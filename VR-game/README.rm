@@ -2,7 +2,20 @@ Starting here to think about folder structure.
 
 VR-Game/
 │
-├── CA/                   # Cellular Automata (CA) system and resources
+Randomness/                       # Main folder for randomness-related experiments
+├── Scenes/                       # Randomness scenes
+│   └── Random_WalkScene.tscn
+├── Scripts/                      # Scripts related to randomness
+│   ├── Random_Walker.gd
+│   └── Random_Grid.gd
+├── Shaders/                      # Shaders that simulate randomness
+│   └── Random_Noise.shader
+├── Materials/                    # Random materials
+│   └── Random_GridMaterial.tres
+└── Docs/                         # Documentation for the randomness system
+    └── RandomnessOverview.md
+│
+├── CellularAutomata/                   # Cellular Automata (CA) system and resources
 │   ├── Scenes/           # Scenes for CA system
 │   │   └── CA_MainScene.tscn
 │   ├── Scripts/          # Scripts for CA system
@@ -10,7 +23,7 @@ VR-Game/
 │   └── Shaders/          # Shaders for CA system
 │       └── CA_Shader.shader
 │
-├── GD/                   # Gaussian Distribution (GD) experiments
+├── GaussianDistribution/                   # Gaussian Distribution (GD) experiments
 │   ├── Scenes/           # Scenes for GD system
 │   │   └── GD_MainScene.tscn
 │   ├── Scripts/          # Scripts for GD system
