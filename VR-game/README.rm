@@ -1,1 +1,30 @@
 Starting here to think about folder structure.
+
+VR-Game/
+│
+├── CA/                   # Cellular Automata (CA) system and resources
+│   ├── Scenes/           # Scenes for CA system
+│   │   └── CA_MainScene.tscn
+│   ├── Scripts/          # Scripts for CA system
+│   │   └── CA_Simulation.gd
+│   └── Shaders/          # Shaders for CA system
+│       └── CA_Shader.shader
+│
+├── GD/                   # Gaussian Distribution (GD) experiments
+│   ├── Scenes/           # Scenes for GD system
+│   │   └── GD_MainScene.tscn
+│   ├── Scripts/          # Scripts for GD system
+│   │   └── GD_Sampler.gd
+│   └── Shaders/          # Shaders for GD system
+│       └── GD_NoiseShader.shader
+│
+├── Noise/                # Noise-related experiments
+│   ├── Scenes/           # Scenes for Noise system
+│   ├── Scripts/          # Scripts for Noise system
+│   └── Shaders/          # Shaders for Noise system
+│
+├── Audio/                # Global audio assets
+│
+├── Objects/              # Models and object-related files
+│
+└── Docs/                 # Documentation files
