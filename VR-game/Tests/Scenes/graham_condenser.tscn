@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhad2l25cenny"]
+
+[ext_resource type="Script" uid="uid://bwqrdr8753f45" path="res://adaresearch/Tests/Scenes/graham_condenser_setup.gd" id="1_4lj3j"]
+
+[node name="GrahamCondenserSetup" type="Node3D"]
+script = ExtResource("1_4lj3j")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.86944)

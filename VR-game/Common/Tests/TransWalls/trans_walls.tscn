@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dll7n3n8soqi7"]
+
+[ext_resource type="Script" uid="uid://vxthx0rlufg3" path="res://adaresearch/Common/Tests/TransWalls/trans_walls.gd" id="1_vsdta"]
+
+[node name="TransWalls" type="Node3D"]
+script = ExtResource("1_vsdta")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.937239, 0.348687, 0, -0.348687, 0.937239, 0, 3.54076, 7.95996)

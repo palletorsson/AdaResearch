@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://4cu3l3ir4oe2"]
+
+[ext_resource type="Script" uid="uid://dht55qbouxsmv" path="res://adaresearch/Common/Tests/LayeredMembrane/layered_membrane.gd" id="1_nmmin"]
+
+[node name="LayeredMembrane" type="Node3D"]
+script = ExtResource("1_nmmin")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

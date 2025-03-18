@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnkpixigfieds"]
+
+[ext_resource type="Script" uid="uid://cyaqcg8lsntc" path="res://adaresearch/Tests/Scenes/wave_function_collapse.gd" id="1_pumb4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obvk2"]
+
+[node name="WaveFunctionCollapse" type="Node3D"]
+script = ExtResource("1_pumb4")
+visualization_material = SubResource("StandardMaterial3D_obvk2")

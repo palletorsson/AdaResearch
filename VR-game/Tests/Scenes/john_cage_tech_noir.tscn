@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cecw0v7wmfigm"]
+
+[ext_resource type="Script" uid="uid://b2alalgcfcfh2" path="res://adaresearch/Tests/Scenes/john_cage_tech_noir.gd" id="1_i6sl3"]
+
+[node name="JohnCageTechNoir" type="Node3D"]
+script = ExtResource("1_i6sl3")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvg41x65gkaag"]
+
+[ext_resource type="Script" uid="uid://im7b0bgv8ce3" path="res://adaresearch/Tests/Scenes/calder_simulation.gd" id="1_1nhe6"]
+
+[node name="CalderSimulation" type="Node3D"]
+script = ExtResource("1_1nhe6")

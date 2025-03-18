@@ -1,0 +1,179 @@
+{
+	"algorithms": [
+		{
+			"category": "Noise",
+			"complexity": "O(n)",
+			"description": "A gradient noise function that creates natural-looking randomness",
+			"history": "Created by Ken Perlin while working on the movie Tron. Later won an Academy Award for Technical Achievement.",
+			"id": "1",
+			"inventor": "Ken Perlin",
+			"name": "Pesrlin Noise",
+			"properties": {
+				"continuity": "C1",
+				"dimensions": "2D/3D",
+				"octaves": "Typically 1-8"
+			},
+			"references": [
+				"Perlin, Ken. 'An image synthesizer.' ACM SIGGRAPH Computer Graphics 19.3 (1985): 287-296."
+			],
+			"related_algorithms": [
+				"2",
+				"3"
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"procedural",
+				"texture",
+				"terrain"
+			],
+			"year_invented": 1983.0
+		},
+		{
+			"category": "Noise",
+			"complexity": "O(n)",
+			"description": "An improvement over Perlin noise with lower computational complexity and fewer directional artifacts",
+			"history": "Developed by Ken Perlin as an improvement to his original Perlin noise algorithm.",
+			"id": "2",
+			"inventor": "Ken Perlin",
+			"name": "Simplex Noise",
+			"properties": {
+				"continuity": "C1",
+				"dimensions": "N-dimensional",
+				"octaves": "Typically 1-8"
+			},
+			"references": [
+				"Perlin, Ken. 'Improving noise.' Proceedings of the 29th annual conference on Computer graphics and interactive techniques. 2002."
+			],
+			"related_algorithms": [
+				"1",
+				"3"
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"procedural",
+				"texture",
+				"terrain"
+			],
+			"year_invented": 2001.0
+		},
+		{
+			"category": "Noise",
+			"complexity": "O(n)",
+			"description": "A simple noise function that interpolates between random values at integer coordinates",
+			"id": "3",
+			"inventor": "Various",
+			"name": "Value Noise",
+			"properties": {
+				"continuity": "C0 to C2 depending on interpolation",
+				"dimensions": "N-dimensional"
+			},
+			"related_algorithms": [
+				"1",
+				"2"
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"procedural",
+				"texture"
+			],
+			"year_invented": 1985.0
+		},
+		{
+			"category": "Signal Processing",
+			"complexity": "O(n log n) for FFT",
+			"description": "Decomposes a function of time into its constituent frequencies",
+			"history": "Introduced by Joseph Fourier in his study of heat transfer. The Fast Fourier Transform (FFT) algorithm was later developed in 1965 by Cooley and Tukey.",
+			"id": "10",
+			"inventor": "Joseph Fourier",
+			"name": "Fourier Transform",
+			"properties": {
+				"applications": "Audio processing, image compression, data analysis",
+				"domains": "Time/Frequency"
+			},
+			"references": [
+				"Fourier, J. 'Théorie analytique de la chaleur.' Paris (1822).",
+				"Cooley, James W., and John W. Tukey. 'An algorithm for the machine calculation of complex Fourier series.' Mathematics of computation 19.90 (1965): 297-301."
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"signal processing",
+				"frequency domain",
+				"decomposition"
+			],
+			"year_invented": 1822.0
+		},
+		{
+			"category": "Simulation",
+			"complexity": "O(n²) per time step",
+			"description": "Simulates the interaction between chemicals that can react and diffuse",
+			"history": "Proposed by Alan Turing in his 1952 paper 'The Chemical Basis of Morphogenesis' to explain pattern formation in nature.",
+			"id": "20",
+			"inventor": "Alan Turing",
+			"name": "Reaction-Diffusion",
+			"properties": {
+				"parameters": "Feed rate, kill rate, diffusion rates",
+				"patterns": "Spots, stripes, waves, mazes"
+			},
+			"references": [
+				"Turing, A. M. 'The chemical basis of morphogenesis.' Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences 237.641 (1952): 37-72."
+			],
+			"related_algorithms": [
+				"21",
+				"22"
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"pattern formation",
+				"biological systems",
+				"cellular automata"
+			],
+			"year_invented": 1952.0
+		},
+		{
+			"category": "Search",
+			"complexity": "O(b^d) where b is branching factor and d is path depth",
+			"description": "An informed search algorithm for finding the shortest path between nodes in a graph",
+			"history": "Developed at SRI International as an extension of Dijkstra's algorithm that uses heuristics to guide the search.",
+			"id": "30",
+			"inventor": "Peter Hart, Nils Nilsson, Bertram Raphael",
+			"name": "A* Pathfinding",
+			"properties": {
+				"completeness": "Complete",
+				"optimality": "Optimal with admissible heuristic"
+			},
+			"references": [
+				"Hart, P. E., Nilsson, N. J., & Raphael, B. 'A formal basis for the heuristic determination of minimum cost paths.' IEEE transactions on Systems Science and Cybernetics 4.2 (1968): 100-107."
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"pathfinding",
+				"search",
+				"heuristic"
+			],
+			"year_invented": 1968.0
+		},
+		{
+			"category": "Visualization",
+			"complexity": "O(n³)",
+			"description": "A computer graphics algorithm for extracting a polygonal mesh from a 3D scalar field",
+			"history": "Developed at General Electric for medical data visualization and published at SIGGRAPH 1987.",
+			"id": "40",
+			"inventor": "William E. Lorensen, Harvey E. Cline",
+			"name": "Marching Cubes",
+			"properties": {
+				"ambiguity": "Has ambiguous cases",
+				"variations": "Marching Tetrahedra, Dual Contouring"
+			},
+			"references": [
+				"Lorensen, William E., and Harvey E. Cline. 'Marching cubes: A high resolution 3D surface construction algorithm.' ACM SIGGRAPH Computer Graphics 21.4 (1987): 163-169."
+			],
+			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"tags": [
+				"isosurface",
+				"3D rendering",
+				"medical imaging"
+			],
+			"year_invented": 1987.0
+		}
+	]
+}

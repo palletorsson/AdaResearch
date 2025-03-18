@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpuv2ou1ha5xx"]
+
+[ext_resource type="Script" uid="uid://c07xxjfrkdmgy" path="res://adaresearch/Common/Scenes/Context/MovingPanels/moving_panels.gd" id="1_32oaq"]
+[ext_resource type="PackedScene" uid="uid://bm7yw75lxxssm" path="res://adaresearch/Common/Scenes/Context/MovingPanels/individual_panel.tscn" id="2_vtpo5"]
+
+[node name="Moving_panels" type="Node3D"]
+script = ExtResource("1_32oaq")
+panel_scene = ExtResource("2_vtpo5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.8775)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

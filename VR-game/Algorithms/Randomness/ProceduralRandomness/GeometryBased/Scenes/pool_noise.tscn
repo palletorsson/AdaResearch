@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqoe42jyo47qh"]
+
+[ext_resource type="Script" uid="uid://etbayi6jqld" path="res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scripts/pool_noise.gd" id="1_tqll2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2i0v"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4xylt"]
+
+[node name="PoolNoise" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344357, 0.23738, 0)
+material_override = SubResource("StandardMaterial3D_n2i0v")
+mesh = SubResource("PlaneMesh_4xylt")
+script = ExtResource("1_tqll2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15762, 2.5539, 0.548497)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.239432, 0.970913, 0, -0.970913, 0.239432, 0, 4.25792, 2.45109)

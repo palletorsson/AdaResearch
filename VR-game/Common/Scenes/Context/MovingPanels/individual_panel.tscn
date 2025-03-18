@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm7yw75lxxssm"]
+
+[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="1_v7kjm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_283tf"]
+render_priority = 0
+shader = ExtResource("1_v7kjm")
+shader_parameter/modelColor = Color(0.505344, 0.505344, 0.505344, 1)
+shader_parameter/wireframeColor = Color(0.940526, 0.689287, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 1, 1)
+shader_parameter/width = 8.68
+shader_parameter/blur = 0.581
+shader_parameter/emission_strength = 2.018
+shader_parameter/modelOpacity = 0.924
+
+[sub_resource type="BoxMesh" id="BoxMesh_hlt7o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ndu3"]
+albedo_color = Color(1, 0, 1, 1)
+
+[node name="IndividualPanel" type="Node3D"]
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_283tf")
+mesh = SubResource("BoxMesh_hlt7o")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_5ndu3")

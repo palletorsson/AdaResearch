@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0a4e4svqagfc"]
+
+[ext_resource type="Script" uid="uid://c634w6i5f42nc" path="res://adaresearch/Common/Tests/RhizomaticStructure/rhizomatic_structure.gd" id="1_q6ll2"]
+
+[node name="RhizomaticStructure" type="Node3D"]
+script = ExtResource("1_q6ll2")

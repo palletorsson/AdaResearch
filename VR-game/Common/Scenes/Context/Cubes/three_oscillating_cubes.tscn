@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c180o6gn8nj2c"]
+
+[ext_resource type="Script" uid="uid://u3cyqghgdyp8" path="res://adaresearch/Common/Scenes/Context/Cubes/three_oscillating_cubes.gd" id="1_ismwy"]
+
+[node name="ThreeOscillatingCubes" type="Node3D"]
+script = ExtResource("1_ismwy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69094, 0, 4.01833)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

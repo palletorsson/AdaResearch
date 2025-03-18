@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://os37gilwjf0x"]
+
+[ext_resource type="Script" uid="uid://b6limrap62lnl" path="res://adaresearch/Tests/Scenes/marching_cubes.gd" id="1_hurni"]
+
+[node name="MarchingCubes" type="Node3D"]
+script = ExtResource("1_hurni")

@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjbg4ct7s7lg"]
+
+[ext_resource type="Script" uid="uid://bkqeuyk4gsssq" path="res://adaresearch/Tests/Scenes/algorithm_tree.gd" id="1_tstt4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbk5v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rksal"]
+albedo_color = Color(0.2, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbr6s"]
+albedo_color = Color(1, 0.188235, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2oefe"]
+albedo_color = Color(1, 1, 0.227451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mcfjp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nk2qu"]
+albedo_color = Color(0.114897, 0.114897, 0.114897, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pref2"]
+
+[node name="algorithmTree" type="Node3D"]
+script = ExtResource("1_tstt4")
+platform_material_wp1 = SubResource("StandardMaterial3D_hbk5v")
+platform_material_wp2 = SubResource("StandardMaterial3D_rksal")
+platform_material_wp3 = SubResource("StandardMaterial3D_sbr6s")
+platform_material_wp4 = SubResource("StandardMaterial3D_2oefe")
+platform_material_concepts = SubResource("StandardMaterial3D_mcfjp")
+connection_material = SubResource("StandardMaterial3D_nk2qu")
+teleport_marker_mesh = SubResource("CylinderMesh_pref2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.14118)

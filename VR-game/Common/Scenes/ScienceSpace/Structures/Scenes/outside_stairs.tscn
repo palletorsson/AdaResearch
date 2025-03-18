@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1sgkjg6xrck0"]
+
+[ext_resource type="Script" uid="uid://cygao1gkajgcr" path="res://adaresearch/Common/Scenes/ScienceSpace/Structures/Scripts/grid_objects.gd" id="1_qvovv"]
+[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="2_al4fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7bsu"]
+render_priority = 0
+shader = ExtResource("2_al4fn")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0.585242, 0.779097, 1)
+shader_parameter/emissionColor = Color(1, 0, 1, 1)
+shader_parameter/width = 8.68
+shader_parameter/blur = 1.025
+shader_parameter/emission_strength = 2.787
+shader_parameter/modelOpacity = 0.977
+
+[sub_resource type="BoxMesh" id="BoxMesh_v0w07"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81u8g"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qh4sm"]
+
+[node name="gridObjects" type="Node3D"]
+script = ExtResource("1_qvovv")
+
+[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="CubeBaseStaticBody3D"]
+material_override = SubResource("ShaderMaterial_l7bsu")
+mesh = SubResource("BoxMesh_v0w07")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_81u8g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D"]
+shape = SubResource("BoxShape3D_qh4sm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.6793, 1.6855, 2.03362)

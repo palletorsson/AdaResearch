@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cesxhlqabud6v"]
+
+[ext_resource type="Script" uid="uid://br24bwh212tce" path="res://adaresearch/Common/Tests/Radiolaria/radiolaria.gd" id="1_sjoi6"]
+
+[node name="Radiolaria" type="Node3D"]
+script = ExtResource("1_sjoi6")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnbamytyewa3c"]
+
+[ext_resource type="Script" uid="uid://pq586esowua1" path="res://adaresearch/Tests/Scenes/resonance_frequencies_visualizer_setup.gd" id="1_esuv1"]
+
+[node name="ResonanceFrequenciesVisualizerSetup" type="Node3D"]
+script = ExtResource("1_esuv1")

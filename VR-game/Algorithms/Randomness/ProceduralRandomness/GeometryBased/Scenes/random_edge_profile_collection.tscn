@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://csvms7xrkyn3h"]
+
+[ext_resource type="Script" uid="uid://cnbq1w3bm8b7p" path="res://adaresearch/Algorithms/Randomness/RandomDecay/Scripts/random_decay_manger.gd" id="1_vaces"]
+[ext_resource type="PackedScene" uid="uid://dtf4qukpj1j7p" path="res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn" id="3_7tqhy"]
+
+[node name="RandomEdgeProfiles" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154254, 0)
+script = ExtResource("1_vaces")
+
+[node name="RandomEdgeProfileGrabable" parent="." instance=ExtResource("3_7tqhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.180153, -0.0122018, -0.216324)
+profile_height = 0.1
+label_text = "id 0005: profile 0.1"
+
+[node name="RandomEdgeProfileGrabable2" parent="." instance=ExtResource("3_7tqhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0747877, -0.0122018, -0.216324)
+profile_height = 0.2
+label_text = "id 0006: profile 0.2"
+
+[node name="RandomEdgeProfileGrabable3" parent="." instance=ExtResource("3_7tqhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0242639, -0.0122018, -0.216324)
+profile_height = 0.3
+label_text = "id 0007: profile 0.3"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0938981, 0, 0.704944)
+
+[node name="RandomEdgeProfileGrabable4" parent="." instance=ExtResource("3_7tqhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106607, -0.0122018, -0.216324)
+profile_height = 0.4
+label_text = "id 0008: profile 0.4"

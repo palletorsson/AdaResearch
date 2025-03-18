@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvt40x4owdxog"]
+
+[ext_resource type="Script" path="res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scripts/random_top_edge_modifier.gd" id="1_1s2wd"]
+[ext_resource type="Shader" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="2_mi0vv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7f4e6"]
+render_priority = 0
+shader = ExtResource("2_mi0vv")
+shader_parameter/scale_0 = 10
+shader_parameter/scale_1 = 10
+shader_parameter/line_scale_0 = 0.086
+shader_parameter/line_scale_1 = 0.124
+shader_parameter/color_0 = Color(1, 0, 0.635294, 1)
+shader_parameter/color_1 = Color(0.396078, 1, 0.772549, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l51aw"]
+
+[node name="RandomEdgeProfile" type="Node3D"]
+script = ExtResource("1_1s2wd")
+
+[node name="NoisePlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.133318, 0, 0)
+material_override = SubResource("ShaderMaterial_7f4e6")
+mesh = SubResource("PlaneMesh_l51aw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.860022, 0.213535, -0.463428, 0, 0.908224, 0.418485, 0.510258, -0.359906, 0.781092, -0.890557, 1.33587, 2.22429)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36254, 0.656453)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d21nucqwea3hq"]
+
+[ext_resource type="Script" uid="uid://dn6u38nx5tiqu" path="res://adaresearch/Tests/Scenes/rigid_body_converter.gd" id="1_g76bs"]
+
+[node name="RigidBodyConverter" type="Node3D"]
+script = ExtResource("1_g76bs")

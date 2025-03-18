@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnoduyjyfcxk2"]
+
+[ext_resource type="Script" uid="uid://48qlr4k05r31" path="res://adaresearch/Tests/Scenes/evolutionary_biology.gd" id="1_gkftc"]
+
+[node name="EvolutionaryBiology" type="Node3D"]
+script = ExtResource("1_gkftc")

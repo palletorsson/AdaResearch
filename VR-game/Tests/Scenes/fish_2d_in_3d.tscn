@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dautqc256n7xe"]
+
+[ext_resource type="Script" uid="uid://dh75mowkoxnrp" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.gd" id="1_icka0"]
+[ext_resource type="PackedScene" uid="uid://drjck6fhcpwnx" path="res://adaresearch/Tests/Scenes/rotating_disk.tscn" id="2_68x5q"]
+[ext_resource type="Script" uid="uid://jnnultxsu2rs" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd" id="3_1kxvi"]
+
+[sub_resource type="QuadMesh" id="1"]
+resource_local_to_scene = true
+size = Vector2(3, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1jhjh"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42v12"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_1jhjh")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="4"]
+resource_local_to_scene = true
+size = Vector3(3, 2, 0.02)
+
+[node name="Fish2Din3D" type="Node3D"]
+script = ExtResource("1_icka0")
+scene = ExtResource("2_68x5q")
+viewport_size = Vector2(1000, 1000)
+alpha_scissor_threshold = 0.25
+unshaded = false
+filter = true
+scene_properties_keys = PackedStringArray("rotating_disk.gd", "rotation_speed", "disk_radius", "background_color", "fish_color", "fish_position_radius", "fish_size", "fish_sine_amplitude", "fish_sine_frequency", "circle_colors", "circle_radii", "circle_line_width", "circle_offset")
+rotation_speed = 30.0
+disk_radius = 400.0
+background_color = Color(0.95, 0.95, 0.9, 1)
+fish_color = Color(0.9, 0.2, 0.1, 1)
+fish_position_radius = 250.0
+fish_size = Vector2(60, 30)
+fish_sine_amplitude = 15.0
+fish_sine_frequency = 3.0
+circle_colors = Array[Color]([Color(0.2, 0.6, 0.5, 1), Color(0.2, 0.6, 0.5, 1), Color(0.2, 0.6, 0.5, 1)])
+circle_radii = Array[float]([300.0, 250.0, 180.0])
+circle_line_width = 3.0
+circle_offset = Vector2(20, 15)
+
+[node name="Viewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+gui_embed_subwindows = true
+size = Vector2i(1000, 1000)
+render_target_update_mode = 1
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+mesh = SubResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_42v12")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 5242881
+collision_mask = 0
+script = ExtResource("3_1kxvi")
+viewport_size = Vector2(1000, 1000)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+shape = SubResource("4")

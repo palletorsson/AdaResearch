@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgn3vk0mpe2l0"]
+
+[ext_resource type="Script" uid="uid://dvtacntnhjexk" path="res://adaresearch/Common/Scenes/Context/Cubes/cube_sequence_pickup.gd" id="1_tkiws"]
+
+[node name="CubeSequencePickUp" type="Node3D"]
+script = ExtResource("1_tkiws")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.872905, 0.48789, 0, -0.48789, 0.872905, 0, 3.88088, 11.2667)

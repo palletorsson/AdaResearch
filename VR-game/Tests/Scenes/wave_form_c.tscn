@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf70lnyyd7fne"]
+
+[ext_resource type="Script" uid="uid://dwmwxnrsv5bwy" path="res://adaresearch/Tests/Scenes/wave_form_c.gd" id="1_qyj8c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_825d7"]
+
+[node name="WaveFormC" type="Node3D"]
+script = ExtResource("1_qyj8c")
+modules_path = "res://adaresearch/Tests/modules/"
+entropy_material = SubResource("StandardMaterial3D_825d7")

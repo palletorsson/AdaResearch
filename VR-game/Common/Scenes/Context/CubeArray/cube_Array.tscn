@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c20bgiuar3sux"]
+
+[ext_resource type="Script" uid="uid://bsajyrwcf5bfr" path="res://adaresearch/Common/Scenes/Context/CubeArray/cube_array.gd" id="1_fmnjp"]
+
+[node name="CubeArray" type="Node3D"]
+script = ExtResource("1_fmnjp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69094, 0, 4.01833)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

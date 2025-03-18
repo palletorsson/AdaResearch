@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxlnnwksma0fg"]
+
+[ext_resource type="Script" uid="uid://dn1f4pn43egjm" path="res://adaresearch/Tests/Scenes/reaction_diffusion_setup.gd" id="1_hg7bt"]
+
+[node name="ReactionDiffusionSetup" type="Node3D"]
+script = ExtResource("1_hg7bt")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0787, 0)
+light_energy = 6.638

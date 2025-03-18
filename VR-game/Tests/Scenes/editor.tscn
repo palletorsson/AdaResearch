@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuunlts2bn1qk"]
+
+[ext_resource type="Script" uid="uid://fh80jdljlftx" path="res://adaresearch/Tests/Scenes/AlgorithmEditorUI.gd" id="1_vx5yg"]
+
+[node name="AlgorithmEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vx5yg")
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HeaderBar" type="PanelContainer" parent="MainLayout"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/HeaderBar"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/HeaderBar/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Ada Research - Algorithm Editor"
+
+[node name="MainContent" type="HSplitContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 300
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainLayout/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FilterContainer" type="HBoxContainer" parent="MainLayout/MainContent/LeftPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/MainContent/LeftPanel/FilterContainer"]
+layout_mode = 2
+text = "Filter:"
+
+[node name="CategoryFilter" type="OptionButton" parent="MainLayout/MainContent/LeftPanel/FilterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SearchField" type="LineEdit" parent="MainLayout/MainContent/LeftPanel/FilterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search..."
+clear_button_enabled = true
+
+[node name="AlgorithmList" type="ItemList" parent="MainLayout/MainContent/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainLayout/MainContent/LeftPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="AddButton" type="Button" parent="MainLayout/MainContent/LeftPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add New"
+
+[node name="RemoveButton" type="Button" parent="MainLayout/MainContent/LeftPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="SaveButton" type="Button" parent="MainLayout/MainContent/LeftPanel/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainLayout/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout/MainContent/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="EditorPanel" type="VBoxContainer" parent="MainLayout/MainContent/RightPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PropertyEditor" type="VBoxContainer" parent="MainLayout/MainContent/RightPanel/ScrollContainer/EditorPanel"]
+visible = false
+layout_mode = 2
+
+[node name="StatusBar" type="PanelContainer" parent="MainLayout"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MainLayout/StatusBar"]
+layout_mode = 2
+text = "Ready"

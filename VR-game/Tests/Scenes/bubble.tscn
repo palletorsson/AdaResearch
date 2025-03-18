@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy2pfmfmomyhl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vnvw"]
+transparency = 1
+albedo_color = Color(1, 0.317647, 1, 0.447059)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cknh2"]
+
+[node name="Bubble" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1vnvw")
+mesh = SubResource("SphereMesh_cknh2")

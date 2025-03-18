@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq664uiv55ls"]
+
+[ext_resource type="Script" uid="uid://banl2asn2acqa" path="res://adaresearch/Common/Tests/MobiusStrip/mobius_strip.gd" id="1_drpkw"]
+
+[node name="MobiusStrip" type="Node3D"]
+script = ExtResource("1_drpkw")

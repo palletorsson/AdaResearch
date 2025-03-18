@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://blxv6fueii88b"]
+
+[ext_resource type="Script" uid="uid://cqmrvrtab2ejr" path="res://adaresearch/Tests/Scenes/see_science_form.gd" id="1_meic0"]
+
+[node name="SeeScienceForm" type="Node3D"]
+script = ExtResource("1_meic0")

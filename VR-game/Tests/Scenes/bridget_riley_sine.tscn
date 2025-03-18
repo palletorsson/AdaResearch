@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctebl6wch43xq"]
+
+[ext_resource type="Script" uid="uid://qau3uejclafs" path="res://adaresearch/Tests/Scenes/bridget_riley_sine.gd" id="1_4asvk"]
+
+[node name="BridgetRileySine" type="Node2D"]
+script = ExtResource("1_4asvk")
+pattern_type = 3

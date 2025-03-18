@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://js700tl0jjkf"]
+
+[ext_resource type="Script" uid="uid://b0b5vn6vjewdt" path="res://adaresearch/Tests/Scenes/bifurcation_diagrams.gd" id="1_nsnow"]
+[ext_resource type="Shader" uid="uid://cmqj13k3r7fie" path="res://adaresearch/Tests/Scenes/glass2.gdshader" id="2_sopf8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvusn"]
+render_priority = 0
+shader = ExtResource("2_sopf8")
+shader_parameter/glass_color = Color(1, 1, 1, 0.603922)
+shader_parameter/glass_roughness = 0.05
+shader_parameter/glass_metallic = 0.0
+shader_parameter/glass_specular = 0.5
+shader_parameter/refraction_scale = 0.1
+shader_parameter/ior = 1.45
+shader_parameter/fresnel_power = 2.0
+shader_parameter/edge_tint = 0.1
+shader_parameter/thickness = 0.54
+
+[node name="BifurcationDiagrams" type="Node3D"]
+script = ExtResource("1_nsnow")
+glass_material = SubResource("ShaderMaterial_tvusn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.84959)

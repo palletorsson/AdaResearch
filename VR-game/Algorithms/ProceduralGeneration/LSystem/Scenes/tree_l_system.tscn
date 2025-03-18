@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmhdlr3q6j5hm"]
+
+[ext_resource type="Script" uid="uid://ct65n0anlcm1p" path="res://adaresearch/Algorithms/ProceduralGeneration/LSystem/Scripts/tree_l_system.gd" id="1_1hsje"]
+[ext_resource type="PackedScene" uid="uid://b3p8j8xrwkxmq" path="res://adaresearch/Common/Scenes/Objects/Primitives/Sphere.tscn" id="2_6rvoh"]
+
+[node name="Tree_L_system" type="Node3D"]
+script = ExtResource("1_1hsje")
+sphere_scene = ExtResource("2_6rvoh")

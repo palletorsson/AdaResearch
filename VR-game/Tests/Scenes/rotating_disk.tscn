@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://drjck6fhcpwnx"]
+
+[ext_resource type="Script" uid="uid://e2cnehykfske" path="res://adaresearch/Tests/Scenes/rotating_disk.gd" id="1_waexa"]
+
+[node name="RotatingDisk" type="Node2D"]
+position = Vector2(-3, 2)
+script = ExtResource("1_waexa")
+disk_radius = 320.0
+fish_sine_frequency = 0.0
+circle_line_width = 4.0
+circle_offset = Vector2(10, 7)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 322)
+scale = Vector2(4.002, 2.727)

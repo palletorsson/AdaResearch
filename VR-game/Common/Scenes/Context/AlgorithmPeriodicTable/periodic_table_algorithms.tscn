@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj5h8trkpivdo"]
+
+[ext_resource type="Script" uid="uid://b886smsm63t21" path="res://adaresearch/Common/Scenes/Context/AlgorithmPeriodicTable/AlgorithmPeriodicTable.gd" id="1_gx8aq"]
+
+[node name="AlgorithmPeriodicTable" type="Node2D"]
+script = ExtResource("1_gx8aq")
+
+[node name="TableContainer" type="ScrollContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 650.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TableContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TableContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="InfoContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = 1166.0
+offset_right = 1283.0
+offset_bottom = 1466.0
+
+[node name="ColorRect" type="ColorRect" parent="InfoContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 0.9)
+
+[node name="Label" type="Label" parent="InfoContainer/ColorRect"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 24
+text = "Click on an algorithm to see details"
+
+[node name="ExportButton" type="Button" parent="."]
+offset_left = 1150.0
+offset_top = 30.0
+offset_right = 1250.0
+offset_bottom = 70.0
+text = "Export as PNG"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(662, 141)
+zoom = Vector2(0.535, 0.535)
+
+[connection signal="pressed" from="ExportButton" to="." method="_on_export_button_pressed"]

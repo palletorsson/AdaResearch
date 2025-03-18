@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpweyfmbickxl"]
+
+[ext_resource type="Script" uid="uid://y61rp54gg5o8" path="res://adaresearch/Common/Tests/Kusama/kusama.gd" id="1_s0hpu"]
+
+[node name="Kusama" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.93713, 0.348981, 0, -0.348981, 0.93713, 0, 1.38633, 2.72369)
+script = ExtResource("1_s0hpu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65894, 7.14014)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn6u2w5incqo3"]
+
+[ext_resource type="Script" uid="uid://bqyvmxsxx8k8d" path="res://adaresearch/Common/Scenes/Context/FirstThereWasCode/first_there_was_code.gd" id="1_cbyfc"]
+
+[node name="FirstThereWasCode" type="Node3D"]
+script = ExtResource("1_cbyfc")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, -4.31924e-08, 0.869426, 0.494063, 7.60076e-08, 0.494063, -0.869426, 2.64186, -0.471811, -0.302524)
+text = "_ dsafdsafd"
+horizontal_alignment = 0
