@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnx646jq4nruq"]
 
-[ext_resource type="Script" uid="uid://bgoknnqs4hq2y" path="res://adaresearch/Common/Scripts/Grid/GridSystem.gd" id="1_pvcmt"]
-[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="6_dpdca"]
+[ext_resource type="Script" uid="uid://wv1i1whothak" path="res://commons/grid/GridSystemEnhanced.gd" id="1_pvcmt"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="6_dpdca"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4xmrc"]
 render_priority = 0

@@ -128,7 +128,7 @@ const CATEGORIES = {
 const EMPTY_SPACE = " "
 
 # Path constants
-const MAP_OBJECTS_PATH = "res://adaresearch/Common/Scenes/Objects/MapObjects/"
+const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
 
 # Get utility type info
 static func get_utility_info(type_code: String) -> Dictionary:

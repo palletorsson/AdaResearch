@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://chw83ynk8wtva"]
+
+[ext_resource type="Script" uid="uid://bttomy333133s" path="res://adaresearch/Common/Scripts/UI_Interaction/xp_label_3d.gd" id="1_6om7c"]
+
+[node name="XPLabel" type="Node3D"]
+
+[node name="XPLabel3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+text = "Xp"
+script = ExtResource("1_6om7c")

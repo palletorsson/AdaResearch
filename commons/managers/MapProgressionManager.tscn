@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvl8n7qxd8piq"]
+
+[ext_resource type="Script" path="res://adaresearch/Common/Scripts/Managers/MapProgressionManager.gd" id="1_h4n8q"]
+
+[node name="MapProgressionManager" type="Node"]
+script = ExtResource("1_h4n8q") 

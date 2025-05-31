@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bufpsqfa8my06"]
+
+[ext_resource type="Script" uid="uid://bvkt6xjie81q" path="res://adaresearch/Tests/Scenes/platform.gd" id="1_4xfn4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nv4ip"]
+size = Vector3(1, 0.102539, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_35pab"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_go1ia"]
+
+[node name="platform" type="Node3D"]
+script = ExtResource("1_4xfn4")
+lift_height = 2.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00341797, 0)
+shape = SubResource("BoxShape3D_nv4ip")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_35pab")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560966, 0)
+shape = SubResource("BoxShape3D_go1ia")
+
+[node name="Label3D" type="Label3D" parent="DetectionArea"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.496961, 0)
+text = "sasas"
+font_size = 16
+outline_size = 3
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125453, 0)
+light_color = Color(1, 0.466667, 1, 1)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

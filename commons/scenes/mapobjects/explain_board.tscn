@@ -1,0 +1,203 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk5c2k513nafm"]
+
+[ext_resource type="Script" uid="uid://x0wcoswwm1wr" path="res://adaresearch/Common/Scenes/UI/ExplainBoard/explain_board.gd" id="1_qcd3u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc54e"]
+bg_color = Color(0.12, 0.12, 0.12, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hfp1n"]
+size = Vector3(1.2, 1.6, 0.05)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qcd3u"]
+viewport_path = NodePath("Viewport")
+
+[node name="ExplainBoard" type="Node3D"]
+script = ExtResource("1_qcd3u")
+
+[node name="Viewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(600, 900)
+
+[node name="ExplainBoardUI" type="Control" parent="Viewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainPanel" type="Panel" parent="Viewport/ExplainBoardUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yc54e")
+
+[node name="LevelNumber" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 30.0
+offset_right = 150.0
+offset_bottom = 170.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 120
+text = "01"
+horizontal_alignment = 1
+
+[node name="LevelID" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 170.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "arrays/01"
+horizontal_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -230.0
+offset_right = 250.0
+offset_bottom = -228.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Title" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 220.0
+offset_right = 250.0
+offset_bottom = 260.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "UNDERSTANDING ARRAYS"
+horizontal_alignment = 1
+
+[node name="Summary" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -270.0
+offset_top = 280.0
+offset_right = 270.0
+offset_bottom = 730.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 18
+text = "Arrays are fundamental data structures that store collections of items in memory.
+
+SINGLE ELEMENT:
+- A single element is accessed with one index: array[0]
+- Memory is allocated for one value at a specific address
+
+1D ARRAY:
+- A row of elements accessed with one index: array[i]
+- Memory is allocated in a contiguous block
+- Perfect for lists, sequences, or collections of similar items
+           - Example: row_cubes[3] accesses the 4th cube in the row
+
+2D ARRAY:
+- A grid of elements accessed with two indices: array[row][col]
+- Can be implemented as an \"array of arrays\"
+- Perfect for grids, tables, matrices, or coordinate systems
+- Example: grid_cubes[1][2] accesses the cube at row 1, column 2
+
+Arrays are essential for:
+• Storing and organizing data
+• Efficiently accessing elements by position
+• Building more complex data structures
+• Processing collections of information"
+autowrap_mode = 3
+
+[node name="XPLabel" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = 220.0
+offset_bottom = -40.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "XP: 0"
+
+[node name="HealthLabel" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -70.0
+offset_right = -20.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Health: 100%"
+horizontal_alignment = 2
+
+[node name="Aperture" type="Label" parent="Viewport/ExplainBoardUI/MainPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Ada Research"
+horizontal_alignment = 1
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_hfp1n")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64217, 2.43057)
+
+[node name="Board" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 1.49254, 0)
+texture = SubResource("ViewportTexture_qcd3u")
