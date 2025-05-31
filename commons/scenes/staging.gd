@@ -388,7 +388,11 @@ func _get_first_available_map() -> String:
 	var available_maps = _list_available_maps_direct()
 	
 	if available_maps.is_empty():
-		return "Tutorial_Start"  # Changed from Random_4 to Tutorial_Start
+		return "Lab"  # Changed fallback to Lab since that's what exists
+	
+	# Check if Lab is available first (since it's the main hub)
+	if "Lab" in available_maps:
+		return "Lab"
 	
 	# Try priority order
 	for priority_map in MAP_ORDER_PRIORITY:
