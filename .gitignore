@@ -1,16 +1,286 @@
-# Godot 4+ specific ignores
+# =============================================================================
+# Ada Research VR Project - Enhanced .gitignore
+# =============================================================================
+
+# Godot 4+ Core Files
+# =============================================================================
 .godot/
+.import/
 .nomedia
 
-# Godot-specific ignores
-.import/
+# Project Directories to Exclude
+# =============================================================================
+/addons/
+/build/
+/assets/
+/android/
+
+# Godot Export & Build Files
+# =============================================================================
 export.cfg
 export_credentials.cfg
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.buildpath
+.project
+.metadata
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
 
 # Imported translations (automatically generated from CSV files)
+# =============================================================================
 *.translation
 
-# Mono-specific ignores
+# Mono/C# specific ignores
+# =============================================================================
 .mono/
 data_*/
 mono_crash.*.json
+*.booproj
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.usertasks
+*.DS_Store
+
+# VR & XR Specific Files
+# =============================================================================
+# OpenXR runtime logs
+openxr_*.log
+# VR profiling data
+*.vr_profile
+# Hand tracking calibration data
+hand_tracking_calibration.dat
+# VR session recordings (if you implement this)
+vr_recordings/
+session_data/
+
+# Research & Documentation Files to Keep Tracked
+# =============================================================================
+# Keep these patterns EXCLUDED from .gitignore (i.e., track them)
+# !README.md
+# !docs/
+# !research_notes/
+# !*.md
+
+# Development & Testing Files
+# =============================================================================
+# Test builds and temporary scenes
+test_builds/
+temp_scenes/
+debug_scenes/
+prototype_*.tscn
+*_test.gd
+*_debug.gd
+
+# Performance profiling data
+*.prof
+performance_logs/
+fps_data/
+
+# Temporary algorithm exploration files
+algorithm_tests/
+shader_experiments/
+temp_algorithms/
+
+# Lab System Specific
+# =============================================================================
+# Backup progression states (keep current states tracked)
+progression_backup_*/
+# Temporary artifact exports
+temp_artifacts/
+# Algorithm visualization cache
+visualization_cache/
+# Sequence testing data
+sequence_test_data/
+
+# 3D Content & Assets (Large Files)
+# =============================================================================
+# Large 3D models (use Git LFS instead)
+*.fbx
+*.blend1
+*.blend2
+*.obj
+*.dae
+*.3ds
+*.max
+
+# Large texture files (use Git LFS)
+*.exr
+*.hdr
+*.tiff
+*.tif
+# Keep smaller textures tracked
+!*_icon.png
+!*_preview.png
+!textures/ui/
+
+# Audio files (keep small ones, LFS for large)
+*.wav
+*.aiff
+*.flac
+!sfx/ui/
+!audio/short/
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# IDE & Editor Files
+# =============================================================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# macOS
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+# =============================================================================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+# =============================================================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Research Project Specific
+# =============================================================================
+# Personal research notes (keep project notes tracked)
+personal_notes/
+private_research/
+# Collaboration drafts
+draft_papers/
+review_copies/
+# Conference submissions (until published)
+submissions/*/draft*
+# Private correspondence about the project
+correspondence/private/
+
+# Version Control & Collaboration
+# =============================================================================
+*.orig
+*.rej
+.svn/
+.bzr/
+.hg/
+CVS/
+
+# Backup files
+# =============================================================================
+*.backup
+*.old
+*_backup.*
+backup_*/
+*.bck
+
+# Logs and temporary files
+# =============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+# =============================================================================
+pids
+*.pid
+*.seed
+*.pid.lock
+lib-cov
+coverage/
+.grunt
+bower_components/
+.lock-wscript
+node_modules/
+jspm_packages/
+
+# Optional: Godot Asset Library cache
+# =============================================================================
+.godot_asset_library_cache/
+
+# =============================================================================
+# IMPORTANT: Files to ALWAYS track (override above patterns)
+# =============================================================================
+# Force include important project files even if they match patterns above
+!project.godot
+!default_env.tres
+!icon.png
+!icon.svg
+!README.md
+!LICENSE
+!CHANGELOG.md
+!docs/
+!*.gd
+!*.cs
+!*.tscn
+!*.tres
+!*.import
+!sequence_definitions/
+!lab_configurations/
+!research_documentation/
