@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw7x4mrg1j8no"]
+
+[ext_resource type="Script" path="res://adaresearch/Common/Scripts/Grid/GridSystemEnhanced.gd" id="1_h4x8j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.7, 0.7, 0.9, 1)
+metallic = 0.2
+roughness = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+
+[node name="GridSystemEnhanced" type="Node3D"]
+script = ExtResource("1_h4x8j")
+
+[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="."]
+visible = false
+
+[node name="CubeBaseMeshInstance3D" type="MeshInstance3D" parent="CubeBaseStaticBody3D"]
+mesh = SubResource("BoxMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="CubeBaseCollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D"]
+shape = SubResource("BoxShape3D_1") 
