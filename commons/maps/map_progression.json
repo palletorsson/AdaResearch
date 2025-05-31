@@ -1,0 +1,201 @@
+{
+	"version": "1.0",
+	"format": "map_progression",
+	"description": "Central configuration for map sequence progression in the VR system",
+	"default_sequence": "tutorial_progression",
+	
+	"sequences": {
+		"tutorial_progression": {
+			"name": "Tutorial Progression",
+			"description": "Complete onboarding sequence for new VR users",
+			"category": "tutorial",
+			"maps": [
+				"Tutorial_Single",
+				"Tutorial_Row",
+				"Tutorial_2D",
+				"Tutorial_Disco",
+				"Tutorial_Start",
+				"Tutorial_Single", 
+				"Tutorial_Room",
+				"Intro_0",
+				"Intro_1"
+			]
+		},
+		"preface_series": {
+			"name": "Preface Series",
+			"description": "Preliminary levels introducing core concepts",
+			"category": "introduction",
+			"maps": [
+				"Preface_0",
+				"Preface_1"
+			]
+		},
+		"random_challenges": {
+			"name": "Random Challenge Series",
+			"description": "Procedurally generated challenge levels",
+			"category": "challenge",
+			"maps": [
+				"Random_0",
+				"Random_1", 
+				"Random_3",
+				"Random_4"
+			]
+		},
+		"advanced_concepts": {
+			"name": "Advanced Concepts",
+			"description": "Complex theoretical and experimental maps",
+			"category": "advanced",
+			"maps": [
+				"AgentialRealism",
+				"JSON_Demo",
+				"TileEffects_Demo"
+			]
+		},
+		"development_testing": {
+			"name": "Development Testing",
+			"description": "Minimal maps for development and testing purposes",
+			"category": "testing",
+			"maps": [
+				"Minimal_Test"
+			]
+		}
+	},
+	
+	"map_metadata": {
+		"Minimal_Test": {
+			"difficulty": "testing",
+			"estimated_time": "30 seconds",
+			"prerequisites": [],
+			"unlocks": ["Tutorial_Row"]
+		},
+		"Tutorial_Row": {
+			"difficulty": "absolute_beginner",
+			"estimated_time": "1-2 minutes",
+			"prerequisites": ["Minimal_Test"],
+			"unlocks": ["Tutorial_2D"]
+		},
+		"Tutorial_2D": {
+			"difficulty": "beginner",
+			"estimated_time": "3-4 minutes",
+			"prerequisites": ["Tutorial_Row"],
+			"unlocks": ["Tutorial_Disco"]
+		},
+		"Tutorial_Disco": {
+			"difficulty": "beginner",
+			"estimated_time": "4-6 minutes",
+			"prerequisites": ["Tutorial_2D"],
+			"unlocks": ["Tutorial_Start"]
+		},
+		"Tutorial_Start": {
+			"difficulty": "absolute_beginner",
+			"estimated_time": "30 seconds",
+			"prerequisites": ["Tutorial_Disco"],
+			"unlocks": ["Tutorial_Single"]
+		},
+		"Tutorial_Single": {
+			"difficulty": "absolute_beginner", 
+			"estimated_time": "1 minute",
+			"prerequisites": ["Tutorial_Start"],
+			"unlocks": ["Tutorial_Room"]
+		},
+		"Tutorial_Room": {
+			"difficulty": "absolute_beginner",
+			"estimated_time": "2 minutes", 
+			"prerequisites": ["Tutorial_Single"],
+			"unlocks": ["Intro_0"]
+		},
+		"Intro_0": {
+			"difficulty": "beginner",
+			"estimated_time": "5-10 minutes",
+			"prerequisites": ["Tutorial_Room"],
+			"unlocks": ["Intro_1", "Preface_0"]
+		},
+		"Intro_1": {
+			"difficulty": "beginner",
+			"estimated_time": "5-10 minutes", 
+			"prerequisites": ["Intro_0"],
+			"unlocks": ["Random_0"]
+		},
+		"Preface_0": {
+			"difficulty": "beginner",
+			"estimated_time": "5-10 minutes",
+			"prerequisites": ["Intro_0"],
+			"unlocks": ["Preface_1"]
+		},
+		"Preface_1": {
+			"difficulty": "beginner", 
+			"estimated_time": "5-10 minutes",
+			"prerequisites": ["Preface_0"],
+			"unlocks": ["Random_0"]
+		},
+		"Random_0": {
+			"difficulty": "intermediate",
+			"estimated_time": "10-15 minutes",
+			"prerequisites": ["Intro_1"],
+			"unlocks": ["Random_1"]
+		},
+		"Random_1": {
+			"difficulty": "intermediate",
+			"estimated_time": "10-15 minutes", 
+			"prerequisites": ["Random_0"],
+			"unlocks": ["Random_3"]
+		},
+		"Random_3": {
+			"difficulty": "intermediate",
+			"estimated_time": "10-15 minutes",
+			"prerequisites": ["Random_1"], 
+			"unlocks": ["Random_4"]
+		},
+		"Random_4": {
+			"difficulty": "intermediate",
+			"estimated_time": "10-15 minutes",
+			"prerequisites": ["Random_3"],
+			"unlocks": ["AgentialRealism", "JSON_Demo"]
+		},
+		"AgentialRealism": {
+			"difficulty": "advanced",
+			"estimated_time": "15-20 minutes",
+			"prerequisites": ["Random_4"],
+			"unlocks": ["TileEffects_Demo"]
+		},
+		"JSON_Demo": {
+			"difficulty": "demonstration", 
+			"estimated_time": "5-10 minutes",
+			"prerequisites": ["Random_4"],
+			"unlocks": ["TileEffects_Demo"]
+		},
+		"TileEffects_Demo": {
+			"difficulty": "demonstration",
+			"estimated_time": "2-5 minutes",
+			"prerequisites": ["AgentialRealism", "JSON_Demo"],
+			"unlocks": []
+		},
+		"menu": {
+			"difficulty": "none",
+			"estimated_time": "1-2 minutes", 
+			"prerequisites": [],
+			"unlocks": ["Tutorial_Start"],
+			"special_type": "navigation_hub"
+		},
+		"default": {
+			"difficulty": "beginner",
+			"estimated_time": "5-10 minutes",
+			"prerequisites": [],
+			"unlocks": [],
+			"special_type": "testing"
+		}
+	},
+	
+	"navigation": {
+		"main_menu": "menu",
+		"starting_map": "Minimal_Test",
+		"fallback_map": "default"
+	},
+	
+	"settings": {
+		"enforce_progression": true,
+		"allow_map_skipping": false,
+		"auto_unlock_next": true,
+		"save_progress": true
+	}
+} 

@@ -3,7 +3,7 @@ extends Node
 class_name AlgorithmRegistry
 
 # Path to the JSON file containing algorithm definitions
-const ALGORITHM_DATA_PATH = "res://adaresearch/Common/Data/algorithms.json"
+const ALGORITHM_DATA_PATH = "res://algorithms/algorithms.json"
 
 # Main registry of algorithms
 var algorithms: Dictionary = {}

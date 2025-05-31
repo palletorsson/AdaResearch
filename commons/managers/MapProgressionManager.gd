@@ -24,7 +24,7 @@ signal map_unlocked(map_name: String)
 signal sequence_completed(sequence_name: String)
 signal progression_loaded()
 
-const PROGRESSION_FILE = "res://adaresearch/Common/Data/Maps/map_progression.json"
+const PROGRESSION_FILE = "res://commons/maps/map_progression.json"
 const SAVE_FILE = "user://map_progress.json"
 var instance 
 func _init():

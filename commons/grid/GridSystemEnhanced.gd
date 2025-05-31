@@ -16,8 +16,8 @@ class_name GridSystemEnhanced
 @export var reload_map: bool = false : set = reload_map_setter
 
 # Path constants
-const MAPS_PATH = "res://adaresearch/Common/Data/Maps/"
-const MAP_OBJECTS_PATH = "res://adaresearch/Common/Scenes/Objects/MapObjects/"
+const MAPS_PATH = "res://commons/maps/"
+const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
 
 # Grid properties
 var grid_x: int
