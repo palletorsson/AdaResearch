@@ -193,7 +193,7 @@ func restart_current_map():
 func list_available_maps() -> Array[String]:
 	"""Get list of available maps from the data directory"""
 	var maps: Array[String] = []
-	var maps_dir = "res://adaresearch/Common/Data/Maps/"
+	var maps_dir = "res://commons/maps/"  # Updated to match actual project structure
 	var dir = DirAccess.open(maps_dir)
 	
 	if dir:
@@ -202,10 +202,19 @@ func list_available_maps() -> Array[String]:
 		
 		while file_name != "":
 			if dir.current_is_dir() and not file_name.begins_with("."):
-				maps.append(file_name)
+				# Check if the directory contains map_data.json
+				var map_data_path = maps_dir + file_name + "/map_data.json"
+				if ResourceLoader.exists(map_data_path):
+					maps.append(file_name)
+					print("VRGridSystemManager: Found map: %s" % file_name)
+				else:
+					print("VRGridSystemManager: Skipping directory '%s' - no map_data.json found" % file_name)
 			file_name = dir.get_next()
+	else:
+		print("VRGridSystemManager: Could not open maps directory: %s" % maps_dir)
 	
 	maps.sort()
+	print("VRGridSystemManager: Total maps found: %d" % maps.size())
 	return maps
 
 func quick_test_map(map_name: String):
@@ -224,7 +233,12 @@ func determine_starting_map() -> String:
 	
 	if available_maps.is_empty():
 		print("VRGridSystemManager: WARNING - No maps found, using fallback")
-		return "Tutorial_Start"  # Changed from Random_4 to Tutorial_Start
+		return "Lab"  # Changed fallback to Lab since that's what exists
+	
+	# Check if Lab is available first (since it's the main hub)
+	if "Lab" in available_maps:
+		print("VRGridSystemManager: Using Lab as starting map (main hub)")
+		return "Lab"
 	
 	# Try to find maps in priority order
 	for priority_map in MAP_ORDER_PRIORITY:
