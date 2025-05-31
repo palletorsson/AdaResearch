@@ -1,0 +1,418 @@
+@tool
+class_name DemoStaging
+extends XRToolsStaging
+
+## Introduction
+#
+# This is an example of using the staging system in XRTools
+# to create an environment in which you can background load
+# scenes and switch between them.
+#
+# There is also some example code here on how to react to
+# the player taking their headset on/off.
+#
+# The primary function here is to trigger the
+# "Press to continue" dialog when switching scenes.
+# We do not want to enter our just loaded scene when the
+# player is still thumbling around putting their headset on
+# so if we detect they hadn't put their headset on yet
+# when we were scene switching, we prompt the user.
+#
+# Finally this shows an example of how to react to pause
+# a game. This is not implemented in this demo (yet) but
+# note that most XR runtimes stop giving us controller
+# tracking data at this point.
+
+var scene_is_loaded : bool = false
+
+# Stores which hand the control pad is bound to
+var control_pad_hand : String = "LEFT"
+
+# VR Map Progression Integration
+var progression_bridge: VRMapProgressionBridge
+var use_progression_system: bool = false
+
+# Grid System Direct Mode
+@export var start_with_grid_system: bool = true
+@export var preferred_grid_map: String = "Lab"  # Changed to start with Lab
+@export var use_enhanced_grid: bool = true
+
+# VR Grid System Manager (Option 3)
+var grid_system_manager: VRGridSystemManager
+@export var use_grid_manager: bool = false  # Disabled to use lab-centric system
+
+# Lab System (New Option 4)
+@export var use_lab_system: bool = true  # New lab-centric system
+
+func _ready() -> void:
+	# In Godot 4 we must now manually call our super class ready function
+	super()
+	
+	# Show startup configuration (for debugging)
+	if OS.is_debug_build():
+		_show_startup_info()
+	
+	# Choose startup method
+	_start_game()
+
+func _start_game():
+	if use_progression_system:
+		_setup_progression_system()
+	elif use_lab_system:
+		_setup_lab_system()
+	elif use_grid_manager:
+		_setup_grid_manager()
+	elif start_with_grid_system:
+		_setup_direct_grid_system()
+	else:
+		# Default fallback
+		print("demo_staging: No system selected, defaulting to lab system")
+		_setup_lab_system()
+
+func _setup_lab_system():
+	print("demo_staging: Setting up lab-centric system")
+	
+	# Load the base scene with Lab map
+	var user_data = {
+		"map_name": "Lab",
+		"system_mode": "lab",
+		"staging_ref": self
+	}
+	
+	# Load the VR scene with lab data
+	load_scene(main_scene, user_data)
+	print("demo_staging: Lab system started with Lab map")
+
+func _setup_progression_system():
+	print("demo_staging: Setting up progression system")
+	
+	# Initialize progression bridge
+	progression_bridge = VRMapProgressionBridge.new()
+	progression_bridge.name = "VRMapProgressionBridge"
+	add_child(progression_bridge)
+	
+	# Initialize and start progression
+	progression_bridge.initialize_with_staging(self)
+	
+	print("demo_staging: Progression system initialized")
+
+func _setup_grid_manager():
+	print("demo_staging: Setting up VR Grid System Manager")
+	
+	# Create grid system manager
+	grid_system_manager = VRGridSystemManager.new()
+	grid_system_manager.name = "VRGridSystemManager"
+	add_child(grid_system_manager)
+	
+	# Initialize and load default map
+	grid_system_manager.initialize_with_staging(self)
+	grid_system_manager.load_default_map()
+	
+	print("demo_staging: VRGridSystemManager initialized")
+
+func _setup_direct_grid_system():
+	print("DemoStaging: Starting directly with grid system")
+	
+	# Use the base scene which contains the grid system
+	var base_scene_path = "res://adaresearch/Common/Scenes/Maps/base.tscn"
+	
+	# Determine starting map if not set
+	var starting_map = preferred_grid_map
+	if starting_map.is_empty():
+		starting_map = _get_first_available_map()
+	
+	# Load the scene with grid configuration
+	var scene_user_data = {
+		"map_name": starting_map,
+		"grid_mode": "direct",
+		"use_enhanced_grid": use_enhanced_grid
+	}
+	
+	print("DemoStaging: Loading grid system with starting map: %s" % starting_map)
+	load_scene(base_scene_path, scene_user_data)
+
+func _load_base_scene():
+	print("DemoStaging: Loading default base VR scene")
+	load_scene("res://adaresearch/Common/Scenes/Maps/base.tscn")
+
+func _load_progression_starting_map():
+	print("DemoStaging: Loading starting map from progression system")
+	
+	# Let progression bridge handle the starting map
+	progression_bridge.load_starting_map()
+
+func _on_Staging_scene_loaded(_scene, _user_data):
+	# We only show the press to continue the first time we load a scene
+	# to give the player time to put their headset on.
+	prompt_for_continue = false
+	scene_is_loaded = true
+
+func _on_Staging_scene_exiting(_scene, _user_data):
+	# We no longer have an active scene
+	scene_is_loaded = false
+
+func _on_Staging_xr_started():
+	# We get the 'xr_started' signal when the user puts on their headset,
+	# or returns from the system menus.
+	# If the user did so while we were already scene switching
+	# we leave our prompt for continue on,
+	# else we turn our prompt for continue off.
+	if scene_is_loaded:
+		# No longer need our prompt
+		prompt_for_continue = false
+
+		# This would be a good moment to unpause your game
+
+func _on_Staging_xr_ended():
+	# We get the 'xr_ended' whenever the player removes their headset (or goes
+	# into the menu system).
+	#
+	# If the user doesn't put their headset on again before we load a
+	# new scene, we'll want to show the prompt so we don't load the
+	# next scene in while the player is still adjusting their position
+	prompt_for_continue = true
+
+	if scene_is_loaded:
+		# This would be a good moment to pause your game
+		pass
+
+# Progression system event handlers
+func _on_map_completed_in_vr(map_name: String):
+	print("DemoStaging: Map '%s' completed in VR!" % map_name)
+	
+	# Show completion notification (could trigger special effects, sounds, etc.)
+	_show_map_completion_feedback(map_name)
+
+func _on_progression_updated(completed_maps: Array, unlocked_maps: Array):
+	print("DemoStaging: Progression updated - %d completed, %d unlocked" % [completed_maps.size(), unlocked_maps.size()])
+
+func _show_map_completion_feedback(map_name: String):
+	# This could trigger special VR effects, achievements, etc.
+	print("DemoStaging: Showing completion feedback for '%s'" % map_name)
+	
+	# Future: Add completion particles, sounds, achievement notifications
+
+# Override load_scene to handle progression-aware loading
+func load_scene(p_scene_path : String, user_data = null) -> void:
+	# Check if this is a map scene and we have progression system
+	if use_progression_system and progression_bridge and _is_map_scene_path(p_scene_path):
+		var map_name = _extract_map_name_from_scene_path(p_scene_path)
+		if not map_name.is_empty():
+			print("DemoStaging: Redirecting to progression-based map loading for '%s'" % map_name)
+			progression_bridge.load_map_in_vr(map_name, user_data)
+			return
+	
+	# Fallback to standard scene loading
+	super.load_scene(p_scene_path, user_data)
+
+# Check if a scene path represents a map scene
+func _is_map_scene_path(scene_path: String) -> bool:
+	return scene_path.find("/Maps/") != -1 or scene_path.find("map") != -1
+
+# Extract map name from scene path
+func _extract_map_name_from_scene_path(scene_path: String) -> String:
+	var filename = scene_path.get_file().get_basename()
+	
+	# Convert common scene names to map names
+	var scene_to_map = {
+		"intro_0": "Intro_0",
+		"intro_1": "Intro_1",
+		"random_0": "Random_0",
+		"random_1": "Random_1",
+		"random_2": "Random_2", 
+		"random_3": "Random_3",
+		"random_4": "Random_4",
+		"tutorial_start": "Tutorial_Start",
+		"tutorial_single": "Tutorial_Single",
+		"tutorial_row": "Tutorial_Row",
+		"tutorial_room": "Tutorial_Room",
+		"tutorial_disco": "Tutorial_Disco",
+		"tutorial_2d": "Tutorial_2D",
+		"preface_0": "Preface_0",
+		"preface_1": "Preface_1",
+		"agental": "AgentialRealism",
+		"menu": "menu",
+		"base": "default"
+	}
+	
+	return scene_to_map.get(filename, filename)
+
+# Public API for external components
+func get_progression_bridge() -> VRMapProgressionBridge:
+	return progression_bridge
+
+func get_progression_status() -> Dictionary:
+	if progression_bridge:
+		return progression_bridge.get_progression_status()
+	return {}
+
+# Quick navigation methods
+func go_to_next_map():
+	if progression_bridge:
+		progression_bridge.go_to_next_map()
+
+func go_to_previous_map():
+	if progression_bridge:
+		progression_bridge.go_to_previous_map()
+
+func complete_current_map():
+	if progression_bridge:
+		progression_bridge.complete_current_map()
+
+func restart_current_map():
+	if progression_bridge:
+		progression_bridge.restart_current_map()
+
+# Development/debugging methods
+func skip_to_map(map_name: String):
+	if progression_bridge:
+		progression_bridge.skip_to_map(map_name)
+
+func force_unlock_all_maps():
+	if progression_bridge and progression_bridge.progression_manager:
+		var all_maps = progression_bridge.progression_manager.map_metadata.keys()
+		for map_name in all_maps:
+			if not progression_bridge.progression_manager.is_map_unlocked(map_name):
+				progression_bridge.progression_manager.unlocked_maps.append(map_name)
+		progression_bridge.progression_manager.save_player_progress()
+		print("DemoStaging: Force unlocked all maps")
+
+# Toggle progression system (for development)
+func toggle_progression_system():
+	use_progression_system = !use_progression_system
+	print("DemoStaging: Progression system %s" % ("enabled" if use_progression_system else "disabled"))
+
+func _initialize_grid_manager():
+	print("DemoStaging: Initializing VR Grid System Manager")
+	
+	# Create grid system manager
+	grid_system_manager = VRGridSystemManager.new()
+	grid_system_manager.name = "VRGridSystemManager"
+	
+	# Set map preference (will auto-determine if empty)
+	if not preferred_grid_map.is_empty():
+		grid_system_manager.default_map = preferred_grid_map
+	
+	grid_system_manager.use_enhanced_grid = use_enhanced_grid
+	add_child(grid_system_manager)
+	
+	# Initialize with staging reference
+	grid_system_manager.initialize_with_staging(self)
+	
+	# Connect to grid manager signals
+	grid_system_manager.grid_system_loaded.connect(_on_grid_system_loaded)
+	grid_system_manager.map_loaded.connect(_on_map_loaded)
+	grid_system_manager.grid_configured.connect(_on_grid_configured)
+	
+	# Load default map
+	call_deferred("_load_grid_manager_default_map")
+
+func _load_grid_manager_default_map():
+	print("DemoStaging: Loading default map via grid manager")
+	grid_system_manager.load_default_map()
+
+# Grid manager event handlers
+func _on_grid_system_loaded(grid_system: Node):
+	print("DemoStaging: Grid system loaded: %s" % grid_system.name)
+
+func _on_map_loaded(map_name: String):
+	print("DemoStaging: Map loaded via grid manager: %s" % map_name)
+
+func _on_grid_configured():
+	print("DemoStaging: Grid system configured successfully")
+
+# Public API for grid manager
+func get_grid_system_manager() -> VRGridSystemManager:
+	return grid_system_manager
+
+func switch_to_map(map_name: String, options: Dictionary = {}):
+	if grid_system_manager:
+		grid_system_manager.switch_to_map(map_name, options)
+
+func get_current_grid_system() -> Node:
+	if grid_system_manager:
+		return grid_system_manager.get_current_grid_system()
+	return null
+
+# Development methods for grid manager
+func list_available_maps() -> Array[String]:
+	if grid_system_manager:
+		return grid_system_manager.list_available_maps()
+	return []
+
+func quick_test_map(map_name: String):
+	if grid_system_manager:
+		grid_system_manager.quick_test_map(map_name)
+
+# Debug and discovery methods
+func discover_maps():
+	"""Print detailed map discovery information"""
+	VRMapDiscovery.print_discovery_results()
+
+func get_starting_map() -> String:
+	"""Get the map that will be used as starting map"""
+	if grid_system_manager:
+		return grid_system_manager.get_starting_map()
+	else:
+		return _get_first_available_map()
+
+func print_startup_info():
+	"""Print information about the current startup configuration"""
+	print("=== Demo Staging Startup Configuration ===")
+	print("Use Progression System: %s" % use_progression_system)
+	print("Use Grid Manager: %s" % use_grid_manager)
+	print("Start With Grid System: %s" % start_with_grid_system)
+	print("Preferred Grid Map: '%s'" % preferred_grid_map)
+	print("Use Enhanced Grid: %s" % use_enhanced_grid)
+	print("")
+	
+	var starting_map = get_starting_map()
+	print("Determined Starting Map: %s" % starting_map)
+	print("============================================")
+
+# Call this in _ready to see startup info
+func _show_startup_info():
+	call_deferred("print_startup_info")
+	call_deferred("discover_maps")
+
+# Helper to get first available map (for direct mode)
+func _get_first_available_map() -> String:
+	"""Get the first available map using the same logic as VRGridSystemManager"""
+	const MAP_ORDER_PRIORITY = [
+		"Tutorial_Start", "Intro_0", "Preface_0", 
+		"Tutorial_Single", "Tutorial_Row", "Tutorial_Room",
+		"Intro_1", "Preface_1", "Random_0", "Random_1", 
+		"Random_2", "Random_3", "Random_4"
+	]
+	
+	# Get available maps
+	var available_maps = _list_available_maps_direct()
+	
+	if available_maps.is_empty():
+		return "Tutorial_Start"  # Changed from Random_4 to Tutorial_Start
+	
+	# Try priority order
+	for priority_map in MAP_ORDER_PRIORITY:
+		if priority_map in available_maps:
+			return priority_map
+	
+	# Use first alphabetically
+	available_maps.sort()
+	return available_maps[0]
+
+# Helper to list available maps (for direct mode)
+func _list_available_maps_direct() -> Array[String]:
+	var maps: Array[String] = []
+	var maps_dir = "res://adaresearch/Common/Data/Maps/"
+	var dir = DirAccess.open(maps_dir)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		
+		while file_name != "":
+			if dir.current_is_dir() and not file_name.begins_with("."):
+				maps.append(file_name)
+			file_name = dir.get_next()
+	
+	return maps
