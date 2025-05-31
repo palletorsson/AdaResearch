@@ -326,48 +326,31 @@ func _handle_spawn_points(scene: Node):
 	if not scene:
 		return
 	
-	print("VRGridSystemManager: Handling spawn points in scene")
+	print("VRGridSystemManager: Setting up default player positioning")
 	
-	# Wait a frame for spawn points to be fully initialized
+	# Wait a frame for grid to be fully initialized
 	await get_tree().process_frame
 	
-	# Get all active spawn points
-	var spawn_points = SpawnPoint.get_active_spawn_points()
-	
-	if spawn_points.is_empty():
-		print("VRGridSystemManager: No spawn points found, using default positioning")
-		return
-	
-	# Get the primary (highest priority) spawn point
-	var primary_spawn = SpawnPoint.get_primary_spawn_point()
-	if primary_spawn:
-		print("VRGridSystemManager: Found primary spawn point: %s (priority: %d)" % [primary_spawn.spawn_name, primary_spawn.priority])
-		_position_player_at_spawn_point(primary_spawn)
-	else:
-		print("VRGridSystemManager: No primary spawn point available")
+	# Use default positioning instead of spawn points
+	_position_player_at_default_location()
 
-# Position player at the specified spawn point
-func _position_player_at_spawn_point(spawn_point: SpawnPoint):
-	if not spawn_point:
-		return
-	
+# Position player at a default location
+func _position_player_at_default_location():
 	# Find the VR origin/staging in the scene
 	var vr_origin = _find_vr_origin()
 	if not vr_origin:
 		print("VRGridSystemManager: WARNING - Could not find VR origin to position player")
 		return
 	
-	# Get spawn transform
-	var spawn_transform = spawn_point.get_spawn_transform()
+	# Set default position (slightly elevated and back from center)
+	var default_position = Vector3(0, 1.8, 3)  # 1.8m height, 3m back from center
+	var default_rotation = Vector3(0, 0, 0)    # Facing forward
 	
 	# Position the VR origin
-	vr_origin.global_transform = spawn_transform
+	vr_origin.global_position = default_position
+	vr_origin.global_rotation_degrees = default_rotation
 	
-	print("VRGridSystemManager: Positioned player at spawn point '%s' - Position: %s, Rotation: %s" % [
-		spawn_point.spawn_name, 
-		spawn_transform.origin, 
-		spawn_point.spawn_rotation
-	])
+	print("VRGridSystemManager: Positioned player at default location - Position: %s" % default_position)
 
 # Find VR origin in the scene
 func _find_vr_origin() -> Node3D:
@@ -385,27 +368,27 @@ func _find_vr_origin() -> Node3D:
 	# Try finding by class
 	return _find_node_by_class(current_scene, "XROrigin3D")
 
-# Get spawn point by name
-func get_spawn_point(spawn_name: String) -> SpawnPoint:
-	return SpawnPoint.get_spawn_point_by_name(spawn_name)
+# Simplified spawn point methods (no longer dependent on SpawnPoint class)
+func get_spawn_point(spawn_name: String) -> Dictionary:
+	# Return default spawn info as a dictionary
+	return {
+		"name": spawn_name,
+		"position": Vector3(0, 1.8, 3),
+		"rotation": Vector3(0, 0, 0),
+		"exists": false
+	}
 
-# Position player at specific spawn point by name
+# Position player at specific location by name (simplified)
 func position_player_at_spawn(spawn_name: String) -> bool:
-	var spawn_point = get_spawn_point(spawn_name)
-	if spawn_point:
-		_position_player_at_spawn_point(spawn_point)
-		return true
-	else:
-		print("VRGridSystemManager: Spawn point '%s' not found" % spawn_name)
-		return false
+	print("VRGridSystemManager: Using default positioning (spawn system not available)")
+	_position_player_at_default_location()
+	return true
 
-# Get all available spawn points
-func get_all_spawn_points() -> Array[SpawnPoint]:
-	return SpawnPoint.get_active_spawn_points()
+# Get all available spawn points (simplified)
+func get_all_spawn_points() -> Array:
+	# Return empty array since spawn system is not available
+	return []
 
-# Debug: List all spawn points
+# Debug: List all spawn points (simplified)
 func list_spawn_points():
-	var spawn_points = SpawnPoint.get_active_spawn_points()
-	print("VRGridSystemManager: Available spawn points (%d):" % spawn_points.size())
-	for spawn_point in spawn_points:
-		spawn_point.print_debug_info()
+	print("VRGridSystemManager: Spawn point system not available - using default positioning")

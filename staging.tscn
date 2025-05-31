@@ -424,14 +424,14 @@ func _list_available_maps_direct() -> Array[String]:
 	return maps
 "
 
-[node name="DemoStaging" instance=ExtResource("1")]
+[node name="Staging" instance=ExtResource("1")]
 script = SubResource("GDScript_kx5ou")
-main_scene = "uid://cgrljkfrmkgda"
 start_with_grid_system = true
 preferred_grid_map = ""
 use_enhanced_grid = true
 use_grid_manager = true
-use_lab_system = null
+use_lab_system = true
+main_scene = "uid://cgrljkfrmkgda"
 
 [node name="LoadingScreen" parent="." index="2"]
 splash_screen = ExtResource("3_2an2h")

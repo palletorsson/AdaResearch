@@ -1,5 +1,5 @@
 @tool
-class_name DemoStaging
+class_name LabStaging
 extends XRToolsStaging
 
 ## Introduction
@@ -66,11 +66,11 @@ func _start_game():
 		_setup_direct_grid_system()
 	else:
 		# Default fallback
-		print("demo_staging: No system selected, defaulting to lab system")
+		print("lab_staging: No system selected, defaulting to lab system")
 		_setup_lab_system()
 
 func _setup_lab_system():
-	print("demo_staging: Setting up lab-centric system")
+	print("lab_staging: Setting up lab-centric system")
 	
 	# Load the base scene with Lab map
 	var user_data = {
@@ -81,10 +81,10 @@ func _setup_lab_system():
 	
 	# Load the VR scene with lab data
 	load_scene(main_scene, user_data)
-	print("demo_staging: Lab system started with Lab map")
+	print("lab_staging: Lab system started with Lab map")
 
 func _setup_progression_system():
-	print("demo_staging: Setting up progression system")
+	print("lab_staging: Setting up progression system")
 	
 	# Initialize progression bridge
 	progression_bridge = VRMapProgressionBridge.new()
@@ -94,10 +94,10 @@ func _setup_progression_system():
 	# Initialize and start progression
 	progression_bridge.initialize_with_staging(self)
 	
-	print("demo_staging: Progression system initialized")
+	print("lab_staging: Progression system initialized")
 
 func _setup_grid_manager():
-	print("demo_staging: Setting up VR Grid System Manager")
+	print("lab_staging: Setting up VR Grid System Manager")
 	
 	# Create grid system manager
 	grid_system_manager = VRGridSystemManager.new()
@@ -108,13 +108,13 @@ func _setup_grid_manager():
 	grid_system_manager.initialize_with_staging(self)
 	grid_system_manager.load_default_map()
 	
-	print("demo_staging: VRGridSystemManager initialized")
+	print("lab_staging: VRGridSystemManager initialized")
 
 func _setup_direct_grid_system():
-	print("DemoStaging: Starting directly with grid system")
+	print("LabStaging: Starting directly with grid system")
 	
 	# Use the base scene which contains the grid system
-	var base_scene_path = "res://adaresearch/Common/Scenes/Maps/base.tscn"
+	var base_scene_path = "res://commons/scenes/base.tscn"  # Updated path
 	
 	# Determine starting map if not set
 	var starting_map = preferred_grid_map
@@ -128,15 +128,15 @@ func _setup_direct_grid_system():
 		"use_enhanced_grid": use_enhanced_grid
 	}
 	
-	print("DemoStaging: Loading grid system with starting map: %s" % starting_map)
+	print("LabStaging: Loading grid system with starting map: %s" % starting_map)
 	load_scene(base_scene_path, scene_user_data)
 
 func _load_base_scene():
-	print("DemoStaging: Loading default base VR scene")
-	load_scene("res://adaresearch/Common/Scenes/Maps/base.tscn")
+	print("LabStaging: Loading default base VR scene")
+	load_scene("res://commons/scenes/base.tscn")  # Updated path
 
 func _load_progression_starting_map():
-	print("DemoStaging: Loading starting map from progression system")
+	print("LabStaging: Loading starting map from progression system")
 	
 	# Let progression bridge handle the starting map
 	progression_bridge.load_starting_map()
@@ -178,17 +178,17 @@ func _on_Staging_xr_ended():
 
 # Progression system event handlers
 func _on_map_completed_in_vr(map_name: String):
-	print("DemoStaging: Map '%s' completed in VR!" % map_name)
+	print("LabStaging: Map '%s' completed in VR!" % map_name)
 	
 	# Show completion notification (could trigger special effects, sounds, etc.)
 	_show_map_completion_feedback(map_name)
 
 func _on_progression_updated(completed_maps: Array, unlocked_maps: Array):
-	print("DemoStaging: Progression updated - %d completed, %d unlocked" % [completed_maps.size(), unlocked_maps.size()])
+	print("LabStaging: Progression updated - %d completed, %d unlocked" % [completed_maps.size(), unlocked_maps.size()])
 
 func _show_map_completion_feedback(map_name: String):
 	# This could trigger special VR effects, achievements, etc.
-	print("DemoStaging: Showing completion feedback for '%s'" % map_name)
+	print("LabStaging: Showing completion feedback for '%s'" % map_name)
 	
 	# Future: Add completion particles, sounds, achievement notifications
 
@@ -198,7 +198,7 @@ func load_scene(p_scene_path : String, user_data = null) -> void:
 	if use_progression_system and progression_bridge and _is_map_scene_path(p_scene_path):
 		var map_name = _extract_map_name_from_scene_path(p_scene_path)
 		if not map_name.is_empty():
-			print("DemoStaging: Redirecting to progression-based map loading for '%s'" % map_name)
+			print("LabStaging: Redirecting to progression-based map loading for '%s'" % map_name)
 			progression_bridge.load_map_in_vr(map_name, user_data)
 			return
 	
@@ -269,21 +269,20 @@ func skip_to_map(map_name: String):
 		progression_bridge.skip_to_map(map_name)
 
 func force_unlock_all_maps():
-	if progression_bridge and progression_bridge.progression_manager:
-		var all_maps = progression_bridge.progression_manager.map_metadata.keys()
-		for map_name in all_maps:
-			if not progression_bridge.progression_manager.is_map_unlocked(map_name):
-				progression_bridge.progression_manager.unlocked_maps.append(map_name)
-		progression_bridge.progression_manager.save_player_progress()
-		print("DemoStaging: Force unlocked all maps")
+	if progression_bridge:
+		print("LabStaging: Progression bridge exists, but no progression manager available")
+		# Since we simplified the progression bridge, just log this
+		print("LabStaging: All maps are already available in simplified mode")
+	else:
+		print("LabStaging: No progression bridge available")
 
 # Toggle progression system (for development)
 func toggle_progression_system():
 	use_progression_system = !use_progression_system
-	print("DemoStaging: Progression system %s" % ("enabled" if use_progression_system else "disabled"))
+	print("LabStaging: Progression system %s" % ("enabled" if use_progression_system else "disabled"))
 
 func _initialize_grid_manager():
-	print("DemoStaging: Initializing VR Grid System Manager")
+	print("LabStaging: Initializing VR Grid System Manager")
 	
 	# Create grid system manager
 	grid_system_manager = VRGridSystemManager.new()
@@ -308,18 +307,18 @@ func _initialize_grid_manager():
 	call_deferred("_load_grid_manager_default_map")
 
 func _load_grid_manager_default_map():
-	print("DemoStaging: Loading default map via grid manager")
+	print("LabStaging: Loading default map via grid manager")
 	grid_system_manager.load_default_map()
 
 # Grid manager event handlers
 func _on_grid_system_loaded(grid_system: Node):
-	print("DemoStaging: Grid system loaded: %s" % grid_system.name)
+	print("LabStaging: Grid system loaded: %s" % grid_system.name)
 
 func _on_map_loaded(map_name: String):
-	print("DemoStaging: Map loaded via grid manager: %s" % map_name)
+	print("LabStaging: Map loaded via grid manager: %s" % map_name)
 
 func _on_grid_configured():
-	print("DemoStaging: Grid system configured successfully")
+	print("LabStaging: Grid system configured successfully")
 
 # Public API for grid manager
 func get_grid_system_manager() -> VRGridSystemManager:
@@ -358,7 +357,7 @@ func get_starting_map() -> String:
 
 func print_startup_info():
 	"""Print information about the current startup configuration"""
-	print("=== Demo Staging Startup Configuration ===")
+	print("=== Lab Staging Startup Configuration ===")
 	print("Use Progression System: %s" % use_progression_system)
 	print("Use Grid Manager: %s" % use_grid_manager)
 	print("Start With Grid System: %s" % start_with_grid_system)
@@ -403,7 +402,7 @@ func _get_first_available_map() -> String:
 # Helper to list available maps (for direct mode)
 func _list_available_maps_direct() -> Array[String]:
 	var maps: Array[String] = []
-	var maps_dir = "res://adaresearch/Common/Data/Maps/"
+	var maps_dir = "res://commons/maps/"  # Updated path to match your structure
 	var dir = DirAccess.open(maps_dir)
 	
 	if dir:
