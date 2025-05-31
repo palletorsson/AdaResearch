@@ -25,18 +25,27 @@ static func discover_available_maps() -> Dictionary:
 		"other_maps": []
 	}
 	
-	var maps_dir = "res://adaresearch/Common/Data/Maps/"
+	var maps_dir = "res://commons/maps/"  # Updated to match actual project structure
 	var dir = DirAccess.open(maps_dir)
 	var found_maps: Array[String] = []
 	
 	if dir:
+		print("VRMapDiscovery: Scanning directory: %s" % maps_dir)
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		
 		while file_name != "":
 			if dir.current_is_dir() and not file_name.begins_with("."):
-				found_maps.append(file_name)
+				# Check if directory contains map_data.json
+				var map_data_path = maps_dir + file_name + "/map_data.json"
+				if ResourceLoader.exists(map_data_path):
+					found_maps.append(file_name)
+					print("VRMapDiscovery: Found valid map: %s" % file_name)
+				else:
+					print("VRMapDiscovery: Skipping '%s' - no map_data.json" % file_name)
 			file_name = dir.get_next()
+	else:
+		print("VRMapDiscovery: ERROR - Could not open maps directory: %s" % maps_dir)
 	
 	found_maps.sort()
 	result.maps = found_maps
@@ -57,7 +66,11 @@ static func discover_available_maps() -> Dictionary:
 # Determine starting map from a list
 static func determine_starting_map_from_list(available_maps: Array[String]) -> String:
 	if available_maps.is_empty():
-		return "Random_4"  # Fallback
+		return "Lab"  # Changed fallback to Lab since that's what exists
+	
+	# Check if Lab is available first (since it's the main hub)
+	if "Lab" in available_maps:
+		return "Lab"
 	
 	# Try priority order
 	for priority_map in MAP_ORDER_PRIORITY:
@@ -101,7 +114,7 @@ static func print_discovery_results():
 
 # Validate a map exists
 static func validate_map_exists(map_name: String) -> bool:
-	var maps_dir = "res://adaresearch/Common/Data/Maps/" + map_name
+	var maps_dir = "res://commons/maps/" + map_name  # Updated path
 	return DirAccess.dir_exists_absolute(maps_dir)
 
 # Get map info
@@ -118,13 +131,13 @@ static func get_map_info(map_name: String) -> Dictionary:
 		"priority_level": -1
 	}
 	
-	var maps_dir = "res://adaresearch/Common/Data/Maps/" + map_name
+	var maps_dir = "res://commons/maps/" + map_name  # Updated path
 	info.path = maps_dir
 	info.exists = DirAccess.dir_exists_absolute(maps_dir)
 	
 	if info.exists:
 		# Check for data files
-		info.has_json = FileAccess.file_exists(maps_dir + "/map_data.json")
+		info.has_json = ResourceLoader.exists(maps_dir + "/map_data.json")  # Use ResourceLoader.exists
 		info.has_gd = FileAccess.file_exists(maps_dir + "/struct_data.gd")
 		
 		# Check priority level
