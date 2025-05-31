@@ -1,0 +1,132 @@
+{
+	"map_info": {
+		"name": "Lab",
+		"description": "Central Science Lab - Hub for algorithmic exploration",
+		"version": "1.0",
+		"format": "json",
+		"created_from": "lab_system_design",
+		"dimensions": {
+			"width": 5.0,
+			"depth": 5.0,
+			"max_height": 2.0
+		},
+		"metadata": {
+			"difficulty": "hub",
+			"category": "laboratory",
+			"estimated_time": "ongoing",
+			"learning_objectives": [
+				"Central hub for all learning sequences",
+				"Progressive artifact discovery",
+				"Sequence-based learning progression"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "]
+		],
+		"tasks": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "pick_up_cube", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"s": {
+			"name": "Lab Spawn Point",
+			"description": "Starting position in the science lab",
+			"type": "spawn_point",
+			"properties": {
+				"spawn_name": "lab_entrance",
+				"priority": 10.0,
+				"rotation": [0.0, 180.0, 0.0],
+				"visible_in_game": false,
+				"active": true
+			}
+		}
+	},
+	"task_definitions": {
+
+	},
+	"spawn_points": {
+		"default": {
+			"position": [2.0, 1.0, 4.0],
+			"rotation": [0.0, 180.0, 0.0],
+			"description": "Main entrance to the lab, facing the research table"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.8, 0.8, 0.9],
+		"ambient_energy": 0.6,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.2, -0.8, -0.1],
+			"color": [1.0, 1.0, 1.0],
+			"energy": 1.2
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.1, 0.15, 0.25]
+		},
+		"materials": {
+			"1": {
+				"name": "lab_floor",
+				"description": "Laboratory floor tiles",
+				"fallback_color": [0.8, 0.8, 0.9, 1.0]
+			},
+			"2": {
+				"name": "lab_platform",
+				"description": "Raised platform area around the table",
+				"fallback_color": [0.9, 0.9, 1.0, 1.0]
+			},
+			"3": {
+				"name": "lab_table",
+				"description": "Central research table",
+				"fallback_color": [0.7, 0.8, 0.9, 1.0]
+			}
+		},
+		"lab_artifacts": {
+			"table_center": {
+				"position": [2.0, 1.1, 2.0],
+				"available_slots": [
+					{"name": "center", "offset": [0.0, 0.1, 0.0]},
+					{"name": "north", "offset": [0.0, 0.1, -0.7]},
+					{"name": "south", "offset": [0.0, 0.1, 0.7]},
+					{"name": "east", "offset": [0.7, 0.1, 0.0]},
+					{"name": "west", "offset": [-0.7, 0.1, 0.0]},
+					{"name": "northeast", "offset": [0.5, 0.1, -0.5]},
+					{"name": "northwest", "offset": [-0.5, 0.1, -0.5]},
+					{"name": "southeast", "offset": [0.5, 0.1, 0.5]},
+					{"name": "southwest", "offset": [-0.5, 0.1, 0.5]}
+				]
+			}
+		},
+		"special_instructions": "Central lab hub for sequence-based learning. Artifacts dynamically spawn based on progression."
+	}
+}
