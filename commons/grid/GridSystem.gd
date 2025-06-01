@@ -35,14 +35,12 @@ var json_loader: JsonMapLoader
 var structure_data_instance
 var utility_data_instance
 var interactable_data_instance
-var task_data_instance
 var explain_data_instance
 
 # Handler instances
 var structure_handler = null
 var utility_handler = null
 var interactable_handler = null
-var task_handler = null
 var explain_handler = null
 
 # Scene cache to avoid loading the same scene multiple times
@@ -92,7 +90,7 @@ func _ready():
 	
 	# Initialize handlers
 	_init_handlers()
-	if structure_handler and utility_handler and interactable_handler and task_handler and explain_handler:
+	if structure_handler and utility_handler and interactable_handler and explain_handler:
 		print("✓ Handlers initialized")
 	else:
 		print("❌ FAILED to initialize handlers")
@@ -126,13 +124,11 @@ func _init_handlers():
 	var StructureHandler = load("res://adaresearch/Common/Scripts/Grid/GridStructureHandler.gd")
 	var UtilityHandler = load("res://adaresearch/Common/Scripts/Grid/GridUtilityHandler.gd")
 	var InteractableHandler = load("res://adaresearch/Common/Scripts/Grid/GridInteractableHandler.gd")
-	var TaskHandler = load("res://adaresearch/Common/Scripts/Grid/GridTaskHandler.gd")
 	var ExplainHandler = load("res://adaresearch/Common/Scripts/Grid/GridExplainHandler.gd")	
 	
 	structure_handler = StructureHandler.new(self)
 	utility_handler = UtilityHandler.new(self)
 	interactable_handler = InteractableHandler.new(self)
-	task_handler = TaskHandler.new(self)
 	explain_handler = ExplainHandler.new(self)	
 	
 	print("GridSystem: All handlers initialized")
@@ -171,19 +167,6 @@ func _setup_handlers_with_json_data():
 		interactable_handler.interactable_data_instance = interactable_data_instance
 		print("GridSystem: Assigned interactable data instance to handler")
 	
-	if task_handler and task_data_instance:
-		# For task handler, we need to provide the JSON data in the format it expects
-		# The task handler expects task_json_data and task_lookup
-		if json_loader:
-			# Get the tasks layer data
-			var tasks_layer = json_loader.get_tasks_layer()
-			var task_definitions = json_loader.get_task_definitions()
-			
-			# Set up task handler data
-			task_handler.task_layout_data = tasks_layer
-			task_handler.task_lookup = task_definitions
-			print("GridSystem: Assigned task data to handler")
-	
 	if explain_handler and explain_data_instance:
 		explain_handler.explain_data_instance = explain_data_instance
 		print("GridSystem: Assigned explain data instance to handler")
@@ -221,7 +204,6 @@ func _try_load_json_map() -> bool:
 		structure_data_instance = json_loader.structure_data_instance
 		utility_data_instance = json_loader.utility_data_instance
 		interactable_data_instance = json_loader.interactable_data_instance
-		task_data_instance = json_loader.task_data_instance
 		explain_data_instance = json_loader  # JSON loader can handle explain data too
 		print("✓ Data instances extracted")
 		
@@ -251,18 +233,16 @@ func _try_load_json_map() -> bool:
 
 func _load_legacy_map_data():
 	# Load map data using handlers (legacy GDScript approach)
-	if structure_handler and utility_handler and interactable_handler and task_handler and explain_handler:
+	if structure_handler and utility_handler and interactable_handler and explain_handler:
 		structure_handler.load_data(map_name)
 		utility_handler.load_data(map_name)
 		interactable_handler.load_data(map_name)
-		task_handler.load_data(map_name)
 		explain_handler.load_data(map_name)
 		
 		# Get data instances from handlers
 		structure_data_instance = structure_handler.structure_data_instance
 		utility_data_instance = utility_handler.utility_data_instance
 		interactable_data_instance = interactable_handler.interactable_data_instance
-		task_data_instance = task_handler.task_data_instance
 		explain_data_instance = explain_handler.explain_data_instance
 	else:
 		print("GridSystem: ERROR - Handlers not initialized for legacy loading")
@@ -306,9 +286,6 @@ func _generate_grid():
 	
 	interactable_handler.apply_data()
 	print("GridSystem: Interactable data applied")
-	
-	task_handler.apply_data()
-	print("GridSystem: Task data applied")
 
 	explain_handler.apply_data()
 	print("GridSystem: Explain data applied")
@@ -323,7 +300,6 @@ func initialize_grid():
 	if structure_handler: structure_handler.clear()
 	if utility_handler: utility_handler.clear()  
 	if interactable_handler: interactable_handler.clear()
-	if task_handler: task_handler.clear()
 	if explain_handler: explain_handler.clear()
 	
 	# Pre-allocate the grid with empty arrays
@@ -359,7 +335,6 @@ func generate_layout():
 	if structure_handler: structure_handler.clear()
 	if utility_handler: utility_handler.clear()
 	if interactable_handler: interactable_handler.clear()
-	if task_handler: task_handler.clear()
 	if explain_handler: explain_handler.clear()
 	
 	# Clear scene cache to reload any changed scenes
@@ -398,10 +373,6 @@ func load_scene(scene_filename: String) -> PackedScene:
 func _on_interactable_activated(algorithm_id: String, position: Vector3i, data = null):
 	emit_signal("interactable_activated", algorithm_id, position, data)
 	#print("GridSystem: Algorithm activated: ID %s at position %s" % [algorithm_id, position])
-	
-	# If TaskSystem singleton exists, update task progress
-	if Engine.has_singleton("TaskSystem"):
-		TaskSystem.update_task_progress(algorithm_id)
 
 # Get methods that delegate to handlers
 
@@ -410,15 +381,6 @@ func get_algorithm_at(x: int, y: int, z: int) -> Node:
 
 func get_algorithms_by_category(category: String) -> Array:
 	return interactable_handler.get_interactables_by_category(category)
-
-func get_task_at(x: int, y: int, z: int) -> Dictionary:
-	return task_handler.get_task_at(x, y, z)
-
-func get_all_tasks() -> Array:
-	return task_handler.get_all_tasks()
-
-func get_task_by_lookup_name(lookup_name: String) -> Dictionary:
-	return task_handler.get_task_by_lookup_name(lookup_name)
 
 # Conversion utilities
 

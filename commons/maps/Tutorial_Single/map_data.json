@@ -29,10 +29,6 @@
 		"interactables": [
 			[" ", " "],
 			[" ", " "]
-		],
-		"tasks": [
-			[" ", " "],
-			[" ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -53,19 +49,6 @@
 			"properties": {
 				"height": 0.5,
 				"material": "metal"
-			}
-		}
-	},
-	"task_definitions": {
-		"cube": {
-			"name": "Tutorial Cube",
-			"description": "Your first grabbable object - reach out and grab it!",
-			"type": "interaction",
-			"properties": {
-				"grabbable": true,
-				"respawns": true,
-				"size": [0.1, 0.1, 0.1],
-				"color": [0.2, 0.8, 0.3]
 			}
 		}
 	},

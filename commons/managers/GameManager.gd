@@ -73,20 +73,6 @@ func set_message(message: String) -> void:
 func get_message() -> String:
 	return current_message
 
-# Task system integration
-
-func set_tasks(tasks: Array) -> bool:
-	# Store any relevant task information in the game state
-	print("GameManager: Registered " + str(tasks.size()) + " tasks")
-	return true
-
-# Get the task manager (through TaskSystem singleton)
-func get_task_manager():
-	pass
-	#if Engine.has_singleton("TaskSystem"):
-		#return TaskSystem.get_task_manager()
-	#return null
-
 # Audio management
 
 func set_sound_enabled(enabled: bool) -> void:

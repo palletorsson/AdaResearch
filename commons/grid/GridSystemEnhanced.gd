@@ -43,7 +43,6 @@ var prefer_json_format: bool = true
 var structure_data_instance
 var utility_data_instance
 var interactable_data_instance
-var task_data_instance
 
 # Components
 @onready var base_cube = $CubeBaseStaticBody3D
@@ -96,7 +95,6 @@ func _load_json_map() -> void:
 		structure_data_instance = json_loader.structure_data_instance
 		utility_data_instance = json_loader.utility_data_instance
 		interactable_data_instance = json_loader.interactable_data_instance
-		task_data_instance = json_loader.task_data_instance
 		
 		# Apply JSON settings
 		var settings = json_loader.get_settings()
@@ -143,7 +141,6 @@ func _generate_grid() -> void:
 	_apply_structure_data()
 	_apply_utility_data()
 	_apply_interactable_data()
-	_apply_task_data()
 	
 	print("GridSystemEnhanced: Grid generation completed")
 	emit_signal("map_generation_complete")
@@ -318,131 +315,6 @@ func _apply_interactable_data() -> void:
 	
 	print("GridSystemEnhanced: Added %d interactables" % interactable_count)
 
-func _apply_task_data() -> void:
-	if not json_loader:
-		print("INFO: No JSON data available for task application")
-		return
-	
-	var task_data = json_loader.get_tasks_layer()
-	var task_definitions = json_loader.get_task_definitions()
-	
-	if not task_data or task_data.is_empty():
-		print("INFO: No task data to apply")
-		return
-	
-	print("GridSystemEnhanced: Applying task data from JSON")
-	
-	# Load global task registry from artifact_data.gd
-	var artifact_data_path = "res://adaresearch/Common/Scripts/Managers/artifact_data.gd"
-
-	if not ResourceLoader.exists(artifact_data_path):
-		print("ERROR: Global artifact data file not found at %s" % artifact_data_path)
-		return
-
-	var artifact_script = load(artifact_data_path)
-	if not artifact_script:
-		print("ERROR: Failed to load artifact data script")
-		return
-
-	var artifact_instance = artifact_script.new()
-	if artifact_instance.get("ARTIFACTS_JSON") != null:
-		var artifacts_json = artifact_instance.ARTIFACTS_JSON
-		
-		# Create lookup table for task info
-		for artifact in artifacts_json:
-			var lookup_name = artifact.get("lookup_name", "")
-			if not lookup_name.is_empty():
-				task_info_registry[lookup_name] = artifact
-	else:
-		print("ERROR: ARTIFACTS_JSON not found in artifact data script")
-
-	var total_size = cube_size + gutter
-	var task_count = 0
-	
-	# Process task layout grid
-	for z in range(min(grid_z, task_data.size())):
-		var row = task_data[z]
-		if not row is Array:
-			continue
-			
-		for x in range(min(grid_x, row.size())):
-			var task_id = str(row[x]).strip_edges()
-			
-			if task_id != " " and not task_id.is_empty():
-				# Find highest Y position for this grid position
-				var y_pos = _find_highest_y_at(x, z)
-				
-				# Look up task in global registry
-				if task_info_registry.has(task_id):
-					var task_info = task_info_registry[task_id]
-					if task_info.has("scene"):
-						_place_task_object(x, y_pos, z, task_id, task_info, total_size)
-						task_count += 1
-					else:
-						print("WARNING: Task '%s' has no scene file defined" % task_id)
-				else:
-					print("WARNING: Task '%s' not found in global task registry" % task_id)
-	
-	print("GridSystemEnhanced: Added %d task objects" % task_count)
-
-# Place a task object at the specified grid position
-func _place_task_object(x: int, y: int, z: int, task_id: String, task_info: Dictionary, total_size: float) -> void:
-	var scene_path = task_info["scene"]
-	
-	# Load the task scene
-	if not ResourceLoader.exists(scene_path):
-		print("ERROR: Task scene not found: %s" % scene_path)
-		return
-	
-	var task_scene = load(scene_path)
-	if not task_scene:
-		print("ERROR: Failed to load task scene: %s" % scene_path)
-		return
-	
-	var task_object = task_scene.instantiate()
-	if not task_object:
-		print("ERROR: Failed to instantiate task scene: %s" % scene_path)
-		return
-	
-	# Position the task object
-	var position = Vector3(x, y, z) * total_size
-	task_object.position = position
-	
-	# Add to scene
-	add_child(task_object)
-	
-	if get_tree() and get_tree().edited_scene_root:
-		task_object.owner = get_tree().edited_scene_root
-	
-	# Store reference (using interactable_objects as tasks are a type of interactable)
-	var grid_pos = Vector3i(x, y, z)
-	interactable_objects[grid_pos] = task_object
-	
-	# Set up task metadata if the object supports it
-	if task_object.has_method("set_task_info"):
-		task_object.set_task_info(task_info)
-	
-	# Connect interaction signals if available
-	if task_object.has_signal("interact"):
-		task_object.connect("interact", _on_task_interact.bind(task_id, grid_pos))
-	
-	if task_object.has_signal("task_completed"):
-		task_object.connect("task_completed", _on_task_completed.bind(task_id, grid_pos))
-	
-	var artifact_name = task_info.get("artifact_name", task_id)
-	print("  Added task '%s' (%s) at (%d,%d,%d)" % [artifact_name, task_id, x, y, z])
-
-# Handle task interaction events
-func _on_task_interact(task_id: String, position: Vector3i, data = null) -> void:
-	emit_signal("interactable_activated", task_id, position, data)
-	print("Task interaction: %s at %s" % [task_id, position])
-
-# Handle task completion events  
-func _on_task_completed(task_id: String, position: Vector3i, data = null) -> void:
-	print("Task completed: %s at %s" % [task_id, position])
-	# Emit a specific task completion signal if needed
-	# emit_signal("task_completed", task_id, position, data)
-
 func _find_highest_y_at(x: int, z: int) -> int:
 	for y in range(grid_y-1, -1, -1):
 		if grid[x][y][z]:
@@ -573,7 +445,6 @@ func _reload_current_map() -> void:
 	structure_data_instance = null
 	utility_data_instance = null
 	interactable_data_instance = null
-	task_data_instance = null
 	json_loader = null
 	
 	# Wait one frame to ensure cleanup is complete

@@ -40,14 +40,6 @@
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "]
-		],
-		"tasks": [
-			["start", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", "center", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "complete"]
 		]
 	},
 	"utility_definitions": {
@@ -58,35 +50,6 @@
 			"properties": {
 				"destination": "next",
 				"visual_effect": "portal_glow"
-			}
-		}
-	},
-	"task_definitions": {
-		"start": {
-			"name": "Begin 2D Navigation",
-			"description": "Learn to navigate in two dimensions",
-			"type": "explanation",
-			"properties": {
-				"text": "Welcome to 2D array navigation!\nStep on this cube to reveal the grid pattern.\nThen navigate using both X and Y axes to explore the 2D structure!",
-				"auto_display": true
-			}
-		},
-		"center": {
-			"name": "Grid Center",
-			"description": "Middle of the 2D array",
-			"type": "explanation",
-			"properties": {
-				"text": "You've reached the center of the 2D array!\nThis is position [2,2] - notice how you can move in multiple directions.\nTry exploring the corners and edges!",
-				"auto_display": true
-			}
-		},
-		"complete": {
-			"name": "2D Navigation Complete",
-			"description": "Grid traversal finished",
-			"type": "explanation",
-			"properties": {
-				"text": "Outstanding! You've mastered 2D array navigation!\nYou understand how grids work in programming.\nUse the teleporter for your final challenge!",
-				"auto_display": true
 			}
 		}
 	},

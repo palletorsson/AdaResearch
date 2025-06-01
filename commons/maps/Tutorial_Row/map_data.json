@@ -58,20 +58,6 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
-		],
-		"tasks": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -82,26 +68,6 @@
 			"properties": {
 				"destination": "next",
 				"visual_effect": "portal_glow"
-			}
-		}
-	},
-	"task_definitions": {
-		"start": {
-			"name": "Begin Y-Axis Navigation",
-			"description": "Start your journey through the array",
-			"type": "explanation",
-			"properties": {
-				"text": "Welcome to Y-axis navigation!\nStep on this cube to reveal the entire array sequence.\nThen walk forward through each element to learn linear progression!",
-				"auto_display": true
-			}
-		},
-		"complete": {
-			"name": "Navigation Complete",
-			"description": "Array traversal finished",
-			"type": "explanation",
-			"properties": {
-				"text": "Excellent! You've completed Y-axis array navigation!\nYou experienced forward movement through 3D space.\nUse the teleporter to continue to the next lesson!",
-				"auto_display": true
 			}
 		}
 	},

@@ -57,12 +57,6 @@ func _ready():
 	else:
 		print(\"❌ MapProgressionManager autoload not found\")
 	
-	var task_system = get_node_or_null(\"/root/TaskSystem\")
-	if task_system:
-		print(\"✅ TaskSystem autoload available\")
-	else:
-		print(\"❌ TaskSystem autoload not found\")
-	
 	print(\"=== Scene initialization complete ===\")
 	
 	# Notify staging system that we're ready

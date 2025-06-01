@@ -40,10 +40,12 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", "s", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -90,29 +92,6 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		],
-		"tasks": [
-			["start", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "disco_center", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "complete", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -123,35 +102,6 @@
 			"properties": {
 				"destination": "next",
 				"visual_effect": "portal_glow"
-			}
-		}
-	},
-	"task_definitions": {
-		"start": {
-			"name": "Disco Floor Introduction",
-			"description": "Welcome to the large scale 2D array",
-			"type": "explanation",
-			"properties": {
-				"text": "Welcome to the Disco Floor!\nThis is an 11x21 array - much larger than before.\nStep here to reveal the entire floor, then explore the disco area!",
-				"auto_display": true
-			}
-		},
-		"disco_center": {
-			"name": "Disco Activation Center",
-			"description": "Center of the 9x9 disco area",
-			"type": "explanation",
-			"properties": {
-				"text": "You've reached the disco activation center!\nStep here to light up the entire 9x9 disco floor.\nWatch the colorful pattern spread outward from the center!",
-				"auto_display": true
-			}
-		},
-		"complete": {
-			"name": "Disco Floor Complete",
-			"description": "Large array navigation finished",
-			"type": "explanation",
-			"properties": {
-				"text": "Amazing! You've navigated a large 2D array!\nYou experienced pattern-based interactions.\nReady for more advanced array concepts!",
-				"auto_display": true
 			}
 		}
 	},

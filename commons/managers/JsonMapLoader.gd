@@ -11,9 +11,8 @@ var is_loaded: bool = false
 
 # Compatibility instances that mimic the GDScript data structure
 var structure_data_instance
-var utility_data_instance 
+var utility_data_instance
 var interactable_data_instance
-var task_data_instance
 
 # Load JSON map file
 func load_map(map_path: String) -> bool:
@@ -35,31 +34,20 @@ func load_map(map_path: String) -> bool:
 	map_data = json.data
 	is_loaded = true
 	
-	# Create compatibility instances
-	_create_compatibility_instances()
-	
-	print("JsonMapLoader: Successfully loaded map '%s'" % get_map_name())
-	return true
-
-# Create compatibility instances that mimic GDScript data files
-func _create_compatibility_instances() -> void:
-	# Structure data compatibility
+	# Create data adapter instances
 	structure_data_instance = JsonStructureDataAdapter.new()
-	structure_data_instance.layout_data = map_data.get("layers", {}).get("structure", [])
-	
-	# Utility data compatibility
 	utility_data_instance = JsonUtilityDataAdapter.new()
+	interactable_data_instance = JsonInteractableDataAdapter.new()
+	
+	# Extract data from JSON
+	structure_data_instance.layout_data = map_data.get("layers", {}).get("structure", [])
 	utility_data_instance.layout_data = map_data.get("layers", {}).get("utilities", [])
 	utility_data_instance.map_name = get_map_name()
 	utility_data_instance.description = get_map_description()
-	
-	# Interactable data compatibility
-	interactable_data_instance = JsonInteractableDataAdapter.new()
 	interactable_data_instance.interactable_data = map_data.get("layers", {}).get("interactables", [])
 	
-	# Task data compatibility
-	task_data_instance = JsonTaskDataAdapter.new()
-	task_data_instance.task_data = map_data.get("layers", {}).get("tasks", [])
+	print("JsonMapLoader: Successfully loaded map '%s'" % get_map_name())
+	return true
 
 # Get map information
 func get_map_name() -> String:
@@ -87,15 +75,9 @@ func get_utilities_layer() -> Array:
 func get_interactables_layer() -> Array:
 	return map_data.get("layers", {}).get("interactables", [])
 
-func get_tasks_layer() -> Array:
-	return map_data.get("layers", {}).get("tasks", [])
-
 # Get definitions
 func get_utility_definitions() -> Dictionary:
 	return map_data.get("utility_definitions", {})
-
-func get_task_definitions() -> Dictionary:
-	return map_data.get("task_definitions", {})
 
 # Get spawn points
 func get_spawn_points() -> Dictionary:
@@ -201,7 +183,6 @@ func generate_report() -> String:
 	report.append("Structure layer: %d rows" % get_structure_layer().size())
 	report.append("Utilities layer: %d rows" % get_utilities_layer().size())
 	report.append("Interactables layer: %d rows" % get_interactables_layer().size())
-	report.append("Tasks layer: %d rows" % get_tasks_layer().size())
 	
 	# Utility analysis
 	var utility_definitions = get_utility_definitions()
@@ -210,14 +191,6 @@ func generate_report() -> String:
 		for code in utility_definitions.keys():
 			var def = utility_definitions[code]
 			report.append("%s: %s (%s)" % [code, def.get("name", "unknown"), def.get("category", "unknown")])
-	
-	# Task analysis
-	var task_definitions = get_task_definitions()
-	if task_definitions.size() > 0:
-		report.append("\n--- Tasks Defined ---")
-		for task_id in task_definitions.keys():
-			var def = task_definitions[task_id]
-			report.append("%s: %s" % [task_id, def.get("name", "unknown")])
 	
 	# Validation
 	var validation = validate()
@@ -254,7 +227,4 @@ class JsonUtilityDataAdapter extends UtilityDataTemplate:
 	pass
 
 class JsonInteractableDataAdapter extends RefCounted:
-	var interactable_data: Array = []
-
-class JsonTaskDataAdapter extends RefCounted:
-	var task_data: Array = [] 
+	var interactable_data: Array = [] 

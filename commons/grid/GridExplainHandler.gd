@@ -112,21 +112,8 @@ func _place_markers_from_layout(explain_layout, total_size: float) -> int:
 func _place_markers_from_tasks(total_size: float) -> int:
 	var marker_count = 0
 	
-	# Get tasks from the task system
-	var tasks = []
-	if grid_system.task_handler and grid_system.task_handler.has_method("get_all_tasks"):
-		tasks = grid_system.task_handler.get_all_tasks()
-	
-	# Use task positions for explanation markers
-	for task in tasks:
-		if task.has("lookup_name") and explain_lookup.has(task["lookup_name"]):
-			if task.has("x_position") and task.has("y_position") and task.has("z_position"):
-				var world_pos = Vector3(task["x_position"], task["y_position"] + 0.5, task["z_position"])
-				var grid_pos = GridCommon.world_to_grid_position(world_pos, grid_system.cube_size, grid_system.gutter)
-				
-				# Place a marker
-				_place_explain_marker(grid_pos.x, grid_pos.y, grid_pos.z, task["lookup_name"], total_size)
-				marker_count += 1
+	# No task system available, skip marker placement
+	print("GridExplainHandler: Task system not available, skipping task-based marker placement")
 	
 	return marker_count
 

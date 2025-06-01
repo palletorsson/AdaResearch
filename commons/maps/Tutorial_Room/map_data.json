@@ -31,12 +31,7 @@
 		"interactables": [
 			[" ", " ", " "],
 			[" ", "cube1", " "],
-			[" ", " ", " "]
-		],
-		"tasks": [
-			["cube2", " ", " "],
-			[" ", " ", " "],
-			[" ", " ", " "]
+			["cube2", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -60,7 +55,7 @@
 			}
 		}
 	},
-	"task_definitions": {
+	"interactable_definitions": {
 		"cube1": {
 			"name": "Center Cube",
 			"description": "A cube on the central platform - easy to find",

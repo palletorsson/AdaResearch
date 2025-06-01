@@ -24,9 +24,8 @@ The grid system uses dedicated handlers for different types of content:
 
 - **GridStructureHandler**: Manages the physical 3D layout (cubes, platforms, terrain)
 - **GridUtilityHandler**: Places utility objects (doors, windows, teleports, tables)
-- **GridInteractableHandler**: Manages algorithm-based interactive elements
-- **GridTaskHandler**: Handles task-based progression and objectives
-- **GridExplainHandler**: Manages educational content and explanations
+- **GridInteractableHandler**: Handles algorithm objects and learning interactions
+- **GridExplainHandler**: Handles explanatory content and educational help
 
 #### 3. AlgorithmRegistry
 Dynamic loading system for interactive components:
@@ -42,11 +41,10 @@ Each map is defined by structured data files in `adaresearch/Common/Data/Maps/[M
 
 ```
 MapName/
-├── struct_data.gd      # Physical 3D layout (height values)
-├── utility_data.gd     # Utility object placement codes
-├── interactable_data.gd # Algorithm ID placement
-├── task_data.gd        # Task definitions and objectives
-└── explain_data.gd     # Educational content
+├── struct_data.gd       # Structure layout (cubes, platforms)
+├── utility_data.gd      # Utility placement (doors, teleports)
+├── interactable_data.gd # Algorithm interactions
+└── explain_data.gd      # Educational explanations
 ```
 
 #### Grid Coordinate System
@@ -97,10 +95,9 @@ GridSystem._ready()
 ### 2. Generation Phase
 ```
 _generate_grid()
-├── structure_handler.apply_data() → Place cubes
+├── structure_handler.apply_data() → Build structure
 ├── utility_handler.apply_data() → Place utilities  
 ├── interactable_handler.apply_data() → Place algorithms
-├── task_handler.apply_data() → Setup objectives
 └── explain_handler.apply_data() → Add explanations
 ```
 
@@ -958,7 +955,7 @@ adaresearch/Common/Data/Maps/Intro_0/
 ├── struct_data.gd         # Legacy GDScript format
 ├── utility_data.gd        # Legacy GDScript format
 ├── interactable_data.gd   # Legacy GDScript format
-└── task_data.gd          # Legacy GDScript format
+└── explain_data.gd        # Legacy GDScript format
 ```
 
 #### **Format Selection Logic**
@@ -995,7 +992,6 @@ This directory contains the complete grid system for building educational VR env
 - **GridStructureHandler.gd**: Manages cube placement and structure
 - **GridUtilityHandler.gd**: Handles utility objects (teleports, lifts, etc.)
 - **GridInteractableHandler.gd**: Manages interactable objects
-- **GridTaskHandler.gd**: Handles educational tasks and objectives
 - **GridExplainHandler.gd**: Manages explanatory content
 
 ### JSON Support (Phase 2)
@@ -1154,7 +1150,7 @@ Separate files for each data type:
 - `struct_data.gd`: Structure layout
 - `utility_data.gd`: Utility placement  
 - `interactable_data.gd`: Interactable objects
-- `task_data.gd`: Educational tasks
+- `explain_data.gd`: Educational explanations
 
 ## Advanced Features
 
@@ -1281,7 +1277,8 @@ adaresearch/Common/
 │   │   ├── map_data.json          # Unified JSON format
 │   │   ├── struct_data.gd         # Legacy structure
 │   │   ├── utility_data.gd        # Legacy utilities
-│   │   └── ...
+│   │   ├── interactable_data.gd   # Legacy interactable
+│   │   └── explain_data.gd        # Legacy explain
 │   └── ...
 ├── Scripts/Grid/
 │   ├── DynamicMapSystem.gd        # 🆕 Dynamic scene generation
