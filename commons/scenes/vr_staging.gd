@@ -2,12 +2,17 @@
 class_name VRStaging
 extends XRToolsStaging
 
-## VR Staging System for Ada Research
+## VR Staging System for Ada Research - Decoupled Architecture
 ##
 ## This staging system manages scene loading and VR initialization
-## It provides proper startup sequencing and handles VR state transitions
+## Now uses the decoupled lab hub and transition manager system
 
 var scene_is_loaded: bool = false
+
+# New decoupled managers
+var lab_hub_manager: LabHubManager
+var transition_manager: TransitionManager
+var sequence_manager: SequenceManager
 
 # Lab System Configuration
 @export var use_lab_system: bool = true
@@ -18,7 +23,7 @@ func _ready() -> void:
 	# Call parent ready function
 	super()
 	
-	print("VRStaging: Starting initialization...")
+	print("VRStaging: Starting initialization with decoupled architecture...")
 	
 	# Show startup configuration
 	if OS.is_debug_build():
@@ -28,20 +33,20 @@ func _ready() -> void:
 	_start_game()
 
 func _start_game():
-	print("VRStaging: Starting game with lab system")
+	print("VRStaging: Starting game with decoupled lab system")
 	
 	if use_lab_system:
-		await _setup_lab_system()
+		await _setup_decoupled_lab_system()
 	else:
 		await _setup_basic_vr_scene()
 
-func _setup_lab_system():
-	print("VRStaging: Setting up lab-centric system")
+func _setup_decoupled_lab_system():
+	print("VRStaging: Setting up decoupled lab-centric system")
 	
 	# Load the main VR scene with lab configuration
 	var user_data = {
 		"map_name": preferred_grid_map,
-		"system_mode": "lab",
+		"system_mode": "lab_hub",
 		"staging_ref": self
 	}
 	
@@ -52,7 +57,6 @@ func _setup_lab_system():
 	
 	# Load the specified main scene
 	print("VRStaging: Loading main scene: %s" % main_scene)
-	print("VRStaging: Scene exists: %s" % ResourceLoader.exists(main_scene))
 	
 	# Call load_scene and await it since it's a coroutine
 	print("VRStaging: Calling load_scene...")
@@ -74,12 +78,12 @@ func _setup_basic_vr_scene():
 	print("VRStaging: Basic VR scene load completed")
 
 func _show_startup_info():
-	print("=== VR Staging Startup Info ===")
+	print("=== VR Staging Startup Info (Decoupled) ===")
 	print("Use lab system: %s" % use_lab_system)
 	print("Start with grid system: %s" % start_with_grid_system)
 	print("Preferred grid map: %s" % preferred_grid_map)
 	print("Main scene: %s" % main_scene)
-	print("===============================")
+	print("==========================================")
 
 # Event handlers for staging system
 func _on_scene_loaded(scene, user_data):
@@ -94,16 +98,16 @@ func _on_scene_loaded(scene, user_data):
 		scene.set_meta("scene_user_data", user_data)
 		print("VRStaging: Set user data as metadata: %s" % user_data)
 	
-	# Configure grid system directly if it exists
+	# Setup the decoupled system
 	if scene and user_data:
-		await _configure_grid_system(scene, user_data)
+		await _setup_decoupled_managers(scene, user_data)
 	
 	# Only show prompt to continue the first time
 	prompt_for_continue = false
 	scene_is_loaded = true
 
-func _configure_grid_system(scene: Node, user_data: Dictionary):
-	print("VRStaging: Looking for grid system to configure...")
+func _setup_decoupled_managers(scene: Node, user_data: Dictionary):
+	print("VRStaging: Setting up decoupled managers...")
 	
 	# Find the grid system in the scene
 	var grid_system = scene.find_child("multiLayerGrid", true, false)
@@ -112,81 +116,43 @@ func _configure_grid_system(scene: Node, user_data: Dictionary):
 		return
 	
 	print("VRStaging: Found grid system: %s" % grid_system.name)
-	print("VRStaging: Grid system class: %s" % grid_system.get_class())
 	
-	# Wait for the grid system to finish its _ready() function and initialization
+	# Wait for the grid system to initialize
 	print("VRStaging: Waiting for grid system to initialize...")
 	await get_tree().process_frame
 	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	# Give extra time for algorithm registry to be added as child
 	await get_tree().create_timer(0.1).timeout
 	
-	# Get the map name from user data
+	# Create and setup transition manager
+	transition_manager = TransitionManager.new()
+	transition_manager.name = "TransitionManager"
+	scene.add_child(transition_manager)
+	transition_manager.initialize(self, grid_system)
+	
+	# Create and setup sequence manager
+	sequence_manager = SequenceManager.new()
+	sequence_manager.name = "SequenceManager"
+	scene.add_child(sequence_manager)
+	transition_manager.set_sequence_manager(sequence_manager)
+	
+	# Create and setup lab hub manager
+	lab_hub_manager = LabHubManager.new()
+	lab_hub_manager.name = "LabHubManager"
+	scene.add_child(lab_hub_manager)
+	transition_manager.set_lab_hub(lab_hub_manager)
+	
+	# Configure the grid system to load the lab
 	var map_name = user_data.get("map_name", "Lab")
 	print("VRStaging: Setting grid system map to: %s" % map_name)
 	
-	# Check if the grid system is responding
-	print("VRStaging: Checking if grid system is ready...")
-	if not is_instance_valid(grid_system):
-		print("VRStaging: ❌ Grid system is not valid")
-		return
-		
-	print("VRStaging: ✅ Grid system is valid")
-	
-	# Check if algorithm registry is available and loaded
-	print("VRStaging: Checking algorithm registry...")
-	var algorithm_registry = null
-	
-	# Try to get algorithm registry as a property first
-	if grid_system.has_method("get") and grid_system.get("algorithm_registry"):
-		algorithm_registry = grid_system.get("algorithm_registry")
-	# Otherwise look for it as a child (which is how multi_layer_grid.gd adds it)
-	else:
-		algorithm_registry = grid_system.find_child("AlgorithmRegistry", false, false)
-		if not algorithm_registry:
-			# Try looking for it by class name as well
-			for child in grid_system.get_children():
-				if child.get_class() == "AlgorithmRegistry" or "AlgorithmRegistry" in str(child.get_script()):
-					algorithm_registry = child
-					break
-	
-	if algorithm_registry and algorithm_registry.has_method("get_all_algorithm_ids"):
-		var algorithm_count = algorithm_registry.get_all_algorithm_ids().size()
-		print("VRStaging: ✅ Algorithm registry found with %d algorithms" % algorithm_count)
-		
-		if algorithm_count == 0:
-			print("VRStaging: Waiting for algorithm registry to load...")
-			# Wait for registry to load
-			var max_wait_time = 5.0  # Maximum 5 seconds
-			var wait_time = 0.0
-			while algorithm_registry.get_all_algorithm_ids().size() == 0 and wait_time < max_wait_time:
-				await get_tree().process_frame
-				wait_time += get_process_delta_time()
-			
-			if algorithm_registry.get_all_algorithm_ids().size() > 0:
-				print("VRStaging: ✅ Algorithm registry loaded with %d algorithms" % algorithm_registry.get_all_algorithm_ids().size())
-			else:
-				print("VRStaging: ⚠️ Algorithm registry still not loaded after timeout")
-	else:
-		print("VRStaging: ❌ No algorithm registry found in grid system")
-	
-	# Set the map name safely
-	if grid_system.has_method("generate_layout"):
-		print("VRStaging: ✅ generate_layout method available")
-		print("VRStaging: Setting map_name directly without triggering setter...")
-		# Set the map_name field directly without triggering the setter
+	if grid_system.has_method("load_map"):
+		grid_system.load_map(map_name)
+	elif grid_system.has_method("set") and "map_name" in grid_system:
 		grid_system.set("map_name", map_name)
-		print("VRStaging: ✅ Map name set to: %s" % grid_system.get("map_name"))
-		
-		print("VRStaging: Calling generate_layout() method...")
-		grid_system.generate_layout()
-		print("VRStaging: ✅ Grid layout generation completed")
-	else:
-		print("VRStaging: ❌ No generate_layout method available")
+		if grid_system.has_method("generate_layout"):
+			grid_system.generate_layout()
 	
-	print("VRStaging: Grid configuration completed")
+	print("VRStaging: ✅ Decoupled lab system setup complete")
 
 func _on_scene_exiting(_scene, _user_data):
 	print("VRStaging: Scene exiting")
@@ -215,7 +181,32 @@ func get_current_scene():
 func is_scene_loaded() -> bool:
 	return scene_is_loaded
 
+func get_lab_hub_manager() -> LabHubManager:
+	return lab_hub_manager
+
+func get_transition_manager() -> TransitionManager:
+	return transition_manager
+
+func get_sequence_manager() -> SequenceManager:
+	return sequence_manager
+
 # Support for scene switching
 func switch_to_scene(scene_path: String, user_data = null):
 	print("VRStaging: Switching to scene: %s" % scene_path)
 	load_scene(scene_path, user_data) 
+
+# Debug methods
+func debug_force_tutorial():
+	"""Force start the tutorial for debugging"""
+	if lab_hub_manager:
+		lab_hub_manager.force_trigger_cube()
+
+func debug_force_sequence(sequence_id: String):
+	"""Force start a specific sequence for debugging"""
+	if transition_manager:
+		transition_manager.go_to_sequence(sequence_id)
+
+func debug_return_to_lab():
+	"""Force return to lab for debugging"""
+	if transition_manager:
+		transition_manager.force_return_to_lab() 
