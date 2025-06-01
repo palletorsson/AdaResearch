@@ -5,27 +5,18 @@ signal task_started(task_id)
 signal task_progress_signal(task_id, progress)
 signal task_completed(task_id, xp_reward)
 
-const ARTIFACTS_JSON := [
-	# ... artifacts definitions ...
-]
-
 var tasks = {}
 var active_tasks = {}
 var task_progress = {}
-
-func _ready():
-	_initialize_tasks()
-
-func _initialize_tasks():
-	for artifact_data in ARTIFACTS_JSON:
-		var lookup_name = artifact_data.get("lookup_name", "")
-		if not lookup_name.is_empty():
-			tasks[lookup_name] = artifact_data
 
 func get_task(task_id: String) -> Dictionary:
 	if tasks.has(task_id):
 		return tasks[task_id]
 	return {}
+
+func add_task(task_id: String, task_data: Dictionary):
+	"""Add a task definition to the manager"""
+	tasks[task_id] = task_data
 
 func start_task(task_id: String) -> bool:
 	if not tasks.has(task_id):

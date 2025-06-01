@@ -41,9 +41,6 @@ var scene_cache = {}
 # For random number generation
 var rng = RandomNumberGenerator.new()
 
-# DEPRECATED: Utility type definitions moved to UtilityRegistry
-# Use UtilityRegistry.UTILITY_TYPES instead for all utility operations
-
 # Empty space, no interactable
 const EMPTY_SPACE = UtilityRegistry.EMPTY_SPACE
 

@@ -1,20 +1,11 @@
 # GridCommon.gd
 extends RefCounted
 class_name GridCommon
+
 # Path constants
 const MAPS_PATH = "res://adaresearch/Common/Data/Maps/"
 const MAP_OBJECTS_PATH = "res://adaresearch/Common/Scenes/Objects/MapObjects/"
 const ARTIFACT_DATA_PATH = "res://adaresearch/Common/Scripts/Managers/artifact_data.gd"
-# DEPRECATED: Use ARTIFACT_DATA_PATH instead
-const TASK_DATA_PATH = "res://adaresearch/Common/Scripts/Managers/task_data.gd"
-
-# DEPRECATED: Utility type definitions moved to UtilityRegistry
-# Use UtilityRegistry.UTILITY_TYPES instead
-# This remains for backward compatibility but will be removed in future versions
-const UTILITY_TYPES = {}
-
-# Empty space constant - now redirected to UtilityRegistry
-const EMPTY_SPACE = UtilityRegistry.EMPTY_SPACE
 
 # Task marker visualization states
 const TASK_STATE = {
@@ -36,36 +27,6 @@ static func world_to_grid_position(world_pos: Vector3, cube_size: float, gutter:
 		int(round(world_pos.y / total_size)),
 		int(round(world_pos.z / total_size))
 	)
-
-# UTILITY FUNCTIONS - Now delegated to UtilityRegistry
-
-# Check if utility type is valid
-static func is_valid_utility_type(type_code: String) -> bool:
-	return UtilityRegistry.is_valid_utility_type(type_code)
-
-# Get utility info
-static func get_utility_info(type_code: String) -> Dictionary:
-	return UtilityRegistry.get_utility_info(type_code)
-
-# Get utility scene path
-static func get_utility_scene_path(type_code: String) -> String:
-	return UtilityRegistry.get_utility_scene_path(type_code)
-
-# Get utility name
-static func get_utility_name(type_code: String) -> String:
-	return UtilityRegistry.get_utility_name(type_code)
-
-# Get utility category
-static func get_utility_category(type_code: String) -> String:
-	return UtilityRegistry.get_utility_category(type_code)
-
-# Validate utility grid
-static func validate_utility_grid(grid_data: Array) -> Dictionary:
-	return UtilityRegistry.validate_utility_grid(grid_data)
-
-# Parse utility cell with parameters
-static func parse_utility_cell(cell_value: String) -> Dictionary:
-	return UtilityRegistry.parse_utility_cell(cell_value)
 
 # Check if grid position is within bounds
 static func is_within_bounds(grid_pos: Vector3i, grid_size: Vector3i) -> bool:
@@ -127,14 +88,9 @@ static func generate_material_hash(object_name: String, position: Vector3i) -> i
 	var hash_string = "%s_%d_%d_%d" % [object_name, position.x, position.y, position.z]
 	return hash_string.hash()
 
-# Backward compatibility warning
-static func _static_init():
-	if OS.is_debug_build():
-		push_warning("GridCommon: UTILITY_TYPES is deprecated. Use UtilityRegistry.UTILITY_TYPES instead.")
-
-# Check if grid position is within bounds
+# Check if grid position is within bounds (alternative signature)
 static func is_position_in_bounds(x: int, y: int, z: int, grid_x: int, grid_y: int, grid_z: int) -> bool:
-	return x >= 0 and x < grid_x and y >= 0 and y < grid_y and z >= 0 and z < grid_z
+	return is_within_bounds(Vector3i(x, y, z), Vector3i(grid_x, grid_y, grid_z))
 
 # Find highest occupied Y position at a given X,Z coordinate
 static func find_highest_y_at(grid: Array, x: int, z: int, grid_y: int) -> int:
