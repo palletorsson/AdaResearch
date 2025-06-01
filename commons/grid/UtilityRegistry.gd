@@ -85,11 +85,11 @@ const UTILITY_TYPES = {
 		"supports_parameters": false
 	},
 	"e": {
-		"name": "explain_board", 
-		"file": "explain_board.tscn", 
-		"category": "educational",
-		"description": "Detailed explanation displays",
-		"supports_parameters": false
+		"name": "exit_portal", 
+		"file": "teleport_scene.tscn", 
+		"category": "transport",
+		"description": "Exit portal for level progression - step here to advance",
+		"supports_parameters": true
 	},
 	
 	# Navigation utilities

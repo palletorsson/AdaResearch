@@ -6,9 +6,9 @@
 		"format": "json",
 		"created_from": "progressive_tutorial_design",
 		"dimensions": {
-			"width": 2,
-			"depth": 2,
-			"max_height": 1
+			"width": 3,
+			"depth": 3,
+			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "absolute_beginner",
@@ -19,20 +19,28 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1"],
-			["1", "1"]
+			["2", "2", "2"],
+			["2", "1", "2"],
+			["2", "1", "2"],
+			["2", "2", "2"]
 		],
 		"utilities": [
-			[" ", "e"],
-			[" ", " "]
+			[" ", " ", " "],
+			[" ", "s", " "],
+			[" ", "t", " "],
+			[" ", " ", " "]
 		],
 		"interactables": [
-			[" ", " "],
-			[" ", " "]
+			[" ", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "]
 		],
 		"tasks": [
-			[" ", " "],
-			[" ", " "]
+			[" ", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "]
 		]
 	},
 	"utility_definitions": {
