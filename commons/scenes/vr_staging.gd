@@ -1,29 +1,23 @@
 @tool
-class_name VRStaging
+class_name AdaVRStaging
 extends XRToolsStaging
 
-## VR Staging System for Ada Research - Decoupled Architecture
+## VR Staging System for Ada Research
 ##
-## This staging system manages scene loading and VR initialization
-## Now uses the decoupled lab hub and transition manager system
+## This staging system manages scene loading and VR initialization for the consolidated architecture
 
-# Scene tracking
-var current_scene: Node = null
-var scene_is_loaded: bool = false
+# Configuration variables
+@export var main_scene: String = "res://commons/scenes/base.tscn"
+@export var prompt_for_continue: bool = true
 
 # Lab System Configuration
 @export var use_lab_system: bool = true
 @export var start_with_grid_system: bool = true
 @export var preferred_grid_map: String = "Lab"
 
-# VR Staging System
-# Manages VR-specific setup and staging functionality
-extends Node3D
-class_name AdaVRStaging
-
-# Configuration variables
-@export var main_scene: String = "res://commons/scenes/base.tscn"
-@export var prompt_for_continue: bool = true
+# Scene tracking
+var current_scene: Node = null
+var scene_is_loaded: bool = false
 
 # Signal emitted when staging is complete
 signal staging_complete
@@ -36,7 +30,7 @@ func _ready() -> void:
 	# Call parent ready function
 	super()
 	
-	print("VRStaging: Starting initialization with decoupled architecture...")
+	print("VRStaging: Starting initialization with consolidated architecture...")
 	
 	# Show startup configuration
 	if OS.is_debug_build():
@@ -46,15 +40,15 @@ func _ready() -> void:
 	_start_game()
 
 func _start_game():
-	print("VRStaging: Starting game with decoupled lab system")
+	print("VRStaging: Starting game with consolidated system")
 	
 	if use_lab_system:
-		await _setup_decoupled_lab_system()
+		await _setup_lab_system()
 	else:
 		await _setup_basic_vr_scene()
 
-func _setup_decoupled_lab_system():
-	print("VRStaging: Setting up decoupled lab-centric system")
+func _setup_lab_system():
+	print("VRStaging: Setting up lab-centric system")
 	
 	# Load the main VR scene with lab configuration
 	var user_data = {
@@ -91,12 +85,12 @@ func _setup_basic_vr_scene():
 	print("VRStaging: Basic VR scene load completed")
 
 func _show_startup_info():
-	print("=== VR Staging Startup Info (Decoupled) ===")
+	print("=== VR Staging Startup Info ===")
 	print("Use lab system: %s" % use_lab_system)
 	print("Start with grid system: %s" % start_with_grid_system)
 	print("Preferred grid map: %s" % preferred_grid_map)
 	print("Main scene: %s" % main_scene)
-	print("==========================================")
+	print("===============================")
 
 # Event handlers for staging system
 func _on_scene_loaded(scene, user_data):
@@ -111,22 +105,22 @@ func _on_scene_loaded(scene, user_data):
 		scene.set_meta("scene_user_data", user_data)
 		print("VRStaging: Set user data as metadata: %s" % user_data)
 	
-	# Setup the decoupled system
+	# Setup the scene
 	if scene and user_data:
-		await _setup_decoupled_managers(scene, user_data)
+		await _setup_scene_systems(scene, user_data)
 	
 	# Only show prompt to continue the first time
 	prompt_for_continue = false
 	scene_is_loaded = true
 
-func _setup_decoupled_managers(scene: Node, user_data: Dictionary):
-	print("VRStaging: Setting up scene...")
+func _setup_scene_systems(scene: Node, user_data: Dictionary):
+	print("VRStaging: Setting up scene systems...")
 	
-	# Find the grid system in the scene
-	var grid_system = scene.find_child("multiLayerGrid", true, false)
+	# Find the grid system in the scene - prioritize new consolidated system
+	var grid_system = scene.find_child("GridSystem", true, false)
 	if not grid_system:
-		# Try looking for the new consolidated GridSystem
-		grid_system = scene.find_child("GridSystem", true, false)
+		# Fallback to legacy names
+		grid_system = scene.find_child("multiLayerGrid", true, false)
 	
 	if not grid_system:
 		print("VRStaging: No grid system found in scene")
@@ -185,22 +179,7 @@ func switch_to_scene(scene_path: String, user_data = null):
 	print("VRStaging: Switching to scene: %s" % scene_path)
 	load_scene(scene_path, user_data)
 
-# Debug methods
-func debug_force_tutorial():
-	"""Force start the tutorial for debugging"""
-	if lab_hub_manager:
-		lab_hub_manager.force_trigger_cube()
-
-func debug_force_sequence(sequence_id: String):
-	"""Force start a specific sequence for debugging"""
-	if transition_manager:
-		transition_manager.go_to_sequence(sequence_id)
-
-func debug_return_to_lab():
-	"""Force return to lab for debugging"""
-	if transition_manager:
-		transition_manager.force_return_to_lab() 
-
+# Manager initialization
 func _initialize_managers():
 	print("VRStaging: Initializing managers...")
 	
@@ -210,8 +189,10 @@ func _initialize_managers():
 		print("VRStaging: WARNING - MapProgressionManager not found")
 	
 	# Create grid system manager
-	grid_system_manager = VRGridSystemManager.new()
-	grid_system_manager.name = "VRGridSystemManager"
-	add_child(grid_system_manager)
+	if not grid_system_manager:
+		grid_system_manager = VRGridSystemManager.new()
+		grid_system_manager.name = "VRGridSystemManager"
+		add_child(grid_system_manager)
+		print("VRStaging: Grid system manager created")
 	
 	print("VRStaging: Managers initialized") 

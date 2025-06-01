@@ -169,8 +169,8 @@ func _is_reasonable_tile_size(mesh_instance: MeshInstance3D) -> bool:
 	
 	# Reasonable tile sizes (between 0.1 and 10 units)
 	return (size.x > 0.1 and size.x < 10.0 and 
-	        size.z > 0.1 and size.z < 10.0 and
-	        size.y > 0.01)  # Allow thin tiles
+			size.z > 0.1 and size.z < 10.0 and
+			size.y > 0.01)  # Allow thin tiles
 
 func _detect_grid_pattern_tiles():
 	"""Detect tiles arranged in a grid pattern"""
@@ -326,7 +326,7 @@ func _find_player():
 
 func _find_node_by_type(node: Node, type) -> Node:
 	"""Find first node of specific type"""
-	if node.get_class() == type.get_class() or node is type:
+	if node.get_class() == type.get_class():
 		return node
 	
 	for child in node.get_children():
