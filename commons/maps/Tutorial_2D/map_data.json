@@ -1,0 +1,137 @@
+{
+	"map_info": {
+		"name": "Tutorial_2D",
+		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 6,
+			"depth": 6,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "tutorial",
+			"estimated_time": "3-4 minutes",
+			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "e"]
+		],
+		"interactables": [
+			["trigger:grid_reveal", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "]
+		],
+		"tasks": [
+			["start", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", "center", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "complete"]
+		]
+	},
+	"utility_definitions": {
+		"e": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to advanced array concepts",
+			"properties": {
+				"destination": "next",
+				"visual_effect": "portal_glow"
+			}
+		}
+	},
+	"tile_effect_definitions": {
+		"grid_reveal": {
+			"effect_type": "grid_reveal",
+			"trigger_method": "step_on",
+			"reveal_pattern": "full_grid",
+			"reveal_delay": 0.1,
+			"color": [0.2, 0.9, 0.4],
+			"glow_intensity": 1.2,
+			"effect_radius": 1,
+			"one_time_trigger": true,
+			"audio_effect": "grid_chime",
+			"cascade_mode": "grid_wave"
+		}
+	},
+	"task_definitions": {
+		"start": {
+			"name": "2D Array Introduction",
+			"description": "Welcome to 2D grid navigation",
+			"type": "explanation",
+			"properties": {
+				"text": "Welcome to 2D arrays!\nStep here to reveal the entire grid floor.\nExplore both X-axis (left/right) and Y-axis (forward/back) movement!",
+				"auto_display": true
+			}
+		},
+		"center": {
+			"name": "Grid Center",
+			"description": "Middle of the 2D array",
+			"type": "explanation",
+			"properties": {
+				"text": "You've reached the center of the 2D array!\nThis is position [2,2] - notice how you can move in multiple directions.\nTry exploring the corners and edges!",
+				"auto_display": true
+			}
+		},
+		"complete": {
+			"name": "2D Navigation Complete",
+			"description": "Grid exploration finished",
+			"type": "explanation",
+			"properties": {
+				"text": "Excellent! You've mastered 2D array navigation!\nYou experienced movement in both X and Y dimensions.\nUse the teleporter to continue!",
+				"auto_display": true
+			}
+		}
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0, 2, 0],
+			"rotation": [0, 45, 0],
+			"description": "Spawn at corner, facing diagonally into the grid"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.5, 0.5, 0.4],
+		"ambient_energy": 0.8,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [1.0, 0.95, 0.9],
+			"energy": 1.2
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"enable_tile_effects": true,
+		"auto_reveal_on_entry": false,
+		"initial_tile_visibility": "hidden_except_start",
+		"background": {
+			"type": "sky",
+			"color": [0.4, 0.5, 0.7]
+		}
+	}
+} 

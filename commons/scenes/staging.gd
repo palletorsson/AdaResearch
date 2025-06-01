@@ -44,9 +44,21 @@ var grid_system_manager: VRGridSystemManager
 # Lab System (New Option 4)
 @export var use_lab_system: bool = true  # New lab-centric system
 
+# VR Mode detection
+var is_vr_enabled: bool = false
+
 func _ready() -> void:
-	# In Godot 4 we must now manually call our super class ready function
-	super()
+	# Check if VR is enabled in project settings
+	is_vr_enabled = ProjectSettings.get_setting("xr/openxr/enabled", false)
+	
+	if is_vr_enabled:
+		print("lab_staging: VR mode enabled - initializing XR")
+		# In Godot 4 we must now manually call our super class ready function
+		super()
+	else:
+		print("lab_staging: VR mode disabled - starting in desktop mode")
+		# Skip VR initialization, go straight to game setup
+		_initialize_desktop_mode()
 	
 	# Show startup configuration (for debugging)
 	if OS.is_debug_build():
@@ -54,6 +66,13 @@ func _ready() -> void:
 	
 	# Choose startup method
 	_start_game()
+
+func _initialize_desktop_mode():
+	"""Initialize the staging system without VR"""
+	print("lab_staging: Initializing desktop mode")
+	# Set up basic staging without XR components
+	set_process(true)
+	# Skip VR-specific initialization
 
 func _start_game():
 	if use_progression_system:

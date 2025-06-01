@@ -3,7 +3,7 @@
 # Provides standardized structure and validation for map utility data
 
 extends RefCounted
-class_name UtilityDataTemplate
+class_name GridUtilityDataTemplate
 
 # Map metadata
 var map_name: String = ""

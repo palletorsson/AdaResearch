@@ -15,8 +15,8 @@ extends Node3D
 
 
 # Path constants
-const MAPS_PATH = "res://adaresearch/Common/Data/Maps/"
-const MAP_OBJECTS_PATH = "res://adaresearch/Common/Scenes/Objects/MapObjects/"
+const MAPS_PATH = "res://commons/maps/"
+const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
 
 # Grid properties
 var grid_x: int  # Set dynamically from layout data
@@ -85,12 +85,80 @@ func _ready():
 		_on_algorithm_registry_loaded()
 
 func _load_map_data_scripts() -> void:
-	print("Loading map data scripts for: %s" % map_name)
+	print("Loading map data for: %s" % map_name)
 	
 	# Clear previous instances
 	structure_data_instance = null
 	utility_data_instance = null
 	interactable_data_instance = null
+	
+	# Try to load JSON data first
+	var json_path = MAPS_PATH + map_name + "/map_data.json"
+	if ResourceLoader.exists(json_path):
+		print("Found JSON map data: %s" % json_path)
+		_load_json_map_data(json_path)
+		return
+	
+	# Fallback to old GDScript method
+	print("JSON not found, trying GDScript files...")
+	_load_gdscript_map_data()
+
+func _load_json_map_data(json_path: String) -> void:
+	var file = FileAccess.open(json_path, FileAccess.READ)
+	if not file:
+		print("ERROR: Could not open JSON file: %s" % json_path)
+		return
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		print("ERROR: Failed to parse JSON: %s" % json.get_error_message())
+		return
+	
+	var map_data = json.data
+	print("Successfully loaded JSON map data")
+	
+	# Create fake data instances that mimic the old GDScript structure
+	structure_data_instance = _create_structure_instance(map_data)
+	utility_data_instance = _create_utility_instance(map_data)
+	interactable_data_instance = _create_interactable_instance(map_data)
+
+func _create_structure_instance(map_data: Dictionary):
+	var instance = RefCounted.new()
+	if map_data.has("layers") and map_data.layers.has("structure"):
+		instance.set("layout_data", map_data.layers.structure)
+		print("Created structure data instance with %d rows" % map_data.layers.structure.size())
+	else:
+		print("ERROR: No structure layer found in JSON data")
+		instance.set("layout_data", [])
+	return instance
+
+func _create_utility_instance(map_data: Dictionary):
+	var instance = RefCounted.new()
+	if map_data.has("layers") and map_data.layers.has("utilities"):
+		instance.set("layout_data", map_data.layers.utilities)
+		print("Created utility data instance with %d rows" % map_data.layers.utilities.size())
+	else:
+		print("WARNING: No utilities layer found in JSON data")
+		instance.set("layout_data", [])
+	return instance
+
+func _create_interactable_instance(map_data: Dictionary):
+	var instance = RefCounted.new()
+	if map_data.has("layers") and map_data.layers.has("interactables"):
+		instance.set("layout_data", map_data.layers.interactables)
+		print("Created interactable data instance with %d rows" % map_data.layers.interactables.size())
+	else:
+		print("WARNING: No interactables layer found in JSON data")
+		instance.set("layout_data", [])
+	return instance
+
+func _load_gdscript_map_data() -> void:
+	# Original GDScript loading code (kept for backwards compatibility)
 	
 	# Load structure data script
 	var struct_path = MAPS_PATH + map_name + "/struct_data.gd"

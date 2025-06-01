@@ -1,0 +1,115 @@
+{
+	"map_info": {
+		"name": "Tutorial_Room",
+		"description": "Your first room - walls, space, and navigation. Find the objects and the exit.",
+		"version": "1.0",
+		"format": "json",
+		"created_from": "progressive_tutorial_design",
+		"dimensions": {
+			"width": 3,
+			"depth": 3,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "absolute_beginner",
+			"category": "onboarding",
+			"estimated_time": "2 minutes",
+			"learning_objectives": ["Room-scale VR movement", "Spatial awareness", "Object finding", "Basic navigation"]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1"],
+			["1", "0", "1"],
+			["1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " "],
+			[" ", "p", " "],
+			[" ", "e", " "]
+		],
+		"interactables": [
+			[" ", " ", " "],
+			[" ", "cube1", " "],
+			[" ", " ", " "]
+		],
+		"tasks": [
+			["cube2", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"e": {
+			"name": "Exit Portal",
+			"description": "Step here to progress to the next level",
+			"type": "teleporter",
+			"properties": {
+				"destination": "Intro_0",
+				"activation_method": "step_on",
+				"visual_effect": "portal_glow"
+			}
+		},
+		"p": {
+			"name": "Central Platform",
+			"description": "A platform in the center of the room",
+			"type": "platform",
+			"properties": {
+				"height": 0.3,
+				"material": "wood"
+			}
+		}
+	},
+	"task_definitions": {
+		"cube1": {
+			"name": "Center Cube",
+			"description": "A cube on the central platform - easy to find",
+			"type": "interaction",
+			"properties": {
+				"grabbable": true,
+				"respawns": false,
+				"size": [0.1, 0.1, 0.1],
+				"color": [0.3, 0.6, 0.9]
+			}
+		},
+		"cube2": {
+			"name": "Corner Cube",
+			"description": "A cube in the corner - requires walking to reach",
+			"type": "interaction",
+			"properties": {
+				"grabbable": true,
+				"respawns": false,
+				"size": [0.1, 0.1, 0.1],
+				"color": [0.9, 0.5, 0.2]
+			}
+		}
+	},
+	"spawn_points": {
+		"default": {
+			"position": [1, 1.5, 0],
+			"rotation": [0, 0, 0],
+			"description": "Player starts at the entrance, facing into the room"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_energy": 0.7,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.3],
+			"color": [1.0, 0.95, 0.8],
+			"energy": 1.1
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.2, 0.3, 0.5]
+		},
+		"special_instructions": "Walk around the room. Find both cubes (blue and orange), then step on the exit portal."
+	}
+} 

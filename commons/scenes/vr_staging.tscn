@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://mrbt4wbnjyl3"]
+
+[ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
+[ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vr_staging.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3"]
+
+[node name="VRStaging" instance=ExtResource("1")]
+script = ExtResource("2")
+use_lab_system = true
+start_with_grid_system = true
+preferred_grid_map = "Tutorial_2D"
+main_scene = "res://commons/scenes/base.tscn"
+
+[node name="LoadingScreen" parent="." index="2"]
+splash_screen = ExtResource("3")
+
+[connection signal="scene_exiting" from="." to="." method="_on_scene_exiting"]
+[connection signal="scene_loaded" from="." to="." method="_on_scene_loaded"]
+[connection signal="xr_ended" from="." to="." method="_on_xr_ended"]
+[connection signal="xr_started" from="." to="." method="_on_xr_started"]

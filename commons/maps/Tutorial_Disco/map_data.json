@@ -1,0 +1,228 @@
+{
+	"map_info": {
+		"name": "Tutorial_Disco",
+		"description": "Disco Floor Navigation - large 2D array with interactive pattern tiles",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 11,
+			"depth": 21,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "tutorial",
+			"estimated_time": "4-6 minutes",
+			"learning_objectives": ["Large 2D arrays", "Pattern recognition", "Interactive tiles", "Spatial navigation"]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "e", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			["trigger:floor_reveal", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "trigger:disco", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"tasks": [
+			["start", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "disco_center", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "complete", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"e": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to the next tutorial",
+			"properties": {
+				"destination": "next",
+				"visual_effect": "portal_glow"
+			}
+		}
+	},
+	"tile_effect_definitions": {
+		"floor_reveal": {
+			"effect_type": "floor_reveal",
+			"trigger_method": "step_on",
+			"reveal_pattern": "full_floor",
+			"reveal_delay": 0.05,
+			"color": [0.8, 0.8, 0.9],
+			"glow_intensity": 0.8,
+			"effect_radius": 1,
+			"one_time_trigger": true,
+			"audio_effect": "floor_reveal_sound",
+			"cascade_mode": "wave_outward"
+		},
+		"disco": {
+			"effect_type": "disco_activation",
+			"trigger_method": "step_on",
+			"disco_area": {
+				"x_start": 2,
+				"x_end": 10,
+				"y_start": 6,
+				"y_end": 14
+			},
+			"activation_pattern": "center_outward",
+			"activation_delay": 0.2,
+			"colors": [
+				[1.0, 0.0, 0.0],
+				[0.0, 1.0, 0.0],
+				[0.0, 0.0, 1.0],
+				[1.0, 1.0, 0.0],
+				[1.0, 0.0, 1.0],
+				[0.0, 1.0, 1.0]
+			],
+			"pulse_speed": 2.0,
+			"glow_intensity": 2.0,
+			"effect_radius": 1,
+			"one_time_trigger": true,
+			"audio_effect": "disco_activation",
+			"cascade_mode": "spiral_outward",
+			"continuous_disco": true
+		}
+	},
+	"task_definitions": {
+		"start": {
+			"name": "Disco Floor Introduction",
+			"description": "Welcome to the large scale 2D array",
+			"type": "explanation",
+			"properties": {
+				"text": "Welcome to the Disco Floor!\nThis is an 11x21 array - much larger than before.\nStep here to reveal the entire floor, then explore the disco area!",
+				"auto_display": true
+			}
+		},
+		"disco_center": {
+			"name": "Disco Activation Center",
+			"description": "Center of the 9x9 disco area",
+			"type": "explanation",
+			"properties": {
+				"text": "You've reached the disco activation center!\nStep here to light up the entire 9x9 disco floor.\nWatch the colorful pattern spread outward from the center!",
+				"auto_display": true
+			}
+		},
+		"complete": {
+			"name": "Disco Floor Complete",
+			"description": "Large array navigation finished",
+			"type": "explanation",
+			"properties": {
+				"text": "Amazing! You've navigated a large 2D array!\nYou experienced pattern-based interactions.\nReady for more advanced array concepts!",
+				"auto_display": true
+			}
+		}
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0, 2, 0],
+			"rotation": [0, 0, 0],
+			"description": "Spawn at the front corner, facing into the large floor"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.3, 0.3, 0.4],
+		"ambient_energy": 0.6,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [0.9, 0.9, 1.0],
+			"energy": 0.8
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"enable_tile_effects": true,
+		"auto_reveal_on_entry": false,
+		"initial_tile_visibility": "hidden_except_start",
+		"background": {
+			"type": "sky",
+			"color": [0.2, 0.2, 0.3]
+		}
+	}
+} 

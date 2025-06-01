@@ -1,0 +1,100 @@
+{
+	"map_info": {
+		"name": "Tutorial_Single",
+		"description": "Your first interaction - one cube to grab, one exit to find.",
+		"version": "1.0",
+		"format": "json",
+		"created_from": "progressive_tutorial_design",
+		"dimensions": {
+			"width": 2,
+			"depth": 2,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "absolute_beginner",
+			"category": "onboarding",
+			"estimated_time": "1 minute",
+			"learning_objectives": ["Learn VR hand tracking", "First object interaction", "Understand grabbing mechanics"]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1"],
+			["1", "1"]
+		],
+		"utilities": [
+			[" ", "e"],
+			["p", " "]
+		],
+		"interactables": [
+			[" ", " "],
+			["cube", " "]
+		],
+		"tasks": [
+			[" ", " "],
+			[" ", " "]
+		]
+	},
+	"utility_definitions": {
+		"e": {
+			"name": "Exit Portal",
+			"description": "Step here to progress to the next level",
+			"type": "teleporter",
+			"properties": {
+				"destination": "Tutorial_Room",
+				"activation_method": "step_on",
+				"visual_effect": "portal_glow"
+			}
+		},
+		"p": {
+			"name": "Simple Platform",
+			"description": "A raised platform for placing objects",
+			"type": "platform",
+			"properties": {
+				"height": 0.5,
+				"material": "metal"
+			}
+		}
+	},
+	"task_definitions": {
+		"cube": {
+			"name": "Tutorial Cube",
+			"description": "Your first grabbable object - reach out and grab it!",
+			"type": "interaction",
+			"properties": {
+				"grabbable": true,
+				"respawns": true,
+				"size": [0.1, 0.1, 0.1],
+				"color": [0.2, 0.8, 0.3]
+			}
+		}
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0, 1.5, 0],
+			"rotation": [0, 45, 0],
+			"description": "Player starts facing the cube and platform"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_energy": 0.8,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.7, -0.2],
+			"color": [1.0, 1.0, 1.0],
+			"energy": 1.0
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.2, 0.3, 0.5]
+		},
+		"special_instructions": "Try to grab the green cube with your hand controllers, then step on the exit portal"
+	}
+} 

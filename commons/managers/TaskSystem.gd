@@ -13,7 +13,19 @@ var _game_text_manager = null
 var _mission_text: Label3D = null
 
 # Path to task data
-const ARTIFACT_DATA_PATH = "res://adaresearch/Common/Scripts/Managers/artifact_data.gd"
+const ARTIFACT_DATA_PATH = "res://commons/artifacts/artifact_data.gd"
+
+func _ready():
+	# When loaded as autoload, initialize with minimal setup
+	print("TaskSystem: Autoload ready - initializing with minimal setup")
+	
+	# Try to load task data
+	_tasks_data = _load_task_data()
+	
+	if _tasks_data:
+		print("TaskSystem: Task data loaded successfully in autoload mode")
+	else:
+		print("TaskSystem: Warning - task data not loaded in autoload mode")
 
 # Initialize the task system with required components
 func initialize(

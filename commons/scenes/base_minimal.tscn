@@ -1,0 +1,129 @@
+[gd_scene load_steps=17 format=3 uid="uid://p30xbr3nq3qe"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
+[ext_resource type="PackedScene" uid="uid://do1wif8rpqtwj" path="res://addons/godot-xr-tools/functions/function_gaze_pointer.tscn" id="3_rldw0"]
+[ext_resource type="PackedScene" uid="uid://yrg5yt0yvc1q" path="res://addons/godot-xr-tools/hands/scenes/collision/collision_hand.tscn" id="4_q0s61"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="5_liliu"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="7_i0uie"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_5nlub"]
+[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="11_y3abi"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ht3b1"]
+sky_top_color = Color(0.0589919, 0.219737, 0.403443, 1)
+sky_horizon_color = Color(0.867263, 0.564102, 0.518013, 1)
+ground_bottom_color = Color(0.856927, 0.331432, 0.528536, 1)
+ground_horizon_color = Color(0.838783, 0.578815, 0.545239, 1)
+
+[sub_resource type="Sky" id="Sky_7vr88"]
+sky_material = SubResource("ProceduralSkyMaterial_ht3b1")
+
+[sub_resource type="Environment" id="Environment_7xvbx"]
+background_mode = 2
+sky = SubResource("Sky_7vr88")
+ambient_light_source = 3
+tonemap_mode = 2
+tonemap_exposure = 0.16
+sdfgi_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.719121, 0.436327, 0.67283, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.92
+adjustment_contrast = 1.34
+adjustment_saturation = 1.17
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
+size = Vector3(0.126328, 0.0757446, 0.10495)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rldw0"]
+size = Vector3(0.118164, 0.102966, 0.12796)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_basic"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10, 0.1, 10)
+
+[node name="Base" instance=ExtResource("1_v5jw7")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_7xvbx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="FunctionGazePointer" parent="XROrigin3D/XRCamera3D" index="0" instance=ExtResource("3_rldw0")]
+click_on_hold = true
+color = Color(1, 0, 1, 1)
+
+[node name="lookat" type="Node3D" parent="XROrigin3D/XRCamera3D" index="1"]
+
+[node name="XRToolsCollisionHand" parent="XROrigin3D/LeftHand" index="0" node_paths=PackedStringArray("hand_skeleton") instance=ExtResource("4_q0s61")]
+hand_skeleton = NodePath("LeftHand/Hand_Nails_low_L/Armature/Skeleton3D")
+
+[node name="LeftHand" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="0" instance=ExtResource("5_liliu")]
+
+[node name="MovementDirect" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="1" instance=ExtResource("7_i0uie")]
+strafe = true
+
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="2" instance=ExtResource("8_5nlub")]
+grab_distance = 0.1
+ranged_angle = 10.0
+
+[node name="GhostHand" parent="XROrigin3D/LeftHand" index="1" instance=ExtResource("5_liliu")]
+visible = false
+
+[node name="LeftHandArea3D" type="Area3D" parent="XROrigin3D/LeftHand" index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/LeftHand/LeftHandArea3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00949848, -0.0152526, 0.0454865)
+shape = SubResource("BoxShape3D_upvej")
+
+[node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" node_paths=PackedStringArray("hand_skeleton") instance=ExtResource("4_q0s61")]
+hand_skeleton = NodePath("RightHand/Hand_Nails_R/Armature/Skeleton3D")
+
+[node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="0" instance=ExtResource("11_y3abi")]
+
+[node name="MovementDirect" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="1" instance=ExtResource("7_i0uie")]
+
+[node name="MovementTurn" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="2" instance=ExtResource("12_26qpu")]
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" instance=ExtResource("8_5nlub")]
+grab_distance = 0.1
+ranged_angle = 10.0
+
+[node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" instance=ExtResource("13_c1k2x")]
+show_laser = 2
+laser_length = 1
+
+[node name="GhostHand" parent="XROrigin3D/RightHand" index="1" instance=ExtResource("15_8l1pr")]
+visible = false
+
+[node name="RightHandArea3D" type="Area3D" parent="XROrigin3D/RightHand" index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightHand/RightHandArea3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00634754, -0.0126038, 0.0445099)
+shape = SubResource("BoxShape3D_rldw0")
+
+[node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_basic")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Label3D" type="Label3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
+text = "Minimal Base - No Grid System" 

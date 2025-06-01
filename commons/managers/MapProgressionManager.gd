@@ -31,9 +31,24 @@ func _init():
 	instance = self
 
 func _ready():
-	load_progression_config()
+	print("MapProgressionManager: Starting initialization...")
+	
+	# Try to load progression config, but don't hang if it fails
+	var config_loaded = load_progression_config()
+	if not config_loaded:
+		print("MapProgressionManager: Failed to load progression config, using defaults")
+		# Set up minimal defaults
+		sequences = {}
+		map_metadata = {}
+		navigation_config = {"starting_map": "Minimal_Test", "fallback_map": "default"}
+		settings = {"save_progress": true}
+	
+	# Try to load player progress
 	load_player_progress()
+	
+	# Update unlocked maps
 	update_unlocked_maps()
+	
 	print("MapProgressionManager: Initialized with %d completed maps" % completed_maps.size())
 
 # Load the central progression configuration
@@ -41,27 +56,31 @@ func load_progression_config() -> bool:
 	print("MapProgressionManager: Loading progression configuration...")
 	
 	if not FileAccess.file_exists(PROGRESSION_FILE):
-		push_error("MapProgressionManager: Configuration file not found: " + PROGRESSION_FILE)
+		print("MapProgressionManager: Configuration file not found: " + PROGRESSION_FILE)
 		return false
 	
 	var file = FileAccess.open(PROGRESSION_FILE, FileAccess.READ)
 	if not file:
-		push_error("MapProgressionManager: Could not open configuration file")
+		print("MapProgressionManager: Could not open configuration file")
 		return false
 	
 	var json_text = file.get_as_text()
 	file.close()
 	
+	if json_text.is_empty():
+		print("MapProgressionManager: Configuration file is empty")
+		return false
+	
 	var json = JSON.new()
 	var parse_result = json.parse(json_text)
 	
 	if parse_result != OK:
-		push_error("MapProgressionManager: Failed to parse JSON: " + json.get_error_message())
+		print("MapProgressionManager: Failed to parse JSON: " + json.get_error_message())
 		return false
 	
 	progression_config = json.data
 	
-	# Extract sections
+	# Extract sections with defaults
 	sequences = progression_config.get("sequences", {})
 	map_metadata = progression_config.get("map_metadata", {})
 	navigation_config = progression_config.get("navigation", {})
@@ -76,6 +95,8 @@ func load_player_progress() -> void:
 	if not FileAccess.file_exists(SAVE_FILE):
 		# First time - start with starting map unlocked
 		var starting_map = get_starting_map()
+		if starting_map.is_empty():
+			starting_map = "Minimal_Test"  # Safe fallback
 		unlocked_maps = [starting_map]
 		completed_maps = []
 		save_player_progress()
@@ -84,6 +105,9 @@ func load_player_progress() -> void:
 	var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
 	if not file:
 		print("MapProgressionManager: Could not load progress file")
+		# Use safe defaults
+		unlocked_maps = ["Minimal_Test"]
+		completed_maps = []
 		return
 	
 	var json_text = file.get_as_text()
@@ -101,7 +125,7 @@ func load_player_progress() -> void:
 		for map in loaded_completed:
 			completed_maps.append(str(map))
 		
-		var loaded_unlocked = progress_data.get("unlocked_maps", [get_starting_map()])
+		var loaded_unlocked = progress_data.get("unlocked_maps", ["Minimal_Test"])
 		unlocked_maps.clear()
 		for map in loaded_unlocked:
 			unlocked_maps.append(str(map))
@@ -110,7 +134,7 @@ func load_player_progress() -> void:
 		print("MapProgressionManager: Loaded progress - %d completed, %d unlocked" % [completed_maps.size(), unlocked_maps.size()])
 	else:
 		print("MapProgressionManager: Failed to parse progress file, starting fresh")
-		unlocked_maps = [get_starting_map()]
+		unlocked_maps = ["Minimal_Test"]
 		completed_maps = []
 
 # Save player progress to file
@@ -268,24 +292,32 @@ func _check_sequence_completion() -> void:
 
 # Get the starting map from configuration
 func get_starting_map() -> String:
-	return navigation_config.get("starting_map", "Tutorial_Start")
+	if navigation_config.is_empty():
+		return "Minimal_Test"
+	return navigation_config.get("starting_map", "Minimal_Test")
 
 # Get the main menu map
 func get_main_menu_map() -> String:
+	if navigation_config.is_empty():
+		return "menu"
 	return navigation_config.get("main_menu", "menu")
 
 # Get the fallback map
 func get_fallback_map() -> String:
+	if navigation_config.is_empty():
+		return "default"
 	return navigation_config.get("fallback_map", "default")
 
 # Get the default sequence
 func get_default_sequence() -> String:
+	if progression_config.is_empty():
+		return "tutorial_progression"
 	return progression_config.get("default_sequence", "tutorial_progression")
 
 # Convert destination map name to scene path for teleporter
 func get_scene_path_for_map(map_name: String) -> String:
 	# Check if it should use dynamic generation or static scene
-	var static_scene_path = "res://adaresearch/Common/Scenes/Maps/" + map_name + ".tscn"
+	var static_scene_path = "res://commons/scenes/maps/" + map_name + ".tscn"
 	
 	if ResourceLoader.exists(static_scene_path):
 		return static_scene_path
@@ -342,7 +374,7 @@ func is_array_sequence_complete() -> bool:
 	return true
 
 # Get next destination with lab return logic
-func get_next_destination(current_map: String) -> String:
+func get_next_destination(_current_map: String) -> String:
 	# If we just completed the disco tutorial, return to lab
 	if current_map == "Tutorial_Disco" and is_array_sequence_complete():
 		return "res://adaresearch/Common/Scenes/ScienceLab/ScienceLab.tscn"

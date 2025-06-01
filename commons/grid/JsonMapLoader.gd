@@ -3,7 +3,7 @@
 # Provides compatibility layer between JSON maps and existing GDScript-based grid system
 
 extends RefCounted
-class_name JsonMapLoader
+class_name GridJsonMapLoader
 
 # Loaded map data
 var map_data: Dictionary = {}
@@ -239,8 +239,8 @@ static func is_json_map_file(file_path: String) -> bool:
 	return file_path.ends_with(".json") and FileAccess.file_exists(file_path)
 
 # Static loader for convenience
-static func load_json_map(file_path: String) -> JsonMapLoader:
-	var loader = JsonMapLoader.new()
+static func load_json_map(file_path: String) -> GridJsonMapLoader:
+	var loader = GridJsonMapLoader.new()
 	if loader.load_map(file_path):
 		return loader
 	else:
