@@ -128,7 +128,7 @@ func _configure_grid_system(grid_system: Node, map_name: String):
 # Find and configure grid system in scene
 func _find_and_configure_grid_system(scene: Node, map_name: String, options: Dictionary = {}):
 	# Look for different grid system types
-	var grid_names = ["multiLayerGrid", "GridSystemEnhanced", "GridSystem", "multi_layer_grid"]
+	var grid_names = ["GridSystem"]
 	var grid_system = null
 	
 	for grid_name in grid_names:
@@ -139,9 +139,7 @@ func _find_and_configure_grid_system(scene: Node, map_name: String, options: Dic
 	
 	if not grid_system:
 		# Try finding by class
-		grid_system = _find_node_by_class(scene, "GridSystemEnhanced")
-		if not grid_system:
-			grid_system = _find_node_by_class(scene, "GridSystem")
+		grid_system = _find_node_by_class(scene, "GridSystem")
 	
 	if grid_system:
 		_configure_grid_system(grid_system, map_name)
@@ -294,7 +292,7 @@ func load_vr_scene_with_grid(map_name: String) -> bool:
 
 func _find_or_create_grid_system(scene: Node, map_name: String) -> Node:
 	# Look for different grid system types
-	var grid_names = ["multiLayerGrid", "GridSystemEnhanced", "GridSystem", "multi_layer_grid"]
+	var grid_names = ["GridSystem"]
 	var grid_system = null
 	
 	for grid_name in grid_names:
@@ -305,9 +303,7 @@ func _find_or_create_grid_system(scene: Node, map_name: String) -> Node:
 	
 	if not grid_system:
 		# Try finding by class
-		grid_system = _find_node_by_class(scene, "GridSystemEnhanced")
-		if not grid_system:
-			grid_system = _find_node_by_class(scene, "GridSystem")
+		grid_system = _find_node_by_class(scene, "GridSystem")
 	
 	if grid_system:
 		_configure_grid_system(grid_system, map_name)

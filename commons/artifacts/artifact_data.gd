@@ -654,10 +654,10 @@ const ARTIFACTS_JSON := [
 		"readme_link": "res://adaresearch/Tests/README.md"
 	},
 	{
-		"artifact_name": "Multi-Layer Grid",
-		"lookup_name": "multi_layer_grid",
+		"artifact_name": "Grid System",
+		"lookup_name": "grid_system",
 		"description": "Explores the interplay between multiple grids at different scales, creating emergent patterns through their interactions and intersections.",
-		"scene": "res://adaresearch/Tests/Scenes/multi_layer_grid.tscn",
+		"scene": "res://commons/grid/grid_system.tscn",
 		"readme_link": "res://adaresearch/Tests/README.md"
 	},
 	{
@@ -687,5 +687,12 @@ const ARTIFACTS_JSON := [
 		"description": "Explores concepts of data condensation and pattern extraction, distilling complex information into simplified but meaningful visual representations.",
 		"scene": "res://adaresearch/Tests/Scenes/graham_condenser.tscn",
 		"readme_link": "res://adaresearch/Tests/README.md"
+	},
+	{
+		"artifact_name": "Grid System",
+		"lookup_name": "grid_system",
+		"description": "Unified grid system for building educational VR environments from modular components, supporting both JSON and GDScript formats.",
+		"scene": "res://commons/grid/grid_system.tscn",
+		"readme_link": "res://commons/grid/README.md"
 	}
 ]

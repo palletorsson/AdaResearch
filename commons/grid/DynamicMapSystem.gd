@@ -7,8 +7,8 @@ class_name DynamicMapSystem
 
 # Path constants
 const BASE_SCENE_PATH = "res://commons/scenes/base.tscn"
-const GRID_SYSTEM_PATH = "res://commons/grid/GridSystemEnhanced.tscn"
-const LEGACY_GRID_PATH = "res://commons/grid/multi_layer_grid.tscn"
+const GRID_SYSTEM_PATH = "res://commons/grid/grid_system.tscn"
+const LEGACY_GRID_PATH = "res://commons/grid/grid_system.tscn"
 
 # Cache for generated scenes
 static var scene_cache: Dictionary = {}
@@ -112,7 +112,7 @@ static func _setup_grid_system(scene_instance: Node, map_name: String, options: 
 	
 	if use_enhanced:
 		# Configure enhanced grid system
-		grid_system.name = "GridSystemEnhanced"
+		grid_system.name = "GridSystem"
 		grid_system.map_name = map_name
 		grid_system.prefer_json_format = prefer_json
 		
@@ -125,7 +125,7 @@ static func _setup_grid_system(scene_instance: Node, map_name: String, options: 
 			grid_system.showgrid = options.show_grid
 	else:
 		# Configure legacy grid system
-		grid_system.name = "multiLayerGrid"
+		grid_system.name = "GridSystem"
 		grid_system.map_name = map_name
 		
 		# Apply settings for legacy system

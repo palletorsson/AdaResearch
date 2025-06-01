@@ -13,8 +13,8 @@ The Grid System is the foundational architecture for the Ada Research project th
 ### Main Components
 
 #### 1. GridSystem (`GridSystem.gd`)
-The central orchestrator that coordinates all grid operations:
-- **Data Loading**: Loads map data from structured files
+The central orchestrator that coordinates all grid operations (consolidated from GridSystemEnhanced):
+- **Data Loading**: Loads map data from JSON and legacy GDScript files
 - **Component Management**: Coordinates specialized handlers
 - **Scene Assembly**: Builds complete environments from individual components
 - **Algorithm Integration**: Connects with AlgorithmRegistry for interactive elements
@@ -254,6 +254,26 @@ SceneRoot (GridSystem)
 ---
 
 This grid system transforms static scene creation into dynamic world assembly, where every visual element from a simple cube to complex interactive algorithms becomes a reusable artifact that can be composed into rich, educational VR experiences.
+
+## **Current System Status** ✅
+
+### **Consolidation Complete**
+All legacy systems have been successfully consolidated:
+
+- ✅ **Grid Systems Unified**: `GridSystemEnhanced.gd` → `GridSystem.gd` (single system)
+- ✅ **Legacy Managers Removed**: TaskManager, SceneManager, TransitionManager, etc.
+- ✅ **Task System Cleaned**: All task references removed from codebase
+- ✅ **Duplicate Components Eliminated**: multi_layer_grid, VRStaging duplicates removed
+- ✅ **Reference Updates**: All imports, scenes, and documentation updated
+- ✅ **Artifact Registry Updated**: References point to new consolidated components
+
+### **Remaining Modern Architecture**
+- **GridSystem.gd**: Main grid system (consolidates all previous versions)
+- **JsonMapLoader.gd**: Modern JSON-based map loading
+- **UtilityRegistry.gd**: Centralized utility type management
+- **DynamicMapSystem.gd**: On-the-fly scene generation
+- **MapProgressionManager.gd**: Educational progression tracking
+- **VRGridSystemManager.gd**: VR-specific grid management
 
 ## **System Improvements & Enhancement Opportunities**
 
@@ -843,12 +863,14 @@ var layout_data = [
 #### **1. Parameter Support**
 ```json
 {
-  "utilities": [[" ", "t:main_menu:spawn_1", " "]]
+  "utilities": {
+    "layout_data": [
+      ["t:main_menu:spawn_1", " ", "l:3.0:fast"],
+      [" ", "wall:glass:transparent", " "]
+    ]
+  }
 }
 ```
-- Teleport with destination and spawn point parameters
-- Automatic parsing and validation
-- Type-specific parameter application
 
 #### **2. Rich Metadata**
 ```json
@@ -983,10 +1005,10 @@ This directory contains the complete grid system for building educational VR env
 ## Components
 
 ### Core Systems
-- **GridSystem.gd**: Original grid system implementation
-- **GridSystemEnhanced.gd**: Enhanced version with JSON support and improved validation
-- **multi_layer_grid.gd**: Legacy multi-layer grid implementation  
-- **GridCommon.gd**: Shared constants and utilities
+- **GridSystem.gd**: Main grid system implementation with JSON and GDScript support
+- **JsonMapLoader.gd**: Complete JSON map loading and parsing system
+- **map_data.json**: Unified JSON format for map definition
+- **GridCommon.gd**: Shared utilities
 
 ### Data Handlers
 - **GridStructureHandler.gd**: Manages cube placement and structure
@@ -1271,27 +1293,32 @@ The system includes comprehensive validation:
 
 ## File Structure
 ```
-adaresearch/Common/
-├── Data/Maps/
-│   ├── intro_0/
-│   │   ├── map_data.json          # Unified JSON format
-│   │   ├── struct_data.gd         # Legacy structure
-│   │   ├── utility_data.gd        # Legacy utilities
-│   │   ├── interactable_data.gd   # Legacy interactable
-│   │   └── explain_data.gd        # Legacy explain
+commons/
+├── grid/
+│   ├── GridSystem.gd                  # 🆕 Consolidated main grid system  
+│   ├── grid_system.tscn              # 🆕 Main grid scene
+│   ├── JsonMapLoader.gd               # JSON loading system
+│   ├── GridCommon.gd                  # Shared utilities
+│   ├── GridStructureHandler.gd        # Structure management
+│   ├── GridUtilityHandler.gd          # Utility placement
+│   ├── GridInteractableHandler.gd     # Interactable objects
+│   ├── GridExplainHandler.gd          # Educational content
+│   ├── UtilityRegistry.gd             # Centralized utility registry
+│   ├── DynamicMapSystem.gd            # Dynamic scene generation
+│   └── README.md                      # This documentation
+├── maps/
+│   ├── Tutorial_Start/
+│   │   └── map_data.json             # JSON format maps
+│   ├── Lab/
+│   │   └── map_data.json
 │   └── ...
-├── Scripts/Grid/
-│   ├── DynamicMapSystem.gd        # 🆕 Dynamic scene generation
-│   ├── MapMigrationUtility.gd     # 🆕 Migration tools
-│   ├── TestDynamicMapSystem.gd    # 🆕 Testing suite
-│   ├── GridSystemEnhanced.gd      # Enhanced grid system
-│   ├── JsonMapLoader.gd           # JSON loading
-│   ├── UtilityRegistry.gd         # Utility management
-│   └── ...
-└── Scenes/Maps/
-    ├── base.tscn                  # Base VR scene
-    ├── intro_0.tscn              # Can be replaced by dynamic
-    └── ...                       # Static scenes (optional)
+├── managers/
+│   ├── GameManager.gd                # Core game management
+│   ├── MapProgressionManager.gd      # Educational progression
+│   └── VRGridSystemManager.gd        # VR-specific management
+└── scenes/
+    ├── base.tscn                     # Main VR base scene
+    └── vr_staging.gd                 # VR staging system
 ```
 
 ## Getting Started with Dynamic Maps

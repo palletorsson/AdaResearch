@@ -7,17 +7,30 @@ extends XRToolsStaging
 ## This staging system manages scene loading and VR initialization
 ## Now uses the decoupled lab hub and transition manager system
 
+# Scene tracking
+var current_scene: Node = null
 var scene_is_loaded: bool = false
-
-# New decoupled managers
-var lab_hub_manager: LabHubManager
-var transition_manager: TransitionManager
-var sequence_manager: SequenceManager
 
 # Lab System Configuration
 @export var use_lab_system: bool = true
 @export var start_with_grid_system: bool = true
 @export var preferred_grid_map: String = "Lab"
+
+# VR Staging System
+# Manages VR-specific setup and staging functionality
+extends Node3D
+class_name AdaVRStaging
+
+# Configuration variables
+@export var main_scene: String = "res://commons/scenes/base.tscn"
+@export var prompt_for_continue: bool = true
+
+# Signal emitted when staging is complete
+signal staging_complete
+
+# Node references
+var map_progression_manager = null
+var grid_system_manager = null
 
 func _ready() -> void:
 	# Call parent ready function
@@ -107,10 +120,14 @@ func _on_scene_loaded(scene, user_data):
 	scene_is_loaded = true
 
 func _setup_decoupled_managers(scene: Node, user_data: Dictionary):
-	print("VRStaging: Setting up decoupled managers...")
+	print("VRStaging: Setting up scene...")
 	
 	# Find the grid system in the scene
 	var grid_system = scene.find_child("multiLayerGrid", true, false)
+	if not grid_system:
+		# Try looking for the new consolidated GridSystem
+		grid_system = scene.find_child("GridSystem", true, false)
+	
 	if not grid_system:
 		print("VRStaging: No grid system found in scene")
 		return
@@ -123,25 +140,7 @@ func _setup_decoupled_managers(scene: Node, user_data: Dictionary):
 	await get_tree().process_frame
 	await get_tree().create_timer(0.1).timeout
 	
-	# Create and setup transition manager
-	transition_manager = TransitionManager.new()
-	transition_manager.name = "TransitionManager"
-	scene.add_child(transition_manager)
-	transition_manager.initialize(self, grid_system)
-	
-	# Create and setup sequence manager
-	sequence_manager = SequenceManager.new()
-	sequence_manager.name = "SequenceManager"
-	scene.add_child(sequence_manager)
-	transition_manager.set_sequence_manager(sequence_manager)
-	
-	# Create and setup lab hub manager
-	lab_hub_manager = LabHubManager.new()
-	lab_hub_manager.name = "LabHubManager"
-	scene.add_child(lab_hub_manager)
-	transition_manager.set_lab_hub(lab_hub_manager)
-	
-	# Configure the grid system to load the lab
+	# Configure the grid system to load the specified map
 	var map_name = user_data.get("map_name", "Lab")
 	print("VRStaging: Setting grid system map to: %s" % map_name)
 	
@@ -152,7 +151,7 @@ func _setup_decoupled_managers(scene: Node, user_data: Dictionary):
 		if grid_system.has_method("generate_layout"):
 			grid_system.generate_layout()
 	
-	print("VRStaging: ✅ Decoupled lab system setup complete")
+	print("VRStaging: ✅ Scene setup complete")
 
 func _on_scene_exiting(_scene, _user_data):
 	print("VRStaging: Scene exiting")
@@ -181,19 +180,10 @@ func get_current_scene():
 func is_scene_loaded() -> bool:
 	return scene_is_loaded
 
-func get_lab_hub_manager() -> LabHubManager:
-	return lab_hub_manager
-
-func get_transition_manager() -> TransitionManager:
-	return transition_manager
-
-func get_sequence_manager() -> SequenceManager:
-	return sequence_manager
-
 # Support for scene switching
 func switch_to_scene(scene_path: String, user_data = null):
 	print("VRStaging: Switching to scene: %s" % scene_path)
-	load_scene(scene_path, user_data) 
+	load_scene(scene_path, user_data)
 
 # Debug methods
 func debug_force_tutorial():
@@ -210,3 +200,18 @@ func debug_return_to_lab():
 	"""Force return to lab for debugging"""
 	if transition_manager:
 		transition_manager.force_return_to_lab() 
+
+func _initialize_managers():
+	print("VRStaging: Initializing managers...")
+	
+	# Get map progression manager
+	map_progression_manager = get_node_or_null("/root/MapProgressionManager")
+	if not map_progression_manager:
+		print("VRStaging: WARNING - MapProgressionManager not found")
+	
+	# Create grid system manager
+	grid_system_manager = VRGridSystemManager.new()
+	grid_system_manager.name = "VRGridSystemManager"
+	add_child(grid_system_manager)
+	
+	print("VRStaging: Managers initialized") 

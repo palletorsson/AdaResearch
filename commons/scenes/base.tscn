@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_5nlub"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="11_y3abi"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
-[ext_resource type="PackedScene" uid="uid://bnx646jq4nruq" path="res://commons/grid/multi_layer_grid.tscn" id="12_qiixw"]
+[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
@@ -111,7 +111,7 @@ shape = SubResource("BoxShape3D_rldw0")
 
 [node name="LabManager" type="Node3D" parent="." index="3"]
 
-[node name="multiLayerGrid" parent="." index="4" instance=ExtResource("12_qiixw")]
+[node name="GridSystem" parent="." index="4" instance=ExtResource("12_qiixw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Label3D" type="Label3D" parent="." index="5"]
