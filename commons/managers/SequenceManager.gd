@@ -36,7 +36,7 @@ func start_sequence(sequence_name: String, sequence_def: Dictionary, staging: XR
 	staging_ref = staging
 	
 	print("SequenceManager: Starting sequence '%s' with %d steps" % [sequence_name, total_steps])
-	print("  Maps: %s" % sequence_def.maps)
+	print("  Maps: %s" % str(sequence_def.maps))
 	
 	# Find grid system
 	_find_grid_system()
@@ -95,15 +95,19 @@ func _load_map_in_grid_system(map_name: String):
 	# Store map name in history
 	sequence_history.append(map_name)
 	
-	# Load map using grid system
+	# Load the map
+	print("SequenceManager: Loading map '%s'" % map_name)
+	
 	if grid_system.has_method("load_map"):
+		print("SequenceManager: Using load_map() method")
 		grid_system.load_map(map_name)
-	elif grid_system.has_method("set") and "map_name" in grid_system:
-		grid_system.set("map_name", map_name)
-		if grid_system.has_method("load_map_data"):
-			grid_system.load_map_data()
+	elif grid_system.has_method("generate_layout"):
+		print("SequenceManager: Using map_name + generate_layout")
+		grid_system.map_name = map_name
+		grid_system.generate_layout()
 	else:
 		print("SequenceManager: ERROR - Grid system doesn't support map loading")
+		print("SequenceManager: Grid type: %s, Script: %s" % [grid_system.get_class(), grid_system.get_script()])
 		sequence_failed.emit(current_sequence, "Grid system doesn't support map loading")
 		_reset_sequence_state()
 

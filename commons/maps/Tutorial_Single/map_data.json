@@ -24,11 +24,11 @@
 		],
 		"utilities": [
 			[" ", "e"],
-			["p", " "]
+			[" ", " "]
 		],
 		"interactables": [
 			[" ", " "],
-			["cube", " "]
+			[" ", " "]
 		],
 		"tasks": [
 			[" ", " "],
@@ -41,7 +41,7 @@
 			"description": "Step here to progress to the next level",
 			"type": "teleporter",
 			"properties": {
-				"destination": "Tutorial_Room",
+				"destination": "Tutorial_Row",
 				"activation_method": "step_on",
 				"visual_effect": "portal_glow"
 			}

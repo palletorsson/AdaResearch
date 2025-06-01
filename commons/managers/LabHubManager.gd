@@ -179,7 +179,7 @@ func has_artifact(artifact_id: String) -> bool:
 
 func get_unlocked_sequences() -> Array[String]:
 	"""Get list of unlocked sequence IDs"""
-	var unlocked = []
+	var unlocked: Array[String] = []
 	for portal_id in sequence_portals:
 		var portal = sequence_portals[portal_id]
 		if portal.is_unlocked():

@@ -13,7 +13,6 @@ extends Node3D
 # Teleport destinations dictionary - maps teleport IDs to scene paths
 @export_file("*.tscn") var scene: String = ""
 
-
 # Path constants
 const MAPS_PATH = "res://commons/maps/"
 const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
@@ -125,33 +124,63 @@ func _load_json_map_data(json_path: String) -> void:
 	interactable_data_instance = _create_interactable_instance(map_data)
 
 func _create_structure_instance(map_data: Dictionary):
-	var instance = RefCounted.new()
+	# Create a simple dictionary instead of RefCounted
+	var instance = {"layout_data": []}
+	
 	if map_data.has("layers") and map_data.layers.has("structure"):
-		instance.set("layout_data", map_data.layers.structure)
-		print("Created structure data instance with %d rows" % map_data.layers.structure.size())
+		var structure_data = map_data.layers.structure
+		print("Raw structure data from JSON: %s" % str(structure_data))
+		print("Structure data type: %s" % typeof(structure_data))
+		print("Structure data size: %d" % structure_data.size())
+		
+		if structure_data.size() > 0:
+			print("First row: %s" % str(structure_data[0]))
+			print("First row type: %s" % typeof(structure_data[0]))
+			if structure_data[0].size() > 0:
+				print("First row size: %d" % structure_data[0].size())
+		
+		instance["layout_data"] = structure_data
+		print("Created structure data instance with %d rows" % structure_data.size())
+		
+		# Verify we can get it back
+		var test_get = instance["layout_data"]
+		print("Test get layout_data: %s (null: %s)" % [str(test_get), str(test_get == null)])
 	else:
 		print("ERROR: No structure layer found in JSON data")
-		instance.set("layout_data", [])
+		instance["layout_data"] = []
 	return instance
 
 func _create_utility_instance(map_data: Dictionary):
-	var instance = RefCounted.new()
+	# Create a simple dictionary instead of RefCounted
+	var instance = {"layout_data": []}
+	
 	if map_data.has("layers") and map_data.layers.has("utilities"):
-		instance.set("layout_data", map_data.layers.utilities)
+		instance["layout_data"] = map_data.layers.utilities
 		print("Created utility data instance with %d rows" % map_data.layers.utilities.size())
 	else:
 		print("WARNING: No utilities layer found in JSON data")
-		instance.set("layout_data", [])
+		instance["layout_data"] = []
 	return instance
 
 func _create_interactable_instance(map_data: Dictionary):
-	var instance = RefCounted.new()
+	# Create a simple dictionary instead of RefCounted
+	var instance = {"layout_data": []}
+	
 	if map_data.has("layers") and map_data.layers.has("interactables"):
-		instance.set("layout_data", map_data.layers.interactables)
-		print("Created interactable data instance with %d rows" % map_data.layers.interactables.size())
+		var interactable_data = map_data.layers.interactables
+		print("Raw interactable data from JSON: %s" % str(interactable_data))
+		print("Interactable data type: %s" % typeof(interactable_data))
+		print("Interactable data size: %d" % interactable_data.size())
+		
+		instance["layout_data"] = interactable_data
+		print("Created interactable data instance with %d rows" % interactable_data.size())
+		
+		# Verify we can get it back
+		var test_get = instance["layout_data"]
+		print("Test get layout_data: %s (null: %s)" % [str(test_get), str(test_get == null)])
 	else:
 		print("WARNING: No interactables layer found in JSON data")
-		instance.set("layout_data", [])
+		instance["layout_data"] = []
 	return instance
 
 func _load_gdscript_map_data() -> void:
@@ -207,21 +236,44 @@ func _load_grid_dimensions() -> void:
 		print("ERROR: Structure data instance not created!")
 		return
 		
-	# Load dimensions from structure data
-	var structure_layout = structure_data_instance.layout_data
+	# Load dimensions from structure data using dictionary access
+	var structure_layout = structure_data_instance["layout_data"]
+	if structure_layout == null:
+		print("ERROR: Could not get layout_data from structure instance!")
+		return
+		
 	print("Structure data loaded, rows: %d" % structure_layout.size())
 	
+	if structure_layout.is_empty():
+		print("ERROR: Structure layout is empty - cannot determine grid dimensions!")
+		return
+	
+	# Safely get grid dimensions
 	grid_z = structure_layout.size()
-	grid_x = structure_layout[0].size() if structure_layout.size() > 0 else 0
+	if grid_z > 0 and structure_layout[0].size() > 0:
+		grid_x = structure_layout[0].size()
+	else:
+		print("ERROR: First row of structure layout is empty!")
+		grid_x = 0
+		return
+		
 	print("Grid dimensions set to: x=%d y=%d z=%d" % [grid_x, grid_y, grid_z])
+	
+	if grid_x == 0 or grid_z == 0:
+		print("ERROR: Invalid grid dimensions! Cannot continue.")
+		return
 	
 	# Skip utility checks if utility data script isn't instantiated
 	if not utility_data_instance:
 		print("WARNING: Utility data instance not created, skipping utility dimension check")
 		return
 		
-	# Verify utility data has same dimensions
-	var utility_layout = utility_data_instance.layout_data
+	# Verify utility data has same dimensions using dictionary access
+	var utility_layout = utility_data_instance["layout_data"]
+	if utility_layout == null:
+		print("WARNING: Could not get utility layout_data")
+		return
+		
 	print("Utility data loaded, rows: %d" % utility_layout.size())
 	
 	if utility_layout.size() != grid_z:
@@ -236,18 +288,18 @@ func _load_grid_dimensions() -> void:
 		print("WARNING: Interactable data instance not created, skipping interactable dimension check")
 		return
 		
-	# Check which property is available
-	var has_layout_data = interactable_data_instance.get("layout_data") != null
-	var has_interactable_data = interactable_data_instance.get("interactable_data") != null
+	# Check which property is available using dictionary access
+	var has_layout_data = interactable_data_instance.has("layout_data") and interactable_data_instance["layout_data"] != null
+	var has_interactable_data = interactable_data_instance.has("interactable_data") and interactable_data_instance["interactable_data"] != null
 	
 	print("Interactable script has layout_data: %s" % has_layout_data)
 	print("Interactable script has interactable_data: %s" % has_interactable_data)
 	
 	var interactable_layout
 	if has_layout_data:
-		interactable_layout = interactable_data_instance.layout_data
+		interactable_layout = interactable_data_instance["layout_data"]
 	elif has_interactable_data:
-		interactable_layout = interactable_data_instance.interactable_data
+		interactable_layout = interactable_data_instance["interactable_data"]
 	else:
 		print("ERROR: Interactable data script has no layout_data or interactable_data property!")
 		return
@@ -275,6 +327,12 @@ func _generate_grid() -> void:
 
 func initialize_grid() -> void:
 	print("Initializing grid: x=%d, y=%d, z=%d" % [grid_x, grid_y, grid_z])
+	
+	# Validate grid dimensions before proceeding
+	if grid_x <= 0 or grid_y <= 0 or grid_z <= 0:
+		print("ERROR: Invalid grid dimensions - cannot initialize grid!")
+		return
+	
 	grid = []
 	cube_map.clear()
 	utility_objects.clear()
@@ -295,7 +353,11 @@ func initialize_grid() -> void:
 			for z in grid_z:
 				grid[x][y][z] = false
 	
-	print("Grid array initialized with dimensions: %d x %d x %d" % [grid.size(), grid[0].size(), grid[0][0].size()])
+	# Safe debug print - only access arrays if they exist
+	if grid.size() > 0 and grid[0].size() > 0 and grid[0][0].size() > 0:
+		print("Grid array initialized with dimensions: %d x %d x %d" % [grid.size(), grid[0].size(), grid[0][0].size()])
+	else:
+		print("ERROR: Grid array failed to initialize properly")
 
 func add_cube(x: int, y: int, z: int, total_size: float) -> void:
 	var position = Vector3(x, y, z) * total_size
@@ -317,13 +379,35 @@ func apply_structure_data() -> void:
 		return
 		
 	print("Applying structure data")
-	var structure_layout = structure_data_instance.layout_data
+	var structure_layout = structure_data_instance["layout_data"]
+	
+	# Check if layout data is valid
+	if structure_layout == null:
+		print("ERROR: Could not get structure layout data!")
+		return
+	
+	if structure_layout.is_empty():
+		print("ERROR: Structure layout is empty!")
+		return
+	
 	var total_size = cube_size + gutter
 	var cube_count = 0
 	
 	for z in grid_z:
+		if z >= structure_layout.size():
+			print("WARNING: z=%d exceeds structure layout size %d" % [z, structure_layout.size()])
+			continue
+			
 		var row = structure_layout[z]
+		if row.is_empty():
+			print("WARNING: Row %d is empty in structure layout" % z)
+			continue
+			
 		for x in grid_x:
+			if x >= row.size():
+				print("WARNING: x=%d exceeds row size %d at z=%d" % [x, row.size(), z])
+				continue
+				
 			var cell_value = row[x].strip_edges()
 			var stack_height = 0
 			
@@ -346,12 +430,26 @@ func apply_utility_data() -> void:
 		return
 		
 	print("Applying utility data")
-	var utility_layout = utility_data_instance.layout_data
+	var utility_layout = utility_data_instance["layout_data"]
+	
+	# Check if layout data is valid
+	if utility_layout == null:
+		print("WARNING: Could not get utility layout data!")
+		return
+	
+	if utility_layout.is_empty():
+		print("WARNING: Utility layout is empty!")
+		return
+	
 	var total_size = cube_size + gutter
 	var utility_count = 0
 	
 	for z in range(min(grid_z, utility_layout.size())):
 		var row = utility_layout[z]
+		if row.is_empty():
+			print("WARNING: Utility row %d is empty" % z)
+			continue
+			
 		for x in range(min(grid_x, row.size())):
 			var utility_info = row[x].strip_edges()
 			
@@ -396,17 +494,29 @@ func apply_interactable_data() -> void:
 		print("WARNING: Algorithm registry not loaded, skipping interactable placement")
 		return
 	
+	# Debug: Print what type the instance is
+	print("Interactable instance type: Dictionary")
+	
 	# Check which property is available
-	var has_layout_data = interactable_data_instance.get("layout_data") != null
-	var has_interactable_data = interactable_data_instance.get("interactable_data") != null
+	var has_layout_data = interactable_data_instance.has("layout_data") and interactable_data_instance["layout_data"] != null
+	var has_interactable_data = interactable_data_instance.has("interactable_data") and interactable_data_instance["interactable_data"] != null
+	
+	print("Interactable script has layout_data: %s" % has_layout_data)
+	print("Interactable script has interactable_data: %s" % has_interactable_data)
+	
+	if has_layout_data:
+		print("DEBUG: layout_data value: %s" % str(interactable_data_instance["layout_data"]))
+	if has_interactable_data:
+		print("DEBUG: interactable_data value: %s" % str(interactable_data_instance["interactable_data"]))
 	
 	var interactable_layout
 	if has_layout_data:
-		interactable_layout = interactable_data_instance.layout_data
+		interactable_layout = interactable_data_instance["layout_data"]
 	elif has_interactable_data:
-		interactable_layout = interactable_data_instance.interactable_data
+		interactable_layout = interactable_data_instance["interactable_data"]
 	else:
 		print("ERROR: Interactable data script has no layout_data or interactable_data property!")
+		print("DEBUG: Available keys in dictionary: %s" % str(interactable_data_instance.keys()))
 		return
 	
 	var total_size = cube_size + gutter
@@ -467,8 +577,6 @@ func _load_scene(scene_filename: String) -> PackedScene:
 	else:
 		print("ERROR: Scene file not found: %s" % scene_path)
 		return null
-
-
 
 # Later in the _place_utility function:
 func _place_utility(x: int, y: int, z: int, utility_type: String, teleport_id: String, total_size: float) -> void:
