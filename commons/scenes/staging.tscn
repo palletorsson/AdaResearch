@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0gs7leeqadc3"]
+[gd_scene load_steps=4 format=3 uid="uid://di7pw2kc5j1cy"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1_pjc83"]
-[ext_resource type="Script" uid="uid://c8wjpjucjc5et" path="res://commons/scenes/staging.gd" id="2_staging"]
+[ext_resource type="Script" path="res://commons/scenes/staging.gd" id="2_staging"]
 [ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3_y6g5n"]
 
 [node name="LabStaging" instance=ExtResource("1_pjc83")]

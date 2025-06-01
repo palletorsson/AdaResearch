@@ -114,11 +114,14 @@ func _configure_grid_system(scene: Node, user_data: Dictionary):
 	print("VRStaging: Found grid system: %s" % grid_system.name)
 	print("VRStaging: Grid system class: %s" % grid_system.get_class())
 	
-	# Wait for the grid system to finish its _ready() function
+	# Wait for the grid system to finish its _ready() function and initialization
 	print("VRStaging: Waiting for grid system to initialize...")
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().process_frame
+	
+	# Give extra time for algorithm registry to be added as child
+	await get_tree().create_timer(0.1).timeout
 	
 	# Get the map name from user data
 	var map_name = user_data.get("map_name", "Lab")
@@ -134,10 +137,24 @@ func _configure_grid_system(scene: Node, user_data: Dictionary):
 	
 	# Check if algorithm registry is available and loaded
 	print("VRStaging: Checking algorithm registry...")
-	var algorithm_registry = grid_system.get("algorithm_registry")
-	if algorithm_registry:
+	var algorithm_registry = null
+	
+	# Try to get algorithm registry as a property first
+	if grid_system.has_method("get") and grid_system.get("algorithm_registry"):
+		algorithm_registry = grid_system.get("algorithm_registry")
+	# Otherwise look for it as a child (which is how multi_layer_grid.gd adds it)
+	else:
+		algorithm_registry = grid_system.find_child("AlgorithmRegistry", false, false)
+		if not algorithm_registry:
+			# Try looking for it by class name as well
+			for child in grid_system.get_children():
+				if child.get_class() == "AlgorithmRegistry" or "AlgorithmRegistry" in str(child.get_script()):
+					algorithm_registry = child
+					break
+	
+	if algorithm_registry and algorithm_registry.has_method("get_all_algorithm_ids"):
 		var algorithm_count = algorithm_registry.get_all_algorithm_ids().size()
-		print("VRStaging: Algorithm registry found with %d algorithms" % algorithm_count)
+		print("VRStaging: ✅ Algorithm registry found with %d algorithms" % algorithm_count)
 		
 		if algorithm_count == 0:
 			print("VRStaging: Waiting for algorithm registry to load...")
@@ -157,6 +174,7 @@ func _configure_grid_system(scene: Node, user_data: Dictionary):
 	
 	# Set the map name safely
 	if grid_system.has_method("generate_layout"):
+		print("VRStaging: ✅ generate_layout method available")
 		print("VRStaging: Setting map_name directly without triggering setter...")
 		# Set the map_name field directly without triggering the setter
 		grid_system.set("map_name", map_name)

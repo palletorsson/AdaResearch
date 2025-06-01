@@ -13,11 +13,11 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory",
-			"estimated_time": "ongoing",
+			"estimated_time": "5 seconds auto-transport",
 			"learning_objectives": [
 				"Central hub for all learning sequences",
 				"Progressive artifact discovery",
-				"Sequence-based learning progression"
+				"Auto-transport to first sequence"
 			]
 		}
 	},
@@ -46,7 +46,7 @@
 		"tasks": [
 			[" ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " "],
-			[" ", " ", "pick_up_cube", " ", " "],
+			[" ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " "]
 		]
@@ -127,6 +127,6 @@
 				]
 			}
 		},
-		"special_instructions": "Central lab hub for sequence-based learning. Artifacts dynamically spawn based on progression."
+		"special_instructions": "Central lab hub for sequence-based learning. Rotating cube auto-triggers first sequence after 5 seconds."
 	}
 }
