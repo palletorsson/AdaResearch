@@ -6,23 +6,15 @@ extends XRToolsStaging
 ##
 ## This staging system manages scene loading and VR initialization for the consolidated architecture
 
-# Configuration variables
-@export var main_scene: String = "res://commons/scenes/base.tscn"
-@export var prompt_for_continue: bool = true
-
-# Lab System Configuration
+# Lab System Configuration (new variables specific to our implementation)
 @export var use_lab_system: bool = true
 @export var start_with_grid_system: bool = true
 @export var preferred_grid_map: String = "Lab"
 
-# Scene tracking
-var current_scene: Node = null
-var scene_is_loaded: bool = false
-
 # Signal emitted when staging is complete
 signal staging_complete
 
-# Node references
+# Node references (specific to our lab system)
 var map_progression_manager = null
 var grid_system_manager = null
 
@@ -71,7 +63,7 @@ func _setup_lab_system():
 	print("VRStaging: load_scene completed")
 	
 	# Check if loading was successful
-	if scene_is_loaded:
+	if current_scene:
 		print("VRStaging: ✅ Scene loaded successfully!")
 	else:
 		print("VRStaging: ❌ Scene loading failed or incomplete")
@@ -111,7 +103,6 @@ func _on_scene_loaded(scene, user_data):
 	
 	# Only show prompt to continue the first time
 	prompt_for_continue = false
-	scene_is_loaded = true
 
 func _setup_scene_systems(scene: Node, user_data: Dictionary):
 	print("VRStaging: Setting up scene systems...")
@@ -149,12 +140,11 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 
 func _on_scene_exiting(_scene, _user_data):
 	print("VRStaging: Scene exiting")
-	scene_is_loaded = false
 
 func _on_xr_started():
 	print("VRStaging: XR started - user put on headset")
 	# User put on headset or returned from system menu
-	if scene_is_loaded:
+	if current_scene:
 		# No longer need prompt
 		prompt_for_continue = false
 		print("VRStaging: Removing continue prompt")
@@ -164,15 +154,12 @@ func _on_xr_ended():
 	# User removed headset or went to system menu
 	prompt_for_continue = true
 	
-	if scene_is_loaded:
+	if current_scene:
 		print("VRStaging: Could pause game here")
 
 # Utility functions
-func get_current_scene():
-	return current_scene
-
-func is_scene_loaded() -> bool:
-	return scene_is_loaded
+func get_scene_loaded() -> bool:
+	return current_scene != null
 
 # Support for scene switching
 func switch_to_scene(scene_path: String, user_data = null):

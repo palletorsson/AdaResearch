@@ -6,10 +6,10 @@
 
 [node name="VRStaging" instance=ExtResource("1")]
 script = ExtResource("2")
-main_scene = "uid://cgrljkfrmkgda"
 use_lab_system = true
 start_with_grid_system = true
 preferred_grid_map = "Tutorial_2D"
+main_scene = "uid://cgrljkfrmkgda"
 
 [node name="LoadingScreen" parent="." index="2"]
 splash_screen = ExtResource("3")
