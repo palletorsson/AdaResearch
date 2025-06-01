@@ -54,34 +54,20 @@
 		"e": {
 			"type": "teleporter",
 			"name": "Next Lesson",
-			"description": "Continue to advanced array concepts",
+			"description": "Complete the 2D grid to advance to the next tutorial",
 			"properties": {
 				"destination": "next",
 				"visual_effect": "portal_glow"
 			}
 		}
 	},
-	"tile_effect_definitions": {
-		"grid_reveal": {
-			"effect_type": "grid_reveal",
-			"trigger_method": "step_on",
-			"reveal_pattern": "full_grid",
-			"reveal_delay": 0.1,
-			"color": [0.2, 0.9, 0.4],
-			"glow_intensity": 1.2,
-			"effect_radius": 1,
-			"one_time_trigger": true,
-			"audio_effect": "grid_chime",
-			"cascade_mode": "grid_wave"
-		}
-	},
 	"task_definitions": {
 		"start": {
-			"name": "2D Array Introduction",
-			"description": "Welcome to 2D grid navigation",
+			"name": "Begin 2D Navigation",
+			"description": "Learn to navigate in two dimensions",
 			"type": "explanation",
 			"properties": {
-				"text": "Welcome to 2D arrays!\nStep here to reveal the entire grid floor.\nExplore both X-axis (left/right) and Y-axis (forward/back) movement!",
+				"text": "Welcome to 2D array navigation!\nStep on this cube to reveal the grid pattern.\nThen navigate using both X and Y axes to explore the 2D structure!",
 				"auto_display": true
 			}
 		},
@@ -96,10 +82,10 @@
 		},
 		"complete": {
 			"name": "2D Navigation Complete",
-			"description": "Grid exploration finished",
+			"description": "Grid traversal finished",
 			"type": "explanation",
 			"properties": {
-				"text": "Excellent! You've mastered 2D array navigation!\nYou experienced movement in both X and Y dimensions.\nUse the teleporter to continue!",
+				"text": "Outstanding! You've mastered 2D array navigation!\nYou understand how grids work in programming.\nUse the teleporter for your final challenge!",
 				"auto_display": true
 			}
 		}
@@ -108,16 +94,16 @@
 		"default": {
 			"position": [0, 2, 0],
 			"rotation": [0, 45, 0],
-			"description": "Spawn at corner, facing diagonally into the grid"
+			"description": "Spawn at corner of grid, facing diagonally"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.5, 0.5, 0.4],
-		"ambient_energy": 0.8,
+		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 0.95, 0.9],
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
 		}
 	},
@@ -126,12 +112,11 @@
 		"gutter": 0.0,
 		"show_grid": true,
 		"enable_physics": true,
-		"enable_tile_effects": true,
 		"auto_reveal_on_entry": false,
-		"initial_tile_visibility": "hidden_except_start",
+		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.4, 0.5, 0.7]
+			"color": [0.2, 0.3, 0.7]
 		}
 	}
 } 

@@ -85,20 +85,6 @@
 			}
 		}
 	},
-	"tile_effect_definitions": {
-		"sequence_reveal": {
-			"effect_type": "sequence_reveal",
-			"trigger_method": "step_on",
-			"sequence_direction": "forward_y",
-			"reveal_delay": 0.3,
-			"color": [0.3, 0.8, 1.0],
-			"glow_intensity": 1.5,
-			"effect_radius": 1,
-			"one_time_trigger": true,
-			"audio_effect": "soft_chime",
-			"cascade_mode": "wave_forward"
-		}
-	},
 	"task_definitions": {
 		"start": {
 			"name": "Begin Y-Axis Navigation",
@@ -141,7 +127,6 @@
 		"gutter": 0.0,
 		"show_grid": true,
 		"enable_physics": true,
-		"enable_tile_effects": true,
 		"auto_reveal_on_entry": false,
 		"initial_tile_visibility": "hidden_except_start",
 		"background": {

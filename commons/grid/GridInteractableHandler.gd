@@ -8,9 +8,6 @@ var grid_system = null
 var interactable_data_instance = null
 var interactable_objects = {}
 
-# Tile effect trigger definitions from JSON
-var tile_effect_definitions = {}
-
 # Initialize with reference to grid system
 func _init(parent_grid_system):
 	grid_system = parent_grid_system
@@ -20,7 +17,6 @@ func load_data(map_name: String) -> void:
 	#print("GridInteractableHandler: Loading interactable data for map: %s" % map_name)
 	
 	interactable_data_instance = null
-	tile_effect_definitions.clear()
 	
 	# Try loading JSON format first
 	var json_path = GridCommon.MAPS_PATH + map_name + "/map_data.json"
@@ -79,14 +75,11 @@ func _load_json_data(json_path: String) -> void:
 	# Extract interactable layer
 	var interactable_layer = map_data.get("layers", {}).get("interactables", [])
 	
-	# Extract tile effect definitions
-	tile_effect_definitions = map_data.get("tile_effect_definitions", {})
-	
 	# Create compatibility instance
 	interactable_data_instance = JsonInteractableDataAdapter.new()
 	interactable_data_instance.interactable_data = interactable_layer
 	
-	print("GridInteractableHandler: Loaded JSON data with %d tile effect definitions" % tile_effect_definitions.size())
+	print("GridInteractableHandler: Loaded JSON data")
 
 # JSON adapter class for compatibility
 class JsonInteractableDataAdapter:
@@ -130,7 +123,6 @@ func apply_data() -> void:
 	
 	var total_size = grid_system.cube_size + grid_system.gutter
 	var interactable_count = 0
-	var tile_effect_trigger_count = 0
 	
 	#print("GridInteractableHandler: Interactable layout size: %d rows" % interactable_layout.size())
 	
@@ -145,91 +137,28 @@ func apply_data() -> void:
 			if item_id != GridCommon.EMPTY_SPACE and item_id != '':
 				#print("GridInteractableHandler: Found item ID: '%s' at position (%d, ?, %d)" % [item_id, x, z])
 				
-				# Check if it's a tile effect trigger
-				if item_id.begins_with("trigger:"):
-					var effect_type = item_id.substr(8)  # Remove "trigger:" prefix
-					_place_tile_effect_trigger(x, z, effect_type, total_size)
-					tile_effect_trigger_count += 1
+				# Only handle regular algorithm placement (removed tile effect trigger handling)
+				var algorithm_data = grid_system.algorithm_registry.get_algorithm(item_id)
+				if algorithm_data and algorithm_data.size() > 0:
+					# Find the highest occupied y position at this x,z coordinate
+					var y_pos = 0
+					for y in range(grid_system.grid_y-1, -1, -1):
+						if grid_system.grid[x][y][z]:
+							y_pos = y + 1  # Place interactable on top of the highest cube
+							break
+					
+					# Check if there's a utility at this position and adjust height accordingly
+					var utility_key = Vector3i(x, y_pos, z)
+					if grid_system.utility_handler.has_utility_at(x, y_pos, z):
+						y_pos += 1  # Place interactable on top of utility
+					
+					#print("GridInteractableHandler: Placing algorithm '%s' at position (%d, %d, %d)" % [item_id, x, y_pos, z])
+					_place_algorithm(x, y_pos, z, item_id, total_size)
+					interactable_count += 1
 				else:
-					# Regular algorithm placement
-					var algorithm_data = grid_system.algorithm_registry.get_algorithm(item_id)
-					if algorithm_data and algorithm_data.size() > 0:
-						# Find the highest occupied y position at this x,z coordinate
-						var y_pos = 0
-						for y in range(grid_system.grid_y-1, -1, -1):
-							if grid_system.grid[x][y][z]:
-								y_pos = y + 1  # Place interactable on top of the highest cube
-								break
-						
-						# Check if there's a utility at this position and adjust height accordingly
-						var utility_key = Vector3i(x, y_pos, z)
-						if grid_system.utility_handler.has_utility_at(x, y_pos, z):
-							y_pos += 1  # Place interactable on top of utility
-						
-						#print("GridInteractableHandler: Placing algorithm '%s' at position (%d, %d, %d)" % [item_id, x, y_pos, z])
-						_place_algorithm(x, y_pos, z, item_id, total_size)
-						interactable_count += 1
-					else:
-						print("WARNING: GridInteractableHandler: Algorithm ID '%s' not found in registry" % item_id)
+					print("WARNING: GridInteractableHandler: Algorithm ID '%s' not found in registry" % item_id)
 	
-	print("GridInteractableHandler: Added %d interactables and %d tile effect triggers to the grid" % [interactable_count, tile_effect_trigger_count])
-
-# Place a tile effect trigger in the grid
-func _place_tile_effect_trigger(x: int, z: int, effect_type: String, total_size: float) -> void:
-	# Find surface level for placement
-	var y_pos = 0
-	for y in range(grid_system.grid_y-1, -1, -1):
-		if grid_system.grid[x][y][z]:
-			y_pos = y + 1  # Place trigger on top of the highest cube
-			break
-	
-	# Check if there's a utility at this position and adjust height accordingly
-	if grid_system.utility_handler.has_utility_at(x, y_pos, z):
-		y_pos += 1  # Place trigger on top of utility
-	
-	var position = Vector3(x, y_pos, z) * total_size
-	
-	# Load the tile effect trigger scene
-	var trigger_scene_path = "res://adaresearch/Common/Scripts/Grid/tile_effect_trigger.tscn"
-	if not ResourceLoader.exists(trigger_scene_path):
-		print("ERROR: TileEffectTrigger scene not found: %s" % trigger_scene_path)
-		return
-	
-	var trigger_scene = load(trigger_scene_path)
-	var trigger_object = trigger_scene.instantiate()
-	
-	if not trigger_object:
-		print("ERROR: Failed to instantiate TileEffectTrigger scene")
-		return
-	
-	# Configure the trigger
-	trigger_object.position = position
-	trigger_object.effect_type = effect_type
-	
-	# Apply effect configuration from JSON definitions
-	if tile_effect_definitions.has(effect_type):
-		var effect_config = tile_effect_definitions[effect_type]
-		trigger_object.set_effect_config(effect_config)
-		print("GridInteractableHandler: Applied effect config for '%s'" % effect_type)
-	
-	# Connect trigger signals
-	if trigger_object.has_signal("effect_triggered"):
-		trigger_object.connect("effect_triggered", _on_tile_effect_triggered)
-	
-	if trigger_object.has_signal("trigger_activated"):
-		trigger_object.connect("trigger_activated", _on_trigger_activated)
-	
-	# Add to scene
-	grid_system.add_child(trigger_object)
-	
-	# Set owner for editor
-	if grid_system.get_tree() and grid_system.get_tree().edited_scene_root:
-		trigger_object.owner = grid_system.get_tree().edited_scene_root
-	
-	# Store reference
-	interactable_objects[Vector3i(x, y_pos, z)] = trigger_object
-	
-	print("GridInteractableHandler: Placed tile effect trigger '%s' at (%d, %d, %d)" % [effect_type, x, y_pos, z])
+	print("GridInteractableHandler: Added %d interactables to the grid" % interactable_count)
 
 # Place an algorithm in the grid
 func _place_algorithm(x: int, y: int, z: int, algorithm_id: String, total_size: float) -> void:
@@ -277,17 +206,6 @@ func _place_algorithm(x: int, y: int, z: int, algorithm_id: String, total_size: 
 	else:
 		print("WARNING: GridInteractableHandler: Attempted to place algorithm with ID '%s' but the scene could not be loaded" % algorithm_id)
 
-# Handle tile effect trigger events
-func _on_tile_effect_triggered(effect_type: String, position: Vector3i, config: Dictionary):
-	print("GridInteractableHandler: Tile effect '%s' triggered at %s" % [effect_type, position])
-	
-	# Forward to grid system for potential logging or additional handling
-	grid_system._on_interactable_activated("trigger:" + effect_type, position, {"effect_config": config})
-
-func _on_trigger_activated(trigger: TileEffectTrigger):
-	var info = trigger.get_trigger_info()
-	print("GridInteractableHandler: Trigger activated - %s" % info)
-
 # Handle algorithm interaction
 func _on_algorithm_interact(algorithm_id: String, position: Vector3i, data = null) -> void:
 	# Forward the signal to the grid system
@@ -332,19 +250,3 @@ func get_interactables_by_category(category: String) -> Array:
 			if metadata.get("category") == category:
 				results.append(obj)
 	return results
-
-# Get all tile effect triggers
-func get_tile_effect_triggers() -> Array:
-	var results = []
-	for key in interactable_objects.keys():
-		var obj = interactable_objects[key]
-		if obj is TileEffectTrigger:
-			results.append(obj)
-	return results
-
-# Get tile effect trigger at position
-func get_tile_effect_trigger_at(x: int, y: int, z: int) -> TileEffectTrigger:
-	var obj = get_interactable_at(x, y, z)
-	if obj is TileEffectTrigger:
-		return obj
-	return null

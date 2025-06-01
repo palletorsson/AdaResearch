@@ -47,8 +47,7 @@
 			"category": "advanced",
 			"maps": [
 				"AgentialRealism",
-				"JSON_Demo",
-				"TileEffects_Demo"
+				"JSON_Demo"
 			]
 		},
 		"development_testing": {
@@ -58,6 +57,22 @@
 			"maps": [
 				"Minimal_Test"
 			]
+		},
+		"array_tutorial": {
+			"name": "Array Tutorial Sequence",
+			"description": "Complete tutorial sequence covering single elements, rows, 2D grids, and disco effects",
+			"maps": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D", "Tutorial_Disco"],
+			"unlocks": ["randomness_exploration"],
+			"estimated_time": "10-15 minutes",
+			"category": "tutorial"
+		},
+		"randomness_exploration": {
+			"name": "Randomness and Distribution",
+			"description": "Explore random number generation and data distribution patterns",
+			"maps": ["Random_Dice", "Random_Distribution", "Random_Clustering"],
+			"unlocks": ["algorithm_basics"],
+			"estimated_time": "15-20 minutes",
+			"category": "concepts"
 		}
 	},
 	
@@ -156,18 +171,12 @@
 			"difficulty": "advanced",
 			"estimated_time": "15-20 minutes",
 			"prerequisites": ["Random_4"],
-			"unlocks": ["TileEffects_Demo"]
+			"unlocks": []
 		},
 		"JSON_Demo": {
 			"difficulty": "demonstration", 
 			"estimated_time": "5-10 minutes",
 			"prerequisites": ["Random_4"],
-			"unlocks": ["TileEffects_Demo"]
-		},
-		"TileEffects_Demo": {
-			"difficulty": "demonstration",
-			"estimated_time": "2-5 minutes",
-			"prerequisites": ["AgentialRealism", "JSON_Demo"],
 			"unlocks": []
 		},
 		"menu": {
