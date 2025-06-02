@@ -35,7 +35,7 @@ func _load_json_data():
 
 func _load_artifact_definitions():
 	"""Load artifact definitions from JSON"""
-	var path = "res://commons/maps/Lab/lab_artifacts.json"
+	var path = "res://commons/artifacts/lab_artifacts.json"
 	
 	if not FileAccess.file_exists(path):
 		print("LabManager: ERROR - lab_artifacts.json not found")
@@ -52,7 +52,7 @@ func _load_artifact_definitions():
 
 func _load_artifact_system_state():
 	"""Load system state from JSON"""
-	var path = "res://commons/maps/Lab/lab_artifact_system.json"
+	var path = "res://commons/artifacts/lab_artifact_system.json"
 	
 	if not FileAccess.file_exists(path):
 		print("LabManager: ERROR - lab_artifact_system.json not found")

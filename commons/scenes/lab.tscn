@@ -26,3 +26,5 @@ mesh = SubResource("BoxMesh_qxwn1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
 shape = SubResource("BoxShape3D_isue8")
+
+[node name="LabSxene" type="Node3D" parent="." index="6"]
