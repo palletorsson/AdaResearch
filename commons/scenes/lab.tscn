@@ -1,7 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=5 format=3 uid="uid://dbpjx3b6wajb4"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
+[ext_resource type="Script" uid="uid://0rwrif23d50d" path="res://commons/managers/LabManager.gd" id="2_isue8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qxwn1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_isue8"]
+size = Vector3(9.62653, 1, 12.0422)
 
 [node name="Base" instance=ExtResource("1_qxwn1")]
 
-[node name="LabManager" type="Node3D" parent="." index="5"]
+[node name="Label3D" parent="." index="3"]
+text = "Base - Lab"
+
+[node name="LabManager" type="Node3D" parent="." index="4"]
+script = ExtResource("2_isue8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_qxwn1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
+shape = SubResource("BoxShape3D_isue8")
