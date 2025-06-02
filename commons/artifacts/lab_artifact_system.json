@@ -1,6 +1,15 @@
 {
   "system_version": "1.0",
   "lab_state": "initial",
+  
+  "current_state": {
+	"active_artifacts": ["rotating_cube"],
+	"visible_artifacts": ["rotating_cube"],
+	"hidden_artifacts": ["grid_display", "randomness_sign"],
+	"lab_lighting": "minimal_cube_focused",
+	"environment_mode": "dark_hub"
+  },
+
   "progression_tracking": {
 	"sequences_completed": [],
 	"artifacts_unlocked": ["rotating_cube"],
@@ -14,30 +23,36 @@
 	  "description": "Only rotating cube visible - dark lab environment",
 	  "visible_artifacts": ["rotating_cube"],
 	  "hidden_artifacts": ["grid_display", "randomness_sign"],
-	  "lighting_mode": "minimal_cube_focused"
+	  "lighting_mode": "minimal_cube_focused",
+	  "environment_settings": {
+		"ambient_energy": 0.1,
+		"background_darkness": 0.95
+	  }
 	},
 	
-	"post_first_sequence": {
-	  "description": "Grid display becomes visible after first sequence completion",
+	"post_cube_activation": {
+	  "description": "Grid display becomes visible after cube activation",
 	  "visible_artifacts": ["rotating_cube", "grid_display"],
+	  "hidden_artifacts": ["randomness_sign"],
 	  "lighting_mode": "dual_artifact_lighting",
-	  "triggers": ["array_tutorial_started"]
+	  "triggers": ["rotating_cube_activated"],
+	  "environment_settings": {
+		"ambient_energy": 0.2,
+		"background_darkness": 0.85
+	  }
 	},
 	
 	"exploration_phase": {
 	  "description": "Randomness sign appears after grid interaction",
 	  "visible_artifacts": ["rotating_cube", "grid_display", "randomness_sign"],
+	  "hidden_artifacts": [],
 	  "lighting_mode": "full_artifact_lighting",
-	  "triggers": ["grid_display_interacted"]
+	  "triggers": ["grid_display_interacted"],
+	  "environment_settings": {
+		"ambient_energy": 0.3,
+		"background_darkness": 0.7
+	  }
 	}
-  },
-
-  "current_state": {
-	"active_artifacts": ["rotating_cube"],
-	"visible_artifacts": ["rotating_cube"],
-	"lab_lighting": "minimal_cube_focused",
-	"player_progression": "initial",
-	"next_unlock_condition": "rotating_cube_triggered"
   },
 
   "artifact_states": {
@@ -45,42 +60,37 @@
 	  "status": "active",
 	  "interaction_count": 0,
 	  "last_triggered": null,
-	  "custom_properties": {
-		"emission_intensity": 0.3,
-		"auto_trigger_enabled": true
-	  }
+	  "progression_events": ["cube_activated", "sequence_started"]
 	},
 	
 	"grid_display": {
 	  "status": "hidden",
 	  "unlock_progress": 0.0,
-	  "preview_mode": false,
-	  "custom_properties": {
-		"grid_complexity": "basic"
-	  }
+	  "unlock_trigger": "rotating_cube_activated",
+	  "progression_events": ["display_unlocked", "grid_interacted"]
 	},
 	
 	"randomness_sign": {
-	  "status": "hidden",
+	  "status": "hidden", 
 	  "unlock_progress": 0.0,
-	  "preview_mode": false,
-	  "custom_properties": {
-		"sign_glow": false
-	  }
+	  "unlock_trigger": "grid_display_interacted",
+	  "progression_events": ["sign_unlocked", "randomness_started"]
 	}
   },
 
   "progression_events": {
-	"rotating_cube_triggered": {
+	"rotating_cube_activated": {
 	  "unlocks": ["grid_display"],
 	  "updates_lighting": true,
-	  "saves_progress": true
+	  "saves_progress": true,
+	  "next_state": "post_cube_activation"
 	},
 	
 	"grid_display_interacted": {
 	  "unlocks": ["randomness_sign"],
 	  "updates_lighting": true,
-	  "achievement": "array_explorer"
+	  "achievement": "array_explorer",
+	  "next_state": "exploration_phase"
 	},
 	
 	"randomness_sign_activated": {
@@ -94,26 +104,23 @@
 	"minimal_cube_focused": {
 	  "ambient_energy": 0.1,
 	  "artifact_lights": ["rotating_cube"],
-	  "background_darkness": 0.95
+	  "background_darkness": 0.95,
+	  "directional_light_enabled": false
 	},
 	
 	"dual_artifact_lighting": {
 	  "ambient_energy": 0.2,
 	  "artifact_lights": ["rotating_cube", "grid_display"],
-	  "background_darkness": 0.85
+	  "background_darkness": 0.85,
+	  "directional_light_enabled": false
 	},
 	
 	"full_artifact_lighting": {
 	  "ambient_energy": 0.3,
 	  "artifact_lights": ["rotating_cube", "grid_display", "randomness_sign"],
-	  "background_darkness": 0.7
+	  "background_darkness": 0.7,
+	  "directional_light_enabled": true,
+	  "directional_light_energy": 0.5
 	}
-  },
-
-  "save_data": {
-	"auto_save": true,
-	"save_interval": 30.0,
-	"save_on_state_change": true,
-	"backup_saves": 3
   }
 }

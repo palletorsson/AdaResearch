@@ -3,24 +3,25 @@
 	"rotating_cube": {
 	  "id": "rotating_cube",
 	  "name": "Educational Sequence Portal",
-	  "description": "Gateway to learning sequences",
+	  "description": "Gateway to learning sequences - auto-triggers after 5 seconds",
 	  "tscn_path": "res://commons/primitives/cubes/rotating_cube.tscn",
-	  "position": [2.0, 1.5, 2.0],
+	  "position": [0.0, 1.5, -3.0],
 	  "rotation": [0, 0, 0],
 	  "scale": [1.0, 1.0, 1.0],
-	  "is_active": true,
-	  "unlock_conditions": [],
 	  "category": "sequence_portal",
 	  "events": {
 		"on_artifact_activated": "handle_sequence_start",
-		"on_sequence_triggered": "handle_sequence_selection"
+		"on_sequence_triggered": "load_first_grid_map"
 	  },
 	  "lighting": {
 		"add_focused_light": true,
 		"light_color": [0.8, 0.9, 1.0],
 		"light_intensity": 2.0,
-		"light_range": 3.0
-	  }
+		"light_range": 4.0,
+		"light_position": [0, 0.5, 0]
+	  },
+	  "unlock_conditions": [],
+	  "is_active": true
 	},
 
 	"grid_display": {
@@ -28,11 +29,9 @@
 	  "name": "Array Visualization Grid",
 	  "description": "Interactive 3D grid showing array concepts",
 	  "tscn_path": "res://commons/displays/GridArtifact.tscn",
-	  "position": [0.0, 1.2, 1.0],
+	  "position": [2.0, 1.2, 1.0],
 	  "rotation": [0, 45, 0],
 	  "scale": [0.5, 0.5, 0.5],
-	  "is_active": false,
-	  "unlock_conditions": ["rotating_cube_triggered"],
 	  "category": "educational_display",
 	  "events": {
 		"on_interaction": "handle_grid_tutorial"
@@ -41,7 +40,9 @@
 		"add_focused_light": false,
 		"ambient_glow": true,
 		"glow_color": [0.0, 1.0, 0.6]
-	  }
+	  },
+	  "unlock_conditions": ["rotating_cube_activated"],
+	  "is_active": false
 	},
 
 	"randomness_sign": {
@@ -49,11 +50,9 @@
 	  "name": "Randomness & Probability Portal", 
 	  "description": "Gateway to randomness exploration",
 	  "tscn_path": "res://commons/displays/RandomnessSign.tscn",
-	  "position": [4.0, 1.3, 2.0],
+	  "position": [-2.0, 1.3, 1.0],
 	  "rotation": [0, -30, 0],
 	  "scale": [1.0, 1.0, 1.0],
-	  "is_active": false,
-	  "unlock_conditions": ["array_tutorial_completed", "grid_display_interacted"],
 	  "category": "sequence_portal",
 	  "events": {
 		"on_interaction": "handle_randomness_sequence"
@@ -63,13 +62,9 @@
 		"light_color": [1.0, 0.3, 0.7],
 		"light_intensity": 1.5,
 		"light_range": 2.5
-	  }
+	  },
+	  "unlock_conditions": ["grid_display_interacted"],
+	  "is_active": false
 	}
-  },
-
-  "global_settings": {
-	"max_active_artifacts": 10,
-	"interaction_cooldown": 1.0,
-	"auto_save_state": true
   }
 }

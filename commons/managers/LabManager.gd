@@ -1,58 +1,64 @@
-# LabManager.gd - Artifact lifecycle management only
+# LabManager.gd - Simplified JSON reader and artifact instantiator
 extends Node3D
 class_name LabManager
 
-# Artifact management (NOT behavior)
+# JSON data
 var artifact_definitions: Dictionary = {}
 var artifact_system_state: Dictionary = {}
-var artifact_instances: Dictionary = {}
 
-# Progression tracking
-var progression_manager: MapProgressionManager
-var current_lab_state: String = "initial"
+# Artifact tracking
+var active_artifacts: Dictionary = {}
 
-# Signals
-signal artifact_unlocked(artifact_id: String)
-signal lab_state_changed(new_state: String)
+# Lab scene reference (for signaling)
+var lab_scene: Node3D
+
+# Signals for lab scene coordination
+signal artifact_activated(artifact_id: String)
+signal progression_event(event_name: String, event_data: Dictionary)
 
 func _ready():
-	print("LabManager: Initializing artifact management system")
-	progression_manager = MapProgressionManager.get_instance()
+	print("LabManager: Initializing as JSON-driven artifact loader")
 	
+	# Get lab scene reference
+	lab_scene = get_parent()
+	
+	# Load JSON configurations
+	_load_json_data()
+	
+	# Create artifacts based on system state
+	_create_artifacts_from_system_state()
+
+func _load_json_data():
+	"""Load both JSON files"""
 	_load_artifact_definitions()
 	_load_artifact_system_state()
-	_create_active_artifacts()
-	
-	print("LabManager: Managing %d artifact definitions" % artifact_definitions.size())
 
 func _load_artifact_definitions():
 	"""Load artifact definitions from JSON"""
-	var artifacts_path = "res://commons/artifacts/lab_artifacts.json"
+	var path = "res://commons/maps/Lab/lab_artifacts.json"
 	
-	if not FileAccess.file_exists(artifacts_path):
+	if not FileAccess.file_exists(path):
 		print("LabManager: ERROR - lab_artifacts.json not found")
 		return
 	
-	var file = FileAccess.open(artifacts_path, FileAccess.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	var json_text = file.get_as_text()
 	file.close()
 	
 	var json = JSON.new()
 	if json.parse(json_text) == OK:
-		var data = json.data
-		artifact_definitions = data.get("artifact_definitions", {})
+		artifact_definitions = json.data.get("artifact_definitions", {})
 		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
 
 func _load_artifact_system_state():
 	"""Load system state from JSON"""
-	var system_path = "res://commons/artifacts/lab_artifact_system.json"
+	var path = "res://commons/maps/Lab/lab_artifact_system.json"
 	
-	if not FileAccess.file_exists(system_path):
-		print("LabManager: Using default system state")
-		artifact_system_state = _get_default_system_state()
+	if not FileAccess.file_exists(path):
+		print("LabManager: ERROR - lab_artifact_system.json not found")
 		return
 	
-	var file = FileAccess.open(system_path, FileAccess.READ)
+	var file = FileAccess.open(path, FileAccess.READ)
 	var json_text = file.get_as_text()
 	file.close()
 	
@@ -61,35 +67,23 @@ func _load_artifact_system_state():
 		artifact_system_state = json.data
 		print("LabManager: Loaded artifact system state")
 
-func _get_default_system_state() -> Dictionary:
-	"""Default system state - only rotating cube active"""
-	return {
-		"current_state": {
-			"active_artifacts": ["rotating_cube"],
-			"lab_lighting": "minimal_cube_focused"
-		},
-		"artifact_states": {
-			"rotating_cube": {"status": "active"},
-			"grid_display": {"status": "hidden"},
-			"randomness_sign": {"status": "hidden"}
-		}
-	}
-
-func _create_active_artifacts():
-	"""Create and position active artifacts"""
-	var active_artifacts = artifact_system_state.get("current_state", {}).get("active_artifacts", ["rotating_cube"])
+func _create_artifacts_from_system_state():
+	"""Create only the artifacts specified as visible in system state"""
+	var current_state = artifact_system_state.get("current_state", {})
+	var visible_artifacts = current_state.get("visible_artifacts", [])
 	
-	for artifact_id in active_artifacts:
+	print("LabManager: Creating visible artifacts: %s" % str(visible_artifacts))
+	
+	for artifact_id in visible_artifacts:
 		_instantiate_artifact(artifact_id)
+	
+	# Apply lighting configuration
+	_apply_lighting_from_system_state()
 
 func _instantiate_artifact(artifact_id: String):
-	"""Instantiate an artifact from its tscn and position it"""
+	"""Instantiate an artifact from definition - dumb loader only"""
 	if not artifact_definitions.has(artifact_id):
 		print("LabManager: No definition for artifact: %s" % artifact_id)
-		return
-	
-	if artifact_instances.has(artifact_id):
-		print("LabManager: Artifact %s already exists" % artifact_id)
 		return
 	
 	var definition = artifact_definitions[artifact_id]
@@ -99,125 +93,97 @@ func _instantiate_artifact(artifact_id: String):
 		print("LabManager: Artifact scene not found: %s" % tscn_path)
 		return
 	
-	# Load and instantiate the artifact scene
+	# Load and instantiate
 	var artifact_scene = load(tscn_path)
 	var artifact_instance = artifact_scene.instantiate()
 	
-	# Apply management properties ONLY
-	_apply_artifact_positioning(artifact_instance, definition)
-	_connect_artifact_management_signals(artifact_instance, artifact_id)
-	_add_artifact_lighting_if_specified(artifact_instance, definition)
-	
-	# Add to scene and track
-	add_child(artifact_instance)
-	artifact_instances[artifact_id] = artifact_instance
-	
-	print("LabManager: Instantiated artifact: %s" % artifact_id)
-
-func _apply_artifact_positioning(artifact_instance: Node3D, definition: Dictionary):
-	"""Apply position, rotation, scale from definition"""
+	# Apply basic positioning from definition
 	var position = definition.get("position", [0, 0, 0])
 	var rotation = definition.get("rotation", [0, 0, 0])
-	var scale = definition.get("scale", [1, 1, 1])
+	var scale_def = definition.get("scale", [1, 1, 1])
 	
 	artifact_instance.position = Vector3(position[0], position[1], position[2])
 	artifact_instance.rotation_degrees = Vector3(rotation[0], rotation[1], rotation[2])
-	artifact_instance.scale = Vector3(scale[0], scale[1], scale[2])
+	artifact_instance.scale = Vector3(scale_def[0], scale_def[1], scale_def[2])
+	
+	# Connect signals (dumb connection - just forward to lab scene)
+	_connect_artifact_signals(artifact_instance, artifact_id)
+	
+	# Add lighting if specified
+	_add_artifact_lighting(artifact_instance, definition)
+	
+	# Add to scene
+	add_child(artifact_instance)
+	active_artifacts[artifact_id] = artifact_instance
+	
+	print("LabManager: Created artifact '%s' at %s" % [artifact_id, str(position)])
 
-func _connect_artifact_management_signals(artifact_instance: Node3D, artifact_id: String):
-	"""Connect artifact signals for management purposes only"""
-	# Connect common artifact signals that affect management
+func _connect_artifact_signals(artifact_instance: Node3D, artifact_id: String):
+	"""Connect artifact signals - just forward to lab scene"""
 	if artifact_instance.has_signal("artifact_activated"):
 		artifact_instance.artifact_activated.connect(_on_artifact_activated.bind(artifact_id))
 	
 	if artifact_instance.has_signal("sequence_triggered"):
 		artifact_instance.sequence_triggered.connect(_on_sequence_triggered.bind(artifact_id))
-	
-	# Do NOT configure internal artifact behavior - tscn handles that
 
-func _add_artifact_lighting_if_specified(artifact_instance: Node3D, definition: Dictionary):
-	"""Add management lighting if specified in definition"""
+func _add_artifact_lighting(artifact_instance: Node3D, definition: Dictionary):
+	"""Add lighting if specified in definition"""
 	var lighting = definition.get("lighting", {})
 	
 	if lighting.get("add_focused_light", false):
 		var light = OmniLight3D.new()
-		light.name = "ManagementLight"
+		light.name = "ArtifactLight"
 		
 		var light_color = lighting.get("light_color", [1.0, 1.0, 1.0])
 		light.light_color = Color(light_color[0], light_color[1], light_color[2])
 		light.light_energy = lighting.get("light_intensity", 2.0)
 		light.omni_range = lighting.get("light_range", 3.0)
-		light.position = Vector3(0, 0.5, 0)
+		
+		var light_pos = lighting.get("light_position", [0, 0.5, 0])
+		light.position = Vector3(light_pos[0], light_pos[1], light_pos[2])
 		
 		artifact_instance.add_child(light)
 
-# Management signal handlers
-func _on_artifact_activated(artifact_id: String):
-	"""Handle artifact activation for management purposes"""
-	print("LabManager: Artifact activated: %s" % artifact_id)
+func _apply_lighting_from_system_state():
+	"""Apply lab lighting based on system state"""
+	var current_state = artifact_system_state.get("current_state", {})
+	var lighting_mode = current_state.get("lab_lighting", "minimal_cube_focused")
 	
-	# Update progression and unlock new artifacts
-	_handle_artifact_progression(artifact_id)
+	var lighting_configs = artifact_system_state.get("lighting_configurations", {})
+	if lighting_configs.has(lighting_mode):
+		var config = lighting_configs[lighting_mode]
+		
+		# Apply to world environment
+		var world_env = get_node("../WorldEnvironment")
+		if world_env and world_env.environment:
+			var env = world_env.environment
+			env.ambient_light_energy = config.get("ambient_energy", 0.1)
+		
+		print("LabManager: Applied lighting mode: %s" % lighting_mode)
+
+# Signal handlers - just forward to lab scene
+func _on_artifact_activated(artifact_id: String):
+	"""Forward artifact activation to lab scene"""
+	print("LabManager: Artifact '%s' activated - forwarding to lab scene" % artifact_id)
+	artifact_activated.emit(artifact_id)
 
 func _on_sequence_triggered(artifact_id: String, sequence_name: String):
-	"""Handle sequence trigger for management purposes"""
-	print("LabManager: Sequence '%s' triggered by %s" % [sequence_name, artifact_id])
+	"""Forward sequence trigger to lab scene"""
+	print("LabManager: Sequence '%s' triggered by '%s' - forwarding to lab scene" % [sequence_name, artifact_id])
 	
-	# Management can track this for progression
-	_handle_sequence_progression(artifact_id, sequence_name)
+	var event_data = {
+		"artifact_id": artifact_id,
+		"sequence_name": sequence_name,
+		"trigger_type": "sequence"
+	}
+	progression_event.emit("sequence_triggered", event_data)
 
-func _handle_artifact_progression(artifact_id: String):
-	"""Handle progression unlocks when artifact is activated"""
-	# Check what should be unlocked based on this activation
-	for check_artifact_id in artifact_definitions.keys():
-		var definition = artifact_definitions[check_artifact_id]
-		var unlock_conditions = definition.get("unlock_conditions", [])
-		
-		# Simple check - if this artifact triggered unlocks another
-		var unlock_trigger = artifact_id + "_triggered"
-		if unlock_trigger in unlock_conditions:
-			_unlock_artifact(check_artifact_id)
-
-func _unlock_artifact(artifact_id: String):
-	"""Unlock and instantiate a new artifact"""
-	if artifact_instances.has(artifact_id):
-		return  # Already exists
-	
-	print("LabManager: Unlocking artifact: %s" % artifact_id)
-	
-	# Add to active artifacts
-	var current_state = artifact_system_state.get("current_state", {})
-	var active_artifacts = current_state.get("active_artifacts", [])
-	
-	if not artifact_id in active_artifacts:
-		active_artifacts.append(artifact_id)
-		_instantiate_artifact(artifact_id)
-		
-		# Update system state
-		artifact_system_state["artifact_states"][artifact_id]["status"] = "active"
-		
-		# Emit unlock signal
-		artifact_unlocked.emit(artifact_id)
-
-func _handle_sequence_progression(artifact_id: String, sequence_name: String):
-	"""Track sequence progression for future unlocks"""
-	# This is where the manager tracks educational progress
-	# without interfering with the actual sequence execution
-	pass
-
-# Public API - Management functions only
+# Public API - simple queries only
 func get_active_artifacts() -> Array:
-	return artifact_system_state.get("current_state", {}).get("active_artifacts", [])
+	return active_artifacts.keys()
 
 func get_artifact_instance(artifact_id: String) -> Node3D:
-	return artifact_instances.get(artifact_id, null)
+	return active_artifacts.get(artifact_id, null)
 
 func is_artifact_active(artifact_id: String) -> bool:
-	return artifact_instances.has(artifact_id)
-
-func force_unlock_artifact(artifact_id: String):
-	"""Force unlock for testing"""
-	_unlock_artifact(artifact_id)
-
-func get_artifact_definitions() -> Dictionary:
-	return artifact_definitions
+	return active_artifacts.has(artifact_id)

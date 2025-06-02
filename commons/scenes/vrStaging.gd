@@ -9,6 +9,7 @@ extends XRToolsStaging
 # Lab System Configuration (new variables specific to our implementation)
 @export var use_lab_system: bool = true
 @export var start_with_grid_system: bool = true
+@export var main_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
 
 # Signal emitted when staging is complete
@@ -40,33 +41,17 @@ func _start_game():
 		await _setup_basic_vr_scene()
 
 func _setup_lab_system():
-	print("VRStaging: Setting up lab-centric system")
+	"""Setup lab system - loads lab.tscn directly"""
+	print("VRStaging: Loading lab.tscn for hub experience")
 	
-	# Load the main VR scene with lab configuration
 	var user_data = {
-		"map_name": preferred_grid_map,
 		"system_mode": "lab_hub",
 		"staging_ref": self
 	}
 	
-	# Check if the scene file exists
-	if not ResourceLoader.exists(main_scene):
-		print("VRStaging: ERROR - Main scene file does not exist: %s" % main_scene)
-		return
-	
-	# Load the specified main scene
-	print("VRStaging: Loading main scene: %s" % main_scene)
-	
-	# Call load_scene and await it since it's a coroutine
-	print("VRStaging: Calling load_scene...")
+	# Load lab.tscn (which contains LabManager and rotating cube)
 	await load_scene(main_scene, user_data)
-	print("VRStaging: load_scene completed")
-	
-	# Check if loading was successful
-	if current_scene:
-		print("VRStaging: ✅ Scene loaded successfully!")
-	else:
-		print("VRStaging: ❌ Scene loading failed or incomplete")
+	print("VRStaging: Lab hub loaded")
 
 func _setup_basic_vr_scene():
 	print("VRStaging: Setting up basic VR scene")
