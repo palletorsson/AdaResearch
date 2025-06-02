@@ -1,0 +1,119 @@
+{
+  "system_version": "1.0",
+  "lab_state": "initial",
+  "progression_tracking": {
+	"sequences_completed": [],
+	"artifacts_unlocked": ["rotating_cube"],
+	"achievements_earned": [],
+	"total_playtime": 0,
+	"last_updated": "2025-01-20"
+  },
+
+  "visibility_rules": {
+	"initial_state": {
+	  "description": "Only rotating cube visible - dark lab environment",
+	  "visible_artifacts": ["rotating_cube"],
+	  "hidden_artifacts": ["grid_display", "randomness_sign"],
+	  "lighting_mode": "minimal_cube_focused"
+	},
+	
+	"post_first_sequence": {
+	  "description": "Grid display becomes visible after first sequence completion",
+	  "visible_artifacts": ["rotating_cube", "grid_display"],
+	  "lighting_mode": "dual_artifact_lighting",
+	  "triggers": ["array_tutorial_started"]
+	},
+	
+	"exploration_phase": {
+	  "description": "Randomness sign appears after grid interaction",
+	  "visible_artifacts": ["rotating_cube", "grid_display", "randomness_sign"],
+	  "lighting_mode": "full_artifact_lighting",
+	  "triggers": ["grid_display_interacted"]
+	}
+  },
+
+  "current_state": {
+	"active_artifacts": ["rotating_cube"],
+	"visible_artifacts": ["rotating_cube"],
+	"lab_lighting": "minimal_cube_focused",
+	"player_progression": "initial",
+	"next_unlock_condition": "rotating_cube_triggered"
+  },
+
+  "artifact_states": {
+	"rotating_cube": {
+	  "status": "active",
+	  "interaction_count": 0,
+	  "last_triggered": null,
+	  "custom_properties": {
+		"emission_intensity": 0.3,
+		"auto_trigger_enabled": true
+	  }
+	},
+	
+	"grid_display": {
+	  "status": "hidden",
+	  "unlock_progress": 0.0,
+	  "preview_mode": false,
+	  "custom_properties": {
+		"grid_complexity": "basic"
+	  }
+	},
+	
+	"randomness_sign": {
+	  "status": "hidden",
+	  "unlock_progress": 0.0,
+	  "preview_mode": false,
+	  "custom_properties": {
+		"sign_glow": false
+	  }
+	}
+  },
+
+  "progression_events": {
+	"rotating_cube_triggered": {
+	  "unlocks": ["grid_display"],
+	  "updates_lighting": true,
+	  "saves_progress": true
+	},
+	
+	"grid_display_interacted": {
+	  "unlocks": ["randomness_sign"],
+	  "updates_lighting": true,
+	  "achievement": "array_explorer"
+	},
+	
+	"randomness_sign_activated": {
+	  "unlocks": [],
+	  "opens_sequence": "randomness_exploration",
+	  "achievement": "probability_pioneer"
+	}
+  },
+
+  "lighting_configurations": {
+	"minimal_cube_focused": {
+	  "ambient_energy": 0.1,
+	  "artifact_lights": ["rotating_cube"],
+	  "background_darkness": 0.95
+	},
+	
+	"dual_artifact_lighting": {
+	  "ambient_energy": 0.2,
+	  "artifact_lights": ["rotating_cube", "grid_display"],
+	  "background_darkness": 0.85
+	},
+	
+	"full_artifact_lighting": {
+	  "ambient_energy": 0.3,
+	  "artifact_lights": ["rotating_cube", "grid_display", "randomness_sign"],
+	  "background_darkness": 0.7
+	}
+  },
+
+  "save_data": {
+	"auto_save": true,
+	"save_interval": 30.0,
+	"save_on_state_change": true,
+	"backup_saves": 3
+  }
+}

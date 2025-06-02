@@ -1,159 +1,75 @@
 {
-	"version": "1.0",
-	"format": "lab_artifacts",
-	"description": "Artifact definitions for the Lab environment",
-	
-	"artifacts": {
-		"rotating_cube": {
-			"name": "Algorithm Cube",
-			"lookup_name": "rotating_cube",
-			"description": "A mysterious cube containing the secrets of arrays",
-			"scene": "res://commons/primitives/cubes/rotating_cube.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
-		},
-		"disco_grid": {
-			"name": "Disco Grid",
-			"lookup_name": "disco_grid", 
-			"description": "A shimmering grid that pulses with disco energy",
-			"scene": "res://commons/primitives/grids/disco_grid.tscn",
-			"position": [-1.0, 1.0, 0.5],
-			"rotation": [0.0, 45.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["array_tutorial"]
-		},
-		"probability_sphere": {
-			"name": "Probability Sphere",
-			"lookup_name": "probability_sphere",
-			"description": "A sphere that shows the dance of randomness",
-			"scene": "res://commons/primitives/spheres/probability_sphere.tscn",
-			"position": [1.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "randomness_exploration",
-			"artifact_type": "sequence_trigger", 
-			"prerequisites": ["array_tutorial"]
-		},
-		"geometric_crystal": {
-			"name": "Geometric Crystal",
-			"lookup_name": "geometric_crystal",
-			"description": "A crystal that contains spatial algorithms",
-			"scene": "res://commons/primitives/crystals/geometric_crystal.tscn",
-			"position": [0.0, 1.0, -1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "geometric_algorithms",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": ["array_tutorial"]
-		},
-		"array_visualizer": {
-			"name": "Array Visualizer",
-			"lookup_name": "array_visualizer",
-			"description": "Interactive tool for visualizing array structures",
-			"scene": "res://commons/primitives/tools/array_visualizer.tscn",
-			"position": [-0.7, 1.0, -0.7],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["array_tutorial"]
-		},
-		"quantum_dice": {
-			"name": "Quantum Dice",
-			"lookup_name": "quantum_dice",
-			"description": "Dice that demonstrate quantum probability principles",
-			"scene": "res://commons/primitives/dice/quantum_dice.tscn",
-			"position": [0.7, 1.0, 0.7],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["randomness_exploration"]
-		},
-		"chaos_attractor": {
-			"name": "Chaos Attractor",
-			"lookup_name": "chaos_attractor",
-			"description": "Visualization of chaotic systems and strange attractors",
-			"scene": "res://commons/primitives/attractors/chaos_attractor.tscn",
-			"position": [1.5, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["randomness_exploration"]
-		},
-		"spatial_compass": {
-			"name": "Spatial Compass",
-			"lookup_name": "spatial_compass",
-			"description": "Tool for navigating geometric algorithms",
-			"scene": "res://commons/primitives/tools/spatial_compass.tscn",
-			"position": [-1.5, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["geometric_algorithms"]
-		},
-		"dimension_lens": {
-			"name": "Dimension Lens",
-			"lookup_name": "dimension_lens",
-			"description": "Lens for viewing multi-dimensional spaces",
-			"scene": "res://commons/primitives/tools/dimension_lens.tscn",
-			"position": [0.0, 1.0, -1.5],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["geometric_algorithms"]
-		},
-		"knowledge_prism": {
-			"name": "Knowledge Prism",
-			"lookup_name": "knowledge_prism",
-			"description": "Prism that refracts complex concepts into understandable forms",
-			"scene": "res://commons/primitives/prisms/knowledge_prism.tscn",
-			"position": [0.0, 1.2, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "advanced_concepts",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": ["randomness_exploration", "geometric_algorithms"]
-		},
-		"reality_modifier": {
-			"name": "Reality Modifier",
-			"lookup_name": "reality_modifier",
-			"description": "Tool for modifying the fundamental nature of reality",
-			"scene": "res://commons/primitives/tools/reality_modifier.tscn",
-			"position": [-1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["advanced_concepts"]
-		},
-		"concept_synthesizer": {
-			"name": "Concept Synthesizer",
-			"lookup_name": "concept_synthesizer",
-			"description": "Device for synthesizing abstract concepts into tangible forms",
-			"scene": "res://commons/primitives/tools/concept_synthesizer.tscn",
-			"position": [1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine", 
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["advanced_concepts"]
-		}
+  "artifact_definitions": {
+	"rotating_cube": {
+	  "id": "rotating_cube",
+	  "name": "Educational Sequence Portal",
+	  "description": "Gateway to learning sequences",
+	  "tscn_path": "res://commons/primitives/cubes/rotating_cube.tscn",
+	  "position": [2.0, 1.5, 2.0],
+	  "rotation": [0, 0, 0],
+	  "scale": [1.0, 1.0, 1.0],
+	  "is_active": true,
+	  "unlock_conditions": [],
+	  "category": "sequence_portal",
+	  "events": {
+		"on_artifact_activated": "handle_sequence_start",
+		"on_sequence_triggered": "handle_sequence_selection"
+	  },
+	  "lighting": {
+		"add_focused_light": true,
+		"light_color": [0.8, 0.9, 1.0],
+		"light_intensity": 2.0,
+		"light_range": 3.0
+	  }
 	},
-	
-	"spawn_rules": {
-		"initial_artifacts": ["rotating_cube"],
-		"max_artifacts_on_table": 12,
-		"spacing_between_artifacts": 0.5,
-		"auto_arrange_on_spawn": true
+
+	"grid_display": {
+	  "id": "grid_display", 
+	  "name": "Array Visualization Grid",
+	  "description": "Interactive 3D grid showing array concepts",
+	  "tscn_path": "res://commons/displays/GridArtifact.tscn",
+	  "position": [0.0, 1.2, 1.0],
+	  "rotation": [0, 45, 0],
+	  "scale": [0.5, 0.5, 0.5],
+	  "is_active": false,
+	  "unlock_conditions": ["rotating_cube_triggered"],
+	  "category": "educational_display",
+	  "events": {
+		"on_interaction": "handle_grid_tutorial"
+	  },
+	  "lighting": {
+		"add_focused_light": false,
+		"ambient_glow": true,
+		"glow_color": [0.0, 1.0, 0.6]
+	  }
+	},
+
+	"randomness_sign": {
+	  "id": "randomness_sign",
+	  "name": "Randomness & Probability Portal", 
+	  "description": "Gateway to randomness exploration",
+	  "tscn_path": "res://commons/displays/RandomnessSign.tscn",
+	  "position": [4.0, 1.3, 2.0],
+	  "rotation": [0, -30, 0],
+	  "scale": [1.0, 1.0, 1.0],
+	  "is_active": false,
+	  "unlock_conditions": ["array_tutorial_completed", "grid_display_interacted"],
+	  "category": "sequence_portal",
+	  "events": {
+		"on_interaction": "handle_randomness_sequence"
+	  },
+	  "lighting": {
+		"add_focused_light": true,
+		"light_color": [1.0, 0.3, 0.7],
+		"light_intensity": 1.5,
+		"light_range": 2.5
+	  }
 	}
-} 
+  },
+
+  "global_settings": {
+	"max_active_artifacts": 10,
+	"interaction_cooldown": 1.0,
+	"auto_save_state": true
+  }
+}

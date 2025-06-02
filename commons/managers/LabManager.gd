@@ -1,156 +1,223 @@
-# LabManager.gd - Simplified lab hub manager for lab.tscn
+# LabManager.gd - Artifact lifecycle management only
 extends Node3D
 class_name LabManager
 
-# Scene management
-@onready var artifact_pedestals = $ArtifactPedestals
-@onready var sequence_portals = $SequencePortals
+# Artifact management (NOT behavior)
+var artifact_definitions: Dictionary = {}
+var artifact_system_state: Dictionary = {}
+var artifact_instances: Dictionary = {}
 
-# Progress tracking
-var unlocked_sequences: Array[String] = ["array_tutorial"]
-var collected_artifacts: Dictionary = {}
+# Progression tracking
+var progression_manager: MapProgressionManager
+var current_lab_state: String = "initial"
 
 # Signals
-signal sequence_requested(sequence_name: String)
+signal artifact_unlocked(artifact_id: String)
+signal lab_state_changed(new_state: String)
 
 func _ready():
-	print("LabManager: Initializing lab hub")
-	_setup_sequence_portals()
-	_load_progress()
-	_update_displays()
-
-func _setup_sequence_portals():
-	print("LabManager: Setting up sequence portals")
+	print("LabManager: Initializing artifact management system")
+	progression_manager = MapProgressionManager.get_instance()
 	
-	# Find and configure array tutorial portal
-	var array_portal = sequence_portals.find_child("ArrayTutorialPortal")
-	if array_portal:
-		array_portal.body_entered.connect(_on_portal_entered.bind("array_tutorial"))
-		print("LabManager: Array tutorial portal configured")
-
-func _on_portal_entered(body: Node3D, sequence_name: String):
-	if body.name.begins_with("PlayerBody") or body.has_method("is_player"):
-		print("LabManager: Player entered %s portal" % sequence_name)
-		_start_sequence(sequence_name)
-
-func _start_sequence(sequence_name: String):
-	if sequence_name in unlocked_sequences:
-		print("LabManager: Starting sequence '%s'" % sequence_name)
-		sequence_requested.emit(sequence_name)
-		_transition_to_grid_scene(sequence_name)
-	else:
-		print("LabManager: Sequence '%s' not unlocked yet" % sequence_name)
-
-func _transition_to_grid_scene(sequence_name: String):
-	print("LabManager: Transitioning to grid scene for '%s'" % sequence_name)
+	_load_artifact_definitions()
+	_load_artifact_system_state()
+	_create_active_artifacts()
 	
-	# Store sequence info for grid scene
-	var sequence_data = {
-		"sequence_name": sequence_name,
-		"return_to": "lab"
+	print("LabManager: Managing %d artifact definitions" % artifact_definitions.size())
+
+func _load_artifact_definitions():
+	"""Load artifact definitions from JSON"""
+	var artifacts_path = "res://commons/artifacts/lab_artifacts.json"
+	
+	if not FileAccess.file_exists(artifacts_path):
+		print("LabManager: ERROR - lab_artifacts.json not found")
+		return
+	
+	var file = FileAccess.open(artifacts_path, FileAccess.READ)
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	if json.parse(json_text) == OK:
+		var data = json.data
+		artifact_definitions = data.get("artifact_definitions", {})
+		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
+
+func _load_artifact_system_state():
+	"""Load system state from JSON"""
+	var system_path = "res://commons/artifacts/lab_artifact_system.json"
+	
+	if not FileAccess.file_exists(system_path):
+		print("LabManager: Using default system state")
+		artifact_system_state = _get_default_system_state()
+		return
+	
+	var file = FileAccess.open(system_path, FileAccess.READ)
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	if json.parse(json_text) == OK:
+		artifact_system_state = json.data
+		print("LabManager: Loaded artifact system state")
+
+func _get_default_system_state() -> Dictionary:
+	"""Default system state - only rotating cube active"""
+	return {
+		"current_state": {
+			"active_artifacts": ["rotating_cube"],
+			"lab_lighting": "minimal_cube_focused"
+		},
+		"artifact_states": {
+			"rotating_cube": {"status": "active"},
+			"grid_display": {"status": "hidden"},
+			"randomness_sign": {"status": "hidden"}
+		}
 	}
-	
-	# Use staging to load grid scene
-	var staging = get_node("/root/VRStaging")
-	if staging and staging.has_method("load_scene"):
-		staging.set_meta("sequence_data", sequence_data)
-		staging.load_scene("res://commons/scenes/grid.tscn")
-	else:
-		print("LabManager: ERROR - Could not access VRStaging")
 
-func _load_progress():
-	print("LabManager: Loading progress from MapProgressionManager")
+func _create_active_artifacts():
+	"""Create and position active artifacts"""
+	var active_artifacts = artifact_system_state.get("current_state", {}).get("active_artifacts", ["rotating_cube"])
 	
-	# Get progress from progression manager
-	if MapProgressionManager:
-		var completed_maps = MapProgressionManager.get_completed_maps()
-		var unlocked_maps = MapProgressionManager.get_unlocked_maps()
+	for artifact_id in active_artifacts:
+		_instantiate_artifact(artifact_id)
+
+func _instantiate_artifact(artifact_id: String):
+	"""Instantiate an artifact from its tscn and position it"""
+	if not artifact_definitions.has(artifact_id):
+		print("LabManager: No definition for artifact: %s" % artifact_id)
+		return
+	
+	if artifact_instances.has(artifact_id):
+		print("LabManager: Artifact %s already exists" % artifact_id)
+		return
+	
+	var definition = artifact_definitions[artifact_id]
+	var tscn_path = definition.get("tscn_path", "")
+	
+	if not ResourceLoader.exists(tscn_path):
+		print("LabManager: Artifact scene not found: %s" % tscn_path)
+		return
+	
+	# Load and instantiate the artifact scene
+	var artifact_scene = load(tscn_path)
+	var artifact_instance = artifact_scene.instantiate()
+	
+	# Apply management properties ONLY
+	_apply_artifact_positioning(artifact_instance, definition)
+	_connect_artifact_management_signals(artifact_instance, artifact_id)
+	_add_artifact_lighting_if_specified(artifact_instance, definition)
+	
+	# Add to scene and track
+	add_child(artifact_instance)
+	artifact_instances[artifact_id] = artifact_instance
+	
+	print("LabManager: Instantiated artifact: %s" % artifact_id)
+
+func _apply_artifact_positioning(artifact_instance: Node3D, definition: Dictionary):
+	"""Apply position, rotation, scale from definition"""
+	var position = definition.get("position", [0, 0, 0])
+	var rotation = definition.get("rotation", [0, 0, 0])
+	var scale = definition.get("scale", [1, 1, 1])
+	
+	artifact_instance.position = Vector3(position[0], position[1], position[2])
+	artifact_instance.rotation_degrees = Vector3(rotation[0], rotation[1], rotation[2])
+	artifact_instance.scale = Vector3(scale[0], scale[1], scale[2])
+
+func _connect_artifact_management_signals(artifact_instance: Node3D, artifact_id: String):
+	"""Connect artifact signals for management purposes only"""
+	# Connect common artifact signals that affect management
+	if artifact_instance.has_signal("artifact_activated"):
+		artifact_instance.artifact_activated.connect(_on_artifact_activated.bind(artifact_id))
+	
+	if artifact_instance.has_signal("sequence_triggered"):
+		artifact_instance.sequence_triggered.connect(_on_sequence_triggered.bind(artifact_id))
+	
+	# Do NOT configure internal artifact behavior - tscn handles that
+
+func _add_artifact_lighting_if_specified(artifact_instance: Node3D, definition: Dictionary):
+	"""Add management lighting if specified in definition"""
+	var lighting = definition.get("lighting", {})
+	
+	if lighting.get("add_focused_light", false):
+		var light = OmniLight3D.new()
+		light.name = "ManagementLight"
 		
-		print("LabManager: Completed maps: %s" % str(completed_maps))
-		print("LabManager: Unlocked maps: %s" % str(unlocked_maps))
+		var light_color = lighting.get("light_color", [1.0, 1.0, 1.0])
+		light.light_color = Color(light_color[0], light_color[1], light_color[2])
+		light.light_energy = lighting.get("light_intensity", 2.0)
+		light.omni_range = lighting.get("light_range", 3.0)
+		light.position = Vector3(0, 0.5, 0)
 		
-		# Update unlocked sequences based on progress
-		_update_unlocked_sequences(completed_maps)
+		artifact_instance.add_child(light)
 
-func _update_unlocked_sequences(completed_maps: Array):
-	# Start with array tutorial always available
-	unlocked_sequences = ["array_tutorial"]
+# Management signal handlers
+func _on_artifact_activated(artifact_id: String):
+	"""Handle artifact activation for management purposes"""
+	print("LabManager: Artifact activated: %s" % artifact_id)
 	
-	# Unlock more sequences based on completion
-	if "Tutorial_Disco" in completed_maps:
-		unlocked_sequences.append("randomness_exploration")
+	# Update progression and unlock new artifacts
+	_handle_artifact_progression(artifact_id)
+
+func _on_sequence_triggered(artifact_id: String, sequence_name: String):
+	"""Handle sequence trigger for management purposes"""
+	print("LabManager: Sequence '%s' triggered by %s" % [sequence_name, artifact_id])
 	
-	print("LabManager: Unlocked sequences: %s" % str(unlocked_sequences))
+	# Management can track this for progression
+	_handle_sequence_progression(artifact_id, sequence_name)
 
-func _update_displays():
-	print("LabManager: Updating artifact displays")
-	_update_artifact_pedestals()
-	_update_portal_states()
-
-func _update_artifact_pedestals():
-	# Update artifact displays based on collected artifacts
-	for i in range(artifact_pedestals.get_child_count()):
-		var pedestal = artifact_pedestals.get_child(i)
-		if i < collected_artifacts.size():
-			_display_artifact_on_pedestal(pedestal, i)
-		else:
-			_clear_pedestal(pedestal)
-
-func _display_artifact_on_pedestal(pedestal: Node3D, artifact_index: int):
-	# Create visual representation of artifact
-	var artifact_mesh = pedestal.find_child("ArtifactMesh")
-	if not artifact_mesh:
-		artifact_mesh = MeshInstance3D.new()
-		artifact_mesh.name = "ArtifactMesh"
-		pedestal.add_child(artifact_mesh)
-	
-	# Simple sphere for now - can be improved later
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.2
-	artifact_mesh.mesh = sphere_mesh
-	
-	print("LabManager: Displayed artifact %d on pedestal" % artifact_index)
-
-func _clear_pedestal(pedestal: Node3D):
-	var artifact_mesh = pedestal.find_child("ArtifactMesh")
-	if artifact_mesh:
-		artifact_mesh.queue_free()
-
-func _update_portal_states():
-	# Update portal visual states based on unlocked sequences
-	for portal in sequence_portals.get_children():
-		var sequence_name = portal.name.replace("Portal", "").to_snake_case()
-		var is_unlocked = sequence_name in unlocked_sequences
-		_set_portal_state(portal, is_unlocked)
-
-func _set_portal_state(portal: Node3D, unlocked: bool):
-	var portal_mesh = portal.find_child("PortalMesh")
-	if portal_mesh:
-		var material = portal_mesh.get_surface_override_material(0)
-		if not material:
-			material = StandardMaterial3D.new()
-			portal_mesh.set_surface_override_material(0, material)
+func _handle_artifact_progression(artifact_id: String):
+	"""Handle progression unlocks when artifact is activated"""
+	# Check what should be unlocked based on this activation
+	for check_artifact_id in artifact_definitions.keys():
+		var definition = artifact_definitions[check_artifact_id]
+		var unlock_conditions = definition.get("unlock_conditions", [])
 		
-		if unlocked:
-			material.albedo_color = Color.GREEN
-			material.emission = Color.GREEN * 0.3
-		else:
-			material.albedo_color = Color.GRAY
-			material.emission = Color.BLACK
+		# Simple check - if this artifact triggered unlocks another
+		var unlock_trigger = artifact_id + "_triggered"
+		if unlock_trigger in unlock_conditions:
+			_unlock_artifact(check_artifact_id)
 
-# Called when returning from grid scene with artifacts
-func add_artifacts(artifacts: Array):
-	print("LabManager: Adding artifacts: %s" % str(artifacts))
+func _unlock_artifact(artifact_id: String):
+	"""Unlock and instantiate a new artifact"""
+	if artifact_instances.has(artifact_id):
+		return  # Already exists
 	
-	for artifact in artifacts:
-		if artifact.has("id"):
-			collected_artifacts[artifact.id] = artifact
+	print("LabManager: Unlocking artifact: %s" % artifact_id)
 	
-	_update_displays()
+	# Add to active artifacts
+	var current_state = artifact_system_state.get("current_state", {})
+	var active_artifacts = current_state.get("active_artifacts", [])
+	
+	if not artifact_id in active_artifacts:
+		active_artifacts.append(artifact_id)
+		_instantiate_artifact(artifact_id)
+		
+		# Update system state
+		artifact_system_state["artifact_states"][artifact_id]["status"] = "active"
+		
+		# Emit unlock signal
+		artifact_unlocked.emit(artifact_id)
 
-# Public API
-func get_unlocked_sequences() -> Array[String]:
-	return unlocked_sequences
+func _handle_sequence_progression(artifact_id: String, sequence_name: String):
+	"""Track sequence progression for future unlocks"""
+	# This is where the manager tracks educational progress
+	# without interfering with the actual sequence execution
+	pass
 
-func is_sequence_unlocked(sequence_name: String) -> bool:
-	return sequence_name in unlocked_sequences 
+# Public API - Management functions only
+func get_active_artifacts() -> Array:
+	return artifact_system_state.get("current_state", {}).get("active_artifacts", [])
+
+func get_artifact_instance(artifact_id: String) -> Node3D:
+	return artifact_instances.get(artifact_id, null)
+
+func is_artifact_active(artifact_id: String) -> bool:
+	return artifact_instances.has(artifact_id)
+
+func force_unlock_artifact(artifact_id: String):
+	"""Force unlock for testing"""
+	_unlock_artifact(artifact_id)
+
+func get_artifact_definitions() -> Dictionary:
+	return artifact_definitions
