@@ -47,7 +47,7 @@ func _load_artifact_definitions():
 	
 	var json = JSON.new()
 	if json.parse(json_text) == OK:
-		artifact_definitions = json.data.get("artifact_definitions", {})
+		artifact_definitions = json.data.get("artifacts", {})
 		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
 
 func _load_artifact_system_state():
