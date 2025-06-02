@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbpjx3b6wajb4"]
+
+[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
+
+[node name="Base" instance=ExtResource("1_qxwn1")]
+
+[node name="LabManager" type="Node3D" parent="." index="5"]
