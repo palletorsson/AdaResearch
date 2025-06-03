@@ -84,14 +84,7 @@ const UTILITY_TYPES = {
 		"description": "Information and instruction displays",
 		"supports_parameters": false
 	},
-	"e": {
-		"name": "exit_portal", 
-		"file": "teleport_scene.tscn", 
-		"category": "transport",
-		"description": "Exit portal for level progression - step here to advance",
-		"supports_parameters": true
-	},
-	
+
 	# Navigation utilities
 	"arrow": {
 		"name": "exit_arrow", 

@@ -41,9 +41,12 @@ func _ready():
 # Connect to lab manager for artifact activations
 func connect_to_lab_manager(lab_manager: LabManager):
 	if lab_manager:
-		lab_manager.artifact_activated.connect(_on_artifact_activated)
-		lab_manager.progression_event.connect(_on_progression_event)
-		print("SceneManager: Connected to LabManager")
+		pass
+		# E 0:00:06:634   SceneManager.gd:44 @ connect_to_lab_manager(): Signal 'artifact_activated' is already connected to given callable 'Node(SceneManager)::_on_artifact_activated' in that object.
+		# lab_manager.artifact_activated.connect(_on_artifact_activated)
+		# E 0:00:06:635   SceneManager.gd:45 @ connect_to_lab_manager(): Signal 'progression_event' is already connected to given callable 'Node(SceneManager)::_on_progression_event' in that object.
+		#lab_manager.progression_event.connect(_on_progression_event)
+		# print("SceneManager: Connected to LabManager")
 
 # Connect to grid system for teleporter/trigger events
 func connect_to_grid_system(grid_system: Node):
@@ -114,12 +117,7 @@ func _on_utility_activated(utility_type: String, position: Vector3, utility_data
 				"destination": destination,
 				"spawn_point": utility_data.get("spawn_point", "default")
 			})
-		"e", "exit_portal":  # Exit portal
-			request_transition({
-				"type": TransitionType.TELEPORTER,
-				"source": "exit_portal",
-				"action": "next_in_sequence"
-			})
+
 		_:
 			print("SceneManager: Unhandled utility type: %s" % utility_type)
 
