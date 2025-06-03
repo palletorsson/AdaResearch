@@ -34,12 +34,12 @@ func load_map(map_path: String) -> bool:
 	map_data = json.data
 	is_loaded = true
 	
-	# Create data adapter instances
+	# Create data adapter instances FIRST
 	structure_data_instance = JsonStructureDataAdapter.new()
-
+	utility_data_instance = JsonUtilityDataAdapter.new()  # Create this!
 	interactable_data_instance = JsonInteractableDataAdapter.new()
 	
-	# Extract data from JSON
+	# THEN extract data from JSON
 	structure_data_instance.layout_data = map_data.get("layers", {}).get("structure", [])
 	utility_data_instance.layout_data = map_data.get("layers", {}).get("utilities", [])
 	utility_data_instance.map_name = get_map_name()
@@ -49,6 +49,12 @@ func load_map(map_path: String) -> bool:
 	print("JsonMapLoader: Successfully loaded map '%s'" % get_map_name())
 	return true
 
+# Add the missing JsonUtilityDataAdapter class
+class JsonUtilityDataAdapter extends RefCounted:
+	var layout_data: Array = []
+	var map_name: String = ""
+	var description: String = ""
+	
 # Get map information
 func get_map_name() -> String:
 	return map_data.get("map_info", {}).get("name", "unknown")

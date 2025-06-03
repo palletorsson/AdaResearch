@@ -407,7 +407,12 @@ func set_staging_reference(staging: Node):
 
 func auto_connect_to_scene():
 	"""Automatically connect to current scene systems"""
-	var scene = get_tree().current_scene
+	var scene = get_tree().current_scene if get_tree() else null
+	if not scene:
+		print("SceneManager: No current scene available for auto-connection")
+		return
+	
+	print("SceneManager: Auto-connecting to scene: %s" % scene.name)
 	
 	# Connect to grid system if present
 	var grid_system = scene.find_child("GridSystem", true, false)
@@ -415,16 +420,18 @@ func auto_connect_to_scene():
 		grid_system = scene.find_child("multiLayerGrid", true, false)
 	if grid_system:
 		connect_to_grid_system(grid_system)
+		print("SceneManager: Connected to grid system: %s" % grid_system.name)
 	
 	# Connect to lab manager if present
 	var lab_manager = scene.find_child("LabManager", true, false)
-	if lab_manager:
+	if lab_manager and lab_manager is LabManager:
 		connect_to_lab_manager(lab_manager)
+		print("SceneManager: Connected to lab manager: %s" % lab_manager.name)
 	
 	# Connect to trigger zones
 	connect_to_trigger_zones()
 	
-	print("SceneManager: Auto-connected to scene systems")
+	print("SceneManager: Auto-connection complete")
 
 # =============================================================================
 # LEGACY COMPATIBILITY (remove later)

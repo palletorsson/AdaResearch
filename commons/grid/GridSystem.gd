@@ -12,7 +12,7 @@ class_name GridSystem
 @export var showgrid: bool = false
 
 # Map selection
-@export var map_name: String = "Intro_0"
+@export var map_name: String = "Tutorial_Start"
 @export var reload_map: bool = false : set = reload_map_setter
 
 # Path constants
@@ -45,7 +45,7 @@ var utility_data_instance
 var interactable_data_instance
 
 # Components
-@onready var base_cube = $CubeBaseStaticBody3D
+@onready var base_cube = $CubeScene
 @onready var algorithm_registry = AlgorithmRegistry.new()
 
 # Scene cache

@@ -18,19 +18,25 @@ func _ready():
 	# Get the root of base scene (the XRToolsSceneBase)
 	base_scene_root = get_parent()
 	
-	# Create and configure SceneManager
-	_setup_scene_manager()
-	
-	# Emit signal for other nodes
-	scene_manager_ready.emit(scene_manager)
-	
-	print("BaseSceneAddon: SceneManager available for scene: %s" % base_scene_root.name)
+	# Defer scene manager creation to avoid timing issues
+	call_deferred("_setup_scene_manager")
 
 func _setup_scene_manager():
 	"""Create and configure the SceneManager"""
+	# Make sure we're still valid and in the tree
+	if not is_inside_tree() or not base_scene_root:
+		print("BaseSceneAddon: Not in tree or no base root, skipping setup")
+		return
+	
 	scene_manager = SceneManager.new()
 	scene_manager.name = "SceneManager"
-	base_scene_root.add_child(scene_manager)
+	
+	# Use call_deferred to add child safely
+	base_scene_root.call_deferred("add_child", scene_manager)
+	
+	# Wait for the child to be added, then continue setup
+	await get_tree().process_frame
+	await get_tree().process_frame
 	
 	# Set staging reference
 	var staging = _find_vr_staging()
@@ -40,13 +46,31 @@ func _setup_scene_manager():
 	
 	# Auto-connect to scene systems after a brief delay
 	call_deferred("_auto_connect_scene_manager")
+	
+	# Emit signal for other nodes
+	scene_manager_ready.emit(scene_manager)
+	
+	print("BaseSceneAddon: SceneManager available for scene: %s" % base_scene_root.name)
 
 func _auto_connect_scene_manager():
 	"""Automatically connect SceneManager to available systems"""
-	await get_tree().process_frame  # Wait for scene to fully load
+	if not scene_manager:
+		print("BaseSceneAddon: No SceneManager to auto-connect")
+		return
 	
-	scene_manager.auto_connect_to_scene()
-	print("BaseSceneAddon: SceneManager auto-connected to scene systems")
+	# Wait for scene to fully load
+	await get_tree().process_frame
+	await get_tree().process_frame  # Extra frame for safety
+	
+	print("BaseSceneAddon: Auto-connecting SceneManager to scene systems")
+	
+	# Safely call auto-connect
+	if scene_manager.has_method("auto_connect_to_scene"):
+		scene_manager.auto_connect_to_scene()
+	else:
+		print("BaseSceneAddon: SceneManager has no auto_connect_to_scene method")
+	
+	print("BaseSceneAddon: SceneManager auto-connection complete")
 
 func _find_vr_staging() -> Node:
 	"""Find VR staging in the tree"""
