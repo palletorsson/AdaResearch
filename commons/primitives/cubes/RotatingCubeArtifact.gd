@@ -43,18 +43,10 @@ func _setup_visual_components():
 	
 	# Load the cube scene
 	var cube_scene = load(CUBE_SCENE_PATH) as PackedScene
-	if not cube_scene:
-		print("ERROR: RotatingCubeArtifact: Could not load cube scene: %s" % CUBE_SCENE_PATH)
-		_fallback_cube_creation()
-		return
 	
 	# Instantiate the cube
 	cube_instance = cube_scene.instantiate()
-	if not cube_instance:
-		print("ERROR: RotatingCubeArtifact: Could not instantiate cube scene")
-		_fallback_cube_creation()
-		return
-	
+	cube_instance.scale = Vector3(0.5, 0.5, 0.5)
 	# Add to scene and make visible
 	add_child(cube_instance)
 	cube_instance.visible = true
@@ -62,13 +54,6 @@ func _setup_visual_components():
 	# Find the mesh instance in the cube scene
 	cube_mesh_instance = _find_mesh_instance(cube_instance)
 	
-	if cube_mesh_instance:
-		# Configure the cube for artifact use
-		_configure_cube_appearance()
-		print("RotatingCubeArtifact: Successfully loaded cube_scene.tscn")
-	else:
-		print("WARNING: RotatingCubeArtifact: Could not find MeshInstance3D in cube scene")
-		_fallback_cube_creation()
 
 func _find_mesh_instance(node: Node) -> MeshInstance3D:
 	"""Find the MeshInstance3D in the cube scene hierarchy"""
@@ -85,56 +70,7 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 	
 	return null
 
-func _configure_cube_appearance():
-	"""Configure the cube's appearance for the artifact"""
-	
-	if not cube_mesh_instance:
-		return
-	
-	# Scale the cube to artifact size
-	cube_instance.scale = Vector3(0.2, 0.2, 0.2)
-	
-	# Create artifact material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.CYAN
-	material.emission_enabled = true
-	material.emission = Color.CYAN * 0.3
-	material.metallic = 0.5
-	material.roughness = 0.3
-	
-	# Apply material to the cube
-	cube_mesh_instance.material_override = material
-	
-	# Disable any collision (we don't want physics on the artifact)
-	var static_body = cube_instance.find_child("CubeBaseStaticBody3D")
-	if static_body:
-		static_body.process_mode = Node.PROCESS_MODE_DISABLED
-	
-	print("RotatingCubeArtifact: Configured cube appearance")
 
-func _fallback_cube_creation():
-	"""Fallback method if cube_scene.tscn can't be loaded"""
-	print("RotatingCubeArtifact: Using fallback cube creation")
-	
-	# Create mesh instance
-	cube_mesh_instance = MeshInstance3D.new()
-	var cube_mesh = BoxMesh.new()
-	cube_mesh.size = Vector3(0.2, 0.2, 0.2)
-	cube_mesh_instance.mesh = cube_mesh
-	
-	# Create material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.CYAN
-	material.emission_enabled = true
-	material.emission = Color.CYAN * 0.3
-	material.metallic = 0.5
-	material.roughness = 0.3
-	cube_mesh_instance.material_override = material
-	
-	add_child(cube_mesh_instance)
-	cube_instance = cube_mesh_instance
-	
-	print("RotatingCubeArtifact: Fallback cube created")
 
 func _process(delta):
 	if not cube_instance:

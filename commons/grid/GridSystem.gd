@@ -458,64 +458,63 @@ func _find_spawn_point_utility() -> Vector3:
 
 # NEW METHOD: Position player at grid-based spawn point
 func _position_player_at_grid_spawn(grid_position: Vector3):
-	"""Position player at a grid-based spawn point - FIXED height calculation"""
+	"""Position player at a grid-based spawn point - Simplified version"""
 	# Find the VR origin
 	var vr_origin = _find_vr_origin()
 	if not vr_origin:
 		print("GridSystem: WARNING - Could not find VR origin for spawn positioning")
 		return
 
-	# Find the actual spawn point utility object to read its properties
-	var spawn_point_utility = _find_spawn_point_object_at(grid_position)
-	var player_rotation = 0.0  # Default rotation
-	var player_height = 1.8    # Default VR height
-	
-	if spawn_point_utility:
-		# Read properties from metadata
-		if spawn_point_utility.has_meta("player_rotation"):
-			player_rotation = spawn_point_utility.get_meta("player_rotation")
-			print("GridSystem: Using spawn point player rotation: %f degrees" % player_rotation)
-		
-		if spawn_point_utility.has_meta("height"):
-			player_height = spawn_point_utility.get_meta("height")
-			print("GridSystem: Using spawn point height: %f" % player_height)
-	else:
-		# Fallback to JSON utility definition height
-		player_height = _get_spawn_point_height()
+	# DEBUG: Check current position
+	print("GridSystem: 🔍 VR Origin BEFORE positioning: %s" % vr_origin.global_position)
+
+	# Get spawn properties from JSON (much simpler!)
+	var player_height = _get_spawn_point_height()
+	var player_rotation = _get_spawn_point_rotation()
 
 	# Convert grid coordinates to world coordinates
 	var total_size = cube_size + gutter
 	var world_position = grid_position * total_size
 	
-	# Use the spawn height as absolute player height
+	# Use reasonable height (clamp to avoid extreme values)
+	player_height = clamp(player_height, 1.5, 3.0)  # Reasonable VR height range
 	var final_position = Vector3(world_position.x, player_height, world_position.z)
 	
-	# Apply position and rotation from spawn point
+	# Apply position and rotation
 	vr_origin.global_position = final_position
 	vr_origin.global_rotation_degrees = Vector3(0, player_rotation, 0)
 	
-	print("GridSystem: ✓ Player positioned at grid spawn point")
+	print("GridSystem: ✓ Player positioned at spawn point")
 	print("  Grid position: %s" % grid_position)
-	print("  World position: %s" % world_position)  
 	print("  Final position: %s (height: %f)" % [final_position, player_height])
 	print("  Player rotation: %f degrees" % player_rotation)
+	
+	# DEBUG: Check position immediately after setting
+	print("GridSystem: 🔍 VR Origin AFTER positioning: %s" % vr_origin.global_position)
+	
+	# Wait and check again to see if something overrides it
+	await get_tree().process_frame
+	print("GridSystem: 🔍 VR Origin after 1 frame: %s" % vr_origin.global_position)
+	
+	await get_tree().process_frame
+	print("GridSystem: 🔍 VR Origin after 2 frames: %s" % vr_origin.global_position)
 	
 	# Apply spawn transition
 	_apply_spawn_transition_effect(vr_origin, {"description": "Grid-based spawn point"})
 
-# NEW METHOD: Find spawn point utility object at grid position
-func _find_spawn_point_object_at(grid_position: Vector3) -> Node3D:
-	"""Find the actual spawn point utility object at the given grid position"""
-	var utility_key = Vector3i(int(grid_position.x), int(grid_position.y), int(grid_position.z))
+# NEW METHOD: Get spawn point rotation from JSON
+func _get_spawn_point_rotation() -> float:
+	"""Get spawn point rotation from JSON utility definition"""
+	if current_map_format == "json" and json_loader:
+		var utility_definitions = json_loader.get_utility_definitions()
+		var spawn_def = utility_definitions.get("s", {})
+		var properties = spawn_def.get("properties", {})
+		
+		# Get player_rotation from properties (default to 0)
+		var rotation = properties.get("player_rotation", 0.0)
+		return float(rotation)
 	
-	if utility_objects.has(utility_key):
-		var utility_obj = utility_objects[utility_key]
-		if is_instance_valid(utility_obj):
-			print("GridSystem: Found spawn point utility object with metadata")
-			return utility_obj
-	
-	print("GridSystem: No spawn point utility object found at grid position %s" % grid_position)
-	return null
+	return 0.0  # Default rotation
 
 # NEW METHOD: Get spawn point height from utility definition
 func _get_spawn_point_height() -> float:
@@ -527,7 +526,6 @@ func _get_spawn_point_height() -> float:
 		
 		# Get height from properties (default to 1.8 for VR player height)
 		var height = properties.get("height", 1.8)
-		print("GridSystem: Using spawn height: %f" % height)
 		return height
 	
 	return 1.8  # Default VR player height
