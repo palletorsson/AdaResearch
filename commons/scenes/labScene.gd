@@ -4,8 +4,8 @@
 extends Node3D
 
 # References
-@onready var lab_manager = $LabManager
-@onready var xr_origin = $XROrigin3D
+@onready var lab_manager = $"."
+@onready var xr_origin = $"../XROrigin3D"
 
 # State
 var cube_triggered: bool = false

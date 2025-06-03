@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=6 format=3 uid="uid://dbpjx3b6wajb4"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
 [ext_resource type="Script" uid="uid://0rwrif23d50d" path="res://commons/managers/LabManager.gd" id="2_isue8"]
+[ext_resource type="Script" uid="uid://ce3huik5day7d" path="res://commons/scenes/labScene.gd" id="3_v8jo4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qxwn1"]
 
@@ -27,4 +28,5 @@ mesh = SubResource("BoxMesh_qxwn1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
 shape = SubResource("BoxShape3D_isue8")
 
-[node name="LabSxene" type="Node3D" parent="." index="6"]
+[node name="LabScene" type="Node3D" parent="." index="6"]
+script = ExtResource("3_v8jo4")

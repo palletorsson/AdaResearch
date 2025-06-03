@@ -3,7 +3,7 @@
 
 extends Node3D
 
-@onready var grid_system = $GridSystem
+@onready var grid_system = $"../GridSystem"
 
 # Sequence management
 var sequence_data: Dictionary = {}
