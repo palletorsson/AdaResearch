@@ -18,7 +18,7 @@ class_name GridSystem
 # Path constants
 const MAPS_PATH = "res://commons/maps/"
 const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
-
+const UTILITY_SCENE_BASE_PATH = "res://commons/scenes/mapobjects/"
 # Grid properties
 var grid_x: int
 var grid_z: int
@@ -43,7 +43,7 @@ var prefer_json_format: bool = true
 var structure_data_instance
 var utility_data_instance
 var interactable_data_instance
-
+var _scene_cache = {}
 # Components
 @onready var base_cube = $CubeScene
 @onready var algorithm_registry = AlgorithmRegistry.new()
@@ -120,6 +120,54 @@ func _load_json_map() -> void:
 		_finalize_map_loading()
 	else:
 		print("ERROR: Failed to load JSON map")
+
+func _load_scene(p_scene_identifier: String) -> PackedScene:
+	var resolved_path: String
+
+	# 1. Resolve the full path to the scene file.
+	if p_scene_identifier.begins_with("res://"):
+		# Assume p_scene_identifier is already a full path.
+		resolved_path = p_scene_identifier
+	else:
+		# Assume p_scene_identifier is a base filename; prepend the known base path.
+		# This is where you ensure the correct directory is used.
+		resolved_path = UTILITY_SCENE_BASE_PATH.path_join(p_scene_identifier)
+
+	# 2. Check if the scene is already in the cache.
+	if _scene_cache.has(resolved_path):
+		print_debug("GridSystem: Loading scene from cache: %s" % resolved_path)
+		return _scene_cache[resolved_path]
+
+	# 3. If not in cache, attempt to load it from disk.
+	if ResourceLoader.exists(resolved_path):
+		print_debug("GridSystem: Loading scene from disk: %s" % resolved_path)
+		var resource = ResourceLoader.load(resolved_path) # Use ResourceLoader for clarity
+
+		if resource is PackedScene:
+			_scene_cache[resolved_path] = resource # Add to cache for next time
+			return resource
+		else:
+			# The file exists but it's not a PackedScene (or failed to load as one).
+			printerr("GridSystem ERROR: Resource at path '%s' is not a PackedScene." % resolved_path)
+			return null
+	else:
+		# The file does not exist at the resolved path.
+		printerr("GridSystem ERROR: Scene file not found at resolved path: %s (Original identifier: '%s')" % [resolved_path, p_scene_identifier])
+		return null
+
+# Optional: A method to allow clearing the cache if necessary (e.g., on map changes).
+func clear_scene_cache() -> void:
+	_scene_cache.clear()
+	print_debug("GridSystem: Scene cache cleared.")
+
+# Optional: A method for preloading common scenes to populate the cache.
+func preload_common_scenes(scene_identifiers: Array) -> void:
+	for identifier in scene_identifiers:
+		var scene = _load_scene(identifier) # Call _load_scene to load and cache it
+		if scene == null:
+			printerr("GridSystem WARNING: Failed to preload scene: %s" % identifier)
+	print_debug("GridSystem: Finished preloading scenes.")
+
 
 func _finalize_map_loading() -> void:
 	# Wait for algorithm registry if needed
