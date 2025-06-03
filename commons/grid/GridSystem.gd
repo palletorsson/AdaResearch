@@ -405,6 +405,11 @@ func _apply_interactable_data() -> void:
 func _handle_player_spawn():
 	"""Position player at spawn point after map is loaded"""
 	print("GridSystem: Handling player spawn positioning...")
+	# Wait longer for VR system to be fully ready
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame  # Extra frames for VR initialization
+	await get_tree().create_timer(0.5).timeout  # Half second delay for VR to settle
 	
 	# Look for spawn point utilities in the grid first
 	var spawn_point_position = _find_spawn_point_utility()
@@ -418,7 +423,7 @@ func _handle_player_spawn():
 
 # NEW METHOD: Find spawn point utilities in the grid
 func _find_spawn_point_utility() -> Vector3:
-	"""Find spawn point utilities placed in the grid"""
+	"""Find spawn point utilities in the grid - FIXED coordinate conversion"""
 	if not utility_data_instance:
 		return Vector3.ZERO
 	
@@ -441,36 +446,76 @@ func _find_spawn_point_utility() -> Vector3:
 			if utility_type == "s":
 				# Find the highest Y position at this grid location
 				var y_pos = _find_highest_y_at(x, z)
-				var world_position = Vector3(x, y_pos, z) * total_size
 				
-				print("GridSystem: Found spawn point 's' at grid(%d, %d, %d) -> world%s" % [x, y_pos, z, world_position])
-				return world_position
+				# FIXED: Return grid coordinates, not world coordinates
+				# We'll convert to world coordinates in the positioning method
+				var grid_position = Vector3(x, y_pos, z)
+				
+				print("GridSystem: Found spawn point 's' at array[%d][%d] -> grid(%d, %d, %d)" % [z, x, x, y_pos, z])
+				return grid_position
 	
 	return Vector3.ZERO
 
 # NEW METHOD: Position player at grid-based spawn point
-func _position_player_at_grid_spawn(world_position: Vector3):
-	"""Position player at a grid-based spawn point"""
+func _position_player_at_grid_spawn(grid_position: Vector3):
+	"""Position player at a grid-based spawn point - FIXED height calculation"""
 	# Find the VR origin
 	var vr_origin = _find_vr_origin()
 	if not vr_origin:
 		print("GridSystem: WARNING - Could not find VR origin for spawn positioning")
 		return
+
+	# Find the actual spawn point utility object to read its properties
+	var spawn_point_utility = _find_spawn_point_object_at(grid_position)
+	var player_rotation = 0.0  # Default rotation
+	var player_height = 1.8    # Default VR height
 	
-	# Get spawn point properties from utility definition
-	var spawn_height = _get_spawn_point_height()
-	var final_position = world_position + Vector3(0, spawn_height, 0)
+	if spawn_point_utility:
+		# Read properties from metadata
+		if spawn_point_utility.has_meta("player_rotation"):
+			player_rotation = spawn_point_utility.get_meta("player_rotation")
+			print("GridSystem: Using spawn point player rotation: %f degrees" % player_rotation)
+		
+		if spawn_point_utility.has_meta("height"):
+			player_height = spawn_point_utility.get_meta("height")
+			print("GridSystem: Using spawn point height: %f" % player_height)
+	else:
+		# Fallback to JSON utility definition height
+		player_height = _get_spawn_point_height()
+
+	# Convert grid coordinates to world coordinates
+	var total_size = cube_size + gutter
+	var world_position = grid_position * total_size
 	
-	# Apply position and default rotation
+	# Use the spawn height as absolute player height
+	var final_position = Vector3(world_position.x, player_height, world_position.z)
+	
+	# Apply position and rotation from spawn point
 	vr_origin.global_position = final_position
-	vr_origin.global_rotation_degrees = Vector3(0, 0, 0)  # Face forward by default
+	vr_origin.global_rotation_degrees = Vector3(0, player_rotation, 0)
 	
 	print("GridSystem: ✓ Player positioned at grid spawn point")
-	print("  Grid position: %s" % world_position)
-	print("  Final position: %s (with height offset: %f)" % [final_position, spawn_height])
+	print("  Grid position: %s" % grid_position)
+	print("  World position: %s" % world_position)  
+	print("  Final position: %s (height: %f)" % [final_position, player_height])
+	print("  Player rotation: %f degrees" % player_rotation)
 	
 	# Apply spawn transition
 	_apply_spawn_transition_effect(vr_origin, {"description": "Grid-based spawn point"})
+
+# NEW METHOD: Find spawn point utility object at grid position
+func _find_spawn_point_object_at(grid_position: Vector3) -> Node3D:
+	"""Find the actual spawn point utility object at the given grid position"""
+	var utility_key = Vector3i(int(grid_position.x), int(grid_position.y), int(grid_position.z))
+	
+	if utility_objects.has(utility_key):
+		var utility_obj = utility_objects[utility_key]
+		if is_instance_valid(utility_obj):
+			print("GridSystem: Found spawn point utility object with metadata")
+			return utility_obj
+	
+	print("GridSystem: No spawn point utility object found at grid position %s" % grid_position)
+	return null
 
 # NEW METHOD: Get spawn point height from utility definition
 func _get_spawn_point_height() -> float:

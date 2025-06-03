@@ -41,6 +41,11 @@ func connect_utility(utility_object: Node3D, utility_type: String):
 		utility_object.teleporter_activated.connect(_on_teleporter_activated.bind(utility_object))
 		print("UtilitySignalRouter: Connected teleporter_activated signal")
 	
+	# Connect exit teleporter signals (completes sequence)
+	if utility_type == "exit" and utility_object.has_signal("teleporter_activated"):
+		utility_object.teleporter_activated.connect(_on_exit_activated.bind(utility_object))
+		print("UtilitySignalRouter: Connected exit teleporter_activated signal")
+	
 	# Connect common utility signals
 	if utility_object.has_signal("activated"):
 		utility_object.activated.connect(_on_utility_activated.bind(utility_type, utility_object))
@@ -61,6 +66,22 @@ func _on_teleporter_activated(utility_object: Node3D):
 		"action": "next_in_sequence",
 		"source": "teleporter",
 		"position": utility_object.global_position
+	})
+
+# Handle exit activation - complete sequence and return to lab
+func _on_exit_activated(utility_object: Node3D):
+	print("UtilitySignalRouter: Exit activated - requesting sequence completion")
+	
+	# Tell SceneManager to complete the sequence and return to lab
+	scene_manager.request_transition({
+		"type": SceneManager.TransitionType.SEQUENCE_COMPLETE,
+		"action": "return_to_hub",
+		"source": "exit_teleporter",
+		"position": utility_object.global_position,
+		"completion_data": {
+			"exit_reason": "sequence_completed",
+			"completion_time": Time.get_datetime_string_from_system()
+		}
 	})
 
 # Handle utility activation

@@ -6,7 +6,7 @@
 		"format": "json",
 		"created_from": "new_minimal_design",
 		"dimensions": {
-			"width": 3,
+			"width": 1,
 			"depth": 3,
 			"max_height": 1
 		},
@@ -24,9 +24,9 @@
 			["1", "1", "1"]
 		],
 		"utilities": [
-			[" ", "s", " "],
+			["s", " ", " "],
 			[" ", " ", " "],
-			[" ", "t", " "]
+			["t", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " "],
@@ -50,14 +50,6 @@
 			"height": 5.5 
 		}
 	}
-	},
-	
-	"spawn_points": {
-		"default": {
-			"position": [0, 1.5, 0],
-			"rotation": [0, 0, 0],
-			"description": "Player starts on the left cube, facing the exit"
-		}
 	},
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],

@@ -79,6 +79,8 @@ func _configure_utility_object(utility_object: Node3D, utility_type: String, def
 	match utility_type:
 		"t":  # Teleporter
 			_configure_teleporter(utility_object, definition)
+		"e":  # Exit (sequence completion)
+			_configure_exit(utility_object, definition)
 		"s":  # Spawn Point
 			_configure_spawn_point(utility_object, definition)
 		"p":  # Platform
@@ -117,46 +119,93 @@ func _connect_teleporter_to_scene_manager(teleporter: Node3D):
 func _configure_spawn_point(spawn_point: Node3D, definition: Dictionary) -> void:
 	var properties = definition.get("properties", {})
 	
+	print("EnhancedUtilityHandler: Configuring spawn point with definition: %s" % definition)
+	
+	# Store spawn point properties as metadata since spawn_point_scene.tscn has no script
 	# Set spawn point name
-	if definition.has("name") and "spawn_name" in spawn_point:
-		spawn_point.spawn_name = definition["name"]
-	elif properties.has("spawn_name") and "spawn_name" in spawn_point:
-		spawn_point.spawn_name = properties["spawn_name"]
+	var spawn_name = "unknown"
+	if definition.has("name"):
+		spawn_name = definition["name"]
+		spawn_point.set_meta("spawn_name", spawn_name)
+	elif properties.has("spawn_name"):
+		spawn_name = properties["spawn_name"]
+		spawn_point.set_meta("spawn_name", spawn_name)
 	
 	# Set priority
-	if properties.has("priority") and "priority" in spawn_point:
-		spawn_point.priority = int(properties["priority"])
+	var priority = 0
+	if properties.has("priority"):
+		priority = int(properties["priority"])
+		spawn_point.set_meta("priority", priority)
 	
 	# Set rotation
-	if properties.has("rotation") and "spawn_rotation" in spawn_point:
+	if properties.has("rotation"):
 		var rot = properties["rotation"]
 		if rot is Array and rot.size() >= 3:
-			spawn_point.spawn_rotation = Vector3(rot[0], rot[1], rot[2])
+			spawn_point.set_meta("spawn_rotation", Vector3(rot[0], rot[1], rot[2]))
 		elif rot is String:
 			# Parse rotation from string format "x,y,z"
 			var rot_parts = rot.split(",")
 			if rot_parts.size() >= 3:
-				spawn_point.spawn_rotation = Vector3(
+				spawn_point.set_meta("spawn_rotation", Vector3(
 					rot_parts[0].to_float(),
 					rot_parts[1].to_float(),
 					rot_parts[2].to_float()
-				)
+				))
+	
+	# Set player facing direction (Y-axis rotation in degrees)
+	if properties.has("player_rotation"):
+		var player_rot = properties["player_rotation"]
+		if player_rot is float or player_rot is int:
+			spawn_point.set_meta("player_rotation", float(player_rot))
+		elif player_rot is String:
+			spawn_point.set_meta("player_rotation", player_rot.to_float())
 	
 	# Set visual settings
-	if properties.has("visible_in_game") and "visible_in_game" in spawn_point:
-		spawn_point.visible_in_game = bool(properties["visible_in_game"])
+	if properties.has("visible_in_game"):
+		spawn_point.set_meta("visible_in_game", bool(properties["visible_in_game"]))
+		# Actually apply visibility to visual components
+		var platform = spawn_point.get_node_or_null("Platform")
+		var indicator = spawn_point.get_node_or_null("Indicator")
+		var label = spawn_point.get_node_or_null("Label3D")
+		
+		var visible = bool(properties["visible_in_game"])
+		if platform:
+			platform.visible = visible
+		if indicator:
+			indicator.visible = visible
+		if label:
+			label.visible = visible
 	
-	if properties.has("indicator_color") and "indicator_color" in spawn_point:
+	if properties.has("indicator_color"):
 		var color = properties["indicator_color"]
 		if color is Array and color.size() >= 3:
 			var alpha = color[3] if color.size() > 3 else 0.8
-			spawn_point.indicator_color = Color(color[0], color[1], color[2], alpha)
+			var spawn_color = Color(color[0], color[1], color[2], alpha)
+			spawn_point.set_meta("indicator_color", spawn_color)
+			
+			# Apply color to visual components
+			var platform = spawn_point.get_node_or_null("Platform")
+			var indicator = spawn_point.get_node_or_null("Indicator")
+			
+			if platform and platform is MeshInstance3D:
+				var material = platform.get_surface_override_material(0)
+				if material:
+					material = material.duplicate()
+					material.albedo_color = spawn_color
+					platform.set_surface_override_material(0, material)
+			
+			if indicator and indicator is MeshInstance3D:
+				var material = indicator.get_surface_override_material(0)
+				if material:
+					material = material.duplicate()
+					material.albedo_color = spawn_color
+					indicator.set_surface_override_material(0, material)
 	
 	# Set active state
-	if properties.has("active") and "active" in spawn_point:
-		spawn_point.active = bool(properties["active"])
+	if properties.has("active"):
+		spawn_point.set_meta("active", bool(properties["active"]))
 	
-	print("    Configured spawn point: %s (priority: %d)" % [spawn_point.get("spawn_name"), spawn_point.get("priority")])
+	print("    ✓ Configured spawn point: %s (priority: %d)" % [spawn_name, priority])
 	
 	# Apply generic properties
 	_apply_generic_properties(spawn_point, definition)
@@ -282,4 +331,20 @@ func _get_previous_map(current_map: String) -> String:
 			return map_name
 	
 	# If no previous map found, return to menu
-	return progression_manager.get_main_menu_map() 
+	return progression_manager.get_main_menu_map()
+
+# Configure exit teleporter (completes sequence and returns to lab)
+func _configure_exit(exit_teleporter: Node3D, definition: Dictionary) -> void:
+	var properties = definition.get("properties", {})
+	
+	print("EnhancedUtilityHandler: Configuring exit teleporter with definition: %s" % definition)
+	
+	# Apply visual effects if specified, default to "exit" effect
+	var visual_effect = properties.get("visual_effect", "exit")
+	_apply_teleporter_visual_effect(exit_teleporter, visual_effect)
+	
+	# Add signal router to connect exit to SceneManager 
+	# This will trigger sequence completion instead of advancing
+	UtilitySignalRouter.add_to_utility(exit_teleporter, "exit")
+	
+	print("    ✓ Exit teleporter configured to complete sequence on activation") 
