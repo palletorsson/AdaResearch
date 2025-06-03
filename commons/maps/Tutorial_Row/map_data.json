@@ -61,12 +61,12 @@
 		]
 	},
 	"utility_definitions": {
-		"e": {
+		"t": {
 			"type": "teleporter",
 			"name": "Next Lesson",
 			"description": "Complete the row to advance to the next tutorial",
 			"properties": {
-				"destination": "next",
+				"destination": "Tutorial_2D",
 				"visual_effect": "portal_glow"
 			}
 		}

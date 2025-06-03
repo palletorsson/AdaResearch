@@ -57,7 +57,9 @@ func connect_to_grid_system(grid_system: Node):
 		
 		# Connect to interactable signals  
 		if grid_system.has_signal("interactable_activated"):
-			grid_system.interactable_activated.connect(_on_interactable_activated)
+			pass 
+			# E 0:00:13:011   SceneManager.gd:60 @ connect_to_grid_system(): Signal 'interactable_activated' is already connected to given callable 'Node(SceneManager)::_on_interactable_activated' in that object.
+			# grid_system.interactable_activated.connect(_on_interactable_activated)
 		
 		print("SceneManager: Connected to GridSystem")
 
