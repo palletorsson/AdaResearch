@@ -76,7 +76,7 @@ func _load_artifact_definitions():
 		
 		artifact_definitions = json.data.get("artifacts", {})
 		print("LabManager: Artifact definitions type: %s" % typeof(artifact_definitions))  # Debug
-		print("LabManager: Artifact definitions keys: %s" % artifact_definitions.keys())  # Debug
+		print("LabManager: Artifact definitions keys: %s" % str(artifact_definitions.keys()))  # Debug
 		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
 	else:
 		print("LabManager: ERROR - Failed to parse JSON: %s" % json.get_error_message())

@@ -12,16 +12,33 @@ func _init(grid_system_ref: Node3D):
 	grid_system = grid_system_ref
 
 func _ready():
-	# Get progression manager instance
-	progression_manager = MapProgressionManager.get_instance()
+	# Get scene manager instance instead of MapProgressionManager
+	var scene_manager = _find_scene_manager()
 	
-	if not progression_manager:
-		print("WARNING: EnhancedUtilityHandler: MapProgressionManager instance not found!")
-		print("  This may indicate MapProgressionManager is not set up as an autoload singleton.")
-		print("  Teleporter progression features will be limited.")
+	if scene_manager:
+		# Connect this handler to the scene manager
+		scene_manager.connect_to_grid_system(grid_system)
+		print("EnhancedUtilityHandler: Successfully connected to SceneManager")
 	else:
-		print("EnhancedUtilityHandler: Successfully connected to MapProgressionManager")
+		print("WARNING: EnhancedUtilityHandler: SceneManager not found!")
+		print("  Teleporter transitions will use fallback destinations.")
 
+func _find_scene_manager() -> SceneManager:
+	# Try common locations
+	var potential_managers = [
+		get_node_or_null("/root/SceneManager"),
+		get_tree().current_scene.find_child("SceneManager", true, false),
+		grid_system.find_child("SceneManager", true, false)
+	]
+	
+	for manager in potential_managers:
+		if manager and manager is SceneManager:
+			return manager as SceneManager
+	
+	return null
+
+
+		
 # Place utility objects with progression-aware destination handling
 func place_utility(x: int, y: int, z: int, utility_type: String, definition: Dictionary, total_size: float) -> void:
 	var position = Vector3(x, y, z) * total_size
@@ -73,121 +90,40 @@ func _configure_utility_object(utility_object: Node3D, utility_type: String, def
 			_apply_generic_properties(utility_object, definition)
 
 # Configure teleporter with progression-aware destination handling
+# Updated teleporter configuration - simplified for SceneManager
 func _configure_teleporter(teleporter: Node3D, definition: Dictionary) -> void:
 	var properties = definition.get("properties", {})
 	
 	print("EnhancedUtilityHandler: Configuring teleporter with definition: %s" % definition)
-	print("  Teleporter node type: %s" % teleporter.get_class())
-	print("  Teleporter script: %s" % str(teleporter.get_script()))
 	
-	# Handle destination mapping
+	# Handle destination mapping - simplified approach
 	if properties.has("destination"):
 		var destination_map = properties["destination"]
-		var original_destination = destination_map  # Keep track of original
 		
 		print("  Original destination: %s" % destination_map)
 		
-		# Handle special destination keywords
+		# Handle special destination keywords with fallback
 		match destination_map:
 			"next":
-				# Automatically determine next map in progression
-				if progression_manager:
-					destination_map = progression_manager.get_next_map(grid_system.map_name)
-					if destination_map.is_empty():
-						destination_map = progression_manager.get_main_menu_map()
-						print("    No next map found, defaulting to main menu")
-					else:
-						print("    Resolved 'next' to: %s" % destination_map)
-				else:
-					print("    WARNING: No progression manager available, cannot resolve 'next' destination")
-					print("    You may need to set up MapProgressionManager as an autoload singleton")
-					destination_map = "menu"  # Changed fallback from Random_4 to menu
+				destination_map = "Tutorial_Row"  # Simple fallback
 			"menu":
-				# Return to main menu
-				if progression_manager:
-					destination_map = progression_manager.get_main_menu_map()
-				else:
-					destination_map = "menu"  # Simple fallback
+				destination_map = "Lab"  # Return to lab
 			"previous":
-				# Go to previous map (if needed for backtracking)
-				if progression_manager:
-					destination_map = _get_previous_map(grid_system.map_name)
-				else:
-					destination_map = "menu"  # Fallback to menu
+				destination_map = "Lab"  # Return to lab
 		
 		print("  Final destination map: %s" % destination_map)
 		
-		# Get scene path from progression manager
-		var scene_path = ""
-		if progression_manager:
-			scene_path = progression_manager.get_scene_path_for_map(destination_map)
-			print("  Scene path from progression manager: %s" % scene_path)
-		else:
-			# Simple fallback scene path generation
-			scene_path = "res://adaresearch/Common/Scenes/Maps/base.tscn"
-			print("    WARNING: Using fallback scene path due to missing progression manager")
-		
-		# Handle dynamic vs static scenes
-		if scene_path.begins_with("dynamic:"):
-			# For dynamic maps, we need to integrate with DynamicMapSystem
-			var map_name = scene_path.substr(8)  # Remove "dynamic:" prefix
-			scene_path = _generate_dynamic_scene_path(map_name)
-			print("  Dynamic scene path generated: %s" % scene_path)
+		# Generate simple scene path
+		var scene_path = "res://commons/scenes/grid.tscn"  # Use grid scene for all maps
 		
 		# Set the scene path on the teleporter
-		print("  Checking if teleporter has 'scene' property...")
-		
-		# Check if the teleporter has a 'scene' property by looking at property list
-		var has_scene_property = false
-		for prop in teleporter.get_property_list():
-			if prop.name == "scene":
-				has_scene_property = true
-				break
-		
-		if has_scene_property:
+		if teleporter.has_property("scene"):
 			teleporter.set("scene", scene_path)
-			print("    ✓ Successfully set teleporter scene to: %s" % scene_path)
-			print("    Current teleporter scene value: %s" % teleporter.get("scene"))
-		else:
-			print("    ❌ WARNING: Teleporter object does not have 'scene' property")
-			print("    Available properties on teleporter:")
-			for prop in teleporter.get_property_list():
-				if prop.name != "" and not prop.name.begins_with("_"):
-					print("      - %s (%s)" % [prop.name, prop.type])
-	
-	# Handle spawn point configuration
-	if properties.has("spawn_point_position"):
-		var spawn_pos = properties["spawn_point_position"]
+			teleporter.set("destination_map", destination_map)  # Store map name separately
+			print("    ✓ Set teleporter destination to: %s" % destination_map)
 		
-		# Check if teleporter has spawn_point_position property
-		var has_spawn_pos_property = false
-		for prop in teleporter.get_property_list():
-			if prop.name == "spawn_point_position":
-				has_spawn_pos_property = true
-				break
-		
-		if has_spawn_pos_property:
-			teleporter.set("spawn_point_position", Vector3(spawn_pos[0], spawn_pos[1], spawn_pos[2]))
-			
-			# Check if teleporter has spawn_data property
-			var has_spawn_data_property = false
-			for prop in teleporter.get_property_list():
-				if prop.name == "spawn_data":
-					has_spawn_data_property = true
-					break
-			
-			if has_spawn_data_property:
-				teleporter.set("spawn_data", Teleport.SpawnDataType.VECTOR3)
-			
-			print("    ✓ Set spawn point position: %s" % teleporter.get("spawn_point_position"))
-	
-	# Handle visual effects
-	if properties.has("visual_effect"):
-		var effect = properties["visual_effect"]
-		_apply_teleporter_visual_effect(teleporter, effect)
-	
-	# Apply generic properties
-	_apply_generic_properties(teleporter, definition)
+		# Add signal router to connect teleporter to SceneManager
+		UtilitySignalRouter.add_to_utility(teleporter, "teleporter")
 
 # Configure spawn point utilities
 func _configure_spawn_point(spawn_point: Node3D, definition: Dictionary) -> void:
