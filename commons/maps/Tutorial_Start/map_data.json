@@ -6,7 +6,7 @@
 		"format": "json",
 		"created_from": "new_minimal_design",
 		"dimensions": {
-			"width": 1,
+			"width": 3,
 			"depth": 3,
 			"max_height": 1
 		},
@@ -19,14 +19,14 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1"],
-			["1", "1", "1"], 
-			["1", "1", "1"]
+			["1", "1", "2"],
+			["2", "1", "2"], 
+			["2", "1", "2"]
 		],
 		"utilities": [
 			["s", " ", " "],
 			[" ", " ", " "],
-			["t", " ", " "]
+			[" ", "t", " "]
 		],
 		"interactables": [
 			[" ", " ", " "],

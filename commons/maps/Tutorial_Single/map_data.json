@@ -7,8 +7,8 @@
 		"created_from": "progressive_tutorial_design",
 		"dimensions": {
 			"width": 3,
-			"depth": 1,
-			"max_height": 1
+			"depth": 3,
+			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "absolute_beginner",
@@ -19,11 +19,14 @@
 	},
 	"layers": {
 		"structure": [
+			["1", "2", "2"],
 			["1", "1", "1"],
-
+			["2", "2", "2"],
 		],
 		"utilities": [
-			["s", " ", "t"],
+			["s", " ", " "],
+			[" ", " ", "t"],
+			[" ", " ", " "],
 		],
 		"interactables": [
 			[" ", " ", " "],

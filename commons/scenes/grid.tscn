@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
 shape = SubResource("BoxShape3D_0u7bn")
 
 [node name="ResetArea3D" type="Area3D" parent="GridSystem" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.380269, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90211, 0)
 script = ExtResource("3_grd5c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GridSystem/ResetArea3D" index="0"]
@@ -46,6 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.623138, 0, -16.8295)
 shape = SubResource("BoxShape3D_grd5c")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GridSystem/ResetArea3D" index="1"]
+transform = Transform3D(23.9965, 0, 0, 0, 1, 0, 0, 0, 45.3196, 0, 0, -17.6834)
 mesh = SubResource("BoxMesh_al13m")
 
 [node name="GridScene" type="Node3D" parent="." index="6"]

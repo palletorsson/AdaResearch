@@ -33,6 +33,11 @@ func _on_body_entered(body: Node3D) -> void:
 	if is_currently_resetting:
 		return # Already processing a reset, ignore further entries
 
+	# DEBUG: Show what body entered
+	print("ResetArea3D: 🔍 Body entered: %s (type: %s)" % [body.name, body.get_class()])
+	print("ResetArea3D: 🔍 Body groups: %s" % body.get_groups())
+	print("ResetArea3D: 🔍 Body position: %s" % body.global_position)
+
 	if not player_node:
 		printerr("ResetArea3D: Player node is not assigned. Cannot reset.")
 		return
@@ -46,16 +51,25 @@ func _on_body_entered(body: Node3D) -> void:
 		entered_body_is_player = true
 	elif body.is_in_group("player_body"): # If the colliding body is in the "player_body" group
 		entered_body_is_player = true
+	elif body.is_in_group("player"): # Alternative group name
+		entered_body_is_player = true
+	elif "player" in body.name.to_lower(): # Name-based detection
+		entered_body_is_player = true
+	elif body.get_parent() == player_node: # If body is a direct child of player_node
+		entered_body_is_player = true
 	# Or, if player_node is an ancestor of body:
-	# elif player_node.is_ancestor_of(body):
-	#     entered_body_is_player = true
+	elif player_node.is_ancestor_of(body):
+		entered_body_is_player = true
+	
+	print("ResetArea3D: 🔍 Is player body? %s" % entered_body_is_player)
 	
 	if not entered_body_is_player:
 		print_debug("ResetArea3D: Non-player body entered, ignoring.")
 		return
 
 	is_currently_resetting = true
-	print("ResetArea3D: Player entered. Initiating reset sequence...")
+	print("ResetArea3D: ⚠️ Player entered reset area! This might override spawn positioning!")
+	print("ResetArea3D: ⚠️ Current player position: %s" % player_node.global_position)
 
 	# 1. Fade Out
 	await _perform_fade(false, 0.5) # Fade to opaque (e.g., black) over 0.5 seconds
@@ -63,11 +77,12 @@ func _on_body_entered(body: Node3D) -> void:
 	# 2. Reset Player Position
 	# Ensure player_node is still valid after the await (it could have been freed)
 	if is_instance_valid(player_node):
-		player_node.global_position = Vector3(0, 4, 0)
+		var reset_position = Vector3(0, 4, 0)
+		player_node.global_position = reset_position
 		# If your player is a CharacterBody3D, you might also want to reset its velocity:
 		# if player_node is CharacterBody3D:
 		#     player_node.velocity = Vector3.ZERO
-		print("ResetArea3D: Player position reset to (0, 4, 0).")
+		print("ResetArea3D: ⚠️ Player position FORCIBLY reset to %s (this overrides spawn points!)" % reset_position)
 	else:
 		printerr("ResetArea3D: Player node became invalid during fade out. Aborting reset.")
 		is_currently_resetting = false
