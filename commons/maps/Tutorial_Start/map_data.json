@@ -24,7 +24,7 @@
 			["1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " "],
+			[" ", "s", " "],
 			[" ", " ", " "],
 			[" ", "t", " "]
 		],
@@ -44,7 +44,12 @@
 				"activation_method": "step_on",
 				"visual_effect": "portal_glow"
 			}
+		}, 
+		"s": {
+		"properties": {
+			"height": 5.5 
 		}
+	}
 	},
 	
 	"spawn_points": {

@@ -1,5 +1,5 @@
 # GridSystem.gd
-# Enhanced grid system that supports JSON map format (now the main grid system)
+# Enhanced grid system that supports JSON map format with grid-based spawn points
 # Unified interface for loading and managing map data from JSON files
 
 extends Node3D
@@ -19,6 +19,7 @@ class_name GridSystem
 const MAPS_PATH = "res://commons/maps/"
 const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
 const UTILITY_SCENE_BASE_PATH = "res://commons/scenes/mapobjects/"
+
 # Grid properties
 var grid_x: int
 var grid_z: int
@@ -44,6 +45,7 @@ var structure_data_instance
 var utility_data_instance
 var interactable_data_instance
 var _scene_cache = {}
+
 # Components
 @onready var base_cube = $CubeScene
 @onready var algorithm_registry = AlgorithmRegistry.new()
@@ -75,8 +77,42 @@ func _ready():
 	add_child(algorithm_registry)
 	algorithm_registry.connect("registry_loaded", _on_algorithm_registry_loaded)
 	
-	# Load the JSON map
+	# CHECK FOR SCENE DATA FIRST - THIS IS THE KEY FIX!
+	_check_for_scene_data()
+	
+	# Load the JSON map (will use updated map_name if scene data was found)
 	_load_json_map()
+
+# NEW METHOD: Check for scene data and update map_name
+func _check_for_scene_data():
+	"""Check if scene was loaded with specific map data"""
+	var scene_root = get_tree().current_scene
+	
+	# Check for scene user data from AdaSceneManager
+	var scene_data = scene_root.get_meta("scene_user_data", {})
+	if scene_data.is_empty():
+		scene_data = scene_root.get_meta("scene_data", {})
+	
+	if not scene_data.is_empty():
+		print("GridSystem: Found scene data: %s" % scene_data)
+		
+		# Update map name from scene data
+		if scene_data.has("map_name"):
+			var new_map_name = scene_data["map_name"]
+			print("GridSystem: Updating map_name from '%s' to '%s'" % [map_name, new_map_name])
+			map_name = new_map_name
+		
+		if scene_data.has("initial_map"):
+			var new_map_name = scene_data["initial_map"]
+			print("GridSystem: Updating map_name from '%s' to '%s' (initial_map)" % [map_name, new_map_name])
+			map_name = new_map_name
+		
+		# Store sequence data for reference
+		if scene_data.has("sequence_data"):
+			set_meta("current_sequence", scene_data["sequence_data"])
+			print("GridSystem: Stored sequence data for reference")
+	else:
+		print("GridSystem: No scene data found, using default map_name: %s" % map_name)
 
 func _load_json_map() -> void:
 	var json_path = MAPS_PATH + map_name + "/map_data.json"
@@ -168,7 +204,6 @@ func preload_common_scenes(scene_identifiers: Array) -> void:
 			printerr("GridSystem WARNING: Failed to preload scene: %s" % identifier)
 	print_debug("GridSystem: Finished preloading scenes.")
 
-
 func _finalize_map_loading() -> void:
 	# Wait for algorithm registry if needed
 	if algorithm_registry.get_all_algorithm_ids().size() > 0:
@@ -182,6 +217,9 @@ func _on_algorithm_registry_loaded():
 	print("GridSystem: Algorithm registry loaded, generating grid...")
 	base_cube.visible = false
 	_generate_grid()
+	
+	# NEW: Handle player spawn positioning after grid is generated
+	call_deferred("_handle_player_spawn")
 
 func _generate_grid() -> void:
 	print("GridSystem: Starting grid generation")
@@ -362,6 +400,215 @@ func _apply_interactable_data() -> void:
 					print("WARNING: Algorithm '%s' not found in registry" % algorithm_id)
 	
 	print("GridSystem: Added %d interactables" % interactable_count)
+
+# NEW METHOD: Handle player spawn positioning
+func _handle_player_spawn():
+	"""Position player at spawn point after map is loaded"""
+	print("GridSystem: Handling player spawn positioning...")
+	
+	# Look for spawn point utilities in the grid first
+	var spawn_point_position = _find_spawn_point_utility()
+	
+	if spawn_point_position != Vector3.ZERO:
+		print("GridSystem: Found spawn point utility at grid position: %s" % spawn_point_position)
+		_position_player_at_grid_spawn(spawn_point_position)
+	else:
+		# Fallback to JSON spawn points
+		_handle_json_spawn_points()
+
+# NEW METHOD: Find spawn point utilities in the grid
+func _find_spawn_point_utility() -> Vector3:
+	"""Find spawn point utilities placed in the grid"""
+	if not utility_data_instance:
+		return Vector3.ZERO
+	
+	var utility_layout = utility_data_instance.layout_data
+	var total_size = cube_size + gutter
+	
+	for z in range(min(grid_z, utility_layout.size())):
+		var row = utility_layout[z]
+		for x in range(min(grid_x, row.size())):
+			var utility_cell = str(row[x]).strip_edges()
+			
+			if utility_cell.is_empty() or utility_cell == " ":
+				continue
+			
+			# Parse utility cell
+			var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
+			var utility_type = parsed.type
+			
+			# Check if this is a spawn point
+			if utility_type == "s":
+				# Find the highest Y position at this grid location
+				var y_pos = _find_highest_y_at(x, z)
+				var world_position = Vector3(x, y_pos, z) * total_size
+				
+				print("GridSystem: Found spawn point 's' at grid(%d, %d, %d) -> world%s" % [x, y_pos, z, world_position])
+				return world_position
+	
+	return Vector3.ZERO
+
+# NEW METHOD: Position player at grid-based spawn point
+func _position_player_at_grid_spawn(world_position: Vector3):
+	"""Position player at a grid-based spawn point"""
+	# Find the VR origin
+	var vr_origin = _find_vr_origin()
+	if not vr_origin:
+		print("GridSystem: WARNING - Could not find VR origin for spawn positioning")
+		return
+	
+	# Get spawn point properties from utility definition
+	var spawn_height = _get_spawn_point_height()
+	var final_position = world_position + Vector3(0, spawn_height, 0)
+	
+	# Apply position and default rotation
+	vr_origin.global_position = final_position
+	vr_origin.global_rotation_degrees = Vector3(0, 0, 0)  # Face forward by default
+	
+	print("GridSystem: ✓ Player positioned at grid spawn point")
+	print("  Grid position: %s" % world_position)
+	print("  Final position: %s (with height offset: %f)" % [final_position, spawn_height])
+	
+	# Apply spawn transition
+	_apply_spawn_transition_effect(vr_origin, {"description": "Grid-based spawn point"})
+
+# NEW METHOD: Get spawn point height from utility definition
+func _get_spawn_point_height() -> float:
+	"""Get spawn point height from utility definition"""
+	if current_map_format == "json" and json_loader:
+		var utility_definitions = json_loader.get_utility_definitions()
+		var spawn_def = utility_definitions.get("s", {})
+		var properties = spawn_def.get("properties", {})
+		
+		# Get height from properties (default to 1.8 for VR player height)
+		var height = properties.get("height", 1.8)
+		print("GridSystem: Using spawn height: %f" % height)
+		return height
+	
+	return 1.8  # Default VR player height
+
+# NEW METHOD: Handle JSON spawn points as fallback
+func _handle_json_spawn_points():
+	"""Handle JSON-defined spawn points as fallback"""
+	print("GridSystem: No grid spawn points found, checking JSON spawn points...")
+	
+	if current_map_format != "json" or not json_loader:
+		print("GridSystem: No JSON data available, using default position")
+		_apply_default_spawn_position()
+		return
+	
+	var spawn_points = json_loader.get_spawn_points()
+	if spawn_points.is_empty():
+		print("GridSystem: No JSON spawn points defined, using default position")
+		_apply_default_spawn_position()
+		return
+	
+	# Use default spawn point from JSON
+	var default_spawn = spawn_points.get("default", {})
+	if not default_spawn.is_empty():
+		_position_player_at_spawn(default_spawn)
+	else:
+		_apply_default_spawn_position()
+
+# NEW METHOD: Position player at JSON-defined spawn point
+func _position_player_at_spawn(spawn_data: Dictionary):
+	"""Position the VR player at specified spawn point"""
+	var spawn_position = spawn_data.get("position", [0, 1.5, 0])
+	var spawn_rotation = spawn_data.get("rotation", [0, 0, 0])
+	
+	# Convert arrays to Vector3
+	var world_position = Vector3(spawn_position[0], spawn_position[1], spawn_position[2])
+	var world_rotation = Vector3(spawn_rotation[0], spawn_rotation[1], spawn_rotation[2])
+	
+	print("GridSystem: Positioning player at JSON spawn - Position: %s, Rotation: %s" % [world_position, world_rotation])
+	
+	# Find the VR origin in the scene
+	var vr_origin = _find_vr_origin()
+	if not vr_origin:
+		print("GridSystem: WARNING - Could not find VR origin to position player")
+		return
+	
+	# Apply position (spawn points are in world coordinates, not grid coordinates)
+	vr_origin.global_position = world_position
+	vr_origin.global_rotation_degrees = world_rotation
+	
+	print("GridSystem: ✓ Player positioned at JSON spawn point - Position: %s, Rotation: %s" % [world_position, world_rotation])
+	
+	# Apply spawn transition effect
+	_apply_spawn_transition_effect(vr_origin, spawn_data)
+
+# NEW METHOD: Apply default spawn position when no spawn points are defined
+func _apply_default_spawn_position():
+	"""Apply a sensible default spawn position"""
+	var vr_origin = _find_vr_origin()
+	if not vr_origin:
+		return
+	
+	# Position player at a reasonable default location
+	var default_position = Vector3(0, 2, 3)  # Slightly elevated and back from center
+	vr_origin.global_position = default_position
+	vr_origin.global_rotation_degrees = Vector3.ZERO
+	
+	print("GridSystem: Applied default spawn position: %s" % default_position)
+
+# NEW METHOD: Find VR origin in the scene
+func _find_vr_origin() -> Node3D:
+	"""Find the VR origin node for player positioning"""
+	var scene_root = get_tree().current_scene
+	if not scene_root:
+		return null
+	
+	# Look for common VR origin node names
+	var origin_names = ["XROrigin3D", "VROrigin", "ARVROrigin", "Origin", "XRPlayer"]
+	
+	for name in origin_names:
+		var origin = scene_root.find_child(name, true, false)
+		if origin and origin is Node3D:
+			print("GridSystem: Found VR origin: %s" % origin.name)
+			return origin as Node3D
+	
+	# Try finding by walking up the scene tree from grid system
+	var current_node = self
+	while current_node:
+		for child in current_node.get_children():
+			if child.name.to_lower().contains("origin") and child is Node3D:
+				print("GridSystem: Found VR origin via tree walk: %s" % child.name)
+				return child as Node3D
+		current_node = current_node.get_parent()
+	
+	print("GridSystem: Could not find VR origin")
+	return null
+
+# NEW METHOD: Apply spawn transition effect
+func _apply_spawn_transition_effect(vr_origin: Node3D, spawn_data: Dictionary):
+	"""Apply a smooth transition effect when spawning"""
+	# Wait for everything to settle
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	# Display welcome message if available
+	var description = spawn_data.get("description", "")
+	if not description.is_empty():
+		print("GridSystem: Spawn description: %s" % description)
+		# You could show this as a UI message or floating text
+	
+	# Add a gentle camera sway to help orient the player
+	_apply_gentle_orientation_cue(vr_origin)
+	
+	print("GridSystem: Spawn transition complete")
+
+# NEW METHOD: Gentle orientation cue for player
+func _apply_gentle_orientation_cue(vr_origin: Node3D):
+	"""Provide a subtle visual cue to help player understand their orientation"""
+	# Create a simple tween to slightly adjust the camera
+	var tween = create_tween()
+	var original_position = vr_origin.global_position
+	
+	# Gentle up-down motion to indicate spawn
+	tween.tween_property(vr_origin, "global_position", original_position + Vector3(0, 0.1, 0), 0.3)
+	tween.tween_property(vr_origin, "global_position", original_position, 0.3)
+	
+	print("GridSystem: Applied orientation cue")
 
 func _find_highest_y_at(x: int, z: int) -> int:
 	for y in range(grid_y-1, -1, -1):
@@ -610,4 +857,4 @@ func set_utility_handler_type(handler_type: String):
 		"legacy", "standard":
 			disable_enhanced_utility_handler()
 		_:
-			print("GridSystem: Unknown utility handler type: %s" % handler_type) 
+			print("GridSystem: Unknown utility handler type: %s" % handler_type)

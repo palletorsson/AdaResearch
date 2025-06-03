@@ -6,8 +6,8 @@
 		"format": "json",
 		"created_from": "progressive_tutorial_design",
 		"dimensions": {
-			"width": 2,
-			"depth": 2,
+			"width": 3,
+			"depth": 3,
 			"max_height": 1
 		},
 		"metadata": {
@@ -19,16 +19,19 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1"],
-			["1", "1"]
+			["1", "1", "1"],
+			["1", "1", "1"], 
+			["1", "1", "1"]
 		],
 		"utilities": [
-			["s", ""],
-			[" ", "t"]
+			[" ", "s", " "],
+			[" ", " ", " "],
+			[" ", "t", " "]
 		],
 		"interactables": [
-			[" ", " "],
-			[" ", " "]
+			[" ", " ", " "],
+			[" ", " ", " "],
+			[" ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -42,23 +45,13 @@
 				"visual_effect": "portal_glow"
 			}
 		},
-		"p": {
-			"name": "Simple Platform",
-			"description": "A raised platform for placing objects",
-			"type": "platform",
-			"properties": {
-				"height": 0.5,
-				"material": "metal"
-			}
+		"s": {
+		"properties": {
+			"height": 5.5  
 		}
+	}
 	},
-	"spawn_points": {
-		"default": {
-			"position": [0, 1.5, 0],
-			"rotation": [0, 45, 0],
-			"description": "Player starts facing the cube and platform"
-		}
-	},
+	
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.8,
