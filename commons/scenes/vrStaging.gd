@@ -9,7 +9,7 @@ extends XRToolsStaging
 # Lab System Configuration (new variables specific to our implementation)
 @export var use_lab_system: bool = true
 @export var start_with_grid_system: bool = true
-@export var main_scene: String = "res://commons/scenes/lab.tscn"
+@export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
 
 # Signal emitted when staging is complete
@@ -50,7 +50,7 @@ func _setup_lab_system():
 	}
 	
 	# Load lab.tscn (which contains LabManager and rotating cube)
-	await load_scene(main_scene, user_data)
+	await load_scene(main_lab_scene, user_data)
 	print("VRStaging: Lab hub loaded")
 
 func _setup_basic_vr_scene():

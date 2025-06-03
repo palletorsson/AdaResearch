@@ -1,10 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://commons_rotating_cube"]
+[gd_scene load_steps=2 format=3 uid="uid://ssh07babupc5"]
 
-[ext_resource type="Script" path="res://commons/primitives/cubes/RotatingCubeArtifact.gd" id="1"]
+[ext_resource type="Script" uid="uid://fffgs3pn6gho" path="res://commons/primitives/cubes/RotatingCubeArtifact.gd" id="1"]
 
 [node name="RotatingCube" type="Node3D"]
 script = ExtResource("1")
-rotation_speed = Vector3(0, 45, 0)
-hover_height = 0.1
-hover_speed = 2.0
-interaction_timer = 4.0 

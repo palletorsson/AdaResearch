@@ -45,10 +45,21 @@ func _load_artifact_definitions():
 	var json_text = file.get_as_text()
 	file.close()
 	
+	print("LabManager: JSON text length: %d" % json_text.length())  # Debug
+	
 	var json = JSON.new()
-	if json.parse(json_text) == OK:
+	var parse_result = json.parse(json_text)
+	
+	if parse_result == OK:
+		print("LabManager: JSON parsed successfully")  # Debug
+		print("LabManager: JSON data keys: ", json.data.keys())  # Debug
+		
 		artifact_definitions = json.data.get("artifacts", {})
+		print("LabManager: Artifact definitions type: %s" % typeof(artifact_definitions))  # Debug
+		print("LabManager: Artifact definitions keys: %s" % artifact_definitions.keys())  # Debug
 		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
+	else:
+		print("LabManager: ERROR - Failed to parse JSON: %s" % json.get_error_message())
 
 func _load_artifact_system_state():
 	"""Load system state from JSON"""
@@ -87,7 +98,7 @@ func _instantiate_artifact(artifact_id: String):
 		return
 	
 	var definition = artifact_definitions[artifact_id]
-	var tscn_path = definition.get("tscn_path", "")
+	var tscn_path = definition.get("scene", "")
 	
 	if not ResourceLoader.exists(tscn_path):
 		print("LabManager: Artifact scene not found: %s" % tscn_path)
