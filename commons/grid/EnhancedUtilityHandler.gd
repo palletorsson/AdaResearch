@@ -96,54 +96,32 @@ func _configure_teleporter(teleporter: Node3D, definition: Dictionary) -> void:
 	
 	print("EnhancedUtilityHandler: Configuring teleporter with definition: %s" % definition)
 	
-	# Handle destination mapping - simplified approach
-	if properties.has("destination"):
-		var destination_map = properties["destination"]
-		
-		print("  Original destination: %s" % destination_map)
-		
-		# Handle special destination keywords with fallback
-		match destination_map:
-			"next":
-				destination_map = "Tutorial_Row"  # Simple fallback
-			"menu":
-				destination_map = "Lab"  # Return to lab
-			"previous":
-				destination_map = "Lab"  # Return to lab
-		
-		print("  Final destination map: %s" % destination_map)
-		
-		# Don't set a hardcoded scene path - let SceneManager determine it dynamically
-		# The SceneManager will handle scene path resolution based on destination_map
-		
-		# Set only the destination map on the teleporter
-		if teleporter.has_property("destination_map"):
-			teleporter.set("destination_map", destination_map)
-			print("    ✓ Set teleporter destination to: %s" % destination_map)
-		
-		# Apply visual effects if specified
-		if properties.has("visual_effect"):
-			_apply_teleporter_visual_effect(teleporter, properties["visual_effect"])
-		
-		# Add signal router to connect teleporter to SceneManager
-		UtilitySignalRouter.add_to_utility(teleporter, "teleporter")
+	# Apply visual effects if specified
+	if properties.has("visual_effect"):
+		_apply_teleporter_visual_effect(teleporter, properties["visual_effect"])
+	
+	# Add signal router to connect teleporter to SceneManager
+	# The teleporter will just signal "advance sequence" and SceneManager handles the rest
+	UtilitySignalRouter.add_to_utility(teleporter, "teleporter")
+	
+	print("    ✓ Teleporter configured to advance sequence on activation")
 
 # Configure spawn point utilities
 func _configure_spawn_point(spawn_point: Node3D, definition: Dictionary) -> void:
 	var properties = definition.get("properties", {})
 	
 	# Set spawn point name
-	if definition.has("name") and spawn_point.has_property("spawn_name"):
+	if definition.has("name") and "spawn_name" in spawn_point:
 		spawn_point.spawn_name = definition["name"]
-	elif properties.has("spawn_name") and spawn_point.has_property("spawn_name"):
+	elif properties.has("spawn_name") and "spawn_name" in spawn_point:
 		spawn_point.spawn_name = properties["spawn_name"]
 	
 	# Set priority
-	if properties.has("priority") and spawn_point.has_property("priority"):
+	if properties.has("priority") and "priority" in spawn_point:
 		spawn_point.priority = int(properties["priority"])
 	
 	# Set rotation
-	if properties.has("rotation") and spawn_point.has_property("spawn_rotation"):
+	if properties.has("rotation") and "spawn_rotation" in spawn_point:
 		var rot = properties["rotation"]
 		if rot is Array and rot.size() >= 3:
 			spawn_point.spawn_rotation = Vector3(rot[0], rot[1], rot[2])
@@ -158,20 +136,20 @@ func _configure_spawn_point(spawn_point: Node3D, definition: Dictionary) -> void
 				)
 	
 	# Set visual settings
-	if properties.has("visible_in_game") and spawn_point.has_property("visible_in_game"):
+	if properties.has("visible_in_game") and "visible_in_game" in spawn_point:
 		spawn_point.visible_in_game = bool(properties["visible_in_game"])
 	
-	if properties.has("indicator_color") and spawn_point.has_property("indicator_color"):
+	if properties.has("indicator_color") and "indicator_color" in spawn_point:
 		var color = properties["indicator_color"]
 		if color is Array and color.size() >= 3:
 			var alpha = color[3] if color.size() > 3 else 0.8
 			spawn_point.indicator_color = Color(color[0], color[1], color[2], alpha)
 	
 	# Set active state
-	if properties.has("active") and spawn_point.has_property("active"):
+	if properties.has("active") and "active" in spawn_point:
 		spawn_point.active = bool(properties["active"])
 	
-	print("    Configured spawn point: %s (priority: %d)" % [spawn_point.spawn_name, spawn_point.priority])
+	print("    Configured spawn point: %s (priority: %d)" % [spawn_point.get("spawn_name"), spawn_point.get("priority")])
 	
 	# Apply generic properties
 	_apply_generic_properties(spawn_point, definition)
@@ -201,11 +179,11 @@ func _configure_lift(lift: Node3D, definition: Dictionary) -> void:
 	var properties = definition.get("properties", {})
 	
 	# Set lift height
-	if properties.has("height") and lift.has_property("lift_height"):
+	if properties.has("height") and "lift_height" in lift:
 		lift.lift_height = properties["height"]
 	
 	# Set lift speed
-	if properties.has("speed") and lift.has_property("lift_speed"):
+	if properties.has("speed") and "lift_speed" in lift:
 		lift.lift_speed = properties["speed"]
 	
 	_apply_generic_properties(lift, definition)
@@ -226,24 +204,24 @@ func _apply_generic_properties(utility_object: Node3D, definition: Dictionary) -
 	for property_name in properties.keys():
 		var property_value = properties[property_name]
 		
-		# Try to set the property directly if it exists
-		if utility_object.has_property(property_name):
+		# Try to set the property directly if it exists using the 'in' operator
+		if property_name in utility_object:
 			utility_object.set(property_name, property_value)
 
 # Apply visual effects to teleporter
 func _apply_teleporter_visual_effect(teleporter: Node3D, effect: String) -> void:
 	match effect:
 		"portal_glow":
-			# Apply portal glow effect
-			if teleporter.has_property("active_beam_color"):
+			# Apply portal glow effect (check if it's a Teleport instance)
+			if teleporter is Teleport:
 				teleporter.active_beam_color = Color(0.2, 0.6, 1.0)  # Blue glow
 		"warning":
 			# Apply warning effect
-			if teleporter.has_property("active_beam_color"):
+			if teleporter is Teleport:
 				teleporter.active_beam_color = Color(1.0, 0.5, 0.0)  # Orange warning
 		"exit":
 			# Apply exit effect
-			if teleporter.has_property("active_beam_color"):
+			if teleporter is Teleport:
 				teleporter.active_beam_color = Color(0.0, 1.0, 0.3)  # Green exit
 		_:
 			print("Unknown teleporter visual effect: %s" % effect)

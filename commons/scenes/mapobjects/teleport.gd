@@ -3,16 +3,8 @@ class_name Teleport
 extends Node3D
 
 ## Emitted when the teleporter is activated by the player.
-## SceneManager should connect to this to handle the actual transition.
-signal teleport_activated(target_scene_path, target_map_name)
-
-## Target scene file path (e.g., "res://commons/scenes/grid.tscn").
-## This property will be set by your EnhancedUtilityHandler/_configure_teleporter function.
-@export_file("*.tscn") var scene: String
-
-## Target map name (e.g., "Tutorial_Single", "Lab", or special keywords like "MAIN_MENU_REQUEST").
-## This property will be set by your EnhancedUtilityHandler/_configure_teleporter function.
-var destination_map: String
+## SceneManager should connect to this to advance the current sequence.
+signal teleporter_activated()
 
 @export_group("Display")
 ## Title texture for display on the teleporter.
@@ -62,15 +54,10 @@ func _on_teleport_area_body_entered(body: Node3D):
 		print_debug("Teleport: Non-player body entered, ignoring.")
 		return
 
-	print_debug("Teleport: Player activated teleport. Target map: '%s'" % destination_map)
+	print_debug("Teleport: Player activated teleporter - advancing sequence")
 
-	# Emit the signal with the destination details.
-	# SceneManager (or UtilitySignalRouter) should be listening to this.
-	# Let SceneManager determine the appropriate scene path based on destination_map
-	if destination_map != null and not destination_map.is_empty():
-		emit_signal("teleport_activated", "", destination_map)  # Empty scene path - let SceneManager handle it
-	else:
-		printerr("Teleport: 'destination_map' ('%s') is not properly configured. Cannot teleport." % destination_map)
+	# Simply emit activation signal - SceneManager will handle sequence progression
+	emit_signal("teleporter_activated")
 
 
 # --- Property Setters and Visual Update Logic (largely from your original script) ---
