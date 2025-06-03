@@ -27,7 +27,27 @@ func _ready():
 	
 	# Create artifacts based on system state
 	_create_artifacts_from_system_state()
+	
+	# connect and create scene manager 
+	_setup_scene_manager()
 
+#Setup scene manager
+func _setup_scene_manager():
+	"""Create and connect scene manager for handling transitions"""
+	var scene_manager = SceneManager.new()
+	scene_manager.name = "SceneManager"
+	add_child(scene_manager)
+	
+	# Connect this lab manager to the scene manager
+	scene_manager.connect_to_lab_manager(self)
+	
+	# Set staging reference if available
+	var staging = get_node_or_null("/root/VRStaging")
+	if staging:
+		scene_manager.set_staging_reference(staging)
+	
+	print("LabManager: Scene manager created and connected")
+	
 func _load_json_data():
 	"""Load both JSON files"""
 	_load_artifact_definitions()

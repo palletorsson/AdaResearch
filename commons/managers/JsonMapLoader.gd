@@ -36,7 +36,7 @@ func load_map(map_path: String) -> bool:
 	
 	# Create data adapter instances
 	structure_data_instance = JsonStructureDataAdapter.new()
-	utility_data_instance = JsonUtilityDataAdapter.new()
+
 	interactable_data_instance = JsonInteractableDataAdapter.new()
 	
 	# Extract data from JSON
@@ -223,8 +223,6 @@ static func load_json_map(file_path: String) -> JsonMapLoader:
 class JsonStructureDataAdapter extends RefCounted:
 	var layout_data: Array = []
 
-class JsonUtilityDataAdapter extends UtilityDataTemplate:
-	pass
 
 class JsonInteractableDataAdapter extends RefCounted:
 	var interactable_data: Array = [] 
