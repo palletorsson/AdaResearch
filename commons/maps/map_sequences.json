@@ -1,116 +1,108 @@
 {
-	"version": "1.0",
-	"format": "lab_sequences", 
-	"description": "Learning sequence definitions for the Lab environment",
+	"format_version": "1.0",
+	"description": "Map sequence configurations for Ada Research VR educational system",
+	"last_updated": "2025-01-20",
 	
 	"sequences": {
 		"array_tutorial": {
-			"name": "Array Tutorial",
-			"lookup_name": "array_tutorial",
-			"description": "Learn about 1D, 2D arrays and disco patterns",
-			"category": "fundamental",
-			"maps": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D", "Tutorial_Disco"],
-			"trigger_artifact": "rotating_cube",
-			"reward_artifacts": ["disco_grid", "array_visualizer"],
-			"prerequisites": [],
-			"estimated_time": "8-12 minutes",
+			"name": "Array Tutorial Sequence",
+			"description": "Progressive tutorial introducing array concepts through VR navigation",
 			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
 			"learning_objectives": [
-				"Understand single element manipulation",
-				"Learn 1D array structures",
-				"Explore 2D grid patterns", 
-				"Experience interactive disco visualizations"
-			]
+				"Basic VR navigation",
+				"Single element interaction", 
+				"Linear array traversal",
+				"2D grid understanding",
+				"Pattern recognition"
+			],
+			"maps": [
+				"Tutorial_Single",
+				"Tutorial_Row", 
+				"Tutorial_2D",
+				"Tutorial_Disco"
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
 		},
+		
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
-			"lookup_name": "randomness_exploration",
-			"description": "Explore random algorithms and probability distributions",
-			"category": "algorithmic",
-			"maps": ["Random_0", "Random_1", "Random_2", "Random_3", "Random_4"],
-			"trigger_artifact": "probability_sphere",
-			"reward_artifacts": ["quantum_dice", "chaos_attractor"],
-			"prerequisites": ["array_tutorial"],
-			"estimated_time": "25-35 minutes",
+			"description": "Explore concepts of randomness, probability, and statistical thinking",
 			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
 			"learning_objectives": [
-				"Understand random number generation",
-				"Explore probability distributions",
-				"Experience chaos theory",
-				"Learn procedural randomness techniques"
-			]
+				"Random number generation",
+				"Probability distributions", 
+				"Statistical patterns",
+				"Chaos vs randomness"
+			],
+			"maps": [
+				"Random_0",
+				"Random_1", 
+				"Random_2",
+				"Random_3"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["probability_pioneer_badge", "chaos_explorer_badge"]
 		},
+		
 		"geometric_algorithms": {
 			"name": "Geometric Algorithms",
-			"lookup_name": "geometric_algorithms", 
-			"description": "Explore spatial and geometric algorithms",
-			"category": "spatial",
-			"maps": ["Tutorial_Room", "Intro_0", "Intro_1"],
-			"trigger_artifact": "geometric_crystal",
-			"reward_artifacts": ["spatial_compass", "dimension_lens"],
-			"prerequisites": ["array_tutorial"],
-			"estimated_time": "15-25 minutes",
-			"difficulty": "intermediate",
+			"description": "Visualize and interact with geometric computational problems",
+			"difficulty": "intermediate", 
+			"estimated_time": "25-30 minutes",
 			"learning_objectives": [
-				"Understand spatial relationships",
-				"Learn geometric transformations",
-				"Explore 3D algorithmic structures",
-				"Master coordinate systems"
-			]
+				"Spatial reasoning",
+				"Geometric transformations",
+				"Algorithmic visualization",
+				"3D coordinate systems"
+			],
+			"maps": [
+				"Geometric_1",
+				"Geometric_2", 
+				"Geometric_3"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["geometry_master_badge", "spatial_thinker_badge"]
 		},
+		
 		"advanced_concepts": {
-			"name": "Advanced Concepts",
-			"lookup_name": "advanced_concepts",
-			"description": "Dive into complex algorithmic and theoretical concepts",
-			"category": "theoretical",
-			"maps": ["AgentialRealism", "Preface_0", "Preface_1"],
-			"trigger_artifact": "knowledge_prism",
-			"reward_artifacts": ["reality_modifier", "concept_synthesizer"],
-			"prerequisites": ["randomness_exploration", "geometric_algorithms"],
-			"estimated_time": "20-30 minutes",
+			"name": "Advanced Algorithmic Concepts",
+			"description": "Deep dive into complex algorithms and data structures",
 			"difficulty": "advanced",
+			"estimated_time": "30-45 minutes", 
 			"learning_objectives": [
-				"Explore agential realism concepts",
-				"Understand complex theoretical frameworks",
-				"Experience meta-algorithmic thinking",
-				"Master abstract concept manipulation"
-			]
+				"Complex data structures",
+				"Algorithm optimization",
+				"Performance analysis",
+				"Abstract thinking"
+			],
+			"maps": [
+				"Advanced_1",
+				"Advanced_2",
+				"Advanced_3", 
+				"Advanced_Final"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["randomness_exploration", "geometric_algorithms"],
+			"completion_rewards": ["algorithm_architect_badge", "complexity_master_badge"]
 		}
 	},
 	
-	"progression_rules": {
-		"enforce_prerequisites": true,
-		"allow_sequence_skipping": false,
-		"auto_unlock_artifacts": true,
-		"save_completion_state": true,
-		"completion_rewards": {
-			"all_sequences_completed": {
-				"special_artifacts": ["master_key", "algorithm_synthesizer"],
-				"unlock_advanced_lab": true
-			}
-		}
-	},
-	
-	"sequence_categories": {
-		"fundamental": {
-			"color": "#4CAF50",
-			"icon": "cube",
-			"description": "Basic building blocks of algorithmic thinking"
+	"sequence_metadata": {
+		"progression_rules": {
+			"allow_sequence_skipping": false,
+			"require_completion_for_unlock": true,
+			"save_progress_between_sessions": true
 		},
-		"algorithmic": {
-			"color": "#2196F3", 
-			"icon": "random",
-			"description": "Core algorithmic concepts and techniques"
-		},
-		"spatial": {
-			"color": "#FF9800",
-			"icon": "grid", 
-			"description": "Geometric and spatial algorithm exploration"
-		},
-		"theoretical": {
-			"color": "#9C27B0",
-			"icon": "brain",
-			"description": "Advanced theoretical and conceptual frameworks"
+		"difficulty_levels": {
+			"beginner": "New to programming and VR",
+			"intermediate": "Basic programming knowledge",
+			"advanced": "Experienced with algorithms and data structures"
 		}
 	}
-} 
+}

@@ -34,9 +34,10 @@ func _ready():
 #Setup scene manager
 func _setup_scene_manager():
 	"""Create and connect scene manager for handling transitions"""
-	var scene_manager = SceneManager.new()
+	var scene_manager = SceneManager 
 	scene_manager.name = "SceneManager"
-	add_child(scene_manager)
+	#E 0:00:05:730   LabManager.gd:39 @ _setup_scene_manager(): Can't add child 'SceneManager' to 'LabManager', already has a parent 'root'.
+	#add_child(scene_manager)
 	
 	# Connect this lab manager to the scene manager
 	scene_manager.connect_to_lab_manager(self)

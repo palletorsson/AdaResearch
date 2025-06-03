@@ -100,12 +100,19 @@ func _configure_teleporter(teleporter: Node3D, definition: Dictionary) -> void:
 	if properties.has("visual_effect"):
 		_apply_teleporter_visual_effect(teleporter, properties["visual_effect"])
 	
-	# Add signal router to connect teleporter to SceneManager
-	# The teleporter will just signal "advance sequence" and SceneManager handles the rest
-	UtilitySignalRouter.add_to_utility(teleporter, "teleporter")
+	# DEFER signal router connection to ensure SceneManager exists
+	call_deferred("_connect_teleporter_to_scene_manager", teleporter)
 	
 	print("    ✓ Teleporter configured to advance sequence on activation")
 
+func _connect_teleporter_to_scene_manager(teleporter: Node3D):
+	# Wait for SceneManager to be ready
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	UtilitySignalRouter.add_to_utility(teleporter, "teleporter")
+	print("    ✓ Teleporter connected to SceneManager")
+	
 # Configure spawn point utilities
 func _configure_spawn_point(spawn_point: Node3D, definition: Dictionary) -> void:
 	var properties = definition.get("properties", {})

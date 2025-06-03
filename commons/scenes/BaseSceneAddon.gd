@@ -28,7 +28,7 @@ func _setup_scene_manager():
 		print("BaseSceneAddon: Not in tree or no base root, skipping setup")
 		return
 	
-	scene_manager = SceneManager.new()
+	scene_manager = SceneManager
 	scene_manager.name = "SceneManager"
 	
 	# Use call_deferred to add child safely
