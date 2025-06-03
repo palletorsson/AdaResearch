@@ -113,14 +113,17 @@ func _configure_teleporter(teleporter: Node3D, definition: Dictionary) -> void:
 		
 		print("  Final destination map: %s" % destination_map)
 		
-		# Generate simple scene path
-		var scene_path = "res://commons/scenes/grid.tscn"  # Use grid scene for all maps
+		# Don't set a hardcoded scene path - let SceneManager determine it dynamically
+		# The SceneManager will handle scene path resolution based on destination_map
 		
-		# Set the scene path on the teleporter
-		if teleporter.has_property("scene"):
-			teleporter.set("scene", scene_path)
-			teleporter.set("destination_map", destination_map)  # Store map name separately
+		# Set only the destination map on the teleporter
+		if teleporter.has_property("destination_map"):
+			teleporter.set("destination_map", destination_map)
 			print("    ✓ Set teleporter destination to: %s" % destination_map)
+		
+		# Apply visual effects if specified
+		if properties.has("visual_effect"):
+			_apply_teleporter_visual_effect(teleporter, properties["visual_effect"])
 		
 		# Add signal router to connect teleporter to SceneManager
 		UtilitySignalRouter.add_to_utility(teleporter, "teleporter")

@@ -62,14 +62,15 @@ func _on_teleport_area_body_entered(body: Node3D):
 		print_debug("Teleport: Non-player body entered, ignoring.")
 		return
 
-	print_debug("Teleport: Player activated teleport. Target scene: '%s', Target map: '%s'" % [scene, destination_map])
+	print_debug("Teleport: Player activated teleport. Target map: '%s'" % destination_map)
 
 	# Emit the signal with the destination details.
 	# SceneManager (or UtilitySignalRouter) should be listening to this.
-	if scene != null and destination_map != null: # Check for null, empty strings can be valid (e.g. for menu)
-		emit_signal("teleport_activated", scene, destination_map)
+	# Let SceneManager determine the appropriate scene path based on destination_map
+	if destination_map != null and not destination_map.is_empty():
+		emit_signal("teleport_activated", "", destination_map)  # Empty scene path - let SceneManager handle it
 	else:
-		printerr("Teleport: 'scene' ('%s') or 'destination_map' ('%s') is not properly configured. Cannot teleport." % [scene, destination_map])
+		printerr("Teleport: 'destination_map' ('%s') is not properly configured. Cannot teleport." % destination_map)
 
 
 # --- Property Setters and Visual Update Logic (largely from your original script) ---

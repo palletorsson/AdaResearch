@@ -43,6 +43,9 @@ func connect_utility(utility_object: Node3D, utility_type: String):
 	if utility_object.has_signal("teleport_triggered"):
 		utility_object.teleport_triggered.connect(_on_teleport_triggered.bind(utility_object))
 	
+	if utility_object.has_signal("teleport_activated"):
+		utility_object.teleport_activated.connect(_on_teleport_activated.bind(utility_object))
+	
 	if utility_object.has_signal("zone_entered"):
 		utility_object.zone_entered.connect(_on_zone_entered.bind(utility_type, utility_object))
 
@@ -57,10 +60,27 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 	if utility_object.has_property("destination"):
 		utility_data["destination"] = utility_object.destination
 	
+	if utility_object.has_property("destination_map"):
+		utility_data["destination"] = utility_object.destination_map
+	
 	if utility_object.has_property("spawn_point"):
 		utility_data["spawn_point"] = utility_object.spawn_point
 	
 	scene_manager._on_utility_activated(utility_type, utility_object.global_position, utility_data)
+
+# Handle teleport activation (from teleport_activated signal)
+func _on_teleport_activated(utility_object: Node3D, target_scene_path: String, target_map_name: String):
+	var utility_data = {
+		"position": utility_object.global_position,
+		"name": utility_object.name,
+		"destination": target_map_name
+	}
+	
+	# Add spawn point if available
+	if utility_object.has_property("spawn_point"):
+		utility_data["spawn_point"] = utility_object.spawn_point
+	
+	scene_manager._on_utility_activated("teleporter", utility_object.global_position, utility_data)
 
 # Handle teleport triggers
 func _on_teleport_triggered(utility_object: Node3D):
