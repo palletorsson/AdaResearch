@@ -13,4 +13,5 @@ preferred_grid_map = "Lab"
 main_scene = "uid://cgrljkfrmkgda"
 
 [node name="LoadingScreen" parent="." index="2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)
 splash_screen = ExtResource("3")
