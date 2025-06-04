@@ -9,7 +9,7 @@ extends Node3D
 
 @onready var xr_origin = $"../../../XROrigin3D"
 @onready var camera = $"../../../XROrigin3D/XRCamera3D"
-@onready var gadget_camera = $Camera3D
+
 var is_grabbed: bool = false
 var initial_camera_transform: Transform3D
 var initial_camera_rotation: Basis
@@ -18,14 +18,9 @@ func _ready():
 	# Scale down the gadget
 	scale = initial_scale
 	if xr_origin:
-		print("------------------------------------- xr_origin found")
+		print("XYZ Cooridinates: XR origin found")
 	else: 
-		print("------------------------------------------- no xr_origin")
-	if camera: 
-		print("------------------------------------- camera found")
-	else: 	
-		print("------------------------------------------- no camera")
-	# Create coordinate axes
+		print("XYZ Cooridinates: XR origin not found")
 	create_axes()
 
 func create_axes():
@@ -99,13 +94,7 @@ func _process(delta):
 		# Camera movement based on Y axis (up/down)
 		var y_movement = -gadget_transform.basis.y.y * camera_movement_sensitivity
 		
-		# Apply rotation to camera
-		gadget_camera.rotation.x = clamp(gadget_camera.rotation.x + x_rotation * delta, -PI/2, PI/2)
-		gadget_camera.rotation.z = clamp(gadget_camera.rotation.z + z_rotation * delta, -PI/2, PI/2)
-		
-		# Apply vertical movement
-		xr_origin.position.y += y_movement * delta
-		print("move be grabbed, current camera", str(gadget_camera.current ))
+
 		
 func _on_grab_xyz_grabbed(pickable: Variant, by: Variant) -> void:
 	# Disable XR camera
@@ -113,7 +102,6 @@ func _on_grab_xyz_grabbed(pickable: Variant, by: Variant) -> void:
 	#gadget_camera.current = true
 	is_grabbed = true
 
-	print("XYZ Gadget picked up! Camera current: " + str(gadget_camera.current))
 
 func _on_grab_xyz_dropped(pickable: Variant) -> void:
 
