@@ -1,4 +1,4 @@
-# AdaSceneManager.gd - RENAMED TO AVOID GODOT CLASS COLLISION
+# AdaSceneManager.gd - UPDATED WITHOUT FALLBACK SYSTEM
 # Universal scene transition manager - now as singleton
 # Add this script as AutoLoad in Project Settings with name "AdaSceneManager"
 
@@ -53,7 +53,7 @@ func _ready():
 	print("AdaSceneManager: Singleton initialized - Universal transition system ready")
 	print("AdaSceneManager: Handles artifact, teleporter, trigger, and sequence transitions")
 	
-	# Load sequence configurations from JSON
+	# Load sequence configurations from JSON (REQUIRED)
 	_load_sequence_configurations()
 
 # =============================================================================
@@ -71,22 +71,21 @@ static func is_available() -> bool:
 	return instance != null
 
 # =============================================================================
-# SEQUENCE CONFIGURATION LOADING
+# SEQUENCE CONFIGURATION LOADING (REQUIRED - NO FALLBACK)
 # =============================================================================
 
 func _load_sequence_configurations():
-	"""Load sequence configurations from JSON file"""
+	"""Load sequence configurations from JSON file - REQUIRED"""
 	print("AdaSceneManager: Loading sequence configurations from JSON...")
 	
 	if not FileAccess.file_exists(SEQUENCES_JSON_PATH):
-		print("AdaSceneManager: WARNING - Sequences JSON file not found: %s" % SEQUENCES_JSON_PATH)
-		_create_fallback_sequences()
+		push_error("AdaSceneManager: CRITICAL - Sequences JSON file not found: %s" % SEQUENCES_JSON_PATH)
+		push_error("AdaSceneManager: Create the file with proper sequence definitions")
 		return
 	
 	var file = FileAccess.open(SEQUENCES_JSON_PATH, FileAccess.READ)
 	if not file:
-		print("AdaSceneManager: ERROR - Could not open sequences file")
-		_create_fallback_sequences()
+		push_error("AdaSceneManager: CRITICAL - Could not open sequences file: %s" % SEQUENCES_JSON_PATH)
 		return
 	
 	var json_text = file.get_as_text()
@@ -96,52 +95,25 @@ func _load_sequence_configurations():
 	var parse_result = json.parse(json_text)
 	
 	if parse_result != OK:
-		print("AdaSceneManager: ERROR - Failed to parse sequences JSON: %s" % json.get_error_message())
-		_create_fallback_sequences()
+		push_error("AdaSceneManager: CRITICAL - Failed to parse sequences JSON: %s" % json.get_error_message())
+		push_error("AdaSceneManager: Check JSON syntax in: %s" % SEQUENCES_JSON_PATH)
 		return
 	
 	var json_data = json.data
 	sequence_configs = json_data.get("sequences", {})
 	
 	if sequence_configs.is_empty():
-		print("AdaSceneManager: WARNING - No sequences found in JSON file")
-		_create_fallback_sequences()
+		push_error("AdaSceneManager: CRITICAL - No sequences found in JSON file")
+		push_error("AdaSceneManager: Check 'sequences' section in: %s" % SEQUENCES_JSON_PATH)
 		return
 	
-	print("AdaSceneManager: Loaded %d sequence configurations from JSON" % sequence_configs.size())
+	print("AdaSceneManager: ✅ Successfully loaded %d sequence configurations from JSON" % sequence_configs.size())
 	
-	# Log loaded sequences for debugging
+	# Log loaded sequences for verification
 	for sequence_name in sequence_configs.keys():
 		var config = sequence_configs[sequence_name]
 		var maps = config.get("maps", [])
 		print("  → %s: %d maps (%s)" % [sequence_name, maps.size(), str(maps)])
-
-func _create_fallback_sequences():
-	"""Create fallback sequences if JSON loading fails"""
-	print("AdaSceneManager: Creating fallback sequence configurations")
-	
-	sequence_configs = {
-		"array_tutorial": {
-			"maps": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D", "Tutorial_Disco"],
-			"return_to": "lab",
-			"name": "Array Tutorial (Fallback)",
-			"description": "Basic array concepts tutorial sequence"
-		},
-		"randomness_exploration": {
-			"maps": ["Random_0", "Random_1", "Random_2"],
-			"return_to": "lab",
-			"name": "Randomness Exploration (Fallback)",
-			"description": "Explore randomness and probability"
-		},
-		"geometric_algorithms": {
-			"maps": ["Geometric_1", "Geometric_2"],
-			"return_to": "lab",
-			"name": "Geometric Algorithms (Fallback)",
-			"description": "Geometric algorithm visualization"
-		}
-	}
-	
-	print("AdaSceneManager: Created %d fallback sequences" % sequence_configs.size())
 
 # =============================================================================
 # SIMPLIFIED CONNECTION METHODS
@@ -251,8 +223,9 @@ func _start_sequence_from_request(request: Dictionary):
 	var sequence_name = request.get("sequence", "")
 	
 	if not sequence_configs.has(sequence_name):
-		print("AdaSceneManager: Unknown sequence: %s" % sequence_name)
+		push_error("AdaSceneManager: Unknown sequence: %s" % sequence_name)
 		print("AdaSceneManager: Available sequences: %s" % str(sequence_configs.keys()))
+		print("AdaSceneManager: Check your sequence configuration in: %s" % SEQUENCES_JSON_PATH)
 		return
 	
 	var config = sequence_configs[sequence_name]
@@ -292,12 +265,12 @@ func _load_specific_map(request: Dictionary):
 
 func _load_grid_scene_with_first_map():
 	if current_sequence_data.is_empty():
-		print("AdaSceneManager: ERROR - No sequence data")
+		push_error("AdaSceneManager: ERROR - No sequence data")
 		return
 	
 	var maps = current_sequence_data.get("maps", [])
 	if maps.is_empty():
-		print("AdaSceneManager: ERROR - No maps in sequence")
+		push_error("AdaSceneManager: ERROR - No maps in sequence")
 		return
 	
 	var first_map = maps[0]
@@ -353,7 +326,7 @@ func _return_to_hub(completion_data: Dictionary = {}):
 func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	var staging = _get_vr_staging()
 	if not staging:
-		print("AdaSceneManager: ERROR - Could not find VR staging")
+		push_error("AdaSceneManager: ERROR - Could not find VR staging")
 		return
 	
 	var from_scene = current_scene_type
@@ -400,6 +373,12 @@ func load_map(map_name: String, spawn_point: String = "default"):
 	})
 
 func start_sequence(sequence_name: String):
+	# Validate sequence exists before starting
+	if not sequence_configs.has(sequence_name):
+		push_error("AdaSceneManager: Cannot start unknown sequence: %s" % sequence_name)
+		print("AdaSceneManager: Available sequences: %s" % str(sequence_configs.keys()))
+		return
+		
 	request_transition({
 		"type": TransitionType.MANUAL_LOAD,
 		"action": "start_sequence",
@@ -428,3 +407,38 @@ func get_transition_history() -> Array:
 func set_staging_reference(staging: Node):
 	staging_ref = staging
 	print("AdaSceneManager: Staging reference set to: %s" % staging.name)
+
+# =============================================================================
+# CONFIGURATION VALIDATION
+# =============================================================================
+
+func validate_sequence_config() -> Dictionary:
+	"""Validate the loaded sequence configuration"""
+	var validation = {
+		"valid": true,
+		"errors": [],
+		"warnings": [],
+		"sequences_found": sequence_configs.size()
+	}
+	
+	if sequence_configs.is_empty():
+		validation.valid = false
+		validation.errors.append("No sequences loaded")
+		return validation
+	
+	# Validate each sequence
+	for sequence_name in sequence_configs.keys():
+		var config = sequence_configs[sequence_name]
+		
+		if not config.has("maps") or config.maps.is_empty():
+			validation.valid = false
+			validation.errors.append("Sequence '%s' has no maps defined" % sequence_name)
+		
+		if not config.has("return_to"):
+			validation.warnings.append("Sequence '%s' has no return_to defined" % sequence_name)
+	
+	return validation
+
+# Get available sequences for UI/debugging
+func get_available_sequences() -> Array:
+	return sequence_configs.keys()
