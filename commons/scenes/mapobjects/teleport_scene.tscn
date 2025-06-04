@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://scm48wy2mydu"]
+[gd_scene load_steps=6 format=3 uid="uid://scm48wy2mydu"]
 
 [ext_resource type="Script" uid="uid://duokmbw77vp7d" path="res://commons/scenes/mapobjects/teleport.gd" id="1_18jqi"]
 [ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_dvv38"]
@@ -21,36 +21,7 @@ shader_parameter/transparency = 0.8
 shader_parameter/rim_power = 3.0
 shader_parameter/distortion_strength = 0.1
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_mbybd"]
-_surfaces = [{
-"aabb": AABB(-0.85, -1.4, -0.85, 1.7, 2.8, 1.7),
-"format": 34896613377,
-"index_count": 192,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAFAAEABAACAAYAAwAHAAUACAAEAAYABwAJAAUACAAGAAoABwALAAkADAAIAAoACwANAAkADAAKAA4ACwAPAA0AEAAMAA4ADwARAA0AEAAOABIADwATABEAFAAQABIAEwAVABEAFAASABYAEwAXABUAGAAUABYAFwAZABUAGAAWABoAFwAbABkAHAAYABoAGwAdABkAHAAaAB4AGwAfAB0AIAAcAB4AHwAhAB0AIAAeACIAHwAjACEAJAAgACIAIwAlACEAJAAiACYAIwAnACUAKAAkACYAJwApACUAKAAmACoAJwArACkALAAoACoAKwAtACkALAAqAC4AKwAvAC0AMAAsAC4ALwAxAC0AMAAuADIALwAzADEANAAwADIAMwA1ADEANAAyADYAMwA3ADUAOAA0ADYANwA5ADUAOAA2ADoANwA7ADkAPAA4ADoAOwA9ADkAPAA6AD4AOwA/AD0APwA8AD4APwA+AD0A"),
-"name": "Teleport",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 64,
-"vertex_data": PackedByteArray("/38AAAAAAAD4mP//dQIAAP9///8AAAAA+JgAAHUCAAAGZwAAdQIAAPuw//++CQAABmf//3UCAAD7sAAAvgkAAANPAAC+CQAAHMf//5IVAAADT///vgkAABzHAACSFQAA4jgAAJIVAACB2v//fSUAAOI4//+SFQAAgdoAAH0lAAB9JQAAfSUAAGzq///iOAAAfSX//30lAABs6gAA4jgAAJIVAADiOAAAQPb//wNPAACSFf//4jgAAED2AAADTwAAvgkAAANPAACJ/f//BmcAAL4J//8DTwAAif0AAAZnAAB1AgAABmcAAP//////fwAAdQL//wZnAAD//wAA/38AAAAAAAD/fwAAif3///iYAAAAAP///38AAIn9AAD4mAAAdQIAAPiYAABA9v//+7AAAHUC///4mAAAQPYAAPuwAAC+CQAA+7AAAGzq//8cxwAAvgn///uwAABs6gAAHMcAAJIVAAAcxwAAgdr//4HaAACSFf//HMcAAIHaAACB2gAAfSUAAIHaAAAcx///bOoAAH0l//+B2gAAHMcAAGzqAADiOAAAbOoAAPuw//9A9gAA4jj//2zqAAD7sAAAQPYAAANPAABA9gAA+Jj//4n9AAADT///QPYAAPiYAACJ/QAABmcAAIn9AAD/f/////8AAAZn//+J/QAA/38AAP//AAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_64i0j"]
-resource_name = "teleport_Cylinder"
-_surfaces = [{
-"aabb": AABB(-0.85, -1.4, -0.85, 1.7, 2.8, 1.7),
-"attribute_data": PackedByteArray("/3////93AAD/fwAA/3f///+H////bwAA/4cAAP9v////j////2cAAP+PAAD/Z////5f///9fAAD/lwAA/1////+f////VwAA/58AAP9X////p////08AAP+nAAD/T////6////9HAAD/rwAA/0f///+3////PwAA/7cAAP8/////v////zcAAP+/AAD/N////8f///8vAAD/xwAA/y/////P////JwAA/88AAP8n////1////x8AAP/XAAD/H////9////8XAAD/3wAA/xf////n////DwAA/+cAAP8P////7////wcAAP/vAAD/B///AAAAAAAA////9/////cAAP///////wAA"),
-"format": 34896613399,
-"index_count": 192,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIAAwAFAAEABAACAAYAAwAHAAUACAAEAAYABwAJAAUACAAGAAoABwALAAkADAAIAAoACwANAAkADAAKAA4ACwAPAA0AEAAMAA4ADwARAA0AEAAOABIADwATABEAFAAQABIAEwAVABEAFAASABYAEwAXABUAGAAUABYAFwAZABUAGAAWABoAFwAbABkAHAAYABoAGwAdABkAHAAaAB4AGwAfAB0AIAAcAB4AHwAhAB0AIAAeACIAHwAjACEAJAAgACIAIwAlACEAJAAiACYAIwAnACUAKAAkACYAJwApACUAKAAmACoAJwArACkALAAoACoAKwAtACkALAAqAC4AKwAvAC0AMAAsAC4ALwAxAC0AMAAuADIALwAzADEANAAwADIAMwA1ADEANAAyADYAMwA3ADUAOAA0ADYANwA5ADUAOAA2ADoANwA7ADkAOwA8ADkAOwA9ADwAPgA4ADoAPgA6AD8AQAA+AD8AQAA/AEEA"),
-"name": "Teleport",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 66,
-"vertex_data": PackedByteArray("/38AAAAA///4mP//dQL+9/9///8AAP//+JgAAHUC/vcGZwAAdQL+9/uw//++Cf7vBmf//3UC/vf7sAAAvgn+7wNPAAC+Cf7vHMf//5IV/+cDT///vgn+7xzHAACSFf/n4jgAAJIV/+eB2v//fSX/3+I4//+SFf/ngdoAAH0l/999JQAAfSX/32zq///iOP/XfSX//30l/99s6gAA4jj/15IVAADiOP/XQPb//wNP/8+SFf//4jj/10D2AAADT//PvgkAAANP/8+J/f//Bmf/x74J//8DT//Pif0AAAZn/8d1AgAABmf/x///////f/+/dQL//wZn/8f//wAA/3//vwAAAAD/f/+/if3///iY/7cAAP///3//v4n9AAD4mP+3dQIAAPiY/7dA9v//+7D/r3UC///4mP+3QPYAAPuw/6++CQAA+7D/r2zq//8cx/+nvgn///uw/69s6gAAHMf/p5IVAAAcx/+ngdr//4Ha/5+SFf//HMf/p4HaAACB2v+ffSUAAIHa/58cx///bOr/l30l//+B2v+fHMcAAGzq/5fiOAAAbOr/l/uw//9A9v+P4jj//2zq/5f7sAAAQPb/jwNPAABA9v+P+Jj//4n9/4cDT///QPb/j/iYAACJ/f+H/3//////AID/fwAA//8AgAZnAACJ/f+HBmf//4n9/4f/fwAA//8AgP9//////wCA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/AAD/f////38AAP9/////fwAA/3////9/////f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_mbybd")
+[sub_resource type="BoxMesh" id="BoxMesh_dvv38"]
 
 [node name="Teleport" type="Node3D"]
 script = ExtResource("1_18jqi")
@@ -60,14 +31,13 @@ collision_layer = 0
 collision_mask = 524288
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="TeleportArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012368, 0.655395, 0.219132)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012368, -0.302122, 0.219132)
 shape = SubResource("CylinderShape3D_pk0bj")
 
-[node name="Cylinder" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.73517, 0)
+[node name="Cube" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_t57yy")
 gi_mode = 0
-mesh = SubResource("ArrayMesh_64i0j")
+mesh = SubResource("BoxMesh_dvv38")
 skeleton = NodePath("")
 
 [connection signal="body_entered" from="TeleportArea" to="." method="_on_TeleportArea_body_entered"]

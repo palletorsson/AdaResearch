@@ -16,17 +16,17 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
-		"disco_grid": {
+		"disco_floor": {
 			"name": "Disco Grid",
-			"lookup_name": "disco_grid", 
+			"lookup_name": "disco_floor", 
 			"description": "A shimmering grid that pulses with disco energy",
-			"scene": "res://commons/primitives/grids/disco_grid.tscn",
-			"position": [-1.0, 1.0, 0.5],
-			"rotation": [0.0, 45.0, 0.0],
+			"scene": "res://commons/context/discofloor/discofloor.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "pickup_and_examine",
 			"sequence": null,
 			"artifact_type": "reward",
-			"prerequisites": ["array_tutorial"]
+			"prerequisites": []
 		},
 		"probability_sphere": {
 			"name": "Probability Sphere",
@@ -57,7 +57,7 @@
 			"lookup_name": "array_visualizer",
 			"description": "Interactive tool for visualizing array structures",
 			"scene": "res://commons/primitives/tools/array_visualizer.tscn",
-			"position": [-0.7, 1.0, -0.7],
+			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "pickup_and_examine",
 			"sequence": null,
@@ -69,7 +69,7 @@
 			"lookup_name": "quantum_dice",
 			"description": "Dice that demonstrate quantum probability principles",
 			"scene": "res://commons/primitives/dice/quantum_dice.tscn",
-			"position": [0.7, 1.0, 0.7],
+			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "pickup_and_examine",
 			"sequence": null,
