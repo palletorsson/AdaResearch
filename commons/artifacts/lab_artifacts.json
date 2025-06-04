@@ -11,7 +11,19 @@
 			"scene": "res://commons/primitives/cubes/rotating_cube.tscn",
 			"position": [0.0, 1.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
+			"interaction": "timer_to_start_sequence",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
+		"xyz_coordinates": {
+			"name": "XYZ coordinates",
+			"lookup_name": "xyz_coordinates",
+			"description": "Cartesian coordinate syste, x y z godot",
+			"scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "look",
 			"sequence": "array_tutorial",
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []

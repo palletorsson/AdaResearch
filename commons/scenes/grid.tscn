@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene load_steps=10 format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
+[ext_resource type="PackedScene" uid="uid://dqj0rbocrgwyj" path="res://commons/context/XYZcoordinates/xyz_gadget.tscn" id="2_al13m"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
 [ext_resource type="Script" uid="uid://b74h73fbitp6m" path="res://commons/scenes/reset_area_3d.gd" id="3_grd5c"]
@@ -22,15 +23,16 @@ size = Vector3(23.0722, 1, 50.1584)
 [node name="Label3D" parent="." index="3"]
 text = "Base - Grid"
 
-[node name="GridSystem" parent="." index="4" instance=ExtResource("2_s4bvx")]
+[node name="XYZgadget" parent="." index="4" instance=ExtResource("2_al13m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0103965, 1.82282, -0.00784874)
+
+[node name="GridSystem" parent="." index="5" instance=ExtResource("2_s4bvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GridSystem" index="1"]
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GridSystem/StaticBody3D" index="0"]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 4.56792)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 2.16677, 4.56792)
 mesh = SubResource("BoxMesh_s4bvx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GridSystem/StaticBody3D" index="1"]
@@ -49,7 +51,7 @@ shape = SubResource("BoxShape3D_grd5c")
 transform = Transform3D(23.9965, 0, 0, 0, 1, 0, 0, 0, 45.3196, 0, 0, -17.6834)
 mesh = SubResource("BoxMesh_al13m")
 
-[node name="GridScene" type="Node3D" parent="." index="6"]
+[node name="GridScene" type="Node3D" parent="." index="7"]
 script = ExtResource("3_0u7bn")
 
 [connection signal="body_entered" from="GridSystem/ResetArea3D" to="GridSystem/ResetArea3D" method="_on_body_entered"]
