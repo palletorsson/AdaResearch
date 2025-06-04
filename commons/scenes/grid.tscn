@@ -29,6 +29,10 @@ visible = false
 
 [node name="GridSystem" parent="." index="5" instance=ExtResource("2_s4bvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cube_size = 1.0
+gutter = 0.0
+map_name = "Tutorial_Start"
+reload_map = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GridSystem" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78273, 0, 0)
