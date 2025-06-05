@@ -6,12 +6,13 @@ extends Node
 class_name GridInteractablesComponent
 
 # Path constants
-const ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
+const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 
 # References
 var parent_node: Node3D
 var structure_component: GridStructureComponent
 var utilities_component: GridUtilitiesComponent
+var map_data_component: GridDataComponent  # Add reference to data component
 
 # Settings
 var cube_size: float = 1.0
@@ -30,20 +31,68 @@ signal interactable_activated(object_id: String, position: Vector3, data: Dictio
 
 func _ready():
 	print("GridInteractablesComponent: Initialized with lookup_name validation")
-	_load_artifact_registry()
+	# Artifact registry will be loaded during initialization with map data
 
-# Load artifact registry from JSON file with lookup_name validation
-func _load_artifact_registry():
-	print("GridInteractablesComponent: Loading artifact registry with lookup_name validation...")
+# Load artifact registries based on map configuration
+func _load_artifact_registries():
+	print("GridInteractablesComponent: Loading artifact registries with lookup_name validation...")
 	
-	if not FileAccess.file_exists(ARTIFACTS_JSON_PATH):
-		push_error("GridInteractablesComponent: Artifacts JSON file not found: %s" % ARTIFACTS_JSON_PATH)
-		return
+	# Get artifact registries from map external references
+	var artifact_paths = _get_artifact_registry_paths()
 	
-	var file = FileAccess.open(ARTIFACTS_JSON_PATH, FileAccess.READ)
+	var total_loaded = 0
+	var validation_errors = []
+	var validation_warnings = []
+	
+	for registry_path in artifact_paths:
+		var loaded_count = _load_single_artifact_registry(registry_path, validation_errors, validation_warnings)
+		total_loaded += loaded_count
+	
+	# Report validation results
+	if validation_errors.size() > 0:
+		push_error("GridInteractablesComponent: VALIDATION ERRORS in artifact registries:")
+		for error in validation_errors:
+			push_error("  - %s" % error)
+	
+	if validation_warnings.size() > 0:
+		print("GridInteractablesComponent: Validation warnings:")
+		for warning in validation_warnings:
+			print("  - %s" % warning)
+	
+	print("GridInteractablesComponent: ✅ Loaded %d validated artifacts from %d registries" % [total_loaded, artifact_paths.size()])
+
+# Get artifact registry paths from map data
+func _get_artifact_registry_paths() -> Array[String]:
+	var paths: Array[String] = []
+	
+	# Try to get from map's external references
+	if map_data_component and map_data_component.json_loader:
+		var external_refs = map_data_component.json_loader.map_data.get("external_references", {})
+		var artifact_registries = external_refs.get("artifact_registries", [])
+		
+		if artifact_registries.size() > 0:
+			print("GridInteractablesComponent: Using artifact registries from map: %s" % str(artifact_registries))
+			for path in artifact_registries:
+				paths.append(str(path))
+			return paths
+	
+	# Fallback to default
+	print("GridInteractablesComponent: Using default artifact registry")
+	paths.append(DEFAULT_ARTIFACTS_JSON_PATH)
+	return paths
+
+# Load a single artifact registry file
+func _load_single_artifact_registry(registry_path: String, validation_errors: Array, validation_warnings: Array) -> int:
+	print("GridInteractablesComponent: Loading registry: %s" % registry_path)
+	
+	if not FileAccess.file_exists(registry_path):
+		push_error("GridInteractablesComponent: Artifacts JSON file not found: %s" % registry_path)
+		return 0
+	
+	var file = FileAccess.open(registry_path, FileAccess.READ)
 	if not file:
-		push_error("GridInteractablesComponent: Could not open artifacts file: %s" % ARTIFACTS_JSON_PATH)
-		return
+		push_error("GridInteractablesComponent: Could not open artifacts file: %s" % registry_path)
+		return 0
 	
 	var json_text = file.get_as_text()
 	file.close()
@@ -53,59 +102,52 @@ func _load_artifact_registry():
 	
 	if parse_result != OK:
 		push_error("GridInteractablesComponent: Failed to parse artifacts JSON: %s" % json.get_error_message())
-		return
+		return 0
 	
 	var json_data = json.data
 	var raw_artifacts = json_data.get("artifacts", {})
 	
 	if raw_artifacts.is_empty():
-		push_warning("GridInteractablesComponent: No artifacts found in JSON file")
-		return
+		push_warning("GridInteractablesComponent: No artifacts found in JSON file: %s" % registry_path)
+		return 0
+	
+	var loaded_count = 0
 	
 	# Process and validate each artifact with lookup_name
-	var validation_errors = []
-	var validation_warnings = []
-	
 	for artifact_key in raw_artifacts.keys():
 		var artifact_data = raw_artifacts[artifact_key]
 		
 		# Validate required fields
 		if not artifact_data.has("lookup_name"):
-			validation_errors.append("Artifact '%s' missing required 'lookup_name' field" % artifact_key)
+			validation_errors.append("Artifact '%s' missing required 'lookup_name' field in %s" % [artifact_key, registry_path])
 			continue
 		
 		if not artifact_data.has("scene"):
-			validation_errors.append("Artifact '%s' missing required 'scene' field" % artifact_key)
+			validation_errors.append("Artifact '%s' missing required 'scene' field in %s" % [artifact_key, registry_path])
 			continue
 		
 		var lookup_name = artifact_data["lookup_name"]
 		
 		# Validate lookup_name consistency
 		if lookup_name != artifact_key:
-			validation_errors.append("Artifact key '%s' doesn't match lookup_name '%s'" % [artifact_key, lookup_name])
+			validation_errors.append("Artifact key '%s' doesn't match lookup_name '%s' in %s" % [artifact_key, lookup_name, registry_path])
 			continue
+		
+		# Check for duplicates
+		if grid_artifact_registry.has(lookup_name):
+			validation_warnings.append("Duplicate artifact '%s' found in %s (overriding previous definition)" % [lookup_name, registry_path])
 		
 		# Validate lookup_name format
 		if not _is_valid_lookup_name(lookup_name):
-			validation_warnings.append("Artifact '%s' has non-standard lookup_name format (prefer snake_case)" % lookup_name)
+			validation_warnings.append("Artifact '%s' has non-standard lookup_name format (prefer snake_case) in %s" % [lookup_name, registry_path])
 		
 		# Store using lookup_name as key
 		grid_artifact_registry[lookup_name] = artifact_data
+		loaded_count += 1
 		
 		print("  → Registered artifact: %s ('%s')" % [lookup_name, artifact_data.get("name", "Unnamed")])
 	
-	# Report validation results
-	if validation_errors.size() > 0:
-		push_error("GridInteractablesComponent: VALIDATION ERRORS in artifact registry:")
-		for error in validation_errors:
-			push_error("  - %s" % error)
-	
-	if validation_warnings.size() > 0:
-		print("GridInteractablesComponent: Validation warnings:")
-		for warning in validation_warnings:
-			print("  - %s" % warning)
-	
-	print("GridInteractablesComponent: ✅ Loaded %d validated artifacts" % grid_artifact_registry.size())
+	return loaded_count
 
 # Validate lookup_name format (prefer snake_case)
 func _is_valid_lookup_name(lookup_name: String) -> bool:
@@ -128,14 +170,18 @@ func has_artifact(lookup_name: String) -> bool:
 	return grid_artifact_registry.has(lookup_name)
 
 # Initialize with references and settings
-func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, util_component: GridUtilitiesComponent, settings: Dictionary = {}):
+func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, util_component: GridUtilitiesComponent, data_component: GridDataComponent, settings: Dictionary = {}):
 	parent_node = grid_parent
 	structure_component = struct_component
 	utilities_component = util_component
+	map_data_component = data_component
 	
 	# Apply settings
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
+	
+	# Load artifact registries based on map configuration
+	_load_artifact_registries()
 	
 	print("GridInteractablesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 

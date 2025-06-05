@@ -196,7 +196,11 @@ func generate_report() -> String:
 		report.append("\n--- Utilities Used ---")
 		for code in utility_definitions.keys():
 			var def = utility_definitions[code]
-			report.append("%s: %s (%s)" % [code, def.get("name", "unknown"), def.get("category", "unknown")])
+			if typeof(def) == TYPE_DICTIONARY:
+				report.append("%s: %s (%s)" % [code, def.get("name", "unknown"), def.get("category", "unknown")])
+			else:
+				# Handle string definitions (external references)
+				report.append("%s: %s" % [code, str(def)])
 	
 	# Validation
 	var validation = validate()

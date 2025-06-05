@@ -86,6 +86,11 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				# Get utility definition if available
 				var utility_definition = utility_definitions.get(utility_type, {})
 				
+				# Ensure utility_definition is always a Dictionary (handle string references)
+				if typeof(utility_definition) != TYPE_DICTIONARY:
+					print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
+					utility_definition = {}
+				
 				_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size)
 				utility_count += 1
 	
@@ -238,7 +243,26 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 
 # Handle teleporter activation specifically - connect to SceneManager
 func _on_teleporter_activated(utility_object: Node3D):
-	print("GridUtilitiesComponent: 🚀 Teleporter activated - requesting scene transition")
+	print("GridUtilitiesComponent: 🚀 Teleporter activated - checking for custom handling")
+	
+	# First, try to let the parent GridSystem handle it (for lab-specific logic)
+	if parent_node and parent_node.has_method("_on_utility_activated"):
+		var utility_data = {
+			"position": utility_object.global_position,
+			"name": utility_object.name,
+			"type": "t"
+		}
+		
+		# Add teleporter-specific data
+		if "destination" in utility_object:
+			utility_data["destination"] = utility_object.destination
+		
+		print("GridUtilitiesComponent: Delegating to parent GridSystem for custom handling")
+		parent_node._on_utility_activated("t", utility_object.global_position, utility_data)
+		return
+	
+	# Fallback to default behavior if no custom handling
+	print("GridUtilitiesComponent: Using default teleporter behavior - requesting scene transition")
 	
 	# Find the SceneManager in the tree
 	var scene_manager = _find_scene_manager()

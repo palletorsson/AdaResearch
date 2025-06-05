@@ -1,33 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=5 format=3 uid="uid://dbpjx3b6wajb4"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
-[ext_resource type="Script" uid="uid://0rwrif23d50d" path="res://commons/managers/LabManager.gd" id="2_isue8"]
-[ext_resource type="Script" uid="uid://ce3huik5day7d" path="res://commons/scenes/labScene.gd" id="3_v8jo4"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_qxwn1"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_isue8"]
-size = Vector3(9.62653, 1, 12.0422)
+[ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="2_labgrid"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="3_cube"]
+[ext_resource type="Script" uid="uid://cx7oruy7bo3pt" path="res://commons/scenes/LabGridScene.gd" id="4_labscene"]
 
 [node name="Base" instance=ExtResource("1_qxwn1")]
 
 [node name="Label3D" parent="." index="3"]
-text = "Base - Lab"
+text = "Base - Lab Grid"
 
-[node name="LabManager" type="Node3D" parent="." index="4"]
-script = ExtResource("2_isue8")
+[node name="LabGridSystem" type="Node3D" parent="." index="4"]
+script = ExtResource("2_labgrid")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+[node name="CubeScene" parent="LabGridSystem" index="0" instance=ExtResource("3_cube")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-visible = false
-mesh = SubResource("BoxMesh_qxwn1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
-shape = SubResource("BoxShape3D_isue8")
-
-[node name="LabScene" type="Node3D" parent="." index="6"]
-script = ExtResource("3_v8jo4")
+[node name="LabGridScene" type="Node3D" parent="." index="5"]
+script = ExtResource("4_labscene")

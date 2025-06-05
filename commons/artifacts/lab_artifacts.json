@@ -5,6 +5,7 @@
   
   "artifacts": {
 	"rotating_cube": {
+	  "lookup_name": "rotating_cube",
 	  "name": "Rotating Cube",
 	  "description": "A mysterious rotating cube that triggers the first learning sequence",
 	  "scene": "res://commons/primitives/cubes/rotating_cube.tscn",
@@ -23,6 +24,7 @@
 	},
 	
 	"grid_display": {
+	  "lookup_name": "grid_display",
 	  "name": "Grid Display", 
 	  "description": "Interactive grid showing array structures and patterns",
 	  "scene": "res://commons/displays/grid_display.tscn",
@@ -42,6 +44,7 @@
 	},
 	
 	"xyz_coordinates": {
+	  "lookup_name": "xyz_coordinates",
 	  "name": "XYZ Coordinates",
 	  "description": "3D coordinate system demonstrating spatial relationships",
 	  "scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn", 
@@ -61,6 +64,7 @@
 	},
 	
 	"randomness_sign": {
+	  "lookup_name": "randomness_sign",
 	  "name": "Randomness Portal",
 	  "description": "Gateway to explore probability and randomness concepts", 
 	  "scene": "res://commons/portals/randomness_portal.tscn",
@@ -80,6 +84,7 @@
 	},
 	
 	"probability_sphere": {
+	  "lookup_name": "probability_sphere",
 	  "name": "Probability Sphere",
 	  "description": "Crystalline sphere containing swirling probability patterns",
 	  "scene": "res://commons/primitives/spheres/probability_sphere.tscn",
@@ -99,6 +104,7 @@
 	},
 	
 	"disco_floor": {
+	  "lookup_name": "disco_floor",
 	  "name": "Disco Array Floor",
 	  "description": "Celebration artifact - interactive disco floor showing array mastery!",
 	  "scene": "res://commons/context/discofloor/discofloor.tscn",

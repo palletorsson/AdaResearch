@@ -148,7 +148,7 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	
 	structure_component.initialize(self, base_cube, component_settings)
 	utilities_component.initialize(self, structure_component, component_settings)
-	interactables_component.initialize(self, structure_component, utilities_component, component_settings)
+	interactables_component.initialize(self, structure_component, utilities_component, data_component, component_settings)
 	spawn_component.initialize(structure_component, utilities_component, data_component, component_settings)
 	
 	# Start grid generation
