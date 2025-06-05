@@ -1,6 +1,6 @@
-# AdaSceneManager.gd - UPDATED WITHOUT FALLBACK SYSTEM
-# Universal scene transition manager - now as singleton
-# Add this script as AutoLoad in Project Settings with name "AdaSceneManager"
+# AdaSceneManager.gd - COMPLETE VERSION WITH PROGRESSION SUPPORT
+# Universal scene transition manager - now as singleton with lab progression
+# Add this script as AutoLoad in Project Settings with name "SceneManager"
 
 extends Node
 class_name AdaSceneManager
@@ -28,6 +28,10 @@ var current_sequence_data: Dictionary = {}
 var staging_ref: Node = null
 var transition_history: Array = []
 
+# Progression integration
+var lab_manager_ref: LabManager = null
+var map_progression_manager_ref = null
+
 # Sequence data loaded from JSON
 var sequence_configs: Dictionary = {}
 const SEQUENCES_JSON_PATH = "res://commons/maps/map_sequences.json"
@@ -36,6 +40,7 @@ const SEQUENCES_JSON_PATH = "res://commons/maps/map_sequences.json"
 signal scene_transition_started(from_scene: String, to_scene: String, transition_type: TransitionType)
 signal scene_transition_completed(scene_name: String, user_data: Dictionary)
 signal sequence_started(sequence_name: String, sequence_data: Dictionary)
+signal sequence_completed(sequence_name: String, completion_data: Dictionary)
 
 func _init():
 	# Ensure singleton pattern
@@ -55,6 +60,9 @@ func _ready():
 	
 	# Load sequence configurations from JSON (REQUIRED)
 	_load_sequence_configurations()
+	
+	# Connect to other managers
+	_connect_to_managers()
 
 # =============================================================================
 # SINGLETON ACCESS
@@ -69,6 +77,33 @@ static func get_instance() -> AdaSceneManager:
 static func is_available() -> bool:
 	"""Check if singleton is available"""
 	return instance != null
+
+# =============================================================================
+# MANAGER CONNECTIONS
+# =============================================================================
+
+func _connect_to_managers():
+	"""Connect to other manager systems"""
+	# Connect to MapProgressionManager if available
+	map_progression_manager_ref = get_node_or_null("/root/MapProgressionManager")
+	if map_progression_manager_ref:
+		print("AdaSceneManager: Connected to MapProgressionManager")
+
+func connect_to_lab_manager(lab_manager: LabManager):
+	"""Connect to lab manager for progression updates"""
+	lab_manager_ref = lab_manager
+	
+	if lab_manager and not lab_manager.artifact_activated.is_connected(_on_artifact_activated):
+		lab_manager.artifact_activated.connect(_on_artifact_activated)
+		lab_manager.progression_event.connect(_on_progression_event)
+		print("AdaSceneManager: ✅ Connected to LabManager with progression support")
+
+func connect_to_grid_system(grid_system: Node):
+	"""Connect to grid system for teleporter/trigger events"""
+	if grid_system and grid_system.has_signal("interactable_activated"):
+		if not grid_system.interactable_activated.is_connected(_on_interactable_activated):
+			grid_system.interactable_activated.connect(_on_interactable_activated)
+			print("AdaSceneManager: Connected to GridSystem")
 
 # =============================================================================
 # SEQUENCE CONFIGURATION LOADING (REQUIRED - NO FALLBACK)
@@ -114,23 +149,6 @@ func _load_sequence_configurations():
 		var config = sequence_configs[sequence_name]
 		var maps = config.get("maps", [])
 		print("  → %s: %d maps (%s)" % [sequence_name, maps.size(), str(maps)])
-
-# =============================================================================
-# SIMPLIFIED CONNECTION METHODS
-# =============================================================================
-
-func connect_to_lab_manager(lab_manager: LabManager):
-	"""Connect to lab manager for artifact activations"""
-	if lab_manager and not lab_manager.artifact_activated.is_connected(_on_artifact_activated):
-		lab_manager.artifact_activated.connect(_on_artifact_activated)
-		lab_manager.progression_event.connect(_on_progression_event)
-		print("AdaSceneManager: Connected to LabManager")
-
-func connect_to_grid_system(grid_system: Node):
-	"""Connect to grid system for teleporter/trigger events"""
-	if grid_system and not grid_system.interactable_activated.is_connected(_on_interactable_activated):
-		grid_system.interactable_activated.connect(_on_interactable_activated)
-		print("AdaSceneManager: Connected to GridSystem")
 
 # =============================================================================
 # SIGNAL HANDLERS
@@ -244,6 +262,9 @@ func _start_sequence_from_request(request: Dictionary):
 	
 	print("AdaSceneManager: Starting sequence '%s' with %d maps" % [sequence_name, current_sequence_data.maps.size()])
 	
+	# Emit sequence started signal
+	sequence_started.emit(sequence_name, current_sequence_data)
+	
 	_load_grid_scene_with_first_map()
 
 func _load_specific_map(request: Dictionary):
@@ -293,7 +314,18 @@ func _advance_sequence():
 	var current_step = current_sequence_data.get("current_step", 0)
 	
 	if current_step + 1 >= maps.size():
-		_return_to_hub({"sequence_completed": current_sequence_data.sequence_name})
+		# Sequence complete - return to hub with completion data
+		var completion_data = {
+			"sequence_completed": current_sequence_data.sequence_name,
+			"maps_completed": maps,
+			"total_maps": maps.size(),
+			"completion_timestamp": Time.get_datetime_string_from_system()
+		}
+		
+		# Emit sequence completion signal
+		sequence_completed.emit(current_sequence_data.sequence_name, completion_data)
+		
+		_return_to_hub(completion_data)
 		return
 	
 	current_sequence_data.current_step = current_step + 1
@@ -310,17 +342,37 @@ func _advance_sequence():
 	_load_scene_with_data(GRID_SCENE_PATH, scene_data)
 
 func _return_to_hub(completion_data: Dictionary = {}):
-	print("AdaSceneManager: Returning to lab hub")
+	print("AdaSceneManager: Returning to lab hub with completion data")
 	print("AdaSceneManager: Completion data: %s" % completion_data)
 	
+	# Extract sequence completion information
+	var completed_sequence = ""
+	if current_sequence_data.has("sequence_name"):
+		completed_sequence = current_sequence_data["sequence_name"]
+		completion_data["sequence_completed"] = completed_sequence
+		completion_data["maps_completed"] = current_sequence_data.get("maps", [])
+		completion_data["total_maps"] = current_sequence_data.get("maps", []).size()
+		completion_data["completion_timestamp"] = Time.get_datetime_string_from_system()
+		
+		# Notify MapProgressionManager if available
+		if map_progression_manager_ref and map_progression_manager_ref.has_method("complete_map"):
+			for map_name in current_sequence_data.get("maps", []):
+				map_progression_manager_ref.complete_map(map_name)
+	
+	# Clear current sequence
 	current_sequence_data.clear()
 	
+	# Prepare lab scene data with completion information
 	var lab_scene_data = {
 		"return_from": "grid",
 		"completion_data": completion_data,
-		"scene_manager": self
+		"scene_manager": self,
+		"completed_sequence": completed_sequence
 	}
 	
+	print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab" % completed_sequence)
+	
+	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
 
 func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
@@ -338,7 +390,48 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	var transition_type = scene_data.get("transition_source", {}).get("type", TransitionType.MANUAL_LOAD)
 	scene_transition_started.emit(from_scene, to_scene, transition_type)
 	
+	# Add completion data to staging metadata for lab to access
+	if scene_data.has("completion_data"):
+		staging.set_meta("completion_data", scene_data["completion_data"])
+	
+	# Connect to staging signals for scene completion handling
+	if staging.has_signal("scene_loaded") and not staging.scene_loaded.is_connected(_on_staging_scene_loaded):
+		staging.scene_loaded.connect(_on_staging_scene_loaded)
+	
+	if staging.has_signal("scene_visible") and not staging.scene_visible.is_connected(_on_staging_scene_visible):
+		staging.scene_visible.connect(_on_staging_scene_visible)
+	
 	staging.load_scene(scene_path, scene_data)
+
+func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
+	"""Handle when staging has loaded a scene"""
+	print("AdaSceneManager: Scene loaded by staging: %s" % scene.name)
+	
+	# Emit our own signal
+	scene_transition_completed.emit(current_scene_type, user_data)
+	
+	# If returning to lab with completion data, notify lab manager
+	if current_scene_type == "lab" and user_data.has("completion_data"):
+		var completion_data = user_data["completion_data"]
+		
+		# Wait for lab scene to initialize
+		await get_tree().process_frame
+		await get_tree().process_frame
+		
+		# Find and notify lab manager directly
+		var lab_manager = scene.find_child("LabManager", true, false)
+		if lab_manager and lab_manager.has_method("_on_scene_transition_completed"):
+			lab_manager._on_scene_transition_completed("lab", user_data)
+		
+		# Also notify via reference if connected
+		if lab_manager_ref and completion_data.has("sequence_completed"):
+			var completed_sequence = completion_data["sequence_completed"]
+			print("AdaSceneManager: 🔄 Notifying LabManager of sequence completion: %s" % completed_sequence)
+			lab_manager_ref._on_sequence_completed(completed_sequence)
+
+func _on_staging_scene_visible(scene: Node, user_data: Dictionary):
+	"""Handle when staging scene becomes visible"""
+	print("AdaSceneManager: Scene visible: %s" % scene.name)
 
 func _get_vr_staging() -> Node:
 	if staging_ref:
@@ -409,6 +502,40 @@ func set_staging_reference(staging: Node):
 	print("AdaSceneManager: Staging reference set to: %s" % staging.name)
 
 # =============================================================================
+# PROGRESSION INTEGRATION
+# =============================================================================
+
+func force_complete_sequence(sequence_name: String):
+	"""Force complete a sequence for testing progression"""
+	print("AdaSceneManager: 🔧 Force completing sequence: %s" % sequence_name)
+	
+	var completion_data = {
+		"sequence_completed": sequence_name,
+		"force_completed": true,
+		"completion_timestamp": Time.get_datetime_string_from_system()
+	}
+	
+	# Notify lab manager directly
+	if lab_manager_ref:
+		lab_manager_ref._on_sequence_completed(sequence_name)
+	
+	# Emit signal
+	sequence_completed.emit(sequence_name, completion_data)
+
+func get_lab_manager() -> LabManager:
+	"""Get reference to connected lab manager"""
+	return lab_manager_ref
+
+func notify_sequence_completion(sequence_name: String, completion_data: Dictionary = {}):
+	"""Manually notify of sequence completion (for external integrations)"""
+	print("AdaSceneManager: Manual sequence completion notification: %s" % sequence_name)
+	
+	if lab_manager_ref:
+		lab_manager_ref._on_sequence_completed(sequence_name)
+	
+	sequence_completed.emit(sequence_name, completion_data)
+
+# =============================================================================
 # CONFIGURATION VALIDATION
 # =============================================================================
 
@@ -442,3 +569,58 @@ func validate_sequence_config() -> Dictionary:
 # Get available sequences for UI/debugging
 func get_available_sequences() -> Array:
 	return sequence_configs.keys()
+
+# =============================================================================
+# DEBUG AND TESTING
+# =============================================================================
+
+func print_scene_manager_status():
+	"""Print comprehensive status information"""
+	print("=== ADASCENEMANAGER STATUS ===")
+	print("Current scene type: %s" % current_scene_type)
+	print("In sequence: %s" % is_in_sequence())
+	if is_in_sequence():
+		print("Current sequence: %s" % current_sequence_data.get("sequence_name", "unknown"))
+		print("Sequence step: %d/%d" % [
+			current_sequence_data.get("current_step", 0) + 1,
+			current_sequence_data.get("maps", []).size()
+		])
+	print("Lab manager connected: %s" % (lab_manager_ref != null))
+	print("Staging reference: %s" % (staging_ref != null))
+	print("Available sequences: %s" % str(sequence_configs.keys()))
+	print("Transition history entries: %d" % transition_history.size())
+	print("==============================")
+
+func get_debug_info() -> Dictionary:
+	"""Get debug information as dictionary"""
+	return {
+		"current_scene_type": current_scene_type,
+		"in_sequence": is_in_sequence(),
+		"current_sequence_data": current_sequence_data,
+		"lab_manager_connected": lab_manager_ref != null,
+		"staging_connected": staging_ref != null,
+		"available_sequences": sequence_configs.keys(),
+		"transition_history_count": transition_history.size(),
+		"last_transition": transition_history[-1] if transition_history.size() > 0 else {}
+	}
+
+# Auto-connect methods for easy integration
+func auto_connect_to_scene():
+	"""Automatically connect to available systems in current scene"""
+	print("AdaSceneManager: Auto-connecting to scene systems...")
+	
+	var current_scene = get_tree().current_scene
+	if not current_scene:
+		return
+	
+	# Try to find and connect to lab manager
+	var lab_manager = current_scene.find_child("LabManager", true, false)
+	if lab_manager and lab_manager is LabManager:
+		connect_to_lab_manager(lab_manager)
+	
+	# Try to find and connect to grid system
+	var grid_system = current_scene.find_child("GridSystem", true, false)
+	if grid_system:
+		connect_to_grid_system(grid_system)
+	
+	print("AdaSceneManager: Auto-connection complete")

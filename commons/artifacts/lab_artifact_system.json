@@ -5,7 +5,7 @@
   "current_state": {
 	"active_artifacts": ["rotating_cube"],
 	"visible_artifacts": ["rotating_cube"],
-	"hidden_artifacts": ["grid_display", "randomness_sign"],
+	"hidden_artifacts": ["grid_display", "randomness_sign", "xyz_coordinates", "disco_floor", "probability_sphere"],
 	"lab_lighting": "minimal_cube_focused",
 	"environment_mode": "dark_hub"
   },
@@ -18,11 +18,67 @@
 	"last_updated": "2025-01-20"
   },
 
+  "progression_states": {
+	"initial": {
+	  "description": "Starting state - only rotating cube visible",
+	  "visible_artifacts": ["rotating_cube"],
+	  "hidden_artifacts": ["grid_display", "randomness_sign", "xyz_coordinates", "disco_floor", "probability_sphere"],
+	  "lighting_mode": "minimal_cube_focused"
+	},
+	
+	"post_array_tutorial": {
+	  "description": "After completing array tutorial sequence",
+	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates"],
+	  "hidden_artifacts": ["randomness_sign", "disco_floor", "probability_sphere"],
+	  "lighting_mode": "dual_artifact_lighting",
+	  "unlocked_sequences": ["randomness_exploration"]
+	},
+	
+	"post_randomness_exploration": {
+	  "description": "After completing randomness exploration",
+	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates", "randomness_sign", "probability_sphere"],
+	  "hidden_artifacts": ["disco_floor"],
+	  "lighting_mode": "full_artifact_lighting",
+	  "unlocked_sequences": ["geometric_algorithms"]
+	},
+	
+	"all_sequences_complete": {
+	  "description": "All major sequences completed - disco celebration!",
+	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates", "randomness_sign", "probability_sphere", "disco_floor"],
+	  "hidden_artifacts": [],
+	  "lighting_mode": "celebration_lighting",
+	  "unlocked_sequences": []
+	}
+  },
+
+  "sequence_rewards": {
+	"array_tutorial": {
+	  "artifacts_to_unlock": ["xyz_coordinates", "grid_display"],
+	  "new_state": "post_array_tutorial",
+	  "lighting_change": "dual_artifact_lighting",
+	  "achievement": "array_master"
+	},
+	
+	"randomness_exploration": {
+	  "artifacts_to_unlock": ["probability_sphere", "randomness_sign"],
+	  "new_state": "post_randomness_exploration", 
+	  "lighting_change": "full_artifact_lighting",
+	  "achievement": "probability_pioneer"
+	},
+	
+	"geometric_algorithms": {
+	  "artifacts_to_unlock": ["disco_floor"],
+	  "new_state": "all_sequences_complete",
+	  "lighting_change": "celebration_lighting",
+	  "achievement": "geometry_guru"
+	}
+  },
+
   "visibility_rules": {
 	"initial_state": {
 	  "description": "Only rotating cube visible - dark lab environment",
 	  "visible_artifacts": ["rotating_cube"],
-	  "hidden_artifacts": ["grid_display", "randomness_sign"],
+	  "hidden_artifacts": ["grid_display", "randomness_sign", "xyz_coordinates", "disco_floor", "probability_sphere"],
 	  "lighting_mode": "minimal_cube_focused",
 	  "environment_settings": {
 		"ambient_energy": 0.1,
@@ -33,7 +89,7 @@
 	"post_cube_activation": {
 	  "description": "Grid display becomes visible after cube activation",
 	  "visible_artifacts": ["rotating_cube", "grid_display"],
-	  "hidden_artifacts": ["randomness_sign"],
+	  "hidden_artifacts": ["randomness_sign", "xyz_coordinates", "disco_floor", "probability_sphere"],
 	  "lighting_mode": "dual_artifact_lighting",
 	  "triggers": ["rotating_cube_activated"],
 	  "environment_settings": {
@@ -43,11 +99,11 @@
 	},
 	
 	"exploration_phase": {
-	  "description": "Randomness sign appears after grid interaction",
-	  "visible_artifacts": ["rotating_cube", "grid_display", "randomness_sign"],
-	  "hidden_artifacts": [],
+	  "description": "More artifacts appear after sequence completion",
+	  "visible_artifacts": ["rotating_cube", "grid_display", "xyz_coordinates"],
+	  "hidden_artifacts": ["randomness_sign", "disco_floor", "probability_sphere"],
 	  "lighting_mode": "full_artifact_lighting",
-	  "triggers": ["grid_display_interacted"],
+	  "triggers": ["sequence_completed"],
 	  "environment_settings": {
 		"ambient_energy": 0.3,
 		"background_darkness": 0.7
@@ -66,15 +122,36 @@
 	"grid_display": {
 	  "status": "hidden",
 	  "unlock_progress": 0.0,
-	  "unlock_trigger": "rotating_cube_activated",
+	  "unlock_trigger": "array_tutorial_completed",
 	  "progression_events": ["display_unlocked", "grid_interacted"]
+	},
+	
+	"xyz_coordinates": {
+	  "status": "hidden",
+	  "unlock_progress": 0.0,
+	  "unlock_trigger": "array_tutorial_completed",
+	  "progression_events": ["coordinates_unlocked", "coordinates_examined"]
 	},
 	
 	"randomness_sign": {
 	  "status": "hidden", 
 	  "unlock_progress": 0.0,
-	  "unlock_trigger": "grid_display_interacted",
+	  "unlock_trigger": "randomness_exploration_completed",
 	  "progression_events": ["sign_unlocked", "randomness_started"]
+	},
+	
+	"probability_sphere": {
+	  "status": "hidden",
+	  "unlock_progress": 0.0,
+	  "unlock_trigger": "randomness_exploration_completed",
+	  "progression_events": ["sphere_unlocked", "probability_examined"]
+	},
+	
+	"disco_floor": {
+	  "status": "hidden",
+	  "unlock_progress": 0.0,
+	  "unlock_trigger": "all_sequences_completed",
+	  "progression_events": ["disco_unlocked", "celebration_mode"]
 	}
   },
 
@@ -86,17 +163,25 @@
 	  "next_state": "post_cube_activation"
 	},
 	
-	"grid_display_interacted": {
-	  "unlocks": ["randomness_sign"],
+	"array_tutorial_completed": {
+	  "unlocks": ["xyz_coordinates", "grid_display"],
 	  "updates_lighting": true,
 	  "achievement": "array_explorer",
-	  "next_state": "exploration_phase"
+	  "next_state": "post_array_tutorial"
 	},
 	
-	"randomness_sign_activated": {
-	  "unlocks": [],
-	  "opens_sequence": "randomness_exploration",
-	  "achievement": "probability_pioneer"
+	"randomness_exploration_completed": {
+	  "unlocks": ["probability_sphere", "randomness_sign"],
+	  "updates_lighting": true,
+	  "achievement": "probability_pioneer",
+	  "next_state": "post_randomness_exploration"
+	},
+	
+	"geometric_algorithms_completed": {
+	  "unlocks": ["disco_floor"],
+	  "updates_lighting": true,
+	  "achievement": "geometry_guru",
+	  "next_state": "all_sequences_complete"
 	}
   },
 
@@ -110,17 +195,26 @@
 	
 	"dual_artifact_lighting": {
 	  "ambient_energy": 0.2,
-	  "artifact_lights": ["rotating_cube", "grid_display"],
+	  "artifact_lights": ["rotating_cube", "grid_display", "xyz_coordinates"],
 	  "background_darkness": 0.85,
 	  "directional_light_enabled": false
 	},
 	
 	"full_artifact_lighting": {
 	  "ambient_energy": 0.3,
-	  "artifact_lights": ["rotating_cube", "grid_display", "randomness_sign"],
+	  "artifact_lights": ["rotating_cube", "grid_display", "xyz_coordinates", "randomness_sign", "probability_sphere"],
 	  "background_darkness": 0.7,
 	  "directional_light_enabled": true,
 	  "directional_light_energy": 0.5
+	},
+	
+	"celebration_lighting": {
+	  "ambient_energy": 0.4,
+	  "artifact_lights": ["rotating_cube", "grid_display", "xyz_coordinates", "randomness_sign", "probability_sphere", "disco_floor"],
+	  "background_darkness": 0.5,
+	  "directional_light_enabled": true,
+	  "directional_light_energy": 0.8,
+	  "disco_mode": true
 	}
   }
 }
