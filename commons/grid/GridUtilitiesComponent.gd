@@ -139,11 +139,22 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		print("  Added %s at (%d,%d,%d)%s" % [UtilityRegistry.get_utility_name(utility_type), x, y, z, param_info])
 
 # Apply utility parameters
+
+# Add this to GridUtilitiesComponent.gd in the _apply_utility_parameters method
+
 func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
 	match utility_type:
 		"t":  # Teleport
-			if parameters.size() > 0 and "destination" in utility_object:
-				utility_object.destination = parameters[0]
+			if parameters.size() > 0:
+				var destination = parameters[0]
+				
+				# Store the destination (could be sequence name or map name)
+				if "destination" in utility_object:
+					utility_object.destination = destination
+				else:
+					utility_object.set_meta("destination", destination)
+				
+				print("GridUtilitiesComponent: Set teleporter destination to: %s" % destination)
 		"l":  # Lift
 			if parameters.size() > 0 and "height" in utility_object:
 				utility_object.height = float(parameters[0])
@@ -245,42 +256,39 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 func _on_teleporter_activated(utility_object: Node3D):
 	print("GridUtilitiesComponent: 🚀 Teleporter activated - checking for custom handling")
 	
+	# Get destination from teleporter
+	var destination = ""
+	if "destination" in utility_object:
+		destination = utility_object.destination
+	else:
+		destination = utility_object.get_meta("destination", "")
+	
 	# First, try to let the parent GridSystem handle it (for lab-specific logic)
 	if parent_node and parent_node.has_method("_on_utility_activated"):
 		var utility_data = {
 			"position": utility_object.global_position,
 			"name": utility_object.name,
-			"type": "t"
+			"type": "t",
+			"destination": destination
 		}
 		
-		# Add teleporter-specific data
-		if "destination" in utility_object:
-			utility_data["destination"] = utility_object.destination
-		
 		print("GridUtilitiesComponent: Delegating to parent GridSystem for custom handling")
+		print("GridUtilitiesComponent: Destination: %s" % destination)
 		parent_node._on_utility_activated("t", utility_object.global_position, utility_data)
 		return
 	
-	# Fallback to default behavior if no custom handling
-	print("GridUtilitiesComponent: Using default teleporter behavior - requesting scene transition")
-	
-	# Find the SceneManager in the tree
+	# Fallback to default behavior
+	print("GridUtilitiesComponent: Using default teleporter behavior")
 	var scene_manager = _find_scene_manager()
 	if scene_manager:
-		print("GridUtilitiesComponent: ✅ Found SceneManager - requesting transition")
-		
-		# Tell SceneManager to advance the current sequence
 		scene_manager.request_transition({
-			"type": 1, # SceneManager.TransitionType.TELEPORTER
-			"action": "next_in_sequence",
+			"type": 1,
+			"action": "start_sequence" if _is_sequence_name(destination) else "load_map",
+			"sequence": destination if _is_sequence_name(destination) else "",
+			"destination": destination if not _is_sequence_name(destination) else "",
 			"source": "teleporter",
 			"position": utility_object.global_position
 		})
-	else:
-		print("GridUtilitiesComponent: ❌ ERROR - Could not find SceneManager for teleporter transition")
-		print("GridUtilitiesComponent: Available nodes in tree:")
-		_debug_print_scene_tree()
-
 # Find SceneManager in the scene tree
 func _find_scene_manager():
 	# Try common locations for SceneManager
@@ -298,6 +306,16 @@ func _find_scene_manager():
 	
 	return null
 
+func _is_sequence_name(name: String) -> bool:
+	"""Check if the name is a sequence name rather than a map name"""
+	var known_sequences = [
+		"array_tutorial",
+		"randomness_exploration", 
+		"geometric_algorithms",
+		"advanced_concepts"
+	]
+	return name in known_sequences
+	
 # Debug: Print scene tree to help find SceneManager
 func _debug_print_scene_tree():
 	print("GridUtilitiesComponent: Scene tree structure:")

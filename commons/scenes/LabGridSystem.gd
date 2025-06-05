@@ -362,6 +362,7 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 
 # UTILITY OVERRIDES FOR LAB-SPECIFIC BEHAVIOR
 
+
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
 	"""Override utility activation for lab-specific handling"""
 	print("LabGridSystem: Lab utility activated - %s" % utility_type)
@@ -370,14 +371,23 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 	if utility_type == "t":
 		print("LabGridSystem: 🚀 Lab teleporter activated")
 		
-		var destination = data.get("destination", "Tutorial_Single")
-		var sequence_name = _get_sequence_for_map(destination)
+		var destination = data.get("destination", "")
+		
+		# Check if destination is a sequence name (no map extension)
+		var sequence_name = ""
+		if _is_sequence_name(destination):
+			sequence_name = destination
+			print("LabGridSystem: Direct sequence teleporter: '%s'" % sequence_name)
+		else:
+			# Legacy: map name, try to determine sequence
+			sequence_name = _get_sequence_for_map(destination)
+			print("LabGridSystem: Map-based teleporter '%s' -> sequence '%s'" % [destination, sequence_name])
 		
 		# Find SceneManager and request transition
 		var scene_manager = _find_scene_manager()
 		if scene_manager:
 			if sequence_name:
-				print("LabGridSystem: Starting sequence '%s' with first map '%s'" % [sequence_name, destination])
+				print("LabGridSystem: Starting sequence '%s'" % sequence_name)
 				scene_manager.request_transition({
 					"type": 1, # TransitionType.TELEPORTER
 					"action": "start_sequence",
@@ -399,6 +409,16 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 		super._on_utility_activated(utility_type, position, data)
 
 # SEQUENCE MANAGEMENT HELPERS
+
+func _is_sequence_name(name: String) -> bool:
+	"""Check if the name is a sequence name rather than a map name"""
+	var known_sequences = [
+		"array_tutorial",
+		"randomness_exploration", 
+		"geometric_algorithms",
+		"advanced_concepts"
+	]
+	return name in known_sequences
 
 func _get_sequence_for_map(map_name: String) -> String:
 	"""Determine which sequence a map belongs to based on map_sequences.json"""
@@ -422,7 +442,6 @@ func _get_sequence_for_map(map_name: String) -> String:
 	}
 	
 	return sequence_mappings.get(map_name, "")
-
 # PUBLIC API EXTENSIONS
 
 func get_lab_info() -> Dictionary:

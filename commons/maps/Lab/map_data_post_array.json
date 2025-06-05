@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Lab_Post_Array",
-		"description": "Lab State After Array Tutorial - New artifacts unlocked",
+		"description": "Lab State After Array Tutorial - New artifacts and sequences unlocked",
 		"version": "1.0",
 		"format": "json_lab_progressive",
 		"progression_state": "post_array_tutorial",
@@ -15,7 +15,8 @@
 			"category": "laboratory_progressive",
 			"learning_objectives": [
 				"Explore newly unlocked artifacts",
-				"Access to randomness exploration"
+				"Access to randomness exploration",
+				"Multiple sequence paths available"
 			]
 		}
 	},
@@ -40,29 +41,43 @@
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
+			["t:array_tutorial", "t:randomness_exploration", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "t:Tutorial_Single", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", ""]
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "rotating_cube", "", " ", " ", " ", " "],
+			[" ", "rotating_cube", " ", " ", " ", " ", " "],
 			[" ", "xyz_coordinates", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
-		], 
-		
+		]
+	},
+	"external_references": {
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
+		"utility_registry": "res://commons/utilities/utility_registry.json",
+		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Sequence Portal",
+			"description": "Portal to learning sequences"
+		}
 	},
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 6.0],
 			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - now with more visible artifacts"
+			"description": "Main entrance - now with sequence access"
 		}
 	},
 	"lighting": {
@@ -84,6 +99,12 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_array_tutorial"
+		"progression_state": "post_array_tutorial",
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"unlock_on_sequence_completion": true
+		}
 	}
 }
