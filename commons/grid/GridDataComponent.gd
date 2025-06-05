@@ -44,10 +44,45 @@ func load_map_data(target_map_name: String) -> bool:
 
 # Load JSON format map data
 func _load_json_map() -> bool:
-	var json_path = MAPS_PATH + map_name + "/map_data.json"
+	var json_path = ""
 	
-	print("GridDataComponent: Attempting to load JSON from: %s" % json_path)
-	print("GridDataComponent: File exists check: %s" % FileAccess.file_exists(json_path))
+	print("🔍 DEBUG: GridDataComponent._load_json_map() called")
+	print("🔍 DEBUG: map_name = '%s'" % map_name)
+	
+	# Handle Lab subfolder structure
+	if map_name.begins_with("Lab/"):
+		# For Lab progressive maps: res://commons/maps/Lab/map_data_init.json
+		var lab_map_file = map_name.substr(4)  # Remove "Lab/" prefix
+		json_path = MAPS_PATH + "Lab/" + lab_map_file + ".json"
+		print("🔍 DEBUG: Lab progressive map detected")
+		print("🔍 DEBUG: lab_map_file = '%s'" % lab_map_file)
+		print("🔍 DEBUG: json_path = '%s'" % json_path)
+	elif map_name == "Lab":
+		# For base Lab map: res://commons/maps/Lab/map_data.json  
+		json_path = MAPS_PATH + "Lab/map_data.json"
+		print("🔍 DEBUG: Base Lab map")
+		print("🔍 DEBUG: json_path = '%s'" % json_path)
+	else:
+		# For regular maps: res://commons/maps/Tutorial_Start/map_data.json
+		json_path = MAPS_PATH + map_name + "/map_data.json"
+		print("🔍 DEBUG: Regular map")
+		print("🔍 DEBUG: json_path = '%s'" % json_path)
+	
+	print("🔍 DEBUG: Final json_path = '%s'" % json_path)
+	print("🔍 DEBUG: File exists check: %s" % FileAccess.file_exists(json_path))
+	
+	# List what files actually exist in the Lab folder
+	print("🔍 DEBUG: Files in Lab folder:")
+	var lab_dir = DirAccess.open(MAPS_PATH + "Lab/")
+	if lab_dir:
+		lab_dir.list_dir_begin()
+		var file_name = lab_dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".json"):
+				print("🔍 DEBUG:   → %s" % file_name)
+			file_name = lab_dir.get_next()
+	else:
+		print("🔍 DEBUG: Could not open Lab folder!")
 	
 	if not JsonMapLoader.is_json_map_file(json_path):
 		var error = "No JSON map data found for '%s' at path: %s" % [map_name, json_path]
@@ -61,6 +96,7 @@ func _load_json_map() -> bool:
 	
 	print("GridDataComponent: Loading JSON map from '%s'" % json_path)
 	
+	# Rest of the method stays the same...
 	json_loader = JsonMapLoader.new()
 	if json_loader.load_map(json_path):
 		current_map_format = "json"
@@ -79,6 +115,7 @@ func _load_json_map() -> bool:
 		)
 		
 		print("GridDataComponent: JSON map loaded successfully")
+		print("  Map name from JSON: %s" % json_loader.get_map_name())
 		print("  Dimensions: %dx%dx%d" % [grid_dimensions.x, grid_dimensions.y, grid_dimensions.z])
 		
 		# Generate report

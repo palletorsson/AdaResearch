@@ -1,7 +1,4 @@
-# LabGridSystem.gd
-# Thin layer on top of GridSystem for lab environments
-# Main difference: off-white cubes and lab-specific styling
-
+# LabGridSystem.gd - FIXED to respect progressive map files
 extends GridSystem
 class_name LabGridSystem
 
@@ -10,13 +7,18 @@ class_name LabGridSystem
 @export var lab_cube_color: Color = Color(0.95, 0.95, 0.98, 1.0)  # Off-white
 @export var lab_ambient_color: Color = Color(0.9, 0.9, 1.0, 0.3)  # Cool lab lighting
 
-# Lab progression integration
+# Progressive map support
+var is_progressive_map: bool = false
+var progression_state: String = "initial"
+
+# Lab progression integration (keep for backwards compatibility)
 var completed_sequences: Array[String] = []
 var unlocked_artifacts: Array[String] = []
 
 # Additional lab signals
 signal lab_artifact_activated(artifact_id: String)
 signal lab_sequence_triggered(sequence_name: String)
+ 
 var show_grid
 
 func _ready():
@@ -27,8 +29,11 @@ func _ready():
 		map_name = "Lab"
 		print("LabGridSystem: Set default map_name to 'Lab'")
 	
-	# Initialize unlocked artifacts with default
-	if unlocked_artifacts.is_empty():
+	# Check if this is a progressive map
+	_check_for_progressive_map()
+	
+	# Initialize unlocked artifacts with default (only for non-progressive maps)
+	if not is_progressive_map and unlocked_artifacts.is_empty():
 		unlocked_artifacts.append("rotating_cube")
 		print("LabGridSystem: Initialized with default unlocked artifact: rotating_cube")
 	
@@ -36,11 +41,39 @@ func _ready():
 	if lab_mode:
 		_apply_lab_styling()
 	
-	# Load lab progression
-	_load_lab_progression()
+	# Load lab progression (only for non-progressive maps)
+	if not is_progressive_map:
+		_load_lab_progression()
 	
 	# Call parent ready
 	super()
+
+func _check_for_progressive_map():
+	"""Check if this is a progressive map file"""
+	if map_name.begins_with("Lab/map_data_"):
+		is_progressive_map = true
+		
+		# Extract progression state from map name
+		var map_file = map_name.substr(4)  # Remove "Lab/" prefix
+		match map_file:
+			"map_data_init":
+				progression_state = "initial"
+			"map_data_post_array":
+				progression_state = "post_array_tutorial"
+			"map_data_post_random":
+				progression_state = "post_randomness_exploration"
+			"map_data_post_geometric":
+				progression_state = "post_geometric_algorithms"
+			"map_data_complete":
+				progression_state = "all_complete"
+			_:
+				progression_state = "initial"
+		
+		print("LabGridSystem: ✅ Progressive map detected - state: %s" % progression_state)
+	else:
+		is_progressive_map = false
+		progression_state = "initial"
+		print("LabGridSystem: Standard lab map - using legacy progression system")
 
 func _apply_lab_styling():
 	"""Apply lab-specific visual styling"""
@@ -63,8 +96,12 @@ func _on_lab_generation_complete():
 	# Apply lab lighting
 	_apply_lab_lighting()
 	
-	# Filter artifacts based on progression
-	_filter_artifacts_by_progression()
+	# FIXED: Only filter artifacts if NOT using progressive maps
+	if not is_progressive_map:
+		print("LabGridSystem: Using legacy artifact filtering")
+		_filter_artifacts_by_progression()
+	else:
+		print("LabGridSystem: ✅ Progressive map - artifacts already defined in JSON, skipping filtering")
 
 func _apply_lab_cube_materials():
 	"""Apply off-white material to all grid cubes"""
@@ -124,14 +161,44 @@ func _apply_lab_lighting():
 	if world_env and world_env.environment:
 		var env = world_env.environment
 		
-		# Brighter ambient light for lab
-		env.ambient_light_color = lab_ambient_color
-		env.ambient_light_energy = 0.4
+		# Apply lighting based on progression state
+		if is_progressive_map:
+			_apply_progressive_lighting(env)
+		else:
+			# Default lab lighting
+			env.ambient_light_color = lab_ambient_color
+			env.ambient_light_energy = 0.4
 		
-		print("LabGridSystem: Lab lighting applied")
+		print("LabGridSystem: Lab lighting applied for state: %s" % progression_state)
+
+func _apply_progressive_lighting(env: Environment):
+	"""Apply lighting based on progression state"""
+	match progression_state:
+		"initial":
+			env.ambient_light_color = Color(0.1, 0.1, 0.2)
+			env.ambient_light_energy = 0.1
+		"post_array_tutorial":
+			env.ambient_light_color = Color(0.2, 0.2, 0.3)
+			env.ambient_light_energy = 0.2
+		"post_randomness_exploration":
+			env.ambient_light_color = Color(0.3, 0.3, 0.4)
+			env.ambient_light_energy = 0.3
+		"post_geometric_algorithms":
+			env.ambient_light_color = Color(0.4, 0.4, 0.5)
+			env.ambient_light_energy = 0.4
+		"all_complete":
+			env.ambient_light_color = Color(0.5, 0.5, 0.6)
+			env.ambient_light_energy = 0.5
+		_:
+			env.ambient_light_color = lab_ambient_color
+			env.ambient_light_energy = 0.4
 
 func _load_lab_progression():
-	"""Load lab progression state"""
+	"""Load lab progression state (legacy system only)"""
+	if is_progressive_map:
+		print("LabGridSystem: Skipping legacy progression load - using progressive map")
+		return
+	
 	var save_path = "user://lab_progression.save"
 	
 	if FileAccess.file_exists(save_path):
@@ -156,7 +223,10 @@ func _load_lab_progression():
 		print("LabGridSystem: Starting fresh lab progression")
 
 func _save_lab_progression():
-	"""Save lab progression state"""
+	"""Save lab progression state (legacy system only)"""
+	if is_progressive_map:
+		return  # Don't save for progressive maps
+	
 	var save_data = {
 		"completed_sequences": completed_sequences,
 		"unlocked_artifacts": unlocked_artifacts,
@@ -168,11 +238,15 @@ func _save_lab_progression():
 	file.close()
 
 func _filter_artifacts_by_progression():
-	"""Filter interactables based on progression"""
+	"""Filter interactables based on progression (LEGACY SYSTEM ONLY)"""
+	if is_progressive_map:
+		print("LabGridSystem: Skipping legacy artifact filtering - progressive map handles this")
+		return
+	
 	if not interactables_component:
 		return
 	
-	print("LabGridSystem: Filtering artifacts by progression")
+	print("LabGridSystem: Filtering artifacts by legacy progression")
 	
 	# Get all interactable positions
 	var interactable_positions = interactables_component.get_all_interactable_positions()
@@ -189,10 +263,14 @@ func _filter_artifacts_by_progression():
 			else:
 				interactable.visible = true
 
-# PROGRESSION MANAGEMENT
+# PROGRESSION MANAGEMENT (Legacy system only)
 
 func complete_sequence(sequence_name: String):
-	"""Complete a sequence and unlock new artifacts"""
+	"""Complete a sequence and unlock new artifacts (LEGACY SYSTEM ONLY)"""
+	if is_progressive_map:
+		print("LabGridSystem: Sequence completion handled by LabManager for progressive maps")
+		return
+	
 	if sequence_name in completed_sequences:
 		return
 	
@@ -216,7 +294,7 @@ func complete_sequence(sequence_name: String):
 		_show_unlock_effects(newly_unlocked)
 
 func _get_artifacts_to_unlock(sequence_name: String) -> Array[String]:
-	"""Get artifacts to unlock for completing a sequence"""
+	"""Get artifacts to unlock for completing a sequence (LEGACY)"""
 	match sequence_name:
 		"array_tutorial":
 			return ["xyz_coordinates", "grid_display"]
@@ -353,6 +431,8 @@ func get_lab_info() -> Dictionary:
 	base_info.merge({
 		"lab_mode": lab_mode,
 		"lab_cube_color": lab_cube_color,
+		"is_progressive_map": is_progressive_map,
+		"progression_state": progression_state,
 		"progression": {
 			"completed_sequences": completed_sequences,
 			"unlocked_artifacts": unlocked_artifacts
@@ -362,14 +442,22 @@ func get_lab_info() -> Dictionary:
 
 func is_artifact_unlocked(artifact_id: String) -> bool:
 	"""Check if artifact is unlocked"""
-	return artifact_id in unlocked_artifacts
+	if is_progressive_map:
+		# For progressive maps, all artifacts in the JSON are "unlocked"
+		return true
+	else:
+		return artifact_id in unlocked_artifacts
 
 func get_unlocked_artifacts() -> Array[String]:
 	"""Get list of unlocked artifacts"""
 	return unlocked_artifacts.duplicate()
 
 func force_unlock_artifact(artifact_id: String):
-	"""Force unlock an artifact for testing"""
+	"""Force unlock an artifact for testing (legacy system only)"""
+	if is_progressive_map:
+		print("LabGridSystem: Cannot force unlock artifacts in progressive map mode")
+		return
+	
 	if not artifact_id in unlocked_artifacts:
 		unlocked_artifacts.append(artifact_id)
 		_save_lab_progression()
@@ -377,7 +465,11 @@ func force_unlock_artifact(artifact_id: String):
 		print("LabGridSystem: 🔧 Force unlocked: %s" % artifact_id)
 
 func reset_lab_progression():
-	"""Reset lab progression for testing"""
+	"""Reset lab progression for testing (legacy system only)"""
+	if is_progressive_map:
+		print("LabGridSystem: Cannot reset progression in progressive map mode")
+		return
+	
 	completed_sequences.clear()
 	unlocked_artifacts.clear()
 	unlocked_artifacts.append("rotating_cube")
@@ -392,8 +484,15 @@ func print_lab_status():
 	print("=== LAB GRID SYSTEM STATUS ===")
 	print("Lab mode: %s" % lab_mode)
 	print("Lab cube color: %s" % lab_cube_color)
-	print("Completed sequences: %s" % str(completed_sequences))
-	print("Unlocked artifacts: %s" % str(unlocked_artifacts))
+	print("Is progressive map: %s" % is_progressive_map)
+	print("Progression state: %s" % progression_state)
+	print("Map name: %s" % map_name)
+	
+	if not is_progressive_map:
+		print("Completed sequences: %s" % str(completed_sequences))
+		print("Unlocked artifacts: %s" % str(unlocked_artifacts))
+	else:
+		print("Progressive map - artifacts defined in JSON")
 	
 	# Call parent status
 	print_component_status()

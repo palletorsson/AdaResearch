@@ -1,0 +1,177 @@
+{
+	"map_info": {
+		"name": "Lab",
+		"description": "Central Science Lab - Hub for algorithmic exploration",
+		"version": "2.0",
+		"format": "json_lab",
+		"dimensions": {
+			"width": 7,
+			"depth": 7,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "hub",
+			"category": "laboratory",
+			"estimated_time": "exploration based",
+			"learning_objectives": [
+				"Central hub for all learning sequences",
+				"Progressive artifact discovery",
+				"Interactive lab environment"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"]
+		],
+		"static_objects": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "rotating_cube", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "t:Tutorial_Single", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", ""]
+		]
+	},
+	"structure_definitions": {
+		"1": {
+			"name": "lab_floor",
+			"description": "Standard laboratory floor tiles",
+			"material": "lab_floor_material",
+			"height": 0.1,
+			"color": [0.8, 0.8, 0.9, 1.0]
+		},
+		"2": {
+			"name": "raised_platform",
+			"description": "Raised platform areas",
+			"material": "lab_platform_material", 
+			"height": 0.2,
+			"color": [0.9, 0.9, 1.0, 1.0]
+		},
+		"3": {
+			"name": "central_area",
+			"description": "Central working area",
+			"material": "lab_central_material",
+			"height": 0.15,
+			"color": [0.85, 0.9, 0.95, 1.0]
+		}
+	},
+	"static_object_definitions": {
+		"main_table": {
+			"name": "Research Table",
+			"description": "Central research table for artifacts",
+			"scene": "res://commons/scenes/lab_objects/research_table.tscn",
+			"position_offset": [0.0, 0.15, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0]
+		},
+		"workbench": {
+			"name": "Lab Workbench",
+			"description": "Side workbenches for tools",
+			"scene": "res://commons/scenes/lab_objects/workbench.tscn",
+			"position_offset": [0.0, 0.2, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"chair": {
+			"name": "Lab Chair",
+			"description": "Laboratory seating",
+			"scene": "res://commons/scenes/lab_objects/lab_chair.tscn",
+			"position_offset": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0]
+		},
+		"storage": {
+			"name": "Storage Cabinet",
+			"description": "Equipment storage",
+			"scene": "res://commons/scenes/lab_objects/storage_cabinet.tscn",
+			"position_offset": [0.0, 0.2, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0]
+		}
+	},
+	"external_references": {
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
+		"utility_registry": "res://commons/utilities/utility_registry.json",
+		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
+	},
+	"artifact_definitions": {
+		"note": "Artifacts are now referenced by lookup_name from external registry files",
+		"rotating_cube": "References lab_artifacts.json rotating_cube definition",
+		"xyz_coordinates": "References grid_artifacts.json xyz_coordinates definition", 
+		"grid_display": "References lab_artifacts.json grid_display definition",
+		"probability_sphere": "References grid_artifacts.json probability_sphere definition"
+	},
+	"utility_definitions": {
+		"note": "Utilities are now referenced from external registry",
+		"s": "References utility_registry.json spawn_point definition",
+		"t": "References utility_registry.json teleport definition with custom properties"
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0.5, 1.8, 6.0],
+			"rotation": [0.0, 180.0, 0.0],
+			"description": "Main entrance - facing the central table"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.9, 0.9, 1.0],
+		"ambient_energy": 0.3,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [1.0, 1.0, 1.0],
+			"energy": 1.0
+		},
+		"lab_atmosphere": {
+			"enable_particle_effects": false,
+			"fog_enabled": false,
+			"mood": "bright_scientific"
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"lab_mode": true,
+		"background": {
+			"type": "sky",
+			"color": [0.1, 0.15, 0.25]
+		},
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": ["rotating_cube"],
+			"unlock_on_sequence_completion": true
+		}
+	}
+}

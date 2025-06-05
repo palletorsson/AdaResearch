@@ -1,0 +1,80 @@
+{
+	"map_info": {
+		"name": "Lab_Post_Random",
+		"description": "Lab State After Randomness Exploration - Even more artifacts",
+		"version": "1.0",
+		"format": "json_lab_progressive",
+		"progression_state": "post_randomness_exploration",
+		"dimensions": {
+			"width": 7,
+			"depth": 7,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "hub",
+			"category": "laboratory_progressive",
+			"learning_objectives": [
+				"Advanced artifact interaction",
+				"Access to geometric algorithms",
+				"Multiple research paths available"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "rotating_cube", "xyz_coordinates", "probability_sphere", " ", " ", " "],
+			[" ", "geometric_crystal", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"spawn_points": {
+		"default": {
+			"position": [0.5, 1.8, 6.0],
+			"rotation": [0.0, 180.0, 0.0],
+			"description": "Main entrance - bustling with discoveries"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.3, 0.3, 0.4],
+		"ambient_energy": 0.3,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.2],
+			"color": [1.0, 1.0, 1.0],
+			"energy": 0.8
+		},
+		"lab_atmosphere": {
+			"mood": "active_research"
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"lab_mode": true,
+		"progression_state": "post_randomness_exploration"
+	}
+}

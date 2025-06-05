@@ -90,13 +90,25 @@ func _connect_to_managers():
 		print("AdaSceneManager: Connected to MapProgressionManager")
 
 func connect_to_lab_manager(lab_manager: LabManager):
-	"""Connect to lab manager for progression updates"""
+	"""Connect to lab manager with progressive lab support"""
 	lab_manager_ref = lab_manager
 	
-	if lab_manager and not lab_manager.artifact_activated.is_connected(_on_artifact_activated):
-		lab_manager.artifact_activated.connect(_on_artifact_activated)
-		lab_manager.progression_event.connect(_on_progression_event)
-		print("AdaSceneManager: ✅ Connected to LabManager with progression support")
+	if lab_manager:
+		# Connect existing signals
+		if not lab_manager.artifact_activated.is_connected(_on_artifact_activated):
+			lab_manager.artifact_activated.connect(_on_artifact_activated)
+		if not lab_manager.progression_event.is_connected(_on_progression_event):
+			lab_manager.progression_event.connect(_on_progression_event)
+		
+		# Connect new progressive lab signals
+		if lab_manager.has_signal("lab_state_changed") and not lab_manager.lab_state_changed.is_connected(_on_lab_state_changed):
+			lab_manager.lab_state_changed.connect(_on_lab_state_changed)
+		
+		if lab_manager.has_signal("lab_map_transition_complete") and not lab_manager.lab_map_transition_complete.is_connected(_on_lab_map_transition_complete):
+			lab_manager.lab_map_transition_complete.connect(_on_lab_map_transition_complete)
+		
+		print("AdaSceneManager: ✅ Connected to LabManager with progressive lab support")
+
 
 func connect_to_grid_system(grid_system: Node):
 	"""Connect to grid system for teleporter/trigger events"""
@@ -341,6 +353,7 @@ func _advance_sequence():
 	
 	_load_scene_with_data(GRID_SCENE_PATH, scene_data)
 
+# Enhanced return to hub with lab state consideration
 func _return_to_hub(completion_data: Dictionary = {}):
 	print("AdaSceneManager: Returning to lab hub with completion data")
 	print("AdaSceneManager: Completion data: %s" % completion_data)
@@ -362,18 +375,24 @@ func _return_to_hub(completion_data: Dictionary = {}):
 	# Clear current sequence
 	current_sequence_data.clear()
 	
+	# Determine appropriate lab map based on progression
+	var lab_map_name = _determine_lab_map_for_return(completed_sequence)
+	
 	# Prepare lab scene data with completion information
 	var lab_scene_data = {
 		"return_from": "grid",
 		"completion_data": completion_data,
 		"scene_manager": self,
-		"completed_sequence": completed_sequence
+		"completed_sequence": completed_sequence,
+		"lab_map_override": lab_map_name  # New: specify which lab map to load
 	}
 	
-	print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab" % completed_sequence)
+	print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab state: %s" % [completed_sequence, lab_map_name])
 	
 	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
+
+# Enhanced scene loading with lab map override support
 
 func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	var staging = _get_vr_staging()
@@ -385,7 +404,31 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	var to_scene = "lab" if scene_path == LAB_SCENE_PATH else "grid"
 	
 	current_scene_type = to_scene
+	
+	print("🔍 DEBUG: AdaSceneManager._load_scene_with_data() called")
+	print("🔍 DEBUG: scene_path = %s" % scene_path)
+	print("🔍 DEBUG: to_scene = %s" % to_scene)
+	print("🔍 DEBUG: scene_data = %s" % scene_data)
+	
+	# CRITICAL FIX: Set scene_data on staging BEFORE anything else
 	staging.set_meta("scene_data", scene_data)
+	print("🔍 DEBUG: ✅ Set staging scene_data")
+	
+	# Handle lab map override for progressive loading - THIS IS THE KEY FIX!
+	if scene_data.has("lab_map_override") and to_scene == "lab":
+		var lab_override = scene_data["lab_map_override"]
+		staging.set_meta("lab_map_override", lab_override)
+		
+		# ALSO set it in the scene_data so LabGridScene can find it
+		scene_data["map_name"] = lab_override
+		staging.set_meta("scene_user_data", scene_data)
+		
+		print("🔍 DEBUG: ✅ Set lab_map_override = '%s'" % lab_override)
+		print("🔍 DEBUG: ✅ Set scene_user_data with map_name = '%s'" % lab_override)
+	else:
+		# Make sure scene_user_data is set for non-lab scenes too
+		staging.set_meta("scene_user_data", scene_data)
+		print("🔍 DEBUG: ✅ Set scene_user_data for non-lab scene")
 	
 	var transition_type = scene_data.get("transition_source", {}).get("type", TransitionType.MANUAL_LOAD)
 	scene_transition_started.emit(from_scene, to_scene, transition_type)
@@ -393,6 +436,7 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	# Add completion data to staging metadata for lab to access
 	if scene_data.has("completion_data"):
 		staging.set_meta("completion_data", scene_data["completion_data"])
+		print("🔍 DEBUG: ✅ Set completion_data")
 	
 	# Connect to staging signals for scene completion handling
 	if staging.has_signal("scene_loaded") and not staging.scene_loaded.is_connected(_on_staging_scene_loaded):
@@ -401,6 +445,7 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	if staging.has_signal("scene_visible") and not staging.scene_visible.is_connected(_on_staging_scene_visible):
 		staging.scene_visible.connect(_on_staging_scene_visible)
 	
+	print("🔍 DEBUG: About to call staging.load_scene()")
 	staging.load_scene(scene_path, scene_data)
 
 func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
@@ -624,3 +669,33 @@ func auto_connect_to_scene():
 		connect_to_grid_system(grid_system)
 	
 	print("AdaSceneManager: Auto-connection complete")
+
+# Handle lab state changes
+func _on_lab_state_changed(new_state: String, unlocked_artifacts: Array):
+	"""Handle lab state transitions"""
+	print("AdaSceneManager: Lab state changed to: %s" % new_state)
+	print("AdaSceneManager: Newly unlocked artifacts: %s" % str(unlocked_artifacts))
+
+# Handle lab map transition completion
+func _on_lab_map_transition_complete(new_state: String):
+	"""Handle completion of lab map transitions"""
+	print("AdaSceneManager: Lab map transition complete - new state: %s" % new_state)
+
+
+
+func _determine_lab_map_for_return(completed_sequence: String) -> String:
+	"""Determine which lab map to load based on completed sequence"""
+	# Let the LabManager handle the state transition
+	# This just provides a hint for initial loading
+	
+	match completed_sequence:
+		"array_tutorial":
+			return "Lab/map_data_post_array"
+		"randomness_exploration":
+			return "Lab/map_data_post_random"
+		"geometric_algorithms":
+			return "Lab/map_data_post_geometric"
+		"advanced_concepts":
+			return "Lab/map_data_complete"
+		_:
+			return "Lab/map_data_init"  # Default to initial state
