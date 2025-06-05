@@ -5,21 +5,23 @@
 	
 	"artifacts": {
 		"rotating_cube": {
-			  "name": "Rotating Cube",
-			  "description": "A mysterious rotating cube that triggers the first learning sequence",
-			  "scene": "res://commons/primitives/cubes/rotating_cube.tscn",
-			  "position": [0.0, 0.1, 0.0],
-			  "rotation": [0.0, 0.0, 0.0],
-			  "scale": [0.5, 0.5, 0.5],
-			  "interaction_type": "auto_trigger",
-			  "sequence": "array_tutorial",
-			  "lighting": {
+			"name": "Rotating Cube",
+			"lookup_name": "rotating_cube",
+			"description": "A mysterious rotating cube that triggers the first learning sequence",
+			"scene": "res://commons/primitives/cubes/rotating_cube.tscn",
+			"position": [0.0, 0.1, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.5, 0.5, 0.5],
+			"interaction_type": "auto_trigger",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"lighting": {
 				"add_focused_light": true,
 				"light_color": [0.3, 0.7, 1.0],
 				"light_intensity": 2.0,
 				"light_range": 3.0,
 				"light_position": [0, 0.5, 0]
-			  }
+			}
 		},
 		"xyz_coordinates": {
 			"name": "XYZ coordinates",
@@ -173,4 +175,4 @@
 		"spacing_between_artifacts": 0.5,
 		"auto_arrange_on_spawn": true
 	}
-} 
+}
