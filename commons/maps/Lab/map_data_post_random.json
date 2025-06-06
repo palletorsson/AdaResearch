@@ -1,10 +1,10 @@
 {
 	"map_info": {
-		"name": "Lab_Post_Random",
-		"description": "Lab State After Randomness Exploration - Even more artifacts",
+		"name": "Lab_Post_Array",
+		"description": "Lab State After Array Tutorial - New artifacts and sequences unlocked",
 		"version": "1.0",
 		"format": "json_lab_progressive",
-		"progression_state": "post_randomness_exploration",
+		"progression_state": "post_array_tutorial",
 		"dimensions": {
 			"width": 7,
 			"depth": 7,
@@ -14,59 +14,83 @@
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
 			"learning_objectives": [
-				"Advanced artifact interaction",
-				"Access to geometric algorithms",
-				"Multiple research paths available"
+				"Explore newly unlocked artifacts",
+				"Access to randomness exploration",
+				"Multiple sequence paths available"
 			]
 		}
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
-			["0", "0", "0", "0", "0", "0", "0"],
+			["1", "1", "2", "2", "2", "2", "0"],
+			["2", "1", "1", "1", "2", "2", "0"],
+			["2", "1", "1", "1", "1", "2", "0"],
+			["2", "1", "1", "1", "2", "2", "0"],
+			["2", "1", "2", "1", "2", "2", "0"],
+			["2", "2", "2", "2", "2", "2", "0"],
 			["0", "0", "0", "0", "0", "0", "0"]
+		],
+		"static_objects": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t:randomness_exploration", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "t:array_tutorial", " ", "t:randomness_exploration", " ", " ", " "],
+			[" ", "", " ", "", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "rotating_cube", "xyz_coordinates", "probability_sphere", " ", " ", " "],
-			[" ", "geometric_crystal", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			["xyz_coordinates", " ", " ", " ", " ", " ", " "],
+			["", "rotating_cube", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " "]
 		]
+	},
+	"external_references": {
+		"artifact_registries": [
+			"res://commons/artifacts/lab_artifacts.json",
+			"res://commons/artifacts/grid_artifacts.json"
+		],
+		"utility_registry": "res://commons/utilities/utility_registry.json",
+		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Sequence Portal",
+			"description": "Portal to learning sequences"
+		}
 	},
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 6.0],
 			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - bustling with discoveries"
+			"description": "Main entrance - now with sequence access"
 		}
 	},
 	"lighting": {
-		"ambient_color": [0.3, 0.3, 0.4],
-		"ambient_energy": 0.3,
+		"ambient_color": [0.2, 0.2, 0.3],
+		"ambient_energy": 0.2,
 		"directional_light": {
 			"enabled": true,
 			"direction": [-0.3, -0.8, -0.2],
-			"color": [1.0, 1.0, 1.0],
-			"energy": 0.8
+			"color": [1.0, 0.9, 0.8],
+			"energy": 0.5
 		},
 		"lab_atmosphere": {
-			"mood": "active_research"
+			"mood": "brightening_discovery"
 		}
 	},
 	"settings": {
@@ -75,6 +99,12 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_randomness_exploration"
+		"progression_state": "post_array_tutorial",
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"unlock_on_sequence_completion": true
+		}
 	}
 }
