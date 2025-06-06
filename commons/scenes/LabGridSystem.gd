@@ -472,6 +472,8 @@ func get_unlocked_artifacts() -> Array[String]:
 	return unlocked_artifacts.duplicate()
 
 func force_unlock_artifact(artifact_id: String):
+	print("LabGridSystem: Artifact filtering disabled - all artifacts visible")
+	return
 	"""Force unlock an artifact for testing (legacy system only)"""
 	if is_progressive_map:
 		print("LabGridSystem: Cannot force unlock artifacts in progressive map mode")
