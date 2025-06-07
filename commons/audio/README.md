@@ -4,6 +4,13 @@
 ### 🎯 **Tutorial Overview**
 This tutorial teaches you to build a complete procedural audio system for VR cubes, starting from mathematical sound generation to spatial 3D audio. Perfect for educators and students learning game audio programming.
 
+### 🆕 **Latest Updates (2024)**
+- ✅ **VR Audio Fixes**: Enhanced compatibility with VR headsets
+- ✅ **Resource Format**: Switched to `.tres` files for better Godot integration
+- ✅ **Ambient Teleporter**: Continuous ghost drone ambient sound
+- ✅ **Dynamic VR Detection**: Automatic audio adjustments for VR/desktop
+- ✅ **Enhanced Debugging**: Comprehensive audio troubleshooting tools
+
 ---
 
 ## 📚 **Chapter 1: Understanding Sound Generation**
@@ -244,7 +251,7 @@ func _ensure_sound_cached(sound_type: AudioSynthesizer.SoundType):
 		return
 	
 	# Try loading from disk first
-	var file_path = "res://commons/audio/" + _get_sound_filename(sound_type) + ".wav"
+	var file_path = "res://commons/audio/" + _get_sound_filename(sound_type) + ".tres"
 	
 	if ResourceLoader.exists(file_path):
 		sound_cache[sound_type] = load(file_path)
@@ -258,9 +265,11 @@ func _ensure_sound_cached(sound_type: AudioSynthesizer.SoundType):
 
 **Smart Loading Strategy**:
 1. **Check memory cache** - Fastest option
-2. **Load from disk** - Pre-generated files
-3. **Generate dynamically** - Fallback option
+2. **Load from disk** - Pre-generated `.tres` files (Godot resources)
+3. **Generate dynamically** - Fallback option with VR compatibility
 4. **Cache result** - Never generate twice
+
+**🔧 File Format Update**: We now use `.tres` (Godot resource) files instead of `.wav` for better compatibility with VR platforms and the Godot resource system.
 
 ### **Step 3: Simple Playback Interface**
 
@@ -343,23 +352,38 @@ Show students the progression:
 
 ---
 
-## ⚡ **Chapter 7: Advanced Audio - The Teleporter Drone**
+## ⚡ **Chapter 7: Advanced Audio - The Teleporter Ambient System**
 
-### **Dynamic Audio That Responds to State**
+### **Continuous Ambient Audio**
+
+The teleporter now features **continuous ambient sound** rather than triggered audio:
 
 ```gdscript
-# Enhanced TeleportController.gd
-func _process(delta):
-	if is_charging:
-		charge_progress += delta / charge_time
-		
-		# Modulate drone pitch based on charge progress
-		if teleport_audio:
-			var pitch = 0.8 + (charge_progress * 0.4)  # 0.8 to 1.2
-			teleport_audio.set_pitch(pitch)
-		
-		if charge_progress >= 1.0:
-			_complete_teleport_charge()
+# Enhanced TeleportController.gd - Ambient Sound Setup
+func _ready():
+	# ... existing setup ...
+	
+	# Start continuous teleporter ambient sound
+	if teleport_audio:
+		await get_tree().create_timer(0.5).timeout  # Brief delay for setup
+		teleport_audio.set_volume(-6.0)  # Moderate ambient volume
+		teleport_audio.play_secondary_sound(true)  # Play ghost drone spatially
+		print("Ambient ghost drone now running continuously")
+```
+
+### **VR-Aware Audio Configuration**
+
+```gdscript
+# Automatic VR detection and audio adjustment
+func _setup_audio_players():
+	# ... existing setup ...
+	
+	var xr_interface = XRServer.get_primary_interface()
+	if xr_interface and xr_interface.is_initialized():
+		print("Configuring for VR audio")
+		audio_player_3d.volume_db = volume_db + 6.0  # Louder for VR
+		audio_player_3d.max_distance = max_distance * 2.0  # Larger range
+		audio_player_3d.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
 ```
 
 **Advanced Concepts**:
@@ -643,11 +667,11 @@ func play_sound():
 ```
 res://commons/
 ├── audio/                          # Generated sound files
-│   ├── pickup_mario.wav
-│   ├── teleport_drone.wav
-│   ├── lift_bass_pulse.wav
-│   ├── ghost_drone.wav
-│   └── melodic_drone.wav
+│   ├── pickup_mario.tres
+│   ├── teleport_drone.tres
+│   ├── lift_bass_pulse.tres
+│   ├── ghost_drone.tres
+│   └── melodic_drone.tres
 ├── primitives/cubes/
 │   ├── AudioSynthesizer.gd        # Sound factory (95 lines)
 │   ├── CubeAudioPlayer.gd         # Audio component (85 lines)
@@ -662,17 +686,19 @@ res://commons/
 ### **Deployment Checklist**
 
 #### **Before Release**
-- ✅ Generate all sounds to disk
-- ✅ Test audio in VR headset
-- ✅ Verify volume levels comfortable
+- ✅ Generate all sounds to disk as `.tres` files
+- ✅ Test audio in VR headset (Meta Quest, PCVR)
+- ✅ Verify volume levels comfortable for both desktop and VR
 - ✅ Check no audio memory leaks
 - ✅ Test with/without headphones
+- ✅ Verify VR audio routing works correctly
 
 #### **Student Distribution**
-- ✅ Include pre-generated .wav files
+- ✅ Include pre-generated `.tres` files
 - ✅ Provide AudioTestScene for testing
 - ✅ Document export variables
-- ✅ Include troubleshooting guide
+- ✅ Include VR troubleshooting guide
+- ✅ Explain file format differences (.tres vs .wav)
 
 ---
 
@@ -714,12 +740,34 @@ audio_player.set_volume(0.0)    # Full volume
 #### **Meta Quest**
 - Lower sample rates (22050Hz) for better performance
 - Mono sounds only (stereo doubles memory)
-- Compress audio files if using disk storage
+- Use `.tres` files for better compatibility
+- Audio may route differently than desktop
 
-#### **PC VR**
+#### **PC VR (SteamVR, Oculus PC)**
 - Full 44100Hz sample rate supported
 - Stereo effects possible
 - Higher quality audio generation
+- Check VR audio device settings if no sound
+
+### **VR Audio Troubleshooting**
+
+#### **No Sound in VR Headset**
+```gdscript
+# Debug VR audio issues
+func debug_vr_audio():
+	var xr_interface = XRServer.get_primary_interface()
+	print("VR Active: ", xr_interface and xr_interface.is_initialized())
+	print("Master Bus Volume: ", AudioServer.get_bus_volume_db(0))
+	print("Audio Player Volume: ", audio_player.volume_db)
+	print("Stream Data Size: ", audio_player.stream.data.size() if audio_player.stream else "No stream")
+```
+
+**Common Solutions**:
+1. **Check VR audio output device** in system settings
+2. **Verify Master bus not muted** in Godot
+3. **Try 2D audio first** - simpler than spatial
+4. **Test with very loud volume** (+10dB) temporarily
+5. **Force `.tres` file regeneration** if corrupted
 
 ---
 
