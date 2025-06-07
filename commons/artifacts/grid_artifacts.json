@@ -35,6 +35,42 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
+		"animated_cube": {
+			"name": "Animated Cube",
+			"lookup_name": "animated_cube",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/primitives/cubes/animated_cube.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
+		"cube_with_shader": {
+			"name": "Cube with shader",
+			"lookup_name": "cube_with_shader",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/primitives/cubes/cube_with_shader.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
+		"pick_up_cube": {
+			"name": "Pick Up Cube",
+			"lookup_name": "pick_up_cube",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor", 

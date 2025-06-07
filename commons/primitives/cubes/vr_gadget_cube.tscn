@@ -21,6 +21,10 @@ outline_color = Color(0, 0, 0, 1)
 size = Vector3(1.1, 1.1, 1.1)
 
 [node name="VRGadgetCube" instance=ExtResource("1_base")]
+play_hover_sound = true
+play_grab_sound = true
+hover_pitch = 1.2
+grab_pitch = 1.0
 
 [node name="CollisionShape3D" parent="CubeBaseStaticBody3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://duokmbw77vp7d" path="res://commons/scenes/mapobjects/teleport.gd" id="1_18jqi"]
 [ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_dvv38"]
-[ext_resource type="PackedScene" uid="uid://cihh84mvqjtul" path="res://commons/primitives/cubes/cube_with_shader.tscn" id="3_t57yy"]
+[ext_resource type="Script" uid="uid://lrdtc5t2q5hj" path="res://commons/audio/CubeAudioPlayer.gd" id="3_audio"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pk0bj"]
 height = 1.49229
@@ -41,6 +41,13 @@ gi_mode = 0
 mesh = SubResource("BoxMesh_dvv38")
 skeleton = NodePath("")
 
-[node name="CubeWithShader" parent="." instance=ExtResource("3_t57yy")]
+[node name="TeleportAudio" type="Node3D" parent="."]
+script = ExtResource("3_audio")
+volume_db = -3.0
+max_distance = 15.0
+primary_sound = 1
+secondary_sound = 3
+
+[node name="Camera3D" type="Camera3D" parent="."]
 
 [connection signal="body_entered" from="TeleportArea" to="." method="_on_TeleportArea_body_entered"]

@@ -18,6 +18,10 @@ script = ExtResource("2_controller")
 hover_color = Color(1, 1, 0, 1)
 grab_color = Color(0, 1, 0, 1)
 hover_scale_boost = 1.1
+play_hover_sound = true
+play_grab_sound = true
+hover_pitch = 1.2
+grab_pitch = 1.0
 
 [node name="CubeAnimator" parent="." index="1"]
 enable_oscillation = true
