@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://blasiqhmj3w0u"]
+
+[ext_resource type="PackedScene" uid="uid://cg7sqo2sld3d5" path="res://commons/primitives/cubes/animated_cube.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://hv4cqsxgluwu" path="res://commons/scenes/mapobjects/PickupController.gd" id="2_controller"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interaction"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hover"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hover"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.3)
+
+[node name="BasicPickupCube" instance=ExtResource("1_base")]
+script = ExtResource("2_controller")
+hover_color = Color(1, 1, 0, 1)
+grab_color = Color(0, 1, 0, 1)
+hover_scale_boost = 1.1
+
+[node name="CubeAnimator" parent="." index="1"]
+enable_oscillation = true
+
+[node name="InteractionArea" type="Area3D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 262144
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" index="0"]
+shape = SubResource("BoxShape3D_interaction")
+
+[node name="HoverIndicator" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_hover")
+surface_material_override/0 = SubResource("StandardMaterial3D_hover")
+
+[node name="Camera3D" parent="." index="4"]
+transform = Transform3D(0.864398, 0, -0.502809, 0, 1, 0, 0.502809, 0, 0.864398, -0.984191, 0.739279, 2.52719)

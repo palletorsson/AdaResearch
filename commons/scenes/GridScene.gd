@@ -50,14 +50,17 @@ func _configure_grid_system_for_map(map_name: String):
 	print("GridScene: Configuring grid system for map: %s" % map_name)
 	
 	# Set map name
-	if grid_system.has_property("map_name"):
+	if "map_name" in grid_system:
 		grid_system.map_name = map_name
 	
 	# Trigger reload if needed
 	if grid_system.has_method("reload_map_async"):
 		await grid_system.reload_map_async()
-	elif grid_system.has_property("reload_map"):
-		grid_system.reload_map = true
+	elif grid_system.has_method("reload_map_with_name"):
+		grid_system.reload_map_with_name(map_name)
+	else:
+		# Fallback: reload the scene
+		get_tree().reload_current_scene()
 
 func _on_map_generation_complete():
 	"""Handle grid system completing map generation"""

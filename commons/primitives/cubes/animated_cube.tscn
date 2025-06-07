@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg7sqo2sld3d5"]
+
+[ext_resource type="PackedScene" uid="uid://cihh84mvqjtul" path="res://commons/primitives/cubes/cube_with_shader.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://dqcqxqu2hkqcq" path="res://commons/primitives/cubes/CubeAnimator.gd" id="2_animator"]
+
+[node name="AnimatedCube" instance=ExtResource("1_base")]
+
+[node name="CubeAnimator" type="Node3D" parent="." index="1"]
+script = ExtResource("2_animator")
+enable_oscillation = false
+enable_scale_pulse = false

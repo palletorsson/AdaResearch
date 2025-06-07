@@ -33,7 +33,6 @@
 	  "scale": [0.8, 0.8, 0.8],
 	  "interaction_type": "touch_examine",
 	  "sequence": null,
-	  "unlock_trigger": "array_tutorial_completed",
 	  "lighting": {
 		"add_focused_light": true,
 		"light_color": [0.0, 1.0, 0.7],
@@ -53,7 +52,6 @@
 	  "scale": [0.6, 0.6, 0.6],
 	  "interaction_type": "pickup_examine",
 	  "sequence": null,
-	  "unlock_trigger": "array_tutorial_completed",
 	  "lighting": {
 		"add_focused_light": true,
 		"light_color": [1.0, 0.8, 0.0],
@@ -73,7 +71,6 @@
 	  "scale": [0.7, 0.7, 0.7],
 	  "interaction_type": "touch_start_sequence",
 	  "sequence": "randomness_exploration",
-	  "unlock_trigger": "randomness_exploration_completed",
 	  "lighting": {
 		"add_focused_light": true,
 		"light_color": [1.0, 0.0, 1.0],

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfqiewrmiswh5"]
+
+[ext_resource type="PackedScene" uid="uid://c5n30rf1hhdrl" path="res://commons/scenes/mapobjects/teleport_cube.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://btucn8cjls542" path="res://commons/primitives/cubes/UtilityCubeController.gd" id="2_utility"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
+size = Vector3(2, 2, 2)
+
+[node name="UtilityCube" instance=ExtResource("1_base")]
+script = ExtResource("2_utility")
+utility_type = "teleporter"
+config_file = ""
+auto_configure = true
+
+[node name="BehaviorManager" type="Node" parent="." index="8"]
+
+[node name="ConfigLoader" type="Node" parent="." index="9"]
+
+[node name="TriggerArea" type="Area3D" parent="." index="10"]
+collision_layer = 0
+collision_mask = 1048576
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea" index="0"]
+shape = SubResource("BoxShape3D_trigger")
+
+[node name="DebugLabel" type="Label3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "Utility Cube
+Type: teleporter"
+font_size = 24

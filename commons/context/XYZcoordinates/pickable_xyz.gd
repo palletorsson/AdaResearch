@@ -1,14 +1,10 @@
 extends Node3D
 
 # XYZ Coordinate Gadget for VR Interaction
-
 @export var initial_scale: Vector3 = Vector3(0.2, 0.2, 0.2)  # Smaller scale for VR
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second
 @export var camera_rotation_sensitivity: float = 2.0  # Sensitivity of camera rotation
 @export var camera_movement_sensitivity: float = 0.5  # Sensitivity of camera movement
-
-@onready var xr_origin = $"../../../XROrigin3D"
-@onready var camera = $"../../../XROrigin3D/XRCamera3D"
 
 var is_grabbed: bool = false
 var initial_camera_transform: Transform3D
@@ -17,10 +13,6 @@ var initial_camera_rotation: Basis
 func _ready():
 	# Scale down the gadget
 	scale = initial_scale
-	if xr_origin:
-		print("XYZ Cooridinates: XR origin found")
-	else: 
-		print("XYZ Cooridinates: XR origin not found")
 	create_axes()
 
 func create_axes():
@@ -80,34 +72,3 @@ func add_axis_label(text: String, position: Vector3, color: Color):
 	label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label_3d.position = position
 	add_child(label_3d)
-
-
-func _process(delta):
-	if is_grabbed and camera and xr_origin:
-		# Update camera based on gadget's orientation
-		var gadget_transform = global_transform
-		
-		# Camera rotation based on X and Z axes
-		var x_rotation = gadget_transform.basis.x.y * camera_rotation_sensitivity
-		var z_rotation = gadget_transform.basis.z.y * camera_rotation_sensitivity
-		
-		# Camera movement based on Y axis (up/down)
-		var y_movement = -gadget_transform.basis.y.y * camera_movement_sensitivity
-		
-
-		
-func _on_grab_xyz_grabbed(pickable: Variant, by: Variant) -> void:
-	# Disable XR camera
-	#camera.current = false
-	#gadget_camera.current = true
-	is_grabbed = true
-
-
-func _on_grab_xyz_dropped(pickable: Variant) -> void:
-
-
-	#camera.current = true
-	#gadget_camera.current = false
-	is_grabbed = false
-
-	print("XYZ Gadget dropped!")

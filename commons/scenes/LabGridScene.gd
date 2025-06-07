@@ -172,8 +172,11 @@ func _handle_sequence_completion(completion_data: Dictionary):
 			lab_grid_system.map_name = new_map
 			
 			# Trigger a reload of the lab grid system
-			if lab_grid_system.has_property("reload_map"):
-				lab_grid_system.reload_map = true
+			if lab_grid_system.has_method("reload_map_with_name"):
+				lab_grid_system.reload_map_with_name(new_map)
+			else:
+				# Fallback: reload the scene
+				get_tree().reload_current_scene()
 
 func _save_sequence_completion(sequence_name: String):
 	"""Save a completed sequence to the progression file"""
@@ -255,8 +258,11 @@ func reset_lab_progression():
 	# Reload to initial map
 	if lab_grid_system:
 		lab_grid_system.map_name = "Lab/map_data_init"
-		if lab_grid_system.has_property("reload_map"):
-			lab_grid_system.reload_map = true
+		if lab_grid_system.has_method("reload_map_with_name"):
+			lab_grid_system.reload_map_with_name("Lab/map_data_init")
+		else:
+			# Fallback: reload the scene
+			get_tree().reload_current_scene()
 
 func print_lab_status():
 	"""Print lab status for debugging"""

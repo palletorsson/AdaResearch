@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://0a8cswdt55rw"]
 
-[ext_resource type="Script" uid="uid://bhmhfkqsn0i4u" path="res://adaresearch/Common/Scripts/Objects/Pick_UpCube/pick_up_cube.gd" id="1_oqxi0"]
-[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="2_lx240"]
+[ext_resource type="Script" uid="uid://dd25b6mupihby" path="res://commons/scenes/mapobjects/pick_up_cube.gd" id="1_oqxi0"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_lx240"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lx240"]
 

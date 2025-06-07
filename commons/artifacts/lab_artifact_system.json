@@ -4,8 +4,8 @@
   
   "current_state": {
 	"active_artifacts": ["rotating_cube"],
-	"visible_artifacts": ["rotating_cube"],
-	"hidden_artifacts": ["grid_display", "randomness_sign", "xyz_coordinates", "disco_floor", "probability_sphere"],
+	"visible_artifacts": ["rotating_cube", "xyz_coordinates"],
+	"hidden_artifacts": ["grid_display", "randomness_sign", "disco_floor", "probability_sphere"],
 	"lab_lighting": "minimal_cube_focused",
 	"environment_mode": "dark_hub"
   },
@@ -127,9 +127,8 @@
 	},
 	
 	"xyz_coordinates": {
-	  "status": "hidden",
-	  "unlock_progress": 0.0,
-	  "unlock_trigger": "array_tutorial_completed",
+	  "status": "visible",
+	  "unlock_progress": 1.0,
 	  "progression_events": ["coordinates_unlocked", "coordinates_examined"]
 	},
 	

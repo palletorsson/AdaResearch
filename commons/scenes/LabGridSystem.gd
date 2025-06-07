@@ -524,3 +524,18 @@ func _on_cube_size_changed():
 	"""Reapply lab styling when cube size changes"""
 	if lab_mode and is_map_ready():
 		call_deferred("_apply_lab_cube_materials")
+
+# RELOAD MAP FUNCTIONALITY
+
+func reload_map_with_name(new_map_name: String):
+	"""Reload the grid system with a new map name"""
+	print("LabGridSystem: Reloading with new map: %s" % new_map_name)
+	
+	# Update the map name
+	map_name = new_map_name
+	
+	# Check if this is a progressive map
+	_check_for_progressive_map()
+	
+	# Trigger the standard reload mechanism
+	reload_map = true
