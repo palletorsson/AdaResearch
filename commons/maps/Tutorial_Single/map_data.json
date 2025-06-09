@@ -6,7 +6,7 @@
 		"format": "json",
 		"created_from": "progressive_tutorial_design",
 		"dimensions": {
-			"width": 3,
+			"width": 4,
 			"depth": 3,
 			"max_height": 2
 		},
@@ -19,19 +19,19 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "2", "2"],
-			["1", "1", "1"],
-			["2", "2", "2"],
+			["1", "2", "2", "2"],
+			["1", "1", "1", "1"],
+			["2", "2", "2", "2"],
 		],
 		"utilities": [
-			["s", " ", " "],
-			[" ", " ", "t"],
-			[" ", " ", " "],
+			["s", " ", " ", " "],
+			[" ", " ", " ", "t"],
+			[" ", " ", " ", " "]
 		],
 		"interactables": [
-			[" ", " ", " "],
-			[" ", "pick_up_cube", " "],
-			[" ", " ", " "],			
+			[" ", " ", " ", " "],
+			[" ", " ", "pick_up_cube", " "],
+			["cube_scene",  "rotating_cube", "oscillation_cube", "pick_up_cube"],
 		]
 	},
 	"utility_definitions": {

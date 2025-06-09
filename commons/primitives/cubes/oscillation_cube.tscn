@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ssh07babupc5"]
+[gd_scene load_steps=3 format=3 uid="uid://c3igces3wtj5f"]
 
 [ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://dqcqxqu2hkqcq" path="res://commons/primitives/cubes/CubeAnimator.gd" id="2_animator"]
 
-[node name="SimpleOscillationCube2" instance=ExtResource("1_base")]
+[node name="SimpleOscillationCube" instance=ExtResource("1_base")]
 
 [node name="CubeAnimator" type="Node3D" parent="." index="1"]
 script = ExtResource("2_animator")
-enable_oscillation = false
+enable_rotation = false
 enable_scale_pulse = false

@@ -47,6 +47,45 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
+		"oscillation_cube": {
+			"name": "Oscillation Cube",
+			"lookup_name": "oscillation_cube",
+			"description": "A cube that demonstrates smooth oscillating motion along multiple axes",
+			"scene": "res://commons/primitives/cubes/oscillation_cube.tscn",
+			"position": [1.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.5, 0.5, 0.5],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
+		"rotation_oscillation_cube": {
+			"name": "Rotation Oscillation Cube",
+			"lookup_name": "rotation_oscillation_cube",
+			"description": "A cube that combines rotation and oscillation with dynamic shader effects",
+			"scene": "res://commons/primitives/cubes/rotation_oscillation_cube.tscn",
+			"position": [-1.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.5, 0.5, 0.5],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
+		"cube_scene": {
+			"name": "Basic Cube Scene",
+			"lookup_name": "cube_scene",
+			"description": "A fundamental cube with shader material and static body physics",
+			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
+			"position": [0.0, 1.0, 1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.5, 0.5, 0.5],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
 				"reset_cube": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_cube",
