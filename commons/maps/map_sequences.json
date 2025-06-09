@@ -21,6 +21,7 @@
 				"Tutorial_Col", 
 				"Tutorial_Row", 				
 				"Tutorial_2D",
+				"Tutorial_2D_Color",
 				"Tutorial_Disco"
 			],
 			"return_to": "lab",
@@ -41,9 +42,9 @@
 			],
 			"maps": [
 				"Random_One",
-				"Random_One",
-				"Random_One",
-				"Random_One",
+				"Random_Two",
+				"Random_Three",
+				"Random_Four",
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["array_tutorial"],

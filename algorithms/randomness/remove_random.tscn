@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8k7iaxm4n2p5"]
+
+[ext_resource type="Script" uid="uid://ctl6tdrey88ge" path="res://algorithms/randomness/RemoveRandom.gd" id="1_remover"]
+
+[node name="RandomRemovalAlgorithm" type="Node3D"]
+script = ExtResource("1_remover")
+region_min_z = 2
+region_max_z = 9
+target_y_level = 0

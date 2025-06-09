@@ -101,7 +101,7 @@
 			"name": "Probability Sphere",
 			"lookup_name": "random_edge_profile",
 			"description": "A sphere that shows the dance of randomness",
-			"scene": "res://algorithms/randomness/random_profile.tscn",
+			"scene": "res://algorithms/randomness/profile_random.tscn",
 			"position": [1.0, 1.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "touch_to_start_sequence",
@@ -109,6 +109,68 @@
 			"artifact_type": "sequence_trigger", 
 			"prerequisites": []
 		},
+		"bubbles_random": {
+			"name": "Probability Sphere",
+			"lookup_name": "bubbles_random",
+			"description": "A sphere that shows the dance of randomness",
+			"scene": "res://algorithms/randomness/bubbles_random.tscn",
+			"position": [1.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_start_sequence",
+			"sequence": "randomness_exploration",
+			"artifact_type": "sequence_trigger", 
+			"prerequisites": []
+		},
+		
+		"walk_random": {
+			"name": "Random Walker",
+			"lookup_name": "walk_random",
+			"description": "An algorithmic walker that creates trails through the grid space",
+			"scene": "res://algorithms/randomness/walk_random.tscn",
+			"position": [2.0, 1.0, 1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"remove_random": {
+			"name": "Random Destructor",
+			"lookup_name": "remove_random",
+			"description": "A demolition algorithm that randomly removes cubes from the grid",
+			"scene": "res://algorithms/randomness/remove_random.tscn",
+			"position": [2.0, 1.0, -1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"height_random": {
+			"name": "Height Distributor",
+			"lookup_name": "height_random",
+			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
+			"scene": "res://algorithms/randomness/height_random.tscn",
+			"position": [-2.0, 1.0, 1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"gaussian_random": {
+			"name": "Gaussian Generator",
+			"lookup_name": "gaussian_random",
+			"description": "A bell curve algorithm that creates natural-looking height distributions",
+			"scene": "res://algorithms/randomness/gaussian_random.tscn",
+			"position": [-2.0, 1.0, -1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		
 		"geometric_crystal": {
 			"name": "Geometric Crystal",
 			"lookup_name": "geometric_crystal",
@@ -221,7 +283,7 @@
 	
 	"spawn_rules": {
 		"initial_artifacts": ["rotating_cube"],
-		"max_artifacts_on_table": 12,
+		"max_artifacts_on_table": 16,
 		"spacing_between_artifacts": 0.5,
 		"auto_arrange_on_spawn": true
 	}

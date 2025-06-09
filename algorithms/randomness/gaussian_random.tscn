@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://7ce53wkoqb5a"]
+
+[ext_resource type="Script" uid="uid://bijtdsfhdtecu" path="res://algorithms/randomness/GaussianDistribution.gd" id="1_gaussian"]
+
+[node name="GaussianDistributionAlgorithm" type="Node3D"]
+script = ExtResource("1_gaussian")
+region_min_z = 2
+region_max_z = 9
