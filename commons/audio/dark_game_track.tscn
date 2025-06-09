@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://caljfjk1aax63"]
+
+[ext_resource type="Script" uid="uid://bfljxlwj4vqse" path="res://commons/audio/DarkGameTrackPlayer.gd" id="1_track_script"]
+
+[node name="DarkGameTrack" type="Node"]
+script = ExtResource("1_track_script")
+master_volume = -3.0
+bass_volume = 3.0
+kick_volume = 0.0
+hihat_volume = -6.0
+ambient_volume = -12.0
+effect_volume = -9.0
+
+[node name="TrackInfo" type="Label" parent="."]
+offset_right = 400.0
+offset_bottom = 200.0
+text = "DARK 808/606 GAME TRACK
+
+🎵 CONTROLS:
+SPACE = Start/Stop Track
+ENTER = Show Track Info
+UP = Volume Up
+DOWN = Volume Down
+
+🎵 TRACK ELEMENTS:
+• Deep 808 Kicks
+• Acid 606 Hi-Hats
+• Sub Bass Layer
+• Ambient Drone
+• Glitch Effects
+• Dark Atmosphere
+
+The track will start automatically
+and loop continuously."

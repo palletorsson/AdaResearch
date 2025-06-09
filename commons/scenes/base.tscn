@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=19 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="PackedScene" uid="uid://do1wif8rpqtwj" path="res://addons/godot-xr-tools/functions/function_gaze_pointer.tscn" id="3_rldw0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
+[ext_resource type="PackedScene" uid="uid://caljfjk1aax63" path="res://commons/audio/dark_game_track.tscn" id="13_lr6fa"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
 
@@ -115,3 +116,5 @@ text = "Base "
 
 [node name="BaseSceneAddon" type="Node3D" parent="." index="4"]
 script = ExtResource("12_qiixw")
+
+[node name="DarkGameTrack" parent="." index="5" instance=ExtResource("13_lr6fa")]
