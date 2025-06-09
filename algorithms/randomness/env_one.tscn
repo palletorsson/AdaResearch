@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbsu1kebg56cs"]
+
+[ext_resource type="Script" uid="uid://bccph2dy6ontc" path="res://algorithms/randomness/envOne.gd" id="1_3651j"]
+
+[node name="kitbashing" type="Node3D"]
+script = ExtResource("1_3651j")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.966524, 0.256576, 0, -0.256576, 0.966524, 0, 0.998101, 2.84494)

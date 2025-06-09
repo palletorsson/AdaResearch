@@ -162,28 +162,28 @@
 			"prerequisites": ["array_tutorial"]
 		},
 		"random_edge_profile": {
-			"name": "Probability Sphere",
+			"name": "Random Edge Profile",
 			"lookup_name": "random_edge_profile",
-			"description": "A sphere that shows the dance of randomness",
+			"description": "A planar surface that generates random edge profiles and patterns",
 			"scene": "res://algorithms/randomness/profile_random.tscn",
-			"position": [1.0, 1.0, 0.0],
+			"position": [1.0, 1.0, 1.0],
 			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
+			"interaction": "touch_to_activate",
 			"sequence": "randomness_exploration",
-			"artifact_type": "sequence_trigger", 
-			"prerequisites": []
+			"artifact_type": "interactive_algorithm", 
+			"prerequisites": ["array_tutorial"]
 		},
 		"bubbles_random": {
-			"name": "Probability Sphere",
+			"name": "Random Bubbles",
 			"lookup_name": "bubbles_random",
-			"description": "A sphere that shows the dance of randomness",
+			"description": "A particle system that generates random bubble effects with dynamic spawning",
 			"scene": "res://algorithms/randomness/bubbles_random.tscn",
-			"position": [1.0, 1.0, 0.0],
+			"position": [1.0, 1.0, -1.0],
 			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
+			"interaction": "touch_to_activate",
 			"sequence": "randomness_exploration",
-			"artifact_type": "sequence_trigger", 
-			"prerequisites": []
+			"artifact_type": "interactive_algorithm", 
+			"prerequisites": ["array_tutorial"]
 		},
 		
 		"walk_random": {
@@ -228,6 +228,42 @@
 			"description": "A bell curve algorithm that creates natural-looking height distributions",
 			"scene": "res://algorithms/randomness/gaussian_random.tscn",
 			"position": [-2.0, 1.0, -1.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"sculpt_one": {
+			"name": "Sculpt One",
+			"lookup_name": "sculpt_one",
+			"description": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
+			"scene": "res://algorithms/randomness/sculpt_one.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"env_one": {
+			"name": "Environment One",
+			"lookup_name": "env_one",
+			"description": "A procedural environment generation algorithm using randomness for kitbashing",
+			"scene": "res://algorithms/randomness/env_one.tscn",
+			"position": [-3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"random_object_spawner": {
+			"name": "Random Object Spawner",
+			"lookup_name": "random_object_spawner",
+			"description": "A spawning algorithm that randomly generates and places objects in the environment",
+			"scene": "res://algorithms/randomness/random_object_spawner.tscn",
+			"position": [0.0, 1.0, -2.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "touch_to_activate",
 			"sequence": "randomness_exploration",

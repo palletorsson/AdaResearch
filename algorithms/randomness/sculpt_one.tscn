@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cero7kwvswo21"]
+
+[ext_resource type="Script" uid="uid://cvx3ofevh4qel" path="res://algorithms/randomness/SculptOne.gd" id="1_ngyit"]
+
+[node name="Omoss" type="Node3D"]
+script = ExtResource("1_ngyit")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.57577)
