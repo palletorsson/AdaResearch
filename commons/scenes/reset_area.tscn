@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0myy6lvui8ey"]
+
+[ext_resource type="Script" uid="uid://b74h73fbitp6m" path="res://commons/scenes/ResetArea.gd" id="1_reset_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_reset_area"]
+size = Vector3(50, 10, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_debug"]
+size = Vector3(50, 10, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
+transparency = 1
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 0.847059)
+
+[node name="ResetArea3D" type="Area3D"]
+collision_layer = 0
+collision_mask = 524288
+monitorable = false
+script = ExtResource("1_reset_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.2185, 0)
+shape = SubResource("BoxShape3D_reset_area")
+
+[node name="DebugMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.2185, 0)
+mesh = SubResource("BoxMesh_debug")
+surface_material_override/0 = SubResource("StandardMaterial3D_debug")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

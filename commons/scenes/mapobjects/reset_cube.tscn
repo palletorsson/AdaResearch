@@ -1,105 +1,35 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv4j0f371ca0r"]
+[gd_scene load_steps=6 format=3 uid="uid://bpqm8x8r7vb4x"]
 
-[ext_resource type="Script" uid="uid://c0qsbsvwdmyvf" path="res://commons/scenes/mapobjects/ResetPlayerController.gd" id="2_reset"]
-[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_shader"]
+[ext_resource type="Script" uid="uid://c0qsbsvwdmyvf" path="res://commons/scenes/mapobjects/ResetPlayerController.gd" id="1_reset_script"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_reset"]
 render_priority = 0
-shader = ExtResource("3_shader")
-shader_parameter/modelColor = Color(0.9, 0.3, 0.1, 1)
+shader = ExtResource("2_grid_shader")
+shader_parameter/modelColor = Color(1, 0.2, 0, 1)
 shader_parameter/wireframeColor = Color(1, 0.5, 0, 1)
-shader_parameter/emissionColor = Color(1, 0.3, 0.1, 1)
-shader_parameter/width = 12.0
-shader_parameter/blur = 0.3
+shader_parameter/emissionColor = Color(1, 0.3, 0, 1)
+shader_parameter/width = 8.0
+shader_parameter/blur = 0.5
 shader_parameter/emission_strength = 4.0
-shader_parameter/modelOpacity = 0.95
+shader_parameter/modelOpacity = 0.9
 
 [sub_resource type="BoxMesh" id="BoxMesh_reset"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_reset"]
-height = 1.5
-radius = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_reset"]
+size = Vector3(3, 3, 3)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_warning"]
-top_radius = 1.2
-bottom_radius = 1.8
-height = 5.0
+[node name="ResetCube" type="Node3D"]
+script = ExtResource("1_reset_script")
 
-[sub_resource type="Gradient" id="Gradient_warning"]
-offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
-colors = PackedColorArray(1, 0.3, 0, 0, 1, 0.6, 0.1, 0.4, 1, 0.8, 0.2, 0.7, 1, 0.3, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_warning"]
-gradient = SubResource("Gradient_warning")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_warning"]
-transparency = 1
-albedo_texture = SubResource("GradientTexture1D_warning")
-emission_enabled = true
-emission = Color(1, 0.5, 0.1, 1)
-emission_energy_multiplier = 3.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_reset"]
-direction = Vector3(0, 1, 0)
-spread = 30.0
-initial_velocity_min = 2.0
-initial_velocity_max = 5.0
-gravity = Vector3(0, -1.5, 0)
-scale_min = 0.08
-scale_max = 0.25
-color = Color(1, 0.4, 0.1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_particle"]
-radius = 0.04
-height = 0.08
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_beam"]
-size = Vector3(4, 5, 4)
-
-[node name="ResetLevelCube" type="Node3D"]
-script = ExtResource("2_reset")
-
-[node name="CubeBaseMesh" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_reset")
 mesh = SubResource("BoxMesh_reset")
 
 [node name="ResetArea" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 1048577
+collision_mask = 1048576
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ResetArea"]
-shape = SubResource("CylinderShape3D_reset")
-
-[node name="WarningEffect" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CylinderMesh_warning")
-surface_material_override/0 = SubResource("StandardMaterial3D_warning")
-
-[node name="ResetParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-emitting = false
-amount = 75
-lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_reset")
-draw_pass_1 = SubResource("SphereMesh_particle")
-
-[node name="BeamArea" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 1048577
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BeamArea"]
-shape = SubResource("BoxShape3D_beam")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
-billboard = 1
-text = "LEVEL RESET
-⚠️ RESTART ⚠️"
-font_size = 18
-
-[connection signal="body_entered" from="ResetArea" to="." method="_on_player_entered_beam"]
-[connection signal="body_exited" from="ResetArea" to="." method="_on_player_exited_beam"]
-[connection signal="body_entered" from="BeamArea" to="." method="_on_player_entered_beam"]
-[connection signal="body_exited" from="BeamArea" to="." method="_on_player_exited_beam"]
+shape = SubResource("BoxShape3D_reset")

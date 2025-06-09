@@ -1,20 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene load_steps=5 format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
-[ext_resource type="PackedScene" uid="uid://dqj0rbocrgwyj" path="res://commons/context/XYZcoordinates/xyz_gadget.tscn" id="2_al13m"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
-[ext_resource type="Script" uid="uid://b74h73fbitp6m" path="res://commons/scenes/reset_area_3d.gd" id="3_grd5c"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_s4bvx"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0u7bn"]
-size = Vector3(9.62653, 1, 12.0422)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_grd5c"]
-size = Vector3(23.0722, 1, 50.1584)
-
-[sub_resource type="BoxMesh" id="BoxMesh_al13m"]
+[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
 
 [node name="Base" instance=ExtResource("1_tp52a")]
 
@@ -23,41 +12,13 @@ size = Vector3(23.0722, 1, 50.1584)
 [node name="Label3D" parent="." index="3"]
 text = "Base - Grid"
 
-[node name="XYZgadget" parent="." index="4" instance=ExtResource("2_al13m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0103965, 1.82282, -0.00784874)
-visible = false
-
-[node name="GridSystem" parent="." index="5" instance=ExtResource("2_s4bvx")]
+[node name="GridSystem" parent="." index="4" instance=ExtResource("2_s4bvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-cube_size = 1.0
-gutter = 0.0
-map_name = "Tutorial_Start"
-reload_map = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GridSystem" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78273, 0, 0)
+[node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -19.2868, 0)
+collision_mask = 1048576
+player_node_path = NodePath("../../XROrigin3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GridSystem/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 2.16677, 4.56792)
-mesh = SubResource("BoxMesh_s4bvx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GridSystem/StaticBody3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.814117, 0, -1.1488)
-shape = SubResource("BoxShape3D_0u7bn")
-
-[node name="ResetArea3D" type="Area3D" parent="GridSystem" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.90211, 0)
-script = ExtResource("3_grd5c")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GridSystem/ResetArea3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.623138, 0, -16.8295)
-shape = SubResource("BoxShape3D_grd5c")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GridSystem/ResetArea3D" index="1"]
-transform = Transform3D(23.9965, 0, 0, 0, 1, 0, 0, 0, 45.3196, 0, 0, -17.6834)
-mesh = SubResource("BoxMesh_al13m")
-
-[node name="GridScene" type="Node3D" parent="." index="7"]
+[node name="GridScene" type="Node3D" parent="." index="6"]
 script = ExtResource("3_0u7bn")
-
-[connection signal="body_entered" from="GridSystem/ResetArea3D" to="GridSystem/ResetArea3D" method="_on_body_entered"]
