@@ -89,7 +89,7 @@ func _on_player_exited_beam(body: Node3D):
 			_cancel_teleport_sequence()
 
 func _is_player_body(body: Node3D) -> bool:
-	return body.is_in_group("player") or "player" in body.name.to_lower()
+	return body.is_in_group("player") or body.is_in_group("player_body") or "player" in body.name.to_lower() or body.name.contains("XROrigin3D")
 
 func _trigger_touch_interaction(touch_position: Vector3):
 	super(touch_position)

@@ -34,7 +34,13 @@ const UTILITY_TYPES = {
 		"description": "Player starting position and respawn location",
 		"supports_parameters": true  # spawn_name, rotation, priority
 	},
-	
+	"r": {
+	"name": "reset_cube", 
+	"file": "reset_cube.tscn", 
+	"category": "safety",
+	"description": "Resets player to safe position when approached",
+	"supports_parameters": true  # position, height_offset, warning_distance
+	},
 	# Visual/Structural utilities
 	"w": {
 		"name": "window", 

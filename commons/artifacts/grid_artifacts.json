@@ -47,6 +47,7 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
+		
 		"cube_with_shader": {
 			"name": "Cube with shader",
 			"lookup_name": "cube_with_shader",
@@ -83,6 +84,7 @@
 			"artifact_type": "reward",
 			"prerequisites": []
 		},
+		
 		"probability_sphere": {
 			"name": "Probability Sphere",
 			"lookup_name": "probability_sphere",
@@ -94,6 +96,18 @@
 			"sequence": "randomness_exploration",
 			"artifact_type": "sequence_trigger", 
 			"prerequisites": ["array_tutorial"]
+		},
+		"random_edge_profile": {
+			"name": "Probability Sphere",
+			"lookup_name": "random_edge_profile",
+			"description": "A sphere that shows the dance of randomness",
+			"scene": "res://algorithms/randomness/random_profile.tscn",
+			"position": [1.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_start_sequence",
+			"sequence": "randomness_exploration",
+			"artifact_type": "sequence_trigger", 
+			"prerequisites": []
 		},
 		"geometric_crystal": {
 			"name": "Geometric Crystal",

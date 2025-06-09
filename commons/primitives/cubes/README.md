@@ -404,3 +404,202 @@ func _on_physics_cube_settled():
 - **Crystal foundation**: `crystal_scene.tscn` for complex geometry
 
 Each chapter builds naturally while teaching fundamental 3D development, VR interaction, and modular system design principles.
+
+# Reset Player Cube (r) - Safety Utility
+
+## Overview
+
+The Reset Player Cube is a safety utility that prevents players from getting lost or stuck outside the map boundaries. When a player approaches the cube, it automatically teleports them back to a safe position.
+
+## Files Required
+
+- **Script**: `res://commons/scenes/mapobjects/ResetPlayerController.gd`
+- **Scene**: `res://commons/scenes/mapobjects/reset_cube.tscn`
+- **Registry**: Add "r" entry to `UtilityRegistry.gd`
+
+## Key Features
+
+### 🔴 **Visual Warning System**
+- Red glowing cube with warning particles
+- "RESET ZONE ⚠️ DANGER ⚠️" label
+- Distance-based warning effects
+
+### ⚡ **Automatic Activation**
+- Proximity-based trigger (no interaction needed)
+- Configurable warning distance (default: 2.0 units)
+- Fast activation (1 second charge time)
+
+### 🎯 **Safe Reset Position**
+- Teleports to Vector3(0, 1.5, 0) by default
+- Configurable via JSON parameters
+- Automatic height offset for safety
+
+### 🧠 **Smart Player Detection**
+- Finds VR origin, player bodies, or character controllers
+- Resets physics velocity to prevent bouncing
+- Works with both VR and desktop players
+
+## Usage in Maps
+
+### Basic Usage
+```json
+{
+	"layers": {
+		"utilities": [
+			[" ", " ", " ", " ", "r"],
+			[" ", " ", " ", "r", " "]
+		]
+	}
+}
+```
+
+### Advanced Configuration
+```json
+{
+	"utility_definitions": {
+		"r": {
+			"properties": {
+				"reset_position": [2, 2, 2],
+				"warning_distance": 3.0,
+				"reset_height_offset": 1.0,
+				"fade_duration": 0.5
+			}
+		}
+	}
+}
+```
+
+## Configuration Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `reset_position` | Vector3 | [0, 1.5, 0] | Where to teleport the player |
+| `warning_distance` | float | 2.0 | Distance to start warning effects |
+| `reset_height_offset` | float | 0.5 | Extra height above reset position |
+| `fade_duration` | float | 0.3 | Fade in/out time (0 = instant) |
+
+## Integration Example
+
+### In GridUtilitiesComponent.gd
+```gdscript
+func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
+	match utility_type:
+		"r":  # Reset cube
+			if parameters.size() > 0:
+				# Parse reset position from parameter
+				var pos_string = parameters[0]
+				var coords = pos_string.split(",")
+				if coords.size() >= 3:
+					var reset_pos = Vector3(
+						float(coords[0]), 
+						float(coords[1]), 
+						float(coords[2])
+					)
+					utility_object.set_reset_position(reset_pos)
+```
+
+### Usage with Parameters
+```json
+{
+	"layers": {
+		"utilities": [
+			["r:2,3,4", " ", " "]
+		]
+	}
+}
+```
+
+## Safety Implementation
+
+### Automatic Player Detection
+```gdscript
+func _find_player_node():
+	var potential_players = [
+		get_tree().get_first_node_in_group("player"),
+		get_tree().current_scene.find_child("XROrigin3D", true, false),
+		get_tree().current_scene.find_child("VROrigin", true, false)
+	]
+```
+
+### Physics Reset
+```gdscript
+func _reset_player_physics():
+	var character_body = player_node.find_child("CharacterBody3D", true, false)
+	if character_body and "velocity" in character_body:
+		character_body.velocity = Vector3.ZERO
+```
+
+## Visual Design
+
+### Red Warning Theme
+- **Base Color**: Red/orange gradient
+- **Emission**: Bright red glow
+- **Particles**: Warning sparks
+- **Animation**: Pulsing intensity
+
+### Distance-Based Effects
+```gdscript
+func _show_warning_effects():
+	if mesh_instance and mesh_instance.material_override:
+		var material = mesh_instance.material_override as ShaderMaterial
+		if material:
+			material.set_shader_parameter("emissionColor", Color.RED)
+			material.set_shader_parameter("emission_strength", 5.0)
+```
+
+## Common Use Cases
+
+### 1. **Map Boundaries**
+Place reset cubes at the edges of floating platforms or limited play areas.
+
+### 2. **Danger Zones**
+Use near cliffs, pits, or areas where players shouldn't go.
+
+### 3. **Tutorial Safety**
+Ensure new VR users can't get lost during tutorials.
+
+### 4. **Puzzle Resets**
+Reset player position when they solve or break a puzzle.
+
+## Signals
+
+### Available Signals
+```gdscript
+signal player_reset_started()
+signal player_reset_complete(new_position: Vector3)
+signal player_approaching_reset(distance: float)
+```
+
+### Signal Usage Example
+```gdscript
+func _on_reset_cube_ready():
+	reset_cube.player_reset_complete.connect(_on_player_reset)
+
+func _on_player_reset(new_position: Vector3):
+	print("Player was reset to: ", new_position)
+	# Maybe show a UI message or play a sound
+```
+
+## Testing & Debugging
+
+### Force Reset (for testing)
+```gdscript
+# In console or debug script
+reset_cube.force_reset_player()
+```
+
+### Debug Information
+```gdscript
+# Check if player node is found
+print("Player node: ", reset_cube.player_node)
+print("Reset position: ", reset_cube.get_reset_position())
+```
+
+## Performance Notes
+
+- ✅ **Lightweight**: Only processes when player is nearby
+- ✅ **Efficient**: Uses Area3D for collision detection
+- ✅ **Safe**: No scene loading or complex transitions
+- ✅ **VR Optimized**: Smooth position changes without motion sickness
+
+The reset cube provides essential safety functionality for VR environments where players can easily get disoriented or move outside intended boundaries!

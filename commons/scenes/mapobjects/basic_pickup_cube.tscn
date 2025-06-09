@@ -38,6 +38,3 @@ transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 visible = false
 mesh = SubResource("BoxMesh_hover")
 surface_material_override/0 = SubResource("StandardMaterial3D_hover")
-
-[node name="Camera3D" parent="." index="4"]
-transform = Transform3D(0.864398, 0, -0.502809, 0, 1, 0, 0.502809, 0, 0.864398, -0.984191, 0.739279, 2.52719)
