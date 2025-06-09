@@ -1,12 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ewsot4c1vwk3"]
+[gd_scene load_steps=2 format=3 uid="uid://b8xwm7qle5uv4"]
 
-[ext_resource type="Script" uid="uid://bfpv7ba8pgqiw" path="res://commons/context/discofloor/DiscoFloorController.gd" id="1_ejqtt"]
+[ext_resource type="Script" uid="uid://bophqluvgtpi0" path="res://commons/context/discofloor/DiscoGridAlgorithm.gd" id="1_disco"]
 
-[node name="Discofloor" type="Node3D"]
-script = ExtResource("1_ejqtt")
-
-[node name="Label3D" type="Label3D" parent="."]
-text = "DISCO"
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.944983, 0.327119, 0, -0.327119, 0.944983, 0, 0.578659, 1.61768)
+[node name="DiscoGridAlgorithm" type="Node3D"]
+script = ExtResource("1_disco")
+region_min_x = 3
+region_max_x = 10
+region_min_z = 4
+region_max_z = 11
