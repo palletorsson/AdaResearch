@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo38qmi4k27v2"]
+[gd_scene load_steps=5 format=3 uid="uid://bo38qmi4k27v2"]
 
-[ext_resource type="Script" uid="uid://bo7fb2yiasu40" path="res://commons/scenes/mapobjects/info_board.gd" id="1_y651h"]
+[ext_resource type="Script" uid="uid://dn4j3mdeb4tyn" path="res://commons/scenes/mapobjects/AnnotationInfoBoard.gd" id="1_wlbfx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc54e"]
 bg_color = Color(0.12, 0.12, 0.12, 1)
@@ -14,9 +14,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_q2xnm"]
-viewport_path = NodePath("Viewport")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_hfp1n"]
 size = Vector3(1.2, 1.6, 0.05)
 
@@ -25,7 +22,7 @@ viewport_path = NodePath("Viewport")
 
 [node name="InfoBoard" type="Node3D"]
 transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
-script = ExtResource("1_y651h")
+script = ExtResource("1_wlbfx")
 
 [node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -120,6 +117,7 @@ text = "A meta-quest into the world of algorithms"
 autowrap_mode = 2
 
 [node name="Barcode" type="Label" parent="Viewport/InfoBoardUI/MainPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -162,7 +160,7 @@ offset_right = 220.0
 offset_bottom = -90.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 18
-text = "XP: 0"
+text = "0"
 
 [node name="HealthLabel" type="Label" parent="Viewport/InfoBoardUI/MainPanel"]
 layout_mode = 1
@@ -200,34 +198,6 @@ horizontal_alignment = 1
 
 [node name="Board" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="Quad" type="QuadMesh" parent="Board"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-size = Vector2(1.2, 1.6)
-script = null
-
-[node name="BoardMaterial" type="StandardMaterial3D" parent="Board/Quad"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transparency = 1
-albedo_texture = SubResource("ViewportTexture_q2xnm")
-roughness = 0.5
-script = null
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

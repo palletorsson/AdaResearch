@@ -43,7 +43,7 @@ const UTILITY_TYPES = {
 	},
 	"an": {
 	"name": "annotation_cube", 
-	"file": "annotation_cube.tscn", 
+	"file": "info_board.tscn", 
 	"category": "ui",
 	"description": "Displays current map name and description",
 	"supports_parameters": true  # display_mode, text_scale
