@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw3abvdhiw3k7"]
+
+[ext_resource type="Script" uid="uid://vygqeq6bli6w" path="res://commons/audio/SyncopatedTrackPlayer.gd" id="1_def456"]
+
+[node name="SyncopatedTrack" type="Node"]
+script = ExtResource("1_def456")
+
+[node name="TrackInfo" type="Label" parent="."]
+offset_right = 500.0
+offset_bottom = 400.0
+text = "SYNCOPATED TRACK PLAYER
+
+🎵 DEMONSTRATES:
+• Heavy syncopation and ghost notes
+• Weak beat emphasis (e's and a's)
+• 16th note swing groove
+• Rhythmic tension and surprise
+
+🎛️ ELEMENTS:
+• Spine Beat: Core rhythm foundation
+• Ghost Notes: Quiet rhythmic texture
+• Accent Hits: Surprise and tension
+• Syncopated Percussion: Complexity
+• Offbeat Stabs: Between-beat fills
+
+🎵 CONTROLS:
+SPACE = Start/Stop
+ENTER = Show Info
+LEFT/RIGHT = Adjust Swing
+
+🎵 PATTERN GUIDE:
+1-e-and-a-2-e-and-a-3-e-and-a-4-e-and-a
+
+Listen for:
+• Ghost snares on weak beats
+• Accent kicks creating surprise
+• 15% swing adding groove
+• Complex rhythmic interactions
+
+This track focuses on the 'e's and 'a's
+- the weak 16th note positions that
+create syncopation and groove!"

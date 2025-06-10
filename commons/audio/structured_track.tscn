@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs8mn0rsp4k1y"]
+
+[ext_resource type="Script" uid="uid://dr7k5h47bf5kf" path="res://commons/audio/StructuredTrackPlayer.gd" id="1_ghi789"]
+
+[node name="StructuredTrack" type="Node"]
+script = ExtResource("1_ghi789")
+
+[node name="TrackInfo" type="Label" parent="."]
+offset_right = 500.0
+offset_bottom = 400.0
+text = "STRUCTURED TRACK PLAYER
+
+🎵 DEMONSTRATES:
+• ABAC/AABD phrasing structure
+• 8-bar phrase organization
+• Fills vs Empties
+• Song structure support
+
+🎛️ 8-BAR PHRASE STRUCTURE:
+Bar 1: A - Core rhythm
+Bar 2: B - Small variation (extra kick)
+Bar 3: A - Core rhythm returns
+Bar 4: C - Bigger variation (more snares)
+Bar 5: A - Core rhythm returns
+Bar 6: B - Small variation again
+Bar 7: A - Core rhythm returns
+Bar 8: D - Fill OR Empty
+
+🎵 CONTROLS:
+SPACE = Start/Stop
+ENTER = Show Structure Info
+UP = Toggle Fills/Empties Mode
+
+🎵 LISTEN FOR:
+• Repetition and variation balance
+• How fills increase energy
+• How empties create vacuum
+• 4-bar and 8-bar phrase cycles
+• Tom fills on D sections
+• Crash accents for anticipation
+
+This demonstrates how rhythm supports
+song structure across multiple bars!"

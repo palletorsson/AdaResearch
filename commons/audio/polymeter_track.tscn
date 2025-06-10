@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceptdatuejky8"]
+
+[ext_resource type="Script" uid="uid://bgisydgjc6gc8" path="res://commons/audio/PolymeterTrackPlayer.gd" id="1_abc123"]
+
+[node name="PolymeterTrack" type="Node"]
+script = ExtResource("1_abc123")
+
+[node name="TrackInfo" type="Label" parent="."]
+offset_right = 500.0
+offset_bottom = 400.0
+text = "POLYMETER TRACK PLAYER
+
+🎵 DEMONSTRATES:
+• 3 vs 4 vs 5 vs 7 beat patterns
+• Shifting relationships between elements
+• Polymeters (not polyrhythms!)
+• Pattern alignment detection
+
+🎛️ PATTERNS:
+• Kick: 4-beat pattern (1-0-1-0)
+• Snare: 3-beat pattern (0-1-0)
+• Bass: 3-beat pattern (1-0-1)
+• Lead: 5-beat pattern (1-0-0-1-0)
+• Percussion: 7-beat pattern (1-0-1-0-1-0-0)
+
+🎵 CONTROLS:
+SPACE = Start/Stop
+ENTER = Show Info
+UP/DOWN = Volume
+
+Watch how the patterns drift apart and
+align in fascinating ways! This creates
+the constantly shifting rhythmic
+relationships that make polymeters
+so compelling in electronic music.
+
+All patterns share the same beat length
+but have different cycle lengths, creating
+the polymeter effect."

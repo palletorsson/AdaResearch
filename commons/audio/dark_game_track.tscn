@@ -8,30 +8,36 @@ script = ExtResource("1_xlm8h")
 [node name="TrackInfo" type="Label" parent="."]
 offset_right = 400.0
 offset_bottom = 300.0
-text = "ENHANCED DARK GAME TRACK (JSON)
+text = "ADVANCED DARK GAME TRACK (RHYTHM THEORY)
+
+🎵 JSON FEATURES UTILIZED:
+• 64-step patterns: kick, hihat, snare, effect, blade_runner
+• Volume settings: All 6 channels from JSON
+• BPM: 360 from JSON configuration
+• Track name: Loaded and displayed
+• Complete auto-loading system
 
 🎵 CONTROLS:
-1-6 = Toggle Layers (Kick/Snare/HiHat/Bass/Lead/Pad)
-F = Filter Sweep
-R = Random Reverb
-C = Random Compression
-P = Generate Random Pattern
-Ctrl+S = Quick Save Config
-Ctrl+L = Quick Load Config
+SPACE = Start/Stop | ENTER = Track Info
+UP/DOWN = Master Volume | LEFT/RIGHT = Swing
+J = JSON Utilization | S = Syncopation Analysis
+R = Reload JSON | 1-5 = Toggle Elements
 
-🎵 CURRENT TRACK:
-Uses JSON configuration system
-Loads: dark_ambient_track.json
-Advanced effects and automation
-Real-time pattern modification
+🎵 RHYTHM THEORY FEATURES:
+• Pattern analysis: Strong/weak/ghost beats
+• Syncopation detection & metrics
+• Dynamic volume accenting
+• 16th note swing groove (8% default)
+• Ghost note system (-15dB)
+• Accent boost (+6dB on strong beats)
 
-🎛️ FEATURES:
-• Multi-layer composition
-• LFO modulation
-• Euclidean patterns
-• Filter automation
-• Professional effects
-• JSON-based configuration
+🎛️ ADVANCED SYSTEMS:
+• Auto-loads: dark_game_track_simple.json
+• Real-time pattern analysis
+• Educational console output
+• Complex rhythmic relationships
+• Cinematic atmospheric elements
 
-The track loads automatically and
-demonstrates the Enhanced Track System."
+Press 'J' to see complete JSON utilization
+Press 'S' to analyze syncopation levels
+All JSON features are fully implemented!"
