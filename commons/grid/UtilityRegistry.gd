@@ -41,6 +41,13 @@ const UTILITY_TYPES = {
 	"description": "show score",
 	"supports_parameters": true  # position, height_offset, warning_distance
 	},
+	"an": {
+	"name": "annotation_cube", 
+	"file": "annotation_cube.tscn", 
+	"category": "ui",
+	"description": "Displays current map name and description",
+	"supports_parameters": true  # display_mode, text_scale
+	},
 	"r": {
 	"name": "reset_cube", 
 	"file": "reset_cube.tscn", 

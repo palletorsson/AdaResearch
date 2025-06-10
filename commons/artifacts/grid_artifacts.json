@@ -210,6 +210,20 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+			"pickup_cube_placer": {
+			"name": "pickup_cube_placer",
+			"lookup_name": "pickup_cube_placer",
+			"description": "pickup_cube_placer",
+			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		
 		"walk_random": {
 			"name": "Random Walker",
 			"lookup_name": "walk_random",
