@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj2lywaa1dhu0"]
+
+[ext_resource type="Script" uid="uid://cyisa22ykjoul" path="res://commons/scenes/mapobjects/ScoreCubeController.gd" id="1_score_script"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_score"]
+render_priority = 0
+shader = ExtResource("2_grid_shader")
+shader_parameter/modelColor = Color(0.2, 0.5, 0.8, 1)
+shader_parameter/wireframeColor = Color(0, 1, 1, 1)
+shader_parameter/emissionColor = Color(0, 1, 1, 1)
+shader_parameter/width = 8.0
+shader_parameter/blur = 0.5
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_score"]
+
+[node name="ScoreCube" type="Node3D"]
+script = ExtResource("1_score_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.368608, 0)
+material_override = SubResource("ShaderMaterial_score")
+mesh = SubResource("BoxMesh_score")
+
+[node name="ScoreLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795082, 0)
+billboard = 1
+text = "0"

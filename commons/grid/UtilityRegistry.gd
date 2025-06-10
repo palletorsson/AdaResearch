@@ -34,6 +34,13 @@ const UTILITY_TYPES = {
 		"description": "Player starting position and respawn location",
 		"supports_parameters": true  # spawn_name, rotation, priority
 	},
+	"sp": {
+	"name": "score points", 
+	"file": "score_cube.tscn", 
+	"category": "score",
+	"description": "show score",
+	"supports_parameters": true  # position, height_offset, warning_distance
+	},
 	"r": {
 	"name": "reset_cube", 
 	"file": "reset_cube.tscn", 
