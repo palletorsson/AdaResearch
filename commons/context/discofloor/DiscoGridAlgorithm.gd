@@ -12,10 +12,10 @@ var grid_reference = null
 var max_steps: int = 8  # Number of lessons
 
 # Disco grid properties - 8x8 region in middle of grid
-@export var region_min_x: int = 2
+@export var region_min_x: int =  1
 @export var region_max_x: int = 9
-@export var region_min_z: int = 2
-@export var region_max_z: int = 9
+@export var region_min_z: int = 4
+@export var region_max_z: int = 11
 @export var target_y_level: int = 0
 
 # Animation settings

@@ -86,11 +86,11 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
-				"reset_cube": {
+		"reset_cube": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_cube",
 			"description": "Cartesian coordinate system, x y z godot",
-			"scene": "res://commons/scenes/mapobjects/reset_cube.tscn",
+			"scene": "res://commons/scenes/mapobjects/reset_scene.tscn",
 			"position": [0.0, 1.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "look",
@@ -98,7 +98,7 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
-				"reset_area": {
+		"reset_area": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_area",
 			"description": "Cartesian coordinate system, x y z godot",
@@ -124,7 +124,7 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
-				"cube_with_shader": {
+		"cube_with_shader": {
 			"name": "Cube with shader",
 			"lookup_name": "cube_with_shader",
 			"description": "Cartesian coordinate system, x y z godot",
@@ -141,6 +141,18 @@
 			"lookup_name": "disco_floor", 
 			"description": "A shimmering grid that pulses with disco energy",
 			"scene": "res://commons/context/discofloor/discofloor.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "pickup_and_examine",
+			"sequence": null,
+			"artifact_type": "reward",
+			"prerequisites": []
+		},
+			"rotating_prisme": {
+			"name": "rotating_prisme",
+			"lookup_name": "rotating_prisme", 
+			"description": "rotating_prisme",
+			"scene": "res://commons/primitives/prismes/rotating_prisme.tscn",
 			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "pickup_and_examine",
@@ -185,7 +197,19 @@
 			"artifact_type": "interactive_algorithm", 
 			"prerequisites": ["array_tutorial"]
 		},
-		
+		"random_walk_128": {
+			"name": "Random Walk 128x128",
+			"lookup_name": "random_walk_128",
+			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
+			"scene": "res://algorithms/randomness/random_walk_128.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
 		"walk_random": {
 			"name": "Random Walker",
 			"lookup_name": "walk_random",

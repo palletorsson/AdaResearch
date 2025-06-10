@@ -32,7 +32,7 @@ var is_playing: bool = false
 
 # Track patterns (1 = play, 0 = silence)
 var kick_pattern: Array = [1, 0, 0, 0, 1, 0, 1, 0]        # Heavy 808 kicks
-var hihat_pattern: Array = [0, 1, 0, 1, 0, 1, 0, 1]       # Steady hi-hats
+var hihat_pattern: Array = [1, 1, 1, 1, 1, 1, 1, 1]       # Steady hi-hats
 var snare_pattern: Array = [0, 0, 0, 0, 1, 0, 0, 0]       # Snare on 5
 var effect_pattern: Array = [0, 0, 1, 0, 0, 0, 1, 0]      # Glitch effects
 

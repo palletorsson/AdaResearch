@@ -1,0 +1,319 @@
+{
+	"metadata": {
+		"name": "Dark Game Track",
+		"artist": "Enhanced Track System",
+		"version": "2.0",
+		"bpm": 160,
+		"key": "Am",
+		"master_volume": -3.0,
+		"description": "Dark 808/606 atmospheric game track with deep bass and crisp hi-hats"
+	},
+	
+	"layers": {
+		"drums": {
+			"kick": {
+				"enabled": true,
+				"volume": 0.0,
+				"solo": false,
+				"pan": 0.0,
+				"pattern": "dark_808_kick",
+				"effects": {
+					"compressor": {
+						"threshold": -8.0,
+						"ratio": 6.0,
+						"attack": 5.0,
+						"release": 100.0
+					},
+					"filter": {
+						"cutoff": 200.0,
+						"resonance": 1.8
+					}
+				}
+			},
+			
+			"snare": {
+				"enabled": true,
+				"volume": -6.0,
+				"solo": false,
+				"pan": 0.0,
+				"pattern": "acid_606_snare",
+				"effects": {
+					"filter": {
+						"cutoff": 2000.0,
+						"resonance": 1.2
+					}
+				}
+			},
+			
+			"hihat": {
+				"enabled": true,
+				"volume": -6.0,
+				"solo": false,
+				"pan": 0.2,
+				"pattern": "acid_606_hihat",
+				"effects": {
+					"filter": {
+						"cutoff": 8000.0,
+						"resonance": 0.7
+					}
+				},
+				"lfo": {
+					"target": "volume",
+					"rate": 4.0,
+					"depth": 0.2
+				}
+			}
+		},
+		
+		"bass": {
+			"sub": {
+				"enabled": true,
+				"volume": 3.0,
+				"solo": false,
+				"pan": 0.0,
+				"pattern": "dark_808_sub",
+				"effects": {
+					"compressor": {
+						"threshold": -6.0,
+						"ratio": 8.0,
+						"attack": 3.0,
+						"release": 200.0
+					},
+					"filter": {
+						"cutoff": 150.0,
+						"resonance": 2.0
+					}
+				},
+				"lfo": {
+					"target": "filter_cutoff",
+					"rate": 0.125,
+					"depth": 50.0
+				}
+			}
+		},
+		
+		"synths": {
+			"lead": {
+				"enabled": false,
+				"volume": -15.0,
+				"solo": false,
+				"pan": -0.3,
+				"pattern": "glitch_stab",
+				"effects": {
+					"filter": {
+						"cutoff": 3000.0,
+						"resonance": 2.5
+					},
+					"delay": {
+						"time": 375.0,
+						"feedback": -18.0
+					}
+				}
+			},
+			
+			"pad": {
+				"enabled": true,
+				"volume": -12.0,
+				"solo": false,
+				"pan": 0.0,
+				"pattern": "ambient_drone",
+				"effects": {
+					"filter": {
+						"cutoff": 1000.0,
+						"resonance": 0.5
+					}
+				},
+				"lfo": {
+					"target": "volume",
+					"rate": 0.1,
+					"depth": 0.3
+				}
+			}
+		},
+		
+		"fx": {
+			"sweep": {
+				"enabled": true,
+				"volume": -9.0,
+				"solo": false,
+				"pan": 0.4,
+				"pattern": "deep_rumble",
+				"effects": {
+					"filter": {
+						"cutoff": 400.0,
+						"resonance": 1.5
+					}
+				}
+			}
+		}
+	},
+	
+	"patterns": {
+		"dark_808_kick": {
+			"length": 8,
+			"steps": [
+				{"active": true, "velocity": 1.0, "pitch": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 0.8, "pitch": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 0.9, "pitch": 0.0},
+				{"active": false, "velocity": 0.0}
+			],
+			"swing": 0.05
+		},
+		
+		"acid_606_hihat": {
+			"length": 8,
+			"steps": [
+				{"active": true, "velocity": 0.6},
+				{"active": true, "velocity": 0.4},
+				{"active": true, "velocity": 0.7},
+				{"active": true, "velocity": 0.5},
+				{"active": true, "velocity": 0.8},
+				{"active": true, "velocity": 0.3},
+				{"active": true, "velocity": 0.6},
+				{"active": true, "velocity": 0.4}
+			],
+			"humanization": 0.15
+		},
+		
+		"acid_606_snare": {
+			"length": 8,
+			"steps": [
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 1.0, "pitch": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0}
+			]
+		},
+		
+		"dark_808_sub": {
+			"length": 32,
+			"type": "bass",
+			"key": "Am",
+			"style": "rolling",
+			"swing": 0.1,
+			"humanization": 0.05
+		},
+		
+		"glitch_stab": {
+			"length": 16,
+			"steps": [
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 0.8, "pitch": 12.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 0.6, "pitch": 7.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": true, "velocity": 0.9, "pitch": 3.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0}
+			],
+			"probability": 0.7
+		},
+		
+		"ambient_drone": {
+			"length": 128,
+			"steps": [
+				{"active": true, "velocity": 0.8, "duration": 64.0, "pitch": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0},
+				{"active": false, "velocity": 0.0}
+			]
+		},
+		
+		"deep_rumble": {
+			"length": 64,
+			"type": "euclidean",
+			"pulses": 3,
+			"steps": 64,
+			"swing": 0.0
+		}
+	},
+	
+	"effects": {
+		"reverb": {
+			"room_size": 0.8,
+			"damping": 0.6,
+			"wet": 0.25,
+			"dry": 0.9
+		},
+		
+		"delay": {
+			"time": 375.0,
+			"feedback": 0.2,
+			"sync_to_bpm": true,
+			"wet": 0.15
+		},
+		
+		"compressor": {
+			"threshold": -3.0,
+			"ratio": 4.0,
+			"attack": 8.0,
+			"release": 120.0,
+			"makeup_gain": 1.5
+		}
+	},
+	
+	"sections": {
+		"intro": {
+			"length_bars": 4,
+			"active_layers": ["bass.sub", "synths.pad"],
+			"volume_multiplier": 0.6
+		},
+		
+		"main": {
+			"length_bars": 16,
+			"active_layers": ["drums.kick", "drums.hihat", "bass.sub", "synths.pad"],
+			"volume_multiplier": 0.8
+		},
+		
+		"full": {
+			"length_bars": 32,
+			"active_layers": "*",
+			"volume_multiplier": 1.0
+		}
+	},
+	
+	"automation": {
+		"filter_sweeps": [
+			{
+				"delay": 8.0,
+				"target": "Layer_bass_sub",
+				"start_freq": 80.0,
+				"end_freq": 200.0,
+				"duration": 4.0
+			},
+			{
+				"delay": 24.0,
+				"target": "Layer_fx_sweep",
+				"start_freq": 200.0,
+				"end_freq": 800.0,
+				"duration": 8.0
+			}
+		],
+		
+		"volume_fades": [
+			{
+				"delay": 16.0,
+				"target": "Layer_synths_lead",
+				"start_volume": -40.0,
+				"end_volume": -15.0,
+				"duration": 4.0
+			}
+		]
+	}
+} 

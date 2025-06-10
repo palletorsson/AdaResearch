@@ -1,34 +1,37 @@
 [gd_scene load_steps=2 format=3 uid="uid://caljfjk1aax63"]
 
-[ext_resource type="Script" uid="uid://bfljxlwj4vqse" path="res://commons/audio/DarkGameTrackPlayer.gd" id="1_track_script"]
+[ext_resource type="Script" uid="uid://dqbsm4j1bxagq" path="res://commons/audio/DarkGameTrackPlayerJSON.gd" id="1_xlm8h"]
 
 [node name="DarkGameTrack" type="Node"]
-script = ExtResource("1_track_script")
-master_volume = -3.0
-bass_volume = 3.0
-kick_volume = 0.0
-hihat_volume = -6.0
-ambient_volume = -12.0
-effect_volume = -9.0
+script = ExtResource("1_xlm8h")
 
 [node name="TrackInfo" type="Label" parent="."]
 offset_right = 400.0
-offset_bottom = 200.0
-text = "DARK 808/606 GAME TRACK
+offset_bottom = 300.0
+text = "ENHANCED DARK GAME TRACK (JSON)
 
 🎵 CONTROLS:
-SPACE = Start/Stop Track
-ENTER = Show Track Info
-UP = Volume Up
-DOWN = Volume Down
+1-6 = Toggle Layers (Kick/Snare/HiHat/Bass/Lead/Pad)
+F = Filter Sweep
+R = Random Reverb
+C = Random Compression
+P = Generate Random Pattern
+Ctrl+S = Quick Save Config
+Ctrl+L = Quick Load Config
 
-🎵 TRACK ELEMENTS:
-• Deep 808 Kicks
-• Acid 606 Hi-Hats
-• Sub Bass Layer
-• Ambient Drone
-• Glitch Effects
-• Dark Atmosphere
+🎵 CURRENT TRACK:
+Uses JSON configuration system
+Loads: dark_ambient_track.json
+Advanced effects and automation
+Real-time pattern modification
 
-The track will start automatically
-and loop continuously."
+🎛️ FEATURES:
+• Multi-layer composition
+• LFO modulation
+• Euclidean patterns
+• Filter automation
+• Professional effects
+• JSON-based configuration
+
+The track loads automatically and
+demonstrates the Enhanced Track System."

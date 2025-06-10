@@ -1,0 +1,103 @@
+{
+	"metadata": {
+		"name": "Simple Beat",
+		"bpm": 120,
+		"master_volume": -3.0
+	},
+	
+	"layers": {
+		"drums": {
+			"kick": {
+				"enabled": true,
+				"volume": 0.0,
+				"pattern": "simple_kick",
+				"effects": {
+					"compressor": {
+						"threshold": -10.0,
+						"ratio": 4.0
+					}
+				}
+			},
+			
+			"snare": {
+				"enabled": true,
+				"volume": -3.0,
+				"pattern": "simple_snare"
+			},
+			
+			"hihat": {
+				"enabled": true,
+				"volume": -8.0,
+				"pattern": "simple_hats",
+				"effects": {
+					"filter": {
+						"cutoff": 10000.0,
+						"resonance": 0.5
+					}
+				}
+			}
+		},
+		
+		"bass": {
+			"sub": {
+				"enabled": true,
+				"volume": -2.0,
+				"pattern": "simple_bass",
+				"effects": {
+					"filter": {
+						"cutoff": 500.0,
+						"resonance": 1.5
+					}
+				}
+			}
+		}
+	},
+	
+	"patterns": {
+		"simple_kick": {
+			"length": 16,
+			"steps": [
+				true, false, false, false,
+				true, false, false, false,
+				true, false, false, false,
+				true, false, false, false
+			]
+		},
+		
+		"simple_snare": {
+			"length": 16,
+			"steps": [
+				false, false, false, false,
+				true, true, false, false,
+				false, false, false, false,
+				true, false, false, false
+			]
+		},
+		
+		"simple_hats": {
+			"length": 16,
+			"type": "hihat",
+			"style": "steady",
+			"humanization": 0.1
+		},
+		
+		"simple_bass": {
+			"length": 16,
+			"type": "bass",
+			"key": "Em",
+			"style": "steady"
+		}
+	},
+	
+	"effects": {
+		"reverb": {
+			"room_size": 0.5,
+			"wet": 0.15
+		},
+		
+		"compressor": {
+			"threshold": -3.0,
+			"ratio": 2.0
+		}
+	}
+} 
