@@ -1,31 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0myy6lvui8ey"]
+[gd_scene load_steps=6 format=3 uid="uid://c0myy6lvui8ey"]
 
-[ext_resource type="Script" uid="uid://b74h73fbitp6m" path="res://commons/scenes/ResetArea.gd" id="1_reset_script"]
+[ext_resource type="Script" uid="uid://c65dthq7ktx8a" path="res://commons/scenes/mapobjects/ResetTeleporter.gd" id="1_4bxhn"]
+[ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_xru1j"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_reset_area"]
-size = Vector3(50, 10, 50)
+[sub_resource type="BoxShape3D" id="BoxShape3D_4bxhn"]
+size = Vector3(31.8371, 1, 24.9359)
 
-[sub_resource type="BoxMesh" id="BoxMesh_debug"]
-size = Vector3(50, 10, 50)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t57yy"]
+render_priority = 0
+shader = ExtResource("2_xru1j")
+shader_parameter/violet_color = Color(0.5, 0, 1, 1)
+shader_parameter/pink_color = Color(1, 0, 0.5, 1)
+shader_parameter/accent_color = Color(1, 1, 1, 1)
+shader_parameter/portal_speed = 2.0
+shader_parameter/pulse_speed = 1.5
+shader_parameter/wave_frequency = 4.0
+shader_parameter/energy = 2.0
+shader_parameter/transparency = 0.8
+shader_parameter/rim_power = 3.0
+shader_parameter/distortion_strength = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_debug"]
-transparency = 1
-no_depth_test = true
-albedo_color = Color(1, 0, 0, 0.847059)
+[sub_resource type="BoxMesh" id="BoxMesh_dvv38"]
 
-[node name="ResetArea3D" type="Area3D"]
+[node name="Reset" type="Node3D"]
+script = ExtResource("1_4bxhn")
+
+[node name="ResetArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.23929, 0)
 collision_layer = 0
 collision_mask = 524288
-monitorable = false
-script = ExtResource("1_reset_script")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.2185, 0)
-shape = SubResource("BoxShape3D_reset_area")
+[node name="CollisionShape3d" type="CollisionShape3D" parent="ResetArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402045, -0.302122, -2.54965)
+shape = SubResource("BoxShape3D_4bxhn")
 
-[node name="DebugMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.2185, 0)
-mesh = SubResource("BoxMesh_debug")
-surface_material_override/0 = SubResource("StandardMaterial3D_debug")
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54794, 0)
+material_override = SubResource("ShaderMaterial_t57yy")
+gi_mode = 0
+mesh = SubResource("BoxMesh_dvv38")
+skeleton = NodePath("")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="ResetAudio" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[connection signal="body_entered" from="ResetArea" to="." method="_on_body_entered"]
