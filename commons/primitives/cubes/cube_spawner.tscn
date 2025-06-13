@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxm4k5n8pap2q"]
+
+[ext_resource type="Script" uid="uid://ydm4hacgxlbb" path="res://commons/primitives/cubes/CubeSpawner.gd" id="1_spawner"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_spawner"]
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spawner"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_warning"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+scale_min = 0.1
+scale_max = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_particles"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="AudioStream" id="AudioStream_placeholder"]
+
+[node name="CubeSpawner" type="Node3D"]
+script = ExtResource("1_spawner")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_spawner")
+surface_material_override/0 = SubResource("StandardMaterial3D_spawner")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="WarningParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+emitting = false
+amount = 50
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_warning")
+draw_pass_1 = SubResource("SphereMesh_particles")
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStream_placeholder")
+volume_db = -10.0
+max_distance = 20.0
+
+[node name="WarningSound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStream_placeholder")
+volume_db = -8.0
+max_distance = 15.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+text = "⚠️ CUBE SPAWNER ⚠️"
+outline_size = 4

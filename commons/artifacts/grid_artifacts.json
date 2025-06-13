@@ -223,7 +223,19 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
-		
+		"cube_projectile_spawner": {
+			"name": "cube_projectile_spawner",
+			"lookup_name": "cube_projectile_spawner",
+			"description": "cube_projectile_spawner",
+			"scene": "res://commons/primitives/cubes/cube_spawner.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
 		"walk_random": {
 			"name": "Random Walker",
 			"lookup_name": "walk_random",

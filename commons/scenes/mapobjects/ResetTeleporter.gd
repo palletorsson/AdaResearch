@@ -1,12 +1,11 @@
-# MinimalResetTeleporter.gd
-# Simple reset with XR-Tools teleportation support
-
+# SimpleResetCube.gd
+# Minimal reset cube that stops velocity and teleports player
 extends Node3D
 
 @export var teleport_target: Node3D
 @export var reset_delay: float = 1.0
-
 @onready var area: Area3D = $ResetArea 
+
 var is_resetting: bool = false
 
 func _ready():
@@ -31,17 +30,56 @@ func _on_body_entered(body: Node3D):
 	is_resetting = true
 	await get_tree().create_timer(reset_delay).timeout
 	
-	# Try XR-Tools teleport first, fallback to scene reload
-	var player_body = body as XRToolsPlayerBody
-	if player_body and player_body.has_method("teleport") and teleport_target:
-		player_body.teleport(teleport_target.global_transform)
-		
-		is_resetting = false
-	else:
-		get_tree().reload_current_scene()
+	# Reset player velocity FIRST
+	_reset_velocity(body)
+	
+	# Then teleport
+	_teleport_player(body)
+	
+	is_resetting = false
+
+func _reset_velocity(body: Node3D):
+	"""Reset all player velocity - simple version"""
+	# Direct velocity reset
+	if "velocity" in body:
+		body.velocity = Vector3.ZERO
+	if "linear_velocity" in body:
+		body.linear_velocity = Vector3.ZERO
+		body.angular_velocity = Vector3.ZERO
+	
+	# Find player parent and reset that too
+	var player_root = _find_player_root(body)
+	if player_root and player_root != body:
+		if "velocity" in player_root:
+			player_root.velocity = Vector3.ZERO
+		if "linear_velocity" in player_root:
+			player_root.linear_velocity = Vector3.ZERO
+			player_root.angular_velocity = Vector3.ZERO
+
+func _find_player_root(body: Node3D) -> Node3D:
+	"""Find the main player node"""
+	var current = body
+	while current:
+		if current.is_in_group("player") or current.name.contains("XROrigin"):
+			return current
+		current = current.get_parent()
+	return body
+
+func _teleport_player(body: Node3D):
+	"""Teleport player to target"""
+	if not teleport_target:
+		return
+	
+	var player_root = _find_player_root(body)
+	if player_root:
+		player_root.global_position = teleport_target.global_position
+		print("Reset: Teleported player to %s" % teleport_target.global_position)
 
 func _is_player(body: Node3D) -> bool:
-	return body is XRToolsPlayerBody or body.is_in_group("player_body") or body.is_in_group("player")
+	return (body.get_class().begins_with("XRToolsPlayerBody") or 
+			body.is_in_group("player_body") or 
+			body.is_in_group("player") or
+			body.name.contains("PlayerBody"))
 
 # XR-Tools compatibility
 func is_xr_class(name: String) -> bool:
