@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://0m7o5iuh0x0k"]
+
+[ext_resource type="Script" uid="uid://b4liyyx11iuch" path="res://commons/scenes/mapobjects/QuitGameController.gd" id="1_quit_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_quit_trigger"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_quit_material"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_quit_cube"]
+
+[node name="QuitCube" type="Node3D"]
+script = ExtResource("1_quit_script")
+warning_color = Color(1, 0.5, 0, 1)
+
+[node name="QuitArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuitArea"]
+shape = SubResource("BoxShape3D_quit_trigger")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_quit_material")
+gi_mode = 0
+mesh = SubResource("BoxMesh_quit_cube")
+
+[node name="QuitLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "⚠️ QUIT GAME ⚠️
+Walk Into Cube"
+font_size = 28

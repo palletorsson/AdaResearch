@@ -55,6 +55,13 @@ const UTILITY_TYPES = {
 	"description": "Resets player to safe position when approached",
 	"supports_parameters": true  # position, height_offset, warning_distance
 	},
+	"q": {
+		"name": "quit_cube", 
+		"file": "quit_cube.tscn", 
+		"category": "game_control",
+		"description": "Quit game when player approaches - with confirmation",
+		"supports_parameters": true  # confirmation_timeout, require_confirmation
+	},
 	# Visual/Structural utilities
 	"w": {
 		"name": "window", 

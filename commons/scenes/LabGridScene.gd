@@ -283,25 +283,3 @@ func print_lab_status():
 	print("Current map: %s" % (lab_grid_system.map_name if lab_grid_system else "unknown"))
 	print("Expected map: %s" % _determine_map_from_sequences(completed_sequences))
 	print("===============================")
-
-func _input(event):
-	# Debug keys for testing progression
-	if event.is_action_pressed("ui_accept"):  # Space
-		print("LabGridScene: Debug - Force completing array_tutorial")
-		force_complete_sequence("array_tutorial")
-	
-	if event.is_action_pressed("ui_cancel"):  # Escape  
-		print("LabGridScene: Debug - Resetting progression")
-		reset_lab_progression()
-	
-	if event.is_action_pressed("ui_select"):  # Enter
-		print("LabGridScene: Debug - Printing lab status")
-		print_lab_status()
-	
-	# Number keys for direct sequence completion testing
-	if event.is_action_pressed("ui_1"):
-		reset_lab_progression()
-	elif event.is_action_pressed("ui_2"):
-		force_complete_sequence("array_tutorial")
-	elif event.is_action_pressed("ui_3"):
-		force_complete_sequence("randomness_exploration")

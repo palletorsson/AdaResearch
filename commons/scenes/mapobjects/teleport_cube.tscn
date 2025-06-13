@@ -71,3 +71,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BeamArea" index="0"]
 shape = SubResource("BoxShape3D_beam")
+
+[node name="Camera3D" parent="." index="8"]
+transform = Transform3D(0.864398, 0, -0.502809, 0, 1, 0, 0.502809, 0, 0.864398, -0.984191, 0.739279, 2.52719)
