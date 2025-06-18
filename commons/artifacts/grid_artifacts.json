@@ -321,6 +321,33 @@
 			"prerequisites": ["array_tutorial"]
 		},
 		
+
+	"noise_space": {
+		"name": "noise_space",
+		"lookup_name": "noise_space", 
+		"description": "A crystal that contains algorithmic resistance terrain",
+		"scene": "res://commons/context/walkgrids/noise_space.tscn"
+	},
+	"random_space": {
+		"name": "random_space",
+		"lookup_name": "random_space",
+		"description": "A crystal that contains mathematical chaos algorithms", 
+		"scene": "res://commons/context/walkgrids/random_space.tscn"
+	},
+	"sine_space": {
+		"name": "sine_space",
+		"lookup_name": "sine_space",
+		"description": "A crystal that contains perfect wave algorithms",
+		"scene": "res://commons/context/walkgrids/sine_space.tscn"
+	},
+	"voronoi_space": {
+		"name": "voronoi_space", 
+		"lookup_name": "voronoi_space",
+		"description": "A crystal that contains territorial boundary algorithms",
+		"scene": "res://commons/context/walkgrids/voronoi_space.tscn"
+	},
+
+
 		"geometric_crystal": {
 			"name": "Geometric Crystal",
 			"lookup_name": "geometric_crystal",
