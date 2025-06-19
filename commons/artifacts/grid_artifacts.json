@@ -168,17 +168,31 @@
 			"artifact_type": "reward",
 			"prerequisites": []
 		},
-			"rotating_prisme": {
-			"name": "rotating_prisme",
-			"lookup_name": "rotating_prisme", 
-			"description": "rotating_prisme",
-			"scene": "res://commons/primitives/prismes/rotating_prisme.tscn",
-			"position": [0.0, 0.0, 0.0],
+			"spectral_analyzer": {
+			"name": "Master Audio Analyzer",
+			"lookup_name": "spectral_analyzer",
+			"description": "A master bus spectrum analyzer that visualizes ALL game audio frequencies and waveforms in real-time",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
+			"position": [0.0, 1.0, 3.0],
 			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": []
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "wavefunction_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.0, 1.0, 0.5],
+				"light_intensity": 1.5,
+				"light_range": 4.0,
+				"light_position": [0, 1.5, 0]
+			},
+			"audio_integration": {
+				"auto_detect_audio": true,
+				"display_modes": ["spectrum_line", "spectrum_bars", "waveform", "vu_meter", "oscilloscope"],
+				"default_display": "spectrum_line",
+				"update_rate": 30.0
+			}
 		},
 		
 		"probability_sphere": {

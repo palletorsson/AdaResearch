@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://b71t61yx02m4x"]
+
+[ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectral"]
+[ext_resource type="Script" uid="uid://cama5hno05cd6" path="res://algorithms/wavefunctions/spectralanalysis/SpectralMeter.gd" id="2_spectral"]
+[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="3_display"]
+[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="4_waveform"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(2, 0.8, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+flip_faces = true
+size = Vector2(2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission_energy_multiplier = 6.0
+
+[node name="SpectralAnalyzer" type="Node3D"]
+
+[node name="DisplayBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("BoxMesh_1")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+
+[node name="AudioDisplay" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="GameSoundMeter" type="Control" parent="AudioDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spectral")
+auto_find_teleport_audio = false
+monitor_master_bus = true
+bar_count = 64
+background_color = Color(0, 0, 0, 0.9)
+line_width = 6.0
+height_multiplier = 300.0
+enable_distance_culling = false
+overlay_mode = false
+world_space_mode = true
+
+[node name="SpectralDisplay" type="Control" parent="AudioDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_spectral")
+bar_count = 32
+line_color = Color(0.5, 1, 0.5, 1)
+background_color = Color(0, 0, 0, 0.5)
+line_width = 3.0
+height_multiplier = 150.0
+max_distance_from_player = 999.0
+
+[node name="WaveformViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="WaveformDisplay" type="Control" parent="WaveformViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_waveform")
+amplitude_scale = 80.0
+time_scale = 1.5
+
+[node name="SpectrumDisplayMaterial" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0167553, 1.98893, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("QuadMesh_1")
+script = ExtResource("3_display")
+
+[node name="WaveformDisplayMaterial" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.000400543, 1.01, 0)
+material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("QuadMesh_1")
+script = ExtResource("3_display")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, 0)
+text = "Master Audio Analyzer
+Analyzing ALL Game Audio"
+font_size = 20
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46567, 1.37801)
