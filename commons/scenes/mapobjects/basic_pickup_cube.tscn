@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://blasiqhmj3w0u"]
 
-[ext_resource type="PackedScene" uid="uid://cg7sqo2sld3d5" path="res://commons/primitives/cubes/animated_cube.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://cg7sqo2sld3d5" path="res://commons/primitives/cubes/animationsine/animated_cube.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://hv4cqsxgluwu" path="res://commons/scenes/mapobjects/PickupController.gd" id="2_controller"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_interaction"]

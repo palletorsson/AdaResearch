@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg7sqo2sld3d5"]
 
 [ext_resource type="PackedScene" uid="uid://cihh84mvqjtul" path="res://commons/primitives/cubes/cube_with_shader.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://dqcqxqu2hkqcq" path="res://commons/primitives/cubes/CubeAnimator.gd" id="2_animator"]
+[ext_resource type="Script" uid="uid://dqcqxqu2hkqcq" path="res://commons/primitives/cubes/animationsine/CubeAnimator.gd" id="2_animator"]
 
 [node name="RotationCube" instance=ExtResource("1_base")]
 
@@ -9,3 +9,7 @@
 script = ExtResource("2_animator")
 enable_oscillation = false
 enable_scale_pulse = false
+
+[node name="Label3D_1_1" type="Label3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+text = "1:1"

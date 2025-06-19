@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv1qkq6lipnwy"]
+
+[ext_resource type="PackedScene" uid="uid://u6bpfxudkduq" path="res://commons/primitives/cubes/animation/transformation_rotation_cube.tscn" id="1_phl8g"]
+[ext_resource type="Script" uid="uid://dmxx8xjkd3ksa" path="res://commons/primitives/cubes/animation/ScaleTween.gd" id="2_xqnjh"]
+
+[node name="CubeWithAllAnimations" instance=ExtResource("1_phl8g")]
+
+[node name="ScaleTween" type="Node" parent="." index="4"]
+script = ExtResource("2_xqnjh")
+
+[node name="Label3D_1_2" type="Label3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+text = "1:1"
