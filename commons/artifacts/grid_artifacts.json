@@ -194,6 +194,46 @@
 				"update_rate": 30.0
 			}
 		},
+		"spectrum_display": {
+			"name": "Frequency Spectrum Analyzer",
+			"lookup_name": "spectrum_display",
+			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
+			"position": [0.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "always_active",
+			"sequence": "frequency_analysis",
+			"artifact_type": "audio_visualizer",
+			"prerequisites": [],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.0, 1.0, 0.0],
+				"light_intensity": 1.2,
+				"light_range": 3.0,
+				"light_position": [0, 1.2, 0]
+			}
+		},
+		"spectral_sine_wave": {
+			"name": "Spectral Sine Wave",
+			"lookup_name": "spectral_sine_wave",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
+			"position": [0.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "always_active",
+			"sequence": "spectral_visualization",
+			"artifact_type": "audio_visualizer",
+			"prerequisites": [],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.0, 1.0, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 3.0,
+				"light_position": [0, 1.2, 0]
+			}
+		},
 		
 		"probability_sphere": {
 			"name": "Probability Sphere",

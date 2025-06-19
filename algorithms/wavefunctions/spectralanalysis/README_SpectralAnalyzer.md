@@ -1,374 +1,236 @@
-# Spectral Analyzer Tutorial
-## Real-Time Audio Analysis: Time Domain & Frequency Domain
+# Spectral Audio Analyzer System
 
-### 🎯 **Overview**
-This tutorial covers the implementation of a dual-display audio analyzer that visualizes sound in both time domain (sine waves) and frequency domain (spectrum analysis). Perfect for understanding how digital audio works and seeing the mathematical relationship between waveforms and frequencies.
+A comprehensive real-time audio visualization system for the AdaResearch VR educational platform, featuring dual complementary displays that analyze and visualize game audio in both frequency and spectral-temporal domains.
 
----
+## Overview
 
-## 📚 **Theory: Time vs Frequency Domain**
+This system provides two distinct but complementary audio visualizers:
 
-### **Spectral Sine Wave (Lower Display)**
-- **What it shows**: Sine wave where amplitude is modulated by frequency spectrum values
-- **Visual**: Smooth sine wave that "breathes" with audio content
-- **X-axis**: Time position across display (2 sine wave cycles)
-- **Y-axis**: Sine wave amplitude (modulated by spectral magnitude)
-- **Use cases**: Seeing how frequency content changes over time in wave form
+1. **Frequency Spectrum Analyzer** (Green) - Traditional FFT frequency bars showing audio content
+2. **Spectral Sine Wave** (Cyan) - Innovative sine wave where amplitude is modulated by cycling through frequency spectrum values over time
 
-### **Frequency Domain (Spectrum)**
-- **What it shows**: Which frequencies are present in the audio
-- **Visual**: Vertical bars showing frequency content
-- **X-axis**: Frequency (Hz - cycles per second)
-- **Y-axis**: Magnitude (how strong each frequency is)
-- **Use cases**: Seeing pitch content, harmonics, timbre
+Both visualizers analyze the Master Bus in real-time, capturing all game audio including ambient sounds, teleporter drones, pickup effects, and any other audio sources.
 
-### **Mathematical Relationship**
+## Features
+
+### Enhanced Grid Systems
+- **Professional Grid Lines**: Both displays feature comprehensive grid systems with frequency/time and amplitude markers
+- **Frequency Labels**: Spectrum analyzer shows 0Hz, 2kHz, 4kHz, 6kHz, 8kHz frequency divisions
+- **Amplitude Markers**: Clear amplitude level indicators (0.2, 0.4, 0.6, 0.8) for precise readings
+- **Time Scale Information**: Spectral sine wave includes time progression markers and current time display
+- **Color-Coded Themes**: Green for spectrum analysis, cyan for spectral sine wave
+
+### Advanced Audio Analysis
+- **Master Bus Monitoring**: Analyzes ALL game audio through the Master Bus
+- **Shared Spectrum Analyzers**: Intelligent detection and sharing of audio analysis resources
+- **Enhanced Sensitivity**: 50x magnitude boosting for detecting even quiet audio sources
+- **Smart Baseline**: Minimum 10% baseline activity ensures visual feedback even with low audio
+- **Debug Monitoring**: Real-time debug output showing audio detection statistics
+
+### Real-Time Performance
+- **30 FPS Updates**: Smooth real-time visualization
+- **Optimized Processing**: Efficient audio analysis with minimal performance impact
+- **VR-Optimized**: Designed specifically for VR environments and spatial audio
+
+## Core Concept: Spectral Sine Wave
+
+The spectral sine wave represents a unique approach to audio visualization that bridges frequency and time domains:
+
+### Traditional Approaches
+- **Time Domain**: Shows amplitude changes over time (waveforms)
+- **Frequency Domain**: Shows frequency content at specific moments (spectrum analyzers)
+
+### Our Spectral Sine Wave Approach
+- **Spectral-Temporal Domain**: Uses frequency spectrum magnitudes to modulate sine wave amplitude over time
+- **Educational Value**: Demonstrates the relationship between frequency content and wave amplitude
+- **Visual Innovation**: Creates a "breathing" sine wave that responds to audio frequency content
+
+### Mathematical Foundation
 ```
-Spectral Sine Wave: Frequency Magnitudes → Modulated Sine Wave
-
-How it works:
-- Frequency Domain: Vertical bars showing frequency content
-- Spectral Sine Wave: sin(phase) × magnitude[frequency] - amplitude varies
-- Time scrolling cycles through different frequency bands (0-8kHz)
-- Strong frequencies = tall sine waves, weak frequencies = small sine waves
-```
-
----
-
-## 🏗️ **Code Architecture**
-
-### **File Structure**
-```
-spectralanalysis/
-├── spectral_analyzer.tscn          # Main scene with dual displays
-├── GameSoundMeter.gd               # Frequency spectrum analyzer
-├── SpectralMeter.gd                # Alternative spectrum display
-├── WaveformDisplay.gd              # Time domain waveform display
-├── SpectralDisplayController.gd    # Links viewports to materials
-└── README_SpectralAnalyzer.md      # This tutorial
-```
-
-### **Component Hierarchy**
-```
-SpectralAnalyzer (Node3D)
-├── AudioDisplay (SubViewport)          # Frequency spectrum rendering
-│   ├── GameSoundMeter (Control)        # Main spectrum analyzer
-│   └── SpectralDisplay (Control)       # Secondary spectrum display
-├── WaveformViewport (SubViewport)      # Time domain rendering  
-│   └── WaveformDisplay (Control)       # Waveform visualization
-├── SpectrumDisplayMaterial (MeshInstance3D)  # Upper screen (green)
-├── WaveformDisplayMaterial (MeshInstance3D)  # Lower screen (cyan)
-└── Label3D                             # Title text
+For each display position i:
+  time_position = i / sample_count
+  freq_index = (time_position + time_offset) * 64 % 64
+  freq_hz = (freq_index / 64) * 8000Hz
+  magnitude = spectrum_analyzer.get_magnitude_for_frequency_range(freq_hz, freq_hz + 125Hz)
+  amplitude = magnitude * sensitivity_boost
+  waveform[i] = sin(time_position * 4π + time_offset) * amplitude
 ```
 
----
+## Technical Architecture
 
-## 🎵 **Audio Processing Pipeline**
+### Scene Structure
+```
+spectral_sine_wave.tscn:
+├── SpectralSineWave (Node3D)
+├── WaveformViewport (SubViewport)
+│   └── WaveformDisplay (Control) - WaveformDisplay.gd
+├── WaveformDisplayMaterial (MeshInstance3D) - SpectralDisplayController.gd
+└── Label3D
 
-### **1. Audio Capture**
+spectrum_display.tscn:
+├── SpectrumDisplay (Node3D)
+├── AudioDisplay (SubViewport)
+│   └── GameSoundMeter (Control) - GameSoundMeter.gd
+├── SpectrumDisplayMaterial (MeshInstance3D) - SpectralDisplayController.gd
+└── Label3D
+```
+
+### Key Components
+
+#### WaveformDisplay.gd
+- **Audio Analysis**: Connects to Master Bus spectrum analyzer
+- **Spectral Sine Wave Generation**: Cycles through frequency bands to modulate sine wave amplitude
+- **Real-time Rendering**: 256-sample sine wave updated at 30 FPS
+- **Debug Monitoring**: Tracks audio magnitude, active frequency bands, and waveform values
+- **Enhanced Sensitivity**: Multiple boosting stages for optimal visual response
+
+#### GameSoundMeter.gd
+- **Traditional Spectrum Analysis**: 64-band frequency spectrum with FFT analysis
+- **Grid System**: Professional frequency and amplitude grid with labels
+- **Multiple Display Modes**: Spectrum lines, bars, VU meter, waveform, oscilloscope
+- **Enhanced Lower Frequency Response**: 2x amplification for bass frequencies
+- **Master Bus Integration**: Analyzes all game audio sources
+
+#### SpectralDisplayController.gd
+- **Viewport Texture Linking**: Connects SubViewport rendering to 3D display materials
+- **Material Configuration**: Sets up emission, unshaded rendering, and transparency
+- **Multi-Display Support**: Handles both spectrum and waveform viewports independently
+
+### Audio Analysis Features
+
+#### Spectrum Analyzer Sharing
+- **Intelligent Detection**: Automatically finds existing spectrum analyzers on Master Bus
+- **Resource Efficiency**: Shares analysis between multiple displays when possible
+- **Fallback Creation**: Creates dedicated analyzer if none exists
+- **Configuration Sync**: Ensures consistent FFT size and buffer settings
+
+#### Enhanced Sensitivity System
 ```gdscript
-# Master bus monitoring - captures ALL game audio
-var master_bus_index = AudioServer.get_bus_index("Master")
-spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
-AudioServer.add_bus_effect(master_bus_index, spectrum_analyzer)
+# Multi-stage audio boosting
+boosted_magnitude = raw_magnitude * 50.0  # Initial sensitivity boost
+db_value = 20.0 * log(boosted_magnitude) / log(10.0)
+normalized = clamp((db_value + 40.0) / 40.0, 0.0, 1.0)  # -40dB to 0dB range
+baseline = 0.1 + normalized * 0.9  # 10% minimum + 90% audio-responsive
 ```
 
-### **2. Frequency Analysis (FFT)**
-```gdscript
-# Get frequency magnitude for each band
-for i in range(bar_count):
-    var freq_hz = (float(i) / float(bar_count)) * 8000.0  # Up to 8kHz
-    var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
-        freq_hz, freq_hz + 100.0
-    ).length()
-    
-    # Convert to decibels and normalize
-    var db = 20.0 * log(magnitude) / log(10.0)
-    frequency_data[i] = clamp((db + 50.0) / 50.0, 0.0, 1.0)
-```
+#### Debug and Monitoring
+- **Real-time Statistics**: Average magnitude, active frequency bands, waveform peaks
+- **Audio Detection Status**: Clear indication of audio source availability
+- **Performance Metrics**: FPS monitoring and processing efficiency
+- **Fallback Patterns**: Test patterns when no audio is detected
 
-### **3. Spectral Sine Wave Visualization**
-```gdscript
-# Create sine wave from spectral magnitude values over time
-for i in range(sample_count):
-    var time_position = float(i) / float(sample_count - 1)
-    
-    # Calculate which frequency to sample based on position + time offset
-    var freq_index = int((time_position + time_offset * 0.5) * 64.0) % 64
-    var freq_hz = (float(freq_index) / 64.0) * 8000.0  # Map to 0-8kHz range
-    
-    # Get the magnitude for this frequency band
-    var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
-        freq_hz, freq_hz + 125.0  # 125Hz bands
-    ).length()
-    
-    # Convert to normalized amplitude and create modulated sine wave
-    var normalized = clamp((db + 60.0) / 60.0, 0.0, 1.0)
-    waveform_data[i] = sin(sine_phase + time_offset) * normalized * amplitude_scale
-```
+## Grid Artifacts Integration
 
----
+Both displays are integrated into the AdaResearch grid system:
 
-## 🎨 **Visual Rendering System**
-
-### **Dual Viewport Architecture**
-```gdscript
-# Frequency Spectrum (Upper Display)
-AudioDisplay (SubViewport) → SpectrumDisplayMaterial
-- Green emission material
-- Vertical frequency bars
-- Real-time FFT analysis
-
-# Spectral Sine Wave (Lower Display)  
-WaveformViewport (SubViewport) → WaveformDisplayMaterial
-- Cyan emission material
-- Sine wave modulated by spectral values
-- Cycles through frequency bands over time
-```
-
-### **Material Properties**
-```gdscript
-# High-visibility emission materials
-emission_enabled = true
-emission_energy_multiplier = 6.0
-unshaded = true                    # No lighting interference
-cull_mode = 0                      # Visible from both sides
-```
-
-### **Real-Time Updates**
-```gdscript
-func _process(delta):
-    time_offset += delta * time_scale     # Advance time
-    _update_waveform_data()               # Calculate new waveform
-    queue_redraw()                        # Trigger visual update
-```
-
----
-
-## 🔧 **Configuration & Customization**
-
-### **Frequency Spectrum Settings**
-```gdscript
-@export var bar_count: int = 64              # Number of frequency bars
-@export var height_multiplier: float = 300.0 # Vertical scaling
-@export var line_width: float = 6.0          # Line thickness
-@export var line_color: Color = Color(0,1,0,1) # Bright green
-```
-
-### **Waveform Display Settings**
-```gdscript
-@export var sample_count: int = 256          # Waveform resolution
-@export var amplitude_scale: float = 80.0    # Vertical amplitude
-@export var time_scale: float = 1.5          # Scrolling speed
-@export var line_color: Color = Color(0,1,1,1) # Cyan color
-```
-
-### **Performance Optimization**
-```gdscript
-# Automatic performance scaling
-@export var update_fps: float = 30.0         # Update rate
-@export var enable_distance_culling: bool = false # Always active
-@export var smoothing_factor: float = 0.8    # Visual smoothing
-```
-
----
-
-## 🎯 **Usage in AdaResearch Grid System**
-
-### **Adding to Maps**
 ```json
-// In map_data.json interactables layer:
-"interactables": [
-    [" ", " ", " ", " ", " ", " ", " "],
-    [" ", "spectral_analyzer", " ", " ", " ", " ", " "]
-]
-```
-
-### **Grid Artifacts Configuration**
-```json
-"spectral_analyzer": {
-    "name": "Master Audio Analyzer",
-    "scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
-    "artifact_type": "interactive_algorithm",
-    "sequence": "wavefunction_exploration"
+{
+  "spectrum_display": {
+    "name": "Frequency Spectrum Analyzer",
+    "description": "Real-time frequency analysis of game audio",
+    "scene_path": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
+    "category": "audio_analysis"
+  },
+  "spectral_sine_wave": {
+    "name": "Spectral Sine Wave",
+    "description": "Sine wave modulated by spectral frequency content",
+    "scene_path": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
+    "category": "audio_analysis"
+  }
 }
 ```
 
----
+## Educational Applications
 
-## 🧮 **Mathematical Foundations**
+### STEM Learning Concepts
+- **Signal Processing**: Real-time demonstration of FFT and frequency analysis
+- **Wave Physics**: Relationship between frequency, amplitude, and wave behavior
+- **Mathematics**: Trigonometric functions, logarithmic scaling, and data visualization
+- **Computer Science**: Real-time processing, optimization, and resource sharing
 
-### **Spectral Sine Wave Concept**
-```
-Spectral Values → Modulated Sine Wave Visualization
+### VR Educational Benefits
+- **Spatial Understanding**: 3D visualization of abstract audio concepts
+- **Interactive Learning**: Students can move around and observe from different angles
+- **Real-time Feedback**: Immediate visual response to audio changes in the environment
+- **Comparative Analysis**: Side-by-side comparison of different visualization approaches
 
-Process:
-1. Analyze audio frequency spectrum (FFT) → get magnitude[frequency]
-2. Cycle through frequency bands over time (0Hz → 8kHz → 0Hz...)
-3. Create sine wave: amplitude = magnitude[current_frequency]
-4. Result: sine wave that "breathes" with audio frequency content
+### Practical Demonstrations
+- **Audio Source Identification**: Visual identification of different game audio sources
+- **Frequency Content Analysis**: Understanding which frequencies are present in different sounds
+- **Amplitude Relationships**: How spectral content translates to wave amplitude
+- **Time-Frequency Evolution**: How audio content changes over time
 
-Examples:
-- Strong bass (100Hz) → Tall sine wave when sampling bass range
-- Weak treble (8kHz) → Small sine wave when sampling treble range
-- Musical chord → Sine wave changes as it cycles through harmonics
-```
+## Usage Instructions
 
-### **Frequency Analysis**
-```gdscript
-// Convert magnitude to decibels (logarithmic scale)
-var db = 20.0 * log10(magnitude)
+### In VR Environment
+1. **Navigate** to maps containing the audio analyzers (e.g., Tutorial_2D)
+2. **Observe** the green spectrum display showing traditional frequency bars
+3. **Compare** with the cyan spectral sine wave showing frequency-modulated amplitude
+4. **Listen** to game audio (teleporter drones, pickup sounds) and watch the displays respond
+5. **Move** around to experience the visualizations from different spatial perspectives
 
-// Human hearing range: ~20Hz to 20kHz
-// Music fundamentals: ~80Hz to 4kHz  
-// Harmonics and brightness: 4kHz to 20kHz
-```
+### Debug Information
+Enable debug output to see:
+- Audio magnitude levels
+- Active frequency band counts
+- Spectrum analyzer connection status
+- Real-time performance metrics
 
-### **Spectral Sine Wave Implementation**
-```gdscript
-// Cycle through frequency bands over time
-var freq_index = int((time_position + time_offset * 0.5) * 64.0) % 64
-var freq_hz = (float(freq_index) / 64.0) * 8000.0
+### Configuration Options
+- **Amplitude Scale**: Adjust display sensitivity
+- **Time Scale**: Control sine wave animation speed
+- **Color Themes**: Customize display colors
+- **Grid Density**: Modify grid line spacing
+- **Update Rate**: Adjust refresh frequency
 
-// Get magnitude for current frequency band
-var magnitude = spectrum_instance.get_magnitude_for_frequency_range(freq_hz, freq_hz + 125.0)
+## Performance Considerations
 
-// Create modulated sine wave
-waveform(t) = sin(sine_phase + time_offset) × normalized_magnitude
+### Optimization Features
+- **Shared Resources**: Multiple displays share audio analysis when possible
+- **Efficient Rendering**: Optimized drawing routines for VR frame rates
+- **Smart Updates**: Intelligent refresh scheduling based on audio activity
+- **Memory Management**: Efficient array handling for real-time processing
 
-// Result: Pure sine wave shape with amplitude varying by spectral content
-```
+### VR-Specific Optimizations
+- **Stereo Rendering**: Efficient handling of dual-eye rendering
+- **Distance Culling**: Optional performance optimization for distant displays
+- **Frame Rate Targeting**: Maintains stable 90 FPS for smooth VR experience
 
----
+## Future Enhancements
 
-## 🎓 **Educational Applications**
+### Potential Extensions
+- **3D Spectrograms**: Time-frequency-amplitude visualization in 3D space
+- **Harmonic Analysis**: Detection and visualization of harmonic relationships
+- **Real-time Filtering**: Interactive frequency filtering and audio modification
+- **Spatial Audio Visualization**: Direction-aware audio analysis for VR environments
+- **Machine Learning Integration**: AI-powered audio pattern recognition and classification
 
-### **Concepts Demonstrated**
-1. **Spectral Analysis**: How audio can be broken down into frequency components
-2. **Data Visualization**: Converting numerical frequency data into visual sine waves
-3. **Time-based Sampling**: Cycling through different frequency ranges over time
-4. **Amplitude Modulation**: How one signal (spectrum) can control another (sine wave)
-5. **Real-time Processing**: Live audio analysis and visual feedback
+### Educational Expansions
+- **Guided Tutorials**: Step-by-step learning modules for audio analysis concepts
+- **Interactive Experiments**: Student-driven audio analysis challenges
+- **Collaborative Learning**: Multi-user VR sessions with shared audio visualizations
+- **Assessment Tools**: Quantitative measures of student understanding
 
-### **Interactive Learning**
-- **Play different sounds** and watch how the sine wave changes
-- **Compare bass vs treble** - sine wave amplitude shifts as it cycles through frequencies
-- **Watch rhythm patterns** reflected in sine wave breathing
-- **Observe musical harmonics** create different amplitude patterns over time
-- **See real-time frequency analysis** converted to smooth wave visualization
+## Technical Requirements
 
-### **STEM Applications**
-- **Physics**: Wave theory, acoustics, resonance
-- **Mathematics**: Trigonometry, Fourier analysis, signal processing
-- **Computer Science**: Real-time algorithms, graphics rendering
-- **Music Theory**: Frequency relationships, harmony, timbre
+- **Godot Engine**: Version 4.4+ with VR support
+- **Audio System**: Real-time audio processing capabilities
+- **VR Hardware**: OpenXR-compatible VR headset
+- **Performance**: Minimum 90 FPS capability for smooth VR experience
 
----
+## Troubleshooting
 
-## 🚀 **Advanced Features**
+### Common Issues
+- **Flat Waveform**: Check audio source availability and Master Bus configuration
+- **Performance Drops**: Verify VR system requirements and reduce display complexity if needed
+- **Audio Conflicts**: Ensure proper spectrum analyzer sharing between displays
+- **Visual Artifacts**: Check viewport resolution and material settings
 
-### **Real-Time Audio Synthesis**
-```gdscript
-// Generate test waveforms when no audio present
-func _generate_test_waveform():
-    for i in range(sample_count):
-        var t = time_offset + float(i) / sample_count * 4.0
-        var base_wave = sin(t * PI * 2.0) * 0.8          # Fundamental
-        var harmonic = sin(t * PI * 4.0) * 0.3           # 2nd harmonic
-        waveform_data[i] = (base_wave + harmonic) * amplitude_scale
-```
+### Debug Commands
+Enable debug output to diagnose issues:
+- Audio magnitude tracking
+- Spectrum analyzer connection status
+- Performance metrics
+- Resource usage statistics
 
-### **Multi-Pass Glow Effects**
-```gdscript
-// Create glowing lines for better visibility
-for glow_pass in range(3):
-    var glow_width = line_width + (glow_pass * 2)
-    var glow_alpha = 0.3 - (glow_pass * 0.1)
-    draw_line(point1, point2, glow_color, glow_width)
-```
-
-### **Dynamic Frequency Boost**
-```gdscript
-// Enhance lower frequencies for better visibility
-if i < bar_count * 0.3:  // First 30% (bass frequencies)
-    normalized = normalized * 2.0  // Double amplitude
-```
-
----
-
-## 🔍 **Debugging & Troubleshooting**
-
-### **Common Issues**
-1. **Black screens**: Check viewport connections and material setup
-2. **No audio response**: Verify master bus monitoring is enabled
-3. **Performance issues**: Reduce update rate or bar count
-4. **Incorrect display content**: Check viewport_node_path settings
-
-### **Debug Output**
-```gdscript
-// Console messages help identify issues:
-"WaveformDisplay: Initialized with 256 samples"
-"SpectralDisplayController [SpectrumDisplayMaterial]: Found viewport: AudioDisplay"
-"GameSoundMeter: Monitoring Master Bus - analyzing ALL game audio"
-```
-
-### **Performance Monitoring**
-```gdscript
-// Check system performance
-func get_performance_stats() -> Dictionary:
-    return {
-        "update_fps": update_fps,
-        "has_spectrum": spectrum_instance != null,
-        "frame_skip_count": frame_skip_counter
-    }
-```
-
----
-
-## 🎼 **Example Use Cases**
-
-### **Music Education**
-- Show how instruments produce different harmonic series
-- Visualize chord progressions and dissonance
-- Demonstrate filter effects and EQ changes
-
-### **Game Audio Design**  
-- Monitor audio mix balance in real-time
-- See frequency conflicts between sounds
-- Verify audio processing effects
-
-### **STEM Demonstrations**
-- Illustrate wave interference patterns
-- Show Doppler effect in real-time
-- Demonstrate digital signal processing
-
-### **Interactive Art**
-- Create responsive visual art based on audio
-- Generate patterns from music structure
-- Real-time audio-visual performances
-
----
-
-## 📖 **Further Reading**
-
-### **Signal Processing Concepts**
-- Fourier Transform and FFT algorithms
-- Digital filter design and implementation  
-- Real-time audio processing techniques
-- Psychoacoustics and human hearing
-
-### **Godot Engine Resources**
-- AudioServer and audio bus architecture
-- Control drawing and custom visualizations
-- SubViewport rendering techniques
-- Real-time graphics optimization
-
-### **Mathematical Background**
-- Trigonometry and sine wave mathematics
-- Logarithmic scales and decibel measurements
-- Complex numbers and phase relationships
-- Sampling theory and Nyquist frequency
-
----
-
-*This spectral analyzer serves as both a practical audio tool and an educational demonstration of fundamental concepts in digital signal processing, acoustics, and real-time graphics programming.* 
+This spectral audio analyzer system represents a significant advancement in educational VR audio visualization, combining traditional frequency analysis with innovative spectral-temporal display techniques to create an engaging and informative learning experience. 

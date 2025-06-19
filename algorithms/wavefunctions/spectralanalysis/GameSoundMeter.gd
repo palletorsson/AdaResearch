@@ -303,7 +303,7 @@ func _draw():
 			_draw_oscilloscope()
 
 func _draw_spectrum_line():
-	"""Draw spectrum as connected line"""
+	"""Draw spectrum as connected line with grid and labels"""
 	if smoothed_data.size() < 2:
 		return
 	
@@ -314,6 +314,10 @@ func _draw_spectrum_line():
 	var draw_rect = Rect2(meter_rect.position + Vector2(padding, padding), 
 						 meter_rect.size - Vector2(padding * 2, padding * 2))
 	
+	# Draw grid lines and labels first (behind the spectrum)
+	_draw_spectrum_grid(draw_rect)
+	
+	# Generate spectrum line points
 	for i in range(bar_count):
 		var x = draw_rect.position.x + (float(i) / float(bar_count - 1)) * draw_rect.size.x
 		var y = draw_rect.position.y + draw_rect.size.y - (smoothed_data[i] * (draw_rect.size.y - padding))
@@ -331,6 +335,9 @@ func _draw_spectrum_line():
 	# Draw the main spectrum line (bright and solid)
 	for i in range(points.size() - 1):
 		draw_line(points[i], points[i + 1], line_color, line_width)
+	
+	# Draw title and info (on top)
+	_draw_spectrum_info(draw_rect)
 
 func _draw_spectrum_bars():
 	"""Draw spectrum as individual bars"""
@@ -435,3 +442,50 @@ func _draw_test_pattern():
 	var text = "NO AUDIO - TEST PATTERN"
 	var text_pos = Vector2(meter_rect.size.x * 0.5 - 100, meter_rect.size.y * 0.5)
 	draw_string(get_theme_default_font(), text_pos, text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, Color.WHITE)
+
+func _draw_spectrum_grid(rect: Rect2):
+	"""Draw grid lines and frequency labels"""
+	var grid_color = Color(0.2, 0.5, 0.2, 0.6)  # Green grid to match spectrum color
+	var text_color = Color(0.8, 1.0, 0.8, 0.9)  # Light green text
+	
+	# Draw horizontal grid lines (amplitude levels)
+	for i in range(4):
+		var y = rect.position.y + (float(i + 1) / 5.0) * rect.size.y
+		draw_line(Vector2(rect.position.x, y), Vector2(rect.position.x + rect.size.x, y), grid_color, 1.0)
+		
+		# Amplitude labels (0.2, 0.4, 0.6, 0.8)
+		var amplitude = 1.0 - (float(i + 1) / 5.0)  # From top: 0.8, 0.6, 0.4, 0.2
+		var amp_text = "%.1f" % amplitude
+		draw_string(get_theme_default_font(), Vector2(rect.position.x + 5, y - 2), 
+					amp_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, text_color)
+	
+	# Draw vertical grid lines (frequency divisions)
+	for i in range(5):  # 0, 2kHz, 4kHz, 6kHz, 8kHz
+		var x = rect.position.x + (float(i) / 4.0) * rect.size.x
+		draw_line(Vector2(x, rect.position.y), Vector2(x, rect.position.y + rect.size.y), grid_color, 1.0)
+		
+		# Frequency labels
+		var freq_hz = (float(i) / 4.0) * 8000.0
+		var freq_text = ""
+		if freq_hz < 1000:
+			freq_text = "%d Hz" % int(freq_hz)
+		else:
+			freq_text = "%.1f kHz" % (freq_hz / 1000.0)
+		
+		draw_string(get_theme_default_font(), Vector2(x + 2, rect.position.y + rect.size.y - 5), 
+					freq_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, text_color)
+
+func _draw_spectrum_info(rect: Rect2):
+	"""Draw title and current info"""
+	var title_color = Color(0, 1, 0, 1)  # Bright green to match spectrum
+	var info_color = Color(0.7, 0.9, 0.7, 0.8)
+	
+	# Title
+	var title = "FREQUENCY SPECTRUM"
+	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 20), 
+				title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, title_color)
+	
+	# Info
+	var info = "Range: 0-8kHz | Bars: %d | Master Bus Analysis" % bar_count
+	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 40), 
+				info, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, info_color)

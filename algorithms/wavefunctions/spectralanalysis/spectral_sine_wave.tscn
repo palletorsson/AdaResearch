@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://d01ajoij5twu0"]
+
+[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
+[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission_energy_multiplier = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+flip_faces = true
+size = Vector2(2, 1)
+
+[node name="SpectralSineWave" type="Node3D"]
+
+[node name="WaveformViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="WaveformDisplay" type="Control" parent="WaveformViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_waveform")
+amplitude_scale = 80.0
+time_scale = 1.5
+
+[node name="WaveformDisplayMaterial" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("QuadMesh_1")
+script = ExtResource("2_controller")
+viewport_node_path = NodePath("../WaveformViewport")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.3, 0)
+text = "Spectral Sine Wave
+Frequency → Amplitude"
+font_size = 16
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.899215, 1.60436)

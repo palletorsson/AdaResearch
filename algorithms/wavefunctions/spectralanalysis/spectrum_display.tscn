@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkuceypdl7iui"]
+
+[ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
+[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 6.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+flip_faces = true
+size = Vector2(2, 1)
+
+[node name="SpectrumDisplay" type="Node3D"]
+
+[node name="AudioDisplay" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="GameSoundMeter" type="Control" parent="AudioDisplay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spectrum")
+auto_find_teleport_audio = false
+monitor_master_bus = true
+bar_count = 64
+background_color = Color(0, 0, 0, 0.9)
+line_width = 6.0
+height_multiplier = 300.0
+enable_distance_culling = false
+overlay_mode = false
+world_space_mode = true
+
+[node name="SpectrumDisplayMaterial" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("QuadMesh_1")
+script = ExtResource("2_controller")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.3, 0)
+text = "Frequency Spectrum
+0-8kHz Analysis"
+font_size = 16
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971452, 1.75009)

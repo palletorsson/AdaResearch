@@ -13,20 +13,26 @@ class_name WaveformDisplay
 # Audio analysis
 var spectrum_analyzer: AudioEffectSpectrumAnalyzer
 var spectrum_instance: AudioEffectSpectrumAnalyzerInstance
+var master_bus_index: int
 var waveform_data: PackedFloat32Array
 var time_offset: float = 0.0
 
 # Display properties
 var display_rect: Rect2
 var is_initialized: bool = false
+var debug_timer: float = 0.0
 
 func _ready():
 	_initialize_waveform()
-	_setup_audio_connection()
 	resized.connect(_on_resized)
 	print("WaveformDisplay: Initialized with %d samples" % sample_count)
-	print("WaveformDisplay: Control size: ", size)
-	print("WaveformDisplay: Parent viewport: ", get_parent().name if get_parent() else "No parent")
+	print("WaveformDisplay: Control size: %s" % size)
+	print("WaveformDisplay: Parent viewport: %s" % get_parent().name if get_parent() else "No parent")
+	
+	# Wait a moment for other audio systems to initialize first
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_setup_audio_analysis()
 
 func _initialize_waveform():
 	"""Initialize waveform data arrays"""
@@ -35,22 +41,32 @@ func _initialize_waveform():
 	display_rect = Rect2(Vector2.ZERO, size)
 	is_initialized = true
 
-func _setup_audio_connection():
-	"""Connect to the same audio analysis as the spectrum analyzer"""
-	# Try to get the spectrum analyzer from the master bus
-	var master_bus_index = AudioServer.get_bus_index("Master")
-	var effect_count = AudioServer.get_bus_effect_count(master_bus_index)
+func _setup_audio_analysis():
+	"""Setup spectrum analyzer for audio analysis"""
+	master_bus_index = AudioServer.get_bus_index("Master")
 	
-	# Look for existing spectrum analyzer
-	for i in range(effect_count):
+	# Try to find existing spectrum analyzer first
+	for i in range(AudioServer.get_bus_effect_count(master_bus_index)):
 		var effect = AudioServer.get_bus_effect(master_bus_index, i)
 		if effect is AudioEffectSpectrumAnalyzer:
-			spectrum_analyzer = effect
 			spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, i) as AudioEffectSpectrumAnalyzerInstance
-			print("WaveformDisplay: Connected to existing spectrum analyzer")
+			print("WaveformDisplay: Connected to existing spectrum analyzer (shared with other displays)")
+			print("WaveformDisplay: Spectrum analyzer FFT size:", effect.fft_size)
+			print("WaveformDisplay: Spectrum analyzer buffer length:", effect.buffer_length)
 			return
 	
-	print("WaveformDisplay: No spectrum analyzer found on master bus")
+	# Create new spectrum analyzer if none found
+	print("WaveformDisplay: No spectrum analyzer found, creating dedicated one for spectral sine wave")
+	spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
+	spectrum_analyzer.buffer_length = 0.5  # Longer buffer for smoother analysis
+	spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_1024
+	spectrum_analyzer.tap_back_pos = 0.0
+	AudioServer.add_bus_effect(master_bus_index, spectrum_analyzer)
+	
+	# Get the newly created instance
+	var new_effect_count = AudioServer.get_bus_effect_count(master_bus_index)
+	spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, new_effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
+	print("WaveformDisplay: Created spectrum analyzer on Master bus for spectral sine wave")
 
 func _process(delta: float):
 	"""Update waveform data and redraw"""
@@ -66,7 +82,11 @@ func _update_waveform_data():
 	if not spectrum_instance:
 		# Generate test sine wave if no audio
 		_generate_test_waveform()
+		print("WaveformDisplay: Using test pattern (no spectrum instance)")
 		return
+	
+	var total_magnitude = 0.0
+	var active_bands = 0
 	
 	# Create sine wave from spectral magnitude values
 	for i in range(sample_count):
@@ -82,13 +102,39 @@ func _update_waveform_data():
 			freq_hz, freq_hz + 125.0  # 125Hz bands (8000/64)
 		).length()
 		
-		# Convert magnitude to decibels and normalize
-		var db = 20.0 * log(magnitude) / log(10.0) if magnitude > 0.0001 else -100.0
-		var normalized = clamp((db + 60.0) / 60.0, 0.0, 1.0)  # Map -60dB to 0dB range
+		# Track total magnitude for debugging
+		total_magnitude += magnitude
+		if magnitude > 0.001:
+			active_bands += 1
+		
+		# Enhanced sensitivity and boosting
+		var boosted_magnitude = magnitude * 50.0  # Boost sensitivity significantly
+		
+		# Convert magnitude to decibels and normalize with better range
+		var db = 20.0 * log(boosted_magnitude) / log(10.0) if boosted_magnitude > 0.0001 else -100.0
+		var normalized = clamp((db + 40.0) / 40.0, 0.0, 1.0)  # Map -40dB to 0dB range (more sensitive)
+		
+		# Add minimum baseline activity
+		var baseline = 0.1 + normalized * 0.9  # Ensure some movement even with low audio
 		
 		# Create sine wave from the spectral values
 		var sine_phase = time_position * PI * 4.0  # 2 cycles across display
-		waveform_data[i] = sin(sine_phase + time_offset) * normalized * amplitude_scale
+		waveform_data[i] = sin(sine_phase + time_offset) * baseline * amplitude_scale
+	
+	# Debug output every 2 seconds
+	debug_timer += get_process_delta_time()
+	if debug_timer > 2.0:
+		debug_timer = 0.0
+		var avg_magnitude = total_magnitude / sample_count if sample_count > 0 else 0.0
+		
+		# Calculate max waveform value manually
+		var max_waveform = 0.0
+		for val in waveform_data:
+			if abs(val) > max_waveform:
+				max_waveform = abs(val)
+		
+		print("WaveformDisplay: Avg magnitude: %.6f, Active bands: %d/%d, Max waveform: %.2f" % 
+			  [avg_magnitude, active_bands, sample_count, max_waveform])
 
 func _generate_test_waveform():
 	"""Generate test sine wave modulated by fake spectral values"""
@@ -99,9 +145,12 @@ func _generate_test_waveform():
 		var fake_freq_index = int((time_position + time_offset * 0.3) * 32.0) % 32
 		var fake_magnitude = (sin(time_offset * 2.0 + fake_freq_index * 0.2) + 1.0) * 0.5
 		
+		# Add baseline activity for visibility
+		var enhanced_magnitude = 0.3 + fake_magnitude * 0.7  # Ensure good visibility
+		
 		# Create sine wave modulated by fake spectral values
 		var sine_phase = time_position * PI * 4.0  # 2 cycles across display
-		waveform_data[i] = sin(sine_phase + time_offset) * fake_magnitude * amplitude_scale * 0.6
+		waveform_data[i] = sin(sine_phase + time_offset) * enhanced_magnitude * amplitude_scale
 
 func _draw():
 	"""Draw the waveform"""
@@ -208,47 +257,30 @@ func _draw_grid():
 			grid_color, 1.0
 		)
 		
-		# Calculate time value at this position
-		var time_value = (time_offset + (float(i) / 5.0) * time_span) * time_scale
-		var time_text = "%.1fs" % fmod(time_value, 10.0)  # Show time modulo 10 seconds
-		
-		# Draw time scale label at bottom
-		var text_pos = Vector2(x - 15, display_rect.position.y + display_rect.size.y - 5)
-		draw_string(get_theme_default_font(), text_pos, time_text, 
-					HORIZONTAL_ALIGNMENT_CENTER, -1, 12, text_color)
-
-func _on_resized():
-	"""Handle control resize"""
-	display_rect = Rect2(Vector2.ZERO, size)
-
-# Public API
-func set_time_scale(scale: float):
-	"""Set the speed of waveform scrolling"""
-	time_scale = scale
-
-func set_amplitude_scale(scale: float):
-	"""Set the amplitude scaling"""
-	amplitude_scale = scale
+		# Time labels
+		var time_value = (float(i) / 5.0) * time_span
+		var time_text = "%.1fs" % time_value
+		draw_string(get_theme_default_font(), Vector2(x + 2, display_rect.position.y + display_rect.size.y - 5), 
+					time_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, text_color)
 
 func _draw_time_scale_info():
-	"""Draw time scale information and title"""
-	var info_color = Color(0.9, 1.0, 1.0, 1.0)
-	var title_color = Color(0, 1, 1, 1)
+	"""Draw title and current time information"""
+	var title_color = Color(0, 1, 1, 1)  # Bright cyan
+	var info_color = Color(0.7, 0.9, 0.9, 0.8)
 	
 	# Title
-	var title_text = "TIME DOMAIN WAVEFORM"
-	var title_pos = Vector2(display_rect.size.x * 0.5 - 80, display_rect.position.y + 15)
-	draw_string(get_theme_default_font(), title_pos, title_text, 
-				HORIZONTAL_ALIGNMENT_CENTER, -1, 14, title_color)
+	var title = "SPECTRAL SINE WAVE"
+	draw_string(get_theme_default_font(), Vector2(display_rect.position.x + 10, display_rect.position.y + 20), 
+				title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, title_color)
 	
-	# Time scale info
-	var scale_text = "Scale: %.1fx | Span: 2.0s" % time_scale
-	var scale_pos = Vector2(display_rect.position.x + 5, display_rect.position.y + 35)
-	draw_string(get_theme_default_font(), scale_pos, scale_text, 
-				HORIZONTAL_ALIGNMENT_LEFT, -1, 10, info_color)
-	
-	# Current time
-	var current_time_text = "Time: %.1fs" % (time_offset * time_scale)
-	var time_pos = Vector2(display_rect.position.x + display_rect.size.x - 60, display_rect.position.y + 35)
-	draw_string(get_theme_default_font(), time_pos, current_time_text, 
-				HORIZONTAL_ALIGNMENT_RIGHT, -1, 10, info_color) 
+	# Current time and scale info
+	var current_time = fmod(time_offset, 100.0)  # Keep reasonable range
+	var time_info = "Time: %.1fs | Scale: %.1fx | Freq Range: 0-8kHz" % [current_time, time_scale]
+	draw_string(get_theme_default_font(), Vector2(display_rect.position.x + 10, display_rect.position.y + 40), 
+				time_info, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, info_color)
+
+func _on_resized():
+	"""Handle viewport resize"""
+	if is_initialized:
+		display_rect = Rect2(Vector2.ZERO, size)
+		print("WaveformDisplay: Resized to ", size)
