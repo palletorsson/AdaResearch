@@ -1,0 +1,100 @@
+{
+	"c64_sid_lead": {
+		"_metadata": {
+			"sound_type": "c64_sid_lead",
+			"description": "Commodore 64 SID chip lead sound with PWM and ring modulation",
+			"instrument": "Commodore 64 SID Chip",
+			"era": "1980s",
+			"game_usage": ["Monty On The Run", "Last Ninja", "Wizball"],
+			"created_at": "2024-12-24T09:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 8.0,
+				"step": 0.1
+			},
+			"base_freq": {
+				"value": 440.0,
+				"min": 220.0,
+				"max": 1760.0,
+				"step": 1.0
+			},
+			"pulse_width": {
+				"value": 0.25,
+				"min": 0.1,
+				"max": 0.9,
+				"step": 0.01
+			},
+			"pwm_rate": {
+				"value": 6.0,
+				"min": 0.5,
+				"max": 15.0,
+				"step": 0.5
+			},
+			"pwm_depth": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 0.8,
+				"step": 0.01
+			},
+			"filter_cutoff": {
+				"value": 2000.0,
+				"min": 300.0,
+				"max": 8000.0,
+				"step": 50.0
+			},
+			"filter_resonance": {
+				"value": 0.6,
+				"min": 0.0,
+				"max": 0.9,
+				"step": 0.01
+			},
+			"ring_mod_amount": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"attack": {
+				"value": 0.01,
+				"min": 0.001,
+				"max": 1.0,
+				"step": 0.001
+			},
+			"decay": {
+				"value": 0.2,
+				"min": 0.01,
+				"max": 2.0,
+				"step": 0.01
+			},
+			"sustain": {
+				"value": 0.5,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"release": {
+				"value": 0.5,
+				"min": 0.01,
+				"max": 3.0,
+				"step": 0.01
+			},
+			"vibrato_rate": {
+				"value": 5.0,
+				"min": 1.0,
+				"max": 12.0,
+				"step": 0.1
+			},
+			"vibrato_depth": {
+				"value": 0.1,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			}
+		}
+	}
+} 

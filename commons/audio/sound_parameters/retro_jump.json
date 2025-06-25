@@ -1,0 +1,72 @@
+{
+	"retro_jump": {
+		"_metadata": {
+			"sound_type": "retro_jump",
+			"description": "🟢 Retro Jump",
+			"category": "Game Effects",
+			"created_at": "2024-12-24T12:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 0.6,
+				"min": 0.1,
+				"max": 2.0,
+				"step": 0.05
+			},
+			"start_freq": {
+				"value": 150.0,
+				"min": 80.0,
+				"max": 300.0,
+				"step": 5.0
+			},
+			"peak_freq": {
+				"value": 400.0,
+				"min": 200.0,
+				"max": 800.0,
+				"step": 5.0
+			},
+			"curve_amount": {
+				"value": 0.7,
+				"min": 0.3,
+				"max": 1.0,
+				"step": 0.05
+			},
+			"attack_time": {
+				"value": 0.05,
+				"min": 0.01,
+				"max": 0.2,
+				"step": 0.01
+			},
+			"decay_rate": {
+				"value": 4.0,
+				"min": 1.0,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"duty_cycle": {
+				"value": 0.5,
+				"min": 0.1,
+				"max": 0.9,
+				"step": 0.05
+			},
+			"duty_mod_rate": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 8.0,
+				"step": 0.1
+			},
+			"amplitude": {
+				"value": 0.35,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"wave_type": {
+				"value": "square",
+				"options": ["sine", "square", "sawtooth"]
+			}
+		}
+	}
+} 

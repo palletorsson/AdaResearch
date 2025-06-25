@@ -1,0 +1,74 @@
+{
+	"amiga_mod_sample": {
+		"_metadata": {
+			"sound_type": "amiga_mod_sample",
+			"description": "Amiga ProTracker style sample with Paula chip characteristics",
+			"instrument": "Amiga Paula Sound Chip",
+			"era": "Late 1980s-90s",
+			"demo_scene": ["Kefrens", "Future Crew", "Razor 1911"],
+			"created_at": "2024-12-24T09:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 1.0,
+				"min": 0.2,
+				"max": 4.0,
+				"step": 0.1
+			},
+			"sample_rate": {
+				"value": 22050,
+				"min": 8000,
+				"max": 44100,
+				"step": 1000
+			},
+			"base_freq": {
+				"value": 261.6,
+				"min": 130.8,
+				"max": 1046.5,
+				"step": 0.1
+			},
+			"finetune": {
+				"value": 0.0,
+				"min": -8.0,
+				"max": 7.0,
+				"step": 1.0
+			},
+			"loop_start": {
+				"value": 0.1,
+				"min": 0.0,
+				"max": 0.8,
+				"step": 0.01
+			},
+			"loop_length": {
+				"value": 0.5,
+				"min": 0.05,
+				"max": 0.9,
+				"step": 0.01
+			},
+			"paula_filtering": {
+				"value": 0.7,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"bit_crush": {
+				"value": 8,
+				"min": 4,
+				"max": 16,
+				"step": 1
+			},
+			"amplitude": {
+				"value": 0.8,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"wave_type": {
+				"value": "sawtooth",
+				"options": ["sawtooth", "square", "triangle", "noise"]
+			}
+		}
+	}
+} 

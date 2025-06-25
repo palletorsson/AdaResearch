@@ -1,0 +1,106 @@
+{
+	"_metadata": {
+		"sound_type": "synare_3_disco_tom",
+		"description": "Star Instruments Synare 3 disco tom - the 'Ring My Bell' sound",
+		"instrument": "Star Instruments Synare 3",
+		"era": "Late 1970s-80s",
+		"famous_tracks": ["Anita Ward - Ring My Bell", "Kim Carnes - Bette Davis Eyes"],
+		"created_at": "2024-12-24T10:00:00Z",
+		"version": "1.0",
+		"is_default": true
+	},
+	"parameters": {
+		"duration": {
+			"value": 1.2,
+			"min": 0.3,
+			"max": 4.0,
+			"step": 0.1
+		},
+		"osc1_freq": {
+			"value": 200.0,
+			"min": 80.0,
+			"max": 800.0,
+			"step": 5.0
+		},
+		"osc2_freq": {
+			"value": 400.0,
+			"min": 160.0,
+			"max": 1600.0,
+			"step": 10.0
+		},
+		"osc_mix": {
+			"value": 0.7,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.05
+		},
+		"noise_level": {
+			"value": 0.3,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"filter_cutoff": {
+			"value": 1200.0,
+			"min": 200.0,
+			"max": 4000.0,
+			"step": 25.0
+		},
+		"filter_resonance": {
+			"value": 0.6,
+			"min": 0.0,
+			"max": 0.9,
+			"step": 0.01
+		},
+		"filter_sweep": {
+			"value": 0.8,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"sweep_direction": {
+			"value": "down",
+			"options": ["up", "down", "up_down"]
+		},
+		"attack": {
+			"value": 0.001,
+			"min": 0.001,
+			"max": 0.1,
+			"step": 0.001
+		},
+		"decay": {
+			"value": 0.8,
+			"min": 0.1,
+			"max": 3.0,
+			"step": 0.05
+		},
+		"sustain": {
+			"value": 0.0,
+			"min": 0.0,
+			"max": 0.5,
+			"step": 0.01
+		},
+		"release": {
+			"value": 0.3,
+			"min": 0.01,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"pitch_envelope": {
+			"value": 0.7,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"analog_drift": {
+			"value": 0.02,
+			"min": 0.0,
+			"max": 0.1,
+			"step": 0.001
+		},
+		"wave_type": {
+			"value": "pulse",
+			"options": ["pulse", "sawtooth", "mixed"]
+		}
+	}
+} 

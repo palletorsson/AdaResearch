@@ -84,7 +84,7 @@ func _ready():
 		# Start continuous teleporter ambient sound
 		print("Teleport: Starting continuous ambient teleporter sound...")
 		await get_tree().create_timer(0.5).timeout  # Brief delay for setup
-		teleport_audio.set_volume(-6.0)  # Moderate ambient volume
+		#teleport_audio.set_volume(-6.0)  # Moderate ambient volume
 		teleport_audio.play_secondary_sound(true)  # Play ghost drone spatially
 		print("Teleport: Ambient ghost drone now running continuously")
 	else:

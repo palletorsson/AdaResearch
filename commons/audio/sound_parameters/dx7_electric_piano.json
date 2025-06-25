@@ -1,0 +1,94 @@
+{
+	"dx7_electric_piano": {
+		"_metadata": {
+			"sound_type": "dx7_electric_piano",
+			"description": "Yamaha DX7 FM electric piano - the sound of the 80s",
+			"instrument": "Yamaha DX7",
+			"era": "1980s",
+			"famous_tracks": ["Whitney Houston - I Wanna Dance", "A-ha - Take On Me"],
+			"created_at": "2024-12-24T09:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 3.0,
+				"min": 1.0,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"carrier_freq": {
+				"value": 220.0,
+				"min": 110.0,
+				"max": 880.0,
+				"step": 1.0
+			},
+			"modulator_ratio": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 8.0,
+				"step": 0.1
+			},
+			"fm_index": {
+				"value": 3.0,
+				"min": 0.0,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"mod_env_attack": {
+				"value": 0.01,
+				"min": 0.001,
+				"max": 1.0,
+				"step": 0.001
+			},
+			"mod_env_decay": {
+				"value": 0.3,
+				"min": 0.01,
+				"max": 2.0,
+				"step": 0.01
+			},
+			"mod_env_sustain": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"mod_env_release": {
+				"value": 1.0,
+				"min": 0.01,
+				"max": 5.0,
+				"step": 0.01
+			},
+			"carrier_attack": {
+				"value": 0.01,
+				"min": 0.001,
+				"max": 1.0,
+				"step": 0.001
+			},
+			"carrier_decay": {
+				"value": 0.5,
+				"min": 0.01,
+				"max": 3.0,
+				"step": 0.01
+			},
+			"carrier_sustain": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"carrier_release": {
+				"value": 2.0,
+				"min": 0.01,
+				"max": 10.0,
+				"step": 0.01
+			},
+			"velocity_sensitivity": {
+				"value": 0.7,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			}
+		}
+	}
+} 

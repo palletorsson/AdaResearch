@@ -1,0 +1,60 @@
+{
+	"power_up_jingle": {
+		"_metadata": {
+			"sound_type": "power_up_jingle",
+			"description": "⭐ Power-Up Jingle",
+			"category": "Game Effects",
+			"created_at": "2024-12-24T12:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 1.5,
+				"min": 0.5,
+				"max": 4.0,
+				"step": 0.1
+			},
+			"root_note": {
+				"value": 262.0,
+				"min": 130.0,
+				"max": 520.0,
+				"step": 1.0
+			},
+			"note_count": {
+				"value": 4,
+				"min": 2,
+				"max": 8,
+				"step": 1
+			},
+			"note_decay": {
+				"value": 3.0,
+				"min": 1.0,
+				"max": 8.0,
+				"step": 0.1
+			},
+			"harmony_amount": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 0.8,
+				"step": 0.01
+			},
+			"bell_character": {
+				"value": 0.8,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"amplitude": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"scale_type": {
+				"value": "major",
+				"options": ["major", "minor", "pentatonic"]
+			}
+		}
+	}
+} 

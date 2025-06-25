@@ -1,0 +1,68 @@
+{
+	"ambient_wind": {
+		"_metadata": {
+			"sound_type": "ambient_wind",
+			"description": "🌬️ Ambient Wind",
+			"category": "Atmospheric",
+			"created_at": "2024-12-24T12:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 8.0,
+				"min": 3.0,
+				"max": 15.0,
+				"step": 0.5
+			},
+			"noise_density": {
+				"value": 4,
+				"min": 2,
+				"max": 8,
+				"step": 1
+			},
+			"filter_cutoff": {
+				"value": 0.7,
+				"min": 0.3,
+				"max": 1.0,
+				"step": 0.05
+			},
+			"gust_rate1": {
+				"value": 0.2,
+				"min": 0.05,
+				"max": 1.0,
+				"step": 0.05
+			},
+			"gust_rate2": {
+				"value": 0.07,
+				"min": 0.02,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"tonal_freq1": {
+				"value": 80.0,
+				"min": 40.0,
+				"max": 200.0,
+				"step": 2.0
+			},
+			"tonal_freq2": {
+				"value": 120.0,
+				"min": 60.0,
+				"max": 300.0,
+				"step": 2.0
+			},
+			"tonal_amount": {
+				"value": 0.1,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"amplitude": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			}
+		}
+	}
+} 

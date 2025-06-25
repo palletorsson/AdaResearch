@@ -1,0 +1,48 @@
+{
+	"lift_bass_pulse": {
+		"_metadata": {
+			"sound_type": "lift_bass_pulse",
+			"description": "🎵 Bass Pulse",
+			"category": "Game Effects",
+			"created_at": "2024-12-24T12:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 3.0,
+				"min": 1.0,
+				"max": 8.0,
+				"step": 0.1
+			},
+			"base_frequency": {
+				"value": 60.0,
+				"min": 30.0,
+				"max": 200.0,
+				"step": 1.0
+			},
+			"pulse_rate": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"decay_rate": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"amplitude": {
+				"value": 0.6,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"wave_type": {
+				"value": "sine",
+				"options": ["sine", "square", "sawtooth"]
+			}
+		}
+	}
+} 

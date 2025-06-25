@@ -1,0 +1,82 @@
+{
+	"jupiter_8_strings": {
+		"_metadata": {
+			"sound_type": "jupiter_8_strings",
+			"description": "🎻 Jupiter-8 Strings",
+			"category": "Vintage Synthesizers",
+			"instrument": "Roland Jupiter-8",
+			"era": "1980s",
+			"created_at": "2024-12-24T12:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"duration": {
+				"value": 8.0,
+				"min": 2.0,
+				"max": 16.0,
+				"step": 0.5
+			},
+			"fundamental": {
+				"value": 220.0,
+				"min": 110.0,
+				"max": 880.0,
+				"step": 1.0
+			},
+			"chorus_rate": {
+				"value": 1.2,
+				"min": 0.1,
+				"max": 5.0,
+				"step": 0.1
+			},
+			"chorus_depth": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"filter_cutoff": {
+				"value": 2000.0,
+				"min": 500.0,
+				"max": 8000.0,
+				"step": 50.0
+			},
+			"filter_resonance": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 0.8,
+				"step": 0.01
+			},
+			"attack": {
+				"value": 0.5,
+				"min": 0.01,
+				"max": 3.0,
+				"step": 0.01
+			},
+			"decay": {
+				"value": 0.3,
+				"min": 0.01,
+				"max": 2.0,
+				"step": 0.01
+			},
+			"sustain": {
+				"value": 0.8,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			},
+			"release": {
+				"value": 1.5,
+				"min": 0.01,
+				"max": 5.0,
+				"step": 0.01
+			},
+			"amplitude": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			}
+		}
+	}
+} 
