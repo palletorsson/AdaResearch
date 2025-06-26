@@ -24,7 +24,7 @@ var interactive_exercises_container: VBoxContainer
 
 # Audio Player for previewing sounds
 var audio_player: AudioStreamPlayer
-var current_sound_type: AudioSynthesizer.SoundType = AudioSynthesizer.SoundType.BASIC_SINE_WAVE
+var current_sound_key: String = "basic_sine_wave"
 
 # Real-time update system
 var realtime_enabled: bool = true
@@ -409,6 +409,7 @@ func _ready():
 	setup_ui()
 	setup_audio_player()
 	setup_realtime_timer()
+	load_parameters_from_files()  # Load from JSON files
 	populate_sound_types()
 	connect_signals()  # Connect signals before creating parameter controls
 	create_parameter_controls()
@@ -650,6 +651,20 @@ func setup_ui():
 	
 	print("✅ UI setup complete - all elements created")
 
+func load_parameters_from_files():
+	"""Load sound parameters from JSON files in the restructured directories"""
+	print("📂 Loading sound parameters from JSON files...")
+	
+	# Use the enhanced parameter loader to get all parameters
+	var loaded_params = EnhancedParameterLoader.load_all_parameters()
+	
+	if loaded_params.size() > 0:
+		# Replace the hardcoded parameters with loaded ones
+		sound_parameters = loaded_params
+		print("✅ Loaded %d sound parameter sets from JSON files" % sound_parameters.size())
+	else:
+		print("⚠️ No parameters loaded from JSON, keeping hardcoded defaults")
+
 func create_visualization_section() -> VBoxContainer:
 	"""Create the waveform and spectrum visualization section"""
 	var section = VBoxContainer.new()
@@ -781,24 +796,51 @@ func populate_sound_types():
 		
 	sound_type_option.clear()
 	
-	var sound_names = {
-		AudioSynthesizer.SoundType.BASIC_SINE_WAVE: "〰️ Basic Sine Wave",
-		AudioSynthesizer.SoundType.PICKUP_MARIO: "🪙 Mario Pickup",
-		AudioSynthesizer.SoundType.TELEPORT_DRONE: "⚡ Teleport Drone",
-		AudioSynthesizer.SoundType.LIFT_BASS_PULSE: "🎵 Bass Pulse",
-		AudioSynthesizer.SoundType.GHOST_DRONE: "👻 Ghost Drone",
-		AudioSynthesizer.SoundType.MELODIC_DRONE: "🎶 Melodic Drone",
-		AudioSynthesizer.SoundType.LASER_SHOT: "🔫 Laser Shot",
-		AudioSynthesizer.SoundType.POWER_UP_JINGLE: "⭐ Power-Up Jingle",
-		AudioSynthesizer.SoundType.EXPLOSION: "💥 Explosion",
-		AudioSynthesizer.SoundType.RETRO_JUMP: "🦘 Retro Jump",
-		AudioSynthesizer.SoundType.SHIELD_HIT: "🛡️ Shield Hit",
-		AudioSynthesizer.SoundType.AMBIENT_WIND: "🌬️ Ambient Wind"
+	# Create display names with emojis for all loaded sounds
+	for sound_key in sound_parameters.keys():
+		var display_name = _create_display_name_with_emoji(sound_key)
+		sound_type_option.add_item(display_name)
+	
+	print("🎵 Populated %d sound types from loaded parameters" % sound_parameters.size())
+
+func _create_display_name_with_emoji(sound_key: String) -> String:
+	"""Create a display name with emoji for a sound key"""
+	var display_name = sound_key.capitalize().replace("_", " ")
+	
+	# Add emoji based on sound type keywords
+	var emoji_map = {
+		"kick": "🥁", "808": "🥁", "drum": "🥁", "909": "🥁", "linn": "🥁",
+		"hihat": "🔥", "hat": "🔥", "606": "🔥",
+		"bass": "🎵", "sub": "🎵",
+		"drone": "🌌", "ambient": "🌌", "amiga": "🌌",
+		"laser": "🔫", "shot": "🔫",
+		"pickup": "🪙", "mario": "🪙",
+		"explosion": "💥", "bomb": "💥",
+		"jump": "🟢", "retro": "🟢",
+		"shield": "🛡️", "hit": "🛡️",
+		"wind": "🌬️", "atmospheric": "🌬️",
+		"sine": "〰️", "basic": "〰️",
+		"disco": "🕺", "tom": "🥁", "synare": "🥁",
+		"cosmic": "🛸", "fx": "🌌", "ufo": "🛸", "space": "🚀",
+		"moog": "🎹", "kraftwerk": "🤖", "sequencer": "🎼", "analog": "🎛️",
+		"herbie": "🎺", "hancock": "🎹", "fusion": "🌟", "jazz": "🎷",
+		"aphex": "🔬", "twin": "🎛️", "modular": "🔧", "experimental": "⚗️",
+		"flying": "🚁", "lotus": "🪷", "sampler": "🎛️", "beats": "🥁",
+		"dx7": "⚡", "electric": "⚡", "piano": "🎹",
+		"tb303": "🔊", "acid": "🔊",
+		"c64": "💾", "sid": "💾", "gameboy": "🎮", "dmg": "🎮",
+		"jupiter": "🪐", "strings": "🎻",
+		"arp": "⚡", "2600": "⚡", "lead": "🎤",
+		"ppg": "🌊", "wave": "🌊", "pad": "🌊",
+		"teleport": "⚡", "power": "⭐", "melodic": "🎶", "ghost": "👻", "lift": "🔄"
 	}
 	
-	for sound_type in AudioSynthesizer.SoundType.values():
-		var display_name = sound_names.get(sound_type, "Unknown")
-		sound_type_option.add_item(display_name)
+	for keyword in emoji_map.keys():
+		if sound_key.to_lower().contains(keyword):
+			display_name = emoji_map[keyword] + " " + display_name
+			break
+	
+	return display_name
 
 func create_parameter_controls():
 	if not parameters_container:
@@ -811,8 +853,7 @@ func create_parameter_controls():
 	parameter_controls.clear()
 	value_labels.clear()
 	
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var params = sound_parameters[sound_key]
+	var params = sound_parameters[current_sound_key]
 	
 	# Create smaller title
 	var title = Label.new()
@@ -916,6 +957,11 @@ func create_parameter_control(param_name: String, param_config: Dictionary):
 
 func create_slider_control_compact(container: VBoxContainer, param_name: String, config: Dictionary):
 	"""Create a compact slider control for column layout"""
+	# Defensive check for parameter structure
+	if not config is Dictionary:
+		print("❌ Invalid config for %s: %s" % [param_name, config])
+		return
+	
 	var slider = HSlider.new()
 	slider.min_value = config.get("min", 0.0)
 	slider.max_value = config.get("max", 1.0)
@@ -1140,17 +1186,21 @@ func get_sound_name_from_type(type: AudioSynthesizer.SoundType) -> String:
 
 # Signal handlers
 func _on_sound_type_changed(index: int):
-	current_sound_type = AudioSynthesizer.SoundType.values()[index]
-	await create_parameter_controls()
-	if realtime_enabled:
-		trigger_audio_update()
+	var sound_keys = sound_parameters.keys()
+	if index < sound_keys.size():
+		current_sound_key = sound_keys[index]
+		print("🎵 Changed to sound: %s" % current_sound_key)
+		await create_parameter_controls()
+		if realtime_enabled:
+			trigger_audio_update()
+	else:
+		print("❌ Invalid sound index: %d" % index)
 
 func _on_slider_changed(param_name: String, value: float):
 	print("🎛️ SLIDER MOVED: %s changed to %.2f" % [param_name, value])  # Enhanced debug output
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	print("🔑 Sound key: %s" % sound_key)
+	print("🔑 Sound key: %s" % current_sound_key)
 	
-	sound_parameters[sound_key][param_name]["value"] = value
+	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
 	print("Slider changed: %s = %.2f" % [param_name, value])  # Debug output
 	
@@ -1167,12 +1217,11 @@ func _on_option_changed(param_name: String, index: int):
 	print("🎚️ OPTION CHANGED TRIGGERED: %s to index %d" % [param_name, index])
 	var option_button = parameter_controls[param_name] as OptionButton
 	var value = option_button.get_item_text(index)
-	var sound_key = get_sound_key_from_type(current_sound_type)
 	
-	print("🔑 Sound key: %s" % sound_key)
-	print("📝 Setting %s.%s = %s" % [sound_key, param_name, value])
+	print("🔑 Sound key: %s" % current_sound_key)
+	print("📝 Setting %s.%s = %s" % [current_sound_key, param_name, value])
 	
-	sound_parameters[sound_key][param_name]["value"] = value
+	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
 	print("✅ Option changed: %s = %s" % [param_name, value])
 	
@@ -1218,13 +1267,13 @@ func update_audio_immediately():
 		audio_player.stop()
 		print("⏸️ Stopped previous audio")
 	
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var params = get_current_parameter_values(sound_key)
+	var params = get_current_parameter_values(current_sound_key)
 	
-	print("🎛️ Using parameters for %s: %s" % [sound_key, params])
+	print("🎛️ Using parameters for %s: %s" % [current_sound_key, params])
 	
-	# Generate new audio with current parameters
-	var audio_stream = CustomSoundGenerator.generate_custom_sound(current_sound_type, params)
+	# Generate new audio with current parameters - need to get the enum type
+	var sound_type = get_type_from_sound_key(current_sound_key)
+	var audio_stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
 	if audio_stream:
 		audio_player.stream = audio_stream
 		audio_player.play()
@@ -1248,10 +1297,23 @@ func _on_audio_finished():
 
 func get_current_parameter_values(sound_key: String) -> Dictionary:
 	var params = {}
+	
+	if not sound_parameters.has(sound_key):
+		print("⚠️ No parameters found for sound key: %s" % sound_key)
+		return params
+	
 	var sound_config = sound_parameters[sound_key]
 	
 	for param_name in sound_config.keys():
-		params[param_name] = sound_config[param_name]["value"]
+		var param_config = sound_config[param_name]
+		
+		# Defensive check for parameter structure
+		if param_config is Dictionary and param_config.has("value"):
+			params[param_name] = param_config["value"]
+		else:
+			print("⚠️ Invalid parameter structure for %s.%s: %s" % [sound_key, param_name, param_config])
+			# Provide a safe default
+			params[param_name] = 0.0
 	
 	print("📊 Current %s parameters: %s" % [sound_key, params])
 	return params
@@ -1356,10 +1418,10 @@ func _load_from_file(file_path: String):
 		print("❌ Failed to open file: ", file_path)
 
 func _export_to_tres(file_path: String):
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var params = get_current_parameter_values(sound_key)
+	var params = get_current_parameter_values(current_sound_key)
 	
-	var audio_stream = CustomSoundGenerator.generate_custom_sound(current_sound_type, params)
+	var sound_type = get_type_from_sound_key(current_sound_key)
+	var audio_stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
 	var save_result = ResourceSaver.save(audio_stream, file_path)
 	
 	if save_result == OK:
@@ -1372,7 +1434,6 @@ func _show_json_popup():
 	var save_data = {}
 	
 	# Get only the current sound type parameters
-	var current_sound_key = get_sound_key_from_type(current_sound_type)
 	if sound_parameters.has(current_sound_key):
 		save_data[current_sound_key] = {}
 		for param_name in sound_parameters[current_sound_key].keys():
@@ -1382,7 +1443,7 @@ func _show_json_popup():
 	
 	# Create a popup dialog
 	var popup = AcceptDialog.new()
-	var sound_name = get_sound_name_from_type(current_sound_type)
+	var sound_name = _create_display_name_with_emoji(current_sound_key)
 	popup.title = "📋 JSON Parameters - " + sound_name
 	popup.dialog_text = "Copy the JSON for " + sound_name + " and paste it into your code:"
 	
@@ -1439,8 +1500,7 @@ func initialize_visualizations():
 
 func update_visualizations():
 	"""Update waveform and spectrum data from current audio parameters"""
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var params = get_current_parameter_values(sound_key)
+	var params = get_current_parameter_values(current_sound_key)
 	
 	# Generate the audio data for analysis
 	var duration = params.get("duration", 1.0)
@@ -1449,7 +1509,8 @@ func update_visualizations():
 	audio_data.resize(sample_count)
 	
 	# Generate using the same method as audio generation
-	match current_sound_type:
+	var sound_type = get_type_from_sound_key(current_sound_key)
+	match sound_type:
 		AudioSynthesizer.SoundType.BASIC_SINE_WAVE:
 			CustomSoundGenerator.generate_custom_basic_sine_wave(audio_data, sample_count, params)
 		AudioSynthesizer.SoundType.PICKUP_MARIO:
@@ -1693,8 +1754,7 @@ func update_theory_display():
 	if not theory_label:
 		return
 		
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var theory_data = sound_theory.get(sound_key, {})
+	var theory_data = sound_theory.get(current_sound_key, {})
 	
 	if theory_data.is_empty():
 		theory_label.text = "No educational content available for this sound type."
@@ -1726,8 +1786,7 @@ func create_interactive_exercises():
 	for child in interactive_exercises_container.get_children():
 		child.queue_free()
 	
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	var theory_data = sound_theory.get(sound_key, {})
+	var theory_data = sound_theory.get(current_sound_key, {})
 	var exercises = theory_data.get("exercises", [])
 	
 	if exercises.is_empty():
@@ -1752,12 +1811,11 @@ func create_interactive_exercises():
 
 func _execute_exercise(params: Dictionary):
 	"""Execute an interactive exercise by setting parameters"""
-	var sound_key = get_sound_key_from_type(current_sound_type)
 	
 	# Apply exercise parameters
 	for param_name in params.keys():
-		if sound_parameters[sound_key].has(param_name):
-			sound_parameters[sound_key][param_name]["value"] = params[param_name]
+		if sound_parameters[current_sound_key].has(param_name):
+			sound_parameters[current_sound_key][param_name]["value"] = params[param_name]
 	
 	# Recreate UI controls to reflect new values
 	create_parameter_controls()
@@ -1788,9 +1846,8 @@ func calculate_lesson_progress() -> float:
 
 func mark_lesson_completed():
 	"""Mark current lesson as completed"""
-	var sound_key = get_sound_key_from_type(current_sound_type)
-	lessons_completed[sound_key] = true
+	lessons_completed[current_sound_key] = true
 	lesson_progress_bar.value = calculate_lesson_progress()
 	
-	print("🎉 Lesson completed: ", sound_theory[sound_key]["title"])
+	print("🎉 Lesson completed: ", sound_theory[current_sound_key]["title"])
 	print("📊 Overall progress: ", int(lesson_progress_bar.value), "%")

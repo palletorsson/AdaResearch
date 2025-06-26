@@ -14,10 +14,10 @@ func _init():
 	SoundParameterManager.create_default_parameter_files()
 	
 	print("Default parameter files created successfully!")
-	print("Files created in: res://commons/audio/sound_parameters/")
+	print("Files created in: res://commons/audio/parameters/basic/")
 	
 	# List the files created
-	var dir = DirAccess.open("res://commons/audio/sound_parameters/")
+	var dir = DirAccess.open("res://commons/audio/parameters/basic/")
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()

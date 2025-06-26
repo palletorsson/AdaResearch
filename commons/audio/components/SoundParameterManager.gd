@@ -5,7 +5,7 @@
 extends RefCounted
 class_name SoundParameterManager
 
-@export var parameters_directory: String = "res://commons/audio/sound_parameters/"
+@export var parameters_directory: String = "res://commons/audio/parameters/basic/"
 @export var user_parameters_directory: String = "user://sound_parameters/"
 
 # Cache for loaded parameters
@@ -138,7 +138,7 @@ static func _load_sound_parameters(sound_key: String) -> Dictionary:
 		return params
 	
 	# Try resource directory
-	var resource_path = "res://commons/audio/sound_parameters/" + filename
+	var resource_path = "res://commons/audio/parameters/basic/" + filename
 	params = _load_json_file(resource_path)
 	
 	if not params.is_empty():
@@ -225,7 +225,7 @@ static func get_all_sound_parameters() -> Dictionary:
 
 static func create_default_parameter_files():
 	"""Create default parameter files in the resource directory"""
-	var base_path = "res://commons/audio/sound_parameters/"
+	var base_path = "res://commons/audio/parameters/basic/"
 	
 	for sound_key in default_parameters.keys():
 		var filename = sound_type_files.get(sound_key, sound_key + ".json")
@@ -298,7 +298,7 @@ static func get_parameter_file_path(sound_key: String, user_directory: bool = tr
 	if user_directory:
 		return "user://sound_parameters/" + filename
 	else:
-		return "res://commons/audio/sound_parameters/" + filename
+		return "res://commons/audio/parameters/basic/" + filename
 
 static func export_all_parameters_to_directory(export_path: String):
 	"""Export all current parameters to a directory"""

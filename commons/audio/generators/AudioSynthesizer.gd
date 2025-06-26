@@ -40,7 +40,11 @@ enum SoundType {
 	KORG_M1_PIANO,     # Korg M1 digital piano
 	ARP_2600_LEAD,     # ARP 2600 analog lead synthesizer
 	SYNARE_3_DISCO_TOM, # Star Instruments Synare 3 disco tom
-	SYNARE_3_COSMIC_FX # Star Instruments Synare 3 cosmic FX
+	SYNARE_3_COSMIC_FX, # Star Instruments Synare 3 cosmic FX
+	MOOG_KRAFTWERK_SEQUENCER, # Moog-style Kraftwerk sequencer
+	HERBIE_HANCOCK_MOOG_FUSION, # Herbie Hancock jazz-fusion Moog
+	APHEX_TWIN_MODULAR, # Aphex Twin experimental modular synthesis
+	FLYING_LOTUS_SAMPLER # Flying Lotus beat machine sampler-synth
 }
 
 # Sound generation functions
@@ -106,6 +110,14 @@ static func generate_sound(type: SoundType, duration: float = 1.0) -> AudioStrea
 			_generate_synare_3_disco_tom(data, sample_count)
 		SoundType.SYNARE_3_COSMIC_FX:
 			_generate_synare_3_cosmic_fx(data, sample_count)
+		SoundType.MOOG_KRAFTWERK_SEQUENCER:
+			_generate_moog_kraftwerk_sequencer(data, sample_count)
+		SoundType.HERBIE_HANCOCK_MOOG_FUSION:
+			_generate_herbie_hancock_moog_fusion(data, sample_count)
+		SoundType.APHEX_TWIN_MODULAR:
+			_generate_aphex_twin_modular(data, sample_count)
+		SoundType.FLYING_LOTUS_SAMPLER:
+			_generate_flying_lotus_sampler(data, sample_count)
 	
 	return _create_audio_stream(data)
 
@@ -880,6 +892,232 @@ static func _generate_synare_3_cosmic_fx(data: PackedFloat32Array, sample_count:
 		
 		data[i] = wave * envelope * 0.4
 
+static func _generate_moog_kraftwerk_sequencer(data: PackedFloat32Array, sample_count: int):
+	# Moog-style Kraftwerk sequencer - classic analog step sequencer
+	var bpm = 120.0
+	var steps = 16
+	var step_duration = (60.0 / bpm) / 4.0  # 16th notes
+	
+	# Classic Kraftwerk sequence pattern (simplified)
+	var sequence = [
+		261.63, 261.63, 392.00, 261.63,  # C C G C
+		329.63, 261.63, 392.00, 261.63,  # E C G C
+		293.66, 293.66, 392.00, 293.66,  # D D G D
+		261.63, 329.63, 392.00, 261.63   # C E G C
+	]
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Calculate current step
+		var step_index = int(t / step_duration) % steps
+		var step_progress = fmod(t / step_duration, 1.0)
+		
+		var freq = sequence[step_index]
+		
+		# Moog-style sawtooth wave
+		var wave = 2.0 * (freq * t - floor(freq * t)) - 1.0
+		
+		# Classic Moog filter (simplified)
+		var filter_cutoff = 800.0 + sin(2.0 * PI * 0.5 * t) * 300.0
+		var filter_factor = clamp(filter_cutoff / 2000.0, 0.3, 1.0)
+		wave *= filter_factor * 1.7  # Resonance
+		
+		# Step envelope
+		var envelope = 1.0
+		if step_progress > 0.8:  # Gate off for last 20% of step
+			envelope = 0.0
+		
+		# ADSR envelope per step
+		if step_progress < 0.01:
+			envelope *= step_progress / 0.01  # Quick attack
+		elif step_progress > 0.6:
+			envelope *= exp(-(step_progress - 0.6) * 10.0)  # Decay
+		
+		data[i] = wave * envelope * 0.6
+
+static func _generate_herbie_hancock_moog_fusion(data: PackedFloat32Array, sample_count: int):
+	# Herbie Hancock jazz-fusion Moog - layered, chorded, funky
+	var chord_freqs = [
+		261.63, 329.63, 392.00, 493.88,  # Cmaj7
+		293.66, 369.99, 440.00, 554.37,  # Dm7
+		329.63, 415.30, 493.88, 622.25,  # Em7
+		349.23, 440.00, 523.25, 659.26   # Fmaj7
+	]
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Jazz rhythm pattern
+		var beat = fmod(t * 2.0, 4.0)  # 2 beats per second, 4-beat pattern
+		var chord_index = int(beat) % 4
+		
+		# Get chord frequencies
+		var root = chord_freqs[chord_index * 4]
+		var third = chord_freqs[chord_index * 4 + 1]
+		var fifth = chord_freqs[chord_index * 4 + 2]
+		var seventh = chord_freqs[chord_index * 4 + 3]
+		
+		# Multiple oscillators for richness
+		var wave1 = sin(2.0 * PI * root * t)  # Root
+		var wave2 = sin(2.0 * PI * third * t) * 0.8  # Third
+		var wave3 = sin(2.0 * PI * fifth * t) * 0.6  # Fifth
+		var wave4 = sin(2.0 * PI * seventh * t) * 0.4  # Seventh
+		
+		var combined_wave = (wave1 + wave2 + wave3 + wave4) / 4.0
+		
+		# Moog filter sweep
+		var filter_cutoff = 800.0 + sin(2.0 * PI * 0.3 * t) * 400.0
+		var filter_factor = clamp(filter_cutoff / 1500.0, 0.4, 1.0)
+		combined_wave *= filter_factor
+		
+		# Funk envelope - quick attack, sustained
+		var envelope = 1.0
+		var beat_pos = fmod(beat, 1.0)
+		if beat_pos < 0.05:
+			envelope = beat_pos / 0.05  # Quick attack
+		elif beat_pos > 0.9:
+			envelope = 1.0 - (beat_pos - 0.9) / 0.1  # Quick release
+		
+		data[i] = combined_wave * envelope * 0.7
+
+static func _generate_aphex_twin_modular(data: PackedFloat32Array, sample_count: int):
+	# Aphex Twin modular synthesis - complex, chaotic, mathematical
+	var base_freq = 220.0  # A3
+	var osc_count = 6
+	var chaos_amount = 0.4
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Complex oscillator network with cross-modulation
+		var total_wave = 0.0
+		
+		for osc in range(osc_count):
+			var osc_freq = base_freq * (1.0 + float(osc) * 0.618)  # Golden ratio intervals
+			
+			# Chaotic modulation between oscillators
+			var chaos_mod = sin(2.0 * PI * osc_freq * 0.1 * t) * chaos_amount
+			var modulated_freq = osc_freq * (1.0 + chaos_mod)
+			
+			# Phase distortion
+			var phase = 2.0 * PI * modulated_freq * t
+			var distorted_phase = phase + sin(phase * 3.0) * 0.3
+			
+			var wave = sin(distorted_phase)
+			
+			# Ring modulation between adjacent oscillators
+			if osc > 0:
+				var ring_freq = base_freq * (1.0 + float(osc - 1) * 0.618)
+				wave *= sin(2.0 * PI * ring_freq * t) * 0.5 + 0.5
+			
+			total_wave += wave / osc_count
+		
+		# Complex filter with resonance
+		var filter_cutoff = 1000.0 + sin(2.0 * PI * 0.7 * t) * 800.0
+		var filter_factor = clamp(filter_cutoff / 3000.0, 0.2, 1.0)
+		var resonance = 0.8
+		
+		# Add resonant feedback
+		var resonant_peak = sin(2.0 * PI * filter_cutoff * t) * resonance * 0.2
+		total_wave = (total_wave + resonant_peak) * filter_factor
+		
+		# Granular processing
+		var grain_size = 0.01  # 10ms grains
+		var grain_index = int(t / grain_size)
+		var grain_phase = fmod(t / grain_size, 1.0)
+		
+		# Randomize grain parameters
+		var grain_pitch = 1.0 + (sin(grain_index * 1.618) * 0.2)
+		if grain_phase < 0.1 or grain_phase > 0.9:
+			total_wave *= grain_pitch * (sin(grain_phase * PI) * sin(grain_phase * PI))
+		
+		# Bit reduction for digital artifacts
+		var bits = 12.0  # Reduce to 12-bit
+		total_wave = floor(total_wave * pow(2, bits)) / pow(2, bits)
+		
+		# Complex envelope
+		var envelope = 1.0
+		var global_progress = t / (float(sample_count) / SAMPLE_RATE)
+		
+		if global_progress < 0.1:
+			envelope = global_progress / 0.1
+		elif global_progress > 0.8:
+			envelope = 1.0 - (global_progress - 0.8) / 0.2
+		
+		# Add glitches randomly
+		if randf() < 0.001:  # 0.1% chance per sample
+			total_wave *= randf() * 2.0
+		
+		data[i] = total_wave * envelope * 0.6
+
+static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_count: int):
+	# Flying Lotus sampler - hip-hop beats with jazz fusion and experimental elements
+	var bpm = 85.0
+	var beat_duration = 60.0 / bpm / 4.0  # 16th note duration
+	
+	# Jazz chord progression
+	var chord_freqs = [
+		261.63, 329.63, 392.00, 493.88,  # Cmaj7
+		220.00, 277.18, 329.63, 415.30,  # Am7
+		174.61, 220.00, 261.63, 329.63,  # Fmaj7
+		196.00, 246.94, 293.66, 369.99   # G7
+	]
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# J Dilla-style swing
+		var beat_time = fmod(t / beat_duration, 1.0)
+		var swing_offset = 0.0
+		if int(t / beat_duration) % 2 == 1:  # Swing on off-beats
+			swing_offset = 0.1
+		
+		# Current chord (changes every 2 seconds)
+		var chord_index = int(t / 2.0) % 4
+		var chord_root = chord_freqs[chord_index * 4]
+		var chord_third = chord_freqs[chord_index * 4 + 1]
+		var chord_fifth = chord_freqs[chord_index * 4 + 2]
+		var chord_seventh = chord_freqs[chord_index * 4 + 3]
+		
+		# Sample chop simulation
+		var chop_rate = 16.0  # 16th note chops
+		var chop_index = int((t + swing_offset) * chop_rate) % 32
+		var chop_progress = fmod((t + swing_offset) * chop_rate, 1.0)
+		
+		# Multi-layered samples
+		var bass_wave = sin(2.0 * PI * chord_root * 0.5 * t)  # Sub bass
+		var chord_wave = (sin(2.0 * PI * chord_third * t) + 
+						 sin(2.0 * PI * chord_fifth * t) + 
+						 sin(2.0 * PI * chord_seventh * t)) / 3.0
+		
+		# Granular chopping
+		var grain_size = 0.05  # 50ms grains
+		var grain_phase = fmod(chop_progress, grain_size / beat_duration)
+		var grain_envelope = sin(grain_phase * PI / (grain_size / beat_duration))
+		
+		var total_wave = bass_wave * 0.6 + chord_wave * 0.4
+		total_wave *= grain_envelope
+		
+		# SP-404 style filter
+		var filter_cutoff = 1200.0 + sin(2.0 * PI * 0.3 * t) * 600.0
+		var filter_factor = clamp(filter_cutoff / 2400.0, 0.3, 1.0)
+		total_wave *= filter_factor
+		
+		# Vintage saturation
+		total_wave = tanh(total_wave * 1.5) * 0.7
+		
+		# Beat envelope
+		var envelope = 1.0
+		if chop_progress > 0.8:  # Gate off near end of chop
+			envelope = 1.0 - (chop_progress - 0.8) / 0.2
+		
+		# Random stutters
+		if randf() < 0.02 and chop_progress < 0.2:  # 2% chance of stutter
+			total_wave *= randf() * 2.0
+		
+		data[i] = total_wave * envelope * 0.7
+
 static func _create_audio_stream(data: PackedFloat32Array) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
@@ -969,7 +1207,11 @@ static func get_all_sound_types() -> Array[SoundType]:
 		SoundType.KORG_M1_PIANO,
 		SoundType.ARP_2600_LEAD,
 		SoundType.SYNARE_3_DISCO_TOM,
-		SoundType.SYNARE_3_COSMIC_FX
+		SoundType.SYNARE_3_COSMIC_FX,
+		SoundType.MOOG_KRAFTWERK_SEQUENCER,
+		SoundType.HERBIE_HANCOCK_MOOG_FUSION,
+		SoundType.APHEX_TWIN_MODULAR,
+		SoundType.FLYING_LOTUS_SAMPLER
 	]
 
 # Get human-readable name for a sound type
@@ -1031,5 +1273,13 @@ static func get_sound_type_name(type: SoundType) -> String:
 			return "Synare 3 Disco Tom"
 		SoundType.SYNARE_3_COSMIC_FX:
 			return "Synare 3 Cosmic FX"
+		SoundType.MOOG_KRAFTWERK_SEQUENCER:
+			return "Moog Kraftwerk Sequencer"
+		SoundType.HERBIE_HANCOCK_MOOG_FUSION:
+			return "Herbie Hancock Moog Fusion"
+		SoundType.APHEX_TWIN_MODULAR:
+			return "Aphex Twin Modular"
+		SoundType.FLYING_LOTUS_SAMPLER:
+			return "Flying Lotus Sampler"
 		_:
 			return "Unknown Sound"

@@ -1,0 +1,201 @@
+{
+	"_metadata": {
+		"sound_type": "flying_lotus_sampler",
+		"description": "Flying Lotus' genre-defying electronic hip-hop fusion 🎛️🚁",
+		"instrument": "SP-404/MPC Series + Synthesizers",
+		"era": "2000s-2020s",
+		"famous_tracks": ["Flying Lotus - Cosmogramma", "Flying Lotus - Do the Astral Plane", "Flying Lotus - Never Catch Me", "Flying Lotus - Putty Boy Strut"],
+		"style": ["Beat Music", "Abstract Hip-Hop", "Jazz Fusion", "Electronic", "Experimental", "IDM", "Future Beats"],
+		"created_at": "2024-12-24T11:30:00Z",
+		"version": "1.0",
+		"is_default": true
+	},
+	"parameters": {
+		"duration": {
+			"value": 12.0,
+			"min": 4.0,
+			"max": 60.0,
+			"step": 1.0
+		},
+		"beat_pattern": {
+			"value": "j_dilla_swing",
+			"options": ["straight", "j_dilla_swing", "off_kilter", "polyrhythmic", "broken_beat", "future_funk"]
+		},
+		"sample_mode": {
+			"value": "granular_chop",
+			"options": ["classic_chop", "granular_chop", "time_stretch", "pitch_shift", "reverse_grain", "stutter_mode"]
+		},
+		"bpm": {
+			"value": 85.0,
+			"min": 60.0,
+			"max": 180.0,
+			"step": 1.0
+		},
+		"swing_amount": {
+			"value": 0.6,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"chop_density": {
+			"value": 16,
+			"min": 4,
+			"max": 64,
+			"step": 1
+		},
+		"sample_layers": {
+			"value": 4,
+			"min": 1,
+			"max": 8,
+			"step": 1
+		},
+		"jazz_harmonies": {
+			"value": "complex_7th",
+			"options": ["simple_triads", "jazz_7th", "complex_7th", "modal_jazz", "chromatic", "atonal"]
+		},
+		"polyrhythm_ratio": {
+			"value": "3_against_4",
+			"options": ["none", "3_against_2", "3_against_4", "5_against_4", "7_against_8", "complex"]
+		},
+		"filter_type": {
+			"value": "sp404_vintage",
+			"options": ["sp404_vintage", "mpc_classic", "analog_warmth", "digital_harsh", "formant_vocal", "comb_delays"]
+		},
+		"filter_cutoff": {
+			"value": 1500.0,
+			"min": 100.0,
+			"max": 8000.0,
+			"step": 25.0
+		},
+		"filter_resonance": {
+			"value": 0.4,
+			"min": 0.0,
+			"max": 0.9,
+			"step": 0.01
+		},
+		"vintage_saturation": {
+			"value": 0.3,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"tape_wow_flutter": {
+			"value": 0.15,
+			"min": 0.0,
+			"max": 0.5,
+			"step": 0.01
+		},
+		"lfo_rate": {
+			"value": 1.2,
+			"min": 0.1,
+			"max": 20.0,
+			"step": 0.1
+		},
+		"lfo_chaos": {
+			"value": 0.3,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"attack": {
+			"value": 0.005,
+			"min": 0.001,
+			"max": 1.0,
+			"step": 0.001
+		},
+		"decay": {
+			"value": 0.8,
+			"min": 0.01,
+			"max": 5.0,
+			"step": 0.01
+		},
+		"sustain": {
+			"value": 0.4,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"release": {
+			"value": 1.5,
+			"min": 0.01,
+			"max": 8.0,
+			"step": 0.01
+		},
+		"reverb_space": {
+			"value": "chamber",
+			"options": ["off", "room", "chamber", "hall", "cathedral", "space_delay", "impossible"]
+		},
+		"reverb_amount": {
+			"value": 0.4,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"delay_time": {
+			"value": 0.125,
+			"min": 0.01,
+			"max": 2.0,
+			"step": 0.001
+		},
+		"delay_feedback": {
+			"value": 0.3,
+			"min": 0.0,
+			"max": 0.95,
+			"step": 0.01
+		},
+		"stutter_probability": {
+			"value": 0.2,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"glitch_amount": {
+			"value": 0.1,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"bass_emphasis": {
+			"value": 0.5,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"high_freq_roll": {
+			"value": 0.2,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"sample_rate_redux": {
+			"value": 0.1,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"bit_crush": {
+			"value": 0.05,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"stereo_width": {
+			"value": 0.7,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"experimental_factor": {
+			"value": 0.4,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		},
+		"amplitude": {
+			"value": 0.8,
+			"min": 0.0,
+			"max": 1.0,
+			"step": 0.01
+		}
+	}
+} 

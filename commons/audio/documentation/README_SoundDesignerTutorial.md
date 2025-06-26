@@ -268,9 +268,9 @@ Real-world: Environmental ambience, weather effects
 ```json
 {
   "teleport_drone": {
-    "base_freq": {"value": 220.0, "min": 50.0, "max": 500.0, "step": 5.0},
-    "mod_freq": {"value": 0.5, "min": 0.1, "max": 5.0, "step": 0.1},
-    "wave_type": {"value": "sawtooth", "options": ["sine", "square", "sawtooth"]}
+	"base_freq": {"value": 220.0, "min": 50.0, "max": 500.0, "step": 5.0},
+	"mod_freq": {"value": 0.5, "min": 0.1, "max": 5.0, "step": 0.1},
+	"wave_type": {"value": "sawtooth", "options": ["sine", "square", "sawtooth"]}
   }
 }
 ```
@@ -314,9 +314,9 @@ Real-world: Environmental ambience, weather effects
 ```gdscript
 # Example: Use generated parameters in code
 var params = {
-    "frequency": 440.0,
-    "amplitude": 0.5,
-    "wave_type": "sine"
+	"frequency": 440.0,
+	"amplitude": 0.5,
+	"wave_type": "sine"
 }
 var audio = CustomSoundGenerator.generate_custom_sound(SoundType.BASIC_SINE_WAVE, params)
 ```

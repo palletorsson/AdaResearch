@@ -39,38 +39,62 @@ var sound_type_mapping = {}
 var ordered_sound_types = []  # Track the order of sound types for dropdown mapping
 
 func _load_sound_parameters_from_folder():
-	"""Load all sound parameter files from res://commons/audio/sound_parameters/"""
-	var sound_params_dir = "res://commons/audio/sound_parameters/"
-	var dir = DirAccess.open(sound_params_dir)
-	
-	if not dir:
-		print("❌ Could not open sound parameters directory: %s" % sound_params_dir)
-		_load_fallback_parameters()
-		return
-	
-	print("📂 Loading sound parameters from: %s" % sound_params_dir)
+	"""Load all sound parameter files from all parameter categories"""
+	print("📂 Loading sound parameters from all categories...")
 	
 	# Clear existing data
 	sound_parameters.clear()
 	sound_names.clear()
 	sound_type_mapping.clear()
 	
-	# Scan for JSON files
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
+	# Use the enhanced parameter loader to get all parameters
+	sound_parameters = EnhancedParameterLoader.load_all_parameters()
 	
-	while file_name != "":
-		if file_name.ends_with(".json"):
-			var file_path = sound_params_dir + file_name
-			_load_sound_parameter_file(file_path)
-		file_name = dir.get_next()
+	if sound_parameters.size() == 0:
+		print("❌ No parameters loaded, using fallback")
+		_load_fallback_parameters()
+		return
 	
-	dir.list_dir_end()
+	# Create display names for all loaded sounds
+	for sound_key in sound_parameters.keys():
+		_create_display_name_for_sound(sound_key)
 	
 	# Create sound type mappings based on loaded parameters
 	_create_sound_type_mappings()
 	
-	print("✅ Loaded %d sound types from JSON files" % sound_parameters.size())
+	print("✅ Loaded %d sound types from all categories" % sound_parameters.size())
+
+func _create_display_name_for_sound(sound_key: String):
+	"""Create a display name with emoji for a sound"""
+	var display_name = sound_key.capitalize().replace("_", " ")
+	
+	# Add emoji based on sound type
+	var emoji_map = {
+		"kick": "🥁", "808": "🥁", "drum": "🥁",
+		"hihat": "🔥", "hat": "🔥", "606": "🔥",
+		"bass": "🎵", "sub": "🎵",
+		"drone": "🌌", "ambient": "🌌", "amiga": "🌌",
+		"laser": "🔫", "shot": "🔫",
+		"pickup": "🪙", "mario": "🪙",
+		"explosion": "💥", "bomb": "💥",
+		"jump": "🟢", "retro": "🟢",
+		"shield": "🛡️", "hit": "🛡️",
+		"wind": "🌬️", "atmospheric": "🌬️",
+		"sine": "〰️", "basic": "〰️",
+		"disco": "🕺", "tom": "🥁", "synare": "🥁",
+		"cosmic": "🛸", "fx": "🌌", "ufo": "🛸", "space": "🚀",
+		"moog": "🎹", "kraftwerk": "🤖", "sequencer": "🎼", "analog": "🎛️",
+		"herbie": "🎺", "hancock": "🎹", "fusion": "🌟", "jazz": "🎷",
+		"aphex": "🔬", "twin": "🎛️", "modular": "🔧", "experimental": "⚗️",
+		"flying": "🚁", "lotus": "🪷", "sampler": "🎛️", "beats": "🥁"
+	}
+	
+	for keyword in emoji_map.keys():
+		if sound_key.to_lower().contains(keyword):
+			display_name = emoji_map[keyword] + " " + display_name
+			break
+	
+	sound_names[sound_key] = display_name
 
 func _load_sound_parameter_file(file_path: String):
 	"""Load a single sound parameter JSON file - handles both old and new JSON structures"""
@@ -151,7 +175,11 @@ func _load_sound_parameter_file(file_path: String):
 		"wind": "🌬️", "atmospheric": "🌬️",
 		"sine": "〰️", "basic": "〰️",
 		"disco": "🕺", "tom": "🥁", "synare": "🥁",
-		"cosmic": "🛸", "fx": "🌌", "ufo": "🛸", "space": "🚀"
+		"cosmic": "🛸", "fx": "🌌", "ufo": "🛸", "space": "🚀",
+		"moog": "🎹", "kraftwerk": "🤖", "sequencer": "🎼", "analog": "🎛️",
+		"herbie": "🎺", "hancock": "🎹", "fusion": "🌟", "jazz": "🎷",
+		"aphex": "🔬", "twin": "🎛️", "modular": "🔧", "experimental": "⚗️",
+		"flying": "🚁", "lotus": "🪷", "sampler": "🎛️", "beats": "🥁"
 	}
 	
 	for keyword in emoji_map.keys():
@@ -194,7 +222,11 @@ func _create_sound_type_mappings():
 		"korg_m1_piano": AudioSynthesizer.SoundType.KORG_M1_PIANO,
 		"arp_2600_lead": AudioSynthesizer.SoundType.ARP_2600_LEAD,
 		"synare_3_disco_tom": AudioSynthesizer.SoundType.SYNARE_3_DISCO_TOM,
-		"synare_3_cosmic_fx": AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX
+		"synare_3_cosmic_fx": AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX,
+		"moog_kraftwerk_sequencer": AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER,
+		"herbie_hancock_moog_fusion": AudioSynthesizer.SoundType.HERBIE_HANCOCK_MOOG_FUSION,
+		"aphex_twin_modular": AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR,
+		"flying_lotus_sampler": AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER
 	}
 	
 	# Create reverse mapping for loaded sounds
@@ -561,7 +593,13 @@ func _on_slider_changed(param_name: String, value: float):
 	var sound_key = get_sound_key_from_type(current_sound_type)
 	print("🔑 Sound key: %s" % sound_key)
 	
-	sound_parameters[sound_key][param_name]["value"] = value
+	# Safety check before accessing nested dictionary
+	if sound_parameters.has(sound_key) and sound_parameters[sound_key].has(param_name):
+		if sound_parameters[sound_key][param_name] is Dictionary:
+			sound_parameters[sound_key][param_name]["value"] = value
+		else:
+			print("⚠️ Invalid parameter structure for %s.%s" % [sound_key, param_name])
+			return
 	update_value_label(param_name, value)
 	print("✅ Slider changed: %s = %.2f" % [param_name, value])
 	
@@ -582,7 +620,13 @@ func _on_option_changed(param_name: String, index: int):
 	print("🔑 Sound key: %s" % sound_key)
 	print("📝 Setting %s.%s = %s" % [sound_key, param_name, value])
 	
-	sound_parameters[sound_key][param_name]["value"] = value
+	# Safety check before accessing nested dictionary
+	if sound_parameters.has(sound_key) and sound_parameters[sound_key].has(param_name):
+		if sound_parameters[sound_key][param_name] is Dictionary:
+			sound_parameters[sound_key][param_name]["value"] = value
+		else:
+			print("⚠️ Invalid parameter structure for %s.%s" % [sound_key, param_name])
+			return
 	update_value_label(param_name, value)
 	print("✅ Option changed: %s = %s" % [param_name, value])
 	
@@ -662,12 +706,25 @@ func update_audio_immediately():
 		print("❌ Failed to generate audio stream")
 
 func get_current_parameter_values(sound_key: String) -> Dictionary:
-	"""Extract parameter values - Same as working version"""
+	"""Extract parameter values with safety checks"""
 	var params = {}
+	
+	if not sound_parameters.has(sound_key):
+		print("⚠️ No parameters found for sound key: %s" % sound_key)
+		return params
+	
 	var sound_config = sound_parameters[sound_key]
 	
 	for param_name in sound_config.keys():
-		params[param_name] = sound_config[param_name]["value"]
+		var param_config = sound_config[param_name]
+		
+		# Defensive check for parameter structure
+		if param_config is Dictionary and param_config.has("value"):
+			params[param_name] = param_config["value"]
+		else:
+			print("⚠️ Invalid parameter structure for %s.%s: %s" % [sound_key, param_name, param_config])
+			# Provide a safe default
+			params[param_name] = 0.0
 	
 	print("📊 Current %s parameters: %s" % [sound_key, params])
 	return params

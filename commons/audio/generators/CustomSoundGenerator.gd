@@ -69,6 +69,14 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_synare_3_disco_tom(data, sample_count, params)
 		AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX:
 			generate_custom_synare_3_cosmic_fx(data, sample_count, params)
+		AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER:
+			generate_custom_moog_kraftwerk_sequencer(data, sample_count, params)
+		AudioSynthesizer.SoundType.HERBIE_HANCOCK_MOOG_FUSION:
+			generate_custom_herbie_hancock_moog_fusion(data, sample_count, params)
+		AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR:
+			generate_custom_aphex_twin_modular(data, sample_count, params)
+		AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER:
+			generate_custom_flying_lotus_sampler(data, sample_count, params)
 	
 	return create_audio_stream(data)
 
@@ -1410,3 +1418,1053 @@ static func generate_custom_synare_3_cosmic_fx(data: PackedFloat32Array, sample_
 		envelope *= (1.0 + flutter)
 		
 		data[i] = filtered_wave * envelope * amplitude
+
+static func generate_custom_moog_kraftwerk_sequencer(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var bpm = params.get("bpm", 120.0)
+	var sequence_steps = params.get("sequence_steps", 16)
+	var base_note = params.get("base_note", "C3")
+	var sequence_pattern = params.get("sequence_pattern", "kraftwerk_classic")
+	var filter_cutoff = params.get("filter_cutoff", 800.0)
+	var filter_resonance = params.get("filter_resonance", 0.7)
+	var filter_envelope = params.get("filter_envelope", 0.6)
+	var oscillator_wave = params.get("oscillator_wave", "sawtooth")
+	var pulse_width = params.get("pulse_width", 0.5)
+	var oscillator_sync = params.get("oscillator_sync", "off")
+	var portamento = params.get("portamento", 0.05)
+	var attack = params.get("attack", 0.01)
+	var decay = params.get("decay", 0.3)
+	var sustain = params.get("sustain", 0.6)
+	var release = params.get("release", 0.2)
+	var accent_amount = params.get("accent_amount", 0.3)
+	var step_gate_length = params.get("step_gate_length", 0.8)
+	var analog_drift = params.get("analog_drift", 0.02)
+	var vintage_warmth = params.get("vintage_warmth", 0.3)
+	var stereo_spread = params.get("stereo_spread", 0.2)
+	var amplitude = params.get("amplitude", 0.7)
+	
+	print("🎹 MOOG KRAFTWERK SEQUENCER GENERATING - Electronic precision!")
+	
+	# Note frequency mapping
+	var note_frequencies = {
+		"C2": 65.41, "C#2": 69.30, "D2": 73.42, "D#2": 77.78, "E2": 82.41, "F2": 87.31,
+		"F#2": 92.50, "G2": 98.00, "G#2": 103.83, "A2": 110.00, "A#2": 116.54, "B2": 123.47,
+		"C3": 130.81, "C#3": 138.59, "D3": 146.83, "D#3": 155.56, "E3": 164.81, "F3": 174.61,
+		"F#3": 185.00, "G3": 196.00, "G#3": 207.65, "A3": 220.00, "A#3": 233.08, "B3": 246.94,
+		"C4": 261.63
+	}
+	
+	var base_freq = note_frequencies.get(base_note, 130.81)
+	
+	# Define sequence patterns inspired by Kraftwerk
+	var sequences = {
+		"kraftwerk_classic": [0, 0, 7, 0, 4, 0, 7, 0, 2, 2, 7, 2, 0, 4, 7, 0],  # Intervals from base
+		"autobahn": [0, 2, 4, 7, 4, 2, 0, -5, 0, 2, 4, 7, 4, 2, 0, 0],
+		"trans_europe": [0, 0, 0, 7, 7, 5, 4, 4, 2, 2, 0, 0, 7, 5, 4, 2],
+		"robots": [0, 4, 7, 12, 7, 4, 0, 0, 2, 5, 9, 14, 9, 5, 2, 0],
+		"radioactivity": [0, 3, 7, 10, 7, 3, 0, -2, 0, 3, 7, 10, 7, 3, 0, 0],
+		"custom": [0, 2, 4, 5, 7, 9, 11, 12, 11, 9, 7, 5, 4, 2, 0, 0]  # Default custom
+	}
+	
+	var sequence = sequences.get(sequence_pattern, sequences["kraftwerk_classic"])
+	
+	# Accent pattern (typical Kraftwerk accents)
+	var accents = [true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false]
+	
+	var step_duration = (60.0 / bpm) / 4.0  # 16th notes
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	
+	var previous_freq = base_freq
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var global_progress = t / duration
+		
+		# Calculate current step with evolving pattern
+		var pattern_evolution = sin(2.0 * PI * 0.05 * t)  # Slow pattern evolution
+		var evolved_step_duration = step_duration * (1.0 + pattern_evolution * 0.1)
+		var step_time = fmod(t, evolved_step_duration * sequence_steps)
+		var step_index = int(step_time / evolved_step_duration) % sequence.size()
+		var step_progress = fmod(step_time / evolved_step_duration, 1.0)
+		
+		# Calculate note frequency with progression
+		var semitone_offset = sequence[step_index]
+		
+		# Add octave jumps during progression
+		var octave_jump = 0
+		if global_progress > 0.5 and int(t * 4.0) % 32 < 8:  # Octave jumps in second half
+			octave_jump = 12
+		elif global_progress > 0.75 and int(t * 2.0) % 16 < 4:  # More octave jumps
+			octave_jump = -12
+		
+		var target_freq = base_freq * pow(2.0, (semitone_offset + octave_jump) / 12.0)
+		
+		# Apply portamento (pitch glide)
+		var current_freq = target_freq
+		if portamento > 0.0 and step_progress < portamento:
+			var glide_amount = step_progress / portamento
+			glide_amount = glide_amount * glide_amount * (3.0 - 2.0 * glide_amount)  # Smoothstep
+			current_freq = previous_freq + (target_freq - previous_freq) * glide_amount
+		else:
+			previous_freq = target_freq
+		
+		# Analog drift simulation
+		var drift = sin(2.0 * PI * analog_drift * t * 3.0) * analog_drift
+		drift += sin(2.0 * PI * analog_drift * t * 7.0) * analog_drift * 0.5
+		current_freq *= (1.0 + drift)
+		
+		# Generate oscillator wave
+		var wave = 0.0
+		match oscillator_wave:
+			"sawtooth":
+				wave = 2.0 * (current_freq * t - floor(current_freq * t)) - 1.0
+			"square":
+				wave = 1.0 if sin(2.0 * PI * current_freq * t) > 0 else -1.0
+			"triangle":
+				var saw = 2.0 * (current_freq * t - floor(current_freq * t)) - 1.0
+				wave = 2.0 * abs(saw) - 1.0
+			"pulse":
+				var phase = fmod(current_freq * t, 1.0)
+				wave = 1.0 if phase < pulse_width else -1.0
+		
+		# Oscillator sync (hard sync to fundamental)
+		if oscillator_sync == "on":
+			var sync_freq = base_freq
+			var sync_phase = fmod(sync_freq * t, 1.0)
+			if sync_phase < 0.01:  # Reset oscillator phase
+				wave *= 0.1
+		
+		# Classic Moog ladder filter simulation
+		var filter_env_amount = 1.0
+		if step_progress < 0.1:
+			filter_env_amount = 1.0 + filter_envelope * (step_progress / 0.1)
+		else:
+			filter_env_amount = 1.0 + filter_envelope * exp(-(step_progress - 0.1) * 3.0)
+		
+		var dynamic_cutoff = filter_cutoff * filter_env_amount
+		
+		# Add progressive filter sweeps
+		var sweep_freq = 0.1 + global_progress * 0.2  # Faster sweeps over time
+		var filter_sweep = sin(2.0 * PI * sweep_freq * t) * 600.0 * (1.0 + global_progress)
+		dynamic_cutoff += filter_sweep
+		
+		var filter_factor = clamp(dynamic_cutoff / 2000.0, 0.2, 1.0)
+		
+		# Apply resonance (Moog-style feedback)
+		var resonance_boost = 1.0 + filter_resonance * 1.8
+		filter_factor *= resonance_boost
+		
+		# Additional resonant peak at cutoff frequency
+		var resonant_peak = sin(2.0 * PI * dynamic_cutoff * t) * filter_resonance * 0.1
+		
+		var filtered_wave = (wave + resonant_peak) * filter_factor
+		
+		# Gate and envelope
+		var gate = 1.0
+		if step_progress > step_gate_length:
+			gate = 0.0
+		
+		# ADSR envelope per step
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var step_samples = step_duration * AudioSynthesizer.SAMPLE_RATE
+		var step_sample_index = int(step_progress * step_samples)
+		
+		if step_sample_index < attack_samples:
+			envelope = float(step_sample_index) / attack_samples
+		elif step_sample_index < attack_samples + decay_samples:
+			var decay_progress = (step_sample_index - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		elif gate > 0.0:
+			envelope = sustain
+		else:
+			# Release phase
+			var release_samples = release * AudioSynthesizer.SAMPLE_RATE
+			var release_index = step_sample_index - (step_gate_length * step_samples)
+			if release_index < release_samples:
+				envelope = sustain * (1.0 - release_index / release_samples)
+			else:
+				envelope = 0.0
+		
+		# Apply accent
+		var accent_multiplier = 1.0
+		if accents[step_index % accents.size()]:
+			accent_multiplier = 1.0 + accent_amount
+		
+		# Vintage warmth (subtle harmonic distortion)
+		var warm_wave = filtered_wave
+		if vintage_warmth > 0.0:
+			warm_wave = tanh(filtered_wave * (1.0 + vintage_warmth)) * (1.0 / (1.0 + vintage_warmth))
+		
+		# Stereo spread simulation (slight detuning)
+		var stereo_detune = sin(2.0 * PI * 0.1 * t) * stereo_spread * 0.01
+		var detuned_freq = current_freq * (1.0 + stereo_detune)
+		var stereo_component = sin(2.0 * PI * detuned_freq * t) * stereo_spread * 0.2
+		
+		# Final output
+		data[i] = (warm_wave + stereo_component) * envelope * accent_multiplier * amplitude * gate
+
+static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var moog_model = params.get("moog_model", "minimoog")
+	var chord_progression = params.get("chord_progression", "rockit")
+	var base_note = params.get("base_note", "C3")
+	var funk_rhythm = params.get("funk_rhythm", "syncopated")
+	var filter_cutoff = params.get("filter_cutoff", 1200.0)
+	var filter_resonance = params.get("filter_resonance", 0.6)
+	var filter_envelope = params.get("filter_envelope", 0.8)
+	var oscillator_detune = params.get("oscillator_detune", 0.05)
+	var oscillator_mix = params.get("oscillator_mix", 0.7)
+	var pulse_width_mod = params.get("pulse_width_mod", 0.4)
+	var lfo_rate = params.get("lfo_rate", 2.5)
+	var lfo_amount = params.get("lfo_amount", 0.3)
+	var attack = params.get("attack", 0.02)
+	var decay = params.get("decay", 0.4)
+	var sustain = params.get("sustain", 0.7)
+	var release = params.get("release", 0.6)
+	var polyphony = params.get("polyphony", 4)
+	var chord_voicing = params.get("chord_voicing", "jazz_7th")
+	var groove_feel = params.get("groove_feel", 0.15)
+	var velocity_sensitivity = params.get("velocity_sensitivity", 0.6)
+	var distortion = params.get("distortion", 0.2)
+	var chorus_depth = params.get("chorus_depth", 0.3)
+	var vintage_character = params.get("vintage_character", 0.4)
+	var space_reverb = params.get("space_reverb", 0.25)
+	var amplitude = params.get("amplitude", 0.8)
+	
+	print("🎹✨ HERBIE HANCOCK MOOG FUSION GENERATING - Jazz-funk revolution!")
+	
+	# Note frequency mapping
+	var note_frequencies = {
+		"C2": 65.41, "C#2": 69.30, "D2": 73.42, "D#2": 77.78, "E2": 82.41, "F2": 87.31,
+		"F#2": 92.50, "G2": 98.00, "G#2": 103.83, "A2": 110.00, "A#2": 116.54, "B2": 123.47,
+		"C3": 130.81, "C#3": 138.59, "D3": 146.83, "D#3": 155.56, "E3": 164.81, "F3": 174.61,
+		"F#3": 185.00, "G3": 196.00, "G#3": 207.65, "A3": 220.00, "A#3": 233.08, "B3": 246.94,
+		"C4": 261.63
+	}
+	
+	var root_freq = note_frequencies.get(base_note, 130.81)
+	
+	# Chord progressions inspired by Herbie's classics
+	var progressions = {
+		"rockit": [[0, 4, 7, 11], [-2, 2, 5, 9], [0, 4, 7, 11], [2, 6, 9, 13]],  # Future funk
+		"chameleon": [[0, 3, 7, 10], [5, 8, 12, 15], [0, 3, 7, 10], [3, 7, 10, 14]],  # Modal jazz
+		"cantaloupe": [[0, 4, 7, 10], [2, 5, 9, 12], [-3, 0, 4, 7], [0, 4, 7, 10]],  # Funky jazz
+		"future_shock": [[0, 4, 7, 11], [7, 11, 14, 18], [0, 4, 7, 11], [5, 9, 12, 16]],  # Electronic fusion
+		"jazz_fusion": [[0, 4, 7, 11], [2, 6, 9, 13], [5, 9, 12, 16], [0, 4, 7, 11]],  # Standard progression
+		"custom": [[0, 4, 7, 10], [2, 5, 9, 12], [7, 11, 14, 17], [0, 4, 7, 10]]  # Custom voicing
+	}
+	
+	var chord_sequence = progressions.get(chord_progression, progressions["rockit"])
+	
+	# Rhythm patterns
+	var rhythm_patterns = {
+		"straight": [1.0, 0.7, 0.8, 0.6, 1.0, 0.7, 0.8, 0.6],
+		"syncopated": [1.0, 0.3, 0.8, 0.4, 0.6, 0.9, 0.2, 0.7],
+		"swing": [1.0, 0.4, 0.8, 0.3, 0.9, 0.5, 0.7, 0.4],
+		"latin": [1.0, 0.6, 0.3, 0.8, 0.5, 0.9, 0.4, 0.7],
+		"afrobeat": [1.0, 0.5, 0.7, 0.3, 0.8, 0.4, 0.9, 0.6]
+	}
+	
+	var rhythm_pattern = rhythm_patterns.get(funk_rhythm, rhythm_patterns["syncopated"])
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var chord_duration = duration / chord_sequence.size()
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var global_progress = t / duration
+		
+		# Current chord
+		var chord_index = int(t / chord_duration) % chord_sequence.size()
+		var chord_progress = fmod(t / chord_duration, 1.0)
+		var current_chord = chord_sequence[chord_index]
+		
+		# Rhythm timing with groove
+		var beat_time = fmod(t * 4.0, 1.0)  # 4 beats per second
+		var rhythm_index = int(t * 32.0) % rhythm_pattern.size()  # 32nd note resolution
+		var rhythm_velocity = rhythm_pattern[rhythm_index]
+		
+		# Add groove feel (slight timing variations)
+		var groove_offset = sin(2.0 * PI * t * 16.0) * groove_feel * 0.01
+		beat_time += groove_offset
+		
+		# LFO modulation (global for all voices)
+		var lfo = sin(2.0 * PI * lfo_rate * t) * lfo_amount
+		
+		# Generate polyphonic voices
+		var total_wave = 0.0
+		var voice_count = min(polyphony, current_chord.size())
+		
+		for voice in range(voice_count):
+			var semitone_offset = current_chord[voice]
+			var note_freq = root_freq * pow(2.0, semitone_offset / 12.0)
+			
+			# Oscillator detuning for thickness
+			var detune_offset = (float(voice) / voice_count - 0.5) * oscillator_detune
+			note_freq *= (1.0 + detune_offset)
+			
+			# Apply LFO modulation to frequency
+			note_freq *= (1.0 + lfo * 0.02)
+			
+			# Generate different waveforms based on Moog model
+			var wave = 0.0
+			match moog_model:
+				"minimoog":
+					# Sawtooth with pulse mix
+					var saw = 2.0 * (note_freq * t - floor(note_freq * t)) - 1.0
+					var pulse_width = 0.5 + pulse_width_mod * lfo * 0.3
+					var pulse = 1.0 if fmod(note_freq * t, 1.0) < pulse_width else -1.0
+					wave = saw * oscillator_mix + pulse * (1.0 - oscillator_mix)
+				"micromoog":
+					# Single oscillator with sub-octave
+					var main = sin(2.0 * PI * note_freq * t)
+					var sub = sin(2.0 * PI * note_freq * 0.5 * t) * 0.3
+					wave = main + sub
+				"polymoog":
+					# Multi-oscillator ensemble
+					var osc1 = sin(2.0 * PI * note_freq * t)
+					var osc2 = sin(2.0 * PI * note_freq * 1.01 * t)
+					var osc3 = sin(2.0 * PI * note_freq * 0.99 * t)
+					wave = (osc1 + osc2 + osc3) / 3.0
+				"hybrid":
+					# Mix of all models
+					var saw = 2.0 * (note_freq * t - floor(note_freq * t)) - 1.0
+					var sine = sin(2.0 * PI * note_freq * t)
+					wave = saw * 0.6 + sine * 0.4
+			
+			# Voice-specific envelope
+			var voice_envelope = 1.0
+			var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+			var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+			var chord_samples = chord_progress * chord_duration * AudioSynthesizer.SAMPLE_RATE
+			
+			if chord_samples < attack_samples:
+				voice_envelope = chord_samples / attack_samples
+			elif chord_samples < attack_samples + decay_samples:
+				var decay_progress = (chord_samples - attack_samples) / decay_samples
+				voice_envelope = 1.0 - decay_progress * (1.0 - sustain)
+			else:
+				voice_envelope = sustain
+			
+			# Apply velocity sensitivity
+			voice_envelope *= (1.0 - velocity_sensitivity) + velocity_sensitivity * rhythm_velocity
+			
+			total_wave += wave * voice_envelope / voice_count
+		
+		# Moog ladder filter with envelope
+		var filter_env = 1.0
+		if chord_progress < 0.1:
+			filter_env = 1.0 + filter_envelope * (chord_progress / 0.1)
+		else:
+			filter_env = 1.0 + filter_envelope * exp(-(chord_progress - 0.1) * 2.0)
+		
+		var dynamic_cutoff = filter_cutoff * filter_env
+		dynamic_cutoff += lfo * 200.0  # LFO modulation of filter
+		
+		# Multi-stage filter (Moog ladder approximation)
+		var filter_factor = clamp(dynamic_cutoff / 3000.0, 0.3, 1.0)
+		var resonance_boost = 1.0 + filter_resonance * 2.0
+		
+		# Filter resonance feedback
+		var resonant_feedback = sin(2.0 * PI * dynamic_cutoff * t) * filter_resonance * 0.15
+		var filtered_wave = (total_wave + resonant_feedback) * filter_factor * resonance_boost
+		
+		# Harmonic distortion (subtle tube/transistor saturation)
+		if distortion > 0.0:
+			filtered_wave = tanh(filtered_wave * (1.0 + distortion * 2.0)) / (1.0 + distortion)
+		
+		# Vintage character (analog imperfections)
+		if vintage_character > 0.0:
+			var drift = sin(2.0 * PI * vintage_character * t * 0.1) * vintage_character * 0.02
+			var noise = (randf() - 0.5) * vintage_character * 0.005
+			filtered_wave *= (1.0 + drift + noise)
+		
+		# Chorus effect (classic jazz-fusion sound)
+		var chorus_wave = filtered_wave
+		if chorus_depth > 0.0:
+			var chorus_delay = 0.002 + chorus_depth * 0.003  # 2-5ms delay
+			var chorus_lfo = sin(2.0 * PI * 0.8 * t) * chorus_depth
+			var delayed_sample_index = i - int((chorus_delay + chorus_lfo * 0.001) * AudioSynthesizer.SAMPLE_RATE)
+			if delayed_sample_index >= 0 and delayed_sample_index < i:
+				var delayed_wave = filtered_wave * 0.7  # Approximate delayed signal
+				chorus_wave = (filtered_wave + delayed_wave) * 0.7
+		
+		# Spatial reverb (hall/plate reverb simulation)
+		var reverb_wave = chorus_wave
+		if space_reverb > 0.0:
+			var reverb_delay1 = int(0.03 * AudioSynthesizer.SAMPLE_RATE)  # 30ms
+			var reverb_delay2 = int(0.07 * AudioSynthesizer.SAMPLE_RATE)  # 70ms
+			if i >= reverb_delay1:
+				reverb_wave += chorus_wave * space_reverb * 0.3
+			if i >= reverb_delay2:
+				reverb_wave += chorus_wave * space_reverb * 0.2
+		
+		# Rhythm gating
+		var gate = rhythm_velocity
+		
+		# Final output with dynamics
+		data[i] = reverb_wave * gate * amplitude
+
+static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var complexity_level = params.get("complexity_level", "advanced")
+	var modular_algorithm = params.get("modular_algorithm", "nonlinear_chaos")
+	var oscillator_count = params.get("oscillator_count", 8)
+	var cross_modulation = params.get("cross_modulation", 0.7)
+	var feedback_amount = params.get("feedback_amount", 0.6)
+	var chaos_factor = params.get("chaos_factor", 0.4)
+	var frequency_ratio_1 = params.get("frequency_ratio_1", 1.618)  # Golden ratio
+	var frequency_ratio_2 = params.get("frequency_ratio_2", 2.718)  # Euler's number
+	var frequency_ratio_3 = params.get("frequency_ratio_3", 3.141)  # Pi
+	var sequence_pattern = params.get("sequence_pattern", "mathematical")
+	var filter_type = params.get("filter_type", "multi_pole")
+	var filter_cutoff = params.get("filter_cutoff", 2000.0)
+	var filter_resonance = params.get("filter_resonance", 0.8)
+	var filter_tracking = params.get("filter_tracking", 0.5)
+	var lfo_1_rate = params.get("lfo_1_rate", 0.3)
+	var lfo_2_rate = params.get("lfo_2_rate", 7.8)
+	var lfo_3_rate = params.get("lfo_3_rate", 23.4)
+	var lfo_sync = params.get("lfo_sync", "free_running")
+	var envelope_complexity = params.get("envelope_complexity", "multi_stage")
+	var attack = params.get("attack", 0.001)
+	var decay = params.get("decay", 0.2)
+	var sustain = params.get("sustain", 0.3)
+	var release = params.get("release", 2.0)
+	var granular_size = params.get("granular_size", 0.05)
+	var granular_density = params.get("granular_density", 20)
+	var phase_distortion = params.get("phase_distortion", 0.3)
+	var ring_modulation = params.get("ring_modulation", 0.2)
+	var bit_reduction = params.get("bit_reduction", 0.1)
+	var sample_rate_reduction = params.get("sample_rate_reduction", 0.05)
+	var stereo_width = params.get("stereo_width", 0.8)
+	var reverb_algorithm = params.get("reverb_algorithm", "algorithmic")
+	var reverb_amount = params.get("reverb_amount", 0.3)
+	var glitch_probability = params.get("glitch_probability", 0.15)
+	var mathematical_precision = params.get("mathematical_precision", 0.9)
+	var amplitude = params.get("amplitude", 0.7)
+	
+	print("🔬🎛️ APHEX TWIN MODULAR GENERATING - Experimental synthesis mastery!")
+	
+	# Mathematical constants and sequences
+	var golden_ratio = 1.618033988749
+	var euler_number = 2.718281828459
+	var pi_constant = 3.141592653589
+	
+	# Generate mathematical sequences based on pattern
+	var sequence_values = []
+	match sequence_pattern:
+		"mathematical":
+			for i in range(32):
+				sequence_values.append(pow(golden_ratio, i) - floor(pow(golden_ratio, i)))
+		"fibonacci":
+			var fib = [1, 1]
+			for i in range(30):
+				fib.append((fib[i] + fib[i + 1]) % 100)
+			sequence_values = fib
+		"prime_numbers":
+			sequence_values = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131]
+		"fractal":
+			for i in range(32):
+				var x = float(i) / 32.0
+				sequence_values.append(abs(sin(x * pi_constant * 4.0) * cos(x * pi_constant * 8.0)))
+		"random_walk":
+			var walk_value = 0.5
+			for i in range(32):
+				walk_value += (randf() - 0.5) * 0.1
+				walk_value = clamp(walk_value, 0.0, 1.0)
+				sequence_values.append(walk_value)
+		"human_feel":
+			for i in range(32):
+				var human_variation = sin(float(i) * 0.1) + randf() * 0.1 - 0.05
+				sequence_values.append(0.5 + human_variation * 0.3)
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var base_freq = 110.0  # A2
+	
+	# Musical progression setup
+	var chord_progression = [
+		[0, 4, 7],      # I - Major triad
+		[5, 9, 12],     # vi - Minor sixth
+		[3, 7, 10],     # IV - Major fourth  
+		[7, 11, 14]     # V - Major fifth
+	]
+	var progression_length = 4.0  # 4 seconds per chord
+	var beats_per_chord = 8  # 8 beats per chord change
+	
+	# Initialize feedback delay lines for complex modular routing
+	var feedback_buffers = []
+	var feedback_buffer_size = int(0.1 * AudioSynthesizer.SAMPLE_RATE)  # 100ms
+	for i in range(oscillator_count):
+		var buffer = []
+		buffer.resize(feedback_buffer_size)
+		buffer.fill(0.0)
+		feedback_buffers.append(buffer)
+	
+	var feedback_indices = []
+	feedback_indices.resize(oscillator_count)
+	feedback_indices.fill(0)
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var global_progress = t / duration
+		
+		# Musical progression timing
+		var chord_time = fmod(t, progression_length * chord_progression.size())
+		var current_chord_index = int(chord_time / progression_length) % chord_progression.size()
+		var chord_progress = fmod(chord_time / progression_length, 1.0)
+		var current_chord = chord_progression[current_chord_index]
+		
+		# Beat timing for rhythmic elements
+		var beat_rate = 2.0  # 2 beats per second (120 BPM)
+		var beat_time = fmod(t * beat_rate, 1.0)
+		var is_strong_beat = int(t * beat_rate) % 4 == 0  # Strong beat every 4 beats
+		
+		# Complex LFO network with tempo sync
+		var lfo_1 = sin(2.0 * PI * lfo_1_rate * t)
+		var lfo_2 = sin(2.0 * PI * lfo_2_rate * t + lfo_1 * 0.5)  # Cross-modulated
+		var lfo_3 = sin(2.0 * PI * lfo_3_rate * t + lfo_2 * 0.3)
+		
+		# Evolving chaos oscillator
+		var chaos_evolution = sin(2.0 * PI * 0.1 * t)  # Slow evolution
+		var chaos_x = sin(t * chaos_factor * (10.0 + chaos_evolution * 5.0))
+		var chaos_y = cos(t * chaos_factor * (15.0 + chaos_evolution * 3.0))
+		var chaos_z = sin(t * chaos_factor * 7.0) * cos(t * chaos_factor * 11.0)
+		var chaos_mod = (chaos_x + chaos_y + chaos_z) / 3.0 * chaos_factor
+		
+		# Sequence-driven frequency modulation with progression
+		var sequence_rate = 8.0 + chaos_mod * 4.0  # Variable sequence rate
+		var sequence_index = int(t * sequence_rate) % sequence_values.size()
+		var sequence_value = sequence_values[sequence_index]
+		
+		# Generate complex oscillator network
+		var total_wave = 0.0
+		var oscillator_outputs = []
+		
+		for osc in range(oscillator_count):
+			var osc_ratio = [frequency_ratio_1, frequency_ratio_2, frequency_ratio_3][osc % 3]
+			
+			# Map oscillator to chord notes for harmonic progression
+			var chord_note_index = osc % current_chord.size()
+			var semitone_offset = current_chord[chord_note_index]
+			var chord_freq = base_freq * pow(2.0, semitone_offset / 12.0)
+			
+			var osc_freq = chord_freq * osc_ratio * (1.0 + float(osc) * 0.05)
+			
+			# Apply sequence modulation with progression
+			osc_freq *= (1.0 + sequence_value * 0.3 * (1.0 + chord_progress))
+			
+			# Apply evolving LFO modulations
+			var lfo_intensity = 1.0 + global_progress * 0.5  # Intensify over time
+			osc_freq *= (1.0 + lfo_1 * 0.02 * lfo_intensity + lfo_2 * 0.01 + lfo_3 * 0.005)
+			
+			# Apply chaos modulation with beat sync
+			var beat_chaos = chaos_mod * (1.0 + (1.0 if is_strong_beat else 0.5))
+			osc_freq *= (1.0 + beat_chaos * 0.1)
+			
+			# Cross-modulation from other oscillators
+			var cross_mod = 0.0
+			if osc > 0:
+				for prev_osc in range(osc):
+					if prev_osc < oscillator_outputs.size():
+						cross_mod += oscillator_outputs[prev_osc] * cross_modulation * 0.1
+			
+			osc_freq *= (1.0 + cross_mod)
+			
+			# Generate base waveform based on algorithm
+			var wave = 0.0
+			match modular_algorithm:
+				"linear_fm":
+					var modulator_freq = osc_freq * 2.0
+					var fm_amount = lfo_1 * cross_modulation
+					wave = sin(2.0 * PI * osc_freq * t + sin(2.0 * PI * modulator_freq * t) * fm_amount)
+				"nonlinear_chaos":
+					var phase = 2.0 * PI * osc_freq * t
+					var chaotic_mod = sin(phase * 3.0) + cos(phase * 5.0) * 0.5
+					wave = sin(phase + chaotic_mod * chaos_factor)
+				"feedback_loops":
+					var feedback_index = feedback_indices[osc]
+					var feedback_sample = feedback_buffers[osc][feedback_index]
+					var phase = 2.0 * PI * osc_freq * t + feedback_sample * feedback_amount
+					wave = sin(phase)
+					# Store in feedback buffer
+					feedback_buffers[osc][feedback_index] = wave
+					feedback_indices[osc] = (feedback_index + 1) % feedback_buffer_size
+				"granular_madness":
+					var grain_freq = osc_freq * (1.0 + randf() * 0.2 - 0.1)
+					var grain_phase = fmod(t * granular_density, 1.0)
+					if grain_phase < granular_size:
+						wave = sin(2.0 * PI * grain_freq * t) * sin(grain_phase * PI / granular_size)
+					else:
+						wave = 0.0
+				"phase_distortion":
+					var phase = 2.0 * PI * osc_freq * t
+					var distorted_phase = phase + sin(phase * 2.0) * phase_distortion
+					wave = sin(distorted_phase)
+				"custom_patch":
+					# Complex custom algorithm
+					var phase1 = 2.0 * PI * osc_freq * t
+					var phase2 = 2.0 * PI * osc_freq * 1.5 * t
+					wave = sin(phase1) * cos(phase2) + sin(phase1 * 0.5) * 0.3
+			
+			# Apply ring modulation
+			if ring_modulation > 0.0 and osc > 0:
+				var ring_freq = base_freq * 3.0
+				wave *= (sin(2.0 * PI * ring_freq * t) * ring_modulation + (1.0 - ring_modulation))
+			
+			# Store oscillator output for cross-modulation
+			oscillator_outputs.append(wave)
+			total_wave += wave / oscillator_count
+		
+		# Complex multi-pole filter
+		var filter_env = 1.0
+		match envelope_complexity:
+			"simple_adsr":
+				var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+				var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+				var release_samples = release * AudioSynthesizer.SAMPLE_RATE
+				var total_samples = attack_samples + decay_samples + release_samples
+				
+				if i < attack_samples:
+					filter_env = float(i) / attack_samples
+				elif i < attack_samples + decay_samples:
+					var decay_progress = (i - attack_samples) / decay_samples
+					filter_env = 1.0 - decay_progress * (1.0 - sustain)
+				else:
+					filter_env = sustain
+			"multi_stage":
+				# Complex envelope with multiple stages
+				var stage_duration = duration / 5.0
+				var stage = int(global_progress * 5.0)
+				var stage_progress = fmod(global_progress * 5.0, 1.0)
+				match stage:
+					0: filter_env = stage_progress  # Attack
+					1: filter_env = 1.0 - stage_progress * 0.3  # Decay 1
+					2: filter_env = 0.7 + stage_progress * 0.2  # Rise
+					3: filter_env = 0.9 - stage_progress * 0.6  # Decay 2
+					4: filter_env = 0.3 * (1.0 - stage_progress)  # Release
+			"looping":
+				var loop_period = 0.5  # 500ms loops
+				var loop_progress = fmod(t / loop_period, 1.0)
+				filter_env = sin(loop_progress * 2.0 * PI) * 0.5 + 0.5
+			"triggered":
+				var trigger_rate = 4.0  # 4 Hz
+				var trigger_phase = fmod(t * trigger_rate, 1.0)
+				if trigger_phase < 0.1:
+					filter_env = trigger_phase / 0.1
+				else:
+					filter_env = exp(-(trigger_phase - 0.1) * 10.0)
+			"generative":
+				# AI-like generative envelope
+				var gen_freq1 = 0.7
+				var gen_freq2 = 1.3
+				filter_env = (sin(2.0 * PI * gen_freq1 * t) + cos(2.0 * PI * gen_freq2 * t)) * 0.25 + 0.5
+		
+		# Dynamic filter cutoff with progression
+		var dynamic_cutoff = filter_cutoff
+		
+		# Filter follows chord progression
+		var chord_brightness = float(current_chord_index) / chord_progression.size()
+		dynamic_cutoff *= (0.5 + chord_brightness + chord_progress * 0.3)
+		
+		dynamic_cutoff *= filter_env * filter_tracking
+		dynamic_cutoff += lfo_1 * 500.0 + lfo_2 * 200.0 + lfo_3 * 100.0
+		
+		# Beat-synced filter sweeps
+		var beat_sweep = sin(2.0 * PI * beat_rate * t) * 400.0
+		if is_strong_beat:
+			beat_sweep *= 2.0
+		dynamic_cutoff += beat_sweep
+		
+		dynamic_cutoff = clamp(dynamic_cutoff, 20.0, 20000.0)
+		
+		# Apply complex filter
+		var filtered_wave = total_wave
+		match filter_type:
+			"ladder":
+				var filter_factor = clamp(dynamic_cutoff / 5000.0, 0.1, 1.0)
+				filtered_wave *= filter_factor * (1.0 + filter_resonance)
+			"state_variable":
+				var cutoff_norm = dynamic_cutoff / 10000.0
+				var lowpass = total_wave * cutoff_norm
+				var highpass = total_wave * (1.0 - cutoff_norm)
+				var bandpass = (lowpass + highpass) * 0.5
+				filtered_wave = bandpass + lowpass * filter_resonance
+			"multi_pole":
+				# 4-pole filter simulation
+				for pole in range(4):
+					var pole_cutoff = dynamic_cutoff / pow(2.0, pole)
+					var pole_factor = clamp(pole_cutoff / 8000.0, 0.2, 1.0)
+					filtered_wave *= pole_factor
+				filtered_wave *= (1.0 + filter_resonance * 1.5)
+			"comb_filter":
+				var delay_samples = int(AudioSynthesizer.SAMPLE_RATE / dynamic_cutoff)
+				if i >= delay_samples:
+					filtered_wave += total_wave * filter_resonance * 0.7
+			"formant":
+				# Vocal formant filter
+				var formant_freq1 = dynamic_cutoff
+				var formant_freq2 = dynamic_cutoff * 2.2
+				var formant_freq3 = dynamic_cutoff * 3.8
+				filtered_wave = (sin(2.0 * PI * formant_freq1 * t) + 
+								sin(2.0 * PI * formant_freq2 * t) * 0.7 + 
+								sin(2.0 * PI * formant_freq3 * t) * 0.3) * total_wave * 0.3
+			"vocal":
+				# Vowel-like filtering
+				var vowel_formants = [800.0, 1200.0, 2400.0]  # "A" vowel
+				filtered_wave = 0.0
+				for formant in vowel_formants:
+					filtered_wave += sin(2.0 * PI * formant * t) * total_wave / 3.0
+		
+		# Digital processing effects
+		var processed_wave = filtered_wave
+		
+		# Bit reduction
+		if bit_reduction > 0.0:
+			var bits = 16.0 - bit_reduction * 12.0  # 16-bit down to 4-bit
+			processed_wave = floor(processed_wave * pow(2, bits)) / pow(2, bits)
+		
+		# Sample rate reduction
+		if sample_rate_reduction > 0.0:
+			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_reduction * 0.9)
+			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
+			if int(i / sample_step) != int((i - 1) / sample_step):
+				# Keep current sample
+				pass
+			else:
+				# Use previous sample (sample and hold)
+				if i > 0:
+					processed_wave = processed_wave  # This creates the aliasing effect
+		
+		# Stereo width processing
+		var stereo_detune = sin(2.0 * PI * 0.3 * t) * stereo_width * 0.01
+		var stereo_component = sin(2.0 * PI * base_freq * (1.0 + stereo_detune) * t) * stereo_width * 0.2
+		
+		# Reverb algorithm
+		var reverbed_wave = processed_wave
+		if reverb_amount > 0.0:
+			match reverb_algorithm:
+				"algorithmic":
+					# Algorithmic reverb (Schroeder)
+					var delay1 = int(0.03 * AudioSynthesizer.SAMPLE_RATE)
+					var delay2 = int(0.07 * AudioSynthesizer.SAMPLE_RATE)
+					var delay3 = int(0.13 * AudioSynthesizer.SAMPLE_RATE)
+					if i >= delay3:
+						reverbed_wave += processed_wave * reverb_amount * 0.4
+					if i >= delay2:
+						reverbed_wave += processed_wave * reverb_amount * 0.3
+					if i >= delay1:
+						reverbed_wave += processed_wave * reverb_amount * 0.2
+				"impossible":
+					# Impossible reverb (non-causal)
+					var future_delay = int(0.01 * AudioSynthesizer.SAMPLE_RATE)
+					if i + future_delay < sample_count:
+						reverbed_wave += processed_wave * reverb_amount * 0.3
+		
+		# Glitch processing
+		if randf() < glitch_probability * 0.001:  # Scale down probability
+			match int(randf() * 5):
+				0: processed_wave *= randf() * 3.0  # Volume glitch
+				1: processed_wave = -processed_wave  # Phase flip
+				2: processed_wave = 0.0  # Dropout
+				3: processed_wave = sin(2.0 * PI * 1000.0 * randf() * t)  # Noise burst
+				4: processed_wave = processed_wave * processed_wave  # Square distortion
+		
+		# Mathematical precision (quantization)
+		if mathematical_precision < 1.0:
+			var precision_factor = pow(10.0, mathematical_precision * 6.0)
+			processed_wave = round(processed_wave * precision_factor) / precision_factor
+		
+		# Final output with stereo component
+		data[i] = (reverbed_wave + stereo_component) * amplitude
+
+static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var beat_pattern = params.get("beat_pattern", "j_dilla_swing")
+	var sample_mode = params.get("sample_mode", "granular_chop")
+	var bpm = params.get("bpm", 85.0)
+	var swing_amount = params.get("swing_amount", 0.6)
+	var chop_density = params.get("chop_density", 16)
+	var sample_layers = params.get("sample_layers", 4)
+	var jazz_harmonies = params.get("jazz_harmonies", "complex_7th")
+	var polyrhythm_ratio = params.get("polyrhythm_ratio", "3_against_4")
+	var filter_type = params.get("filter_type", "sp404_vintage")
+	var filter_cutoff = params.get("filter_cutoff", 1500.0)
+	var filter_resonance = params.get("filter_resonance", 0.4)
+	var vintage_saturation = params.get("vintage_saturation", 0.3)
+	var tape_wow_flutter = params.get("tape_wow_flutter", 0.15)
+	var lfo_rate = params.get("lfo_rate", 1.2)
+	var lfo_chaos = params.get("lfo_chaos", 0.3)
+	var attack = params.get("attack", 0.005)
+	var decay = params.get("decay", 0.8)
+	var sustain = params.get("sustain", 0.4)
+	var release = params.get("release", 1.5)
+	var reverb_space = params.get("reverb_space", "chamber")
+	var reverb_amount = params.get("reverb_amount", 0.4)
+	var delay_time = params.get("delay_time", 0.125)
+	var delay_feedback = params.get("delay_feedback", 0.3)
+	var stutter_probability = params.get("stutter_probability", 0.2)
+	var glitch_amount = params.get("glitch_amount", 0.1)
+	var bass_emphasis = params.get("bass_emphasis", 0.5)
+	var high_freq_roll = params.get("high_freq_roll", 0.2)
+	var sample_rate_redux = params.get("sample_rate_redux", 0.1)
+	var bit_crush = params.get("bit_crush", 0.05)
+	var stereo_width = params.get("stereo_width", 0.7)
+	var experimental_factor = params.get("experimental_factor", 0.4)
+	var amplitude = params.get("amplitude", 0.8)
+	
+	print("🎛️🚁 FLYING LOTUS SAMPLER GENERATING - Genre-defying beat music!")
+	
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var beat_duration = 60.0 / bpm / 4.0  # 16th note duration
+	
+	# Jazz chord progressions inspired by Flying Lotus
+	var chord_progressions = {
+		"simple_triads": [[0, 4, 7], [2, 5, 9], [3, 7, 10], [5, 9, 12]],
+		"jazz_7th": [[0, 4, 7, 11], [2, 5, 9, 12], [3, 7, 10, 14], [5, 9, 12, 16]],
+		"complex_7th": [[0, 4, 7, 11, 14], [2, 5, 9, 12, 16], [3, 7, 10, 14, 17], [5, 9, 12, 16, 19]],
+		"modal_jazz": [[0, 3, 7, 10], [5, 8, 12, 15], [2, 5, 9, 12], [7, 10, 14, 17]],
+		"chromatic": [[0, 1, 4, 7], [3, 4, 7, 10], [6, 7, 10, 13], [9, 10, 13, 16]],
+		"atonal": [[0, 2, 6, 10], [1, 5, 8, 11], [4, 7, 11, 14], [3, 6, 9, 13]]
+	}
+	
+	var chord_progression = chord_progressions.get(jazz_harmonies, chord_progressions["complex_7th"])
+	
+	# Beat patterns
+	var beat_patterns = {
+		"straight": [1.0, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0],
+		"j_dilla_swing": [1.0, 0.2, 0.6, 0.3, 0.8, 0.1, 0.7, 0.4],
+		"off_kilter": [1.0, 0.3, 0.1, 0.7, 0.5, 0.2, 0.8, 0.4],
+		"polyrhythmic": [1.0, 0.6, 0.3, 0.8, 0.4, 0.9, 0.2, 0.7],
+		"broken_beat": [1.0, 0.0, 0.7, 0.2, 0.0, 0.9, 0.3, 0.0],
+		"future_funk": [1.0, 0.4, 0.8, 0.2, 0.6, 0.3, 0.9, 0.1]
+	}
+	
+	var rhythm_pattern = beat_patterns.get(beat_pattern, beat_patterns["j_dilla_swing"])
+	
+	# Polyrhythm ratios
+	var polyrhythm_ratios = {
+		"none": 1.0,
+		"3_against_2": 1.5,
+		"3_against_4": 0.75,
+		"5_against_4": 1.25,
+		"7_against_8": 0.875,
+		"complex": 1.618  # Golden ratio
+	}
+	
+	var poly_ratio = polyrhythm_ratios.get(polyrhythm_ratio, 0.75)
+	
+	# Initialize delay buffer
+	var delay_buffer_size = int(delay_time * AudioSynthesizer.SAMPLE_RATE)
+	var delay_buffer = []
+	delay_buffer.resize(delay_buffer_size)
+	delay_buffer.fill(0.0)
+	var delay_index = 0
+	
+	var base_freq = 110.0  # A2
+	
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var global_progress = t / duration
+		
+		# Current chord progression
+		var chord_duration = 4.0  # 4 seconds per chord
+		var chord_index = int(t / chord_duration) % chord_progression.size()
+		var chord_progress = fmod(t / chord_duration, 1.0)
+		var current_chord = chord_progression[chord_index]
+		
+		# Beat timing with swing
+		var beat_time = fmod(t / beat_duration, 1.0)
+		var beat_index = int(t / beat_duration) % rhythm_pattern.size()
+		var beat_velocity = rhythm_pattern[beat_index]
+		
+		# Apply swing
+		var swing_offset = 0.0
+		if beat_index % 2 == 1:  # Off-beats
+			swing_offset = swing_amount * 0.1
+		beat_time += swing_offset
+		
+		# Polyrhythmic layer
+		var poly_beat_time = fmod(t / (beat_duration * poly_ratio), 1.0)
+		var poly_velocity = sin(2.0 * PI * poly_beat_time) * 0.3 + 0.7
+		
+		# Sample chopping simulation
+		var chop_rate = float(chop_density) / 4.0  # Chops per beat
+		var chop_time = fmod(t * chop_rate, 1.0)
+		var chop_index = int(t * chop_rate) % 64
+		
+		# LFO with chaos
+		var lfo_base = sin(2.0 * PI * lfo_rate * t)
+		var lfo_chaos_mod = sin(2.0 * PI * lfo_rate * 3.7 * t) * lfo_chaos
+		var lfo = lfo_base * (1.0 + lfo_chaos_mod)
+		
+		# Tape wow and flutter
+		var wow_freq = 0.5  # 0.5 Hz wow
+		var flutter_freq = 15.0  # 15 Hz flutter
+		var wow = sin(2.0 * PI * wow_freq * t) * tape_wow_flutter * 0.02
+		var flutter = sin(2.0 * PI * flutter_freq * t) * tape_wow_flutter * 0.005
+		var tape_modulation = 1.0 + wow + flutter
+		
+		# Generate layered samples
+		var total_wave = 0.0
+		
+		# Grain size for granular effects (used across multiple modes)
+		var grain_size = 0.02 + lfo * 0.01  # 20-30ms grains
+		
+		for layer in range(sample_layers):
+			var layer_chord_index = layer % current_chord.size()
+			var semitone_offset = current_chord[layer_chord_index]
+			var layer_freq = base_freq * pow(2.0, semitone_offset / 12.0)
+			
+			# Apply tape modulation to frequency
+			layer_freq *= tape_modulation
+			
+			# Different sample modes
+			var layer_wave = 0.0
+			match sample_mode:
+				"classic_chop":
+					layer_wave = sin(2.0 * PI * layer_freq * t)
+					if chop_time > 0.8:  # Gate off during chop
+						layer_wave = 0.0
+				"granular_chop":
+					var grain_phase = fmod(chop_time, grain_size * chop_rate)
+					var grain_env = sin(grain_phase * PI / (grain_size * chop_rate))
+					layer_wave = sin(2.0 * PI * layer_freq * t) * grain_env
+				"time_stretch":
+					var stretch_factor = 1.0 + lfo * 0.3
+					layer_wave = sin(2.0 * PI * layer_freq * t * stretch_factor)
+				"pitch_shift":
+					var pitch_shift = 1.0 + lfo * 0.2
+					layer_wave = sin(2.0 * PI * layer_freq * pitch_shift * t)
+				"reverse_grain":
+					var reverse_time = grain_size - fmod(t, grain_size)
+					layer_wave = sin(2.0 * PI * layer_freq * reverse_time)
+				"stutter_mode":
+					if randf() < stutter_probability * 0.01:
+						var stutter_freq = layer_freq * (2.0 + randf() * 2.0)
+						layer_wave = sin(2.0 * PI * stutter_freq * t)
+					else:
+						layer_wave = sin(2.0 * PI * layer_freq * t)
+			
+			# Layer-specific processing
+			if layer == 0:  # Bass layer
+				layer_wave *= (1.0 + bass_emphasis)
+				layer_freq *= 0.5  # Sub bass
+			elif layer == sample_layers - 1:  # High layer
+				layer_wave *= (1.0 - high_freq_roll)
+			
+			total_wave += layer_wave / sample_layers
+		
+		# Apply beat velocity and polyrhythm
+		total_wave *= beat_velocity * poly_velocity
+		
+		# Filtering based on type
+		var filtered_wave = total_wave
+		match filter_type:
+			"sp404_vintage":
+				# SP-404 style low-pass with resonance
+				var cutoff_norm = filter_cutoff / 8000.0
+				filtered_wave *= cutoff_norm * (1.0 + filter_resonance)
+				# Add some vintage character
+				filtered_wave = tanh(filtered_wave * (1.0 + vintage_saturation)) / (1.0 + vintage_saturation)
+			"mpc_classic":
+				# MPC style filter with slight high cut
+				var mpc_factor = clamp(filter_cutoff / 6000.0, 0.4, 1.0)
+				filtered_wave *= mpc_factor
+			"analog_warmth":
+				# Warm analog filtering
+				filtered_wave *= clamp(filter_cutoff / 5000.0, 0.3, 1.0)
+				filtered_wave = tanh(filtered_wave * 1.2) * 0.8
+			"digital_harsh":
+				# Harsh digital filtering
+				var bits = 16.0 - bit_crush * 12.0
+				filtered_wave = floor(filtered_wave * pow(2, bits)) / pow(2, bits)
+			"formant_vocal":
+				# Vocal formant filtering
+				var formant_freq = filter_cutoff
+				filtered_wave *= sin(2.0 * PI * formant_freq * t) * 0.3 + 0.7
+			"comb_delays":
+				# Comb filter delays
+				var comb_delay = int(AudioSynthesizer.SAMPLE_RATE / filter_cutoff)
+				if i >= comb_delay:
+					filtered_wave += total_wave * filter_resonance * 0.5
+		
+		# Sample rate reduction
+		if sample_rate_redux > 0.0:
+			var reduced_rate = AudioSynthesizer.SAMPLE_RATE * (1.0 - sample_rate_redux * 0.8)
+			var sample_step = AudioSynthesizer.SAMPLE_RATE / reduced_rate
+			if int(i / sample_step) == int((i - 1) / sample_step):
+				# Hold previous sample
+				pass
+		
+		# ADSR envelope per chop
+		var envelope = 1.0
+		var attack_samples = attack * AudioSynthesizer.SAMPLE_RATE
+		var decay_samples = decay * AudioSynthesizer.SAMPLE_RATE
+		var chop_samples = chop_time * (AudioSynthesizer.SAMPLE_RATE / chop_rate)
+		
+		if chop_samples < attack_samples:
+			envelope = chop_samples / attack_samples
+		elif chop_samples < attack_samples + decay_samples:
+			var decay_progress = (chop_samples - attack_samples) / decay_samples
+			envelope = 1.0 - decay_progress * (1.0 - sustain)
+		else:
+			envelope = sustain
+		
+		# Apply envelope
+		filtered_wave *= envelope
+		
+		# Delay effect
+		var delayed_sample = delay_buffer[delay_index]
+		filtered_wave += delayed_sample * delay_feedback
+		delay_buffer[delay_index] = filtered_wave
+		delay_index = (delay_index + 1) % delay_buffer_size
+		
+		# Glitch effects
+		if randf() < glitch_amount * 0.001:
+			match int(randf() * 4):
+				0: filtered_wave *= randf() * 3.0  # Volume spike
+				1: filtered_wave = -filtered_wave  # Phase flip
+				2: filtered_wave = 0.0  # Dropout
+				3: filtered_wave = sin(2.0 * PI * 1000.0 * randf() * t)  # Noise burst
+		
+		# Reverb simulation
+		var reverbed_wave = filtered_wave
+		if reverb_amount > 0.0:
+			match reverb_space:
+				"room":
+					var room_delay = int(0.02 * AudioSynthesizer.SAMPLE_RATE)
+					if i >= room_delay:
+						reverbed_wave += filtered_wave * reverb_amount * 0.3
+				"chamber":
+					var chamber_delay1 = int(0.04 * AudioSynthesizer.SAMPLE_RATE)
+					var chamber_delay2 = int(0.08 * AudioSynthesizer.SAMPLE_RATE)
+					if i >= chamber_delay1:
+						reverbed_wave += filtered_wave * reverb_amount * 0.4
+					if i >= chamber_delay2:
+						reverbed_wave += filtered_wave * reverb_amount * 0.2
+				"hall":
+					var hall_delay1 = int(0.06 * AudioSynthesizer.SAMPLE_RATE)
+					var hall_delay2 = int(0.12 * AudioSynthesizer.SAMPLE_RATE)
+					var hall_delay3 = int(0.18 * AudioSynthesizer.SAMPLE_RATE)
+					if i >= hall_delay1:
+						reverbed_wave += filtered_wave * reverb_amount * 0.3
+					if i >= hall_delay2:
+						reverbed_wave += filtered_wave * reverb_amount * 0.2
+					if i >= hall_delay3:
+						reverbed_wave += filtered_wave * reverb_amount * 0.1
+				"space_delay":
+					var space_delay = int(0.25 * AudioSynthesizer.SAMPLE_RATE)
+					if i >= space_delay:
+						reverbed_wave += filtered_wave * reverb_amount * 0.6
+		
+		# Stereo width processing
+		var stereo_detune = sin(2.0 * PI * 0.7 * t) * stereo_width * 0.02
+		var stereo_component = sin(2.0 * PI * base_freq * (1.0 + stereo_detune) * t) * stereo_width * 0.1
+		
+		# Experimental processing
+		if experimental_factor > 0.0:
+			# Add some experimental modulation
+			var exp_mod1 = sin(2.0 * PI * 1.618 * t) * experimental_factor * 0.1
+			var exp_mod2 = cos(2.0 * PI * 2.718 * t) * experimental_factor * 0.05
+			reverbed_wave *= (1.0 + exp_mod1 + exp_mod2)
+		
+		# Final output
+		data[i] = (reverbed_wave + stereo_component) * amplitude
