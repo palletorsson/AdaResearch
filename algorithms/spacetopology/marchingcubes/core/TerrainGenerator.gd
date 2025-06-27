@@ -51,6 +51,9 @@ func setup_components(seed_value: int = -1):
 	marching_cubes = MarchingCubesGenerator.new()
 	marching_cubes.threshold = surface_threshold
 	
+	# CRITICAL: Pass self reference to marching cubes for GLSL-style direct density evaluation
+	marching_cubes.terrain_generator_ref = self
+	
 	# Initialize collision generator
 	collision_generator = CaveCollisionGenerator.new()
 	
@@ -157,7 +160,7 @@ func create_terrain_voxel_grid():
 	
 	print("Creating %dx%dx%d terrain chunks" % [chunks_x, chunks_y, chunks_z])
 	
-	# Create chunks with proper coverage - FIXED positioning
+	# Create chunks with proper coverage and neighbor connectivity (inspired by reference)
 	for x in range(chunks_x):
 		for y in range(chunks_y):
 			for z in range(chunks_z):
@@ -168,9 +171,53 @@ func create_terrain_voxel_grid():
 				)
 				
 				var chunk = VoxelChunk.new(chunk_size, chunk_world_pos, voxel_scale)
+				chunk.chunk_name = "Chunk_%d_%d_%d" % [x, y, z]  # Better debugging
 				terrain_chunks.append(chunk)
 	
+	# CRITICAL: Setup neighbor connections (inspired by reference architecture)
+	setup_chunk_neighbors(chunks_x, chunks_y, chunks_z)
+	
 	print("Created %d terrain chunks" % terrain_chunks.size())
+
+func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int):
+	"""Setup neighbor connections between chunks for seamless boundaries (inspired by reference)"""
+	print("TerrainGenerator: Setting up chunk neighbor connections...")
+	
+	for x in range(chunks_x):
+		for y in range(chunks_y):
+			for z in range(chunks_z):
+				var chunk_index = x + y * chunks_x + z * chunks_x * chunks_y
+				if chunk_index >= terrain_chunks.size():
+					continue
+					
+				var current_chunk = terrain_chunks[chunk_index]
+				
+				# Connect to neighboring chunks in all 6 directions
+				var neighbor_offsets = [
+					Vector3i(1, 0, 0),   # Right
+					Vector3i(-1, 0, 0),  # Left  
+					Vector3i(0, 1, 0),   # Up
+					Vector3i(0, -1, 0),  # Down
+					Vector3i(0, 0, 1),   # Forward
+					Vector3i(0, 0, -1)   # Back
+				]
+				
+				for offset in neighbor_offsets:
+					var neighbor_x = x + offset.x
+					var neighbor_y = y + offset.y
+					var neighbor_z = z + offset.z
+					
+					# Check bounds
+					if (neighbor_x >= 0 and neighbor_x < chunks_x and
+						neighbor_y >= 0 and neighbor_y < chunks_y and
+						neighbor_z >= 0 and neighbor_z < chunks_z):
+						
+						var neighbor_index = neighbor_x + neighbor_y * chunks_x + neighbor_z * chunks_x * chunks_y
+						if neighbor_index < terrain_chunks.size():
+							var neighbor_chunk = terrain_chunks[neighbor_index]
+							current_chunk.set_neighbor_chunk(offset, neighbor_chunk)
+	
+	print("TerrainGenerator: Chunk neighbor connections established")
 
 func generate_height_field_async():
 	"""Generate height field data asynchronously"""
@@ -186,11 +233,19 @@ func generate_height_field_async():
 			await Engine.get_main_loop().process_frame
 
 func fill_chunk_with_terrain(chunk: VoxelChunk):
-	"""Fill a chunk with terrain height field data"""
+	"""Fill a chunk with terrain height field data - BLOG POST PATTERN"""
+	# Calculate chunk offset in world space (critical for seamless chunks)
+	var chunk_offset = chunk.world_position
+	
 	for x in range(chunk.chunk_size.x + 1):
 		for y in range(chunk.chunk_size.y + 1):
 			for z in range(chunk.chunk_size.z + 1):
-				var world_pos = chunk.local_to_world(Vector3i(x, y, z))
+				# CRITICAL: Use world-space coordinates for noise sampling (from blog post)
+				var world_x = chunk_offset.x + x * chunk.voxel_scale
+				var world_y = chunk_offset.y + y * chunk.voxel_scale
+				var world_z = chunk_offset.z + z * chunk.voxel_scale
+				
+				var world_pos = Vector3(world_x, world_y, world_z)
 				var density = calculate_terrain_density(world_pos)
 				chunk.set_density(Vector3i(x, y, z), density)
 
@@ -206,7 +261,7 @@ func calculate_terrain_density(world_pos: Vector3) -> float:
 		return 0.8  # Simple solid density, NO complex noise variations
 	else:
 		# Simple air above
-		return 0.0
+			return 0.0
 	
 	# DEBUG: Print to confirm this function is being called correctly
 	# Uncomment for detailed debugging:

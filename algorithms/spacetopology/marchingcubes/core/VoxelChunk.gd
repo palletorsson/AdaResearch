@@ -9,6 +9,9 @@ class_name VoxelChunk
 @export var world_position: Vector3 = Vector3.ZERO
 @export var voxel_scale: float = 1.0
 
+# Chunk identification
+var chunk_name: String = ""
+
 # 3D array storing density values (0.0 to 1.0)
 var density_data: Array = []
 var is_dirty: bool = true
@@ -156,14 +159,15 @@ func set_neighbor_chunk(direction: Vector3i, chunk: VoxelChunk):
 	neighbors[key] = chunk
 
 func get_density_with_neighbors(local_pos: Vector3i) -> float:
-	"""Get density considering neighboring chunks for seamless edges"""
+	"""Get density considering neighboring chunks for seamless edges (enhanced from reference patterns)"""
 	if is_valid_position(local_pos):
 		return get_density(local_pos)
 	
-	# Check if we need to sample from a neighbor
+	# Determine which neighbor chunk to sample from
 	var neighbor_dir = Vector3i.ZERO
 	var neighbor_pos = local_pos
 	
+	# X direction
 	if local_pos.x < 0:
 		neighbor_dir.x = -1
 		neighbor_pos.x = chunk_size.x + local_pos.x
@@ -171,14 +175,32 @@ func get_density_with_neighbors(local_pos: Vector3i) -> float:
 		neighbor_dir.x = 1
 		neighbor_pos.x = local_pos.x - chunk_size.x
 		
-	# Similar logic for y and z...
+	# Y direction  
+	if local_pos.y < 0:
+		neighbor_dir.y = -1
+		neighbor_pos.y = chunk_size.y + local_pos.y
+	elif local_pos.y > chunk_size.y:
+		neighbor_dir.y = 1
+		neighbor_pos.y = local_pos.y - chunk_size.y
+		
+	# Z direction
+	if local_pos.z < 0:
+		neighbor_dir.z = -1
+		neighbor_pos.z = chunk_size.z + local_pos.z
+	elif local_pos.z > chunk_size.z:
+		neighbor_dir.z = 1
+		neighbor_pos.z = local_pos.z - chunk_size.z
 	
+	# Try to get from neighbor chunk
 	var neighbor_key = str(neighbor_dir)
 	if neighbors.has(neighbor_key):
 		var neighbor_chunk = neighbors[neighbor_key] as VoxelChunk
-		return neighbor_chunk.get_density(neighbor_pos)
+		if neighbor_chunk != null:
+			# Recursive call to handle multi-hop neighbor access
+			return neighbor_chunk.get_density_with_neighbors(neighbor_pos)
 	
-	return 0.0  # Default to empty space outside chunks
+	# No neighbor found - return solid boundary (prevents holes like GLSL approach)
+	return 1.0
 
 func clear():
 	"""Clear all density data"""
