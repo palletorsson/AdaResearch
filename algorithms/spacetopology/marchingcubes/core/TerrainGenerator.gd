@@ -145,7 +145,7 @@ func generate_terrain_async() -> Array[MeshInstance3D]:
 	return terrain_meshes
 
 func create_terrain_voxel_grid():
-	"""Create voxel chunks for terrain generation"""
+	"""Create voxel chunks for terrain generation - FIXED FOR SEAMLESS BOUNDARIES"""
 	terrain_chunks.clear()
 	
 	# Calculate effective chunk size in world units
@@ -153,31 +153,31 @@ func create_terrain_voxel_grid():
 	var chunk_world_size_z = chunk_size.z * voxel_scale
 	var chunk_world_size_y = chunk_size.y * voxel_scale
 	
-	# Calculate number of chunks needed - FIXED for proper terrain coverage
-	var chunks_x = int(ceil(terrain_size.x / chunk_world_size_x)) + 1  # Extra chunk for safety
-	var chunks_z = int(ceil(terrain_size.y / chunk_world_size_z)) + 1
-	var chunks_y = 1  # Single layer for terrain (not deep cave system)
+	# FIXED: No overlap needed - chunks will share boundary vertices through direct calculation
+	var chunks_x = int(ceil(terrain_size.x / chunk_world_size_x))
+	var chunks_z = int(ceil(terrain_size.y / chunk_world_size_z))
+	var chunks_y = 1  # Single layer for terrain
 	
-	print("Creating %dx%dx%d terrain chunks" % [chunks_x, chunks_y, chunks_z])
+	print("Creating %dx%dx%d terrain chunks (seamless boundaries)" % [chunks_x, chunks_y, chunks_z])
 	
-	# Create chunks with proper coverage and neighbor connectivity (inspired by reference)
+	# Create chunks with precise positioning for seamless boundaries
 	for x in range(chunks_x):
 		for y in range(chunks_y):
 			for z in range(chunks_z):
 				var chunk_world_pos = Vector3(
 					x * chunk_world_size_x - terrain_size.x * 0.5,
-					-terrain_height * 0.5,  # Center chunks around terrain height
+					-terrain_height * 0.5,
 					z * chunk_world_size_z - terrain_size.y * 0.5
 				)
 				
 				var chunk = VoxelChunk.new(chunk_size, chunk_world_pos, voxel_scale)
-				chunk.chunk_name = "Chunk_%d_%d_%d" % [x, y, z]  # Better debugging
+				chunk.chunk_name = "TerrainChunk_%d_%d_%d" % [x, y, z]
 				terrain_chunks.append(chunk)
 	
-	# CRITICAL: Setup neighbor connections (inspired by reference architecture)
+	# Setup neighbor connections for reference (not used for density lookup anymore)
 	setup_chunk_neighbors(chunks_x, chunks_y, chunks_z)
 	
-	print("Created %d terrain chunks" % terrain_chunks.size())
+	print("Created %d terrain chunks with seamless boundary handling" % terrain_chunks.size())
 
 func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int):
 	"""Setup neighbor connections between chunks for seamless boundaries (inspired by reference)"""
@@ -233,14 +233,13 @@ func generate_height_field_async():
 			await Engine.get_main_loop().process_frame
 
 func fill_chunk_with_terrain(chunk: VoxelChunk):
-	"""Fill a chunk with terrain height field data - BLOG POST PATTERN"""
-	# Calculate chunk offset in world space (critical for seamless chunks)
+	"""Fill a chunk with terrain height field data - FIXED FOR CONSISTENT BOUNDARIES"""
 	var chunk_offset = chunk.world_position
 	
-	for x in range(chunk.chunk_size.x + 1):
+	# FIXED: Generate density data including boundary voxels for marching cubes
+	for x in range(chunk.chunk_size.x + 1):  # +1 for marching cubes boundary
 		for y in range(chunk.chunk_size.y + 1):
 			for z in range(chunk.chunk_size.z + 1):
-				# CRITICAL: Use world-space coordinates for noise sampling (from blog post)
 				var world_x = chunk_offset.x + x * chunk.voxel_scale
 				var world_y = chunk_offset.y + y * chunk.voxel_scale
 				var world_z = chunk_offset.z + z * chunk.voxel_scale
@@ -248,24 +247,28 @@ func fill_chunk_with_terrain(chunk: VoxelChunk):
 				var world_pos = Vector3(world_x, world_y, world_z)
 				var density = calculate_terrain_density(world_pos)
 				chunk.set_density(Vector3i(x, y, z), density)
+				
+				# DEBUG: Log boundary voxels
+				if x == chunk.chunk_size.x or y == chunk.chunk_size.y or z == chunk.chunk_size.z:
+					if x < 2 and z < 2:  # Only log first few for debugging
+						print("🎯 BOUNDARY VOXEL: chunk %s pos (%d,%d,%d) world %v density %.3f" % 
+							[chunk.chunk_name, x, y, z, world_pos, density])
 
 func calculate_terrain_density(world_pos: Vector3) -> float:
-	"""Calculate density value for terrain at world position - DEBUG VERSION"""
-	# Sample basic height WITHOUT complex noise interactions
+	"""Calculate density value for terrain at world position - SIMPLIFIED & ROBUST"""
+	# Use the same simple, consistent approach as successful walkgrids
 	var height_value = height_noise.get_noise_2d(world_pos.x, world_pos.z)
-	var surface_height = height_value * terrain_height * 0.5  # Simple height calculation
+	var surface_height = height_value * terrain_height * 0.5
 	
-	# ULTRA-SIMPLE density calculation to match boundary logic success
+	# CRITICAL FIX: Use simple binary classification like walkgrids do
+	# Walkgrids work because they have clear solid/empty distinction
 	if world_pos.y <= surface_height:
-		# Mimic the successful boundary logic: return consistent solid density
-		return 0.8  # Simple solid density, NO complex noise variations
+		return 1.0  # Solid terrain (above threshold)
 	else:
-		# Simple air above
-			return 0.0
+		return 0.0  # Empty air (below threshold)
 	
-	# DEBUG: Print to confirm this function is being called correctly
-	# Uncomment for detailed debugging:
-	# print("Interior density: %.3f at pos %v (surface: %.2f)" % [final_density, world_pos, surface_height])
+	# This creates the same clear boundary as your successful walkgrids
+	# No complex transitions that can cause marching cubes configuration issues
 
 func calculate_surface_height(x: float, z: float) -> float:
 	"""Calculate terrain surface height at given X,Z coordinates"""

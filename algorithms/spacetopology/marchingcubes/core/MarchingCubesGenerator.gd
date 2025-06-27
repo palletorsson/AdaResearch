@@ -18,7 +18,7 @@ func _init():
 	lookup_tables = MarchingCubesLookupTables.new()
 
 func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
-	"""Generate a mesh from a voxel chunk using marching cubes"""
+	"""Generate a mesh from a voxel chunk using marching cubes - ROBUST VERSION"""
 	if chunk.cached_mesh != null and not chunk.is_dirty:
 		return chunk.cached_mesh
 	
@@ -26,27 +26,29 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	var normals: PackedVector3Array = []
 	var indices: PackedInt32Array = []
 	
-	# Process each cube in the chunk (excluding the last layer to avoid boundary issues)
+	var triangle_count = 0
+	
+	# Process each cube in the chunk 
 	for x in range(chunk.chunk_size.x):
 		for y in range(chunk.chunk_size.y):
 			for z in range(chunk.chunk_size.z):
-				# Ensure we have valid voxel data for all 8 cube vertices
-				if x < chunk.chunk_size.x and y < chunk.chunk_size.y and z < chunk.chunk_size.z:
-					var cube_vertices_data = get_cube_vertices(chunk, Vector3i(x, y, z))
-					if is_valid_cube_data(cube_vertices_data):
-						var triangles = march_cube(cube_vertices_data)
-						
-						# Add triangles to mesh arrays
-						for triangle in triangles:
-							if triangle.vertices.size() == 3:
-								var start_index = vertices.size()
-								vertices.append_array(triangle.vertices)
-								normals.append_array(triangle.normals)
-								
-								# Add indices for the triangle
-								indices.append(start_index)
-								indices.append(start_index + 1)
-								indices.append(start_index + 2)
+				var cube_vertices_data = get_cube_vertices(chunk, Vector3i(x, y, z))
+				if is_valid_cube_data(cube_vertices_data):
+					var triangles = march_cube(cube_vertices_data)
+					
+					# Add triangles to mesh arrays
+					for triangle in triangles:
+						if triangle.vertices.size() == 3 and triangle.normals.size() == 3:
+							var start_index = vertices.size()
+							vertices.append_array(triangle.vertices)
+							normals.append_array(triangle.normals)
+							
+							# Add indices for the triangle (ensure proper winding)
+							indices.append(start_index)
+							indices.append(start_index + 1)
+							indices.append(start_index + 2)
+							
+							triangle_count += 1
 	
 	# Create the mesh
 	var mesh = ArrayMesh.new()
@@ -57,21 +59,15 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 		arrays[Mesh.ARRAY_NORMAL] = normals
 		arrays[Mesh.ARRAY_INDEX] = indices
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		
+		print("MarchingCubes: Generated %d triangles, %d vertices for chunk %s" % 
+			[triangle_count, vertices.size(), chunk.chunk_name])
+	else:
+		print("MarchingCubes: WARNING - No geometry generated for chunk %s" % chunk.chunk_name)
 	
 	# Cache the result
 	chunk.cached_mesh = mesh
 	chunk.is_dirty = false
-	
-	print("MarchingCubes: Generated mesh with %d vertices, %d triangles, %d indices" % [vertices.size(), indices.size() / 3, indices.size()])
-	
-	# DEBUG: Check if mesh has proper surfaces
-	if mesh.get_surface_count() > 0:
-		var surface_arrays = mesh.surface_get_arrays(0)
-		var mesh_vertices = surface_arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
-		var mesh_indices = surface_arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
-		print("MarchingCubes: Surface has %d vertices, %d indices" % [mesh_vertices.size(), mesh_indices.size()])
-	else:
-		print("MarchingCubes: WARNING - No surfaces in generated mesh!")
 	
 	return mesh
 
@@ -90,7 +86,7 @@ func is_valid_cube_data(cube_data: Dictionary) -> bool:
 	return true
 
 func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
-	"""Get the 8 vertex data for a cube at the given position - GLSL-INSPIRED VERSION"""
+	"""Get the 8 vertex data for a cube at the given position - FIXED VERSION"""
 	var cube_data = {
 		"positions": [],
 		"densities": []
@@ -101,8 +97,13 @@ func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
 		var vert_pos = cube_pos + Vector3i(cube_verts[i])
 		var world_pos = chunk.local_to_world(vert_pos)
 		
-		# CRITICAL FIX: Use direct evaluation instead of stored grid values
-		var density = evaluate_density_at_world_position(world_pos, chunk)
+		# FIXED: Use consistent density evaluation for all vertices
+		var density: float
+		if chunk.is_valid_position(vert_pos):
+			density = chunk.get_density(vert_pos)
+		else:
+			# For vertices outside chunk, use direct terrain calculation
+			density = calculate_direct_terrain_density(world_pos)
 		
 		cube_data.positions.append(world_pos)
 		cube_data.densities.append(density)
@@ -110,29 +111,10 @@ func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
 	return cube_data
 
 func evaluate_density_at_world_position(world_pos: Vector3, chunk: VoxelChunk) -> float:
-	"""Seamless density evaluation using neighbor chunks (inspired by reference implementation)"""
-	var local_pos = chunk.world_to_local(world_pos)
-	
-	# FIRST: Try neighbor-aware lookup (inspired by reference architecture)
-	var neighbor_density = chunk.get_density_with_neighbors(local_pos)
-	if neighbor_density > 0.0:  # Valid density from chunk network
-		return neighbor_density
-	
-	# FALLBACK: Direct evaluation for missing data
-	if chunk.is_valid_position(local_pos):
-		var stored_density = chunk.get_density(local_pos)
-		
-		# DEBUG: Check for problematic stored values
-		if stored_density < 0.1:
-			var direct_density = calculate_direct_terrain_density(world_pos)
-			if abs(direct_density - stored_density) > 0.2:
-				print("🔄 CHUNK BOUNDARY FIX: stored %.3f -> direct %.3f at %v" % [stored_density, direct_density, world_pos])
-			return direct_density
-		
-		return stored_density
-	else:
-		# Final fallback: direct evaluation (like GLSL/reference approach)
-		return calculate_direct_terrain_density(world_pos)
+	"""Seamless density evaluation using neighbor chunks - DEPRECATED"""
+	# This function is no longer used - density evaluation is now handled directly
+	# in get_cube_vertices for consistency
+	return calculate_direct_terrain_density(world_pos)
 
 func calculate_direct_terrain_density(world_pos: Vector3) -> float:
 	"""Direct terrain density calculation - independent of chunk storage"""
@@ -157,48 +139,42 @@ func calculate_direct_terrain_density(world_pos: Vector3) -> float:
 		return 0.0  # Air above
 
 func get_safe_density(chunk: VoxelChunk, local_pos: Vector3i) -> float:
-	"""Get density with safe boundary handling - ENHANCED DEBUG VERSION"""
+	"""Get density with safe boundary handling - FIXED FOR SEAMLESS TERRAIN"""
 	if chunk.is_valid_position(local_pos):
 		var interior_density = chunk.get_density(local_pos)
-	
-		# DEBUG: Check for suspiciously low densities
-		if interior_density < 0.3:
-			print("⚠️ LOW INTERIOR DENSITY: %.3f at local pos %v in chunk %s" % [interior_density, local_pos, chunk.chunk_name])
-		
 		return interior_density
 	
-	# CRITICAL: Boundary case - this should prevent holes
-	var boundary_density = 1.0  # Default to solid material outside chunk bounds
-	print("🔴 BOUNDARY HIT at local pos %v - returning %.3f (should prevent holes)" % [local_pos, boundary_density])
+	# FIXED: Use world coordinates for boundary density evaluation
+	var world_pos = chunk.local_to_world(local_pos)
+	var boundary_density = calculate_direct_terrain_density(world_pos)
+	
+	# DEBUG: Only print when debugging specific areas
+	if local_pos.x == chunk.chunk_size.x or local_pos.y == chunk.chunk_size.y or local_pos.z == chunk.chunk_size.z:
+		print("🔗 BOUNDARY SEAMLESS: pos %v -> density %.3f (world: %v)" % [local_pos, boundary_density, world_pos])
+	
 	return boundary_density
 
 func march_cube(cube_data: Dictionary) -> Array:
-	"""Apply marching cubes algorithm to a single cube - BLOG POST PATTERN"""
+	"""Apply marching cubes algorithm to a single cube - FIXED FOR BINARY DENSITY"""
 	var triangles = []
 	
-	# BLOG POST PATTERN: Bit manipulation for configuration index
+	# Calculate configuration index using threshold comparison
 	var config_index = 0
-	# Use the exact same order as the blog post for consistency
-	config_index |= int(cube_data.densities[0] < threshold) << 0  # vertex 0
-	config_index |= int(cube_data.densities[1] < threshold) << 1  # vertex 1  
-	config_index |= int(cube_data.densities[2] < threshold) << 2  # vertex 2
-	config_index |= int(cube_data.densities[3] < threshold) << 3  # vertex 3
-	config_index |= int(cube_data.densities[4] < threshold) << 4  # vertex 4
-	config_index |= int(cube_data.densities[5] < threshold) << 5  # vertex 5
-	config_index |= int(cube_data.densities[6] < threshold) << 6  # vertex 6
-	config_index |= int(cube_data.densities[7] < threshold) << 7  # vertex 7
+	for i in range(8):
+		if cube_data.densities[i] < threshold:
+			config_index |= (1 << i)
 	
-	# DEBUG: Log configuration for first few cubes
-	if triangles.size() < 3:  # Only first few cubes to avoid spam
-		print("🔍 CUBE CONFIG: index %d, densities: [%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f]" % 
-			[config_index, cube_data.densities[0], cube_data.densities[1], cube_data.densities[2], 
-			cube_data.densities[3], cube_data.densities[4], cube_data.densities[5], 
-			cube_data.densities[6], cube_data.densities[7]])
+	# DEBUG: Log configuration for first few cubes to understand what's happening
+	if triangles.size() == 0:  # Only log for debugging
+		var density_str = ""
+		for d in cube_data.densities:
+			density_str += "%.1f " % d
+		print("🔍 Cube config %d, densities: [%s]" % [config_index, density_str.strip_edges()])
 	
 	# Get edge table entry
 	var edge_table = lookup_tables.get_edge_table()
-	if config_index >= edge_table.size():
-		return triangles  # Invalid configuration
+	if config_index >= edge_table.size() or config_index < 0:
+		return triangles
 	
 	var edge_flags = edge_table[config_index]
 	if edge_flags == 0:
@@ -219,7 +195,6 @@ func march_cube(cube_data: Dictionary) -> Array:
 			var v1_density = cube_data.densities[v1_idx]
 			var v2_density = cube_data.densities[v2_idx]
 			
-			# BLOG POST INTERPOLATION PATTERN: Exact linear interpolation  
 			edge_vertices[i] = calculate_interpolation(v1_pos, v2_pos, v1_density, v2_density)
 		else:
 			edge_vertices[i] = null
@@ -227,12 +202,11 @@ func march_cube(cube_data: Dictionary) -> Array:
 	# Generate triangles using triangle table
 	var triangle_table = lookup_tables.get_triangle_table()
 	if config_index >= triangle_table.size():
-		return triangles  # Invalid configuration
+		return triangles
 	
 	var triangle_config = triangle_table[config_index]
 	var i = 0
 	while i < triangle_config.size():
-		# Process triangles in groups of 3
 		if i + 2 >= triangle_config.size():
 			break
 			
@@ -247,7 +221,7 @@ func march_cube(cube_data: Dictionary) -> Array:
 			i += 3
 			continue
 		
-		# Check if all edge vertices exist and are valid
+		# Check if all edge vertices exist
 		if (edge_vertices[edge_idx1] == null or 
 			edge_vertices[edge_idx2] == null or 
 			edge_vertices[edge_idx3] == null):
@@ -255,27 +229,18 @@ func march_cube(cube_data: Dictionary) -> Array:
 			continue
 		
 		var triangle = TriangleData.new()
-		
-		# Get triangle vertices
 		var v1 = edge_vertices[edge_idx1]
 		var v2 = edge_vertices[edge_idx2]
 		var v3 = edge_vertices[edge_idx3]
 		
-		# Validate vertices
-		if v1 == null or v2 == null or v3 == null:
-			i += 3
-			continue
-			
-		# FIX: Correct winding order for terrain surfaces (counter-clockwise when viewed from above)
-		triangle.vertices = [v1, v2, v3]  # Proper counter-clockwise winding
+		triangle.vertices = [v1, v2, v3]
 		
-		# Calculate normal with proper winding order (right-hand rule)
+		# Calculate normal
 		var edge1 = v2 - v1
 		var edge2 = v3 - v1
 		var normal = edge1.cross(edge2)
 		
-		# Only add triangle if normal is valid
-		if normal.length_squared() > 0.0001:
+		if normal.length_squared() > 0.000001:
 			normal = normal.normalized()
 			triangle.normals = [normal, normal, normal]
 			triangles.append(triangle)
@@ -285,14 +250,17 @@ func march_cube(cube_data: Dictionary) -> Array:
 	return triangles
 
 func calculate_interpolation(a: Vector3, b: Vector3, val_a: float, val_b: float) -> Vector3:
-	"""Linear interpolation exactly like the blog post"""
-	# Prevent division by zero
-	if abs(val_b - val_a) < 0.000001:
-		return a
+	"""Linear interpolation - FIXED for binary density values"""
+	# With binary values (0.0 or 1.0), we need to handle the edge case properly
+	var density_diff = abs(val_b - val_a)
 	
-	# Blog post interpolation formula: t = (ISO_LEVEL - val_a) / (val_b - val_a)
+	if density_diff < 0.000001:
+		# Both values are the same, return midpoint
+		return (a + b) * 0.5
+	
+	# Standard interpolation formula
 	var t = (threshold - val_a) / (val_b - val_a)
-	t = clamp(t, 0.0, 1.0)  # Safety clamp
+	t = clamp(t, 0.0, 1.0)
 	
 	return a + t * (b - a)
 

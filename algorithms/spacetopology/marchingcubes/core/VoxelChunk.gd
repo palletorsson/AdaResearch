@@ -159,48 +159,13 @@ func set_neighbor_chunk(direction: Vector3i, chunk: VoxelChunk):
 	neighbors[key] = chunk
 
 func get_density_with_neighbors(local_pos: Vector3i) -> float:
-	"""Get density considering neighboring chunks for seamless edges (enhanced from reference patterns)"""
+	"""Get density considering neighboring chunks for seamless edges - FIXED VERSION"""
 	if is_valid_position(local_pos):
 		return get_density(local_pos)
 	
-	# Determine which neighbor chunk to sample from
-	var neighbor_dir = Vector3i.ZERO
-	var neighbor_pos = local_pos
-	
-	# X direction
-	if local_pos.x < 0:
-		neighbor_dir.x = -1
-		neighbor_pos.x = chunk_size.x + local_pos.x
-	elif local_pos.x > chunk_size.x:
-		neighbor_dir.x = 1
-		neighbor_pos.x = local_pos.x - chunk_size.x
-		
-	# Y direction  
-	if local_pos.y < 0:
-		neighbor_dir.y = -1
-		neighbor_pos.y = chunk_size.y + local_pos.y
-	elif local_pos.y > chunk_size.y:
-		neighbor_dir.y = 1
-		neighbor_pos.y = local_pos.y - chunk_size.y
-		
-	# Z direction
-	if local_pos.z < 0:
-		neighbor_dir.z = -1
-		neighbor_pos.z = chunk_size.z + local_pos.z
-	elif local_pos.z > chunk_size.z:
-		neighbor_dir.z = 1
-		neighbor_pos.z = local_pos.z - chunk_size.z
-	
-	# Try to get from neighbor chunk
-	var neighbor_key = str(neighbor_dir)
-	if neighbors.has(neighbor_key):
-		var neighbor_chunk = neighbors[neighbor_key] as VoxelChunk
-		if neighbor_chunk != null:
-			# Recursive call to handle multi-hop neighbor access
-			return neighbor_chunk.get_density_with_neighbors(neighbor_pos)
-	
-	# No neighbor found - return solid boundary (prevents holes like GLSL approach)
-	return 1.0
+	# FIXED: For out-of-bounds positions, return a special value to indicate
+	# that direct terrain calculation should be used instead
+	return -1.0  # Special value indicating "use direct calculation"
 
 func clear():
 	"""Clear all density data"""
