@@ -167,13 +167,42 @@
 			"references": [
 				"Lorensen, William E., and Harvey E. Cline. 'Marching cubes: A high resolution 3D surface construction algorithm.' ACM SIGGRAPH Computer Graphics 21.4 (1987): 163-169."
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/marchingcubes/scenes/marching_cubes_test.tscn",
 			"tags": [
 				"isosurface",
 				"3D rendering",
 				"medical imaging"
 			],
 			"year_invented": 1987.0
+		},
+		{
+			"category": "Procedural Generation",
+			"complexity": "O(n×k) where n is voxels and k is growth iterations",
+			"description": "Rhizomatic cave generation system using marching cubes for organic underground networks",
+			"history": "Novel implementation combining biological rhizomatic growth patterns with marching cubes algorithm for cave generation.",
+			"id": "41",
+			"inventor": "AdaResearch Project",
+			"name": "Rhizomatic Cave System",
+			"properties": {
+				"growth_pattern": "Rhizomatic (root-like spreading)",
+				"physics": "Automatic collision generation",
+				"features": "Interconnected chambers, organic tunnels"
+			},
+			"references": [
+				"Based on rhizomatic theory and marching cubes algorithm"
+			],
+			"related_algorithms": [
+				"40"
+			],
+			"scene_path": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"tags": [
+				"cave generation",
+				"rhizomatic growth",
+				"procedural",
+				"3D rendering",
+				"physics"
+			],
+			"year_invented": 2024.0
 		}
 	]
 }

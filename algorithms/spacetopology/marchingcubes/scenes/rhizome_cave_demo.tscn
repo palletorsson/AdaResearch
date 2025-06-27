@@ -1,0 +1,135 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm7e2x6xr82dv"]
+
+[ext_resource type="Script" uid="uid://cjr8c2r6nn4w0" path="res://algorithms/spacetopology/marchingcubes/scenes/RhizomeCaveDemoController.gd" id="1_1k2q3"]
+
+[sub_resource type="Environment" id="Environment_1xk2q"]
+background_mode = 1
+background_color = Color(0.15, 0.05, 0.25, 1)
+sky_custom_fov = 75.0
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.3, 0.9, 1)
+ambient_light_energy = 0.6
+glow_enabled = true
+glow_strength = 1.2
+glow_bloom = 0.3
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.9, 0.4, 0.8, 1)
+volumetric_fog_emission = Color(0.3, 0.8, 0.9, 1)
+volumetric_fog_emission_energy = 0.3
+
+[node name="RhizomeCaveDemo" type="Node3D"]
+script = ExtResource("1_1k2q3")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_color = Color(1, 0.8, 0.9, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_blur = 1.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_1xk2q")
+
+[node name="CaveGenerator" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "🏔️ Rhizomatic Cave System"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Generate New Cave"
+
+[node name="Parameters" type="VBoxContainer" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SizeLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Cave Size:"
+
+[node name="SizeSlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 50.0
+max_value = 200.0
+value = 100.0
+
+[node name="ComplexityLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Complexity:"
+
+[node name="ComplexitySlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 0.7
+
+[node name="ChambersLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Initial Chambers:"
+
+[node name="ChambersSlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 3.0
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="UI/Panel/VBoxContainer/Stats"]
+layout_mode = 2
+text = "Cave Statistics:"
+
+[node name="StatsText" type="RichTextLabel" parent="UI/Panel/VBoxContainer/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "No cave generated yet."
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+show_percentage = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 25, 25)

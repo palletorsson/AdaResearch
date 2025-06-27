@@ -1,0 +1,116 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldwvf3pqq3mn"]
+
+[ext_resource type="Script" uid="uid://cl3jpgeusrg64" path="res://algorithms/spacetopology/marchingcubes/scenes/TerrainDemoController.gd" id="1_terrain"]
+
+[node name="TerrainDemo" type="Node3D"]
+script = ExtResource("1_terrain")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.9)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.3
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="RichTextLabel" parent="UI/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 0
+text = "[center][color=cyan][font_size=24]Walkable Terrain Demo[/font_size][/color][/center]
+[center][color=gray]Marching Cubes Ground Generation[/color][/center]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GenerateButton" type="Button" parent="UI/Panel/VBoxContainer/Controls"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Generate Terrain"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Parameters" type="VBoxContainer" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SizeLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Terrain Size: 50 units"
+
+[node name="SizeSlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 20.0
+value = 50.0
+
+[node name="HeightLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Height Variation: 5.0"
+
+[node name="HeightSlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 1.0
+max_value = 15.0
+value = 5.0
+
+[node name="NoiseLabel" type="Label" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+text = "Noise Frequency: 0.05"
+
+[node name="NoiseSlider" type="HSlider" parent="UI/Panel/VBoxContainer/Parameters"]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.2
+step = 0.005
+value = 0.05
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+show_percentage = false
+
+[node name="StatsText" type="RichTextLabel" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "[color=gray]Ready to generate terrain...[/color]"
+fit_content = true
+
+[connection signal="pressed" from="UI/Panel/VBoxContainer/Controls/GenerateButton" to="." method="_on_generate_pressed"]
+[connection signal="value_changed" from="UI/Panel/VBoxContainer/Parameters/SizeSlider" to="." method="_on_size_changed"]
+[connection signal="value_changed" from="UI/Panel/VBoxContainer/Parameters/HeightSlider" to="." method="_on_height_changed"]
+[connection signal="value_changed" from="UI/Panel/VBoxContainer/Parameters/NoiseSlider" to="." method="_on_noise_changed"]

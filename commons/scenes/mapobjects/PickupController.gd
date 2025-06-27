@@ -19,7 +19,7 @@ var original_material: Material
 var mesh_instance: MeshInstance3D
 var interaction_area: Area3D
 var animator: Node3D
-var audio_player: CubeAudioPlayer
+var audio_player
 var is_grabbed: bool = false
 var is_hovered: bool = false
 
@@ -46,7 +46,8 @@ func _ready():
 
 func _setup_audio():
 	# Create audio player component
-	audio_player = CubeAudioPlayer.new()
+	var CubeAudioPlayerScript = load("res://commons/audio/runtime/CubeAudioPlayer.gd")
+	audio_player = CubeAudioPlayerScript.new()
 	audio_player.name = "CubeAudioPlayer"
 	audio_player.primary_sound = AudioSynthesizer.SoundType.PICKUP_MARIO
 	audio_player.secondary_sound = AudioSynthesizer.SoundType.MELODIC_DRONE

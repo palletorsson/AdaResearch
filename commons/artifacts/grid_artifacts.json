@@ -394,6 +394,37 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+		"marching_cubes": {
+			"name": "Marching Cubes Test",
+			"lookup_name": "marching_cubes",
+			"description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
+			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"position": [4.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "spatial_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"rhizome_cave_system": {
+			"name": "Rhizomatic Cave System",
+			"lookup_name": "rhizome_cave_system",
+			"description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
+			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"position": [5.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "spatial_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.4, 0.35, 0.3],
+				"light_intensity": 1.8,
+				"light_range": 5.0,
+				"light_position": [0, 2.0, 0]
+			}
+		},
 		
 
 	"noise_space": {

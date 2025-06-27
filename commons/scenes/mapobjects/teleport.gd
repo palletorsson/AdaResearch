@@ -31,7 +31,7 @@ signal teleporter_activated()
 @onready var cylinder_mesh_node = get_node_or_null("Cube")
 
 # Audio component
-@onready var teleport_audio: CubeAudioPlayer = get_node_or_null("TeleportAudio")
+@onready var teleport_audio = get_node_or_null("TeleportAudio")
 
 
 func _ready():

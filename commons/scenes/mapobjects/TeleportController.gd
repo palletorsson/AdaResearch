@@ -17,7 +17,7 @@ extends "res://commons/primitives/cubes/VRGadgetController.gd"
 
 var portal_effect: GPUParticles3D
 var beam_area: Area3D
-var teleport_audio: CubeAudioPlayer
+var teleport_audio
 var is_charging: bool = false
 var charge_progress: float = 0.0
 var players_in_beam: Array = []
@@ -45,8 +45,9 @@ func _ready():
 	print("TeleportController: Ready with drone audio - destination: %s" % destination)
 
 func _setup_teleporter_audio():
-	# Create dedicated audio player for teleporter sounds
-	teleport_audio = CubeAudioPlayer.new()
+	# Create dedicated audio player for teleporter sounds using resource path
+	var CubeAudioPlayerScript = load("res://commons/audio/runtime/CubeAudioPlayer.gd")
+	teleport_audio = CubeAudioPlayerScript.new()
 	teleport_audio.name = "TeleportAudio"
 	teleport_audio.primary_sound = AudioSynthesizer.SoundType.TELEPORT_DRONE
 	teleport_audio.secondary_sound = AudioSynthesizer.SoundType.GHOST_DRONE
