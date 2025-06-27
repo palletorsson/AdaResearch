@@ -248,7 +248,9 @@ func update_terrain_parameters():
 		"size": Vector2(terrain_size, terrain_size),
 		"height": terrain_height,
 		"noise_frequency": noise_frequency,
-		"threshold": 0.5
+		"threshold": 0.5,
+		"debug_mode": true,  # Enable debug mode to prevent holes
+		"min_density": 0.7   # Guarantee minimum density
 	}
 	terrain_generator.configure_terrain(params)
 

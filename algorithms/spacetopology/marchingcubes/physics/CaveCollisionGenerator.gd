@@ -330,16 +330,28 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 		# Calculate triangle normal
 		var edge1 = v2 - v1
 		var edge2 = v3 - v1
-		var triangle_normal = edge1.cross(edge2).normalized()
+		var cross_product = edge1.cross(edge2)
+		
+		# Skip degenerate triangles
+		if cross_product.length_squared() < 0.000001:
+			continue
+			
+		var triangle_normal = cross_product.normalized()
 		
 		# Check if surface is walkable (roughly horizontal)
 		var angle_from_up = rad_to_deg(triangle_normal.angle_to(Vector3.UP))
 		
-		if angle_from_up <= max_slope_angle:
+		# DEBUG: Show angle analysis for first few triangles
+		if surface_data.surface_count < 5:
+			print("Triangle %d: normal %v, angle from up: %.1f°" % [surface_data.surface_count, triangle_normal, angle_from_up])
+		
+		# RELAXED: More permissive slope detection for voxel terrain
+		if angle_from_up <= 60.0:  # Increased from 30° to 60° for marching cubes terrain
 			# Calculate triangle area
 			var area = edge1.cross(edge2).length() * 0.5
 			
-			if area >= min_surface_area:
+			# RELAXED: Lower minimum area requirement for voxel-based terrain  
+			if area >= 0.1:  # Reduced from 0.5 to 0.1 for finer terrain detection
 				var triangle_data = {
 					"vertices": [v1, v2, v3],
 					"normal": triangle_normal,
@@ -352,8 +364,10 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 				surface_data.total_walkable_area += area
 				surface_data.surface_count += 1
 	
-	print("Found %d walkable triangles with total area %.2f m²" % 
-		[surface_data.walkable_triangles.size(), surface_data.total_walkable_area])
+	print("DEBUG: Analyzed %d total triangles, found %d walkable (%.1f%%) with total area %.2f m²" % 
+		[indices.size() / 3, surface_data.walkable_triangles.size(), 
+		(surface_data.walkable_triangles.size() * 100.0) / max(1, indices.size() / 3),
+		surface_data.total_walkable_area])
 	
 	return surface_data
 

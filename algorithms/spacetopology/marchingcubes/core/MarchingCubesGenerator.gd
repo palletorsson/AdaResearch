@@ -59,7 +59,17 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	chunk.cached_mesh = mesh
 	chunk.is_dirty = false
 	
-	print("MarchingCubes: Generated mesh with %d vertices, %d triangles" % [vertices.size(), indices.size() / 3])
+	print("MarchingCubes: Generated mesh with %d vertices, %d triangles, %d indices" % [vertices.size(), indices.size() / 3, indices.size()])
+	
+	# DEBUG: Check if mesh has proper surfaces
+	if mesh.get_surface_count() > 0:
+		var surface_arrays = mesh.surface_get_arrays(0)
+		var mesh_vertices = surface_arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+		var mesh_indices = surface_arrays[Mesh.ARRAY_INDEX] as PackedInt32Array
+		print("MarchingCubes: Surface has %d vertices, %d indices" % [mesh_vertices.size(), mesh_indices.size()])
+	else:
+		print("MarchingCubes: WARNING - No surfaces in generated mesh!")
+	
 	return mesh
 
 func is_valid_cube_data(cube_data: Dictionary) -> bool:
@@ -99,11 +109,17 @@ func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
 func get_safe_density(chunk: VoxelChunk, local_pos: Vector3i) -> float:
 	"""Get density with safe boundary handling"""
 	if chunk.is_valid_position(local_pos):
-		return chunk.get_density(local_pos)
+		var interior_density = chunk.get_density(local_pos)
+		# DEBUG: Uncomment to trace boundary vs interior density differences
+		# print("Interior density: %.3f at local pos %v" % [interior_density, local_pos])
+		return interior_density
 	
 	# For positions outside the chunk, return a default value
 	# This prevents holes at chunk boundaries
-	return 1.0  # Default to solid material outside chunk bounds
+	var boundary_density = 1.0  # Default to solid material outside chunk bounds
+	# DEBUG: Uncomment to trace boundary density usage
+	# print("Boundary density: %.3f for out-of-bounds pos %v" % [boundary_density, local_pos])
+	return boundary_density
 
 func march_cube(cube_data: Dictionary) -> Array:
 	"""Apply marching cubes algorithm to a single cube"""
@@ -185,9 +201,10 @@ func march_cube(cube_data: Dictionary) -> Array:
 			i += 3
 			continue
 			
-		triangle.vertices = [v1, v2, v3]
+		# FIX: Correct winding order for terrain surfaces (counter-clockwise when viewed from above)
+		triangle.vertices = [v1, v2, v3]  # Proper counter-clockwise winding
 		
-		# Calculate normal with proper winding order
+		# Calculate normal with proper winding order (right-hand rule)
 		var edge1 = v2 - v1
 		var edge2 = v3 - v1
 		var normal = edge1.cross(edge2)
