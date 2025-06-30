@@ -151,19 +151,20 @@ func generate_fifteen_cases():
 		generate_case_mesh(case_data, position, i)
 
 func generate_case_mesh(case_data: Dictionary, position: Vector3, case_index: int):
-	"""Generate mesh for a specific marching cubes case"""
-	# Create cube data for marching cubes
-	var cube_data = {
-		"positions": get_cube_positions(),
-		"densities": case_data.densities
-	}
+	"""Generate mesh for a specific marching cubes case using the advanced generator"""
 	
-	# Generate mesh using marching cubes
+	# Create a single-cube VoxelChunk for this case
+	var chunk = create_voxel_chunk_from_case(case_data)
+	
+	# Generate mesh using the advanced marching cubes generator
 	var generator = MarchingCubesGenerator.new()
-	var triangles = generator.march_cube(cube_data)
+	generator.threshold = 0.5  # Match our demo threshold
+	generator.smoothing_enabled = true  # Enable smoothing for better surfaces
+	
+	var mesh = generator.generate_mesh_from_chunk(chunk)
 	
 	# Create visual representation
-	var mesh_instance = create_case_visualization(triangles, position, case_data, case_index)
+	var mesh_instance = create_case_mesh_instance(mesh, position, case_data, case_index)
 	add_child(mesh_instance)
 	meshes.append(mesh_instance)
 	
@@ -172,6 +173,80 @@ func generate_case_mesh(case_data: Dictionary, position: Vector3, case_index: in
 		var wireframe = create_wireframe_cube(position, case_data.densities)
 		add_child(wireframe)
 
+func create_voxel_chunk_from_case(case_data: Dictionary) -> VoxelChunk:
+	"""Create a VoxelChunk from case data for the advanced generator"""
+	var chunk = VoxelChunk.new()
+	chunk.chunk_size = Vector3i(2, 2, 2)  # 2x2x2 to contain one marching cube
+	chunk.world_position = Vector3.ZERO
+	
+	# Set densities according to marching cubes vertex ordering
+	var cube_vertex_positions = [
+		Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(1, 1, 0), Vector3i(0, 1, 0),  # Bottom face
+		Vector3i(0, 0, 1), Vector3i(1, 0, 1), Vector3i(1, 1, 1), Vector3i(0, 1, 1)   # Top face
+	]
+	
+	# Initialize chunk with default air density
+	for x in range(chunk.chunk_size.x + 1):
+		for y in range(chunk.chunk_size.y + 1):
+			for z in range(chunk.chunk_size.z + 1):
+				chunk.set_density(Vector3i(x, y, z), 0.3)  # Default outside value
+	
+	# Set the 8 cube vertices to match our case
+	for i in range(8):
+		var pos = cube_vertex_positions[i]
+		chunk.set_density(pos, case_data.densities[i])
+	
+	return chunk
+
+func create_case_mesh_instance(mesh: ArrayMesh, position: Vector3, case_data: Dictionary, case_index: int) -> MeshInstance3D:
+	"""Create a MeshInstance3D for a generated marching cubes case"""
+	var mesh_instance = MeshInstance3D.new()
+	mesh_instance.name = "Case_%d" % case_index
+	mesh_instance.position = position
+	
+	if mesh != null and mesh.get_surface_count() > 0:
+		mesh_instance.mesh = mesh
+		
+		# Create material with case-specific color and enhanced visualization
+		var material = StandardMaterial3D.new()
+		material.albedo_color = get_case_color(case_index)
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides
+		material.metallic = 0.1
+		material.roughness = 0.7
+		material.emission_enabled = true
+		material.emission = material.albedo_color * 0.2
+		material.emission_energy = 0.4
+		
+		# Add rim lighting for better edge definition
+		material.rim_enabled = true
+		material.rim = 0.3
+		material.rim_tint = 0.8
+		
+		if show_wireframes:
+			material.flags_transparent = true
+			material.albedo_color.a = 0.85
+		
+		mesh_instance.set_surface_override_material(0, material)
+		
+		print("Case %d (%s): Generated mesh with %d surfaces" % [case_index, case_data.name, mesh.get_surface_count()])
+	else:
+		# No mesh generated - show indicator
+		var sphere_mesh = SphereMesh.new()
+		sphere_mesh.radius = 0.08
+		sphere_mesh.height = 0.16
+		mesh_instance.mesh = sphere_mesh
+		mesh_instance.position.y += 0.3
+		
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color.GRAY
+		material.emission_enabled = true
+		material.emission = Color.GRAY * 0.5
+		mesh_instance.set_surface_override_material(0, material)
+		
+		print("Case %d (%s): No mesh generated (config %d)" % [case_index, case_data.name, case_data.config])
+	
+	return mesh_instance
+
 func get_cube_positions() -> Array:
 	"""Get the 8 corner positions of a unit cube"""
 	return [
@@ -179,63 +254,7 @@ func get_cube_positions() -> Array:
 		Vector3(0, 0, 1), Vector3(1, 0, 1), Vector3(1, 1, 1), Vector3(0, 1, 1)   # Top face
 	]
 
-func create_case_visualization(triangles: Array, position: Vector3, case_data: Dictionary, case_index: int) -> MeshInstance3D:
-	"""Create a colored mesh instance for a marching cubes case"""
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.name = "Case_%d" % case_index
-	mesh_instance.position = position
-	
-	if triangles.size() > 0:
-		# Create mesh from triangles
-		var array_mesh = ArrayMesh.new()
-		var vertices = PackedVector3Array()
-		var normals = PackedVector3Array()
-		var indices = PackedInt32Array()
-		
-		var vertex_index = 0
-		for triangle in triangles:
-			if triangle.vertices.size() == 3 and triangle.normals.size() == 3:
-				vertices.append_array(triangle.vertices)
-				normals.append_array(triangle.normals)
-				
-				# Add triangle indices
-				indices.append(vertex_index)
-				indices.append(vertex_index + 1)
-				indices.append(vertex_index + 2)
-				vertex_index += 3
-		
-		if vertices.size() > 0:
-			var arrays = []
-			arrays.resize(Mesh.ARRAY_MAX)
-			arrays[Mesh.ARRAY_VERTEX] = vertices
-			arrays[Mesh.ARRAY_NORMAL] = normals
-			arrays[Mesh.ARRAY_INDEX] = indices
-			array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			mesh_instance.mesh = array_mesh
-	else:
-		# No triangles - create a small indicator sphere
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.1
-		sphere_mesh.height = 0.2
-		mesh_instance.mesh = sphere_mesh
-		mesh_instance.position.y += 0.5
-	
-	# Create material with case-specific color
-	var material = StandardMaterial3D.new()
-	material.albedo_color = get_case_color(case_index)
-	material.metallic = 0.2
-	material.roughness = 0.8
-	material.emission_enabled = true
-	material.emission = material.albedo_color * 0.3
-	material.emission_energy = 0.5
-	
-	if show_wireframes:
-		material.flags_transparent = true
-		material.albedo_color.a = 0.8
-	
-	mesh_instance.set_surface_override_material(0, material)
-	
-	return mesh_instance
+
 
 func create_wireframe_cube(position: Vector3, densities: Array) -> Node3D:
 	"""Create wireframe representation showing vertex states"""
