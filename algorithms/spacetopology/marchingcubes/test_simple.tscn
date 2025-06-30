@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/user_fixed_marching_cubes.gd" id="1_simple"]
+
+[node name="TestSimple" type="Node3D"]
+script = ExtResource("1_simple")
+RESOLUTION = 32
+TERRAIN_HEIGHT = 15.0
+USE_HEIGHTMAP_MODE = true
+USE_ROBUST_INTERPOLATION = true
+PREVENT_DEGENERATE_TRIANGLES = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."] 

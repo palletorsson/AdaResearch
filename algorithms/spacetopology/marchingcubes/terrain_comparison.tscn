@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/user_fixed_marching_cubes.gd" id="1_comparison"]
+
+[node name="TerrainComparison" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 30, 50)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="HeightmapTerrain" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)
+script = ExtResource("1_comparison")
+RESOLUTION = 32
+TERRAIN_HEIGHT = 12.0
+USE_HEIGHTMAP_MODE = true
+USE_ROBUST_INTERPOLATION = true
+PREVENT_DEGENERATE_TRIANGLES = true
+
+[node name="VolumetricTerrain" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
+script = ExtResource("1_comparison")
+RESOLUTION = 32
+USE_HEIGHTMAP_MODE = false
+PLANE_HEIGHT_OFFSET = 0.3
+USE_ROBUST_INTERPOLATION = true
+PREVENT_DEGENERATE_TRIANGLES = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Labels" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 400.0
+offset_bottom = -20.0
+
+[node name="Title" type="Label" parent="UI/Labels"]
+layout_mode = 2
+text = "Terrain Generation Comparison"
+theme_override_font_sizes/font_size = 20
+
+[node name="LeftLabel" type="Label" parent="UI/Labels"]
+layout_mode = 2
+text = "LEFT: Heightmap Mode (2.5D) - Normal terrain"
+theme_override_font_sizes/font_size = 14
+
+[node name="RightLabel" type="Label" parent="UI/Labels"]
+layout_mode = 2
+text = "RIGHT: Volumetric Mode (3D) - Swirly patterns"
+theme_override_font_sizes/font_size = 14
+
+[node name="Instructions" type="Label" parent="UI/Labels"]
+layout_mode = 2
+text = "Use WASD + Mouse to navigate and compare the two modes"
+theme_override_font_sizes/font_size = 12 

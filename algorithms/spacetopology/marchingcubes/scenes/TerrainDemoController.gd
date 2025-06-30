@@ -26,7 +26,7 @@ var vr_controllers: Array[XRController3D] = []
 var terrain_generator: TerrainGenerator
 
 # Parameters
-var terrain_size: float = 50.0
+var terrain_size: float = 10.0
 var terrain_height: float = 5.0
 var noise_frequency: float = 0.05
 
@@ -194,7 +194,8 @@ func update_camera_movement(delta: float):
 		camera_rotation.y -= mouse_delta.x
 		camera_rotation.x -= mouse_delta.y
 		camera_rotation.x = clamp(camera_rotation.x, -PI/2, PI/2)
-		camera.rotation = camera_rotation
+		# FIXED: Convert Vector2 camera_rotation to Vector3 for Camera3D
+		camera.rotation = Vector3(camera_rotation.x, camera_rotation.y, 0.0)
 	
 	# WASD movement
 	var input_vector = Vector3.ZERO

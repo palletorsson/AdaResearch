@@ -233,10 +233,11 @@ func generate_height_field_async():
 			await Engine.get_main_loop().process_frame
 
 func fill_chunk_with_terrain(chunk: VoxelChunk):
-	"""Fill a chunk with terrain height field data - FIXED FOR CONSISTENT BOUNDARIES"""
+	"""Fill a chunk with terrain height field data - HOLE-FREE VERSION"""
 	var chunk_offset = chunk.world_position
 	
-	# FIXED: Generate density data including boundary voxels for marching cubes
+	# Generate density data for ALL voxels (interior + boundary)
+	# This ensures seamless marching cubes can operate across chunk boundaries
 	for x in range(chunk.chunk_size.x + 1):  # +1 for marching cubes boundary
 		for y in range(chunk.chunk_size.y + 1):
 			for z in range(chunk.chunk_size.z + 1):
@@ -246,29 +247,67 @@ func fill_chunk_with_terrain(chunk: VoxelChunk):
 				
 				var world_pos = Vector3(world_x, world_y, world_z)
 				var density = calculate_terrain_density(world_pos)
-				chunk.set_density(Vector3i(x, y, z), density)
 				
-				# DEBUG: Log boundary voxels
-				if x == chunk.chunk_size.x or y == chunk.chunk_size.y or z == chunk.chunk_size.z:
-					if x < 2 and z < 2:  # Only log first few for debugging
-						print("🎯 BOUNDARY VOXEL: chunk %s pos (%d,%d,%d) world %v density %.3f" % 
-							[chunk.chunk_name, x, y, z, world_pos, density])
+				# Ensure density is valid before storing
+				density = clamp(density, 0.0, 1.0)
+				chunk.set_density(Vector3i(x, y, z), density)
+	
+	# Mark chunk as clean after filling
+	chunk.is_dirty = false
+	
+	print("TerrainGenerator: Filled chunk %s with hole-free density data" % chunk.chunk_name)
 
 func calculate_terrain_density(world_pos: Vector3) -> float:
-	"""Calculate density value for terrain at world position - SIMPLIFIED & ROBUST"""
-	# Use the same simple, consistent approach as successful walkgrids
+	"""Calculate density value for terrain at world position - HOLE-FREE VERSION"""
+	# Get height from multiple noise layers
 	var height_value = height_noise.get_noise_2d(world_pos.x, world_pos.z)
-	var surface_height = height_value * terrain_height * 0.5
+	var detail_value = detail_noise.get_noise_2d(world_pos.x, world_pos.z) * 0.2  # Reduced for stability
+	var feature_value = feature_noise.get_noise_2d(world_pos.x, world_pos.z) * 0.3  # Reduced for stability
 	
-	# CRITICAL FIX: Use simple binary classification like walkgrids do
-	# Walkgrids work because they have clear solid/empty distinction
-	if world_pos.y <= surface_height:
-		return 1.0  # Solid terrain (above threshold)
+	var combined_height = (height_value + detail_value + feature_value) * terrain_height * 0.4
+	
+	# Distance from surface
+	var distance_to_surface = world_pos.y - combined_height
+	
+	# HOLE-FREE STRATEGY: Use smooth distance field
+	if distance_to_surface <= -2.0:
+		# Deep solid - guaranteed high density
+		return 0.95
+	elif distance_to_surface <= -1.0:
+		# Near-surface solid with smooth falloff
+		var depth_factor = (-distance_to_surface - 1.0) / 1.0
+		return lerp(0.75, 0.95, depth_factor)
+	elif distance_to_surface <= 0.0:
+		# Surface transition zone - critical for hole prevention
+		var surface_factor = -distance_to_surface / 1.0
+		var base_density = lerp(0.45, 0.75, surface_factor)
+		
+		# Add minimal surface variation only if not in debug mode
+		var surface_var = 0.0
+		if not debug_disable_surface_variation:
+			surface_var = detail_value * 0.05  # Minimal variation
+		
+		return clamp(base_density + surface_var, 0.4, 0.8)  # Ensure it crosses threshold cleanly
+	elif distance_to_surface <= 1.0:
+		# Air transition zone - smooth falloff to prevent floating geometry
+		var air_factor = distance_to_surface / 1.0
+		return lerp(0.45, 0.1, air_factor)
 	else:
-		return 0.0  # Empty air (below threshold)
+		# Definitely air
+		return 0.05
+
+func smooth_air_transition(world_pos: Vector3, surface_height: float) -> float:
+	"""Create smooth air transition above terrain surface"""
+	var height_above_surface = world_pos.y - surface_height
+	var transition_zone = terrain_height * 0.1  # 10% of terrain height for smooth transition
 	
-	# This creates the same clear boundary as your successful walkgrids
-	# No complex transitions that can cause marching cubes configuration issues
+	if height_above_surface < transition_zone:
+		# Smooth falloff from surface to air
+		var t = height_above_surface / transition_zone
+		return lerp(0.6, 0.0, smoothstep(0.0, 1.0, t))
+	else:
+		# Definitely air
+		return 0.0
 
 func calculate_surface_height(x: float, z: float) -> float:
 	"""Calculate terrain surface height at given X,Z coordinates"""

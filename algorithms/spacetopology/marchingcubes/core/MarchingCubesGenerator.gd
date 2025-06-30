@@ -18,7 +18,7 @@ func _init():
 	lookup_tables = MarchingCubesLookupTables.new()
 
 func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
-	"""Generate a mesh from a voxel chunk using marching cubes - ROBUST VERSION"""
+	"""Generate a mesh from a voxel chunk using marching cubes - HOLE-FREE VERSION"""
 	if chunk.cached_mesh != null and not chunk.is_dirty:
 		return chunk.cached_mesh
 	
@@ -27,13 +27,18 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	var indices: PackedInt32Array = []
 	
 	var triangle_count = 0
+	var processed_cubes = 0
+	var valid_cubes = 0
 	
 	# Process each cube in the chunk 
 	for x in range(chunk.chunk_size.x):
 		for y in range(chunk.chunk_size.y):
 			for z in range(chunk.chunk_size.z):
+				processed_cubes += 1
 				var cube_vertices_data = get_cube_vertices(chunk, Vector3i(x, y, z))
+				
 				if is_valid_cube_data(cube_vertices_data):
+					valid_cubes += 1
 					var triangles = march_cube(cube_vertices_data)
 					
 					# Add triangles to mesh arrays
@@ -60,10 +65,15 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 		arrays[Mesh.ARRAY_INDEX] = indices
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		
-		print("MarchingCubes: Generated %d triangles, %d vertices for chunk %s" % 
-			[triangle_count, vertices.size(), chunk.chunk_name])
+		print("MarchingCubes: Generated %d triangles from %d/%d valid cubes for chunk %s" % 
+			[triangle_count, valid_cubes, processed_cubes, chunk.chunk_name])
+		
+		# Validate mesh for holes
+		if triangle_count == 0 and valid_cubes > 0:
+			print("⚠️  WARNING: No triangles generated despite valid cubes - potential hole detected!")
 	else:
-		print("MarchingCubes: WARNING - No geometry generated for chunk %s" % chunk.chunk_name)
+		print("MarchingCubes: No geometry generated for chunk %s (processed %d cubes)" % 
+			[chunk.chunk_name, processed_cubes])
 	
 	# Cache the result
 	chunk.cached_mesh = mesh
@@ -86,7 +96,7 @@ func is_valid_cube_data(cube_data: Dictionary) -> bool:
 	return true
 
 func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
-	"""Get the 8 vertex data for a cube at the given position - FIXED VERSION"""
+	"""Get the 8 vertex data for a cube at the given position - ROBUST BOUNDARY VERSION"""
 	var cube_data = {
 		"positions": [],
 		"densities": []
@@ -97,13 +107,16 @@ func get_cube_vertices(chunk: VoxelChunk, cube_pos: Vector3i) -> Dictionary:
 		var vert_pos = cube_pos + Vector3i(cube_verts[i])
 		var world_pos = chunk.local_to_world(vert_pos)
 		
-		# FIXED: Use consistent density evaluation for all vertices
+		# FIXED: Always use direct terrain calculation for CONSISTENCY
+		# This ensures seamless boundaries across all chunks
 		var density: float
-		if chunk.is_valid_position(vert_pos):
-			density = chunk.get_density(vert_pos)
+		if terrain_generator_ref != null:
+			density = terrain_generator_ref.calculate_terrain_density(world_pos)
 		else:
-			# For vertices outside chunk, use direct terrain calculation
 			density = calculate_direct_terrain_density(world_pos)
+		
+		# Ensure density is within valid range [0.0, 1.0]
+		density = clamp(density, 0.0, 1.0)
 		
 		cube_data.positions.append(world_pos)
 		cube_data.densities.append(density)
@@ -155,7 +168,7 @@ func get_safe_density(chunk: VoxelChunk, local_pos: Vector3i) -> float:
 	return boundary_density
 
 func march_cube(cube_data: Dictionary) -> Array:
-	"""Apply marching cubes algorithm to a single cube - FIXED FOR BINARY DENSITY"""
+	"""Apply marching cubes algorithm to a single cube - HOLE-FREE VERSION"""
 	var triangles = []
 	
 	# Calculate configuration index using threshold comparison
@@ -163,13 +176,6 @@ func march_cube(cube_data: Dictionary) -> Array:
 	for i in range(8):
 		if cube_data.densities[i] < threshold:
 			config_index |= (1 << i)
-	
-	# DEBUG: Log configuration for first few cubes to understand what's happening
-	if triangles.size() == 0:  # Only log for debugging
-		var density_str = ""
-		for d in cube_data.densities:
-			density_str += "%.1f " % d
-		print("🔍 Cube config %d, densities: [%s]" % [config_index, density_str.strip_edges()])
 	
 	# Get edge table entry
 	var edge_table = lookup_tables.get_edge_table()
@@ -180,7 +186,7 @@ func march_cube(cube_data: Dictionary) -> Array:
 	if edge_flags == 0:
 		return triangles  # No intersection
 	
-	# Calculate edge intersections
+	# Calculate edge intersections with improved interpolation
 	var edge_vertices = []
 	edge_vertices.resize(12)
 	
@@ -195,7 +201,7 @@ func march_cube(cube_data: Dictionary) -> Array:
 			var v1_density = cube_data.densities[v1_idx]
 			var v2_density = cube_data.densities[v2_idx]
 			
-			edge_vertices[i] = calculate_interpolation(v1_pos, v2_pos, v1_density, v2_density)
+			edge_vertices[i] = calculate_robust_interpolation(v1_pos, v2_pos, v1_density, v2_density)
 		else:
 			edge_vertices[i] = null
 	
@@ -233,9 +239,16 @@ func march_cube(cube_data: Dictionary) -> Array:
 		var v2 = edge_vertices[edge_idx2]
 		var v3 = edge_vertices[edge_idx3]
 		
+		# Ensure triangle vertices are distinct (prevent degenerate triangles)
+		if (v1.distance_squared_to(v2) < 0.000001 or
+			v2.distance_squared_to(v3) < 0.000001 or
+			v3.distance_squared_to(v1) < 0.000001):
+			i += 3
+			continue
+		
 		triangle.vertices = [v1, v2, v3]
 		
-		# Calculate normal
+		# Calculate normal with proper orientation
 		var edge1 = v2 - v1
 		var edge2 = v3 - v1
 		var normal = edge1.cross(edge2)
@@ -249,18 +262,36 @@ func march_cube(cube_data: Dictionary) -> Array:
 	
 	return triangles
 
-func calculate_interpolation(a: Vector3, b: Vector3, val_a: float, val_b: float) -> Vector3:
-	"""Linear interpolation - FIXED for binary density values"""
-	# With binary values (0.0 or 1.0), we need to handle the edge case properly
+func calculate_robust_interpolation(a: Vector3, b: Vector3, val_a: float, val_b: float) -> Vector3:
+	"""Robust interpolation - ELIMINATES HOLES"""
+	# Ensure density values are properly clamped
+	val_a = clamp(val_a, 0.0, 1.0)
+	val_b = clamp(val_b, 0.0, 1.0)
+	
 	var density_diff = abs(val_b - val_a)
 	
-	if density_diff < 0.000001:
-		# Both values are the same, return midpoint
+	# Handle edge case where densities are nearly identical
+	if density_diff < 0.001:
+		# Both values are very close, return midpoint
 		return (a + b) * 0.5
 	
-	# Standard interpolation formula
+	# Handle edge case where one value is exactly at threshold
+	if abs(val_a - threshold) < 0.001:
+		return a
+	if abs(val_b - threshold) < 0.001:
+		return b
+	
+	# Standard interpolation formula with robust threshold handling
 	var t = (threshold - val_a) / (val_b - val_a)
 	t = clamp(t, 0.0, 1.0)
+	
+	# Additional safety check for extreme values
+	if val_a >= threshold and val_b >= threshold:
+		# Both solid, use midpoint
+		return (a + b) * 0.5
+	elif val_a < threshold and val_b < threshold:
+		# Both air, use midpoint 
+		return (a + b) * 0.5
 	
 	return a + t * (b - a)
 

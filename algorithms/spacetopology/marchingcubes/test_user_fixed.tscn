@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/user_fixed_marching_cubes.gd" id="1_5oiqw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xmv4"]
+frequency = 0.08
+
+[node name="TestUserFixed" type="Node3D"]
+
+[node name="MarchingCubesTerrain" type="MeshInstance3D" parent="."]
+script = ExtResource("1_5oiqw")
+RESOLUTION = 32
+NOISE = SubResource("FastNoiseLite_1xmv4")
+USE_ROBUST_INTERPOLATION = true
+PREVENT_DEGENERATE_TRIANGLES = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 50, 50, 50)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 50, 0) 
