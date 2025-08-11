@@ -35,6 +35,7 @@ shape = SubResource("BoxShape3D_uyvxc")
 
 [node name="Label3D_1_1" type="Label3D" parent="CubeBaseStaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
 text = "1:1"
 
 [node name="Camera3D" type="Camera3D" parent="."]

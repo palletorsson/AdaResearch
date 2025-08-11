@@ -104,7 +104,7 @@ func _on_lab_generation_complete():
 		print("LabGridSystem: ✅ Progressive map - artifacts already defined in JSON, skipping filtering")
 
 func _apply_lab_cube_materials():
-	"""Apply off-white material to all grid cubes"""
+	"""Apply lab styling to all grid cubes while preserving grid shader effect"""
 	if not structure_component:
 		return
 	
@@ -117,22 +117,43 @@ func _apply_lab_cube_materials():
 			_apply_lab_material_to_cube(cube)
 
 func _apply_lab_material_to_cube(cube: Node3D):
-	"""Apply lab material to a single cube"""
+	"""Apply lab styling to cube while keeping grid shader"""
 	# Find the mesh instance in the cube
 	var mesh_instance = _find_mesh_instance_in_cube(cube)
 	if not mesh_instance:
 		return
 	
-	# Create lab material
-	var lab_material = StandardMaterial3D.new()
-	lab_material.albedo_color = lab_cube_color
-	lab_material.metallic = 0.1
-	lab_material.roughness = 0.8
-	lab_material.emission_enabled = true
-	lab_material.emission = lab_cube_color * 0.02  # Subtle glow
-	
-	# Apply material
-	mesh_instance.material_override = lab_material
+	# Check if it already has a shader material
+	var current_material = mesh_instance.material_override
+	if current_material and current_material is ShaderMaterial:
+		# Duplicate the shader material to make it unique for this cube
+		var lab_shader_material = current_material.duplicate() as ShaderMaterial
+		
+		# Update shader parameters for lab styling
+		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
+		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
+		lab_shader_material.set_shader_parameter("emissionColor", Color(0.6, 0.6, 0.6, 1.0))   # Gray emission
+		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
+		lab_shader_material.set_shader_parameter("modelOpacity", 0.95)  # Slightly transparent
+		
+		# Apply the modified shader material
+		mesh_instance.material_override = lab_shader_material
+	else:
+		# Fallback: create new shader material if none exists
+		var lab_shader_material = ShaderMaterial.new()
+		var grid_shader = load("res://commons/resourses/shaders/Grid.gdshader")
+		lab_shader_material.shader = grid_shader
+		
+		# Set lab-appropriate shader parameters
+		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
+		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
+		lab_shader_material.set_shader_parameter("emissionColor", Color(0.6, 0.6, 0.6, 1.0))   # Gray emission
+		lab_shader_material.set_shader_parameter("width", 8.0)
+		lab_shader_material.set_shader_parameter("blur", 0.5)
+		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
+		lab_shader_material.set_shader_parameter("modelOpacity", 0.95)
+		
+		mesh_instance.material_override = lab_shader_material
 
 func _find_mesh_instance_in_cube(cube: Node3D) -> MeshInstance3D:
 	"""Find MeshInstance3D in cube hierarchy"""

@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "description": "Lab map progression configuration - determines which lab map to load based on completed sequences",
+  "last_updated": "2025-01-27",
+  
+  "progression_mapping": {
+    "description": "Maps completed sequences to lab map files. System checks in order - first match wins.",
+    "rules": [
+      {
+        "required_sequences": ["advanced_concepts"],
+        "lab_map": "Lab/map_data_complete",
+        "description": "All sequences complete - celebration lab"
+      },
+      {
+        "required_sequences": ["geometric_algorithms"],
+        "lab_map": "Lab/map_data_post_geometric", 
+        "description": "After geometric algorithms - disco floor unlocked"
+      },
+      {
+        "required_sequences": ["randomness_exploration"],
+        "lab_map": "Lab/map_data_post_random",
+        "description": "After randomness exploration - probability artifacts"
+      },
+      {
+        "required_sequences": ["array_tutorial"],
+        "lab_map": "Lab/map_data_post_array",
+        "description": "After array tutorial - xyz_coordinates and grid_display"
+      }
+    ],
+    "fallback_map": "Lab/map_data_init",
+    "fallback_description": "Initial lab state - only rotating_cube visible"
+  },
+  
+  "sequence_dependencies": {
+    "description": "Defines which sequences must be completed before others",
+    "array_tutorial": [],
+    "randomness_exploration": ["array_tutorial"],
+    "geometric_algorithms": ["array_tutorial"],
+    "advanced_concepts": ["randomness_exploration", "geometric_algorithms"]
+  },
+  
+  "validation_rules": {
+    "description": "Rules to validate progression integrity",
+    "enforce_dependencies": true,
+    "auto_fix_invalid_progression": true,
+    "log_progression_issues": true
+  },
+  
+  "debug_overrides": {
+    "description": "Debug options for testing specific lab states",
+    "force_lab_map": "Lab/map_data_post_array",
+    "ignore_dependencies": false,
+    "reset_on_invalid": true
+  }
+}

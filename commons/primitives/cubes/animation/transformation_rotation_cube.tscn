@@ -6,6 +6,7 @@
 [node name="CubeWithTransformationRotation" instance=ExtResource("1_3i0az")]
 
 [node name="Label3D_1_1" parent="CubeBaseStaticBody3D" index="2"]
+visible = true
 text = "1:2"
 
 [node name="RotationTween" type="Node" parent="." index="3"]

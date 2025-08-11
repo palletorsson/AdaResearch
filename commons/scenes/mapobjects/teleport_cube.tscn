@@ -51,6 +51,9 @@ ui_show_distance = 1.5
 haptic_intensity = 0.3
 info_text = "VR Interactive Cube"
 
+[node name="CubeAnimator" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="PortalEffect" type="GPUParticles3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 emitting = false

@@ -23,6 +23,9 @@ play_grab_sound = true
 hover_pitch = 1.2
 grab_pitch = 1.0
 
+[node name="Label3D_1_1" parent="CubeBaseStaticBody3D" index="2"]
+visible = true
+
 [node name="CubeAnimator" parent="." index="1"]
 enable_oscillation = true
 

@@ -5,6 +5,9 @@
 
 [node name="RotationCube" instance=ExtResource("1_base")]
 
+[node name="Label3D_1_1" parent="CubeBaseStaticBody3D" index="2"]
+visible = true
+
 [node name="CubeAnimator" type="Node3D" parent="." index="1"]
 script = ExtResource("2_animator")
 enable_oscillation = false
