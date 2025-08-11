@@ -164,17 +164,17 @@ Optimized triangle generation:
 ```gdscript
 # Create rolling hills with noise
 func generate_hills_terrain(chunk: VoxelChunk):
-    var noise = FastNoiseLite.new()
-    noise.frequency = 0.01
-    
-    for x in range(chunk.chunk_size.x + 1):
-        for y in range(chunk.chunk_size.y + 1):
-            for z in range(chunk.chunk_size.z + 1):
-                var world_pos = chunk.local_to_world(Vector3i(x, y, z))
-                var height = noise.get_noise_2d(world_pos.x, world_pos.z) * 10
-                
-                var density = 1.0 if world_pos.y < height else 0.0
-                chunk.set_density(Vector3i(x, y, z), density)
+	var noise = FastNoiseLite.new()
+	noise.frequency = 0.01
+	
+	for x in range(chunk.chunk_size.x + 1):
+		for y in range(chunk.chunk_size.y + 1):
+			for z in range(chunk.chunk_size.z + 1):
+				var world_pos = chunk.local_to_world(Vector3i(x, y, z))
+				var height = noise.get_noise_2d(world_pos.x, world_pos.z) * 10
+				
+				var density = 1.0 if world_pos.y < height else 0.0
+				chunk.set_density(Vector3i(x, y, z), density)
 ```
 
 ### Cave Systems
@@ -182,9 +182,9 @@ func generate_hills_terrain(chunk: VoxelChunk):
 ```gdscript
 # Generate organic cave networks
 func generate_cave_system(chunk: VoxelChunk):
-    var cave_generator = RhizomeCaveGenerator.new()
-    cave_generator.growth_pattern = RhizomeGrowthPattern.ORGANIC
-    cave_generator.generate_cave_network(chunk)
+	var cave_generator = RhizomeCaveGenerator.new()
+	cave_generator.growth_pattern = RhizomeGrowthPattern.ORGANIC
+	cave_generator.generate_cave_network(chunk)
 ```
 
 ### Fluid Surfaces
@@ -192,10 +192,10 @@ func generate_cave_system(chunk: VoxelChunk):
 ```gdscript
 # Create water/lava surfaces
 func generate_fluid_surface(chunk: VoxelChunk, fluid_level: float):
-    for pos in chunk.get_all_positions():
-        var world_pos = chunk.local_to_world(pos)
-        var density = 1.0 if world_pos.y < fluid_level else 0.0
-        chunk.set_density(pos, density)
+	for pos in chunk.get_all_positions():
+		var world_pos = chunk.local_to_world(pos)
+		var density = 1.0 if world_pos.y < fluid_level else 0.0
+		chunk.set_density(pos, density)
 ```
 
 ## 🔍 Technical Details
@@ -234,16 +234,16 @@ For even higher quality surfaces:
 ```gdscript
 # Generate surfaces with multiple materials
 func create_multi_material_terrain(chunk: VoxelChunk):
-    var materials = {
-        "stone": {"threshold": 0.8, "color": Color.GRAY},
-        "dirt": {"threshold": 0.5, "color": Color.SADDLE_BROWN},
-        "grass": {"threshold": 0.3, "color": Color.GREEN}
-    }
-    
-    # Generate separate surfaces for each material
-    for material_name in materials:
-        var material_mesh = generate_material_surface(chunk, materials[material_name])
-        # Add to scene with appropriate material
+	var materials = {
+		"stone": {"threshold": 0.8, "color": Color.GRAY},
+		"dirt": {"threshold": 0.5, "color": Color.SADDLE_BROWN},
+		"grass": {"threshold": 0.3, "color": Color.GREEN}
+	}
+	
+	# Generate separate surfaces for each material
+	for material_name in materials:
+		var material_mesh = generate_material_surface(chunk, materials[material_name])
+		# Add to scene with appropriate material
 ```
 
 ## 🔧 Development Setup

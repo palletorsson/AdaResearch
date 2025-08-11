@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxqp8j7k2m3n5"]
+
+[ext_resource type="Script" path="res://algorithms/physicssimulation/verletintegration/VerletCloth.gd" id="1_h8k9m"]
+
+[sub_resource type="Environment" id="Environment_1w2x4"]
+background_mode = 1
+background_color = Color(0.2, 0.3, 0.5, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k7l2"]
+albedo_color = Color(0.4, 0.4, 0.4, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(10, 0.2, 10)
+
+[node name="VRClothScene" type="Node3D"]
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="LeftHandController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="LeftHandMesh" type="MeshInstance3D" parent="XROrigin3D/LeftHandController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_4k7l2")
+
+[node name="RightHandController" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="RightHandMesh" type="MeshInstance3D" parent="XROrigin3D/RightHandController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SphereMesh.new()
+surface_material_override/0 = SubResource("StandardMaterial3D_4k7l2")
+
+[node name="VerletCloth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_h8k9m")
+cloth_width = 25
+cloth_height = 25
+cloth_size = 3.0
+damping = 0.995
+gravity = -9.8
+constraint_iterations = 3
+constraint_strength = 1.0
+left_hand_controller = NodePath("../XROrigin3D/LeftHandController")
+right_hand_controller = NodePath("../XROrigin3D/RightHandController")
+hand_collision_radius = 0.1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 3, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_1w2x4")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+mesh = BoxMesh.new()
+surface_material_override/0 = SubResource("StandardMaterial3D_4k7l2")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
+shape = BoxShape3D.new()
+
+[node name="XRInterface" type="Node" parent="."]
+script_class = "XRInterface"
+
+[node name="XRServer" type="Node" parent="XRInterface"]
+
+[connection signal="button_pressed" from="XROrigin3D/LeftHandController" to="VerletCloth" method="_on_left_hand_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/LeftHandController" to="VerletCloth" method="_on_left_hand_button_released"]
+[connection signal="button_pressed" from="XROrigin3D/RightHandController" to="VerletCloth" method="_on_right_hand_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/RightHandController" to="VerletCloth" method="_on_right_hand_button_released"]
