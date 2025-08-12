@@ -214,9 +214,13 @@ func generate_interactables(interactable_data):
 	for z in range(min(dimensions.z, interactable_layout.size())):
 		var row = interactable_layout[z]
 		for x in range(min(dimensions.x, row.size())):
-			var lookup_name = str(row[x]).strip_edges()
+			var token = str(row[x]).strip_edges()
 			
-			if lookup_name != " " and not lookup_name.is_empty():
+			if token != " " and not token.is_empty():
+				var parsed = _parse_interactable_token(token)
+				var lookup_name: String = parsed.get("lookup_name", "")
+				var overrides: Dictionary = parsed.get("overrides", {})
+				
 				if has_artifact(lookup_name):
 					var y_pos = structure_component.find_highest_y_at(x, z)
 					
@@ -224,7 +228,7 @@ func generate_interactables(interactable_data):
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
 					
-					if _place_artifact(x, y_pos, z, lookup_name, total_size):
+					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides):
 						interactable_count += 1
 					else:
 						placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
@@ -242,7 +246,7 @@ func generate_interactables(interactable_data):
 	interactables_generation_complete.emit(interactable_count)
 
 # Place a single artifact using lookup_name
-func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float) -> bool:
+func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}) -> bool:
 	var position = Vector3(x, y, z) * total_size
 	
 	var artifact_info = get_artifact_info(lookup_name)
@@ -264,6 +268,13 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	
 	# Apply position/rotation/scale from artifact definition
 	_apply_artifact_transform(artifact_object, artifact_info)
+
+	# Apply per-instance overrides (e.g., scifi_panel_wall:45 → rotate Y by 45 degrees)
+	if overrides.has("rotation_y_degrees"):
+		var ry = float(overrides.get("rotation_y_degrees", 0.0))
+		var current = artifact_object.rotation_degrees
+		current.y = ry
+		artifact_object.rotation_degrees = current
 	
 	# Set artifact metadata using both lookup_name and display name
 	artifact_object.set_meta("artifact_lookup_name", lookup_name)
@@ -291,6 +302,25 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	print("  ✅ Placed artifact '%s' (%s) at (%d,%d,%d)" % [display_name, lookup_name, x, y, z])
 	
 	return true
+
+# Parse compact token syntax from map JSON cells.
+# Examples:
+#   "scifi_panel_wall"           → { lookup_name: "scifi_panel_wall", overrides: {} }
+#   "scifi_panel_wall:45"        → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
+func _parse_interactable_token(token: String) -> Dictionary:
+	var result := {"lookup_name": token, "overrides": {}}
+	if token.find(":") == -1:
+		return result
+	var parts = token.split(":", false)
+	if parts.size() < 2:
+		return result
+	var name = parts[0].strip_edges()
+	var param = parts[1].strip_edges()
+	result.lookup_name = name
+	# If numeric param, treat as yaw degrees
+	if param.is_valid_float():
+		result.overrides["rotation_y_degrees"] = float(param)
+	return result
 
 # Apply transform data from artifact definition
 func _apply_artifact_transform(artifact_object: Node3D, artifact_info: Dictionary):
