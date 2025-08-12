@@ -62,6 +62,7 @@
 			"scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
 			"position": [0.0, 1.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0],
+			"scale": [0.5, 0.5, 0.5],
 			"interaction": "look",
 			"sequence": "array_tutorial",
 			"artifact_type": "sequence_trigger",
@@ -156,6 +157,21 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
+		"scifi_panel_wall": {
+		  "lookup_name": "scifi_panel_wall",
+		  "name": "Sci-Fi Panel Wall",
+		  "description": "A futuristic panel wall with procedural greebles and atmospheric lighting",
+		  "scene": "res://commons/primitives/panels/scifi_panel_wall.tscn",
+		  "position": [1.5, 1.5, 0.0],
+		  "rotation": [0.0, 0.0, 0.0],
+		  "scale": [1.0, 1.0, 1.0],
+		  "interaction_type": "examine",
+		  "sequence": null,
+		  "lighting": {
+			"add_focused_light": false,
+			"note": "Panel has built-in atmospheric lighting"
+		  }
+		},
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor", 
@@ -167,7 +183,8 @@
 			"sequence": null,
 			"artifact_type": "reward",
 			"prerequisites": []
-		},
+		}
+		,
 			"spectral_analyzer": {
 			"name": "Master Audio Analyzer",
 			"lookup_name": "spectral_analyzer",

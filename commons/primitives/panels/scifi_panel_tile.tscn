@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqpwqsgm6c77d"]
+
+[ext_resource type="PackedScene" uid="uid://c4ug7cyx08afh" path="res://commons/primitives/panels/scifi_panel_wall.tscn" id="1_panel_base"]
+
+[node name="SciFiPanelTile" type="Node3D"]
+
+[node name="SciFiPanelWall" parent="." instance=ExtResource("1_panel_base")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50665, 2.72831)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85528, 1.51928)
+text = "wall"

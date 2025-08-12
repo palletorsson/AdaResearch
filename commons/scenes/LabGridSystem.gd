@@ -260,29 +260,9 @@ func _save_lab_progression():
 
 func _filter_artifacts_by_progression():
 	"""Filter interactables based on progression (LEGACY SYSTEM ONLY)"""
-	if is_progressive_map:
-		print("LabGridSystem: Skipping legacy artifact filtering - progressive map handles this")
-		return
-	
-	if not interactables_component:
-		return
-	
-	print("LabGridSystem: Filtering artifacts by legacy progression")
-	
-	# Get all interactable positions
-	var interactable_positions = interactables_component.get_all_interactable_positions()
-	
-	for position in interactable_positions:
-		var interactable = interactables_component.get_interactable_at(position.x, position.y, position.z)
-		if interactable:
-			var artifact_lookup_name = interactable.get_meta("artifact_lookup_name", "")
-			
-			# Hide artifacts that aren't unlocked yet
-			if not artifact_lookup_name.is_empty() and not artifact_lookup_name in unlocked_artifacts:
-				interactable.visible = false
-				print("  Hidden locked artifact: %s" % artifact_lookup_name)
-			else:
-				interactable.visible = true
+	# Disabled per project setup: always show all artifacts in legacy maps
+	print("LabGridSystem: Legacy filtering disabled - showing all artifacts")
+	return
 
 # PROGRESSION MANAGEMENT (Legacy system only)
 
