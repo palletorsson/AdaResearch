@@ -56,7 +56,10 @@ func _process_scene_user_data():
 	
 	if lab_grid_system:
 		print("🔍 DEBUG: lab_grid_system found: %s" % lab_grid_system.name)
-		print("🔍 DEBUG: lab_grid_system.map_name BEFORE = '%s'" % lab_grid_system.map_name)
+		if "map_name" in lab_grid_system:
+			print("🔍 DEBUG: lab_grid_system.map_name BEFORE = '%s'" % lab_grid_system.map_name)
+		else:
+			print("🔍 DEBUG: lab_grid_system has no 'map_name' property")
 	else:
 		print("🔍 DEBUG: ❌ lab_grid_system NOT FOUND!")
 	

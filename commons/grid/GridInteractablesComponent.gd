@@ -275,6 +275,17 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var current = artifact_object.rotation_degrees
 		current.y = ry
 		artifact_object.rotation_degrees = current
+		# Also try to set an exported yaw property if available
+		_try_set_property(artifact_object, "yaw_degrees", ry)
+
+	# Apply per-instance label text if provided (e.g., level_entrance:90|Level 3)
+	if overrides.has("label_text"):
+		var label_text = str(overrides.get("label_text", ""))
+		_try_set_property(artifact_object, "label_text", label_text)
+		# Fallback: update a Label3D child if present
+		var label_node = artifact_object.find_child("Label3D", true, false)
+		if label_node and (label_node is Label3D):
+			label_node.text = label_text
 	
 	# Set artifact metadata using both lookup_name and display name
 	artifact_object.set_meta("artifact_lookup_name", lookup_name)
@@ -309,6 +320,11 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 #   "scifi_panel_wall:45"        → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
 func _parse_interactable_token(token: String) -> Dictionary:
 	var result := {"lookup_name": token, "overrides": {}}
+	# Expect formats:
+	#   name
+	#   name:45
+	#   name:Label Text
+	#   name:45|Label Text
 	if token.find(":") == -1:
 		return result
 	var parts = token.split(":", false)
@@ -317,10 +333,40 @@ func _parse_interactable_token(token: String) -> Dictionary:
 	var name = parts[0].strip_edges()
 	var param = parts[1].strip_edges()
 	result.lookup_name = name
-	# If numeric param, treat as yaw degrees
-	if param.is_valid_float():
-		result.overrides["rotation_y_degrees"] = float(param)
+
+	var rot_part = param
+	var label_part = ""
+	if param.find("|") != -1:
+		var p2 = param.split("|", false)
+		rot_part = p2[0].strip_edges()
+		if p2.size() > 1:
+			label_part = p2[1].strip_edges()
+		else:
+			label_part = ""
+
+	# rotation part
+	if rot_part.is_valid_float():
+		result.overrides["rotation_y_degrees"] = float(rot_part)
+	else:
+		# If it's not numeric and no explicit label part, treat rot_part as label text
+		if label_part == "" and rot_part != "":
+			label_part = rot_part
+
+	# label part
+	if label_part != "":
+		result.overrides["label_text"] = label_part
+
 	return result
+
+# Safely set a property if the node exposes it
+func _try_set_property(obj: Object, prop: String, value) -> void:
+	if obj == null:
+		return
+	var props = obj.get_property_list()
+	for p in props:
+		if typeof(p) == TYPE_DICTIONARY and p.has("name") and str(p["name"]) == prop:
+			obj.set(prop, value)
+			return
 
 # Apply transform data from artifact definition
 func _apply_artifact_transform(artifact_object: Node3D, artifact_info: Dictionary):

@@ -25,6 +25,7 @@ var quit_timer: Timer
 
 # Audio support (like teleport cube)
 var audio_player: Node3D
+var warning_tween: Tween
 
 func _ready():
 	print("QuitGameController: Initializing quit cube...")
@@ -264,19 +265,22 @@ func _start_warning_animation():
 	
 	var material = cube_mesh.material_override as StandardMaterial3D
 	if material:
+		# Kill any existing tween to avoid duplicates
+		if warning_tween:
+			warning_tween.kill()
+			warning_tween = null
 		# Create pulsing animation
-		var tween = create_tween()
-		tween.set_loops()
-		tween.tween_property(material, "emission_energy", 1.5, 0.5)
-		tween.tween_property(material, "emission_energy", 0.3, 0.5)
+		warning_tween = create_tween()
+		warning_tween.set_loops()
+		warning_tween.tween_property(material, "emission_energy", 1.5, 0.5)
+		warning_tween.tween_property(material, "emission_energy", 0.3, 0.5)
 
 func _stop_warning_animation():
 	"""Stop warning animation"""
-	# Stop any active tweens
-	var tweens = get_tree().get_processed_tweens()
-	for tween in tweens:
-		if tween.get_bound_node() == self:
-			tween.kill()
+	# Stop active tween if present
+	if warning_tween:
+		warning_tween.kill()
+		warning_tween = null
 	
 	# Reset emission
 	if cube_mesh and cube_mesh.material_override:

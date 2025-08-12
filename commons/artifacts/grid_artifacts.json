@@ -172,6 +172,17 @@
 			"note": "Panel has built-in atmospheric lighting"
 		  }
 		},
+		"level_entrance": {
+		  "lookup_name": "level_entrance",
+		  "name": "Level Entrance",
+		  "description": "Entrance tile with door frame and label text",
+		  "scene": "res://commons/primitives/entrances/level_entrance.tscn",
+		  "position": [0.0, 0.0, 0.0],
+		  "rotation": [0.0, 0.0, 0.0],
+		  "scale": [1.0, 1.0, 1.0],
+		  "artifact_type": "entrance",
+		  "prerequisites": []
+		},
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor", 

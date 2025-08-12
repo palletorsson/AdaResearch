@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://ni4iqeo4gi0m"]
+
+[ext_resource type="Script" uid="uid://ckth7w02xxk26" path="res://commons/primitives/entrances/LevelEntrance.gd" id="1_script"]
+
+[sub_resource type="BoxMesh" id="wall_mesh"]
+size = Vector3(1, 3, 1)
+
+[sub_resource type="BoxMesh" id="frame_vert_mesh"]
+size = Vector3(0.05, 2, 0.1)
+
+[sub_resource type="BoxMesh" id="frame_horz_mesh"]
+size = Vector3(0.8, 0.05, 0.1)
+
+[sub_resource type="BoxMesh" id="plate_mesh"]
+size = Vector3(0.9, 0.15, 0.05)
+
+[node name="LevelEntrance" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="Wall" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("wall_mesh")
+
+[node name="Frame" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Left" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.1, 0.45)
+mesh = SubResource("frame_vert_mesh")
+
+[node name="Right" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.1, 0.45)
+mesh = SubResource("frame_vert_mesh")
+
+[node name="Top" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0.45)
+mesh = SubResource("frame_horz_mesh")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.192, 0.511724)
+text = "Randomness"
+font_size = 24
+outline_size = 8
+
+[node name="Plate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.192, 0.45)
+mesh = SubResource("plate_mesh")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="TriggerCollision" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
