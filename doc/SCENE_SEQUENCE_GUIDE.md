@@ -89,6 +89,32 @@ graph TD
     style T fill:#f3e5f5
 ```
 
+## 🗺️ Sequence → Lab Post-Map Selection (High-Level)
+
+```mermaid
+flowchart TD
+    A[Complete Sequence in GridScene] --> B{AdaSceneManager<br/>_advance_sequence}
+    B -->|last map| C[Emit sequence_completed]
+    C --> D[AdaSceneManager<br/>_return_to_hub(completion_data)]
+    D --> E[Load Lab Scene<br/>with completion_data]
+    E --> F[LabGridScene<br/>_handle_sequence_completion]
+    F --> G[Save completed sequence<br/>user://lab_progression.save]
+    G --> H[LabGridScene<br/>_determine_map_from_sequences]
+    H --> I[Read rules<br/>commons/maps/Lab/lab_map_progression.json]
+    I --> J{First matching rule?}
+    J -->|Yes| K[Set lab_map → e.g. Lab/map_data_post_random]
+    J -->|No| L[Use fallback: Lab/map_data_init]
+    K --> M[Reload Lab with selected map]
+    L --> M
+```
+
+Key files and functions:
+- `commons/maps/map_sequences.json`: sequence definitions
+- `commons/managers/AdaSceneManager.gd`: `_load_sequence_configurations`, `_advance_sequence`, `_return_to_hub`
+- `commons/scenes/LabGridScene.gd`: `_handle_sequence_completion`, `_save_sequence_completion`, `_determine_map_from_sequences`
+- `commons/maps/Lab/lab_map_progression.json`: ordered rules mapping `required_sequences` to `lab_map`
+
+
 ### 📊 Sequence Definitions
 
 From `commons/maps/map_sequences.json`:

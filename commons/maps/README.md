@@ -452,6 +452,30 @@ func _input(event):
 			KEY_F3: SceneManager.return_to_lab()
 ```
 
+## Sequence and Lab Post-Map Selection
+
+This project uses JSON-driven rules to decide which lab map to load after a sequence completes.
+
+- **Sequence definitions**: `res://commons/maps/map_sequences.json`
+  - Loaded by `res://commons/managers/AdaSceneManager.gd` via `_load_sequence_configurations()`
+  - Controls sequence names, map order, and `return_to: "lab"`
+
+- **On sequence completion**:
+  - `AdaSceneManager._advance_sequence()` emits `sequence_completed` and calls `_return_to_hub(completion_data)`
+  - Lab scene handles completion and persists progress:
+	- `res://commons/scenes/LabGridScene.gd`
+	  - `_handle_sequence_completion(...)` → saves the finished sequence to `user://lab_progression.save`
+	  - `_determine_map_from_sequences(...)` → selects lab map using rules below
+
+- **Lab map selection rules**: `res://commons/maps/Lab/lab_map_progression.json`
+  - Ordered `rules` with `required_sequences` → `lab_map` (first match wins)
+  - Example: `required_sequences: ["randomness_exploration"]` → `Lab/map_data_post_random`
+
+- **Persistence**:
+  - Save file: `user://lab_progression.save` with `completed_sequences: ["array_tutorial", ...]`
+
+For a full walkthrough and diagrams, see `res://doc/SCENE_SEQUENCE_GUIDE.md` and `res://doc/PROGRESSION_SYSTEM.md`.
+
 ## Best Practices
 
 ### Performance
