@@ -5,6 +5,7 @@ class_name TopologySpace
 @export var space_size: Vector2 = Vector2(20, 20)
 @export var resolution: int = 100
 @export var height_scale: float = 2.0
+@export var position_offset: Vector3 = Vector3.ZERO
 
 var static_body: StaticBody3D
 var mesh_instance: MeshInstance3D
@@ -51,9 +52,9 @@ func create_mesh_from_heights(heights: Array) -> ArrayMesh:
 	for z in range(resolution + 1):
 		for x in range(resolution + 1):
 			var world_pos = Vector3(
-				(x / float(resolution)) * space_size.x - space_size.x/2,
-				heights[z * (resolution + 1) + x],
-				(z / float(resolution)) * space_size.y - space_size.y/2
+				(x / float(resolution)) * space_size.x - space_size.x/2 + position_offset.x,
+				heights[z * (resolution + 1) + x] + position_offset.y,
+				(z / float(resolution)) * space_size.y - space_size.y/2 + position_offset.z
 			)
 			vertices.append(world_pos)
 			uvs.append(Vector2(x / float(resolution), z / float(resolution)))

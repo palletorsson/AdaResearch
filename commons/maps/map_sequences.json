@@ -28,7 +28,6 @@
 			"unlock_requirements": [],
 			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
 		},
-		
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
 			"description": "Explore concepts of randomness, probability, and statistical thinking",
@@ -94,6 +93,30 @@
 			"return_to": "lab",
 			"unlock_requirements": ["randomness_exploration", "geometric_algorithms"],
 			"completion_rewards": ["algorithm_architect_badge", "complexity_master_badge"]
+		},
+
+		"wavefunctions": {
+			"name": "Wavefunctions",
+			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
+			"difficulty": "intermediate",
+			"estimated_time": "20-30 minutes",
+			"learning_objectives": [
+				"Sine waves and harmonics",
+				"Spectral analysis",
+				"Audio-visualization",
+				"Wave interference"
+			],
+			"maps": [
+				"Wavefunctions_One",
+				"Wavefunctions_Two",
+				"Wavefunctions_Three",
+				"Wavefunctions_Four",
+				"Wavefunctions_Five",
+				"Wavefunctions_Six"
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
 		}
 	},
 	

@@ -12,6 +12,7 @@ script = ExtResource("1_n8dtw")
 space_size = Vector2(10, 10)
 resolution = 50
 height_scale = 1.0
+position_offset = Vector3(0, 2, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
