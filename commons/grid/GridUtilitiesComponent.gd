@@ -311,6 +311,23 @@ func _is_sequence_name(name: String) -> bool:
 	var known_sequences = [
 		"array_tutorial",
 		"randomness_exploration", 
+		"wavefunctions",
+		"proceduralaudio",
+		"physicssimulation",
+		"softbodies",
+		"recursiveemergence",
+		"lsystems",
+		"swarmintelligence",
+		"patterngeneration",
+		"proceduralgeneration",
+		"searchpathfinding",
+		"graphtheory",
+		"computationalgeometry",
+		"machinelearning",
+		"criticalalgorithms",
+		"speculativecomputation",
+		"resourcemanagement",
+		"advancedlaboratory",
 		"geometric_algorithms",
 		"advanced_concepts"
 	]

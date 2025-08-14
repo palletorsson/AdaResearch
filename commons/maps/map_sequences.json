@@ -73,6 +73,407 @@
 			"return_to": "lab",
 			"unlock_requirements": [],
 			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
+		},
+		"proceduralaudio": {
+			"name": "Procedural Audio",
+			"description": "Explore procedural sound synthesis, effects, and generative music",
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+			"learning_objectives": [
+				"Sound synthesis techniques",
+				"Audio effects processing",
+				"Generative music algorithms",
+				"Psychoacoustic principles"
+			],
+			"maps": [
+				"ProceduralAudio_Sound_Synthesis_Drone_Effects",
+				"ProceduralAudio_Subtractive_Synthesis",
+				"ProceduralAudio_Additive_Synthesis",
+				"ProceduralAudio_FM_Synthesis",
+				"ProceduralAudio_Granular_Synthesis",
+				"ProceduralAudio_Audio_Effects",
+				"ProceduralAudio_Generative_Music_Algorithms",
+				"ProceduralAudio_Psychoacoustics"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["wavefunctions"],
+			"completion_rewards": ["audio_architect_badge", "synthesis_specialist_badge"]
+		},
+		"physicssimulation": {
+			"name": "Physics Simulation",
+			"description": "Explore Newtonian mechanics, forces, and physical system simulation",
+			"difficulty": "intermediate",
+			"estimated_time": "30-40 minutes",
+			"learning_objectives": [
+				"Newton's laws of motion",
+				"Force field visualization",
+				"Collision detection systems",
+				"Fluid and particle dynamics"
+			],
+			"maps": [
+				"PhysicsSimulation_Newton_s_Laws",
+				"PhysicsSimulation_Vector_Fields",
+				"PhysicsSimulation_Three_Body_Problem",
+				"PhysicsSimulation_Bouncing_Ball_Physics",
+				"PhysicsSimulation_Rigid_Body_Dynamics",
+				"PhysicsSimulation_Constraints",
+				"PhysicsSimulation_Verlet_Integration",
+				"PhysicsSimulation_Spring_Mass_Systems",
+				"PhysicsSimulation_Fluid_Simulation_SPH",
+				"PhysicsSimulation_Collision_Detection",
+				"PhysicsSimulation_Numerical_Integration",
+				"PhysicsSimulation_Force_Fields",
+				"PhysicsSimulation_Finite_Element_Method_FEM",
+				"PhysicsSimulation_Mass_Spring_Damper",
+				"PhysicsSimulation_Cloth_Simulation",
+				"PhysicsSimulation_Particle_Systems"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["proceduralaudio"],
+			"completion_rewards": ["physics_pioneer_badge", "simulation_specialist_badge"]
+		},
+		"softbodies": {
+			"name": "Soft Bodies",
+			"description": "Explore cloth physics, deformation, and tactile interaction systems",
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Cloth physics simulation",
+				"Soft body deformation",
+				"Tactile interaction design",
+				"Affect theory in digital spaces"
+			],
+			"maps": [
+				"SoftBodies_Cloth_Physics",
+				"SoftBodies_Soft_Body_Deformation",
+				"SoftBodies_Playground_of_Joy",
+				"SoftBodies_Affect_Theory_Visualization"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["physicssimulation"],
+			"completion_rewards": ["soft_body_badge", "tactile_explorer_badge"]
+		},
+		"recursiveemergence": {
+			"name": "Recursive Emergence",
+			"description": "Explore cellular automata, fractals, and emergent complexity",
+			"difficulty": "advanced",
+			"estimated_time": "35-45 minutes",
+			"learning_objectives": [
+				"Cellular automata patterns",
+				"Fractal generation systems",
+				"Recursive mathematical structures",
+				"Emergent behavior analysis"
+			],
+			"maps": [
+				"RecursiveEmergence_Cellular_Automata_1D",
+				"RecursiveEmergence_Cellular_Automata_2D",
+				"RecursiveEmergence_Cellular_Automata_3D",
+				"RecursiveEmergence_Rule_30_110",
+				"RecursiveEmergence_Lattice_Gas_Automata",
+				"RecursiveEmergence_Fibonacci_Sequences",
+				"RecursiveEmergence_Koch_Curve",
+				"RecursiveEmergence_Tail_Recursion_Memoization",
+				"RecursiveEmergence_Mandelbrot_Set",
+				"RecursiveEmergence_Julia_Set",
+				"RecursiveEmergence_Iterated_Function_Systems_IFS"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["softbodies"],
+			"completion_rewards": ["fractal_explorer_badge", "emergence_specialist_badge"]
+		},
+		"lsystems": {
+			"name": "L-Systems",
+			"description": "Explore generative grammar systems and formal language structures",
+			"difficulty": "advanced",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Generative grammar rules",
+				"Formal language structures",
+				"Botanical generation systems",
+				"Stochastic rule variations"
+			],
+			"maps": [
+				"LSystems_Tree_L_Systems",
+				"LSystems_Context_Free_Grammars_CFG",
+				"LSystems_Backus_Naur_Form_BNF",
+				"LSystems_Shape_Grammars",
+				"LSystems_Stochastic_L_Systems",
+				"LSystems_Different_Grammar_Types"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["recursiveemergence"],
+			"completion_rewards": ["grammar_architect_badge", "generative_systems_badge"]
+		},
+		"swarmintelligence": {
+			"name": "Swarm Intelligence",
+			"description": "Explore collective behavior and distributed intelligence systems",
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Collective behavior patterns",
+				"Distributed problem solving",
+				"Agent-based modeling",
+				"Optimization through swarms"
+			],
+			"maps": [
+				"SwarmIntelligence_Boids_Algorithm",
+				"SwarmIntelligence_Agent_Based_Modeling_ABM",
+				"SwarmIntelligence_Ant_Colony_Optimization",
+				"SwarmIntelligence_Particle_Swarm_Optimization",
+				"SwarmIntelligence_Swarm_Intelligence_Algorithms"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["lsystems"],
+			"completion_rewards": ["swarm_coordinator_badge", "collective_intelligence_badge"]
+		},
+		"patterngeneration": {
+			"name": "Pattern Generation",
+			"description": "Explore algorithmic pattern creation and tessellation systems",
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Tessellation algorithms",
+				"Pattern generation systems",
+				"Typography algorithms",
+				"Narrative generation"
+			],
+			"maps": [
+				"PatternGeneration_Wang_Tiles",
+				"PatternGeneration_Penrose_Tilings",
+				"PatternGeneration_Diffusion_Limited_Aggregation_DLA",
+				"PatternGeneration_Typography_Generation",
+				"PatternGeneration_Narrative_Generation"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["swarmintelligence"],
+			"completion_rewards": ["pattern_architect_badge", "tessellation_specialist_badge"]
+		},
+		"proceduralgeneration": {
+			"name": "Procedural Generation",
+			"description": "Explore advanced procedural content generation systems",
+			"difficulty": "advanced",
+			"estimated_time": "40-50 minutes",
+			"learning_objectives": [
+				"Spatial partitioning algorithms",
+				"Genetic algorithms",
+				"Markov chain systems",
+				"Constraint-based generation"
+			],
+			"maps": [
+				"ProceduralGeneration_Voronoi_Diagrams",
+				"ProceduralGeneration_Delaunay_Triangulation",
+				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGeneration_Markov_Chains",
+				"ProceduralGeneration_N_grams",
+				"ProceduralGeneration_Poisson_Disk_Sampling",
+				"ProceduralGeneration_Wave_Function_Collapse",
+				"ProceduralGeneration_Space_Colonization_Algorithms",
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
+				"ProceduralGeneration_Genetic_Algorithms",
+				"ProceduralGeneration_Evolutionary_Computation",
+				"ProceduralGeneration_Genetic_Programming",
+				"ProceduralGeneration_Marching_Cubes_Algorithm"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["patterngeneration"],
+			"completion_rewards": ["procedural_master_badge", "generation_specialist_badge"]
+		},
+		"searchpathfinding": {
+			"name": "Search & Pathfinding",
+			"description": "Explore optimization and pathfinding algorithms",
+			"difficulty": "intermediate",
+			"estimated_time": "30-35 minutes",
+			"learning_objectives": [
+				"Graph traversal methods",
+				"Optimization algorithms",
+				"Heuristic search techniques",
+				"Pathfinding in complex spaces"
+			],
+			"maps": [
+				"SearchPathfinding_Gradient_Descent",
+				"SearchPathfinding_Dijkstra_s_Algorithm",
+				"SearchPathfinding_A_Search_Algorithm",
+				"SearchPathfinding_Breadth_First_Search_BFS",
+				"SearchPathfinding_Depth_First_Search_DFS",
+				"SearchPathfinding_Simulated_Annealing",
+				"SearchPathfinding_Particle_Swarm_Optimization"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["proceduralgeneration"],
+			"completion_rewards": ["pathfinding_expert_badge", "optimization_specialist_badge"]
+		},
+		"graphtheory": {
+			"name": "Graph Theory",
+			"description": "Explore graph algorithms and network analysis",
+			"difficulty": "advanced",
+			"estimated_time": "35-40 minutes",
+			"learning_objectives": [
+				"Network analysis techniques",
+				"Graph traversal algorithms",
+				"Flow optimization",
+				"Connectivity analysis"
+			],
+			"maps": [
+				"GraphTheory_Network_Analysis",
+				"GraphTheory_Force_Directed_Graph_Layout",
+				"GraphTheory_Tarjan_s_Algorithm",
+				"GraphTheory_Kosaraju_s_Algorithm",
+				"GraphTheory_Topological_Sort",
+				"GraphTheory_Minimum_Spanning_Tree",
+				"GraphTheory_Maximum_Flow_Algorithms",
+				"GraphTheory_Push_Relabel_Algorithm",
+				"GraphTheory_Karger_s_Algorithm",
+				"GraphTheory_Edmonds_Algorithm"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["searchpathfinding"],
+			"completion_rewards": ["graph_theory_master_badge", "network_analyst_badge"]
+		},
+		"computationalgeometry": {
+			"name": "Computational Geometry",
+			"description": "Explore geometric algorithms and spatial computation",
+			"difficulty": "advanced",
+			"estimated_time": "30-35 minutes",
+			"learning_objectives": [
+				"Geometric algorithm design",
+				"Spatial data structures",
+				"Distance field computation",
+				"Morphological operations"
+			],
+			"maps": [
+				"ComputationalGeometry_Medial_Axis_Transform",
+				"ComputationalGeometry_Distance_Fields_SDF",
+				"ComputationalGeometry_Morphological_Operations",
+				"ComputationalGeometry_Closest_Pair_Problem",
+				"ComputationalGeometry_Line_Intersection",
+				"ComputationalGeometry_Point_in_Polygon",
+				"ComputationalGeometry_Convex_Hull_Algorithms",
+				"ComputationalGeometry_Euclidean_Distance_Transform"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["graphtheory"],
+			"completion_rewards": ["geometry_expert_badge", "spatial_computation_badge"]
+		},
+		"machinelearning": {
+			"name": "Machine Learning",
+			"description": "Explore neural networks and AI algorithms",
+			"difficulty": "advanced",
+			"estimated_time": "45-55 minutes",
+			"learning_objectives": [
+				"Neural network architectures",
+				"Deep learning systems",
+				"AI model training",
+				"Explainable AI concepts"
+			],
+			"maps": [
+				"MachineLearning_Neural_Networks",
+				"MachineLearning_Convolutional_Neural_Networks_CNNs",
+				"MachineLearning_Recurrent_Neural_Networks_RNNs",
+				"MachineLearning_LSTMs",
+				"MachineLearning_Transformers",
+				"MachineLearning_Generative_Adversarial_Networks_GANs",
+				"MachineLearning_Variational_Autoencoders_VAEs",
+				"MachineLearning_Clustering_Algorithms",
+				"MachineLearning_Dimensionality_Reduction",
+				"MachineLearning_Transfer_Learning",
+				"MachineLearning_Fine_tuning",
+				"MachineLearning_Explainable_AI_XAI",
+				"MachineLearning_Recommendation_Systems",
+				"MachineLearning_Classification_Algorithms",
+				"MachineLearning_Attention_Mechanisms"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["computationalgeometry"],
+			"completion_rewards": ["ai_specialist_badge", "neural_network_architect_badge"]
+		},
+		"criticalalgorithms": {
+			"name": "Critical Algorithms",
+			"description": "Explore algorithmic bias, ethics, and societal impact of algorithms",
+			"difficulty": "advanced",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Algorithmic bias analysis",
+				"Ethics in AI systems",
+				"Societal impact assessment",
+				"Surveillance system critique"
+			],
+			"maps": [
+				"CriticalAlgorithms_Algorithmic_Misframing",
+				"CriticalAlgorithms_Societal_Impact",
+				"CriticalAlgorithms_Ethics_in_AI",
+				"CriticalAlgorithms_Algorithmic_Bias_Visualization",
+				"CriticalAlgorithms_Surveillance_Systems",
+				"CriticalAlgorithms_Attention_Economy"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["machinelearning"],
+			"completion_rewards": ["critical_thinker_badge", "algorithm_ethicist_badge"]
+		},
+		"speculativecomputation": {
+			"name": "Speculative Computation",
+			"description": "Explore non-traditional computational approaches and alternative paradigms",
+			"difficulty": "advanced",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Alternative computational paradigms",
+				"Non-binary system design",
+				"Evolutionary computation",
+				"Ontological uncertainty navigation"
+			],
+			"maps": [
+				"SpeculativeComputation_Evolutionary_Algorithms",
+				"SpeculativeComputation_Queer_Cyborg_Subjectivity",
+				"SpeculativeComputation_Queer_Morphological_Systems",
+				"SpeculativeComputation_Ontological_Uncertainty"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["criticalalgorithms"],
+			"completion_rewards": ["speculative_explorer_badge", "paradigm_shifter_badge"]
+		},
+		"resourcemanagement": {
+			"name": "Resource Management",
+			"description": "Explore computational efficiency and system optimization",
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Performance optimization",
+				"Hardware utilization",
+				"Algorithmic complexity analysis",
+				"Development workflow optimization"
+			],
+			"maps": [
+				"ResourceManagement_Real_time_vs_Offline_Processing",
+				"ResourceManagement_Hardware_Considerations",
+				"ResourceManagement_Algorithmic_Complexity_Big_O",
+				"ResourceManagement_Data_Locality_Caching",
+				"ResourceManagement_Version_Control",
+				"ResourceManagement_Testing_and_Debugging"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["speculativecomputation"],
+			"completion_rewards": ["optimization_expert_badge", "efficiency_master_badge"]
+		},
+		"advancedlaboratory": {
+			"name": "Advanced Laboratory",
+			"description": "Explore complex systems theory and laboratory simulation",
+			"difficulty": "advanced",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Complex systems modeling",
+				"Cybernetic feedback loops",
+				"Entropy and information theory",
+				"Laboratory equipment simulation"
+			],
+			"maps": [
+				"AdvancedLaboratory_Lab_Equipment_Simulation",
+				"AdvancedLaboratory_Water_Dynamics",
+				"AdvancedLaboratory_Entropy_Visualization",
+				"AdvancedLaboratory_Feedback_Cybernetics",
+				"AdvancedLaboratory_Systems_Theory"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["resourcemanagement"],
+			"completion_rewards": ["systems_master_badge", "laboratory_architect_badge"]
 		}
 	},
 	

@@ -367,8 +367,8 @@ func _return_to_hub(completion_data: Dictionary = {}):
 		completion_data["total_maps"] = current_sequence_data.get("maps", []).size()
 		completion_data["completion_timestamp"] = Time.get_datetime_string_from_system()
 		
-		# CRITICAL FIX: Save the completed sequence to progression file
-		_save_sequence_completion(completed_sequence)
+		# TODO: Skip sequence saving for now - just direct to correct lab map
+		print("AdaSceneManager: ⏭️ Skipping sequence saving - direct map transition for: %s" % completed_sequence)
 		
 		# Notify MapProgressionManager if available
 		if map_progression_manager_ref and map_progression_manager_ref.has_method("complete_map"):
@@ -391,6 +391,7 @@ func _return_to_hub(completion_data: Dictionary = {}):
 	}
 	
 	print("AdaSceneManager: 🎉 Sequence '%s' completed - returning to lab state: %s" % [completed_sequence, lab_map_name])
+	print("AdaSceneManager: 🔍 DEBUG - lab_scene_data = %s" % lab_scene_data)
 	
 	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
@@ -549,42 +550,7 @@ func set_staging_reference(staging: Node):
 	staging_ref = staging
 	print("AdaSceneManager: Staging reference set to: %s" % staging.name)
 
-func _save_sequence_completion(sequence_name: String):
-	"""Save completed sequence to lab progression file"""
-	if sequence_name.is_empty():
-		return
-		
-	var save_path = "user://lab_progression.save"
-	var completed_sequences: Array[String] = []
-	
-	# Load existing progression
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		var save_data = file.get_var()
-		file.close()
-		
-		var loaded_sequences = save_data.get("completed_sequences", [])
-		for seq in loaded_sequences:
-			completed_sequences.append(str(seq))
-	
-	# Add new sequence if not already completed
-	if not sequence_name in completed_sequences:
-		completed_sequences.append(sequence_name)
-		print("AdaSceneManager: 🎉 Added completed sequence: %s" % sequence_name)
-	else:
-		print("AdaSceneManager: Sequence already completed: %s" % sequence_name)
-	
-	# Save updated progression
-	var save_data = {
-		"completed_sequences": completed_sequences,
-		"timestamp": Time.get_datetime_string_from_system()
-	}
-	
-	var file = FileAccess.open(save_path, FileAccess.WRITE)
-	file.store_var(save_data)
-	file.close()
-	
-	print("AdaSceneManager: ✅ Progression saved - completed sequences: %s" % str(completed_sequences))
+# TODO: Implement _save_sequence_completion() later when needed
 
 # =============================================================================
 # PROGRESSION INTEGRATION
@@ -724,40 +690,45 @@ func _on_lab_map_transition_complete(new_state: String):
 
 
 func _determine_lab_map_for_return(completed_sequence: String) -> String:
-	"""Determine lab map using JSON rules via LabGridScene logic.
-	Falls back to initial map if rules cannot be loaded.
-	"""
-	# Delegate selection to LabGridScene's JSON-driven rules by reading saved progression
-	var save_path = "user://lab_progression.save"
-	var completed_sequences: Array[String] = []
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		var save_data = file.get_var()
-		file.close()
-		var loaded_sequences = save_data.get("completed_sequences", [])
-		for seq in loaded_sequences:
-			completed_sequences.append(str(seq))
-
-	# Load lab progression JSON
-	var config_path = "res://commons/maps/Lab/lab_map_progression.json"
-	if not FileAccess.file_exists(config_path):
-		return "Lab/map_data_init"
-	var cfg_file = FileAccess.open(config_path, FileAccess.READ)
-	var cfg_text = cfg_file.get_as_text()
-	cfg_file.close()
-	var json = JSON.new()
-	if json.parse(cfg_text) != OK:
-		return "Lab/map_data_init"
-	var cfg = json.data
-	var mapping = cfg.get("progression_mapping", {})
-	var rules = mapping.get("rules", [])
-	for rule in rules:
-		var reqs = rule.get("required_sequences", [])
-		var match_all = true
-		for req in reqs:
-			if not str(req) in completed_sequences:
-				match_all = false
-				break
-		if match_all:
-			return rule.get("lab_map", "Lab/map_data_init")
-	return mapping.get("fallback_map", "Lab/map_data_init")
+	"""Direct mapping: sequence → post map (no save file dependency)"""
+	
+	# Simple hardcoded mapping for immediate results (no JSON dependency)
+	var direct_mapping = {
+		"array_tutorial": "Lab/map_data_post_array",
+		"randomness_exploration": "Lab/map_data_post_random", 
+		"wavefunctions": "Lab/map_data_post_wavefunctions",
+		"proceduralaudio": "Lab/map_data_post_proceduralaudio",
+		"physicssimulation": "Lab/map_data_post_physicssimulation",
+		"softbodies": "Lab/map_data_post_softbodies",
+		"recursiveemergence": "Lab/map_data_post_recursiveemergence",
+		"lsystems": "Lab/map_data_post_lsystems",
+		"swarmintelligence": "Lab/map_data_post_swarmintelligence",
+		"patterngeneration": "Lab/map_data_post_patterngeneration",
+		"proceduralgeneration": "Lab/map_data_post_proceduralgeneration",
+		"searchpathfinding": "Lab/map_data_post_searchpathfinding",
+		"graphtheory": "Lab/map_data_post_graphtheory",
+		"computationalgeometry": "Lab/map_data_post_computationalgeometry",
+		"machinelearning": "Lab/map_data_post_machinelearning",
+		"criticalalgorithms": "Lab/map_data_post_criticalalgorithms",
+		"speculativecomputation": "Lab/map_data_post_speculativecomputation",
+		"resourcemanagement": "Lab/map_data_post_resourcemanagement",
+		"advancedlaboratory": "Lab/map_data_post_advancedlaboratory"
+	}
+	
+	# Debug: show what we're looking for vs what's available
+	print("AdaSceneManager: 🔍 Looking for sequence: '%s'" % completed_sequence)
+	print("AdaSceneManager: 🔍 Available mappings: %s" % str(direct_mapping.keys()))
+	
+	# Direct lookup: completed sequence → post map
+	if direct_mapping.has(completed_sequence):
+		var lab_map = direct_mapping[completed_sequence]
+		print("AdaSceneManager: 🎯 DIRECT: Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
+		return lab_map
+	
+	# No mapping found, use fallback
+	print("AdaSceneManager: ⚠️ No direct mapping for sequence '%s', using fallback" % completed_sequence)
+	print("AdaSceneManager: 🔍 Checking if sequence name is close to any mapping...")
+	for key in direct_mapping.keys():
+		if completed_sequence in key or key in completed_sequence:
+			print("AdaSceneManager: 🔍 Similar key found: '%s'" % key)
+	return "Lab/map_data_init"
