@@ -1,0 +1,91 @@
+{
+	"format_version": "1.0",
+	"description": "Map sequence configurations for Ada Research VR educational system",
+	"last_updated": "2025-01-20",
+	
+	"sequences": {
+		"array_tutorial": {
+			"name": "Array Tutorial Sequence",
+			"description": "Progressive tutorial introducing array concepts through VR navigation",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Basic VR navigation",
+				"Single element interaction", 
+				"Linear array traversal",
+				"2D grid understanding",
+				"Pattern recognition"
+			],
+			"maps": [
+				"Tutorial_Single",
+				"Tutorial_Col", 
+				"Tutorial_Row", 				
+				"Tutorial_2D",
+				"Tutorial_2D_Color",
+				"Tutorial_Disco"
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
+		},
+		"randomness_exploration": {
+			"name": "Randomness & Probability",
+			"description": "Explore concepts of randomness, probability, and statistical thinking",
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Random number generation",
+				"Probability distributions", 
+				"Statistical patterns",
+				"Chaos vs randomness"
+			],
+			"maps": [
+				"Random_One",
+				"Random_Two",
+				"Random_Three",
+				"Random_Four",
+				"Random_Five",
+				"Random_Six"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["probability_pioneer_badge", "chaos_explorer_badge"]
+		},
+		"wavefunctions": {
+			"name": "Wavefunctions",
+			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
+			"difficulty": "intermediate",
+			"estimated_time": "20-30 minutes",
+			"learning_objectives": [
+				"Sine waves and harmonics",
+				"Spectral analysis",
+				"Audio-visualization",
+				"Wave interference"
+			],
+			"maps": [
+				"Wavefunctions_One",
+				"Wavefunctions_Two",
+				"Wavefunctions_Three",
+				"Wavefunctions_Four",
+				"Wavefunctions_Five",
+				"Wavefunctions_Six"
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
+		}
+	},
+	
+	"sequence_metadata": {
+		"progression_rules": {
+			"allow_sequence_skipping": false,
+			"require_completion_for_unlock": true,
+			"save_progress_between_sessions": true
+		},
+		"difficulty_levels": {
+			"beginner": "New to programming and VR",
+			"intermediate": "Basic programming knowledge",
+			"advanced": "Experienced with algorithms and data structures"
+		}
+	}
+}

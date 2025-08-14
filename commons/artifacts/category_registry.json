@@ -1,0 +1,289 @@
+{
+	"canonical_categories": {
+		"Primitives": {
+			"label": "Primitives",
+			"subtopics": [
+				"Point Vertices, Line Edge, Plane, Cube - Interactive 3D construction progression",
+				"Tron Grid Navigation - Spatial reference and coordinate systems",
+				"Geometric Transformations - Real-time rotation, scaling, translation, shearing",
+				"Arrays and Grid Understanding - Visual data structure manipulation",
+				"Static Loop Visualization - Iterator patterns in 3D space",
+				"Sort Algorithm Animation - Bubble, merge, quick sort in spatial arrays",
+				"Modular Loop Operations - Mathematical operations with visual feedback",
+				"Computational Geometry - Convex hulls, triangulation, mesh operations"
+			]
+		},
+		"DataStructures": {
+			"label": "Data Structures",
+			"subtopics": [
+				"Linked Lists - Chain visualization with pointer manipulation",
+				"Trees - Binary, B-trees, decision trees in branching 3D forms",
+				"Hash Maps - Bucket visualization and collision handling",
+				"BSP Trees - Binary space partitioning for 3D scenes",
+				"Quadtrees/Octrees - Hierarchical space subdivision",
+				"Graph Structures - Node and edge manipulation in 3D space",
+				"Heap Operations - Priority queue maintenance visualization",
+				"Trie Operations - Prefix tree algorithms in 3D",
+				"Union-Find (Disjoint Set) - Connectivity queries visualization",
+				"Segment Tree - Range query optimization structures",
+				"Fenwick Tree (Binary Indexed Tree) - Efficient update visualization",
+				"Suffix Array/Tree - String processing structures"
+			]
+		},
+		"WaveFunctions": {
+			"label": "Wave Functions",
+			"subtopics": [
+				"Unit Circle - Sine and cosine wave generation",
+				"Circle, Cone, Sphere, Torus - Parametric shape exploration",
+				"Sine Space - Smooth topology manipulation",
+				"Fourier Transforms - Frequency domain visualization",
+				"Wave Interference Patterns - Multiple wave source interaction",
+				"Standing Wave Patterns - Resonance and harmonics",
+				"3D Wave Propagation - Sound and light wave simulation"
+			],
+			"synonyms": ["Signal Processing"]
+		},
+		"ProceduralAudio": {
+			"label": "Procedural Audio",
+			"subtopics": [
+				"Sound Synthesis (Drone & Effects) - Real-time audio generation",
+				"Subtractive Synthesis - Filter-based sound shaping",
+				"Additive Synthesis - Harmonic series building",
+				"FM Synthesis - Frequency modulation exploration",
+				"Granular Synthesis - Micro-sound manipulation",
+				"Audio Effects - Reverb, delay, chorus, distortion visualization",
+				"Generative Music Algorithms - Algorithmic composition",
+				"Psychoacoustics - Perception-based audio design"
+			]
+		},
+		"Randomness": {
+			"label": "Randomness",
+			"subtopics": [
+				"Examples of Randomness - Various random phenomena",
+				"Distribution Visualization - Normal, uniform, exponential curves",
+				"Noise Functions - White, pink, brown noise patterns",
+				"Perlin/Simplex Noise - Coherent noise landscapes",
+				"Blue Noise - Poisson disc distribution patterns",
+				"Random Walk - Brownian motion and path generation",
+				"10 PRINT Algorithm - Maze-like pattern generation",
+				"Random Transformations - Stochastic geometric operations",
+				"Digital Materiality & Glitch - Error as aesthetic",
+				"TRNG vs PRNG - True vs pseudo-random comparison"
+			],
+			"synonyms": ["Noise"]
+		},
+		"PhysicsSimulation": {
+			"label": "Physics Simulation",
+			"subtopics": [
+				"Newton's Laws - Moving bodies and force visualization",
+				"Vector Fields - 3D force field navigation",
+				"Three-Body Problem - Gravitational dynamics",
+				"Bouncing Ball Physics - Basic collision and momentum",
+				"Rigid Body Dynamics - Stacking blocks, tumbling objects",
+				"Constraints - Joints, hinges, slider mechanisms",
+				"Verlet Integration - Cloth, rope, soft body foundation",
+				"Spring-Mass Systems - Deformable object simulation",
+				"Fluid Simulation (SPH) - Smoothed particle hydrodynamics",
+				"Collision Detection - Broad phase (spatial hashing) and narrow phase (GJK/SAT)",
+				"Numerical Integration - Euler, Runge-Kutta methods",
+				"Force Fields - Gravity, magnetic, fluid drag interactions",
+				"Finite Element Method (FEM) - Advanced deformable body simulation",
+				"Mass-Spring-Damper - Detailed elasticity models",
+				"Cloth Simulation - Self-collision, wind interaction",
+				"Particle Systems - Smoke, fire, sparks, weather effects"
+			],
+			"synonyms": ["Simulation"]
+		},
+		"SoftBodies": {
+			"label": "Soft Bodies",
+			"subtopics": [
+				"Cloth Physics - Interactive fabric manipulation",
+				"Soft Body Deformation - Squishy, elastic object behavior",
+				"Playground of Joy - Tactile interaction experiences",
+				"Affect Theory Visualization - Emotional response to digital touch"
+			]
+		},
+		"RecursiveEmergence": {
+			"label": "Recursive Emergence",
+			"subtopics": [
+				"Cellular Automata 1D - Elementary rule visualization",
+				"Cellular Automata 2D - Game of Life and variants",
+				"Cellular Automata 3D - Volumetric automaton spaces",
+				"Rule 30/110 - Specific CA rule exploration",
+				"Lattice Gas Automata - Non-standard CA systems",
+				"Fibonacci Sequences - Mathematical recursion patterns",
+				"Koch Curve - Fractal curve generation",
+				"Tail Recursion/Memoization - Optimization techniques",
+				"Mandelbrot Set - Complex number fractal exploration",
+				"Julia Set - Parameter-space fractal variants",
+				"Iterated Function Systems (IFS) - Fractal generation methods"
+			]
+		},
+		"LSystems": {
+			"label": "L-Systems",
+			"subtopics": [
+				"Tree L-Systems - Botanical structure generation",
+				"Context-Free Grammars (CFG) - Language generation rules",
+				"Backus-Naur Form (BNF) - Formal grammar notation",
+				"Shape Grammars - Architectural and design rules",
+				"Stochastic L-Systems - Probabilistic grammar rules",
+				"Different Grammar Types - Various rule system examples"
+			]
+		},
+		"SwarmIntelligence": {
+			"label": "Swarm Intelligence",
+			"subtopics": [
+				"Boids Algorithm - Flocking, schooling, herding behavior",
+				"Agent-Based Modeling (ABM) - Social simulation systems",
+				"Ant Colony Optimization - Pheromone-based pathfinding",
+				"Particle Swarm Optimization - Collective problem solving",
+				"Swarm Intelligence Algorithms - Various collective intelligence methods"
+			]
+		},
+		"PatternGeneration": {
+			"label": "Pattern Generation",
+			"subtopics": [
+				"Wang Tiles - Non-repeating tile patterns",
+				"Penrose Tilings - Aperiodic tessellation",
+				"Diffusion-Limited Aggregation (DLA) - Fractal growth structures",
+				"Typography Generation - Algorithmic letterform creation",
+				"Narrative Generation - Procedural storytelling systems"
+			]
+		},
+		"ProceduralGeneration": {
+			"label": "Procedural Generation",
+			"subtopics": [
+				"Voronoi Diagrams - Cell-based spatial division",
+				"Delaunay Triangulation - Optimal mesh generation",
+				"Space Partitioning - Efficient spatial organization",
+				"Markov Chains - State-based generation systems",
+				"N-grams - Text and pattern prediction",
+				"Poisson Disk Sampling - Organic point distribution",
+				"Wave Function Collapse - Constraint-based generation",
+				"Space Colonization Algorithms - Growth simulation",
+				"Reaction-Diffusion Systems - Pattern formation processes",
+				"Genetic Algorithms - Evolutionary optimization",
+				"Evolutionary Computation - Population-based problem solving",
+				"Genetic Programming - Code evolution systems",
+				"Marching Cubes Algorithm - Isosurface extraction"
+			]
+		},
+		"SearchPathfinding": {
+			"label": "Search & Pathfinding",
+			"subtopics": [
+				"Gradient Descent - Optimization landscape navigation",
+				"Dijkstra's Algorithm - Shortest path computation",
+				"A* Search Algorithm - Heuristic pathfinding",
+				"Breadth-First Search (BFS) - Graph traversal method",
+				"Depth-First Search (DFS) - Alternative graph traversal",
+				"Simulated Annealing - Temperature-based optimization",
+				"Particle Swarm Optimization - (Cross-reference with swarms)"
+			]
+		},
+		"GraphTheory": {
+			"label": "Graph Theory",
+			"subtopics": [
+				"Network Analysis - Centrality, clustering, small-world networks",
+				"Force-Directed Graph Layout - Spring-based node positioning",
+				"Tarjan's Algorithm - Strongly connected components",
+				"Kosaraju's Algorithm - Alternative SCC algorithm",
+				"Topological Sort - Dependency ordering visualization",
+				"Minimum Spanning Tree - Kruskal's and Prim's algorithms",
+				"Maximum Flow Algorithms - Ford-Fulkerson, Edmonds-Karp, Dinic's",
+				"Push-Relabel Algorithm - Alternative max flow approach",
+				"Karger's Algorithm - Monte Carlo minimum cut",
+				"Edmonds' Algorithm - Maximum weight matching"
+			]
+		},
+		"ComputationalGeometry": {
+			"label": "Computational Geometry",
+			"subtopics": [
+				"Medial Axis Transform - Skeleton extraction algorithms",
+				"Distance Fields (SDF) - Smooth boolean shape operations",
+				"Morphological Operations - Erosion, dilation for digital materiality",
+				"Closest Pair Problem - Efficient distance computation in 3D",
+				"Line Intersection - Computational geometry primitives",
+				"Point-in-Polygon - Spatial query algorithms",
+				"Convex Hull Algorithms - Graham scan, Gift wrapping in 3D",
+				"Euclidean Distance Transform - Distance field computation"
+			],
+			"synonyms": ["Visualization"]
+		},
+		"MachineLearning": {
+			"label": "Machine Learning",
+			"subtopics": [
+				"Neural Networks - Basic feedforward, backpropagation",
+				"Convolutional Neural Networks (CNNs) - Image processing networks",
+				"Recurrent Neural Networks (RNNs) - Sequential data processing",
+				"LSTMs - Long short-term memory networks",
+				"Transformers - Attention-based architectures",
+				"Generative Adversarial Networks (GANs) - Generator vs discriminator",
+				"Variational Autoencoders (VAEs) - Latent space generation",
+				"Clustering Algorithms - K-means and variants",
+				"Dimensionality Reduction - PCA, t-SNE visualization",
+				"Transfer Learning - Pre-trained model adaptation",
+				"Fine-tuning - Model specialization processes",
+				"Explainable AI (XAI) - AI decision transparency",
+				"Recommendation Systems - Collaborative and content-based filtering",
+				"Classification Algorithms - Decision trees, various classifiers",
+				"Attention Mechanisms - AI focus and prioritization systems"
+			]
+		},
+		"CriticalAlgorithms": {
+			"label": "Critical Algorithms",
+			"subtopics": [
+				"Algorithmic Misframing - Bias and distortion in systems",
+				"Societal Impact - VR, AI, and algorithm effects on society",
+				"Ethics in AI - Bias, accountability, transparency discussions",
+				"Algorithmic Bias Visualization - Discrimination pattern analysis",
+				"Surveillance Systems - Pattern recognition and tracking",
+				"Attention Economy - Engagement optimization algorithms"
+			]
+		},
+		"SpeculativeComputation": {
+			"label": "Speculative Computation",
+			"subtopics": [
+				"Evolutionary Algorithms - Non-traditional optimization approaches",
+				"Queer Cyborg Subjectivity - Alternative identity algorithms",
+				"Queer Morphological Systems - Non-binary form generation",
+				"Ontological Uncertainty - Ambiguous category navigation"
+			]
+		},
+		"ResourceManagement": {
+			"label": "Resource Management",
+			"subtopics": [
+				"Real-time vs Offline Processing - Computational trade-offs",
+				"Hardware Considerations - GPU, CPU optimization strategies",
+				"Algorithmic Complexity (Big O) - Performance analysis visualization",
+				"Data Locality/Caching - Memory access pattern optimization",
+				"Version Control - Collaborative development systems",
+				"Testing and Debugging - Quality assurance algorithms"
+			]
+		},
+		"AdvancedLaboratory": {
+			"label": "Advanced Laboratory",
+			"subtopics": [
+				"Lab Equipment Simulation - Scientific instrument modeling",
+				"Water Dynamics - Fluid behavior and randomness",
+				"Entropy Visualization - Disorder and information theory",
+				"Feedback Cybernetics - Control system loops",
+				"Systems Theory - Complex system interactions"
+			]
+		}
+	},
+	"synonyms": {
+		"Noise": "Randomness",
+		"Signal Processing": "WaveFunctions",
+		"Simulation": "PhysicsSimulation",
+		"Search": "SearchPathfinding",
+		"Visualization": "ComputationalGeometry",
+		"Procedural Generation": "ProceduralGeneration",
+		"Audio Analysis": "WaveFunctions"
+	},
+	"cross_references": {
+		"Particle Swarm Optimization": ["SwarmIntelligence", "SearchPathfinding"],
+		"Reaction-Diffusion Systems": ["PatternGeneration", "ProceduralGeneration"],
+		"Fourier Transforms": ["WaveFunctions", "ProceduralAudio"]
+	}
+}
+

@@ -417,7 +417,8 @@ func _is_sequence_name(name: String) -> bool:
 		"array_tutorial",
 		"randomness_exploration", 
 		"geometric_algorithms",
-		"advanced_concepts"
+		"advanced_concepts",
+		"wavefunctions"
 	]
 	return name in known_sequences
 

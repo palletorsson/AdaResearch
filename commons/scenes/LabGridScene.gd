@@ -449,32 +449,24 @@ func _validate_and_fix_progression(completed_sequences: Array[String], config: D
 	return valid_sequences
 
 func force_load_post_array_map():
-	"""Immediately force load the post-array map regardless of progression"""
-	print("LabGridScene: 🎯 FORCE LOADING POST-ARRAY MAP")
-	
-	# Update progression to only array_tutorial
+	"""Debug helper: compute target via JSON rules after faking array completion"""
+	print("LabGridScene: 🎯 FORCE LOAD via rules (array_tutorial only)")
 	var save_path = "user://lab_progression.save"
 	var save_data = {
 		"completed_sequences": ["array_tutorial"],
 		"timestamp": Time.get_datetime_string_from_system(),
 		"forced_by_user": true
 	}
-	
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var(save_data)
 	file.close()
-	
-	# Force load the post-array map
-	var target_map = "Lab/map_data_post_array"
-	print("LabGridScene: 🚀 Loading map: %s" % target_map)
-	
+	var new_map = _determine_map_from_sequences(["array_tutorial"])
+	print("LabGridScene: 🚀 Loading map via rules: %s" % new_map)
 	if lab_grid_system:
-		lab_grid_system.map_name = target_map
+		lab_grid_system.map_name = new_map
 		if lab_grid_system.has_method("reload_map_with_name"):
-			lab_grid_system.reload_map_with_name(target_map)
+			lab_grid_system.reload_map_with_name(new_map)
 		else:
 			get_tree().reload_current_scene()
 	else:
 		print("LabGridScene: ❌ No lab_grid_system found, cannot reload")
-	
-	print("LabGridScene: ✅ Post-array map should now be loaded!")

@@ -1,7 +1,7 @@
 {
 	"algorithms": [
 		{
-			"category": "Noise",
+			"category": "Randomness",
 			"complexity": "O(n)",
 			"description": "A gradient noise function that creates natural-looking randomness",
 			"history": "Created by Ken Perlin while working on the movie Tron. Later won an Academy Award for Technical Achievement.",
@@ -29,7 +29,7 @@
 			"year_invented": 1983.0
 		},
 		{
-			"category": "Noise",
+			"category": "Randomness",
 			"complexity": "O(n)",
 			"description": "An improvement over Perlin noise with lower computational complexity and fewer directional artifacts",
 			"history": "Developed by Ken Perlin as an improvement to his original Perlin noise algorithm.",
@@ -57,7 +57,7 @@
 			"year_invented": 2001.0
 		},
 		{
-			"category": "Noise",
+			"category": "Randomness",
 			"complexity": "O(n)",
 			"description": "A simple noise function that interpolates between random values at integer coordinates",
 			"id": "3",
@@ -79,7 +79,7 @@
 			"year_invented": 1985.0
 		},
 		{
-			"category": "Signal Processing",
+			"category": "WaveFunctions",
 			"complexity": "O(n log n) for FFT",
 			"description": "Decomposes a function of time into its constituent frequencies",
 			"history": "Introduced by Joseph Fourier in his study of heat transfer. The Fast Fourier Transform (FFT) algorithm was later developed in 1965 by Cooley and Tukey.",
@@ -103,7 +103,7 @@
 			"year_invented": 1822.0
 		},
 		{
-			"category": "Simulation",
+			"category": "PatternGeneration",
 			"complexity": "O(n²) per time step",
 			"description": "Simulates the interaction between chemicals that can react and diffuse",
 			"history": "Proposed by Alan Turing in his 1952 paper 'The Chemical Basis of Morphogenesis' to explain pattern formation in nature.",
@@ -130,7 +130,7 @@
 			"year_invented": 1952.0
 		},
 		{
-			"category": "Search",
+			"category": "SearchPathfinding",
 			"complexity": "O(b^d) where b is branching factor and d is path depth",
 			"description": "An informed search algorithm for finding the shortest path between nodes in a graph",
 			"history": "Developed at SRI International as an extension of Dijkstra's algorithm that uses heuristics to guide the search.",
@@ -153,7 +153,7 @@
 			"year_invented": 1968.0
 		},
 		{
-			"category": "Visualization",
+			"category": "ComputationalGeometry",
 			"complexity": "O(n³)",
 			"description": "A computer graphics algorithm for extracting a polygonal mesh from a 3D scalar field",
 			"history": "Developed at General Electric for medical data visualization and published at SIGGRAPH 1987.",
@@ -176,7 +176,7 @@
 			"year_invented": 1987.0
 		},
 		{
-			"category": "Procedural Generation",
+			"category": "ProceduralGeneration",
 			"complexity": "O(n×k) where n is voxels and k is growth iterations",
 			"description": "Rhizomatic cave generation system using marching cubes for organic underground networks",
 			"history": "Novel implementation combining biological rhizomatic growth patterns with marching cubes algorithm for cave generation.",

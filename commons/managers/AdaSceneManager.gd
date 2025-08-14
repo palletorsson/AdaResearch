@@ -684,18 +684,40 @@ func _on_lab_map_transition_complete(new_state: String):
 
 
 func _determine_lab_map_for_return(completed_sequence: String) -> String:
-	"""Determine which lab map to load based on completed sequence"""
-	# Let the LabManager handle the state transition
-	# This just provides a hint for initial loading
-	
-	match completed_sequence:
-		"array_tutorial":
-			return "Lab/map_data_post_array"
-		"randomness_exploration":
-			return "Lab/map_data_post_random"
-		"geometric_algorithms":
-			return "Lab/map_data_post_geometric"
-		"advanced_concepts":
-			return "Lab/map_data_complete"
-		_:
-			return "Lab/map_data_init"  # Default to initial state
+	"""Determine lab map using JSON rules via LabGridScene logic.
+	Falls back to initial map if rules cannot be loaded.
+	"""
+	# Delegate selection to LabGridScene's JSON-driven rules by reading saved progression
+	var save_path = "user://lab_progression.save"
+	var completed_sequences: Array[String] = []
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		var save_data = file.get_var()
+		file.close()
+		var loaded_sequences = save_data.get("completed_sequences", [])
+		for seq in loaded_sequences:
+			completed_sequences.append(str(seq))
+
+	# Load lab progression JSON
+	var config_path = "res://commons/maps/Lab/lab_map_progression.json"
+	if not FileAccess.file_exists(config_path):
+		return "Lab/map_data_init"
+	var cfg_file = FileAccess.open(config_path, FileAccess.READ)
+	var cfg_text = cfg_file.get_as_text()
+	cfg_file.close()
+	var json = JSON.new()
+	if json.parse(cfg_text) != OK:
+		return "Lab/map_data_init"
+	var cfg = json.data
+	var mapping = cfg.get("progression_mapping", {})
+	var rules = mapping.get("rules", [])
+	for rule in rules:
+		var reqs = rule.get("required_sequences", [])
+		var match_all = true
+		for req in reqs:
+			if not str(req) in completed_sequences:
+				match_all = false
+				break
+		if match_all:
+			return rule.get("lab_map", "Lab/map_data_init")
+	return mapping.get("fallback_map", "Lab/map_data_init")
