@@ -367,6 +367,9 @@ func _return_to_hub(completion_data: Dictionary = {}):
 		completion_data["total_maps"] = current_sequence_data.get("maps", []).size()
 		completion_data["completion_timestamp"] = Time.get_datetime_string_from_system()
 		
+		# CRITICAL FIX: Save the completed sequence to progression file
+		_save_sequence_completion(completed_sequence)
+		
 		# Notify MapProgressionManager if available
 		if map_progression_manager_ref and map_progression_manager_ref.has_method("complete_map"):
 			for map_name in current_sequence_data.get("maps", []):
@@ -545,6 +548,43 @@ func get_transition_history() -> Array:
 func set_staging_reference(staging: Node):
 	staging_ref = staging
 	print("AdaSceneManager: Staging reference set to: %s" % staging.name)
+
+func _save_sequence_completion(sequence_name: String):
+	"""Save completed sequence to lab progression file"""
+	if sequence_name.is_empty():
+		return
+		
+	var save_path = "user://lab_progression.save"
+	var completed_sequences: Array[String] = []
+	
+	# Load existing progression
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		var save_data = file.get_var()
+		file.close()
+		
+		var loaded_sequences = save_data.get("completed_sequences", [])
+		for seq in loaded_sequences:
+			completed_sequences.append(str(seq))
+	
+	# Add new sequence if not already completed
+	if not sequence_name in completed_sequences:
+		completed_sequences.append(sequence_name)
+		print("AdaSceneManager: 🎉 Added completed sequence: %s" % sequence_name)
+	else:
+		print("AdaSceneManager: Sequence already completed: %s" % sequence_name)
+	
+	# Save updated progression
+	var save_data = {
+		"completed_sequences": completed_sequences,
+		"timestamp": Time.get_datetime_string_from_system()
+	}
+	
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	file.store_var(save_data)
+	file.close()
+	
+	print("AdaSceneManager: ✅ Progression saved - completed sequences: %s" % str(completed_sequences))
 
 # =============================================================================
 # PROGRESSION INTEGRATION

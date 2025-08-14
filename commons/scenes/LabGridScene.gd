@@ -127,6 +127,9 @@ func _use_lab_manager_state():
 	var state_map = _determine_map_from_sequences(completed_sequences)
 	print("LabGridScene: Using lab map based on completed sequences %s: %s" % [str(completed_sequences), state_map])
 	
+	# Update debug label with map name
+	_update_debug_label(state_map, completed_sequences)
+	
 	if lab_grid_system and "map_name" in lab_grid_system:
 		lab_grid_system.map_name = state_map
 
@@ -470,3 +473,24 @@ func force_load_post_array_map():
 			get_tree().reload_current_scene()
 	else:
 		print("LabGridScene: ❌ No lab_grid_system found, cannot reload")
+
+func _update_debug_label(map_name: String, completed_sequences: Array[String]):
+	"""Update the 3D label in the scene to show current map info for debugging"""
+	var base_node = get_parent()
+	if not base_node:
+		return
+		
+	var label = base_node.find_child("Label3D", true, false)
+	if not label:
+		print("LabGridScene: DEBUG - No Label3D found for debug display")
+		return
+	
+	# Extract just the map file name for cleaner display
+	var map_file = map_name.get_file().get_basename() if map_name.contains("/") else map_name
+	
+	# Create debug text
+	var debug_text = "LAB MAP: %s\nSequences: %s" % [map_file, str(completed_sequences)]
+	
+	label.text = debug_text
+	label.modulate = Color.CYAN  # Make it stand out
+	print("LabGridScene: 🏷️ Updated debug label: %s" % map_file)
