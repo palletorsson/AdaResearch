@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://h4k3i5j0g9l7k1"]
+
+[ext_resource type="Script" path="res://algorithms/searchpathfinding/astar/AStar.gd" id="1_astar"]
+[ext_resource type="Script" path="res://algorithms/searchpathfinding/astar/AStarVisualizer.gd" id="2_visual"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0_astar"]
+albedo_color = Color(0.3, 0.6, 0.9, 1.0)
+metallic = 0.1
+roughness = 0.8
+
+[node name="AStar" type="Node3D"]
+script = ExtResource("1_astar")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 25, 0)
+light_energy = 1.5
+
+[node name="PathfindingVisualizer" type="Node3D" parent="."]
+script = ExtResource("2_visual")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -350.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "A* Pathfinding Algorithm
+- Informed search with heuristics
+- Real-time path visualization
+- Multiple heuristic options
+- Interactive grid manipulation"
+horizontal_alignment = 1
+
+[node name="GridSizeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 20.0
+value = 10.0
+step = 1.0
+
+[node name="GridSizeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Grid Size: 10x10"
+
+[node name="HeuristicSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 3.0
+value = 0.0
+step = 1.0
+
+[node name="HeuristicLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Heuristic: Manhattan"
+
+[node name="ObstacleDensitySlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 0.8
+value = 0.3
+step = 0.05
+
+[node name="ObstacleDensityLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Obstacle Density: 30%"
+
+[node name="DiagonalMovementSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+value = 1.0
+step = 1.0
+
+[node name="DiagonalMovementLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Diagonal Movement: Enabled"
+
+[node name="GenerateGridButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Generate New Grid"
+
+[node name="FindPathButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Find Path"
+
+[node name="ClearPathButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Clear Path"
+
+[node name="StepByStepButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Step by Step"
+

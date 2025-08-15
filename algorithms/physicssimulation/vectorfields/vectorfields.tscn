@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" uid="uid://df07djqrc20l" path="res://algorithms/physicssimulation/vectorfields/VectorFieldArrow.gd" id="2_8e17c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
+
+[node name="VectorFields" type="Node3D"]
+script = ExtResource("2_8e17c")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]
+
+[node name="VectorField" type="Node3D" parent="."]
+
+[node name="TestParticle" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="ParticleTrail" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Vector Fields Visualization
+- Red arrows: Force field vectors
+- Blue sphere: Test particle
+- Green trail: Particle path
+- Use mouse to rotate camera"
+horizontal_alignment = 1
+
+[node name="FieldTypeButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Switch Field Type"
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Particle"
+
+[node name="TrailToggle" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Trail"

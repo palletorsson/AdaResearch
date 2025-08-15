@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxw"]
+
+[ext_resource type="Script" uid="uid://y6vf7tqlkc7s" path="res://algorithms/physicssimulation/springmass/SpringMassSystem.gd" id="1_e942b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxw"]
+
+[node name="SpringMassSystem" type="Node3D"]
+script = ExtResource("1_e942b")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(15, 0, 0, 0, 0.1, 0, 0, 0, 15, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_0xqxw")
+
+[node name="MassPoints" type="Node3D" parent="."]
+
+[node name="Springs" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Spring-Mass System
+- Mass points connected by springs
+- Deformable object simulation
+- Realistic physics behavior
+- Use mouse to rotate camera"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset System"
+
+[node name="PauseButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pause/Resume"
+
+[node name="SpringStiffnessSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 10.0
+step = 0.1
+value = 2.1
+
+[node name="StiffnessLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Spring Stiffness: 2.0"
+
+[node name="DampingSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.1
+
+[node name="DampingLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Damping: 0.8"

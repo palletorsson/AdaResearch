@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://g3j2h4i9f8k6j0"]
+
+[ext_resource type="Script" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusion.gd" id="1_reaction"]
+[ext_resource type="Script" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusionVisualizer.gd" id="2_visual"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0_reaction"]
+albedo_color = Color(0.1, 0.8, 0.3, 1.0)
+metallic = 0.0
+roughness = 1.0
+
+[node name="ReactionDiffusion" type="Node3D"]
+script = ExtResource("1_reaction")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="PatternVisualizer" type="Node3D" parent="."]
+script = ExtResource("2_visual")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -350.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reaction-Diffusion System
+- Chemical pattern formation simulation
+- Turing patterns in 3D
+- Real-time parameter adjustment
+- Multiple pattern types"
+horizontal_alignment = 1
+
+[node name="FeedRateSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.1
+value = 0.055
+step = 0.001
+
+[node name="FeedRateLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Feed Rate: 0.055"
+
+[node name="KillRateSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.1
+value = 0.062
+step = 0.001
+
+[node name="KillRateLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Kill Rate: 0.062"
+
+[node name="DiffusionASlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+value = 1.0
+step = 0.01
+
+[node name="DiffusionALabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Diffusion A: 1.0"
+
+[node name="DiffusionBSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+value = 0.5
+step = 0.01
+
+[node name="DiffusionBLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Diffusion B: 0.5"
+
+[node name="PatternTypeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 3.0
+value = 0.0
+step = 1.0
+
+[node name="PatternTypeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pattern Type: Spots"
+
+[node name="StartButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Start Simulation"
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Pattern"
+
+[node name="ExportButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Export Pattern"

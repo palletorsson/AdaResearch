@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqx0"]
+
+[ext_resource type="Script" uid="uid://cf5qup1cykb0l" path="res://algorithms/physicssimulation/numericalintegration/NumericalIntegration.gd" id="1_614fe"]
+[ext_resource type="Script" uid="uid://d4j3u42g68kht" path="res://algorithms/physicssimulation/numericalintegration/IntegrationParticle.gd" id="2_cf43e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxz"]
+
+[node name="NumericalIntegration" type="Node3D"]
+script = ExtResource("1_614fe")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(15, 0, 0, 0, 0.1, 0, 0, 0, 15, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_0xqxz")
+
+[node name="IntegrationParticles" type="Node3D" parent="."]
+
+[node name="EulerParticle" type="Node3D" parent="IntegrationParticles"]
+script = ExtResource("2_cf43e")
+particle_color = Color(1, 0, 0, 1)
+integration_method = "euler"
+initial_position = Vector3(-4, 2, 0)
+initial_velocity = Vector3(2, 0, 0)
+
+[node name="RK4Particle" type="Node3D" parent="IntegrationParticles"]
+script = ExtResource("2_cf43e")
+particle_color = Color(0, 1, 0, 1)
+integration_method = "rk4"
+initial_position = Vector3(-4, 1, 0)
+initial_velocity = Vector3(2, 0, 0)
+
+[node name="AnalyticalParticle" type="Node3D" parent="IntegrationParticles"]
+script = ExtResource("2_cf43e")
+particle_color = Color(0, 0, 1, 1)
+integration_method = "analytical"
+initial_position = Vector3(-4, 0, 0)
+initial_velocity = Vector3(2, 0, 0)
+
+[node name="Trails" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Numerical Integration
+- Red: Euler method
+- Green: Runge-Kutta 4th order
+- Blue: Analytical solution
+- Compare accuracy of methods"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Particles"
+
+[node name="PauseButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pause/Resume"
+
+[node name="TimeStepSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.1
+step = 0.01
+value = 0.01
+
+[node name="TimeStepLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Time Step: 0.05"
+
+[node name="TrailToggle" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Trails"

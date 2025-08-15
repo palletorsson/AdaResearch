@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
+albedo_color = Color(0.2, 0.6, 1, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.1, 0.3, 0.8, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxr"]
+albedo_color = Color(1, 0.3, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.8, 0.1, 0.1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xqxr"]
+albedo_color = Color(0.2, 1, 0.3, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.1, 0.8, 0.1, 1)
+emission_energy_multiplier = 0.5
+
+[node name="ForceFields" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="GravityField" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="GravityCenter" type="CSGBox3D" parent="GravityField"]
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="GravityParticles" type="Node3D" parent="GravityField"]
+
+[node name="MagneticField" type="Node3D" parent="."]
+
+[node name="MagneticCenter" type="CSGBox3D" parent="MagneticField"]
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="MagneticParticles" type="Node3D" parent="MagneticField"]
+
+[node name="FluidDragField" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="FluidDragCenter" type="CSGBox3D" parent="FluidDragField"]
+size = Vector3(0.5, 0.5, 0.5)
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="FluidDragParticles" type="Node3D" parent="FluidDragField"]
+
+[node name="FieldLines" type="Node3D" parent="."]
+
+[node name="GravityLines" type="Node3D" parent="FieldLines"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MagneticLines" type="Node3D" parent="FieldLines"]
+
+[node name="FluidDragLines" type="Node3D" parent="FieldLines"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Script" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null

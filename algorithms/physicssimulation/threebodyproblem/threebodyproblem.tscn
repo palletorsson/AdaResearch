@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxs"]
+
+[ext_resource type="Script" uid="uid://e4h6irqfj14b" path="res://algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd" id="1_0xqxs"]
+[ext_resource type="Script" uid="uid://bgajkg3bnqisf" path="res://algorithms/physicssimulation/threebodyproblem/CelestialBody.gd" id="2_0xqxs"]
+
+[node name="ThreeBodyProblem" type="Node3D"]
+script = ExtResource("1_0xqxs")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="StarField" type="Node3D" parent="."]
+
+[node name="CelestialBodies" type="Node3D" parent="."]
+
+[node name="Body1" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Alpha"
+body_color = Color(1, 0.5, 0, 1)
+initial_position = Vector3(-5, 0, 0)
+initial_velocity = Vector3(0, 0, 3)
+
+[node name="Body2" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Beta"
+body_color = Color(0, 0.5, 1, 1)
+initial_position = Vector3(5, 0, 0)
+initial_velocity = Vector3(0, 0, -3)
+
+[node name="Body3" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Gamma"
+body_color = Color(0.5, 0, 1, 1)
+initial_position = Vector3(0, 0, 5)
+initial_velocity = Vector3(-3, 0, 0)
+
+[node name="Trails" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Three-Body Problem
+- Three celestial bodies with gravitational interaction
+- Chaotic orbital dynamics
+- Use mouse to rotate camera
+- Watch the unpredictable trajectories"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Simulation"
+
+[node name="PauseButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pause/Resume"
+
+[node name="TrailToggle" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Trails"
+
+[node name="MassSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 100.0
+max_value = 2000.0
+step = 100.0
+value = 1000.0
+
+[node name="MassLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Mass: 1000"

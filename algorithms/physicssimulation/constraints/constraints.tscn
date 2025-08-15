@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxv"]
+
+[ext_resource type="Script" uid="uid://dxptu8sni4w67" path="res://algorithms/physicssimulation/constraints/Constraints.gd" id="1_51005"]
+[ext_resource type="Script" uid="uid://ckkmeivlsuy7j" path="res://algorithms/physicssimulation/constraints/ConstraintBlock.gd" id="2_caf0d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxv"]
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Constraints" type="Node3D"]
+script = ExtResource("1_51005")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_0xqxv")
+
+[node name="ConstraintSystems" type="Node3D" parent="."]
+
+[node name="HingeSystem" type="Node3D" parent="ConstraintSystems"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="Base" type="Node3D" parent="ConstraintSystems/HingeSystem"]
+script = ExtResource("2_caf0d")
+block_color = Color(0.5, 0.5, 0.5, 1)
+is_fixed = true
+
+[node name="HingeJoint" type="Node3D" parent="ConstraintSystems/HingeSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Arm1" type="Node3D" parent="ConstraintSystems/HingeSystem/HingeJoint"]
+script = ExtResource("2_caf0d")
+block_color = Color(1, 0, 0, 1)
+
+[node name="Arm2" type="Node3D" parent="ConstraintSystems/HingeSystem/HingeJoint"]
+script = ExtResource("2_caf0d")
+block_color = Color(0, 1, 0, 1)
+
+[node name="SliderSystem" type="Node3D" parent="ConstraintSystems"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="SliderBase" type="Node3D" parent="ConstraintSystems/SliderSystem"]
+script = ExtResource("2_caf0d")
+block_color = Color(0.5, 0.5, 0.5, 1)
+is_fixed = true
+
+[node name="SliderTrack" type="Node3D" parent="ConstraintSystems/SliderSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SliderBlock" type="Node3D" parent="ConstraintSystems/SliderSystem/SliderTrack"]
+script = ExtResource("2_caf0d")
+block_color = Color(0, 0, 1, 1)
+
+[node name="PendulumSystem" type="Node3D" parent="ConstraintSystems"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="PendulumBase" type="Node3D" parent="ConstraintSystems/PendulumSystem"]
+script = ExtResource("2_caf0d")
+block_color = Color(0.5, 0.5, 0.5, 1)
+is_fixed = true
+
+[node name="PendulumString" type="Node3D" parent="ConstraintSystems/PendulumSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PendulumBob" type="Node3D" parent="ConstraintSystems/PendulumSystem/PendulumString"]
+script = ExtResource("2_caf0d")
+block_color = Color(1, 1, 0, 1)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Constraints Visualization
+- Hinge Joint: Red and green arms
+- Slider: Blue block on track
+- Pendulum: Yellow bob on string
+- Different constraint types in action"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Systems"
+
+[node name="PauseButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pause/Resume"
+
+[node name="ConstraintTypeButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Switch Constraint Type"

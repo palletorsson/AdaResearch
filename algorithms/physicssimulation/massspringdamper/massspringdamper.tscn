@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
+albedo_color = Color(0.8, 0.4, 0.2, 1)
+metallic = 0.3
+roughness = 0.7
+emission_enabled = true
+emission = Color(0.4, 0.2, 0.1, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxr"]
+albedo_color = Color(0.2, 0.6, 0.8, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.1, 0.3, 0.4, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xqxr"]
+albedo_color = Color(0.8, 0.2, 0.6, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.4, 0.1, 0.3, 0)
+emission_energy_multiplier = 0.3
+
+[node name="MassSpringDamper" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="MassSpringSystem" type="Node3D" parent="."]
+
+[node name="Masses" type="Node3D" parent="MassSpringSystem"]
+
+[node name="Springs" type="Node3D" parent="MassSpringSystem"]
+
+[node name="Dampers" type="Node3D" parent="MassSpringSystem"]
+
+[node name="GridStructure" type="Node3D" parent="MassSpringSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="ChainStructure" type="Node3D" parent="MassSpringSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="ClothStructure" type="Node3D" parent="MassSpringSystem"]
+
+[node name="ForceSources" type="Node3D" parent="."]
+
+[node name="WindForce" type="CSGSphere3D" parent="ForceSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+radius = 0.2
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="GravityForce" type="CSGSphere3D" parent="ForceSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+radius = 0.2
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="ExternalForce" type="CSGSphere3D" parent="ForceSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+radius = 0.2
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="Parameters" type="Node3D" parent="."]
+
+[node name="SpringConstant" type="CSGSphere3D" parent="Parameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="DampingCoefficient" type="CSGSphere3D" parent="Parameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="MassValue" type="CSGSphere3D" parent="Parameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="Script" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null

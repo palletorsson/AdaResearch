@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7j5mra2027q"]
+
+[ext_resource type="Script" uid="uid://cnm4mv160os1r" path="res://algorithms/randomness/valuenoise/ValueNoise.gd" id="1_value"]
+[ext_resource type="Script" uid="uid://sb27y88b7klf" path="res://algorithms/randomness/valuenoise/ValueNoiseVisualizer.gd" id="2_value_visual"]
+
+[node name="ValueNoise" type="Node3D"]
+script = ExtResource("1_value")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="NoiseField" type="Node3D" parent="."]
+script = ExtResource("2_value_visual")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Value Noise Visualization
+- Simple interpolation-based noise
+- Configurable interpolation method
+- Adjustable grid resolution
+- Real-time parameter changes"
+horizontal_alignment = 1
+
+[node name="InterpolationSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+value = 1.0
+
+[node name="InterpolationLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Interpolation: Linear"
+
+[node name="GridSizeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 20.0
+value = 10.0
+
+[node name="GridSizeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Grid Size: 10"
+
+[node name="AmplitudeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 3.0
+step = 0.1
+value = 1.1
+
+[node name="AmplitudeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Amplitude: 1.0"
+
+[node name="RegenerateButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Noise"
+
+[node name="ShowGridButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Toggle Grid Lines"

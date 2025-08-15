@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1aqu5i1078fv"]
+
+[ext_resource type="Script" uid="uid://rexe0g44r51e" path="res://algorithms/wavefunctions/fouriertransform/FourierTransform.gd" id="1_fourier"]
+[ext_resource type="Script" uid="uid://doupfscgaxgk2" path="res://algorithms/wavefunctions/fouriertransform/SignalGenerator.gd" id="2_signal"]
+
+[node name="FourierTransform" type="Node3D"]
+script = ExtResource("1_fourier")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 25, 0)
+light_energy = 1.5
+
+[node name="SignalGenerator" type="Node3D" parent="."]
+script = ExtResource("2_signal")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -350.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Fourier Transform Visualization
+- Time domain signal generation
+- Frequency domain analysis
+- Real-time FFT computation
+- Interactive signal parameters"
+horizontal_alignment = 1
+
+[node name="SignalTypeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+max_value = 3.0
+
+[node name="SignalTypeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Signal Type: Sine Wave"
+
+[node name="FrequencySlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.1
+
+[node name="FrequencyLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Frequency: 1.0 Hz"
+
+[node name="AmplitudeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 3.0
+step = 0.1
+value = 1.1
+
+[node name="AmplitudeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Amplitude: 1.0"
+
+[node name="HarmonicsSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 1.0
+
+[node name="HarmonicsLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Harmonics: 1"
+
+[node name="TransformButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Compute FFT"
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Signal"

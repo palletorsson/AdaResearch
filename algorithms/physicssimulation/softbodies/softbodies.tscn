@@ -1,0 +1,152 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
+albedo_color = Color(0.8, 0.4, 0.6, 1)
+metallic = 0.3
+roughness = 0.7
+emission_enabled = true
+emission = Color(0.4, 0.2, 0.3, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxr"]
+albedo_color = Color(0.4, 0.8, 0.6, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.2, 0.4, 0.3, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xqxr"]
+albedo_color = Color(0.6, 0.4, 0.8, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.3, 0.2, 0.4, 1)
+emission_energy_multiplier = 0.3
+
+[node name="SoftBodies" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="SoftBodyObjects" type="Node3D" parent="."]
+
+[node name="JellyCube" type="Node3D" parent="SoftBodyObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="JellyCubeMesh" type="CSGBox3D" parent="SoftBodyObjects/JellyCube"]
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="JellyCubeNodes" type="Node3D" parent="SoftBodyObjects/JellyCube"]
+
+[node name="JellyCubeSprings" type="Node3D" parent="SoftBodyObjects/JellyCube"]
+
+[node name="BlobSphere" type="Node3D" parent="SoftBodyObjects"]
+
+[node name="BlobSphereMesh" type="CSGSphere3D" parent="SoftBodyObjects/BlobSphere"]
+radius = 0.8
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="BlobSphereNodes" type="Node3D" parent="SoftBodyObjects/BlobSphere"]
+
+[node name="BlobSphereSprings" type="Node3D" parent="SoftBodyObjects/BlobSphere"]
+
+[node name="DeformableCylinder" type="Node3D" parent="SoftBodyObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="DeformableCylinderMesh" type="CSGCylinder3D" parent="SoftBodyObjects/DeformableCylinder"]
+height = 1.5
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="DeformableCylinderNodes" type="Node3D" parent="SoftBodyObjects/DeformableCylinder"]
+
+[node name="DeformableCylinderSprings" type="Node3D" parent="SoftBodyObjects/DeformableCylinder"]
+
+[node name="PressureSources" type="Node3D" parent="."]
+
+[node name="PressureField1" type="CSGSphere3D" parent="PressureSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
+radius = 0.3
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="PressureField2" type="CSGSphere3D" parent="PressureSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+radius = 0.3
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="PressureField3" type="CSGSphere3D" parent="PressureSources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.2, 0)
+radius = 0.3
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="CollisionObjects" type="Node3D" parent="."]
+
+[node name="GroundPlane" type="CSGBox3D" parent="CollisionObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+size = Vector3(10, 0.1, 10)
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="Obstacle1" type="CSGSphere3D" parent="CollisionObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, 0)
+radius = 0.4
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="Obstacle2" type="CSGSphere3D" parent="CollisionObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.2, 0)
+radius = 0.3
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="Obstacle3" type="CSGSphere3D" parent="CollisionObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="VolumeIndicators" type="Node3D" parent="."]
+
+[node name="JellyVolume" type="CSGSphere3D" parent="VolumeIndicators"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="BlobVolume" type="CSGSphere3D" parent="VolumeIndicators"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="CylinderVolume" type="CSGSphere3D" parent="VolumeIndicators"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="PhysicsParameters" type="Node3D" parent="."]
+
+[node name="StiffnessControl" type="CSGSphere3D" parent="PhysicsParameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_0xqxr")
+
+[node name="DampingControl" type="CSGSphere3D" parent="PhysicsParameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_1xqxr")
+
+[node name="PressureControl" type="CSGSphere3D" parent="PhysicsParameters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+radius = 0.1
+material = SubResource("StandardMaterial3D_2xqxr")
+
+[node name="Script" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null

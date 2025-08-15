@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxu"]
+
+[ext_resource type="Script" uid="uid://7lxu75mbjs58" path="res://algorithms/physicssimulation/rigidbody/RigidBodyDynamics.gd" id="1_256aa"]
+[ext_resource type="Script" uid="uid://cbsog8cijq4kn" path="res://algorithms/physicssimulation/rigidbody/RigidBlock.gd" id="2_30851"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxu"]
+
+[node name="RigidBodyDynamics" type="Node3D"]
+script = ExtResource("1_256aa")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(20, 0, 0, 0, 0.1, 0, 0, 0, 20, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_0xqxu")
+
+[node name="Walls" type="Node3D" parent="Environment"]
+
+[node name="WallNorth" type="CSGBox3D" parent="Environment/Walls"]
+transform = Transform3D(20, 0, 0, 0, 3, 0, 0, 0, 0.1, 0, 1.5, 10)
+material_override = SubResource("StandardMaterial3D_1xqxu")
+
+[node name="WallSouth" type="CSGBox3D" parent="Environment/Walls"]
+transform = Transform3D(20, 0, 0, 0, 3, 0, 0, 0, 0.1, 0, 1.5, -10)
+material_override = SubResource("StandardMaterial3D_1xqxu")
+
+[node name="WallEast" type="CSGBox3D" parent="Environment/Walls"]
+transform = Transform3D(0.1, 0, 0, 0, 3, 0, 0, 0, 20, 10, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_1xqxu")
+
+[node name="WallWest" type="CSGBox3D" parent="Environment/Walls"]
+transform = Transform3D(0.1, 0, 0, 0, 3, 0, 0, 0, 20, -10, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_1xqxu")
+
+[node name="RigidBlocks" type="Node3D" parent="."]
+
+[node name="Block1" type="Node3D" parent="RigidBlocks"]
+script = ExtResource("2_30851")
+block_color = Color(1, 0, 0, 1)
+initial_position = Vector3(-3, 2, -3)
+initial_rotation = Vector3(0.2, 0.3, 0.1)
+
+[node name="Block2" type="Node3D" parent="RigidBlocks"]
+script = ExtResource("2_30851")
+block_color = Color(0, 1, 0, 1)
+initial_position = Vector3(0, 2, 0)
+initial_rotation = Vector3(0, 0.5, 0)
+
+[node name="Block3" type="Node3D" parent="RigidBlocks"]
+script = ExtResource("2_30851")
+block_color = Color(0, 0, 1, 1)
+initial_position = Vector3(3, 2, 3)
+initial_rotation = Vector3(0.1, 0, 0.4)
+
+[node name="Block4" type="Node3D" parent="RigidBlocks"]
+script = ExtResource("2_30851")
+block_color = Color(1, 1, 0, 1)
+initial_position = Vector3(-2, 4, 2)
+initial_rotation = Vector3(0.3, 0.2, 0.1)
+
+[node name="Block5" type="Node3D" parent="RigidBlocks"]
+script = ExtResource("2_30851")
+block_color = Color(1, 0, 1, 1)
+initial_position = Vector3(2, 4, -2)
+initial_rotation = Vector3(0.1, 0.3, 0.2)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Rigid Body Dynamics
+- Multiple rigid blocks with physics
+- Realistic collision and stacking
+- Angular momentum and tumbling
+- Use mouse to rotate camera"
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset Blocks"
+
+[node name="PauseButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Pause/Resume"
+
+[node name="GravitySlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+max_value = 20.0
+step = 0.1
+value = 10.0
+
+[node name="GravityLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Gravity: 9.8"
+
+[node name="AddBlockButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Add Random Block"
