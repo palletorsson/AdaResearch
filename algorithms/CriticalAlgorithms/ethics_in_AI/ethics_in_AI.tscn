@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/CriticalAlgorithms/ethics_in_AI/EthicsInAI.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="EthicsInAI" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="AISystem" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AICore" type="CSGSphere3D" parent="AISystem"]
+radius = 2.0
+material = SubResource("StandardMaterial3D_1")
+
+[node name="AILabel" type="CSGBox3D" parent="AISystem"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="EthicalFramework" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, 0)
+
+[node name="TransparencyCore" type="CSGSphere3D" parent="EthicalFramework"]
+radius = 0.8
+material = SubResource("StandardMaterial3D_2")
+
+[node name="TransparencyLabel" type="CSGBox3D" parent="EthicalFramework"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="AccountabilityCore" type="CSGSphere3D" parent="EthicalFramework"]
+radius = 0.8
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="AccountabilityLabel" type="CSGBox3D" parent="EthicalFramework"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="HumanValues" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, 0)
+
+[node name="ValuesCore" type="CSGSphere3D" parent="HumanValues"]
+radius = 0.8
+material = SubResource("StandardMaterial3D_2")
+
+[node name="ValuesLabel" type="CSGBox3D" parent="HumanValues"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="HumanCore" type="CSGSphere3D" parent="HumanValues"]
+radius = 0.8
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="HumanLabel" type="CSGBox3D" parent="HumanValues"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="DecisionProcess" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="DecisionCore" type="CSGBox3D" parent="DecisionProcess"]
+size = Vector3(4, 2, 2)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="DecisionLabel" type="CSGBox3D" parent="DecisionProcess"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="EthicalDilemmas" type="Node3D" parent="."]
+
+[node name="DilemmaSpheres" type="Node3D" parent="EthicalDilemmas"]
+
+[node name="DataFlow" type="Node3D" parent="."]
+
+[node name="FlowParticles" type="Node3D" parent="DataFlow"]
+
+[node name="TrustMetrics" type="Node3D" parent="."]
+
+[node name="TrustScore" type="Node3D" parent="TrustMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
+
+[node name="TrustBase" type="CSGBox3D" parent="TrustMetrics/TrustScore"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="TrustIndicator" type="CSGSphere3D" parent="TrustMetrics/TrustScore"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="EthicsScore" type="Node3D" parent="TrustMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
+
+[node name="EthicsBase" type="CSGBox3D" parent="TrustMetrics/EthicsScore"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="EthicsIndicator" type="CSGSphere3D" parent="TrustMetrics/EthicsScore"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

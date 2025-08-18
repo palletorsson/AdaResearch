@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/MachineLearning/computer_vision/ComputerVision.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="ComputerVision" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="InputImage" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="ImagePixels" type="Node3D" parent="InputImage"]
+
+[node name="ImageLabel" type="CSGBox3D" parent="InputImage"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="ConvolutionalNetwork" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="NetworkCore" type="CSGBox3D" parent="ConvolutionalNetwork"]
+size = Vector3(3, 3, 3)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="NetworkLabel" type="CSGBox3D" parent="ConvolutionalNetwork"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="ProcessingLayers" type="Node3D" parent="ConvolutionalNetwork"]
+
+[node name="ConvolutionCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="PoolingCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="ActivationCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="BatchNormCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="DropoutCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="FeatureExtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="FeatureParticles" type="Node3D" parent="FeatureExtraction"]
+
+[node name="FeatureLabel" type="CSGBox3D" parent="FeatureExtraction"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="ObjectDetection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="DetectionCore" type="CSGBox3D" parent="ObjectDetection"]
+size = Vector3(6, 0.5, 3)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="DetectionLabel" type="CSGBox3D" parent="ObjectDetection"]
+size = Vector3(4, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="BoundingBoxes" type="Node3D" parent="ObjectDetection"]
+
+[node name="DataFlow" type="Node3D" parent="."]
+
+[node name="FlowParticles" type="Node3D" parent="DataFlow"]
+
+[node name="VisionMetrics" type="Node3D" parent="."]
+
+[node name="AccuracyMeter" type="Node3D" parent="VisionMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
+
+[node name="AccuracyBase" type="CSGBox3D" parent="VisionMetrics/AccuracyMeter"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="AccuracyIndicator" type="CSGSphere3D" parent="VisionMetrics/AccuracyMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="mAPMeter" type="Node3D" parent="VisionMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
+
+[node name="mAPBase" type="CSGBox3D" parent="VisionMetrics/mAPMeter"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="mAPIndicator" type="CSGSphere3D" parent="VisionMetrics/mAPMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

@@ -1,0 +1,150 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/AdvancedLaboratory/systems_theory/SystemsTheory.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="SystemsTheory" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 18, 18)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 25, 0)
+light_energy = 1.5
+
+[node name="SystemNetwork" type="Node3D" parent="."]
+
+[node name="Subsystem1" type="Node3D" parent="SystemNetwork"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -8)
+
+[node name="Subsystem1Core" type="CSGSphere3D" parent="SystemNetwork/Subsystem1"]
+radius = 1.0
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Subsystem1Label" type="CSGBox3D" parent="SystemNetwork/Subsystem1"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Subsystem2" type="Node3D" parent="SystemNetwork"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -8)
+
+[node name="Subsystem2Core" type="CSGSphere3D" parent="SystemNetwork/Subsystem2"]
+radius = 1.0
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Subsystem2Label" type="CSGBox3D" parent="SystemNetwork/Subsystem2"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Subsystem3" type="Node3D" parent="SystemNetwork"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, 8)
+
+[node name="Subsystem3Core" type="CSGSphere3D" parent="SystemNetwork/Subsystem3"]
+radius = 1.0
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Subsystem3Label" type="CSGBox3D" parent="SystemNetwork/Subsystem3"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Subsystem4" type="Node3D" parent="SystemNetwork"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, 8)
+
+[node name="Subsystem4Core" type="CSGSphere3D" parent="SystemNetwork/Subsystem4"]
+radius = 1.0
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Subsystem4Label" type="CSGBox3D" parent="SystemNetwork/Subsystem4"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="CentralSystem" type="Node3D" parent="SystemNetwork"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CentralCore" type="CSGBox3D" parent="SystemNetwork/CentralSystem"]
+size = Vector3(3, 3, 3)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="CentralLabel" type="CSGBox3D" parent="SystemNetwork/CentralSystem"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="ConnectionNetwork" type="Node3D" parent="SystemNetwork"]
+
+[node name="Connection1" type="CSGCylinder3D" parent="SystemNetwork/ConnectionNetwork"]
+radius = 0.05
+height = 12
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -4)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Connection2" type="CSGCylinder3D" parent="SystemNetwork/ConnectionNetwork"]
+radius = 0.05
+height = 12
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -4)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Connection3" type="CSGCylinder3D" parent="SystemNetwork/ConnectionNetwork"]
+radius = 0.05
+height = 12
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 4)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Connection4" type="CSGCylinder3D" parent="SystemNetwork/ConnectionNetwork"]
+radius = 0.05
+height = 12
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 4)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="DataFlow" type="Node3D" parent="."]
+
+[node name="FlowParticles" type="Node3D" parent="DataFlow"]
+
+[node name="EmergentProperties" type="Node3D" parent="."]
+
+[node name="EmergentSphere" type="CSGSphere3D" parent="EmergentProperties"]
+radius = 0.8
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="EmergentLabel" type="CSGBox3D" parent="EmergentProperties"]
+size = Vector3(4, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="SystemMetrics" type="Node3D" parent="."]
+
+[node name="ComplexityMeter" type="Node3D" parent="SystemMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+
+[node name="MeterBase" type="CSGBox3D" parent="SystemMetrics/ComplexityMeter"]
+size = Vector3(12, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="MeterIndicator" type="CSGSphere3D" parent="SystemMetrics/ComplexityMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

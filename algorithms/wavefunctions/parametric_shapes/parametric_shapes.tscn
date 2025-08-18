@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://d8k9m7v3x2nqr"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/parametric_shapes/ParametricShapes.gd" id="1_parametric"]
+
+[node name="ParametricShapes" type="Node3D"]
+script = ExtResource("1_parametric")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866, 0, -0.866, 0.5, 0, 15, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 18, 0)
+light_energy = 1.2
+
+[node name="ShapePoints" type="Node3D" parent="."]
+
+[node name="ParameterLines" type="Node3D" parent="."]
+
+[node name="ShapeIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, 0)
+size = Vector3(1, 0.5, 0.3)
+
+[node name="ParameterU" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, 0)
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[node name="ParameterV" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -4, 0)
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0

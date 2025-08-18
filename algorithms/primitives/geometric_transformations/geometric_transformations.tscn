@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx8k9v2m4nq7r"]
+
+[ext_resource type="Script" path="res://algorithms/primitives/geometric_transformations/GeometricTransformations.gd" id="1_geometric"]
+
+[node name="GeometricTransformations" type="Node3D"]
+script = ExtResource("1_geometric")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 12, 0)
+light_energy = 1.5
+
+[node name="Point" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+radius = 0.15
+
+[node name="Line" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+top_radius = 0.05
+bottom_radius = 0.05
+height = 3.0
+
+[node name="Plane" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+size = Vector3(2, 0.1, 2)
+
+[node name="Cube" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="TransformationControls" type="Node3D" parent="."]
+
+[node name="RotationIndicator" type="CSGCylinder3D" parent="TransformationControls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[node name="ScaleIndicator" type="CSGBox3D" parent="TransformationControls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -3, 0)
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="TranslationIndicator" type="CSGSphere3D" parent="TransformationControls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, 0)
+radius = 0.2

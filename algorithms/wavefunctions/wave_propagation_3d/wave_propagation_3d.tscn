@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8yxk4v5m9nop"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/wave_propagation_3d/WavePropagation3D.gd" id="1_wave_prop"]
+
+[node name="WavePropagation3D" type="Node3D"]
+script = ExtResource("1_wave_prop")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866, 0, -0.866, 0.5, 0, 15, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.2
+
+[node name="WaveSource" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+radius = 0.3
+
+[node name="WaveSurface" type="Node3D" parent="."]
+
+[node name="WaveRings" type="Node3D" parent="."]
+
+[node name="FrequencyControl" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
+size = Vector3(0.5, 2, 0.2)
+
+[node name="AmplitudeControl" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+size = Vector3(0.5, 2, 0.2)

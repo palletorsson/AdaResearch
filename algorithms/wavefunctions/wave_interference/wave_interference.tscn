@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/wave_interference/WaveInterference.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="WaveInterference" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="WaveSource1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+
+[node name="SourceCore" type="CSGSphere3D" parent="WaveSource1"]
+radius = 0.3
+material = SubResource("StandardMaterial3D_2")
+
+[node name="SourceLabel" type="CSGBox3D" parent="WaveSource1"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="WaveSource2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="SourceCore" type="CSGSphere3D" parent="WaveSource2"]
+radius = 0.3
+material = SubResource("StandardMaterial3D_3")
+
+[node name="SourceLabel" type="CSGBox3D" parent="WaveSource2"]
+size = Vector3(2, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="InterferenceField" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="FieldPoints" type="Node3D" parent="InterferenceField"]
+
+[node name="FieldLabel" type="CSGBox3D" parent="InterferenceField"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="WaveRings1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+
+[node name="WaveRings2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="InterferencePattern" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="PatternCore" type="CSGBox3D" parent="InterferencePattern"]
+size = Vector3(8, 0.1, 6)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="PatternLabel" type="CSGBox3D" parent="InterferencePattern"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

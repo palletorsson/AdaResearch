@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfrkjjy43b6co"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/standing_waves/StandingWaves.gd" id="1_standing_waves"]
+
+[node name="StandingWaves" type="Node3D"]
+script = ExtResource("1_standing_waves")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="WaveString" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(10, 0.1, 0.1)
+
+[node name="LeftAnchor" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+radius = 0.2
+
+[node name="RightAnchor" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+radius = 0.2
+
+[node name="WaveNodes" type="Node3D" parent="."]
+
+[node name="FrequencyIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -3, 0)
+size = Vector3(0.5, 1, 0.1)
+
+[node name="AmplitudeIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3, 0)
+size = Vector3(0.5, 1, 0.1)

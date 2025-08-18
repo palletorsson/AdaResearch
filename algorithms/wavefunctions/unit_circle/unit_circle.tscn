@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/unit_circle/UnitCircle.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="UnitCircle" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="Circle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CirclePoints" type="Node3D" parent="Circle"]
+
+[node name="CircleLabel" type="CSGBox3D" parent="Circle"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="SineWave" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="SinePoints" type="Node3D" parent="SineWave"]
+
+[node name="SineLabel" type="CSGBox3D" parent="SineWave"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="CosineWave" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="CosinePoints" type="Node3D" parent="CosineWave"]
+
+[node name="CosineLabel" type="CSGBox3D" parent="CosineWave"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="RotatingPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PointCore" type="CSGSphere3D" parent="RotatingPoint"]
+radius = 0.2
+material = SubResource("StandardMaterial3D_3")
+
+[node name="RadiusLine" type="CSGBox3D" parent="RotatingPoint"]
+size = Vector3(2, 0.05, 0.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Projections" type="Node3D" parent="."]
+
+[node name="SineProjection" type="Node3D" parent="Projections"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="ProjectionCore" type="CSGSphere3D" parent="Projections/SineProjection"]
+radius = 0.15
+material = SubResource("StandardMaterial3D_3")
+
+[node name="CosineProjection" type="Node3D" parent="Projections"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="ProjectionCore" type="CSGSphere3D" parent="Projections/CosineProjection"]
+radius = 0.15
+material = SubResource("StandardMaterial3D_3")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

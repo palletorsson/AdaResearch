@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7x9k7v6m5nqr"]
+
+[ext_resource type="Script" path="res://algorithms/SearchPathfinding/dijkstra_algorithm/DijkstraAlgorithm.gd" id="1_dijkstra"]
+
+[node name="DijkstraAlgorithm" type="Node3D"]
+script = ExtResource("1_dijkstra")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.2
+
+[node name="GraphNodes" type="Node3D" parent="."]
+
+[node name="GraphEdges" type="Node3D" parent="."]
+
+[node name="StartNode" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 0)
+radius = 0.3
+
+[node name="EndNode" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+radius = 0.3
+
+[node name="DistanceIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
+
+[node name="VisitedCount" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+size = Vector3(0.8, 1, 0.4)

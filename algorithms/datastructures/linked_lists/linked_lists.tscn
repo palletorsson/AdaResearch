@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4k8m9v3x7nqr"]
+
+[ext_resource type="Script" path="res://algorithms/datastructures/linked_lists/LinkedLists.gd" id="1_linked_lists"]
+
+[node name="LinkedLists" type="Node3D"]
+script = ExtResource("1_linked_lists")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5
+
+[node name="ListNodes" type="Node3D" parent="."]
+
+[node name="ListPointers" type="Node3D" parent="."]
+
+[node name="HeadPointer" type="CSGCone3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0)
+top_radius = 0.0
+bottom_radius = 0.3
+height = 0.5
+
+[node name="OperationIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
+size = Vector3(0.5, 1, 0.2)
+
+[node name="ListSizeIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0

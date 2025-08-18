@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c9x7k3m5n8qpo"]
+
+[ext_resource type="Script" path="res://algorithms/primitives/tron_grid/TronGrid.gd" id="1_tron_grid"]
+
+[node name="TronGrid" type="Node3D"]
+script = ExtResource("1_tron_grid")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866, 0, -0.866, 0.5, 0, 15, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 0.8
+
+[node name="GridLines" type="Node3D" parent="."]
+
+[node name="CoordinateAxes" type="Node3D" parent="."]
+
+[node name="Navigator" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+radius = 0.3
+
+[node name="NavigatorTrail" type="Node3D" parent="."]
+
+[node name="ReferencePoints" type="Node3D" parent="."]
+
+[node name="CoordinateDisplay" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, 0)
+size = Vector3(1, 0.5, 0.2)
+
+[node name="GridModeIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, 0)
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.5

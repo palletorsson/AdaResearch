@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c9x8k7v5m4nqp"]
+
+[ext_resource type="Script" path="res://algorithms/datastructures/union_find/UnionFind.gd" id="1_union_find"]
+
+[node name="UnionFind" type="Node3D"]
+script = ExtResource("1_union_find")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+
+[node name="Elements" type="Node3D" parent="."]
+
+[node name="Connections" type="Node3D" parent="."]
+
+[node name="ComponentIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -4, 0)
+size = Vector3(0.5, 1, 0.3)
+
+[node name="UnionOperationIndicator" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -4, 0)
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.5

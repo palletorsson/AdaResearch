@@ -1,0 +1,123 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/MachineLearning/recommendation_systems/RecommendationSystems.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+
+[node name="RecommendationSystems" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="Users" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="UserProfiles" type="Node3D" parent="Users"]
+
+[node name="UserLabel" type="CSGBox3D" parent="Users"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="RecommendationEngine" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="EngineCore" type="CSGBox3D" parent="RecommendationEngine"]
+size = Vector3(3, 3, 3)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="EngineLabel" type="CSGBox3D" parent="RecommendationEngine"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="RecommendationMethods" type="Node3D" parent="RecommendationEngine"]
+
+[node name="CollaborativeCore" type="CSGSphere3D" parent="RecommendationEngine/RecommendationMethods"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="ContentBasedCore" type="CSGSphere3D" parent="RecommendationEngine/RecommendationMethods"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="HybridCore" type="CSGSphere3D" parent="RecommendationEngine/RecommendationMethods"]
+radius = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+material = SubResource("StandardMaterial3D_3")
+
+[node name="Items" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="ItemCatalog" type="Node3D" parent="Items"]
+
+[node name="ItemLabel" type="CSGBox3D" parent="Items"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="UserItemMatrix" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="MatrixCore" type="CSGBox3D" parent="UserItemMatrix"]
+size = Vector3(4, 2, 2)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="MatrixLabel" type="CSGBox3D" parent="UserItemMatrix"]
+size = Vector3(3, 0.3, 0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="DataFlow" type="Node3D" parent="."]
+
+[node name="FlowParticles" type="Node3D" parent="DataFlow"]
+
+[node name="RecommendationMetrics" type="Node3D" parent="."]
+
+[node name="PrecisionMeter" type="Node3D" parent="RecommendationMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
+
+[node name="PrecisionBase" type="CSGBox3D" parent="RecommendationMetrics/PrecisionMeter"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="PrecisionIndicator" type="CSGSphere3D" parent="RecommendationMetrics/PrecisionMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="RecallMeter" type="Node3D" parent="RecommendationMetrics"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
+
+[node name="RecallBase" type="CSGBox3D" parent="RecommendationMetrics/RecallMeter"]
+size = Vector3(4, 0.2, 1)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="RecallIndicator" type="CSGSphere3D" parent="RecommendationMetrics/RecallMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material = SubResource("StandardMaterial3D_2")
+
+[node name="Grid" type="Node3D" parent="."]
+
+[node name="GridLines" type="Node3D" parent="Grid"]

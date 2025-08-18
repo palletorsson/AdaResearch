@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8x9k7v6m4nqr"]
+
+[ext_resource type="Script" path="res://algorithms/RecursiveEmergence/koch_curve/KochCurve.gd" id="1_koch"]
+
+[node name="KochCurve" type="Node3D"]
+script = ExtResource("1_koch")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 12, 0)
+light_energy = 1.5
+
+[node name="FractalSegments" type="Node3D" parent="."]
+
+[node name="IterationControl" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
+
+[node name="ComplexityIndicator" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+size = Vector3(0.8, 1, 0.4)

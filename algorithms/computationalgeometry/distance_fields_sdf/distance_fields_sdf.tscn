@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://a4x9k7v6m5nqr"]
+
+[ext_resource type="Script" path="res://algorithms/ComputationalGeometry/distance_fields_sdf/DistanceFieldsSDF.gd" id="1_sdf"]
+
+[node name="DistanceFieldsSDF" type="Node3D"]
+script = ExtResource("1_sdf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 12, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.2
+
+[node name="SDFField" type="Node3D" parent="."]
+
+[node name="PrimitiveShapes" type="Node3D" parent="."]
+
+[node name="FieldResolution" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
+
+[node name="DistanceRange" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+size = Vector3(0.8, 1, 0.4)
