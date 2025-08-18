@@ -47,8 +47,8 @@ func create_boids():
 	var boids_node = $SwarmSpace/Boids
 	for i in range(boid_count):
 		var boid = CSGCylinder3D.new()
-		boid.top_radius = 0.05
-		boid.bottom_radius = 0.15
+		boid.radius = 0.05
+		
 		boid.height = 0.3
 		boid.material_override = StandardMaterial3D.new()
 		

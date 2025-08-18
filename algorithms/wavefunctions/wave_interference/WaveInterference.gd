@@ -56,8 +56,8 @@ func create_wave_rings():
 	# Create rings for source 1
 	for i in range(8):
 		var ring = CSGCylinder3D.new()
-		ring.top_radius = 0.5 + i * 0.5
-		ring.bottom_radius = 0.5 + i * 0.5
+		ring.radius = 0.5 + i * 0.5
+		 + i * 0.5
 		ring.height = 0.02
 		ring.material_override = StandardMaterial3D.new()
 		ring.material_override.albedo_color = Color(0.2, 0.8, 0.2, 0.3)
@@ -71,8 +71,8 @@ func create_wave_rings():
 	# Create rings for source 2
 	for i in range(8):
 		var ring = CSGCylinder3D.new()
-		ring.top_radius = 0.5 + i * 0.5
-		ring.bottom_radius = 0.5 + i * 0.5
+		ring.radius = 0.5 + i * 0.5
+		 + i * 0.5
 		ring.height = 0.02
 		ring.material_override = StandardMaterial3D.new()
 		ring.material_override.albedo_color = Color(0.8, 0.2, 0.2, 0.3)
@@ -135,36 +135,34 @@ func animate_wave_rings(delta):
 		if ring:
 			# Expand rings from source 1
 			var ring_time = time * wave_speed - i * 0.5
-			var ring_radius = ring_time % 4.0
+			var ring_radius = fmod(ring_time, 4.0)
 			if ring_radius > 0:
-				ring.top_radius = ring_radius
-				ring.bottom_radius = ring_radius
+				ring.radius = ring_radius
 				
 				# Fade out as ring expands
 				var alpha = max(0, 1.0 - ring_radius / 4.0)
 				ring.material_override.albedo_color = Color(0.2, 0.8, 0.2, alpha * 0.3)
 				ring.material_override.emission = Color(0.2, 0.8, 0.2, 1) * alpha * 0.2
 			else:
-				ring.top_radius = 0.01
-				ring.bottom_radius = 0.01
+				ring.radius = 0.01
+				
 	
 	for i in range(wave_rings2.size()):
 		var ring = wave_rings2[i]
 		if ring:
 			# Expand rings from source 2
 			var ring_time = time * wave_speed - i * 0.5
-			var ring_radius = ring_time % 4.0
+			var ring_radius = fmod(ring_time, 4.0)
 			if ring_radius > 0:
-				ring.top_radius = ring_radius
-				ring.bottom_radius = ring_radius
+				ring.radius = ring_radius
 				
 				# Fade out as ring expands
 				var alpha = max(0, 1.0 - ring_radius / 4.0)
 				ring.material_override.albedo_color = Color(0.8, 0.2, 0.2, alpha * 0.3)
 				ring.material_override.emission = Color(0.8, 0.2, 0.2, 1) * alpha * 0.2
 			else:
-				ring.top_radius = 0.01
-				ring.bottom_radius = 0.01
+				ring.radius = 0.01
+				
 
 func animate_interference_field(delta):
 	# Animate field points based on wave interference

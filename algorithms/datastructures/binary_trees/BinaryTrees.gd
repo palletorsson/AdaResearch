@@ -50,25 +50,31 @@ func _ready():
 
 func setup_materials():
 	# Root marker material
-	var root_material = StandardMaterial3D.new()
-	root_material.albedo_color = Color(1.0, 0.2, 0.2, 1.0)
-	root_material.emission_enabled = true
-	root_material.emission = Color(0.5, 0.1, 0.1, 1.0)
-	$RootMarker.material_override = root_material
+	var root_marker = get_node_or_null("RootMarker")
+	if root_marker and (root_marker is CSGShape3D or root_marker is MeshInstance3D):
+		var root_material = StandardMaterial3D.new()
+		root_material.albedo_color = Color(1.0, 0.2, 0.2, 1.0)
+		root_material.emission_enabled = true
+		root_material.emission = Color(0.5, 0.1, 0.1, 1.0)
+		root_marker.material_override = root_material
 	
 	# Traversal indicator material
-	var traversal_material = StandardMaterial3D.new()
-	traversal_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
-	traversal_material.emission_enabled = true
-	traversal_material.emission = Color(0.05, 0.3, 0.2, 1.0)
-	$TraversalIndicator.material_override = traversal_material
+	var traversal_indicator = get_node_or_null("TraversalIndicator")
+	if traversal_indicator and (traversal_indicator is CSGShape3D or traversal_indicator is MeshInstance3D):
+		var traversal_material = StandardMaterial3D.new()
+		traversal_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
+		traversal_material.emission_enabled = true
+		traversal_material.emission = Color(0.05, 0.3, 0.2, 1.0)
+		traversal_indicator.material_override = traversal_material
 	
 	# Height indicator material
-	var height_material = StandardMaterial3D.new()
-	height_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
-	height_material.emission_enabled = true
-	height_material.emission = Color(0.3, 0.2, 0.05, 1.0)
-	$HeightIndicator.material_override = height_material
+	var height_indicator = get_node_or_null("HeightIndicator")
+	if height_indicator and (height_indicator is CSGShape3D or height_indicator is MeshInstance3D):
+		var height_material = StandardMaterial3D.new()
+		height_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
+		height_material.emission_enabled = true
+		height_material.emission = Color(0.3, 0.2, 0.05, 1.0)
+		height_indicator.material_override = height_material
 
 func build_initial_tree():
 	# Build a sample binary search tree
@@ -96,7 +102,8 @@ func _process(delta):
 	animate_indicators()
 
 func switch_operation():
-	current_operation = (current_operation + 1) % TreeOperation.size()
+	# FIXED: Use int() cast for enum operations in Godot 4
+	current_operation = TreeOperation.values()[(int(current_operation) + 1) % TreeOperation.size()]
 	
 	match current_operation:
 		TreeOperation.INSERT:
@@ -219,7 +226,13 @@ func create_visual_node(node: TreeNode):
 	node_material.emission = node_material.albedo_color * 0.3
 	sphere.material_override = node_material
 	
-	$TreeNodes.add_child(sphere)
+	# FIXED: Use get_node_or_null for safer node access
+	var tree_nodes = get_node_or_null("TreeNodes")
+	if tree_nodes:
+		tree_nodes.add_child(sphere)
+	else:
+		add_child(sphere)  # Fallback to adding to root
+	
 	node.visual_object = sphere
 
 func calculate_positions():
@@ -231,6 +244,9 @@ func calculate_positions():
 	
 	# Position nodes based on level and position
 	for node in all_nodes:
+		if node.visual_object == null:
+			continue  # Skip nodes without visual objects
+		
 		var x_offset = (node.position_in_level - get_level_center(node.level)) * 2.0
 		var y_position = 3 - node.level * 1.5
 		var z_position = 0
@@ -238,8 +254,10 @@ func calculate_positions():
 		node.visual_object.position = Vector3(x_offset, y_position, z_position)
 	
 	# Update root marker
-	if root:
-		$RootMarker.position = Vector3(root.visual_object.position.x, root.visual_object.position.y + 1, 0)
+	if root and root.visual_object:
+		var root_marker = get_node_or_null("RootMarker")
+		if root_marker and root_marker is Node3D:
+			root_marker.position = Vector3(root.visual_object.position.x, root.visual_object.position.y + 1, 0)
 
 func calculate_node_levels(node: TreeNode, level: int):
 	node.level = level
@@ -276,9 +294,9 @@ func update_edges():
 	
 	# Create new edges
 	for node in all_nodes:
-		if node.left_child:
+		if node.left_child and node.visual_object and node.left_child.visual_object:
 			create_edge(node, node.left_child)
-		if node.right_child:
+		if node.right_child and node.visual_object and node.right_child.visual_object:
 			create_edge(node, node.right_child)
 
 func create_edge(parent: TreeNode, child: TreeNode):
@@ -286,8 +304,9 @@ func create_edge(parent: TreeNode, child: TreeNode):
 	var distance = parent.visual_object.position.distance_to(child.visual_object.position)
 	
 	edge.height = distance
-	edge.top_radius = 0.03
-	edge.bottom_radius = 0.03
+	# FIXED: Use top_radius and bottom_radius instead of just radius
+	edge.radius = 0.03
+	#
 	
 	# Position and orient edge
 	var mid_point = (parent.visual_object.position + child.visual_object.position) * 0.5
@@ -297,8 +316,9 @@ func create_edge(parent: TreeNode, child: TreeNode):
 	var direction = (child.visual_object.position - parent.visual_object.position).normalized()
 	if direction != Vector3.UP:
 		var axis = Vector3.UP.cross(direction).normalized()
-		var angle = acos(Vector3.UP.dot(direction))
-		edge.transform.basis = Basis(axis, angle)
+		if axis.length() > 0.001:  # Avoid zero-length axis
+			var angle = acos(clamp(Vector3.UP.dot(direction), -1.0, 1.0))
+			edge.transform.basis = Basis(axis, angle)
 	
 	# Edge material
 	var edge_material = StandardMaterial3D.new()
@@ -307,7 +327,13 @@ func create_edge(parent: TreeNode, child: TreeNode):
 	edge_material.emission = Color(0.2, 0.2, 0.2, 1.0)
 	edge.material_override = edge_material
 	
-	$TreeEdges.add_child(edge)
+	# FIXED: Use get_node_or_null for safer node access
+	var tree_edges_node = get_node_or_null("TreeEdges")
+	if tree_edges_node:
+		tree_edges_node.add_child(edge)
+	else:
+		add_child(edge)  # Fallback to adding to root
+	
 	tree_edges.append(edge)
 
 func start_traversal(type: String):
@@ -359,7 +385,8 @@ func start_search(target: int):
 func animate_tree():
 	# Reset all node scales
 	for node in all_nodes:
-		node.visual_object.scale = Vector3.ONE
+		if node.visual_object:
+			node.visual_object.scale = Vector3.ONE
 	
 	match current_operation:
 		TreeOperation.INORDER_TRAVERSAL, TreeOperation.PREORDER_TRAVERSAL, TreeOperation.POSTORDER_TRAVERSAL:
@@ -378,6 +405,9 @@ func animate_traversal_highlighting():
 	# Highlight visited nodes
 	for i in range(min(current_traversal_index, traversal_order.size())):
 		var node = traversal_order[i]
+		if not node.visual_object:
+			continue
+			
 		var intensity = 1.0 - (current_traversal_index - i - 1) * 0.2
 		intensity = max(0.3, intensity)
 		node.visual_object.scale = Vector3.ONE * (1.0 + intensity * 0.5)
@@ -403,41 +433,53 @@ func animate_search_highlighting():
 			current_node = current_node.right_child
 	
 	# Animate path
-	var wave_progress = fmod(time * 2.0, search_path.size())
-	for i in range(search_path.size()):
-		var node = search_path[i]
-		var distance_from_wave = abs(i - wave_progress)
-		var intensity = max(0.0, 1.0 - distance_from_wave)
-		node.visual_object.scale = Vector3.ONE * (1.0 + intensity * 0.8)
+	if search_path.size() > 0:
+		var wave_progress = fmod(time * 2.0, float(search_path.size()))
+		for i in range(search_path.size()):
+			var node = search_path[i]
+			if not node.visual_object:
+				continue
+			var distance_from_wave = abs(float(i) - wave_progress)
+			var intensity = max(0.0, 1.0 - distance_from_wave)
+			node.visual_object.scale = Vector3.ONE * (1.0 + intensity * 0.8)
 
 func animate_insert_highlighting():
 	# Pulse all nodes
 	var pulse = 1.0 + sin(time * 4.0) * 0.2
 	for node in all_nodes:
-		node.visual_object.scale = Vector3.ONE * pulse
+		if node.visual_object:
+			node.visual_object.scale = Vector3.ONE * pulse
 
 func animate_delete_highlighting():
 	# Different pulse for delete
 	var pulse = 1.0 + sin(time * 6.0) * 0.15
 	for node in all_nodes:
-		node.visual_object.scale = Vector3.ONE * pulse
+		if node.visual_object:
+			node.visual_object.scale = Vector3.ONE * pulse
 
 func animate_indicators():
 	# Traversal indicator
-	var traversal_height = (current_operation + 1) * 0.3
-	$TraversalIndicator.size.y = traversal_height
-	$TraversalIndicator.position.y = -4 + traversal_height/2
+	var traversal_indicator = get_node_or_null("TraversalIndicator")
+	if traversal_indicator and traversal_indicator is CSGBox3D:
+		var traversal_height = (int(current_operation) + 1) * 0.3
+		traversal_indicator.size.y = traversal_height
+		traversal_indicator.position.y = -4 + traversal_height/2
+		
+		# Pulsing effects
+		var pulse = 1.0 + sin(time * 3.0) * 0.1
+		traversal_indicator.scale.x = pulse
 	
 	# Height indicator (tree height)
-	var tree_height = get_tree_height()
-	var height_indicator_height = tree_height * 0.4 + 0.5
-	$HeightIndicator.size.y = height_indicator_height
-	$HeightIndicator.position.y = -4 + height_indicator_height/2
-	
-	# Pulsing effects
-	var pulse = 1.0 + sin(time * 3.0) * 0.1
-	$TraversalIndicator.scale.x = pulse
-	$HeightIndicator.scale.x = pulse
+	var height_indicator = get_node_or_null("HeightIndicator")
+	if height_indicator and height_indicator is CSGBox3D:
+		var tree_height = get_tree_height()
+		var height_indicator_height = tree_height * 0.4 + 0.5
+		height_indicator.size.y = height_indicator_height
+		height_indicator.position.y = -4 + height_indicator_height/2
+		
+		# Pulsing effects
+		var pulse = 1.0 + sin(time * 3.0) * 0.1
+		height_indicator.scale.x = pulse
 
 func get_tree_height() -> int:
 	if root == null:

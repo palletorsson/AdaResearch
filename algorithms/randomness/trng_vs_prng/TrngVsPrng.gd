@@ -132,8 +132,8 @@ func visualize_true_random():
 		
 		# Connect to center (entropy combiner)
 		var connection = CSGCylinder3D.new()
-		connection.top_radius = 0.02
-		connection.bottom_radius = 0.02
+		connection.radius = 0.02
+		
 		connection.height = 2.0
 		connection.position = source_sphere.position * 0.5
 		connection.look_at(Vector3.ZERO, Vector3.UP)
@@ -187,9 +187,8 @@ func visualize_pseudo_random():
 		
 		# Arrow between steps
 		if i < algorithm_steps.size() - 1:
-			var arrow = CSGCone3D.new()
-			arrow.radius_top = 0.0
-			arrow.radius_bottom = 0.1
+			var arrow = CSGCylinder3D.new()
+			arrow.radius = 0.0
 			arrow.height = 0.3
 			arrow.position = Vector3(0, i * 1.0 - 1.5, 0)
 			arrow.rotation_degrees = Vector3(180, 0, 0)
@@ -388,8 +387,8 @@ func demonstrate_entropy_visualization():
 		
 		# TRNG entropy line
 		var trng_segment = CSGCylinder3D.new()
-		trng_segment.top_radius = 0.02
-		trng_segment.bottom_radius = 0.02
+		trng_segment.radius = 0.02
+		
 		trng_segment.height = 0.1
 		trng_segment.position = Vector3(
 			i * 0.1 - entropy_history.size() * 0.05,
@@ -405,8 +404,8 @@ func demonstrate_entropy_visualization():
 		
 		# PRNG entropy line
 		var prng_segment = CSGCylinder3D.new()
-		prng_segment.top_radius = 0.02
-		prng_segment.bottom_radius = 0.02
+		prng_segment.radius = 0.02
+		
 		prng_segment.height = 0.1
 		prng_segment.position = Vector3(
 			i * 0.1 - entropy_history.size() * 0.05,
@@ -448,4 +447,3 @@ func calculate_entropy(samples: Array) -> float:
 			entropy -= probability * log(probability) / log(2)
 	
 	return entropy / log(bin_count) / log(2)  # Normalize to 0-1
-

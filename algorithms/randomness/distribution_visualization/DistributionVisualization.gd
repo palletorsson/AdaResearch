@@ -374,16 +374,16 @@ func animate_indicators():
 	
 	# Sample count indicator
 	var count_height = (sample_count / 1000.0) * 2.0 + 0.5
-	$SampleCount.size.y = count_height
+	$SampleCount.height = count_height
 	$SampleCount.position.y = 4 + count_height/2
 	
 	# Parameter indicators
 	var param1_height = abs(param1) * 0.5 + 0.5
-	$Parameter1.size.y = param1_height
+	$Parameter1.height = param1_height
 	$Parameter1.position.y = -3 + param1_height/2
 	
 	var param2_height = abs(param2) * 0.5 + 0.5
-	$Parameter2.size.y = param2_height
+	$Parameter2.height = param2_height
 	$Parameter2.position.y = -3 + param2_height/2
 	
 	# Pulsing effects

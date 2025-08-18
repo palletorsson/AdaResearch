@@ -212,7 +212,7 @@ func animate_data_flow(delta):
 		var particle = flow_particles[i]
 		if particle:
 			# Move particles through the VAE flow
-			var progress = (time * 0.25 + float(i) * 0.1) % 1.0
+			var progress = fmod(time * 0.25 + float(i) * 0.1, 1.0)
 			var x = lerp(-8, 8, progress)
 			var y = sin(progress * PI * 2) * 2
 			
@@ -220,7 +220,7 @@ func animate_data_flow(delta):
 			particle.position.y = lerp(particle.position.y, y, delta * 2.0)
 			
 			# Change color based on position and training progress
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var green_component = 0.8 * (1.0 - color_progress * 0.5) * training_progress
 			var blue_component = 0.8 * (0.5 + color_progress * 0.5) * training_progress
 			particle.material_override.albedo_color = Color(0.2, green_component, blue_component, 1)

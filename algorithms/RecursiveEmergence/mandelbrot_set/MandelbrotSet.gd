@@ -94,7 +94,7 @@ func animate_fractal():
 func animate_indicators():
 	# Iteration control
 	var iter_height = (max_iterations / 100.0) * 2.0 + 0.5
-	$IterationControl.size.y = iter_height
+	$IterationControl.height = iter_height
 	$IterationControl.position.y = -3 + iter_height/2
 	
 	# Zoom level

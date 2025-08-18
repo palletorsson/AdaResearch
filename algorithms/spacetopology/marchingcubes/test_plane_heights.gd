@@ -11,7 +11,7 @@ extends Node3D
 
 func test_height_variations():
 	print("🧪 TESTING PLANE HEIGHT VARIATIONS")
-	print("=" * 50)
+	#print("=" * 50)
 	
 	# Test different height offsets
 	var height_offsets = [-0.5, -0.2, 0.0, 0.2, 0.3, 0.5]

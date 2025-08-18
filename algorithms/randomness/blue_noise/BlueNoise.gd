@@ -241,8 +241,8 @@ func create_voronoi_edge(start: Vector2, end: Vector2):
 	var length = start.distance_to(end)
 	
 	edge.height = length
-	edge.top_radius = 0.01
-	edge.bottom_radius = 0.01
+	edge.radius = 0.01
+	
 	
 	# Position and orient
 	var mid_point = (start + end) * 0.5
@@ -291,13 +291,13 @@ func animate_blue_noise():
 func animate_indicators():
 	# Min distance indicator
 	var min_dist_height = min_distance * 1.5 + 0.5
-	$MinDistance.size.y = min_dist_height
+	$MinDistance.height = min_dist_height
 	$MinDistance.position.y = -3 + min_dist_height/2
 	
 	# Iteration count indicator
 	var iter_progress = current_iteration / float(max_iterations)
 	var iter_height = iter_progress * 2.0 + 0.5
-	$IterationCount.size.y = iter_height
+	$IterationCount.height = iter_height
 	$IterationCount.position.y = -3 + iter_height/2
 	
 	# Pulsing effects

@@ -123,8 +123,8 @@ func create_segment(start: Vector2, end: Vector2, index: int):
 	var length = start.distance_to(end)
 	
 	segment.height = length
-	segment.top_radius = 0.02
-	segment.bottom_radius = 0.02
+	segment.radius = 0.02
+	
 	
 	# Position at midpoint
 	var midpoint = (start + end) * 0.5
@@ -170,15 +170,17 @@ func animate_koch_curve():
 func animate_indicators():
 	# Iteration control
 	var iter_height = (current_iteration + 1) * 0.4 + 0.5
-	$IterationControl.size.y = iter_height
+	$IterationControl.height = iter_height
 	$IterationControl.position.y = -3 + iter_height/2
 	
 	# Complexity indicator (number of segments)
 	var complexity = total_segments
 	var max_complexity = pow(4, max_iterations) * 3  # Theoretical maximum
 	var complexity_height = (float(complexity) / max_complexity) * 3.0 + 0.5
-	$ComplexityIndicator.size.y = complexity_height
-	$ComplexityIndicator.position.y = -3 + complexity_height/2
+	var complexityindicator = get_node_or_null("ComplexityIndicator")
+	if complexityindicator and complexityindicator is CSGCylinder3D:
+		complexityindicator.height = complexity_height
+		complexityindicator.position.y = -3 + complexity_height/2
 	
 	# Pulsing effects
 	var pulse = 1.0 + sin(time * 4.0) * 0.1

@@ -226,7 +226,7 @@ func animate_feedback_loop(delta):
 		var particle = feedback_particles.get_child(i)
 		if particle:
 			# Move particles in a circular pattern
-			var progress = (time * 0.3 + float(i) * 0.1) % 1.0
+			var progress = fmod(time * 0.3 + float(i) * 0.1, 1.0)
 			var angle = progress * PI * 2
 			var radius = 4.0
 			var x = cos(angle) * radius
@@ -236,7 +236,7 @@ func animate_feedback_loop(delta):
 			particle.position.z = lerp(particle.position.z, z, delta * 2.0)
 			
 			# Change color based on position in feedback loop
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var green_component = 0.8 * (1.0 - color_progress * 0.5)
 			var blue_component = 0.8 * (0.5 + color_progress * 0.5)
 			particle.material_override.albedo_color = Color(0.2, green_component, blue_component, 1)

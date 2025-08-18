@@ -33,7 +33,7 @@ func _process(delta):
 			step_astar()
 
 func generate_grid():
-	clear_grid()
+	clear_grid()  # Now this function exists
 	
 	# Initialize grid
 	grid.clear()
@@ -55,10 +55,25 @@ func generate_grid():
 	
 	create_visual_grid()
 
-func create_visual_grid():
+func clear_grid():
+	"""Clear existing grid cubes and reset grid data"""
 	# Clear existing cubes
 	for cube in grid_cubes:
-		cube.queue_free()
+		if is_instance_valid(cube):
+			cube.queue_free()
+	grid_cubes.clear()
+	
+	# Clear grid data
+	grid.clear()
+	
+	# Clear pathfinding data
+	reset_astar()
+
+func create_visual_grid():
+	# Clear existing cubes (redundant but safe)
+	for cube in grid_cubes:
+		if is_instance_valid(cube):
+			cube.queue_free()
 	grid_cubes.clear()
 	
 	# Create grid of cubes
@@ -68,8 +83,8 @@ func create_visual_grid():
 			cube.size = Vector3(0.8, 0.8, 0.8)
 			
 			# Position the cube
-			var world_x = (x - grid_size/2) * 1.0
-			var world_z = (y - grid_size/2) * 1.0
+			var world_x = (x - grid_size/2.0) * 1.0
+			var world_z = (y - grid_size/2.0) * 1.0
 			cube.position = Vector3(world_x, 0, world_z)
 			
 			# Set material based on grid type
@@ -96,10 +111,16 @@ func find_path():
 	
 	if is_step_by_step:
 		# Start step-by-step mode
-		pass
+		initialize_astar()
 	else:
 		# Run A* immediately
 		run_astar()
+
+func initialize_astar():
+	"""Initialize A* for step-by-step mode"""
+	open_set.append(start_pos)
+	g_score[start_pos] = 0
+	f_score[start_pos] = heuristic(start_pos, goal_pos)
 
 func run_astar():
 	# Initialize A* variables
@@ -112,7 +133,7 @@ func run_astar():
 		var current = open_set[0]
 		var current_index = 0
 		for i in range(open_set.size()):
-			if f_score[open_set[i]] < f_score[current]:
+			if f_score.get(open_set[i], INF) < f_score.get(current, INF):
 				current = open_set[i]
 				current_index = i
 		
@@ -132,11 +153,11 @@ func run_astar():
 			if neighbor in closed_set:
 				continue
 			
-			var tentative_g_score = g_score[current] + 1
+			var tentative_g_score = g_score.get(current, INF) + 1
 			
 			if neighbor not in open_set:
 				open_set.append(neighbor)
-			elif tentative_g_score >= g_score[neighbor]:
+			elif tentative_g_score >= g_score.get(neighbor, INF):
 				continue
 			
 			came_from[neighbor] = current
@@ -149,13 +170,15 @@ func run_astar():
 func step_astar():
 	# Single step of A* algorithm
 	if open_set.size() == 0:
+		print("No path found!")
+		is_step_by_step = false
 		return
 	
 	# Find node with lowest f_score
 	var current = open_set[0]
 	var current_index = 0
 	for i in range(open_set.size()):
-		if f_score[open_set[i]] < f_score[current]:
+		if f_score.get(open_set[i], INF) < f_score.get(current, INF):
 			current = open_set[i]
 			current_index = i
 	
@@ -176,11 +199,11 @@ func step_astar():
 		if neighbor in closed_set:
 			continue
 		
-		var tentative_g_score = g_score[current] + 1
+		var tentative_g_score = g_score.get(current, INF) + 1
 		
 		if neighbor not in open_set:
 			open_set.append(neighbor)
-		elif tentative_g_score >= g_score[neighbor]:
+		elif tentative_g_score >= g_score.get(neighbor, INF):
 			continue
 		
 		came_from[neighbor] = current
@@ -212,15 +235,15 @@ func heuristic(a: Vector2i, b: Vector2i) -> float:
 	
 	match heuristic_type:
 		0:  # Manhattan
-			return dx + dy
+			return float(dx + dy)
 		1:  # Euclidean
-			return sqrt(dx * dx + dy * dy)
+			return sqrt(float(dx * dx + dy * dy))
 		2:  # Chebyshev
-			return max(dx, dy)
+			return float(max(dx, dy))
 		3:  # Octile
-			return max(dx, dy) + (sqrt(2) - 1) * min(dx, dy)
+			return float(max(dx, dy)) + (sqrt(2.0) - 1.0) * float(min(dx, dy))
 		_:
-			return dx + dy
+			return float(dx + dy)
 
 func reconstruct_path():
 	path.clear()
@@ -253,9 +276,7 @@ func toggle_step_by_step():
 	is_step_by_step = !is_step_by_step
 	if is_step_by_step:
 		reset_astar()
-		open_set.append(start_pos)
-		g_score[start_pos] = 0
-		f_score[start_pos] = heuristic(start_pos, goal_pos)
+		initialize_astar()
 
 func update_visualization():
 	# Update grid cube colors
@@ -263,11 +284,18 @@ func update_visualization():
 		var x = i / grid_size
 		var y = i % grid_size
 		
-		if x < grid_size and y < grid_size:
+		if x < grid_size and y < grid_size and i < grid_cubes.size():
 			var cube = grid_cubes[i]
+			if not is_instance_valid(cube):
+				continue
+				
 			var pos = Vector2i(x, y)
 			
-			var material = cube.material_override
+			var material = cube.material_override as StandardMaterial3D
+			if not material:
+				material = StandardMaterial3D.new()
+				cube.material_override = material
+			
 			if pos in path:
 				material.albedo_color = Color(1.0, 1.0, 0.0)  # Yellow for path
 			elif pos in explored_nodes:
@@ -288,3 +316,26 @@ func update_parameters():
 	# Regenerate grid with new parameters
 	generate_grid()
 
+# Public interface functions for external control
+func set_start_position(pos: Vector2i):
+	if is_valid_position(pos):
+		start_pos = pos
+		update_visualization()
+
+func set_goal_position(pos: Vector2i):
+	if is_valid_position(pos):
+		goal_pos = pos
+		update_visualization()
+
+func set_obstacle_density(density: float):
+	obstacle_density = clamp(density, 0.0, 1.0)
+	generate_grid()
+
+func set_heuristic_type(type: int):
+	heuristic_type = clamp(type, 0, 3)
+
+func get_path_length() -> int:
+	return path.size()
+
+func get_explored_count() -> int:
+	return explored_nodes.size()

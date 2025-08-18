@@ -39,25 +39,31 @@ func _ready():
 
 func setup_materials():
 	# Head pointer material
-	var head_material = StandardMaterial3D.new()
-	head_material.albedo_color = Color(1.0, 0.2, 0.2, 1.0)
-	head_material.emission_enabled = true
-	head_material.emission = Color(0.5, 0.1, 0.1, 1.0)
-	$HeadPointer.material_override = head_material
+	var head_pointer = get_node_or_null("HeadPointer")
+	if head_pointer and (head_pointer is CSGShape3D or head_pointer is MeshInstance3D):
+		var head_material = StandardMaterial3D.new()
+		head_material.albedo_color = Color(1.0, 0.2, 0.2, 1.0)
+		head_material.emission_enabled = true
+		head_material.emission = Color(0.5, 0.1, 0.1, 1.0)
+		head_pointer.material_override = head_material
 	
 	# Operation indicator material
-	var op_material = StandardMaterial3D.new()
-	op_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
-	op_material.emission_enabled = true
-	op_material.emission = Color(0.05, 0.3, 0.2, 1.0)
-	$OperationIndicator.material_override = op_material
+	var op_indicator = get_node_or_null("OperationIndicator")
+	if op_indicator and (op_indicator is CSGShape3D or op_indicator is MeshInstance3D):
+		var op_material = StandardMaterial3D.new()
+		op_material.albedo_color = Color(0.2, 1.0, 0.8, 1.0)
+		op_material.emission_enabled = true
+		op_material.emission = Color(0.05, 0.3, 0.2, 1.0)
+		op_indicator.material_override = op_material
 	
 	# List size indicator material
-	var size_material = StandardMaterial3D.new()
-	size_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
-	size_material.emission_enabled = true
-	size_material.emission = Color(0.3, 0.2, 0.05, 1.0)
-	$ListSizeIndicator.material_override = size_material
+	var size_indicator = get_node_or_null("ListSizeIndicator")
+	if size_indicator and (size_indicator is CSGShape3D or size_indicator is MeshInstance3D):
+		var size_material = StandardMaterial3D.new()
+		size_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
+		size_material.emission_enabled = true
+		size_material.emission = Color(0.3, 0.2, 0.05, 1.0)
+		size_indicator.material_override = size_material
 
 func initialize_list():
 	# Start with a few nodes
@@ -76,7 +82,8 @@ func _process(delta):
 	animate_indicators()
 
 func perform_next_operation():
-	current_operation = (current_operation + 1) % ListOperation.size()
+	# FIXED: Use int() cast for enum operations in Godot 4
+	current_operation = ListOperation.values()[(int(current_operation) + 1) % ListOperation.size()]
 	
 	match current_operation:
 		ListOperation.INSERT_HEAD:
@@ -170,7 +177,13 @@ func create_visual_node(node: ListNode):
 	node_material.emission = node_material.albedo_color * 0.3
 	sphere.material_override = node_material
 	
-	$ListNodes.add_child(sphere)
+	# FIXED: Use get_node_or_null for safer node access
+	var list_nodes = get_node_or_null("ListNodes")
+	if list_nodes:
+		list_nodes.add_child(sphere)
+	else:
+		add_child(sphere)  # Fallback to adding to root
+	
 	node.visual_object = sphere
 
 func update_node_positions():
@@ -182,24 +195,27 @@ func update_node_positions():
 
 func update_pointers():
 	# Clear existing pointers
-	for child in $ListPointers.get_children():
-		child.queue_free()
+	var list_pointers = get_node_or_null("ListPointers")
+	if list_pointers:
+		for child in list_pointers.get_children():
+			child.queue_free()
 	pointers.clear()
 	
 	# Create new pointers
 	for i in range(nodes.size() - 1):
 		create_pointer(i, i + 1)
 	
-	# Update head pointer position
-	if nodes.size() > 0:
-		$HeadPointer.position = Vector3(-6 + 0 * node_spacing, 1.5, 0)
-	else:
-		$HeadPointer.position = Vector3(-6, 1.5, 0)
+	# Update head pointer position - FIXED: Check if it's a Node3D
+	var head_pointer = get_node_or_null("HeadPointer")
+	if head_pointer and head_pointer is Node3D:
+		if nodes.size() > 0:
+			head_pointer.position = Vector3(-6 + 0 * node_spacing, 1.5, 0)
+		else:
+			head_pointer.position = Vector3(-6, 1.5, 0)
 
 func create_pointer(from_index: int, to_index: int):
 	var pointer = CSGCylinder3D.new()
-	pointer.top_radius = 0.05
-	pointer.bottom_radius = 0.05
+	pointer.radius = 0.05
 	pointer.height = node_spacing * 0.8
 	
 	# Position between nodes
@@ -215,7 +231,13 @@ func create_pointer(from_index: int, to_index: int):
 	pointer_material.emission = Color(0.2, 0.2, 0.05, 1.0)
 	pointer.material_override = pointer_material
 	
-	$ListPointers.add_child(pointer)
+	# FIXED: Use get_node_or_null for safer node access
+	var list_pointers = get_node_or_null("ListPointers")
+	if list_pointers:
+		list_pointers.add_child(pointer)
+	else:
+		add_child(pointer)  # Fallback to adding to root
+	
 	pointers.append(pointer)
 
 func animate_traversal():
@@ -257,32 +279,43 @@ func animate_list():
 					pulse_intensity = sin(time * 6.0) * 0.3 + 0.3
 		
 		var scale_factor = base_scale + pulse_intensity
-		node.visual_object.scale = Vector3.ONE * scale_factor
+		if node.visual_object:
+			node.visual_object.scale = Vector3.ONE * scale_factor
 	
 	# Animate pointers
 	for pointer in pointers:
 		var pointer_pulse = 1.0 + sin(time * 4.0 + pointer.position.x) * 0.1
 		pointer.scale = Vector3(pointer_pulse, 1.0, pointer_pulse)
 	
-	# Animate head pointer
-	var head_pulse = 1.0 + sin(time * 5.0) * 0.2
-	$HeadPointer.scale = Vector3.ONE * head_pulse
+	# Animate head pointer - FIXED: Check if it's a Node3D
+	var head_pointer = get_node_or_null("HeadPointer")
+	if head_pointer and head_pointer is Node3D:
+		var head_pulse = 1.0 + sin(time * 5.0) * 0.2
+		head_pointer.scale = Vector3.ONE * head_pulse
 
 func animate_indicators():
-	# Operation indicator
-	var op_height = (current_operation + 1) * 0.3
-	$OperationIndicator.size.y = op_height
-	$OperationIndicator.position.y = -3 + op_height/2
+	# Operation indicator - FIXED: Check if it's a Node3D before setting position
+	var op_height = (int(current_operation) + 1) * 0.3
+	var operation_indicator = get_node_or_null("OperationIndicator")
+	if operation_indicator and operation_indicator is CSGCylinder3D:
+		operation_indicator.height = op_height
+		if operation_indicator is Node3D:
+			operation_indicator.position.y = -3 + op_height/2
 	
-	# List size indicator
+	# List size indicator - FIXED: Check if it's a Node3D before setting position
 	var size_height = nodes.size() * 0.2 + 0.5
-	$ListSizeIndicator.size.y = size_height
-	$ListSizeIndicator.position.y = -3 + size_height/2
+	var list_size_indicator = get_node_or_null("ListSizeIndicator")
+	if list_size_indicator and list_size_indicator is CSGCylinder3D:
+		list_size_indicator.height = size_height
+		if list_size_indicator is Node3D:
+			list_size_indicator.position.y = -3 + size_height/2
 	
-	# Pulsing effects
+	# Pulsing effects - FIXED: Check if nodes are Node3D before setting scale
 	var pulse = 1.0 + sin(time * 3.0) * 0.1
-	$OperationIndicator.scale.x = pulse
-	$ListSizeIndicator.scale.x = pulse
+	if operation_indicator and operation_indicator is Node3D:
+		operation_indicator.scale.x = pulse
+	if list_size_indicator and list_size_indicator is Node3D:
+		list_size_indicator.scale.x = pulse
 
 func get_operation_name() -> String:
 	match current_operation:

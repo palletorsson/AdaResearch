@@ -10,12 +10,14 @@ roughness = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.8, 0.2, 0.2, 1)
+emission_energy = 0.3
 
 [node name="Transformers" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
 [node name="InputLabel" type="CSGBox3D" parent="InputSequence"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="TransformerLayers" type="Node3D" parent="."]
 
@@ -44,48 +46,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
 [node name="EncoderCore1" type="CSGBox3D" parent="TransformerLayers/EncoderLayer1"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EncoderLabel1" type="CSGBox3D" parent="TransformerLayers/EncoderLayer1"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="EncoderLayer2" type="Node3D" parent="TransformerLayers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="EncoderCore2" type="CSGBox3D" parent="TransformerLayers/EncoderLayer2"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EncoderLabel2" type="CSGBox3D" parent="TransformerLayers/EncoderLayer2"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="DecoderLayer1" type="Node3D" parent="TransformerLayers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="DecoderCore1" type="CSGBox3D" parent="TransformerLayers/DecoderLayer1"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DecoderLabel1" type="CSGBox3D" parent="TransformerLayers/DecoderLayer1"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="DecoderLayer2" type="Node3D" parent="TransformerLayers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
 [node name="DecoderCore2" type="CSGBox3D" parent="TransformerLayers/DecoderLayer2"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DecoderLabel2" type="CSGBox3D" parent="TransformerLayers/DecoderLayer2"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="OutputSequence" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
@@ -95,7 +97,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 [node name="OutputLabel" type="CSGBox3D" parent="OutputSequence"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="AttentionHeads" type="Node3D" parent="."]
 
@@ -104,24 +106,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="AttentionCore" type="CSGSphere3D" parent="AttentionHeads/MultiHeadAttention"]
 radius = 1.0
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="AttentionLabel" type="CSGBox3D" parent="AttentionHeads/MultiHeadAttention"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="PositionalEncoding" type="Node3D" parent="."]
 
 [node name="EncodingCore" type="CSGSphere3D" parent="PositionalEncoding"]
 radius = 0.8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EncodingLabel" type="CSGBox3D" parent="PositionalEncoding"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="DataFlow" type="Node3D" parent="."]
 
@@ -134,24 +136,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="LossBase" type="CSGBox3D" parent="TrainingMetrics/LossMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="LossIndicator" type="CSGSphere3D" parent="TrainingMetrics/LossMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="AccuracyMeter" type="Node3D" parent="TrainingMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="AccuracyBase" type="CSGBox3D" parent="TrainingMetrics/AccuracyMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="AccuracyIndicator" type="CSGSphere3D" parent="TrainingMetrics/AccuracyMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Grid" type="Node3D" parent="."]
 

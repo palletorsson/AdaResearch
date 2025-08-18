@@ -126,8 +126,8 @@ func show_parameter_space():
 	
 	# Parameter space boundaries
 	var boundary_ring = CSGCylinder3D.new()
-	boundary_ring.top_radius = 3.0
-	boundary_ring.bottom_radius = 2.8
+	boundary_ring.radius = 3.0
+	
 	boundary_ring.height = 0.2
 	boundary_ring.position = Vector3.ZERO
 	
@@ -193,9 +193,9 @@ func analyze_escape_behavior():
 			var escape_data = analyze_escape_velocity(x, y, c_real, c_imag)
 			
 			if escape_data.escaped:
-				var escape_indicator = CSGCone3D.new()
-				escape_indicator.radius_top = 0.0
-				escape_indicator.radius_bottom = 0.2
+				var escape_indicator = CSGCylinder3D.new()
+				escape_indicator.radius = 0.0
+				escape_indicator
 				escape_indicator.height = escape_data.velocity * 2.0
 				escape_indicator.position = Vector3(x, escape_indicator.height * 0.5, y)
 				
@@ -238,4 +238,3 @@ func analyze_escape_velocity(x: float, y: float, c_r: float, c_i: float) -> Dict
 		"iterations": iteration,
 		"velocity": escape_velocity
 	}
-

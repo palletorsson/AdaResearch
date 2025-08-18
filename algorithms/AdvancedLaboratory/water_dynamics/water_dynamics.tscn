@@ -1,38 +1,34 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
 
-[ext_resource type="Script" path="res://algorithms/AdvancedLaboratory/water_dynamics/WaterDynamics.gd" id="1_script"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
-albedo_color = Color(0.1, 0.3, 0.8, 0.7)
-transparency = 0.3
-metallic = 0.1
-roughness = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.2, 0.6, 0.9, 1)
-emission_enabled = true
-emission = Color(0.2, 0.6, 0.9, 1) * 0.2
+[ext_resource type="Script" uid="uid://lmusj7076vib" path="res://algorithms/AdvancedLaboratory/water_dynamics/WaterDynamics.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.8, 0.8, 1)
 metallic = 0.8
 roughness = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.6, 0.9, 1)
+emission_enabled = true
+emission = Color(0.04, 0.12, 0.18, 1)
+
 [node name="WaterDynamics" type="Node3D"]
 script = ExtResource("1_script")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="WaterContainer" type="Node3D" parent="."]
 
 [node name="Container" type="CSGBox3D" parent="WaterContainer"]
+material_override = SubResource("StandardMaterial3D_3")
 size = Vector3(16, 8, 16)
-material = SubResource("StandardMaterial3D_3")
 
 [node name="WaterSurface" type="Node3D" parent="WaterContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
@@ -47,53 +43,57 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="FlowVectors" type="Node3D" parent="."]
 
-[node name="FlowArrow1" type="CSGCone3D" parent="FlowVectors"]
-radius = 0.1
-height = 0.8
+[node name="FlowArrow1" type="CSGCylinder3D" parent="FlowVectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -4)
-material = SubResource("StandardMaterial3D_2")
-
-[node name="FlowArrow2" type="CSGCone3D" parent="FlowVectors"]
+material_override = SubResource("StandardMaterial3D_2")
 radius = 0.1
 height = 0.8
+cone = true
+
+[node name="FlowArrow2" type="CSGCylinder3D" parent="FlowVectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, -4)
-material = SubResource("StandardMaterial3D_2")
-
-[node name="FlowArrow3" type="CSGCone3D" parent="FlowVectors"]
+material_override = SubResource("StandardMaterial3D_2")
 radius = 0.1
 height = 0.8
+cone = true
+
+[node name="FlowArrow3" type="CSGCylinder3D" parent="FlowVectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 4)
-material = SubResource("StandardMaterial3D_2")
-
-[node name="FlowArrow4" type="CSGCone3D" parent="FlowVectors"]
+material_override = SubResource("StandardMaterial3D_2")
 radius = 0.1
 height = 0.8
+cone = true
+
+[node name="FlowArrow4" type="CSGCylinder3D" parent="FlowVectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 4)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.1
+height = 0.8
+cone = true
 
 [node name="DisturbanceSources" type="Node3D" parent="."]
 
 [node name="Source1" type="CSGSphere3D" parent="DisturbanceSources"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -6)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="Source2" type="CSGSphere3D" parent="DisturbanceSources"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 6)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="Waves" type="Node3D" parent="."]
 
 [node name="Wave1" type="CSGSphere3D" parent="Waves"]
-radius = 0.05
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, -6)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.05
 
 [node name="Wave2" type="CSGSphere3D" parent="Waves"]
-radius = 0.05
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 6)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.05
 
 [node name="Grid" type="Node3D" parent="."]
 

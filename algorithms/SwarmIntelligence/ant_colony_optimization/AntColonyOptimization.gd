@@ -301,7 +301,7 @@ func animate_indicators():
 			total_pheromone += pheromone_grid[x][y]
 	
 	var pheromone_height = (total_pheromone / 100.0) * 2.0 + 0.5
-	$PheromoneStrength.size.y = pheromone_height
+	$PheromoneStrength.height = pheromone_height
 	$PheromoneStrength.position.y = -3 + pheromone_height/2
 	
 	# Ant count indicator
@@ -312,7 +312,7 @@ func animate_indicators():
 	
 	var efficiency = float(ants_with_food) / ant_count
 	var count_height = efficiency * 2.0 + 0.5
-	$AntCount.size.y = count_height
+	$AntCount.height = count_height
 	$AntCount.position.y = -3 + count_height/2
 	
 	# Pulsing effects

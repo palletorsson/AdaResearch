@@ -190,7 +190,7 @@ func animate_data_flow(delta):
 		var particle = flow_particles.get_child(i)
 		if particle:
 			# Move particles through the ethical decision flow
-			var progress = (time * 0.3 + float(i) * 0.1) % 1.0
+			var progress = fmod(time * 0.3 + float(i) * 0.1, 1.0)
 			var x = lerp(-8, 8, progress)
 			var y = sin(progress * PI * 2) * 2
 			
@@ -198,7 +198,7 @@ func animate_data_flow(delta):
 			particle.position.y = lerp(particle.position.y, y, delta * 2.0)
 			
 			# Change color based on position and ethical standing
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var green_component = 0.8 * (1.0 - color_progress * 0.5) * (trust_score + ethics_score) * 0.5
 			var blue_component = 0.8 * (0.5 + color_progress * 0.5) * (transparency_level + accountability_level) * 0.5
 			particle.material_override.albedo_color = Color(0.2, green_component, blue_component, 1)

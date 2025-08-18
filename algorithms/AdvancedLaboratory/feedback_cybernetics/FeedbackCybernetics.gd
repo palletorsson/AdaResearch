@@ -80,7 +80,7 @@ func animate_data_flow(delta):
 		var particle = data_particles.get_child(i)
 		if particle:
 			# Move particles along the control flow path
-			var progress = (time * data_flow_rate + float(i) * 0.1) % 1.0
+			var progress = fmod(time * data_flow_rate + float(i) * 0.1, 1.0)
 			var angle = progress * PI * 2
 			var radius = 6.0
 			var x = cos(angle) * radius
@@ -90,7 +90,7 @@ func animate_data_flow(delta):
 			particle.position.z = lerp(particle.position.z, z, delta * 3.0)
 			
 			# Change color based on position in the flow
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var green_component = 0.8 * (1.0 - color_progress)
 			var red_component = 0.2 + 0.6 * color_progress
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)

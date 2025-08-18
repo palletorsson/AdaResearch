@@ -126,7 +126,7 @@ func animate_input_text(delta):
 			particle.scale = Vector3.ONE * pulse
 			
 			# Change color based on tokenization progress
-			var token_progress = (time * 0.5 + float(i) * 0.1) % 1.0
+			var token_progress = fmod(time * 0.5 + float(i) * 0.1, 1.0)
 			var red_component = 0.8 * (0.5 + token_progress * 0.5)
 			var blue_component = 0.8 * (0.5 + (1.0 - token_progress) * 0.5)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
@@ -233,7 +233,7 @@ func animate_output_results(delta):
 			particle.scale = Vector3.ONE * pulse
 			
 			# Change color based on result confidence
-			var confidence = (processing_progress + sin(time * 1.5 + i * 0.2) * 0.2) % 1.0
+			var confidence = fmod(processing_progress + sin(time * 1.5 + i * 0.2) * 0.2, 1.0)
 			var green_component = 0.8 * confidence
 			var red_component = 0.2 + 0.6 * (1.0 - confidence)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
@@ -260,7 +260,7 @@ func animate_data_flow(delta):
 		var particle = flow_particles[i]
 		if particle:
 			# Move particles through the processing flow
-			var progress = (time * 0.25 + float(i) * 0.08) % 1.0
+			var progress = fmod(time * 0.25 + float(i) * 0.08, 1.0)
 			var x = lerp(-8, 8, progress)
 			var y = sin(progress * PI * 5) * 2.5
 			
@@ -268,7 +268,7 @@ func animate_data_flow(delta):
 			particle.position.y = lerp(particle.position.y, y, delta * 2.0)
 			
 			# Change color based on position and processing progress
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var red_component = 0.8 * (0.5 + color_progress * 0.5)
 			var blue_component = 0.8 * (0.5 + (1.0 - color_progress) * 0.5)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)

@@ -174,8 +174,8 @@ func create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3)
 	
 	# Edge line
 	var edge = CSGCylinder3D.new()
-	edge.top_radius = 0.05
-	edge.bottom_radius = 0.05
+	edge.radius = 0.05
+	#
 	edge.height = distance - 0.6  # Account for node radius
 	
 	edge.position = (from_pos + to_pos) * 0.5
@@ -189,9 +189,8 @@ func create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3)
 	container.add_child(edge)
 	
 	# Arrow head
-	var arrow = CSGCone3D.new()
-	arrow.radius_top = 0.0
-	arrow.radius_bottom = 0.15
+	var arrow =  CSGCylinder3D.new()
+	arrow.radius = 0.0
 	arrow.height = 0.3
 	arrow.position = to_pos - direction * 0.4
 	arrow.look_at(to_pos, Vector3.UP)
@@ -208,8 +207,8 @@ func create_undirected_edge(container: Node3D, from_pos: Vector3, to_pos: Vector
 	var distance = from_pos.distance_to(to_pos)
 	
 	var edge = CSGCylinder3D.new()
-	edge.top_radius = 0.06
-	edge.bottom_radius = 0.06
+	edge.radius = 0.06
+	
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
@@ -229,8 +228,7 @@ func create_weighted_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3,
 	var thickness = weight * 0.03  # Scale thickness by weight
 	
 	var edge = CSGCylinder3D.new()
-	edge.top_radius = thickness
-	edge.bottom_radius = thickness
+	edge.radius = thickness
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
@@ -333,8 +331,8 @@ func create_traversal_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3
 	var distance = from_pos.distance_to(to_pos)
 	
 	var edge = CSGCylinder3D.new()
-	edge.top_radius = 0.05
-	edge.bottom_radius = 0.05
+	edge.radius = 0.05
+	
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
@@ -349,4 +347,3 @@ func create_traversal_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3
 	edge.material_override = material
 	
 	container.add_child(edge)
-

@@ -10,12 +10,14 @@ roughness = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.8, 0.2, 0.2, 1)
+emission_energy = 0.3
 
 [node name="FeatureEngineering" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,46 +37,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 [node name="RawLabel" type="CSGBox3D" parent="RawFeatures"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="TransformationPipeline" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="PipelineCore" type="CSGBox3D" parent="TransformationPipeline"]
 size = Vector3(3, 3, 3)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="PipelineLabel" type="CSGBox3D" parent="TransformationPipeline"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="TransformationMethods" type="Node3D" parent="TransformationPipeline"]
 
 [node name="ScalingCore" type="CSGSphere3D" parent="TransformationPipeline/TransformationMethods"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="NormalizationCore" type="CSGSphere3D" parent="TransformationPipeline/TransformationMethods"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="EncodingCore" type="CSGSphere3D" parent="TransformationPipeline/TransformationMethods"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="PolynomialCore" type="CSGSphere3D" parent="TransformationPipeline/TransformationMethods"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="BinningCore" type="CSGSphere3D" parent="TransformationPipeline/TransformationMethods"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="EngineereddFeatures" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
@@ -84,36 +86,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 [node name="EngineeredLabel" type="CSGBox3D" parent="EngineereddFeatures"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="FeatureSelection" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="SelectionCore" type="CSGBox3D" parent="FeatureSelection"]
 size = Vector3(6, 0.5, 3)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="SelectionLabel" type="CSGBox3D" parent="FeatureSelection"]
 size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="SelectionMethods" type="Node3D" parent="FeatureSelection"]
 
 [node name="UnivariateCore" type="CSGSphere3D" parent="FeatureSelection/SelectionMethods"]
 radius = 0.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="RecursiveCore" type="CSGSphere3D" parent="FeatureSelection/SelectionMethods"]
 radius = 0.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="LassoCore" type="CSGSphere3D" parent="FeatureSelection/SelectionMethods"]
 radius = 0.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DataFlow" type="Node3D" parent="."]
 
@@ -126,24 +128,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="QualityBase" type="CSGBox3D" parent="EngineeringMetrics/QualityMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="QualityIndicator" type="CSGSphere3D" parent="EngineeringMetrics/QualityMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="RelevanceMeter" type="Node3D" parent="EngineeringMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="RelevanceBase" type="CSGBox3D" parent="EngineeringMetrics/RelevanceMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="RelevanceIndicator" type="CSGSphere3D" parent="EngineeringMetrics/RelevanceMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Grid" type="Node3D" parent="."]
 

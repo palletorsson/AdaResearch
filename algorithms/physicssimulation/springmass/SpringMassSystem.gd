@@ -9,14 +9,21 @@ var gravity = Vector3(0, -9.8, 0)
 var spring_stiffness = 2.0
 var damping = 0.8
 
-# Grid configuration
-var grid_size = 5
-var grid_spacing = 1.0
+# Grid configuration (VR-optimized)
+var grid_size = 2  # Reduced from 5 to 2 (2x2x2 = 8 points vs 726!)
+var grid_spacing = 1.5  # Increased spacing for better visibility
+
+# VR Performance optimization
+var physics_update_interval = 2  # Update physics every 2 frames
+var frame_counter = 0
+var performance_timer = 0.0
 
 func _ready():
+	print("Creating VR-optimized spring-mass system...")
 	_create_mass_point_grid()
 	_create_spring_connections()
 	_connect_ui()
+	print("Created ", mass_points.size(), " mass points and ", springs.size(), " springs")
 
 func _create_mass_point_grid():
 	# Create a grid of mass points
@@ -35,7 +42,8 @@ func _create_mass_point_grid():
 				mass_points.append(mass_point)
 
 func _create_spring_connections():
-	# Create springs between adjacent mass points
+	# Create springs only between direct neighbors (VR-optimized)
+	# This reduces the number of springs significantly
 	for i in range(mass_points.size()):
 		var point1 = mass_points[i]
 		var pos1 = point1.position
@@ -45,8 +53,9 @@ func _create_spring_connections():
 			var pos2 = point2.position
 			var distance = pos1.distance_to(pos2)
 			
-			# Connect points that are within grid spacing
-			if distance <= grid_spacing * 1.5 and distance > 0:
+			# Only connect direct neighbors (not diagonals) for VR performance
+			# This means distance should be exactly grid_spacing (with small tolerance)
+			if abs(distance - grid_spacing) < 0.1 and distance > 0:
 				var spring = {
 					"point1": point1,
 					"point2": point2,
@@ -80,14 +89,28 @@ func _physics_process(delta):
 	if paused:
 		return
 	
-	# Apply forces to mass points
-	_apply_spring_forces(delta)
+	# Performance monitoring
+	performance_timer += delta
+	if performance_timer >= 1.0:  # Display FPS every second
+		var current_fps = Engine.get_frames_per_second()
+		print("Spring-Mass System FPS: ", current_fps, " | Mass Points: ", mass_points.size(), " | Springs: ", springs.size())
+		performance_timer = 0.0
+	
+	# VR Performance: Skip physics calculations on some frames
+	frame_counter += 1
+	if frame_counter % physics_update_interval != 0:
+		return
+	
+	var adjusted_delta = delta * physics_update_interval  # Adjust delta for skipped frames
+	
+	# Apply forces to mass points (less frequently for VR)
+	_apply_spring_forces(adjusted_delta)
 	
 	# Update mass point physics
 	for mass_point in mass_points:
-		mass_point.update_physics(delta, gravity)
+		mass_point.update_physics(adjusted_delta, gravity)
 	
-	# Update spring visuals
+	# Update spring visuals (less frequently)
 	_update_spring_visuals()
 
 func _apply_spring_forces(delta):

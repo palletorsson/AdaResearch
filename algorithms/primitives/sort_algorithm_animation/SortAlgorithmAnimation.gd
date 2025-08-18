@@ -85,8 +85,8 @@ func create_merge_sort_elements():
 	for i in range(merge_array.size()):
 		var element = CSGCylinder3D.new()
 		var height = float(merge_array[i])
-		element.top_radius = 0.3
-		element.bottom_radius = 0.3
+		element.radius = 0.3
+		
 		element.height = height * 0.3
 		element.position = Vector3(i * 1.0, height * 0.15, 0)
 		element.name = "MergeElement_" + str(i)
@@ -309,8 +309,8 @@ func recreate_merge_elements():
 	for i in range(merge_array.size()):
 		var element = CSGCylinder3D.new()
 		var height = float(merge_array[i])
-		element.top_radius = 0.3
-		element.bottom_radius = 0.3
+		element.radius = 0.3
+		
 		element.height = height * 0.3
 		element.position = Vector3(i * 1.0, height * 0.15, 0)
 		element.name = "MergeElement_" + str(i)

@@ -15,9 +15,6 @@ light_energy = 1.5
 
 [node name="HullVisualizer" type="Node3D" parent="."]
 script = ExtResource("2_visual")
-point_count = null
-distribution_type = null
-algorithm_type = null
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

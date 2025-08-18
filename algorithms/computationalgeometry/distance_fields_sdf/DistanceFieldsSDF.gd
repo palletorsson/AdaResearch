@@ -119,7 +119,7 @@ func _process(delta):
 func animate_indicators():
 	# Field resolution indicator
 	var resolution_height = (field_resolution / 50.0) * 2.0 + 0.5
-	$FieldResolution.size.y = resolution_height
+	$FieldResolution.height = resolution_height
 	$FieldResolution.position.y = -3 + resolution_height/2
 	
 	# Distance range indicator  

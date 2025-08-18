@@ -163,8 +163,8 @@ func visualize_suffix_array():
 		# Show LCP value
 		var lcp_height = lcp_array[i] * 0.3 + 0.1
 		var lcp_element = CSGCylinder3D.new()
-		lcp_element.top_radius = 0.15
-		lcp_element.bottom_radius = 0.15
+		lcp_element.radius = 0.15
+		
 		lcp_element.height = lcp_height
 		lcp_element.position = Vector3(i * 1.0 - suffix_array.size() * 0.5, lcp_height * 0.5 + 1.5, 0)
 		
@@ -256,8 +256,8 @@ func visualize_tree_node(container: Node3D, node: SuffixNode, position: Vector3,
 func create_tree_edge(container: Node3D, from: Vector3, to: Vector3, edge_char: String):
 	var distance = from.distance_to(to)
 	var edge = CSGCylinder3D.new()
-	edge.top_radius = 0.05
-	edge.bottom_radius = 0.05
+	edge.radius = 0.05
+	
 	edge.height = distance
 	
 	edge.position = (from + to) * 0.5

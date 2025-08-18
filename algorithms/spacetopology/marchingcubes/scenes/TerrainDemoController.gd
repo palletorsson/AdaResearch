@@ -50,7 +50,7 @@ func setup_ui():
 	noise_slider = $UI/Panel/VBoxContainer/Parameters/NoiseSlider
 	
 	# Setup initial state
-	progress_bar.visible = false
+	#progress_bar.visible = false
 	
 	print("TerrainDemo: UI initialized")
 

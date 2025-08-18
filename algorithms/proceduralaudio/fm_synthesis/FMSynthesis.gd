@@ -238,22 +238,22 @@ func bessel_j2_approx(x: float) -> float:
 func animate_controls():
 	# Carrier frequency control
 	var carrier_height = (carrier_freq / 800.0) * 1.5 + 0.5
-	$CarrierFreq.size.y = carrier_height
+	$CarrierFreq.height = carrier_height
 	$CarrierFreq.position.y = -3 + carrier_height/2
 	
 	# Modulator frequency control
 	var mod_height = (modulator_freq / 800.0) * 1.5 + 0.5
-	$ModulatorFreq.size.y = mod_height
+	$ModulatorFreq.height = mod_height
 	$ModulatorFreq.position.y = -3 + mod_height/2
 	
 	# Modulation index control
 	var index_height = (modulation_index / 10.0) * 1.5 + 0.5
-	$ModulationIndex.size.y = index_height
+	$ModulationIndex.height = index_height
 	$ModulationIndex.position.y = -3 + index_height/2
 	
 	# FM ratio indicator
 	var ratio_height = fm_ratio * 0.8 + 0.5
-	$FMRatio.size.y = ratio_height
+	$FMRatio.height = ratio_height
 	$FMRatio.position.y = -3 + ratio_height/2
 	
 	# Pulsing effects

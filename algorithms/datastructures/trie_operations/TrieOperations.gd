@@ -300,8 +300,8 @@ func create_trie_edge(parent: TrieNode, child: TrieNode):
 	var distance = parent_pos.distance_to(child_pos)
 	
 	edge.height = distance
-	edge.top_radius = 0.03
-	edge.bottom_radius = 0.03
+	edge.radius = 0.03
+	
 	
 	# Position and orient edge
 	var mid_point = (parent_pos + child_pos) * 0.5
@@ -390,7 +390,7 @@ func animate_prefix_search():
 func animate_autocomplete():
 	# Pulse nodes that match the autocomplete prefix
 	animate_prefix_search()
-
+	
 func animate_indicators():
 	# Word counter
 	var counter_height = word_count * 0.2 + 0.5
@@ -399,8 +399,10 @@ func animate_indicators():
 	
 	# Prefix indicator
 	var prefix_height = search_path.size() * 0.15 + 0.3
-	$PrefixIndicator.size.y = prefix_height
-	$PrefixIndicator.position.y = -3 + prefix_height/2
+	var prefixindicator = get_node_or_null("PrefixIndicator")
+	if prefixindicator and prefixindicator is CSGCylinder3D:
+		prefixindicator.height = prefix_height
+		prefixindicator.position.y = -3 + prefix_height/2
 	
 	# Pulsing effects
 	var pulse = 1.0 + sin(time * 3.0) * 0.1

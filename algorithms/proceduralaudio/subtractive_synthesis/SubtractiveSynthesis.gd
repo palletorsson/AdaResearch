@@ -341,17 +341,17 @@ func animate_spectrum():
 func animate_controls():
 	# Filter frequency control
 	var freq_height = (filter_frequency / 1000.0) * 1.5 + 0.5
-	$FilterFrequency.size.y = freq_height
+	$FilterFrequency.height = freq_height
 	$FilterFrequency.position.y = -3 + freq_height/2
 	
 	# Filter resonance control
 	var res_height = filter_resonance * 1.5 + 0.5
-	$FilterResonance.size.y = res_height
+	$FilterResonance.height = res_height
 	$FilterResonance.position.y = -3 + res_height/2
 	
 	# Filter type indicator
 	var type_height = (current_filter + 1) * 0.3 + 0.5
-	$FilterType.size.y = type_height
+	$FilterType.height = type_height
 	$FilterType.position.y = -3 + type_height/2
 	
 	# Update filter type color

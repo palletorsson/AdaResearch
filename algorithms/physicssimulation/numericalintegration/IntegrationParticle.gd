@@ -7,7 +7,7 @@ class_name IntegrationParticle
 @export var initial_position: Vector3 = Vector3.ZERO
 @export var initial_velocity: Vector3 = Vector3.ZERO
 
-var position: Vector3
+var particle_position: Vector3  # Renamed to avoid conflict with Node3D.position
 var velocity: Vector3
 var trail_points = []
 var max_trail_points = 200
@@ -35,7 +35,7 @@ func _create_trail_material():
 	trail_material.albedo_color.a = 0.7
 
 func initialize():
-	position = initial_position
+	particle_position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
 
@@ -49,11 +49,11 @@ func update_physics(delta: float, gravity: Vector3, damping: float):
 			_analytical_solution(delta, gravity, damping)
 	
 	# Update node position
-	self.position = position
+	self.position = particle_position
 
 func _euler_integration(delta: float, gravity: Vector3, damping: float):
 	# Simple Euler method: x(t+dt) = x(t) + v(t)*dt
-	position += velocity * delta
+	particle_position += velocity * delta
 	velocity += gravity * delta
 	velocity *= damping
 
@@ -72,7 +72,7 @@ func _rk4_integration(delta: float, gravity: Vector3, damping: float):
 	var k4_vel = gravity
 	
 	# Update position and velocity
-	position += (k1_pos + 2*k2_pos + 2*k3_pos + k4_pos) * delta / 6.0
+	particle_position += (k1_pos + 2*k2_pos + 2*k3_pos + k4_pos) * delta / 6.0
 	velocity += (k1_vel + 2*k2_vel + 2*k3_vel + k4_vel) * delta / 6.0
 	velocity *= damping
 
@@ -81,7 +81,7 @@ func _analytical_solution(delta: float, gravity: Vector3, damping: float):
 	var t = delta
 	
 	# Position: x(t) = x0 + v0*t + 0.5*a*t^2
-	position += velocity * t + 0.5 * gravity * t * t
+	particle_position += velocity * t + 0.5 * gravity * t * t
 	
 	# Velocity: v(t) = v0 + a*t
 	velocity += gravity * t
@@ -89,7 +89,7 @@ func _analytical_solution(delta: float, gravity: Vector3, damping: float):
 
 func update_trail():
 	# Add current position to trail
-	trail_points.append(position)
+	trail_points.append(particle_position)
 	
 	# Limit trail length
 	if trail_points.size() > max_trail_points:
@@ -116,7 +116,7 @@ func update_trail():
 		get_parent().get_parent().get_node("Trails").add_child(trail_segment)
 
 func reset_to_initial():
-	position = initial_position
+	particle_position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
 	

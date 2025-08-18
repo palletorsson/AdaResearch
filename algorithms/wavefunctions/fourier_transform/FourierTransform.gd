@@ -96,8 +96,8 @@ func create_wave_components():
 	var sine_waves_node = $WaveComponents/SineWaves
 	for i in range(harmonics.size()):
 		var sine_component = CSGCylinder3D.new()
-		sine_component.top_radius = 0.05
-		sine_component.bottom_radius = 0.05
+		sine_component.radius = 0.05
+		
 		sine_component.height = 2.0
 		sine_component.material_override = StandardMaterial3D.new()
 		sine_component.material_override.albedo_color = Color(0.8, 0.2, 0.2, 1)
@@ -120,8 +120,8 @@ func create_wave_components():
 	var cosine_waves_node = $WaveComponents/CosineWaves
 	for i in range(harmonics.size()):
 		var cosine_component = CSGCylinder3D.new()
-		cosine_component.top_radius = 0.05
-		cosine_component.bottom_radius = 0.05
+		cosine_component.radius = 0.05
+		co
 		cosine_component.height = 2.0
 		cosine_component.material_override = StandardMaterial3D.new()
 		cosine_component.material_override.albedo_color = Color(0.2, 0.8, 0.2, 1)
@@ -428,7 +428,7 @@ func animate_data_flow(delta):
 			particle.position.y = lerp(particle.position.y, y, delta * 2.0)
 			
 			# Change color based on position and transform progress
-			var color_progress = (progress + 0.5) % 1.0
+			var color_progress = fmod((progress + 0.5), 1.0)
 			var red_component = 0.8 * (0.5 + color_progress * 0.5)
 			var blue_component = 0.8 * (0.5 + (1.0 - color_progress) * 0.5)
 			particle.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)

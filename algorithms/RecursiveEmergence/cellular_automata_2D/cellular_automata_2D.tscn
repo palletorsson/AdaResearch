@@ -10,12 +10,14 @@ roughness = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.8, 0.2, 0.2, 1)
+emission_energy = 0.3
 
 [node name="CellularAutomata2D" type="Node3D"]
 script = ExtResource("1_script")
@@ -37,48 +39,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 [node name="GridLabel" type="CSGBox3D" parent="CellGrid"]
 size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="RuleEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="EngineCore" type="CSGBox3D" parent="RuleEngine"]
 size = Vector3(3, 3, 3)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EngineLabel" type="CSGBox3D" parent="RuleEngine"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="AutomataRules" type="Node3D" parent="RuleEngine"]
 
 [node name="ConwayCore" type="CSGSphere3D" parent="RuleEngine/AutomataRules"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="Rule30Core" type="CSGSphere3D" parent="RuleEngine/AutomataRules"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="Rule110Core" type="CSGSphere3D" parent="RuleEngine/AutomataRules"]
 radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="PatternEvolution" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
 [node name="EvolutionCore" type="CSGBox3D" parent="PatternEvolution"]
 size = Vector3(3, 3, 3)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EvolutionLabel" type="CSGBox3D" parent="PatternEvolution"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="Patterns" type="Node3D" parent="PatternEvolution"]
 
@@ -95,24 +97,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="DensityBase" type="CSGBox3D" parent="AutomataMetrics/DensityMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="DensityIndicator" type="CSGSphere3D" parent="AutomataMetrics/DensityMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="StabilityMeter" type="Node3D" parent="AutomataMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="StabilityBase" type="CSGBox3D" parent="AutomataMetrics/StabilityMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="StabilityIndicator" type="CSGSphere3D" parent="AutomataMetrics/StabilityMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Grid" type="Node3D" parent="."]
 

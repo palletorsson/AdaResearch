@@ -10,12 +10,14 @@ roughness = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.8, 0.2, 0.2, 1)
+emission_energy = 0.3
 
 [node name="VariationalAutoencodersVAEs" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,31 +37,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 [node name="InputLabel" type="CSGBox3D" parent="InputData"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="Encoder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
 [node name="EncoderCore" type="CSGBox3D" parent="Encoder"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EncoderLabel" type="CSGBox3D" parent="Encoder"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="LatentSpace" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LatentCore" type="CSGSphere3D" parent="LatentSpace"]
 radius = 1.5
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="LatentLabel" type="CSGBox3D" parent="LatentSpace"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="LatentParticles" type="Node3D" parent="LatentSpace"]
 
@@ -68,12 +70,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="DecoderCore" type="CSGBox3D" parent="Decoder"]
 size = Vector3(2, 2, 2)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DecoderLabel" type="CSGBox3D" parent="Decoder"]
 size = Vector3(2.5, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="OutputData" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
@@ -83,19 +85,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 [node name="OutputLabel" type="CSGBox3D" parent="OutputData"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="ReconstructionLoss" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="LossCore" type="CSGSphere3D" parent="ReconstructionLoss"]
 radius = 0.8
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="LossLabel" type="CSGBox3D" parent="ReconstructionLoss"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="DataFlow" type="Node3D" parent="."]
 
@@ -108,24 +110,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="LossBase" type="CSGBox3D" parent="TrainingMetrics/ReconstructionLossMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="LossIndicator" type="CSGSphere3D" parent="TrainingMetrics/ReconstructionLossMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="KLDivergenceMeter" type="Node3D" parent="TrainingMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="KLBase" type="CSGBox3D" parent="TrainingMetrics/KLDivergenceMeter"]
 size = Vector3(4, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="KLIndicator" type="CSGSphere3D" parent="TrainingMetrics/KLDivergenceMeter"]
 radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Grid" type="Node3D" parent="."]
 

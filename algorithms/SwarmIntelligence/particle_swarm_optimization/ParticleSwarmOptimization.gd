@@ -222,7 +222,7 @@ func animate_swarm():
 func animate_indicators():
 	# Inertia weight indicator
 	var inertia_height = inertia_weight * 2.0 + 0.5
-	$InertiaWeight.size.y = inertia_height
+	$InertiaWeight.height = inertia_height
 	$InertiaWeight.position.y = -3 + inertia_height/2
 	
 	# Swarm convergence indicator
@@ -233,7 +233,7 @@ func animate_indicators():
 	
 	var convergence = 1.0 / (1.0 + avg_distance_to_global)  # Higher when more converged
 	var convergence_height = convergence * 2.0 + 0.5
-	$SwarmConvergence.size.y = convergence_height
+	$SwarmConvergence.height = convergence_height
 	$SwarmConvergence.position.y = -3 + convergence_height/2
 	
 	# Update convergence color

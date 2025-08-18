@@ -67,8 +67,8 @@ func visualize_number_sequence():
 func create_addition_visualization(container: Node3D, index: int):
 	# Visualize Fib(n) = Fib(n-1) + Fib(n-2)
 	var connection1 = CSGCylinder3D.new()
-	connection1.top_radius = 0.02
-	connection1.bottom_radius = 0.02
+	connection1.radius = 0.02
+	
 	connection1.height = 0.8
 	connection1.position = Vector3((index - 1) * 0.8 - 6 + 0.4, 2.5, 0.3)
 	connection1.rotation_degrees = Vector3(0, 0, -45)
@@ -81,8 +81,8 @@ func create_addition_visualization(container: Node3D, index: int):
 	container.add_child(connection1)
 	
 	var connection2 = CSGCylinder3D.new()
-	connection2.top_radius = 0.02
-	connection2.bottom_radius = 0.02
+	connection2.radius = 0.02
+	
 	connection2.height = 1.6
 	connection2.position = Vector3((index - 2) * 0.8 - 6 + 0.8, 2.5, 0.6)
 	connection2.rotation_degrees = Vector3(0, 0, -30)
@@ -130,8 +130,8 @@ func create_golden_spiral():
 	# Connect spiral points
 	for i in range(spiral_points.size() - 1):
 		var connection = CSGCylinder3D.new()
-		connection.top_radius = 0.02
-		connection.bottom_radius = 0.02
+		connection.radius = 0.02
+		
 		connection.height = spiral_points[i].distance_to(spiral_points[i + 1])
 		
 		connection.position = (spiral_points[i] + spiral_points[i + 1]) * 0.5
@@ -276,8 +276,8 @@ func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max
 			
 			# Create connection
 			var connection = CSGCylinder3D.new()
-			connection.top_radius = 0.05
-			connection.bottom_radius = 0.05
+			connection.radius = 0.05
+			
 			connection.height = position.distance_to(branch_pos)
 			
 			connection.position = (position + branch_pos) * 0.5

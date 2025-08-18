@@ -11,6 +11,12 @@ var smoothing_length = 1.0
 var particle_mass = 1.0
 var rest_density = 1000.0
 
+# VR Performance optimization
+var frame_counter = 0
+var physics_update_interval = 2  # Update physics every 2 frames for VR performance
+var performance_timer = 0.0
+var fps_display_interval = 1.0  # Display FPS every second
+
 # SPH parameters
 var kernel_constant = 315.0 / (64.0 * PI * pow(smoothing_length, 9))
 var pressure_kernel_constant = 45.0 / (PI * pow(smoothing_length, 6))
@@ -21,9 +27,11 @@ func _ready():
 	_connect_ui()
 
 func _create_fluid_particles():
-	# Create a cube of fluid particles
-	var particle_count = 8
-	var spacing = 0.5
+	# Create a smaller cube of fluid particles for VR performance
+	var particle_count = 3  # Reduced from 8 to 3 (3x3x3 = 27 particles vs 2048!)
+	var spacing = 0.8  # Increased spacing for better visibility
+	
+	print("Creating ", (particle_count * 2) * particle_count * (particle_count * 2), " fluid particles for VR-optimized simulation")
 	
 	for x in range(-particle_count, particle_count):
 		for y in range(0, particle_count):
@@ -39,15 +47,27 @@ func _physics_process(delta):
 	if paused:
 		return
 	
-	# Calculate densities for all particles
+	# Performance monitoring
+	performance_timer += delta
+	if performance_timer >= fps_display_interval:
+		var current_fps = Engine.get_frames_per_second()
+		print("Fluid Simulation FPS: ", current_fps, " | Particles: ", particles.size())
+		performance_timer = 0.0
+	
+	# VR Performance: Skip physics calculations on some frames
+	frame_counter += 1
+	if frame_counter % physics_update_interval != 0:
+		return
+	
+	# Calculate densities for all particles (less frequently for VR)
 	_calculate_densities()
 	
 	# Calculate forces for all particles
-	_calculate_forces(delta)
+	_calculate_forces(delta * physics_update_interval)  # Adjust delta for skipped frames
 	
 	# Update particle physics
 	for particle in particles:
-		particle.update_physics(delta, gravity)
+		particle.update_physics(delta * physics_update_interval, gravity)
 	
 	# Handle collisions
 	_handle_collisions()
@@ -145,10 +165,12 @@ func _connect_ui():
 	$UI/VBoxContainer/PressureSlider.value_changed.connect(_on_pressure_changed)
 
 func _on_reset_pressed():
-	# Reset all particles to initial positions
-	var particle_count = 8
-	var spacing = 0.5
+	# Reset all particles to initial positions (VR-optimized)
+	var particle_count = 3  # Match the optimized count
+	var spacing = 0.8  # Match the optimized spacing
 	var index = 0
+	
+	print("Resetting ", particles.size(), " particles to initial positions")
 	
 	for x in range(-particle_count, particle_count):
 		for y in range(0, particle_count):

@@ -273,8 +273,8 @@ func create_tree_nodes(container: Node3D, position: Vector3, max_depth: int, cur
 
 func create_connection(container: Node3D, from: Vector3, to: Vector3):
 	var connection = CSGCylinder3D.new()
-	connection.top_radius = 0.05
-	connection.bottom_radius = 0.05
+	connection.radius = 0.05
+	
 	connection.height = from.distance_to(to)
 	
 	# Position and orient the cylinder

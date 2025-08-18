@@ -218,8 +218,8 @@ func show_critical_bands():
 		
 		# Band frequency label (height represents frequency)
 		var freq_indicator = CSGCylinder3D.new()
-		freq_indicator.top_radius = 0.1
-		freq_indicator.bottom_radius = 0.1
+		freq_indicator.radius = 0.1
+		
 		freq_indicator.height = log(band_center) * 0.3
 		freq_indicator.position = Vector3(i * 0.9 - critical_bands.size() * 0.45, freq_indicator.height * 0.5 + 2.5, 0)
 		
@@ -339,8 +339,8 @@ func show_a_weighting_filter(container: Node3D):
 
 func create_contour_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	var connection = CSGCylinder3D.new()
-	connection.top_radius = 0.02
-	connection.bottom_radius = 0.02
+	connection.radius = 0.02
+	
 	connection.height = from.distance_to(to)
 	
 	connection.position = (from + to) * 0.5

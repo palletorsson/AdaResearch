@@ -56,9 +56,8 @@ func create_for_loop_elements():
 		container.add_child(element)
 	
 	# Create iterator pointer
-	var pointer = CSGCone3D.new()
-	pointer.radius_top = 0.0
-	pointer.radius_bottom = 0.3
+	var pointer =  CSGCylinder3D.new()
+	pointer.radius = 0.05
 	pointer.height = 0.8
 	pointer.position = Vector3(-1.5, 0, 0)
 	pointer.name = "ForLoopPointer"
@@ -224,8 +223,8 @@ func show_iterator_patterns():
 	for p in range(patterns.size()):
 		for i in range(6):
 			var element = CSGCylinder3D.new()
-			element.top_radius = 0.3
-			element.bottom_radius = 0.3
+			element.radius = 0.3
+			
 			element.height = 0.6
 			element.position = Vector3(i * 0.8, 0, p * 1.5)
 			
@@ -331,4 +330,3 @@ func update_performance_metrics():
 		bar.material_override = material
 		
 		container.add_child(bar)
-

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3tyskbprx01w"]
+
+[ext_resource type="Script" uid="uid://4tecojbheo2l" path="res://tests/scene_based_tester.gd" id="1"]
+
+[node name="AlgorithmTester" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+
+[node name="StatusLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+text = "Algorithm Testing Suite
+Press SPACE to start testing
+Press ESC to stop"
+
+[node name="TestingArea" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)

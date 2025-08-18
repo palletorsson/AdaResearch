@@ -16,7 +16,7 @@ func create_arrow():
 	# Create a cylinder for the arrow shaft
 	var cylinder = CylinderMesh.new()
 	cylinder.top_radius = 0.01
-	cylinder.bottom_radius = 0.01
+	
 	cylinder.height = 0.8
 	cylinder.radial_segments = 6
 	

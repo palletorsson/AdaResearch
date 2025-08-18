@@ -78,8 +78,8 @@ func create_datamosh_effect(container: Node3D, base_pos: Vector3):
 	# Datamoshing - motion vector corruption
 	for i in range(16):
 		var motion_vector = CSGCylinder3D.new()
-		motion_vector.top_radius = 0.05
-		motion_vector.bottom_radius = 0.05
+		motion_vector.radius = 0.05
+		
 		motion_vector.height = randf_range(0.5, 2.0)
 		
 		var original_pos = base_pos + Vector3(
@@ -401,8 +401,7 @@ func show_error_propagation():
 		var wave_radius = fmod(time * error_propagation_speed + i * 0.5, 4.0)
 		
 		var error_wave = CSGCylinder3D.new()
-		error_wave.top_radius = wave_radius + 0.2
-		error_wave.bottom_radius = wave_radius
+		error_wave.radius = wave_radius + 0.2
 		error_wave.height = 0.1
 		error_wave.position = Vector3(0, 0, 0)
 		
@@ -461,4 +460,3 @@ func create_error_cascade(container: Node3D):
 		error_sphere.material_override = material
 		
 		container.add_child(error_sphere)
-

@@ -242,9 +242,9 @@ func show_particle_flow():
 			var cell = lattice_grid[i][j]
 			
 			if cell.velocity.length() > 0.1:
-				var flow_arrow = CSGCone3D.new()
-				flow_arrow.radius_top = 0.0
-				flow_arrow.radius_bottom = 0.1
+				var flow_arrow = CSGCylinder3D.new()
+				flow_arrow.radius = 0.0
+				flow_arrow
 				flow_arrow.height = cell.velocity.length() * 2.0
 				
 				flow_arrow.position = Vector3(
@@ -371,4 +371,3 @@ func display_macroscopic_properties():
 		prop_sphere.material_override = prop_material
 		
 		container.add_child(prop_sphere)
-

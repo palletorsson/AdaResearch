@@ -159,8 +159,8 @@ func create_parse_tree_recursive(container: Node3D, symbol: String, position: Ve
 			
 			# Create connection
 			var connection = CSGCylinder3D.new()
-			connection.top_radius = 0.02
-			connection.bottom_radius = 0.02
+			connection.radius = 0.02
+			
 			connection.height = position.distance_to(child_pos)
 			
 			connection.position = (position + child_pos) * 0.5

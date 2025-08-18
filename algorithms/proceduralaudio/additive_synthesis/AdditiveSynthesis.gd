@@ -33,8 +33,8 @@ func create_harmonic_oscillators():
 		
 		# Amplitude control
 		var amplitude_control = CSGCylinder3D.new()
-		amplitude_control.top_radius = 0.05
-		amplitude_control.bottom_radius = 0.05
+		amplitude_control.radius = 0.05
+		
 		amplitude_control.height = 1.0
 		amplitude_control.position = Vector3(
 			-7 + i * 0.9,
@@ -187,7 +187,7 @@ func animate_harmonic_oscillators():
 		
 		# Update amplitude control height
 		var amp_height = current_amplitude * 1.5 + 0.3
-		harmonic.amplitude_control.size.y = amp_height
+		harmonic.amplitude_control.height = amp_height
 		harmonic.amplitude_control.position.y = 1 + amp_height/2
 		
 		# Update frequency indicator
@@ -271,13 +271,13 @@ func animate_output_waveform():
 func animate_controls():
 	# Fundamental frequency control
 	var fund_height = (fundamental_freq / 400.0) * 1.5 + 0.5
-	$FundamentalFreq.size.y = fund_height
+	$FundamentalFreq.height = fund_height
 	$FundamentalFreq.position.y = -3 + fund_height/2
 	
 	# Harmonic count indicator
 	var active_harmonics = count_active_harmonics()
 	var count_height = (active_harmonics / float(harmonic_count)) * 1.5 + 0.5
-	$HarmonicCount.size.y = count_height
+	$HarmonicCount.height = count_height
 	$HarmonicCount.position.y = -3 + count_height/2
 	
 	# Pulsing effects

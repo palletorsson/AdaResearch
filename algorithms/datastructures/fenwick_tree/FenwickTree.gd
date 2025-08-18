@@ -106,8 +106,8 @@ func show_responsibility_connections(container: Node3D, index: int):
 	# Show range this index covers
 	if start != end:
 		var connection = CSGCylinder3D.new()
-		connection.top_radius = 0.02
-		connection.bottom_radius = 0.02
+		connection.radius = 0.02
+		#
 		connection.height = float(end - start + 1) * 1.0
 		
 		var start_pos = (start - 1) * 1.0 - fenwick_tree.size() * 0.5
@@ -205,8 +205,8 @@ func demonstrate_update_operation():
 	for i in range(1, fenwick_tree.size()):
 		var height = abs(fenwick_tree[i]) * 0.2 + 0.1
 		var element = CSGCylinder3D.new()
-		element.top_radius = 0.3
-		element.bottom_radius = 0.3
+		element.radius = 0.3
+		#
 		element.height = height
 		element.position = Vector3((i - 1) * 1.0 - fenwick_tree.size() * 0.5, height * 0.5, 0)
 		
@@ -292,4 +292,3 @@ func show_binary_bits(container: Node3D, number: int, position: Vector3):
 		
 		bit_cube.material_override = material
 		container.add_child(bit_cube)
-

@@ -217,17 +217,17 @@ func update_node_color(node: CSGSphere3D, height_value: float):
 func animate_controls():
 	# Frequency control
 	var freq_height = frequency * 0.8 + 0.5
-	$FrequencyControl.size.y = freq_height
+	$FrequencyControl.height = freq_height
 	$FrequencyControl.position.y = -3 + freq_height/2
 	
 	# Amplitude control
 	var amp_height = amplitude * 0.6 + 0.5
-	$AmplitudeControl.size.y = amp_height
+	$AmplitudeControl.height = amp_height
 	$AmplitudeControl.position.y = -3 + amp_height/2
 	
 	# Phase control (rotating)
 	var phase_height = 1.0 + sin(phase) * 0.3
-	$PhaseControl.size.y = phase_height
+	$PhaseControl.height = phase_height
 	$PhaseControl.position.y = -3 + phase_height/2
 	$PhaseControl.rotation_degrees.y = phase * 180.0 / PI
 	

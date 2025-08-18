@@ -26,7 +26,6 @@ material_override = SubResource("StandardMaterial3D_0xqxz")
 [node name="EulerParticle" type="Node3D" parent="IntegrationParticles"]
 script = ExtResource("2_cf43e")
 particle_color = Color(1, 0, 0, 1)
-integration_method = "euler"
 initial_position = Vector3(-4, 2, 0)
 initial_velocity = Vector3(2, 0, 0)
 

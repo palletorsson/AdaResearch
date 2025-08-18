@@ -106,8 +106,8 @@ func generate_maze_step():
 
 func create_maze_line(x: int, y: int, forward_slash: bool):
 	var line = CSGCylinder3D.new()
-	line.top_radius = 0.02
-	line.bottom_radius = 0.02
+	line.radius = 0.02
+	
 	line.height = cell_size * sqrt(2)  # Diagonal length
 	
 	# Position at cell center
@@ -193,7 +193,7 @@ func animate_ten_print():
 func animate_indicators():
 	# Probability control
 	var prob_height = probability * 2.0 + 0.5
-	$ProbabilityControl.size.y = prob_height
+	$ProbabilityControl.height = prob_height
 	$ProbabilityControl.position.y = -4 + prob_height/2
 	
 	# Generation speed indicator

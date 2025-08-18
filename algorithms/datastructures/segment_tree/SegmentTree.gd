@@ -19,6 +19,8 @@ var update_index := 0
 var update_value := 0
 
 func _ready():
+	# Create necessary containers if they don't exist
+	ensure_containers_exist()
 	build_segment_tree()
 	tree_size = segment_tree.size()
 
@@ -31,6 +33,16 @@ func _process(delta):
 	show_array_representation()
 	demonstrate_range_queries()
 	show_update_operations()
+
+func ensure_containers_exist():
+	"""Ensure all required containers exist in the scene"""
+	var containers = ["TreeStructure", "ArrayRepresentation", "RangeQueries", "UpdateOperations"]
+	
+	for container_name in containers:
+		if not get_node_or_null(container_name):
+			var container = Node3D.new()
+			container.name = container_name
+			add_child(container)
 
 func build_segment_tree():
 	var n = array_data.size()
@@ -88,7 +100,7 @@ func update_tree(node: int, start: int, end: int, index: int, value: int):
 		segment_tree[node] = segment_tree[left_child] + segment_tree[right_child]
 
 func animate_tree_structure():
-	var container = $TreeStructure
+	var container = get_node("TreeStructure")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -125,13 +137,19 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 		# Leaf nodes (original array elements)
 		material.albedo_color = Color(0.2, 1.0, 0.2)
 		material.emission_enabled = true
-		material.emission = Color(0.2, 1.0, 0.2) * 0.3
+		material.emission = Color(0.06, 0.3, 0.06)
+		material.emission_energy = 1.0
 	else:
 		# Internal nodes (aggregate values)
-		var depth_ratio = float(level) / max_levels
+		# FIXED: Ensure max_levels is not zero to avoid division by zero
+		var depth_ratio = 0.0
+		if max_levels > 0:
+			depth_ratio = float(level) / float(max_levels)
+		
 		material.albedo_color = Color(1.0 - depth_ratio, 0.5, depth_ratio)
 		material.emission_enabled = true
-		material.emission = Color(1.0 - depth_ratio, 0.5, depth_ratio) * 0.2
+		material.emission = Color(1.0 - depth_ratio, 0.5, depth_ratio)
+		material.emission_energy = 0.2
 	
 	material.metallic = 0.3
 	material.roughness = 0.4
@@ -145,10 +163,15 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 	label.position = Vector3(x_pos, y_pos + 0.8, 0)
 	
 	var label_material = StandardMaterial3D.new()
-	var value_ratio = float(segment_tree[node_index]) / 40.0  # Normalize for color
+	# FIXED: Ensure proper float casting and range checking
+	var value_ratio = 0.0
+	if segment_tree[node_index] != null and segment_tree[node_index] > 0:
+		value_ratio = clamp(float(segment_tree[node_index]) / 40.0, 0.0, 1.0)
+	
 	label_material.albedo_color = Color(value_ratio, 1.0 - value_ratio, 0.5)
 	label_material.emission_enabled = true
-	label_material.emission = Color(value_ratio, 1.0 - value_ratio, 0.5) * 0.4
+	label_material.emission = Color(value_ratio, 1.0 - value_ratio, 0.5)
+	label_material.emission_energy = 0.4
 	label.material_override = label_material
 	
 	container.add_child(label)
@@ -157,7 +180,7 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 	var left_child = 2 * node_index + 1
 	var right_child = 2 * node_index + 2
 	
-	if left_child < segment_tree.size() and segment_tree[left_child] != 0:
+	if left_child < segment_tree.size() and segment_tree[left_child] != null and segment_tree[left_child] != 0:
 		# Create connection to left child
 		var left_child_x = -total_width / 2 + (position_index * 2) * (level_width / 2) + (level_width / 4)
 		var left_child_y = y_pos - 2.0
@@ -165,7 +188,7 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 		
 		create_tree_nodes(container, left_child, level + 1, position_index * 2, max_levels, total_width)
 	
-	if right_child < segment_tree.size() and segment_tree[right_child] != 0:
+	if right_child < segment_tree.size() and segment_tree[right_child] != null and segment_tree[right_child] != 0:
 		# Create connection to right child
 		var right_child_x = -total_width / 2 + (position_index * 2 + 1) * (level_width / 2) + (level_width / 4)
 		var right_child_y = y_pos - 2.0
@@ -176,8 +199,8 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
 	var distance = from.distance_to(to)
 	var connection = CSGCylinder3D.new()
-	connection.top_radius = 0.05
-	connection.bottom_radius = 0.05
+	# FIXED: Use proper Godot 4 CSGCylinder3D properties
+	connection.radius = 0.05
 	connection.height = distance
 	
 	connection.position = (from + to) * 0.5
@@ -191,7 +214,7 @@ func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
 	container.add_child(connection)
 
 func show_array_representation():
-	var container = $ArrayRepresentation
+	var container = get_node("ArrayRepresentation")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -219,13 +242,14 @@ func show_array_representation():
 		var index_material = StandardMaterial3D.new()
 		index_material.albedo_color = Color(1.0, 1.0, 0.0)
 		index_material.emission_enabled = true
-		index_material.emission = Color(1.0, 1.0, 0.0) * 0.4
+		index_material.emission = Color(0.4, 0.4, 0.0)
+		index_material.emission_energy = 1.0
 		index_label.material_override = index_material
 		
 		container.add_child(index_label)
 
 func demonstrate_range_queries():
-	var container = $RangeQueries
+	var container = get_node("RangeQueries")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -249,7 +273,8 @@ func demonstrate_range_queries():
 			# In query range
 			material.albedo_color = Color(1.0, 0.2, 0.2)
 			material.emission_enabled = true
-			material.emission = Color(1.0, 0.2, 0.2) * 0.5
+			material.emission = Color(0.5, 0.1, 0.1)
+			material.emission_energy = 1.0
 		else:
 			# Outside query range
 			material.albedo_color = Color(0.5, 0.5, 0.5)
@@ -264,19 +289,20 @@ func demonstrate_range_queries():
 	var query_result = range_query(0, 0, array_data.size() - 1, query_left, query_right)
 	
 	var result_display = CSGSphere3D.new()
-	result_display.radius = query_result * 0.1
+	result_display.radius = max(0.1, query_result * 0.1)  # Ensure minimum radius
 	result_display.position = Vector3(0, 3, 0)
 	
 	var result_material = StandardMaterial3D.new()
 	result_material.albedo_color = Color(0.0, 1.0, 0.0)
 	result_material.emission_enabled = true
-	result_material.emission = Color(0.0, 1.0, 0.0) * 0.6
+	result_material.emission = Color(0.0, 0.6, 0.0)
+	result_material.emission_energy = 1.0
 	result_display.material_override = result_material
 	
 	container.add_child(result_display)
 
 func show_update_operations():
-	var container = $UpdateOperations
+	var container = get_node("UpdateOperations")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -294,8 +320,7 @@ func show_update_operations():
 	# Visualize update operation
 	for i in range(array_data.size()):
 		var element = CSGCylinder3D.new()
-		element.top_radius = 0.3
-		element.bottom_radius = 0.3
+		element.radius = 0.3
 		element.height = array_data[i] * 0.3
 		element.position = Vector3(i * 0.8 - array_data.size() * 0.4, array_data[i] * 0.15, 0)
 		
@@ -305,7 +330,8 @@ func show_update_operations():
 			# Element being updated
 			material.albedo_color = Color(1.0, 1.0, 0.0)
 			material.emission_enabled = true
-			material.emission = Color(1.0, 1.0, 0.0) * 0.6
+			material.emission = Color(0.6, 0.6, 0.0)
+			material.emission_energy = 1.0
 		else:
 			material.albedo_color = Color(0.5, 1.0, 0.3)
 		
@@ -322,10 +348,11 @@ func show_update_operations():
 	
 	var effect_material = StandardMaterial3D.new()
 	effect_material.albedo_color = Color(1.0, 0.0, 1.0, 0.6)
-	effect_material.flags_transparent = true
+	# FIXED: Use proper Godot 4 transparency system
+	effect_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	effect_material.emission_enabled = true
-	effect_material.emission = Color(1.0, 0.0, 1.0) * 0.4
+	effect_material.emission = Color(0.4, 0.0, 0.4)
+	effect_material.emission_energy = 1.0
 	propagation_effect.material_override = effect_material
 	
 	container.add_child(propagation_effect)
-

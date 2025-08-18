@@ -199,8 +199,8 @@ func visualize_chorus_effect():
 		# Connection lines showing modulation
 		if i > 0:
 			var connection = CSGCylinder3D.new()
-			connection.top_radius = 0.02
-			connection.bottom_radius = 0.02
+			connection.radius = 0.02
+			
 			connection.height = 0.4
 			connection.position = Vector3(modulation * 3, base_height - 0.2, 0)
 			connection.rotation_degrees = Vector3(0, 0, 90)
@@ -317,9 +317,8 @@ func show_effect_chain():
 		
 		# Connection arrows
 		if i < effects.size() - 1:
-			var arrow = CSGCone3D.new()
-			arrow.radius_top = 0.0
-			arrow.radius_bottom = 0.15
+			var arrow = CSGCylinder3D.new()
+			arrow.radius = 0.05
 			arrow.height = 0.4
 			arrow.position = Vector3(i * 2.5 - effects.size() * 1.25 + 1.0, 0, 0)
 			arrow.rotation_degrees = Vector3(0, 0, -90)
@@ -370,4 +369,3 @@ func show_frequency_analysis():
 		spectrum_bar.material_override = material
 		
 		container.add_child(spectrum_bar)
-

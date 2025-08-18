@@ -10,12 +10,14 @@ roughness = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.8, 0.2, 0.2, 1)
+emission_energy = 0.3
 
 [node name="UnitCircle" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,7 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 [node name="CircleLabel" type="CSGBox3D" parent="Circle"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="SineWave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
@@ -45,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 [node name="SineLabel" type="CSGBox3D" parent="SineWave"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="CosineWave" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
@@ -55,19 +57,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 [node name="CosineLabel" type="CSGBox3D" parent="CosineWave"]
 size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="RotatingPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="PointCore" type="CSGSphere3D" parent="RotatingPoint"]
 radius = 0.2
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="RadiusLine" type="CSGBox3D" parent="RotatingPoint"]
 size = Vector3(2, 0.05, 0.05)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Projections" type="Node3D" parent="."]
 
@@ -76,14 +78,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
 [node name="ProjectionCore" type="CSGSphere3D" parent="Projections/SineProjection"]
 radius = 0.15
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="CosineProjection" type="Node3D" parent="Projections"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="ProjectionCore" type="CSGSphere3D" parent="Projections/CosineProjection"]
 radius = 0.15
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="Grid" type="Node3D" parent="."]
 

@@ -204,8 +204,8 @@ func create_pattern_indicators():
 	var gliders_node = $PatternEvolution/Patterns/Gliders
 	for i in range(3):
 		var glider = CSGCylinder3D.new()
-		glider.top_radius = 0.1
-		glider.bottom_radius = 0.2
+		glider.radius = 0.1
+		
 		glider.height = 0.3
 		glider.material_override = StandardMaterial3D.new()
 		glider.material_override.albedo_color = Color(0.8, 0.2, 0.8, 1)

@@ -74,8 +74,8 @@ func apply_geometric_transforms():
 		
 		# Connection line showing transformation
 		var connection = CSGCylinder3D.new()
-		connection.top_radius = 0.02
-		connection.bottom_radius = 0.02
+		connection.radius = 0.02
+		
 		connection.height = 4.0
 		connection.position = Vector3(i * 2.0 - base_objects.size(), 0, 0)
 		
@@ -98,14 +98,13 @@ func create_object(obj_data: Dictionary) -> CSGPrimitive3D:
 			return sphere
 		"cylinder":
 			var cylinder = CSGCylinder3D.new()
-			cylinder.top_radius = obj_data.radius
-			cylinder.bottom_radius = obj_data.radius
+			cylinder.radius = obj_data.radius
 			cylinder.height = obj_data.height
 			return cylinder
 		"cone":
-			var cone = CSGCone3D.new()
-			cone.radius_top = 0.0
-			cone.radius_bottom = obj_data.radius
+			var cone = CSGCylinder3D.new()
+			#cone.radius = 0.0
+			cone.radius = obj_data.radius
 			cone.height = obj_data.height
 			return cone
 		_:
@@ -191,8 +190,8 @@ func demonstrate_stochastic_operations():
 
 func gaussian_random() -> float:
 	# Box-Muller transform for Gaussian distribution
-	static var has_spare = false
-	static var spare = 0.0
+	var has_spare = false
+	var spare = 0.0
 	
 	if has_spare:
 		has_spare = false
@@ -311,8 +310,8 @@ func create_noise_based_distortion():
 			# Show displacement vector
 			if perlin_offset.length() > 0.1:
 				var displacement_line = CSGCylinder3D.new()
-				displacement_line.top_radius = 0.02
-				displacement_line.bottom_radius = 0.02
+				displacement_line.radius = 0.02
+				
 				displacement_line.height = perlin_offset.length()
 				
 				displacement_line.position = base_pos + perlin_offset * 0.5
@@ -372,4 +371,3 @@ func grad3d(hash: int, x: float, y: float, z: float) -> float:
 	var u = x if h < 8 else y
 	var v = y if h < 4 else (x if h == 12 or h == 14 else z)
 	return (u if (h & 1) == 0 else -u) + (v if (h & 2) == 0 else -v)
-

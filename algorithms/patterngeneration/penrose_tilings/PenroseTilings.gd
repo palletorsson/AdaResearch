@@ -241,7 +241,7 @@ func animate_penrose_tiling():
 func animate_indicators():
 	# Iteration control
 	var iter_height = (current_iteration + 1) * 0.4 + 0.5
-	$IterationControl.size.y = iter_height
+	$IterationControl.height = iter_height
 	$IterationControl.position.y = -3 + iter_height/2
 	
 	# Tile count indicator

@@ -117,7 +117,7 @@ func animate_bias_visualization():
 func animate_indicators():
 	# Bias indicator
 	var bias_height = bias_level * 2.0 + 0.5
-	$BiasIndicator.size.y = bias_height
+	$BiasIndicator.height  = bias_height 
 	$BiasIndicator.position.y = -3 + bias_height/2
 	
 	# Fairness metric

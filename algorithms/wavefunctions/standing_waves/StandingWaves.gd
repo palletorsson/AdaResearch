@@ -96,13 +96,17 @@ func animate_standing_wave():
 func animate_indicators():
 	# Frequency indicator - height represents frequency
 	var freq_height = frequency * 0.5
-	$FrequencyIndicator.size.y = freq_height
-	$FrequencyIndicator.position.y = -3 + freq_height/2
+	var frequencyindicator = get_node_or_null("FrequencyIndicator")
+	if frequencyindicator and frequencyindicator is CSGCylinder3D:
+		frequencyindicator.height = freq_height
+			frequencyindicator.position.y = -3 + freq_height/2
 	
 	# Amplitude indicator - height represents amplitude
 	var amp_height = amplitude * 0.3
-	$AmplitudeIndicator.size.y = amp_height
-	$AmplitudeIndicator.position.y = -3 + amp_height/2
+	var amplitudeindicator = get_node_or_null("AmplitudeIndicator")
+	if amplitudeindicator and amplitudeindicator is CSGCylinder3D:
+		amplitudeindicator.height = amp_height
+			amplitudeindicator.position.y = -3 + amp_height/2
 	
 	# Slowly vary parameters for demonstration
 	frequency = 2.0 + sin(time * 0.3) * 1.0

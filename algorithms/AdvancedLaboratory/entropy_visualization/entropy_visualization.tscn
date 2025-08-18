@@ -10,28 +10,30 @@ roughness = 0.1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1) * 0.3
+emission = Color(0.24, 0.06, 0.06, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1) * 0.3
+emission = Color(0.06, 0.24, 0.06, 1)
 
 [node name="EntropyVisualization" type="Node3D"]
 script = ExtResource("1_script")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="EntropyContainer" type="Node3D" parent="."]
 
 [node name="Container" type="CSGBox3D" parent="EntropyContainer"]
 size = Vector3(20, 12, 20)
-material = SubResource("StandardMaterial3D_1")
+material_override = SubResource("StandardMaterial3D_1")
 
 [node name="OrderedSystem" type="Node3D" parent="EntropyContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
@@ -40,36 +42,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
 [node name="OrderedGrid" type="Node3D" parent="EntropyContainer/OrderedSystem"]
 
-[node name="DisorderedSystem" type="Node3D" parent="EntropyContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-
-[node name="DisorderedParticles" type="Node3D" parent="EntropyContainer/DisorderedSystem"]
-
-[node name="EntropyMeter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
-
-[node name="MeterBase" type="CSGBox3D" parent="EntropyMeter"]
-size = Vector3(16, 0.2, 1)
-material = SubResource("StandardMaterial3D_1")
-
-[node name="MeterIndicator" type="CSGSphere3D" parent="EntropyMeter"]
-radius = 0.3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.3, 0)
-material = SubResource("StandardMaterial3D_2")
-
 [node name="OrderedLabel" type="Node3D" parent="EntropyContainer/OrderedSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 
 [node name="LabelCube" type="CSGBox3D" parent="EntropyContainer/OrderedSystem/OrderedLabel"]
 size = Vector3(4, 0.5, 0.5)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DisorderedSystem" type="Node3D" parent="EntropyContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="DisorderedParticles" type="Node3D" parent="EntropyContainer/DisorderedSystem"]
 
 [node name="DisorderedLabel" type="Node3D" parent="EntropyContainer/DisorderedSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 
 [node name="LabelCube" type="CSGBox3D" parent="EntropyContainer/DisorderedSystem/DisorderedLabel"]
 size = Vector3(4, 0.5, 0.5)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="EntropyMeter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+
+[node name="MeterBase" type="CSGBox3D" parent="EntropyMeter"]
+size = Vector3(16, 0.2, 1)
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="MeterIndicator" type="CSGSphere3D" parent="EntropyMeter"]
+radius = 0.3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.3, 0)
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="EnergyFlow" type="Node3D" parent="."]
 
@@ -81,13 +83,13 @@ material = SubResource("StandardMaterial3D_2")
 radius = 0.02
 height = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
-material = SubResource("StandardMaterial3D_3")
+material_override = SubResource("StandardMaterial3D_3")
 
 [node name="FlowLine2" type="CSGCylinder3D" parent="EnergyFlow/FlowLines"]
 radius = 0.02
 height = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
-material = SubResource("StandardMaterial3D_2")
+material_override = SubResource("StandardMaterial3D_2")
 
 [node name="Grid" type="Node3D" parent="."]
 

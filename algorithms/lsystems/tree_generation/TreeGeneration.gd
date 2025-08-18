@@ -120,8 +120,7 @@ func create_branch_segment(start_pos, end_pos, thickness):
 	var length = start_pos.distance_to(end_pos)
 	
 	branch.height = length
-	branch.top_radius = thickness
-	branch.bottom_radius = thickness * 1.2
+	branch.radius = thickness * 1.2
 	
 	# Position and orient the cylinder
 	var mid_point = (start_pos + end_pos) * 0.5
@@ -205,8 +204,10 @@ func animate_growth():
 func animate_indicators():
 	# Generation indicator height
 	var gen_height = (generation + 1) * 0.3
-	$GenerationIndicator.size.y = gen_height
-	$GenerationIndicator.position.y = -2 + gen_height/2
+	var generationindicator = get_node_or_null("GenerationIndicator")
+	if generationindicator and generationindicator is CSGCylinder3D:
+		generationindicator.height = gen_height
+		generationindicator.position.y = -2 + gen_height/2
 	
 	# Rule display pulsing
 	var pulse = 1.0 + sin(time * 3.0) * 0.2

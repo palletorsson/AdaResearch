@@ -35,8 +35,8 @@ func create_wave_rings():
 	
 	for i in range(5):
 		var ring = CSGCylinder3D.new()
-		ring.top_radius = 1.0 + i * 0.8
-		ring.bottom_radius = 1.0 + i * 0.8
+		ring.radius = 1.0 + i * 0.8
+		 + i * 0.8
 		ring.height = 0.05
 		ring.position.y = -0.5
 		rings_parent.add_child(ring)
@@ -123,8 +123,7 @@ func animate_wave_rings():
 		
 		if ring_time > 0:
 			var ring_radius = wave_speed * ring_time
-			ring.top_radius = ring_radius
-			ring.bottom_radius = ring_radius
+			ring.radius = ring_radius
 			
 			# Fade out as ring expands
 			var fade_factor = max(0.0, 1.0 - ring_time * 0.2)
@@ -136,21 +135,21 @@ func animate_wave_rings():
 			
 			# Reset ring when it gets too large
 			if ring_radius > 6.0:
-				ring.top_radius = 0.1
-				ring.bottom_radius = 0.1
+				ring.radius = 0.1
+				
 		else:
-			ring.top_radius = 0.1
-			ring.bottom_radius = 0.1
+			ring.radius = 0.1
+			
 
 func animate_controls():
 	# Frequency control
 	var freq_height = frequency * 0.8
-	$FrequencyControl.size.y = freq_height
+	$FrequencyControl.height = freq_height
 	$FrequencyControl.position.y = -3 + freq_height/2
 	
 	# Amplitude control
 	var amp_height = amplitude * 1.2
-	$AmplitudeControl.size.y = amp_height
+	$AmplitudeControl.height = amp_height
 	$AmplitudeControl.position.y = -3 + amp_height/2
 	
 	# Vary parameters for demonstration

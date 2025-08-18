@@ -70,7 +70,7 @@ func create_bias_indicators():
 	# Create bias arrows
 	var bias_arrows = $BiasIndicators/BiasArrows
 	for i in range(8):
-		var arrow = CSGCone3D.new()
+		var arrow = CSGCylinder3D.new()
 		arrow.radius = 0.1
 		arrow.height = 0.8
 		arrow.material_override = StandardMaterial3D.new()
@@ -188,7 +188,7 @@ func animate_data_flow(delta):
 			var particle = flow_particles.get_child(i)
 			if particle:
 				# Move particles through the system
-				var progress = (time * data_flow_rate + float(i) * 0.1) % 1.0
+				var progress = fmod(time * data_flow_rate + float(i) * 0.1, 1.0)
 				var x = lerp(-8, 8, progress)
 				var y = sin(progress * PI * 2) * 2
 				
@@ -196,7 +196,7 @@ func animate_data_flow(delta):
 				particle.position.y = lerp(particle.position.y, y, delta * 2.0)
 				
 				# Change color based on position and bias
-				var color_progress = (progress + 0.5) % 1.0
+				var color_progress = fmod((progress + 0.5), 1.0)
 				var green_component = 0.8 * (1.0 - color_progress * 0.5) * (1.0 - bias_level * 0.5)
 				var red_component = 0.2 + 0.6 * color_progress + bias_level * 0.3
 				particle.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)

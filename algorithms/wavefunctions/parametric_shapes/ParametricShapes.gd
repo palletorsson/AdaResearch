@@ -291,12 +291,12 @@ func animate_indicators():
 	
 	# Parameter U indicator
 	var u_height = (current_u / (2.0 * PI)) * 2.0 + 0.5
-	$ParameterU.size.y = u_height
+	$ParameterU.height = u_height
 	$ParameterU.position.y = -4 + u_height/2
 	
 	# Parameter V indicator
 	var v_height = (current_v / (2.0 * PI)) * 2.0 + 0.5
-	$ParameterV.size.y = v_height
+	$ParameterV.height = v_height
 	$ParameterV.position.y = -4 + v_height/2
 	
 	# Pulsing parameter indicators

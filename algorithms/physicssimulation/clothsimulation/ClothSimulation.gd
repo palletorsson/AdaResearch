@@ -56,7 +56,7 @@ class ClothPiece:
 		for i in range(resolution + 1):
 			for j in range(resolution + 1):
 				var x = (i - resolution / 2.0) * size.x / resolution
-				var z = (j - resolution / 2.0) * size.z / resolution
+				var z = (j - resolution / 2.0) * size.y / resolution
 				var pos = position + Vector3(x, 0, z)
 				
 				# Determine if node is fixed (top edge for hanging cloth)

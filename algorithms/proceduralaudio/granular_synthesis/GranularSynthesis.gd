@@ -176,8 +176,8 @@ func visualize_waveform_source():
 		
 		# Create waveform segment
 		var segment = CSGCylinder3D.new()
-		segment.top_radius = 0.05
-		segment.bottom_radius = 0.05
+		segment.radius = 0.05
+		
 		segment.height = pos1.distance_to(pos2)
 		
 		segment.position = (pos1 + pos2) * 0.5
@@ -289,8 +289,8 @@ func demonstrate_output_synthesis():
 		
 		# Create output waveform segment
 		var segment = CSGCylinder3D.new()
-		segment.top_radius = 0.08
-		segment.bottom_radius = 0.08
+		segment.radius = 0.08
+		
 		segment.height = pos1.distance_to(pos2)
 		
 		segment.position = (pos1 + pos2) * 0.5

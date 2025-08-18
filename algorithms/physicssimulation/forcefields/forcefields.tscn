@@ -38,16 +38,16 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
 [node name="GravityCenter" type="CSGBox3D" parent="GravityField"]
+material_override = SubResource("StandardMaterial3D_0xqxr")
 size = Vector3(0.5, 0.5, 0.5)
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="GravityParticles" type="Node3D" parent="GravityField"]
 
 [node name="MagneticField" type="Node3D" parent="."]
 
 [node name="MagneticCenter" type="CSGBox3D" parent="MagneticField"]
+material_override = SubResource("StandardMaterial3D_1xqxr")
 size = Vector3(0.5, 0.5, 0.5)
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="MagneticParticles" type="Node3D" parent="MagneticField"]
 
@@ -55,8 +55,8 @@ material = SubResource("StandardMaterial3D_1xqxr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="FluidDragCenter" type="CSGBox3D" parent="FluidDragField"]
+material_override = SubResource("StandardMaterial3D_2xqxr")
 size = Vector3(0.5, 0.5, 0.5)
-material = SubResource("StandardMaterial3D_2xqxr")
 
 [node name="FluidDragParticles" type="Node3D" parent="FluidDragField"]
 

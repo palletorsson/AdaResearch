@@ -215,8 +215,8 @@ func create_connection(element1: UFElement, element2: UFElement):
 	var distance = pos1.distance_to(pos2)
 	
 	connection.height = distance
-	connection.top_radius = 0.05
-	connection.bottom_radius = 0.05
+	connection.radius = 0.05
+	
 	
 	# Position and orient
 	var mid_point = (pos1 + pos2) * 0.5
@@ -321,17 +321,20 @@ func get_path_to_root_length(element: UFElement) -> int:
 		length += 1
 	
 	return length
-
 func animate_indicators():
 	# Component count indicator
 	var component_height = components_count * 0.3 + 0.5
-	$ComponentIndicator.size.y = component_height
-	$ComponentIndicator.position.y = -4 + component_height/2
+	var componentindicator = get_node_or_null("ComponentIndicator")
+	if componentindicator and componentindicator is CSGCylinder3D:
+		componentindicator.height = component_height
+		componentindicator.position.y = -4 + component_height/2
 	
 	# Union operation indicator
 	var union_height = (current_operation + 1) * 0.2 + 0.3
-	$UnionOperationIndicator.size.y = union_height
-	$UnionOperationIndicator.position.y = -4 + union_height/2
+	var unionoperationindicator = get_node_or_null("UnionOperationIndicator")
+	if unionoperationindicator and unionoperationindicator is CSGCylinder3D:
+		unionoperationindicator.height = union_height
+		unionoperationindicator.position.y = -4 + union_height/2
 	
 	# Pulsing effects
 	var pulse = 1.0 + sin(time * 3.0) * 0.1

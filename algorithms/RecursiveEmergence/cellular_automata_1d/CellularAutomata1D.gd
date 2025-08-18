@@ -61,9 +61,8 @@ func create_rule_table():
 			rule_group.add_child(input_cell)
 		
 		# Arrow
-		var arrow = CSGCone3D.new()
-		arrow.top_radius = 0.0
-		arrow.bottom_radius = 0.05
+		var arrow = CSGCylinder3D.new()
+		arrow.radius = 0.05
 		arrow.height = 0.2
 		arrow.rotation_degrees = Vector3(180, 0, 0)
 		arrow.position = Vector3(
@@ -256,8 +255,10 @@ func animate_automaton():
 func animate_indicators():
 	# Generation indicator
 	var gen_height = (current_generation / float(grid_height)) * 2.0 + 0.5
-	$GenerationIndicator.size.y = gen_height
-	$GenerationIndicator.position.y = -3 + gen_height/2
+	var generationindicator = get_node_or_null("GenerationIndicator")
+	if generationindicator and generationindicator is CSGCylinder3D:
+		generationindicator.height = gen_height
+		generationindicator.position.y = -3 + gen_height/2
 	
 	# Rule number indicator
 	var rule_height = (rule_number / 255.0) * 2.0 + 0.5

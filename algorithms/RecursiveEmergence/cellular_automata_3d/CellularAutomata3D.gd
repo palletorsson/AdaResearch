@@ -251,14 +251,16 @@ func animate_3d_automaton():
 func animate_indicators():
 	# Generation control
 	var gen_height = (current_generation % 20) * 0.15 + 0.5
-	$GenerationControl.size.y = gen_height
+	$GenerationControl.height = gen_height
 	$GenerationControl.position.y = -4 + gen_height/2
 	
 	# Density indicator
 	var density = float(alive_count) / (grid_size * grid_size * grid_size)
 	var density_height = density * 3.0 + 0.5
-	$DensityIndicator.size.y = density_height
-	$DensityIndicator.position.y = -4 + density_height/2
+	var densityindicator = get_node_or_null("DensityIndicator")
+	if densityindicator and densityindicator is CSGCylinder3D:
+		densityindicator.height = density_height
+		densityindicator.position.y = -4 + density_height/2
 	
 	# Update rule-based colors
 	var gen_material = $GenerationControl.material_override as StandardMaterial3D

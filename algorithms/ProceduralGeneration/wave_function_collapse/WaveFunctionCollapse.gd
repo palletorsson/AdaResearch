@@ -243,8 +243,10 @@ func animate_indicators():
 	
 	var avg_entropy = total_entropy / max(uncollapsed_count, 1)
 	var entropy_height = (avg_entropy / tile_types.size()) * 2.0 + 0.5
-	$EntropyIndicator.size.y = entropy_height
-	$EntropyIndicator.position.y = -3 + entropy_height/2
+	var entropyindicator = get_node_or_null("EntropyIndicator")
+	if entropyindicator and entropyindicator is CSGCylinder3D:
+		entropyindicator.height = entropy_height
+		entropyindicator.position.y = -3 + entropy_height/2
 	
 	# Collapse progress indicator
 	var progress = float(collapsed_cells) / (grid_size * grid_size)

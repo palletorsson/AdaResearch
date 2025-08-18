@@ -199,8 +199,8 @@ func create_chain_connection(bucket: HashBucket, position: int):
 	
 	var chain_link = CSGCylinder3D.new()
 	chain_link.height = 0.3
-	chain_link.top_radius = 0.03
-	chain_link.bottom_radius = 0.03
+	chain_link.radius = 0.03
+	
 	
 	chain_link.position = Vector3(
 		bucket.visual_container.position.x,
@@ -387,8 +387,10 @@ func animate_indicators():
 	# Load factor indicator
 	var load_factor = get_load_factor()
 	var load_height = load_factor * 3.0 + 0.5
-	$LoadFactorIndicator.size.y = load_height
-	$LoadFactorIndicator.position.y = -3 + load_height/2
+	var load_factor_indicator = get_node_or_null("LoadFactorIndicator")
+	if load_factor_indicator and load_factor_indicator is CSGBox3D:
+		load_factor_indicator.size.y = load_height
+		load_factor_indicator.position.y = -3 + load_height/2
 	
 	# Collision indicator
 	var collision_ratio = min(1.0, collision_count / 5.0)

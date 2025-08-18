@@ -185,14 +185,14 @@ func animate_indicators():
 	# Particle count indicator
 	var active_particles = walking_particles.size()
 	var particle_height = (float(active_particles) / max_particles) * 2.0 + 0.5
-	$ParticleCount.size.y = particle_height
+	$ParticleCount.height = particle_height
 	$ParticleCount.position.y = -3 + particle_height/2
 	
 	# Structure size indicator
 	var structure_size = aggregate_points.size()
 	var max_structure = 200  # Rough estimate
 	var structure_height = (float(structure_size) / max_structure) * 2.0 + 0.5
-	$StructureSize.size.y = structure_height
+	$StructureSize.height = structure_height
 	$StructureSize.position.y = -3 + structure_height/2
 	
 	# Update structure size color based on growth

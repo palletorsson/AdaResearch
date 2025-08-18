@@ -48,8 +48,8 @@ func create_coordinate_axes():
 	# X-axis (Red)
 	var x_axis = CSGCylinder3D.new()
 	x_axis.height = grid_size * grid_spacing * 1.2
-	x_axis.top_radius = 0.05
-	x_axis.bottom_radius = 0.05
+	x_axis.radius = 0.05
+	
 	x_axis.rotation_degrees = Vector3(0, 0, 90)
 	x_axis.position = Vector3(0, 0, 0)
 	axes_parent.add_child(x_axis)
@@ -57,16 +57,16 @@ func create_coordinate_axes():
 	# Y-axis (Green)
 	var y_axis = CSGCylinder3D.new()
 	y_axis.height = grid_size * grid_spacing * 0.8
-	y_axis.top_radius = 0.05
-	y_axis.bottom_radius = 0.05
+	y_axis.radius = 0.05
+	
 	y_axis.position = Vector3(0, grid_size * grid_spacing * 0.4, 0)
 	axes_parent.add_child(y_axis)
 	
 	# Z-axis (Blue)
 	var z_axis = CSGCylinder3D.new()
 	z_axis.height = grid_size * grid_spacing * 1.2
-	z_axis.top_radius = 0.05
-	z_axis.bottom_radius = 0.05
+	z_axis.radius = 0.05
+	
 	z_axis.rotation_degrees = Vector3(90, 0, 0)
 	z_axis.position = Vector3(0, 0, 0)
 	axes_parent.add_child(z_axis)
@@ -291,8 +291,8 @@ func create_trail_segment(start_pos, end_pos):
 	var length = start_pos.distance_to(end_pos)
 	
 	segment.height = length
-	segment.top_radius = 0.03
-	segment.bottom_radius = 0.03
+	segment.radius = 0.03
+	
 	
 	# Position and orient
 	var mid_point = (start_pos + end_pos) * 0.5
@@ -342,5 +342,7 @@ func update_coordinate_display():
 	
 	# Update grid mode indicator
 	var mode_height = (current_pattern + 1) * 0.3
-	$GridModeIndicator.size.y = mode_height
-	$GridModeIndicator.position.y = 4 + mode_height/2
+	var gridmodeindicator = get_node_or_null("GridModeIndicator")
+	if gridmodeindicator and gridmodeindicator is CSGCylinder3D:
+		gridmodeindicator.height = mode_height
+		gridmodeindicator.position.y = 4 + mode_height/2

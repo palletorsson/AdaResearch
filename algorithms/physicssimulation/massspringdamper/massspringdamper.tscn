@@ -54,32 +54,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="WindForce" type="CSGSphere3D" parent="ForceSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 radius = 0.2
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="GravityForce" type="CSGSphere3D" parent="ForceSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.2
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="ExternalForce" type="CSGSphere3D" parent="ForceSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+material_override = SubResource("StandardMaterial3D_2xqxr")
 radius = 0.2
-material = SubResource("StandardMaterial3D_2xqxr")
 
 [node name="Parameters" type="Node3D" parent="."]
 
 [node name="SpringConstant" type="CSGSphere3D" parent="Parameters"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="DampingCoefficient" type="CSGSphere3D" parent="Parameters"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="MassValue" type="CSGSphere3D" parent="Parameters"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+material_override = SubResource("StandardMaterial3D_2xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_2xqxr")

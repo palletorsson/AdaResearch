@@ -90,7 +90,7 @@ func animate_data_flow(delta):
 		var particle = flow_particles.get_child(i)
 		if particle:
 			# Create flowing motion through the network
-			var progress = (time * 0.5 + float(i) * 0.1) % 1.0
+			var progress = fmod(time * 0.5 + float(i) * 0.1, 1.0)
 			var angle = progress * PI * 2
 			var radius = 6.0 + sin(angle * 3) * 2.0
 			var x = cos(angle) * radius
@@ -102,7 +102,7 @@ func animate_data_flow(delta):
 			particle.position.z = lerp(particle.position.z, z, delta * 2.0)
 			
 			# Change color based on position in network
-			var color_progress = (progress + 0.3) % 1.0
+			var color_progress = fmod((progress + 0.3), 1.0)
 			var green_component = 0.8 * (1.0 - color_progress * 0.5)
 			var blue_component = 0.2 + 0.6 * color_progress
 			particle.material_override.albedo_color = Color(0.2, green_component, blue_component, 1)

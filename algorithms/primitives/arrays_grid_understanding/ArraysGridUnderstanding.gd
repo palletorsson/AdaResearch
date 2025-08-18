@@ -289,9 +289,8 @@ func update_indexing_visualization():
 		container.add_child(element)
 		
 		# Index pointer
-		var pointer = CSGCone3D.new()
-		pointer.radius_top = 0.0
-		pointer.radius_bottom = 0.2
+		var pointer = CSGCylinder3D.new()
+		pointer.radius = 0.05
 		pointer.height = 0.6
 		pointer.position = Vector3(i * 1.2, -1.0, 0)
 		
@@ -362,4 +361,3 @@ func show_access_patterns():
 		label.material_override = label_material
 		
 		container.add_child(label)
-

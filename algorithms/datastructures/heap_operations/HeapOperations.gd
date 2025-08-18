@@ -332,8 +332,8 @@ func create_heap_edge(parent_index: int, child_index: int):
 	var distance = parent_pos.distance_to(child_pos)
 	
 	edge.height = distance
-	edge.top_radius = 0.02
-	edge.bottom_radius = 0.02
+	edge.radius = 0.02
+	
 	
 	# Position and orient edge
 	var mid_point = (parent_pos + child_pos) * 0.5
@@ -437,8 +437,10 @@ func animate_indicators():
 	
 	# Operation indicator
 	var op_height = (current_operation + 1) * 0.2 + 0.3
-	$OperationIndicator.size.y = op_height
-	$OperationIndicator.position.y = 3 + op_height/2
+	var operation_indicator = get_node_or_null("OperationIndicator")
+	if operation_indicator and operation_indicator is CSGCylinder3D:
+		operation_indicator.height = op_height
+		operation_indicator.position.y = 3 + op_height/2
 	
 	# Heap size indicator
 	var size_scale = 1.0 + (heap_array.size() / 15.0) * 0.8

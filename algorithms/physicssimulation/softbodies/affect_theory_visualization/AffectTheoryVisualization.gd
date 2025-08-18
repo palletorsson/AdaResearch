@@ -411,8 +411,7 @@ func show_digital_touch_responses():
 		
 		# Create ripple effect
 		var ripple = CSGCylinder3D.new()
-		ripple.top_radius = response.ripple_radius + 0.3
-		ripple.bottom_radius = response.ripple_radius
+		ripple.radius = response.ripple_radius + 0.3
 		ripple.height = 0.1
 		ripple.position = response.position
 		
@@ -470,4 +469,3 @@ func create_touch_response():
 				body.current_affect.intensity + influence * 0.2,
 				0.0, 1.0
 			)
-

@@ -256,8 +256,7 @@ func animate_joyful_responses():
 		var wave_radius = fmod(time * 2 + wave_idx * 1.0, 6.0)
 		
 		var joy_wave = CSGCylinder3D.new()
-		joy_wave.top_radius = wave_radius + 0.3
-		joy_wave.bottom_radius = wave_radius
+		joy_wave.radius = wave_radius + 0.3
 		joy_wave.height = 0.1
 		joy_wave.position = Vector3(0, 1 + wave_idx * 2, 0)
 		
@@ -291,8 +290,8 @@ func create_playground_element(container: Node3D, element_name: String, base_pos
 	match element_name:
 		"Trampoline":
 			var trampoline = CSGCylinder3D.new()
-			trampoline.top_radius = 1.0
-			trampoline.bottom_radius = 1.0
+			trampoline.radius = 1.0
+			
 			trampoline.height = 0.2
 			trampoline.position = base_pos
 			
@@ -344,8 +343,8 @@ func create_playground_element(container: Node3D, element_name: String, base_pos
 			# Swing chains
 			for chain_side in range(2):
 				var chain = CSGCylinder3D.new()
-				chain.top_radius = 0.02
-				chain.bottom_radius = 0.02
+				chain.radius = 0.02
+				
 				chain.height = chain_length
 				chain.position = base_pos + Vector3(
 					sin(swing_angle) * chain_length * 0.5 + (chain_side - 0.5) * 0.4,
@@ -376,9 +375,8 @@ func create_playground_element(container: Node3D, element_name: String, base_pos
 			container.add_child(seesaw)
 			
 			# Seesaw fulcrum
-			var fulcrum = CSGCone3D.new()
-			fulcrum.radius_top = 0.0
-			fulcrum.radius_bottom = 0.3
+			var fulcrum = CSGCylinder3D.new()
+			fulcrum.radius = 0.05
 			fulcrum.height = 0.8
 			fulcrum.position = base_pos + Vector3(0, 0.4, 0)
 			
@@ -450,4 +448,3 @@ func visualize_emotional_resonance():
 	joy_core.material_override = core_material
 	
 	container.add_child(joy_core)
-

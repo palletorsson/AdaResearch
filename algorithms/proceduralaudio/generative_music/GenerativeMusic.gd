@@ -241,9 +241,9 @@ func update_rhythm_ca():
 		var center = rhythm_cells[i]
 		var right = rhythm_cells[(i + 1) % rhythm_cells.size()]
 		
-		# Rule 30 for rhythm generation
-		var next_state = left ^ (center or right)
-		new_generation.append(int(next_state))
+		# FIXED: Rule 30 for rhythm generation - ensure all operands are int
+		var next_state = left ^ (center | right)  # Use bitwise OR (|) instead of logical OR (or)
+		new_generation.append(next_state)  # No need for int() conversion since result is already int
 	
 	rhythm_cells = new_generation
 	rhythm_generations.append(rhythm_cells.duplicate())
@@ -330,8 +330,8 @@ func generate_fractal_sequence(iteration: int) -> Array:
 
 func create_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	var connection = CSGCylinder3D.new()
-	connection.top_radius = 0.02
-	connection.bottom_radius = 0.02
+	connection.radius = 0.02
+	
 	connection.height = from.distance_to(to)
 	
 	connection.position = (from + to) * 0.5
@@ -347,8 +347,7 @@ func create_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 
 func create_weighted_connection(from: Vector3, to: Vector3, weight: float) -> CSGCylinder3D:
 	var connection = create_connection(from, to)
-	connection.top_radius = weight * 0.1
-	connection.bottom_radius = weight * 0.1
+	connection.radius = weight * 0.1* 0.1
 	
 	var material = connection.material_override as StandardMaterial3D
 	material.albedo_color = Color(1.0, weight, 0.0, weight)
@@ -356,4 +355,3 @@ func create_weighted_connection(from: Vector3, to: Vector3, weight: float) -> CS
 	material.emission = Color(1.0, weight, 0.0) * weight * 0.5
 	
 	return connection
-

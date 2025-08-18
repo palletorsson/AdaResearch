@@ -1,29 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
 
-[ext_resource type="Script" path="res://algorithms/physicssimulation/clothsimulation/ClothSimulation.gd" id="1_clothsimulation"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
-albedo_color = Color(0.8, 0.6, 0.4, 1.0)
+albedo_color = Color(0.8, 0.6, 0.4, 1)
 metallic = 0.2
 roughness = 0.8
 emission_enabled = true
-emission = Color(0.4, 0.3, 0.2, 1.0)
+emission = Color(0.4, 0.3, 0.2, 1)
 emission_energy_multiplier = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxr"]
-albedo_color = Color(0.2, 0.8, 0.6, 1.0)
+albedo_color = Color(0.2, 0.8, 0.6, 1)
 metallic = 0.8
 roughness = 0.2
 emission_enabled = true
-emission = Color(0.1, 0.4, 0.3, 1.0)
+emission = Color(0.1, 0.4, 0.3, 1)
 emission_energy_multiplier = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xqxr"]
-albedo_color = Color(0.6, 0.2, 0.8, 1.0)
+albedo_color = Color(0.6, 0.2, 0.8, 1)
 metallic = 0.8
 roughness = 0.2
 emission_enabled = true
-emission = Color(0.3, 0.1, 0.4, 1.0)
+emission = Color(0.3, 0.1, 0.4, 1)
 emission_energy_multiplier = 0.3
 
 [node name="ClothSimulation" type="Node3D"]
@@ -42,19 +40,16 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
 [node name="HangingClothMesh" type="CSGBox3D" parent="ClothPieces/HangingCloth"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 size = Vector3(1.5, 0.05, 1.5)
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="HangingClothNodes" type="Node3D" parent="ClothPieces/HangingCloth"]
 
 [node name="FloatingCloth" type="Node3D" parent="ClothPieces"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="FloatingClothMesh" type="CSGBox3D" parent="ClothPieces/FloatingCloth"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 size = Vector3(1.2, 0.05, 1.2)
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="FloatingClothNodes" type="Node3D" parent="ClothPieces/FloatingCloth"]
 
@@ -62,9 +57,8 @@ material = SubResource("StandardMaterial3D_1xqxr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
 [node name="DrapedClothMesh" type="CSGBox3D" parent="ClothPieces/DrapedCloth"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-size = Vector3(1.0, 0.05, 1.0)
-material = SubResource("StandardMaterial3D_2xqxr")
+material_override = SubResource("StandardMaterial3D_2xqxr")
+size = Vector3(1, 0.05, 1)
 
 [node name="DrapedClothNodes" type="Node3D" parent="ClothPieces/DrapedCloth"]
 
@@ -72,35 +66,34 @@ material = SubResource("StandardMaterial3D_2xqxr")
 
 [node name="WindField1" type="CSGSphere3D" parent="WindSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.3
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="WindField2" type="CSGSphere3D" parent="WindSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.3
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="WindField3" type="CSGSphere3D" parent="WindSources"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.3
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="CollisionObjects" type="Node3D" parent="."]
 
 [node name="Sphere1" type="CSGSphere3D" parent="CollisionObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 radius = 0.4
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="Sphere2" type="CSGSphere3D" parent="CollisionObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+material_override = SubResource("StandardMaterial3D_1xqxr")
 radius = 0.3
-material = SubResource("StandardMaterial3D_1xqxr")
 
 [node name="Sphere3" type="CSGSphere3D" parent="CollisionObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1.5, 0)
-radius = 0.5
-material = SubResource("StandardMaterial3D_2xqxr")
+material_override = SubResource("StandardMaterial3D_2xqxr")
 
 [node name="WindStreams" type="Node3D" parent="."]
 
@@ -119,22 +112,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="FixedPoint1" type="CSGSphere3D" parent="ClothConstraints/FixedPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="FixedPoint2" type="CSGSphere3D" parent="ClothConstraints/FixedPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_0xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_0xqxr")
 
 [node name="FixedPoint3" type="CSGSphere3D" parent="ClothConstraints/FixedPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_2xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_2xqxr")
 
 [node name="FixedPoint4" type="CSGSphere3D" parent="ClothConstraints/FixedPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_2xqxr")
 radius = 0.1
-material = SubResource("StandardMaterial3D_2xqxr")
 
-[node name="Script" parent="." instance=ExtResource("1_clothsimulation")]
+[node name="Script" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
