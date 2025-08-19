@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs2p114la7bpv"]
+
+[ext_resource type="Script" uid="uid://bxb20j73sipnv" path="res://algorithms/randomness/proceduralrandomness/geometrybased/mccluld/mc_clould_2.gd" id="1_f1mgk"]
+
+[node name="McClould2" type="Node3D"]
+script = ExtResource("1_f1mgk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.678903, 0.734228, 0, -0.734228, 0.678903, 0, 47.0169, 64.7467)

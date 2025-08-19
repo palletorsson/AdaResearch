@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwpr7ydh1xamk"]
+
+[ext_resource type="Script" uid="uid://b8cj7pxeo1glw" path="res://algorithms/neuroscience/markovblanket/puls_markov.gd" id="1_45qhf"]
+
+[node name="pulsMarkov" type="Node3D"]
+script = ExtResource("1_45qhf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.31397)

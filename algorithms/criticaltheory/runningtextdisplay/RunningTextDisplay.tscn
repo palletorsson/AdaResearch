@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc3lis54mj6gs"]
+
+[ext_resource type="Script" uid="uid://lotp5lbcay02" path="res://algorithms/criticaltheory/runningtextdisplay/running_text_display.gd" id="1_5s2rh"]
+
+[node name="RunningTextDisplay" type="Node3D"]
+script = ExtResource("1_5s2rh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.919801, 0.392385, 0, -0.392385, 0.919801, 0, 2.5736, 6.7976)

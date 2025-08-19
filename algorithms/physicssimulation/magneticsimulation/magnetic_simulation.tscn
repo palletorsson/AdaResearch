@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://cnos6465ke2dn"]
+
+[ext_resource type="Script" uid="uid://l0s4bo38g142" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation_main.gd" id="1_ln13f"]
+[ext_resource type="Script" uid="uid://cce141t85n5yh" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="2_pcela"]
+[ext_resource type="Material" path="res://assets/wahooney.itch.io/blue_grid.tres" id="3_nwjdb"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_ah7ke"]
+[ext_resource type="Script" uid="uid://dpxstp6yan68y" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_object.gd" id="5_e68in"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4t3r"]
+margin = 0.01
+size = Vector3(0.206944, 0.207106, 0.202563)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i7p7b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g5nvj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_brsxs"]
+size = Vector3(0.209839, 0.212738, 0.213654)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gjwhj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tp2ad"]
+size = Vector3(0.209595, 0.196838, 0.209839)
+
+[node name="MagneticSimulation" type="Node3D"]
+script = ExtResource("1_ln13f")
+field_size = Vector3(4, 4, 4)
+resolution = 4
+field_strength = 30.0
+
+[node name="pickMe_1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.169925)
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("2_pcela")
+alternate_material = ExtResource("3_nwjdb")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickMe_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000662562, 0.000836853, 0.00117036)
+shape = SubResource("BoxShape3D_r4t3r")
+
+[node name="HighlightRing" parent="pickMe_1" instance=ExtResource("4_ah7ke")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109342, 0.00359024, 0.279247)
+material_override = SubResource("StandardMaterial3D_i7p7b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickMe_1"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_g5nvj")
+
+[node name="MagneticObject1" type="RigidBody3D" parent="pickMe_1"]
+freeze = true
+script = ExtResource("5_e68in")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickMe_1/MagneticObject1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00140381, 0.497758, -0.00590515)
+shape = SubResource("BoxShape3D_brsxs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickMe_1/MagneticObject1"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.206427, 0)
+mesh = SubResource("SphereMesh_gjwhj")
+
+[node name="pickMe_2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.163718)
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("2_pcela")
+alternate_material = ExtResource("3_nwjdb")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickMe_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00217093, 0.000677217, -0.000990078)
+shape = SubResource("BoxShape3D_r4t3r")
+
+[node name="HighlightRing" parent="pickMe_2" instance=ExtResource("4_ah7ke")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109342, 0.00359024, 0.279247)
+material_override = SubResource("StandardMaterial3D_i7p7b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickMe_2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_g5nvj")
+
+[node name="MagneticObject2" type="RigidBody3D" parent="pickMe_2"]
+freeze = true
+script = ExtResource("5_e68in")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickMe_2/MagneticObject2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00750732, 0.46839, 0.00250246)
+shape = SubResource("BoxShape3D_tp2ad")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickMe_2/MagneticObject2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.206427, 0)
+mesh = SubResource("SphereMesh_gjwhj")

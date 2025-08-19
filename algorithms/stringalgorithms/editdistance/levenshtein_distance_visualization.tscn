@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk8m3n7yap2q"]
+
+[ext_resource type="Script" uid="uid://b5abk3r7jqhwj" path="res://algorithms/stringalgorithms/editdistance/levenshtein_distance_visualization.gd" id="1"]
+
+[node name="LevenshteinDistanceVisualization" type="Node3D"]
+script = ExtResource("1")
+animation_speed = 1.5

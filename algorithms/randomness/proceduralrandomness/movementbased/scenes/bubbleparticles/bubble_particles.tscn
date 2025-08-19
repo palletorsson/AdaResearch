@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfpoupxc8k7h7"]
+
+[ext_resource type="Script" uid="uid://dj005w6517nii" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/bubbleparticles/bubble_particles.gd" id="1_jex6f"]
+
+[node name="BubbleParticles" type="Node3D"]
+script = ExtResource("1_jex6f")
+spawn_rate = 10.0
+bubble_lifetime = 4.0
+bubble_scale_down_rate = 0.1

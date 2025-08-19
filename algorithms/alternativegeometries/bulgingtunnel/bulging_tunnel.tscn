@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbq7mcrjx1dst"]
+
+[ext_resource type="Script" uid="uid://b62jmmmdxgi2l" path="res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.gd" id="1_0v8mp"]
+
+[node name="BulgingTunnel" type="Node3D"]
+script = ExtResource("1_0v8mp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.01579)

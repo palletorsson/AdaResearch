@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp9k7m4x2q8n"]
+
+[ext_resource type="Script" path="res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd" id="1"]
+
+[node name="GradientDescentVisualization" type="Node3D"]
+script = ExtResource("1")
+objective_function = "x^2 + y^2"
+initial_position = Vector2(3, 2)
+learning_rate = 0.1
+tolerance = 0.001
+max_iterations = 50
+iteration_speed = 1.2
+surface_resolution = 80
+x_range = Vector2(-5, 5)
+y_range = Vector2(-5, 5)
+z_scale = 1.5
+show_gradient_vectors = true
+show_path_trail = true
+animate_descent = true
+surface_color = Color(0.3, 0.6, 0.9, 1)
+gradient_color = Color(0.9, 0.3, 0.3, 1)
+path_color = Color(0.9, 0.9, 0.3, 1)
+minimum_color = Color(0.3, 0.9, 0.3, 1)
+current_position_color = Color(0.9, 0.3, 0.9, 1)
+function_preset = "Quadratic Bowl" 

@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://du1ewjrrwsjv7"]
+
+[ext_resource type="Script" uid="uid://jjl4f4p67kue" path="res://algorithms/machinelearning/geneticalgorithm/genetic_algorithm.gd" id="1"]
+[ext_resource type="Script" path="res://algorithms/machinelearning/geneticalgorithm/camera_controller.gd" id="2"]
+
+[node name="EvolutionaryEcosystem" type="Node3D"]
+script = ExtResource("1")
+population_size = 100
+mutation_rate = 0.15
+crossover_rate = 0.8
+elite_count = 8
+generation_time = 15.0
+environment_size = 30.0
+species_threshold = 3.0
+speciation_enabled = true
+neural_complexity = 3
+neurons_per_layer = 8
+activation_function = "tanh"
+neuroevolution_enabled = true
+synaptic_pruning = true
+food_sources = 20
+predator_prey_enabled = true
+environmental_pressure = 0.1
+resource_competition = true
+age_limit = 60.0
+reproduction_threshold = 50.0
+adaptive_mutation = true
+fitness_landscape_evolution = true
+epigenetic_inheritance = true
+cultural_transmission = true
+show_neural_connections = true
+show_species_colors = true
+show_fitness_landscape = true
+show_family_trees = false
+trail_visualization = true
+real_time_graphs = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Environment/Ground"]
+mesh = BoxMesh.new()
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="GroundCollision" type="CollisionShape3D" parent="Environment/Ground"]
+shape = BoxShape3D.new()
+transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="AmbientLight" type="Environment" parent="Lighting"]
+background_mode = 1
+background_color = Color(0.2, 0.3, 0.4, 1)
+ambient_light_color = Color(0.4, 0.6, 0.8, 1)
+ambient_light_energy = 0.3
+
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("2")
+camera_speed = 10.0
+mouse_sensitivity = 0.002
+zoom_speed = 2.0
+smooth_factor = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
+fov = 75.0
+
+[node name="CreatureContainer" type="Node3D" parent="."]
+
+[node name="FoodContainer" type="Node3D" parent="."]
+
+[node name="PredatorContainer" type="Node3D" parent="."]
+
+[node name="VisualizationContainer" type="Node3D" parent="."]
+
+[node name="NeuralNetworkVisualization" type="Node3D" parent="VisualizationContainer"]
+
+[node name="FitnessLandscape" type="Node3D" parent="VisualizationContainer"]
+
+[node name="TrailSystem" type="Node3D" parent="VisualizationContainer"]

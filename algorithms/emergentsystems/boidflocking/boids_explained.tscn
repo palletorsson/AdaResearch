@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk602dk0yrtux"]
+
+[ext_resource type="Script" uid="uid://cmhnnoeq6pj6c" path="res://EmergentSystems/BoidFlocking/boids_documentation_ui.gd" id="1_ocsmj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vuax"]
+bg_color = Color(0.129, 0.145, 0.196, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.6, 1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvj3e"]
+bg_color = Color(0.176, 0.22, 0.31, 1)
+border_width_bottom = 2
+border_color = Color(0.2, 0.6, 1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2w8r"]
+bg_color = Color(0.6, 0.1, 0.1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r45hs"]
+bg_color = Color(0.8, 0.2, 0.2, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="BoidsDocumentationUI" type="CanvasLayer"]
+script = ExtResource("1_ocsmj")
+show_on_start = true
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 700.0
+offset_bottom = 900.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7vuax")
+
+[node name="TitleBar" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bvj3e")
+
+[node name="TitleLabel" type="Label" parent="Panel/TitleBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.5
+offset_top = -13.0
+offset_right = 197.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Boids Algorithm Documentation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/hover = SubResource("StyleBoxFlat_o2w8r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o2w8r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_r45hs")
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7g4dxk5n8yw6"]
+
+[ext_resource type="Script" uid="uid://cchduyqgkigog" path="res://SineAndSound/BerniniColumns/BerniniColumns.gd" id="1_3xjmv"]
+
+[sub_resource type="Environment" id="Environment_qul75"]
+background_mode = 2
+background_color = Color(0.2, 0.2, 0.2, 1)
+ssao_enabled = true
+glow_enabled = true
+glow_bloom = 0.1
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+
+[node name="BerniniScene" type="Node3D"]
+
+[node name="BerniniColumns" type="Node3D" parent="."]
+script = ExtResource("1_3xjmv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5, 5, 5)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qul75")
+
+[node name="Explanation" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+billboard = 1
+text = "Bernini's Twisted Columns
+Created using Sine and Cosine Displacement"
+font_size = 64
+width = 800.0

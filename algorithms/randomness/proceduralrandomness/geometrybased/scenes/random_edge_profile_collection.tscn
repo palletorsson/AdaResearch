@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://csvms7xrkyn3h"]
+
+[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_0863a"]
+[ext_resource type="PackedScene" uid="uid://dvt40x4owdxog" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile.tscn" id="2_vdena"]
+
+[node name="RandomEdgeProfiles" type="Node3D"]
+script = ExtResource("1_0863a")
+scene_to_instantiate = ExtResource("2_vdena")
+rows = 5
+columns = 1
+grid_offset = Vector3(0, 1, 0)

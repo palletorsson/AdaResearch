@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lkrjsssm4rqm"]
+
+[ext_resource type="Script" uid="uid://ytrl4rsku2af" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/verticalblockanimator/VerticalBlockAnimator.gd" id="1_qe4sg"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qe4sg"]
+
+[node name="VerticalBlockAnimator" type="Node3D"]
+script = ExtResource("1_qe4sg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.818029, 0.575177, 0, -0.575177, 0.818029, 0, 0.842546, 3.52838)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.82137e-15, -4.37114e-08, 1, -2, -4.37114e-08, 0, 8.74228e-08, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_qe4sg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.206849, -2.1442)

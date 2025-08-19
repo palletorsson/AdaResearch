@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxqm2xhr5toih"]
+
+[ext_resource type="Script" uid="uid://duegpps302qq7" path="res://algorithms/criticaltheory/pipilottiristworld/pipilotti_rist_world.gd" id="1_scej7"]
+
+[node name="PipilottiRistWorld" type="Node3D"]
+script = ExtResource("1_scej7")
+
+[node name="Camera3D" type="Camera3D" parent="."]

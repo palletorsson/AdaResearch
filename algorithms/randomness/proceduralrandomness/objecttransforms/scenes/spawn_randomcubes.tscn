@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bj1y26a4kgg0f"]
+
+[ext_resource type="Script" uid="uid://b3aeaecpgypl0" path="res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.gd" id="1_gvyep"]
+[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="1_sff3b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_og5p4"]
+render_priority = 0
+shader = ExtResource("1_sff3b")
+shader_parameter/modelColor = Color(0.505344, 0.505344, 0.505344, 1)
+shader_parameter/wireframeColor = Color(0.940526, 0.689287, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 1, 1)
+shader_parameter/width = 8.68
+shader_parameter/blur = 0.581
+shader_parameter/emission_strength = 2.018
+shader_parameter/modelOpacity = 0.924
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhdw7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr76s"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuyvk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r71lw"]
+size = Vector3(1.10651, 1.0813, 1.11383)
+
+[node name="spawnRandomcubes" type="Node3D"]
+script = ExtResource("1_gvyep")
+
+[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="CubeBaseStaticBody3D"]
+material_override = SubResource("ShaderMaterial_og5p4")
+mesh = SubResource("BoxMesh_bhdw7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hr76s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D"]
+shape = SubResource("BoxShape3D_tuyvk")
+
+[node name="Area3D" type="Area3D" parent="CubeBaseStaticBody3D"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018158, -0.00964355, -0.00112915)
+shape = SubResource("BoxShape3D_r71lw")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.58886)
+
+[connection signal="area_entered" from="CubeBaseStaticBody3D/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="CubeBaseStaticBody3D/Area3D" to="." method="_on_area_3d_body_entered"]

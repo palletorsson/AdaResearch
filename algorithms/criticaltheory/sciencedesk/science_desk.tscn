@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqsxur0fsjq0d"]
+
+[ext_resource type="Script" uid="uid://kwy5hp0821on" path="res://algorithms/criticaltheory/sciencedesk/science_desk.gd" id="1_24ev8"]
+
+[node name="ScienceDesk" type="Node3D"]
+script = ExtResource("1_24ev8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.19154)

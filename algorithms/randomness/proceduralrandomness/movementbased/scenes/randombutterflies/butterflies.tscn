@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://crfyuhr11v8lk"]
+
+[ext_resource type="Script" uid="uid://b6cxc42b1nu3d" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd" id="1_nn2xg"]
+[ext_resource type="PackedScene" uid="uid://cmavmakrosvt6" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterfly.tscn" id="2_1g2yd"]
+
+[node name="butterflies" type="Node3D"]
+script = ExtResource("1_nn2xg")
+butterfly_scene = ExtResource("2_1g2yd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.15033)

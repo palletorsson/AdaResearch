@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8hhwbr08o17c"]
+
+[ext_resource type="Script" uid="uid://b841r3u35jcht" path="res://algorithms/criticaltheory/earthsdelight/earths_delight.gd" id="1_b2w1q"]
+
+[node name="EarthsDelight" type="Node3D"]
+script = ExtResource("1_b2w1q")
+
+[node name="Camera3D" type="Camera3D" parent="."]

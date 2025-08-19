@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://hatjmunbvgyr"]
+
+[ext_resource type="PackedScene" uid="uid://s4gh4d0kbi6y" path="res://algorithms/chaos/strangeattractors/strange_attractors.tscn" id="1_gapd1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Vectorfeild" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="StrangeAttractors" parent="SubViewport" instance=ExtResource("1_gapd1")]
+script = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.374844)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.076, 0, 0, 0, 0.076, 0, 0, 0, 0.076, 0.200729, 0.200192, 0.0334181)
+texture = SubResource("ViewportTexture_btd14")

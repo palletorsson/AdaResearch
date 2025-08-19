@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdosxiscjcus4"]
+
+[ext_resource type="Script" uid="uid://bmxs06mham0jg" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.gd" id="1_nuwkp"]
+
+[node name="Pollock3D" type="Node3D"]
+script = ExtResource("1_nuwkp")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581465, 0.896567)
+text = "ddd"

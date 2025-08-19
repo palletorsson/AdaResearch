@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://di5gehwp7lkxj"]
+
+[ext_resource type="Script" uid="uid://fdfqqjmrk7fi" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/increaserandomnesswall/random_increase_wall.gd" id="1_uleef"]
+[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="3_m5jx0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifn8k"]
+render_priority = 0
+shader = ExtResource("3_m5jx0")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0.585242, 0.779097, 1)
+shader_parameter/emissionColor = Color(1, 0, 1, 1)
+shader_parameter/width = 8.68
+shader_parameter/blur = 1.025
+shader_parameter/emission_strength = 2.787
+shader_parameter/modelOpacity = 0.977
+
+[sub_resource type="BoxMesh" id="BoxMesh_x00bu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tm8vy"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dp7lh"]
+
+[node name="RandomIncreaseWall" type="Node3D"]
+script = ExtResource("1_uleef")
+randomness_direction = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.676388, 0.736546, 0, -0.736546, 0.676388, 1.55265, 10.2187, 46.7936)
+visible = false
+
+[node name="CubeBaseStaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="CubeBaseStaticBody3D"]
+material_override = SubResource("ShaderMaterial_ifn8k")
+mesh = SubResource("BoxMesh_x00bu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_tm8vy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeBaseStaticBody3D"]
+shape = SubResource("BoxShape3D_dp7lh")

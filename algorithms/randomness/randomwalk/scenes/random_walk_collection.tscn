@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://b12x1wmigmlmo"]
+
+[ext_resource type="PackedScene" uid="uid://d28m400o724g5" path="res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn" id="1_0f1eu"]
+[ext_resource type="Script" uid="uid://b11b8g0mx4lvc" path="res://algorithms/randomness/randomwalk/scenes/place_me.gd" id="1_vt5mq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t7wqy"]
+viewport_path = NodePath("placeMe/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt5mq"]
+albedo_color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xb2ei"]
+
+[node name="RandomWalkCollection" type="Node3D"]
+
+[node name="placeMe" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.120228, 0, -0.32644)
+script = ExtResource("1_vt5mq")
+
+[node name="RandomWalkGrabPaper_simple_0001" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.997997, 0, -0.0632608, 0, 1, 0, 0.0632608, 0, 0.997997, -0.422545, -0.336047, -0.311709)
+label_text = "id: 0001 - simpel random walk "
+selected_walk_type = 1
+
+[node name="RandomWalkGrabPaper_diagonal_0002" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.998678, 0, -0.0513947, 0, 1, 0, 0.0513947, 0, 0.998678, -0.122545, -0.336047, -0.311709)
+label_text = "id: 0002 - diagonal random walk "
+selected_walk_type = 2
+
+[node name="RandomWalkGrabPaper_brownian_0003" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.99853, 0, -0.0542008, 0, 1, 0, 0.0542008, 0, 0.99853, 0.156819, -0.336047, -0.311709)
+label_text = "id: 0003 -  brownian random walk"
+selected_walk_type = 3
+
+[node name="RandomWalkGrabPaper_fractal_0004" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.999091, 0, 0.0426255, 0, 1, 0, -0.0426255, 0, 0.999091, -0.381428, -0.336047, -0.00221828)
+label_text = "id: 0004 - fractal random walk "
+
+[node name="RandomWalkGrabPaper_selfavioding_0005" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.997105, 0, -0.0760403, 0, 1, 0, 0.0760403, 0, 0.997105, -0.10831, -0.336047, -0.00221819)
+label_text = "id: 0005 - self avoiding walk "
+selected_walk_type = 6
+
+[node name="RandomWalkGrabPaper_levyflight_0006" parent="placeMe" instance=ExtResource("1_0f1eu")]
+transform = Transform3D(0.998815, 0, 0.0486754, 0, 1, 0, -0.0486754, 0, 0.998815, 0.147842, -0.336047, -0.00221804)
+label_text = "id: 0006 - levy flight walk "
+selected_walk_type = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="placeMe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28123, 0)
+skeleton = NodePath("../..")
+
+[node name="SubViewport" type="SubViewport" parent="placeMe"]
+
+[node name="ViewPortCamera3D" type="Camera3D" parent="placeMe/SubViewport"]
+transform = Transform3D(-1, 8.74228e-08, -1.12078e-15, 5.28339e-08, 0.604349, 0.79672, 6.96515e-08, 0.79672, -0.604349, -0.363626, 3.26796, 0.803389)
+
+[node name="Sprite3D" type="Sprite3D" parent="placeMe"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3.72529e-08, 0.926537, -2.173)
+texture = SubResource("ViewportTexture_t7wqy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="placeMe/Sprite3D"]
+transform = Transform3D(-5.4, -2.6658e-28, -1.74846e-08, 0, 5.4, 0, 4.72083e-07, -3.04932e-21, -0.2, 8.9407e-08, 0, -0.10808)
+material_override = SubResource("StandardMaterial3D_vt5mq")
+mesh = SubResource("BoxMesh_xb2ei")

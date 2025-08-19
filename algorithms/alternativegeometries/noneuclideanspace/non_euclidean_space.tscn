@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://byvh5yklhyht1"]
+
+[ext_resource type="Script" uid="uid://dq7mse4r2pn4t" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.gd" id="1_7e3cb"]
+[ext_resource type="Script" uid="uid://1ktkwoepomts" path="res://algorithms/alternativegeometries/noneuclideanspace/portal_manager.gd" id="2_pqw5i"]
+[ext_resource type="Script" uid="uid://wsioosieur5u" path="res://algorithms/alternativegeometries/noneuclideanspace/impossible_geometry.gd" id="2_sve45"]
+[ext_resource type="Script" uid="uid://bha415upfkoiy" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_room.gd" id="3_0msqp"]
+[ext_resource type="Script" uid="uid://b6vpkbqdksrfk" path="res://algorithms/alternativegeometries/noneuclideanspace/recursive_room.gd" id="4_0msqp"]
+
+[node name="NonEuclideanSpace" type="Node3D"]
+script = ExtResource("1_7e3cb")
+
+[node name="ImpossibleCorner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0958114, 0.895721, 3.92497)
+script = ExtResource("2_sve45")
+
+[node name="BiggerInsideRoom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.07957, 0.895721, 0)
+script = ExtResource("3_0msqp")
+
+[node name="RecursiveRoom" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895721, -3.20521)
+script = ExtResource("4_0msqp")
+
+[node name="PortalManager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895721, 1.25609)
+script = ExtResource("2_pqw5i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518962, 2.0994)

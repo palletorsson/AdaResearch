@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbikf2wqc0iqb"]
+
+[ext_resource type="Script" uid="uid://cttorbmiimu8i" path="res://algorithms/proceduralgeneration/mazegeneration/maze_generator.gd" id="1"]
+
+[node name="MazeGenerator" type="Node3D"]
+script = ExtResource("1")
+maze_width = 15
+maze_height = 15
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.267423, 0.963579, 0, -0.963579, 0.267423, 4.02941, 33.8442, 6.66458)

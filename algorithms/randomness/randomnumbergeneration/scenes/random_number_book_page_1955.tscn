@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://di5kf64lrnfv1"]
+
+[ext_resource type="Script" uid="uid://b26vg3g33hp3" path="res://algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd" id="1_0r1wv"]
+
+[sub_resource type="FontFile" id="FontFile_dirmf"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtm2p"]
+cull_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_kl1il"]
+size = Vector2(4, 6)
+
+[sub_resource type="FontFile" id="FontFile_kd6s2"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+
+[node name="randomNumberBookPage1955" type="Node3D"]
+script = ExtResource("1_0r1wv")
+font_file = SubResource("FontFile_dirmf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jtm2p")
+mesh = SubResource("QuadMesh_kl1il")
+
+[node name="Label3D_Title" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 2.60914e-10, 0.999996, -0.00298451, 8.74224e-08, -0.00298451, -0.999996, -0.101, 2.8, -0.00720661)
+shaded = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "TABLE OF RANDOM DIGITS"
+font = SubResource("FontFile_kd6s2")
+font_size = 16
+outline_size = 4
+
+[node name="Label3D_Side_Number" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.71048, 2.8, -0.0357025)
+shaded = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "356"
+font = SubResource("FontFile_kd6s2")
+font_size = 16
+outline_size = 4

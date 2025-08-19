@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmf61btg4qs25"]
+
+[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_jay5v"]
+[ext_resource type="PackedScene" uid="uid://di5kf64lrnfv1" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn" id="1_quvqh"]
+
+[node name="randomNumberBookPageCollection" type="Node3D"]
+script = ExtResource("1_jay5v")
+scene_to_instantiate = ExtResource("1_quvqh")
+row_spacing = 1.0
+column_spacing = 1.0
+grid_offset = Vector3(-2, 0, -0.51)
+instance_scale = Vector3(0.2, 0.2, 0.2)

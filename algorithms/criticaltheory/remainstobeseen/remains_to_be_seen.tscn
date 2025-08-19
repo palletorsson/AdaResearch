@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu8t1mgoq1hxg"]
+
+[ext_resource type="Script" uid="uid://c4bk46wrhmui5" path="res://algorithms/criticaltheory/remainstobeseen/remains_to_be_seen.gd" id="1_wpk42"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bjcbk"]
+
+[node name="RemainsToBeSeen" type="Node3D"]
+script = ExtResource("1_wpk42")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.65483)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_bjcbk")

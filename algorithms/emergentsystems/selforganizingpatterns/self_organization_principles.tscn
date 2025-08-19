@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://xrwrm8wwtefi"]
+
+[ext_resource type="Script" uid="uid://b6btfbec2k7rj" path="res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.gd" id="1_dyeya"]
+
+[node name="SelfOrganizationPrinciples" type="Node3D"]
+script = ExtResource("1_dyeya")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.93291, 0.360111, 0, -0.360111, 0.93291, 0, 0.970303, 1.88058)

@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://tiamaxuywcn7"]
+
+[ext_resource type="Script" uid="uid://c6yrhyk63peg" path="res://algorithms/randomness/randomnumbergeneration/scripts/random_color_book_page_1955.gd" id="1_hvxeg"]
+
+[sub_resource type="FontFile" id="FontFile_nmg35"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_kl1il"]
+size = Vector2(4, 6)
+
+[sub_resource type="FontFile" id="FontFile_kd6s2"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+
+[node name="randomNumberColorBookPage1955" type="Node3D"]
+script = ExtResource("1_hvxeg")
+font_file = SubResource("FontFile_nmg35")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.567, -2.379, -0.02)
+mesh = SubResource("QuadMesh_kl1il")
+
+[node name="Label3D_Title" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.626282, 0.368, -0.01)
+shaded = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "TABLE OF RANDOM COLORS"
+font = SubResource("FontFile_kd6s2")
+font_size = 16
+outline_size = 4
+
+[node name="Label3D_Side_Number" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05616, 0.374, -0.01)
+shaded = true
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "356"
+font = SubResource("FontFile_kd6s2")
+font_size = 16
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.185123, -0.867174, 2.84719)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15163, 0.953273)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2hvmu3q400pf"]
+
+[ext_resource type="Script" uid="uid://ykh1ertkuti7" path="res://randomness/Distributions/probability_distributions_3d.gd" id="1_tjexv"]
+
+[node name="ProbabilityDistributions3d" type="Node3D"]
+script = ExtResource("1_tjexv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886787, 3.97816)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

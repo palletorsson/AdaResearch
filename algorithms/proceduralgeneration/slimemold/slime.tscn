@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bde061h5schj0"]
+
+[ext_resource type="Script" uid="uid://bxfu2wd462uvf" path="res://algorithms/proceduralgeneration/slimemold/dave-stewart-slime-tubes.gd" id="1_w6n2l"]
+
+[node name="SlimeTubes" type="Node3D"]
+script = ExtResource("1_w6n2l")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds4gaqv1supbl"]
+
+[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_uugr5"]
+[ext_resource type="PackedScene" uid="uid://lkrjsssm4rqm" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/verticalblockanimator/vertical_block_animator.tscn" id="2_jxfvj"]
+
+[node name="VerticalBlockAnimatorCollection" type="Node3D"]
+script = ExtResource("1_uugr5")
+scene_to_instantiate = ExtResource("2_jxfvj")
+rows = 2
+columns = 2

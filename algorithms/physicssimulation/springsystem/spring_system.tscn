@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drbl4f2i7rbws"]
+
+[ext_resource type="Script" uid="uid://i5cfi37qgu4q" path="res://algorithms/physicssimulation/springsystem/spring_system.gd" id="1"]
+
+[node name="SpringSystem" type="Node3D"]
+script = ExtResource("1")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brm1wstaxfifb"]
+
+[ext_resource type="Script" uid="uid://tjefsdnymt0v" path="res://algorithms/criticaltheory/anickayilab/anicka_yi_lab.gd" id="1_r1vgk"]
+
+[node name="AnickaYiLab" type="Node3D"]
+script = ExtResource("1_r1vgk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.849469, 0.527638, 0, -0.527638, 0.849469, 0, 1.67518, 1.80954)

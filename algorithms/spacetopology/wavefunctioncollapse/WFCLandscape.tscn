@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvq8xj4y7w8kn"]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/wavefunctioncollapse/WFCLandscape.gd" id="1_7m9xo"]
+
+[node name="WFCLandscape" type="Node3D"]
+script = ExtResource("1_7m9xo")

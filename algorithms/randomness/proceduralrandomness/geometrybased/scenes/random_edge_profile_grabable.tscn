@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtf4qukpj1j7p"]
+
+[ext_resource type="Script" uid="uid://cnmxv8gstb4og" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_t68sp"]
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://adaresearch/Common/Scenes/Objects/DigitalPaper/grab_paper.tscn" id="3_txy17"]
+[ext_resource type="PackedScene" uid="uid://dvt40x4owdxog" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile.tscn" id="4_jql3c"]
+
+[node name="RandomEdgeProfileGrabable" type="Node3D"]
+script = ExtResource("1_t68sp")
+label_text = "Th"
+
+[node name="GrabPaper" parent="." instance=ExtResource("3_txy17")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+
+[node name="RandomEdgeProfile" parent="GrabPaper" instance=ExtResource("4_jql3c")]
+transform = Transform3D(-4.37114e-09, 4.37114e-09, -0.1, 0.1, -4.37114e-09, -4.37114e-09, -4.37114e-09, -0.1, -4.37114e-09, 1.89543e-05, -0.00338142, -0.031236)
+
+[node name="id_info_Label3D" type="Label3D" parent="GrabPaper"]
+transform = Transform3D(0.1, -2.64699e-24, 0, 0, -4.37114e-09, 0.1, 2.64698e-23, -0.1, -4.37114e-09, -0.0939793, 0.031674, 0.0807338)
+text = "id: 0001 - simpel random walk "
+font_size = 20
+outline_size = 4
+horizontal_alignment = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.11355, 0, 0.993532, 0, 1, 0, -0.993532, 0, 0.11355, 0.231084, 0, 0.0412638)
+
+[connection signal="dropped" from="GrabPaper" to="." method="_on_grab_paper_dropped"]
+[connection signal="grabbed" from="GrabPaper" to="." method="_on_grab_paper_grabbed"]

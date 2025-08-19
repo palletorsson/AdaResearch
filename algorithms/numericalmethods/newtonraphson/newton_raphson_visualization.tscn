@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxmrj7y8k5n2p"]
+
+[ext_resource type="Script" path="res://algorithms/numericalmethods/newtonraphson/newton_raphson_visualization.gd" id="1"]
+
+[node name="NewtonRaphsonVisualization" type="Node3D"]
+script = ExtResource("1")
+target_function = "x^3 - 2*x - 5"
+initial_guess = 2.0
+tolerance = 0.0001
+max_iterations = 20
+iteration_speed = 1.5
+function_resolution = 150
+x_range = Vector2(-3, 4)
+y_range = Vector2(-8, 8)
+show_tangent_lines = true
+show_convergence_path = true
+animate_convergence = true
+function_preset = "Cubic" 

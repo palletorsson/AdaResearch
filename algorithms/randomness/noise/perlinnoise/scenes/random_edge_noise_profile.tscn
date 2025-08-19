@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://e02ftvempen3"]
+
+[ext_resource type="Script" uid="uid://w4152px3wh33" path="res://algorithms/randomness/noise/perlinnoise/scripts/random_top_noise_edge_modifier.gd" id="1_cyvip"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujyxf"]
+cull_mode = 2
+albedo_color = Color(1, 0.498039, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t8f46"]
+subdivide_width = 20
+subdivide_depth = 20
+orientation = 2
+
+[node name="RandomEdgeNoiseProfile" type="Node3D"]
+script = ExtResource("1_cyvip")
+
+[node name="NoisePlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.133318, 0, 0)
+material_override = SubResource("StandardMaterial3D_ujyxf")
+mesh = SubResource("PlaneMesh_t8f46")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.860022, 0.213535, -0.463428, 0, 0.908224, 0.418485, 0.510258, -0.359906, 0.781092, -0.890557, 1.33587, 2.22429)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36254, 0.656453)

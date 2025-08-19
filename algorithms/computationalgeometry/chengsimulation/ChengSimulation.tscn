@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://fatqjwh8a81e"]
+
+[ext_resource type="Script" uid="uid://betkk7cmmvt7l" path="res://algorithms/computationalgeometry/chengsimulation/cheng_simulation.gd" id="1_irott"]
+
+[node name="ChengSimulation" type="Node3D"]
+script = ExtResource("1_irott")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906684, 0.421811, 0, -0.421811, 0.906684, 0, 0.638437, 1.56661)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpweyfmbickxl"]
+
+[ext_resource type="Script" uid="uid://y61rp54gg5o8" path="res://SineAndSound/KusamaSine/kusama.gd" id="1_ingm8"]
+
+[node name="Kusama" type="Node3D"]
+script = ExtResource("1_ingm8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65894, 7.14014)

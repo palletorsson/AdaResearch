@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://7el22s8sx0lw"]
+
+[ext_resource type="Script" uid="uid://cknrk6fo2pmn1" path="res://algorithms/misc/jointpanel/joint_panel.gd" id="1_yk08v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqud2"]
+albedo_color = Color(1, 0.34902, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brjqy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qj3ua"]
+albedo_color = Color(0.20871, 0.20871, 0.20871, 1)
+
+[node name="JointPanel" type="Node3D"]
+script = ExtResource("1_yk08v")
+panel_material = SubResource("StandardMaterial3D_pqud2")
+frame_material = SubResource("StandardMaterial3D_brjqy")
+pit_material = SubResource("StandardMaterial3D_qj3ua")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.654965, 0.755659, 0, -0.755659, 0.654965, 0, 5.5585, 7.75035)

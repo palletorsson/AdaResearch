@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://thvbdvl4d3sj"]
+
+[ext_resource type="Shader" uid="uid://dpxs7cpxccugg" path="res://algorithms/randomness/noise/cellularnoise/shaders/cellshader.gdshader" id="1_vj7f0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lmjn"]
+shader = ExtResource("1_vj7f0")
+shader_parameter/cell_density = 10.0
+shader_parameter/outer_membrane_thickness = 0.05
+shader_parameter/inner_membrane_thickness = 0.03
+shader_parameter/background_color = Color(0.98, 0.95, 0.82, 1)
+shader_parameter/outer_membrane_color = Color(0.85, 0.8, 0.55, 1)
+shader_parameter/inner_membrane_color = Color(0.3, 0.3, 0.4, 1)
+shader_parameter/nucleus_color = Color(0.2, 0.2, 0.35, 1)
+shader_parameter/highlight_color = Color(0.3, 0.35, 0.6, 1)
+shader_parameter/random_seed = 43759.0
+shader_parameter/nucleus_size_variance = 1.125
+shader_parameter/deformation_amount = 0.945
+shader_parameter/circular_mask = true
+shader_parameter/circular_mask_softness = 0.1
+shader_parameter/time_scale = 0.2
+shader_parameter/flow_intensity = 0.15
+shader_parameter/pulse_intensity = 0.1
+shader_parameter/membrane_fluctuation = 0.02
+
+[sub_resource type="SphereMesh" id="SphereMesh_qmxbu"]
+
+[node name="cellshader" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_2lmjn")
+mesh = SubResource("SphereMesh_qmxbu")

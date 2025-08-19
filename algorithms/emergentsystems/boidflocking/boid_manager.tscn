@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://co00rs3lmd5lq"]
+
+[ext_resource type="Script" uid="uid://diwbtarss7vib" path="res://algorithms/emergentsystems/boidflocking/boid_manager.gd" id="1_fku5t"]
+[ext_resource type="PackedScene" uid="uid://bq8fmes5xwbuj" path="res://algorithms/emergentsystems/boidflocking/boid.tscn" id="2_wo2ik"]
+
+[node name="BoidManager" type="Node3D"]
+script = ExtResource("1_fku5t")
+boid_scene = ExtResource("2_wo2ik")
+num_boids = 100

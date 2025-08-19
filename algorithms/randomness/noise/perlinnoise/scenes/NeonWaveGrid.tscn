@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpqv702j5i2o7"]
+
+[ext_resource type="Script" uid="uid://d21gm8erhjww6" path="res://algorithms/randomness/noise/perlinnoise/scenes/neon_wave_grid.gd" id="1_yrsl4"]
+
+[node name="NeonWaveGrid" type="Node3D"]
+script = ExtResource("1_yrsl4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.73454)

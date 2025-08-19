@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c31t0ok5c3i20"]
+
+[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_t43dj"]
+
+[node name="BranchingGrowthAlgorithm" type="Node3D"]
+script = ExtResource("1_t43dj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.792194, 0.61027, 0, -0.61027, 0.792194, 0, 1.71594, 3.49372)

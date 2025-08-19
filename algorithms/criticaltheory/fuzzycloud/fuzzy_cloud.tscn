@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://be60tqqsxosh8"]
+
+[ext_resource type="Script" uid="uid://dficyn82cck2b" path="res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.gd" id="1_a2cfn"]
+
+[node name="FuzzyCloud" type="Node3D"]
+script = ExtResource("1_a2cfn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.892318, 0.451407, 0, -0.451407, 0.892318, 0, 1.19335, 2.8505)

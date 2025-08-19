@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciya30686rghe"]
+
+[ext_resource type="Script" uid="uid://cixt51fmiw24t" path="res://algorithms/algorithms/sortingalgorithms/sorting_visualization.gd" id="1"]
+
+[node name="SortingVisualization" type="Node3D"]
+script = ExtResource("1")
+array_size = 20
+animation_speed = 0.3
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8757, 1.81344, 18.2078)

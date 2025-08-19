@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx4amv6r8f33k"]
+
+[ext_resource type="PackedScene" uid="uid://tiamaxuywcn7" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_1955.tscn" id="1_l5wed"]
+
+[node name="randomNumberBookPageCollection" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999929, -0.0119378, 0, 0.0119378, 0.999929, 0.114775, -0.183014, 4.77024)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90515, 0.544492)
+
+[node name="randomNumberBookPage1955" parent="." instance=ExtResource("1_l5wed")]
+
+[node name="randomNumberBookPage1956" parent="." instance=ExtResource("1_l5wed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1909, 0, 0)
+
+[node name="randomNumberBookPage1957" parent="." instance=ExtResource("1_l5wed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18189, 0, 0)

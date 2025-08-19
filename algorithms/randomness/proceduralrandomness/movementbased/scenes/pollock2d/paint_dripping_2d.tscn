@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://3c6rskdpafdo"]
+
+[ext_resource type="Script" uid="uid://b5txiuh81xhch" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/paint_dripping_2d.gd" id="1_ugfr2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p51w8"]
+bg_color = Color(0.129412, 0.129412, 0.129412, 0.878431)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtxh8"]
+font_size = 18
+font_color = Color(0.945098, 0.945098, 0.945098, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[node name="PollockPainting" type="Node2D"]
+script = ExtResource("1_ugfr2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -249.5
+offset_top = 20.0
+offset_right = 249.5
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Jackson Pollock-Style Painting Generator"
+horizontal_alignment = 1
+
+[node name="Quote" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 68.0
+offset_right = 300.0
+offset_bottom = 94.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
+[node name="ButtonPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -80.0
+offset_right = 184.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p51w8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ButtonPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RegenerateButton" type="Button" parent="CanvasLayer/ButtonPanel/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create New Painting"
+
+[node name="SaveButton" type="Button" parent="CanvasLayer/ButtonPanel/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save Painting"
+
+[node name="SavedLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_top = 94.0
+offset_right = 224.0
+offset_bottom = 124.0
+grow_horizontal = 2
+text = "Painting saved successfully!"
+label_settings = SubResource("LabelSettings_jtxh8")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/ButtonPanel/HBoxContainer/RegenerateButton" to="." method="_on_regenerate_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonPanel/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

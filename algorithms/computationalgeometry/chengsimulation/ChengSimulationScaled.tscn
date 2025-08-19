@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://gkr0aesovf33"]
+
+[ext_resource type="PackedScene" uid="uid://fatqjwh8a81e" path="res://algorithms/computationalgeometry/chengsimulation/ChengSimulation.tscn" id="1_orj4j"]
+
+[node name="ChengSimulation" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906684, 0.421811, 0, -0.421811, 0.906684, 0, 0.638437, 1.56661)
+
+[node name="ChengSimulation" parent="." instance=ExtResource("1_orj4j")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
