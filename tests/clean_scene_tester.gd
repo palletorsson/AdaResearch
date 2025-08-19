@@ -4,11 +4,12 @@
 
 extends SceneTree
 
-# Configuration
+# Configuration - Updated for 283 algorithms across 33 categories
 const TEST_TIMEOUT = 8.0
 const SCREENSHOT_DELAY = 2.0
 const SCREENSHOT_SIZE = Vector2i(1920, 1080)
 const OUTPUT_DIR = "user://test_results/"
+const EXPECTED_ALGORITHM_COUNT = 283  # Total algorithm scenes to test
 
 # State
 var test_results: Array[Dictionary] = []
@@ -60,12 +61,20 @@ func discover_scenes():
 	
 	print("📁 Found ", scene_paths.size(), " scenes")
 	
+	# Validate algorithm count
+	if scene_paths.size() != EXPECTED_ALGORITHM_COUNT:
+		print("⚠️ WARNING: Expected ", EXPECTED_ALGORITHM_COUNT, " algorithms but found ", scene_paths.size())
+		print("💡 This may indicate missing algorithms or configuration issues")
+	else:
+		print("✅ Algorithm count validation passed - all ", EXPECTED_ALGORITHM_COUNT, " algorithms found")
+	
 	# Show category breakdown
 	var categories = {}
 	for path in scene_paths:
 		var category = extract_category(path)
 		categories[category] = categories.get(category, 0) + 1
 	
+	print("📊 Testing across ", categories.size(), " categories:")
 	for category in categories.keys():
 		print("   • ", category.capitalize(), ": ", categories[category], " scenes")
 

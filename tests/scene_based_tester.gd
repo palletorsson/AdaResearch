@@ -4,14 +4,15 @@
 
 extends Node3D
 
-# Configuration
+# Configuration - Updated for 283 algorithms across 33 categories
 const TEST_TIMEOUT = 16.0
 const SCREENSHOT_DELAY = 2.0
 const SCREENSHOT_SIZE = Vector2i(1920, 1080)
-const OUTPUT_DIR = "user://test_results/"
+const OUTPUT_DIR = "res://test_results/"
+const EXPECTED_ALGORITHM_COUNT = 283  # Total algorithm scenes to test
 
 # Start from algorithm 50 (0-indexed, so 49)
-const START_FROM_INDEX = 0  # Set to 0 to start from beginning
+const START_FROM_INDEX = 121  # Set to 0 to start from beginning
 
 # State
 var test_results: Array[Dictionary] = []

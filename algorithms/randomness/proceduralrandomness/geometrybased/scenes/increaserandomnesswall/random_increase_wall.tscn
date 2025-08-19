@@ -1,7 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://di5gehwp7lkxj"]
 
 [ext_resource type="Script" uid="uid://fdfqqjmrk7fi" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/increaserandomnesswall/random_increase_wall.gd" id="1_uleef"]
-[ext_resource type="Shader" uid="uid://dntkgqkirhudu" path="res://adaresearch/Common/Shaders/Grids/DualScaleGrid.gdshader" id="3_m5jx0"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_m5jx0"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ifn8k"]
 render_priority = 0

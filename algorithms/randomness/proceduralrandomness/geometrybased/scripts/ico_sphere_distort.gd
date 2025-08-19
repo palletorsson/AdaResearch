@@ -24,13 +24,18 @@ func _ready():
 	for v in vertices:
 		var sphere = create_sphere_instance()
 		
+		# Check if sphere creation was successful
+		if not sphere:
+			print("Failed to create sphere instance - sphere_scene may not be assigned")
+			continue
+		
 		# Calculate **positional distortion**
 		var displacement = calculate_positional_displacement(v)
 
-		var position = (v + displacement).normalized() * structure_radius  # Ensure it remains on the sphere
-		sphere.global_transform.origin = position
+		var _position = (v + displacement).normalized() * structure_radius  # Ensure it remains on the sphere
+		sphere.global_transform.origin = _position
 		add_child(sphere)
-		sphere_positions[index_count] = position
+		sphere_positions[index_count] = _position
 		index_count += 1
 
 	# Connect vertices using edges
@@ -115,11 +120,31 @@ func calculate_positional_displacement(vertex: Vector3) -> Vector3:
 # ============================================
 
 func create_sphere_instance() -> Node3D:
-	if not sphere_scene:
-		print("Sphere scene not assigned")
-		return null
+	var sphere: Node3D
 	
-	var sphere = sphere_scene.instantiate() as Node3D
+	if not sphere_scene:
+		print("Sphere scene not assigned - creating default CSGSphere3D")
+		# Create a default sphere if no scene is provided
+		var csg_sphere = CSGSphere3D.new()
+		csg_sphere.radius = 0.1
+		
+		# Add basic material
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color(0.8, 0.2, 0.2, 1.0)
+		material.emission_enabled = true
+		material.emission = Color(0.8, 0.2, 0.2, 0.3)
+		csg_sphere.material_override = material
+		
+		sphere = csg_sphere
+	else:
+		sphere = sphere_scene.instantiate() as Node3D
+		if not sphere:
+			print("Failed to instantiate sphere scene - creating fallback")
+			# Fallback to CSGSphere3D if instantiation fails
+			var csg_sphere = CSGSphere3D.new()
+			csg_sphere.radius = 0.1
+			sphere = csg_sphere
+	
 	sphere.scale = Vector3(scale_factor, scale_factor, scale_factor)
 	return sphere
 

@@ -1,6 +1,6 @@
 extends Node3D
 
-class_name FluidParticle
+class_name FluidSimParticle
 
 var velocity: Vector3 = Vector3.ZERO
 var current_force: Vector3 = Vector3.ZERO

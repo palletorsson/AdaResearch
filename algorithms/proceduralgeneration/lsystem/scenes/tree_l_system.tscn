@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmhdlr3q6j5hm"]
-
-[ext_resource type="Script" uid="uid://ct65n0anlcm1p" path="res://algorithms/proceduralgeneration/lsystem/scripts/tree_l_system.gd" id="1_1hsje"]
-
-[node name="Tree_L_system" type="Node3D"]
-script = ExtResource("1_1hsje")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.770858, 0.658724, 2.28147)

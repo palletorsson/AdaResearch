@@ -13,6 +13,7 @@ const SCREENSHOT_DELAY = 2.0  # Seconds to wait before screenshot
 const SCREENSHOT_SIZE = Vector2i(1920, 1080)
 const OUTPUT_DIR = "user://test_results/"
 const ALGORITHMS_DIR = "res://algorithms/"
+const EXPECTED_ALGORITHM_COUNT = 283  # Total algorithm scenes across 33 categories
 
 # Performance thresholds for warnings
 const MIN_FPS_WARNING = 30.0

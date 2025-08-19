@@ -32,7 +32,7 @@ This scene demonstrates Smoothed Particle Hydrodynamics (SPH) fluid simulation, 
 ## Files
 - `fluidsimulation.tscn` - Main scene file
 - `FluidSimulation.gd` - SPH fluid simulation script
-- `FluidParticle.gd` - Individual fluid particle script
+- `FluidParticle.gd` - Individual fluid particle script (class: FluidSimParticle)
 
 ## Usage
 1. Open the scene in Godot 4

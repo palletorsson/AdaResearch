@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8w7smd767wsf"]
-
-[ext_resource type="Script" uid="uid://dnd44e1whfgmu" path="res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd" id="1_1vlxq"]
-
-[node name="JointLearnWalk" type="Node3D"]
-script = ExtResource("1_1vlxq")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727208, 0)

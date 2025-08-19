@@ -34,7 +34,7 @@ var container_mesh: MeshInstance3D
 var force_lines: Array = []
 
 # Particle class
-class FluidParticle:
+class FluidSimulationParticle:
 	var position: Vector3
 	var velocity: Vector3
 	var acceleration: Vector3
@@ -132,7 +132,7 @@ func initialize_particles():
 					-container_size.z/2 + spacing * col + spacing/2
 				)
 				
-				var particle = FluidParticle.new(pos, particle_mass, particle_radius)
+				var particle = FluidSimulationParticle.new(pos, particle_mass, particle_radius)
 				particles.append(particle)
 				
 				if show_particles:
@@ -140,7 +140,7 @@ func initialize_particles():
 				
 				created_particles += 1
 
-func create_particle_visual(particle: FluidParticle):
+func create_particle_visual(particle: FluidSimulationParticle):
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = particle.radius
@@ -201,11 +201,11 @@ func simulate_fluid(delta):
 		particle.update(fixed_delta)
 		apply_boundary_constraints(particle)
 
-func apply_gravity(particle: FluidParticle):
+func apply_gravity(particle: FluidSimulationParticle):
 	var gravity_force = Vector3(0, gravity * particle.mass, 0)
 	particle.apply_force(gravity_force)
 
-func apply_pressure_forces(particle: FluidParticle):
+func apply_pressure_forces(particle: FluidSimulationParticle):
 	for neighbor in particle.neighbors:
 		var direction = particle.position - neighbor.position
 		var distance = direction.length()
@@ -216,7 +216,7 @@ func apply_pressure_forces(particle: FluidParticle):
 			var force_magnitude = pressure_diff * pressure_force / (distance * distance)
 			particle.apply_force(direction * force_magnitude)
 
-func apply_viscosity_forces(particle: FluidParticle):
+func apply_viscosity_forces(particle: FluidSimulationParticle):
 	var viscosity_force = Vector3.ZERO
 	
 	for neighbor in particle.neighbors:
@@ -229,7 +229,7 @@ func apply_viscosity_forces(particle: FluidParticle):
 	
 	particle.apply_force(viscosity_force)
 
-func apply_surface_tension(particle: FluidParticle):
+func apply_surface_tension(particle: FluidSimulationParticle):
 	if particle.neighbors.size() < 6:  # Surface particles have fewer neighbors
 		var surface_normal = Vector3.ZERO
 		
@@ -241,7 +241,7 @@ func apply_surface_tension(particle: FluidParticle):
 			surface_normal = surface_normal.normalized()
 			particle.apply_force(surface_normal * surface_tension)
 
-func apply_boundary_constraints(particle: FluidParticle):
+func apply_boundary_constraints(particle: FluidSimulationParticle):
 	var half_size = container_size / 2
 	var damping = 0.7  # Energy loss on collision
 	

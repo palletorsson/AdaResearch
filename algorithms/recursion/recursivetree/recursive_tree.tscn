@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8cc4ceiitbr5"]
-
-[ext_resource type="Script" uid="uid://bb34hilojfscn" path="res://algorithms/recursion/recursivetree/recursive_tree.gd" id="1_20hvy"]
-
-[node name="RecursiveTree" type="Node3D"]
-script = ExtResource("1_20hvy")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72735, 10.8728)

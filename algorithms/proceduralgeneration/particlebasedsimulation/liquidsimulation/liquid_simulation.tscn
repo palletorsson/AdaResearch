@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://286gtxux3max"]
-
-[ext_resource type="Script" uid="uid://bma6v7dhmjoos" path="res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.gd" id="1_8vv52"]
-
-[node name="LiquidSimulation" type="Node3D"]
-script = ExtResource("1_8vv52")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.756402, 0.654107, 0, -0.654107, 0.756402, 0, 2.06372, 4.79678)

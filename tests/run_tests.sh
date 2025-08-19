@@ -28,8 +28,9 @@ if [ ! -d "algorithms" ]; then
     exit 1
 fi
 
-echo "📁 Found algorithms directory with $(find algorithms -name "*.tscn" | wc -l) scene files"
-echo "🚀 Starting automated testing..."
+SCENE_COUNT=$(find algorithms -name "*.tscn" | wc -l)
+echo "📁 Found algorithms directory with $SCENE_COUNT scene files (expected: 283)"
+echo "🚀 Starting automated testing across 33 algorithm categories..."
 echo ""
 
 # Create the testing script if it doesn't exist
