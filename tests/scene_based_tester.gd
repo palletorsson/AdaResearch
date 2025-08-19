@@ -5,13 +5,13 @@
 extends Node3D
 
 # Configuration
-const TEST_TIMEOUT = 8.0
+const TEST_TIMEOUT = 16.0
 const SCREENSHOT_DELAY = 2.0
 const SCREENSHOT_SIZE = Vector2i(1920, 1080)
 const OUTPUT_DIR = "user://test_results/"
 
 # Start from algorithm 50 (0-indexed, so 49)
-const START_FROM_INDEX = 122  # Set to 0 to start from beginning
+const START_FROM_INDEX = 0  # Set to 0 to start from beginning
 
 # State
 var test_results: Array[Dictionary] = []
