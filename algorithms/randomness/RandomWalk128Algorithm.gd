@@ -95,13 +95,8 @@ func _create_walker_indicator():
 	walker_cube.name = "Walker"
 	walker_cube.scale = Vector3.ONE * CUBE_SCALE * 2.0  # Bigger for visibility
 	
-	# Find mesh and change color
-	var mesh_instance = _find_mesh_instance(walker_cube)
-	if mesh_instance and mesh_instance.material_override:
-		var material = mesh_instance.material_override as ShaderMaterial
-		if material:
-			material.set_shader_parameter("emissionColor", Color.RED)
-			material.set_shader_parameter("emission_strength", 5.0)
+
+	
 	
 	add_child(walker_cube)
 	_update_walker_position()
@@ -298,21 +293,3 @@ func print_walk_status():
 	print("Cubes created: %d" % info.cubes_created)
 	print("Running: %s" % info.is_running)
 	print("=================================")
-
-# === INPUT CONTROLS ===
-
-func _input(event):
-	"""Handle input for walk control"""
-	if event.is_action_pressed("ui_accept"):  # Space
-		if is_running:
-			stop_walk()
-		else:
-			start_walk()
-	elif event.is_action_pressed("ui_cancel"):  # Escape
-		restart_walk()
-	elif event.is_action_pressed("ui_select"):  # Enter
-		print_walk_status()
-	elif event.is_action_pressed("ui_up"):  # Speed up
-		set_walk_speed(steps_per_frame + 5)
-	elif event.is_action_pressed("ui_down"):  # Speed down
-		set_walk_speed(steps_per_frame - 5)

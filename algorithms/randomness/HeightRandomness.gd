@@ -8,7 +8,7 @@ var grid_reference = null
 var max_steps: int = 100
 
 # Height properties
-@export var raise_amount: float = 0.05
+@export var raise_amount: float = 0.2
 var total_raises: int = 0
 @export var max_raises: int = 100
 
@@ -22,7 +22,10 @@ var total_raises: int = 0
 # Node3D properties
 @export var auto_start: bool = true
 @export var step_delay: float = 0.15
+@export var auto_loop: bool = true  # Automatically restart when finished
+@export var loop_delay: float = 2.0  # Delay before restarting (seconds)
 var timer: Timer
+var loop_timer: Timer
 var is_running: bool = false
 
 # Signals
@@ -31,7 +34,7 @@ signal algorithm_finished()
 
 func _init():
 	algorithm_name = "Height Distribution (8x8 Region)"
-	algorithm_description = "Random height distribution in middle 8x8 area"
+	algorithm_description = "Random height distribution in middle 8x8 area with auto-loop capability"
 	max_steps = max_raises
 
 func _ready():
@@ -40,6 +43,13 @@ func _ready():
 	timer.wait_time = step_delay
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
+	
+	# Create timer for looping
+	loop_timer = Timer.new()
+	loop_timer.wait_time = loop_delay
+	loop_timer.one_shot = true
+	loop_timer.timeout.connect(_on_loop_timer_timeout)
+	add_child(loop_timer)
 	
 	# Auto-connect to grid system
 	call_deferred("_find_and_connect_grid")
@@ -84,7 +94,13 @@ func start_algorithm():
 func stop_algorithm():
 	is_running = false
 	timer.stop()
+	loop_timer.stop()  # Also stop the loop timer
 	print("HeightRandomnessAlgorithm: Algorithm stopped")
+
+func set_auto_loop(enabled: bool):
+	"""Enable or disable automatic looping"""
+	auto_loop = enabled
+	print("HeightRandomnessAlgorithm: Auto-loop %s" % ("enabled" if enabled else "disabled"))
 
 func step_once():
 	if not grid_reference:
@@ -96,12 +112,49 @@ func step_once():
 	if not result:
 		stop_algorithm()
 		algorithm_finished.emit()
+		
+		# Start loop timer if auto_loop is enabled
+		if auto_loop:
+			print("HeightRandomnessAlgorithm: Algorithm finished, restarting in %.1f seconds..." % loop_delay)
+			loop_timer.start()
 	
 	return result
 
 func _on_timer_timeout():
 	if is_running:
 		step_once()
+
+func _on_loop_timer_timeout():
+	"""Called when it's time to restart the algorithm"""
+	if auto_loop:
+		reset_algorithm()
+		start_algorithm()
+
+func reset_algorithm():
+	"""Reset the algorithm to its initial state"""
+	if not grid_reference:
+		return
+	
+	var structure_component = grid_reference.get_structure_component()
+	if not structure_component:
+		return
+	
+	print("HeightRandomnessAlgorithm: Resetting cubes to base level...")
+	
+	# Reset all cubes in the region back to their base positions
+	for x in range(region_min_x, region_max_x + 1):
+		for z in range(region_min_z, region_max_z + 1):
+			var cube = structure_component.get_cube_at(x, target_y_level, z)
+			if cube:
+				# Reset to original position using GridCommon utility
+				var grid_pos = Vector3i(x, target_y_level, z)
+				var world_pos = GridCommon.grid_to_world_position(grid_pos, structure_component.cube_size, structure_component.gutter)
+				cube.position = world_pos
+	
+	# Reset counters
+	total_raises = 0
+	
+	print("HeightRandomnessAlgorithm: Reset complete - ready to restart")
 
 func setup_initial_state():
 	# Ensure there are base cubes in the 8x8 region
@@ -190,5 +243,8 @@ func get_algorithm_info() -> Dictionary:
 		"max_raises": max_raises,
 		"current_raises": total_raises,
 		"raise_amount": raise_amount,
+		"auto_loop": auto_loop,
+		"loop_delay": loop_delay,
+		"is_running": is_running,
 		"region_bounds": get_region_bounds()
 	} 

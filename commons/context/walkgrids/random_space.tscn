@@ -9,10 +9,10 @@ cull_mode = 2
 
 [node name="RandomSpace" type="Node3D"]
 script = ExtResource("1_n8dtw")
-space_size = Vector2(10, 10)
-resolution = 50
-height_scale = 1.0
-position_offset = Vector3(0, 2, 0)
+seed_value = 1
+space_size = Vector2(8, 8)
+height_scale = 0.1
+position_offset = Vector3(0, 0.1, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

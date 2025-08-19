@@ -291,7 +291,7 @@
 			"name": "Random Bubbles",
 			"lookup_name": "bubbles_random",
 			"description": "A particle system that generates random bubble effects with dynamic spawning",
-			"scene": "res://algorithms/randomness/bubbles_random.tscn",
+			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
 			"position": [1.0, 1.0, -1.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "touch_to_activate",
@@ -367,7 +367,7 @@
 			"lookup_name": "height_random",
 			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
 			"scene": "res://algorithms/randomness/height_random.tscn",
-			"position": [-2.0, 1.0, 1.0],
+			"position": [1.0, 1.0, 1.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"interaction": "touch_to_activate",
 			"sequence": "randomness_exploration",
@@ -465,7 +465,8 @@
 		"name": "random_space",
 		"lookup_name": "random_space",
 		"description": "A crystal that contains mathematical chaos algorithms", 
-		"scene": "res://commons/context/walkgrids/random_space.tscn"
+		"scene": "res://commons/context/walkgrids/random_space.tscn",
+		"position": [0.0, 1.0, 0.0],
 	},
 	"sine_space": {
 		"name": "sine_space",

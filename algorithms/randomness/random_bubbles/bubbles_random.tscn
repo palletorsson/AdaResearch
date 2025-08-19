@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfpoupxc8k7h7"]
+
+[ext_resource type="Script" uid="uid://eexace00x0v" path="res://algorithms/randomness/random_bubbles/BubblesRandom.gd" id="1_tlfe2"]
+
+[node name="BubbleParticles" type="Node3D"]
+script = ExtResource("1_tlfe2")
+spawn_rate = 10.0
+bubble_lifetime = 4.0
+bubble_scale_down_rate = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 8, 6, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 0)
+light_energy = 0.8
+shadow_enabled = true

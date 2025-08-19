@@ -1,7 +1,7 @@
 extends Node3D
 
 # Bubble particle properties
-@export var spawn_area_size: Vector3 = Vector3(10, 1.0, 10)  # Size of the area where bubbles spawn
+@export var spawn_area_size: Vector3 = Vector3(6, 1.0, 6)  # Size of the area where bubbles spawn (matches smaller petri dish)
 @export var min_bubble_size: float = 0.2
 @export var max_bubble_size: float = 0.8
 @export var min_rise_speed: float = 0.5
@@ -11,6 +11,12 @@ extends Node3D
 @export var bubble_lifetime: float = 10.0  # How long bubbles exist before fading out
 @export var bubble_fade_time: float = 2.0  # Time it takes for a bubble to fade out
 @export var bubble_scale_down_rate: float = 0.05  # How quickly bubbles shrink as they rise
+
+# Petri dish properties
+@export var petri_dish_radius: float = 3.5  # Radius of the petri dish (smaller)
+@export var petri_dish_height: float = 0.25  # Height of the petri dish walls
+@export var petri_dish_thickness: float = 0.04  # Wall thickness
+@export var petri_dish_color: Color = Color(1.0, 0.7, 0.9, 0.4)  # Pink glass transparency
 
 # Sound properties
 @export var use_synthesized_sounds: bool = true
@@ -31,6 +37,7 @@ var active_bubbles = []
 var active_audio_players = []
 var audio_player_pool = []
 var synthesized_sounds: Array = []
+var petri_dish_container: Node3D
 #var sound_synthesizer: BubbleSoundSynthesizer
 
 # Bubble class to track properties of each bubble
@@ -62,7 +69,10 @@ class Bubble:
 		material.metallic_specular = 1.0
 		mesh_instance.set_surface_override_material(0, material)
 
-#func _ready():
+func _ready():
+	# Create the petri dish
+	create_petri_dish()
+	
 	# Create the sound synthesizer
 	#if use_synthesized_sounds:
 		#sound_synthesizer = BubbleSoundSynthesizer.new()
@@ -125,6 +135,77 @@ func _process(delta):
 			bubble.material.albedo_color.a = alpha
 		
 		i += 1
+
+func create_petri_dish():
+	"""Create a realistic petri dish with glass-like appearance"""
+	petri_dish_container = Node3D.new()
+	petri_dish_container.name = "PetriDish"
+	add_child(petri_dish_container)
+	
+	# Create glass material for the petri dish
+	var glass_material = StandardMaterial3D.new()
+	glass_material.transparency = StandardMaterial3D.TRANSPARENCY_ALPHA
+	glass_material.albedo_color = petri_dish_color
+	glass_material.roughness = 0.05  # Very smooth for glass
+	glass_material.metallic = 0.0
+	glass_material.refraction_enabled = true
+	glass_material.refraction_scale = 0.05
+	glass_material.rim_enabled = true
+	glass_material.rim = 0.9
+	glass_material.rim_color = Color(1.0, 0.8, 0.95, 0.7)  # Pink-tinted rim
+	
+	# Create the bottom plate (main circular base)
+	var bottom_cylinder = CylinderMesh.new()
+	bottom_cylinder.top_radius = petri_dish_radius
+	bottom_cylinder.bottom_radius = petri_dish_radius
+	bottom_cylinder.height = petri_dish_thickness
+	
+	var bottom_instance = MeshInstance3D.new()
+	bottom_instance.mesh = bottom_cylinder
+	bottom_instance.set_surface_override_material(0, glass_material)
+	bottom_instance.position = Vector3(0, -petri_dish_thickness/2, 0)
+	bottom_instance.name = "PetriDishBottom"
+	petri_dish_container.add_child(bottom_instance)
+	
+	# Create the side walls (outer ring)
+	var wall_cylinder = CylinderMesh.new()
+	wall_cylinder.top_radius = petri_dish_radius
+	wall_cylinder.bottom_radius = petri_dish_radius
+	wall_cylinder.height = petri_dish_height
+	
+	var wall_instance = MeshInstance3D.new()
+	wall_instance.mesh = wall_cylinder
+	wall_instance.set_surface_override_material(0, glass_material)
+	wall_instance.position = Vector3(0, petri_dish_height/2, 0)
+	wall_instance.name = "PetriDishWalls"
+	petri_dish_container.add_child(wall_instance)
+	
+	# Create inner walls (to make it look hollow)
+	var inner_wall_cylinder = CylinderMesh.new()
+	inner_wall_cylinder.top_radius = petri_dish_radius - petri_dish_thickness
+	inner_wall_cylinder.bottom_radius = petri_dish_radius - petri_dish_thickness
+	inner_wall_cylinder.height = petri_dish_height - petri_dish_thickness
+	
+	var inner_wall_instance = MeshInstance3D.new()
+	inner_wall_instance.mesh = inner_wall_cylinder
+	# Create inverted material for inner walls
+	var inner_material = glass_material.duplicate()
+	inner_material.cull_mode = BaseMaterial3D.CULL_FRONT  # Render from inside
+	inner_wall_instance.set_surface_override_material(0, inner_material)
+	inner_wall_instance.position = Vector3(0, (petri_dish_height - petri_dish_thickness)/2, 0)
+	inner_wall_instance.name = "PetriDishInnerWalls"
+	petri_dish_container.add_child(inner_wall_instance)
+	
+	# Add some subtle lighting enhancement around the dish
+	var area_light = OmniLight3D.new()
+	area_light.light_energy = 0.4
+	area_light.light_color = Color(1.0, 0.85, 0.95)  # Pink-tinted light
+	area_light.omni_range = petri_dish_radius * 2.5
+	area_light.position = Vector3(0, petri_dish_height + 0.8, 0)
+	area_light.name = "PetriDishLight"
+	petri_dish_container.add_child(area_light)
+	
+	print("BubblesRandom: Created petri dish with radius %.1f and height %.1f" % [petri_dish_radius, petri_dish_height])
 
 func spawn_bubble():
 	# Create a random position within the spawn area
