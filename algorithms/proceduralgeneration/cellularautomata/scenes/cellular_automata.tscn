@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm7sauucsn1es"]
+
+[ext_resource type="Script" uid="uid://cba6t05qqgyxc" path="res://algorithms/proceduralgeneration/cellularautomata/scripts/cellular_automata.gd" id="1_oq2nr"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4xsfj"]
+
+[node name="CellularAutomata" type="Node3D"]
+script = ExtResource("1_oq2nr")
+
+[node name="AutomataPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, -0.129436)
+mesh = SubResource("QuadMesh_4xsfj")

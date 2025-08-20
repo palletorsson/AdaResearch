@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btlkpkg6dvf3d"]
+
+[ext_resource type="Script" uid="uid://dss2jhldf28fc" path="res://algorithms/proceduralgeneration/treegen/gen_tree.gd" id="1_7mriu"]
+
+[node name="GenTree" type="Node3D"]
+script = ExtResource("1_7mriu")
