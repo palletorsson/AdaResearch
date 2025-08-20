@@ -1,0 +1,271 @@
+[gd_scene load_steps=7 format=3 uid="uid://3dy7os2yscx"]
+
+[ext_resource type="Script" uid="uid://di58lda6qi44r" path="res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.gd" id="1_sculpture"]
+
+[sub_resource type="Environment" id="Environment_surreal"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.4, 0.5, 1)
+ambient_light_energy = 0.4
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.2
+fog_enabled = true
+fog_light_color = Color(0.3, 0.3, 0.4, 1)
+fog_light_energy = 0.5
+fog_sun_scatter = 0.1
+fog_density = 0.005
+fog_aerial_perspective = 0.2
+fog_sky_affect = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.7, 0.7, 0.8, 1)
+volumetric_fog_emission = Color(0.1, 0.1, 0.15, 1)
+volumetric_fog_emission_energy = 0.3
+volumetric_fog_gi_inject = 0.5
+volumetric_fog_anisotropy = 0.1
+volumetric_fog_length = 30.0
+volumetric_fog_ambient_inject = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.3
+roughness = 0.8
+clearcoat_enabled = true
+clearcoat = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_viewing"]
+radius = 1.0
+
+[node name="SurrealKineticSculpture" type="Node3D"]
+script = ExtResource("1_sculpture")
+sculpture_scale = 1.2
+piston_speed_multiplier = 0.8
+color_intensity = 1.4
+organic_distortion = 1.0
+rotation_speeds = Array[float]([0.4, 0.6, 0.35])
+piston_amplitudes = Array[float]([2.2, 1.8, 2.6])
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_surreal")
+
+[node name="Gallery" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Gallery"]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Gallery/Floor"]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -2, 0)
+material_override = SubResource("StandardMaterial3D_floor")
+mesh = SubResource("BoxMesh_floor")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Gallery/Floor"]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -2, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MainLighting" type="Node3D" parent="."]
+
+[node name="KeyLight" type="DirectionalLight3D" parent="MainLighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 3, 8, 3)
+light_color = Color(0.95, 0.95, 1, 1)
+shadow_enabled = true
+shadow_bias = 0.03
+shadow_normal_bias = 1.0
+shadow_blur = 2.0
+
+[node name="RimLight" type="DirectionalLight3D" parent="MainLighting"]
+transform = Transform3D(-0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, -3, 6, -3)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.4
+
+[node name="FillLight" type="OmniLight3D" parent="MainLighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
+light_color = Color(1, 0.95, 0.9, 1)
+light_energy = 0.3
+omni_range = 15.0
+omni_attenuation = 0.5
+
+[node name="SpotAccent" type="SpotLight3D" parent="MainLighting"]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 6, 10, 6)
+light_color = Color(1, 1, 0.9, 1)
+light_energy = 0.8
+spot_range = 20.0
+spot_angle = 35.0
+spot_angle_attenuation = 2.0
+
+[node name="ViewingCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.766044, -0.34202, 0.54464, 0, 0.848048, 0.529919, -0.642788, -0.405956, 0.649448, 8, 6, 10)
+near = 0.3
+far = 100.0
+
+[node name="VRViewpoint" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 5)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="VRViewpoint"]
+
+[node name="LeftController" type="XRController3D" parent="VRViewpoint"]
+tracker = &"left_hand"
+
+[node name="RightController" type="XRController3D" parent="VRViewpoint"]
+tracker = &"right_hand"
+
+[node name="InteractionZones" type="Node3D" parent="."]
+
+[node name="ViewingZone1" type="Area3D" parent="InteractionZones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0)
+
+[node name="ViewingCollision1" type="CollisionShape3D" parent="InteractionZones/ViewingZone1"]
+shape = SubResource("SphereShape3D_viewing")
+
+[node name="ViewingZone2" type="Area3D" parent="InteractionZones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 6.93)
+
+[node name="ViewingCollision2" type="CollisionShape3D" parent="InteractionZones/ViewingZone2"]
+shape = SubResource("SphereShape3D_viewing")
+
+[node name="ViewingZone3" type="Area3D" parent="InteractionZones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -6.93)
+
+[node name="ViewingCollision3" type="CollisionShape3D" parent="InteractionZones/ViewingZone3"]
+shape = SubResource("SphereShape3D_viewing")
+
+[node name="SculptureInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="InfoPanel" type="Panel" parent="SculptureInfo"]
+modulate = Color(0, 0, 0, 0.7)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoText" type="RichTextLabel" parent="SculptureInfo/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[b]🎨 Surreal Kinetic Sculpture[/b]
+[i]Inspired by Satterwhite, Tanguy & de Saint Phalle[/i]
+
+[color=gray]• 3 Black Tanguy Pistons/Rotors
+• Colorful Niki de Saint Phalle Forms
+• Dynamic Forward/Backward Motion
+• Biomechanical Surrealism[/color]
+
+[b]Motion Parameters:[/b]
+[color=yellow]Speed: 0.8x | Scale: 1.2x
+Organic Distortion: 100%[/color]
+
+[b]VR Controls:[/b]
+[color=cyan]• Walk around sculpture
+• Observe kinetic motion
+• Experience scale & presence[/color]"
+
+[node name="AudioSystem" type="Node3D" parent="."]
+
+[node name="AmbientDrone" type="AudioStreamPlayer3D" parent="AudioSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+max_distance = 30.0
+
+[node name="MechanicalSounds" type="Node3D" parent="AudioSystem"]
+
+[node name="PistonSound1" type="AudioStreamPlayer3D" parent="AudioSystem/MechanicalSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)
+unit_size = 3.0
+max_distance = 15.0
+
+[node name="PistonSound2" type="AudioStreamPlayer3D" parent="AudioSystem/MechanicalSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 3.46)
+unit_size = 3.0
+max_distance = 15.0
+
+[node name="PistonSound3" type="AudioStreamPlayer3D" parent="AudioSystem/MechanicalSounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -3.46)
+unit_size = 3.0
+max_distance = 15.0
+
+[node name="AnimationManager" type="AnimationPlayer" parent="."]
+
+[node name="DebugControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="DebugPanel" type="Panel" parent="DebugControls"]
+modulate = Color(0, 0, 0, 0.6)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugVBox" type="VBoxContainer" parent="DebugControls/DebugPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugLabel" type="Label" parent="DebugControls/DebugPanel/DebugVBox"]
+layout_mode = 2
+text = "🔧 Debug Controls"
+horizontal_alignment = 1
+
+[node name="SpeedSlider" type="HSlider" parent="DebugControls/DebugPanel/DebugVBox"]
+layout_mode = 2
+min_value = 0.1
+max_value = 3.0
+step = 0.1
+value = 0.8
+
+[node name="SpeedLabel" type="Label" parent="DebugControls/DebugPanel/DebugVBox"]
+layout_mode = 2
+text = "Speed: 0.8x"
+horizontal_alignment = 1
+
+[node name="ScaleSlider" type="HSlider" parent="DebugControls/DebugPanel/DebugVBox"]
+layout_mode = 2
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.2
+
+[node name="ScaleLabel" type="Label" parent="DebugControls/DebugPanel/DebugVBox"]
+layout_mode = 2
+text = "Scale: 1.2x"
+horizontal_alignment = 1

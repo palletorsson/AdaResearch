@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvdn6omga8nrg"]
+
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="1_ro53j"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_5upju"]
+[ext_resource type="PackedScene" uid="uid://ckua8mtup1ybl" path="res://commons/context/agnesnatringrid/agnes_grid_3d.tscn" id="5_ro53j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s42ox"]
+margin = 0.01
+size = Vector3(0.521136, 0.1, 0.445532)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wbnq4"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="GrabableAgnes" type="Node3D"]
+
+[node name="GrabCube" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_ro53j")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040619, 0, 0.00499266)
+shape = SubResource("BoxShape3D_s42ox")
+
+[node name="HighlightRing" parent="GrabCube" instance=ExtResource("4_5upju")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube"]
+visible = false
+mesh = SubResource("BoxMesh_wbnq4")
+
+[node name="agnesGrid3d" parent="GrabCube" instance=ExtResource("5_ro53j")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

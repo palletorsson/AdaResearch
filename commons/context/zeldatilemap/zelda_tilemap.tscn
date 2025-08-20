@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b252pmenv8t8f"]
+
+[ext_resource type="Script" uid="uid://co701tn6d37dg" path="res://commons/context/zeldatilemap/zelda_tilemap.gd" id="1_itybg"]
+
+[node name="ZeldaTilemap" type="Node3D"]
+script = ExtResource("1_itybg")

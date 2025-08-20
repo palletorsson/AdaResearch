@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvw8y7m4k2h"]
+
+[ext_resource type="Script" uid="uid://dp7wahyrgfrap" path="res://algorithms/alternativegeometries/organicspace/organic_space.gd" id="1_0x8v2"]
+
+[sub_resource type="Environment" id="Environment_1hjkl"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.6, 0.8, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.1
+fog_enabled = true
+fog_light_color = Color(0.5, 0.6, 0.8, 1)
+volumetric_fog_enabled = true
+
+[node name="OrganicVRSpace" type="Node3D"]
+script = ExtResource("1_0x8v2")
+space_size = Vector3(25, 18, 25)
+organic_strength = 0.9
+tunnel_complexity = 6
+material_variety = 5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1hjkl")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 12)
+fov = 85.0
+near = 0.1
+far = 100.0
+
+[node name="FallbackLighting" type="Node3D" parent="."]
+
+[node name="PrimaryLight" type="DirectionalLight3D" parent="FallbackLighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.4
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="FallbackLighting"]
+transform = Transform3D(-0.707107, -0.5, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.5, -0.5, 0, 10, 0)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.2
+
+[node name="RimLight" type="DirectionalLight3D" parent="FallbackLighting"]
+transform = Transform3D(0, 0, 1, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 5, 0)
+light_color = Color(1, 0.9, 0.8, 1)
+light_energy = 0.15

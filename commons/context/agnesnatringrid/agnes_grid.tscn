@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://srq7u85s1v40"]
+
+[ext_resource type="Script" uid="uid://bucrlveqfrhav" path="res://commons/context/agnesnatringrid/agnes_grid.gd" id="1_atsgh"]
+
+[node name="agnes_grid" type="Node2D"]
+script = ExtResource("1_atsgh")
+grid_margin = Vector2(1, 1)

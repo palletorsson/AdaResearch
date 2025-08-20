@@ -43,7 +43,7 @@ size = Vector3(0.126328, 0.0757446, 0.10495)
 size = Vector3(0.118164, 0.102966, 0.12796)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qiixw"]
-size = Vector3(5.63313, 1, 8.79502)
+size = Vector3(2.88065, 0.12793, 2.54959)
 
 [node name="Base" instance=ExtResource("1_v5jw7")]
 
@@ -120,7 +120,8 @@ text = "Base "
 script = ExtResource("12_qiixw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106468, -1.16828, 0.225899)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.436035, 1.32355)
 shape = SubResource("BoxShape3D_qiixw")

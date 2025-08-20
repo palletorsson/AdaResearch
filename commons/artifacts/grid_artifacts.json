@@ -466,8 +466,221 @@
 		"lookup_name": "random_space",
 		"description": "A crystal that contains mathematical chaos algorithms", 
 		"scene": "res://commons/context/walkgrids/random_space.tscn",
-		"position": [0.0, 1.0, 0.0],
+		"position": [0.0, 1.0, 0.0], 
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "randomness_exploration"
 	},
+	"fourier_transform": {
+		"name": "Fourier Transform",
+		"lookup_name": "fourier_transform",
+		"description": "Frequency domain analysis and signal processing",
+		"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
+		"position": [0.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"spectral_analyzer": {
+		"name": "Spectral Analyzer",
+		"lookup_name": "spectral_analyzer",
+		"description": "Real-time audio frequency spectrum visualization",
+		"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
+		"position": [1.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"unit_circle": {
+		"name": "Unit Circle",
+		"lookup_name": "unit_circle",
+		"description": "Trigonometric functions visualization on unit circle",
+		"scene": "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn",
+		"position": [2.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"tech_noir_audio": {
+		"name": "Tech Noir Audio",
+		"lookup_name": "tech_noir_audio",
+		"description": "John Cage inspired algorithmic audio composition",
+		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+		"position": [3.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"resonance_frequencies": {
+		"name": "Resonance Frequencies",
+		"lookup_name": "resonance_frequencies",
+		"description": "Visualization of resonant frequency patterns",
+		"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
+		"position": [4.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"noir_sequencer": {
+		"name": "Noir Sequencer",
+		"lookup_name": "noir_sequencer",
+		"description": "Film noir style algorithmic music sequencer",
+		"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
+		"position": [5.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"kusama_sine": {
+		"name": "Kusama Sine",
+		"lookup_name": "kusama_sine",
+		"description": "Yayoi Kusama inspired sine wave patterns",
+		"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
+		"position": [6.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"bernini_columns": {
+		"name": "Bernini Columns",
+		"lookup_name": "bernini_columns",
+		"description": "Baroque architectural wave patterns",
+		"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+		"position": [7.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"fourier_transform_advanced": {
+		"name": "Advanced Fourier Transform",
+		"lookup_name": "fourier_transform_advanced",
+		"description": "Enhanced frequency domain signal analysis",
+		"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
+		"position": [0.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"parametric_shapes": {
+		"name": "Parametric Shapes",
+		"lookup_name": "parametric_shapes",
+		"description": "Mathematical curve and surface generation",
+		"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
+		"position": [1.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"sine_space": {
+		"name": "Sine Space",
+		"lookup_name": "sine_space",
+		"description": "3D sine wave spatial exploration",
+		"scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
+		"position": [2.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"standing_waves": {
+		"name": "Standing Waves",
+		"lookup_name": "standing_waves",
+		"description": "Stationary wave pattern visualization",
+		"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
+		"position": [3.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"unit_circle_advanced": {
+		"name": "Advanced Unit Circle",
+		"lookup_name": "unit_circle_advanced",
+		"description": "Enhanced trigonometric visualization",
+		"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+		"position": [4.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	"wave_interference": {
+		"name": "Wave Interference",
+		"lookup_name": "wave_interference",
+		"description": "Superposition and interference patterns",
+		"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+		"position": [5.0, 1.0, 5.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+			"wave_propagation_3d": {
+			"name": "3D Wave Propagation",
+			"lookup_name": "wave_propagation_3d",
+			"description": "Three-dimensional wave dynamics simulation",
+			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
+			"position": [6.0, 1.0, 5.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "wavefunction_exploration"
+		},
+		"boid_flocking": {
+			"name": "Boid Flocking",
+			"lookup_name": "boid_flocking",
+			"description": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
+			"scene": "res://algorithms/emergentsystems/boidflocking/boids_explained.tscn",
+			"position": [0.0, 1.0, 6.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "emergent_systems_exploration"
+		},
+		"ecosystem_simulation": {
+			"name": "Ecosystem Simulation",
+			"lookup_name": "ecosystem_simulation",
+			"description": "Predator-prey ecosystem dynamics with emergent population behaviors",
+			"scene": "res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+			"position": [1.0, 1.0, 6.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "emergent_systems_exploration"
+		},
+		"ecosystem_simulation_2": {
+			"name": "Advanced Ecosystem Simulation",
+			"lookup_name": "ecosystem_simulation_2",
+			"description": "Complex ecosystem with morphology generation, resource systems, and relationship networks",
+			"scene": "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn",
+			"position": [2.0, 1.0, 6.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "emergent_systems_exploration"
+		},
+		"self_organizing_patterns": {
+			"name": "Self-Organizing Patterns",
+			"lookup_name": "self_organizing_patterns",
+			"description": "Emergent pattern formation through self-organization principles",
+			"scene": "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
+			"position": [3.0, 1.0, 6.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "emergent_systems_exploration"
+		},
 	"sine_space": {
 		"name": "sine_space",
 		"lookup_name": "sine_space",
@@ -589,6 +802,144 @@
 			"sequence": null,
 			"artifact_type": "reward",
 			"prerequisites": ["advanced_concepts"]
+		},
+		"mondrian_2d": {
+			"name": "Mondrian 2D Canvas",
+			"lookup_name": "mondrian_2d",
+			"description": "A classic Mondrian composition rendered in 2D with geometric precision and De Stijl color palette",
+			"scene": "res://commons/context/mondrian2d/mondrian_2d.tscn",
+			"position": [0.0, 1.5, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "examine",
+			"sequence": "geometric_algorithms",
+			"artifact_type": "artistic_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"mondrian_3d_display": {
+			"name": "Mondrian 3D Display",
+			"lookup_name": "mondrian_3d_display",
+			"description": "3D representation of Mondrian compositions with depth and spatial presentation",
+			"scene": "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
+			"position": [2.0, 1.5, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "geometric_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 1.0, 0.9],
+				"light_intensity": 1.2,
+				"light_range": 3.0,
+				"light_position": [0, 1.0, 1.0]
+			}
+		},
+		"grabable_mondrian": {
+			"name": "Grabable Mondrian",
+			"lookup_name": "grabable_mondrian",
+			"description": "Interactive Mondrian composition that can be picked up, manipulated, and examined in VR space",
+			"scene": "res://commons/context/mondrian2d/grabable_mondrian.tscn",
+			"position": [-2.0, 1.2, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "pickup_and_examine",
+			"sequence": "geometric_algorithms",
+			"artifact_type": "interactive_art",
+			"prerequisites": ["array_tutorial"],
+			"interaction_properties": {
+				"can_grab": true,
+				"can_scale": true,
+				"can_rotate": true,
+				"physics_enabled": true
+			}
+		},
+		"bucket_of_tulips": {
+			"name": "Bucket of Tulips",
+			"lookup_name": "bucket_of_tulips",
+			"description": "A charming metal bucket filled with colorful tulips, bringing natural beauty and algorithmic growth patterns to the laboratory space",
+			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
+			"position": [3.0, 1.0, -2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "pickup_and_examine",
+			"sequence": null,
+			"artifact_type": "decorative",
+			"prerequisites": [],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.95, 0.8],
+				"light_intensity": 0.8,
+				"light_range": 2.5,
+				"light_position": [0, 1.5, 0]
+			},
+			"aesthetic_properties": {
+				"natural_element": true,
+				"color_palette": ["red", "yellow", "pink", "white", "purple"],
+				"brings_life_to_space": true,
+				"organic_contrast": "provides organic contrast to geometric algorithms"
+			}
+		},
+		"organic_space": {
+			"name": "Organic Space",
+			"lookup_name": "organic_space",
+			"description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
+			"scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+			"position": [4.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "alternative_geometries",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 1.0, 0.9],
+				"light_intensity": 1.0,
+				"light_range": 4.0,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		"rhizomatic_maze_space": {
+			"name": "Rhizomatic Maze Space",
+			"lookup_name": "rhizomatic_maze_space",
+			"description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
+			"scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+			"position": [5.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "alternative_geometries",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.9, 0.7, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 4.5,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		"surreal_kinetic_sculpture": {
+			"name": "Surreal Kinetic Sculpture",
+			"lookup_name": "surreal_kinetic_sculpture",
+			"description": "A mesmerizing physics-based sculpture that defies gravity and conventional motion, creating dreamlike movements and impossible geometries through advanced physics simulation",
+			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
+			"position": [6.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.6],
+				"light_intensity": 1.5,
+				"light_range": 5.0,
+				"light_position": [0, 2.0, 0]
+			}
 		}
 	},
 	

@@ -5,6 +5,3 @@
 
 [node name="CubeWithShader" instance=ExtResource("1_m3k8j")]
 script = ExtResource("2_p9n7k")
-
-[node name="Camera3D" parent="." index="1"]
-transform = Transform3D(0.864398, 0, -0.502809, 0, 1, 0, 0.502809, 0, 0.864398, -0.984191, 0.739279, 2.52719)

@@ -1,0 +1,203 @@
+[gd_scene load_steps=6 format=3 uid="uid://px3w0bbdrcc7"]
+
+[ext_resource type="Script" uid="uid://lqon82gu4bxv" path="res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd" id="1_r5x8k"]
+
+[sub_resource type="Environment" id="Environment_2mklj"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.4, 0.6, 1)
+ambient_light_energy = 0.25
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.6
+glow_strength = 0.8
+glow_bloom = 0.05
+fog_enabled = true
+fog_light_color = Color(0.4, 0.5, 0.7, 1)
+fog_light_energy = 0.8
+fog_density = 0.008
+fog_aerial_perspective = 0.1
+fog_sky_affect = 0.8
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.8, 0.9, 1, 1)
+volumetric_fog_emission = Color(0.1, 0.2, 0.4, 1)
+volumetric_fog_emission_energy = 0.5
+volumetric_fog_gi_inject = 0.8
+volumetric_fog_anisotropy = 0.3
+volumetric_fog_length = 50.0
+volumetric_fog_detail_spread = 3.0
+volumetric_fog_ambient_inject = 0.2
+volumetric_fog_sky_affect = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nav"]
+transparency = 1
+albedo_color = Color(0.2, 0.8, 1, 0.7)
+emission_enabled = true
+emission = Color(0.1, 0.4, 0.8, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_center"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_boundary"]
+radius = 1.0
+height = 2.0
+
+[node name="RhizomaticMazeSpace" type="Node3D"]
+script = ExtResource("1_r5x8k")
+maze_size = Vector3(50, 25, 50)
+path_width = 3.0
+branch_probability = 0.8
+connection_probability = 0.5
+vertical_layers = 4
+organic_distortion = 1.2
+generation_seed = 42
+growth_iterations = 250
+merge_threshold = 7.0
+chamber_probability = 0.2
+deadend_pruning = 0.25
+tunnel_segments = 12
+surface_detail_level = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2mklj")
+
+[node name="TestCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 15, 20, 30)
+fov = 90.0
+near = 0.2
+far = 200.0
+
+[node name="MazeLighting" type="Node3D" parent="."]
+
+[node name="KeyLight" type="DirectionalLight3D" parent="MazeLighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.6
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+
+[node name="FillLight" type="DirectionalLight3D" parent="MazeLighting"]
+transform = Transform3D(-0.5, -0.707107, -0.5, 0, 0.707107, -0.707107, 0.707107, -0.353553, -0.353553, 0, 10, 0)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.3
+
+[node name="AccentLights" type="Node3D" parent="MazeLighting"]
+
+[node name="AccentLight1" type="OmniLight3D" parent="MazeLighting/AccentLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 8, 20)
+light_color = Color(1, 0.6, 0.8, 1)
+light_energy = 0.4
+omni_range = 25.0
+omni_attenuation = 0.5
+
+[node name="AccentLight2" type="OmniLight3D" parent="MazeLighting/AccentLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 8, -20)
+light_color = Color(0.6, 0.8, 1, 1)
+light_energy = 0.4
+omni_range = 25.0
+omni_attenuation = 0.5
+
+[node name="AccentLight3" type="OmniLight3D" parent="MazeLighting/AccentLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 25)
+light_color = Color(0.8, 1, 0.6, 1)
+light_energy = 0.35
+omni_range = 20.0
+omni_attenuation = 0.6
+
+[node name="AccentLight4" type="OmniLight3D" parent="MazeLighting/AccentLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5, -15)
+light_color = Color(1, 0.8, 0.4, 1)
+light_energy = 0.3
+omni_range = 18.0
+omni_attenuation = 0.7
+
+[node name="NavigationHelpers" type="Node3D" parent="."]
+
+[node name="CenterMarker" type="MeshInstance3D" parent="NavigationHelpers"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_nav")
+mesh = SubResource("SphereMesh_center")
+
+[node name="BoundaryMarkers" type="Node3D" parent="NavigationHelpers"]
+
+[node name="BoundaryNorth" type="MeshInstance3D" parent="NavigationHelpers/BoundaryMarkers"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 2, 25)
+material_override = SubResource("StandardMaterial3D_nav")
+mesh = SubResource("SphereMesh_boundary")
+
+[node name="BoundarySouth" type="MeshInstance3D" parent="NavigationHelpers/BoundaryMarkers"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 2, -25)
+material_override = SubResource("StandardMaterial3D_nav")
+mesh = SubResource("SphereMesh_boundary")
+
+[node name="BoundaryEast" type="MeshInstance3D" parent="NavigationHelpers/BoundaryMarkers"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 25, 2, 0)
+material_override = SubResource("StandardMaterial3D_nav")
+mesh = SubResource("SphereMesh_boundary")
+
+[node name="BoundaryWest" type="MeshInstance3D" parent="NavigationHelpers/BoundaryMarkers"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -25, 2, 0)
+material_override = SubResource("StandardMaterial3D_nav")
+mesh = SubResource("SphereMesh_boundary")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioSystem" type="Node3D" parent="."]
+
+[node name="AmbientAudio" type="AudioStreamPlayer3D" parent="AudioSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+unit_size = 50.0
+max_distance = 100.0
+
+[node name="DebugInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -120.0
+offset_right = 400.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="InfoPanel" type="Panel" parent="DebugInfo"]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoText" type="RichTextLabel" parent="DebugInfo/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[b]🌿 Rhizomatic Maze Space[/b]
+[color=gray]Generating organic tunnel network...[/color]
+
+[b]Parameters:[/b]
+• Size: 50×25×50 units
+• Growth Iterations: 250
+• Branch Probability: 80%
+• Vertical Layers: 4
+
+[b]Navigation:[/b]
+• Mouse + Drag: Rotate view
+• Scroll: Zoom in/out
+• WASD: Move camera"
+fit_content = true

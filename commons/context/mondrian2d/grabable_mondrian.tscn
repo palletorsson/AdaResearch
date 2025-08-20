@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b126l7nkyr40b"]
+
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_phsub"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="5_fohcb"]
+[ext_resource type="PackedScene" uid="uid://ci0dy7i3mn2pb" path="res://commons/context/mondrian2d/mondrian_2d.tscn" id="6_j4f18"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s42ox"]
+margin = 0.01
+size = Vector3(0.521136, 0.1, 0.445532)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wbnq4"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="GrabMondrian" type="Node3D"]
+
+[node name="GrabCube" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("2_phsub")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040619, 0, 0.00499266)
+shape = SubResource("BoxShape3D_s42ox")
+
+[node name="Mondrian2d" parent="GrabCube" instance=ExtResource("6_j4f18")]
+transform = Transform3D(0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, 0, 0, 0)
+sprite3d_y_position = 1.0
+
+[node name="HighlightRing" parent="GrabCube" instance=ExtResource("5_fohcb")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube"]
+visible = false
+mesh = SubResource("BoxMesh_wbnq4")
+
+[connection signal="dropped" from="GrabCube" to="GrabCube/Mondrian2d" method="_on_grab_cube_dropped"]
+[connection signal="grabbed" from="GrabCube" to="GrabCube/Mondrian2d" method="_on_grab_cube_grabbed"]

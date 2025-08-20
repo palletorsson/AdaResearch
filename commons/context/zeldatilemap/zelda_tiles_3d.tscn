@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://quk8u6aadchq"]
+
+[ext_resource type="PackedScene" uid="uid://bx822smtdwbpm" path="res://commons/context/zeldatilemap/zelda_tilemap_2d.tscn" id="1_5ty6y"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_h27wg"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_k6kni"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ysrvx"]
+margin = 0.01
+size = Vector3(0.503879, 0.1, 0.495924)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbx64"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2jjy0"]
+viewport_path = NodePath("SubViewport")
+
+[node name="ZeldaGrid3d" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ZeldaTilemap2d" parent="SubViewport" instance=ExtResource("1_5ty6y")]
+
+[node name="GrabCube" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("2_h27wg")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000334129, 0, -0.00666121)
+shape = SubResource("BoxShape3D_ysrvx")
+
+[node name="HighlightRing" parent="GrabCube" instance=ExtResource("4_k6kni")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube"]
+visible = false
+mesh = SubResource("BoxMesh_jbx64")
+
+[node name="Sprite3D" type="Sprite3D" parent="GrabCube"]
+transform = Transform3D(-0.1, 1.50996e-08, -6.60024e-16, 0, -4.37114e-09, -0.1, -1.50996e-08, -0.1, 4.37114e-09, 0, 0, 0)
+texture = SubResource("ViewportTexture_2jjy0")

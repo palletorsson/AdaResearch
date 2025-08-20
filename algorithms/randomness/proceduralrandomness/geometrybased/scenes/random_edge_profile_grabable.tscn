@@ -7,23 +7,10 @@
 script = ExtResource("1_t68sp")
 label_text = "Th"
 
-[node name="GrabPaper" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
-script = null
-
-[node name="RandomEdgeProfile" parent="GrabPaper" instance=ExtResource("4_jql3c")]
+[node name="GrabPaper#RandomEdgeProfile" parent="." instance=ExtResource("4_jql3c")]
 transform = Transform3D(-4.37114e-09, 4.37114e-09, -0.1, 0.1, -4.37114e-09, -4.37114e-09, -4.37114e-09, -0.1, -4.37114e-09, 1.89543e-05, -0.00338142, -0.031236)
 
-[node name="id_info_Label3D" type="Label3D" parent="GrabPaper"]
+[node name="GrabPaper#id_info_Label3D" type="Label3D" parent="."]
 transform = Transform3D(0.1, -2.64699e-24, 0, 0, -4.37114e-09, 0.1, 2.64698e-23, -0.1, -4.37114e-09, -0.0939793, 0.031674, 0.0807338)
 text = "id: 0001 - simpel random walk "
 font_size = 20
