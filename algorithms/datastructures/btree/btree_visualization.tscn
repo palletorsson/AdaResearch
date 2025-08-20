@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bl3h8n9m4kqty"]
 
-[ext_resource type="Script" path="res://datastructures/btree/btree_visualization.gd" id="1_btree_script"]
+[ext_resource type="Script" path="res://algorithms/datastructures/btree/btree_visualization.gd" id="1_btree_script"]
 
 [sub_resource type="Environment" id="Environment_btree"]
 background_mode = 1
@@ -21,7 +21,7 @@ size = Vector3(20, 0.1, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_database"]
 albedo_color = Color(0.2, 0.4, 0.3, 0.5)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 emission_enabled = true
 emission = Color(0.1, 0.2, 0.15, 1)
 
@@ -32,7 +32,7 @@ height = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_index"]
 albedo_color = Color(0.6, 0.4, 0.2, 0.8)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 emission_enabled = true
 emission = Color(0.3, 0.2, 0.1, 1)
 

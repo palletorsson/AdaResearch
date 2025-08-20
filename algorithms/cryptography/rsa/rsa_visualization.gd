@@ -234,7 +234,7 @@ func is_prime(n: int) -> bool:
 	var d = n - 1
 	var r = 0
 	while d % 2 == 0:
-		d //= 2
+		d = d / 2
 		r += 1
 	
 	# Perform Miller-Rabin test

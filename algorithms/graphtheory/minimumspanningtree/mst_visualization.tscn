@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3kr9xm8qw2ty"]
 
-[ext_resource type="Script" path="res://graphtheory/minimumspanningtree/mst_visualization.gd" id="1_mst_script"]
+[ext_resource type="Script" path="res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd" id="1_mst_script"]
 
 [sub_resource type="Environment" id="Environment_mst"]
 background_mode = 1
@@ -23,7 +23,7 @@ height = 20
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axis"]
 albedo_color = Color(0.3, 0.4, 0.5, 0.4)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_origin"]
 radius = 0.1

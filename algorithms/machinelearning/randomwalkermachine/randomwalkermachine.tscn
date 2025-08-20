@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://egpmsmxo2c7k"]
+
+[ext_resource type="Script" uid="uid://d4hfo7p6rfywb" path="res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.gd" id="1_fy2po"]
+
+[node name="Randomwalkermachine" type="Node3D"]
+script = ExtResource("1_fy2po")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.339625, 0.940561, 0, -0.940561, 0.339625, 0, 15.8137, 2.5441)

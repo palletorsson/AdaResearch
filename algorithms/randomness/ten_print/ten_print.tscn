@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b9x8k7v6m4nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://cax8k7v6m4nqr"]
 
-[ext_resource type="Script" path="res://algorithms/randomness/ten_print/TenPrint.gd" id="1_ten_print"]
+[ext_resource type="Script" uid="uid://bc7qyjbgiv1gs" path="res://algorithms/randomness/ten_print/TenPrint.gd" id="1_ten_print"]
 
 [node name="TenPrint" type="Node3D"]
 script = ExtResource("1_ten_print")
@@ -18,8 +18,6 @@ light_energy = 1.2
 
 [node name="ProbabilityControl" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -4, 0)
-top_radius = 0.3
-bottom_radius = 0.3
 height = 1.0
 
 [node name="GenerationSpeed" type="CSGBox3D" parent="."]

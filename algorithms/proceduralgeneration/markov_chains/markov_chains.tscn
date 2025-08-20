@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxr"]
 
-[ext_resource type="Script" path="res://algorithms/ProceduralGeneration/markov_chains/MarkovChains.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dpx40stberga" path="res://algorithms/proceduralgeneration/markov_chains/MarkovChains.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.2, 0.2, 0.2, 1)
@@ -11,13 +11,13 @@ roughness = 0.2
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
 emission = Color(0.2, 0.8, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
 emission = Color(0.8, 0.2, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [node name="MarkovChains" type="Node3D"]
 script = ExtResource("1_script")
@@ -30,7 +30,6 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 light_energy = 1.5
 
 [node name="StateSpace" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="States" type="Node3D" parent="StateSpace"]
 
@@ -39,36 +38,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 [node name="CurrentState" type="Node3D" parent="StateSpace"]
 
 [node name="StateLabel" type="CSGBox3D" parent="StateSpace"]
-size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.3, 0.3)
 
 [node name="GenerationEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="EngineCore" type="CSGBox3D" parent="GenerationEngine"]
-size = Vector3(3, 3, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(3, 3, 3)
 
 [node name="EngineLabel" type="CSGBox3D" parent="GenerationEngine"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="ChainMethods" type="Node3D" parent="GenerationEngine"]
 
 [node name="TextGenerationCore" type="CSGSphere3D" parent="GenerationEngine/ChainMethods"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="MusicGenerationCore" type="CSGSphere3D" parent="GenerationEngine/ChainMethods"]
-radius = 0.5
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="PatternGenerationCore" type="CSGSphere3D" parent="GenerationEngine/ChainMethods"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
@@ -76,13 +71,13 @@ material_override = SubResource("StandardMaterial3D_3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 
 [node name="MatrixCore" type="CSGBox3D" parent="ProbabilityMatrix"]
-size = Vector3(3, 3, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(3, 3, 3)
 
 [node name="MatrixLabel" type="CSGBox3D" parent="ProbabilityMatrix"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="ProbabilityValues" type="Node3D" parent="ProbabilityMatrix"]
 
@@ -90,13 +85,13 @@ material_override = SubResource("StandardMaterial3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="SequenceCore" type="CSGBox3D" parent="GeneratedSequence"]
-size = Vector3(8, 0.5, 2)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(8, 0.5, 2)
 
 [node name="SequenceLabel" type="CSGBox3D" parent="GeneratedSequence"]
-size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.3, 0.3)
 
 [node name="SequenceElements" type="Node3D" parent="GeneratedSequence"]
 
@@ -106,25 +101,25 @@ material_override = SubResource("StandardMaterial3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="EntropyBase" type="CSGBox3D" parent="MarkovMetrics/EntropyMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="EntropyIndicator" type="CSGSphere3D" parent="MarkovMetrics/EntropyMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="ConvergenceMeter" type="Node3D" parent="MarkovMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="ConvergenceBase" type="CSGBox3D" parent="MarkovMetrics/ConvergenceMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="ConvergenceIndicator" type="CSGSphere3D" parent="MarkovMetrics/ConvergenceMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
 

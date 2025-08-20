@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwq0sahysj06c"]
+
+[ext_resource type="PackedScene" uid="uid://c6h2wjm2fvjsv" path="res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn" id="1_l6bsy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MirroredCellularAutomata" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="MirroredCellularAutomata" parent="SubViewport" instance=ExtResource("1_l6bsy")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.374844)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.200729, 0.200192, 0.0334181)
+texture = SubResource("ViewportTexture_btd14")

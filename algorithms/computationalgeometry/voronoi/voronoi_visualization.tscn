@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cn4k7m8j2pqxr"]
 
-[ext_resource type="Script" path="res://computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
+[ext_resource type="Script" path="res://algorithms/computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
 
 [sub_resource type="Environment" id="Environment_voronoi"]
 background_mode = 1
@@ -21,7 +21,7 @@ size = Vector3(22, 0.05, 17)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diagram"]
 albedo_color = Color(0.2, 0.3, 0.4, 0.6)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 emission_enabled = true
 emission = Color(0.1, 0.15, 0.2, 1)
 
@@ -32,7 +32,7 @@ height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_territory"]
 albedo_color = Color(0.7, 0.4, 0.3, 0.8)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 emission_enabled = true
 emission = Color(0.35, 0.2, 0.15, 1)
 

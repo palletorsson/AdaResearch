@@ -4,3 +4,6 @@
 
 [node name="SlimeTubes" type="Node3D"]
 script = ExtResource("1_w6n2l")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.756402, 0.654107, 0, -0.654107, 0.756402, 0, 0.831484, 1.36551)

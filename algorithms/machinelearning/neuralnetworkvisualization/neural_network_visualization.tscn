@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1mpnr2ny8l5u"]
+
+[ext_resource type="Script" uid="uid://dl7hnn82ih02" path="res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd" id="1_neural"]
+
+[node name="NeuralNetworkVisualization" type="Node3D"]
+script = ExtResource("1_neural")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+near = 0.01

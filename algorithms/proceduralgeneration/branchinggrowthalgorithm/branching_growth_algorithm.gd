@@ -1,217 +1,370 @@
 extends Node3D
 
 # Parameters for the growth algorithm
-@export var max_branches = 30
-@export var attraction_distance = 5.0
-@export var min_branch_distance = 0.5
-@export var growth_distance = 0.2
-@export var jitter = 0.1
-@export var max_connections_per_attractor = 1
+@export var max_branches = 200  # Reduced for VR performance
+@export var attraction_distance = 3.0
+@export var min_branch_distance = 0.3
+@export var growth_distance = 0.15
+@export var jitter = 0.05
+@export var attractor_count = 50  # Much smaller for VR
 
 # Visual parameters
 @export var branch_material: Material
-@export var branch_radius = 0.05
+@export var branch_radius = 0.02
+@export var growth_per_frame = 5  # Grow multiple branches per frame for smooth VR
 
-# Internal variables
+# Internal variables - simple arrays for compatibility
 var branches = []
 var attractors = []
+
+# Mesh for visualization
 var mesh_instance: MeshInstance3D
-# Note: removed unused immediate_geometry variable
-var mesh: ImmediateMesh
+var immediate_mesh: ImmediateMesh
+
+# Performance tracking
+var growth_timer = 0.0
+var is_growing = false
 
 class Branch:
 	var position: Vector3
 	var direction: Vector3
 	var parent_index: int = -1
 	var is_active: bool = true
+	var generation: int = 0
 	
-	func _init(pos, dir, parent = -1):
+	func _init(pos: Vector3, dir: Vector3, parent: int = -1, gen: int = 0):
 		position = pos
-		direction = dir
+		direction = dir.normalized()
 		parent_index = parent
+		generation = gen
 
 class Attractor:
 	var position: Vector3
 	var is_reached: bool = false
 	
-	func _init(pos):
+	func _init(pos: Vector3):
 		position = pos
 
 func _ready():
-	# Set up the mesh for visualization
-	mesh = ImmediateMesh.new()
+	print("Initializing VR Space Colonization...")
+	
+	# Set up simple mesh for VR performance
+	immediate_mesh = ImmediateMesh.new()
 	mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = mesh
-	if branch_material:
+	mesh_instance.mesh = immediate_mesh
+	
+	# Use unshaded material for VR performance if none provided
+	if not branch_material:
+		var material = StandardMaterial3D.new()
+		material.flags_unshaded = true
+		material.vertex_color_use_as_albedo = true
+		material.albedo_color = Color.WHITE
+		mesh_instance.material_override = material
+	else:
 		mesh_instance.material_override = branch_material
+	
 	add_child(mesh_instance)
 	
 	# Initialize with a single branch at the origin
-	add_branch(Vector3.ZERO, Vector3.UP)
+	add_branch(Vector3.ZERO, Vector3.UP, -1, 0)
 	
-	# Generate random attractors
-	generate_attractors(200, 10.0)
+	# Generate fewer attractors for VR
+	generate_attractors_vr_optimized()
 	
-	# Run the growth simulation
-	grow_branches()
+	print("Starting growth with ", branches.size(), " branches and ", attractors.size(), " attractors")
+	
+	# Start growth process
+	start_growth()
 
-func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1) -> int:
-	var branch = Branch.new(position, direction, parent_index)
+func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1, generation: int = 0):
+	var branch = Branch.new(position, direction, parent_index, generation)
 	branches.append(branch)
-	return branches.size() - 1
 
-func generate_attractors(count: int, radius: float):
+func generate_attractors_vr_optimized():
 	attractors.clear()
-	for i in range(count):
-		var pos = Vector3(
-			randf_range(-radius, radius),
-			randf_range(-radius, radius),
-			randf_range(-radius, radius)
-		).normalized() * (radius * randf())
-		attractors.append(Attractor.new(pos))
-
-func grow_branches():
-	var iterations = 0
-	var active_branches_exist = true
 	
-	while active_branches_exist and iterations < max_branches:
-		iterations += 1
-		active_branches_exist = false
+	# Generate attractors in a more controlled pattern for VR
+	var radius = 3.0
+	
+	for i in range(attractor_count):
+		# Use spherical coordinates for better distribution
+		var theta = randf() * 2.0 * PI
+		var phi = acos(1.0 - 2.0 * randf())  # Better sphere distribution
+		var r = radius * pow(randf(), 0.33)  # Cube root for volume distribution
 		
-		# Process all branches
-		for i in range(branches.size()):
-			var branch = branches[i]
-			if not branch.is_active:
+		var pos = Vector3(
+			r * sin(phi) * cos(theta),
+			r * sin(phi) * sin(theta),
+			r * cos(phi)
+		)
+		
+		# Avoid attractors too close to origin
+		if pos.length() > 0.5:
+			attractors.append(Attractor.new(pos))
+
+func start_growth():
+	is_growing = true
+	growth_timer = 0.0
+
+func _process(delta):
+	if not is_growing:
+		return
+	
+	growth_timer += delta
+	
+	# Grow branches at a steady rate for smooth VR experience - NON-BLOCKING
+	if growth_timer > 0.016:  # ~60 FPS target
+		growth_timer = 0.0
+		
+		# Process only a limited number of branches per frame to avoid blocking
+		var processed_count = 0
+		var max_process_per_frame = growth_per_frame
+		
+		for i in range(growth_per_frame):
+			if not grow_step():
+				is_growing = false
+				print("Growth completed with ", branches.size(), " branches")
+				break
+			processed_count += 1
+			
+			# Break if we've processed enough for this frame
+			if processed_count >= max_process_per_frame:
+				break
+		
+		# Update mesh every frame for smooth VR
+		update_mesh_immediate()
+
+func grow_step() -> bool:
+	var active_branches_found = false
+	var new_branches = []
+	var reached_attractors = []
+	
+	# Process existing branches
+	for i in range(branches.size()):
+		var branch = branches[i]
+		if not branch.is_active:
+			continue
+		
+		active_branches_found = true
+		
+		# Find closest attractor
+		var closest_attractor_index = -1
+		var closest_distance = attraction_distance
+		
+		for j in range(attractors.size()):
+			var attractor = attractors[j]
+			if attractor.is_reached:
 				continue
-				
-			active_branches_exist = true
 			
-			# Find the closest attractor
-			var closest_attractor_index = -1
-			var closest_distance = attraction_distance
+			var distance = branch.position.distance_to(attractor.position)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest_attractor_index = j
+		
+		# Grow towards attractor
+		if closest_attractor_index >= 0:
+			var attractor = attractors[closest_attractor_index]
+			var direction = (attractor.position - branch.position).normalized()
 			
-			for j in range(attractors.size()):
-				var attractor = attractors[j]
-				if attractor.is_reached:
-					continue
-					
-				var distance = branch.position.distance_to(attractor.position)
-				if distance < closest_distance:
-					closest_distance = distance
-					closest_attractor_index = j
-			
-			# If we found an attractor, grow towards it
-			if closest_attractor_index >= 0:
-				var attractor = attractors[closest_attractor_index]
-				var direction = (attractor.position - branch.position).normalized()
-				
-				# Add some randomness to the direction
+			# Add minimal jitter for VR (less motion sickness)
+			if jitter > 0:
 				direction += Vector3(
 					randf_range(-jitter, jitter),
 					randf_range(-jitter, jitter),
 					randf_range(-jitter, jitter)
 				)
 				direction = direction.normalized()
-				
-				# Create new branch
-				var new_position = branch.position + direction * growth_distance
-				var new_branch_index = add_branch(new_position, direction, i)
-				
-				# Check if we've reached the attractor
-				if closest_distance < min_branch_distance:
-					attractors[closest_attractor_index].is_reached = true
-					branch.is_active = false
-			else:
-				# No attractors in range, deactivate this branch
+			
+			# Create new branch
+			var new_position = branch.position + direction * growth_distance
+			new_branches.append({
+				"position": new_position,
+				"direction": direction,
+				"parent": i,
+				"generation": branch.generation + 1
+			})
+			
+			# Check if attractor is reached
+			if closest_distance < min_branch_distance:
+				reached_attractors.append(closest_attractor_index)
 				branch.is_active = false
+		else:
+			# No attractors in range
+			branch.is_active = false
+		
+		# Limit branches for VR performance
+		if branches.size() >= max_branches:
+			is_growing = false
+			return false
 	
-	print("Growth completed after ", iterations, " iterations")
+	# Add new branches
+	for branch_data in new_branches:
+		add_branch(
+			branch_data.position,
+			branch_data.direction,
+			branch_data.parent,
+			branch_data.generation
+		)
 	
-	# Draw all branches at once after growth is complete
-	draw_all_branches()
+	# Mark reached attractors
+	for attractor_index in reached_attractors:
+		attractors[attractor_index].is_reached = true
+	
+	return active_branches_found and new_branches.size() > 0
 
-func draw_branch(start: Vector3, end: Vector3):
-	# Only redraw mesh periodically or when growth is complete
-	# This prevents the expensive mesh rebuild on every branch
-	pass
-
-func draw_all_branches():
-	mesh.clear_surfaces()
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+func update_mesh_immediate():
+	immediate_mesh.clear_surfaces()
+	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
-	# Draw all branches at once
+	# Draw all branches with generation-based colors
 	for i in range(branches.size()):
 		var branch = branches[i]
-		if branch.parent_index >= 0:
+		if branch.parent_index >= 0 and branch.parent_index < branches.size():
 			var parent = branches[branch.parent_index]
-			mesh.surface_set_color(Color(1, 1, 1, 1))
-			mesh.surface_add_vertex(parent.position)
-			mesh.surface_add_vertex(branch.position)
+			
+			# Color based on generation for visual feedback
+			var generation_factor = min(branch.generation / 10.0, 1.0)
+			var color = Color(
+				1.0 - generation_factor * 0.5,
+				1.0 - generation_factor * 0.3,
+				1.0,
+				1.0
+			)
+			
+			immediate_mesh.surface_set_color(color)
+			immediate_mesh.surface_add_vertex(parent.position)
+			immediate_mesh.surface_set_color(color)
+			immediate_mesh.surface_add_vertex(branch.position)
 	
-	mesh.surface_end()
+	immediate_mesh.surface_end()
 
-# Variant using cylinders (slower but more realistic)
-func draw_branches_as_cylinders():
-	# Remove any previous children
-	for child in get_children():
-		if child != mesh_instance:
-			remove_child(child)
-			child.queue_free()
+# VR-specific functions
+func set_vr_start_point(position: Vector3):
+	"""Set new starting point for VR interaction"""
+	clear_growth()
+	add_branch(position, Vector3.UP, -1, 0)
+	generate_attractors_around_point(position)
+	start_growth()
+
+func generate_attractors_around_point(center: Vector3, radius: float = 2.0):
+	"""Generate attractors around a specific point for VR interaction"""
+	attractors.clear()
 	
-	# Create a cylinder mesh
+	for i in range(attractor_count):
+		var offset = Vector3(
+			randf_range(-radius, radius),
+			randf_range(-radius, radius),
+			randf_range(-radius, radius)
+		)
+		
+		# Ensure minimum distance from center
+		if offset.length() < 0.3:
+			offset = offset.normalized() * 0.3
+		
+		attractors.append(Attractor.new(center + offset))
+
+func add_attractor_at_position(position: Vector3):
+	"""Add single attractor at VR controller position"""
+	attractors.append(Attractor.new(position))
+
+func clear_growth():
+	"""Reset the entire growth system"""
+	branches.clear()
+	attractors.clear()
+	is_growing = false
+	immediate_mesh.clear_surfaces()
+
+func pause_growth():
+	"""Pause growth for VR menu interaction"""
+	is_growing = false
+
+func resume_growth():
+	"""Resume growth after VR interaction"""
+	is_growing = true
+
+func get_growth_stats() -> Dictionary:
+	"""Get stats for VR UI display"""
+	var active_count = 0
+	var reached_count = 0
+	
+	for branch in branches:
+		if branch.is_active:
+			active_count += 1
+	
+	for attractor in attractors:
+		if attractor.is_reached:
+			reached_count += 1
+	
+	return {
+		"total_branches": branches.size(),
+		"active_branches": active_count,
+		"total_attractors": attractors.size(),
+		"reached_attractors": reached_count,
+		"is_growing": is_growing
+	}
+
+# Simplified cylinder rendering for VR (optional)
+func enable_cylinder_rendering(enable: bool = true):
+	"""Enable/disable cylinder rendering - expensive for VR"""
+	if not enable:
+		return
+		
+	# Remove line mesh
+	mesh_instance.visible = false
+	
+	# Create simple cylinder instances (limited number for VR)
 	var cylinder_mesh = CylinderMesh.new()
 	cylinder_mesh.top_radius = branch_radius
 	cylinder_mesh.bottom_radius = branch_radius
 	cylinder_mesh.height = 1.0
 	
-	# Create one mesh instance for each branch
-	for i in range(branches.size()):
+	var instance_count = 0
+	for i in range(min(branches.size(), 100)):  # Limit for VR performance
 		var branch = branches[i]
 		if branch.parent_index >= 0:
 			var parent = branches[branch.parent_index]
 			
-			var midpoint = (parent.position + branch.position) / 2
-			var distance = parent.position.distance_to(branch.position)
+			var cylinder = MeshInstance3D.new()
+			cylinder.mesh = cylinder_mesh
+			cylinder.material_override = mesh_instance.material_override
+			
+			# Position and orient cylinder
+			var midpoint = (parent.position + branch.position) * 0.5
+			var length = parent.position.distance_to(branch.position)
 			var direction = (branch.position - parent.position).normalized()
 			
-			# Create mesh instance
-			var branch_mesh = MeshInstance3D.new()
-			branch_mesh.mesh = cylinder_mesh
-			branch_mesh.material_override = branch_material
-			add_child(branch_mesh)
+			cylinder.position = midpoint
+			cylinder.scale.y = length
 			
-			# Position and scale the cylinder
-			branch_mesh.position = midpoint
-			branch_mesh.scale = Vector3(1, distance, 1)
+			# Simple orientation
+			if direction != Vector3.UP:
+				cylinder.look_at(midpoint + direction, Vector3.UP)
+				cylinder.rotate_object_local(Vector3.RIGHT, PI * 0.5)
 			
-			# Orient the cylinder towards the direction
-			var up_vector = Vector3.UP
-			if direction.dot(up_vector) > 0.99:
-				up_vector = Vector3.RIGHT
-			branch_mesh.look_at(branch_mesh.position + direction, up_vector)
-			branch_mesh.rotate_object_local(Vector3.RIGHT, PI / 2)
+			add_child(cylinder)
+			instance_count += 1
+			
+			# Break if too many for VR
+			if instance_count > 50:
+				break
 
-# Utility functions
-func clear_all():
-	branches.clear()
-	attractors.clear()
-	if mesh:
-		mesh.clear_surfaces()
-
-# VR Interaction methods
-func set_branch_start_point(position: Vector3):
-	# Reset the simulation
-	clear_all()
-	
-	# Start with a branch at the specified position
-	add_branch(position, Vector3.UP)
-	
-	# Generate attractors around this position
-	generate_attractors(200, 10.0)
-	
-	# Regrow the branches
-	grow_branches()
-	
-func regrow():
-	# Re-run the growth simulation
-	grow_branches()
+# Debug function
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_R:
+				print("Restarting growth...")
+				clear_growth()
+				add_branch(Vector3.ZERO, Vector3.UP, -1, 0)
+				generate_attractors_vr_optimized()
+				start_growth()
+			KEY_P:
+				if is_growing:
+					pause_growth()
+					print("Growth paused")
+				else:
+					resume_growth()
+					print("Growth resumed")
+			KEY_S:
+				var stats = get_growth_stats()
+				print("Stats: ", stats)

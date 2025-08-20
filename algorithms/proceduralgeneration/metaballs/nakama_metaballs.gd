@@ -72,70 +72,69 @@ func create_shader_material():
 	# Create the shader
 	var shader = Shader.new()
 	shader.code = """
-	shader_type spatial;
+shader_type spatial;
+
+// Surface properties
+uniform vec4 albedo : source_color = vec4(0.95, 0.85, 0.85, 1.0);
+uniform float roughness : hint_range(0.0, 1.0) = 0.2;
+uniform float metallic : hint_range(0.0, 1.0) = 0.1;
+uniform float specular : hint_range(0.0, 1.0) = 0.6;
+
+// Subsurface scattering
+uniform float subsurface_scatter : hint_range(0.0, 1.0) = 0.3;
+uniform vec4 subsurface_color : source_color = vec4(0.95, 0.75, 0.75, 1.0);
+
+// Detail noise
+uniform sampler2D noise_texture;
+uniform float noise_scale = 10.0;
+uniform float noise_strength = 0.05;
+
+// Displacement
+uniform float displacement_amount = 0.03;
+
+// Use built-in TIME instead of custom uniform
+// uniform float time = 0.0; // Remove this line
+
+varying vec3 world_normal;
+varying vec3 world_tangent;
+varying vec3 world_binormal;
+
+void vertex() {
+	// Calculate world space TBN matrix
+	world_normal = (MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz;
+	world_tangent = (MODEL_MATRIX * vec4(TANGENT, 0.0)).xyz;
+	world_binormal = (MODEL_MATRIX * vec4(BINORMAL, 0.0)).xyz;
 	
-	// Surface properties
-	uniform vec4 albedo : source_color = vec4(0.95, 0.85, 0.85, 1.0);
-	uniform float roughness : hint_range(0.0, 1.0) = 0.2;
-	uniform float metallic : hint_range(0.0, 1.0) = 0.1;
-	uniform float specular : hint_range(0.0, 1.0) = 0.6;
+	// Add subtle displacement along normal for surface details
+	float noise_value = texture(noise_texture, UV * noise_scale + vec2(TIME * 0.05)).r;
+	VERTEX += NORMAL * noise_value * displacement_amount;
+}
+
+void fragment() {
+	// Base surface properties
+	ALBEDO = albedo.rgb;
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
+	SPECULAR = specular;
 	
-	// Subsurface scattering
-	uniform float subsurface_scatter : hint_range(0.0, 1.0) = 0.3;
-	uniform vec4 subsurface_color : source_color = vec4(0.95, 0.75, 0.75, 1.0);
+	// Sample noise for normal perturbation
+	vec2 uv_offset = UV * noise_scale + vec2(TIME * 0.05);
+	float noise_x = texture(noise_texture, uv_offset + vec2(0.01, 0.0)).r - 
+				   texture(noise_texture, uv_offset - vec2(0.01, 0.0)).r;
+	float noise_y = texture(noise_texture, uv_offset + vec2(0.0, 0.01)).r - 
+				   texture(noise_texture, uv_offset - vec2(0.0, 0.01)).r;
+				   
+	vec3 normal_map = vec3(noise_x, noise_y, 1.0) * noise_strength;
+	normal_map = normalize(normal_map);
 	
-	// Detail noise
-	uniform sampler2D noise_texture;
-	uniform float noise_scale = 10.0;
-	uniform float noise_strength = 0.05;
+	// Apply normal mapping
+	NORMAL_MAP = normal_map;
 	
-	// Displacement
-	uniform float displacement_amount = 0.03;
-	uniform float time = 0.0;
-	
-	varying vec3 vertex_normal;
-	varying vec3 vertex_tangent;
-	varying vec3 vertex_binormal;
-	
-	void vertex() {
-		// Store normals for fragment shader
-		vertex_normal = NORMAL;
-		vertex_tangent = TANGENT;
-		vertex_binormal = BINORMAL;
-		
-		// Add subtle displacement along normal for surface details
-		float noise_value = texture(noise_texture, UV * noise_scale + vec2(time * 0.05)).r;
-		VERTEX += NORMAL * noise_value * displacement_amount;
-	}
-	
-	void fragment() {
-		// Base surface properties
-		ALBEDO = albedo.rgb;
-		ROUGHNESS = roughness;
-		METALLIC = metallic;
-		SPECULAR = specular;
-		
-		// Normal mapping for micro details
-		vec3 normal_map = vec3(0.0);
-		
-		// Sample noise for normal perturbation
-		vec2 uv_offset = UV * noise_scale + vec2(time * 0.05);
-		float noise_x = texture(noise_texture, uv_offset + vec2(0.01, 0.0)).r - 
-					   texture(noise_texture, uv_offset - vec2(0.01, 0.0)).r;
-		float noise_y = texture(noise_texture, uv_offset + vec2(0.0, 0.01)).r - 
-					   texture(noise_texture, uv_offset - vec2(0.0, 0.01)).r;
-					   
-		normal_map = vec3(noise_x, noise_y, 1.0) * 2.0 - 1.0;
-		normal_map = normalize(normal_map);
-		
-		// Transform normal map from tangent to world space
-		mat3 tbn = mat3(vertex_tangent, vertex_binormal, vertex_normal);
-		NORMAL = normalize(tbn * normal_map);
-		
-		// Subsurface scattering
-		SUBSURFACE_SCATTERING_STRENGTH = subsurface_scatter;
-		SUBSURFACE_SCATTERING_COLOR = subsurface_color.rgb;
-	}
+	// In Godot 4, subsurface scattering is handled differently
+	// Use BACKLIGHT for translucent effects instead
+	BACKLIGHT = subsurface_color.rgb * subsurface_scatter;
+}
+
 	"""
 	material.shader = shader
 	

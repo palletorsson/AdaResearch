@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d8x9k7v6m5nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://ekey5yw2xry0"]
 
-[ext_resource type="Script" path="res://algorithms/randomness/blue_noise/BlueNoise.gd" id="1_blue_noise"]
+[ext_resource type="Script" uid="uid://1rm4pbtwl523" path="res://algorithms/randomness/blue_noise/BlueNoise.gd" id="1_blue_noise"]
 
 [node name="BlueNoise" type="Node3D"]
 script = ExtResource("1_blue_noise")
@@ -20,10 +20,10 @@ light_energy = 1.2
 
 [node name="MinDistance" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
-top_radius = 0.3
-bottom_radius = 0.3
+visible = false
 height = 1.0
 
 [node name="IterationCount" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -3, 0)
+visible = false
 size = Vector3(0.8, 1, 0.4)

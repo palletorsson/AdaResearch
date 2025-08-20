@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://g4w8x7k9nqrpw"]
+[gd_scene load_steps=2 format=3 uid="uid://dajed5n03jvx5"]
 
-[ext_resource type="Script" path="res://algorithms/randomness/digital_materiality_glitch/DigitalMaterialityGlitch.gd" id="1"]
+[ext_resource type="Script" uid="uid://y8sflkspkahp" path="res://algorithms/randomness/digital_materiality_glitch/DigitalMaterialityGlitch.gd" id="1"]
 
 [node name="DigitalMaterialityGlitch" type="Node3D"]
 script = ExtResource("1")
@@ -10,7 +10,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 1.0
 shadow_enabled = true
 
 [node name="GlitchAesthetics" type="Node3D" parent="."]
@@ -24,4 +23,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 
 [node name="ErrorPropagation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
-

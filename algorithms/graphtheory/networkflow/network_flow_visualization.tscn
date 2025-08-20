@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwm5xg7h2qplt"]
 
-[ext_resource type="Script" path="res://graphtheory/networkflow/network_flow_visualization.gd" id="1_h8x9p"]
+[ext_resource type="Script" path="res://algorithms/graphtheory/networkflow/network_flow_visualization.gd" id="1_h8x9p"]
 
 [sub_resource type="Environment" id="Environment_flow"]
 background_mode = 1
@@ -21,7 +21,7 @@ size = Vector3(0.1, 0.1, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grid"]
 albedo_color = Color(0.3, 0.3, 0.4, 0.3)
-transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+transparency = 1
 
 [node name="NetworkFlow_Visualization" type="Node3D"]
 script = ExtResource("1_h8x9p")

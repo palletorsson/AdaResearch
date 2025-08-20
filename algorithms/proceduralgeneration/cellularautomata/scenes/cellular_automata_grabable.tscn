@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://v5hbim07t5xj"]
 
 [ext_resource type="Script" uid="uid://cnmxv8gstb4og" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_vef34"]
-[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://adaresearch/Common/Scenes/Objects/DigitalPaper/grab_paper.tscn" id="2_xfila"]
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="2_xfila"]
 [ext_resource type="PackedScene" uid="uid://cm7sauucsn1es" path="res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn" id="3_yltt8"]
 
 [node name="RandomEdgeProfileGrabable" type="Node3D"]

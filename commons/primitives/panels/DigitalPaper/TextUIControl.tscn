@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3wn56kir0avm"]
+
+[ext_resource type="Script" uid="uid://ci72klbsn1tur" path="res://adaresearch/Common/Scripts/Objects/rich_text_label.gd" id="1_ta0sx"]
+
+[sub_resource type="Theme" id="Theme_wtba0"]
+default_font_size = 15
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 1034.0
+offset_bottom = 645.0
+theme = SubResource("Theme_wtba0")
+theme_override_colors/default_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.843137, 0, 0, 1)
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 4
+theme_override_font_sizes/normal_font_size = 0
+theme_override_font_sizes/bold_font_size = 0
+bbcode_enabled = true
+text = "text "
+fit_content = true
+scroll_following = true
+script = ExtResource("1_ta0sx")
+init_text = "# Random Walk - local
+
+## Overview
+A **random walk** is a mathematical concept that describes a path consisting of a succession of random steps. It is widely used in various fields, including physics, biology, economics, and computer science. In **Ada Research**, the random walk is implemented as an **algorithmic exploration** of emergent patterns in movement and simulation.
+
+## How It Works
+A random walk consists of:
+- A starting position (e.g., the center of a grid).
+- A **random direction** chosen at each step.
+- A **step size** that determines how far it moves.
+- **Boundaries** to prevent out-of-bounds movement.
+
+Each step follows this simple rule:
+1. Pick a **random direction** (e.g., up, down, left, right).
+2. Move a **fixed step size** in that direction.
+3. If movement exceeds boundaries, **constrain** the position.
+
+
+
+## **Random Walk in the Ada Research Game**
+In the **Ada Research** game, the random walk is used to:
+- Generate **dynamic movement** for objects.
+- Simulate **procedural textures and noise patterns**.
+- Create **self-organizing behaviors** in environments.
+
+### **🔹 Godot Implementation**
+This is the core function for the **random walk algorithm** in the game:
+```gdscript
+extends Object
+
+class_name RandomWalkHelper
+
+static func perform_random_walk(img: Image, current_position: Vector2, width: int, height: int, area_size: int):
+    var direction = Vector2(randi_range(-1, 1), randi_range(-1, 1))
+    if direction.length_squared() == 0:
+        return current_position  
+
+    current_position += direction * area_size
+    current_position.x = int(current_position.x / area_size) * area_size
+    current_position.y = int(current_position.y / area_size) * area_size
+    current_position.x = clamp(current_position.x, 0, width - area_size)
+    current_position.y = clamp(current_position.y, 0, height - area_size)
+
+    for x in range(area_size):
+        for y in range(area_size):
+            var px = int(current_position.x + x)
+            var py = int(current_position.y + y)
+            if px < width and py < height:
+                img.set_pixel(px, py, Color.WHITE if (x + y) % 2 == 0 else Color.PINK)
+
+    return current_position
+"

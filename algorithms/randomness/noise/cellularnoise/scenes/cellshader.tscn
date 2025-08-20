@@ -29,3 +29,6 @@ shader_parameter/membrane_fluctuation = 0.02
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_2lmjn")
 mesh = SubResource("SphereMesh_qmxbu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.892838, 0.450379, 0, -0.450379, 0.892838, 0, 0.495633, 1.26137)

@@ -4,3 +4,6 @@
 
 [node name="TenPrintMaze3d" type="Node3D"]
 script = ExtResource("1_2rw0u")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.893364, 0.449335, 0, -0.449335, 0.893364, 2.65955, 0.873103, 4.2653)
