@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4xqr8nt2y5wh"]
+
+[ext_resource type="Script" uid="uid://d6q2d57dcmjc" path="res://algorithms/randomness/shadernoisespace/noiseroom.gd" id="1_0x8mq"]
+[ext_resource type="Shader" uid="uid://cipfbdt0qd24h" path="res://algorithms/randomness/shadernoisespace/QueerNoiseShader..gdshader" id="2_h3k1p"]
+[ext_resource type="Shader" uid="uid://bxl1jiqucj57k" path="res://algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader" id="3_m9n4t"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.2, 0.1, 0.3, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.4, 0.9, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+render_priority = 0
+shader = ExtResource("2_h3k1p")
+shader_parameter/time = 0.0
+shader_parameter/cloud_scale = 2.0
+shader_parameter/pink_intensity = 0.8
+shader_parameter/corner_darkness = 0.3
+shader_parameter/time_scale = 0.2
+shader_parameter/cloud_density = 1.0
+shader_parameter/base_pink = Color(1, 0.6, 0.8, 1)
+shader_parameter/deep_pink = Color(0.8, 0.2, 0.6, 1)
+shader_parameter/dark_corner = Color(0.2, 0.1, 0.2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2"]
+render_priority = 0
+shader = ExtResource("3_m9n4t")
+shader_parameter/time = 0.0
+shader_parameter/cloud_scale = 2.0
+shader_parameter/pink_intensity = 0.8
+shader_parameter/corner_darkness = 0.3
+shader_parameter/time_scale = 0.2
+shader_parameter/cloud_density = 1.0
+shader_parameter/base_pink = Color(1, 0.6, 0.8, 1)
+shader_parameter/deep_pink = Color(0.8, 0.2, 0.6, 1)
+shader_parameter/dark_corner = Color(0.2, 0.1, 0.2, 1)
+
+[node name="QueerNoiseRoom" type="Node3D"]
+script = ExtResource("1_0x8mq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 15)
+environment = SubResource("Environment_1")
+
+[node name="RoomContainer" type="Node3D" parent="."]
+
+[node name="MainRoomBody" type="CSGCombiner3D" parent="RoomContainer"]
+
+[node name="RoomShape" type="CSGSphere3D" parent="RoomContainer/MainRoomBody"]
+material_override = SubResource("ShaderMaterial_1")
+radial_segments = 32
+rings = 16
+
+[node name="WallsContainer" type="Node3D" parent="."]
+
+[node name="FrontWall" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.5)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(16, 12, 0.1)
+
+[node name="BackWall" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -13.5)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(16, 12, 0.1)
+
+[node name="RightWall" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 0, 0)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(27, 12, 0.1)
+
+[node name="LeftWall" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 0)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(27, 12, 0.1)
+
+[node name="Ceiling" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6.75, 0)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(16, 24, 0.1)
+
+[node name="Floor" type="CSGBox3D" parent="WallsContainer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -6.75, 0)
+material_override = SubResource("ShaderMaterial_2")
+size = Vector3(16, 24, 0.1)
+
+[node name="LightingContainer" type="Node3D" parent="."]
+
+[node name="PinkLight" type="OmniLight3D" parent="LightingContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
+light_color = Color(1, 0.2, 0.8, 1)
+light_energy = 0.8
+omni_range = 15.0
+omni_attenuation = 2.0
+
+[node name="CyanLight" type="OmniLight3D" parent="LightingContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -5, 5)
+light_color = Color(0.2, 1, 0.8, 1)
+light_energy = 0.8
+omni_range = 15.0
+omni_attenuation = 2.0
+
+[node name="PurpleLight" type="OmniLight3D" parent="LightingContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -5, -5)
+light_color = Color(0.8, 0.2, 1, 1)
+light_energy = 0.8
+omni_range = 15.0
+omni_attenuation = 2.0
+
+[node name="YellowLight" type="OmniLight3D" parent="LightingContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, -5)
+light_color = Color(1, 0.8, 0.2, 1)
+light_energy = 0.8
+omni_range = 15.0
+omni_attenuation = 2.0

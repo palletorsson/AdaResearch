@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjt7kac5xbhhi"]
 
 [ext_resource type="Script" uid="uid://cnbq1w3bm8b7p" path="res://algorithms/randomness/randomdecay/scripts/random_decay_manger.gd" id="1_hct1x"]
-[ext_resource type="PackedScene" uid="uid://blyjchbskvov5" path="res://adaresearch/Common/Scenes/Objects/Primitives/Prism.tscn" id="2_di8bd"]
-[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://adaresearch/Common/Scenes/Objects/DigitalPaper/grab_paper.tscn" id="3_wykdb"]
+[ext_resource type="PackedScene" uid="uid://bapvfdrc33ea2" path="res://commons/primitives/prismes/rotating_prisme.tscn" id="2_di8bd"]
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="3_wykdb"]
 
 [node name="RandomDecayObjects" type="Node3D"]
 script = ExtResource("1_hct1x")

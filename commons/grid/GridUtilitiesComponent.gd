@@ -116,8 +116,12 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		utility_object.position = position
 		
 		# Apply parameters if supported
+		print("GridUtilitiesComponent: Utility type '%s' has %d parameters: %s" % [utility_type, parameters.size(), str(parameters)])
 		if parameters.size() > 0 and UtilityRegistry.supports_parameters(utility_type):
+			print("GridUtilitiesComponent: Applying parameters for utility type '%s'" % utility_type)
 			_apply_utility_parameters(utility_object, utility_type, parameters)
+		else:
+			print("GridUtilitiesComponent: No parameters to apply for utility type '%s' (supports: %s)" % [utility_type, UtilityRegistry.supports_parameters(utility_type)])
 		
 		# Apply definition properties
 		_apply_utility_definition(utility_object, utility_type, definition)
@@ -161,6 +165,17 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 		"s":  # Spawn point
 			if parameters.size() > 0:
 				utility_object.set_meta("spawn_name", parameters[0])
+		"an":  # Annotation/Info Board
+			if parameters.size() > 0:
+				var sequence_name = parameters[0]
+				
+				# Store the sequence name for the info board to use
+				if "sequence_name" in utility_object:
+					utility_object.sequence_name = sequence_name
+				else:
+					utility_object.set_meta("sequence_name", sequence_name)
+				
+				print("GridUtilitiesComponent: Set info board sequence to: %s" % sequence_name)
 
 # Apply utility definition properties from JSON
 func _apply_utility_definition(utility_object: Node3D, utility_type: String, definition: Dictionary):

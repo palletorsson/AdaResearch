@@ -83,8 +83,19 @@ func _initialize_info_board():
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
+	# Check if a specific sequence was provided via parameter
+	var sequence_name = ""
+	if "sequence_name" in self:
+		sequence_name = self.sequence_name
+		print("InfoBoard: Using sequence from property: " + sequence_name)
+	elif has_meta("sequence_name"):
+		sequence_name = get_meta("sequence_name")
+		print("InfoBoard: Using sequence from metadata: " + sequence_name)
+	
 	# Load the level data and start animation
-	if specific_category != "" and specific_id >= 0:
+	if not sequence_name.is_empty():
+		_load_sequence_directly(sequence_name)
+	elif specific_category != "" and specific_id >= 0:
 		_load_specific_level_info()
 	else:
 		_load_from_map_name()
@@ -97,9 +108,22 @@ func _get_all_children(node):
 		nodes.append_array(_get_all_children(child))
 	return nodes
 
+# Load sequence directly by name
+func _load_sequence_directly(sequence_name: String):
+	print("InfoBoard: Loading sequence directly: " + sequence_name)
+	
+	# Load sequence data from map_sequences.json
+	var sequence_data = _load_specific_sequence_data(sequence_name)
+	if sequence_data.is_empty():
+		push_error("InfoBoard: No sequence data found for: " + sequence_name)
+		return
+	
+	print("InfoBoard: Found sequence data for: " + sequence_name)
+	_update_info_board_with_sequence_data("", sequence_data)
+
 # Load information for a specifically assigned level
 func _load_specific_level_info():
-	pass
+	print("InfoBoard: Loading specific level info for category: " + specific_category + ", id: " + str(specific_id))
 
 # Load level info from grid system's map_name by parsing it
 func _load_from_map_name():
@@ -167,6 +191,46 @@ func _load_sequence_data_for_map(map_name: String) -> Dictionary:
 	print("InfoBoard: ❌ Map '" + map_name + "' not found in any sequence")
 	print("InfoBoard: Available sequences: " + str(sequences.keys()))
 	return {}
+
+# Load specific sequence data directly by sequence name
+func _load_specific_sequence_data(sequence_name: String) -> Dictionary:
+	var sequence_file_path = "res://commons/maps/map_sequences.json"
+	
+	if not FileAccess.file_exists(sequence_file_path):
+		push_error("InfoBoard: map_sequences.json not found!")
+		return {}
+	
+	var file = FileAccess.open(sequence_file_path, FileAccess.READ)
+	if not file:
+		push_error("InfoBoard: Could not open map_sequences.json")
+		return {}
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		push_error("InfoBoard: Failed to parse map_sequences.json")
+		return {}
+	
+	var json_data = json.data
+	var sequences = json_data.get("sequences", {})
+	
+	# Find the specific sequence
+	if sequences.has(sequence_name):
+		var sequence = sequences[sequence_name]
+		var result = sequence.duplicate()
+		result["sequence_name"] = sequence_name
+		result["map_index"] = 0  # Default to first map
+		result["total_maps"] = sequence.get("maps", []).size()
+		print("InfoBoard: ✅ Found sequence '" + sequence_name + "'")
+		return result
+	else:
+		print("InfoBoard: ❌ Sequence '" + sequence_name + "' not found")
+		print("InfoBoard: Available sequences: " + str(sequences.keys()))
+		return {}
 
 # Update the info board with sequence data from map_sequences.json
 func _update_info_board_with_sequence_data(map_name: String, sequence_data: Dictionary):

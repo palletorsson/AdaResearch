@@ -2254,6 +2254,26 @@
 				"light_range": 3.7,
 				"light_position": [0, 1.5, 0]
 			}
+		},
+		"shader_noise_space": {
+			"name": "Shader Noise Space",
+			"lookup_name": "shader_noise_space",
+			"description": "Interactive shader-based noise space exploration with procedural textures and patterns",
+			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
+			"position": [44.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 0.8, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 3.3,
+				"light_position": [0, 1.4, 0]
+			}
 		}
 	},
 	

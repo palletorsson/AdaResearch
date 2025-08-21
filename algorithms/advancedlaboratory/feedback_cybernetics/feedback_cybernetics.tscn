@@ -1,0 +1,374 @@
+[gd_scene load_steps=11 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" uid="uid://du4uhngoo1mnd" path="res://algorithms/advancedlaboratory/feedback_cybernetics/FeedbackCybernetics.gd" id="1_script"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.02, 0.02, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.4, 0.6, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.1, 0.8, 0.3, 1)
+emission_enabled = true
+emission = Color(0.05, 0.4, 0.15, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.2, 0.5, 0.9, 1)
+emission_enabled = true
+emission = Color(0.1, 0.25, 0.45, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.9, 0.6, 0.1, 1)
+emission_enabled = true
+emission = Color(0.45, 0.3, 0.05, 1)
+emission_energy_multiplier = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.8, 0.1, 0.8, 1)
+emission_enabled = true
+emission = Color(0.4, 0.05, 0.4, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.1, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.05, 0.05, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.8, 0.2, 0.1, 1)
+emission_enabled = true
+emission = Color(0.4, 0.1, 0.05, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7"]
+albedo_color = Color(0.1, 0.9, 0.9, 1)
+emission_enabled = true
+emission = Color(0.05, 0.45, 0.45, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+metallic = 0.9
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.2, 0.2, 0.2, 1)
+
+[node name="EnhancedFeedbackCybernetics" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 12, 15, 20)
+environment = SubResource("Environment_1")
+fov = 70.0
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 25, 0)
+light_energy = 0.8
+shadow_enabled = true
+shadow_bias = 0.05
+
+[node name="AccentLight1" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 10)
+light_color = Color(0.2, 0.8, 0.4, 1)
+light_energy = 1.5
+omni_range = 30.0
+
+[node name="AccentLight2" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 10, -10)
+light_color = Color(0.8, 0.3, 0.2, 1)
+light_energy = 1.2
+omni_range = 25.0
+
+[node name="ControlSystems" type="Node3D" parent="."]
+
+[node name="PIDController" type="Node3D" parent="ControlSystems"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 5, 0)
+
+[node name="ProportionalNode" type="Node3D" parent="ControlSystems/PIDController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="PNode" type="CSGBox3D" parent="ControlSystems/PIDController/ProportionalNode"]
+material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="IntegralNode" type="Node3D" parent="ControlSystems/PIDController"]
+
+[node name="INode" type="CSGSphere3D" parent="ControlSystems/PIDController/IntegralNode"]
+material_override = SubResource("StandardMaterial3D_4")
+radius = 0.8
+
+[node name="DerivativeNode" type="Node3D" parent="ControlSystems/PIDController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="DNode" type="CSGCylinder3D" parent="ControlSystems/PIDController/DerivativeNode"]
+material_override = SubResource("StandardMaterial3D_5")
+radius = 0.8
+height = 1.5
+
+[node name="MainControlLoop" type="Node3D" parent="ControlSystems"]
+
+[node name="Setpoint" type="Node3D" parent="ControlSystems/MainControlLoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
+
+[node name="SetpointSphere" type="CSGSphere3D" parent="ControlSystems/MainControlLoop/Setpoint"]
+material_override = SubResource("StandardMaterial3D_2")
+radius = 1.0
+
+[node name="ErrorNode" type="Node3D" parent="ControlSystems/MainControlLoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="ErrorBox" type="CSGBox3D" parent="ControlSystems/MainControlLoop/ErrorNode"]
+material_override = SubResource("StandardMaterial3D_6")
+size = Vector3(1.2, 1.2, 1.2)
+
+[node name="Controller" type="Node3D" parent="ControlSystems/MainControlLoop"]
+
+[node name="ControllerCube" type="CSGBox3D" parent="ControlSystems/MainControlLoop/Controller"]
+material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(2.5, 2.5, 2.5)
+
+[node name="Plant" type="Node3D" parent="ControlSystems/MainControlLoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="PlantSphere" type="CSGSphere3D" parent="ControlSystems/MainControlLoop/Plant"]
+material_override = SubResource("StandardMaterial3D_4")
+radius = 1.2
+
+[node name="Output" type="Node3D" parent="ControlSystems/MainControlLoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+
+[node name="OutputSphere" type="CSGSphere3D" parent="ControlSystems/MainControlLoop/Output"]
+material_override = SubResource("StandardMaterial3D_3")
+radius = 1.0
+
+[node name="Sensor" type="Node3D" parent="ControlSystems/MainControlLoop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -6, 0)
+
+[node name="SensorCylinder" type="CSGCylinder3D" parent="ControlSystems/MainControlLoop/Sensor"]
+material_override = SubResource("StandardMaterial3D_7")
+radius = 0.6
+height = 1.0
+
+[node name="Disturbances" type="Node3D" parent="ControlSystems"]
+
+[node name="NoiseSource1" type="Node3D" parent="ControlSystems/Disturbances"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 5)
+
+[node name="NoiseSphere" type="CSGSphere3D" parent="ControlSystems/Disturbances/NoiseSource1"]
+material_override = SubResource("StandardMaterial3D_6")
+radius = 0.4
+
+[node name="NoiseSource2" type="Node3D" parent="ControlSystems/Disturbances"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8, -5)
+
+[node name="NoiseSphere" type="CSGSphere3D" parent="ControlSystems/Disturbances/NoiseSource2"]
+material_override = SubResource("StandardMaterial3D_6")
+radius = 0.4
+
+[node name="ConnectionNetwork" type="Node3D" parent="."]
+
+[node name="ForwardConnections" type="Node3D" parent="ConnectionNetwork"]
+
+[node name="FeedbackConnections" type="Node3D" parent="ConnectionNetwork"]
+
+[node name="DataFlowSystem" type="Node3D" parent="."]
+
+[node name="SignalParticles" type="Node3D" parent="DataFlowSystem"]
+
+[node name="ControlSignals" type="Node3D" parent="DataFlowSystem"]
+
+[node name="FeedbackSignals" type="Node3D" parent="DataFlowSystem"]
+
+[node name="ErrorSignals" type="Node3D" parent="DataFlowSystem"]
+
+[node name="VisualizationPanels" type="Node3D" parent="."]
+
+[node name="SystemResponseGraph" type="Node3D" parent="VisualizationPanels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -8)
+
+[node name="GraphBackground" type="CSGBox3D" parent="VisualizationPanels/SystemResponseGraph"]
+material_override = SubResource("StandardMaterial3D_8")
+size = Vector3(12, 6, 0.2)
+
+[node name="GraphData" type="Node3D" parent="VisualizationPanels/SystemResponseGraph"]
+
+[node name="StabilityMeter" type="Node3D" parent="VisualizationPanels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 0)
+
+[node name="MeterBase" type="CSGCylinder3D" parent="VisualizationPanels/StabilityMeter"]
+material_override = SubResource("StandardMaterial3D_1")
+radius = 2.0
+height = 0.3
+
+[node name="StabilityIndicator" type="CSGSphere3D" parent="VisualizationPanels/StabilityMeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
+
+[node name="PerformanceMetrics" type="Node3D" parent="VisualizationPanels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 10, 0)
+
+[node name="MetricsBackground" type="CSGBox3D" parent="VisualizationPanels/PerformanceMetrics"]
+material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(8, 5, 0.2)
+
+[node name="MetricsDisplay" type="Node3D" parent="VisualizationPanels/PerformanceMetrics"]
+
+[node name="InteractiveControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ControlPanel" type="VBoxContainer" parent="InteractiveControls"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -350.0
+offset_right = 400.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="TitleLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Feedback Cybernetics Control"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+
+[node name="ControllerTypeLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Controller Type"
+
+[node name="ControllerTypeOption" type="OptionButton" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+
+[node name="SetpointLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Setpoint: 1.0"
+
+[node name="SetpointSlider" type="HSlider" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="KpLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Proportional Gain (Kp): 1.0"
+
+[node name="KpSlider" type="HSlider" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="KiLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Integral Gain (Ki): 0.1"
+
+[node name="KiSlider" type="HSlider" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+max_value = 2.0
+step = 0.01
+value = 0.1
+
+[node name="KdLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Derivative Gain (Kd): 0.05"
+
+[node name="KdSlider" type="HSlider" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.05
+
+[node name="DisturbanceLabel" type="Label" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+text = "Disturbance Level: 0.1"
+
+[node name="DisturbanceSlider" type="HSlider" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="HSeparator2" type="HSeparator" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="InteractiveControls/ControlPanel"]
+layout_mode = 2
+
+[node name="StepResponseButton" type="Button" parent="InteractiveControls/ControlPanel/ButtonContainer"]
+layout_mode = 2
+text = "Step Response"
+
+[node name="ResetButton" type="Button" parent="InteractiveControls/ControlPanel/ButtonContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="AutoTuneButton" type="Button" parent="InteractiveControls/ControlPanel/ButtonContainer"]
+layout_mode = 2
+text = "Auto-Tune"
+
+[node name="InfoDisplay" type="VBoxContainer" parent="InteractiveControls"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 250.0
+grow_horizontal = 0
+
+[node name="InfoLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "System Information"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+
+[node name="CurrentOutputLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "Current Output: 0.00"
+
+[node name="SteadyStateErrorLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "Steady State Error: 0.00"
+
+[node name="SettlingTimeLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "Settling Time: 0.00s"
+
+[node name="OvershootLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "Overshoot: 0.00%"
+
+[node name="StabilityLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "System Stability: Stable"
+
+[node name="RiseTimeLabel" type="Label" parent="InteractiveControls/InfoDisplay"]
+layout_mode = 2
+text = "Rise Time: 0.00s"
