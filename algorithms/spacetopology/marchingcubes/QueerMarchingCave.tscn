@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://btxvpgsb55wbr"]
+
+[ext_resource type="Script" uid="uid://xo0g4j5qkt7y" path="res://algorithms/spacetopology/marchingcubes/QueerMarchingCave.gd" id="1_cave_script"]
+
+[sub_resource type="StandardMaterial3D" id="CaveMaterial"]
+albedo_color = Color(0.7, 0.3, 0.8, 1)
+metallic = 0.4
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.25, 0.1, 0.35, 1)
+emission_energy_multiplier = 1.8
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rxir3"]
+
+[node name="QueerMarchingCave" type="Node3D"]
+script = ExtResource("1_cave_script")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 0.6
+shadow_enabled = true
+shadow_bias = 0.05
+
+[node name="AmbientLight1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 8, -15)
+light_color = Color(0.8, 0.2, 0.9, 1)
+light_energy = 2.0
+omni_range = 25.0
+
+[node name="AmbientLight2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8, 15)
+light_color = Color(0.2, 0.9, 0.8, 1)
+light_energy = 2.0
+omni_range = 25.0
+
+[node name="CaveMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("CaveMaterial")
+
+[node name="CaveCollision" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="CaveCollision"]
+shape = SubResource("ConvexPolygonShape3D_rxir3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.411622, 2.04635)

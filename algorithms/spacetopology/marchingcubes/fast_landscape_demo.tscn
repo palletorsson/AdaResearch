@@ -1,0 +1,163 @@
+[gd_scene load_steps=3 format=3 uid="uid://csw3v7hvwnyvo"]
+
+[ext_resource type="Script" uid="uid://cn3hu84d84lwb" path="res://algorithms/spacetopology/marchingcubes/FastLandscapeCaveGenerator.gd" id="1_36168"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.05, 0.1, 0.15, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.9, 1, 1)
+ambient_light_energy = 0.4
+glow_enabled = true
+glow_strength = 0.8
+glow_bloom = 0.2
+
+[node name="FastLandscapeDemo" type="Node3D"]
+script = ExtResource("1_36168")
+world_size = Vector3(60, 25, 60)
+voxel_resolution = Vector3i(48, 24, 48)
+terrain_height = 10.0
+terrain_noise_frequency = 0.03
+terrain_octaves = 3
+cave_density = 0.4
+cave_noise_frequency = 0.02
+cave_size_multiplier = 1.5
+cave_min_height = -6.0
+cave_max_height = 4.0
+cave_vertical_bias = 0.3
+generate_collision = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.4, 0.576, 0, 0.819, 0.574, -0.707107, -0.4, 0.579, 30, 20, 30)
+fov = 70.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.02
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.4, -0.576, 0, 0.819, -0.574, 0.707107, -0.4, -0.579, 0, 15, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.9)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 220.0
+grow_horizontal = 0
+
+[node name="InfoContainer" type="VBoxContainer" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/InfoPanel/InfoContainer"]
+layout_mode = 2
+text = "⚡ Fast Landscape + Cave Generator"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/InfoPanel/InfoContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="RichTextLabel" parent="UI/InfoPanel/InfoContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b]Performance Stats:[/b]
+Generation Time: --
+Vertices: --
+Triangles: --
+Optimized CPU: Yes
+
+[color=yellow]Controls:[/color]
+R - Regenerate World
+Mouse - Look Around"
+
+[node name="ControlsPanel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.9)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_right = 280.0
+grow_vertical = 0
+
+[node name="ControlsContainer" type="VBoxContainer" parent="UI/ControlsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RegenerateButton" type="Button" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+text = "🔄 Regenerate World (R)"
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="TerrainHeightLabel" type="Label" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+text = "Terrain Height:"
+
+[node name="TerrainHeightSlider" type="HSlider" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+min_value = 3.0
+max_value = 20.0
+step = 0.5
+value = 10.0
+
+[node name="CaveDensityLabel" type="Label" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+text = "Cave Density:"
+
+[node name="CaveDensitySlider" type="HSlider" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 0.8
+step = 0.05
+value = 0.4
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/ControlsPanel/ControlsContainer"]
+layout_mode = 2
+show_percentage = false
+
+[connection signal="generation_complete" from="." to="." method="_on_generation_complete"]
+[connection signal="generation_progress" from="." to="." method="_on_generation_progress"]
+[connection signal="pressed" from="UI/ControlsPanel/ControlsContainer/RegenerateButton" to="." method="_on_regenerate_button_pressed"]
+[connection signal="value_changed" from="UI/ControlsPanel/ControlsContainer/TerrainHeightSlider" to="." method="_on_terrain_height_slider_value_changed"]
+[connection signal="value_changed" from="UI/ControlsPanel/ControlsContainer/CaveDensitySlider" to="." method="_on_cave_density_slider_value_changed"]

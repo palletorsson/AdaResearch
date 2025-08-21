@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://connectivity_test"]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/FastLandscapeCaveGenerator.gd" id="1_connectivity"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.15, 0.2, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.9, 0.9, 1, 1)
+ambient_light_energy = 0.5
+
+[node name="ConnectivityTest" type="Node3D"]
+script = ExtResource("1_connectivity")
+world_size = Vector3(40, 20, 40)
+voxel_resolution = Vector3i(32, 16, 32)
+terrain_height = 6.0
+terrain_noise_frequency = 0.04
+terrain_octaves = 2
+terrain_persistence = 0.3
+cave_density = 0.1
+cave_noise_frequency = 0.02
+cave_size_multiplier = 1.0
+cave_min_height = -4.0
+cave_max_height = 2.0
+cave_vertical_bias = 0.2
+generate_collision = false
+show_generation_progress = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866, -0.35, 0.35, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 15, 15, 15)
+fov = 65.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

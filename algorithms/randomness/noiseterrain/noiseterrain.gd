@@ -18,11 +18,18 @@ var bulge_noise: FastNoiseLite
 # Terrain mesh and collision
 var terrain_mesh: ArrayMesh
 var terrain_material: StandardMaterial3D
+var heightmap_material: ShaderMaterial
 var vertices: PackedVector3Array
 var normals: PackedVector3Array
 var uvs: PackedVector2Array
 var indices: PackedInt32Array
 var colors: PackedColorArray
+
+# Material settings
+var use_heightmap_shader: bool = true  # Make heightmap shader the default
+var contour_frequency: float = 20.0
+var contour_strength: float = 0.3
+var enable_contours: bool = true
 
 # Player controller (removed - using external player)
 # var player: CharacterBody3D
@@ -38,7 +45,9 @@ var animate_terrain: bool = true
 
 func _ready():
 	setup_noise_generators()
+	setup_materials()
 	setup_ui_connections()
+	update_ui_button_states()
 	generate_terrain()
 
 func _process(delta):
@@ -48,28 +57,49 @@ func _process(delta):
 		animate_terrain_colors(delta)
 
 func setup_noise_generators():
-	# Primary terrain noise
+	# Primary terrain noise - smoother settings
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
-	noise.frequency = 0.01
+	noise.frequency = 0.008  # Lower frequency for smoother terrain
 	noise.fractal_octaves = octaves
-	noise.fractal_gain = 0.5
+	noise.fractal_gain = 0.4  # Less gain for smoother transitions
 	noise.fractal_lacunarity = 2.0
 	
-	# Secondary detail noise
+	# Secondary detail noise - gentler
 	secondary_noise = FastNoiseLite.new()
 	secondary_noise.seed = randi()
 	secondary_noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	secondary_noise.frequency = 0.05
-	secondary_noise.fractal_octaves = 3
+	secondary_noise.frequency = 0.03  # Smaller details
+	secondary_noise.fractal_octaves = 2  # Fewer octaves
 	
-	# Bulge/warp noise for queer distortion
+	# Bulge/warp noise for queer distortion - much gentler
 	bulge_noise = FastNoiseLite.new()
 	bulge_noise.seed = randi()
 	bulge_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
-	bulge_noise.frequency = 0.02
+	bulge_noise.frequency = 0.01  # Lower frequency
 	bulge_noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
+
+func setup_materials():
+	# Create heightmap material
+	var shader = load("res://algorithms/randomness/noiseterrain/heightmap_shader.gdshader")
+	if shader == null:
+		print("ERROR: Could not load heightmap shader!")
+		return
+	
+	heightmap_material = ShaderMaterial.new()
+	heightmap_material.shader = shader
+	heightmap_material.set_shader_parameter("height_scale", 1.0)
+	heightmap_material.set_shader_parameter("contour_frequency", contour_frequency)
+	heightmap_material.set_shader_parameter("contour_strength", contour_strength)
+	heightmap_material.set_shader_parameter("enable_contours", enable_contours)
+	
+	print("Heightmap material created successfully")
+
+func update_ui_button_states():
+	# Set button states based on current material mode
+	$ParameterUI/ParameterPanel/MaterialButtons/StandardMaterialButton.button_pressed = not use_heightmap_shader
+	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.button_pressed = use_heightmap_shader
 
 func setup_ui_connections():
 	$ParameterUI/ParameterPanel/NoiseScaleSlider.value_changed.connect(_on_noise_scale_changed)
@@ -80,6 +110,15 @@ func setup_ui_connections():
 	
 	$ParameterUI/ParameterPanel/ButtonContainer/RegenerateButton.pressed.connect(_on_regenerate_pressed)
 	$ParameterUI/ParameterPanel/ButtonContainer/RandomizeButton.pressed.connect(_on_randomize_pressed)
+	
+	# Material switching connections
+	$ParameterUI/ParameterPanel/MaterialButtons/StandardMaterialButton.pressed.connect(_on_standard_material_pressed)
+	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.pressed.connect(_on_heightmap_shader_pressed)
+	
+	# Shader parameter connections
+	$ParameterUI/ParameterPanel/ContourFrequencySlider.value_changed.connect(_on_contour_frequency_changed)
+	$ParameterUI/ParameterPanel/ContourStrengthSlider.value_changed.connect(_on_contour_strength_changed)
+	$ParameterUI/ParameterPanel/EnableContoursCheckbox.toggled.connect(_on_enable_contours_toggled)
 
 # Removed camera and player movement functions
 # setup_camera_follow(), handle_player_movement(), update_camera_follow(), _input()
@@ -89,6 +128,8 @@ func generate_terrain():
 	create_terrain_mesh()
 	create_terrain_collision()
 	apply_terrain_material()
+	
+	print("Terrain generated: %d vertices, %d triangles" % [vertices.size(), indices.size() / 3])
 
 func clear_terrain():
 	vertices.clear()
@@ -100,6 +141,8 @@ func clear_terrain():
 func create_terrain_mesh():
 	var mesh_instance = $TerrainMesh
 	terrain_mesh = ArrayMesh.new()
+	
+	print("Generating terrain mesh...")
 	
 	# Generate vertex grid
 	for z in range(terrain_resolution + 1):
@@ -119,25 +162,29 @@ func create_terrain_mesh():
 			var color = generate_color_at_position(world_x, world_z, height)
 			colors.append(color)
 	
-	# Generate indices for triangles
+	print("Generated %d vertices" % vertices.size())
+	
+	# Generate indices for triangles - FIXED winding order
 	for z in range(terrain_resolution):
 		for x in range(terrain_resolution):
 			var i = z * (terrain_resolution + 1) + x
 			
-			# First triangle
+			# First triangle: counter-clockwise from top view
 			indices.append(i)
-			indices.append(i + terrain_resolution + 1)
 			indices.append(i + 1)
+			indices.append(i + terrain_resolution + 1)
 			
-			# Second triangle
+			# Second triangle: counter-clockwise from top view
 			indices.append(i + 1)
-			indices.append(i + terrain_resolution + 1)
 			indices.append(i + terrain_resolution + 2)
+			indices.append(i + terrain_resolution + 1)
+	
+	print("Generated %d triangles" % (indices.size() / 3))
 	
 	# Calculate normals
 	calculate_normals()
 	
-	# Create mesh
+	# Create mesh arrays
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
@@ -146,28 +193,32 @@ func create_terrain_mesh():
 	arrays[Mesh.ARRAY_COLOR] = colors
 	arrays[Mesh.ARRAY_INDEX] = indices
 	
+	# Add surface to mesh
 	terrain_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh_instance.mesh = terrain_mesh
+	
+	print("Mesh created successfully with %d surfaces!" % terrain_mesh.get_surface_count())
 
 func generate_height_at_position(x: float, z: float) -> float:
-	# Primary noise layer
+	# Primary noise layer - smoother
 	var primary_height = noise.get_noise_2d(x * noise_scale, z * noise_scale)
 	
-	# Secondary detail layer
-	var detail_height = secondary_noise.get_noise_2d(x * noise_scale * 3.0, z * noise_scale * 3.0) * 0.3
+	# Secondary detail layer - reduced intensity
+	var detail_height = secondary_noise.get_noise_2d(x * noise_scale * 2.0, z * noise_scale * 2.0) * 0.2
 	
-	# Bulge/warp effect for queer aesthetics
-	var bulge_x = x + bulge_noise.get_noise_2d(x * 0.005, z * 0.005) * bulginess * 10.0
-	var bulge_z = z + bulge_noise.get_noise_2d(x * 0.007, z * 0.007) * bulginess * 10.0
-	var bulge_height = noise.get_noise_2d(bulge_x * noise_scale, bulge_z * noise_scale) * bulginess
+	# Bulge/warp effect - much gentler
+	var bulge_x = x + bulge_noise.get_noise_2d(x * 0.003, z * 0.003) * bulginess * 5.0
+	var bulge_z = z + bulge_noise.get_noise_2d(x * 0.004, z * 0.004) * bulginess * 5.0
+	var bulge_height = noise.get_noise_2d(bulge_x * noise_scale, bulge_z * noise_scale) * bulginess * 0.3
 	
-	# Combine layers
-	var total_height = (primary_height + detail_height + bulge_height * 0.5) * height_multiplier
+	# Combine layers with smoother blending
+	var total_height = (primary_height + detail_height + bulge_height) * height_multiplier
 	
-	# Add some organic curves
+	# Gentler center elevation
 	var distance_from_center = sqrt(x * x + z * z) / (terrain_size * 0.5)
-	var center_bulge = (1.0 - distance_from_center) * bulginess * 2.0
+	var center_bulge = max(0.0, (1.0 - distance_from_center * 0.3)) * bulginess * 1.0
 	
+	# Smoother base level without sharp cutoffs
 	return total_height + center_bulge
 
 func generate_color_at_position(x: float, z: float, height: float) -> Color:
@@ -197,34 +248,59 @@ func generate_color_at_position(x: float, z: float, height: float) -> Color:
 
 func calculate_normals():
 	normals.resize(vertices.size())
-	normals.fill(Vector3.ZERO)
 	
-	# Calculate face normals and accumulate
+	# Initialize all normals to up vector
+	for i in range(normals.size()):
+		normals[i] = Vector3.UP
+	
+	# Calculate face normals and accumulate to vertices
 	for i in range(0, indices.size(), 3):
 		var i0 = indices[i]
 		var i1 = indices[i + 1]
 		var i2 = indices[i + 2]
 		
+		# Bounds check
+		if i0 >= vertices.size() or i1 >= vertices.size() or i2 >= vertices.size():
+			continue
+		
+		# Get vertices
 		var v0 = vertices[i0]
 		var v1 = vertices[i1]
 		var v2 = vertices[i2]
 		
-		var face_normal = (v1 - v0).cross(v2 - v0).normalized()
+		# Calculate face normal
+		var edge1 = v1 - v0
+		var edge2 = v2 - v0
+		var face_normal = edge1.cross(edge2)
 		
-		normals[i0] += face_normal
-		normals[i1] += face_normal
-		normals[i2] += face_normal
+		# Only use if not zero length
+		if face_normal.length() > 0.001:
+			face_normal = face_normal.normalized()
+			
+			# Accumulate to vertex normals
+			normals[i0] += face_normal
+			normals[i1] += face_normal
+			normals[i2] += face_normal
 	
-	# Normalize all normals
+	# Normalize all vertex normals
 	for i in range(normals.size()):
-		normals[i] = normals[i].normalized()
+		if normals[i].length() > 0.001:
+			normals[i] = normals[i].normalized()
+		else:
+			normals[i] = Vector3.UP
+	
+	print("Normals calculated for %d vertices" % normals.size())
 
 func create_terrain_collision():
 	var collision_shape = $TerrainBody/TerrainCollision
+	
+	# CRITICAL: Use ConcavePolygonShape3D for detailed terrain collision
 	var shape = ConcavePolygonShape3D.new()
 	
-	# Create collision from mesh
+	# Create collision mesh that exactly matches the visual mesh
 	var collision_vertices: PackedVector3Array = []
+	
+	# Use the same triangulation as the visual mesh
 	for i in range(0, indices.size(), 3):
 		collision_vertices.append(vertices[indices[i]])
 		collision_vertices.append(vertices[indices[i + 1]])
@@ -232,22 +308,39 @@ func create_terrain_collision():
 	
 	shape.set_faces(collision_vertices)
 	collision_shape.shape = shape
+	
+	print("Collision mesh created with %d triangles" % (collision_vertices.size() / 3))
+	print("IMPORTANT: Make sure TerrainCollision uses ConcavePolygonShape3D, not ConvexPolygonShape3D!")
 
 func apply_terrain_material():
 	var mesh_instance = $TerrainMesh
-	terrain_material = StandardMaterial3D.new()
 	
-	# Queer aesthetic material
-	terrain_material.albedo_color = Color(0.8, 0.4, 0.9, 1.0)
-	terrain_material.emission_enabled = true
-	terrain_material.emission = Color(0.3, 0.1, 0.4, 1.0)
-	terrain_material.emission_energy = 1.5
-	terrain_material.metallic = 0.3
-	terrain_material.roughness = 0.4
-	terrain_material.vertex_color_use_as_albedo = true
-	terrain_material.vertex_color_is_srgb = true
-	
-	mesh_instance.material_override = terrain_material
+	if use_heightmap_shader:
+		# Apply heightmap shader material
+		if heightmap_material == null:
+			print("ERROR: Heightmap material is null!")
+			return
+		mesh_instance.material_override = heightmap_material
+		print("Applied heightmap shader material")
+	else:
+		# Create and apply standard material
+		terrain_material = StandardMaterial3D.new()
+		
+		# Simpler material settings that definitely work
+		terrain_material.albedo_color = Color(0.8, 0.4, 0.9, 1.0)
+		terrain_material.emission_enabled = true
+		terrain_material.emission = Color(0.3, 0.1, 0.4, 1.0)
+		terrain_material.emission_energy = 1.5
+		terrain_material.metallic = 0.2
+		terrain_material.roughness = 0.6
+		terrain_material.vertex_color_use_as_albedo = true
+		terrain_material.vertex_color_is_srgb = true
+		
+		# Keep culling enabled for now to avoid issues
+		terrain_material.cull_mode = BaseMaterial3D.CULL_BACK
+		
+		mesh_instance.material_override = terrain_material
+		print("Applied standard material")
 
 func animate_terrain_colors(delta):
 	if not terrain_mesh:
@@ -265,6 +358,8 @@ func update_ui_labels():
 	$ParameterUI/ParameterPanel/BulginessLabel.text = "Bulginess: %.1f" % bulginess
 	$ParameterUI/ParameterPanel/OctavesLabel.text = "Octaves: %d" % octaves
 	$ParameterUI/ParameterPanel/ColorShiftLabel.text = "Color Shift: %.1f" % color_shift
+	$ParameterUI/ParameterPanel/ContourFrequencyLabel.text = "Contour Frequency: %.1f" % contour_frequency
+	$ParameterUI/ParameterPanel/ContourStrengthLabel.text = "Contour Strength: %.2f" % contour_strength
 
 # UI Event Handlers
 func _on_noise_scale_changed(value: float):
@@ -324,6 +419,41 @@ func _on_randomize_pressed():
 	_on_regenerate_pressed()
 	
 	update_ui_labels()
+
+# Material switching event handlers
+func _on_standard_material_pressed():
+	if not use_heightmap_shader:
+		return
+	use_heightmap_shader = false
+	$ParameterUI/ParameterPanel/MaterialButtons/StandardMaterialButton.button_pressed = true
+	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.button_pressed = false
+	apply_terrain_material()
+
+func _on_heightmap_shader_pressed():
+	if use_heightmap_shader:
+		return
+	use_heightmap_shader = true
+	$ParameterUI/ParameterPanel/MaterialButtons/StandardMaterialButton.button_pressed = false
+	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.button_pressed = true
+	apply_terrain_material()
+
+# Shader parameter event handlers
+func _on_contour_frequency_changed(value: float):
+	contour_frequency = value
+	if heightmap_material:
+		heightmap_material.set_shader_parameter("contour_frequency", contour_frequency)
+	update_ui_labels()
+
+func _on_contour_strength_changed(value: float):
+	contour_strength = value
+	if heightmap_material:
+		heightmap_material.set_shader_parameter("contour_strength", contour_strength)
+	update_ui_labels()
+
+func _on_enable_contours_toggled(enabled: bool):
+	enable_contours = enabled
+	if heightmap_material:
+		heightmap_material.set_shader_parameter("enable_contours", enable_contours)
 
 # Public API
 func get_height_at_world_position(world_pos: Vector3) -> float:

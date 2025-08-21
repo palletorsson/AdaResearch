@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb8m1v4xq5r2n"]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/LandscapeCaveGenerator.gd" id="1_surface_test"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.9, 1, 1)
+ambient_light_energy = 0.4
+
+[node name="SurfaceTest" type="Node3D"]
+script = ExtResource("1_surface_test")
+auto_update_in_editor = true
+auto_update_in_game = true
+generate_colliders = false
+fixed_map_size = true
+num_chunks = Vector3i(1, 1, 1)
+bounds_size = 10.0
+iso_level = 0.5
+num_points_per_axis = 16
+terrain_height = 4.0
+terrain_noise_frequency = 0.08
+cave_density = 0.0
+cave_noise_frequency = 0.02
+show_wireframe = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 10, 15)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

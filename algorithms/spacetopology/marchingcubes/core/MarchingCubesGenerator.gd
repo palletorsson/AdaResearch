@@ -180,14 +180,16 @@ func march_cube_fixed(cube_data: Dictionary) -> Array:
 	var i = 0
 	while i < triangle_config.size() and triangle_config[i] >= 0:
 		if i + 2 < triangle_config.size():
-			var triangle = create_triangle_from_edges(
-				edge_vertices[triangle_config[i]],
-				edge_vertices[triangle_config[i + 1]],
-				edge_vertices[triangle_config[i + 2]]
-			)
+			var v1 = edge_vertices[triangle_config[i]]
+			var v2 = edge_vertices[triangle_config[i + 1]]
+			var v3 = edge_vertices[triangle_config[i + 2]]
 			
-			if not triangle.is_empty():
-				triangles.append(triangle)
+			# Check that all vertices are valid (not null)
+			if v1 != null and v2 != null and v3 != null:
+				var triangle = create_triangle_from_edges(v1, v2, v3)
+				
+				if not triangle.is_empty():
+					triangles.append(triangle)
 		
 		i += 3
 	

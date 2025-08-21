@@ -4,6 +4,27 @@
 	"last_updated": "2025-01-20",
 	
 	"sequences": {
+		"tests": {
+			"name": "TestSequence",
+			"description": "This is a test sequence",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"test"
+			],
+			"maps": [
+				"Test_Scene_1",
+				"Test_Scene_2",
+				"Test_3",
+				"Test_4",
+				"Test_5",
+				"Test_6",
+				"Test_7"
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["test_badge"]
+		},
 		"array_tutorial": {
 			"name": "Array Tutorial Sequence",
 			"description": "Progressive tutorial introducing array concepts through VR navigation",
