@@ -17,13 +17,13 @@ var use_gpu_acceleration: bool = true
 @export var auto_generate_on_ready: bool = true
 
 @export_group("Terrain Parameters")
-@export var terrain_height: float = 15.0
-@export var terrain_noise_frequency: float = 0.02
+@export var terrain_height: float = 8.0
+@export var terrain_noise_frequency: float = 0.0015
 @export var terrain_octaves: int = 4
 @export var terrain_persistence: float = 0.5
 
 @export_group("Cave Parameters")
-@export var cave_density: float = 0.3
+@export var cave_density: float = 0.25
 @export var cave_noise_frequency: float = 0.015
 @export var cave_size_multiplier: float = 2.0
 @export var cave_min_height: float = -10.0
@@ -35,7 +35,10 @@ var use_gpu_acceleration: bool = true
 @export var material_cave: Material
 @export var generate_collision: bool = true
 @export var show_generation_progress: bool = true
-
+# ADD THESE NEW PROPERTIES HERE:
+@export var ISO_LEVEL: float = 0.5
+@export var USE_ROBUST_INTERPOLATION: bool = true
+@export var PREVENT_DEGENERATE_TRIANGLES: bool = true
 # === NOISE GENERATORS ===
 var noise_terrain: FastNoiseLite
 var noise_cave_primary: FastNoiseLite
@@ -50,6 +53,8 @@ var generation_time: float = 0.0
 # === SIGNALS ===
 signal generation_complete(generation_time: float)
 signal generation_progress(percentage: float)
+
+
 
 func _ready():
 	setup_noise_generators()

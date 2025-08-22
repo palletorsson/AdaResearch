@@ -1,0 +1,156 @@
+[gd_scene load_steps=4 format=3 uid="uid://n88q8m218rmh"]
+
+[ext_resource type="Script" uid="uid://ujdmxsyscsr1" path="res://algorithms/misc/algorithm_flowchart_2d.gd" id="1_flowchart"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 18
+font_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2"]
+font_size = 14
+font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="AlgorithmFlowChart2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_flowchart")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="HeaderBG" type="ColorRect" parent="UI/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="Title" type="Label" parent="UI/Header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -15.0
+offset_right = 300.0
+offset_bottom = 15.0
+grow_vertical = 2
+text = "Algorithm Learning Flowchart"
+label_settings = SubResource("LabelSettings_1")
+
+[node name="Instructions" type="Label" parent="UI/Header"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -15.0
+offset_right = -20.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Click nodes for info • SPACE: Center • R: Reset"
+horizontal_alignment = 2
+
+[node name="Controls" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="LegendLabel" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "Legend:"
+label_settings = SubResource("LabelSettings_2")
+
+[node name="LegendGrid" type="GridContainer" parent="UI/Controls"]
+layout_mode = 2
+columns = 2
+
+[node name="EntryColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="EntryLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Entry Points"
+
+[node name="FoundationColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.8, 0.9, 1, 1)
+
+[node name="FoundationLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Foundation"
+
+[node name="AudioColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(1, 0.9, 0.8, 1)
+
+[node name="AudioLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Audio"
+
+[node name="RandomColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.9, 1, 0.8, 1)
+
+[node name="RandomLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Randomness"
+
+[node name="VisualColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(1, 0.8, 0.9, 1)
+
+[node name="VisualLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Visual/Meshes"
+
+[node name="PhysicsColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(0.8, 1, 1, 1)
+
+[node name="PhysicsLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Physics"
+
+[node name="AdvancedColor" type="ColorRect" parent="UI/Controls/LegendGrid"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+color = Color(1, 0.8, 1, 1)
+
+[node name="AdvancedLabel" type="Label" parent="UI/Controls/LegendGrid"]
+layout_mode = 2
+text = "Advanced"

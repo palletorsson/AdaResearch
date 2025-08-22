@@ -263,20 +263,51 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		print("GridInteractablesComponent: WARNING - Failed to load scene for artifact '%s'" % lookup_name)
 		return false
 	
-	# Position the artifact
-	artifact_object.position = position
-	
-	# Apply position/rotation/scale from artifact definition
-	_apply_artifact_transform(artifact_object, artifact_info)
+	# Handle different node types (Node3D vs Control)
+	if artifact_object is Node3D:
+		# Position the 3D artifact (base grid position)
+		artifact_object.position = position
+		
+		# Apply position/rotation/scale from artifact definition
+		_apply_artifact_transform(artifact_object, artifact_info)
 
-	# Apply per-instance overrides (e.g., scifi_panel_wall:45 → rotate Y by 45 degrees)
-	if overrides.has("rotation_y_degrees"):
-		var ry = float(overrides.get("rotation_y_degrees", 0.0))
-		var current = artifact_object.rotation_degrees
-		current.y = ry
-		artifact_object.rotation_degrees = current
-		# Also try to set an exported yaw property if available
-		_try_set_property(artifact_object, "yaw_degrees", ry)
+		# Apply per-instance overrides for 3D objects
+		
+		# Apply Y position override (e.g., random_number_book_page_1955:0:2.5:1.2 → Y offset +2.5)
+		if overrides.has("y_position"):
+			var y_offset = float(overrides.get("y_position", 0.0))
+			artifact_object.position.y += y_offset
+			print("    Applied Y position offset: +%s" % str(y_offset))
+		
+		# Apply uniform scale override (e.g., random_number_book_page_1955:0:2.5:1.2 → scale all axes by 1.2)
+		if overrides.has("uniform_scale"):
+			var scale_factor = float(overrides.get("uniform_scale", 1.0))
+			artifact_object.scale *= scale_factor
+			print("    Applied uniform scale: %s" % str(scale_factor))
+		
+		# Apply rotation override (e.g., scifi_panel_wall:45 → rotate Y by 45 degrees)
+		if overrides.has("rotation_y_degrees"):
+			var ry = float(overrides.get("rotation_y_degrees", 0.0))
+			var current = artifact_object.rotation_degrees
+			current.y = ry
+			artifact_object.rotation_degrees = current
+			# Also try to set an exported yaw property if available
+			_try_set_property(artifact_object, "yaw_degrees", ry)
+			print("    Applied Y rotation: %s degrees" % str(ry))
+			
+	elif artifact_object is Control:
+		# Handle 2D/UI artifacts (like the algorithm overview)
+		# For Control nodes, position them to fill the screen or use anchors
+		artifact_object.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		print("    Applied fullscreen preset for Control artifact")
+		
+		# Apply scale override for Control nodes differently
+		if overrides.has("uniform_scale"):
+			var scale_factor = float(overrides.get("uniform_scale", 1.0))
+			artifact_object.scale = Vector2(scale_factor, scale_factor)
+			print("    Applied uniform scale for Control: %s" % str(scale_factor))
+	else:
+		print("GridInteractablesComponent: WARNING - Unknown artifact node type: %s" % artifact_object.get_class())
 
 	# Apply per-instance label text if provided (e.g., level_entrance:90|Level 3)
 	if overrides.has("label_text"):
@@ -286,6 +317,7 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var label_node = artifact_object.find_child("Label3D", true, false)
 		if label_node and (label_node is Label3D):
 			label_node.text = label_text
+		print("    Applied label text: '%s'" % label_text)
 	
 	# Set artifact metadata using both lookup_name and display name
 	artifact_object.set_meta("artifact_lookup_name", lookup_name)
@@ -316,46 +348,69 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 
 # Parse compact token syntax from map JSON cells.
 # Examples:
-#   "scifi_panel_wall"           → { lookup_name: "scifi_panel_wall", overrides: {} }
-#   "scifi_panel_wall:45"        → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
+#   "scifi_panel_wall"                    → { lookup_name: "scifi_panel_wall", overrides: {} }
+#   "scifi_panel_wall:45"                 → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
+#   "random_number_book_page_1955:0:2.5:1.2" → { lookup_name: "random_number_book_page_1955", overrides: { rotation_y_degrees: 0, y_position: 2.5, uniform_scale: 1.2 } }
+#   "scifi_panel_wall:45|Label Text"      → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45, label_text: "Label Text" } }
 func _parse_interactable_token(token: String) -> Dictionary:
 	var result := {"lookup_name": token, "overrides": {}}
-	# Expect formats:
-	#   name
-	#   name:45
-	#   name:Label Text
-	#   name:45|Label Text
+	
 	if token.find(":") == -1:
 		return result
+	
 	var parts = token.split(":", false)
 	if parts.size() < 2:
 		return result
+		
 	var name = parts[0].strip_edges()
-	var param = parts[1].strip_edges()
 	result.lookup_name = name
-
-	var rot_part = param
-	var label_part = ""
-	if param.find("|") != -1:
-		var p2 = param.split("|", false)
-		rot_part = p2[0].strip_edges()
-		if p2.size() > 1:
-			label_part = p2[1].strip_edges()
+	
+	# Handle different parameter formats:
+	# Format 1: name:rotation|label  (legacy format)
+	# Format 2: name:rotation:y_pos:scale  (new extended format)
+	
+	if parts.size() == 2:
+		# Legacy format: name:param where param could be rotation or rotation|label
+		var param = parts[1].strip_edges()
+		var rot_part = param
+		var label_part = ""
+		
+		if param.find("|") != -1:
+			var p2 = param.split("|", false)
+			rot_part = p2[0].strip_edges()
+			if p2.size() > 1:
+				label_part = p2[1].strip_edges()
+		
+		# rotation part
+		if rot_part.is_valid_float():
+			result.overrides["rotation_y_degrees"] = float(rot_part)
 		else:
-			label_part = ""
-
-	# rotation part
-	if rot_part.is_valid_float():
-		result.overrides["rotation_y_degrees"] = float(rot_part)
-	else:
-		# If it's not numeric and no explicit label part, treat rot_part as label text
-		if label_part == "" and rot_part != "":
-			label_part = rot_part
-
-	# label part
-	if label_part != "":
-		result.overrides["label_text"] = label_part
-
+			# If it's not numeric and no explicit label part, treat rot_part as label text
+			if label_part == "" and rot_part != "":
+				label_part = rot_part
+		
+		# label part
+		if label_part != "":
+			result.overrides["label_text"] = label_part
+			
+	elif parts.size() >= 3:
+		# Extended format: name:rotation:y_pos[:scale]
+		# Parse rotation parameter
+		var rotation_str = parts[1].strip_edges()
+		if rotation_str.is_valid_float():
+			result.overrides["rotation_y_degrees"] = float(rotation_str)
+		
+		# Parse Y position parameter
+		var y_pos_str = parts[2].strip_edges()
+		if y_pos_str.is_valid_float():
+			result.overrides["y_position"] = float(y_pos_str)
+		
+		# Parse optional uniform scale parameter
+		if parts.size() >= 4:
+			var scale_str = parts[3].strip_edges()
+			if scale_str.is_valid_float():
+				result.overrides["uniform_scale"] = float(scale_str)
+	
 	return result
 
 # Safely set a property if the node exposes it
@@ -369,43 +424,64 @@ func _try_set_property(obj: Object, prop: String, value) -> void:
 			return
 
 # Apply transform data from artifact definition
-func _apply_artifact_transform(artifact_object: Node3D, artifact_info: Dictionary):
-	# Apply rotation if specified in artifact definition
-	if artifact_info.has("rotation"):
-		var rotation_data = artifact_info["rotation"]
-		if rotation_data is Array and rotation_data.size() >= 3:
-			artifact_object.rotation_degrees = Vector3(rotation_data[0], rotation_data[1], rotation_data[2])
-	
-	# Apply scale if specified in artifact definition
-	if artifact_info.has("scale"):
-		var scale_data = artifact_info["scale"]
-		if scale_data is Array and scale_data.size() >= 3:
-			artifact_object.scale = Vector3(scale_data[0], scale_data[1], scale_data[2])
-		elif scale_data is float or scale_data is int:
-			artifact_object.scale = Vector3.ONE * scale_data
+func _apply_artifact_transform(artifact_object: Node, artifact_info: Dictionary):
+	if artifact_object is Node3D:
+		# Apply rotation if specified in artifact definition
+		if artifact_info.has("rotation"):
+			var rotation_data = artifact_info["rotation"]
+			if rotation_data is Array and rotation_data.size() >= 3:
+				artifact_object.rotation_degrees = Vector3(rotation_data[0], rotation_data[1], rotation_data[2])
+		
+		# Apply scale if specified in artifact definition
+		if artifact_info.has("scale"):
+			var scale_data = artifact_info["scale"]
+			if scale_data is Array and scale_data.size() >= 3:
+				artifact_object.scale = Vector3(scale_data[0], scale_data[1], scale_data[2])
+			elif scale_data is float or scale_data is int:
+				artifact_object.scale = Vector3.ONE * scale_data
+	elif artifact_object is Control:
+		# For Control nodes, handle scale differently
+		if artifact_info.has("scale"):
+			var scale_data = artifact_info["scale"]
+			if scale_data is Array and scale_data.size() >= 2:
+				artifact_object.scale = Vector2(scale_data[0], scale_data[1])
+			elif scale_data is float or scale_data is int:
+				artifact_object.scale = Vector2.ONE * scale_data
 
 # Load and instantiate artifact scene
-func _load_and_instantiate_artifact(scene_path: String) -> Node3D:
+func _load_and_instantiate_artifact(scene_path: String) -> Node:
 	var scene_resource = _load_scene_cached(scene_path)
 	if scene_resource:
 		return scene_resource.instantiate()
 	return null
 
 # Update artifact labels with information
-func _update_artifact_labels(artifact_object: Node3D, lookup_name: String, artifact_info: Dictionary):
-	# Look for common label names
-	var label_names = ["id_info_Label3D", "Label3D", "InfoLabel"]
-	
-	for label_name in label_names:
-		var label = artifact_object.find_child(label_name)
-		if label and label is Label3D:
-			var display_name = artifact_info.get("name", lookup_name)
-			label.text = "%s: %s" % [lookup_name, display_name]
-			print("  Updated label: %s" % label.text)
-			break
+func _update_artifact_labels(artifact_object: Node, lookup_name: String, artifact_info: Dictionary):
+	if artifact_object is Node3D:
+		# Look for common 3D label names
+		var label_names = ["id_info_Label3D", "Label3D", "InfoLabel"]
+		
+		for label_name in label_names:
+			var label = artifact_object.find_child(label_name)
+			if label and label is Label3D:
+				var display_name = artifact_info.get("name", lookup_name)
+				label.text = "%s: %s" % [lookup_name, display_name]
+				print("  Updated 3D label: %s" % label.text)
+				break
+	elif artifact_object is Control:
+		# Look for common 2D label names
+		var label_names = ["Label", "TitleLabel", "InfoLabel"]
+		
+		for label_name in label_names:
+			var label = artifact_object.find_child(label_name)
+			if label and label is Label:
+				var display_name = artifact_info.get("name", lookup_name)
+				label.text = "%s: %s" % [lookup_name, display_name]
+				print("  Updated 2D label: %s" % label.text)
+				break
 
 # Connect artifact signals using lookup_name
-func _connect_artifact_signals(artifact_object: Node3D, lookup_name: String):
+func _connect_artifact_signals(artifact_object: Node, lookup_name: String):
 	# Connect common interaction signals
 	if artifact_object.has_signal("interact"):
 		artifact_object.interact.connect(_on_artifact_interact.bind(lookup_name, artifact_object))
@@ -417,11 +493,20 @@ func _connect_artifact_signals(artifact_object: Node3D, lookup_name: String):
 		artifact_object.artifact_activated.connect(_on_artifact_activated.bind(lookup_name, artifact_object))
 
 # Handle artifact interaction
-func _on_artifact_interact(lookup_name: String, artifact_object: Node3D):
+func _on_artifact_interact(lookup_name: String, artifact_object: Node):
 	var artifact_info = get_artifact_info(lookup_name)
+	var position = Vector3.ZERO
+	
+	# Get position based on node type
+	if artifact_object is Node3D:
+		position = artifact_object.global_position
+	elif artifact_object is Control:
+		# For Control nodes, use a default position or convert from 2D
+		position = Vector3(artifact_object.global_position.x, 0, artifact_object.global_position.y)
+	
 	var artifact_data = {
 		"lookup_name": lookup_name,
-		"position": artifact_object.global_position,
+		"position": position,
 		"name": artifact_info.get("name", lookup_name),
 		"artifact_type": artifact_info.get("artifact_type", "unknown"),
 		"description": artifact_info.get("description", ""),
@@ -429,10 +514,10 @@ func _on_artifact_interact(lookup_name: String, artifact_object: Node3D):
 	}
 	
 	print("GridInteractablesComponent: Artifact interaction - %s ('%s')" % [lookup_name, artifact_info.get("name", "")])
-	interactable_activated.emit(lookup_name, artifact_object.global_position, artifact_data)
+	interactable_activated.emit(lookup_name, position, artifact_data)
 
 # Handle artifact activation
-func _on_artifact_activated(lookup_name: String, artifact_object: Node3D):
+func _on_artifact_activated(lookup_name: String, artifact_object: Node):
 	_on_artifact_interact(lookup_name, artifact_object)
 
 # Load scene with caching

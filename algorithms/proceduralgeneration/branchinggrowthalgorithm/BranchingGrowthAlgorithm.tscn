@@ -4,6 +4,9 @@
 
 [node name="BranchingGrowthAlgorithm" type="Node3D"]
 script = ExtResource("1_t43dj")
+jitter = 0.2
+pulse_strength = 0.4
+rainbow_speed = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.792194, 0.61027, 0, -0.61027, 0.792194, 0, 1.71594, 3.49372)

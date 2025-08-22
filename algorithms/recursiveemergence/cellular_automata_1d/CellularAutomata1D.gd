@@ -35,7 +35,7 @@ func create_automaton_grid():
 			cell.size = Vector3(0.15, 0.15, 0.15)
 			cell.position = Vector3(
 				-6 + x * 0.3,
-				3 - y * 0.2,
+				9 - y * 0.2,
 				0
 			)
 			grid_parent.add_child(cell)
@@ -55,7 +55,7 @@ func create_rule_table():
 			input_cell.size = Vector3(0.1, 0.1, 0.1)
 			input_cell.position = Vector3(
 				-6 + i * 1.5 + j * 0.15,
-				-1.5,
+				4.5,
 				0
 			)
 			rule_group.add_child(input_cell)
@@ -67,7 +67,7 @@ func create_rule_table():
 		arrow.rotation_degrees = Vector3(180, 0, 0)
 		arrow.position = Vector3(
 			-6 + i * 1.5 + 0.15,
-			-1.8,
+			4.2,
 			0
 		)
 		rule_group.add_child(arrow)
@@ -77,7 +77,7 @@ func create_rule_table():
 		output_cell.size = Vector3(0.1, 0.1, 0.1)
 		output_cell.position = Vector3(
 			-6 + i * 1.5 + 0.15,
-			-2.1,
+			3.9,
 			0
 		)
 		rule_group.add_child(output_cell)
@@ -250,7 +250,7 @@ func animate_automaton():
 	for i in range(rule_parent.get_child_count()):
 		var rule_group = rule_parent.get_child(i)
 		var wave = sin(time * 4.0 + i * 0.5) * 0.1
-		rule_group.position.y = -1.8 + wave
+		rule_group.position.y = 4.2 + wave
 
 func animate_indicators():
 	# Generation indicator
@@ -258,12 +258,12 @@ func animate_indicators():
 	var generationindicator = get_node_or_null("GenerationIndicator")
 	if generationindicator and generationindicator is CSGCylinder3D:
 		generationindicator.height = gen_height
-		generationindicator.position.y = -3 + gen_height/2
+		generationindicator.position.y = 3 + gen_height/2
 	
 	# Rule number indicator
 	var rule_height = (rule_number / 255.0) * 2.0 + 0.5
 	$RuleNumber.size.y = rule_height
-	$RuleNumber.position.y = -3 + rule_height/2
+	$RuleNumber.position.y = 3 + rule_height/2
 	
 	# Update rule number color based on rule
 	var rule_material = $RuleNumber.material_override as StandardMaterial3D

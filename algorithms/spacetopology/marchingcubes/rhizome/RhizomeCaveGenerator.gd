@@ -12,14 +12,14 @@ var voxel_chunks: Array[VoxelChunk] = []
 
 # Generation parameters
 @export var cave_size: Vector3 = Vector3(100, 40, 100)
-@export var chunk_size: Vector3i = Vector3i(16, 16, 16)  # Smaller chunks for better quality
-@export var voxel_scale: float = 0.8  # Finer voxel resolution
+@export var chunk_size: Vector3i = Vector3i(24, 24, 24)  # Smaller chunks for better quality
+@export var voxel_scale: float = 1.5  # Finer voxel resolution
 @export var generation_seed: int = -1
 
 # Cave system parameters
 @export var initial_chambers: int = 3
-@export var growth_iterations: int = 30  # Reduced for performance
-@export var noise_strength: float = 0.2  # Reduced to prevent holes
+@export var growth_iterations: int = 20  # Reduced for performance
+@export var noise_strength: float = 0.1  # Reduced to prevent holes
 @export var surface_threshold: float = 0.5
 
 # Generated content

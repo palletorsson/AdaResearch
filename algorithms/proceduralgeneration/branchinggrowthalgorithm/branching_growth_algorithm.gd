@@ -1,19 +1,23 @@
 extends Node3D
 
-# Parameters for the growth algorithm
-@export var max_branches = 200  # Reduced for VR performance
-@export var attraction_distance = 3.0
-@export var min_branch_distance = 0.3
-@export var growth_distance = 0.15
-@export var jitter = 0.05
-@export var attractor_count = 50  # Much smaller for VR
+# Parameters for the SPICY QUEER growth algorithm 🌈✨
+@export var max_branches = 500  # More branches for fabulous density!
+@export var attraction_distance = 4.0
+@export var min_branch_distance = 0.25
+@export var growth_distance = 0.2
+@export var jitter = 0.15  # More chaos, more queer energy!
+@export var attractor_count = 80  # More attraction points!
 
-# Visual parameters
+# 🏳️‍🌈 QUEER VISUAL PARAMETERS 🏳️‍⚧️
 @export var branch_material: Material
-@export var branch_radius = 0.02
-@export var growth_per_frame = 5  # Grow multiple branches per frame for smooth VR
+@export var branch_radius = 0.03
+@export var growth_per_frame = 8  # Faster, more dynamic growth
+@export var enable_pride_colors = true
+@export var enable_sparkles = true
+@export var pulse_strength = 0.3
+@export var rainbow_speed = 2.0
 
-# Internal variables - simple arrays for compatibility
+# Internal variables - arrays with QUEER POWER! 🌈
 var branches = []
 var attractors = []
 
@@ -21,9 +25,25 @@ var attractors = []
 var mesh_instance: MeshInstance3D
 var immediate_mesh: ImmediateMesh
 
-# Performance tracking
+# ✨ SPICY QUEER TIMING AND EFFECTS ✨
 var growth_timer = 0.0
 var is_growing = false
+var time_elapsed = 0.0
+var current_pride_flag = 0
+var color_cycle_timer = 0.0
+var pulse_timer = 0.0
+
+# 🏳️‍🌈 PRIDE FLAG COLORS 🏳️‍⚧️
+var pride_flags = {
+	"rainbow": [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE],
+	"trans": [Color(0.33, 0.8, 1.0), Color(0.96, 0.66, 0.73), Color.WHITE, Color(0.96, 0.66, 0.73), Color(0.33, 0.8, 1.0)],
+	"lesbian": [Color(0.84, 0.4, 0.0), Color(1.0, 0.6, 0.4), Color.WHITE, Color(0.83, 0.46, 0.65), Color(0.64, 0.2, 0.4)],
+	"bi": [Color(0.84, 0.0, 0.5), Color(0.84, 0.0, 0.5), Color(0.4, 0.2, 0.6), Color(0.0, 0.4, 1.0), Color(0.0, 0.4, 1.0)],
+	"pan": [Color(1.0, 0.13, 0.54), Color(1.0, 0.85, 0.0), Color(0.13, 0.69, 1.0)],
+	"ace": [Color.BLACK, Color(0.64, 0.64, 0.64), Color.WHITE, Color(0.5, 0.0, 0.5)],
+	"nonbinary": [Color.YELLOW, Color.WHITE, Color(0.6, 0.4, 0.8), Color.BLACK]
+}
+var current_flag_name = "rainbow"
 
 class Branch:
 	var position: Vector3
@@ -31,19 +51,27 @@ class Branch:
 	var parent_index: int = -1
 	var is_active: bool = true
 	var generation: int = 0
+	var birth_time: float = 0.0  # ✨ For sparkly effects!
+	var personal_hue: float = 0.0  # 🌈 Each branch gets its own rainbow position!
 	
-	func _init(pos: Vector3, dir: Vector3, parent: int = -1, gen: int = 0):
+	func _init(pos: Vector3, dir: Vector3, parent: int = -1, gen: int = 0, time: float = 0.0):
 		position = pos
 		direction = dir.normalized()
 		parent_index = parent
 		generation = gen
+		birth_time = time
+		personal_hue = randf()  # Random rainbow position!
 
 class Attractor:
 	var position: Vector3
 	var is_reached: bool = false
+	var sparkle_phase: float = 0.0  # ✨ For twinkling attractors!
+	var attractor_hue: float = 0.0  # 🌈 Each attractor gets fabulous colors!
 	
 	func _init(pos: Vector3):
 		position = pos
+		sparkle_phase = randf() * PI * 2
+		attractor_hue = randf()
 
 func _ready():
 	print("Initializing VR Space Colonization...")
@@ -65,8 +93,8 @@ func _ready():
 	
 	add_child(mesh_instance)
 	
-	# Initialize with a single branch at the origin
-	add_branch(Vector3.ZERO, Vector3.UP, -1, 0)
+	# Initialize with a FABULOUS starting branch! 🌈
+	add_branch(Vector3.ZERO, Vector3.UP, -1, 0, 0.0)
 	
 	# Generate fewer attractors for VR
 	generate_attractors_vr_optimized()
@@ -76,8 +104,8 @@ func _ready():
 	# Start growth process
 	start_growth()
 
-func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1, generation: int = 0):
-	var branch = Branch.new(position, direction, parent_index, generation)
+func add_branch(position: Vector3, direction: Vector3, parent_index: int = -1, generation: int = 0, birth_time: float = 0.0):
+	var branch = Branch.new(position, direction, parent_index, generation, birth_time)
 	branches.append(branch)
 
 func generate_attractors_vr_optimized():
@@ -107,13 +135,26 @@ func start_growth():
 	growth_timer = 0.0
 
 func _process(delta):
+	# ✨ ALWAYS UPDATE QUEER TIMERS FOR FABULOUS EFFECTS! ✨
+	time_elapsed += delta
+	color_cycle_timer += delta * rainbow_speed
+	pulse_timer += delta * 4.0  # Heartbeat-like pulsing
+	
+	# Cycle through pride flags every 10 seconds
+	if color_cycle_timer > 10.0:
+		color_cycle_timer = 0.0
+		var flag_names = pride_flags.keys()
+		current_pride_flag = (current_pride_flag + 1) % flag_names.size()
+		current_flag_name = flag_names[current_pride_flag]
+		print("Switching to ", current_flag_name, " pride colors! 🌈")
+	
 	if not is_growing:
 		return
 	
 	growth_timer += delta
 	
-	# Grow branches at a steady rate for smooth VR experience - NON-BLOCKING
-	if growth_timer > 0.016:  # ~60 FPS target
+	# Grow branches at a SPICY rate for dynamic experience! 🔥
+	if growth_timer > 0.012:  # Faster updates for more fluid growth
 		growth_timer = 0.0
 		
 		# Process only a limited number of branches per frame to avoid blocking
@@ -166,22 +207,26 @@ func grow_step() -> bool:
 			var attractor = attractors[closest_attractor_index]
 			var direction = (attractor.position - branch.position).normalized()
 			
-			# Add minimal jitter for VR (less motion sickness)
+			# Add SPICY QUEER JITTER for organic flow! 🔥
 			if jitter > 0:
+				# Flowing, wave-like movement
+				var wave_offset = sin(time_elapsed * 3.0 + branch.position.length()) * jitter * 0.5
 				direction += Vector3(
-					randf_range(-jitter, jitter),
-					randf_range(-jitter, jitter),
-					randf_range(-jitter, jitter)
+					randf_range(-jitter, jitter) + wave_offset,
+					randf_range(-jitter, jitter) + sin(time_elapsed * 2.0) * jitter * 0.3,
+					randf_range(-jitter, jitter) + cos(time_elapsed * 2.5) * jitter * 0.3
 				)
 				direction = direction.normalized()
 			
-			# Create new branch
-			var new_position = branch.position + direction * growth_distance
+			# Create new FABULOUS branch! ✨
+			var pulsed_distance = growth_distance * (1.0 + sin(pulse_timer) * pulse_strength * 0.5)
+			var new_position = branch.position + direction * pulsed_distance
 			new_branches.append({
 				"position": new_position,
 				"direction": direction,
 				"parent": i,
-				"generation": branch.generation + 1
+				"generation": branch.generation + 1,
+				"birth_time": time_elapsed
 			})
 			
 			# Check if attractor is reached
@@ -197,13 +242,14 @@ func grow_step() -> bool:
 			is_growing = false
 			return false
 	
-	# Add new branches
+	# Add new QUEER branches! 🌈
 	for branch_data in new_branches:
 		add_branch(
 			branch_data.position,
 			branch_data.direction,
 			branch_data.parent,
-			branch_data.generation
+			branch_data.generation,
+			branch_data.birth_time
 		)
 	
 	# Mark reached attractors
@@ -216,20 +262,25 @@ func update_mesh_immediate():
 	immediate_mesh.clear_surfaces()
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
-	# Draw all branches with generation-based colors
+	# Draw all branches with FABULOUS QUEER COLORS! 🌈✨
 	for i in range(branches.size()):
 		var branch = branches[i]
 		if branch.parent_index >= 0 and branch.parent_index < branches.size():
 			var parent = branches[branch.parent_index]
 			
-			# Color based on generation for visual feedback
-			var generation_factor = min(branch.generation / 10.0, 1.0)
-			var color = Color(
-				1.0 - generation_factor * 0.5,
-				1.0 - generation_factor * 0.3,
-				1.0,
-				1.0
-			)
+			# Get SPICY colors based on current pride flag!
+			var color = get_fabulous_color(branch)
+			
+			# Add sparkle effect for young branches! ✨
+			var age = time_elapsed - branch.birth_time
+			if age < 2.0 and enable_sparkles:
+				var sparkle_intensity = (2.0 - age) / 2.0
+				var sparkle = sin(time_elapsed * 10.0 + branch.position.length()) * 0.5 + 0.5
+				color = color.lerp(Color.WHITE, sparkle * sparkle_intensity * 0.6)
+			
+			# Pulsing brightness based on heartbeat! 💖
+			var pulse = sin(pulse_timer) * pulse_strength + 1.0
+			color = color * pulse
 			
 			immediate_mesh.surface_set_color(color)
 			immediate_mesh.surface_add_vertex(parent.position)
@@ -237,6 +288,28 @@ func update_mesh_immediate():
 			immediate_mesh.surface_add_vertex(branch.position)
 	
 	immediate_mesh.surface_end()
+
+# 🌈 GET FABULOUS PRIDE COLORS! 🌈
+func get_fabulous_color(branch: Branch) -> Color:
+	if not enable_pride_colors:
+		return Color.WHITE
+	
+	var current_colors = pride_flags[current_flag_name]
+	
+	# Use branch's personal hue and generation for color selection
+	var color_index = int((branch.personal_hue + branch.generation * 0.1) * current_colors.size()) % current_colors.size()
+	var base_color = current_colors[color_index]
+	
+	# Add rainbow cycling effect
+	var rainbow_shift = sin(color_cycle_timer + branch.position.x * 0.5) * 0.2
+	var hue_shifted = Color.from_hsv(
+		base_color.h + rainbow_shift,
+		base_color.s,
+		base_color.v,
+		base_color.a
+	)
+	
+	return hue_shifted
 
 # VR-specific functions
 func set_vr_start_point(position: Vector3):
@@ -348,14 +421,14 @@ func enable_cylinder_rendering(enable: bool = true):
 			if instance_count > 50:
 				break
 
-# Debug function
+# 🌈 FABULOUS DEBUG FUNCTIONS! ✨
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("Restarting growth...")
+				print("Restarting QUEER growth... 🌈")
 				clear_growth()
-				add_branch(Vector3.ZERO, Vector3.UP, -1, 0)
+				add_branch(Vector3.ZERO, Vector3.UP, -1, 0, time_elapsed)
 				generate_attractors_vr_optimized()
 				start_growth()
 			KEY_P:
@@ -367,4 +440,19 @@ func _input(event):
 					print("Growth resumed")
 			KEY_S:
 				var stats = get_growth_stats()
-				print("Stats: ", stats)
+				print("SPICY Stats: ", stats, " Flag: ", current_flag_name, " 🌈")
+			KEY_C:
+				# Cycle pride flags manually
+				var flag_names = pride_flags.keys()
+				current_pride_flag = (current_pride_flag + 1) % flag_names.size()
+				current_flag_name = flag_names[current_pride_flag]
+				color_cycle_timer = 0.0
+				print("Switched to ", current_flag_name, " colors! 🏳️‍🌈")
+			KEY_T:
+				# Toggle sparkles
+				enable_sparkles = !enable_sparkles
+				print("Sparkles: ", "ON ✨" if enable_sparkles else "OFF")
+			KEY_Q:
+				# Toggle pride colors
+				enable_pride_colors = !enable_pride_colors
+				print("Pride colors: ", "FABULOUS 🌈" if enable_pride_colors else "Basic")

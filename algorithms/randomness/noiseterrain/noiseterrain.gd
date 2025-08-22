@@ -43,11 +43,15 @@ var mouse_sensitivity: float = 0.002
 var time: float = 0.0
 var animate_terrain: bool = true
 
+# Blob system
+var blob_spawner: NoiseBlobSpawner
+
 func _ready():
 	setup_noise_generators()
 	setup_materials()
 	setup_ui_connections()
 	update_ui_button_states()
+	setup_blob_system()
 	generate_terrain()
 
 func _process(delta):
@@ -57,8 +61,13 @@ func _process(delta):
 		animate_terrain_colors(delta)
 
 func setup_noise_generators():
+	print("Setting up noise generators...")
+	
 	# Primary terrain noise - smoother settings
 	noise = FastNoiseLite.new()
+	if noise == null:
+		print("ERROR: Failed to create primary noise!")
+		return
 	noise.seed = randi()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.frequency = 0.008  # Lower frequency for smoother terrain
@@ -68,6 +77,9 @@ func setup_noise_generators():
 	
 	# Secondary detail noise - gentler
 	secondary_noise = FastNoiseLite.new()
+	if secondary_noise == null:
+		print("ERROR: Failed to create secondary noise!")
+		return
 	secondary_noise.seed = randi()
 	secondary_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	secondary_noise.frequency = 0.03  # Smaller details
@@ -75,10 +87,15 @@ func setup_noise_generators():
 	
 	# Bulge/warp noise for queer distortion - much gentler
 	bulge_noise = FastNoiseLite.new()
+	if bulge_noise == null:
+		print("ERROR: Failed to create bulge noise!")
+		return
 	bulge_noise.seed = randi()
 	bulge_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	bulge_noise.frequency = 0.01  # Lower frequency
 	bulge_noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
+	
+	print("Noise generators created successfully!")
 
 func setup_materials():
 	# Create heightmap material
@@ -119,6 +136,12 @@ func setup_ui_connections():
 	$ParameterUI/ParameterPanel/ContourFrequencySlider.value_changed.connect(_on_contour_frequency_changed)
 	$ParameterUI/ParameterPanel/ContourStrengthSlider.value_changed.connect(_on_contour_strength_changed)
 	$ParameterUI/ParameterPanel/EnableContoursCheckbox.toggled.connect(_on_enable_contours_toggled)
+	
+	# Blob system connections
+	$ParameterUI/ParameterPanel/BlobButtonContainer/SpawnBlobButton.pressed.connect(_on_spawn_blob_pressed)
+	$ParameterUI/ParameterPanel/BlobButtonContainer/ClearBlobsButton.pressed.connect(_on_clear_blobs_pressed)
+	$ParameterUI/ParameterPanel/BlobCountSlider.value_changed.connect(_on_blob_count_changed)
+	$ParameterUI/ParameterPanel/BlobSpeedSlider.value_changed.connect(_on_blob_speed_changed)
 
 # Removed camera and player movement functions
 # setup_camera_follow(), handle_player_movement(), update_camera_follow(), _input()
@@ -200,15 +223,29 @@ func create_terrain_mesh():
 	print("Mesh created successfully with %d surfaces!" % terrain_mesh.get_surface_count())
 
 func generate_height_at_position(x: float, z: float) -> float:
+	# Safety check: ensure noise generators are initialized
+	if noise == null:
+		print("ERROR: noise is null, reinitializing...")
+		setup_noise_generators()
+	
+	if noise == null:
+		print("CRITICAL ERROR: Failed to initialize noise generators!")
+		return 0.0
+	
 	# Primary noise layer - smoother
 	var primary_height = noise.get_noise_2d(x * noise_scale, z * noise_scale)
 	
 	# Secondary detail layer - reduced intensity
-	var detail_height = secondary_noise.get_noise_2d(x * noise_scale * 2.0, z * noise_scale * 2.0) * 0.2
+	var detail_height = 0.0
+	if secondary_noise != null:
+		detail_height = secondary_noise.get_noise_2d(x * noise_scale * 2.0, z * noise_scale * 2.0) * 0.2
 	
 	# Bulge/warp effect - much gentler
-	var bulge_x = x + bulge_noise.get_noise_2d(x * 0.003, z * 0.003) * bulginess * 5.0
-	var bulge_z = z + bulge_noise.get_noise_2d(x * 0.004, z * 0.004) * bulginess * 5.0
+	var bulge_x = x
+	var bulge_z = z
+	if bulge_noise != null:
+		bulge_x = x + bulge_noise.get_noise_2d(x * 0.003, z * 0.003) * bulginess * 5.0
+		bulge_z = z + bulge_noise.get_noise_2d(x * 0.004, z * 0.004) * bulginess * 5.0
 	var bulge_height = noise.get_noise_2d(bulge_x * noise_scale, bulge_z * noise_scale) * bulginess * 0.3
 	
 	# Combine layers with smoother blending
@@ -232,7 +269,9 @@ func generate_color_at_position(x: float, z: float, height: float) -> Color:
 	height_ratio = clamp(height_ratio, 0.0, 1.0)
 	
 	# Noise-based color variation
-	var color_noise = secondary_noise.get_noise_2d(x * 0.02, z * 0.02)
+	var color_noise = 0.0
+	if secondary_noise != null:
+		color_noise = secondary_noise.get_noise_2d(x * 0.02, z * 0.02)
 	var color_variation = (color_noise + 1.0) * 0.5  # Normalize to 0-1
 	
 	# Mix colors based on height and noise
@@ -241,7 +280,9 @@ func generate_color_at_position(x: float, z: float, height: float) -> Color:
 	var final_color = color1.lerp(color2, color_shift)
 	
 	# Add some sparkle/variation
-	var sparkle = abs(bulge_noise.get_noise_2d(x * 0.1, z * 0.1))
+	var sparkle = 0.0
+	if bulge_noise != null:
+		sparkle = abs(bulge_noise.get_noise_2d(x * 0.1, z * 0.1))
 	final_color = final_color.lerp(Color.WHITE, sparkle * 0.2)
 	
 	return final_color
@@ -454,6 +495,40 @@ func _on_enable_contours_toggled(enabled: bool):
 	enable_contours = enabled
 	if heightmap_material:
 		heightmap_material.set_shader_parameter("enable_contours", enable_contours)
+
+# Blob system setup and event handlers
+func setup_blob_system():
+	blob_spawner = $NoiseBlobSpawner
+	if blob_spawner:
+		print("Blob spawner found and connected!")
+	else:
+		print("WARNING: Blob spawner not found!")
+
+func _on_spawn_blob_pressed():
+	if blob_spawner:
+		blob_spawner.spawn_single_blob()
+		update_blob_ui_labels()
+
+func _on_clear_blobs_pressed():
+	if blob_spawner:
+		blob_spawner.clear_all_blobs()
+		update_blob_ui_labels()
+
+func _on_blob_count_changed(value: float):
+	if blob_spawner:
+		blob_spawner.blob_count = int(value)
+		update_blob_ui_labels()
+
+func _on_blob_speed_changed(value: float):
+	if blob_spawner:
+		blob_spawner.blob_speed = value
+		update_blob_ui_labels()
+
+func update_blob_ui_labels():
+	if blob_spawner:
+		var stats = blob_spawner.get_blob_stats()
+		$ParameterUI/ParameterPanel/BlobCountLabel.text = "Active Blobs: %d/%d" % [stats.active_blobs, stats.max_blobs]
+		$ParameterUI/ParameterPanel/BlobSpeedLabel.text = "Blob Speed: %.1f" % blob_spawner.blob_speed
 
 # Public API
 func get_height_at_world_position(world_pos: Vector3) -> float:

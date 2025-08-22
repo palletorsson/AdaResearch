@@ -1,19 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwq0sahysj06c"]
+[gd_scene load_steps=5 format=3 uid="uid://bwq0sahysj06c"]
 
 [ext_resource type="PackedScene" uid="uid://c6h2wjm2fvjsv" path="res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn" id="1_l6bsy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
 viewport_path = NodePath("SubViewport")
 
-[node name="MirroredCellularAutomata" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6bsy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ac470"]
+
+[node name="MirroredCellularAutomata2" type="Node3D"]
 
 [node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(400, 400)
+render_target_update_mode = 3
 
 [node name="MirroredCellularAutomata" parent="SubViewport" instance=ExtResource("1_l6bsy")]
+grid_size = 100
+cell_size = 4
+update_interval = 0.5
+symmetry_type = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.374844)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221659, 1.30596, 4.52706)
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.200729, 0.200192, 0.0334181)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 texture = SubResource("ViewportTexture_btd14")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 0.1, 0, 0, 0, 4, 0, -0.0990655, 0)
+material_override = SubResource("StandardMaterial3D_l6bsy")
+mesh = SubResource("BoxMesh_ac470")

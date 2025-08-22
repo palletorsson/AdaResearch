@@ -13,7 +13,7 @@ RESOLUTION = 32
 NOISE = SubResource("FastNoiseLite_1xmv4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 50, 50, 50)
+transform = Transform3D(1, 0, 0, 0, 0.916997, 0.398893, 0, -0.398893, 0.916997, 0, 2.49236, 7.6094)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 50, 0)

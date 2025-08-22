@@ -8,7 +8,7 @@
 			"name": "This is just a test",
 			"lookup_name": "test_scene_1",
 			"description": "this is the test",
-			"scene": "res://algorithms/spacetopology/marchingcubes/fast_landscape_demo.tscn",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
 			"position": [0.0, 1.0, 1.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [0.5, 0.5, 0.5],
@@ -2311,6 +2311,85 @@
 				"light_intensity": 1.3,
 				"light_range": 3.5,
 				"light_position": [0, 1.5, 0]
+			}
+		},
+		"perlin_noise_clouds": {
+			"name": "Perlin Noise Clouds",
+			"lookup_name": "perlin_noise_clouds",
+			"description": "Interactive 3D volumetric cloud generation using Perlin noise for atmospheric and procedural sky effects",
+			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn",
+			"position": [46.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 0.9, 1.0],
+				"light_intensity": 1.4,
+				"light_range": 4.0,
+				"light_position": [0, 1.6, 0]
+			},
+			"atmospheric_properties": {
+				"volumetric_rendering": true,
+				"cloud_density": "variable",
+				"wind_effects": true,
+				"lighting_scattering": true
+			}
+		},
+		"algorithm_overview": {
+			"name": "Algorithm Learning Overview",
+			"lookup_name": "algorithm_overview",
+			"description": "Interactive 2D flowchart visualization showing the complete learning progression through various algorithm categories and their relationships",
+			"scene": "res://algorithms/misc/maps_overview_in_3d.tscn",
+			"position": [1.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "meta_learning",
+			"artifact_type": "navigation_tool",
+			"prerequisites": [],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.9, 0.9, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 3.0,
+				"light_position": [0, 1.4, 0]
+			},
+			"ui_properties": {
+				"fullscreen_mode": true,
+				"interactive_navigation": true,
+				"category_color_coding": true,
+				"connection_visualization": true
+			}
+		},
+		"noise_terrain_with_blobs": {
+			"name": "Noise Terrain with Animated Blobs",
+			"lookup_name": "noise_terrain_with_blobs",
+			"description": "Advanced noise terrain generator with animated blob particles that move across the landscape using spatial shaders and dynamic positioning",
+			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn",
+			"position": [48.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["perlin_noise_terrain"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.5, 0.9, 0.8],
+				"light_intensity": 1.5,
+				"light_range": 4.5,
+				"light_position": [0, 2.0, 0]
+			},
+			"terrain_properties": {
+				"dynamic_blobs": true,
+				"shader_animated": true,
+				"particle_system": "spatial_shader",
+				"terrain_interaction": true,
+				"blob_lifecycle": "managed"
 			}
 		}
 	},

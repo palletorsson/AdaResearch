@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmxv8h7k5c2ny"]
+
+[ext_resource type="PackedScene" uid="uid://btxvpgsb55wbr" path="res://algorithms/randomness/noiseterrain/noiseterrain.tscn" id="1_terrain"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.05, 0.2, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.4, 0.6, 1, 1)
+ambient_light_energy = 0.3
+fog_enabled = true
+fog_light_color = Color(0.5, 0.3, 0.8, 1)
+fog_light_energy = 0.5
+fog_sun_scatter = 0.1
+fog_height = -5.0
+fog_height_density = 0.02
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 50.0
+dof_blur_far_transition = 10.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1"]
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, -0.5, 0)
+scale_min = 0.1
+scale_max = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.3)
+emission_enabled = true
+emission = Color(0.8, 0.9, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 50.0
+height = 100.0
+
+[node name="NoiseTerrainWithBlobsDemo" type="Node3D"]
+
+[node name="QueerNoiseTerrain" parent="." instance=ExtResource("1_terrain")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 15, 20, 25)
+environment = SubResource("Environment_1")
+attributes = SubResource("CameraAttributesPractical_1")
+fov = 65.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.2
+shadow_enabled = true
+shadow_blur = 2.0
+
+[node name="EnvironmentEffects" type="Node3D" parent="."]
+
+[node name="ParticleField" type="GPUParticles3D" parent="EnvironmentEffects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)
+amount = 100
+lifetime = 10.0
+visibility_aabb = AABB(-50, -25, -50, 100, 50, 100)
+process_material = SubResource("ParticleProcessMaterial_1")
+draw_pass_1 = SubResource("SphereMesh_1")
+
+[node name="AtmosphericSphere" type="MeshInstance3D" parent="EnvironmentEffects"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("SphereMesh_2")
+
+[node name="InfoDisplay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="InfoDisplay"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "🌊 Animated Noise Blobs on Terrain 🌊"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlsLabel" type="Label" parent="InfoDisplay"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -100.0
+offset_right = -20.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "🎮 Controls:
+B - Spawn Blob
+V - Clear All Blobs  
+N - Show Blob Stats
+
+✨ Features:
+• Morphing noise blobs
+• Terrain following
+• Time-based shaders
+• Dynamic colors
+• Organic movement"
+vertical_alignment = 1

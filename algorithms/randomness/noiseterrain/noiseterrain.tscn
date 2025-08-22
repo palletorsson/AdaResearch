@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://btxvpgsb55wbr"]
+[gd_scene load_steps=4 format=3 uid="uid://btxvpgsb55wbr"]
 
 [ext_resource type="Script" uid="uid://c6i3ptfqg7nen" path="res://algorithms/randomness/noiseterrain/noiseterrain.gd" id="1_terrain_script"]
+[ext_resource type="Script" uid="uid://cvvfy831sw6yh" path="res://algorithms/randomness/noiseterrain/noise_blob_spawner.gd" id="2_blob_spawner"]
 
 [sub_resource type="StandardMaterial3D" id="TerrainMaterial"]
 cull_mode = 1
@@ -177,6 +178,45 @@ text = "Regenerate"
 layout_mode = 2
 text = "Randomize"
 
+[node name="HSeparator5" type="HSeparator" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+
+[node name="BlobLabel" type="Label" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+text = "Noise Blob Controls"
+
+[node name="BlobButtonContainer" type="HBoxContainer" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+
+[node name="SpawnBlobButton" type="Button" parent="ParameterUI/ParameterPanel/BlobButtonContainer"]
+layout_mode = 2
+text = "Spawn Blob"
+
+[node name="ClearBlobsButton" type="Button" parent="ParameterUI/ParameterPanel/BlobButtonContainer"]
+layout_mode = 2
+text = "Clear Blobs"
+
+[node name="BlobCountLabel" type="Label" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+text = "Blob Count: 25"
+
+[node name="BlobCountSlider" type="HSlider" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+min_value = 5.0
+max_value = 50.0
+value = 25.0
+
+[node name="BlobSpeedLabel" type="Label" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+text = "Blob Speed: 1.5"
+
+[node name="BlobSpeedSlider" type="HSlider" parent="ParameterUI/ParameterPanel"]
+layout_mode = 2
+min_value = 0.5
+max_value = 3.0
+step = 0.1
+value = 1.5
+
 [node name="InfoPanel" type="VBoxContainer" parent="ParameterUI"]
 layout_mode = 1
 anchors_preset = 1
@@ -207,3 +247,6 @@ text = "Resolution: 200x200 vertices"
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.7467, 0)
 light_energy = 3.0
+
+[node name="NoiseBlobSpawner" type="Node3D" parent="."]
+script = ExtResource("2_blob_spawner")

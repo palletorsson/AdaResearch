@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cta7bg2mikhes"]
+[gd_scene load_steps=3 format=3 uid="uid://bwrwvfyxkxdui"]
 
-[ext_resource type="PackedScene" uid="uid://n88q8m218rmh" path="res://algorithms/misc/algorithm_flowchart_2d.tscn" id="1_dxj5k"]
+[ext_resource type="PackedScene" uid="uid://n88q8m218rmh" path="res://algorithms/misc/algorithm_flowchart_2d.tscn" id="1_d4vdo"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lvt26"]
 viewport_path = NodePath("SubViewport")
@@ -10,7 +10,7 @@ viewport_path = NodePath("SubViewport")
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1024, 512)
 
-[node name="AlgorithmFlowChart2D" parent="SubViewport" instance=ExtResource("1_dxj5k")]
+[node name="AlgorithmFlowChart2D" parent="SubViewport" instance=ExtResource("1_d4vdo")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
