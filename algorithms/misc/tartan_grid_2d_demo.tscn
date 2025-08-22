@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxf6xr8mou8xo"]
+
+[ext_resource type="PackedScene" path="res://algorithms/misc/tartan_grid_2d.tscn" id="1_grid"]
+
+[node name="TartanGrid2DDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TartanGrid2D" parent="." instance=ExtResource("1_grid")]
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2

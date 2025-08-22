@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://cywj4vlx4k08s"]
+
+[ext_resource type="Script" path="res://algorithms/misc/tartan_grid_10x10.gd" id="1_script"]
+
+[node name="TartanGrid10x10" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.1, 1)
+
+[node name="Header" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+
+[node name="HeaderBG" type="ColorRect" parent="Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -12.0
+offset_right = 300.0
+offset_bottom = 12.0
+text = "10x10 Tartan Grid Gallery"
+label_settings = SubResource("LabelSettings_1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 16
+font_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Instructions" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -12.0
+offset_right = -20.0
+offset_bottom = 12.0
+text = "Click items for details"
+horizontal_alignment = 2

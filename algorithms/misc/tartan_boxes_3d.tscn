@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://eml0i34aix88"]
+
+[ext_resource type="Script" uid="uid://bsu2wg5sy4fls" path="res://algorithms/misc/tartan_boxes_3d.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://c3xb3tgshg1vp" path="res://commons/resourses/shaders/tartanshader.gdshader" id="2_shader"]
+
+[node name="TartanBoxes3D" type="Node3D"]
+script = ExtResource("1_script")
+tartan_shader = ExtResource("2_shader")

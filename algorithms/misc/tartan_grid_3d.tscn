@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://boos1dq00tai8"]
+
+[ext_resource type="Script" uid="uid://bywtet6ppfefq" path="res://algorithms/misc/tartan_grid_3d.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://c3xb3tgshg1vp" path="res://commons/resourses/shaders/tartanshader.gdshader" id="2_07b1p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoh5"]
+render_priority = 0
+shader = ExtResource("2_07b1p")
+shader_parameter/uv_scale = Vector2(40, 10)
+shader_parameter/color_a = Color(1, 1, 1, 1)
+shader_parameter/color_b = Color(0, 0, 0, 1)
+shader_parameter/color_c = Color(1, 0, 0, 1)
+shader_parameter/color_d = Color(0.945098, 0.85098, 0.721569, 1)
+shader_parameter/object_seed = 0.0
+shader_parameter/color_randomness = 0.5
+shader_parameter/line_width_randomness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_0l1sq"]
+
+[node name="TartanGrid3D" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585697, 0)
+material_override = SubResource("ShaderMaterial_5xoh5")
+mesh = SubResource("BoxMesh_0l1sq")

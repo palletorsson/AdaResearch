@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6j3p2m3hle1s"]
+
+[ext_resource type="PackedScene" uid="uid://eml0i34aix88" path="res://algorithms/misc/tartan_boxes_3d.tscn" id="1_tartan_boxes"]
+
+[node name="TartanBoxesDemo" type="Node3D"]
+
+[node name="TartanBoxes3D" parent="." instance=ExtResource("1_tartan_boxes")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.652575, 0.757724, 0, -0.757724, 0.652575, 0, 3.56246, 3.03702)
