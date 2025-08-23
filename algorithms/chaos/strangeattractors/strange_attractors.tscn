@@ -1,12 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://s4gh4d0kbi6y"]
 
-[ext_resource type="Script" uid="uid://cemmyvooi5hdv" path="res://algorithms/chaos/strangeattractors/strange_attractors.gd" id="1_alenl"]
+[ext_resource type="Script" path="res://algorithms/chaos/strangeattractors/strange_attractors.gd" id="1_alenl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bow0h"]
 
 [node name="StrangeAttractors" type="Node2D"]
 material = SubResource("CanvasItemMaterial_bow0h")
 script = ExtResource("1_alenl")
-background_color = Color(0.287805, 0.288404, 0.443516, 1)
-point_size = 0.86
-max_points = 1000
+attractor_type = 0
+line_color = Color(0.2, 0.6, 1, 0.8)
+point_color = Color(1, 0.9, 0.2, 1)
+background_color = Color(0.05, 0.05, 0.1, 1)
+point_size = 2.0
+line_width = 1.0
+max_points = 5000
+iterations_per_frame = 5
+scale_factor = 50.0
+offset = Vector2(0, 0)

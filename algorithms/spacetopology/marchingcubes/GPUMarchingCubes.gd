@@ -55,26 +55,36 @@ func initialize_gpu_resources():
 	print("FixedGPUMarchingCubes: GPU resources initialized successfully")
 
 func load_compute_shader() -> bool:
-	"""Load the marching cubes compute shader"""
-	# Create shader source code
-	var shader_source = create_compute_shader_source()
+	var shader_path = "res://algorithms/spacetopology/marchingcubes/shaders/marching_cubes_compute.glsl"
 	
-	# Create shader file
-	shader_file = RDShaderFile.new()
-	shader_file.set_source_code(RenderingDevice.SHADER_STAGE_COMPUTE, shader_source)
-	
-	# Compile shader
-	var shader_spirv = shader_file.get_spirv()
-	if not shader_spirv:
-		push_error("Failed to compile compute shader")
+	# Check if file exists
+	if not FileAccess.file_exists(shader_path):
+		push_error("Shader file not found: " + shader_path)
+		push_error("Please create the directory and file manually, then copy the shader code into it.")
 		return false
 	
-	compute_shader = rd.shader_create_from_spirv(shader_spirv)
-	if not compute_shader.is_valid():
-		push_error("Failed to create compute shader")
+	# Load the shader
+	var shader_resource = load(shader_path) as RDShaderFile
+	if not shader_resource:
+		push_error("Failed to load shader resource")
 		return false
 	
-	return true
+	var spirv = shader_resource.get_spirv()
+	if not spirv:
+		push_error("Failed to get SPIR-V")
+		return false
+	
+	compute_shader = rd.shader_create_from_spirv(spirv)
+	return compute_shader.is_valid()
+
+func create_shader_file(path: String):
+	var dir = path.get_base_dir()
+	DirAccess.make_dir_recursive_absolute(path)
+	
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	file.store_string(create_compute_shader_source())
+	file.close()
+	print("Created: ", path)
 
 func create_compute_shader_source() -> String:
 	"""Create the compute shader source code"""

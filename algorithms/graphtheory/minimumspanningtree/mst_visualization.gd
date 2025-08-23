@@ -166,7 +166,7 @@ func generate_vertex_positions():
 		
 		for i in range(graph_size):
 			var row = i / grid_size
-			var col = i % grid_size
+			 var col = fmod(i, grid_size)
 			var x = (col - grid_size / 2.0) * spacing
 			var y = (row - grid_size / 2.0) * spacing
 			var z = randf_range(-0.5, 0.5)

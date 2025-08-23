@@ -15,24 +15,25 @@ enum AttractorType {
 @export var line_color: Color = Color(0.2, 0.6, 1.0, 0.8)
 @export var point_color: Color = Color(1.0, 0.9, 0.2, 1.0)
 @export var background_color: Color = Color(0.05, 0.05, 0.1, 1.0)
-@export var point_size: float = 1.0
+@export var point_size: float = 2.0
 @export var line_width: float = 1.0
-@export var max_points: int = 10000
-@export var iterations_per_frame: int = 10
-@export var scale_factor: float = 100.0
+@export var max_points: int = 5000
+@export var iterations_per_frame: int = 5
+@export var scale_factor: float = 50.0
 @export var offset: Vector2 = Vector2(0, 0)
 
 # Current position and parameters
 var current_position: Vector3 = Vector3.ZERO
 var current_point_2d: Vector2 = Vector2.ZERO
 var trail_points: Array[Vector2] = []
+var is_initialized: bool = false
 
 # Parameters for attractors
 var lorenz_params: Dictionary = {
 	"sigma": 10.0,
 	"rho": 28.0,
 	"beta": 8.0 / 3.0,
-	"dt": 0.005
+	"dt": 0.01
 }
 
 var clifford_params: Dictionary = {
@@ -66,98 +67,130 @@ var ikeda_params: Dictionary = {
 }
 
 func _ready():
-	randomize()
-	
-	# Initialize the position with a small random offset
+	# Force immediate initialization
+	print("Initializing Strange Attractors...")
 	_reset_position()
+	is_initialized = true
+	print("Attractor type: ", _get_attractor_name())
+	print("Initial position: ", current_position if attractor_type == AttractorType.LORENZ else current_point_2d)
 	
-	# Create initial points
-	for i in range(max_points):
-		if attractor_type == AttractorType.LORENZ:
-			# For Lorenz we use the 3D calculation
-			current_position = _lorenz_attractor(current_position)
-			# Project 3D to 2D (simple side view)
-			current_point_2d = Vector2(current_position.x, current_position.z) * scale_factor
-		else:
-			# Update using the current 2D attractor
-			current_point_2d = _calculate_next_point(current_point_2d)
-		
-		trail_points.append(current_point_2d + get_viewport_rect().size / 2 + offset)
+	# Start with a few points to see something immediately
+	_generate_initial_points()
+
+func _generate_initial_points():
+	# Generate some initial points so we see something right away
+	for i in range(min(100, max_points)):
+		_calculate_next_iteration()
+
+func _calculate_next_iteration():
+	if attractor_type == AttractorType.LORENZ:
+		# For Lorenz we use the 3D calculation
+		current_position = _lorenz_attractor(current_position)
+		# Project 3D to 2D (use X-Y projection for better view)
+		current_point_2d = Vector2(current_position.x, current_position.y) * scale_factor
+	else:
+		# Update using the current 2D attractor
+		current_point_2d = _calculate_next_point(current_point_2d)
+	
+	# Add to trail with screen centering
+	var screen_point = current_point_2d + get_viewport_rect().size / 2 + offset
+	trail_points.append(screen_point)
+	
+	# Keep array at max size
+	if trail_points.size() > max_points:
+		trail_points.remove_at(0)
 
 func _process(_delta):
+	if not is_initialized:
+		return
+	
 	# Calculate new points
 	for i in range(iterations_per_frame):
-		if attractor_type == AttractorType.LORENZ:
-			# For Lorenz we use the 3D calculation
-			current_position = _lorenz_attractor(current_position)
-			# Project 3D to 2D (simple side view)
-			current_point_2d = Vector2(current_position.x, current_position.z) * scale_factor
-		else:
-			# Update using the current 2D attractor
-			current_point_2d = _calculate_next_point(current_point_2d)
-		
-		trail_points.append(current_point_2d + get_viewport_rect().size / 2 + offset)
-		
-		# Keep array at max size
-		if trail_points.size() > max_points:
-			trail_points.remove_at(0)
+		_calculate_next_iteration()
 	
 	# Force redraw
 	queue_redraw()
 
 func _draw():
+	if not is_initialized:
+		return
+		
 	# Draw background
 	draw_rect(Rect2(Vector2.ZERO, get_viewport_rect().size), background_color)
 	
-	# Draw grid lines
+	# Draw grid lines for reference
 	var grid_color = Color(1, 1, 1, 0.1)
 	var center = get_viewport_rect().size / 2
-	draw_line(Vector2(0, center.y), Vector2(get_viewport_rect().size.x, center.y), grid_color)
-	draw_line(Vector2(center.x, 0), Vector2(center.x, get_viewport_rect().size.y), grid_color)
+	draw_line(Vector2(0, center.y), Vector2(get_viewport_rect().size.x, center.y), grid_color, 1.0)
+	draw_line(Vector2(center.x, 0), Vector2(center.x, get_viewport_rect().size.y), grid_color, 1.0)
+	
+	# Draw center point
+	draw_circle(center, 3.0, Color(1, 1, 1, 0.3))
 	
 	# Draw the attractor points and lines
 	if trail_points.size() >= 2:
 		# Draw lines connecting points
 		for i in range(1, trail_points.size()):
+			var alpha = float(i) / trail_points.size()
 			var color = line_color
-			color.a = float(i) / trail_points.size() * line_color.a  # Fade out older lines
-			draw_line(trail_points[i-1], trail_points[i], color, line_width)
+			color.a = alpha * line_color.a  # Fade in newer lines
+			
+			# Make sure points are valid
+			if trail_points[i-1].length() < 10000 and trail_points[i].length() < 10000:
+				draw_line(trail_points[i-1], trail_points[i], color, line_width)
 		
-		# Draw current point
-		draw_circle(trail_points[trail_points.size() - 1], point_size, point_color)
+		# Draw current point (brightest)
+		if trail_points.size() > 0:
+			var current_pos = trail_points[trail_points.size() - 1]
+			if current_pos.length() < 10000:  # Sanity check
+				draw_circle(current_pos, point_size, point_color)
 	
-	# Draw attractor name
+	# Draw attractor name and info
 	var font_color = Color(1, 1, 1, 0.8)
 	var attractor_name = _get_attractor_name()
 	draw_string(
 		ThemeDB.fallback_font, 
 		Vector2(20, 30), 
-		attractor_name, 
+		attractor_name + " (Points: " + str(trail_points.size()) + ")", 
 		HORIZONTAL_ALIGNMENT_LEFT, 
 		-1, 
 		16, 
 		font_color
 	)
+	
+	# Draw controls
+	draw_string(
+		ThemeDB.fallback_font, 
+		Vector2(20, 50), 
+		"Keys: 1-6 to switch attractors, Space to reset", 
+		HORIZONTAL_ALIGNMENT_LEFT, 
+		-1, 
+		12, 
+		Color(1, 1, 1, 0.6)
+	)
 
 func _reset_position():
+	print("Resetting position for ", _get_attractor_name())
+	
 	match attractor_type:
 		AttractorType.LORENZ:
 			# For Lorenz we need a 3D position
 			current_position = Vector3(
-				randf_range(-0.1, 0.1),
-				randf_range(-0.1, 0.1),
-				randf_range(-0.1, 0.1)
+				randf_range(-1.0, 1.0),
+				randf_range(-1.0, 1.0),
+				randf_range(-1.0, 1.0)
 			)
-			current_point_2d = Vector2(current_position.x, current_position.z) * scale_factor
+			current_point_2d = Vector2(current_position.x, current_position.y) * scale_factor
 		_:
 			# For 2D attractors, initialize with a small random position
 			current_point_2d = Vector2(
-				randf_range(-0.1, 0.1),
-				randf_range(-0.1, 0.1)
+				randf_range(-1.0, 1.0),
+				randf_range(-1.0, 1.0)
 			)
 	
 	# Clear trail
 	trail_points.clear()
+	print("Position reset to: ", current_position if attractor_type == AttractorType.LORENZ else current_point_2d)
 
 func _calculate_next_point(point: Vector2) -> Vector2:
 	var next_point = Vector2.ZERO
@@ -255,8 +288,10 @@ func _get_attractor_name() -> String:
 			return "Unknown Attractor"
 
 func _change_attractor(new_type: AttractorType):
+	print("Changing to attractor: ", new_type)
 	attractor_type = new_type
 	_reset_position()
+	_generate_initial_points()  # Generate some points immediately
 
 func _input(event):
 	# Handle input to change attractor type
@@ -276,3 +311,4 @@ func _input(event):
 				_change_attractor(AttractorType.IKEDA)
 			KEY_SPACE:
 				_reset_position()  # Reset with same attractor
+				_generate_initial_points()
