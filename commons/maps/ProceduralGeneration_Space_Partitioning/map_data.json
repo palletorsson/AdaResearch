@@ -69,9 +69,9 @@
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
 			"properties": {
-				"destination": "next",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
+		}
 		}, 
 		"s": {
 			"properties": {

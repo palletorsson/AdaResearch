@@ -68,10 +68,9 @@
 			"type": "teleporter",
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
-			"properties": {
-				"destination": "Randomness_TRNG_vs_PRNG",
-				"visual_effect": "portal_glow"
-			}
+			  "properties": {
+				"action": "next_in_sequence"
+			  }
 		}, 
 		"s": {
 			"properties": {

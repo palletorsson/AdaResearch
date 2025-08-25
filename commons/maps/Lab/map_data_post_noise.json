@@ -1,14 +1,14 @@
 {
 	"map_info": {
-		"name": "Lab_Post_Array",
-		"description": "Lab State After Array Tutorial - New artifacts and sequences unlocked",
+		"name": "Lab_Post_Randomness",
+		"description": "Lab State After Randomness - Adds Randomness portal and expands lab",
 		"version": "1.0",
 		"format": "json_lab_progressive",
-		"progression_state": "post_array_tutorial",
+		"progression_state": "post_randomness",
 		"dimensions": {
-			"width": 7,
-			"depth": 7,
-			"max_height": 3
+			"width": 12,
+			"depth": 12,
+			"max_height": 5
 		},
 		"metadata": {
 			"difficulty": "hub",
@@ -22,13 +22,18 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "3", "0", "0"],
-			["1", "1", "1", "1", "3", "3", "3"],
-			["1", "1", "0", "1", "1", "0", "0"],
-			["1", "1", "1", "1", "3", "3", "3"],
+			["1", "1", "1", "1", "2", "0", "0"],
+			["1", "1", "1", "1", "2", "3", "3"],
+			["1", "1", "0", "1", "1", "0", "3"],
+			["1", "1", "1", "1", "2", "3", "3"],
 			["1", "1", "2", "1", "0", "2", "0"],
-			["2", "1", "1", "3", "3", "3", "0"],
-			["2", "1", "1", "0", "0", "0", "0"]
+			["2", "1", "0", "4", "4", "4", "3"],
+			["2", "1", "1", "3", "1", "1", "3"],
+			["2", "1", "1", "3", "1", "1", "1"],
+			["3", "1", "1", "1", "1", "1", "3"],
+			["4", "1", "1", "1", "1", "1", "3"], 
+			["4", "1", "4", "1", "4", "1", "3"],
+			["4", "4", "4", "1", "4", "1", "3"]	
 		],
 		"static_objects": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -37,16 +42,23 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
-	"utilities": [
+		"utilities": [
 			[" ", " ", " ", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:One_Primitives", " ", " ", "t:Meshes_One", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "t:array_tutorial", " ", " "],
 			[" ", " ", "t:Wavefunctions_One", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", "t:Random_One", " ", " "], 
+			[" ", " ", " ", " ", " ", " ", " "], 
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "t:Randomness_Blue_Noise", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "] 
 		], 
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -54,6 +66,8 @@
 			[" ", "", "cube_scene:0:2", " ", " ", " ", " " ],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "rotating_cube", " ", " "],
+			[" ", " ", "spectrum_analyser:90:0:0.5", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		]
@@ -99,7 +113,7 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_array_tutorial",
+		"progression_state": "post_randomness",
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,

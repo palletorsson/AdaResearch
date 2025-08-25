@@ -142,6 +142,50 @@
 			"unlock_requirements": [],
 			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
 		},
+		
+		
+			"noise": {
+				"name": "Noise & Signal Processing",
+				"description": "Explore different types of noise, signal processing, and audio generation techniques",
+				"difficulty": "intermediate",
+				"estimated_time": "15-20 minutes",
+				"learning_objectives": [
+					"Understanding different noise types",
+					"Signal processing fundamentals", 
+					"Audio noise generation",
+					"Noise filtering techniques"
+				],
+				"maps": [
+					"Noise_One",
+					"Noise_Two",
+					"Noise_Three"
+				],
+				"return_to": "lab",
+				"unlock_requirements": ["randomness_exploration"],
+				"completion_rewards": ["noise_engineer_badge", "signal_processor_badge"],
+				"lab_map": "Lab/map_data_post_noise"
+			},
+			"forces": {
+				"name": "Forces & Physics Simulation",
+				"description": "Explore fundamental forces, physics simulation, and dynamic interactions",
+				"difficulty": "intermediate",
+				"estimated_time": "20-25 minutes",
+				"learning_objectives": [
+					"Gravitational force simulation",
+					"Electromagnetic forces",
+					"Spring and tension forces",
+					"Collision dynamics and response"
+				],
+				"maps": [
+					"Forces_One",
+					"Forces_Two",
+					"Forces_Three"
+				],
+				"return_to": "lab",
+				"unlock_requirements": ["noise"],
+				"completion_rewards": ["physics_engineer_badge", "force_master_badge"],
+				"lab_map": "Lab/map_data_post_forces"
+			},
 		"proceduralaudio": {
 			"name": "Procedural Audio",
 			"description": "Explore procedural sound synthesis, effects, and generative music",
@@ -179,8 +223,7 @@
 				"Collision detection systems",
 				"Fluid and particle dynamics"
 			],
-			"maps": [
-				"PhysicsSimulation_Newton_s_Laws",
+			"temps": [
 				"PhysicsSimulation_Vector_Fields",
 				"PhysicsSimulation_Three_Body_Problem",
 				"PhysicsSimulation_Bouncing_Ball_Physics",
@@ -195,6 +238,9 @@
 				"PhysicsSimulation_Finite_Element_Method_FEM",
 				"PhysicsSimulation_Mass_Spring_Damper",
 				"PhysicsSimulation_Cloth_Simulation",
+			],
+			"maps": [
+				"PhysicsSimulation_Newton_s_Laws",
 				"PhysicsSimulation_Particle_Systems"
 			],
 			"return_to": "lab",
