@@ -244,6 +244,13 @@ func request_transition(transition_request: Dictionary):
 			_load_specific_map(transition_request)
 		"next_in_sequence":
 			_advance_sequence()
+		"next":
+			# NEW: Handle generic "next" action using map_sequences.json
+			var current_map = transition_request.get("current_map_name", "")
+			if current_map.is_empty():
+				# Try to get map name from utility data or other sources
+				current_map = transition_request.get("utility_data", {}).get("current_map", "")
+			_handle_next_action(current_map)
 		"return_to_hub":
 			_return_to_hub(transition_request.get("completion_data", {}))
 		_:
@@ -316,6 +323,110 @@ func _load_grid_scene_with_first_map():
 	}
 	
 	_load_scene_with_data(GRID_SCENE_PATH, grid_scene_data)
+
+func _restore_sequence_context(sequence_data: Dictionary):
+	"""Restore sequence context when transitioning between maps in a sequence"""
+	if sequence_data.is_empty():
+		print("AdaSceneManager: No sequence data to restore")
+		return
+		
+	current_sequence_data = sequence_data
+	print("AdaSceneManager: ✅ Restored sequence context: %s (step %d/%d)" % [
+		current_sequence_data.get("sequence_name", "unknown"),
+		current_sequence_data.get("current_step", 0) + 1,
+		current_sequence_data.get("maps", []).size()
+	])
+
+func _handle_next_action(current_map_name: String):
+	"""Handle 'next' action by analyzing current map against sequence configuration"""
+	print("AdaSceneManager: Handling 'next' action from map: %s" % current_map_name)
+	
+	# Find which sequence contains this map
+	var sequence_info = _find_sequence_containing_map(current_map_name)
+	
+	if sequence_info.is_empty():
+		print("AdaSceneManager: Map '%s' not found in any sequence - cannot advance" % current_map_name)
+		return
+	
+	var sequence_name = sequence_info["sequence_name"]
+	var maps = sequence_info["maps"]
+	var current_step = sequence_info["current_step"]
+	
+	print("AdaSceneManager: Found map in sequence '%s' at step %d/%d" % [sequence_name, current_step + 1, maps.size()])
+	
+	# Set sequence context if not already active
+	if current_sequence_data.is_empty():
+		_activate_sequence_context(sequence_name, current_step)
+	
+	# Determine next action
+	if current_step + 1 >= maps.size():
+		# Last map in sequence - complete and return to lab
+		_complete_sequence(sequence_name, maps)
+	else:
+		# Advance to next map in sequence
+		_advance_to_next_map(sequence_name, maps, current_step)
+
+func _find_sequence_containing_map(map_name: String) -> Dictionary:
+	"""Find which sequence contains the given map and return sequence info"""
+	for sequence_name in sequence_configs.keys():
+		var config = sequence_configs[sequence_name]
+		var maps = config.get("maps", [])
+		
+		var map_index = maps.find(map_name)
+		if map_index >= 0:
+			return {
+				"sequence_name": sequence_name,
+				"maps": maps,
+				"current_step": map_index,
+				"config": config
+			}
+	
+	return {}
+
+func _activate_sequence_context(sequence_name: String, current_step: int):
+	"""Activate sequence context for an already-started sequence"""
+	var config = sequence_configs[sequence_name]
+	current_sequence_data = {
+		"sequence_name": sequence_name,
+		"maps": config.get("maps", []),
+		"current_step": current_step,
+		"return_to": config.get("return_to", "lab"),
+		"sequence_info": {
+			"name": config.get("name", sequence_name),
+			"description": config.get("description", ""),
+			"total_maps": config.get("maps", []).size()
+		}
+	}
+	print("AdaSceneManager: ✅ Activated sequence context: %s" % sequence_name)
+
+func _complete_sequence(sequence_name: String, maps: Array):
+	"""Complete the sequence and return to lab"""
+	print("AdaSceneManager: Completing sequence: %s" % sequence_name)
+	
+	var completion_data = {
+		"sequence_completed": sequence_name,
+		"maps_completed": maps,
+		"total_maps": maps.size(),
+		"completion_timestamp": Time.get_datetime_string_from_system()
+	}
+	
+	sequence_completed.emit(sequence_name, completion_data)
+	_return_to_hub(completion_data)
+
+func _advance_to_next_map(sequence_name: String, maps: Array, current_step: int):
+	"""Advance to the next map in the sequence"""
+	current_sequence_data.current_step = current_step + 1
+	var next_map = maps[current_sequence_data.current_step]
+	
+	print("AdaSceneManager: Advancing sequence '%s' to map: %s (%d/%d)" % [sequence_name, next_map, current_step + 2, maps.size()])
+	
+	var scene_data = {
+		"sequence_data": current_sequence_data,
+		"map_name": next_map,
+		"scene_manager": self
+	}
+	
+	_load_scene_with_data(GRID_SCENE_PATH, scene_data)
 
 func _advance_sequence():
 	if current_sequence_data.is_empty():
@@ -690,45 +801,53 @@ func _on_lab_map_transition_complete(new_state: String):
 
 
 func _determine_lab_map_for_return(completed_sequence: String) -> String:
-	"""Direct mapping: sequence → post map (no save file dependency)"""
+	"""Determine lab map based on sequence completion using JSON configuration"""
 	
-	# Simple hardcoded mapping for immediate results (no JSON dependency)
-	var direct_mapping = {
-		"array_tutorial": "Lab/map_data_post_array",
-		"randomness_exploration": "Lab/map_data_post_random", 
-		"wavefunctions": "Lab/map_data_post_wavefunctions",
-		"proceduralaudio": "Lab/map_data_post_proceduralaudio",
-		"physicssimulation": "Lab/map_data_post_physicssimulation",
-		"softbodies": "Lab/map_data_post_softbodies",
-		"recursiveemergence": "Lab/map_data_post_recursiveemergence",
-		"lsystems": "Lab/map_data_post_lsystems",
-		"swarmintelligence": "Lab/map_data_post_swarmintelligence",
-		"patterngeneration": "Lab/map_data_post_patterngeneration",
-		"proceduralgeneration": "Lab/map_data_post_proceduralgeneration",
-		"searchpathfinding": "Lab/map_data_post_searchpathfinding",
-		"graphtheory": "Lab/map_data_post_graphtheory",
-		"computationalgeometry": "Lab/map_data_post_computationalgeometry",
-		"machinelearning": "Lab/map_data_post_machinelearning",
-		"criticalalgorithms": "Lab/map_data_post_criticalalgorithms",
-		"speculativecomputation": "Lab/map_data_post_speculativecomputation",
-		"resourcemanagement": "Lab/map_data_post_resourcemanagement",
-		"advancedlaboratory": "Lab/map_data_post_advancedlaboratory"
-	}
+	# Load lab progression configuration
+	var lab_progression_config = _load_lab_progression_config()
+	if lab_progression_config.is_empty():
+		print("AdaSceneManager: ⚠️ Could not load lab progression config, using fallback")
+		return "Lab/map_data_init"
+	
+	var sequence_to_post_map = lab_progression_config.get("sequence_to_post_map", {})
 	
 	# Debug: show what we're looking for vs what's available
 	print("AdaSceneManager: 🔍 Looking for sequence: '%s'" % completed_sequence)
-	print("AdaSceneManager: 🔍 Available mappings: %s" % str(direct_mapping.keys()))
+	print("AdaSceneManager: 🔍 Available mappings: %s" % str(sequence_to_post_map.keys()))
 	
 	# Direct lookup: completed sequence → post map
-	if direct_mapping.has(completed_sequence):
-		var lab_map = direct_mapping[completed_sequence]
+	if sequence_to_post_map.has(completed_sequence):
+		var lab_map = sequence_to_post_map[completed_sequence]
 		print("AdaSceneManager: 🎯 DIRECT: Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
 		return lab_map
 	
 	# No mapping found, use fallback
-	print("AdaSceneManager: ⚠️ No direct mapping for sequence '%s', using fallback" % completed_sequence)
-	print("AdaSceneManager: 🔍 Checking if sequence name is close to any mapping...")
-	for key in direct_mapping.keys():
-		if completed_sequence in key or key in completed_sequence:
-			print("AdaSceneManager: 🔍 Similar key found: '%s'" % key)
-	return "Lab/map_data_init"
+	var fallback_map = lab_progression_config.get("fallback_map", "Lab/map_data_init")
+	print("AdaSceneManager: ⚠️ No mapping for sequence '%s', using fallback: %s" % [completed_sequence, fallback_map])
+	return fallback_map
+
+func _load_lab_progression_config() -> Dictionary:
+	"""Load lab progression configuration from JSON"""
+	var config_path = "res://commons/maps/Lab/lab_map_progression.json"
+	
+	if not FileAccess.file_exists(config_path):
+		print("AdaSceneManager: ERROR - Lab progression config not found: %s" % config_path)
+		return {}
+	
+	var file = FileAccess.open(config_path, FileAccess.READ)
+	if not file:
+		print("AdaSceneManager: ERROR - Could not open lab progression config")
+		return {}
+	
+	var content = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(content)
+	
+	if parse_result != OK:
+		print("AdaSceneManager: ERROR - Failed to parse lab progression JSON: %s" % json.get_error_message())
+		return {}
+	
+	print("AdaSceneManager: ✅ Loaded lab progression config")
+	return json.data

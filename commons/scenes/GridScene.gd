@@ -24,7 +24,7 @@ func _ready():
 			grid_system.map_generation_complete.connect(_on_map_generation_complete)
 	
 	# Handle scene user data from staging
-	_process_scene_user_data()
+	call_deferred("_process_scene_user_data")
 	
 	print("GridScene: Grid scene ready with SceneManagerHelper")
 
@@ -36,11 +36,20 @@ func _process_scene_user_data():
 		sequence_data = user_data.sequence_data
 		current_map_index = sequence_data.get("current_step", 0)
 		print("GridScene: Loaded sequence data: %s" % sequence_data.get("sequence_name", "unknown"))
+		
+		# CRITICAL: Pass sequence data to GridSystem
+		if grid_system:
+			grid_system.set_meta("current_sequence", sequence_data)
+			print("GridScene: ✅ Passed sequence data to GridSystem: %s" % sequence_data.get("sequence_name", "unknown"))
 	
 	if user_data.has("initial_map"):
 		var initial_map = user_data.initial_map
 		print("GridScene: Setting initial map: %s" % initial_map)
 		_configure_grid_system_for_map(initial_map)
+	elif user_data.has("map_name"):
+		var map_name = user_data.map_name
+		print("GridScene: Setting map from user_data: %s" % map_name)
+		_configure_grid_system_for_map(map_name)
 
 func _configure_grid_system_for_map(map_name: String):
 	"""Configure grid system to load specific map"""

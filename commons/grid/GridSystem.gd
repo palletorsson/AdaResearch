@@ -242,16 +242,57 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 	# Find SceneManager in the tree
 	var scene_manager = _find_scene_manager()
 	if scene_manager:
-		print("GridSystem: ✅ Found SceneManager - requesting sequence advance")
+		print("GridSystem: ✅ Found SceneManager - requesting transition")
 		
-		# Tell SceneManager to advance the current sequence
-		scene_manager.request_transition({
+		# Check if we're in a sequence context
+		var current_sequence = get_meta("current_sequence", {})
+		var action = "load_map"  # Default action
+		var destination = data.get("destination", "")
+		var sequence = ""
+		
+		print("GridSystem: 🔍 DEBUG - Current sequence metadata: %s" % current_sequence)
+		print("GridSystem: 🔍 DEBUG - Destination from teleporter: '%s'" % destination)
+		print("GridSystem: 🔍 DEBUG - All metadata: %s" % get_meta_list())
+		
+		# NEW APPROACH: Use "next" action for empty destinations
+		if destination.is_empty():
+			action = "next"
+			print("GridSystem: ✅ Empty destination - using 'next' action")
+		# Check if destination is a sequence name
+		elif destination in ["primitives", "array_tutorial", "randomness_exploration", "wavefunctions"]:
+			action = "start_sequence"
+			sequence = destination
+			destination = ""
+		# Otherwise it's a direct map load
+		else:
+			action = "load_map"
+		
+		print("GridSystem: Action: %s, Destination: %s, Sequence: %s" % [action, destination, sequence])
+		print("GridSystem: Current sequence context: %s" % current_sequence.get("sequence_name", "none"))
+		
+		# Request transition with appropriate action
+		var transition_request = {
 			"type": 1, # TransitionType.TELEPORTER
-			"action": "next_in_sequence", 
+			"action": action,
+			"sequence": sequence,
+			"destination": destination,
+			"current_map_name": map_name,  # Pass current map name
 			"source": "grid_teleporter",
 			"position": position,
 			"utility_data": data
-		})
+		}
+		
+		# If we're in a sequence context, provide the sequence data to SceneManager
+		if not current_sequence.is_empty():
+			transition_request["current_sequence_context"] = current_sequence
+			# Ensure SceneManager knows about the sequence
+			if scene_manager.has_method("_restore_sequence_context"):
+				scene_manager._restore_sequence_context(current_sequence)
+			else:
+				# Fallback: set the sequence data directly
+				scene_manager.current_sequence_data = current_sequence
+		
+		scene_manager.request_transition(transition_request)
 	else:
 		print("GridSystem: ❌ WARNING - No SceneManager found for teleporter transition")
 		print("GridSystem: 🔍 Available autoloads:")

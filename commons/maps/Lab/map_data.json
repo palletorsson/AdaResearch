@@ -41,8 +41,8 @@
 		],
 		"utilities": [
 			[" ", " ", " ", "t:softbodies", " ", "", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:Tutorial_Single", " ", " ", " ", " "],
+			[" ", " ", "t:Primitives", " ", " ", " ", " "],
 			["t:Test_Scene_1", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -133,7 +133,17 @@
 	"utility_definitions": {
 		"note": "Utilities are now referenced from external registry",
 		"s": "References utility_registry.json spawn_point definition",
-		"t": "References utility_registry.json teleport definition with custom properties"
+		"t": {
+			"type": "teleporter",
+			"name": "Primitives Sequence",
+			"description": "Start the primitives learning sequence",
+			"properties": {
+				"action": "start_sequence",
+				"sequence": "primitives",
+				"destination": "One_Primitives",
+				"visual_effect": "portal_glow"
+			}
+		}
 	},
 	"spawn_points": {
 		"default": {

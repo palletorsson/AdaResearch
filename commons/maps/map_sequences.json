@@ -4,6 +4,23 @@
 	"last_updated": "2025-01-20",
 	
 	"sequences": {
+		"primitives": {
+			"name": "name Primitives",
+			"description": "This is the basic",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"test"
+			],
+			"maps": [
+				"One_Primitives",
+				"One_Colors",
+				"One_Tranformations",
+			],
+			"return_to": "lab",
+			"unlock_requirements": [],
+			"completion_rewards": ["test_badge"]
+		},
 		"tests": {
 			"name": "TestSequence",
 			"description": "This is a test sequence",

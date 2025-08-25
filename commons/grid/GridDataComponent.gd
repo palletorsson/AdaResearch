@@ -59,7 +59,7 @@ func _load_json_map() -> bool:
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	elif map_name == "Lab":
 		# For base Lab map: res://commons/maps/Lab/map_data.json  
-		json_path = MAPS_PATH + "Lab/map_data.json"
+		json_path = MAPS_PATH + "Lab/map_data_one.json"
 		print("🔍 DEBUG: Base Lab map")
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	else:
