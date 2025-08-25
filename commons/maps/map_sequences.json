@@ -2,6 +2,7 @@
 	"format_version": "1.0",
 	"description": "Map sequence configurations for Ada Research VR educational system",
 	"last_updated": "2025-01-20",
+	"fallback_lab_map": "Lab/map_data_init",
 	
 	"sequences": {
 		"primitives": {
@@ -15,9 +16,10 @@
 			"maps": [
 				"One_Primitives",
 				"One_Colors",
-				"One_Tranformations",
+				"One_Tranformations"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_primitives",
 			"unlock_requirements": [],
 			"completion_rewards": ["test_badge"]
 		},
@@ -54,17 +56,45 @@
 				"2D grid understanding",
 				"Pattern recognition"
 			],
-			"maps": [
-				"Tutorial_Single",
+			"temps": [
 				"Tutorial_Col", 
 				"Tutorial_Row", 				
 				"Tutorial_2D",
 				"Tutorial_2D_Color",
+			],
+			"maps": [
+				"Tutorial_Single",
 				"Tutorial_Disco"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_array",
 			"unlock_requirements": [],
 			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
+		},
+		
+		"meshestextures": {
+			"name": "Meshes & Textures",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+				"Meshes_Two", 
+				"Meshes_Three",
+			],
+			"maps": [
+				"Meshes_One",
+				"Meshes_Four"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_meshes"
 		},
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
@@ -85,11 +115,10 @@
 				"Random_Walk",				
 				"Random_Five",
 				"Random_Six",
-				"Random_Seven",
-				"Random_Seven",
-				"Random_Seven",				
+				"Random_Seven",			
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_random",
 			"unlock_requirements": ["array_tutorial"],
 			"completion_rewards": ["probability_pioneer_badge", "chaos_explorer_badge"]
 		},
@@ -107,12 +136,9 @@
 			"maps": [
 				"Wavefunctions_One",
 				"Wavefunctions_Two",
-				"Wavefunctions_Three",
-				"Wavefunctions_Four",
-				"Wavefunctions_Five",
-				"Wavefunctions_Six"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_wavefunctions",
 			"unlock_requirements": [],
 			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
 		},
@@ -138,6 +164,7 @@
 				"ProceduralAudio_Psychoacoustics"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_proceduralaudio",
 			"unlock_requirements": ["wavefunctions"],
 			"completion_rewards": ["audio_architect_badge", "synthesis_specialist_badge"]
 		},
@@ -171,6 +198,7 @@
 				"PhysicsSimulation_Particle_Systems"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_physicssimulation",
 			"unlock_requirements": ["proceduralaudio"],
 			"completion_rewards": ["physics_pioneer_badge", "simulation_specialist_badge"]
 		},
@@ -199,6 +227,7 @@
 				"Test_7", 
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_softbodies",
 			"unlock_requirements": ["physicssimulation"],
 			"completion_rewards": ["soft_body_badge", "tactile_explorer_badge"]
 		},
@@ -227,6 +256,7 @@
 				"RecursiveEmergence_Iterated_Function_Systems_IFS"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_recursiveemergence",
 			"unlock_requirements": ["softbodies"],
 			"completion_rewards": ["fractal_explorer_badge", "emergence_specialist_badge"]
 		},
@@ -250,6 +280,7 @@
 				"LSystems_Different_Grammar_Types"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_lsystems",
 			"unlock_requirements": ["recursiveemergence"],
 			"completion_rewards": ["grammar_architect_badge", "generative_systems_badge"]
 		},
@@ -272,6 +303,7 @@
 				"SwarmIntelligence_Swarm_Intelligence_Algorithms"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_swarmintelligence",
 			"unlock_requirements": ["lsystems"],
 			"completion_rewards": ["swarm_coordinator_badge", "collective_intelligence_badge"]
 		},
@@ -294,6 +326,7 @@
 				"PatternGeneration_Narrative_Generation"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_patterngeneration",
 			"unlock_requirements": ["swarmintelligence"],
 			"completion_rewards": ["pattern_architect_badge", "tessellation_specialist_badge"]
 		},
@@ -324,6 +357,7 @@
 				"ProceduralGeneration_Marching_Cubes_Algorithm"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_proceduralgeneration",
 			"unlock_requirements": ["patterngeneration"],
 			"completion_rewards": ["procedural_master_badge", "generation_specialist_badge"]
 		},
@@ -348,6 +382,7 @@
 				"SearchPathfinding_Particle_Swarm_Optimization"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_searchpathfinding",
 			"unlock_requirements": ["proceduralgeneration"],
 			"completion_rewards": ["pathfinding_expert_badge", "optimization_specialist_badge"]
 		},
@@ -375,6 +410,7 @@
 				"GraphTheory_Edmonds_Algorithm"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_graphtheory",
 			"unlock_requirements": ["searchpathfinding"],
 			"completion_rewards": ["graph_theory_master_badge", "network_analyst_badge"]
 		},
@@ -400,6 +436,7 @@
 				"ComputationalGeometry_Euclidean_Distance_Transform"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_computationalgeometry",
 			"unlock_requirements": ["graphtheory"],
 			"completion_rewards": ["geometry_expert_badge", "spatial_computation_badge"]
 		},
@@ -432,6 +469,7 @@
 				"MachineLearning_Attention_Mechanisms"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_machinelearning",
 			"unlock_requirements": ["computationalgeometry"],
 			"completion_rewards": ["ai_specialist_badge", "neural_network_architect_badge"]
 		},
@@ -476,6 +514,7 @@
 				"SpeculativeComputation_Ontological_Uncertainty"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_speculativecomputation",
 			"unlock_requirements": ["criticalalgorithms"],
 			"completion_rewards": ["speculative_explorer_badge", "paradigm_shifter_badge"]
 		},
@@ -521,6 +560,7 @@
 				"AdvancedLaboratory_Systems_Theory"
 			],
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_advancedlaboratory",
 			"unlock_requirements": ["resourcemanagement"],
 			"completion_rewards": ["systems_master_badge", "laboratory_architect_badge"]
 		}

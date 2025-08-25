@@ -801,53 +801,16 @@ func _on_lab_map_transition_complete(new_state: String):
 
 
 func _determine_lab_map_for_return(completed_sequence: String) -> String:
-	"""Determine lab map based on sequence completion using JSON configuration"""
+	"""Determine lab map using consolidated sequence_configs"""
 	
-	# Load lab progression configuration
-	var lab_progression_config = _load_lab_progression_config()
-	if lab_progression_config.is_empty():
-		print("AdaSceneManager: ⚠️ Could not load lab progression config, using fallback")
-		return "Lab/map_data_init"
-	
-	var sequence_to_post_map = lab_progression_config.get("sequence_to_post_map", {})
-	
-	# Debug: show what we're looking for vs what's available
-	print("AdaSceneManager: 🔍 Looking for sequence: '%s'" % completed_sequence)
-	print("AdaSceneManager: 🔍 Available mappings: %s" % str(sequence_to_post_map.keys()))
-	
-	# Direct lookup: completed sequence → post map
-	if sequence_to_post_map.has(completed_sequence):
-		var lab_map = sequence_to_post_map[completed_sequence]
-		print("AdaSceneManager: 🎯 DIRECT: Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
+	# Use already-loaded sequence_configs (no additional file I/O needed)
+	if sequence_configs.has(completed_sequence):
+		var sequence = sequence_configs[completed_sequence]
+		var lab_map = sequence.get("lab_map", "Lab/map_data_init")
+		print("AdaSceneManager: 🎯 Sequence '%s' → lab map: %s" % [completed_sequence, lab_map])
 		return lab_map
 	
-	# No mapping found, use fallback
-	var fallback_map = lab_progression_config.get("fallback_map", "Lab/map_data_init")
-	print("AdaSceneManager: ⚠️ No mapping for sequence '%s', using fallback: %s" % [completed_sequence, fallback_map])
-	return fallback_map
-
-func _load_lab_progression_config() -> Dictionary:
-	"""Load lab progression configuration from JSON"""
-	var config_path = "res://commons/maps/Lab/lab_map_progression.json"
-	
-	if not FileAccess.file_exists(config_path):
-		print("AdaSceneManager: ERROR - Lab progression config not found: %s" % config_path)
-		return {}
-	
-	var file = FileAccess.open(config_path, FileAccess.READ)
-	if not file:
-		print("AdaSceneManager: ERROR - Could not open lab progression config")
-		return {}
-	
-	var content = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(content)
-	
-	if parse_result != OK:
-		print("AdaSceneManager: ERROR - Failed to parse lab progression JSON: %s" % json.get_error_message())
-		return {}
-	
-	print("AdaSceneManager: ✅ Loaded lab progression config")
-	return json.data
+	# Use consolidated fallback
+	var fallback = sequence_configs.get("fallback_lab_map", "Lab/map_data_init")
+	print("AdaSceneManager: ⚠️ No mapping for sequence '%s', using fallback: %s" % [completed_sequence, fallback])
+	return fallback

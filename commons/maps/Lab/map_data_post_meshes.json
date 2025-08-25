@@ -1,34 +1,34 @@
 {
 	"map_info": {
-		"name": "Lab_Post_WaveFunctions",
-		"description": "Lab State After Wave Functions - New wing and sequence portal unlocked",
+		"name": "Lab_Post_Array",
+		"description": "Lab State After Array Tutorial - New artifacts and sequences unlocked",
 		"version": "1.0",
 		"format": "json_lab_progressive",
-		"progression_state": "post_wavefunctions",
+		"progression_state": "post_array_tutorial",
 		"dimensions": {
-			"width": 9,
-			"depth": 9,
+			"width": 7,
+			"depth": 7,
 			"max_height": 3
 		},
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
 			"learning_objectives": [
-				"Explore the Wave Functions wing",
-				"Access the Wave Functions overview sequence",
-				"Navigate expanded lab space"
+				"Explore newly unlocked artifacts",
+				"Access to randomness exploration",
+				"Multiple sequence paths available"
 			]
 		}
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "3", "1", "1"],
+			["1", "1", "1", "1", "3", "0", "0"],
 			["1", "1", "1", "1", "3", "3", "3"],
-			["1", "1", "0", "1", "1", "1", "1"],
+			["1", "1", "0", "1", "1", "0", "0"],
 			["1", "1", "1", "1", "3", "3", "3"],
-			["1", "1", "1", "1", "0", "2", "1"],
-			["1", "1", "1", "3", "3", "3", "1"],
-			["1", "1", "1", "1", "1", "1", "1"]
+			["1", "1", "1", "1", "0", "2", "0"],
+			["2", "2", "1", "3", "3", "3", "0"],
+			["0", "0", "0", "0", "0", "0", "0"]
 		],
 		"static_objects": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -39,14 +39,14 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
-		"utilities": [
+	"utilities": [
 			[" ", " ", " ", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:One_Primitives", " ", " ", "t:Meshes_One", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "t:array_tutorial", " ", " "],
 			[" ", " ", "t:Wavefunctions_One", " ", " ", " ", " "],
-			["t:Random_One", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", " ", " "]
 		], 
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -75,9 +75,9 @@
 	},
 	"spawn_points": {
 		"default": {
-					"position": [0.5, 1.8, 8.0],
+			"position": [0.5, 1.8, 6.0],
 			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - with wave functions access"
+			"description": "Main entrance - now with sequence access"
 		}
 	},
 	"lighting": {
@@ -99,7 +99,7 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_wavefunctions",
+		"progression_state": "post_array_tutorial",
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,
