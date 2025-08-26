@@ -258,13 +258,19 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		# RESPECT the teleporter's action property instead of overriding it
 		if action == "next_in_sequence":
 			print("GridSystem: ✅ Using teleporter's 'next_in_sequence' action")
+			# If no active sequence and destination is a sequence name, convert to start_sequence
+			if current_sequence.is_empty() and destination in ["primitives", "array_tutorial", "randomness_exploration", "noise", "wavefunctions"]:
+				print("GridSystem: 🔄 No active sequence, converting next_in_sequence to start_sequence for: %s" % destination)
+				action = "start_sequence"
+				sequence = destination
+				destination = ""
 		elif action == "next":
 			print("GridSystem: ✅ Using teleporter's 'next' action")
 		elif destination.is_empty():
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
-		elif destination in ["primitives", "array_tutorial", "randomness_exploration", "wavefunctions"]:
+		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness_exploration", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory"]:
 			action = "start_sequence"
 			sequence = destination
 			destination = ""

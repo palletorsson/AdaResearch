@@ -33,19 +33,14 @@
 		"static_objects": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", "", " "],
 			[" ", "s", " ", " ", " ", " ", " "],
 			[" ", " ", "t:One_Primitives", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "t:Noise_One"],
-			["t:proceduralgeneration", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "t:Forces_One", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["t:softbodies", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		], 
 		"interactables": [
@@ -76,7 +71,15 @@
 	"utility_definitions": {
 		"note": "Utilities are now referenced from external registry",
 		"s": "References utility_registry.json spawn_point definition",
-		"t": "References utility_registry.json teleport definition with custom properties"
+		"t": {
+			"type": "teleporter",
+			"name": "Sequence Portal",
+			"description": "Portal to learning sequences",
+			"properties": {
+				"action": "next_in_sequence",
+				"visual_effect": "portal_glow"
+			}
+		}
 	},
 	"spawn_points": {
 		"default": {

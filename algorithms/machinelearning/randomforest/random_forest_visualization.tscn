@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5k9xmqr3yqwp"]
+[gd_scene load_steps=4 format=3 uid="uid://c5laxmqr3yqwp"]
 
-[ext_resource type="Script" path="res://machinelearning/randomforest/random_forest_visualization.gd" id="1_nxb7r"]
+[ext_resource type="Script" uid="uid://sw5oit06ux23" path="res://algorithms/machinelearning/randomforest/random_forest_visualization.gd" id="1_nxb7r"]
 
 [sub_resource type="Environment" id="Environment_1xyz2"]
 background_mode = 1
@@ -31,4 +31,4 @@ environment = SubResource("Environment_1xyz2")
 [node name="GroundPlane" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("PlaneMesh_ground")
-skeleton = NodePath("../..") 
+skeleton = NodePath("../..")

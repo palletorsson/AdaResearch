@@ -2,11 +2,12 @@ extends Node3D
 
 var time = 0.0
 var current_iteration = 0
-var max_iterations = 6
+var max_iterations = 4
 var iteration_timer = 0.0
 var iteration_interval = 3.0
 var fractal_segments = []
 var total_segments = 0
+var animation_stopped = false  # New: flag to stop animation
 
 # Koch curve generation
 var points = []
@@ -43,24 +44,27 @@ func initialize_koch_curve():
 	points.append(Vector2(-triangle_size/2, -height/3))  # Close the triangle
 	
 	current_iteration = 0
+	animation_stopped = false  # Reset animation flag
 	generate_koch_curve()
 
 func _process(delta):
 	time += delta
 	iteration_timer += delta
 	
-	# Advance iteration
-	if iteration_timer >= iteration_interval:
+	# Only advance iteration if animation hasn't stopped
+	if not animation_stopped and iteration_timer >= iteration_interval:
 		iteration_timer = 0.0
 		current_iteration = (current_iteration + 1) % (max_iterations + 1)
 		
-		if current_iteration == 0:
+		# Stop progression after iteration 2 to prevent VR crashes
+		if current_iteration > 2:
+			animation_stopped = true
+			current_iteration = 2  # Stay at safe iteration 2
+			generate_koch_curve()
+		elif current_iteration == 0:
 			initialize_koch_curve()
 		else:
 			generate_koch_curve()
-	
-	animate_koch_curve()
-	animate_indicators()
 
 func generate_koch_curve():
 	# Apply Koch transformation for current iteration
@@ -203,5 +207,6 @@ func get_fractal_info() -> Dictionary:
 	return {
 		"iteration": current_iteration,
 		"segments": total_segments,
-		"theoretical_length": pow(4.0/3.0, current_iteration) * 12.0  # Length grows by 4/3 each iteration
+		"theoretical_length": pow(4.0/3.0, current_iteration) * 12.0,  # Length grows by 4/3 each iteration
+		"animation_stopped": animation_stopped
 	}

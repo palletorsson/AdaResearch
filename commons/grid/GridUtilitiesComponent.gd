@@ -335,10 +335,14 @@ func _find_scene_manager():
 func _is_sequence_name(name: String) -> bool:
 	"""Check if the name is a sequence name rather than a map name"""
 	var known_sequences = [
-		"primitives", 
+		"primitives",
+		"tests", 
 		"array_tutorial",
-		"randomness_exploration", 
+		"meshestextures",
+		"randomness_exploration",
 		"wavefunctions",
+		"noise",
+		"forces",
 		"proceduralaudio",
 		"physicssimulation",
 		"softbodies",
@@ -354,9 +358,7 @@ func _is_sequence_name(name: String) -> bool:
 		"criticalalgorithms",
 		"speculativecomputation",
 		"resourcemanagement",
-		"advancedlaboratory",
-		"geometric_algorithms",
-		"advanced_concepts"
+		"advancedlaboratory"
 	]
 	return name in known_sequences
 	

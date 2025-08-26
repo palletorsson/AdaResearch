@@ -66,8 +66,7 @@
 			"name": "Next Lesson",
 			"description": "Complete the row to advance to the next tutorial",
 			"properties": {
-				"destination": "Tutorial_2D",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
 		}, 
 		"s": {

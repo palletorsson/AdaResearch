@@ -40,9 +40,7 @@
 			"description": "Step here to progress to the next level",
 			"type": "teleporter",
 			"properties": {
-				"destination": "Tutorial_Row",
-				"activation_method": "step_on",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
 		},
 		"s": {

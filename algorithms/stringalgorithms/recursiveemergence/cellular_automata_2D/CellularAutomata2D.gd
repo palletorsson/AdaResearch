@@ -1,5 +1,5 @@
 extends Node3D
-class_name CellularAutomata2D
+class_name theCellularAutomata2D
 
 var time: float = 0.0
 var generation: int = 0

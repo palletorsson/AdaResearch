@@ -57,14 +57,14 @@
 				"Pattern recognition"
 			],
 			"temps": [
-				"Tutorial_Col", 
+				"Tutorial_Disco", 
 				"Tutorial_Row", 				
 				"Tutorial_2D",
 				"Tutorial_2D_Color",
 			],
 			"maps": [
 				"Tutorial_Single",
-				"Tutorial_Disco"
+				"Tutorial_Col"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_array",
@@ -107,15 +107,16 @@
 				"Statistical patterns",
 				"Chaos vs randomness"
 			],
-			"maps": [
-				"Random_One",
-				"Random_Two",
+			"temps": [			
 				"Random_Three",
 				"Random_Four",
 				"Random_Walk",				
 				"Random_Five",
-				"Random_Six",
-				"Random_Seven",			
+				"Random_Six" 
+			],
+			"maps": [
+				"Random_One",
+				"Random_Two",			
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_random",
@@ -142,50 +143,49 @@
 			"unlock_requirements": [],
 			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
 		},
-		
-		
-			"noise": {
-				"name": "Noise & Signal Processing",
-				"description": "Explore different types of noise, signal processing, and audio generation techniques",
-				"difficulty": "intermediate",
-				"estimated_time": "15-20 minutes",
-				"learning_objectives": [
-					"Understanding different noise types",
-					"Signal processing fundamentals", 
-					"Audio noise generation",
-					"Noise filtering techniques"
-				],
-				"maps": [
-					"Noise_One",
-					"Noise_Two",
-					"Noise_Three"
-				],
-				"return_to": "lab",
-				"unlock_requirements": ["randomness_exploration"],
-				"completion_rewards": ["noise_engineer_badge", "signal_processor_badge"],
-				"lab_map": "Lab/map_data_post_noise"
+
+		"noise": {
+			"name": "Noise & Signal Processing",
+			"description": "Explore different types of noise, signal processing, and audio generation techniques",
+			"difficulty": "intermediate",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Understanding different noise types",
+				"Signal processing fundamentals", 
+				"Audio noise generation",
+				"Noise filtering techniques"
+			],
+			"maps": [
+				"Noise_One",
+				"Noise_Two",
+				"Noise_Three"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["randomness_exploration"],
+			"completion_rewards": ["noise_engineer_badge", "signal_processor_badge"],
+			"lab_map": "Lab/map_data_post_noise"
 			},
-			"forces": {
-				"name": "Forces & Physics Simulation",
-				"description": "Explore fundamental forces, physics simulation, and dynamic interactions",
-				"difficulty": "intermediate",
-				"estimated_time": "20-25 minutes",
-				"learning_objectives": [
-					"Gravitational force simulation",
-					"Electromagnetic forces",
-					"Spring and tension forces",
-					"Collision dynamics and response"
-				],
-				"maps": [
-					"Forces_One",
-					"Forces_Two",
-					"Forces_Three"
-				],
-				"return_to": "lab",
-				"unlock_requirements": ["noise"],
-				"completion_rewards": ["physics_engineer_badge", "force_master_badge"],
-				"lab_map": "Lab/map_data_post_physicssimulation"
-			},
+		"forces": {
+			"name": "Forces & Physics Simulation",
+			"description": "Explore fundamental forces, physics simulation, and dynamic interactions",
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Gravitational force simulation",
+				"Electromagnetic forces",
+				"Spring and tension forces",
+				"Collision dynamics and response"
+			],
+			"maps": [
+				"Forces_One",
+				"Forces_Two",
+				"Forces_Three"
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["noise"],
+			"completion_rewards": ["physics_engineer_badge", "force_master_badge"],
+			"lab_map": "Lab/map_data_post_physicssimulation"
+		},
 		"proceduralaudio": {
 			"name": "Procedural Audio",
 			"description": "Explore procedural sound synthesis, effects, and generative music",
@@ -264,13 +264,6 @@
 				"SoftBodies_Soft_Body_Deformation",
 				"SoftBodies_Playground_of_Joy",
 				"SoftBodies_Affect_Theory_Visualization",
-				"Test_1", 
-				"Test_2", 
-				"Test_3", 
-				"Test_4", 
-				"Test_5", 
-				"Test_6", 
-				"Test_7", 
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_softbodies",
@@ -288,7 +281,7 @@
 				"Recursive mathematical structures",
 				"Emergent behavior analysis"
 			],
-			"maps": [
+			"temps": [			
 				"RecursiveEmergence_Cellular_Automata_1D",
 				"RecursiveEmergence_Cellular_Automata_2D",
 				"RecursiveEmergence_Cellular_Automata_3D",
@@ -298,8 +291,11 @@
 				"RecursiveEmergence_Koch_Curve",
 				"RecursiveEmergence_Tail_Recursion_Memoization",
 				"RecursiveEmergence_Mandelbrot_Set",
-				"RecursiveEmergence_Julia_Set",
 				"RecursiveEmergence_Iterated_Function_Systems_IFS"
+			], 
+			"maps": [
+				"RecursiveEmergence_Julia_Set",
+				"RecursiveEmergence_Koch_Curve"		
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_recursiveemergence",
@@ -387,8 +383,7 @@
 				"Markov chain systems",
 				"Constraint-based generation"
 			],
-			"maps": [
-				"ProceduralGeneration_Voronoi_Diagrams",
+			"temps": [
 				"ProceduralGeneration_Delaunay_Triangulation",
 				"ProceduralGeneration_Space_Partitioning",
 				"ProceduralGeneration_Markov_Chains",
@@ -399,8 +394,13 @@
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"ProceduralGeneration_Genetic_Algorithms",
 				"ProceduralGeneration_Evolutionary_Computation",
-				"ProceduralGeneration_Genetic_Programming",
+				"ProceduralGeneration_Genetic_Programming", 
+				"ProceduralGeneration_Voronoi_Diagrams",
 				"ProceduralGeneration_Marching_Cubes_Algorithm"
+			],
+			"maps": [
+				"ProceduralGeneration_One",
+				"ProceduralGeneration_Two"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",
@@ -497,7 +497,7 @@
 				"AI model training",
 				"Explainable AI concepts"
 			],
-			"maps": [
+			"temps": [
 				"MachineLearning_Neural_Networks",
 				"MachineLearning_Convolutional_Neural_Networks_CNNs",
 				"MachineLearning_Recurrent_Neural_Networks_RNNs",
@@ -513,6 +513,10 @@
 				"MachineLearning_Recommendation_Systems",
 				"MachineLearning_Classification_Algorithms",
 				"MachineLearning_Attention_Mechanisms"
+			], 
+			"maps": [
+				"MachineLearning_One",
+				"MachineLearning_Two"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_machinelearning",
