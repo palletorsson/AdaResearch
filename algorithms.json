@@ -1,0 +1,301 @@
+{
+  "categories": {
+	"Advanced Laboratory": [
+	  "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
+	  "res://algorithms/advancedlaboratory/feedback_cybernetics/feedback_cybernetics.tscn",
+	  "res://algorithms/advancedlaboratory/lab_equipment_simulation/lab_equipment_simulation.tscn",
+	  "res://algorithms/advancedlaboratory/water_dynamics/water_dynamics.tscn"
+	],
+	"Alternative Geometries": [
+	  "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+	  "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+	  "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+	  "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
+	  "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
+	  "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn"
+	],
+	"Chaos Theory": [
+	  "res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.tscn",
+	  "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
+	  "res://algorithms/chaos/strangeattractors/2d_to_3d_strange_attractors.tscn",
+	  "res://algorithms/chaos/lyapunovexponents/LyapunovExponents_2d_in_3d.tscn"
+	],
+	"Computational Biology": [
+	  "res://algorithms/computationalbiology/bucketoftulips/bucket_of_tulips.tscn",
+	  "res://algorithms/computationalbiology/radiolaria/radiolaria.tscn",
+	  "res://algorithms/computationalbiology/montecarloproteinchain/monte_carl_methods_protein.tscn"
+	],
+	"Computational Geometry": [
+	  "res://algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
+	  "res://algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
+	  "res://algorithms/computationalgeometry/distance_fields_sdf/distance_fields_sdf.tscn",
+	  "res://algorithms/computationalgeometry/convexhull/convex_hull_3d.tscn",
+	  "res://algorithms/computationalgeometry/chengsimulation/ChengSimulationScaled.tscn",
+	  "res://algorithms/computationalgeometry/chengsimulation/ChengSimulation.tscn"
+	],
+	"Critical Algorithms": [
+	  "res://algorithms/criticalalgorithms/ethics_in_AI/ethics_in_AI.tscn",
+	  "res://algorithms/criticalalgorithms/algorithmic_bias_visualization/algorithmic_bias_visualization.tscn",
+	  "res://algorithms/criticalalgorithms/algorithmic_bias/algorithmic_bias.tscn"
+	],
+	"Critical Theory": [
+	  "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
+	  "res://algorithms/criticaltheory/runningtextdisplay/RunningTextDisplay.tscn",
+	  "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
+	  "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
+	  "res://algorithms/criticaltheory/remainstobeseen/remains_to_be_seen.tscn",
+	  "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
+	  "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
+	  "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn"
+	],
+	"Cryptography": [
+	  "res://algorithms/cryptography/rsa/rsa_visualization.tscn"
+	],
+	"Data Structures": [
+	  "res://algorithms/datastructures/redblacktree/redblack_visualization.tscn",
+	  "res://algorithms/datastructures/btree/btree_visualization.tscn",
+	  "res://algorithms/datastructures/suffix_array_tree/suffix_array_tree.tscn",
+	  "res://algorithms/datastructures/fenwick_tree/fenwick_tree.tscn",
+	  "res://algorithms/datastructures/segment_tree/segment_tree.tscn",
+	  "res://algorithms/datastructures/graph_structures/graph_structures.tscn",
+	  "res://algorithms/datastructures/quadtrees_octrees/quadtrees_octrees.tscn",
+	  "res://algorithms/datastructures/bsp_trees/bsp_trees.tscn",
+	  "res://algorithms/datastructures/union_find/union_find.tscn",
+	  "res://algorithms/datastructures/trie_operations/trie_operations.tscn",
+	  "res://algorithms/datastructures/heap_operations/heap_operations.tscn",
+	  "res://algorithms/datastructures/hash_maps/hash_maps.tscn",
+	  "res://algorithms/datastructures/binary_trees/binary_trees.tscn",
+	  "res://algorithms/datastructures/linked_lists/linked_lists.tscn",
+	  "res://algorithms/datastructures/binarysearchtree/bst_visualization.tscn"
+	],
+	"Emergent Systems": [
+	  "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
+	  "res://algorithms/emergentsystems/boidflocking/boid_manager.tscn",
+	  "res://algorithms/emergentsystems/boidflocking/boids_explained.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/components/torus.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/components/sphere.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/components/cylinder.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/components/cube.tscn",
+	  "res://algorithms/emergentsystems/ecosystemsimulation2/components/cone.tscn"
+	],
+	"Graph Theory": [
+	  "res://algorithms/graphtheory/networkflow/network_flow_visualization.tscn",
+	  "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+	  "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
+	  "res://algorithms/graphtheory/minimum_spanning_tree/minimum_spanning_tree.tscn",
+	  "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+	  "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn"
+	],
+	"Machine Learning": [
+	  "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn",
+	  "res://algorithms/machinelearning/geneticalgorithm/genetic_algorithm.tscn",
+	  "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/convolutional_neural_networks_CNNs.tscn",
+	  "res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms.tscn",
+	  "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+	  "res://algorithms/machinelearning/variational_autoencoders_VAEs/variational_autoencoders_VAEs.tscn",
+	  "res://algorithms/machinelearning/transformers/transformers.tscn",
+	  "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
+	  "res://algorithms/machinelearning/reinforcement_learning/reinforcement_learning.tscn",
+	  "res://algorithms/machinelearning/recommendation_systems/recommendation_systems.tscn",
+	  "res://algorithms/machinelearning/optimization_algorithms/optimization_algorithms.tscn",
+	  "res://algorithms/machinelearning/natural_language_processing_NLP/natural_language_processing_NLP.tscn",
+	  "res://algorithms/machinelearning/LSTMs/LSTMs.tscn",
+	  "res://algorithms/machinelearning/generative_adversarial_networks_GANs/generative_adversarial_networks_GANs.tscn",
+	  "res://algorithms/machinelearning/feature_engineering/feature_engineering.tscn",
+	  "res://algorithms/machinelearning/explainable_AI_XAI/explainable_AI_XAI.tscn",
+	  "res://algorithms/machinelearning/ensemble_methods/ensemble_methods.tscn",
+	  "res://algorithms/machinelearning/dimensionality_reduction/dimensionality_reduction.tscn",
+	  "res://algorithms/machinelearning/computer_vision/computer_vision.tscn",
+	  "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
+	  "res://algorithms/machinelearning/neural_networks/neural_networks.tscn",
+	  "res://algorithms/machinelearning/kmeansclustering/kmeans_simple.tscn",
+	  "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+	  "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+	  "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+	  "res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/evolved_creatures.tscn",
+	  "res://algorithms/machinelearning/evolutionaryalgorithms/evolving_creatures.tscn",
+	  "res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/creature.tscn",
+	  "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+	  "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+	  "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn"
+	],
+	"Neuroscience": [
+	  "res://algorithms/neuroscience/freeenergyprinciple/scenes/markov_blanket_visualization.tscn",
+	  "res://algorithms/neuroscience/perceptionaltering/perception_altering.tscn",
+	  "res://algorithms/neuroscience/markovblanket/puls_markov.tscn"
+	],
+	"Numerical Methods": [
+	  "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+	  "res://algorithms/numericalmethods/newtonraphson/newton_raphson_visualization.tscn"
+	],
+	"Optimization": [
+	  "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn"
+	],
+	"Pattern Generation": [
+	  "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
+	  "res://algorithms/patterngeneration/penrose_tilings/penrose_tilings.tscn",
+	  "res://algorithms/patterngeneration/reactiondiffusion/reactiondiffusion.tscn"
+	],
+	"Primitives": [
+	  "res://algorithms/primitives/sort_algorithm_animation/sort_algorithm_animation.tscn",
+	  "res://algorithms/primitives/static_loop_visualization/static_loop_visualization.tscn",
+	  "res://algorithms/primitives/arrays_grid_understanding/arrays_grid_understanding.tscn",
+	  "res://algorithms/primitives/tron_grid/tron_grid.tscn",
+	  "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn"
+	],
+	"Procedural Audio": [
+	  "res://algorithms/proceduralaudio/psychoacoustics/psychoacoustics.tscn",
+	  "res://algorithms/proceduralaudio/generative_music/generative_music.tscn",
+	  "res://algorithms/proceduralaudio/audio_effects/audio_effects.tscn",
+	  "res://algorithms/proceduralaudio/granular_synthesis/granular_synthesis.tscn",
+	  "res://algorithms/proceduralaudio/fm_synthesis/fm_synthesis.tscn",
+	  "res://algorithms/proceduralaudio/additive_synthesis/additive_synthesis.tscn",
+	  "res://algorithms/proceduralaudio/subtractive_synthesis/subtractive_synthesis.tscn"
+	],
+	"Quantum Algorithms": [
+	  "res://algorithms/quantumalgorithms/superposition/quantum_superposition.tscn"
+	],
+	"Search & Pathfinding": [
+	  "res://algorithms/searchpathfinding/dijkstra_algorithm/dijkstra_algorithm.tscn",
+	  "res://algorithms/searchpathfinding/astar/astar.tscn"
+	],
+	"Sorting Algorithms": [
+	  "res://algorithms/sortingalgorithms/sorting_visualization.tscn"
+	],
+	"String Algorithms": [
+	  "res://algorithms/stringalgorithms/recursiveemergence/cellular_automata_1d/cellular_automata_1d.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/julia_set/julia_set.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/lattice_gas_automata/lattice_gas_automata.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/rule_30_110/rule_30_110.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/mandelbrot_set/mandelbrot_set.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/koch_curve/koch_curve.tscn",
+	  "res://algorithms/stringalgorithms/recursiveemergence/cellular_automata_3d/cellular_automata_3d.tscn",
+	  "res://algorithms/stringalgorithms/patternmatching/boyer_moore_visualization.tscn",
+	  "res://algorithms/stringalgorithms/editdistance/levenshtein_distance_visualization.tscn",
+	  "res://algorithms/stringalgorithms/recursion/koshcurve/KochCurve3D.tscn",
+	  "res://algorithms/stringalgorithms/recursion/recursivetree/recursive_tree.tscn"
+	],
+	"Swarm Intelligence": [
+	  "res://algorithms/swarmintelligence/boids_algorithm/boids_algorithm.tscn",
+	  "res://algorithms/swarmintelligence/particle_swarm_optimization/particle_swarm_optimization.tscn",
+	  "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
+	  "res://algorithms/swarmintelligence/antcolonyoptimization/main.tscn",
+	  "res://algorithms/swarmintelligence/particleswarmoptimization/particle_swarm_optimization.tscn"
+	],
+	"Wave Functions": [
+	  "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
+	  "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
+	  "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
+	  "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
+	  "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn",
+	  "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+	  "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
+	  "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
+	  "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
+	  "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+	  "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
+	  "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
+	  "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
+	  "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
+	  "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+	  "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+	  "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
+	],
+	"Commons & Primitives": [
+	  "res://commons/primitives/cubes/cube_scene.tscn",
+	  "res://commons/primitives/cubes/animation/transformation_cube.tscn",
+	  "res://commons/primitives/cubes/animation/rotating_cube.tscn",
+	  "res://commons/primitives/cubes/animated_cube.tscn",
+	  "res://commons/primitives/cubes/oscillation_cube.tscn",
+	  "res://commons/primitives/cubes/rotation_oscillation_cube.tscn",
+	  "res://commons/primitives/cubes/cube_with_shader.tscn",
+	  "res://commons/primitives/cubes/cube_spawner.tscn",
+	  "res://commons/primitives/spheres/probability_sphere.tscn",
+	  "res://commons/primitives/plants/bucket_of_tulips.tscn",
+	  "res://commons/primitives/crystals/geometric_crystal.tscn",
+	  "res://commons/primitives/dice/quantum_dice.tscn",
+	  "res://commons/primitives/attractors/chaos_attractor.tscn",
+	  "res://commons/primitives/tools/array_visualizer.tscn",
+	  "res://commons/primitives/tools/spatial_compass.tscn",
+	  "res://commons/primitives/tools/dimension_lens.tscn",
+	  "res://commons/primitives/tools/reality_modifier.tscn",
+	  "res://commons/primitives/tools/concept_synthesizer.tscn",
+	  "res://commons/primitives/prisms/knowledge_prism.tscn",
+	  "res://commons/primitives/panels/scifi_panel_wall.tscn",
+	  "res://commons/primitives/entrances/level_entrance.tscn",
+	  "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
+	  "res://commons/context/discofloor/discofloor.tscn",
+	  "res://commons/context/mondrian2d/mondrian_2d.tscn",
+	  "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
+	  "res://commons/context/mondrian2d/grabable_mondrian.tscn",
+	  "res://commons/context/walkgrids/noise_space.tscn",
+	  "res://commons/context/walkgrids/random_space.tscn",
+	  "res://commons/context/walkgrids/sine_space.tscn",
+	  "res://commons/context/walkgrids/voronoi_space.tscn",
+	  "res://commons/scenes/mapobjects/reset_scene.tscn",
+	  "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+	  "res://commons/scenes/reset_area.tscn"
+	],
+	"Randomness & Noise": [
+	  "res://algorithms/randomness/profile_random.tscn",
+	  "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
+	  "res://algorithms/randomness/walk_random.tscn",
+	  "res://algorithms/randomness/remove_random.tscn",
+	  "res://algorithms/randomness/gaussian_random.tscn",
+	  "res://algorithms/randomness/sculpt_one.tscn",
+	  "res://algorithms/randomness/env_one.tscn",
+	  "res://algorithms/randomness/random_object_spawner.tscn",
+	  "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn",
+	  "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
+	  "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+	  "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+	  "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn",
+	  "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn",
+	  "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn",
+	  "res://algorithms/randomness/valuenoise/valuenoise.tscn",
+	  "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
+	  "res://algorithms/randomness/perlinnoise/perlinnoise.tscn"
+	],
+	"Physics Simulation": [
+	  "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
+	  "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+	  "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
+	  "res://algorithms/physicssimulation/constraints/constraints.tscn",
+	  "res://algorithms/physicssimulation/fem/fem.tscn",
+	  "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
+	  "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+	  "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
+	  "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
+	  "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
+	  "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
+	  "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+	  "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
+	  "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
+	  "res://algorithms/physicssimulation/springmass/springmass.tscn",
+	  "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
+	  "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+	  "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
+	  "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn"
+	],
+	"Space Topology": [
+	  "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+	  "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn"
+	],
+	"Procedural Generation": [
+	  "res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
+	  "res://algorithms/proceduralgeneration/lsystem/scenes/tree_l_system.tscn",
+	  "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn"
+	],
+	"Misc & Visual Enhancements": [
+	  "res://algorithms/misc/maps_overview_in_3d.tscn",
+	  "res://algorithms/misc/tartan_boxes_demo.tscn",
+	  "res://algorithms/misc/tartan_boxes_3d.tscn",
+	  "res://algorithms/misc/tartan_grid_3d.tscn",
+	  "res://algorithms/misc/tartan_grid_3d_demo.tscn",
+	  "res://algorithms/misc/tartan_grid_demo.tscn"
+	]
+  }
+}
