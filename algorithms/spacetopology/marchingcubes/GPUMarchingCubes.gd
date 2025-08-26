@@ -3,7 +3,7 @@
 # Fixed for Godot 4.x compatibility
 
 extends RefCounted
-class_name FixedGPUMarchingCubes
+class_name  GPUMarchingCubes
 
 # Rendering device and compute shader
 var rd: RenderingDevice

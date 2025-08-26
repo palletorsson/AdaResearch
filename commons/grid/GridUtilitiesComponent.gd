@@ -264,6 +264,13 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 	# Add utility-specific data
 	if "destination" in utility_object:
 		utility_data["destination"] = utility_object.destination
+	else:
+		utility_data["destination"] = utility_object.get_meta("destination", "")
+	
+	# Add action property from metadata (crucial for teleporters!)
+	if utility_object.has_meta("action"):
+		utility_data["action"] = utility_object.get_meta("action")
+		print("GridUtilitiesComponent: 🎯 Found action in metadata: %s" % utility_data["action"])
 	
 	utility_activated.emit(utility_type, utility_object.global_position, utility_data)
 
@@ -271,12 +278,14 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 func _on_teleporter_activated(utility_object: Node3D):
 	print("GridUtilitiesComponent: 🚀 Teleporter activated - checking for custom handling")
 	
-	# Get destination from teleporter
+	# Get destination and action from teleporter
 	var destination = ""
 	if "destination" in utility_object:
 		destination = utility_object.destination
 	else:
 		destination = utility_object.get_meta("destination", "")
+	
+	var action = utility_object.get_meta("action", "")
 	
 	# First, try to let the parent GridSystem handle it (for lab-specific logic)
 	if parent_node and parent_node.has_method("_on_utility_activated"):
@@ -284,10 +293,12 @@ func _on_teleporter_activated(utility_object: Node3D):
 			"position": utility_object.global_position,
 			"name": utility_object.name,
 			"type": "t",
-			"destination": destination
+			"destination": destination,
+			"action": action
 		}
 		
 		print("GridUtilitiesComponent: Delegating to parent GridSystem for custom handling")
+		print("GridUtilitiesComponent: Action: %s" % action)
 		print("GridUtilitiesComponent: Destination: %s" % destination)
 		parent_node._on_utility_activated("t", utility_object.global_position, utility_data)
 		return

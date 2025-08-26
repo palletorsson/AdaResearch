@@ -68,10 +68,7 @@
 			"type": "teleporter",
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
-			"properties": {
-				"destination": "Tutorial_Disco",
-				"visual_effect": "portal_glow"
-			}
+			"properties": { "action": "next_in_sequence" }
 		}, 
 		"s": {
 			"properties": {

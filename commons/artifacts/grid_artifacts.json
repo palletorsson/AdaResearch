@@ -425,6 +425,32 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+		"rainbow": {
+			"name": "rainbow",
+			"lookup_name": "rainbow",
+			"description": "rainbow",
+			"scene": "res://algorithms/primitives/rainbow/rainbow.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
+		"homagetothesquare": {
+			"name": "homagetothesquare",
+			"lookup_name": "homagetothesquare",
+			"description": "homagetothesquare",
+			"scene": "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
+		"platonicsolids": {
+			"name": "platonicsolids",
+			"lookup_name": "platonicsolids",
+			"description": "platonicsolids",
+			"scene": "res://algorithms/primitives/platonicsolids/platonicsolids.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
+		
+		
 		"env_one": {
 			"name": "Environment One",
 			"lookup_name": "env_one",

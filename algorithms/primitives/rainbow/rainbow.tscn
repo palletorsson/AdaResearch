@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqxk8n7m8vp2o"]
+
+[ext_resource type="Script" uid="uid://cb0673e5dwqwi" path="res://algorithms/primitives/rainbow/rainbow.gd" id="1_0x8vq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8k9l2"]
+cull_mode = 2
+no_depth_test = true
+albedo_color = Color(0.6, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0.4, 0.6, 0.8, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_1x2y4"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_9j2l4"]
+albedo_color = Color(0.2, 0.6, 0.2, 1)
+roughness = 0.8
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7h8k3"]
+size = Vector2(100, 100)
+
+[node name="DoubleRainbow3D" type="Node3D"]
+script = ExtResource("1_0x8vq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Sky" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(70, 0, 0, 0, 70, 0, 0, 0, 70, 0, 0, -30)
+material_override = SubResource("StandardMaterial3D_8k9l2")
+mesh = SubResource("SphereMesh_1x2y4")
+
+[node name="Ground" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+material_override = SubResource("StandardMaterial3D_9j2l4")
+mesh = SubResource("PlaneMesh_7h8k3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.282104, 4.12267, 70.0373)

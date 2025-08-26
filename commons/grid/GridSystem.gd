@@ -246,18 +246,23 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		
 		# Check if we're in a sequence context
 		var current_sequence = get_meta("current_sequence", {})
-		var action = "load_map"  # Default action
+		var action = data.get("action", "load_map")  # Use teleporter's action property
 		var destination = data.get("destination", "")
 		var sequence = ""
 		
 		print("GridSystem: 🔍 DEBUG - Current sequence metadata: %s" % current_sequence)
+		print("GridSystem: 🔍 DEBUG - Teleporter action: '%s'" % action)
 		print("GridSystem: 🔍 DEBUG - Destination from teleporter: '%s'" % destination)
 		print("GridSystem: 🔍 DEBUG - All metadata: %s" % get_meta_list())
 		
-		# NEW APPROACH: Use "next" action for empty destinations
-		if destination.is_empty():
+		# RESPECT the teleporter's action property instead of overriding it
+		if action == "next_in_sequence":
+			print("GridSystem: ✅ Using teleporter's 'next_in_sequence' action")
+		elif action == "next":
+			print("GridSystem: ✅ Using teleporter's 'next' action")
+		elif destination.is_empty():
 			action = "next"
-			print("GridSystem: ✅ Empty destination - using 'next' action")
+			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
 		elif destination in ["primitives", "array_tutorial", "randomness_exploration", "wavefunctions"]:
 			action = "start_sequence"

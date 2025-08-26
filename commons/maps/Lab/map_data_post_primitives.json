@@ -24,7 +24,9 @@
 		"structure": [
 			["1", "1", "1", "1", "1", "0", "0"],
 			["1", "1", "1", "1", "1", "0", "0"],
+			["1", "1", "1", "1", "1", "0", "0"],
 			["1", "1", "0", "1", "1", "0", "0"],
+			["1", "1", "1", "1", "1", "2", "0"],
 			["1", "1", "1", "1", "1", "2", "0"],
 			["1", "1", "1", "1", "0", "2", "0"],
 			["0", "0", "0", "2", "2", "2", "0"],
@@ -42,7 +44,9 @@
 		"utilities": [
 			[" ", " ", " ", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:One_Primitives", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "t:array_tutorial", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -51,45 +55,14 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "", "cube_scene:0:2", " ", " ", " ", " " ],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "rotating_cube", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
 		]
-	},
-	"structure_definitions": {
-		"1": {
-			"name": "lab_floor",
-			"description": "Standard laboratory floor tiles",
-			"material": "lab_floor_material",
-			"height": 0.1,
-			"color": [0.8, 0.8, 0.9, 1.0]
-		},
-		"2": {
-			"name": "raised_platform",
-			"description": "Raised platform areas",
-			"material": "lab_platform_material", 
-			"height": 0.2,
-			"color": [0.9, 0.9, 1.0, 1.0]
-		},
-		"3": {
-			"name": "central_area",
-			"description": "Central working area",
-			"material": "lab_central_material",
-			"height": 0.15,
-			"color": [0.85, 0.9, 0.95, 1.0]
-		}
-	},
-	"static_object_definitions": {
-		"main_table": {
-			"name": "Research Table",
-			"description": "Central research table for artifacts",
-			"scene": "res://commons/scenes/lab_objects/research_table.tscn",
-			"position_offset": [0.0, 0.15, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0]
-		}
 	},
 	"external_references": {
 		"artifact_registries": [
