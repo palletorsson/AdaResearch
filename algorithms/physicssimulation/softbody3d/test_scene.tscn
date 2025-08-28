@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://test_scene_001"]
+
+[ext_resource type="PackedScene" path="res://algorithms/physicssimulation/softbody3d/softbody3d.tscn" id="1_main_scene"]
+[ext_resource type="Script" path="res://algorithms/physicssimulation/softbody3d/test_softbody.gd" id="2_test_script"]
+
+[node name="SoftBodyTestScene" type="Node3D"]
+script = ExtResource("2_test_script")
+
+[node name="SoftBodyVariationsScene" parent="." instance=ExtResource("1_main_scene")]
+
+[node name="TestTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

@@ -238,6 +238,16 @@
 			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0]
 		},
+		"noisetorus": {
+			"name": "noisetorus",
+			"lookup_name": "noisetorus", 
+			"description": "noisetorus",
+			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
+		
+		
 			"spectral_analyzer": {
 			"name": "Master Audio Analyzer",
 			"lookup_name": "spectral_analyzer",
@@ -1101,6 +1111,35 @@
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
 		},
+		"softbody3d": {
+			"name": "softbody3d",
+			"lookup_name": "softbody3d",
+			"description": "softbody3d",
+			"scene": "res://algorithms/physicssimulation/softbody3d/softbody3d.tscn",
+			"position": [1.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		"fetishtorus": {
+			"name": "fetishtorus",
+			"lookup_name": "fetishtorus",
+			"description": "fetishtorus",
+			"scene": "res://algorithms/primitives/fetishtorus/fetishtorus.tscn",
+			"position": [1.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		"standalonevrterrain": {
+			"name": "standalonevrterrain",
+			"lookup_name": "standalonevrterrain",
+			"description": "standalonevrterrain",
+			"scene": "res://algorithms/proceduralgeneration/standalonevrterrain/standalonevrterrain.tscn",
+			"position": [1.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		
+		
 		"collision_detection": {
 			"name": "Collision Detection",
 			"lookup_name": "collision_detection",

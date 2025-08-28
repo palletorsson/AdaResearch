@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcex1irpxpshu"]
+
+[ext_resource type="Shader" uid="uid://dh7qdqk0gdpfh" path="res://algorithms/primitives/fetishtorus/blackshine.gdshader" id="1_kolnp"]
+[ext_resource type="Shader" uid="uid://cghkb0x20f5hp" path="res://algorithms/primitives/fetishtorus/fetishtorus.gdshader" id="2_tomh8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tomh8"]
+render_priority = 0
+shader = ExtResource("1_kolnp")
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c1mfk"]
+render_priority = 0
+shader = ExtResource("2_tomh8")
+shader_parameter/inner_color_speed = 0.5
+shader_parameter/outer_color_speed = 0.7
+shader_parameter/gradient_spread = 0.5
+shader_parameter/light_dir = Vector3(0, 0, 0)
+
+[sub_resource type="TorusMesh" id="TorusMesh_3lcln"]
+
+[node name="FluidTorusScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, -0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0, 8, 12)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.852158, 0, 0.523097, 0, 1, 0, -0.523097, 0, 0.852158, 0, 6, 8)
+fov = 60.0
+
+[node name="FluidTorus" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.248284, 0.968687, 0, -0.968687, -0.248284, -0.0499929, 1.6222, 0)
+material_override = SubResource("ShaderMaterial_tomh8")
+mesh = SubResource("TorusMesh_1")
+
+[node name="FluidTorus2" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_c1mfk")
+mesh = SubResource("TorusMesh_3lcln")

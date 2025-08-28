@@ -1,0 +1,195 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpectcn2s5gf7"]
+
+[ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_i3odx"]
+[ext_resource type="Script" uid="uid://c84t5tsgdhmb8" path="res://algorithms/physicssimulation/softbody3d/softbody3d_scene_controller.gd" id="2_script"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqfal"]
+size = Vector3(17.2446, 1, 14.6509)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2xf48"]
+render_priority = 0
+shader = ExtResource("2_i3odx")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+
+[node name="SoftBodyVariationsScene" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, -0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0, 8, 12)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.852158, 0, 0.523097, 0, 1, 0, -0.523097, 0, 0.852158, 0, 6, 8)
+fov = 60.0
+
+[node name="Floor" type="Node3D" parent="."]
+visible = false
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.1, 0)
+mesh = SubResource("PlaneMesh_1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05619, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.43482, 0, -1.04907)
+shape = SubResource("BoxShape3D_tqfal")
+
+[node name="SoftBodyVariations" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.16074, 0, 4.78199)
+
+[node name="SphereSoftBody01" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -6)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+pressure_coefficient = 0.05
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody02" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -6)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 6
+pressure_coefficient = 0.1
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody03" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -6)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 7
+pressure_coefficient = 0.15
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody04" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -6)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 8
+pressure_coefficient = 0.2
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody05" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -6)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 9
+pressure_coefficient = 0.25
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody06" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -3)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 10
+pressure_coefficient = 0.3
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody07" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -3)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 12
+pressure_coefficient = 0.4
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody08" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -3)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 15
+pressure_coefficient = 0.5
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody09" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -3)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 20
+pressure_coefficient = 0.7
+script = ExtResource("1_script")
+
+[node name="SphereSoftBody10" type="SoftBody3D" parent="SoftBodyVariations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -3)
+material_override = SubResource("ShaderMaterial_2xf48")
+mesh = SubResource("SphereMesh_1")
+simulation_precision = 25
+pressure_coefficient = 1.0
+script = ExtResource("1_script")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Soft Body Variations"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Different soft body types with unique physics properties"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SphereInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Sphere: Balanced physics, medium pressure"
+autowrap_mode = 2
+
+[node name="BoxInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Box: High stiffness, structured deformation"
+autowrap_mode = 2
+
+[node name="CylinderInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Cylinder: Low stiffness, fluid-like behavior"
+autowrap_mode = 2
+
+[node name="CapsuleInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Capsule: Very low stiffness, organic movement"
+autowrap_mode = 2
