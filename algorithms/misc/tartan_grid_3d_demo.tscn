@@ -5,9 +5,11 @@
 [node name="TartanGrid3DDemo" type="Node3D"]
 
 [node name="TartanGrid3D" parent="." instance=ExtResource("1_grid")]
+script = null
 
 [node name="TartanGrid3D" parent="TartanGrid3D" instance=ExtResource("1_grid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32403, 0, 0)
+script = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.956422, 0.291988, 0, -0.291988, 0.956422, 0, 0.574072, 2.0614)

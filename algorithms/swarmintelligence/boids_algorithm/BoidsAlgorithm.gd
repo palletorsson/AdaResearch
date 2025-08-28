@@ -1,5 +1,5 @@
 extends Node3D
-class_name BoidsAlgorithm
+class_name thrBoidsAlgorithm
 
 var time: float = 0.0
 var swarm_progress: float = 0.0

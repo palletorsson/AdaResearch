@@ -54,7 +54,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "spectral_analyzer", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "bernini_columns", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -69,8 +69,7 @@
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
 			"properties": {
-				"destination": "Wavefunctions_Two",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
 		}, 
 		"s": {

@@ -35,8 +35,7 @@ func create_wave_rings():
 	
 	for i in range(5):
 		var ring = CSGCylinder3D.new()
-		ring.radius = 1.0 + i * 0.8
-		 + i * 0.8
+		ring.radius = 1.0 + i * 0.8 + i * 0.8
 		ring.height = 0.05
 		ring.position.y = -0.5
 		rings_parent.add_child(ring)

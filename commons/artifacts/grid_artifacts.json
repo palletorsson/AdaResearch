@@ -221,8 +221,23 @@
 			"sequence": null,
 			"artifact_type": "reward",
 			"prerequisites": []
-		}
-		,
+		},
+		"radiolaria": {
+			"name": "radiolaria",
+			"lookup_name": "radiolaria", 
+			"description": "radiolaria",
+			"scene": "res://algorithms/computationalbiology/radiolaria/radiolaria.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
+		"tartan_demo": {
+			"name": "tartan_demo",
+			"lookup_name": "tartan_demo", 
+			"description": "tartan_demo",
+			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},
 			"spectral_analyzer": {
 			"name": "Master Audio Analyzer",
 			"lookup_name": "spectral_analyzer",

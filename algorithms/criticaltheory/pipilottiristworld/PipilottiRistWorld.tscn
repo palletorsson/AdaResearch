@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://duegpps302qq7" path="res://algorithms/criticaltheory/pipilottiristworld/pipilotti_rist_world.gd" id="1_scej7"]
 
 [node name="PipilottiRistWorld" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.948677, 0.316245, 0, -0.316245, 0.948677, 0, 0.622577, 2.60162)
 script = ExtResource("1_scej7")
 
 [node name="Camera3D" type="Camera3D" parent="."]

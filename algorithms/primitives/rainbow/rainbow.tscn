@@ -30,6 +30,7 @@ light_energy = 0.8
 shadow_enabled = true
 
 [node name="Environment" type="Node3D" parent="."]
+visible = false
 
 [node name="Sky" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(70, 0, 0, 0, 70, 0, 0, 0, 70, 0, 0, -30)

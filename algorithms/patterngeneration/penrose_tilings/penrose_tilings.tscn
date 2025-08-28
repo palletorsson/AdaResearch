@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8x9k7v6m4nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://b8yak7v6m4nqr"]
 
-[ext_resource type="Script" path="res://algorithms/PatternGeneration/penrose_tilings/PenroseTilings.gd" id="1_penrose"]
+[ext_resource type="Script" uid="uid://dhwtt1onmrvth" path="res://algorithms/patterngeneration/penrose_tilings/PenroseTilings.gd" id="1_penrose"]
 
 [node name="PenroseTilings" type="Node3D"]
 script = ExtResource("1_penrose")
@@ -16,8 +16,6 @@ light_energy = 1.5
 
 [node name="IterationControl" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
-top_radius = 0.3
-bottom_radius = 0.3
 height = 1.0
 
 [node name="TileCount" type="CSGBox3D" parent="."]

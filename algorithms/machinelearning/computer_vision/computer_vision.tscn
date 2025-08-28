@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxr"]
 
-[ext_resource type="Script" path="res://algorithms/MachineLearning/computer_vision/ComputerVision.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cg5lm0660a8f4" path="res://algorithms/MachineLearning/computer_vision/ComputerVision.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.2, 0.2, 0.2, 1)
@@ -11,13 +11,13 @@ roughness = 0.2
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
 emission = Color(0.2, 0.8, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
 emission = Color(0.8, 0.2, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [node name="ComputerVision" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,46 +35,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 [node name="ImagePixels" type="Node3D" parent="InputImage"]
 
 [node name="ImageLabel" type="CSGBox3D" parent="InputImage"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="ConvolutionalNetwork" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="NetworkCore" type="CSGBox3D" parent="ConvolutionalNetwork"]
-size = Vector3(3, 3, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(3, 3, 3)
 
 [node name="NetworkLabel" type="CSGBox3D" parent="ConvolutionalNetwork"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="ProcessingLayers" type="Node3D" parent="ConvolutionalNetwork"]
 
 [node name="ConvolutionCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="PoolingCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="ActivationCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="BatchNormCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DropoutCore" type="CSGSphere3D" parent="ConvolutionalNetwork/ProcessingLayers"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
@@ -84,21 +78,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 [node name="FeatureParticles" type="Node3D" parent="FeatureExtraction"]
 
 [node name="FeatureLabel" type="CSGBox3D" parent="FeatureExtraction"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="ObjectDetection" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="DetectionCore" type="CSGBox3D" parent="ObjectDetection"]
-size = Vector3(6, 0.5, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(6, 0.5, 3)
 
 [node name="DetectionLabel" type="CSGBox3D" parent="ObjectDetection"]
-size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.3, 0.3)
 
 [node name="BoundingBoxes" type="Node3D" parent="ObjectDetection"]
 
@@ -112,25 +106,25 @@ material_override = SubResource("StandardMaterial3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="AccuracyBase" type="CSGBox3D" parent="VisionMetrics/AccuracyMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="AccuracyIndicator" type="CSGSphere3D" parent="VisionMetrics/AccuracyMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="mAPMeter" type="Node3D" parent="VisionMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="mAPBase" type="CSGBox3D" parent="VisionMetrics/mAPMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="mAPIndicator" type="CSGSphere3D" parent="VisionMetrics/mAPMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
 

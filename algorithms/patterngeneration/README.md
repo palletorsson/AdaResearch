@@ -148,4 +148,3 @@ Patterns emerge when:
 - Gray, P., and Scott, S. K. "Autocatalytic reactions in the isothermal, continuous stirred tank reactor: isolas and other forms of multistability." Chemical Engineering Science 38.1 (1983): 29-43.
 - Pearson, J. E. "Complex patterns in a simple system." Science 261.5118 (1993): 189-192.
 - Various reaction-diffusion and pattern formation references
-
