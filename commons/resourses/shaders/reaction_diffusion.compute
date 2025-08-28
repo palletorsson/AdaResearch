@@ -1,0 +1,46 @@
+@compute
+@group(0) @binding(0) uniform sampler2D input_texture;  // Read previous state
+@group(0) @binding(1) uniform writeonly image2D output_texture; // Write new state
+
+@group(0) @binding(2) uniform Params {
+    float diffusion_a;
+    float diffusion_b;
+    float feed_rate;
+    float kill_rate;
+    float dt;
+    vec2 tex_size;
+};
+
+void compute_laplacian(inout vec2 ab, ivec2 uv) {
+    vec2 center = texelFetch(input_texture, uv, 0).rg;
+    vec2 laplacian = vec2(0.0);
+    
+    laplacian += texelFetch(input_texture, uv + ivec2( 1,  0), 0).rg * 0.2;
+    laplacian += texelFetch(input_texture, uv + ivec2(-1,  0), 0).rg * 0.2;
+    laplacian += texelFetch(input_texture, uv + ivec2( 0,  1), 0).rg * 0.2;
+    laplacian += texelFetch(input_texture, uv + ivec2( 0, -1), 0).rg * 0.2;
+    laplacian += texelFetch(input_texture, uv + ivec2( 1,  1), 0).rg * 0.05;
+    laplacian += texelFetch(input_texture, uv + ivec2(-1, -1), 0).rg * 0.05;
+    laplacian += texelFetch(input_texture, uv + ivec2( 1, -1), 0).rg * 0.05;
+    laplacian += texelFetch(input_texture, uv + ivec2(-1,  1), 0).rg * 0.05;
+    laplacian += center * -1.0;
+
+    vec2 reaction = vec2(
+        diffusion_a * laplacian.x - center.x * center.y * center.y + feed_rate * (1.0 - center.x),
+        diffusion_b * laplacian.y + center.x * center.y * center.y - (kill_rate + feed_rate) * center.y
+    );
+
+    ab = center + reaction * dt;
+}
+
+@compute @workgroup_size(16, 16, 1)
+void compute_shader_main(@builtin(global_invocation_id) uvec3 id) {
+    ivec2 uv = ivec2(id.xy);
+    if (uv.x >= int(tex_size.x) || uv.y >= int(tex_size.y)) return;
+
+    vec2 ab;
+    compute_laplacian(ab, uv);
+    ab = clamp(ab, 0.0, 1.0);
+
+    imageStore(output_texture, uv, vec4(ab, 0.0, 1.0));
+}
