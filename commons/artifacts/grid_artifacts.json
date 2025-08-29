@@ -1129,11 +1129,20 @@
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],
 		},
-		"standalonevrterrain": {
-			"name": "standalonevrterrain",
-			"lookup_name": "standalonevrterrain",
-			"description": "standalonevrterrain",
-			"scene": "res://algorithms/proceduralgeneration/standalonevrterrain/standalonevrterrain.tscn",
+		"marchingcave": {
+			"name": "marchingcave",
+			"lookup_name": "marchingcave",
+			"description": "smarchingcave",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn",
+			"position": [1.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		"booleans": {
+			"name": "booleans",
+			"lookup_name": "booleans",
+			"description": "booleans",
+			"scene": "res://algorithms/primitives/booleans/booleans.tscn",
 			"position": [1.0, 1.0, 12.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],
@@ -1162,6 +1171,18 @@
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
 		},
+		"modernistchairgallery": {
+			"name": "modernistchairgallery",
+			"lookup_name": "modernistchairgallery",
+			"description": "Physics constraint systems for maintaining object relationships",
+			"scene": "res://algorithms/proceduralgeneration/modernistchairs/ModernistChairGallery.tscn",
+			"position": [3.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration"
+		},	
+		
 		"fem_simulation": {
 			"name": "Finite Element Method",
 			"lookup_name": "fem_simulation",

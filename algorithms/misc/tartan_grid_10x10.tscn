@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cywj4vlx4k08s"]
+[gd_scene load_steps=3 format=3 uid="uid://cywj4vlx4k08s"]
 
 [ext_resource type="Script" path="res://algorithms/misc/tartan_grid_10x10.gd" id="1_script"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 16
+font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="TartanGrid10x10" type="Control"]
 layout_mode = 3
@@ -40,10 +44,6 @@ offset_right = 300.0
 offset_bottom = 12.0
 text = "10x10 Tartan Grid Gallery"
 label_settings = SubResource("LabelSettings_1")
-
-[sub_resource type="LabelSettings" id="LabelSettings_1"]
-font_size = 16
-font_color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="Instructions" type="Label" parent="Header"]
 layout_mode = 1

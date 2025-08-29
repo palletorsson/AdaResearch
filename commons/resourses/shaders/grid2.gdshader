@@ -29,7 +29,7 @@ void fragment() {
 	vec3 dBaryCoordX = dFdx(baryCoord);
 	vec3 dBaryCoordY = dFdy(baryCoord);
 	vec3 dBaryCoord = sqrt(dBaryCoordX * dBaryCoordX + dBaryCoordY * dBaryCoordY);
-	
+
 	// Smoothstep with blur control
 	vec3 edge_distance = baryCoord / (dBaryCoord * width);
 	vec3 remap = smoothstep(
@@ -37,14 +37,14 @@ void fragment() {
 		blur,
 		edge_distance
 	);
-	
+
 	// Find the closest edge
 	float closestEdge = min(min(remap.x, remap.y), remap.z);
-	
+
 	// Mix colors - NO ALPHA BLENDING, always opaque
 	ALBEDO = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
 	ALPHA = 1.0;  // Force complete opacity for VR
-	
+
 	// Add emission to the wireframe edges
 	EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;
 }

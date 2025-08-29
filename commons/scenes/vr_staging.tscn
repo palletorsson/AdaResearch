@@ -15,6 +15,7 @@ start_with_grid_system = true
 main_lab_scene = "res://commons/scenes/lab.tscn"
 preferred_grid_map = "Lab"
 main_scene = "uid://cgrljkfrmkgda"
+prompt_for_continue = false
 
 [node name="LoadingScreen" parent="." index="2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)

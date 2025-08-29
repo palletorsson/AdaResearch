@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcr7ldwvca3vl"]
+[gd_scene load_steps=5 format=3 uid="uid://bcr7ldwvca3vl"]
 
-[ext_resource type="Material" uid="uid://c16m6psb2fle8" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_um64b"]
-[ext_resource type="Script" uid="uid://c2aji3u2bgmv8" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd" id="2_qk53n"]
+[ext_resource type="Material" uid="uid://c16m6psb2fle8" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
+[ext_resource type="Script" uid="uid://c2aji3u2bgmv8" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd" id="2_kc6u2"]
 
 [sub_resource type="Environment" id="Environment_q07dc"]
 background_mode = 1
@@ -34,13 +34,16 @@ adjustment_enabled = true
 adjustment_contrast = 1.05
 adjustment_saturation = 1.25
 
+[sub_resource type="BoxMesh" id="BoxMesh_gptaj"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Terrain" type="MeshInstance3D" parent="."]
-material_override = ExtResource("1_um64b")
-script = ExtResource("2_qk53n")
+material_override = ExtResource("1_gptaj")
+script = ExtResource("2_kc6u2")
 noise_offset = Vector3(152.543, -150, 100)
 iso_level = 1.11
+use_fallback_cave = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.99624, 0.0489368, -0.0714891, -4.23437e-09, 0.825182, 0.564866, 0.0866343, -0.562742, 0.82208, 0, 3.75176, 6.83158)
@@ -76,4 +79,9 @@ sky_mode = 1
 environment = SubResource("Environment_q07dc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.30715)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 40, 60)
+fov = 60.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
+mesh = SubResource("BoxMesh_gptaj")

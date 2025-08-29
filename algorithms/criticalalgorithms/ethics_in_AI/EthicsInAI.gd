@@ -1,5 +1,5 @@
 extends Node3D
-class_name EthicsInAI
+class_name EthicsInAISystem
 
 var time: float = 0.0
 var trust_score: float = 1.0

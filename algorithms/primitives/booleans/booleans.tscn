@@ -1,203 +1,96 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqwjku6ms35yc"]
-
-[sub_resource type="Environment" id="Environment_1"]
-background_mode = 1
-background_color = Color(0.15, 0.15, 0.2, 1)
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.3
+[gd_scene load_steps=6 format=3 uid="uid://dqwjku6ms35yc"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
-albedo_color = Color(0.2, 0.6, 0.9, 1)
-metallic = 0.1
-roughness = 0.3
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(5, 0.1, 5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_floor"]
-size = Vector3(30, 0.2, 30)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_color = Color(0.4, 0.4, 0.4, 1)
-roughness = 0.8
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.7, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hybrid"]
-albedo_color = Color(0.8, 0.6, 0.3, 1)
-metallic = 0.3
-roughness = 0.2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(1, 0.4, 0.1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_organic"]
-albedo_color = Color(0.3, 0.8, 0.4, 1)
-roughness = 0.6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flow"]
-albedo_color = Color(0.7, 0.2, 0.8, 1)
-metallic = 0.6
-roughness = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_complex"]
-albedo_color = Color(0.9, 0.7, 0.1, 1)
-metallic = 0.2
-roughness = 0.5
-
-[sub_resource type="LabelSettings" id="LabelSettings_1"]
-font_size = 24
-
-[sub_resource type="LabelSettings" id="LabelSettings_desc"]
-font_size = 14
-font_color = Color(0.8, 0.8, 0.8, 1)
-
-[node name="ExpressiveCSGForms" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1")
+[node name="CSGOperations" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 10)
-light_energy = 1.2
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 0, 8.27181, 12.3392)
+light_energy = 1.5
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.866, -0.35, 0.35, 0, 0.707, 0.707, -0.5, -0.612, 0.612, -8, 8, 12)
+transform = Transform3D(0.965926, -0.169829, 0.198308, 0, 0.828695, 0.559817, -0.258819, -0.536761, 0.799757, -1.94276, 3.42571, 7.74796)
 attributes = SubResource("CameraAttributesPractical_1")
-fov = 60.0
+fov = 50.0
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-material_override = SubResource("StandardMaterial3D_base")
-mesh = SubResource("BoxMesh_floor")
-surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_3")
 
-[node name="PittedSphere#Pit1" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.8, 0.5)
-operation = 2
-radius = 0.6
-radial_segments = 16
-rings = 8
+[node name="OperationsContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="PittedSphere#Pit2" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 1.1, -0.7)
-operation = 2
-radius = 0.8
-radial_segments = 16
-rings = 8
-
-[node name="PittedSphere#Pit3" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -1.4, 0.9)
-operation = 2
-radius = 0.7
-radial_segments = 16
-rings = 8
-
-[node name="PittedSphere#Pit4" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, -0.6, 1.2)
-material_override = SubResource("StandardMaterial3D_hybrid")
-operation = 2
+[node name="Union" type="CSGCombiner3D" parent="OperationsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 use_collision = true
-radius = 2.0
+
+[node name="TorusBase" type="CSGTorus3D" parent="OperationsContainer/Union"]
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="SphereUnion" type="CSGSphere3D" parent="OperationsContainer/Union"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_2")
+radius = 1.0
 radial_segments = 32
 rings = 16
 
-[node name="HybridCore#IntersectBox" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.73976)
-material_override = SubResource("StandardMaterial3D_organic")
+[node name="Intersection" type="CSGCombiner3D" parent="OperationsContainer"]
+use_collision = true
+
+[node name="SphereBase" type="CSGSphere3D" parent="OperationsContainer/Intersection"]
+material_override = SubResource("StandardMaterial3D_1")
+radius = 1.0
+radial_segments = 32
+rings = 16
+
+[node name="TorusIntersect" type="CSGTorus3D" parent="OperationsContainer/Intersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_2")
 operation = 1
+
+[node name="Subtraction" type="CSGCombiner3D" parent="OperationsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 use_collision = true
-size = Vector3(3, 3, 3)
 
-[node name="BiomorphicAmalgam#Growth1" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.8, 0.2, 0.1, -0.1, 0.9, 0.3, -0.2, -0.1, 0.95, 1.8, 0.5, 0.3)
-radius = 0.9
-radial_segments = 16
-rings = 8
+[node name="SphereBase" type="CSGSphere3D" parent="OperationsContainer/Subtraction"]
+material_override = SubResource("StandardMaterial3D_1")
+radius = 1.0
+radial_segments = 32
+rings = 16
 
-[node name="BiomorphicAmalgam#Growth2" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.9, -0.3, 0.2, 0.3, 0.8, 0.4, -0.1, -0.4, 0.9, -1.2, 1.1, -0.6)
-radius = 0.7
-radial_segments = 16
-rings = 8
-
-[node name="BiomorphicAmalgam#Growth3" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.7, 0.4, -0.2, -0.3, 0.9, 0.2, 0.3, -0.1, 0.8, 0.2, -1.6, 0.8)
-radius = 0.8
-radial_segments = 16
-rings = 8
-
-[node name="BiomorphicAmalgam#Growth4" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.6, 0.1, 0.5, -0.2, 0.95, 0.1, -0.4, -0.2, 0.8, -0.5, 0.3, 1.7)
-material_override = SubResource("StandardMaterial3D_flow")
-use_collision = true
-radius = 0.6
-radial_segments = 16
-rings = 8
-
-[node name="FlowingVine#Joint1" type="CSGSphere3D" parent="."]
-transform = Transform3D(1.154, 0, 0, 0, 1, -0.577, 0, 1, 1.155, 0, 0.8, 0.5)
-radius = 0.4
-radial_segments = 16
-rings = 8
-
-[node name="FlowingVine#Segment2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(0.816, 0.408, 0.408, -0.408, 1, -0.289, -0.408, -0.289, 1, 0.5, 1.5, 1.2)
-height = 2.2
-sides = 16
-
-[node name="FlowingVine#Joint2" type="CSGSphere3D" parent="."]
-transform = Transform3D(1.154, 0, 0, 0, 1, -0.577, 0, 1, 1.155, 1.2, 2.3, 1.8)
-radius = 0.35
-radial_segments = 16
-rings = 8
-
-[node name="FlowingVine#Segment3" type="CSGCylinder3D" parent="."]
-transform = Transform3D(0.577, 1, 0, -0.866, 0.5, 0.577, 0.5, -0.289, 1, 1.8, 2.8, 2.5)
-material_override = SubResource("StandardMaterial3D_complex")
-use_collision = true
-height = 1.8
-sides = 16
-
-[node name="HollowedTorus#HollowTorus" type="CSGTorus3D" parent="."]
-transform = Transform3D(0.707, 0.707, 0, -0.707, 0.707, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_base")
+[node name="TorusSubtract" type="CSGTorus3D" parent="OperationsContainer/Subtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_2")
 operation = 2
-use_collision = true
-inner_radius = 0.3
-outer_radius = 1.2
 
-[node name="CrescentOrb#CutSphere" type="CSGSphere3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0)
-operation = 2
-radius = 1.8
-radial_segments = 24
-rings = 12
+[node name="UnionLabel" type="Label3D" parent="OperationsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 0)
+billboard = 1
+text = "Union"
+font_size = 100
 
-[node name="UI#Title" type="Label" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -140.0
-offset_right = 400.0
-offset_bottom = -110.0
-grow_vertical = 0
-text = "Expressive CSG Operations"
-label_settings = SubResource("LabelSettings_1")
+[node name="IntersectionLabel" type="Label3D" parent="OperationsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "Intersection"
+font_size = 100
 
-[node name="UI#Instructions" type="Label" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -110.0
-offset_right = 600.0
-offset_bottom = -20.0
-grow_vertical = 0
-text = "Examples (back row left to right):
-1. Pitted Sphere - Subtractive erosion
-2. Hybrid Core - Sphere/Box intersection
-3. Biomorphic Amalgam - Organic growth
-
-Examples (front row left to right):
-4. Flowing Vine - Connected segments
-5. Hollowed Torus - Complex void carving  
-6. Crescent Orb - Smooth subtraction"
-label_settings = SubResource("LabelSettings_desc")
+[node name="SubtractionLabel" type="Label3D" parent="OperationsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+billboard = 1
+text = "Subtraction"
+font_size = 100
