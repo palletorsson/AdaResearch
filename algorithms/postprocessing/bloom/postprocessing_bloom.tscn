@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi1gkge11u8v2"]
+
+[ext_resource type="Script" uid="uid://chi12j2ib1x7u" path="res://algorithms/postprocessing/bloom/postprocessing_bloom.gd" id="1_7wnes"]
+
+[node name="postprocessing_bloom" type="Node3D"]
+script = ExtResource("1_7wnes")
+
+[node name="Camera3D" type="Camera3D" parent="."]

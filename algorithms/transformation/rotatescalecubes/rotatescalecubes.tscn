@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4def5ghi6jkl"]
+
+[ext_resource type="Script" uid="uid://cyt83v18h4dg0" path="res://algorithms/transformation/rotatescalecubes/rotatescalecubes.gd" id="1_cubesvr"]
+
+[node name="VRCubes" type="Node3D"]
+script = ExtResource("1_cubesvr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.62262, 11.5068)

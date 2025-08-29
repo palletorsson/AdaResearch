@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wmevvafj7yun"]
+
+[ext_resource type="Script" uid="uid://cjrunqunqa8v3" path="res://algorithms/shaders/materialtransmission/materialstransmission.gd" id="1_n9k8j"]
+
+[node name="materials_transmission" type="Node3D"]
+script = ExtResource("1_n9k8j")

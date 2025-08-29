@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7w62oabiaa0b"]
+
+[ext_resource type="Script" uid="uid://fip5bj7pp4mj" path="res://algorithms/physicssimulation/water_one/waterone.gd" id="1_nlkw5"]
+
+[node name="waterone" type="Node3D"]
+script = ExtResource("1_nlkw5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.922948, 0.384924, 0, -0.384924, 0.922948, 0, 5.54239, 8.559)

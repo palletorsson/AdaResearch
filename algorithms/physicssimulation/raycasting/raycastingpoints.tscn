@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv0t2xhxv5ccw"]
+
+[ext_resource type="Script" uid="uid://o64mkqxxmohk" path="res://algorithms/physicssimulation/raycasting/raycastingpoints.gd" id="1_z7k9n"]
+
+[node name="RaycastingPointsVR" type="Node3D"]
+script = ExtResource("1_z7k9n")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.973042, 0.230627, 0, -0.230627, 0.973042, 0, 0.478111, 1.63854)

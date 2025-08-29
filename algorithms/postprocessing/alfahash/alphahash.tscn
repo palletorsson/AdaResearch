@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnxasqsnra4ri"]
+
+[ext_resource type="Script" uid="uid://cuk3c6pkqaktb" path="res://algorithms/postprocessing/alfahash/alphahash.gd" id="1_c8n7m"]
+
+[node name="AlphaHashVR" type="Node3D"]
+script = ExtResource("1_c8n7m")
+
+[node name="Camera3D" type="Camera3D" parent="."]

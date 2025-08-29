@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwy8w014b5aij"]
+
+[ext_resource type="Script" uid="uid://ceygok8tdwc3v" path="res://algorithms/randomness/noise/scatter/instancingscatter.gd" id="1_y9k8m"]
+
+[node name="InstancingScatterVR" type="Node3D"]
+script = ExtResource("1_y9k8m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.974952, 0.222416, 0, -0.222416, 0.974952, 0, 0.604072, 1.81469)
