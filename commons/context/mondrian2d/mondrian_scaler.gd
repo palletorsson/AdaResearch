@@ -8,7 +8,7 @@ func _ready():
 	#viewport.size = Vector2i(viewport_size_x, viewport_size_y)  # Set viewport size
 	
 	# Set the Y position of the Sprite3D
-	var sprite3d = $Sprite3D
+	var sprite3d = $StaticBody3D/CollisionShape3D/Sprite3D
 	if sprite3d:
 		var current_position = sprite3d.transform.origin
 		sprite3d.transform.origin = Vector3(current_position.x, sprite3d_y_position, current_position.z)

@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjbdcxe2hscmc"]
+
+[ext_resource type="Script" uid="uid://dlcp3dv6kjmip" path="res://algorithms/patterngeneration/reactiondiffusion/reaction_diffusion.gd" id="1_rflbg"]
+
+[node name="ReactionDiffusion" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rflbg")
+
+[node name="Display" type="TextureRect" parent="Control"]
+layout_mode = 1
+
+[node name="BufferA_Container" type="Node2D" parent="Control"]
+
+[node name="BufferA" type="SubViewport" parent="Control/BufferA_Container"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/BufferA_Container/BufferA"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BufferB_Container" type="Node2D" parent="Control"]
+
+[node name="BufferB" type="SubViewport" parent="Control/BufferB_Container"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/BufferB_Container/BufferB"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0

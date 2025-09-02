@@ -1505,6 +1505,17 @@
 			"artifact_type": "artistic_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+		"colortrails": {
+			"name": "colortrails",
+			"lookup_name": "colortrails",
+			"description": "colortrails",
+			"scene": "res://algorithms/color/colortrails/colortrails.tscn",
+			"position": [0.0, 1.5, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		
+		
 		"mondrian_3d_display": {
 			"name": "Mondrian 3D Display",
 			"lookup_name": "mondrian_3d_display",

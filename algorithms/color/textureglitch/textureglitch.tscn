@@ -1,0 +1,1088 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmqp53spuyhif"]
+
+[sub_resource type="GDScript" id="GDScript_osoai"]
+script/source = "extends Node3D
+
+# Layered Animated Texture System
+# Separates textures into multiple animated layers driven by glitch algorithms
+
+# ===================
+# CONFIGURATION
+# ===================
+
+@export_group(\"Texture Layers\")
+@export var num_texture_layers: int = 4
+@export var layer_resolution: int = 128
+@export var layer_blend_modes: Array[String] = [\"multiply\", \"add\", \"overlay\", \"screen\"]
+@export var enable_layer_separation: bool = true
+
+@export_group(\"Animation Settings\")
+@export var animation_speed: float = 1.0
+@export var layer_offset_strength: float = 0.1
+@export var rotation_speed: float = 0.5
+@export var scale_animation: bool = true
+
+@export_group(\"Glitch Parameters\")
+@export var glitch_frequency: float = 2.0
+@export var separation_distance: float = 0.05
+@export var chromatic_shift: float = 0.02
+@export var digital_noise_amount: float = 0.3
+
+# ===================
+# CORE VARIABLES
+# ===================
+
+var time := 0.0
+var demo_objects := []
+
+# Layer management
+var texture_layers := {}  # object -> layers array
+var layer_materials := {}  # object -> materials array  
+var layer_animations := {}  # object -> animation data
+var glitch_controllers := {}  # object -> glitch control data
+
+# Animation patterns
+var wave_patterns := []
+var noise_seeds := []
+var corruption_timers := {}
+
+func _ready():
+	initialize_layer_system()
+	create_demo_objects()
+	setup_glitch_controllers()
+
+# ===================
+# SYSTEM INITIALIZATION
+# ===================
+
+func initialize_layer_system():
+	print(\"🎬 Initializing Layered Animated Texture System...\")
+	
+	# Generate wave patterns for smooth animations
+	generate_wave_patterns()
+	
+	# Initialize noise seeds for random effects
+	initialize_noise_system()
+	
+	# Setup scene
+	setup_scene_environment()
+
+func generate_wave_patterns():
+	wave_patterns = [
+		{\"frequency\": 1.0, \"amplitude\": 1.0, \"phase\": 0.0},
+		{\"frequency\": 1.5, \"amplitude\": 0.8, \"phase\": PI * 0.5},
+		{\"frequency\": 2.0, \"amplitude\": 0.6, \"phase\": PI},
+		{\"frequency\": 0.5, \"amplitude\": 1.2, \"phase\": PI * 1.5}
+	]
+
+func initialize_noise_system():
+	noise_seeds.clear()
+	for i in range(16):
+		noise_seeds.append(randi() % 10000)
+
+func setup_scene_environment():
+	# Camera with smooth movement
+	var camera = Camera3D.new()
+	camera.position = Vector3(0, 3, 12)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
+	add_child(camera)
+	
+	# Animate camera
+	var camera_tween = create_tween()
+	camera_tween.set_loops()
+	camera_tween.tween_method(
+		func(pos): camera.position = pos,
+		Vector3(8, 3, 8),
+		Vector3(-8, 3, 8),
+		10.0
+	)
+	camera_tween.tween_method(
+		func(pos): camera.look_at(Vector3.ZERO, Vector3.UP); camera.position = pos,
+		Vector3(-8, 3, 8),
+		Vector3(8, 3, 8), 
+		10.0
+	)
+	
+	# Dynamic lighting
+	setup_dynamic_lighting()
+
+func setup_dynamic_lighting():
+	# Main key light
+	var key_light = DirectionalLight3D.new()
+	key_light.light_energy = 1.2
+	key_light.rotation_degrees = Vector3(-45, 30, 0)
+	add_child(key_light)
+	
+	# Animated colored lights
+	for i in range(3):
+		var color_light = SpotLight3D.new()
+		var colors = [Color.CYAN, Color.MAGENTA, Color.YELLOW]
+		color_light.light_color = colors[i]
+		color_light.light_energy = 2.0
+		color_light.spot_range = 20.0
+		color_light.spot_angle = 60.0
+		
+		var angle = i * PI * 2.0 / 3.0
+		color_light.position = Vector3(cos(angle) * 8, 5, sin(angle) * 8)
+		color_light.look_at(Vector3.ZERO, Vector3.UP)
+		add_child(color_light)
+		
+		# Animate light position
+		animate_light(color_light, i)
+
+func animate_light(light: SpotLight3D, index: int):
+	if not light:
+		return
+		
+	var light_tween = create_tween()
+	light_tween.set_loops()
+	
+	var base_angle = index * PI * 2.0 / 3.0
+	light_tween.tween_method(
+		func(angle): 
+			if light and is_instance_valid(light):
+				light.position = Vector3(cos(base_angle + angle) * 8, 5 + sin(angle * 2) * 2, sin(base_angle + angle) * 8);
+				light.look_at(Vector3.ZERO, Vector3.UP),
+		0.0, PI * 2.0, 8.0 + index * 2.0
+	)
+
+# ===================
+# DEMO OBJECTS CREATION
+# ===================
+
+func create_demo_objects():
+	var object_configs = [
+		{\"name\": \"Datamosh Layers\", \"pos\": Vector3(-6, 2, 0), \"type\": \"datamosh\"},
+		{\"name\": \"Chromatic Split\", \"pos\": Vector3(-2, 2, 0), \"type\": \"chromatic\"},
+		{\"name\": \"Digital Decay\", \"pos\": Vector3(2, 2, 0), \"type\": \"decay\"},
+		{\"name\": \"Buffer Cascade\", \"pos\": Vector3(6, 2, 0), \"type\": \"cascade\"},
+		{\"name\": \"Pixel Sort\", \"pos\": Vector3(-6, -2, 0), \"type\": \"pixel_sort\"},
+		{\"name\": \"Bit Crush\", \"pos\": Vector3(-2, -2, 0), \"type\": \"bit_crush\"},
+		{\"name\": \"Memory Leak\", \"pos\": Vector3(2, -2, 0), \"type\": \"memory_leak\"},
+		{\"name\": \"Quantum Glitch\", \"pos\": Vector3(6, -2, 0), \"type\": \"quantum\"}
+	]
+	
+	for config in object_configs:
+		create_layered_object(config.name, config.pos, config.type)
+
+func create_layered_object(name: String, pos: Vector3, glitch_type: String):
+	# Create base container
+	var container = Node3D.new()
+	container.name = name
+	container.position = pos
+	add_child(container)
+	
+	# Create multiple layer objects
+	var layers = []
+	var materials = []
+	
+	for layer_index in range(num_texture_layers):
+		var layer_obj = create_layer_object(layer_index, glitch_type)
+		container.add_child(layer_obj)
+		layers.append(layer_obj)
+		materials.append(layer_obj.material_override)
+	
+	# Store references
+	demo_objects.append(container)
+	texture_layers[container] = layers
+	layer_materials[container] = materials
+	
+	# Initialize layer data
+	initialize_layer_animations(container, glitch_type)
+	
+	# Add label
+	# add_object_label(container, name)
+
+func create_layer_object(layer_index: int, glitch_type: String) -> CSGBox3D:
+	var layer = CSGBox3D.new()
+	layer.size = Vector3(3.0, 3.0, 0.05 + layer_index * 0.02)  # Slightly different depths
+	layer.name = \"Layer_\" + str(layer_index)
+	
+	# Create material for this layer
+	var material = create_layer_material(layer_index, glitch_type)
+	layer.material_override = material
+	
+	return layer
+
+func create_layer_material(layer_index: int, glitch_type: String) -> StandardMaterial3D:
+	var material = StandardMaterial3D.new()
+	
+	# Layer-specific settings
+	material.flags_transparent = true
+	material.flags_unshaded = true
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	
+	# Different blend modes for each layer
+	match layer_index:
+		0:
+			material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+			material.albedo_color = Color(1.0, 0.3, 0.3, 0.8)  # Red base
+		1:
+			material.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+			material.albedo_color = Color(0.3, 1.0, 0.3, 0.6)  # Green additive
+		2:
+			material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+			material.albedo_color = Color(0.3, 0.3, 1.0, 0.7)  # Blue overlay
+		3:
+			material.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+			material.albedo_color = Color(1.0, 1.0, 0.3, 0.5)  # Yellow screen
+	
+	# Enable emission for glowing effect
+	material.emission_enabled = true
+	material.emission = material.albedo_color * 0.3
+	
+	# Generate initial texture
+	create_animated_texture(material, layer_index, glitch_type)
+	
+	return material
+
+# ===================
+# TEXTURE GENERATION
+# ===================
+
+func create_animated_texture(material: StandardMaterial3D, layer_index: int, glitch_type: String):
+	var texture_size = layer_resolution
+	var buffer = PackedByteArray()
+	buffer.resize(texture_size * texture_size * 4)  # RGBA
+	
+	# Generate initial pattern based on layer and type
+	generate_layer_pattern(buffer, texture_size, layer_index, glitch_type, 0.0)
+	
+	# Create texture
+	var image = Image.create_from_data(texture_size, texture_size, false, Image.FORMAT_RGBA8, buffer)
+	var texture = ImageTexture.new()
+	texture.set_image(image)
+	
+	material.albedo_texture = texture
+	material.emission_texture = texture
+
+func generate_layer_pattern(buffer: PackedByteArray, size: int, layer_index: int, glitch_type: String, time_val: float):
+	for y in range(size):
+		for x in range(size):
+			var pixel_index = (y * size + x) * 4
+			var uv = Vector2(float(x) / size, float(y) / size)
+			
+			# Generate pattern based on glitch type and layer
+			var color = get_layer_pattern_color(uv, layer_index, glitch_type, time_val)
+			
+			buffer[pixel_index] = int(color.r * 255)
+			buffer[pixel_index + 1] = int(color.g * 255)
+			buffer[pixel_index + 2] = int(color.b * 255)
+			buffer[pixel_index + 3] = int(color.a * 255)
+
+func get_layer_pattern_color(uv: Vector2, layer_index: int, glitch_type: String, t: float) -> Color:
+	var base_color = Color.WHITE
+	
+	match glitch_type:
+		\"datamosh\":
+			base_color = get_datamosh_pattern(uv, layer_index, t)
+		\"chromatic\":
+			base_color = get_chromatic_pattern(uv, layer_index, t)
+		\"decay\":
+			base_color = get_decay_pattern(uv, layer_index, t)
+		\"cascade\":
+			base_color = get_cascade_pattern(uv, layer_index, t)
+		\"pixel_sort\":
+			base_color = get_pixel_sort_pattern(uv, layer_index, t)
+		\"bit_crush\":
+			base_color = get_bit_crush_pattern(uv, layer_index, t)
+		\"memory_leak\":
+			base_color = get_memory_leak_pattern(uv, layer_index, t)
+		\"quantum\":
+			base_color = get_quantum_pattern(uv, layer_index, t)
+	
+	return base_color
+
+# ===================
+# GLITCH PATTERN GENERATORS
+# ===================
+
+func get_datamosh_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Datamoshing - motion vector corruption
+	var motion_offset = Vector2(
+		sin(t * 3.0 + uv.x * 10.0) * 0.1,
+		cos(t * 2.0 + uv.y * 8.0) * 0.1
+	)
+	
+	var shifted_uv = uv + motion_offset * (layer + 1) * 0.25
+	var pattern = sin(shifted_uv.x * PI * 8) * cos(shifted_uv.y * PI * 6)
+	
+	# Different motion for each layer
+	match layer:
+		0: return Color(pattern * 0.5 + 0.5, 0.2, 0.2, 0.8)
+		1: return Color(0.2, pattern * 0.5 + 0.5, 0.2, 0.6)
+		2: return Color(0.2, 0.2, pattern * 0.5 + 0.5, 0.7)
+		_: return Color(pattern * 0.3 + 0.3, pattern * 0.3 + 0.3, 0.2, 0.5)
+
+func get_chromatic_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Chromatic aberration separation
+	var shift_amount = chromatic_shift * (layer - 1.5)
+	var shifted_uv = uv + Vector2(shift_amount, 0)
+	
+	# Create RGB separation
+	var r_pattern = sin(shifted_uv.x * PI * 12 + t * 2)
+	var g_pattern = sin(uv.x * PI * 12 + t * 2)
+	var b_pattern = sin((uv.x - shift_amount) * PI * 12 + t * 2)
+	
+	match layer:
+		0: return Color(r_pattern * 0.5 + 0.5, 0.0, 0.0, 0.8)
+		1: return Color(0.0, g_pattern * 0.5 + 0.5, 0.0, 0.8)
+		2: return Color(0.0, 0.0, b_pattern * 0.5 + 0.5, 0.8)
+		_: return Color(0.3, 0.3, 0.3, 0.4)
+
+func get_decay_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Digital decay accumulation
+	var decay_seed = int(uv.x * 100 + uv.y * 100 + t * 10) % 256
+	var decay_noise = float(decay_seed) / 255.0
+	
+	# Accumulate decay over time
+	var decay_amount = sin(t * 0.5) * 0.5 + 0.5
+	var pattern_intensity = decay_noise * decay_amount
+	
+	# Each layer decays at different rates
+	var layer_decay = 1.0 - fmod((t * 0.1 * (layer + 1)), 1.0)
+	
+	return Color(
+		pattern_intensity * layer_decay,
+		pattern_intensity * 0.5 * layer_decay,
+		pattern_intensity * 0.3 * layer_decay,
+		0.6 + pattern_intensity * 0.4
+	)
+
+func get_cascade_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Buffer overflow cascade
+	var cascade_wave = t * 2.0 - layer * 0.5
+	var cascade_position = fmod(cascade_wave, 1.0)
+	
+	# Create cascade effect
+	var distance_from_wave = abs(uv.y - cascade_position)
+	var cascade_intensity = exp(-distance_from_wave * 10.0)
+	
+	# Corruption intensity
+	var corruption = cascade_intensity * sin(uv.x * PI * 16 + t * 4)
+	
+	return Color(
+		1.0 * cascade_intensity,
+		0.2 + corruption * 0.4,
+		0.2 + corruption * 0.4,
+		cascade_intensity * 0.8
+	)
+
+func get_pixel_sort_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Pixel sorting simulation
+	var sort_column = int(uv.x * 16) % 16
+	var sort_trigger = sin(t * 3.0 + sort_column) > 0.5
+	
+	var brightness = uv.y
+	if sort_trigger:
+		# Simulate sorted pixels
+		brightness = smoothstep(0.0, 1.0, uv.y)
+	
+	# Each layer sorts differently
+	var layer_offset = float(layer) * 0.25
+	brightness = fmod(brightness + layer_offset, 1.0)
+	
+	return Color(brightness, brightness * 0.7, brightness * 0.4, 0.7)
+
+func get_bit_crush_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Bit crushing quantization
+	var bit_depth = 4 - layer  # Different bit depths per layer
+	var levels = pow(2, bit_depth)
+	
+	var pattern = sin(uv.x * PI * 8) * cos(uv.y * PI * 6) + sin(t * 2)
+	var crushed_pattern = floor(pattern * levels) / levels
+	
+	return Color(
+		crushed_pattern * 0.5 + 0.5,
+		crushed_pattern * 0.3 + 0.3,
+		crushed_pattern * 0.7 + 0.3,
+		0.6
+	)
+
+func get_memory_leak_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Memory leak accumulation
+	var leak_positions = [
+		Vector2(0.2, 0.3),
+		Vector2(0.7, 0.2),
+		Vector2(0.4, 0.8),
+		Vector2(0.8, 0.6)
+	]
+	
+	var total_intensity = 0.0
+	for i in range(leak_positions.size()):
+		var distance = uv.distance_to(leak_positions[i])
+		var leak_size = 0.1 + sin(t * 1.5 + i) * 0.05
+		if distance < leak_size:
+			total_intensity += (leak_size - distance) / leak_size
+	
+	# Accumulate over time
+	total_intensity *= (1.0 + t * 0.1)
+	
+	return Color(
+		total_intensity * 0.8,
+		total_intensity * 0.4,
+		total_intensity * 0.2,
+		min(total_intensity, 1.0) * 0.7
+	)
+
+func get_quantum_pattern(uv: Vector2, layer: int, t: float) -> Color:
+	# Quantum uncertainty patterns
+	var quantum_noise = hash_noise(Vector2(uv.x * 64, uv.y * 64) + Vector2(t * 10, layer * 5))
+	var uncertainty = sin(quantum_noise * PI * 4) * 0.5 + 0.5
+	
+	# Quantum superposition effect
+	var state_a = sin(uv.x * PI * 20 + t * 3) * 0.5 + 0.5
+	var state_b = cos(uv.y * PI * 16 + t * 2.5) * 0.5 + 0.5
+	var superposition = (state_a + state_b) / 2.0
+	
+	# Collapse probability
+	var collapse = 1.0 if uncertainty >= 0.8 else 0.0
+
+	
+	var final_pattern = lerp(superposition, quantum_noise * 0.5 + 0.5, collapse)
+
+	return Color(
+		final_pattern,
+		final_pattern * 0.6,
+		final_pattern * 0.8,
+		0.5 + uncertainty * 0.5
+	)
+
+func hash_noise(pos: Vector2) -> float:
+	# Simple hash function for noise
+	var p = Vector2(
+		sin(pos.x * 12.9898 + pos.y * 78.233) * 43758.5453,
+		cos(pos.x * 23.1406 + pos.y * 56.789) * 12345.6789
+	)
+	return fract(p.x + p.y)
+
+func fract(value: float) -> float:
+	return value - floor(value)
+
+# ===================
+# LAYER ANIMATIONS
+# ===================
+
+func initialize_layer_animations(container: Node3D, glitch_type: String):
+	var anim_data = {
+		\"type\": glitch_type,
+		\"start_time\": time,
+		\"layer_offsets\": [],
+		\"rotation_speeds\": [],
+		\"scale_factors\": [],
+		\"corruption_timers\": []
+	}
+	
+	# Initialize per-layer animation data
+	for i in range(num_texture_layers):
+		anim_data.layer_offsets.append(Vector3(
+			randf_range(-0.1, 0.1),
+			randf_range(-0.1, 0.1),
+			i * 0.1
+		))
+		anim_data.rotation_speeds.append(randf_range(-1.0, 1.0) * rotation_speed)
+		anim_data.scale_factors.append(1.0 + randf_range(-0.2, 0.2))
+		anim_data.corruption_timers.append(randf() * 5.0)
+	
+	layer_animations[container] = anim_data
+	corruption_timers[container] = 0.0
+
+func setup_glitch_controllers():
+	print(\"⚡ Setting up Glitch Controllers...\")
+	
+	for container in demo_objects:
+		var controller = {
+			\"separation_active\": false,
+			\"animation_active\": true,
+			\"corruption_level\": 0.0,
+			\"last_update\": 0.0
+		}
+		glitch_controllers[container] = controller
+
+# ===================
+# MAIN UPDATE LOOP
+# ===================
+
+func _process(delta):
+	time += delta * animation_speed
+	
+	# Update all layered objects
+	for container in demo_objects:
+		update_layered_object(container, delta)
+
+func update_layered_object(container: Node3D, delta: float):
+	if not texture_layers.has(container):
+		return
+	
+	var layers = texture_layers[container]
+	var materials = layer_materials[container]
+	var anim_data = layer_animations[container]
+	var controller = glitch_controllers[container]
+	
+	# Update layer positions and rotations
+	if enable_layer_separation and controller.animation_active:
+		update_layer_transforms(layers, anim_data)
+	
+	# Update textures
+	update_layer_textures(materials, anim_data)
+	
+	# Update corruption timer
+	corruption_timers[container] += delta
+
+func update_layer_transforms(layers: Array, anim_data: Dictionary):
+	for i in range(layers.size()):
+		var layer = layers[i]
+		var base_offset = anim_data.layer_offsets[i]
+		var rotation_speed = anim_data.rotation_speeds[i]
+		var scale_factor = anim_data.scale_factors[i]
+		
+		# Animated separation
+		var separation = Vector3(
+			sin(time * 2.0 + i) * separation_distance,
+			cos(time * 1.5 + i) * separation_distance,
+			base_offset.z
+		)
+		
+		# Apply glitch-specific movement
+		match anim_data.type:
+			\"datamosh\":
+				separation += Vector3(
+					sin(time * 5.0 + i) * 0.02,
+					cos(time * 7.0 + i) * 0.02,
+					0
+				)
+			\"chromatic\":
+				separation.x += (i - 1.5) * chromatic_shift * 2.0
+			\"cascade\":
+				separation.y += sin(time * 3.0 - i * 0.5) * 0.05
+		
+		layer.position = base_offset + separation
+		
+		# Rotation animation
+		if scale_animation:
+			layer.rotation.z = time * rotation_speed
+			layer.scale = Vector3.ONE * (scale_factor + sin(time * 3.0 + i) * 0.1)
+
+func update_layer_textures(materials: Array, anim_data: Dictionary):
+	var glitch_type = anim_data.type
+	
+	for i in range(materials.size()):
+		var material = materials[i]
+		
+		# Generate new texture frame
+		update_material_texture(material, i, glitch_type, time)
+		
+		# Update material properties
+		animate_material_properties(material, i, time)
+
+func update_material_texture(material: StandardMaterial3D, layer_index: int, glitch_type: String, t: float):
+	# Only update at specific intervals for performance
+	if int(t * 30.0) % 2 != 0:  # Update 15 FPS
+		return
+	
+	var texture = material.albedo_texture as ImageTexture
+	if not texture:
+		return
+	
+	var size = layer_resolution
+	var buffer = PackedByteArray()
+	buffer.resize(size * size * 4)
+	
+	# Generate new frame
+	generate_layer_pattern(buffer, size, layer_index, glitch_type, t)
+	
+	# Update texture
+	var image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, buffer)
+	texture.set_image(image)
+
+func animate_material_properties(material: StandardMaterial3D, layer_index: int, t: float):
+	# Animate emission intensity
+	var base_emission = material.albedo_color * 0.3
+	var pulse = sin(t * 4.0 + layer_index) * 0.5 + 0.5
+	material.emission = base_emission * (0.5 + pulse * 0.5)
+	
+	# Animate transparency
+	var base_alpha = [0.8, 0.6, 0.7, 0.5][layer_index % 4]
+	var alpha_pulse = sin(t * 2.0 + layer_index * 1.5) * 0.2 + 0.8
+	
+	var current_color = material.albedo_color
+	material.albedo_color = Color(current_color.r, current_color.g, current_color.b, base_alpha * alpha_pulse)
+
+func trigger_digital_decay_wave(container: Node3D):
+	# Wave of digital decay across layers
+	if not layer_materials.has(container):
+		return
+	
+	var materials = layer_materials[container]
+	print(\"🌊 Digital decay wave triggered for: \", container.name)
+	
+	for i in range(materials.size()):
+		var material = materials[i]
+		var decay_delay = i * 0.3
+		
+		var decay_tween = create_tween()
+		decay_tween.tween_delay(decay_delay)
+		
+		# Fade to corruption
+		decay_tween.tween_method(
+			func(alpha): material.albedo_color.a = alpha,
+			material.albedo_color.a, 0.1, 0.5
+		)
+		
+		# Flash corruption color
+		decay_tween.tween_method(
+			func(color): material.albedo_color = Color(color, 0.0, 0.0, 0.8),
+			0.0, 1.0, 0.3
+		)
+		
+		# Return to normal
+		decay_tween.tween_delay(1.0)
+		decay_tween.tween_method(
+			func(alpha): material.albedo_color.a = alpha,
+			0.1, 0.8, 1.0
+		)
+
+func trigger_layer_scramble(container: Node3D):
+	# Scramble layer order and positions
+	if not texture_layers.has(container):
+		return
+	
+	var layers = texture_layers[container]
+	print(\"🔀 Layer scramble triggered for: \", container.name)
+	
+	# Store original positions
+	var original_positions = []
+	for layer in layers:
+		original_positions.append(layer.position)
+	
+	# Shuffle positions
+	var shuffled_positions = original_positions.duplicate()
+	shuffled_positions.shuffle()
+	
+	# Animate to scrambled positions
+	for i in range(layers.size()):
+		var layer = layers[i]
+		var scramble_tween = create_tween()
+		
+		scramble_tween.tween_property(layer, \"position\", shuffled_positions[i], 1.0)
+		scramble_tween.tween_delay(3.0)
+		scramble_tween.tween_property(layer, \"position\", original_positions[i], 1.5)
+
+func trigger_layer_orbit(container: Node3D):
+	# Make layers orbit around center
+	if not texture_layers.has(container):
+		return
+	
+	var layers = texture_layers[container]
+	print(\"🌌 Layer orbit triggered for: \", container.name)
+	
+	for i in range(layers.size()):
+		var layer = layers[i]
+		var radius = (i + 1) * 0.5
+		var orbit_speed = 2.0 + i * 0.5
+		
+		var orbit_tween = create_tween()
+		orbit_tween.set_loops()
+		
+		# Create circular motion
+		orbit_tween.tween_method(
+			func(angle): 
+				layer.position = Vector3(
+					cos(angle) * radius,
+					sin(angle) * radius * 0.5,
+					i * 0.05
+				),
+			0.0, PI * 2.0, orbit_speed
+		)
+
+func trigger_memory_cascade(container: Node3D):
+	# Memory corruption cascade effect
+	if not layer_materials.has(container):
+		return
+	
+	var materials = layer_materials[container]
+	print(\"💾 Memory cascade triggered for: \", container.name)
+	
+	for i in range(materials.size()):
+		var material = materials[i]
+		var cascade_delay = i * 0.2
+		
+		var cascade_tween = create_tween()
+		cascade_tween.tween_delay(cascade_delay)
+		
+		# Corruption flash
+		cascade_tween.tween_method(
+			func(intensity): 
+				material.emission_energy = intensity
+				material.emission = Color(1.0, 0.0, 1.0) * intensity,  # Magenta corruption
+			0.3, 3.0, 0.2
+		)
+		
+		cascade_tween.tween_method(
+			func(intensity): 
+				material.emission_energy = intensity,
+			3.0, 0.3, 0.8
+		)
+
+# ===================
+# TEXTURE MANIPULATION EFFECTS
+# ===================
+
+func apply_realtime_bit_manipulation(container: Node3D):
+	# Real-time bit manipulation on textures
+	if not layer_materials.has(container):
+		return
+	
+	var materials = layer_materials[container]
+	
+	for i in range(materials.size()):
+		var material = materials[i]
+		var texture = material.albedo_texture as ImageTexture
+		if not texture:
+			continue
+		
+		# Get image data
+		var image = texture.get_image()
+		var data = image.get_data()
+		
+		# Apply bit manipulation
+		for byte_idx in range(min(100, data.size())):  # Limit for performance
+			var random_pos = randi() % data.size()
+			var bit_pos = randi() % 8
+			var current_byte = data[random_pos]
+			var flipped_byte = current_byte ^ (1 << bit_pos)
+			data[random_pos] = flipped_byte
+		
+		# Update texture
+		image = Image.create_from_data(image.get_width(), image.get_height(), false, image.get_format(), data)
+		texture.set_image(image)
+
+func apply_pixel_sort_to_layer(container: Node3D, layer_index: int):
+	# Apply pixel sorting to specific layer
+	if not container or not is_instance_valid(container) or not layer_materials.has(container) or layer_index >= layer_materials[container].size():
+		return
+	
+	var material = layer_materials[container][layer_index]
+	var texture = material.albedo_texture as ImageTexture
+	if not texture:
+		return
+	
+	print(\"🔄 Pixel sorting layer \", layer_index, \" of \", container.name if container else \"Unknown\")
+	
+	var image = texture.get_image()
+	var width = image.get_width()
+	var height = image.get_height()
+	
+	# Sort random rows by brightness
+	for sort_attempt in range(5):  # Sort 5 random rows
+		var row = randi() % height
+		var row_pixels = []
+		
+		# Extract row pixels
+		for x in range(width):
+			var pixel = image.get_pixel(x, row)
+			var brightness = pixel.r * 0.299 + pixel.g * 0.587 + pixel.b * 0.114
+			row_pixels.append({\"pixel\": pixel, \"brightness\": brightness, \"x\": x})
+		
+		# Sort by brightness
+		row_pixels.sort_custom(func(a, b): return a.brightness < b.brightness)
+		
+		# Apply sorted pixels back
+		for i in range(row_pixels.size()):
+			image.set_pixel(i, row, row_pixels[i].pixel)
+	
+	# Update texture
+	texture.set_image(image)
+
+func create_texture_feedback_loop(container: Node3D):
+	# Create feedback loop between layers
+	if not container or not is_instance_valid(container) or not layer_materials.has(container) or layer_materials[container].size() < 2:
+		return
+	
+	print(\"🔄 Creating texture feedback loop for: \", container.name if container else \"Unknown\")
+	
+	var materials = layer_materials[container]
+	
+	# Create feedback between layer 0 and layer 2
+	var source_texture = materials[0].albedo_texture as ImageTexture
+	var target_material = materials[2]
+	
+	if source_texture:
+		# Apply source texture with modifications to target
+		target_material.albedo_texture = source_texture
+		target_material.emission_texture = source_texture
+		
+		# Modify properties for feedback effect
+		target_material.albedo_color = Color(0.5, 1.0, 0.8, 0.6)
+		target_material.emission_energy = 0.8
+
+# ===================
+# GLITCH COMBINATIONS
+# ===================
+
+func trigger_mega_glitch(container: Node3D):
+	# Combine multiple glitch effects
+	if not container or not is_instance_valid(container):
+		return
+		
+	print(\"🚀 MEGA GLITCH activated for: \", container.name if container else \"Unknown\")
+	
+	# Trigger multiple effects in sequence
+	trigger_layer_explosion(container)
+	
+	await get_tree().create_timer(1.0).timeout
+	trigger_chromatic_separation(container)
+	
+	await get_tree().create_timer(0.5).timeout  
+	trigger_memory_decay_wave(container)
+	
+	await get_tree().create_timer(2.0).timeout
+	apply_realtime_bit_manipulation(container)
+	
+	await get_tree().create_timer(1.0).timeout
+	trigger_memory_cascade(container)
+
+func create_system_wide_corruption():
+	# Corrupt all objects simultaneously
+	print(\"⚡ SYSTEM-WIDE CORRUPTION INITIATED!\")
+	
+	for i in range(demo_objects.size()):
+		var container = demo_objects[i]
+		var delay = i * 0.3
+		
+		# Stagger the corruption
+		get_tree().create_timer(delay).timeout.connect(
+			func(): trigger_mega_glitch(container)
+		)
+
+# ===================
+# ADVANCED SEPARATION EFFECTS
+# ===================
+
+func trigger_layer_explosion(container: Node3D):
+	# Dramatic layer separation effect
+	if not container or not is_instance_valid(container) or not texture_layers.has(container):
+		return
+	
+	var layers = texture_layers[container]
+	var controller = glitch_controllers[container]
+	controller.separation_active = true
+	
+	print(\"💥 Layer explosion triggered for: \", container.name if container else \"Unknown\")
+	
+	for i in range(layers.size()):
+		var layer = layers[i]
+		var explosion_tween = create_tween()
+		
+		# Random explosion direction
+		var explosion_dir = Vector3(
+			randf_range(-2.0, 2.0),
+			randf_range(-2.0, 2.0),
+			randf_range(0.5, 2.0)
+		)
+		
+		# Animate explosion
+		explosion_tween.parallel().tween_property(layer, \"position\", explosion_dir, 2.0)
+		explosion_tween.parallel().tween_property(layer, \"rotation\", Vector3(randf() * PI, randf() * PI, randf() * PI), 2.0)
+		explosion_tween.parallel().tween_property(layer, \"scale\", Vector3.ONE * (2.0 + i * 0.5), 2.0)
+		
+		# Return to normal
+		explosion_tween.tween_property(layer, \"position\", Vector3.ZERO, 1.5)
+		explosion_tween.parallel().tween_property(layer, \"rotation\", Vector3.ZERO, 1.5)
+		explosion_tween.parallel().tween_property(layer, \"scale\", Vector3.ONE, 1.5)
+		
+		# Reset controller
+		explosion_tween.tween_callback(func(): controller.separation_active = false)
+
+func trigger_chromatic_separation(container: Node3D):
+	# RGB channel separation effect
+	if not container or not is_instance_valid(container) or not texture_layers.has(container):
+		return
+	
+	var layers = texture_layers[container]
+	var separation_offsets = [
+		Vector3(-chromatic_shift * 10, 0, 0),      # Red
+		Vector3(0, 0, 0),                           # Green (center)
+		Vector3(chromatic_shift * 10, 0, 0),       # Blue
+		Vector3(0, chromatic_shift * 10, 0)        # Yellow
+	]
+	
+	print(\"🌈 Chromatic separation triggered for: \", container.name if container else \"Unknown\")
+	
+	for i in range(min(layers.size(), separation_offsets.size())):
+		var layer = layers[i]
+		var target_pos = separation_offsets[i]
+		
+		var chromatic_tween = create_tween()
+		chromatic_tween.tween_property(layer, \"position\", target_pos, 1.0)
+		#chromatic_tween.tween_delay(2.0)
+		chromatic_tween.tween_property(layer, \"position\", Vector3.ZERO, 1.0)
+
+func trigger_memory_decay_wave(container: Node3D):
+	# Wave of digital decay across layers
+	if not layer_materials.has(container):
+		return
+	
+	var materials = layer_materials[container]
+	print(\"🌊 Memory decay wave triggered for: \", container.name)
+	
+	
+# ===================
+# INPUT CONTROLS
+# ===================
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_SPACE:
+				# Toggle layer separation
+				enable_layer_separation = !enable_layer_separation
+				print(\"Layer separation: \", enable_layer_separation)
+			
+			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8:
+				# Trigger effects on specific objects
+				var object_index = event.keycode - KEY_1
+				if object_index < demo_objects.size():
+					trigger_layer_explosion(demo_objects[object_index])
+			
+			KEY_Q:
+				# Chromatic separation on random object
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_chromatic_separation(random_obj)
+			
+			KEY_W:
+				# Memory decay wave
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_memory_decay_wave(random_obj)
+			
+			KEY_E:
+				# Layer scramble
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_layer_scramble(random_obj)
+			
+			KEY_R:
+				# Layer orbit
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_layer_orbit(random_obj)
+			
+			KEY_T:
+				# Memory cascade
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_memory_cascade(random_obj)
+			
+			KEY_F:
+				# Pixel sorting
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					var random_layer = randi() % num_texture_layers
+					apply_pixel_sort_to_layer(random_obj, random_layer)
+			
+			KEY_G:
+				# Texture feedback loop
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					create_texture_feedback_loop(random_obj)
+			
+			KEY_M:
+				# Mega glitch on random object
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					trigger_mega_glitch(random_obj)
+			
+			KEY_X:
+				# System-wide corruption
+				create_system_wide_corruption()
+			
+			KEY_C:
+				# Real-time bit manipulation
+				if demo_objects.size() > 0:
+					var random_obj = demo_objects[randi() % demo_objects.size()]
+					apply_realtime_bit_manipulation(random_obj)
+			
+			KEY_PLUS, KEY_EQUAL:
+				# Increase animation speed
+				animation_speed = min(animation_speed * 1.2, 3.0)
+				print(\"Animation speed: \", animation_speed)
+			
+			KEY_MINUS:
+				# Decrease animation speed
+				animation_speed = max(animation_speed * 0.8, 0.1)
+				print(\"Animation speed: \", animation_speed)
+			
+			KEY_H:
+				print_controls_help()
+
+func print_controls_help():
+	print(\"\\n🎮 LAYERED TEXTURE SYSTEM CONTROLS:\")
+	print(\"═══════════════════════════════════\")
+	print(\"  SPACE - Toggle layer separation\")
+	print(\"  1-8   - Layer explosion on object 1-8\") 
+	print(\"  Q     - Chromatic separation\")
+	print(\"  W     - Memory decay wave\")
+	print(\"  E     - Layer scramble\")
+	print(\"  R     - Layer orbit\")
+	print(\"  T     - Memory cascade\")
+	print(\"  F     - Pixel sorting\")
+	print(\"  G     - Texture feedback loop\")
+	print(\"  C     - Real-time bit manipulation\")
+	print(\"  M     - Mega glitch (combines effects)\")
+	print(\"  X     - System-wide corruption\")
+	print(\"  +/-   - Animation speed\")
+	print(\"  H     - Show this help\")
+	print(\"\\n🎨 WHAT'S HAPPENING:\")
+	print(\"  • Each object has 4 texture layers\")
+	print(\"  • Layers animate independently\")
+	print(\"  • Different blend modes create complex effects\")
+	print(\"  • Real-time texture generation and corruption\")
+	print(\"  • Glitch algorithms drive the animations\")
+
+# ===================
+# PERFORMANCE MONITORING
+# ===================
+
+func get_performance_stats():
+	var stats = {
+		\"fps\": Engine.get_frames_per_second(),
+		\"objects\": demo_objects.size(),
+		\"total_layers\": demo_objects.size() * num_texture_layers,
+		\"texture_memory\": demo_objects.size() * num_texture_layers * layer_resolution * layer_resolution * 4,
+		\"animation_speed\": animation_speed,
+		\"layer_separation\": enable_layer_separation
+	}
+	
+	print(\"📊 Performance Stats: \", stats)
+	return stats
+
+func _notification(what):
+	if what == NOTIFICATION_READY:
+		print(\"\\n✨ LAYERED ANIMATED TEXTURE SYSTEM READY!\")
+		print(\"🎨 Objects: \", demo_objects.size())
+		print(\"📱 Layers per object: \", num_texture_layers) 
+		print(\"🔧 Texture resolution: \", layer_resolution, \"x\", layer_resolution)
+		print(\"⚡ Layer separation: \", enable_layer_separation)
+		print(\"\\nPress H for controls help!\")
+		
+		# Auto-start some effects
+		get_tree().create_timer(2.0).timeout.connect(
+			func(): 
+				if demo_objects.size() > 0:
+					trigger_chromatic_separation(demo_objects[0])
+		)
+		
+		get_tree().create_timer(4.0).timeout.connect(
+			func():
+				if demo_objects.size() > 1: 
+					trigger_layer_explosion(demo_objects[1])
+		)
+"
+
+[node name="textureglitch" type="Node3D"]
+script = SubResource("GDScript_osoai")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.039)

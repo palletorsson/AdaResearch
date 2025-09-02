@@ -1,559 +1,548 @@
-# Color Scanner - Handheld Ray Tracer for Color Detection
-# Scans surfaces to detect and display their colors on a small built-in screen
+# UV-Based Texture Pixel Scanner - Samples actual texture pixels at hit point
 extends Node3D
 
 @export_category("Scanner Settings")
-@export var scan_range: float = 10.0  # Maximum scanning distance
-@export var scan_beam_width: float = 0.1  # Width of the scanning beam
-@export var scan_frequency: float = 60.0  # Scans per second
-@export var beam_color: Color = Color(0.8, 0.2, 0.2, 0.6)  # Red scanning beam
-@export var scanner_sensitivity: float = 1.0
+@export var scan_range: float = 15.0
+@export var scan_frequency: float = 30.0
 
-@export_category("Display Settings")
-@export var screen_size: Vector2 = Vector2(0.2, 0.2)  # Screen dimensions
-@export var screen_resolution: Vector2i = Vector2i(128, 96)  # Pixel resolution
-@export var display_brightness: float = 1.0
-@export var show_debug_info: bool = true
+@export_category("Texture Pixel Sampling")
+@export var enable_pixel_sampling: bool = true
+@export var uv_debug: bool = true
+@export var texture_debug: bool = true
+@export var sample_area_size: int = 1  # Sample NxN pixels for averaging
 
-@export_category("Visual Effects")
-@export var emit_scanning_beam: bool = true
-@export var beam_intensity: float = 0.5
-@export var screen_glow: bool = true
-@export var scanner_animation: bool = true
+@export_category("Visual Ray Settings")
+@export var show_ray: bool = true
+@export var ray_color_scanning: Color = Color(1, 0, 0, 0.8)
+@export var ray_color_hit: Color = Color(0, 1, 0, 0.8)
+@export var ray_thickness: float = 0.02
 
-# Scanner components
-var scanner_body: MeshInstance3D
+@export_category("Display Screen Settings")
+@export var enable_screen_updates: bool = true
+@export var screen_brightness: float = 1.5
+@export var screen_off_color: Color = Color(0.1, 0.1, 0.1, 1.0)
+
+var raycast: RayCast3D
+var color_data_label: Label3D
+var visual_ray: MeshInstance3D
+var ray_material: StandardMaterial3D
 var display_screen: MeshInstance3D
-var scanning_beam: MeshInstance3D
 var screen_material: StandardMaterial3D
-var beam_material: StandardMaterial3D
-
-# Scanning system
-var space_state: PhysicsDirectSpaceState3D
 var scan_timer: float = 0.0
-var current_scan_result: Dictionary = {}
 var detected_color: Color = Color.BLACK
-var is_scanning: bool = true
 
-# Ray tracing data
-var scan_origin: Vector3
-var scan_direction: Vector3
-var hit_point: Vector3
-var hit_normal: Vector3
-var hit_object: Node3D
-
-# Screen display system
-var screen_texture: ImageTexture
-var screen_image: Image
-var color_history: Array[Color] = []
-var display_mode: String = "color_display"  # "color_display", "debug_info", "scan_pattern"
+# UV and texture data
+var last_uv_coord: Vector2
+var last_texture_data: Dictionary = {}
+var current_direction: Vector3 = Vector3(0, 0, -1)
 
 func _ready():
-	# Enable debug for troubleshooting
-	show_debug_info = true
+	print("=== UV TEXTURE PIXEL SCANNER STARTING ===")
+	setup_components()
+	setup_visual_ray()
+	setup_raycast()
 	
-	setup_scanner_geometry()
-	setup_materials()
-	setup_physics()
-	setup_display_system()
-	setup_scanning_beam()
+	print("UV texture pixel scanner ready!")
+	update_display_screen(Color.BLACK, false)
+
+func setup_components():
+	"""Setup scanner components"""
+	
+	# RayCast3D
+	raycast = find_child("RayCast3D", true, false)
+	if not raycast:
+		raycast = RayCast3D.new()
+		raycast.name = "UVScannerRayCast"
+		add_child(raycast)
+	
+	# Label
+	color_data_label = find_child("ColorDataLabel", true, false)
+	if not color_data_label:
+		color_data_label = Label3D.new()
+		color_data_label.name = "ColorDisplay"
+		color_data_label.position = Vector3(0, 0.1, 0)
+		color_data_label.font_size = 28
+		color_data_label.outline_size = 2
+		add_child(color_data_label)
+	
+	# Find display screen
+	display_screen = get_node_or_null("../GrabStick_ColorScanner#DisplayScreen")
+	setup_display_screen()
+
+func setup_display_screen():
+	"""Setup display screen"""
+	
+	if not display_screen:
+		enable_screen_updates = false
+		return
+	
+	screen_material = display_screen.get_surface_override_material(0)
+	if not screen_material:
+		screen_material = StandardMaterial3D.new()
+		display_screen.set_surface_override_material(0, screen_material)
+	
+	screen_material.flags_unshaded = true
+	screen_material.emission_enabled = true
+	screen_material.emission_energy = screen_brightness
+	screen_material.albedo_color = screen_off_color
+	screen_material.emission = screen_off_color
+
+func setup_visual_ray():
+	"""Create visual ray"""
+	
+	if not show_ray:
+		return
+	
+	visual_ray = MeshInstance3D.new()
+	visual_ray.name = "UVSampleRay"
+	add_child(visual_ray)
+	
+	var box_mesh = BoxMesh.new()
+	box_mesh.size = Vector3(ray_thickness, ray_thickness, scan_range)
+	visual_ray.mesh = box_mesh
+	visual_ray.position = Vector3(0, 0, -scan_range / 2)
+	
+	ray_material = StandardMaterial3D.new()
+	ray_material.flags_unshaded = true
+	ray_material.flags_transparent = true
+	ray_material.emission_enabled = true
+	ray_material.emission = ray_color_scanning
+	ray_material.albedo_color = ray_color_scanning
+	visual_ray.set_surface_override_material(0, ray_material)
+
+func setup_raycast():
+	"""Setup RayCast3D"""
+	
+	raycast.enabled = true
+	raycast.target_position = current_direction * scan_range
+	raycast.collision_mask = 0xFFFFFFFF
+	raycast.collide_with_bodies = true
+	raycast.collide_with_areas = true
 
 func _process(delta):
 	scan_timer += delta
 	
-	if is_scanning and scan_timer >= (1.0 / scan_frequency):
-		perform_color_scan()
-		update_display()
+	if scan_timer >= (1.0 / scan_frequency):
+		perform_uv_texture_scan()
 		scan_timer = 0.0
-	
-	if scanner_animation:
-		animate_scanner(delta)
-	
-	update_scanning_beam()
 
-func setup_scanner_geometry():
-	"""Create the physical scanner device"""
+func perform_uv_texture_scan():
+	"""Perform UV-based texture pixel sampling"""
 	
-	# Main scanner body
-	scanner_body = MeshInstance3D.new()
-	var scanner_mesh = BoxMesh.new()
-	scanner_mesh.size = Vector3(0.8, 1.5, 0.3)
-	scanner_body.mesh = scanner_mesh
-	add_child(scanner_body)
-	
-	# Scanner body material
-	var body_material = StandardMaterial3D.new()
-	body_material.albedo_color = Color(0.2, 0.2, 0.3)
-	body_material.metallic = 0.8
-	body_material.roughness = 0.3
-	scanner_body.material_override = body_material
-	
-	# Display screen (mounted on top)
-	display_screen = MeshInstance3D.new()
-	var screen_mesh = BoxMesh.new()
-	screen_mesh.size = Vector3(screen_size.x, 0.1, screen_size.y)
-	display_screen.mesh = screen_mesh
-	display_screen.position = Vector3(0, 0.8, 0)
-	scanner_body.add_child(display_screen)
-	
-	# Scanner lens/sensor (front of device)
-	var lens = MeshInstance3D.new()
-	var lens_mesh = CylinderMesh.new()
-	lens_mesh.top_radius = 0.15
-	lens_mesh.bottom_radius = 0.15
-	lens_mesh.height = 0.2
-	lens.mesh = lens_mesh
-	lens.position = Vector3(0, 0, -0.25)
-	lens.rotation = Vector3(PI/2, 0, 0)
-	scanner_body.add_child(lens)
-	
-	# Lens material
-	var lens_material = StandardMaterial3D.new()
-	lens_material.albedo_color = Color(0.1, 0.1, 0.1)
-	lens_material.metallic = 0.9
-	lens_material.roughness = 0.1
-	lens.material_override = lens_material
-
-func setup_materials():
-	"""Setup materials for screen and beam"""
-	
-	# Screen material with texture
-	screen_material = StandardMaterial3D.new()
-	screen_material.emission_enabled = true
-	screen_material.emission_energy = display_brightness
-	screen_material.albedo_color = Color.BLACK
-	
-	if screen_glow:
-		screen_material.emission = Color.WHITE
-	
-	display_screen.material_override = screen_material
-	
-	# Beam material for scanning ray
-	beam_material = StandardMaterial3D.new()
-	beam_material.albedo_color = beam_color
-	beam_material.emission_enabled = true
-	beam_material.emission = beam_color * beam_intensity
-	beam_material.flags_transparent = true
-	beam_material.flags_unshaded = true
-
-func setup_physics():
-	"""Initialize physics for ray casting"""
-	space_state = get_world_3d().direct_space_state
-
-func setup_display_system():
-	"""Create the color display system"""
-	
-	# Create screen image and texture
-	screen_image = Image.create(screen_resolution.x, screen_resolution.y, false, Image.FORMAT_RGB8)
-	screen_image.fill(Color.BLACK)
-	screen_texture = ImageTexture.new()
-	screen_texture.set_image(screen_image)
-	
-	# Apply texture to screen material
-	screen_material.albedo_texture = screen_texture
-	
-	# Initialize color history
-	for i in range(10):
-		color_history.append(Color.BLACK)
-
-func setup_scanning_beam():
-	"""Create the visible scanning beam"""
-	if not emit_scanning_beam:
+	if not raycast:
 		return
+	
+	raycast.force_raycast_update()
+	
+	if raycast.is_colliding():
+		var hit_object = raycast.get_collider()
+		var hit_point = raycast.get_collision_point()
+		var hit_normal = raycast.get_collision_normal()
+		var hit_distance = global_position.distance_to(hit_point)
 		
-	scanning_beam = MeshInstance3D.new()
-	var beam_mesh = BoxMesh.new()
-	beam_mesh.size = Vector3(scan_beam_width, scan_beam_width, scan_range)
-	scanning_beam.mesh = beam_mesh
-	scanning_beam.material_override = beam_material
-	scanning_beam.position = Vector3(0, 0, -scan_range * 0.5)
-	scanner_body.add_child(scanning_beam)
-
-func perform_color_scan():
-	"""Perform ray tracing to detect surface color"""
-	
-	# Calculate scan origin and direction
-	scan_origin = scanner_body.global_position + Vector3(0, 0, -0.3)
-	scan_direction = -scanner_body.global_transform.basis.z
-	
-	# Create ray query
-	var query = PhysicsRayQueryParameters3D.create(
-		scan_origin, 
-		scan_origin + scan_direction * scan_range
-	)
-	query.collision_mask = 0xFFFFFFFF  # Scan all layers
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-	
-	# Perform ray cast
-	var result = space_state.intersect_ray(query)
-	
-	if result:
-		hit_point = result.position
-		hit_normal = result.normal
-		hit_object = result.collider
+		print("=== UV TEXTURE SCAN ===")
+		print("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
+		print("Hit point: ", hit_point)
 		
-		# Extract color from the hit surface
-		detected_color = extract_surface_color(result)
+		# Extract color using UV texture sampling
+		detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
 		
-		# Update scan result data
-		current_scan_result = {
-			"has_hit": true,
-			"distance": scan_origin.distance_to(hit_point),
-			"color": detected_color,
-			"position": hit_point,
-			"normal": hit_normal,
-			"object_name": hit_object.name if hit_object else "Unknown"
-		}
+		update_ray_for_hit(hit_distance)
+		update_display_hit(hit_object, hit_distance)
+		update_display_screen(detected_color, true)
+		
 	else:
-		# No hit - scanning empty space
 		detected_color = Color.BLACK
-		current_scan_result = {
-			"has_hit": false,
-			"distance": scan_range,
-			"color": Color.BLACK,
-			"position": scan_origin + scan_direction * scan_range,
-			"normal": Vector3.ZERO,
-			"object_name": "No Target"
-		}
-	
-	# Add to color history
-	color_history.append(detected_color)
-	if color_history.size() > 10:
-		color_history.pop_front()
+		update_ray_for_miss()
+		update_display_miss()
+		update_display_screen(screen_off_color, false)
 
-func extract_surface_color(ray_result: Dictionary) -> Color:
-	"""Extract color from the surface at the hit point"""
+func extract_texture_pixel_color(hit_object: Node, hit_point: Vector3, hit_normal: Vector3) -> Color:
+	"""Extract actual texture pixel color at hit point"""
 	
-	var surface_color = Color.BLACK  # Default color (black for no detection)
+	var mesh_instance = find_mesh_instance(hit_object)
+	if not mesh_instance:
+		print("No MeshInstance3D found")
+		return Color.BLACK
 	
-	# Debug output to help troubleshoot
-	if show_debug_info:
-		print("Scanner hit object: ", ray_result.collider.name if ray_result.collider else "None")
+	#print("Found mesh: ", mesh_instance.name)
 	
-	# Try to get color from the material
-	if ray_result.collider and ray_result.collider is StaticBody3D:
-		# If we hit a StaticBody3D, find the closest MeshInstance3D child at the hit point
-		var static_body = ray_result.collider as StaticBody3D
-		var hit_position = ray_result.position
-		var closest_mesh: MeshInstance3D = null
-		var closest_distance = INF
-		
-		# Find the closest color sheet to the hit point
-		for child in static_body.get_children():
-			if child is MeshInstance3D and child.name.begins_with("ColorSheet"):
-				var mesh_instance = child as MeshInstance3D
-				var distance = mesh_instance.global_position.distance_to(hit_position)
-				if distance < closest_distance:
-					closest_distance = distance
-					closest_mesh = mesh_instance
-		
-		if closest_mesh:
-			if show_debug_info:
-				print("Found closest color sheet: ", closest_mesh.name)
-			
-			# Check surface material overrides (this is the format used in our scene)
-			if closest_mesh.get_surface_override_material(0):
-				surface_color = get_material_color(closest_mesh.get_surface_override_material(0))
-				if show_debug_info:
-					print("Found surface override material color: ", surface_color)
-			
-			# Check material override
-			elif closest_mesh.material_override:
-				surface_color = get_material_color(closest_mesh.material_override)
-				if show_debug_info:
-					print("Found material override color: ", surface_color)
-			
-			# Check surface materials
-			elif closest_mesh.mesh and closest_mesh.mesh.get_surface_count() > 0:
-				var surface_material = closest_mesh.mesh.surface_get_material(0)
-				if surface_material:
-					surface_color = get_material_color(surface_material)
-					if show_debug_info:
-						print("Found surface material color: ", surface_color)
+	# Calculate UV coordinates at hit point
+	var uv_coord = calculate_precise_uv(mesh_instance, hit_point)
+	if uv_coord == Vector2(-1, -1):
+		print("UV calculation failed")
+		return fallback_material_color(mesh_instance)
 	
-	# Also handle direct MeshInstance3D hits
-	elif ray_result.collider and ray_result.collider is MeshInstance3D:
-		var mesh_instance = ray_result.collider as MeshInstance3D
-		
-		# Check surface material overrides (new format)
-		if mesh_instance.get_surface_override_material(0):
-			surface_color = get_material_color(mesh_instance.get_surface_override_material(0))
-			if show_debug_info:
-				print("Found direct surface override material color: ", surface_color)
-		
-		# Check material override first
-		elif mesh_instance.material_override:
-			surface_color = get_material_color(mesh_instance.material_override)
-			if show_debug_info:
-				print("Found direct material override color: ", surface_color)
-		
-		# Check surface materials
-		elif mesh_instance.mesh and mesh_instance.mesh.get_surface_count() > 0:
-			var surface_material = mesh_instance.mesh.surface_get_material(0)
-			if surface_material:
-				surface_color = get_material_color(surface_material)
-				if show_debug_info:
-					print("Found direct surface material color: ", surface_color)
+	print("UV coordinates: ", uv_coord)
+	last_uv_coord = uv_coord
 	
-	# For colorsheet palette detection, check for ColorRect nodes
-	elif ray_result.collider and ray_result.collider.has_method("get_color"):
-		surface_color = ray_result.collider.get_color()
-		if show_debug_info:
-			print("Found custom color method: ", surface_color)
+	# Get material and sample texture
+	var sampled_color = sample_texture_at_uv(mesh_instance, uv_coord)
 	
-	# Apply scanner sensitivity
-	surface_color = surface_color * scanner_sensitivity
-	surface_color.a = 1.0  # Ensure full opacity for display
-	
-	if show_debug_info:
-		print("Final detected color: ", surface_color)
-	
-	return surface_color
+	if sampled_color != Color.BLACK:
+		print("Successfully sampled texture pixel: ", sampled_color)
+		return sampled_color
+	else:
+		print("Texture sampling failed, using material fallback")
+		return fallback_material_color(mesh_instance)
 
-func get_material_color(material: Material) -> Color:
-	"""Extract color from different material types"""
+func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
+	"""Find the MeshInstance3D associated with the hit collider"""
+	
+	# Direct mesh hit
+	if hit_object is MeshInstance3D:
+		return hit_object as MeshInstance3D
+	
+	# Physics body with mesh children
+	if hit_object.has_method("get_children"):
+		for child in hit_object.get_children():
+			if child is MeshInstance3D:
+				return child as MeshInstance3D
+	
+	return null
+
+func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector3) -> Vector2:
+	"""Calculate precise UV coordinates for the hit point"""
+	
+	if not mesh_instance.mesh:
+		return Vector2(-1, -1)
+	
+	# Convert to local space
+	var local_hit = mesh_instance.to_local(world_hit_point)
+	
+	print("Local hit point: ", local_hit)
+	
+	# Handle different mesh types
+	if mesh_instance.mesh is BoxMesh:
+		return calculate_box_uv(mesh_instance.mesh as BoxMesh, local_hit)
+	elif mesh_instance.mesh is PlaneMesh:
+		return calculate_plane_uv(mesh_instance.mesh as PlaneMesh, local_hit)
+	elif mesh_instance.mesh is QuadMesh:
+		return calculate_quad_uv(mesh_instance.mesh as QuadMesh, local_hit)
+	else:
+		print("Unsupported mesh type: ", mesh_instance.mesh.get_class())
+		return Vector2(0.5, 0.5)  # Center fallback
+
+func calculate_box_uv(box_mesh: BoxMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for BoxMesh at local hit point"""
+	
+	var size = box_mesh.size
+	print("Box size: ", size)
+	
+	# Find which face was hit by checking which coordinate is at the edge
+	var abs_point = Vector3(abs(local_point.x), abs(local_point.y), abs(local_point.z))
+	var half_size = size * 0.5
+	
+	# Determine which face by finding the coordinate closest to the edge
+	var face_tolerance = 0.01
+	
+	if abs(abs_point.x - half_size.x) < face_tolerance:
+		# Hit X face (left/right side)
+		var u = (local_point.z + half_size.z) / size.z
+		var v = (local_point.y + half_size.y) / size.y
+		print("Hit X face, UV: ", Vector2(u, 1.0 - v))
+		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+		
+	elif abs(abs_point.y - half_size.y) < face_tolerance:
+		# Hit Y face (top/bottom)
+		var u = (local_point.x + half_size.x) / size.x
+		var v = (local_point.z + half_size.z) / size.z
+		print("Hit Y face, UV: ", Vector2(u, 1.0 - v))
+		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+		
+	elif abs(abs_point.z - half_size.z) < face_tolerance:
+		# Hit Z face (front/back)
+		var u = (local_point.x + half_size.x) / size.x
+		var v = (local_point.y + half_size.y) / size.y
+		print("Hit Z face, UV: ", Vector2(u, 1.0 - v))
+		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+	
+	print("Could not determine hit face")
+	return Vector2(0.5, 0.5)
+
+func calculate_plane_uv(plane_mesh: PlaneMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for PlaneMesh"""
+	
+	var size = plane_mesh.size
+	var u = (local_point.x + size.x/2) / size.x
+	var v = (local_point.z + size.y/2) / size.y
+	
+	return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+func calculate_quad_uv(quad_mesh: QuadMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for QuadMesh"""
+	
+	var size = quad_mesh.size
+	var u = (local_point.x + size.x/2) / size.x
+	var v = (local_point.y + size.y/2) / size.y
+	
+	return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+func sample_texture_at_uv(mesh_instance: MeshInstance3D, uv_coord: Vector2) -> Color:
+	"""Sample texture pixel at UV coordinate"""
+	
+	var material = get_material_from_mesh(mesh_instance)
+	if not material:
+		print("No material found")
+		return Color.BLACK
+	
+	print("Material type: ", material.get_class())
+	
+	# Handle StandardMaterial3D
+	if material is StandardMaterial3D:
+		var std_mat = material as StandardMaterial3D
+		
+		# Check if there's an albedo texture
+		if std_mat.albedo_texture:
+			print("Found albedo texture!")
+			var texture_color = sample_texture_pixel(std_mat.albedo_texture, uv_coord)
+			
+			# Combine texture color with albedo color (material tinting)
+			var final_color = texture_color * std_mat.albedo_color
+			print("Texture color: ", texture_color, " * Albedo: ", std_mat.albedo_color, " = ", final_color)
+			return final_color
+		else:
+			# No texture, just return albedo color
+			print("No texture, using albedo color: ", std_mat.albedo_color)
+			return std_mat.albedo_color
+	
+	# Handle ShaderMaterial
+	elif material is ShaderMaterial:
+		var shader_mat = material as ShaderMaterial
+		return sample_shader_texture(shader_mat, uv_coord)
+	
+	return Color.BLACK
+
+func get_material_from_mesh(mesh_instance: MeshInstance3D) -> Material:
+	"""Get material from mesh in priority order"""
+	
+	# Priority 1: Material override
+	if mesh_instance.material_override:
+		print("Using material_override")
+		return mesh_instance.material_override
+	
+	# Priority 2: Surface material overrides
+	if mesh_instance.get_surface_override_material(0):
+		print("Using surface_override_material")
+		return mesh_instance.get_surface_override_material(0)
+	
+	# Priority 3: Mesh surface materials
+	if mesh_instance.mesh and mesh_instance.mesh.get_surface_count() > 0:
+		var surface_mat = mesh_instance.mesh.surface_get_material(0)
+		if surface_mat:
+			print("Using mesh surface material")
+			return surface_mat
+	
+	return null
+
+func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
+	"""Sample a pixel from texture at UV coordinate"""
+	
+	if not texture:
+		return Color.BLACK
+	
+	var image: Image = null
+	
+	# Get image from texture
+	if texture is ImageTexture:
+		image = (texture as ImageTexture).get_image()
+	elif texture.has_method("get_image"):
+		image = texture.get_image()
+	
+	if not image:
+		print("Could not get image from texture")
+		return Color.BLACK
+	
+	var texture_size = image.get_size()
+	print("Texture size: ", texture_size)
+	
+	# Convert UV to pixel coordinates
+	var pixel_x = int(uv_coord.x * (texture_size.x - 1))
+	var pixel_y = int(uv_coord.y * (texture_size.y - 1))
+	
+	# Clamp to texture bounds
+	pixel_x = clamp(pixel_x, 0, texture_size.x - 1)
+	pixel_y = clamp(pixel_y, 0, texture_size.y - 1)
+	
+	print("Sampling texture pixel at: (", pixel_x, ", ", pixel_y, ")")
+	
+	# Sample pixel or area
+	if sample_area_size > 1:
+		return sample_texture_area(image, pixel_x, pixel_y, sample_area_size)
+	else:
+		var pixel_color = image.get_pixel(pixel_x, pixel_y)
+		print("Sampled pixel color: ", pixel_color)
+		return pixel_color
+
+func sample_texture_area(image: Image, center_x: int, center_y: int, area_size: int) -> Color:
+	"""Sample an area of texture pixels and average them"""
+	
+	var total_r = 0.0
+	var total_g = 0.0
+	var total_b = 0.0
+	var sample_count = 0
+	
+	var half_area = area_size / 2
+	var texture_size = image.get_size()
+	
+	for x in range(center_x - half_area, center_x + half_area + 1):
+		for y in range(center_y - half_area, center_y + half_area + 1):
+			if x >= 0 and x < texture_size.x and y >= 0 and y < texture_size.y:
+				var pixel = image.get_pixel(x, y)
+				total_r += pixel.r
+				total_g += pixel.g
+				total_b += pixel.b
+				sample_count += 1
+	
+	if sample_count == 0:
+		return Color.BLACK
+	
+	var average_color = Color(total_r / sample_count, total_g / sample_count, total_b / sample_count, 1.0)
+	print("Averaged ", sample_count, " texture pixels: ", average_color)
+	return average_color
+
+func sample_shader_texture(shader_mat: ShaderMaterial, uv_coord: Vector2) -> Color:
+	"""Sample texture from shader material"""
+	
+	# Common texture parameter names in shaders
+	var texture_params = ["texture", "albedo_texture", "main_texture", "diffuse", "base_texture"]
+	
+	for param_name in texture_params:
+		var texture = shader_mat.get_shader_parameter(param_name)
+		if texture and texture is Texture2D:
+			print("Found shader texture parameter: ", param_name)
+			return sample_texture_pixel(texture, uv_coord)
+	
+	# Try color parameters as fallback
+	var color_params = ["color", "albedo", "base_color", "tint"]
+	for param_name in color_params:
+		var color = shader_mat.get_shader_parameter(param_name)
+		if color and color is Color:
+			print("Found shader color parameter: ", param_name, " = ", color)
+			return color
+	
+	return Color.BLACK
+
+func fallback_material_color(mesh_instance: MeshInstance3D) -> Color:
+	"""Fallback to material color when texture sampling fails"""
+	
+	var material = get_material_from_mesh(mesh_instance)
 	
 	if material is StandardMaterial3D:
 		var std_mat = material as StandardMaterial3D
+		print("Fallback to albedo color: ", std_mat.albedo_color)
 		return std_mat.albedo_color
-		
-	elif material is ShaderMaterial:
-		var shader_mat = material as ShaderMaterial
-		# Try to get color from common shader parameters
-		if shader_mat.get_shader_parameter("albedo"):
-			return shader_mat.get_shader_parameter("albedo")
-		elif shader_mat.get_shader_parameter("color"):
-			return shader_mat.get_shader_parameter("color")
-		elif shader_mat.get_shader_parameter("base_color"):
-			return shader_mat.get_shader_parameter("base_color")
 	
-	return Color.WHITE
+	return Color.BLACK
 
-func update_display():
-	"""Update the scanner's display screen"""
+func update_ray_for_hit(distance: float):
+	"""Update ray for hit"""
 	
-	match display_mode:
-		"color_display":
-			draw_color_display()
-		"debug_info":
-			draw_debug_display()
-		"scan_pattern":
-			draw_scan_pattern()
-	
-	# Update the texture
-	screen_texture.update(screen_image)
-
-func draw_color_display():
-	"""Draw the detected color on the screen"""
-	
-	# Clear screen
-	screen_image.fill(Color.BLACK)
-	
-	# Main color display (center area)
-	var center_rect = Rect2i(
-		screen_resolution.x * 0.1,
-		screen_resolution.y * 0.1,
-		screen_resolution.x * 0.8,
-		screen_resolution.y * 0.6
-	)
-	screen_image.fill_rect(center_rect, detected_color)
-	
-	# Color history strip (bottom)
-	var history_width = screen_resolution.x / color_history.size()
-	for i in range(color_history.size()):
-		var hist_rect = Rect2i(
-			i * history_width,
-			screen_resolution.y * 0.8,
-			history_width,
-			screen_resolution.y * 0.2
-		)
-		screen_image.fill_rect(hist_rect, color_history[i])
-	
-	# Add border
-	draw_border(Color.WHITE, 2)
-
-func draw_debug_display():
-	"""Draw debugging information"""
-	
-	screen_image.fill(Color(0.1, 0.1, 0.1))
-	
-	# This would be more complex with actual text rendering
-	# For now, just show colored indicators
-	
-	# Hit indicator
-	var hit_color = Color.GREEN if current_scan_result.get("has_hit", false) else Color.RED
-	var hit_rect = Rect2i(10, 10, 20, 20)
-	screen_image.fill_rect(hit_rect, hit_color)
-	
-	# Distance indicator (as a color gradient)
-	if current_scan_result.has("distance"):
-		var distance_normalized = current_scan_result.distance / scan_range
-		var distance_color = Color(distance_normalized, 1.0 - distance_normalized, 0.0)
-		var dist_rect = Rect2i(40, 10, 60, 20)
-		screen_image.fill_rect(dist_rect, distance_color)
-	
-	# Current color sample
-	var color_rect = Rect2i(10, 40, screen_resolution.x - 20, 30)
-	screen_image.fill_rect(color_rect, detected_color)
-
-func draw_scan_pattern():
-	"""Draw scanning pattern visualization"""
-	
-	screen_image.fill(Color.BLACK)
-	
-	# Radar-like sweep pattern
-	var center = Vector2i(screen_resolution.x / 2, screen_resolution.y / 2)
-	var radius = min(screen_resolution.x, screen_resolution.y) / 3
-	
-	# Draw concentric circles
-	for r in range(1, 4):
-		draw_circle_outline(center, radius * r / 3, Color(0.2, 0.8, 0.2, 0.5))
-	
-	# Draw sweep line
-	var sweep_angle = Time.get_ticks_msec() * 0.002
-	var sweep_end = center + Vector2i(
-		cos(sweep_angle) * radius,
-		sin(sweep_angle) * radius
-	)
-	draw_line(center, sweep_end, Color.GREEN)
-	
-	# Show detected color as a dot
-	if current_scan_result.get("has_hit", false):
-		var dot_pos = center + Vector2i(
-			cos(sweep_angle) * radius * 0.8,
-			sin(sweep_angle) * radius * 0.8
-		)
-		draw_filled_circle(dot_pos, 5, detected_color)
-
-func draw_border(color: Color, thickness: int):
-	"""Draw a border around the screen"""
-	
-	# Top and bottom borders
-	for i in range(thickness):
-		var top_rect = Rect2i(0, i, screen_resolution.x, 1)
-		var bottom_rect = Rect2i(0, screen_resolution.y - 1 - i, screen_resolution.x, 1)
-		screen_image.fill_rect(top_rect, color)
-		screen_image.fill_rect(bottom_rect, color)
-	
-	# Left and right borders
-	for i in range(thickness):
-		var left_rect = Rect2i(i, 0, 1, screen_resolution.y)
-		var right_rect = Rect2i(screen_resolution.x - 1 - i, 0, 1, screen_resolution.y)
-		screen_image.fill_rect(left_rect, color)
-		screen_image.fill_rect(right_rect, color)
-
-func draw_circle_outline(center: Vector2i, radius: int, color: Color):
-	"""Draw a circle outline on the screen"""
-	
-	# Simple circle drawing using Bresenham-like algorithm
-	for angle in range(0, 360, 5):
-		var rad = deg_to_rad(angle)
-		var x = center.x + int(cos(rad) * radius)
-		var y = center.y + int(sin(rad) * radius)
-		
-		if x >= 0 and x < screen_resolution.x and y >= 0 and y < screen_resolution.y:
-			screen_image.set_pixel(x, y, color)
-
-func draw_line(start: Vector2i, end: Vector2i, color: Color):
-	"""Draw a line on the screen"""
-	
-	var dx = abs(end.x - start.x)
-	var dy = abs(end.y - start.y)
-	var x = start.x
-	var y = start.y
-	var x_inc = 1 if end.x > start.x else -1
-	var y_inc = 1 if end.y > start.y else -1
-	var error = dx - dy
-	
-	while true:
-		if x >= 0 and x < screen_resolution.x and y >= 0 and y < screen_resolution.y:
-			screen_image.set_pixel(x, y, color)
-		
-		if x == end.x and y == end.y:
-			break
-			
-		var e2 = 2 * error
-		if e2 > -dy:
-			error -= dy
-			x += x_inc
-		if e2 < dx:
-			error += dx
-			y += y_inc
-
-func draw_filled_circle(center: Vector2i, radius: int, color: Color):
-	"""Draw a filled circle on the screen"""
-	
-	for y in range(-radius, radius + 1):
-		for x in range(-radius, radius + 1):
-			if x * x + y * y <= radius * radius:
-				var px = center.x + x
-				var py = center.y + y
-				if px >= 0 and px < screen_resolution.x and py >= 0 and py < screen_resolution.y:
-					screen_image.set_pixel(px, py, color)
-
-func animate_scanner(delta):
-	"""Add subtle animation to the scanner"""
-	
-	var time = Time.get_ticks_msec() * 0.001
-	
-	# Gentle bobbing motion
-	var bob_offset = sin(time * 0.5) * 0.05
-	position.y += bob_offset * delta
-	
-	# Subtle beam pulsing
-	if scanning_beam:
-		var pulse = 0.8 + 0.2 * sin(time * 3.0)
-		beam_material.emission = beam_color * beam_intensity * pulse
-
-func update_scanning_beam():
-	"""Update the scanning beam visualization"""
-	
-	if not scanning_beam or not emit_scanning_beam:
+	if not visual_ray or not ray_material:
 		return
 	
-	# Adjust beam length based on scan result
-	var beam_length = scan_range
-	if current_scan_result.get("has_hit", false):
-		beam_length = current_scan_result.distance
+	var box_mesh = visual_ray.mesh as BoxMesh
+	if box_mesh:
+		box_mesh.size.z = distance
+		visual_ray.position.z = -distance / 2
 	
-	# Update beam geometry
-	var beam_mesh = scanning_beam.mesh as BoxMesh
-	beam_mesh.size.z = beam_length
-	scanning_beam.position.z = -beam_length * 0.5 - 0.3
+	ray_material.emission = ray_color_hit
+	ray_material.albedo_color = ray_color_hit
+
+func update_ray_for_miss():
+	"""Update ray for miss"""
 	
-	# Change beam color when hitting something
-	if current_scan_result.get("has_hit", false):
-		beam_material.emission = Color.GREEN * beam_intensity
+	if not visual_ray or not ray_material:
+		return
+	
+	var box_mesh = visual_ray.mesh as BoxMesh
+	if box_mesh:
+		box_mesh.size.z = scan_range
+		visual_ray.position.z = -scan_range / 2
+	
+	ray_material.emission = ray_color_scanning
+	ray_material.albedo_color = ray_color_scanning
+
+func update_display_hit(hit_object: Node, distance: float):
+	"""Update display for hits"""
+	
+	if not color_data_label:
+		return
+	
+	var r = int(detected_color.r * 255)
+	var g = int(detected_color.g * 255)
+	var b = int(detected_color.b * 255)
+	
+	var info_text = "TEXTURE PIXEL!\n%s\nRGB: %d,%d,%d\n%.1fm" % [
+		hit_object.name,
+		r, g, b,
+		distance
+	]
+	
+	# Add UV info
+	info_text += "\nUV: %.3f,%.3f" % [last_uv_coord.x, last_uv_coord.y]
+	
+	color_data_label.text = info_text
+	
+	var display_color = detected_color
+	if display_color.get_luminance() < 0.3:
+		display_color = display_color.lightened(0.5)
+	color_data_label.modulate = display_color
+
+func update_display_miss():
+	"""Update display for misses"""
+	
+	if not color_data_label:
+		return
+	
+	color_data_label.text = "UV SCANNING...\nRange: %.1fm" % scan_range
+	color_data_label.modulate = Color.WHITE
+
+func update_display_screen(color: Color, is_active: bool):
+	"""Update display screen"""
+	
+	if not enable_screen_updates or not display_screen or not screen_material:
+		return
+	
+	if is_active and color != Color.BLACK:
+		screen_material.albedo_color = color
+		screen_material.emission = color * screen_brightness
+		
+		var pulse = 0.8 + 0.2 * sin(Time.get_ticks_msec() * 0.005)
+		screen_material.emission_energy = screen_brightness * pulse
 	else:
-		beam_material.emission = beam_color * beam_intensity
+		screen_material.albedo_color = screen_off_color
+		screen_material.emission = screen_off_color
+		screen_material.emission_energy = screen_brightness * 0.3
 
-# Public API for external control
-func set_scanning_enabled(enabled: bool):
-	"""Enable or disable scanning"""
-	is_scanning = enabled
+# Public API
+func get_last_uv_coordinates() -> Vector2:
+	"""Get UV coordinates of last hit"""
+	return last_uv_coord
 
-func set_display_mode(mode: String):
-	"""Change display mode"""
-	if mode in ["color_display", "debug_info", "scan_pattern"]:
-		display_mode = mode
+func get_texture_data() -> Dictionary:
+	"""Get detailed texture sampling data"""
+	return last_texture_data
 
-func get_current_color() -> Color:
-	"""Get the currently detected color"""
-	return detected_color
+func toggle_uv_debug():
+	"""Toggle UV calculation debug output"""
+	uv_debug = not uv_debug
+	texture_debug = not texture_debug
+	print("UV/Texture debug: ", "enabled" if uv_debug else "disabled")
 
-func get_scan_data() -> Dictionary:
-	"""Get complete scan result data"""
-	return current_scan_result
-
-func calibrate_scanner():
-	"""Perform scanner calibration"""
-	# Reset color history
-	color_history.clear()
-	for i in range(10):
-		color_history.append(Color.BLACK)
-	
-	# Reset detection sensitivity
-	scanner_sensitivity = 1.0
-	
-	print("Color Scanner calibrated")
+func test_uv_calculation():
+	"""Test UV calculation with current hit"""
+	print("=== UV CALCULATION TEST ===")
+	if raycast and raycast.is_colliding():
+		var hit_point = raycast.get_collision_point()
+		var hit_object = raycast.get_collider()
+		var mesh_instance = find_mesh_instance(hit_object)
+		
+		if mesh_instance:
+			print("Testing UV calculation for: ", mesh_instance.name)
+			var uv = calculate_precise_uv(mesh_instance, hit_point)
+			print("Calculated UV: ", uv)
+		else:
+			print("No mesh instance found for UV test")
+	else:
+		print("No current hit to test UV calculation")
