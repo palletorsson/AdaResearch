@@ -1,0 +1,325 @@
+[gd_scene load_steps=12 format=3 uid="uid://nz8q5r7t4efgh"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var card_slot = $ReaderBase/CardSlot
+@onready var status_display = $ReaderBase/StatusDisplay
+@onready var biometric_scanner = $ReaderBase/BiometricScanner
+@onready var access_lights = [$ReaderBase/AccessLight1, $ReaderBase/AccessLight2, $ReaderBase/AccessLight3]
+@onready var security_antenna = $ReaderBase/SecurityAntenna
+
+var reader_state = 'standby'  # standby, scanning, granted, denied, error
+var security_level = 'CLASSIFIED'
+var last_card_id = ''
+var biometric_verified = false
+
+var authorized_cards = [
+	{'id': 'CARD_001', 'name': 'Dr. Chen', 'clearance': 'ALPHA'},
+	{'id': 'CARD_002', 'name': 'Dr. Rodriguez', 'clearance': 'BETA'},
+	{'id': 'CARD_003', 'name': 'Admin Override', 'clearance': 'OMEGA'},
+	{'id': 'CARD_999', 'name': 'Emergency Access', 'clearance': 'EMERGENCY'}
+]
+
+signal access_granted
+signal access_denied
+signal security_breach
+signal biometric_scan_complete
+
+func _ready():
+	setup_card_reader()
+	initialize_security_systems()
+
+func setup_card_reader():
+	add_to_group('lab_equipment')
+	add_to_group('security_systems')
+	add_to_group('access_control')
+	
+	# Set initial status display
+	status_display.get_active_material(0).emission = Color.ORANGE
+
+func initialize_security_systems():
+	print('🔒 CARD READER: Security systems online - Clearance level: ', security_level)
+	
+	# Standby scanning animation
+	animate_standby_mode()
+	
+	# Security antenna sweep
+	animate_security_antenna()
+
+func animate_standby_mode():
+	var standby_tween = create_tween().set_loops()
+	standby_tween.tween_property(status_display, 'material_override:emission_energy_multiplier', 0.5, 2.0)
+	standby_tween.tween_property(status_display, 'material_override:emission_energy_multiplier', 1.0, 2.0)
+
+func animate_security_antenna():
+	var antenna_tween = create_tween().set_loops()
+	antenna_tween.tween_property(security_antenna, 'rotation_degrees:y', 45.0, 3.0).set_trans(Tween.TRANS_SINE)
+	antenna_tween.tween_property(security_antenna, 'rotation_degrees:y', -45.0, 3.0).set_trans(Tween.TRANS_SINE)
+	antenna_tween.tween_property(security_antenna, 'rotation_degrees:y', 0.0, 2.0).set_trans(Tween.TRANS_SINE)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		initiate_security_scan()
+
+func initiate_security_scan():
+	if reader_state != 'standby':
+		return
+		
+	reader_state = 'scanning'
+	print('🔒 CARD READER: Initiating security scan...')
+	
+	# Visual scanning sequence
+	var scan_tween = create_tween()
+	scan_tween.tween_property(biometric_scanner, 'light_energy', 2.0, 1.0)
+	scan_tween.tween_property(status_display, 'material_override:emission', Color.BLUE, 0.5)
+	
+	# Simulate card detection
+	get_tree().create_timer(2.0).timeout.connect(simulate_card_scan)
+
+func simulate_card_scan():
+	# Randomly select a card or generate denial
+	if randf() < 0.7:  # 70% chance of valid card
+		var random_card = authorized_cards[randi() % authorized_cards.size()]
+		process_card_authentication(random_card)
+	else:
+		# Invalid card or no card detected
+		deny_access('INVALID_CARD')
+
+func process_card_authentication(card_data: Dictionary):
+	last_card_id = card_data.id
+	print('🔒 CARD READER: Card detected - ID: ', card_data.id, ' | User: ', card_data.name)
+	
+	# Check clearance level
+	if card_data.clearance in ['ALPHA', 'OMEGA', 'EMERGENCY']:
+		# Proceed to biometric verification
+		initiate_biometric_scan(card_data)
+	else:
+		deny_access('INSUFFICIENT_CLEARANCE')
+
+func initiate_biometric_scan(card_data: Dictionary):
+	print('👁️ CARD READER: Biometric verification required...')
+	
+	# Biometric scanning animation
+	var bio_tween = create_tween()
+	bio_tween.tween_property(biometric_scanner, 'light_color', Color.GREEN, 1.0)
+	bio_tween.tween_property(biometric_scanner, 'light_energy', 3.0, 2.0)
+	
+	# Simulate biometric verification (80% success rate)
+	get_tree().create_timer(3.0).timeout.connect(complete_biometric_scan.bind(card_data))
+
+func complete_biometric_scan(card_data: Dictionary):
+	if randf() < 0.8:  # 80% biometric success
+		grant_access(card_data)
+	else:
+		deny_access('BIOMETRIC_MISMATCH')
+
+func grant_access(card_data: Dictionary):
+	reader_state = 'granted'
+	biometric_verified = true
+	print('✅ ACCESS GRANTED - Welcome, ', card_data.name, ' | Clearance: ', card_data.clearance)
+	emit_signal('access_granted', card_data)
+	
+	# Access granted visual sequence
+	status_display.get_active_material(0).emission = Color.GREEN
+	
+	# Light sequence for granted access
+	for i in range(access_lights.size()):
+		var light = access_lights[i]
+		var delay_tween = create_tween()
+		delay_tween.tween_interval(i * 0.3)
+		delay_tween.tween_property(light, 'light_color', Color.GREEN, 0.2)
+		delay_tween.tween_property(light, 'light_energy', 1.5, 0.3)
+	
+	# Reset after access period
+	get_tree().create_timer(5.0).timeout.connect(reset_reader)
+
+func deny_access(reason: String):
+	reader_state = 'denied'
+	print('❌ ACCESS DENIED - Reason: ', reason)
+	emit_signal('access_denied', reason, last_card_id)
+	
+	# Access denied visual sequence
+	status_display.get_active_material(0).emission = Color.RED
+	
+	# Flash all lights red
+	for light in access_lights:
+		var deny_tween = create_tween()
+		deny_tween.set_loops(3)
+		deny_tween.tween_property(light, 'light_color', Color.RED, 0.2)
+		deny_tween.tween_property(light, 'light_energy', 2.0, 0.1)
+		deny_tween.tween_property(light, 'light_energy', 0.2, 0.1)
+	
+	# Security breach detection for multiple failures
+	check_security_breach(reason)
+	
+	# Reset after denial period
+	get_tree().create_timer(3.0).timeout.connect(reset_reader)
+
+func check_security_breach(reason: String):
+	# In a real system, this would track failed attempts
+	if reason == 'BIOMETRIC_MISMATCH' and randf() < 0.3:
+		trigger_security_breach()
+
+func trigger_security_breach():
+	reader_state = 'error'
+	print('🚨 SECURITY BREACH DETECTED - Unauthorized access attempt!')
+	emit_signal('security_breach', last_card_id)
+	
+	# Security alarm state
+	var breach_tween = create_tween()
+	breach_tween.set_loops(10)
+	breach_tween.tween_property(status_display, 'material_override:emission', Color.RED, 0.1)
+	breach_tween.tween_property(status_display, 'material_override:emission', Color.WHITE, 0.1)
+
+func reset_reader():
+	reader_state = 'standby'
+	last_card_id = ''
+	biometric_verified = false
+	
+	# Return to standby visuals
+	status_display.get_active_material(0).emission = Color.ORANGE
+	biometric_scanner.light_color = Color.BLUE
+	biometric_scanner.light_energy = 0.5
+	
+	# Reset access lights
+	for light in access_lights:
+		light.light_color = Color.BLUE
+		light.light_energy = 0.3
+	
+	print('🔒 CARD READER: System reset - Awaiting next access attempt')
+
+func override_access(override_code: String):
+	if override_code == 'EMERGENCY_ALPHA_7':
+		print('🔓 EMERGENCY OVERRIDE ACTIVATED')
+		var override_card = {'id': 'OVERRIDE', 'name': 'Emergency Protocol', 'clearance': 'EMERGENCY'}
+		grant_access(override_card)
+	else:
+		deny_access('INVALID_OVERRIDE')
+
+func update_security_level(new_level: String):
+	security_level = new_level
+	print('🔒 CARD READER: Security level updated to: ', security_level)
+	
+	# Visual indication of security level change
+	var level_tween = create_tween()
+	match new_level:
+		'PUBLIC':
+			level_tween.tween_property(status_display, 'material_override:emission', Color.GREEN, 1.0)
+		'RESTRICTED':
+			level_tween.tween_property(status_display, 'material_override:emission', Color.YELLOW, 1.0)
+		'CLASSIFIED':
+			level_tween.tween_property(status_display, 'material_override:emission', Color.ORANGE, 1.0)
+		'TOP_SECRET':
+			level_tween.tween_property(status_display, 'material_override:emission', Color.RED, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy_multiplier = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy_multiplier = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.3, 0.6, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.2, 0.1, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.15, 0.08, 0.02)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.01
+height = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.8, 1, 0.5)
+
+[node name="SecurityCardReader" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ReaderBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="CardSlot" type="MeshInstance3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.04)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="StatusDisplay" type="MeshInstance3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.04)
+mesh = SubResource("BoxMesh_3")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="BiometricScanner" type="SpotLight3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -0.2, 0.04)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+spot_range = 2.0
+spot_angle = 30.0
+
+[node name="AccessLight1" type="OmniLight3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.25, 0.04)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.3
+omni_range = 0.5
+
+[node name="Light1Visual" type="MeshInstance3D" parent="ReaderBase/AccessLight1"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="AccessLight2" type="OmniLight3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.04)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.3
+omni_range = 0.5
+
+[node name="Light2Visual" type="MeshInstance3D" parent="ReaderBase/AccessLight2"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="AccessLight3" type="OmniLight3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.25, 0.04)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.3
+omni_range = 0.5
+
+[node name="Light3Visual" type="MeshInstance3D" parent="ReaderBase/AccessLight3"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="SecurityAntenna" type="MeshInstance3D" parent="ReaderBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]

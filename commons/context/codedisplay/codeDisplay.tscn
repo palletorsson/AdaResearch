@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://5ruomhsxmw3r"]
+
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_gh2hq"]
+[ext_resource type="PackedScene" uid="uid://b3wn56kir0avm" path="res://commons/primitives/panels/DigitalPaper/TextUIControl.tscn" id="4_2eqye"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_mmrse"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_cbktk"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_vae7a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lidq2"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.364706)
+
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(0.7, 0.7, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7u64y"]
+size = Vector3(0.65, 0.2, 0.650062)
+
+[node name="codeDisplay" type="Node3D"]
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("3_gh2hq")]
+screen_size = Vector2(1, 1)
+scene = ExtResource("4_2eqye")
+viewport_size = Vector2(720, 720)
+unshaded = true
+
+[node name="Screen2" type="MeshInstance3D" parent="Viewport2Din3D"]
+transform = Transform3D(1.46, 0, 0, 0, 1.48, -2.01367e-08, 0, 2.98023e-08, 1, 0, 0, -0.0133978)
+material_override = SubResource("StandardMaterial3D_lidq2")
+mesh = SubResource("1")
+skeleton = NodePath("../..")
+
+[node name="HandPoseArea" parent="." instance=ExtResource("5_mmrse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30198, -0.00126704)
+left_pose = ExtResource("6_cbktk")
+right_pose = ExtResource("7_vae7a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+shape = SubResource("BoxShape3D_7u64y")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.07608)

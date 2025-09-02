@@ -1,0 +1,231 @@
+[gd_scene load_steps=11 format=3 uid="uid://ey8l6o4r7uvwx"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var containment_field = $ContainmentChamber/ForceField
+@onready var specimen = $ContainmentChamber/Specimen
+@onready var energy_core = $Base/EnergyCore
+@onready var status_panel = $Base/StatusPanel
+@onready var warning_lights = [$Base/WarningLight1, $Base/WarningLight2]
+
+var containment_active = true
+var energy_level = 100.0
+var specimen_activity = 0.0
+
+signal containment_breach
+signal specimen_analyzed
+signal energy_critical
+
+func _ready():
+	setup_containment_unit()
+	start_containment_systems()
+
+func setup_containment_unit():
+	add_to_group('lab_equipment')
+	add_to_group('hazardous')
+	
+	# Initialize containment field
+	containment_field.get_active_material(0).albedo_color.a = 0.3
+	
+func start_containment_systems():
+	# Specimen floating animation
+	animate_specimen()
+	
+	# Energy core pulsing
+	animate_energy_core()
+	
+	# Status monitoring
+	start_energy_drain()
+
+func animate_specimen():
+	var float_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_tween.set_loops()
+	float_tween.tween_property(specimen, 'position:y', 0.2, 2.0)
+	float_tween.tween_property(specimen, 'position:y', -0.2, 2.0)
+	
+	var rotate_tween = create_tween().set_loops()
+	rotate_tween.tween_property(specimen, 'rotation_degrees:y', 360.0, 8.0)
+
+func animate_energy_core():
+	var energy_tween = create_tween().set_loops()
+	energy_tween.tween_property(energy_core, 'light_energy', 1.8, 1.5)
+	energy_tween.tween_property(energy_core, 'light_energy', 2.5, 1.5)
+
+func start_energy_drain():
+	# Slowly drain energy over time
+	var energy_timer = Timer.new()
+	energy_timer.wait_time = 1.0
+	energy_timer.timeout.connect(drain_energy)
+	add_child(energy_timer)
+	energy_timer.start()
+
+func drain_energy():
+	if containment_active:
+		energy_level -= 0.5
+		specimen_activity += 0.1
+		
+		if energy_level <= 20.0 and get_tree().get_nodes_in_group(\"warning_active\").size() == 0:
+			trigger_warning_state()
+		
+		if energy_level <= 0.0:
+			trigger_containment_breach()
+		
+		# Update visual feedback
+		update_containment_visuals()
+
+func update_containment_visuals():
+	var field_alpha = (energy_level / 100.0) * 0.3
+	containment_field.get_active_material(0).albedo_color.a = field_alpha
+	
+	var core_energy = (energy_level / 100.0) * 2.5
+	energy_core.light_energy = core_energy
+
+func trigger_warning_state():
+	print('CONTAINMENT WARNING: Energy levels critical!')
+	emit_signal('energy_critical')
+	
+	# Flash warning lights
+	for light in warning_lights:
+		light.add_to_group(\"warning_active\")
+		var warning_tween = create_tween()
+		warning_tween.set_loops()
+		warning_tween.tween_property(light, 'light_energy', 5.0, 0.2)
+		warning_tween.tween_property(light, 'light_energy', 0.0, 0.2)
+
+func trigger_containment_breach():
+	containment_active = false
+	print('CONTAINMENT BREACH! Specimen escaped!')
+	emit_signal('containment_breach')
+	
+	# Hide containment field
+	containment_field.visible = false
+	
+	# Specimen becomes more active
+	var escape_tween = create_tween()
+	escape_tween.tween_property(specimen, 'scale', Vector3(1.5, 1.5, 1.5), 2.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		analyze_specimen()
+
+func analyze_specimen():
+	if containment_active and energy_level > 10.0:
+		print('Analyzing specimen... Unique properties detected!')
+		emit_signal('specimen_analyzed')
+		
+		energy_level -= 10.0 # Analysis costs energy
+		
+		# Specimen reacts to analysis
+		var analysis_tween = create_tween()
+		analysis_tween.tween_property(specimen, 'material_override:emission_energy', 2.0, 0.5)
+		analysis_tween.tween_property(specimen, 'material_override:emission_energy', 0.5, 0.5)
+
+func recharge_containment():
+	energy_level = min(100.0, energy_level + 50.0)
+	print('Containment unit recharged. Energy: ', energy_level, '%')
+	
+	if not containment_active and energy_level > 30.0:
+		restore_containment()
+
+func restore_containment():
+	containment_active = true
+	containment_field.visible = true
+	specimen.scale = Vector3.ONE
+	print('Containment restored!')
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+transparency = 1
+albedo_color = Color(0, 0.5, 1, 0.3)
+emission_enabled = true
+emission = Color(0.2, 0.6, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.1, 0.1, 0.12, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(4, 0.2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="Theme" id="Theme_1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+
+[node name="ContainmentUnit" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ContainmentChamber" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="ForceField" type="MeshInstance3D" parent="ContainmentChamber"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Specimen" type="MeshInstance3D" parent="ContainmentChamber"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="EnergyCore" type="OmniLight3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_color = Color(0, 1, 1, 1)
+light_energy = 2.5
+omni_range = 5.0
+
+[node name="WarningLight1" type="OmniLight3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.3, 1.8)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+
+[node name="WarningLight2" type="OmniLight3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.3, -1.8)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+
+[node name="StatusPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="StatusPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "STATUS: STABLE"
+theme = SubResource("Theme_1")
+label_settings = SubResource("LabelSettings_1")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
+

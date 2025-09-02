@@ -1,0 +1,206 @@
+[gd_scene load_steps=12 format=3 uid="uid://uz2v8w0x1yzab"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var radar_screen = $RadarBase/RadarScreen
+@onready var sweep_arm = $RadarBase/SweepArm
+@onready var radar_blips = [$RadarBase/RadarBlip1, $RadarBase/RadarBlip2, $RadarBase/RadarBlip3]
+@onready var range_indicators = [$RadarBase/RangeRing1, $RadarBase/RangeRing2]
+
+var radar_active = false
+var sweep_speed = 4.0
+var detected_objects = []
+var radar_range = 100.0
+
+signal object_detected
+signal radar_sweep_complete
+signal target_locked
+
+func _ready():
+	setup_radar_monitor()
+	start_radar_sweep()
+
+func setup_radar_monitor():
+	add_to_group('monitors')
+	add_to_group('radar_systems')
+
+func start_radar_sweep():
+	radar_active = true
+	
+	# Continuous sweep arm rotation
+	var sweep_tween = create_tween()
+	sweep_tween.set_loops()
+	sweep_tween.tween_property(sweep_arm, 'rotation_degrees:z', 360.0, sweep_speed)
+	sweep_tween.tween_callback(sweep_complete)
+
+func sweep_complete():
+	emit_signal('radar_sweep_complete')
+	update_radar_blips()
+
+func update_radar_blips():
+	# Simulate radar contacts
+	for i in range(radar_blips.size()):
+		var blip = radar_blips[i]
+		if randf() < 0.7:  # 70% chance of detecting object
+			blip.light_energy = randf_range(0.8, 1.5)
+			blip.light_color = get_blip_color()
+		else:
+			blip.light_energy = 0.1  # Fade out
+
+func get_blip_color() -> Color:
+	var blip_type = randi() % 3
+	match blip_type:
+		0: return Color.GREEN  # Friendly
+		1: return Color.YELLOW # Unknown
+		2: return Color.RED    # Hostile
+		_: return Color.WHITE
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		enhance_radar_resolution()
+
+func enhance_radar_resolution():
+	print('📡 RADAR: Enhanced resolution mode activated')
+	sweep_speed = 2.0  # Slower, more detailed sweep
+	
+	# Brighter range indicators
+	for ring in range_indicators:
+		var enhance_tween = create_tween()
+		enhance_tween.tween_property(ring, 'light_energy', 1.0, 1.0)
+
+func detect_new_contact(contact_data: Dictionary):
+	detected_objects.append(contact_data)
+	emit_signal('object_detected', contact_data)
+	
+	print('📡 RADAR: New contact detected - ', contact_data.get('type', 'Unknown'))
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.15, 0.1, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 0.8, 0.2, 0.6)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 1, 0.3, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.6, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.35
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+inner_radius = 0.15
+outer_radius = 0.16
+
+[sub_resource type="TorusMesh" id="TorusMesh_2"]
+inner_radius = 0.25
+outer_radius = 0.26
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1.2, 0.8, 1.2)
+
+[node name="CircularRadarMonitor" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="RadarBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="RadarScreen" type="MeshInstance3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SweepArm" type="MeshInstance3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.2, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RadarBlip1" type="OmniLight3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.12, 0.1)
+light_color = Color(0, 1, 0, 1)
+light_energy = 1.0
+omni_range = 0.5
+
+[node name="Blip1Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip1"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RadarBlip2" type="OmniLight3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.12, -0.05)
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.8
+omni_range = 0.5
+
+[node name="Blip2Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip2"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RadarBlip3" type="OmniLight3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.12, -0.2)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.2
+omni_range = 0.5
+
+[node name="Blip3Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip3"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RangeRing1" type="OmniLight3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+light_color = Color(0, 0.6, 0, 1)
+light_energy = 0.4
+omni_range = 1.0
+
+[node name="Ring1Visual" type="MeshInstance3D" parent="RadarBase/RangeRing1"]
+mesh = SubResource("TorusMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="RangeRing2" type="OmniLight3D" parent="RadarBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+light_color = Color(0, 0.6, 0, 1)
+light_energy = 0.3
+omni_range = 1.0
+
+[node name="Ring2Visual" type="MeshInstance3D" parent="RadarBase/RangeRing2"]
+mesh = SubResource("TorusMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
+

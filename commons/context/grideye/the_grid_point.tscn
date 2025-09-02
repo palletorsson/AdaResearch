@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqg6i6v4gq5h7"]
+
+[ext_resource type="Script" uid="uid://bdg0ynoop5dys" path="res://commons/context/grideye/the_grid_point.gd" id="1_wmfit"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_52k8y"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_umie2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p5ip8"]
+margin = 0.01
+size = Vector3(0.455133, 0.450379, 0.0608956)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qxqq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrwvh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pst81"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pb4q6"]
+albedo_color = Color(0.099986, 0.099986, 0.099986, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4njxg"]
+
+[node name="TheGridPoint" type="Node3D"]
+script = ExtResource("1_wmfit")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, 0.0262383, 0.603338, -0.00904754)
+text = "\"x: \" + str(grid_x) + \" y: \" + str(grid_y)"
+font_size = 16
+outline_size = 8
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677991, 0.421992)
+text = "hello world"
+
+[node name="Label3D3" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.470732, 0.421992)
+text = "hello world"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.982349, -0.129137, 0.135327, 0, 0.723461, 0.690365, -0.187056, -0.67818, 0.710692, 0.619911, 1.72803, 3.31872)
+
+[node name="GrabCube2" type="RigidBody3D" parent="."]
+transform = Transform3D(-0.00370005, 0.999993, 0, -0.999993, -0.00370005, 0, 0, 0, 1, 0, 0.335358, 0)
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("2_52k8y")
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube2"]
+shape = SubResource("BoxShape3D_p5ip8")
+
+[node name="HighlightRing" parent="GrabCube2" instance=ExtResource("4_umie2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109342, 0.00359024, 0.279247)
+material_override = SubResource("StandardMaterial3D_1qxqq")
+
+[node name="PlanGrid" type="MeshInstance3D" parent="GrabCube2"]
+transform = Transform3D(0.205, 0, 0, 0, 0.0021002, -0.204989, 0, 0.204989, 0.0021002, 0, 0, 0.0310826)
+material_override = SubResource("StandardMaterial3D_nrwvh")
+mesh = SubResource("PlaneMesh_pst81")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube2"]
+transform = Transform3D(0.44, 0, 0, 0, 0.435, 0, 0, 0, 0.035, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_pb4q6")
+mesh = SubResource("BoxMesh_4njxg")

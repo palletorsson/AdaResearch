@@ -1,0 +1,295 @@
+[gd_scene load_steps=16 format=3 uid="uid://iy3l0s6v9wxyz"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var pod_chamber = $PodStructure/Chamber
+@onready var neural_crown = $PodStructure/NeuralCrown
+@onready var interface_cables = [$PodStructure/Cable1, $PodStructure/Cable2, $PodStructure/Cable3]
+@onready var consciousness_display = $PodStructure/ConsciousnessDisplay
+@onready var biometric_sensors = [$PodStructure/BiometricSensor1, $PodStructure/BiometricSensor2]
+@onready var pod_lid = $PodStructure/PodLid
+
+var pod_state = 'closed'  # closed, opening, interfacing, emergency
+var neural_activity = 0.0
+var consciousness_level = 100.0
+var interface_established = false
+
+signal neural_interface_connected
+signal consciousness_transfer_detected
+signal biometric_anomaly
+signal pod_malfunction
+
+func _ready():
+	setup_neural_pod()
+	initialize_biometric_systems()
+
+func setup_neural_pod():
+	add_to_group('lab_equipment')
+	add_to_group('neural_devices')
+	add_to_group('restricted_access')
+	
+	# Set initial pod state
+	pod_chamber.material_override.albedo_color.a = 0.8
+
+func initialize_biometric_systems():
+	print('🧠 NEURAL INTERFACE POD: Biometric systems online...')
+	
+	# Neural crown subtle rotation
+	var crown_tween = create_tween()
+	crown_tween.set_loops()
+	crown_tween.tween_property(neural_crown, 'rotation_degrees:y', 10.0, 3.0)
+	crown_tween.tween_property(neural_crown, 'rotation_degrees:y', -10.0, 3.0)
+	crown_tween.tween_property(neural_crown, 'rotation_degrees:y', 0.0, 2.0)
+	
+	# Cable undulation
+	animate_neural_cables()
+	
+	# Consciousness display patterns
+	animate_consciousness_display()
+	
+	# Biometric sensor scanning
+	animate_biometric_sensors()
+
+func animate_neural_cables():
+	for i in range(interface_cables.size()):
+		var cable = interface_cables[i]
+		var cable_tween = create_tween()
+		cable_tween.set_loops()
+		var delay = i * 0.5
+		cable_tween.tween_delay(delay)
+		cable_tween.tween_property(cable, 'scale:y', 1.1, 1.0)
+		cable_tween.tween_property(cable, 'scale:y', 0.9, 1.0)
+		cable_tween.tween_property(cable, 'scale:y', 1.0, 0.5)
+
+func animate_consciousness_display():
+	var display_tween = create_tween()
+	display_tween.set_loops()
+	display_tween.tween_property(consciousness_display, 'material_override:emission_energy', 0.5, 2.0)
+	display_tween.tween_property(consciousness_display, 'material_override:emission_energy', 2.0, 1.0)
+	display_tween.tween_property(consciousness_display, 'material_override:emission_energy', 1.0, 1.0)
+
+func animate_biometric_sensors():
+	for sensor in biometric_sensors:
+		var sensor_tween = create_tween()
+		sensor_tween.set_loops()
+		sensor_tween.tween_property(sensor, 'light_energy', 0.1, 0.5)
+		sensor_tween.tween_property(sensor, 'light_energy', 0.8, 0.2)
+		sensor_tween.tween_property(sensor, 'light_energy', 0.1, 1.3)
+
+func _process(delta):
+	if pod_state == 'interfacing':
+		neural_activity += delta * 5.0
+		
+		# Simulate neural interface effects
+		update_neural_interface_visuals()
+		
+		# Monitor consciousness levels
+		consciousness_level -= delta * 2.0
+		if consciousness_level < 20.0:
+			trigger_consciousness_warning()
+
+func update_neural_interface_visuals():
+	# Neural crown intensity based on activity
+	var crown_intensity = sin(neural_activity) * 0.5 + 1.0
+	neural_crown.get_child(0).light_energy = crown_intensity
+	
+	# Consciousness display shows brain wave patterns
+	var wave_pattern = sin(neural_activity * 3.0) * 0.5 + 1.5
+	consciousness_display.material_override.emission_energy = wave_pattern
+	
+	# Cable energy pulses
+	for cable in interface_cables:
+		var pulse_intensity = sin(neural_activity + randf() * PI) * 0.3 + 0.7
+		cable.material_override.emission_energy = pulse_intensity
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		initiate_pod_sequence()
+
+func initiate_pod_sequence():
+	if pod_state != 'closed':
+		return
+		
+	print('🧠 NEURAL POD: Subject detected - Initiating interface protocol...')
+	pod_state = 'opening'
+	
+	# Pod opening sequence
+	var lid_tween = create_tween()
+	lid_tween.tween_property(pod_lid, 'rotation_degrees:x', -90.0, 3.0)
+	lid_tween.tween_callback(start_neural_interface)
+
+func start_neural_interface():
+	pod_state = 'interfacing'
+	interface_established = true
+	print('🧠 NEURAL INTERFACE: Connection established - Consciousness transfer initiated')
+	emit_signal('neural_interface_connected')
+	
+	# Enhanced neural activity
+	var interface_tween = create_tween()
+	interface_tween.tween_method(increase_neural_activity, 0.0, 10.0, 5.0)
+
+func increase_neural_activity(activity: float):
+	neural_activity = activity
+	
+	# Visual feedback during interface establishment
+	var interface_alpha = activity / 10.0
+	pod_chamber.material_override.emission_energy = interface_alpha * 2.0
+
+func trigger_consciousness_warning():
+	print('⚠️ NEURAL WARNING: Consciousness levels critical!')
+	emit_signal('consciousness_transfer_detected')
+	
+	# Flash biometric warnings
+	for sensor in biometric_sensors:
+		var warning_tween = create_tween()
+		warning_tween.set_loops(5)
+		warning_tween.tween_property(sensor, 'light_color', Color.RED, 0.1)
+		warning_tween.tween_property(sensor, 'light_color', Color.GREEN, 0.1)
+
+func emergency_pod_ejection():
+	print('🚨 NEURAL POD: Emergency ejection protocol activated!')
+	pod_state = 'emergency'
+	emit_signal('pod_malfunction')
+	
+	# Rapid pod opening and system shutdown
+	var emergency_tween = create_tween()
+	emergency_tween.tween_property(pod_lid, 'rotation_degrees:x', -180.0, 0.5)
+	
+	# Shut down all neural systems
+	neural_activity = 0.0
+	consciousness_level = 100.0
+	interface_established = false
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.3, 0.4, 0.8)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+emission_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0.5, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.8, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.3, 1)
+emission_energy = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.3, 0.3, 0.4, 1)
+metallic = 0.6
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 1.0
+height = 2.5
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+inner_radius = 0.8
+outer_radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.03
+bottom_radius = 0.05
+height = 1.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.8, 0.6, 0.1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2"]
+radius = 1.0
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(3, 3, 4)
+
+[node name="NeuralInterfacePod" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="PodStructure" type="Node3D" parent="."]
+
+[node name="Chamber" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CapsuleMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="PodLid" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+mesh = SubResource("CapsuleMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="NeuralCrown" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+mesh = SubResource("TorusMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CrownLight" type="OmniLight3D" parent="PodStructure/NeuralCrown"]
+light_color = Color(1, 0, 0.8, 1)
+light_energy = 0.8
+omni_range = 2.0
+
+[node name="Cable1" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.8, 1.5, 0.3)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Cable2" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.8, 1.5, 0.3)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Cable3" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1.8, -0.8)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="ConsciousnessDisplay" type="MeshInstance3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 1.0, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="BiometricSensor1" type="OmniLight3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.8, 0.8)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.3
+omni_range = 1.5
+
+[node name="Sensor1Visual" type="MeshInstance3D" parent="PodStructure/BiometricSensor1"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BiometricSensor2" type="OmniLight3D" parent="PodStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.8, 0.8)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.3
+omni_range = 1.5
+
+[node name="Sensor2Visual" type="MeshInstance3D" parent="PodStructure/BiometricSensor2"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

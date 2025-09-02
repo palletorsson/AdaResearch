@@ -1,0 +1,148 @@
+[gd_scene load_steps=8 format=3 uid="uid://qz8r9s5t6uvwx"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var seat_cushion = $ChairStructure/SeatCushion
+@onready var chair_base = $ChairStructure/ChairBase
+@onready var gas_cylinder = $ChairStructure/GasCylinder
+@onready var caster_wheels = [$ChairStructure/CasterWheel1, $ChairStructure/CasterWheel2, $ChairStructure/CasterWheel3, $ChairStructure/CasterWheel4, $ChairStructure/CasterWheel5]
+
+var chair_height = 0.0
+var is_occupied = false
+var height_adjustment_range = 0.3
+
+signal chair_occupied
+signal chair_vacated
+signal height_adjusted
+
+func _ready():
+	setup_office_chair()
+	add_subtle_animations()
+
+func setup_office_chair():
+	add_to_group('lab_equipment')
+	add_to_group('furniture')
+	add_to_group('seating')
+
+func add_subtle_animations():
+	# Subtle breathing effect for leather seat
+	var seat_tween = create_tween()
+	seat_tween.set_loops()
+	seat_tween.tween_property(seat_cushion, 'scale', Vector3(1.0, 1.02, 1.0), 4.0)
+	seat_tween.tween_property(seat_cushion, 'scale', Vector3(1.0, 1.0, 1.0), 4.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		occupy_chair()
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group('player'):
+		vacate_chair()
+
+func occupy_chair():
+	is_occupied = true
+	emit_signal('chair_occupied')
+	
+	# Compress seat cushion slightly
+	var compress_tween = create_tween()
+	compress_tween.tween_property(seat_cushion, 'scale:y', 0.9, 0.5)
+
+func vacate_chair():
+	is_occupied = false
+	emit_signal('chair_vacated')
+	
+	# Return seat to normal
+	var decompress_tween = create_tween()
+	decompress_tween.tween_property(seat_cushion, 'scale:y', 1.0, 0.8)
+
+func adjust_height(delta_height: float):
+	chair_height += delta_height
+	chair_height = clamp(chair_height, -height_adjustment_range, height_adjustment_range)
+	
+	# Move entire chair structure
+	var height_tween = create_tween()
+	height_tween.tween_property(self, 'position:y', chair_height, 0.3)
+	
+	emit_signal('height_adjusted', chair_height)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.4, 0.2, 0.15, 1)
+roughness = 0.3
+metallic = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.55, 0.1, 0.55)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="ScientificOfficeChair" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ChairStructure" type="Node3D" parent="."]
+
+[node name="SeatCushion" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="GasCylinder" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="ChairBase" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CasterWheel1" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CasterWheel2" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(-0.309017, 0, 0.951057, 0, 1, 0, -0.951057, 0, -0.309017, 0.077, 0, 0.238)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CasterWheel3" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(-0.809017, 0, 0.587785, 0, 1, 0, -0.587785, 0, -0.809017, -0.202, 0, 0.147)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CasterWheel4" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(-0.809017, 0, -0.587785, 0, 1, 0, 0.587785, 0, -0.809017, -0.202, 0, -0.147)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CasterWheel5" type="MeshInstance3D" parent="ChairStructure"]
+transform = Transform3D(-0.309017, 0, -0.951057, 0, 1, 0, 0.951057, 0, -0.309017, 0.077, 0, -0.238)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

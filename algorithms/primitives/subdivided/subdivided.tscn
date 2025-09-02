@@ -1,0 +1,258 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvqxh2y3w8qko"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+# Scene for comparing different cube subdivision and smoothing methods
+
+func _ready():
+	# Create both cubes for comparison
+	create_surface_tool_cube()
+	create_built_in_smooth_cube()
+	
+	print(\"Scene loaded! Compare the two subdivision methods:\")
+	print(\"Left (Cyan): SurfaceTool with manual subdivision\")
+	print(\"Right (Orange): Built-in BoxMesh with subdivision parameters\")
+
+# Method 1: SurfaceTool with manual subdivision and smoothing
+func create_surface_tool_cube():
+	print(\"Creating SurfaceTool subdivided cube...\")
+	
+	var surface_tool = SurfaceTool.new()
+	var subdivisions = 4  # Number of subdivisions per face
+	
+	# Begin surface creation
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	# Generate subdivided cube geometry
+	generate_subdivided_cube_geometry(surface_tool, subdivisions)
+	
+	# Apply smoothing operations
+	surface_tool.generate_normals()  # Smooth normals
+	surface_tool.generate_tangents() # Tangents for advanced materials
+	surface_tool.index()             # Optimize mesh
+	
+	# Create the mesh
+	var array_mesh = surface_tool.commit()
+	
+	# Get the existing MeshInstance3D node
+	var mesh_instance = get_node(\"SurfaceToolCube\")
+	mesh_instance.mesh = array_mesh
+	
+ 
+# Method 2: Built-in BoxMesh with subdivision parameters
+func create_built_in_smooth_cube():
+	print(\"Creating built-in subdivided cube...\")
+	
+	var box_mesh = BoxMesh.new()
+	box_mesh.size = Vector3.ONE
+	
+	# Set subdivision parameters
+	box_mesh.subdivide_width = 8
+	box_mesh.subdivide_height = 8
+	box_mesh.subdivide_depth = 8
+	
+	# Get the existing MeshInstance3D node
+	var mesh_instance = get_node(\"BuiltInCube\")
+	mesh_instance.mesh = box_mesh
+	
+	print(\"Built-in cube created with subdivisions: \", box_mesh.subdivide_width, \"x\", box_mesh.subdivide_height, \"x\", box_mesh.subdivide_depth)
+
+# Generate subdivided cube geometry using SurfaceTool
+func generate_subdivided_cube_geometry(surface_tool: SurfaceTool, subdivisions: int):
+	var size = 1.0
+	var half_size = size * 0.5
+	
+	# Define the 6 faces of a cube with proper winding order
+	var faces = [
+		# Front face (+Z)
+		[Vector3(-half_size, -half_size, half_size), Vector3(half_size, -half_size, half_size), 
+		 Vector3(half_size, half_size, half_size), Vector3(-half_size, half_size, half_size)],
+		# Back face (-Z) 
+		[Vector3(half_size, -half_size, -half_size), Vector3(-half_size, -half_size, -half_size),
+		 Vector3(-half_size, half_size, -half_size), Vector3(half_size, half_size, -half_size)],
+		# Right face (+X)
+		[Vector3(half_size, -half_size, half_size), Vector3(half_size, -half_size, -half_size),
+		 Vector3(half_size, half_size, -half_size), Vector3(half_size, half_size, half_size)],
+		# Left face (-X)
+		[Vector3(-half_size, -half_size, -half_size), Vector3(-half_size, -half_size, half_size),
+		 Vector3(-half_size, half_size, half_size), Vector3(-half_size, half_size, -half_size)],
+		# Top face (+Y)
+		[Vector3(-half_size, half_size, half_size), Vector3(half_size, half_size, half_size),
+		 Vector3(half_size, half_size, -half_size), Vector3(-half_size, half_size, -half_size)],
+		# Bottom face (-Y)
+		[Vector3(-half_size, -half_size, -half_size), Vector3(half_size, -half_size, -half_size),
+		 Vector3(half_size, -half_size, half_size), Vector3(-half_size, -half_size, half_size)]
+	]
+	
+	# Subdivide each face
+	for face in faces:
+		subdivide_face(surface_tool, face, subdivisions)
+
+# Subdivide a single face into smaller quads
+func subdivide_face(surface_tool: SurfaceTool, corners: Array, subdivisions: int):
+	var step = 1.0 / subdivisions
+	
+	# Generate vertices for subdivided face
+	for i in subdivisions:
+		for j in subdivisions:
+			var u1 = i * step
+			var v1 = j * step
+			var u2 = (i + 1) * step
+			var v2 = (j + 1) * step
+			
+			# Calculate positions using bilinear interpolation
+			var p1 = lerp_quad(corners, u1, v1)
+			var p2 = lerp_quad(corners, u2, v1)
+			var p3 = lerp_quad(corners, u2, v2)
+			var p4 = lerp_quad(corners, u1, v2)
+			
+			# Calculate UV coordinates for texturing
+			var uv1 = Vector2(u1, v1)
+			var uv2 = Vector2(u2, v1)
+			var uv3 = Vector2(u2, v2)
+			var uv4 = Vector2(u1, v2)
+			
+			# Add triangles for this subdivision with UVs
+			add_quad_as_triangles_with_uv(surface_tool, p1, p2, p3, p4, uv1, uv2, uv3, uv4)
+
+# Bilinear interpolation for quad vertices
+func lerp_quad(corners: Array, u: float, v: float) -> Vector3:
+	var top = corners[0].lerp(corners[1], u)
+	var bottom = corners[3].lerp(corners[2], u)
+	return top.lerp(bottom, v)
+
+# Add a quad as two triangles with UV coordinates
+func add_quad_as_triangles_with_uv(surface_tool: SurfaceTool, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3, 
+								  uv1: Vector2, uv2: Vector2, uv3: Vector2, uv4: Vector2):
+	# First triangle (p1, p2, p3)
+	surface_tool.set_uv(uv1)
+	surface_tool.add_vertex(p1)
+	surface_tool.set_uv(uv2)
+	surface_tool.add_vertex(p2)
+	surface_tool.set_uv(uv3)
+	surface_tool.add_vertex(p3)
+	
+	# Second triangle (p1, p3, p4)
+	surface_tool.set_uv(uv1)
+	surface_tool.add_vertex(p1)
+	surface_tool.set_uv(uv3)
+	surface_tool.add_vertex(p3)
+	surface_tool.set_uv(uv4)
+	surface_tool.add_vertex(p4)
+
+# Optional: Add rotation for better visualization
+func _process(delta):
+	# Slowly rotate both cubes for better viewing
+	var surface_cube = get_node(\"SurfaceToolCube\")
+	var builtin_cube = get_node(\"BuiltInCube\")
+	
+	surface_cube.rotation.y += delta * 0.5
+	surface_cube.rotation.x += delta * 0.3
+	
+	builtin_cube.rotation.y += delta * 0.5
+	builtin_cube.rotation.x += delta * 0.3
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0, 1, 1, 1)
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(1, 0.647059, 0, 1)
+roughness = 0.3
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.2, 0.2, 0.3, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.9, 1, 1)
+ambient_light_energy = 0.3
+
+[node name="SubdividedCubeComparison" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 6)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 4, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="SurfaceToolCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="BuiltInCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Labels" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SurfaceToolLabel" type="Label" parent="UI/Labels"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -100.0
+offset_right = 350.0
+offset_bottom = -50.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "SurfaceTool Method
+• Manual subdivision
+• Custom geometry generation
+• Full control over vertices
+• generate_normals() smoothing"
+
+[node name="BuiltInLabel" type="Label" parent="UI/Labels"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -100.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.647059, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "BoxMesh Method
+• Built-in subdivision parameters
+• subdivide_width/height/depth
+• Optimized internal generation
+• Automatic smooth normals"
+horizontal_alignment = 2
+
+[node name="TitleLabel" type="Label" parent="UI/Labels"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Godot 4 Cube Subdivision & Smoothing Comparison"
+horizontal_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

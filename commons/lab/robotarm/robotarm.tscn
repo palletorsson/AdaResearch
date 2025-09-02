@@ -1,0 +1,306 @@
+[gd_scene load_steps=14 format=3 uid="uid://mz7p4q8s9abcd"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var base_joint = $RobotBase/BaseJoint
+@onready var shoulder_joint = $RobotBase/BaseJoint/ShoulderJoint
+@onready var elbow_joint = $RobotBase/BaseJoint/ShoulderJoint/ElbowJoint
+@onready var wrist_joint = $RobotBase/BaseJoint/ShoulderJoint/ElbowJoint/WristJoint
+@onready var end_effector = $RobotBase/BaseJoint/ShoulderJoint/ElbowJoint/WristJoint/EndEffector
+@onready var status_lights = [$RobotBase/StatusLight1, $RobotBase/StatusLight2]
+@onready var precision_laser = $RobotBase/BaseJoint/ShoulderJoint/ElbowJoint/WristJoint/PrecisionLaser
+
+var robot_state = 'idle'  # idle, calibrating, working, error
+var current_task = ''
+var precision_mode = false
+var joint_positions = [0.0, 0.0, 0.0, 0.0]  # Base, shoulder, elbow, wrist rotations
+
+var predefined_movements = [
+	{'name': 'sample_pickup', 'positions': [45.0, -30.0, 60.0, -90.0], 'duration': 2.0},
+	{'name': 'microscope_positioning', 'positions': [90.0, -45.0, 90.0, 0.0], 'duration': 3.0},
+	{'name': 'precision_manipulation', 'positions': [0.0, -60.0, 120.0, -45.0], 'duration': 4.0},
+	{'name': 'storage_placement', 'positions': [-45.0, -20.0, 45.0, 90.0], 'duration': 2.5}
+]
+
+signal robot_task_complete
+signal precision_operation_finished
+signal robot_malfunction
+signal sample_acquired
+
+func _ready():
+	setup_robot_arm()
+	start_idle_behavior()
+
+func setup_robot_arm():
+	add_to_group('lab_equipment')
+	add_to_group('robotic_systems')
+	add_to_group('precision_instruments')
+	
+	# Initialize status lights
+	status_lights[0].light_color = Color.GREEN
+	status_lights[1].light_color = Color.BLUE
+
+func start_idle_behavior():
+	print('🤖 ROBOT ARM: System initialized - Awaiting instructions')
+	robot_state = 'idle'
+	
+	# Subtle idle movements
+	var idle_tween = create_tween()
+	idle_tween.set_loops()
+	idle_tween.tween_property(base_joint, 'rotation_degrees:y', 5.0, 8.0)
+	idle_tween.tween_property(base_joint, 'rotation_degrees:y', -5.0, 8.0)
+	idle_tween.tween_property(base_joint, 'rotation_degrees:y', 0.0, 4.0)
+	
+	# Status light breathing effect
+	animate_status_lights()
+
+func animate_status_lights():
+	for light in status_lights:
+		var light_tween = create_tween()
+		light_tween.set_loops()
+		light_tween.tween_property(light, 'light_energy', 0.3, 2.0)
+		light_tween.tween_property(light, 'light_energy', 0.8, 2.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		if robot_state == 'idle':
+			start_calibration_sequence()
+		elif robot_state == 'calibrating':
+			begin_precision_task()
+
+func start_calibration_sequence():
+	robot_state = 'calibrating'
+	print('🤖 ROBOT ARM: Initiating calibration sequence...')
+	
+	# Calibration movement pattern
+	var cal_tween = create_tween()
+	cal_tween.tween_property(shoulder_joint, 'rotation_degrees:x', -90.0, 1.0)
+	cal_tween.tween_property(elbow_joint, 'rotation_degrees:x', 90.0, 1.0)
+	cal_tween.tween_property(wrist_joint, 'rotation_degrees:x', -45.0, 1.0)
+	cal_tween.tween_property(base_joint, 'rotation_degrees:y', 360.0, 2.0)
+	cal_tween.tween_callback(calibration_complete)
+
+func calibration_complete():
+	print('🤖 ROBOT ARM: Calibration complete - Ready for precision operations')
+	robot_state = 'working'
+	
+	# Activate precision laser
+	precision_laser.light_energy = 0.5
+	precision_mode = true
+
+func begin_precision_task():
+	if predefined_movements.size() == 0:
+		return
+		
+	var random_task = predefined_movements[randi() % predefined_movements.size()]
+	current_task = random_task.name
+	
+	print('🤖 ROBOT ARM: Executing task - ', current_task)
+	
+	# Execute the movement sequence
+	execute_movement_sequence(random_task.positions, random_task.duration)
+
+func execute_movement_sequence(target_positions: Array, duration: float):
+	robot_state = 'working'
+	
+	# Simultaneous joint movement
+	var movement_tween = create_tween()
+	movement_tween.set_parallel(true)
+	
+	movement_tween.tween_property(base_joint, 'rotation_degrees:y', target_positions[0], duration)
+	movement_tween.tween_property(shoulder_joint, 'rotation_degrees:x', target_positions[1], duration)
+	movement_tween.tween_property(elbow_joint, 'rotation_degrees:x', target_positions[2], duration)
+	movement_tween.tween_property(wrist_joint, 'rotation_degrees:x', target_positions[3], duration)
+	
+	# Precision laser tracking
+	if precision_mode:
+		movement_tween.tween_property(precision_laser, 'light_energy', 1.5, duration * 0.3)
+		movement_tween.tween_property(precision_laser, 'light_energy', 0.5, duration * 0.7)
+	
+	movement_tween.tween_callback(task_complete)
+
+func task_complete():
+	print('🤖 ROBOT ARM: Task completed - ', current_task)
+	emit_signal('robot_task_complete', current_task)
+	
+	if current_task == 'sample_pickup':
+		emit_signal('sample_acquired')
+	
+	# Return to ready position
+	return_to_ready_position()
+
+func return_to_ready_position():
+	var return_tween = create_tween()
+	return_tween.set_parallel(true)
+	return_tween.tween_property(base_joint, 'rotation_degrees:y', 0.0, 1.5)
+	return_tween.tween_property(shoulder_joint, 'rotation_degrees:x', 0.0, 1.5)
+	return_tween.tween_property(elbow_joint, 'rotation_degrees:x', 0.0, 1.5)
+	return_tween.tween_property(wrist_joint, 'rotation_degrees:x', 0.0, 1.5)
+	return_tween.tween_callback(ready_for_next_task)
+
+func ready_for_next_task():
+	robot_state = 'idle'
+	current_task = ''
+	precision_laser.light_energy = 0.1
+	print('🤖 ROBOT ARM: Ready for next operation')
+
+func emergency_stop():
+	print('🛑 ROBOT ARM: Emergency stop activated!')
+	robot_state = 'error'
+	emit_signal('robot_malfunction')
+	
+	# Stop all movements immediately
+	var stop_tween = create_tween()
+	stop_tween.kill()
+	
+	# Error indicator
+	status_lights[0].light_color = Color.RED
+	var error_flash_tween = create_tween()
+	error_flash_tween.set_loops(10)
+	error_flash_tween.tween_property(status_lights[0], 'light_energy', 2.0, 0.1)
+	error_flash_tween.tween_property(status_lights[0], 'light_energy', 0.1, 0.1)
+
+func activate_precision_mode():
+	precision_mode = true
+	precision_laser.light_energy = 1.0
+	print('🎯 ROBOT ARM: Precision mode activated - Laser targeting online')
+	emit_signal('precision_operation_finished')
+
+func perform_sample_analysis():
+	if robot_state != 'idle':
+		return
+		
+	print('🔬 ROBOT ARM: Performing automated sample analysis')
+	begin_precision_task()
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4"]
+top_radius = 0.04
+bottom_radius = 0.04
+height = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.1, 0.1, 0.15)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 2, 2)
+
+[node name="PrecisionRobotArm" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="RobotBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="BaseJoint" type="Node3D" parent="RobotBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="ShoulderSegment" type="MeshInstance3D" parent="RobotBase/BaseJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="ShoulderJoint" type="Node3D" parent="RobotBase/BaseJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="UpperArmSegment" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="ElbowJoint" type="Node3D" parent="RobotBase/BaseJoint/ShoulderJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ForearmSegment" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderJoint/ElbowJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("CylinderMesh_4")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="WristJoint" type="Node3D" parent="RobotBase/BaseJoint/ShoulderJoint/ElbowJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="EndEffector" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderJoint/ElbowJoint/WristJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="PrecisionLaser" type="SpotLight3D" parent="RobotBase/BaseJoint/ShoulderJoint/ElbowJoint/WristJoint"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.1, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.1
+spot_range = 3.0
+spot_angle = 5.0
+
+[node name="StatusLight1" type="OmniLight3D" parent="RobotBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.15, 0)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="Status1Visual" type="MeshInstance3D" parent="RobotBase/StatusLight1"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StatusLight2" type="OmniLight3D" parent="RobotBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.15, 0)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="Status2Visual" type="MeshInstance3D" parent="RobotBase/StatusLight2"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

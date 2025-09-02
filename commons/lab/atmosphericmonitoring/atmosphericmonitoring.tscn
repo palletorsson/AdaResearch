@@ -1,0 +1,298 @@
+[gd_scene load_steps=15 format=3 uid="uid://fz9m7q8s4tuvw"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var sensor_array = $StationBase/SensorArray
+@onready var data_displays = [$StationBase/Display1, $StationBase/Display2, $StationBase/Display3]
+@onready var atmospheric_scanner = $StationBase/AtmosphericScanner
+@onready var ventilation_fan = $StationBase/VentilationFan
+
+var monitoring_active = false
+var atmospheric_data = {
+	'temperature': 22.5,
+	'humidity': 45.0,
+	'pressure': 1013.25,
+	'co2_levels': 400.0,
+	'particulate_matter': 12.0
+}
+
+signal atmospheric_alert
+signal data_collected
+signal environmental_change
+
+func _ready():
+	setup_monitoring_station()
+	start_continuous_monitoring()
+
+func setup_monitoring_station():
+	add_to_group('lab_equipment')
+	add_to_group('environmental')
+	
+	# Initialize displays with different colors
+	data_displays[0].material_override.emission = Color.GREEN
+	data_displays[1].material_override.emission = Color.CYAN  
+	data_displays[2].material_override.emission = Color.YELLOW
+
+func start_continuous_monitoring():
+	# Sensor array rotation
+	var sensor_tween = create_tween()
+	sensor_tween.set_loops()
+	sensor_tween.tween_property(sensor_array, 'rotation_degrees:y', 360.0, 10.0)
+	
+	# Ventilation fan animation
+	var fan_tween = create_tween()
+	fan_tween.set_loops()
+	fan_tween.tween_property(ventilation_fan, 'rotation_degrees:z', 3600.0, 2.0)
+	
+	# Scanner sweep effect
+	animate_scanner()
+	
+	# Start data collection timer
+	var data_timer = Timer.new()
+	data_timer.wait_time = 3.0
+	data_timer.timeout.connect(collect_atmospheric_data)
+	data_timer.autostart = true
+	add_child(data_timer)
+
+func animate_scanner():
+	var scan_tween = create_tween()
+	scan_tween.set_loops()
+	scan_tween.tween_property(atmospheric_scanner, 'light_energy', 0.5, 1.0)
+	scan_tween.tween_property(atmospheric_scanner, 'light_energy', 2.0, 0.2)
+	scan_tween.tween_property(atmospheric_scanner, 'light_energy', 0.5, 1.0)
+
+func collect_atmospheric_data():
+	if not monitoring_active:
+		return
+		
+	# Simulate atmospheric fluctuations
+	atmospheric_data.temperature += randf_range(-0.5, 0.5)
+	atmospheric_data.humidity += randf_range(-2.0, 2.0)
+	atmospheric_data.pressure += randf_range(-1.0, 1.0)
+	atmospheric_data.co2_levels += randf_range(-5.0, 5.0)
+	atmospheric_data.particulate_matter += randf_range(-1.0, 1.0)
+	
+	# Clamp values to realistic ranges
+	atmospheric_data.temperature = clamp(atmospheric_data.temperature, 18.0, 28.0)
+	atmospheric_data.humidity = clamp(atmospheric_data.humidity, 30.0, 70.0)
+	atmospheric_data.pressure = clamp(atmospheric_data.pressure, 990.0, 1030.0)
+	atmospheric_data.co2_levels = clamp(atmospheric_data.co2_levels, 350.0, 800.0)
+	atmospheric_data.particulate_matter = clamp(atmospheric_data.particulate_matter, 5.0, 50.0)
+	
+	emit_signal('data_collected', atmospheric_data)
+	
+	# Check for critical conditions
+	check_atmospheric_alerts()
+	
+	# Update display colors based on readings
+	update_display_indicators()
+
+func check_atmospheric_alerts():
+	var alerts = []
+	
+	if atmospheric_data.co2_levels > 600.0:
+		alerts.append('High CO2 levels detected')
+	
+	if atmospheric_data.particulate_matter > 35.0:
+		alerts.append('Elevated particulate matter')
+		
+	if atmospheric_data.temperature > 26.0:
+		alerts.append('Temperature above optimal range')
+	
+	if alerts.size() > 0:
+		print('ATMOSPHERIC ALERT: ', alerts)
+		emit_signal('atmospheric_alert', alerts)
+		flash_warning_displays()
+
+func update_display_indicators():
+	# Temperature display (green to red)
+	var temp_ratio = (atmospheric_data.temperature - 18.0) / 10.0
+	var temp_color = Color.GREEN.lerp(Color.RED, temp_ratio)
+	data_displays[0].material_override.emission = temp_color
+	
+	# CO2 display (green to orange)
+	var co2_ratio = (atmospheric_data.co2_levels - 350.0) / 450.0
+	var co2_color = Color.GREEN.lerp(Color.ORANGE, co2_ratio)
+	data_displays[1].material_override.emission = co2_color
+	
+	# Particulate display (cyan to magenta)
+	var pm_ratio = atmospheric_data.particulate_matter / 50.0
+	var pm_color = Color.CYAN.lerp(Color.MAGENTA, pm_ratio)
+	data_displays[2].material_override.emission = pm_color
+
+func flash_warning_displays():
+	for display in data_displays:
+		var warning_tween = create_tween()
+		warning_tween.set_loops(3)
+		warning_tween.tween_property(display, 'material_override:emission_energy', 3.0, 0.1)
+		warning_tween.tween_property(display, 'material_override:emission_energy', 1.0, 0.1)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_detailed_scan()
+
+func activate_detailed_scan():
+	monitoring_active = true
+	print('Atmospheric monitoring station activated')
+	print('Current readings:')
+	print('  Temperature: %.1f°C' % atmospheric_data.temperature)
+	print('  Humidity: %.1f%%' % atmospheric_data.humidity)
+	print('  Pressure: %.1f hPa' % atmospheric_data.pressure)
+	print('  CO2: %.1f ppm' % atmospheric_data.co2_levels)
+	print('  Particulates: %.1f μg/m³' % atmospheric_data.particulate_matter)
+	
+	# Enhanced scanning mode
+	var enhanced_tween = create_tween()
+	enhanced_tween.tween_property(atmospheric_scanner, 'light_energy', 3.0, 1.0)
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group('player'):
+		monitoring_active = false
+		
+		var normal_tween = create_tween()
+		normal_tween.tween_property(atmospheric_scanner, 'light_energy', 0.5, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.25, 0.3, 1)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.2, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.6, 1, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.3, 0.3, 0.4, 1)
+metallic = 0.5
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.8, 1.2, 0.4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.12, 0.08, 0.02)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.08
+height = 0.16
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.03
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1.5, 2, 1)
+
+[node name="AtmosphericMonitoringStation" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="StationBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="SensorArray" type="Node3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="MainSensor" type="MeshInstance3D" parent="StationBase/SensorArray"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="Sensor1" type="MeshInstance3D" parent="StationBase/SensorArray"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Sensor2" type="MeshInstance3D" parent="StationBase/SensorArray"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Display1" type="MeshInstance3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.3, 0.18)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Display2" type="MeshInstance3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.18)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Display3" type="MeshInstance3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.3, 0.18)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="AtmosphericScanner" type="SpotLight3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.4, 0.15)
+light_color = Color(0.5, 0.8, 1, 1)
+light_energy = 0.5
+spot_range = 5.0
+spot_angle = 60.0
+
+[node name="VentilationFan" type="MeshInstance3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, 0)
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="FanBlade1" type="MeshInstance3D" parent="StationBase/VentilationFan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0, 0)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="FanBlade2" type="MeshInstance3D" parent="StationBase/VentilationFan"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0.04)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="FanBlade3" type="MeshInstance3D" parent="StationBase/VentilationFan"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.04, 0, 0)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="FanBlade4" type="MeshInstance3D" parent="StationBase/VentilationFan"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, -0.04)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="AirQualitySensor" type="MeshInstance3D" parent="StationBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.2, 0.15)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbeqe8d82cme0"]
+
+[ext_resource type="Shader" uid="uid://3lcigicds0kv" path="res://commons/resourses/shaders/magnifyingLens.gdshader" id="1_6v7so"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mly57"]
+render_priority = 0
+shader = ExtResource("1_6v7so")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/specular = 0.5
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.5
+shader_parameter/magnification_strength = 0.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_sncmn"]
+
+[node name="magnifyingGlass" type="Node3D"]
+
+[node name="GlassLensMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.1, 0, 0, 0, 0.4, 0, 0.0959786, 0)
+material_override = SubResource("ShaderMaterial_mly57")
+mesh = SubResource("SphereMesh_sncmn")

@@ -1,0 +1,401 @@
+[gd_scene load_steps=16 format=3 uid="uid://oz9r8s6t5uvwx"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var main_pack = $BackpackStructure/MainPack
+@onready var power_cells = [$BackpackStructure/PowerCell1, $BackpackStructure/PowerCell2]
+@onready var data_storage = $BackpackStructure/DataStorage
+@onready var environmental_sensors = [$BackpackStructure/TempSensor, $BackpackStructure/RadSensor, $BackpackStructure/AtmoSensor]
+@onready var communication_array = $BackpackStructure/CommArray
+@onready var emergency_beacon = $BackpackStructure/EmergencyBeacon
+
+var pack_status = 'operational'  # operational, low_power, emergency, offline
+var power_level = 100.0
+var data_capacity = 75.0  # Percentage used
+var environmental_data = {
+	'temperature': 22.0,
+	'radiation': 0.1,
+	'atmospheric_pressure': 1013.0,
+	'oxygen_level': 21.0
+}
+
+signal power_critical
+signal data_storage_full
+signal environmental_alert
+signal emergency_activated
+signal research_data_collected
+
+func _ready():
+	setup_research_backpack()
+	start_continuous_monitoring()
+
+func setup_research_backpack():
+	add_to_group('lab_equipment')
+	add_to_group('portable_devices')
+	add_to_group('research_tools')
+	
+	print('🎒 RESEARCH PACK: Field research equipment initialized')
+
+func start_continuous_monitoring():
+	# Power cell monitoring
+	animate_power_cells()
+	
+	# Environmental sensor sweeps
+	animate_environmental_sensors()
+	
+	# Communication array rotation
+	animate_communication_array()
+	
+	# Start system timers
+	start_power_drain()
+	start_data_collection()
+
+func animate_power_cells():
+	for i in range(power_cells.size()):
+		var cell = power_cells[i]
+		var pulse_delay = i * 1.0
+		
+		var cell_tween = create_tween()
+		cell_tween.set_loops()
+		cell_tween.tween_delay(pulse_delay)
+		cell_tween.tween_property(cell, 'light_energy', 0.3, 0.5)
+		cell_tween.tween_property(cell, 'light_energy', 1.2, 0.3)
+		cell_tween.tween_property(cell, 'light_energy', 0.6, 1.2)
+
+func animate_environmental_sensors():
+	for sensor in environmental_sensors:
+		var sensor_tween = create_tween()
+		sensor_tween.set_loops()
+		sensor_tween.tween_property(sensor, 'light_energy', 0.2, 2.0)
+		sensor_tween.tween_property(sensor, 'light_energy', 0.8, 0.5)
+		sensor_tween.tween_property(sensor, 'light_energy', 0.4, 1.5)
+
+func animate_communication_array():
+	var comm_tween = create_tween()
+	comm_tween.set_loops()
+	comm_tween.tween_property(communication_array, 'rotation_degrees:y', 360.0, 8.0)
+
+func start_power_drain():
+	var power_timer = Timer.new()
+	power_timer.wait_time = 2.0
+	power_timer.timeout.connect(update_power_systems)
+	power_timer.autostart = true
+	add_child(power_timer)
+
+func start_data_collection():
+	var data_timer = Timer.new()
+	data_timer.wait_time = 3.0
+	data_timer.timeout.connect(collect_environmental_data)
+	data_timer.autostart = true
+	add_child(data_timer)
+
+func update_power_systems():
+	if pack_status == 'operational':
+		power_level -= 0.5  # Gradual power drain
+		
+		# Update power cell visuals
+		update_power_visuals()
+		
+		# Check for low power conditions
+		if power_level < 20.0:
+			trigger_low_power_mode()
+		elif power_level < 5.0:
+			trigger_emergency_mode()
+
+func update_power_visuals():
+	var power_ratio = power_level / 100.0
+	
+	for cell in power_cells:
+		# Color shift from green to red as power depletes
+		var power_color = Color.GREEN.lerp(Color.RED, 1.0 - power_ratio)
+		cell.light_color = power_color
+		
+		# Intensity decreases with power level
+		cell.light_energy = power_ratio * 1.5
+
+func collect_environmental_data():
+	if pack_status == 'offline':
+		return
+		
+	# Simulate environmental readings with some variation
+	environmental_data.temperature += randf_range(-1.0, 1.0)
+	environmental_data.radiation += randf_range(-0.02, 0.05)
+	environmental_data.atmospheric_pressure += randf_range(-5.0, 5.0)
+	environmental_data.oxygen_level += randf_range(-0.5, 0.5)
+	
+	# Clamp values to realistic ranges
+	environmental_data.temperature = clamp(environmental_data.temperature, -10.0, 40.0)
+	environmental_data.radiation = clamp(environmental_data.radiation, 0.0, 2.0)
+	environmental_data.atmospheric_pressure = clamp(environmental_data.atmospheric_pressure, 950.0, 1050.0)
+	environmental_data.oxygen_level = clamp(environmental_data.oxygen_level, 15.0, 25.0)
+	
+	# Update data storage
+	data_capacity += 1.0
+	if data_capacity >= 100.0:
+		trigger_storage_full()
+	
+	# Check for environmental alerts
+	check_environmental_conditions()
+	
+	emit_signal('research_data_collected', environmental_data)
+
+func check_environmental_conditions():
+	var alerts = []
+	
+	if environmental_data.radiation > 0.5:
+		alerts.append('Elevated radiation detected')
+	
+	if environmental_data.temperature > 35.0 or environmental_data.temperature < 0.0:
+		alerts.append('Extreme temperature conditions')
+	
+	if environmental_data.oxygen_level < 18.0:
+		alerts.append('Low oxygen levels')
+	
+	if alerts.size() > 0:
+		emit_signal('environmental_alert', alerts)
+		flash_sensor_warnings()
+
+func flash_sensor_warnings():
+	for sensor in environmental_sensors:
+		var warning_tween = create_tween()
+		warning_tween.set_loops(3)
+		warning_tween.tween_property(sensor, 'light_color', Color.RED, 0.2)
+		warning_tween.tween_property(sensor, 'light_color', Color.BLUE, 0.2)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		display_pack_status()
+
+func display_pack_status():
+	print('🎒 RESEARCH PACK STATUS:')
+	print('  Power Level: %.1f%%' % power_level)
+	print('  Data Storage: %.1f%% used' % data_capacity)
+	print('  Status: ', pack_status.to_upper())
+	print('  Temperature: %.1f°C' % environmental_data.temperature)
+	print('  Radiation: %.3f mSv/h' % environmental_data.radiation)
+	print('  O2 Level: %.1f%%' % environmental_data.oxygen_level)
+
+func trigger_low_power_mode():
+	pack_status = 'low_power'
+	print('⚠️ RESEARCH PACK: Low power mode activated')
+	emit_signal('power_critical', power_level)
+	
+	# Dim non-essential systems
+	data_storage.light_energy = 0.2
+	communication_array.get_child(0).light_energy = 0.3
+
+func trigger_emergency_mode():
+	pack_status = 'emergency'
+	print('🚨 RESEARCH PACK: Emergency mode - Critical power levels!')
+	emit_signal('emergency_activated')
+	
+	# Activate emergency beacon
+	emergency_beacon.light_energy = 2.0
+	var beacon_tween = create_tween()
+	beacon_tween.set_loops()
+	beacon_tween.tween_property(emergency_beacon, 'light_color', Color.RED, 0.5)
+	beacon_tween.tween_property(emergency_beacon, 'light_color', Color.ORANGE, 0.5)
+
+func trigger_storage_full():
+	print('💾 RESEARCH PACK: Data storage at capacity!')
+	emit_signal('data_storage_full', data_capacity)
+	
+	# Flash data storage indicator
+	var storage_tween = create_tween()
+	storage_tween.set_loops(5)
+	storage_tween.tween_property(data_storage, 'light_color', Color.YELLOW, 0.3)
+	storage_tween.tween_property(data_storage, 'light_color', Color.GREEN, 0.3)
+
+func recharge_power():
+	power_level = 100.0
+	pack_status = 'operational'
+	print('🔋 RESEARCH PACK: Power cells recharged - All systems nominal')
+	
+	# Restore normal operation visuals
+	emergency_beacon.light_energy = 0.0
+	data_storage.light_energy = 0.8
+	communication_array.get_child(0).light_energy = 1.0
+
+func upload_research_data():
+	if data_capacity > 0.0:
+		print('📡 RESEARCH PACK: Uploading %.1f%% research data...' % data_capacity)
+		
+		# Upload animation
+		var upload_tween = create_tween()
+		upload_tween.tween_property(communication_array.get_child(0), 'light_energy', 3.0, 2.0)
+		upload_tween.tween_property(data_storage, 'light_energy', 0.2, 2.0)
+		upload_tween.tween_callback(data_upload_complete)
+
+func data_upload_complete():
+	data_capacity = 0.0
+	print('✅ RESEARCH PACK: Data upload complete - Storage cleared')
+
+func activate_emergency_protocol():
+	print('🆘 RESEARCH PACK: Emergency protocol activated - Transmitting distress signal')
+	pack_status = 'emergency'
+	
+	# Full system alert
+	for sensor in environmental_sensors:
+		sensor.light_color = Color.RED
+		sensor.light_energy = 2.0
+	
+	emergency_beacon.light_energy = 3.0
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.25, 0.3, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.4, 0.6, 0.15)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.15, 0.1, 0.08)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.15
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1, 1, 0.5)
+
+[node name="ResearchBackpack" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="BackpackStructure" type="Node3D" parent="."]
+
+[node name="MainPack" type="MeshInstance3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="PowerCell1" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.2, 0.1)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.8
+omni_range = 1.0
+
+[node name="Cell1Visual" type="MeshInstance3D" parent="BackpackStructure/PowerCell1"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="PowerCell2" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.2, 0.1)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.8
+omni_range = 1.0
+
+[node name="Cell2Visual" type="MeshInstance3D" parent="BackpackStructure/PowerCell2"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="DataStorage" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.1)
+light_color = Color(0, 0.8, 1, 1)
+light_energy = 0.6
+omni_range = 0.8
+
+[node name="StorageVisual" type="MeshInstance3D" parent="BackpackStructure/DataStorage"]
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="TempSensor" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.5, 0.1)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.4
+omni_range = 0.5
+
+[node name="TempSensorVisual" type="MeshInstance3D" parent="BackpackStructure/TempSensor"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RadSensor" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.5, 0.1)
+light_color = Color(1, 0.8, 0, 1)
+light_energy = 0.4
+omni_range = 0.5
+
+[node name="RadSensorVisual" type="MeshInstance3D" parent="BackpackStructure/RadSensor"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="AtmoSensor" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0.1)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.4
+omni_range = 0.5
+
+[node name="AtmoSensorVisual" type="MeshInstance3D" parent="BackpackStructure/AtmoSensor"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CommArray" type="MeshInstance3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="CommLight" type="OmniLight3D" parent="BackpackStructure/CommArray"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+light_color = Color(0.5, 0.8, 1, 1)
+light_energy = 1.0
+omni_range = 2.0
+
+[node name="EmergencyBeacon" type="OmniLight3D" parent="BackpackStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.1)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.0
+omni_range = 3.0
+
+[node name="BeaconVisual" type="MeshInstance3D" parent="BackpackStructure/EmergencyBeacon"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

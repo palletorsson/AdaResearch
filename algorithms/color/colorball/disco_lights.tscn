@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5ypb1wprupid"]
+
+[ext_resource type="Shader" uid="uid://bj0il7yud7icc" path="res://commons/resourses/shaders/discoLights.gdshader" id="1_wno5d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnuxx"]
+render_priority = 0
+shader = ExtResource("1_wno5d")
+shader_parameter/time_speed = 4.846
+shader_parameter/base_color = Vector3(0.5, 0.5, 0.5)
+shader_parameter/intensity_factor = 1.867
+
+[sub_resource type="SphereMesh" id="SphereMesh_sn17e"]
+
+[node name="DiscoLights" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_pnuxx")
+mesh = SubResource("SphereMesh_sn17e")

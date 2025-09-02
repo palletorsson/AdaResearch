@@ -1,0 +1,155 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwq8x3y9z1abc"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var eyepiece = $Base/Stand/EyepieceArm/Eyepiece
+@onready var objective_turret = $Base/Stand/ObjectiveTurret
+@onready var focus_knob = $Base/Stand/FocusKnob
+@onready var light = $Base/Stand/Light
+
+var is_being_used = false
+var focus_position = 0.0
+var objective_rotation = 0.0
+
+signal microscope_activated
+
+func _ready():
+	setup_interactions()
+	animate_idle()
+
+func setup_interactions():
+	# Make components interactable
+	add_to_group('interactable')
+	
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		print('Microscope ready for use')
+		is_being_used = true
+		emit_signal('microscope_activated')
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group('player'):
+		is_being_used = false
+
+func animate_idle():
+	# Subtle breathing light effect
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(light, 'light_energy', 0.8, 2.0)
+	tween.tween_property(light, 'light_energy', 1.2, 2.0)
+
+func _input(event):
+	if is_being_used and event is InputEventKey:
+		match event.keycode:
+			KEY_F:
+				adjust_focus()
+			KEY_R:
+				rotate_objectives()
+
+func adjust_focus():
+	focus_position += 0.1
+	if focus_position > 1.0:
+		focus_position = 0.0
+	
+	var tween = create_tween()
+	tween.tween_property(eyepiece, 'position:y', focus_position * 0.2, 0.5)
+
+func rotate_objectives():
+	objective_rotation += 90.0
+	if objective_rotation >= 360.0:
+		objective_rotation = 0.0
+	
+	var tween = create_tween()
+	tween.tween_property(objective_turret, 'rotation_degrees:y', objective_rotation, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.8, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.4, 0.15, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1, 1.2, 1)
+
+[node name="ResearchMicroscope" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Stand" type="Node3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+
+[node name="MainColumn" type="MeshInstance3D" parent="Base/Stand"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="EyepieceArm" type="Node3D" parent="Base/Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Eyepiece" type="MeshInstance3D" parent="Base/Stand/EyepieceArm"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.3, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ObjectiveTurret" type="Node3D" parent="Base/Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Objective1" type="MeshInstance3D" parent="Base/Stand/ObjectiveTurret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, -0.2, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Objective2" type="MeshInstance3D" parent="Base/Stand/ObjectiveTurret"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.08, -0.2, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Stage" type="MeshInstance3D" parent="Base/Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="FocusKnob" type="MeshInstance3D" parent="Base/Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Light" type="SpotLight3D" parent="Base/Stand"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, -0.5, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 1.2
+spot_range = 2.0
+spot_angle = 30.0
+
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

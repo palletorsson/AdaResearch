@@ -1,0 +1,211 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxy9d4k8m2efg"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var flask_liquid = $Table/ChemicalFlask/Liquid
+@onready var beaker_liquid = $Table/Beaker/Liquid
+@onready var tube_rack = $Table/TestTubeRack
+@onready var burner_flame = $Table/BunsenBurner/Flame
+
+var is_experiment_running = false
+var liquid_colors = [
+	Color.CYAN, Color.GREEN, Color.MAGENTA, 
+	Color.YELLOW, Color.RED, Color.BLUE
+]
+var current_color_index = 0
+
+signal experiment_started
+signal chemical_mixed
+
+func _ready():
+	setup_chemistry_station()
+	start_ambient_effects()
+
+func setup_chemistry_station():
+	# Make station interactable
+	add_to_group('lab_equipment')
+	
+	# Set initial liquid states
+	flask_liquid.material_override.albedo_color = liquid_colors[0]
+	beaker_liquid.material_override.albedo_color = liquid_colors[1]
+
+func start_ambient_effects():
+	# Gentle bubbling animation for liquids
+	animate_liquid_bubbles()
+	
+	# Flickering flame effect
+	animate_bunsen_flame()
+
+func animate_liquid_bubbles():
+	var flask_tween = create_tween()
+	flask_tween.set_loops()
+	flask_tween.tween_property(flask_liquid, 'scale:y', 1.1, 1.5)
+	flask_tween.tween_property(flask_liquid, 'scale:y', 1.0, 1.5)
+	
+	var beaker_tween = create_tween()
+	beaker_tween.set_loops()
+	beaker_tween.tween_property(beaker_liquid, 'scale:y', 1.05, 2.0)
+	beaker_tween.tween_property(beaker_liquid, 'scale:y', 1.0, 2.0)
+
+func animate_bunsen_flame():
+	var flame_tween = create_tween()
+	flame_tween.set_loops()
+	flame_tween.tween_property(burner_flame, 'light_energy', 0.8, 0.3)
+	flame_tween.tween_property(burner_flame, 'light_energy', 1.2, 0.4)
+	flame_tween.tween_property(burner_flame, 'light_energy', 1.0, 0.2)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player') and not is_experiment_running:
+		start_chemical_reaction()
+
+func start_chemical_reaction():
+	is_experiment_running = true
+	emit_signal('experiment_started')
+	
+	print('Chemical reaction initiated...')
+	
+	# Color change sequence
+	var color_tween = create_tween()
+	color_tween.tween_method(change_liquid_colors, 0.0, 1.0, 3.0)
+	color_tween.tween_callback(complete_experiment)
+
+func change_liquid_colors(progress: float):
+	current_color_index = int(progress * liquid_colors.size()) % liquid_colors.size()
+	var new_color = liquid_colors[current_color_index]
+	
+	flask_liquid.material_override.albedo_color = new_color
+	beaker_liquid.material_override.albedo_color = new_color.inverted()
+
+func complete_experiment():
+	print('Chemical analysis complete!')
+	emit_signal('chemical_mixed')
+	is_experiment_running = false
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+metallic = 0.0
+roughness = 0.8
+transparency = 1
+albedo_color = Color(0.9, 0.9, 0.95, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 1, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.5, 0.5, 1)
+emission_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 0.4, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.2, 0.05, 0.8)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.06
+bottom_radius = 0.08
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1.5, 1, 1)
+
+[node name="ChemicalApparatus" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="Table" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="ChemicalFlask" type="Node3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.25, 0)
+
+[node name="FlaskBody" type="MeshInstance3D" parent="Table/ChemicalFlask"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Liquid" type="MeshInstance3D" parent="Table/ChemicalFlask"]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Beaker" type="Node3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.15, 0)
+
+[node name="BeakerBody" type="MeshInstance3D" parent="Table/Beaker"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="Liquid" type="MeshInstance3D" parent="Table/Beaker"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, -0.02, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="TestTubeRack" type="Node3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -0.3)
+
+[node name="Rack" type="MeshInstance3D" parent="Table/TestTubeRack"]
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="TestTube1" type="MeshInstance3D" parent="Table/TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="TestTube2" type="MeshInstance3D" parent="Table/TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="TestTube3" type="MeshInstance3D" parent="Table/TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.1, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="BunsenBurner" type="Node3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.15, 0.2)
+
+[node name="Base" type="MeshInstance3D" parent="Table/BunsenBurner"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Flame" type="OmniLight3D" parent="Table/BunsenBurner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+light_color = Color(1, 0.4, 0, 1)
+light_energy = 1.0
+omni_range = 1.5
+
+[node name="FlameMesh" type="MeshInstance3D" parent="Table/BunsenBurner/Flame"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

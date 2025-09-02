@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh87cji2met00"]
+
+[ext_resource type="PackedScene" uid="uid://cjt6ep2vedby" path="res://commons/context/teslasparks/tesla_sphere.tscn" id="2_hvjf4"]
+[ext_resource type="Script" uid="uid://c8cyc5t21u37p" path="res://commons/context/teslasparks/tesla_sparks.gd" id="3_js714"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ldmra"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up5iy"]
+albedo_color = Color(1, 1, 0.290196, 1)
+emission_enabled = true
+emission = Color(0.976471, 0.894118, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tncuo"]
+
+[node name="teslaSparks" type="Node3D"]
+script = ExtResource("3_js714")
+sphere_scene = ExtResource("2_hvjf4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.998978, -0.0452061, 0, 0.0452061, 0.998978, 0, 0, 1.87483)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0261111, 1.58897, -1.15622)
+visible = false
+text = "tesla debug"
+
+[node name="teslasphereGrabMeLow" type="RigidBody3D" parent="." groups=["teslasphere"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 4
+collision_mask = 196615
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 0.001
+gravity_scale = -0.1
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("3_js714")
+
+[node name="startNode" type="Node3D" parent="teslasphereGrabMeLow"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="teslasphereGrabMeLow/startNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3201, 0)
+visible = false
+text = "hello"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teslasphereGrabMeLow"]
+transform = Transform3D(0.265, 0, -2.8244e-15, 0, 0.265, 0, 2.8244e-15, 0, 0.265, 0, 0, 0)
+shape = SubResource("SphereShape3D_ldmra")
+
+[node name="sphere" type="MeshInstance3D" parent="teslasphereGrabMeLow"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_up5iy")
+mesh = SubResource("SphereMesh_tncuo")
+skeleton = NodePath("../startNode")
+
+[node name="teslasphereGrabMeTop" type="RigidBody3D" parent="." groups=["teslasphere"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.926425, 0)
+collision_layer = 4
+collision_mask = 196615
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 0.001
+gravity_scale = -0.1
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("3_js714")
+
+[node name="endNode" type="Node3D" parent="teslasphereGrabMeTop"]
+transform = Transform3D(-4.54598e-08, 0, 1.04, 0, 1.04, 0, -1.04, 0, -4.54598e-08, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="teslasphereGrabMeTop/endNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32772, 0)
+visible = false
+text = "hello "
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teslasphereGrabMeTop"]
+transform = Transform3D(0.22, 0, -2.34478e-15, 0, 0.22, 0, 2.34478e-15, 0, 0.22, 0, 0, 0)
+shape = SubResource("SphereShape3D_ldmra")
+
+[node name="sphere" type="MeshInstance3D" parent="teslasphereGrabMeTop"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_up5iy")
+mesh = SubResource("SphereMesh_tncuo")
+skeleton = NodePath("../endNode")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50701, 0)
+visible = false
+light_color = Color(0.258824, 1, 1, 1)

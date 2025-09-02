@@ -1,0 +1,322 @@
+[gd_scene load_steps=18 format=3 uid="uid://hx2k9r5y8bcde"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var quantum_core = $ChamberStructure/QuantumCore
+@onready var resonance_rings = [$ChamberStructure/ResonanceRing1, $ChamberStructure/ResonanceRing2, $ChamberStructure/ResonanceRing3]
+@onready var energy_conduits = [$ChamberStructure/EnergyConduit1, $ChamberStructure/EnergyConduit2, $ChamberStructure/EnergyConduit3, $ChamberStructure/EnergyConduit4]
+@onready var control_console = $ControlConsole
+@onready var quantum_field_generator = $ChamberStructure/QuantumFieldGenerator
+
+var quantum_state = 'stable'  # stable, resonating, critical, collapsed
+var resonance_frequency = 0.0
+var quantum_energy = 0.0
+var phase_alignment = 0.0
+
+signal quantum_resonance_achieved
+signal quantum_collapse_detected
+signal reality_distortion_warning
+
+func _ready():
+	setup_quantum_chamber()
+	initialize_quantum_systems()
+
+func setup_quantum_chamber():
+	add_to_group('lab_equipment')
+	add_to_group('quantum_devices')
+	add_to_group('high_energy')
+	
+	# Set initial quantum field state
+	quantum_field_generator.light_energy = 0.1
+
+func initialize_quantum_systems():
+	print('⚛️ QUANTUM RESONANCE CHAMBER: Initializing quantum field generators...')
+	
+	# Start resonance ring rotation at different speeds
+	for i in range(resonance_rings.size()):
+		var ring = resonance_rings[i]
+		var speed = (i + 1) * 2.0  # Different rotation speeds
+		var direction = 1 if i % 2 == 0 else -1  # Alternate directions
+		
+		var ring_tween = create_tween()
+		ring_tween.set_loops()
+		ring_tween.tween_property(ring, 'rotation_degrees:y', 360.0 * direction, speed)
+	
+	# Energy conduit pulsing sequence
+	animate_energy_conduits()
+	
+	# Quantum core oscillation
+	animate_quantum_core()
+
+func animate_energy_conduits():
+	for i in range(energy_conduits.size()):
+		var conduit = energy_conduits[i]
+		var delay = i * 0.25
+		
+		var conduit_tween = create_tween()
+		conduit_tween.set_loops()
+		conduit_tween.tween_delay(delay)
+		conduit_tween.tween_property(conduit, 'light_energy', 0.2, 0.1)
+		conduit_tween.tween_property(conduit, 'light_energy', 1.5, 0.3)
+		conduit_tween.tween_property(conduit, 'light_energy', 0.2, 0.6)
+
+func animate_quantum_core():
+	var core_tween = create_tween()
+	core_tween.set_loops()
+	core_tween.tween_property(quantum_core, 'scale', Vector3(1.1, 1.1, 1.1), 1.5)
+	core_tween.tween_property(quantum_core, 'scale', Vector3(0.9, 0.9, 0.9), 1.5)
+	
+	var core_light_tween = create_tween()
+	core_light_tween.set_loops()
+	core_light_tween.tween_property(quantum_core.get_child(0), 'light_energy', 3.0, 2.0)
+	core_light_tween.tween_property(quantum_core.get_child(0), 'light_energy', 1.0, 2.0)
+
+func _process(delta):
+	if quantum_state == 'resonating':
+		resonance_frequency += delta * 2.0
+		quantum_energy += delta * 10.0
+		phase_alignment = sin(resonance_frequency) * 0.5 + 0.5
+		
+		# Update visual effects based on quantum state
+		update_quantum_visuals()
+		
+		# Check for quantum events
+		if quantum_energy > 100.0:
+			trigger_quantum_resonance()
+		elif quantum_energy > 150.0:
+			warn_reality_distortion()
+
+func update_quantum_visuals():
+	# Quantum field intensity
+	var field_intensity = quantum_energy / 100.0
+	quantum_field_generator.light_energy = field_intensity * 2.0
+	
+	# Ring rotation speed increases with energy
+	var speed_multiplier = 1.0 + (quantum_energy / 50.0)
+	# This would be applied to ring tweens if we stored them
+	
+	# Phase alignment affects color
+	var core_color = Color.CYAN.lerp(Color.MAGENTA, phase_alignment)
+	quantum_core.get_child(0).light_color = core_color
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_quantum_chamber()
+
+func activate_quantum_chamber():
+	if quantum_state != 'stable':
+		return
+		
+	print('⚛️ QUANTUM CHAMBER: Activating resonance protocols...')
+	quantum_state = 'resonating'
+	
+	# Start quantum resonance buildup
+	var activation_tween = create_tween()
+	activation_tween.tween_method(increase_quantum_energy, 0.0, 50.0, 5.0)
+
+func increase_quantum_energy(energy: float):
+	quantum_energy = energy
+	
+	# Visual feedback during energy buildup
+	var field_alpha = energy / 50.0
+	quantum_field_generator.light_energy = field_alpha * 1.5
+
+func trigger_quantum_resonance():
+	print('⚛️ QUANTUM RESONANCE ACHIEVED! Reality fluctuations detected!')
+	quantum_state = 'critical'
+	emit_signal('quantum_resonance_achieved')
+	
+	# Dramatic visual effect
+	var resonance_tween = create_tween()
+	resonance_tween.tween_property(quantum_field_generator, 'light_energy', 5.0, 0.5)
+	resonance_tween.tween_property(quantum_field_generator, 'light_energy', 2.0, 2.0)
+	
+	# Reset after resonance event
+	get_tree().create_timer(8.0).timeout.connect(reset_quantum_chamber)
+
+func warn_reality_distortion():
+	print('⚠️ QUANTUM WARNING: Reality distortion field detected!')
+	emit_signal('reality_distortion_warning')
+	
+	# Emergency shutdown to prevent quantum collapse
+	emergency_quantum_shutdown()
+
+func emergency_quantum_shutdown():
+	print('🛑 QUANTUM EMERGENCY SHUTDOWN')
+	quantum_state = 'collapsed'
+	emit_signal('quantum_collapse_detected')
+	
+	# All effects stop
+	quantum_energy = 0.0
+	quantum_field_generator.light_energy = 0.0
+	
+	get_tree().create_timer(10.0).timeout.connect(reset_quantum_chamber)
+
+func reset_quantum_chamber():
+	quantum_state = 'stable'
+	quantum_energy = 0.0
+	resonance_frequency = 0.0
+	phase_alignment = 0.0
+	print('⚛️ QUANTUM CHAMBER: Systems reset - Ready for next experiment')
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.9
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 1, 1, 0.4)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.8, 1, 1)
+emission_energy = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(0.8, 0, 1, 1)
+emission_energy = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.2, 0.2, 0.3, 1)
+metallic = 0.8
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(3.0, 0.3, 3.0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+inner_radius = 1.0
+outer_radius = 1.2
+
+[sub_resource type="TorusMesh" id="TorusMesh_2"]
+inner_radius = 1.5
+outer_radius = 1.7
+
+[sub_resource type="TorusMesh" id="TorusMesh_3"]
+inner_radius = 2.0
+outer_radius = 2.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.8, 1.2, 0.3)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(8, 4, 8)
+
+[node name="QuantumResonanceChamber" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ChamberStructure" type="Node3D" parent="."]
+
+[node name="Base" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="QuantumCore" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="CoreLight" type="OmniLight3D" parent="ChamberStructure/QuantumCore"]
+light_color = Color(0, 1, 1, 1)
+light_energy = 1.0
+omni_range = 4.0
+
+[node name="ResonanceRing1" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("TorusMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ResonanceRing2" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2.0, 0)
+mesh = SubResource("TorusMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ResonanceRing3" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("TorusMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="EnergyConduit1" type="OmniLight3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.0, 0)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.2
+omni_range = 2.0
+
+[node name="Conduit1Visual" type="MeshInstance3D" parent="ChamberStructure/EnergyConduit1"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="EnergyConduit2" type="OmniLight3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.0, 0)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.2
+omni_range = 2.0
+
+[node name="Conduit2Visual" type="MeshInstance3D" parent="ChamberStructure/EnergyConduit2"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="EnergyConduit3" type="OmniLight3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 1.5)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.2
+omni_range = 2.0
+
+[node name="Conduit3Visual" type="MeshInstance3D" parent="ChamberStructure/EnergyConduit3"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="EnergyConduit4" type="OmniLight3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, -1.5)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.2
+omni_range = 2.0
+
+[node name="Conduit4Visual" type="MeshInstance3D" parent="ChamberStructure/EnergyConduit4"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="QuantumFieldGenerator" type="SpotLight3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 4.0, 0)
+light_color = Color(0.5, 0, 1, 1)
+light_energy = 0.1
+spot_range = 10.0
+spot_angle = 45.0
+
+[node name="ControlConsole" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.6, 0)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="QuantumField" type="MeshInstance3D" parent="ChamberStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

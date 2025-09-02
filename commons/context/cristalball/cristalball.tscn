@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj7kmru0tgj8j"]
+
+[ext_resource type="Shader" uid="uid://kb1kdymuvcf6" path="res://commons/resourses/shaders/cristal_ball.gdshader" id="2_tvrcn"]
+[ext_resource type="Script" uid="uid://4qdnwkg1auat" path="res://commons/context/cristalball/touchSphere.gd" id="2_wh3qn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cajkf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0rr7"]
+render_priority = 0
+shader = ExtResource("2_tvrcn")
+shader_parameter/is_touched = false
+shader_parameter/u_time = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_hrntr"]
+
+[node name="CristalBall" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-1.50996e-08, -0.2, -1.74846e-08, -0.2, 1.50996e-08, 1.74846e-08, -1.74846e-08, 1.74846e-08, -0.2, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_wh3qn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, -7.64278e-15, -7.10543e-15, -5.37353e-16, 1, 7.10543e-15, 7.10543e-15, -7.10543e-15, 1, -0.289203, 2.18343e-08, 2.5283e-08)
+shape = SubResource("SphereShape3D_cajkf")
+
+[node name="Label3D" type="Label3D" parent="Area3D"]
+transform = Transform3D(0.000534706, -0.09976, -0.0069033, -0.0999462, -0.000309819, -0.00326428, 0.00323506, 0.00691704, -0.099708, -0.123666, -0.000698355, -0.0330276)
+text = "touch"
+font_size = 36
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-5.8511e-08, -0.775, -6.77528e-08, -0.775, 5.85109e-08, 6.77528e-08, -6.77528e-08, 6.77528e-08, -0.775, -0.299493, 2.26111e-08, 2.61825e-08)
+material_override = SubResource("ShaderMaterial_y0rr7")
+mesh = SubResource("SphereMesh_hrntr")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.602815)
+
+[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]

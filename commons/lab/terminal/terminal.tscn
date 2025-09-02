@@ -1,0 +1,185 @@
+[gd_scene load_steps=10 format=3 uid="uid://dx7k5n9p3qrst"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var screen = $ComputerBase/Monitor/Screen
+@onready var screen_light = $ComputerBase/Monitor/ScreenLight
+@onready var status_lights = [$ComputerBase/StatusLight1, $ComputerBase/StatusLight2, $ComputerBase/StatusLight3]
+
+var is_active = false
+var data_processing = false
+var screen_flicker_timer = 0.0
+
+signal terminal_accessed
+signal data_analysis_complete
+
+func _ready():
+	setup_terminal()
+	start_idle_animations()
+
+func setup_terminal():
+	add_to_group('lab_equipment')
+	screen.material_override.emission_energy = 0.5
+
+func start_idle_animations():
+	# Screen glow pulse
+	var screen_tween = create_tween()
+	screen_tween.set_loops()
+	screen_tween.tween_property(screen_light, 'light_energy', 0.3, 2.0)
+	screen_tween.tween_property(screen_light, 'light_energy', 0.7, 2.0)
+	
+	# Status light sequence
+	animate_status_lights()
+
+func animate_status_lights():
+	for i in range(status_lights.size()):
+		var light = status_lights[i]
+		var tween = create_tween()
+		tween.set_loops()
+		var delay = i * 0.5
+		tween.tween_delay(delay)
+		tween.tween_property(light, 'light_energy', 1.0, 0.2)
+		tween.tween_property(light, 'light_energy', 0.2, 0.8)
+
+func _process(delta):
+	if data_processing:
+		screen_flicker_timer += delta * 8.0
+		var flicker = sin(screen_flicker_timer) * 0.1 + 0.9
+		screen.material_override.emission_energy = flicker
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_terminal()
+
+func activate_terminal():
+	if is_active:
+		return
+		
+	is_active = true
+	data_processing = true
+	emit_signal('terminal_accessed')
+	
+	print('Research terminal activated - Running data analysis...')
+	
+	# Intense screen activity
+	var activation_tween = create_tween()
+	activation_tween.tween_property(screen_light, 'light_energy', 1.5, 0.5)
+	
+	# Complete analysis after 4 seconds
+	get_tree().create_timer(4.0).timeout.connect(complete_analysis)
+
+func complete_analysis():
+	data_processing = false
+	print('Data analysis complete - Results available')
+	emit_signal('data_analysis_complete')
+	
+	# Return to normal state
+	var complete_tween = create_tween()
+	complete_tween.tween_property(screen_light, 'light_energy', 0.5, 1.0)
+	
+	# Reset after 2 seconds
+	get_tree().create_timer(2.0).timeout.connect(reset_terminal)
+
+func reset_terminal():
+	is_active = false
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.3, 1)
+emission_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0.2, 0.7, 1, 1)
+emission_energy = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.6, 0.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.35, 0.25, 0.02)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(1, 0.8, 0.8)
+
+[node name="ResearchTerminal" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ComputerBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Monitor" type="Node3D" parent="ComputerBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.15)
+
+[node name="Screen" type="MeshInstance3D" parent="ComputerBase/Monitor"]
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="ScreenLight" type="SpotLight3D" parent="ComputerBase/Monitor"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0.1)
+light_color = Color(0, 1, 0.3, 1)
+light_energy = 0.5
+spot_range = 2.0
+spot_angle = 45.0
+
+[node name="StatusLight1" type="OmniLight3D" parent="ComputerBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.15, 0.18)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.2
+omni_range = 0.5
+
+[node name="StatusIndicator1" type="MeshInstance3D" parent="ComputerBase/StatusLight1"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StatusLight2" type="OmniLight3D" parent="ComputerBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.18)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.2
+omni_range = 0.5
+
+[node name="StatusIndicator2" type="MeshInstance3D" parent="ComputerBase/StatusLight2"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="StatusLight3" type="OmniLight3D" parent="ComputerBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.15, 0.18)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.2
+omni_range = 0.5
+
+[node name="StatusIndicator3" type="MeshInstance3D" parent="ComputerBase/StatusLight3"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Keyboard" type="MeshInstance3D" parent="ComputerBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0.15)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

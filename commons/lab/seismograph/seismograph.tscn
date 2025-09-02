@@ -1,0 +1,326 @@
+[gd_scene load_steps=16 format=3 uid="uid://pz7q8r9s4tuvw"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var seismometer_drum = $SeismoBase/SeismometerDrum
+@onready var recording_needle = $SeismoBase/SeismometerDrum/RecordingNeedle
+@onready var data_display = $SeismoBase/DataDisplay
+@onready var status_lights = [$SeismoBase/StatusLight1, $SeismoBase/StatusLight2, $SeismoBase/StatusLight3]
+@onready var paper_roll = $SeismoBase/PaperRoll
+@onready var sensor_array = $SeismoBase/SensorArray
+
+var seismic_activity = 0.0
+var recording_active = false
+var sensitivity = 1.0
+var baseline_reading = 0.0
+var earthquake_detected = false
+
+signal seismic_event_detected
+signal earthquake_warning
+signal data_recording_complete
+
+func _ready():
+	setup_seismograph()
+	start_monitoring()
+
+func setup_seismograph():
+	add_to_group('lab_equipment')
+	add_to_group('monitoring_devices')
+	add_to_group('geological_instruments')
+	
+	print('📊 SEISMOGRAPH: Geological monitoring station initialized')
+
+func start_monitoring():
+	# Drum rotation for continuous recording
+	animate_recording_drum()
+	
+	# Status light sequence
+	animate_status_lights()
+	
+	# Begin seismic monitoring
+	start_seismic_detection()
+
+func animate_recording_drum():
+	var drum_tween = create_tween()
+	drum_tween.set_loops()
+	drum_tween.tween_property(seismometer_drum, 'rotation_degrees:z', 360.0, 60.0)  # Slow rotation
+
+func animate_status_lights():
+	for i in range(status_lights.size()):
+		var light = status_lights[i]
+		var delay = i * 0.5
+		
+		var light_tween = create_tween()
+		light_tween.set_loops()
+		light_tween.tween_interval(delay)
+		light_tween.tween_property(light, 'light_energy', 0.2, 1.0)
+		light_tween.tween_property(light, 'light_energy', 0.8, 0.3)
+		light_tween.tween_property(light, 'light_energy', 0.4, 1.7)
+
+func start_seismic_detection():
+	var monitor_timer = Timer.new()
+	monitor_timer.wait_time = 0.1  # High frequency monitoring
+	monitor_timer.timeout.connect(detect_seismic_activity)
+	add_child(monitor_timer)
+	monitor_timer.start()
+
+func detect_seismic_activity():
+	# Simulate seismic readings with various noise levels
+	var background_noise = randf_range(-0.1, 0.1)
+	var current_reading = background_noise
+	
+	# Occasional seismic events
+	if randf() < 0.01:  # 1% chance per frame
+		trigger_seismic_event()
+	elif randf() < 0.001:  # 0.1% chance of major earthquake
+		trigger_earthquake()
+	
+	seismic_activity = current_reading + baseline_reading
+	
+	# Update needle position
+	update_recording_needle()
+	
+	# Update visual displays
+	update_seismic_displays()
+
+func update_recording_needle():
+	# Needle movement based on seismic activity
+	var needle_angle = seismic_activity * sensitivity * 45.0  # Max 45 degree deflection
+	needle_angle = clamp(needle_angle, -45.0, 45.0)
+	
+	var needle_tween = create_tween()
+	needle_tween.tween_property(recording_needle, 'rotation_degrees:z', needle_angle, 0.05)
+
+func update_seismic_displays():
+	# Display intensity affects color and brightness
+	var intensity = abs(seismic_activity)
+	var display_color = Color.GREEN
+	
+	if intensity > 0.8:
+		display_color = Color.RED
+	elif intensity > 0.6:
+		display_color = Color.ORANGE
+	elif intensity > 0.3:
+		display_color = Color.YELLOW
+	
+	data_display.get_active_material(0).emission = display_color
+	data_display.get_active_material(0).emission_energy_multiplier = 0.5 + intensity * 1.5
+
+func trigger_seismic_event():
+	var event_magnitude = randf_range(0.2, 0.8)
+	print('🌍 SEISMOGRAPH: Seismic event detected - Magnitude: %.2f' % event_magnitude)
+	emit_signal('seismic_event_detected', event_magnitude)
+	
+	# Temporary spike in readings
+	baseline_reading = event_magnitude
+	
+	# Visual response
+	flash_seismic_alert()
+	
+	# Return to normal after event
+	var decay_tween = create_tween()
+	decay_tween.tween_method(Callable(self, \"set_baseline_reading\"), baseline_reading, 0.0, 3.0)
+
+func trigger_earthquake():
+	earthquake_detected = true
+	var magnitude = randf_range(3.0, 7.5)
+	print('🚨 EARTHQUAKE DETECTED! Magnitude: %.1f' % magnitude)
+	emit_signal('earthquake_warning', magnitude)
+	
+	# Intense seismic activity
+	baseline_reading = magnitude / 10.0  # Scale down for needle
+	
+	# Emergency alert sequence
+	trigger_earthquake_alert()
+	
+	# Extended decay time for earthquakes
+	var earthquake_tween = create_tween()
+	earthquake_tween.tween_method(Callable(self, \"set_baseline_reading\"), baseline_reading, 0.0, 10.0)
+	earthquake_tween.tween_callback(earthquake_complete)
+
+func flash_seismic_alert():
+	# Flash status lights for seismic events
+	for light in status_lights:
+		var alert_tween = create_tween()
+		alert_tween.set_loops(3)
+		alert_tween.tween_property(light, 'light_color', Color.YELLOW, 0.1)
+		alert_tween.tween_property(light, 'light_color', Color.BLUE, 0.1)
+
+func trigger_earthquake_alert():
+	# Full emergency alert for earthquakes
+	for light in status_lights:
+		var emergency_tween = create_tween()
+		emergency_tween.set_loops(10)
+		emergency_tween.tween_property(light, 'light_color', Color.RED, 0.2)
+		emergency_tween.tween_property(light, 'light_energy', 2.0, 0.1)
+		emergency_tween.tween_property(light, 'light_energy', 0.1, 0.1)
+
+func set_baseline_reading(current_value: float):
+	baseline_reading = current_value
+
+func earthquake_complete():
+	earthquake_detected = false
+	print('📊 SEISMOGRAPH: Earthquake event concluded - Returning to normal monitoring')
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		display_seismic_status()
+
+func display_seismic_status():
+	print('📊 SEISMOGRAPH STATUS:')
+	print('  Current Activity: %.3f' % seismic_activity)
+	print('  Sensitivity: %.1fx' % sensitivity)
+	print('  Recording: ', 'ACTIVE' if recording_active else 'STANDBY')
+	if earthquake_detected:
+		print('  🚨 EARTHQUAKE IN PROGRESS')
+
+func calibrate_sensitivity(new_sensitivity: float):
+	sensitivity = clamp(new_sensitivity, 0.1, 5.0)
+	print('📊 SEISMOGRAPH: Sensitivity calibrated to %.1fx' % sensitivity)
+
+func start_recording():
+	recording_active = true
+	print('📊 SEISMOGRAPH: Recording activated')
+	
+	# Paper roll animation
+	var paper_tween = create_tween()
+	paper_tween.set_loops()
+	paper_tween.tween_property(paper_roll, 'position:x', -0.1, 30.0)
+
+func stop_recording():
+	recording_active = false
+	print('📊 SEISMOGRAPH: Recording stopped')
+	emit_signal('data_recording_complete')
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.25, 0.3, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.9, 0.9, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.2, 0.8, 0.6)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.25, 0.15, 0.05)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.4, 0.05, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 1.5, 1.5)
+
+[node name="SeismographStation" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="SeismoBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="SeismometerDrum" type="MeshInstance3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.5, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RecordingNeedle" type="MeshInstance3D" parent="SeismoBase/SeismometerDrum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="DataDisplay" type="MeshInstance3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.25)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StatusLight1" type="OmniLight3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.25, 0.25)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="Status1Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight1"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="StatusLight2" type="OmniLight3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="Status2Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight2"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="StatusLight3" type="OmniLight3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.25)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+omni_range = 1.0
+
+[node name="Status3Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight3"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="PaperRoll" type="MeshInstance3D" parent="SeismoBase"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.3, 0.3, 0)
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="SensorArray" type="MeshInstance3D" parent="SeismoBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+mesh = SubResource("BoxMesh_3")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]

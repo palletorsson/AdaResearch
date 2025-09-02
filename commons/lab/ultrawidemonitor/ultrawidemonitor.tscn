@@ -1,0 +1,197 @@
+[gd_scene load_steps=12 format=3 uid="uid://sz0t6u8v9wxyz"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var curved_screen = $MonitorStructure/CurvedScreen
+@onready var display_content = $MonitorStructure/DisplayContent
+@onready var status_indicators = [$MonitorStructure/StatusIndicator1, $MonitorStructure/StatusIndicator2, $MonitorStructure/StatusIndicator3]
+@onready var cooling_vents = [$MonitorStructure/CoolingVent1, $MonitorStructure/CoolingVent2]
+
+var display_mode = 'multi_window'  # single, multi_window, full_scan
+var brightness = 0.8
+var contrast = 1.0
+
+signal display_activated
+signal window_layout_changed
+signal system_scan_complete
+
+func _ready():
+	setup_ultrawide_monitor()
+	start_display_cycle()
+
+func setup_ultrawide_monitor():
+	add_to_group('monitors')
+	add_to_group('ultrawide_displays')
+	
+	# Animate cooling system
+	animate_cooling_vents()
+
+func animate_cooling_vents():
+	for vent in cooling_vents:
+		var vent_tween = create_tween()
+		vent_tween.set_loops()
+		vent_tween.tween_property(vent, 'light_energy', 0.2, 2.0)
+		vent_tween.tween_property(vent, 'light_energy', 0.6, 2.0)
+
+func start_display_cycle():
+	var cycle_timer = Timer.new()
+	cycle_timer.wait_time = 8.0
+	cycle_timer.timeout.connect(cycle_display_mode)
+	cycle_timer.autostart = true
+	add_child(cycle_timer)
+
+func cycle_display_mode():
+	match display_mode:
+		'single':
+			display_mode = 'multi_window'
+		'multi_window':
+			display_mode = 'full_scan'
+		'full_scan':
+			display_mode = 'single'
+	
+	update_display_visuals()
+	emit_signal('window_layout_changed', display_mode)
+
+func update_display_visuals():
+	match display_mode:
+		'single':
+			display_content.material_override.emission = Color.BLUE
+		'multi_window':
+			display_content.material_override.emission = Color.GREEN
+		'full_scan':
+			display_content.material_override.emission = Color.CYAN
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_display()
+
+func activate_display():
+	emit_signal('display_activated')
+	
+	# Brightness surge
+	var activation_tween = create_tween()
+	activation_tween.tween_property(display_content, 'material_override:emission_energy', 2.5, 0.5)
+	activation_tween.tween_property(display_content, 'material_override:emission_energy', 1.5, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.05, 0.05, 0.1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.1, 0.1, 0.2, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+emission_energy = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.6, 0.7, 0.08)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+size = Vector2(1.5, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.01
+height = 0.02
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2, 1.2, 0.5)
+
+[node name="CurvedUltrawideMonitor" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="MonitorStructure" type="Node3D" parent="."]
+
+[node name="CurvedScreen" type="MeshInstance3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="DisplayContent" type="MeshInstance3D" parent="MonitorStructure"]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 0, 0.35, 0.01)
+mesh = SubResource("QuadMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="StatusIndicator1" type="OmniLight3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0.04)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.5
+omni_range = 0.5
+
+[node name="Indicator1Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator1"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StatusIndicator2" type="OmniLight3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.04)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.5
+omni_range = 0.5
+
+[node name="Indicator2Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator2"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StatusIndicator3" type="OmniLight3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, 0.04)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.5
+omni_range = 0.5
+
+[node name="Indicator3Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator3"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CoolingVent1" type="OmniLight3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.6, -0.03)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.3
+omni_range = 0.8
+
+[node name="Vent1Visual" type="MeshInstance3D" parent="MonitorStructure/CoolingVent1"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="CoolingVent2" type="OmniLight3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.6, -0.03)
+light_color = Color(1, 0.5, 0, 1)
+light_energy = 0.3
+omni_range = 0.8
+
+[node name="Vent2Visual" type="MeshInstance3D" parent="MonitorStructure/CoolingVent2"]
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="MonitorStand" type="MeshInstance3D" parent="MonitorStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

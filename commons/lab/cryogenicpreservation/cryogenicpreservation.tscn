@@ -1,0 +1,315 @@
+[gd_scene load_steps=16 format=3 uid="uid://kz5n9p8r2efgh"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var cryo_chamber = $CryoStructure/CryoChamber
+@onready var specimen_capsule = $CryoStructure/SpecimenCapsule
+@onready var cooling_systems = [$CryoStructure/CoolingUnit1, $CryoStructure/CoolingUnit2]
+@onready var temperature_display = $CryoStructure/TemperatureDisplay
+@onready var cryo_mist = $CryoStructure/CryoMistEffect
+@onready var pressure_valves = [$CryoStructure/PressureValve1, $CryoStructure/PressureValve2]
+
+var cryo_temperature = -196.0  # Liquid nitrogen temperature
+var target_temperature = -196.0
+var cooling_active = false
+var specimen_status = 'preserved'  # preserved, thawing, critical
+
+signal cryo_activation
+signal temperature_critical
+signal specimen_viable
+signal system_malfunction
+
+func _ready():
+	setup_cryogenic_unit()
+	initialize_cooling_systems()
+
+func setup_cryogenic_unit():
+	add_to_group('lab_equipment')
+	add_to_group('cryogenic_systems')
+	add_to_group('preservation_devices')
+	
+	# Set initial cryo chamber appearance
+	cryo_chamber.material_override.emission_energy = 0.3
+
+func initialize_cooling_systems():
+	print('❄️ CRYOGENIC UNIT: Cooling systems initializing...')
+	
+	# Cooling unit animations
+	for i in range(cooling_systems.size()):
+		var unit = cooling_systems[i]
+		var rotation_speed = (i + 1) * 3.0
+		
+		var cooling_tween = create_tween()
+		cooling_tween.set_loops()
+		cooling_tween.tween_property(unit, 'rotation_degrees:z', 360.0, rotation_speed)
+	
+	# Pressure valve cycling
+	animate_pressure_valves()
+	
+	# Cryo mist effect
+	animate_cryo_mist()
+	
+	# Temperature monitoring
+	start_temperature_monitoring()
+
+func animate_pressure_valves():
+	for valve in pressure_valves:
+		var valve_tween = create_tween()
+		valve_tween.set_loops()
+		valve_tween.tween_property(valve, 'light_energy', 0.1, 2.0)
+		valve_tween.tween_property(valve, 'light_energy', 1.0, 0.5)
+		valve_tween.tween_property(valve, 'light_energy', 0.1, 1.5)
+
+func animate_cryo_mist():
+	var mist_tween = create_tween()
+	mist_tween.set_loops()
+	mist_tween.tween_property(cryo_mist, 'scale:y', 1.2, 3.0)
+	mist_tween.tween_property(cryo_mist, 'scale:y', 0.8, 3.0)
+	
+	var mist_opacity_tween = create_tween()
+	mist_opacity_tween.set_loops()
+	mist_opacity_tween.tween_property(cryo_mist, 'material_override:albedo_color:a', 0.2, 2.0)
+	mist_opacity_tween.tween_property(cryo_mist, 'material_override:albedo_color:a', 0.6, 2.0)
+
+func start_temperature_monitoring():
+	var temp_timer = Timer.new()
+	temp_timer.wait_time = 1.0
+	temp_timer.timeout.connect(monitor_temperature)
+	temp_timer.autostart = true
+	add_child(temp_timer)
+
+func monitor_temperature():
+	if cooling_active:
+		# Gradually approach target temperature
+		var temp_diff = target_temperature - cryo_temperature
+		cryo_temperature += temp_diff * 0.1
+		
+		# Temperature fluctuations for realism
+		cryo_temperature += randf_range(-2.0, 2.0)
+		
+		# Clamp temperature to reasonable cryogenic range
+		cryo_temperature = clamp(cryo_temperature, -210.0, 20.0)
+		
+		# Update visual indicators
+		update_temperature_visuals()
+		
+		# Check for critical conditions
+		if cryo_temperature > -180.0:
+			trigger_temperature_warning()
+
+func update_temperature_visuals():
+	# Temperature display color - blue for cold, red for warm
+	var temp_ratio = (cryo_temperature + 210.0) / 230.0  # Normalize to 0-1
+	var display_color = Color.BLUE.lerp(Color.RED, temp_ratio)
+	temperature_display.material_override.emission = display_color
+	
+	# Chamber frost intensity
+	var frost_intensity = (-cryo_temperature / 200.0) * 0.8
+	cryo_chamber.material_override.emission_energy = frost_intensity
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_cryogenic_system()
+
+func activate_cryogenic_system():
+	cooling_active = true
+	target_temperature = -196.0
+	print('❄️ CRYOGENIC: Activating preservation protocol - Target: %.1f°C' % target_temperature)
+	emit_signal('cryo_activation')
+	
+	# Dramatic cooling sequence
+	var activation_tween = create_tween()
+	activation_tween.tween_method(initiate_cooling, 0.0, 1.0, 3.0)
+
+func initiate_cooling(progress: float):
+	# Visual feedback during cooling activation
+	var mist_intensity = progress * 1.5
+	cryo_mist.material_override.emission_energy = mist_intensity
+	
+	# Specimen capsule frost buildup
+	var frost_buildup = progress * 0.6
+	specimen_capsule.material_override.albedo_color.a = 1.0 - frost_buildup
+
+func trigger_temperature_warning():
+	print('⚠️ CRYO WARNING: Temperature rising above safe threshold!')
+	emit_signal('temperature_critical')
+	
+	specimen_status = 'critical'
+	
+	# Flash warning indicators
+	var warning_tween = create_tween()
+	warning_tween.set_loops(3)
+	warning_tween.tween_property(temperature_display, 'material_override:emission_energy', 3.0, 0.2)
+	warning_tween.tween_property(temperature_display, 'material_override:emission_energy', 1.0, 0.2)
+
+func emergency_cooling():
+	print('❄️ EMERGENCY COOLING: Activating backup nitrogen reserves')
+	target_temperature = -205.0  # Emergency super-cooling
+	
+	# Intense cooling effect
+	var emergency_tween = create_tween()
+	emergency_tween.tween_property(cryo_mist, 'scale', Vector3(2.0, 3.0, 2.0), 2.0)
+	emergency_tween.tween_property(cryo_mist, 'scale', Vector3.ONE, 3.0)
+
+func thaw_specimen():
+	cooling_active = false
+	target_temperature = 20.0  # Room temperature
+	specimen_status = 'thawing'
+	
+	print('🔥 CRYO: Initiating controlled thaw sequence')
+	
+	# Gradual thawing visuals
+	var thaw_tween = create_tween()
+	thaw_tween.tween_property(specimen_capsule, 'material_override:albedo_color:a', 1.0, 10.0)
+	thaw_tween.tween_property(cryo_mist, 'material_override:emission_energy', 0.0, 5.0)
+	
+	# Check specimen viability after thaw
+	get_tree().create_timer(12.0).timeout.connect(check_specimen_viability)
+
+func check_specimen_viability():
+	if cryo_temperature < -170.0:  # Was kept cold enough
+		specimen_status = 'preserved'
+		print('✅ CRYO: Specimen successfully preserved - Cell integrity maintained')
+		emit_signal('specimen_viable')
+	else:
+		specimen_status = 'damaged'
+		print('❌ CRYO: Specimen degraded - Temperature exposure too high')
+		emit_signal('system_malfunction')
+		trigger_contamination_protocol()
+
+func trigger_contamination_protocol():
+	print('☣️ CRYO: Contamination protocol activated - Specimen quarantined')
+	
+	# Red warning state
+	var contamination_tween = create_tween()
+	contamination_tween.set_loops(10)
+	contamination_tween.tween_property(cryo_chamber, 'material_override:emission', Color.RED, 0.3)
+	contamination_tween.tween_property(cryo_chamber, 'material_override:emission', Color.CYAN, 0.3)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.7, 0.9, 1, 0.6)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.7, 1, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.9, 0.95, 1, 0.8)
+transparency = 1
+emission_enabled = true
+emission = Color(0.5, 0.8, 1, 1)
+emission_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.2, 0.3, 0.4, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.8, 1, 1, 0.4)
+transparency = 1
+emission_enabled = true
+emission = Color(0.6, 1, 1, 1)
+emission_energy = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 1.2
+bottom_radius = 1.2
+height = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.4, 0.2, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 2.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(4, 4, 4)
+
+[node name="CryogenicPreservationUnit" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="CryoStructure" type="Node3D" parent="."]
+
+[node name="CryoChamber" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SpecimenCapsule" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CoolingUnit1" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="CoolingUnit2" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.3, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TemperatureDisplay" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.3)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="CryoMistEffect" type="MeshInstance3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="PressureValve1" type="OmniLight3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2.5, 0.8)
+light_color = Color(0, 0.8, 1, 1)
+light_energy = 0.3
+omni_range = 1.5
+
+[node name="Valve1Visual" type="MeshInstance3D" parent="CryoStructure/PressureValve1"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="PressureValve2" type="OmniLight3D" parent="CryoStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.5, 0.8)
+light_color = Color(0, 0.8, 1, 1)
+light_energy = 0.3
+omni_range = 1.5
+
+[node name="Valve2Visual" type="MeshInstance3D" parent="CryoStructure/PressureValve2"]
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

@@ -1,0 +1,342 @@
+[gd_scene load_steps=14 format=3 uid="uid://jz4m8q7p5uvwx"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var hologram_base = $ProjectorBase
+@onready var projection_lens = $ProjectorBase/ProjectionLens
+@onready var data_crystals = [$ProjectorBase/DataCrystal1, $ProjectorBase/DataCrystal2, $ProjectorBase/DataCrystal3]
+@onready var hologram_field = $HologramField
+@onready var data_streams = [$HologramField/DataStream1, $HologramField/DataStream2, $HologramField/DataStream3]
+
+var projection_active = false
+var data_complexity = 0.0
+var hologram_opacity = 0.0
+var current_dataset = 'molecular_structure'
+
+var available_datasets = [
+	'molecular_structure',
+	'dna_sequence', 
+	'quantum_field',
+	'neural_network',
+	'cosmic_radiation',
+	'temporal_anomaly'
+]
+
+signal hologram_activated
+signal dataset_changed
+signal projection_error
+
+func _ready():
+	setup_holographic_projector()
+	initialize_data_systems()
+
+func setup_holographic_projector():
+	add_to_group('lab_equipment')
+	add_to_group('holographic_devices')
+	
+	# Set initial hologram transparency
+	hologram_field.material_override.albedo_color.a = 0.0
+
+func initialize_data_systems():
+	print('📊 HOLOGRAPHIC PROJECTOR: Data matrix initializing...')
+	
+	# Data crystal pulsing at different frequencies
+	for i in range(data_crystals.size()):
+		var crystal = data_crystals[i]
+		var pulse_speed = (i + 1) * 0.8
+		
+		var crystal_tween = create_tween()
+		crystal_tween.set_loops()
+		crystal_tween.tween_property(crystal, 'light_energy', 0.2, pulse_speed)
+		crystal_tween.tween_property(crystal, 'light_energy', 1.5, pulse_speed * 0.3)
+		crystal_tween.tween_property(crystal, 'light_energy', 0.5, pulse_speed * 0.7)
+	
+	# Projection lens focusing animation
+	animate_projection_lens()
+
+func animate_projection_lens():
+	var lens_tween = create_tween()
+	lens_tween.set_loops()
+	lens_tween.tween_property(projection_lens, 'position:y', 0.1, 2.0)
+	lens_tween.tween_property(projection_lens, 'position:y', -0.1, 2.0)
+
+func _process(delta):
+	if projection_active:
+		data_complexity += delta * 3.0
+		
+		# Update hologram visuals
+		update_holographic_display()
+		
+		# Animate data streams
+		animate_data_streams()
+
+func update_holographic_display():
+	# Hologram opacity fluctuation
+	var base_opacity = 0.4 + sin(data_complexity) * 0.2
+	hologram_field.material_override.albedo_color.a = base_opacity
+	
+	# Color shifts based on current dataset
+	var dataset_color = get_dataset_color(current_dataset)
+	hologram_field.material_override.emission = dataset_color
+	
+	# Scale fluctuation for 3D effect
+	var scale_variation = 1.0 + sin(data_complexity * 2.0) * 0.1
+	hologram_field.scale = Vector3.ONE * scale_variation
+
+func get_dataset_color(dataset: String) -> Color:
+	match dataset:
+		'molecular_structure':
+			return Color.GREEN
+		'dna_sequence':
+			return Color.BLUE
+		'quantum_field':
+			return Color.MAGENTA
+		'neural_network':
+			return Color.YELLOW
+		'cosmic_radiation':
+			return Color.CYAN
+		'temporal_anomaly':
+			return Color.RED
+		_:
+			return Color.WHITE
+
+func animate_data_streams():
+	for stream in data_streams:
+		var stream_intensity = sin(data_complexity + randf() * TAU) * 0.5 + 1.0
+		stream.light_energy = stream_intensity
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_holographic_projection()
+
+func activate_holographic_projection():
+	if projection_active:
+		cycle_dataset()
+		return
+	
+	projection_active = true
+	print('📊 HOLOGRAM: Activating 3D data projection - Dataset: ', current_dataset)
+	emit_signal('hologram_activated')
+	
+	# Projection startup sequence
+	var startup_tween = create_tween()
+	startup_tween.tween_method(increase_projection_power, 0.0, 1.0, 2.0)
+
+func increase_projection_power(power: float):
+	hologram_opacity = power
+	
+	# Gradual hologram materialization
+	hologram_field.material_override.albedo_color.a = power * 0.5
+	hologram_field.material_override.emission_energy = power * 2.0
+	
+	# Lens focusing effect
+	projection_lens.get_child(0).light_energy = power * 3.0
+
+func cycle_dataset():
+	var current_index = available_datasets.find(current_dataset)
+	var next_index = (current_index + 1) % available_datasets.size()
+	current_dataset = available_datasets[next_index]
+	
+	print('📊 HOLOGRAM: Dataset changed to: ', current_dataset)
+	emit_signal('dataset_changed', current_dataset)
+	
+	# Visual transition effect
+	var transition_tween = create_tween()
+	transition_tween.tween_property(hologram_field, 'scale', Vector3(0.1, 0.1, 0.1), 0.3)
+	transition_tween.tween_property(hologram_field, 'scale', Vector3(1.2, 1.2, 1.2), 0.4)
+	transition_tween.tween_property(hologram_field, 'scale', Vector3.ONE, 0.3)
+
+func display_specific_dataset(dataset: String):
+	if dataset in available_datasets:
+		current_dataset = dataset
+		print('📊 HOLOGRAM: Loading specific dataset - ', dataset)
+		
+		# Dramatic data loading effect
+		var loading_tween = create_tween()
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 0.0, 0.2)
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 3.0, 0.5)
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 1.5, 0.8)
+
+func trigger_projection_error():
+	print('⚠️ HOLOGRAM ERROR: Data corruption detected!')
+	emit_signal('projection_error')
+	
+	# Error state visual
+	var error_tween = create_tween()
+	error_tween.set_loops(5)
+	error_tween.tween_property(hologram_field, 'material_override:emission', Color.RED, 0.1)
+	error_tween.tween_property(hologram_field, 'material_override:emission', Color.WHITE, 0.1)
+	
+	# Auto-recovery after error
+	get_tree().create_timer(3.0).timeout.connect(recover_from_error)
+
+func recover_from_error():
+	print('📊 HOLOGRAM: Error resolved - Resuming normal operation')
+	# Return to normal dataset color
+	var recovery_color = get_dataset_color(current_dataset)
+	var recovery_tween = create_tween()
+	recovery_tween.tween_property(hologram_field, 'material_override:emission', recovery_color, 1.0)
+
+func deactivate_projection():
+	projection_active = false
+	data_complexity = 0.0
+	
+	var shutdown_tween = create_tween()
+	shutdown_tween.tween_property(hologram_field, 'material_override:albedo_color:a', 0.0, 1.5)
+	shutdown_tween.tween_property(projection_lens.get_child(0), 'light_energy', 0.0, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 0.4)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 1, 0.3, 1)
+emission_energy = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.5, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0, 1)
+emission_energy = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.8
+bottom_radius = 0.8
+height = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(6, 6, 6)
+
+[node name="HolographicDataProjector" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ProjectorBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="ProjectionLens" type="MeshInstance3D" parent="ProjectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="LensLight" type="SpotLight3D" parent="ProjectorBase/ProjectionLens"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0.2, 0)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.0
+spot_range = 8.0
+spot_angle = 30.0
+
+[node name="DataCrystal1" type="OmniLight3D" parent="ProjectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, 0)
+light_color = Color(1, 0, 0.8, 1)
+light_energy = 0.5
+omni_range = 2.0
+
+[node name="Crystal1Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal1"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="DataCrystal2" type="OmniLight3D" parent="ProjectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0)
+light_color = Color(0, 0.8, 1, 1)
+light_energy = 0.5
+omni_range = 2.0
+
+[node name="Crystal2Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal2"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="DataCrystal3" type="OmniLight3D" parent="ProjectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.4)
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.5
+omni_range = 2.0
+
+[node name="Crystal3Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal3"]
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="HologramField" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("SphereMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DataStream1" type="SpotLight3D" parent="HologramField"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 1, 0, 0)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 1.0
+spot_range = 4.0
+spot_angle = 20.0
+
+[node name="Stream1Visual" type="MeshInstance3D" parent="HologramField/DataStream1"]
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DataStream2" type="SpotLight3D" parent="HologramField"]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -1, 0, 0)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 1.0
+spot_range = 4.0
+spot_angle = 20.0
+
+[node name="Stream2Visual" type="MeshInstance3D" parent="HologramField/DataStream2"]
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DataStream3" type="SpotLight3D" parent="HologramField"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 1)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 1.0
+spot_range = 4.0
+spot_angle = 20.0
+
+[node name="Stream3Visual" type="MeshInstance3D" parent="HologramField/DataStream3"]
+mesh = SubResource("CylinderMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

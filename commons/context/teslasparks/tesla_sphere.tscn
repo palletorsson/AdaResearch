@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjt6ep2vedby"]
+
+[ext_resource type="Script" path="res://ProceduralGeneration/Randomness/Scripts/tesla_grab.gd" id="1_yu1cu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ldmra"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up5iy"]
+albedo_color = Color(1, 1, 0.290196, 1)
+emission_enabled = true
+emission = Color(0.976471, 0.894118, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tncuo"]
+
+[node name="teslaSphere" type="Node3D"]
+
+[node name="teslasphereGrabMe" type="RigidBody3D" parent="." groups=["teslasphere"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 4
+collision_mask = 196615
+mass = 0.001
+gravity_scale = -0.1
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_yu1cu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="teslasphereGrabMe"]
+transform = Transform3D(0.265, 0, -2.8244e-15, 0, 0.265, 0, 2.8244e-15, 0, 0.265, 0, 0, 0)
+shape = SubResource("SphereShape3D_ldmra")
+
+[node name="sphere" type="MeshInstance3D" parent="teslasphereGrabMe"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_up5iy")
+mesh = SubResource("SphereMesh_tncuo")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="."]
+
+[connection signal="grabbed" from="teslasphereGrabMe" to="teslasphereGrabMe" method="_on_grabbed"]
