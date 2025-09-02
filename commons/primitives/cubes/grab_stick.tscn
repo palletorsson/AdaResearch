@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnfmsrmelyuhq"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_u82vu"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_4w1i0"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_tfadk"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="4_a8llw"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_moxur"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.0236115, 0.204024, 0.0203419)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="GrabStick" instance=ExtResource("1_u82vu")]
+script = ExtResource("2_4w1i0")
+alternate_material = null
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000920061, 0.000134276, -0.000782901)
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-8.74228e-09, 0, -1.685, 0, 0.195, 0, 0.2, 0, -7.36537e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_tfadk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00162586, 0, 0.0739675)
+visible = false
+
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("4_moxur")]
+transform = Transform3D(-0.0412479, 0.99089, -0.128202, -5.60865e-09, 0.128311, 0.991734, 0.999149, 0.040907, -0.00529256, -0.0267695, -0.0835771, 0.0177133)
+mode = 1
+
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("4_a8llw")]
+transform = Transform3D(0.0412479, 0.99089, -0.128202, 0, 0.128311, 0.991734, 0.999149, -0.0409069, 0.00529256, -0.027, -0.084, -0.018)
+mode = 1
+
+[node name="GrabPointGripLeft" parent="." index="5" instance=ExtResource("4_moxur")]
+transform = Transform3D(0.0412478, -0.99089, 0.128202, -5.60865e-09, 0.128311, 0.991734, -0.999149, -0.0409069, 0.00529255, -0.136863, -0.084, -0.018)
+
+[node name="GrabPointGripRight" parent="." index="6" instance=ExtResource("4_a8llw")]
+transform = Transform3D(-0.041248, -0.99089, 0.128202, 0, 0.128311, 0.991734, -0.999149, 0.040907, -0.00529257, -0.137, -0.084, 0.018)

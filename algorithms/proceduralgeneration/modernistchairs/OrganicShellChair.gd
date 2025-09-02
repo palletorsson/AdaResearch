@@ -238,3 +238,4 @@ func regenerate_with_parameters(params: Dictionary):
 		curve_intensity = params.curve_intensity
 	
 	generate_chair()
+

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c857ayrif1anv"]
+
+[ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_v7j14"]
+[ext_resource type="Script" uid="uid://dg7i2o5ryotta" path="res://algorithms/color/color_scanner/color_scanner.gd" id="2_7w5aw"]
+
+[node name="GrabStick2" instance=ExtResource("1_v7j14")]
+
+[node name="Node3D" type="Node3D" parent="MeshInstance3D" index="0"]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5.1282, 0, -0.593472, 0, -2.59415e-08, -1.81233e-08, 0, -0.0492123)
+script = ExtResource("2_7w5aw")

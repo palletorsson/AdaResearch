@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci0dy7i3mn2pb"]
+[gd_scene load_steps=5 format=3 uid="uid://ci0dy7i3mn2pb"]
 
-[ext_resource type="Script" uid="uid://cyi5rumav0dc6" path="res://adaresearch/Common/Scenes/Context/CombineGrids/Mondrian2d/mondrian_scaler.gd" id="1_2jjy0"]
-[ext_resource type="Script" uid="uid://c21pcu3ufvjcx" path="res://adaresearch/Common/Scenes/Context/CombineGrids/Mondrian2d/mondrian_2d.gd" id="1_2mmph"]
+[ext_resource type="Script" uid="uid://cyi5rumav0dc6" path="res://commons/context/mondrian2d/mondrian_scaler.gd" id="1_2jjy0"]
+[ext_resource type="Script" uid="uid://c21pcu3ufvjcx" path="res://commons/context/mondrian2d/mondrian_2d.gd" id="1_2mmph"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_76n8t"]
+size = Vector3(9.67029, 9.83203, 0.237549)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2jjy0"]
 viewport_path = NodePath("SubViewport")
@@ -11,14 +14,21 @@ script = ExtResource("1_2jjy0")
 sprite3d_y_position = 7.0
 
 [node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1024, 1024)
 render_target_update_mode = 0
-render_target_clear_mode = 0
-size = Vector2(1024, 1024)
-update_mode = 0
 
 [node name="Mondrian" type="Node2D" parent="SubViewport"]
 script = ExtResource("1_2mmph")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94421, 8.82299)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0651245, 0.146484, -0.0123143)
+shape = SubResource("BoxShape3D_76n8t")
+
+[node name="Sprite3D" type="Sprite3D" parent="StaticBody3D/CollisionShape3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0651245, -0.146484, 0.0123143)
 texture = SubResource("ViewportTexture_2jjy0")

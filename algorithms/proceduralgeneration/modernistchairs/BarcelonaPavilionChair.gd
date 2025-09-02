@@ -227,3 +227,4 @@ func regenerate_with_parameters(params: Dictionary):
 		tufting_divisions = params.tufting_divisions
 	
 	generate_chair()
+

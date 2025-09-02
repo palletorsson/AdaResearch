@@ -99,3 +99,4 @@ The main scene arranges all 10 chairs in a gallery-like space with:
 - **Optimal Lighting**: Professional gallery lighting setup
 - **Information Panels**: Details about each chair's algorithm
 - **Interactive Controls**: Parameter adjustment interfaces
+

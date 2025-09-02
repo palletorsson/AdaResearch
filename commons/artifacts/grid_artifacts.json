@@ -1683,6 +1683,24 @@
 				"physics_enabled": true
 			}
 		},
+		"grab_stick": {
+			"name": "grab_stick",
+			"lookup_name": "grab_stick",
+			"description": "grab_stick",
+			"scene": "res://algorithms/color/color_scanner/grab_stick.tscn",
+			"position": [9.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},	
+		"grab_stick_scanner": {
+			"name": "grab_stick_scannerk",
+			"lookup_name": "grab_stick_scanner",
+			"description": "grab_stick_scanner",
+			"scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn",
+			"position": [9.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},	
 		"metaballs": {
 			"name": "Metaballs",
 			"lookup_name": "metaballs",
@@ -2500,6 +2518,306 @@
 				"particle_system": "spatial_shader",
 				"terrain_interaction": true,
 				"blob_lifecycle": "managed"
+			}
+		},
+		"coloredlines": {
+			"name": "Colored Lines",
+			"lookup_name": "coloredlines",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"scene": "res://algorithms/color/colorlines/coloredlines.tscn",
+			"position": [0.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "color_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.6],
+				"light_intensity": 1.2,
+				"light_range": 3.5,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		"clippingplanes": {
+			"name": "Clipping Planes",
+			"lookup_name": "clippingplanes",
+			"description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
+			"scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
+			"position": [1.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "effects_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 0.9, 1.0],
+				"light_intensity": 1.1,
+				"light_range": 3.2,
+				"light_position": [0, 1.3, 0]
+			}
+		},
+		"raycastingpoints": {
+			"name": "Raycasting Points",
+			"lookup_name": "raycastingpoints",
+			"description": "Interactive raycasting algorithm visualization with point-based collision detection",
+			"scene": "res://algorithms/physicssimulation/raycasting/raycastingpoints.tscn",
+			"position": [2.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.7, 0.8],
+				"light_intensity": 1.3,
+				"light_range": 3.8,
+				"light_position": [0, 1.6, 0]
+			}
+		},
+		"waterone": {
+			"name": "Water One",
+			"lookup_name": "waterone",
+			"description": "Advanced water simulation algorithm with realistic fluid dynamics and surface tension",
+			"scene": "res://algorithms/physicssimulation/water_one/waterone.tscn",
+			"position": [3.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.6, 0.8, 1.0],
+				"light_intensity": 1.4,
+				"light_range": 4.2,
+				"light_position": [0, 1.7, 0]
+			}
+		},
+		"waterflowers": {
+			"name": "Water Flowers",
+			"lookup_name": "waterflowers",
+			"description": "Artistic water simulation with flower-like patterns and organic fluid behavior",
+			"scene": "res://algorithms/physicssimulation/waterflowers/waterflowers.tscn",
+			"position": [4.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 0.6, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 3.6,
+				"light_position": [0, 1.4, 0]
+			}
+		},
+		"alphahash": {
+			"name": "Alpha Hash",
+			"lookup_name": "alphahash",
+			"description": "Post-processing alpha hash algorithm for transparent texture generation and anti-aliasing",
+			"scene": "res://algorithms/postprocessing/alfahash/alphahash.tscn",
+			"position": [5.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "postprocessing_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.9, 0.7],
+				"light_intensity": 1.1,
+				"light_range": 3.3,
+				"light_position": [0, 1.3, 0]
+			}
+		},
+		"postprocessing_bloom": {
+			"name": "Post-Processing Bloom",
+			"lookup_name": "postprocessing_bloom",
+			"description": "Advanced bloom post-processing effect with configurable intensity and threshold parameters",
+			"scene": "res://algorithms/postprocessing/bloom/postprocessing_bloom.tscn",
+			"position": [6.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "postprocessing_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 1.0, 0.8],
+				"light_intensity": 1.3,
+				"light_range": 3.9,
+				"light_position": [0, 1.6, 0]
+			}
+		},
+		"fatwireframe": {
+			"name": "Fat Wireframe",
+			"lookup_name": "fatwireframe",
+			"description": "Procedural wireframe generation with adjustable line thickness and geometric complexity",
+			"scene": "res://algorithms/proceduralgeneration/wireframe/fatwireframe.tscn",
+			"position": [7.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.9, 0.8, 1.0],
+				"light_intensity": 1.2,
+				"light_range": 3.5,
+				"light_position": [0, 1.4, 0]
+			}
+		},
+		"cloudvolume": {
+			"name": "Cloud Volume",
+			"lookup_name": "cloudvolume",
+			"description": "3D volumetric cloud generation using noise algorithms for atmospheric and sky effects",
+			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn",
+			"position": [8.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.7, 0.9, 1.0],
+				"light_intensity": 1.4,
+				"light_range": 4.1,
+				"light_position": [0, 1.7, 0]
+			}
+		},
+		"perlinvolume": {
+			"name": "Perlin Volume",
+			"lookup_name": "perlinvolume",
+			"description": "3D Perlin noise volume generation for procedural content creation and spatial algorithms",
+			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn",
+			"position": [9.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 1.0, 0.8],
+				"light_intensity": 1.3,
+				"light_range": 3.7,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		"instancingscatter": {
+			"name": "Instancing Scatter",
+			"lookup_name": "instancingscatter",
+			"description": "High-performance instance scattering algorithm for procedural object placement and distribution",
+			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn",
+			"position": [10.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.9],
+				"light_intensity": 1.2,
+				"light_range": 3.4,
+				"light_position": [0, 1.3, 0]
+			}
+		},
+		"buffergeometryparticles": {
+			"name": "Buffer Geometry Particles",
+			"lookup_name": "buffergeometryparticles",
+			"description": "High-performance particle system using buffer geometry for efficient rendering and animation",
+			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
+			"position": [11.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "shader_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.9, 1.0, 0.8],
+				"light_intensity": 1.3,
+				"light_range": 3.8,
+				"light_position": [0, 1.6, 0]
+			}
+		},
+		"dynamiccubemap": {
+			"name": "Dynamic Cube Map",
+			"lookup_name": "dynamiccubemap",
+			"description": "Real-time dynamic cube map generation for environmental reflections and lighting",
+			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
+			"position": [12.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "shader_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.7, 0.9],
+				"light_intensity": 1.4,
+				"light_range": 4.0,
+				"light_position": [0, 1.7, 0]
+			}
+		},
+		"materialstransmission": {
+			"name": "Materials Transmission",
+			"lookup_name": "materialstransmission",
+			"description": "Advanced material transmission and refraction algorithms for realistic glass and transparent effects",
+			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
+			"position": [13.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "shader_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.8, 1.0, 0.9],
+				"light_intensity": 1.5,
+				"light_range": 4.3,
+				"light_position": [0, 1.8, 0]
+			}
+		},
+		"rotatescalecubes": {
+			"name": "Rotate Scale Cubes",
+			"lookup_name": "rotatescalecubes",
+			"description": "Interactive transformation algorithms demonstrating rotation and scaling operations on geometric primitives",
+			"scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+			"position": [14.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "transformation_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.7],
+				"light_intensity": 1.2,
+				"light_range": 3.6,
+				"light_position": [0, 1.4, 0]
 			}
 		}
 	},

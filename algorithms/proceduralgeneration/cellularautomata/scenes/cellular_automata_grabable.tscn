@@ -4,8 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="2_xfila"]
 [ext_resource type="PackedScene" uid="uid://cm7sauucsn1es" path="res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn" id="3_yltt8"]
 
-[node name="RandomEdgeProfileGrabable" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000799842, 0, 0)
+[node name="CellularAutomataProfileGrabable" type="Node3D"]
 script = ExtResource("1_vef34")
 label_text = "id 0010: scrolling cells "
 
@@ -21,6 +20,9 @@ text = "id: 0001 - simpel random walk "
 font_size = 20
 outline_size = 4
 horizontal_alignment = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.012217, 0, 0.999925, 0, 1, 0, -0.999925, 0, -0.012217, 0.39, 0.34, 0)
 
 [connection signal="dropped" from="GrabPaper" to="GrabPaper/CellularAutomata" method="_on_grab_paper_dropped"]
 [connection signal="grabbed" from="GrabPaper" to="GrabPaper/CellularAutomata" method="_on_grab_paper_grabbed"]

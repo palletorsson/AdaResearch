@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://KMeansColorDemo.gd" id="1"]
+
+[node name="KMeansColorDemo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MainVBox" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "K-Means Color Quantization: Ada Lovelace Portrait Analysis"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+
+[node name="Row1Container" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Row1Label" type="Label" parent="ScrollContainer/MarginContainer/MainVBox/Row1Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Row 1: Color Quantization Comparison"
+horizontal_alignment = 1
+
+[node name="Row1Images" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox/Row1Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+
+[node name="Row2Container" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Row2Label" type="Label" parent="ScrollContainer/MarginContainer/MainVBox/Row2Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Row 2: Pixel Resolution Effects"
+horizontal_alignment = 1
+
+[node name="Row2Images" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox/Row2Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+
+[node name="Row3Container" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Row3Label" type="Label" parent="ScrollContainer/MarginContainer/MainVBox/Row3Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Row 3: Extracted Color Palettes (K-Means Centroids)"
+horizontal_alignment = 1
+
+[node name="Row3Palettes" type="HBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox/Row3Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="InfoPanel" type="Panel" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="InfoLabel" type="RichTextLabel" parent="ScrollContainer/MarginContainer/MainVBox/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[b]K-Means Color Quantization Explanation:[/b]
+
+[color=blue]Row 1[/color] shows how k-means clustering reduces the color palette of the Ada Lovelace portrait from ~100+ original colors down to 2, 5, 10, and 15 colors. The algorithm groups similar colors together and replaces them with cluster centroids.
+
+[color=green]Row 2[/color] demonstrates how pixel resolution affects quantization results. Lower resolutions (8x8) lose detail but can still capture the essence with just 5 colors, while higher resolutions (64x64) preserve more detail.
+
+[color=purple]Row 3[/color] displays the actual color palettes extracted by k-means. These centroids represent the most significant colors in the image - notice how skin tones, hair colors, and dress colors are preserved as separate clusters.
+
+[b]Algorithm Process:[/b]
+1. Initialize k random centroids in RGB color space
+2. Assign each pixel to nearest centroid
+3. Update centroids to mean of assigned pixels
+4. Repeat steps 2-3 until convergence
+5. Replace all pixels with their centroid colors"

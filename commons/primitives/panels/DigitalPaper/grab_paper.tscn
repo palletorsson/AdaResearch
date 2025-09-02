@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0cbythiosykd"]
+[gd_scene load_steps=11 format=3 uid="uid://0cbythiosykd"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_4i0xi"]
 [ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_5e8to"]
@@ -10,6 +10,9 @@
 [sub_resource type="BoxShape3D" id="7"]
 margin = 0.01
 size = Vector3(0.201868, 0.0114502, 0.221465)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="8"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -31,6 +34,7 @@ shape = SubResource("7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
 mesh = SubResource("8")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("5_bmrce")]

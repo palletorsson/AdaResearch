@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ColorPaletteSheets.gd" id="1"]
+
+[node name="ColorPaletteSheets" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="MainVBox" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="HeaderContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MainTitle" type="Label" parent="ScrollContainer/MarginContainer/MainVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "20 Cultural & Emotional Color Palette Collection"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="ScrollContainer/MarginContainer/MainVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 16
+text = "4x4 Color Grids Inspired by Art, History, Culture & Human Experience"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="ScrollContainer/MarginContainer/MainVBox/HeaderContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+theme_override_colors/default_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]Each sheet contains a 4x4 grid of carefully selected colors representing different themes:
+[color=gold]Famous Paintings[/color] • [color=cyan]Design Movements[/color] • [color=pink]Historical Events[/color] • [color=lime]Emotional States[/color] • [color=orange]Cultural Moments[/color][/center]"
+fit_content = true
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PalettesGrid" type="GridContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 35
+columns = 2
+
+[node name="FooterContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HSeparator2" type="HSeparator" parent="ScrollContainer/MarginContainer/MainVBox/FooterContainer"]
+layout_mode = 2
+
+[node name="FooterInfo" type="RichTextLabel" parent="ScrollContainer/MarginContainer/MainVBox/FooterContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+theme_override_colors/default_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][b]Color Palette Themes Include:[/b]
+
+[color=lightblue]• Van Gogh's Starry Night[/color] • [color=maroon]Rothko Chapel Meditation[/color] • [color=red]Mondrian Primary Composition[/color]
+[color=hotpink]• Memphis Design Movement[/color] • [color=yellow]Bauhaus School Colors[/color] • [color=purple]Stonewall Uprising 1969[/color]
+[color=rainbow]• Pride Flag Evolution[/color] • [color=gold]Harlem Renaissance Jazz[/color] • [color=pink]Spectrum of Pinkness[/color]
+[color=cyan]• Dance Floor Energy[/color] • [color=orange]Pure Joy & Celebration[/color] • [color=darkred]Depths of Pain[/color]
+[color=lightpink]• Love & Warmth[/color] • [color=green]Frida Kahlo's Palette[/color] • [color=blue]Hokusai's Great Wave[/color]
+[color=orange]• Desert Sunset Meditation[/color] • [color=magenta]Cyberpunk Neon Dreams[/color] • [color=brown]Autumn Melancholy[/color]
+[color=lime]• Tropical Paradise[/color] • [color=gray]Industrial Brutalism[/color]
+
+Each palette captures the essence of its theme through carefully selected colors that evoke specific emotions, historical moments, or artistic movements.[/center]"
+fit_content = true

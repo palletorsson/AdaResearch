@@ -32,3 +32,6 @@ func _ready():
 	
 	print("🎉 All chairs generated successfully!")
 	print("📝 Scene ready for VR exploration")
+
+
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://tiamaxuywcn7"]
+[gd_scene load_steps=6 format=3 uid="uid://tiamaxuywcn7"]
 
 [ext_resource type="Script" uid="uid://c6yrhyk63peg" path="res://algorithms/randomness/randomnumbergeneration/scripts/random_color_book_page_1955.gd" id="1_hvxeg"]
 
@@ -11,6 +11,9 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xq8st"]
+size = Vector3(3.41071, 5.51074, 0.064209)
 
 [sub_resource type="QuadMesh" id="QuadMesh_kl1il"]
 size = Vector2(4, 6)
@@ -34,9 +37,16 @@ cache/0/32/0/scale = 1.0
 script = ExtResource("1_hvxeg")
 font_file = SubResource("FontFile_nmg35")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.314223, -2.18613, -0.092876)
+shape = SubResource("BoxShape3D_xq8st")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.567, -2.379, -0.02)
 mesh = SubResource("QuadMesh_kl1il")
+skeleton = NodePath("../..")
 
 [node name="Label3D_Title" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.626282, 0.368, -0.01)

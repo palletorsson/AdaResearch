@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdmjvisatwxow"]
+
+[ext_resource type="Shader" uid="uid://7uwhkotmpokt" path="res://commons/resourses/shaders/grid_solid.gdshader" id="1_g773y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwevy"]
+size = Vector3(0.278259, 3.06052, 0.226563)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6i3qi"]
+render_priority = 0
+shader = ExtResource("1_g773y")
+shader_parameter/base_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/edge_width = 1.5
+shader_parameter/edge_sharpness = 2.0
+shader_parameter/emission_strength = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_27cvv"]
+size = Vector3(0.2, 2.975, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ru11a"]
+size = Vector3(0.86377, 0.23645, 0.197876)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_07ufv"]
+render_priority = 0
+shader = ExtResource("1_g773y")
+shader_parameter/base_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/edge_width = 1.5
+shader_parameter/edge_sharpness = 2.0
+shader_parameter/emission_strength = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_erd8f"]
+size = Vector3(1, 0.2, 0.2)
+
+[node name="Beam" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.5054)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50963, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0108948, -0.0215607, 0.00292969)
+shape = SubResource("BoxShape3D_wwevy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("ShaderMaterial_6i3qi")
+mesh = SubResource("BoxMesh_27cvv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.577806, 2.82562, -0.0315552)
+shape = SubResource("BoxShape3D_ru11a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.589125, 2.89999, 0)
+material_override = SubResource("ShaderMaterial_07ufv")
+mesh = SubResource("BoxMesh_erd8f")

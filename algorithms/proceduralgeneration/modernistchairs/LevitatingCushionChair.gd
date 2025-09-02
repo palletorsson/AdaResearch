@@ -64,3 +64,4 @@ func regenerate_with_parameters(params: Dictionary):
 		if child != materials:
 			child.queue_free()
 	generate_chair()
+

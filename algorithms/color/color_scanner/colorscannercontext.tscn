@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn7qh8qvlgwuq"]
+
+[ext_resource type="PackedScene" uid="uid://dm6vc5eep4k6g" path="res://algorithms/color/color_scanner/grab_stick_scanner.tscn" id="1_htakw"]
+
+[node name="colorscannercontext" type="Node3D"]
+
+[node name="GrabStick" parent="." instance=ExtResource("1_htakw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.699075, -0.27749)
