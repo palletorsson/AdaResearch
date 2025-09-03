@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://pz7q8r9s4tuvw"]
+[gd_scene load_steps=16 format=3 uid="uid://klavklsu1duu"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -199,10 +199,28 @@ albedo_color = Color(0.2, 0.25, 0.3, 1)
 metallic = 0.7
 roughness = 0.4
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.2, 0.8, 0.6)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.8, 0.85, 0.9, 1)
 metallic = 0.9
 roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 1, 0.5, 1)
@@ -210,39 +228,21 @@ emission_enabled = true
 emission = Color(0, 0.8, 0.3, 1)
 emission_energy_multiplier = 0.8
 
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.25, 0.15, 0.05)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
 albedo_color = Color(0, 0.5, 1, 1)
 emission_enabled = true
 emission = Color(0, 0.3, 1, 1)
 emission_energy_multiplier = 0.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
-albedo_color = Color(0.9, 0.9, 0.8, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
-albedo_color = Color(0.1, 0.1, 0.15, 1)
-metallic = 0.8
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(1.2, 0.8, 0.6)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.15
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.25
-
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(0.25, 0.15, 0.05)
-
 [sub_resource type="SphereMesh" id="SphereMesh_1"]
 radius = 0.02
 height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.9, 0.9, 0.8, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3"]
 top_radius = 0.15
@@ -260,23 +260,23 @@ script = SubResource("GDScript_1")
 
 [node name="SeismoBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="SeismometerDrum" type="MeshInstance3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.5, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="RecordingNeedle" type="MeshInstance3D" parent="SeismoBase/SeismometerDrum"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="DataDisplay" type="MeshInstance3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.25)
-mesh = SubResource("BoxMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_2")
 
 [node name="StatusLight1" type="OmniLight3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.25, 0.25)
@@ -285,8 +285,8 @@ light_energy = 0.5
 omni_range = 1.0
 
 [node name="Status1Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight1"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="StatusLight2" type="OmniLight3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.25)
@@ -295,8 +295,8 @@ light_energy = 0.5
 omni_range = 1.0
 
 [node name="Status2Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight2"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="StatusLight3" type="OmniLight3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.25)
@@ -305,18 +305,18 @@ light_energy = 0.5
 omni_range = 1.0
 
 [node name="Status3Visual" type="MeshInstance3D" parent="SeismoBase/StatusLight3"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="PaperRoll" type="MeshInstance3D" parent="SeismoBase"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.3, 0.3, 0)
-mesh = SubResource("CylinderMesh_3")
 material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_3")
 
 [node name="SensorArray" type="MeshInstance3D" parent="SeismoBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("BoxMesh_3")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

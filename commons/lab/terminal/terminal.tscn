@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dx7k5n9p3qrst"]
+[gd_scene load_steps=10 format=3 uid="uid://dx7k5oap3qrst"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -90,34 +90,34 @@ albedo_color = Color(0.1, 0.1, 0.15, 1)
 metallic = 0.8
 roughness = 0.2
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.6, 0.4, 0.4)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0, 0.8, 0.2, 1)
 emission_enabled = true
 emission = Color(0, 1, 0.3, 1)
-emission_energy = 0.5
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.35, 0.25, 0.02)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(1, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 0.2, 0, 1)
-emission_energy = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(0, 0.5, 1, 1)
-emission_enabled = true
-emission = Color(0.2, 0.7, 1, 1)
-emission_energy = 0.6
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.6, 0.4, 0.4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(0.35, 0.25, 0.02)
+emission_energy_multiplier = 0.8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.01
 bottom_radius = 0.01
 height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0.2, 0.7, 1, 1)
+emission_energy_multiplier = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(1, 0.8, 0.8)
@@ -127,22 +127,21 @@ script = SubResource("GDScript_1")
 
 [node name="ComputerBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="Monitor" type="Node3D" parent="ComputerBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.15)
 
 [node name="Screen" type="MeshInstance3D" parent="ComputerBase/Monitor"]
-mesh = SubResource("BoxMesh_2")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("BoxMesh_2")
 
 [node name="ScreenLight" type="SpotLight3D" parent="ComputerBase/Monitor"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0.1)
 light_color = Color(0, 1, 0.3, 1)
 light_energy = 0.5
 spot_range = 2.0
-spot_angle = 45.0
 
 [node name="StatusLight1" type="OmniLight3D" parent="ComputerBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.15, 0.18)
@@ -151,8 +150,8 @@ light_energy = 0.2
 omni_range = 0.5
 
 [node name="StatusIndicator1" type="MeshInstance3D" parent="ComputerBase/StatusLight1"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="StatusLight2" type="OmniLight3D" parent="ComputerBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.18)
@@ -161,8 +160,8 @@ light_energy = 0.2
 omni_range = 0.5
 
 [node name="StatusIndicator2" type="MeshInstance3D" parent="ComputerBase/StatusLight2"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="StatusLight3" type="OmniLight3D" parent="ComputerBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.15, 0.18)
@@ -171,13 +170,13 @@ light_energy = 0.2
 omni_range = 0.5
 
 [node name="StatusIndicator3" type="MeshInstance3D" parent="ComputerBase/StatusLight3"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="Keyboard" type="MeshInstance3D" parent="ComputerBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0.15)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

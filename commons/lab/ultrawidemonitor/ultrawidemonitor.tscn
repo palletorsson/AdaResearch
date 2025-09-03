@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://sz0t6u8v9wxyz"]
+[gd_scene load_steps=12 format=3 uid="uid://dkedtnkv04gxx"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -80,33 +80,33 @@ albedo_color = Color(0.05, 0.05, 0.1, 1)
 metallic = 0.9
 roughness = 0.1
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(1.6, 0.7, 0.08)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.1, 0.1, 0.2, 1)
 emission_enabled = true
 emission = Color(0, 0.5, 1, 1)
-emission_energy = 1.5
+emission_energy_multiplier = 1.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+size = Vector2(1.5, 0.6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 1, 0.5, 1)
 emission_enabled = true
 emission = Color(0, 0.8, 0.3, 1)
-emission_energy = 0.6
+emission_energy_multiplier = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.01
+height = 0.02
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
 albedo_color = Color(1, 0.5, 0, 1)
 emission_enabled = true
 emission = Color(1, 0.3, 0, 1)
-emission_energy = 0.4
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(1.6, 0.7, 0.08)
-
-[sub_resource type="QuadMesh" id="QuadMesh_1"]
-size = Vector2(1.5, 0.6)
-
-[sub_resource type="SphereMesh" id="SphereMesh_1"]
-radius = 0.01
-height = 0.02
+emission_energy_multiplier = 0.4
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.02
@@ -128,13 +128,13 @@ script = SubResource("GDScript_1")
 
 [node name="CurvedScreen" type="MeshInstance3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="DisplayContent" type="MeshInstance3D" parent="MonitorStructure"]
-transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 0, 0.35, 0.01)
-mesh = SubResource("QuadMesh_1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.0648465)
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("QuadMesh_1")
 
 [node name="StatusIndicator1" type="OmniLight3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0.04)
@@ -143,8 +143,8 @@ light_energy = 0.5
 omni_range = 0.5
 
 [node name="Indicator1Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator1"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="StatusIndicator2" type="OmniLight3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.04)
@@ -153,8 +153,8 @@ light_energy = 0.5
 omni_range = 0.5
 
 [node name="Indicator2Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator2"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="StatusIndicator3" type="OmniLight3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, 0.04)
@@ -163,8 +163,8 @@ light_energy = 0.5
 omni_range = 0.5
 
 [node name="Indicator3Visual" type="MeshInstance3D" parent="MonitorStructure/StatusIndicator3"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="CoolingVent1" type="OmniLight3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.6, -0.03)
@@ -173,8 +173,8 @@ light_energy = 0.3
 omni_range = 0.8
 
 [node name="Vent1Visual" type="MeshInstance3D" parent="MonitorStructure/CoolingVent1"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="CoolingVent2" type="OmniLight3D" parent="MonitorStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.6, -0.03)
@@ -183,13 +183,12 @@ light_energy = 0.3
 omni_range = 0.8
 
 [node name="Vent2Visual" type="MeshInstance3D" parent="MonitorStructure/CoolingVent2"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="MonitorStand" type="MeshInstance3D" parent="MonitorStructure"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

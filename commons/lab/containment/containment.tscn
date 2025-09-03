@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ey8l6o4r7uvwx"]
+[gd_scene load_steps=11 format=3 uid="uid://4tqlm7jnn056"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -164,14 +164,14 @@ roughness = 0.2
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(4, 0.2, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(5, 5, 5)
-
 [sub_resource type="Theme" id="Theme_1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1"]
 font_size = 32
 font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(5, 5, 5)
 
 [node name="ContainmentUnit" type="Node3D"]
 script = SubResource("GDScript_1")
@@ -180,22 +180,21 @@ script = SubResource("GDScript_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="ForceField" type="MeshInstance3D" parent="ContainmentChamber"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("SphereMesh_1")
 
 [node name="Specimen" type="MeshInstance3D" parent="ContainmentChamber"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("SphereMesh_2")
 
 [node name="Base" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_1")
 
 [node name="EnergyCore" type="OmniLight3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 light_color = Color(0, 1, 1, 1)
 light_energy = 2.5
-omni_range = 5.0
 
 [node name="WarningLight1" type="OmniLight3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.3, 1.8)
@@ -217,8 +216,8 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "STATUS: STABLE"
 theme = SubResource("Theme_1")
+text = "STATUS: STABLE"
 label_settings = SubResource("LabelSettings_1")
 
 [node name="InteractionArea" type="Area3D" parent="."]
@@ -228,4 +227,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_1")
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
-

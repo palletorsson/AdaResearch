@@ -1,0 +1,277 @@
+[gd_scene load_steps=14 format=3 uid="uid://de1f7g0h4ijkl"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var quantum_chamber_a = $MeterBase/QuantumChamberA
+@onready var quantum_chamber_b = $MeterBase/QuantumChamberB
+@onready var entanglement_beam = $MeterBase/EntanglementBeam
+@onready var coherence_display = $MeterBase/CoherenceDisplay
+@onready var uncertainty_gauge = $MeterBase/UncertaintyGauge
+
+var entanglement_strength = 0.0
+var quantum_coherence = 0.0
+var heisenberg_uncertainty = 0.0
+var particles_entangled = false
+var bell_inequality_violated = false
+
+signal entanglement_established
+signal quantum_decoherence
+signal bell_test_violation
+signal schrodinger_paradox
+
+func _ready():
+	setup_quantum_meter()
+	start_quantum_measurements()
+
+func setup_quantum_meter():
+	add_to_group('desk_equipment')
+	add_to_group('exotic_instruments')
+	add_to_group('quantum_devices')
+	
+	print('⚛️ QUANTUM METER: Entanglement detection initialized')
+
+func start_quantum_measurements():
+	# Synchronized quantum chamber oscillations
+	var chamber_a_tween = create_tween()
+	chamber_a_tween.set_loops()
+	chamber_a_tween.tween_property(quantum_chamber_a, 'rotation_degrees:y', 360.0, 3.14159)
+	
+	var chamber_b_tween = create_tween()
+	chamber_b_tween.set_loops() 
+	chamber_b_tween.tween_property(quantum_chamber_b, 'rotation_degrees:y', -360.0, 3.14159)  # Counter-rotation
+	
+	# Start quantum state monitoring
+	var quantum_timer = Timer.new()
+	quantum_timer.wait_time = 0.137  # Fine structure constant interval
+	quantum_timer.timeout.connect(measure_quantum_states)
+	quantum_timer.autostart = true
+	add_child(quantum_timer)
+
+func measure_quantum_states():
+	# Simulate quantum measurements with uncertainty principle
+	var measurement_noise = randf_range(-0.1, 0.1)
+	var quantum_fluctuation = sin(Time.get_time_dict_from_system().second * 2.71828) * 0.4
+	
+	entanglement_strength = abs(quantum_fluctuation) + measurement_noise
+	quantum_coherence = 1.0 - abs(measurement_noise * 2.0)
+	heisenberg_uncertainty = abs(measurement_noise) * 3.0
+	
+	# Check for entanglement
+	if entanglement_strength > 0.6 and quantum_coherence > 0.7:
+		establish_entanglement()
+	
+	# Test Bell's inequality
+	if entanglement_strength > 0.8:
+		test_bell_inequality()
+	
+	update_quantum_displays()
+
+func update_quantum_displays():
+	# Entanglement beam visibility
+	if particles_entangled:
+		entanglement_beam.material_override.albedo_color.a = entanglement_strength * 0.8
+		entanglement_beam.material_override.emission_energy = entanglement_strength * 2.0
+	else:
+		entanglement_beam.material_override.albedo_color.a = 0.1
+		entanglement_beam.material_override.emission_energy = 0.3
+	
+	# Chamber synchronization
+	if particles_entangled:
+		# Synchronized colors when entangled
+		var entangled_color = Color.MAGENTA.lerp(Color.CYAN, entanglement_strength)
+		quantum_chamber_a.material_override.emission = entangled_color
+		quantum_chamber_b.material_override.emission = entangled_color
+	else:
+		# Independent colors when not entangled
+		quantum_chamber_a.material_override.emission = Color.BLUE
+		quantum_chamber_b.material_override.emission = Color.RED
+	
+	# Coherence display brightness
+	coherence_display.material_override.emission_energy = quantum_coherence * 2.0
+	
+	# Uncertainty gauge needle position
+	uncertainty_gauge.rotation_degrees.z = heisenberg_uncertainty * 45.0
+
+func establish_entanglement():
+	if not particles_entangled:
+		particles_entangled = true
+		print('🔗 QUANTUM ENTANGLEMENT: Particle pair successfully entangled!')
+		emit_signal('entanglement_established', entanglement_strength)
+		
+		# Entanglement visualization
+		var entangle_tween = create_tween()
+		entangle_tween.tween_property(entanglement_beam, 'scale:y', 2.0, 1.0)
+		entangle_tween.tween_property(entanglement_beam, 'scale:y', 1.0, 1.0)
+
+func test_bell_inequality():
+	# Simulate Bell test measurements
+	var bell_correlation = entanglement_strength * quantum_coherence
+	
+	if bell_correlation > 0.707:  # √2/2 - Bell's theorem threshold
+		if not bell_inequality_violated:
+			bell_inequality_violated = true
+			print('🎯 BELL TEST VIOLATION: Local realism disproven!')
+			emit_signal('bell_test_violation', bell_correlation)
+			
+			# Reality-bending visual effect
+			var bell_tween = create_tween()
+			bell_tween.tween_property(self, 'rotation_degrees:y', 720.0, 2.0)
+			bell_tween.tween_property(self, 'rotation_degrees:y', 0.0, 1.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		perform_quantum_measurement()
+
+func perform_quantum_measurement():
+	print('⚛️ QUANTUM METER: Performing quantum state measurement...')
+	
+	# Measurement causes decoherence (quantum Zeno effect)
+	if randf() < 0.3:
+		trigger_quantum_decoherence()
+	
+	display_quantum_readings()
+
+func display_quantum_readings():
+	print('📊 QUANTUM ANALYSIS:')
+	print('  Entanglement Strength: %.3f' % entanglement_strength)
+	print('  Quantum Coherence: %.1f%%' % (quantum_coherence * 100))
+	print('  Heisenberg Uncertainty: Δx·Δp ≥ %.3f ℏ/2' % heisenberg_uncertainty)
+	print('  Particles Entangled: %s' % ('YES' if particles_entangled else 'NO'))
+	print('  Bell Inequality: %s' % ('VIOLATED' if bell_inequality_violated else 'RESPECTED'))
+
+func trigger_quantum_decoherence():
+	particles_entangled = false
+	bell_inequality_violated = false
+	print('💫 QUANTUM DECOHERENCE: Entanglement lost due to measurement!')
+	emit_signal('quantum_decoherence')
+	
+	# Decoherence visual effect
+	var decohere_tween = create_tween()
+	decohere_tween.tween_property(entanglement_beam, 'material_override:albedo_color:a', 0.0, 2.0)
+
+func create_superposition():
+	print('🌀 QUANTUM METER: Creating quantum superposition state...')
+	
+	# Superposition visualization - both states simultaneously
+	var super_tween = create_tween()
+	super_tween.set_loops(3)
+	super_tween.tween_property(quantum_chamber_a, 'material_override:emission', Color.WHITE, 0.5)
+	super_tween.tween_property(quantum_chamber_a, 'material_override:emission', Color.BLACK, 0.5)
+
+func detect_quantum_tunneling():
+	if heisenberg_uncertainty > 2.0:
+		print('🌊 QUANTUM TUNNELING: Particle barrier penetration detected!')
+		
+		# Tunneling effect - particle appears on other side
+		var tunnel_tween = create_tween()
+		tunnel_tween.tween_property(quantum_chamber_a, 'position:x', quantum_chamber_b.position.x, 0.1)
+		tunnel_tween.tween_property(quantum_chamber_a, 'position:x', -0.04, 0.1)
+
+func trigger_schrodinger_paradox():
+	if particles_entangled and quantum_coherence > 0.9:
+		print('🐱 SCHRÖDINGER PARADOX: Macroscopic quantum effects observed!')
+		emit_signal('schrodinger_paradox')
+		
+		# Reality distortion effect
+		var paradox_tween = create_tween()
+		paradox_tween.set_loops(2)
+		paradox_tween.tween_property(self, 'scale', Vector3(1.5, 1.0, 1.5), 1.0)
+		paradox_tween.tween_property(self, 'scale', Vector3(0.5, 1.0, 0.5), 1.0)
+		paradox_tween.tween_property(self, 'scale', Vector3.ONE, 0.5)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.05, 0.05, 0.1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.16, 0.05, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 0, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+transparency = 1
+albedo_color = Color(1, 0, 1, 0.3)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.002
+bottom_radius = 0.002
+height = 0.08
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.04, 0.02, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.001
+bottom_radius = 0.001
+height = 0.015
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.3, 0.12, 0.15)
+
+[node name="QuantumEntanglementMeter" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="MeterBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
+
+[node name="QuantumChamberA" type="MeshInstance3D" parent="MeterBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.04, 0)
+material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("SphereMesh_1")
+
+[node name="QuantumChamberB" type="MeshInstance3D" parent="MeterBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.04, 0)
+material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
+
+[node name="EntanglementBeam" type="MeshInstance3D" parent="MeterBase"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.04, 0)
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="CoherenceDisplay" type="MeshInstance3D" parent="MeterBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.01, -0.035)
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("BoxMesh_2")
+
+[node name="UncertaintyGauge" type="MeshInstance3D" parent="MeterBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 0.015, -0.03)
+material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("CylinderMesh_2")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

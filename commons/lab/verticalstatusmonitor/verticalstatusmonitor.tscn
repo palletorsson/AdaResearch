@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://tz1u7v9w0xyza"]
+[gd_scene load_steps=11 format=3 uid="uid://o0jamon6xl7g"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -120,32 +120,31 @@ albedo_color = Color(0.1, 0.1, 0.15, 1)
 metallic = 0.8
 roughness = 0.2
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.4, 1, 0.08)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0, 1, 0.5, 1)
 emission_enabled = true
 emission = Color(0, 0.8, 0.3, 1)
-emission_energy = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.3, 0.15, 0.02)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 0.5, 1, 1)
 emission_enabled = true
 emission = Color(0, 0.3, 1, 1)
-emission_energy = 0.8
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.25, 0.05, 0.01)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
 albedo_color = Color(1, 0.5, 0, 1)
 emission_enabled = true
 emission = Color(1, 0.3, 0, 1)
-emission_energy = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.4, 1.0, 0.08)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(0.3, 0.15, 0.02)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3"]
-size = Vector3(0.25, 0.05, 0.01)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_1"]
 radius = 0.03
@@ -159,13 +158,13 @@ script = SubResource("GDScript_1")
 
 [node name="MonitorFrame" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="StatusDisplay" type="MeshInstance3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
-mesh = SubResource("BoxMesh_2")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("BoxMesh_2")
 
 [node name="DataBar1" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.1, 0.04)
@@ -174,8 +173,8 @@ light_energy = 0.8
 omni_range = 0.5
 
 [node name="Bar1Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar1"]
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_3")
 
 [node name="DataBar2" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.1, 0.04)
@@ -184,8 +183,8 @@ light_energy = 0.6
 omni_range = 0.5
 
 [node name="Bar2Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar2"]
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_3")
 
 [node name="DataBar3" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.04)
@@ -194,8 +193,8 @@ light_energy = 0.9
 omni_range = 0.5
 
 [node name="Bar3Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar3"]
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_3")
 
 [node name="DataBar4" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.1, 0.04)
@@ -204,8 +203,8 @@ light_energy = 0.4
 omni_range = 0.5
 
 [node name="Bar4Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar4"]
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_3")
 
 [node name="DataBar5" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.1, 0.04)
@@ -214,8 +213,8 @@ light_energy = 0.7
 omni_range = 0.5
 
 [node name="Bar5Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar5"]
-mesh = SubResource("BoxMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_3")
 
 [node name="AlertBeacon" type="OmniLight3D" parent="MonitorFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.04)
@@ -224,8 +223,8 @@ light_energy = 0.5
 omni_range = 1.0
 
 [node name="BeaconVisual" type="MeshInstance3D" parent="MonitorFrame/AlertBeacon"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

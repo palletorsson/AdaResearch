@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://uz2v8w0x1yzab"]
+[gd_scene load_steps=13 format=3 uid="uid://bo1kbnfo7ymhh"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -81,33 +81,27 @@ albedo_color = Color(0.1, 0.15, 0.1, 1)
 metallic = 0.8
 roughness = 0.3
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.1
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0, 0.8, 0.2, 0.6)
 transparency = 1
+albedo_color = Color(0, 0.8, 0.2, 0.6)
 emission_enabled = true
 emission = Color(0, 1, 0.3, 1)
 emission_energy_multiplier = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.35
+height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0, 1, 0, 1)
 emission_enabled = true
 emission = Color(0, 0.8, 0, 1)
 emission_energy_multiplier = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(0, 0.6, 0, 1)
-emission_enabled = true
-emission = Color(0, 0.5, 0, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
-top_radius = 0.4
-bottom_radius = 0.4
-height = 0.1
-
-[sub_resource type="SphereMesh" id="SphereMesh_1"]
-radius = 0.35
-height = 0.05
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.01
@@ -117,6 +111,12 @@ height = 0.3
 [sub_resource type="SphereMesh" id="SphereMesh_2"]
 radius = 0.02
 height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.6, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 0, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="TorusMesh" id="TorusMesh_1"]
 inner_radius = 0.15
@@ -134,28 +134,27 @@ script = SubResource("GDScript_1")
 
 [node name="RadarBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="RadarScreen" type="MeshInstance3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("SphereMesh_1")
 
 [node name="SweepArm" type="MeshInstance3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.2, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="RadarBlip1" type="OmniLight3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.12, 0.1)
 light_color = Color(0, 1, 0, 1)
-light_energy = 1.0
 omni_range = 0.5
 
 [node name="Blip1Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip1"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_2")
 
 [node name="RadarBlip2" type="OmniLight3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.12, -0.05)
@@ -164,8 +163,8 @@ light_energy = 0.8
 omni_range = 0.5
 
 [node name="Blip2Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip2"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_2")
 
 [node name="RadarBlip3" type="OmniLight3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.12, -0.2)
@@ -174,8 +173,8 @@ light_energy = 1.2
 omni_range = 0.5
 
 [node name="Blip3Visual" type="MeshInstance3D" parent="RadarBase/RadarBlip3"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_2")
 
 [node name="RangeRing1" type="OmniLight3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
@@ -184,8 +183,8 @@ light_energy = 0.4
 omni_range = 1.0
 
 [node name="Ring1Visual" type="MeshInstance3D" parent="RadarBase/RangeRing1"]
-mesh = SubResource("TorusMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("TorusMesh_1")
 
 [node name="RangeRing2" type="OmniLight3D" parent="RadarBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
@@ -194,8 +193,8 @@ light_energy = 0.3
 omni_range = 1.0
 
 [node name="Ring2Visual" type="MeshInstance3D" parent="RadarBase/RangeRing2"]
-mesh = SubResource("TorusMesh_2")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("TorusMesh_2")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 
@@ -203,4 +202,3 @@ material_override = SubResource("StandardMaterial3D_4")
 shape = SubResource("BoxShape3D_1")
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://kz5n9p8r2efgh"]
+[gd_scene load_steps=15 format=3 uid="uid://fx28li2e78mm"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -188,64 +188,63 @@ func trigger_contamination_protocol():
 	contamination_tween.tween_property(cryo_chamber, 'material_override:emission', Color.CYAN, 0.3)
 "
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
-albedo_color = Color(0.8, 0.9, 1, 1)
-metallic = 0.9
-roughness = 0.1
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.7, 0.9, 1, 0.6)
 transparency = 1
+albedo_color = Color(0.7, 0.9, 1, 0.6)
 emission_enabled = true
 emission = Color(0, 0.7, 1, 1)
-emission_energy = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0.9, 0.95, 1, 0.8)
-transparency = 1
-emission_enabled = true
-emission = Color(0.5, 0.8, 1, 1)
-emission_energy = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(0.2, 0.3, 0.4, 1)
-metallic = 0.8
-roughness = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
-albedo_color = Color(0, 0.5, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.3, 1, 1)
-emission_energy = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
-albedo_color = Color(0.8, 1, 1, 0.4)
-transparency = 1
-emission_enabled = true
-emission = Color(0.6, 1, 1, 1)
-emission_energy = 0.5
+emission_energy_multiplier = 0.8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 1.2
 bottom_radius = 1.2
 height = 3.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+transparency = 1
+albedo_color = Color(0.9, 0.95, 1, 0.8)
+emission_enabled = true
+emission = Color(0.5, 0.8, 1, 1)
+emission_energy_multiplier = 0.3
+
 [sub_resource type="SphereMesh" id="SphereMesh_1"]
 radius = 0.4
 height = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.2, 0.3, 0.4, 1)
+metallic = 0.8
+roughness = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.6
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(0.4, 0.2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+transparency = 1
+albedo_color = Color(0.8, 1, 1, 0.4)
+emission_enabled = true
+emission = Color(0.6, 1, 1, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3"]
 top_radius = 1.0
 bottom_radius = 1.0
 height = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_2"]
 radius = 0.02
@@ -261,33 +260,33 @@ script = SubResource("GDScript_1")
 
 [node name="CryoChamber" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="SpecimenCapsule" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="CoolingUnit1" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.3, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="CoolingUnit2" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.3, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="TemperatureDisplay" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.3)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("BoxMesh_1")
 
 [node name="CryoMistEffect" type="MeshInstance3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-mesh = SubResource("CylinderMesh_3")
 material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("CylinderMesh_3")
 
 [node name="PressureValve1" type="OmniLight3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2.5, 0.8)
@@ -296,8 +295,8 @@ light_energy = 0.3
 omni_range = 1.5
 
 [node name="Valve1Visual" type="MeshInstance3D" parent="CryoStructure/PressureValve1"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("SphereMesh_2")
 
 [node name="PressureValve2" type="OmniLight3D" parent="CryoStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.5, 0.8)
@@ -306,8 +305,8 @@ light_energy = 0.3
 omni_range = 1.5
 
 [node name="Valve2Visual" type="MeshInstance3D" parent="CryoStructure/PressureValve2"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("SphereMesh_2")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

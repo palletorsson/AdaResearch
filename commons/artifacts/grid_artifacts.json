@@ -12,6 +12,10 @@
 			"position": [0.0, 1.0, 1.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [0.5, 0.5, 0.5],
+			"interaction": "look",
+			"sequence": "primitives",
+			"artifact_type": "context_tool",
+			"prerequisites": []
 		},
 		"test_scene_2": {
 			"name": "This is just a test",
@@ -21,6 +25,10 @@
 			"position": [0.0, 1.0, 1.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [0.5, 0.5, 0.5],
+			"interaction": "look",
+			"sequence": "primitives",
+			"artifact_type": "context_tool",
+			"prerequisites": []
 		},
 		"geometric_transformations": {
 			"name": "geometric_transformations",
@@ -2830,8 +2838,7 @@
 				"light_range": 3.6,
 				"light_position": [0, 1.4, 0]
 			}
-		}
-	},
+		},
 	"agnes_grid": {
 		"name": "Agnes Grid",
 		"lookup_name": "agnes_grid",
@@ -2971,7 +2978,7 @@
 		"artifact_type": "context_tool",
 		"prerequisites": []
 	},
-	"magnifying_glass": {
+		"magnifying_glass": {
 		"name": "Magnifying Glass",
 		"lookup_name": "magnifying_glass",
 		"description": "Magnifying glass for detailed examination",
@@ -3108,4 +3115,5 @@
 		"spacing_between_artifacts": 0.5,
 		"auto_arrange_on_spawn": true
 	}
+}
 }

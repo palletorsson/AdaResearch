@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://oz9r8s6t5uvwx"]
+[gd_scene load_steps=15 format=3 uid="uid://df16hnf3haann"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -248,42 +248,25 @@ albedo_color = Color(0.2, 0.25, 0.3, 1)
 metallic = 0.6
 roughness = 0.4
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.4, 0.6, 0.15)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0, 1, 0.5, 1)
 emission_enabled = true
 emission = Color(0, 0.8, 0.3, 1)
-emission_energy = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0, 0.5, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.3, 1, 1)
-emission_energy = 0.6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(1, 0.5, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.3, 0, 1)
-emission_energy = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
-albedo_color = Color(0.8, 0.9, 1, 1)
-metallic = 0.9
-roughness = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.2, 0, 1)
-emission_energy = 0.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.4, 0.6, 0.15)
+emission_energy_multiplier = 0.8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.05
 bottom_radius = 0.05
 height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy_multiplier = 0.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_2"]
 size = Vector3(0.15, 0.1, 0.08)
@@ -292,10 +275,27 @@ size = Vector3(0.15, 0.1, 0.08)
 radius = 0.02
 height = 0.04
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.08
 bottom_radius = 0.08
 height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy_multiplier = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_2"]
 radius = 0.03
@@ -311,8 +311,8 @@ script = SubResource("GDScript_1")
 
 [node name="MainPack" type="MeshInstance3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="PowerCell1" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.2, 0.1)
@@ -321,8 +321,8 @@ light_energy = 0.8
 omni_range = 1.0
 
 [node name="Cell1Visual" type="MeshInstance3D" parent="BackpackStructure/PowerCell1"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="PowerCell2" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.2, 0.1)
@@ -331,8 +331,8 @@ light_energy = 0.8
 omni_range = 1.0
 
 [node name="Cell2Visual" type="MeshInstance3D" parent="BackpackStructure/PowerCell2"]
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="DataStorage" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0.1)
@@ -341,8 +341,8 @@ light_energy = 0.6
 omni_range = 0.8
 
 [node name="StorageVisual" type="MeshInstance3D" parent="BackpackStructure/DataStorage"]
-mesh = SubResource("BoxMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_2")
 
 [node name="TempSensor" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.5, 0.1)
@@ -351,8 +351,8 @@ light_energy = 0.4
 omni_range = 0.5
 
 [node name="TempSensorVisual" type="MeshInstance3D" parent="BackpackStructure/TempSensor"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="RadSensor" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.5, 0.1)
@@ -361,8 +361,8 @@ light_energy = 0.4
 omni_range = 0.5
 
 [node name="RadSensorVisual" type="MeshInstance3D" parent="BackpackStructure/RadSensor"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="AtmoSensor" type="OmniLight3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0.1)
@@ -371,18 +371,17 @@ light_energy = 0.4
 omni_range = 0.5
 
 [node name="AtmoSensorVisual" type="MeshInstance3D" parent="BackpackStructure/AtmoSensor"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="CommArray" type="MeshInstance3D" parent="BackpackStructure"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="CommLight" type="OmniLight3D" parent="BackpackStructure/CommArray"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 light_color = Color(0.5, 0.8, 1, 1)
-light_energy = 1.0
 omni_range = 2.0
 
 [node name="EmergencyBeacon" type="OmniLight3D" parent="BackpackStructure"]
@@ -392,8 +391,8 @@ light_energy = 0.0
 omni_range = 3.0
 
 [node name="BeaconVisual" type="MeshInstance3D" parent="BackpackStructure/EmergencyBeacon"]
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("SphereMesh_2")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

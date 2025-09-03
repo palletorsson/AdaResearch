@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jz4m8q7p5uvwx"]
+[gd_scene load_steps=14 format=3 uid="uid://cbbv2nd71g5ff"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -192,49 +192,46 @@ albedo_color = Color(0.2, 0.2, 0.25, 1)
 metallic = 0.8
 roughness = 0.3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.8, 0.9, 1, 1)
-metallic = 0.9
-roughness = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0, 1, 0.5, 0.4)
-transparency = 1
-emission_enabled = true
-emission = Color(0, 1, 0.3, 1)
-emission_energy = 1.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(1, 0, 0.8, 1)
-emission_enabled = true
-emission = Color(1, 0, 0.5, 1)
-emission_energy = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
-albedo_color = Color(0, 0.8, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.5, 1, 1)
-emission_energy = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
-albedo_color = Color(1, 1, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.8, 0, 1)
-emission_energy = 1.0
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.8
 bottom_radius = 0.8
 height = 0.3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
 [sub_resource type="SphereMesh" id="SphereMesh_1"]
 radius = 0.2
 height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.5, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.05
 bottom_radius = 0.05
 height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+transparency = 1
+albedo_color = Color(0, 1, 0.5, 0.4)
+emission_enabled = true
+emission = Color(0, 1, 0.3, 1)
+emission_energy_multiplier = 1.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_2"]
 radius = 2.0
@@ -253,13 +250,13 @@ script = SubResource("GDScript_1")
 
 [node name="ProjectorBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="ProjectionLens" type="MeshInstance3D" parent="ProjectorBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("SphereMesh_1")
 
 [node name="LensLight" type="SpotLight3D" parent="ProjectorBase/ProjectionLens"]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0.2, 0)
@@ -275,8 +272,8 @@ light_energy = 0.5
 omni_range = 2.0
 
 [node name="Crystal1Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal1"]
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="DataCrystal2" type="OmniLight3D" parent="ProjectorBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0)
@@ -285,8 +282,8 @@ light_energy = 0.5
 omni_range = 2.0
 
 [node name="Crystal2Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal2"]
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="DataCrystal3" type="OmniLight3D" parent="ProjectorBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.4)
@@ -295,46 +292,43 @@ light_energy = 0.5
 omni_range = 2.0
 
 [node name="Crystal3Visual" type="MeshInstance3D" parent="ProjectorBase/DataCrystal3"]
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_6")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="HologramField" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-mesh = SubResource("SphereMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_2")
 
 [node name="DataStream1" type="SpotLight3D" parent="HologramField"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 1, 0, 0)
 light_color = Color(0, 1, 0.5, 1)
-light_energy = 1.0
 spot_range = 4.0
 spot_angle = 20.0
 
 [node name="Stream1Visual" type="MeshInstance3D" parent="HologramField/DataStream1"]
-mesh = SubResource("CylinderMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_3")
 
 [node name="DataStream2" type="SpotLight3D" parent="HologramField"]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -1, 0, 0)
 light_color = Color(0, 1, 0.5, 1)
-light_energy = 1.0
 spot_range = 4.0
 spot_angle = 20.0
 
 [node name="Stream2Visual" type="MeshInstance3D" parent="HologramField/DataStream2"]
-mesh = SubResource("CylinderMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_3")
 
 [node name="DataStream3" type="SpotLight3D" parent="HologramField"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 1)
 light_color = Color(0, 1, 0.5, 1)
-light_energy = 1.0
 spot_range = 4.0
 spot_angle = 20.0
 
 [node name="Stream3Visual" type="MeshInstance3D" parent="HologramField/DataStream3"]
-mesh = SubResource("CylinderMesh_3")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_3")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

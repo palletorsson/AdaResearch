@@ -1,0 +1,1045 @@
+extends Node3D
+class_name GeometricStudiesCollection
+
+# Complete collection of historical geometric studies
+# Based on works by Brückner, Hirschvogel, and Renaissance masters
+
+@export var study_scale: float = 1.0
+@export var paper_color: Color = Color(0.94, 0.91, 0.86, 1)
+@export var ink_color: Color = Color(0.15, 0.12, 0.1, 1)
+@export var show_animations: bool = false
+@export var polyhedra_material_type: String = "paper"  # "paper", "crystal", "metal"
+
+var paper_material: StandardMaterial3D
+var ink_material: StandardMaterial3D
+var study_materials: Dictionary = {}
+
+# Color theory system for tessellated cubes
+var color_theory_colors = {
+	"white": Color(0.95, 0.95, 0.95, 1),
+	"light_yellow": Color(1.0, 0.95, 0.7, 1),
+	"yellow": Color(1.0, 0.9, 0.2, 1),
+	"light_blue": Color(0.7, 0.85, 1.0, 1),
+	"blue": Color(0.2, 0.4, 0.8, 1),
+	"light_green": Color(0.7, 1.0, 0.7, 1),
+	"green": Color(0.2, 0.7, 0.2, 1),
+	"pink": Color(1.0, 0.7, 0.8, 1),
+	"red": Color(0.8, 0.2, 0.2, 1),
+	"ochre": Color(0.8, 0.6, 0.3, 1),
+	"orange": Color(1.0, 0.5, 0.1, 1),
+	"brown": Color(0.5, 0.3, 0.2, 1),
+	"purple": Color(0.6, 0.3, 0.7, 1),
+	"light_purple": Color(0.8, 0.6, 0.9, 1),
+	"null_white": Color(0.9, 0.9, 0.9, 1)
+}
+
+func _ready():
+	setup_materials()
+	create_study_layout()
+	create_twisted_spire()
+	create_bruckner_polyhedra()
+	create_watercolor_cube()
+	create_renaissance_scene()
+	create_hirschvogel_cube_net()
+	create_color_theory_tessellation()
+	setup_period_lighting()
+
+func setup_materials():
+	# Base materials
+	paper_material = StandardMaterial3D.new()
+	paper_material.albedo_color = paper_color
+	paper_material.roughness = 0.9
+	paper_material.metallic = 0.0
+	
+	ink_material = StandardMaterial3D.new()
+	ink_material.albedo_color = ink_color
+	ink_material.roughness = 0.8
+	ink_material.metallic = 0.0
+	
+	# Create materials for different polyhedra types
+	match polyhedra_material_type:
+		"paper":
+			create_paper_materials()
+		"crystal":
+			create_crystal_materials()
+		"metal":
+			create_metal_materials()
+	
+	# Color theory materials
+	for color_name in color_theory_colors:
+		var material = StandardMaterial3D.new()
+		material.albedo_color = color_theory_colors[color_name]
+		material.roughness = 0.7
+		material.metallic = 0.1
+		study_materials[color_name] = material
+
+func create_paper_materials():
+	var paper_tones = [
+		Color(0.9, 0.88, 0.85, 1),   # Light paper
+		Color(0.85, 0.82, 0.78, 1),  # Medium paper
+		Color(0.8, 0.76, 0.72, 1),   # Dark paper
+		Color(0.88, 0.85, 0.82, 1),  # Warm paper
+		Color(0.87, 0.84, 0.8, 1)    # Cool paper
+	]
+	
+	for i in range(paper_tones.size()):
+		var material = StandardMaterial3D.new()
+		material.albedo_color = paper_tones[i]
+		material.roughness = 0.8
+		material.metallic = 0.0
+		study_materials["paper_" + str(i)] = material
+
+func create_crystal_materials():
+	var crystal_colors = [
+		Color(0.9, 0.95, 1.0, 0.7),   # Clear crystal
+		Color(0.8, 0.9, 1.0, 0.6),    # Blue crystal
+		Color(1.0, 0.9, 0.8, 0.6),    # Amber crystal
+		Color(0.9, 1.0, 0.9, 0.6),    # Green crystal
+		Color(1.0, 0.8, 0.9, 0.6)     # Rose crystal
+	]
+	
+	for i in range(crystal_colors.size()):
+		var material = StandardMaterial3D.new()
+		material.albedo_color = crystal_colors[i]
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.metallic = 0.1
+		material.roughness = 0.05
+		material.refraction_enabled = true
+		study_materials["crystal_" + str(i)] = material
+
+func create_metal_materials():
+	var metal_colors = [
+		Color(0.8, 0.8, 0.85, 1),     # Silver
+		Color(0.9, 0.7, 0.4, 1),      # Gold
+		Color(0.7, 0.5, 0.3, 1),      # Bronze
+		Color(0.6, 0.6, 0.65, 1),     # Pewter
+		Color(0.5, 0.3, 0.2, 1)       # Iron
+	]
+	
+	for i in range(metal_colors.size()):
+		var material = StandardMaterial3D.new()
+		material.albedo_color = metal_colors[i]
+		material.metallic = 0.9
+		material.roughness = 0.3
+		study_materials["metal_" + str(i)] = material
+
+func create_study_layout():
+	# Create paper backgrounds for each study
+	var layout_positions = [
+		Vector3(-4, 0, 3),    # Twisted spire
+		Vector3(0, 0, 3),     # Brückner polyhedra
+		Vector3(4, 0, 3),     # Watercolor cube
+		Vector3(-4, 0, -1),   # Renaissance scene
+		Vector3(0, 0, -1),    # Hirschvogel net
+		Vector3(4, 0, -1)     # Color theory
+	]
+	
+	for i in range(layout_positions.size()):
+		create_study_background(layout_positions[i], "Study" + str(i + 1))
+
+func create_study_background(pos: Vector3, name: String):
+	var background = StaticBody3D.new()
+	background.name = name + "Background"
+	background.position = pos
+	add_child(background)
+	
+	var page = MeshInstance3D.new()
+	page.name = "StudyPage"
+	page.transform.basis = page.transform.basis.rotated(Vector3.RIGHT, -PI/2)
+	page.position.y = -0.01
+	
+	var quad_mesh = QuadMesh.new()
+	quad_mesh.size = Vector2(3, 4) * study_scale
+	page.mesh = quad_mesh
+	page.material_override = paper_material
+	
+	background.add_child(page)
+
+func create_twisted_spire():
+	var spire_group = Node3D.new()
+	spire_group.name = "TwistedSpire"
+	spire_group.position = Vector3(-4, 0, 3) * study_scale
+	add_child(spire_group)
+	
+	# Base platform (pink/brown)
+	var base = MeshInstance3D.new()
+	base.name = "SpireBase"
+	base.position.y = 0.1 * study_scale
+	
+	var base_mesh = BoxMesh.new()
+	base_mesh.size = Vector3(0.8, 0.2, 0.6) * study_scale
+	base.mesh = base_mesh
+	
+	var base_material = StandardMaterial3D.new()
+	base_material.albedo_color = Color(0.9, 0.7, 0.6, 1)
+	base_material.roughness = 0.7
+	base.material_override = base_material
+	spire_group.add_child(base)
+	
+	# Twisted column with angular segments
+	var segment_count = 20
+	var total_height = 3.0 * study_scale
+	var base_radius = 0.15 * study_scale
+	var twist_amount = PI * 2
+	
+	for i in range(segment_count):
+		var segment = MeshInstance3D.new()
+		segment.name = "SpireSegment" + str(i)
+		
+		var height_ratio = i / float(segment_count)
+		var y_pos = 0.2 + (height_ratio * total_height)
+		var rotation = (height_ratio * twist_amount)
+		var radius = base_radius * (1.0 - height_ratio * 0.3)
+		
+		segment.position = Vector3(0, y_pos, 0)
+		segment.rotation.y = rotation
+		
+		# Create angular prism segment
+		var segment_mesh = create_angular_prism(radius, total_height / segment_count, 8)
+		segment.mesh = segment_mesh
+		segment.material_override = study_materials.get("paper_0", paper_material)
+		
+		spire_group.add_child(segment)
+
+func create_angular_prism(radius: float, height: float, sides: int) -> ArrayMesh:
+	var mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var vertices = PackedVector3Array()
+	var normals = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	# Create vertices for angular faceted cylinder
+	for i in range(sides):
+		var angle = (i / float(sides)) * TAU
+		var x = cos(angle) * radius
+		var z = sin(angle) * radius
+		
+		# Bottom vertex
+		vertices.append(Vector3(x, 0, z))
+		normals.append(Vector3(x, 0, z).normalized())
+		
+		# Top vertex  
+		vertices.append(Vector3(x, height, z))
+		normals.append(Vector3(x, 0, z).normalized())
+	
+	# Create faces
+	for i in range(sides):
+		var current = i * 2
+		var next = ((i + 1) % sides) * 2
+		
+		# Side face (two triangles)
+		indices.append_array([current, current + 1, next])
+		indices.append_array([next, current + 1, next + 1])
+	
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
+
+func create_bruckner_polyhedra():
+	var polyhedra_group = Node3D.new()
+	polyhedra_group.name = "BrucknerPolyhedra"
+	polyhedra_group.position = Vector3(0, 0, 3) * study_scale
+	add_child(polyhedra_group)
+	
+	# 3x4 grid layout matching Brückner's arrangement
+	var grid_positions = []
+	for row in range(4):
+		for col in range(3):
+			grid_positions.append(Vector3(
+				(col - 1) * 1.2 * study_scale,
+				1.5 + (row * 0.8) * study_scale,
+				0
+			))
+	
+	# Polyhedra types (simplified versions of Brückner's complex forms)
+	var polyhedra_types = [
+		"compound_tetrahedra",      # 1
+		"stellated_dodecahedron",   # 2  
+		"geodesic_sphere",          # 3
+		"flower_polyhedron",        # 4
+		"compound_cubes",           # 5
+		"triangular_dipyramid",     # 6
+		"star_polyhedron",          # 7
+		"complex_compound",         # 8
+		"stellated_octahedron",     # 9
+		"faceted_sphere",           # 10
+		"crown_polyhedron",         # 11
+		"rhombic_compound"          # 12
+	]
+	
+	for i in range(min(grid_positions.size(), polyhedra_types.size())):
+		create_polyhedron(polyhedra_group, polyhedra_types[i], grid_positions[i], i)
+
+func create_polyhedron(parent: Node3D, type: String, pos: Vector3, index: int):
+	var polyhedron = Node3D.new()
+	polyhedron.name = "Polyhedron_" + str(index + 1)
+	polyhedron.position = pos
+	parent.add_child(polyhedron)
+	
+	var material_key = polyhedra_material_type + "_" + str(index % 5)
+	var material = study_materials.get(material_key, paper_material)
+	
+	match type:
+		"compound_tetrahedra":
+			create_compound_tetrahedra(polyhedron, material)
+		"stellated_dodecahedron":
+			create_stellated_dodecahedron(polyhedron, material)
+		"geodesic_sphere":
+			create_geodesic_sphere(polyhedron, material)
+		"flower_polyhedron":
+			create_flower_polyhedron(polyhedron, material)
+		"compound_cubes":
+			create_compound_cubes(polyhedron, material)
+		"triangular_dipyramid":
+			create_triangular_dipyramid(polyhedron, material)
+		"star_polyhedron":
+			create_star_polyhedron(polyhedron, material)
+		"complex_compound":
+			create_complex_compound(polyhedron, material)
+		"stellated_octahedron":
+			create_stellated_octahedron(polyhedron, material)
+		"faceted_sphere":
+			create_faceted_sphere(polyhedron, material)
+		"crown_polyhedron":
+			create_crown_polyhedron(polyhedron, material)
+		"rhombic_compound":
+			create_rhombic_compound(polyhedron, material)
+
+func create_compound_tetrahedra(parent: Node3D, material: StandardMaterial3D):
+	# Two intersecting tetrahedra
+	var size = 0.2 * study_scale
+	
+	for i in range(2):
+		var tetrahedron = MeshInstance3D.new()
+		tetrahedron.name = "Tetrahedron" + str(i + 1)
+		if i == 1:
+			tetrahedron.rotation.y = PI
+		
+		var tetra_mesh = create_tetrahedron_mesh(size)
+		tetrahedron.mesh = tetra_mesh
+		tetrahedron.material_override = material
+		parent.add_child(tetrahedron)
+
+func create_stellated_dodecahedron(parent: Node3D, material: StandardMaterial3D):
+	# Approximation using spikes from dodecahedron faces
+	var core = MeshInstance3D.new()
+	core.name = "DodecahedronCore"
+	
+	# Use sphere as base, add spikes
+	var core_mesh = SphereMesh.new()
+	core_mesh.radius = 0.1 * study_scale
+	core_mesh.height = 0.2 * study_scale
+	core.mesh = core_mesh
+	core.material_override = material
+	parent.add_child(core)
+	
+	# Add stellated spikes
+	var spike_count = 12
+	for i in range(spike_count):
+		var spike = MeshInstance3D.new()
+		spike.name = "Spike" + str(i)
+		
+		var angle_h = (i / float(spike_count)) * TAU
+		var angle_v = sin(i * 0.7) * 0.5
+		var spike_direction = Vector3(
+			cos(angle_h) * cos(angle_v),
+			sin(angle_v),
+			sin(angle_h) * cos(angle_v)
+		).normalized()
+		
+		spike.position = spike_direction * 0.1 * study_scale
+		spike.look_at(spike.position + spike_direction, Vector3.UP)
+		
+		var spike_mesh = BoxMesh.new()
+		spike_mesh.size = Vector3(0.01, 0.01, 0.08) * study_scale
+		spike.mesh = spike_mesh
+		spike.material_override = material
+		parent.add_child(spike)
+
+func create_geodesic_sphere(parent: Node3D, material: StandardMaterial3D):
+	# Simplified geodesic using icosphere subdivision
+	var sphere = MeshInstance3D.new()
+	sphere.name = "GeodesicSphere"
+	
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.15 * study_scale
+	sphere_mesh.height = 0.3 * study_scale
+	# Increase subdivision for geodesic appearance
+	sphere_mesh.radial_segments = 16
+	sphere_mesh.rings = 8
+	
+	sphere.mesh = sphere_mesh
+	sphere.material_override = material
+	parent.add_child(sphere)
+
+func create_watercolor_cube():
+	var cube_group = Node3D.new()
+	cube_group.name = "WatercolorCube"
+	cube_group.position = Vector3(4, 0, 3) * study_scale
+	add_child(cube_group)
+	
+	# Main cube with gradient coloring
+	var cube = MeshInstance3D.new()
+	cube.name = "MainCube"
+	cube.position.y = 0.15 * study_scale
+	cube.rotation = Vector3(0.2, 0.3, 0.1)
+	
+	var cube_mesh = BoxMesh.new()
+	cube_mesh.size = Vector3(0.3, 0.3, 0.3) * study_scale
+	cube.mesh = cube_mesh
+	
+	# Watercolor-style material
+	var watercolor_material = StandardMaterial3D.new()
+	watercolor_material.albedo_color = Color(0.6, 0.7, 0.9, 0.8)
+	watercolor_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	watercolor_material.roughness = 0.9
+	cube.material_override = watercolor_material
+	
+	cube_group.add_child(cube)
+	
+	# Add watercolor wash background
+	create_watercolor_wash(cube_group)
+
+func create_watercolor_wash(parent: Node3D):
+	# Simulate watercolor bleeding effect
+	var wash_positions = [
+		Vector3(0.2, 0.05, 0.1),
+		Vector3(-0.15, 0.05, -0.1),
+		Vector3(0.1, 0.05, -0.15)
+	]
+	
+	var wash_colors = [
+		Color(0.9, 0.8, 0.7, 0.3),
+		Color(0.8, 0.9, 0.8, 0.3),
+		Color(0.8, 0.8, 0.9, 0.3)
+	]
+	
+	for i in range(wash_positions.size()):
+		var wash = MeshInstance3D.new()
+		wash.name = "WatercolorWash" + str(i)
+		wash.position = wash_positions[i] * study_scale
+		wash.transform.basis = wash.transform.basis.rotated(Vector3.RIGHT, -PI/2)
+		
+		var wash_mesh = QuadMesh.new()
+		wash_mesh.size = Vector2(0.6, 0.4) * study_scale
+		wash.mesh = wash_mesh
+		
+		var wash_material = StandardMaterial3D.new()
+		wash_material.albedo_color = wash_colors[i]
+		wash_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		wash_material.roughness = 1.0
+		wash.material_override = wash_material
+		
+		parent.add_child(wash)
+
+func create_renaissance_scene():
+	var scene_group = Node3D.new()
+	scene_group.name = "RenaissanceScene"
+	scene_group.position = Vector3(-4, 0, -1) * study_scale
+	add_child(scene_group)
+	
+	# Central icosahedron
+	var icosahedron = MeshInstance3D.new()
+	icosahedron.name = "CentralIcosahedron"
+	icosahedron.position = Vector3(0, 0.3, 0) * study_scale
+	icosahedron.rotation = Vector3(0.2, 0.3, 0.1)
+	
+	var icosa_mesh = SphereMesh.new()
+	icosa_mesh.radius = 0.15 * study_scale
+	icosa_mesh.height = 0.3 * study_scale
+	icosa_mesh.radial_segments = 10  # Creates icosahedral-like faceting
+	icosa_mesh.rings = 5
+	
+	icosahedron.mesh = icosa_mesh
+	icosahedron.material_override = study_materials.get("paper_2", paper_material)
+	scene_group.add_child(icosahedron)
+	
+	# Architectural elements
+	create_renaissance_architecture(scene_group)
+	
+	# Decorative scrollwork
+	create_renaissance_scrollwork(scene_group)
+
+func create_renaissance_architecture(parent: Node3D):
+	# Simplified architectural columns and arches
+	var arch_positions = [
+		Vector3(-0.8, 0.2, 0),
+		Vector3(0.8, 0.2, 0)
+	]
+	
+	for i in range(arch_positions.size()):
+		var column = MeshInstance3D.new()
+		column.name = "Column" + str(i + 1)
+		column.position = arch_positions[i] * study_scale
+		
+		var column_mesh = CylinderMesh.new()
+		column_mesh.height = 0.6 * study_scale
+		column_mesh.top_radius = 0.05 * study_scale
+		column_mesh.bottom_radius = 0.06 * study_scale
+		
+		column.mesh = column_mesh
+		column.material_override = study_materials.get("paper_1", paper_material)
+		parent.add_child(column)
+
+func create_renaissance_scrollwork(parent: Node3D):
+	# Decorative scroll elements
+	var scroll_count = 8
+	var radius = 0.6 * study_scale
+	
+	for i in range(scroll_count):
+		var angle = (i / float(scroll_count)) * TAU
+		var scroll_pos = Vector3(
+			cos(angle) * radius,
+			0.1 + sin(angle * 2) * 0.05,
+			sin(angle) * radius
+		) * study_scale
+		
+		var scroll = MeshInstance3D.new()
+		scroll.name = "Scroll" + str(i)
+		scroll.position = scroll_pos
+		scroll.rotation.y = angle
+		
+		var scroll_mesh = create_scroll_shape()
+		scroll.mesh = scroll_mesh
+		scroll.material_override = study_materials.get("paper_3", paper_material)
+		parent.add_child(scroll)
+
+func create_scroll_shape() -> ArrayMesh:
+	# Simple curved scroll approximation
+	var mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var vertices = PackedVector3Array()
+	var normals = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	# Create a simple spiral shape
+	var points = 12
+	for i in range(points):
+		var t = i / float(points - 1)
+		var angle = t * PI * 2
+		var radius = 0.02 + t * 0.03
+		
+		vertices.append(Vector3(
+			cos(angle) * radius * study_scale,
+			t * 0.05 * study_scale,
+			sin(angle) * radius * study_scale
+		))
+		normals.append(Vector3.UP)
+	
+	# Connect points
+	for i in range(points - 1):
+		indices.append(i)
+		indices.append(i + 1)
+	
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
+	return mesh
+
+func create_hirschvogel_cube_net():
+	var net_group = Node3D.new()
+	net_group.name = "HirschvogelCubeNet"
+	net_group.position = Vector3(0, 0, -1) * study_scale
+	add_child(net_group)
+	
+	# Create the cross-shaped cube net from Image 5
+	var face_size = 0.25 * study_scale
+	var thickness = 0.005 * study_scale
+	
+	# Net layout positions (cross pattern)
+	var net_positions = [
+		Vector3(0, face_size, 0),       # Top
+		Vector3(-face_size, 0, 0),      # Left
+		Vector3(0, 0, 0),               # Center
+		Vector3(face_size, 0, 0),       # Right
+		Vector3(0, -face_size, 0),      # Bottom
+		Vector3(0, -face_size * 2, 0)   # Bottom extension
+	]
+	
+	for i in range(net_positions.size()):
+		var face = MeshInstance3D.new()
+		face.name = "CubeFace" + str(i + 1)
+		face.position = net_positions[i] * study_scale
+		face.position.y += 0.002
+		
+		var face_mesh = BoxMesh.new()
+		face_mesh.size = Vector3(face_size, thickness, face_size)
+		face.mesh = face_mesh
+		face.material_override = study_materials.get("paper_0", paper_material)
+		net_group.add_child(face)
+		
+		# Add vertex labels
+		create_vertex_labels(face, i, face_size)
+	
+	# Add the circular construction (top left of Image 5)
+	create_circle_construction(net_group)
+
+func create_vertex_labels(parent: Node3D, face_index: int, face_size: float):
+	# Add numbered vertices like in Hirschvogel's original
+	var label_positions = [
+		Vector3(-face_size/2, 0.01, -face_size/2),  # Bottom left
+		Vector3(face_size/2, 0.01, -face_size/2),   # Bottom right
+		Vector3(face_size/2, 0.01, face_size/2),    # Top right
+		Vector3(-face_size/2, 0.01, face_size/2)    # Top left
+	]
+	
+	var vertex_numbers = ["a", "b", "c", "d", "e", "f", "g", "h"]
+	
+	for i in range(label_positions.size()):
+		var label = Label3D.new()
+		label.text = vertex_numbers[(face_index * 4 + i) % vertex_numbers.size()]
+		label.position = label_positions[i]
+		label.font_size = int(8 * study_scale)
+		label.modulate = ink_color
+		parent.add_child(label)
+
+func create_circle_construction(parent: Node3D):
+	# The circle with inscribed polygon from Image 5 (top left)
+	var circle_group = Node3D.new()
+	circle_group.name = "CircleConstruction"
+	circle_group.position = Vector3(-0.8, 0.8, 0) * study_scale
+	parent.add_child(circle_group)
+	
+	# Circle outline
+	var circle = create_circle_outline_mesh(0.2 * study_scale, 32)
+	var circle_node = MeshInstance3D.new()
+	circle_node.name = "ConstructionCircle"
+	circle_node.mesh = circle
+	circle_node.material_override = ink_material
+	circle_group.add_child(circle_node)
+	
+	# Inscribed polygon
+	var polygon = create_inscribed_polygon_mesh(0.2 * study_scale, 8)
+	var polygon_node = MeshInstance3D.new()
+	polygon_node.name = "InscribedPolygon"
+	polygon_node.mesh = polygon
+	polygon_node.material_override = ink_material
+	circle_group.add_child(polygon_node)
+
+func create_color_theory_tessellation():
+	var tessellation_group = Node3D.new()
+	tessellation_group.name = "ColorTheoryTessellation"
+	tessellation_group.position = Vector3(4, 0, -1) * study_scale
+	add_child(tessellation_group)
+	
+	# Three tessellated cubes as shown in Image 6
+	var cube_positions = [
+		Vector3(-0.6, 0.3, 0),  # Cube 10
+		Vector3(0, 0.3, 0),     # Cube 11  
+		Vector3(0.6, 0.3, 0)    # Cube 12
+	]
+	
+	var cube_color_schemes = [
+		# Cube 10: Blue/Yellow scheme
+		{
+			"top": "light_blue",
+			"left": "blue", 
+			"right": "yellow",
+			"interior": "light_green"
+		},
+		# Cube 11: Pink/Orange scheme
+		{
+			"top": "pink",
+			"left": "ochre",
+			"right": "orange", 
+			"interior": "brown"
+		},
+		# Cube 12: Purple/Green scheme
+		{
+			"top": "light_purple",
+			"left": "purple",
+			"right": "green",
+			"interior": "light_green"
+		}
+	]
+	
+	for i in range(cube_positions.size()):
+		create_tessellated_cube(tessellation_group, cube_positions[i], cube_color_schemes[i], i + 10)
+
+func create_tessellated_cube(parent: Node3D, pos: Vector3, color_scheme: Dictionary, cube_number: int):
+	var cube_group = Node3D.new()
+	cube_group.name = "TessellatedCube" + str(cube_number)
+	cube_group.position = pos * study_scale
+	parent.add_child(cube_group)
+	
+	# Main cube structure
+	var cube_size = 0.4 * study_scale
+	
+	# Top face
+	var top_face = MeshInstance3D.new()
+	top_face.name = "TopFace"
+	top_face.position = Vector3(0, cube_size/2, 0)
+	top_face.transform.basis = top_face.transform.basis.rotated(Vector3.RIGHT, -PI/2)
+	
+	var top_mesh = QuadMesh.new()
+	top_mesh.size = Vector2(cube_size, cube_size)
+	top_face.mesh = top_mesh
+	top_face.material_override = study_materials.get(color_scheme.get("top", "white"), paper_material)
+	cube_group.add_child(top_face)
+	
+	# Left face
+	var left_face = MeshInstance3D.new()
+	left_face.name = "LeftFace"
+	left_face.position = Vector3(-cube_size/2, 0, 0)
+	left_face.transform.basis = left_face.transform.basis.rotated(Vector3.UP, PI/2)
+	
+	var left_mesh = QuadMesh.new()
+	left_mesh.size = Vector2(cube_size, cube_size)
+	left_face.mesh = left_mesh
+	left_face.material_override = study_materials.get(color_scheme.get("left", "white"), paper_material)
+	cube_group.add_child(left_face)
+	
+	# Right face
+	var right_face = MeshInstance3D.new()
+	right_face.name = "RightFace"
+	right_face.position = Vector3(cube_size/2, 0, 0)
+	right_face.transform.basis = right_face.transform.basis.rotated(Vector3.FORWARD, PI/2)
+	
+	var right_mesh = QuadMesh.new()
+	right_mesh.size = Vector2(cube_size, cube_size)
+	right_face.mesh = right_mesh
+	right_face.material_override = study_materials.get(color_scheme.get("right", "white"), paper_material)
+	cube_group.add_child(right_face)
+	
+	# Interior tessellation pattern
+	create_cube_tessellation_pattern(cube_group, cube_size, color_scheme)
+
+func create_cube_tessellation_pattern(parent: Node3D, cube_size: float, color_scheme: Dictionary):
+	# Create interior tessellation lines and patterns
+	var pattern_count = 8
+	var interior_color = color_scheme.get("interior", "white")
+	
+	for i in range(pattern_count):
+		var line = MeshInstance3D.new()
+		line.name = "TessellationLine" + str(i)
+		
+		var t = i / float(pattern_count - 1)
+		var line_pos = Vector3(
+			(t - 0.5) * cube_size * 0.8,
+			cube_size * 0.25 + sin(t * PI) * 0.1,
+			0
+		)
+		line.position = line_pos
+		line.rotation.z = t * PI * 0.5
+		
+		var line_mesh = BoxMesh.new()
+		line_mesh.size = Vector3(cube_size * 0.6, 0.01, 0.01) * study_scale
+		line.mesh = line_mesh
+		line.material_override = study_materials.get(interior_color, ink_material)
+		parent.add_child(line)
+
+func setup_period_lighting():
+	# Add period-appropriate lighting for the study
+	var main_light = DirectionalLight3D.new()
+	main_light.name = "StudyLight"
+	main_light.position = Vector3(2, 4, 2) * study_scale
+	main_light.rotation = Vector3(-0.5, 0.3, 0)
+	main_light.light_energy = 0.8
+	main_light.light_color = Color(1.0, 0.95, 0.85, 1)  # Warm paper color
+	add_child(main_light)
+	
+	# Ambient lighting
+	var env = Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.9, 0.88, 0.82, 1)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(0.8, 0.8, 0.9, 1)
+	env.ambient_light_energy = 0.3
+	
+	var camera = get_viewport().get_camera_3d()
+	if camera:
+		camera.environment = env
+
+# Helper functions for polyhedra creation
+
+func create_tetrahedron_mesh(size: float) -> ArrayMesh:
+	var mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var vertices = PackedVector3Array()
+	var normals = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	# Tetrahedron vertices
+	var h = size * 0.816496  # Height factor for regular tetrahedron
+	vertices.append(Vector3(0, h, 0))
+	vertices.append(Vector3(-size/2, 0, -size/3))
+	vertices.append(Vector3(size/2, 0, -size/3))
+	vertices.append(Vector3(0, 0, size * 2/3))
+	
+	# Calculate normals and create faces
+	var faces = [
+		[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]
+	]
+	
+	for face in faces:
+		var v1 = vertices[face[0]]
+		var v2 = vertices[face[1]]
+		var v3 = vertices[face[2]]
+		var normal = (v2 - v1).cross(v3 - v1).normalized()
+		
+		for vertex_idx in face:
+			normals.append(normal)
+		indices.append_array(face)
+	
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
+
+func create_circle_outline_mesh(radius: float, segments: int) -> ArrayMesh:
+	var mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var vertices = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	# Create circle vertices
+	for i in range(segments):
+		var angle = (i / float(segments)) * TAU
+		vertices.append(Vector3(cos(angle) * radius, 0.01, sin(angle) * radius))
+	
+	# Connect vertices in a loop
+	for i in range(segments):
+		indices.append(i)
+		indices.append((i + 1) % segments)
+	
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
+	return mesh
+
+func create_inscribed_polygon_mesh(radius: float, sides: int) -> ArrayMesh:
+	var mesh = ArrayMesh.new()
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	
+	var vertices = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	# Create polygon vertices
+	for i in range(sides):
+		var angle = (i / float(sides)) * TAU
+		vertices.append(Vector3(cos(angle) * radius, 0.02, sin(angle) * radius))
+	
+	# Connect vertices
+	for i in range(sides):
+		indices.append(i)
+		indices.append((i + 1) % sides)
+	
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_INDEX] = indices
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
+	return mesh
+
+# Placeholder implementations for the missing polyhedra functions
+func create_flower_polyhedron(parent: Node3D, material: StandardMaterial3D):
+	# Simple flower-like arrangement of pyramids
+	var center = MeshInstance3D.new()
+	center.name = "FlowerCenter"
+	
+	var center_mesh = SphereMesh.new()
+	center_mesh.radius = 0.05 * study_scale
+	center_mesh.height = 0.1 * study_scale
+	center.mesh = center_mesh
+	center.material_override = material
+	parent.add_child(center)
+	
+	# Add "petals" around the center
+	var petal_count = 6
+	for i in range(petal_count):
+		var angle = (i / float(petal_count)) * TAU
+		var petal = MeshInstance3D.new()
+		petal.name = "Petal" + str(i)
+		petal.position = Vector3(cos(angle), 0, sin(angle)) * 0.08 * study_scale
+		
+		var petal_mesh = BoxMesh.new()
+		petal_mesh.size = Vector3(0.02, 0.06, 0.02) * study_scale
+		petal.mesh = petal_mesh
+		petal.material_override = material
+		parent.add_child(petal)
+
+func create_compound_cubes(parent: Node3D, material: StandardMaterial3D):
+	# Two intersecting cubes
+	for i in range(2):
+		var cube = MeshInstance3D.new()
+		cube.name = "Cube" + str(i + 1)
+		if i == 1:
+			cube.rotation.y = PI/4
+			cube.rotation.x = PI/4
+		
+		var cube_mesh = BoxMesh.new()
+		cube_mesh.size = Vector3(0.15, 0.15, 0.15) * study_scale
+		cube.mesh = cube_mesh
+		cube.material_override = material
+		parent.add_child(cube)
+
+func create_triangular_dipyramid(parent: Node3D, material: StandardMaterial3D):
+	# Two triangular pyramids base-to-base
+	for i in range(2):
+		var pyramid = MeshInstance3D.new()
+		pyramid.name = "Pyramid" + str(i + 1)
+		pyramid.position.y = (i * 2 - 1) * 0.05 * study_scale
+		if i == 1:
+			pyramid.rotation.z = PI
+		
+		var pyramid_mesh = create_tetrahedron_mesh(0.1 * study_scale)
+		pyramid.mesh = pyramid_mesh
+		pyramid.material_override = material
+		parent.add_child(pyramid)
+
+func create_star_polyhedron(parent: Node3D, material: StandardMaterial3D):
+	# Star-like arrangement of spikes
+	var core = MeshInstance3D.new()
+	core.name = "StarCore"
+	
+	var core_mesh = SphereMesh.new()
+	core_mesh.radius = 0.03 * study_scale
+	core_mesh.height = 0.06 * study_scale
+	core.mesh = core_mesh
+	core.material_override = material
+	parent.add_child(core)
+	
+	# Add star spikes
+	var spike_count = 8
+	for i in range(spike_count):
+		var angle = (i / float(spike_count)) * TAU
+		var spike = MeshInstance3D.new()
+		spike.name = "StarSpike" + str(i)
+		
+		var spike_dir = Vector3(cos(angle), sin(i * 0.5), sin(angle)).normalized()
+		spike.position = spike_dir * 0.08 * study_scale
+		spike.look_at(spike.position + spike_dir, Vector3.UP)
+		
+		var spike_mesh = BoxMesh.new()
+		spike_mesh.size = Vector3(0.01, 0.01, 0.06) * study_scale
+		spike.mesh = spike_mesh
+		spike.material_override = material
+		parent.add_child(spike)
+
+func create_complex_compound(parent: Node3D, material: StandardMaterial3D):
+	# Complex geometric compound - simplified as multiple intersecting shapes
+	var shapes = ["cube", "tetrahedron", "octahedron"]
+	
+	for i in range(3):
+		var shape = MeshInstance3D.new()
+		shape.name = "CompoundShape" + str(i + 1)
+		shape.rotation = Vector3(i * 0.5, i * 0.7, i * 0.3)
+		
+		match shapes[i]:
+			"cube":
+				var cube_mesh = BoxMesh.new()
+				cube_mesh.size = Vector3(0.12, 0.12, 0.12) * study_scale
+				shape.mesh = cube_mesh
+			"tetrahedron":
+				shape.mesh = create_tetrahedron_mesh(0.1 * study_scale)
+			"octahedron":
+				var octa_mesh = SphereMesh.new()
+				octa_mesh.radius = 0.08 * study_scale
+				octa_mesh.height = 0.16 * study_scale
+				octa_mesh.radial_segments = 4
+				octa_mesh.rings = 2
+				shape.mesh = octa_mesh
+		
+		shape.material_override = material
+		parent.add_child(shape)
+
+func create_stellated_octahedron(parent: Node3D, material: StandardMaterial3D):
+	# Octahedron with stellated points
+	var core = MeshInstance3D.new()
+	core.name = "OctahedronCore"
+	
+	var core_mesh = SphereMesh.new()
+	core_mesh.radius = 0.06 * study_scale
+	core_mesh.height = 0.12 * study_scale
+	core_mesh.radial_segments = 4
+	core_mesh.rings = 2
+	core.mesh = core_mesh
+	core.material_override = material
+	parent.add_child(core)
+	
+	# Add stellated points at octahedron vertices
+	var points = [
+		Vector3(0, 0.1, 0), Vector3(0, -0.1, 0),  # Top/bottom
+		Vector3(0.1, 0, 0), Vector3(-0.1, 0, 0),  # Left/right
+		Vector3(0, 0, 0.1), Vector3(0, 0, -0.1)   # Front/back
+	]
+	
+	for i in range(points.size()):
+		var point = MeshInstance3D.new()
+		point.name = "StellatedPoint" + str(i)
+		point.position = points[i] * study_scale
+		point.look_at(point.position * 2, Vector3.UP)
+		
+		var point_mesh = BoxMesh.new()
+		point_mesh.size = Vector3(0.01, 0.01, 0.04) * study_scale
+		point.mesh = point_mesh
+		point.material_override = material
+		parent.add_child(point)
+
+func create_faceted_sphere(parent: Node3D, material: StandardMaterial3D):
+	# Sphere with visible faceting
+	var sphere = MeshInstance3D.new()
+	sphere.name = "FacetedSphere"
+	
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.12 * study_scale
+	sphere_mesh.height = 0.24 * study_scale
+	sphere_mesh.radial_segments = 8  # Lower segment count for faceting
+	sphere_mesh.rings = 4
+	sphere.mesh = sphere_mesh
+	sphere.material_override = material
+	parent.add_child(sphere)
+
+func create_crown_polyhedron(parent: Node3D, material: StandardMaterial3D):
+	# Crown-like arrangement with central body and projecting elements
+	var crown_base = MeshInstance3D.new()
+	crown_base.name = "CrownBase"
+	
+	var base_mesh = CylinderMesh.new()
+	base_mesh.height = 0.08 * study_scale
+	base_mesh.top_radius = 0.08 * study_scale
+	base_mesh.bottom_radius = 0.1 * study_scale
+	crown_base.mesh = base_mesh
+	crown_base.material_override = material
+	parent.add_child(crown_base)
+	
+	# Crown points
+	var point_count = 6
+	for i in range(point_count):
+		var angle = (i / float(point_count)) * TAU
+		var point = MeshInstance3D.new()
+		point.name = "CrownPoint" + str(i)
+		point.position = Vector3(cos(angle) * 0.08, 0.06, sin(angle) * 0.08) * study_scale
+		
+		var point_mesh = BoxMesh.new()
+		point_mesh.size = Vector3(0.02, 0.08, 0.02) * study_scale
+		point.mesh = point_mesh
+		point.material_override = material
+		parent.add_child(point)
+
+func create_rhombic_compound(parent: Node3D, material: StandardMaterial3D):
+	# Compound of rhombic shapes
+	var shape_count = 3
+	
+	for i in range(shape_count):
+		var rhomb = MeshInstance3D.new()
+		rhomb.name = "RhombicElement" + str(i)
+		rhomb.rotation = Vector3(i * TAU/3, i * 0.5, 0)
+		
+		# Create rhombic shape using stretched cube
+		var rhomb_mesh = BoxMesh.new()
+		rhomb_mesh.size = Vector3(0.15, 0.06, 0.15) * study_scale
+		rhomb.mesh = rhomb_mesh
+		rhomb.material_override = material
+		parent.add_child(rhomb)

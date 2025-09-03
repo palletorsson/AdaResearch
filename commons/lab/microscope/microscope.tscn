@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwq8x3y9z1abc"]
+[gd_scene load_steps=9 format=3 uid="uid://bwq8x30a01abc"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -69,25 +69,25 @@ albedo_color = Color(0.2, 0.2, 0.25, 1)
 metallic = 0.8
 roughness = 0.3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.8, 0.8, 0.9, 1)
-metallic = 0.9
-roughness = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0.1, 0.1, 0.15, 1)
-metallic = 0.7
-roughness = 0.4
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.2
 bottom_radius = 0.2
 height = 0.1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.8, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.05
 bottom_radius = 0.05
 height = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.7
+roughness = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(0.4, 0.15, 0.6)
@@ -100,46 +100,46 @@ script = SubResource("GDScript_1")
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="Stand" type="Node3D" parent="Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 
 [node name="MainColumn" type="MeshInstance3D" parent="Base/Stand"]
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="EyepieceArm" type="Node3D" parent="Base/Stand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="Eyepiece" type="MeshInstance3D" parent="Base/Stand/EyepieceArm"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0.3, 0, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="ObjectiveTurret" type="Node3D" parent="Base/Stand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
 
 [node name="Objective1" type="MeshInstance3D" parent="Base/Stand/ObjectiveTurret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, -0.2, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="Objective2" type="MeshInstance3D" parent="Base/Stand/ObjectiveTurret"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.08, -0.2, 0)
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="Stage" type="MeshInstance3D" parent="Base/Stand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="FocusKnob" type="MeshInstance3D" parent="Base/Stand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.1, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="Light" type="SpotLight3D" parent="Base/Stand"]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, -0.5, 0)

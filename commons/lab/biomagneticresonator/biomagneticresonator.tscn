@@ -1,0 +1,290 @@
+[gd_scene load_steps=14 format=3 uid="uid://cd0e6gag3hijk"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var resonance_chamber = $ResonatorBase/ResonanceChamber
+@onready var biomagnetic_coils = [$ResonatorBase/BioCoil1, $ResonatorBase/BioCoil2, $ResonatorBase/BioCoil3]
+@onready var neural_interface = $ResonatorBase/NeuralInterface
+@onready var frequency_modulator = $ResonatorBase/FrequencyModulator
+@onready var bio_sample_holder = $ResonatorBase/BioSampleHolder
+
+var resonance_frequency = 432.0  # Hz - 'healing frequency'
+var biomagnetic_field_strength = 0.0
+var neural_coherence = 0.0
+var life_force_detected = false
+var cellular_resonance_active = false
+
+signal biofield_detected
+signal neural_resonance
+signal cellular_harmony_achieved
+signal life_essence_anomaly
+
+func _ready():
+	setup_biomagnetic_resonator()
+	start_biofield_scanning()
+
+func setup_biomagnetic_resonator():
+	add_to_group('desk_equipment')
+	add_to_group('exotic_instruments')
+	add_to_group('biomagnetic_devices')
+	
+	print('🧬 BIOMAGNETIC RESONATOR: Life essence detection initialized')
+
+func start_biofield_scanning():
+	# Coil rotation at specific biomagnetic frequencies
+	for i in range(biomagnetic_coils.size()):
+		var coil = biomagnetic_coils[i]
+		var bio_freq = resonance_frequency * (i + 1) / 100.0
+		
+		var coil_tween = create_tween()
+		coil_tween.set_loops()
+		coil_tween.tween_property(coil, 'rotation_degrees:z', 360.0, bio_freq)
+	
+	# Resonance chamber pulsing
+	animate_resonance_chamber()
+	
+	# Start biofield monitoring
+	var bio_timer = Timer.new()
+	bio_timer.wait_time = 0.618  # Golden ratio intervals
+	bio_timer.timeout.connect(scan_biofield)
+	bio_timer.autostart = true
+	add_child(bio_timer)
+
+func animate_resonance_chamber():
+	var chamber_tween = create_tween()
+	chamber_tween.set_loops()
+	chamber_tween.tween_property(resonance_chamber, 'material_override:emission_energy', 1.5, 1.618)
+	chamber_tween.tween_property(resonance_chamber, 'material_override:emission_energy', 0.8, 2.618)
+	chamber_tween.tween_property(resonance_chamber, 'material_override:emission_energy', 1.2, 1.0)
+
+func scan_biofield():
+	# Simulate biomagnetic field detection
+	var chakra_resonance = sin(Time.get_time_dict_from_system().second * 0.432) * 0.5
+	var cellular_activity = randf_range(-0.3, 0.7)
+	
+	biomagnetic_field_strength = chakra_resonance + cellular_activity
+	neural_coherence = abs(sin(resonance_frequency * 0.001))
+	
+	# Detect life essence
+	if biomagnetic_field_strength > 0.6:
+		detect_life_force()
+	
+	# Check for cellular resonance
+	if neural_coherence > 0.8 and biomagnetic_field_strength > 0.4:
+		achieve_cellular_harmony()
+	
+	update_biomagnetic_displays()
+
+func update_biomagnetic_displays():
+	# Chamber color based on life force
+	var life_color = Color.GREEN.lerp(Color.MAGENTA, neural_coherence)
+	resonance_chamber.material_override.emission = life_color
+	
+	# Neural interface activity
+	var neural_intensity = 0.5 + neural_coherence * 1.5
+	neural_interface.material_override.emission_energy = neural_intensity
+	
+	# Frequency modulator brightness
+	var freq_intensity = 0.8 + abs(biomagnetic_field_strength) * 1.2
+	frequency_modulator.material_override.emission_energy = freq_intensity
+
+func detect_life_force():
+	if not life_force_detected:
+		life_force_detected = true
+		print('✨ BIOFIELD DETECTED: Life essence signature identified!')
+		emit_signal('biofield_detected', biomagnetic_field_strength)
+		
+		# Life force visualization
+		var life_tween = create_tween()
+		life_tween.tween_property(bio_sample_holder, 'material_override:emission_energy', 3.0, 1.0)
+		life_tween.tween_property(bio_sample_holder, 'material_override:emission_energy', 1.0, 2.0)
+
+func achieve_cellular_harmony():
+	if not cellular_resonance_active:
+		cellular_resonance_active = true
+		print('🌟 CELLULAR HARMONY: Optimal biomagnetic resonance achieved!')
+		emit_signal('cellular_harmony_achieved', neural_coherence)
+		
+		# Harmony visualization - all components sync
+		for coil in biomagnetic_coils:
+			var harmony_tween = create_tween()
+			harmony_tween.tween_property(coil, 'material_override:emission', Color.GOLD, 2.0)
+			harmony_tween.tween_property(coil, 'material_override:emission', Color.GREEN, 2.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		perform_bioresonance_scan()
+
+func perform_bioresonance_scan():
+	print('🧬 BIOMAGNETIC RESONATOR: Scanning human biofield...')
+	
+	# Enhanced scanning mode for living subjects
+	var scan_tween = create_tween()
+	scan_tween.tween_property(neural_interface, 'material_override:emission_energy', 2.5, 1.0)
+	scan_tween.tween_property(neural_interface, 'material_override:emission_energy', 1.0, 1.0)
+	
+	display_biometric_analysis()
+
+func display_biometric_analysis():
+	print('📊 BIOMETRIC ANALYSIS:')
+	print('  Biomagnetic Field: %.3f gauss' % biomagnetic_field_strength)
+	print('  Neural Coherence: %.1f%%' % (neural_coherence * 100))
+	print('  Resonance Frequency: %.1f Hz' % resonance_frequency)
+	print('  Chakra Alignment: %s' % ('BALANCED' if neural_coherence > 0.7 else 'IMBALANCED'))
+	print('  Life Force Index: %.2f' % (biomagnetic_field_strength + neural_coherence))
+
+func tune_resonance_frequency(new_frequency: float):
+	resonance_frequency = clamp(new_frequency, 100.0, 1000.0)
+	print('🧬 BIOMAGNETIC RESONATOR: Frequency tuned to %.1f Hz' % resonance_frequency)
+	
+	# Visual frequency change
+	var tune_tween = create_tween()
+	tune_tween.tween_property(frequency_modulator, 'scale', Vector3(1.2, 1.2, 1.2), 0.5)
+	tune_tween.tween_property(frequency_modulator, 'scale', Vector3(1.0, 1.0, 1.0), 0.5)
+
+func detect_anomalous_life_essence():
+	if biomagnetic_field_strength < -0.5:  # Negative life force?
+		print('⚠️ ANOMALY: Unusual life essence pattern detected!')
+		emit_signal('life_essence_anomaly', biomagnetic_field_strength)
+		
+		# Anomaly warning
+		var anomaly_tween = create_tween()
+		anomaly_tween.set_loops(5)
+		anomaly_tween.tween_property(resonance_chamber, 'material_override:emission', Color.RED, 0.3)
+		anomaly_tween.tween_property(resonance_chamber, 'material_override:emission', Color.GREEN, 0.3)
+
+func amplify_biofield():
+	print('🧬 BIOMAGNETIC RESONATOR: Amplifying detected biofield...')
+	
+	# Amplification sequence
+	for coil in biomagnetic_coils:
+		var amp_tween = create_tween()
+		amp_tween.tween_property(coil, 'light_energy', 2.0, 1.0)
+		amp_tween.tween_property(coil, 'light_energy', 1.0, 1.0)
+
+func enter_meditation_mode():
+	resonance_frequency = 432.0  # Return to healing frequency
+	print('🧘 BIOMAGNETIC RESONATOR: Entering meditation enhancement mode')
+	
+	# Calming visualization
+	var meditate_tween = create_tween()
+	meditate_tween.set_loops()
+	meditate_tween.tween_property(resonance_chamber, 'material_override:emission', Color.DEEP_SKY_BLUE, 4.0)
+	meditate_tween.tween_property(resonance_chamber, 'material_override:emission', Color.VIOLET, 4.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.05, 0.1, 0.05, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.12, 0.06, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+transparency = 1
+albedo_color = Color(0, 1, 0.5, 0.6)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.8, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+inner_radius = 0.02
+outer_radius = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0.5, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.3, 1, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.015
+height = 0.03
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.9, 0.7, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.025, 0.015, 0.015)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.25, 0.15, 0.2)
+
+[node name="BiomagneticResonator" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ResonatorBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
+
+[node name="ResonanceChamber" type="MeshInstance3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="BioCoil1" type="OmniLight3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035, 0.05, 0)
+light_color = Color(1, 0.5, 1, 1)
+omni_range = 0.8
+
+[node name="Coil1Visual" type="MeshInstance3D" parent="ResonatorBase/BioCoil1"]
+material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("TorusMesh_1")
+
+[node name="BioCoil2" type="OmniLight3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035, 0.05, 0)
+light_color = Color(1, 0.5, 1, 1)
+omni_range = 0.8
+
+[node name="Coil2Visual" type="MeshInstance3D" parent="ResonatorBase/BioCoil2"]
+material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("TorusMesh_1")
+
+[node name="BioCoil3" type="OmniLight3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.035)
+light_color = Color(1, 0.5, 1, 1)
+omni_range = 0.8
+
+[node name="Coil3Visual" type="MeshInstance3D" parent="ResonatorBase/BioCoil3"]
+material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("TorusMesh_1")
+
+[node name="NeuralInterface" type="MeshInstance3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.02, -0.04)
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
+
+[node name="FrequencyModulator" type="MeshInstance3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.02, -0.04)
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("CylinderMesh_2")
+
+[node name="BioSampleHolder" type="MeshInstance3D" parent="ResonatorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.04)
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("BoxMesh_2")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

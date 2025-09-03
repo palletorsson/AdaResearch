@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxxayj8qk2qyh"]
+
+[ext_resource type="Script" uid="uid://cbuf7er7s73m5" path="res://commons/lab/worthingtonsplashstudy/worthingtonsplashstudy.gd" id="1_6qx5b"]
+
+[node name="WorthingtonSplashStudy" type="Node3D"]
+script = ExtResource("1_6qx5b")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.82726, 0.721647)

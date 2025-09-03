@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxxayj8qk0qyh"]
+
+[ext_resource type="Script" uid="uid://d11t3jukwtvqy" path="res://commons/lab/hirschvogelgeometry/hirschvogelgeometry.gd" id="1_3qx2y"]
+
+[node name="HirschvogelGeometry" type="Node3D"]
+script = ExtResource("1_3qx2y")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.39245)

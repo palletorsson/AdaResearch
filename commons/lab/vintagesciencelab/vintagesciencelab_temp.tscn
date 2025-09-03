@@ -1,0 +1,962 @@
+[gd_scene load_steps=8 format=3 uid="uid://hnmljpsjbd1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.4, 0.25, 0.15, 1)
+metallic = 0.1
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(2, 0.1, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.8
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.7, 0.6, 0.3, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+transparency = 1
+albedo_color = Color(0.9, 0.95, 1, 0.3)
+metallic = 0.1
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.6, 0.4, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.3, 0.2, 0.1, 1)
+roughness = 0.8
+
+[node name="VintageLabScene" type="Node3D"]
+
+[node name="LaboratoryShelf" type="StaticBody3D" parent="."]
+
+[node name="ShelfBoard" type="MeshInstance3D" parent="LaboratoryShelf"]
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
+
+[node name="BracketLeft" type="MeshInstance3D" parent="LaboratoryShelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, -0.15, 0)
+material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("BoxMesh_1")
+
+[node name="BracketLeftMesh" type="BoxMesh" parent="LaboratoryShelf/BracketLeft"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.05, 0.3, 0.3)
+script = null
+
+[node name="BracketRight" type="MeshInstance3D" parent="LaboratoryShelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -0.15, 0)
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="BracketRightMesh" type="BoxMesh" parent="LaboratoryShelf/BracketRight"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.05, 0.3, 0.3)
+script = null
+
+[node name="VintageMicroscope" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
+
+[node name="MicroscopeBase" type="MeshInstance3D" parent="VintageMicroscope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="BaseMesh" type="CylinderMesh" parent="VintageMicroscope/MicroscopeBase"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.1
+top_radius = 0.15
+bottom_radius = 0.15
+script = null
+
+[node name="Column" type="MeshInstance3D" parent="VintageMicroscope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ColumnMesh" type="CylinderMesh" parent="VintageMicroscope/Column"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.4
+top_radius = 0.02
+bottom_radius = 0.02
+script = null
+
+[node name="Eyepiece" type="MeshInstance3D" parent="VintageMicroscope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="EyepieceMesh" type="CylinderMesh" parent="VintageMicroscope/Eyepiece"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.08
+top_radius = 0.025
+bottom_radius = 0.025
+script = null
+
+[node name="Objective" type="MeshInstance3D" parent="VintageMicroscope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ObjectiveMesh" type="CylinderMesh" parent="VintageMicroscope/Objective"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.06
+top_radius = 0.015
+bottom_radius = 0.02
+script = null
+
+[node name="Stage" type="MeshInstance3D" parent="VintageMicroscope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="StageMesh" type="BoxMesh" parent="VintageMicroscope/Stage"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.12, 0.02, 0.12)
+script = null
+
+[node name="GlassBeakers" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.1, 0)
+
+[node name="BeakerLarge" type="MeshInstance3D" parent="GlassBeakers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BeakerLargeMesh" type="CylinderMesh" parent="GlassBeakers/BeakerLarge"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.08
+bottom_radius = 0.064
+script = null
+
+[node name="BeakerMedium" type="MeshInstance3D" parent="GlassBeakers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BeakerMediumMesh" type="CylinderMesh" parent="GlassBeakers/BeakerMedium"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.1
+top_radius = 0.06
+bottom_radius = 0.048
+script = null
+
+[node name="BeakerSmall" type="MeshInstance3D" parent="GlassBeakers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.04, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BeakerSmallMesh" type="CylinderMesh" parent="GlassBeakers/BeakerSmall"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.08
+top_radius = 0.05
+bottom_radius = 0.04
+script = null
+
+[node name="SpecimenJars" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.1, 0)
+
+[node name="Jar1" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Jar1Mesh" type="CylinderMesh" parent="SpecimenJars/Jar1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.2
+top_radius = 0.04
+bottom_radius = 0.04
+script = null
+
+[node name="Cork1" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.215, 0)
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="Cork1Mesh" type="CylinderMesh" parent="SpecimenJars/Cork1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.03
+top_radius = 0.035
+bottom_radius = 0.04
+script = null
+
+[node name="Jar2" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Jar2Mesh" type="CylinderMesh" parent="SpecimenJars/Jar2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.2
+top_radius = 0.04
+bottom_radius = 0.04
+script = null
+
+[node name="Cork2" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.215, 0)
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="Cork2Mesh" type="CylinderMesh" parent="SpecimenJars/Cork2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.03
+top_radius = 0.035
+bottom_radius = 0.04
+script = null
+
+[node name="Jar3" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Jar3Mesh" type="CylinderMesh" parent="SpecimenJars/Jar3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.2
+top_radius = 0.04
+bottom_radius = 0.04
+script = null
+
+[node name="Cork3" type="MeshInstance3D" parent="SpecimenJars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.215, 0)
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="Cork3Mesh" type="CylinderMesh" parent="SpecimenJars/Cork3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.03
+top_radius = 0.035
+bottom_radius = 0.04
+script = null
+
+[node name="LabNotebooks" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.12, -0.1)
+
+[node name="Notebook1" type="MeshInstance3D" parent="LabNotebooks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, 0)
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Notebook1Mesh" type="BoxMesh" parent="LabNotebooks/Notebook1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.15, 0.02, 0.2)
+script = null
+
+[node name="Notebook2" type="MeshInstance3D" parent="LabNotebooks"]
+transform = Transform3D(0.998027, 0, -0.062791, 0, 1, 0, 0.062791, 0, 0.998027, 0, 0.025, 0)
+
+[node name="Notebook2Mesh" type="BoxMesh" parent="LabNotebooks/Notebook2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.15, 0.02, 0.2)
+script = null
+
+[node name="Notebook2Material" type="StandardMaterial3D" parent="LabNotebooks/Notebook2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.2, 0.15, 0.1, 1)
+roughness = 0.8
+script = null
+
+[node name="Notebook3" type="MeshInstance3D" parent="LabNotebooks"]
+transform = Transform3D(0.995004, 0, 0.0998334, 0, 1, 0, -0.0998334, 0, 0.995004, 0.02, 0.05, 0)
+
+[node name="Notebook3Mesh" type="BoxMesh" parent="LabNotebooks/Notebook3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.15, 0.02, 0.2)
+script = null
+
+[node name="Notebook3Material" type="StandardMaterial3D" parent="LabNotebooks/Notebook3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.4, 0.25, 0.15, 1)
+roughness = 0.8
+script = null
+
+[node name="AntiqueScales" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.1, 0)
+
+[node name="ScaleBase" type="MeshInstance3D" parent="AntiqueScales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ScaleBaseMesh" type="BoxMesh" parent="AntiqueScales/ScaleBase"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.3, 0.05, 0.2)
+script = null
+
+[node name="ScalePost" type="MeshInstance3D" parent="AntiqueScales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ScalePostMesh" type="CylinderMesh" parent="AntiqueScales/ScalePost"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.3
+top_radius = 0.01
+bottom_radius = 0.015
+script = null
+
+[node name="ScaleBeam" type="MeshInstance3D" parent="AntiqueScales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ScaleBeamMesh" type="BoxMesh" parent="AntiqueScales/ScaleBeam"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.4, 0.01, 0.02)
+script = null
+
+[node name="ScalePanLeft" type="MeshInstance3D" parent="AntiqueScales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18, 0.32, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ScalePanLeftMesh" type="CylinderMesh" parent="AntiqueScales/ScalePanLeft"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.02
+top_radius = 0.06
+bottom_radius = 0.05
+script = null
+
+[node name="ScalePanRight" type="MeshInstance3D" parent="AntiqueScales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.32, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="ScalePanRightMesh" type="CylinderMesh" parent="AntiqueScales/ScalePanRight"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.02
+top_radius = 0.06
+bottom_radius = 0.05
+script = null
+
+[node name="TestTubeRack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.15)
+
+[node name="RackBase" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="RackBaseMesh" type="BoxMesh" parent="TestTubeRack/RackBase"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.25, 0.03, 0.08)
+script = null
+
+[node name="TestTube1" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube1Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="TestTube2" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube2Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="TestTube3" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube3Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="TestTube4" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube4Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube4"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="TestTube5" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube5Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube5"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="TestTube6" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.09, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TestTube6Mesh" type="CylinderMesh" parent="TestTubeRack/TestTube6"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.12
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="Liquid1" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.05, 0)
+
+[node name="Liquid1Mesh" type="CylinderMesh" parent="TestTubeRack/Liquid1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.04
+top_radius = 0.007
+bottom_radius = 0.007
+script = null
+
+[node name="Liquid1Material" type="StandardMaterial3D" parent="TestTubeRack/Liquid1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.8, 0.3, 0.4, 0.7)
+transparency = 1
+script = null
+
+[node name="Liquid2" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.05, 0)
+
+[node name="Liquid2Mesh" type="CylinderMesh" parent="TestTubeRack/Liquid2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.04
+top_radius = 0.007
+bottom_radius = 0.007
+script = null
+
+[node name="Liquid2Material" type="StandardMaterial3D" parent="TestTubeRack/Liquid2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.3, 0.6, 0.8, 0.7)
+transparency = 1
+script = null
+
+[node name="Liquid3" type="MeshInstance3D" parent="TestTubeRack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 0.05, 0)
+
+[node name="Liquid3Mesh" type="CylinderMesh" parent="TestTubeRack/Liquid3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.04
+top_radius = 0.007
+bottom_radius = 0.007
+script = null
+
+[node name="Liquid3Material" type="StandardMaterial3D" parent="TestTubeRack/Liquid3"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.6, 0.8, 0.3, 0.7)
+transparency = 1
+script = null
+
+[node name="GlassRetort" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, -0.1)
+
+[node name="RetortBulb" type="MeshInstance3D" parent="GlassRetort"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="RetortBulbMesh" type="SphereMesh" parent="GlassRetort/RetortBulb"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+radius = 0.08
+height = 0.12
+script = null
+
+[node name="RetortNeck" type="MeshInstance3D" parent="GlassRetort"]
+transform = Transform3D(0.955336, 0, -0.29552, 0, 1, 0, 0.29552, 0, 0.955336, 0, 0.15, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="RetortNeckMesh" type="CylinderMesh" parent="GlassRetort/RetortNeck"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.15
+top_radius = 0.015
+bottom_radius = 0.03
+script = null
+
+[node name="RetortSpout" type="MeshInstance3D" parent="GlassRetort"]
+transform = Transform3D(0.362358, 0, -0.932039, 0, 1, 0, 0.932039, 0, 0.362358, 0.08, 0.18, 0)
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="RetortSpoutMesh" type="CylinderMesh" parent="GlassRetort/RetortSpout"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.1
+top_radius = 0.01
+bottom_radius = 0.015
+script = null
+
+[node name="BrassCalipers" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.1, 0.1)
+
+[node name="CalipersArm1" type="MeshInstance3D" parent="BrassCalipers"]
+transform = Transform3D(0.995004, 0, 0.0998334, 0, 1, 0, -0.0998334, 0, 0.995004, -0.01, 0.075, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CalipersArm1Mesh" type="BoxMesh" parent="BrassCalipers/CalipersArm1"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.008, 0.15, 0.01)
+script = null
+
+[node name="CalipersArm2" type="MeshInstance3D" parent="BrassCalipers"]
+transform = Transform3D(0.980067, 0, -0.198669, 0, 1, 0, 0.198669, 0, 0.980067, 0.01, 0.075, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CalipersArm2Mesh" type="BoxMesh" parent="BrassCalipers/CalipersArm2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.008, 0.15, 0.01)
+script = null
+
+[node name="CalipersPivot" type="MeshInstance3D" parent="BrassCalipers"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0.14, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CalipersPivotMesh" type="CylinderMesh" parent="BrassCalipers/CalipersPivot"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.015
+top_radius = 0.008
+bottom_radius = 0.008
+script = null
+
+[node name="VintageBarometer" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.15, 0.15)
+
+[node name="BarometerBacking" type="MeshInstance3D" parent="VintageBarometer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="BarometerBackingMesh" type="CylinderMesh" parent="VintageBarometer/BarometerBacking"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.03
+top_radius = 0.08
+bottom_radius = 0.08
+script = null
+
+[node name="BarometerFace" type="MeshInstance3D" parent="VintageBarometer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="BarometerFaceMesh" type="CylinderMesh" parent="VintageBarometer/BarometerFace"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.005
+top_radius = 0.06
+bottom_radius = 0.06
+script = null
+
+[node name="BarometerNeedle" type="MeshInstance3D" parent="VintageBarometer"]
+transform = Transform3D(0.955336, 0, 0.29552, 0, 1, 0, -0.29552, 0, 0.955336, 0, 0.105, 0)
+
+[node name="BarometerNeedleMesh" type="BoxMesh" parent="VintageBarometer/BarometerNeedle"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(0.08, 0.002, 0.001)
+script = null
+
+[node name="BarometerNeedleMaterial" type="StandardMaterial3D" parent="VintageBarometer/BarometerNeedle"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+script = null
+
+[node name="InkwellAndQuill" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.1, -0.15)
+
+[node name="Inkwell" type="MeshInstance3D" parent="InkwellAndQuill"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="InkwellMesh" type="CylinderMesh" parent="InkwellAndQuill/Inkwell"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+height = 0.06
+top_radius = 0.03
+bottom_radius = 0.035
+script = null
+
+[node name="InkwellLid" type="MeshInstance3D" parent="InkwellAndQuill/Inkwell"]

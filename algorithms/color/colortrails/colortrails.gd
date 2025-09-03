@@ -28,7 +28,7 @@ var right_hand: Node3D
 func _ready():
 	find_hand_controllers()
 	setup_trail_meshes()
-	print("🎨 VR Hand Trails initialized!")
+
 
 func _process(delta):
 	# Debug: Always try to draw trails for testing
@@ -65,29 +65,29 @@ func find_hand_controllers():
 	for path in possible_paths:
 		if has_node(path):
 			xr_origin = get_node(path)
-			print("✅ Found XROrigin3D at: ", path)
+
 			break
 	
 	# If direct paths don't work, search recursively
 	if not xr_origin:
 		xr_origin = find_node_recursive(get_tree().root, "XROrigin3D")
 		if xr_origin:
-			print("✅ Found XROrigin3D via search at: ", xr_origin.get_path())
+			pass
 	
 	if xr_origin:
 		if xr_origin.has_node("LeftHand"):
 			left_hand = xr_origin.get_node("LeftHand")
-			print("✅ Handtrails: left hand controller found at: ", left_hand.get_path())
+			pass
 		else:
-			print("❌ Handtrails: left hand controller not found")
+			pass
 		
 		if xr_origin.has_node("RightHand"):
 			right_hand = xr_origin.get_node("RightHand")
-			print("✅ Handtrails: right hand controller found at: ", right_hand.get_path())
+			pass
 		else:
-			print("❌ Handtrails: right hand controller not found")
+			pass
 	else:
-		print("❌ Handtrails: XROrigin3D not found anywhere")
+		pass
 
 func find_node_recursive(node: Node, node_name: String) -> Node:
 	if node.name == node_name:
@@ -104,16 +104,14 @@ func is_trigger_pressed(hand: Node3D) -> bool:
 	# First check if it's an XRController3D
 	if hand is XRController3D:
 		var pressed = hand.is_button_pressed("trigger_click")
-		if pressed:
-			print("🎮 XRController3D trigger detected")
+
 		return pressed
 	
 	# Check for XRController3D in children (XR Tools structure)
 	for child in hand.get_children():
 		if child is XRController3D:
 			var pressed = child.is_button_pressed("trigger_click")
-			if pressed:
-				print("🎮 Child XRController3D trigger detected")
+
 			return pressed
 	
 	# Check input actions
@@ -122,13 +120,11 @@ func is_trigger_pressed(hand: Node3D) -> bool:
 	
 	for action in actions:
 		if Input.is_action_pressed(action):
-			print("🎮 Input action detected: ", action)
 			return true
 	
 	# Keyboard/mouse fallback for testing
 	var fallback = Input.is_action_pressed("ui_accept") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-	if fallback and randf() < 0.01:  # Print occasionally to avoid spam
-		print("🖱️ Fallback input detected (Space/Mouse)")
+
 	return fallback 
 
 func setup_trail_meshes():
@@ -165,13 +161,11 @@ func update_trail(hand: Node3D, trail_points: Array[Dictionary], delta: float):
 	var should_add = false
 	if trail_points.is_empty():
 		should_add = true
-		print("📍 First trail point for ", hand.name, " at: ", hand_pos)
 	else:
 		var last_pos = trail_points[-1].position
 		var distance = hand_pos.distance_to(last_pos)
 		if distance > update_distance:
 			should_add = true
-			print("📍 New trail point (distance: ", "%.3f" % distance, ") at: ", hand_pos)
 	
 	if should_add:
 		var trail_point = {
@@ -186,7 +180,6 @@ func update_trail(hand: Node3D, trail_points: Array[Dictionary], delta: float):
 			trail_point.velocity = (hand_pos - prev_point.position) / delta
 		
 		trail_points.append(trail_point)
-		print("✨ Trail now has ", trail_points.size(), " points")
 		
 		# Limit trail length
 		if trail_points.size() > trail_length:
@@ -204,7 +197,7 @@ func update_trail_mesh(mesh_instance: MeshInstance3D, trail_points: Array[Dictio
 		mesh_instance.mesh = null
 		return
 	
-	print("🎨 Creating mesh with ", trail_points.size(), " trail points")
+
 	
 	var array_mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()

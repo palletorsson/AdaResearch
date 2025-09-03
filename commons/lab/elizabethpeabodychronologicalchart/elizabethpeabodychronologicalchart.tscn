@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxxayj8qk1qyh"]
+
+[ext_resource type="Script" uid="uid://bosrlxjfytn0c" path="res://commons/lab/elizabethpeabodychronologicalchart/elizabethpeabodychronologicalchart.gd" id="1_5qx4a"]
+
+[node name="PeabodyChronologicalChart" type="Node3D"]
+script = ExtResource("1_5qx4a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.877632, 0.479335, 0, -0.479335, 0.877632, 0, 2.13874, 3.9675)

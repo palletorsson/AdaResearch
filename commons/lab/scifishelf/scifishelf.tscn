@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxw8yj7qk9qyh"]
+
+[ext_resource type="Script" path="res://SciFiShelf.gd" id="1_4qx3z"]
+
+[node name="SciFiShelf" type="Node3D"]
+script = ExtResource("1_4qx3z")
+shelf_width = 2.5
+shelf_depth = 0.5
+shelf_height = 0.08
+holo_glow_intensity = 1.0
+equipment_scale = 1.0
