@@ -14,8 +14,8 @@ shader_parameter/emission_strength = 2.0
 shader_parameter/modelOpacity = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_jq5s6"]
-radius = 0.1
-height = 0.2
+radius = 0.25
+height = 0.5
 
 [node name="sphere" type="Node3D"]
 

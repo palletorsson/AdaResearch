@@ -22,6 +22,26 @@
 			"description": "A fundamental cube with shader material and static body physics",
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
 		},
+		
+		"righttriangle": {
+			"name": "righttriangle",
+			"lookup_name": "righttriangle",
+			"description": "A righttriangle",
+			"scene": "res://commons/primitives/righttriangle/righttriangle.tscn",
+		},
+		"lefttriangle": {
+			"name": "lefttriangle",
+			"lookup_name": "lefttriangle",
+			"description": "A lefttriangle",
+			"scene": "res://commons/primitives/lefttriangle/lefttriangle.tscn",
+		},
+		"interactivetriangle": {
+			"name": "interactivetriangle",
+			"lookup_name": "interactivetriangle",
+			"description": "A linteractivetriangle",
+			"scene": "res://commons/primitives/interactivetriangle/interactivetriangle.tscn",
+		},
+		
 		"plane": {
 			"name": "plane",
 			"lookup_name": "plane",
@@ -46,6 +66,13 @@
 			"description": "A cylinder",
 			"scene": "res://commons/primitives/cylinder/cylinder.tscn",
 		},	
+		"capsule": {
+			"name": "capsule",
+			"lookup_name": "capsule",
+			"description": "A capsule",
+			"scene": "res://commons/primitives/capsule/capsule.tscn",
+		},	
+		
 		"torus": {
 			"name": "torus",
 			"lookup_name": "torus",

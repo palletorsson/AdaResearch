@@ -380,22 +380,32 @@ func generate_walkable_collision():
 	if terrain_meshes.size() == 0:
 		return
 	
+	# Safety check for collision generator
+	if collision_generator == null:
+		print("TerrainGenerator: Warning - collision_generator is null, skipping collision generation")
+		return
+	
 	# Use a temporary parent for collision generation
 	var temp_parent = Node3D.new()
 	
-	# Generate walkable collision bodies
+	# Generate walkable collision bodies with error handling
 	var walkable_bodies = collision_generator.generate_walkable_collision(terrain_meshes, temp_parent)
+	if walkable_bodies == null:
+		print("TerrainGenerator: Error generating walkable collision, continuing without collision")
+		temp_parent.queue_free()
+		return
+	
 	collision_bodies.append_array(walkable_bodies)
 	
 	# Generate navigation tiles for each walkable body
 	for walkable_body in walkable_bodies:
-		if walkable_body.has_meta("vr_walkable"):
+		if walkable_body != null and walkable_body.has_meta("vr_walkable"):
 			# Get corresponding mesh
 			var mesh_name = walkable_body.name.replace("_VR_Collision", "")
 			var mesh_instance: MeshInstance3D = null
 			
 			for instance in terrain_meshes:
-				if instance.name == mesh_name:
+				if instance != null and instance.name == mesh_name:
 					mesh_instance = instance
 					break
 			
@@ -403,16 +413,24 @@ func generate_walkable_collision():
 				# Analyze for walkable surfaces
 				var surface_data = collision_generator.analyze_walkable_surfaces(mesh_instance.mesh)
 				
-				# Generate 1x1m navigation tiles
-				var nav_tiles = collision_generator.generate_navigation_tiles(surface_data.walkable_triangles, temp_parent)
-				
-				# Create visual markers
-				collision_generator.create_vr_teleport_markers(nav_tiles, temp_parent)
+				if surface_data != null and surface_data.has("walkable_triangles"):
+					# Generate 1x1m navigation tiles
+					var nav_tiles = collision_generator.generate_navigation_tiles(surface_data.walkable_triangles, temp_parent)
+					
+					# Create visual markers
+					if nav_tiles != null:
+						collision_generator.create_vr_teleport_markers(nav_tiles, temp_parent)
+				else:
+					print("TerrainGenerator: No walkable triangles found for %s, skipping" % mesh_name)
 	
 	print("Generated %d collision bodies for terrain" % collision_bodies.size())
 
 func clear_previous_terrain():
 	"""Clear previously generated terrain"""
+	# Clean up marching cubes GPU resources if they exist
+	if marching_cubes != null and marching_cubes.has_method("cleanup"):
+		marching_cubes.cleanup()
+	
 	terrain_chunks.clear()
 	terrain_meshes.clear()
 	collision_bodies.clear()

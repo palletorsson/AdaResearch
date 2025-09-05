@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwx7ddv7rwqpl"]
+
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/next_cube.gd" id="1_next_cube"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_detection"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_next"]
+render_priority = 0
+shader = ExtResource("2_grid_shader")
+shader_parameter/modelColor = Color(0.2, 0.6, 1.0, 1)
+shader_parameter/wireframeColor = Color(0.0, 0.8, 1.0, 1)
+shader_parameter/emissionColor = Color(0.3, 0.7, 1.0, 1)
+shader_parameter/width = 6.0
+shader_parameter/blur = 0.4
+shader_parameter/emission_strength = 1.5
+shader_parameter/modelOpacity = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_next"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fallback"]
+albedo_color = Color(0.3, 0.7, 1.0, 1)
+emission_enabled = true
+emission = Color(0.1, 0.3, 0.5, 1)
+
+[node name="NextCube" type="Node3D"]
+script = ExtResource("1_next_cube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.359572, 1.74679)
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560966, 0)
+shape = SubResource("BoxShape3D_detection")
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_next")
+mesh = SubResource("BoxMesh_next")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_fallback")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

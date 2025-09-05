@@ -103,6 +103,20 @@ const UTILITY_TYPES = {
 		"description": "Grabbable objects for interaction",
 		"supports_parameters": false
 	},
+	"n": {
+		"name": "next_cube", 
+		"file": "next_cube.tscn", 
+		"category": "interactive",
+		"description": "Advances to next example/pattern with 3s respawn",
+		"supports_parameters": true  # respawn_time, rotation_speed
+	},
+	"tc": {
+		"name": "transport_cube", 
+		"file": "transport_cube.tscn", 
+		"category": "transport",
+		"description": "Cube that carries players across voids with directional movement",
+		"supports_parameters": true  # distance:direction (e.g. "4:z" or "3.5:1,0,0")
+	},
 	
 	# UI/Information utilities
 	"x": {

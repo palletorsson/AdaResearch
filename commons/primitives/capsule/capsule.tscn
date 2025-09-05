@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnn1obxysw0rw"]
+[gd_scene load_steps=4 format=3 uid="uid://cn3s0pq4b086c"]
 
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_5loff"]
 
@@ -13,13 +13,14 @@ shader_parameter/blur = 1.0
 shader_parameter/emission_strength = 2.0
 shader_parameter/modelOpacity = 1.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_trnbg"]
-size = Vector2(0.8, 0.8)
-subdivide_width = 3
-subdivide_depth = 2
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f0bor"]
+radius = 0.25
+height = 1.0
+radial_segments = 4
+rings = 4
 
-[node name="plane" type="Node3D"]
+[node name="capsule" type="Node3D"]
 
-[node name="plane" type="MeshInstance3D" parent="."]
+[node name="capsule" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_gt5y2")
-mesh = SubResource("PlaneMesh_trnbg")
+mesh = SubResource("CapsuleMesh_f0bor")

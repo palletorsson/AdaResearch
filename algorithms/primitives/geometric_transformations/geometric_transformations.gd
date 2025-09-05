@@ -42,12 +42,16 @@ func setup_materials():
 	plane_material.emission = Color(0.1, 0.3, 0.1, 1.0)
 	$Plane.material_override = plane_material
 	
-	# Cube material - red
+	# Cube material - red (applied to the CubeBaseMesh inside cube_scene.tscn)
 	var cube_material = StandardMaterial3D.new()
 	cube_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
 	cube_material.emission_enabled = true
 	cube_material.emission = Color(0.4, 0.1, 0.1, 1.0)
-	$Cube.material_override = cube_material
+	
+	# Apply material to the MeshInstance3D inside the cube scene
+	var cube_mesh = $Cube.get_node("CubeBaseStaticBody3D/CubeBaseMesh")
+	if cube_mesh:
+		cube_mesh.material_override = cube_material
 	
 	# Transformation indicator materials
 	var rotation_material = StandardMaterial3D.new()

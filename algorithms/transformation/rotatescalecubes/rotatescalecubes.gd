@@ -36,6 +36,34 @@ func setup_lighting():
 	light.rotation_degrees = Vector3(-45, 30, 0)
 	add_child(light)
 
+func create_grid_shader_material() -> ShaderMaterial:
+	"""Create a Grid shader material like the one used in cube_scene.tscn"""
+	var material = ShaderMaterial.new()
+	
+	# Load the Grid shader
+	var shader = load("res://commons/resourses/shaders/Grid.gdshader")
+	if shader:
+		material.shader = shader
+		
+		# Set default shader parameters (similar to cube_scene.tscn)
+		material.set_shader_parameter("modelColor", Color(0.5, 0.5, 0.5, 1.0))
+		material.set_shader_parameter("wireframeColor", Color(0.0, 1.0, 0.0, 1.0))  # Green wireframe
+		material.set_shader_parameter("emissionColor", Color(0.8, 0.1, 0.7, 1.0))   # Magenta emission
+		material.set_shader_parameter("width", 8.68)
+		material.set_shader_parameter("blur", 0.581)
+		material.set_shader_parameter("emission_strength", 2.018)
+		material.set_shader_parameter("modelOpacity", 0.924)
+	else:
+		print("Warning: Could not load Grid shader, falling back to standard material")
+		# Fallback to standard material if shader loading fails
+		var fallback_material = StandardMaterial3D.new()
+		fallback_material.albedo_color = Color.GRAY
+		fallback_material.emission_enabled = true
+		fallback_material.emission = Color(0.8, 0.1, 0.7)
+		return fallback_material
+	
+	return material
+
 func setup_cubes():
 	# Use a MultiMesh for performance, which is ideal for drawing
 	# thousands of identical meshes.
@@ -46,20 +74,20 @@ func setup_cubes():
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.instance_count = cube_count
 	
-	# 2. Define the mesh that will be repeated.
+	# 2. Define the mesh that will be repeated - using cube_scene.tscn mesh.
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(0.2, 0.2, 0.2)
 	
-	# 3. Define the material for the mesh. We will set colors per-instance.
-	var material = StandardMaterial3D.new()
-	material.vertex_color_use_as_albedo = true
+	# 3. Define the Grid shader material from cube_scene.tscn
+	var material = create_grid_shader_material()
 	box_mesh.surface_set_material(0, material)
 	
 	multimesh.mesh = box_mesh
 	multi_mesh_instance.multimesh = multimesh
 	add_child(multi_mesh_instance)
 	
-	# 4. Position and color each instance.
+	# 4. Position each instance and store random colors.
+	var instance_colors: Array[Color] = []
 	for i in range(cube_count):
 		# Generate a random position within a sphere.
 		var position = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized() * randf() * spread_radius
@@ -68,13 +96,17 @@ func setup_cubes():
 		var transform = Transform3D(Basis(), position)
 		multimesh.set_instance_transform(i, transform)
 		
-		# Assign a random color to this instance.
+		# Store a random color for this instance (used for wireframe color variation)
 		var random_color = Color.from_hsv(randf(), 0.85, 0.9)
-		multimesh.set_instance_color(i, random_color)
+		instance_colors.append(random_color)
 		
 		# Store a random rotation speed for the animation.
 		var speed = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
 		rotation_speeds.append(speed)
+	
+	# Store colors for potential future use (Grid shader can't use per-instance colors directly)
+	# The cubes will all have the same Grid shader appearance for performance
+	print("VRCubes: Created %d cubes with Grid shader wireframe effect" % cube_count)
 
 func _process(delta):
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:

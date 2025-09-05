@@ -187,6 +187,41 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					utility_object.set_meta("sequence_name", sequence_name)
 				
 				print("GridUtilitiesComponent: Set info board sequence to: %s" % sequence_name)
+		"tc":  # Transport Cube
+			if parameters.size() >= 2:
+				var distance = float(parameters[0])
+				var direction_param = parameters[1]
+				
+				# Parse direction parameter
+				var direction = Vector3(1, 0, 0)  # Default
+				match direction_param.to_lower():
+					"x":
+						direction = Vector3(1, 0, 0)
+					"y":
+						direction = Vector3(0, 1, 0)
+					"z":
+						direction = Vector3(0, 0, 1)
+					"-x":
+						direction = Vector3(-1, 0, 0)
+					"-y":
+						direction = Vector3(0, -1, 0)
+					"-z":
+						direction = Vector3(0, 0, -1)
+					_:
+						# Try parsing as comma-separated coordinates
+						var coords = direction_param.split(",")
+						if coords.size() >= 3:
+							direction = Vector3(
+								coords[0].to_float(),
+								coords[1].to_float(),
+								coords[2].to_float()
+							)
+				
+				# Apply to transport cube
+				if "set_transport_parameters" in utility_object:
+					utility_object.set_transport_parameters(distance, direction)
+				
+				print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
 
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):

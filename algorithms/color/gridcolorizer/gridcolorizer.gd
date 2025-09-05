@@ -80,6 +80,9 @@ var color_patterns = {
 var current_pattern_index = 0
 var pattern_names = ["rose_vase", "damascus_tiles", "chinese_shell", "textile_saucer", "antique_persian", "rainbow_gradient", "sunset_gradient", "ocean_gradient", "pink_gradient", "sphere_reflection"]
 
+# Manual pattern control
+var auto_cycle_enabled = true
+
 # Vibrant queer-friendly color palette
 var colors = {
 	# Original rose vase colors (enhanced)
@@ -117,7 +120,13 @@ func _ready():
 	print("ColorGrid: Ready to cycle through vibrant queer patterns! 🌈")
 	# Wait one second before checking for cubes
 	await get_tree().create_timer(1.0).timeout
-	start_pattern_cycling()
+	
+	# Connect to next cubes if they exist
+	connect_to_next_cubes()
+	
+	# Start auto cycling (can be disabled by next cubes)
+	if auto_cycle_enabled:
+		start_pattern_cycling()
 
 func colorize_all_cubes():
 	print("ColorGrid: Starting single cube colorization...")
@@ -506,3 +515,80 @@ func debug_cube_info():
 		if i >= 20:
 			print("... (showing first 20 of %d cubes)" % cubes.size())
 			break
+
+# Next cube integration functions
+func connect_to_next_cubes():
+	"""Find and connect to NextCube instances in the scene"""
+	var next_cubes = find_next_cubes()
+	if next_cubes.size() > 0:
+		print("ColorGrid: Found %d NextCube(s), disabling auto-cycle" % next_cubes.size())
+		auto_cycle_enabled = false  # Disable auto cycling when next cubes are present
+		
+		for next_cube in next_cubes:
+			if next_cube.has_signal("next_requested"):
+				next_cube.next_requested.connect(_on_next_requested)
+				print("ColorGrid: Connected to NextCube at %s" % next_cube.global_position)
+
+func find_next_cubes() -> Array:
+	"""Find all NextCube instances in the current scene"""
+	var next_cubes = []
+	find_next_cubes_recursive(get_tree().current_scene, next_cubes)
+	return next_cubes
+
+func find_next_cubes_recursive(node: Node, next_cubes: Array):
+	"""Recursively search for NextCube nodes"""
+	if node.get_script() and node.get_script().get_global_name() == "NextCube":
+		next_cubes.append(node)
+	
+	for child in node.get_children():
+		find_next_cubes_recursive(child, next_cubes)
+
+func _on_next_requested(from_position: Vector3):
+	"""Handle next pattern request from NextCube"""
+	print("ColorGrid: 🎨 Next pattern requested from %s" % from_position)
+	advance_to_next_pattern()
+
+func advance_to_next_pattern():
+	"""Manually advance to the next pattern"""
+	current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
+	var pattern_name = pattern_names[current_pattern_index]
+	
+	print("ColorGrid: 🎨 Advancing to pattern: %s (%d/10)" % [pattern_name, current_pattern_index + 1])
+	
+	# Apply the new pattern immediately
+	var cube_meshes = find_all_cube_meshes()
+	if not cube_meshes.is_empty():
+		var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
+		
+		if pattern_name.ends_with("_gradient"):
+			apply_gradient_pattern(sorted_cubes, pattern_name)
+		elif pattern_name == "sphere_reflection":
+			apply_sphere_reflection(sorted_cubes, pattern_name)
+		else:
+			var pattern = color_patterns[pattern_name]
+			apply_pattern_to_cubes(sorted_cubes, pattern, pattern_name)
+
+# Public API for external control
+func get_current_pattern_index() -> int:
+	return current_pattern_index
+
+func get_pattern_count() -> int:
+	return pattern_names.size()
+
+func set_pattern_by_index(index: int):
+	"""Set pattern by index"""
+	if index >= 0 and index < pattern_names.size():
+		current_pattern_index = index
+		advance_to_next_pattern()
+
+func get_current_pattern_name() -> String:
+	return pattern_names[current_pattern_index]
+
+func enable_auto_cycle():
+	"""Re-enable automatic pattern cycling"""
+	auto_cycle_enabled = true
+	start_pattern_cycling()
+
+func disable_auto_cycle():
+	"""Disable automatic pattern cycling"""
+	auto_cycle_enabled = false

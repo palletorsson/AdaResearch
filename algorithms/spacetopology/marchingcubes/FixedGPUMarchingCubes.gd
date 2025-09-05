@@ -7,16 +7,16 @@ class_name FixedGPUMarchingCubes
 
 # Rendering device and compute shader
 var rd: RenderingDevice
-var compute_shader: RID
+var compute_shader: RID = RID()
 var shader_file: RDShaderFile
 
-# Buffer objects
-var density_buffer: RID
-var vertex_buffer: RID
-var normal_buffer: RID
-var index_buffer: RID
-var counter_buffer: RID
-var uniform_buffer: RID
+# Buffer objects - Initialize as invalid RIDs
+var density_buffer: RID = RID()
+var vertex_buffer: RID = RID()
+var normal_buffer: RID = RID()
+var index_buffer: RID = RID()
+var counter_buffer: RID = RID()
+var uniform_buffer: RID = RID()
 
 # Parameters
 var grid_size: Vector3i = Vector3i(64, 64, 64)
@@ -536,20 +536,28 @@ func cleanup():
 	if not is_initialized or not rd:
 		return
 	
-	if density_buffer.is_valid():
+	# Safely free RIDs with null checks
+	if density_buffer != RID() and density_buffer.is_valid():
 		rd.free_rid(density_buffer)
-	if vertex_buffer.is_valid():
+		density_buffer = RID()
+	if vertex_buffer != RID() and vertex_buffer.is_valid():
 		rd.free_rid(vertex_buffer)
-	if normal_buffer.is_valid():
+		vertex_buffer = RID()
+	if normal_buffer != RID() and normal_buffer.is_valid():
 		rd.free_rid(normal_buffer)
-	if index_buffer.is_valid():
+		normal_buffer = RID()
+	if index_buffer != RID() and index_buffer.is_valid():
 		rd.free_rid(index_buffer)
-	if counter_buffer.is_valid():
+		index_buffer = RID()
+	if counter_buffer != RID() and counter_buffer.is_valid():
 		rd.free_rid(counter_buffer)
-	if uniform_buffer.is_valid():
+		counter_buffer = RID()
+	if uniform_buffer != RID() and uniform_buffer.is_valid():
 		rd.free_rid(uniform_buffer)
-	if compute_shader.is_valid():
+		uniform_buffer = RID()
+	if compute_shader != RID() and compute_shader.is_valid():
 		rd.free_rid(compute_shader)
+		compute_shader = RID()
 	
 	is_initialized = false
 	print("FixedGPUMarchingCubes: GPU resources cleaned up")

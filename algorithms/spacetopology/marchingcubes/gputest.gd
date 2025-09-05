@@ -69,8 +69,10 @@ void main() {
 	
 	# Cleanup
 	if rd:
-		rd.free_rid(compute_shader)
-		rd.free_rid(buffer)
+		if compute_shader != RID() and compute_shader.is_valid():
+			rd.free_rid(compute_shader)
+		if buffer != RID() and buffer.is_valid():
+			rd.free_rid(buffer)
 	
 	print("🎉 ALL GPU TESTS PASSED!")
 	print("   Your system supports compute shaders")
