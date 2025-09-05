@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwt4esw1futik"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q2nsk"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_6l87n"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_xog5e"]
+[ext_resource type="PackedScene" uid="uid://ddkksijgplfht" path="res://commons/primitives/positionlabel/positionlabel.tscn" id="4_cp53c"]
+[ext_resource type="Script" uid="uid://ds7ohqeal1so6" path="res://commons/primitives/constraint/distance_constraint.gd" id="5_q2nsk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qrm56"]
+radius = 0.035
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cp53c"]
+radius = 0.025
+height = 0.05
+radial_segments = 32
+rings = 15
+
+[node name="GrabSphere" instance=ExtResource("1_q2nsk")]
+script = ExtResource("2_6l87n")
+alternate_material = null
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000920061, 0.000134276, -0.000782901)
+shape = SubResource("SphereShape3D_qrm56")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("SphereMesh_cp53c")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_xog5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00162586, 0, 0.0739675)
+
+[node name="positionlabel" parent="." index="3" instance=ExtResource("4_cp53c")]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0.0245838, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.300491)
+
+[node name="DistanceConstraint" type="Node3D" parent="." index="5"]
+visible = false
+script = ExtResource("5_q2nsk")

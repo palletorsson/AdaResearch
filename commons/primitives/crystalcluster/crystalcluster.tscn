@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brkyk6lxbvjsn"]
+
+[ext_resource type="Script" uid="uid://0bs2hgp3fto4" path="res://commons/primitives/crystalcluster/crystalcluster.gd" id="1_um2fn"]
+
+[node name="Crystalcluster" type="Node3D"]
+script = ExtResource("1_um2fn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)

@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3 uid="uid://bub54b3e28w8v"]
+
+[ext_resource type="Script" uid="uid://d2xqtpn0rckup" path="res://algorithms/color/gridcolorizer/gridcolorizer.gd" id="1_cube3d"]
+
+[node name="CubeColorizer3D" type="Node"]
+script = ExtResource("1_cube3d")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="InfoLabel" type="Label" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3D Cube Colorizer
+
+Finds all MeshInstance3D nodes with 'cube' in their name
+and applies the rose vase pattern to an 11x11 grid.
+
+Check console for detailed logs."
+vertical_alignment = 1
+
+[node name="ControlPanel" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 300.0
+grow_horizontal = 0
+
+[node name="Title" type="Label" parent="UI/ControlPanel"]
+layout_mode = 2
+text = "Cube Controls"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/ControlPanel"]
+layout_mode = 2
+
+[node name="ApplyPatternButton" type="Button" parent="UI/ControlPanel"]
+layout_mode = 2
+tooltip_text = "Apply the 11x11 rose vase color pattern"
+text = "Apply Rose Pattern"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ControlPanel"]
+layout_mode = 2
+
+[node name="TestRedButton" type="Button" parent="UI/ControlPanel"]
+layout_mode = 2
+tooltip_text = "Make all cubes red for testing"
+text = "Test: All Red"
+
+[node name="TestRainbowButton" type="Button" parent="UI/ControlPanel"]
+layout_mode = 2
+tooltip_text = "Apply rainbow colors for testing"
+text = "Test: Rainbow"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/ControlPanel"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="UI/ControlPanel"]
+layout_mode = 2
+tooltip_text = "Remove all color overrides"
+text = "Reset Colors"
+
+[node name="HSeparator4" type="HSeparator" parent="UI/ControlPanel"]
+layout_mode = 2
+
+[node name="DebugButton" type="Button" parent="UI/ControlPanel"]
+layout_mode = 2
+tooltip_text = "Print cube information to console"
+text = "Debug Info"
+
+[connection signal="pressed" from="UI/ControlPanel/ApplyPatternButton" to="." method="reapply_pattern"]
+[connection signal="pressed" from="UI/ControlPanel/TestRedButton" to="." method="test_all_red"]
+[connection signal="pressed" from="UI/ControlPanel/TestRainbowButton" to="." method="test_rainbow"]
+[connection signal="pressed" from="UI/ControlPanel/ResetButton" to="." method="reset_all_cube_colors"]
+[connection signal="pressed" from="UI/ControlPanel/DebugButton" to="." method="debug_cube_info"]

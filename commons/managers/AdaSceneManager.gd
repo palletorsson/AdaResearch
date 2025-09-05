@@ -163,12 +163,63 @@ func _load_sequence_configurations():
 		print("  → %s: %d maps (%s)" % [sequence_name, maps.size(), str(maps)])
 
 # =============================================================================
+# ARTIFACT SEQUENCE MAPPING
+# =============================================================================
+
+func _get_sequence_for_artifact(artifact_id: String) -> String:
+	"""Get sequence name for artifact from grid_artifacts.json"""
+	const ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
+	
+	if not FileAccess.file_exists(ARTIFACTS_JSON_PATH):
+		print("AdaSceneManager: Artifacts JSON not found: %s" % ARTIFACTS_JSON_PATH)
+		return ""
+	
+	var file = FileAccess.open(ARTIFACTS_JSON_PATH, FileAccess.READ)
+	if not file:
+		print("AdaSceneManager: Could not open artifacts file")
+		return ""
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	var parse_result = json.parse(json_text)
+	
+	if parse_result != OK:
+		print("AdaSceneManager: Failed to parse artifacts JSON")
+		return ""
+	
+	var artifacts_data = json.data.get("artifacts", {})
+	
+	if artifacts_data.has(artifact_id):
+		var artifact_info = artifacts_data[artifact_id]
+		var sequence = artifact_info.get("sequence", "")
+		if sequence and sequence != null:
+			return sequence
+	
+	return ""
+
+# =============================================================================
 # SIGNAL HANDLERS
 # =============================================================================
 
 func _on_artifact_activated(artifact_id: String):
 	print("AdaSceneManager: Artifact activated: %s" % artifact_id)
 	
+	# First, try to get sequence from artifacts registry
+	var sequence_name = _get_sequence_for_artifact(artifact_id)
+	
+	if sequence_name and not sequence_name.is_empty():
+		print("AdaSceneManager: Found sequence '%s' for artifact '%s'" % [sequence_name, artifact_id])
+		request_transition({
+			"type": TransitionType.ARTIFACT_ACTIVATION,
+			"source": artifact_id,
+			"action": "start_sequence",
+			"sequence": sequence_name
+		})
+		return
+	
+	# Fallback to hardcoded mappings for special cases
 	match artifact_id:
 		"rotating_cube":
 			request_transition({
@@ -178,22 +229,8 @@ func _on_artifact_activated(artifact_id: String):
 				"sequence": "array_tutorial",
 				"first_map": "Tutorial_Single"
 			})
-		"grid_display":
-			request_transition({
-				"type": TransitionType.ARTIFACT_ACTIVATION,
-				"source": "grid_display", 
-				"action": "start_sequence",
-				"sequence": "array_visualization"
-			})
-		"randomness_sign":
-			request_transition({
-				"type": TransitionType.ARTIFACT_ACTIVATION,
-				"source": "randomness_sign",
-				"action": "start_sequence", 
-				"sequence": "randomness_exploration"
-			})
 		_:
-			print("AdaSceneManager: Unhandled artifact: %s" % artifact_id)
+			print("AdaSceneManager: No sequence mapping found for artifact: %s" % artifact_id)
 
 func _on_interactable_activated(object_id: String, position: Vector3, data: Dictionary):
 	print("AdaSceneManager: Interactable activated: %s" % object_id)

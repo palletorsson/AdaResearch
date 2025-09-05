@@ -1,0 +1,242 @@
+[gd_scene load_steps=12 format=3 uid="uid://yz6a2b5c8defg"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var weighing_platform = $ScaleBase/WeighingPlatform
+@onready var digital_display = $ScaleBase/DigitalDisplay
+@onready var tare_button = $ScaleBase/TareButton
+@onready var calibration_weight = $ScaleBase/CalibrationWeight
+@onready var stability_indicator = $ScaleBase/StabilityIndicator
+
+var current_weight = 0.0
+var tare_weight = 0.0
+var scale_precision = 0.001  # mg precision
+var is_stable = false
+var calibrated = true
+
+signal weight_measured
+signal tare_complete
+signal calibration_required
+
+func _ready():
+	setup_electronic_scales()
+	start_weight_monitoring()
+
+func setup_electronic_scales():
+	add_to_group('desk_equipment')
+	add_to_group('measurement_tools')
+	
+	print('⚖️ SCALES: Precision electronic balance ready')
+
+func start_weight_monitoring():
+	var weight_timer = Timer.new()
+	weight_timer.wait_time = 0.5
+	weight_timer.timeout.connect(update_weight_reading)
+	weight_timer.autostart = true
+	add_child(weight_timer)
+
+func update_weight_reading():
+	# Simulate micro-vibrations and air currents
+	var noise = randf_range(-0.0002, 0.0002)
+	var base_weight = 0.0
+	
+	# Check for objects on platform (simulated)
+	if randf() < 0.3:  # 30% chance something is on the scale
+		base_weight = randf_range(0.001, 5.000)  # 1mg to 5g
+	
+	current_weight = base_weight + noise
+	
+	# Apply tare
+	var displayed_weight = current_weight - tare_weight
+	
+	# Update stability
+	check_stability(noise)
+	
+	# Update display
+	update_digital_display(displayed_weight)
+	
+	emit_signal('weight_measured', displayed_weight)
+
+func check_stability(noise_level: float):
+	is_stable = abs(noise_level) < 0.0001
+	
+	if is_stable:
+		stability_indicator.light_color = Color.GREEN
+		stability_indicator.light_energy = 0.8
+	else:
+		stability_indicator.light_color = Color.YELLOW
+		stability_indicator.light_energy = 1.2
+
+func update_digital_display(weight: float):
+	# Format weight display
+	var weight_text = '%.3f g' % weight
+	
+	# Color coding based on weight range
+	if abs(weight) < 0.001:
+		digital_display.material_override.emission = Color.WHITE
+	elif weight < 0.1:
+		digital_display.material_override.emission = Color.GREEN
+	elif weight < 1.0:
+		digital_display.material_override.emission = Color.YELLOW
+	else:
+		digital_display.material_override.emission = Color.ORANGE
+	
+	# Brightness based on stability
+	var brightness = 1.0 if is_stable else 1.5
+	digital_display.material_override.emission_energy = brightness
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		perform_tare()
+
+func perform_tare():
+	tare_weight = current_weight
+	print('⚖️ SCALES: Tare completed - Zero point set')
+	emit_signal('tare_complete', tare_weight)
+	
+	# Visual feedback for tare
+	var tare_tween = create_tween()
+	tare_tween.tween_property(tare_button.get_child(0), 'light_energy', 2.0, 0.3)
+	tare_tween.tween_property(tare_button.get_child(0), 'light_energy', 0.5, 0.7)
+
+func calibrate_scale():
+	print('⚖️ SCALES: Initiating calibration sequence...')
+	calibrated = false
+	
+	# Show calibration weight
+	calibration_weight.visible = true
+	
+	# Calibration animation
+	var cal_tween = create_tween()
+	cal_tween.tween_property(weighing_platform, 'position:y', -0.002, 1.0)
+	cal_tween.tween_property(weighing_platform, 'position:y', 0.0, 1.0)
+	cal_tween.tween_callback(calibration_complete)
+
+func calibration_complete():
+	calibrated = true
+	calibration_weight.visible = false
+	print('⚖️ SCALES: Calibration complete - Accuracy verified')
+
+func measure_sample(sample_name: String):
+	if not calibrated:
+		print('⚠️ SCALES: Calibration required before measurement')
+		emit_signal('calibration_required')
+		return
+	
+	print('⚖️ SCALES: Measuring sample: %s' % sample_name)
+	
+	# Enhanced stability monitoring during measurement
+	var measure_tween = create_tween()
+	measure_tween.tween_property(stability_indicator, 'light_energy', 2.0, 2.0)
+	measure_tween.tween_property(stability_indicator, 'light_energy', 0.8, 1.0)
+
+func detect_air_currents():
+	if randf() < 0.1:  # 10% chance of air current
+		print('💨 SCALES: Air current detected - Readings may be unstable')
+		
+		# Simulate instability
+		var instability_tween = create_tween()
+		instability_tween.set_loops(3)
+		instability_tween.tween_property(weighing_platform, 'position:y', 0.001, 0.1)
+		instability_tween.tween_property(weighing_platform, 'position:y', 0.0, 0.1)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+metallic = 0.6
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.7, 0.7, 0.8, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.15, 0.08, 0.12)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.005
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.08, 0.04, 0.01)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.008
+height = 0.016
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.3, 0.2, 0.25)
+
+[node name="ElectronicScales" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="ScaleBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="WeighingPlatform" type="MeshInstance3D" parent="ScaleBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="DigitalDisplay" type="MeshInstance3D" parent="ScaleBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.025, -0.05)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="TareButton" type="OmniLight3D" parent="ScaleBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.02, -0.045)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.5
+omni_range = 0.2
+
+[node name="TareButtonVisual" type="MeshInstance3D" parent="ScaleBase/TareButton"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="StabilityIndicator" type="OmniLight3D" parent="ScaleBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.02, -0.045)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.8
+omni_range = 0.2
+
+[node name="StabilityVisual" type="MeshInstance3D" parent="ScaleBase/StabilityIndicator"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="CalibrationWeight" type="MeshInstance3D" parent="ScaleBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+visible = false
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

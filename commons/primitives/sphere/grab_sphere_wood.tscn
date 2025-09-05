@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://et4e1rwdhx84"]
+
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="1_agi6j"]
+[ext_resource type="Shader" uid="uid://bvosua7kp43yv" path="res://commons/resourses/shaders/wood.gdshader" id="2_msbuu"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_ja0n1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oypbc"]
+radius = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qdos"]
+render_priority = 0
+shader = ExtResource("2_msbuu")
+shader_parameter/light_color = Vector4(0.952941, 0.858824, 0.74902, 1)
+shader_parameter/dark_color = Vector4(0.74902, 0.619608, 0.490196, 1)
+shader_parameter/ring_scale = 4.045
+shader_parameter/wave_scale = 9.189
+shader_parameter/random_scale = 4.75
+shader_parameter/noise_scale = 0.03
+shader_parameter/cube_position = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yvp1q"]
+radius = 0.025
+height = 0.05
+
+[node name="GrabSphere" type="Node3D"]
+
+[node name="GrabSphere" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_agi6j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabSphere"]
+shape = SubResource("SphereShape3D_oypbc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabSphere"]
+material_override = SubResource("ShaderMaterial_7qdos")
+mesh = SubResource("SphereMesh_yvp1q")
+
+[node name="HighlightRing" parent="GrabSphere" instance=ExtResource("3_ja0n1")]

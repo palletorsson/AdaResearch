@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bapvfdrc33ea2"]
+
+[ext_resource type="Script" uid="uid://d2p7pyg7y54lq" path="res://commons/primitives/triangularprism/triangularprism.gd" id="1_lo54e"]
+
+[node name="Triangularprism" type="Node3D"]
+script = ExtResource("1_lo54e")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)

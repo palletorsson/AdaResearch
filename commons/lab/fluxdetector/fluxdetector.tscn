@@ -1,0 +1,283 @@
+[gd_scene load_steps=16 format=3 uid="uid://bc9d5e8f2ghij"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var temporal_orb = $DetectorBase/TemporalOrb
+@onready var flux_rings = [$DetectorBase/FluxRing1, $DetectorBase/FluxRing2, $DetectorBase/FluxRing3]
+@onready var chronometer = $DetectorBase/Chronometer
+@onready var temporal_needles = [$DetectorBase/TemporalNeedle1, $DetectorBase/TemporalNeedle2]
+@onready var flux_readout = $DetectorBase/FluxReadout
+
+var temporal_stability = 100.0
+var flux_intensity = 0.0
+var chronon_decay_rate = 0.95
+var temporal_anomaly_detected = false
+var time_dilation_factor = 1.0
+
+signal temporal_anomaly
+signal chronon_surge
+signal time_stream_disruption
+
+func _ready():
+	setup_temporal_detector()
+	start_temporal_monitoring()
+
+func setup_temporal_detector():
+	add_to_group('desk_equipment')
+	add_to_group('exotic_instruments')
+	add_to_group('temporal_devices')
+	
+	print('⏰ TEMPORAL DETECTOR: Chronon field analysis initialized')
+
+func start_temporal_monitoring():
+	# Flux ring rotation at different temporal frequencies
+	for i in range(flux_rings.size()):
+		var ring = flux_rings[i]
+		var temporal_freq = (i + 1) * 1.618  # Golden ratio intervals
+		
+		var ring_tween = create_tween()
+		ring_tween.set_loops()
+		ring_tween.tween_property(ring, 'rotation_degrees:y', 360.0, temporal_freq)
+	
+	# Temporal orb pulsing
+	animate_temporal_orb()
+	
+	# Start flux detection
+	var flux_timer = Timer.new()
+	flux_timer.wait_time = 0.333  # 3Hz monitoring
+	flux_timer.timeout.connect(detect_temporal_flux)
+	flux_timer.autostart = true
+	add_child(flux_timer)
+
+func animate_temporal_orb():
+	var orb_tween = create_tween()
+	orb_tween.set_loops()
+	orb_tween.tween_property(temporal_orb, 'scale', Vector3(1.2, 1.2, 1.2), 2.618)  # Phi seconds
+	orb_tween.tween_property(temporal_orb, 'scale', Vector3(0.8, 0.8, 0.8), 1.618)
+	orb_tween.tween_property(temporal_orb, 'scale', Vector3(1.0, 1.0, 1.0), 1.0)
+
+func detect_temporal_flux():
+	# Simulate temporal field fluctuations
+	var quantum_noise = randf_range(-0.05, 0.05)
+	var base_flux = sin(Time.get_time_dict_from_system().second * 0.1) * 0.3
+	
+	flux_intensity = base_flux + quantum_noise
+	
+	# Chronon decay simulation
+	temporal_stability *= chronon_decay_rate
+	if temporal_stability < 50.0:
+		temporal_stability = 100.0  # Field regeneration
+	
+	# Check for temporal anomalies
+	if abs(flux_intensity) > 0.4:
+		trigger_temporal_anomaly()
+	
+	# Update visual displays
+	update_temporal_displays()
+
+func update_temporal_displays():
+	# Orb color based on flux intensity
+	var flux_color = Color.BLUE.lerp(Color.MAGENTA, abs(flux_intensity))
+	temporal_orb.material_override.emission = flux_color
+	
+	# Orb brightness
+	temporal_orb.material_override.emission_energy = 1.0 + abs(flux_intensity) * 2.0
+	
+	# Needle positions based on temporal readings
+	if temporal_needles.size() >= 2:
+		var flux_angle = flux_intensity * 45.0
+		var stability_angle = (temporal_stability - 50.0) * 0.6
+		
+		temporal_needles[0].rotation_degrees.z = flux_angle
+		temporal_needles[1].rotation_degrees.z = stability_angle
+	
+	# Flux readout brightness
+	var readout_intensity = clamp(abs(flux_intensity) * 3.0, 0.5, 2.0)
+	flux_readout.material_override.emission_energy = readout_intensity
+
+func trigger_temporal_anomaly():
+	temporal_anomaly_detected = true
+	print('⚠️ TEMPORAL ANOMALY: Chronon field disturbance detected!')
+	emit_signal('temporal_anomaly', flux_intensity)
+	
+	# Visual temporal distortion effect
+	for ring in flux_rings:
+		var distortion_tween = create_tween()
+		distortion_tween.tween_property(ring, 'rotation_degrees:x', randf_range(-15, 15), 0.5)
+		distortion_tween.tween_property(ring, 'rotation_degrees:x', 0.0, 1.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		perform_temporal_scan()
+
+func perform_temporal_scan():
+	print('⏰ TEMPORAL DETECTOR: Performing localized chronon analysis...')
+	
+	# Enhanced scanning mode
+	var scan_tween = create_tween()
+	scan_tween.tween_property(chronometer, 'material_override:emission_energy', 3.0, 2.0)
+	scan_tween.tween_property(chronometer, 'material_override:emission_energy', 1.0, 1.0)
+	
+	# Display temporal readings
+	display_temporal_readings()
+
+func display_temporal_readings():
+	print('📊 TEMPORAL ANALYSIS:')
+	print('  Flux Intensity: %.3f chronons/μs' % flux_intensity)
+	print('  Temporal Stability: %.1f%%' % temporal_stability)
+	print('  Time Dilation Factor: %.6f' % time_dilation_factor)
+	print('  Causality Index: %.2f' % (1.0 - abs(flux_intensity)))
+
+func detect_chronon_surge():
+	if randf() < 0.05:  # 5% chance per detection cycle
+		print('⚡ CHRONON SURGE: Massive temporal energy spike!')
+		emit_signal('chronon_surge')
+		
+		# Surge visual effect
+		var surge_tween = create_tween()
+		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy', 5.0, 0.3)
+		surge_tween.tween_property(temporal_orb, 'material_override:emission_energy', 1.0, 2.0)
+
+func calibrate_temporal_baseline():
+	print('⏰ TEMPORAL DETECTOR: Calibrating to local timestream...')
+	temporal_stability = 100.0
+	flux_intensity = 0.0
+	time_dilation_factor = 1.0
+	
+	# Calibration animation
+	var cal_tween = create_tween()
+	for needle in temporal_needles:
+		cal_tween.set_parallel(true)
+		cal_tween.tween_property(needle, 'rotation_degrees:z', 0.0, 1.5)
+
+func detect_time_stream_disruption():
+	if temporal_stability < 30.0 and abs(flux_intensity) > 0.6:
+		print('🌊 TIME STREAM DISRUPTION: Reality coherence compromised!')
+		emit_signal('time_stream_disruption', temporal_stability)
+		
+		# Reality distortion effect
+		var disruption_tween = create_tween()
+		disruption_tween.set_loops(3)
+		disruption_tween.tween_property(self, 'scale', Vector3(1.1, 0.9, 1.1), 0.2)
+		disruption_tween.tween_property(self, 'scale', Vector3(0.9, 1.1, 0.9), 0.2)
+		disruption_tween.tween_property(self, 'scale', Vector3.ONE, 0.2)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.05, 0.15, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.5, 0, 1, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(0.3, 0, 1, 1)
+emission_energy = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0.8, 0.8)
+transparency = 1
+emission_enabled = true
+emission = Color(1, 0, 0.5, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 1, 1)
+emission_energy = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.9, 1, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.15, 0.08, 0.15)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="TorusMesh" id="TorusMesh_1"]
+inner_radius = 0.05
+outer_radius = 0.06
+
+[sub_resource type="TorusMesh" id="TorusMesh_2"]
+inner_radius = 0.07
+outer_radius = 0.08
+
+[sub_resource type="TorusMesh" id="TorusMesh_3"]
+inner_radius = 0.09
+outer_radius = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.01
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.001
+bottom_radius = 0.001
+height = 0.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.06, 0.03, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.3, 0.2, 0.3)
+
+[node name="TemporalFluxDetector" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="DetectorBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="TemporalOrb" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="FluxRing1" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("TorusMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="FluxRing2" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.08, 0)
+mesh = SubResource("TorusMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="FluxRing3" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("TorusMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Chronometer" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.02, 0.06)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="TemporalNeedle1" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.025, 0.06)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="TemporalNeedle2" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.025, 0.06)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="FluxReadout" type="MeshInstance3D" parent="DetectorBase"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.05, 0.02, 0.06)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

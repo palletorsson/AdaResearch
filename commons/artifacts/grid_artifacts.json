@@ -4,31 +4,154 @@
 	"description": "Artifact definitions for the Lab environment",
 	
 	"artifacts": {
+		"point": {
+			"name": "point",
+			"lookup_name": "point",
+			"description": "a point",
+			"scene": "res://commons/primitives/point/point.tscn",
+		},
+		"animatedcubebuilder": {
+			"name": "animatedcubebuilder",
+			"lookup_name": "animatedcubebuilder",
+			"description": "animatedcubebuilder",
+			"scene": "res://commons/primitives/animatedcubebuilder/animatedcubebuilder.tscn",
+		},
+		"cube_scene": {
+			"name": "Basic Cube Scene",
+			"lookup_name": "cube_scene",
+			"description": "A fundamental cube with shader material and static body physics",
+			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
+		},
+		"plane": {
+			"name": "plane",
+			"lookup_name": "plane",
+			"description": "A plane",
+			"scene": "res://commons/primitives/plane/plane.tscn",
+		},
+		"sphere": {
+			"name": "sphere",
+			"lookup_name": "sphere",
+			"description": "A sphere",
+			"scene": "res://commons/primitives/sphere/sphere.tscn",
+		},	
+		"prism": {
+			"name": "prism",
+			"lookup_name": "prism",
+			"description": "A prism",
+			"scene": "res://commons/primitives/prism/prism.tscn",
+		},		
+		"cylinder": {
+			"name": "cylinder",
+			"lookup_name": "cylinder",
+			"description": "A cylinder",
+			"scene": "res://commons/primitives/cylinder/cylinder.tscn",
+		},	
+		"torus": {
+			"name": "torus",
+			"lookup_name": "torus",
+			"description": "A torus",
+			"scene": "res://commons/primitives/torus/torus.tscn",
+		},	
+		
+		"pyramid": {
+			"name": "pyramid",
+			"lookup_name": "pyramid",
+			"description": "A pyramid",
+			"scene": "res://commons/primitives/pyramid/pyramid.tscn",
+		},			
+		"tetrahedron": {
+			"name": "tetrahedron",
+			"lookup_name": "tetrahedron",
+			"description": "A tetrahedron",
+			"scene": "res://commons/primitives/tetrahedron/tetrahedron.tscn",
+		},	
+		"octahedron": {
+			"name": "octahedron",
+			"lookup_name": "octahedron",
+			"description": "A octahedron",
+			"scene": "res://commons/primitives/octahedron/octahedron.tscn",
+		},		
+		"dodecahedron": {
+			"name": "dodecahedron",
+			"lookup_name": "dodecahedron",
+			"description": "A dodecahedron",
+			"scene": "res://commons/primitives/dodecahedron/dodecahedron.tscn",
+		},	
+		"icosahedron": {
+			"name": "icosahedron",
+			"lookup_name": "icosahedron",
+			"description": "A icosahedron",
+			"scene": "res://commons/primitives/icosahedron/icosahedron.tscn",
+		},	
+		"diamond": {
+			"name": "diamond",
+			"lookup_name": "diamond",
+			"description": "A diamond",
+			"scene": "res://commons/primitives/diamond/diamond.tscn",
+		},	
+		"bipyramid": {
+			"name": "bipyramid",
+			"lookup_name": "bipyramid",
+			"description": "A bipyramid",
+			"scene": "res://commons/primitives/bipyramid/bipyramid.tscn",
+		},	
+		"crystalcluster": {
+			"name": "crystalcluster",
+			"lookup_name": "crystalcluster",
+			"description": "A crystalcluster",
+			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+		},	
+
+		"triangularprism": {
+			"name": "triangularprism",
+			"lookup_name": "triangularprism",
+			"description": "A triangularprism",
+			"scene": "res://commons/primitives/triangularprism/triangularprism.tscn",
+		},	
+			"truncatedtetrahedron": {
+			"name": "truncatedtetrahedron",
+			"lookup_name": "truncatedtetrahedron",
+			"description": "A truncatedtetrahedron",
+			"scene": "res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn",
+		},		
+		
+		"roughrock": {
+			"name": "roughrock",
+			"lookup_name": "roughrock",
+			"description": "A roughrock",
+			"scene": "res://commons/primitives/roughrock/roughrock.tscn",
+		},	
+		"diamondtoruscollection": {
+			"name": "diamondtoruscollection",
+			"lookup_name": "diamondtoruscollection",
+			"description": "A diamondtoruscollection",
+			"scene": "res://algorithms/primitives/diamondtoruscollection/diamondtoruscollection.tscn",
+		},	
+		"pyramidlong": {
+			"name": "pyramidlong",
+			"lookup_name": "pyramidlong",
+			"description": "pyramidlong",
+			"scene": "res://commons/primitives/pyramid/pyramidlong.tscn",
+		},	
+		
+		"smallcontainment": {
+			"name": "smallcontainment",
+			"lookup_name": "smallcontainment",
+			"description": "A smallcontainment",
+			"scene": "res://commons/lab/smallcontainment/smallcontainment.tscn",
+		},	
+		
 		"test_scene_1": {
-			"name": "This is just a test",
+			"name": "test",
 			"lookup_name": "test_scene_1",
 			"description": "this is the test",
 			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
-			"position": [0.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "primitives",
-			"artifact_type": "context_tool",
-			"prerequisites": []
 		},
 		"test_scene_2": {
 			"name": "This is just a test",
 			"lookup_name": "test_scene_2",
 			"description": "this is the test",
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
-			"position": [0.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "primitives",
-			"artifact_type": "context_tool",
-			"prerequisites": []
 		},
 		"geometric_transformations": {
 			"name": "geometric_transformations",
@@ -39,19 +162,7 @@
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [0.5, 0.5, 0.5],
 		},
-		"cube_scene": {
-			"name": "Basic Cube Scene",
-			"lookup_name": "cube_scene",
-			"description": "A fundamental cube with shader material and static body physics",
-			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
-			"position": [0.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
-		},
+
 		"transformation_cube": {
 			"name": "transformation_cube",
 			"lookup_name": "transformation_cube",
@@ -166,7 +277,18 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},
-		
+		 "toruscylinder": {
+			"name": "toruscylinder",
+			"lookup_name": "toruscylinder",
+			"description": "Cartesian coordinate system, x y z godot",
+			"scene": "res://algorithms/transformation/toruscylinder/toruscylinder.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "look",
+			"sequence": "array_tutorial",
+			"artifact_type": "sequence_trigger",
+			"prerequisites": []
+		},
 
 		"pick_up_cube": {
 			"name": "Pick Up Cube",
@@ -218,6 +340,18 @@
 		  "artifact_type": "entrance",
 		  "prerequisites": []
 		},
+		 "gridcolorizer": {
+		  "lookup_name": "gridcolorizer",
+		  "name": "gridcolorizer",
+		  "description": "gridcolorizer",
+		  "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
+		  "position": [0.0, 0.0, 0.0],
+		  "rotation": [0.0, 0.0, 0.0],
+		  "scale": [1.0, 1.0, 1.0],
+		  "artifact_type": "entrance",
+		  "prerequisites": []
+		},
+		
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor", 
@@ -2559,6 +2693,68 @@
 				"light_position": [0, 1.5, 0]
 			}
 		},
+		"disco_lights": {
+			"name": "disco_lights",
+			"lookup_name": "disco_lights",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"scene": "res://algorithms/color/colorball/disco_lights.tscn",
+			"position": [0.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "color_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.6],
+				"light_intensity": 1.2,
+				"light_range": 3.5,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		 "advancedglitch": {
+			"name": "advancedglitch",
+			"lookup_name": "advancedglitch",
+			"description": "Interactive colored line visualization and manipulation algorithms",
+			"scene": "res://algorithms/color/advancedglitch/advancedglitch.tscn",
+			"position": [0.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "color_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.6],
+				"light_intensity": 1.2,
+				"light_range": 3.5,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		"spherecolors": {
+			"name": "spherecolors",
+			"lookup_name": "spherecolors",
+			"description": "spherecolors",
+			"scene": "res://algorithms/color/spherecolors/spherecolors.tscn",
+			"position": [0.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "color_algorithms",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [1.0, 0.8, 0.6],
+				"light_intensity": 1.2,
+				"light_range": 3.5,
+				"light_position": [0, 1.5, 0]
+			}
+		},
+		
+		
 		"clippingplanes": {
 			"name": "Clipping Planes",
 			"lookup_name": "clippingplanes",
@@ -2865,6 +3061,33 @@
 		"artifact_type": "context_tool",
 		"prerequisites": []
 	},
+	"grab_cube": {
+		"name": "grab_cube",
+		"lookup_name": "grab_cube",
+		"description": "grab_cube",
+		"scene": "res://commons/primitives/cubes/grab_cube.tscn",
+		"position": [0.0, 1.0, 0.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "look",
+		"sequence": "primitives",
+		"artifact_type": "context_tool",
+		"prerequisites": []
+	},
+	 "wood_cube": {
+		"name": "wood_cube",
+		"lookup_name": "wood_cube",
+		"description": "wood_cube",
+		"scene": "res://commons/primitives/cubes/grab_cube_wood.tscn",
+		"position": [0.0, 1.0, 0.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "look",
+		"sequence": "primitives",
+		"artifact_type": "context_tool",
+		"prerequisites": []
+	},
+	
 	"grabable_agnes": {
 		"name": "Grabable Agnes",
 		"lookup_name": "grabable_agnes",

@@ -20,6 +20,14 @@ const UTILITY_TYPES = {
 		"description": "Transitions between areas",
 		"supports_parameters": false
 	},
+ 
+	"wp": {
+		"name": "walkway", 
+		"file": "walkableprism.tscn", 
+		"category": "transport",
+		"description": "walkway walk your way",
+		"supports_parameters": true  # destination, spawn point
+	},
 	"t": {
 		"name": "teleport", 
 		"file": "teleport_scene.tscn", 

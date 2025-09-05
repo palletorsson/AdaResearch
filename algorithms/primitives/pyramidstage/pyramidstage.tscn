@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://buxb1dtpp7cno"]
+
+[ext_resource type="Script" uid="uid://55k6eeuoaymj" path="res://algorithms/primitives/pyramidstage/pyramidstage.gd" id="1"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_v3b3v"]
+
+[node name="GeometricComposition" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.43428)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_v3b3v")

@@ -1,0 +1,369 @@
+[gd_scene load_steps=17 format=3 uid="uid://cyenyttx6qua1"]
+
+[ext_resource type="PackedScene" uid="uid://dqj0rbocrgwyj" path="res://commons/context/XYZcoordinates/xyz_gadget.tscn" id="1_2482f"]
+[ext_resource type="PackedScene" uid="uid://bapvfdrc33ea2" path="res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn" id="1_v6coo"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var containment_walls = [$CubeStructure/BackWall, $CubeStructure/LeftWall, $CubeStructure/RightWall, $CubeStructure/TopWall, $CubeStructure/BottomWall]
+@onready var contained_specimen = $CubeStructure/ContainedSpecimen
+@onready var energy_field = $CubeStructure/EnergyField
+@onready var status_indicators = [$CubeStructure/StatusIndicator1, $CubeStructure/StatusIndicator2, $CubeStructure/StatusIndicator3]
+@onready var field_projectors = [$CubeStructure/FieldProjector1, $CubeStructure/FieldProjector2, $CubeStructure/FieldProjector3, $CubeStructure/FieldProjector4]
+
+var containment_active = true
+var specimen_type = 'anomalous_sample'
+var field_strength = 100.0
+var containment_breach_risk = 0.0
+var cube_size = 0.2  # 20cm desktop cube
+
+signal containment_stabilized
+signal breach_warning
+signal specimen_contained
+signal field_fluctuation
+
+func _ready():
+	setup_containment_cube()
+	initialize_containment_field()
+
+func setup_containment_cube():
+	add_to_group('desk_equipment')
+	add_to_group('containment_devices')
+	add_to_group('specimen_storage')
+	
+	print('🔳 CONTAINMENT CUBE: Desktop specimen containment active')
+
+func initialize_containment_field():
+	# Start field projector animations
+	animate_field_projectors()
+	
+	# Specimen floating animation
+	animate_contained_specimen()
+	
+	# Status monitoring
+	start_containment_monitoring()
+
+func animate_field_projectors():
+	for i in range(field_projectors.size()):
+		var projector = field_projectors[i]
+		var phase_offset = i * (PI / 2.0)  # 90 degree phase separation
+		
+		var projector_tween = create_tween()
+		projector_tween.set_loops()
+		projector_tween.tween_method(pulse_field_projector.bind(projector, phase_offset), 0.0, TAU, 3.0)
+
+func pulse_field_projector(projector: Node3D, phase_offset: float, time: float):
+	var intensity = sin(time + phase_offset) * 0.3 + 0.7
+	projector.light_energy = intensity * (field_strength / 100.0)
+
+func animate_contained_specimen():
+	# Specimen floating inside the cube
+	var float_tween = create_tween()
+	float_tween.set_loops()
+	float_tween.tween_property(contained_specimen, 'position:y', 0.02, 3.0)
+	float_tween.tween_property(contained_specimen, 'position:y', -0.02, 3.0)
+	
+	# Gentle rotation
+	var rotate_tween = create_tween()
+	rotate_tween.set_loops()
+	rotate_tween.tween_property(contained_specimen, 'rotation_degrees:y', 360.0, 12.0)
+
+func start_containment_monitoring():
+	var monitor_timer = Timer.new()
+	monitor_timer.wait_time = 2.0
+	monitor_timer.timeout.connect(monitor_containment_integrity)
+	monitor_timer.autostart = true
+	add_child(monitor_timer)
+
+func monitor_containment_integrity():
+	# Simulate field fluctuations
+	field_strength += randf_range(-5.0, 2.0)
+	field_strength = clamp(field_strength, 60.0, 100.0)
+	
+	# Calculate breach risk
+	containment_breach_risk = (100.0 - field_strength) / 100.0
+	
+	# Update energy field visibility
+	update_energy_field_visuals()
+	
+	# Check for critical conditions
+	if field_strength < 75.0:
+		trigger_breach_warning()
+	elif field_strength < 85.0:
+		emit_signal('field_fluctuation', field_strength)
+
+func update_energy_field_visuals():
+	# Field opacity based on strength
+	var field_alpha = (field_strength / 100.0) * 0.4
+	energy_field.material_override.albedo_color.a = field_alpha
+	
+	# Color shifts based on stability
+	if field_strength > 90.0:
+		energy_field.material_override.emission = Color.CYAN
+	elif field_strength > 75.0:
+		energy_field.material_override.emission = Color.YELLOW
+	else:
+		energy_field.material_override.emission = Color.RED
+	
+	# Pulsing intensity for unstable fields
+	if field_strength < 80.0:
+		var pulse_tween = create_tween()
+		pulse_tween.tween_property(energy_field, 'material_override:emission_energy', 2.0, 0.5)
+		pulse_tween.tween_property(energy_field, 'material_override:emission_energy', 1.0, 0.5)
+
+func trigger_breach_warning():
+	print('⚠️ CONTAINMENT CUBE: Field integrity compromised - Breach risk elevated')
+	emit_signal('breach_warning', containment_breach_risk)
+	
+	# Flash status indicators
+	for indicator in status_indicators:
+		var warning_tween = create_tween()
+		warning_tween.set_loops(3)
+		warning_tween.tween_property(indicator, 'light_color', Color.RED, 0.2)
+		warning_tween.tween_property(indicator, 'light_color', Color.BLUE, 0.2)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		analyze_contained_specimen()
+
+func analyze_contained_specimen():
+	print('🔍 CONTAINMENT CUBE: Analyzing specimen properties...')
+	print('  Specimen Type: %s' % specimen_type)
+	print('  Field Strength: %.1f%%' % field_strength)
+	print('  Breach Risk: %.1f%%' % (containment_breach_risk * 100))
+	print('  Containment Status: %s' % ('STABLE' if field_strength > 85.0 else 'UNSTABLE'))
+
+func reinforce_containment_field():
+	print('🔋 CONTAINMENT CUBE: Reinforcing containment field...')
+	field_strength = 100.0
+	containment_breach_risk = 0.0
+	
+	# Visual reinforcement effect
+	var reinforce_tween = create_tween()
+	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy', 3.0, 1.0)
+	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy', 1.5, 1.0)
+	
+	emit_signal('containment_stabilized')
+
+func emergency_containment_protocol():
+	print('🚨 CONTAINMENT CUBE: Emergency protocol activated!')
+	
+	# Maximum field strength
+	field_strength = 100.0
+	
+	# Lock down specimen
+	var lockdown_tween = create_tween()
+	lockdown_tween.tween_property(contained_specimen, 'scale', Vector3(0.8, 0.8, 0.8), 0.5)
+	
+	# Intensify all field projectors
+	for projector in field_projectors:
+		projector.light_energy = 2.0
+		projector.light_color = Color.WHITE
+
+func specimen_interaction_detected():
+	print('👁️ CONTAINMENT CUBE: Specimen showing reactive behavior')
+	
+	# Specimen becomes more active
+	var reaction_tween = create_tween()
+	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy', 2.5, 1.0)
+	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy', 1.0, 2.0)
+	
+	# Slight field fluctuation in response
+	field_strength -= 10.0
+
+func change_specimen(new_specimen_type: String, specimen_color: Color):
+	specimen_type = new_specimen_type
+	contained_specimen.material_override.emission = specimen_color
+	contained_specimen.material_override.albedo_color = specimen_color
+	
+	print('🔬 CONTAINMENT CUBE: New specimen contained - Type: %s' % specimen_type)
+	emit_signal('specimen_contained', specimen_type)
+
+func toggle_containment_access():
+	# The front wall is missing for access, but we can simulate opening/closing
+	if containment_active:
+		print('🔓 CONTAINMENT CUBE: Access mode - Field temporarily lowered')
+		field_strength *= 0.7
+	else:
+		print('🔒 CONTAINMENT CUBE: Sealed mode - Full containment restored')
+		field_strength = 100.0
+	
+	containment_active = not containment_active
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+transparency = 1
+albedo_color = Color(0.9, 0.95, 1, 0.8)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.005, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.2, 0.2, 0.005)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.2, 0.005, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 0, 0.5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+transparency = 1
+albedo_color = Color(0, 0.8, 1, 0.3)
+emission_enabled = true
+emission = Color(0, 0.6, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(0.18, 0.18, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.005
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.008
+bottom_radius = 0.008
+height = 0.015
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.35, 0.35, 0.35)
+
+[node name="DesktopContainmentCube" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="CubeStructure" type="Node3D" parent="."]
+
+[node name="BackWall" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.1)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
+
+[node name="LeftWall" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.1, 0, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_2")
+
+[node name="RightWall" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.1, 0, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_2")
+
+[node name="TopWall" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_3")
+
+[node name="BottomWall" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_3")
+
+[node name="ContainedSpecimen" type="MeshInstance3D" parent="CubeStructure"]
+visible = false
+material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
+
+[node name="EnergyField" type="MeshInstance3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0966832, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("BoxMesh_4")
+
+[node name="StatusIndicator1" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.08, -0.08)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.8
+omni_range = 0.3
+
+[node name="Status1Visual" type="MeshInstance3D" parent="CubeStructure/StatusIndicator1"]
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_2")
+
+[node name="StatusIndicator2" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.08, -0.08)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.8
+omni_range = 0.3
+
+[node name="Status2Visual" type="MeshInstance3D" parent="CubeStructure/StatusIndicator2"]
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_2")
+
+[node name="StatusIndicator3" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.08)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 0.8
+omni_range = 0.3
+
+[node name="Status3Visual" type="MeshInstance3D" parent="CubeStructure/StatusIndicator3"]
+material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_2")
+
+[node name="FieldProjector1" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, -0.08, -0.08)
+light_color = Color(1, 0.5, 0, 1)
+omni_range = 0.5
+
+[node name="Projector1Visual" type="MeshInstance3D" parent="CubeStructure/FieldProjector1"]
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="FieldProjector2" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, -0.08, -0.08)
+light_color = Color(1, 0.5, 0, 1)
+omni_range = 0.5
+
+[node name="Projector2Visual" type="MeshInstance3D" parent="CubeStructure/FieldProjector2"]
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="FieldProjector3" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.08, 0.08)
+light_color = Color(1, 0.5, 0, 1)
+omni_range = 0.5
+
+[node name="Projector3Visual" type="MeshInstance3D" parent="CubeStructure/FieldProjector3"]
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="FieldProjector4" type="OmniLight3D" parent="CubeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.08, 0.08)
+light_color = Color(1, 0.5, 0, 1)
+omni_range = 0.5
+
+[node name="Projector4Visual" type="MeshInstance3D" parent="CubeStructure/FieldProjector4"]
+material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_1")
+
+[node name="XYZgadget" parent="CubeStructure/FieldProjector4" instance=ExtResource("1_2482f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0573014, -0.097902, 0)
+
+[node name="Point" parent="." instance=ExtResource("1_v6coo")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="InteractionArea" type="Area3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

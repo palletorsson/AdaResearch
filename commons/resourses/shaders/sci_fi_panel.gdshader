@@ -54,5 +54,3 @@ void fragment(){
     EMISSION = line_color.rgb * (lineMask * 0.6);
     ALPHA = 1.0;
 }
-
-

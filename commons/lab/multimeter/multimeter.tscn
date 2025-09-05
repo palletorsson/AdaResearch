@@ -1,0 +1,246 @@
+[gd_scene load_steps=12 format=3 uid="uid://wz4x0y3z5abcd"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var lcd_display = $MultimeterBody/LCDDisplay
+@onready var probe_red = $MultimeterBody/RedProbe
+@onready var probe_black = $MultimeterBody/BlackProbe
+@onready var rotary_dial = $MultimeterBody/RotaryDial
+@onready var status_led = $MultimeterBody/StatusLED
+
+var measurement_mode = 'voltage'  # voltage, current, resistance, continuity
+var current_reading = 0.0
+var is_measuring = false
+var probe_connected = false
+
+signal measurement_taken
+signal probe_contact_detected
+signal continuity_beep
+
+func _ready():
+	setup_multimeter()
+	start_measurement_cycle()
+
+func setup_multimeter():
+	add_to_group('desk_equipment')
+	add_to_group('measurement_tools')
+	
+	print('🔬 MULTIMETER: Digital measurement device ready')
+
+func start_measurement_cycle():
+	var measure_timer = Timer.new()
+	measure_timer.wait_time = 1.0
+	measure_timer.timeout.connect(take_measurement)
+	measure_timer.autostart = true
+	add_child(measure_timer)
+
+func take_measurement():
+	if not is_measuring:
+		return
+	
+	# Simulate realistic measurements based on mode
+	match measurement_mode:
+		'voltage':
+			current_reading = randf_range(0.1, 12.0)
+		'current':
+			current_reading = randf_range(0.001, 2.5)
+		'resistance':
+			current_reading = randf_range(1.0, 10000.0)
+		'continuity':
+			current_reading = randf() * 100  # 0-100 ohms
+			if current_reading < 10.0:
+				emit_continuity_beep()
+	
+	update_lcd_display()
+	emit_signal('measurement_taken', measurement_mode, current_reading)
+
+func update_lcd_display():
+	# Update display based on measurement
+	var display_brightness = clamp(current_reading / 10.0, 0.3, 1.5)
+	lcd_display.material_override.emission_energy = display_brightness
+	
+	# Color coding for different measurements
+	match measurement_mode:
+		'voltage':
+			lcd_display.material_override.emission = Color.GREEN
+		'current':
+			lcd_display.material_override.emission = Color.YELLOW
+		'resistance':
+			lcd_display.material_override.emission = Color.ORANGE
+		'continuity':
+			if current_reading < 10.0:
+				lcd_display.material_override.emission = Color.GREEN
+			else:
+				lcd_display.material_override.emission = Color.RED
+
+func emit_continuity_beep():
+	emit_signal('continuity_beep')
+	# Visual feedback for continuity
+	var beep_tween = create_tween()
+	beep_tween.tween_property(status_led, 'light_energy', 2.0, 0.1)
+	beep_tween.tween_property(status_led, 'light_energy', 0.5, 0.1)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		connect_probes()
+
+func connect_probes():
+	probe_connected = true
+	is_measuring = true
+	emit_signal('probe_contact_detected')
+	
+	print('🔬 MULTIMETER: Probes connected - Mode: %s' % measurement_mode.to_upper())
+	
+	# Animate probe lights
+	var probe_tween = create_tween()
+	probe_tween.set_parallel(true)
+	probe_tween.tween_property(probe_red.get_child(0), 'light_energy', 1.0, 0.5)
+	probe_tween.tween_property(probe_black.get_child(0), 'light_energy', 1.0, 0.5)
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group('player'):
+		disconnect_probes()
+
+func disconnect_probes():
+	probe_connected = false
+	is_measuring = false
+	current_reading = 0.0
+	
+	# Dim display and probes
+	lcd_display.material_override.emission_energy = 0.3
+	probe_red.get_child(0).light_energy = 0.1
+	probe_black.get_child(0).light_energy = 0.1
+
+func cycle_measurement_mode():
+	match measurement_mode:
+		'voltage':
+			measurement_mode = 'current'
+		'current':
+			measurement_mode = 'resistance'
+		'resistance':
+			measurement_mode = 'continuity'
+		'continuity':
+			measurement_mode = 'voltage'
+	
+	print('🔬 MULTIMETER: Mode changed to %s' % measurement_mode.to_upper())
+	
+	# Rotate dial animation
+	var dial_tween = create_tween()
+	dial_tween.tween_property(rotary_dial, 'rotation_degrees:z', rotary_dial.rotation_degrees.z + 90, 0.5)
+
+func calibrate_device():
+	print('🔬 MULTIMETER: Calibrating measurement circuits...')
+	
+	# Calibration sequence
+	var cal_tween = create_tween()
+	cal_tween.tween_property(lcd_display, 'material_override:emission', Color.WHITE, 1.0)
+	cal_tween.tween_property(lcd_display, 'material_override:emission', Color.GREEN, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.3
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.8, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.12, 0.18, 0.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.08, 0.06, 0.01)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.002
+bottom_radius = 0.002
+height = 0.08
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.005
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.005
+height = 0.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.25, 0.3, 0.15)
+
+[node name="DigitalMultimeter" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="MultimeterBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="LCDDisplay" type="MeshInstance3D" parent="MultimeterBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.018)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="RotaryDial" type="MeshInstance3D" parent="MultimeterBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0.018)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="RedProbe" type="MeshInstance3D" parent="MultimeterBody"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.04, 0.02, 0.04)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RedProbeLight" type="OmniLight3D" parent="MultimeterBody/RedProbe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.1
+omni_range = 0.2
+
+[node name="BlackProbe" type="MeshInstance3D" parent="MultimeterBody"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.04, 0.02, 0.04)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="BlackProbeLight" type="OmniLight3D" parent="MultimeterBody/BlackProbe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+light_color = Color(0.3, 0.3, 0.3, 1)
+light_energy = 0.1
+omni_range = 0.2
+
+[node name="StatusLED" type="OmniLight3D" parent="MultimeterBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.08, 0.018)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.5
+omni_range = 0.1
+
+[node name="StatusLEDVisual" type="MeshInstance3D" parent="MultimeterBody/StatusLED"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_area_3d_body_exited"]

@@ -415,6 +415,8 @@ func _is_sequence_name(name: String) -> bool:
 	"""Check if the name is a sequence name rather than a map name"""
 	var known_sequences = [
 		"primitives",
+		"transformation",
+		"color",
 		"tests",
 		"array_tutorial",
 		"meshestextures",

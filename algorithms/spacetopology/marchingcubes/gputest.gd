@@ -68,8 +68,9 @@ void main() {
 	print("✅ SUCCESS: GPU buffer created")
 	
 	# Cleanup
-	rd.free_rid(compute_shader)
-	rd.free_rid(buffer)
+	if rd:
+		rd.free_rid(compute_shader)
+		rd.free_rid(buffer)
 	
 	print("🎉 ALL GPU TESTS PASSED!")
 	print("   Your system supports compute shaders")

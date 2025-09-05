@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://k8dwt7yei788"]
+
+[ext_resource type="Script" uid="uid://dwp1yrb0x6gw2" path="res://algorithms/transformation/surreal_machines/surreal_machines.gd" id="1_s3t2n"]
+
+[node name="surreal_machines" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.16964)
+script = ExtResource("1_s3t2n")
+
+[node name="Camera3D" type="Camera3D" parent="."]

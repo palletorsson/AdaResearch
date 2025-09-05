@@ -1,0 +1,336 @@
+[gd_scene load_steps=14 format=3 uid="uid://xz5y1a4b6cdef"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var vial_rack = $RackBase
+@onready var sample_vials = [$RackBase/Vial1, $RackBase/Vial2, $RackBase/Vial3, $RackBase/Vial4, $RackBase/Vial5, $RackBase/Vial6]
+@onready var sample_liquids = [$RackBase/Vial1/SampleLiquid1, $RackBase/Vial2/SampleLiquid2, $RackBase/Vial3/SampleLiquid3, $RackBase/Vial4/SampleLiquid4, $RackBase/Vial5/SampleLiquid5, $RackBase/Vial6/SampleLiquid6]
+@onready var rack_label = $RackBase/RackLabel
+
+var sample_data = [
+	{'id': 'A-001', 'type': 'plasma', 'color': Color.CYAN, 'stability': 'stable'},
+	{'id': 'B-002', 'type': 'enzyme', 'color': Color.YELLOW, 'stability': 'degrading'},
+	{'id': 'C-003', 'type': 'compound_x', 'color': Color.MAGENTA, 'stability': 'reactive'},
+	{'id': 'D-004', 'type': 'buffer', 'color': Color.GREEN, 'stability': 'stable'},
+	{'id': 'E-005', 'type': 'unknown', 'color': Color.RED, 'stability': 'unstable'},
+	{'id': 'F-006', 'type': 'control', 'color': Color.WHITE, 'stability': 'inert'}
+]
+
+signal sample_analyzed
+signal vial_removed
+signal contamination_detected
+
+func _ready():
+	setup_sample_rack()
+	initialize_samples()
+	start_stability_monitoring()
+
+func setup_sample_rack():
+	add_to_group('desk_equipment')
+	add_to_group('sample_storage')
+	
+	print('🧪 SAMPLE RACK: Laboratory sample storage initialized')
+
+func initialize_samples():
+	for i in range(sample_liquids.size()):
+		if i < sample_data.size():
+			var sample = sample_data[i]
+			var liquid = sample_liquids[i]
+			
+			# Set sample colors
+			liquid.material_override.emission = sample.color
+			liquid.material_override.albedo_color = sample.color
+			
+			# Add stability animations
+			animate_sample_stability(liquid, sample.stability)
+
+func animate_sample_stability(liquid: MeshInstance3D, stability: String):
+	match stability:
+		'stable':
+			# Gentle glow
+			var stable_tween = create_tween()
+			stable_tween.set_loops()
+			stable_tween.tween_property(liquid, 'material_override:emission_energy', 0.8, 3.0)
+			stable_tween.tween_property(liquid, 'material_override:emission_energy', 1.2, 3.0)
+		
+		'degrading':
+			# Slow pulsing
+			var degrade_tween = create_tween()
+			degrade_tween.set_loops()
+			degrade_tween.tween_property(liquid, 'material_override:emission_energy', 0.3, 2.0)
+			degrade_tween.tween_property(liquid, 'material_override:emission_energy', 1.5, 2.0)
+		
+		'reactive':
+			# Fast flickering
+			var reactive_tween = create_tween()
+			reactive_tween.set_loops()
+			reactive_tween.tween_property(liquid, 'material_override:emission_energy', 0.5, 0.3)
+			reactive_tween.tween_property(liquid, 'material_override:emission_energy', 2.0, 0.2)
+		
+		'unstable':
+			# Chaotic blinking
+			var unstable_tween = create_tween()
+			unstable_tween.set_loops()
+			unstable_tween.tween_property(liquid, 'scale', Vector3(1.1, 1.1, 1.1), 0.5)
+			unstable_tween.tween_property(liquid, 'scale', Vector3(0.9, 0.9, 0.9), 0.5)
+		
+		'inert':
+			# Steady dim glow
+			liquid.material_override.emission_energy = 0.5
+
+func start_stability_monitoring():
+	var monitor_timer = Timer.new()
+	monitor_timer.wait_time = 5.0
+	monitor_timer.timeout.connect(check_sample_stability)
+	monitor_timer.autostart = true
+	add_child(monitor_timer)
+
+func check_sample_stability():
+	for i in range(sample_data.size()):
+		var sample = sample_data[i]
+		
+		# Random stability changes
+		if sample.stability == 'unstable' and randf() < 0.3:
+			trigger_contamination_alert(sample.id)
+		
+		elif sample.stability == 'degrading' and randf() < 0.2:
+			sample.stability = 'unstable'
+			print('⚠️ SAMPLE %s: Stability degraded to unstable' % sample.id)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		analyze_samples()
+
+func analyze_samples():
+	print('🧪 SAMPLE RACK: Analyzing sample composition...')
+	
+	for sample in sample_data:
+		print('  Sample %s: Type=%s | Stability=%s' % [sample.id, sample.type, sample.stability])
+	
+	emit_signal('sample_analyzed', sample_data)
+	
+	# Analysis visual feedback
+	var analysis_tween = create_tween()
+	analysis_tween.tween_property(rack_label, 'material_override:emission_energy', 2.0, 1.0)
+	analysis_tween.tween_property(rack_label, 'material_override:emission_energy', 0.8, 1.0)
+
+func remove_sample(sample_id: String):
+	for i in range(sample_data.size()):
+		if sample_data[i].id == sample_id:
+			print('🧪 SAMPLE RACK: Removing sample %s' % sample_id)
+			
+			# Hide the vial
+			sample_vials[i].visible = false
+			sample_liquids[i].visible = false
+			
+			emit_signal('vial_removed', sample_id)
+			break
+
+func add_sample(new_sample: Dictionary):
+	# Find empty slot
+	for i in range(sample_vials.size()):
+		if not sample_vials[i].visible:
+			sample_data[i] = new_sample
+			sample_vials[i].visible = true
+			sample_liquids[i].visible = true
+			
+			# Set new sample properties
+			var liquid = sample_liquids[i]
+			liquid.material_override.emission = new_sample.color
+			liquid.material_override.albedo_color = new_sample.color
+			animate_sample_stability(liquid, new_sample.stability)
+			
+			print('🧪 SAMPLE RACK: Added new sample %s' % new_sample.id)
+			break
+
+func trigger_contamination_alert(sample_id: String):
+	print('🚨 CONTAMINATION ALERT: Sample %s showing anomalous behavior!' % sample_id)
+	emit_signal('contamination_detected', sample_id)
+	
+	# Find and flash the contaminated sample
+	for i in range(sample_data.size()):
+		if sample_data[i].id == sample_id:
+			var liquid = sample_liquids[i]
+			var alert_tween = create_tween()
+			alert_tween.set_loops(5)
+			alert_tween.tween_property(liquid, 'material_override:emission', Color.RED, 0.2)
+			alert_tween.tween_property(liquid, 'material_override:emission', sample_data[i].color, 0.2)
+			break
+
+func centrifuge_samples():
+	print('🌀 SAMPLE RACK: Centrifuging samples for separation...')
+	
+	# Spin all vials
+	for vial in sample_vials:
+		var spin_tween = create_tween()
+		spin_tween.tween_property(vial, 'rotation_degrees:y', 360.0 * 3, 2.0)
+	
+	# Settle samples after spinning
+	get_tree().create_timer(3.0).timeout.connect(samples_settled)
+
+func samples_settled():
+	print('🧪 SAMPLE RACK: Centrifugation complete - Samples stratified')
+	
+	# Visual settling effect
+	for liquid in sample_liquids:
+		var settle_tween = create_tween()
+		settle_tween.tween_property(liquid, 'scale:y', 0.8, 1.0)
+		settle_tween.tween_property(liquid, 'scale:y', 1.0, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.9, 0.95, 1, 0.8)
+transparency = 1
+metallic = 0.0
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 1, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.8, 1, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 1, 0, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(1, 0.8, 0, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(1, 0, 1, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(1, 0, 0.8, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0, 1, 0.5, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7"]
+albedo_color = Color(1, 0, 0, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8"]
+albedo_color = Color(1, 1, 1, 0.7)
+transparency = 1
+emission_enabled = true
+emission = Color(0.8, 0.8, 0.8, 1)
+emission_energy = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_9"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.15, 0.03, 0.08)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.008
+bottom_radius = 0.008
+height = 0.04
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.006
+bottom_radius = 0.006
+height = 0.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.12, 0.01, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.25, 0.15, 0.15)
+
+[node name="SampleVialRack" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="RackBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Vial1" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid1" type="MeshInstance3D" parent="RackBase/Vial1"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="Vial2" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid2" type="MeshInstance3D" parent="RackBase/Vial2"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="Vial3" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid3" type="MeshInstance3D" parent="RackBase/Vial3"]
+transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="Vial4" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid4" type="MeshInstance3D" parent="RackBase/Vial4"]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="Vial5" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid5" type="MeshInstance3D" parent="RackBase/Vial5"]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_7")
+
+[node name="Vial6" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.035, 0)
+mesh = SubResource("CylinderMesh_1")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="SampleLiquid6" type="MeshInstance3D" parent="RackBase/Vial6"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 1, 0, -0.005, 0)
+mesh = SubResource("CylinderMesh_2")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="RackLabel" type="MeshInstance3D" parent="RackBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0.035)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_9")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")

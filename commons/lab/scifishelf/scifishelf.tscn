@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxw8yj7qk9qyh"]
+[gd_scene load_steps=2 format=3 uid="uid://bxw8yj7qlaqyh"]
 
-[ext_resource type="Script" path="res://SciFiShelf.gd" id="1_4qx3z"]
+[ext_resource type="Script" uid="uid://0afp5wqsrnw6" path="res://commons/lab/scifishelf/scifishelf.gd" id="1_4qx3z"]
 
 [node name="SciFiShelf" type="Node3D"]
 script = ExtResource("1_4qx3z")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://faliw31psqdg"]
+
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_ltysr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gt5y2"]
+render_priority = 0
+shader = ExtResource("1_ltysr")
+shader_parameter/fill_color = Color(0.2, 0.3, 0.8, 0.7)
+shader_parameter/wireframe_color = Color(0, 1, 1, 1)
+shader_parameter/wireframe_width = 3.0
+shader_parameter/wireframe_brightness = 2.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_g8iaj"]
+left_to_right = 0.0
+
+[node name="prism" type="Node3D"]
+
+[node name="prism" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_gt5y2")
+mesh = SubResource("PrismMesh_g8iaj")

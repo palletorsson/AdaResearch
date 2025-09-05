@@ -13,20 +13,70 @@
 			"learning_objectives": [
 				"test"
 			],
-			"maps": [
-				"One_Colors",
+			"temps":[ 
 				"One_Primitives",
-				"One_Tranformations", 
 				"One_Adapt_1",
 				"One_Adapt_2",
 				"One_Adapt_3",
 				"One_Adapt_4",
 				"One_Adapt_5",
 				"One_Adapt_6",
-				"One_Adapt_7"
+				"One_Adapt_7",
+			],
+			"maps": [
+				"Point_1",
+				"Primitives_1",					
+				"Primitives_2",					
+				"Primitives_3",	
+				"Primitives_4",					
+				"Primitives_5",															
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_primitives",
+			"unlock_requirements": [],
+			"completion_rewards": ["test_badge"]
+		},
+		"transformation": {
+			"name": "name translation",
+			"description": "This is the basic",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"test"
+			],
+			"maps": [
+				"Transformation_1",
+				"Transformation_2", 
+				"Transformation_3",
+				"Transformation_4",
+				"Transformation_5",
+				"Transformation_6",	
+														
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_transformation",
+			"unlock_requirements": [],
+			"completion_rewards": ["test_badge"]
+		},
+		"color": {
+			"name": "name translation",
+			"description": "This is the basic",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"test"
+			],
+			"temps":[ 			
+
+			],
+			"maps": [
+				"Color_1",
+				"Color_2",			
+				"Color_3",	
+														
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_color",
 			"unlock_requirements": [],
 			"completion_rewards": ["test_badge"]
 		},

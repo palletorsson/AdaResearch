@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfd58n7islfqi"]
+
+[ext_resource type="Script" uid="uid://wgibqu8lf3jh" path="res://commons/primitives/icosahedron/icosahedron.gd" id="1_vjrvb"]
+
+[node name="Icosahedron" type="Node3D"]
+script = ExtResource("1_vjrvb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)

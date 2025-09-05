@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rfris1cl38d5"]
+
+[ext_resource type="Script" uid="uid://cuf1b203xlub0" path="res://commons/primitives/bipyramid/bipyramid.gd" id="1_iejlb"]
+
+[node name="Bipyramid" type="Node3D"]
+script = ExtResource("1_iejlb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)

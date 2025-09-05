@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bapvfdrc33ea2"]
+
+[ext_resource type="Script" uid="uid://dg5gukh1y3av7" path="res://commons/primitives/tetrahedron/tetrahedron.gd" id="1_iknv7"]
+
+[node name="Tetrahedron" type="Node3D"]
+script = ExtResource("1_iknv7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515557, 2.76349)

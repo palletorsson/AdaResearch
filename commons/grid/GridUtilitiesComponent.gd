@@ -165,6 +165,17 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 		"s":  # Spawn point
 			if parameters.size() > 0:
 				utility_object.set_meta("spawn_name", parameters[0])
+		"wp":  # Walkable prism
+			if parameters.size() > 0:
+				var rotation_y = float(parameters[0])
+				utility_object.rotation_degrees.y = rotation_y
+				print("GridUtilitiesComponent: Set walkable prism rotation to: %f degrees" % rotation_y)
+			
+			# Apply color if second parameter is provided
+			if parameters.size() > 1:
+				var color_param = parameters[1]
+				_apply_color_to_utility(utility_object, color_param)
+				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
 		"an":  # Annotation/Info Board
 			if parameters.size() > 0:
 				var sequence_name = parameters[0]
@@ -176,6 +187,110 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					utility_object.set_meta("sequence_name", sequence_name)
 				
 				print("GridUtilitiesComponent: Set info board sequence to: %s" % sequence_name)
+
+# Apply color to utility object (works with materials and shaders)
+func _apply_color_to_utility(utility_object: Node3D, color_param: String):
+	var color = _parse_color_parameter(color_param)
+	if color == Color.WHITE:
+		print("GridUtilitiesComponent: Warning - Could not parse color '%s', using white" % color_param)
+	
+	# Find the mesh instance in the utility object
+	var mesh_instance = _find_mesh_instance_in_utility(utility_object)
+	if not mesh_instance:
+		print("GridUtilitiesComponent: Warning - No MeshInstance3D found in utility object")
+		return
+	
+	# Apply color based on material type
+	var material = mesh_instance.material_override
+	if material is ShaderMaterial:
+		_apply_color_to_shader_material(material as ShaderMaterial, color)
+	elif material is StandardMaterial3D:
+		_apply_color_to_standard_material(material as StandardMaterial3D, color)
+	else:
+		# Create new standard material if none exists
+		var new_material = StandardMaterial3D.new()
+		_apply_color_to_standard_material(new_material, color)
+		mesh_instance.material_override = new_material
+
+# Parse color parameter string to Color object
+func _parse_color_parameter(color_param: String) -> Color:
+	match color_param.to_lower():
+		"red": return Color.RED
+		"green": return Color.GREEN
+		"blue": return Color.BLUE
+		"yellow": return Color.YELLOW
+		"cyan": return Color.CYAN
+		"magenta": return Color.MAGENTA
+		"orange": return Color.ORANGE
+		"purple": return Color.PURPLE
+		"pink": return Color.PINK
+		"white": return Color.WHITE
+		"black": return Color.BLACK
+		"gray", "grey": return Color.GRAY
+		"lime": return Color(0.5, 1.0, 0.0, 1.0)
+		"navy": return Color(0.0, 0.0, 0.5, 1.0)
+		"maroon": return Color(0.5, 0.0, 0.0, 1.0)
+		"olive": return Color(0.5, 0.5, 0.0, 1.0)
+		"aqua": return Color(0.0, 1.0, 1.0, 1.0)
+		"silver": return Color(0.75, 0.75, 0.75, 1.0)
+		_:
+			# Try to parse as hex color (e.g., "ff0000" for red)
+			if color_param.length() == 6:
+				var hex_color = Color.html("#" + color_param)
+				if hex_color != Color.BLACK or color_param == "000000":
+					return hex_color
+			# Try direct HTML color parsing
+			var html_color = Color.html(color_param)
+			if html_color != Color.BLACK or color_param.to_lower() == "black":
+				return html_color
+			return Color.WHITE  # Default fallback
+
+# Apply color to shader material (like the walkable prism)
+func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Color):
+	# Check for common shader parameter names
+	var shader_params = ["fill_color", "base_color", "albedo_color", "modelColor", "color"]
+	
+	for param_name in shader_params:
+		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
+			shader_material.set_shader_parameter(param_name, color)
+			print("GridUtilitiesComponent: Set shader parameter '%s' to %s" % [param_name, color])
+			break
+	
+	# Also try to set wireframe color to a complementary color
+	var wireframe_params = ["wireframe_color", "edge_color", "wireframeColor"]
+	var wireframe_color = Color(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, 1.0)  # Complementary color
+	
+	for param_name in wireframe_params:
+		if shader_material.shader and shader_material.shader.get_shader_params().has(param_name):
+			shader_material.set_shader_parameter(param_name, wireframe_color)
+			print("GridUtilitiesComponent: Set wireframe parameter '%s' to %s" % [param_name, wireframe_color])
+			break
+
+# Apply color to standard material
+func _apply_color_to_standard_material(standard_material: StandardMaterial3D, color: Color):
+	standard_material.albedo_color = color
+	# Add subtle emission for better visibility
+	standard_material.emission_enabled = true
+	standard_material.emission = color * 0.2
+	print("GridUtilitiesComponent: Set standard material albedo to %s" % color)
+
+# Find MeshInstance3D in utility object
+func _find_mesh_instance_in_utility(utility_object: Node3D) -> MeshInstance3D:
+	# Check if the object itself is a MeshInstance3D
+	if utility_object is MeshInstance3D:
+		return utility_object as MeshInstance3D
+	
+	# Search children recursively
+	return _find_mesh_instance_recursive(utility_object)
+
+func _find_mesh_instance_recursive(node: Node) -> MeshInstance3D:
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			return child as MeshInstance3D
+		var found = _find_mesh_instance_recursive(child)
+		if found:
+			return found
+	return null
 
 # Apply utility definition properties from JSON
 func _apply_utility_definition(utility_object: Node3D, utility_type: String, definition: Dictionary):
@@ -336,7 +451,9 @@ func _is_sequence_name(name: String) -> bool:
 	"""Check if the name is a sequence name rather than a map name"""
 	var known_sequences = [
 		"primitives",
+		"transformation",
 		"tests", 
+		"color", 
 		"array_tutorial",
 		"meshestextures",
 		"randomness_exploration",

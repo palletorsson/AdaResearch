@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2ydpv5o12odk"]
+
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="1_ra5tx"]
+[ext_resource type="Shader" uid="uid://bvosua7kp43yv" path="res://commons/resourses/shaders/wood.gdshader" id="3_qmhod"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="5_4y24k"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qdos"]
+render_priority = 0
+shader = ExtResource("3_qmhod")
+shader_parameter/light_color = Vector4(0.952941, 0.858824, 0.74902, 1)
+shader_parameter/dark_color = Vector4(0.74902, 0.619608, 0.490196, 1)
+shader_parameter/ring_scale = 4.045
+shader_parameter/wave_scale = 9.189
+shader_parameter/random_scale = 4.75
+shader_parameter/noise_scale = 0.03
+shader_parameter/cube_position = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="woodCube" type="Node3D"]
+
+[node name="GrabCube" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_ra5tx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube"]
+material_override = SubResource("ShaderMaterial_7qdos")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="GrabCube" instance=ExtResource("5_4y24k")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407665, 1.93432)

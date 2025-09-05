@@ -543,7 +543,7 @@ func create_mesh_from_gpu_results() -> ArrayMesh:
 
 func cleanup():
 	"""Clean up GPU resources"""
-	if not is_initialized:
+	if not is_initialized or not rd:
 		return
 	
 	if density_buffer.is_valid():

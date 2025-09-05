@@ -1,0 +1,263 @@
+[gd_scene load_steps=10 format=3 uid="uid://ab8c4d7e0fghi"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Node3D
+
+@onready var tablet_screen = $TabletBody/Screen
+@onready var status_bar = $TabletBody/StatusBar
+@onready var data_graphs = [$TabletBody/DataGraph1, $TabletBody/DataGraph2, $TabletBody/DataGraph3]
+@onready var notification_led = $TabletBody/NotificationLED
+
+var tablet_state = 'standby'  # standby, active, syncing, low_battery
+var battery_level = 85.0
+var active_dataset = 'experiment_log'
+var data_sync_progress = 0.0
+
+var research_data = {
+	'experiments_today': 12,
+	'samples_processed': 47,
+	'data_accuracy': 98.7,
+	'sync_status': 'current'
+}
+
+signal data_updated
+signal sync_complete
+signal battery_warning
+
+func _ready():
+	setup_data_tablet()
+	start_data_refresh_cycle()
+
+func setup_data_tablet():
+	add_to_group('desk_equipment')
+	add_to_group('data_devices')
+	
+	print('📱 DATA TABLET: Research interface initialized')
+
+func start_data_refresh_cycle():
+	var refresh_timer = Timer.new()
+	refresh_timer.wait_time = 3.0
+	refresh_timer.timeout.connect(refresh_research_data)
+	refresh_timer.autostart = true
+	add_child(refresh_timer)
+
+func refresh_research_data():
+	# Simulate live data updates
+	research_data.experiments_today += randi() % 3
+	research_data.samples_processed += randi() % 5
+	research_data.data_accuracy += randf_range(-0.5, 0.2)
+	research_data.data_accuracy = clamp(research_data.data_accuracy, 85.0, 99.9)
+	
+	# Battery drain
+	battery_level -= randf_range(0.1, 0.3)
+	if battery_level < 20.0:
+		trigger_battery_warning()
+	
+	update_display_visuals()
+	emit_signal('data_updated', research_data)
+
+func update_display_visuals():
+	# Screen brightness based on activity
+	var screen_brightness = 1.2 if tablet_state == 'active' else 0.8
+	tablet_screen.material_override.emission_energy = screen_brightness
+	
+	# Status bar color based on system state
+	match tablet_state:
+		'standby':
+			status_bar.material_override.emission = Color.BLUE
+		'active':
+			status_bar.material_override.emission = Color.GREEN
+		'syncing':
+			status_bar.material_override.emission = Color.YELLOW
+		'low_battery':
+			status_bar.material_override.emission = Color.RED
+	
+	# Data graph animations
+	animate_data_graphs()
+
+func animate_data_graphs():
+	for i in range(data_graphs.size()):
+		var graph = data_graphs[i]
+		var data_intensity = randf_range(0.5, 1.5)
+		
+		var graph_tween = create_tween()
+		graph_tween.tween_property(graph, 'material_override:emission_energy', data_intensity, 1.0)
+
+func _on_area_3d_body_entered(body):
+	if body.is_in_group('player'):
+		activate_tablet()
+
+func activate_tablet():
+	tablet_state = 'active'
+	print('📱 DATA TABLET: Interface activated - Loading research dashboard')
+	
+	# Screen activation animation
+	var activation_tween = create_tween()
+	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy', 2.0, 0.5)
+	activation_tween.tween_property(tablet_screen, 'material_override:emission_energy', 1.5, 0.5)
+	
+	display_current_research_summary()
+
+func display_current_research_summary():
+	print('📊 RESEARCH SUMMARY:')
+	print('  Experiments Today: %d' % research_data.experiments_today)
+	print('  Samples Processed: %d' % research_data.samples_processed)
+	print('  Data Accuracy: %.1f%%' % research_data.data_accuracy)
+	print('  Battery Level: %.1f%%' % battery_level)
+	print('  Sync Status: %s' % research_data.sync_status)
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group('player'):
+		enter_standby_mode()
+
+func enter_standby_mode():
+	tablet_state = 'standby'
+	
+	# Dim screen for standby
+	var standby_tween = create_tween()
+	standby_tween.tween_property(tablet_screen, 'material_override:emission_energy', 0.6, 1.0)
+
+func sync_with_lab_systems():
+	tablet_state = 'syncing'
+	data_sync_progress = 0.0
+	research_data.sync_status = 'syncing'
+	
+	print('📱 DATA TABLET: Syncing with laboratory systems...')
+	
+	# Sync progress animation
+	var sync_tween = create_tween()
+	sync_tween.tween_method(update_sync_progress, 0.0, 100.0, 5.0)
+	sync_tween.tween_callback(sync_complete_callback)
+
+func update_sync_progress(progress: float):
+	data_sync_progress = progress
+	
+	# Visual sync indicator
+	var sync_intensity = progress / 100.0 * 2.0
+	status_bar.material_override.emission_energy = sync_intensity
+
+func sync_complete_callback():
+	tablet_state = 'active'
+	research_data.sync_status = 'current'
+	print('✅ DATA TABLET: Sync complete - All systems current')
+	emit_signal('sync_complete', research_data)
+
+func trigger_battery_warning():
+	tablet_state = 'low_battery'
+	print('🔋 DATA TABLET: Low battery warning - %.1f%% remaining' % battery_level)
+	emit_signal('battery_warning', battery_level)
+	
+	# Flash notification LED
+	var warning_tween = create_tween()
+	warning_tween.set_loops(5)
+	warning_tween.tween_property(notification_led, 'light_energy', 2.0, 0.3)
+	warning_tween.tween_property(notification_led, 'light_energy', 0.5, 0.3)
+
+func switch_dataset(dataset_name: String):
+	active_dataset = dataset_name
+	print('📱 DATA TABLET: Switched to dataset: %s' % dataset_name)
+	
+	# Dataset change animation
+	var switch_tween = create_tween()
+	switch_tween.tween_property(tablet_screen, 'scale', Vector3(0.95, 0.95, 1.0), 0.2)
+	switch_tween.tween_property(tablet_screen, 'scale', Vector3(1.0, 1.0, 1.0), 0.3)
+
+func export_research_data():
+	print('📱 DATA TABLET: Exporting research data to external systems...')
+	
+	# Export progress visualization
+	for graph in data_graphs:
+		var export_tween = create_tween()
+		export_tween.tween_property(graph, 'material_override:emission', Color.WHITE, 0.5)
+		export_tween.tween_property(graph, 'material_override:emission', Color.GREEN, 1.0)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 1, 1)
+emission_energy = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+emission_energy = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0.5, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.3, 0, 1)
+emission_energy = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.12, 0.18, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.1, 0.15, 0.005)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.08, 0.01, 0.003)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(0.02, 0.03, 0.003)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.003
+height = 0.006
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.2, 0.25, 0.08)
+
+[node name="ResearchDataTablet" type="Node3D"]
+script = SubResource("GDScript_1")
+
+[node name="TabletBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+mesh = SubResource("BoxMesh_1")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Screen" type="MeshInstance3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.008)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_2")
+
+[node name="StatusBar" type="MeshInstance3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0.009)
+mesh = SubResource("BoxMesh_3")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DataGraph1" type="MeshInstance3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025, 0.02, 0.009)
+mesh = SubResource("BoxMesh_4")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="DataGraph2" type="MeshInstance3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.009)
+mesh = SubResource("BoxMesh_4")
+material_override = SubResource("StandardMaterial3D_4")
+
+[node name="DataGraph3" type="MeshInstance3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025, 0.02, 0.009)
+mesh = SubResource("BoxMesh_4")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="NotificationLED" type="OmniLight3D" parent="TabletBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.07, 0.01)
+light_color = Color(0, 1, 0.5, 1)
+light_energy = 0.5
+omni_range = 0.1
+
+[node name="LEDVisual" type="MeshInstance3D" parent="TabletBody/NotificationLED"]
+mesh = SubResource("SphereMesh_1")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("BoxShape3D_1")
