@@ -1,0 +1,467 @@
+[gd_scene load_steps=3 format=3 uid="uid://3vkyu133i5kl"]
+
+[sub_resource type="Theme" id="Theme_1"]
+
+[sub_resource type="GDScript" id="GDScript_l2i88"]
+script/source = "# simple_mario_control.gd
+extends Control
+
+class_name SimpleMarioControl
+
+# UI Elements
+@onready var pitch_slider = $VBoxContainer/PitchContainer/PitchSlider
+@onready var volume_slider = $VBoxContainer/VolumeContainer/VolumeSlider
+@onready var tone_slider = $VBoxContainer/ToneContainer/ToneSlider
+@onready var harmony_slider = $VBoxContainer/HarmonyContainer/HarmonySlider
+@onready var reverb_slider = $VBoxContainer/ReverbContainer/ReverbSlider
+
+@onready var pitch_label = $VBoxContainer/PitchContainer/PitchLabel
+@onready var volume_label = $VBoxContainer/VolumeContainer/VolumeLabel
+@onready var tone_label = $VBoxContainer/ToneContainer/ToneLabel
+@onready var harmony_label = $VBoxContainer/HarmonyContainer/HarmonyLabel
+@onready var reverb_label = $VBoxContainer/ReverbContainer/ReverbLabel
+
+@onready var test_button = $VBoxContainer/ButtonContainer/TestButton
+@onready var mario_preset = $VBoxContainer/ButtonContainer/MarioPreset
+@onready var ethereal_preset = $VBoxContainer/ButtonContainer/EtherealPreset
+
+# Sound parameters
+var current_pitch: float = 1.0
+var current_volume: float = 0.7
+var current_tone: float = 0.5
+var current_harmony: float = 0.3
+var current_reverb: float = 0.2
+
+# Audio player for testing
+var audio_player: AudioStreamPlayer
+
+func _ready():
+	setup_sliders()
+	connect_signals()
+	create_audio_player()
+	update_all_labels()
+	print(\"Simple Mario Control ready\")
+
+func setup_sliders():
+	# Configure slider ranges
+	pitch_slider.min_value = 0.0
+	pitch_slider.max_value = 1.0
+	pitch_slider.value = 0.5
+	pitch_slider.step = 0.01
+	
+	volume_slider.min_value = 0.0
+	volume_slider.max_value = 1.0
+	volume_slider.value = 0.7
+	volume_slider.step = 0.01
+	
+	tone_slider.min_value = 0.0
+	tone_slider.max_value = 1.0
+	tone_slider.value = 0.5
+	tone_slider.step = 0.01
+	
+	harmony_slider.min_value = 0.0
+	harmony_slider.max_value = 1.0
+	harmony_slider.value = 0.3
+	harmony_slider.step = 0.01
+	
+	reverb_slider.min_value = 0.0
+	reverb_slider.max_value = 1.0
+	reverb_slider.value = 0.2
+	reverb_slider.step = 0.01
+
+func connect_signals():
+	pitch_slider.value_changed.connect(_on_pitch_changed)
+	volume_slider.value_changed.connect(_on_volume_changed)
+	tone_slider.value_changed.connect(_on_tone_changed)
+	harmony_slider.value_changed.connect(_on_harmony_changed)
+	reverb_slider.value_changed.connect(_on_reverb_changed)
+	
+	test_button.pressed.connect(_on_test_pressed)
+	mario_preset.pressed.connect(_on_mario_preset)
+	ethereal_preset.pressed.connect(_on_ethereal_preset)
+
+func create_audio_player():
+	audio_player = AudioStreamPlayer.new()
+	add_child(audio_player)
+
+func _on_pitch_changed(value: float):
+	current_pitch = lerp(0.5, 2.0, value)
+	pitch_label.text = \"Pitch: %.2fx\" % current_pitch
+
+func _on_volume_changed(value: float):
+	current_volume = value
+	volume_label.text = \"Volume: %d%%\" % (value * 100)
+
+func _on_tone_changed(value: float):
+	current_tone = value
+	var tone_desc = \"Dark\" if value < 0.3 else (\"Balanced\" if value < 0.7 else \"Bright\")
+	tone_label.text = \"Tone: %s\" % tone_desc
+
+func _on_harmony_changed(value: float):
+	current_harmony = value
+	harmony_label.text = \"Harmony: %d%%\" % (value * 100)
+
+func _on_reverb_changed(value: float):
+	current_reverb = value
+	var reverb_desc = \"Dry\" if value < 0.2 else (\"Room\" if value < 0.5 else (\"Hall\" if value < 0.8 else \"Cathedral\"))
+	reverb_label.text = \"Reverb: %s\" % reverb_desc
+
+func update_all_labels():
+	_on_pitch_changed(pitch_slider.value)
+	_on_volume_changed(volume_slider.value)
+	_on_tone_changed(tone_slider.value)
+	_on_harmony_changed(harmony_slider.value)
+	_on_reverb_changed(reverb_slider.value)
+
+func _on_test_pressed():
+	var sound = generate_pickup_sound()
+	audio_player.stream = sound
+	audio_player.volume_db = lerp(-20, 0, current_volume)
+	audio_player.pitch_scale = current_pitch
+	audio_player.play()
+
+func _on_mario_preset():
+	pitch_slider.value = 0.6
+	volume_slider.value = 0.8
+	tone_slider.value = 0.7
+	harmony_slider.value = 0.4
+	reverb_slider.value = 0.1
+
+func _on_ethereal_preset():
+	pitch_slider.value = 0.3
+	volume_slider.value = 0.6
+	tone_slider.value = 0.2
+	harmony_slider.value = 0.8
+	reverb_slider.value = 0.9
+
+func generate_pickup_sound() -> AudioStreamWAV:
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 44100
+	stream.stereo = false
+	
+	var duration = 0.4
+	var samples = int(duration * 44100)
+	var data = PackedByteArray()
+	data.resize(samples * 2)
+	
+	var base_freq = lerp(400, 1200, current_tone) * current_pitch
+	var harmony_freq = base_freq * 1.5
+	
+	for i in range(samples):
+		var t = float(i) / 44100.0
+		
+		# Envelope
+		var envelope = 1.0
+		if t < 0.05:
+			envelope = t / 0.05
+		elif t > duration - 0.15:
+			envelope = (duration - t) / 0.15
+		
+		# Main tone
+		var main = sin(TAU * base_freq * t)
+		
+		# Harmony
+		var harmony = sin(TAU * harmony_freq * t) * current_harmony
+		
+		# Sub bass
+		var sub = sin(TAU * base_freq * 0.5 * t) * 0.3
+		
+		# Combine
+		var sample = (main + harmony + sub) * envelope * current_volume * 0.6
+		
+		# Convert to 16-bit
+		var sample_int = int(clamp(sample, -1.0, 1.0) * 32767.0)
+		data.encode_s16(i * 2, sample_int)
+	
+	stream.data = data
+	return stream
+
+# Public API for pickup cubes
+func get_current_sound() -> AudioStreamWAV:
+	return generate_pickup_sound()
+
+func get_current_settings() -> Dictionary:
+	return {
+		\"pitch\": current_pitch,
+		\"volume\": current_volume,
+		\"tone\": current_tone,
+		\"harmony\": current_harmony,
+		\"reverb\": current_reverb
+	}
+
+# Enhanced pickup cube that uses this 2D control
+class Simple2DPickupCube:
+	extends Node3D
+	
+	@export var points_value: int = 1
+	@export var rotation_speed: float = 2.0
+	@export var bob_height: float = 0.2
+	@export var bob_speed: float = 2.0
+	
+	var original_y: float
+	var time_passed: float = 0.0
+	var has_been_collected: bool = false
+	var pickup_sound: AudioStreamPlayer3D
+	
+	# Reference to the 2D control panel
+	var sound_control: SimpleMarioControl
+	
+	func _ready() -> void:
+		original_y = global_position.y
+		setup_pickup_sound()
+		find_sound_control()
+		print(\"Simple2DPickupCube ready\")
+	
+	func _process(delta: float) -> void:
+		if has_been_collected:
+			return
+		
+		rotate_y(rotation_speed * delta)
+		time_passed += delta
+		var bob_offset = sin(time_passed * bob_speed) * bob_height
+		global_position.y = original_y + bob_offset
+	
+	func setup_pickup_sound() -> void:
+		pickup_sound = AudioStreamPlayer3D.new()
+		add_child(pickup_sound)
+		pickup_sound.unit_size = 2.0
+		pickup_sound.max_distance = 20.0
+	
+	func find_sound_control() -> void:
+		# Find the SimpleMarioControl in the scene
+		sound_control = get_tree().get_first_node_in_group(\"mario_sound_control\")
+		if not sound_control:
+			print(\"Warning: No SimpleMarioControl found in scene\")
+	
+	func collect() -> void:
+		if has_been_collected:
+			return
+		
+		has_been_collected = true
+		
+		# Generate sound using current slider settings
+		var dynamic_sound = null
+		if sound_control:
+			dynamic_sound = sound_control.get_current_sound()
+			var settings = sound_control.get_current_settings()
+			pickup_sound.volume_db = lerp(-20, 0, settings.volume)
+			pickup_sound.pitch_scale = settings.pitch
+		else:
+			# Fallback to default sound
+			dynamic_sound = create_default_sound()
+		
+		# Play sound
+		var sound_clone = AudioStreamPlayer3D.new()
+		get_tree().root.add_child(sound_clone)
+		sound_clone.stream = dynamic_sound
+		sound_clone.global_position = global_position
+		sound_clone.volume_db = pickup_sound.volume_db
+		sound_clone.pitch_scale = pickup_sound.pitch_scale
+		sound_clone.play()
+		
+		sound_clone.finished.connect(func(): sound_clone.queue_free())
+		
+		# Game logic
+		GameManager.add_points(points_value, global_position)
+		_play_collection_effect()
+		
+		await get_tree().create_timer(0.1).timeout
+		queue_free()
+	
+	func create_default_sound() -> AudioStreamWAV:
+		var stream = AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = 44100
+		
+		var data = PackedByteArray()
+		var samples = int(0.3 * 44100)
+		data.resize(samples * 2)
+		
+		for i in range(samples):
+			var t = float(i) / 44100.0
+			var sample = sin(TAU * 880 * t) * exp(-t * 3) * 0.5
+			var sample_int = int(sample * 32767.0)
+			data.encode_s16(i * 2, sample_int)
+		
+		stream.data = data
+		return stream
+	
+	func _play_collection_effect():
+		var mesh_instance = find_child(\"CubeBaseMesh\", true, false)
+		if mesh_instance:
+			var tween = create_tween()
+			tween.parallel().tween_property(mesh_instance, \"scale\", mesh_instance.scale * 1.5, 0.2)
+			tween.parallel().tween_property(mesh_instance, \"modulate\", Color.TRANSPARENT, 0.2)
+	
+	func _on_detection_area_body_entered(body: Node3D) -> void:
+		if _is_player(body):
+			collect()
+	
+	func _is_player(body: Node3D) -> bool:
+		return body.is_in_group(\"player\") or body.is_in_group(\"vr_player\") or body.name.contains(\"Player\")
+"
+
+[node name="SimpleMarioControl" type="Control" groups=["mario_sound_control"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1")
+script = SubResource("GDScript_l2i88")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.2, 0.9)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "Mario Sound Control"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PitchContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PitchLabel" type="Label" parent="VBoxContainer/PitchContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pitch: 1.25x"
+vertical_alignment = 1
+
+[node name="PitchSlider" type="HSlider" parent="VBoxContainer/PitchContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="VolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer/VolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Volume: 70%"
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/VolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.7
+
+[node name="ToneContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ToneLabel" type="Label" parent="VBoxContainer/ToneContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tone: Balanced"
+vertical_alignment = 1
+
+[node name="ToneSlider" type="HSlider" parent="VBoxContainer/ToneContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="HarmonyContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HarmonyLabel" type="Label" parent="VBoxContainer/HarmonyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Harmony: 30%"
+vertical_alignment = 1
+
+[node name="HarmonySlider" type="HSlider" parent="VBoxContainer/HarmonyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="ReverbContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ReverbLabel" type="Label" parent="VBoxContainer/ReverbContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reverb: Room"
+vertical_alignment = 1
+
+[node name="ReverbSlider" type="HSlider" parent="VBoxContainer/ReverbContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TestButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test Sound"
+
+[node name="MarioPreset" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mario"
+
+[node name="EtherealPreset" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ethereal"
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Use sliders to control pickup sound
+Test button to preview
+Pickup cubes will use current settings"
+horizontal_alignment = 1
+vertical_alignment = 1

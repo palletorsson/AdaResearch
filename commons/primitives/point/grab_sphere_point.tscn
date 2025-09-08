@@ -10,13 +10,17 @@ metallic = 0.2
 roughness = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
-radius = 0.12
+radius = 0.0455009
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dtj8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
+transparency = 1
+albedo_color = Color(0.105882, 0.105882, 0.105882, 0.568627)
+metallic = 1.0
+roughness = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_0v2tn"]
-radius = 0.1
-height = 0.2
+radius = 0.05
+height = 0.1
 radial_segments = 32
 rings = 16
 
@@ -31,7 +35,7 @@ second_hand_grab = 2
 shape = SubResource("SphereShape3D_blybu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-material_override = SubResource("ShaderMaterial_3dtj8")
+material_override = SubResource("StandardMaterial3D_1t2g7")
 mesh = SubResource("SphereMesh_0v2tn")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_nukvf")]

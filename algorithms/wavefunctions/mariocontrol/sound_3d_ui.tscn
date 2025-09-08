@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnoumh5vstes"]
+
+[ext_resource type="Script" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_6gg7t"]
+[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_vl0x6"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_c3g87"]
+[ext_resource type="PackedScene" uid="uid://bwhjh7wlhpe5" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_h6db6"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_veq71"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_le3po"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_hrmy6"]
+
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(0.7, 0.7, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7u64y"]
+size = Vector3(0.65, 0.2, 0.650062)
+
+[node name="SettingsUI" type="Node3D"]
+script = ExtResource("1_6gg7t")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.555293, 0)
+mesh = SubResource("1")
+surface_material_override/0 = ExtResource("2_vl0x6")
+
+[node name="Viewport2Din3D" parent="Screen" instance=ExtResource("3_c3g87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
+screen_size = Vector2(0.625, 0.625)
+scene = ExtResource("4_h6db6")
+viewport_size = Vector2(500, 500)
+scene_properties_keys = PackedStringArray("simple_mario_slider.gd")
+
+[node name="CSGCylinder" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+radius = 0.05
+height = 1.8
+material = ExtResource("2_vl0x6")
+
+[node name="CSGBox" type="CSGBox3D" parent="CSGCylinder"]
+transform = Transform3D(0.985, 0, 0, 0, 0.993485, 2.10718, 0, -0.993485, 2.10718, 0, 0.39106, 0.277908)
+operation = 2
+size = Vector3(0.5, 1, 0.5)
+
+[node name="HandPoseArea" parent="." instance=ExtResource("5_veq71")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555293, 0)
+left_pose = ExtResource("6_le3po")
+right_pose = ExtResource("7_hrmy6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+shape = SubResource("BoxShape3D_7u64y")

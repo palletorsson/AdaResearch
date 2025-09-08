@@ -269,7 +269,7 @@ material_override = SubResource("StandardMaterial3D_4")
 mesh = SubResource("BoxMesh_2")
 
 [node name="StatusDisplay" type="MeshInstance3D" parent="ReaderBase"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.04)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.0594705)
 material_override = SubResource("StandardMaterial3D_2")
 mesh = SubResource("BoxMesh_3")
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://eak4r6x8y2m1"]
 
-[ext_resource type="PackedScene" uid="uid://c8xf2a5k1m9h" path="res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn" id="1_spectrum"]
-[ext_resource type="PackedScene" uid="uid://b5m3n8p1q7r2" path="res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn" id="2_sine_wave"]
+[ext_resource type="PackedScene" uid="uid://dkuceypdl7iui" path="res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn" id="1_spectrum"]
+[ext_resource type="PackedScene" uid="uid://d01ajoij5twu0" path="res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn" id="2_sine_wave"]
 
 [node name="DualDisplayTest" type="Node3D"]
 
@@ -15,4 +15,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 text = "Audio Analysis Comparison
 Left: Frequency Spectrum | Right: Spectral Sine Wave"
-font_size = 18 
+font_size = 18

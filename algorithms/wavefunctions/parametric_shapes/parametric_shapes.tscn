@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d8k9m7v3x2nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://d6e15yueury0"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/parametric_shapes/ParametricShapes.gd" id="1_parametric"]
+[ext_resource type="Script" uid="uid://d4lmc1ps38x7p" path="res://algorithms/wavefunctions/parametric_shapes/ParametricShapes.gd" id="1_parametric"]
 
 [node name="ParametricShapes" type="Node3D"]
 script = ExtResource("1_parametric")
@@ -22,12 +22,8 @@ size = Vector3(1, 0.5, 0.3)
 
 [node name="ParameterU" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4, 0)
-top_radius = 0.2
-bottom_radius = 0.2
 height = 1.0
 
 [node name="ParameterV" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -4, 0)
-top_radius = 0.2
-bottom_radius = 0.2
 height = 1.0

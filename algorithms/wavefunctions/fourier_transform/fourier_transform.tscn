@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxr"]
 
-[ext_resource type="Script" path="res://algorithms/WaveFunctions/fourier_transform/FourierTransform.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://0xwieeparpjd" path="res://algorithms/WaveFunctions/fourier_transform/FourierTransform.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.2, 0.2, 0.2, 1)
@@ -11,13 +11,13 @@ roughness = 0.2
 albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
 emission = Color(0.2, 0.8, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(0.8, 0.2, 0.2, 1)
 emission_enabled = true
 emission = Color(0.8, 0.2, 0.2, 1)
-emission_energy = 0.3
+emission_energy_multiplier = 0.3
 
 [node name="FourierTransform" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,13 +35,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
 [node name="TimeWaveform" type="Node3D" parent="TimeDomain"]
 
 [node name="TimeAxis" type="CSGBox3D" parent="TimeDomain"]
-size = Vector3(6, 0.05, 0.05)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(6, 0.05, 0.05)
 
 [node name="TimeLabel" type="CSGBox3D" parent="TimeDomain"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="FrequencyDomain" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
@@ -49,40 +49,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 [node name="FrequencySpectrum" type="Node3D" parent="FrequencyDomain"]
 
 [node name="FrequencyAxis" type="CSGBox3D" parent="FrequencyDomain"]
-size = Vector3(6, 0.05, 0.05)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(6, 0.05, 0.05)
 
 [node name="FrequencyLabel" type="CSGBox3D" parent="FrequencyDomain"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="TransformEngine" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="EngineCore" type="CSGBox3D" parent="TransformEngine"]
-size = Vector3(3, 3, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(3, 3, 3)
 
 [node name="EngineLabel" type="CSGBox3D" parent="TransformEngine"]
-size = Vector3(3, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(3, 0.3, 0.3)
 
 [node name="TransformMethods" type="Node3D" parent="TransformEngine"]
 
 [node name="FFTCore" type="CSGSphere3D" parent="TransformEngine/TransformMethods"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DFTCore" type="CSGSphere3D" parent="TransformEngine/TransformMethods"]
-radius = 0.5
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
 [node name="IFFTCore" type="CSGSphere3D" parent="TransformEngine/TransformMethods"]
-radius = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 material_override = SubResource("StandardMaterial3D_3")
 
@@ -90,13 +85,13 @@ material_override = SubResource("StandardMaterial3D_3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="ComponentsCore" type="CSGBox3D" parent="WaveComponents"]
-size = Vector3(8, 0.5, 3)
 material_override = SubResource("StandardMaterial3D_2")
+size = Vector3(8, 0.5, 3)
 
 [node name="ComponentsLabel" type="CSGBox3D" parent="WaveComponents"]
-size = Vector3(4, 0.3, 0.3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.3, 0.3)
 
 [node name="SineWaves" type="Node3D" parent="WaveComponents"]
 
@@ -114,25 +109,25 @@ material_override = SubResource("StandardMaterial3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
 
 [node name="ResolutionBase" type="CSGBox3D" parent="FourierMetrics/ResolutionMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="ResolutionIndicator" type="CSGSphere3D" parent="FourierMetrics/ResolutionMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="PhaseCoherenceMeter" type="Node3D" parent="FourierMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
 
 [node name="PhaseBase" type="CSGBox3D" parent="FourierMetrics/PhaseCoherenceMeter"]
-size = Vector3(4, 0.2, 1)
 material_override = SubResource("StandardMaterial3D_1")
+size = Vector3(4, 0.2, 1)
 
 [node name="PhaseIndicator" type="CSGSphere3D" parent="FourierMetrics/PhaseCoherenceMeter"]
-radius = 0.3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 material_override = SubResource("StandardMaterial3D_2")
+radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
 

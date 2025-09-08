@@ -2,8 +2,8 @@
 extends TopologySpace
 class_name SineSpace
 
-@export var wave_frequency: float = 2.0
-@export var wave_amplitude: float = 1.0
+@export var wave_frequency: float = 1.2
+@export var wave_amplitude: float = 0.7
 @export var phase_x: float = 0.0
 @export var phase_z: float = 0.0
 

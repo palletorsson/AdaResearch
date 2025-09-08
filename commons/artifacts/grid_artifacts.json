@@ -4,6 +4,14 @@
 	"description": "Artifact definitions for the Lab environment",
 	
 	"artifacts": {
+		
+		
+		"menu": {
+			"name": "menu",
+			"lookup_name": "menu",
+			"description": "a menu",
+			"scene": "res://commons/primitives/menu/menu.tscn",
+		},
 		"point": {
 			"name": "point",
 			"lookup_name": "point",
@@ -796,6 +804,30 @@
 		"interaction": "touch_to_activate",
 		"sequence": "wavefunction_exploration"
 	},
+	"john_cage_tech_noir": {
+		"name": "john_cage_tech_noir",
+		"lookup_name": "john_cage_tech_noir",
+		"description": "john_cage_tech_noir",
+		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+		"position": [6.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+		"mario_test_sound_ui": {
+		"name": "mario_test_sound_ui",
+		"lookup_name": "mario_test_sound_ui",
+		"description": "mario_test_sound_ui",
+		"scene": "res://algorithms/wavefunctions/mariocontrol/sound_3d_ui.tscn",
+		"position": [6.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	
+	
 	"bernini_columns": {
 		"name": "Bernini Columns",
 		"lookup_name": "bernini_columns",

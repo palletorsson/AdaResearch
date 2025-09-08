@@ -121,7 +121,6 @@ func create_wave_components():
 	for i in range(harmonics.size()):
 		var cosine_component = CSGCylinder3D.new()
 		cosine_component.radius = 0.05
-		co
 		cosine_component.height = 2.0
 		cosine_component.material_override = StandardMaterial3D.new()
 		cosine_component.material_override.albedo_color = Color(0.2, 0.8, 0.2, 1)
@@ -420,7 +419,7 @@ func animate_data_flow(delta):
 		var particle = flow_particles[i]
 		if particle:
 			# Move particles through the transform flow
-			var progress = (time * 0.3 + float(i) * 0.08) % 1.0
+			var progress = fmod((time * 0.3 + float(i) * 0.08), 1.0)
 			var x = lerp(-8, 8, progress)
 			var y = sin(progress * PI * 4) * 2.0
 			

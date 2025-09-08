@@ -70,7 +70,7 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 func apply_queer_material(mesh_instance: MeshInstance3D, color: Color):
 	# Create shader material using the solid wireframe shader
 	var material = ShaderMaterial.new()
-	var shader = load("res://commons/resourses/shaders/grid_solid.gdshaderr")
+	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 	if shader:
 		material.shader = shader
 		

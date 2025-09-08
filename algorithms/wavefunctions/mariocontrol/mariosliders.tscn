@@ -1,0 +1,153 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv8or0hnk5nku"]
+
+[ext_resource type="Script" uid="uid://cabshqgrvu24o" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_control_panel.gd" id="1"]
+[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" uid="uid://cjk36g18pp1ni" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_pickup_cube.gd" id="3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.8, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="XRSliderPickupScene" type="Node3D"]
+script = ExtResource("1")
+
+[node name="SliderPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2)
+
+[node name="PanelBackground" type="MeshInstance3D" parent="SliderPanel"]
+transform = Transform3D(3, 0, 0, 0, 2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="PitchSlider" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+script = ExtResource("2")
+slider_position = 0.5
+default_position = 0.5
+
+[node name="SliderTrack" type="MeshInstance3D" parent="SliderPanel/PitchSlider"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SliderHandle" type="MeshInstance3D" parent="SliderPanel/PitchSlider"]
+mesh = SubResource("BoxMesh_2")
+
+[node name="VolumeSlider" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0)
+script = ExtResource("2")
+slider_position = 0.7
+default_position = 0.7
+
+[node name="SliderTrack" type="MeshInstance3D" parent="SliderPanel/VolumeSlider"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SliderHandle" type="MeshInstance3D" parent="SliderPanel/VolumeSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, 0)
+mesh = SubResource("BoxMesh_2")
+
+[node name="ToneSlider" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+script = ExtResource("2")
+slider_position = 0.5
+default_position = 0.5
+
+[node name="SliderTrack" type="MeshInstance3D" parent="SliderPanel/ToneSlider"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SliderHandle" type="MeshInstance3D" parent="SliderPanel/ToneSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("BoxMesh_2")
+
+[node name="HarmonySlider" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+script = ExtResource("2")
+slider_position = 0.3
+default_position = 0.3
+
+[node name="SliderTrack" type="MeshInstance3D" parent="SliderPanel/HarmonySlider"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SliderHandle" type="MeshInstance3D" parent="SliderPanel/HarmonySlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+mesh = SubResource("BoxMesh_2")
+
+[node name="ReverbSlider" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+script = ExtResource("2")
+slider_position = 0.2
+default_position = 0.2
+
+[node name="SliderTrack" type="MeshInstance3D" parent="SliderPanel/ReverbSlider"]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="SliderHandle" type="MeshInstance3D" parent="SliderPanel/ReverbSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+mesh = SubResource("BoxMesh_2")
+
+[node name="Labels" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="PitchLabel" type="Label3D" parent="SliderPanel/Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+billboard = 1
+text = "Pitch: 1.25x"
+font_size = 24
+
+[node name="VolumeLabel" type="Label3D" parent="SliderPanel/Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+billboard = 1
+text = "Volume: 70%"
+font_size = 24
+
+[node name="ToneLabel" type="Label3D" parent="SliderPanel/Labels"]
+billboard = 1
+text = "Tone: Balanced"
+font_size = 24
+
+[node name="HarmonyLabel" type="Label3D" parent="SliderPanel/Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+billboard = 1
+text = "Harmony: 30%"
+font_size = 24
+
+[node name="ReverbLabel" type="Label3D" parent="SliderPanel/Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+billboard = 1
+text = "Reverb: Room"
+font_size = 24
+
+[node name="PresetButtons" type="Node3D" parent="SliderPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+
+[node name="MarioPresetButton" type="MeshInstance3D" parent="SliderPanel/PresetButtons"]
+transform = Transform3D(0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.3, -0.8, 0, 0)
+mesh = SubResource("BoxMesh_3")
+
+[node name="EtherealPresetButton" type="MeshInstance3D" parent="SliderPanel/PresetButtons"]
+transform = Transform3D(0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.3, -0.2, 0, 0)
+mesh = SubResource("BoxMesh_3")
+
+[node name="RetroPresetButton" type="MeshInstance3D" parent="SliderPanel/PresetButtons"]
+transform = Transform3D(0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.3, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_3")
+
+[node name="ResetButton" type="MeshInstance3D" parent="SliderPanel/PresetButtons"]
+transform = Transform3D(0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.3, 1, 0, 0)
+mesh = SubResource("BoxMesh_3")
+
+[node name="TestSoundButton" type="MeshInstance3D" parent="SliderPanel/PresetButtons"]
+transform = Transform3D(0.3, 0, 0, 0, 0.1, 0, 0, 0, 0.3, 1.6, 0, 0)
+mesh = SubResource("BoxMesh_3")
+script = ExtResource("3")
+points_value = 10
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4247)

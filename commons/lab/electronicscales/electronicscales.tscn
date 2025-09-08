@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yz6a2b5c8defg"]
+[gd_scene load_steps=13 format=3 uid="uid://btp2iymtt44uu"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -147,42 +147,41 @@ albedo_color = Color(0.9, 0.9, 0.95, 1)
 metallic = 0.6
 roughness = 0.3
 
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+size = Vector3(0.15, 0.08, 0.12)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
 albedo_color = Color(0.8, 0.85, 0.9, 1)
 metallic = 0.9
 roughness = 0.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0, 1, 0.5, 1)
-emission_enabled = true
-emission = Color(0, 0.8, 0.3, 1)
-emission_energy = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(0, 0.5, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.3, 1, 1)
-emission_energy = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
-albedo_color = Color(0.7, 0.7, 0.8, 1)
-metallic = 0.8
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.15, 0.08, 0.12)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1"]
 top_radius = 0.06
 bottom_radius = 0.06
 height = 0.005
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0, 1, 0.5, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.3, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_2"]
 size = Vector3(0.08, 0.04, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(0, 0.5, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.3, 1, 1)
+emission_energy_multiplier = 0.8
 
 [sub_resource type="SphereMesh" id="SphereMesh_1"]
 radius = 0.008
 height = 0.016
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.7, 0.7, 0.8, 1)
+metallic = 0.8
+roughness = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_2"]
 top_radius = 0.01
@@ -197,18 +196,18 @@ script = SubResource("GDScript_1")
 
 [node name="ScaleBase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
-mesh = SubResource("BoxMesh_1")
 material_override = SubResource("StandardMaterial3D_1")
+mesh = SubResource("BoxMesh_1")
 
 [node name="WeighingPlatform" type="MeshInstance3D" parent="ScaleBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
-mesh = SubResource("CylinderMesh_1")
 material_override = SubResource("StandardMaterial3D_2")
+mesh = SubResource("CylinderMesh_1")
 
 [node name="DigitalDisplay" type="MeshInstance3D" parent="ScaleBase"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.025, -0.05)
-mesh = SubResource("BoxMesh_2")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("BoxMesh_2")
 
 [node name="TareButton" type="OmniLight3D" parent="ScaleBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.02, -0.045)
@@ -217,8 +216,8 @@ light_energy = 0.5
 omni_range = 0.2
 
 [node name="TareButtonVisual" type="MeshInstance3D" parent="ScaleBase/TareButton"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_4")
+mesh = SubResource("SphereMesh_1")
 
 [node name="StabilityIndicator" type="OmniLight3D" parent="ScaleBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.02, -0.045)
@@ -227,14 +226,14 @@ light_energy = 0.8
 omni_range = 0.2
 
 [node name="StabilityVisual" type="MeshInstance3D" parent="ScaleBase/StabilityIndicator"]
-mesh = SubResource("SphereMesh_1")
 material_override = SubResource("StandardMaterial3D_3")
+mesh = SubResource("SphereMesh_1")
 
 [node name="CalibrationWeight" type="MeshInstance3D" parent="ScaleBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
 visible = false
-mesh = SubResource("CylinderMesh_2")
 material_override = SubResource("StandardMaterial3D_5")
+mesh = SubResource("CylinderMesh_2")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 

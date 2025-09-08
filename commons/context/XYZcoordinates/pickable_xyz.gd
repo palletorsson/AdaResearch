@@ -1,7 +1,7 @@
 extends Node3D
 
 # XYZ Coordinate Gadget for VR Interaction
-@export var initial_scale: Vector3 = Vector3(0.2, 0.2, 0.2)  # Smaller scale for VR
+@export var initial_scale: Vector3 = Vector3(3.2, 3.2, 3.2)  # Smaller scale for VR
 @export var rotation_speed: float = 1.0  # Rotation speed in radians per second
 @export var camera_rotation_sensitivity: float = 2.0  # Sensitivity of camera rotation
 @export var camera_movement_sensitivity: float = 0.5  # Sensitivity of camera movement

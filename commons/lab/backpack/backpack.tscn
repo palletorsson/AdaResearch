@@ -58,7 +58,7 @@ func animate_power_cells():
 		
 		var cell_tween = create_tween()
 		cell_tween.set_loops()
-		cell_tween.tween_delay(pulse_delay)
+		cell_tween.tween_interval(pulse_delay)
 		cell_tween.tween_property(cell, 'light_energy', 0.3, 0.5)
 		cell_tween.tween_property(cell, 'light_energy', 1.2, 0.3)
 		cell_tween.tween_property(cell, 'light_energy', 0.6, 1.2)
@@ -398,3 +398,6 @@ mesh = SubResource("SphereMesh_2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("BoxShape3D_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300824, 0.926593)

@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2xhvl4gh5h2s"]
+
+[ext_resource type="Script" uid="uid://dtg2wjqfdds6x" path="res://algorithms/wavefunctions/soundtimeline/TimelineController.gd" id="1_2j8k9"]
+
+[node name="SoundTimeline" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2j8k9")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlPanel" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="RecordButton" type="Button" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Record"
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Play"
+
+[node name="StopButton" type="Button" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Stop"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+
+[node name="ZoomLabel" type="Label" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Zoom:"
+
+[node name="ZoomSlider" type="HSlider" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="ScrollLabel" type="Label" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+text = "Scroll:"
+
+[node name="ScrollSlider" type="HSlider" parent="VBoxContainer/ControlPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="TimelineArea" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InfoPanel" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Instructions" type="RichTextLabel" parent="VBoxContainer/InfoPanel"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+bbcode_enabled = true
+text = "[b]Sound Timeline Visualizer[/b]
+
+[color=yellow]Controls:[/color]
+• [b]Space[/b] - Play/Pause
+• [b]R[/b] - Start/Stop Recording
+• [b]C[/b] - Clear Timeline
+• [b]Mouse[/b] - Click timeline to scrub
+• [b]Zoom/Scroll[/b] - Adjust view
+
+[color=cyan]Features:[/color]
+• Real-time waveform display
+• Frequency spectrum analysis
+• Rainbow frequency visualization
+• Timeline scrubbing and playback"

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bapvfdrc33ea2"]
+
+[ext_resource type="Script" uid="uid://dqjybvfhmkqei" path="res://commons/primitives/menu/menu.gd" id="1_ojyjb"]
+
+[node name="menu" type="Node3D"]
+script = ExtResource("1_ojyjb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.870124, 0.492834, 0, -0.492834, 0.870124, 0, 4.08725, 9.31134)

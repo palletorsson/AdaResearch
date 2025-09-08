@@ -1,6 +1,6 @@
-extends Node
+extends Node3D
 
-# Endless Techno-Noir Ambient Generator
+# Endless Techno-Noir Ambient Generator (Non-Blocking Version)
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
 
 # Audio buses setup
@@ -16,7 +16,7 @@ var buffer_size = 4096
 var drone_player = null
 var ambient_player = null
 var effect_players = []
-var num_effect_players = 5  # Pool of players for random effects
+var num_effect_players = 5
 
 # Pre-generated sound streams
 var precreated_sounds = {}
@@ -30,31 +30,58 @@ var sound_types = [
 	"heartbeat_segment"
 ]
 
+# Threading and progress tracking
+var generation_thread: Thread
+var mutex: Mutex
+var generation_progress = 0.0
+var current_sound_name = ""
+var total_sounds = 0
+var sounds_completed = 0
+var is_generating = false
+var generation_complete = false
+
 # Time tracking
 var elapsed_time = 0.0
 var last_effect_time = 0.0
 var is_initialized = false
 
+# 3D Loading Bar Components
+var loading_bar_container: Node3D
+var loading_bar_fill: MeshInstance3D
+var loading_text: Label3D
+var progress_text: Label3D
+var loading_particles: Array = []
+
+# Signals
+signal sound_generation_started
+signal sound_created(sound_name: String)
+signal generation_progress_updated(progress: float)
+signal sound_generation_complete
+
 func _ready():
 	rng.randomize()
+	mutex = Mutex.new()
+	generation_thread = Thread.new()
+	
+	# Calculate total sounds to generate
+	total_sounds = 2 + (sound_types.size() * 3)  # 2 base sounds + 3 variations per effect
+	
 	setup_audio_buses()
 	setup_players()
+	create_3d_loading_bar()
 	
-	# Create a loading screen or message
-	print("Pre-generating soundscape, please wait...")
+	# Connect signals
+	sound_generation_started.connect(_on_generation_started)
+	sound_created.connect(_on_sound_created)
+	generation_progress_updated.connect(_on_progress_updated)
+	sound_generation_complete.connect(_on_generation_complete)
 	
-	# Defer sound generation to next frame to allow UI to update
-	call_deferred("initialize_sounds")
+	# Start generation in background thread
+	start_sound_generation()
 
-func initialize_sounds():
-	# Pre-generate all sounds to avoid runtime generation
-	generate_all_sounds()
-	start_ambient()
-	is_initialized = true
-	print("Sound generation complete!")
-	
 func _process(delta):
 	if not is_initialized:
+		animate_loading_bar(delta)
 		return
 		
 	elapsed_time += delta
@@ -63,15 +90,59 @@ func _process(delta):
 	if elapsed_time - last_effect_time > rng.randf_range(3.0, 15.0):
 		play_random_effect()
 		last_effect_time = elapsed_time
-		
-func generate_all_sounds():
-	# Pre-generate the drone and ambient sounds
-	precreated_sounds["drone"] = create_endless_drone()
-	precreated_sounds["city_ambience"] = create_city_ambience()
+
+func start_sound_generation():
+	is_generating = true
+	sound_generation_started.emit()
 	
-	# Pre-generate variations of each effect sound
+	# Start generation in background thread
+	if generation_thread.start(_thread_generate_sounds) != OK:
+		print("Failed to start generation thread")
+		return
+
+func _thread_generate_sounds():
+	# Thread-safe sound generation
+	mutex.lock()
+	current_sound_name = "drone"
+	mutex.unlock()
+	
+	# Generate base drone
+	var drone_stream = create_endless_drone()
+	mutex.lock()
+	precreated_sounds["drone"] = drone_stream
+	sounds_completed += 1
+	generation_progress = float(sounds_completed) / total_sounds
+	mutex.unlock()
+	
+	call_deferred("_emit_sound_created", "drone")
+	call_deferred("_emit_progress_updated")
+	
+	# Small delay to allow UI update
+	OS.delay_msec(100)
+	
+	# Generate city ambience
+	mutex.lock()
+	current_sound_name = "city_ambience"
+	mutex.unlock()
+	
+	var ambience_stream = create_city_ambience()
+	mutex.lock()
+	precreated_sounds["city_ambience"] = ambience_stream
+	sounds_completed += 1
+	generation_progress = float(sounds_completed) / total_sounds
+	mutex.unlock()
+	
+	call_deferred("_emit_sound_created", "city_ambience")
+	call_deferred("_emit_progress_updated")
+	
+	OS.delay_msec(100)
+	
+	# Generate effect sound variations
 	for sound_type in sound_types:
+		mutex.lock()
+		current_sound_name = sound_type
 		precreated_sounds[sound_type] = []
+		mutex.unlock()
 		
 		# Create 3 variations of each sound type
 		for i in range(3):
@@ -86,7 +157,216 @@ func generate_all_sounds():
 				"electric_hum": stream = create_electric_hum()
 				"heartbeat_segment": stream = create_heartbeat_segment()
 			
+			mutex.lock()
 			precreated_sounds[sound_type].append(stream)
+			sounds_completed += 1
+			generation_progress = float(sounds_completed) / total_sounds
+			mutex.unlock()
+			
+			# Only emit signal for the first variation to avoid spam
+			if i == 0:
+				call_deferred("_emit_sound_created", sound_type)
+			call_deferred("_emit_progress_updated")
+			
+			# Small delay between variations
+			OS.delay_msec(50)
+	
+	# Generation complete
+	mutex.lock()
+	generation_complete = true
+	mutex.unlock()
+	
+	call_deferred("_emit_generation_complete")
+
+func _emit_sound_created(sound_name: String):
+	sound_created.emit(sound_name)
+
+func _emit_progress_updated():
+	mutex.lock()
+	var progress = generation_progress
+	mutex.unlock()
+	generation_progress_updated.emit(progress)
+
+func _emit_generation_complete():
+	sound_generation_complete.emit()
+
+func create_3d_loading_bar():
+	# Create container for loading bar
+	loading_bar_container = Node3D.new()
+	loading_bar_container.name = "LoadingBarContainer"
+	add_child(loading_bar_container)
+	
+	# Create loading bar background
+	var bar_bg = MeshInstance3D.new()
+	bar_bg.name = "LoadingBarBackground"
+	var bg_mesh = BoxMesh.new()
+	bg_mesh.size = Vector3(8.0, 0.5, 0.8)
+	bar_bg.mesh = bg_mesh
+	
+	var bg_material = StandardMaterial3D.new()
+	bg_material.albedo_color = Color(0.1, 0.1, 0.15, 0.8)
+	bg_material.emission_enabled = true
+	bg_material.emission = Color(0.0, 0.1, 0.2) * 0.3
+	bg_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	bar_bg.material_override = bg_material
+	
+	loading_bar_container.add_child(bar_bg)
+	
+	# Create loading bar fill
+	loading_bar_fill = MeshInstance3D.new()
+	loading_bar_fill.name = "LoadingBarFill"
+	var fill_mesh = BoxMesh.new()
+	fill_mesh.size = Vector3(0.1, 0.4, 0.7)  # Start very small
+	loading_bar_fill.mesh = fill_mesh
+	
+	var fill_material = StandardMaterial3D.new()
+	fill_material.albedo_color = Color(0.2, 0.8, 1.0, 1.0)
+	fill_material.emission_enabled = true
+	fill_material.emission = Color(0.2, 0.8, 1.0) * 0.8
+	fill_material.metallic = 0.3
+	fill_material.roughness = 0.1
+	loading_bar_fill.material_override = fill_material
+	
+	# Position fill at left edge
+	loading_bar_fill.position = Vector3(-3.95, 0, 0)
+	loading_bar_container.add_child(loading_bar_fill)
+	
+	# Create main loading text
+	loading_text = Label3D.new()
+	loading_text.text = "Generating Ambient Soundscape..."
+	loading_text.font_size = 48
+	loading_text.position = Vector3(0, 1.5, 0)
+	loading_text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	loading_text.modulate = Color(0.8, 1.0, 1.0, 1.0)
+	loading_bar_container.add_child(loading_text)
+	
+	# Create progress text
+	progress_text = Label3D.new()
+	progress_text.text = "Initializing..."
+	progress_text.font_size = 32
+	progress_text.position = Vector3(0, -1.2, 0)
+	progress_text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	progress_text.modulate = Color(0.6, 0.9, 1.0, 1.0)
+	loading_bar_container.add_child(progress_text)
+	
+	# Create loading particles
+	create_loading_particles()
+	
+	# Position the entire loading bar at a good viewing position
+	loading_bar_container.position = Vector3(0, 2, -5)
+
+func create_loading_particles():
+	# Create floating particles around the loading bar
+	for i in range(20):
+		var particle = MeshInstance3D.new()
+		particle.name = "LoadingParticle_" + str(i)
+		
+		var particle_mesh = SphereMesh.new()
+		particle_mesh.radius = 0.05 + randf() * 0.03
+		particle_mesh.height = particle_mesh.radius * 2
+		particle.mesh = particle_mesh
+		
+		var particle_material = StandardMaterial3D.new()
+		var hue = randf()
+		particle_material.albedo_color = Color.from_hsv(hue, 0.7, 1.0, 0.8)
+		particle_material.emission_enabled = true
+		particle_material.emission = Color.from_hsv(hue, 0.7, 1.0) * 0.6
+		particle_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		particle.material_override = particle_material
+		
+		# Random position around loading bar
+		var angle = randf() * PI * 2
+		var radius = 5 + randf() * 3
+		var height = randf_range(-2, 2)
+		particle.position = Vector3(
+			cos(angle) * radius,
+			height,
+			sin(angle) * radius
+		)
+		
+		loading_bar_container.add_child(particle)
+		loading_particles.append({
+			"node": particle,
+			"base_pos": particle.position,
+			"float_speed": randf_range(0.5, 1.5),
+			"float_amplitude": randf_range(0.3, 0.8),
+			"rotation_speed": randf_range(1.0, 3.0)
+		})
+
+func animate_loading_bar(delta):
+	if not loading_bar_container:
+		return
+	
+	# Use unix time for smooth sub-second precision
+	var t = fmod(Time.get_unix_time_from_system(), 60.0)
+	
+	# Animate loading bar glow
+	if loading_bar_fill and loading_bar_fill.material_override:
+		var pulse = 0.8 + sin(t * 4.0) * 0.3
+		loading_bar_fill.material_override.emission = Color(0.2, 0.8, 1.0) * pulse
+	
+	# Animate particles
+	for particle_data in loading_particles:
+		var particle = particle_data["node"]
+		var base_pos = particle_data["base_pos"]
+		var float_speed = particle_data["float_speed"]
+		var float_amplitude = particle_data["float_amplitude"]
+		var rotation_speed = particle_data["rotation_speed"]
+		
+		# Floating motion
+		var float_offset = sin(t * float_speed) * float_amplitude
+		particle.position = base_pos + Vector3(0, float_offset, 0)
+		
+		# Rotation
+		particle.rotation_degrees.y += rotation_speed * delta * 60
+		
+		# Pulse the emission
+		if particle.material_override:
+			var pulse = 0.6 + sin(t * 3.0 + particle.position.x) * 0.4
+			var base_color = particle.material_override.albedo_color
+			particle.material_override.emission = Color(base_color.r, base_color.g, base_color.b) * pulse
+	
+	# Rotate entire loading bar container slowly
+	loading_bar_container.rotation_degrees.y += delta * 5
+
+func _on_generation_started():
+	print("Sound generation started...")
+
+func _on_sound_created(sound_name: String):
+	print("Created: " + sound_name)
+	if progress_text:
+		progress_text.text = "Created: " + sound_name.replace("_", " ").capitalize()
+
+func _on_progress_updated(progress: float):
+	# Update loading bar fill
+	if loading_bar_fill:
+		var new_width = lerp(0.1, 7.9, progress)
+		loading_bar_fill.mesh.size.x = new_width
+		loading_bar_fill.position.x = -3.95 + (new_width - 0.1) * 0.5
+		
+		# Update color based on progress
+		var color = Color.from_hsv(progress * 0.3, 0.8, 1.0)  # Red to green transition
+		loading_bar_fill.material_override.albedo_color = color
+		loading_bar_fill.material_override.emission = color * 0.8
+	
+	# Update loading text
+	if loading_text:
+		var percentage = int(progress * 100)
+		loading_text.text = "Generating Sounds... " + str(percentage) + "%"
+
+func _on_generation_complete():
+	print("Sound generation complete!")
+	
+	# Hide loading bar with fade effect
+	if loading_bar_container:
+		var tween = create_tween()
+		tween.tween_property(loading_bar_container, "modulate:a", 0.0, 1.0)
+		tween.tween_callback(loading_bar_container.queue_free)
+	
+	# Start ambient sounds
+	start_ambient()
+	is_initialized = true
+	is_generating = false
 
 func setup_audio_buses():
 	# Create audio buses for effects

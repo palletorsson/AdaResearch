@@ -56,8 +56,7 @@ func create_wave_rings():
 	# Create rings for source 1
 	for i in range(8):
 		var ring = CSGCylinder3D.new()
-		ring.radius = 0.5 + i * 0.5
-		 + i * 0.5
+		ring.radius = 0.5 + i * 0.5 + i * 0.5
 		ring.height = 0.02
 		ring.material_override = StandardMaterial3D.new()
 		ring.material_override.albedo_color = Color(0.2, 0.8, 0.2, 0.3)
@@ -71,8 +70,7 @@ func create_wave_rings():
 	# Create rings for source 2
 	for i in range(8):
 		var ring = CSGCylinder3D.new()
-		ring.radius = 0.5 + i * 0.5
-		 + i * 0.5
+		ring.radius = 0.5 + i * 0.5 + i * 0.5
 		ring.height = 0.02
 		ring.material_override = StandardMaterial3D.new()
 		ring.material_override.albedo_color = Color(0.8, 0.2, 0.2, 0.3)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqm7k8x1n5p3y"]
+
+[ext_resource type="Script" path="res://commons/primitives/interactivetriangle/simple_split_quad.gd" id="1_9x2k4"]
+
+[node name="SimpleSplitQuad" type="Node3D"]
+script = ExtResource("1_9x2k4")
+quad_size = 1.2

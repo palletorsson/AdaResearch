@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bapvfdrc33ea2"]
+
+[ext_resource type="Script" uid="uid://3x21e2qmcung" path="res://commons/primitives/slantedcube/slantedcube.gd" id="1_4jyup"]
+
+[node name="slantedcube" type="Node3D"]
+script = ExtResource("1_4jyup")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)
