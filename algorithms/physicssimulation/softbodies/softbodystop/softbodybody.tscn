@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw75lrwfiq6g4"]
+
+[ext_resource type="Shader" uid="uid://bimhagwf8d30p" path="res://commons/resourses/shaders/pinktartan.gdshader" id="1_x0cc6"]
+[ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="2_vn2qu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v475k"]
+render_priority = 0
+shader = ExtResource("1_x0cc6")
+
+[sub_resource type="SphereMesh" id="SphereMesh_gpvcg"]
+
+[node name="Softbodybody" type="Node3D"]
+
+[node name="SphereSoftBody" type="SoftBody3D" parent="."]
+material_override = SubResource("ShaderMaterial_v475k")
+mesh = SubResource("SphereMesh_gpvcg")
+simulation_precision = 7
+pressure_coefficient = 0.15
+script = ExtResource("2_vn2qu")

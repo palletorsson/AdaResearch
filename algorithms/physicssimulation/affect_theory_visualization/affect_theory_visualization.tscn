@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://j7w8x9k6nqrpw"]
+[gd_scene load_steps=2 format=3 uid="uid://ch4ir5qojc07e"]
 
-[ext_resource type="Script" path="res://algorithms/physicssimulation/softbodies/affect_theory_visualization/AffectTheoryVisualization.gd" id="1"]
+[ext_resource type="Script" uid="uid://dk8f1vk48r7lg" path="res://algorithms/physicssimulation/affect_theory_visualization/AffectTheoryVisualization.gd" id="1"]
 
 [node name="AffectTheoryVisualization" type="Node3D"]
 script = ExtResource("1")
@@ -10,7 +10,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
-light_energy = 1.0
 shadow_enabled = true
 
 [node name="EmotionalBodies" type="Node3D" parent="."]
@@ -24,4 +23,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 
 [node name="DigitalTouch" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
-

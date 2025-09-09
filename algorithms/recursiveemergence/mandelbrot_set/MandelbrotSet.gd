@@ -1,44 +1,141 @@
+# This script generates a VR-optimized Mandelbrot set.
+# It uses incremental calculation and a single ArrayMesh for high performance.
+
 extends Node3D
 
+# VR-Optimized State Variables
 var time = 0.0
-var resolution = 50
-var max_iterations = 50
+var resolution = 200  # Increased resolution for more detail
+var max_iterations = 100
 var zoom = 1.0
 var center = Vector2(-0.5, 0.0)
-var fractal_points = []
+
+# Incremental generation state
+var current_x = 0
+var current_y = 0
+var is_generating = false
+
+# VR-Optimized rendering
+var fractal_mesh_instance: MeshInstance3D
+var array_mesh: ArrayMesh
+var vertices = PackedVector3Array()
+var colors = PackedColorArray()
+
+# Materials
+var fractal_material: StandardMaterial3D
 
 func _ready():
-	generate_mandelbrot()
+	"""Initializes the scene, materials, and starts the initial generation."""
+	setup_vr_optimized_scene()
 	setup_materials()
+	start_generation()
 
-func generate_mandelbrot():
-	var points_parent = $FractalPoints
+func setup_vr_optimized_scene():
+	"""Sets up the single MeshInstance3D for rendering the fractal."""
+	fractal_mesh_instance = MeshInstance3D.new()
+	fractal_mesh_instance.name = "MandelbrotMesh"
+	add_child(fractal_mesh_instance)
+
+func setup_materials():
+	"""Sets up the material for the fractal mesh."""
+	fractal_material = StandardMaterial3D.new()
+	# VR optimization: Unshaded material for better performance and glow
+	fractal_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fractal_material.vertex_color_use_as_albedo = true
+	fractal_material.point_size = 2.0  # VR friendly point size
+	fractal_material.albedo_color = Color.WHITE
+	fractal_mesh_instance.material_override = fractal_material
+
+func _process(delta):
+	"""Handles animation and incremental generation."""
+	time += delta
 	
-	# Clear existing points
-	for child in points_parent.get_children():
-		child.queue_free()
-	fractal_points.clear()
+	# Only generate if the flag is set
+	if is_generating:
+		generate_batch_of_points()
 	
-	for x in range(resolution):
-		for y in range(resolution):
-			var real = center.x + (x - resolution/2) * (4.0 / zoom) / resolution
-			var imag = center.y + (y - resolution/2) * (4.0 / zoom) / resolution
-			
-			var iterations = mandelbrot_iterations(real, imag)
-			var normalized_iter = float(iterations) / max_iterations
-			
-			var point = CSGSphere3D.new()
-			point.radius = 0.03
-			point.position = Vector3(
-				(x - resolution/2) * 0.15,
-				(y - resolution/2) * 0.15,
-				normalized_iter * 2.0
-			)
-			
-			points_parent.add_child(point)
-			fractal_points.append({"object": point, "iterations": iterations})
+	animate_fractal()
+
+func start_generation():
+	"""Resets generation state and prepares for a new fractal."""
+	vertices.clear()
+	colors.clear()
+	current_x = 0
+	current_y = 0
+	is_generating = true
+	# Reset the mesh instance's mesh to clear the previous fractal
+	fractal_mesh_instance.mesh = null
+	
+func generate_batch_of_points():
+	"""
+	Calculates a small batch of points each frame to smooth out performance.
+	"""
+	var batch_size = 50  # Adjust this value for performance
+	var points_generated_this_frame = 0
+
+	# Continue calculating points until the batch size is met or the grid is complete
+	while points_generated_this_frame < batch_size and is_generating:
+		# Calculate the current point
+		var real = center.x + (float(current_x) - resolution/2.0) * (4.0 / zoom) / resolution
+		var imag = center.y + (float(current_y) - resolution/2.0) * (4.0 / zoom) / resolution
+		
+		var iterations = mandelbrot_iterations(real, imag)
+		var normalized_iter = float(iterations) / max_iterations
+		
+		# Define the point's position in 3D space
+		var pos = Vector3(
+			(float(current_x) - resolution/2.0) * 0.1,
+			(float(current_y) - resolution/2.0) * 0.1,
+			0
+		)
+		
+		# Define the point's color based on iterations
+		var point_color
+		if iterations >= max_iterations:
+			point_color = Color.BLACK  # In the set
+		else:
+			# Outside the set, a colorful gradient
+			var hue = normalized_iter * 360.0
+			point_color = Color.from_hsv(hue / 360.0, 0.8, 1.0)
+		
+		# Add the calculated point and color to our arrays
+		vertices.append(pos)
+		colors.append(point_color)
+		
+		# Move to the next point in the grid
+		current_x += 1
+		if current_x >= resolution:
+			current_x = 0
+			current_y += 1
+		
+		# Check if generation is complete
+		if current_y >= resolution:
+			is_generating = false
+		
+		points_generated_this_frame += 1
+	
+	# Update the mesh instance with the new points
+	update_mesh()
+
+func update_mesh():
+	"""Updates the ArrayMesh with the current points."""
+	if not array_mesh:
+		array_mesh = ArrayMesh.new()
+	
+	var arrays = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_COLOR] = colors
+	
+	if array_mesh.get_surface_count() > 0:
+		array_mesh.clear_surfaces()
+	
+	# Use a single surface with PRIMITIVE_POINTS
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_POINTS, arrays)
+	fractal_mesh_instance.mesh = array_mesh
 
 func mandelbrot_iterations(c_real: float, c_imag: float) -> int:
+	"""Calculates the number of iterations for a given complex number."""
 	var z_real = 0.0
 	var z_imag = 0.0
 	var iterations = 0
@@ -52,53 +149,20 @@ func mandelbrot_iterations(c_real: float, c_imag: float) -> int:
 	
 	return iterations
 
-func setup_materials():
-	update_fractal_colors()
-
-func update_fractal_colors():
-	for point_data in fractal_points:
-		var material = StandardMaterial3D.new()
-		var normalized_iter = float(point_data.iterations) / max_iterations
-		
-		if point_data.iterations >= max_iterations:
-			# In the set - black
-			material.albedo_color = Color(0.1, 0.1, 0.1, 1.0)
-		else:
-			# Outside the set - colorful gradient
-			var hue = normalized_iter * 360.0
-			material.albedo_color = Color.from_hsv(hue / 360.0, 0.8, 1.0)
-		
-		material.emission_enabled = true
-		material.emission = material.albedo_color * 0.5
-		point_data.object.material_override = material
-
-func _process(delta):
-	time += delta
-	
-	# Animate zoom
-	zoom = 1.0 + sin(time * 0.5) * 0.8
-	
-	# Regenerate periodically for zoom animation
-	if int(time * 2) % 2 == 0:
-		generate_mandelbrot()
-	
-	animate_fractal()
-	animate_indicators()
-
 func animate_fractal():
-	for i in range(fractal_points.size()):
-		var point_data = fractal_points[i]
-		var wave = sin(time * 3.0 + i * 0.01) * 0.1
-		point_data.object.scale = Vector3.ONE * (1.0 + wave)
-
-func animate_indicators():
-	# Iteration control
-	var iter_height = (max_iterations / 100.0) * 2.0 + 0.5
-	$IterationControl.height = iter_height
-	$IterationControl.position.y = -3 + iter_height/2
+	"""Applies a subtle animation to the fractal."""
+	if not fractal_mesh_instance:
+		return
 	
-	# Zoom level
-	var zoom_height = (zoom / 2.0) * 2.0 + 0.5
-	$ZoomLevel.size.y = zoom_height
-	$ZoomLevel.position.y = -3 + zoom_height/2
+	# Gentle pulsing animation
+	var pulse = 1.0 + sin(time * 2.0) * 0.1
+	fractal_mesh_instance.scale = Vector3.ONE * pulse
 
+func _input(event):
+	"""Handles user input to manually trigger a new generation."""
+	if event.is_action_pressed("ui_accept"):  # Space key
+		# Randomly select a new zoom and center
+		zoom = 1.0 + randf() * 1000.0
+		center = Vector2(randf() * 2.0 - 1.5, randf() * 2.0 - 1.0)
+		start_generation()
+		print("🌟 Starting new fractal generation...")

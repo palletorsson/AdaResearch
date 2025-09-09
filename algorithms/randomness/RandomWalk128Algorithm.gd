@@ -23,7 +23,7 @@ var walker_position: Vector2i = Vector2i(64, 64)  # Start at center
 
 # Algorithm settings
 @export var steps_per_frame: int = 10
-@export var total_steps: int = 10000
+@export var total_steps: int = 20000
 @export var auto_start: bool = true
 @export var show_walker: bool = true
 

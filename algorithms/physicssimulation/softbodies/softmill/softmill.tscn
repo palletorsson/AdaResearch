@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctq1ibdmbs7oi"]
+
+[ext_resource type="Shader" uid="uid://cn6haqw16yd0n" path="res://commons/resourses/shaders/frosted_glass.gdshader" id="1_qjj20"]
+[ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="2_xp6t4"]
+[ext_resource type="PackedScene" uid="uid://cflnu0r1frky4" path="res://algorithms/physicssimulation/softbodies/softmill/RotatingArmWithStand.tscn" id="3_qjj20"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njui8"]
+render_priority = 0
+shader = ExtResource("1_qjj20")
+shader_parameter/brightness = 1.0
+shader_parameter/distortion_intensity = 0.02
+shader_parameter/blur_amount = 1.0
+shader_parameter/tint_color = Color(1, 1, 1, 0.8)
+shader_parameter/transparency = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_vompo"]
+
+[node name="Softmill" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.269054, 0, -0.963125, 0, 1, 0, 0.963125, 0, -0.269054, -4.72509, 3.53199, -2.64146)
+
+[node name="SphereSoftBody08" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.809108, 3.99691, -1.97789)
+material_override = SubResource("ShaderMaterial_njui8")
+mesh = SubResource("SphereMesh_vompo")
+simulation_precision = 15
+pressure_coefficient = 0.5
+pinned_points = [1047]
+attachments/0/point_index = 1047
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+script = ExtResource("2_xp6t4")
+
+[node name="RobotArmWithStand" parent="." instance=ExtResource("3_qjj20")]

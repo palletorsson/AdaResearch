@@ -67,14 +67,6 @@ simulation_precision = 6
 pressure_coefficient = 0.1
 script = ExtResource("1_script")
 
-[node name="SphereSoftBody03" type="SoftBody3D" parent="SoftBodyVariations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -6)
-material_override = SubResource("ShaderMaterial_2xf48")
-mesh = SubResource("SphereMesh_1")
-simulation_precision = 7
-pressure_coefficient = 0.15
-script = ExtResource("1_script")
-
 [node name="SphereSoftBody04" type="SoftBody3D" parent="SoftBodyVariations"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -6)
 material_override = SubResource("ShaderMaterial_2xf48")

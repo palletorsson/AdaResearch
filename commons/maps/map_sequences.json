@@ -149,7 +149,7 @@
 			],
 			"maps": [
 				"Meshes_One",
-				"Meshes_Four"
+				"Meshes_Four fetishtorus"
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["array_tutorial"],
@@ -168,15 +168,25 @@
 				"Chaos vs randomness"
 			],
 			"temps": [			
+		 
+			],
+			"maps": [
+				"Random_One",
+				"Random_Two",
 				"Random_Three",
 				"Random_Four",
 				"Random_Walk",				
 				"Random_Five",
-				"Random_Six" 
-			],
-			"maps": [
-				"Random_One",
-				"Random_Two",			
+				"Random_Six", 
+				"Random_Seven", 
+				"Randomness_10_PRINT_Algorithm",
+				"Randomness_Digital_Materiality_Glitch",
+				"Randomness_Distribution_Visualization",
+				"Randomness_Examples_of_Randomness",
+				"Randomness_Random_Transformations",
+				"Randomness_Random_Walk",
+				"Randomness_TRNG_vs_PRNG",
+	
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_random",
@@ -228,7 +238,10 @@
 			"maps": [
 				"Noise_One",
 				"Noise_Two",
-				"Noise_Three"
+				"Noise_Three",
+				"Noise_Blue",
+				"Noise_Functions",
+				"Noise_Perlin_Simplex",		
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["randomness_exploration"],
@@ -470,7 +483,16 @@
 			],
 			"maps": [
 				"ProceduralGeneration_One",
-				"ProceduralGeneration_Two"
+				"ProceduralGeneration_Two",
+				"ProceduralGeneration_Three",
+				"ProceduralGeneration_Four",
+				"ProceduralGeneration_Five",
+				"ProceduralGeneration_Six",
+				"ProceduralGeneration_Seven",
+				"ProceduralGeneration_Eight",
+				"ProceduralGeneration_Nine",
+				"ProceduralGeneration_Ten",
+					"ProceduralGeneration_Eleven",				
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

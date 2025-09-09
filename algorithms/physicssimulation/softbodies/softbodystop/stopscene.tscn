@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://blwsr1vf3i5kv"]
+
+[ext_resource type="Script" uid="uid://cjdgoo30obk7e" path="res://algorithms/physicssimulation/softbodies/softbodystop/stopsoftbody.gd" id="1_juoqt"]
+[ext_resource type="PackedScene" uid="uid://bw75lrwfiq6g4" path="res://algorithms/physicssimulation/softbodies/softbodystop/softbodybody.tscn" id="2_mawbi"]
+
+[node name="Stopscene" type="Node3D"]
+script = ExtResource("1_juoqt")
+
+[node name="Softbodybody" parent="." instance=ExtResource("2_mawbi")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517375, 2.15436)

@@ -415,14 +415,7 @@
 			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0]
 		},
-		"noisetorus": {
-			"name": "noisetorus",
-			"lookup_name": "noisetorus", 
-			"description": "noisetorus",
-			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
-		},
+
 		
 		
 			"spectral_analyzer": {
@@ -516,6 +509,7 @@
 			"artifact_type": "interactive_algorithm", 
 			"prerequisites": ["array_tutorial"]
 		},
+
 		"bubbles_random": {
 			"name": "Random Bubbles",
 			"lookup_name": "bubbles_random",
@@ -541,7 +535,48 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
-			"pickup_cube_placer": {
+		"ten_print_maze_3d": {
+			"name": "ten_print_maze_3d",
+			"lookup_name": "ten_print_maze_3d",
+			"description": "ten_print_maze_3d",
+			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		
+		"digital_materiality_glitch": {
+			"name": "digital_materiality_glitch",
+			"lookup_name": "digital_materiality_glitch",
+			"description": "digital_materiality_glitch",
+			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},		
+		"distribution_visualization": {
+			"name": "distribution_visualization",
+			"lookup_name": "distribution_visualization",
+			"description": "distribution_visualization",
+			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},	
+		
+		 "pickup_cube_placer": {
 			"name": "pickup_cube_placer",
 			"lookup_name": "pickup_cube_placer",
 			"description": "pickup_cube_placer",
@@ -615,6 +650,53 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+
+		 "blue_noise": {
+			"name": "blue_noise",
+			"lookup_name": "blue_noise",
+			"description": "blue_noise",
+			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
+			"position": [0.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},	
+		"noisetorus": {
+			"name": "noisetorus",
+			"lookup_name": "noisetorus", 
+			"description": "noisetorus",
+			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
+			"position": [0.0, 0.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0]
+		},	
+		"noisetext": {
+			"name": "noisetext",
+			"lookup_name": "noisetext",
+			"description": "noisetext",
+			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+		"noisesphere": {
+			"name": "noisesphere",
+			"lookup_name": "noisesphere",
+			"description": "noisesphere",
+			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
+			"position": [3.0, 1.0, 0.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"]
+		},
+				
 		"sculpt_one": {
 			"name": "Sculpt One",
 			"lookup_name": "sculpt_one",
@@ -1505,6 +1587,29 @@
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
 		},
+		"softmill": {
+			"name": "softmill",
+			"lookup_name": "softmill",
+			"description": "Deformable soft body physics simulation",
+			"scene": "res://algorithms/physicssimulation/softbodies/softmill/softmill.tscn",
+			"position": [0.0, 1.0, 14.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration"
+		},
+		"softstopscene": {
+			"name": "softstopscene",
+			"lookup_name": "softstopscene",
+			"description": "Deformable soft body physics simulation",
+			"scene": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
+			"position": [0.0, 1.0, 14.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration"
+		},
+		
 		"spring_mass_system": {
 			"name": "Spring Mass System",
 			"lookup_name": "spring_mass_system",
@@ -1842,6 +1947,20 @@
 				"light_position": [0, 2.0, 0]
 			}
 		},
+		
+		"random_walk_collection": {
+			"name": "Random Walk Grab Paper",
+			"lookup_name": "random_walk_collection",
+			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
+			"position": [7.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "pickup_and_examine",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+		},		
 		"random_walk_grab_paper": {
 			"name": "Random Walk Grab Paper",
 			"lookup_name": "random_walk_grab_paper",
@@ -2278,6 +2397,26 @@
 			"lookup_name": "pollock_painting_in_3d",
 			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
 			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+			"position": [27.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm",
+			"prerequisites": ["array_tutorial"],
+			"lighting": {
+				"add_focused_light": true,
+				"light_color": [0.9, 0.6, 0.3],
+				"light_intensity": 1.2,
+				"light_range": 3.6,
+				"light_position": [0, 1.4, 0]
+			}
+		},
+		"spawn_randomcubes": {
+			"name": "spawn_randomcubes",
+			"lookup_name": "spawn_randomcubes",
+			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
+			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn",
 			"position": [27.0, 1.0, 2.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],

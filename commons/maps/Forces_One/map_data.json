@@ -68,8 +68,10 @@
 			"type": "teleporter",
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
-			"properties": { "action": "next_in_sequence" }
-		}, 
+			"properties": { 
+				"action": "next_in_sequence" 
+				}
+			}, 
 		"s": {
 			"properties": {
 				"height": 5.5  
