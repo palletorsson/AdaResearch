@@ -4,11 +4,11 @@ extends Node3D
 # Creates animated 3D maze with step-by-step generation
 
 @export_category("Maze Configuration")
-@export var maze_width: int = 21
-@export var maze_height: int = 21
+@export var maze_width: int = 9
+@export var maze_height: int = 9
 @export var cell_size: float = 1.0
-@export var wall_height: float = 2.0
-@export var generation_speed: float = 0.05
+@export var wall_height: float = 1.0
+@export var generation_speed: float = 0.2
 
 @export_category("Visual Settings")
 @export var wall_color: Color = Color(0.4, 0.4, 0.6)
@@ -28,6 +28,8 @@ var generation_timer: float = 0.0
 # Visual elements
 var cell_meshes: Array = []
 var wall_meshes: Array = []
+var wall_colliders: Array = []  # Store collision bodies for walls
+var floor_colliders: Array = []  # Store collision bodies for floor/paths
 
 # Directions for maze generation
 var directions = [
@@ -97,14 +99,32 @@ func initialize_maze():
 func create_maze_visuals():
 	cell_meshes.clear()
 	wall_meshes.clear()
+	wall_colliders.clear()
+	floor_colliders.clear()
 	
 	for y in range(maze_height):
 		var row = []
+		var wall_collider_row = []
+		var floor_collider_row = []
 		for x in range(maze_width):
 			var mesh_instance = create_cell_visual(x, y)
 			row.append(mesh_instance)
 			add_child(mesh_instance)
+			
+			# Create collision for walls
+			if maze[y][x]:  # If it's a wall
+				var wall_collider = create_wall_collider(x, y)
+				wall_collider_row.append(wall_collider)
+				add_child(wall_collider)
+				floor_collider_row.append(null)
+			else:  # If it's a path/floor
+				var floor_collider = create_floor_collider(x, y)
+				wall_collider_row.append(null)
+				floor_collider_row.append(floor_collider)
+				add_child(floor_collider)
 		cell_meshes.append(row)
+		wall_colliders.append(wall_collider_row)
+		floor_colliders.append(floor_collider_row)
 
 func create_cell_visual(x: int, y: int) -> MeshInstance3D:
 	var mesh_instance = MeshInstance3D.new()
@@ -124,6 +144,40 @@ func create_cell_visual(x: int, y: int) -> MeshInstance3D:
 	mesh_instance.material_override = material
 	
 	return mesh_instance
+
+func create_wall_collider(x: int, y: int) -> StaticBody3D:
+	# Create StaticBody3D for collision
+	var static_body = StaticBody3D.new()
+	static_body.name = "WallCollider_" + str(x) + "_" + str(y)
+	
+	# Create CollisionShape3D
+	var collision_shape = CollisionShape3D.new()
+	var box_shape = BoxShape3D.new()
+	box_shape.size = Vector3(cell_size, wall_height, cell_size)
+	collision_shape.shape = box_shape
+	static_body.add_child(collision_shape)
+	
+	# Position the collider
+	static_body.position = Vector3(x * cell_size, wall_height / 2, y * cell_size)
+	
+	return static_body
+
+func create_floor_collider(x: int, y: int) -> StaticBody3D:
+	# Create StaticBody3D for floor collision
+	var static_body = StaticBody3D.new()
+	static_body.name = "FloorCollider_" + str(x) + "_" + str(y)
+	
+	# Create CollisionShape3D
+	var collision_shape = CollisionShape3D.new()
+	var box_shape = BoxShape3D.new()
+	box_shape.size = Vector3(cell_size, 0.1, cell_size)  # Thin floor collision
+	collision_shape.shape = box_shape
+	static_body.add_child(collision_shape)
+	
+	# Position the collider at ground level
+	static_body.position = Vector3(x * cell_size, 0.05, y * cell_size)
+	
+	return static_body
 
 func start_generation():
 	# Start from top-left path cell
@@ -213,6 +267,16 @@ func update_wall_visual(x: int, y: int):
 	var material = StandardMaterial3D.new()
 	material.albedo_color = path_color
 	mesh_instance.material_override = material
+	
+	# Remove wall collision body
+	if wall_colliders[y][x]:
+		wall_colliders[y][x].queue_free()
+		wall_colliders[y][x] = null
+	
+	# Create floor collision body
+	var floor_collider = create_floor_collider(x, y)
+	floor_colliders[y][x] = floor_collider
+	add_child(floor_collider)
 
 func create_entrance_exit():
 	# Create entrance at top
@@ -238,6 +302,16 @@ func update_entrance_exit_visual(x: int, y: int):
 	material.emission_enabled = true
 	material.emission = Color(0.9, 0.9, 0.3) * 0.3
 	mesh_instance.material_override = material
+	
+	# Remove wall collision body for entrance/exit
+	if wall_colliders[y][x]:
+		wall_colliders[y][x].queue_free()
+		wall_colliders[y][x] = null
+	
+	# Create floor collision body for entrance/exit
+	var floor_collider = create_floor_collider(x, y)
+	floor_colliders[y][x] = floor_collider
+	add_child(floor_collider)
 
 func get_maze_string() -> String:
 	var result = ""
@@ -245,4 +319,63 @@ func get_maze_string() -> String:
 		for x in range(maze_width):
 			result += "█" if maze[y][x] else " "
 		result += "\n"
-	return result 
+	return result
+
+# Utility functions for collision management
+func get_wall_collider_at_position(world_pos: Vector3) -> StaticBody3D:
+	var x = int(round(world_pos.x / cell_size))
+	var y = int(round(world_pos.z / cell_size))
+	
+	if x >= 0 and x < maze_width and y >= 0 and y < maze_height:
+		return wall_colliders[y][x]
+	return null
+
+func get_floor_collider_at_position(world_pos: Vector3) -> StaticBody3D:
+	var x = int(round(world_pos.x / cell_size))
+	var y = int(round(world_pos.z / cell_size))
+	
+	if x >= 0 and x < maze_width and y >= 0 and y < maze_height:
+		return floor_colliders[y][x]
+	return null
+
+func is_wall_at_position(world_pos: Vector3) -> bool:
+	var x = int(round(world_pos.x / cell_size))
+	var y = int(round(world_pos.z / cell_size))
+	
+	if x >= 0 and x < maze_width and y >= 0 and y < maze_height:
+		return maze[y][x]
+	return false
+
+func is_floor_at_position(world_pos: Vector3) -> bool:
+	var x = int(round(world_pos.x / cell_size))
+	var y = int(round(world_pos.z / cell_size))
+	
+	if x >= 0 and x < maze_width and y >= 0 and y < maze_height:
+		return not maze[y][x]  # Floor if not a wall
+	return false
+
+func get_wall_collision_count() -> int:
+	var count = 0
+	for y in range(maze_height):
+		for x in range(maze_width):
+			if wall_colliders[y][x] != null:
+				count += 1
+	return count
+
+func get_floor_collision_count() -> int:
+	var count = 0
+	for y in range(maze_height):
+		for x in range(maze_width):
+			if floor_colliders[y][x] != null:
+				count += 1
+	return count
+
+# Debug function to show collision status
+func debug_collision_info() -> Dictionary:
+	return {
+		"total_walls": get_wall_collision_count(),
+		"total_floors": get_floor_collision_count(),
+		"maze_size": Vector2i(maze_width, maze_height),
+		"cell_size": cell_size,
+		"wall_height": wall_height
+	} 

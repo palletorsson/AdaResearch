@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqxr8nt2y5wh"]
+[gd_scene load_steps=6 format=3 uid="uid://bqxr8nt2y5wh"]
 
 [ext_resource type="Script" uid="uid://smhkdgu72p3v" path="res://commons/primitives/interactivetriangle/interactivetriangle.gd" id="1_abc123"]
 
@@ -8,6 +8,16 @@ background_color = Color(0.1, 0.1, 0.2, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.8, 0.8, 0.9, 1)
 ambient_light_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vvmu"]
+transparency = 1
+albedo_color = Color(1, 0.580392, 1, 0.580392)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a40jk"]
+size = Vector3(1, 0.1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ay84d"]
+size = Vector3(1, 0.108215, 0.189636)
 
 [node name="InteractiveTriangle" type="Node3D"]
 script = ExtResource("1_abc123")
@@ -21,3 +31,14 @@ light_energy = 0.8
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_8vvmu")
+mesh = SubResource("BoxMesh_a40jk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000457764, 0.00296021)
+shape = SubResource("BoxShape3D_ay84d")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://wnfd4gv6v4h2"]
+
+[ext_resource type="Script" uid="uid://dun21bxl6g5i4" path="res://algorithms/proceduralgeneration/ca_showcase/ca_showcase.gd" id="1_iqbx2"]
+
+[node name="CaShowcase" type="Node3D"]
+script = ExtResource("1_iqbx2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.64439)

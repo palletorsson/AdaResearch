@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://conu48ficlt7y"]
+
+[ext_resource type="Script" uid="uid://duipf7ddhfj0c" path="res://commons/primitives/cubes/doublestick.gd" id="1_i0sox"]
+[ext_resource type="PackedScene" uid="uid://c7r5upmpm2rrm" path="res://commons/primitives/cubes/grab_long_stick.tscn" id="2_k1vup"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lyr7i"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_baklq"]
+radius = 0.05
+height = 0.1
+
+[node name="Doublestick" type="Node3D"]
+script = ExtResource("1_i0sox")
+
+[node name="GrabStick" parent="." instance=ExtResource("2_k1vup")]
+
+[node name="ForceOne" type="MeshInstance3D" parent="GrabStick"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01071, 0, 0)
+mesh = SubResource("SphereMesh_lyr7i")
+
+[node name="GrabStick2" parent="." instance=ExtResource("2_k1vup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.702885)
+
+[node name="ForceTwo" type="MeshInstance3D" parent="GrabStick2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00264, 0, 0)
+mesh = SubResource("SphereMesh_baklq")

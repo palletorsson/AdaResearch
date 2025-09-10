@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7r5upmpm2rrm"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_u82vu"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_4w1i0"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_tfadk"]
+[ext_resource type="PackedScene" uid="uid://801v8wjrvkgv" path="res://commons/resourses/utilities/displayobjectposition/displayobjectposition.tscn" id="6_w7h7a"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.0236115, 0.169395, 0.0203419)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w7h7a"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ckwi5"]
+top_radius = 0.01
+bottom_radius = 0.011
+height = 1.5
+
+[node name="GrabStick" instance=ExtResource("1_u82vu")]
+freeze = true
+script = ExtResource("2_4w1i0")
+alternate_material = null
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-1.37323e-10, 0.999995, -0.00314159, 4.37112e-08, 0.00314159, 0.999995, 1, 0, -4.37114e-08, -0.608517, 7.98806e-05, -0.000782901)
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-6.55671e-09, 0, -1.646, 0, 0.15, 0, 0.15, 0, -7.19489e-08, -0.608403, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_tfadk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.588657, 0, 0.0739675)
+
+[node name="Blade" type="Node3D" parent="." index="3"]
+
+[node name="Top" type="Node3D" parent="Blade" index="0"]
+
+[node name="Displayobjectposition" parent="Blade/Top" index="0" instance=ExtResource("6_w7h7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994309, 0.331825, 0)
+
+[node name="TrackBall" type="MeshInstance3D" parent="Blade/Top" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00344, 0, 0)
+mesh = SubResource("SphereMesh_w7h7a")
+skeleton = NodePath("")
+
+[node name="Blade" type="MeshInstance3D" parent="Blade" index="1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.222, 0, 0)
+mesh = SubResource("CylinderMesh_ckwi5")
+skeleton = NodePath("")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://5fe4q80xth7v"]
+
+[ext_resource type="Script" uid="uid://dxmecthdpoqb7" path="res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.gd" id="1_rjnu8"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_rjnu8"]
+
+[node name="Liturgicalambientgenerator" type="Node3D"]
+script = ExtResource("1_rjnu8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.804573, 0.593854, 0, -0.593854, 0.804573, 0, 1.15089, 1.55429)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
+mesh = SubResource("TorusMesh_rjnu8")

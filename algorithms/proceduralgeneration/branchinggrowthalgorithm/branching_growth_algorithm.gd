@@ -1,7 +1,7 @@
 extends Node3D
 
 # Parameters for the SPICY QUEER growth algorithm 🌈✨
-@export var max_branches = 500  # More branches for fabulous density!
+@export var max_branches = 100  # More branches for fabulous density!
 @export var attraction_distance = 4.0
 @export var min_branch_distance = 0.25
 @export var growth_distance = 0.2

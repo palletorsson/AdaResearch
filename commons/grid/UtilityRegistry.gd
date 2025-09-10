@@ -85,6 +85,13 @@ const UTILITY_TYPES = {
 		"description": "Barriers and boundaries",
 		"supports_parameters": true  # material, transparency
 	},
+	"hb": {
+		"name": "horizontal_border", 
+		"file": "horizontalboarder.tscn", 
+		"category": "structure",
+		"description": "Horizontal border element",
+		"supports_parameters": false
+	},
 	
 	# Furniture utilities
 	"b": {

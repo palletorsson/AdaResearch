@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://maze_collision_test"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/mazegeneration/maze_generator.gd" id="1_maze"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/mazegeneration/maze_debug_collision.gd" id="2_debug"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+height = 2.0
+radius = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+height = 2.0
+radius = 0.5
+
+[node name="MazeTestCollision" type="Node3D"]
+
+[node name="MazeGenerator" type="Node3D" parent="."]
+script = ExtResource("1_maze")
+maze_width = 15
+maze_height = 15
+cell_size = 1.0
+wall_height = 2.0
+generation_speed = 0.1
+show_generation = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_debug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+mesh = SubResource("CapsuleMesh_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.5

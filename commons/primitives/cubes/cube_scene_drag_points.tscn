@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfc4x2r8od7v6"]
+
+[ext_resource type="Script" uid="uid://c6dd16k6lsim4" path="res://commons/primitives/cubes/cube_scene_drag_points.gd" id="2_drag_points"]
+
+[node name="CubeScene" type="Node3D"]
+script = ExtResource("2_drag_points")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.54377)

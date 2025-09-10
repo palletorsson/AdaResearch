@@ -23,7 +23,7 @@ ranged_grab_method = 0
 second_hand_grab = 2
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.000920061, 0.000134276, -0.000782901)
+transform = Transform3D(1.83859e-10, 0.999991, 0.00420621, 4.3711e-08, -0.00420621, 0.999991, 1, 0, -4.37114e-08, -0.000920061, 0.000134276, -0.000782901)
 shape = SubResource("7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]

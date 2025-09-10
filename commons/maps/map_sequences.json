@@ -467,21 +467,21 @@
 				"Constraint-based generation"
 			],
 			"temps": [
+
+			],
+			"maps": [
+				"ProceduralGeneration_N_grams", 
 				"ProceduralGeneration_Delaunay_Triangulation",
 				"ProceduralGeneration_Space_Partitioning",
 				"ProceduralGeneration_Markov_Chains",
-				"ProceduralGeneration_N_grams",
 				"ProceduralGeneration_Poisson_Disk_Sampling",
-				"ProceduralGeneration_Wave_Function_Collapse",
 				"ProceduralGeneration_Space_Colonization_Algorithms",
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"ProceduralGeneration_Genetic_Algorithms",
 				"ProceduralGeneration_Evolutionary_Computation",
 				"ProceduralGeneration_Genetic_Programming", 
 				"ProceduralGeneration_Voronoi_Diagrams",
-				"ProceduralGeneration_Marching_Cubes_Algorithm"
-			],
-			"maps": [
+				"ProceduralGeneration_Marching_Cubes_Algorithm", 
 				"ProceduralGeneration_One",
 				"ProceduralGeneration_Two",
 				"ProceduralGeneration_Three",

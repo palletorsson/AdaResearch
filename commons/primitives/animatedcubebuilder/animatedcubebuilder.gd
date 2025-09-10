@@ -62,15 +62,17 @@ var final_cube_mesh: MeshInstance3D
 
 # Animation timing
 var vertex_blink_timer = 0.0
-var step_duration = 2.0  # Slightly slower for VR observation
+var step_duration = 0.5  # Much faster animation
 var current_step_time = 0.0
-var initial_delay = 1.0  # Delay before starting animation
+var initial_delay = 0.5  # Shorter delay before starting animation
 
-# Colors optimized for VR - Green and Yellow vertices  
-var vertex_color = Color(0.2, 1.0, 0.2)  # Bright green vertices
-var vertex_color_alt = Color(1.0, 1.0, 0.2)  # Bright yellow vertices (alternating)
-var edge_color = Color(0.2, 0.8, 1.0)    # Bright cyan
-var triangle_color = Color(0.4, 0.6, 1.0, 0.8)  # Semi-transparent blue
+# Colors optimized for VR - Marble green balls, transparent triangles, black edges
+var vertex_color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
+var vertex_color_alt = Color(0.2, 0.8, 0.3, 0.7)  # Same marble green for all
+var edge_color = Color(0.1, 0.1, 0.1)    # Black edges
+var triangle_color = Color(0.8, 0.2, 0.4, 0.6)  # Transparent dark pink
+var triangle_color_alt1 = Color(0.8, 0.1, 0.1, 0.6)  # Transparent red
+var triangle_color_alt2 = Color(0.1, 0.1, 0.1, 0.6)  # Transparent black
 var final_color = Color(0.2, 1.0, 0.4)   # Bright green
 
 # Audio feedback (optional - can be connected externally)
@@ -101,14 +103,18 @@ func create_vertex_spheres():
 		sphere.mesh = sphere_mesh
 		sphere.position = vertices[i] * cube_size
 		
-		# Alternate between green and yellow vertices
-		var color = vertex_color if i % 2 == 0 else vertex_color_alt
+		# All vertices are marble green
+		var color = vertex_color
 		
-		# Create bright glowing material for VR
+		# Create transparent green marble material
 		var material = StandardMaterial3D.new()
 		material.albedo_color = color
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission_enabled = true
-		material.emission = color * 1.2  # Brighter emission for VR
+		material.emission = Color(0.1, 0.4, 0.2) * 0.3  # Subtle green glow
+		material.roughness = 0.1  # Very smooth like marble
+		material.metallic = 0.0   # Non-metallic
+		material.refraction = 0.05  # Slight refraction for glass-like effect
 		material.flags_unshaded = true
 		material.no_depth_test = false
 		sphere.material_override = material
@@ -164,12 +170,12 @@ func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
 	
 	mesh_instance.transform = transform
 	
-	# Create bright glowing material for VR
+	# Create black material for edges
 	var material = StandardMaterial3D.new()
 	material.albedo_color = edge_color
-	material.emission_enabled = true
-	material.emission = edge_color * 0.8
-	material.flags_unshaded = false  # Allow some depth for VR
+	material.emission_enabled = false
+	material.roughness = 0.3
+	material.metallic = 0.0
 	mesh_instance.material_override = material
 	
 	return mesh_instance
@@ -206,12 +212,18 @@ func create_triangle_meshes():
 		
 		mesh_instance.mesh = st.commit()
 		
-		# Create semi-transparent material optimized for VR
+		# Create transparent material with alternating colors
 		var material = StandardMaterial3D.new()
-		material.albedo_color = triangle_color
+		var tri_index = triangle_meshes.size()
+		var color = triangle_color
+		if tri_index % 3 == 1:
+			color = triangle_color_alt1  # Red
+		elif tri_index % 3 == 2:
+			color = triangle_color_alt2  # Black
+		
+		material.albedo_color = color
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		material.emission_enabled = true
-		material.emission = triangle_color * 0.4
+		material.emission_enabled = false
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides in VR
 		mesh_instance.material_override = material
 		
@@ -303,9 +315,9 @@ func animate_vertices(delta):
 	for i in range(min(animation_step + 1, vertices.size())):
 		if vertex_spheres[i].visible:
 			var material = vertex_spheres[i].material_override as StandardMaterial3D
-			# Use the appropriate color for each vertex
-			var base_color = vertex_color if i % 2 == 0 else vertex_color_alt
-			material.emission = base_color * (0.6 + blink_alpha * 0.6)
+				# Use marble green for all vertices
+			var base_color = vertex_color
+			material.emission = Color(0.1, 0.4, 0.2) * (0.3 + blink_alpha * 0.2)
 
 func animate_edges(delta):
 	# Show edges progressively
@@ -381,7 +393,7 @@ func skip_to_final():
 	final_cube_mesh.visible = true
 
 func set_animation_speed(speed_multiplier: float):
-	step_duration = 2.0 / speed_multiplier
+	step_duration = 0.5 / speed_multiplier
 
 # VR-specific helpers
 func get_current_phase() -> String:

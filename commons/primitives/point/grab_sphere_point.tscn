@@ -14,7 +14,7 @@ radius = 0.0455009
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
 transparency = 1
-albedo_color = Color(0.105882, 0.105882, 0.105882, 0.568627)
+albedo_color = Color(0.8, 0.105882, 0.8, 0.843137)
 metallic = 1.0
 roughness = 0.0
 
@@ -25,7 +25,6 @@ radial_segments = 32
 rings = 16
 
 [node name="GrabSphere" instance=ExtResource("1_1t2g7")]
-freeze = true
 script = ExtResource("2_3uxjj")
 alternate_material = SubResource("10")
 ranged_grab_method = 0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkipan3flv7rv"]
+
+[ext_resource type="Script" uid="uid://bnsu67p42grdf" path="res://algorithms/proceduralgeneration/ca_showcase/dendrite_growth_ca.gd" id="1_dendrite"]
+
+[node name="DendriteGrowthCA" type="Node3D"]
+script = ExtResource("1_dendrite")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

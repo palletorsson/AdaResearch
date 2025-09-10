@@ -415,10 +415,7 @@
 			"position": [0.0, 0.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0]
 		},
-
-		
-		
-			"spectral_analyzer": {
+		"spectral_analyzer": {
 			"name": "Master Audio Analyzer",
 			"lookup_name": "spectral_analyzer",
 			"description": "A master bus spectrum analyzer that visualizes ALL game audio frequencies and waveforms in real-time",
@@ -853,6 +850,18 @@
 		"interaction": "touch_to_activate",
 		"sequence": "wavefunction_exploration"
 	},
+	 "liturgicalambientgen": {
+		"name": "liturgicalambientgenera",
+		"lookup_name": "liturgicalambientgen",
+		"description": "liturgicalambientgenera",
+		"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
+		"position": [3.0, 1.0, 4.0],
+		"rotation": [0.0, 0.0, 0.0],
+		"scale": [1.0, 1.0, 1.0],
+		"interaction": "touch_to_activate",
+		"sequence": "wavefunction_exploration"
+	},
+	
 	"resonance_frequencies": {
 		"name": "Resonance Frequencies",
 		"lookup_name": "resonance_frequencies",
@@ -1075,6 +1084,29 @@
 			"interaction": "touch_to_activate",
 			"sequence": "recursive_emergence_exploration"
 		},
+		 "crackpropagation_ca": {
+			"name": "crackpropagation_ca",
+			"lookup_name": "crackpropagation_ca",
+			"description": "crackpropagation_ca",
+			"scene": "res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn",
+			"position": [2.0, 1.0, 7.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "recursive_emergence_exploration"
+		},
+		  "percolationnetwork_ca": {
+			"name": "percolationnetwork_ca",
+			"lookup_name": "percolationnetwork_ca",
+			"description": "percolationnetwork_ca",
+			"scene": "res://algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn",
+			"position": [2.0, 1.0, 7.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "recursive_emergence_exploration"
+		},
+		
 		"mandelbrot_set": {
 			"name": "Mandelbrot Set",
 			"lookup_name": "mandelbrot_set",
@@ -2023,6 +2055,35 @@
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],
 		},	
+		"grab_long_stick": {
+			"name": "grab_long_stick",
+			"lookup_name": "grab_long_stick",
+			"description": "grab_long_stick",
+			"scene": "res://commons/primitives/cubes/grab_long_stick.tscn",
+			"position": [9.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},	
+		 "doublestick": {
+			"name": "doublestick",
+			"lookup_name": "doublestick",
+			"description": "doublestick",
+			"scene": "res://commons/primitives/cubes/doublestick.tscn",
+			"position": [9.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},	
+		 "cube_scene_drag_points": {
+			"name": "cube_scene_drag_points",
+			"lookup_name": "cube_scene_drag_points",
+			"description": "cube_scene_drag_points",
+			"scene": "res://commons/primitives/cubes/cube_scene_drag_points.tscn",
+			"position": [9.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},	
+
+		
 		"grab_stick_scanner": {
 			"name": "grab_stick_scannerk",
 			"lookup_name": "grab_stick_scanner",
@@ -3530,11 +3591,6 @@
 		"prerequisites": []
 	},
 	
-	"spawn_rules": {
-		"initial_artifacts": ["rotating_cube"],
-		"max_artifacts_on_table": 16,
-		"spacing_between_artifacts": 0.5,
-		"auto_arrange_on_spawn": true
+
 	}
-}
 }

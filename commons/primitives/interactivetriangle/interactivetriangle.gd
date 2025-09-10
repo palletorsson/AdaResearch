@@ -1,20 +1,20 @@
 # SplitQuad.gd - Creates a quad split into two triangles with different colors
 extends Node3D
 
-var vertex_color: Color = Color(1.0, 0.8, 0.2)  # Golden spheres
-@export var sphere_size_multiplier: float = 1.2
+var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
+@export var sphere_size_multiplier: float = 0.5  # Half the original size
 
 # Two triangle mesh instances - one pink, one black
 var triangle_mesh_pink: MeshInstance3D
 var triangle_mesh_black: MeshInstance3D
 var grab_spheres: Array[Node3D] = []
 
-# Quad has 4 corner points that define 2 triangles
+# Quad has 4 corner points that define 2 triangles (horizontal/flat)
 var vertex_positions: Array[Vector3] = [
-	Vector3(-1.0, -1.0, 0.0),  # Bottom-left (0)
-	Vector3(1.0, -1.0, 0.0),   # Bottom-right (1)
-	Vector3(1.0, 1.0, 0.0),    # Top-right (2)
-	Vector3(-1.0, 1.0, 0.0)    # Top-left (3)
+	Vector3(-1.0, 0.0, -1.0),  # Bottom-left (0)
+	Vector3(1.0, 0.0, 1.0),    # Bottom-right (1)
+	Vector3(1.0, 0.0, -1.0),   # Top-right (2)
+	Vector3(-1.0, 0.0, 1.0)    # Top-left (3)
 ]
 
 # Define the two triangles from the quad
@@ -65,11 +65,14 @@ func create_grab_spheres():
 			
 			var material = mesh_instance.material_override as StandardMaterial3D
 			if material:
+				# Transparent green marble properties
 				material.albedo_color = vertex_color
+				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 				material.emission_enabled = true
-				material.emission = vertex_color * 0.5
-				material.roughness = 0.3
-				material.metallic = 0.2
+				material.emission = Color(0.1, 0.4, 0.2) * 0.3  # Subtle green glow
+				material.roughness = 0.1  # Very smooth like marble
+				material.metallic = 0.0   # Non-metallic
+				material.refraction = 0.05  # Slight refraction for glass-like effect
 		
 		# Connect signals if available
 		if sphere_instance.has_signal("picked_up"):
@@ -144,12 +147,43 @@ func _on_sphere_picked_up(vertex_index: int, _pickable):
 func _on_sphere_dropped(vertex_index: int, _pickable):
 	if vertex_index < grab_spheres.size():
 		var sphere = grab_spheres[vertex_index]
-		vertex_positions[vertex_index] = sphere.position
+		var drop_position = sphere.position
+		
+		# Rotate each sphere 90 degrees in Z axis to prevent stacking
+		var rotation_angle = vertex_index * PI/2  # 90 degrees per sphere
+		var rotation_offset = Vector3(
+			cos(rotation_angle) * 0.1,  # X offset based on rotation
+			0.0,  # No Y offset to keep them at same height
+			sin(rotation_angle) * 0.1   # Z offset based on rotation
+		)
+		
+		# Apply rotation-based offset to prevent stacking
+		drop_position += rotation_offset
+		vertex_positions[vertex_index] = drop_position
+		
+		# Update sphere position with offset
+		sphere.position = drop_position
+		
 		update_triangle_meshes()
-		print("Corner ", vertex_index, " dropped at: ", vertex_positions[vertex_index])
+		print("Corner ", vertex_index, " dropped at: ", vertex_positions[vertex_index], " (with rotation offset)")
 
 func _process(delta):
 	_sync_vertices_from_spheres()
+	_handle_input()
+
+func _handle_input():
+	if Input.is_action_just_pressed("ui_accept"):  # Space key
+		arrange_in_boat_formation()
+	elif Input.is_key_pressed(KEY_R):
+		reset_to_square()
+	elif Input.is_key_pressed(KEY_Q):
+		reset_to_quad()
+	elif Input.is_key_pressed(KEY_D):
+		reset_to_diamond()
+	elif Input.is_key_pressed(KEY_T):
+		reset_to_trapezoid()
+	elif Input.is_key_pressed(KEY_B):
+		arrange_in_boat_formation()
 
 func _sync_vertices_from_spheres():
 	var needs_update = false
@@ -193,48 +227,59 @@ func apply_triangle_material(mesh_instance: MeshInstance3D, color: Color):
 
 
 func reset_to_square():
-	# Reset to perfect square
+	# Reset to perfect square (horizontal)
 	vertex_positions = [
-		Vector3(-1.0, -1.0, 0.0),  # Bottom-left
-		Vector3(1.0, -1.0, 0.0),   # Bottom-right
-		Vector3(1.0, 1.0, 0.0),    # Top-right
-		Vector3(-1.0, 1.0, 0.0)    # Top-left
+		Vector3(-1.0, 0.0, -1.0),  # Bottom-left
+		Vector3(1.0, 0.0, 1.0),    # Bottom-right
+		Vector3(1.0, 0.0, -1.0),   # Top-right
+		Vector3(-1.0, 0.0, 1.0)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to square shape")
 
 func reset_to_quad():
-	# Reset to rectangular quad
+	# Reset to rectangular quad (horizontal)
 	vertex_positions = [
-		Vector3(-1.5, -0.8, 0.0),  # Bottom-left
-		Vector3(1.5, -0.8, 0.0),   # Bottom-right
-		Vector3(1.5, 0.8, 0.0),    # Top-right
-		Vector3(-1.5, 0.8, 0.0)    # Top-left
+		Vector3(-1.5, 0.0, -0.8),  # Bottom-left
+		Vector3(1.5, 0.0, 0.8),    # Bottom-right
+		Vector3(1.5, 0.0, -0.8),   # Top-right
+		Vector3(-1.5, 0.0, 0.8)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to rectangular quad")
 
 func reset_to_diamond():
-	# Reset to diamond shape
+	# Reset to diamond shape (horizontal)
 	vertex_positions = [
-		Vector3(0.0, -1.2, 0.0),   # Bottom
+		Vector3(0.0, 0.0, -1.2),   # Bottom
 		Vector3(1.2, 0.0, 0.0),    # Right
-		Vector3(0.0, 1.2, 0.0),    # Top
+		Vector3(0.0, 0.0, 1.2),    # Top
 		Vector3(-1.2, 0.0, 0.0)    # Left
 	]
 	update_sphere_positions()
 	print("Reset to diamond shape")
 
 func reset_to_trapezoid():
-	# Reset to trapezoid shape
+	# Reset to trapezoid shape (horizontal)
 	vertex_positions = [
-		Vector3(-1.2, -1.0, 0.0),  # Bottom-left
-		Vector3(1.2, -1.0, 0.0),   # Bottom-right
-		Vector3(0.8, 1.0, 0.0),    # Top-right
-		Vector3(-0.8, 1.0, 0.0)    # Top-left
+		Vector3(-1.2, 0.0, -1.0),  # Bottom-left
+		Vector3(1.2, 0.0, 1.0),    # Bottom-right
+		Vector3(0.8, 0.0, -1.0),   # Top-right
+		Vector3(-0.8, 0.0, 1.0)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to trapezoid shape")
+
+func arrange_in_boat_formation():
+	# Arrange spheres in a boat-like formation with slight offsets (horizontal)
+	vertex_positions = [
+		Vector3(-1.0, 0.0, -0.1),  # Bottom-left (slightly back)
+		Vector3(1.0, 0.0, 0.1),    # Bottom-right (slightly forward)
+		Vector3(0.8, 0.0, 0.0),    # Top-right (centered)
+		Vector3(-0.8, 0.0, -0.05)  # Top-left (slightly back)
+	]
+	update_sphere_positions()
+	print("Arranged spheres in boat formation")
 
 func update_sphere_positions():
 	for i in range(grab_spheres.size()):
@@ -249,8 +294,13 @@ func set_vertex_color(color: Color):
 		if mesh_instance:
 			var material = mesh_instance.material_override as StandardMaterial3D
 			if material:
+				# Maintain transparent green marble properties
 				material.albedo_color = vertex_color
-				material.emission = vertex_color * 0.3
+				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				material.emission = Color(0.1, 0.4, 0.2) * 0.3  # Subtle green glow
+				material.roughness = 0.1  # Very smooth like marble
+				material.metallic = 0.0   # Non-metallic
+				material.refraction = 0.05  # Slight refraction for glass-like effect
 
 func print_help():
 	print("=== Split Quad Controls ===")
@@ -259,6 +309,7 @@ func print_help():
 	print("Q: Reset to rectangular quad")
 	print("D: Reset to diamond")
 	print("T: Reset to trapezoid")
+	print("B: Arrange spheres in boat formation")
 	print("Pink Triangle: Bottom-left → Bottom-right → Top-right")
 	print("Black Triangle: Bottom-left → Top-right → Top-left")
 	print("============================")
