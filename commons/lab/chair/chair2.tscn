@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlba7wbkdme45"]
+
+[ext_resource type="Script" uid="uid://fmbb83q3po47" path="res://commons/lab/chair/chair_2.gd" id="1_rsjic"]
+[ext_resource type="Shader" uid="uid://c08ke0r6841lq" path="res://algorithms/patterngeneration/gridscheckers/rotatedcheckers.gdshader" id="2_a6iq8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebogo"]
+render_priority = 0
+shader = ExtResource("2_a6iq8")
+shader_parameter/uv_scale = Vector2(24, 24)
+shader_parameter/angle_deg = 45.0
+shader_parameter/gutter = 0.08
+shader_parameter/edge_soft = 0.02
+shader_parameter/col_a = Color(0.05, 0.02, 0.08, 1)
+shader_parameter/col_b = Color(1, 0, 0.8, 1)
+shader_parameter/col_gutter = Color(0.02, 0.98, 0.85, 1)
+shader_parameter/glow = 1.2
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.45
+
+[sub_resource type="SphereMesh" id="SphereMesh_0wods"]
+
+[node name="Chair2" type="Node3D"]
+script = ExtResource("1_rsjic")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.26474)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82467, 0, 0)
+material_override = SubResource("ShaderMaterial_ebogo")
+mesh = SubResource("SphereMesh_0wods")

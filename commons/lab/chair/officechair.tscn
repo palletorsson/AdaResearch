@@ -1,0 +1,218 @@
+[gd_scene load_steps=8 format=3 uid="uid://3ad800dtr2t6"]
+
+[ext_resource type="Shader" uid="uid://c08ke0r6841lq" path="res://algorithms/patterngeneration/gridscheckers/rotatedcheckers.gdshader" id="1_0lfka"]
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.05, 0.08, 0.12, 1)
+ambient_light_color = Color(0.3, 0.4, 0.5, 1)
+ambient_light_energy = 0.4
+
+[sub_resource type="CameraAttributesPractical" id="camera_attributes"]
+exposure_multiplier = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wulvu"]
+render_priority = 0
+shader = ExtResource("1_0lfka")
+shader_parameter/uv_scale = Vector2(24, 24)
+shader_parameter/angle_deg = 45.0
+shader_parameter/gutter = 0.08
+shader_parameter/edge_soft = 0.02
+shader_parameter/col_a = Color(0.05, 0.02, 0.08, 1)
+shader_parameter/col_b = Color(1, 0, 0.8, 1)
+shader_parameter/col_gutter = Color(0.02, 0.98, 0.85, 1)
+shader_parameter/glow = 1.2
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="seat_material"]
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.8
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.05, 0.15, 0.25, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="accent_material"]
+albedo_color = Color(0, 0.7, 1, 1)
+metallic = 0.7
+roughness = 0.2
+emission_enabled = true
+emission = Color(0, 0.5, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="frame_material"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+metallic = 0.95
+roughness = 0.05
+emission_enabled = true
+emission = Color(0.1, 0.15, 0.2, 1)
+emission_energy_multiplier = 0.2
+
+[node name="SciFiOfficeChair" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+camera_attributes = SubResource("camera_attributes")
+
+[node name="Chair" type="Node3D" parent="."]
+
+[node name="Seat" type="CSGBox3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_wulvu")
+size = Vector3(0.6, 0.08, 0.55)
+material = SubResource("seat_material")
+
+[node name="SeatBevel" type="CSGBox3D" parent="Chair/Seat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+operation = 2
+size = Vector3(0.55, 0.04, 0.5)
+
+[node name="Backrest" type="CSGBox3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 0.972943, 0.231556, 0, -0.231556, 0.972943, 0, 0.85, -0.405553)
+size = Vector3(0.6, 0.7, 0.08)
+material = SubResource("seat_material")
+
+[node name="LumbarSupport" type="CSGBox3D" parent="Chair/Backrest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.06)
+size = Vector3(0.4, 0.15, 0.04)
+material = SubResource("accent_material")
+
+[node name="Armrests" type="Node3D" parent="Chair"]
+
+[node name="LeftArmrest" type="Node3D" parent="Chair/Armrests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+
+[node name="ArmPad" type="CSGBox3D" parent="Chair/Armrests/LeftArmrest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.1)
+size = Vector3(0.08, 0.04, 0.35)
+material = SubResource("seat_material")
+
+[node name="ArmSupport" type="CSGCylinder3D" parent="Chair/Armrests/LeftArmrest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.566399, 0.1)
+radius = 0.015
+height = 0.15
+material = SubResource("frame_material")
+
+[node name="RightArmrest" type="Node3D" parent="Chair/Armrests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+
+[node name="ArmPad" type="CSGBox3D" parent="Chair/Armrests/RightArmrest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.1)
+size = Vector3(0.08, 0.04, 0.35)
+material = SubResource("seat_material")
+
+[node name="ArmSupport" type="CSGCylinder3D" parent="Chair/Armrests/RightArmrest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.571667, 0.1)
+radius = 0.015
+height = 0.15
+material = SubResource("frame_material")
+
+[node name="Base" type="Node3D" parent="Chair"]
+
+[node name="CenterColumn" type="CSGCylinder3D" parent="Chair/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+radius = 0.04
+height = 0.5
+material = SubResource("frame_material")
+
+[node name="GasShock" type="CSGCylinder3D" parent="Chair/Base/CenterColumn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 0.025
+height = 0.15
+material = SubResource("accent_material")
+
+[node name="StarBase" type="Node3D" parent="Chair/Base"]
+
+[node name="CenterColumn2" type="CSGCylinder3D" parent="Chair/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0139975, 0.00625694)
+radius = 0.2
+height = 0.04
+sides = 24
+material = SubResource("frame_material")
+
+[node name="GasShock" type="CSGCylinder3D" parent="Chair/Base/CenterColumn2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 0.025
+height = 0.15
+material = SubResource("accent_material")
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="MainLight" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 0, 5, 0)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="RimLight" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.259, 0.966, 0, -0.966, 0.259, -2, 3, 2)
+light_color = Color(0.2, 0.6, 1, 1)
+light_energy = 3.0
+spot_range = 8.0
+
+[node name="AccentLight" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -0.259, 0.966, 0, -0.966, -0.259, 2, 1, 1)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 2.0
+spot_range = 6.0
+spot_angle = 60.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707, -0.354, 0.612, 0, 0.866, 0.5, -0.707, -0.354, 0.612, 2, 2, 2)
+fov = 45.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Sci-Fi Office Chair"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Features" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "• Ergonomic floating seat design
+• Holographic lumbar support
+• Anti-gravity caster wheels
+• Titanium alloy frame
+• Smart responsive materials"
+autowrap_mode = 2
+
+[node name="Controls" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Mouse: Rotate View
+Scroll: Zoom"
+autowrap_mode = 2

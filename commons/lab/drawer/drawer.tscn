@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://7f0c05to6d3n"]
+
+[ext_resource type="Script" uid="uid://c0m3cqhtx5upw" path="res://commons/lab/drawer/drawer.gd" id="1_rth6v"]
+
+[node name="Drawer" type="Node3D"]
+script = ExtResource("1_rth6v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.96565)

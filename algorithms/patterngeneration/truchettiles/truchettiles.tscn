@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=3 uid="uid://cac0urxooc0u3"]
+
+[ext_resource type="Shader" uid="uid://b8qayab1ufc2m" path="res://algorithms/patterngeneration/truchettiles/quarterarcs.gdshader" id="1_7kma8"]
+[ext_resource type="Shader" uid="uid://dw4oc0ekbld6i" path="res://algorithms/patterngeneration/truchettiles/diagonalsplit.gdshader" id="2_7kma8"]
+[ext_resource type="Shader" uid="uid://yc7xs20vbg4m" path="res://algorithms/patterngeneration/truchettiles/dots.gdshader" id="3_7kma8"]
+[ext_resource type="Shader" uid="uid://fqq3apbw83nn" path="res://algorithms/patterngeneration/truchettiles/zigzag.gdshader" id="4_7kma8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74bsi"]
+render_priority = 0
+shader = ExtResource("1_7kma8")
+shader_parameter/zoom = 20.0
+shader_parameter/animate = false
+shader_parameter/spin_speed = 0.25
+shader_parameter/color_a = Color(0, 0, 0, 1)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlrn3"]
+size = Vector2(5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kma8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7afui"]
+render_priority = 0
+shader = ExtResource("2_7kma8")
+shader_parameter/uv_scale = Vector2(50, 50)
+shader_parameter/col_a = Color(0.02, 0.02, 0.08, 1)
+shader_parameter/col_b = Color(0.901961, 0.854902, 1, 1)
+shader_parameter/edge_soft = 0.02
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lw0fy"]
+size = Vector2(5, 5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nlrn3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wiot5"]
+render_priority = 0
+shader = ExtResource("3_7kma8")
+shader_parameter/zoom = 18.0
+shader_parameter/radius = 0.05
+shader_parameter/color_a = Color(0, 0, 0, 1)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nqafo"]
+size = Vector2(5, 5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lw0fy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlrn3"]
+render_priority = 0
+shader = ExtResource("4_7kma8")
+shader_parameter/zoom = 14.702
+shader_parameter/color_a = Color(0, 0, 0, 1)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u00w3"]
+size = Vector2(5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nqafo"]
+
+[node name="FloorScene" type="Node3D"]
+
+[node name="FloorCollider" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCollider"]
+shape = SubResource("BoxShape3D_1")
+
+[node name="FloorSection1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -2.5)
+material_override = SubResource("ShaderMaterial_74bsi")
+mesh = SubResource("PlaneMesh_nlrn3")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45633, 0)
+material_override = SubResource("ShaderMaterial_74bsi")
+mesh = SubResource("BoxMesh_7kma8")
+skeleton = NodePath("../..")
+
+[node name="FloorSection2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+material_override = SubResource("ShaderMaterial_7afui")
+mesh = SubResource("PlaneMesh_lw0fy")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59228, 0)
+material_override = SubResource("ShaderMaterial_7afui")
+mesh = SubResource("SphereMesh_nlrn3")
+skeleton = NodePath("../..")
+
+[node name="FloorSection3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 2.5)
+material_override = SubResource("ShaderMaterial_wiot5")
+mesh = SubResource("PlaneMesh_nqafo")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.10564, 0)
+material_override = SubResource("ShaderMaterial_wiot5")
+mesh = SubResource("SphereMesh_lw0fy")
+skeleton = NodePath("../..")
+
+[node name="FloorSection4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+material_override = SubResource("ShaderMaterial_nlrn3")
+mesh = SubResource("PlaneMesh_u00w3")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76096, 0)
+material_override = SubResource("ShaderMaterial_nlrn3")
+mesh = SubResource("BoxMesh_nqafo")
+skeleton = NodePath("../..")

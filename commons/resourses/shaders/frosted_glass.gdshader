@@ -1,51 +1,46 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+render_mode diffuse_burley, specular_schlick_ggx, blend_mix;
 
-// For Godot 4, we need to use a different approach for screen effects
-uniform sampler2D frosted_texture : hint_default_white, repeat_enable; // Your frosted glass texture for distortion
-uniform float brightness : hint_range(0.0, 2.0) = 1.0; // Brightness adjustment
-uniform float distortion_intensity : hint_range(0.0, 0.1) = 0.02; // Strength of distortion
-uniform float blur_amount : hint_range(0.0, 5.0) = 1.0; // Manual blur amount
-uniform vec4 tint_color : source_color = vec4(1.0, 1.0, 1.0, 0.8); // Glass tint
-uniform float transparency : hint_range(0.0, 1.0) = 0.8; // Overall transparency
+group_uniforms albedo;
+uniform vec4 albedo : source_color = vec4(1.0, 1.0, 1.0, 0.0);
+uniform sampler2D albedo_texture : source_color, hint_default_white;
 
-varying vec2 screen_uv;
+group_uniforms roughness;
+uniform float roughness : hint_range(0.0, 1.0) = 0.15;
+uniform sampler2D roughness_texture : hint_roughness_r;
 
-void vertex() {
-	// Calculate screen UV coordinates
-	vec4 clip_pos = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
-	screen_uv = (clip_pos.xy / clip_pos.w) * 0.5 + 0.5;
+group_uniforms normal;
+uniform float normal_strength : hint_range(-16.0, 16.0) = 1.0;
+uniform sampler2D normal_map : hint_normal;
+
+group_uniforms misc;
+uniform vec4 edge_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+float SchlickFresnel(float u) {
+	float m = 1.0 - u;
+	float m2 = m * m;
+	return m2 * m2 * m;
 }
 
 void fragment() {
-	// Use the frosted texture for distortion
-	vec2 distortion = texture(frosted_texture, UV).rg - 0.5; // Center distortion values around 0
-	distortion = normalize(distortion) * distortion_intensity; // Normalize to prevent stretching
-
-	// Apply the distortion to the UV coordinates
-	vec2 distorted_uv = screen_uv + distortion;
-
-	// Since we can't easily access screen texture in Godot 4, we'll create a frosted glass effect
-	// using the material properties and distortion
-
-	// Create a base glass-like appearance
-	vec3 base_color = tint_color.rgb;
-
-	// Add some distortion-based color variation
-	float distortion_factor = length(distortion) * 10.0;
-	base_color += vec3(distortion_factor * 0.1);
-
-	// Apply brightness
-	vec3 final_color = base_color * brightness;
-
-	// Set the material properties for a glass-like appearance
-	ALBEDO = final_color;
-	ALPHA = transparency * tint_color.a;
-	METALLIC = 0.0;
-	ROUGHNESS = 0.1;
-	SPECULAR = 0.8;
-
-	// Add some refraction-like effect using the normal
-	vec3 distorted_normal = vec3(distortion.x, distortion.y, 1.0);
-	NORMAL = normalize(distorted_normal);
+	// calculate fresnel values
+	float VdotN = dot(VIEW, NORMAL);
+	float fresnel = clamp(SchlickFresnel(VdotN), 0.0, 1.0);
+	
+	// sample and mix textures
+	vec4 _albedo = texture(albedo_texture, UV) * albedo;
+	float _roughness = texture(roughness_texture, UV).r * roughness;
+	
+	// apply glass look
+	float a = mix(0.001, 1.0, _albedo.a);
+	ALPHA = mix(fresnel * edge_color.a, 1.0, a);
+	ALBEDO = mix(edge_color.rgb * edge_color.a, _albedo.rgb, a);
+	
+	ROUGHNESS = _roughness;
+	NORMAL_MAP = texture(normal_map, UV).xyz;
+	NORMAL_MAP_DEPTH = normal_strength;
+	
+	// function to compensate specular for alpha blend
+	// 0.5 * ALPHA^-0.5
+	SPECULAR = 0.5 * inversesqrt(ALPHA);
 }

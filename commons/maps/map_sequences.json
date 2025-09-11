@@ -132,7 +132,7 @@
 			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
 		},
 		
-		"meshestextures": {
+		"patterngeneration": {
 			"name": "Meshes & Textures",
 			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
 			"difficulty": "beginner", 
@@ -144,17 +144,35 @@
 				"Radiodrama narrative integration"
 			],
 			"temps": [
-				"Meshes_Two", 
-				"Meshes_Three",
+				"PatternGeneration_Wang_Tiles",
+				"PatternGeneration_Penrose_Tilings",
+				"PatternGeneration_Diffusion_Limited_Aggregation_DLA",
+				"PatternGeneration_Typography_Generation",
+				"PatternGeneration_Narrative_Generation"
+			],
+			"content": [
+				" One : Grids Checkers and Rotations",
+				" Two : Lines, Stripes and Sines", 
+				" Three : Tartan",
+				" Four : Glass - Wall, Water - Floor, two sections",
+				" Five : Noise and Bump",
+				" Six : Fetish Material - Torus",
+				" Seven : Penrose Titling and Wang Tiles",
 			],
 			"maps": [
-				"Meshes_One",
-				"Meshes_Four fetishtorus"
+				"Pattern_Generation_One",
+
+				"Pattern_Generation_Two", 
+				"Pattern_Generation_Three",
+				"Pattern_Generation_Four",
+				"Pattern_Generation_Five",
+				"Pattern_Generation_Six",
+				"Pattern_Generation_Seven",			
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["array_tutorial"],
 			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
-			"lab_map": "Lab/map_data_post_meshes"
+			"lab_map": "Lab/map_data_post_patterngeneration"
 		},
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
@@ -307,6 +325,11 @@
 				"Fluid and particle dynamics"
 			],
 			"temps": [
+
+			],
+			"maps": [
+				"PhysicsSimulation_Newton_s_Laws",
+				"PhysicsSimulation_Particle_Systems",
 				"PhysicsSimulation_Vector_Fields",
 				"PhysicsSimulation_Three_Body_Problem",
 				"PhysicsSimulation_Bouncing_Ball_Physics",
@@ -320,11 +343,7 @@
 				"PhysicsSimulation_Force_Fields",
 				"PhysicsSimulation_Finite_Element_Method_FEM",
 				"PhysicsSimulation_Mass_Spring_Damper",
-				"PhysicsSimulation_Cloth_Simulation",
-			],
-			"maps": [
-				"PhysicsSimulation_Newton_s_Laws",
-				"PhysicsSimulation_Particle_Systems"
+				"PhysicsSimulation_Cloth_Simulation",				
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_physicssimulation",
@@ -432,29 +451,7 @@
 			"unlock_requirements": ["lsystems"],
 			"completion_rewards": ["swarm_coordinator_badge", "collective_intelligence_badge"]
 		},
-		"patterngeneration": {
-			"name": "Pattern Generation",
-			"description": "Explore algorithmic pattern creation and tessellation systems",
-			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
-			"learning_objectives": [
-				"Tessellation algorithms",
-				"Pattern generation systems",
-				"Typography algorithms",
-				"Narrative generation"
-			],
-			"maps": [
-				"PatternGeneration_Wang_Tiles",
-				"PatternGeneration_Penrose_Tilings",
-				"PatternGeneration_Diffusion_Limited_Aggregation_DLA",
-				"PatternGeneration_Typography_Generation",
-				"PatternGeneration_Narrative_Generation"
-			],
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_patterngeneration",
-			"unlock_requirements": ["swarmintelligence"],
-			"completion_rewards": ["pattern_architect_badge", "tessellation_specialist_badge"]
-		},
+
 		"proceduralgeneration": {
 			"name": "Procedural Generation",
 			"description": "Explore advanced procedural content generation systems",

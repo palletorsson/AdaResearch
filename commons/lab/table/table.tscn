@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2l3d8lxfwiyc"]
+
+[ext_resource type="Script" uid="uid://ckdohotke04x4" path="res://commons/lab/table/table.gd" id="1_im1eo"]
+
+[node name="Table" type="Node3D"]
+script = ExtResource("1_im1eo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.45357)

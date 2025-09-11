@@ -1,0 +1,198 @@
+[gd_scene load_steps=23 format=3 uid="uid://b61gku282qcs0"]
+
+[ext_resource type="Shader" uid="uid://c1t2n5kkfm7l3" path="res://algorithms/patterngeneration/gridscheckers/checkers.gdshader" id="1_friol"]
+[ext_resource type="Shader" uid="uid://ca0b28fh2swso" path="res://algorithms/patterngeneration/gridscheckers/diagonalstripes.gdshader" id="1_waw5b"]
+[ext_resource type="Shader" uid="uid://v14oia2sc00g" path="res://commons/resourses/shaders/plotter.gdshader" id="2_friol"]
+[ext_resource type="Shader" uid="uid://8t1f0ng2ghj2" path="res://algorithms/patterngeneration/glassdivider/frostglass.gdshader" id="3_friol"]
+[ext_resource type="Shader" uid="uid://cn6haqw16yd0n" path="res://commons/resourses/shaders/frosted_glass.gdshader" id="4_friol"]
+[ext_resource type="Shader" uid="uid://2s52pydnhqc3" path="res://commons/resourses/shaders/frostglass.gdshader" id="5_waw5b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j646v"]
+render_priority = 0
+shader = ExtResource("1_waw5b")
+shader_parameter/uv_scale = Vector2(2, 12)
+shader_parameter/stripe_width = 0.35
+shader_parameter/col_a = Color(0.02, 0.02, 0.08, 1)
+shader_parameter/col_b = Color(1, 0, 0.8, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Floor"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_Floor"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_Stand"]
+top_radius = 0.15
+bottom_radius = 0.25
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_Stand"]
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_waw5b"]
+render_priority = 0
+shader = ExtResource("1_friol")
+shader_parameter/uv_scale = Vector2(4, 1)
+shader_parameter/col_a = Color(0.05, 0.02, 0.08, 1)
+shader_parameter/col_b = Color(1, 1, 1, 1)
+shader_parameter/glow = 1.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_DividerPanel"]
+size = Vector3(0.05, 1.8, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_Divider"]
+size = Vector3(0.05, 1.8, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjhqm"]
+render_priority = 0
+shader = ExtResource("2_friol")
+shader_parameter/mytime = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/amplitude = 0.5
+shader_parameter/frequency = 2.0
+shader_parameter/noise_strength = 0.3
+shader_parameter/jitter_strength = 0.2
+shader_parameter/line_offset = 0.0
+shader_parameter/paper_color = Vector3(1, 1, 1)
+shader_parameter/line_color = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r5x20"]
+size = Vector3(0.05, 1.8, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hbs1"]
+render_priority = 0
+shader = ExtResource("3_friol")
+shader_parameter/glass_tint = Color(0.92, 0.98, 1, 0.96)
+shader_parameter/brightness = 1.0
+shader_parameter/roughness = 0.6
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/use_noise = true
+shader_parameter/noise_scale = 40.0
+shader_parameter/noise_speed = 0.0
+shader_parameter/noise_strength = 0.8
+shader_parameter/blur_enable = true
+shader_parameter/blur_radius_px = 2.5
+shader_parameter/blur_strength = 1.0
+shader_parameter/depth_fade = 0.8
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_waw5b"]
+size = Vector2(2, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5x20"]
+render_priority = 0
+shader = ExtResource("4_friol")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_7hbs1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8cucx"]
+render_priority = 0
+shader = ExtResource("5_waw5b")
+shader_parameter/distortion_strength = 0.05
+shader_parameter/speed = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_j646v"]
+
+[node name="OfficeScene" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("ShaderMaterial_j646v")
+mesh = SubResource("BoxMesh_Floor")
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_Floor")
+
+[node name="OfficeDivider" type="Node3D" parent="."]
+
+[node name="DividerStand" type="StaticBody3D" parent="OfficeDivider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="StandMesh" type="MeshInstance3D" parent="OfficeDivider/DividerStand"]
+mesh = SubResource("CylinderMesh_Stand")
+
+[node name="StandCollision" type="CollisionShape3D" parent="OfficeDivider/DividerStand"]
+shape = SubResource("CylinderShape3D_Stand")
+
+[node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+
+[node name="PanelMesh" type="MeshInstance3D" parent="OfficeDivider/DividerPanel"]
+material_override = SubResource("ShaderMaterial_waw5b")
+mesh = SubResource("BoxMesh_DividerPanel")
+
+[node name="PanelMesh" type="MeshInstance3D" parent="OfficeDivider/DividerPanel/PanelMesh"]
+material_override = SubResource("ShaderMaterial_waw5b")
+mesh = SubResource("BoxMesh_DividerPanel")
+
+[node name="PanelCollision" type="CollisionShape3D" parent="OfficeDivider/DividerPanel"]
+shape = SubResource("BoxShape3D_Divider")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 8, 12, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="OfficeDivider2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62218, 0, 0)
+
+[node name="DividerStand" type="StaticBody3D" parent="OfficeDivider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="StandMesh" type="MeshInstance3D" parent="OfficeDivider2/DividerStand"]
+mesh = SubResource("CylinderMesh_Stand")
+
+[node name="StandCollision" type="CollisionShape3D" parent="OfficeDivider2/DividerStand"]
+shape = SubResource("CylinderShape3D_Stand")
+
+[node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+
+[node name="PanelCollision" type="CollisionShape3D" parent="OfficeDivider2/DividerPanel"]
+shape = SubResource("BoxShape3D_Divider")
+
+[node name="PanelMesh2" type="MeshInstance3D" parent="OfficeDivider2/DividerPanel"]
+material_override = SubResource("ShaderMaterial_rjhqm")
+mesh = SubResource("BoxMesh_r5x20")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OfficeDivider2"]
+
+[node name="OfficeDivider3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73459, 0, 0)
+
+[node name="DividerStand" type="StaticBody3D" parent="OfficeDivider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="StandMesh" type="MeshInstance3D" parent="OfficeDivider3/DividerStand"]
+mesh = SubResource("CylinderMesh_Stand")
+
+[node name="StandCollision" type="CollisionShape3D" parent="OfficeDivider3/DividerStand"]
+shape = SubResource("CylinderShape3D_Stand")
+
+[node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+
+[node name="PanelCollision" type="CollisionShape3D" parent="OfficeDivider3/DividerPanel"]
+shape = SubResource("BoxShape3D_Divider")
+
+[node name="PanelMesh3" type="MeshInstance3D" parent="OfficeDivider3/DividerPanel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.0993009, 0)
+material_override = SubResource("ShaderMaterial_7hbs1")
+mesh = SubResource("PlaneMesh_waw5b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OfficeDivider3/DividerPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15836, 0, 0.280672)
+material_override = SubResource("ShaderMaterial_r5x20")
+mesh = SubResource("SphereMesh_7hbs1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OfficeDivider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.36505, 1.59412, 0)
+material_override = SubResource("ShaderMaterial_8cucx")
+mesh = SubResource("SphereMesh_j646v")

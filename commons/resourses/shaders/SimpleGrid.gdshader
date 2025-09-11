@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, diffuse_burley, specular_schlick_ggx;
 
 // Simple uniforms for educational use
 uniform vec4 fill_color : source_color = vec4(0.2, 0.3, 0.8, 0.7);        // Inside face color

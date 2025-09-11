@@ -1,7 +1,7 @@
 shader_type spatial;
 
 // VR-optimized Grid shader - forces complete opacity
-render_mode unshaded, cull_disabled, depth_draw_always ;
+render_mode unshaded, depth_draw_always ;
 
 // Uniforms
 uniform vec4 modelColor : source_color = vec4(0.5, 0.5, 0.5, 1.0);

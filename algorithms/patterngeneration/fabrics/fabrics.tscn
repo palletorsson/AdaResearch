@@ -1,0 +1,187 @@
+[gd_scene load_steps=22 format=3 uid="uid://cac0urxooc0u3"]
+
+[ext_resource type="Shader" uid="uid://y1fcfjs8yt7l" path="res://algorithms/patterngeneration/fabrics/wallpaper.gdshader" id="1_yyhok"]
+[ext_resource type="Shader" uid="uid://bn6jdw8qa0i6y" path="res://algorithms/patterngeneration/fabrics/normalstone.gdshader" id="2_tvsoc"]
+[ext_resource type="Shader" uid="uid://2u4p4yxwld04" path="res://algorithms/patterngeneration/fabrics/terrain.gdshader" id="3_yyhok"]
+[ext_resource type="Shader" uid="uid://dng3joxidpbi8" path="res://algorithms/patterngeneration/fabrics/displacement.gdshader" id="4_yyhok"]
+[ext_resource type="Shader" uid="uid://830rfocg1dnk" path="res://commons/resourses/shaders/tartan_pattern.gdshader" id="5_tvsoc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvd38"]
+render_priority = 0
+shader = ExtResource("1_yyhok")
+shader_parameter/time_scale = 1.142
+shader_parameter/pattern_scale = 4.37
+shader_parameter/turbulence_strength = 0.33
+shader_parameter/turbulence_offset = 0.255
+shader_parameter/base_color = Color(0.445, 0.92, 0.457, 1)
+shader_parameter/mid_color = Color(0.915, 0.537, 0.413, 1)
+shader_parameter/dark_color = Color(0.49, 0.038, 0.06, 1)
+shader_parameter/roughness = 0.41
+shader_parameter/metallic = 0.0
+shader_parameter/emission_strength = 0.086
+shader_parameter/animate = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlrn3"]
+size = Vector2(5, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36ff8"]
+render_priority = 0
+shader = ExtResource("1_yyhok")
+shader_parameter/time_scale = 1.0
+shader_parameter/pattern_scale = 5.0
+shader_parameter/turbulence_strength = 0.0
+shader_parameter/turbulence_offset = 0.0
+shader_parameter/base_color = Color(0.445, 0.92, 0.457, 1)
+shader_parameter/mid_color = Color(0.915, 0.537, 0.413, 1)
+shader_parameter/dark_color = Color(0.49, 0.038, 0.06, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/metallic = 0.0
+shader_parameter/emission_strength = 0.1
+shader_parameter/animate = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7kma8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7afui"]
+render_priority = 0
+shader = ExtResource("2_tvsoc")
+shader_parameter/time_scale = 1.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/height_scale = 1.0
+shader_parameter/detail_offset = 0.001
+shader_parameter/octaves = 7
+shader_parameter/displacement_strength = 0.1
+shader_parameter/base_color = Color(0.445, 0.92, 0.457, 1)
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/animate = false
+shader_parameter/use_vertex_displacement = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lw0fy"]
+size = Vector2(5, 5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nlrn3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wiot5"]
+render_priority = 0
+shader = ExtResource("3_yyhok")
+shader_parameter/time_scale = 1.0
+shader_parameter/noise_scale = 1.0
+shader_parameter/water_level = 0.4
+shader_parameter/terrain_height = 1.0
+shader_parameter/octaves = 7
+shader_parameter/vertex_displacement = 0.3
+shader_parameter/land_color = Color(0.2, 0.6, 0.2, 1)
+shader_parameter/water_color = Color(0, 0.2, 0.8, 1)
+shader_parameter/mountain_color = Color(0.5, 0.4, 0.3, 1)
+shader_parameter/beach_color = Color(0.8, 0.7, 0.4, 1)
+shader_parameter/roughness_land = 0.8
+shader_parameter/roughness_water = 0.1
+shader_parameter/roughness_mountain = 0.9
+shader_parameter/metallic_water = 0.1
+shader_parameter/mountain_threshold = 0.7
+shader_parameter/beach_threshold = 0.05
+shader_parameter/animate_terrain = false
+shader_parameter/use_vertex_displacement = true
+shader_parameter/foam_intensity = 0.3
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nqafo"]
+size = Vector2(5, 5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lw0fy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlrn3"]
+render_priority = 0
+shader = ExtResource("4_yyhok")
+shader_parameter/time_scale = 0.5
+shader_parameter/cell_scale = 8.181
+shader_parameter/displacement_strength = 0.5
+shader_parameter/animation_speed = 1.0
+shader_parameter/vertex_displacement = 0.1
+shader_parameter/base_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.3
+shader_parameter/metallic = 0.2
+shader_parameter/emission_strength = 0.3
+shader_parameter/base_alpha = 0.5
+shader_parameter/color_r = Color(1, 0, 0, 1)
+shader_parameter/color_g = Color(0, 1, 0, 1)
+shader_parameter/color_b = Color(1, 1, 1, 1)
+shader_parameter/animate = true
+shader_parameter/use_vertex_displacement = true
+shader_parameter/use_full_color = false
+shader_parameter/use_pattern_alpha = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u00w3"]
+size = Vector2(5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nqafo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0hea"]
+render_priority = 0
+shader = ExtResource("5_tvsoc")
+shader_parameter/color_yellow = Vector3(1, 0.8, 0)
+shader_parameter/color_red = Vector3(1, 0, 0)
+shader_parameter/color_black = Vector3(0, 0, 0)
+shader_parameter/grid_scale = 4.0
+shader_parameter/line_width = 0.1
+shader_parameter/stripe_width = 0.05
+
+[sub_resource type="TorusMesh" id="TorusMesh_fgebj"]
+
+[node name="FloorScene" type="Node3D"]
+
+[node name="FloorCollider" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCollider"]
+shape = SubResource("BoxShape3D_1")
+
+[node name="FloorSection1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -2.5)
+material_override = SubResource("ShaderMaterial_kvd38")
+mesh = SubResource("PlaneMesh_nlrn3")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45633, 0)
+material_override = SubResource("ShaderMaterial_36ff8")
+mesh = SubResource("BoxMesh_7kma8")
+skeleton = NodePath("../..")
+
+[node name="FloorSection2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+material_override = SubResource("ShaderMaterial_7afui")
+mesh = SubResource("PlaneMesh_lw0fy")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59228, 0)
+material_override = SubResource("ShaderMaterial_7afui")
+mesh = SubResource("SphereMesh_nlrn3")
+skeleton = NodePath("../..")
+
+[node name="FloorSection3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 2.5)
+material_override = SubResource("ShaderMaterial_wiot5")
+mesh = SubResource("PlaneMesh_nqafo")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.10564, 0)
+material_override = SubResource("ShaderMaterial_wiot5")
+mesh = SubResource("SphereMesh_lw0fy")
+skeleton = NodePath("../..")
+
+[node name="FloorSection4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+material_override = SubResource("ShaderMaterial_nlrn3")
+mesh = SubResource("PlaneMesh_u00w3")
+
+[node name="FloorSection5" type="MeshInstance3D" parent="FloorSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76096, 0)
+material_override = SubResource("ShaderMaterial_nlrn3")
+mesh = SubResource("BoxMesh_nqafo")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloorSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429124, 0)
+material_override = SubResource("ShaderMaterial_d0hea")
+mesh = SubResource("TorusMesh_fgebj")
