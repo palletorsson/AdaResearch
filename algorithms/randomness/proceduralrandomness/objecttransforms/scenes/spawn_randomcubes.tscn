@@ -13,6 +13,9 @@ shader_parameter/width = 8.68
 shader_parameter/blur = 0.581
 shader_parameter/emission_strength = 2.018
 shader_parameter/modelOpacity = 0.924
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_bhdw7"]
 

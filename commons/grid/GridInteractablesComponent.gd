@@ -145,7 +145,7 @@ func _load_single_artifact_registry(registry_path: String, validation_errors: Ar
 		grid_artifact_registry[lookup_name] = artifact_data
 		loaded_count += 1
 		
-		print("  → Registered artifact: %s ('%s')" % [lookup_name, artifact_data.get("name", "Unnamed")])
+		#print("  → Registered artifact: %s ('%s')" % [lookup_name, artifact_data.get("name", "Unnamed")])
 	
 	return loaded_count
 

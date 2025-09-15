@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://kxygnlpxjmju"]
+
+[ext_resource type="Script" uid="uid://diilbilo22t80" path="res://algorithms/randomness/walkingsphere/walkingsphere.gd" id="1_s1e75"]
+
+[node name="Walkingsphere" type="Node3D"]
+script = ExtResource("1_s1e75")
+modifier_mode = 2
+sphere_subdivisions = 4
+auto_evolve = true
+intensity = 0.5
+spike_count = 14
+spike_length = 0.6
+spike_taper = 0.1
+hill_count = 8
+hill_attraction_strength = 2.0
+hill_influence_radius = 2.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.99389)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.219608, 1, 1)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfj71yd65jqg"]
+
+[ext_resource type="Script" uid="uid://bsf73lbq8s7vb" path="res://algorithms/proceduralgeneration/dewcoveredfoliage/dewcoveredfoliage.gd" id="1_wqcte"]
+
+[node name="Dewcoveredfoliage" type="Node3D"]
+script = ExtResource("1_wqcte")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.23796)

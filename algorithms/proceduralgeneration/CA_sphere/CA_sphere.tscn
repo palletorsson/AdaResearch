@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1jpudhabea88"]
+
+[ext_resource type="Script" uid="uid://co66jqgcdn6yh" path="res://algorithms/proceduralgeneration/CA_sphere/CA_sphere.gd" id="1_26kao"]
+
+[node name="CaSphere" type="Node3D"]
+script = ExtResource("1_26kao")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.779)

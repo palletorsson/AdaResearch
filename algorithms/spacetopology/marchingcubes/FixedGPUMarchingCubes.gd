@@ -38,12 +38,16 @@ func _init():
 
 func initialize_gpu_resources():
 	"""Initialize GPU resources for compute shader"""
+	# Try different rendering device creation methods for VR compatibility
 	rd = RenderingServer.create_local_rendering_device()
 	
+	# If that fails, try getting the main rendering device
 	if not rd:
-		push_error("Failed to create local rendering device")
-		is_initialized = false
-		return
+		rd = RenderingServer.get_rendering_device()
+		if not rd:
+			push_error("Failed to create rendering device - VR compatibility issue")
+			is_initialized = false
+			return
 	
 	# Load compute shader
 	if not load_compute_shader():
@@ -343,31 +347,49 @@ func setup_buffers(density_data: PackedFloat32Array) -> bool:
 	# Create density buffer
 	var density_bytes = density_data.to_byte_array()
 	density_buffer = rd.storage_buffer_create(density_bytes.size())
+	if not density_buffer.is_valid():
+		push_error("Failed to create density buffer")
+		return false
 	# FIXED: Use 4-parameter buffer_update (buffer, offset, size, data)
 	rd.buffer_update(density_buffer, 0, density_bytes.size(), density_bytes)
 	
 	# Create vertex buffer (vec3 = 12 bytes per vertex)
 	var vertex_buffer_size = max_vertices * 12
 	vertex_buffer = rd.storage_buffer_create(vertex_buffer_size)
+	if not vertex_buffer.is_valid():
+		push_error("Failed to create vertex buffer")
+		return false
 	
 	# Create normal buffer (vec3 = 12 bytes per normal)
 	var normal_buffer_size = max_vertices * 12
 	normal_buffer = rd.storage_buffer_create(normal_buffer_size)
+	if not normal_buffer.is_valid():
+		push_error("Failed to create normal buffer")
+		return false
 	
 	# Create index buffer (uint = 4 bytes per index)
 	var index_buffer_size = max_vertices * 4
 	index_buffer = rd.storage_buffer_create(index_buffer_size)
+	if not index_buffer.is_valid():
+		push_error("Failed to create index buffer")
+		return false
 	
 	# Create counter buffer (2 uints = 8 bytes)
 	var counter_data = PackedInt32Array([0, 0])  # vertex_count, triangle_count
 	var counter_bytes = counter_data.to_byte_array()
 	counter_buffer = rd.storage_buffer_create(counter_bytes.size())
+	if not counter_buffer.is_valid():
+		push_error("Failed to create counter buffer")
+		return false
 	# FIXED: Use 4-parameter buffer_update (buffer, offset, size, data)
 	rd.buffer_update(counter_buffer, 0, counter_bytes.size(), counter_bytes)
 	
 	# Create uniform buffer
 	var uniform_data = create_uniform_data()
 	uniform_buffer = rd.uniform_buffer_create(uniform_data.size())
+	if not uniform_buffer.is_valid():
+		push_error("Failed to create uniform buffer")
+		return false
 	# FIXED: Use 4-parameter buffer_update (buffer, offset, size, data)
 	rd.buffer_update(uniform_buffer, 0, uniform_data.size(), uniform_data)
 	

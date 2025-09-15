@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgk4ibq683ahk"]
+[gd_scene load_steps=3 format=3 uid="uid://dgk4ibq683ahk"]
 
-[ext_resource type="Script" uid="uid://btf6twyii2nxl" path="res://algorithms/proceduralgeneration/tilepatterns/tilemate.gd" id="1_10ur6"]
 [ext_resource type="PackedScene" uid="uid://bbg22jt7d5vl4" path="res://algorithms/proceduralgeneration/tilepatterns/tilemate.tscn" id="2_10ur6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
@@ -9,7 +8,6 @@ viewport_path = NodePath("SubViewport")
 [node name="ColorPatternMateTexture" type="Node3D"]
 
 [node name="SubViewport" type="SubViewport" parent="."]
-script = ExtResource("1_10ur6")
 
 [node name="tilemate" parent="SubViewport" instance=ExtResource("2_10ur6")]
 

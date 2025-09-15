@@ -1274,6 +1274,41 @@
 			"interaction": "touch_to_activate",
 			"sequence": "procedural_generation_exploration"
 		},
+				"animalpatterns": {
+			"name": "animalpatterns",
+			"lookup_name": "animalpatterns",
+			"description": "animalpatterns",
+			"scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
+			"position": [3.0, 1.0, 9.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},
+		 "Marching_Cubes": {
+			"name": "Marching_Cubes",
+			"lookup_name": "Marching_Cubes",
+			"description": "Marching Cubes",
+			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
+			"position": [3.0, 1.0, 9.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},
+		"rhizome_cave_demo": {
+			"name": "rhizome_cave_demo",
+			"lookup_name": "rhizome_cave_demos",
+			"description": "rhizome_cave_demo",
+			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"position": [3.0, 1.0, 9.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},
+		
+		
 		 "fabrics": {
 			"name": "fabrics",
 			"lookup_name": "fabrics",
@@ -1388,6 +1423,18 @@
 			"interaction": "touch_to_activate",
 			"sequence": "procedural_generation_exploration"
 		},
+		 "walkingsphere": {
+			"name": "walkingsphere",
+			"lookup_name": "walkingsphere",
+			"description": "Spike, Random walk, Cellular automata  sphere",
+			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn",
+			"position": [1.0, 1.0, 10.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},
+		
 		"metaballs": {
 			"name": "Metaballs",
 			"lookup_name": "metaballs",
@@ -1498,6 +1545,18 @@
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
 		},
+		"flagdancer": {
+			"name": "flagdancer",
+			"lookup_name": "flagdancer",
+			"description": "Soft flagdancerms",
+			"scene": "res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
+			"position": [1.0, 1.0, 12.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration"
+		},		
+		
 		"softbody3d": {
 			"name": "softbody3d",
 			"lookup_name": "softbody3d",

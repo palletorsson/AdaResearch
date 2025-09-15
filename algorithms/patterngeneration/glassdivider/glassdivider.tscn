@@ -77,7 +77,7 @@ shader_parameter/blur_strength = 1.0
 shader_parameter/depth_fade = 0.8
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_waw5b"]
-size = Vector2(2, 4)
+size = Vector2(2, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5x20"]
 render_priority = 0
@@ -120,7 +120,7 @@ mesh = SubResource("CylinderMesh_Stand")
 shape = SubResource("CylinderShape3D_Stand")
 
 [node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.11688, 1.9, 0)
 
 [node name="PanelMesh" type="MeshInstance3D" parent="OfficeDivider/DividerPanel"]
 material_override = SubResource("ShaderMaterial_waw5b")
@@ -153,7 +153,7 @@ mesh = SubResource("CylinderMesh_Stand")
 shape = SubResource("CylinderShape3D_Stand")
 
 [node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2241, 1.9, 0)
 
 [node name="PanelCollision" type="CollisionShape3D" parent="OfficeDivider2/DividerPanel"]
 shape = SubResource("BoxShape3D_Divider")
@@ -177,7 +177,7 @@ mesh = SubResource("CylinderMesh_Stand")
 shape = SubResource("CylinderShape3D_Stand")
 
 [node name="DividerPanel" type="StaticBody3D" parent="OfficeDivider3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7124, 1.9, 0)
 
 [node name="PanelCollision" type="CollisionShape3D" parent="OfficeDivider3/DividerPanel"]
 shape = SubResource("BoxShape3D_Divider")

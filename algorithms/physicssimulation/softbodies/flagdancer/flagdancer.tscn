@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx8oetgmcq3wq"]
+
+[ext_resource type="Script" uid="uid://x8tkp3k6ywh6" path="res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.gd" id="1_81dem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81dem"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_81dem"]
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="Skin" id="Skin_81dem"]
+
+[node name="Boneflag" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0162468, 0.895624)
+
+[node name="FlagDancer" type="Node3D" parent="."]
+transform = Transform3D(0.999572, -0.0292583, 0, 0.0292583, 0.999572, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_81dem")
+
+[node name="FlagSkeleton" type="Skeleton3D" parent="FlagDancer"]
+
+[node name="SkinnedMeshInstance3D" type="MeshInstance3D" parent="FlagDancer"]
+material_override = SubResource("StandardMaterial3D_81dem")
+mesh = SubResource("QuadMesh_81dem")
+skin = SubResource("Skin_81dem")

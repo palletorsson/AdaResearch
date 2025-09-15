@@ -287,3 +287,4 @@ func _input(event):
 				_on_auto_regenerate_toggled(auto_regenerate)
 			KEY_ESCAPE:
 				get_tree().quit()
+

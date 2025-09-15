@@ -30,7 +30,7 @@ shader_parameter/col_ln = Color(1, 0.6, 0, 1)
 shader_parameter/glow = 1.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(5, 0.1, 5)
+size = Vector3(10, 0.1, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiot5"]
 render_priority = 0
@@ -41,7 +41,7 @@ shader_parameter/col_a = Color(0.02, 0.02, 0.08, 1)
 shader_parameter/col_b = Color(1, 0, 0.8, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3"]
-size = Vector3(5, 0.1, 5)
+size = Vector3(10, 0.1, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rvlub"]
 render_priority = 0
@@ -57,8 +57,9 @@ shader_parameter/glow = 1.2
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.45
 
-[sub_resource type="BoxMesh" id="BoxMesh_4"]
-size = Vector3(5, 0.1, 5)
+[sub_resource type="SphereMesh" id="SphereMesh_wiot5"]
+radius = 2.0
+height = 2.0
 
 [node name="FloorScene" type="Node3D"]
 
@@ -68,21 +69,21 @@ size = Vector3(5, 0.1, 5)
 shape = SubResource("BoxShape3D_1")
 
 [node name="FloorSection1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4.37607, -0.715593)
 material_override = SubResource("ShaderMaterial_74bsi")
 mesh = SubResource("BoxMesh_1")
 
 [node name="FloorSection2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.127, 0)
 material_override = SubResource("ShaderMaterial_7afui")
 mesh = SubResource("BoxMesh_2")
 
 [node name="FloorSection3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 0.20424, 0.978921, 0, -0.978921, 0.20424, 0, 1.546, -10.3729)
 material_override = SubResource("ShaderMaterial_wiot5")
 mesh = SubResource("BoxMesh_3")
 
 [node name="FloorSection4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 material_override = SubResource("ShaderMaterial_rvlub")
-mesh = SubResource("BoxMesh_4")
+mesh = SubResource("SphereMesh_wiot5")
