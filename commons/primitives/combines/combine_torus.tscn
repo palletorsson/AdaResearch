@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5bvaawn0quvi"]
+
+[ext_resource type="Script" uid="uid://dqyrxdopgprcr" path="res://commons/primitives/combines/combine_torus.gd" id="1_nvuvo"]
+
+[node name="CombineTorus" type="Node3D"]
+script = ExtResource("1_nvuvo")

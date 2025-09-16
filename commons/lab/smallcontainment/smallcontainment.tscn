@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://cyenyttx6qua1"]
 
-[ext_resource type="PackedScene" uid="uid://dqj0rbocrgwyj" path="res://commons/context/XYZcoordinates/xyz_gadget.tscn" id="1_2482f"]
-[ext_resource type="PackedScene" uid="uid://bapvfdrc33ea2" path="res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn" id="1_v6coo"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_2482f"]
+[ext_resource type="PackedScene" uid="uid://d2r31gpcpho3n" path="res://commons/primitives/point/grab_sphere_point_with_text.tscn" id="2_2482f"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
@@ -207,6 +207,9 @@ size = Vector3(0.2, 0.2, 0.005)
 [sub_resource type="BoxMesh" id="BoxMesh_3"]
 size = Vector3(0.2, 0.005, 0.2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2482f"]
+size = Vector3(0.200699, 0.0172729, 0.216248)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
 albedo_color = Color(1, 0, 0.8, 1)
 emission_enabled = true
@@ -246,9 +249,6 @@ top_radius = 0.008
 bottom_radius = 0.008
 height = 0.015
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(0.35, 0.35, 0.35)
-
 [node name="DesktopContainmentCube" type="Node3D"]
 script = SubResource("GDScript_1")
 
@@ -274,10 +274,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = SubResource("StandardMaterial3D_1")
 mesh = SubResource("BoxMesh_3")
 
-[node name="BottomWall" type="MeshInstance3D" parent="CubeStructure"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CubeStructure"]
+
+[node name="BottomWall" type="MeshInstance3D" parent="CubeStructure/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 material_override = SubResource("StandardMaterial3D_1")
 mesh = SubResource("BoxMesh_3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeStructure/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000587463, -0.107758, -0.00357056)
+shape = SubResource("BoxShape3D_2482f")
 
 [node name="ContainedSpecimen" type="MeshInstance3D" parent="CubeStructure"]
 visible = false
@@ -356,14 +363,9 @@ omni_range = 0.5
 material_override = SubResource("StandardMaterial3D_5")
 mesh = SubResource("CylinderMesh_1")
 
-[node name="XYZgadget" parent="CubeStructure/FieldProjector4" instance=ExtResource("1_2482f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0573014, -0.097902, 0)
+[node name="CubeScene" parent="." instance=ExtResource("1_2482f")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, -0.075261, 0)
 
-[node name="Point" parent="." instance=ExtResource("1_v6coo")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-
-[node name="InteractionArea" type="Area3D" parent="."]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
-shape = SubResource("BoxShape3D_1")
+[node name="GrabSphere" parent="." instance=ExtResource("2_2482f")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+freeze = true

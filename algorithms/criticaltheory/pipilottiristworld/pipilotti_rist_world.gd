@@ -176,24 +176,59 @@ func create_curved_projection_surface(position: Vector3, size: Vector2, arc_degr
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	
+	# Create vertices for the curved surface
+	var vertices = []
+	var normals = []
+	var uvs = []
+	
 	for i in range(segments + 1):
 		var angle_percent = float(i) / float(segments)
 		var angle = -arc_radians / 2.0 + arc_radians * angle_percent
 		
 		var x = radius * sin(angle)
 		var z = radius * cos(angle)
+		var normal = Vector3(sin(angle), 0, cos(angle)).normalized()
 		
 		# Bottom vertex
-		mesh.surface_set_normal(Vector3(sin(angle), 0, cos(angle)).normalized())
-		mesh.surface_set_uv(Vector2(angle_percent, 0))
-		mesh.surface_add_vertex(Vector3(x, -height/2.0, z))
+		vertices.append(Vector3(x, -height/2.0, z))
+		normals.append(normal)
+		uvs.append(Vector2(angle_percent, 0))
 		
 		# Top vertex
-		mesh.surface_set_normal(Vector3(sin(angle), 0, cos(angle)).normalized())
-		mesh.surface_set_uv(Vector2(angle_percent, 1))
-		mesh.surface_add_vertex(Vector3(x, height/2.0, z))
+		vertices.append(Vector3(x, height/2.0, z))
+		normals.append(normal)
+		uvs.append(Vector2(angle_percent, 1))
+	
+	# Create triangles
+	for i in range(segments):
+		var base = i * 2
+		var next_base = (i + 1) * 2
 		
-
+		# First triangle (bottom-left, top-left, bottom-right)
+		mesh.surface_set_normal(normals[base])
+		mesh.surface_set_uv(uvs[base])
+		mesh.surface_add_vertex(vertices[base])
+		
+		mesh.surface_set_normal(normals[base + 1])
+		mesh.surface_set_uv(uvs[base + 1])
+		mesh.surface_add_vertex(vertices[base + 1])
+		
+		mesh.surface_set_normal(normals[next_base])
+		mesh.surface_set_uv(uvs[next_base])
+		mesh.surface_add_vertex(vertices[next_base])
+		
+		# Second triangle (bottom-right, top-left, top-right)
+		mesh.surface_set_normal(normals[next_base])
+		mesh.surface_set_uv(uvs[next_base])
+		mesh.surface_add_vertex(vertices[next_base])
+		
+		mesh.surface_set_normal(normals[base + 1])
+		mesh.surface_set_uv(uvs[base + 1])
+		mesh.surface_add_vertex(vertices[base + 1])
+		
+		mesh.surface_set_normal(normals[next_base + 1])
+		mesh.surface_set_uv(uvs[next_base + 1])
+		mesh.surface_add_vertex(vertices[next_base + 1])
 		
 	mesh.surface_end()
 	

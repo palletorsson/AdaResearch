@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c26g0tdotd02l"]
+
+[ext_resource type="Script" uid="uid://gxgv2fh2wpx7" path="res://commons/primitives/point/point.gd" id="1_cn6s8"]
+[ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_sphere"]
+
+[node name="Point" type="Node3D"]
+script = ExtResource("1_cn6s8")
+
+[node name="GrabSphere" parent="." instance=ExtResource("2_sphere")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)
+visible = false

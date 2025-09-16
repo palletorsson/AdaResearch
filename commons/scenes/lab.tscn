@@ -1,29 +1,95 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=11 format=3 uid="uid://dbpjx3b6wajb4"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
+[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="2_1qoim"]
 [ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="2_labgrid"]
 [ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="3_cube"]
 [ext_resource type="Script" uid="uid://cx7oruy7bo3pt" path="res://commons/scenes/LabGridScene.gd" id="4_labscene"]
+[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="5_6e2p8"]
 [ext_resource type="Script" uid="uid://gx7u0v8c5iur" path="res://tests/audio_test.gd" id="5_f6pg2"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6e2p8"]
+shader = ExtResource("2_1qoim")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(1, 0.3, 0.8, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.1
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_x6klc"]
+sky_material = SubResource("ShaderMaterial_6e2p8")
+
+[sub_resource type="Environment" id="Environment_njeto"]
+background_mode = 2
+background_energy_multiplier = 1.43
+sky = SubResource("Sky_x6klc")
+ambient_light_source = 3
+ambient_light_color = Color(0.67207, 0.682537, 0.672356, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.16
+ssil_enabled = true
+glow_intensity = 1.67
+fog_enabled = true
+fog_light_color = Color(0.24544, 0.558192, 0.903878, 1)
+fog_light_energy = 1.73
+fog_sun_scatter = 3.5
+fog_density = 0.02
+fog_sky_affect = 0.885
+fog_height = -1.3
+adjustment_enabled = true
+adjustment_brightness = 0.92
+adjustment_contrast = 1.02
+adjustment_saturation = 1.01
+
 [node name="Base" instance=ExtResource("1_qxwn1")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_njeto")
 
 [node name="Label3D" parent="." index="3"]
 text = "Base - Lab Grid"
 
-[node name="LabGridSystem" type="Node3D" parent="." index="4"]
+[node name="LabGridSystem" type="Node3D" parent="." index="5"]
 script = ExtResource("2_labgrid")
 
 [node name="CubeScene" parent="LabGridSystem" index="0" instance=ExtResource("3_cube")]
 
-[node name="LabGridScene" type="Node3D" parent="." index="5"]
+[node name="ResetArea3D" parent="LabGridSystem" index="1" instance=ExtResource("5_6e2p8")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="LabGridScene" type="Node3D" parent="." index="6"]
+visible = false
 script = ExtResource("4_labscene")
 
-[node name="AudioTest" type="Node3D" parent="." index="7"]
-script = ExtResource("5_f6pg2")
-
-[node name="StaticBody3D" parent="." index="8"]
+[node name="StaticBody3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47427, 1, -1.13057)
 
 [node name="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.624792, 1.32355)
+
+[node name="AudioTest" type="Node3D" parent="." index="8"]
+script = ExtResource("5_f6pg2")

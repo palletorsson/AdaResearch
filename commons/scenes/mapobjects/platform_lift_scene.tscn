@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bufpsqfa8my06"]
+[gd_scene load_steps=7 format=3 uid="uid://bufpsqfa8my06"]
 
 [ext_resource type="Script" uid="uid://bwk6233x6yv5g" path="res://commons/scenes/mapobjects/platform.gd" id="1_4xfn4"]
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="2_rtdld"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nv4ip"]
 size = Vector3(1, 0.102539, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_376e8"]
+render_priority = 0
+shader = ExtResource("2_rtdld")
+shader_parameter/fill_color = Color(0.2, 0.3, 0.8, 0.7)
+shader_parameter/wireframe_color = Color(0, 1, 1, 1)
+shader_parameter/wireframe_width = 2.0
+shader_parameter/wireframe_brightness = 2.0
+shader_parameter/show_only_wireframe = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_35pab"]
 
@@ -22,6 +32,7 @@ shape = SubResource("BoxShape3D_nv4ip")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_376e8")
 mesh = SubResource("BoxMesh_35pab")
 
 [node name="DetectionArea" type="Area3D" parent="."]

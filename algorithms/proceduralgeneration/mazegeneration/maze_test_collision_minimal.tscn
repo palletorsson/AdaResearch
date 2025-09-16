@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://maze_collision_test_minimal"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/mazegeneration/maze_generator.gd" id="1_maze"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.2)
+
+[node name="MazeTestCollisionMinimal" type="Node3D"]
+
+[node name="MazeGenerator" type="Node3D" parent="."]
+script = ExtResource("1_maze")
+maze_width = 15
+maze_height = 15
+cell_size = 1.0
+wall_height = 2.0
+generation_speed = 0.1
+show_generation = true

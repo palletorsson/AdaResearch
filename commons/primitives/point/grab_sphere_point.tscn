@@ -1,13 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cu0qtodekjr5r"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_1t2g7"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_3uxjj"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/cubes/grab_sphere.gd" id="2_3uxjj"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_nukvf"]
 
-[sub_resource type="StandardMaterial3D" id="10"]
-albedo_color = Color(0.2, 0.2, 0.8, 1)
-metallic = 0.2
-roughness = 0.4
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
+albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
 radius = 0.0455009
@@ -26,7 +24,8 @@ rings = 16
 
 [node name="GrabSphere" instance=ExtResource("1_1t2g7")]
 script = ExtResource("2_3uxjj")
-alternate_material = SubResource("10")
+alternate_material = SubResource("StandardMaterial3D_nukvf")
+alter_freeze = true
 ranged_grab_method = 0
 second_hand_grab = 2
 

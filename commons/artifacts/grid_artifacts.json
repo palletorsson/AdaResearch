@@ -18,6 +18,19 @@
 			"description": "a point",
 			"scene": "res://commons/primitives/point/point.tscn",
 		},
+		"grab_sphere_point_with_text": {
+			"name": "grab_sphere_point_with_text",
+			"lookup_name": "grab_sphere_point_with_text",
+			"description": "a grab_sphere_point_with_text",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
+		},
+		"line": {
+			"name": "line",
+			"lookup_name": "line",
+			"description": "line",
+			"scene": "res://commons/primitives/line/line.tscn",
+		},		
+		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
 			"lookup_name": "animatedcubebuilder",
@@ -87,6 +100,18 @@
 			"description": "A torus",
 			"scene": "res://commons/primitives/torus/torus.tscn",
 		},	
+		"combine_primitives": {
+			"name": "combine_primitives",
+			"lookup_name": "combine_primitives",
+			"description": "combine_primitives",
+			"scene": "res://commons/primitives/combines/combine_primitives.tscn",
+		},	
+		"combine_torus": {
+			"name": "combine_torus",
+			"lookup_name": "combine_torus",
+			"description": "combine_torus",
+			"scene": "res://commons/primitives/combines/combine_torus.tscn",
+		},	
 		
 		"pyramid": {
 			"name": "pyramid",
@@ -149,6 +174,12 @@
 			"description": "A truncatedtetrahedron",
 			"scene": "res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn",
 		},		
+		"modernpolysolid": {
+			"name": "modernpolysolid",
+			"lookup_name": "modernpolysolid",
+			"description": "A modernpolysolid",
+			"scene": "res://commons/primitives/modernpolysolid/modernpolysolid.tscn",
+		},	
 		
 		"roughrock": {
 			"name": "roughrock",
@@ -156,6 +187,13 @@
 			"description": "A roughrock",
 			"scene": "res://commons/primitives/roughrock/roughrock.tscn",
 		},	
+		"crystal": {
+			"name": "crystal",
+			"lookup_name": "crystal",
+			"description": "A crystal",
+			"scene": "res://commons/primitives/crystal/crystal.tscn",
+		},	
+
 		"diamondtoruscollection": {
 			"name": "diamondtoruscollection",
 			"lookup_name": "diamondtoruscollection",
@@ -1512,6 +1550,40 @@
 			"interaction": "touch_to_activate",
 			"sequence": "procedural_generation_exploration"
 		},
+		"WFCSculptureGenerator": {
+			"name": "WFCSculptureGenerator",
+			"lookup_name": "WFCSculptureGenerator",
+			"description": "WFCSculptureGenerator",
+			"scene": "res://algorithms/proceduralgeneration/WFCSculptureGenerator/WFCSculptureGenerator.tscn",
+			"position": [2.0, 1.0, 11.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},	
+		"WFC3DGenerator": {
+			"name": "WWFC3DGeneratorr",
+			"lookup_name": "WFC3DGenerator",
+			"description": "WFC3DGenerator",
+			"scene": "res://algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn",
+			"position": [2.0, 1.0, 11.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},	
+		"spherenetwork": {
+			"name": "spherenetwork",
+			"lookup_name": "spherenetwork",
+			"description": "spherenetwork",
+			"scene": "res://algorithms/proceduralgeneration/spherenetwork/spherenetwork.tscn",
+			"position": [2.0, 1.0, 11.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "procedural_generation_exploration"
+		},						
+		
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",
 			"lookup_name": "branching_growth_algorithm",
@@ -1706,6 +1778,18 @@
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
 		},
+		"fuzzy_cloud": {
+			"name": "fuzzy_cloud",
+			"lookup_name": "fuzzy_cloud",
+			"description": "fuzzy_cloud",
+			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscncn",
+			"position": [3.0, 1.0, 13.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+			"interaction": "touch_to_activate",
+			"sequence": "physics_simulation_exploration"
+		},
+		
 		"numerical_integration": {
 			"name": "Numerical Integration",
 			"lookup_name": "numerical_integration",
@@ -2090,6 +2174,17 @@
 				"light_position": [0, 1.5, 0]
 			}
 		},
+		"AnickaYiLab": {
+			"name": "AnickaYiLab",
+			"lookup_name": "AnickaYiLab",
+			"description": "AnickaYiLab",
+			"scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
+			"position": [5.0, 1.0, 2.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+	 
+		},		
+
 		"surreal_kinetic_sculpture": {
 			"name": "Surreal Kinetic Sculpture",
 			"lookup_name": "surreal_kinetic_sculpture",
@@ -3386,6 +3481,16 @@
 				"light_position": [0, 1.3, 0]
 			}
 		},
+		"entropy_visualization": {
+			"name": "entropy_visualization",
+			"lookup_name": "entropy_visualization",
+			"description": "entropy_visualization",
+			"scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
+			"position": [11.0, 1.0, 15.0],
+			"rotation": [0.0, 0.0, 0.0],
+			"scale": [1.0, 1.0, 1.0],
+		},
+		
 		"buffergeometryparticles": {
 			"name": "Buffer Geometry Particles",
 			"lookup_name": "buffergeometryparticles",
@@ -3398,13 +3503,7 @@
 			"sequence": "shader_exploration",
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 1.0, 0.8],
-				"light_intensity": 1.3,
-				"light_range": 3.8,
-				"light_position": [0, 1.6, 0]
-			}
+	 
 		},
 		"dynamiccubemap": {
 			"name": "Dynamic Cube Map",

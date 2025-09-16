@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c20ouucifng0g"]
+
+[ext_resource type="Script" uid="uid://hpb8kq3xbmys" path="res://commons/primitives/modernpolysolid/modernpolysolid.gd" id="1_fwjqm"]
+
+[node name="Modernpolysolid" type="Node3D"]
+script = ExtResource("1_fwjqm")

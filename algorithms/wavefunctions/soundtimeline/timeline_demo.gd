@@ -107,10 +107,11 @@ func generate_frequency_sweep(config: Dictionary):
 	
 	# Get the playback object after starting playback
 	var generator = player.get_stream_playback() as AudioStreamGeneratorPlayback
+	var duration = config["duration"]  # Move duration outside the if block
+	
 	if generator:
 		# Generate sweep samples
 		var sample_rate = 44100
-		var duration = config["duration"]
 		var samples_count = int(sample_rate * duration)
 		
 		var freq_start = config["freq_start"]

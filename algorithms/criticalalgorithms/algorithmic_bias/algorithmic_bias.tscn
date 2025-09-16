@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://a5x9k7v6m5nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://5yak7v6m5nqr"]
 
-[ext_resource type="Script" path="res://algorithms/CriticalAlgorithms/algorithmic_bias/AlgorithmicBias.gd" id="1_bias"]
+[ext_resource type="Script" uid="uid://b33nm44hrk84g" path="res://algorithms/CriticalAlgorithms/algorithmic_bias/AlgorithmicBias.gd" id="1_bias"]
 
 [node name="AlgorithmicBias" type="Node3D"]
 script = ExtResource("1_bias")
@@ -18,8 +18,6 @@ light_energy = 1.2
 
 [node name="BiasIndicator" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
-top_radius = 0.3
-bottom_radius = 0.3
 height = 1.0
 
 [node name="FairnessMetric" type="CSGBox3D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=17 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -14,34 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ht3b1"]
-sky_top_color = Color(0.959117, 0.975689, 0.997015, 1)
-sky_horizon_color = Color(0.669531, 0.645818, 0.675515, 1)
-sky_curve = 0.356762
-ground_bottom_color = Color(0.856927, 0.331432, 0.528536, 1)
-ground_horizon_color = Color(0.838783, 0.578815, 0.545239, 1)
-
-[sub_resource type="Sky" id="Sky_7vr88"]
-sky_material = SubResource("ProceduralSkyMaterial_ht3b1")
-
-[sub_resource type="Environment" id="Environment_7xvbx"]
-background_mode = 2
-sky = SubResource("Sky_7vr88")
-ambient_light_source = 3
-ambient_light_color = Color(0.506377, 0.515376, 0.472721, 1)
-tonemap_mode = 2
-tonemap_exposure = 0.16
-ssr_enabled = true
-ssil_enabled = true
-glow_enabled = true
-fog_enabled = true
-fog_sun_scatter = 3.5
-fog_sky_affect = 0.885
-adjustment_enabled = true
-adjustment_brightness = 0.92
-adjustment_contrast = 1.29
-adjustment_saturation = 1.28
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
 
@@ -49,18 +21,15 @@ size = Vector3(0.126328, 0.0757446, 0.10495)
 size = Vector3(0.118164, 0.102966, 0.12796)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qiixw"]
-size = Vector3(2.88065, 0.12793, 2.54959)
+size = Vector3(4.77321, 0.12793, 3.00417)
 
 [node name="Base" instance=ExtResource("1_v5jw7")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
-environment = SubResource("Environment_7xvbx")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="0"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="XROrigin3D" parent="." index="2"]
+[node name="XROrigin3D" parent="." index="1"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 9.20941, 0)
 
 [node name="FunctionGazePointer" parent="XROrigin3D/XRCamera3D" index="0" instance=ExtResource("3_rldw0")]
@@ -119,21 +88,21 @@ shape = SubResource("BoxShape3D_rldw0")
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
 
-[node name="Label3D" type="Label3D" parent="." index="3"]
+[node name="Label3D" type="Label3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
 text = "Base "
 
-[node name="BaseSceneAddon" type="Node3D" parent="." index="4"]
+[node name="BaseSceneAddon" type="Node3D" parent="." index="3"]
 script = ExtResource("12_qiixw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.436035, 1.32355)
 shape = SubResource("BoxShape3D_qiixw")
 
-[node name="env" type="Node3D" parent="." index="6"]
+[node name="env" type="Node3D" parent="." index="5"]
 visible = false
 script = ExtResource("2_lr6fa")
 particle_density = -0.98

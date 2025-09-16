@@ -4,7 +4,7 @@ class_name WaterDynamics
 var time: float = 0.0
 var wave_speed: float = 2.0
 var flow_intensity: float = 1.0
-var particle_count: int = 50
+var particle_count: int = 200
 
 func _ready():
 	# Initialize water dynamics simulation

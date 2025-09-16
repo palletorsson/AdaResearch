@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3k8m9v2x7nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://d3k8nav2x7nqr"]
 
-[ext_resource type="Script" path="res://algorithms/computationalgeometry/closest_pair/ClosestPair.gd" id="1_closest_pair"]
+[ext_resource type="Script" uid="uid://d1wmusjghhqop" path="res://algorithms/computationalgeometry/closest_pair/ClosestPair.gd" id="1_closest_pair"]
 
 [node name="ClosestPair" type="Node3D"]
 script = ExtResource("1_closest_pair")
@@ -19,11 +19,9 @@ shadow_enabled = true
 [node name="DistanceLines" type="Node3D" parent="."]
 
 [node name="DivisionLine" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 size = Vector3(0.1, 10, 0.1)
 
 [node name="ClosestPairLine" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.1
 height = 1.0
 

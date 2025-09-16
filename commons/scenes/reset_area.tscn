@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_xru1j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4bxhn"]
-size = Vector3(1213.1, 1, 932.564)
+size = Vector3(1000, 1, 1000)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t57yy"]
 render_priority = 0
@@ -21,21 +21,21 @@ shader_parameter/rim_power = 3.0
 shader_parameter/distortion_strength = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_dvv38"]
+size = Vector3(100, 1, 100)
 
 [node name="Reset" type="Node3D"]
 script = ExtResource("1_4bxhn")
 
 [node name="ResetArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.23929, 0)
 collision_layer = 0
 collision_mask = 524288
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="ResetArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -332.978, -0.302122, -203.149)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 shape = SubResource("BoxShape3D_4bxhn")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54794, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.6, 0)
 material_override = SubResource("ShaderMaterial_t57yy")
 gi_mode = 0
 mesh = SubResource("BoxMesh_dvv38")

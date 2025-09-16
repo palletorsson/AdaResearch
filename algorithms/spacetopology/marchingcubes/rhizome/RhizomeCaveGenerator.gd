@@ -1,4 +1,42 @@
-# MarchingCubesGenerator.gd - Add this async method to your existing MarchingCubesGenerator class
+# RhizomeCaveGenerator.gd - Rhizome-based cave generation using marching cubes
+extends Node3D
+class_name RhizomeCaveGenerator
+
+# Configuration
+@export var threshold: float = 0.5
+@export var chunk_size: Vector3i = Vector3i(32, 32, 32)
+@export var voxel_scale: float = 1.0
+
+# VoxelChunk class
+class VoxelChunk:
+	var chunk_size: Vector3i
+	var voxel_scale: float
+	var density_data: Array[Array[Array]]
+	
+	func _init(size: Vector3i, scale: float):
+		chunk_size = size
+		voxel_scale = scale
+		# Initialize 3D array
+		density_data = []
+		for x in size.x:
+			density_data.append([])
+			for y in size.y:
+				density_data[x].append([])
+				for z in size.z:
+					density_data[x][y].append(0.0)
+	
+	func get_density(pos: Vector3i) -> float:
+		if pos.x >= 0 and pos.x < chunk_size.x and \
+		   pos.y >= 0 and pos.y < chunk_size.y and \
+		   pos.z >= 0 and pos.z < chunk_size.z:
+			return density_data[pos.x][pos.y][pos.z]
+		return 1.0
+	
+	func set_density(pos: Vector3i, value: float):
+		if pos.x >= 0 and pos.x < chunk_size.x and \
+		   pos.y >= 0 and pos.y < chunk_size.y and \
+		   pos.z >= 0 and pos.z < chunk_size.z:
+			density_data[pos.x][pos.y][pos.z] = value
 
 # Async version of generate_mesh_from_chunk
 func generate_mesh_from_chunk_async(chunk: VoxelChunk, max_time_ms: float = 8.0) -> ArrayMesh:
@@ -161,11 +199,11 @@ func calculate_normal(chunk: VoxelChunk, world_pos: Vector3) -> Vector3:
 	var epsilon = chunk.voxel_scale * 0.5
 	
 	# Sample density at offset positions
-	var dx = get_density_at_world_pos(chunk, world_pos + Vector3(epsilon, 0, 0)) - 
+	var dx = get_density_at_world_pos(chunk, world_pos + Vector3(epsilon, 0, 0)) - \
 			 get_density_at_world_pos(chunk, world_pos - Vector3(epsilon, 0, 0))
-	var dy = get_density_at_world_pos(chunk, world_pos + Vector3(0, epsilon, 0)) - 
+	var dy = get_density_at_world_pos(chunk, world_pos + Vector3(0, epsilon, 0)) - \
 			 get_density_at_world_pos(chunk, world_pos - Vector3(0, epsilon, 0))
-	var dz = get_density_at_world_pos(chunk, world_pos + Vector3(0, 0, epsilon)) - 
+	var dz = get_density_at_world_pos(chunk, world_pos + Vector3(0, 0, epsilon)) - \
 			 get_density_at_world_pos(chunk, world_pos - Vector3(0, 0, epsilon))
 	
 	var normal = Vector3(dx, dy, dz).normalized()
@@ -186,8 +224,8 @@ func get_density_at_world_pos(chunk: VoxelChunk, world_pos: Vector3) -> float:
 	)
 	
 	# Bounds check
-	if voxel_pos.x < 0 or voxel_pos.x >= chunk.chunk_size.x or
-	   voxel_pos.y < 0 or voxel_pos.y >= chunk.chunk_size.y or
+	if voxel_pos.x < 0 or voxel_pos.x >= chunk.chunk_size.x or \
+	   voxel_pos.y < 0 or voxel_pos.y >= chunk.chunk_size.y or \
 	   voxel_pos.z < 0 or voxel_pos.z >= chunk.chunk_size.z:
 		return 1.0  # Outside bounds = solid
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7r5upmpm2rrm"]
+[gd_scene load_steps=12 format=3 uid="uid://c7r5upmpm2rrm"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_u82vu"]
 [ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_4w1i0"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_tfadk"]
+[ext_resource type="Script" uid="uid://cegq55d1jncwf" path="res://commons/primitives/cubes/text_node.gd" id="6_ckwi5"]
 [ext_resource type="PackedScene" uid="uid://801v8wjrvkgv" path="res://commons/resourses/utilities/displayobjectposition/displayobjectposition.tscn" id="6_w7h7a"]
 
 [sub_resource type="BoxShape3D" id="7"]
@@ -14,6 +15,8 @@ albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="8"]
 size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvu24"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_w7h7a"]
 radius = 0.05
@@ -52,10 +55,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994309, 0.331825, 0)
 
 [node name="TrackBall" type="MeshInstance3D" parent="Blade/Top" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00344, 0, 0)
+material_override = SubResource("StandardMaterial3D_rvu24")
 mesh = SubResource("SphereMesh_w7h7a")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Blade/Top/TrackBall" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.129813, 0, 0)
+light_color = Color(1, 0, 1, 1)
+
+[node name="TextNode" type="Node3D" parent="Blade/Top/TrackBall" index="1"]
+script = ExtResource("6_ckwi5")
+manifesto_text = "o ooo o o o o o o o o o oo o o  o o ooo o o o o o o o o o o o o o o o o o o o ooo o o o o o oooo oo o o o"
 
 [node name="Blade" type="MeshInstance3D" parent="Blade" index="1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.222, 0, 0)
 mesh = SubResource("CylinderMesh_ckwi5")
 skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9703)

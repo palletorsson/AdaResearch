@@ -34,28 +34,28 @@ void fragment() {
     vec3 dBaryCoordX = dFdx(baryCoord);
     vec3 dBaryCoordY = dFdy(baryCoord);
     vec3 dBaryCoord = sqrt(dBaryCoordX * dBaryCoordX + dBaryCoordY * dBaryCoordY);
-    
+
     // Prevent division by zero
     dBaryCoord = max(dBaryCoord, vec3(0.0001));
-    
+
     // Calculate distance to edges
     vec3 edge_distance = baryCoord / (dBaryCoord * width);
-    
+
     // Apply smoothstep for edge detection
     vec3 remap = smoothstep(vec3(0.0), vec3(blur), edge_distance);
-    
+
     // Find the closest edge (minimum distance means closest to an edge)
     float closestEdge = min(min(remap.x, remap.y), remap.z);
-    
+
     // Calculate final colors and alpha
     vec3 finalColor;
     float finalAlpha;
-    
+
     if (show_interior) {
         // Mix wireframe and model colors
         finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
         finalAlpha = mix(wireframeOpacity, modelOpacity, closestEdge);
-        
+
         // Ensure minimum visibility for the model interior
         if (closestEdge > 0.5) {
             finalAlpha = max(finalAlpha, 0.1); // Minimum 10% opacity for interior
@@ -64,25 +64,25 @@ void fragment() {
         // Only show wireframe
         finalColor = wireframeColor.rgb;
         finalAlpha = wireframeOpacity * (1.0 - closestEdge);
-        
+
         // If not showing interior, make interior completely transparent
         if (closestEdge > 0.5) {
             finalAlpha = 0.0;
         }
     }
-    
+
     // Apply global opacity multiplier
     finalAlpha *= globalOpacity;
-    
+
     // Clamp alpha to prevent complete transparency when not intended
     if (show_interior && modelOpacity > 0.0) {
         finalAlpha = max(finalAlpha, 0.05);
     }
-    
+
     // Apply colors
     ALBEDO = finalColor;
     ALPHA = finalAlpha;
-    
+
     // Add emission to wireframe edges
     EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;
 }

@@ -16,7 +16,7 @@ subdivide_depth = 100
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0162468, 0.895624)
 
 [node name="FlagDancer" type="Node3D" parent="."]
-transform = Transform3D(0.999572, -0.0292583, 0, 0.0292583, 0.999572, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0.000298225, 0, -0.000298225, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_81dem")
 
 [node name="FlagSkeleton" type="Skeleton3D" parent="FlagDancer"]

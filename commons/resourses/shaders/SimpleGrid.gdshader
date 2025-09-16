@@ -1,40 +1,47 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
 
-// Simple uniforms for educational use
-uniform vec4 fill_color : source_color = vec4(0.2, 0.3, 0.8, 0.7);        // Inside face color
-uniform vec4 wireframe_color : source_color = vec4(0.0, 1.0, 1.0, 1.0);   // Edge color (cyan)
-uniform float wireframe_width : hint_range(0.0, 10.0) = 3.0;               // Edge thickness
-uniform float wireframe_brightness : hint_range(0.0, 5.0) = 2.0;           // Edge glow
+uniform vec4 fill_color : source_color = vec4(0.2, 0.3, 0.8, 0.7);
+uniform vec4 wireframe_color : source_color = vec4(0.0, 1.0, 1.0, 1.0);
+uniform float wireframe_width : hint_range(0.1, 10.0) = 2.0;
+uniform float wireframe_brightness : hint_range(0.0, 5.0) = 2.0;
+uniform bool show_only_wireframe = false;
 
-// Barycentric coordinates for edge detection
+// Better barycentric coordinate calculation
 varying vec3 barycentric;
+varying vec3 world_pos;
 
-// Simple vertex shader
 void vertex() {
-	// Set barycentric coordinates based on vertex ID
-	barycentric = vec3(0.0);
-	if (VERTEX_ID % 3 == 0) barycentric.x = 1.0;
-	else if (VERTEX_ID % 3 == 1) barycentric.y = 1.0;
-	else barycentric.z = 1.0;
+    world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    
+    // More reliable barycentric coordinate assignment
+    // This works better with indexed geometry
+    int vid = VERTEX_ID % 3;
+    barycentric = vec3(0.0);
+    if (vid == 0) barycentric = vec3(1.0, 0.0, 0.0);
+    else if (vid == 1) barycentric = vec3(0.0, 1.0, 0.0);
+    else barycentric = vec3(0.0, 0.0, 1.0);
 }
 
-// Simple fragment shader
 void fragment() {
-	// Calculate distance to edges using barycentric coordinates
-	vec3 d = fwidth(barycentric);
-	vec3 edge_distance = barycentric / d;
-	
-	// Find closest edge
-	float closest_edge = min(min(edge_distance.x, edge_distance.y), edge_distance.z);
-	
-	// Create wireframe effect
-	float wireframe_factor = 1.0 - smoothstep(0.0, wireframe_width, closest_edge);
-	
-	// Mix fill and wireframe colors
-	ALBEDO = mix(fill_color.rgb, wireframe_color.rgb, wireframe_factor);
-	ALPHA = mix(fill_color.a, wireframe_color.a, wireframe_factor);
-	
-	// Add emission for glowing edges
-	EMISSION = wireframe_color.rgb * wireframe_factor * wireframe_brightness;
-} 
+    // Calculate edge distances with proper derivatives
+    vec3 d = fwidth(barycentric);
+    vec3 a3 = smoothstep(vec3(0.0), d * wireframe_width, barycentric);
+    
+    // Find the minimum distance to any edge
+    float edge_factor = min(min(a3.x, a3.y), a3.z);
+    float wireframe_factor = 1.0 - edge_factor;
+    
+    if (show_only_wireframe) {
+        ALBEDO = wireframe_color.rgb;
+        ALPHA = wireframe_factor * wireframe_color.a;
+        if (wireframe_factor < 0.1) {
+            discard;
+        }
+    } else {
+        ALBEDO = mix(fill_color.rgb, wireframe_color.rgb, wireframe_factor);
+        ALPHA = mix(fill_color.a, wireframe_color.a, wireframe_factor);
+    }
+    
+    EMISSION = wireframe_color.rgb * wireframe_factor * wireframe_brightness;
+}

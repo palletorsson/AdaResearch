@@ -25,7 +25,7 @@ uniform float depth_fade : hint_range(0.0, 2.0) = 0.8;
 // Screen + depth
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D DEPTH_TEXTURE  : hint_depth_texture;
- 
+
 
 // ---------------- Noise helpers ----------------
 float hash21(vec2 p){

@@ -3,6 +3,10 @@ extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
+@export var sphere_y_offset: float = -5.9
+
+## Freeze behavior options
+@export var alter_freeze : bool = true  # Enable alternating freeze behavior
 
 # Two triangle mesh instances - one pink, one black
 var triangle_mesh_pink: MeshInstance3D
@@ -11,10 +15,10 @@ var grab_spheres: Array[Node3D] = []
 
 # Quad has 4 corner points that define 2 triangles (horizontal/flat)
 var vertex_positions: Array[Vector3] = [
-	Vector3(-1.0, 0.0, -1.0),  # Bottom-left (0)
-	Vector3(1.0, 0.0, 1.0),    # Bottom-right (1)
-	Vector3(1.0, 0.0, -1.0),   # Top-right (2)
-	Vector3(-1.0, 0.0, 1.0)    # Top-left (3)
+	Vector3(-1.0, sphere_y_offset, -1.0),  # Bottom-left (0) - moved down 2 meters
+	Vector3(1.0, sphere_y_offset, 1.0),    # Bottom-right (1) - moved down 2 meters
+	Vector3(1.0,  sphere_y_offset, -1.0),   # Top-right (2) - moved down 2 meters
+	Vector3(-1.0, sphere_y_offset, 1.0)    # Top-left (3) - moved down 2 meters
 ]
 
 # Define the two triangles from the quad
@@ -26,9 +30,13 @@ var triangle2_indices: Array[int] = [0, 2, 3]  # Black triangle
 # Grab sphere scene to instantiate
 var grab_sphere_scene: PackedScene
 
+# Pickup state tracking for alternating freeze behavior
+var _pickup_count : int = 0
+var _should_freeze_this_pickup : bool = false
+
 func _ready():
 	# Load the grab sphere scene
-	grab_sphere_scene = preload("res://commons/primitives/point/grab_sphere_point.tscn")
+	grab_sphere_scene = preload("res://commons/primitives/point/simple_grab_sphere.tscn")
 	
 	create_triangle_meshes()
 	create_grab_spheres()
@@ -73,7 +81,7 @@ func create_grab_spheres():
 				material.roughness = 0.1  # Very smooth like marble
 				material.metallic = 0.0   # Non-metallic
 				material.refraction = 0.05  # Slight refraction for glass-like effect
-		
+				
 		# Connect signals if available
 		if sphere_instance.has_signal("picked_up"):
 			sphere_instance.connect("picked_up", _on_sphere_picked_up.bind(i))
@@ -142,48 +150,26 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.add_vertex(v1)
 
 func _on_sphere_picked_up(vertex_index: int, _pickable):
-	print("Corner ", vertex_index, " sphere picked up")
+	print("DEBUG PICKUP")
+	
 
 func _on_sphere_dropped(vertex_index: int, _pickable):
-	if vertex_index < grab_spheres.size():
-		var sphere = grab_spheres[vertex_index]
-		var drop_position = sphere.position
-		
-		# Rotate each sphere 90 degrees in Z axis to prevent stacking
-		var rotation_angle = vertex_index * PI/2  # 90 degrees per sphere
-		var rotation_offset = Vector3(
-			cos(rotation_angle) * 0.1,  # X offset based on rotation
-			0.0,  # No Y offset to keep them at same height
-			sin(rotation_angle) * 0.1   # Z offset based on rotation
-		)
-		
-		# Apply rotation-based offset to prevent stacking
-		drop_position += rotation_offset
-		vertex_positions[vertex_index] = drop_position
-		
-		# Update sphere position with offset
-		sphere.position = drop_position
-		
-		update_triangle_meshes()
-		print("Corner ", vertex_index, " dropped at: ", vertex_positions[vertex_index], " (with rotation offset)")
+	# Debug: Show current settings
 
+	if alter_freeze: 
+		print("DEBUG DROP AND CHANGE STATE !CURRENTFREEZESTATE")
+		# Toggle the freeze state of the grab sphere
+		if _pickable and _pickable.has_method("set_freeze_enabled"):
+			# Get current freeze state and toggle it
+			var current_frozen = _pickable.freeze
+			_pickable.set_freeze_enabled(!current_frozen)
+			print("DEBUG: Toggled freeze state from ", current_frozen, " to ", !current_frozen)
+		
+	
 func _process(delta):
 	_sync_vertices_from_spheres()
-	_handle_input()
 
-func _handle_input():
-	if Input.is_action_just_pressed("ui_accept"):  # Space key
-		arrange_in_boat_formation()
-	elif Input.is_key_pressed(KEY_R):
-		reset_to_square()
-	elif Input.is_key_pressed(KEY_Q):
-		reset_to_quad()
-	elif Input.is_key_pressed(KEY_D):
-		reset_to_diamond()
-	elif Input.is_key_pressed(KEY_T):
-		reset_to_trapezoid()
-	elif Input.is_key_pressed(KEY_B):
-		arrange_in_boat_formation()
+
 
 func _sync_vertices_from_spheres():
 	var needs_update = false
@@ -227,45 +213,45 @@ func apply_triangle_material(mesh_instance: MeshInstance3D, color: Color):
 
 
 func reset_to_square():
-	# Reset to perfect square (horizontal)
+	# Reset to perfect square (horizontal) - 2 meters down
 	vertex_positions = [
-		Vector3(-1.0, 0.0, -1.0),  # Bottom-left
-		Vector3(1.0, 0.0, 1.0),    # Bottom-right
-		Vector3(1.0, 0.0, -1.0),   # Top-right
-		Vector3(-1.0, 0.0, 1.0)    # Top-left
+		Vector3(-1.0, -2.0, -1.0),  # Bottom-left
+		Vector3(1.0, -2.0, 1.0),    # Bottom-right
+		Vector3(1.0, -2.0, -1.0),   # Top-right
+		Vector3(-1.0, -2.0, 1.0)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to square shape")
 
 func reset_to_quad():
-	# Reset to rectangular quad (horizontal)
+	# Reset to rectangular quad (horizontal) - 2 meters down
 	vertex_positions = [
-		Vector3(-1.5, 0.0, -0.8),  # Bottom-left
-		Vector3(1.5, 0.0, 0.8),    # Bottom-right
-		Vector3(1.5, 0.0, -0.8),   # Top-right
-		Vector3(-1.5, 0.0, 0.8)    # Top-left
+		Vector3(-1.5, -2.0, -0.8),  # Bottom-left
+		Vector3(1.5, -2.0, 0.8),    # Bottom-right
+		Vector3(1.5, -2.0, -0.8),   # Top-right
+		Vector3(-1.5, -2.0, 0.8)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to rectangular quad")
 
 func reset_to_diamond():
-	# Reset to diamond shape (horizontal)
+	# Reset to diamond shape (horizontal) - 2 meters down
 	vertex_positions = [
-		Vector3(0.0, 0.0, -1.2),   # Bottom
-		Vector3(1.2, 0.0, 0.0),    # Right
-		Vector3(0.0, 0.0, 1.2),    # Top
-		Vector3(-1.2, 0.0, 0.0)    # Left
+		Vector3(0.0, -2.0, -1.2),   # Bottom
+		Vector3(1.2, -2.0, 0.0),    # Right
+		Vector3(0.0, -2.0, 1.2),    # Top
+		Vector3(-1.2, -2.0, 0.0)    # Left
 	]
 	update_sphere_positions()
 	print("Reset to diamond shape")
 
 func reset_to_trapezoid():
-	# Reset to trapezoid shape (horizontal)
+	# Reset to trapezoid shape (horizontal) - 2 meters down
 	vertex_positions = [
-		Vector3(-1.2, 0.0, -1.0),  # Bottom-left
-		Vector3(1.2, 0.0, 1.0),    # Bottom-right
-		Vector3(0.8, 0.0, -1.0),   # Top-right
-		Vector3(-0.8, 0.0, 1.0)    # Top-left
+		Vector3(-1.2, -2.0, -1.0),  # Bottom-left
+		Vector3(1.2, -2.0, 1.0),    # Bottom-right
+		Vector3(0.8, -2.0, -1.0),   # Top-right
+		Vector3(-0.8, -2.0, 1.0)    # Top-left
 	]
 	update_sphere_positions()
 	print("Reset to trapezoid shape")

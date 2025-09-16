@@ -1,6 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bvq8xj4y7w8kn"]
 
-[ext_resource type="Script" path="res://algorithms/spacetopology/wavefunctioncollapse/WFCLandscape.gd" id="1_7m9xo"]
+[ext_resource type="Script" uid="uid://caw3jsx42fcfy" path="res://algorithms/spacetopology/wavefunctioncollapse/WFCLandscape.gd" id="1_7m9xo"]
 
 [node name="WFCLandscape" type="Node3D"]
 script = ExtResource("1_7m9xo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.926837, 0.375464, 0, -0.375464, 0.926837, 4.81667, 4.1642, 7.07758)

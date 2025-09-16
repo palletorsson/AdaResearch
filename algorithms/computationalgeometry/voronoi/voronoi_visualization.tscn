@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cn4k7m8j2pqxr"]
 
-[ext_resource type="Script" path="res://algorithms/computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
+[ext_resource type="Script" uid="uid://ceoqcls8um7gi" path="res://algorithms/computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
 
 [sub_resource type="Environment" id="Environment_voronoi"]
 background_mode = 1
@@ -8,33 +8,33 @@ background_color = Color(0.05, 0.08, 0.12, 1)
 ambient_light_color = Color(0.4, 0.5, 0.6, 1)
 ambient_light_energy = 0.5
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_base"]
-size = Vector2(40, 30)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
 albedo_color = Color(0.1, 0.15, 0.2, 1)
 emission_enabled = true
 emission = Color(0.03, 0.05, 0.08, 1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_base"]
+size = Vector2(40, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diagram"]
+transparency = 1
+albedo_color = Color(0.2, 0.3, 0.4, 0.6)
+emission_enabled = true
+emission = Color(0.1, 0.15, 0.2, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_diagram_area"]
 size = Vector3(22, 0.05, 17)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diagram"]
-albedo_color = Color(0.2, 0.3, 0.4, 0.6)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_territory"]
 transparency = 1
+albedo_color = Color(0.7, 0.4, 0.3, 0.8)
 emission_enabled = true
-emission = Color(0.1, 0.15, 0.2, 1)
+emission = Color(0.35, 0.2, 0.15, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_territory"]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.05
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_territory"]
-albedo_color = Color(0.7, 0.4, 0.3, 0.8)
-transparency = 1
-emission_enabled = true
-emission = Color(0.35, 0.2, 0.15, 1)
 
 [node name="Voronoi_Visualization" type="Node3D"]
 script = ExtResource("1_voronoi_script")
@@ -55,50 +55,50 @@ environment = SubResource("Environment_voronoi")
 
 [node name="BasePlane" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
-mesh = SubResource("PlaneMesh_base")
 material_override = SubResource("StandardMaterial3D_base")
+mesh = SubResource("PlaneMesh_base")
 
 [node name="DiagramBounds" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("BoxMesh_diagram_area")
 material_override = SubResource("StandardMaterial3D_diagram")
+mesh = SubResource("BoxMesh_diagram_area")
 
 [node name="TerritoryMarkers" type="Node3D" parent="Environment"]
 
 [node name="TerritoryMarker1" type="MeshInstance3D" parent="Environment/TerritoryMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -0.8, -6)
-mesh = SubResource("CylinderMesh_territory")
 material_override = SubResource("StandardMaterial3D_territory")
+mesh = SubResource("CylinderMesh_territory")
 
 [node name="TerritoryMarker2" type="MeshInstance3D" parent="Environment/TerritoryMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -6)
-mesh = SubResource("CylinderMesh_territory")
 material_override = SubResource("StandardMaterial3D_territory")
+mesh = SubResource("CylinderMesh_territory")
 
 [node name="TerritoryMarker3" type="MeshInstance3D" parent="Environment/TerritoryMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.8, -6)
-mesh = SubResource("CylinderMesh_territory")
 material_override = SubResource("StandardMaterial3D_territory")
+mesh = SubResource("CylinderMesh_territory")
 
 [node name="Lighting" type="Node3D" parent="."]
 
 [node name="SpotLight_Sites" type="SpotLight3D" parent="Lighting"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -6, 12, 8)
-light_energy = 2.0
 light_color = Color(0.9, 0.4, 0.3, 1)
+light_energy = 2.0
 spot_range = 25.0
 spot_angle = 30.0
 
 [node name="SpotLight_Edges" type="SpotLight3D" parent="Lighting"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 6, 10, 12)
-light_energy = 1.8
 light_color = Color(0.3, 0.7, 0.9, 1)
+light_energy = 1.8
 spot_range = 20.0
 spot_angle = 25.0
 
 [node name="SpotLight_Territory" type="SpotLight3D" parent="Lighting"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 8, 15)
-light_energy = 1.5
 light_color = Color(0.6, 0.8, 0.4, 1)
+light_energy = 1.5
 spot_range = 18.0
-spot_angle = 35.0 
+spot_angle = 35.0
