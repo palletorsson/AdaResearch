@@ -20,41 +20,21 @@ extends Node3D
 func _ready():
 	if generate_on_ready:
 		create_sculpture()
-		setup_environment()
+		#setup_environment()
 
 func create_sculpture():
 	var sculpture = Node3D.new()
 	sculpture.name = "DonovanSculpture"
 	
 	# Create a base platform for blobs if needed
-	var base = create_base_platform()
-	sculpture.add_child(base)
+
 	
 	# Create the blob cluster
 	create_blob_cluster(sculpture)
 	
 	add_child(sculpture)
 
-func create_base_platform():
-	var base = MeshInstance3D.new()
-	base.name = "BasePlatform"
-	
-	var mesh = CylinderMesh.new()
-	mesh.top_radius = 4.0
-	mesh.bottom_radius = 4.0
-	mesh.height = 0.1
-	base.mesh = mesh
-	
-	# Position the base slightly below the floor level
-	base.position.y = -0.05
-	
-	# Create material for base
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.3, 0.3, 0.3)
-	material.roughness = 0.8
-	base.material_override = material
-	
-	return base
+
 
 func create_blob_cluster(parent):
 	# Create the cluster of hairy blobs

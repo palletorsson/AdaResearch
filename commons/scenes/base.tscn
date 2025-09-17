@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=19 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -21,7 +21,12 @@ size = Vector3(0.126328, 0.0757446, 0.10495)
 size = Vector3(0.118164, 0.102966, 0.12796)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qiixw"]
-size = Vector3(4.77321, 0.12793, 3.00417)
+size = Vector3(7.19801, 0.12793, 2.49808)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lr6fa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5sk3y"]
+size = Vector3(3.34094, 0.163635, 2.29346)
 
 [node name="Base" instance=ExtResource("1_v5jw7")]
 
@@ -99,8 +104,15 @@ script = ExtResource("12_qiixw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.436035, 1.32355)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.253602, 0, 1.24598)
 shape = SubResource("BoxShape3D_qiixw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="1"]
+mesh = SubResource("PlaneMesh_lr6fa")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69871, -0.01651, -1.16029)
+shape = SubResource("BoxShape3D_5sk3y")
 
 [node name="env" type="Node3D" parent="." index="5"]
 visible = false

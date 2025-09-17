@@ -177,16 +177,10 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				_apply_color_to_utility(utility_object, color_param)
 				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
 		"an":  # Annotation/Info Board
-			if parameters.size() > 0:
-				var sequence_name = parameters[0]
-				
-				# Store the sequence name for the info board to use
-				if "sequence_name" in utility_object:
-					utility_object.sequence_name = sequence_name
-				else:
-					utility_object.set_meta("sequence_name", sequence_name)
-				
-				print("GridUtilitiesComponent: Set info board sequence to: %s" % sequence_name)
+			# Info boards now load data directly from map_data.json
+			# No parameters needed - the info board will automatically
+			# load the current map's data from the grid system
+			print("GridUtilitiesComponent: Info board will load map data automatically")
 		"tc":  # Transport Cube
 			if parameters.size() >= 2:
 				var distance = float(parameters[0])

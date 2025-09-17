@@ -1,5 +1,5 @@
 # InfoBoard.gd
-# Animated version that cycles through summary sections
+# Map-specific info board that loads data from map_data.json
 extends Node3D
 
 # References to UI elements
@@ -25,6 +25,10 @@ var is_animating: bool = false
 var summary_sections = []
 var player_in_range: bool = true  # Default to true for testing
 var animation_paused: bool = false
+
+# Map data
+var map_data: Dictionary = {}
+var map_name: String = ""
 
 # Icon textures dictionary using your actual icons
 var icon_textures = {
@@ -59,13 +63,8 @@ var icon_textures = {
 	"xp": preload("res://commons/icons/xp-icon.png")
 }
 
-# The specific level info to display on this board
-# Set these in the Inspector to override auto-detection
-@export var specific_category: String = ""
-@export var specific_id: int = -1
-
-# Reference to the grid system
-@onready var grid_system = $"../../multiLayerGrid"
+# Reference to the grid system - will be found dynamically
+var grid_system: Node = null
 
 func _ready():
 	# Connect to XP signal for updates
@@ -83,80 +82,91 @@ func _initialize_info_board():
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
-	# Check if a specific sequence was provided via parameter
-	var sequence_name = ""
-	if "sequence_name" in self:
-		sequence_name = self.sequence_name
-		print("InfoBoard: Using sequence from property: " + sequence_name)
-	elif has_meta("sequence_name"):
-		sequence_name = get_meta("sequence_name")
-		print("InfoBoard: Using sequence from metadata: " + sequence_name)
-	
-	# Load the level data and start animation
-	if not sequence_name.is_empty():
-		_load_sequence_directly(sequence_name)
-	elif specific_category != "" and specific_id >= 0:
-		_load_specific_level_info()
-	else:
-		_load_from_map_name()
+	# Load map data from the current map
+	_load_map_data()
 
-# Helper function to get all children recursively
-func _get_all_children(node):
-	var nodes = []
+# Find the grid system in the scene tree
+func _find_grid_system() -> Node:
+	# Try different common paths and names for the grid system
+	var potential_paths = [
+		"../../multiLayerGrid",
+		"../../GridSystem", 
+		"../GridSystem",
+		"../../LabGridSystem",
+		"../LabGridSystem"
+	]
+	
+	# Try direct path references first
+	for path in potential_paths:
+		var node = get_node_or_null(path)
+		if node and (node.get_class() == "GridSystem" or node.get_class() == "LabGridSystem"):
+			print("InfoBoard: Found grid system at path: " + path)
+			return node
+	
+	# Try finding by class name in the scene tree
+	var scene_root = get_tree().current_scene
+	if scene_root:
+		var grid_systems = _find_nodes_by_class_name(scene_root, "GridSystem")
+		if grid_systems.size() > 0:
+			print("InfoBoard: Found grid system by class search")
+			return grid_systems[0]
+		
+		var lab_grid_systems = _find_nodes_by_class_name(scene_root, "LabGridSystem")
+		if lab_grid_systems.size() > 0:
+			print("InfoBoard: Found lab grid system by class search")
+			return lab_grid_systems[0]
+	
+	# Try finding in parent hierarchy
+	var current = get_parent()
+	while current:
+		if current.get_class() == "GridSystem" or current.get_class() == "LabGridSystem":
+			print("InfoBoard: Found grid system in parent hierarchy")
+			return current
+		current = current.get_parent()
+	
+	print("InfoBoard: No grid system found in scene tree")
+	return null
+
+# Helper function to find nodes by class name
+func _find_nodes_by_class_name(node: Node, target_class: String) -> Array:
+	var results = []
+	if node.get_class() == target_class:
+		results.append(node)
+	
 	for child in node.get_children():
-		nodes.append(child)
-		nodes.append_array(_get_all_children(child))
-	return nodes
-
-# Load sequence directly by name
-func _load_sequence_directly(sequence_name: String):
-	print("InfoBoard: Loading sequence directly: " + sequence_name)
+		results.append_array(_find_nodes_by_class_name(child, target_class))
 	
-	# Load sequence data from map_sequences.json
-	var sequence_data = _load_specific_sequence_data(sequence_name)
-	if sequence_data.is_empty():
-		push_error("InfoBoard: No sequence data found for: " + sequence_name)
-		return
+	return results
+
+# Load map data from the current map's map_data.json
+func _load_map_data():
+	# Find the grid system dynamically
+	grid_system = _find_grid_system()
 	
-	print("InfoBoard: Found sequence data for: " + sequence_name)
-	_update_info_board_with_sequence_data("", sequence_data)
-
-# Load information for a specifically assigned level
-func _load_specific_level_info():
-	print("InfoBoard: Loading specific level info for category: " + specific_category + ", id: " + str(specific_id))
-
-# Load level info from grid system's map_name by parsing it
-func _load_from_map_name():
 	if not grid_system:
 		push_error("InfoBoard: No grid system found!")
+		_show_fallback_info()
 		return
 	
 	# Get the map_name from the grid system
-	var map_name = grid_system.map_name
-	print("InfoBoard: Using map name: '" + map_name + "'")
-	print("InfoBoard: Map name length: " + str(map_name.length()))
+	map_name = grid_system.map_name
+	print("InfoBoard: Found grid system: " + str(grid_system.name))
+	print("InfoBoard: Loading map data for: " + map_name)
 	
-	# Load sequence data from map_sequences.json
-	var sequence_data = _load_sequence_data_for_map(map_name)
-	if sequence_data.is_empty():
-		push_error("InfoBoard: No sequence data found for map: " + map_name)
+	# Load map data from map_data.json
+	var map_data_path = "res://commons/maps/" + map_name + "/map_data.json"
+	print("InfoBoard: Looking for map data at: " + map_data_path)
+	
+	if not FileAccess.file_exists(map_data_path):
+		push_error("InfoBoard: map_data.json not found at: " + map_data_path)
+		_show_fallback_info()
 		return
 	
-	print("InfoBoard: Found sequence data for: " + map_name)
-	_update_info_board_with_sequence_data(map_name, sequence_data)
-
-# Load sequence data from map_sequences.json for the current map
-func _load_sequence_data_for_map(map_name: String) -> Dictionary:
-	var sequence_file_path = "res://commons/maps/map_sequences.json"
-	
-	if not FileAccess.file_exists(sequence_file_path):
-		push_error("InfoBoard: map_sequences.json not found!")
-		return {}
-	
-	var file = FileAccess.open(sequence_file_path, FileAccess.READ)
+	var file = FileAccess.open(map_data_path, FileAccess.READ)
 	if not file:
-		push_error("InfoBoard: Could not open map_sequences.json")
-		return {}
+		push_error("InfoBoard: Could not open map_data.json")
+		_show_fallback_info()
+		return
 	
 	var json_text = file.get_as_text()
 	file.close()
@@ -165,101 +175,67 @@ func _load_sequence_data_for_map(map_name: String) -> Dictionary:
 	var parse_result = json.parse(json_text)
 	
 	if parse_result != OK:
-		push_error("InfoBoard: Failed to parse map_sequences.json")
-		return {}
+		push_error("InfoBoard: Failed to parse map_data.json")
+		_show_fallback_info()
+		return
 	
-	var json_data = json.data
-	var sequences = json_data.get("sequences", {})
-	
-	# Find which sequence contains this map
-	print("InfoBoard: Searching for map '" + map_name + "' in sequences...")
-	
-	for sequence_name in sequences.keys():
-		var sequence = sequences[sequence_name]
-		var maps = sequence.get("maps", [])
-		
-		print("InfoBoard: Checking sequence '" + sequence_name + "' with maps: " + str(maps))
-		
-		if map_name in maps:
-			print("InfoBoard: ✅ Found map '" + map_name + "' in sequence '" + sequence_name + "'")
-			var result = sequence.duplicate()
-			result["sequence_name"] = sequence_name
-			result["map_index"] = maps.find(map_name)
-			result["total_maps"] = maps.size()
-			return result
-	
-	print("InfoBoard: ❌ Map '" + map_name + "' not found in any sequence")
-	print("InfoBoard: Available sequences: " + str(sequences.keys()))
-	return {}
+	map_data = json.data
+	print("InfoBoard: Successfully loaded map data for: " + map_name)
+	print("InfoBoard: Map data keys: " + str(map_data.keys()))
+	_update_info_board_with_map_data()
 
-# Load specific sequence data directly by sequence name
-func _load_specific_sequence_data(sequence_name: String) -> Dictionary:
-	var sequence_file_path = "res://commons/maps/map_sequences.json"
-	
-	if not FileAccess.file_exists(sequence_file_path):
-		push_error("InfoBoard: map_sequences.json not found!")
-		return {}
-	
-	var file = FileAccess.open(sequence_file_path, FileAccess.READ)
-	if not file:
-		push_error("InfoBoard: Could not open map_sequences.json")
-		return {}
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		push_error("InfoBoard: Failed to parse map_sequences.json")
-		return {}
-	
-	var json_data = json.data
-	var sequences = json_data.get("sequences", {})
-	
-	# Find the specific sequence
-	if sequences.has(sequence_name):
-		var sequence = sequences[sequence_name]
-		var result = sequence.duplicate()
-		result["sequence_name"] = sequence_name
-		result["map_index"] = 0  # Default to first map
-		result["total_maps"] = sequence.get("maps", []).size()
-		print("InfoBoard: ✅ Found sequence '" + sequence_name + "'")
-		return result
-	else:
-		print("InfoBoard: ❌ Sequence '" + sequence_name + "' not found")
-		print("InfoBoard: Available sequences: " + str(sequences.keys()))
-		return {}
+# Show fallback info when map data cannot be loaded
+func _show_fallback_info():
+	level_number_label.text = "??"
+	level_id_label.text = "Unknown Map"
+	title_label.text = "Map Information Unavailable"
+	summary_label.text = "Unable to load map data. Please check the map configuration."
+	barcode.text = "||||||||||||||||||||||||||"
+	start_animation()
 
-# Update the info board with sequence data from map_sequences.json
-func _update_info_board_with_sequence_data(map_name: String, sequence_data: Dictionary):
-	var sequence_name = sequence_data.get("sequence_name", "Unknown")
-	var map_index = sequence_data.get("map_index", 0)
-	var total_maps = sequence_data.get("total_maps", 1)
+# Update the info board with map-specific data
+func _update_info_board_with_map_data():
+	if map_data.is_empty():
+		push_error("InfoBoard: No map data available")
+		return
 	
-	# Format number with leading zero if needed
-	var number_text = str(map_index + 1)  # Show 1-based index
-	if (map_index + 1) < 10:
-		number_text = "0" + number_text
+	print("InfoBoard: Updating info board with map data...")
 	
-	# Update labels with sequence information
-	level_number_label.text = number_text
-	level_id_label.text = sequence_name + "/" + str(map_index + 1) + " of " + str(total_maps)
-	title_label.text = sequence_data.get("name", "Unknown Sequence")
+	var map_info = map_data.get("map_info", {})
+	var metadata = map_info.get("metadata", {})
+	
+	print("InfoBoard: Map info keys: " + str(map_info.keys()))
+	print("InfoBoard: Metadata keys: " + str(metadata.keys()))
+	
+	# Extract map information
+	var map_name_display = map_info.get("name", "Unknown Map")
+	var description = map_info.get("description", "No description available")
+	var difficulty = metadata.get("difficulty", "unknown")
+	var category = metadata.get("category", "unknown")
+	var estimated_time = metadata.get("estimated_time", "Unknown")
+	var learning_objectives = metadata.get("learning_objectives", [])
+	
+	print("InfoBoard: Map name: " + map_name_display)
+	print("InfoBoard: Description: " + description)
+	print("InfoBoard: Category: " + category)
+	print("InfoBoard: Difficulty: " + difficulty)
+	
+	# Update labels with map information
+	level_number_label.text = "01"  # Could be enhanced to show map number if needed
+	level_id_label.text = category + "/" + map_name_display
+	title_label.text = map_name_display
 	
 	# Update barcode
 	barcode.text = "||||||||||||||||||||||||||"
 	
-	# Clear and repopulate icons based on sequence difficulty and category
+	# Clear and repopulate icons based on map metadata
 	for child in icons_container.get_children():
 		child.queue_free()
 	
-	# Add icons based on sequence metadata
-	var difficulty = sequence_data.get("difficulty", "beginner")
-	var sequence_icons = _get_icons_for_sequence(sequence_name, difficulty)
+	# Add icons based on map category and difficulty
+	var map_icons = _get_icons_for_map(category, difficulty)
 	
-	for icon_name in sequence_icons:
+	for icon_name in map_icons:
 		if icon_textures.has(icon_name):
 			var icon = TextureRect.new()
 			icon.texture = icon_textures[icon_name]
@@ -268,12 +244,12 @@ func _update_info_board_with_sequence_data(map_name: String, sequence_data: Dict
 			icon.custom_minimum_size = Vector2(50, 50)
 			icons_container.add_child(icon)
 	
-	# Create summary sections from sequence data
-	_create_summary_from_sequence_data(sequence_data)
+	# Create summary sections from map data
+	_create_summary_from_map_data(map_info, metadata)
 	start_animation()
 
-# Get appropriate icons for a sequence
-func _get_icons_for_sequence(sequence_name: String, difficulty: String) -> Array:
+# Get appropriate icons for a map based on category and difficulty
+func _get_icons_for_map(category: String, difficulty: String) -> Array:
 	var icons = []
 	
 	# Add difficulty-based icons
@@ -285,126 +261,75 @@ func _get_icons_for_sequence(sequence_name: String, difficulty: String) -> Array
 		"advanced":
 			icons.append("ai")
 	
-	# Add sequence-specific icons
-	match sequence_name:
-		"randomness_exploration":
-			icons.append_array(["random", "noise"])
-		"physicssimulation":
+	# Add category-specific icons
+	match category:
+		"tutorial":
+			icons.append_array(["cube", "array"])
+		"primitives":
+			icons.append_array(["cube", "plane", "point"])
+		"color":
+			icons.append_array(["material", "shader"])
+		"physics":
 			icons.append_array(["physics", "gravity", "collision"])
-		"softbodies":
-			icons.append_array(["material", "physics"])
-		"wavefunctions":
-			icons.append_array(["procedural", "noise"])
 		"machinelearning":
 			icons.append_array(["ai", "neural-net"])
-		"patterngeneration":
-			icons.append_array(["procedural", "texture"])
+		"procedural":
+			icons.append_array(["procedural", "noise", "texture"])
+		"randomness":
+			icons.append_array(["random", "noise"])
+		"wavefunctions":
+			icons.append_array(["procedural", "noise"])
 		"graphtheory":
 			icons.append_array(["pathfinding", "flow-field"])
-		"recursiveemergence":
+		"recursive":
 			icons.append_array(["recursion", "procedural"])
-		"criticalalgorithms":
+		"critical":
 			icons.append_array(["ai", "danger"])
 		_:
 			icons.append("cube")
 	
 	return icons
 
-# Create summary sections from sequence data
-func _create_summary_from_sequence_data(sequence_data: Dictionary):
+# Create summary sections from map data
+func _create_summary_from_map_data(map_info: Dictionary, metadata: Dictionary):
 	summary_sections.clear()
 	
-	# Section 1: Sequence description
-	var description = sequence_data.get("description", "No description available")
-	summary_sections.append("SEQUENCE: " + description)
+	# Section 1: Map description
+	var description = map_info.get("description", "No description available")
+	summary_sections.append("MAP: " + description)
 	
 	# Section 2: Learning objectives
-	var objectives = sequence_data.get("learning_objectives", [])
-	if objectives.size() > 0:
+	var learning_objectives = metadata.get("learning_objectives", [])
+	if learning_objectives.size() > 0:
 		var objectives_text = "LEARNING OBJECTIVES:\n"
-		for objective in objectives:
+		for objective in learning_objectives:
 			objectives_text += "• " + objective + "\n"
 		summary_sections.append(objectives_text.strip_edges())
 	
-	# Section 3: Progress and timing
-	var estimated_time = sequence_data.get("estimated_time", "Unknown")
-	var difficulty = sequence_data.get("difficulty", "Unknown")
-	var map_index = sequence_data.get("map_index", 0)
-	var total_maps = sequence_data.get("total_maps", 1)
+	# Section 3: Map metadata
+	var difficulty = metadata.get("difficulty", "Unknown")
+	var estimated_time = metadata.get("estimated_time", "Unknown")
+	var category = metadata.get("category", "Unknown")
 	
-	var progress_text = "PROGRESS: Map %d of %d\n" % [map_index + 1, total_maps]
-	progress_text += "DIFFICULTY: %s\n" % difficulty.capitalize()
-	progress_text += "ESTIMATED TIME: %s" % estimated_time
-	summary_sections.append(progress_text)
+	var metadata_text = "CATEGORY: %s\n" % category.capitalize()
+	metadata_text += "DIFFICULTY: %s\n" % difficulty.capitalize()
+	metadata_text += "ESTIMATED TIME: %s" % estimated_time
+	summary_sections.append(metadata_text)
 	
-	# Section 4: Prerequisites (if any)
-	var unlock_requirements = sequence_data.get("unlock_requirements", [])
-	if unlock_requirements.size() > 0:
-		var prereq_text = "PREREQUISITES:\n"
-		for req in unlock_requirements:
-			prereq_text += "• " + req.replace("_", " ").capitalize() + "\n"
-		summary_sections.append(prereq_text.strip_edges())
-	
-	print("InfoBoard: Created " + str(summary_sections.size()) + " summary sections from sequence data")
-	
-	
-# Update the info board with level data
-func _update_info_board(category, id, data):
-	# Format number with leading zero if needed
-	var number_text = str(id)
-	if id < 10:
-		number_text = "0" + number_text
-	
-	# Update labels
-	level_number_label.text = number_text
-	level_id_label.text = category + "/" + str(id)
-	title_label.text = data.title
-	
-	# Update barcode
-	barcode.text = "||||||||||||||||||||||||||"
-	
-	# Clear and repopulate icons
-	for child in icons_container.get_children():
-		child.queue_free()
-
-	# Add icons based on the level's icon list
-	if data.has("icons"):
-		for icon_name in data.icons:
-			if icon_textures.has(icon_name):
-				var icon = TextureRect.new()
-				icon.texture = icon_textures[icon_name]
-				icon.expand = true
-				icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-				icon.custom_minimum_size = Vector2(50, 50)
-				icons_container.add_child(icon)
-	
-	# Extract summary sections and start animation
-	_extract_summary_sections(data)
-	start_animation()
-
-# Extract summary sections from data
-func _extract_summary_sections(data):
-	summary_sections.clear()
-	
-	# If summary is a dictionary with numbered sections
-	if data.has("summary") and data.summary is Dictionary:
-		var sorted_keys = data.summary.keys()
-		sorted_keys.sort()
+	# Section 4: Map dimensions (if available)
+	var dimensions = map_info.get("dimensions", {})
+	if not dimensions.is_empty():
+		var width = dimensions.get("width", 0)
+		var depth = dimensions.get("depth", 0)
+		var max_height = dimensions.get("max_height", 0)
 		
-		for key in sorted_keys:
-			summary_sections.append(data.summary[key])
-		
-		print("InfoBoard: Extracted " + str(summary_sections.size()) + " summary sections")
+		var dimensions_text = "MAP DIMENSIONS:\n"
+		dimensions_text += "Size: %dx%d\n" % [width, depth]
+		dimensions_text += "Max Height: %d levels" % max_height
+		summary_sections.append(dimensions_text)
 	
-	# If summary is a simple string, use it as a single section
-	elif data.has("summary") and data.summary is String:
-		summary_sections.append(data.summary)
-		print("InfoBoard: Using summary as a single section")
+	print("InfoBoard: Created " + str(summary_sections.size()) + " summary sections from map data")
 	
-	# If we somehow got no sections, add a placeholder
-	if summary_sections.size() == 0:
-		summary_sections.append("No summary available for this level.")
-		print("InfoBoard: No summary sections found, using placeholder")
 
 # Animation control functions
 func start_animation():

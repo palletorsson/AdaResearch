@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://6aa34sx61wi3"]
+
+[ext_resource type="Script" uid="uid://c2136pvm5mv2q" path="res://algorithms/array/grid_3d_4x4x4.gd" id="1_jkl012"]
+
+[node name="Grid3D4x4x4" type="Node3D"]
+script = ExtResource("1_jkl012")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.904649, 0.426158, 0, -0.426158, 0.904649, 0, 1.55752, 5.25239)

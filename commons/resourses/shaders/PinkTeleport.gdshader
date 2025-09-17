@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_opaque, blend_mix, diffuse_burley, specular_schlick_ggx;
+render_mode unshaded, cull_disabled, depth_prepass_alpha, blend_mix, diffuse_burley, specular_schlick_ggx;
 
 // Color parameters
 uniform vec4 violet_color : source_color = vec4(0.5, 0.0, 1.0, 1.0);

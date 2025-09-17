@@ -1,24 +1,25 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0myy6lvui8ey"]
 
 [ext_resource type="Script" uid="uid://c65dthq7ktx8a" path="res://commons/scenes/mapobjects/ResetTeleporter.gd" id="1_4bxhn"]
-[ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_xru1j"]
+[ext_resource type="Shader" uid="uid://dmuoi7rro8iuk" path="res://commons/resourses/shaders/bitwisewater.gdshader" id="2_4bxhn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4bxhn"]
 size = Vector3(1000, 1, 1000)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t57yy"]
 render_priority = 0
-shader = ExtResource("2_xru1j")
-shader_parameter/violet_color = Color(0.5, 0, 1, 1)
-shader_parameter/pink_color = Color(1, 0, 0.5, 1)
-shader_parameter/accent_color = Color(1, 1, 1, 1)
-shader_parameter/portal_speed = 2.0
-shader_parameter/pulse_speed = 1.5
-shader_parameter/wave_frequency = 4.0
-shader_parameter/energy = 2.0
+shader = ExtResource("2_4bxhn")
+shader_parameter/pride_flag = 0
+shader_parameter/flow_speed = 2.0
+shader_parameter/wave_intensity = 1.0
+shader_parameter/shimmer_speed = 3.0
+shader_parameter/color_blend = 1.2
 shader_parameter/transparency = 0.8
-shader_parameter/rim_power = 3.0
-shader_parameter/distortion_strength = 0.1
+shader_parameter/glow_strength = 1.8
+shader_parameter/sparkle_density = 5.0
+shader_parameter/flowing_stripes = true
+shader_parameter/add_sparkles = true
+shader_parameter/holographic_effect = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_dvv38"]
 size = Vector3(100, 1, 100)
@@ -36,6 +37,7 @@ shape = SubResource("BoxShape3D_4bxhn")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.6, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_t57yy")
 gi_mode = 0
 mesh = SubResource("BoxMesh_dvv38")

@@ -3,6 +3,13 @@ extends Node3D
 # Plane dimensions
 const PLANE_SIZE = 10.0
 
+# Scale factor
+var scale_factor = 0.5
+
+# Translation offset
+var x_offset = 0.5
+var z_offset = 0.0
+
 # Colors from the Albers image (from outer to inner)
 var square_colors = [
 	Color(0.85, 0.7, 0.5, 1.0),   # Outermost - warm beige
@@ -44,7 +51,7 @@ func create_albers_plane():
 	var vertex_index = 0
 	
 	for square_index in range(square_colors.size()):
-		var size = square_sizes[square_index] * PLANE_SIZE * 0.5
+		var size = square_sizes[square_index] * PLANE_SIZE * 0.5 * scale_factor
 		var color = square_colors[square_index]
 		
 		# Calculate square bounds
@@ -52,25 +59,25 @@ func create_albers_plane():
 		
 		# Add vertices for this square (4 corners)
 		# Bottom-left
-		vertices.append(Vector3(-half_size, -half_size, 0))
+		vertices.append(Vector3(-half_size + x_offset, -half_size, z_offset))
 		normals.append(Vector3(0, 0, 1))
 		colors.append(color)
 		uvs.append(Vector2(0, 0))
 		
 		# Bottom-right
-		vertices.append(Vector3(half_size, -half_size, 0))
+		vertices.append(Vector3(half_size + x_offset, -half_size, z_offset))
 		normals.append(Vector3(0, 0, 1))
 		colors.append(color)
 		uvs.append(Vector2(1, 0))
 		
 		# Top-right
-		vertices.append(Vector3(half_size, half_size, 0))
+		vertices.append(Vector3(half_size + x_offset, half_size, z_offset))
 		normals.append(Vector3(0, 0, 1))
 		colors.append(color)
 		uvs.append(Vector2(1, 1))
 		
 		# Top-left
-		vertices.append(Vector3(-half_size, half_size, 0))
+		vertices.append(Vector3(-half_size + x_offset, half_size, z_offset))
 		normals.append(Vector3(0, 0, 1))
 		colors.append(color)
 		uvs.append(Vector2(0, 1))
@@ -114,4 +121,4 @@ func create_albers_plane():
 	mesh_instance.material_override = material
 	
 	# Rotate plane to face viewer better
-	mesh_instance.rotation_degrees = Vector3(-10, 0, 0)
+	mesh_instance.rotation_degrees = Vector3(0, 90, 0)

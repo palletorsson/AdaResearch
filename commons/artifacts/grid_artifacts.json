@@ -241,89 +241,36 @@
 			"lookup_name": "transformation_cube",
 			"description": "A mysterious rotating cube that triggers the first learning sequence",
 			"scene": "res://commons/primitives/cubes/animation/transformation_cube.tscn",
-			"position": [0.0, 0.1, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction_type": "auto_trigger",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.3, 0.7, 1.0],
-				"light_intensity": 2.0,
-				"light_range": 3.0,
-				"light_position": [0, 0.5, 0]
-			}
 		},
 		"rotating_cube": {
 			"name": "Rotating Cube",
 			"lookup_name": "rotating_cube",
 			"description": "A mysterious rotating cube that triggers the first learning sequence",
 			"scene": "res://commons/primitives/cubes/animation/rotating_cube.tscn",
-			"position": [0.0, 0.1, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.2, 0.2, 0.2],
-			"interaction_type": "auto_trigger",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.3, 0.7, 1.0],
-				"light_intensity": 2.0,
-				"light_range": 3.0,
-				"light_position": [0, 0.5, 0]
-			}
 		},
 		"xyz_coordinates": {
 			"name": "XYZ coordinates",
 			"lookup_name": "xyz_coordinates",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"animated_cube": {
 			"name": "Animated Cube",
 			"lookup_name": "animated_cube",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/primitives/cubes/animated_cube.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"oscillation_cube": {
 			"name": "Oscillation Cube",
 			"lookup_name": "oscillation_cube",
 			"description": "A cube that demonstrates smooth oscillating motion along multiple axes",
 			"scene": "res://commons/primitives/cubes/oscillation_cube.tscn",
-			"position": [1.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"rotation_oscillation_cube": {
 			"name": "Rotation Oscillation Cube",
 			"lookup_name": "rotation_oscillation_cube",
 			"description": "A cube that combines rotation and oscillation with dynamic shader effects",
 			"scene": "res://commons/primitives/cubes/rotation_oscillation_cube.tscn",
-			"position": [-1.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 
 		"reset_cube": {
@@ -331,36 +278,18 @@
 			"lookup_name": "reset_cube",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/mapobjects/reset_scene.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"reset_area": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_area",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/reset_area.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		 "toruscylinder": {
 			"name": "toruscylinder",
 			"lookup_name": "toruscylinder",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://algorithms/transformation/toruscylinder/toruscylinder.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		 "chair2": {
 			"name": "chair2",
@@ -374,80 +303,65 @@
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
 		},		
-
 		"pick_up_cube": {
 			"name": "Pick Up Cube",
 			"lookup_name": "pick_up_cube",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"cube_with_shader": {
 			"name": "Cube with shader",
 			"lookup_name": "cube_with_shader",
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/primitives/cubes/cube_with_shader.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
 		"scifi_panel_wall": {
 		  "lookup_name": "scifi_panel_wall",
 		  "name": "Sci-Fi Panel Wall",
 		  "description": "A futuristic panel wall with procedural greebles and atmospheric lighting",
 		  "scene": "res://commons/primitives/panels/scifi_panel_wall.tscn",
-		  "position": [1.5, 1.5, 0.0],
-		  "rotation": [0.0, 0.0, 0.0],
-		  "scale": [1.0, 1.0, 1.0],
-		  "interaction_type": "examine",
-		  "sequence": null,
-		  "lighting": {
-			"add_focused_light": false,
-			"note": "Panel has built-in atmospheric lighting"
-		  }
 		},
 		"level_entrance": {
 		  "lookup_name": "level_entrance",
 		  "name": "Level Entrance",
 		  "description": "Entrance tile with door frame and label text",
 		  "scene": "res://commons/primitives/entrances/level_entrance.tscn",
-		  "position": [0.0, 0.0, 0.0],
-		  "rotation": [0.0, 0.0, 0.0],
-		  "scale": [1.0, 1.0, 1.0],
-		  "artifact_type": "entrance",
-		  "prerequisites": []
 		},
 		 "gridcolorizer": {
 		  "lookup_name": "gridcolorizer",
 		  "name": "gridcolorizer",
 		  "description": "gridcolorizer",
 		  "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
-		  "position": [0.0, 0.0, 0.0],
-		  "rotation": [0.0, 0.0, 0.0],
-		  "scale": [1.0, 1.0, 1.0],
-		  "artifact_type": "entrance",
-		  "prerequisites": []
-		},
-		
+		},	
+		"row_3_x": {
+			"name": "row_3_x",
+			"lookup_name": "row_3_x", 
+			"description": "A row_3_x",
+			"scene": "res://algorithms/array/row_3_x.tscn",
+		},	
+		"column_3_z": {
+			"name": "column_3_z",
+			"lookup_name": "column_3_z", 
+			"description": "A column_3_z",
+			"scene": "res://algorithms/array/column_3_z.tscn",
+		},	
+		"grid_2d_4x4": {
+			"name": "grid_2d_4x4",
+			"lookup_name": "grid_2d_4x4", 
+			"description": "A grid_2d_4x4",
+			"scene": "res://algorithms/array/grid_2d_4x4.tscn",
+		},	
+		"grid_3d_4x4x4": {
+			"name": "grid_3d_4x4x4",
+			"lookup_name": "grid_3d_4x4x4", 
+			"description": "A grid_3d_4x4x4",
+			"scene": "res://algorithms/array/grid_3d_4x4x4.tscn",
+		},	
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor", 
 			"description": "A shimmering grid that pulses with disco energy",
 			"scene": "res://commons/context/discofloor/discofloor.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": []
 		},
 		"radiolaria": {
 			"name": "radiolaria",
@@ -470,79 +384,25 @@
 			"lookup_name": "spectral_analyzer",
 			"description": "A master bus spectrum analyzer that visualizes ALL game audio frequencies and waveforms in real-time",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
-			"position": [0.0, 1.0, 3.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "wavefunction_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.0, 1.0, 0.5],
-				"light_intensity": 1.5,
-				"light_range": 4.0,
-				"light_position": [0, 1.5, 0]
-			},
-			"audio_integration": {
-				"auto_detect_audio": true,
-				"display_modes": ["spectrum_line", "spectrum_bars", "waveform", "vu_meter", "oscilloscope"],
-				"default_display": "spectrum_line",
-				"update_rate": 30.0
-			}
 		},
 		"spectrum_display": {
 			"name": "Frequency Spectrum Analyzer",
 			"lookup_name": "spectrum_display",
 			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
-			"position": [0.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "always_active",
-			"sequence": "frequency_analysis",
-			"artifact_type": "audio_visualizer",
-			"prerequisites": [],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.0, 1.0, 0.0],
-				"light_intensity": 1.2,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
 		},
 		"spectral_sine_wave": {
 			"name": "Spectral Sine Wave",
 			"lookup_name": "spectral_sine_wave",
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
-			"position": [0.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "always_active",
-			"sequence": "spectral_visualization",
-			"artifact_type": "audio_visualizer",
-			"prerequisites": [],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.0, 1.0, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
 		},
-		
+
 		"probability_sphere": {
 			"name": "Probability Sphere",
 			"lookup_name": "probability_sphere",
 			"description": "A sphere that shows the dance of randomness",
 			"scene": "res://commons/primitives/spheres/probability_sphere.tscn",
-			"position": [1.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "randomness_exploration",
-			"artifact_type": "sequence_trigger", 
-			"prerequisites": ["array_tutorial"]
 		},
 		"random_edge_profile": {
 			"name": "Random Edge Profile",
@@ -1406,6 +1266,14 @@
 			"interaction": "touch_to_activate",
 			"sequence": "procedural_generation_exploration"
 		},
+		"fuzzy_cloud": {
+			"name": "fuzzy_cloud",
+			"lookup_name": "fuzzy_cloud",
+			"description": "fuzzy_cloud",
+			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
+
+		},
+		
 		"slime_mold": {
 			"name": "Slime Mold",
 			"lookup_name": "slime_mold",
