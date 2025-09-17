@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7g4dxk5n8yw6"]
+[gd_scene load_steps=5 format=3 uid="uid://b7g4dxk5n8yw6"]
 
 [ext_resource type="Script" uid="uid://cchduyqgkigog" path="res://algorithms/wavefunctions/berninicolumns/BerniniColumns.gd" id="1_3xjmv"]
 
@@ -12,11 +12,31 @@ fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
 
+[sub_resource type="Curve" id="Curve_q5l1y"]
+_data = [Vector2(0.140845, 0.783647), 0.0, 0.0, 0, 0, Vector2(0.278169, 0.642547), -0.647635, -0.647635, 0, 0, Vector2(0.43662, 0.54848), 0.0, 0.0, 0, 0, Vector2(0.644366, 0.454414), 0.0, 0.0, 0, 0, Vector2(0.911972, 0.7178), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_34kgh"]
+radius = 0.2
+radial_steps = 16
+section_length = 0.02
+curve = SubResource("Curve_q5l1y")
+
 [node name="BerniniScene" type="Node3D"]
 
 [node name="BerniniColumns" type="Node3D" parent="."]
 script = ExtResource("1_3xjmv")
+column_height = null
+column_radius = null
+spiral_density = null
+sine_amplitude = null
+cosine_amplitude = null
+vertical_segments = null
+radial_segments = null
+twist_factor = null
 material_color = Color(0.927072, 0.545847, 0.949327, 1)
+rotate_columns = null
+rotation_speed = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5, 5, 5)
@@ -33,3 +53,6 @@ text = "Bernini's Twisted Columns
 Created using Sine and Cosine Displacement"
 font_size = 64
 width = 800.0
+
+[node name="tubetrailmesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("TubeTrailMesh_34kgh")

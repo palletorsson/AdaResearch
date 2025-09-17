@@ -53,8 +53,8 @@ func _process(delta):
 	if rotate_columns:
 		time += delta
 		for column in columns:
-			# Gentle sine wave rotation for a subtle effect
-			column.rotation.y = sin(time * rotation_speed) * 0.1
+			# Slow continuous rotation
+			column.rotation.y = time * rotation_speed
 
 # --- Procedural Generation Functions ---
 
@@ -148,14 +148,9 @@ func generate_spiral_column_mesh() -> Mesh:
 	return st.commit()
 
 func add_column_base(column_node: Node3D):
-	# Adds a cylindrical base to the bottom of a column.
+	# Adds a tube trail mesh base to the bottom of a column.
 	var base = MeshInstance3D.new()
-	var cylinder_mesh = CylinderMesh.new()
-	cylinder_mesh.top_radius = column_radius * 1.5
-	cylinder_mesh.bottom_radius = column_radius * 2.0
-	cylinder_mesh.height = 0.5
-	cylinder_mesh.radial_segments = radial_segments
-	base.mesh = cylinder_mesh
+	base.mesh = create_tube_trail_base_mesh()
 	base.position.y = -0.25
 	
 	var material = StandardMaterial3D.new()

@@ -1,6 +1,6 @@
 shader_type spatial;
 // Enable transparency for opacity control - Correct Godot 4 syntax
- 
+
 
 // Uniforms
 uniform vec4 modelColor : source_color = vec4(0.5, 0.5, 0.5, 1.0);       // Main cube color

@@ -1,38 +1,44 @@
-# UnitCircleSineWave.gd - Modified for thicker sine wave lines
-# This script visualizes the "unwrapping" of a unit circle to create a sine wave,
-# with enhanced thick line rendering for better visibility.
 extends Node3D
 
-# -- Configuration --
 @export var radius: float = 2.0
 @export var rotation_speed: float = 0.5
 @export var wave_color := Color.MAGENTA
 @export var projection_color := Color.AQUA
-@export var line_thickness: float = 0.05  # NEW: Control line thickness
-@export var num_cycles: int = 3  # NEW: Number of complete cycles to draw
-@export var auto_stop: bool = true  # NEW: Stop after completing cycles
+@export var line_thickness: float = 0.045
+@export var num_cycles: int = 3
+@export var auto_stop: bool = true
+@export var samples_per_cycle: int = 140
+@export var wave_depth_scale: float = 1.0
+@export var extra_wave_buffer_cycles: int = 4
+@export var circle_resolution: int = 48
 
-# -- State --
 var time: float = 0.0
 var angle: float = 0.0
-var cycles_completed: int = 0  # NEW: Track completed cycles
-var is_stopped: bool = false  # NEW: Animation control
+var cycles_completed: int = 0
+var is_stopped: bool = false
 
-# -- Scene Nodes --
 var rotating_point: MeshInstance3D
 var radius_line: MeshInstance3D
-var circle_points_node: Node3D
+var circle_outline: MultiMeshInstance3D
+var sine_wave_instance: MultiMeshInstance3D
+var projection_lines_instance: MultiMeshInstance3D
 
-# Nodes for drawing the sine wave and projections
-var sine_wave_node: Node3D  # Changed to Node3D container
-var sine_wave_segments: Array[MeshInstance3D] = []  # Array of thick line segments
-var projection_lines_node: MeshInstance3D
+var wave_points: PackedVector3Array = PackedVector3Array()
+var current_wave_point: Vector3 = Vector3.ZERO
 
-# Constants for layout
+var wave_multimesh: MultiMesh
+var projection_multimesh: MultiMesh
+var shared_line_mesh: Mesh
+
 const WAVE_START_X: float = 3.0
 const WAVE_LENGTH: float = 10.0
 
+var min_segment_length: float
+var max_wave_points: int
+
 func _ready():
+	min_segment_length = WAVE_LENGTH / float(max(samples_per_cycle, 2))
+	max_wave_points = (max(num_cycles, 1) + extra_wave_buffer_cycles) * samples_per_cycle + 2
 	setup_camera()
 	create_axes()
 	create_unit_circle_outline()
@@ -41,79 +47,77 @@ func _ready():
 	setup_projection_lines()
 
 func _process(delta: float):
-	# Only animate if not stopped
-	if not is_stopped:
-		time += delta
-		angle = time * rotation_speed
-		
-		# Check if we completed a full cycle
-		if angle > PI * 2:
-			cycles_completed += 1
-			print("Cycle %d completed!" % cycles_completed)
-			
-			# Check if we should stop
-			if auto_stop and cycles_completed >= num_cycles:
-				is_stopped = true
-				print("Animation stopped after %d cycles. Full sine wave shape preserved!" % num_cycles)
-				return
-			
-			# Reset for next cycle (but keep the geometry!)
-			time = 0.0
-			angle = 0.0
-			# DON'T clear the sine wave - let it accumulate!
-
-		update_rotating_point()
-		update_thick_sine_wave()
-		update_projection_lines()
+	if is_stopped:
+		return
+	
+	time += delta
+	angle = time * rotation_speed
+	if angle > TAU:
+		cycles_completed += 1
+		if auto_stop and cycles_completed >= num_cycles:
+			is_stopped = true
+			angle = TAU
+			update_rotating_point()
+			update_sine_wave()
+			update_projection_lines()
+			return
+		time = 0.0
+		angle = 0.0
+	
+	update_rotating_point()
+	update_sine_wave()
+	update_projection_lines()
 
 func setup_camera():
-	var camera_node = Camera3D.new()
-	add_child(camera_node)
-	camera_node.position = Vector3(0, 0, 12)
-	camera_node.look_at(Vector3.ZERO, Vector3.UP)
+	if not has_node("Camera3D"):
+		var camera_node = Camera3D.new()
+		camera_node.name = "Camera3D"
+		camera_node.position = Vector3(0, 0, 12)
+		camera_node.look_at(Vector3.ZERO, Vector3.UP)
+		add_child(camera_node)
 
 func create_axes():
 	var axes_node = Node3D.new()
 	axes_node.name = "CoordinateAxes"
 	add_child(axes_node)
 	
-	# Create thicker axes using cylinders
-	var x_axis_material = StandardMaterial3D.new()
-	x_axis_material.albedo_color = Color.GRAY
-	var x_axis = create_thick_line(Vector3(-radius - 1, 0, 0), Vector3(WAVE_START_X + WAVE_LENGTH + 1, 0, 0), x_axis_material, 0.02)
-	axes_node.add_child(x_axis)
+	var x_material = StandardMaterial3D.new()
+	x_material.albedo_color = Color(0.45, 0.45, 0.5)
+	var y_material = x_material.duplicate()
 	
-	var y_axis_material = StandardMaterial3D.new()
-	y_axis_material.albedo_color = Color.GRAY
-	var y_axis = create_thick_line(Vector3(0, -radius - 1, 0), Vector3(0, radius + 1, 0), y_axis_material, 0.02)
+	var x_axis = create_thick_line(Vector3(-radius - 1.0, 0, 0), Vector3(WAVE_START_X + WAVE_LENGTH + 1.0, 0, 0), x_material, 0.02)
+	var y_axis = create_thick_line(Vector3(0, -radius - 1.0, 0), Vector3(0, radius + 1.0, 0), y_material, 0.02)
+	axes_node.add_child(x_axis)
 	axes_node.add_child(y_axis)
 
 func create_unit_circle_outline():
-	circle_points_node = Node3D.new()
-	circle_points_node.name = "UnitCircleOutline"
-	add_child(circle_points_node)
-	
-	var point_material = StandardMaterial3D.new()
-	point_material.albedo_color = Color.WHITE * 0.8
-	
+	circle_outline = MultiMeshInstance3D.new()
+	circle_outline.name = "UnitCircleOutline"
 	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.05
-	sphere_mesh.height = 0.1
+	sphere_mesh.radius = 0.04
+	sphere_mesh.height = 0.08
+	var mm = MultiMesh.new()
+	mm.mesh = sphere_mesh
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = max(circle_resolution, 12)
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(0.85, 0.85, 0.9)
+	circle_outline.material_override = material
+	for i in range(mm.instance_count):
+		var t = float(i) / float(mm.instance_count)
+		var theta = t * TAU
+		var position = Vector3(cos(theta) * radius, sin(theta) * radius, 0)
+		var transform = Transform3D(Basis.IDENTITY, position)
+		mm.set_instance_transform(i, transform)
 	
-	for i in range(72):
-		var point = MeshInstance3D.new()
-		point.mesh = sphere_mesh
-		point.material_override = point_material
-		
-		var point_angle = (float(i) / 72.0) * PI * 2
-		point.position = Vector3(cos(point_angle) * radius, sin(point_angle) * radius, 0)
-		circle_points_node.add_child(point)
+	circle_outline.multimesh = mm
+	add_child(circle_outline)
 
 func create_rotating_point():
-	var point_container = Node3D.new()
-	point_container.name = "RotatingPointAssembly"
-	add_child(point_container)
-
+	var container = Node3D.new()
+	container.name = "RotatingPointAssembly"
+	add_child(container)
+	
 	rotating_point = MeshInstance3D.new()
 	rotating_point.name = "RotatingPoint"
 	var sphere_mesh = SphereMesh.new()
@@ -122,195 +126,145 @@ func create_rotating_point():
 	rotating_point.mesh = sphere_mesh
 	var point_material = StandardMaterial3D.new()
 	point_material.albedo_color = wave_color
+	point_material.emission_enabled = true
+	point_material.emission = wave_color * 0.6
 	rotating_point.material_override = point_material
-	point_container.add_child(rotating_point)
+	container.add_child(rotating_point)
 	
-	# Create thick radius line
-	var radius_material = StandardMaterial3D.new()
-	radius_material.albedo_color = Color.WHITE * 0.9
-	radius_line = create_thick_line(Vector3.ZERO, Vector3(radius, 0, 0), radius_material, line_thickness)
-	radius_line.name = "RadiusLine"
-	point_container.add_child(radius_line)
+	radius_line = create_thick_line(Vector3.ZERO, Vector3(radius, 0, 0), point_material, line_thickness * 0.75)
+	container.add_child(radius_line)
 
 func setup_sine_wave_drawing():
-	# Create container for sine wave segments
-	sine_wave_node = Node3D.new()
-	sine_wave_node.name = "SineWavePath"
-	add_child(sine_wave_node)
+	sine_wave_instance = MultiMeshInstance3D.new()
+	sine_wave_instance.name = "SineWave"
+	wave_multimesh = MultiMesh.new()
+	wave_multimesh.mesh = get_shared_line_mesh()
+	wave_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	wave_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	wave_multimesh.instance_count = 0
+	sine_wave_instance.multimesh = wave_multimesh
+	var wave_material = StandardMaterial3D.new()
+	wave_material.vertex_color_use_as_albedo = true
+	wave_material.emission_enabled = true
+	wave_material.emission = wave_color * 0.2
+	sine_wave_instance.material_override = wave_material
+	add_child(sine_wave_instance)
 
 func setup_projection_lines():
-	projection_lines_node = MeshInstance3D.new()
-	projection_lines_node.name = "ProjectionLines"
-	
-	var projection_material = StandardMaterial3D.new()
-	projection_material.albedo_color = projection_color
-	projection_lines_node.material_override = projection_material
-	
-	add_child(projection_lines_node)
+	projection_lines_instance = MultiMeshInstance3D.new()
+	projection_lines_instance.name = "ProjectionLines"
+	projection_multimesh = MultiMesh.new()
+	projection_multimesh.mesh = get_shared_line_mesh()
+	projection_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	projection_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	projection_multimesh.instance_count = 3
+	projection_lines_instance.multimesh = projection_multimesh
+	var proj_material = StandardMaterial3D.new()
+	proj_material.vertex_color_use_as_albedo = true
+	proj_material.emission_enabled = true
+	proj_material.emission = projection_color * 0.35
+	projection_lines_instance.material_override = proj_material
+	add_child(projection_lines_instance)
 
 func update_rotating_point():
-	var x = cos(angle) * radius
-	var y = sin(angle) * radius
-	rotating_point.position = Vector3(x, y, 0)
-	
-	# Update thick radius line
+	var circle_x = cos(angle) * radius
+	var circle_y = sin(angle) * radius
+	rotating_point.position = Vector3(circle_x, circle_y, 0)
 	update_thick_line(radius_line, Vector3.ZERO, rotating_point.position)
 
-# NEW: Function to update sine wave with thick lines (accumulating geometry)
-func update_thick_sine_wave():
-	# Calculate wave position with cycle offset
-	var cycle_offset = cycles_completed * WAVE_LENGTH
-	var wave_x = WAVE_START_X + cycle_offset + (angle / (PI * 2)) * WAVE_LENGTH
+func update_sine_wave():
+	var cycle_offset = float(cycles_completed) * WAVE_LENGTH
+	var normalized_angle = angle / TAU
+	var wave_x = WAVE_START_X + cycle_offset + normalized_angle * WAVE_LENGTH
 	var wave_y = sin(angle) * radius
-	var current_point = Vector3(wave_x, wave_y, 0)
-	
-	# If we have a previous point, create a thick line segment
-	if sine_wave_segments.size() > 0:
-		var last_segment = sine_wave_segments[sine_wave_segments.size() - 1]
-		# Get the end position of the last segment
-		var cylinder_mesh = last_segment.mesh as CylinderMesh
-		var last_height = cylinder_mesh.height
-		var last_direction = last_segment.transform.basis.y  # Cylinder's up direction
-		var previous_point = last_segment.global_position + last_direction * (last_height / 2)
-		
-		# Only create segment if there's meaningful distance
-		if previous_point.distance_to(current_point) > 0.01:
-			var wave_material = StandardMaterial3D.new()
-			
-			# Color code by cycle for visual distinction
-			var cycle_hue = float(cycles_completed % 6) / 6.0  # 6 different colors
-			var cycle_color = Color.from_hsv(cycle_hue, 0.8, 1.0)
-			var blended_color = wave_color.lerp(cycle_color, 0.3)
-			
-			wave_material.albedo_color = blended_color
-			wave_material.emission_enabled = true
-			wave_material.emission = blended_color * 0.4  # Stronger glow
-			
-			var segment = create_thick_line(previous_point, current_point, wave_material, line_thickness)
-			sine_wave_node.add_child(segment)
-			sine_wave_segments.append(segment)
+	var wave_z = cos(angle) * radius * wave_depth_scale
+	current_wave_point = Vector3(wave_x, wave_y, wave_z)
+	if wave_points.is_empty():
+		wave_points.append(current_wave_point)
 	else:
-		# First point - create initial segment
-		var wave_material = StandardMaterial3D.new()
-		wave_material.albedo_color = wave_color
-		wave_material.emission_enabled = true
-		wave_material.emission = wave_color * 0.4
-		
-		var segment = create_thick_line(current_point, current_point, wave_material, line_thickness)
-		sine_wave_node.add_child(segment)
-		sine_wave_segments.append(segment)
+		if wave_points[wave_points.size() - 1].distance_to(current_wave_point) >= min_segment_length:
+			wave_points.append(current_wave_point)
+			if wave_points.size() > max_wave_points:
+				wave_points.remove_at(0)
+	update_wave_multimesh()
 
-# NEW: Function to manually clear and restart (call from script or debugger)
+func update_wave_multimesh():
+	var segment_count = max(wave_points.size() - 1, 0)
+	wave_multimesh.instance_count = segment_count
+	if segment_count == 0:
+		return
+	for i in range(segment_count):
+		var from_point = wave_points[i]
+		var to_point = wave_points[i + 1]
+		var transform = build_line_transform(from_point, to_point, line_thickness)
+		wave_multimesh.set_instance_transform(i, transform)
+		var cycle_index = int(floor((from_point.x - WAVE_START_X) / WAVE_LENGTH + 0.001))
+		var cycle_hue = float((cycle_index % 6 + 6) % 6) / 6.0
+		var cycle_color = Color.from_hsv(cycle_hue, 0.75, 1.0)
+		var color = wave_color.lerp(cycle_color, 0.35)
+		wave_multimesh.set_instance_color(i, color)
+
+func update_projection_lines():
+	if projection_lines_instance == null:
+		return
+	var multimesh = projection_multimesh
+	if is_stopped:
+		projection_lines_instance.visible = false
+		return
+	projection_lines_instance.visible = true
+	var circle_pos = rotating_point.position
+	var sine_axis_point = Vector3(circle_pos.x, 0, 0)
+	var cos_axis_point = Vector3(0, circle_pos.y, 0)
+	var wave_axis_point = Vector3(current_wave_point.x, 0, current_wave_point.z)
+	multimesh.instance_count = 3
+	multimesh.set_instance_transform(0, build_line_transform(circle_pos, sine_axis_point, line_thickness * 0.6))
+	multimesh.set_instance_color(0, projection_color)
+	multimesh.set_instance_transform(1, build_line_transform(circle_pos, current_wave_point, line_thickness * 0.6))
+	multimesh.set_instance_color(1, wave_color.lerp(projection_color, 0.5))
+	multimesh.set_instance_transform(2, build_line_transform(current_wave_point, wave_axis_point, line_thickness * 0.6))
+	multimesh.set_instance_color(2, projection_color * Color(1, 1, 1, 0.8))
+
 func restart_animation():
 	clear_sine_wave()
 	cycles_completed = 0
 	time = 0.0
 	angle = 0.0
 	is_stopped = false
-	print("Animation restarted!")
 
-# NEW: Function to pause/resume animation
 func toggle_pause():
 	is_stopped = not is_stopped
-	print("Animation %s" % ("paused" if is_stopped else "resumed"))
 
-# NEW: Function to clear sine wave segments
 func clear_sine_wave():
-	for segment in sine_wave_segments:
-		if is_instance_valid(segment):
-			segment.queue_free()
-	sine_wave_segments.clear()
+	wave_points.clear()
+	if wave_multimesh:
+		wave_multimesh.instance_count = 0
 
-func update_projection_lines():
-	# Only show projection lines when animating
-	if is_stopped:
-		# Hide projection lines when stopped to see the full wave clearly
-		projection_lines_node.visible = false
-		return
-	else:
-		projection_lines_node.visible = true
-	
-	var circle_pos = rotating_point.position
-	var cycle_offset = cycles_completed * WAVE_LENGTH
-	var wave_x = WAVE_START_X + cycle_offset + (angle / (PI * 2)) * WAVE_LENGTH
-	var wave_pos = Vector3(wave_x, circle_pos.y, 0)
+func get_shared_line_mesh() -> Mesh:
+	if shared_line_mesh == null:
+		var box = BoxMesh.new()
+		box.size = Vector3.ONE
+		shared_line_mesh = box
+	return shared_line_mesh
 
-	var p1 = circle_pos
-	var p2 = Vector3(circle_pos.x, 0, 0)
-	var p3 = wave_pos
-	var p4 = Vector3(wave_pos.x, 0, 0)
-	
-	var projection_vertices = PackedVector3Array()
-	projection_vertices.push_back(p1)
-	projection_vertices.push_back(p2)
-	projection_vertices.push_back(p1)
-	projection_vertices.push_back(p3)
-	projection_vertices.push_back(p3)
-	projection_vertices.push_back(p4)
-	
-	var mesh = ArrayMesh.new()
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = projection_vertices
-	
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
-	projection_lines_node.mesh = mesh
-
-# NEW: Create thick line using cylinder mesh
-func create_thick_line(from: Vector3, to: Vector3, material: Material, thickness: float = 0.05) -> MeshInstance3D:
-	var line_node = MeshInstance3D.new()
-	var cylinder_mesh = CylinderMesh.new()
-	
-	var distance = from.distance_to(to)
-	var direction = (to - from).normalized()
-	
-	# Configure cylinder
-	cylinder_mesh.top_radius = thickness
-	cylinder_mesh.bottom_radius = thickness
-	cylinder_mesh.height = max(distance, 0.001)  # Prevent zero height
-	
-	line_node.mesh = cylinder_mesh
-	line_node.material_override = material
-	
-	# Position cylinder
+func build_line_transform(from: Vector3, to: Vector3, thickness: float) -> Transform3D:
+	var delta = to - from
+	var distance = delta.length()
 	var midpoint = (from + to) * 0.5
-	line_node.position = midpoint
-	
-	# Rotate cylinder to align with direction
-	if distance > 0.001:
-		var up = Vector3.UP
-		if direction.is_equal_approx(up) or direction.is_equal_approx(-up):
-			up = Vector3.FORWARD
-		line_node.look_at(line_node.position + direction, up)
-		line_node.rotate_object_local(Vector3.RIGHT, PI / 2)  # Align cylinder axis
-	
+	var basis = Basis.IDENTITY
+	if distance > 0.0001:
+		var direction = delta.normalized()
+		basis = Basis().looking_at(direction, Vector3.UP)
+	basis = basis.scaled(Vector3(thickness, thickness, max(distance, 0.0001)))
+	return Transform3D(basis, midpoint)
+
+func create_thick_line(from: Vector3, to: Vector3, material: Material, thickness: float) -> MeshInstance3D:
+	var line_node = MeshInstance3D.new()
+	line_node.mesh = get_shared_line_mesh()
+	line_node.set_meta("thickness", thickness)
+	line_node.material_override = material
+	line_node.transform = build_line_transform(from, to, thickness)
 	return line_node
 
-# NEW: Update existing thick line
 func update_thick_line(line_node: MeshInstance3D, from: Vector3, to: Vector3):
-	var cylinder_mesh = line_node.mesh as CylinderMesh
-	var distance = from.distance_to(to)
-	var direction = (to - from).normalized()
-	
-	# Update height
-	cylinder_mesh.height = max(distance, 0.001)
-	
-	# Update position
-	var midpoint = (from + to) * 0.5
-	line_node.position = midpoint
-	
-	# Update rotation
-	if distance > 0.001:
-		var up = Vector3.UP
-		if direction.is_equal_approx(up) or direction.is_equal_approx(-up):
-			up = Vector3.FORWARD
-		line_node.look_at(line_node.position + direction, up)
-		line_node.rotate_object_local(Vector3.RIGHT, PI / 2)
-
-# Legacy function for compatibility (now unused)
-func create_line(from: Vector3, to: Vector3, material: Material) -> MeshInstance3D:
-	return create_thick_line(from, to, material, 0.02)
-
-func update_line_mesh(mesh: ArrayMesh, from: Vector3, to: Vector3):
-	# Legacy function - now handled by update_thick_line
-	pass
+	var thickness = line_node.get_meta("thickness", line_thickness)
+	line_node.transform = build_line_transform(from, to, thickness)

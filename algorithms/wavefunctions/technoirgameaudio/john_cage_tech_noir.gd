@@ -43,7 +43,14 @@ var generation_complete = false
 # Time tracking
 var elapsed_time = 0.0
 var last_effect_time = 0.0
-var is_initialized = false
+
+var playback_started = false
+var base_sounds_ready = {
+	"drone": false,
+	"city_ambience": false
+}
+var visualizer_root: Node3D
+var visualizer_infos: Array = []
 
 # 3D Loading Bar Components
 var loading_bar_container: Node3D
@@ -68,6 +75,7 @@ func _ready():
 	
 	setup_audio_buses()
 	setup_players()
+	setup_visualizers()
 	create_3d_loading_bar()
 	
 	# Connect signals
@@ -80,13 +88,15 @@ func _ready():
 	start_sound_generation()
 
 func _process(delta):
-	if not is_initialized:
+	if not generation_complete:
 		animate_loading_bar(delta)
+	update_visualizers(delta)
+	
+	if not playback_started:
 		return
-		
+	
 	elapsed_time += delta
 	
-	# Check if we should trigger a random sound effect
 	if elapsed_time - last_effect_time > rng.randf_range(3.0, 15.0):
 		play_random_effect()
 		last_effect_time = elapsed_time
@@ -334,6 +344,7 @@ func _on_generation_started():
 
 func _on_sound_created(sound_name: String):
 	print("Created: " + sound_name)
+	_maybe_start_stream(sound_name)
 	if progress_text:
 		progress_text.text = "Created: " + sound_name.replace("_", " ").capitalize()
 
@@ -364,9 +375,60 @@ func _on_generation_complete():
 		tween.tween_callback(loading_bar_container.queue_free)
 	
 	# Start ambient sounds
-	start_ambient()
-	is_initialized = true
+	if not playback_started:
+		start_ambient()
+		base_sounds_ready["drone"] = true
+		base_sounds_ready["city_ambience"] = true
+		_try_start_playback()
 	is_generating = false
+
+func _try_start_playback():
+	if base_sounds_ready["drone"] and base_sounds_ready["city_ambience"] and not playback_started:
+		playback_started = true
+		elapsed_time = 0.0
+		last_effect_time = 0.0
+		play_random_effect()
+
+func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream):
+	if player == null or stream == null:
+		return
+	if player.stream != stream:
+		player.stream = stream
+	if not player.playing:
+		player.play()
+
+func _maybe_start_stream(sound_name: String):
+	if sound_name == "drone" and precreated_sounds.has("drone"):
+		_ensure_player_stream(drone_player, precreated_sounds["drone"])
+		base_sounds_ready["drone"] = true
+		_try_start_playback()
+		return
+	if sound_name == "city_ambience" and precreated_sounds.has("city_ambience"):
+		_ensure_player_stream(ambient_player, precreated_sounds["city_ambience"])
+		base_sounds_ready["city_ambience"] = true
+		_try_start_playback()
+		return
+	if precreated_sounds.has(sound_name) and precreated_sounds[sound_name] is Array:
+		_play_effect_immediately(sound_name)
+
+func _play_effect_immediately(sound_name: String):
+	var available_players = []
+	for player in effect_players:
+		if not player.playing:
+			available_players.append(player)
+	if available_players.size() == 0:
+		return
+	var variations = precreated_sounds.get(sound_name, [])
+	if typeof(variations) != TYPE_ARRAY:
+		return
+	if variations.size() == 0:
+		return
+	var player = available_players[rng.randi() % available_players.size()]
+	var stream = variations[rng.randi() % variations.size()]
+	player.stream = stream
+	player.volume_db = -15 - rng.randf_range(0, 10)
+	player.play()
+	last_effect_time = elapsed_time
 
 func setup_audio_buses():
 	# Create audio buses for effects
@@ -421,14 +483,141 @@ func setup_players():
 		add_child(player)
 		effect_players.append(player)
 
+func setup_visualizers():
+	# Rebuild small transparent spheres for each audio source.
+	if visualizer_root:
+		visualizer_root.queue_free()
+	visualizer_root = null
+	visualizer_infos.clear()
+	visualizer_root = Node3D.new()
+	visualizer_root.name = "AudioVisualizerRoot"
+	visualizer_root.position = Vector3.ZERO
+	add_child(visualizer_root)
+	
+	if drone_player:
+		add_visualizer_for_player(drone_player, Vector3(-1.5, 0.0, 0.0), Color(0.45, 0.15, 0.8, 0.6))
+	if ambient_player:
+		add_visualizer_for_player(ambient_player, Vector3(1.5, 0.0, 0.0), Color(0.1, 0.6, 0.95, 0.6))
+	
+	if effect_players.size() == 0:
+		return
+	
+	var radius = 2.2
+	for i in range(effect_players.size()):
+		var angle = TAU * float(i) / max(1.0, float(effect_players.size()))
+		var pos = Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
+		var hue = fposmod(0.55 + float(i) / max(1.0, float(effect_players.size())), 1.0)
+		var color = Color.from_hsv(hue, 0.75, 1.0, 0.6)
+		add_visualizer_for_player(effect_players[i], pos, color)
+
+func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color):
+	if not player:
+		return
+	if visualizer_root == null:
+		return
+	var holder = Node3D.new()
+	holder.position = position
+	visualizer_root.add_child(holder)
+	
+	var base_radius = 0.45
+	var mesh_instance = MeshInstance3D.new()
+	var mesh = SphereMesh.new()
+	mesh.radius = base_radius
+	mesh.height = base_radius * 2.0
+	mesh_instance.mesh = mesh
+	mesh_instance.position = Vector3(0, base_radius, 0)
+	mesh_instance.scale = Vector3.ONE
+	
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(color.r, color.g, color.b, 0.35)
+	material.emission_enabled = true
+	material.emission = color * 1.3
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.roughness = 0.25
+	material.metallic = 0.05
+	mesh_instance.material_override = material
+	
+	holder.add_child(mesh_instance)
+	
+	visualizer_infos.append({
+		"player": player,
+		"mesh": mesh_instance,
+		"color": color,
+		"radius": base_radius,
+		"level": 0.0
+	})
+
+# Smooth amplitude-driven scaling to keep the floating orbs breathing.
+func update_visualizers(delta):
+	if visualizer_infos.size() == 0:
+		return
+	for i in range(visualizer_infos.size()):
+		var info = visualizer_infos[i]
+		var mesh: MeshInstance3D = info.get("mesh")
+		var player: AudioStreamPlayer = info.get("player")
+		if mesh == null:
+			continue
+		var amplitude = 0.0
+		if player and player.playing and player.stream is AudioStreamWAV:
+			amplitude = _get_stream_amplitude(player.stream, player.get_playback_position())
+		var level = info.get("level", 0.0)
+		level = lerp(level, amplitude, 0.15)
+		var base_radius = info.get("radius", 0.45)
+		var scale = 1.0 + level * 6.0
+		mesh.scale = Vector3.ONE * scale
+		mesh.position.y = base_radius * scale
+		
+		var base_color: Color = info.get("color", Color.WHITE)
+		var emission_strength = 0.8 + level * 3.0
+		if mesh.material_override:
+			mesh.material_override.emission = base_color * emission_strength
+			mesh.material_override.albedo_color = Color(base_color.r, base_color.g, base_color.b, clamp(0.35 + level * 0.4, 0.35, 0.9))
+		
+		info["level"] = level
+		visualizer_infos[i] = info
+func _get_stream_amplitude(stream: AudioStreamWAV, position: float, sample_window := 256) -> float:
+	if stream == null:
+		return 0.0
+	var data = stream.data
+	if data.is_empty():
+		return 0.0
+	var mix_rate = max(stream.mix_rate, 1)
+	var frame_count = data.size() / 4
+	if frame_count == 0:
+		return 0.0
+	var current_frame = int(position * mix_rate)
+	if stream.loop_mode == AudioStreamWAV.LOOP_FORWARD and frame_count > 0:
+		current_frame = current_frame % frame_count
+	else:
+		current_frame = clamp(current_frame, 0, frame_count - 1)
+	var max_samples = min(sample_window, frame_count)
+	var sum = 0.0
+	var samples = 0
+	for i in range(max_samples):
+		var frame_index = current_frame + i
+		if stream.loop_mode == AudioStreamWAV.LOOP_FORWARD:
+			frame_index = (current_frame + i) % frame_count
+		elif frame_index >= frame_count:
+			break
+		var offset = frame_index * 4
+		if offset + 3 >= data.size():
+			break
+		var left = data.decode_s16(offset) / 32767.0
+		var right = data.decode_s16(offset + 2) / 32767.0
+		sum += (abs(left) + abs(right)) * 0.5
+		samples += 1
+	if samples == 0:
+		return 0.0
+	return sum / float(samples)
+
 func start_ambient():
 	# Start the continuous drone using pre-generated stream
-	drone_player.stream = precreated_sounds["drone"]
-	drone_player.play()
+	if precreated_sounds.has("drone"):
+		_ensure_player_stream(drone_player, precreated_sounds["drone"])
 	
 	# Start city ambience using pre-generated stream
-	ambient_player.stream = precreated_sounds["city_ambience"]
-	ambient_player.play()
+	if precreated_sounds.has("city_ambience"):
+		_ensure_player_stream(ambient_player, precreated_sounds["city_ambience"])
 
 func play_random_effect():
 	# Find an available player
@@ -437,19 +626,25 @@ func play_random_effect():
 		if not player.playing:
 			available_players.append(player)
 	
-	if available_players.size() > 0:
-		var player = available_players[rng.randi() % available_players.size()]
-		
-		# Choose a random effect type from our pre-generated sounds
-		var sound_type = sound_types[rng.randi() % sound_types.size()]
-		
-		# Get a random variation of this sound type
-		var variation_index = rng.randi() % precreated_sounds[sound_type].size()
-		var stream = precreated_sounds[sound_type][variation_index]
-		
-		player.stream = stream
-		player.volume_db = -15 - rng.randf_range(0, 10)  # Random volume for variation
-		player.play()
+	if available_players.size() == 0:
+		return
+	
+	var ready_types = []
+	for sound_type in sound_types:
+		if precreated_sounds.has(sound_type) and precreated_sounds[sound_type] is Array and precreated_sounds[sound_type].size() > 0:
+			ready_types.append(sound_type)
+	
+	if ready_types.size() == 0:
+		return
+	
+	var player = available_players[rng.randi() % available_players.size()]
+	var sound_type = ready_types[rng.randi() % ready_types.size()]
+	var variations = precreated_sounds[sound_type]
+	var stream = variations[rng.randi() % variations.size()]
+	
+	player.stream = stream
+	player.volume_db = -15 - rng.randf_range(0, 10)  # Random volume for variation
+	player.play()
 
 # Sound Generators
 

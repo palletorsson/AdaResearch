@@ -1,0 +1,121 @@
+[gd_scene load_steps=17 format=3 uid="uid://dla5jk75e7x1f"]
+
+[ext_resource type="Script" uid="uid://b7fjcl5fs0cn2" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_tb2l3"]
+[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_8dssk"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_1h47w"]
+[ext_resource type="PackedScene" uid="uid://bwhjh7wlhpe5" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_dd5gu"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_f6bvu"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_36ypl"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_n1cvh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.25, 0.3, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(1, 0.7, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.1, 0.1, 0.12, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(1.05, 0.75, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3"]
+size = Vector3(1.1, 0.3, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.15, 0.2, 0.25, 1)
+metallic = 0.6
+roughness = 0.4
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.4, 0.6, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(0.7, 0.7, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7u64y"]
+size = Vector3(0.65, 0.2, 0.650062)
+
+[node name="SciFiKiosk" type="Node3D"]
+
+[node name="KioskWithCutout" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_1")
+use_collision = true
+
+[node name="KioskBody" type="CSGBox3D" parent="KioskWithCutout"]
+size = Vector3(1.2, 2, 0.8)
+
+[node name="MonitorCutout" type="CSGBox3D" parent="KioskWithCutout"]
+transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0.0158935, 0.302461, -0.431828)
+operation = 2
+size = Vector3(0.884326, 1.02856, 0.939258)
+
+[node name="Monitor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, -0.35)
+mesh = SubResource("BoxMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="MonitorFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, -0.4)
+mesh = SubResource("BoxMesh_4")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="ControlPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, -1.39937, 0.8, -0.2)
+mesh = SubResource("BoxMesh_3")
+surface_material_override/0 = SubResource("StandardMaterial3D_3")
+
+[node name="MonitorLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, 0.1)
+light_color = Color(0.2, 0.8, 1, 1)
+light_energy = 1.5
+spot_range = 3.0
+spot_angle = 30.0
+
+[node name="AmbientLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707, -0.5, 0.5, 0, 0.707, 0.707, -0.707, -0.5, 0.5, 0, 2, 2)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 2, 2, 2)
+fov = 60.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="SettingsUI" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.359093, -0.209207)
+script = ExtResource("1_tb2l3")
+
+[node name="Screen" type="MeshInstance3D" parent="SettingsUI"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 4.42915e-09, 0.600621, -0.0506636)
+mesh = SubResource("1")
+surface_material_override/0 = ExtResource("2_8dssk")
+
+[node name="Viewport2Din3D" parent="SettingsUI/Screen" instance=ExtResource("3_1h47w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
+screen_size = Vector2(0.625, 0.625)
+scene = ExtResource("4_dd5gu")
+viewport_size = Vector2(500, 500)
+scene_properties_keys = PackedStringArray("simple_mario_slider.gd")
+
+[node name="HandPoseArea" parent="SettingsUI" instance=ExtResource("5_f6bvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555293, 0)
+left_pose = ExtResource("6_36ypl")
+right_pose = ExtResource("7_n1cvh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SettingsUI/HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+shape = SubResource("BoxShape3D_7u64y")

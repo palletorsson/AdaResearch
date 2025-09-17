@@ -20,7 +20,7 @@ func _find_spawn():
 	teleport_target = get_tree().current_scene.find_child("SpawnPoint", true, false)
 	if not teleport_target:
 		teleport_target = Node3D.new()
-		teleport_target.position = Vector3(0, 3, 0)
+		teleport_target.position = Vector3(0.5, 3, 0.5)
 		get_tree().current_scene.add_child(teleport_target)
 
 func _on_body_entered(body: Node3D):

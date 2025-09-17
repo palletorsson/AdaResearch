@@ -18,19 +18,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.1, 0.1, 0.2, 0.9)
+color = Color(0.08, 0.09, 0.16, 0.92)
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -100.0
+offset_left = -150.0
 offset_top = 20.0
-offset_right = 100.0
-offset_bottom = 50.0
+offset_right = 150.0
+offset_bottom = 60.0
 grow_horizontal = 2
-text = "Mario Sound Control"
+text = "Mario Sound Lab"
 horizontal_alignment = 1
 
 [node name="VBox" type="VBoxContainer" parent="."]
@@ -40,12 +40,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
+offset_left = -240.0
+offset_top = -220.0
+offset_right = 240.0
+offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
 [node name="Freq1Container" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
@@ -60,7 +61,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 min_value = 200.0
 max_value = 2000.0
-step = 10.0
+step = 5.0
 value = 880.0
 
 [node name="Freq2Container" type="HBoxContainer" parent="VBox"]
@@ -69,14 +70,14 @@ layout_mode = 2
 [node name="Freq2Label" type="Label" parent="VBox/Freq2Container"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Frequency 2: 1318 Hz"
+text = "Frequency 2: 1319 Hz"
 
 [node name="Freq2Slider" type="HSlider" parent="VBox/Freq2Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 400.0
-max_value = 3000.0
-step = 10.0
+max_value = 3200.0
+step = 5.0
 value = 1320.0
 
 [node name="VolumeContainer" type="HBoxContainer" parent="VBox"]
@@ -110,10 +111,90 @@ max_value = 0.5
 step = 0.01
 value = 0.2
 
-[node name="TestButton" type="Button" parent="VBox"]
+[node name="AttackContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="AttackLabel" type="Label" parent="VBox/AttackContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack: 18 ms"
+
+[node name="AttackSlider" type="HSlider" parent="VBox/AttackContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 0.08
+step = 0.001
+value = 0.018
+
+[node name="ReleaseContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="ReleaseLabel" type="Label" parent="VBox/ReleaseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Release: 120 ms"
+
+[node name="ReleaseSlider" type="HSlider" parent="VBox/ReleaseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.03
+max_value = 0.3
+step = 0.001
+value = 0.12
+
+[node name="NoiseContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="NoiseLabel" type="Label" parent="VBox/NoiseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Noise Sparkle: 8%"
+
+[node name="NoiseSlider" type="HSlider" parent="VBox/NoiseContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 0.3
+step = 0.005
+value = 0.08
+
+[node name="SparkleContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="SparkleToggle" type="CheckButton" parent="VBox/SparkleContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Sparkle Arpeggio"
+
+[node name="ButtonRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TestButton" type="Button" parent="VBox/ButtonRow"]
 layout_mode = 2
 text = "Test Sound"
 
-[node name="WaveformDisplay" type="Control" parent="VBox"]
-custom_minimum_size = Vector2(400, 150)
+[node name="RandomizeButton" type="Button" parent="VBox/ButtonRow"]
+layout_mode = 2
+text = "Inspire Me"
+
+[node name="VisualizationContainer" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="WaveformLabel" type="Label" parent="VBox/VisualizationContainer"]
+layout_mode = 2
+text = "Waveform (first 120 ms)"
+horizontal_alignment = 1
+
+[node name="WaveformDisplay" type="Control" parent="VBox/VisualizationContainer"]
+custom_minimum_size = Vector2(420, 160)
+layout_mode = 2
+
+[node name="SpectrumLabel" type="Label" parent="VBox/VisualizationContainer"]
+layout_mode = 2
+text = "Spectrum (80 Hz - 4000 Hz)"
+horizontal_alignment = 1
+
+[node name="SpectrumDisplay" type="Control" parent="VBox/VisualizationContainer"]
+custom_minimum_size = Vector2(420, 120)
 layout_mode = 2

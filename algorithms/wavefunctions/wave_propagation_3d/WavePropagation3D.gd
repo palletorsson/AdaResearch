@@ -1,13 +1,23 @@
 extends Node3D
 
-var time = 0.0
-var surface_nodes = []
-var wave_rings = []
-var grid_size = 20
-var surface_scale = 8.0
-var frequency = 1.5
-var amplitude = 1.0
-var wave_speed = 3.0
+@export var grid_size: int = 20
+@export var tile_size: float = 0.4
+@export var tile_gutter: float = 0.1
+@export var tile_height: float = 0.06
+@export var floor_tilt_degrees: float = -12.0
+@export var frequency: float = 0.6
+@export var amplitude: float = 0.25
+@export var wave_speed: float = 0.6
+@export var wave_damping: float = 0.08
+
+var time: float = 0.0
+var tile_positions: Array[Vector2] = []
+var tile_multimesh_instance: MultiMeshInstance3D
+var tile_multimesh: MultiMesh
+var wave_rings: Array = []
+
+var base_tile_color := Color(0.22, 0.55, 0.85, 1.0)
+var peak_tile_color := Color(0.95, 0.85, 0.4, 1.0)
 
 func _ready():
 	create_wave_surface()
@@ -16,70 +26,77 @@ func _ready():
 
 func create_wave_surface():
 	var surface_parent = $WaveSurface
+	var instance = MultiMeshInstance3D.new()
+	tile_multimesh_instance = instance
+	tile_multimesh = MultiMesh.new()
+	var tile_mesh = BoxMesh.new()
+	tile_mesh.size = Vector3(tile_size, tile_height, tile_size)
+	tile_multimesh.mesh = tile_mesh
+	tile_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	tile_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	tile_multimesh.instance_count = grid_size * grid_size
+	tile_multimesh_instance.multimesh = tile_multimesh
+	surface_parent.add_child(tile_multimesh_instance)
 	
+	tile_positions.clear()
+	var spacing = tile_size + tile_gutter
+	var half = (grid_size - 1) * 0.5
+	var index = 0
 	for x in range(grid_size):
-		surface_nodes.append([])
 		for z in range(grid_size):
-			var node_sphere = CSGSphere3D.new()
-			node_sphere.radius = 0.08
-			
-			var x_pos = (x - grid_size/2.0) * surface_scale / grid_size
-			var z_pos = (z - grid_size/2.0) * surface_scale / grid_size
-			
-			node_sphere.position = Vector3(x_pos, 0, z_pos)
-			surface_parent.add_child(node_sphere)
-			surface_nodes[x].append(node_sphere)
+			var pos2 = Vector2((x - half) * spacing, (z - half) * spacing)
+			tile_positions.append(pos2)
+			var origin = Vector3(pos2.x, tile_height * 0.5, pos2.y)
+			var transform = Transform3D(Basis.IDENTITY, origin)
+			tile_multimesh.set_instance_transform(index, transform)
+			tile_multimesh.set_instance_color(index, base_tile_color)
+			index += 1
 
 func create_wave_rings():
 	var rings_parent = $WaveRings
-	
-	for i in range(5):
+	wave_rings.clear()
+	var ring_count = 4
+	for i in range(ring_count):
 		var ring = CSGCylinder3D.new()
-		ring.radius = 1.0 + i * 0.8 + i * 0.8
-		ring.height = 0.05
-		ring.position.y = -0.5
+		ring.radius = 0.2 + float(i) * 0.9
+		ring.height = 0.04
+		ring.position.y = -0.4
 		rings_parent.add_child(ring)
 		wave_rings.append(ring)
 
 func setup_materials():
-	# Wave source material
-	var source_material = StandardMaterial3D.new()
-	source_material.albedo_color = Color(1.0, 0.3, 0.3, 1.0)
-	source_material.emission_enabled = true
-	source_material.emission = Color(0.5, 0.1, 0.1, 1.0)
-	$WaveSource.material_override = source_material
+	var tile_material = StandardMaterial3D.new()
+	tile_material.vertex_color_use_as_albedo = true
+	tile_material.metallic = 0.0
+	tile_material.roughness = 0.4
+	tile_material.emission_enabled = true
+	tile_material.emission = Color(0.05, 0.08, 0.1, 1.0)
+	tile_multimesh_instance.material_override = tile_material
 	
-	# Surface node materials
-	var surface_material = StandardMaterial3D.new()
-	surface_material.albedo_color = Color(0.3, 0.7, 1.0, 1.0)
-	surface_material.emission_enabled = true
-	surface_material.emission = Color(0.1, 0.2, 0.3, 1.0)
-	
-	for row in surface_nodes:
-		for node in row:
-			node.material_override = surface_material
-	
-	# Wave ring materials
 	var ring_material = StandardMaterial3D.new()
-	ring_material.albedo_color = Color(0.8, 0.8, 1.0, 0.3)
+	ring_material.albedo_color = Color(0.75, 0.82, 1.0, 0.35)
 	ring_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	ring_material.emission_enabled = true
-	ring_material.emission = Color(0.2, 0.2, 0.4, 1.0)
-	
+	ring_material.emission = Color(0.22, 0.22, 0.45, 1.0)
 	for ring in wave_rings:
 		ring.material_override = ring_material
 	
-	# Control materials
+	var source_material = StandardMaterial3D.new()
+	source_material.albedo_color = Color(1.0, 0.35, 0.35)
+	source_material.emission_enabled = true
+	source_material.emission = Color(0.6, 0.1, 0.1)
+	$WaveSource.material_override = source_material
+	
 	var freq_material = StandardMaterial3D.new()
-	freq_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
+	freq_material.albedo_color = Color(1.0, 0.85, 0.35)
 	freq_material.emission_enabled = true
-	freq_material.emission = Color(0.3, 0.2, 0.05, 1.0)
+	freq_material.emission = Color(0.35, 0.22, 0.08)
 	$FrequencyControl.material_override = freq_material
 	
 	var amp_material = StandardMaterial3D.new()
-	amp_material.albedo_color = Color(0.8, 1.0, 0.2, 1.0)
+	amp_material.albedo_color = Color(0.85, 1.0, 0.35)
 	amp_material.emission_enabled = true
-	amp_material.emission = Color(0.2, 0.3, 0.05, 1.0)
+	amp_material.emission = Color(0.2, 0.32, 0.08)
 	$AmplitudeControl.material_override = amp_material
 
 func _process(delta):
@@ -89,71 +106,55 @@ func _process(delta):
 	animate_controls()
 
 func animate_3d_wave_propagation():
-	var source_pos = Vector3.ZERO
-	
-	for x in range(grid_size):
-		for z in range(grid_size):
-			var node = surface_nodes[x][z]
-			var node_pos = node.position
-			
-			# Calculate distance from wave source
-			var distance = Vector2(node_pos.x, node_pos.z).length()
-			
-			# Wave equation: A * sin(k*r - ω*t)
-			var wave_phase = distance * frequency - wave_speed * time
-			var displacement = amplitude * sin(wave_phase) * exp(-distance * 0.1)
-			
-			# Apply displacement
-			node.position.y = displacement * 0.5
-			
-			# Color based on wave phase
-			var wave_intensity = (sin(wave_phase) + 1.0) * 0.5
-			var node_material = node.material_override as StandardMaterial3D
-			if node_material:
-				var emission_strength = 0.1 + wave_intensity * 0.3
-				node_material.emission = Color(0.1 * emission_strength, 0.2 * emission_strength, 
-											   0.3 * emission_strength, 1.0)
+	if tile_multimesh == null:
+		return
+	var instance_index = 0
+	var tile_half_height = tile_height * 0.5
+	for pos2 in tile_positions:
+		var distance = pos2.length()
+		var wave_phase = distance * frequency - wave_speed * time
+		var attenuation = exp(-distance * wave_damping)
+		var displacement = amplitude * sin(wave_phase) * attenuation
+		var origin = Vector3(pos2.x, tile_half_height + displacement, pos2.y)
+		var transform = Transform3D(Basis.IDENTITY, origin)
+		tile_multimesh.set_instance_transform(instance_index, transform)
+		var intensity = clamp((sin(wave_phase) + 1.0) * 0.5, 0.0, 1.0)
+		var color = base_tile_color.lerp(peak_tile_color, intensity)
+		tile_multimesh.set_instance_color(instance_index, color)
+		instance_index += 1
 
 func animate_wave_rings():
-	# Animate expanding wave rings
+	if wave_rings.is_empty():
+		return
+	var travel_rate = max(wave_speed * 1.8, 0.01)
+	var max_radius = 7.5
+	var cycle_duration = max_radius / travel_rate
 	for i in range(wave_rings.size()):
 		var ring = wave_rings[i]
-		var ring_time = time - i * 0.5
-		
-		if ring_time > 0:
-			var ring_radius = wave_speed * ring_time
-			ring.radius = ring_radius
-			
-			# Fade out as ring expands
-			var fade_factor = max(0.0, 1.0 - ring_time * 0.2)
-			var ring_material = ring.material_override as StandardMaterial3D
-			if ring_material:
-				ring_material.albedo_color.a = fade_factor * 0.3
-				ring_material.emission = Color(0.2 * fade_factor, 0.2 * fade_factor, 
-											   0.4 * fade_factor, 1.0)
-			
-			# Reset ring when it gets too large
-			if ring_radius > 6.0:
-				ring.radius = 0.1
-				
-		else:
-			ring.radius = 0.1
-			
+		var local_time = time - float(i) * 0.9
+		if cycle_duration <= 0.0:
+			cycle_duration = 1.0
+		local_time = fposmod(local_time, cycle_duration)
+		var ring_radius = max(0.15, travel_rate * local_time)
+		ring.radius = ring_radius
+		var fade = clamp(1.0 - local_time * 0.18, 0.0, 1.0)
+		var ring_material = ring.material_override as StandardMaterial3D
+		if ring_material:
+			ring_material.albedo_color.a = fade * 0.35
+			ring_material.emission = Color(0.22 * fade, 0.22 * fade, 0.45 * fade, 1.0)
 
 func animate_controls():
-	# Frequency control
 	var freq_height = frequency * 0.8
-	$FrequencyControl.height = freq_height
-	$FrequencyControl.position.y = -3 + freq_height/2
-	
-	# Amplitude control
-	var amp_height = amplitude * 1.2
-	$AmplitudeControl.height = amp_height
-	$AmplitudeControl.position.y = -3 + amp_height/2
-	
-	# Vary parameters for demonstration
-	frequency = 1.5 + sin(time * 0.2) * 0.8
-	amplitude = 1.0 + cos(time * 0.15) * 0.5
-	
-	# Pulsing wave source
-	$WaveSource.radius = 0.3 + sin(time * frequency * 3.0) * 0.1
+	var freq_size = $FrequencyControl.size
+	freq_size.y = max(0.2, freq_height)
+	$FrequencyControl.size = freq_size
+	$FrequencyControl.position.y = -3.0 + freq_size.y * 0.5
+	var amp_height = amplitude * 1.6
+	var amp_size = $AmplitudeControl.size
+	amp_size.y = max(0.2, amp_height)
+	$AmplitudeControl.size = amp_size
+	$AmplitudeControl.position.y = -3.0 + amp_size.y * 0.5
+	frequency = 0.55 + sin(time * 0.12) * 0.25
+	amplitude = 0.22 + cos(time * 0.1) * 0.12
+	wave_speed = 0.5 + sin(time * 0.09) * 0.18
+	$WaveSource.radius = 0.28 + sin(time * frequency * 2.4) * 0.05

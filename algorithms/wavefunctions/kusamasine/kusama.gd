@@ -2,14 +2,20 @@ extends Node3D
 
 # Enhanced Configuration variables
 @export_category("Ultra-Vivid Sculpture Configuration")
-@export var num_petals: int = 12
-@export var num_tendrils: int = 8
-@export var num_orbital_rings: int = 5
+@export var num_petals: int = 6
+@export var num_tendrils: int = 4
+@export var num_orbital_rings: int = 2
 @export var generate_on_ready: bool = true
 @export var animation_intensity: float = 1.0
 @export var color_shift_speed: float = 1.0
 @export var morphing_amplitude: float = 0.3
-@export var harmonic_layers: int = 6
+@export var harmonic_layers: int = 3
+@export var detail_scale: float = 0.6
+@export var vertical_offset: float = 2.0
+@export var include_tendrils: bool = false
+@export var include_orbital_rings: bool = false
+@export var include_harmonic_clusters: bool = false
+@export var include_energy_streams: bool = false
 
 # Time tracking for sine/cosine animations
 var time: float = 0.0
@@ -45,6 +51,8 @@ var aurora_colors = [
 	Color(1.0, 1.0, 0.0),    # Aurora Yellow
 ]
 
+var detail_scale_clamped: float = 0.8
+
 # Arrays to store dynamic elements
 var dynamic_petals: Array = []
 var morphing_tendrils: Array = []
@@ -53,6 +61,9 @@ var harmonic_dots: Array = []
 var energy_streams: Array = []
 
 func _ready():
+	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
+	if abs(vertical_offset) > 0.001:
+		translate(Vector3(0, vertical_offset, 0))
 	if generate_on_ready:
 		generate_ultra_vivid_sculpture()
 
@@ -72,17 +83,15 @@ func generate_ultra_vivid_sculpture():
 	# Create morphing petals with sine wave dynamics
 	create_morphing_petals()
 	
-	# Create undulating tendrils
-	create_undulating_tendrils()
-	
-	# Create orbital ring systems
-	create_orbital_rings()
-	
-	# Create harmonic dot clusters
-	create_harmonic_clusters()
-	
-	# Create energy stream effects
-	create_energy_streams()
+	# Optional modules for heavier geometry
+	if include_tendrils:
+		create_undulating_tendrils()
+	if include_orbital_rings:
+		create_orbital_rings()
+	if include_harmonic_clusters:
+		create_harmonic_clusters()
+	if include_energy_streams:
+		create_energy_streams()
 	
 	# Set up enhanced environment
 	setup_ultra_vivid_environment()
@@ -99,8 +108,8 @@ func create_ultra_vivid_core():
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.9 - (layer * 0.15)
 		sphere_mesh.height = sphere_mesh.radius * 2
-		sphere_mesh.radial_segments = 64
-		sphere_mesh.rings = 32
+		sphere_mesh.radial_segments = max(24, int(round(64 * detail_scale_clamped)))
+		sphere_mesh.rings = max(16, int(round(32 * detail_scale_clamped)))
 		sphere.mesh = sphere_mesh
 		
 		# Create ultra-vivid material with sine-based properties
@@ -194,8 +203,8 @@ func create_enhanced_petal_mesh(layer):
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
 	# Create more complex petal shape with sine-based morphing
-	var segments = 32
-	var rings = 16
+	var segments = max(16, int(round(32 * detail_scale_clamped)))
+	var rings = max(8, int(round(16 * detail_scale_clamped)))
 	
 	for ring in range(rings):
 		for segment in range(segments):
@@ -253,7 +262,8 @@ func create_undulating_tendril(index):
 	tendril.name = "UndulatingTendril_" + str(index)
 	
 	var base_angle = (2 * PI * index) / num_tendrils
-	var segments = 12 + index % 4
+	var base_segments = 12 + index % 4
+	var segments = max(6, int(round(base_segments * detail_scale_clamped)))
 	var base_color = plasma_spectrum[index % plasma_spectrum.size()]
 	
 	var tendril_segments = []
@@ -291,8 +301,8 @@ func create_tendril_segment_mesh(segment_index, total_segments):
 	var size_factor = 1.0 - (float(segment_index) / total_segments) * 0.7
 	mesh.radius = 0.2 * size_factor * (1.0 + sin(segment_index) * 0.3)
 	mesh.height = mesh.radius * 2
-	mesh.radial_segments = 16
-	mesh.rings = 8
+	mesh.radial_segments = max(8, int(round(16 * detail_scale_clamped)))
+	mesh.rings = max(4, int(round(8 * detail_scale_clamped)))
 	return mesh
 
 func create_orbital_rings():
@@ -308,7 +318,8 @@ func create_orbital_ring_system(ring_index):
 	orbital.name = "OrbitalRing_" + str(ring_index)
 	
 	var ring_radius = 3.0 + ring_index * 0.8
-	var num_orbs = 8 + ring_index * 2
+	var base_orbs = 8 + ring_index * 2
+	var num_orbs = max(6, int(round(base_orbs * detail_scale_clamped)))
 	var ring_color = aurora_colors[ring_index % aurora_colors.size()]
 	
 	for orb in range(num_orbs):
@@ -318,8 +329,8 @@ func create_orbital_ring_system(ring_index):
 		var orb_mesh = SphereMesh.new()
 		orb_mesh.radius = 0.15 + sin(orb * 0.5) * 0.05
 		orb_mesh.height = orb_mesh.radius * 2
-		orb_mesh.radial_segments = 12
-		orb_mesh.rings = 8
+		orb_mesh.radial_segments = max(8, int(round(12 * detail_scale_clamped)))
+		orb_mesh.rings = max(4, int(round(8 * detail_scale_clamped)))
 		orb_node.mesh = orb_mesh
 		
 		# Create glowing material
@@ -348,7 +359,8 @@ func create_orbital_ring_system(ring_index):
 func create_harmonic_clusters():
 	harmonic_dots.clear()
 	
-	for cluster in range(6):
+	var cluster_count = max(3, int(round(6 * detail_scale_clamped)))
+	for cluster in range(cluster_count):
 		var cluster_node = create_harmonic_cluster(cluster)
 		add_child(cluster_node)
 		harmonic_dots.append(cluster_node)
@@ -359,21 +371,19 @@ func create_harmonic_cluster(cluster_index):
 	
 	var base_radius = 4.0 + cluster_index * 0.5
 	var cluster_color = plasma_spectrum[cluster_index % plasma_spectrum.size()]
-	
-	# Create dots in harmonic patterns
-	for harmonic in range(5):
-		for dot in range(12):
+	var harmonic_count = max(3, int(round(5 * detail_scale_clamped)))
+	var dots_per_harmonic = max(6, int(round(12 * detail_scale_clamped)))
+
+	for harmonic in range(harmonic_count):
+		for dot in range(dots_per_harmonic):
 			var dot_node = MeshInstance3D.new()
 			dot_node.name = "HarmonicDot_" + str(harmonic) + "_" + str(dot)
-			
 			var dot_mesh = SphereMesh.new()
 			dot_mesh.radius = 0.08 + sin(harmonic) * 0.02
 			dot_mesh.height = dot_mesh.radius * 2
-			dot_mesh.radial_segments = 8
-			dot_mesh.rings = 4
+			dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
+			dot_mesh.rings = max(3, int(round(4 * detail_scale_clamped)))
 			dot_node.mesh = dot_mesh
-			
-			# Ultra-bright material
 			var material = StandardMaterial3D.new()
 			material.albedo_color = cluster_color
 			material.roughness = 0.0
@@ -381,28 +391,23 @@ func create_harmonic_cluster(cluster_index):
 			material.metallic_specular = 1.0
 			material.emission_enabled = true
 			material.emission = cluster_color * 1.2
-			
 			dot_node.material_override = material
-			
-			# Position using sine waves for harmonic distribution
-			var angle = (2 * PI * dot) / 12
+			var angle = (2 * PI * dot) / float(dots_per_harmonic)
 			var radius = base_radius + sin(harmonic * PI) * 0.8
 			var height = cos(harmonic * PI * 0.5) * 2.0
-			
 			dot_node.position = Vector3(
 				cos(angle) * radius,
 				height,
 				sin(angle) * radius
 			)
-			
 			cluster.add_child(dot_node)
-	
 	return cluster
 
 func create_energy_streams():
 	energy_streams.clear()
 	
-	for stream in range(8):
+	var stream_count = max(4, int(round(8 * detail_scale_clamped)))
+	for stream in range(stream_count):
 		var stream_node = create_energy_stream(stream)
 		add_child(stream_node)
 		energy_streams.append(stream_node)
@@ -412,7 +417,7 @@ func create_energy_stream(stream_index):
 	stream.name = "EnergyStream_" + str(stream_index)
 	
 	var stream_color = aurora_colors[stream_index % aurora_colors.size()]
-	var segments = 20
+	var segments = max(10, int(round(20 * detail_scale_clamped)))
 	
 	for segment in range(segments):
 		var particle = MeshInstance3D.new()
@@ -444,7 +449,7 @@ func create_harmonic_spiral(radius, harmonic_index):
 	var spiral = Node3D.new()
 	spiral.name = "HarmonicSpiral_" + str(harmonic_index)
 	
-	var segments = 48 + harmonic_index * 8
+	var segments = max(18, int(round((48 + harmonic_index * 8) * detail_scale_clamped)))
 	var spiral_color = kusama_colors[harmonic_index % kusama_colors.size()]
 	
 	for i in range(segments):
@@ -504,8 +509,8 @@ func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, inver
 		var dot_mesh = SphereMesh.new()
 		dot_mesh.radius = size_variation
 		dot_mesh.height = size_variation * 2
-		dot_mesh.radial_segments = 8
-		dot_mesh.rings = 4
+		dot_mesh.radial_segments = max(6, int(round(8 * detail_scale_clamped)))
+		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
 		dot.mesh = dot_mesh
 		
 		# Ultra-bright dot material
@@ -540,7 +545,7 @@ func add_ultra_vivid_polka_dots(mesh_instance, base_color, density_factor, inver
 func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, layer):
 	var mesh = mesh_instance.mesh
 	var aabb = mesh.get_aabb()
-	var num_dots = int(25 * density)
+	var num_dots = max(8, int(round(25 * density * detail_scale_clamped)))
 	
 	for i in range(num_dots):
 		var dot = MeshInstance3D.new()
@@ -553,8 +558,8 @@ func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, la
 		var dot_mesh = SphereMesh.new()
 		dot_mesh.radius = dot_size
 		dot_mesh.height = dot_size * 2
-		dot_mesh.radial_segments = 6
-		dot_mesh.rings = 4
+		dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
+		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
 		dot.mesh = dot_mesh
 		
 		# Harmonic color shifting
@@ -584,7 +589,7 @@ func add_harmonic_polka_dots(mesh_instance, base_color, density, petal_index, la
 		mesh_instance.add_child(dot)
 
 func add_sine_wave_dots(mesh_instance, base_color, density, segment_index):
-	var num_dots = int(20 * density)
+	var num_dots = max(6, int(round(20 * density * detail_scale_clamped)))
 	
 	for i in range(num_dots):
 		var dot = MeshInstance3D.new()
@@ -594,8 +599,8 @@ func add_sine_wave_dots(mesh_instance, base_color, density, segment_index):
 		var dot_mesh = SphereMesh.new()
 		dot_mesh.radius = dot_size
 		dot_mesh.height = dot_size * 2
-		dot_mesh.radial_segments = 6
-		dot_mesh.rings = 4
+		dot_mesh.radial_segments = max(4, int(round(6 * detail_scale_clamped)))
+		dot_mesh.rings = max(2, int(round(4 * detail_scale_clamped)))
 		dot.mesh = dot_mesh
 		
 		# Sine-based color variation
@@ -679,6 +684,8 @@ func animate_morphing_petals():
 		petal.scale = Vector3.ONE * scale_pulse
 
 func animate_undulating_tendrils():
+	if not include_tendrils or morphing_tendrils.is_empty():
+		return
 	for i in range(morphing_tendrils.size()):
 		var tendril = morphing_tendrils[i]
 		if not tendril:
@@ -716,6 +723,8 @@ func animate_undulating_tendrils():
 				segment.scale = Vector3.ONE * scale_factor
 
 func animate_orbital_rings():
+	if not include_orbital_rings or orbital_elements.is_empty():
+		return
 	for i in range(orbital_elements.size()):
 		var orbital = orbital_elements[i]
 		if not orbital:
@@ -746,6 +755,8 @@ func animate_orbital_rings():
 					orb.material_override.emission = new_color * (0.8 + sin(time + j) * 0.4)
 
 func animate_harmonic_clusters():
+	if not include_harmonic_clusters or harmonic_dots.is_empty():
+		return
 	for i in range(harmonic_dots.size()):
 		var cluster = harmonic_dots[i]
 		if not cluster:
@@ -771,6 +782,8 @@ func animate_harmonic_clusters():
 					dot.material_override.emission = base_emission * (brightness + 0.5)
 
 func animate_energy_streams():
+	if not include_energy_streams or energy_streams.is_empty():
+		return
 	for i in range(energy_streams.size()):
 		var stream = energy_streams[i]
 		if not stream:
@@ -845,8 +858,6 @@ func setup_ultra_vivid_environment():
 	world_environment.environment = environment
 	add_child(world_environment)
 	
-	# Create reflective floor with patterns
-	create_ultra_vivid_floor()
 
 func create_dynamic_lighting():
 	# Primary directional light with animation
@@ -891,8 +902,8 @@ func create_ultra_vivid_floor():
 	
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = Vector2(40, 40)
-	plane_mesh.subdivide_width = 32
-	plane_mesh.subdivide_depth = 32
+	plane_mesh.subdivide_width = max(12, int(round(32 * detail_scale_clamped)))
+	plane_mesh.subdivide_depth = max(12, int(round(32 * detail_scale_clamped)))
 	floor_node.mesh = plane_mesh
 	
 	# Create animated floor material with sine wave patterns
@@ -973,6 +984,7 @@ func cycle_color_palette():
 
 func generate():
 	clear_children()
+	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
 	generate_ultra_vivid_sculpture()
 
 func clear_children():

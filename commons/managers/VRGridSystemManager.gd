@@ -353,7 +353,7 @@ func _position_player_at_default_location():
 		return
 	
 	# Set default position (slightly elevated and back from center)
-	var default_position = Vector3(0, 1.8, 3)  # 1.8m height, 3m back from center
+	var default_position = Vector3(0.5, 4, 0.5)  # Custom spawn position
 	var default_rotation = Vector3(0, 0, 0)    # Facing forward
 	
 	# Position the VR origin

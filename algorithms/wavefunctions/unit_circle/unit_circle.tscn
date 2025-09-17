@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=6 format=3 uid="uid://bqxvhxqxqxqxr"]
 
 [ext_resource type="Script" uid="uid://cidtq6kpqfe72" path="res://algorithms/wavefunctions/unit_circle/UnitCircle.gd" id="1_script"]
+[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_k87gd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.2, 0.2, 0.2, 1)
@@ -92,3 +93,14 @@ radius = 0.15
 [node name="AxisLabels" type="Label3D" parent="Grid"]
 
 [node name="TrigLabels" type="Label3D" parent="Grid"]
+
+[node name="CSGCylinder" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+radius = 0.05
+height = 1.8
+material = ExtResource("2_k87gd")
+
+[node name="CSGBox" type="CSGBox3D" parent="CSGCylinder"]
+transform = Transform3D(0.985, 0, 0, 0, 0.993485, 2.10718, 0, -0.993485, 2.10718, 0, 0.39106, 0.277908)
+operation = 2
+size = Vector3(0.5, 1, 0.5)
