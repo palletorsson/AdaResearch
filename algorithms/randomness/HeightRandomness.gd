@@ -5,12 +5,15 @@ extends Node3D
 var algorithm_name: String = ""
 var algorithm_description: String = ""
 var grid_reference = null
-var max_steps: int = 100
+var max_steps: int = 1000
 
 # Height properties
-@export var raise_amount: float = 0.2
+@export var raise_amount: float = 0.5
 var total_raises: int = 0
-@export var max_raises: int = 100
+@export var max_raises: int = 150
+@export var max_height: float = 10.0  # Maximum height cubes can reach
+@export var min_height: float = 0.0   # Minimum height for cubes
+@export var height_variation: float = 0.2  # Random variation in raise amount
 
 # 8x8 area bounds in the middle of 11x16 map
 @export var region_min_x: int = 2
@@ -24,9 +27,14 @@ var total_raises: int = 0
 @export var step_delay: float = 0.15
 @export var auto_loop: bool = true  # Automatically restart when finished
 @export var loop_delay: float = 2.0  # Delay before restarting (seconds)
+@export var enable_visual_feedback: bool = true  # Show visual effects during raising
+@export var enable_sound_feedback: bool = true  # Play sounds during raising
+
 var timer: Timer
 var loop_timer: Timer
 var is_running: bool = false
+var cube_heights: Dictionary = {}  # Track individual cube heights
+var audio_player: AudioStreamPlayer3D
 
 # Signals
 signal algorithm_step_complete()
@@ -50,6 +58,9 @@ func _ready():
 	loop_timer.one_shot = true
 	loop_timer.timeout.connect(_on_loop_timer_timeout)
 	add_child(loop_timer)
+	
+	# Setup audio player for feedback
+	_setup_audio_player()
 	
 	# Auto-connect to grid system
 	call_deferred("_find_and_connect_grid")
@@ -80,6 +91,35 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 			return result
 	
 	return null
+
+func _setup_audio_player():
+	"""Setup audio player for cube raising feedback"""
+	if enable_sound_feedback:
+		audio_player = AudioStreamPlayer3D.new()
+		audio_player.unit_size = 2.0
+		audio_player.max_distance = 20.0
+		audio_player.volume_db = -10.0
+		add_child(audio_player)
+		
+		# Generate a simple rising tone
+		var stream = AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = 44100
+		var data = PackedByteArray()
+		var length = 0.1
+		var samples = int(length * 44100)
+		data.resize(samples * 2)
+		
+		for i in range(samples):
+			var t = float(i) / 44100.0
+			var frequency = 200.0 + (t / length) * 100.0  # Rising frequency
+			var envelope = 0.3 * (1.0 - t / length)
+			var sample_value = envelope * sin(TAU * frequency * t)
+			var sample_int = int(clamp(sample_value, -1.0, 1.0) * 32767.0)
+			data.encode_s16(i * 2, sample_int)
+		
+		stream.data = data
+		audio_player.stream = stream
 
 func start_algorithm():
 	if not grid_reference:
@@ -151,8 +191,9 @@ func reset_algorithm():
 				var world_pos = GridCommon.grid_to_world_position(grid_pos, structure_component.cube_size, structure_component.gutter)
 				cube.position = world_pos
 	
-	# Reset counters
+	# Reset counters and height tracking
 	total_raises = 0
+	cube_heights.clear()
 	
 	print("HeightRandomnessAlgorithm: Reset complete - ready to restart")
 
@@ -200,10 +241,92 @@ func _raise_cube(x: int, z: int):
 	if not structure_component:
 		return
 	
-	# Raise the cube at target Y level position
+	# Get the cube at target Y level position
 	var cube = structure_component.get_cube_at(x, target_y_level, z)
-	if cube:
-		cube.position.y += raise_amount
+	if not cube:
+		return
+	
+	# Calculate current height for this cube
+	var cube_key = str(x) + "," + str(z)
+	var current_height = cube_heights.get(cube_key, 0.0)
+	
+	# Check height limits
+	if current_height >= max_height:
+		# Try to find a different cube to raise
+		_try_raise_different_cube()
+		return
+	
+	# Calculate raise amount with variation
+	var actual_raise = raise_amount + randf_range(-height_variation, height_variation)
+	actual_raise = max(0.1, actual_raise)  # Ensure minimum raise
+	
+	# Apply the raise
+	cube.position.y += actual_raise
+	cube_heights[cube_key] = current_height + actual_raise
+	
+	# Visual feedback
+	if enable_visual_feedback:
+		_add_visual_effect(cube.global_position)
+	
+	# Audio feedback
+	if enable_sound_feedback and audio_player:
+		audio_player.global_position = cube.global_position
+		audio_player.pitch_scale = 0.8 + (current_height / max_height) * 0.4  # Higher pitch for higher cubes
+		audio_player.play()
+	
+	print("HeightRandomness: Raised cube at (%d, %d) to height %.2f" % [x, z, cube_heights[cube_key]])
+
+func _try_raise_different_cube():
+	"""Try to find a different cube that hasn't reached max height"""
+	var attempts = 0
+	var max_attempts = 20
+	
+	while attempts < max_attempts:
+		var rand_x = randi_range(region_min_x, region_max_x)
+		var rand_z = randi_range(region_min_z, region_max_z)
+		var cube_key = str(rand_x) + "," + str(rand_z)
+		var current_height = cube_heights.get(cube_key, 0.0)
+		
+		if current_height < max_height:
+			_raise_cube(rand_x, rand_z)
+			return
+		
+		attempts += 1
+	
+	# If no suitable cube found, reduce max height slightly
+	max_height = max(min_height + 1.0, max_height - 0.5)
+	print("HeightRandomness: Reduced max height to %.2f" % max_height)
+
+func _add_visual_effect(position: Vector3):
+	"""Add a visual effect at the cube position"""
+	if not enable_visual_feedback:
+		return
+	
+	# Create a temporary particle effect
+	var effect = MeshInstance3D.new()
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.2
+	sphere_mesh.height = 0.4
+	effect.mesh = sphere_mesh
+	
+	# Create glowing material
+	var material = StandardMaterial3D.new()
+	material.emission_enabled = true
+	material.emission = Color(0.2, 0.8, 1.0, 1.0)
+	material.emission_energy = 2.0
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color.a = 0.6
+	effect.material_override = material
+	
+	effect.global_position = position + Vector3(0, 0.5, 0)
+	add_child(effect)
+	
+	# Animate the effect
+	var tween = create_tween()
+	tween.parallel().tween_property(effect, "scale", Vector3(2.0, 2.0, 2.0), 0.3)
+	tween.parallel().tween_property(effect, "global_position", effect.global_position + Vector3(0, 1.0, 0), 0.3)
+	tween.parallel().tween_property(material, "albedo_color:a", 0.0, 0.3)
+	tween.tween_callback(effect.queue_free)
 
 # Place a cube at specific 3D coordinates
 func _place_cube_at(x: int, y: int, z: int):
@@ -243,8 +366,49 @@ func get_algorithm_info() -> Dictionary:
 		"max_raises": max_raises,
 		"current_raises": total_raises,
 		"raise_amount": raise_amount,
+		"max_height": max_height,
+		"min_height": min_height,
+		"height_variation": height_variation,
+		"visual_feedback": enable_visual_feedback,
+		"sound_feedback": enable_sound_feedback,
 		"auto_loop": auto_loop,
 		"loop_delay": loop_delay,
 		"is_running": is_running,
-		"region_bounds": get_region_bounds()
-	} 
+		"region_bounds": get_region_bounds(),
+		"cube_heights": cube_heights.size()
+	}
+
+# Get height statistics for the current state
+func get_height_statistics() -> Dictionary:
+	var heights = cube_heights.values()
+	if heights.is_empty():
+		return {"average": 0.0, "max": 0.0, "min": 0.0, "total_cubes": 0}
+	
+	var total = 0.0
+	var max_height_found = 0.0
+	var min_height_found = heights[0]
+	
+	for height in heights:
+		total += height
+		max_height_found = max(max_height_found, height)
+		min_height_found = min(min_height_found, height)
+	
+	return {
+		"average": total / heights.size(),
+		"max": max_height_found,
+		"min": min_height_found,
+		"total_cubes": heights.size(),
+		"height_distribution": cube_heights
+	}
+
+# Manually continue the rising process (useful for external control)
+func continue_rising_process(steps: int = 10):
+	"""Continue the rising process for a specific number of steps"""
+	if not is_running:
+		start_algorithm()
+	
+	for i in range(steps):
+		if total_raises >= max_raises:
+			break
+		step_once()
+		await get_tree().create_timer(step_delay).timeout

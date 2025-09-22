@@ -1,0 +1,143 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxm8p7q2vf3nh"]
+
+[ext_resource type="Script" uid="uid://fsix0ckx5xnj" path="res://algorithms/primitives/booleans/csg_boolean_editor.gd" id="1_a5k2p"]
+
+[node name="CSGBooleanExplorer" type="Node3D"]
+script = ExtResource("1_a5k2p")
+total_objects = 100
+grid_info = "5x4x5 = 100 objects"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 15)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 0
+anchor_right = 0.3
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "CSG Boolean Explorer"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridSettings" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Grid Settings"
+
+[node name="GridSizeLabel" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Grid Size: 5x4x5 (100 examples)"
+
+[node name="SpacingLabel" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Spacing: 4.0 units"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="RegenerateButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Examples"
+
+[node name="RandomSeedButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "New Random Seed"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PresetButtons" type="Label" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Quick Presets"
+
+[node name="SmallGridButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Small Grid (2x2x2)"
+
+[node name="MediumGridButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Medium Grid (3x3x3)"
+
+[node name="LargeGridButton" type="Button" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Large Grid (5x4x5)"
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="InfoLabel" type="RichTextLabel" parent="UI/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b]Navigation:[/b]
+• WASD + Mouse to fly around
+• Each object has a number label
+• Look for interesting combinations!
+
+[b]Variation Types:[/b]
+• Hollow spheres & cubes
+• Perforated structures  
+• Intersecting geometry
+• Lattice frameworks
+• Organic cavities
+• Complex boolean ops"
+
+[node name="Instructions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -50.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InstructionLabel" type="Label" parent="Instructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CSG Boolean Explorer Ready!
+100 variations will generate automatically.
+Use the UI panel to control the explorer."
+horizontal_alignment = 1
+vertical_alignment = 1

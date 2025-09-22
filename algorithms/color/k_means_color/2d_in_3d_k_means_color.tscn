@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc8h405u4ijo2"]
+
+[ext_resource type="PackedScene" uid="uid://cspuds84fvnam" path="res://algorithms/color/k_means_color/k_means_color.tscn" id="1_owsnt"]
+[ext_resource type="Script" uid="uid://3sl7n8qthx7n" path="res://algorithms/color/k_means_color/k_means_color_3d_wrapper.gd" id="1_t2mky"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Kmeanscolor" type="Node3D"]
+script = ExtResource("1_t2mky")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="KMeansColorDemo" parent="SubViewport" instance=ExtResource("1_owsnt")]
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.530772)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.076, 0, 0, 0, 0.076, 0, 0, 0, 0.076, 0.200729, 0.200192, 0.0334181)
+texture = SubResource("ViewportTexture_btd14")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dla5jk75e7x1f"]
+[gd_scene load_steps=12 format=3 uid="uid://dla5jk75e7x1f"]
 
 [ext_resource type="Script" uid="uid://b7fjcl5fs0cn2" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_tb2l3"]
 [ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_8dssk"]
@@ -12,26 +12,6 @@
 albedo_color = Color(0.2, 0.25, 0.3, 1)
 metallic = 0.8
 roughness = 0.3
-
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(1, 0.7, 0.05)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.1, 0.1, 0.12, 1)
-emission_enabled = true
-emission = Color(0, 0.8, 1, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_4"]
-size = Vector3(1.05, 0.75, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3"]
-size = Vector3(1.1, 0.3, 0.6)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0.15, 0.2, 0.25, 1)
-metallic = 0.6
-roughness = 0.4
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -54,27 +34,13 @@ material_override = SubResource("StandardMaterial3D_1")
 use_collision = true
 
 [node name="KioskBody" type="CSGBox3D" parent="KioskWithCutout"]
-size = Vector3(1.2, 2, 0.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0164734, -0.5, 0.1)
+size = Vector3(1.48234, 3, 1)
 
 [node name="MonitorCutout" type="CSGBox3D" parent="KioskWithCutout"]
 transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0.0158935, 0.302461, -0.431828)
 operation = 2
 size = Vector3(0.884326, 1.02856, 0.939258)
-
-[node name="Monitor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, -0.35)
-mesh = SubResource("BoxMesh_2")
-surface_material_override/0 = SubResource("StandardMaterial3D_2")
-
-[node name="MonitorFrame" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, -0.4)
-mesh = SubResource("BoxMesh_4")
-surface_material_override/0 = SubResource("StandardMaterial3D_1")
-
-[node name="ControlPanel" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, -1.39937, 0.8, -0.2)
-mesh = SubResource("BoxMesh_3")
-surface_material_override/0 = SubResource("StandardMaterial3D_3")
 
 [node name="MonitorLight" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.819, 0.574, 0, -0.574, 0.819, 0, 1.6, 0.1)
@@ -96,7 +62,7 @@ fov = 60.0
 environment = SubResource("Environment_1")
 
 [node name="SettingsUI" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.359093, -0.209207)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.24531, -0.300345)
 script = ExtResource("1_tb2l3")
 
 [node name="Screen" type="MeshInstance3D" parent="SettingsUI"]
@@ -108,7 +74,7 @@ surface_material_override/0 = ExtResource("2_8dssk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
 screen_size = Vector2(0.625, 0.625)
 scene = ExtResource("4_dd5gu")
-viewport_size = Vector2(500, 500)
+viewport_size = Vector2(700, 700)
 scene_properties_keys = PackedStringArray("simple_mario_slider.gd")
 
 [node name="HandPoseArea" parent="SettingsUI" instance=ExtResource("5_f6bvu")]

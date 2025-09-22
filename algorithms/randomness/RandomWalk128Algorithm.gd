@@ -6,7 +6,7 @@ class_name RandomWalk128Algorithm
 extends Node3D
 
 # Grid configuration
-const GRID_SIZE = 128  # 128x128 grid
+const GRID_SIZE = 64  # 128x128 grid
 const GRID_AREA_SIZE = 8.0  # 8x8 meters
 const CUBE_SIZE = GRID_AREA_SIZE / GRID_SIZE  # 0.0625m = 6.25cm per cube
 const CUBE_SCALE = CUBE_SIZE  # Scale factor for cube_scene.tscn
@@ -23,7 +23,7 @@ var walker_position: Vector2i = Vector2i(64, 64)  # Start at center
 
 # Algorithm settings
 @export var steps_per_frame: int = 10
-@export var total_steps: int = 20000
+@export var total_steps: int = 10000
 @export var auto_start: bool = true
 @export var show_walker: bool = true
 

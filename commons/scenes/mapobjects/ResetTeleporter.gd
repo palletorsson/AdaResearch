@@ -7,6 +7,7 @@ extends Node3D
 @onready var area: Area3D = $ResetArea 
 
 var is_resetting: bool = false
+var is_ready: bool = false
 
 func _ready():
 	area.body_entered.connect(_on_body_entered)
@@ -14,19 +15,34 @@ func _ready():
 	# Auto-find spawn if no target set
 	if not teleport_target:
 		call_deferred("_find_spawn")
+	
+	# Add a delay before the reset teleporter becomes active
+	# This prevents it from triggering during scene transitions
+	await get_tree().create_timer(2.0).timeout
+	is_ready = true
+	print("ResetTeleporter: Now active and ready to detect player falls")
 
 func _find_spawn():
 	# Look for spawn point or create default
 	teleport_target = get_tree().current_scene.find_child("SpawnPoint", true, false)
+
 	if not teleport_target:
+		# Use the same spawn position as the grid system to avoid conflicts
 		teleport_target = Node3D.new()
-		teleport_target.position = Vector3(0.5, 3, 0.5)
+		teleport_target.position = Vector3(0.5, 4.0, 0.5)  # Match GridSpawnComponent default
 		get_tree().current_scene.add_child(teleport_target)
+		print("ResetTeleporter: Created default spawn at %s" % teleport_target.position)
 
 func _on_body_entered(body: Node3D):
+	# Don't trigger if not ready yet (prevents scene transition issues)
+	if not is_ready:
+		print("ResetTeleporter: Ignoring body entry - not ready yet")
+		return
+		
 	if is_resetting or not _is_player(body):
 		return
 	
+	print("ResetTeleporter: Player detected in reset area - initiating reset")
 	is_resetting = true
 	await get_tree().create_timer(reset_delay).timeout
 	

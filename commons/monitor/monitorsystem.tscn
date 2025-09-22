@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://diqvgb5k24jux"]
+
+[ext_resource type="Script" uid="uid://ciq5e76fr3nci" path="res://commons/monitor/monitorsystem.gd" id="1_monitor_system"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_support"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_support"]
+size = Vector3(12, 0.2, 2)
+
+[node name="GameMonitorSystem" type="Node3D"]
+script = ExtResource("1_monitor_system")
+
+[node name="MonitorSupport" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+material_override = SubResource("StandardMaterial3D_support")
+mesh = SubResource("BoxMesh_support")
+
+[node name="SupportPosts" type="Node3D" parent="."]
+
+[node name="SupportPost1" type="MeshInstance3D" parent="SupportPosts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.7, 0)
+
+[node name="SupportPost2" type="MeshInstance3D" parent="SupportPosts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.7, 0)
+
+[node name="EnvironmentLighting" type="Node3D" parent="."]
+
+[node name="MonitorLight1" type="OmniLight3D" parent="EnvironmentLighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 2)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.5
+omni_range = 8.0
+
+[node name="MonitorLight2" type="OmniLight3D" parent="EnvironmentLighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 2)
+light_color = Color(0.9, 0.95, 1, 1)
+light_energy = 0.5
+omni_range = 8.0
+
+[node name="BackgroundLight" type="OmniLight3D" parent="EnvironmentLighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
+light_color = Color(0.7, 0.8, 0.9, 1)
+light_energy = 0.3
+omni_range = 15.0

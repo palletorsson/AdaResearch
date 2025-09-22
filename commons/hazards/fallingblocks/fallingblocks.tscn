@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvgiw71fow1p0"]
+
+[ext_resource type="Script" uid="uid://ctcxi64f2adlf" path="res://commons/hazards/fallingblocks/fallingblocks.gd" id="1_pitmy"]
+
+[node name="Fallingblocks" type="Node3D"]
+script = ExtResource("1_pitmy")
+spawn_height = 4.0
+spawn_interval_range = Vector2(2, 5.5)
+gravity = 15.0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cis3cskoc5dba"]
+
+[ext_resource type="PackedScene" uid="uid://cnw8o3dyeavnp" path="res://commons/monitor/2d_in_3d_monitor.tscn" id="1_dy8dg"]
+[ext_resource type="PackedScene" uid="uid://bk7yam2n4p5q8" path="res://commons/lab/verticalstatusmonitor/verticalstatusmonitor.tscn" id="2_v2vn7"]
+
+[node name="Infokiosk" type="Node3D"]
+
+[node name="messageconsole" parent="." instance=ExtResource("1_dy8dg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205083, 1.05538, 0.321242)
+
+[node name="VerticalStatusMonitor" parent="." instance=ExtResource("2_v2vn7")]

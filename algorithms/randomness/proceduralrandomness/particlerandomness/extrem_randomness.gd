@@ -8,6 +8,7 @@ extends Node3D
 @export var num_particles: int = 100
 @export var display_time: float = 10.0  # Time before switching to next visualization
 @export var enable_narration: bool = true
+@export var forced_demo: int = -1
 
 # Visual elements
 var particles = []
@@ -93,6 +94,11 @@ func _ready():
 	
 	# Start first demo
 	start_demo(0)
+	if forced_demo >= 0 and forced_demo < demo_titles.size():
+		display_time = 1_000_000.0
+		demo_time = 0.0
+		current_demo = forced_demo
+		start_demo(current_demo)
 
 # Create particles for visualization
 func create_particles():

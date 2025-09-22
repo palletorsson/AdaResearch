@@ -35,6 +35,72 @@ var modules = []
 var placed_modules = []
 var color_theme = null
 
+
+# -- Regenerate handling --
+func regenerate_scene() -> void:
+	print("envOne: Regenerating scene")
+	_clear_current_geometry()
+	generate_space()
+	apply_lighting()
+	apply_atmosphere()
+
+func _clear_current_geometry():
+	for module in placed_modules:
+		if module and is_instance_valid(module):
+			module.queue_free()
+	placed_modules.clear()
+	
+	var to_remove: Array = []
+	for child in get_children():
+		if child is Camera3D:
+			continue
+		if child is MeshInstance3D or child is CSGPrimitive3D or child is GPUParticles3D:
+			to_remove.append(child)
+		elif child is WorldEnvironment or child is Light3D or child is SpotLight3D or child is OmniLight3D or child is DirectionalLight3D:
+			to_remove.append(child)
+	for node in to_remove:
+		if is_instance_valid(node):
+			node.queue_free()
+
+func connect_regenerate_signal():
+	if _regenerate_connected:
+		return
+	_attach_to_regenerate_cubes()
+	if not get_tree().node_added.is_connected(_on_tree_node_added):
+		get_tree().node_added.connect(_on_tree_node_added)
+	_regenerate_connected = true
+
+func _attach_to_regenerate_cubes():
+	for cube in get_tree().get_nodes_in_group("regenerate_emitters"):
+		_connect_regenerate_cube(cube)
+
+func _on_tree_node_added(node: Node):
+	if node and node.is_in_group("regenerate_emitters"):
+		_connect_regenerate_cube(node)
+
+func _connect_regenerate_cube(cube):
+	if cube and cube.has_signal("regenerate_requested") and not cube.regenerate_requested.is_connected(_on_regenerate_requested):
+		cube.regenerate_requested.connect(_on_regenerate_requested)
+		print("envOne: connected to regenerate cube %s" % cube.get_path())
+
+func _on_regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionary):
+	print("envOne: regenerate signal received with %d target(s)" % targets.size())
+	if targets.is_empty() or _matches_target(targets):
+		regenerate_scene()
+
+func _matches_target(targets: Array) -> bool:
+	var this_path = get_script().resource_path
+	for target in targets:
+		var value = str(target)
+		if value.ends_with("envOne.gd") or value.ends_with("env_one.tscn"):
+			return true
+		if value == this_path:
+			return true
+	return false
+
+var _initial_children: Array = []
+var _regenerate_connected: bool = false
+
 func _ready():
 	randomize()
 	color_theme = color_themes[randi() % color_themes.size()]
@@ -42,6 +108,7 @@ func _ready():
 	generate_space()
 	apply_lighting()
 	apply_atmosphere()
+	connect_regenerate_signal()
 
 func load_or_create_modules():
 	# Try to load existing modules

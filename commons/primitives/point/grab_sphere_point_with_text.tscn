@@ -9,17 +9,19 @@
 albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
-radius = 0.0455009
+radius = 0.022
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
 transparency = 1
-albedo_color = Color(0.8, 0.105882, 0.8, 0.843137)
+albedo_color = Color(0.95, 0.55, 1, 0.9)
 metallic = 1.0
 roughness = 0.0
+emission_enabled = true
+emission = Color(0.9, 0.5, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0v2tn"]
-radius = 0.05
-height = 0.1
+radius = 0.018
+height = 0.036
 radial_segments = 32
 rings = 16
 
@@ -38,8 +40,9 @@ material_override = SubResource("StandardMaterial3D_1t2g7")
 mesh = SubResource("SphereMesh_0v2tn")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_nukvf")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="." index="3"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0847215, 0)
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.06, 0)
 text = "(1.2, 2.0, 2.3)"
 script = ExtResource("4_pguj0")

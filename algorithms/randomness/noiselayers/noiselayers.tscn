@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://hhp3sd1t024n"]
+
+[ext_resource type="Script" uid="uid://kfo5rwna6ru5" path="res://algorithms/randomness/noiselayers/noiselayers.gd" id="1_u8d4v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u8d4v"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_pjiod"]
+sky_material = SubResource("ProceduralSkyMaterial_u8d4v")
+
+[sub_resource type="Environment" id="Environment_aj0im"]
+background_mode = 2
+sky = SubResource("Sky_pjiod")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8d4v"]
+cull_mode = 2
+albedo_color = Color(1, 0.552941, 1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u8d4v"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aj0im"]
+seed = 54321
+frequency = 0.0056
+fractal_octaves = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6eqya"]
+noise_type = 2
+seed = 98765
+frequency = 0.0057
+fractal_octaves = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pjiod"]
+seed = 12345
+frequency = 0.0175
+fractal_octaves = 3
+
+[node name="Noiselayers" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.992206, -0.124606, 0, 0.124606, 0.992206, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aj0im")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.784419, 0.620231, 0, -0.620231, 0.784419, 0, 171.61, 293.064)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_u8d4v")
+mesh = SubResource("ArrayMesh_u8d4v")
+script = ExtResource("1_u8d4v")
+terrain_scale = 2.0
+height_scale = 2.0
+low_freq_noise = SubResource("FastNoiseLite_aj0im")
+med_freq_noise = SubResource("FastNoiseLite_6eqya")
+high_freq_noise = SubResource("FastNoiseLite_pjiod")

@@ -17,7 +17,7 @@ extends Node3D
 @export var show_edge_weights: bool = true
 @export var show_mst_cost: bool = true
 @export var animate_edge_selection: bool = true
-@export var highlight_current_edge: bool = true
+@export var highlight_current_edgea: bool = true
 @export var show_rejected_edges: bool = true
 
 @export_category("Interactive Mode")
@@ -166,7 +166,7 @@ func generate_vertex_positions():
 		
 		for i in range(graph_size):
 			var row = i / grid_size
-			 var col = fmod(i, grid_size)
+			var col = fmod(i, grid_size)
 			var x = (col - grid_size / 2.0) * spacing
 			var y = (row - grid_size / 2.0) * spacing
 			var z = randf_range(-0.5, 0.5)
@@ -586,8 +586,8 @@ func step_kruskal():
 		# Reject edge (creates cycle)
 		edge.rejected = true
 		rejected_edges.append(edge)
-		if show_rejected_edges:
-			highlight_rejected_edge(edge)
+		#if show_rejected_edges:
+			#highlight_rejected_edge(edge)
 	
 	current_edge_index += 1
 	update_ui()
@@ -646,14 +646,7 @@ func highlight_current_edge(edge):
 		material.albedo_color = current_edge_color
 		material.emission = current_edge_color * 0.5
 
-func highlight_rejected_edge(edge):
-	"""Highlight a rejected edge"""
-	var edge_index = edges.find(edge)
-	if edge_index >= 0 and edge_index < edge_meshes.size():
-		var mesh = edge_meshes[edge_index]
-		var material = mesh.material_override as StandardMaterial3D
-		material.albedo_color = rejected_edge_color
-		material.emission = rejected_edge_color * 0.3
+ 
 
 func create_mst_edge_visualization(edge):
 	"""Create visualization for MST edge"""

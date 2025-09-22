@@ -38,7 +38,9 @@ func initialize_base_objects():
 	]
 
 func apply_geometric_transforms():
-	var container = $GeometricTransforms
+	var container = get_node_or_null("GeometricTransforms")
+	if container == null:
+		return
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -134,7 +136,9 @@ func apply_random_transform(object: Node3D, seed_offset: int):
 	) * 0.3
 
 func demonstrate_stochastic_operations():
-	var container = $StochasticOperations
+	var container = get_node_or_null("StochasticOperations")
+	if container == null:
+		return
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -219,7 +223,9 @@ func poisson_random(lambda: float) -> int:
 	return k - 1
 
 func show_random_matrices():
-	var container = $RandomMatrices
+	var container = get_node_or_null("RandomMatrices")
+	if container == null:
+		return
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -267,7 +273,9 @@ func show_random_matrices():
 	container.add_child(det_indicator)
 
 func create_noise_based_distortion():
-	var container = $NoiseBasedDistortion
+	var container = get_node_or_null("NoiseBasedDistortion")
+	if container == null:
+		return
 	
 	# Clear previous visualization
 	for child in container.get_children():

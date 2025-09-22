@@ -13,6 +13,9 @@ shader_parameter/width = 1.0
 shader_parameter/blur = 1.0
 shader_parameter/emission_strength = 2.0
 shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lxqkn"]
 
@@ -26,3 +29,6 @@ material_override = SubResource("ShaderMaterial_n6wbr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_lxqkn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.956269, 0.292489, 0, -0.292489, 0.956269, 0, 6.33223, 9.28161)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://a6x9k7v6m5nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://6yak7v6m5nqr"]
 
-[ext_resource type="Script" path="res://algorithms/GraphTheory/force_directed_layout/ForceDirectedLayout.gd" id="1_fdl"]
+[ext_resource type="Script" uid="uid://hj83qoo7ro4a" path="res://algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd" id="1_fdl"]
 
 [node name="ForceDirectedLayout" type="Node3D"]
 script = ExtResource("1_fdl")
@@ -18,8 +18,6 @@ light_energy = 1.2
 
 [node name="ForceIndicator" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -3, 0)
-top_radius = 0.3
-bottom_radius = 0.3
 height = 1.0
 
 [node name="EnergyLevel" type="CSGBox3D" parent="."]

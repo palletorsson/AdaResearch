@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvq8x7y2n3m4p"]
+
+[ext_resource type="Script" uid="uid://o5jurrquocmn" path="res://commons/monitor/VRconsole.gd" id="1_0x4j5"]
+[ext_resource type="PackedScene" uid="uid://c7n8nax2q5r6s" path="res://commons/monitor/MessageItem.tscn" id="2_1y6k7"]
+
+[node name="VRConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0x4j5")
+message_prefab = ExtResource("2_1y6k7")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.018758, 0.2673, 0.0172546, 0.901961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "System Console"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Clear"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MessageContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/Header/ClearButton" to="." method="_on_clear_button_pressed"]

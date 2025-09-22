@@ -41,7 +41,7 @@ func create_grid_shader_material() -> ShaderMaterial:
 	var material = ShaderMaterial.new()
 	
 	# Load the Grid shader
-	var shader = load("res://commons/resourses/shaders/Grid.gdshader")
+	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 	if shader:
 		material.shader = shader
 		

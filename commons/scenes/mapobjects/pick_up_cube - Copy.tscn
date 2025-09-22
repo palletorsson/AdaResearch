@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cuiguw65ict8"]
+
+[ext_resource type="Script" uid="uid://dd25b6mupihby" path="res://commons/scenes/mapobjects/pick_up_cube.gd" id="1_oqxi0"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_lx240"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lx240"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdpok"]
+render_priority = 0
+shader = ExtResource("2_lx240")
+shader_parameter/modelColor = Color(0.505344, 0.505344, 0.505344, 1)
+shader_parameter/wireframeColor = Color(0.940526, 0.689287, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 1, 1)
+shader_parameter/width = 8.68
+shader_parameter/blur = 0.581
+shader_parameter/emission_strength = 2.018
+shader_parameter/modelOpacity = 0.924
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_y57fk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rag18"]
+albedo_color = Color(1, 0, 1, 1)
+
+[node name="PickUpCube" type="Node3D"]
+script = ExtResource("1_oqxi0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.359572, 1.74679)
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560966, 0)
+shape = SubResource("BoxShape3D_lx240")
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_kdpok")
+mesh = SubResource("BoxMesh_y57fk")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rag18")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

@@ -49,6 +49,10 @@ func _ready():
 	
 	# Choose an initial random direction and time to move
 	change_direction()
+	
+	# Ensure the butterfly starts with the correct orientation
+	rotation = Vector3(0, 0, 0)  # Reset to upright orientation
+	
 	$AnimationPlayer.play("fly")
 
 func _process(delta: float):
@@ -84,6 +88,9 @@ func change_direction():
 	# Choose a new random horizontal direction
 	var horizontal_direction = Vector3(randf_range(-1, 1), randf_range(-0.3, 0.3), randf_range(-1, 1)).normalized()
 	move_direction = horizontal_direction
+	
+	# Ensure the butterfly faces the correct direction when starting to move
+	point_in_direction(horizontal_direction)
 	
 	# Set a random time to move in this direction
 	move_timer = randf_range(min_move_time, max_move_time)
@@ -136,7 +143,7 @@ func point_in_direction(direction: Vector3):
 	# Ensure the direction is not zero to avoid errors
 	if direction.length() > 0:
 		# Rotate the butterfly to face the movement direction
-		look_at(position + direction, Vector3(0, -1, 0))  # Adjust the up vector as needed
+		look_at(position + direction, Vector3(0, 1, 0))  # Use upward vector to keep butterfly right-side up
 
 func _physics_process(delta: float):
 	# Check if we have reached the sitting point (if one was chosen)

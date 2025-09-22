@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnw8o3dyeavnp"]
+
+[ext_resource type="PackedScene" uid="uid://bvq8x7y2n3m4p" path="res://commons/monitor/VRconsole.tscn" id="1_nfc24"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[node name="messageconsole" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="VRConsole" parent="SubViewport" instance=ExtResource("1_nfc24")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202103, 0.207537, 0.374844)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.116, 0, 0, 0, 0.116, 0, 0, 0, 0.116, 0.200729, 0.242676, -0.0043356)
+texture = SubResource("ViewportTexture_btd14")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://6j64gdgl5gkh"]
+
+[ext_resource type="Script" uid="uid://ckkapq3sioon3" path="res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/EvolutionaryAlgorithmsDemo.gd" id="1"]
+
+[node name="EvolutionaryAlgorithmsDemo" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.36555)

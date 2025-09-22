@@ -147,6 +147,67 @@ func generate_spiral_column_mesh() -> Mesh:
 	
 	return st.commit()
 
+func create_tube_trail_base_mesh() -> Mesh:
+	"""Create a tube trail mesh for the column base"""
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	# Tube parameters
+	var base_radius = column_radius * 2.0
+	var top_radius = column_radius * 1.5
+	var height = 0.5
+	var segments = radial_segments
+	var rings = 8  # Number of vertical rings for the tube
+	
+	# Generate vertices for the tube
+	for i in range(rings + 1):
+		var v = float(i) / rings  # Vertical progress (0.0 to 1.0)
+		var current_height = v * height
+		var current_radius = lerp(base_radius, top_radius, v)
+		
+		# Create a ring of vertices
+		for j in range(segments + 1):
+			var u = float(j) / segments  # Radial progress (0.0 to 1.0)
+			var angle = u * 2.0 * PI
+			
+			# Calculate vertex position
+			var x = cos(angle) * current_radius
+			var z = sin(angle) * current_radius
+			var vertex = Vector3(x, current_height, z)
+			
+			# Calculate normal (pointing outward from center)
+			var normal = Vector3(x, 0, z).normalized()
+			
+			# Add vertex data
+			st.set_normal(normal)
+			st.set_uv(Vector2(u, v))
+			st.add_vertex(vertex)
+	
+	# Create triangle faces
+	for i in range(rings):
+		for j in range(segments):
+			# Get indices for the four corners of a quad
+			var a = i * (segments + 1) + j
+			var b = i * (segments + 1) + j + 1
+			var c = (i + 1) * (segments + 1) + j
+			var d = (i + 1) * (segments + 1) + j + 1
+			
+			# Create the first triangle of the quad
+			st.add_index(a)
+			st.add_index(b)
+			st.add_index(c)
+			
+			# Create the second triangle of the quad
+			st.add_index(b)
+			st.add_index(d)
+			st.add_index(c)
+	
+	# Finalize the mesh
+	st.generate_normals()
+	st.generate_tangents()
+	
+	return st.commit()
+
 func add_column_base(column_node: Node3D):
 	# Adds a tube trail mesh base to the bottom of a column.
 	var base = MeshInstance3D.new()

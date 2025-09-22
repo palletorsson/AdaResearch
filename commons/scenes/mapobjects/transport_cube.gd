@@ -72,10 +72,8 @@ func setup_transport_material():
 			var new_material = shader_material.duplicate()
 			
 			# Set transport cube colors (cyan theme for movement)
-			new_material.set_shader_parameter("modelColor", Color(0.2, 0.8, 1.0, 1.0))  # Light cyan
-			new_material.set_shader_parameter("wireframeColor", Color(0.0, 1.0, 1.0, 1.0))  # Cyan wireframe
-			new_material.set_shader_parameter("emissionColor", Color(0.3, 0.9, 1.0, 1.0))  # Bright cyan emission
-			new_material.set_shader_parameter("emission_strength", 1.8)
+			new_material.set_shader_parameter("fill_color", Color(0.0, 0.8, 1.0, 1.0))  # Light cyan
+			new_material.set_shader_parameter("wireframe_color", Color(0.0, 1.0, 1.0, 1.0))  # Cyan wireframe
 			
 			cube_mesh.material_override = new_material
 

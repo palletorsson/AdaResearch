@@ -117,6 +117,14 @@ const UTILITY_TYPES = {
 		"description": "Advances to next example/pattern with 3s respawn",
 		"supports_parameters": true  # respawn_time, rotation_speed
 	},
+
+	"rg": {
+		"name": "regenerate_cube", 
+		"file": "regenerate_cube.tscn", 
+		"category": "interactive",
+		"description": "Triggers regenerate signal for linked listings",
+		"supports_parameters": true
+	},
 	"tc": {
 		"name": "transport_cube", 
 		"file": "transport_cube.tscn", 

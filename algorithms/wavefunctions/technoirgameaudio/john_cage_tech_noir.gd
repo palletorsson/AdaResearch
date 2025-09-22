@@ -51,6 +51,7 @@ var base_sounds_ready = {
 }
 var visualizer_root: Node3D
 var visualizer_infos: Array = []
+var stop_requested = false
 
 # 3D Loading Bar Components
 var loading_bar_container: Node3D
@@ -77,6 +78,8 @@ func _ready():
 	setup_players()
 	setup_visualizers()
 	create_3d_loading_bar()
+	add_to_group("audio_emitters")
+	stop_requested = false
 	
 	# Connect signals
 	sound_generation_started.connect(_on_generation_started)
@@ -88,6 +91,8 @@ func _ready():
 	start_sound_generation()
 
 func _process(delta):
+	if stop_requested:
+		return
 	if not generation_complete:
 		animate_loading_bar(delta)
 	update_visualizers(delta)
@@ -111,6 +116,8 @@ func start_sound_generation():
 		return
 
 func _thread_generate_sounds():
+	if stop_requested:
+		return
 	# Thread-safe sound generation
 	mutex.lock()
 	current_sound_name = "drone"
@@ -129,7 +136,8 @@ func _thread_generate_sounds():
 	
 	# Small delay to allow UI update
 	OS.delay_msec(100)
-	
+	if stop_requested:
+		return
 	# Generate city ambience
 	mutex.lock()
 	current_sound_name = "city_ambience"
@@ -146,9 +154,12 @@ func _thread_generate_sounds():
 	call_deferred("_emit_progress_updated")
 	
 	OS.delay_msec(100)
-	
+	if stop_requested:
+		return
 	# Generate effect sound variations
 	for sound_type in sound_types:
+		if stop_requested:
+			return
 		mutex.lock()
 		current_sound_name = sound_type
 		precreated_sounds[sound_type] = []
@@ -156,6 +167,8 @@ func _thread_generate_sounds():
 		
 		# Create 3 variations of each sound type
 		for i in range(3):
+			if stop_requested:
+				return
 			var stream = null
 			
 			match sound_type:
@@ -489,6 +502,8 @@ func setup_visualizers():
 		visualizer_root.queue_free()
 	visualizer_root = null
 	visualizer_infos.clear()
+	precreated_sounds.clear()
+	precreated_sounds.clear()
 	visualizer_root = Node3D.new()
 	visualizer_root.name = "AudioVisualizerRoot"
 	visualizer_root.position = Vector3.ZERO
@@ -620,6 +635,8 @@ func start_ambient():
 		_ensure_player_stream(ambient_player, precreated_sounds["city_ambience"])
 
 func play_random_effect():
+	if stop_requested:
+		return
 	# Find an available player
 	var available_players = []
 	for player in effect_players:
@@ -1176,3 +1193,27 @@ func create_heartbeat_segment():
 	
 	stream.data = data
 	return stream
+
+func shutdown_audio():
+	if stop_requested:
+		return
+	stop_requested = true
+	playback_started = false
+	is_generating = false
+	if generation_thread and generation_thread.is_alive():
+		generation_thread.wait_to_finish()
+	generation_thread = null
+	if drone_player:
+		drone_player.stop()
+	if ambient_player:
+		ambient_player.stop()
+	for player in effect_players:
+		if player:
+			player.stop()
+	if loading_bar_container:
+		loading_bar_container.queue_free()
+		loading_bar_container = null
+	if visualizer_root:
+		visualizer_root.queue_free()
+		visualizer_root = null
+	visualizer_infos.clear()

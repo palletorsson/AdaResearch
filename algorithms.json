@@ -86,7 +86,16 @@
 	  "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
 	  "res://algorithms/graphtheory/minimum_spanning_tree/minimum_spanning_tree.tscn",
 	  "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
-	  "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn"
+	  "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn",
+	  "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+	  "res://algorithms/graphtheory/graphspace/KonigsbergBridge.tscn"
+	],
+	"Graph Theory 3D": [
+	  "res://algorithms/graphtheory/graphspace3d/graphspace3d.tscn",
+	  "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+	  "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+	  "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+	  "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn"
 	],
 	"Machine Learning": [
 	  "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn",
@@ -143,7 +152,8 @@
 	  "res://algorithms/primitives/static_loop_visualization/static_loop_visualization.tscn",
 	  "res://algorithms/primitives/arrays_grid_understanding/arrays_grid_understanding.tscn",
 	  "res://algorithms/primitives/tron_grid/tron_grid.tscn",
-	  "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn"
+	  "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
+	  "res://algorithms/primitives/booleans/booleanvariations.tscn"
 	],
 	"Procedural Audio": [
 	  "res://algorithms/proceduralaudio/psychoacoustics/psychoacoustics.tscn",

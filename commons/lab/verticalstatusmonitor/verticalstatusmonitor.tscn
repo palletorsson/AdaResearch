@@ -1,235 +1,250 @@
-[gd_scene load_steps=11 format=3 uid="uid://o0jamon6xl7g"]
+[gd_scene load_steps=12 format=3 uid="uid://bk7yam2n4p5q8"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
-
-@onready var status_display = $MonitorFrame/StatusDisplay
-@onready var data_bars = [$MonitorFrame/DataBar1, $MonitorFrame/DataBar2, $MonitorFrame/DataBar3, $MonitorFrame/DataBar4, $MonitorFrame/DataBar5]
-@onready var alert_beacon = $MonitorFrame/AlertBeacon
-
-var system_status = 'operational'  # operational, warning, critical, offline
-var data_values = [0.8, 0.6, 0.9, 0.4, 0.7]  # Normalized values 0-1
-
-signal status_changed
-signal critical_alert
-signal system_offline
+ 
 
 func _ready():
-	setup_status_monitor()
-	start_data_updates()
-
-func setup_status_monitor():
-	add_to_group('monitors')
-	add_to_group('status_displays')
-
-func start_data_updates():
-	var update_timer = Timer.new()
-	update_timer.wait_time = 2.0
-	update_timer.timeout.connect(update_system_data)
-	update_timer.autostart = true
-	add_child(update_timer)
-
-func update_system_data():
-	# Simulate data fluctuations
-	for i in range(data_values.size()):
-		data_values[i] += randf_range(-0.1, 0.1)
-		data_values[i] = clamp(data_values[i], 0.0, 1.0)
-		
-		# Update visual bars
-		update_data_bar(i, data_values[i])
+	# Connect to GameManager if available
+	if GameManager:
+		GameManager.console_message_added.connect(_on_console_message_added)
+		GameManager.health_updated.connect(_on_health_updated)
+		GameManager.score_updated.connect(_on_score_updated)
 	
-	# Check for critical conditions
-	check_system_status()
+	# Start screen animation
+	_animate_screen()
 
-func update_data_bar(index: int, value: float):
-	if index < data_bars.size():
-		var bar = data_bars[index]
-		var bar_color = get_status_color(value)
-		bar.light_color = bar_color
-		bar.light_energy = value * 1.5
+func _on_console_message_added(message_data: Dictionary):
+	print(\"Monitor received: %s\" % message_data.text)
+	# Could flash screen or change colors based on message type
 
-func get_status_color(value: float) -> Color:
-	if value > 0.7:
-		return Color.GREEN
-	elif value > 0.4:
-		return Color.YELLOW
-	else:
-		return Color.RED
+func _on_health_updated(new_health: float):
+	# Update screen color based on health
+	var health_percent = new_health / 100.0
+	var screen = $KioskBody/ScreenFrame/Screen
+	if screen and screen.material_override:
+		var mat = screen.material_override as StandardMaterial3D
+		if health_percent < 0.3:
+			mat.emission = Color.RED * 0.8
+		elif health_percent < 0.6:
+			mat.emission = Color.YELLOW * 0.6
+		else:
+			mat.emission = Color.GREEN * 0.4
 
-func check_system_status():
-	var critical_count = 0
-	var warning_count = 0
-	
-	for value in data_values:
-		if value < 0.2:
-			critical_count += 1
-		elif value < 0.5:
-			warning_count += 1
-	
-	var new_status = system_status
-	if critical_count > 2:
-		new_status = 'critical'
-	elif critical_count > 0 or warning_count > 3:
-		new_status = 'warning'
-	else:
-		new_status = 'operational'
-	
-	if new_status != system_status:
-		system_status = new_status
-		update_status_display()
-		emit_signal('status_changed', system_status)
+func _on_score_updated(new_score: int):
+	print(\"Score display: %d\" % new_score)
 
-func update_status_display():
-	match system_status:
-		'operational':
-			status_display.material_override.emission = Color.GREEN
-		'warning':
-			status_display.material_override.emission = Color.YELLOW
-			flash_alert_beacon()
-		'critical':
-			status_display.material_override.emission = Color.RED
-			trigger_critical_alert()
+func _animate_screen():
+	var tween = create_tween()
+	tween.set_loops()
+	var screen = $KioskBody/ScreenFrame/Screen
+	if screen and screen.material_override:
+		var mat = screen.material_override as StandardMaterial3D
+		tween.tween_method(_update_screen_brightness, 0.2, 0.8, 2.0)
+		tween.tween_method(_update_screen_brightness, 0.8, 0.2, 2.0)
 
-func flash_alert_beacon():
-	var beacon_tween = create_tween()
-	beacon_tween.set_loops(3)
-	beacon_tween.tween_property(alert_beacon, 'light_energy', 2.0, 0.3)
-	beacon_tween.tween_property(alert_beacon, 'light_energy', 0.5, 0.3)
-
-func trigger_critical_alert():
-	emit_signal('critical_alert', data_values)
-	
-	var critical_tween = create_tween()
-	critical_tween.set_loops(10)
-	critical_tween.tween_property(alert_beacon, 'light_energy', 3.0, 0.1)
-	critical_tween.tween_property(alert_beacon, 'light_energy', 0.1, 0.1)
-
-func _on_area_3d_body_entered(body):
-	if body.is_in_group('player'):
-		display_detailed_status()
-
-func display_detailed_status():
-	print('📊 STATUS MONITOR:')
-	print('  System Status: ', system_status.to_upper())
-	for i in range(data_values.size()):
-		print('  Data Stream %d: %.1f%%' % [i+1, data_values[i] * 100])
+func _update_screen_brightness(value: float):
+	var screen = $KioskBody/ScreenFrame/Screen
+	if screen and screen.material_override:
+		var mat = screen.material_override as StandardMaterial3D
+		mat.emission_energy_multiplier = value
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
-albedo_color = Color(0.1, 0.1, 0.15, 1)
+albedo_color = Color(0.2, 0.25, 0.3, 1)
 metallic = 0.8
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(0.4, 1, 0.08)
+roughness = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0, 1, 0.5, 1)
+albedo_color = Color(0.1, 0.1, 0.15, 1)
+metallic = 0.9
+roughness = 0.1
 emission_enabled = true
 emission = Color(0, 0.8, 0.3, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_2"]
-size = Vector3(0.3, 0.15, 0.02)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0, 0.5, 1, 1)
+albedo_color = Color(0, 0.2, 0.4, 1)
 emission_enabled = true
-emission = Color(0, 0.3, 1, 1)
-emission_energy_multiplier = 0.8
-
-[sub_resource type="BoxMesh" id="BoxMesh_3"]
-size = Vector3(0.25, 0.05, 0.01)
+emission = Color(0, 0.3, 0.8, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
-albedo_color = Color(1, 0.5, 0, 1)
+albedo_color = Color(0.8, 0.8, 0.85, 1)
+metallic = 0.6
+roughness = 0.4
 emission_enabled = true
 emission = Color(1, 0.3, 0, 1)
 emission_energy_multiplier = 0.5
 
-[sub_resource type="SphereMesh" id="SphereMesh_1"]
-radius = 0.03
-height = 0.06
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0, 1, 0.2, 1)
+emission_enabled = true
+emission = Color(0, 0.8, 0.1, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(1, 0.3, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0, 1)
+emission_energy_multiplier = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(0.8, 1.5, 0.5)
+size = Vector3(1.5, 2.5, 1)
 
-[node name="VerticalStatusMonitor" type="Node3D"]
+[sub_resource type="Animation" id="Animation_1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KioskBody/StatusLights/StatusLight1:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_2"]
+resource_name = "status_blink"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KioskBody/StatusLights/StatusLight1:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 0.8, 0.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KioskBody/StatusLights/StatusLight2:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.8, 0.2, 0.6, 0.9, 0.3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1"]
+_data = {
+&"RESET": SubResource("Animation_1"),
+&"status_blink": SubResource("Animation_2")
+}
+
+[node name="CSGMonitorKiosk" type="Node3D"]
 script = SubResource("GDScript_1")
 
-[node name="MonitorFrame" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="KioskBody" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_1")
-mesh = SubResource("BoxMesh_1")
 
-[node name="StatusDisplay" type="MeshInstance3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+[node name="MainBase" type="CSGBox3D" parent="KioskBody"]
+size = Vector3(0.8, 2, 0.6)
+
+[node name="BaseStand" type="CSGCylinder3D" parent="KioskBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+height = 0.4
+
+[node name="ScreenFrame" type="CSGCombiner3D" parent="KioskBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.25)
 material_override = SubResource("StandardMaterial3D_2")
-mesh = SubResource("BoxMesh_2")
 
-[node name="DataBar1" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08, 0.1, 0.04)
-light_color = Color(0, 0.5, 1, 1)
-light_energy = 0.8
-omni_range = 0.5
+[node name="OuterFrame" type="CSGBox3D" parent="KioskBody/ScreenFrame"]
+size = Vector3(0.7, 0.9, 0.15)
 
-[node name="Bar1Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar1"]
+[node name="ScreenCutout" type="CSGBox3D" parent="KioskBody/ScreenFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100635, 0.02)
+operation = 2
+size = Vector3(0.6, 0.59873, 0.2)
+
+[node name="Screen" type="CSGBox3D" parent="KioskBody/ScreenFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_3")
-mesh = SubResource("BoxMesh_3")
+size = Vector3(0.58, 0.78, 0.02)
 
-[node name="DataBar2" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.1, 0.04)
-light_color = Color(0, 0.5, 1, 1)
-light_energy = 0.6
-omni_range = 0.5
-
-[node name="Bar2Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar2"]
-material_override = SubResource("StandardMaterial3D_3")
-mesh = SubResource("BoxMesh_3")
-
-[node name="DataBar3" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.04)
-light_color = Color(0, 0.5, 1, 1)
-light_energy = 0.9
-omni_range = 0.5
-
-[node name="Bar3Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar3"]
-material_override = SubResource("StandardMaterial3D_3")
-mesh = SubResource("BoxMesh_3")
-
-[node name="DataBar4" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.1, 0.04)
-light_color = Color(0, 0.5, 1, 1)
-light_energy = 0.4
-omni_range = 0.5
-
-[node name="Bar4Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar4"]
-material_override = SubResource("StandardMaterial3D_3")
-mesh = SubResource("BoxMesh_3")
-
-[node name="DataBar5" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.1, 0.04)
-light_color = Color(0, 0.5, 1, 1)
-light_energy = 0.7
-omni_range = 0.5
-
-[node name="Bar5Visual" type="MeshInstance3D" parent="MonitorFrame/DataBar5"]
-material_override = SubResource("StandardMaterial3D_3")
-mesh = SubResource("BoxMesh_3")
-
-[node name="AlertBeacon" type="OmniLight3D" parent="MonitorFrame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.35, 0.04)
-light_color = Color(1, 0.5, 0, 1)
-light_energy = 0.5
-omni_range = 1.0
-
-[node name="BeaconVisual" type="MeshInstance3D" parent="MonitorFrame/AlertBeacon"]
+[node name="ControlPanel" type="CSGCombiner3D" parent="KioskBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.32)
 material_override = SubResource("StandardMaterial3D_4")
-mesh = SubResource("SphereMesh_1")
+
+[node name="PanelBase" type="CSGBox3D" parent="KioskBody/ControlPanel"]
+size = Vector3(0.5, 0.3, 0.1)
+
+[node name="ButtonHole1" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, 0.02)
+operation = 2
+height = 0.15
+
+[node name="ButtonHole2" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+operation = 2
+height = 0.15
+
+[node name="ButtonHole3" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0.02)
+operation = 2
+height = 0.15
+
+[node name="Button1" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, 0.08)
+material_override = SubResource("StandardMaterial3D_5")
+height = 0.06
+
+[node name="Button2" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08)
+material_override = SubResource("StandardMaterial3D_5")
+height = 0.06
+
+[node name="Button3" type="CSGCylinder3D" parent="KioskBody/ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0.08)
+material_override = SubResource("StandardMaterial3D_6")
+height = 0.06
+
+[node name="StatusLights" type="Node3D" parent="KioskBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.32)
+
+[node name="StatusLight1" type="OmniLight3D" parent="KioskBody/StatusLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+light_color = Color(0, 1, 0.2, 1)
+light_energy = 0.5
+omni_range = 1.5
+
+[node name="LightVisual1" type="CSGSphere3D" parent="KioskBody/StatusLights/StatusLight1"]
+material_override = SubResource("StandardMaterial3D_5")
+radius = 0.03
+radial_segments = 8
+
+[node name="StatusLight2" type="OmniLight3D" parent="KioskBody/StatusLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+light_color = Color(0, 0.8, 1, 1)
+light_energy = 0.6
+omni_range = 1.5
+
+[node name="LightVisual2" type="CSGSphere3D" parent="KioskBody/StatusLights/StatusLight2"]
+material_override = SubResource("StandardMaterial3D_3")
+radius = 0.03
+radial_segments = 8
 
 [node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("BoxShape3D_1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.944095, 0, -0.329674, 0, 1, 0, 0.329674, 0, 0.944095, -0.394005, 0.532506, 1.0538)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1")
+}
+autoplay = "status_blink"
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

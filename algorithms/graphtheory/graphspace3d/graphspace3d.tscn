@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxv6y1ps86btu"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/graphspace3d/graphspace3d.gd" id="1_8m3vg"]
+
+[node name="GraphSpace3D" type="Node3D"]
+script = ExtResource("1_8m3vg")
+structure_type = 1
+node_count = 12
+avg_degree = 2.8
+layout_iters = 300
+seed = 20250922
+node_spacing = 10.0
+edge_stiffness = 0.06
+volume_repulsion = 300.0
+volume_bounds = Vector3(100, 50, 100)
+elevation_range = Vector2(-20, 30)
+discrete_levels = 4
+bridge_type = 1
+bridge_arc_height = 4.0
+comfort_radius = 2.5
+teleporter_threshold = 25.0
+comfort_locomotion = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 15, 25, 35)
+fov = 75.0

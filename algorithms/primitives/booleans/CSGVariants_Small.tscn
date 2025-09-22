@@ -1,0 +1,456 @@
+[gd_scene load_steps=9 format=3 uid="uid://b000003e8"]
+
+[sub_resource type="StandardMaterial3D" id="Material_0"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.49311
+roughness = 0.806241
+
+[sub_resource type="StandardMaterial3D" id="Material_1"]
+albedo_color = Color(0, 1, 0, 1)
+metallic = 0.651325
+roughness = 0.478382
+
+[sub_resource type="StandardMaterial3D" id="Material_2"]
+albedo_color = Color(0, 0, 1, 1)
+metallic = 0.694203
+roughness = 0.69702
+
+[sub_resource type="StandardMaterial3D" id="Material_3"]
+albedo_color = Color(1, 1, 0, 1)
+metallic = 0.763966
+roughness = 0.899729
+
+[sub_resource type="StandardMaterial3D" id="Material_4"]
+albedo_color = Color(1, 0, 1, 1)
+metallic = 0.797413
+roughness = 0.133357
+
+[sub_resource type="StandardMaterial3D" id="Material_5"]
+albedo_color = Color(0, 1, 1, 1)
+metallic = 0.599792
+roughness = 0.198363
+
+[sub_resource type="StandardMaterial3D" id="Material_6"]
+albedo_color = Color(1, 0.5, 0, 1)
+metallic = 0.113959
+roughness = 0.546047
+
+[sub_resource type="StandardMaterial3D" id="Material_7"]
+albedo_color = Color(0.5, 0, 1, 1)
+metallic = 0.337216
+roughness = 0.118111
+
+[node name="CSGVariants" type="Node3D"]
+
+[node name="CSG_Variant_000_HollowSphere#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_0")
+
+[node name="CSG_Variant_000_HollowSphere_CSGCombiner3D#OuterSphere" type="CSGSphere3D" parent="."]
+radius = 1.0
+
+[node name="CSG_Variant_000_HollowSphere_CSGCombiner3D#InnerSphere" type="CSGSphere3D" parent="."]
+operation = 2
+radius = 0.7
+
+[node name="CSG_Variant_000_HollowSphere#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "0: HollowSphere"
+
+[node name="CSG_Variant_001_SphereWithHoles#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_1")
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#BaseSphere" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.191255)
+radius = 1.2
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#Hole0" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133408, -0.783729, 0.52033)
+operation = 2
+radius = 0.259728
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#Hole1" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.210541, -0.490142, 0.105613)
+operation = 2
+radius = 0.232338
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#Hole2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.601173, -0.107302, 0.0993256)
+operation = 2
+radius = 0.234869
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#Hole3" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0851537, -0.232158, 0.732904)
+operation = 2
+radius = 0.218259
+
+[node name="CSG_Variant_001_SphereWithHoles_CSGCombiner3D#Hole4" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.765824, -0.140609, 0.00629659)
+operation = 2
+radius = 0.229629
+
+[node name="CSG_Variant_001_SphereWithHoles#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "1: SphereWithHoles"
+
+[node name="CSG_Variant_002_PerforatedCube#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_2")
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#BaseCube" type="CSGBox3D" parent="."]
+size = Vector3(2, 2, 2)
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole0" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole1" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole3" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole4" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole5" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole6" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole7" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole8" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole9" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole10" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole11" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole12" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole13" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole14" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole15" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole16" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole17" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole18" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole19" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole20" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole21" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole22" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole23" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, -0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole24" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube_CSGCombiner3D#Hole25" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.6)
+operation = 2
+radius = 0.2
+
+[node name="CSG_Variant_002_PerforatedCube#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "2: PerforatedCube"
+
+[node name="CSG_Variant_003_TorusIntersection#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_3")
+
+[node name="CSG_Variant_003_TorusIntersection_CSGCombiner3D#Torus1" type="CSGTorus3D" parent="."]
+inner_radius = 0.3
+
+[node name="CSG_Variant_003_TorusIntersection_CSGCombiner3D#Torus2" type="CSGTorus3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+operation = 3
+inner_radius = 0.3
+
+[node name="CSG_Variant_003_TorusIntersection#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "3: TorusIntersection"
+
+[node name="CSG_Variant_004_CylinderSubtraction#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_4")
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#BaseCylinder" type="CSGCylinder3D" parent="."]
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder0" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder1" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424264, 0, 0.424264)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67394e-17, 0, 0.6)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.424264, 0, 0.424264)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 7.34788e-17)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder5" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.424264, 0, -0.424264)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder6" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10218e-16, 0, -0.6)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction_CSGCombiner3D#SubCylinder7" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424264, 0, -0.424264)
+operation = 2
+height = 2.5
+
+[node name="CSG_Variant_004_CylinderSubtraction#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "4: CylinderSubtraction"
+
+[node name="CSG_Variant_005_NestedBoxes#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_5")
+
+[node name="CSG_Variant_005_NestedBoxes_CSGCombiner3D#NestedBox0" type="CSGBox3D" parent="."]
+operation = 1
+size = Vector3(2, 2, 2)
+
+[node name="CSG_Variant_005_NestedBoxes_CSGCombiner3D#NestedBox1" type="CSGBox3D" parent="."]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(1.6, 1.6, 1.6)
+
+[node name="CSG_Variant_005_NestedBoxes_CSGCombiner3D#NestedBox2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+size = Vector3(1.2, 1.2, 1.2)
+
+[node name="CSG_Variant_005_NestedBoxes_CSGCombiner3D#NestedBox3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+size = Vector3(0.8, 0.8, 0.8)
+
+[node name="CSG_Variant_005_NestedBoxes#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "5: NestedBoxes"
+
+[node name="CSG_Variant_006_SwissCheese#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_6")
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseBase" type="CSGSphere3D" parent="."]
+radius = 1.3
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole0" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.437934, -0.620057, -0.316879)
+operation = 2
+radius = 0.107056
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole1" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.320964, 0.934965, 0.957597)
+operation = 2
+radius = 0.323359
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.993091, 0.880477, 0.741534)
+operation = 2
+radius = 0.33125
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole3" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.642252, -0.801001, -0.170935)
+operation = 2
+radius = 0.365661
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole4" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156172, 0.473164, -0.534758)
+operation = 2
+radius = 0.257079
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole5" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.418773, 0.649668, 0.614249)
+operation = 2
+radius = 0.169692
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole6" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74638, -0.567239, 0.603798)
+operation = 2
+radius = 0.266526
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole7" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.628343, 0.177217, 0.0364788)
+operation = 2
+radius = 0.387599
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole8" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.916922, -0.671723, 0.966585)
+operation = 2
+radius = 0.349661
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole9" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.699455, -0.541774, 0.0782766)
+operation = 2
+radius = 0.147094
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole10" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.352479, -0.901362, 0.423355)
+operation = 2
+radius = 0.123569
+
+[node name="CSG_Variant_006_SwissCheese_CSGCombiner3D#CheeseHole11" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.989209, 0.84114, 0.577658)
+operation = 2
+radius = 0.331722
+
+[node name="CSG_Variant_006_SwissCheese#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "6: SwissCheese"
+
+[node name="CSG_Variant_007_LatticeStructure#CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("Material_7")
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam0" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(2, 0.1, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+size = Vector3(2, 0.1, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+size = Vector3(2, 0.1, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(2, 0.1, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+size = Vector3(0.1, 2, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+size = Vector3(0.1, 2, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+size = Vector3(0.1, 2, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+size = Vector3(0.1, 2, 0.1)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+size = Vector3(0.1, 0.1, 2)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.1, 0.1, 2)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam10" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+size = Vector3(0.1, 0.1, 2)
+
+[node name="CSG_Variant_007_LatticeStructure_CSGCombiner3D#LatticeBeam11" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(0.1, 0.1, 2)
+
+[node name="CSG_Variant_007_LatticeStructure#Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "7: LatticeStructure"

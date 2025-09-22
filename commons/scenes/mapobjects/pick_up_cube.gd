@@ -15,6 +15,10 @@ var has_been_collected: bool = false
 # Reference to the pickup sound
 var pickup_sound: AudioStreamPlayer3D
 
+# Static variables for shared pickup stream management
+static var shared_pickup_stream: AudioStream = null
+static var default_pickup_stream: AudioStream = null
+
 func _ready() -> void:
 	# Store original position for bobbing motion
 	original_y = global_position.y
@@ -130,3 +134,46 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
 func set_points_value(new_value: int) -> void:
 	points_value = new_value
 	print("PickupCube: Points value set to %d" % points_value)
+
+# Static functions for shared pickup stream management
+static func get_shared_pickup_stream() -> AudioStream:
+	return shared_pickup_stream
+
+static func get_default_pickup_stream() -> AudioStream:
+	if default_pickup_stream == null:
+		_create_default_pickup_stream()
+	return default_pickup_stream
+
+static func set_shared_pickup_stream(stream: AudioStream) -> void:
+	shared_pickup_stream = stream
+
+static func reset_shared_pickup_stream() -> AudioStream:
+	shared_pickup_stream = get_default_pickup_stream()
+	return shared_pickup_stream
+
+static func _create_default_pickup_stream() -> void:
+	# Create a simple default pickup sound
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 44100
+	
+	# Generate a simple Mario-style pickup sound
+	var sample_rate = 44100
+	var duration = 0.2
+	var samples = int(duration * sample_rate)
+	var data = PackedByteArray()
+	data.resize(samples * 2)
+	
+	for i in range(samples):
+		var t = float(i) / sample_rate
+		var freq1 = 880.0
+		var freq2 = 1318.5
+		var normalized = clamp(t / duration, 0.0, 1.0)
+		var sweep_freq = lerp(freq1, freq2, pow(normalized, 0.7))
+		var envelope = 1.0 - normalized  # Simple decay
+		var sample = sin(TAU * sweep_freq * t) * envelope * 0.5
+		var sample_int = int(clamp(sample, -1.0, 1.0) * 32767.0)
+		data.encode_s16(i * 2, sample_int)
+	
+	stream.data = data
+	default_pickup_stream = stream

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://crqp4bhcdnssh"]
+
+[ext_resource type="Script" uid="uid://cvx8542ieappp" path="res://algorithms/color/grabcolor/grabcolorcollection.gd" id="1_oxhp4"]
+
+[node name="Grabcolorcollection" type="Node3D"]
+script = ExtResource("1_oxhp4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.722)

@@ -6,6 +6,8 @@ extends Node3D
 ## SceneManager should connect to this to advance the current sequence.
 signal teleporter_activated()
 
+const AUDIO_CLEANUP_GROUP := "audio_emitters"
+
 @export_group("Display")
 ## Title texture for display on the teleporter.
 @export var title: Texture2D: set = _set_title
@@ -118,7 +120,11 @@ func _on_teleport_area_body_entered(body: Node3D):
 		return
 
 	print("Teleport: Player activated teleporter - advancing sequence")
-	
+
+	# Request any active audio scenes to wind down before teleporting
+	if get_tree():
+		get_tree().call_group(AUDIO_CLEANUP_GROUP, "shutdown_audio")
+
 	# The ambient sound is already playing - just emit the activation signal
 	emit_signal("teleporter_activated")
 

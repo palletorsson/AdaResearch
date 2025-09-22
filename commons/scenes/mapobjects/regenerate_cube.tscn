@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsvj4n5f2k3v8"]
+
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/regenerate_cube.gd" id="1_regen_cube"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_detection"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_regen"]
+render_priority = 0
+shader = ExtResource("2_grid_shader")
+shader_parameter/modelColor = Color(0.75, 0.2, 0.6, 1)
+shader_parameter/wireframeColor = Color(1, 0.4, 0.8, 1)
+shader_parameter/emissionColor = Color(0.9, 0.35, 0.7, 1)
+shader_parameter/width = 6.0
+shader_parameter/blur = 0.35
+shader_parameter/emission_strength = 1.8
+shader_parameter/modelOpacity = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_regen"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_regen_fallback"]
+albedo_color = Color(0.9, 0.35, 0.7, 1)
+emission_enabled = true
+emission = Color(0.45, 0.15, 0.4, 1)
+
+[node name="RegenerateCube" type="Node3D"]
+script = ExtResource("1_regen_cube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 1.68)
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48, 0)
+collision_layer = 0
+collision_mask = 524288
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0)
+shape = SubResource("BoxShape3D_detection")
+
+[node name="CubeBaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+material_override = SubResource("ShaderMaterial_regen")
+mesh = SubResource("BoxMesh_regen")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_regen_fallback")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

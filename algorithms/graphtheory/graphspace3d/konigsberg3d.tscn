@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccj56vn4hmdk2"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/graphspace3d/konigsberg3d.gd" id="1_8v9g2"]
+
+[node name="Konigsberg3D" type="Node3D"]
+script = ExtResource("1_8v9g2")
+structure_type = 3
+place_structures = true
+node_count = 4
+avg_degree = 3.5
+layout_iters = 0
+historical_mode = true
+show_euler_analysis = true
+highlight_odd_degree_nodes = true
+animate_path_attempts = true
+show_degree_labels = true
+show_theorem_explanation = true
+interactive_bridge_removal = true
+eulerian_path_demo = true
+river_visualization = true
+landmass_elevation = 2.0
+bridge_arch_height = 1.5
+water_level = -1.0
+historical_building_style = true
+volume_bounds = Vector3(60, 20, 50)
+elevation_range = Vector2(-2, 8)
+discrete_levels = 3
+bridge_type = 1
+bridge_width = 2.0
+bridge_thickness = 0.3
+bridge_arc_height = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.766044, -0.4, 0.5, 0, 0.781831, 0.623490, -0.642788, -0.477714, 0.598846, 25, 20, 30)
+fov = 75.0

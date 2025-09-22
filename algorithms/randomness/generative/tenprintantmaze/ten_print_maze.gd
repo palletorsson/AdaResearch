@@ -39,11 +39,16 @@ var path_mesh_instance: MeshInstance3D
 # Pathfinding
 var visited: Dictionary = {}
 
+# Wall movement
+var wall_timer: Timer
+var wall_nodes: Array[Node3D] = []
+
 func _ready():
 	randomize()
 	generate_maze()
 	# build_navigation_grid()
 	create_3d_maze()
+	setup_wall_movement_timer()
 	# for later
 	#create_ant()
 	#create_path_visualization()
@@ -113,6 +118,9 @@ func create_3d_maze():
 	floor_instance.position = Vector3(grid_width * cell_size / 3, -1, grid_depth * cell_size / 2)
 	add_child(floor_instance)
 	
+	# Clear existing wall nodes
+	wall_nodes.clear()
+	
 	# Create maze walls
 	for z in range(grid_depth):
 		for x in range(grid_width):
@@ -131,6 +139,9 @@ func create_diagonal_wall(position, is_forward_slash):
 	var wall_node = Node3D.new()
 	wall_node.position = position
 	add_child(wall_node)
+	
+	# Store reference to wall node for movement
+	wall_nodes.append(wall_node)
 	
 	var wall_mesh = BoxMesh.new()
 	wall_mesh.size = Vector3(cell_size * sqrt(2), wall_height, wall_thickness)
@@ -330,3 +341,39 @@ func update_path_visualization():
 	
 	path_immediate_mesh.surface_end()
 	path_node.add_child(path_mesh_instance)
+
+func setup_wall_movement_timer():
+	"""Setup timer to move a random wall every second"""
+	wall_timer = Timer.new()
+	wall_timer.wait_time = 1.0
+	wall_timer.timeout.connect(_on_wall_timer_timeout)
+	wall_timer.autostart = true
+	add_child(wall_timer)
+
+func _on_wall_timer_timeout():
+	"""Rotate a random wall to change its diagonal direction"""
+	if wall_nodes.is_empty():
+		return
+	
+	# Pick a random wall
+	var random_wall = wall_nodes[randi() % wall_nodes.size()]
+	
+	# Get the wall's mesh instance
+	var wall_instance = random_wall.get_child(0) as MeshInstance3D
+	if not wall_instance:
+		return
+	
+	# Rotate the wall by 90 degrees (switching between / and \)
+	wall_instance.rotate_y(PI/2)
+	
+	# Add some visual feedback - change color briefly
+	if wall_instance.material_override:
+		var original_color = wall_instance.material_override.albedo_color
+		wall_instance.material_override.albedo_color = Color.RED
+		
+		# Reset color after 0.2 seconds
+		await get_tree().create_timer(0.2).timeout
+		if is_instance_valid(wall_instance) and wall_instance.material_override:
+			wall_instance.material_override.albedo_color = original_color
+	
+	print("Rotated wall at position: ", random_wall.position)

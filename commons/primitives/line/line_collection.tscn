@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5cd7wwp06bsa"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_e6fhm"]
+
+[node name="LineCollection" type="Node3D"]
+
+[node name="Line" parent="." instance=ExtResource("1_e6fhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271659, 0)
+
+[node name="Line2" parent="." instance=ExtResource("1_e6fhm")]
+
+[node name="Line3" parent="." instance=ExtResource("1_e6fhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15096, 0)

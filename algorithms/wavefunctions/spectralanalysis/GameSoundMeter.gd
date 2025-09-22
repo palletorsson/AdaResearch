@@ -224,10 +224,12 @@ func _update_spectrum_data():
 	"""Update frequency spectrum data"""
 	for i in range(bar_count):
 		var freq_ratio = float(i) / float(bar_count - 1)
-		var freq_hz = freq_ratio * 8000.0  # Cover up to 8kHz
+		# Use logarithmic scale for better human hearing range representation
+		# 20 Hz to 20,000 Hz (full human hearing range)
+		var freq_hz = 20.0 * pow(1000.0, freq_ratio)  # Logarithmic: 20Hz to 20kHz
 		
 		var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
-			freq_hz, freq_hz + 100.0
+			freq_hz, freq_hz + max(100.0, freq_hz * 0.1)  # Adaptive frequency window
 		).length()
 		
 		# Convert to normalized dB with enhanced lower frequency response
@@ -459,16 +461,19 @@ func _draw_spectrum_grid(rect: Rect2):
 		draw_string(get_theme_default_font(), Vector2(rect.position.x + 5, y - 2), 
 					amp_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, text_color)
 	
-	# Draw vertical grid lines (frequency divisions)
-	for i in range(5):  # 0, 2kHz, 4kHz, 6kHz, 8kHz
-		var x = rect.position.x + (float(i) / 4.0) * rect.size.x
+	# Draw vertical grid lines (frequency divisions) - Human hearing range
+	var freq_marks = [20, 100, 1000, 5000, 20000]  # 20Hz, 100Hz, 1kHz, 5kHz, 20kHz
+	for i in range(freq_marks.size()):
+		var freq_hz = freq_marks[i]
+		# Convert to logarithmic position
+		var freq_ratio = log(freq_hz / 20.0) / log(1000.0)  # Log scale from 20Hz to 20kHz
+		var x = rect.position.x + freq_ratio * rect.size.x
 		draw_line(Vector2(x, rect.position.y), Vector2(x, rect.position.y + rect.size.y), grid_color, 1.0)
 		
 		# Frequency labels
-		var freq_hz = (float(i) / 4.0) * 8000.0
 		var freq_text = ""
 		if freq_hz < 1000:
-			freq_text = "%d Hz" % int(freq_hz)
+			freq_text = "%d Hz" % freq_hz
 		else:
 			freq_text = "%.1f kHz" % (freq_hz / 1000.0)
 		
@@ -485,7 +490,7 @@ func _draw_spectrum_info(rect: Rect2):
 	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 20), 
 				title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, title_color)
 	
-	# Info
-	var info = "Range: 0-8kHz | Bars: %d | Master Bus Analysis" % bar_count
+	# Info - Updated to show full human hearing range
+	var info = "Range: 20Hz-20kHz (Human Hearing) | Bars: %d | Log Scale | Master Bus" % bar_count
 	draw_string(get_theme_default_font(), Vector2(rect.position.x + 10, rect.position.y + 40), 
 				info, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, info_color)

@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwfc3d"]
+
+[ext_resource type="Script" uid="uid://c01nsm2ja2o2y" path="res://algorithms/proceduralgeneration/wave_function_collapse/WFC.gd" id="1_wfc3d"]
+
+[node name="WFC3D" type="Node3D"]
+script = ExtResource("1_wfc3d")
+grid_size = Vector3i(8, 4, 8)
+generation_speed = 0.05
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12, 10, 12)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5, 8, 5)
+shadow_enabled = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="UI"]
+modulate = Color(1, 1, 1, 0.9)
+layout_mode = 0
+anchor_right = 0.35
+anchor_bottom = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "3D Wave Function Collapse"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Grid: 8x4x8 = 256 cells"
+
+[node name="TileInfo" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Tiles: 12 circuit patterns"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Controls:"
+
+[node name="ControlsList" type="RichTextLabel" parent="UI/InfoPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b]SPACE[/b] - Play/Pause generation
+[b]ESCAPE[/b] - Restart
+[b]ENTER[/b] - Single step
+
+[color=yellow]Watch as tiles connect based on edge compatibility rules![/color]"

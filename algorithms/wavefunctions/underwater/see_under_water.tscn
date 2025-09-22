@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://cywo0sv307kxm"]
+
+[ext_resource type="Shader" uid="uid://8tl02a1e84aq" path="res://algorithms/wavefunctions/underwater/see_under_water.gdshader" id="1_jmpgl"]
+[ext_resource type="Shader" uid="uid://6q2y7v01s4rj" path="res://algorithms/wavefunctions/underwater/see_under_water_grid.gdshader" id="2_e7oyb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6qrhx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4ma68"]
+noise = SubResource("FastNoiseLite_6qrhx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5yfe"]
+render_priority = 0
+shader = ExtResource("1_jmpgl")
+shader_parameter/wave_speed = 0.1
+shader_parameter/wave_strength = 0.163
+shader_parameter/normal_scale = 0.181
+shader_parameter/water_color = Color(0, 0.3, 0.535, 1)
+shader_parameter/transparency = 0.672
+shader_parameter/refraction_amount = 0.03
+shader_parameter/normal_map = SubResource("NoiseTexture2D_4ma68")
+shader_parameter/fresnel_power = 1.5
+shader_parameter/deep_water_color = Color(0, 0.1, 0.3, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0pj7o"]
+lightmap_size_hint = Vector2i(7, 7)
+add_uv2 = true
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_umcf1"]
+render_priority = 0
+shader = ExtResource("2_e7oyb")
+shader_parameter/color_top = Vector4(1, 0, 0, 1)
+shader_parameter/color_bottom = Vector4(0, 0, 1, 1)
+shader_parameter/intensity = 1.0
+shader_parameter/position = 0.0
+shader_parameter/blend = 0.5
+shader_parameter/angle = 90.0
+shader_parameter/line_height_min = 0.01
+shader_parameter/line_height_max = 0.1
+shader_parameter/num_lines = 6.0
+shader_parameter/speed = 0.1
+shader_parameter/vertical_origin = 0.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_w3q8g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ksvd"]
+render_priority = 0
+shader = ExtResource("2_e7oyb")
+shader_parameter/color_top = Vector4(1, 0, 0, 1)
+shader_parameter/color_bottom = Vector4(0, 0, 1, 1)
+shader_parameter/intensity = 1.0
+shader_parameter/position = 0.0
+shader_parameter/blend = 0.5
+shader_parameter/angle = 90.0
+shader_parameter/line_height_min = 0.01
+shader_parameter/line_height_max = 0.1
+shader_parameter/num_lines = 6.0
+shader_parameter/speed = 0.1
+shader_parameter/vertical_origin = 0.0
+
+[node name="SeeUnderWater" type="Node3D"]
+
+[node name="SeeUnderWaterPlaneMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.164, 0, 0, 0, -2.36697e-07, 1.757, 0, -5.415, -7.68009e-08, 0, -0.170492, 0)
+material_override = SubResource("ShaderMaterial_n5yfe")
+mesh = SubResource("QuadMesh_0pj7o")
+
+[node name="TorusMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.105, 0, 0, 0, 1.105, 0, 0, 0, 1.105, -1.14917, 0.31903, -0.185922)
+material_override = SubResource("ShaderMaterial_umcf1")
+mesh = SubResource("TorusMesh_w3q8g")
+
+[node name="TorusMesh2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.06, 0, 0, 0, 1.06, 0, 0, 0, 1.06, 1.49505, 0.170056, 0.304535)
+material_override = SubResource("ShaderMaterial_3ksvd")
+mesh = SubResource("TorusMesh_w3q8g")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.848723, 0.528838, 0, -0.528838, 0.848723, 0, 0.894989, 1.82996)

@@ -24,12 +24,32 @@
 			"description": "a grab_sphere_point_with_text",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
 		},
+		"point_collection": {
+			"name": "point_collection",
+			"lookup_name": "point_collection",
+			"description": "a point_collection",
+			"scene": "res://commons/primitives/point/point_collection.tscn",
+		},
+		"infokiosk": {
+			"name": "infokiosk",
+			"lookup_name": "infokiosk",
+			"description": "infokiosk",
+			"scene": "res://commons/monitor/infokiosk.tscn",
+		},
+ 
 		"line": {
 			"name": "line",
 			"lookup_name": "line",
 			"description": "line",
 			"scene": "res://commons/primitives/line/line.tscn",
-		},		
+		},
+		
+		"line_collection": {
+			"name": "line_collection",
+			"lookup_name": "line_collection",
+			"description": "line_collection",
+			"scene": "res://commons/primitives/line/line_collection.tscn",
+		},	
 		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
@@ -80,7 +100,8 @@
 			"lookup_name": "prism",
 			"description": "A prism",
 			"scene": "res://commons/primitives/prism/prism.tscn",
-		},		
+		},
+		
 		"cylinder": {
 			"name": "cylinder",
 			"lookup_name": "cylinder",
@@ -111,6 +132,18 @@
 			"lookup_name": "combine_torus",
 			"description": "combine_torus",
 			"scene": "res://commons/primitives/combines/combine_torus.tscn",
+		},
+		"combine_sphere": {
+			"name": "combine_sphere",
+			"lookup_name": "combine_sphere",
+			"description": "combine_sphere",
+			"scene": "res://commons/primitives/combines/combine_sphere.tscn",
+		},
+		"combine_capsule": {
+			"name": "combine_capsule",
+			"lookup_name": "combine_capsule",
+			"description": "combine_capsule",
+			"scene": "res://commons/primitives/combines/combine_capsule.tscn",
 		},	
 		
 		"pyramid": {
@@ -118,7 +151,8 @@
 			"lookup_name": "pyramid",
 			"description": "A pyramid",
 			"scene": "res://commons/primitives/pyramid/pyramid.tscn",
-		},			
+		},
+			
 		"tetrahedron": {
 			"name": "tetrahedron",
 			"lookup_name": "tetrahedron",
@@ -130,7 +164,8 @@
 			"lookup_name": "octahedron",
 			"description": "A octahedron",
 			"scene": "res://commons/primitives/octahedron/octahedron.tscn",
-		},		
+		},
+		
 		"dodecahedron": {
 			"name": "dodecahedron",
 			"lookup_name": "dodecahedron",
@@ -162,18 +197,26 @@
 			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
 		},	
 
-		"triangularprism": {
-			"name": "triangularprism",
-			"lookup_name": "triangularprism",
-			"description": "A triangularprism",
-			"scene": "res://commons/primitives/triangularprism/triangularprism.tscn",
+		"triangularblock": {
+			"name": "triangularblock",
+			"lookup_name": "triangularblock",
+			"description": "A triangularblock",
+			"scene": "res://commons/primitives/triangularblock/triangularblock.tscn",
 		},	
-			"truncatedtetrahedron": {
+		"prismblock": {
+			"name": "prismblock",
+			"lookup_name": "prismblock",
+			"description": "A prismblock",
+			"scene": "res://commons/primitives/prismblock/prismblock.tscn",
+		},	
+		 
+		"truncatedtetrahedron": {
 			"name": "truncatedtetrahedron",
 			"lookup_name": "truncatedtetrahedron",
 			"description": "A truncatedtetrahedron",
 			"scene": "res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn",
-		},		
+		},
+		
 		"modernpolysolid": {
 			"name": "modernpolysolid",
 			"lookup_name": "modernpolysolid",
@@ -302,7 +345,8 @@
 			"sequence": "array_tutorial",
 			"artifact_type": "sequence_trigger",
 			"prerequisites": []
-		},		
+		},
+		
 		"pick_up_cube": {
 			"name": "Pick Up Cube",
 			"lookup_name": "pick_up_cube",
@@ -397,6 +441,19 @@
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
 		},
+		"doublehelix": {
+			"name": "doublehelix",
+			"lookup_name": "doublehelix",
+			"description": "doublehelix",
+			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn",
+		},
+		
+		"dual_display_test": {
+			"name": "dual_display_test",
+			"lookup_name": "dual_display_test",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn",
+		},
 
 		"probability_sphere": {
 			"name": "Probability Sphere",
@@ -468,7 +525,8 @@
 			"sequence": "randomness_exploration",
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
-		},		
+		},
+		
 		"distribution_visualization": {
 			"name": "distribution_visualization",
 			"lookup_name": "distribution_visualization",
@@ -501,14 +559,8 @@
 			"lookup_name": "cube_projectile_spawner",
 			"description": "cube_projectile_spawner",
 			"scene": "res://commons/primitives/cubes/cube_spawner.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
 		},
+
 		"walk_random": {
 			"name": "Random Walker",
 			"lookup_name": "walk_random",
@@ -640,7 +692,19 @@
 			"position": [3.0, 1.0, 0.0],
 			"rotation": [0.0, 0.0, 0.0]
 		},
+		"monitorsystem": {
+			"name": "monitorsystem",
+			"lookup_name": "monitorsystem",
+			"description": "monitorsystem",
+			"scene": "res://commons/monitor/monitorsystem.tscn",
+		},
 		
+		"fallingblocks": {
+			"name": "fallingblocks",
+			"lookup_name": "fallingblocks",
+			"description": "fallingblocks",
+			"scene": "res://commons/scenes/mapobjects/pick_up_cube_danger.tscn",
+		},
 		
 		"env_one": {
 			"name": "Environment One",
@@ -654,17 +718,93 @@
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"]
 		},
+		"random_transformations_geometric": {
+			"name": "Random Transformations - Geometric",
+			"lookup_name": "random_transformations_geometric",
+			"description": "Random geometric transform visualization",
+			"scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
+			"interaction": "look",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"random_transformations_stochastic": {
+			"name": "Random Transformations - Stochastic",
+			"lookup_name": "random_transformations_stochastic",
+			"description": "Stochastic distribution demonstrations",
+			"scene": "res://algorithms/randomness/random_transformations/stochastic_operations/stochastic_operations.tscn",
+			"interaction": "look",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"random_transformations_matrices": {
+			"name": "Random Transformations - Matrices",
+			"lookup_name": "random_transformations_matrices",
+			"description": "Random matrix visualization",
+			"scene": "res://algorithms/randomness/random_transformations/random_matrices/random_matrices.tscn",
+			"interaction": "look",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"random_transformations_noise": {
+			"name": "Random Transformations - Noise",
+			"lookup_name": "random_transformations_noise",
+			"description": "Noise-based distortion grid",
+			"scene": "res://algorithms/randomness/random_transformations/noise_based_distortion/noise_based_distortion.tscn",
+			"interaction": "look",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"particle_randomness_pure": {
+			"name": "Particle Randomness - Pure",
+			"lookup_name": "particle_randomness_pure",
+			"description": "Pure random particle movement",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn",
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"particle_randomness_perlin": {
+			"name": "Particle Randomness - Perlin",
+			"lookup_name": "particle_randomness_perlin",
+			"description": "Perlin-noise-driven particles",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn",
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"particle_randomness_patterns": {
+			"name": "Particle Randomness - Patterns",
+			"lookup_name": "particle_randomness_patterns",
+			"description": "Procedural pattern particles",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn",
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"particle_randomness_emergent": {
+			"name": "Particle Randomness - Emergent",
+			"lookup_name": "particle_randomness_emergent",
+			"description": "Emergent behavior particle system",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn",
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+		"particle_randomness_evolutionary": {
+			"name": "Particle Randomness - Evolutionary",
+			"lookup_name": "particle_randomness_evolutionary",
+			"description": "Evolutionary algorithm particles",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+			"interaction": "touch_to_activate",
+			"sequence": "randomness_exploration",
+			"artifact_type": "interactive_algorithm"
+		},
+
 		"random_object_spawner": {
 			"name": "Random Object Spawner",
 			"lookup_name": "random_object_spawner",
 			"description": "A spawning algorithm that randomly generates and places objects in the environment",
-			"scene": "res://algorithms/randomness/random_object_spawner.tscn",
-			"position": [0.0, 1.0, -2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+			"scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
 		},
 		"marching_cubes": {
 			"name": "Marching Cubes Test",
@@ -900,67 +1040,68 @@
 		"lookup_name": "wave_interference",
 		"description": "Superposition and interference patterns",
 		"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
-		"position": [5.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
 	},
-			"wave_propagation_3d": {
+	"fouriertransformshape": {
+		"name": "fouriertransformshape",
+		"lookup_name": "fouriertransformshape",
+		"description": "fouriertransformshape",
+		"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
+	},
+	"wave_propagation_3d": {
 			"name": "3D Wave Propagation",
 			"lookup_name": "wave_propagation_3d",
 			"description": "Three-dimensional wave dynamics simulation",
 			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
-			"position": [6.0, 1.0, 5.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "wavefunction_exploration"
 		},
 		"boid_flocking": {
 			"name": "Boid Flocking",
 			"lookup_name": "boid_flocking",
 			"description": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
 			"scene": "res://algorithms/emergentsystems/boidflocking/boids_explained.tscn",
-			"position": [0.0, 1.0, 6.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "emergent_systems_exploration"
 		},
 		"ecosystem_simulation": {
 			"name": "Ecosystem Simulation",
 			"lookup_name": "ecosystem_simulation",
 			"description": "Predator-prey ecosystem dynamics with emergent population behaviors",
 			"scene": "res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
-			"position": [1.0, 1.0, 6.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "emergent_systems_exploration"
 		},
 		"ecosystem_simulation_2": {
 			"name": "Advanced Ecosystem Simulation",
 			"lookup_name": "ecosystem_simulation_2",
 			"description": "Complex ecosystem with morphology generation, resource systems, and relationship networks",
 			"scene": "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn",
-			"position": [2.0, 1.0, 6.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "emergent_systems_exploration"
 		},
 		"self_organizing_patterns": {
 			"name": "Self-Organizing Patterns",
 			"lookup_name": "self_organizing_patterns",
 			"description": "Emergent pattern formation through self-organization principles",
 			"scene": "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
-			"position": [3.0, 1.0, 6.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "emergent_systems_exploration"
 		},
+		"earths_delight": {
+			"name": "earths_delight",
+			"lookup_name": "earths_delight",
+			"description": "earths_delight",
+			"scene": "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
+		},		
+		"PipilottiRistWorld": {
+			"name": "PipilottiRistWorld",
+			"lookup_name": "PipilottiRistWorld",
+			"description": "PipilottiRistWorld",
+			"scene": "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
+		},	
+		"science_desk": {
+			"name": "science_desk",
+			"lookup_name": "science_desk",
+			"description": "science_desk",
+			"scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
+		},	
+				"science_glasses": {
+			"name": "science_glasses",
+			"lookup_name": "science_glasses",
+			"description": "science_glasses",
+			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
+		},	
+			
 		"koch_curve_3d": {
 			"name": "3D Koch Curve",
 			"lookup_name": "koch_curve_3d",
@@ -1121,44 +1262,41 @@
 			"lookup_name": "tree_generation",
 			"description": "Procedural tree generation using L-system algorithms",
 			"scene": "res://algorithms/recursiveemergence/lsystems/tree_generation/tree_generation.tscn",
-			"position": [5.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
 		},
 		"wave_function_collapse": {
 			"name": "Wave Function Collapse",
 			"lookup_name": "wave_function_collapse",
 			"description": "Procedural generation using wave function collapse algorithm",
 			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/wave_function_collapse.tscn",
-			"position": [0.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
 		},
+		"WFCCav": {
+			"name": "WFCCav",
+			"lookup_name": "WFCCav",
+			"description": "WFCCav",
+			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.tscn",
+		},
+
 		"voronoi_diagrams": {
 			"name": "Voronoi Diagrams",
 			"lookup_name": "voronoi_diagrams",
 			"description": "Spatial partitioning using Voronoi tessellation algorithms",
 			"scene": "res://algorithms/proceduralgeneration/voronoi_diagrams/voronoi_diagrams.tscn",
-			"position": [1.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+
 		},
+				"noiselayers": {
+			"name": "noiselayers",
+			"lookup_name": "noiselayers",
+			"description": "noiselayers",
+			"scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+
+		},
+		
+		
 		"tree_gen": {
 			"name": "Tree Generator",
 			"lookup_name": "tree_gen",
 			"description": "Procedural tree generation with branching algorithms",
 			"scene": "res://algorithms/proceduralgeneration/treegen/gen_tree.tscn",
-			"position": [2.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
 		},
 		
 		"gridscheckers": {
@@ -1346,11 +1484,44 @@
 			"lookup_name": "metaballs",
 			"description": "Organic shape generation using metaball algorithms",
 			"scene": "res://algorithms/proceduralgeneration/metaballs/nakama_metaballs.tscn",
-			"position": [2.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+		},
+		
+		"force_directed_layout": {
+			"name": "force_directed_layout",
+			"lookup_name": "force_directed_layout",
+			"description": "force_directed_layout",
+			"scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+		},
+		"graphspace": {
+			"name": "graphspace",
+			"lookup_name": "graphspace",
+			"description": "graphspace",
+			"scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+		},	
+		"KonigsbergBridge": {
+			"name": "KonigsbergBridge",
+			"lookup_name": "KonigsbergBridge",
+			"description": "KonigsbergBridge",
+			"scene": "res://algorithms/graphtheory/graphspace/KonigsbergBridge.tscn",
+		},	
+			
+		"mst_visualization": {
+			"name": "mst_visualization",
+			"lookup_name": "mst_visualization",
+			"description": "mst_visualization",
+			"scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+		},
+		"pathfinding_visualization": {
+			"name": "pathfinding_visualization",
+			"lookup_name": "pathfinding_visualization",
+			"description": "pathfinding_visualization",
+			"scene": "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn",
+		},
+				"network_analysis": {
+			"name": "network_analysis",
+			"lookup_name": "network_analysis",
+			"description": "network_analysis",
+			"scene": "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
 		},
 		"maze_generation": {
 			"name": "Maze Generation",
@@ -1434,12 +1605,15 @@
 			"lookup_name": "WFC3DGenerator",
 			"description": "WFC3DGenerator",
 			"scene": "res://algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn",
-			"position": [2.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
-		},	
+
+		},
+		"modelsynthesis": {
+			"name": "modelsynthesis",
+			"lookup_name": "modelsynthesis",
+			"description": "modelsynthesis",
+			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.tscn",
+		},		
+		
 		"spherenetwork": {
 			"name": "spherenetwork",
 			"lookup_name": "spherenetwork",
@@ -1450,7 +1624,8 @@
 			"scale": [1.0, 1.0, 1.0],
 			"interaction": "touch_to_activate",
 			"sequence": "procedural_generation_exploration"
-		},						
+		},
+						
 		
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",
@@ -1495,7 +1670,8 @@
 			"scale": [1.0, 1.0, 1.0],
 			"interaction": "touch_to_activate",
 			"sequence": "physics_simulation_exploration"
-		},		
+		},
+		
 		
 		"softbody3d": {
 			"name": "softbody3d",
@@ -1529,10 +1705,15 @@
 			"lookup_name": "booleans",
 			"description": "booleans",
 			"scene": "res://algorithms/primitives/booleans/booleans.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+ 
 		},
+			"booleanvariations": {
+			"name": "booleanvariations",
+			"lookup_name": "booleanvariations",
+			"description": "booleanvariations",
+			"scene": "res://algorithms/primitives/booleans/booleanvariations.tscn",
+ 
+		},	
 		
 		
 		"collision_detection": {
@@ -2051,7 +2232,8 @@
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],
 	 
-		},		
+		},
+		
 
 		"surreal_kinetic_sculpture": {
 			"name": "Surreal Kinetic Sculpture",
@@ -2086,7 +2268,8 @@
 			"sequence": "randomness_exploration",
 			"artifact_type": "interactive_algorithm",
 			"prerequisites": ["array_tutorial"],
-		},		
+		},
+		
 		"random_walk_grab_paper": {
 			"name": "Random Walk Grab Paper",
 			"lookup_name": "random_walk_grab_paper",
@@ -3072,21 +3255,14 @@
 			"lookup_name": "coloredlines",
 			"description": "Interactive colored line visualization and manipulation algorithms",
 			"scene": "res://algorithms/color/colorlines/coloredlines.tscn",
-			"position": [0.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "color_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
 		},
+		"grabcolorcollection": {
+			"name": "grabcolorcollection",
+			"lookup_name": "grabcolorcollection",
+			"description": "grabcolorcollection",
+			"scene": "res://algorithms/color/grabcolor/grabcolorcollection.tscn",
+		},
+		
 		"disco_lights": {
 			"name": "disco_lights",
 			"lookup_name": "disco_lights",
@@ -3695,39 +3871,24 @@
 		"lookup_name": "zelda_tilemap_2d",
 		"description": "2D Zelda-style tilemap for retro game aesthetics",
 		"scene": "res://commons/context/zeldatilemap/zelda_tilemap_2d.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
 	},
 	"zelda_tilemap": {
 		"name": "Zelda Tilemap",
 		"lookup_name": "zelda_tilemap",
 		"description": "Zelda-style tilemap system for game-like environments",
 		"scene": "res://commons/context/zeldatilemap/zelda_tilemap.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
 	},
 	"zelda_tiles_3d": {
 		"name": "Zelda Tiles 3D",
 		"lookup_name": "zelda_tiles_3d",
 		"description": "3D Zelda-style tiles for dimensional game environments",
 		"scene": "res://commons/context/zeldatilemap/zelda_tiles_3d.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+	},
+	"evolutionary_algorithms": {
+		"name": "evolutionary_algorithms",
+		"lookup_name": "evolutionary_algorithms",
+		"description": "evolutionary_algorithms",
+		"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
 	},
 	
 

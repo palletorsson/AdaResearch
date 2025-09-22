@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkuceypdl7iui"]
+
+[ext_resource type="Script" uid="uid://bep1nx1x67res" path="res://algorithms/wavefunctions/doublehelix/doublehelix.gd" id="1_ccs26"]
+
+[node name="doublehelix" type="Node3D"]
+script = ExtResource("1_ccs26")
+helix_radius = 0.65
+helix_height = 6.0
+helix_turns = 5
+points_per_turn = 32
+strand_point_radius = 0.08
+strand_segments = 24
+rung_every = 3
+phase_offset = 0.0
+vertical_offset = 0.0
+strand_color_a = Color(0.2, 0.85, 1, 1)
+strand_color_b = Color(1, 0.42, 0.75, 1)
+rung_color = Color(0.7, 1, 0.6, 1)
+axis_color = Color(0.35, 0.65, 1, 1)
+glow_energy = 4.0
+use_emission = true
+draw_axis = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971452, 1.75009)

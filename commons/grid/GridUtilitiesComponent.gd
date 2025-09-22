@@ -151,13 +151,10 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 		"t":  # Teleport
 			if parameters.size() > 0:
 				var destination = parameters[0]
-				
-				# Store the destination (could be sequence name or map name)
 				if "destination" in utility_object:
 					utility_object.destination = destination
 				else:
 					utility_object.set_meta("destination", destination)
-				
 				print("GridUtilitiesComponent: Set teleporter destination to: %s" % destination)
 		"l":  # Lift
 			if parameters.size() > 0 and "height" in utility_object:
@@ -170,24 +167,17 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var rotation_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rotation_y
 				print("GridUtilitiesComponent: Set walkable prism rotation to: %f degrees" % rotation_y)
-			
-			# Apply color if second parameter is provided
 			if parameters.size() > 1:
 				var color_param = parameters[1]
 				_apply_color_to_utility(utility_object, color_param)
 				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
 		"an":  # Annotation/Info Board
-			# Info boards now load data directly from map_data.json
-			# No parameters needed - the info board will automatically
-			# load the current map's data from the grid system
 			print("GridUtilitiesComponent: Info board will load map data automatically")
 		"tc":  # Transport Cube
 			if parameters.size() >= 2:
 				var distance = float(parameters[0])
 				var direction_param = parameters[1]
-				
-				# Parse direction parameter
-				var direction = Vector3(1, 0, 0)  # Default
+				var direction = Vector3(1, 0, 0)
 				match direction_param.to_lower():
 					"x":
 						direction = Vector3(1, 0, 0)
@@ -202,7 +192,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					"-z":
 						direction = Vector3(0, 0, -1)
 					_:
-						# Try parsing as comma-separated coordinates
 						var coords = direction_param.split(",")
 						if coords.size() >= 3:
 							direction = Vector3(
@@ -210,13 +199,26 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 								coords[1].to_float(),
 								coords[2].to_float()
 							)
-				
-				# Apply to transport cube
 				if "set_transport_parameters" in utility_object:
 					utility_object.set_transport_parameters(distance, direction)
-				
 				print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
-
+		"rg":  # Regenerate cube
+			var target_params: Array = []
+			var status_message := ""
+			for param in parameters:
+				var value := str(param).strip_edges()
+				if value.is_empty():
+					continue
+				if value.begins_with("msg="):
+					status_message = value.substr(4, value.length() - 4)
+				else:
+					target_params.append(value)
+			if utility_object.has_method("set_targets_from_parameters"):
+				utility_object.set_targets_from_parameters(target_params)
+			elif utility_object.has_method("set_target_data"):
+				utility_object.set_target_data([], target_params)
+			if status_message.length() > 0 and utility_object.has_method("set_status_message"):
+				utility_object.set_status_message(status_message)
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)

@@ -21,6 +21,9 @@ class_name SimpleMarioSlider
 @onready var sparkle_toggle = $"VBox/SparkleContainer/SparkleToggle"
 @onready var test_button = $"VBox/ButtonRow/TestButton"
 @onready var randomize_button = $"VBox/ButtonRow/RandomizeButton"
+@onready var reset_button = $"VBox/ButtonRow/ResetButton"
+@onready var load_button = $"VBox/ButtonRow/LoadButton"
+@onready var load_dialog = $"LoadSoundDialog"
 @onready var waveform_label = $"VBox/VisualizationContainer/WaveformLabel"
 @onready var waveform_display = $"VBox/VisualizationContainer/WaveformDisplay"
 @onready var spectrum_label = $"VBox/VisualizationContainer/SpectrumLabel"
@@ -39,6 +42,10 @@ var vibrato_amount: float = 0.02
 
 # Audio playback
 var audio_player: AudioStreamPlayer
+var external_players: Array = []
+var use_custom_stream: bool = false
+var custom_stream: AudioStream = null
+var original_stream: AudioStream = null
 
 # Visualization data
 var waveform_points: PackedFloat32Array = PackedFloat32Array()
@@ -51,6 +58,14 @@ const SPECTRUM_BINS := 48
 const SPECTRUM_FREQ_MIN := 80.0
 const SPECTRUM_FREQ_MAX := 4000.0
 const SPECTRUM_SOURCE_SAMPLES := 1024
+const DEFAULT_FREQ1 := 880.0
+const DEFAULT_FREQ2 := 1318.5
+const DEFAULT_VOLUME := 0.5
+const DEFAULT_LENGTH := 0.2
+const DEFAULT_ATTACK := 0.018
+const DEFAULT_RELEASE := 0.12
+const DEFAULT_NOISE := 0.08
+const DEFAULT_SPARKLE := true
 
 var rng := RandomNumberGenerator.new()
 
@@ -59,8 +74,11 @@ func _ready():
 	setup_sliders()
 	connect_signals()
 	create_audio_player()
+	_configure_load_dialog()
+	# initialize_pickup_sound() wait with this until make a asingelton audio managere 
 	setup_visualizations()
 	update_all_labels()
+	add_to_group("audio_emitters")
 	update_waveform()
 
 func setup_sliders():
@@ -133,31 +151,139 @@ func connect_signals():
 		test_button.pressed.connect(_on_test_pressed)
 	if randomize_button:
 		randomize_button.pressed.connect(_on_randomize_pressed)
+	if reset_button:
+		reset_button.pressed.connect(_on_reset_pressed)
+	if load_button:
+		load_button.pressed.connect(_on_load_pressed)
+	if load_dialog:
+		load_dialog.file_selected.connect(_on_sound_file_selected)
 
 func create_audio_player():
 	audio_player = AudioStreamPlayer.new()
 	add_child(audio_player)
 	audio_player.bus = "Master"
 
+func _configure_load_dialog() -> void:
+	if load_dialog:
+		load_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		load_dialog.access = FileDialog.ACCESS_FILESYSTEM
+		load_dialog.filters = PackedStringArray(["*.wav ; WAV Audio", "*.ogg ; OGG Audio", "*.mp3 ; MP3 Audio"])
+		load_dialog.title = "Select Custom Sound"
+
+func initialize_pickup_sound() -> void:
+	original_stream = PickupCube.get_shared_pickup_stream()
+	if original_stream == null:
+		original_stream = PickupCube.get_default_pickup_stream()
+		PickupCube.set_shared_pickup_stream(original_stream)
+	_apply_stream_to_audio_player(original_stream)
+
+func _apply_stream_to_audio_player(stream: AudioStream) -> void:
+	if audio_player == null:
+		return
+	audio_player.stop()
+	audio_player.stream = stream
+	audio_player.volume_db = lerp(-20.0, 0.0, clamp(volume, 0.0, 1.0))
+
+func _apply_stream_to_pickups(stream: AudioStream) -> void:
+	PickupCube.set_shared_pickup_stream(stream)
+
+func _clear_custom_stream_if_needed() -> void:
+	if use_custom_stream:
+		use_custom_stream = false
+		custom_stream = null
+
+func _parameters_match_defaults() -> bool:
+	return (is_equal_approx(freq1, DEFAULT_FREQ1) and
+		is_equal_approx(freq2, DEFAULT_FREQ2) and
+		is_equal_approx(volume, DEFAULT_VOLUME) and
+		is_equal_approx(sound_length, DEFAULT_LENGTH) and
+		is_equal_approx(attack_time, DEFAULT_ATTACK) and
+		is_equal_approx(release_time, DEFAULT_RELEASE) and
+		is_equal_approx(noise_amount, DEFAULT_NOISE) and
+		(sparkle_enabled == DEFAULT_SPARKLE))
+
+func _apply_default_settings() -> void:
+	freq1 = DEFAULT_FREQ1
+	freq2 = DEFAULT_FREQ2
+	volume = DEFAULT_VOLUME
+	sound_length = DEFAULT_LENGTH
+	attack_time = DEFAULT_ATTACK
+	release_time = DEFAULT_RELEASE
+	noise_amount = DEFAULT_NOISE
+	sparkle_enabled = DEFAULT_SPARKLE
+	if freq1_slider:
+		freq1_slider.value = freq1
+	if freq2_slider:
+		freq2_slider.value = freq2
+	if volume_slider:
+		volume_slider.value = volume
+	if length_slider:
+		length_slider.value = sound_length
+	if attack_slider:
+		attack_slider.value = attack_time
+	if release_slider:
+		release_slider.value = release_time
+	if noise_slider:
+		noise_slider.value = noise_amount
+	if sparkle_toggle:
+		sparkle_toggle.button_pressed = sparkle_enabled
+
+func _get_active_stream() -> AudioStream:
+	if use_custom_stream and custom_stream:
+		return custom_stream
+	if _parameters_match_defaults():
+		return PickupCube.get_shared_pickup_stream()
+	update_waveform()
+	return create_mario_sound()
+
+func _on_reset_pressed() -> void:
+	use_custom_stream = false
+	custom_stream = null
+	_apply_default_settings()
+	update_all_labels()
+	update_waveform()
+	var stream = PickupCube.reset_shared_pickup_stream()
+	original_stream = stream
+	_apply_stream_to_audio_player(stream)
+
+func _on_load_pressed() -> void:
+	if load_dialog:
+		load_dialog.popup_centered_ratio()
+
+func _on_sound_file_selected(path: String) -> void:
+	var resource = ResourceLoader.load(path)
+	if resource == null or not resource is AudioStream:
+		push_warning("Unsupported audio file: %s" % path)
+		return
+	custom_stream = resource
+	use_custom_stream = true
+	_apply_stream_to_audio_player(custom_stream)
+	_apply_stream_to_pickups(custom_stream)
+	update_waveform()
+
 func _on_freq1_changed(value: float):
+	_clear_custom_stream_if_needed()
 	freq1 = value
 	if freq1_label:
 		freq1_label.text = "Frequency 1: %.0f Hz" % value
 	update_waveform()
 
 func _on_freq2_changed(value: float):
+	_clear_custom_stream_if_needed()
 	freq2 = value
 	if freq2_label:
 		freq2_label.text = "Frequency 2: %.0f Hz" % value
 	update_waveform()
 
 func _on_volume_changed(value: float):
+	_clear_custom_stream_if_needed()
 	volume = value
 	if volume_label:
 		volume_label.text = "Volume: %.2f" % value
 	update_waveform()
 
 func _on_length_changed(value: float):
+	_clear_custom_stream_if_needed()
 	sound_length = clamp(value, 0.05, 1.0)
 	if length_label:
 		length_label.text = "Length: %.2fs" % sound_length
@@ -165,6 +291,7 @@ func _on_length_changed(value: float):
 	update_waveform()
 
 func _on_attack_changed(value: float):
+	_clear_custom_stream_if_needed()
 	attack_time = clamp(value, 0.0, 0.2)
 	if attack_label:
 		attack_label.text = "Attack: %s" % _format_ms(attack_time)
@@ -172,6 +299,7 @@ func _on_attack_changed(value: float):
 	update_waveform()
 
 func _on_release_changed(value: float):
+	_clear_custom_stream_if_needed()
 	release_time = clamp(value, 0.0, 0.5)
 	if release_label:
 		release_label.text = "Release: %s" % _format_ms(release_time)
@@ -179,23 +307,25 @@ func _on_release_changed(value: float):
 	update_waveform()
 
 func _on_noise_changed(value: float):
+	_clear_custom_stream_if_needed()
 	noise_amount = clamp(value, 0.0, 1.0)
 	if noise_label:
 		noise_label.text = "Noise Sparkle: %d%%" % int(round(noise_amount * 100.0))
 	update_waveform()
 
 func _on_sparkle_toggled(pressed: bool):
+	_clear_custom_stream_if_needed()
 	sparkle_enabled = pressed
 	update_waveform()
 
 func _on_test_pressed():
-	update_waveform()
-	var sound = create_mario_sound()
-	audio_player.stream = sound
-	audio_player.volume_db = lerp(-20.0, 0.0, clamp(volume, 0.0, 1.0))
+	var stream = _get_active_stream()
+	_apply_stream_to_audio_player(stream)
 	audio_player.play()
+	_apply_stream_to_pickups(stream)
 
 func _on_randomize_pressed():
+	_clear_custom_stream_if_needed()
 	rng.randomize()
 	freq1_slider.value = rng.randf_range(420.0, 980.0)
 	freq2_slider.value = freq1_slider.value + rng.randf_range(280.0, 620.0)
@@ -214,6 +344,41 @@ func _ensure_envelope_within_bounds():
 	release_time = clamp(max_total - attack_time, 0.0, max_total)
 	if release_slider:
 		release_slider.value = release_time
+
+func shutdown_audio():
+	if audio_player:
+		audio_player.stop()
+	for player in external_players.duplicate():
+		if is_instance_valid(player):
+			player.stop()
+		_unregister_external_player(player)
+	for cube in get_tree().get_nodes_in_group("mario_pickup_cubes"):
+		if cube.has_method("shutdown_audio"):
+			cube.shutdown_audio()
+	if waveform_display:
+		waveform_display.queue_redraw()
+	if spectrum_display:
+		spectrum_display.queue_redraw()
+
+func _register_external_player(player: AudioStreamPlayer):
+	if player == null or not is_instance_valid(player):
+		return
+	if player in external_players:
+		return
+	external_players.append(player)
+	if player.has_signal("finished"):
+		player.finished.connect(Callable(self, "_on_external_player_finished").bind(player), CONNECT_ONE_SHOT)
+
+func _on_external_player_finished(player: AudioStreamPlayer):
+	_unregister_external_player(player)
+
+func _unregister_external_player(player: AudioStreamPlayer):
+	if player == null:
+		return
+	if player in external_players:
+		external_players.erase(player)
+	if is_instance_valid(player):
+		player.queue_free()
 
 func _adjust_release_if_needed():
 	var max_total = max(sound_length - 0.01, 0.02)
@@ -234,6 +399,20 @@ func _adjust_attack_if_needed():
 				attack_label.text = "Attack: %s" % _format_ms(attack_time)
 
 func update_waveform():
+	if use_custom_stream and custom_stream:
+		for i in range(waveform_points.size()):
+			waveform_points[i] = 0.0
+		for i in range(spectrum_bins.size()):
+			spectrum_bins[i] = 0.0
+		if waveform_label:
+			waveform_label.text = "Waveform (custom audio)"
+		if spectrum_label:
+			spectrum_label.text = "Spectrum (custom audio)"
+		if waveform_display:
+			waveform_display.queue_redraw()
+		if spectrum_display:
+			spectrum_display.queue_redraw()
+		return
 	if sound_length <= 0.0:
 		return
 	var total_samples = int(max(1, sound_length * SAMPLE_RATE))
@@ -326,7 +505,7 @@ func _on_waveform_draw():
 	var font = ThemeDB.fallback_font
 	var font_size = 12
 	waveform_display.draw_string(font, Vector2(10, 20), "Sweep %.0f ? %.0f Hz" % [freq1, freq2], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.9, 0.95, 1.0))
-	waveform_display.draw_string(font, Vector2(10, rect.size.y - 10), "Attack %s  •  Release %s" % [_format_ms(attack_time), _format_ms(release_time)], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.7, 0.85, 1.0))
+	waveform_display.draw_string(font, Vector2(10, rect.size.y - 10), "Attack %s  ï¿½  Release %s" % [_format_ms(attack_time), _format_ms(release_time)], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.7, 0.85, 1.0))
 
 func _on_spectrum_draw():
 	if not spectrum_display or spectrum_bins.is_empty():
@@ -423,8 +602,8 @@ func _format_ms(seconds: float) -> String:
 	return "%d ms" % int(round(seconds * 1000.0))
 
 # Public API for pickup cubes
-func get_mario_sound() -> AudioStreamWAV:
-	return create_mario_sound()
+func get_mario_sound() -> AudioStream:
+	return _get_active_stream()
 
 func get_sound_settings() -> Dictionary:
 	return {
@@ -457,9 +636,18 @@ class SimpleMarioPickupCube:
 	
 	func _ready() -> void:
 		original_y = global_position.y
+		add_to_group("mario_pickup_cubes")
 		setup_pickup_sound()
 		find_mario_slider()
 		print("SimpleMarioPickupCube ready")
+	
+	func shutdown_audio() -> void:
+		if pickup_sound:
+			pickup_sound.stop()
+		has_been_collected = true
+		for player in get_children():
+			if player is AudioStreamPlayer3D:
+				player.stop()
 	
 	func _process(delta: float) -> void:
 		if has_been_collected:
@@ -474,6 +662,8 @@ class SimpleMarioPickupCube:
 		add_child(pickup_sound)
 		pickup_sound.unit_size = 2.0
 		pickup_sound.max_distance = 20.0
+		pickup_sound.volume_db = -6.0
+		pickup_sound.stream = PickupCube.get_shared_pickup_stream()
 	
 	func find_mario_slider() -> void:
 		mario_slider = get_tree().get_first_node_in_group("mario_slider_control")
@@ -484,7 +674,7 @@ class SimpleMarioPickupCube:
 		if has_been_collected:
 			return
 		has_been_collected = true
-		var dynamic_sound: AudioStreamWAV = null
+		var dynamic_sound: AudioStream = null
 		if mario_slider:
 			dynamic_sound = mario_slider.get_mario_sound()
 			var settings = mario_slider.get_sound_settings()
@@ -497,34 +687,23 @@ class SimpleMarioPickupCube:
 		sound_clone.global_position = global_position
 		sound_clone.volume_db = pickup_sound.volume_db
 		sound_clone.play()
-		sound_clone.finished.connect(func(): sound_clone.queue_free())
+		if mario_slider:
+			mario_slider._register_external_player(sound_clone)
+			sound_clone.finished.connect(func():
+				if mario_slider:
+					mario_slider._unregister_external_player(sound_clone)
+				sound_clone.queue_free())
+		else:
+			sound_clone.finished.connect(func(): sound_clone.queue_free())
 		GameManager.add_points(points_value, global_position)
 		_play_collection_effect()
 		await get_tree().create_timer(0.1).timeout
 		queue_free()
 	
-	func create_default_mario_sound() -> AudioStreamWAV:
-		var sample_rate = 44100
-		var sample_hz = 880
-		var sample_hz_2 = 1318.5
-		var stream = AudioStreamWAV.new()
-		stream.format = AudioStreamWAV.FORMAT_16_BITS
-		stream.mix_rate = sample_rate
-		var data = PackedByteArray()
-		var length = 0.2
-		var samples = int(length * sample_rate)
-		data.resize(samples * 2)
-		for i in range(samples):
-			var t = float(i) / sample_rate
-			var phase_1 = t * sample_hz
-			var phase_2 = t * sample_hz_2
-			var amplitude = 0.5 * (1.0 - t / length)
-			var sample_value = amplitude * (sin(TAU * phase_1) + sin(TAU * phase_2))
-			var sample_int = int(sample_value * 32767.0)
-			data.encode_s16(i * 2, sample_int)
-		stream.data = data
-		return stream
-	
+	func create_default_mario_sound() -> AudioStream:
+		return PickupCube.get_default_pickup_stream()
+
+
 	func _play_collection_effect():
 		var mesh_instance = find_child("CubeBaseMesh", true, false)
 		if mesh_instance:
@@ -538,4 +717,3 @@ class SimpleMarioPickupCube:
 	
 	func _is_player(body: Node3D) -> bool:
 		return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player")
-

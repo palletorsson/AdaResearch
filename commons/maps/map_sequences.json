@@ -26,7 +26,8 @@
 			"maps": [
 				"Point_1",
 				"Point_Line",	
-				"Point_2",				
+				"Point_2",		
+				"Point_3",			
 				"Point_4",			
 				"Primitives_1",
 				"Primitives_Torus",					
@@ -72,9 +73,18 @@
 			"temps":[ 			
 			],
 			"maps": [
+				"Color_Grabbable",					
 				"Color_1",
 				"Color_2",			
-				"Color_3",										
+				"Color_3",		
+				
+				"Pattern_Generation_One",
+				"Pattern_Generation_Two", 
+				"Pattern_Generation_Three",
+				"Pattern_Generation_Four",
+				"Pattern_Generation_Five",
+				"Pattern_Generation_Six",
+				"Pattern_Generation_Seven",													
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
@@ -90,8 +100,8 @@
 				"test"
 			],
 			"maps": [
-				"Test_Scene_1",
-				"Test_Scene_2",
+				"Test_1",
+				"Test_2",
 				"Test_3",
 				"Test_4",
 				"Test_5",
@@ -188,17 +198,26 @@
 			"temps": [			
 		 
 			],
+			"content": [
+				" One : Random Remove, TD: placement",
+				" Two : Random Topology", 
+				" Three : Wave Propagation Space",
+				" John_Cage: Audio scape",
+				" Bernini : Bernini columns",
+				" Four : Lines",
+				" Kusama: Kusama",
+			],
 			"maps": [
-				"Random_One",
-				"Random_Game",				
+				"Random_One",	
+				"Randomness_10_PRINT_Algorithm",		
 				"Random_Two",
+				"Random_Seven", 				
 				"Random_Three",
 				"Random_Four",
 				"Random_Walk",				
-				"Random_Five",
+				"Random_Five", 
 				"Random_Six", 
 				"Random_Seven", 
-				"Random_Game", 
 				"Randomness_10_PRINT_Algorithm",
 				"Randomness_Digital_Materiality_Glitch",
 				"Randomness_Distribution_Visualization",
@@ -206,6 +225,8 @@
 				"Randomness_Random_Transformations",
 				"Randomness_Random_Walk",
 				"Randomness_TRNG_vs_PRNG",
+						"Random_Game", 			
+							
 	
 			],
 			"return_to": "lab",
@@ -224,21 +245,25 @@
 				"Audio-visualization",
 				"Wave interference"
 			],
+			"content": [
+				" Mario_Sound : Mario Sound Arcade simple_mario_slider",
+				" Sine_Space : Sine Space a space", 
+				" Wave_Propagation : Wave Propagation Space",
+				" John_Cage: Audio scape",
+				" Bernini : Bernini columns",
+				" Four : Lines",
+				" Kusama: Kusama",
+			],
 			"maps": [
-				"WaveFunctions_3D_Wave_Propagation",
-				"WaveFunctions_John_Cage",
-				
-				"WaveFunctions_Circle_Cone_Sphere_Torus",
-				"WaveFunctions_Fourier_Transforms",
-				"WaveFunctions_Sine_Space",
-				"WaveFunctions_Standing_Wave_Patterns",
+				"WaveFunctions_Mario_Sound",
 				"WaveFunctions_Unit_Circle",
-				"WaveFunctions_Wave_Interference_Patterns",				
-				"Wavefunctions_One",
-				"Wavefunctions_Two",
-				"Wavefunctions_Three", 
+				"WaveFunctions_Fourier_Form",
+				"WaveFunctions_Sine_Space",
+				"WaveFunctions_3D_Wave_Propagation",					
+				"WaveFunctions_John_Cage",
+				"Wavefunctions_Bernini",			
 				"Wavefunctions_Four", 
-				"Wavefunctions_Five"
+				"WaveFunctions_Kusama",
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_wavefunctions",
@@ -283,8 +308,6 @@
 			],
 			"maps": [
 				"Forces_One",
-				"Forces_Two",
-				"Forces_Three"
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["noise"],
@@ -493,7 +516,7 @@
 				"ProceduralGeneration_Eight",
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
-					"ProceduralGeneration_Eleven",				
+				"ProceduralGeneration_Eleven",				
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

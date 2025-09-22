@@ -1,0 +1,644 @@
+[gd_scene load_steps=12 format=3 uid="uid://b000003e8"]
+
+[ext_resource type="Script" path="res://csg_viewer.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="Material_0"]
+albedo_color = Color(0.8, 0.2, 0.2, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_1"]
+albedo_color = Color(0.2, 0.8, 0.2, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_2"]
+albedo_color = Color(0.2, 0.2, 0.8, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_3"]
+albedo_color = Color(0.8, 0.8, 0.2, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_4"]
+albedo_color = Color(0.8, 0.2, 0.8, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_5"]
+albedo_color = Color(0.2, 0.8, 0.8, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_6"]
+albedo_color = Color(0.9, 0.5, 0.1, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_7"]
+albedo_color = Color(0.5, 0.2, 0.8, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_8"]
+albedo_color = Color(0.8, 0.5, 0.5, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="Material_9"]
+albedo_color = Color(0.5, 0.8, 0.5, 1.0)
+metallic = 0.2
+roughness = 0.8
+
+[node name="CSGVariants" type="Node3D"]
+script = ExtResource("1_script")
+
+# Camera positioned for good overview
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 20, 15, 20)
+fov = 60.0
+
+# Lighting setup
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5, 10, 5)
+light_energy = 1.0
+shadow_enabled = true
+
+# Variant 0: HollowSphere
+[node name="Variant_000_HollowSphere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, -3.0, -3.0)
+
+[node name="MainSphere" type="CSGSphere3D" parent="Variant_000_HollowSphere"]
+radius = 1.5
+material_override = SubResource("Material_0")
+
+[node name="HollowSphere" type="CSGSphere3D" parent="Variant_000_HollowSphere/MainSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+radius = 1.1
+operation = 2
+
+[node name="Label" type="Label3D" parent="Variant_000_HollowSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "0: HollowSphere"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 1: SphereWithHoles
+[node name="Variant_001_SphereWithHoles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, -3.0, 3.0)
+
+[node name="BaseSphere" type="CSGSphere3D" parent="Variant_001_SphereWithHoles"]
+radius = 1.5
+material_override = SubResource("Material_1")
+
+[node name="Hole0" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+radius = 0.38332397450906824
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+radius = 0.30203383389141364
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+radius = 0.46504130185074866
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+radius = 0.35972797103991855
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+radius = 0.3736823378976951
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="Variant_001_SphereWithHoles/BaseSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+radius = 0.33873226980901483
+operation = 2
+
+
+[node name="Label" type="Label3D" parent="Variant_001_SphereWithHoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "1: SphereWithHoles"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 2: PerforatedCube
+[node name="Variant_002_PerforatedCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 3.0, -3.0)
+
+[node name="BaseCube" type="CSGBox3D" parent="Variant_002_PerforatedCube"]
+size = Vector3(3, 3, 3)
+material_override = SubResource("Material_2")
+
+[node name="Hole0" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole6" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole7" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole8" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.8, -0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole9" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole10" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole11" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole12" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole13" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole14" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole15" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole16" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.8, 0)
+radius = 0.3
+operation = 2
+
+[node name="Hole17" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.8, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole18" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole19" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.8, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole20" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole21" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole22" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole23" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.8, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole24" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.8)
+radius = 0.3
+operation = 2
+
+[node name="Hole25" type="CSGSphere3D" parent="Variant_002_PerforatedCube/BaseCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.8, 0.8)
+radius = 0.3
+operation = 2
+
+
+[node name="Label" type="Label3D" parent="Variant_002_PerforatedCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "2: PerforatedCube"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 3: TorusIntersection
+[node name="Variant_003_TorusIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 3.0, 3.0)
+
+[node name="TorusHorizontal" type="CSGTorus3D" parent="Variant_003_TorusIntersection"]
+inner_radius = 0.5
+outer_radius = 1.3
+material_override = SubResource("Material_3")
+
+[node name="TorusVertical" type="CSGTorus3D" parent="Variant_003_TorusIntersection/TorusHorizontal"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+inner_radius = 0.5
+outer_radius = 1.3
+operation = 3
+
+[node name="TorusDepth" type="CSGTorus3D" parent="Variant_003_TorusIntersection/TorusHorizontal"]
+transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0)
+inner_radius = 0.5
+outer_radius = 1.3
+operation = 3
+
+[node name="Label" type="Label3D" parent="Variant_003_TorusIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "3: TorusIntersection"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 4: CylinderSubtraction
+[node name="Variant_004_CylinderSubtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, -3.0, -3.0)
+
+[node name="MainCylinder" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction"]
+height = 2.5
+top_radius = 1.2
+bottom_radius = 1.2
+material_override = SubResource("Material_4")
+
+[node name="RadialHole0" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.0)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole1" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5656854249492381, 0, 0.5656854249492381)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole2" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.898587196589413e-17, 0, 0.8)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole3" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.565685424949238, 0, 0.5656854249492381)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole4" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 9.797174393178826e-17)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole5" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5656854249492381, 0, -0.565685424949238)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole6" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4695761589768238e-16, 0, -0.8)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="RadialHole7" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5656854249492379, 0, -0.5656854249492381)
+height = 3.0
+top_radius = 0.2
+bottom_radius = 0.2
+operation = 2
+
+[node name="CentralHole" type="CSGCylinder3D" parent="Variant_004_CylinderSubtraction/MainCylinder"]
+height = 3.0
+top_radius = 0.4
+bottom_radius = 0.4
+operation = 2
+
+[node name="Label" type="Label3D" parent="Variant_004_CylinderSubtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "4: CylinderSubtraction"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 5: NestedBoxes
+[node name="Variant_005_NestedBoxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, -3.0, 3.0)
+
+[node name="OuterBox" type="CSGBox3D" parent="Variant_005_NestedBoxes"]
+size = Vector3(2.5, 2.5, 2.5)
+material_override = SubResource("Material_5")
+
+[node name="NestedBox0" type="CSGBox3D" parent="Variant_005_NestedBoxes/OuterBox"]
+transform = Transform3D(0.9659258262890683, 0.25881904510252074, 0, -0.25881904510252074, 0.9659258262890683, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 2.0, 2.0)
+operation = 2
+
+[node name="NestedBox1" type="CSGBox3D" parent="Variant_005_NestedBoxes/OuterBox/NestedBox0"]
+transform = Transform3D(0.8660254037844387, 0.49999999999999994, 0, -0.49999999999999994, 0.8660254037844387, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.5, 1.5, 1.5)
+operation = 1
+
+[node name="NestedBox2" type="CSGBox3D" parent="Variant_005_NestedBoxes/OuterBox/NestedBox0/NestedBox1"]
+transform = Transform3D(0.7071067811865476, 0.7071067811865476, 0, -0.7071067811865476, 0.7071067811865476, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.0, 1.0, 1.0)
+operation = 2
+
+[node name="NestedBox3" type="CSGBox3D" parent="Variant_005_NestedBoxes/OuterBox/NestedBox0/NestedBox1/NestedBox2"]
+transform = Transform3D(0.5000000000000001, 0.8660254037844386, 0, -0.8660254037844386, 0.5000000000000001, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.5, 0.5, 0.5)
+operation = 1
+
+
+[node name="Label" type="Label3D" parent="Variant_005_NestedBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "5: NestedBoxes"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 6: SwissCheese
+[node name="Variant_006_SwissCheese" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 3.0, -3.0)
+
+[node name="CheeseBlock" type="CSGBox3D" parent="Variant_006_SwissCheese"]
+size = Vector3(2.5, 2.0, 2.5)
+material_override = SubResource("Material_6")
+
+[node name="CheeseHole0" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, 0.5)
+radius = 0.3
+operation = 2
+
+[node name="CheeseHole1" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.3, 0.2)
+radius = 0.25
+operation = 2
+
+[node name="CheeseHole2" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.6, -0.8)
+radius = 0.35
+operation = 2
+
+[node name="CheeseHole3" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.7, -0.4)
+radius = 0.28
+operation = 2
+
+[node name="CheeseHole4" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.1, 0.1)
+radius = 0.22
+operation = 2
+
+[node name="CheeseHole5" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.8, 0.7)
+radius = 0.33
+operation = 2
+
+[node name="CheeseHole6" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.5, -0.6)
+radius = 0.26
+operation = 2
+
+[node name="CheeseHole7" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.4, 0.3)
+radius = 0.29
+operation = 2
+
+[node name="CheeseHole8" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, -0.1, 0.9)
+radius = 0.24
+operation = 2
+
+[node name="CheeseHole9" type="CSGSphere3D" parent="Variant_006_SwissCheese/CheeseBlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.7, -0.2)
+radius = 0.31
+operation = 2
+
+
+[node name="Label" type="Label3D" parent="Variant_006_SwissCheese"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "6: SwissCheese"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Variant 7: LatticeStructure
+[node name="Variant_007_LatticeStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 3.0, 3.0)
+
+[node name="LatticeFrame" type="CSGBox3D" parent="Variant_007_LatticeStructure"]
+size = Vector3(0.1, 0.1, 0.1)
+material_override = SubResource("Material_7")
+
+[node name="BeamX_-0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_-0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_-0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamX_0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.8)
+size = Vector3(2.0, 0.15, 0.15)
+operation = 1
+
+[node name="BeamY_-0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_-0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_-0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, -0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamY_0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.8)
+size = Vector3(0.15, 2.0, 0.15)
+operation = 1
+
+[node name="BeamZ_-0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, -0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_-0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_-0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0.8_-0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, -0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0.8_0" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+[node name="BeamZ_0.8_0.8" type="CSGBox3D" parent="Variant_007_LatticeStructure/LatticeFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.8, 0)
+size = Vector3(0.15, 0.15, 2.0)
+operation = 1
+
+
+[node name="Label" type="Label3D" parent="Variant_007_LatticeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "7: LatticeStructure"
+pixel_size = 0.004
+billboard = 1
+modulate = Color(1, 1, 1, 0.8)
+
+# Generated 8 CSG variants in 2x2x2 grid
+# Spacing: 6.0 units
+# Seed: 12345
+# Each variant has proper CSG hierarchy with spatial separation

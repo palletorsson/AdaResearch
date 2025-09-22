@@ -1,37 +1,27 @@
 extends Node3D
 
 # Line connection system for grab spheres
-@export var line_thickness: float = 0.01
-@export var line_color: Color = Color(0.0, 0.0, 0.0, 1.0)
+@export var line_thickness: float = 0.005
+@export var line_color: Color = Color(1.0, 0.6, 0.9, 1.0)
 @export var update_frequency: float = 0.1  # Update every 0.1 seconds
 
 @onready var point_one = $GrabSphere
 @onready var point_two = $GrabSphere2
 
 var connection_lines: Array[MeshInstance3D] = []
-var update_timer: Timer
+var current_line: MeshInstance3D
 
 func _ready():
-	setup_update_timer()
 	update_connections()
 
-func setup_update_timer():
-	update_timer = Timer.new()
-	update_timer.wait_time = update_frequency
-	update_timer.timeout.connect(update_connections)
-	update_timer.autostart = true
-	add_child(update_timer)
-
 func update_connections():
-	# Clear existing connection lines
 	clear_connections()
-	
-	# Create connection between the two specific grab spheres
 	if point_one and point_two and is_instance_valid(point_one) and is_instance_valid(point_two):
-		# Get the local positions of the grab spheres relative to this container
-		var pos_one = point_one.position
-		var pos_two = point_two.position
-		create_connection_line(pos_one, pos_two)
+		current_line = create_connection_line(point_one.position, point_two.position)
+
+func _process(delta):
+	if point_one and point_two and is_instance_valid(point_one) and is_instance_valid(point_two):
+		update_line_transform(point_one.position, point_two.position)
 
 func create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstance3D:
 	var line = MeshInstance3D.new()
@@ -79,10 +69,31 @@ func create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstanc
 	
 	return line
 
+func update_line_transform(start_pos: Vector3, end_pos: Vector3):
+	if current_line == null or not is_instance_valid(current_line):
+		return
+	var cylinder = current_line.mesh as CylinderMesh
+	if cylinder == null:
+		return
+	var distance = start_pos.distance_to(end_pos)
+	cylinder.height = distance
+	var center_pos = (start_pos + end_pos) / 2.0
+	current_line.position = center_pos
+	var direction = (end_pos - start_pos).normalized()
+	if direction.length() > 0.001:
+		var up = Vector3.UP
+		var right = direction.cross(up).normalized()
+		if right.length() < 0.001:
+			right = Vector3.RIGHT
+			up = right.cross(direction).normalized()
+		else:
+			up = right.cross(direction).normalized()
+		current_line.transform.basis = Basis(right, direction, up)
+
 func clear_connections():
-	for line in connection_lines:
-		if is_instance_valid(line):
-			line.queue_free()
+	if current_line and is_instance_valid(current_line):
+		current_line.queue_free()
+	current_line = null
 	connection_lines.clear()
 
 # Public method to manually refresh connections

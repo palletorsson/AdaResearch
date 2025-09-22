@@ -1,0 +1,4148 @@
+[gd_scene load_steps=12 format=3 uid="uid://b000003ea"]
+
+[ext_resource type="Script" path="res://csg_viewer.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="Material_0"]
+albedo_color = Color(1.0, 0.0, 0.0, 1.0)
+metallic = 0.4931096728304965
+roughness = 0.8062405747434515
+
+[sub_resource type="StandardMaterial3D" id="Material_1"]
+albedo_color = Color(0.0, 1.0, 0.0, 1.0)
+metallic = 0.6513246301465085
+roughness = 0.47838230464008313
+
+[sub_resource type="StandardMaterial3D" id="Material_2"]
+albedo_color = Color(0.0, 0.0, 1.0, 1.0)
+metallic = 0.6942034523229097
+roughness = 0.6970197673870674
+
+[sub_resource type="StandardMaterial3D" id="Material_3"]
+albedo_color = Color(1.0, 1.0, 0.0, 1.0)
+metallic = 0.7639658087262468
+roughness = 0.8997286683311786
+
+[sub_resource type="StandardMaterial3D" id="Material_4"]
+albedo_color = Color(1.0, 0.0, 1.0, 1.0)
+metallic = 0.7974134049016689
+roughness = 0.13335694654453434
+
+[sub_resource type="StandardMaterial3D" id="Material_5"]
+albedo_color = Color(0.0, 1.0, 1.0, 1.0)
+metallic = 0.5997921138913773
+roughness = 0.19836263087905703
+
+[sub_resource type="StandardMaterial3D" id="Material_6"]
+albedo_color = Color(1.0, 0.5, 0.0, 1.0)
+metallic = 0.11395883327172047
+roughness = 0.5460470614420861
+
+[sub_resource type="StandardMaterial3D" id="Material_7"]
+albedo_color = Color(0.5, 0.0, 1.0, 1.0)
+metallic = 0.337216404476014
+roughness = 0.11811071530653505
+
+[sub_resource type="StandardMaterial3D" id="Material_8"]
+albedo_color = Color(1.0, 0.75, 0.8, 1.0)
+metallic = 0.08591800978544627
+roughness = 0.12587904453107487
+
+[sub_resource type="StandardMaterial3D" id="Material_9"]
+albedo_color = Color(0.5, 1.0, 0.5, 1.0)
+metallic = 0.5588121130775512
+roughness = 0.26366423315637977
+
+[node name="CSGVariants" type="Node3D"]
+script = ExtResource("1_script")
+
+# Camera positioned for good overview
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 20)
+fov = 75.0
+
+# Lighting setup
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 5, 10, 5)
+light_energy = 1.0
+shadow_enabled = true
+
+# Environment for better visuals
+[node name="Environment" type="Node3D" parent="."]
+
+# Variant 0: HollowSphere
+[node name="CSG_Variant_000_HollowSphere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_000_HollowSphere"]
+material_override = SubResource("Material_0")
+
+[node name="OuterSphere" type="CSGSphere3D" parent="CSG_Variant_000_HollowSphere/CSGCombiner3D"]
+radius = 1.0
+
+[node name="InnerSphere" type="CSGSphere3D" parent="CSG_Variant_000_HollowSphere/CSGCombiner3D"]
+radius = 0.7
+operation = 2
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_000_HollowSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "0: HollowSphere"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 1: SphereWithHoles
+[node name="CSG_Variant_001_SphereWithHoles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_001_SphereWithHoles"]
+material_override = SubResource("Material_1")
+
+[node name="BaseSphere" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+radius = 1.2
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13340820392745412, -0.7837293288686906, 0.5203304148059891)
+radius = 0.25972797103991857
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21054129681843892, -0.4901418415278812, 0.10561306996617803)
+radius = 0.23233756478587364
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6011729851463518, -0.10730197118413454, 0.09932558092134869)
+radius = 0.23486871214474636
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08515373691092765, -0.2321577818614421, 0.7329036561592779)
+radius = 0.21825881977534703
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_001_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.765823992912656, -0.14060897129711836, 0.0062965889760600025)
+radius = 0.22962923378603783
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_001_SphereWithHoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "1: SphereWithHoles"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 2: PerforatedCube
+[node name="CSG_Variant_002_PerforatedCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_002_PerforatedCube"]
+material_override = SubResource("Material_2")
+
+[node name="BaseCube" type="CSGBox3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+size = Vector3(2, 2, 2)
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole6" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole7" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole8" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole9" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole10" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole11" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole12" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole13" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole14" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole15" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole16" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole17" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole18" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole19" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole20" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole21" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole22" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole23" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole24" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole25" type="CSGSphere3D" parent="CSG_Variant_002_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_002_PerforatedCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "2: PerforatedCube"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 3: TorusIntersection
+[node name="CSG_Variant_003_TorusIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_003_TorusIntersection"]
+material_override = SubResource("Material_3")
+
+[node name="Torus1" type="CSGTorus3D" parent="CSG_Variant_003_TorusIntersection/CSGCombiner3D"]
+inner_radius = 0.3
+outer_radius = 1.0
+
+[node name="Torus2" type="CSGTorus3D" parent="CSG_Variant_003_TorusIntersection/CSGCombiner3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+inner_radius = 0.3
+outer_radius = 1.0
+operation = 3
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_003_TorusIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "3: TorusIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 4: CylinderSubtraction
+[node name="CSG_Variant_004_CylinderSubtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_004_CylinderSubtraction"]
+material_override = SubResource("Material_4")
+
+[node name="BaseCylinder" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+height = 2.0
+top_radius = 1.0
+bottom_radius = 1.0
+
+[node name="SubCylinder0" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.0)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder1" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119285, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder2" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6739403974420595e-17, 0, 0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder3" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42426406871192845, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder4" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 7.347880794884119e-17)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder5" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4242640687119286, 0, -0.42426406871192845)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder6" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1021821192326178e-16, 0, -0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder7" type="CSGCylinder3D" parent="CSG_Variant_004_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119284, 0, -0.4242640687119286)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_004_CylinderSubtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "4: CylinderSubtraction"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 5: NestedBoxes
+[node name="CSG_Variant_005_NestedBoxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_005_NestedBoxes"]
+material_override = SubResource("Material_5")
+
+[node name="NestedBox0" type="CSGBox3D" parent="CSG_Variant_005_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(1.0, 0.0, 0, -0.0, 1.0, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 2.0, 2.0)
+operation = 1
+
+[node name="NestedBox1" type="CSGBox3D" parent="CSG_Variant_005_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.9659258262890683, 0.25881904510252074, 0, -0.25881904510252074, 0.9659258262890683, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.6, 1.6, 1.6)
+operation = 2
+
+[node name="NestedBox2" type="CSGBox3D" parent="CSG_Variant_005_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.8660254037844387, 0.49999999999999994, 0, -0.49999999999999994, 0.8660254037844387, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.2, 1.2, 1.2)
+operation = 1
+
+[node name="NestedBox3" type="CSGBox3D" parent="CSG_Variant_005_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.7071067811865476, 0.7071067811865476, 0, -0.7071067811865476, 0.7071067811865476, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.8, 0.8, 0.8)
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_005_NestedBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "5: NestedBoxes"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 6: SwissCheese
+[node name="CSG_Variant_006_SwissCheese" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_006_SwissCheese"]
+material_override = SubResource("Material_6")
+
+[node name="CheeseBase" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+radius = 1.3
+
+[node name="CheeseHole0" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4379342806017701, -0.6200572425563593, -0.31687914845289566)
+radius = 0.10705636544266017
+operation = 2
+
+[node name="CheeseHole1" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3209644552041586, 0.9349649177597428, 0.9575969083713136)
+radius = 0.32335901204231043
+operation = 2
+
+[node name="CheeseHole2" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9930907784898089, 0.8804770061954856, 0.7415339375109526)
+radius = 0.3312503015550433
+operation = 2
+
+[node name="CheeseHole3" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6422524707529698, -0.8010007343807772, -0.17093506297628447)
+radius = 0.3656609401436439
+operation = 2
+
+[node name="CheeseHole4" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1561720547326464, 0.47316442988816454, -0.5347577935431846)
+radius = 0.25707927404939757
+operation = 2
+
+[node name="CheeseHole5" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4187728749682633, 0.6496678937955613, 0.6142490661181659)
+radius = 0.16969243389323865
+operation = 2
+
+[node name="CheeseHole6" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7463799342397583, -0.5672391394199106, 0.6037984752066285)
+radius = 0.2665255896815133
+operation = 2
+
+[node name="CheeseHole7" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6283432802895681, 0.17721723666303202, 0.03647877150816736)
+radius = 0.3875987510305696
+operation = 2
+
+[node name="CheeseHole8" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9169215562972763, -0.67172343579938, 0.9665853062950225)
+radius = 0.34966146575515694
+operation = 2
+
+[node name="CheeseHole9" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6994550680367617, -0.5417740590911013, 0.07827654990504485)
+radius = 0.1470942490980321
+operation = 2
+
+[node name="CheeseHole10" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35247854869302886, -0.9013615539537378, 0.42335458763113265)
+radius = 0.1235688240560154
+operation = 2
+
+[node name="CheeseHole11" type="CSGSphere3D" parent="CSG_Variant_006_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9892085015636325, 0.8411396768612389, 0.5776577444629247)
+radius = 0.33172176714018287
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_006_SwissCheese"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "6: SwissCheese"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 7: LatticeStructure
+[node name="CSG_Variant_007_LatticeStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_007_LatticeStructure"]
+material_override = SubResource("Material_7")
+
+[node name="LatticeBeam0" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam1" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam2" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam3" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam4" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam5" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam6" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam7" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam8" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam9" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam10" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam11" type="CSGBox3D" parent="CSG_Variant_007_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_007_LatticeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "7: LatticeStructure"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 8: TwistedForms
+[node name="CSG_Variant_008_TwistedForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_008_TwistedForms"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_008_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17870617294701474, 0.2612587669603891, -0.019223745004467108)
+operation = 1
+radius = 0.6050445354210666
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_008_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2984053837933609, 0.26885636644696054, 0.1985618555499734)
+operation = 3
+inner_radius = 0.29345639547043395
+outer_radius = 0.4922570115424759
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_008_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21170432753753265, 0.037120529194144436, 0.019613338229956367)
+operation = 1
+radius = 0.39242724565887144
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_008_TwistedForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "8: TwistedForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 9: BooleanSculpture
+[node name="CSG_Variant_009_BooleanSculpture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, -2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_009_BooleanSculpture"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_009_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2357213161500754, 0.250023345694975, -0.43388351954182036)
+operation = 1
+size = Vector3(1.4189346498137216, 0.6843210833316722, 0.8729136089270252)
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_009_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32214768843364816, 0.07164355128955002, 0.32347661642928616)
+operation = 2
+radius = 0.508766230661288
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_009_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14373939082401277, 0.24356486048597448, 0.12814382926607526)
+operation = 1
+size = Vector3(0.7332402790359263, 1.067864010425696, 0.6253608803321342)
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_009_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27720969488379343, -0.4559599804583171, 0.29922963318740603)
+operation = 2
+size = Vector3(0.6561733660937648, 1.3803419374567563, 1.134807341063971)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_009_BooleanSculpture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "9: BooleanSculpture"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 10: OrganicCavities
+[node name="CSG_Variant_010_OrganicCavities" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_010_OrganicCavities"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_010_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1859014136246242, -0.09820864865739376, -0.05082873545308664)
+operation = 1
+inner_radius = 0.1530258975111815
+outer_radius = 0.4117410696138
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_010_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42099202425804017, 0.17614491261238585, 0.1256024673922519)
+operation = 1
+height = 0.6879507665555745
+top_radius = 0.35877770927705754
+bottom_radius = 0.2727341540832019
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_010_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40137841776124106, 0.2253922769077522, 0.3462916716059914)
+operation = 1
+height = 0.540451261544659
+top_radius = 0.2758889948145336
+bottom_radius = 0.23274271828783932
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_010_OrganicCavities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "10: OrganicCavities"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 11: RingStructures
+[node name="CSG_Variant_011_RingStructures" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_011_RingStructures"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_011_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16716759335777331, -0.29909472157168304, -0.3500978640193748)
+operation = 1
+radius = 0.4960686941420603
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_011_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40038395311953545, -0.351485113960576, -0.29374219284091585)
+operation = 1
+size = Vector3(0.7841099577994114, 1.3562795212227932, 0.5917742408363947)
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_011_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004200515577912456, 0.461327526048841, 0.4807182887493756)
+operation = 3
+radius = 0.46267911563844005
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_011_RingStructures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "11: RingStructures"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 12: IntersectingCylinders
+[node name="CSG_Variant_012_IntersectingCylinders" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_012_IntersectingCylinders"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_012_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08541365385343047, -0.47543070933408027, 0.162556015158836)
+operation = 1
+inner_radius = 0.23160570501428643
+outer_radius = 0.406815419552438
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_012_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45426098019620353, -0.18677793898077377, 0.300639080244815)
+operation = 2
+inner_radius = 0.12196510804619423
+outer_radius = 0.7808657172879493
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_012_IntersectingCylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "12: IntersectingCylinders"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 13: ComplexHollow
+[node name="CSG_Variant_013_ComplexHollow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_013_ComplexHollow"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_013_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46673981890026384, -0.4487851686116242, 0.3350008071697542)
+operation = 1
+radius = 0.5116779916735492
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_013_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24514608669708748, -0.33786965621113274, 0.08813772010263843)
+operation = 2
+radius = 0.7619268446431287
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_013_ComplexHollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "13: ComplexHollow"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 14: FractalLike
+[node name="CSG_Variant_014_FractalLike" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_014_FractalLike"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_014_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3406091952863175, 0.2323486019332045, 0.3492864948438936)
+operation = 1
+radius = 0.6840248885368889
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_014_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23474677974843783, -0.2642846911133042, 0.4805838560880975)
+operation = 1
+size = Vector3(1.163166302468973, 1.062192471691469, 1.150676648695779)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_014_FractalLike"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "14: FractalLike"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 15: Architectural
+[node name="CSG_Variant_015_Architectural" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_015_Architectural"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_015_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01813191942966197, 0.012877135825085873, 0.040201313125083904)
+operation = 1
+size = Vector3(0.5824182288461114, 0.9655575760530519, 0.8277568016143241)
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_015_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07536671633872205, -0.3753933148740901, -0.28203564339404374)
+operation = 2
+inner_radius = 0.2761621708217953
+outer_radius = 0.7109398060976907
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_015_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49440080287664934, 0.23217151850836282, -0.2237177116889133)
+operation = 3
+radius = 0.6155964173436875
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_015_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22712327836229984, -0.13297547984593028, 0.4361815643402751)
+operation = 1
+height = 0.7040283251648514
+top_radius = 0.5673125551930376
+bottom_radius = 0.20233982210322773
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_015_Architectural"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "15: Architectural"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 16: AbstractArt
+[node name="CSG_Variant_016_AbstractArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_016_AbstractArt"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_016_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1716106667131947, -0.3715959873974187, 0.10947649645049984)
+operation = 1
+radius = 0.4966608983335838
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_016_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14041805809605334, 0.16050603844481726, -0.05984136036939136)
+operation = 3
+inner_radius = 0.11462702700246066
+outer_radius = 0.5909178166726378
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_016_AbstractArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "16: AbstractArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 17: MechanicalParts
+[node name="CSG_Variant_017_MechanicalParts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_017_MechanicalParts"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_017_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4168337259361715, -0.3413372941364696, -0.07800190115343575)
+operation = 1
+inner_radius = 0.1532714868537812
+outer_radius = 0.5258865472314357
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_017_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10763287189001802, -0.40730160488666367, -0.11023940378140251)
+operation = 3
+inner_radius = 0.22413551212444188
+outer_radius = 0.7004417164887436
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_017_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4856772992316415, -0.33987507342126666, 0.17893032930688435)
+operation = 3
+radius = 0.613631711903319
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_017_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4607894915775904, -0.25471636138332643, 0.10054185884434053)
+operation = 2
+height = 0.6371188730526732
+top_radius = 0.5069614701422555
+bottom_radius = 0.3496130194180807
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_017_MechanicalParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "17: MechanicalParts"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 18: NaturalErosion
+[node name="CSG_Variant_018_NaturalErosion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_018_NaturalErosion"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_018_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2964456047674854, -0.3677111454390235, -0.04857608160431348)
+operation = 1
+height = 1.476588438986219
+top_radius = 0.2901710469028574
+bottom_radius = 0.403284953057935
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_018_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3273311404156818, 0.09517172149267317, 0.3810982958631802)
+operation = 2
+inner_radius = 0.1092567797908563
+outer_radius = 0.6829472958604064
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_018_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3748412775210376, -0.43584800362282994, 0.15907941173815976)
+operation = 2
+size = Vector3(1.1524294207860972, 1.1155973693496717, 1.4493921146799833)
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_018_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18500785237772566, -0.4785760299785846, -0.3789386928922869)
+operation = 2
+height = 0.5994336990357014
+top_radius = 0.4739774682818186
+bottom_radius = 0.4688876094246884
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_018_NaturalErosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "18: NaturalErosion"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 19: Crystalline
+[node name="CSG_Variant_019_Crystalline" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_019_Crystalline"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_019_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35904964411389784, -0.3030889280050446, -0.2318998633996321)
+operation = 1
+radius = 0.7683800365823368
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_019_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2667214891932256, 0.4669902477013421, 0.3086635904295121)
+operation = 3
+radius = 0.5897783719779781
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_019_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45462095852502016, 0.17280001573285175, 0.016681471051924524)
+operation = 1
+size = Vector3(1.2415327068861988, 0.522427864908117, 1.3069788951477486)
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_019_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4331302297178864, -0.15793256491421093, -0.28813878972427587)
+operation = 1
+height = 0.6625015083796744
+top_radius = 0.389008167179905
+bottom_radius = 0.4208781903075635
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_019_Crystalline"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "19: Crystalline"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 20: FlowingForms
+[node name="CSG_Variant_020_FlowingForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_020_FlowingForms"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_020_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11534994077228533, -0.05565810094235224, 0.3839609615465721)
+operation = 1
+radius = 0.6671944759788832
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_020_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2443356939419159, 0.20254887642178276, 0.017539348934731636)
+operation = 3
+height = 0.6008346296859964
+top_radius = 0.5685413781076256
+bottom_radius = 0.45612791937367436
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_020_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3031131439045953, -0.31527444664383397, 0.1622622820418853)
+operation = 2
+radius = 0.7776040045854236
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_020_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13644462914070488, -0.09582650469167309, -0.2143915062222751)
+operation = 2
+size = Vector3(0.6763197156568975, 0.5979031356189508, 0.6472915953283329)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_020_FlowingForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "20: FlowingForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 21: PuzzlePieces
+[node name="CSG_Variant_021_PuzzlePieces" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_021_PuzzlePieces"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_021_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17121189321597285, 0.1636052012153486, 0.05821578920687698)
+operation = 1
+size = Vector3(0.8735403447636122, 0.8097386286053023, 0.7916702998506151)
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_021_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08153313781777716, 0.4908711322034962, -0.02555419151072502)
+operation = 2
+inner_radius = 0.13793372064723153
+outer_radius = 0.48751994345483374
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_021_PuzzlePieces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "21: PuzzlePieces"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 22: MinimalArt
+[node name="CSG_Variant_022_MinimalArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_022_MinimalArt"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_022_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32256746938810665, -0.3246365439748071, -0.49534130969734136)
+operation = 1
+radius = 0.6786037523672752
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_022_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3779686255078806, 0.03311778082388739, 0.4568159046882395)
+operation = 2
+size = Vector3(0.8384565832902677, 0.59314072895843, 0.513050754720165)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_022_MinimalArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "22: MinimalArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 23: ComplexIntersection
+[node name="CSG_Variant_023_ComplexIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_023_ComplexIntersection"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_023_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19086999115631076, 0.475581221803815, -0.4265365348488216)
+operation = 1
+size = Vector3(1.2397909362548138, 0.6437360170007793, 1.3295748719836604)
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_023_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08918126780233115, -0.3558501345472762, 0.18528146920632438)
+operation = 1
+inner_radius = 0.10276968100922744
+outer_radius = 0.5375420097067897
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_023_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3802073925106483, -0.22670891079366784, 0.026018196362842638)
+operation = 2
+inner_radius = 0.2971605502930369
+outer_radius = 0.5977849502824801
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_023_ComplexIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "23: ComplexIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 24: RandomCombination
+[node name="CSG_Variant_024_RandomCombination" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_024_RandomCombination"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_024_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2497509737920598, -0.0724270714477937, -0.3527038386340019)
+operation = 1
+radius = 0.6637122564308435
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_024_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0887804809722762, -0.07919187469476097, -0.16880066272970773)
+operation = 1
+size = Vector3(0.684774105668681, 1.2125555404755328, 1.4331358669272412)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_024_RandomCombination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "24: RandomCombination"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 25: HollowSphere
+[node name="CSG_Variant_025_HollowSphere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_025_HollowSphere"]
+material_override = SubResource("Material_5")
+
+[node name="OuterSphere" type="CSGSphere3D" parent="CSG_Variant_025_HollowSphere/CSGCombiner3D"]
+radius = 1.0
+
+[node name="InnerSphere" type="CSGSphere3D" parent="CSG_Variant_025_HollowSphere/CSGCombiner3D"]
+radius = 0.7
+operation = 2
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_025_HollowSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "25: HollowSphere"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 26: SphereWithHoles
+[node name="CSG_Variant_026_SphereWithHoles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_026_SphereWithHoles"]
+material_override = SubResource("Material_6")
+
+[node name="BaseSphere" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+radius = 1.2
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6508876931313887, -0.21372093626206312, -0.7813959204250847)
+radius = 0.3537821949256106
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06152648136736105, 0.0723884203256503, 0.24927194242413764)
+radius = 0.36232087278524333
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028709118926369293, -0.10492394201516508, -0.5896705043131419)
+radius = 0.20837171388492065
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5353444479531058, -0.5525347180511535, 0.70528162657803)
+radius = 0.313370390889585
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_026_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7561053397483122, -0.2908422367796991, -0.14082630483225955)
+radius = 0.3668947925321651
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_026_SphereWithHoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "26: SphereWithHoles"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 27: PerforatedCube
+[node name="CSG_Variant_027_PerforatedCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_027_PerforatedCube"]
+material_override = SubResource("Material_7")
+
+[node name="BaseCube" type="CSGBox3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+size = Vector3(2, 2, 2)
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole6" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole7" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole8" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole9" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole10" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole11" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole12" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole13" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole14" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole15" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole16" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole17" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole18" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole19" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole20" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole21" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole22" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole23" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole24" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole25" type="CSGSphere3D" parent="CSG_Variant_027_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_027_PerforatedCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "27: PerforatedCube"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 28: TorusIntersection
+[node name="CSG_Variant_028_TorusIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_028_TorusIntersection"]
+material_override = SubResource("Material_8")
+
+[node name="Torus1" type="CSGTorus3D" parent="CSG_Variant_028_TorusIntersection/CSGCombiner3D"]
+inner_radius = 0.3
+outer_radius = 1.0
+
+[node name="Torus2" type="CSGTorus3D" parent="CSG_Variant_028_TorusIntersection/CSGCombiner3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+inner_radius = 0.3
+outer_radius = 1.0
+operation = 3
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_028_TorusIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "28: TorusIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 29: CylinderSubtraction
+[node name="CSG_Variant_029_CylinderSubtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, -2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_029_CylinderSubtraction"]
+material_override = SubResource("Material_9")
+
+[node name="BaseCylinder" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+height = 2.0
+top_radius = 1.0
+bottom_radius = 1.0
+
+[node name="SubCylinder0" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.0)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder1" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119285, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder2" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6739403974420595e-17, 0, 0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder3" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42426406871192845, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder4" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 7.347880794884119e-17)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder5" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4242640687119286, 0, -0.42426406871192845)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder6" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1021821192326178e-16, 0, -0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder7" type="CSGCylinder3D" parent="CSG_Variant_029_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119284, 0, -0.4242640687119286)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_029_CylinderSubtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "29: CylinderSubtraction"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 30: NestedBoxes
+[node name="CSG_Variant_030_NestedBoxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_030_NestedBoxes"]
+material_override = SubResource("Material_0")
+
+[node name="NestedBox0" type="CSGBox3D" parent="CSG_Variant_030_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(1.0, 0.0, 0, -0.0, 1.0, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 2.0, 2.0)
+operation = 1
+
+[node name="NestedBox1" type="CSGBox3D" parent="CSG_Variant_030_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.9659258262890683, 0.25881904510252074, 0, -0.25881904510252074, 0.9659258262890683, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.6, 1.6, 1.6)
+operation = 2
+
+[node name="NestedBox2" type="CSGBox3D" parent="CSG_Variant_030_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.8660254037844387, 0.49999999999999994, 0, -0.49999999999999994, 0.8660254037844387, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.2, 1.2, 1.2)
+operation = 1
+
+[node name="NestedBox3" type="CSGBox3D" parent="CSG_Variant_030_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.7071067811865476, 0.7071067811865476, 0, -0.7071067811865476, 0.7071067811865476, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.8, 0.8, 0.8)
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_030_NestedBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "30: NestedBoxes"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 31: SwissCheese
+[node name="CSG_Variant_031_SwissCheese" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_031_SwissCheese"]
+material_override = SubResource("Material_1")
+
+[node name="CheeseBase" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+radius = 1.3
+
+[node name="CheeseHole0" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17344998476768758, 0.09363699687349847, -0.47190024502466876)
+radius = 0.1969428511499997
+operation = 2
+
+[node name="CheeseHole1" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8405055973011812, 0.5658679641575612, -0.02204956886264653)
+radius = 0.3194180431124466
+operation = 2
+
+[node name="CheeseHole2" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1443323870858857, -0.8220100203383058, -0.4623110511327926)
+radius = 0.19605023966434693
+operation = 2
+
+[node name="CheeseHole3" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5663072538765648, -0.3070303203809597, 0.9312784306894193)
+radius = 0.3390056445669758
+operation = 2
+
+[node name="CheeseHole4" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3815120735154991, 0.06318486262984191, 0.38475618037589054)
+radius = 0.20161690356125206
+operation = 2
+
+[node name="CheeseHole5" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7955431422867383, 0.7165211950787331, -0.08091275707062984)
+radius = 0.38747560035639794
+operation = 2
+
+[node name="CheeseHole6" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4639569627047282, 0.14875482326770761, -0.1458469148986652)
+radius = 0.3058386313132904
+operation = 2
+
+[node name="CheeseHole7" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5152448740953333, -0.29361233920860363, -0.3607224757114007)
+radius = 0.3455682748709561
+operation = 2
+
+[node name="CheeseHole8" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8996625918924595, -0.8056412668954207, -0.9509899808320856)
+radius = 0.20580771803168937
+operation = 2
+
+[node name="CheeseHole9" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36524917060122974, -0.12450242270072898, 0.520104095674869)
+radius = 0.3904471735682654
+operation = 2
+
+[node name="CheeseHole10" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33257066075210884, 0.3321666276112303, -0.7136783991272146)
+radius = 0.2755115759050454
+operation = 2
+
+[node name="CheeseHole11" type="CSGSphere3D" parent="CSG_Variant_031_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.255205899479924, -0.6095760343882712, -0.9482019202290237)
+radius = 0.3034634002960868
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_031_SwissCheese"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "31: SwissCheese"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 32: LatticeStructure
+[node name="CSG_Variant_032_LatticeStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_032_LatticeStructure"]
+material_override = SubResource("Material_2")
+
+[node name="LatticeBeam0" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam1" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam2" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam3" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam4" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam5" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam6" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam7" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam8" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam9" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam10" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam11" type="CSGBox3D" parent="CSG_Variant_032_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_032_LatticeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "32: LatticeStructure"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 33: TwistedForms
+[node name="CSG_Variant_033_TwistedForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_033_TwistedForms"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_033_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2992237158865282, 0.3704092676297326, -0.18240340178237124)
+operation = 1
+radius = 0.7655729549635554
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_033_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2712581761924403, 0.08285939575183965, -0.26822273587227463)
+operation = 1
+size = Vector3(1.4439195389955124, 1.207674569173212, 1.463423042985187)
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_033_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3641558478303929, 0.016601828229893312, 0.44872994983651504)
+operation = 1
+inner_radius = 0.12683060447986544
+outer_radius = 0.4490454309430932
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_033_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09540979887997325, 0.07861342262859183, 0.388545143098613)
+operation = 2
+size = Vector3(0.5859692501015448, 0.6976499963147054, 0.7072425642377718)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_033_TwistedForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "33: TwistedForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 34: BooleanSculpture
+[node name="CSG_Variant_034_BooleanSculpture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_034_BooleanSculpture"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_034_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.056234258205107746, -0.38835332689771784, 0.47444406989454635)
+operation = 1
+radius = 0.6903224252998732
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_034_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2346281686564332, -0.012869132067298228, 0.31045215577156426)
+operation = 1
+inner_radius = 0.23164495164312304
+outer_radius = 0.4104441009434487
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_034_BooleanSculpture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "34: BooleanSculpture"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 35: OrganicCavities
+[node name="CSG_Variant_035_OrganicCavities" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_035_OrganicCavities"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_035_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47783878398709334, 0.21072366531175746, -0.32787951999650433)
+operation = 1
+radius = 0.5314370685519332
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_035_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28693608859484576, 0.3901442178935235, -0.42954402742787823)
+operation = 3
+size = Vector3(0.9257251307585099, 1.4864775264602565, 1.0173266144972637)
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_035_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39202276948877923, 0.3651435613702274, 0.12043554108665377)
+operation = 3
+size = Vector3(1.4895279099637158, 1.4950553249158551, 1.2063399418715006)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_035_OrganicCavities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "35: OrganicCavities"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 36: RingStructures
+[node name="CSG_Variant_036_RingStructures" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_036_RingStructures"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_036_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33555135563728833, 0.3963859481357088, 0.45024348623348587)
+operation = 1
+height = 1.4246819969707354
+top_radius = 0.48511498536889847
+bottom_radius = 0.5701995981591228
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_036_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24628031119617744, -0.19810970185058152, -0.2503338200618346)
+operation = 3
+inner_radius = 0.13674430778946575
+outer_radius = 0.632942359569263
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_036_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16058749908965586, -0.22501524176604593, -0.4880024292932862)
+operation = 3
+size = Vector3(0.7556046123607231, 1.3603708874633482, 0.7155241038340767)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_036_RingStructures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "36: RingStructures"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 37: IntersectingCylinders
+[node name="CSG_Variant_037_IntersectingCylinders" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_037_IntersectingCylinders"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_037_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4919046223481427, -0.49091981612180857, 0.21108640263994205)
+operation = 1
+size = Vector3(1.4179258533438102, 1.3762497059755692, 0.5917582322139467)
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_037_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11949893832357683, 0.41060469209869366, 0.21343869797696025)
+operation = 2
+size = Vector3(0.6084839169581493, 1.2056409907166694, 0.6677740136692881)
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_037_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33652528886553656, -0.4430416078740289, -0.30201352947462523)
+operation = 3
+size = Vector3(1.2310787380582195, 1.1543381708125533, 1.1009768851868518)
+
+[node name="RandomShape3" type="CSGTorus3D" parent="CSG_Variant_037_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16279931641761858, 0.33626059216091686, 0.3564606262679708)
+operation = 1
+inner_radius = 0.16559283780697512
+outer_radius = 0.5822442564376755
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_037_IntersectingCylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "37: IntersectingCylinders"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 38: ComplexHollow
+[node name="CSG_Variant_038_ComplexHollow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_038_ComplexHollow"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_038_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30174137445662574, -0.1253268588385822, 0.3334782051280858)
+operation = 1
+size = Vector3(0.9219568963014856, 1.2213008293030119, 1.2548345512477228)
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_038_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38484615122242505, -0.4292053839128075, 0.06515614509916057)
+operation = 3
+size = Vector3(0.6024776819438631, 0.8746947626497967, 0.9355118505128434)
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_038_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.431101799490076, -0.17103430972727574, 0.19409894014324425)
+operation = 2
+height = 1.3642138230490244
+top_radius = 0.2786647808833043
+bottom_radius = 0.4134468247262779
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_038_ComplexHollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "38: ComplexHollow"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 39: FractalLike
+[node name="CSG_Variant_039_FractalLike" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0, 6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_039_FractalLike"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_039_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04729932000130188, 0.29283547376156416, 0.41458273926685263)
+operation = 1
+height = 1.3057880042673342
+top_radius = 0.21960454102102298
+bottom_radius = 0.5482229181778437
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_039_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34623278478698327, 0.24951903586659052, 0.3082536895828749)
+operation = 3
+radius = 0.7221693042203176
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_039_FractalLike"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "39: FractalLike"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 40: Architectural
+[node name="CSG_Variant_040_Architectural" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_040_Architectural"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_040_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11410711101041526, 0.001985161586357198, 0.25330300515892046)
+operation = 1
+size = Vector3(0.5524102518126947, 0.5943229344407152, 0.6149525913454347)
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_040_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2564875792789658, -0.4982078898606632, 0.18690494264718915)
+operation = 1
+size = Vector3(1.1545566493222577, 0.5739958601994546, 0.5207368863754216)
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_040_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4070078810935843, -0.03551672997595012, -0.23721204290661513)
+operation = 2
+inner_radius = 0.12468091577504994
+outer_radius = 0.7673863554609112
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_040_Architectural"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "40: Architectural"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 41: AbstractArt
+[node name="CSG_Variant_041_AbstractArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_041_AbstractArt"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_041_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08577876024627162, -0.035980781581528065, -0.09473219616750395)
+operation = 1
+inner_radius = 0.21990984368181404
+outer_radius = 0.5572756839327103
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_041_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3377307082100178, 0.35080466505174135, -0.2477484806818776)
+operation = 1
+size = Vector3(1.311104168454262, 1.1983765842722844, 1.2880169261543002)
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_041_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11257339076350115, -0.2431478888667099, -0.09258005008369108)
+operation = 1
+height = 0.6591936896350846
+top_radius = 0.5848188328493704
+bottom_radius = 0.5871495609549734
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_041_AbstractArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "41: AbstractArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 42: MechanicalParts
+[node name="CSG_Variant_042_MechanicalParts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_042_MechanicalParts"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_042_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3541390065071588, -0.1352916601711288, -0.38269852578821095)
+operation = 1
+radius = 0.47676175679310745
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_042_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41194840248353504, 0.10034001886283084, 0.35015969506877676)
+operation = 2
+size = Vector3(1.197748913404191, 1.4734917542689987, 0.5848573309186442)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_042_MechanicalParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "42: MechanicalParts"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 43: NaturalErosion
+[node name="CSG_Variant_043_NaturalErosion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_043_NaturalErosion"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_043_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1632079395648115, 0.23006582808061937, 0.03584096057228747)
+operation = 1
+radius = 0.7373932591679287
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_043_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435557561803138, -0.42561213027689315, 0.42552666381935045)
+operation = 1
+radius = 0.7344282003197653
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_043_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24078060324905448, -0.3151539985617008, 0.24894065319327785)
+operation = 3
+size = Vector3(1.4166477398380022, 0.5788927726596672, 1.3148081324668783)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_043_NaturalErosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "43: NaturalErosion"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 44: Crystalline
+[node name="CSG_Variant_044_Crystalline" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_044_Crystalline"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_044_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05932298073904352, 0.3622447286699261, -0.07329752410148382)
+operation = 1
+radius = 0.3431834968718474
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_044_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11463383660933169, -0.1574958905185928, 0.21462748488141348)
+operation = 3
+inner_radius = 0.15609449438377493
+outer_radius = 0.5006221711869243
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_044_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27490772632799787, 0.29744836252431084, -0.3411490541449239)
+operation = 2
+radius = 0.7725654807408502
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_044_Crystalline"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "44: Crystalline"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 45: FlowingForms
+[node name="CSG_Variant_045_FlowingForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_045_FlowingForms"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_045_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007880957141929712, -0.028416296808531638, -0.2714339829124509)
+operation = 1
+inner_radius = 0.2254098008086461
+outer_radius = 0.5132518294318469
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_045_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38001132061890663, 0.43939623958763563, -0.16102915368396764)
+operation = 3
+inner_radius = 0.26063690023921093
+outer_radius = 0.712213853463563
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_045_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43724413769529624, 0.1487834165221129, 0.4732075731819979)
+operation = 3
+inner_radius = 0.15275109699317616
+outer_radius = 0.48400336331867916
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_045_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15314558473588924, -0.328180017166686, -0.28536867366618435)
+operation = 2
+size = Vector3(1.2649558972934265, 1.2070915606028993, 0.8732519015003645)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_045_FlowingForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "45: FlowingForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 46: PuzzlePieces
+[node name="CSG_Variant_046_PuzzlePieces" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_046_PuzzlePieces"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_046_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07108566921193549, -0.4553219003780027, 0.46899911419320184)
+operation = 1
+size = Vector3(1.2437214274189468, 1.439486617305215, 1.3920953669298788)
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_046_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10514849456813158, 0.4657951087444596, -0.2694061758172319)
+operation = 2
+size = Vector3(1.2107621940266513, 1.236874417584804, 0.8237405601249697)
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_046_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4516497348820645, -0.4500028998090744, -0.4330900989280936)
+operation = 3
+inner_radius = 0.15684284782840185
+outer_radius = 0.6031279951708755
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_046_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4522912049151282, 0.073209707401792, -0.42287220664303904)
+operation = 2
+radius = 0.6598169060869908
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_046_PuzzlePieces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "46: PuzzlePieces"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 47: MinimalArt
+[node name="CSG_Variant_047_MinimalArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_047_MinimalArt"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_047_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17628282558679165, -0.4418156756049848, 0.2780678436978884)
+operation = 1
+size = Vector3(1.347881114236122, 0.8860200180910026, 1.18365969074706)
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_047_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40809861407099635, 0.06500352168409562, -0.4435338085236976)
+operation = 1
+radius = 0.45712888494151793
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_047_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31429384809016436, 0.21328004184900806, -0.45308796694242814)
+operation = 3
+height = 0.5476950142048439
+top_radius = 0.49697757583867647
+bottom_radius = 0.24054123407885353
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_047_MinimalArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "47: MinimalArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 48: ComplexIntersection
+[node name="CSG_Variant_048_ComplexIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_048_ComplexIntersection"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_048_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28006902587783156, -0.1355503269799675, -0.3516649177209743)
+operation = 1
+height = 0.9929316934257064
+top_radius = 0.34214525175307364
+bottom_radius = 0.3385029002090551
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_048_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13741876818698429, -0.41799574165331566, -0.337231012178147)
+operation = 2
+inner_radius = 0.2911304469068232
+outer_radius = 0.48923343205555775
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_048_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36188575259524824, -0.12777294171464693, 0.2883888970630396)
+operation = 3
+inner_radius = 0.12156197534174432
+outer_radius = 0.5728415586314448
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_048_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2096802091301062, -0.459708267343381, 0.06704360137006082)
+operation = 2
+size = Vector3(1.0891253695457235, 1.4766974205882388, 0.6155326197714861)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_048_ComplexIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "48: ComplexIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 49: RandomCombination
+[node name="CSG_Variant_049_RandomCombination" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_049_RandomCombination"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_049_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02342218784551453, -0.16778710540022967, -0.42496731168505697)
+operation = 1
+inner_radius = 0.23312303078304708
+outer_radius = 0.5240122734436129
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_049_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050723567566032024, 0.04512639998220913, -0.08352267628562404)
+operation = 3
+radius = 0.7890349023162131
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_049_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07878241138471698, -0.3505133769351241, -0.29786861935685705)
+operation = 3
+radius = 0.5806305051152165
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_049_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13097577718715192, -0.11752487057843186, -0.35807904616710384)
+operation = 2
+size = Vector3(1.0794915131956833, 1.4820631694661752, 0.682088234959548)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_049_RandomCombination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "49: RandomCombination"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 50: HollowSphere
+[node name="CSG_Variant_050_HollowSphere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_050_HollowSphere"]
+material_override = SubResource("Material_0")
+
+[node name="OuterSphere" type="CSGSphere3D" parent="CSG_Variant_050_HollowSphere/CSGCombiner3D"]
+radius = 1.0
+
+[node name="InnerSphere" type="CSGSphere3D" parent="CSG_Variant_050_HollowSphere/CSGCombiner3D"]
+radius = 0.7
+operation = 2
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_050_HollowSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "50: HollowSphere"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 51: SphereWithHoles
+[node name="CSG_Variant_051_SphereWithHoles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_051_SphereWithHoles"]
+material_override = SubResource("Material_1")
+
+[node name="BaseSphere" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+radius = 1.2
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12552252074308234, 0.47534060203448525, 0.316156034966558)
+radius = 0.2919703249771684
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020724220698513762, -0.009336460740506203, -0.7415552497295945)
+radius = 0.34379759925544917
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06803161224480214, -0.5397886959393403, -0.43934562463766813)
+radius = 0.27279559360262773
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015701410856052922, -0.07727329606121214, -0.5598516901405293)
+radius = 0.23285736863346862
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_051_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43607400837688304, 0.22504448831181967, -0.4836805055129716)
+radius = 0.3972599208999955
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_051_SphereWithHoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "51: SphereWithHoles"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 52: PerforatedCube
+[node name="CSG_Variant_052_PerforatedCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_052_PerforatedCube"]
+material_override = SubResource("Material_2")
+
+[node name="BaseCube" type="CSGBox3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+size = Vector3(2, 2, 2)
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole6" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole7" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole8" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole9" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole10" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole11" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole12" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole13" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole14" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole15" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole16" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole17" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole18" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole19" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole20" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole21" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole22" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole23" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole24" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole25" type="CSGSphere3D" parent="CSG_Variant_052_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_052_PerforatedCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "52: PerforatedCube"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 53: TorusIntersection
+[node name="CSG_Variant_053_TorusIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_053_TorusIntersection"]
+material_override = SubResource("Material_3")
+
+[node name="Torus1" type="CSGTorus3D" parent="CSG_Variant_053_TorusIntersection/CSGCombiner3D"]
+inner_radius = 0.3
+outer_radius = 1.0
+
+[node name="Torus2" type="CSGTorus3D" parent="CSG_Variant_053_TorusIntersection/CSGCombiner3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+inner_radius = 0.3
+outer_radius = 1.0
+operation = 3
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_053_TorusIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "53: TorusIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 54: CylinderSubtraction
+[node name="CSG_Variant_054_CylinderSubtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_054_CylinderSubtraction"]
+material_override = SubResource("Material_4")
+
+[node name="BaseCylinder" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+height = 2.0
+top_radius = 1.0
+bottom_radius = 1.0
+
+[node name="SubCylinder0" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.0)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder1" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119285, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder2" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6739403974420595e-17, 0, 0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder3" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42426406871192845, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder4" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 7.347880794884119e-17)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder5" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4242640687119286, 0, -0.42426406871192845)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder6" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1021821192326178e-16, 0, -0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder7" type="CSGCylinder3D" parent="CSG_Variant_054_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119284, 0, -0.4242640687119286)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_054_CylinderSubtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "54: CylinderSubtraction"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 55: NestedBoxes
+[node name="CSG_Variant_055_NestedBoxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_055_NestedBoxes"]
+material_override = SubResource("Material_5")
+
+[node name="NestedBox0" type="CSGBox3D" parent="CSG_Variant_055_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(1.0, 0.0, 0, -0.0, 1.0, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 2.0, 2.0)
+operation = 1
+
+[node name="NestedBox1" type="CSGBox3D" parent="CSG_Variant_055_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.9659258262890683, 0.25881904510252074, 0, -0.25881904510252074, 0.9659258262890683, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.6, 1.6, 1.6)
+operation = 2
+
+[node name="NestedBox2" type="CSGBox3D" parent="CSG_Variant_055_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.8660254037844387, 0.49999999999999994, 0, -0.49999999999999994, 0.8660254037844387, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.2, 1.2, 1.2)
+operation = 1
+
+[node name="NestedBox3" type="CSGBox3D" parent="CSG_Variant_055_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.7071067811865476, 0.7071067811865476, 0, -0.7071067811865476, 0.7071067811865476, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.8, 0.8, 0.8)
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_055_NestedBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "55: NestedBoxes"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 56: SwissCheese
+[node name="CSG_Variant_056_SwissCheese" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_056_SwissCheese"]
+material_override = SubResource("Material_6")
+
+[node name="CheeseBase" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+radius = 1.3
+
+[node name="CheeseHole0" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4329546534145041, 0.5064070344941236, -0.72748030163687)
+radius = 0.3579557862215299
+operation = 2
+
+[node name="CheeseHole1" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18773977038526257, -0.007812036572475645, -0.4077776980951435)
+radius = 0.29955298326202706
+operation = 2
+
+[node name="CheeseHole2" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7487921193966713, -0.16898175776091318, -0.08780872042960275)
+radius = 0.35534207877596824
+operation = 2
+
+[node name="CheeseHole3" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025803283764963103, 0.6253838668051908, 0.37727208016184544)
+radius = 0.10209684945099856
+operation = 2
+
+[node name="CheeseHole4" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9134340326411128, -0.8772569286121925, 0.7435119653017845)
+radius = 0.15289198804160786
+operation = 2
+
+[node name="CheeseHole5" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.824553626907754, 0.5197825478860456, -0.7569734992943149)
+radius = 0.2784156511858715
+operation = 2
+
+[node name="CheeseHole6" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8515476882579474, 0.4212042681882997, -0.757730227939895)
+radius = 0.33925729051465475
+operation = 2
+
+[node name="CheeseHole7" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.513890477694402, 0.637845478283326, 0.7777149311336777)
+radius = 0.312450981553328
+operation = 2
+
+[node name="CheeseHole8" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7069673049285949, -0.34816877336427243, 0.5187940598102421)
+radius = 0.10105004318391436
+operation = 2
+
+[node name="CheeseHole9" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07975791155367662, 0.7014960828437482, 0.42311433602524295)
+radius = 0.1848889456545053
+operation = 2
+
+[node name="CheeseHole10" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6272910905627958, 0.49298166057810566, 0.20980244945550797)
+radius = 0.2363730020752227
+operation = 2
+
+[node name="CheeseHole11" type="CSGSphere3D" parent="CSG_Variant_056_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18934616415655725, 0.26242468625647897, -0.7494499765036584)
+radius = 0.21654243162522582
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_056_SwissCheese"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "56: SwissCheese"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 57: LatticeStructure
+[node name="CSG_Variant_057_LatticeStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_057_LatticeStructure"]
+material_override = SubResource("Material_7")
+
+[node name="LatticeBeam0" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam1" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam2" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam3" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam4" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam5" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam6" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam7" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam8" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam9" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam10" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam11" type="CSGBox3D" parent="CSG_Variant_057_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_057_LatticeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "57: LatticeStructure"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 58: TwistedForms
+[node name="CSG_Variant_058_TwistedForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_058_TwistedForms"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_058_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3517888306917635, 0.11364958672057301, -0.0004388595902335979)
+operation = 1
+radius = 0.3052291157950019
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_058_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2960926885974491, -0.3931104750045086, 0.1865289546371649)
+operation = 2
+inner_radius = 0.27534663837609585
+outer_radius = 0.546229719504338
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_058_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23359317181421968, -0.04844232822172467, -0.013631454517228248)
+operation = 1
+size = Vector3(1.3717870623278001, 0.9126633110687095, 0.7833440123862672)
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_058_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4863538762488576, -0.40545961675527, -0.02167574877140721)
+operation = 3
+size = Vector3(1.4027182256031037, 1.4808492816023093, 1.2655062325272672)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_058_TwistedForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "58: TwistedForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 59: BooleanSculpture
+[node name="CSG_Variant_059_BooleanSculpture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_059_BooleanSculpture"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_059_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46139424807833995, 0.032568022084390025, -0.4125184955905017)
+operation = 1
+height = 0.8201530800396352
+top_radius = 0.48390045305906154
+bottom_radius = 0.4034911545635629
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_059_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03444294660595126, -0.49732667556655363, -0.4375043885037957)
+operation = 2
+size = Vector3(0.895127097125881, 0.9160682541986198, 0.77305134826046)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_059_BooleanSculpture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "59: BooleanSculpture"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 60: OrganicCavities
+[node name="CSG_Variant_060_OrganicCavities" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_060_OrganicCavities"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_060_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32339370154105995, 0.0005469761830272368, -0.22291505281585267)
+operation = 1
+inner_radius = 0.1848798664322054
+outer_radius = 0.6916200507658297
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_060_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4120802933784673, 0.23591047494050876, 0.17831042395623264)
+operation = 3
+size = Vector3(1.3287239008879688, 0.7883492696604261, 0.9576339577581555)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_060_OrganicCavities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "60: OrganicCavities"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 61: RingStructures
+[node name="CSG_Variant_061_RingStructures" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_061_RingStructures"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_061_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1022792559171859, -0.037743792287503464, -0.018390278791478032)
+operation = 1
+inner_radius = 0.2543610432580721
+outer_radius = 0.7461252340975051
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_061_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38781069276449776, -0.266107079669596, 0.378823283541988)
+operation = 3
+radius = 0.3580488836751904
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_061_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2087115473768536, 0.24757225063580923, 0.39192605573322703)
+operation = 1
+inner_radius = 0.19804737452526022
+outer_radius = 0.6313837524023158
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_061_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4716027514548634, 0.37058160535250373, -0.1646031446525259)
+operation = 2
+radius = 0.5079088123698633
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_061_RingStructures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "61: RingStructures"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 62: IntersectingCylinders
+[node name="CSG_Variant_062_IntersectingCylinders" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_062_IntersectingCylinders"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_062_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19555370843826192, 0.12386887553196724, -0.20060437420847876)
+operation = 1
+height = 0.7859063010758278
+top_radius = 0.26189592789606203
+bottom_radius = 0.4263585050916894
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_062_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21484989293352807, -0.4348612329846575, -0.36667862621262737)
+operation = 2
+height = 0.6264190671510785
+top_radius = 0.2446725176975101
+bottom_radius = 0.3466141366338412
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_062_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041671123297794765, -0.47065707400539014, 0.020267523639586282)
+operation = 3
+size = Vector3(1.0820458167521918, 1.211859781479194, 0.6801477187600129)
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_062_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4487443579990744, -0.43321027465852147, -0.005575809890578154)
+operation = 2
+size = Vector3(0.9958624622054228, 1.0575989058170405, 1.2780209614081408)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_062_IntersectingCylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "62: IntersectingCylinders"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 63: ComplexHollow
+[node name="CSG_Variant_063_ComplexHollow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_063_ComplexHollow"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_063_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2090882063479732, -0.08884850362537677, -0.16846727801252626)
+operation = 1
+size = Vector3(1.0741141625470036, 1.3437083496518076, 1.0707160668503128)
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_063_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009447483810685053, -0.1555525393943632, -0.2710366720486017)
+operation = 2
+radius = 0.7839832533214122
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_063_ComplexHollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "63: ComplexHollow"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 64: FractalLike
+[node name="CSG_Variant_064_FractalLike" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_064_FractalLike"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_064_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37706484917630223, 0.41010859829680213, 0.05496987672266629)
+operation = 1
+height = 1.3005230537441324
+top_radius = 0.3090555719607055
+bottom_radius = 0.5125362750584025
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_064_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16113440731670747, 0.39506888838932197, -0.45078841716683393)
+operation = 3
+inner_radius = 0.16315114862705427
+outer_radius = 0.7743451531046466
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_064_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4441892221219559, -0.26271972295449664, 0.04169190145170332)
+operation = 3
+height = 1.242221928747671
+top_radius = 0.5637864686176857
+bottom_radius = 0.2688067899435921
+
+[node name="RandomShape3" type="CSGTorus3D" parent="CSG_Variant_064_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.481636983865667, -0.08154528361465996, 0.01108238134774664)
+operation = 1
+inner_radius = 0.2632575846498575
+outer_radius = 0.7546903828352645
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_064_FractalLike"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "64: FractalLike"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 65: Architectural
+[node name="CSG_Variant_065_Architectural" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_065_Architectural"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_065_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4159826911936877, -0.09649885411738424, -0.15999987790103454)
+operation = 1
+height = 1.2803058306905046
+top_radius = 0.25440121982498254
+bottom_radius = 0.5077313425834957
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_065_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19152746033305357, 0.18880008062294784, -0.13243760801873872)
+operation = 3
+radius = 0.522031069009006
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_065_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43303515399495507, -0.42694495966527013, 0.41823593819656124)
+operation = 2
+size = Vector3(0.5574812352598378, 0.9543744705723067, 0.8795952699572199)
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_065_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4874907734929277, -0.14794488557291163, -0.09576105722501582)
+operation = 3
+size = Vector3(1.243949219528246, 1.1556252922832821, 1.1625876748955315)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_065_Architectural"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "65: Architectural"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 66: AbstractArt
+[node name="CSG_Variant_066_AbstractArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_066_AbstractArt"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_066_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31171837029824045, -0.4582021157238705, 0.1759580608478004)
+operation = 1
+height = 1.3086704043482202
+top_radius = 0.4397788892070782
+bottom_radius = 0.4399818560380617
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_066_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3626049744191123, -0.19684861922150598, -0.3967846605646437)
+operation = 1
+size = Vector3(1.1711531782677174, 0.5540195682159936, 1.2281718479097143)
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_066_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10028885564491541, -0.07626404625694105, -0.4701896842674558)
+operation = 2
+size = Vector3(1.2888483305288054, 1.4689132559084044, 1.388463938899511)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_066_AbstractArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "66: AbstractArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 67: MechanicalParts
+[node name="CSG_Variant_067_MechanicalParts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_067_MechanicalParts"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_067_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1570229298618232, 0.15944702313596704, -0.2727011304185868)
+operation = 1
+height = 1.2814922913048505
+top_radius = 0.31238309499040257
+bottom_radius = 0.5378341617026333
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_067_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30241747525255525, -0.43200573614637094, 0.27340372253882705)
+operation = 2
+height = 0.831023036566453
+top_radius = 0.5918046635414578
+bottom_radius = 0.22136614140688043
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_067_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18477684160114316, 0.10508440326784185, -0.14873082422259765)
+operation = 2
+inner_radius = 0.1300337485262348
+outer_radius = 0.46031405785641755
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_067_MechanicalParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "67: MechanicalParts"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 68: NaturalErosion
+[node name="CSG_Variant_068_NaturalErosion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_068_NaturalErosion"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_068_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16781232833273207, -0.327229244233719, -0.3314678001483923)
+operation = 1
+size = Vector3(1.4625615162074377, 1.2112332588412373, 1.4125326773521556)
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_068_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0027715543126468623, -0.13304415395507008, 0.3126621549186006)
+operation = 3
+radius = 0.770145986978708
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_068_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4272014381213274, -0.034989976787986654, -0.211642075341833)
+operation = 1
+size = Vector3(0.8517317892855722, 1.0321235541708664, 0.9474514608349283)
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_068_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17027034506132377, -0.46612879186550304, -0.4008381811732835)
+operation = 1
+size = Vector3(0.5176545471390162, 1.3814493260311036, 0.567802922513834)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_068_NaturalErosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "68: NaturalErosion"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 69: Crystalline
+[node name="CSG_Variant_069_Crystalline" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, -2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_069_Crystalline"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_069_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07421110214059035, -0.06126943236183957, 0.2809777231517482)
+operation = 1
+radius = 0.33444471120954034
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_069_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14561900965067054, 0.32754998124233936, -0.09255907885823134)
+operation = 2
+inner_radius = 0.24971553562955653
+outer_radius = 0.6477585547955892
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_069_Crystalline"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "69: Crystalline"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 70: FlowingForms
+[node name="CSG_Variant_070_FlowingForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_070_FlowingForms"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_070_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040333122295616586, 0.30216654759092776, -0.3195517944700361)
+operation = 1
+radius = 0.4768704645805681
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_070_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47534957305112613, 0.4874081189062789, 0.40963462321135613)
+operation = 1
+size = Vector3(0.7508980552170255, 1.4220513685645928, 1.4875379862724976)
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_070_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24581657112815347, -0.2088790466300705, 0.20467543457211412)
+operation = 3
+size = Vector3(0.6752042027954213, 0.9652287464125787, 1.0294092462155322)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_070_FlowingForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "70: FlowingForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 71: PuzzlePieces
+[node name="CSG_Variant_071_PuzzlePieces" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_071_PuzzlePieces"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_071_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01905995571014485, -0.263409548994219, 0.48588019149396144)
+operation = 1
+inner_radius = 0.173149367916891
+outer_radius = 0.7804397976768779
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_071_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26180010733530823, 0.17961318432061424, 0.21534356143030864)
+operation = 2
+size = Vector3(0.7992967174313818, 0.5886256392577601, 1.1133077234604853)
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_071_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26589122445254565, -0.1092722498758466, 0.1584321675220156)
+operation = 3
+height = 1.347833231452675
+top_radius = 0.5143599196299957
+bottom_radius = 0.24739353081376003
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_071_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45313496099444717, 0.28728049293636737, -0.024080856227431835)
+operation = 3
+height = 1.4406063419836141
+top_radius = 0.4809408415381337
+bottom_radius = 0.5930378606151727
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_071_PuzzlePieces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "71: PuzzlePieces"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 72: MinimalArt
+[node name="CSG_Variant_072_MinimalArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_072_MinimalArt"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_072_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32573498430899983, -0.034522246360906284, -0.24739474954366247)
+operation = 1
+inner_radius = 0.13721669354970922
+outer_radius = 0.5582368040739141
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_072_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3889031948317737, 0.1193983175230231, 0.24436744019229895)
+operation = 1
+radius = 0.6416575901066399
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_072_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019354249933252743, -0.09256920253752388, -0.17564792412689512)
+operation = 2
+radius = 0.30253433351351855
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_072_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261405702411313, 0.3454030342952894, 0.1486633348534988)
+operation = 3
+size = Vector3(1.4717358477221305, 0.5535406754059667, 1.2084047230590684)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_072_MinimalArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "72: MinimalArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 73: ComplexIntersection
+[node name="CSG_Variant_073_ComplexIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_073_ComplexIntersection"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_073_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3686952549444652, 0.19653031714784075, -0.36720757512178503)
+operation = 1
+radius = 0.5365354799498181
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_073_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3584935391745203, 0.4416471524837571, 0.458158913777335)
+operation = 2
+inner_radius = 0.2029137689186044
+outer_radius = 0.7948388380674629
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_073_ComplexIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "73: ComplexIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 74: RandomCombination
+[node name="CSG_Variant_074_RandomCombination" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_074_RandomCombination"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_074_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014648608492393467, -0.27221163565557005, 0.07048744756503056)
+operation = 1
+height = 1.3677145694072916
+top_radius = 0.33689506265956715
+bottom_radius = 0.42450075048759506
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_074_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20680408413912799, -0.3431187484319358, 0.45938129498334745)
+operation = 3
+inner_radius = 0.127854974344856
+outer_radius = 0.4203869864437503
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_074_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19022682830610627, -0.39745292984042624, 0.05738957540638712)
+operation = 1
+size = Vector3(1.0498403464682795, 1.4062259347548478, 1.3108862312033343)
+
+[node name="RandomShape3" type="CSGCylinder3D" parent="CSG_Variant_074_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26048947745260376, 0.005408247678403866, -0.07221848774955963)
+operation = 1
+height = 1.084429371179188
+top_radius = 0.3891031432418055
+bottom_radius = 0.5628776806181814
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_074_RandomCombination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "74: RandomCombination"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 75: HollowSphere
+[node name="CSG_Variant_075_HollowSphere" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_075_HollowSphere"]
+material_override = SubResource("Material_5")
+
+[node name="OuterSphere" type="CSGSphere3D" parent="CSG_Variant_075_HollowSphere/CSGCombiner3D"]
+radius = 1.0
+
+[node name="InnerSphere" type="CSGSphere3D" parent="CSG_Variant_075_HollowSphere/CSGCombiner3D"]
+radius = 0.7
+operation = 2
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_075_HollowSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "75: HollowSphere"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 76: SphereWithHoles
+[node name="CSG_Variant_076_SphereWithHoles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_076_SphereWithHoles"]
+material_override = SubResource("Material_6")
+
+[node name="BaseSphere" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+radius = 1.2
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0903419759423475, -0.31477892279546205, -0.034808255918359565)
+radius = 0.3322722326814468
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4246110976820928, 0.3922094762328068, -0.20207656612432634)
+radius = 0.21200552266870187
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31670994517625983, 0.6160536298253705, 0.654817767588671)
+radius = 0.39638845738151424
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.723770701851721, 0.7578801379279847, 0.6410450184495353)
+radius = 0.3781247175522068
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_076_SphereWithHoles/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7873131519746146, 0.2736575344061558, -0.48396936101548516)
+radius = 0.38018989328317737
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_076_SphereWithHoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "76: SphereWithHoles"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 77: PerforatedCube
+[node name="CSG_Variant_077_PerforatedCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_077_PerforatedCube"]
+material_override = SubResource("Material_7")
+
+[node name="BaseCube" type="CSGBox3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+size = Vector3(2, 2, 2)
+
+[node name="Hole0" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole1" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole2" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole3" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole4" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole5" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole6" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole7" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole8" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole9" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole10" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole11" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole12" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole13" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole14" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole15" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole16" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole17" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole18" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole19" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.6, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole20" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole21" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole22" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.0, 0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole23" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, -0.6)
+radius = 0.2
+operation = 2
+
+[node name="Hole24" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.0)
+radius = 0.2
+operation = 2
+
+[node name="Hole25" type="CSGSphere3D" parent="CSG_Variant_077_PerforatedCube/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.6, 0.6)
+radius = 0.2
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_077_PerforatedCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "77: PerforatedCube"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 78: TorusIntersection
+[node name="CSG_Variant_078_TorusIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_078_TorusIntersection"]
+material_override = SubResource("Material_8")
+
+[node name="Torus1" type="CSGTorus3D" parent="CSG_Variant_078_TorusIntersection/CSGCombiner3D"]
+inner_radius = 0.3
+outer_radius = 1.0
+
+[node name="Torus2" type="CSGTorus3D" parent="CSG_Variant_078_TorusIntersection/CSGCombiner3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+inner_radius = 0.3
+outer_radius = 1.0
+operation = 3
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_078_TorusIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "78: TorusIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 79: CylinderSubtraction
+[node name="CSG_Variant_079_CylinderSubtraction" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0, 6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_079_CylinderSubtraction"]
+material_override = SubResource("Material_9")
+
+[node name="BaseCylinder" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+height = 2.0
+top_radius = 1.0
+bottom_radius = 1.0
+
+[node name="SubCylinder0" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.0)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder1" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119285, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder2" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6739403974420595e-17, 0, 0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder3" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42426406871192845, 0, 0.4242640687119285)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder4" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 7.347880794884119e-17)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder5" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4242640687119286, 0, -0.42426406871192845)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder6" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1021821192326178e-16, 0, -0.6)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+[node name="SubCylinder7" type="CSGCylinder3D" parent="CSG_Variant_079_CylinderSubtraction/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4242640687119284, 0, -0.4242640687119286)
+height = 2.5
+top_radius = 0.15
+bottom_radius = 0.15
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_079_CylinderSubtraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "79: CylinderSubtraction"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 80: NestedBoxes
+[node name="CSG_Variant_080_NestedBoxes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_080_NestedBoxes"]
+material_override = SubResource("Material_0")
+
+[node name="NestedBox0" type="CSGBox3D" parent="CSG_Variant_080_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(1.0, 0.0, 0, -0.0, 1.0, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(2.0, 2.0, 2.0)
+operation = 1
+
+[node name="NestedBox1" type="CSGBox3D" parent="CSG_Variant_080_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.9659258262890683, 0.25881904510252074, 0, -0.25881904510252074, 0.9659258262890683, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.6, 1.6, 1.6)
+operation = 2
+
+[node name="NestedBox2" type="CSGBox3D" parent="CSG_Variant_080_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.8660254037844387, 0.49999999999999994, 0, -0.49999999999999994, 0.8660254037844387, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1.2, 1.2, 1.2)
+operation = 1
+
+[node name="NestedBox3" type="CSGBox3D" parent="CSG_Variant_080_NestedBoxes/CSGCombiner3D"]
+transform = Transform3D(0.7071067811865476, 0.7071067811865476, 0, -0.7071067811865476, 0.7071067811865476, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(0.8, 0.8, 0.8)
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_080_NestedBoxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "80: NestedBoxes"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 81: SwissCheese
+[node name="CSG_Variant_081_SwissCheese" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_081_SwissCheese"]
+material_override = SubResource("Material_1")
+
+[node name="CheeseBase" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+radius = 1.3
+
+[node name="CheeseHole0" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44896115945024784, -0.8857294238742976, 0.1745735548977705)
+radius = 0.3077352937521105
+operation = 2
+
+[node name="CheeseHole1" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06623559859548789, -0.1767743347115429, -0.8639923590239751)
+radius = 0.31699962818476424
+operation = 2
+
+[node name="CheeseHole2" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9833935723731975, 0.15822358988071428, -0.8048060912799266)
+radius = 0.23662282563596457
+operation = 2
+
+[node name="CheeseHole3" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16415673694000477, -0.5074875418562108, 0.5088893909649164)
+radius = 0.17681672192067063
+operation = 2
+
+[node name="CheeseHole4" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7321020009548314, -0.21443220150251108, 0.3738981625811848)
+radius = 0.23536773154291357
+operation = 2
+
+[node name="CheeseHole5" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36028868113967727, -0.8142508936660842, 0.2233526175269387)
+radius = 0.11546935003108721
+operation = 2
+
+[node name="CheeseHole6" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06293805949986941, -0.18743959178414893, -0.41570575248358943)
+radius = 0.17544230990320098
+operation = 2
+
+[node name="CheeseHole7" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025807058683571915, 0.7623163560053332, 0.5881968030323532)
+radius = 0.19216177652095046
+operation = 2
+
+[node name="CheeseHole8" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18953252251880648, 0.2611023442939737, 0.4445820155963438)
+radius = 0.28754280389902254
+operation = 2
+
+[node name="CheeseHole9" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8736940865461735, -0.7132418680988413, 0.5771778370714729)
+radius = 0.1786969257466474
+operation = 2
+
+[node name="CheeseHole10" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1368208808970146, -0.8934393876527844, 0.16231426340218835)
+radius = 0.18637760198668038
+operation = 2
+
+[node name="CheeseHole11" type="CSGSphere3D" parent="CSG_Variant_081_SwissCheese/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9162217027411954, -0.9701217362358867, -0.522769108079274)
+radius = 0.25478805593063636
+operation = 2
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_081_SwissCheese"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "81: SwissCheese"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 82: LatticeStructure
+[node name="CSG_Variant_082_LatticeStructure" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_082_LatticeStructure"]
+material_override = SubResource("Material_2")
+
+[node name="LatticeBeam0" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam1" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam2" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam3" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+size = Vector3(2.0, 0.1, 0.1)
+
+[node name="LatticeBeam4" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam5" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam6" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam7" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+size = Vector3(0.1, 2.0, 0.1)
+
+[node name="LatticeBeam8" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam9" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam10" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+[node name="LatticeBeam11" type="CSGBox3D" parent="CSG_Variant_082_LatticeStructure/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+size = Vector3(0.1, 0.1, 2.0)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_082_LatticeStructure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "82: LatticeStructure"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 83: TwistedForms
+[node name="CSG_Variant_083_TwistedForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_083_TwistedForms"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_083_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4762763567817021, 0.31322386365494626, 0.49576349263782216)
+operation = 1
+size = Vector3(1.0858117779265328, 1.4886471008039543, 0.8026409012592712)
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_083_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3455992829027795, -0.09367867038163002, 0.03042420114399591)
+operation = 1
+height = 1.4883175799292379
+top_radius = 0.347098145279992
+bottom_radius = 0.45902565486771857
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_083_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05104174984238519, 0.18716596791037787, 0.24176695914987179)
+operation = 2
+inner_radius = 0.16348391551870142
+outer_radius = 0.5783682643671101
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_083_TwistedForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "83: TwistedForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 84: BooleanSculpture
+[node name="CSG_Variant_084_BooleanSculpture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_084_BooleanSculpture"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_084_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45050078054742415, -0.12942098505003186, 0.05426385501683284)
+operation = 1
+height = 1.452870694967996
+top_radius = 0.34066380749088726
+bottom_radius = 0.3915146403119778
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_084_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427780015948246, -0.1298360247727367, 0.09078270101824681)
+operation = 2
+size = Vector3(0.9074449561020616, 1.390044061022564, 0.6329836103328885)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_084_BooleanSculpture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "84: BooleanSculpture"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 85: OrganicCavities
+[node name="CSG_Variant_085_OrganicCavities" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_085_OrganicCavities"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_085_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27073398520636693, -0.08241999301017466, -0.3830363003379509)
+operation = 1
+height = 0.9595218472833216
+top_radius = 0.42951891939627407
+bottom_radius = 0.4962300105842646
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_085_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4434123504570697, -0.39862624769358357, -0.19968707742696656)
+operation = 3
+inner_radius = 0.2542615313543537
+outer_radius = 0.5175958017441671
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_085_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28036610040612586, 0.48524137654900346, 0.4568394270185203)
+operation = 2
+size = Vector3(0.9178712046399621, 0.6849537736603388, 1.0641066690654868)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_085_OrganicCavities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "85: OrganicCavities"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 86: RingStructures
+[node name="CSG_Variant_086_RingStructures" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_086_RingStructures"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_086_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33735733290757175, 0.39517756708148977, -0.4048119309265614)
+operation = 1
+size = Vector3(0.8102366783596181, 0.9703285566683808, 0.5595831161177274)
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_086_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4949094431571046, -0.37803687325851754, 0.15831215334461857)
+operation = 2
+height = 1.2585037621399038
+top_radius = 0.2392124661565025
+bottom_radius = 0.47958949916479005
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_086_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3723524969985921, -0.40260731503427305, -0.1486758907279766)
+operation = 3
+inner_radius = 0.1677448808721229
+outer_radius = 0.4644834100231704
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_086_RingStructures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "86: RingStructures"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 87: IntersectingCylinders
+[node name="CSG_Variant_087_IntersectingCylinders" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_087_IntersectingCylinders"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_087_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2850751941962588, 0.39644743106280556, 0.18121073665773535)
+operation = 1
+height = 0.7780039972728185
+top_radius = 0.24149883705493513
+bottom_radius = 0.20989744865786855
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_087_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.047250142379537174, 0.07724147936915216, -0.4992926011434363)
+operation = 3
+size = Vector3(1.39376683632841, 0.8640448565989985, 1.480523240021068)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_087_IntersectingCylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "87: IntersectingCylinders"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 88: ComplexHollow
+[node name="CSG_Variant_088_ComplexHollow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_088_ComplexHollow"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_088_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09817873888199458, 0.10950791751635347, -0.04017281152978469)
+operation = 1
+height = 0.8918338738507213
+top_radius = 0.5207914913450093
+bottom_radius = 0.35538061160074774
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_088_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34395347234162243, -0.11935003051618487, -0.16720073188294027)
+operation = 3
+size = Vector3(1.4555659453973022, 1.4389508176958963, 1.2346678280658852)
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_088_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30169794116035964, -0.4309248757439972, 0.2854432333571173)
+operation = 1
+size = Vector3(0.5997781058782709, 0.7414396233529894, 1.2700706713365022)
+
+[node name="RandomShape3" type="CSGTorus3D" parent="CSG_Variant_088_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31313741636578407, -0.33241516612566724, -0.40131283757329506)
+operation = 1
+inner_radius = 0.172879163771338
+outer_radius = 0.5708980387033207
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_088_ComplexHollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "88: ComplexHollow"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 89: FractalLike
+[node name="CSG_Variant_089_FractalLike" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, -2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_089_FractalLike"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGBox3D" parent="CSG_Variant_089_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18117885607750517, -0.27272771913856486, 0.20042376990483246)
+operation = 1
+size = Vector3(1.444267800870822, 0.8698886504892366, 1.069346839759318)
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_089_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2064189568492788, -0.2098250602443592, 0.30632740824381943)
+operation = 1
+height = 1.0380656937605992
+top_radius = 0.4484271068319505
+bottom_radius = 0.44645725718217005
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_089_FractalLike"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "89: FractalLike"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 90: Architectural
+[node name="CSG_Variant_090_Architectural" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 2.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_090_Architectural"]
+material_override = SubResource("Material_0")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_090_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24678119516504038, -0.3266597192241687, 0.28762039095338365)
+operation = 1
+radius = 0.5894624918623581
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_090_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0015882093839194589, -0.39906599451250613, 0.13228958219500053)
+operation = 1
+radius = 0.39506074005491776
+
+[node name="RandomShape2" type="CSGBox3D" parent="CSG_Variant_090_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48946258275589727, 0.24087943051601313, 0.0659099734664943)
+operation = 3
+size = Vector3(1.0797544692946022, 1.1562752306887054, 1.1139703285982963)
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_090_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439030219237163, -0.49316445320547597, 0.17487121535193806)
+operation = 1
+radius = 0.7745434820392028
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_090_Architectural"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "90: Architectural"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 91: AbstractArt
+[node name="CSG_Variant_091_AbstractArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 2.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_091_AbstractArt"]
+material_override = SubResource("Material_1")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_091_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17143426491205627, -0.17095429660800332, 0.42597277966802116)
+operation = 1
+height = 0.7817289394460856
+top_radius = 0.5706857525705764
+bottom_radius = 0.30008970448083744
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_091_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20627742690799078, -0.1078551941200383, 0.285745329093405)
+operation = 3
+inner_radius = 0.1465906909438737
+outer_radius = 0.7928718230295921
+
+[node name="RandomShape2" type="CSGTorus3D" parent="CSG_Variant_091_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31274424912670173, 0.2351055902501734, -0.46034261431217216)
+operation = 2
+inner_radius = 0.12136111524728121
+outer_radius = 0.6183369079494453
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_091_AbstractArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "91: AbstractArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 92: MechanicalParts
+[node name="CSG_Variant_092_MechanicalParts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 2.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_092_MechanicalParts"]
+material_override = SubResource("Material_2")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_092_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05516757691155327, -0.1504746101679445, -0.05807941034217812)
+operation = 1
+height = 1.3622999034702032
+top_radius = 0.26261484128819573
+bottom_radius = 0.49492328483589604
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_092_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49216751474546516, 0.16328018220038198, -0.4564442336590716)
+operation = 2
+height = 1.3417789772016881
+top_radius = 0.583856824918478
+bottom_radius = 0.45091057898884923
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_092_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09361348172799189, 0.11688111421767544, -0.19204054287996675)
+operation = 2
+height = 1.3900762541053528
+top_radius = 0.5054343275825264
+bottom_radius = 0.30434319385728414
+
+[node name="RandomShape3" type="CSGBox3D" parent="CSG_Variant_092_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2960307255701442, -0.032826352258687685, -0.39219640819613955)
+operation = 2
+size = Vector3(1.1421999045671245, 0.51705850444701, 0.5089433137277908)
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_092_MechanicalParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "92: MechanicalParts"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 93: NaturalErosion
+[node name="CSG_Variant_093_NaturalErosion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 2.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_093_NaturalErosion"]
+material_override = SubResource("Material_3")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_093_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1359394945535366, 0.42359117667103063, -0.2399578183326201)
+operation = 1
+radius = 0.3761713374573886
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_093_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31272289773498485, 0.09139342265996209, -0.148487747584781)
+operation = 2
+inner_radius = 0.15278140060839668
+outer_radius = 0.6962124963089734
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_093_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012834438413320326, 0.004861082718576104, -0.4352100784943337)
+operation = 2
+radius = 0.3507797516981121
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_093_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4009053010756154, 0.3514152065102063, -0.47667293570870406)
+operation = 1
+radius = 0.7902935036417279
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_093_NaturalErosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "93: NaturalErosion"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 94: Crystalline
+[node name="CSG_Variant_094_Crystalline" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 2.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_094_Crystalline"]
+material_override = SubResource("Material_4")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_094_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42465377223829703, 0.26400215897912827, 0.048475744937959586)
+operation = 1
+height = 0.7681481164763699
+top_radius = 0.36797290421983064
+bottom_radius = 0.5711538860600602
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_094_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3674415770460562, -0.09632340120417948, -0.2288658727045333)
+operation = 3
+radius = 0.7194822254209717
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_094_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2614665416660885, -0.29462091194875273, -0.02424975653704098)
+operation = 1
+radius = 0.7873897612808216
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_094_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0008462650147557094, 0.3632096659580184, 0.3083345651786581)
+operation = 3
+radius = 0.7593134509256817
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_094_Crystalline"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "94: Crystalline"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 95: FlowingForms
+[node name="CSG_Variant_095_FlowingForms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 6.0, -8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_095_FlowingForms"]
+material_override = SubResource("Material_5")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_095_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17013962430967144, 0.3957669777202374, -0.26774110291899633)
+operation = 1
+inner_radius = 0.10931950022632848
+outer_radius = 0.713879284182492
+
+[node name="RandomShape1" type="CSGCylinder3D" parent="CSG_Variant_095_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2969985705087044, 0.30536185098797075, 0.47345305085043865)
+operation = 3
+height = 1.1678465127387354
+top_radius = 0.22917041374651217
+bottom_radius = 0.5501299477644378
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_095_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1901495893197067, 0.42627934534806466, 0.302723517548093)
+operation = 1
+radius = 0.7977921696703327
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_095_FlowingForms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "95: FlowingForms"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 96: PuzzlePieces
+[node name="CSG_Variant_096_PuzzlePieces" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 6.0, -4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_096_PuzzlePieces"]
+material_override = SubResource("Material_6")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_096_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2817952921114487, -0.2876698867698835, -0.2609235505473486)
+operation = 1
+height = 1.3337571358575313
+top_radius = 0.33673981346964443
+bottom_radius = 0.30249695208571914
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_096_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3548406044163761, -0.05000743780999617, 0.4004234947536385)
+operation = 1
+radius = 0.7260439173925852
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_096_PuzzlePieces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "96: PuzzlePieces"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 97: MinimalArt
+[node name="CSG_Variant_097_MinimalArt" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 6.0, 0.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_097_MinimalArt"]
+material_override = SubResource("Material_7")
+
+[node name="RandomShape0" type="CSGCylinder3D" parent="CSG_Variant_097_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21714538257323623, 0.32418328151547904, -0.17050337518183556)
+operation = 1
+height = 1.1438050135005178
+top_radius = 0.4655427459160563
+bottom_radius = 0.34087336156668024
+
+[node name="RandomShape1" type="CSGSphere3D" parent="CSG_Variant_097_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.039814413586157116, -0.4470528073801947, -0.479601607913105)
+operation = 1
+radius = 0.5698768009884163
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_097_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4284600652505759, -0.353342159166285, -0.1509911453387135)
+operation = 2
+height = 1.4371967234142267
+top_radius = 0.3180095397080498
+bottom_radius = 0.3715981231382879
+
+[node name="RandomShape3" type="CSGSphere3D" parent="CSG_Variant_097_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21631415756581507, -0.2612110706921701, 0.34830389491291036)
+operation = 2
+radius = 0.40533549156252946
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_097_MinimalArt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "97: MinimalArt"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 98: ComplexIntersection
+[node name="CSG_Variant_098_ComplexIntersection" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 6.0, 4.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_098_ComplexIntersection"]
+material_override = SubResource("Material_8")
+
+[node name="RandomShape0" type="CSGTorus3D" parent="CSG_Variant_098_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1968214756631912, -0.11686197343145077, -0.10577621356900668)
+operation = 1
+inner_radius = 0.21173421394372904
+outer_radius = 0.5511855512314681
+
+[node name="RandomShape1" type="CSGTorus3D" parent="CSG_Variant_098_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23639597587667938, 0.3265353372357246, 0.28702716333992584)
+operation = 1
+inner_radius = 0.25938834211625217
+outer_radius = 0.606586506885201
+
+[node name="RandomShape2" type="CSGSphere3D" parent="CSG_Variant_098_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017434717740739458, 0.454953468741361, 0.4070644316166955)
+operation = 1
+radius = 0.6602312553229186
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_098_ComplexIntersection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "98: ComplexIntersection"
+pixel_size = 0.005
+billboard = 1
+
+# Variant 99: RandomCombination
+[node name="CSG_Variant_099_RandomCombination" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 6.0, 8.0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSG_Variant_099_RandomCombination"]
+material_override = SubResource("Material_9")
+
+[node name="RandomShape0" type="CSGSphere3D" parent="CSG_Variant_099_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11134332710919159, -0.2286782980177806, -0.41690806282522863)
+operation = 1
+radius = 0.377154104067914
+
+[node name="RandomShape1" type="CSGBox3D" parent="CSG_Variant_099_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4759894622761768, 0.16010101351184303, 0.33025486898857137)
+operation = 1
+size = Vector3(0.7924462134772329, 1.1318476635451846, 0.6456425767934837)
+
+[node name="RandomShape2" type="CSGCylinder3D" parent="CSG_Variant_099_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48288839998294497, -0.0015352139324801284, 0.09361345016936873)
+operation = 3
+height = 0.6882110527503892
+top_radius = 0.5725107875940008
+bottom_radius = 0.25197128670621294
+
+[node name="RandomShape3" type="CSGTorus3D" parent="CSG_Variant_099_RandomCombination/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38209012225461636, 0.16646036109514595, 0.31155246480825916)
+operation = 3
+inner_radius = 0.2538939952484668
+outer_radius = 0.5271318115456012
+
+
+[node name="Label3D" type="Label3D" parent="CSG_Variant_099_RandomCombination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "99: RandomCombination"
+pixel_size = 0.005
+billboard = 1
+
+# Generated 100 CSG variants in 5x4x5 grid
+# Spacing: 4.0 units
+# Seed: 12345

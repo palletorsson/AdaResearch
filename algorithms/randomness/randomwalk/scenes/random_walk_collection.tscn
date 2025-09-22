@@ -54,9 +54,11 @@ skeleton = NodePath("../..")
 
 [node name="ViewPortCamera3D" type="Camera3D" parent="placeMe/SubViewport"]
 transform = Transform3D(-1, 8.74228e-08, -1.12078e-15, 5.28339e-08, 0.604349, 0.79672, 6.96515e-08, 0.79672, -0.604349, -0.363626, 3.26796, 0.803389)
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="placeMe"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 3.72529e-08, 0.926537, -2.173)
+visible = false
 texture = SubResource("ViewportTexture_t7wqy")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="placeMe/Sprite3D"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://o175phpwkoig"]
+
+[ext_resource type="Script" uid="uid://dskbp1h8e5vr0" path="res://algorithms/primitives/booleans/booleanvariations.gd" id="1_miqxp"]
+
+[node name="Booleanvariations" type="Node3D"]
+script = ExtResource("1_miqxp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.0407)
+projection = 1
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true

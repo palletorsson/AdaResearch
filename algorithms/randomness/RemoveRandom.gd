@@ -9,7 +9,7 @@ var max_steps: int = 15
 
 # Removal properties
 var removal_count: int = 0
-@export var max_removals: int = 15
+@export var max_removals: int = 50
 var active_positions: Array[Vector2i] = []
 
 # 8x8 area bounds in the middle of 11x16 map

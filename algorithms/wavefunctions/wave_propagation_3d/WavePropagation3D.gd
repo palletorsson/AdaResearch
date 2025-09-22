@@ -5,8 +5,8 @@ extends Node3D
 @export var tile_gutter: float = 0.1
 @export var tile_height: float = 0.06
 @export var floor_tilt_degrees: float = -12.0
-@export var frequency: float = 0.6
-@export var amplitude: float = 0.25
+@export var frequency: float = 0.7
+@export var amplitude: float = 0.5
 @export var wave_speed: float = 0.6
 @export var wave_damping: float = 0.08
 
@@ -15,13 +15,14 @@ var tile_positions: Array[Vector2] = []
 var tile_multimesh_instance: MultiMeshInstance3D
 var tile_multimesh: MultiMesh
 var wave_rings: Array = []
+var tile_collision_bodies: Array[StaticBody3D] = []
 
 var base_tile_color := Color(0.22, 0.55, 0.85, 1.0)
 var peak_tile_color := Color(0.95, 0.85, 0.4, 1.0)
 
 func _ready():
 	create_wave_surface()
-	create_wave_rings()
+	#create_wave_rings()
 	setup_materials()
 
 func create_wave_surface():
@@ -37,6 +38,9 @@ func create_wave_surface():
 	tile_multimesh.instance_count = grid_size * grid_size
 	tile_multimesh_instance.multimesh = tile_multimesh
 	surface_parent.add_child(tile_multimesh_instance)
+	
+	# Create collision bodies for each tile
+	_create_tile_collision_bodies(surface_parent)
 	
 	tile_positions.clear()
 	var spacing = tile_size + tile_gutter
@@ -121,6 +125,11 @@ func animate_3d_wave_propagation():
 		var intensity = clamp((sin(wave_phase) + 1.0) * 0.5, 0.0, 1.0)
 		var color = base_tile_color.lerp(peak_tile_color, intensity)
 		tile_multimesh.set_instance_color(instance_index, color)
+		
+		# Update collision body position to match visual tile
+		if instance_index < tile_collision_bodies.size():
+			tile_collision_bodies[instance_index].position = origin
+		
 		instance_index += 1
 
 func animate_wave_rings():
@@ -158,3 +167,32 @@ func animate_controls():
 	amplitude = 0.22 + cos(time * 0.1) * 0.12
 	wave_speed = 0.5 + sin(time * 0.09) * 0.18
 	$WaveSource.radius = 0.28 + sin(time * frequency * 2.4) * 0.05
+
+func _create_tile_collision_bodies(surface_parent: Node3D):
+	"""Create collision bodies for each tile"""
+	tile_collision_bodies.clear()
+	
+	var spacing = tile_size + tile_gutter
+	var half = (grid_size - 1) * 0.5
+	
+	for x in range(grid_size):
+		for z in range(grid_size):
+			var pos2 = Vector2((x - half) * spacing, (z - half) * spacing)
+			var origin = Vector3(pos2.x, tile_height * 0.5, pos2.y)
+			
+			# Create StaticBody3D for collision
+			var collision_body = StaticBody3D.new()
+			collision_body.name = "TileCollision_%d_%d" % [x, z]
+			collision_body.position = origin
+			
+			# Create collision shape
+			var collision_shape = CollisionShape3D.new()
+			var box_shape = BoxShape3D.new()
+			box_shape.size = Vector3(tile_size, tile_height, tile_size)
+			collision_shape.shape = box_shape
+			
+			collision_body.add_child(collision_shape)
+			surface_parent.add_child(collision_body)
+			
+			# Store reference for animation
+			tile_collision_bodies.append(collision_body)

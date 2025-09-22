@@ -54,7 +54,7 @@ func _on_dropped(_pickable) -> void:
 
 	# Restore original material when dropped
 	$MeshInstance3D.set_surface_override_material(0, _original_material)
-
+	GameManager.add_console_message("Point Position: " + str(global_position), "info", "system")
 
 # Called when a controller button is pressed
 func _on_controller_button_pressed(button : String):

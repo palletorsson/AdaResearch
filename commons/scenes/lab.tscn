@@ -91,5 +91,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47427, 1, -1.13057)
 [node name="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.624792, 1.32355)
 
+[node name="MeshInstance3D" parent="StaticBody3D" index="1"]
+visible = false
+
 [node name="AudioTest" type="Node3D" parent="." index="8"]
+visible = false
 script = ExtResource("5_f6pg2")

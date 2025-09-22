@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgu73mahjno8t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0qcl"]
+albedo_color = Color(1, 0.211765, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y0qcl"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.695
+
+[sub_resource type="SphereMesh" id="SphereMesh_dwwy0"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwwy0"]
+albedo_color = Color(1, 0.227451, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qy5vn"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qy5vn"]
+albedo_color = Color(1, 0.12549, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ti0qw"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="corner" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="corner"]
+transform = Transform3D(0.670932, 0.741519, 0, -0.741519, 0.670932, 0, 0, 0, 1, -0.25, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_y0qcl")
+mesh = SubResource("CylinderMesh_y0qcl")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="corner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_y0qcl")
+mesh = SubResource("SphereMesh_dwwy0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="corner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_y0qcl")
+mesh = SubResource("SphereMesh_dwwy0")
+skeleton = NodePath("../..")
+
+[node name="straight" type="Node3D" parent="."]
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="straight"]
+transform = Transform3D(-0.0058992, -0.999983, 0, 0.999983, -0.0058992, 0, 0, 0, 1, 0.5, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_dwwy0")
+mesh = SubResource("CylinderMesh_qy5vn")
+skeleton = NodePath("../..")
+
+[node name="base" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_qy5vn")
+mesh = SubResource("BoxMesh_ti0qw")
+skeleton = NodePath("../..")

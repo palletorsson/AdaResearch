@@ -4,7 +4,6 @@
 
 [node name="HeightRandomnessAlgorithm" type="Node3D"]
 script = ExtResource("1_height")
-raise_amount = 0.1
 region_min_z = 2
 region_max_z = 9
 target_y_level = 0

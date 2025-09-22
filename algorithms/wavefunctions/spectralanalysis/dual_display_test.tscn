@@ -16,3 +16,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 text = "Audio Analysis Comparison
 Left: Frequency Spectrum | Right: Spectral Sine Wave"
 font_size = 18
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8432, 4.01992)

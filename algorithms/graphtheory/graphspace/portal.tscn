@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://tluyu160ehv2"]
+
+[ext_resource type="Script" uid="uid://bxhr2rwcff0kp" path="res://algorithms/graphtheory/graphspace/portal.gd" id="1"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(1.6, 2.6, 0.6)
+
+[node name="Portal" type="Area3D"]
+script = ExtResource("1")
+link_mesh_path = NodePath("Frame/Beam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[node name="Frame" type="CSGBox3D" parent="."]
+size = Vector3(1.8, 2.8, 0.6)
+
+[node name="FrameHollow" type="CSGBox3D" parent="Frame"]
+operation = 2
+size = Vector3(1.4, 2.4, 0.7)
+
+[node name="Beam" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+size = Vector3(1, 0.06, 0.06)

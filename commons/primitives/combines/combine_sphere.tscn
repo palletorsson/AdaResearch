@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cix00tkxnybnc"]
+
+[ext_resource type="Script" uid="uid://c54gptdnf4vm4" path="res://commons/primitives/combines/combine_sphere.gd" id="1_af0lr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mnf7g"]
+radial_segments = 13
+rings = 3
+
+[node name="CombineSphere" type="Node3D"]
+script = ExtResource("1_af0lr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mnf7g")
