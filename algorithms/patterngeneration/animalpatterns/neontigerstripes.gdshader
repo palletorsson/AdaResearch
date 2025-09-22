@@ -180,7 +180,7 @@ vec3 snake_colors(vec2 uv){
     // tiny speckle
     col *= 0.95 + 0.05*fbm(uv*2.5);
 
-    
+
 
     return col;
 }

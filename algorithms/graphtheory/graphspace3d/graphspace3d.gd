@@ -603,8 +603,7 @@ func _create_teleporter_nodes(pa: Vector3, pb: Vector3, edge: Dictionary) -> voi
 		var pos = pa if i == 0 else pb
 		var teleporter := CSGCylinder3D.new()
 		teleporter.name = "Teleporter_%d_%d_%d" % [edge.a, edge.b, i]
-		teleporter.top_radius = 1.0
-		teleporter.bottom_radius = 1.0
+		teleporter.radius = 1.0
 		teleporter.height = 0.2
 		teleporter.position = pos + Vector3(0, 0.1, 0)
 		teleporter.operation = CSGShape3D.OPERATION_UNION

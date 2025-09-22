@@ -21,6 +21,6 @@ is_hemisphere = true
 [node name="Noisetorus" type="Node3D"]
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, -20, 0.073)
+transform = Transform3D(-1.07367, 29.9808, 0, -29.9808, -1.07367, 0, 0, 0, 30, -17.7262, 0.852951, 0.073)
 material_override = SubResource("ShaderMaterial_hsvs3")
 mesh = SubResource("SphereMesh_bhbqq")

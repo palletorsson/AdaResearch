@@ -201,11 +201,11 @@
 			"content": [
 				" One : Random Remove, TD: placement",
 				" Two : Random Topology", 
-				" Three : Wave Propagation Space",
-				" John_Cage: Audio scape",
-				" Bernini : Bernini columns",
-				" Four : Lines",
-				" Kusama: Kusama",
+				" Three : ",
+				" Random_Seven",
+				" Random_Four",
+				" Random_Walk",
+				" Random_Seven",
 			],
 			"maps": [
 				"Random_One",	
@@ -225,9 +225,7 @@
 				"Randomness_Random_Transformations",
 				"Randomness_Random_Walk",
 				"Randomness_TRNG_vs_PRNG",
-						"Random_Game", 			
-							
-	
+				"Random_Game", 			
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_random",
@@ -282,11 +280,22 @@
 				"Audio noise generation",
 				"Noise filtering techniques"
 			],
+			
+			"content": [
+				" Noise_One : noisetorus noiselayers:0:20 ",
+				" Noise_6_Wall: shader_noise_space",
+				" Noise_Inside_Noise : in side noise sphere", 
+				" Noise_Volume: perlinvolume:0:1:0.3",
+				" Noise_Space_10 : Noise_Space_10",
+				" Noise_Functions: ",
+				" Noise_Perlin_Simplex :  "
+			],
 			"maps": [
 				"Noise_One",
-				"Noise_Two",
-				"Noise_Three",
-				"Noise_Blue",
+				"Noise_6_Wall",
+				"Noise_Inside_Noise",
+				"Noise_Volume",
+				"Noise_Space_10",
 				"Noise_Functions",
 				"Noise_Perlin_Simplex",		
 			],

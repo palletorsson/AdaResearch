@@ -230,8 +230,7 @@ func _create_landmass_platform(node: Dictionary, index: int):
 	"""Create a platform representing each landmass"""
 	var platform = CSGCylinder3D.new()
 	platform.name = "Landmass_" + node.landmass_name
-	platform.top_radius = 4.0
-	platform.bottom_radius = 4.0
+	platform.radius = 4.0
 	platform.height = 1.0
 	platform.position = node.pos
 	
@@ -350,8 +349,7 @@ func _create_educational_markers():
 	# Central information pillar
 	var info_pillar = CSGCylinder3D.new()
 	info_pillar.name = "EulerTheoremPillar"
-	info_pillar.top_radius = 0.5
-	info_pillar.bottom_radius = 0.5
+	info_pillar.radius = 0.5
 	info_pillar.height = 3.0
 	info_pillar.position = Vector3(0, 1.5, 0)
 	

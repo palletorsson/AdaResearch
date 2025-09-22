@@ -1,33 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://bj4q6rgtfv13w"]
 
-[ext_resource type="Script" path="res://algorithms/graphtheory/graphspace/konigsbergBridge.gd" id="1_5m8x2"]
+[ext_resource type="Script" uid="uid://bquly2lyakt5q" path="res://algorithms/graphtheory/graphspace/konigsbergBridge.gd" id="1_5m8x2"]
 
 [node name="KonigsbergBridge" type="Node3D"]
 script = ExtResource("1_5m8x2")
+historical_scale = 1.2
 structure_type = 3
-place_structures = true
 node_count = 4
 avg_degree = 3.5
 layout_iters = 0
-planar_layout = true
-plane_y = 0.0
-room_radius = 6.0
-educational_mode = true
-show_euler_analysis = true
-highlight_odd_degree_nodes = true
-animate_problem_explanation = true
-use_historical_layout = true
-show_bridge_names = true
-show_construction_dates = true
-historical_scale = 1.2
-bridge_collision_layer = 1
-bridge_collision_mask = 1
-scale_xy = 1.0
-center = Vector3(0, 0, 0)
-y_plane = 0.0
-structure_rotation_variation_deg = 20.0
-show_debug_lines = true
-label_nodes_in_editor = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 15, 0)

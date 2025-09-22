@@ -22,9 +22,3 @@ func setup_scene():
 	# The material is already set in the .tscn file, so we don't need
 	# to create it here. We just need to ensure the shader can receive
 	# updates if necessary (like the TIME uniform, which is built-in).
-
-func _process(delta):
-	if is_instance_valid(volume_mesh):
-		# Slowly rotate the volume to showcase the 3D nature of the noise.
-		volume_mesh.rotate_y(rotation_speed * delta)
-		volume_mesh.rotate_x(rotation_speed * delta * 0.5)

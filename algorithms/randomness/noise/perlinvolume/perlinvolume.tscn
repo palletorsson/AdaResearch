@@ -1,24 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://dklmno1pqrstu"]
+[gd_scene load_steps=9 format=3 uid="uid://dklmno1pqrstu"]
 
-[ext_resource type="Script" uid="uid://w3jxqg7xdi7k" path="res://algorithms/randomness/noise/perlinvolume/perlinvolume.gd" id="1_volume"]
 [ext_resource type="Shader" uid="uid://byd71ykop4g5o" path="res://algorithms/randomness/noise/perlinvolume/perlinvolume.gdshader" id="2_shader"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l8722"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_og6lg"]
+sky_material = SubResource("ProceduralSkyMaterial_l8722")
+
+[sub_resource type="Environment" id="Environment_criwv"]
+background_mode = 2
+sky = SubResource("Sky_og6lg")
+tonemap_mode = 2
+volumetric_fog_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_og6lg"]
+offsets = PackedFloat32Array(0, 0.0929204, 1)
+colors = PackedColorArray(0.870588, 0.0862745, 0, 1, 0.0941176, 0.854902, 0.0941176, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_criwv"]
+gradient = SubResource("Gradient_og6lg")
+fill_from = Vector2(0.491453, 0.188034)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_12345"]
 render_priority = 0
 shader = ExtResource("2_shader")
-shader_parameter/time_scale = 0.2
-shader_parameter/noise_scale = 1.5
-shader_parameter/density = 1.2
+shader_parameter/time_scale = 0.0
+shader_parameter/noise_scale = 2.789
+shader_parameter/density = 3.328
 shader_parameter/march_steps = 48
-shader_parameter/color1 = Color(0, 0.4, 1, 1)
+shader_parameter/fbm_detail = 0.077
+shader_parameter/warp_amount = 0.363
+shader_parameter/contrast = 0.778
+shader_parameter/edge_softness = 0.04
+shader_parameter/jitter_amount = 1.0
+shader_parameter/light_dir = Vector3(0.4, 0.7, 0.3)
+shader_parameter/light_strength = 0.252
+shader_parameter/phase_g = 0.25
+shader_parameter/rim_strength = 0.557
+shader_parameter/emission_boost = 0.643
+shader_parameter/color1 = Color(0.810939, 1.13589e-05, 0.539163, 1)
 shader_parameter/color2 = Color(0.4, 1, 1, 1)
 shader_parameter/color3 = Color(1, 1, 1, 1)
+shader_parameter/gradient_tex = SubResource("GradientTexture2D_criwv")
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(2, 2, 2)
 
 [node name="PerlinVolumeVR" type="Node3D"]
-script = ExtResource("1_volume")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_criwv")
 
 [node name="VolumeBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

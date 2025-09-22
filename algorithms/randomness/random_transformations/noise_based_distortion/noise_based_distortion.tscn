@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://d0kufv56g25sw"]
 
-[ext_resource type="Script" path="res://algorithms/randomness/random_transformations/RandomTransformations.gd" id="1"]
+[ext_resource type="Script" uid="uid://dwpcv0jf7j0t1" path="res://algorithms/randomness/random_transformations/RandomTransformations.gd" id="1"]
 
 [node name="NoiseDistortionExample" type="Node3D"]
 script = ExtResource("1")
@@ -13,4 +13,3 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 shadow_enabled = true
 
 [node name="NoiseBasedDistortion" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

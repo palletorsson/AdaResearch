@@ -143,7 +143,7 @@ func update_progress(progress: float):
 func fade_out():
 	var tween = create_tween()
 	tween.tween_property(progress_container, "modulate:a", 0.0, 1.0)
-		tween.tween_callback(func(): visualization_complete.emit())
+	tween.tween_callback(func(): visualization_complete.emit())
 
 # Public interface for the main generator
 func connect_to_generator(generator_node):

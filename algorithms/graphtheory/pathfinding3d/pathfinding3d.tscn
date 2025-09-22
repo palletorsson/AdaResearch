@@ -4,7 +4,7 @@
 
 [node name="Pathfinding3D" type="Node3D"]
 script = ExtResource("1_3xr7p")
-grid_dimensions = Vector3i(30, 15, 30)
+grid_dimensions = Vector3i(10, 15, 10)
 obstacle_probability = 0.2
 movement_model = 0
 heuristic_weight = 1.1

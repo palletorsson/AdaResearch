@@ -27,15 +27,15 @@ shader_parameter/dark_corner = Color(0.2, 0.1, 0.2, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2"]
 render_priority = 0
 shader = ExtResource("3_m9n4t")
-shader_parameter/time = 0.0
-shader_parameter/cloud_scale = 2.0
-shader_parameter/pink_intensity = 0.8
-shader_parameter/corner_darkness = 0.3
-shader_parameter/time_scale = 0.2
-shader_parameter/cloud_density = 1.0
+shader_parameter/time = 10.639
+shader_parameter/cloud_scale = 1.745
+shader_parameter/pink_intensity = 0.928
+shader_parameter/corner_darkness = 0.399
+shader_parameter/time_scale = 0.427
+shader_parameter/cloud_density = 1.499
 shader_parameter/base_pink = Color(1, 0.6, 0.8, 1)
-shader_parameter/deep_pink = Color(0.8, 0.2, 0.6, 1)
-shader_parameter/dark_corner = Color(0.2, 0.1, 0.2, 1)
+shader_parameter/deep_pink = Color(1, 1, 1, 1)
+shader_parameter/dark_corner = Color(0.951663, 0.897574, 0.949297, 1)
 
 [node name="QueerNoiseRoom" type="Node3D"]
 script = ExtResource("1_0x8mq")
@@ -66,9 +66,9 @@ material_override = SubResource("ShaderMaterial_2")
 size = Vector3(16, 12, 0.1)
 
 [node name="RightWall" type="CSGBox3D" parent="WallsContainer"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.8939, 0, 4.63793e-09)
 material_override = SubResource("ShaderMaterial_2")
-size = Vector3(27, 12, 0.1)
+size = Vector3(27, 12, 0.312207)
 
 [node name="LeftWall" type="CSGBox3D" parent="WallsContainer"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 0)
