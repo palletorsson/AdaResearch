@@ -11,10 +11,11 @@ ambient_light_energy = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vvmu"]
 transparency = 1
-albedo_color = Color(1, 0.580392, 1, 0.580392)
+albedo_color = Color(1, 1, 1, 0.580392)
+emission_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_a40jk"]
-size = Vector3(1, 0.1, 0.2)
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay84d"]
 size = Vector3(1, 0.108215, 0.189636)

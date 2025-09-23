@@ -1,134 +1,107 @@
 extends Node3D
 
-@export var particle_count: int = 50
-@export var field_strength: float = 10.0
-@export var particle_speed: float = 2.0
+@export var particle_count: int = 80
+@export var field_strength: float = 2.0
+@export var particle_speed: float = 0.6
+@export var drag_coefficient: float = 1.5
+@export var buoyancy: float = 0.15
+@export var max_speed: float = 2.0
+@export var spawn_rate: float = 2.0  # particles per second
+@export var max_particles: int = 200
+@export var particle_lifetime: float = 8.0  # seconds before removing particles
 
-var gravity_particles: Array[Node3D] = []
-var magnetic_particles: Array[Node3D] = []
 var fluid_drag_particles: Array[Node3D] = []
+var particle_velocity: Array[Vector3] = []
+var particle_ages: Array[float] = []
 
-var gravity_center: Node3D
-var magnetic_center: Node3D
 var fluid_drag_center: Node3D
 
 var time: float = 0.0
+var spawn_timer: float = 0.0
 
-func _ready():
-	gravity_center = $GravityField/GravityCenter
-	magnetic_center = $MagneticField/MagneticCenter
+func _ready() -> void:
+	randomize()
 	fluid_drag_center = $FluidDragField/FluidDragCenter
-	
 	create_particles()
-	create_field_lines()
 
-func create_particles():
-	# Create gravity field particles
+func create_particles() -> void:
 	for i in range(particle_count):
-		var particle = create_particle(Color.BLUE)
-		particle.position = Vector3(
-			randf_range(-3, 3),
-			randf_range(-3, 3),
-			randf_range(-3, 3)
-		)
-		$GravityField/GravityParticles.add_child(particle)
-		gravity_particles.append(particle)
-	
-	# Create magnetic field particles
-	for i in range(particle_count):
-		var particle = create_particle(Color.RED)
-		particle.position = Vector3(
-			randf_range(-3, 3),
-			randf_range(-3, 3),
-			randf_range(-3, 3)
-		)
-		$MagneticField/MagneticParticles.add_child(particle)
-		magnetic_particles.append(particle)
-	
-	# Create fluid drag field particles
-	for i in range(particle_count):
-		var particle = create_particle(Color.GREEN)
-		particle.position = Vector3(
-			randf_range(-3, 3),
-			randf_range(-3, 3),
-			randf_range(-3, 3)
-		)
-		$FluidDragField/FluidDragParticles.add_child(particle)
-		fluid_drag_particles.append(particle)
+		var p: CSGSphere3D = create_particle(Color.GREEN)
+		p.position = Vector3(randf_range(-3.0, 3.0), randf_range(-3.0, 3.0), randf_range(-3.0, 3.0))
+		$FluidDragField/FluidDragParticles.add_child(p)
+		fluid_drag_particles.append(p)
+		particle_velocity.append(Vector3.ZERO)
+		particle_ages.append(0.0)
 
 func create_particle(color: Color) -> CSGSphere3D:
-	var particle = CSGSphere3D.new()
-	particle.radius = 0.05
-	particle.material = StandardMaterial3D.new()
-	particle.material.albedo_color = color
-	particle.material.emission_enabled = true
-	particle.material.emission = color
-	particle.material.emission_energy_multiplier = 0.3
-	return particle
+	var s := CSGSphere3D.new()
+	s.radius = 0.05
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy = 0.3
+	s.material = mat
+	return s
 
-func create_field_lines():
-	# Create gravity field lines (radial)
-	for i in range(12):
-		var line = create_field_line(Color.BLUE, 0.8)
-		line.rotation.y = i * PI / 6
-		$FieldLines/GravityLines.add_child(line)
-	
-	# Create magnetic field lines (dipole)
-	for i in range(16):
-		var line = create_field_line(Color.RED, 0.8)
-		line.rotation.y = i * PI / 8
-		line.rotation.z = PI / 2
-		$FieldLines/MagneticLines.add_child(line)
-	
-	# Create fluid drag field lines (streamlines)
-	for i in range(10):
-		var line = create_field_line(Color.GREEN, 1.2)
-		line.rotation.y = i * PI / 5
-		$FieldLines/FluidDragLines.add_child(line)
 
-func create_field_line(color: Color, length: float) -> CSGCylinder3D:
-	var line = CSGCylinder3D.new()
-	line.radius = 0.02
-	line.height = length
-	line.material = StandardMaterial3D.new()
-	line.material.albedo_color = color
-	line.material.emission_enabled = true
-	line.material.emission = color
-	line.material.emission_energy_multiplier = 0.2
-	line.position.z = -length / 2
-	return line
+func spawn_new_particle() -> void:
+	var p: CSGSphere3D = create_particle(Color.GREEN)
+	# Spawn particles from random positions around the edges
+	var spawn_distance = 8.0
+	p.position = Vector3(
+		randf_range(-spawn_distance, spawn_distance),
+		randf_range(-spawn_distance, spawn_distance),
+		randf_range(-spawn_distance, spawn_distance)
+	)
+	$FluidDragField/FluidDragParticles.add_child(p)
+	fluid_drag_particles.append(p)
+	particle_velocity.append(Vector3.ZERO)
+	particle_ages.append(0.0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
-	# Update gravity field particles
-	for particle in gravity_particles:
-		var direction = (gravity_center.global_position - particle.global_position).normalized()
-		var distance = particle.global_position.distance_to(gravity_center.global_position)
-		var force = field_strength / (distance * distance + 0.1)
-		particle.position += direction * force * delta * particle_speed
-	
-	# Update magnetic field particles
-	for particle in magnetic_particles:
-		var direction = (magnetic_center.global_position - particle.global_position).normalized()
-		var distance = particle.global_position.distance_to(magnetic_center.global_position)
-		var force = field_strength / (distance * distance + 0.1)
-		# Add some circular motion for magnetic field
-		var tangent = Vector3(-direction.z, 0, direction.x)
-		particle.position += (direction * force + tangent * force * 0.5) * delta * particle_speed
-	
-	# Update fluid drag field particles
-	for particle in fluid_drag_particles:
-		var direction = (fluid_drag_center.global_position - particle.global_position).normalized()
-		var distance = particle.global_position.distance_to(fluid_drag_center.global_position)
-		var force = field_strength / (distance * distance + 0.1)
-		# Add some turbulence
-		var turbulence = Vector3(
-			sin(time + particle.position.x) * 0.1,
-			cos(time + particle.position.y) * 0.1,
-			sin(time + particle.position.z) * 0.1
+	# Spawn new particles continuously
+	spawn_timer += delta
+	if spawn_timer >= 1.0 / spawn_rate and fluid_drag_particles.size() < max_particles:
+		spawn_new_particle()
+		spawn_timer = 0.0
+
+	# Remove old particles and update ages
+	for i in range(fluid_drag_particles.size() - 1, -1, -1):
+		particle_ages[i] += delta
+		if particle_ages[i] >= particle_lifetime:
+			# Remove particle
+			fluid_drag_particles[i].queue_free()
+			fluid_drag_particles.remove_at(i)
+			particle_velocity.remove_at(i)
+			particle_ages.remove_at(i)
+
+	# Fluid drag (with turbulence) and buoyant floaty motion
+	for i in range(fluid_drag_particles.size()):
+		var p: Node3D = fluid_drag_particles[i]
+		var v: Vector3 = particle_velocity[i]
+
+		var dir: Vector3 = (fluid_drag_center.global_position - p.global_position)
+		var dist: float = max(dir.length(), 0.001)
+		dir = dir / dist
+		var force: float = field_strength / (dist * dist + 0.1)
+
+		var turbulence: Vector3 = Vector3(
+			sin(time + p.position.x) * 0.08,
+			cos(time + p.position.y) * 0.08,
+			sin(time + p.position.z) * 0.08
 		)
-		particle.position += (direction * force + turbulence) * delta * particle_speed
-	
-	# Rotate field lines
-	$FieldLines.rotation.y += delta * 0.2
+
+		var acceleration: Vector3 = dir * force + turbulence + Vector3(0.0, buoyancy, 0.0)
+		v += acceleration * particle_speed * delta
+
+		var damping: float = max(0.0, 1.0 - drag_coefficient * delta)
+		v *= damping
+
+		if v.length() > max_speed:
+			v = v.normalized() * max_speed
+
+		p.position += v * delta
+		particle_velocity[i] = v

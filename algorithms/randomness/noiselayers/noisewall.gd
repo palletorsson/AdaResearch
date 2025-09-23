@@ -56,7 +56,7 @@ func setup_noise():
 	if not fine_noise:
 		fine_noise = FastNoiseLite.new()
 		fine_noise.seed = 98765
-		fine_noise.noise_type = FastNoiseLite.TYPE_RIDGED
+		#fine_noise.noise_type = FastNoiseLite.TYPE_RIDGED
 		fine_noise.frequency = fine_frequency
 		fine_noise.fractal_octaves = 2
 

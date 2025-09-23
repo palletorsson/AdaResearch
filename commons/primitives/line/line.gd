@@ -2,7 +2,7 @@ extends Node3D
 
 # Line connection system for grab spheres
 @export var line_thickness: float = 0.005
-@export var line_color: Color = Color(1.0, 0.6, 0.9, 1.0)
+@export var line_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var update_frequency: float = 0.1  # Update every 0.1 seconds
 
 @onready var point_one = $GrabSphere
@@ -10,6 +10,7 @@ extends Node3D
 
 var connection_lines: Array[MeshInstance3D] = []
 var current_line: MeshInstance3D
+ 
 
 func _ready():
 	update_connections()
@@ -55,13 +56,14 @@ func create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstanc
 		# Set the transform with proper orientation
 		line.transform.basis = Basis(right, direction, up)
 	
-	# Create material - hard, glossy, black
+	# Create material - glossy and emissive
 	var material = StandardMaterial3D.new()
 	material.albedo_color = line_color
 	material.metallic = 0.8  # High metallic for glossy look
 	material.roughness = 0.1  # Low roughness for glossy finish
 	material.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED  # Hard, not transparent
-	material.emission_enabled = false  # No emission for hard look
+	material.emission_enabled = true
+	material.emission = line_color
 	line.material_override = material
 	
 	connection_lines.append(line)

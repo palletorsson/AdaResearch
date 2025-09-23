@@ -69,7 +69,7 @@ func _process(delta):
 	if slideshow_enabled:
 		handle_slideshow(delta)
 	
-	#animate_geometry(delta)
+	animate_geometry(delta)
 	update_colors(delta)
 	if enable_morphing:
 		apply_morphing(delta)
@@ -537,8 +537,8 @@ func update_existing_plate_colors():
 					material.emission = new_color * emission_strength
 
 func animate_geometry(delta):
-	# Rotate the entire geometry
-	rotation += rotation_speed * delta
+	# Rotate around Y axis only
+	rotation.y += rotation_speed.y * delta
 	
 	# Pulsing scale
 	var pulse = 1.0 + sin(time * pulse_frequency) * pulse_amplitude

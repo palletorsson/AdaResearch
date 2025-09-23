@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://801v8wjrvkgv"]
 
-[ext_resource type="Script" uid="uid://bjbjk617nxyhw" path="res://commons/resourses/utilities/displayobjectposition/displayobjectposition.gd" id="1_b2plt"]
+[ext_resource type="Script" uid="uid://bjbjk617nxyhw" path="res://commons/resourses/shaders/displayobjectposition/displayobjectposition.gd" id="1_b2plt"]
 
 [node name="Displayobjectposition" type="Node3D"]
 script = ExtResource("1_b2plt")

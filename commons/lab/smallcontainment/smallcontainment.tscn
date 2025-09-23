@@ -32,7 +32,7 @@ func setup_containment_cube():
 	add_to_group('containment_devices')
 	add_to_group('specimen_storage')
 	
-	print('🔳 CONTAINMENT CUBE: Desktop specimen containment active')
+	#print('🔳 CONTAINMENT CUBE: Desktop specimen containment active')
 
 func initialize_containment_field():
 	# Start field projector animations
@@ -113,7 +113,7 @@ func update_energy_field_visuals():
 		pulse_tween.tween_property(energy_field, 'material_override:emission_energy', 1.0, 0.5)
 
 func trigger_breach_warning():
-	print('⚠️ CONTAINMENT CUBE: Field integrity compromised - Breach risk elevated')
+	#print('⚠️ CONTAINMENT CUBE: Field integrity compromised - Breach risk elevated')
 	emit_signal('breach_warning', containment_breach_risk)
 	
 	# Flash status indicators
@@ -135,7 +135,7 @@ func analyze_contained_specimen():
 	print('  Containment Status: %s' % ('STABLE' if field_strength > 85.0 else 'UNSTABLE'))
 
 func reinforce_containment_field():
-	print('🔋 CONTAINMENT CUBE: Reinforcing containment field...')
+	#print('🔋 CONTAINMENT CUBE: Reinforcing containment field...')
 	field_strength = 100.0
 	containment_breach_risk = 0.0
 	
@@ -147,7 +147,7 @@ func reinforce_containment_field():
 	emit_signal('containment_stabilized')
 
 func emergency_containment_protocol():
-	print('🚨 CONTAINMENT CUBE: Emergency protocol activated!')
+	#print('🚨 CONTAINMENT CUBE: Emergency protocol activated!')
 	
 	# Maximum field strength
 	field_strength = 100.0
@@ -162,7 +162,7 @@ func emergency_containment_protocol():
 		projector.light_color = Color.WHITE
 
 func specimen_interaction_detected():
-	print('👁️ CONTAINMENT CUBE: Specimen showing reactive behavior')
+	#print('👁️ CONTAINMENT CUBE: Specimen showing reactive behavior')
 	
 	# Specimen becomes more active
 	var reaction_tween = create_tween()
@@ -177,16 +177,16 @@ func change_specimen(new_specimen_type: String, specimen_color: Color):
 	contained_specimen.material_override.emission = specimen_color
 	contained_specimen.material_override.albedo_color = specimen_color
 	
-	print('🔬 CONTAINMENT CUBE: New specimen contained - Type: %s' % specimen_type)
+	#print('🔬 CONTAINMENT CUBE: New specimen contained - Type: %s' % specimen_type)
 	emit_signal('specimen_contained', specimen_type)
 
 func toggle_containment_access():
 	# The front wall is missing for access, but we can simulate opening/closing
 	if containment_active:
-		print('🔓 CONTAINMENT CUBE: Access mode - Field temporarily lowered')
+		#print('🔓 CONTAINMENT CUBE: Access mode - Field temporarily lowered')
 		field_strength *= 0.7
 	else:
-		print('🔒 CONTAINMENT CUBE: Sealed mode - Full containment restored')
+		#print('🔒 CONTAINMENT CUBE: Sealed mode - Full containment restored')
 		field_strength = 100.0
 	
 	containment_active = not containment_active

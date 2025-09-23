@@ -10,19 +10,7 @@ dof_blur_far_transition = 8.0
 [node name="GeometryColorPlates" type="Node3D"]
 script = ExtResource("1")
 geometry_resolution = 2
-geometry_scale = 6.0
-plate_thickness = 0.2
-plate_separation = 0.05
-color_intensity = 1.2
-color_variation_speed = 0.8
-rotation_speed = Vector3(0.1, 0.15, 0.05)
-pulse_amplitude = 0.08
-pulse_frequency = 1.5
-color_wave_speed = 1.2
-slide_duration = 6.0
-emission_strength = 0.4
-metallic_factor = 0.15
-roughness_factor = 0.5
+wireframe_overlay = true
 
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 15)

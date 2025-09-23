@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu76ua8qg2p0o"]
+[gd_scene load_steps=6 format=3 uid="uid://cu76ua8qg2p0o"]
 
 [ext_resource type="Shader" uid="uid://7hapaspktawr" path="res://commons/resourses/shaders/noisePlanet2.gdshader" id="1_mkyck"]
 
@@ -16,6 +16,12 @@ material = SubResource("ShaderMaterial_hf00x")
 text = "ADA RESEARCH
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4odw"]
+albedo_color = Color(0.249027, 4.30891e-05, 0.250087, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l32ll"]
+size = Vector3(1.125, 0.25, 0.375)
+
 [node name="Noisetorus" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -23,3 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 0.888361, 0.459146, 0, -0.459146, 0.888361, 
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = SubResource("TextMesh_n7533")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.369207, 0)
+material_override = SubResource("StandardMaterial3D_u4odw")
+mesh = SubResource("BoxMesh_l32ll")

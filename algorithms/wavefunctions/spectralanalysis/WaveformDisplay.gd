@@ -133,8 +133,8 @@ func _update_waveform_data():
 			if abs(val) > max_waveform:
 				max_waveform = abs(val)
 		
-		print("WaveformDisplay: Avg magnitude: %.6f, Active bands: %d/%d, Max waveform: %.2f" % 
-			  [avg_magnitude, active_bands, sample_count, max_waveform])
+		#print("WaveformDisplay: Avg magnitude: %.6f, Active bands: %d/%d, Max waveform: %.2f" % 
+			  #[avg_magnitude, active_bands, sample_count, max_waveform])
 
 func _generate_test_waveform():
 	"""Generate test sine wave modulated by fake spectral values"""

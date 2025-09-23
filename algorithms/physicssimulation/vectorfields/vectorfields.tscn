@@ -1,8 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=7 format=3 uid="uid://bqxvhxqxqxqxr"]
 
+[ext_resource type="Script" uid="uid://7nroxgjfknky" path="res://algorithms/physicssimulation/vectorfields/StreamlineRenderer.gd" id="1_mslnp"]
 [ext_resource type="Script" uid="uid://df07djqrc20l" path="res://algorithms/physicssimulation/vectorfields/VectorFieldArrow.gd" id="2_8e17c"]
+[ext_resource type="Shader" uid="uid://sdg6jbplu1q7" path="res://algorithms/physicssimulation/vectorfields/VectorField3D.gdshader" id="3_c7m1e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vf"]
+size = Vector2(6.28, 9)
+subdivide_width = 1
+subdivide_depth = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vf"]
+render_priority = 0
+shader = ExtResource("3_c7m1e")
+shader_parameter/bg_color = Color(0.7, 0.73, 0.76, 1)
+shader_parameter/line_color = Color(0.8, 0, 0, 1)
+shader_parameter/line_width = 0.012
+shader_parameter/grid_cols = 34
+shader_parameter/grid_rows = 20
+shader_parameter/time_scale = 0.5
+shader_parameter/field_type = 1
+shader_parameter/field_strength = 1.4
+shader_parameter/arrow_len = 0.035
 
 [node name="VectorFields" type="Node3D"]
 script = ExtResource("2_8e17c")
@@ -62,3 +82,13 @@ text = "Reset Particle"
 [node name="TrailToggle" type="Button" parent="UI/VBoxContainer"]
 layout_mode = 2
 text = "Toggle Trail"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Streamlines" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("1_mslnp")
+
+[node name="VectorFieldSurface" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 4.5, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_vf")
+surface_material_override/0 = SubResource("ShaderMaterial_vf")

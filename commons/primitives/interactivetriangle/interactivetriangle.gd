@@ -6,7 +6,7 @@ var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_y_offset: float = -5.9
 
 ## Freeze behavior options
-@export var alter_freeze : bool = true  # Enable alternating freeze behavior
+@export var alter_freeze : bool = false  # Keep triangle fixed; points move freely
 
 # Two triangle mesh instances - one pink, one black
 var triangle_mesh_pink: MeshInstance3D
@@ -35,8 +35,8 @@ var _pickup_count : int = 0
 var _should_freeze_this_pickup : bool = false
 
 func _ready():
-	# Load the grab sphere scene
-	grab_sphere_scene = preload("res://commons/primitives/point/simple_grab_sphere.tscn")
+	# Load the grab sphere with text scene
+	grab_sphere_scene = preload("res://commons/primitives/point/grab_sphere_point_with_text.tscn")
 	
 	create_triangle_meshes()
 	create_grab_spheres()
@@ -151,19 +151,13 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 
 func _on_sphere_picked_up(vertex_index: int, _pickable):
 	print("DEBUG PICKUP")
-	
+	if _pickable and _pickable.has_method("set_freeze_enabled"):
+		_pickable.set_freeze_enabled(false)
 
 func _on_sphere_dropped(vertex_index: int, _pickable):
-	# Debug: Show current settings
-
-	if alter_freeze: 
-		print("DEBUG DROP AND CHANGE STATE !CURRENTFREEZESTATE")
-		# Toggle the freeze state of the grab sphere
-		if _pickable and _pickable.has_method("set_freeze_enabled"):
-			# Get current freeze state and toggle it
-			var current_frozen = _pickable.freeze
-			_pickable.set_freeze_enabled(!current_frozen)
-			print("DEBUG: Toggled freeze state from ", current_frozen, " to ", !current_frozen)
+	# Always freeze on drop so the point stays where you leave it
+	if _pickable and _pickable.has_method("set_freeze_enabled"):
+		_pickable.set_freeze_enabled(true)
 		
 	
 func _process(delta):

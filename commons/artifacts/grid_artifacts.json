@@ -12,6 +12,13 @@
 			"description": "a menu",
 			"scene": "res://commons/primitives/menu/menu.tscn",
 		},
+		"dark_sphere": {
+			"name": "dark_sphere",
+			"lookup_name": "dark_sphere",
+			"description": "a dark_sphere",
+			"scene": "res://commons/primitives/sphere/dark_sphere.tscn",
+		},
+		
 		"point": {
 			"name": "point",
 			"lookup_name": "point",
@@ -235,6 +242,12 @@
 			"lookup_name": "crystal",
 			"description": "A crystal",
 			"scene": "res://commons/primitives/crystal/crystal.tscn",
+		},	
+		"diamonds": {
+			"name": "diamonds",
+			"lookup_name": "diamonds",
+			"description": "diamonds",
+			"scene": "res://commons/primitives/combines/diamonds.tscn",
 		},	
 
 		"diamondtoruscollection": {
@@ -2221,20 +2234,7 @@
 			"lookup_name": "rhizomatic_maze_space",
 			"description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
 			"scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
-			"position": [5.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "alternative_geometries",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.7, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 4.5,
-				"light_position": [0, 1.5, 0]
-			}
+		
 		},
 		"AnickaYiLab": {
 			"name": "AnickaYiLab",
@@ -3164,25 +3164,26 @@
 				"light_position": [0, 1.4, 0]
 			}
 		},
+		"voxelnoise": {
+			"name": "voxelnoise",
+			"lookup_name": "voxelnoise",
+			"description": "voxelnoise",
+			"scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn",
+
+		},
+		"VoxelNoiseROIs": {
+			"name": "VoxelNoiseROIs",
+			"lookup_name": "VoxelNoiseROIs",
+			"description": "VoxelNoiseROIs",
+			"scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn",
+
+		},		
+		
 		"noise_terrain": {
 			"name": "Noise Terrain",
 			"lookup_name": "noise_terrain",
 			"description": "Interactive procedural terrain generation using various noise algorithms and height mapping",
 			"scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
-			"position": [45.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 1.0, 0.6],
-				"light_intensity": 1.3,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
 		},
 		"perlin_noise_clouds": {
 			"name": "Perlin Noise Clouds",

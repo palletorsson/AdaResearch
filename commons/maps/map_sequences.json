@@ -70,21 +70,14 @@
 			"learning_objectives": [
 				"test"
 			],
-			"temps":[ 			
+			"temps":[ 	
+				"Color_3",			
 			],
 			"maps": [
 				"Color_Grabbable",					
 				"Color_1",
 				"Color_2",			
-				"Color_3",		
-				
-				"Pattern_Generation_One",
-				"Pattern_Generation_Two", 
-				"Pattern_Generation_Three",
-				"Pattern_Generation_Four",
-				"Pattern_Generation_Five",
-				"Pattern_Generation_Six",
-				"Pattern_Generation_Seven",													
+												
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
@@ -125,16 +118,13 @@
 				"Pattern recognition"
 			],
 			"temps": [
-				"Tutorial_Disco", 
-				"Tutorial_Row", 				
-				"Tutorial_2D",
-				"Tutorial_2D_Color",
-			],
-			"maps": [
-				"Tutorial_Single",
 				"Tutorial_Col",
 				"Tutorial_Row", 				
 				"Tutorial_2D",
+			],
+			"maps": [
+				"Tutorial_Single",
+
 				"Tutorial_3D",				
 			],
 			"return_to": "lab",
@@ -206,11 +196,7 @@
 				" Random_Four",
 				" Random_Walk",
 				" Random_Seven",
-			],
-			"maps": [
-				"Random_One",	
-				"Randomness_10_PRINT_Algorithm",		
-				"Random_Two",
+								"Random_Two",
 				"Random_Seven", 				
 				"Random_Three",
 				"Random_Four",
@@ -225,6 +211,11 @@
 				"Randomness_Random_Transformations",
 				"Randomness_Random_Walk",
 				"Randomness_TRNG_vs_PRNG",
+			],
+			"maps": [
+				"Random_One",	
+				"Randomness_10_PRINT_Algorithm",		
+
 				"Random_Game", 			
 			],
 			"return_to": "lab",
@@ -287,16 +278,19 @@
 				" Noise_Inside_Noise : in side noise sphere", 
 				" Noise_Volume: perlinvolume:0:1:0.3",
 				" Noise_Space_10 : Noise_Space_10",
+				" Noise_Voxel ",
 				" Noise_Functions: ",
-				" Noise_Perlin_Simplex :  "
-			],
-			"maps": [
-				"Noise_One",
-				"Noise_6_Wall",
+				" Noise_Perlin_Simplex :  ",
+								"Noise_6_Wall",
 				"Noise_Inside_Noise",
 				"Noise_Volume",
 				"Noise_Space_10",
+				"Noise_Voxel",
 				"Noise_Functions",
+			],
+			"maps": [
+				"Noise_One",
+
 				"Noise_Perlin_Simplex",		
 			],
 			"return_to": "lab",
@@ -397,11 +391,14 @@
 				"Tactile interaction design",
 				"Affect theory in digital spaces"
 			],
-			"maps": [
-				"SoftBodies_Cloth_Physics",
+			"content": [
 				"SoftBodies_Soft_Body_Deformation",
 				"SoftBodies_Playground_of_Joy",
 				"SoftBodies_Affect_Theory_Visualization",
+			],
+			"maps": [
+				"SoftBodies_Cloth_Physics",
+
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_softbodies",
@@ -500,10 +497,6 @@
 				"Constraint-based generation"
 			],
 			"temps": [
-
-			],
-			"maps": [
-				"ProceduralGeneration_N_grams", 
 				"ProceduralGeneration_Delaunay_Triangulation",
 				"ProceduralGeneration_Space_Partitioning",
 				"ProceduralGeneration_Markov_Chains",
@@ -525,7 +518,11 @@
 				"ProceduralGeneration_Eight",
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
-				"ProceduralGeneration_Eleven",				
+				"ProceduralGeneration_Eleven",	
+			],
+			"maps": [
+				"ProceduralGeneration_N_grams", 
+			
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

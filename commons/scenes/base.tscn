@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=21 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
+[ext_resource type="PackedScene" uid="uid://cnw8o3dyeavnp" path="res://commons/monitor/2d_in_3d_monitor.tscn" id="3_hea6t"]
 [ext_resource type="PackedScene" uid="uid://do1wif8rpqtwj" path="res://addons/godot-xr-tools/functions/function_gaze_pointer.tscn" id="3_rldw0"]
 [ext_resource type="PackedScene" uid="uid://yrg5yt0yvc1q" path="res://addons/godot-xr-tools/hands/scenes/collision/collision_hand.tscn" id="4_q0s61"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="5_liliu"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="7_i0uie"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_5nlub"]
+[ext_resource type="PackedScene" uid="uid://kyhaogt0a4q8" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="10_5sk3y"]
 [ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="11_y3abi"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
@@ -65,6 +67,9 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00949848, -0.0152526, 0.0454865)
 shape = SubResource("BoxShape3D_upvej")
 
+[node name="messageconsole" parent="XROrigin3D/LeftHand" index="3" instance=ExtResource("3_hea6t")]
+transform = Transform3D(1.74846e-08, -2.6401e-15, -0.4, -6.03983e-08, -0.4, 1.40086e-21, -0.4, 6.03983e-08, -1.74846e-08, -0.0511409, 0.0662661, 0.373891)
+
 [node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" node_paths=PackedStringArray("hand_skeleton") instance=ExtResource("4_q0s61")]
 hand_skeleton = NodePath("RightHand/Hand_Nails_R/Armature/Skeleton3D")
 
@@ -81,6 +86,8 @@ ranged_angle = 10.0
 [node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" instance=ExtResource("13_c1k2x")]
 show_laser = 2
 laser_length = 1
+
+[node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" instance=ExtResource("10_5sk3y")]
 
 [node name="GhostHand" parent="XROrigin3D/RightHand" index="1" instance=ExtResource("15_8l1pr")]
 visible = false

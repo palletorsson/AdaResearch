@@ -19,19 +19,19 @@ varying float vertex_height;
 
 void vertex() {
     world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-    
+
     // Simple sine wave displacement
     float time = TIME * wave_speed;
     float wave1 = sin(world_position.x * wave_frequency + time) * wave_height;
     float wave2 = sin(world_position.z * wave_frequency * 0.7 + time * 1.3) * wave_height * 0.6;
-    
+
     VERTEX.y += wave1 + wave2;
     vertex_height = wave1 + wave2;
-    
+
     // Simple normal calculation
     float dx = cos(world_position.x * wave_frequency + time) * wave_frequency * wave_height;
     float dz = cos(world_position.z * wave_frequency * 0.7 + time * 1.3) * wave_frequency * 0.7 * wave_height * 0.6;
-    
+
     NORMAL = normalize(vec3(-dx, 1.0, -dz));
 }
 
@@ -40,19 +40,19 @@ void fragment() {
     float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
     depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
     float water_depth = depth + VERTEX.z;
-    
+
     // Simple depth-based color mixing
     float depth_factor = clamp(water_depth * 0.5, 0.0, 1.0);
     vec3 final_color = mix(water_color.rgb, deep_color.rgb, depth_factor);
-    
+
     // Add screen color for refraction effect
     vec3 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
     final_color = mix(screen_color, final_color, water_color.a);
-    
+
     // Simple fresnel effect
     float fresnel = 1.0 - dot(normalize(NORMAL), normalize(VIEW));
     fresnel = pow(fresnel, 2.0);
-    
+
     ALBEDO = mix(final_color, final_color * 1.2, fresnel * 0.3);
     ROUGHNESS = roughness;
     METALLIC = metallic;

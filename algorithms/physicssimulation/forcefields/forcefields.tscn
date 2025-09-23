@@ -1,20 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxq"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xqxr"]
-albedo_color = Color(0.2, 0.6, 1, 1)
-metallic = 0.8
-roughness = 0.2
-emission_enabled = true
-emission = Color(0.1, 0.3, 0.8, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xqxr"]
-albedo_color = Color(1, 0.3, 0.2, 1)
-metallic = 0.8
-roughness = 0.2
-emission_enabled = true
-emission = Color(0.8, 0.1, 0.1, 1)
-emission_energy_multiplier = 0.5
+[ext_resource type="Script" uid="uid://cev6qjrqcn3sa" path="res://algorithms/physicssimulation/forcefields/ForceFields.gd" id="1_aim8i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xqxr"]
 albedo_color = Color(0.2, 1, 0.3, 1)
@@ -25,6 +11,8 @@ emission = Color(0.1, 0.8, 0.1, 1)
 emission_energy_multiplier = 0.5
 
 [node name="ForceFields" type="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_aim8i")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8.66025)
@@ -34,25 +22,7 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 light_energy = 1.5
 shadow_enabled = true
 
-[node name="GravityField" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="GravityCenter" type="CSGBox3D" parent="GravityField"]
-material_override = SubResource("StandardMaterial3D_0xqxr")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="GravityParticles" type="Node3D" parent="GravityField"]
-
-[node name="MagneticField" type="Node3D" parent="."]
-
-[node name="MagneticCenter" type="CSGBox3D" parent="MagneticField"]
-material_override = SubResource("StandardMaterial3D_1xqxr")
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="MagneticParticles" type="Node3D" parent="MagneticField"]
-
 [node name="FluidDragField" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="FluidDragCenter" type="CSGBox3D" parent="FluidDragField"]
 material_override = SubResource("StandardMaterial3D_2xqxr")
@@ -62,10 +32,4 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="FieldLines" type="Node3D" parent="."]
 
-[node name="GravityLines" type="Node3D" parent="FieldLines"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="MagneticLines" type="Node3D" parent="FieldLines"]
-
 [node name="FluidDragLines" type="Node3D" parent="FieldLines"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)

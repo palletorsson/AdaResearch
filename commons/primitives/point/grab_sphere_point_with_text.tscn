@@ -26,6 +26,7 @@ radial_segments = 32
 rings = 16
 
 [node name="GrabSphere" instance=ExtResource("1_1t2g7")]
+freeze = true
 script = ExtResource("2_3uxjj")
 alternate_material = SubResource("StandardMaterial3D_nukvf")
 alter_freeze = false

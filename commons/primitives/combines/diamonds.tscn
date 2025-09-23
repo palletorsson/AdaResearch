@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bojnedh5yiuj6"]
+
+[ext_resource type="Script" uid="uid://b32y1i0qtvkyr" path="res://commons/primitives/combines/diamonds.gd" id="1_tnyde"]
+
+[node name="Diamonds" type="Node3D"]
+script = ExtResource("1_tnyde")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.986731, 0.162362, 0, -0.162362, 0.986731, 0, 8.67747, 20.5819)

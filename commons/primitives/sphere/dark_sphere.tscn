@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7gpc47eqau2t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6p2k"]
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_s108s"]
+radius = 20.0
+height = 40.0
+
+[node name="DarkSphere" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_r6p2k")
+mesh = SubResource("SphereMesh_s108s")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.695341, 0)
+light_energy = 6.0
