@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://0deda12rinid"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pcgen"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_7ibjv"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_45yyq"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.195583, 0.0114649, 0.201389)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.195, 0.01, 0.205)
+
+[node name="GrabPaper" instance=ExtResource("1_pcgen")]
+script = ExtResource("2_7ibjv")
+alternate_material = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = true
+snap_falloff_distance = 1.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.000113619, -4.0289e-05, -0.00224172)
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_45yyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.073151, 0, 0.0739675)
+
+[node name="Label3D" type="Label3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0742994, 0.0151616, 0.00518098)
+pixel_size = 0.0004
+modulate = Color(1, 0.411765, 1, 1)
+text = "in godot 4 3d make a tscn. 7 by 7 shelf, I will put virtual sticker in so the whole should be 20 cm.  "
+horizontal_alignment = 0
+uppercase = true
+autowrap_mode = 3
+width = 400.0

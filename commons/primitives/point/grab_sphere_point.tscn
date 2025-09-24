@@ -26,6 +26,9 @@ rings = 16
 script = ExtResource("2_3uxjj")
 alternate_material = SubResource("StandardMaterial3D_nukvf")
 alter_freeze = true
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
 ranged_grab_method = 0
 second_hand_grab = 2
 

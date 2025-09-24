@@ -4,8 +4,6 @@
 	"description": "Artifact definitions for the Lab environment",
 	
 	"artifacts": {
-		
-		
 		"menu": {
 			"name": "menu",
 			"lookup_name": "menu",
@@ -18,7 +16,6 @@
 			"description": "a dark_sphere",
 			"scene": "res://commons/primitives/sphere/dark_sphere.tscn",
 		},
-		
 		"point": {
 			"name": "point",
 			"lookup_name": "point",
@@ -50,14 +47,12 @@
 			"description": "line",
 			"scene": "res://commons/primitives/line/line.tscn",
 		},
-		
 		"line_collection": {
 			"name": "line_collection",
 			"lookup_name": "line_collection",
 			"description": "line_collection",
 			"scene": "res://commons/primitives/line/line_collection.tscn",
 		},	
-		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
 			"lookup_name": "animatedcubebuilder",
@@ -158,6 +153,12 @@
 			"lookup_name": "pyramid",
 			"description": "A pyramid",
 			"scene": "res://commons/primitives/pyramid/pyramid.tscn",
+		},
+		"pyramid_edit": {
+			"name": "pyramid_edit",
+			"lookup_name": "pyramid_edit",
+			"description": "A pyramid_edit",
+			"scene": "res://commons/primitives/pyramid/pyramid_edit.tscn",
 		},
 			
 		"tetrahedron": {
@@ -3276,26 +3277,24 @@
 			"description": "grabcolorcollection",
 			"scene": "res://algorithms/color/grabcolor/grabcolorcollection.tscn",
 		},
+		"shelf": {
+			"name": "shelf",
+			"lookup_name": "shelf",
+			"description": "shelf",
+			"scene": "res://algorithms/color/grabcolor/shelf.tscn",
+		},
+		"shelf_with_stickers": {
+			"name": "shelf_with_stickers",
+			"lookup_name": "shelf_with_stickers",
+			"description": "shelf_with_stickers",
+			"scene": "res://algorithms/color/grabcolor/shelf_with_stickers.tscn",
+		},
 		
 		"disco_lights": {
 			"name": "disco_lights",
 			"lookup_name": "disco_lights",
 			"description": "Interactive colored line visualization and manipulation algorithms",
 			"scene": "res://algorithms/color/colorball/disco_lights.tscn",
-			"position": [0.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "color_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
 		},
 		 "advancedglitch": {
 			"name": "advancedglitch",

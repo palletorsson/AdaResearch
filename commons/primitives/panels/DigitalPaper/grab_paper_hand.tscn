@@ -1,0 +1,44 @@
+[gd_scene load_steps=11 format=3 uid="uid://bpk873ki1ypt6"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_ouhpl"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_7ot0p"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_n47vr"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="4_1xlp2"]
+[ext_resource type="Animation" uid="uid://ca21ej1p3g2yt" path="res://addons/godot-xr-tools/hands/animations/right/Pinch Tight.res" id="5_yxvhi"]
+[ext_resource type="Script" uid="uid://dnbxhbldklmo7" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_ymcao"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.195583, 0.0114649, 0.201389)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhi2d"]
+albedo_color = Color(0.427493, 0.427493, 0.427493, 1)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.195, 0.01, 0.205)
+
+[sub_resource type="Resource" id="Resource_sfeqh"]
+script = ExtResource("6_ymcao")
+open_pose = ExtResource("5_yxvhi")
+closed_pose = ExtResource("5_yxvhi")
+
+[node name="GrabPaper" instance=ExtResource("1_ouhpl")]
+script = ExtResource("2_7ot0p")
+alternate_material = null
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000113619, -4.0289e-05, -0.00224172)
+shape = SubResource("7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_hhi2d")
+mesh = SubResource("8")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_n47vr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.073151, 0, 0.0739675)
+
+[node name="GrabPointHandleRight" parent="." index="3" instance=ExtResource("4_1xlp2")]
+transform = Transform3D(1, 0, 0, 0, 0.841605, 0.540093, 0, -0.540093, 0.841605, 0.127708, -0.0132304, -0.0106687)
+hand_pose = SubResource("Resource_sfeqh")

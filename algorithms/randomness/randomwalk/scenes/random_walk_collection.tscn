@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b12x1wmigmlmo"]
+[gd_scene load_steps=7 format=3 uid="uid://b12x1wmigmlmo"]
 
 [ext_resource type="PackedScene" uid="uid://d28m400o724g5" path="res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn" id="1_0f1eu"]
 [ext_resource type="Script" uid="uid://b11b8g0mx4lvc" path="res://algorithms/randomness/randomwalk/scenes/place_me.gd" id="1_vt5mq"]
+[ext_resource type="PackedScene" uid="uid://bqx8y7j2qk0dw" path="res://algorithms/color/grabcolor/shelf.tscn" id="3_a6fw8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_t7wqy"]
 viewport_path = NodePath("placeMe/SubViewport")
@@ -65,3 +66,6 @@ texture = SubResource("ViewportTexture_t7wqy")
 transform = Transform3D(-5.4, -2.6658e-28, -1.74846e-08, 0, 5.4, 0, 4.72083e-07, -3.04932e-21, -0.2, 8.9407e-08, 0, -0.10808)
 material_override = SubResource("StandardMaterial3D_vt5mq")
 mesh = SubResource("BoxMesh_xb2ei")
+
+[node name="Shelf7x7" parent="." instance=ExtResource("3_a6fw8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

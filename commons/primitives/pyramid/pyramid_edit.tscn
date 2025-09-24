@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmslb21hrou32"]
+
+[ext_resource type="Script" uid="uid://b4kl6sf6ju82d" path="res://commons/primitives/pyramid/pyramid_edit.gd" id="1_yfp5d"]
+
+[node name="pyramid_edit" type="Node3D"]
+script = ExtResource("1_yfp5d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.01387)

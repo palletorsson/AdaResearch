@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnw8o3dyeavnp"]
+[gd_scene load_steps=6 format=3 uid="uid://cnw8o3dyeavnp"]
 
 [ext_resource type="PackedScene" uid="uid://bvq8x7y2n3m4p" path="res://commons/monitor/VRconsole.tscn" id="1_nfc24"]
 
@@ -6,6 +6,12 @@
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfc24"]
+albedo_color = Color(1, 0.634488, 0.739283, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ypg02"]
+size = Vector3(0.62, 0.61, 0.04)
 
 [node name="messageconsole" type="Node3D"]
 
@@ -20,3 +26,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202103, 0.207537, 0.374844)
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.116, 0, 0, 0, 0.116, 0, 0, 0, 0.116, 0.200729, 0.242676, -0.0043356)
 texture = SubResource("ViewportTexture_btd14")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202992, 0.244488, -0.0269377)
+material_override = SubResource("StandardMaterial3D_nfc24")
+mesh = SubResource("BoxMesh_ypg02")
