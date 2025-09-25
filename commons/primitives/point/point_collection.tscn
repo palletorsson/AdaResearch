@@ -6,16 +6,24 @@
 
 [node name="GrabSphere2" parent="." instance=ExtResource("1_qisu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.2, 0)
-freeze = true
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
 
 [node name="GrabSphere" parent="." instance=ExtResource("1_qisu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
-freeze = true
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
 
 [node name="GrabSphere3" parent="." instance=ExtResource("1_qisu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
-freeze = true
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
 
 [node name="GrabSphere4" parent="." instance=ExtResource("1_qisu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, 0)
-freeze = true
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0

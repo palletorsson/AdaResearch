@@ -13,24 +13,6 @@ var current_line: MeshInstance3D
 var length_label: Label3D
 var last_distance: float = 0.0
 
-# Educational messages about lines from queer CGI perspective
-var _fallback_line_messages := [
-	"A line is more than geometry - it's a relationship, a connection between two points choosing to be linked.",
-	"Lines have direction and intention, like reaching out to make contact across digital space.",
-	"The distance between points doesn't diminish the connection - it defines the relationship's span.",
-	"In queer theory and CGI, lines represent chosen bonds that create structure through connection.",
-	"Two points become more than themselves when joined by a line - community amplifies identity.",
-	"Lines are vectors of possibility, paths between where we are and where we're going.",
-	"Every line has length, direction, and purpose - just like the connections we build in life.",
-	"Lines create edges, boundaries, and bridges - they define what's inside and outside, together and apart.",
-	"From lines come polygons, from polygons come surfaces - connection builds complexity.",
-	"A line is the first step from isolation to community, from single points to shared structure."
-]
-
-# Track message index and whether messages have been sent
-var _fallback_message_index := 0
-var _messages_completed := false
-
 func _ready():
 	create_length_label()
 	update_connections()
@@ -50,6 +32,7 @@ func create_length_label():
 	length_label.modulate = Color(1.0, 1.0, 1.0, 0.8)
 	length_label.outline_size = 4
 	length_label.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+	length_label.scale = Vector3.ONE * 0.1
 	add_child(length_label)
 
 func update_connections():
@@ -160,20 +143,10 @@ func clear_connections():
 func refresh_connections():
 	update_connections()
 
-func _get_next_fallback_message() -> String:
-	if _fallback_message_index >= _fallback_line_messages.size():
-		return ""  # No more messages available
-	
-	var message = _fallback_line_messages[_fallback_message_index]
-	_fallback_message_index += 1
-	return message
 
 # Called when either point is dropped
 func _on_point_dropped(_pickable):
-	if _messages_completed:
-		return  # Don't send more messages after all have been shown
-	
-	# Send map-aware educational message via TextManager first
+	# Send map-aware educational message via TextManager
 	var context := {
 		"length": "%.2f" % last_distance,
 		"length_raw": last_distance
@@ -183,9 +156,4 @@ func _on_point_dropped(_pickable):
 		handled = TextManager.trigger_event("line_drop", context)
 	if handled:
 		return
-	var educational_message = _get_next_fallback_message()
-	if educational_message != "":
-		var length_context = " [Current line length: %.2fm]" % last_distance
-		GameManager.add_console_message(educational_message + length_context, "info", "queer_cgi_line")
-	else:
-		_messages_completed = true
+	push_warning("Line: Missing line_drop text entry for current map")

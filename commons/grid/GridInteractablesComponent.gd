@@ -220,6 +220,7 @@ func generate_interactables(interactable_data):
 				var parsed = _parse_interactable_token(token)
 				var lookup_name: String = parsed.get("lookup_name", "")
 				var overrides: Dictionary = parsed.get("overrides", {})
+				var config_data: Dictionary = parsed.get("config_data", {})
 				
 				if has_artifact(lookup_name):
 					var y_pos = structure_component.find_highest_y_at(x, z)
@@ -228,7 +229,7 @@ func generate_interactables(interactable_data):
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
 					
-					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides):
+					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides, config_data):
 						interactable_count += 1
 					else:
 						placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
@@ -246,7 +247,7 @@ func generate_interactables(interactable_data):
 	interactables_generation_complete.emit(interactable_count)
 
 # Place a single artifact using lookup_name
-func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}) -> bool:
+func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
 	var position = Vector3(x, y, z) * total_size
 	
 	var artifact_info = get_artifact_info(lookup_name)
@@ -333,6 +334,10 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Connect signals if artifact has them
 	_connect_artifact_signals(artifact_object, lookup_name)
 	
+	# Apply configuration data if provided (using # syntax)
+	if not config_data.is_empty():
+		_apply_artifact_config(artifact_object, config_data, lookup_name)
+	
 	parent_node.add_child(artifact_object)
 	
 	# Set owner for editor
@@ -352,9 +357,17 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 #   "scifi_panel_wall:45"                 → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
 #   "random_number_book_page_1955:0:2.5:1.2" → { lookup_name: "random_number_book_page_1955", overrides: { rotation_y_degrees: 0, y_position: 2.5, uniform_scale: 1.2 } }
 #   "scifi_panel_wall:45|Label Text"      → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45, label_text: "Label Text" } }
+#   "clipboard#pages:point,line,triangle" → { lookup_name: "clipboard", config_data: { pages: "point,line,triangle" } }
+#   "clipboard#title:Getting Started"     → { lookup_name: "clipboard", config_data: { title: "Getting Started" } }
+#   "clipboard#pages:point,line#title:My Clipboard" → { lookup_name: "clipboard", config_data: { pages: "point,line", title: "My Clipboard" } }
 func _parse_interactable_token(token: String) -> Dictionary:
-	var result := {"lookup_name": token, "overrides": {}}
+	var result := {"lookup_name": token, "overrides": {}, "config_data": {}}
 	
+	# Handle # configuration syntax first (e.g., "clipboard#pages:point,line,triangle")
+	if token.find("#") != -1:
+		return _parse_config_token(token)
+	
+	# Handle legacy : syntax for overrides
 	if token.find(":") == -1:
 		return result
 	
@@ -412,6 +425,68 @@ func _parse_interactable_token(token: String) -> Dictionary:
 				result.overrides["uniform_scale"] = float(scale_str)
 	
 	return result
+
+# Parse configuration token syntax with # (e.g., "clipboard#pages:point,line,triangle")
+# Format: "artifact_name#config_key:config_value[#config_key2:config_value2]..."
+# Examples:
+#   "clipboard#pages:point,line,triangle"         → { lookup_name: "clipboard", config_data: { pages: "point,line,triangle" } }
+#   "clipboard#title:Getting Started"             → { lookup_name: "clipboard", config_data: { title: "Getting Started" } }
+#   "clipboard#pages:point,line#title:My Clips"   → { lookup_name: "clipboard", config_data: { pages: "point,line", title: "My Clips" } }
+#   "infokiosk#message:Hello World#color:red"     → { lookup_name: "infokiosk", config_data: { message: "Hello World", color: "red" } }
+func _parse_config_token(token: String) -> Dictionary:
+	var result := {"lookup_name": "", "overrides": {}, "config_data": {}}
+	
+	# Split on # to separate artifact name from config parts
+	var hash_parts = token.split("#", false)
+	if hash_parts.size() < 2:
+		result.lookup_name = token
+		return result
+	
+	var artifact_name = hash_parts[0].strip_edges()
+	result.lookup_name = artifact_name
+	
+	# Process all config parts (supports multiple # configs)
+	for i in range(1, hash_parts.size()):
+		var config_part = hash_parts[i].strip_edges()
+		
+		# Parse config part (format: "key:value")
+		if config_part.find(":") != -1:
+			var config_parts = config_part.split(":", false, 1)  # Split only on first ":"
+			if config_parts.size() == 2:
+				var config_key = config_parts[0].strip_edges()
+				var config_value = config_parts[1].strip_edges()
+				result.config_data[config_key] = config_value
+			else:
+				# No value provided, just key
+				result.config_data[config_part] = true
+		else:
+			# No colon, treat entire config_part as a key with true value
+			result.config_data[config_part] = true
+	
+	return result
+
+# Apply configuration data to an artifact using the # syntax
+# This is a general system that allows any artifact to receive custom configuration
+func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, lookup_name: String):
+	print("GridInteractablesComponent: Applying config to '%s': %s" % [lookup_name, config_data])
+	
+	# Set config data as metadata for the artifact to read
+	for config_key in config_data.keys():
+		var config_value = config_data[config_key]
+		var meta_key = "config_%s" % config_key
+		artifact_object.set_meta(meta_key, config_value)
+		print("  → Set metadata '%s' = '%s'" % [meta_key, str(config_value)])
+	
+	# Try to call a configuration method on the artifact if it exists
+	# This allows artifacts to handle their own configuration logic
+	if artifact_object.has_method("apply_grid_config"):
+		artifact_object.call_deferred("apply_grid_config", config_data)
+		print("  → Called apply_grid_config() method")
+	elif artifact_object.has_method("configure"):
+		artifact_object.call_deferred("configure", config_data)
+		print("  → Called configure() method")
+	else:
+		print("  → No configuration method found, using metadata only")
 
 # Safely set a property if the node exposes it
 func _try_set_property(obj: Object, prop: String, value) -> void:

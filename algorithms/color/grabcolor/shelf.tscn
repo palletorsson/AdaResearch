@@ -4,7 +4,6 @@
 
 [node name="Shelf7x7" type="Node3D"]
 script = ExtResource("1_m8x7k")
-create_stickers = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.677799, 1.08774)

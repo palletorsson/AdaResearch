@@ -178,9 +178,8 @@ func get_console_messages() -> Array[Dictionary]:
 func add_test_console_messages():
 	add_console_message("Ada Research", "info", "system")
 	add_console_message("A meta quest into the world of algorithms", "info", "system")	
-	add_console_message("The artistic research project Ada Research is a virtual reality (VR) world and a meta-quest into visual algorithms. The name originates from Ada Lovelace, the world's first programmer, who wrote about the relationship between computers and generative art in 1842.", "warning", "health")
-	add_console_message("Critical error in system detected, entropy to low", "error", "save")
-
+	add_console_message("There was no time when there was nothing. First there was light and a body. Thrown into space. You, inside the experiment.", "warning", "health")
+	
 
 # Regenerate management
 func request_regenerate(origin: Vector3, targets: Array = [], metadata: Dictionary = {}):

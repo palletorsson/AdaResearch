@@ -1,7 +1,18 @@
-[gd_scene load_steps=14 format=4 uid="uid://bqaqcvdoccfdq"]
+[gd_scene load_steps=24 format=4 uid="uid://bqaqcvdoccfdq"]
 
-[ext_resource type="Script" uid="uid://dig18jy1o8b8e" path="res://commons/context/clipboard/clipboard.gd" id="1_edgjo"]
-[ext_resource type="PackedScene" uid="uid://djkjuy7wct10q" path="res://commons/primitives/cubes/grab_cube.tscn" id="2_2qefi"]
+[ext_resource type="Script" path="res://Common/Scripts/clipboard.gd" id="1_edgjo"]
+[ext_resource type="Script" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="1_f3d0w"]
+[ext_resource type="Material" uid="uid://rffo8pgalbag" path="res://assets/wahooney.itch.io/blue_grid.tres" id="2_2igq3"]
+[ext_resource type="Texture2D" uid="uid://rvkboex0kxkp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_board_Diffuse.png" id="4_kdgph"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_nusvq"]
+[ext_resource type="Texture2D" uid="uid://cqgn256xk30wp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_page_Diffuse.png" id="5_ku4vn"]
+[ext_resource type="Script" path="res://Common/Scripts/reset_canvas_trigger.gd" id="7_u53ab"]
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.268137, 0.0233963, 0.366382)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04adc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbtao"]
 albedo_color = Color(0.314939, 0.159426, 0.0158957, 1)
@@ -10,6 +21,7 @@ albedo_color = Color(0.314939, 0.159426, 0.0158957, 1)
 resource_name = "boardmaterial"
 transparency = 4
 cull_mode = 2
+albedo_texture = ExtResource("4_kdgph")
 metallic = 1.0
 roughness = 0.552786
 uv1_offset = Vector3(0, -1, 0)
@@ -52,6 +64,7 @@ shadow_mesh = SubResource("ArrayMesh_uargb")
 resource_name = "pagematerial"
 transparency = 4
 cull_mode = 2
+albedo_texture = ExtResource("5_ku4vn")
 roughness = 0.292893
 uv1_offset = Vector3(0, -1, 0)
 
@@ -125,24 +138,40 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_kfwob")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2exk"]
+size = Vector3(0.144881, 0.119266, 0.467804)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3egy"]
+transparency = 1
+albedo_color = Color(1, 0.439216, 1, 0.290196)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o7p37"]
+
 [node name="clipboard" type="Node3D"]
 script = ExtResource("1_edgjo")
 addxp = 22
-title = "Code Snippets"
-description_sets = Array[String](["Welcome! This clipboard shows rich code examples. Try: code#point", "Connect points together: code#line", "Build surfaces with: code#triangle", "Add visual effects: code#material"])
+title = "Hello world"
+description_sets = Array[String](["Every artifact has a script. Use code:point to start making space.", "Need structure? Combine them with code:line and then close the surface with code:triangle."])
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0, 0, 0.374449)
+[node name="GrabCube" type="RigidBody3D" parent="."]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_f3d0w")
+alternate_material = ExtResource("2_2igq3")
+ranged_grab_method = 0
+second_hand_grab = 2
 
-[node name="GrabCube" parent="." instance=ExtResource("2_2qefi")]
-transform = Transform3D(-0.358235, 0, -0.110872, 0, 0.375, 0, 0.110872, 0, -0.358235, -0.110758, 0, -0.274743)
-snap_to_shelf = true
-snap_max_distance = 0.08
-snap_match_rotation = false
-snap_falloff_distance = 1.0
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00210572, 0.0129178, 0.122245)
+visible = false
+shape = SubResource("7")
+
+[node name="HighlightRing" parent="GrabCube" instance=ExtResource("4_nusvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109342, 0.00359024, 0.279247)
+material_override = SubResource("StandardMaterial3D_04adc")
 
 [node name="clipboard" type="Node3D" parent="GrabCube"]
-transform = Transform3D(2.66667, 0, 0, 0, 2.66667, 0, 0, 0, 2.66667, -0.282333, 0, -0.799723)
 
 [node name="board" type="MeshInstance3D" parent="GrabCube/clipboard"]
 material_override = SubResource("StandardMaterial3D_jbtao")
@@ -189,5 +218,31 @@ horizontal_alignment = 0
 autowrap_mode = 3
 width = 300.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25505, 0)
+[node name="ResetCanvas" type="Area3D" parent="GrabCube/clipboard"]
+transform = Transform3D(0.00203103, 0, -0.269992, 0, 0.27, 0, 0.269992, 0, 0.00203103, 0, -0.0943234, 0.12193)
+script = ExtResource("7_u53ab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabCube/clipboard/ResetCanvas"]
+transform = Transform3D(1, 0, -2.3842e-07, 0, 1, 0, 2.3842e-07, 0, 1, 0.653194, 0.256977, 0.250938)
+shape = SubResource("BoxShape3D_f2exk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GrabCube/clipboard/ResetCanvas"]
+transform = Transform3D(0.095, 0, 0, 0, 0.126, 0, 0, 0, 0.365, 0.609658, 0.355734, 0.247258)
+material_override = SubResource("StandardMaterial3D_y3egy")
+mesh = SubResource("BoxMesh_o7p37")
+
+[node name="Label3D" type="Label3D" parent="GrabCube/clipboard/ResetCanvas"]
+transform = Transform3D(-2.22928e-08, -0.51, 2.22928e-08, 1.9489e-15, 2.22928e-08, 0.51, -0.51, 2.22928e-08, 9.7445e-16, 0.602639, 0.429115, 0.251396)
+text = "next
+"
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000106245, 0.0932848, -0.0333213)
+visible = false
+text = "debug"
+font_size = 12
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0, 0, 0.374449)
+
+[connection signal="area_entered" from="GrabCube/clipboard/ResetCanvas" to="GrabCube/clipboard/ResetCanvas" method="_on_area_entered"]

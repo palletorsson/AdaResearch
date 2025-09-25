@@ -154,12 +154,33 @@ func _on_sphere_picked_up(vertex_index: int, _pickable):
 	if _pickable and _pickable.has_method("set_freeze_enabled"):
 		_pickable.set_freeze_enabled(false)
 
-func _on_sphere_dropped(vertex_index: int, _pickable):
+func _on_sphere_dropped(_pickable, vertex_index: int):
 	# Always freeze on drop so the point stays where you leave it
 	if _pickable and _pickable.has_method("set_freeze_enabled"):
 		_pickable.set_freeze_enabled(true)
-		
-	
+	print("triangle sphere dropped ")
+	var triangle_context := {
+		"vertex": vertex_index,
+		"pink_area": "%.2f" % get_triangle_area(triangle1_indices),
+		"black_area": "%.2f" % get_triangle_area(triangle2_indices),
+		"total_area": "%.2f" % (get_triangle_area(triangle1_indices) + get_triangle_area(triangle2_indices))
+	}
+
+	var handled := false
+	if typeof(TextManager) != TYPE_NIL and TextManager.has_method("trigger_event"):
+		handled = TextManager.trigger_event("triangle_drop", triangle_context)
+
+	if handled and typeof(GameManager) != TYPE_NIL and GameManager.has_method("add_console_message"):
+		var status := "Triangle vertex %d dropped. Pink area %s, black area %s, total area %s" % [
+			triangle_context["vertex"],
+			triangle_context["pink_area"],
+			triangle_context["black_area"],
+			triangle_context["total_area"]
+		]
+		GameManager.add_console_message(status, "info", "interactive_triangle")
+	elif not handled:
+		push_warning("InteractiveTriangle: Missing triangle_drop text entry for current map")
+
 func _process(delta):
 	_sync_vertices_from_spheres()
 

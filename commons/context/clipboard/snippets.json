@@ -1,0 +1,69 @@
+{
+  "_metadata": {
+    "description": "Code snippets for the clipboard system",
+    "version": "1.0",
+    "format": "Rich text with BBCode support"
+  },
+  "snippets": {
+    "point": {
+      "title": "Create a Point",
+      "summary": "Instantiate a point and place it in 3D space:",
+      "code": "var point := Node3D.new()\npoint.name = \"Point\"\npoint.position = Vector3.ZERO\nadd_child(point)",
+      "tags": ["geometry", "basic", "3d"]
+    },
+    "line": {
+      "title": "Connect Two Points",
+      "summary": "Generate a MeshInstance3D line segment between two positions:",
+      "code": "func create_line(start: Vector3, finish: Vector3) -> MeshInstance3D:\n\tvar mesh := MeshInstance3D.new()\n\tvar st := SurfaceTool.new()\n\tst.begin(Mesh.PRIMITIVE_LINES)\n\tst.add_vertex(start)\n\tst.add_vertex(finish)\n\tmesh.mesh = st.commit()\n\treturn mesh",
+      "tags": ["geometry", "line", "mesh"]
+    },
+    "triangle": {
+      "title": "Build a Triangle",
+      "summary": "SurfaceTool can emit a filled triangle with a normal:",
+      "code": "func create_triangle(a: Vector3, b: Vector3, c: Vector3) -> MeshInstance3D:\n\tvar st := SurfaceTool.new()\n\tst.begin(Mesh.PRIMITIVE_TRIANGLES)\n\tvar normal := (b - a).cross(c - a).normalized()\n\tst.set_normal(normal)\n\tst.add_vertex(a)\n\tst.add_vertex(b)\n\tst.add_vertex(c)\n\tvar mesh := MeshInstance3D.new()\n\tmesh.mesh = st.commit()\n\treturn mesh",
+      "tags": ["geometry", "triangle", "surface"]
+    },
+    "vector": {
+      "title": "Vector Operations",
+      "summary": "Essential vector operations in Godot:",
+      "code": "# Create vectors\nvar v1 = Vector3(1, 0, 0)\nvar v2 = Vector3(0, 1, 0)\n\n# Vector operations\nvar dot_product = v1.dot(v2)\nvar cross_product = v1.cross(v2)\nvar magnitude = v1.length()\nvar normalized = v1.normalized()",
+      "tags": ["math", "vector", "operations"]
+    },
+    "transform": {
+      "title": "3D Transformations",
+      "summary": "Apply transformations to 3D objects:",
+      "code": "# Translation\nnode.position += Vector3(1, 0, 0)\n\n# Rotation\nnode.rotation_degrees.y += 45\n\n# Scale\nnode.scale = Vector3(2, 2, 2)\n\n# Transform matrix\nvar transform = Transform3D()\ntransform.origin = Vector3(0, 5, 0)\nnode.transform = transform",
+      "tags": ["transform", "3d", "movement"]
+    },
+    "material": {
+      "title": "Create Materials",
+      "summary": "Set up materials for 3D objects:",
+      "code": "var material = StandardMaterial3D.new()\nmaterial.albedo_color = Color.RED\nmaterial.metallic = 0.8\nmaterial.roughness = 0.2\nmaterial.emission_enabled = true\nmaterial.emission = Color.BLUE\nmesh_instance.material_override = material",
+      "tags": ["material", "rendering", "appearance"]
+    },
+    "mesh": {
+      "title": "Custom Mesh Creation",
+      "summary": "Build custom meshes using ArrayMesh:",
+      "code": "var array_mesh = ArrayMesh.new()\nvar arrays = []\narrays.resize(Mesh.ARRAY_MAX)\n\nvar vertices = PackedVector3Array()\nvar normals = PackedVector3Array()\nvar indices = PackedInt32Array()\n\n# Add vertex data\nvertices.append(Vector3(0, 1, 0))\nvertices.append(Vector3(-1, -1, 0))\nvertices.append(Vector3(1, -1, 0))\n\n# Set arrays and create surface\narrays[Mesh.ARRAY_VERTEX] = vertices\narray_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)",
+      "tags": ["mesh", "procedural", "geometry"]
+    },
+    "animation": {
+      "title": "Simple Animations",
+      "summary": "Create smooth animations with Tween:",
+      "code": "var tween = create_tween()\ntween.set_loops()\ntween.tween_property(node, \"position\", Vector3(5, 0, 0), 2.0)\ntween.tween_property(node, \"position\", Vector3(0, 0, 0), 2.0)",
+      "tags": ["animation", "tween", "movement"]
+    },
+    "collision": {
+      "title": "Collision Detection",
+      "summary": "Set up collision detection for objects:",
+      "code": "# Add collision body\nvar body = RigidBody3D.new()\nvar collision_shape = CollisionShape3D.new()\nvar shape = BoxShape3D.new()\nshape.size = Vector3(1, 1, 1)\ncollision_shape.shape = shape\nbody.add_child(collision_shape)\nadd_child(body)",
+      "tags": ["physics", "collision", "detection"]
+    },
+    "vr": {
+      "title": "VR Interaction",
+      "summary": "Basic VR controller interaction:",
+      "code": "extends XRToolsPickable\n\nfunc _on_picked_up(pickable):\n\tprint(\"Object picked up!\")\n\t# Apply glow effect\n\tvar material = get_surface_override_material(0)\n\tif material:\n\t\tmaterial.emission_enabled = true\n\nfunc _on_dropped(pickable):\n\tprint(\"Object dropped!\")\n\t# Remove glow effect\n\tvar material = get_surface_override_material(0)\n\tif material:\n\t\tmaterial.emission_enabled = false",
+      "tags": ["vr", "interaction", "xr-tools"]
+    }
+  }
+}

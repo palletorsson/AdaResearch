@@ -17,10 +17,10 @@ size = Vector3(0.195, 0.01, 0.205)
 [node name="GrabPaper" instance=ExtResource("1_4i0xi")]
 script = ExtResource("2_5e8to")
 alternate_material = null
-snap_to_shelf = null
-snap_max_distance = null
-snap_match_rotation = null
-snap_falloff_distance = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
 ranged_grab_method = 0
 second_hand_grab = 2
 
