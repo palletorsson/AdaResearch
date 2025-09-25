@@ -13,6 +13,9 @@ var game_paused: bool = false
 var max_player_health: float = 100.0
 var player_health: float = 100.0
 
+# Map tracking
+var current_map_name: String = ""
+
 # Game settings
 var sound_enabled: bool = true
 var music_volume: float = 0.8
@@ -26,6 +29,7 @@ signal game_state_changed(is_started: bool, is_paused: bool)
 signal regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionary)
 signal health_updated(new_health: float)
 signal player_damaged(amount: float, new_health: float)
+signal current_map_changed(map_name: String)
 var console_messages: Array[Dictionary] = []
 var max_console_messages: int = 100
 
@@ -127,6 +131,17 @@ func _handle_player_death() -> void:
 	print("GameManager: Player health depleted")
 
 # Message management
+func set_current_map(map_name: String) -> void:
+	var normalized_name := str(map_name).strip_edges()
+	if current_map_name == normalized_name:
+		return
+	current_map_name = normalized_name
+	emit_signal("current_map_changed", current_map_name)
+	print("GameManager: Current map set to %s" % current_map_name)
+
+func get_current_map() -> String:
+	return current_map_name
+
 func set_message(message: String) -> void:
 	current_message = message
 	emit_signal("message_updated", current_message)

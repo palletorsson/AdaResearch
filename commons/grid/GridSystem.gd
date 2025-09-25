@@ -154,6 +154,9 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	# Start grid generation
 	_generate_grid()
 	
+	if typeof(GameManager) != TYPE_NIL and GameManager.has_method("set_current_map"):
+		GameManager.set_current_map(loaded_map_name)
+	
 	emit_signal("map_loaded", loaded_map_name, format)
 
 # Handle data loading failure

@@ -440,4 +440,6 @@ func mark_map_completed(map_name: String):
 
 # Set current map
 func set_current_map(map_name: String):
-	current_map = map_name 
+	current_map = map_name
+	if typeof(GameManager) != TYPE_NIL and GameManager.has_method("set_current_map"):
+		GameManager.set_current_map(map_name)

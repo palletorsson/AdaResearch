@@ -28,7 +28,7 @@ var _is_glowing := false
 var _current_controller : XRController3D
 
 # Educational messages about points from queer CGI perspective
-var _queer_point_messages := [
+var _fallback_point_messages := [
 	"A point at (0, 0, 0) isn't 'nothing' - it's the origin, the center from which all other positions are understood.",
 	"Moving a point doesn't destroy its essence - it transforms its relationships.",
 	"Point = (x, y, z) - where x = width axis, y = height axis, z = depth axis.",
@@ -41,7 +41,7 @@ var _queer_point_messages := [
 ]
 
 # Track message index to cycle through them
-var _message_index := 0
+var _fallback_message_index := 0
 
 
 
@@ -125,12 +125,12 @@ func _play_pickup_sound() -> void:
 		_pickup_player.stop()
 	_pickup_player.play()
 
-func _get_next_queer_message() -> String:
-	if _message_index >= _queer_point_messages.size():
+func _get_next_fallback_message() -> String:
+	if _fallback_message_index >= _fallback_point_messages.size():
 		return ""  # No more messages available
 	
-	var message = _queer_point_messages[_message_index]
-	_message_index += 1
+	var message = _fallback_point_messages[_fallback_message_index]
+	_fallback_message_index += 1
 	return message
 
 # Called when this object is picked up
@@ -162,10 +162,17 @@ func _on_dropped(_pickable) -> void:
 	# Restore original material when dropped
 	_restore_original_material()
 	
-	# Send educational message about points from queer perspective
-	var educational_message = _get_next_queer_message()
-	if educational_message != "":
-		GameManager.add_console_message(educational_message, "info", "queer_cgi")
+	# Send map-aware educational message through TextManager, fallback to local list if missing
+	var context := {
+		"object_name": str(name)
+	}
+	var handled := false
+	if typeof(TextManager) != TYPE_NIL and TextManager.has_method("trigger_event"):
+		handled = TextManager.trigger_event("point_drop", context)
+	if not handled:
+		var educational_message = _get_next_fallback_message()
+		if educational_message != "":
+			GameManager.add_console_message(educational_message, "info", "queer_cgi")
 
 # Called when a controller button is pressed
 func _on_controller_button_pressed(button : String):

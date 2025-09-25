@@ -11,8 +11,6 @@ const WALL_THICKNESS = 0.01  # 5mm walls
 const SHELF_DEPTH = 0.1  # 5cm depth for the shelf
 const SHELF_SIZE = GRID_SIZE * COMPARTMENT_SIZE + (GRID_SIZE + 1) * WALL_THICKNESS  # Total shelf size
 
-@export var create_stickers: bool = true  # Whether to populate compartments with text stickers
-
 const TEXT_PAPER_SCENE = preload("res://commons/primitives/panels/DigitalPaper/grab_paper_text.tscn")
 
 const COMPARTMENT_TEXTS = [
@@ -51,7 +49,7 @@ func _ready():
 func create_shelf_with_csg():
 	# Create wood material
 	var wood_material = StandardMaterial3D.new()
-	wood_material.albedo_color = Color(1, 1, 1)  # Light wood color
+	wood_material.albedo_color = Color(0.8, 0.6, 0.4)  # Light wood color
 	wood_material.roughness = 0.8
 	wood_material.metallic = 0.0
 	
@@ -80,9 +78,7 @@ func create_shelf_with_csg():
 	# Create compartment markers for sticker placement
 	create_compartment_markers()
 
-	# Only populate with stickers if enabled
-	if create_stickers:
-		populate_compartment_texts()
+	populate_compartment_texts()
 	
 	print("CSG Shelf created with ", GRID_SIZE, "x", GRID_SIZE, " compartments")
 	print("Compartment size: ", COMPARTMENT_SIZE * 100, "cm (exactly 2 dm)")
@@ -161,11 +157,11 @@ func create_compartment_markers():
 	marker_material.flags_transparent = true
 
 	var indicator_material = StandardMaterial3D.new()
-	indicator_material.albedo_color = Color(0.6, 0.9, 1.0, 0.2)
+	indicator_material.albedo_color = Color(0.2, 0.8, 1.0, 0.7)
 	indicator_material.flags_transparent = true
 	indicator_material.emission_enabled = true
 	indicator_material.emission = Color(0.1, 0.3, 0.6)
-	indicator_material.emission_energy_multiplier = 0.3
+	indicator_material.emission_energy_multiplier = 0.5
 
 	var marker_mesh = SphereMesh.new()
 	marker_mesh.radius = 0.001  # 1mm radius
@@ -254,11 +250,11 @@ func create_extra_snap_points() -> void:
 	var z_offsets = [front_z, front_z - 0.05]
 
 	var indicator_material = StandardMaterial3D.new()
-	indicator_material.albedo_color = Color(0.7, 0.9, 1.0, 0.25)
+	indicator_material.albedo_color = Color(0.8, 0.5, 1.0, 0.7)
 	indicator_material.flags_transparent = true
 	indicator_material.emission_enabled = true
-	indicator_material.emission = Color(0.3, 0.2, 0.6)
-	indicator_material.emission_energy_multiplier = 0.35
+	indicator_material.emission = Color(0.4, 0.2, 0.6)
+	indicator_material.emission_energy_multiplier = 0.5
 
 	var indicator_mesh = SphereMesh.new()
 	indicator_mesh.radius = 0.012

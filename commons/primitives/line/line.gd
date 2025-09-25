@@ -14,7 +14,7 @@ var length_label: Label3D
 var last_distance: float = 0.0
 
 # Educational messages about lines from queer CGI perspective
-var _queer_line_messages := [
+var _fallback_line_messages := [
 	"A line is more than geometry - it's a relationship, a connection between two points choosing to be linked.",
 	"Lines have direction and intention, like reaching out to make contact across digital space.",
 	"The distance between points doesn't diminish the connection - it defines the relationship's span.",
@@ -28,7 +28,7 @@ var _queer_line_messages := [
 ]
 
 # Track message index and whether messages have been sent
-var _message_index := 0
+var _fallback_message_index := 0
 var _messages_completed := false
 
 func _ready():
@@ -160,12 +160,12 @@ func clear_connections():
 func refresh_connections():
 	update_connections()
 
-func _get_next_queer_message() -> String:
-	if _message_index >= _queer_line_messages.size():
+func _get_next_fallback_message() -> String:
+	if _fallback_message_index >= _fallback_line_messages.size():
 		return ""  # No more messages available
 	
-	var message = _queer_line_messages[_message_index]
-	_message_index += 1
+	var message = _fallback_line_messages[_fallback_message_index]
+	_fallback_message_index += 1
 	return message
 
 # Called when either point is dropped
@@ -173,10 +173,18 @@ func _on_point_dropped(_pickable):
 	if _messages_completed:
 		return  # Don't send more messages after all have been shown
 	
-	# Send educational message about lines from queer perspective
-	var educational_message = _get_next_queer_message()
+	# Send map-aware educational message via TextManager first
+	var context := {
+		"length": "%.2f" % last_distance,
+		"length_raw": last_distance
+	}
+	var handled := false
+	if typeof(TextManager) != TYPE_NIL and TextManager.has_method("trigger_event"):
+		handled = TextManager.trigger_event("line_drop", context)
+	if handled:
+		return
+	var educational_message = _get_next_fallback_message()
 	if educational_message != "":
-		# Include current length in the educational context
 		var length_context = " [Current line length: %.2fm]" % last_distance
 		GameManager.add_console_message(educational_message + length_context, "info", "queer_cgi_line")
 	else:
