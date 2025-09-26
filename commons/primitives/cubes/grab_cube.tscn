@@ -24,6 +24,10 @@ roughness = 0.4
 [node name="GrabCube" instance=ExtResource("1")]
 script = ExtResource("2_xxt38")
 alternate_material = SubResource("10")
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
 ranged_grab_method = 0
 second_hand_grab = 2
 

@@ -6,7 +6,7 @@ class_name PickupCubePlacer
 
 @export var number_of_cubes: int = 10
 @export var placement_pattern: String = "random"  # "random", "grid", "circle", "line"
-@export var grid_bounds: Vector3i = Vector3i(10, 1, 10)  # Max placement area
+@export var grid_bounds: Vector3i = Vector3i(3, 1, 21)  # Max placement area
 @export var avoid_occupied_spaces: bool = true
 
 const PICKUP_CUBE_SCENE = "res://commons/scenes/mapobjects/pick_up_cube.tscn"
@@ -51,7 +51,7 @@ func place_pickup_cubes():
 	
 	for i in range(min(number_of_cubes, positions.size())):
 		var pos = positions[i]
-		_create_pickup_cube_at(pos.x, pos.y, pos.z)
+		_create_pickup_cube_at(pos.x+1, pos.y, pos.z)
 	
 	print("PickupCubePlacer: ✅ Placed %d pickup cubes" % pickup_cubes.size())
 

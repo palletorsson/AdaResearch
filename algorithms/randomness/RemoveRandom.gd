@@ -1,198 +1,160 @@
-class_name RandomRemovalAlgorithm
 extends Node3D
 
-# Algorithm properties
-var algorithm_name: String = ""
-var algorithm_description: String = ""
-var grid_reference = null
-var max_steps: int = 15
+# Configurable range for cube removal
+@export var x_min: float = 2.0
+@export var x_max: float = 4.0
+@export var y_min: float = 0.0
+@export var y_max: float = 2.0
+@export var z_min: float = 2.0  # Start from Z=2 to skip rows 0-1
+@export var z_max: float = 21.0
 
-# Removal properties
-var removal_count: int = 0
-@export var max_removals: int = 50
-var active_positions: Array[Vector2i] = []
-
-# 8x8 area bounds in the middle of 11x16 map
-@export var region_min_x: int = 2
-@export var region_max_x: int = 9
-@export var region_min_z: int = 4
-@export var region_max_z: int = 11
-@export var target_y_level: int = 1
-
-# Node3D properties
-@export var auto_start: bool = true
-@export var step_delay: float = 0.2
 var timer: Timer
-var is_running: bool = false
-
-# Signals
-signal algorithm_step_complete()
-signal algorithm_finished()
-
-func _init():
-	algorithm_name = "Random Removal (8x8 Region)"
-	algorithm_description = "Random cube removal in middle 8x8 area"
-	max_steps = max_removals
+var all_boxes: Array = []
 
 func _ready():
-	# Create timer for stepping
+	# Create a timer that fires every 0.5 seconds
 	timer = Timer.new()
-	timer.wait_time = step_delay
+	timer.wait_time = 0.5
+	timer.one_shot = false
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
 	
-	# Auto-connect to grid system
-	call_deferred("_find_and_connect_grid")
+	# Find all boxes initially
+	find_all_boxes()
 	
-	if auto_start:
-		call_deferred("start_algorithm")
+	# Display all found box names for inspection
+	print("=== SCENE SCAN RESULTS ===")
+	print("Found ", all_boxes.size(), " boxes total:")
+	for i in range(all_boxes.size()):
+		var box = all_boxes[i]
+		if is_instance_valid(box):
+			print("  ", i+1, ". Name: '", box.name, "' | Type: ", box.get_class(), " | Position: ", box.position)
+		else:
+			print("  ", i+1, ". [INVALID NODE]")
+	print("=========================")
+	
+	# Start the timer
+	timer.start()
+	print("Started removing boxes every 0.5 seconds.")
 
-func _find_and_connect_grid():
-	# Look for GridSystem in the scene
-	var grid_system = get_tree().get_first_node_in_group("grid_system")
-	if not grid_system:
-		# Try finding by class name
-		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")
-	
-	if grid_system:
-		set_grid_reference(grid_system)
-		print("RandomRemovalAlgorithm: Connected to grid system")
-	else:
-		print("RandomRemovalAlgorithm: WARNING - Could not find GridSystem!")
-
-func _find_node_by_class(node: Node, target_class_name: String) -> Node:
-	if node.get_script() and node.get_script().get_global_name() == target_class_name:
-		return node
-	
-	for child in node.get_children():
-		var result = _find_node_by_class(child, target_class_name)
-		if result:
-			return result
-	
-	return null
-
-func start_algorithm():
-	if not grid_reference:
-		print("RandomRemovalAlgorithm: Cannot start - grid not ready")
+func find_all_boxes():
+	"""Find all box/cube nodes in the scene"""
+	all_boxes.clear()
+	var parent = get_parent()
+	if not parent:
+		print("No parent node found")
 		return
 	
-	setup_initial_state()
-	is_running = true
-	timer.start()
-	print("RandomRemovalAlgorithm: Algorithm started")
+	# Recursively find all boxes
+	_find_boxes_recursive(parent)
 
-func stop_algorithm():
-	is_running = false
-	timer.stop()
-	print("RandomRemovalAlgorithm: Algorithm stopped")
+func _find_boxes_recursive(node: Node):
+	"""Recursively search for box/cube nodes"""
+	# Check if this node is a box/cube
+	if _is_box_node(node):
+		all_boxes.append(node)
+		print("Found box: ", node.name, " at position: ", node.position)
+	
+	# Search children
+	for child in node.get_children():
+		_find_boxes_recursive(child)
 
-func step_once():
-	if not grid_reference:
+func _is_box_node(node: Node) -> bool:
+	"""Check if a node is an instance of cube_scene.tscn but NOT a teleport and NOT in rows 0-1"""
+	
+	# Don't remove teleport nodes
+	var name_lower = node.name.to_lower()
+	if name_lower.contains("teleport"):
 		return false
 	
-	var result = execute_step()
-	algorithm_step_complete.emit()
+	# Don't remove boxes in rows 0 and 1 (Z position 0 and 1)
+	if node.has_method("get") and node.get("position"):
+		var pos = node.position
+		if pos.z == 0 or pos.z == 1:
+			return false
 	
-	if not result:
-		stop_algorithm()
-		algorithm_finished.emit()
+	# Check if this node is an instance of cube_scene.tscn
+	# Method 1: Check if the scene file path matches
+	if node.scene_file_path == "res://commons/primitives/cubes/cube_scene.tscn":
+		return true
 	
-	return result
+	# Method 2: Check if it's a Node3D with specific structure
+	if node.get_class() == "Node3D":
+		# Look for characteristic children of cube_scene.tscn
+		# This depends on the actual structure of your cube_scene.tscn
+		# You might need to adjust this based on what's inside the scene
+		var has_cube_characteristics = false
+		
+		# Check for common cube scene characteristics
+		# (Adjust these based on your actual cube_scene.tscn structure)
+		for child in node.get_children():
+			if child.get_class() == "MeshInstance3D":
+				has_cube_characteristics = true
+				break
+			elif child.get_class() == "CollisionShape3D":
+				has_cube_characteristics = true
+				break
+		
+		if has_cube_characteristics:
+			return true
+	
+	return false
+
+func cleanup_invalid_boxes():
+	"""Remove invalid/freed boxes from the list"""
+	var valid_boxes = []
+	for box in all_boxes:
+		if is_instance_valid(box):
+			valid_boxes.append(box)
+		else:
+			print("Cleaned up invalid box reference")
+	
+	all_boxes = valid_boxes
 
 func _on_timer_timeout():
-	if is_running:
-		step_once()
-
-func setup_initial_state():
-	# Find existing cubes in the 8x8 region first
-	active_positions.clear()
+	"""Called every 0.5 seconds to remove one box"""
+	# Clean up invalid references first
+	cleanup_invalid_boxes()
 	
-	if not grid_reference:
-		return
-		
-	var structure_component = grid_reference.get_structure_component()
-	if not structure_component:
+	if all_boxes.size() == 0:
+		print("No more boxes to remove!")
+		timer.stop()
 		return
 	
-	# Collect all existing cubes in the region at target Y level
-	for x in range(region_min_x, region_max_x + 1):
-		for z in range(region_min_z, region_max_z + 1):
-			# Check only target Y level for existing cubes
-			if structure_component.has_cube_at(x, target_y_level, z):
-				active_positions.append(Vector2i(x, z))
+	# Pick a random box to remove
+	var random_index = randi() % all_boxes.size()
+	var box_to_remove = all_boxes[random_index]
 	
-	removal_count = 0
-	print("RandomRemoval: Found %d positions with cubes in 8x8 region" % active_positions.size())
-
-func execute_step() -> bool:
-	if removal_count >= max_removals or active_positions.is_empty():
-		return false
-	
-	# Choose random position from remaining active cubes
-	var random_index = randi() % active_positions.size()
-	var pos = active_positions[random_index]
-	
-	# Remove the topmost cube at this position
-	_remove_top_cube_at(pos.x, pos.y)
-	
-	# Check if there are still cubes at this position
-	if not _has_cubes_at_position(pos.x, pos.y):
-		active_positions.remove_at(random_index)
-	
-	removal_count += 1
-	
-	return removal_count < max_removals and not active_positions.is_empty()
-
-# Set grid reference for the algorithm to work with
-func set_grid_reference(grid_ref):
-	grid_reference = grid_ref
-
-# Remove the cube at target Y level position
-func _remove_top_cube_at(x: int, z: int):
-	if not grid_reference:
-		return
-		
-	var structure_component = grid_reference.get_structure_component()
-	if not structure_component:
+	# Check if the box is still valid
+	if not is_instance_valid(box_to_remove):
+		print("Box is no longer valid, removing from list")
+		all_boxes.remove_at(random_index)
 		return
 	
-	# Remove cube at target Y level
-	var cube = structure_component.get_cube_at(x, target_y_level, z)
-	if cube and is_instance_valid(cube):
-		cube.queue_free()
-		structure_component.cube_map.erase(Vector3i(x, target_y_level, z))
-		# Don't manipulate grid array directly - let the component handle it
-
-# Check if there are any cubes remaining at x,z position (target Y level)
-func _has_cubes_at_position(x: int, z: int) -> bool:
-	if not grid_reference:
-		return false
-		
-	var structure_component = grid_reference.get_structure_component()
-	if not structure_component:
-		return false
+	# Remove it from our list first
+	all_boxes.remove_at(random_index)
 	
-	return structure_component.has_cube_at(x, target_y_level, z)
+	# Remove it from the scene
+	print("Removing box: ", box_to_remove.name, " at position: ", box_to_remove.position)
+	box_to_remove.queue_free()
+	
+	print("Boxes remaining: ", all_boxes.size())
 
-# Get current region bounds for external access
-func get_region_bounds() -> Dictionary:
-	return {
-		"min_x": region_min_x,
-		"max_x": region_max_x,
-		"min_z": region_min_z,
-		"max_z": region_max_z,
-		"center_x": (region_min_x + region_max_x) / 2,
-		"center_z": (region_min_z + region_max_z) / 2
-	}
+# Manual function to start/stop the removal process
+func start_removal():
+	"""Start removing boxes every 0.5 seconds"""
+	if timer:
+		timer.start()
+		print("Started box removal")
 
-# Get algorithm info
-func get_algorithm_info() -> Dictionary:
-	return {
-		"name": algorithm_name,
-		"description": algorithm_description,
-		"max_steps": max_steps,
-		"max_removals": max_removals,
-		"current_removals": removal_count,
-		"active_positions": active_positions.size(),
-		"region_bounds": get_region_bounds()
-	} 
+func stop_removal():
+	"""Stop removing boxes"""
+	if timer:
+		timer.stop()
+		print("Stopped box removal")
+
+func reset_and_find_boxes():
+	"""Reset the process and find all boxes again"""
+	stop_removal()
+	find_all_boxes()
+	print("Reset complete. Found ", all_boxes.size(), " boxes.")

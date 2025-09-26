@@ -1,12 +1,12 @@
 {
 	"map_info": {
-		"name": "A Point",
-		"description": "In geometry, a point is an abstract idealization of an exact position, without size, in physical space,[1] or its generalization to other kinds of mathematical spaces. As zero-dimensional objects, points are usually taken to be the fundamental indivisible elements comprising the space, of which one-dimensional curves, two-dimensional surfaces, and higher-dimensional objects consist.",
+		"name": "Tutorial_2D",
+		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 8,
+			"depth": 16,
 			"max_height": 2
 		},
 		"metadata": {
@@ -22,12 +22,22 @@
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "2", "2", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"],			
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["0", "0", "0", "0", "1", "1", "1"],	
 		],
 		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -39,12 +49,11 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "combine_portals", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "dark_sphere ", " ", " "],
-			[" ", " ", "clipboard#pages:point#title:A Points", "point_collection:180", " ", " ", " "],
-			[" ", " ", " ", "infokiosk:180:0:1.2", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "xyz_coordinates"]
+			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", " ", " ", " ", " "], 
+			[" ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {

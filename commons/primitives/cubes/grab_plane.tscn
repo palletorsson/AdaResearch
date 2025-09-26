@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxpseco03ygvb"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_03rhq"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_pji3p"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_521c3"]
+
+[sub_resource type="StandardMaterial3D" id="10"]
+albedo_color = Color(0.2, 0.2, 0.8, 1)
+metallic = 0.2
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="7"]
+margin = 0.01
+size = Vector3(0.404, 0.03, 0.5)
+
+[sub_resource type="BoxMesh" id="8"]
+size = Vector3(0.39, 0.025, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="9"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+metallic = 0.2
+roughness = 0.4
+
+[node name="GrabPlane" instance=ExtResource("1_03rhq")]
+script = ExtResource("2_pji3p")
+alternate_material = SubResource("10")
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D" index="0"]
+size = Vector3(0.366455, 0.0187988, 0.462639)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGBox3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00357056, 0.0123901, -0.00136042)
+operation = 2
+size = Vector3(0.327087, 0.0435791, 0.414397)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+visible = false
+mesh = SubResource("8")
+surface_material_override/0 = SubResource("9")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_521c3")]

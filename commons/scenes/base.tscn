@@ -70,6 +70,11 @@ shape = SubResource("BoxShape3D_upvej")
 [node name="messageconsole" parent="XROrigin3D/LeftHand" index="3" instance=ExtResource("3_hea6t")]
 transform = Transform3D(1.74846e-08, -2.6401e-15, -0.4, -6.03983e-08, -0.4, 1.40086e-21, -0.4, 6.03983e-08, -1.74846e-08, -0.0511409, 0.0662661, 0.373891)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D/LeftHand" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330398, 0, -2.98023e-08)
+light_color = Color(0, 1, 0, 1)
+light_energy = 1.5
+
 [node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" node_paths=PackedStringArray("hand_skeleton") instance=ExtResource("4_q0s61")]
 hand_skeleton = NodePath("RightHand/Hand_Nails_R/Armature/Skeleton3D")
 
@@ -97,6 +102,11 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightHand/RightHandArea3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00634754, -0.0126038, 0.0445099)
 shape = SubResource("BoxShape3D_rldw0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D/RightHand" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175538, 0, 5.96046e-08)
+light_color = Color(1, 0.0666667, 1, 1)
+light_energy = 1.5
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
 
