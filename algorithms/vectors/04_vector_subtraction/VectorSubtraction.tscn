@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3extdyapfjs0"]
+
+[ext_resource type="Script" uid="uid://c4ttov0snykcq" path="res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.gd" id="1_vctsub"]
+
+[node name="VectorSubtraction" type="Node3D"]
+script = ExtResource("1_vctsub")
+
+[node name="Camera3D" type="Camera3D" parent="."]

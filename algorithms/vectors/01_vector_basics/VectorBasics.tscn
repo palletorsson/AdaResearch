@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxvpmxdianyto"]
+
+[ext_resource type="Script" uid="uid://pj6lprudlo2o" path="res://algorithms/vectors/01_vector_basics/VectorBasics.gd" id="1_j2fx1"]
+
+[node name="VectorBasics" type="Node3D"]
+script = ExtResource("1_j2fx1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.52145)

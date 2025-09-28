@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8x3tecp0ev3"]
+
+[ext_resource type="Script" uid="uid://cqg1xemillrjt" path="res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.gd" id="1_wm5hq"]
+
+[node name="ConeTwistBag" type="Node3D"]
+script = ExtResource("1_wm5hq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.983747, 0.179558, 0, -0.179558, 0.983747, 0, 0.611098, 1.73724)

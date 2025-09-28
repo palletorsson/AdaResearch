@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdhlq27330n0f"]
+
+[ext_resource type="Script" uid="uid://cu5rqflosuhf7" path="res://algorithms/joint/01_pendulum_pin/PendulumPin.gd" id="1_8l2my"]
+
+[node name="PendulumPin" type="Node3D"]
+script = ExtResource("1_8l2my")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.983747, 0.179558, 0, -0.179558, 0.983747, 0, 0.611098, 1.73724)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv7ojdwjdh67v"]
+
+[ext_resource type="Script" uid="uid://bcl7iv64qthx0" path="res://algorithms/joint/05_spring_suspension/SpringSuspension.gd" id="1_p6g0l"]
+
+[node name="SpringSuspension" type="Node3D"]
+script = ExtResource("1_p6g0l")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.983747, 0.179558, 0, -0.179558, 0.983747, 0, 0.611098, 1.73724)

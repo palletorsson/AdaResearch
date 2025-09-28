@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpv315mc0v2h8"]
+
+[ext_resource type="Script" uid="uid://b47wqtpbo82iy" path="res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.gd" id="1_j90r3"]
+
+[node name="DrawbridgeHinge" type="Node3D"]
+script = ExtResource("1_j90r3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.983747, 0.179558, 0, -0.179558, 0.983747, 0, 0.611098, 1.73724)

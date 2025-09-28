@@ -1,4 +1,4 @@
-{
+﻿{
   "categories": {
 	"Advanced Laboratory": [
 	  "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
@@ -290,6 +290,18 @@
 	  "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
 	  "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn"
 	],
+\t"Vector Mathematics": [
+\t  "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+\t  "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+\t  "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+\t  "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+\t  "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+	  "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+	  "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+	  "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+	  "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+	  "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn"
+\t],
 	"Space Topology": [
 	  "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
 	  "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn"
@@ -298,6 +310,18 @@
 	  "res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
 	  "res://algorithms/proceduralgeneration/lsystem/scenes/tree_l_system.tscn",
 	  "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn"
+	],
+	"Joint Mechanics": [
+	  "res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",
+	  "res://algorithms/joint/02_double_pendulum/DoublePendulum.tscn",
+	  "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
+	  "res://algorithms/joint/04_slider_press/SliderPress.tscn",
+	  "res://algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
+	  "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+	  "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
+	  "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
+	  "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
+	  "res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn"
 	],
 	"Misc & Visual Enhancements": [
 	  "res://algorithms/misc/maps_overview_in_3d.tscn",

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dokq7g8gm2l0j"]
+
+[ext_resource type="Script" uid="uid://cy56irrx247tw" path="res://algorithms/vectors/02_vector_addition/VectorAddition.gd" id="1_vctad"]
+
+[node name="VectorAddition" type="Node3D"]
+script = ExtResource("1_vctad")
