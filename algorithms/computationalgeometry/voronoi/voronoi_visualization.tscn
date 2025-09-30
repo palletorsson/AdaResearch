@@ -38,6 +38,44 @@ height = 0.05
 
 [node name="Voronoi_Visualization" type="Node3D"]
 script = ExtResource("1_voronoi_script")
+site_count = null
+auto_generate_sites = null
+show_delaunay_triangulation = null
+show_fortune_algorithm = null
+animate_sweepline = null
+use_fortune_algorithm = null
+sweepline_speed = null
+show_beach_line = null
+show_circle_events = null
+precision_epsilon = null
+show_territory_sizes = null
+highlight_largest_territory = null
+show_territorial_borders = null
+analyze_spatial_equity = null
+show_power_diagrams = null
+diagram_bounds = null
+site_radius = null
+edge_thickness = null
+show_infinite_edges = null
+animate_construction = null
+animation_speed = null
+site_animation_duration = null
+cell_animation_duration = null
+enable_pulsing = null
+enable_rotation = null
+rotation_speed = null
+enable_floating = null
+floating_amplitude = null
+floating_frequency = null
+allow_site_dragging = null
+real_time_updates = null
+show_nearest_site = null
+highlight_mouse_cell = null
+site_color = null
+voronoi_edge_color = null
+delaunay_edge_color = null
+sweepline_color = null
+beach_line_color = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 15)

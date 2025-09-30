@@ -1,306 +1,404 @@
 # CrackPropagation.gd
-# Attach this script to a Node3D in your scene
+# Attach to a Node3D. Generates, grows and draws 2D crack lines on XZ-plane.
 extends Node3D
 
-const GRID_SIZE = 64
-const CUBE_SIZE = 1.0
-const CRACK_THRESHOLD = 0.3
-const PROPAGATION_RATE = 0.02
-const CRACK_PROPAGATION_CHANCE = 0.5 # New: chance for a cracked cell to start a new arm
+# ---------- Simulation parameters ----------
+@export var GRID_SIZE: int = 64        # cells per side
+@export var CELL_SIZE: float = 0.25    # world meters per cell
+@export var SEED: int = 0              # 0 = randomize()
 
-var grid: Array = []
-var stress_grid: Array = []
-var crack_mesh: MeshInstance3D
-var crack_material: StandardMaterial3D
+@export_range(0.0, 1.0, 0.001) var CRACK_THRESHOLD: float = 0.30
+@export_range(0.0, 1.0, 0.01) var PROPAGATION_RATE: float = 0.06     # stress from cracked neighbors to intact
+@export_range(0.0, 1.0, 0.01) var STRESS_DIFFUSE: float = 0.04       # mild stress diffusion (all neighbors)
+@export_range(0.0, 1.0, 0.01) var STRESS_DECAY: float = 0.02         # stress relax per tick
+@export_range(0.0, 1.0, 0.01) var CRACK_PROPAGATION_CHANCE: float = 0.55   # chance a cracked cell seeds a new arm each step
+@export var MAX_BRANCHES_PER_STEP: int = 400                         # safety / performance cap
+
+# Bias new arms to follow existing directionality (prevents zig-zag)
+@export_range(0.0, 1.0, 0.05) var DIRECTION_BIAS: float = 0.6
+
+# ---------- Visual parameters ----------
+@export var CRACK_COLOR: Color = Color(0.08, 0.05, 0.04, 1.0)
+@export_range(0.001, 0.5, 0.001) var CRACK_WIDTH_BASE: float = 0.02  # meters
+@export_range(0.0, 1.0, 0.01) var CRACK_WIDTH_STRESS_SCALE: float = 0.15
+@export var EMISSIVE: float = 0.0   # set >0 for faint glow
+
+# ---------- Grids ----------
+var grid: Array = []         # int states
+var stress_grid: Array = []  # float stress 0..1
+var dir_grid: Array = []     # Vector2 direction memory for each cracked cell (for nicer continuity)
 
 # Cellular automata states
-enum CellState {
-	INTACT = 0,
-	STRESSED = 1,
-	CRACKED = 2,
-}
+enum CellState { INTACT = 0, STRESSED = 1, CRACKED = 2 }
+
+# ---------- Mesh ----------
+var crack_mesh: MeshInstance3D
+var crack_material: StandardMaterial3D
+var _mesh_dirty := true
+
+# 8-neighborhood offsets
+const N8 := [
+	Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
+	Vector2i(-1, 0),                 Vector2i(1, 0),
+	Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)
+]
 
 func _ready():
-	setup_crack_system()
-	initialize_grid()
-	create_crack_mesh()
-	
-	# Start the crack propagation
-	add_initial_stress_points()
+	if SEED == 0: 
+		randomize() 
+	else: 
+		seed(SEED)
 
-func setup_crack_system():
-	# Initialize 2D arrays
+	_init_arrays()
+	_seed_weakness()
+	_make_crack_mesh()
+	_add_initial_stress_center()
+	_mesh_dirty = true
+
+func _process(_delta: float) -> void:
+	var changed := _step_sim()
+	if changed:
+		_mesh_dirty = true
+	if _mesh_dirty:
+		_update_crack_mesh()
+		_mesh_dirty = false
+
+# ----------------- Setup -----------------
+func _init_arrays() -> void:
 	grid.resize(GRID_SIZE)
 	stress_grid.resize(GRID_SIZE)
-	
+	dir_grid.resize(GRID_SIZE)
 	for x in range(GRID_SIZE):
 		grid[x] = []
 		stress_grid[x] = []
+		dir_grid[x] = []
 		grid[x].resize(GRID_SIZE)
 		stress_grid[x].resize(GRID_SIZE)
-		
+		dir_grid[x].resize(GRID_SIZE)
 		for z in range(GRID_SIZE):
 			grid[x][z] = CellState.INTACT
 			stress_grid[x][z] = 0.0
+			dir_grid[x][z] = Vector2.ZERO
 
-func initialize_grid():
-	# Add some random material weakness
+func _seed_weakness() -> void:
+	# 5% weak spots with small initial stress
 	for x in range(GRID_SIZE):
 		for z in range(GRID_SIZE):
-			if randf() < 0.05:  # 5% chance of weak spots
+			if randf() < 0.05:
 				stress_grid[x][z] = randf_range(0.1, 0.25)
 
-func create_crack_mesh():
+func _make_crack_mesh() -> void:
 	crack_mesh = MeshInstance3D.new()
 	add_child(crack_mesh)
-	
-	# Create material for cracks
-	crack_material = StandardMaterial3D.new()
-	crack_material.albedo_color = Color(0.2, 0.1, 0.0)  # Dark brown cracks
-	crack_material.roughness = 0.8
-	crack_material.metallic = 0.0
-	
-	update_crack_mesh()
 
-func add_initial_stress_points():
-	# Start from a single point in the center
-	var x = GRID_SIZE / 2
-	var z = GRID_SIZE / 2
-	
-	stress_grid[x][z] = 1.0 # High initial stress
-	grid[x][z] = CellState.STRESSED
-	
-	# Add stress in surrounding area to start the propagation
+	crack_material = StandardMaterial3D.new()
+	crack_material.flags_unshaded = true
+	crack_material.flags_transparent = false
+	crack_material.no_depth_test = false
+	crack_material.albedo_color = CRACK_COLOR
+	crack_material.metallic = 0.0
+	crack_material.roughness = 1.0
+	if EMISSIVE > 0.0:
+		crack_material.emission_enabled = true
+		crack_material.emission = CRACK_COLOR
+		crack_material.emission_energy_multiplier = EMISSIVE
+
+func _add_initial_stress_center() -> void:
+	var cx: int = GRID_SIZE / 2
+	var cz: int = GRID_SIZE / 2
+	stress_grid[cx][cz] = 1.0
+	grid[cx][cz] = CellState.STRESSED
 	for dx in range(-2, 3):
 		for dz in range(-2, 3):
-			var nx = x + dx
-			var nz = z + dz
-			if is_valid_position(nx, nz):
-				var distance = sqrt(dx*dx + dz*dz)
-				if distance > 0:
-					stress_grid[nx][nz] += 0.6 / distance
+			var nx := cx + dx
+			var nz := cz + dz
+			if _in_bounds(nx, nz):
+				var dist := sqrt(float(dx * dx + dz * dz))
+				if dist > 0.0:
+					stress_grid[nx][nz] = clamp(stress_grid[nx][nz] + 0.6 / dist, 0.0, 1.0)
 					if stress_grid[nx][nz] > CRACK_THRESHOLD:
 						grid[nx][nz] = CellState.STRESSED
-	
-	print("Added initial stress concentrator at center")
 
-func _process(_delta):
-	update_cellular_automata()
-	update_crack_mesh()
+# ----------------- Simulation -----------------
+func _step_sim() -> bool:
+	var changed := false
+	var new_grid := _dup_grid()
+	var new_stress := _dup_stress()
 
-func update_cellular_automata():
-	var new_grid = duplicate_grid()
-	var new_stress = duplicate_stress_grid()
-	
+	# 1) diffuse and decay stress
 	for x in range(1, GRID_SIZE - 1):
 		for z in range(1, GRID_SIZE - 1):
-			var current_state = grid[x][z]
-			var current_stress = stress_grid[x][z]
-			
-			match current_state:
+			var s = stress_grid[x][z]
+			# decay
+			s = max(0.0, s - STRESS_DECAY)
+			# mild diffusion (average of neighbors)
+			var neigh_sum := 0.0
+			for v in N8:
+				neigh_sum += stress_grid[x + v.x][z + v.y]
+			var neigh_avg := neigh_sum / 8.0
+			s = clamp(lerp(s, neigh_avg, STRESS_DIFFUSE), 0.0, 1.0)
+			new_stress[x][z] = s
+
+	# 2) intact & stressed → update, cracked propagates stress
+	for x in range(1, GRID_SIZE - 1):
+		for z in range(1, GRID_SIZE - 1):
+			var state = grid[x][z]
+			match state:
 				CellState.INTACT:
-					# Intact cells become stressed if neighbor stress is high enough
-					var neighbor_stress_influence = calculate_neighbor_stress(x, z)
-					new_stress[x][z] += neighbor_stress_influence
+					var add := _stress_from_cracked_neighbors(x, z)
+					new_stress[x][z] = clamp(new_stress[x][z] + add, 0.0, 1.0)
 					if new_stress[x][z] > CRACK_THRESHOLD:
 						new_grid[x][z] = CellState.STRESSED
-				
+						changed = true
+
 				CellState.STRESSED:
-					# Stressed cells can become cracked based on probability
-					var crack_probability = calculate_crack_probability(x, z)
-					if randf() < crack_probability:
+					var p := _crack_probability(x, z)
+					if randf() < p:
 						new_grid[x][z] = CellState.CRACKED
 						new_stress[x][z] = 1.0
-				
+						# set an initial direction guess using stress gradient
+						dir_grid[x][z] = _dominant_neighbor_direction(x, z)
+						changed = true
+
 				CellState.CRACKED:
-					# Cracked cells are the source of new propagation
-					propagate_stress_to_neighbors(new_stress, new_grid, x, z)
-	
+					# Cracked continues to push stress outward
+					for v in N8:
+						var nx = x + v.x
+						var nz = z + v.y
+						if _in_bounds(nx, nz):
+							new_stress[nx][nz] = clamp(new_stress[nx][nz] + PROPAGATION_RATE * stress_grid[x][z], 0.0, 1.0)
+
+	# 3) branching from cracked cells (limited per step)
+	var branches := 0
+	for x in range(1, GRID_SIZE - 1):
+		for z in range(1, GRID_SIZE - 1):
+			if branches >= MAX_BRANCHES_PER_STEP:
+				break
+			if grid[x][z] == CellState.CRACKED and randf() < CRACK_PROPAGATION_CHANCE:
+				var ok := _branch_from_cell(new_grid, new_stress, x, z)
+				if ok:
+					branches += 1
+					changed = true
+
 	grid = new_grid
 	stress_grid = new_stress
+	return changed
 
-func calculate_neighbor_stress(x: int, z: int) -> float:
-	var total_stress = 0.0
-	# Only propagate from cracked neighbors, not stressed ones
-	for dx in range(-1, 2):
-		for dz in range(-1, 2):
-			if dx == 0 and dz == 0:
-				continue
-			var nx = x + dx
-			var nz = z + dz
-			if is_valid_position(nx, nz) and grid[nx][nz] == CellState.CRACKED:
-				total_stress += stress_grid[nx][nz] * PROPAGATION_RATE
-	return total_stress
+func _stress_from_cracked_neighbors(x: int, z: int) -> float:
+	var s := 0.0
+	for v in N8:
+		var nx = x + v.x
+		var nz = z + v.y
+		if grid[nx][nz] == CellState.CRACKED:
+			s += stress_grid[nx][nz] * PROPAGATION_RATE
+	return s
 
-func calculate_crack_probability(x: int, z: int) -> float:
-	# Probability is based on stress level and number of cracked neighbors
-	var base_probability = 0.1
-	var cracked_neighbors = 0
-	for dx in range(-1, 2):
-		for dz in range(-1, 2):
-			if dx == 0 and dz == 0:
-				continue
-			var nx = x + dx
-			var nz = z + dz
-			if is_valid_position(nx, nz) and grid[nx][nz] == CellState.CRACKED:
-				cracked_neighbors += 1
-	
-	return base_probability + stress_grid[x][z] * 0.5 + (cracked_neighbors * 0.2)
+func _crack_probability(x: int, z: int) -> float:
+	var base := 0.08
+	var cracked_n := 0
+	for v in N8:
+		var nx = x + v.x
+		var nz = z + v.y
+		if grid[nx][nz] == CellState.CRACKED:
+			cracked_n += 1
+	var p = base + stress_grid[x][z] * 0.55 + float(cracked_n) * 0.12
+	return clamp(p, 0.0, 1.0)
 
-func propagate_stress_to_neighbors(new_stress: Array, new_grid: Array, x: int, z: int):
-	# A cracked cell can start a new arm
-	if randf() > CRACK_PROPAGATION_CHANCE:
-		return
-	
-	# Find a random neighbor to propagate to
-	var possible_directions = []
-	for dx in range(-1, 2):
-		for dz in range(-1, 2):
-			if dx == 0 and dz == 0:
-				continue
-			var nx = x + dx
-			var nz = z + dz
-			# Only propagate to INTACT or STRESSED neighbors to create "arms"
-			if is_valid_position(nx, nz) and grid[nx][nz] != CellState.CRACKED:
-				possible_directions.push_back(Vector2i(nx, nz))
-	
-	if possible_directions.size() > 0:
-		var target_pos = possible_directions[randi() % possible_directions.size()]
-		# Apply a high amount of stress to the new point
-		new_stress[target_pos.x][target_pos.y] = 0.8
-		new_grid[target_pos.x][target_pos.y] = CellState.STRESSED
+func _dominant_neighbor_direction(x: int, z: int) -> Vector2:
+	var best_dir := Vector2.ZERO
+	var best_val := -1.0
+	for v in N8:
+		var nx = x + v.x
+		var nz = z + v.y
+		var s = stress_grid[nx][nz]
+		if s > best_val:
+			best_val = s
+			best_dir = Vector2(v.x, v.y).normalized()
+	return best_dir
 
-func is_valid_position(x: int, z: int) -> bool:
-	return x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE
+func _branch_from_cell(new_grid: Array, new_stress: Array, x: int, z: int) -> bool:
+	# Prefer continuing along previous direction
+	var prefer = dir_grid[x][z]
+	var candidates: Array = []
+	for v in N8:
+		var nx = x + v.x
+		var nz = z + v.y
+		if not _in_bounds(nx, nz):
+			continue
+		if new_grid[nx][nz] != CellState.CRACKED:
+			# score by alignment with preferred direction and local stress
+			var align := 0.0
+			if prefer != Vector2.ZERO:
+				align = max(0.0, prefer.dot(Vector2(v.x, v.y).normalized()))
+			var score = DIRECTION_BIAS * align + (1.0 - DIRECTION_BIAS) * stress_grid[nx][nz]
+			candidates.append({"pos": Vector2i(nx, nz), "score": score})
+	if candidates.is_empty():
+		return false
+	candidates.sort_custom(func(a, b): return a["score"] > b["score"])
+	var target: Vector2i = candidates[0]["pos"]
+	new_grid[target.x][target.y] = CellState.STRESSED
+	new_stress[target.x][target.y] = max(new_stress[target.x][target.y], 0.85)
+	# update direction memory for the new target
+	dir_grid[target.x][target.y] = (Vector2(target.x - x, target.y - z)).normalized()
+	return true
 
-func duplicate_grid() -> Array:
-	var new_grid = []
-	new_grid.resize(GRID_SIZE)
-	
-	for x in range(GRID_SIZE):
-		new_grid[x] = grid[x].duplicate()
-	
-	return new_grid
+# ----------------- Mesh build -----------------
+func _update_crack_mesh() -> void:
+	var mesh := ArrayMesh.new()
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var indices := PackedInt32Array()
+	var vi := 0
 
-func duplicate_stress_grid() -> Array:
-	var new_stress = []
-	new_stress.resize(GRID_SIZE)
-	
-	for x in range(GRID_SIZE):
-		new_stress[x] = stress_grid[x].duplicate()
-	
-	return new_stress
-
-func update_crack_mesh():
-	var array_mesh = ArrayMesh.new()
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	
-	var vertex_index = 0
-	
-	# Keep track of visited cracked cells to avoid duplicates
-	var visited_cells = {}
-	
-	# Iterate over all cells to find the start of crack segments
+	# visited to avoid retreading
+	var visited := {}
 	for x in range(GRID_SIZE):
 		for z in range(GRID_SIZE):
-			if grid[x][z] == CellState.CRACKED and not visited_cells.has(Vector2i(x, z)):
-				# Start a new crack segment
-				var current_pos = Vector2i(x, z)
-				var path = [current_pos]
-				visited_cells[current_pos] = true
-				
-				# Trace the path of the crack
+			var key := Vector2i(x, z)
+			if grid[x][z] == CellState.CRACKED and not visited.has(key):
+				var path: Array = []
+				path.append(key)
+				visited[key] = true
+
+				# greedy walk following cracked neighbors, prefer straight direction
+				var prev := key
+				var curr := key
 				while true:
-					var next_pos = find_next_crack_segment(current_pos, visited_cells)
-					if next_pos:
-						path.push_back(next_pos)
-						visited_cells[next_pos] = true
-						current_pos = next_pos
-					else:
+					var res := _next_crack_step(curr, prev, visited)
+					if not res["found"]:
 						break
-				
-				# Generate mesh for the traced path
+					var nxt: Vector2i = res["pos"]
+					path.append(nxt)
+					visited[nxt] = true
+					prev = curr
+					curr = nxt
+
 				if path.size() > 1:
 					for i in range(path.size() - 1):
-						var p1 = path[i]
-						var p2 = path[i+1]
-						create_crack_line_segment(vertices, normals, indices, vertex_index, p1, p2)
-						vertex_index += 4
-	
+						var a: Vector2i = path[i]
+						var b: Vector2i = path[i + 1]
+						vi = _emit_quad_segment(vertices, normals, indices, vi, a, b)
+
 	if vertices.size() > 0:
-		var arrays = []
+		var arrays: Array = []
 		arrays.resize(Mesh.ARRAY_MAX)
 		arrays[Mesh.ARRAY_VERTEX] = vertices
 		arrays[Mesh.ARRAY_NORMAL] = normals
 		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		crack_mesh.mesh = array_mesh
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		crack_mesh.mesh = mesh
 		crack_mesh.material_override = crack_material
+	else:
+		crack_mesh.mesh = null
 
-# Helper function to find the next cracked cell in a continuous path
-func find_next_crack_segment(current_pos: Vector2i, visited_cells: Dictionary) -> Vector2i:
-	for dx in range(-1, 2):
-		for dz in range(-1, 2):
-			var next_pos = Vector2i(current_pos.x + dx, current_pos.y + dz)
-			if is_valid_position(next_pos.x, next_pos.y) and grid[next_pos.x][next_pos.y] == CellState.CRACKED:
-				if not visited_cells.has(next_pos):
-					return next_pos
-	return Vector2i()
+# Prefer continuing forward from (prev->curr)
+func _next_crack_step(curr: Vector2i, prev: Vector2i, visited: Dictionary) -> Dictionary:
+	var best_found := false
+	var best_pos := Vector2i.ZERO
+	var best_score := -1.0
+	var forward := Vector2(curr.x - prev.x, curr.y - prev.y).normalized()
 
-# New function to create a single quad between two cracked cells
-func create_crack_line_segment(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array, start_index: int, p1: Vector2i, p2: Vector2i):
-	var world_pos_1 = Vector3(
-		(p1.x - GRID_SIZE/2) * CUBE_SIZE + CUBE_SIZE/2,
-		-0.05,
-		(p1.y - GRID_SIZE/2) * CUBE_SIZE + CUBE_SIZE/2
-	)
-	var world_pos_2 = Vector3(
-		(p2.x - GRID_SIZE/2) * CUBE_SIZE + CUBE_SIZE/2,
-		-0.05,
-		(p2.y - GRID_SIZE/2) * CUBE_SIZE + CUBE_SIZE/2
-	)
-	
-	var line_dir = (world_pos_2 - world_pos_1).normalized()
-	var perp_dir = Vector3(line_dir.z, 0, -line_dir.x) * CUBE_SIZE * 0.1 # Thin line
-	
-	# Vertices for the quad segment
-	vertices.push_back(world_pos_1 + perp_dir)
-	vertices.push_back(world_pos_1 - perp_dir)
-	vertices.push_back(world_pos_2 - perp_dir)
-	vertices.push_back(world_pos_2 + perp_dir)
-	
-	# Add normals
+	for v in N8:
+		var nx = curr.x + v.x
+		var nz = curr.y + v.y
+		var p := Vector2i(nx, nz)
+		if not _in_bounds(nx, nz):
+			continue
+		if visited.has(p):
+			continue
+		if grid[nx][nz] != CellState.CRACKED:
+			continue
+		var dir := Vector2(v.x, v.y).normalized()
+		var align := 0.0
+		if forward != Vector2.ZERO:
+			align = max(0.0, forward.dot(dir))
+		# weight by local stress too (smoother thickness transitions)
+		var s = stress_grid[nx][nz]
+		var score = 0.7 * align + 0.3 * s
+		if score > best_score:
+			best_score = score
+			best_pos = p
+			best_found = true
+
+	return {"found": best_found, "pos": best_pos}
+
+func _emit_quad_segment(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array, start_index: int, p1: Vector2i, p2: Vector2i) -> int:
+	var wpos1 := _grid_to_world(p1)
+	var wpos2 := _grid_to_world(p2)
+	var dir := (wpos2 - wpos1).normalized()
+	var perp := Vector3(dir.z, 0.0, -dir.x)
+
+	# width from stress (average)
+	var s1 = stress_grid[p1.x][p1.y]
+	var s2 = stress_grid[p2.x][p2.y]
+	var s_avg = (s1 + s2) * 0.5
+	var width = CRACK_WIDTH_BASE + s_avg * CRACK_WIDTH_STRESS_SCALE
+
+	var v0 = wpos1 + perp * width * 0.5
+	var v1 = wpos1 - perp * width * 0.5
+	var v2 = wpos2 - perp * width * 0.5
+	var v3 = wpos2 + perp * width * 0.5
+
+	vertices.push_back(v0)
+	vertices.push_back(v1)
+	vertices.push_back(v2)
+	vertices.push_back(v3)
+
 	normals.push_back(Vector3.UP)
 	normals.push_back(Vector3.UP)
 	normals.push_back(Vector3.UP)
 	normals.push_back(Vector3.UP)
-	
-	# Add indices
-	indices.push_back(start_index)
+
+	indices.push_back(start_index + 0)
 	indices.push_back(start_index + 1)
 	indices.push_back(start_index + 2)
-	indices.push_back(start_index)
+	indices.push_back(start_index + 0)
 	indices.push_back(start_index + 2)
 	indices.push_back(start_index + 3)
 
-# Public method to add new stress points (for testing or interaction)
-func add_stress_point(world_pos: Vector3):
-	var grid_x = int((world_pos.x + GRID_SIZE/2 * CUBE_SIZE) / CUBE_SIZE)
-	var grid_z = int((world_pos.z + GRID_SIZE/2 * CUBE_SIZE) / CUBE_SIZE)
-	
-	if is_valid_position(grid_x, grid_z):
-		stress_grid[grid_x][grid_z] = 1.0
-		grid[grid_x][grid_z] = CellState.STRESSED
+	return start_index + 4
 
-# Debug method to visualize stress levels
-func get_stress_at_position(world_pos: Vector3) -> float:
-	var grid_x = int((world_pos.x + GRID_SIZE/2 * CUBE_SIZE) / CUBE_SIZE)
-	var grid_z = int((world_pos.z + GRID_SIZE/2 * CUBE_SIZE) / CUBE_SIZE)
-	
-	if is_valid_position(grid_x, grid_z):
-		return stress_grid[grid_x][grid_z]
-	
+# ----------------- Utilities -----------------
+func _grid_to_world(p: Vector2i) -> Vector3:
+	var offset := (GRID_SIZE * CELL_SIZE) * 0.5
+	return Vector3(float(p.x) * CELL_SIZE - offset + CELL_SIZE * 0.5, -0.02, float(p.y) * CELL_SIZE - offset + CELL_SIZE * 0.5)
+
+func _in_bounds(x: int, z: int) -> bool:
+	return x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE
+
+func _dup_grid() -> Array:
+	var out := []
+	out.resize(GRID_SIZE)
+	for x in range(GRID_SIZE):
+		out[x] = grid[x].duplicate()
+	return out
+
+func _dup_stress() -> Array:
+	var out := []
+	out.resize(GRID_SIZE)
+	for x in range(GRID_SIZE):
+		out[x] = stress_grid[x].duplicate()
+	return out
+
+# ----------------- Public API -----------------
+func reset_simulation() -> void:
+	_init_arrays()
+	_seed_weakness()
+	_add_initial_stress_center()
+	_mesh_dirty = true
+
+func add_stress_point(world_pos: Vector3, amount: float = 1.0) -> void:
+	var gx := int(floor((world_pos.x / CELL_SIZE) + float(GRID_SIZE) * 0.5))
+	var gz := int(floor((world_pos.z / CELL_SIZE) + float(GRID_SIZE) * 0.5))
+	if _in_bounds(gx, gz):
+		stress_grid[gx][gz] = clamp(stress_grid[gx][gz] + amount, 0.0, 1.0)
+		if stress_grid[gx][gz] > CRACK_THRESHOLD:
+			grid[gx][gz] = CellState.STRESSED
+		_mesh_dirty = true
+
+func get_stress_at(world_pos: Vector3) -> float:
+	var gx := int(floor((world_pos.x / CELL_SIZE) + float(GRID_SIZE) * 0.5))
+	var gz := int(floor((world_pos.z / CELL_SIZE) + float(GRID_SIZE) * 0.5))
+	if _in_bounds(gx, gz):
+		return stress_grid[gx][gz]
 	return 0.0

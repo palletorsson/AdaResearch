@@ -100,7 +100,15 @@
 				"Test_4",
 				"Test_5",
 				"Test_6",
-				"Test_7"
+				"Test_7",
+				"Test_8",
+				"Test_10",
+				"Test_11",
+				"Test_12",
+				"Test_13",
+				"Test_14",
+				"Test_15",
+				"Test_16"						
 			],
 			"return_to": "lab",
 			"unlock_requirements": [],
@@ -197,7 +205,7 @@
 				" Random_Four",
 				" Random_Walk",
 				" Random_Seven",
-								"Random_Two",
+				"Random_Two",
 				"Random_Seven", 				
 				"Random_Three",
 				"Random_Four",
@@ -564,19 +572,27 @@
 				"Network analysis techniques",
 				"Graph traversal algorithms",
 				"Flow optimization",
-				"Connectivity analysis"
-			],
-			"maps": [
-				"GraphTheory_Network_Analysis",
-				"GraphTheory_Force_Directed_Graph_Layout",
-				"GraphTheory_Tarjan_s_Algorithm",
+				"Connectivity analysis",
+				"GraphTheory_Edmonds_Algorithm",
 				"GraphTheory_Kosaraju_s_Algorithm",
+				"GraphTheory_Tarjan_s_Algorithm",
+				"GraphTheory_Force_Directed_3d",
+				"GraphTheory_Force_Directed_Graph_Layout",
+				"GraphTheory_Path_Finding_3d",
 				"GraphTheory_Topological_Sort",
 				"GraphTheory_Minimum_Spanning_Tree",
 				"GraphTheory_Maximum_Flow_Algorithms",
 				"GraphTheory_Push_Relabel_Algorithm",
 				"GraphTheory_Karger_s_Algorithm",
-				"GraphTheory_Edmonds_Algorithm"
+
+				"GraphTheory_Network_Analysis",
+				"GraphTheory_Force_Directed_Graph_Layout",				
+			],
+			"maps": [
+			
+				"GraphTheory_Graphspace",
+				"GraphTheory_Graphspace_3d",
+
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_graphtheory",
@@ -621,6 +637,12 @@
 				"Explainable AI concepts"
 			],
 			"temps": [
+				""
+			], 
+			"maps": [
+				"MachineLearning_Evolving_Creatures", 
+				"MachineLearning_Evolving_Flowers",
+				"MachineLearning_Random_Walker_Machine",
 				"MachineLearning_Neural_Networks",
 				"MachineLearning_Convolutional_Neural_Networks_CNNs",
 				"MachineLearning_Recurrent_Neural_Networks_RNNs",
@@ -636,10 +658,6 @@
 				"MachineLearning_Recommendation_Systems",
 				"MachineLearning_Classification_Algorithms",
 				"MachineLearning_Attention_Mechanisms"
-			], 
-			"maps": [
-				"MachineLearning_One",
-				"MachineLearning_Two"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_machinelearning",

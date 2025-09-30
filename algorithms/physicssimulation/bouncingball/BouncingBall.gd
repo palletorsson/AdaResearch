@@ -16,14 +16,32 @@ var fixed_timestep = 1.0/60.0  # Fixed physics timestep
 var ball_radius = 0.5
 var bounds = Vector3(7.5, 10, 7.5)
 
+# Vibrant queer color palette
+var queer_colors = [
+	Color(1.0, 0.4, 0.7, 1.0),    # Hot pink
+	Color(0.8, 0.3, 1.0, 1.0),    # Purple
+	Color(0.3, 0.9, 1.0, 1.0),    # Cyan
+	Color(1.0, 0.8, 0.2, 1.0),    # Gold
+	Color(0.5, 1.0, 0.4, 1.0),    # Lime
+	Color(1.0, 0.5, 0.3, 1.0),    # Coral
+	Color(0.4, 0.7, 1.0, 1.0),    # Sky blue
+	Color(1.0, 0.3, 0.5, 1.0)     # Rose
+]
+
+var auto_rotate_time = 0.0
+
 func _ready():
 	_initialize_balls()
 	_initialize_obstacles()
 	_connect_ui()
-	
+	_apply_vibrant_colors()
+
 	# Cache ball radius from first ball
 	if balls.size() > 0:
 		ball_radius = balls[0].get_radius()
+
+	# Auto-start the simulation
+	paused = false
 
 func _initialize_balls():
 	# Get all balls
@@ -49,19 +67,27 @@ func _initialize_obstacles():
 func _physics_process(delta):
 	if paused:
 		return
-	
+
+	# Auto-rotate camera for dynamic 3D view
+	auto_rotate_time += delta
+	_auto_rotate_view(delta)
+
 	# Use fixed timestep for stable physics
 	physics_accumulator += delta
-	
+
 	while physics_accumulator >= fixed_timestep:
 		physics_accumulator -= fixed_timestep
 		_update_physics_step(fixed_timestep)
-	
+
 	# Update trail visualization at lower frequency
 	trail_update_timer += delta
 	if trail_update_timer >= trail_update_interval:
 		trail_update_timer = 0.0
 		_update_trail_visualizations()
+
+func _auto_rotate_view(delta):
+	# Gently rotate the entire scene for better 3D visualization
+	rotation.y += delta * 0.1
 
 func _update_physics_step(delta: float):
 	# Update physics for each ball
@@ -225,3 +251,22 @@ func _get_total_trail_points() -> int:
 	for ball in balls:
 		total += ball.trail_points.size()
 	return total
+
+func _apply_vibrant_colors():
+	# Apply vibrant queer colors to balls
+	for i in range(balls.size()):
+		var ball = balls[i]
+		var color = queer_colors[i % queer_colors.size()]
+
+		# Apply color to ball mesh
+		if ball.has_node("MeshInstance3D"):
+			var mesh_instance = ball.get_node("MeshInstance3D")
+			if mesh_instance.material_override:
+				mesh_instance.material_override.albedo_color = color
+				mesh_instance.material_override.emission_enabled = true
+				mesh_instance.material_override.emission = color * 0.5
+				mesh_instance.material_override.emission_energy_multiplier = 2.0
+
+		# Apply color to trail if available
+		if ball.has_method("set_trail_color"):
+			ball.set_trail_color(color)

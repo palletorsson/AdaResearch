@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var ball: RigidBody3D
 var acceleration_vector: Node3D
@@ -10,7 +10,6 @@ var accumulator := 0.0
 func _ready():
 	super._ready()
 	create_axes(4.0)
-	create_floor(10.0)
 	ball = create_ball(Vector3(0.0, 1.0, 0.0), 0.2, 1.0, Color(0.9, 0.4, 0.7, 1.0))
 	ball.linear_damp = 0.02
 	ball.angular_damp = 0.05
@@ -56,3 +55,6 @@ func _update_info(accel: Vector3):
 	builder.append("Speed = %.2f" % ball.linear_velocity.length())
 	builder.append("Position = (%.2f, %.2f, %.2f)" % [ball.global_position.x, ball.global_position.y, ball.global_position.z])
 	info_label.text = "\n".join(builder)
+
+
+

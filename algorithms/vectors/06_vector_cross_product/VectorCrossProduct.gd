@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var vector_a: Node3D
 var vector_b: Node3D
@@ -9,7 +9,6 @@ var info_label: Label3D
 func _ready():
 	super._ready()
 	create_axes(3.5)
-	create_floor(9.0)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.2, 1.0), Color(1.0, 0.55, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.4, 1.5, 0.6), Color(0.2, 0.7, 1.0, 1.0), "Vector b")
 	cross_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.8, 0.6, 1.0, 1.0), "a_cross_b", false)
@@ -76,3 +75,6 @@ func _update_info(a: Vector3, b: Vector3, cross: Vector3):
 		var sine = area / (mag_a * mag_b)
 		builder.append("sin(angle) ~= %.2f" % clamp(sine, -1.0, 1.0))
 	info_label.text = "\n".join(builder)
+
+
+

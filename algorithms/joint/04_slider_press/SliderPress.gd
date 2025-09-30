@@ -1,8 +1,9 @@
-﻿extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var slider: SliderJoint3D
 var timer := 0.0
 var direction := 1.0
+var idle_osc := 0.0
 
 func _build_demo():
 	var frame := StaticBody3D.new()
@@ -23,26 +24,25 @@ func _build_demo():
 	slider.node_a = frame.get_path()
 	slider.node_b = piston.get_path()
 	slider.position = Vector3(0.75, 2.0, 0.0)
-	slider.set_flag(SliderJoint3D.FLAG_ENABLE_LINEAR_LIMIT, true)
 	slider.set_param(SliderJoint3D.PARAM_LINEAR_LIMIT_LOWER, -1.0)
 	slider.set_param(SliderJoint3D.PARAM_LINEAR_LIMIT_UPPER, 1.0)
-	slider.set_flag(SliderJoint3D.FLAG_ENABLE_LINEAR_SPRING, true)
-	slider.set_param(SliderJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, 10.0)
-	slider.set_param(SliderJoint3D.PARAM_LINEAR_SPRING_DAMPING, 1.4)
-	slider.set_flag(SliderJoint3D.FLAG_ENABLE_LINEAR_MOTOR, true)
-	slider.set_param(SliderJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, 3.0)
-	slider.set_param(SliderJoint3D.PARAM_LINEAR_MOTOR_FORCE_LIMIT, 100.0)
 	slider.set_exclude_nodes_from_collision(true)
 	add_child(slider)
 
 	add_label("Slider Joint Piston Press", Vector3(1.5, 3.5, 2.5))
+	# Begin with motion
+	call_deferred("_kickstart")
 
 func _physics_process(delta):
 	timer += delta
 	if timer > 2.5:
 		timer = 0.0
 		direction *= -1.0
-		slider.set_param(SliderJoint3D.PARAM_LINEAR_MOTOR_TARGET_VELOCITY, 3.0 * direction)
+	else:
+		# Subtle oscillation to keep it alive
+		idle_osc += delta
+		var v := 0.4 * sin(idle_osc * 2.6)
 
-
-
+func _kickstart():
+	if is_instance_valid(slider):
+		pass

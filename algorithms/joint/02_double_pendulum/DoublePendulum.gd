@@ -1,4 +1,4 @@
-extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var lower: RigidBody3D
 
@@ -36,7 +36,13 @@ func _build_demo():
 	add_child(joint_middle)
 
 	add_label("Double Pendulum", Vector3(0.0, 4.2, 3.0))
+	# Nudge to start motion
+	call_deferred("_nudge")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		lower.apply_impulse(Vector3(2.0, 0.0, 1.0))
+
+func _nudge():
+	if is_instance_valid(lower):
+		lower.apply_impulse(Vector3(1.2, 0.0, 0.6))

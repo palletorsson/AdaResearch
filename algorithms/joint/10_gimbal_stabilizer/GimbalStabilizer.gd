@@ -1,4 +1,4 @@
-extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var yaw_hinge: HingeJoint3D
 var pitch_hinge: HingeJoint3D
@@ -19,7 +19,7 @@ func _build_demo():
 	yaw_hinge.set_flag(HingeJoint3D.FLAG_USE_LIMIT, false)
 	yaw_hinge.set_flag(HingeJoint3D.FLAG_USE_MOTOR, true)
 	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_TORQUE, 60.0)
-	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.0)
+	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.2)
 	add_child(yaw_hinge)
 
 	pitch_hinge = HingeJoint3D.new()
@@ -44,6 +44,15 @@ func _build_demo():
 	add_child(payload_joint)
 
 	add_label("Dual Hinge Gimbal", Vector3(0.0, 4.5, 3.0))
+	set_process(true)
+
+func _process(delta):
+	# Idle sweeping motion for life; arrow keys can override via physics constraints
+	var t := Time.get_ticks_msec() * 0.001
+	if is_instance_valid(yaw_hinge):
+		yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.6 * sin(t * 0.6))
+	if is_instance_valid(pitch_hinge):
+		pitch_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.5 * sin(t * 0.9))
 
 func _physics_process(delta):
 	var yaw_velocity := 0.0

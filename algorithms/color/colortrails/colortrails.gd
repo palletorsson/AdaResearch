@@ -1,429 +1,360 @@
 extends Node3D
+## VR Hand Color Trails (Godot 4)
+## Spline-smoothed ribbons, per-hand gradients, width/alpha curves, additive-ish glow.
 
-# VR Hand Color Trails System for Godot 4
-# Attach this to your Base node or create a new Node3D in your scene
+# ----------------- Trail config -----------------
+@export_range(8, 2048, 1) var trail_max_points: int = 256
+@export var trail_lifetime: float = 1.75
+@export_range(0.001, 0.2, 0.001) var min_sample_distance: float = 0.01
+@export_range(0.002, 1.0, 0.001) var base_width: float = 0.08
+@export var only_when_trigger_pressed := true
+@export var smooth_spline := true
+@export_range(2, 64, 1) var smooth_samples_per_segment: int = 6 # more = smoother
 
-# Trail configuration
-@export var trail_length: int = 100
-@export var trail_lifetime: float = 2.0
-@export var trail_width: float = 0.2
-@export var update_distance: float = 0.001  # Minimum distance to add new trail point
-@export var left_hand_color: Color = Color(0.2, 0.8, 1.0, 0.8)  # Cyan
-@export var right_hand_color: Color = Color(1.0, 0.2, 0.8, 0.8)  # Magenta
+@export_range(0.0, 0.02, 0.0005) var ribbon_jitter: float = 0.002
 
-# Trail data structures
-var left_trail_points: Array[Dictionary] = []
-var right_trail_points: Array[Dictionary] = []
+@export var additive_glow := true
+@export var disable_depth_test := true
 
-# Trail meshes
-var left_trail_mesh: MeshInstance3D
-var right_trail_mesh: MeshInstance3D
-var left_trail_material: StandardMaterial3D
-var right_trail_material: StandardMaterial3D
+@export var left_gradient: Gradient
+@export var right_gradient: Gradient
+@export var width_curve: Curve
+@export var alpha_curve: Curve
 
-# Hand references (will be found automatically)
-var left_hand: Node3D
-var right_hand: Node3D
+@export var left_hand_path: NodePath
+@export var right_hand_path: NodePath
 
-func _ready():
-	find_hand_controllers()
-	setup_trail_meshes()
+# --------------- Internals ----------------------
+const K_POS := "pos"
+const K_AGE := "age"
+const K_VEL := "vel"
 
+var _left_points: Array[Dictionary] = []
+var _right_points: Array[Dictionary] = []
 
-func _process(delta):
-	# Debug: Always try to draw trails for testing
-	if left_hand:
-		update_trail(left_hand, left_trail_points, delta)
-		update_trail_mesh(left_trail_mesh, left_trail_points, left_hand_color)
-	
-	if right_hand:
-		update_trail(right_hand, right_trail_points, delta)
-		update_trail_mesh(right_trail_mesh, right_trail_points, right_hand_color)
-	
-	# Always decay existing trails
-	decay_trails(left_trail_points, delta)
-	decay_trails(right_trail_points, delta)
-	
-	# Update meshes even when not drawing (for decay)
-	if left_trail_points.size() > 0:
-		update_trail_mesh(left_trail_mesh, left_trail_points, left_hand_color)
-	if right_trail_points.size() > 0:
-		update_trail_mesh(right_trail_mesh, right_trail_points, right_hand_color)
+var _left_mesh_inst: MeshInstance3D
+var _right_mesh_inst: MeshInstance3D
+var _left_mesh := ArrayMesh.new()
+var _right_mesh := ArrayMesh.new()
 
-func find_hand_controllers():
-	# Find hand controllers - search through the scene tree
-	var xr_origin = null
-	
-	# Try multiple common paths
-	var possible_paths = [
-		"/root/Base/XROrigin3D",
-		"/root/VRStaging/Scene/Base/XROrigin3D", 
-		"/root/Lab/XROrigin3D",
-		"/root/Scene/Base/XROrigin3D"
-	]
-	
-	for path in possible_paths:
-		if has_node(path):
-			xr_origin = get_node(path)
+var _left_mat: ShaderMaterial
+var _right_mat: ShaderMaterial
 
-			break
-	
-	# If direct paths don't work, search recursively
-	if not xr_origin:
-		xr_origin = find_node_recursive(get_tree().root, "XROrigin3D")
-		if xr_origin:
-			pass
-	
-	if xr_origin:
-		if xr_origin.has_node("LeftHand"):
-			left_hand = xr_origin.get_node("LeftHand")
-			pass
-		else:
-			pass
-		
-		if xr_origin.has_node("RightHand"):
-			right_hand = xr_origin.get_node("RightHand")
-			pass
-		else:
-			pass
-	else:
-		pass
+var _left_hand: Node3D
+var _right_hand: Node3D
 
-func find_node_recursive(node: Node, node_name: String) -> Node:
-	if node.name == node_name:
-		return node
-	
-	for child in node.get_children():
-		var result = find_node_recursive(child, node_name)
-		if result:
-			return result
-	
-	return null
+var _time := 0.0
+var _was_left_drawing := false
+var _was_right_drawing := false
 
-func is_trigger_pressed(hand: Node3D) -> bool:
-	# First check if it's an XRController3D
+# ----------------- Lifecycle --------------------
+func _ready() -> void:
+	_init_defaults()
+	_autodetect_hands()
+	_setup_meshes_and_materials()
+
+func _process(delta: float) -> void:
+	_time += delta
+
+	_update_trail_for_hand(_left_hand, _left_points, delta, true)
+	_update_trail_for_hand(_right_hand, _right_points, delta, false)
+
+	_decay_points(_left_points, delta)
+	_decay_points(_right_points, delta)
+
+	_build_ribbon(_left_mesh, _left_points, _left_mesh_inst, left_gradient)
+	_build_ribbon(_right_mesh, _right_points, _right_mesh_inst, right_gradient)
+
+# ----------------- Setup ------------------------
+func _init_defaults() -> void:
+	if width_curve == null:
+		width_curve = Curve.new()
+		width_curve.add_point(Vector2(0.0, 1.0))
+		width_curve.add_point(Vector2(1.0, 0.0))
+	if alpha_curve == null:
+		alpha_curve = Curve.new()
+		alpha_curve.add_point(Vector2(0.0, 1.0))
+		alpha_curve.add_point(Vector2(1.0, 0.0))
+	if left_gradient == null:
+		left_gradient = Gradient.new()
+		left_gradient.add_point(0.0, Color(0.2, 0.8, 1.0, 1.0)) # head
+		left_gradient.add_point(1.0, Color(0.2, 0.8, 1.0, 0.0)) # tail
+	if right_gradient == null:
+		right_gradient = Gradient.new()
+		right_gradient.add_point(0.0, Color(1.0, 0.2, 0.8, 1.0))
+		right_gradient.add_point(1.0, Color(1.0, 0.2, 0.8, 0.0))
+
+func _autodetect_hands() -> void:
+	if left_hand_path != NodePath() and has_node(left_hand_path):
+		_left_hand = get_node(left_hand_path)
+	if right_hand_path != NodePath() and has_node(right_hand_path):
+		_right_hand = get_node(right_hand_path)
+
+	if _left_hand == null:
+		_left_hand = _find_node_recursive(get_tree().root, "LeftHand") as Node3D
+	if _right_hand == null:
+		_right_hand = _find_node_recursive(get_tree().root, "RightHand") as Node3D
+
+func _setup_meshes_and_materials() -> void:
+	_left_mesh_inst = MeshInstance3D.new()
+	_left_mesh_inst.name = "LeftTrailMesh"
+	_left_mesh_inst.mesh = _left_mesh
+	add_child(_left_mesh_inst)
+
+	_left_mat = _make_trail_material()
+	_left_mesh_inst.material_override = _left_mat
+
+	_right_mesh_inst = MeshInstance3D.new()
+	_right_mesh_inst.name = "RightTrailMesh"
+	_right_mesh_inst.mesh = _right_mesh
+	add_child(_right_mesh_inst)
+
+	_right_mat = _make_trail_material()
+	_right_mesh_inst.material_override = _right_mat
+
+func _make_trail_material() -> ShaderMaterial:
+	var mat := ShaderMaterial.new()
+	var shader := Shader.new()
+	shader.code = _trail_shader_code()
+	mat.shader = shader
+	mat.set_shader_parameter("u_time", 0.0)
+	mat.set_shader_parameter("u_additive", 1.0 if additive_glow else 0.0)
+	mat.set_shader_parameter("u_disable_depth", 1.0 if disable_depth_test else 0.0)
+	return mat
+
+# ----------------- Input helpers ----------------
+func _is_trigger_pressed(hand: Node3D) -> bool:
+	if hand == null:
+		return false
 	if hand is XRController3D:
-		var pressed = hand.is_button_pressed("trigger_click")
-
-		return pressed
-	
-	# Check for XRController3D in children (XR Tools structure)
-	for child in hand.get_children():
-		if child is XRController3D:
-			var pressed = child.is_button_pressed("trigger_click")
-
-			return pressed
-	
-	# Check input actions
-	var is_left = hand == left_hand
-	var actions = ["trigger_click", "grip_click", "primary_click"]
-	
-	for action in actions:
-		if Input.is_action_pressed(action):
+		return (hand as XRController3D).is_button_pressed("trigger_click")
+	for c in hand.get_children():
+		if c is XRController3D and (c as XRController3D).is_button_pressed("trigger_click"):
 			return true
-	
-	# Keyboard/mouse fallback for testing
-	var fallback = Input.is_action_pressed("ui_accept") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	return Input.is_action_pressed("ui_accept") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
-	return fallback 
-
-func setup_trail_meshes():
-	# Left hand trail
-	left_trail_mesh = MeshInstance3D.new()
-	left_trail_mesh.name = "LeftTrailMesh"
-	add_child(left_trail_mesh)
-	
-	left_trail_material = StandardMaterial3D.new()
-	left_trail_material.flags_transparent = true
-	left_trail_material.flags_unshaded = true
-	left_trail_material.no_depth_test = false
-	left_trail_material.billboard_mode = BaseMaterial3D.BILLBOARD_DISABLED
-	left_trail_material.albedo_color = left_hand_color
-	left_trail_mesh.material_override = left_trail_material
-	
-	# Right hand trail
-	right_trail_mesh = MeshInstance3D.new()
-	right_trail_mesh.name = "RightTrailMesh"
-	add_child(right_trail_mesh)
-	
-	right_trail_material = StandardMaterial3D.new()
-	right_trail_material.flags_transparent = true
-	right_trail_material.flags_unshaded = true
-	right_trail_material.no_depth_test = false
-	right_trail_material.billboard_mode = BaseMaterial3D.BILLBOARD_DISABLED
-	right_trail_material.albedo_color = right_hand_color
-	right_trail_mesh.material_override = right_trail_material
-
-func update_trail(hand: Node3D, trail_points: Array[Dictionary], delta: float):
-	var hand_pos = hand.global_transform.origin
-	
-	# Check if we should add a new point
-	var should_add = false
-	if trail_points.is_empty():
-		should_add = true
-	else:
-		var last_pos = trail_points[-1].position
-		var distance = hand_pos.distance_to(last_pos)
-		if distance > update_distance:
-			should_add = true
-	
-	if should_add:
-		var trail_point = {
-			"position": hand_pos,
-			"age": 0.0,
-			"velocity": Vector3.ZERO
-		}
-		
-		# Calculate velocity if we have previous points
-		if trail_points.size() > 0:
-			var prev_point = trail_points[-1]
-			trail_point.velocity = (hand_pos - prev_point.position) / delta
-		
-		trail_points.append(trail_point)
-		
-		# Limit trail length
-		if trail_points.size() > trail_length:
-			trail_points.pop_front()
-
-func decay_trails(trail_points: Array[Dictionary], delta: float):
-	# Age all points and remove old ones
-	for i in range(trail_points.size() - 1, -1, -1):
-		trail_points[i].age += delta
-		if trail_points[i].age > trail_lifetime:
-			trail_points.remove_at(i)
-
-func update_trail_mesh(mesh_instance: MeshInstance3D, trail_points: Array[Dictionary], base_color: Color):
-	if trail_points.size() < 2:
-		mesh_instance.mesh = null
-		return
-	
-
-	
-	var array_mesh = ArrayMesh.new()
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var uvs = PackedVector2Array()
-	var indices = PackedInt32Array()
-	var colors = PackedColorArray()
-	
-	# Generate trail geometry
-	for i in range(trail_points.size()):
-		var point = trail_points[i]
-		var pos = point.position
-		var age_factor = 1.0 - (point.age / trail_lifetime)
-		var width = trail_width * age_factor
-		
-		# Calculate direction for ribbon orientation
-		var forward = Vector3.FORWARD
-		if i < trail_points.size() - 1:
-			forward = (trail_points[i + 1].position - pos).normalized()
-		elif i > 0:
-			forward = (pos - trail_points[i - 1].position).normalized()
-		
-		# Create perpendicular vector for width
-		var camera = get_viewport().get_camera_3d()
-		var to_camera = Vector3.UP
-		if camera:
-			to_camera = (camera.global_transform.origin - pos).normalized()
-		
-		var right = forward.cross(to_camera).normalized()
-		
-		# Create quad vertices
-		var left_pos = pos - right * width * 0.5
-		var right_pos = pos + right * width * 0.5
-		
-		vertices.append(left_pos)
-		vertices.append(right_pos)
-		
-		# Normals
-		normals.append(to_camera)
-		normals.append(to_camera)
-		
-		# UVs
-		var u = float(i) / float(trail_points.size() - 1)
-		uvs.append(Vector2(u, 0.0))
-		uvs.append(Vector2(u, 1.0))
-		
-		# Colors with alpha fade
-		var alpha = age_factor * base_color.a
-		var point_color = Color(base_color.r, base_color.g, base_color.b, alpha)
-		colors.append(point_color)
-		colors.append(point_color)
-		
-		# Indices for triangles (except last point)
-		if i < trail_points.size() - 1:
-			var base_idx = i * 2
-			
-			# First triangle
-			indices.append(base_idx)
-			indices.append(base_idx + 1)
-			indices.append(base_idx + 2)
-			
-			# Second triangle
-			indices.append(base_idx + 1)
-			indices.append(base_idx + 3)
-			indices.append(base_idx + 2)
-	
-	# Create the mesh
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_TEX_UV] = uvs
-		arrays[Mesh.ARRAY_COLOR] = colors
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		mesh_instance.mesh = array_mesh
-
-# Alternative: Particle-based trails (more performance-friendly for long trails)
-func create_particle_trail(hand: Node3D, color: Color) -> GPUParticles3D:
-	var particles = GPUParticles3D.new()
-	add_child(particles)
-	
-	# Configure particle system
-	particles.emitting = false
-	particles.amount = 1000
-	particles.lifetime = trail_lifetime
-	particles.process_material = create_trail_particle_material(color)
-	
-	# Create custom mesh for particles
-	var particle_mesh = SphereMesh.new()
-	particle_mesh.radius = 0.01
-	particle_mesh.height = 0.02
-	particles.draw_pass_1 = particle_mesh
-	
-	return particles
-
-func create_trail_particle_material(color: Color) -> ParticleProcessMaterial:
-	var material = ParticleProcessMaterial.new()
-	
-	# Basic particle settings
-	material.direction = Vector3(0, 0, 0)
-	material.initial_velocity_min = 0.0
-	material.initial_velocity_max = 0.1
-	material.angular_velocity_min = 0.0
-	material.angular_velocity_max = 0.0
-	material.gravity = Vector3.ZERO
-	
-	# Size and color
-	material.scale_min = 0.5
-	material.scale_max = 1.0
-	material.color = color
-	
-	# Fade out over time
-	var fade_curve = Curve.new()
-	fade_curve.add_point(Vector2(0.0, 1.0))
-	fade_curve.add_point(Vector2(1.0, 0.0))
-	material.alpha_curve = fade_curve
-	
-	return material
-
-# Advanced trail effects
-func create_glitch_trail_effect():
-	# Add bit manipulation effects to trails
-	var glitch_material = StandardMaterial3D.new()
-	glitch_material.flags_transparent = true
-	glitch_material.flags_unshaded = true
-	
-	# Create shader for glitch effects
-	var shader = Shader.new()
-	shader.code = '''
-shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_opaque, depth_test_disabled, diffuse_burley, specular_schlick_ggx;
-
-varying float age;
-varying vec3 world_pos;
-
-uniform float time : hint_range(0.0, 100.0);
-uniform vec4 base_color : source_color = vec4(1.0);
-uniform float glitch_intensity : hint_range(0.0, 2.0) = 0.5;
-
-float random(vec2 uv) {
-	return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
-}
-
-void vertex() {
-	age = COLOR.a;
-	world_pos = VERTEX;
-}
-
-void fragment() {
-	vec2 glitch_uv = world_pos.xz + time * 0.1;
-	float noise = random(floor(glitch_uv * 20.0) / 20.0);
-	
-	vec3 color = base_color.rgb;
-	
-	// Bit-shift color channels
-	if (noise > 0.8 && glitch_intensity > 0.5) {
-		color.r = fract(color.r * 4.0);
-		color.g = fract(color.g * 2.0);  
-		color.b = fract(color.b * 8.0);
-	}
-	
-	// Digital corruption
-	if (random(glitch_uv + time) > 0.9) {
-		color = vec3(1.0, 0.0, 1.0); // Hot pink corruption
-	}
-	
-	ALBEDO = color;
-	ALPHA = base_color.a * age;
-}
-'''
-	
-	glitch_material.shader = shader
-	return glitch_material
-
-# Input handling for trail controls
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_1:
-				left_hand_color = Color(randf(), randf(), randf(), 0.8)
-				left_trail_material.albedo_color = left_hand_color
-			KEY_2:
-				right_hand_color = Color(randf(), randf(), randf(), 0.8)
-				right_trail_material.albedo_color = right_hand_color
-			KEY_C:
-				clear_all_trails()
-			KEY_PLUS, KEY_EQUAL:
-				trail_width = min(trail_width * 1.2, 0.5)
-			KEY_MINUS:
-				trail_width = max(trail_width * 0.8, 0.005)
-
-func clear_all_trails():
-	left_trail_points.clear()
-	right_trail_points.clear()
-	left_trail_mesh.mesh = null
-	right_trail_mesh.mesh = null
-
-# VR-specific enhancements
-func get_hand_velocity(hand: Node3D) -> Vector3:
-	# Get hand velocity from XR system if available
-	if hand.has_method("get_velocity"):
+func _hand_velocity(hand: Node3D) -> Vector3:
+	if hand and hand.has_method("get_velocity"):
 		return hand.get_velocity()
 	return Vector3.ZERO
 
-func add_haptic_feedback(hand: Node3D, intensity: float = 0.3):
-	# Add haptic feedback when drawing
-	if hand.has_method("trigger_haptic_pulse"):
-		hand.trigger_haptic_pulse("haptic", 0, intensity, 0.1, 0.0)
+func _haptic(hand: Node3D, on_strength := 0.25) -> void:
+	if hand and hand.has_method("trigger_haptic_pulse"):
+		hand.trigger_haptic_pulse("haptic", 0.0, on_strength, 0.08, 0.0)
 
-# Performance optimization for long trails
-func optimize_trail_points(trail_points: Array[Dictionary]):
-	# Remove redundant points that are too close together
-	if trail_points.size() < 3:
+# ----------------- Update / record ---------------
+func _update_trail_for_hand(hand: Node3D, buf: Array, delta: float, is_left: bool) -> void:
+	var drawing_now := true
+	if only_when_trigger_pressed:
+		drawing_now = _is_trigger_pressed(hand)
+
+	if hand != null:
+		if is_left and drawing_now and !_was_left_drawing: _haptic(hand)
+		if (not is_left) and drawing_now and !_was_right_drawing: _haptic(hand)
+
+	if hand == null:
+		_set_was_drawing(is_left, false)
 		return
-		
-	for i in range(trail_points.size() - 2, 0, -1):
-		var curr = trail_points[i]
-		var prev = trail_points[i - 1]
-		var next = trail_points[i + 1]
-		
-		# Check if current point is nearly collinear
-		var to_prev = (prev.position - curr.position).normalized()
-		var to_next = (next.position - curr.position).normalized()
-		
-		if to_prev.dot(to_next) > 0.98:  # Nearly collinear
-			trail_points.remove_at(i)
+
+	var p := hand.global_transform.origin
+	var should_add := buf.is_empty()
+	if not should_add and drawing_now:
+		var last_p: Vector3 = buf[-1][K_POS]
+		should_add = last_p.distance_to(p) >= min_sample_distance
+
+	if drawing_now and should_add:
+		var vel := Vector3.ZERO
+		if not buf.is_empty():
+			vel = (p - buf[-1][K_POS]) / max(delta, 1e-5)
+		buf.append({K_POS: p, K_AGE: 0.0, K_VEL: vel})
+		if buf.size() > trail_max_points:
+			buf.pop_front()
+
+	_set_was_drawing(is_left, drawing_now)
+
+func _set_was_drawing(is_left: bool, val: bool) -> void:
+	if is_left: _was_left_drawing = val
+	else: _was_right_drawing = val
+
+func _decay_points(buf: Array, delta: float) -> void:
+	for i in range(buf.size() - 1, -1, -1):
+		buf[i][K_AGE] = float(buf[i][K_AGE]) + delta
+		if float(buf[i][K_AGE]) > trail_lifetime:
+			buf.remove_at(i)
+
+# ----------------- Geometry build ----------------
+func _build_ribbon(mesh: ArrayMesh, points: Array, mi: MeshInstance3D, grad: Gradient) -> void:
+	if points.size() < 2:
+		mesh.clear_surfaces()
+		return
+
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		mesh.clear_surfaces()
+		return
+
+	var line: Array[Vector3] = []
+	line.resize(points.size())
+	for i in range(line.size()):
+		line[i] = points[i][K_POS]
+
+	var smoothed: Array[Vector3]
+	if smooth_spline and line.size() >= 4:
+		smoothed = _catmull_rom_resample(line, smooth_samples_per_segment)
+	else:
+		smoothed = line
+
+	var vtx := PackedVector3Array()
+	var nrm := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var col := PackedColorArray()
+	var idx := PackedInt32Array()
+
+	var total_len = max(1, smoothed.size() - 1)
+	for i in range(smoothed.size()):
+		var pos := smoothed[i]
+		var raw_idx = clamp(int(round(float(i) / float(total_len) * (points.size() - 1))), 0, points.size() - 1)
+		var age := float(points[raw_idx][K_AGE])
+		var t = clamp(age / max(trail_lifetime, 1e-5), 0.0, 1.0)
+
+		var w_scale := width_curve.sample(t)
+		var alpha_scale := alpha_curve.sample(t)
+		var width := base_width * w_scale
+
+		var fwd: Vector3
+		if i < smoothed.size() - 1:
+			fwd = (smoothed[i + 1] - pos).normalized()
+		else:
+			fwd = (pos - smoothed[i - 1]).normalized()
+
+		var to_cam := (cam.global_transform.origin - pos).normalized()
+		var right := fwd.cross(to_cam).normalized()
+		if right.length_squared() < 1e-6:
+			right = Vector3.RIGHT
+
+		if ribbon_jitter > 0.0:
+			var j := _hash_vec3(pos + Vector3(_time, float(i), 0.0)) * 2.0 - 1.0
+			right += (Vector3(j, -j, j) * ribbon_jitter)
+			right = right.normalized()
+
+		var lft := pos - right * (width * 0.5)
+		var rgt := pos + right * (width * 0.5)
+
+		var gcol := grad.sample(1.0 - t)
+		gcol.a *= alpha_scale
+
+		vtx.append(lft); vtx.append(rgt)
+		nrm.append(to_cam); nrm.append(to_cam)
+		var u := float(i) / float(max(1, smoothed.size() - 1))
+		uvs.append(Vector2(u, 0.0)); uvs.append(Vector2(u, 1.0))
+		col.append(gcol); col.append(gcol)
+
+		if i < smoothed.size() - 1:
+			var b := i * 2
+			idx.append_array([b, b + 1, b + 2, b + 1, b + 3, b + 2])
+
+	mesh.clear_surfaces()
+	var arrays: Array = []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vtx
+	arrays[Mesh.ARRAY_NORMAL] = nrm
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_COLOR] = col
+	arrays[Mesh.ARRAY_INDEX] = idx
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+
+	var mat := mi.material_override as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("u_time", _time)
+
+# ----------------- Spline helpers ----------------
+func _catmull_rom(p0: Vector3, p1: Vector3, p2: Vector3, p3: Vector3, t: float) -> Vector3:
+	var t2 := t * t
+	var t3 := t2 * t
+	return 0.5 * ((2.0 * p1) +
+		(-p0 + p2) * t +
+		(2.0 * p0 - 5.0 * p1 + 4.0 * p2 - p3) * t2 +
+		(-p0 + 3.0 * p1 - 3.0 * p2 + p3) * t3)
+
+func _catmull_rom_resample(line: Array[Vector3], samples_per_seg: int) -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	if line.size() < 4:
+		return line.duplicate()
+
+	for i in range(0, line.size() - 3):
+		var p0 := line[i]
+		var p1 := line[i + 1]
+		var p2 := line[i + 2]
+		var p3 := line[i + 3]
+		for s in range(samples_per_seg):
+			var t := float(s) / float(samples_per_seg)
+			out.append(_catmull_rom(p0, p1, p2, p3, t))
+	out.append(line[line.size() - 2])
+	out.append(line[line.size() - 1])
+	return out
+
+# ----------------- Utility ----------------------
+func _find_node_recursive(n: Node, needle: String) -> Node:
+	if n.name == needle:
+		return n
+	for c in n.get_children():
+		var r := _find_node_recursive(c, needle)
+		if r:
+			return r
+	return null
+
+func _hash_vec3(v: Vector3) -> float:
+	var s := sin(v.dot(Vector3(12.9898, 78.233, 37.719))) * 43758.5453
+	return s - floor(s) # 0..1
+
+# ----------------- Controls ---------------------
+func _input(e: InputEvent) -> void:
+	if e is InputEventKey and e.pressed:
+		match e.keycode:
+			KEY_C:
+				_left_points.clear(); _right_points.clear()
+				_left_mesh.clear_surfaces(); _right_mesh.clear_surfaces()
+			KEY_PLUS, KEY_EQUAL:
+				base_width = clamp(base_width * 1.15, 0.005, 0.5)
+			KEY_MINUS:
+				base_width = clamp(base_width * 0.85, 0.005, 0.5)
+			KEY_G:
+				additive_glow = !additive_glow
+				if _left_mat: _left_mat.set_shader_parameter("u_additive", 1.0 if additive_glow else 0.0)
+				if _right_mat: _right_mat.set_shader_parameter("u_additive", 1.0 if additive_glow else 0.0)
+			KEY_D:
+				disable_depth_test = !disable_depth_test
+				if _left_mat: _left_mat.set_shader_parameter("u_disable_depth", 1.0 if disable_depth_test else 0.0)
+				if _right_mat: _right_mat.set_shader_parameter("u_disable_depth", 1.0 if disable_depth_test else 0.0)
+
+# ----------------- Shader -----------------------
+func _trail_shader_code() -> String:
+	return """
+shader_type spatial;
+render_mode unshaded, cull_disabled, depth_draw_opaque;
+
+uniform float u_time = 0.0;
+uniform float u_additive = 1.0;       // emulate additive highlights
+uniform float u_disable_depth = 1.0;  // (hint flag only)
+
+void vertex() {
+}
+
+void fragment() {
+	vec4 c = COLOR;
+
+	float v = UV.y;
+	float edge = smoothstep(0.0, 0.15, v) * smoothstep(0.0, 0.15, 1.0 - v);
+	c.rgb *= mix(1.2, 0.9, edge);
+
+	float fr = pow(1.0 - clamp(dot(NORMAL, -VIEW), 0.0, 1.0), 3.0);
+	c.rgb += fr * 0.15;
+
+	if (u_additive > 0.5) {
+		c.rgb = c.rgb * 0.6 + c.rgb * c.rgb * 0.6;
+	}
+
+	ALBEDO = c.rgb;
+	ALPHA = c.a;
+}
+"""

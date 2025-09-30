@@ -295,9 +295,6 @@
 			"lookup_name": "geometric_transformations",
 			"description": "geometric_transformations",
 			"scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
-			"position": [0.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [0.5, 0.5, 0.5],
 		},
 
 		"transformation_cube": {
@@ -360,14 +357,7 @@
 			"lookup_name": "chair2",
 			"description": "chair2",
 			"scene": "res://commons/lab/chair/officechair.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "look",
-			"sequence": "array_tutorial",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": []
 		},
-		
 		"pick_up_cube": {
 			"name": "Pick Up Cube",
 			"lookup_name": "pick_up_cube",
@@ -433,16 +423,14 @@
 			"lookup_name": "radiolaria", 
 			"description": "radiolaria",
 			"scene": "res://algorithms/computationalbiology/radiolaria/radiolaria.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},
 		"tartan_demo": {
 			"name": "tartan_demo",
 			"lookup_name": "tartan_demo", 
 			"description": "tartan_demo",
 			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},
 		"spectral_analyzer": {
 			"name": "Master Audio Analyzer",
@@ -487,12 +475,7 @@
 			"lookup_name": "random_edge_profile",
 			"description": "A planar surface that generates random edge profiles and patterns",
 			"scene": "res://algorithms/randomness/profile_random.tscn",
-			"position": [1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm", 
-			"prerequisites": ["array_tutorial"]
+	
 		},
 
 		"bubbles_random": {
@@ -500,38 +483,21 @@
 			"lookup_name": "bubbles_random",
 			"description": "A particle system that generates random bubble effects with dynamic spawning",
 			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
-			"position": [1.0, 1.0, -1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm", 
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"random_walk_128": {
 			"name": "Random Walk 128x128",
 			"lookup_name": "random_walk_128",
 			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
 			"scene": "res://algorithms/randomness/random_walk_128.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+	
 		},
 		"ten_print_maze_3d": {
 			"name": "ten_print_maze_3d",
 			"lookup_name": "ten_print_maze_3d",
 			"description": "ten_print_maze_3d",
 			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		
 		"digital_materiality_glitch": {
@@ -539,13 +505,7 @@
 			"lookup_name": "digital_materiality_glitch",
 			"description": "digital_materiality_glitch",
 			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		
 		"distribution_visualization": {
@@ -553,13 +513,6 @@
 			"lookup_name": "distribution_visualization",
 			"description": "distribution_visualization",
 			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
 		},	
 		
 		 "pickup_cube_placer": {
@@ -567,13 +520,7 @@
 			"lookup_name": "pickup_cube_placer",
 			"description": "pickup_cube_placer",
 			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"cube_projectile_spawner": {
 			"name": "cube_projectile_spawner",
@@ -587,48 +534,27 @@
 			"lookup_name": "walk_random",
 			"description": "An algorithmic walker that creates trails through the grid space",
 			"scene": "res://algorithms/randomness/walk_random.tscn",
-			"position": [2.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
 		},
 		"remove_random": {
 			"name": "Random Destructor",
 			"lookup_name": "remove_random",
 			"description": "A demolition algorithm that randomly removes cubes from the grid",
 			"scene": "res://algorithms/randomness/remove_random.tscn",
-			"position": [2.0, 1.0, -1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+	
 		},
 		"height_random": {
 			"name": "Height Distributor",
 			"lookup_name": "height_random",
 			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
 			"scene": "res://algorithms/randomness/height_random.tscn",
-			"position": [1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+	
 		},
 		"gaussian_random": {
 			"name": "Gaussian Generator",
 			"lookup_name": "gaussian_random",
 			"description": "A bell curve algorithm that creates natural-looking height distributions",
 			"scene": "res://algorithms/randomness/gaussian_random.tscn",
-			"position": [-2.0, 1.0, -1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 
 		 "blue_noise": {
@@ -636,45 +562,28 @@
 			"lookup_name": "blue_noise",
 			"description": "blue_noise",
 			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
-			"position": [0.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},	
 		"noisetorus": {
 			"name": "noisetorus",
 			"lookup_name": "noisetorus", 
 			"description": "noisetorus",
 			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},	
 		"noisetext": {
 			"name": "noisetext",
 			"lookup_name": "noisetext",
 			"description": "noisetext",
 			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"noisesphere": {
 			"name": "noisesphere",
 			"lookup_name": "noisesphere",
 			"description": "noisesphere",
 			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 				
 		"sculpt_one": {
@@ -682,36 +591,28 @@
 			"lookup_name": "sculpt_one",
 			"description": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
 			"scene": "res://algorithms/randomness/sculpt_one.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"rainbow": {
 			"name": "rainbow",
 			"lookup_name": "rainbow",
 			"description": "rainbow",
 			"scene": "res://algorithms/primitives/rainbow/rainbow.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},
 		"homagetothesquare": {
 			"name": "homagetothesquare",
 			"lookup_name": "homagetothesquare",
 			"description": "homagetothesquare",
 			"scene": "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},
 		"platonicsolids": {
 			"name": "platonicsolids",
 			"lookup_name": "platonicsolids",
 			"description": "platonicsolids",
 			"scene": "res://algorithms/primitives/platonicsolids/platonicsolids.tscn",
-			"position": [3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0]
+
 		},
 		"monitorsystem": {
 			"name": "monitorsystem",
@@ -732,12 +633,7 @@
 			"lookup_name": "env_one",
 			"description": "A procedural environment generation algorithm using randomness for kitbashing",
 			"scene": "res://algorithms/randomness/env_one.tscn",
-			"position": [-3.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"random_transformations_geometric": {
 			"name": "Random Transformations - Geometric",
@@ -807,18 +703,14 @@
 			"lookup_name": "particle_randomness_emergent",
 			"description": "Emergent behavior particle system",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn",
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm"
+			
 		},
 		"particle_randomness_evolutionary": {
 			"name": "Particle Randomness - Evolutionary",
 			"lookup_name": "particle_randomness_evolutionary",
 			"description": "Evolutionary algorithm particles",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm"
+
 		},
 
 		"random_object_spawner": {
@@ -832,31 +724,14 @@
 			"lookup_name": "marching_cubes",
 			"description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
 			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
-			"position": [4.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "spatial_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"]
+			
 		},
 		"rhizome_cave_system": {
 			"name": "Rhizomatic Cave System",
 			"lookup_name": "rhizome_cave_system",
 			"description": "Advanced cave generation using rhizomatic growth patterns and marching cubes for organic underground networks",
 			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
-			"position": [5.0, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_activate",
-			"sequence": "spatial_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.4, 0.35, 0.3],
-				"light_intensity": 1.8,
-				"light_range": 5.0,
-				"light_position": [0, 2.0, 0]
-			}
+		
 		},
 		
 
@@ -871,66 +746,40 @@
 		"lookup_name": "random_space",
 		"description": "A crystal that contains mathematical chaos algorithms", 
 		"scene": "res://commons/context/walkgrids/random_space.tscn",
-		"position": [0.0, 1.0, 0.0], 
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "randomness_exploration"
+		
 	},
 	"fourier_transform": {
 		"name": "Fourier Transform",
 		"lookup_name": "fourier_transform",
 		"description": "Frequency domain analysis and signal processing",
 		"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
-		"position": [0.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"spectral_analyzer": {
 		"name": "Spectral Analyzer",
 		"lookup_name": "spectral_analyzer",
 		"description": "Real-time audio frequency spectrum visualization",
 		"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
-		"position": [1.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
 	},
 	"unit_circle": {
 		"name": "Unit Circle",
 		"lookup_name": "unit_circle",
 		"description": "Trigonometric functions visualization on unit circle",
 		"scene": "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn",
-		"position": [2.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+
 	},
 	"tech_noir_audio": {
 		"name": "Tech Noir Audio",
 		"lookup_name": "tech_noir_audio",
 		"description": "John Cage inspired algorithmic audio composition",
 		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
-		"position": [3.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
 	},
 	 "liturgicalambientgen": {
 		"name": "liturgicalambientgenera",
 		"lookup_name": "liturgicalambientgen",
 		"description": "liturgicalambientgenera",
 		"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
-		"position": [3.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+	
 	},
 	
 	"resonance_frequencies": {
@@ -938,55 +787,35 @@
 		"lookup_name": "resonance_frequencies",
 		"description": "Visualization of resonant frequency patterns",
 		"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
-		"position": [4.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+	
 	},
 	"noir_sequencer": {
 		"name": "Noir Sequencer",
 		"lookup_name": "noir_sequencer",
 		"description": "Film noir style algorithmic music sequencer",
 		"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
-		"position": [5.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"kusama_sine": {
 		"name": "Kusama Sine",
 		"lookup_name": "kusama_sine",
 		"description": "Yayoi Kusama inspired sine wave patterns",
 		"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
-		"position": [6.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+	
 	},
 	"john_cage_tech_noir": {
 		"name": "john_cage_tech_noir",
 		"lookup_name": "john_cage_tech_noir",
 		"description": "john_cage_tech_noir",
 		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
-		"position": [6.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 		"mario_test_sound_ui": {
 		"name": "mario_test_sound_ui",
 		"lookup_name": "mario_test_sound_ui",
 		"description": "mario_test_sound_ui",
 		"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
-		"position": [6.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	
 	
@@ -995,66 +824,42 @@
 		"lookup_name": "bernini_columns",
 		"description": "Baroque architectural wave patterns",
 		"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
-		"position": [7.0, 1.0, 4.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"fourier_transform_advanced": {
 		"name": "Advanced Fourier Transform",
 		"lookup_name": "fourier_transform_advanced",
 		"description": "Enhanced frequency domain signal analysis",
 		"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
-		"position": [0.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"parametric_shapes": {
 		"name": "Parametric Shapes",
 		"lookup_name": "parametric_shapes",
 		"description": "Mathematical curve and surface generation",
 		"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
-		"position": [1.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"sine_space": {
 		"name": "Sine Space",
 		"lookup_name": "sine_space",
 		"description": "3D sine wave spatial exploration",
 		"scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
-		"position": [2.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"standing_waves": {
 		"name": "Standing Waves",
 		"lookup_name": "standing_waves",
 		"description": "Stationary wave pattern visualization",
 		"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
-		"position": [3.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+		
 	},
 	"unit_circle_advanced": {
 		"name": "Advanced Unit Circle",
 		"lookup_name": "unit_circle_advanced",
 		"description": "Enhanced trigonometric visualization",
 		"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
-		"position": [4.0, 1.0, 5.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch_to_activate",
-		"sequence": "wavefunction_exploration"
+
 	},
 	"wave_interference": {
 		"name": "Wave Interference",
@@ -1128,55 +933,40 @@
 			"lookup_name": "koch_curve_3d",
 			"description": "Three-dimensional recursive Koch snowflake curve generation",
 			"scene": "res://algorithms/recursiveemergence/koshcurve/KochCurve3D.tscn",
-			"position": [0.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+		
 		},
 		"recursive_tree": {
 			"name": "Recursive Tree",
 			"lookup_name": "recursive_tree",
 			"description": "Fractal tree generation using recursive branching algorithms",
 			"scene": "res://algorithms/recursiveemergence/recursivetree/recursive_tree.tscn",
-			"position": [1.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"rule_30_110": {
 			"name": "Rule 30/110 Cellular Automata",
 			"lookup_name": "rule_30_110",
 			"description": "Elementary cellular automata rules 30 and 110 visualization",
 			"scene": "res://algorithms/recursiveemergence/rule_30_110/rule_30_110.tscn",
-			"position": [2.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		 "crackpropagation_ca": {
 			"name": "crackpropagation_ca",
 			"lookup_name": "crackpropagation_ca",
 			"description": "crackpropagation_ca",
 			"scene": "res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn",
-			"position": [2.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+		},
+		 "dewcoveredfol": {
+			"name": "dewcoveredfol",
+			"lookup_name": "dewcoveredfol",
+			"description": "dewcoveredfol",
+			"scene": "res://algorithms/proceduralgeneration/dewcoveredfoliage/dewcoveredfoliage.tscn",
 		},
 		  "percolationnetwork_ca": {
 			"name": "percolationnetwork_ca",
 			"lookup_name": "percolationnetwork_ca",
 			"description": "percolationnetwork_ca",
 			"scene": "res://algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn",
-			"position": [2.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		
 		"mandelbrot_set": {
@@ -1184,99 +974,62 @@
 			"lookup_name": "mandelbrot_set",
 			"description": "Fractal visualization of the famous Mandelbrot set",
 			"scene": "res://algorithms/recursiveemergence/mandelbrot_set/mandelbrot_set.tscn",
-			"position": [3.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"lattice_gas_automata": {
 			"name": "Lattice Gas Automata",
 			"lookup_name": "lattice_gas_automata",
 			"description": "Particle-based fluid simulation using cellular automata rules",
 			"scene": "res://algorithms/recursiveemergence/lattice_gas_automata/lattice_gas_automata.tscn",
-			"position": [4.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"koch_curve": {
 			"name": "Koch Curve",
 			"lookup_name": "koch_curve",
 			"description": "Classic Koch snowflake fractal curve generation",
 			"scene": "res://algorithms/recursiveemergence/koch_curve/koch_curve.tscn",
-			"position": [5.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"julia_set": {
 			"name": "Julia Set",
 			"lookup_name": "julia_set",
 			"description": "Complex plane fractal visualization of Julia sets",
 			"scene": "res://algorithms/recursiveemergence/julia_set/julia_set.tscn",
-			"position": [6.0, 1.0, 7.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"fibonacci_sequences": {
 			"name": "Fibonacci Sequences",
 			"lookup_name": "fibonacci_sequences",
 			"description": "Recursive mathematical sequences and spiral visualizations",
 			"scene": "res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn",
-			"position": [0.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
 		},
 		"cellular_automata_3d": {
 			"name": "3D Cellular Automata",
 			"lookup_name": "cellular_automata_3d",
 			"description": "Three-dimensional cellular automata simulation and visualization",
 			"scene": "res://algorithms/recursiveemergence/cellular_automata_3d/cellular_automata_3d.tscn",
-			"position": [1.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"cellular_automata_2d": {
 			"name": "2D Cellular Automata",
 			"lookup_name": "cellular_automata_2d",
 			"description": "Two-dimensional cellular automata with Conway's Game of Life rules",
 			"scene": "res://algorithms/recursiveemergence/cellular_automata_2D/cellular_automata_2D.tscn",
-			"position": [2.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"cellular_automata_1d": {
 			"name": "1D Cellular Automata",
 			"lookup_name": "cellular_automata_1d",
 			"description": "One-dimensional cellular automata rule exploration",
 			"scene": "res://algorithms/recursiveemergence/cellular_automata_1d/cellular_automata_1d.tscn",
-			"position": [3.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"context_free_grammars": {
 			"name": "Context-Free Grammars",
 			"lookup_name": "context_free_grammars",
 			"description": "L-system context-free grammar generation and visualization",
 			"scene": "res://algorithms/recursiveemergence/lsystems/context_free_grammars/context_free_grammars.tscn",
-			"position": [4.0, 1.0, 8.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "recursive_emergence_exploration"
+			
 		},
 		"tree_generation": {
 			"name": "Tree Generation",
@@ -1325,57 +1078,35 @@
 			"lookup_name": "gridscheckers",
 			"description": "gridscheckers",
 			"scene": "res://algorithms/patterngeneration/gridscheckers/gridscheckers.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 				"animalpatterns": {
 			"name": "animalpatterns",
 			"lookup_name": "animalpatterns",
 			"description": "animalpatterns",
 			"scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		 "Marching_Cubes": {
 			"name": "Marching_Cubes",
 			"lookup_name": "Marching_Cubes",
 			"description": "Marching Cubes",
 			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+		
 		},
 		"rhizome_cave_demo": {
 			"name": "rhizome_cave_demo",
 			"lookup_name": "rhizome_cave_demos",
 			"description": "rhizome_cave_demo",
 			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
-		
-		
 		 "fabrics": {
 			"name": "fabrics",
 			"lookup_name": "fabrics",
 			"description": "fabrics",
 			"scene": "res://algorithms/patterngeneration/fabrics/fabrics.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		
 		 "truchettiles": {
@@ -1383,47 +1114,28 @@
 			"lookup_name": "truchettiles",
 			"description": "truchettiles",
 			"scene": "res://algorithms/patterngeneration/truchettiles/truchettiles.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		 "waves": {
 			"name": "waves",
 			"lookup_name": "waves",
 			"description": "waves",
 			"scene": "res://algorithms/patterngeneration/waves/waves.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
 		},	
-			
-		
 		 "glassdivider": {
 			"name": "glassdivider",
 			"lookup_name": "glassdivider",
 			"description": "glassdivider",
 			"scene": "res://algorithms/patterngeneration/glassdivider/glassdivider.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
-		
+
 		"tile_patterns": {
 			"name": "Tile Patterns",
 			"lookup_name": "tile_patterns",
 			"description": "Procedural tile pattern generation and tiling algorithms",
 			"scene": "res://algorithms/proceduralgeneration/tilepatterns/tilepattern.tscn",
-			"position": [3.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"fuzzy_cloud": {
 			"name": "fuzzy_cloud",
@@ -1438,66 +1150,42 @@
 			"lookup_name": "slime_mold",
 			"description": "Slime mold simulation using Dave Stewart's tube algorithm",
 			"scene": "res://algorithms/proceduralgeneration/slimemold/slime.tscn",
-			"position": [4.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"reaction_diffusion": {
 			"name": "Reaction Diffusion",
 			"lookup_name": "reaction_diffusion",
 			"description": "Turing pattern generation using reaction-diffusion systems",
 			"scene": "res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern.tscn",
-			"position": [5.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"liquid_simulation": {
 			"name": "Liquid Simulation",
 			"lookup_name": "liquid_simulation",
 			"description": "Particle-based liquid simulation and fluid dynamics",
 			"scene": "res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
-			"position": [6.0, 1.0, 9.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"mushrooms": {
 			"name": "Mushrooms",
 			"lookup_name": "mushrooms",
 			"description": "Procedural mushroom generation with organic growth patterns",
 			"scene": "res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn",
-			"position": [0.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"mirrored_cellular_automata": {
 			"name": "Mirrored Cellular Automata",
 			"lookup_name": "mirrored_cellular_automata",
 			"description": "Cellular automata with mirroring and symmetry effects",
 			"scene": "res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn",
-			"position": [1.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+		
 		},
 		 "walkingsphere": {
 			"name": "walkingsphere",
 			"lookup_name": "walkingsphere",
 			"description": "Spike, Random walk, Cellular automata  sphere",
 			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn",
-			"position": [1.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		
 		"metaballs": {
@@ -1562,77 +1250,48 @@
 			"lookup_name": "maze_generation",
 			"description": "Procedural maze generation algorithms and visualization",
 			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn",
-			"position": [3.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"markov_chains": {
 			"name": "Markov Chains",
 			"lookup_name": "markov_chains",
 			"description": "Procedural generation using Markov chain algorithms",
 			"scene": "res://algorithms/proceduralgeneration/markov_chains/markov_chains.tscn",
-			"position": [4.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"lsystem_tree": {
 			"name": "L-System Tree",
 			"lookup_name": "lsystem_tree",
 			"description": "Procedural tree generation using L-system algorithms",
 			"scene": "res://algorithms/proceduralgeneration/lsystem/scenes/tree_l_system.tscn",
-			"position": [5.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"layered_membrane": {
 			"name": "Layered Membrane",
 			"lookup_name": "layered_membrane",
 			"description": "Procedural membrane generation with layered structures",
 			"scene": "res://algorithms/proceduralgeneration/layeredmembrane/layered_membrane.tscn",
-			"position": [6.0, 1.0, 10.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 		"implicit_surface_modeling": {
 			"name": "Implicit Surface Modeling",
 			"lookup_name": "implicit_surface_modeling",
 			"description": "Metaball-based implicit surface generation and modeling",
 			"scene": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn",
-			"position": [0.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
 		},
 		"cellular_automata_procgen": {
 			"name": "Cellular Automata Procedural",
 			"lookup_name": "cellular_automata_procgen",
 			"description": "Procedural generation using cellular automata rules",
 			"scene": "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn",
-			"position": [1.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+	
 		},
 		"WFCSculptureGenerator": {
 			"name": "WFCSculptureGenerator",
 			"lookup_name": "WFCSculptureGenerator",
 			"description": "WFCSculptureGenerator",
 			"scene": "res://algorithms/proceduralgeneration/WFCSculptureGenerator/WFCSculptureGenerator.tscn",
-			"position": [2.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+	
 		},	
 		"WFC3DGenerator": {
 			"name": "WWFC3DGeneratorr",
@@ -1653,11 +1312,7 @@
 			"lookup_name": "spherenetwork",
 			"description": "spherenetwork",
 			"scene": "res://algorithms/proceduralgeneration/spherenetwork/spherenetwork.tscn",
-			"position": [2.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
+			
 		},
 						
 		
@@ -1666,44 +1321,41 @@
 			"lookup_name": "branching_growth_algorithm",
 			"description": "Procedural branching and growth pattern generation",
 			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
-			"position": [2.0, 1.0, 11.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration"
 		},
+		"branching_growth_algorithm_continued": {
+			"name": "Branching Growth Algorithm continued",
+			"lookup_name": "branching_growth_algorithm_continued",
+			"description": "Procedural branching and growth pattern generation",
+			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn",
+		},
+
+		"CA_sphere": {
+			"name": "CA_sphere",
+			"lookup_name": "CA_sphere",
+			"description": "CA_sphere",
+			"scene": "res://algorithms/proceduralgeneration/CA_sphere/CA_sphere.tscn",
+		},
+		
 		"bouncing_ball": {
 			"name": "Bouncing Ball Physics",
 			"lookup_name": "bouncing_ball",
 			"description": "Basic physics simulation with gravity and collision response",
 			"scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
-			"position": [0.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+			
 		},
 		"cloth_simulation": {
 			"name": "Cloth Simulation",
 			"lookup_name": "cloth_simulation",
 			"description": "Soft body physics simulation using spring-mass systems",
 			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+	
 		},
 		"flagdancer": {
 			"name": "flagdancer",
 			"lookup_name": "flagdancer",
 			"description": "Soft flagdancerms",
 			"scene": "res://algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+			
 		},
 		
 		
@@ -1712,27 +1364,21 @@
 			"lookup_name": "softbody3d",
 			"description": "softbody3d",
 			"scene": "res://algorithms/physicssimulation/softbody3d/softbody3d.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},
 		"fetishtorus": {
 			"name": "fetishtorus",
 			"lookup_name": "fetishtorus",
 			"description": "fetishtorus",
 			"scene": "res://algorithms/primitives/fetishtorus/fetishtorus.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},
 		"marchingcave": {
 			"name": "marchingcave",
 			"lookup_name": "marchingcave",
 			"description": "smarchingcave",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn",
-			"position": [1.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},
 		"booleans": {
 			"name": "booleans",
@@ -1755,33 +1401,21 @@
 			"lookup_name": "collision_detection",
 			"description": "Algorithms for detecting and resolving object collisions",
 			"scene": "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
-			"position": [2.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+			
 		},
 		"constraints": {
 			"name": "Constraints",
 			"lookup_name": "constraints",
 			"description": "Physics constraint systems for maintaining object relationships",
 			"scene": "res://algorithms/physicssimulation/constraints/constraints.tscn",
-			"position": [3.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"modernistchairgallery": {
 			"name": "modernistchairgallery",
 			"lookup_name": "modernistchairgallery",
 			"description": "Physics constraint systems for maintaining object relationships",
 			"scene": "res://algorithms/proceduralgeneration/modernistchairs/ModernistChairGallery.tscn",
-			"position": [3.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},	
 		
 		"fem_simulation": {
@@ -1789,88 +1423,56 @@
 			"lookup_name": "fem_simulation",
 			"description": "Numerical analysis using finite element method for physics",
 			"scene": "res://algorithms/physicssimulation/fem/fem.tscn",
-			"position": [4.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"fluid_simulation": {
 			"name": "Fluid Simulation",
 			"lookup_name": "fluid_simulation",
 			"description": "Particle-based fluid dynamics and flow simulation",
 			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
-			"position": [5.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"force_fields": {
 			"name": "Force Fields",
 			"lookup_name": "force_fields",
 			"description": "Visualization and simulation of various force field interactions",
 			"scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
-			"position": [6.0, 1.0, 12.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"magnetic_simulation": {
 			"name": "Magnetic Simulation",
 			"lookup_name": "magnetic_simulation",
 			"description": "Electromagnetic field simulation and magnetic object interactions",
 			"scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
-			"position": [0.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"mass_spring_damper": {
 			"name": "Mass Spring Damper",
 			"lookup_name": "mass_spring_damper",
 			"description": "Oscillatory motion simulation with damping effects",
 			"scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
-			"position": [1.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"nbody_simulation": {
 			"name": "N-Body Simulation",
 			"lookup_name": "nbody_simulation",
 			"description": "Gravitational simulation of multiple interacting bodies",
 			"scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
-			"position": [2.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"newtons_laws": {
 			"name": "Newton's Laws",
 			"lookup_name": "newtons_laws",
 			"description": "Fundamental physics simulation demonstrating Newton's laws of motion",
 			"scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
-			"position": [3.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"fuzzy_cloud": {
 			"name": "fuzzy_cloud",
 			"lookup_name": "fuzzy_cloud",
 			"description": "fuzzy_cloud",
 			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscncn",
-			"position": [3.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		
 		"numerical_integration": {
@@ -1878,66 +1480,41 @@
 			"lookup_name": "numerical_integration",
 			"description": "Various numerical integration methods for physics simulation",
 			"scene": "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
-			"position": [4.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"particle_systems": {
 			"name": "Particle Systems",
 			"lookup_name": "particle_systems",
 			"description": "Physics-based particle system simulation and effects",
 			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
-			"position": [5.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"rigid_body": {
 			"name": "Rigid Body Dynamics",
 			"lookup_name": "rigid_body",
 			"description": "Simulation of rigid body physics and rotational dynamics",
 			"scene": "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
-			"position": [6.0, 1.0, 13.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
 		},
 		"soft_bodies": {
 			"name": "Soft Bodies",
 			"lookup_name": "soft_bodies",
 			"description": "Deformable soft body physics simulation",
 			"scene": "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
-			"position": [0.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"softmill": {
 			"name": "softmill",
 			"lookup_name": "softmill",
 			"description": "Deformable soft body physics simulation",
 			"scene": "res://algorithms/physicssimulation/softbodies/softmill/softmill.tscn",
-			"position": [0.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"softstopscene": {
 			"name": "softstopscene",
 			"lookup_name": "softstopscene",
 			"description": "Deformable soft body physics simulation",
 			"scene": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
-			"position": [0.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		
 		"spring_mass_system": {
@@ -1945,66 +1522,131 @@
 			"lookup_name": "spring_mass_system",
 			"description": "Networked spring-mass physics simulation system",
 			"scene": "res://algorithms/physicssimulation/springmass/springmass.tscn",
-			"position": [1.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"spring_system": {
 			"name": "Spring System",
 			"lookup_name": "spring_system",
 			"description": "Basic spring physics simulation and oscillation dynamics",
 			"scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
-			"position": [2.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"surreal_kinetic_sculpture": {
 			"name": "Surreal Kinetic Sculpture",
 			"lookup_name": "surreal_kinetic_sculpture",
 			"description": "Artistic physics simulation inspired by surrealist kinetic art",
 			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
-			"position": [3.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"three_body_problem": {
 			"name": "Three Body Problem",
 			"lookup_name": "three_body_problem",
 			"description": "Classical mechanics simulation of three gravitating bodies",
 			"scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
-			"position": [4.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
 		},
+		"VectorBasics": {
+			"name": "VectorBasics",
+			"lookup_name": "VectorBasics",
+			"description": "VectorBasics",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+		},
+		"VectorAddition": {
+			"name": "VectorAddition",
+			"lookup_name": "VectorAddition",
+			"description": "VectorAddition",
+			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+		},
+		"VectorDotProduct": {
+			"name": "VectorDotProduct",
+			"lookup_name": "VectorDotProduct",
+			"description": "VectorDotProduct",
+			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+		},
+		"VectorSubtraction": {
+			"name": "VectorSubtraction",
+			"lookup_name": "VectorSubtraction",
+			"description": "VectorSubtraction",
+			"scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+		},
+		"VectorForces": {
+			"name": "VectorForces",
+			"lookup_name": "VectorForces",
+			"description": "VectorForces",
+			"scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+		},
+		"VectorCrossProduct": {
+			"name": "VectorCrossProduct",
+			"lookup_name": "VectorCrossProduct",
+			"description": "VectorCrossProduct",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+		},
+		"VectorProjectionReflection": {
+			"name": "VectorProjectionReflection",
+			"lookup_name": "VectorProjectionReflection",
+			"description": "VectorProjectionReflection",
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+		},
+		"VectorMotion": {
+			"name": "VectorMotion",
+			"lookup_name": "VectorMotion",
+			"description": "VectorMotion",
+			"scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+		},
+		"VectorTorque": {
+			"name": "VectorTorque",
+			"lookup_name": "VectorTorque",
+			"description": "VectorTorque",
+			"scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+		},
+		"VectorFieldFlow": {
+			"name": "VectorFieldFlow",
+			"lookup_name": "VectorFieldFlow",
+			"description": "VectorFieldFlow",
+			"scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+		},
+		"vectorline": {
+			"name": "vectorline",
+			"lookup_name": "vectorline",
+			"description": "Interactive vector line with arrowhead",
+			"scene": "res://algorithms/vectors/vectorline/vectorline.tscn",
+		},
+		"PendulumPin": {
+			"name": "PendulumPin",
+			"lookup_name": "PendulumPin",
+			"description": "PendulumPin",
+			"scene": "res://algores://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",
+		},
+		"DoublePendulum": {
+			"name": "DoublePendulum",
+			"lookup_name": "DoublePendulum",
+			"description": "DoublePendulum",
+			"scene": "res://algorithms/joint/02_double_pendulum/DoublePendulum.tscn",
+		},	
+		"HingeCrank": {
+			"name": "HingeCrank",
+			"lookup_name": "HingeCrank",
+			"description": "HingeCrank",
+			"scene": "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
+		},	
+		"CharacterRagdoll": {
+			"name": "CharacterRagdoll",
+			"lookup_name": "CharacterRagdollHingeCrank",
+			"description": "CharacterRagdoll",
+			"scene": "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
+		},			
 		"vector_fields": {
 			"name": "Vector Fields",
 			"lookup_name": "vector_fields",
 			"description": "Visualization and analysis of vector field dynamics",
 			"scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
-			"position": [5.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 		"verlet_integration": {
 			"name": "Verlet Integration",
 			"lookup_name": "verlet_integration",
 			"description": "Numerical integration using Verlet method for stable physics",
 			"scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
-			"position": [6.0, 1.0, 14.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration"
+
 		},
 	"sine_space": {
 		"name": "sine_space",
@@ -2025,217 +1667,101 @@
 			"lookup_name": "geometric_crystal",
 			"description": "A crystal that contains spatial algorithms",
 			"scene": "res://commons/primitives/crystals/geometric_crystal.tscn",
-			"position": [0.0, 1.0, -1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "geometric_algorithms",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"array_visualizer": {
 			"name": "Array Visualizer",
 			"lookup_name": "array_visualizer",
 			"description": "Interactive tool for visualizing array structures",
 			"scene": "res://commons/primitives/tools/array_visualizer.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["array_tutorial"]
+
 		},
 		"quantum_dice": {
 			"name": "Quantum Dice",
 			"lookup_name": "quantum_dice",
 			"description": "Dice that demonstrate quantum probability principles",
 			"scene": "res://commons/primitives/dice/quantum_dice.tscn",
-			"position": [0.0, 0.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["randomness_exploration"]
+
 		},
 		"chaos_attractor": {
 			"name": "Chaos Attractor",
 			"lookup_name": "chaos_attractor",
 			"description": "Visualization of chaotic systems and strange attractors",
 			"scene": "res://commons/primitives/attractors/chaos_attractor.tscn",
-			"position": [1.5, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["randomness_exploration"]
+
 		},
 		"spatial_compass": {
 			"name": "Spatial Compass",
 			"lookup_name": "spatial_compass",
 			"description": "Tool for navigating geometric algorithms",
 			"scene": "res://commons/primitives/tools/spatial_compass.tscn",
-			"position": [-1.5, 1.0, 0.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["geometric_algorithms"]
+
 		},
 		"dimension_lens": {
 			"name": "Dimension Lens",
 			"lookup_name": "dimension_lens",
 			"description": "Lens for viewing multi-dimensional spaces",
 			"scene": "res://commons/primitives/tools/dimension_lens.tscn",
-			"position": [0.0, 1.0, -1.5],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["geometric_algorithms"]
+
 		},
 		"knowledge_prism": {
 			"name": "Knowledge Prism",
 			"lookup_name": "knowledge_prism",
 			"description": "Prism that refracts complex concepts into understandable forms",
 			"scene": "res://commons/primitives/prisms/knowledge_prism.tscn",
-			"position": [0.0, 1.2, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "touch_to_start_sequence",
-			"sequence": "advanced_concepts",
-			"artifact_type": "sequence_trigger",
-			"prerequisites": ["randomness_exploration", "geometric_algorithms"]
+			
 		},
 		"reality_modifier": {
 			"name": "Reality Modifier",
 			"lookup_name": "reality_modifier",
 			"description": "Tool for modifying the fundamental nature of reality",
 			"scene": "res://commons/primitives/tools/reality_modifier.tscn",
-			"position": [-1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["advanced_concepts"]
 		},
 		"concept_synthesizer": {
 			"name": "Concept Synthesizer",
 			"lookup_name": "concept_synthesizer",
 			"description": "Device for synthesizing abstract concepts into tangible forms",
 			"scene": "res://commons/primitives/tools/concept_synthesizer.tscn",
-			"position": [1.0, 1.0, 1.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"interaction": "pickup_and_examine", 
-			"sequence": null,
-			"artifact_type": "reward",
-			"prerequisites": ["advanced_concepts"]
 		},
 		"mondrian_2d": {
 			"name": "Mondrian 2D Canvas",
 			"lookup_name": "mondrian_2d",
 			"description": "A classic Mondrian composition rendered in 2D with geometric precision and De Stijl color palette",
 			"scene": "res://commons/context/mondrian2d/mondrian_2d.tscn",
-			"position": [0.0, 1.5, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "examine",
-			"sequence": "geometric_algorithms",
-			"artifact_type": "artistic_algorithm",
-			"prerequisites": ["array_tutorial"]
 		},
 		"colortrails": {
 			"name": "colortrails",
 			"lookup_name": "colortrails",
 			"description": "colortrails",
 			"scene": "res://algorithms/color/colortrails/colortrails.tscn",
-			"position": [0.0, 1.5, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-		},
-		
-		
+
+		},	
 		"mondrian_3d_display": {
 			"name": "Mondrian 3D Display",
 			"lookup_name": "mondrian_3d_display",
 			"description": "3D representation of Mondrian compositions with depth and spatial presentation",
 			"scene": "res://commons/context/mondrian2d/mondrian_3d_display.tscn",
-			"position": [2.0, 1.5, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "geometric_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 1.0, 0.9],
-				"light_intensity": 1.2,
-				"light_range": 3.0,
-				"light_position": [0, 1.0, 1.0]
-			}
+
 		},
 		"grabable_mondrian": {
 			"name": "Grabable Mondrian",
 			"lookup_name": "grabable_mondrian",
 			"description": "Interactive Mondrian composition that can be picked up, manipulated, and examined in VR space",
 			"scene": "res://commons/context/mondrian2d/grabable_mondrian.tscn",
-			"position": [-2.0, 1.2, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "pickup_and_examine",
-			"sequence": "geometric_algorithms",
-			"artifact_type": "interactive_art",
-			"prerequisites": ["array_tutorial"],
-			"interaction_properties": {
-				"can_grab": true,
-				"can_scale": true,
-				"can_rotate": true,
-				"physics_enabled": true
-			}
+
 		},
 		"bucket_of_tulips": {
 			"name": "Bucket of Tulips",
 			"lookup_name": "bucket_of_tulips",
 			"description": "A charming metal bucket filled with colorful tulips, bringing natural beauty and algorithmic growth patterns to the laboratory space",
 			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
-			"position": [3.0, 1.0, -2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "pickup_and_examine",
-			"sequence": null,
-			"artifact_type": "decorative",
-			"prerequisites": [],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.95, 0.8],
-				"light_intensity": 0.8,
-				"light_range": 2.5,
-				"light_position": [0, 1.5, 0]
-			},
-			"aesthetic_properties": {
-				"natural_element": true,
-				"color_palette": ["red", "yellow", "pink", "white", "purple"],
-				"brings_life_to_space": true,
-				"organic_contrast": "provides organic contrast to geometric algorithms"
-			}
+
 		},
 		"organic_space": {
 			"name": "Organic Space",
 			"lookup_name": "organic_space",
 			"description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
 			"scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
-			"position": [4.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "alternative_geometries",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.9],
-				"light_intensity": 1.0,
-				"light_range": 4.0,
-				"light_position": [0, 1.5, 0]
-			}
 		},
 		"rhizomatic_maze_space": {
 			"name": "Rhizomatic Maze Space",
@@ -2248,11 +1774,7 @@
 			"name": "AnickaYiLab",
 			"lookup_name": "AnickaYiLab",
 			"description": "AnickaYiLab",
-			"scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
-			"position": [5.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-	 
+			"scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn", 
 		},
 		
 
@@ -2261,20 +1783,7 @@
 			"lookup_name": "surreal_kinetic_sculpture",
 			"description": "A mesmerizing physics-based sculpture that defies gravity and conventional motion, creating dreamlike movements and impossible geometries through advanced physics simulation",
 			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
-			"position": [6.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.5,
-				"light_range": 5.0,
-				"light_position": [0, 2.0, 0]
-			}
+
 		},
 		
 		"random_walk_collection": {
@@ -2282,13 +1791,7 @@
 			"lookup_name": "random_walk_collection",
 			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
 			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
-			"position": [7.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "pickup_and_examine",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
+
 		},
 		
 		"random_walk_grab_paper": {
@@ -2296,26 +1799,7 @@
 			"lookup_name": "random_walk_grab_paper",
 			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
 			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn",
-			"position": [7.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "pickup_and_examine",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.9, 1.0],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			},
-			"interaction_properties": {
-				"can_grab": true,
-				"can_scale": true,
-				"can_rotate": true,
-				"physics_enabled": true
-			}
+
 		}
 		,
 		"cellular_automata_grabable": {
@@ -2323,73 +1807,42 @@
 			"lookup_name": "cellular_automata_grabable",
 			"description": "Grabable cellular automata board for interactive exploration",
 			"scene": "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata_grabable.tscn",
-			"position": [8.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "pickup_and_examine",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 1.0, 0.8],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			},
-			"interaction_properties": {
-				"can_grab": true,
-				"can_scale": true,
-				"can_rotate": true,
-				"physics_enabled": true
-			}
+
 		},
 		"grab_stick": {
 			"name": "grab_stick",
 			"lookup_name": "grab_stick",
 			"description": "grab_stick",
 			"scene": "res://algorithms/color/color_scanner/grab_stick.tscn",
-			"position": [9.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},	
 		"grab_long_stick": {
 			"name": "grab_long_stick",
 			"lookup_name": "grab_long_stick",
 			"description": "grab_long_stick",
 			"scene": "res://commons/primitives/cubes/grab_long_stick.tscn",
-			"position": [9.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},	
 		 "doublestick": {
 			"name": "doublestick",
 			"lookup_name": "doublestick",
 			"description": "doublestick",
 			"scene": "res://commons/primitives/cubes/doublestick.tscn",
-			"position": [9.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},	
 		 "cube_scene_drag_points": {
 			"name": "cube_scene_drag_points",
 			"lookup_name": "cube_scene_drag_points",
 			"description": "cube_scene_drag_points",
 			"scene": "res://commons/primitives/cubes/cube_scene_drag_points.tscn",
-			"position": [9.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-		},	
 
-		
+		},	
 		"grab_stick_scanner": {
 			"name": "grab_stick_scannerk",
 			"lookup_name": "grab_stick_scanner",
 			"description": "grab_stick_scanner",
 			"scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn",
-			"position": [9.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},	
 		"metaballs": {
 			"name": "Metaballs",
@@ -2399,177 +1852,63 @@
 			"position": [9.0, 1.0, 2.0],
 			"rotation": [0.0, 0.0, 0.0],
 			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",
 			"lookup_name": "branching_growth_algorithm",
 			"description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
 			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
-			"position": [10.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.8],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"lsystem_tree": {
 			"name": "L-System Tree",
 			"lookup_name": "lsystem_tree",
 			"description": "Interactive L-system tree generation demonstrating formal grammar-based plant growth",
 			"scene": "res://algorithms/proceduralgeneration/lsystem/tree_l_system.tscn",
-			"position": [11.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.8, 1.0],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"maze_generator": {
 			"name": "Maze Generator",
 			"lookup_name": "maze_generator",
 			"description": "Interactive maze generation algorithms with procedural layout creation",
 			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn",
-			"position": [12.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.9],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"mirror_cellular_texture_for_3d": {
 			"name": "Mirror Cellular Texture for 3D",
 			"lookup_name": "mirror_cellular_texture_for_3d",
 			"description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
 			"scene": "res://algorithms/proceduralgeneration/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
-			"position": [13.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.8],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"mushrooms": {
 			"name": "Mushrooms",
 			"lookup_name": "mushrooms",
 			"description": "Interactive procedural mushroom generation with organic growth patterns",
 			"scene": "res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn",
-			"position": [14.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.7, 0.5],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"slime_mold": {
 			"name": "Slime Mold",
 			"lookup_name": "slime_mold",
 			"description": "Interactive slime mold simulation using Dave Stewart's tube algorithm",
 			"scene": "res://algorithms/proceduralgeneration/slimemold/slime.tscn",
-			"position": [15.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 1.0, 0.7],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"diffusion_limited_aggregation": {
 			"name": "diffusion_limited_aggregation",
 			"lookup_name": "diffusion_limited_aggregation",
 			"description": "diffusion_limited_aggregation",
 			"scene": "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
-			"position": [15.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 1.0, 0.7],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"penrose_tilings": {
 			"name": "penrose_tilings",
 			"lookup_name": "penrose_tilings",
 			"description": "penrose_tilings",
 			"scene": "res://algorithms/patterngeneration/penrose_tilings/penrose_tilings.tscn",
-			"position": [15.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 1.0, 0.7],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		
 		"color_pattern_mate_texture_for_3d": {
@@ -2577,80 +1916,28 @@
 			"lookup_name": "color_pattern_mate_texture_for_3d",
 			"description": "Interactive 3D color pattern mate texture generation for procedural tiling",
 			"scene": "res://algorithms/proceduralgeneration/tilepatterns/color_pattern_mate_texture_for_3d.tscn",
-			"position": [16.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.9, 0.6],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"color_pattern_texture_for_3d": {
 			"name": "Color Pattern Texture for 3D",
 			"lookup_name": "color_pattern_texture_for_3d",
 			"description": "Interactive 3D color pattern texture generation for procedural tiling systems",
 			"scene": "res://algorithms/proceduralgeneration/tilepatterns/color_pattern_texture_for_3d.tscn",
-			"position": [17.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.7, 0.9],
-				"light_intensity": 1.1,
-				"light_range": 3.1,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"blue_noise": {
 			"name": "Blue Noise",
 			"lookup_name": "blue_noise",
 			"description": "Interactive blue noise generation for high-quality random sampling and distribution",
 			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
-			"position": [18.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 0.8, 1.0],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"digital_materiality_glitch": {
 			"name": "Digital Materiality Glitch",
 			"lookup_name": "digital_materiality_glitch",
 			"description": "Interactive exploration of digital materiality through glitch aesthetics and algorithmic artifacts",
 			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
-			"position": [19.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.6, 0.8],
-				"light_intensity": 1.2,
-				"light_range": 3.3,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"random_gaussian_texture": {
 			"name": "Random Gaussian Texture",
@@ -2659,518 +1946,180 @@
 			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
 			"position": [20.0, 1.0, 2.0],
 			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.8],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
 		},
 		"probability_distributions_3d": {
 			"name": "Probability Distributions 3D",
 			"lookup_name": "probability_distributions_3d",
 			"description": "Interactive 3D visualization of various probability distributions and statistical patterns",
 			"scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn",
-			"position": [21.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
 		},
 		"distribution_visualization": {
 			"name": "Distribution Visualization",
 			"lookup_name": "distribution_visualization",
 			"description": "Interactive visualization of statistical distributions and probability patterns",
 			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
-			"position": [22.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.6, 1.0],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"pool_hole_noise": {
 			"name": "Pool Hole Noise",
 			"lookup_name": "pool_hole_noise",
 			"description": "Interactive cellular noise generation with pool hole pattern visualization",
 			"scene": "res://algorithms/randomness/noise/cellularnoise/scenes/pool_hole_noise.tscn",
-			"position": [23.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 1.0, 0.8],
-				"light_intensity": 1.1,
-				"light_range": 3.1,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"neon_wave_grid": {
 			"name": "Neon Wave Grid",
 			"lookup_name": "neon_wave_grid",
 			"description": "Interactive Perlin noise-based neon wave grid with dynamic lighting effects",
 			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/NeonWaveGrid.tscn",
-			"position": [24.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.2, 1.0, 0.8],
-				"light_intensity": 1.3,
-				"light_range": 3.8,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"perlin_noise_terrain": {
 			"name": "Perlin Noise Terrain",
 			"lookup_name": "perlin_noise_terrain",
 			"description": "Interactive 3D terrain generation using Perlin noise algorithms",
 			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
-			"position": [25.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.9, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"perlin_noise": {
 			"name": "Perlin Noise",
 			"lookup_name": "perlin_noise",
 			"description": "Interactive Perlin noise generation and visualization",
 			"scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
-			"position": [26.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.7, 0.8],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"pollock_painting_in_3d": {
 			"name": "Pollock Painting in 3D",
 			"lookup_name": "pollock_painting_in_3d",
 			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
 			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
-			"position": [27.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.6, 0.3],
-				"light_intensity": 1.2,
-				"light_range": 3.6,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"spawn_randomcubes": {
 			"name": "spawn_randomcubes",
 			"lookup_name": "spawn_randomcubes",
 			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
 			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn",
-			"position": [27.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.6, 0.3],
-				"light_intensity": 1.2,
-				"light_range": 3.6,
-				"light_position": [0, 1.4, 0]
-			}
+		
 		},
 		"pollock_3d": {
 			"name": "Pollock 3D",
 			"lookup_name": "pollock_3d",
 			"description": "Interactive 3D Jackson Pollock-inspired art using movement-based procedural randomness",
 			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.tscn",
-			"position": [28.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 0.8, 0.4],
-				"light_intensity": 1.1,
-				"light_range": 3.3,
-				"light_position": [0, 1.3, 0]
-			}
+	
 		},
 		"extreme_randomness": {
 			"name": "Extreme Randomness",
 			"lookup_name": "extreme_randomness",
 			"description": "Interactive particle-based extreme randomness generation and visualization",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
-			"position": [29.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.5, 0.7],
-				"light_intensity": 1.3,
-				"light_range": 3.7,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"random_decay_objects": {
 			"name": "Random Decay Objects",
 			"lookup_name": "random_decay_objects",
 			"description": "Interactive visualization of random decay processes and object degradation",
 			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn",
-			"position": [30.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 0.7, 0.9],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"random_color_book_page_collection": {
 			"name": "Random Color Book Page Collection",
 			"lookup_name": "random_color_book_page_collection",
 			"description": "Interactive collection of randomly generated colored book pages using procedural algorithms",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn",
-			"position": [31.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.9, 0.7],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"random_number_book_page_collection": {
 			"name": "Random Number Book Page Collection",
 			"lookup_name": "random_number_book_page_collection",
 			"description": "Interactive collection of randomly generated numbered book pages using procedural algorithms",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
-			"position": [32.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.7, 1.0],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+	
 		},
 		"random_transformations": {
 			"name": "Random Transformations",
 			"lookup_name": "random_transformations",
 			"description": "Interactive visualization of random geometric transformations and spatial manipulations",
 			"scene": "res://algorithms/randomness/random_transformations/random_transformations.tscn",
-			"position": [33.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.6, 0.6],
-				"light_intensity": 1.1,
-				"light_range": 3.1,
-				"light_position": [0, 1.3, 0]
-			}
+	
 		},
 		"simplex_noise": {
 			"name": "Simplex Noise",
 			"lookup_name": "simplex_noise",
 			"description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
 			"scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
-			"position": [34.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 1.0, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.4,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"ten_print": {
 			"name": "10 PRINT",
 			"lookup_name": "ten_print",
 			"description": "Interactive recreation of the classic Commodore 64 10 PRINT maze generation algorithm",
 			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
-			"position": [35.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.4],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"trng_vs_prng": {
 			"name": "TRNG vs PRNG",
 			"lookup_name": "trng_vs_prng",
 			"description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",
 			"scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
-			"position": [36.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.6, 1.0],
-				"light_intensity": 1.3,
-				"light_range": 3.6,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"value_noise": {
 			"name": "Value Noise",
 			"lookup_name": "value_noise",
 			"description": "Interactive Value noise generation and visualization for procedural texture creation",
 			"scene": "res://algorithms/randomness/valuenoise/valuenoise.tscn",
-			"position": [37.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 0.8, 1.0],
-				"light_intensity": 1.1,
-				"light_range": 3.3,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"random_number_book_page_1955": {
 			"name": "Random Number Book Page 1955",
 			"lookup_name": "random_number_book_page_1955",
 			"description": "Interactive 1955-style random number book page generation using procedural algorithms",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
-			"position": [38.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.0,
-				"light_range": 3.0,
-				"light_position": [0, 1.2, 0]
-			}
+
 		},
 		"random_butterflies": {
 			"name": "Random Butterflies",
 			"lookup_name": "random_butterflies",
 			"description": "Interactive butterfly swarm with random movement patterns and procedural animation",
 			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
-			"position": [39.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.9, 0.7],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.4, 0]
-			}
+	
 		},
 		"random_edge_profile_collection": {
 			"name": "Random Edge Profile Collection",
 			"lookup_name": "random_edge_profile_collection",
 			"description": "Interactive collection of random edge profiles for procedural geometry generation",
 			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn",
-			"position": [40.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.8],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+	
 		},
 		"random_plants": {
 			"name": "Random Plants",
 			"lookup_name": "random_plants",
 			"description": "Interactive procedural plant generation with random growth patterns and organic forms",
 			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn",
-			"position": [41.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 1.0, 0.7],
-				"light_intensity": 1.2,
-				"light_range": 3.4,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"omoss": {
 			"name": "Omoss",
 			"lookup_name": "omoss",
 			"description": "Interactive Omoss algorithm for procedural organic growth and pattern generation",
 			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn",
-			"position": [42.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.7, 0.9],
-				"light_intensity": 1.1,
-				"light_range": 3.1,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"random_walker_machine": {
 			"name": "Random Walker Machine",
 			"lookup_name": "random_walker_machine",
 			"description": "Interactive machine learning random walker algorithm for exploring decision spaces",
 			"scene": "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn",
-			"position": [43.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "machine_learning_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.6, 1.0],
-				"light_intensity": 1.3,
-				"light_range": 3.7,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"shader_noise_space": {
 			"name": "Shader Noise Space",
 			"lookup_name": "shader_noise_space",
 			"description": "Interactive shader-based noise space exploration with procedural textures and patterns",
 			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
-			"position": [44.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.8, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.3,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
 		"voxelnoise": {
 			"name": "voxelnoise",
@@ -3198,79 +2147,20 @@
 			"lookup_name": "perlin_noise_clouds",
 			"description": "Interactive 3D volumetric cloud generation using Perlin noise for atmospheric and procedural sky effects",
 			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn",
-			"position": [46.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.9, 1.0],
-				"light_intensity": 1.4,
-				"light_range": 4.0,
-				"light_position": [0, 1.6, 0]
-			},
-			"atmospheric_properties": {
-				"volumetric_rendering": true,
-				"cloud_density": "variable",
-				"wind_effects": true,
-				"lighting_scattering": true
-			}
 		},
 		"algorithm_overview": {
 			"name": "Algorithm Learning Overview",
 			"lookup_name": "algorithm_overview",
 			"description": "Interactive 2D flowchart visualization showing the complete learning progression through various algorithm categories and their relationships",
 			"scene": "res://algorithms/misc/maps_overview_in_3d.tscn",
-			"position": [1.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "meta_learning",
-			"artifact_type": "navigation_tool",
-			"prerequisites": [],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.9, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.0,
-				"light_position": [0, 1.4, 0]
-			},
-			"ui_properties": {
-				"fullscreen_mode": true,
-				"interactive_navigation": true,
-				"category_color_coding": true,
-				"connection_visualization": true
-			}
+
 		},
 		"noise_terrain_with_blobs": {
 			"name": "Noise Terrain with Animated Blobs",
 			"lookup_name": "noise_terrain_with_blobs",
 			"description": "Advanced noise terrain generator with animated blob particles that move across the landscape using spatial shaders and dynamic positioning",
 			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn",
-			"position": [48.0, 1.0, 2.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["perlin_noise_terrain"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.5, 0.9, 0.8],
-				"light_intensity": 1.5,
-				"light_range": 4.5,
-				"light_position": [0, 2.0, 0]
-			},
-			"terrain_properties": {
-				"dynamic_blobs": true,
-				"shader_animated": true,
-				"particle_system": "spatial_shader",
-				"terrain_interaction": true,
-				"blob_lifecycle": "managed"
-			}
+
 		},
 		"coloredlines": {
 			"name": "Colored Lines",
@@ -3308,40 +2198,14 @@
 			"lookup_name": "advancedglitch",
 			"description": "Interactive colored line visualization and manipulation algorithms",
 			"scene": "res://algorithms/color/advancedglitch/advancedglitch.tscn",
-			"position": [0.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "color_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		"spherecolors": {
 			"name": "spherecolors",
 			"lookup_name": "spherecolors",
 			"description": "spherecolors",
 			"scene": "res://algorithms/color/spherecolors/spherecolors.tscn",
-			"position": [0.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "color_algorithms",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.6],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.5, 0]
-			}
+
 		},
 		
 		
@@ -3350,209 +2214,77 @@
 			"lookup_name": "clippingplanes",
 			"description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
 			"scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
-			"position": [1.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "effects_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.9, 1.0],
-				"light_intensity": 1.1,
-				"light_range": 3.2,
-				"light_position": [0, 1.3, 0]
-			}
+
 		},
 		"raycastingpoints": {
 			"name": "Raycasting Points",
 			"lookup_name": "raycastingpoints",
 			"description": "Interactive raycasting algorithm visualization with point-based collision detection",
 			"scene": "res://algorithms/physicssimulation/raycasting/raycastingpoints.tscn",
-			"position": [2.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.7, 0.8],
-				"light_intensity": 1.3,
-				"light_range": 3.8,
-				"light_position": [0, 1.6, 0]
-			}
+			
 		},
 		"waterone": {
 			"name": "Water One",
 			"lookup_name": "waterone",
 			"description": "Advanced water simulation algorithm with realistic fluid dynamics and surface tension",
 			"scene": "res://algorithms/physicssimulation/water_one/waterone.tscn",
-			"position": [3.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.6, 0.8, 1.0],
-				"light_intensity": 1.4,
-				"light_range": 4.2,
-				"light_position": [0, 1.7, 0]
-			}
+			
 		},
 		"waterflowers": {
 			"name": "Water Flowers",
 			"lookup_name": "waterflowers",
 			"description": "Artistic water simulation with flower-like patterns and organic fluid behavior",
 			"scene": "res://algorithms/physicssimulation/waterflowers/waterflowers.tscn",
-			"position": [4.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "physics_simulation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 0.6, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.6,
-				"light_position": [0, 1.4, 0]
-			}
+			
 		},
 		"alphahash": {
 			"name": "Alpha Hash",
 			"lookup_name": "alphahash",
 			"description": "Post-processing alpha hash algorithm for transparent texture generation and anti-aliasing",
 			"scene": "res://algorithms/postprocessing/alfahash/alphahash.tscn",
-			"position": [5.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "postprocessing_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.9, 0.7],
-				"light_intensity": 1.1,
-				"light_range": 3.3,
-				"light_position": [0, 1.3, 0]
-			}
+			
 		},
 		"postprocessing_bloom": {
 			"name": "Post-Processing Bloom",
 			"lookup_name": "postprocessing_bloom",
 			"description": "Advanced bloom post-processing effect with configurable intensity and threshold parameters",
 			"scene": "res://algorithms/postprocessing/bloom/postprocessing_bloom.tscn",
-			"position": [6.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "postprocessing_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 1.0, 0.8],
-				"light_intensity": 1.3,
-				"light_range": 3.9,
-				"light_position": [0, 1.6, 0]
-			}
+			
 		},
 		"fatwireframe": {
 			"name": "Fat Wireframe",
 			"lookup_name": "fatwireframe",
 			"description": "Procedural wireframe generation with adjustable line thickness and geometric complexity",
 			"scene": "res://algorithms/proceduralgeneration/wireframe/fatwireframe.tscn",
-			"position": [7.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "procedural_generation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.9, 0.8, 1.0],
-				"light_intensity": 1.2,
-				"light_range": 3.5,
-				"light_position": [0, 1.4, 0]
-			}
+			
 		},
 		"cloudvolume": {
 			"name": "Cloud Volume",
 			"lookup_name": "cloudvolume",
 			"description": "3D volumetric cloud generation using noise algorithms for atmospheric and sky effects",
 			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn",
-			"position": [8.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.7, 0.9, 1.0],
-				"light_intensity": 1.4,
-				"light_range": 4.1,
-				"light_position": [0, 1.7, 0]
-			}
+			
 		},
 		"perlinvolume": {
 			"name": "Perlin Volume",
 			"lookup_name": "perlinvolume",
 			"description": "3D Perlin noise volume generation for procedural content creation and spatial algorithms",
 			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn",
-			"position": [9.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.8],
-				"light_intensity": 1.3,
-				"light_range": 3.7,
-				"light_position": [0, 1.5, 0]
-			}
+			
 		},
 		"instancingscatter": {
 			"name": "Instancing Scatter",
 			"lookup_name": "instancingscatter",
 			"description": "High-performance instance scattering algorithm for procedural object placement and distribution",
 			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn",
-			"position": [10.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.9],
-				"light_intensity": 1.2,
-				"light_range": 3.4,
-				"light_position": [0, 1.3, 0]
-			}
+			
 		},
 		"entropy_visualization": {
 			"name": "entropy_visualization",
 			"lookup_name": "entropy_visualization",
 			"description": "entropy_visualization",
 			"scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
-			"position": [11.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
+
 		},
 		
 		"buffergeometryparticles": {
@@ -3560,13 +2292,7 @@
 			"lookup_name": "buffergeometryparticles",
 			"description": "High-performance particle system using buffer geometry for efficient rendering and animation",
 			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
-			"position": [11.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "shader_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
+
 	 
 		},
 		"dynamiccubemap": {
@@ -3574,112 +2300,48 @@
 			"lookup_name": "dynamiccubemap",
 			"description": "Real-time dynamic cube map generation for environmental reflections and lighting",
 			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
-			"position": [12.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "shader_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.7, 0.9],
-				"light_intensity": 1.4,
-				"light_range": 4.0,
-				"light_position": [0, 1.7, 0]
-			}
+			
 		},
 		"materialstransmission": {
 			"name": "Materials Transmission",
 			"lookup_name": "materialstransmission",
 			"description": "Advanced material transmission and refraction algorithms for realistic glass and transparent effects",
 			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
-			"position": [13.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "shader_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [0.8, 1.0, 0.9],
-				"light_intensity": 1.5,
-				"light_range": 4.3,
-				"light_position": [0, 1.8, 0]
-			}
+			
 		},
+		"agnes_grid": {
+		"name": "Agnes Grid",
+		"lookup_name": "agnes_grid",
+		"description": "Agnes grid system for spatial arrangement and interaction",
+		"scene": "res://commons/context/agnesnatringrid/agnes_grid_3d.tscn",
+	},
 		"rotatescalecubes": {
 			"name": "Rotate Scale Cubes",
 			"lookup_name": "rotatescalecubes",
 			"description": "Interactive transformation algorithms demonstrating rotation and scaling operations on geometric primitives",
 			"scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
-			"position": [14.0, 1.0, 15.0],
-			"rotation": [0.0, 0.0, 0.0],
-			"scale": [1.0, 1.0, 1.0],
-			"interaction": "touch_to_activate",
-			"sequence": "transformation_exploration",
-			"artifact_type": "interactive_algorithm",
-			"prerequisites": ["array_tutorial"],
-			"lighting": {
-				"add_focused_light": true,
-				"light_color": [1.0, 0.8, 0.7],
-				"light_intensity": 1.2,
-				"light_range": 3.6,
-				"light_position": [0, 1.4, 0]
-			}
+
 		},
-	"agnes_grid": {
-		"name": "Agnes Grid",
-		"lookup_name": "agnes_grid",
-		"description": "Agnes grid system for spatial arrangement and interaction",
-		"scene": "res://commons/context/agnesnatringrid/agnes_grid_3d.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
-	},
 	"agnes_grid_2d": {
 		"name": "Agnes Grid 2D",
 		"lookup_name": "agnes_grid_2d",
 		"description": "2D version of Agnes grid system",
 		"scene": "res://commons/context/agnesnatringrid/agnes_grid.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"grab_cube": {
 		"name": "grab_cube",
 		"lookup_name": "grab_cube",
 		"description": "grab_cube",
 		"scene": "res://commons/primitives/cubes/grab_cube.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	 "wood_cube": {
 		"name": "wood_cube",
 		"lookup_name": "wood_cube",
 		"description": "wood_cube",
 		"scene": "res://commons/primitives/cubes/grab_cube_wood.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	
 	"grabable_agnes": {
@@ -3687,35 +2349,21 @@
 		"lookup_name": "grabable_agnes",
 		"description": "Interactive grabable Agnes grid component",
 		"scene": "res://commons/context/agnesnatringrid/grabable_agnes.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
+
 	},
 	"camera_context": {
 		"name": "Camera Context",
 		"lookup_name": "camera_context",
 		"description": "Camera system for viewing and perspective control",
 		"scene": "res://commons/context/camera/camera.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"clipboard": {
 		"name": "Clipboard",
 		"lookup_name": "clipboard",
 		"description": "Clipboard for copy-paste operations and data transfer",
 		"scene": "res://commons/context/clipboard/clipboard.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	
 	"code_display": {
@@ -3723,169 +2371,91 @@
 		"lookup_name": "code_display",
 		"description": "Display system for showing code and text content",
 		"scene": "res://commons/context/codedisplay/codeDisplay.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"crystal_ball": {
 		"name": "Crystal Ball",
 		"lookup_name": "crystal_ball",
 		"description": "Interactive crystal ball for mystical interactions and predictions",
 		"scene": "res://commons/context/cristalball/cristalball.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"cube_create": {
 		"name": "Cube Creator",
 		"lookup_name": "cube_create",
 		"description": "Tool for creating and manipulating cubes in 3D space",
 		"scene": "res://commons/context/cubecreate/cubecreate.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"drawing_paper": {
 		"name": "Drawing Paper",
 		"lookup_name": "drawing_paper",
 		"description": "Paper surface for drawing and artistic creation",
 		"scene": "res://commons/context/drawingboard/drawing_paper.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"drawing_pen": {
 		"name": "Drawing Pen",
 		"lookup_name": "drawing_pen",
 		"description": "Pen tool for drawing on surfaces",
 		"scene": "res://commons/context/drawingboard/pen.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"grid_eye": {
 		"name": "Grid Eye",
 		"lookup_name": "grid_eye",
 		"description": "Grid point visualization for spatial awareness",
 		"scene": "res://commons/context/grideye/the_grid_point.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "look",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 		"magnifying_glass": {
 		"name": "Magnifying Glass",
 		"lookup_name": "magnifying_glass",
 		"description": "Magnifying glass for detailed examination",
 		"scene": "res://commons/context/magnifyer/magnifying_glass.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"magnifying_glass_red": {
 		"name": "Magnifying Glass Red",
 		"lookup_name": "magnifying_glass_red",
 		"description": "Red variant of magnifying glass for specialized viewing",
 		"scene": "res://commons/context/magnifyer/magnifying_glass_red.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"magnifying_glass_tool": {
 		"name": "Magnifying Glass Tool",
 		"lookup_name": "magnifying_glass_tool",
 		"description": "Advanced magnifying glass tool with additional features",
 		"scene": "res://commons/context/magnifyer/magnifying_glass_tool.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+	
 	},
 	"sequencer": {
 		"name": "Sequencer",
 		"lookup_name": "sequencer",
 		"description": "Music and audio sequencer for algorithmic composition",
 		"scene": "res://commons/context/sequencer/seqencer.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch",
-		"sequence": "proceduralaudio",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"helper_arm": {
 		"name": "Helper Arm",
 		"lookup_name": "helper_arm",
 		"description": "Mechanical helper arm for assistance and manipulation",
 		"scene": "res://commons/context/swing/helper_arm.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "grab",
-		"sequence": "primitives",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"tesla_sparks": {
 		"name": "Tesla Sparks",
 		"lookup_name": "tesla_sparks",
 		"description": "Tesla coil spark effects for electrical visualization",
 		"scene": "res://commons/context/teslasparks/tesla_sparks.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch",
-		"sequence": "physicssimulation",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"tesla_sphere": {
 		"name": "Tesla Sphere",
 		"lookup_name": "tesla_sphere",
 		"description": "Tesla sphere for electrical field interaction",
 		"scene": "res://commons/context/teslasparks/tesla_sphere.tscn",
-		"position": [0.0, 1.0, 0.0],
-		"rotation": [0.0, 0.0, 0.0],
-		"scale": [1.0, 1.0, 1.0],
-		"interaction": "touch",
-		"sequence": "physicssimulation",
-		"artifact_type": "context_tool",
-		"prerequisites": []
+
 	},
 	"zelda_tilemap_2d": {
 		"name": "Zelda Tilemap 2D",
@@ -3911,7 +2481,107 @@
 		"description": "evolutionary_algorithms",
 		"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
 	},
-	
-
+	"ChengSimulationScaled": {
+		"name": "ChengSimulationScaled",
+		"lookup_name": "ChengSimulationScaled",
+		"description": "ChengSimulationScaled",
+		"scene": "res://algorithms/computationalgeometry/chengsimulation/ChengSimulationScaled.tscn",
+	},
+	"closest_pair": {
+		"name": "closest_pair",
+		"lookup_name": "closest_pair",
+		"description": "closest_pair",
+		"scene": "res://algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
+	},
+	"distance_fields_sdf": {
+		"name": "distance_fields_sdf",
+		"lookup_name": "distance_fields_sdf",
+		"description": "distance_fields_sdf",
+		"scene": "res://algorithms/computationalgeometry/distance_fields_sdf/distance_fields_sdf.tscn",
+	},	
+	"voronoi_visualization": {
+		"name": "voronoi_visualization",
+		"lookup_name": "voronoi_visualization",
+		"description": "voronoi_visualization",
+		"scene": "res://algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
+	},	
+	"textureglitch": {
+		"name": "textureglitch",
+		"lookup_name": "textureglitch",
+		"description": "textureglitch",
+		"scene": "res://algorithms/color/textureglitch/textureglitch.tscn",
+	},	
+	"boids_2d_in_3d": {
+		"name": "boids_2d_in_3d",
+		"lookup_name": "boids_2d_in_3d",
+		"description": "boids_2d_in_3d",
+		"scene": "res://algorithms/emergentsystems/boidflocking/boids_2d_in_3d.tscn",
+	},	
+		"renaissancepaintingfloorrattern": {
+			"name": "renaissancepaintingfloorrattern",
+			"lookup_name": "renaissancepaintingfloorrattern",
+			"description": "renaissancepaintingfloorrattern",
+			"scene": "res://algorithms/geometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn",
+		},
+		"edmonds_algorithm": {
+			"name": "Edmonds' Algorithm",
+			"lookup_name": "edmonds_algorithm",
+			"description": "Blossom-based algorithm for maximum matching in general graphs",
+			"scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+		},
+		"karger_algorithm": {
+			"name": "Karger's Algorithm",
+			"lookup_name": "karger_algorithm",
+			"description": "Randomized algorithm for finding minimum cut in undirected graphs",
+			"scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+		},
+		"kosaraju_algorithm": {
+			"name": "Kosaraju's Algorithm",
+			"lookup_name": "kosaraju_algorithm",
+			"description": "Two-pass algorithm for finding strongly connected components",
+			"scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+		},
+		"push_relabel_algorithm": {
+			"name": "Push-Relabel Algorithm",
+			"lookup_name": "push_relabel_algorithm",
+			"description": "Maximum flow algorithm using preflow and relabel operations",
+			"scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+		},
+		"tarjan_algorithm": {
+			"name": "Tarjan's Algorithm",
+			"lookup_name": "tarjan_algorithm",
+			"description": "DFS-based algorithm for finding strongly connected components",
+			"scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+		},
+		"topological_sort_algorithm": {
+			"name": "Topological Sort",
+			"lookup_name": "topological_sort_algorithm",
+			"description": "Algorithm for ordering vertices in directed acyclic graphs",
+			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+		},		
+		"forcedirected3d": {
+			"name": "forcedirected3d",
+			"lookup_name": "forcedirected3d",
+			"description": "forcedirected3d",
+			"scene": "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+		},		
+		"networkflow3d": {
+			"name": "networkflow3d",
+			"lookup_name": "networkflow3d",
+			"description": "networkflow3d",
+			"scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+		},	
+		"evolvingflowers": {
+			"name": "evolvingflowers",
+			"lookup_name": "evolvingflowers",
+			"description": "evolvingflowers",
+			"scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+		},				
+		"evolvedcreatures": {
+			"name": "evolvedcreatures",
+			"lookup_name": "evolvedcreatures",
+			"description": "evolvedcreatures",
+			"scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+		},					
 	}
 }

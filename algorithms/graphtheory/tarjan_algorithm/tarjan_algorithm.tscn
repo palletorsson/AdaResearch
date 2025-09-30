@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8x7y9z2a1b2c"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd" id="1_tarjan"]
+
+[node name="TarjanAlgorithm" type="Node3D"]
+script = ExtResource("1_tarjan")
+graph_size = 12
+edge_density = 0.3
+auto_start = true
+step_by_step = true
+animation_delay = 1.2
+show_discovery_time = true
+show_low_link = true
+show_stack_state = true
+highlight_current_vertex = true
+show_scc_colors = true
+animate_dfs_traversal = true
+enable_graph_editing = true
+allow_edge_editing = true
+real_time_scc_update = true
+show_algorithm_state = true
+vertex_color = Color(0.4, 0.6, 0.9, 1)
+visited_color = Color(0.9, 0.6, 0.2, 1)
+current_color = Color(0.9, 0.9, 0.2, 1)
+scc_color_1 = Color(0.9, 0.2, 0.2, 1)
+scc_color_2 = Color(0.2, 0.9, 0.2, 1)
+scc_color_3 = Color(0.2, 0.2, 0.9, 1)
+scc_color_4 = Color(0.9, 0.2, 0.9, 1)
+scc_color_5 = Color(0.2, 0.9, 0.9, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+back_edge_color = Color(0.9, 0.3, 0.3, 1)
+cross_edge_color = Color(0.3, 0.9, 0.3, 1)
+forward_edge_color = Color(0.3, 0.3, 0.9, 1)

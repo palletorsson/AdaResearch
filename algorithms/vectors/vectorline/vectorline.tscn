@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0sfrw0tsm0uc"]
+
+[ext_resource type="Script" uid="uid://dg8q0jrwwvvdj" path="res://algorithms/vectors/vectorline/vectorline.gd" id="1"]
+
+[sub_resource type="SphereMesh" id="1"]
+radius = 0.06
+height = 0.12
+
+[node name="VectorLine" type="Node3D"]
+script = ExtResource("1")
+line_thickness = null
+line_color = null
+arrow_tip_length = null
+arrow_tip_radius = null
+vector_name = null
+
+[node name="lineContainer" type="Node3D" parent="."]
+
+[node name="GrabSphere" type="Node3D" parent="lineContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="lineContainer/GrabSphere"]
+mesh = SubResource("1")
+
+[node name="GrabSphere2" type="Node3D" parent="lineContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="lineContainer/GrabSphere2"]
+mesh = SubResource("1")

@@ -3,13 +3,15 @@
 [ext_resource type="Script" uid="uid://wpdxoperlf3y" path="res://commons/primitives/combines/combine_portals.gd" id="1_4gqxr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_300sy"]
-albedo_color = Color(0.14902, 1, 0.0431373, 1)
+albedo_color = Color(0.529638, 0.202236, 0.612734, 1)
+metallic = 0.59
+roughness = 0.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_088xj"]
 inner_radius = 4.0
 outer_radius = 3.0
-rings = 14
-ring_segments = 24
+rings = 3
+ring_segments = 3
 
 [node name="CombinePortals" type="Node3D"]
 script = ExtResource("1_4gqxr")

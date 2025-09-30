@@ -12,8 +12,6 @@ script = ExtResource("1_t2mky")
 [node name="SubViewport" type="SubViewport" parent="."]
 
 [node name="KMeansColorDemo" parent="SubViewport" instance=ExtResource("1_owsnt")]
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.530772)

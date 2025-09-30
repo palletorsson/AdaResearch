@@ -1,6 +1,7 @@
-﻿extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var seat: RigidBody3D
+var _t := 0.0
 
 func _build_demo():
 	var frame_left := create_static_box("FrameLeft", Vector3(0.4, 4.0, 0.4), Vector3(-2.0, 3.0, -1.5), Color(0.5, 0.5, 0.55))
@@ -42,10 +43,20 @@ func _build_demo():
 	add_child(joint_bottom)
 
 	add_label("Chain Swing", Vector3(0.0, 4.0, -3.5))
+	# Nudge to start swinging
+	call_deferred("_nudge")
 
 func _process(delta):
+	_t += delta
 	if Input.is_action_pressed("ui_right"):
 		seat.apply_central_force(Vector3(5.0, 0.0, 0.0))
 	elif Input.is_action_pressed("ui_left"):
 		seat.apply_central_force(Vector3(-5.0, 0.0, 0.0))
+	else:
+		# Gentle periodic drive when idle
+		var f := sin(_t * 1.2) * 2.2
+		seat.apply_central_force(Vector3(f, 0.0, 0.0))
 
+func _nudge():
+	if is_instance_valid(seat):
+		seat.apply_impulse(Vector3(0.8, 0.0, 0.0))

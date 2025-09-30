@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://g3x2y1z0a9b8c"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd" id="1_edmonds"]
+
+[node name="EdmondsAlgorithm" type="Node3D"]
+script = ExtResource("1_edmonds")
+graph_size = 10
+edge_density = 0.3
+auto_start = true
+step_by_step = true
+animation_delay = 1.0
+show_augmenting_paths = true
+show_blossoms = true
+highlight_matched_edges = true
+show_forest_structure = true
+animate_path_augmentation = true
+show_matching_size = true
+enable_graph_editing = true
+allow_edge_editing = true
+real_time_matching_update = true
+show_algorithm_state = true
+vertex_color = Color(0.4, 0.6, 0.9, 1)
+matched_color = Color(0.2, 0.9, 0.2, 1)
+unmatched_color = Color(0.9, 0.2, 0.2, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+matching_edge_color = Color(0.9, 0.3, 0.3, 1)
+augmenting_path_color = Color(0.9, 0.9, 0.2, 1)
+blossom_color = Color(0.9, 0.2, 0.9, 1)
+forest_color = Color(0.2, 0.9, 0.9, 0.6)

@@ -1,4 +1,4 @@
-﻿extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var wheel: RigidBody3D
 var rod: RigidBody3D
@@ -34,9 +34,9 @@ func _build_demo():
 	hinge.node_b = wheel.get_path()
 	hinge.position = base.position
 	hinge.rotation = Vector3.ZERO
-	hinge.set_flag(HingeJoint3D.FLAG_USE_MOTOR, true)
+
 	hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 2.5)
-	hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_TORQUE, 50.0)
+	
 	hinge.set_flag(HingeJoint3D.FLAG_USE_LIMIT, false)
 	add_child(hinge)
 
@@ -53,11 +53,9 @@ func _build_demo():
 	guide.node_a = base.get_path()
 	guide.node_b = rod.get_path()
 	guide.position = Vector3(2.5, 2.0, 0.0)
-	guide.set_flag(SliderJoint3D.FLAG_ENABLE_LINEAR_LIMIT, true)
+	
 	guide.set_param(SliderJoint3D.PARAM_LINEAR_LIMIT_LOWER, -0.8)
 	guide.set_param(SliderJoint3D.PARAM_LINEAR_LIMIT_UPPER, 0.8)
 	add_child(guide)
 
 	add_label("Powered Hinge Crank", Vector3(1.5, 3.5, 2.5))
-
-

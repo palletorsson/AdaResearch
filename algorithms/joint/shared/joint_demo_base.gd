@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 class_name JointDemoBase
 
@@ -17,26 +17,7 @@ func _setup_environment():
 	ambient.environment.background_color = Color(0.08, 0.09, 0.12)
 	ambient.environment.background_mode = Environment.BG_COLOR
 	add_child(ambient)
-	var floor_body := StaticBody3D.new()
-	floor_body.name = "Floor"
-	var collider := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(30.0, 1.0, 30.0)
-	collider.shape = shape
-	collider.position = Vector3(0.0, -0.5, 0.0)
-	floor_body.add_child(collider)
-	var mesh := MeshInstance3D.new()
-	mesh.name = "FloorMesh"
-	var box := BoxMesh.new()
-	box.size = Vector3(30.0, 1.0, 30.0)
-	mesh.mesh = box
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.2, 0.22, 0.25)
-	mat.roughness = 0.9
-	mesh.material_override = mat
-	mesh.position = Vector3.ZERO
-	floor_body.add_child(mesh)
-	add_child(floor_body)
+	# Floor removed - joint demos now float in space
 	var camera := Camera3D.new()
 	camera.name = "DemoCamera"
 	camera.position = Vector3(12.0, 9.0, 14.0)
@@ -53,6 +34,9 @@ func create_box(name: String, size: Vector3, position: Vector3, mass: float = 1.
 	body.name = name
 	body.mass = mass
 	body.position = position
+	body.can_sleep = false
+	body.contact_monitor = true
+	body.max_contacts_reported = 8
 	var collider := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = size
@@ -96,6 +80,9 @@ func create_cylinder(name: String, radius: float, height: float, position: Vecto
 	body.name = name
 	body.mass = mass
 	body.position = position
+	body.can_sleep = false
+	body.contact_monitor = true
+	body.max_contacts_reported = 8
 	var collider := CollisionShape3D.new()
 	var shape := CylinderShape3D.new()
 	shape.radius = radius
@@ -121,6 +108,9 @@ func create_sphere(name: String, radius: float, position: Vector3, mass: float =
 	body.name = name
 	body.mass = mass
 	body.position = position
+	body.can_sleep = false
+	body.contact_monitor = true
+	body.max_contacts_reported = 8
 	var collider := CollisionShape3D.new()
 	var shape := SphereShape3D.new()
 	shape.radius = radius

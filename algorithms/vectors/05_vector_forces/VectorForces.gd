@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const DRAG_COEFFICIENT := 0.8
 
@@ -12,7 +12,6 @@ var accumulator := 0.0
 func _ready():
 	super._ready()
 	create_axes(4.0)
-	create_floor(10.0)
 	_create_ground()
 	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, 1.2, Color(0.9, 0.5, 1.0, 1.0))
 	gravity_vector = spawn_vector(ball.global_position, Vector3(0.0, -6.0, 0.0), Color(0.4, 0.8, 1.0, 1.0), "Gravity")
@@ -71,3 +70,6 @@ func _create_ground():
 	collider.shape = plane
 	ground.add_child(collider)
 	add_child(ground)
+
+
+

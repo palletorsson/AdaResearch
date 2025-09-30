@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5yx08i23kbbl"]
+
+[ext_resource type="Script" uid="uid://cws6kn0sjsv54" path="res://commons/primitives/cubes/grab_cube_.gd" id="1_82nit"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2_omt67"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tdol0"]
+margin = 0.01
+size = Vector3(0.220128, 0.0882211, 0.342493)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jns5y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2nf6"]
+cull_mode = 2
+albedo_color = Color(0.745329, 0.611616, 0.292277, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_4bpc6"]
+inner_radius = 13.845
+outer_radius = 6.335
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hsvf3"]
+size = Vector3(0.255371, 0.0716553, 0.334961)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4h6dd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f455d"]
+size = Vector3(0.100037, 0.400024, 0.11499)
+
+[node name="helperArm" type="Node3D"]
+
+[node name="KleinBottle" type="Node3D" parent="."]
+transform = Transform3D(-0.0151488, 0, -0.999885, 0, 1, 0, 0.999885, 0, -0.0151488, 0.769708, 0, 0)
+
+[node name="GrabCube" type="RigidBody3D" parent="KleinBottle"]
+collision_layer = 4
+collision_mask = 196615
+freeze_mode = 1
+script = ExtResource("1_82nit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KleinBottle/GrabCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0240045, 0.0201341, -0.0119446)
+shape = SubResource("BoxShape3D_tdol0")
+
+[node name="HighlightRing" parent="KleinBottle/GrabCube" instance=ExtResource("2_omt67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109342, 0.00359024, 0.279247)
+material_override = SubResource("StandardMaterial3D_jns5y")
+
+[node name="KleinBottle" type="MeshInstance3D" parent="KleinBottle/GrabCube"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.000655845, 0, 0.0432885)
+material_override = SubResource("StandardMaterial3D_n2nf6")
+mesh = SubResource("TorusMesh_4bpc6")
+skeleton = NodePath("")
+
+[node name="CopyMeArea3D" type="Area3D" parent="KleinBottle/GrabCube"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KleinBottle/GrabCube/CopyMeArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214645, 0.0316214, 0.00634766)
+shape = SubResource("BoxShape3D_hsvf3")
+
+[node name="HingeJoint3D3" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.588752, 0.00205699, -0.000489503)
+node_a = NodePath("../RigidBody3D_top")
+node_b = NodePath("../KleinBottle/GrabCube")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203501, 0.00205699, -0.000489503)
+node_a = NodePath("../RigidBody3D_first")
+node_b = NodePath("../RigidBody3D_mid")
+
+[node name="RigidBody3D_mid" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D_mid"]
+transform = Transform3D(-4.37114e-09, -0.2, 0, 0.1, -8.74228e-09, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_4h6dd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D_mid"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00177002, 0.0116272, -0.00158691)
+shape = SubResource("BoxShape3D_f455d")
+
+[node name="RigidBody3D_first" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.403748, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D_first"]
+transform = Transform3D(-4.37114e-09, -0.2, 0, 0.1, -8.74228e-09, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_4h6dd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D_first"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00177002, 0.0116272, -0.00158691)
+shape = SubResource("BoxShape3D_f455d")
+
+[node name="HingeJoint3D2" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194775, 0.00205699, -0.000489503)
+node_a = NodePath("../RigidBody3D_mid")
+node_b = NodePath("../RigidBody3D_top")
+
+[node name="RigidBody3D_top" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384789, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D_top"]
+transform = Transform3D(-4.37114e-09, -0.2, 0, 0.1, -8.74228e-09, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_4h6dd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D_top"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00177002, 0.0116272, -0.00158691)
+shape = SubResource("BoxShape3D_f455d")
+
+[node name="HingeJoint3D4" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59516, 0.00205699, -0.000489503)
+node_a = NodePath("../RigidBody3D_fixed")
+node_b = NodePath("../RigidBody3D_first")
+
+[node name="RigidBody3D_fixed" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.801166, 0, 0)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D_fixed"]
+transform = Transform3D(-4.37114e-09, -0.2, 0, 0.1, -8.74228e-09, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_4h6dd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D_fixed"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.00177002, 0.0116272, -0.00158691)
+shape = SubResource("BoxShape3D_f455d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.24688)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.747164)
+visible = false

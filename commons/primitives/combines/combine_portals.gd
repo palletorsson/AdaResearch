@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var portal_count: int = 10
+@export var portal_count: int = 20
 @export var portal_spacing: float = 4.5
 @export var base_path: NodePath = NodePath("Lowrestorus")
 

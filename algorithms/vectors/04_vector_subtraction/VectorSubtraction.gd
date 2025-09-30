@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var vector_a: Node3D
 var vector_b: Node3D
@@ -10,7 +10,6 @@ var info_label: Label3D
 func _ready():
 	super._ready()
 	create_axes(3.5)
-	create_floor(9.0)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.7, -0.4), Color(0.9, 0.5, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.3, 1.1, 0.8), Color(0.2, 0.6, 1.0, 1.0), "Vector b")
 	difference_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 1.0, 1.0, 1.0), "a - b", false)
@@ -38,3 +37,6 @@ func _update_info(a: Vector3, b: Vector3, diff: Vector3, minus_b: Vector3):
 	builder.append("|a - b| = %.2f" % diff.length())
 	builder.append("Opposite vector -b = (%.2f, %.2f, %.2f)" % [minus_b.x, minus_b.y, minus_b.z])
 	info_label.text = "\n".join(builder)
+
+
+

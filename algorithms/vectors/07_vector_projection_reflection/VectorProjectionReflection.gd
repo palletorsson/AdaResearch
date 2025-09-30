@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var incident_vector: Node3D
 var normal_vector: Node3D
@@ -10,7 +10,6 @@ var info_label: Label3D
 func _ready():
 	super._ready()
 	create_axes(3.5)
-	create_floor(9.0)
 	incident_vector = spawn_vector(Vector3.ZERO, Vector3(1.2, 1.3, 0.5), Color(1.0, 0.5, 0.3, 1.0), "Incident")
 	normal_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.6, 0.6), Color(0.3, 0.8, 1.0, 1.0), "Normal")
 	plane_projection = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.7, 1.0, 0.5, 1.0), "Plane Projection", false)
@@ -70,3 +69,6 @@ func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, refle
 		angle = acos(clamp(incident.normalized().dot(n_unit), -1.0, 1.0))
 	builder.append("Angle to Plane Normal ~= %.1f deg" % rad_to_deg(angle))
 	info_label.text = "\n".join(builder)
+
+
+

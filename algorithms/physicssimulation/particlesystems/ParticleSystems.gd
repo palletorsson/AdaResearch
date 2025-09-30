@@ -7,6 +7,21 @@ extends Node3D
 @export var gravity_strength: float = 9.8
 @export var wind_strength: float = 1.0
 @export var turbulence_strength: float = 0.5
+@export var auto_rotate: bool = true
+
+var rotation_time: float = 0.0
+
+# Vibrant queer color palette
+var queer_colors = [
+	Color(1.0, 0.4, 0.7, 1.0),    # Hot pink
+	Color(0.8, 0.3, 1.0, 1.0),    # Purple
+	Color(0.3, 0.9, 1.0, 1.0),    # Cyan
+	Color(1.0, 0.8, 0.2, 1.0),    # Gold
+	Color(0.5, 1.0, 0.4, 1.0),    # Lime
+	Color(1.0, 0.5, 0.3, 1.0),    # Coral
+	Color(0.4, 0.7, 1.0, 1.0),    # Sky blue
+	Color(1.0, 0.3, 0.5, 1.0)     # Rose
+]
 
 class Particle:
 	var position: Vector3
@@ -81,21 +96,21 @@ func create_smoke_particle() -> Particle:
 		randf_range(-0.1, 0.1),
 		randf_range(-0.1, 0.1)
 	)
-	
+
 	var vel = Vector3(
 		randf_range(-0.5, 0.5),
 		randf_range(1.0, 3.0),
 		randf_range(-0.5, 0.5)
 	)
-	
+
 	var size = randf_range(0.05, 0.15)
-	var color = Color(0.5, 0.5, 0.5, 0.8)
+	var color = queer_colors[randi() % queer_colors.size()] * 0.7  # Slightly muted
 	var node = create_particle_node(color, size)
-	
+
 	var particle = Particle.new(pos, vel, particle_lifetime * 2.0, size, color, node)
 	$ParticleEmitters/SmokeEmitter/SmokeParticles.add_child(node)
 	smoke_particles.append(particle)
-	
+
 	return particle
 
 func create_fire_particle() -> Particle:
@@ -112,13 +127,13 @@ func create_fire_particle() -> Particle:
 	)
 	
 	var size = randf_range(0.03, 0.1)
-	var color = Color(1.0, 0.3, 0.0, 1.0)
+	var color = queer_colors[(randi() % 3) + 3]  # Gold, lime, coral - warm colors
 	var node = create_particle_node(color, size)
-	
+
 	var particle = Particle.new(pos, vel, particle_lifetime * 0.5, size, color, node)
 	$ParticleEmitters/FireEmitter/FireParticles.add_child(node)
 	fire_particles.append(particle)
-	
+
 	return particle
 
 func create_spark_particle() -> Particle:
@@ -127,21 +142,22 @@ func create_spark_particle() -> Particle:
 		randf_range(-0.1, 0.1),
 		randf_range(-0.1, 0.1)
 	)
-	
+
 	var vel = Vector3(
 		randf_range(-3.0, 3.0),
 		randf_range(1.0, 4.0),
 		randf_range(-3.0, 3.0)
 	)
-	
+
 	var size = randf_range(0.02, 0.06)
-	var color = Color(1.0, 1.0, 0.0, 1.0)
+	var color = queer_colors[randi() % queer_colors.size()]
+	color.a = 1.0
 	var node = create_particle_node(color, size)
-	
+
 	var particle = Particle.new(pos, vel, particle_lifetime * 0.3, size, color, node)
 	$ParticleEmitters/SparkEmitter/SparkParticles.add_child(node)
 	spark_particles.append(particle)
-	
+
 	return particle
 
 func create_weather_particle() -> Particle:
@@ -150,15 +166,16 @@ func create_weather_particle() -> Particle:
 		randf_range(-0.1, 0.1),
 		randf_range(-0.5, 0.5)
 	)
-	
+
 	var vel = Vector3(
 		randf_range(-0.5, 0.5),
 		randf_range(-2.0, -1.0),
 		randf_range(-0.5, 0.5)
 	)
-	
+
 	var size = randf_range(0.02, 0.08)
-	var color = Color(0.7, 0.7, 1.0, 0.6)
+	var color = queer_colors[(randi() % 3)]  # Pink, purple, cyan - cool colors
+	color.a = 0.7
 	var node = create_particle_node(color, size)
 	
 	var particle = Particle.new(pos, vel, particle_lifetime * 1.5, size, color, node)
@@ -174,30 +191,38 @@ func create_particle_node(color: Color, size: float) -> CSGSphere3D:
 	node.material.albedo_color = color
 	node.material.emission_enabled = true
 	node.material.emission = color
-	node.material.emission_energy_multiplier = 0.3
+	node.material.emission_energy_multiplier = 2.0  # Brighter emission
+	node.material.metallic = 0.2
+	node.material.roughness = 0.3
 	return node
 
 func _process(delta):
 	time += delta
 	emission_timer += delta
-	
+
+	# Auto-rotate for dynamic 3D view
+	if auto_rotate:
+		rotation_time += delta
+		rotation.y = sin(rotation_time * 0.3) * 0.3
+		rotation.x = cos(rotation_time * 0.2) * 0.1
+
 	# Emit new particles
 	if emission_timer >= 1.0 / emission_rate:
 		emission_timer = 0.0
 		emit_new_particles()
-	
+
 	# Update all particle systems
 	update_particle_system(smoke_particles, delta)
 	update_particle_system(fire_particles, delta)
 	update_particle_system(spark_particles, delta)
 	update_particle_system(weather_particles, delta)
-	
+
 	# Animate emitters
 	animate_emitters(delta)
-	
+
 	# Update particle controls
 	animate_particle_controls(delta)
-	
+
 	# Handle environment collisions
 	handle_environment_collisions()
 

@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7j6ex30p1ggk"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/karger_algorithm/karger_algorithm.gd" id="1_karger"]
+
+[node name="KargerAlgorithm" type="Node3D"]
+script = ExtResource("1_karger")
+graph_size = 8
+edge_density = 0.4
+auto_start = true
+step_by_step = true
+animation_delay = 1.0
+num_iterations = 10
+show_contraction_steps = true
+highlight_contracted_edges = true
+show_cut_edges = true
+animate_contraction = true
+show_probability = true
+show_best_cut = true
+enable_graph_editing = true
+allow_edge_editing = true
+real_time_cut_update = true
+show_algorithm_state = true
+vertex_color = Color(0.4, 0.6, 0.9, 1)
+contracted_color = Color(0.9, 0.2, 0.2, 1)
+cut_edge_color = Color(0.9, 0.9, 0.2, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+best_cut_color = Color(0.9, 0.3, 0.9, 1)
+partition_a_color = Color(0.2, 0.9, 0.2, 1)
+partition_b_color = Color(0.2, 0.2, 0.9, 1)

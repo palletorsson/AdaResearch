@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Karger's Algorithm: Minimum Cut",
+		"description": "Interactive 3D visualization of Karger's randomized algorithm for finding minimum cut in undirected graphs",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,10 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "advanced",
+			"category": "graphtheory",
+			"estimated_time": "8-12 minutes",
+			"learning_objectives": ["Minimum cut", "Edge contraction", "Randomized algorithms", "Graph connectivity", "Network reliability"]
 		}
 	},
 	"layers": {
@@ -54,7 +54,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "env_one", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "karger_algorithm", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -69,8 +69,7 @@
 			"name": "Next Lesson",
 			"description": "Continue to the next algorithm demonstration",
 			"properties": {
-				"destination": "next",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence" 
 			}
 		}, 
 		"s": {

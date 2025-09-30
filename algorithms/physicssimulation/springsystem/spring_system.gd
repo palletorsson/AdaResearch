@@ -28,6 +28,8 @@ extends Node3D
 @export var show_velocity_vectors: bool = false
 @export var color_by_tension: bool = true
 @export var animate_springs: bool = true
+@export var auto_rotate: bool = true
+@export var auto_interaction: bool = true
 
 # System state
 var masses: Array = []
@@ -35,12 +37,26 @@ var springs: Array = []
 var anchors: Array = []
 var time_step: float = 0.016
 var wind_time: float = 0.0
+var rotation_time: float = 0.0
+var interaction_timer: float = 0.0
 
 # Visual elements
 var mass_meshes: Array = []
 var spring_lines: Array = []
 var velocity_arrows: Array = []
 var system_container: Node3D
+
+# Vibrant queer color palette
+var queer_colors = [
+	Color(1.0, 0.4, 0.7, 1.0),    # Hot pink
+	Color(0.8, 0.3, 1.0, 1.0),    # Purple
+	Color(0.3, 0.9, 1.0, 1.0),    # Cyan
+	Color(1.0, 0.8, 0.2, 1.0),    # Gold
+	Color(0.5, 1.0, 0.4, 1.0),    # Lime
+	Color(1.0, 0.5, 0.3, 1.0),    # Coral
+	Color(0.4, 0.7, 1.0, 1.0),    # Sky blue
+	Color(1.0, 0.3, 0.5, 1.0)     # Rose
+]
 
 # Mass class
 class Mass:
@@ -130,12 +146,17 @@ class Spring:
 			var material = line_mesh.material_override
 			if material:
 				var tension_normalized = clamp(tension / 100.0, 0.0, 1.0)
-				material.albedo_color = Color(
-					0.2 + tension_normalized * 0.8,  # More red with tension
-					0.8 - tension_normalized * 0.6,  # Less green with tension
-					0.2,
-					0.8
+				# Cycle through vibrant colors based on tension
+				var base_color = Color(
+					0.5 + sin(tension_normalized * 3.14) * 0.5,
+					0.5 + cos(tension_normalized * 3.14 * 1.5) * 0.5,
+					0.7 + sin(tension_normalized * 3.14 * 2.0) * 0.3,
+					0.9
 				)
+				material.albedo_color = base_color
+				material.emission_enabled = true
+				material.emission = base_color * 0.6
+				material.emission_energy_multiplier = 1.5
 
 func _ready():
 	setup_environment()
@@ -147,7 +168,20 @@ func _process(delta):
 	simulate_physics(delta)
 	update_wind_force(delta)
 	update_visuals()
-	
+
+	# Auto-rotate for 3D effect
+	if auto_rotate:
+		rotation_time += delta
+		rotation.y = sin(rotation_time * 0.3) * 0.5
+		rotation.x = cos(rotation_time * 0.2) * 0.2
+
+	# Automatic interaction
+	if auto_interaction:
+		interaction_timer += delta
+		if interaction_timer >= 2.0:
+			interaction_timer = 0.0
+			_apply_auto_force()
+
 	# Handle mouse interaction
 	if enable_mouse_interaction:
 		handle_mouse_interaction()
@@ -232,13 +266,18 @@ func create_visuals():
 		mesh_instance.mesh = sphere
 		
 		var material = StandardMaterial3D.new()
+		var color = queer_colors[i % queer_colors.size()]
 		if mass.is_fixed:
-			material.albedo_color = Color(0.8, 0.2, 0.2)  # Red for fixed masses
+			material.albedo_color = color * 0.7  # Darker for fixed masses
 			material.emission_enabled = true
-			material.emission = Color(0.4, 0.1, 0.1)
+			material.emission = color * 0.8
+			material.emission_energy_multiplier = 3.0
 		else:
-			material.albedo_color = Color(0.2, 0.6, 0.8)  # Blue for free masses
-		
+			material.albedo_color = color
+			material.emission_enabled = true
+			material.emission = color * 0.5
+			material.emission_energy_multiplier = 2.0
+
 		material.metallic = 0.3
 		material.roughness = 0.7
 		mesh_instance.material_override = material
@@ -346,4 +385,21 @@ func update_visuals():
 	# Update spring visuals
 	if show_springs:
 		for spring in springs:
-			spring.update_visual() 
+			spring.update_visual()
+
+func _apply_auto_force():
+	# Apply random forces to create automatic interaction
+	if masses.size() > 0:
+		var random_indices = []
+		for i in range(min(3, masses.size())):
+			random_indices.append(randi() % masses.size())
+
+		for idx in random_indices:
+			var mass = masses[idx]
+			if not mass.is_fixed:
+				var random_force = Vector3(
+					randf_range(-mouse_force_strength, mouse_force_strength),
+					randf_range(-mouse_force_strength, mouse_force_strength),
+					randf_range(-mouse_force_strength, mouse_force_strength)
+				)
+				mass.apply_force(random_force) 

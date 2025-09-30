@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const GRID_RANGE := 4
 const GRID_SPACING := 0.9
@@ -13,7 +13,6 @@ var elapsed := 0.0
 func _ready():
 	super._ready()
 	create_axes(4.5)
-	create_floor(12.0)
 	_create_field_vectors()
 	particle = _create_particle_marker()
 	reposition_particle(Vector3.ZERO)
@@ -90,3 +89,6 @@ func _update_info():
 	builder.append("Velocity = (%.2f, %.2f, %.2f)" % [particle_velocity.x, particle_velocity.y, particle_velocity.z])
 	builder.append("Field(position) = (%.2f, %.2f, %.2f)" % [field_here.x, field_here.y, field_here.z])
 	info_label.text = "\n".join(builder)
+
+
+

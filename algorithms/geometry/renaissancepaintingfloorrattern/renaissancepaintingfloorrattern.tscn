@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://chukh3vfyqi1i" path="res://algorithms/geometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.gd" id="1_3s4u7"]
 
 [node name="RenaissanceFloorScene" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.805645, 0)
 script = ExtResource("1_3s4u7")
 
 [node name="Camera3D" type="Camera3D" parent="."]

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 class_name VectorSceneBase
 
@@ -60,7 +60,7 @@ func create_axes(length: float = 3.0):
 	var axes = [
 		{ "dir": Vector3.RIGHT, "color": Color(1.0, 0.2, 0.2, 1.0), "label": "X" },
 		{ "dir": Vector3.UP, "color": Color(0.2, 1.0, 0.2, 1.0), "label": "Y" },
-		{ "dir": Vector3.FORWARD, "color": Color(0.2, 0.6, 1.0, 1.0), "label": "Z" }
+		{ "dir": Vector3.BACK, "color": Color(0.2, 0.6, 1.0, 1.0), "label": "Z" }
 	]
 	for axis_data in axes:
 		var axis_root = Node3D.new()

@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var vector_a: Node3D
 var unit_vector: Node3D
@@ -12,7 +12,6 @@ var info_label: Label3D
 func _ready():
 	super._ready()
 	create_axes(3.0)
-	create_floor(8.0)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.5, 1.0, 0.5), Color(0.95, 0.85, 0.2, 1.0), "Vector a")
 	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(1.0, 0.4, 0.9, 1.0), "Unit a", false)
 	component_vectors["x"] = spawn_vector(Vector3.ZERO, Vector3(1.5, 0, 0), Color(1.0, 0.3, 0.3, 1.0), "a_x", false)

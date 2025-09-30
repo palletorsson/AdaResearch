@@ -20,19 +20,23 @@ extends Node3D
 func _ready():
 	if generate_on_ready:
 		create_sculpture()
-		#setup_environment()
+		setup_environment()
 
 func create_sculpture():
 	var sculpture = Node3D.new()
 	sculpture.name = "DonovanSculpture"
 	
-	# Create a base platform for blobs if needed
-
+	# Position for VR viewing
+	sculpture.position = Vector3(0, 0, -2.5)
+	sculpture.scale = Vector3(1.5, 1.5, 1.5)  # Larger scale for VR
 	
 	# Create the blob cluster
 	create_blob_cluster(sculpture)
 	
 	add_child(sculpture)
+	
+	# Add VR-specific optimizations
+	optimize_for_vr(sculpture)
 
 
 
@@ -142,6 +146,10 @@ func create_blob_core(size):
 	
 	material.albedo_color = core_color
 	material.roughness = 0.7
+	material.metallic = 0.1
+	material.emission_enabled = true
+	material.emission = core_color * 0.1  # Subtle emission for VR visibility
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Ensure visibility from all angles
 	core.material_override = material
 	
 	return core
@@ -175,8 +183,11 @@ func create_hair_for_blob(parent_node, core_mesh, size):
 	material.roughness = 0.9
 	material.metallic_specular = 0.1
 	
-	# Make sure to set as transparent so alpha works
-	material.flags_transparent = true
+	# VR-compatible material settings
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Ensure visibility from all angles
+	material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+	material.depth_test_enabled = true
 	
 	hair_instance.material_override = material
 	
@@ -225,13 +236,38 @@ func create_hair_for_blob(parent_node, core_mesh, size):
 	hair_container.add_child(hair_instance)
 	parent_node.add_child(hair_container)
 
-func setup_environment():
-	# Create camera
+func setup_vr_camera():
+	"""Set up VR-compatible camera and positioning"""
+	# Remove existing camera if present
+	var existing_camera = get_node_or_null("Camera3D")
+	if existing_camera:
+		existing_camera.queue_free()
+	
+	# Create VR camera controller
+	var camera_controller = Node3D.new()
+	camera_controller.name = "VRCameraController"
+	camera_controller.position = Vector3(0, 1.6, 0)  # VR eye height
+	
+	# Create main camera for VR
 	var camera = Camera3D.new()
-	camera.name = "MainCamera"
-	camera.position = Vector3(0, 2, 8)
-	camera.look_at(Vector3(0, 1.5, 0), Vector3.UP)
-	add_child(camera)
+	camera.name = "VRCamera"
+	camera.position = Vector3(0, 0, 0)
+	camera.fov = 75.0  # VR-appropriate FOV
+	camera.near = 0.1
+	camera.far = 100.0
+	
+	camera_controller.add_child(camera)
+	add_child(camera_controller)
+	
+	# Position the sculpture at a good viewing distance for VR
+	var sculpture = get_node_or_null("DonovanSculpture")
+	if sculpture:
+		sculpture.position = Vector3(0, 0, -2.5)  # Closer for VR viewing
+		sculpture.scale = Vector3(1.5, 1.5, 1.5)  # Larger scale for VR
+
+func setup_environment():
+	# Create VR-compatible camera setup
+	setup_vr_camera()
 	
 	# Create lighting
 	setup_lighting()
@@ -540,3 +576,37 @@ func create_particle_hair_for_blob(parent_node, core_mesh, size):
 	particles.draw_pass_1 = hair_mesh
 	
 	parent_node.add_child(particles)
+
+func optimize_for_vr(sculpture: Node3D):
+	"""Apply VR-specific optimizations to the sculpture"""
+	# Ensure all meshes are visible in VR
+	var mesh_instances = find_children_by_type(sculpture, "MeshInstance3D")
+	for mesh_instance in mesh_instances:
+		if mesh_instance.material_override:
+			var material = mesh_instance.material_override
+			# Ensure proper depth testing
+			material.depth_test_enabled = true
+			material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+			# Disable culling for better VR visibility
+			material.cull_mode = BaseMaterial3D.CULL_DISABLED
+			# Add subtle emission for better visibility
+			if not material.emission_enabled:
+				material.emission_enabled = true
+				material.emission = material.albedo_color * 0.05
+	
+	# Add a subtle rotation animation for VR interest
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(sculpture, "rotation_degrees:y", 360.0, 30.0)
+	tween.tween_delay(2.0)
+
+func find_children_by_type(node: Node, type_name: String) -> Array:
+	"""Recursively find all children of a specific type"""
+	var result = []
+	if node.get_class() == type_name:
+		result.append(node)
+	
+	for child in node.get_children():
+		result.append_array(find_children_by_type(child, type_name))
+	
+	return result

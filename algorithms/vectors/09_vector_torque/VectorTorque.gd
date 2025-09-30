@@ -1,4 +1,4 @@
-﻿extends VectorSceneBase
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var radius_vector: Node3D
 var force_vector: Node3D
@@ -9,7 +9,6 @@ var info_label: Label3D
 func _ready():
 	super._ready()
 	create_axes(3.5)
-	create_floor(9.0)
 	radius_vector = spawn_vector(Vector3.ZERO, Vector3(1.4, 0.8, 0.0), Color(1.0, 0.6, 0.2, 1.0), "r")
 	force_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.4, 1.0), Color(0.2, 0.8, 1.0, 1.0), "F")
 	torque_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.9, 0.6, 1.0, 1.0), "tau", false)
@@ -47,3 +46,6 @@ func _update_info(r: Vector3, f: Vector3, torque: Vector3):
 		var sin_theta = torque.length() / (r.length() * f.length())
 		builder.append("sin(theta) ~= %.2f" % clamp(sin_theta, -1.0, 1.0))
 	info_label.text = "\n".join(builder)
+
+
+

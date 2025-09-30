@@ -1,4 +1,4 @@
-﻿extends JointDemoBase
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var bag: RigidBody3D
 
@@ -32,8 +32,14 @@ func _build_demo():
 	add_child(joint)
 
 	add_label("Cone Twist Punching Bag", Vector3(0.0, 4.0, 2.8))
+	# Nudge to set it in motion
+	call_deferred("_nudge")
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		bag.apply_impulse((Vector3.FORWARD + Vector3.RIGHT) * 4.0)
+
+func _nudge():
+	if is_instance_valid(bag):
+		bag.apply_impulse(Vector3(1.0, 0.0, 1.2))
 

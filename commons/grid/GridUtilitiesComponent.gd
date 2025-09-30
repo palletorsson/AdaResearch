@@ -155,6 +155,11 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					utility_object.destination = destination
 				else:
 					utility_object.set_meta("destination", destination)
+
+				# Set scene name for display label
+				if "scene_name" in utility_object:
+					utility_object.scene_name = destination
+
 				print("GridUtilitiesComponent: Set teleporter destination to: %s" % destination)
 		"l":  # Lift
 			if parameters.size() > 0 and "height" in utility_object:
@@ -506,7 +511,8 @@ func _is_sequence_name(name: String) -> bool:
 		"criticalalgorithms",
 		"speculativecomputation",
 		"resourcemanagement",
-		"advancedlaboratory"
+		"advancedlaboratory", 
+		"machinelearning"
 	]
 	return name in known_sequences
 	

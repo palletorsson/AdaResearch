@@ -1,4 +1,4 @@
-extends JointDemoBase
+extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var wheel: RigidBody3D
 var suspension: Generic6DOFJoint3D

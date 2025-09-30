@@ -40,13 +40,30 @@ func _ready():
 	start_showcase_cycle()
 
 func setup_vr_environment():
-	# Create ambient lighting for VR
+	# Create enhanced lighting for VR
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
 	env.sky = Sky.new()
 	env.sky.sky_material = ProceduralSkyMaterial.new()
-	env.ambient_light_color = Color(0.3, 0.4, 0.6)
-	env.ambient_light_energy = 0.3
+	env.ambient_light_color = Color(0.4, 0.5, 0.7)
+	env.ambient_light_energy = 0.4
+	
+	# Add main directional light
+	var main_light = DirectionalLight3D.new()
+	main_light.position = Vector3(10, 15, 10)
+	main_light.look_at(Vector3.ZERO, Vector3.UP)
+	main_light.light_energy = 1.2
+	main_light.shadow_enabled = true
+	main_light.light_color = Color(1.0, 0.98, 0.95)
+	add_child(main_light)
+	
+	# Add rim light for better depth perception
+	var rim_light = DirectionalLight3D.new()
+	rim_light.position = Vector3(-8, 12, -8)
+	rim_light.look_at(Vector3.ZERO, Vector3.UP)
+	rim_light.light_energy = 0.6
+	rim_light.light_color = Color(0.8, 0.9, 1.0)
+	add_child(rim_light)
 	
 	var camera = get_viewport().get_camera_3d()
 	if camera:
@@ -73,10 +90,13 @@ func create_showcase_platforms():
 		platform.position = platform_pos
 		
 		var platform_material = StandardMaterial3D.new()
-		platform_material.albedo_color = Color(0.2, 0.3, 0.4, 0.8)
+		platform_material.albedo_color = Color(0.15, 0.25, 0.35, 0.9)
 		platform_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		platform_material.emission_enabled = true
-		platform_material.emission = Color(0.1, 0.2, 0.3) * 0.5
+		platform_material.emission = Color(0.1, 0.2, 0.3) * 0.3
+		platform_material.metallic = 0.1
+		platform_material.roughness = 0.3
+		platform_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Better VR visibility
 		platform.material_override = platform_material
 		
 		add_child(platform)
@@ -93,11 +113,23 @@ func create_info_panel(index: int, pos: Vector3):
 	panel.position = pos
 	
 	var panel_material = StandardMaterial3D.new()
-	panel_material.albedo_color = Color(0.1, 0.1, 0.2, 0.9)
+	panel_material.albedo_color = Color(0.05, 0.1, 0.15, 0.95)
 	panel_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	panel_material.emission_enabled = true
-	panel_material.emission = Color(0.2, 0.3, 0.5) * 0.3
+	panel_material.emission = Color(0.2, 0.4, 0.6) * 0.4
+	panel_material.metallic = 0.2
+	panel_material.roughness = 0.1
+	panel_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	panel.material_override = panel_material
+	
+	# Add text label
+	var label = Label3D.new()
+	label.text = get_ca_name(index)
+	label.font_size = 24
+	label.position = Vector3(0, 0, 0.06)
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.modulate = Color.WHITE
+	panel.add_child(label)
 	
 	add_child(panel)
 	info_panels.append(panel)
@@ -162,11 +194,15 @@ func create_recrystallization_ca(parent: Node3D):
 		var marker = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.1
+		sphere_mesh.height = 0.2  # Fix elongated sphere
 		marker.mesh = sphere_mesh
 		var marker_material = StandardMaterial3D.new()
-		marker_material.albedo_color = Color(1.0, 0.5, 0.0)
+		marker_material.albedo_color = Color(1.0, 0.6, 0.0)
 		marker_material.emission_enabled = true
-		marker_material.emission = Color(1.0, 0.5, 0.0) * 0.5
+		marker_material.emission = Color(1.0, 0.6, 0.0) * 0.8
+		marker_material.metallic = 0.3
+		marker_material.roughness = 0.2
+		marker_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 		marker.material_override = marker_material
 		parent.add_child(marker)
 	
@@ -189,11 +225,15 @@ func create_dendrite_growth_ca(parent: Node3D):
 	var center_marker = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.15
+	sphere_mesh.height = 0.3  # Fix elongated sphere
 	center_marker.mesh = sphere_mesh
 	var center_material = StandardMaterial3D.new()
-	center_material.albedo_color = Color(0.5, 0.8, 1.0)
+	center_material.albedo_color = Color(0.3, 0.7, 1.0)
 	center_material.emission_enabled = true
-	center_material.emission = Color(0.5, 0.8, 1.0) * 0.6
+	center_material.emission = Color(0.3, 0.7, 1.0) * 0.9
+	center_material.metallic = 0.4
+	center_material.roughness = 0.1
+	center_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	center_marker.material_override = center_material
 	parent.add_child(center_marker)
 	
@@ -212,6 +252,7 @@ func create_percolation_ca(parent: Node3D):
 		var pore = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.05 + randf() * 0.03
+		sphere_mesh.height = sphere_mesh.radius * 2  # Fix elongated sphere
 		pore.mesh = sphere_mesh
 		pore.position = Vector3(
 			randf_range(-1.5, 1.5),
@@ -308,6 +349,7 @@ func create_ecosystem_ca(parent: Node3D):
 		var organism = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.05
+		sphere_mesh.height = 0.1  # Fix elongated sphere
 		organism.mesh = sphere_mesh
 		organism.position = Vector3(
 			randf_range(-1.5, 1.5),
@@ -375,6 +417,7 @@ func create_droplet_behavior_ca(parent: Node3D):
 		var droplet = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.1 + randf() * 0.05
+		sphere_mesh.height = sphere_mesh.radius * 2  # Fix elongated sphere
 		droplet.mesh = sphere_mesh
 		droplet.position = Vector3(
 			randf_range(-1.0, 1.0),
@@ -403,6 +446,7 @@ func create_self_organization_ca(parent: Node3D):
 		var particle = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.03
+		sphere_mesh.height = 0.06  # Fix elongated sphere
 		particle.mesh = sphere_mesh
 		particle.position = Vector3(
 			randf_range(-1.5, 1.5),
@@ -709,11 +753,22 @@ func highlight_current_showcase():
 		var material = platform.material_override as StandardMaterial3D
 		
 		if i == current_showcase:
-			material.emission = Color(0.3, 0.6, 1.0) * 0.8  # Bright blue highlight
-			material.albedo_color = Color(0.4, 0.6, 0.8, 0.9)
+			# Enhanced highlight with pulsing effect
+			material.emission = Color(0.4, 0.8, 1.0) * 1.2  # Bright cyan highlight
+			material.albedo_color = Color(0.5, 0.7, 0.9, 0.95)
+			material.metallic = 0.3
+			material.roughness = 0.1
+			
+			# Add subtle pulsing animation
+			var tween = create_tween()
+			tween.set_loops()
+			tween.tween_property(material, "emission", Color(0.6, 1.0, 1.0) * 1.5, 1.0)
+			tween.tween_property(material, "emission", Color(0.4, 0.8, 1.0) * 1.2, 1.0)
 		else:
-			material.emission = Color(0.1, 0.2, 0.3) * 0.3  # Dim
-			material.albedo_color = Color(0.2, 0.3, 0.4, 0.6)
+			material.emission = Color(0.1, 0.2, 0.3) * 0.2  # Dim
+			material.albedo_color = Color(0.15, 0.25, 0.35, 0.7)
+			material.metallic = 0.1
+			material.roughness = 0.3
 
 func get_ca_name(index: int) -> String:
 	var names = [
@@ -935,6 +990,33 @@ func on_vr_controller_input(controller_id: int, input_type: String):
 		auto_cycle = not auto_cycle
 		print("Auto-cycle: ", auto_cycle)
 
+func _input(event):
+	"""Handle keyboard input for testing and control"""
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_SPACE:
+				cycle_to_next_showcase()
+			KEY_A:
+				auto_cycle = not auto_cycle
+				print("Auto-cycle: ", auto_cycle)
+			KEY_R:
+				reset_all_showcases()
+				print("Reset all showcases")
+			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9:
+				var target_showcase = event.keycode - KEY_1
+				if target_showcase < SHOWCASE_COUNT:
+					current_showcase = target_showcase
+					highlight_current_showcase()
+					print("Switched to showcase: ", get_ca_name(current_showcase))
+			KEY_PLUS, KEY_EQUAL:
+				cycle_interval = max(5.0, cycle_interval - 2.0)
+				print("Cycle interval: ", cycle_interval, " seconds")
+			KEY_MINUS:
+				cycle_interval = min(60.0, cycle_interval + 2.0)
+				print("Cycle interval: ", cycle_interval, " seconds")
+			KEY_H:
+				print_help()
+
 # Public method to focus on specific CA type
 func focus_on_ca_type(ca_type: CAType):
 	current_showcase = ca_type as int
@@ -970,3 +1052,17 @@ func reset_all_showcases():
 func set_auto_cycle_interval(seconds: float):
 	cycle_interval = max(5.0, seconds)  # Minimum 5 seconds
 	print("Auto-cycle interval set to: ", cycle_interval, " seconds")
+
+func print_help():
+	"""Print help information for controls"""
+	print("=== CA Showcase Controls ===")
+	print("SPACE - Cycle to next showcase")
+	print("A - Toggle auto-cycle")
+	print("R - Reset all showcases")
+	print("1-9 - Jump to specific showcase")
+	print("+/- - Adjust cycle interval")
+	print("H - Show this help")
+	print("")
+	print("Current showcase: ", get_ca_name(current_showcase))
+	print("Auto-cycle: ", auto_cycle)
+	print("Cycle interval: ", cycle_interval, " seconds")

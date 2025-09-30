@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0x9y8z7a6b5c"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/topological_sort/topological_sort.gd" id="1_topological"]
+
+[node name="TopologicalSort" type="Node3D"]
+script = ExtResource("1_topological")
+graph_size = 8
+edge_density = 0.3
+auto_start = true
+step_by_step = true
+animation_delay = 1.0
+show_in_degrees = true
+show_queue_state = true
+highlight_current_vertex = true
+show_sorting_order = true
+animate_dependency_resolution = true
+show_levels = true
+enable_graph_editing = true
+allow_edge_editing = true
+real_time_sort_update = true
+show_algorithm_state = true
+vertex_color = Color(0.4, 0.6, 0.9, 1)
+ready_color = Color(0.2, 0.9, 0.2, 1)
+processing_color = Color(0.9, 0.9, 0.2, 1)
+processed_color = Color(0.9, 0.2, 0.2, 1)
+level_1_color = Color(0.9, 0.2, 0.2, 1)
+level_2_color = Color(0.9, 0.5, 0.2, 1)
+level_3_color = Color(0.9, 0.9, 0.2, 1)
+level_4_color = Color(0.5, 0.9, 0.2, 1)
+level_5_color = Color(0.2, 0.9, 0.2, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+dependency_edge_color = Color(0.9, 0.3, 0.3, 1)

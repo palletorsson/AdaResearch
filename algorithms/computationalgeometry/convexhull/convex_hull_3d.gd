@@ -582,8 +582,10 @@ func generate_point_cloud():
 func create_point_visuals():
 	for p in input_points:
 		var mesh_inst = MeshInstance3D.new()
-		mesh_inst.mesh = SphereMesh.new()
-		mesh_inst.mesh.radius = 0.1
+		var sphere_mesh = SphereMesh.new()
+		sphere_mesh.radius = 0.1
+		sphere_mesh.height = 0.2  # Set height to 2 * radius for a perfect sphere
+		mesh_inst.mesh = sphere_mesh
 		mesh_inst.material_override = included_point_material
 		mesh_inst.position = p
 		point_meshes.append(mesh_inst)

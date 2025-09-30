@@ -7,11 +7,27 @@ var paused = false
 var trails_enabled = true
 var gravitational_constant = 0.1
 var time_scale = 1.0
+var rotation_time = 0.0
+
+# Vibrant queer color palette for bodies
+var queer_colors = [
+	Color(1.0, 0.4, 0.7, 1.0),    # Hot pink
+	Color(0.8, 0.3, 1.0, 1.0),    # Purple
+	Color(0.3, 0.9, 1.0, 1.0),    # Cyan
+	Color(1.0, 0.8, 0.2, 1.0),    # Gold
+	Color(0.5, 1.0, 0.4, 1.0),    # Lime
+	Color(1.0, 0.5, 0.3, 1.0)     # Coral
+]
 
 func _ready():
 	_create_star_field()
 	_initialize_bodies()
 	_connect_ui()
+	_apply_vibrant_colors()
+
+	# Auto-start simulation
+	paused = false
+	trails_enabled = true
 
 func _create_star_field():
 	# Create a background star field for visual appeal
@@ -49,13 +65,18 @@ func _initialize_bodies():
 func _physics_process(delta):
 	if paused:
 		return
-	
+
+	# Auto-rotate for dynamic 3D view
+	rotation_time += delta
+	rotation.y = sin(rotation_time * 0.2) * 0.4
+	rotation.x = cos(rotation_time * 0.15) * 0.15
+
 	# Apply gravitational forces between all bodies
 	_apply_gravitational_forces(delta)
-	
+
 	# Update body positions and velocities
 	_update_bodies(delta)
-	
+
 	# Update trails
 	if trails_enabled:
 		_update_trails()
@@ -120,6 +141,25 @@ func _on_mass_changed(value: float):
 	# Update mass of all bodies
 	for body in bodies:
 		body.body_mass = value
-	
+
 	# Update UI label
 	$UI/VBoxContainer/MassLabel.text = "Mass: " + str(int(value))
+
+func _apply_vibrant_colors():
+	# Apply vibrant queer colors to celestial bodies
+	for i in range(bodies.size()):
+		var body = bodies[i]
+		var color = queer_colors[i % queer_colors.size()]
+
+		# Apply color to body mesh
+		if body.has_node("MeshInstance3D"):
+			var mesh_instance = body.get_node("MeshInstance3D")
+			if mesh_instance.material_override:
+				mesh_instance.material_override.albedo_color = color
+				mesh_instance.material_override.emission_enabled = true
+				mesh_instance.material_override.emission = color
+				mesh_instance.material_override.emission_energy_multiplier = 3.0
+
+		# Apply color to trail if available
+		if body.has_method("set_trail_color"):
+			body.set_trail_color(color)
