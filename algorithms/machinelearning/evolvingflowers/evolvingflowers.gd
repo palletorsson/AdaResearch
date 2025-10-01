@@ -26,6 +26,13 @@ class FlowerGenome:
 	var leaf_size: float = 0.5
 	var symmetry: float = 1.0
 	var fitness: float = 0.0
+
+	# L-System parameters for branching
+	var lsystem_axiom: String = "F"
+	var lsystem_rules: Dictionary = {"F": "F[+F]F[-F]F"}
+	var lsystem_iterations: int = 2
+	var branch_angle: float = 25.0
+	var branch_length_decay: float = 0.7
 	
 	func _init():
 		randomize_genome()
@@ -42,6 +49,21 @@ class FlowerGenome:
 		stem_height = randf_range(1.0, 2.5)
 		leaf_size = randf_range(0.3, 0.8)
 		symmetry = randf_range(0.8, 1.0)
+
+		# Randomize L-System parameters
+		lsystem_iterations = randi() % 3 + 1  # 1-3 iterations
+		branch_angle = randf_range(15.0, 45.0)
+		branch_length_decay = randf_range(0.5, 0.8)
+
+		# Random L-System rule selection
+		var rule_options = [
+			"F[+F]F[-F]F",
+			"F[+F][-F]F",
+			"FF[+F][-F]",
+			"F[++F][--F]F",
+			"F[+F][F][-F]"
+		]
+		lsystem_rules = {"F": rule_options[randi() % rule_options.size()]}
 	
 	func crossover(other: FlowerGenome) -> FlowerGenome:
 		var child = FlowerGenome.new()
@@ -57,6 +79,13 @@ class FlowerGenome:
 		child.stem_height = lerp(self.stem_height, other.stem_height, randf())
 		child.leaf_size = lerp(self.leaf_size, other.leaf_size, randf())
 		child.symmetry = lerp(self.symmetry, other.symmetry, randf())
+
+		# L-System crossover
+		child.lsystem_iterations = self.lsystem_iterations if randf() < 0.5 else other.lsystem_iterations
+		child.branch_angle = lerp(self.branch_angle, other.branch_angle, randf())
+		child.branch_length_decay = lerp(self.branch_length_decay, other.branch_length_decay, randf())
+		child.lsystem_rules = self.lsystem_rules if randf() < 0.5 else other.lsystem_rules
+
 		return child
 	
 	func mutate():
@@ -82,6 +111,23 @@ class FlowerGenome:
 			leaf_size = clamp(leaf_size + randf_range(-0.1, 0.1), 0.2, 1.0)
 		if randf() < MUTATION_RATE:
 			symmetry = clamp(symmetry + randf_range(-0.05, 0.05), 0.7, 1.0)
+
+		# L-System mutations
+		if randf() < MUTATION_RATE:
+			lsystem_iterations = clampi(lsystem_iterations + (randi() % 3 - 1), 1, 4)
+		if randf() < MUTATION_RATE:
+			branch_angle = clamp(branch_angle + randf_range(-5.0, 5.0), 10.0, 60.0)
+		if randf() < MUTATION_RATE:
+			branch_length_decay = clamp(branch_length_decay + randf_range(-0.1, 0.1), 0.4, 0.9)
+		if randf() < MUTATION_RATE * 0.5:  # Rarer mutation
+			var rule_options = [
+				"F[+F]F[-F]F",
+				"F[+F][-F]F",
+				"FF[+F][-F]",
+				"F[++F][--F]F",
+				"F[+F][F][-F]"
+			]
+			lsystem_rules = {"F": rule_options[randi() % rule_options.size()]}
 
 class Flower:
 	var genome: FlowerGenome
@@ -218,15 +264,21 @@ func spawn_flower(genome: FlowerGenome, pos: Vector3) -> Flower:
 		petal_mat.emission = petal_color * 0.2
 		petal_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		petal.material_override = petal_mat
-		
+
 		# Position with symmetry variation
 		var symmetry_offset = randf_range(-1.0 + genome.symmetry, 1.0 - genome.symmetry) * 0.1
 		petal.rotation.y = angle + symmetry_offset
 		petal.position = Vector3(0, 0, 0)
-		
+
 		flower.flower_head.add_child(petal)
 		flower.petals.append(petal)
-	
+
+	# L-System branching structure
+	var lsystem_container = Node3D.new()
+	lsystem_container.rotation_degrees.x = 90  # Point branches outward
+	flower.flower_head.add_child(lsystem_container)
+	create_lsystem_branches(genome, lsystem_container, petal_color)
+
 	return flower
 
 func create_petal_mesh(genome: FlowerGenome) -> ArrayMesh:
@@ -271,33 +323,111 @@ func create_leaf_mesh(size: float) -> ArrayMesh:
 	var mesh := ArrayMesh.new()
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
-	
+
 	var vertices := PackedVector3Array()
 	var normals := PackedVector3Array()
 	var indices := PackedInt32Array()
-	
+
 	# Simple leaf shape
 	vertices.append(Vector3(0, 0, 0))
 	vertices.append(Vector3(-size * 0.3, 0, size * 0.5))
 	vertices.append(Vector3(0, 0, size))
 	vertices.append(Vector3(size * 0.3, 0, size * 0.5))
-	
+
 	for i in range(4):
 		normals.append(Vector3.UP)
-	
+
 	indices.append(0)
 	indices.append(1)
 	indices.append(2)
 	indices.append(0)
 	indices.append(2)
 	indices.append(3)
-	
+
 	arrays[Mesh.ARRAY_VERTEX] = vertices
 	arrays[Mesh.ARRAY_NORMAL] = normals
 	arrays[Mesh.ARRAY_INDEX] = indices
-	
+
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
+
+# L-System Generation
+func generate_lsystem_string(genome: FlowerGenome) -> String:
+	var result = genome.lsystem_axiom
+	for i in range(genome.lsystem_iterations):
+		var next_result = ""
+		for c in result:
+			if genome.lsystem_rules.has(c):
+				next_result += genome.lsystem_rules[c]
+			else:
+				next_result += c
+		result = next_result
+	return result
+
+func create_lsystem_branches(genome: FlowerGenome, parent: Node3D, petal_color: Color):
+	var lstring = generate_lsystem_string(genome)
+	var position = Vector3.ZERO
+	var direction = Vector3.UP
+	var length = genome.petal_length * 0.3
+
+	var stack = []  # Stack for push/pop operations
+
+	for c in lstring:
+		match c:
+			"F":  # Draw forward
+				var end_pos = position + direction * length
+				var branch = create_branch_segment(position, end_pos, length * 0.05, petal_color)
+				parent.add_child(branch)
+
+				# Add small petal at end
+				var mini_petal = MeshInstance3D.new()
+				mini_petal.mesh = create_petal_mesh(genome)
+				mini_petal.scale = Vector3.ONE * 0.3
+				mini_petal.position = end_pos
+				var petal_mat = StandardMaterial3D.new()
+				petal_mat.albedo_color = petal_color
+				petal_mat.emission_enabled = true
+				petal_mat.emission = petal_color * 0.3
+				petal_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+				mini_petal.material_override = petal_mat
+				parent.add_child(mini_petal)
+
+				position = end_pos
+				length *= genome.branch_length_decay
+
+			"+":  # Rotate right
+				direction = direction.rotated(Vector3.FORWARD, deg_to_rad(genome.branch_angle))
+
+			"-":  # Rotate left
+				direction = direction.rotated(Vector3.FORWARD, deg_to_rad(-genome.branch_angle))
+
+			"[":  # Push state
+				stack.append({"pos": position, "dir": direction, "len": length})
+
+			"]":  # Pop state
+				if stack.size() > 0:
+					var state = stack.pop_back()
+					position = state.pos
+					direction = state.dir
+					length = state.len
+
+func create_branch_segment(start: Vector3, end: Vector3, thickness: float, color: Color) -> MeshInstance3D:
+	var branch = MeshInstance3D.new()
+	var mesh = CylinderMesh.new()
+	mesh.top_radius = thickness
+	mesh.bottom_radius = thickness * 1.2
+	mesh.height = start.distance_to(end)
+	branch.mesh = mesh
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color.darkened(0.3)
+	branch.material_override = mat
+
+	branch.position = (start + end) / 2.0
+	branch.look_at(end, Vector3.RIGHT)
+	branch.rotate_object_local(Vector3.RIGHT, PI / 2)
+
+	return branch
 
 func _process(delta):
 	timer += delta
@@ -369,20 +499,32 @@ func calculate_fitness():
 	for flower in current_population:
 		var genome = flower.genome
 		var fitness = 0.0
-		
+
 		# Reward specific traits
 		fitness += genome.petal_count * 2.0  # More petals = better
 		fitness += genome.petal_length * 10.0  # Longer petals = better
 		fitness += genome.symmetry * 15.0  # Symmetry = better
 		fitness += (1.0 - abs(genome.color_hue - 0.8)) * 20.0  # Prefer purple/pink hues
 		fitness += genome.color_saturation * 10.0  # Vivid colors = better
-		
+
+		# L-System fitness rewards
+		fitness += genome.lsystem_iterations * 8.0  # More complex = better
+		fitness += (1.0 - abs(genome.branch_angle - 30.0) / 30.0) * 10.0  # Prefer ~30 degree angles
+		fitness += genome.branch_length_decay * 5.0  # Reward gradual decay
+
+		# Calculate L-System complexity
+		var lstring = generate_lsystem_string(genome)
+		var branch_count = lstring.count("F")
+		fitness += min(branch_count, 20) * 0.5  # Reward branching up to a limit
+
 		# Penalty for extreme values
 		if genome.petal_count > 10:
 			fitness -= 10.0
 		if genome.petal_width < 0.3:
 			fitness -= 5.0
-		
+		if branch_count > 50:  # Too many branches
+			fitness -= 15.0
+
 		flower.genome.fitness = fitness
 		fitness_scores.append(fitness)
 

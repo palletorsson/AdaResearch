@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://scm48wy2mydu"]
+[gd_scene load_steps=9 format=3 uid="uid://scm48wy2mydu"]
 
 [ext_resource type="Script" uid="uid://duokmbw77vp7d" path="res://commons/scenes/mapobjects/teleport.gd" id="1_18jqi"]
 [ext_resource type="Shader" uid="uid://drb42568m7t2x" path="res://commons/resourses/shaders/PinkTeleport.gdshader" id="2_dvv38"]
@@ -24,10 +24,16 @@ shader_parameter/distortion_strength = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_dvv38"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t57yy"]
+shading_mode = 0
+disable_fog = true
+albedo_color = Color(0.3, 0.9, 1, 1)
+disable_receive_shadows = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_n5akl"]
+
 [node name="Teleport" type="Node3D"]
 script = ExtResource("1_18jqi")
-scene_name = null
-edge_color = null
 
 [node name="TeleportArea" type="Area3D" parent="."]
 collision_layer = 0
@@ -50,5 +56,21 @@ max_distance = 15.0
 secondary_sound = 3
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="EdgeOutline" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_t57yy")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_n5akl")
+
+[node name="SceneLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.35, 0.51, -0.35)
+pixel_size = 0.002
+render_priority = 1
+outline_modulate = Color(0, 0, 0, 0.8)
+text = "Teleporter"
+font_size = 20
+outline_size = 4
+horizontal_alignment = 0
+vertical_alignment = 0
 
 [connection signal="body_entered" from="TeleportArea" to="." method="_on_TeleportArea_body_entered"]

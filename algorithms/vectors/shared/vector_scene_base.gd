@@ -119,34 +119,28 @@ func create_info_panel(text: String, position: Vector3) -> Label3D:
 	info_root.add_child(label)
 	return label
 
-func create_ball(position: Vector3, radius: float = 0.18, mass: float = 1.0, color: Color = Color(0.9, 0.4, 0.8, 1.0)) -> RigidBody3D:
-	var body = RigidBody3D.new()
-	body.name = "Ball"
-	body.mass = mass
-	body.gravity_scale = 0.0
-	body.linear_damp = 0.1
-	body.angular_damp = 0.2
-	body.position = position
-	var shape = SphereShape3D.new()
-	shape.radius = radius
-	var collider = CollisionShape3D.new()
-	collider.shape = shape
-	body.add_child(collider)
-	var mesh = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
+func create_ball(position: Vector3, radius: float = 0.18, _mass: float = 1.0, color: Color = Color(0.9, 0.4, 0.8, 1.0)) -> Node3D:
+	# Visual-only sphere (no physics body or collider)
+	var root := Node3D.new()
+	root.name = "Ball"
+	root.position = position
+	var mesh := MeshInstance3D.new()
+	var sphere_mesh := SphereMesh.new()
 	sphere_mesh.radius = radius
+	# Ensure perfect sphere (avoid elongated look)
+	sphere_mesh.height = radius * 2.0
 	sphere_mesh.radial_segments = 32
 	sphere_mesh.rings = 16
 	mesh.mesh = sphere_mesh
-	var material = StandardMaterial3D.new()
+	var material := StandardMaterial3D.new()
 	material.albedo_color = color
 	material.emission_enabled = true
 	material.emission = color * 0.3
 	material.roughness = 0.3
 	mesh.material_override = material
-	body.add_child(mesh)
-	add_child(body)
-	return body
+	root.add_child(mesh)
+	add_child(root)
+	return root
 
 func _disable_grab_sphere(grab_node: Node):
 	if grab_node == null:
@@ -176,9 +170,13 @@ func _create_origin_marker():
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.05
+	# Force perfect sphere dimensions to avoid any elongated appearance
+	sphere.height = sphere.radius * 2.0
 	sphere.radial_segments = 18
 	sphere.rings = 12
 	mesh.mesh = sphere
+	mesh.scale = Vector3.ONE
+	mesh.transform = Transform3D.IDENTITY
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 	material.emission_enabled = true

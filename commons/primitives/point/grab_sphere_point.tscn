@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu0qtodekjr5r"]
+[gd_scene load_steps=10 format=3 uid="uid://cu0qtodekjr5r"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_1t2g7"]
-[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/cubes/grab_sphere.gd" id="2_3uxjj"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_3uxjj"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="3_3uxjj"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_blybu"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_nukvf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
@@ -10,22 +12,30 @@ albedo_color = Color(0, 1, 1, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
 radius = 0.0455009
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
-transparency = 1
-albedo_color = Color(0.8, 0.105882, 0.8, 0.843137)
-metallic = 1.0
-roughness = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dtj8"]
+render_priority = 0
+shader = ExtResource("3_blybu")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_0v2tn"]
-radius = 0.05
-height = 0.1
-radial_segments = 32
-rings = 16
+radial_segments = 4
+rings = 1
+is_hemisphere = true
 
 [node name="GrabSphere" instance=ExtResource("1_1t2g7")]
+freeze = true
 script = ExtResource("2_3uxjj")
 alternate_material = SubResource("StandardMaterial3D_nukvf")
-alter_freeze = true
+alter_freeze = false
 glow_color = Color(1, 0.6, 1, 1)
 glow_emission_energy = 2.0
 pickup_sound_volume_db = -6.0
@@ -36,7 +46,10 @@ second_hand_grab = 2
 shape = SubResource("SphereShape3D_blybu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-material_override = SubResource("StandardMaterial3D_1t2g7")
+material_override = SubResource("ShaderMaterial_3dtj8")
 mesh = SubResource("SphereMesh_0v2tn")
+
+[node name="Sphere" type="Node3D" parent="MeshInstance3D" index="0"]
+script = ExtResource("3_3uxjj")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_nukvf")]

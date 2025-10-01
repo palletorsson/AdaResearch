@@ -22,12 +22,31 @@
 			"description": "a point",
 			"scene": "res://commons/primitives/point/point.tscn",
 		},
+		"grab_sphere_point": {
+			"name": "grab_sphere_point",
+			"lookup_name": "grab_sphere_point",
+			"description": "a grab_sphere_point",
+			"scene": "res://commons/primitives/point/grab_sphere_point.tscn",
+		},		
+		
+		"grab_sphere_point_with_color": {
+			"name": "grab_sphere_point_with_color_text",
+			"lookup_name": "grab_sphere_point_with_color",
+			"description": "a grab_sphere_point_with_color",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+		},
 		"grab_sphere_point_with_text": {
 			"name": "grab_sphere_point_with_text",
 			"lookup_name": "grab_sphere_point_with_text",
 			"description": "a grab_sphere_point_with_text",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
 		},
+		"grab_sphere_point_color_with_text": {
+			"name": "grab_sphere_point_color_with_text",
+			"lookup_name": "grab_sphere_point_color_with_text",
+			"description": "a grab_sphere_point_color_with_text",
+			"scene": "res://commons/primitives/point/grab_sphere_point_color_with_text.tscn",
+		},		
 		"point_collection": {
 			"name": "point_collection",
 			"lookup_name": "point_collection",

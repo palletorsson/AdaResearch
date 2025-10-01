@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://b18v48rxnefil"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_2447a"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_c0vtv"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_pnl2h"]
+[ext_resource type="Script" uid="uid://dwav8ipcg84b3" path="res://commons/primitives/point/point_color.gd" id="4_2447a"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="4_c0vtv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
+radius = 0.022
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
+transparency = 1
+albedo_color = Color(0.95, 0.55, 1, 0.9)
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.9, 0.5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0vtv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0v2tn"]
+material = SubResource("StandardMaterial3D_c0vtv")
+radius = 0.018
+height = 0.036
+radial_segments = 32
+rings = 16
+
+[node name="GrabSphere" instance=ExtResource("1_2447a")]
+freeze = true
+script = ExtResource("2_c0vtv")
+alternate_material = SubResource("StandardMaterial3D_nukvf")
+alter_freeze = false
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_blybu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_1t2g7")
+mesh = SubResource("SphereMesh_0v2tn")
+
+[node name="Sphere" type="Node3D" parent="MeshInstance3D" index="0"]
+script = ExtResource("4_c0vtv")
+
+[node name="Color" type="Node3D" parent="MeshInstance3D" index="1"]
+script = ExtResource("4_2447a")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_pnl2h")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.39503)

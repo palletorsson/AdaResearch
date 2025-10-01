@@ -1,18 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8gjb8jbonyxl"]
+[gd_scene load_steps=2 format=3 uid="uid://c8gjb8jbonyxl"]
 
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/cylinder/cylinder.tscn" id="1_76jeo"]
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/plane/plane.tscn" id="2_6p5hs"]
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/torus/torus.tscn" id="4_6p5hs"]
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/sphere/sphere.tscn" id="4_76jeo"]
+[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/walledcube/walledcube.tscn" id="4_6p5hs"]
 
 [node name="CombinePrimitives" type="Node3D"]
 
-[node name="cylinder" parent="." instance=ExtResource("1_76jeo")]
+[node name="cylinder" parent="." instance=ExtResource("4_6p5hs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
-[node name="plane" parent="." instance=ExtResource("2_6p5hs")]
+[node name="plane" parent="." instance=ExtResource("4_6p5hs")]
 
-[node name="sphere" parent="." instance=ExtResource("4_76jeo")]
+[node name="sphere" parent="." instance=ExtResource("4_6p5hs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.710827, 0)
 
 [node name="torus" parent="." instance=ExtResource("4_6p5hs")]

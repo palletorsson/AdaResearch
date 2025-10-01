@@ -10,6 +10,7 @@ rings = 3
 script = ExtResource("1_af0lr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23573, 0, 4.21071)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_mnf7g")

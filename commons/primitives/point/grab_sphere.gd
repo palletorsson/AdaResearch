@@ -1,7 +1,6 @@
 @tool
 extends XRToolsPickable
 
-
 ## Alternate material when button pressed
 @export var alternate_material : Material
 
@@ -33,8 +32,10 @@ func _ready() -> void:
 	super()
 
 	# Get the original material
-	_original_material = $MeshInstance3D.get_active_material(0)
-	_glow_material = _build_glow_material(_original_material)
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		_original_material = mesh_instance.get_active_material(0)
+		_glow_material = _build_glow_material(_original_material)
 	_setup_pickup_audio()
 
 	# Listen for when this object is picked up or dropped
@@ -94,11 +95,15 @@ func _apply_glow() -> void:
 	if not _glow_material:
 		_glow_material = _build_glow_material(_original_material)
 	_is_glowing = true
-	$MeshInstance3D.set_surface_override_material(0, _glow_material)
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		mesh_instance.set_surface_override_material(0, _glow_material)
 
 func _restore_original_material() -> void:
 	_is_glowing = false
-	$MeshInstance3D.set_surface_override_material(0, _original_material)
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		mesh_instance.set_surface_override_material(0, _original_material)
 
 func _play_pickup_sound() -> void:
 	if not _pickup_player:
@@ -153,7 +158,9 @@ func _on_controller_button_pressed(button : String):
 	if button == "ax_button":
 		# Set alternate material when button pressed
 		if alternate_material:
-			$MeshInstance3D.set_surface_override_material(0, alternate_material)
+			var mesh_instance = get_node_or_null("MeshInstance3D")
+			if mesh_instance:
+				mesh_instance.set_surface_override_material(0, alternate_material)
 
 
 # Called when a controller button is released
@@ -164,4 +171,6 @@ func _on_controller_button_released(button : String):
 		if _is_glowing:
 			_apply_glow()
 		else:
-			$MeshInstance3D.set_surface_override_material(0, _original_material)
+			var mesh_instance = get_node_or_null("MeshInstance3D")
+			if mesh_instance:
+				mesh_instance.set_surface_override_material(0, _original_material)

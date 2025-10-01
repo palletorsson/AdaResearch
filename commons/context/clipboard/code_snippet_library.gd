@@ -139,7 +139,11 @@ func _format_snippet(snippet_id: String, as_bbcode: bool) -> String:
 		if not title.is_empty():
 			pieces.append("[b]" + _escape_bbcode(title) + "[/b]")
 		if not description.is_empty():
-			pieces.append(_convert_markdown_to_bbcode(description))
+			# If the content already looks like BBCode, do not escape/convert it
+			if _looks_like_bbcode(description):
+				pieces.append(description)
+			else:
+				pieces.append(_convert_markdown_to_bbcode(description))
 		return "\n" + "\n".join(pieces) + "\n"
 	else:
 		if not title.is_empty():
@@ -176,6 +180,12 @@ func _escape_bbcode(text: String) -> String:
 	result = result.replace("[", "\\[")
 	result = result.replace("]", "\\]")
 	return result
+
+func _looks_like_bbcode(text: String) -> bool:
+	var tag_regex := RegEx.new()
+	if tag_regex.compile("\\[(\\/)?(b|i|u|code|color|url|img|center|right|left|table|tr|td|font|indent|ul|ol|li|quote)(=.*?)?\\]") != OK:
+		return false
+	return tag_regex.search(text) != null
 
 func _convert_markdown_to_bbcode(markdown: String) -> String:
 	var bold_regex := RegEx.new()

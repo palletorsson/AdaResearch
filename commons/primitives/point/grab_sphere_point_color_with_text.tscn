@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://l00lqnsj148q"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_k05qr"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_hu8p3"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="3_3u2et"]
+[ext_resource type="Script" uid="uid://b16kpi3bxgv67" path="res://commons/primitives/point/simple_position_text.gd" id="3_6hf3r"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_3u2et"]
+[ext_resource type="Script" uid="uid://dwav8ipcg84b3" path="res://commons/primitives/point/point_color.gd" id="4_rulpc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
+radius = 0.022
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1t2g7"]
+transparency = 1
+albedo_color = Color(0.95, 0.55, 1, 0.9)
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.9, 0.5, 1, 1)
+
+[node name="GrabSphere" instance=ExtResource("1_k05qr")]
+freeze = true
+script = ExtResource("2_hu8p3")
+alternate_material = SubResource("StandardMaterial3D_nukvf")
+alter_freeze = false
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_blybu")
+
+[node name="MeshInstance3DSphere" type="MeshInstance3D" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_1t2g7")
+
+[node name="Sphere" type="Node3D" parent="MeshInstance3DSphere" index="0"]
+script = ExtResource("3_3u2et")
+
+[node name="Color" type="Node3D" parent="MeshInstance3DSphere" index="1"]
+script = ExtResource("4_rulpc")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3DSphere" index="2"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.06, 0)
+text = "(1.2, 2.0, 2.3)"
+script = ExtResource("3_6hf3r")
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("4_3u2et")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)

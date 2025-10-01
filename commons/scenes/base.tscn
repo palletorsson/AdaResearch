@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=23 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
+[ext_resource type="Shader" uid="uid://8lp3am10hjmy" path="res://commons/resourses/shaders/basic_grid.gdshader" id="15_7fdd7"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
 
@@ -24,6 +25,15 @@ size = Vector3(0.118164, 0.102966, 0.12796)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qiixw"]
 size = Vector3(7.19801, 0.12793, 2.49808)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3jjl"]
+render_priority = 0
+shader = ExtResource("15_7fdd7")
+shader_parameter/line_color = Color(1, 0, 1, 1)
+shader_parameter/fill_color = Color(0, 0, 0, 1)
+shader_parameter/alt_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/line_width = 1.5
+shader_parameter/emission_strength = 1.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lr6fa"]
 
@@ -125,6 +135,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.253602, 0, 1.24598)
 shape = SubResource("BoxShape3D_qiixw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="1"]
+material_override = SubResource("ShaderMaterial_f3jjl")
 mesh = SubResource("PlaneMesh_lr6fa")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="2"]

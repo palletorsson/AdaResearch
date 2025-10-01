@@ -1,0 +1,169 @@
+[gd_scene load_steps=16 format=3 uid="uid://c41tn62p25cbw"]
+
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_66lfb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3nvy"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_34jt0"]
+material = SubResource("ShaderMaterial_n3nvy")
+radial_segments = 4
+rings = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fq4b5"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oa2bu"]
+material = SubResource("ShaderMaterial_fq4b5")
+top_radius = 0.0
+bottom_radius = 0.465
+height = 1.0
+radial_segments = 7
+rings = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jx2w"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_vq1og"]
+material = SubResource("ShaderMaterial_8jx2w")
+left_to_right = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eg0w6"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jl6jr"]
+material = SubResource("ShaderMaterial_eg0w6")
+radial_segments = 4
+rings = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xe1cd"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_11buj"]
+material = SubResource("ShaderMaterial_xe1cd")
+radial_segments = 4
+rings = 1
+is_hemisphere = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e21ut"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_v5s2y"]
+material = SubResource("ShaderMaterial_e21ut")
+radial_segments = 4
+rings = 26
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkdx1"]
+render_priority = 0
+shader = ExtResource("1_66lfb")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_syred"]
+lightmap_size_hint = Vector2i(17, 9)
+material = SubResource("ShaderMaterial_nkdx1")
+radial_segments = 4
+rings = 5
+
+[node name="SpheresVersion" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_34jt0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07335, 0.166271, 0)
+mesh = SubResource("CylinderMesh_oa2bu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09994, 0, 0)
+mesh = SubResource("PrismMesh_vq1og")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.18439)
+mesh = SubResource("CapsuleMesh_jl6jr")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.10639)
+mesh = SubResource("SphereMesh_11buj")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15957, 0, 0)
+mesh = SubResource("SphereMesh_v5s2y")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.82682)
+mesh = SubResource("SphereMesh_syred")
