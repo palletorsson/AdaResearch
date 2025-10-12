@@ -1,5 +1,5 @@
 extends Node3D
-class_name AttentionMechanisms
+ 
 
 @export var token_count: int = 6 : set = _set_token_count
 @export_range(0.0, 1.0, 0.01) var base_attention: float = 0.0

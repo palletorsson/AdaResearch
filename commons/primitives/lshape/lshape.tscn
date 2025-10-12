@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmmx5pjr2vqwc"]
+
+[ext_resource type="Script" uid="uid://dc07fxqd7hvki" path="res://commons/primitives/lshape/lshape.gd" id="1_lshape"]
+
+[node name="LShape" type="Node3D"]
+script = ExtResource("1_lshape")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

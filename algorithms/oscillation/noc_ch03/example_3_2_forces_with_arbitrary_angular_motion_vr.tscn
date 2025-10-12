@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpn4nynvb7jl"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.gd" id="1_v6plm"]
+
+[node name="Example32AngularForcesVR" type="Node3D"]
+script = ExtResource("1_v6plm")

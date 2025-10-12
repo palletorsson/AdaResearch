@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c674m5ekyec0e"]
+
+[ext_resource type="Script" uid="uid://bs1il3dqb0poj" path="res://commons/primitives/kochsnowflake/kochsnowflake.gd" id="1_koch"]
+
+[node name="KochSnowflake" type="MeshInstance3D"]
+script = ExtResource("1_koch")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.5, 1.5, 2)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxdq8ltxht3ln"]
+
+[ext_resource type="Script" uid="uid://cbnnhaktycymn" path="res://algorithms/computationalbiology/limbgrowth/limbgrowth.gd" id="1_nbhhq"]
+
+[node name="Limbgrowth" type="Node3D"]
+script = ExtResource("1_nbhhq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.917)

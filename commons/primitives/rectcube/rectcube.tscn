@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bswg6kpeyxvkw"]
+
+[ext_resource type="Script" uid="uid://d0ttcueorylot" path="res://commons/primitives/rectcube/rectcube.gd" id="1_rectcube"]
+
+[node name="RectCube" type="Node3D"]
+script = ExtResource("1_rectcube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://spatial_ui/parameter_controller_3d.gd" id="1_lhlvd"]
+[ext_resource type="PackedScene" path="res://commons/primitives/line/line.tscn" id="2_qzmy7"]
+
+[node name="ParameterController3D" type="Node3D"]
+script = ExtResource("1_lhlvd")
+
+[node name="LinePrimitive" parent="." instance=ExtResource("2_qzmy7")]
+visible = false

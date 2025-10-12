@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_6_5_chain"]
+
+[ext_resource type="Script" path="res://algorithms/physics/example_6_5_chain_vr.gd" id="1"]
+
+[node name="Example_6_5_Chain" type="Node3D"]
+script = ExtResource("1")
+num_links = 8

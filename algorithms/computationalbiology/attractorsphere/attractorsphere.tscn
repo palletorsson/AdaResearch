@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1o1y4v7ool6g"]
+
+[ext_resource type="Script" uid="uid://dvdnq2i47ursp" path="res://algorithms/computationalbiology/attractorsphere/attractorsphere.gd" id="1_moa1d"]
+
+[node name="Attractorsphere" type="Node3D"]
+script = ExtResource("1_moa1d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.88826)

@@ -1,5 +1,5 @@
 extends Node3D
-class_name ComputerVision
+ 
 
 var time: float = 0.0
 var processing_progress: float = 0.0

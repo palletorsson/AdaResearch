@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://quad123456"]
+
+[ext_resource type="Script" path="res://commons/primitives/quad/quad.gd" id="1_quad"]
+
+[node name="Quad" type="Node3D"]
+script = ExtResource("1_quad")
+
+[node name="Camera3D" type="Camera3D" parent= "."]
+transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 0.8, 2.2)
+
+

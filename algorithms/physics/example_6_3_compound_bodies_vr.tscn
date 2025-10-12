@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_6_3_compound_bodies"]
+
+[ext_resource type="Script" path="res://algorithms/physics/example_6_3_compound_bodies_vr.gd" id="1"]
+
+[node name="Example_6_3_Compound_Bodies" type="Node3D"]
+script = ExtResource("1")

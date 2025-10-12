@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4pg2wbkxfm3n"]
+
+[ext_resource type="Script" path="res://commons/primitives/unitcube/unitcube.gd" id="1_unitcube"]
+
+[node name="UnitCube" type="Node3D"]
+script = ExtResource("1_unitcube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

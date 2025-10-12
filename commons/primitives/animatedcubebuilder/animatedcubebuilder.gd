@@ -2,11 +2,13 @@
 # No UI - just the educational animation for VR environments
 extends Node3D
 
+const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
+
 # Animation states
 enum BuildState {
 	WAITING,
 	SHOWING_VERTICES,
-	SHOWING_EDGES,  
+	SHOWING_EDGES,
 	SHOWING_TRIANGLES,
 	SHOWING_FINAL_MESH,
 	COMPLETE
@@ -27,6 +29,11 @@ var vertices = [
 	Vector3(0.5, 0.5, 0.5),     # 6: top-front-right
 	Vector3(-0.5, 0.5, 0.5)     # 7: top-front-left
 ]
+
+# Grab sphere handles
+var handle_nodes: Array = []
+var last_handle_positions: Array = []
+var is_updating_geometry: bool = false
 
 # Cube edges (12 edges connecting vertices)
 var edges = [
@@ -95,33 +102,27 @@ func setup_scene():
 	#create_final_mesh()
 
 func create_vertex_spheres():
+	# Initialize last_handle_positions array
+	last_handle_positions.resize(vertices.size())
+
 	for i in range(vertices.size()):
-		var sphere = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.025  # Slightly larger for VR visibility
-		sphere_mesh.height = 0.05
-		sphere.mesh = sphere_mesh
-		sphere.position = vertices[i] * cube_size
-		
-		# All vertices are marble green
-		var color = vertex_color
-		
-		# Create transparent green marble material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		material.emission_enabled = true
-		material.emission = Color(0.1, 0.4, 0.2) * 0.3  # Subtle green glow
-		material.roughness = 0.1  # Very smooth like marble
-		material.metallic = 0.0   # Non-metallic
-		material.refraction = 0.05  # Slight refraction for glass-like effect
-		material.flags_unshaded = true
-		material.no_depth_test = false
-		sphere.material_override = material
-		
-		sphere.visible = false
-		vertex_spheres.append(sphere)
-		add_child(sphere)
+		# Create grab sphere handle
+		var handle := HANDLE_SCENE.instantiate()
+		handle.name = "vertex_%d" % i
+		handle.position = vertices[i] * cube_size
+		handle.alter_freeze = false
+		handle.freeze = true
+		handle.set_meta("vertex_index", i)
+		handle.visible = false
+
+		handle_nodes.append(handle)
+		vertex_spheres.append(handle)
+		add_child(handle)
+		if owner:
+			handle.owner = owner
+
+		# Store initial position
+		last_handle_positions[i] = handle.position
 
 func create_edge_lines():
 	for edge in edges:
@@ -282,7 +283,11 @@ func start_animation():
 func _process(delta):
 	current_step_time += delta
 	vertex_blink_timer += delta
-	
+
+	# Check if handles moved and update geometry (but throttle updates)
+	if _handles_changed() and current_state == BuildState.COMPLETE:
+		call_deferred("_update_geometry_from_handles")
+
 	match current_state:
 		BuildState.SHOWING_VERTICES:
 			animate_vertices(delta)
@@ -310,14 +315,7 @@ func animate_vertices(delta):
 			current_step_time = 0.0
 			animation_step_completed.emit("vertices_complete")
 	
-	# Blink visible vertices (slower blink for VR comfort)
-	var blink_alpha = (sin(vertex_blink_timer * 2.0) + 1.0) * 0.5
-	for i in range(min(animation_step + 1, vertices.size())):
-		if vertex_spheres[i].visible:
-			var material = vertex_spheres[i].material_override as StandardMaterial3D
-				# Use marble green for all vertices
-			var base_color = vertex_color
-			material.emission = Color(0.1, 0.4, 0.2) * (0.3 + blink_alpha * 0.2)
+	# Note: Blinking animation removed since grab spheres handle their own appearance
 
 func animate_edges(delta):
 	# Show edges progressively
@@ -425,3 +423,153 @@ func get_progress_percentage() -> float:
 			return 1.0
 		_:
 			return 0.0
+
+# Grab sphere interaction functions
+func _handles_changed() -> bool:
+	if handle_nodes.is_empty():
+		return false
+
+	var changed := false
+	for i in range(handle_nodes.size()):
+		var handle: Node3D = handle_nodes[i]
+		var pos := handle.position
+		var last_position = last_handle_positions[i]
+		if last_position == null or not pos.is_equal_approx(last_position):
+			changed = true
+			last_handle_positions[i] = pos
+
+	return changed
+
+func _update_geometry_from_handles() -> void:
+	# Prevent recursive updates
+	if is_updating_geometry:
+		return
+
+	# Safety checks
+	if handle_nodes.is_empty() or handle_nodes.size() != vertices.size():
+		return
+
+	is_updating_geometry = true
+
+	# Update vertices array from handle positions
+	for i in range(handle_nodes.size()):
+		if not is_instance_valid(handle_nodes[i]):
+			is_updating_geometry = false
+			return
+		vertices[i] = handle_nodes[i].position / cube_size
+
+	# Rebuild edge lines
+	for i in range(edge_lines.size()):
+		if not is_instance_valid(edge_lines[i]):
+			continue
+		if edge_lines[i].visible:
+			var edge = edges[i]
+			_update_edge_line(i, vertices[edge[0]] * cube_size, vertices[edge[1]] * cube_size)
+
+	# Rebuild triangle meshes
+	for i in range(triangle_meshes.size()):
+		if not is_instance_valid(triangle_meshes[i]):
+			continue
+		if triangle_meshes[i].visible:
+			_update_triangle_mesh(i)
+
+	# Rebuild final mesh if visible
+	if is_instance_valid(final_cube_mesh) and final_cube_mesh.visible:
+		_rebuild_final_mesh()
+
+	is_updating_geometry = false
+
+func _update_edge_line(index: int, start: Vector3, end: Vector3) -> void:
+	var line = edge_lines[index]
+	if not line:
+		return
+
+	# Recalculate line mesh
+	var line_length = start.distance_to(end)
+	var cylinder = line.mesh as CylinderMesh
+	if cylinder:
+		cylinder.height = line_length
+
+	# Position at the center point between start and end
+	var center_pos = (start + end) * 0.5
+	line.position = center_pos
+
+	# Calculate the direction vector from start to end
+	var direction = (end - start).normalized()
+
+	# Create a proper transform that aligns the cylinder's Y-axis (height) with the line direction
+	var transform = Transform3D()
+	transform.origin = center_pos
+
+	# If direction is not straight up or down, use cross product for alignment
+	if abs(direction.dot(Vector3.UP)) < 0.99:
+		var up = Vector3.UP
+		var right = direction.cross(up).normalized()
+		up = right.cross(direction).normalized()
+		transform.basis = Basis(right, direction, up)
+	else:
+		var right = Vector3.RIGHT if direction.y > 0 else Vector3.LEFT
+		var forward = direction.cross(right).normalized()
+		right = forward.cross(direction).normalized()
+		transform.basis = Basis(right, direction, forward)
+
+	line.transform = transform
+
+func _update_triangle_mesh(index: int) -> void:
+	var mesh_instance = triangle_meshes[index]
+	if not mesh_instance:
+		return
+
+	var triangle = triangles[index]
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Get triangle vertices
+	var v0 = vertices[triangle[0]] * cube_size
+	var v1 = vertices[triangle[1]] * cube_size
+	var v2 = vertices[triangle[2]] * cube_size
+
+	# Calculate normal
+	var normal = (v1 - v0).cross(v2 - v0).normalized()
+
+	# Add triangle (both sides for VR visibility)
+	st.set_normal(normal)
+	st.add_vertex(v0)
+	st.set_normal(normal)
+	st.add_vertex(v1)
+	st.set_normal(normal)
+	st.add_vertex(v2)
+
+	# Add reverse side
+	st.set_normal(-normal)
+	st.add_vertex(v0)
+	st.set_normal(-normal)
+	st.add_vertex(v2)
+	st.set_normal(-normal)
+	st.add_vertex(v1)
+
+	mesh_instance.mesh = st.commit()
+
+func _rebuild_final_mesh() -> void:
+	if not final_cube_mesh:
+		return
+
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Add all triangles to create the complete cube
+	for triangle in triangles:
+		var v0 = vertices[triangle[0]] * cube_size
+		var v1 = vertices[triangle[1]] * cube_size
+		var v2 = vertices[triangle[2]] * cube_size
+
+		var normal = (v1 - v0).cross(v2 - v0).normalized()
+
+		st.set_normal(normal)
+		st.add_vertex(v0)
+		st.set_normal(normal)
+		st.add_vertex(v1)
+		st.set_normal(normal)
+		st.add_vertex(v2)
+
+	final_cube_mesh.mesh = st.commit()

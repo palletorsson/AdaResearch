@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eqo5nynvb6jm"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.gd" id="1_w7plm"]
+
+[node name="Example33PointingVR" type="Node3D"]
+script = ExtResource("1_w7plm")

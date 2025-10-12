@@ -17,9 +17,9 @@
 			"scene": "res://commons/primitives/sphere/dark_sphere.tscn",
 		},
 		"point": {
-			"name": "point",
+			"name": "1.0 A Point",
 			"lookup_name": "point",
-			"description": "a point",
+			"description": "0.0 A Point",
 			"scene": "res://commons/primitives/point/point.tscn",
 		},
 		"grab_sphere_point": {
@@ -61,17 +61,50 @@
 		},
  
 		"line": {
-			"name": "line",
+			"name": "1.1 A Line",
 			"lookup_name": "line",
 			"description": "line",
 			"scene": "res://commons/primitives/line/line.tscn",
 		},
+		"cross_lines": {
+			"name": "cross_lines",
+			"lookup_name": "cross_lines",
+			"description": "cross_lines",
+			"scene": "res://commons/primitives/line/cross_lines.tscn",
+		},
+		"parallel_lines": {
+			"name": "parallel_lines",
+			"lookup_name": "parallel_lines",
+			"description": "parallel_lines",
+			"scene": "res://commons/primitives/line/parallel_lines.tscn",
+		},
+		"coordinate_lines": {
+			"name": "coordinate_lines",
+			"lookup_name": "coordinate_lines",
+			"description": "coordinate_lines",
+			"scene": "res://commons/primitives/line/coordinate_lines.tscn",
+		},
+		"plus_lines": {
+			"name": "plus_lines",
+			"lookup_name": "plus_lines",
+			"description": "plus_lines",
+			"scene": "res://commons/primitives/line/plus_lines.tscn",
+		},
+
+							
 		"line_collection": {
 			"name": "line_collection",
 			"lookup_name": "line_collection",
 			"description": "line_collection",
 			"scene": "res://commons/primitives/line/line_collection.tscn",
 		},	
+		"line_interface": {
+			"name": "line_interface",
+			"lookup_name": "line_interface",
+			"description": "line_interface",
+			"scene": "res://commons/interface/line.tscn",
+		},	
+		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
 			"lookup_name": "animatedcubebuilder",
@@ -84,7 +117,12 @@
 			"description": "A fundamental cube with shader material and static body physics",
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
 		},
-		
+		"triangle": {
+			"name": "triangle",
+			"lookup_name": "triangle",
+			"description": "triangle",
+			"scene": "res://commons/primitives/triangle/triangle.tscn",
+		},
 		"righttriangle": {
 			"name": "righttriangle",
 			"lookup_name": "righttriangle",
@@ -97,11 +135,36 @@
 			"description": "A lefttriangle",
 			"scene": "res://commons/primitives/lefttriangle/lefttriangle.tscn",
 		},
+		
 		"interactivetriangle": {
-			"name": "interactivetriangle",
+			"name": "1.2: A triangle",
 			"lookup_name": "interactivetriangle",
-			"description": "A linteractivetriangle",
+			"description": "A interactivetriangle",
 			"scene": "res://commons/primitives/interactivetriangle/interactivetriangle.tscn",
+		},
+		"triangleprofiles": {
+			"name": "1.2: A triangleprofilese",
+			"lookup_name": "triangleprofiles",
+			"description": "A triangleprofiles",
+			"scene": "res://commons/primitives/triangleprofiles/triangleprofiles.tscn",
+		},
+		"zigzagprofile": {
+			"name": "1.2: A zigzagprofile",
+			"lookup_name": "zigzagprofile",
+			"description": "A zigzagprofile",
+			"scene": "res://commons/primitives/zigzagprofile/zigzagprofile.tscn",
+		},
+		"foldedpaper": {
+			"name": "1.2: A foldedpaper",
+			"lookup_name": "foldedpaper",
+			"description": "A foldedpaper",
+			"scene": "res://commons/primitives/foldedpaper/foldedpaper.tscn",
+		},
+		"quad": {
+			"name": "quad",
+			"lookup_name": "quad",
+			"description": "quad",
+			"scene": "res://commons/primitives/quad/quad.tscn",
 		},
 		
 		"plane": {
@@ -121,6 +184,12 @@
 			"lookup_name": "prism",
 			"description": "A prism",
 			"scene": "res://commons/primitives/prism/prism.tscn",
+		},
+		"prism_block": {
+			"name": "prism_block",
+			"lookup_name": "prism_block",
+			"description": "A prism_block",
+			"scene": "res://commons/primitives/prismes/prism_block.tscn",
 		},
 		
 		"cylinder": {
@@ -301,14 +370,38 @@
 			"name": "test",
 			"lookup_name": "test_scene_1",
 			"description": "this is the test",
-			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
+			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
 		},
 		"test_scene_2": {
 			"name": "This is just a test",
 			"lookup_name": "test_scene_2",
 			"description": "this is the test",
-			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
+			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
 		},
+		"test_scene_3": {
+			"name": "test",
+			"lookup_name": "test_scene_3",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+		},
+		"test_scene_4": {
+			"name": "This is just a test",
+			"lookup_name": "test_scene_4",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
+		},		
+		"test_scene_5": {
+			"name": "test",
+			"lookup_name": "test_scene_5",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+		},
+		"test_scene_6": {
+			"name": "This is just a test",
+			"lookup_name": "test_scene_6",
+			"description": "this is the test",
+			"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
+		},		
 		"geometric_transformations": {
 			"name": "geometric_transformations",
 			"lookup_name": "geometric_transformations",
@@ -496,6 +589,52 @@
 			"scene": "res://algorithms/randomness/profile_random.tscn",
 	
 		},
+		"randompoints": {
+			"name": "randompoints",
+			"lookup_name": "randompoints",
+			"description": "randompoints",
+			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
+	
+		},
+		"randompoints_gaussian": {
+			"name": "randompoints_gaussian",
+			"lookup_name": "randompoints_gaussian",
+			"description": "randompoints_gaussian",
+			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn",
+		},
+		"randompoints_uniform": {
+			"name": "randompoints_uniform",
+			"lookup_name": "randompoints_uniform",
+			"description": "randompoints_uniform",
+			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn",
+		},
+		"pixel_cloud": {
+			"name": "pixel_cloud",
+			"lookup_name": "pixel_cloud",
+			"description": "pixel_cloud",
+			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+		},		
+		
+		"coordinate_axes_xy": {
+			"name": "coordinate_axes_xy",
+			"lookup_name": "coordinate_axes_xy",
+			"description": "coordinate_axes_xy",
+			"scene": "res://commons/primitives/line/coordinate_axes_xy.tscn"
+		},
+		"randompoint": {
+			"name": "randompoint",
+			"lookup_name": "randompoint",
+			"description": "randompoint",
+			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn"
+		},		
+		
+		"randomlines": {
+			"name": "randomlines",
+			"lookup_name": "randomlines",
+			"description": "randomlines",
+			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
+	
+		},
 
 		"bubbles_random": {
 			"name": "Random Bubbles",
@@ -590,6 +729,14 @@
 			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
 
 		},	
+		"noisetorus_ex_1": {
+			"name": "noisetorus_ex_1",
+			"lookup_name": "noisetorus_ex_1", 
+			"description": "noisetorus_ex_1",
+			"scene": "res://commons/primitives/torus/noisetorus_ex_1.tscn",
+
+		},	
+		
 		"noisetext": {
 			"name": "noisetext",
 			"lookup_name": "noisetext",
@@ -954,6 +1101,14 @@
 			"scene": "res://algorithms/recursiveemergence/koshcurve/KochCurve3D.tscn",
 		
 		},
+		"kochsnowflake": {
+			"name": "kochsnowflake",
+			"lookup_name": "kochsnowflake",
+			"description": "kochsnowflaken",
+			"scene": "res://commons/primitives/kochsnowflake/kochsnowflake.tscn",
+		
+		},
+		
 		"recursive_tree": {
 			"name": "Recursive Tree",
 			"lookup_name": "recursive_tree",
@@ -1486,13 +1641,6 @@
 			"scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
 
 		},
-		"fuzzy_cloud": {
-			"name": "fuzzy_cloud",
-			"lookup_name": "fuzzy_cloud",
-			"description": "fuzzy_cloud",
-			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscncn",
-
-		},
 		
 		"numerical_integration": {
 			"name": "Numerical Integration",
@@ -1508,6 +1656,15 @@
 			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
 
 		},
+		"evolutionary_algorithms": {
+			"name": "evolutionary_algorithms",
+			"lookup_name": "evolutionary_algorithms",
+			"description": "evolutionary_algorithms",
+			"scene": "res://algorithms//randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+
+		},
+		
+
 		"rigid_body": {
 			"name": "Rigid Body Dynamics",
 			"lookup_name": "rigid_body",
@@ -1563,6 +1720,8 @@
 			"description": "Classical mechanics simulation of three gravitating bodies",
 			"scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
 		},
+
+	
 		"VectorBasics": {
 			"name": "VectorBasics",
 			"lookup_name": "VectorBasics",
@@ -1649,24 +1808,60 @@
 		},	
 		"CharacterRagdoll": {
 			"name": "CharacterRagdoll",
-			"lookup_name": "CharacterRagdollHingeCrank",
+			"lookup_name": "CharacterRagdoll",
 			"description": "CharacterRagdoll",
 			"scene": "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
+		},		
+		"SpringSuspension": {
+			"name": "SpringSuspension",
+			"lookup_name": "SpringSuspension",
+			"description": "SpringSuspension",
+			"scene": "res://algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
+		},	
+		"ConeTwistBag": {
+			"name": "ConeTwistBag",
+			"lookup_name": "ConeTwistBag",
+			"description": "ConeTwistBag",
+			"scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+		},	
+		"ConeTwistBag": {
+			"name": "ConeTwistBag",
+			"lookup_name": "ConeTwistBag",
+			"description": "ConeTwistBag",
+			"scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+		},	
+		"ChainSwing": {
+			"name": "ChainSwing",
+			"lookup_name": "ChainSwing",
+			"description": "ChainSwing",
+			"scene": "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
+		},
+		"DrawbridgeHinge": {
+			"name": "DrawbridgeHinge",
+			"lookup_name": "DrawbridgeHinge",
+			"description": "DrawbridgeHinge",
+			"scene": "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
+		},		
+		"DrawbridgeHinge": {
+			"name": "DrawbridgeHinge",
+			"lookup_name": "DrawbridgeHinge",
+			"description": "DrawbridgeHinge",
+			"scene": "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
 		},			
-		"vector_fields": {
-			"name": "Vector Fields",
-			"lookup_name": "vector_fields",
-			"description": "Visualization and analysis of vector field dynamics",
-			"scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
-
+		"GimbalStabilizer": {
+			"name": "GimbalStabilizer",
+			"lookup_name": "GimbalStabilizer",
+			"description": "GimbalStabilizer",
+			"scene": "res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn",
 		},
-		"verlet_integration": {
-			"name": "Verlet Integration",
-			"lookup_name": "verlet_integration",
-			"description": "Numerical integration using Verlet method for stable physics",
-			"scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
-
+		"tscn_joint": {
+			"name": "tscn_joint",
+			"lookup_name": "tscn_joint",
+			"description": "tscn_joint",
+			"scene": "res://algorithms/joint/shared/static_exemple.tscn",
 		},
+		
+		
 	"sine_space": {
 		"name": "sine_space",
 		"lookup_name": "sine_space",
@@ -1776,6 +1971,14 @@
 			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
 
 		},
+		"attractorsphere": {
+			"name": "attractorsphere",
+			"lookup_name": "attractorsphere",
+			"description": "attractorsphere",
+			"scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
+
+		},		
+		
 		"organic_space": {
 			"name": "Organic Space",
 			"lookup_name": "organic_space",
@@ -2596,11 +2799,493 @@
 			"description": "evolvingflowers",
 			"scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
 		},				
-		"evolvedcreatures": {
-			"name": "evolvedcreatures",
-			"lookup_name": "evolvedcreatures",
-			"description": "evolvedcreatures",
-			"scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
-		},					
+	"evolvedcreatures": {
+		"name": "evolvedcreatures",
+		"lookup_name": "evolvedcreatures",
+		"description": "evolvedcreatures",
+		"scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+	},
+	"fractal_recursion_1": {
+		"name": "Fractal Recursion 1",
+		"lookup_name": "fractal_recursion_1",
+		"description": "Basic recursion visualization demonstrating fundamental recursive patterns",
+		"scene": "res://algorithms/fractals/example_8_1_recursion_vr.tscn",
+	},
+	"fractal_recursion_2": {
+		"name": "Fractal Recursion 2",
+		"lookup_name": "fractal_recursion_2",
+		"description": "Advanced recursion patterns with multiple levels of depth",
+		"scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn",
+	},
+	"fractal_recursion_circles": {
+		"name": "Recursive Circles",
+		"lookup_name": "fractal_recursion_circles",
+		"description": "Circular recursive fractal patterns demonstrating self-similarity",
+		"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
+	},
+	"fractal_cantor_set": {
+		"name": "Cantor Set",
+		"lookup_name": "fractal_cantor_set",
+		"description": "Classic Cantor set fractal demonstrating infinite subdivision",
+		"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+	},
+	"fractal_koch_curve": {
+		"name": "Koch Curve",
+		"lookup_name": "fractal_koch_curve",
+		"description": "Koch snowflake curve fractal with recursive edge patterns",
+		"scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
+	},
+	"fractal_recursive_tree": {
+		"name": "Recursive Tree",
+		"lookup_name": "fractal_recursive_tree",
+		"description": "Branching tree structure using recursive algorithms",
+		"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+	},
+	"fractal_stochastic_tree": {
+		"name": "Stochastic Tree",
+		"lookup_name": "fractal_stochastic_tree",
+		"description": "Randomized recursive tree with natural variation",
+		"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
+	},
+	"fractal_lsystem_string": {
+		"name": "L-System String",
+		"lookup_name": "fractal_lsystem_string",
+		"description": "L-System string generation demonstrating grammar-based fractals",
+		"scene": "res://algorithms/fractals/example_8_8_lsystem_string_only_vr.tscn",
+	},
+	"fractal_lsystem_tree": {
+		"name": "L-System Tree",
+		"lookup_name": "fractal_lsystem_tree",
+		"description": "L-System tree generation with formal grammar rules",
+		"scene": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
+	},	
+	"example_2_2_forces_mass_variation_vr": {
+		"name": "example_2_2_forces_mass_variation_vr",
+		"lookup_name": "example_2_2_forces_mass_variation_vr",
+		"description": "Forces with mass variation demonstration",
+		"scene": "res://algorithms/forces/example_2_2_forces_mass_variation_vr.tscn",
+	},
+	"example_2_3_gravity_scaled_by_mass_vr": {
+		"name": "example_2_3_gravity_scaled_by_mass_vr",
+		"lookup_name": "example_2_3_gravity_scaled_by_mass_vr",
+		"description": "Gravity scaled by mass demonstration",
+		"scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn",
+	},
+	"example_2_4_friction_vr": {
+		"name": "example_2_4_friction_vr",
+		"lookup_name": "example_2_4_friction_vr",
+		"description": "Friction forces demonstration",
+		"scene": "res://algorithms/forces/example_2_4_friction_vr.tscn",
+	},
+	"example_2_5_fluid_resistance_vr": {
+		"name": "example_2_5_fluid_resistance_vr",
+		"lookup_name": "example_2_5_fluid_resistance_vr",
+		"description": "Fluid resistance forces demonstration",
+		"scene": "res://algorithms/forces/example_2_5_fluid_resistance_vr.tscn",
+	},
+	"example_2_6_single_attractor_vr": {
+		"name": "example_2_6_single_attractor_vr",
+		"lookup_name": "example_2_6_single_attractor_vr",
+		"description": "Single attractor force demonstration",
+		"scene": "res://algorithms/forces/example_2_6_single_attractor_vr.tscn",
+	},
+	"example_2_7_multiple_attractors_vr": {
+		"name": "example_2_7_multiple_attractors_vr",
+		"lookup_name": "example_2_7_multiple_attractors_vr",
+		"description": "Multiple attractors force demonstration",
+		"scene": "res://algorithms/forces/example_2_7_multiple_attractors_vr.tscn",
+	},
+	"example_2_8_two_body_attraction_vr": {
+		"name": "example_2_8_two_body_attraction_vr",
+		"lookup_name": "example_2_8_two_body_attraction_vr",
+		"description": "Two body attraction demonstration",
+		"scene": "res://algorithms/forces/example_2_8_two_body_attraction_vr.tscn",
+	},
+	"example_2_9_n_body_attraction_vr": {
+		"name": "example_2_9_n_body_attraction_vr",
+		"lookup_name": "example_2_9_n_body_attraction_vr",
+		"description": "N-body attraction demonstration",
+		"scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn",
+	}, 
+	"example_1_10_accelerating_towards_the_mouse_vr": {
+		"name": "example_1_10_accelerating_towards_the_mouse_vr",
+		"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",
+		"description": "Accelerating towards the mouse demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_1_10_accelerating_towards_the_mouse_vr.tscn",
+	},
+	"example_3_1_angular_motion_using_rotate_vr": {
+		"name": "example_3_1_angular_motion_using_rotate_vr",
+		"lookup_name": "example_3_1_angular_motion_using_rotate_vr",
+		"description": "Angular motion using rotate demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_1_angular_motion_using_rotate_vr.tscn",
+	},
+	"example_3_10_swinging_pendulum_vr": {
+		"name": "example_3_10_swinging_pendulum_vr",
+		"lookup_name": "example_3_10_swinging_pendulum_vr",
+		"description": "Swinging pendulum demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_10_swinging_pendulum_vr.tscn",
+	},
+	"example_3_11_a_spring_connection_vr": {
+		"name": "example_3_11_a_spring_connection_vr",
+		"lookup_name": "example_3_11_a_spring_connection_vr",
+		"description": "Spring connection demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_11_a_spring_connection_vr.tscn",
+	},
+	"example_3_2_forces_with_arbitrary_angular_motion_vr": {
+		"name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+		"lookup_name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+		"description": "Forces with arbitrary angular motion demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn",
+	},
+	"example_3_3_pointing_in_the_direction_of_motion_vr": {
+		"name": "example_3_3_pointing_in_the_direction_of_motion_vr",
+		"lookup_name": "example_3_3_pointing_in_the_direction_of_motion_vr",
+		"description": "Pointing in the direction of motion demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn",
+	},
+	"example_3_4_polar_to_cartesian_vr": {
+		"name": "example_3_4_polar_to_cartesian_vr",
+		"lookup_name": "example_3_4_polar_to_cartesian_vr",
+		"description": "Polar to cartesian coordinate conversion demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_4_polar_to_cartesian_vr.tscn",
+	},
+	"example_3_5_simple_harmonic_motion_vr": {
+		"name": "example_3_5_simple_harmonic_motion_vr",
+		"lookup_name": "example_3_5_simple_harmonic_motion_vr",
+		"description": "Simple harmonic motion demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_5_simple_harmonic_motion_vr.tscn",
+	},
+	"example_3_6_simple_harmonic_motion_ii_vr": {
+		"name": "example_3_6_simple_harmonic_motion_ii_vr",
+		"lookup_name": "example_3_6_simple_harmonic_motion_ii_vr",
+		"description": "Simple harmonic motion part II demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_6_simple_harmonic_motion_ii_vr.tscn",
+	},
+	"example_3_7_oscillator_objects_vr": {
+		"name": "example_3_7_oscillator_objects_vr",
+		"lookup_name": "example_3_7_oscillator_objects_vr",
+		"description": "Oscillator objects demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_7_oscillator_objects_vr.tscn",
+	},
+	"example_3_8_static_wave_vr": {
+		"name": "example_3_8_static_wave_vr",
+		"lookup_name": "example_3_8_static_wave_vr",
+		"description": "Static wave demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_8_static_wave_vr.tscn",
+	},
+	"example_3_9_the_wave_vr": {
+		"name": "example_3_9_the_wave_vr",
+		"lookup_name": "example_3_9_the_wave_vr",
+		"description": "The wave demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/example_3_9_the_wave_vr.tscn",
+	},
+	"exercise_3_1_baton_vr": {
+		"name": "exercise_3_1_baton_vr",
+		"lookup_name": "exercise_3_1_baton_vr",
+		"description": "Baton exercise demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_1_baton_vr.tscn",
+	},
+	"exercise_3_11_oop_wave_vr": {
+		"name": "exercise_3_11_oop_wave_vr",
+		"lookup_name": "exercise_3_11_oop_wave_vr",
+		"description": "Object-oriented programming wave exercise",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_11_oop_wave_vr.tscn",
+	},
+	"exercise_3_12_additive_wave_vr": {
+		"name": "exercise_3_12_additive_wave_vr",
+		"lookup_name": "exercise_3_12_additive_wave_vr",
+		"description": "Additive wave exercise demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_12_additive_wave_vr.tscn",
+	},
+	"exercise_3_15_double_pendulum_vr": {
+		"name": "exercise_3_15_double_pendulum_vr",
+		"lookup_name": "exercise_3_15_double_pendulum_vr",
+		"description": "Double pendulum exercise demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_15_double_pendulum_vr.tscn",
+	},
+	"exercise_3_5_spiral_vr": {
+		"name": "exercise_3_5_spiral_vr",
+		"lookup_name": "exercise_3_5_spiral_vr",
+		"description": "Spiral exercise demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_5_spiral_vr.tscn",
+	},
+	"exercise_3_6_asteroids_vr": {
+		"name": "exercise_3_6_asteroids_vr",
+		"lookup_name": "exercise_3_6_asteroids_vr",
+		"description": "Asteroids exercise demonstration",
+		"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_6_asteroids_vr.tscn",
+	},
+	"example_1_1_bouncing_ball_with_no_vectors_vr": {
+		"name": "Bouncing Ball with No Vectors VR",
+		"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
+		"description": "Bouncing ball demonstration without vector math",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
+	},
+	"example_1_2_bouncing_ball_with_vectors_vr": {
+		"name": "Bouncing Ball with Vectors VR",
+		"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
+		"description": "Bouncing ball demonstration using vector math",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_2_bouncing_ball_with_vectors_vr.tscn",
+	},
+	"example_1_3_vector_subtraction_vr": {
+		"name": "Vector Subtraction VR",
+		"lookup_name": "example_1_3_vector_subtraction_vr",
+		"description": "Vector subtraction demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn",
+	},
+	"example_1_4_vector_multiplication_vr": {
+		"name": "Vector Multiplication VR",
+		"lookup_name": "example_1_4_vector_multiplication_vr",
+		"description": "Vector multiplication demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+	},
+	"example_1_5_vector_magnitude_vr": {
+		"name": "Vector Magnitude VR",
+		"lookup_name": "example_1_5_vector_magnitude_vr",
+		"description": "Vector magnitude calculation demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn",
+	},
+	"example_1_6_vector_normalize_vr": {
+		"name": "Vector Normalize VR",
+		"lookup_name": "example_1_6_vector_normalize_vr",
+		"description": "Vector normalization demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn",
+	},
+	"example_1_7_motion_101_velocity_vr": {
+		"name": "Motion 101 Velocity VR",
+		"lookup_name": "example_1_7_motion_101_velocity_vr",
+		"description": "Basic velocity motion demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn",
+	},
+	"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
+		"name": "Motion 101 Velocity and Constant Acceleration VR",
+		"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+		"description": "Velocity and constant acceleration demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn",
+	},
+	"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
+		"name": "Motion 101 Velocity and Random Acceleration VR",
+		"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+		"description": "Velocity and random acceleration demonstration",
+		"scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+	},
+	"exercise_1_3_solution_3_d_bouncing_ball_vr": {
+		"name": "Exercise 1.3 Solution 3D Bouncing Ball VR",
+		"lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+		"description": "3D bouncing ball exercise solution",
+		"scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
+	},
+	"exercise_1_5_solution_accelerate_and_decelerate_vr": {
+		"name": "Exercise 1.5 Solution Accelerate and Decelerate VR",
+		"lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+		"description": "Acceleration and deceleration exercise solution",
+		"scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+	},
+	"exercise_1_8_solution_attraction_magnitude_vr": {
+		"name": "Exercise 1.8 Solution Attraction Magnitude VR",
+		"lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
+		"description": "Attraction magnitude exercise solution",
+		"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
+	},
+	"example_4_1_single_particle_vr": {
+		"name": "Single Particle VR",
+		"lookup_name": "example_4_1_single_particle_vr",
+		"description": "Single particle system demonstration",
+		"scene": "res://algorithms/particles/example_4_1_single_particle_vr.tscn",
+	},
+	"example_4_2_array_particles_vr": {
+		"name": "Array Particles VR",
+		"lookup_name": "example_4_2_array_particles_vr",
+		"description": "Particle array system demonstration",
+		"scene": "res://algorithms/particles/example_4_2_array_particles_vr.tscn",
+	},
+	"example_4_3_particle_emitter_vr": {
+		"name": "Particle Emitter VR",
+		"lookup_name": "example_4_3_particle_emitter_vr",
+		"description": "Particle emitter system demonstration",
+		"scene": "res://algorithms/particles/example_4_3_particle_emitter_vr.tscn",
+	},
+	"example_4_4_multiple_emitters_vr": {
+		"name": "Multiple Emitters VR",
+		"lookup_name": "example_4_4_multiple_emitters_vr",
+		"description": "Multiple particle emitters demonstration",
+		"scene": "res://algorithms/particles/example_4_4_multiple_emitters_vr.tscn",
+	},
+	"example_4_5_inheritance_polymorphism_vr": {
+		"name": "Inheritance Polymorphism VR",
+		"lookup_name": "example_4_5_inheritance_polymorphism_vr",
+		"description": "Particle inheritance and polymorphism demonstration",
+		"scene": "res://algorithms/particles/example_4_5_inheritance_polymorphism_vr.tscn",
+	},
+	"example_4_6_particle_repeller_vr": {
+		"name": "Particle Repeller VR",
+		"lookup_name": "example_4_6_particle_repeller_vr",
+		"description": "Particle repeller system demonstration",
+		"scene": "res://algorithms/particles/example_4_6_particle_repeller_vr.tscn",
+	},
+	"example_6_1_basic_rigidbody_vr": {
+		"name": "Basic Rigidbody VR",
+		"lookup_name": "example_6_1_basic_rigidbody_vr",
+		"description": "Basic rigidbody physics demonstration",
+		"scene": "res://algorithms/physics/example_6_1_basic_rigidbody_vr.tscn",
+	},
+	"example_6_2_falling_boxes_vr": {
+		"name": "Falling Boxes VR",
+		"lookup_name": "example_6_2_falling_boxes_vr",
+		"description": "Falling boxes physics demonstration",
+		"scene": "res://algorithms/physics/example_6_2_falling_boxes_vr.tscn",
+	},
+	"example_6_3_compound_bodies_vr": {
+		"name": "Compound Bodies VR",
+		"lookup_name": "example_6_3_compound_bodies_vr",
+		"description": "Compound rigidbody physics demonstration",
+		"scene": "res://algorithms/physics/example_6_3_compound_bodies_vr.tscn",
+	},
+	"example_6_4_windmill_vr": {
+		"name": "Windmill VR",
+		"lookup_name": "example_6_4_windmill_vr",
+		"description": "Windmill physics demonstration",
+		"scene": "res://algorithms/physics/example_6_4_windmill_vr.tscn",
+	},
+	"example_6_5_chain_vr": {
+		"name": "Chain VR",
+		"lookup_name": "example_6_5_chain_vr",
+		"description": "Chain physics demonstration",
+		"scene": "res://algorithms/physics/example_6_5_chain_vr.tscn",
+	},
+	"example_6_6_grab_vr": {
+		"name": "Grab VR",
+		"lookup_name": "example_6_6_grab_vr",
+		"description": "Grab physics demonstration",
+		"scene": "res://algorithms/physics/example_6_6_grab_vr.tscn",
+	},
+	"example_6_7_bridge_vr": {
+		"name": "Bridge VR",
+		"lookup_name": "example_6_7_bridge_vr",
+		"description": "Bridge physics demonstration",
+		"scene": "res://algorithms/physics/example_6_7_bridge_vr.tscn",
+	},
+	"example_6_8_collision_layers_vr": {
+		"name": "Collision Layers VR",
+		"lookup_name": "example_6_8_collision_layers_vr",
+		"description": "Collision layers physics demonstration",
+		"scene": "res://algorithms/physics/example_6_8_collision_layers_vr.tscn",
+	},
+	"lshape": {
+		"name": "L Shape",
+		"lookup_name": "lshape",
+		"description": "Upside down L shape primitive with meeting corner joints",
+		"scene": "res://commons/primitives/lshape/lshape.tscn",
+	},
+	"arch": {
+		"name": "Arch",
+		"lookup_name": "arch",
+		"description": "Architectural arch with curved top and pillars",
+		"scene": "res://commons/primitives/arch/arch.tscn",
+	},
+	"profile_chair": {
+		"name": "Profile Chair",
+		"lookup_name": "profile_chair",
+		"description": "Profile chair with integrated seat and backrest corners",
+		"scene": "res://commons/primitives/chair/chair.tscn",
+	},
+	"portal_frame": {
+		"name": "Portal Frame",
+		"lookup_name": "portal_frame",
+		"description": "Portal doorway frame with three-plate lintel",
+		"scene": "res://commons/primitives/portal/portal.tscn",
+	},
+	"rectcube": {
+		"name": "Rectangular Cube",
+		"lookup_name": "rectcube",
+		"description": "Flat rectangular cube platform (1.0 x 0.2 x 1.0)",
+		"scene": "res://commons/primitives/rectcube/rectcube.tscn",
+	},
+	"halocube": {
+		"name": "Halo Cube",
+		"lookup_name": "halocube",
+		"description": "Hollow cube frame with four mitered walls",
+		"scene": "res://commons/primitives/halocube/halocube.tscn",
+	},
+	"unitcube": {
+		"name": "Unit Cube",
+		"lookup_name": "unitcube",
+		"description": "Unit cube from vertex and face arrays",
+		"scene": "res://commons/primitives/unitcube/unitcube.tscn",
+	},
+	"star_primitive": {
+		"name": "Star",
+		"lookup_name": "star_primitive",
+		"description": "Five-pointed star shape with thickness",
+		"scene": "res://commons/primitives/star/star.tscn",
+	},
+	"rock_primitive": {
+		"name": "Rock",
+		"lookup_name": "rock_primitive",
+		"description": "Simple rock pyramid shape",
+		"scene": "res://commons/primitives/rock/rock.tscn",
+	},
+	"parametric_surface": {
+		"name": "Parametric Surface",
+		"lookup_name": "parametric_surface",
+		"description": "Parametric surface with configurable equations",
+		"scene": "res://commons/primitives/parametric/parametric.tscn",
+	},
+	"mengersponge": {
+		"name": "Menger Sponge",
+		"lookup_name": "mengersponge",
+		"description": "Menger sponge fractal with configurable depth",
+		"scene": "res://commons/primitives/mengersponge/mengersponge.tscn",
+	},
+	"steppedpyramid": {
+		"name": "Stepped Pyramid",
+		"lookup_name": "steppedpyramid",
+		"description": "Stepped pyramid/ziggurat with 10 levels",
+		"scene": "res://commons/primitives/steppedpyramid/steppedpyramid.tscn",
+	},
+	"boxbeam": {
+		"name": "Box Beam",
+		"lookup_name": "boxbeam",
+		"description": "Hollow rectangular beam with configurable dimensions",
+		"scene": "res://commons/primitives/boxbeam/boxbeam.tscn",
+	},
+	"proceduralrock": {
+		"name": "Procedural Rock",
+		"lookup_name": "proceduralrock",
+		"description": "Procedural rock using icosphere and noise deformation",
+		"scene": "res://commons/primitives/proceduralrock/proceduralrock.tscn",
+	},
+	"hollowrock": {
+		"name": "Hollow Rock",
+		"lookup_name": "hollowrock",
+		"description": "Hollow rock using torus with varied openings",
+		"scene": "res://commons/primitives/hollowrock/hollowrock.tscn",
+	},
+	"modernchair": {
+		"name": "Modern Chair",
+		"lookup_name": "modernchair",
+		"description": "Modern chair with configurable seat, legs and backrest",
+		"scene": "res://commons/primitives/modernchair/modernchair.tscn",
+	},
+	"techstrider": {
+		"name": "techstrider",
+		"lookup_name": "techstrider",
+		"description": "techstrider",
+		"scene": "res://commons/hazards/techstrider/techstrider.tscn",
+	},
+	"cavex": {
+		"name": "cavetest",
+		"lookup_name": "cavetest",
+		"description": "cavetest",
+		"scene": "res://commons/primitives/cave/cave.tscn",
+	}, 
+	"cavetest": {
+		"name": "cavetest",
+		"lookup_name": "cavetest",
+		"description": "cavetest",
+		"scene": "res://commons/primitives/cave/test.tscn",
+	}
+
+
 	}
 }

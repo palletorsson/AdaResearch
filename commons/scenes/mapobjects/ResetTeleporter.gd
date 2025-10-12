@@ -27,11 +27,43 @@ func _find_spawn():
 	teleport_target = get_tree().current_scene.find_child("SpawnPoint", true, false)
 
 	if not teleport_target:
-		# Use the same spawn position as the grid system to avoid conflicts
+		# Try to get spawn position from GridSpawnComponent
+		var spawn_position = _get_grid_spawn_position()
+
+		# Create temporary spawn node
 		teleport_target = Node3D.new()
-		teleport_target.position = Vector3(0.5, 4.0, 0.5)  # Match GridSpawnComponent default
+		teleport_target.position = spawn_position
 		get_tree().current_scene.add_child(teleport_target)
 		print("ResetTeleporter: Created default spawn at %s" % teleport_target.position)
+
+func _get_grid_spawn_position() -> Vector3:
+	"""Try to get spawn position from GridSpawnComponent or map data"""
+	var scene_root = get_tree().current_scene
+	if not scene_root:
+		return Vector3(2.5, 16.0, 2.5)  # Default fallback
+
+	# Try to find GridSystem
+	var grid_system = scene_root.find_child("LabGridSystem", true, false)
+	if not grid_system:
+		grid_system = scene_root.find_child("GridSystem", true, false)
+
+	if not grid_system:
+		return Vector3(2.5, 16.0, 2.5)  # No grid system found
+
+	# Try to get data component directly to read spawn points from JSON
+	if grid_system.has_node("GridDataComponent"):
+		var data_component = grid_system.get_node("GridDataComponent")
+		if data_component and data_component.has_method("get_spawn_points"):
+			var spawn_points = data_component.get_spawn_points()
+			if spawn_points is Dictionary and not spawn_points.is_empty():
+				var default_spawn = spawn_points.get("default", {})
+				if default_spawn is Dictionary and not default_spawn.is_empty():
+					var pos = default_spawn.get("position", [2.5, 16.0, 2.5])
+					if pos is Array and pos.size() >= 3:
+						return Vector3(pos[0], pos[1], pos[2])
+
+	# Fallback to GridSpawnComponent default
+	return Vector3(2.5, 16.0, 2.5)
 
 func _on_body_entered(body: Node3D):
 	# Don't trigger if not ready yet (prevents scene transition issues)
@@ -96,6 +128,16 @@ func _is_player(body: Node3D) -> bool:
 			body.is_in_group("player_body") or 
 			body.is_in_group("player") or
 			body.name.contains("PlayerBody"))
+
+# Public API to update spawn position
+func set_reset_position(new_position: Vector3):
+	"""Update the reset/spawn position - called by GridSpawnComponent"""
+	if not teleport_target:
+		teleport_target = Node3D.new()
+		get_tree().current_scene.add_child(teleport_target)
+
+	teleport_target.global_position = new_position
+	print("ResetTeleporter: Updated spawn position to %s" % new_position)
 
 # XR-Tools compatibility
 func is_xr_class(name: String) -> bool:

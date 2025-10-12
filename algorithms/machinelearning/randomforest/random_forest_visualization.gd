@@ -1,4 +1,3 @@
-class_name RandomForestVisualization
 extends Node3D
 
 # Random Forest: Collective Intelligence & Democratic Decision Making

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5y2q8v7n3x1p"]
+
+[ext_resource type="Script" path="res://algorithms/wfc/wfc_grid_3d.gd" id="1"]
+
+[node name="WFCGrid3D" type="Node3D"]
+script = ExtResource("1")
+grid_width = 10
+grid_height = 1
+grid_depth = 10
+tile_size = 1.0
+auto_generate = false
+generation_seed = 0
+animate_generation = false
+animation_speed = 0.1

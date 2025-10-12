@@ -1,5 +1,5 @@
 extends Node3D
-class_name DimensionalityReduction
+ 
 
 var time: float = 0.0
 var reduction_progress: float = 0.0

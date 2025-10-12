@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n0a4nynvbxjv"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/exercise_3_1_baton_vr.gd" id="1_f6plm"]
+
+[node name="Exercise31BatonVR" type="Node3D"]
+script = ExtResource("1_f6plm")

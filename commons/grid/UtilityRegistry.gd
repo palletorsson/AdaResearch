@@ -142,11 +142,18 @@ const UTILITY_TYPES = {
 		"supports_parameters": false
 	},
 	"i": {
-		"name": "info_board", 
-		"file": "info_board.tscn", 
+		"name": "info_board",
+		"file": "info_board.tscn",
 		"category": "educational",
 		"description": "Information and instruction displays",
 		"supports_parameters": false
+	},
+	"la": {
+		"name": "label",
+		"file": "info_label.tscn",
+		"category": "ui",
+		"description": "Displays artifact name from grid_artifacts.json by keyid",
+		"supports_parameters": true  # keyid parameter
 	},
 
 	# Navigation utilities

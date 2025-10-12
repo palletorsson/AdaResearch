@@ -1,5 +1,4 @@
 extends Node3D
-class_name OptimizationAlgorithms
 
 var time: float = 0.0
 var optimization_progress: float = 0.0

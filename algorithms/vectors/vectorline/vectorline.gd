@@ -62,7 +62,7 @@ func _update_arrow_tip(start_local: Vector3, end_local: Vector3):
 	if not arrow_tip or not is_instance_valid(arrow_tip):
 		arrow_tip = MeshInstance3D.new()
 		arrow_tip.name = "VectorArrow"
-		var cone := ConeMesh.new()
+		var cone := CylinderMesh.new()
 		cone.radial_segments = 32
 		arrow_tip.mesh = cone
 		if not line_material:
@@ -77,7 +77,7 @@ func _update_arrow_tip(start_local: Vector3, end_local: Vector3):
 	arrow_tip.visible = true
 	var normalized = direction / distance
 	var tip_length = min(arrow_tip_length, distance)
-	var cone_mesh := arrow_tip.mesh as ConeMesh
+	var cone_mesh := arrow_tip.mesh as CylinderMesh
 	cone_mesh.height = tip_length
 	cone_mesh.top_radius = 0.0
 	cone_mesh.bottom_radius = arrow_tip_radius

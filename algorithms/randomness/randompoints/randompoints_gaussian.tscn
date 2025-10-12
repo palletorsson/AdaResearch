@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://randompoints_gaussian123"]
+
+[ext_resource type="Script" path="res://algorithms/randomness/randompoints/randompoints.gd" id="1_script"]
+
+[node name="RandomPointsGaussian" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.6, 2.0)
+
+

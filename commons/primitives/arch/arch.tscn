@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4o4xq3w6r5tb"]
+
+[ext_resource type="Script" uid="uid://b156hq2jgtda8" path="res://commons/primitives/arch/arch.gd" id="1_arch"]
+
+[node name="Arch" type="Node3D"]
+script = ExtResource("1_arch")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

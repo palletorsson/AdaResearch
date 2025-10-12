@@ -79,6 +79,7 @@ size = Vector2(100, 100)
 environment = SubResource("Environment_q35sa")
 
 [node name="XROrigin3D" parent="." index="2" groups=["player_body"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, 0)
 
 [node name="Label3D" parent="." index="3"]
 visible = false
@@ -89,6 +90,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -53.0245, 0)
+
+[node name="StaticBody3D" parent="." index="6"]
+visible = false
 
 [node name="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51939, -0.436035, 1.55084)

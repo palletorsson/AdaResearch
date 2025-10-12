@@ -1,13 +1,24 @@
 # 🎵 Audio System Documentation
 
-**Status: ✅ FULLY FUNCTIONAL** (Last Updated: December 2024)
+**Status: ✅ FULLY FUNCTIONAL** (Last Updated: January 2025)
 
-A comprehensive audio synthesis system for the AdaResearch project, featuring real-time parameter editing, multiple JSON format support, and educational content integration.
+A comprehensive audio synthesis system for the AdaResearch project, featuring:
+- **Singleton Sound Bank** - Centralized sound generation and caching
+- **Hierarchical Audio Configuration** - JSON-driven ambient presets
+- **Real-time Parameter Editing** - Interactive sound design tools
+- **Multiple JSON Format Support** - Flexible parameter management
+- **Educational Content Integration** - Music theory and algorithm visualization
 
 ## 📁 Current Structure (Post-Migration)
 
 ```
 commons/audio/
+├── 🎛️ SINGLETON SOUND SYSTEM (January 2025)
+│   ├── SoundBankSingleton.gd         # [NEW] AutoLoad singleton for sound management
+│   ├── AmbientSoundController.gd     # [NEW] Per-map ambient sound controller
+│   ├── ambient_presets.json          # [NEW] 10 ambient presets with layers & effects
+│   └── SOUND_SYSTEM_GUIDE.md         # [NEW] Complete integration guide
+│
 ├── runtime/                    # 🎮 Game Runtime Components
 │   ├── EnhancedParameterLoader.gd    # Multi-format JSON parameter loader
 │   ├── LeanAudioRuntime.gd          # Lightweight runtime for games
@@ -23,7 +34,7 @@ commons/audio/
 │       └── SoundParameterManager.gd
 │
 ├── generators/                 # 🔧 Audio Synthesis
-│   ├── AudioSynthesizer.gd          # Core synthesis engine
+│   ├── AudioSynthesizer.gd          # Core synthesis engine (47+ sounds)
 │   ├── CustomSoundGenerator.gd      # Custom sound generation
 │   └── create_default_parameters.gd  # Parameter file creation tools
 │
@@ -52,9 +63,17 @@ commons/audio/
     └── test_scenes/                  # Test scene files
 ```
 
-## 🎯 Recent Achievements (December 2024)
+## 🎯 Recent Achievements
 
-### ✅ Complete System Overhaul
+### ✅ Singleton Sound Bank System (January 2025)
+1. **Centralized Sound Management**: Created `SoundBankSingleton.gd` as AutoLoad for all sound generation
+2. **Ambient Preset System**: 10 JSON-defined ambient presets with continuous layers and random events
+3. **Hierarchical Configuration**: Global → Sequence → Map cascade system in `map_sequences.json`
+4. **Audio Bus Management**: Dynamic bus creation with effects (Reverb, Delay, Filters, etc.)
+5. **Lazy Loading with Caching**: Sounds generated on-demand and cached for performance
+6. **Per-Map Controllers**: `AmbientSoundController.gd` manages ambient playback per scene
+
+### ✅ Complete System Overhaul (December 2024)
 1. **Folder Restructuring**: Migrated from mixed 70+ file structure to organized 7-category system
 2. **Multi-Format JSON Support**: Automatically handles 3 different JSON parameter formats
 3. **Error Resolution**: Fixed "Invalid access to property 'value'" errors across all sounds
@@ -76,7 +95,46 @@ commons/audio/
 
 ## 🔧 Core Components
 
-### 1. EnhancedParameterLoader.gd
+### 1. SoundBankSingleton.gd (NEW - January 2025)
+**Purpose**: Centralized AutoLoad singleton for sound generation, caching, and preset management
+**Key Features**:
+- Lazy loading with caching in `sound_registry` Dictionary
+- Routes to 5 generators: SyntheticSoundGenerator, AudioSynthesizer, techno_noir, liturgical, DarkGameTrack
+- Loads ambient presets from `ambient_presets.json`
+- Manages audio buses with effect configuration
+- String-to-enum conversion for AudioSynthesizer compatibility
+
+```gdscript
+# Usage Examples:
+# Get singleton reference (automatically available as AutoLoad)
+var sound = SoundBank.get_sound("AudioSynthesizer.SHIELD_HIT")
+
+# Load preset for a map
+SoundBank.setup_buses_for_preset("lab_scientific")
+SoundBank.pregenerate_preset_sounds("lab_scientific")
+
+# Get preset configuration
+var preset = SoundBank.get_preset("techno_noir_full")
+```
+
+### 2. AmbientSoundController.gd (NEW - January 2025)
+**Purpose**: Per-map controller for ambient sound playback
+**Key Features**:
+- Loads and plays ambient presets from SoundBank
+- Manages continuous audio layers (looping sounds)
+- Schedules random sound events with timers
+- Crossfading between presets
+- Volume control and audio bus routing
+
+```gdscript
+# Usage Example:
+var ambient_controller = AmbientSoundController.new()
+add_child(ambient_controller)
+ambient_controller.load_preset("lab_scientific", -6.0, 2.0)
+# Automatically starts playing ambient layers and random events
+```
+
+### 3. EnhancedParameterLoader.gd
 **Purpose**: Universal parameter loading from all JSON formats
 **Key Features**:
 - Handles 3 different JSON structures automatically
@@ -152,18 +210,25 @@ var audio_stream = CustomSoundGenerator.generate_custom_sound(sound_type, params
 
 ### 🎯 Next Development Opportunities
 
+#### Singleton Sound System Enhancement:
+1. **Extract Generators**: Refactor techno_noir and liturgical generators from existing code
+2. **Advanced Crossfading**: Smooth transitions between ambient presets
+3. **Parameter System**: Pass entropy/queer_factor parameters to SyntheticSoundGenerator
+4. **LRU Cache**: Implement cache size limits with eviction policy
+5. **Map-Specific Overrides**: Per-map audio configuration in `map_data.json`
+
 #### Easy Wins (1-2 hours):
 1. **Add New Sound Categories**: Create new folders in `parameters/`
-2. **Preset System**: Enhance save/load functionality
+2. **New Ambient Presets**: Design presets for specific sequences
 3. **UI Themes**: Create different visual themes for interfaces
 
 #### Medium Tasks (4-8 hours):
 1. **MIDI Integration**: Add MIDI input for real-time playing
-2. **Audio Effects**: Implement reverb, delay, filters
+2. **Additional Audio Effects**: Expand effect types beyond current 6
 3. **Batch Processing**: Tools for processing multiple sounds
 
 #### Advanced Features (1-2 days):
-1. **Machine Learning**: AI-assisted sound design
+1. **Real-time Mixing**: Dynamic volume and effect adjustment during playback
 2. **Collaborative Editing**: Multi-user sound design
 3. **Plugin Architecture**: Extensible effects system
 

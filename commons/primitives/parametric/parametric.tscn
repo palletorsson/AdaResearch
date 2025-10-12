@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqy8x5b3rw8n1"]
+
+[ext_resource type="Script" path="res://commons/primitives/parametric/parametric.gd" id="1_parametric"]
+
+[node name="Parametric" type="MeshInstance3D"]
+script = ExtResource("1_parametric")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 5)

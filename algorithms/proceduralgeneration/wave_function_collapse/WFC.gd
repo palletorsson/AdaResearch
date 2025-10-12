@@ -29,7 +29,7 @@ class WFCCell:
 		collapsed = true
 		options = [tile_index]
 
-class WFCTile:
+class WFCBasicTile:
 	var index: int
 	var edges: Array[String] = []
 	var texture: Texture2D
@@ -66,7 +66,7 @@ class WFCTile:
 		west.clear()
 		
 		for i in range(all_tiles.size()):
-			var other_tile = all_tiles[i] as WFCTile
+			var other_tile = all_tiles[i] as WFCBasicTile
 			
 			# For 3D, we check edge compatibility
 			# Top face (Y+) matches with bottom face (Y-) of tile above
@@ -103,7 +103,7 @@ class WFCTile:
 		return "".join(chars)
 
 # Main WFC variables
-var tiles: Array[WFCTile] = []
+var tiles: Array[WFCBasicTile] = []
 var grid: Array[WFCCell] = []
 var mesh_instances: Array[MeshInstance3D] = []
 var generation_timer: float = 0.0
@@ -150,7 +150,7 @@ func setup_tiles():
 			edges = ["BBB", "BBB", "BBB", "BBB", "BBB", "BBB"]
 		
 		var texture = tile_textures[i] if i < tile_textures.size() else null
-		var tile = WFCTile.new(i, edges, texture)
+		var tile = WFCBasicTile.new(i, edges, texture)
 		tiles.append(tile)
 	
 	# Generate rotated variations for some tiles (excluding symmetric ones)
@@ -169,11 +169,11 @@ func _should_generate_rotations(tile_index: int) -> bool:
 	# Don't rotate symmetric tiles (0, 1, 7, 10)
 	return not tile_index in [0, 1, 7, 10]
 
-func _generate_rotations(base_tile: WFCTile):
+func _generate_rotations(base_tile: WFCBasicTile):
 	# Generate Y-axis rotations (90°, 180°, 270°)
 	for rotation in range(1, 4):
 		var rotated_edges = _rotate_edges_y(base_tile.edges, rotation)
-		var rotated_tile = WFCTile.new(base_tile.index, rotated_edges, base_tile.texture)
+		var rotated_tile = WFCBasicTile.new(base_tile.index, rotated_edges, base_tile.texture)
 		
 		# Check if this rotation creates a unique tile
 		if not _is_duplicate_tile(rotated_tile):
@@ -191,7 +191,7 @@ func _rotate_edges_y(edges: Array[String], rotations: int) -> Array[String]:
 		new_edges = temp
 	return new_edges
 
-func _is_duplicate_tile(new_tile: WFCTile) -> bool:
+func _is_duplicate_tile(new_tile: WFCBasicTile) -> bool:
 	for existing_tile in tiles:
 		if existing_tile.edges == new_tile.edges:
 			return true

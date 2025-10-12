@@ -90,7 +90,7 @@ var performance_metrics: Dictionary = {
 # Enhanced creature class with neural networks and complex behaviors
 class EvolutionaryCreature:
 	var genes: Dictionary = {}
-	var neural_network: NeuralNetwork
+	var neural_network: MyNeuralNetwork
 	var fitness: float = 0.0
 	var age: float = 0.0
 	var energy: float = 100.0
@@ -193,7 +193,7 @@ class EvolutionaryCreature:
 		var neurons_per_layer = int(4 + genes.connection_density * 8)
 		var output_size = 6  # Movement outputs
 		
-		neural_network = NeuralNetwork.new(
+		neural_network = MyNeuralNetwork.new(
 			input_size, 
 			hidden_layers, 
 			neurons_per_layer, 
@@ -647,7 +647,7 @@ class EvolutionaryCreature:
 		return signals
 
 # Neural Network Implementation
-class NeuralNetwork:
+class MyNeuralNetwork:
 	var layers: Array = []
 	var weights: Array = []
 	var biases: Array = []
@@ -735,7 +735,7 @@ class NeuralNetwork:
 				
 				biases[layer_idx][neuron_idx] += genetic_influence
 	
-	func crossover_with(partner: NeuralNetwork) -> NeuralNetwork:
+	func crossover_with(partner: MyNeuralNetwork) -> MyNeuralNetwork:
 		"""Create offspring neural network"""
 		# Calculate proper parameters from parent network structure
 		var input_size = layers[0]
@@ -743,7 +743,7 @@ class NeuralNetwork:
 		var hidden_layers = max(0, layers.size() - 2)  # Ensure non-negative
 		var neurons_per_layer = layers[1] if layers.size() > 2 else output_size
 		
-		var child = NeuralNetwork.new(input_size, hidden_layers, neurons_per_layer, output_size, plasticity)
+		var child = MyNeuralNetwork.new(input_size, hidden_layers, neurons_per_layer, output_size, plasticity)
 		
 		# Crossover weights
 		for layer_idx in range(weights.size()):
@@ -2567,7 +2567,7 @@ func update_neural_visualization(creature: EvolutionaryCreature):
 		if layer_idx < layer_count - 1:
 			create_neural_connections(layer_node, network, layer_idx, creature)
 
-func create_neural_connections(layer_node: Node3D, network: NeuralNetwork, layer_idx: int, creature: EvolutionaryCreature):
+func create_neural_connections(layer_node: Node3D, network: MyNeuralNetwork, layer_idx: int, creature: EvolutionaryCreature):
 	"""Create visual connections between neural layers"""
 	var current_layer_size = network.layers[layer_idx]
 	var next_layer_size = network.layers[layer_idx + 1]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0is6tsvjpakk"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_lq6n6"]
+
+[node name="PlusLines" type="Node3D"]
+
+[node name="Vertical" parent="." instance=ExtResource("1_lq6n6")]
+
+[node name="Horizontal" parent="." instance=ExtResource("1_lq6n6")]
+transform = Transform3D(0, 0, 1, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
+text = "Plus (+) Lines"
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bcr0oya65epvu"]
 
-[ext_resource type="Script" path="res://algorithms/vectors/09_vector_torque/VectorTorque.gd" id="1_vcttorque"]
+[ext_resource type="Script" uid="uid://bbhntth0wq2hi" path="res://algorithms/vectors/09_vector_torque/VectorTorque.gd" id="1_vcttorque"]
 
 [node name="VectorTorque" type="Node3D"]
 script = ExtResource("1_vcttorque")

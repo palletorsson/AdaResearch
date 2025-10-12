@@ -1,5 +1,5 @@
 extends Node3D
-class_name AlgorithmicBiasVisualization
+ 
 
 var time: float = 0.0
 var bias_level: float = 0.0

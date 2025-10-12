@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1ksi6su02qe"]
+
+[ext_resource type="Material" uid="uid://d0fmiqm5e71vp" path="res://commons/resourses/materials/noc_vr/noc_vr_fishtank_glass.tres" id="1_fish"]
+[ext_resource type="Material" path="res://commons/resourses/materials/noc_vr/noc_vr_pink_wireframe.tres" id="2_fish"]
+[ext_resource type="Material" path="res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres" id="3_fish"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fish"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fish"]
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fish"]
+
+[node name="FishTank" type="Node3D"]
+
+[node name="FishTank#Glass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_fish")
+mesh = SubResource("BoxMesh_fish")
+
+[node name="FishTank#EdgeFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_fish")
+mesh = SubResource("BoxMesh_fish")
+
+[node name="FishTank#Floor" type="MeshInstance3D" parent="."]
+material_override = ExtResource("3_fish")
+mesh = SubResource("PlaneMesh_fish")
+
+[node name="FishTank#TankBounds" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="FishTank_TankBounds#CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fish")

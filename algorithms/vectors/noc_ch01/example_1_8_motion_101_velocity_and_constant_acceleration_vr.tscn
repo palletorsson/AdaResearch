@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://q3d7nynvbuiy"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.gd" id="1_i9olm"]
+
+[node name="Example18Motion101VelocityConstantAccelerationVR" type="Node3D"]
+script = ExtResource("1_i9olm")

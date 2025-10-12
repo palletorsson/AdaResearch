@@ -22,11 +22,14 @@ AdaResearch is a VR/desktop research platform built in Godot 4 for exploring alg
 - **`doc/`** - Documentation and guides
 - **`tests/`** - Test scenes and validation scripts
 
-## 🎵 Audio System (Recently Updated - Dec 2024)
+## 🎵 Audio System (Recently Updated - January 2025)
 
-The audio system has been completely restructured for better organization and maintainability:
+The audio system features a **centralized Singleton Sound Bank** architecture with hierarchical configuration:
 
 ### Current Status: ✅ FULLY FUNCTIONAL
+- **Singleton Sound Bank** - Centralized sound generation and caching (AutoLoad)
+- **10 Ambient Presets** - JSON-defined atmospheric soundscapes with layers and effects
+- **Hierarchical Configuration** - Global → Sequence → Map cascade in `map_sequences.json`
 - **70+ audio parameter files** organized into 6 logical categories
 - **Multiple JSON formats** supported automatically
 - **Real-time parameter editing** with visual feedback
@@ -36,11 +39,16 @@ The audio system has been completely restructured for better organization and ma
 ### Audio Module Structure
 ```
 commons/audio/
+├── 🎛️ SINGLETON SOUND SYSTEM (January 2025)
+│   ├── SoundBankSingleton.gd      # AutoLoad singleton for sound management
+│   ├── AmbientSoundController.gd  # Per-map ambient controller
+│   ├── ambient_presets.json       # 10 ambient presets
+│   └── SOUND_SYSTEM_GUIDE.md      # Complete integration guide
 ├── runtime/           # Game runtime components
 ├── interfaces/        # Development sound design tools
-├── generators/        # Audio synthesis engines
+├── generators/        # Audio synthesis engines (AudioSynthesizer, etc.)
 ├── compositions/      # Track players and systems
-├── parameters/        # Organized JSON configs
+├── parameters/        # Organized JSON configs (70+ files)
 │   ├── basic/        # Simple sounds (sine waves, pickups)
 │   ├── drums/        # Drum machines and percussion
 │   ├── synthesizers/ # Classic synth emulations
@@ -52,6 +60,16 @@ commons/audio/
 ```
 
 ### Recent Achievements
+
+**January 2025 - Singleton Sound Bank System:**
+- ✅ Centralized sound management with SoundBankSingleton (AutoLoad)
+- ✅ 10 ambient presets with continuous layers and random events
+- ✅ Hierarchical audio configuration (Global → Sequence → Map)
+- ✅ Dynamic audio bus management with 6 effect types
+- ✅ Lazy loading with caching for performance
+- ✅ String-to-enum conversion for AudioSynthesizer compatibility
+
+**December 2024 - System Restructure:**
 - ✅ Automated migration from mixed folder structure
 - ✅ Fixed "Invalid access to property 'value'" errors across all sounds
 - ✅ Enhanced parameter loading supporting 3 different JSON formats
@@ -79,7 +97,9 @@ commons/audio/
 ## 📚 Documentation
 
 ### Key Documentation Files
+- `commons/audio/SOUND_SYSTEM_GUIDE.md` - Singleton sound bank integration guide
 - `commons/audio/documentation/README.md` - Audio system overview
+- `commons/audio/ambient_presets.json` - 10 ambient preset definitions
 - `commons/audio/documentation/FOLDER_RESTRUCTURE_PLAN.md` - Migration details
 - `doc/LAB_GRID_GUID.md` - Grid interaction systems
 - `doc/PROGRESSION_SYSTEM.md` - Learning progression mechanics
@@ -87,6 +107,12 @@ commons/audio/
 ## 🔄 Development Status
 
 ### Recently Completed
+- **Singleton Sound Bank System** (Jan 2025)
+  - Centralized AutoLoad sound management
+  - Hierarchical ambient preset configuration
+  - Audio bus management with effects
+  - Per-map ambient controllers
+
 - **Audio System Restructuring** (Dec 2024)
   - Complete folder reorganization
   - Multi-format JSON parameter loading
@@ -94,6 +120,8 @@ commons/audio/
   - Real-time interface improvements
 
 ### Next Development Areas
+- Integration of SoundBank with map loading system
+- Extract techno_noir and liturgical generators
 - Algorithm visualization enhancements
 - VR interaction improvements
 - Grid system optimizations

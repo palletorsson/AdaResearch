@@ -1,5 +1,4 @@
 extends Node3D
-class_name ReinforcementLearning
 
 var time: float = 0.0
 var learning_progress: float = 0.0

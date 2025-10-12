@@ -2,16 +2,20 @@
 extends Node3D
 class_name RhizomeCaveGenerator
 
+# Signals
+signal generation_progress(percentage: float)
+signal generation_complete()
+
 # Configuration
 @export var threshold: float = 0.5
 @export var chunk_size: Vector3i = Vector3i(32, 32, 32)
 @export var voxel_scale: float = 1.0
 
 # VoxelChunk class
-class VoxelChunk:
+class RhizomeVoxelChunk:
 	var chunk_size: Vector3i
 	var voxel_scale: float
-	var density_data: Array[Array[Array]]
+	var density_data: Array  # 3D array [x][y][z] of floats
 	
 	func _init(size: Vector3i, scale: float):
 		chunk_size = size
@@ -39,7 +43,7 @@ class VoxelChunk:
 			density_data[pos.x][pos.y][pos.z] = value
 
 # Async version of generate_mesh_from_chunk
-func generate_mesh_from_chunk_async(chunk: VoxelChunk, max_time_ms: float = 8.0) -> ArrayMesh:
+func generate_mesh_from_chunk_async(chunk: RhizomeVoxelChunk, max_time_ms: float = 8.0) -> ArrayMesh:
 	"""Generate mesh from voxel chunk asynchronously with time-based yielding"""
 	var mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()
@@ -113,7 +117,7 @@ func generate_mesh_from_chunk_async(chunk: VoxelChunk, max_time_ms: float = 8.0)
 	
 	return mesh
 
-func get_voxel_corners(chunk: VoxelChunk, voxel_pos: Vector3i) -> Array[float]:
+func get_voxel_corners(chunk: RhizomeVoxelChunk, voxel_pos: Vector3i) -> Array[float]:
 	"""Get the density values at the 8 corners of a voxel"""
 	var corners: Array[float] = []
 	
@@ -156,7 +160,7 @@ func get_triangles_for_cube(cube_index: int) -> Array:
 	
 	return triangles
 
-func interpolate_vertex(chunk: VoxelChunk, voxel_pos: Vector3i, edge_index: int, corner_values: Array[float]) -> Vector3:
+func interpolate_vertex(chunk: RhizomeVoxelChunk, voxel_pos: Vector3i, edge_index: int, corner_values: Array[float]) -> Vector3:
 	"""Interpolate vertex position along an edge based on density values"""
 	# Edge vertex pairs for marching cubes
 	var edge_vertices = [
@@ -194,7 +198,7 @@ func interpolate_vertex(chunk: VoxelChunk, voxel_pos: Vector3i, edge_index: int,
 	
 	return world_pos
 
-func calculate_normal(chunk: VoxelChunk, world_pos: Vector3) -> Vector3:
+func calculate_normal(chunk: RhizomeVoxelChunk, world_pos: Vector3) -> Vector3:
 	"""Calculate normal vector at a world position using gradient"""
 	var epsilon = chunk.voxel_scale * 0.5
 	
@@ -214,7 +218,7 @@ func calculate_normal(chunk: VoxelChunk, world_pos: Vector3) -> Vector3:
 	
 	return normal
 
-func get_density_at_world_pos(chunk: VoxelChunk, world_pos: Vector3) -> float:
+func get_density_at_world_pos(chunk: RhizomeVoxelChunk, world_pos: Vector3) -> float:
 	"""Get density value at a world position (with bounds checking)"""
 	var local_pos = world_pos - chunk.world_position
 	var voxel_pos = Vector3i(
@@ -240,10 +244,12 @@ func get_triangle_configuration(cube_index: int) -> Array[int]:
 	# Placeholder - replace with your actual marching cubes table
 	var triangle_table = get_marching_cubes_table()
 	
+	var result: Array[int] = []
 	if cube_index >= 0 and cube_index < triangle_table.size():
-		return triangle_table[cube_index]
-	else:
-		return []
+		var config = triangle_table[cube_index]
+		for val in config:
+			result.append(val as int)
+	return result
 
 func get_marching_cubes_table() -> Array:
 	"""Return the marching cubes triangle lookup table"""
@@ -259,3 +265,52 @@ func get_marching_cubes_table() -> Array:
 	# from the MarchingCubesLUT.txt file
 	
 	return table
+
+# Public API methods for cave generation
+func setup_parameters(params: Dictionary) -> void:
+	"""Setup basic cave generation parameters"""
+	if params.has("chunk_size"):
+		chunk_size = params["chunk_size"]
+	if params.has("voxel_scale"):
+		voxel_scale = params["voxel_scale"]
+	if params.has("threshold"):
+		threshold = params["threshold"]
+
+func configure_rhizome_parameters(params: Dictionary) -> void:
+	"""Configure rhizomatic growth parameters"""
+	# Store rhizome parameters for use during generation
+	# This is a placeholder - you would use these in actual rhizome generation
+	pass
+
+func generate_cave_async() -> void:
+	"""Generate cave asynchronously"""
+	# Emit progress at start
+	generation_progress.emit(0.0)
+	
+	# Create a sample chunk for demonstration
+	var chunk = RhizomeVoxelChunk.new(chunk_size, voxel_scale)
+	
+	# Generate some sample density data (replace with actual rhizome algorithm)
+	for x in range(chunk_size.x):
+		for y in range(chunk_size.y):
+			for z in range(chunk_size.z):
+				var pos = Vector3(x, y, z)
+				var density = 0.5 + 0.3 * sin(pos.x * 0.5) + 0.3 * sin(pos.z * 0.5)
+				chunk.set_density(Vector3i(x, y, z), density)
+		
+		# Emit progress
+		var progress = float(x) / float(chunk_size.x) * 100.0
+		generation_progress.emit(progress)
+		await get_tree().process_frame
+	
+	# Generate mesh from chunk
+	var mesh = await generate_mesh_from_chunk_async(chunk)
+	
+	# Create MeshInstance3D and add to scene
+	var mesh_instance = MeshInstance3D.new()
+	mesh_instance.mesh = mesh
+	add_child(mesh_instance)
+	
+	# Emit completion
+	generation_complete.emit()
+	generation_progress.emit(100.0)

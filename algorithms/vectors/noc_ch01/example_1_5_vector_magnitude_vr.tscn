@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t6g0nynvbrj1"]
+
+[ext_resource type="Script" uid="uid://cvvbir2mustng" path="res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.gd" id="1_l2plm"]
+
+[node name="Example15VectorMagnitudeVR" type="Node3D"]
+script = ExtResource("1_l2plm")

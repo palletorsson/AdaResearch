@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o1b5nynvbwjw"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/exercise_3_5_spiral_vr.gd" id="1_g7plm"]
+
+[node name="Exercise35SpiralVR" type="Node3D"]
+script = ExtResource("1_g7plm")

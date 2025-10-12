@@ -598,7 +598,8 @@ func optimize_for_vr(sculpture: Node3D):
 	var tween = create_tween()
 	tween.set_loops()
 	tween.tween_property(sculpture, "rotation_degrees:y", 360.0, 30.0)
-	tween.tween_delay(2.0)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_BOUND)
+	await get_tree().create_timer(2.0).timeout
 
 func find_children_by_type(node: Node, type_name: String) -> Array:
 	"""Recursively find all children of a specific type"""

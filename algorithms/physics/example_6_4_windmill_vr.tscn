@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_6_4_windmill"]
+
+[ext_resource type="Script" path="res://algorithms/physics/example_6_4_windmill_vr.gd" id="1"]
+
+[node name="Example_6_4_Windmill" type="Node3D"]
+script = ExtResource("1")

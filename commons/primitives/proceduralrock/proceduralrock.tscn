@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8xp4vw2jkn5m"]
+
+[ext_resource type="Script" uid="uid://doxw66lseffs4" path="res://commons/primitives/proceduralrock/proceduralrock.gd" id="1_proceduralrock"]
+
+[node name="ProceduralRock" type="MeshInstance3D"]
+script = ExtResource("1_proceduralrock")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 3, 2, 3)

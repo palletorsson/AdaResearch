@@ -403,19 +403,20 @@ func _notification(type):
 		release()
 
 func release():
-	rendering_device.free_rid(pipeline)
-	rendering_device.free_rid(triangle_buffer)
-	rendering_device.free_rid(params_buffer)
-	rendering_device.free_rid(counter_buffer);
-	rendering_device.free_rid(lut_buffer);
-	rendering_device.free_rid(shader)
-	
-	pipeline = RID()
-	triangle_buffer = RID()
-	params_buffer = RID()
-	counter_buffer = RID()
-	lut_buffer = RID()
-	shader = RID()
+	if rendering_device:
+		rendering_device.free_rid(pipeline)
+		rendering_device.free_rid(triangle_buffer)
+		rendering_device.free_rid(params_buffer)
+		rendering_device.free_rid(counter_buffer);
+		rendering_device.free_rid(lut_buffer);
+		rendering_device.free_rid(shader)
 		
-	rendering_device.free()
-	rendering_device= null
+		pipeline = RID()
+		triangle_buffer = RID()
+		params_buffer = RID()
+		counter_buffer = RID()
+		lut_buffer = RID()
+		shader = RID()
+			
+		rendering_device.free()
+		rendering_device = null

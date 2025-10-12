@@ -148,7 +148,8 @@ func setup_sine_wave_drawing():
 	wave_multimesh = MultiMesh.new()
 	wave_multimesh.mesh = get_shared_line_mesh()
 	wave_multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	wave_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	# Enable per-instance colors
+	wave_multimesh.use_colors = true
 	wave_multimesh.instance_count = 0
 	sine_wave_instance.multimesh = wave_multimesh
 	var wave_material = StandardMaterial3D.new()
@@ -164,7 +165,8 @@ func setup_projection_lines():
 	projection_multimesh = MultiMesh.new()
 	projection_multimesh.mesh = get_shared_line_mesh()
 	projection_multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	projection_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
+	# Enable per-instance colors
+	projection_multimesh.use_colors = true
 	projection_multimesh.instance_count = 3
 	projection_lines_instance.multimesh = projection_multimesh
 	var proj_material = StandardMaterial3D.new()
@@ -270,7 +272,10 @@ func build_line_transform(from: Vector3, to: Vector3, thickness: float) -> Trans
 	var basis = Basis.IDENTITY
 	if distance > 0.0001:
 		var direction = delta.normalized()
-		basis = Basis().looking_at(direction, Vector3.UP)
+		var up := Vector3.UP
+		if abs(direction.dot(Vector3.UP)) > 0.999:
+			up = Vector3.FORWARD
+		basis = Basis().looking_at(direction, up)
 	basis = basis.scaled(Vector3(thickness, thickness, max(distance, 0.0001)))
 	return Transform3D(basis, midpoint)
 

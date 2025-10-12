@@ -1037,7 +1037,8 @@ func find_energy_sources(delta):
 func find_food_objects():
 	# Find food objects in the environment
 	var food_items = []
-	var radius = 1.5 * genome["body_scale"].x
+	var body_scale := _get_body_scale()
+	var radius = 1.5 * body_scale.x
 	
 	var space_state = get_world_3d().direct_space_state
 	
@@ -1091,3 +1092,17 @@ func get_creature_type():
 
 func get_genome():
 	return genome
+
+func _get_body_scale() -> Vector3:
+	# Safely get body scale from genome; supports different stored formats
+	if genome.has("body_scale"):
+		var v = genome["body_scale"]
+		if typeof(v) == TYPE_VECTOR3:
+			return v
+		if typeof(v) == TYPE_DICTIONARY:
+			# Expecting keys x,y,z
+			return Vector3(v.get("x", 1.0), v.get("y", 1.0), v.get("z", 1.0))
+		if typeof(v) == TYPE_ARRAY and v.size() >= 3:
+			return Vector3(float(v[0]), float(v[1]), float(v[2]))
+	# Fallback scale
+	return Vector3.ONE

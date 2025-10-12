@@ -3,7 +3,18 @@
 	"description": "Map sequence configurations for Ada Research VR educational system",
 	"last_updated": "2025-01-20",
 	"fallback_lab_map": "Lab/map_data_init",
-	
+
+	"audio_defaults": {
+		"ambient_preset": "silent",
+		"volume": -6.0,
+		"crossfade_duration": 2.0,
+		"interactive_sounds": {
+			"teleport": "SyntheticSoundGenerator.detection_sound",
+			"pickup": "AudioSynthesizer.PICKUP_MARIO",
+			"activate": "AudioSynthesizer.SHIELD_HIT"
+		}
+	},
+
 	"sequences": {
 		"primitives": {
 			"name": "name Primitives",
@@ -13,7 +24,11 @@
 			"learning_objectives": [
 				"test"
 			],
-			"temps":[ 
+			"audio": {
+				"ambient_preset": "vangelis_waves",
+				"volume": -8.0
+			},
+			"temps":[
 				"One_Primitives",
 				"One_Adapt_1",
 				"One_Adapt_2",
@@ -22,19 +37,32 @@
 				"One_Adapt_5",
 				"One_Adapt_6",
 				"One_Adapt_7",
-				"Point_Tests",		
+				"Point_Tests",
+				"Point_Line",
+				"Point_Triangle",
+				"Point_Animatedcube",
+				"Primitives_3",
+				"Primitives_1",
+				"Primitives_Torus",
+				"Primitives_Portals",
+				"Primitives_2",
+				"Primitives_4",	
 			],
 			"maps": [
-				"Point_1",
-				"Point_Line",	
-				"Point_Triangle",		
-				"Point_Animatedcube",			
+				"Point_1_0",
+
+				"Point_1_1",
+				"Point_Line_0",				
+				"Point_Line_1",
+				"Point_Triangle_1_0",
+				"Point_Triangle_1_1",
+				"Point_Animatedcube",
+				"Primitives_3",
 				"Primitives_1",
-				"Primitives_Torus",					
-				"Primitives_Portals",				
-				"Primitives_2",				
-				"Primitives_4",					
-				"Primitives_5",															
+				"Primitives_Torus",
+				"Primitives_Portals",
+				"Primitives_2",
+				"Primitives_4",	
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_primitives",
@@ -182,6 +210,224 @@
 			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
 			"lab_map": "Lab/map_data_post_patterngeneration"
 		},
+		"vectors": {
+			"name": "Vectors",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"Vectors_1",
+				"Vectors_2", 
+				"Vectors_3",
+				"Vectors_4",
+				"Vectors_5",
+				"Vectors_6",	
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_vectors"
+		},		
+		"fractals": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"Fractals_1",
+				"Fractals_2", 
+				"Fractals_3",
+				"Fractals_4",
+				"Fractals_5",
+				"Fractals_6",
+				"Fractals_7",		
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_fractals"
+		},
+		"cellularautomata": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"CA_1",
+				"CA_2", 
+				"CA_3",
+				"CA_4",
+				"CA_5",
+				"CA_6",
+				"CA_7",		
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_fractals"
+		},
+		"joints": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"Joints_1",
+				"Joints_2", 
+				"Joints_3",
+				"Joints_4",
+				"Joints_5",
+				"Joints_6",
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_joints"
+		},
+		"particles": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"Particles_1",
+				"Particles_2", 
+				"Particles_3",
+				"Particles_4",
+				"Particles_5",
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_particles"
+		},
+		"oscillation": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"oscillation_1",
+				"oscillation_2", 
+				"oscillation_3",
+				"oscillation_4",
+				"oscillation_5",
+				"oscillation_6",
+				"oscillation_7",		
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_fractals"
+		},
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
 			"description": "Explore concepts of randomness, probability, and statistical thinking",
@@ -242,9 +488,16 @@
 				"Audio-visualization",
 				"Wave interference"
 			],
+			"audio": {
+				"ambient_preset": "techno_noir_subtle",
+				"volume": -10.0,
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
+				}
+			},
 			"content": [
 				" Mario_Sound : Mario Sound Arcade simple_mario_slider",
-				" Sine_Space : Sine Space a space", 
+				" Sine_Space : Sine Space a space",
 				" Wave_Propagation : Wave Propagation Space",
 				" John_Cage: Audio scape",
 				" Bernini : Bernini columns",
@@ -256,10 +509,10 @@
 				"WaveFunctions_Unit_Circle",
 				"WaveFunctions_Fourier_Form",
 				"WaveFunctions_Sine_Space",
-				"WaveFunctions_3D_Wave_Propagation",					
+				"WaveFunctions_3D_Wave_Propagation",
 				"WaveFunctions_John_Cage",
-				"Wavefunctions_Bernini",			
-				"Wavefunctions_Four", 
+				"Wavefunctions_Bernini",
+				"Wavefunctions_Four",
 				"WaveFunctions_Kusama",
 			],
 			"return_to": "lab",
@@ -318,12 +571,51 @@
 				"Collision dynamics and response"
 			],
 			"maps": [
-				"Forces_One",
+				"Forces_1",
+				"Forces_2",
+				"Forces_3",
+				"Forces_4",
+				"Forces_5",		
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["noise"],
 			"completion_rewards": ["physics_engineer_badge", "force_master_badge"],
-			"lab_map": "Lab/map_data_post_physicssimulation"
+			"lab_map": "Lab/map_data_post_forces"
+		},
+		"physics": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"Physics_1",
+				"Physics_2", 
+				"Physics_3",
+				"Physics_4",
+				"Physics_5",
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_particles"
 		},
 		"proceduralaudio": {
 			"name": "Procedural Audio",
@@ -351,6 +643,7 @@
 			"unlock_requirements": ["wavefunctions"],
 			"completion_rewards": ["audio_architect_badge", "synthesis_specialist_badge"]
 		},
+		
 		"physicssimulation": {
 			"name": "Physics Simulation",
 			"description": "Explore Newtonian mechanics, forces, and physical system simulation",
@@ -635,11 +928,19 @@
 				"AI model training",
 				"Explainable AI concepts"
 			],
+			"audio": {
+				"ambient_preset": "computational_hum",
+				"volume": -12.0,
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.C64_SID_PULSE",
+					"activate": "AudioSynthesizer.GAMEBOY_PULSE"
+				}
+			},
 			"temps": [
 				""
-			], 
+			],
 			"maps": [
-				"MachineLearning_Evolving_Creatures", 
+				"MachineLearning_Evolving_Creatures",
 				"MachineLearning_Evolving_Flowers",
 				"MachineLearning_Random_Walker_Machine",
 				"MachineLearning_Neural_Networks",

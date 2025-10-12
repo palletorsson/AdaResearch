@@ -1,5 +1,5 @@
 extends Node3D
-class_name GenerativeAdversarialNetworksGANs
+
 
 var time: float = 0.0
 var training_progress: float = 0.0

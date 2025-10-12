@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_11_4_neuroevolution_steering_seek_vr"]
+
+[ext_resource type="Script" path="res://algorithms/neuroevolution/noc_ch11/example_11_4_neuroevolution_steering_seek_vr.gd" id="1"]
+
+[node name="Example_11_4_Neuroevolution_Steering_Seek_VR" type="Node3D"]
+script = ExtResource("1")

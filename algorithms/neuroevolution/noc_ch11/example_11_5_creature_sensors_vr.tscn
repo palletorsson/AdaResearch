@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_11_5_creature_sensors_vr"]
+
+[ext_resource type="Script" path="res://algorithms/neuroevolution/noc_ch11/example_11_5_creature_sensors_vr.gd" id="1"]
+
+[node name="Example_11_5_Creature_Sensors_VR" type="Node3D"]
+script = ExtResource("1")

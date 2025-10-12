@@ -1,4 +1,3 @@
-class_name SVMVisualization
 extends Node3D
 
 # Support Vector Machine: Mathematical Justice & Boundary Politics

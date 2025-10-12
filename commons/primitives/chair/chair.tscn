@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2xvg6rq4hnjv"]
+
+[ext_resource type="Script" uid="uid://gorybcnpejpp" path="res://commons/primitives/chair/chair.gd" id="1_chair"]
+
+[node name="Chair" type="Node3D"]
+script = ExtResource("1_chair")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

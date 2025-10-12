@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://71u8ar2cjm2e"]
+
+[ext_resource type="Script" uid="uid://gy7sld7ey2ky" path="res://commons/primitives/cave/PlaceWallSpheres.gd" id="1_edo2d"]
+
+[node name="CaveSpace" type="Node3D"]
+script = ExtResource("1_edo2d")
+
+[node name="Cave" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16877, 0, 0)
+
+[node name="Cutaway_cube" type="CSGBox3D" parent="Cave"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+size = Vector3(40, 20, 40)
+
+[node name="Blob_01_entrence" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6045, -3, 0)
+operation = 2
+radius = 5.70575
+
+[node name="Blob_02_enterinter" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3347, -2.85211, 0.374982)
+operation = 2
+radius = 4.2
+
+[node name="Blob_03_innerRoom" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15761, -4, 2)
+operation = 2
+radius = 7.18663
+
+[node name="Blob_04_wallblob" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.510809, -5, 1)
+radius = 1.70372
+
+[node name="Blob_05_entrenceblob" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4107, -3, -6.24127)
+radius = 5.2
+
+[node name="Blob_06_wallblob" type="CSGSphere3D" parent="Cave/Cutaway_cube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18319, -1.62461, -2.29609)
+radius = 1.70372
+
+[node name="Floor" type="CSGBox3D" parent="Cave"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+size = Vector3(40, 1, 40)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 0, 0)
+light_energy = 2.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_energy = 1.4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.319571, 0, 0.947562, 0, 1, 0, -0.947562, 0, 0.319571, 43.1833, 8, -2.22036)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]

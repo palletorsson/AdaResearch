@@ -1,4 +1,3 @@
-@tool
 class_name Teleport
 extends Node3D
 

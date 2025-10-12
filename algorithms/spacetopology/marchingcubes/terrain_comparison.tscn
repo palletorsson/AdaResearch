@@ -13,7 +13,7 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 light_energy = 0.8
 shadow_enabled = true
 
-[node name="HeightmapTerrain" type="Node3D" parent="."]
+[node name="HeightmapTerrain" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)
 script = ExtResource("1_comparison")
 RESOLUTION = 32
@@ -22,7 +22,7 @@ USE_HEIGHTMAP_MODE = true
 USE_ROBUST_INTERPOLATION = true
 PREVENT_DEGENERATE_TRIANGLES = true
 
-[node name="VolumetricTerrain" type="Node3D" parent="."]
+[node name="VolumetricTerrain" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0)
 script = ExtResource("1_comparison")
 RESOLUTION = 32

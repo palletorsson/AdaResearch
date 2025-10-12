@@ -1,5 +1,5 @@
 extends Node3D
-class_name ClusteringAlgorithms
+ 
 
 var time: float = 0.0
 var clustering_progress: float = 0.0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cojwx2ys8mn4k"]
+
+[ext_resource type="Script" path="res://commons/primitives/portal/portal.gd" id="1_portal"]
+
+[node name="Portal" type="Node3D"]
+script = ExtResource("1_portal")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

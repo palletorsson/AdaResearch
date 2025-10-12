@@ -1,5 +1,4 @@
 extends Node3D
-class_name RecommendationSystems
 
 var time: float = 0.0
 var recommendation_progress: float = 0.0

@@ -1,0 +1,112 @@
+[gd_scene load_steps=17 format=3 uid="uid://c8p4nan3r2k7q"]
+
+[ext_resource type="Script" uid="uid://iygoqynkwxol" path="res://algorithms/scene_slideshow/first_person_controller.gd" id="1"]
+[ext_resource type="Script" uid="uid://c4mi62heuhmmg" path="res://algorithms/scene_slideshow/scene_slideshow_manager.gd" id="2"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_c0kms"]
+[ext_resource type="Shader" uid="uid://dg1cd83krkd17" path="res://commons/resourses/shaders/fire.gdshader" id="4_158kl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+height = 1.8
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.2, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.8, 0.9, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_da4tr"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0kms"]
+render_priority = 0
+shader = ExtResource("3_c0kms")
+shader_parameter/modelColor = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(1, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 0.8
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_158kl"]
+material = SubResource("ShaderMaterial_c0kms")
+size = Vector3(100, 0.2, 100)
+subdivide_width = 12
+subdivide_depth = 12
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kdleb"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w4je4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_umnkw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4po6d"]
+noise = SubResource("FastNoiseLite_umnkw")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3hht6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdleb"]
+render_priority = 0
+shader = ExtResource("4_158kl")
+shader_parameter/Noise_Texture = SubResource("NoiseTexture2D_4po6d")
+shader_parameter/Coloring_Texture = SubResource("NoiseTexture2D_w4je4")
+shader_parameter/UV_Random = SubResource("NoiseTexture2D_3hht6")
+shader_parameter/Alpha_Texture = SubResource("NoiseTexture2D_kdleb")
+shader_parameter/Speed = Vector2(0.2, 0)
+shader_parameter/Emmision_Power = 1.0
+shader_parameter/Twist_Power = 1.0
+shader_parameter/Displace_Power = 0.5
+shader_parameter/Fresnel_Power = 1.0
+shader_parameter/Random_Power = 1.0
+shader_parameter/Fresnel_Color = Color(0, 0, 0, 1)
+shader_parameter/Tail_Displace_Power = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_w4je4"]
+material = SubResource("ShaderMaterial_kdleb")
+size = Vector2(100, 100)
+orientation = 1
+
+[node name="FirstPersonSlideshow" type="Node3D"]
+
+[node name="SceneSlideshowManager" type="Node" parent="."]
+script = ExtResource("2")
+starting_slide_index = 423
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+script = ExtResource("1")
+move_speed = 8.0
+sprint_speed = 15.0
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+current = true
+fov = 90.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.401367, 0)
+shape = SubResource("BoxShape3D_da4tr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.03665, 0)
+mesh = SubResource("BoxMesh_158kl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("QuadMesh_w4je4")

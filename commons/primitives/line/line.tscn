@@ -12,14 +12,14 @@ height = 0.7
 
 [node name="lineContainer" type="Node3D" parent="."]
 script = ExtResource("1_ejps8")
+line_thickness = 0.01
+line_color = Color(0.788235, 0.462745, 0.996078, 1)
 
 [node name="GrabSphere" parent="lineContainer" instance=ExtResource("2_c0ogx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
-freeze = true
 
 [node name="GrabSphere2" parent="lineContainer" instance=ExtResource("2_c0ogx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
-freeze = true
 
 [node name="line" type="MeshInstance3D" parent="lineContainer"]
 transform = Transform3D(-0.00396184, 0.999992, 0, -0.999992, -0.00396184, 0, 0, 0, 1, 0, 0, 0)
@@ -29,3 +29,4 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.340571)
+visible = false

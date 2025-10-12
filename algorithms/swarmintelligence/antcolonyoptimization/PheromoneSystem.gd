@@ -101,8 +101,8 @@ func get_pheromone_direction(world_pos: Vector3, type: String, perception_radius
 				strongest_value = pheromone_value
 				
 				# Convert grid position to world position
-				var world_x = x * terrain.size.x / resolution - terrain.size.x/2
-				var world_z = z * terrain.size.y / resolution - terrain.size.y/2
+				var world_x = x * terrain.terrain_size.x / resolution - terrain.terrain_size.x/2
+				var world_z = z * terrain.terrain_size.y / resolution - terrain.terrain_size.y/2
 				var world_y = terrain.get_height_at(world_x, world_z) + 0.1
 				
 				strongest_dir = Vector3(world_x, world_y, world_z) - world_pos

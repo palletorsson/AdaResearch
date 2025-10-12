@@ -25,7 +25,7 @@ enum SocketType {
 }
 
 # Tile definitions with socket connections
-class WFCTile:
+class WFC3DTile:
 	var name: String
 	var sockets: Array[SocketType] = []  # [North, South, East, West, Up, Down]
 	var weight: float = 1.0
@@ -41,15 +41,15 @@ class WFCTile:
 		color = col
 		can_rotate = can_rot
 
-var tile_library: Array[WFCTile] = []
+var tile_library: Array[WFC3DTile] = []
 var grid: Array = []  # 3D grid of cells
 var generation_queue: Array = []
 
 class GridCell:
 	var position: Vector3i
-	var possible_tiles: Array[WFCTile] = []
+	var possible_tiles: Array[WFC3DTile] = []
 	var collapsed: bool = false
-	var chosen_tile: WFCTile = null
+	var chosen_tile: WFC3DTile = null
 	var rotation: int = 0  # 0-3 for 90-degree rotations
 	
 	func _init(pos: Vector3i):
@@ -109,17 +109,17 @@ func setup_tile_library():
 	# SIMPLIFIED TILE SET FOR BETTER COMPATIBILITY
 	
 	# Empty/Air tile - can connect to anything
-	tile_library.append(WFCTile.new("Empty", 
+	tile_library.append(WFC3DTile.new("Empty", 
 		[SocketType.NONE, SocketType.NONE, SocketType.NONE, SocketType.NONE, SocketType.NONE, SocketType.NONE],
 		1.0, "none", Color.TRANSPARENT))
 	
 	# Basic floor - connects to other floors and walls
-	tile_library.append(WFCTile.new("Floor", 
+	tile_library.append(WFC3DTile.new("Floor", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		5.0, "floor", Color(0.6, 0.4, 0.2)))
 	
 	# Basic wall - connects to walls and floors
-	tile_library.append(WFCTile.new("Wall", 
+	tile_library.append(WFC3DTile.new("Wall", 
 		[SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.NONE, SocketType.WALL_SOLID],
 		3.0, "wall_straight", Color(0.7, 0.7, 0.7)))
 	
@@ -134,32 +134,32 @@ func add_queer_joyful_tiles():
 	"""Add simplified queer joyful tiles that are more compatible"""
 	
 	# RAINBOW DANCE FLOOR - acts like a floor
-	tile_library.append(WFCTile.new("Rainbow_Dance_Floor", 
+	tile_library.append(WFC3DTile.new("Rainbow_Dance_Floor", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		6.0, "rainbow_floor", Color(1.0, 0.3, 0.8), true))
 	
 	# PRIDE FLAG WALL - acts like a wall
-	tile_library.append(WFCTile.new("Pride_Flag_Wall", 
+	tile_library.append(WFC3DTile.new("Pride_Flag_Wall", 
 		[SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.NONE, SocketType.WALL_SOLID],
 		3.0, "pride_wall", Color(0.9, 0.4, 0.0), true))
 	
 	# COMMUNITY CIRCLE - acts like a floor
-	tile_library.append(WFCTile.new("Community_Circle", 
+	tile_library.append(WFC3DTile.new("Community_Circle", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		4.0, "community_circle", Color(0.7, 0.2, 0.9), true))
 	
 	# GLITTER FOUNTAIN - acts like a floor with some decoration
-	tile_library.append(WFCTile.new("Glitter_Fountain", 
+	tile_library.append(WFC3DTile.new("Glitter_Fountain", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		2.0, "glitter_fountain", Color(0.0, 0.8, 0.9), false))
 	
 	# LOVE ARCHWAY - acts like a wall with openings
-	tile_library.append(WFCTile.new("Love_Archway", 
+	tile_library.append(WFC3DTile.new("Love_Archway", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.WALL_SOLID, SocketType.WALL_SOLID, SocketType.NONE, SocketType.WALL_SOLID],
 		2.0, "love_archway", Color(1.0, 0.8, 0.0), false))
 	
 	# SAFE SPACE - acts like a floor
-	tile_library.append(WFCTile.new("Safe_Space", 
+	tile_library.append(WFC3DTile.new("Safe_Space", 
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		3.0, "safe_alcove", Color(0.4, 0.7, 0.4), true))
 	
@@ -293,7 +293,7 @@ func propagate_constraints(collapsed_cell: GridCell):
 			if neighbor == null or neighbor.collapsed:
 				continue
 			
-			var valid_tiles: Array[WFCTile] = []
+			var valid_tiles: Array[WFC3DTile] = []
 			
 			for tile in neighbor.possible_tiles:
 				if can_tiles_connect_with_rotation(current_cell.chosen_tile, current_cell.rotation, tile, 0, i):
@@ -332,7 +332,7 @@ func get_neighbor_cells(pos: Vector3i) -> Array:
 	
 	return neighbors
 
-func can_tiles_connect_with_rotation(tile1: WFCTile, rotation1: int, tile2: WFCTile, rotation2: int, direction: int) -> bool:
+func can_tiles_connect_with_rotation(tile1: WFC3DTile, rotation1: int, tile2: WFC3DTile, rotation2: int, direction: int) -> bool:
 	if tile1 == null or tile2 == null:
 		return true  # Allow null connections
 	
@@ -341,7 +341,7 @@ func can_tiles_connect_with_rotation(tile1: WFCTile, rotation1: int, tile2: WFCT
 	
 	return sockets_compatible(socket1, socket2)
 
-func get_rotated_socket(tile: WFCTile, rotation: int, direction: int) -> SocketType:
+func get_rotated_socket(tile: WFC3DTile, rotation: int, direction: int) -> SocketType:
 	# Only rotate horizontal directions (N=0, S=1, E=2, W=3)
 	if direction >= 4:  # Up/Down don't rotate
 		return tile.sockets[direction]

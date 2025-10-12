@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvx5w8ym3jk2p"]
+
+[ext_resource type="Script" path="res://commons/primitives/modernchair/modernchair.gd" id="1_modernchair"]
+
+[node name="ModernChair" type="MeshInstance3D"]
+script = ExtResource("1_modernchair")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 1, 0.5, 1.5)

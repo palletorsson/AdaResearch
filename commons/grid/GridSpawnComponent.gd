@@ -1,242 +1,149 @@
 # GridSpawnComponent.gd
-# Handles player spawn positioning based on map data
-# Uses spawn points from utilities or JSON spawn definitions
+# Simplified spawn system - reads from JSON map data only
+# Handles player spawn positioning and updates reset systems
 
 extends Node
 class_name GridSpawnComponent
 
 # References
-var structure_component: GridStructureComponent
-var utilities_component: GridUtilitiesComponent
 var data_component: GridDataComponent
 
-# Settings
-var cube_size: float = 1.0
-var gutter: float = 0.0
+# Default spawn position (fallback if no JSON spawn defined)
+const DEFAULT_SPAWN_POSITION = Vector3(2.5, 1.8, 2.5)
+const DEFAULT_SPAWN_ROTATION = Vector3(0.0, 0.0, 0.0)
 
 # Signals
 signal spawn_positioning_complete(spawn_position: Vector3)
 
 func _ready():
-	print("GridSpawnComponent: Initialized")
+	print("GridSpawnComponent: Initialized (simplified)")
 
-# Initialize with references and settings
-func initialize(struct_component: GridStructureComponent, util_component: GridUtilitiesComponent, data_comp: GridDataComponent, settings: Dictionary = {}):
-	structure_component = struct_component
-	utilities_component = util_component
+# Initialize with data component only
+func initialize(data_comp: GridDataComponent, settings: Dictionary = {}):
 	data_component = data_comp
-	
-	# Apply settings
-	cube_size = settings.get("cube_size", 1.0)
-	gutter = settings.get("gutter", 0.0)
-	
-	print("GridSpawnComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
+	print("GridSpawnComponent: Ready to handle spawning")
 
 # Handle player spawn positioning after map generation
 func handle_player_spawn():
-	print("GridSpawnComponent: Handling player spawn positioning...")
-	
+ 
+	print("GridSpawnComponent: STARTING SPAWN POSITIONING")
+	 
+
 	# Wait for VR system to be ready
 	await get_tree().process_frame
 	await get_tree().process_frame
-	await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
-	
-	# Try grid-based spawn points first (utility "s" type)
-	var spawn_point_position = _find_grid_spawn_point()
-	
-	if spawn_point_position != Vector3.ZERO:
-		print("GridSpawnComponent: Found grid spawn point at: %s" % spawn_point_position)
-		_position_player_at_grid_spawn(spawn_point_position)
-	else:
-		# Fallback to JSON spawn points
-		_handle_json_spawn_points()
 
-# Find spawn points from utility grid (type "s")
-func _find_grid_spawn_point() -> Vector3:
-	if not utilities_component:
-		return Vector3.ZERO
-	
-	# Look for spawn point utilities in the grid
-	var utility_positions = utilities_component.get_all_utility_positions()
-	
-	for pos in utility_positions:
-		var utility = utilities_component.get_utility_at(pos.x, pos.y, pos.z)
-		if utility and utility.get_meta("spawn_name", "") != "":
-			# Found a spawn point utility
-			return Vector3(pos.x, pos.y, pos.z)
-	
-	return Vector3.ZERO
+	# Get spawn data from map JSON
+	var spawn_data = _get_spawn_data_from_json()
 
-# Position player at grid-based spawn point
-func _position_player_at_grid_spawn(grid_position: Vector3):
-	var vr_origin = _find_vr_origin()
-	if not vr_origin:
-		print("GridSpawnComponent: WARNING - Could not find VR origin")
-		return
-	
-	# Get spawn properties from utility or JSON
-	var spawn_height = _get_spawn_height_from_data()
-	var spawn_rotation = _get_spawn_rotation_from_data()
-	
-	# Convert grid coordinates to world coordinates
-	var total_size = cube_size + gutter
-	var world_position = grid_position * total_size
-	
-	# Apply reasonable height constraints
-	spawn_height = clamp(spawn_height, 1.5, 3.0)
-	var final_position = Vector3(world_position.x, spawn_height, world_position.z)
-	
-	# Apply position and rotation
-	vr_origin.global_position = final_position
-	vr_origin.global_rotation_degrees = Vector3(0, spawn_rotation, 0)
-	
-	print("GridSpawnComponent: ✓ Player positioned at grid spawn")
-	print("  Grid position: %s" % grid_position)
-	print("  World position: %s (height: %f)" % [final_position, spawn_height])
-	print("  Rotation: %f degrees" % spawn_rotation)
-	
-	_apply_spawn_transition_effect(vr_origin)
-	spawn_positioning_complete.emit(final_position)
+	print("GridSpawnComponent: Spawn data retrieved:")
+	print("  Position: %s" % spawn_data.position)
+	print("  Rotation: %s" % spawn_data.rotation)
+	print("  Source: %s" % spawn_data.source)
 
-# Handle JSON-defined spawn points as fallback
-func _handle_json_spawn_points():
-	print("GridSpawnComponent: No grid spawn points found, checking JSON spawn points...")
-	
-	if not data_component:
-		_apply_default_spawn_position()
-		return
-	
-	var spawn_points = data_component.get_spawn_points()
-	if spawn_points.is_empty():
-		print("GridSpawnComponent: No JSON spawn points defined, using default")
-		_apply_default_spawn_position()
-		return
-	
-	# Use default spawn point from JSON
-	var default_spawn = spawn_points.get("default", {})
-	if not default_spawn.is_empty():
-		_position_player_at_json_spawn(default_spawn)
-	else:
-		_apply_default_spawn_position()
+	# Position the player
+	_position_player(spawn_data)
 
-# Position player at JSON-defined spawn point
-func _position_player_at_json_spawn(spawn_data: Dictionary):
-	var spawn_position = spawn_data.get("position", [0, 1.5, 0])
-	var spawn_rotation = spawn_data.get("rotation", [0, 0, 0])
-	
-	# Convert arrays to Vector3
-	var world_position = Vector3(spawn_position[0], spawn_position[1], spawn_position[2])
-	var world_rotation = Vector3(spawn_rotation[0], spawn_rotation[1], spawn_rotation[2])
-	
-	print("GridSpawnComponent: Positioning player at JSON spawn - Position: %s, Rotation: %s" % [world_position, world_rotation])
-	
-	var vr_origin = _find_vr_origin()
-	if not vr_origin:
-		print("GridSpawnComponent: WARNING - Could not find VR origin")
-		return
-	
-	# Apply position (spawn points are in world coordinates)
-	vr_origin.global_position = world_position
-	vr_origin.global_rotation_degrees = world_rotation
-	
-	print("GridSpawnComponent: ✓ Player positioned at JSON spawn")
-	
-	_apply_spawn_transition_effect(vr_origin)
-	spawn_positioning_complete.emit(world_position)
+	# Update reset systems
+	_update_reset_systems(spawn_data.position)
 
-# Apply default spawn position when no spawn points are defined
-func _apply_default_spawn_position():
-	var vr_origin = _find_vr_origin()
-	if not vr_origin:
-		return
-	
-	# Position player at a reasonable default location
-	var default_position = Vector3(0.5, 4, 0.5)  # Custom spawn position
-	vr_origin.global_position = default_position
-	vr_origin.global_rotation_degrees = Vector3.ZERO
-	
-	print("GridSpawnComponent: Applied default spawn position: %s" % default_position)
-	spawn_positioning_complete.emit(default_position)
+ 
+	print("GridSpawnComponent: SPAWN POSITIONING COMPLETE")
+ 
 
-# Get spawn height from utility metadata or JSON
-func _get_spawn_height_from_data() -> float:
-	# Try to get from utility definition first
+# Get spawn data from JSON (or use defaults)
+func _get_spawn_data_from_json() -> Dictionary:
+	"""Returns spawn data with position and rotation"""
+
+	# Try to get from map JSON
 	if data_component:
-		var utility_definitions = data_component.get_utility_definitions()
-		var spawn_def = utility_definitions.get("s", {})
-		var properties = spawn_def.get("properties", {})
-		
-		if properties.has("height"):
-			return float(properties["height"])
-	
-	return 1.8  # Default VR player height
+		var spawn_points = data_component.get_spawn_points()
+		if spawn_points and not spawn_points.is_empty():
+			var default_spawn = spawn_points.get("default", {})
+			if not default_spawn.is_empty():
+				var pos_array = default_spawn.get("position", [DEFAULT_SPAWN_POSITION.x, DEFAULT_SPAWN_POSITION.y, DEFAULT_SPAWN_POSITION.z])
+				var rot_array = default_spawn.get("rotation", [DEFAULT_SPAWN_ROTATION.x, DEFAULT_SPAWN_ROTATION.y, DEFAULT_SPAWN_ROTATION.z])
 
-# Get spawn rotation from utility metadata or JSON
-func _get_spawn_rotation_from_data() -> float:
-	# Try to get from utility definition first
-	if data_component:
-		var utility_definitions = data_component.get_utility_definitions()
-		var spawn_def = utility_definitions.get("s", {})
-		var properties = spawn_def.get("properties", {})
-		
-		if properties.has("player_rotation"):
-			return float(properties["player_rotation"])
-	
-	return 0.0  # Default rotation
+				var spawn_data = {
+					"position": Vector3(pos_array[0], pos_array[1], pos_array[2]),
+					"rotation": Vector3(rot_array[0], rot_array[1], rot_array[2]),
+					"source": "json"
+				}
+				print("GridSpawnComponent: Using JSON spawn point: %s" % spawn_data.position)
+				return spawn_data
+
+	# Fallback to default
+	print("GridSpawnComponent: Using default spawn position: %s" % DEFAULT_SPAWN_POSITION)
+	return {
+		"position": DEFAULT_SPAWN_POSITION,
+		"rotation": DEFAULT_SPAWN_ROTATION,
+		"source": "default"
+	}
+
+# Position the player at spawn point
+func _position_player(spawn_data: Dictionary):
+	"""Set player position and rotation"""
+	var vr_origin = _find_vr_origin()
+	if not vr_origin:
+		print("GridSpawnComponent: ERROR - Could not find VR origin")
+		return
+
+	var position = spawn_data.position
+	var rotation = spawn_data.rotation
+
+	print("GridSpawnComponent: VR Origin found: %s" % vr_origin.name)
+	print("GridSpawnComponent: Current position BEFORE: %s" % vr_origin.global_position)
+
+	vr_origin.global_position = position
+	vr_origin.global_rotation_degrees = rotation
+
+	print("GridSpawnComponent: Set position TO: %s" % position)
+	print("GridSpawnComponent: Actual position AFTER: %s" % vr_origin.global_position)
+
+	# Wait a frame and check if position stuck
+	await get_tree().process_frame
+	print("GridSpawnComponent: Position after 1 frame: %s" % vr_origin.global_position)
+
+	print("GridSpawnComponent: ✓ Player spawned at %s (rotation: %s, source: %s)" % [position, rotation, spawn_data.source])
+
+	# Emit completion signal
+	spawn_positioning_complete.emit(position)
 
 # Find VR origin in the scene
 func _find_vr_origin() -> Node3D:
 	var scene_root = get_tree().current_scene
 	if not scene_root:
 		return null
-	
+
 	# Look for common VR origin node names
 	var origin_names = ["XROrigin3D", "VROrigin", "ARVROrigin", "Origin", "XRPlayer"]
-	
+
 	for name in origin_names:
 		var origin = scene_root.find_child(name, true, false)
 		if origin and origin is Node3D:
-			print("GridSpawnComponent: Found VR origin: %s" % origin.name)
 			return origin as Node3D
-	
-	print("GridSpawnComponent: Could not find VR origin")
+
 	return null
 
-# Apply spawn transition effect
-func _apply_spawn_transition_effect(vr_origin: Node3D):
-	# Wait for everything to settle
-	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	# Add a gentle camera movement to help orient the player
-	_apply_gentle_orientation_cue(vr_origin)
-	
-	print("GridSpawnComponent: Spawn transition complete")
+# Update reset systems with new spawn position
+func _update_reset_systems(spawn_position: Vector3):
+	"""Update all reset systems to use this spawn position"""
+	var scene_root = get_tree().current_scene
+	if not scene_root:
+		return
 
-# Gentle orientation cue for player
-func _apply_gentle_orientation_cue(vr_origin: Node3D):
-	var tween = create_tween()
-	var original_position = vr_origin.global_position
-	
-	# Gentle up-down motion to indicate spawn
-	tween.tween_property(vr_origin, "global_position", original_position + Vector3(0, 0.1, 0), 0.3)
-	tween.tween_property(vr_origin, "global_position", original_position, 0.3)
-	
-	print("GridSpawnComponent: Applied orientation cue")
+	# Find and update reset systems
+	var reset_nodes = [
+		scene_root.find_child("ResetArea", true, false),
+		scene_root.find_child("ResetArea3D", true, false),
+		scene_root.find_child("Reset", true, false),
+	]
 
-# Get spawn point info for debugging
-func get_spawn_info() -> Dictionary:
-	var info = {
-		"grid_spawn_found": _find_grid_spawn_point() != Vector3.ZERO,
-		"json_spawn_available": false,
-		"spawn_height": _get_spawn_height_from_data(),
-		"spawn_rotation": _get_spawn_rotation_from_data()
-	}
-	
-	if data_component:
-		var spawn_points = data_component.get_spawn_points()
-		info["json_spawn_available"] = not spawn_points.is_empty()
-		info["json_spawn_points"] = spawn_points.keys()
-	
-	return info
+	for reset_node in reset_nodes:
+		if reset_node and reset_node.has_method("set_reset_position"):
+			reset_node.set_reset_position(spawn_position)
+			print("GridSpawnComponent: Updated %s to spawn position" % reset_node.name)
+			return
+
+	print("GridSpawnComponent: No reset system found (this is okay)")

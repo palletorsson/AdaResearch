@@ -335,31 +335,42 @@ func _load_map_into_grid_system(grid_system: Node, map_name: String) -> bool:
 func _handle_spawn_points(scene: Node):
 	if not scene:
 		return
-	
-	print("VRGridSystemManager: Setting up default player positioning")
-	
+
+	print("VRGridSystemManager: Setting up player spawn positioning")
+
 	# Wait a frame for grid to be fully initialized
 	await get_tree().process_frame
-	
-	# Use default positioning instead of spawn points
+
+	# Let the GridSystem's spawn component handle the positioning
+	# It will read from map JSON or use defaults
+	if current_grid_system and current_grid_system.has_node("GridSpawnComponent"):
+		print("VRGridSystemManager: Using GridSpawnComponent for positioning")
+		# GridSpawnComponent will be called automatically by GridSystem
+		return
+
+	# Fallback to default positioning only if no spawn component exists
+	print("VRGridSystemManager: No GridSpawnComponent found, using fallback positioning")
 	_position_player_at_default_location()
 
 # Position player at a default location
 func _position_player_at_default_location():
+	print("!!!! VRGridSystemManager: _position_player_at_default_location() CALLED !!!!")
+	print("!!!! THIS SHOULD NOT HAPPEN IF GridSpawnComponent EXISTS !!!!")
+
 	# Find the VR origin/staging in the scene
 	var vr_origin = _find_vr_origin()
 	if not vr_origin:
 		print("VRGridSystemManager: WARNING - Could not find VR origin to position player")
 		return
-	
+
 	# Set default position (slightly elevated and back from center)
-	var default_position = Vector3(0.5, 4, 0.5)  # Custom spawn position
+	var default_position = Vector3(1.5, 16, 1.5)  # Custom spawn position
 	var default_rotation = Vector3(0, 0, 0)    # Facing forward
-	
+
 	# Position the VR origin
 	vr_origin.global_position = default_position
 	vr_origin.global_rotation_degrees = default_rotation
-	
+
 	print("VRGridSystemManager: Positioned player at default location - Position: %s" % default_position)
 
 # Find VR origin in the scene

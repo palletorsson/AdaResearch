@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://p47kd7m002bh"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+
+[node name="ParallelLines" type="Node3D"]
+
+[node name="Line1" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(0.258819, 0, 0.965926, 0.965926, 0, -0.258819, 0, 1, 0, -0.0648265, 0, 0)
+
+[node name="Line2" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(0.258819, -1.13133e-08, 0.965926, 0.965926, -4.2222e-08, -0.258819, 4.37114e-08, 1, 0, 0.204004, 0, 0)
+
+[node name="Line3" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(0.258819, -1.13133e-08, 0.965926, 0.965926, -4.2222e-08, -0.258819, 4.37114e-08, 1, 0, 0.305252, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304004, 0.1, 0)
+visible = false
+text = "Parallel Lines"
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.927367, 0.374153, 0, -0.374153, 0.927367, 0, 0.912768, 1.88128)

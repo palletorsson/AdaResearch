@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2ku2yc2n6blk"]
+
+[ext_resource type="Script" uid="uid://u8sdqqh05kjg" path="res://algorithms/primitives/cave/cave.gd" id="1_f1oj2"]
+
+[node name="Cave" type="Node3D"]
+script = ExtResource("1_f1oj2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.27714)

@@ -1,5 +1,5 @@
 extends Node3D
-class_name AnomalyDetection
+  
 
 var time: float = 0.0
 var detection_progress: float = 0.0

@@ -1,5 +1,4 @@
 extends Node3D
-class_name NaturalLanguageProcessingNLP
 
 var time: float = 0.0
 var processing_progress: float = 0.0

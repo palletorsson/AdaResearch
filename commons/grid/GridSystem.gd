@@ -17,6 +17,8 @@ var structure_component: GridStructureComponent
 var utilities_component: GridUtilitiesComponent
 var interactables_component: GridInteractablesComponent
 var spawn_component: GridSpawnComponent
+var ceiling_component: GridCeilingComponent
+var audio_component: GridAudioComponent
 
 # Scene references
 @onready var base_cube = $CubeScene
@@ -82,26 +84,34 @@ func _initialize_components():
 	data_component = GridDataComponent.new()
 	data_component.name = "GridDataComponent"
 	add_child(data_component)
-	
+
 	structure_component = GridStructureComponent.new()
 	structure_component.name = "GridStructureComponent"
 	add_child(structure_component)
-	
+
 	utilities_component = GridUtilitiesComponent.new()
 	utilities_component.name = "GridUtilitiesComponent"
 	add_child(utilities_component)
-	
+
 	interactables_component = GridInteractablesComponent.new()
 	interactables_component.name = "GridInteractablesComponent"
 	add_child(interactables_component)
-	
+
 	spawn_component = GridSpawnComponent.new()
 	spawn_component.name = "GridSpawnComponent"
 	add_child(spawn_component)
-	
+
+	ceiling_component = GridCeilingComponent.new()
+	ceiling_component.name = "GridCeilingComponent"
+	add_child(ceiling_component)
+
+	audio_component = GridAudioComponent.new()
+	audio_component.name = "GridAudioComponent"
+	add_child(audio_component)
+
 	# Connect component signals
 	_connect_component_signals()
-	
+
 	print("GridSystem: ✅ All components initialized")
 
 # Connect signals from components
@@ -123,6 +133,15 @@ func _connect_component_signals():
 	
 	# Spawn component signals
 	spawn_component.spawn_positioning_complete.connect(_on_spawn_complete)
+
+	# Ceiling component signals
+	ceiling_component.ceiling_generation_complete.connect(_on_ceiling_complete)
+
+	# Audio component signals
+	audio_component.audio_initialized.connect(_on_audio_initialized)
+	audio_component.ambient_started.connect(_on_ambient_started)
+	audio_component.ambient_stopped.connect(_on_ambient_stopped)
+	audio_component.audio_error.connect(_on_audio_error)
 
 # Load map data using data component
 func _load_map_data():
@@ -149,7 +168,16 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	structure_component.initialize(self, base_cube, component_settings)
 	utilities_component.initialize(self, structure_component, component_settings)
 	interactables_component.initialize(self, structure_component, utilities_component, data_component, component_settings)
-	spawn_component.initialize(structure_component, utilities_component, data_component, component_settings)
+	spawn_component.initialize(data_component, component_settings)
+	ceiling_component.initialize(self, data_component, component_settings)
+	audio_component.initialize(self, data_component)
+
+	# Set sequence ID if available from scene data
+	var current_sequence = get_meta("current_sequence", {})
+	if not current_sequence.is_empty():
+		var sequence_name = current_sequence.get("sequence_name", "")
+		if not sequence_name.is_empty():
+			audio_component.set_sequence_id(sequence_name)
 	
 	# Start grid generation
 	_generate_grid()
@@ -211,8 +239,27 @@ func _on_utilities_complete(utility_count: int):
 # Handle interactables generation completion
 func _on_interactables_complete(interactable_count: int):
 	print("GridSystem: Interactables generation complete (%d interactables)" % interactable_count)
-	
-	# Handle player spawn positioning
+
+	# Generate ceiling if configured
+	_handle_ceiling_generation()
+
+# Handle ceiling generation
+func _handle_ceiling_generation():
+	var settings = data_component.get_settings()
+	var ceiling_config = settings.get("ceiling", {})
+
+	if not ceiling_config.is_empty() or settings.has("enable_ceiling"):
+		print("GridSystem: Generating ceiling...")
+		ceiling_component.generate_ceiling(ceiling_config)
+	else:
+		# Skip ceiling, go directly to spawn
+		call_deferred("_handle_player_spawn")
+
+# Handle ceiling generation completion
+func _on_ceiling_complete(tile_count: int, light_count: int):
+	print("GridSystem: Ceiling generation complete (%d tiles, %d lights)" % [tile_count, light_count])
+
+	# Now handle player spawn positioning
 	call_deferred("_handle_player_spawn")
 
 # Handle player spawn positioning
@@ -223,10 +270,31 @@ func _handle_player_spawn():
 # Handle spawn positioning completion
 func _on_spawn_complete(spawn_position: Vector3):
 	print("GridSystem: Spawn positioning complete at %s" % spawn_position)
-	
+
+	# Start ambient audio after everything is set up
+	call_deferred("_handle_audio_start")
+
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")
 	emit_signal("map_generation_complete")
+
+# Handle audio start
+func _handle_audio_start():
+	print("GridSystem: Starting ambient audio...")
+	audio_component.start_ambient()
+
+# Audio component signal handlers
+func _on_audio_initialized():
+	print("GridSystem: Audio component initialized")
+
+func _on_ambient_started(preset_name: String):
+	print("GridSystem: 🎵 Ambient audio started - %s" % preset_name)
+
+func _on_ambient_stopped():
+	print("GridSystem: 🎵 Ambient audio stopped")
+
+func _on_audio_error(error_message: String):
+	print("GridSystem: ⚠️ Audio error: %s" % error_message)
 
 # Handle utility activation
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
@@ -380,7 +448,13 @@ func _clear_all_components():
 	
 	if interactables_component:
 		interactables_component.clear_interactables()
-	
+
+	if ceiling_component:
+		ceiling_component.clear_ceiling()
+
+	if audio_component:
+		audio_component.cleanup()
+
 	generation_in_progress = false
 
 # Public API methods
@@ -394,7 +468,9 @@ func get_current_map_info() -> Dictionary:
 		"objects": {
 			"cubes": structure_component.get_cube_count() if structure_component else 0,
 			"utilities": utilities_component.get_utility_count() if utilities_component else 0,
-			"interactables": interactables_component.get_interactable_count() if interactables_component else 0
+			"interactables": interactables_component.get_interactable_count() if interactables_component else 0,
+			"ceiling_tiles": ceiling_component.ceiling_tiles.size() if ceiling_component else 0,
+			"ceiling_lights": ceiling_component.ceiling_lights.size() if ceiling_component else 0
 		},
 		"generation_complete": not generation_in_progress
 	}
@@ -419,6 +495,12 @@ func get_interactables_component() -> GridInteractablesComponent:
 
 func get_spawn_component() -> GridSpawnComponent:
 	return spawn_component
+
+func get_ceiling_component() -> GridCeilingComponent:
+	return ceiling_component
+
+func get_audio_component() -> GridAudioComponent:
+	return audio_component
 
 # Check if map is fully loaded and generated
 func is_map_ready() -> bool:
@@ -522,8 +604,9 @@ func get_error_info() -> Dictionary:
 
 # Check if all components are properly initialized
 func _are_components_initialized() -> bool:
-	return (data_component != null and 
-			structure_component != null and 
-			utilities_component != null and 
-			interactables_component != null and 
-			spawn_component != null)
+	return (data_component != null and
+			structure_component != null and
+			utilities_component != null and
+			interactables_component != null and
+			spawn_component != null and
+			ceiling_component != null)

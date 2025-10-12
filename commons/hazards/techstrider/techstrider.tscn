@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsl8e4h1liret"]
+
+[ext_resource type="Script" uid="uid://dkjxnax3cpijd" path="res://commons/hazards/techstrider/techstrider.gd" id="1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.6, 0.6, 0.65, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_2"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.4, 0.45, 0.5, 1)
+metallic = 0.9
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2"]
+top_radius = 0.0
+bottom_radius = 0.08
+height = 0.2
+
+[node name="Walker" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Leg1" type="Node3D" parent="."]
+
+[node name="Joint1" type="MeshInstance3D" parent="Leg1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment1" type="MeshInstance3D" parent="Leg1/Joint1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Joint2" type="MeshInstance3D" parent="Leg1/Joint1/Segment1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment2" type="MeshInstance3D" parent="Leg1/Joint1/Segment1/Joint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Foot" type="MeshInstance3D" parent="Leg1/Joint1/Segment1/Joint2/Segment2"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("CylinderMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Leg2" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 0, 0, 0)
+
+[node name="Joint1" type="MeshInstance3D" parent="Leg2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment1" type="MeshInstance3D" parent="Leg2/Joint1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Joint2" type="MeshInstance3D" parent="Leg2/Joint1/Segment1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment2" type="MeshInstance3D" parent="Leg2/Joint1/Segment1/Joint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Foot" type="MeshInstance3D" parent="Leg2/Joint1/Segment1/Joint2/Segment2"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("CylinderMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Leg3" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0)
+
+[node name="Joint1" type="MeshInstance3D" parent="Leg3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment1" type="MeshInstance3D" parent="Leg3/Joint1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Joint2" type="MeshInstance3D" parent="Leg3/Joint1/Segment1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("SphereMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Segment2" type="MeshInstance3D" parent="Leg3/Joint1/Segment1/Joint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="Foot" type="MeshInstance3D" parent="Leg3/Joint1/Segment1/Joint2/Segment2"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("CylinderMesh_2")
+surface_material_override/0 = SubResource("StandardMaterial3D_2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.27016)

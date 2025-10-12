@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://iuwanynvb2jq"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/example_3_7_oscillator_objects_vr.gd" id="1_a1plm"]
+
+[node name="Example37OscillatorsVR" type="Node3D"]
+script = ExtResource("1_a1plm")

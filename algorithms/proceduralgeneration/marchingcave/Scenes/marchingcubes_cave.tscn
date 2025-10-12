@@ -1,0 +1,141 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkjo2r38vn7pq"]
+
+[ext_resource type="Material" uid="uid://c16m6psb2fle8" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
+[ext_resource type="Script" uid="uid://c2aji3u2bgmv8" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd" id="2_kc6u2"]
+
+[sub_resource type="Environment" id="Environment_q07dc"]
+background_mode = 1
+background_color = Color(0.05, 0.04, 0.03, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.15, 0.12, 0.1, 1)
+ambient_light_energy = 0.15
+ssao_enabled = true
+ssao_radius = 12.0
+ssao_intensity = 6.0
+ssao_power = 2.5
+ssao_detail = 0.5
+ssao_horizon = 0.15
+ssao_sharpness = 0.6
+ssao_light_affect = 0.8
+ssao_ao_channel_affect = 1.0
+glow_enabled = true
+glow_intensity = 2.5
+glow_strength = 0.8
+glow_bloom = 0.5
+glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(0.08, 0.06, 0.05, 1)
+fog_light_energy = 0.1
+fog_density = 0.015
+fog_height = -20.0
+fog_height_density = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.08
+volumetric_fog_albedo = Color(0.1, 0.08, 0.06, 1)
+volumetric_fog_emission = Color(0.02, 0.015, 0.01, 1)
+volumetric_fog_emission_energy = 0.3
+volumetric_fog_gi_inject = 0.3
+volumetric_fog_anisotropy = 0.2
+volumetric_fog_length = 40.0
+volumetric_fog_detail_spread = 8.0
+volumetric_fog_ambient_inject = 0.1
+volumetric_fog_temporal_reprojection_amount = 0.8
+adjustment_enabled = true
+adjustment_brightness = 0.85
+adjustment_contrast = 1.15
+adjustment_saturation = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_gptaj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_gptaj")
+script = ExtResource("2_kc6u2")
+noise_scale = 3.5
+noise_offset = Vector3(200, -120, 150)
+iso_level = 0.85
+chunk_scale = 1200.0
+use_fallback_cave = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, -15, 25, 20)
+light_color = Color(0.8, 0.65, 0.4, 1)
+light_energy = 0.15
+light_indirect_energy = 0.05
+light_volumetric_fog_energy = 0.4
+shadow_enabled = true
+shadow_bias = 0.08
+shadow_normal_bias = 2.5
+shadow_opacity = 0.7
+shadow_blur = 10.0
+directional_shadow_mode = 1
+directional_shadow_max_distance = 500.0
+
+[node name="OmniLight3D_Torch1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 8, -15)
+light_color = Color(1, 0.6, 0.2, 1)
+light_energy = 3.5
+light_indirect_energy = 1.2
+light_volumetric_fog_energy = 6.0
+omni_range = 35.0
+omni_attenuation = 2.0
+shadow_enabled = true
+shadow_opacity = 0.6
+
+[node name="OmniLight3D_Torch2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5, 10)
+light_color = Color(1, 0.55, 0.15, 1)
+light_energy = 2.8
+light_indirect_energy = 0.9
+light_volumetric_fog_energy = 5.0
+omni_range = 30.0
+omni_attenuation = 2.2
+shadow_enabled = true
+shadow_opacity = 0.5
+
+[node name="OmniLight3D_Bio1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5, -20)
+light_color = Color(0.2, 0.8, 0.6, 1)
+light_energy = 2.0
+light_indirect_energy = 1.5
+light_volumetric_fog_energy = 4.5
+omni_range = 25.0
+omni_attenuation = 1.8
+shadow_enabled = false
+
+[node name="OmniLight3D_Bio2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -8, 25)
+light_color = Color(0.3, 0.6, 0.9, 1)
+light_energy = 1.8
+light_indirect_energy = 1.2
+light_volumetric_fog_energy = 4.0
+omni_range = 28.0
+omni_attenuation = 2.0
+shadow_enabled = false
+
+[node name="SpotLight3D_Crevice" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -10, 20, -5)
+light_color = Color(0.5, 0.4, 0.3, 1)
+light_energy = 1.2
+light_volumetric_fog_energy = 3.5
+spot_range = 40.0
+spot_attenuation = 1.5
+spot_angle = 35.0
+spot_angle_attenuation = 2.0
+shadow_enabled = true
+shadow_opacity = 0.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q07dc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, -15, 35, 50)
+fov = 70.0
+near = 0.5
+far = 500.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
+visible = false
+mesh = SubResource("BoxMesh_gptaj")

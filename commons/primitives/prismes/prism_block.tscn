@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd68kknmdo6vb"]
+
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="1_d57hu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc12h"]
+render_priority = 0
+shader = ExtResource("1_d57hu")
+shader_parameter/fill_color = Color(0.2, 0.3, 0.8, 0.7)
+shader_parameter/wireframe_color = Color(0, 1, 1, 1)
+shader_parameter/wireframe_width = 2.0
+shader_parameter/wireframe_brightness = 2.0
+shader_parameter/show_only_wireframe = false
+
+[sub_resource type="PrismMesh" id="PrismMesh_1ginq"]
+material = SubResource("ShaderMaterial_lc12h")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_11eks"]
+data = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, -0.5, 0, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="PrismBlock" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PrismMesh_1ginq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_11eks")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.11999)

@@ -41,7 +41,7 @@ var liquid_types = {
 }
 
 # Particle class
-class Particle:
+class LiquidParticle:
 	var position: Vector3
 	var velocity: Vector3
 	var acceleration: Vector3
@@ -118,7 +118,7 @@ func _initialize_particles():
 			randf_range(-half_container.z / 2, half_container.z / 2)
 		)
 		
-		var particle = Particle.new(position, liquid_key, instance)
+		var particle = LiquidParticle.new(position, liquid_key, instance)
 		particle_data.append(particle)
 		
 		# Set particle color
@@ -429,7 +429,7 @@ func add_liquid(position: Vector3, type: String, amount: int):
 		
 		var particle_position = position + random_offset
 		
-		var particle = Particle.new(particle_position, type, instance)
+		var particle = LiquidParticle.new(particle_position, type, instance)
 		particle_data.append(particle)
 		
 		# Set particle color

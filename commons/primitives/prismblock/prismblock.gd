@@ -1,96 +1,91 @@
 # PrismBlock.gd - Rectangular base tapering to central ridge
 extends Node3D
+const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
+const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
+
 
 var base_color: Color = Color(0.6, 0.8, 1.0)
+var _mesh_instance: MeshInstance3D
+var _collision_body: StaticBody3D
 
 func _ready():
 	create_prism_block()
 
-func create_prism_block():
-	clear_children()
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+func create_prism_block() -> void:
+	_teardown()
+	var geometry := _prism_geometry()
+	var material = GridMaterialFactory.make(base_color, {
+		"edge_width": 1.4,
+		"emission_strength": 0.9
+	})
+	_mesh_instance = PrimitiveMeshBuilder.build_mesh_instance(
+		geometry["vertices"],
+		geometry["faces"],
+		{
+			"name": "PrismBlock",
+			"material": material
+		}
+	)
+	add_child(_mesh_instance)
+	_collision_body = _build_collision_body(geometry["vertices"])
+	add_child(_collision_body)
 
-	var base_length = 0.8
-	var base_width = 0.4
-	var height = 0.35
+func _prism_geometry() -> Dictionary:
+	var base_length := 0.8
+	var base_width := 0.4
+	var height := 0.35
+	var half_l := base_length * 0.5
+	var half_w := base_width * 0.5
+	var ridge_offset := 0.15
+	var ridge_height := height
+	var vertices: Array[Vector3] = [
+		Vector3(-half_l, 0, -half_w),
+		Vector3(half_l, 0, -half_w),
+		Vector3(half_l, 0, half_w),
+		Vector3(-half_l, 0, half_w),
+		Vector3(-ridge_offset, ridge_height, 0),
+		Vector3(ridge_offset, ridge_height, 0)
+	]
+	var faces: Array = [
+		{ "indices": [0, 1, 2], "normal": Vector3.DOWN },
+		{ "indices": [0, 2, 3], "normal": Vector3.DOWN },
+		[0, 1, 5],
+		[0, 5, 4],
+		[1, 2, 5],
+		[2, 3, 4],
+		[4, 5, 2],
+		[3, 0, 4]
+	]
+	return {
+		"vertices": vertices,
+		"faces": faces
+	}
 
-	var half_l = base_length * 0.5
-	var half_w = base_width * 0.5
-
-	var p0 = Vector3(-half_l, 0, -half_w)
-	var p1 = Vector3(half_l, 0, -half_w)
-	var p2 = Vector3(half_l, 0, half_w)
-	var p3 = Vector3(-half_l, 0, half_w)
-
-	var ridge_offset = 0.15
-	var ridge_height = height
-	var ridge_left = Vector3(-ridge_offset, ridge_height, 0)
-	var ridge_right = Vector3(ridge_offset, ridge_height, 0)
-
-	add_quad(st, p0, p1, p2, p3, Vector3.DOWN)
-	add_triangle(st, p0, p1, ridge_right)
-	add_triangle(st, p0, ridge_right, ridge_left)
-	add_triangle(st, p1, p2, ridge_right)
-	add_triangle(st, p2, p3, ridge_left)
-	add_triangle(st, ridge_left, ridge_right, p2)
-	add_triangle(st, p3, p0, ridge_left)
-
-	st.generate_normals()
-	var mesh = st.commit()
-
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = mesh
-	mesh_instance.name = "PrismBlock"
-	apply_material(mesh_instance, base_color)
-	add_child(mesh_instance)
-
-	var body = StaticBody3D.new()
-	var shape = CollisionShape3D.new()
-	var convex = ConvexPolygonShape3D.new()
-	convex.points = PackedVector3Array([p0, p1, p2, p3, ridge_left, ridge_right])
+func _build_collision_body(vertices: Array[Vector3]) -> StaticBody3D:
+	var body := StaticBody3D.new()
+	var shape := CollisionShape3D.new()
+	var convex := ConvexPolygonShape3D.new()
+	convex.points = PackedVector3Array(vertices)
 	shape.shape = convex
 	body.add_child(shape)
-	add_child(body)
+	return body
 
-func add_quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, normal_override: Vector3 = Vector3.ZERO):
-	add_triangle(st, a, b, c, normal_override)
-	add_triangle(st, a, c, d, normal_override)
+func _teardown() -> void:
+	if _mesh_instance:
+		if _mesh_instance.get_parent() == self:
+			remove_child(_mesh_instance)
+		_mesh_instance.queue_free()
+		_mesh_instance = null
+	if _collision_body:
+		if _collision_body.get_parent() == self:
+			remove_child(_collision_body)
+		_collision_body.queue_free()
+		_collision_body = null
 
-func add_triangle(st: SurfaceTool, v0: Vector3, v1: Vector3, v2: Vector3, normal_override: Vector3 = Vector3.ZERO):
-	var normal = normal_override.normalized() if normal_override != Vector3.ZERO else (v1 - v0).cross(v2 - v0).normalized()
-	st.set_normal(normal)
-	st.add_vertex(v0)
-	st.set_normal(normal)
-	st.add_vertex(v1)
-	st.set_normal(normal)
-	st.add_vertex(v2)
-
-func apply_material(mesh_instance: MeshInstance3D, color: Color):
-	var material = ShaderMaterial.new()
-	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
-	if shader:
-		material.shader = shader
-		material.set_shader_parameter("base_color", color)
-		material.set_shader_parameter("edge_color", Color.WHITE)
-		material.set_shader_parameter("edge_width", 1.4)
-		material.set_shader_parameter("edge_sharpness", 2.0)
-		material.set_shader_parameter("emission_strength", 0.9)
-		mesh_instance.material_override = material
-	else:
-		var standard_material = StandardMaterial3D.new()
-		standard_material.albedo_color = color
-		standard_material.emission_enabled = true
-		standard_material.emission = color * 0.25
-		mesh_instance.material_override = standard_material
-
-func clear_children():
-	for child in get_children():
-		remove_child(child)
-		child.queue_free()
-
-func set_base_color(color: Color):
+func set_base_color(color: Color) -> void:
 	base_color = color
-	var mesh_instance = get_child(0) as MeshInstance3D
-	if mesh_instance:
-		apply_material(mesh_instance, base_color)
+	if _mesh_instance:
+		_mesh_instance.material_override = GridMaterialFactory.make(base_color, {
+			"edge_width": 1.4,
+			"emission_strength": 0.9
+		})

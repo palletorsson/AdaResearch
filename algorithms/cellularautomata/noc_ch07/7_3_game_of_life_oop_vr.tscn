@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.gd" id="1_script"]
+
+[node name="GameOfLifeOOPVR" type="Node3D"]
+script = ExtResource("1_script")

@@ -258,7 +258,8 @@ func create_visuals():
 	spring_lines.clear()
 	
 	# Create mass visuals
-	for mass in masses:
+	for i in range(masses.size()):
+		var mass = masses[i]
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = mass.radius

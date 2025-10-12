@@ -119,15 +119,26 @@ func create_info_panel(text: String, position: Vector3) -> Label3D:
 	info_root.add_child(label)
 	return label
 
-func create_ball(position: Vector3, radius: float = 0.18, _mass: float = 1.0, color: Color = Color(0.9, 0.4, 0.8, 1.0)) -> Node3D:
-	# Visual-only sphere (no physics body or collider)
-	var root := Node3D.new()
-	root.name = "Ball"
-	root.position = position
+func create_ball(position: Vector3, radius: float = 0.18, mass: float = 1.0, color: Color = Color(0.9, 0.4, 0.8, 1.0)) -> RigidBody3D:
+	# Physics-enabled ball with collider and visible mesh
+	var body := RigidBody3D.new()
+	body.name = "Ball"
+	body.position = position
+	body.mass = mass
+	body.can_sleep = false
+	body.contact_monitor = true
+	body.max_contacts_reported = 8
+
+	var collider := CollisionShape3D.new()
+	var sphere_shape := SphereShape3D.new()
+	sphere_shape.radius = radius
+	collider.shape = sphere_shape
+	body.add_child(collider)
+
 	var mesh := MeshInstance3D.new()
 	var sphere_mesh := SphereMesh.new()
 	sphere_mesh.radius = radius
-	# Ensure perfect sphere (avoid elongated look)
+	# Ensure perfect sphere dimensions
 	sphere_mesh.height = radius * 2.0
 	sphere_mesh.radial_segments = 32
 	sphere_mesh.rings = 16
@@ -138,9 +149,10 @@ func create_ball(position: Vector3, radius: float = 0.18, _mass: float = 1.0, co
 	material.emission = color * 0.3
 	material.roughness = 0.3
 	mesh.material_override = material
-	root.add_child(mesh)
-	add_child(root)
-	return root
+	body.add_child(mesh)
+
+	add_child(body)
+	return body
 
 func _disable_grab_sphere(grab_node: Node):
 	if grab_node == null:

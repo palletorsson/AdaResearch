@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_8_9_lsystem_tree"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/example_8_9_lsystem_tree.gd" id="1"]
+
+[node name="Example_8_9_LSystem_Tree" type="Node3D"]
+script = ExtResource("1")
+generations = 4
+step_length = 0.05
+turn_angle = 25.0
+show_generation_animation = true
+preset = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 2)
+fov = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 3, 0)
+light_energy = 1.0
+shadow_enabled = true

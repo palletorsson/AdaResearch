@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://example_4_1_single_particle"]
+
+[ext_resource type="Script" path="res://algorithms/particles/example_4_1_single_particle_vr.gd" id="1"]
+
+[node name="Example_4_1_Single_Particle" type="Node3D"]
+script = ExtResource("1")

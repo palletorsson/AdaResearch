@@ -93,7 +93,7 @@ func _process(delta):
 	# Update existing bubbles
 	var i = 0
 	while i < active_bubbles.size():
-		var bubble = active_bubbles[i]
+		var bubble: Bubble = active_bubbles[i]
 		bubble.age += delta
 		
 		if bubble.age >= bubble_lifetime:
@@ -174,8 +174,8 @@ func play_bubble_sound(position: Vector3, bubble_size: float):
 		return
 	
 	# Check if we have any sounds to play
-	var available_sounds = use_synthesized_sounds if  synthesized_sounds else bubble_sounds
-	if available_sounds:
+	var available_sounds = synthesized_sounds if use_synthesized_sounds else bubble_sounds
+	if available_sounds.is_empty():
 		return
 		
 	# Get an available audio player from the pool

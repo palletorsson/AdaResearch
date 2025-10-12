@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dexbbayaax251"]
+
+[ext_resource type="Script" uid="uid://bt4m5dxlpo8vm" path="res://commons/primitives/halocube/halocube.gd" id="1_halocube"]
+
+[node name="HaloCube" type="Node3D"]
+script = ExtResource("1_halocube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)

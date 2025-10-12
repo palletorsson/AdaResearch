@@ -19,7 +19,7 @@ var cube_scene_resource: PackedScene
 # Grid storage
 var grid: Array[Array] = []  # 2D array to track cube heights
 var cube_instances: Array[Array] = []  # Store actual cube nodes
-var walker_position: Vector2i = Vector2i(64, 64)  # Start at center
+var walker_position: Vector2i = Vector2i(GRID_SIZE / 2, GRID_SIZE / 2)  # Start at center
 
 # Algorithm settings
 @export var steps_per_frame: int = 10

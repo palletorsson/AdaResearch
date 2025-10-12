@@ -55,6 +55,3 @@ func _update_info(accel: Vector3):
 	builder.append("Speed = %.2f" % ball.linear_velocity.length())
 	builder.append("Position = (%.2f, %.2f, %.2f)" % [ball.global_position.x, ball.global_position.y, ball.global_position.z])
 	info_label.text = "\n".join(builder)
-
-
-

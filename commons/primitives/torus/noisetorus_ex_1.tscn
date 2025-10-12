@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0fxn16tyumag"]
+
+[ext_resource type="Shader" uid="uid://7hapaspktawr" path="res://commons/resourses/shaders/noisePlanet2.gdshader" id="1_ac7q8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gu7a"]
+render_priority = 0
+shader = ExtResource("1_ac7q8")
+shader_parameter/noise_scale = 0.955
+shader_parameter/height_multiplier = 0.365
+shader_parameter/noise_speed = 0.03
+shader_parameter/elongation_factor = 0.0
+shader_parameter/hue_shift_speed = 0.05
+
+[sub_resource type="TorusMesh" id="TorusMesh_scesd"]
+material = SubResource("ShaderMaterial_1gu7a")
+inner_radius = 0.745
+rings = 24
+ring_segments = 22
+
+[node name="noisetorus_ex1" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.17, 0, 0, 0, -9.48537e-07, -2.17, 0, 21.7, -9.48537e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_scesd")

@@ -181,45 +181,80 @@ func create_rainbow_sky_shader() -> Shader:
 	var shader = Shader.new()
 	shader.code = """
 shader_type sky;
-render_mode use_debanding;
 
-uniform vec4 sky_top_color : source_color = vec4(0.9, 0.3, 0.9, 1.0);
-uniform vec4 sky_horizon_color : source_color = vec4(1.0, 0.6, 0.0, 1.0);
-uniform float rainbow_intensity : hint_range(0.0, 2.0) = 1.0;
-uniform float sky_energy = 1.0;
-uniform float time_scale : hint_range(0.0, 5.0) = 1.0;
+uniform sampler2D sky_tex : source_color;
 
-vec3 rainbow_gradient(float t) {
-	// Create smooth rainbow transition
-	vec3 colors[6];
-	colors[0] = vec3(1.0, 0.0, 0.0); // Red
-	colors[1] = vec3(1.0, 0.5, 0.0); // Orange
-	colors[2] = vec3(1.0, 1.0, 0.0); // Yellow
-	colors[3] = vec3(0.0, 1.0, 0.0); // Green
-	colors[4] = vec3(0.0, 0.0, 1.0); // Blue
-	colors[5] = vec3(0.5, 0.0, 1.0); // Purple
-	
-	t = fract(t) * 5.0;
-	int index = int(t);
-	float frac = fract(t);
-	
-	if (index >= 5) return colors[5];
-	return mix(colors[index], colors[index + 1], frac);
+uniform float energy : hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform float gamma : hint_range(0.0,4.0) = 1.0;
+uniform sampler2D tint_ramp : source_color, repeat_disable, hint_default_white;
+uniform vec3 scale = vec3(1);
+uniform float triplanar_blend_power : hint_range(0.0,40.0) = 4.0;
+uniform float seamless_blend : hint_range(0.0,0.5) = 0.1;
+
+vec4 textureSeamless(sampler2D tex, vec2 uv, vec2 padding){
+	vec2 inv_scale = 1.0 / (1.0 + 2.0 * padding);
+
+	// Get partial derivatives here for textureGrad() to avoid mipmapping seams
+	vec2 dx = dFdx(uv) * inv_scale;
+	vec2 dy = dFdy(uv) * inv_scale;
+
+	// Textures need to repeat somewhere. In addition, repeat must be enabled on the sampler
+	uv = fract(uv+0.5)-0.5;
+
+	// Get the bilinear blend factors. This is actually undefined for padding = 0
+	vec2 u = smoothstep(-padding, padding, uv);
+
+	// Apply scale
+	uv *= inv_scale;
+
+	// Bilinear interpolation
+	inv_scale = 0.5 * (1.0 - inv_scale);
+	vec4 lower_right = textureGrad(tex, uv - vec2(-1,-1) * inv_scale,  dx, dy);
+	vec4 lower_left = textureGrad(tex, uv - vec2(1,-1) * inv_scale,  dx, dy);
+	vec4 upper_right = textureGrad(tex, uv - vec2(-1,1) * inv_scale, dx, dy);
+	vec4 upper_left = textureGrad(tex, uv - vec2(1,1) * inv_scale, dx, dy);
+
+	lower_right = mix(lower_left, lower_right, u.x);
+	upper_right = mix(upper_left, upper_right, u.x);
+
+	return mix(upper_right, lower_right, u.y);
 }
 
-void fragment() {
-	float gradient = pow(max(EYEDIR.y, 0.0), 0.6);
-	float angle = atan(EYEDIR.z, EYEDIR.x) / (2.0 * PI) + 0.5;
-	
-	// Add gentle time-based color shift
-	float time_offset = TIME * time_scale * 0.1;
-	vec3 rainbow_color = rainbow_gradient(angle + time_offset);
-	
-	vec3 base_mix = mix(sky_horizon_color.rgb, sky_top_color.rgb, gradient);
-	vec3 final_color = mix(base_mix, rainbow_color, rainbow_intensity * 0.3);
-	
-	COLOR = final_color * sky_energy;
+// "p" point being textured
+// "n" surface normal at "p"
+// "k" controls the sharpness of the blending in the transitions areas
+// "s" texture sampler
+vec4 boxmap( in sampler2D s, in vec3 p, in vec3 n, in float k )
+{
+	// project+fetch
+	vec4 x = textureSeamless( s, p.yz, vec2(seamless_blend) );
+	vec4 y = textureSeamless( s, p.zx, vec2(seamless_blend) );
+	vec4 z = textureSeamless( s, p.xy, vec2(seamless_blend) );
+
+	// blend weights
+	vec3 w = pow( abs(n), vec3(k) );
+
+	// blend and return
+	return (x*w.x + y*w.y + z*w.z) / (w.x + w.y + w.z);
 }
+
+void sky() {
+	// Ray direction
+	vec3 rd = EYEDIR;
+	
+	// Apply scaling
+	vec3 p = rd;
+	p = normalize(rd / scale) * scale;
+	vec3 n = normalize(p / scale);
+	
+	// Triplanar mapping of sky texture
+	COLOR = boxmap(sky_tex, p, n, triplanar_blend_power).rgb;
+	COLOR = energy * pow(COLOR, vec3(gamma));
+	COLOR *= textureLod(tint_ramp, SKY_COORDS.yx, 0.0).rgb;
+	
+	// Alpha of tint ramp determines transparency of sky texture
+	COLOR = mix(textureLod(tint_ramp, SKY_COORDS.yx, 0.0).rgb, COLOR, textureLod(tint_ramp, SKY_COORDS.yx, 0.0).a);
+}n
 """
 	return shader
 

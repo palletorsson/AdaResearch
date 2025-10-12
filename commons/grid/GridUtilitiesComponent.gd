@@ -224,6 +224,14 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.set_target_data([], target_params)
 			if status_message.length() > 0 and utility_object.has_method("set_status_message"):
 				utility_object.set_status_message(status_message)
+		"la":  # Label - displays artifact name from grid_artifacts.json
+			if parameters.size() > 0:
+				var keyid = parameters[0]
+				if utility_object.has_method("set_keyid"):
+					utility_object.set_keyid(keyid)
+					print("GridUtilitiesComponent: Set label keyid to: %s" % keyid)
+				else:
+					print("GridUtilitiesComponent: Warning - Label object doesn't have set_keyid method")
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)
@@ -493,6 +501,10 @@ func _is_sequence_name(name: String) -> bool:
 		"array_tutorial",
 		"meshestextures",
 		"randomness_exploration",
+		"vectors", 
+		"fractals", 
+		"cellularautomata", 
+		"joints", 
 		"wavefunctions",
 		"noise",
 		"forces",

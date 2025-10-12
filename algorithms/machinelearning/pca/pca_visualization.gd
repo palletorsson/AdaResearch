@@ -1,4 +1,3 @@
-class_name PCAVisualization
 extends Node3D
 
 # Principal Component Analysis: Dimensional Reduction & Identity Compression

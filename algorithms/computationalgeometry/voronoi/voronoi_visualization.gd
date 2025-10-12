@@ -99,7 +99,6 @@ func _init():
 
 func _ready():
 	setup_visual_environment()
-	setup_ui()
 	setup_animation_system()
 	
 	if auto_generate_sites:
@@ -224,7 +223,7 @@ func construct_voronoi_cells():
 	
 	# Create a grid-based approach for better cell generation
 	var grid_resolution = 100
-	var cell_map = {}
+	var cell_map = {} # int -> Array[Vector2]
 	
 	# For each grid point, find the closest site
 	for x in range(grid_resolution):
@@ -246,9 +245,10 @@ func construct_voronoi_cells():
 		
 		if cell_map.has(site.index):
 			# Create convex hull of grid points
-			var grid_points: Array[Vector2] = cell_map[site.index]
+			var grid_points: Array[Vector2] = []
+			grid_points.assign(cell_map[site.index])
 			cell.vertices = create_convex_hull(grid_points)
-	else:
+		else:
 			# Fallback: create a small cell around the site
 			cell.vertices = create_small_cell_around_site(site.position)
 		
@@ -522,23 +522,23 @@ func animate_cells_construction():
 
 func create_animated_site(site: VoronoiSite, index: int) -> MeshInstance3D:
 	"""Create an animated site with entrance effect"""
-		var mesh_instance = MeshInstance3D.new()
-		var mesh = SphereMesh.new()
-		mesh.radius = site_radius
+	var mesh_instance = MeshInstance3D.new()
+	var mesh = SphereMesh.new()
+	mesh.radius = site_radius
 	mesh.height = site_radius * 2
-		mesh_instance.mesh = mesh
-		
+	mesh_instance.mesh = mesh
+	
 	# Start from above and animate down
 	mesh_instance.position = Vector3(site.position.x, 5.0, site.position.y)
-		
-		var material = StandardMaterial3D.new()
+	
+	var material = StandardMaterial3D.new()
 	var hue = float(index) / float(sites.size())
 	material.albedo_color = Color.from_hsv(hue, 0.8, 0.9)
-		material.emission_enabled = true
+	material.emission_enabled = true
 	material.emission = Color.from_hsv(hue, 0.6, 0.4)
 	material.metallic = 0.3
 	material.roughness = 0.2
-		mesh_instance.material_override = material
+	mesh_instance.material_override = material
 		
 	# Animate entrance
 	var tween = create_tween()
@@ -638,7 +638,7 @@ func visualize_territories_detailed():
 			var mesh_instance = create_territory_polygon_mesh(cell, color)
 			if mesh_instance:
 				mesh_instance.position.y = 0.01 + (i * 0.001)
-		add_child(mesh_instance)
+				add_child(mesh_instance)
 				cell_meshes.append(mesh_instance)
 				cell.mesh_instance = mesh_instance
 				print("Created detailed cell ", i, " with ", hull_vertices.size(), " vertices")
@@ -651,13 +651,13 @@ func visualize_delaunay():
 			var site2 = sites[j]
 			
 			if are_sites_adjacent(site1, site2):
-			var mesh_instance = create_edge_mesh(
-								site1.position,
-								site2.position,
-				delaunay_edge_color
-			)
-			add_child(mesh_instance)
-			delaunay_meshes.append(mesh_instance)
+				var mesh_instance = create_edge_mesh(
+									site1.position,
+									site2.position,
+					delaunay_edge_color
+				)
+				add_child(mesh_instance)
+				delaunay_meshes.append(mesh_instance)
 
 func are_sites_adjacent(site1: VoronoiSite, site2: VoronoiSite) -> bool:
 	"""Check if two sites share a Voronoi edge"""

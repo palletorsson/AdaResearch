@@ -2,7 +2,7 @@ extends Node3D
 @export var cube_size: float = 1.0
 @export var gutter: float = 0.0
 @export var spawn_position: Vector3 = Vector3(0, 1, 0)  # Default position on table (y=1)
-@onready var base_cube = $woodCube  # Template cube
+@onready var base_cube = $woodCube  # Template cube 
 var spawned_cubes: Array = []  # Track spawned cubes
 var spawn_timer: float = 0.0  # Timer for spawning
 var next_spawn_time: float = 1.0  # Initial spawn time target (1 second)

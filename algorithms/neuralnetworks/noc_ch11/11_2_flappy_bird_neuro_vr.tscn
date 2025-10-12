@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/neuralnetworks/noc_ch11/11_2_flappy_bird_neuro_vr.gd" id="1_script"]
+
+[node name="FlappyBirdNeuroVR" type="Node3D"]
+script = ExtResource("1_script")

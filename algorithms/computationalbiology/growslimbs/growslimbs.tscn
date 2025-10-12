@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0abh1ifmnx44"]
+
+[ext_resource type="Script" uid="uid://dgexdt4dpm75w" path="res://algorithms/computationalbiology/growslimbs/growslimbs.gd" id="1_ogxq6"]
+
+[node name="Growslimbs" type="Node3D"]
+script = ExtResource("1_ogxq6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.41517)

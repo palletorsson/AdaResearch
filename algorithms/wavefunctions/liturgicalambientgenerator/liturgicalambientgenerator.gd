@@ -10,8 +10,34 @@ var bus_names = ["Master", "Cathedral_Reverb", "Choir_Hall", "Strings_Chamber", 
 
 # Sound generators and audio players
 var rng = RandomNumberGenerator.new()
-var sample_rate = 44100
+var sample_rate: float = 44100.0
 var buffer_size = 8192
+
+# Threading and progress tracking
+var generation_thread: Thread
+var mutex: Mutex
+var generation_progress = 0.0
+var current_sound_name = ""
+var total_sounds = 0
+var sounds_completed = 0
+var is_generating = false
+var generation_complete = false
+var stop_requested = false
+
+func _ensure_rng() -> RandomNumberGenerator:
+	if rng == null or not is_instance_valid(rng):
+		rng = RandomNumberGenerator.new()
+		rng.randomize()
+	return rng
+
+func _randf_range(min_value: float, max_value: float) -> float:
+	return _ensure_rng().randf_range(min_value, max_value)
+
+func _randf() -> float:
+	return _ensure_rng().randf()
+
+func _randi() -> int:
+	return _ensure_rng().randi()
 
 # Main sound stream players
 var choral_drone_player = null
@@ -33,15 +59,6 @@ var sacred_sound_types = [
 	"angelic_texture"
 ]
 
-# Threading and progress tracking
-var generation_thread: Thread
-var mutex: Mutex
-var generation_progress = 0.0
-var current_sound_name = ""
-var total_sounds = 0
-var sounds_completed = 0
-var is_generating = false
-var generation_complete = false
 
 # Time and spiritual atmosphere tracking
 var elapsed_time = 0.0
@@ -64,9 +81,10 @@ signal liturgical_progress_updated(progress: float)
 signal sacred_generation_complete
 
 func _ready():
-	rng.randomize()
+	_ensure_rng()
 	mutex = Mutex.new()
 	generation_thread = Thread.new()
+	stop_requested = false
 	
 	# Calculate total sounds for liturgical collection
 	total_sounds = 3 + (sacred_sound_types.size() * 2)
@@ -81,11 +99,38 @@ func _ready():
 	liturgical_progress_updated.connect(_on_liturgical_progress_updated)
 	sacred_generation_complete.connect(_on_sacred_generation_complete)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -10.0)
-	# Begin sacred sound creation
+	# Begin non-blocking sacred sound creation
 	start_liturgical_generation()
 
+func _exit_tree():
+	# Stop generation and clean up when leaving the scene tree
+	stop_requested = true
+	
+	# Wait for generation thread to finish if it's running
+	if generation_thread and generation_thread.is_alive():
+		generation_thread.wait_to_finish()
+	
+	# Stop all audio players
+	if choral_drone_player and is_instance_valid(choral_drone_player):
+		choral_drone_player.stop()
+	if organ_foundation_player and is_instance_valid(organ_foundation_player):
+		organ_foundation_player.stop()
+	if string_ensemble_player and is_instance_valid(string_ensemble_player):
+		string_ensemble_player.stop()
+	
+	for player in effect_players:
+		if player and is_instance_valid(player):
+			player.stop()
+
 func _process(delta):
+	_ensure_rng()
+	if stop_requested:
+		return
 	if not is_initialized:
+		return
+	
+	# Check if we're still in the scene tree
+	if not is_inside_tree():
 		return
 		
 	elapsed_time += delta
@@ -94,7 +139,7 @@ func _process(delta):
 	spiritual_intensity = 0.4 + 0.3 * sin(elapsed_time * 0.1)
 	
 	# Trigger sacred events at irregular, contemplative intervals
-	if elapsed_time - last_sacred_event_time > rng.randf_range(8.0, 25.0):
+	if elapsed_time - last_sacred_event_time > _randf_range(8.0, 25.0):
 		trigger_sacred_event()
 		last_sacred_event_time = elapsed_time
 
@@ -120,10 +165,17 @@ func start_liturgical_generation():
 		return
 
 func _thread_generate_sacred_sounds():
+	_ensure_rng()
+	if stop_requested:
+		return
+		
 	# Generate foundational choral drone
 	mutex.lock()
 	current_sound_name = "choral_foundation"
 	mutex.unlock()
+	
+	if stop_requested:
+		return
 	
 	var choral_stream = create_choral_foundation()
 	mutex.lock()
@@ -136,10 +188,16 @@ func _thread_generate_sacred_sounds():
 	call_deferred("_emit_liturgical_progress_updated")
 	OS.delay_msec(200)
 	
+	if stop_requested:
+		return
+	
 	# Generate organ foundation
 	mutex.lock()
 	current_sound_name = "organ_foundation"
 	mutex.unlock()
+	
+	if stop_requested:
+		return
 	
 	var organ_stream = create_organ_foundation()
 	mutex.lock()
@@ -152,10 +210,16 @@ func _thread_generate_sacred_sounds():
 	call_deferred("_emit_liturgical_progress_updated")
 	OS.delay_msec(200)
 	
+	if stop_requested:
+		return
+	
 	# Generate string ensemble atmosphere
 	mutex.lock()
 	current_sound_name = "string_atmosphere"
 	mutex.unlock()
+	
+	if stop_requested:
+		return
 	
 	var strings_stream = create_string_atmosphere()
 	mutex.lock()
@@ -168,8 +232,14 @@ func _thread_generate_sacred_sounds():
 	call_deferred("_emit_liturgical_progress_updated")
 	OS.delay_msec(200)
 	
+	if stop_requested:
+		return
+	
 	# Generate sacred effect sounds
 	for sound_type in sacred_sound_types:
+		if stop_requested:
+			return
+			
 		mutex.lock()
 		current_sound_name = sound_type
 		precreated_sounds[sound_type] = []
@@ -177,6 +247,9 @@ func _thread_generate_sacred_sounds():
 		
 		# Create 2 variations of each sacred sound
 		for i in range(2):
+			if stop_requested:
+				return
+				
 			var stream = null
 			
 			match sound_type:
@@ -314,16 +387,26 @@ func start_sacred_ambient():
 	string_ensemble_player.play()
 
 func trigger_sacred_event():
+	_ensure_rng()
+	if stop_requested:
+		return
+	# Check if we're still in the scene tree
+	if not is_inside_tree():
+		return
+	
 	# Find available sacred player
 	var available_players = []
 	for player in effect_players:
-		if not player.playing:
+		if player != null and is_instance_valid(player) and not player.playing:
 			available_players.append(player)
 	
 	if available_players.size() > 0:
-		var player = available_players[rng.randi() % available_players.size()]
-		var sound_type = sacred_sound_types[rng.randi() % sacred_sound_types.size()]
-		var variation_index = rng.randi() % precreated_sounds[sound_type].size()
+		var player = available_players[_randi() % available_players.size()]
+		if player == null or not is_instance_valid(player):
+			return
+			
+		var sound_type = sacred_sound_types[_randi() % sacred_sound_types.size()]
+		var variation_index = _randi() % precreated_sounds[sound_type].size()
 		var stream = precreated_sounds[sound_type][variation_index]
 		
 		player.stream = stream

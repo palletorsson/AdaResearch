@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhq2h3x67ko1b"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+
+[node name="HorizonPlumbLines" type="Node3D"]
+
+[node name="VerticalLine1" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.2, 0, 0)
+
+[node name="VerticalLine2" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.2, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+text = "Vertical Lines"
+outline_size = 4

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj4q6xw7y8cne"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/cubesubdivision/cube_subdivision.gd" id="1_cube_subdivision"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_initial_cube"]
+
+[node name="CubeSubdivision" type="Node3D"]
+script = ExtResource("1_cube_subdivision")
+subdivision_interval = 1.0
+max_subdivisions = 5
+auto_start = true
+
+[node name="InitialCube" parent="." instance=ExtResource("2_initial_cube")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 5)
+current = true
+fov = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true

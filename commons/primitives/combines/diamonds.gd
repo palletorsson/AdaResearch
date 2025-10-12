@@ -12,7 +12,7 @@ func _ready() -> void:
 	for i in range(unit_count):
 		var diamond_scene = preload("res://commons/primitives/octahedron/octahedron.tscn")
 		var diamond := diamond_scene.instantiate()
-		diamond.position = Vector3(0, unit_height * i + unit_height, -1.0)
+		diamond.position = Vector3(0, unit_height * i + unit_height, 0)
 		diamond.rotation.y = deg_to_rad(rotation_offset * i)
 		diamond.scale = Vector3(unit_size, unit_height, unit_size)
 		add_child(diamond)

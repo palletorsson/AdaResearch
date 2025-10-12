@@ -75,9 +75,9 @@ offset_right = -32.0
 offset_bottom = -48.0
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[b][color=cyan]Axiom 1:[/color][/b] A point in the 3D dimensional coordinate system is a vector representing a position in x, y, z.
+text = "A point in the 3d dimensional coordinate system is a vector representing a position in x, y, z. 
 
-[color=yellow]Code:[/color]
+Code: 
 [code]var point_position = Vector3(0, 0, 0)[/code]
 
 The vector [color=lime](0,0,0)[/color] is the [b]origin[/b] - the root of all vectors.
@@ -86,7 +86,8 @@ The vector [color=lime](0,0,0)[/color] is the [b]origin[/b] - the root of all ve
 
 [b][color=cyan]Axiom 2:[/color][/b] A visible point can be represented by a small sphere at its position.
 
-[color=yellow]Code:[/color]
+Code: 
+[code] Code:[/color]
 [code]var sphere_mesh = SphereMesh.new()
 radius = 0.02 # a small sphere
 sphere_mesh.radius = radius

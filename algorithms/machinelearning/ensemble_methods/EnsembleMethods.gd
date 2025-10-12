@@ -1,5 +1,5 @@
 extends Node3D
-class_name EnsembleMethods
+ 
 
 var time: float = 0.0
 var ensemble_progress: float = 0.0

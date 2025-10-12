@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxlm0nynvb7li"]
+
+[ext_resource type="Script" path="res://algorithms/steering/noc_ch05/exercise_5_13_crowd_path_following_vr.gd" id="1_r2plm"]
+
+[node name="Exercise513CrowdPathVR" type="Node3D"]
+script = ExtResource("1_r2plm")

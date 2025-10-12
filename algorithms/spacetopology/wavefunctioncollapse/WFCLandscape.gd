@@ -15,7 +15,7 @@ enum TileType {
 }
 
 # Each tile stores possible states
-class WFCTile:
+class WFCLandscapeTile:
 	var possible_states: Array[TileType]
 	var collapsed: bool = false
 	var final_state: TileType
@@ -88,7 +88,7 @@ func initialize_grid():
 		grid[x].resize(GRID_SIZE)
 		for z in range(GRID_SIZE):
 			var pos = Vector3(x * TILE_SIZE, 0, z * TILE_SIZE)
-			var tile = WFCTile.new(pos)
+			var tile = WFCLandscapeTile.new(pos)
 			grid[x][z] = tile
 			
 			# Create visual placeholder
@@ -157,7 +157,7 @@ func collapse_tile(x: int, z: int):
 	tile.collapsed = true
 	update_tile_visual(tile)
 
-func update_tile_visual(tile: WFCTile):
+func update_tile_visual(tile: WFCLandscapeTile):
 	var mesh_instance = tile.mesh_instance
 	
 	match tile.final_state:

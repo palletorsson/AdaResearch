@@ -61,14 +61,14 @@ func initialize_gpu_resources():
 func load_compute_shader() -> bool:
 	"""Load the marching cubes compute shader"""
 	# Create shader source code
-	var shader_source = create_compute_shader_source()
+	var shader_source_text = create_compute_shader_source()
 	
-	# Create shader file
-	shader_file = RDShaderFile.new()
-	shader_file.set_source_code(RenderingDevice.SHADER_STAGE_COMPUTE, shader_source)
+	# Create shader source and compile
+	var shader_source = RDShaderSource.new()
+	shader_source.source_compute = shader_source_text
+	shader_source.language = RenderingDevice.SHADER_LANGUAGE_GLSL
 	
-	# Compile shader
-	var shader_spirv = shader_file.get_spirv()
+	var shader_spirv = rd.shader_compile_spirv_from_source(shader_source)
 	if not shader_spirv:
 		push_error("Failed to compile compute shader")
 		return false

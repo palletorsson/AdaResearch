@@ -1,5 +1,5 @@
 extends Node3D
-class_name ExplainableAIXAI
+ 
 
 var time: float = 0.0
 var explanation_progress: float = 0.0

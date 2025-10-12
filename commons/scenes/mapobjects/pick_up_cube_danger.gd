@@ -1,6 +1,6 @@
 extends Node3D
 
-const RESET_POSITION: Vector3 = Vector3(0.5, 4.0, 0.5)
+const RESET_POSITION: Vector3 = Vector3(1.5, 4.0, 1.5)
 
 @export var drop_height: float = 8.0
 @export var gravity_force: float = 30.0

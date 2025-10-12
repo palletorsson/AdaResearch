@@ -1221,8 +1221,13 @@ func _setup_animations(visual_node: Node3D, form_data: Dictionary):
 	
 	# Add animation to player
 	var anim_name = "morph_anim"
-	#anim_player.remove_animation(anim_name)
-	#anim_player.add_animation(anim_name, anim)
+	var lib: AnimationLibrary = anim_player.get_animation_library("")
+	if lib == null:
+		lib = AnimationLibrary.new()
+		anim_player.add_animation_library("", lib)
+	if lib.has_animation(anim_name):
+		lib.remove_animation(anim_name)
+	lib.add_animation(anim_name, anim)
 	anim_player.play(anim_name)
 
 func _create_pulsing_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):

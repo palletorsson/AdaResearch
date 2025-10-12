@@ -40,7 +40,7 @@ void main() {
 """
 	
 	var shader_file = RDShaderFile.new()
-	shader_file.set_source_code(RenderingDevice.SHADER_STAGE_COMPUTE, simple_shader_source)
+	#shader_file.set_source_code(RenderingDevice.SHADER_STAGE_COMPUTE, simple_shader_source)
 	
 	var shader_spirv = shader_file.get_spirv()
 	if not shader_spirv:

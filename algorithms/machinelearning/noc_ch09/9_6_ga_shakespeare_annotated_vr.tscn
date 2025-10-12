@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/noc_ch09/9_6_ga_shakespeare_annotated_vr.gd" id="1_script"]
+
+[node name="AnnotatedGAShakespeareVR" type="Node3D"]
+script = ExtResource("1_script")

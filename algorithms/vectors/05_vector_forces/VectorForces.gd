@@ -66,10 +66,8 @@ func _create_ground():
 	var ground = StaticBody3D.new()
 	ground.name = "Ground"
 	var collider = CollisionShape3D.new()
-	var plane = PlaneShape3D.new()
-	collider.shape = plane
+	var box = BoxShape3D.new()
+	box.size = Vector3(20, 0.1, 20)  # Very thin box to simulate a plane
+	collider.shape = box
 	ground.add_child(collider)
 	add_child(ground)
-
-
-

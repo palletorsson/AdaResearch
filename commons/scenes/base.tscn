@@ -46,9 +46,6 @@ size = Vector3(3.34094, 0.163635, 2.29346)
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="XROrigin3D" parent="." index="1"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 9.20941, 0)
-
 [node name="FunctionGazePointer" parent="XROrigin3D/XRCamera3D" index="0" instance=ExtResource("3_rldw0")]
 click_on_hold = true
 color = Color(1, 0, 1, 1)

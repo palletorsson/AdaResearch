@@ -25,7 +25,7 @@ uniform float reflection_strength : hint_range(0.5, 2.0) = 1.2;
 uniform float fresnel_power : hint_range(1.0, 8.0) = 3.0;
 uniform float reflection_distortion : hint_range(0.0, 0.2) = 0.02;
 uniform sampler2D reflection_texture;
-uniform bool animate_distortion : hint_default(true, true) = true;
+uniform bool animate_distortion = true;
 
 varying vec3 world_position;
 varying vec3 world_normal;

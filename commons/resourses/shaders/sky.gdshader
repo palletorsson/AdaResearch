@@ -148,7 +148,7 @@ void sky()
 	float time = overwritten_time != 0.0 ? overwritten_time : TIME;
 
 	//////////////////// SKY ///////////////////////////////////////////////////////////////////////
-	float _eyedir_y = abs( sin( EYEDIR.y * PI * 0.5 ));
+	float _eyedir_y = abs( sin( POSITION.y * PI * 0.5 ));
 
 	// The day color will be our base color
 	vec3 _sky_color = mix( day_bottom_color, day_top_color, _eyedir_y );
@@ -156,7 +156,7 @@ void sky()
 
 	float _sunset_amount = clamp( 0.5 - abs( LIGHT0_DIRECTION.y ), 0.0, 0.5 ) * 2.0;
 	// The sky should be more red around the west, on the opposite side you don't see it as much
-	float _sunset_distance = clamp( 1.0 - pow( distance( EYEDIR, LIGHT0_DIRECTION ), 2 ), 0.0, 1.0 );
+	float _sunset_distance = clamp( 1.0 - pow( distance( POSITION, LIGHT0_DIRECTION ), 2 ), 0.0, 1.0 );
 	vec3 _sky_sunset_color = mix( sunset_bottom_color, sunset_top_color, _eyedir_y + 0.5 );
 	_sky_sunset_color = mix( _sky_sunset_color, sunset_bottom_color, _sunset_amount * _sunset_distance );
 	_sky_color = mix( _sky_color, _sky_sunset_color, _sunset_amount );
@@ -170,9 +170,9 @@ void sky()
 
 	//////////////////// HORIZON ///////////////////////////////////////////////////////////////////
 	float _horizon_amount = 0.0;
-	if( EYEDIR.y < 0.0 )
+	if( POSITION.y < 0.0 )
 	{
-		_horizon_amount = clamp( abs( EYEDIR.y ) / horizon_blur, 0.0, 1.0 );
+		_horizon_amount = clamp( abs( POSITION.y ) / horizon_blur, 0.0, 1.0 );
 		// Mixing with the color of the night sky to make the horizon darker
 		vec3 _horizon_color = mix( horizon_color, _sky_color, _night_amount * 0.9 );
 		// And if ther are many dark clouds, we also make the horizon darker
@@ -186,14 +186,14 @@ void sky()
 	{
 		// Bigger moon near the horizon
 		float _moon_size = moon_size + cos( LIGHT1_DIRECTION.y * PI ) * moon_size * 0.25;
-		float _moon_distance = distance( EYEDIR, LIGHT1_DIRECTION ) / _moon_size;
+		float _moon_distance = distance( POSITION, LIGHT1_DIRECTION ) / _moon_size;
 		// Finding moon disc and edge blur
 		_moon_amount = clamp(( 1.0 - _moon_distance ) / moon_blur, 0.0, 1.0 );
 		if( _moon_amount > 0.0 )
 		{
 			// Moon illumination depending on the position of the sun
-			float _moon_intersect = sphere_intersect( EYEDIR, LIGHT1_DIRECTION, _moon_size );
-			vec3 _moon_normal = normalize( LIGHT1_DIRECTION - EYEDIR * _moon_intersect );
+			float _moon_intersect = sphere_intersect( POSITION, LIGHT1_DIRECTION, _moon_size );
+			vec3 _moon_normal = normalize( LIGHT1_DIRECTION - POSITION * _moon_intersect );
 			// Power on the result gives a better effect
 			float _moon_n_dot_l = pow( clamp( dot( _moon_normal, -LIGHT0_DIRECTION ), 0.05, 1.0 ), 2 );
 			// Hiding the moon behind the horizon
@@ -206,7 +206,7 @@ void sky()
 	float _sun_distance = 0.0;
 	if( LIGHT0_ENABLED )
 	{
-		_sun_distance = distance( EYEDIR, LIGHT0_DIRECTION );
+		_sun_distance = distance( POSITION, LIGHT0_DIRECTION );
 		// Bigger sun near the horizon
 		float _sun_size = sun_size + cos( LIGHT0_DIRECTION.y * PI ) * sun_size * 0.25;
 		// Finding sun disc and edge blur
@@ -230,8 +230,8 @@ void sky()
 	}
 
 	//////////////////// STARS /////////////////////////////////////////////////////////////////
-	vec2 _sky_uv = EYEDIR.xz / sqrt( EYEDIR.y );
-	if( EYEDIR.y > -0.01 && LIGHT0_DIRECTION.y < 0.0  )
+	vec2 _sky_uv = POSITION.xz / sqrt( POSITION.y );
+	if( POSITION.y > -0.01 && LIGHT0_DIRECTION.y < 0.0  )
 	{
 		// Stars UV rotation
 		float _stars_speed_cos = cos( stars_speed * time * 0.005 );
@@ -248,7 +248,7 @@ void sky()
 	}
 
 	//////////////////// CLOUDS ////////////////////////////////////////////////////////////////
-	if( EYEDIR.y > 0.0 )
+	if( POSITION.y > 0.0 )
 	{
 		// Clouds UV movement direction
 		float _clouds_speed = time * clouds_speed * 0.01;
@@ -271,7 +271,7 @@ void sky()
 		_noise_top = smoothstep( clouds_cutoff, clouds_cutoff + clouds_fuzziness, _noise_top + _noise_middle * 0.4 ) * 1.2;
 		float _clouds_amount = clamp( _noise_top + _noise_middle + _noise_bottom, 0.0, 1.0 );
 		// Fading clouds near the horizon
-		_clouds_amount *= clamp( abs( EYEDIR.y ) / clouds_blur, 0.0, 1.0 );
+		_clouds_amount *= clamp( abs( POSITION.y ) / clouds_blur, 0.0, 1.0 );
 
 		vec3 _clouds_color = mix( vec3( 0.0 ), clouds_top_color, _noise_top );
 		_clouds_color = mix( _clouds_color, clouds_middle_color, _noise_middle );

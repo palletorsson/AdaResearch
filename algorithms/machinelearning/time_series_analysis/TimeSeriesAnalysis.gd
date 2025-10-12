@@ -1,5 +1,4 @@
 extends Node3D
-class_name TimeSeriesAnalysis
 
 var time: float = 0.0
 var analysis_progress: float = 0.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://htu8nynvb3jp"]
+
+[ext_resource type="Script" path="res://algorithms/oscillation/noc_ch03/example_3_6_simple_harmonic_motion_ii_vr.gd" id="1_z0plm"]
+
+[node name="Example36SimpleHarmonic2VR" type="Node3D"]
+script = ExtResource("1_z0plm")

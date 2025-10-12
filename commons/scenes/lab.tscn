@@ -70,6 +70,9 @@ adjustment_saturation = 1.01
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
 environment = SubResource("Environment_njeto")
 
+[node name="XROrigin3D" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 8, 1)
+
 [node name="Label3D" parent="." index="3"]
 text = "Base - Lab Grid"
 

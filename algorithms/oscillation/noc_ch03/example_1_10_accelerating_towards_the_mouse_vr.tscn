@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blm2nynvcaji"]
+
+[ext_resource type="Script" uid="uid://d353y6by6tmdv" path="res://algorithms/oscillation/noc_ch03/example_1_10_accelerating_towards_the_mouse_vr.gd" id="1_t4plm"]
+
+[node name="Example110AccelToMouseVR" type="Node3D"]
+script = ExtResource("1_t4plm")
+
+[node name="Camera3D" type="Camera3D" parent="."]

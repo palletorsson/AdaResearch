@@ -123,7 +123,7 @@ func create_sphere_instance() -> Node3D:
 	var sphere: Node3D
 	
 	if not sphere_scene:
-		print("Sphere scene not assigned - creating default CSGSphere3D")
+
 		# Create a default sphere if no scene is provided
 		var csg_sphere = CSGSphere3D.new()
 		csg_sphere.radius = 0.1

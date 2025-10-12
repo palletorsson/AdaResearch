@@ -157,7 +157,7 @@ func _play_drum_hit(delay: float):
 	var player = AudioStreamPlayer.new()
 	add_child(player)
 	
-	# Create a simple drum sound (noise burst with envelope)
+	# Create a simple drum sound (noise burst with envelope)n
 	var stream = AudioStreamGenerator.new()
 	stream.mix_rate = 44100.0
 	stream.buffer_length = 0.1

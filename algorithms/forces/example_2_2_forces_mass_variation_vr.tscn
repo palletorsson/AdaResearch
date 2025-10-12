@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ev84xwyd8pbs"]
+
+[ext_resource type="Script" uid="uid://bayuu77bvkp8t" path="res://algorithms/forces/example_2_2_forces_mass_variation_vr.gd" id="1"]
+[ext_resource type="Script" uid="uid://t5l0d0bu80oa" path="res://core/fish_tank.gd" id="2"]
+
+[node name="Example_2_2_ForcesMass" type="Node3D"]
+
+[node name="FishTank" type="Node3D" parent="."]
+script = ExtResource("2")
+
+[node name="ForcesMassVariation" type="Node3D" parent="FishTank"]
+script = ExtResource("1")

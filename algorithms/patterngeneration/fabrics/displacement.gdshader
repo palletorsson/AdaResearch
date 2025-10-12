@@ -40,22 +40,22 @@ float cellular(vec2 p) {
     vec2 i_st = floor(p);
     vec2 f_st = fract(p);
     float m_dist = 10.0;
-    
+
     for (int j = -1; j <= 1; j++) {
         for (int i = -1; i <= 1; i++) {
             vec2 neighbor = vec2(float(i), float(j));
             vec2 point = random2(i_st + neighbor);
-            
+
             // Animate the cellular pattern
             if (animate) {
                 point = 0.5 + 0.5 * sin(6.2831 * point + TIME * animation_speed);
             } else {
                 point = 0.5 + 0.5 * sin(6.2831 * point);
             }
-            
+
             vec2 diff = neighbor + point - f_st;
             float dist = length(diff);
-            
+
             if (dist < m_dist) {
                 m_dist = dist;
             }
@@ -68,7 +68,7 @@ void vertex() {
     if (use_vertex_displacement) {
         vec2 st = UV * cell_scale;
         float time_offset = animate ? TIME * time_scale : 0.0;
-        
+
         // Use cellular noise for vertex displacement
         float displacement = cellular(st + time_offset);
         VERTEX += NORMAL * displacement * vertex_displacement;
@@ -77,17 +77,17 @@ void vertex() {
 
 void fragment() {
     vec2 st = UV * cell_scale;
-    
+
     // Calculate time offset for displacement
     float time_offset = animate ? TIME * time_scale : 0.0;
-    
+
     // Calculate cellular noise values
     float r = cellular(st);
     float g = cellular(st + vec2(displacement_strength, 0.0)); // Horizontal displacement
     float b = cellular(st - vec2(0.0, sin(time_offset) * displacement_strength)); // Vertical displacement
-    
+
     vec3 final_color;
-    
+
     if (use_full_color) {
         // Use custom color channels
         final_color = base_color * (r * color_r + g * color_g + b * color_b);
@@ -95,21 +95,21 @@ void fragment() {
         // Original red-blue displacement effect
         final_color = base_color * vec3(r, 0.5, b);
     }
-    
+
     ALBEDO = final_color;
     ROUGHNESS = roughness;
     METALLIC = metallic;
     EMISSION = final_color * emission_strength;
-    
+
     // Calculate transparency based on cellular patterns
     float alpha = base_alpha;
-    
+
     if (use_pattern_alpha) {
         // Use cellular pattern to influence transparency
         float pattern_intensity = (r + g + b) / 3.0;
         alpha = mix(base_alpha * (1.0 - pattern_alpha_influence), base_alpha, pattern_intensity);
     }
-    
+
     // Add edge fade effect based on UV coordinates
     if (edge_fade > 0.0) {
         vec2 edge_dist = min(UV, 1.0 - UV);
@@ -117,9 +117,9 @@ void fragment() {
         float fade_factor = smoothstep(0.0, edge_fade, edge_factor);
         alpha *= fade_factor;
     }
-    
+
     ALPHA = alpha;
-    
+
     // Add subtle normal mapping based on cellular pattern
     vec3 normal_variation = vec3(r - 0.5, g - 0.5, 0.5) * 0.5 + 0.5;
     NORMAL_MAP = normal_variation;

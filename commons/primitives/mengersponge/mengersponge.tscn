@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5v3w8yxjkp2r"]
+
+[ext_resource type="Script" path="res://commons/primitives/mengersponge/mengersponge.gd" id="1_mengersponge"]
+
+[node name="MengerSponge" type="Node3D"]
+script = ExtResource("1_mengersponge")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 1.5, 2)

@@ -17,8 +17,10 @@ func _build_demo():
 	yaw_hinge.position = Vector3(0.0, 2.0, 0.0)
 	yaw_hinge.rotation = Vector3(0.0, 0.0, 0.0)
 	yaw_hinge.set_flag(HingeJoint3D.FLAG_USE_LIMIT, false)
-	yaw_hinge.set_flag(HingeJoint3D.FLAG_USE_MOTOR, true)
-	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_TORQUE, 60.0)
+	yaw_hinge.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
+	# Max torque is required or the motor will have no effect
+	# Godot 4 uses MAX_IMPULSE for motor strength
+	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_IMPULSE, 60.0)
 	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.2)
 	add_child(yaw_hinge)
 
@@ -31,8 +33,10 @@ func _build_demo():
 	pitch_hinge.set_flag(HingeJoint3D.FLAG_USE_LIMIT, true)
 	pitch_hinge.set_param(HingeJoint3D.PARAM_LIMIT_LOWER, deg_to_rad(-45.0))
 	pitch_hinge.set_param(HingeJoint3D.PARAM_LIMIT_UPPER, deg_to_rad(45.0))
-	pitch_hinge.set_flag(HingeJoint3D.FLAG_USE_MOTOR, true)
-	pitch_hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_TORQUE, 40.0)
+	pitch_hinge.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
+	# Max torque is required or the motor will have no effect
+	# Godot 4 uses MAX_IMPULSE for motor strength
+	pitch_hinge.set_param(HingeJoint3D.PARAM_MOTOR_MAX_IMPULSE, 40.0)
 	pitch_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, 0.0)
 	add_child(pitch_hinge)
 
@@ -60,11 +64,10 @@ func _physics_process(delta):
 		yaw_velocity = -1.5
 	elif Input.is_action_pressed("ui_right"):
 		yaw_velocity = 1.5
-	yaw_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, yaw_velocity)
+	#yaw_hinge.motor_target_velocity = yaw_velocity
 
 	var pitch_velocity := 0.0
 	if Input.is_action_pressed("ui_up"):
 		pitch_velocity = 1.2
 	elif Input.is_action_pressed("ui_down"):
 		pitch_velocity = -1.2
-	pitch_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, pitch_velocity)

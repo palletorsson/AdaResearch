@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/steering/noc_ch05/noc_5_04_flow_field_vr.gd" id="1_script"]
+
+[node name="FlowFieldVR" type="Node3D"]
+script = ExtResource("1_script")

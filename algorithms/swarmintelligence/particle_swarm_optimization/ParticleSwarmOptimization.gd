@@ -14,7 +14,7 @@ var social_coefficient = 1.5
 var global_best_position = Vector2.ZERO
 var global_best_fitness = -INF
 
-class Particle:
+class PSOParticle:
 	var position: Vector2
 	var velocity: Vector2
 	var personal_best_position: Vector2
@@ -58,7 +58,7 @@ func create_particles():
 			randf() * 2 * search_space - search_space
 		)
 		
-		var particle = Particle.new(start_pos)
+		var particle = PSOParticle.new(start_pos)
 		
 		# Create visual representation
 		var particle_sphere = CSGSphere3D.new()
