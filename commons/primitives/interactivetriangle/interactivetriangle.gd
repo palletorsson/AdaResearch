@@ -3,7 +3,7 @@ extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
-@export var sphere_y_offset: float = -5.9
+@export var sphere_y_offset: float = 0.0
 
 ## Freeze behavior options
 @export var alter_freeze : bool = false  # Keep triangle fixed; points move freely

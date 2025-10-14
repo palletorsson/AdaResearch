@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(taskkill:*)"
+      "Bash(python -c \"import re; content = open(''color_palettes.tres'', ''r'').read(); updated = re.sub(r''(\\))\\n(\\t\\t\\tColor)'', r''\\1,\\n\\2'', content); open(''color_palettes.tres'', ''w'').write(updated)\")"
     ],
     "deny": [],
     "ask": []

@@ -176,6 +176,52 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var color_param = parameters[1]
 				_apply_color_to_utility(utility_object, color_param)
 				print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % color_param)
+		"el":  # Extra light
+			var energy_value = null
+			if parameters.size() > 0:
+				var raw_energy := str(parameters[0]).strip_edges()
+				if not raw_energy.is_empty():
+					if raw_energy.is_valid_float():
+						energy_value = raw_energy.to_float()
+					else:
+						print("GridUtilitiesComponent: WARNING - Invalid light energy value %s for extra light" % raw_energy)
+			if energy_value != null:
+				if utility_object.has_method("set_light_intensity"):
+					utility_object.set_light_intensity(energy_value)
+				else:
+					var light_node := utility_object.get_node_or_null("StaticBody3D/OmniLight3D")
+					if light_node:
+						light_node.light_energy = max(energy_value, 0.0)
+				print("GridUtilitiesComponent: Set extra light intensity to %.2f" % energy_value)
+			var hide_flag_set := false
+			var hide_flag := false
+			if parameters.size() > 1:
+				var raw_hide := str(parameters[1]).strip_edges()
+				if not raw_hide.is_empty():
+					if raw_hide.is_valid_int():
+						hide_flag = raw_hide.to_int() != 0
+						hide_flag_set = true
+					elif raw_hide.is_valid_float():
+						hide_flag = raw_hide.to_float() != 0.0
+						hide_flag_set = true
+					else:
+						hide_flag = raw_hide.to_lower() in ["true", "yes"]
+						hide_flag_set = true
+			if hide_flag_set:
+				if utility_object.has_method("set_fixture_hidden"):
+					utility_object.set_fixture_hidden(hide_flag)
+				else:
+					var static_body := utility_object.get_node_or_null("StaticBody3D")
+					if static_body:
+						var collision_shape := static_body.get_node_or_null("CollisionShape3D")
+						if collision_shape and collision_shape is CollisionShape3D:
+							collision_shape.disabled = hide_flag
+						var mesh_node := static_body.get_node_or_null("MeshInstance3D_lightbody")
+						if mesh_node == null:
+							mesh_node = static_body.get_node_or_null("MeshInstance3D")
+						if mesh_node and mesh_node is Node3D:
+							mesh_node.visible = not hide_flag
+				print("GridUtilitiesComponent: Set extra light fixture hidden=%s" % str(hide_flag))
 		"an":  # Annotation/Info Board
 			print("GridUtilitiesComponent: Info board will load map data automatically")
 		"tc":  # Transport Cube

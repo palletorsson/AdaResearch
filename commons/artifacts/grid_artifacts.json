@@ -46,7 +46,20 @@
 			"lookup_name": "grab_sphere_point_color_with_text",
 			"description": "a grab_sphere_point_color_with_text",
 			"scene": "res://commons/primitives/point/grab_sphere_point_color_with_text.tscn",
+		},	
+		"vectorpoint": {
+			"name": "VectorPoint",
+			"lookup_name": "vectorpoint",
+			"description": "a VectorPoint",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
 		},		
+		"pythagorean_proof": {
+			"name": "pythagorean_proof",
+			"lookup_name": "pythagorean_proof",
+			"description": "a pythagorean_proof",
+			"scene": "res://commons/primitives/pythagorean_proof/pythagorean_proof.tscn",
+		},					
+		
 		"point_collection": {
 			"name": "point_collection",
 			"lookup_name": "point_collection",
@@ -173,6 +186,14 @@
 			"description": "A plane",
 			"scene": "res://commons/primitives/plane/plane.tscn",
 		},
+		
+		"cube": {
+			"name": "cube",
+			"lookup_name": "cube",
+			"description": "A scube",
+			"scene": "res://commons/primitives/cube/cube.tscn",
+		},	
+				
 		"sphere": {
 			"name": "sphere",
 			"lookup_name": "sphere",
@@ -500,6 +521,12 @@
 		  "description": "gridcolorizer",
 		  "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
 		},	
+		 "pillarcolorcollection": {
+		  "lookup_name": "pillarcolorcollection",
+		  "name": "pillarcolorcollection",
+		  "description": "pillarcolorcollection",
+		  "scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+		},			
 		"row_3_x": {
 			"name": "row_3_x",
 			"lookup_name": "row_3_x", 
@@ -2390,6 +2417,15 @@
 			"description": "Interactive colored line visualization and manipulation algorithms",
 			"scene": "res://algorithms/color/colorlines/coloredlines.tscn",
 		},
+
+		"brick_wall_factory": {
+			"name": "brick_wall_factory",
+			"lookup_name": "brick_wall_factory",
+			"description": "brick_wall_factory",
+			"scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn",
+		},
+				
+		
 		"grabcolorcollection": {
 			"name": "grabcolorcollection",
 			"lookup_name": "grabcolorcollection",

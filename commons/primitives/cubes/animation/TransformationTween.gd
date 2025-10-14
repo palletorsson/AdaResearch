@@ -5,7 +5,7 @@
 extends Node
 
 @export_group("Movement Settings")
-@export var movement_distance: Vector3 = Vector3(0, 1, 0)  # How far to move
+@export var movement_distance: Vector3 = Vector3(0, 3, 0)  # How far to move
 @export var duration: float = 2.0  # How long each movement takes
 @export var auto_start: bool = true  # Start animation automatically
 @export var loop_animation: bool = true  # Keep moving back and forth

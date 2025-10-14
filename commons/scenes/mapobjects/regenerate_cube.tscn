@@ -1,7 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bsvj4n5f2k3v8"]
 
-[ext_resource type="Script" path="res://commons/scenes/mapobjects/regenerate_cube.gd" id="1_regen_cube"]
+[ext_resource type="Script" uid="uid://co4i5t1cr06bk" path="res://commons/scenes/mapobjects/regenerate_cube.gd" id="1_regen_cube"]
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_detection"]
 

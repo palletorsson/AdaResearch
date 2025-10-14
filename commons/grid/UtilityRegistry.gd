@@ -71,6 +71,13 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # confirmation_timeout, require_confirmation
 	},
 	# Visual/Structural utilities
+	"el": {
+		"name": "extra_light",
+		"file": "overhead_light.tscn",
+		"category": "visual",
+		"description": "An extra overhead light.",
+		"supports_parameters": true
+	},
 	"w": {
 		"name": "window", 
 		"file": "window_scene.tscn", 

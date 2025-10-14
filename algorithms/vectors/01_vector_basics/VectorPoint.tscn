@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://djtfhfr0vgdib"]
+
+[ext_resource type="Script" uid="uid://0nmfvw3mbumw" path="res://algorithms/vectors/01_vector_basics/VectorPoint.gd" id="1"]
+
+[node name="VectorPoint" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.987295, 0.158899, 0, -0.158899, 0.987295, 0, 1.5, 5.06)

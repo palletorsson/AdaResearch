@@ -1,56 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene load_steps=11 format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
-[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="2_6o8e0"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
 [ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6o8e0"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
+sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
+ground_bottom_color = Color(0.775322, 0.714533, 0.644928, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jli6m"]
-noise = SubResource("FastNoiseLite_6o8e0")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jli6m"]
-shader = ExtResource("2_6o8e0")
-shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
-shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
-shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
-shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
-shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
-shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
-shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
-shader_parameter/horizon_blur = 0.05
-shader_parameter/sun_color = Color(1, 0.3, 0.8, 1)
-shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
-shader_parameter/sun_size = 0.1
-shader_parameter/sun_blur = 10.0
-shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
-shader_parameter/moon_size = 0.06
-shader_parameter/moon_blur = 0.1
-shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
-shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
-shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
-shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
-shader_parameter/clouds_speed = 2.0
-shader_parameter/clouds_direction = 0.2
-shader_parameter/clouds_scale = 1.0
-shader_parameter/clouds_cutoff = 0.3
-shader_parameter/clouds_fuzziness = 0.5
-shader_parameter/clouds_weight = 0.0
-shader_parameter/clouds_blur = 0.25
-shader_parameter/stars_texture = SubResource("NoiseTexture2D_jli6m")
-shader_parameter/stars_speed = 1.0
-shader_parameter/overwritten_time = 0.0
-
-[sub_resource type="Sky" id="Sky_7vr88"]
-sky_material = SubResource("ShaderMaterial_jli6m")
+[sub_resource type="Sky" id="Sky_al13m"]
+sky_material = SubResource("ProceduralSkyMaterial_al13m")
 
 [sub_resource type="Environment" id="Environment_q35sa"]
 background_mode = 2
 background_energy_multiplier = 2.74
-sky = SubResource("Sky_7vr88")
+sky = SubResource("Sky_al13m")
 ambient_light_source = 3
 ambient_light_color = Color(0.506377, 0.515376, 0.472721, 1)
 tonemap_mode = 3
@@ -89,10 +55,7 @@ text = "Base - Grid"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -53.0245, 0)
-
-[node name="StaticBody3D" parent="." index="6"]
-visible = false
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51939, -0.436035, 1.55084)

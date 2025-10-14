@@ -1,563 +1,1060 @@
 {
-	"format_version": "1.0",
-	"description": "Ambient sound presets for Ada Research VR educational system",
-	"last_updated": "2025-01-20",
-
-	"presets": {
-		"silent": {
-			"description": "No ambient sound - complete silence",
-			"continuous_layers": [],
-			"random_events": [],
-			"buses": {}
-		},
-
-		"lab_scientific": {
-			"description": "Clean scientific lab ambience with subtle electrical hum",
-			"continuous_layers": [
-				{
-					"sound_id": "SyntheticSoundGenerator.ambient_sound",
-					"volume_db": -20,
-					"bus": "Ambient",
-					"parameters": {
-						"entropy": 0.3,
-						"queer_factor": 0.5
-					}
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.SHIELD_HIT",
-						"SyntheticSoundGenerator.detection_sound"
-					],
-					"interval_range": [15.0, 45.0],
-					"volume_range": [-25, -20],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.4, "wet": 0.3, "damping": 0.5}
-					]
-				}
-			}
-		},
-
-		"techno_noir_subtle": {
-			"description": "Subtle dark ambient atmosphere using AudioSynthesizer",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-					"volume_db": -18,
-					"bus": "Ambient"
-				},
-				{
-					"sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
-					"volume_db": -22,
-					"bus": "Ambient"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.LASER_SHOT",
-						"AudioSynthesizer.SHIELD_HIT",
-						"AudioSynthesizer.APHEX_TWIN_GLITCH"
-					],
-					"interval_range": [20.0, 60.0],
-					"volume_range": [-22, -18],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.8, "wet": 0.5, "damping": 0.2}
-					]
-				}
-			}
-		},
-
-		"techno_noir_full": {
-			"description": "Full techno-noir cyberpunk experience",
-			"continuous_layers": [
-				{
-					"sound_id": "techno_noir.drone",
-					"volume_db": -10,
-					"bus": "Reverb"
-				},
-				{
-					"sound_id": "techno_noir.city_ambience",
-					"volume_db": -15,
-					"bus": "LowPass"
-				},
-				{
-					"sound_id": "techno_noir.rain_segment",
-					"volume_db": -18,
-					"bus": "Ambient"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"techno_noir.distant_siren",
-						"techno_noir.static_burst",
-						"techno_noir.mechanical_whir",
-						"techno_noir.typing_segment"
-					],
-					"interval_range": [3.0, 15.0],
-					"volume_range": [-18, -12],
-					"bus": "Delay"
-				}
-			],
-			"buses": {
-				"Reverb": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.9, "wet": 0.7, "damping": 0.1}
-					]
-				},
-				"LowPass": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 2000}
-					]
-				},
-				"Delay": {
-					"effects": [
-						{"type": "Delay", "dry": 0.8, "tap1_delay_ms": 250, "tap1_level": 0.3}
-					]
-				}
-			}
-		},
-
-		"liturgical_cathedral": {
-			"description": "Sacred cathedral atmosphere with choral and organ",
-			"continuous_layers": [
-				{
-					"sound_id": "liturgical.choral_foundation",
-					"volume_db": -8,
-					"bus": "Choir_Hall"
-				},
-				{
-					"sound_id": "liturgical.organ_foundation",
-					"volume_db": -12,
-					"bus": "Organ_Pipes"
-				},
-				{
-					"sound_id": "liturgical.string_atmosphere",
-					"volume_db": -10,
-					"bus": "Strings_Chamber"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"liturgical.cathedral_bell",
-						"liturgical.gregorian_phrase",
-						"liturgical.sacred_whisper",
-						"liturgical.pipe_organ_swell"
-					],
-					"interval_range": [8.0, 25.0],
-					"volume_range": [-18, -10],
-					"bus": "Cathedral_Reverb"
-				}
-			],
-			"buses": {
-				"Cathedral_Reverb": {
-					"effects": [
-						{"type": "Reverb", "room_size": 1.0, "wet": 0.7, "damping": 0.05}
-					]
-				},
-				"Choir_Hall": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.9, "wet": 0.5, "damping": 0.2}
-					]
-				},
-				"Strings_Chamber": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.6, "wet": 0.4, "damping": 0.3}
-					]
-				},
-				"Organ_Pipes": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.95, "wet": 0.6, "damping": 0.1},
-						{"type": "LowPassFilter", "cutoff_hz": 8000}
-					]
-				}
-			}
-		},
-
-		"computational_hum": {
-			"description": "Computational/analytical atmosphere for machine learning",
-			"continuous_layers": [
-				{
-					"sound_id": "SyntheticSoundGenerator.ambient_sound",
-					"volume_db": -15,
-					"bus": "Ambient",
-					"parameters": {
-						"entropy": 0.2,
-						"queer_factor": 0.3
-					}
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.C64_SID_PULSE",
-						"AudioSynthesizer.GAMEBOY_PULSE",
-						"AudioSynthesizer.COMMODORE_AMIGA_WAVE"
-					],
-					"interval_range": [10.0, 30.0],
-					"volume_range": [-20, -15],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "HighPassFilter", "cutoff_hz": 200},
-						{"type": "Reverb", "room_size": 0.3, "wet": 0.2, "damping": 0.6}
-					]
-				}
-			}
-		},
-
-		"dark_game_808": {
-			"description": "Dark 808/606 game track atmosphere",
-			"continuous_layers": [
-				{
-					"sound_id": "DarkGameTrack.AMBIENT_DRONE",
-					"volume_db": -12,
-					"bus": "Ambient"
-				},
-				{
-					"sound_id": "DarkGameTrack.DARK_808_SUB_BASS",
-					"volume_db": -15,
-					"bus": "Bass"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"DarkGameTrack.GLITCH_STAB",
-						"DarkGameTrack.BLADE_RUNNER_HIT"
-					],
-					"interval_range": [8.0, 20.0],
-					"volume_range": [-15, -10],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.7, "wet": 0.4}
-					]
-				},
-				"Bass": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 150}
-					]
-				}
-			}
-		},
-
-		"minimal_drone": {
-			"description": "Minimal ambient drone for focused work",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
-					"volume_db": -22,
-					"bus": "Ambient"
-				}
-			],
-			"random_events": [],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.5, "wet": 0.3, "damping": 0.4}
-					]
-				}
-			}
-		},
-
-		"fractal_exploration": {
-			"description": "Mathematical exploration atmosphere with subtle tones",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.MOOG_MINIMOOG_BASS",
-					"volume_db": -20,
-					"bus": "Ambient"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.KORG_M1_PIANO",
-						"AudioSynthesizer.PPG_WAVE_METALLIC"
-					],
-					"interval_range": [12.0, 35.0],
-					"volume_range": [-22, -18],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Chorus", "dry": 0.8, "wet": 0.3},
-						{"type": "Reverb", "room_size": 0.6, "wet": 0.4}
-					]
-				}
-			}
-		},
-
-		"particle_physics": {
-			"description": "Energetic atmosphere for particle and physics simulations",
-			"continuous_layers": [
-				{
-					"sound_id": "SyntheticSoundGenerator.ambient_sound",
-					"volume_db": -18,
-					"bus": "Ambient",
-					"parameters": {
-						"entropy": 0.5,
-						"queer_factor": 0.6
-					}
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.SHIELD_HIT",
-						"AudioSynthesizer.ACID_TB303_SQUELCH"
-					],
-					"interval_range": [5.0, 15.0],
-					"volume_range": [-20, -15],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.5, "wet": 0.35}
-					]
-				}
-			}
-		},
-
-		"blade_runner_minimal": {
-			"description": "Minimal dystopian cyberpunk atmosphere",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-					"volume_db": -20,
-					"bus": "Bass"
-				},
-				{
-					"sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
-					"volume_db": -18,
-					"bus": "Ambient"
-				},
-				{
-					"sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
-					"volume_db": -24,
-					"bus": "Strings"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.LASER_SHOT",
-						"AudioSynthesizer.SHIELD_HIT",
-						"AudioSynthesizer.APHEX_TWIN_GLITCH"
-					],
-					"interval_range": [25.0, 80.0],
-					"volume_range": [-28, -22],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.9, "wet": 0.6, "damping": 0.15}
-					]
-				},
-				"Bass": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 120}
-					]
-				},
-				"Strings": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.95, "wet": 0.7, "damping": 0.1},
-						{"type": "Chorus", "dry": 0.7, "wet": 0.4}
-					]
-				}
-			}
-		},
-
-		"industrial_machine": {
-			"description": "Dark mechanical industrial atmosphere",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
-					"volume_db": -22,
-					"bus": "Ambient"
-				},
-				{
-					"sound_id": "AudioSynthesizer.TB303_ACID_BASS",
-					"volume_db": -26,
-					"bus": "Acid"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.DARK_808_KICK",
-						"AudioSynthesizer.ACID_606_HIHAT",
-						"AudioSynthesizer.SYNARE_3_COSMIC_FX"
-					],
-					"interval_range": [8.0, 20.0],
-					"volume_range": [-25, -18],
-					"bus": "Effects"
-				}
-			],
-			"buses": {
-				"Ambient": {
-					"effects": [
-						{"type": "Distortion", "mode": 0, "drive": 0.2},
-						{"type": "Reverb", "room_size": 0.7, "wet": 0.4}
-					]
-				},
-				"Acid": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 800},
-						{"type": "Delay", "dry": 0.9, "tap1_delay_ms": 500, "tap1_level_db": -6.0}
-					]
-				}
-			}
-		},
-
-		"deep_void": {
-			"description": "Minimal dark void with occasional disturbances",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
-					"volume_db": -25,
-					"bus": "DeepAmbient"
-				},
-				{
-					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
-					"volume_db": -28,
-					"bus": "Wind"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.FLYING_LOTUS_SAMPLER",
-						"AudioSynthesizer.APHEX_TWIN_MODULAR"
-					],
-					"interval_range": [40.0, 120.0],
-					"volume_range": [-30, -24],
-					"bus": "Glitch"
-				}
-			],
-			"buses": {
-				"DeepAmbient": {
-					"effects": [
-						{"type": "Reverb", "room_size": 1.0, "wet": 0.8, "damping": 0.05},
-						{"type": "LowPassFilter", "cutoff_hz": 600}
-					]
-				},
-				"Glitch": {
-					"effects": [
-						{"type": "Delay", "dry": 0.7, "tap1_delay_ms": 750, "tap1_level_db": -3.0},
-						{"type": "Reverb", "room_size": 0.95, "wet": 0.6}
-					]
-				}
-			}
-		},
-
-		"vangelis_waves": {
-			"description": "Flowing very long synth waves - Blade Runner/Vangelis style with lush evolving pads",
-			"continuous_layers": [
-				{
-					"sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
-					"volume_db": -16,
-					"bus": "MainPad"
-				},
-				{
-					"sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
-					"volume_db": -18,
-					"bus": "StringPad"
-				},
-				{
-					"sound_id": "AudioSynthesizer.DX7_ELECTRIC_PIANO",
-					"volume_db": -22,
-					"bus": "HighPad"
-				},
-				{
-					"sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
-					"volume_db": -20,
-					"bus": "DeepDrone"
-				},
-				{
-					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-					"volume_db": -24,
-					"bus": "SubBass"
-				}
-			],
-			"random_events": [
-				{
-					"sound_pool": [
-						"AudioSynthesizer.KORG_M1_PIANO",
-						"AudioSynthesizer.DX7_ELECTRIC_PIANO",
-						"AudioSynthesizer.ARP_2600_LEAD"
-					],
-					"interval_range": [30.0, 90.0],
-					"volume_range": [-26, -20],
-					"bus": "DelayPad"
-				}
-			],
-			"buses": {
-				"MainPad": {
-					"effects": [
-						{"type": "Chorus", "dry": 0.5, "wet": 0.6},
-						{"type": "Reverb", "room_size": 0.95, "wet": 0.75, "damping": 0.08},
-						{"type": "Delay", "dry": 0.8, "tap1_delay_ms": 375, "tap1_level_db": -4.0}
-					]
-				},
-				"StringPad": {
-					"effects": [
-						{"type": "Reverb", "room_size": 1.0, "wet": 0.8, "damping": 0.05},
-						{"type": "Chorus", "dry": 0.6, "wet": 0.5}
-					]
-				},
-				"HighPad": {
-					"effects": [
-						{"type": "Reverb", "room_size": 0.92, "wet": 0.7, "damping": 0.1},
-						{"type": "Delay", "dry": 0.75, "tap1_delay_ms": 500, "tap1_level_db": -5.0}
-					]
-				},
-				"DeepDrone": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 800},
-						{"type": "Reverb", "room_size": 0.98, "wet": 0.85, "damping": 0.03}
-					]
-				},
-				"SubBass": {
-					"effects": [
-						{"type": "LowPassFilter", "cutoff_hz": 150},
-						{"type": "Reverb", "room_size": 0.7, "wet": 0.4, "damping": 0.2}
-					]
-				},
-				"DelayPad": {
-					"effects": [
-						{"type": "Delay", "dry": 0.5, "tap1_delay_ms": 1000, "tap1_level_db": -2.0},
-						{"type": "Reverb", "room_size": 0.98, "wet": 0.8, "damping": 0.06},
-						{"type": "Chorus", "dry": 0.6, "wet": 0.5}
-					]
-				}
-			}
-		}
-	}
+    "format_version": "1.0",
+    "description": "Ambient sound presets for Ada Research VR educational system",
+    "last_updated": "2025-01-20",
+    "presets": {
+        "silent": {
+            "description": "No ambient sound - complete silence",
+            "continuous_layers": [],
+            "random_events": [],
+            "buses": {}
+        },
+        "lab_scientific": {
+            "description": "Clean scientific lab ambience with subtle electrical hum",
+            "continuous_layers": [
+                {
+                    "sound_id": "SyntheticSoundGenerator.ambient_sound",
+                    "volume_db": -20,
+                    "bus": "Ambient",
+                    "parameters": {
+                        "entropy": 0.3,
+                        "queer_factor": 0.5
+                    }
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.SHIELD_HIT",
+                        "SyntheticSoundGenerator.detection_sound"
+                    ],
+                    "interval_range": [
+                        15.0,
+                        45.0
+                    ],
+                    "volume_range": [
+                        -25,
+                        -20
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.4,
+                            "wet": 0.3,
+                            "damping": 0.5
+                        }
+                    ]
+                }
+            }
+        },
+        "techno_noir_subtle": {
+            "description": "Subtle dark ambient atmosphere using AudioSynthesizer",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+                    "volume_db": -18,
+                    "bus": "Ambient"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+                    "volume_db": -22,
+                    "bus": "Ambient"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.LASER_SHOT",
+                        "AudioSynthesizer.SHIELD_HIT",
+                        "AudioSynthesizer.APHEX_TWIN_GLITCH"
+                    ],
+                    "interval_range": [
+                        20.0,
+                        60.0
+                    ],
+                    "volume_range": [
+                        -22,
+                        -18
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.8,
+                            "wet": 0.5,
+                            "damping": 0.2
+                        }
+                    ]
+                }
+            }
+        },
+        "techno_noir_full": {
+            "description": "Full techno-noir cyberpunk experience",
+            "continuous_layers": [
+                {
+                    "sound_id": "techno_noir.drone",
+                    "volume_db": -10,
+                    "bus": "Reverb"
+                },
+                {
+                    "sound_id": "techno_noir.city_ambience",
+                    "volume_db": -15,
+                    "bus": "LowPass"
+                },
+                {
+                    "sound_id": "techno_noir.rain_segment",
+                    "volume_db": -18,
+                    "bus": "Ambient"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "techno_noir.distant_siren",
+                        "techno_noir.static_burst",
+                        "techno_noir.mechanical_whir",
+                        "techno_noir.typing_segment"
+                    ],
+                    "interval_range": [
+                        3.0,
+                        15.0
+                    ],
+                    "volume_range": [
+                        -18,
+                        -12
+                    ],
+                    "bus": "Delay"
+                }
+            ],
+            "buses": {
+                "Reverb": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.9,
+                            "wet": 0.7,
+                            "damping": 0.1
+                        }
+                    ]
+                },
+                "LowPass": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 2000
+                        }
+                    ]
+                },
+                "Delay": {
+                    "effects": [
+                        {
+                            "type": "Delay",
+                            "dry": 0.8,
+                            "tap1_delay_ms": 250,
+                            "tap1_level": 0.3
+                        }
+                    ]
+                }
+            }
+        },
+        "liturgical_cathedral": {
+            "description": "Sacred cathedral atmosphere with choral and organ",
+            "continuous_layers": [
+                {
+                    "sound_id": "liturgical.choral_foundation",
+                    "volume_db": -8,
+                    "bus": "Choir_Hall"
+                },
+                {
+                    "sound_id": "liturgical.organ_foundation",
+                    "volume_db": -12,
+                    "bus": "Organ_Pipes"
+                },
+                {
+                    "sound_id": "liturgical.string_atmosphere",
+                    "volume_db": -10,
+                    "bus": "Strings_Chamber"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "liturgical.cathedral_bell",
+                        "liturgical.gregorian_phrase",
+                        "liturgical.sacred_whisper",
+                        "liturgical.pipe_organ_swell"
+                    ],
+                    "interval_range": [
+                        8.0,
+                        25.0
+                    ],
+                    "volume_range": [
+                        -18,
+                        -10
+                    ],
+                    "bus": "Cathedral_Reverb"
+                }
+            ],
+            "buses": {
+                "Cathedral_Reverb": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 1.0,
+                            "wet": 0.7,
+                            "damping": 0.05
+                        }
+                    ]
+                },
+                "Choir_Hall": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.9,
+                            "wet": 0.5,
+                            "damping": 0.2
+                        }
+                    ]
+                },
+                "Strings_Chamber": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.6,
+                            "wet": 0.4,
+                            "damping": 0.3
+                        }
+                    ]
+                },
+                "Organ_Pipes": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.95,
+                            "wet": 0.6,
+                            "damping": 0.1
+                        },
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 8000
+                        }
+                    ]
+                }
+            }
+        },
+        "computational_hum": {
+            "description": "Computational/analytical atmosphere for machine learning",
+            "continuous_layers": [
+                {
+                    "sound_id": "SyntheticSoundGenerator.ambient_sound",
+                    "volume_db": -15,
+                    "bus": "Ambient",
+                    "parameters": {
+                        "entropy": 0.2,
+                        "queer_factor": 0.3
+                    }
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.C64_SID_PULSE",
+                        "AudioSynthesizer.GAMEBOY_PULSE",
+                        "AudioSynthesizer.COMMODORE_AMIGA_WAVE"
+                    ],
+                    "interval_range": [
+                        10.0,
+                        30.0
+                    ],
+                    "volume_range": [
+                        -20,
+                        -15
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "HighPassFilter",
+                            "cutoff_hz": 200
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.3,
+                            "wet": 0.2,
+                            "damping": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "dark_game_808": {
+            "description": "Dark 808/606 game track atmosphere",
+            "continuous_layers": [
+                {
+                    "sound_id": "DarkGameTrack.AMBIENT_DRONE",
+                    "volume_db": -12,
+                    "bus": "Ambient"
+                },
+                {
+                    "sound_id": "DarkGameTrack.DARK_808_SUB_BASS",
+                    "volume_db": -15,
+                    "bus": "Bass"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "DarkGameTrack.GLITCH_STAB",
+                        "DarkGameTrack.BLADE_RUNNER_HIT"
+                    ],
+                    "interval_range": [
+                        8.0,
+                        20.0
+                    ],
+                    "volume_range": [
+                        -15,
+                        -10
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.7,
+                            "wet": 0.4
+                        }
+                    ]
+                },
+                "Bass": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 150
+                        }
+                    ]
+                }
+            }
+        },
+        "minimal_drone": {
+            "description": "Minimal ambient drone for focused work",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+                    "volume_db": -22,
+                    "bus": "Ambient"
+                }
+            ],
+            "random_events": [],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.5,
+                            "wet": 0.3,
+                            "damping": 0.4
+                        }
+                    ]
+                }
+            }
+        },
+        "fractal_exploration": {
+            "description": "Mathematical exploration atmosphere with subtle tones",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.MOOG_MINIMOOG_BASS",
+                    "volume_db": -20,
+                    "bus": "Ambient"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.KORG_M1_PIANO",
+                        "AudioSynthesizer.PPG_WAVE_METALLIC"
+                    ],
+                    "interval_range": [
+                        12.0,
+                        35.0
+                    ],
+                    "volume_range": [
+                        -22,
+                        -18
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Chorus",
+                            "dry": 0.8,
+                            "wet": 0.3
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.6,
+                            "wet": 0.4
+                        }
+                    ]
+                }
+            }
+        },
+        "particle_physics": {
+            "description": "Energetic atmosphere for particle and physics simulations",
+            "continuous_layers": [
+                {
+                    "sound_id": "SyntheticSoundGenerator.ambient_sound",
+                    "volume_db": -18,
+                    "bus": "Ambient",
+                    "parameters": {
+                        "entropy": 0.5,
+                        "queer_factor": 0.6
+                    }
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.SHIELD_HIT",
+                        "AudioSynthesizer.ACID_TB303_SQUELCH"
+                    ],
+                    "interval_range": [
+                        5.0,
+                        15.0
+                    ],
+                    "volume_range": [
+                        -20,
+                        -15
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.5,
+                            "wet": 0.35
+                        }
+                    ]
+                }
+            }
+        },
+        "blade_runner_minimal": {
+            "description": "Minimal dystopian cyberpunk atmosphere",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+                    "volume_db": -20,
+                    "bus": "Bass"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+                    "volume_db": -18,
+                    "bus": "Ambient"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
+                    "volume_db": -24,
+                    "bus": "Strings"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.LASER_SHOT",
+                        "AudioSynthesizer.SHIELD_HIT",
+                        "AudioSynthesizer.APHEX_TWIN_GLITCH"
+                    ],
+                    "interval_range": [
+                        25.0,
+                        80.0
+                    ],
+                    "volume_range": [
+                        -28,
+                        -22
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.9,
+                            "wet": 0.6,
+                            "damping": 0.15
+                        }
+                    ]
+                },
+                "Bass": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 120
+                        }
+                    ]
+                },
+                "Strings": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.95,
+                            "wet": 0.7,
+                            "damping": 0.1
+                        },
+                        {
+                            "type": "Chorus",
+                            "dry": 0.7,
+                            "wet": 0.4
+                        }
+                    ]
+                }
+            }
+        },
+        "industrial_machine": {
+            "description": "Dark mechanical industrial atmosphere",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+                    "volume_db": -22,
+                    "bus": "Ambient"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.TB303_ACID_BASS",
+                    "volume_db": -26,
+                    "bus": "Acid"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.DARK_808_KICK",
+                        "AudioSynthesizer.ACID_606_HIHAT",
+                        "AudioSynthesizer.SYNARE_3_COSMIC_FX"
+                    ],
+                    "interval_range": [
+                        8.0,
+                        20.0
+                    ],
+                    "volume_range": [
+                        -25,
+                        -18
+                    ],
+                    "bus": "Effects"
+                }
+            ],
+            "buses": {
+                "Ambient": {
+                    "effects": [
+                        {
+                            "type": "Distortion",
+                            "mode": 0,
+                            "drive": 0.2
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.7,
+                            "wet": 0.4
+                        }
+                    ]
+                },
+                "Acid": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 800
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.9,
+                            "tap1_delay_ms": 500,
+                            "tap1_level_db": -6.0
+                        }
+                    ]
+                }
+            }
+        },
+        "deep_void": {
+            "description": "Minimal dark void with occasional disturbances",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+                    "volume_db": -25,
+                    "bus": "DeepAmbient"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+                    "volume_db": -28,
+                    "bus": "Wind"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+                        "AudioSynthesizer.APHEX_TWIN_MODULAR"
+                    ],
+                    "interval_range": [
+                        40.0,
+                        120.0
+                    ],
+                    "volume_range": [
+                        -30,
+                        -24
+                    ],
+                    "bus": "Glitch"
+                }
+            ],
+            "buses": {
+                "DeepAmbient": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 1.0,
+                            "wet": 0.8,
+                            "damping": 0.05
+                        },
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 600
+                        }
+                    ]
+                },
+                "Glitch": {
+                    "effects": [
+                        {
+                            "type": "Delay",
+                            "dry": 0.7,
+                            "tap1_delay_ms": 750,
+                            "tap1_level_db": -3.0
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.95,
+                            "wet": 0.6
+                        }
+                    ]
+                }
+            }
+        },
+        "vangelis_waves": {
+            "description": "Flowing very long synth waves - Blade Runner/Vangelis style with lush evolving pads",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+                    "volume_db": -16,
+                    "bus": "MainPad"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.JUPITER_8_STRINGS",
+                    "volume_db": -18,
+                    "bus": "StringPad"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.DX7_ELECTRIC_PIANO",
+                    "volume_db": -22,
+                    "bus": "HighPad"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+                    "volume_db": -20,
+                    "bus": "DeepDrone"
+                },
+                {
+                    "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+                    "volume_db": -24,
+                    "bus": "SubBass"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.KORG_M1_PIANO",
+                        "AudioSynthesizer.DX7_ELECTRIC_PIANO",
+                        "AudioSynthesizer.ARP_2600_LEAD"
+                    ],
+                    "interval_range": [
+                        30.0,
+                        90.0
+                    ],
+                    "volume_range": [
+                        -26,
+                        -20
+                    ],
+                    "bus": "DelayPad"
+                }
+            ],
+            "buses": {
+                "MainPad": {
+                    "effects": [
+                        {
+                            "type": "Chorus",
+                            "dry": 0.5,
+                            "wet": 0.6
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.95,
+                            "wet": 0.75,
+                            "damping": 0.08
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.8,
+                            "tap1_delay_ms": 375,
+                            "tap1_level_db": -4.0
+                        }
+                    ]
+                },
+                "StringPad": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 1.0,
+                            "wet": 0.8,
+                            "damping": 0.05
+                        },
+                        {
+                            "type": "Chorus",
+                            "dry": 0.6,
+                            "wet": 0.5
+                        }
+                    ]
+                },
+                "HighPad": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.92,
+                            "wet": 0.7,
+                            "damping": 0.1
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.75,
+                            "tap1_delay_ms": 500,
+                            "tap1_level_db": -5.0
+                        }
+                    ]
+                },
+                "DeepDrone": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 800
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.98,
+                            "wet": 0.85,
+                            "damping": 0.03
+                        }
+                    ]
+                },
+                "SubBass": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 150
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.7,
+                            "wet": 0.4,
+                            "damping": 0.2
+                        }
+                    ]
+                },
+                "DelayPad": {
+                    "effects": [
+                        {
+                            "type": "Delay",
+                            "dry": 0.5,
+                            "tap1_delay_ms": 1000,
+                            "tap1_level_db": -2.0
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.98,
+                            "wet": 0.8,
+                            "damping": 0.06
+                        },
+                        {
+                            "type": "Chorus",
+                            "dry": 0.6,
+                            "wet": 0.5
+                        }
+                    ]
+                }
+            }
+        },
+        "techno_noir_bass_foundation": {
+            "description": "Tech-noir dark ambient bed with deep evolving bass pulses",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+                    "volume_db": -14,
+                    "bus": "Bass",
+                    "parameters": {
+                        "pulse_rate": 0.35,
+                        "filter_cutoff": 220.0
+                    }
+                },
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+                    "volume_db": -20,
+                    "bus": "Drone",
+                    "parameters": {
+                        "entropy": 0.25,
+                        "queer_factor": 0.6
+                    }
+                },
+                {
+                    "sound_id": "techno_noir.city_ambience",
+                    "volume_db": -22,
+                    "bus": "Texture"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.MOOG_KRAFTWERK_SEQUENCER",
+                        "AudioSynthesizer.GHOST_DRONE",
+                        "techno_noir.static_burst"
+                    ],
+                    "interval_range": [
+                        18.0,
+                        42.0
+                    ],
+                    "volume_range": [
+                        -24,
+                        -18
+                    ],
+                    "bus": "Events"
+                }
+            ],
+            "buses": {
+                "Bass": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 160
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.7,
+                            "wet": 0.35,
+                            "damping": 0.2
+                        }
+                    ]
+                },
+                "Drone": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.92,
+                            "wet": 0.6,
+                            "damping": 0.12
+                        },
+                        {
+                            "type": "Chorus",
+                            "dry": 0.6,
+                            "wet": 0.45
+                        }
+                    ]
+                },
+                "Texture": {
+                    "effects": [
+                        {
+                            "type": "Delay",
+                            "dry": 0.7,
+                            "tap1_delay_ms": 420,
+                            "tap1_level_db": -6.0
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.85,
+                            "wet": 0.5,
+                            "damping": 0.3
+                        }
+                    ]
+                },
+                "Events": {
+                    "effects": [
+                        {
+                            "type": "HighPassFilter",
+                            "cutoff_hz": 180
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.65,
+                            "tap1_delay_ms": 640,
+                            "tap1_level_db": -8.0
+                        }
+                    ]
+                }
+            }
+        },
+        "techno_noir_lofi_return": {
+            "description": "Tech-noir lofi pulse that drifts away and leaks back in",
+            "continuous_layers": [
+                {
+                    "sound_id": "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+                    "volume_db": -18,
+                    "bus": "Beat",
+                    "parameters": {
+                        "swing": 0.12,
+                        "tape_warp": 0.45
+                    }
+                },
+                {
+                    "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+                    "volume_db": -24,
+                    "bus": "Atmosphere",
+                    "parameters": {
+                        "entropy": 0.4,
+                        "queer_factor": 0.7
+                    }
+                },
+                {
+                    "sound_id": "techno_noir.rain_segment",
+                    "volume_db": -26,
+                    "bus": "Texture"
+                }
+            ],
+            "random_events": [
+                {
+                    "sound_pool": [
+                        "AudioSynthesizer.TR909_KICK",
+                        "AudioSynthesizer.ACID_606_HIHAT",
+                        "AudioSynthesizer.AMBIENT_WIND"
+                    ],
+                    "interval_range": [
+                        12.0,
+                        36.0
+                    ],
+                    "volume_range": [
+                        -26,
+                        -20
+                    ],
+                    "bus": "BeatFX"
+                },
+                {
+                    "sound_pool": [
+                        "techno_noir.distant_siren",
+                        "AudioSynthesizer.APHEX_TWIN_MODULAR"
+                    ],
+                    "interval_range": [
+                        45.0,
+                        120.0
+                    ],
+                    "volume_range": [
+                        -30,
+                        -24
+                    ],
+                    "bus": "AtmosphereFX"
+                }
+            ],
+            "buses": {
+                "Beat": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 1800
+                        },
+                        {
+                            "type": "Chorus",
+                            "dry": 0.7,
+                            "wet": 0.35
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.65,
+                            "tap1_delay_ms": 650,
+                            "tap1_level_db": -7.0
+                        }
+                    ]
+                },
+                "Atmosphere": {
+                    "effects": [
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.95,
+                            "wet": 0.65,
+                            "damping": 0.1
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.6,
+                            "tap1_delay_ms": 900,
+                            "tap1_level_db": -6.0
+                        }
+                    ]
+                },
+                "Texture": {
+                    "effects": [
+                        {
+                            "type": "HighPassFilter",
+                            "cutoff_hz": 500
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 0.8,
+                            "wet": 0.4
+                        }
+                    ]
+                },
+                "BeatFX": {
+                    "effects": [
+                        {
+                            "type": "LowPassFilter",
+                            "cutoff_hz": 1400
+                        },
+                        {
+                            "type": "Delay",
+                            "dry": 0.6,
+                            "tap1_delay_ms": 950,
+                            "tap1_level_db": -8.0
+                        }
+                    ]
+                },
+                "AtmosphereFX": {
+                    "effects": [
+                        {
+                            "type": "Delay",
+                            "dry": 0.55,
+                            "tap1_delay_ms": 1200,
+                            "tap1_level_db": -9.0
+                        },
+                        {
+                            "type": "Reverb",
+                            "room_size": 1.0,
+                            "wet": 0.75,
+                            "damping": 0.08
+                        }
+                    ]
+                }
+            }
+        }
+    }
 }

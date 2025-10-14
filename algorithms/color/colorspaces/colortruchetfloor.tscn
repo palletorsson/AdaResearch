@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckjd8ag7qiiua"]
+
+[ext_resource type="Shader" uid="uid://l7gfxm6ad5sg" path="res://commons/resourses/shaders/TruchetFloor.gdshader" id="1_t0nhi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmsqs"]
+render_priority = 0
+shader = ExtResource("1_t0nhi")
+shader_parameter/tile_size = 1.219
+shader_parameter/rotation_deg = 8.55e-06
+shader_parameter/grout = 0.085
+shader_parameter/edge_softness = 0.037
+shader_parameter/grout_color = Color(0.9, 0.86, 0.82, 1)
+shader_parameter/truchet_mode = 0
+shader_parameter/preset = 0
+shader_parameter/metallic = 0.97
+shader_parameter/roughness = 0.45
+shader_parameter/emission_strength = 0.0
+shader_parameter/light_tile = Color(0.97, 0.95, 0.93, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ykg4y"]
+material = SubResource("ShaderMaterial_qmsqs")
+size = Vector3(10, 0.2, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgrwo"]
+size = Vector3(10, 0.2, 20)
+
+[node name="Colortruchetfloor" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_ykg4y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_cgrwo")

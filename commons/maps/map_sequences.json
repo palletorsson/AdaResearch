@@ -25,7 +25,7 @@
 				"test"
 			],
 			"audio": {
-				"ambient_preset": "vangelis_waves",
+				"ambient_preset": "techno_noir_bass_foundation",
 				"volume": -8.0
 			},
 			"temps":[
@@ -50,19 +50,17 @@
 			],
 			"maps": [
 				"Point_1_0",
-
 				"Point_1_1",
 				"Point_Line_0",				
 				"Point_Line_1",
 				"Point_Triangle_1_0",
 				"Point_Triangle_1_1",
 				"Point_Animatedcube",
-				"Primitives_3",
 				"Primitives_1",
-				"Primitives_Torus",
-				"Primitives_Portals",
 				"Primitives_2",
-				"Primitives_4",	
+				"Primitives_Portals",
+				"Primitives_4",			
+				"Primitives_5",
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_primitives",
@@ -104,8 +102,10 @@
 			"maps": [
 				"Color_Grabbable",					
 				"Color_1",
-				"Color_2",			
-												
+				"Color_2",	
+				"Color_3",	
+				"Color_4",						
+				"Color_5",												
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",

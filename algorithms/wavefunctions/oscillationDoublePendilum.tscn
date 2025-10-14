@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqri25safcwou"]
+
+[ext_resource type="PackedScene" uid="uid://bg3wcsxn0u35t" path="res://Common/Scene/double_pendulum.tscn" id="1_phd1b"]
+[ext_resource type="PackedScene" uid="uid://nyyu265jxg7j" path="res://Common/Models/computers/DoubleScreen.glb" id="2_hou35"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgsnp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_swxfa"]
+
+[node name="oscillationDoublePendilum" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="DoublePendilum" parent="SubViewport" instance=ExtResource("1_phd1b")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.374844)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.076, 0, 0, 0, 0.076, 0, 0, 0, 0.076, 0.200729, 0.200192, 0.0334181)
+texture = SubResource("ViewportTexture_btd14")
+
+[node name="DrawTexture" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.195, 0, 0, 0, -8.52372e-09, -0.195, 0, 0.195, -8.52372e-09, -0.196301, 0.20051, 0.0372897)
+material_override = SubResource("StandardMaterial3D_sgsnp")
+mesh = SubResource("PlaneMesh_swxfa")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610895, 0, 1.96171)
+visible = false
+light_energy = 0.245
+
+[node name="DoubleScreen" parent="." instance=ExtResource("2_hou35")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

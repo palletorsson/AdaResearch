@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cok2f550nvl31"]
+
+[ext_resource type="Script" uid="uid://cr8e1y8myckm6" path="res://commons/primitives/pythagorean_proof/SplitQuadTriangles.gd" id="1_4k7j2"]
+
+[node name="SplitQuadTriangles" type="Node3D"]
+script = ExtResource("1_4k7j2")

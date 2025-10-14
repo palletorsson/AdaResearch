@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3q2vy0q5w1ox"]
+
+[ext_resource type="PackedScene" uid="uid://dit0krnhn3s88" path="res://Common/Scene/triangle_circle.tscn" id="1_krnqd"]
+[ext_resource type="PackedScene" uid="uid://nyyu265jxg7j" path="res://Common/Models/computers/DoubleScreen.glb" id="2_411b0"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgsnp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_swxfa"]
+
+[node name="oscillationAngularMotion" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="triangleCircle" parent="SubViewport" instance=ExtResource("1_krnqd")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00163025, 0.207537, 0.374844)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.076, 0, 0, 0, 0.076, 0, 0, 0, 0.076, 0.200729, 0.200192, 0.0334181)
+texture = SubResource("ViewportTexture_btd14")
+
+[node name="DrawTexture" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.195, 0, 0, 0, -8.52372e-09, -0.195, 0, 0.195, -8.52372e-09, -0.196301, 0.20051, 0.0372897)
+material_override = SubResource("StandardMaterial3D_sgsnp")
+mesh = SubResource("PlaneMesh_swxfa")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610895, 0, 1.96171)
+
+[node name="DoubleScreen" parent="." instance=ExtResource("2_411b0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

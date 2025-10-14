@@ -1,7 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwx7ddv7rwqpl"]
 
-[ext_resource type="Script" path="res://commons/scenes/mapobjects/next_cube.gd" id="1_next_cube"]
+[ext_resource type="Script" uid="uid://d1wn5ff6loag7" path="res://commons/scenes/mapobjects/next_cube.gd" id="1_next_cube"]
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_detection"]
 

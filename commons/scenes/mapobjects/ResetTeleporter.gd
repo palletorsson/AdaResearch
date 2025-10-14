@@ -40,7 +40,7 @@ func _get_grid_spawn_position() -> Vector3:
 	"""Try to get spawn position from GridSpawnComponent or map data"""
 	var scene_root = get_tree().current_scene
 	if not scene_root:
-		return Vector3(2.5, 16.0, 2.5)  # Default fallback
+		return Vector3(0.5, 16.0, 0.5)  # Default fallback
 
 	# Try to find GridSystem
 	var grid_system = scene_root.find_child("LabGridSystem", true, false)
@@ -48,7 +48,7 @@ func _get_grid_spawn_position() -> Vector3:
 		grid_system = scene_root.find_child("GridSystem", true, false)
 
 	if not grid_system:
-		return Vector3(2.5, 16.0, 2.5)  # No grid system found
+		return Vector3(0.5, 16.0, 0.5)  # No grid system found
 
 	# Try to get data component directly to read spawn points from JSON
 	if grid_system.has_node("GridDataComponent"):
@@ -63,7 +63,7 @@ func _get_grid_spawn_position() -> Vector3:
 						return Vector3(pos[0], pos[1], pos[2])
 
 	# Fallback to GridSpawnComponent default
-	return Vector3(2.5, 16.0, 2.5)
+	return Vector3(0.5, 16.0, 0.5)
 
 func _on_body_entered(body: Node3D):
 	# Don't trigger if not ready yet (prevents scene transition issues)

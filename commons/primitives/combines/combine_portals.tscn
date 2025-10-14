@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://wpdxoperlf3y" path="res://commons/primitives/combines/combine_portals.gd" id="1_4gqxr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_300sy"]
-albedo_color = Color(0.529638, 0.202236, 0.612734, 1)
+transparency = 1
+albedo_color = Color(0.529412, 0.203922, 0.611765, 0.807843)
 metallic = 0.59
 roughness = 0.0
+emission_enabled = true
+emission = Color(0.259294, 0.259294, 0.259294, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_088xj"]
 inner_radius = 4.0
@@ -20,5 +23,7 @@ script = ExtResource("1_4gqxr")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0)
 material_override = SubResource("StandardMaterial3D_300sy")
 mesh = SubResource("TorusMesh_088xj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lowrestorus"]
 
 [node name="Camera3D" type="Camera3D" parent="."]

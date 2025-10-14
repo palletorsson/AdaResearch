@@ -76,6 +76,7 @@ shape = SubResource("BoxShape3D_upvej")
 
 [node name="messageconsole" parent="XROrigin3D/LeftHand" index="3" instance=ExtResource("3_hea6t")]
 transform = Transform3D(1.74846e-08, -2.6401e-15, -0.4, -6.03983e-08, -0.4, 1.40086e-21, -0.4, 6.03983e-08, -1.74846e-08, -0.0511409, 0.0662661, 0.373891)
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="XROrigin3D/LeftHand" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.330398, 0, -2.98023e-08)
@@ -126,6 +127,7 @@ script = ExtResource("12_qiixw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.253602, 0, 1.24598)

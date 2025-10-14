@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://va82bivotm00"]
+
+[ext_resource type="Script" uid="uid://pajxnsgw306b" path="res://algorithms/color/brick_wall_factory/brick_wall_factory.gd" id="1_abc12"]
+
+[node name="BrickWallFactory" type="Node3D"]
+script = ExtResource("1_abc12")
+wall_width = 40
+wall_height = 50
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.33975)

@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvq5xm1kg2r8n"]
+[gd_scene load_steps=6 format=3 uid="uid://bvq5xm1kg2r8n"]
 
 [ext_resource type="Script" uid="uid://c4wljrhl04phw" path="res://algorithms/transformation/toruscylinder/toruscylinder.gd" id="1_torus_cylinder"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71awy"]
+albedo_color = Color(1, 0.227451, 1, 1)
+
 [sub_resource type="TorusMesh" id="TorusMesh_71awy"]
+material = SubResource("StandardMaterial3D_71awy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg35t"]
+albedo_color = Color(0.607843, 0.282353, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dg35t"]
+material = SubResource("StandardMaterial3D_dg35t")
+top_radius = 1.36
+bottom_radius = 1.115
+height = 5.925
 
 [node name="TorusCylinderScene" type="Node3D"]
 script = ExtResource("1_torus_cylinder")
@@ -17,6 +28,7 @@ transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0
 light_energy = 1.2
 
 [node name="TorusMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.575, 0, 0, 0, 3.575, 0, 0, 0, 3.575, 0, 0, 0)
 mesh = SubResource("TorusMesh_71awy")
 
 [node name="CylinderMesh" type="MeshInstance3D" parent="."]

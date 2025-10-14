@@ -25,6 +25,7 @@ var _is_glowing := false
 
 # Current controller holding this object
 var _current_controller : XRController3D
+var _active_controllers: Array[XRController3D] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -120,6 +121,10 @@ func _on_picked_up(_pickable) -> void:
 	if _current_controller:
 		_current_controller.button_pressed.connect(_on_controller_button_pressed)
 		_current_controller.button_released.connect(_on_controller_button_released)
+		if _current_controller not in _active_controllers:
+			_active_controllers.append(_current_controller)
+		if _active_controllers.size() == 2:
+			_duplicate_for_second_controller(_active_controllers[1])
 
 	_apply_glow()
 	_play_pickup_sound()
@@ -137,6 +142,7 @@ func _on_dropped(_pickable) -> void:
 	if _current_controller:
 		_current_controller.button_pressed.disconnect(_on_controller_button_pressed)
 		_current_controller.button_released.disconnect(_on_controller_button_released)
+		_active_controllers.erase(_current_controller)
 		_current_controller = null
 
 	# Restore original material when dropped
@@ -174,3 +180,20 @@ func _on_controller_button_released(button : String):
 			var mesh_instance = get_node_or_null("MeshInstance3D")
 			if mesh_instance:
 				mesh_instance.set_surface_override_material(0, _original_material)
+		if _current_controller:
+			_duplicate_for_second_controller(_current_controller)
+
+func _duplicate_for_second_controller(controller: XRController3D) -> void:
+	if controller == null:
+		return
+	var scene := load('res://commons/primitives/point/grab_sphere_point.tscn')
+	if scene == null:
+		return
+	var instance: Node3D = scene.instantiate()
+	if instance == null:
+		return
+	var parent := get_tree().current_scene
+	if parent == null:
+		parent = get_tree().root
+	parent.add_child(instance)
+	instance.global_transform = global_transform.translated(Vector3(0.1, 0, 0))

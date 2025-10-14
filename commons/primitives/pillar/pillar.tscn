@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqnhnsppumlx4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_footer"]
+size = Vector3(1, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Material_footer"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+metallic = 0.3
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_pillar"]
+size = Vector3(0.8, 3.6, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="Material_pillar"]
+albedo_color = Color(0.7, 0.65, 0.5, 1)
+metallic = 0.1
+roughness = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape_pillar"]
+size = Vector3(0.8, 4, 0.8)
+
+[node name="Pillar" type="Node3D"]
+
+[node name="Footer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_footer")
+surface_material_override/0 = SubResource("Material_footer")
+
+[node name="Column" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+mesh = SubResource("BoxMesh_pillar")
+surface_material_override/0 = SubResource("Material_pillar")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape_pillar")

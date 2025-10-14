@@ -4,120 +4,82 @@
 
 extends Node
 
-# Pattern collection with queer-friendly vibrant colors
-var color_patterns = {
-	"rose_vase": [
-		["rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose"],
-		["rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose"],
-		["rose", "rose", "yellow", "yellow", "white", "white", "blue", "rose", "rose", "rose", "rose"],
-		["rose", "rose", "yellow", "yellow", "white", "white", "blue", "rose", "rose", "rose", "rose"],
-		["rose", "rose", "red", "yellow", "white", "white", "rose", "yellow_green", "rose", "rose", "rose"],
-		["rose", "rose", "red", "white", "white", "white", "rose", "yellow_green", "rose", "rose", "rose"],
-		["rose", "rose", "red", "white", "white", "white", "rose", "yellow_green", "rose", "rose", "rose"],
-		["rose", "rose", "red", "white", "white", "green", "green", "yellow_green", "rose", "rose", "rose"],
-		["rose", "rose", "red", "green", "green", "green", "green", "green", "rose", "rose", "rose"],
-		["rose", "rose", "rose", "green", "green", "green", "green", "green", "green", "rose", "rose"],
-		["rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose", "rose"]
-	],
-	
-	"damascus_tiles": [
-		["teal", "teal", "gold", "gold", "gold", "navy", "navy", "gold", "gold", "teal", "olive"],
-		["teal", "teal", "gold", "gold", "gold", "navy", "navy", "gold", "gold", "teal", "olive"],
-		["teal", "teal", "gold", "gold", "gold", "navy", "navy", "gold", "gold", "teal", "olive"],
-		["teal", "teal", "teal", "teal", "teal", "navy", "navy", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "teal", "navy", "navy", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "teal", "navy", "navy", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "gold", "gold", "gold", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "gold", "gold", "gold", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "gold", "gold", "gold", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "gold", "gold", "gold", "navy", "navy", "navy", "navy"],
-		["teal", "teal", "teal", "teal", "gold", "gold", "gold", "navy", "navy", "navy", "navy"]
-	],
-	
-	"chinese_shell": [
-		["coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral"],
-		["coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral"],
-		["magenta", "magenta", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "lime", "lime", "lime", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "lime", "lime", "lime", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "cream", "cream", "cream", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "cream", "cream", "cream", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "cream", "cream", "cream", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "lime", "lime", "lime", "lime", "coral", "coral", "coral"],
-		["magenta", "magenta", "lime", "lime", "lime", "lime", "lime", "lime", "coral", "coral", "coral"],
-		["coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral", "coral"]
-	],
-	
-	"textile_saucer": [
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "orange", "blue", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "green", "green", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "green", "green", "green", "green"],
-		["pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "pale_yellow", "green", "green", "green", "green"]
-	],
-	
-	"antique_persian": [
-		["amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "burgundy", "burgundy", "burgundy", "burgundy", "amber", "amber", "amber"],
-		["amber", "amber", "amber", "amber", "burgundy", "burgundy", "burgundy", "burgundy", "amber", "amber", "amber"],
-		["rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust"],
-		["rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust"],
-		["rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust"],
-		["rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust", "rust"]
-	]
-}
+@export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 
-var current_pattern_index = 0
-var pattern_names = ["rose_vase", "damascus_tiles", "chinese_shell", "textile_saucer", "antique_persian", "rainbow_gradient", "sunset_gradient", "ocean_gradient", "pink_gradient", "sphere_reflection"]
+const DEFAULT_PALETTE_SEQUENCE := [
+	"starry_night",
+	"mondrian_grid",
+	"stonewall_freedom",
+	"frida_kahlo",
+	"neon_cyberpunk"
+]
+const GRADIENT_PATTERN_NAMES := [
+	"rainbow_gradient",
+	"sunset_gradient",
+	"ocean_gradient",
+	"pink_gradient"
+]
+const SPECIAL_PATTERN_NAMES := ["sphere_reflection"]
+
+var current_pattern_index := 0
+var palette_pattern_names: Array = []
+var pattern_names: Array = []
 
 # Manual pattern control
-var auto_cycle_enabled = true
+var auto_cycle_enabled := true
 
-# Vibrant queer-friendly color palette
-var colors = {
-	# Original rose vase colors (enhanced)
-	"rose": Color(0.95, 0.4, 0.75),       # Hot pink rose
-	"white": Color(0.98, 0.98, 0.98),     # Bright white
-	"blue": Color(0.2, 0.6, 1.0),         # Electric blue
-	"yellow": Color(1.0, 0.9, 0.0),       # Vibrant yellow
-	"red": Color(1.0, 0.2, 0.4),          # Neon red
-	"green": Color(0.2, 0.9, 0.4),        # Electric green
-	"yellow_green": Color(0.7, 1.0, 0.3), # Bright lime
-	
-	# Damascus tiles colors
-	"teal": Color(0.0, 0.8, 0.8),         # Bright teal
-	"gold": Color(1.0, 0.8, 0.0),         # Vibrant gold
-	"navy": Color(0.1, 0.2, 0.6),         # Deep navy
-	"olive": Color(0.5, 0.7, 0.3),        # Olive green
-	
-	# Chinese shell colors
-	"coral": Color(1.0, 0.5, 0.4),        # Bright coral
-	"magenta": Color(1.0, 0.0, 0.8),      # Electric magenta
-	"lime": Color(0.5, 1.0, 0.0),         # Neon lime
-	"cream": Color(0.98, 0.95, 0.85),     # Warm cream
-	
-	# Textile saucer colors
-	"pale_yellow": Color(1.0, 1.0, 0.7),  # Bright pale yellow
-	"orange": Color(1.0, 0.5, 0.0),       # Vibrant orange
-	
-	# Persian rug colors
-	"amber": Color(1.0, 0.75, 0.0),       # Bright amber
-	"burgundy": Color(0.8, 0.1, 0.4),     # Deep burgundy
-	"rust": Color(0.9, 0.4, 0.2)          # Bright rust
-}
+
+func _initialize_pattern_names():
+	if pattern_names.size() > 0:
+		return
+
+	palette_pattern_names.clear()
+	if color_palette_resource and "palettes" in color_palette_resource:
+		var palettes_dict = color_palette_resource.palettes
+		if typeof(palettes_dict) == TYPE_DICTIONARY:
+			for palette_name in DEFAULT_PALETTE_SEQUENCE:
+				if palettes_dict.has(palette_name):
+					palette_pattern_names.append(palette_name)
+			if palette_pattern_names.is_empty():
+				for palette_name in palettes_dict.keys():
+					palette_pattern_names.append(palette_name)
+
+	pattern_names = palette_pattern_names.duplicate()
+	pattern_names.append_array(GRADIENT_PATTERN_NAMES)
+	pattern_names.append_array(SPECIAL_PATTERN_NAMES)
+	current_pattern_index = clamp(current_pattern_index, 0, max(pattern_names.size() - 1, 0))
+
+func _get_palette_colors(palette_name: String) -> Array:
+	if color_palette_resource and "palettes" in color_palette_resource:
+		var palettes_dict = color_palette_resource.palettes
+		if typeof(palettes_dict) == TYPE_DICTIONARY and palettes_dict.has(palette_name):
+			var entry = palettes_dict[palette_name]
+			if typeof(entry) == TYPE_DICTIONARY and entry.has("colors"):
+				var colors_source = entry["colors"]
+				var result: Array = []
+				for color_value in colors_source:
+					result.append(color_value)
+				return result
+	return []
+
+func _apply_named_pattern(cubes: Array[MeshInstance3D], pattern_name: String) -> void:
+	if pattern_name.is_empty():
+		return
+
+	if palette_pattern_names.has(pattern_name):
+		var palette_colors = _get_palette_colors(pattern_name)
+		apply_pattern_to_cubes(cubes, palette_colors, pattern_name)
+	elif GRADIENT_PATTERN_NAMES.has(pattern_name):
+		apply_gradient_pattern(cubes, pattern_name)
+	elif SPECIAL_PATTERN_NAMES.has(pattern_name):
+		apply_sphere_reflection(cubes, pattern_name)
+	else:
+		print("ColorGrid: WARNING - Unknown pattern '%s'" % pattern_name)
+
 
 func _ready():
 	print("ColorGrid: Ready to cycle through vibrant queer patterns! 🌈")
+	_initialize_pattern_names()
 	# Wait one second before checking for cubes
 	await get_tree().create_timer(1.0).timeout
 	
@@ -142,10 +104,13 @@ func colorize_all_cubes():
 	# Sort cubes by position for consistent mapping
 	var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
 	
-	# Apply the first pattern (rose vase) as default
+	_initialize_pattern_names()
+	if pattern_names.is_empty():
+		print("ColorGrid: WARNING - No patterns available")
+		return
+
 	var pattern_name = pattern_names[0]
-	var pattern = color_patterns[pattern_name]
-	apply_pattern_to_cubes(sorted_cubes, pattern, pattern_name)
+	_apply_named_pattern(sorted_cubes, pattern_name)
 	
 	print("ColorGrid: Single cube colorization complete! 🎨")
 
@@ -195,60 +160,68 @@ func sort_cubes_by_3d_position(cubes: Array[MeshInstance3D]) -> Array[MeshInstan
 	
 	return cubes
 
+
 func start_pattern_cycling():
-	# Find cubes once at the start
+	_initialize_pattern_names()
+	if pattern_names.is_empty():
+		print("ColorGrid: No patterns available - pattern cycling aborted")
+		return
+
 	var cube_meshes = find_all_cube_meshes()
 	if cube_meshes.is_empty():
 		print("ColorGrid: No cubes found - pattern cycling aborted")
 		return
-	
+
 	var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
-	
-	# Start the cycling loop
+
 	while true:
 		var pattern_name = pattern_names[current_pattern_index]
-		
-		print("ColorGrid: 🎨 Switching to pattern: %s (%d/10)" % [pattern_name, current_pattern_index + 1])
-		
-		# Check if it's a gradient pattern or special effect
-		if pattern_name.ends_with("_gradient"):
-			apply_gradient_pattern(sorted_cubes, pattern_name)
-		elif pattern_name == "sphere_reflection":
-			apply_sphere_reflection(sorted_cubes, pattern_name)
-		else:
-			var pattern = color_patterns[pattern_name]
-			apply_pattern_to_cubes(sorted_cubes, pattern, pattern_name)
-		
-		# Wait 10 seconds
+		print("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
+		_apply_named_pattern(sorted_cubes, pattern_name)
+
 		await get_tree().create_timer(10.0).timeout
-		
-		# Move to next pattern
+
+		if pattern_names.is_empty():
+			_initialize_pattern_names()
+			if pattern_names.is_empty():
+				break
 		current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
 
-func apply_pattern_to_cubes(cubes: Array[MeshInstance3D], pattern: Array, pattern_name: String):
-	var cube_index = 0
-	var colored_count = 0
-	
-	# Apply colors row by row (11x11 grid)
-	for row in range(pattern.size()):
-		var row_data = pattern[row]
-		
-		for col in range(row_data.size()):
-			if cube_index >= cubes.size():
-				print("ColorGrid: Warning - ran out of cubes at position (%d, %d)" % [col, row])
+
+func apply_pattern_to_cubes(cubes: Array[MeshInstance3D], palette_colors: Array, pattern_name: String):
+	if palette_colors.is_empty():
+		print("ColorGrid: WARNING - Palette '%s' has no colors" % pattern_name)
+		return
+
+	var cube_total := cubes.size()
+	if cube_total == 0:
+		return
+
+	var grid_size := int(sqrt(float(cube_total)))
+	if grid_size * grid_size < cube_total:
+		grid_size += 1
+	grid_size = max(grid_size, 1)
+
+	var cube_index := 0
+	var colored_count := 0
+
+	for row in range(grid_size):
+		for col in range(grid_size):
+			if cube_index >= cube_total:
 				break
-			
-			var color_name = row_data[col]
-			var cube_mesh = cubes[cube_index]
-			
-			if colors.has(color_name):
-				var target_color = colors[color_name]
-				apply_color_to_mesh(cube_mesh, target_color, color_name)
+
+			var color_index := int((row + col) % palette_colors.size())
+			var color_value = palette_colors[color_index] if color_index < palette_colors.size() else null
+			if color_value is Color:
+				var cube_mesh = cubes[cube_index]
+				apply_color_to_mesh(cube_mesh, color_value, "%s_%d" % [pattern_name, color_index])
 				colored_count += 1
 			else:
-				print("ColorGrid: Unknown color: %s" % color_name)
-			
+				print("ColorGrid: WARNING - Non-color entry in palette '%s' at index %d" % [pattern_name, color_index])
+
 			cube_index += 1
+
+	print("ColorGrid: Applied palette '%s' to %d cubes" % [pattern_name, colored_count])
 
 func apply_gradient_pattern(cubes: Array[MeshInstance3D], gradient_name: String):
 	var grid_size = 11  # 11x11 grid
@@ -548,25 +521,26 @@ func _on_next_requested(from_position: Vector3):
 	print("ColorGrid: 🎨 Next pattern requested from %s" % from_position)
 	advance_to_next_pattern()
 
+
 func advance_to_next_pattern():
 	"""Manually advance to the next pattern"""
+	if pattern_names.is_empty():
+		_initialize_pattern_names()
+		if pattern_names.is_empty():
+			print("ColorGrid: No patterns available to advance")
+			return
+
 	current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
 	var pattern_name = pattern_names[current_pattern_index]
-	
-	print("ColorGrid: 🎨 Advancing to pattern: %s (%d/10)" % [pattern_name, current_pattern_index + 1])
-	
-	# Apply the new pattern immediately
+
+	print("ColorGrid: Switching to pattern: %s (%d/%d)" % [pattern_name, current_pattern_index + 1, pattern_names.size()])
+
 	var cube_meshes = find_all_cube_meshes()
-	if not cube_meshes.is_empty():
-		var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
-		
-		if pattern_name.ends_with("_gradient"):
-			apply_gradient_pattern(sorted_cubes, pattern_name)
-		elif pattern_name == "sphere_reflection":
-			apply_sphere_reflection(sorted_cubes, pattern_name)
-		else:
-			var pattern = color_patterns[pattern_name]
-			apply_pattern_to_cubes(sorted_cubes, pattern, pattern_name)
+	if cube_meshes.is_empty():
+		return
+
+	var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
+	_apply_named_pattern(sorted_cubes, pattern_name)
 
 # Public API for external control
 func get_current_pattern_index() -> int:
@@ -575,11 +549,17 @@ func get_current_pattern_index() -> int:
 func get_pattern_count() -> int:
 	return pattern_names.size()
 
+
 func set_pattern_by_index(index: int):
 	"""Set pattern by index"""
+	_initialize_pattern_names()
 	if index >= 0 and index < pattern_names.size():
 		current_pattern_index = index
-		advance_to_next_pattern()
+		var cube_meshes = find_all_cube_meshes()
+		if cube_meshes.is_empty():
+			return
+		var sorted_cubes = sort_cubes_by_3d_position(cube_meshes)
+		_apply_named_pattern(sorted_cubes, pattern_names[current_pattern_index])
 
 func get_current_pattern_name() -> String:
 	return pattern_names[current_pattern_index]

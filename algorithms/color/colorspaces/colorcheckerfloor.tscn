@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7jldkhkdjfbk"]
+
+[ext_resource type="Shader" uid="uid://ucgpmq6luayp" path="res://commons/resourses/shaders/ColorCheckerFloor.gdshader" id="1_m62vb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpsr4"]
+render_priority = 0
+shader = ExtResource("1_m62vb")
+shader_parameter/tile_size = 0.6
+shader_parameter/rotation_deg = 8.55e-06
+shader_parameter/grout = 0.06
+shader_parameter/edge_softness = 0.02
+shader_parameter/grout_color = Color(0.9, 0.86, 0.82, 1)
+shader_parameter/light_tile = Color(0.97, 0.95, 0.93, 1)
+shader_parameter/inner_fill_mix = 1.0
+shader_parameter/preset = 0
+shader_parameter/metallic = 0.757
+shader_parameter/roughness = 0.45
+shader_parameter/emission_strength = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_bf7mp"]
+material = SubResource("ShaderMaterial_lpsr4")
+size = Vector3(10, 0.2, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5wurn"]
+size = Vector3(10, 0.2, 20)
+
+[node name="Colorcheckerfloor" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_bf7mp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_5wurn")

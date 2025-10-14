@@ -37,6 +37,16 @@ import/blender/enabled=false
 
 singletons=["res://addons/godot-openxr/config/godot_openxr.gdnlib"]
 
+[global_script_classes]
+
+_global_script_class_0="GridMaterialFactory"
+_global_script_class_type_0="Object"
+_global_script_class_path_0="res://commons/primitives/shared/grid_material_factory.gd"
+_global_script_class_1="PrimitiveMeshBuilder"
+_global_script_class_type_1="Object"
+_global_script_class_path_1="res://commons/primitives/shared/primitive_mesh_builder.gd"
+_global_script_classes=["GridMaterialFactory", "PrimitiveMeshBuilder"]
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
@@ -125,13 +135,3 @@ openxr/enabled=true
 openxr/foveation_level=3
 openxr/foveation_dynamic=true
 shaders/enabled=true
-
-
-[global_script_classes]
-_global_script_class_0="GridMaterialFactory"
-_global_script_class_type_0="Object"
-_global_script_class_path_0="res://commons/primitives/shared/grid_material_factory.gd"
-_global_script_class_1="PrimitiveMeshBuilder"
-_global_script_class_type_1="Object"
-_global_script_class_path_1="res://commons/primitives/shared/primitive_mesh_builder.gd"
-_global_script_classes=[ "GridMaterialFactory", "PrimitiveMeshBuilder" ]
