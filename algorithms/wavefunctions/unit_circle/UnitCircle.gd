@@ -4,12 +4,12 @@ extends Node3D
 @export var rotation_speed: float = 0.5
 @export var wave_color := Color(0.8, 0.6, 1.0)  # Light purple to complement blue-pink gradient
 @export var projection_color := Color(0.4, 0.8, 1.0)  # Light blue to complement the gradient
-@export var line_thickness: float = 1
-@export var wave_width: float = 0.5  # Width of the 3D waveform
+@export var line_thickness: float = 0.5
+@export var wave_width: float = 2.5  # Width of the 3D waveform
 @export var num_cycles: int = 3
 @export var auto_stop: bool = true
 @export var samples_per_cycle: int = 140
-@export var wave_depth_scale: float = 0.2
+@export var wave_depth_scale: float = 3.2
 @export var extra_wave_buffer_cycles: int = 4
 @export var circle_resolution: int = 48
 @export var enable_collision: bool = true  # Enable collision for the waveform

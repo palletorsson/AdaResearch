@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dltj4y522mku4"]
+
+[ext_resource type="Script" uid="uid://db7041ew5uuk6" path="res://commons/interfaces/nail_color_controller.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dg5hn1rbxo8km" path="res://commons/interfaces/value_mapper_3d.tscn" id="2"]
+
+[node name="NailColorController" type="Node3D"]
+script = ExtResource("1")
+
+[node name="ValueMapper3D" parent="." instance=ExtResource("2")]
+space_size = Vector3(0.5, 0.5, 0.5)
+label_x = "R"
+label_y = "G"
+label_z = "B"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.8, 1.5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2, 0)

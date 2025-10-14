@@ -85,3 +85,6 @@ right_pose = ExtResource("7_n1cvh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SettingsUI/HandPoseArea"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
 shape = SubResource("BoxShape3D_7u64y")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.718268, -0.878707)

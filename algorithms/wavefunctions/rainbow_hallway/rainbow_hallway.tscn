@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxr"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/rainbow_hallway/RainbowHallway.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_1"]
+colors = PackedColorArray(0.2, 0.8, 0.2, 1, 0.8, 0.8, 0.2, 1, 0.8, 0.2, 0.2, 1)
+offsets = PackedFloat32Array(0, 0.5, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1"]
+gradient = SubResource("Gradient_1")
+
+[node name="RainbowHallway" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3, 8)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 0.8
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(10, 6, 20)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+operation = 1
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+radius = 2.5
+height = 25
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(1, 0.9, 0.7, 1)
+light_energy = 2.0
+omni_range = 15.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10)
+light_color = Color(1, 0.9, 0.7, 1)
+light_energy = 2.0
+omni_range = 15.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10)
+light_color = Color(1, 0.9, 0.7, 1)
+light_energy = 2.0
+omni_range = 15.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -20.0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Rainbow Hallway"
+theme_override_font_sizes/font_size = 24
+
+[node name="HSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+value = 0.5
+step = 0.01
+
+[node name="Label2" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Gradient Position"
+
+[node name="HSlider2" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 2.0
+value = 1.0
+step = 0.01
+
+[node name="Label3" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Animation Speed"

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8yak2m3n4p5q"]
+
+[ext_resource type="Script" uid="uid://d2enkff5n7obn" path="res://algorithms/wavefunctions/static_cables/StaticCables.gd" id="1_abc123"]
+
+[node name="StaticCables" type="Node3D"]
+script = ExtResource("1_abc123")
+cable_count = 15
+cable_length = 40.0
+cable_spacing = 2.5
+cable_radius = 0.08
+ring_segments = 8
+points_per_cable = 80
+pattern_type = "Straight"
+sag_amount = 1.5
+wave_amplitude = 2.0
+wave_frequency = 1.2
+spiral_turns = 3.0
+random_variation = 0.8
+cable_color = Color(0.8, 0.8, 0.9, 1)
+cable_metallic = 0.3
+cable_roughness = 0.4
+cable_emission = 0.1
+use_vertex_colors = true
+color_variation = 0.3
+environment_brightness = 0.3
+fog_density = 0.02
+ambient_color = Color(0.1, 0.1, 0.15, 1)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7yq3vr8mnqxc"]
+
+[ext_resource type="Script" path="res://commons/interfaces/value_mapper_1d.gd" id="1"]
+
+[node name="ValueMapper1D" type="Node3D"]
+script = ExtResource("1")
+line_length = 1.0
+line_color = Color(0.788235, 0.462745, 0.996078, 1)
+line_thickness = 0.01
+output_min = 0.0
+output_max = 1.0
+show_labels = true
+label_text = "Value"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 0.6, 2)

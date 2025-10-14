@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b13yw0rx6x7uv"]
+
+[ext_resource type="Script" uid="uid://bog6us56g5acm" path="res://commons/interfaces/value_mapper_example.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b7yq3vr8mnqxc" path="res://commons/interfaces/value_mapper_1d.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c5x2hp8vwn7yb" path="res://commons/interfaces/value_mapper_2d.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dg5hn1rbxo8km" path="res://commons/interfaces/value_mapper_3d.tscn" id="4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_demo"]
+radius = 0.15
+height = 0.3
+
+[node name="ValueMapperExample" type="Node3D"]
+script = ExtResource("1")
+
+[node name="ValueMapper1D" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, 0)
+line_length = 0.8
+label_text = "Size"
+
+[node name="ValueMapper2D" parent="." instance=ExtResource("3")]
+plane_size = Vector2(0.8, 0.8)
+
+[node name="ValueMapper3D" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, 0)
+space_size = Vector3(0.5, 0.5, 0.5)
+label_x = "R"
+label_y = "G"
+label_z = "B"
+
+[node name="DemoSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+mesh = SubResource("SphereMesh_demo")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 1, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2, 0)

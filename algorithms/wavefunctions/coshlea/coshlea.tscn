@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyhr7bm4hbrnu"]
+
+[ext_resource type="Script" uid="uid://c71ed4ihibtng" path="res://algorithms/wavefunctions/coshlea/CosHLea.gd" id="1_coshlea"]
+
+[node name="CosHLea" type="Node3D"]
+script = ExtResource("1_coshlea")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 4.10805, 12, 18)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 10, 0)
+light_energy = 1.2

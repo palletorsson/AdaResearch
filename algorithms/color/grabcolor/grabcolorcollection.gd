@@ -123,6 +123,12 @@ func set_paper_color(paper_instance: Node3D, color: Color) -> void:
 		material.emission = color * 0.2
 		material.emission_energy_multiplier = 0.5
 		mesh_instance.material_override = material
+
+		var label = paper_instance.get_node_or_null("Label")
+		if label:
+			var hex_code = color.to_html(false)
+			var rgb_value = "RGB: (%d, %d, %d)" % [color.r * 255, color.g * 255, color.b * 255]
+			label.text = "%s\n%s" % [hex_code, rgb_value]
 	else:
 		print("Warning: Could not find MeshInstance3D or material for paper")
 

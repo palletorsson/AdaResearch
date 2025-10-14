@@ -61,6 +61,9 @@ func clear_points() -> void:
 func _queue_rebuild() -> void:
 	_rebuild_queued = true
 
+func _rebuild_mesh() -> void:
+	_rebuild_mesh_immediate()
+
 func get_point_count() -> int:
 	return _points.size()
 

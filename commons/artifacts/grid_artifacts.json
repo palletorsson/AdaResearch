@@ -448,6 +448,13 @@
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/context/XYZcoordinates/xyz_gadget.tscn",
 		},
+		"value_mapper_example": {
+			"name": "value_mapper_example",
+			"lookup_name": "value_mapper_example",
+			"description": "value_mapper_example",
+			"scene": "res://commons/interfaces/value_mapper_example.tscn",
+		},
+		
 		"animated_cube": {
 			"name": "Animated Cube",
 			"lookup_name": "animated_cube",
@@ -515,7 +522,14 @@
 		  "description": "Entrance tile with door frame and label text",
 		  "scene": "res://commons/primitives/entrances/level_entrance.tscn",
 		},
-		 "gridcolorizer": {
+		
+		"nail_color_controller": {
+		  "lookup_name": "nail_color_controller",
+		  "name": "nail_color_controller",
+		  "description": "nail_color_controller",
+		  "scene": "res://commons/interfaces/nail_color_controller.tscn",
+		},	
+		"gridcolorizer": {
 		  "lookup_name": "gridcolorizer",
 		  "name": "gridcolorizer",
 		  "description": "gridcolorizer",
@@ -589,6 +603,19 @@
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
 		},
+		"ColoredLinesVR": {
+			"name": "ColoredLinesVR",
+			"lookup_name": "ColoredLinesVR",
+			"description": "ColoredLinesVR",
+			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn",
+		},
+		"StaticCables": {
+			"name": "StaticCables",
+			"lookup_name": "StaticCables",
+			"description": "StaticCables",
+			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
+		},
+		
 		"doublehelix": {
 			"name": "doublehelix",
 			"lookup_name": "doublehelix",
@@ -1003,15 +1030,49 @@
 		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
 		
 	},
-		"mario_test_sound_ui": {
+	"mario_test_sound_ui": {
 		"name": "mario_test_sound_ui",
 		"lookup_name": "mario_test_sound_ui",
 		"description": "mario_test_sound_ui",
 		"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
 		
 	},
-	
-	
+	"sine_wave_controller": {
+		"name": "sine_wave_controller",
+		"lookup_name": "sine_wave_controller",
+		"description": "sine_wave_controller",
+		"scene": "res://commons/interfaces/sine_wave_controller.tscn",
+		
+	},
+	"coshlea": {
+		"name": "coshlea",
+		"lookup_name": "coshlea",
+		"description": "coshlea",
+		"scene": "algorithms/wavefunctions/coshlea/coshlea.tscn",
+		
+	},
+	"sine_cylinder_staircase": {
+		"name": "sine_cylinder_staircase",
+		"lookup_name": "sine_cylinder_staircase",
+		"description": "sine_cylinder_staircase",
+		"scene": "es://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+		
+	},	
+		"rainbow_hallway": {
+		"name": "rainbow_hallway",
+		"lookup_name": "rainbow_hallway",
+		"description": "rainbow_hallway",
+		"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
+		
+	},
+		"hallway_scene": {
+		"name": "hallway_scene",
+		"lookup_name": "hallway_scene",
+		"description": "hallway_scene",
+		"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+		
+	},
+
 	"bernini_columns": {
 		"name": "Bernini Columns",
 		"lookup_name": "bernini_columns",
@@ -1977,6 +2038,14 @@
 			"scene": "res://algorithms/color/colortrails/colortrails.tscn",
 
 		},	
+			"colorballs": {
+			"name": "colorballs",
+			"lookup_name": "colorballs",
+			"description": "colorballs",
+			"scene": "res://algorithms/color/colorballs/colorballs.tscn",
+
+		},		
+			
 		"mondrian_3d_display": {
 			"name": "Mondrian 3D Display",
 			"lookup_name": "mondrian_3d_display",

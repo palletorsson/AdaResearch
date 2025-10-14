@@ -21,6 +21,9 @@ var sound_enabled: bool = true
 var music_volume: float = 0.8
 var sfx_volume: float = 0.7
 
+# Player customization
+var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
+
 # Signals
 signal score_updated(new_score: int)
 signal pickup_collected(pickup_position: Vector3)
@@ -30,6 +33,7 @@ signal regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionar
 signal health_updated(new_health: float)
 signal player_damaged(amount: float, new_health: float)
 signal current_map_changed(map_name: String)
+signal nail_color_changed(new_color: Color)
 var console_messages: Array[Dictionary] = []
 var max_console_messages: int = 100
 
@@ -196,6 +200,15 @@ func set_music_volume(volume: float) -> void:
 func set_sfx_volume(volume: float) -> void:
 	sfx_volume = clamp(volume, 0.0, 1.0)
 
+# Nail color management
+func set_nail_color(color: Color) -> void:
+	nail_color = color
+	emit_signal("nail_color_changed", nail_color)
+	print("GameManager: Nail color set to %s" % color)
+
+func get_nail_color() -> Color:
+	return nail_color
+
 # Save and load game state
 func save_game() -> void:
 	var save_data = {
@@ -203,6 +216,7 @@ func save_game() -> void:
 		"sound_enabled": sound_enabled,
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
+		"nail_color": {"r": nail_color.r, "g": nail_color.g, "b": nail_color.b, "a": nail_color.a},
 		"timestamp": Time.get_datetime_string_from_system()
 	}
 	
@@ -223,12 +237,18 @@ func load_game() -> bool:
 	if save_file:
 		var save_data = save_file.get_var()
 		save_file.close()
-		
+
 		player_score = save_data.get("player_score", 0)
 		sound_enabled = save_data.get("sound_enabled", true)
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
-		
+
+		# Load nail color
+		var color_data = save_data.get("nail_color", null)
+		if color_data:
+			nail_color = Color(color_data.get("r", 1.0), color_data.get("g", 0.5), color_data.get("b", 0.7), color_data.get("a", 1.0))
+			emit_signal("nail_color_changed", nail_color)
+
 		emit_signal("score_updated", player_score)
 		print("GameManager: Game loaded successfully - Score: %d" % player_score)
 		return true

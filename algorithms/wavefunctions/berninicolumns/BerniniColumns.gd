@@ -244,18 +244,36 @@ func add_column_capital(column_node: Node3D):
 # --- Scene Setup Functions ---
 
 func create_platform():
-	# Creates a simple box mesh to act as a floor or base.
-	var platform = MeshInstance3D.new()
-	var box_mesh = BoxMesh.new()
-	box_mesh.size = Vector3(6.0, 0.3, 6.0)
-	platform.mesh = box_mesh
-	platform.position.y = -0.5
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.6, 0.6, 0.6, 1.0) # Gray marble-like color
-	platform.set_surface_override_material(0, material)
-	
-	add_child(platform)
+	# Creates a three-step base for the columns.
+	var base_material = StandardMaterial3D.new()
+	base_material.albedo_color = Color(0.6, 0.6, 0.6, 1.0) # Gray marble-like color
+
+	# Step 1 (Bottom)
+	var step1 = MeshInstance3D.new()
+	var mesh1 = BoxMesh.new()
+	mesh1.size = Vector3(8.0, 0.2, 8.0)
+	step1.mesh = mesh1
+	step1.position.y = -0.1
+	step1.set_surface_override_material(0, base_material)
+	add_child(step1)
+
+	# Step 2 (Middle)
+	var step2 = MeshInstance3D.new()
+	var mesh2 = BoxMesh.new()
+	mesh2.size = Vector3(7.0, 0.2, 7.0)
+	step2.mesh = mesh2
+	step2.position.y = 0.1
+	step2.set_surface_override_material(0, base_material)
+	add_child(step2)
+
+	# Step 3 (Top)
+	var step3 = MeshInstance3D.new()
+	var mesh3 = BoxMesh.new()
+	mesh3.size = Vector3(6.0, 0.2, 6.0)
+	step3.mesh = mesh3
+	step3.position.y = 0.3
+	step3.set_surface_override_material(0, base_material)
+	add_child(step3)
 
 func create_lighting():
 	# Sets up basic lighting for the scene to make the columns visible.

@@ -31,13 +31,13 @@ func _build_geometry():
 	# Arrow head (cone) placed at +X end
 	arrow = MeshInstance3D.new()
 	var cone := CylinderMesh.new()  # Use cylinder with top_radius = 0 to form a cone
-	cone.top_radius = 0.0
-	cone.bottom_radius = max(thickness * 3.0, 0.01)
+	cone.top_radius = max(thickness * 3.0, 0.01)
+	cone.bottom_radius = 0.0
 	cone.height = arrow_size
 	cone.radial_segments = 16
 	arrow.mesh = cone
-	# Place arrow at end of shaft; orient along +X
-	var end_pos := Vector3(length * 0.5, 0.0, 0.0)
+	# Place arrow at end of shaft; orient along +X with cone pointing outward
+	var end_pos := Vector3(length * 0.5 + arrow_size * 0.5, 0.0, 0.0)
 	var basis := Basis(Vector3(0,1,0), Vector3(-1,0,0), Vector3(0,0,1))
 	arrow.transform = Transform3D(basis, end_pos)
 	arrow.material_override = mat

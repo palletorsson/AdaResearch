@@ -35,3 +35,9 @@ mesh = SubResource("8")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("5_bmrce")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.073151, 0, 0.0739675)
+
+[node name="Label" type="Label3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+text = "Color Info"
+font_size = 72
+pixel_size = 0.005
