@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_5 - Torus Translation Runway",
+		"layout": "Expanded 12x14 field with northern staging pads, a mid-lane transport cube, and southern return deck.",
+		"objective": "Combine long-form translations with torus-cylinder manipulation and distant pickup goals.",
+		"key_elements": [
+			"Transport cube `tc:3:z` positioned along the north lane",
+			"`toruscylinder:0:4` demo tower at (5,2)",
+			"`dark_sphere` canopy over the runway",
+			"Remote `pick_up_cube:0:0:1` target at (1,12)",
+			"Teleporter `t` and score cube `sp` sharing the south platform"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "0", "0", "0", "0"],

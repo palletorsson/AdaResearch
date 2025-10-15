@@ -17,6 +17,16 @@
 			"learning_objectives": ["Understand VR spatial presence", "Learn basic movement", "Concept of world progression"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Start - Motion Showcase",
+		"layout": "3x3 entry plate featuring three animated cubes directly in front of the teleporter.",
+		"objective": "Demonstrate rotating and oscillating cube behaviors right after spawning.",
+		"key_elements": [
+			"Spawn `s` at (0,0)",
+			"Animated trio: `rotating_cube`, `oscillation_cube`, `rotation_oscillation_cube` across the south row",
+			"Teleporter `t` at (1,2) to move into the next tutorial"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2"],

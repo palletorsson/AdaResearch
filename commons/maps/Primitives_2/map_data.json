@@ -16,6 +16,19 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_2 - Polyhedron Gallery",
+		"layout": "7x14 corridor with alternating 2-high pedestals presenting ordered shape families; exit alcove in the south-east.",
+		"objective": "Survey canonical polyhedra and compare structural variations.",
+		"key_elements": [
+			"Scaled `cube`, `pyramid`, and `octahedron` display row at (1/3/5,2)",
+			"`dodecahedron`, `prism`, `icosahedron` lineup at (1/3/5,4)",
+			"`lshape`, `bipyramid`, `halocube` sequence at (1/3/5,6)",
+			"Irregular set (`roughrock`, `prism_block`, `truncatedtetrahedron`) at (1/3/5,8)",
+			"`dark_sphere` dome at (3,5)",
+			"Teleporter `t` at (5,11)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

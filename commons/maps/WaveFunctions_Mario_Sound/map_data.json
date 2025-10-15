@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions Mario Sound Lab",
+		"layout": "13x14 lab deck with central audio console, pickups, and annotation panels along the exit side.",
+		"objective": "Manipulate Mario-themed wave samples and collect pickups before proceeding.",
+		"key_elements": [
+			"`mario_test_sound_ui` console at the arena core",
+			"`dark_sphere` overhead dome for focus",
+			"Pickup cube cluster supporting replay",
+			"Annotation `an` and teleporter `t` leading to the next lesson"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

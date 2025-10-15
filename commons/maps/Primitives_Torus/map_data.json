@@ -16,6 +16,16 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_Torus - Torus Assembly Pad",
+		"layout": "7x10 platform with open south-east recess for the exit teleporter.",
+		"objective": "Inspect torus composition controls and observe the resulting geometry.",
+		"key_elements": [
+			"`combine_torus` station at (0,0) elevated by 0.5",
+			"`dark_sphere` ambient dome at (3,3)",
+			"Teleporter `t` at (5,8)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

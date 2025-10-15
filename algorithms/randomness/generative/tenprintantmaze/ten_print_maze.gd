@@ -11,7 +11,7 @@ extends Node3D
 @export var wall_thickness: float = 0.1
 
 # Ant settings
-@export var ant_speed: float = 2.0
+@export var ant_speed: float = 5.0
 @export var ant_size: float = 0.3
 @export var ant_color: Color = Color.RED
 @export var path_color: Color = Color(1.0, 0.5, 0.0)

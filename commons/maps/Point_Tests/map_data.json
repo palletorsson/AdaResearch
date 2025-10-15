@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Point_Tests - Experimental Grid",
+		"layout": "Planar 12x13 testbed with northern 2-high ridge; open experimentation floor.",
+		"objective": "Provide sandbox for geometry utility evaluation.",
+		"key_elements": [
+			"Teleporter `t` at (5,6)",
+			"`combine_capsule` gallery at (1,1)",
+			"`doublestick:90:0.5` linkage at (3,3)",
+			"`cube_scene_drag_points` scaled 0.8 at (1,4)",
+			"`combine_sphere` array at (1,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],

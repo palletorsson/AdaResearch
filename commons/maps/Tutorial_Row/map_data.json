@@ -16,6 +16,17 @@
 			"learning_objectives": ["Y-axis navigation", "Forward movement in VR", "Linear progression", "3D spatial awareness"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Row - Row Focus",
+		"layout": "3x12 corridor highlighting row scanning with spawn at the north and exit mid-way down the hall.",
+		"objective": "Reinforce row traversal concepts through the `column_3_z` widget and coordinate reference.",
+		"key_elements": [
+			"Spawn `s` at (0,0)",
+			"`column_3_z` interaction rig near the north",
+			"`xyz_coordinates` marker at (2,7)",
+			"Score cube `sp` and teleporter `t` positioned at (0,7) and (1,7)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", " ", " ", " ", " "],

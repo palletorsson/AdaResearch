@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions Circle/Cone/Sphere/Torus",
+		"layout": "13x14 gallery with a recessed central pad for geometric waveforms and a ringed observation path.",
+		"objective": "Experiment with the Mario-themed sound and geometry UI to mix circle, cone, sphere, and torus harmonics.",
+		"key_elements": [
+			"Spawn `s` at the northern edge",
+			"`mario_test_sound_ui` console at the core platform",
+			"Annotation cube `an` and score cube `sp` framing the southern exit",
+			"Teleporter `t` leading onward"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],

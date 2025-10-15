@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=27 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b48aivfdv6q8h" path="res://commons/body/hands/right_hand.tscn" id="12_cwrn5"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
-[ext_resource type="PackedScene" uid="uid://raeeicvvindd" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_hand.tscn" id="13_cwrn5"]
 [ext_resource type="Script" uid="uid://rt6n5myljxfg" path="res://addons/godot-xr-tools/hands/hand.gd" id="13_j7xni"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://m85b1gogdums" path="res://addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres" id="14_mjcnw"]
 [ext_resource type="Shader" uid="uid://8lp3am10hjmy" path="res://commons/resourses/shaders/basic_grid.gdshader" id="15_7fdd7"]
@@ -111,8 +110,6 @@ hand_material_override = null
 default_pose = ExtResource("15_to05d")
 grip_action = "grip"
 trigger_action = "trigger"
-
-[node name="RightHand2" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="6" instance=ExtResource("13_cwrn5")]
 
 [node name="GhostHand" parent="XROrigin3D/RightHand" index="1" instance=ExtResource("15_8l1pr")]
 visible = false

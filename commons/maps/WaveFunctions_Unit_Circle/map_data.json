@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions Unit Circle",
+		"layout": "13x14 floor with a walkway leading to an elevated unit circle platform under a dark dome.",
+		"objective": "Navigate the walkway to explore the advanced unit circle animator.",
+		"key_elements": [
+			"Spawn `s` at the start of the ramp",
+			"Walkway `wp` guiding players across the span",
+			"`unit_circle_advanced` feature at the platform",
+			"Teleporter `t` beyond the exhibit"
+		]
+	},
 	"layers": {
 		"structure": [
 			["4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4"],

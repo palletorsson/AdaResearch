@@ -16,6 +16,15 @@
 			"learning_objectives": ["Large 2D arrays", "Pattern recognition", "Interactive tiles", "Spatial navigation"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Game - Projectile Training Arena",
+		"layout": "11x18 arena with elevated platforms and opposing projectile spawners guarding the exit.",
+		"objective": "Introduce cube projectile hazards and prepare players for game-style encounters.",
+		"key_elements": [
+			"Twin `cube_projectile_spawner` utilities at (4,15) and (6,15)",
+			"Teleporter `t` at (5,16) closing the exercise"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],

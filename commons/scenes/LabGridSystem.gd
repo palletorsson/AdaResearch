@@ -5,7 +5,7 @@ class_name LabGridSystem
 # Lab-specific styling
 @export var lab_mode: bool = true
 @export var lab_cube_color: Color = Color(0.95, 0.95, 0.98, 1.0)  # Off-white
-@export var lab_ambient_color: Color = Color(0.9, 0.9, 1.0, 0.3)  # Cool lab lighting
+@export var lab_ambient_color: Color = Color(0.9, 0.9, 1.0, 1.0)  # Cool lab lighting
 
 # Progressive map support
 var is_progressive_map: bool = false
@@ -134,7 +134,7 @@ func _apply_lab_material_to_cube(cube: Node3D):
 		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
 		lab_shader_material.set_shader_parameter("emissionColor", Color(0.6, 0.6, 0.6, 1.0))   # Gray emission
 		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
-		lab_shader_material.set_shader_parameter("modelOpacity", 0.95)  # Slightly transparent
+		lab_shader_material.set_shader_parameter("modelOpacity", 1.0)  # Slightly transparent
 		
 		# Apply the modified shader material
 		mesh_instance.material_override = lab_shader_material

@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_4 - Prism Symmetry Lab",
+		"layout": "7x10 hall framed by prism-block columns with a suspended diamond array at the center and exit recess to the south-east.",
+		"objective": "Explore rotational symmetry using prism blocks and hanging diamond primitives.",
+		"key_elements": [
+			"`prism_block` columns outlining the workspace (z=2-6)",
+			"`diamonds:0:-1:0.8` installation at (3,4)",
+			"`dark_sphere` dome at (3,3)",
+			"Teleporter `t` at (5,8)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

@@ -55,7 +55,7 @@ func setup_environment():
 	env.glow_hdr_threshold = 0.5
 	
 	# Set background
-	env.background = Environment.BG_SKY
+	env.background_mode = Environment.BG_SKY
 	env.sky = Sky.new()
 	
 	# Apply to world environment
@@ -80,6 +80,9 @@ func update_shader_parameters():
 		shader_material.set_shader_parameter("gradient_offset", gradient_offset)
 		shader_material.set_shader_parameter("glow_intensity", glow_intensity)
 		shader_material.set_shader_parameter("emission_strength", emission_strength)
+		# Map gradient across exactly 10 meters in world Z
+		shader_material.set_shader_parameter("gradient_start_z", 0.0)
+		shader_material.set_shader_parameter("gradient_length_m", 10.0)
 
 func _on_gradient_changed(value: float):
 	gradient_offset = value
@@ -110,7 +113,9 @@ func add_light_at_position(position: Vector3, color: Color = Color.WHITE, energy
 func create_light_sequence(positions: Array[Vector3], colors: Array[Color] = []):
 	"""Create a sequence of lights along the hallway"""
 	if colors.is_empty():
-		colors = [Color.WHITE] * positions.size()
+		colors = []
+		for i in range(positions.size()):
+			colors.append(Color.WHITE)
 	
 	for i in range(positions.size()):
 		var color = colors[i] if i < colors.size() else Color.WHITE

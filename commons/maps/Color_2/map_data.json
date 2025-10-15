@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_2 - Rainbow Walkway",
+		"layout": "7x60 suspended corridor with repeating rainbow emitters, mid-course dome, and transport return walkway.",
+		"objective": "Walk through animated rainbow pillars while interacting with pickups and walkway transport.",
+		"key_elements": [
+			"Series of `rainbow:0:0.5:0.1` emitters along the main lane",
+			"Pickup cubes staggered mid-way for interaction resets",
+			"Mid-corridor `dark_sphere` observation point",
+			"Walkway `wp` and teleporter `t` with score cube `sp` at the far turnaround"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"], 

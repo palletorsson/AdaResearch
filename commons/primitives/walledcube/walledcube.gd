@@ -63,5 +63,9 @@ func set_base_color(color: Color) -> void:
 
 func set_cube_size(size: float) -> void:
 	cube_size = size
-\tif _mesh_instance:\r\n\t\tif _mesh_instance.get_parent() == self:\r\n\t\t\tremove_child(_mesh_instance)\r\n\t\t_mesh_instance.queue_free()\r\n\t_mesh_instance = null
+	if _mesh_instance:
+		if _mesh_instance.get_parent() == self:
+			remove_child(_mesh_instance)
+			_mesh_instance.queue_free()
+			_mesh_instance = null
 	call_deferred("_build_walled_cube")

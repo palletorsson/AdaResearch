@@ -149,8 +149,39 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
 	match utility_type:
 		"t":  # Teleport
+			var destination = ""
+			var height_offset = 0.0
+			var has_explicit_destination = false
+
+			# Parse parameters: can be t, t:next, t:next:3, t:3, t:mapname, t:mapname:2
 			if parameters.size() > 0:
-				var destination = parameters[0]
+				var first_param = parameters[0]
+
+				# If first param is numeric, treat it as height offset only
+				if first_param.is_valid_float():
+					height_offset = float(first_param)
+					# Don't set destination - let utility_definitions handle it
+				# If first param is "next", it's explicit but handled by utility_definitions
+				elif first_param == "next":
+					# Don't set destination - let utility_definitions handle it
+					# Check for height offset in second parameter
+					if parameters.size() > 1:
+						var second_param = parameters[1]
+						if second_param.is_valid_float():
+							height_offset = float(second_param)
+				# Otherwise it's a specific map destination
+				else:
+					destination = first_param
+					has_explicit_destination = true
+
+					# Check for height offset in second parameter
+					if parameters.size() > 1:
+						var second_param = parameters[1]
+						if second_param.is_valid_float():
+							height_offset = float(second_param)
+
+			# Only set destination if explicitly provided (not "next" or numeric-only)
+			if has_explicit_destination:
 				if "destination" in utility_object:
 					utility_object.destination = destination
 				else:
@@ -161,6 +192,20 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					utility_object.scene_name = destination
 
 				print("GridUtilitiesComponent: Set teleporter destination to: %s" % destination)
+			else:
+				print("GridUtilitiesComponent: Teleporter using default 'next_in_sequence' behavior from utility_definitions")
+
+			# Apply height offset if specified
+			if height_offset != 0.0:
+				if "height_offset" in utility_object:
+					utility_object.height_offset = height_offset
+				else:
+					utility_object.set_meta("height_offset", height_offset)
+
+				# Adjust the teleporter's vertical position
+				utility_object.position.y += height_offset
+
+				print("GridUtilitiesComponent: Set teleporter height offset to: %f" % height_offset)
 		"l":  # Lift
 			if parameters.size() > 0 and "height" in utility_object:
 				utility_object.height = float(parameters[0])

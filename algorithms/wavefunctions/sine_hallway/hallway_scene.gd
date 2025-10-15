@@ -22,7 +22,6 @@ var elapsed: float = 0.0
 
 func _ready():
 	_setup_environment()
-	_create_hallway()
 	_create_sine_tubes()
 
 func _process(delta: float) -> void:
@@ -41,30 +40,6 @@ func _setup_environment():
 	env.glow_hdr_threshold = 0.6
 	$WorldEnvironment.environment = env
 
-func _create_hallway():
-	var floor := MeshInstance3D.new()
-	var floor_mesh := BoxMesh.new()
-	floor_mesh.size = Vector3(hallway_width, 0.5, hallway_length)
-	floor.mesh = floor_mesh
-	floor.material_override = _make_metallic(Color(0.1, 0.1, 0.12))
-	floor.position = Vector3(0, -0.25, 0)
-	add_child(floor)
-
-	var ceiling := floor.duplicate() as MeshInstance3D
-	ceiling.position.y = hallway_height
-	add_child(ceiling)
-
-	var wall_left := MeshInstance3D.new()
-	var wl_mesh := BoxMesh.new()
-	wl_mesh.size = Vector3(0.5, hallway_height, hallway_length)
-	wall_left.mesh = wl_mesh
-	wall_left.material_override = _make_reflective(Color(0.85, 0.88, 0.95))
-	wall_left.position = Vector3(-hallway_width * 0.5, hallway_height * 0.5, 0)
-	add_child(wall_left)
-
-	var wall_right := wall_left.duplicate() as MeshInstance3D
-	wall_right.position.x = hallway_width * 0.5
-	add_child(wall_right)
 
 func _create_sine_tubes():
 	var half_len := int(tube_length * 0.5)

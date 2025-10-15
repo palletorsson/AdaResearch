@@ -4,8 +4,8 @@
 extends Node3D
 
 @export var points_per_line: int = 120
-@export var animation_speed: float = 1.0
-@export var flow_speed: float = 2.0
+@export var animation_speed: float = 0.0  # Set to 0 for static lines
+@export var flow_speed: float = 0.0  # Set to 0 for static colors
 @export var hallway_width: float = 12.0
 @export var hallway_length: float = 60.0
 @export var hallway_height: float = 8.0
@@ -13,8 +13,8 @@ extends Node3D
 @export var span_wave_amp: float = 2.2
 @export var span_twist_amp: float = 1.1
 @export var span_frequency: float = 1.5
-@export var line_radius: float = 0.12
-@export var ring_segments: int = 12
+@export var line_radius: float = 0.3  # Thicker tubes
+@export var ring_segments: int = 16  # More segments for smoother tubes
 
 var line_meshes: Array[MeshInstance3D] = []
 var line_materials: Array[ShaderMaterial] = []
@@ -31,38 +31,49 @@ shader_type spatial;
 render_mode depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
 
 uniform float time_offset = 0.0;
-uniform float flow_speed = 1.0;
+uniform float flow_speed = 0.0;  // Static by default
 uniform vec4 color_start : source_color = vec4(1.0, 0.0, 0.5, 1.0);
 uniform vec4 color_end : source_color = vec4(0.0, 0.5, 1.0, 1.0);
 uniform float glow_intensity = 1.5;
-uniform float thickness_variation = 0.8;
-uniform float pulse_frequency = 2.0;
+uniform float thickness_variation = 0.0;  // No thickness animation by default
+uniform float pulse_frequency = 0.0;  // No pulse by default
 
 varying float line_progress;
 
 void vertex() {
 	line_progress = UV.x;
-	float thickness = 1.0 + sin(line_progress * 10.0 + TIME * pulse_frequency) * thickness_variation;
+	// Static thickness - no animation when pulse_frequency is 0
+	float thickness = 1.0;
+	if (pulse_frequency > 0.0) {
+		thickness += sin(line_progress * 10.0 + TIME * pulse_frequency) * thickness_variation;
+	}
 	VERTEX.xyz *= thickness;
 }
 
 void fragment() {
-	float flow_time = TIME * flow_speed + time_offset;
-	float color_wave = sin(line_progress * 6.2831 + flow_time) * 0.5 + 0.5;
+	// Static gradient based on position along line
+	float color_wave = line_progress;  // Simple gradient, no time-based animation
 	vec3 flowing_color = mix(color_start.rgb, color_end.rgb, color_wave);
-	float hue_shift = line_progress + flow_time * 0.2;
+
+	// Optional rainbow effect, but static
+	float hue_shift = line_progress;  // No time component for static look
 	vec3 rainbow = vec3(
 		sin(hue_shift * 6.2831) * 0.5 + 0.5,
 		sin(hue_shift * 6.2831 + 2.094) * 0.5 + 0.5,
 		sin(hue_shift * 6.2831 + 4.188) * 0.5 + 0.5
 	);
 	vec3 final_color = mix(flowing_color, rainbow, 0.3);
-	float pulse = sin(TIME * pulse_frequency + line_progress * 3.1415) * 0.3 + 0.7;
+
+	// Static intensity - no pulse
+	float pulse = 1.0;
+
+	// Center glow effect
 	float center_distance = abs(UV.y - 0.5) * 2.0;
 	float glow = 1.0 - pow(center_distance, 0.5);
+
 	ALBEDO = final_color;
-	EMISSION = final_color * glow_intensity * pulse * glow;
-	ALPHA = color_start.a * glow;
+	EMISSION = final_color * glow_intensity * glow;
+	ALPHA = color_start.a;
 }
 """
 
@@ -99,28 +110,13 @@ func _setup_environment() -> void:
 		camera.environment = env
 
 func _create_hallway_box() -> void:
-	var floor_mesh := BoxMesh.new()
-	floor_mesh.size = Vector3(hallway_width, FLOOR_THICKNESS, hallway_length)
-	var floor := MeshInstance3D.new()
-	floor.name = "Floor"
-	floor.mesh = floor_mesh
-	floor.position = Vector3(0.0, FLOOR_OFFSET_Y - FLOOR_THICKNESS * 0.5, 0.0)
-	floor.material_override = _make_metal(Color(0.1, 0.1, 0.12))
-	add_child(floor)
+	
 
-	var floor_body := StaticBody3D.new()
-	floor_body.name = "FloorBody"
-	var floor_shape := CollisionShape3D.new()
-	var floor_shape_res := BoxShape3D.new()
-	floor_shape_res.size = floor_mesh.size
-	floor_shape.shape = floor_shape_res
-	floor_body.add_child(floor_shape)
-	floor_body.position = floor.position
-	add_child(floor_body)
+
 
 	var ceiling := MeshInstance3D.new()
 	ceiling.name = "Ceiling"
-	ceiling.mesh = floor_mesh
+
 	ceiling.position = Vector3(0.0, hallway_height + FLOOR_OFFSET_Y, 0.0)
 	ceiling.material_override = _make_metal(Color(0.12, 0.12, 0.18))
 	add_child(ceiling)
@@ -216,10 +212,10 @@ func create_line_meshes() -> void:
 		material.set_shader_parameter("color_start", color1)
 		material.set_shader_parameter("color_end", color2)
 		material.set_shader_parameter("time_offset", randf_range(0.0, 10.0))
-		material.set_shader_parameter("flow_speed", flow_speed + randf_range(-0.5, 0.5))
-		material.set_shader_parameter("glow_intensity", randf_range(1.0, 2.5))
-		material.set_shader_parameter("thickness_variation", randf_range(0.3, 1.2))
-		material.set_shader_parameter("pulse_frequency", randf_range(1.0, 4.0))
+		material.set_shader_parameter("flow_speed", flow_speed)  # Use export value directly
+		material.set_shader_parameter("glow_intensity", randf_range(1.5, 2.0))  # Consistent glow
+		material.set_shader_parameter("thickness_variation", 0.0)  # No thickness variation
+		material.set_shader_parameter("pulse_frequency", 0.0)  # No pulsing
 
 		mesh_instance.set_surface_override_material(0, material)
 		_line_container.add_child(mesh_instance)
@@ -295,13 +291,13 @@ func start_line_animations() -> void:
 		_deform_tween.kill()
 	_deform_tween = null
 
+	# Only animate if animation_speed is greater than 0
 	if animation_speed > 0.0:
 		var duration: float = 15.0 / max(animation_speed, 0.01)
 		_deform_tween = create_tween()
 		_deform_tween.set_loops()
 		_deform_tween.tween_method(Callable(self, "_update_line_deformation"), 0.0, TAU, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	_animate_shader_properties()
+		_animate_shader_properties()  # Only animate shader properties if lines are animating
 
 func _update_line_deformation(time: float) -> void:
 	for i in range(line_meshes.size()):

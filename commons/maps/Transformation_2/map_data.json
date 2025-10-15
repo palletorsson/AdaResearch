@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_2 - Symmetry Grid",
+		"layout": "7x8 floor with mirrored workstations flanking a central manipulation lane.",
+		"objective": "Practice mirrored cube transformations and observe combined rotate-scale sequences.",
+		"key_elements": [
+			"Utility pickups `p` framing the north and south rows",
+			"`transformation_cube` pairs at (2,2) (4,2) (2,4) (4,4)",
+			"`rotatescalecubes:0:12` centerpiece at (3,3)",
+			"`dark_sphere` dome over the active zone",
+			"Teleporter `t` stationed at (5,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

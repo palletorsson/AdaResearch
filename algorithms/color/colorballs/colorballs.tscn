@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8x7lam2n3p4q"]
+[gd_scene load_steps=4 format=3 uid="uid://b8x7lam2n3p4q"]
 
 [ext_resource type="Script" uid="uid://c1dnkff4n6obn" path="res://algorithms/color/colorballs/colorballs.gd" id="1_abc123"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_nw1lg"]
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nw1lg"]
+size = Vector3(10, 0.2, 10)
+
 [node name="ColorBalls" type="Node3D"]
 script = ExtResource("1_abc123")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02559, 2.89893)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 2.0
+omni_range = 10.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22427, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nw1lg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_nw1lg")

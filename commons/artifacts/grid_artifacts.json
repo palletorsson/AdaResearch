@@ -7,100 +7,100 @@
 		"menu": {
 			"name": "menu",
 			"lookup_name": "menu",
-			"description": "a menu",
+			"description": "Stacked slanted-cube VR menu with animated hover, keyboard navigation, and theme switching.",
 			"scene": "res://commons/primitives/menu/menu.tscn",
 		},
 		"dark_sphere": {
 			"name": "dark_sphere",
 			"lookup_name": "dark_sphere",
-			"description": "a dark_sphere",
+			"description": "Large reflective black sphere used as an ambient dome for isolating demos.",
 			"scene": "res://commons/primitives/sphere/dark_sphere.tscn",
 		},
 		"point": {
 			"name": "1.0 A Point",
 			"lookup_name": "point",
-			"description": "0.0 A Point",
+			"description": "Pickable point sphere that continuously displays its world coordinates with a floating label.",
 			"scene": "res://commons/primitives/point/point.tscn",
 		},
 		"grab_sphere_point": {
 			"name": "grab_sphere_point",
 			"lookup_name": "grab_sphere_point",
-			"description": "a grab_sphere_point",
+			"description": "XR Tools pickable sphere with highlight ring for repositioning a reference point.",
 			"scene": "res://commons/primitives/point/grab_sphere_point.tscn",
 		},		
 		
 		"grab_sphere_point_with_color": {
 			"name": "grab_sphere_point_with_color_text",
 			"lookup_name": "grab_sphere_point_with_color",
-			"description": "a grab_sphere_point_with_color",
+			"description": "Pickable point sphere that applies emission-tinted colors via the point_color helper.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
 		},
 		"grab_sphere_point_with_text": {
 			"name": "grab_sphere_point_with_text",
 			"lookup_name": "grab_sphere_point_with_text",
-			"description": "a grab_sphere_point_with_text",
+			"description": "Pickable point sphere preset with a floating Label3D that shows its coordinates.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
 		},
 		"grab_sphere_point_color_with_text": {
 			"name": "grab_sphere_point_color_with_text",
 			"lookup_name": "grab_sphere_point_color_with_text",
-			"description": "a grab_sphere_point_color_with_text",
+			"description": "Pickable point sphere combining color tint control with a live coordinate label.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_color_with_text.tscn",
 		},	
 		"vectorpoint": {
 			"name": "VectorPoint",
 			"lookup_name": "vectorpoint",
-			"description": "a VectorPoint",
+			"description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
 			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
 		},		
 		"pythagorean_proof": {
 			"name": "pythagorean_proof",
 			"lookup_name": "pythagorean_proof",
-			"description": "a pythagorean_proof",
+			"description": "Interactive right-triangle construction with draggable vertices and animated area proof squares.",
 			"scene": "res://commons/primitives/pythagorean_proof/pythagorean_proof.tscn",
 		},					
 		
 		"point_collection": {
 			"name": "point_collection",
 			"lookup_name": "point_collection",
-			"description": "a point_collection",
+			"description": "Grouped set of labelled pickable points for demonstrating multiple coordinate references.",
 			"scene": "res://commons/primitives/point/point_collection.tscn",
 		},
 		"infokiosk": {
 			"name": "infokiosk",
 			"lookup_name": "infokiosk",
-			"description": "infokiosk",
+			"description": "Freestanding kiosk combining a 2D-in-3D message console with a vertical status monitor for lab readouts.",
 			"scene": "res://commons/monitor/infokiosk.tscn",
 		},
  
 		"line": {
 			"name": "1.1 A Line",
 			"lookup_name": "line",
-			"description": "line",
+			"description": "Interactive measuring line linking two grab spheres and rendering a cylinder with live distance text.",
 			"scene": "res://commons/primitives/line/line.tscn",
 		},
 		"cross_lines": {
 			"name": "cross_lines",
 			"lookup_name": "cross_lines",
-			"description": "cross_lines",
+			"description": "Pair of line modules rotated into an X to demonstrate intersecting lines.",
 			"scene": "res://commons/primitives/line/cross_lines.tscn",
 		},
 		"parallel_lines": {
 			"name": "parallel_lines",
 			"lookup_name": "parallel_lines",
-			"description": "parallel_lines",
+			"description": "Three line modules arranged in parallel to visualize equidistant lines.",
 			"scene": "res://commons/primitives/line/parallel_lines.tscn",
 		},
 		"coordinate_lines": {
 			"name": "coordinate_lines",
 			"lookup_name": "coordinate_lines",
-			"description": "coordinate_lines",
+			"description": "Orthogonal vertical and horizontal line modules forming a coordinate axis crosshair.",
 			"scene": "res://commons/primitives/line/coordinate_lines.tscn",
 		},
 		"plus_lines": {
 			"name": "plus_lines",
 			"lookup_name": "plus_lines",
-			"description": "plus_lines",
+			"description": "Reusable plus-shaped line rig built from two line segments for crosshair highlights.",
 			"scene": "res://commons/primitives/line/plus_lines.tscn",
 		},
 
@@ -108,229 +108,230 @@
 		"line_collection": {
 			"name": "line_collection",
 			"lookup_name": "line_collection",
-			"description": "line_collection",
+			"description": "Bundle of line modules offset in space for demonstrations of multiple edges.",
 			"scene": "res://commons/primitives/line/line_collection.tscn",
 		},	
 		"line_interface": {
 			"name": "line_interface",
 			"lookup_name": "line_interface",
-			"description": "line_interface",
+			"description": "Interactive line tool packaged for interface use with grab spheres and dynamic length display.",
 			"scene": "res://commons/interface/line.tscn",
 		},	
 		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
 			"lookup_name": "animatedcubebuilder",
-			"description": "animatedcubebuilder",
+			"description": "Animated construction sequence that steps from vertices to edges to full cube mesh with grab handles.",
 			"scene": "res://commons/primitives/animatedcubebuilder/animatedcubebuilder.tscn",
 		},
 		"cube_scene": {
 			"name": "Basic Cube Scene",
 			"lookup_name": "cube_scene",
-			"description": "A fundamental cube with shader material and static body physics",
+			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive.",
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
 		},
 		"triangle": {
 			"name": "triangle",
 			"lookup_name": "triangle",
-			"description": "triangle",
+			"description": "Interactive triangle mesh with draggable vertices and presets for equilateral, right-angled, and isosceles shapes.",
 			"scene": "res://commons/primitives/triangle/triangle.tscn",
 		},
 		"righttriangle": {
 			"name": "righttriangle",
 			"lookup_name": "righttriangle",
-			"description": "A righttriangle",
+			"description": "Thin right-triangle prism leaning to the positive X side with grid shader material and adjustable size.",
 			"scene": "res://commons/primitives/righttriangle/righttriangle.tscn",
 		},
 		"lefttriangle": {
 			"name": "lefttriangle",
 			"lookup_name": "lefttriangle",
-			"description": "A lefttriangle",
+			"description": "Complementary right-triangle prism leaning left, rendered with pink grid shading and configurable size.",
 			"scene": "res://commons/primitives/lefttriangle/lefttriangle.tscn",
 		},
 		
 		"interactivetriangle": {
 			"name": "1.2: A triangle",
 			"lookup_name": "interactivetriangle",
-			"description": "A interactivetriangle",
+			"description": "Standing triangle panel split into pink and black faces with grab spheres and multiple shape resets.",
 			"scene": "res://commons/primitives/interactivetriangle/interactivetriangle.tscn",
 		},
 		"triangleprofiles": {
 			"name": "1.2: A triangleprofilese",
 			"lookup_name": "triangleprofiles",
-			"description": "A triangleprofiles",
+			"description": "Folded pink zigzag profile built from alternating peaks with drag points to edit the pleated surface.",
 			"scene": "res://commons/primitives/triangleprofiles/triangleprofiles.tscn",
 		},
 		"zigzagprofile": {
 			"name": "1.2: A zigzagprofile",
 			"lookup_name": "zigzagprofile",
-			"description": "A zigzagprofile",
+			"description": "Interactive zigzag strip featuring top and base grab points plus presets for zigzag, sine, and sawtooth patterns.",
 			"scene": "res://commons/primitives/zigzagprofile/zigzagprofile.tscn",
 		},
 		"foldedpaper": {
 			"name": "1.2: A foldedpaper",
 			"lookup_name": "foldedpaper",
-			"description": "A foldedpaper",
+			"description": "Accordion-style folded paper mesh with editable top/base control points and multiple fold reset modes.",
 			"scene": "res://commons/primitives/foldedpaper/foldedpaper.tscn",
 		},
 		"quad": {
 			"name": "quad",
 			"lookup_name": "quad",
-			"description": "quad",
+			"description": "Editable quad divided into pink and black triangles with draggable corners and square/rectangle/diamond presets.",
 			"scene": "res://commons/primitives/quad/quad.tscn",
 		},
 		
 		"plane": {
 			"name": "plane",
 			"lookup_name": "plane",
-			"description": "A plane",
+			"description": "Grid-shaded plane mesh (0.8m square) used for flat surface demonstrations.",
 			"scene": "res://commons/primitives/plane/plane.tscn",
 		},
+		
 		
 		"cube": {
 			"name": "cube",
 			"lookup_name": "cube",
-			"description": "A scube",
+			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive.",
 			"scene": "res://commons/primitives/cube/cube.tscn",
 		},	
 				
 		"sphere": {
 			"name": "sphere",
 			"lookup_name": "sphere",
-			"description": "A sphere",
+			"description": "Standard grid-shaded sphere primitive for basic geometry demonstrations.",
 			"scene": "res://commons/primitives/sphere/sphere.tscn",
 		},	
 		"prism": {
 			"name": "prism",
 			"lookup_name": "prism",
-			"description": "A prism",
+			"description": "Grid-shaded triangular prism mesh for primitive previews.",
 			"scene": "res://commons/primitives/prism/prism.tscn",
 		},
 		"prism_block": {
 			"name": "prism_block",
 			"lookup_name": "prism_block",
-			"description": "A prism_block",
+			"description": "Static-body triangular prism block with grid shader and collision.",
 			"scene": "res://commons/primitives/prismes/prism_block.tscn",
 		},
 		
 		"cylinder": {
 			"name": "cylinder",
 			"lookup_name": "cylinder",
-			"description": "A cylinder",
+			"description": "Basic grid-lined cylinder primitive for quick scale checks.",
 			"scene": "res://commons/primitives/cylinder/cylinder.tscn",
 		},	
 		"capsule": {
 			"name": "capsule",
 			"lookup_name": "capsule",
-			"description": "A capsule",
+			"description": "Grid-shaded capsule primitive with glowing wireframe overlay.",
 			"scene": "res://commons/primitives/capsule/capsule.tscn",
 		},	
 		
 		"torus": {
 			"name": "torus",
 			"lookup_name": "torus",
-			"description": "A torus",
+			"description": "Grid material torus primitive for layout and shading tests.",
 			"scene": "res://commons/primitives/torus/torus.tscn",
 		},	
 		"combine_primitives": {
 			"name": "combine_primitives",
 			"lookup_name": "combine_primitives",
-			"description": "combine_primitives",
+			"description": "Shows four procedural walled-cube modules (cylinder, plane, sphere, torus) side by side for layout inspection.",
 			"scene": "res://commons/primitives/combines/combine_primitives.tscn",
 		},	
 		"combine_torus": {
 			"name": "combine_torus",
 			"lookup_name": "combine_torus",
-			"description": "combine_torus",
+			"description": "Generates a gradient-colored grid of torus meshes sweeping through ring and segment counts.",
 			"scene": "res://commons/primitives/combines/combine_torus.tscn",
 		},
 		"combine_portals": {
 			"name": "combine_portals",
 			"lookup_name": "combine_portals",
-			"description": "combine_portals",
+			"description": "Duplicates a base torus to form a tunnel of portals that grow denser down the hallway.",
 			"scene": "res://commons/primitives/combines/combine_portals.tscn",
 		},		
 		
 		"combine_sphere": {
 			"name": "combine_sphere",
 			"lookup_name": "combine_sphere",
-			"description": "combine_sphere",
+			"description": "Builds a grid of spheres varying ring and radial segment settings with optional hemisphere alternation.",
 			"scene": "res://commons/primitives/combines/combine_sphere.tscn",
 		},
 		"combine_capsule": {
 			"name": "combine_capsule",
 			"lookup_name": "combine_capsule",
-			"description": "combine_capsule",
+			"description": "Arranges capsule meshes in a matrix while iterating through height and radial segment combinations.",
 			"scene": "res://commons/primitives/combines/combine_capsule.tscn",
 		},	
 		
 		"pyramid": {
 			"name": "pyramid",
 			"lookup_name": "pyramid",
-			"description": "A pyramid",
+			"description": "Procedural square-based pyramid primitive built via surface tool.",
 			"scene": "res://commons/primitives/pyramid/pyramid.tscn",
 		},
 		"pyramid_edit": {
 			"name": "pyramid_edit",
 			"lookup_name": "pyramid_edit",
-			"description": "A pyramid_edit",
+			"description": "Interactive pyramid demo with grab handles to reshape the base and apex.",
 			"scene": "res://commons/primitives/pyramid/pyramid_edit.tscn",
 		},
 			
 		"tetrahedron": {
 			"name": "tetrahedron",
 			"lookup_name": "tetrahedron",
-			"description": "A tetrahedron",
+			"description": "Procedural tetrahedron mesh rendered with the project grid material.",
 			"scene": "res://commons/primitives/tetrahedron/tetrahedron.tscn",
 		},	
 		"octahedron": {
 			"name": "octahedron",
 			"lookup_name": "octahedron",
-			"description": "A octahedron",
+			"description": "Procedural octahedron primitive useful as a diamond core.",
 			"scene": "res://commons/primitives/octahedron/octahedron.tscn",
 		},
 		
 		"dodecahedron": {
 			"name": "dodecahedron",
 			"lookup_name": "dodecahedron",
-			"description": "A dodecahedron",
+			"description": "Procedural dodecahedron solid using grid material.",
 			"scene": "res://commons/primitives/dodecahedron/dodecahedron.tscn",
 		},	
 		"icosahedron": {
 			"name": "icosahedron",
 			"lookup_name": "icosahedron",
-			"description": "A icosahedron",
+			"description": "Procedural icosahedron primitive for sphere approximations.",
 			"scene": "res://commons/primitives/icosahedron/icosahedron.tscn",
 		},	
 		"diamond": {
 			"name": "diamond",
 			"lookup_name": "diamond",
-			"description": "A diamond",
+			"description": "Faceted diamond mesh generated with grid shading for highlights.",
 			"scene": "res://commons/primitives/diamond/diamond.tscn",
 		},	
 		"bipyramid": {
 			"name": "bipyramid",
 			"lookup_name": "bipyramid",
-			"description": "A bipyramid",
+			"description": "Double-ended pyramid primitive formed by mirrored pyramid faces.",
 			"scene": "res://commons/primitives/bipyramid/bipyramid.tscn",
 		},	
 		"crystalcluster": {
 			"name": "crystalcluster",
 			"lookup_name": "crystalcluster",
-			"description": "A crystalcluster",
+			"description": "Cluster of scaled crystals arranged with deterministic offsets.",
 			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
 		},	
 
 		"triangularblock": {
 			"name": "triangularblock",
 			"lookup_name": "triangularblock",
-			"description": "A triangularblock",
+			"description": "Triangular block mesh with matched convex collision for kitbashing.",
 			"scene": "res://commons/primitives/triangularblock/triangularblock.tscn",
 		},	
 		"prismblock": {
 			"name": "prismblock",
 			"lookup_name": "prismblock",
-			"description": "A prismblock",
+			"description": "Triangular wedge primitive with grid shader and convex collision.",
 			"scene": "res://commons/primitives/prismblock/prismblock.tscn",
 		},	
 		 
@@ -344,46 +345,46 @@
 		"modernpolysolid": {
 			"name": "modernpolysolid",
 			"lookup_name": "modernpolysolid",
-			"description": "A modernpolysolid",
+			"description": "Twisted multi-level polysolid sculpture with pride-inspired materials.",
 			"scene": "res://commons/primitives/modernpolysolid/modernpolysolid.tscn",
 		},	
 		
 		"roughrock": {
 			"name": "roughrock",
 			"lookup_name": "roughrock",
-			"description": "A roughrock",
+			"description": "Irregular rock polyhedron created from noise-perturbed vertices.",
 			"scene": "res://commons/primitives/roughrock/roughrock.tscn",
 		},	
 		"crystal": {
 			"name": "crystal",
 			"lookup_name": "crystal",
-			"description": "A crystal",
+			"description": "Procedurally built quartz-style crystal with layered facets.",
 			"scene": "res://commons/primitives/crystal/crystal.tscn",
 		},	
 		"diamonds": {
 			"name": "diamonds",
 			"lookup_name": "diamonds",
-			"description": "diamonds",
+			"description": "Stacks rotating octahedron instances into a twisting diamond tower sculpture.",
 			"scene": "res://commons/primitives/combines/diamonds.tscn",
 		},	
 
 		"diamondtoruscollection": {
 			"name": "diamondtoruscollection",
 			"lookup_name": "diamondtoruscollection",
-			"description": "A diamondtoruscollection",
+			"description": "Torus reference ring with hanging cylinders and colored diamonds.",
 			"scene": "res://algorithms/primitives/diamondtoruscollection/diamondtoruscollection.tscn",
 		},	
 		"pyramidlong": {
 			"name": "pyramidlong",
 			"lookup_name": "pyramidlong",
-			"description": "pyramidlong",
+			"description": "Procedurally models a long rectangular pyramid primitive with computed faces and materials.",
 			"scene": "res://commons/primitives/pyramid/pyramidlong.tscn",
 		},	
 		
 		"smallcontainment": {
 			"name": "smallcontainment",
 			"lookup_name": "smallcontainment",
-			"description": "A smallcontainment",
+			"description": "Desk-scale containment cube with animated field projectors and floating specimen.",
 			"scene": "res://commons/lab/smallcontainment/smallcontainment.tscn",
 		},	
 		
@@ -426,7 +427,7 @@
 		"geometric_transformations": {
 			"name": "geometric_transformations",
 			"lookup_name": "geometric_transformations",
-			"description": "geometric_transformations",
+			"description": "Animates point, line, plane, and cube primitives through rotation, scale, translation, and shear stages.",
 			"scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
 		},
 
@@ -451,7 +452,7 @@
 		"value_mapper_example": {
 			"name": "value_mapper_example",
 			"lookup_name": "value_mapper_example",
-			"description": "value_mapper_example",
+			"description": "Demonstrates 1D, 2D, and 3D value mappers driving sphere scale, position, color, and audio hooks.",
 			"scene": "res://commons/interfaces/value_mapper_example.tscn",
 		},
 		
@@ -495,7 +496,7 @@
 		 "chair2": {
 			"name": "chair2",
 			"lookup_name": "chair2",
-			"description": "chair2",
+			"description": "Procedurally builds a wood chair with seat, backrest, and legs atop a tartan accent pad.",
 			"scene": "res://commons/lab/chair/officechair.tscn",
 		},
 		"pick_up_cube": {
@@ -526,43 +527,43 @@
 		"nail_color_controller": {
 		  "lookup_name": "nail_color_controller",
 		  "name": "nail_color_controller",
-		  "description": "nail_color_controller",
+		  "description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
 		  "scene": "res://commons/interfaces/nail_color_controller.tscn",
 		},	
 		"gridcolorizer": {
 		  "lookup_name": "gridcolorizer",
 		  "name": "gridcolorizer",
-		  "description": "gridcolorizer",
+		  "description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
 		  "scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn",
 		},	
 		 "pillarcolorcollection": {
 		  "lookup_name": "pillarcolorcollection",
 		  "name": "pillarcolorcollection",
-		  "description": "pillarcolorcollection",
+		  "description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
 		  "scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
 		},			
 		"row_3_x": {
 			"name": "row_3_x",
 			"lookup_name": "row_3_x", 
-			"description": "A row_3_x",
+			"description": "Places three pickup cubes in a single row along the X axis.",
 			"scene": "res://algorithms/array/row_3_x.tscn",
 		},	
 		"column_3_z": {
 			"name": "column_3_z",
 			"lookup_name": "column_3_z", 
-			"description": "A column_3_z",
+			"description": "Stacks three pickup cubes in the Z direction for spacing tests.",
 			"scene": "res://algorithms/array/column_3_z.tscn",
 		},	
 		"grid_2d_4x4": {
 			"name": "grid_2d_4x4",
 			"lookup_name": "grid_2d_4x4", 
-			"description": "A grid_2d_4x4",
+			"description": "Builds a 4x4 pickup-cube grid laid out across the floor.",
 			"scene": "res://algorithms/array/grid_2d_4x4.tscn",
 		},	
 		"grid_3d_4x4x4": {
 			"name": "grid_3d_4x4x4",
 			"lookup_name": "grid_3d_4x4x4", 
-			"description": "A grid_3d_4x4x4",
+			"description": "Populates a 4x4x4 lattice of pickup cubes for volumetric layouts.",
 			"scene": "res://algorithms/array/grid_3d_4x4x4.tscn",
 		},	
 		"disco_floor": {
@@ -574,14 +575,14 @@
 		"radiolaria": {
 			"name": "radiolaria",
 			"lookup_name": "radiolaria", 
-			"description": "radiolaria",
+			"description": "Generates a gallery of radiolaria forms with procedural spikes, lattices, and custom materials.",
 			"scene": "res://algorithms/computationalbiology/radiolaria/radiolaria.tscn",
 
 		},
 		"tartan_demo": {
 			"name": "tartan_demo",
 			"lookup_name": "tartan_demo", 
-			"description": "tartan_demo",
+			"description": "Loads the tartan boxes showcase with bright shader-driven crates under studio lighting.",
 			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
 
 		},
@@ -603,23 +604,30 @@
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
 			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
 		},
+		"walkable_sine_bridge": {
+			"name": "walkable_sine_bridge",
+			"lookup_name": "walkable_sine_bridge",
+			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
+			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
+		},		
+		
 		"ColoredLinesVR": {
 			"name": "ColoredLinesVR",
 			"lookup_name": "ColoredLinesVR",
-			"description": "ColoredLinesVR",
+			"description": "Builds a VR hallway filled with glowing sine-wave tubes rendered from procedural meshes.",
 			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn",
 		},
 		"StaticCables": {
 			"name": "StaticCables",
 			"lookup_name": "StaticCables",
-			"description": "StaticCables",
+			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
 			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
 		},
 		
 		"doublehelix": {
 			"name": "doublehelix",
 			"lookup_name": "doublehelix",
-			"description": "doublehelix",
+			"description": "Procedurally models an adjustable DNA-style double helix with strands, rungs, and rebuild-on-change controls.",
 			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn",
 		},
 		
@@ -643,49 +651,64 @@
 			"scene": "res://algorithms/randomness/profile_random.tscn",
 	
 		},
+		"plane_manipulator": {
+			"name": "plane_manipulator",
+			"lookup_name": "plane_manipulator",
+			"description": "This script animates a random walk on a 3D plane. It simulates walkers that move across the plane's surface, raising the ground to create trails in real-time.",
+			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn",
+	
+		},		
+		"pheromone_terrain": {
+			"name": "pheromone_terrain",
+			"lookup_name": "pheromone_terrain",
+			"description": "pheromone_terrain",
+			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+	
+		},		
+		
 		"randompoints": {
 			"name": "randompoints",
 			"lookup_name": "randompoints",
-			"description": "randompoints",
+			"description": "Spawns labeled grab points distributed by 3D Gaussian noise inside a configurable volume.",
 			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
 	
 		},
 		"randompoints_gaussian": {
 			"name": "randompoints_gaussian",
 			"lookup_name": "randompoints_gaussian",
-			"description": "randompoints_gaussian",
+			"description": "Variant of the grab-point scatter preconfigured to sample from a 3D Gaussian cloud with labeled spheres.",
 			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn",
 		},
 		"randompoints_uniform": {
 			"name": "randompoints_uniform",
 			"lookup_name": "randompoints_uniform",
-			"description": "randompoints_uniform",
+			"description": "Scatters grab spheres uniformly through a bounding box and labels each point.",
 			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn",
 		},
 		"pixel_cloud": {
 			"name": "pixel_cloud",
 			"lookup_name": "pixel_cloud",
-			"description": "pixel_cloud",
+			"description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
 			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
 		},		
 		
 		"coordinate_axes_xy": {
 			"name": "coordinate_axes_xy",
 			"lookup_name": "coordinate_axes_xy",
-			"description": "coordinate_axes_xy",
+			"description": "Displays orthogonal X/Y line modules with floating labels for quick planar orientation.",
 			"scene": "res://commons/primitives/line/coordinate_axes_xy.tscn"
 		},
 		"randompoint": {
 			"name": "randompoint",
 			"lookup_name": "randompoint",
-			"description": "randompoint",
+			"description": "Drops a single draggable point inside an XY bounds and keeps its billboarded coordinate label in range.",
 			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn"
 		},		
 		
 		"randomlines": {
 			"name": "randomlines",
 			"lookup_name": "randomlines",
-			"description": "randomlines",
+			"description": "Spawns multiple interactive line rigs and randomly positions their grab endpoints in 3D space.",
 			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
 	
 		},
@@ -707,7 +730,7 @@
 		"ten_print_maze_3d": {
 			"name": "ten_print_maze_3d",
 			"lookup_name": "ten_print_maze_3d",
-			"description": "ten_print_maze_3d",
+			"description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
 			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
 
 		},
@@ -730,14 +753,14 @@
 		 "pickup_cube_placer": {
 			"name": "pickup_cube_placer",
 			"lookup_name": "pickup_cube_placer",
-			"description": "pickup_cube_placer",
+			"description": "Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.",
 			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
 
 		},
 		"cube_projectile_spawner": {
 			"name": "cube_projectile_spawner",
 			"lookup_name": "cube_projectile_spawner",
-			"description": "cube_projectile_spawner",
+			"description": "Timed hazard that spawns projectile cubes, leads the target, and fires warning effects before launch.",
 			"scene": "res://commons/primitives/cubes/cube_spawner.tscn",
 		},
 
@@ -779,14 +802,14 @@
 		"noisetorus": {
 			"name": "noisetorus",
 			"lookup_name": "noisetorus", 
-			"description": "noisetorus",
+			"description": "Shader-driven torus whose surface ripples with animated noise and hue shifting.",
 			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
 
 		},	
 		"noisetorus_ex_1": {
 			"name": "noisetorus_ex_1",
 			"lookup_name": "noisetorus_ex_1", 
-			"description": "noisetorus_ex_1",
+			"description": "Example torus mesh using the noise planet shader to showcase parameter tweaks.",
 			"scene": "res://commons/primitives/torus/noisetorus_ex_1.tscn",
 
 		},	
@@ -794,14 +817,14 @@
 		"noisetext": {
 			"name": "noisetext",
 			"lookup_name": "noisetext",
-			"description": "noisetext",
+			"description": "Applies the noise planet shader to 3D text and a plinth for animated logo signage.",
 			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
 
 		},
 		"noisesphere": {
 			"name": "noisesphere",
 			"lookup_name": "noisesphere",
-			"description": "noisesphere",
+			"description": "Noise-deformed hemisphere rendered with the planet shader for atmospheric dome effects.",
 			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
 
 		},
@@ -816,35 +839,35 @@
 		"rainbow": {
 			"name": "rainbow",
 			"lookup_name": "rainbow",
-			"description": "rainbow",
+			"description": "Creates double rainbow arcs with atmospheric bloom and layered color bands.",
 			"scene": "res://algorithms/primitives/rainbow/rainbow.tscn",
 
 		},
 		"homagetothesquare": {
 			"name": "homagetothesquare",
 			"lookup_name": "homagetothesquare",
-			"description": "homagetothesquare",
+			"description": "Procedurally layers Albers-inspired colored squares on a plane mesh.",
 			"scene": "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
 
 		},
 		"platonicsolids": {
 			"name": "platonicsolids",
 			"lookup_name": "platonicsolids",
-			"description": "platonicsolids",
+			"description": "Lays out pride-themed platonic solids amid rainbow flooring, banners, and colorful lighting.",
 			"scene": "res://algorithms/primitives/platonicsolids/platonicsolids.tscn",
 
 		},
 		"monitorsystem": {
 			"name": "monitorsystem",
 			"lookup_name": "monitorsystem",
-			"description": "monitorsystem",
+			"description": "Builds four monitor kiosks with dedicated cameras and viewports for overhead, third-person, mirror, and side views.",
 			"scene": "res://commons/monitor/monitorsystem.tscn",
 		},
 		
 		"fallingblocks": {
 			"name": "fallingblocks",
 			"lookup_name": "fallingblocks",
-			"description": "fallingblocks",
+			"description": "Drops physics cubes from above on a timer, handling collisions, cleanup, and teleport-on-hit resets.",
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube_danger.tscn",
 		},
 		
@@ -997,7 +1020,7 @@
 	 "liturgicalambientgen": {
 		"name": "liturgicalambientgenera",
 		"lookup_name": "liturgicalambientgen",
-		"description": "liturgicalambientgenera",
+		"description": "Threaded ambient generator that layers choral drones, organ swells, and cathedral effects with progress visualization.",
 		"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
 	
 	},
@@ -1026,49 +1049,49 @@
 	"john_cage_tech_noir": {
 		"name": "john_cage_tech_noir",
 		"lookup_name": "john_cage_tech_noir",
-		"description": "john_cage_tech_noir",
+		"description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
 		"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
 		
 	},
 	"mario_test_sound_ui": {
 		"name": "mario_test_sound_ui",
 		"lookup_name": "mario_test_sound_ui",
-		"description": "mario_test_sound_ui",
+		"description": "Sci-fi kiosk hosting the Mario slider UI with XR hand poses and 2D-in-3D controls.",
 		"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
 		
 	},
 	"sine_wave_controller": {
 		"name": "sine_wave_controller",
 		"lookup_name": "sine_wave_controller",
-		"description": "sine_wave_controller",
+		"description": "Pair of value mappers that expose sine-wave frequency, amplitude, and phase and optionally drive the Mario slider rig.",
 		"scene": "res://commons/interfaces/sine_wave_controller.tscn",
 		
 	},
 	"coshlea": {
 		"name": "coshlea",
 		"lookup_name": "coshlea",
-		"description": "coshlea",
+		"description": "Creates a hyperbolic cosine helicoid surface with adjustable domain sampling.",
 		"scene": "algorithms/wavefunctions/coshlea/coshlea.tscn",
 		
 	},
 	"sine_cylinder_staircase": {
 		"name": "sine_cylinder_staircase",
 		"lookup_name": "sine_cylinder_staircase",
-		"description": "sine_cylinder_staircase",
-		"scene": "es://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+		"description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
+		"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
 		
 	},	
 		"rainbow_hallway": {
 		"name": "rainbow_hallway",
 		"lookup_name": "rainbow_hallway",
-		"description": "rainbow_hallway",
+		"description": "CSG hallway coated with animated rainbow shader controls and glow-rich lighting.",
 		"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
 		
 	},
 		"hallway_scene": {
 		"name": "hallway_scene",
 		"lookup_name": "hallway_scene",
-		"description": "hallway_scene",
+		"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
 		"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
 		
 	},
@@ -1124,7 +1147,7 @@
 	"fouriertransformshape": {
 		"name": "fouriertransformshape",
 		"lookup_name": "fouriertransformshape",
-		"description": "fouriertransformshape",
+		"description": "Shows nested rotating circles that trace a Fourier drawing with emissive connections.",
 		"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
 	},
 	"wave_propagation_3d": {
@@ -1160,25 +1183,25 @@
 		"earths_delight": {
 			"name": "earths_delight",
 			"lookup_name": "earths_delight",
-			"description": "earths_delight",
+			"description": "Procedurally sculpts noise terrain and scatters mutated Bosch-inspired plants across it.",
 			"scene": "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
 		},		
 		"PipilottiRistWorld": {
 			"name": "PipilottiRistWorld",
 			"lookup_name": "PipilottiRistWorld",
-			"description": "PipilottiRistWorld",
+			"description": "Immersive projection space with animated color grading, floating sculptures, and video-mapped surfaces.",
 			"scene": "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
 		},	
 		"science_desk": {
 			"name": "science_desk",
 			"lookup_name": "science_desk",
-			"description": "science_desk",
+			"description": "Constructs a lab workstation with cabinets, countertop equipment, and built-in lighting.",
 			"scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
 		},	
 				"science_glasses": {
 			"name": "science_glasses",
 			"lookup_name": "science_glasses",
-			"description": "science_glasses",
+			"description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
 			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
 		},	
 			

@@ -16,6 +16,16 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_Portals - Portal Corridor",
+		"layout": "7x40 longitudinal spine suspended over void with a single-tile walkway and distant exit alcove.",
+		"objective": "Demonstrate the portal combination system along an extended traversal path.",
+		"key_elements": [
+			"`combine_portals` rig at (3,4)",
+			"Mid-corridor `dark_sphere` enclosure at (3,18)",
+			"Teleporter `t` at (4,33)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

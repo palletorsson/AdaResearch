@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_Grabbable - Interactive Color Shelf",
+		"layout": "7x10 boutique space with mirrored shelves and grab-collection stations under dome lighting.",
+		"objective": "Grab color samples from shelves and trigger the experiment completion teleporter.",
+		"key_elements": [
+			"`grabcolorcollection` stations arranged around the floor",
+			"Shelves `shelf:0:1` and `shelf:180:1` for display",
+			"`dark_sphere` dome at (3,3)",
+			"Extra lights `el` and `e` focus lighting, teleporter `t` at (6,7)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "4", "4", "4", "4", "4"],

@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "Wavefunctions Level Four",
+		"layout": "13x14 corridor highlighting colored line halls and waveform lighting.",
+		"objective": "Traverse colored waveform corridors to experience line-based interference patterns.",
+		"key_elements": [
+			"Spawn `s` at the entry",
+			"`coloredlines` walkway tied into `hallway_scene`",
+			"`dark_sphere` dome enhancing visual clarity",
+			"Teleporter `t` at the terminus"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2", "2", "2", "2"],
@@ -51,7 +62,7 @@
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "coloredlines:0:1:0.2", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],				
+			[" ", " ", "hallway_scene", " ", " ", " ", " ", " ", " "],				
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],	
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],								
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "]	

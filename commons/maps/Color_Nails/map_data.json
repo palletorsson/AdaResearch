@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_Nails - Nail Polish Studio",
+		"layout": "6x7 salon bay with concentric lighting and nail interaction stations.",
+		"objective": "Use the nail color controller and color balls to practice precise color selection.",
+		"key_elements": [
+			"`nail_color_controller:180:1.0` console at (2,3)",
+			"`colorballs` accessory rack at (2,4)",
+			"`dark_sphere` dome creating the studio ambiance",
+			"Ring of extra lights `el` and teleporter `t` at (3,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2"], 
@@ -41,8 +52,8 @@
 			[" ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " "],
 			[" ", "", "dark_sphere", "", " "],
-			[" ", " ", "nail_color_controller:0:1.0", " ", " "],
-			[" ", " ", "colorballs", " ", " "],
+			[" ", " ", "nail_color_controller:180:1.0", " ", " "],
+			[" ", " ", "colorballs:0:0:0.1", " ", " "],
 			[" ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " "],
 									

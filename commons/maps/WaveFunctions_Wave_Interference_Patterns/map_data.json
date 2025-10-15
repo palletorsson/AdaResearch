@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions Wave Interference",
+		"layout": "13x14 lecture grid with annotation, scoring station, and the interference board at the center.",
+		"objective": "Adjust the wave interference widget to visualize constructive and destructive regions.",
+		"key_elements": [
+			"Spawn `s` at the north",
+			"`wave_interference` board centrally located",
+			"Annotation `an` and score cube `sp` near the teleporter",
+			"Teleporter `t` along the southern edge"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],

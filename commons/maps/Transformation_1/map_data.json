@@ -16,6 +16,19 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_1 - Cube Transformation Primer",
+		"layout": "7x8 lab pad with elevated pedestals and a score cube beside the south exit.",
+		"objective": "Introduce basic rotation, scaling, and pickup interactions on primitive cubes.",
+		"key_elements": [
+			"`cube_scene:0:0:0.8` scaffold at (2,1)",
+			"`transformation_cube` workstation at (3,2)",
+			"`rotating_cube:0:0:0.5` spinner at (4,3)",
+			"`pick_up_cube` grab test at (4,4)",
+			"`dark_sphere` ambient dome at (3,3)",
+			"Score cube `sp` and teleporter `t` guarding the south-east exit"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

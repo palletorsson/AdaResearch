@@ -17,6 +17,16 @@
 			"learning_objectives": ["Learn VR hand tracking", "First object interaction", "Understand grabbing mechanics"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Single - Single Cube Task",
+		"layout": "4x3 micro-platform with spawn and score nodes framing a solitary pickup.",
+		"objective": "Provide a minimal task: pick up a single cube before teleporting onward.",
+		"key_elements": [
+			"Score cube `sp` at (2,0) signalling completion",
+			"`pick_up_cube` target at (1,1)",
+			"Teleporter `t` at (2,1) to continue"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2"],

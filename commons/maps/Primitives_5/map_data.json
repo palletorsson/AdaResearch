@@ -16,6 +16,19 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_5 - Pyramid Courtyard",
+		"layout": "13x13 multi-tier plaza with walkway nodes and a central elevated dais holding torus composites.",
+		"objective": "Combine pyramid arrangements with modular cube scenes and torus galleries.",
+		"key_elements": [
+			"Walkway utilities `wp` at (0,3) and (3,9) guiding traffic",
+			"Paired `pyramid:0:-0.5` fixtures at (1/5,1) and (1/5,5)",
+			"`cube_scene` cluster with `pyramidlong` spine across (2-4,3)",
+			"`dark_sphere` canopy at (2,5)",
+			"`diamondtoruscollection` installation at (3,10)",
+			"Teleporter `t` pads at (1,8) and (5,8)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

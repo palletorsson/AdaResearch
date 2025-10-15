@@ -4,8 +4,10 @@
 
 [node name="BrickWallFactory" type="Node3D"]
 script = ExtResource("1_abc12")
-wall_width = 40
-wall_height = 50
+wall_width = 20
+wall_height = 25
+brick_size = Vector3(0.4, 0.2, 0.2)
+palette = "pinkness_spectrum"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.33975)

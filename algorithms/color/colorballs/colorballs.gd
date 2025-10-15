@@ -7,8 +7,8 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 
 @export_category("Ball Settings")
 @export var ball_count: int = 20
-@export var min_ball_radius: float = 0.035  # Golf ball size (3.5cm radius)
-@export var max_ball_radius: float = 0.06   # Hand ball size (6cm radius)
+@export var min_ball_radius: float = 0.1  # 10cm radius
+@export var max_ball_radius: float = 0.1   # 10cm radius
 @export var ball_mass: float = 0.1
 @export var ball_bounce: float = 0.8
 @export var ball_friction: float = 0.3
@@ -86,22 +86,14 @@ func _get_palette_colors(palette_name: String) -> Array:
 	return []
 
 func create_ball_scene() -> void:
-	# Create a simple sphere scene for the balls
-	ball_scene = PackedScene.new()
+	# We'll create balls directly instead of using PackedScene
+	# This avoids the packing/instantiation issues
+	print("Ball scene creation skipped - using direct creation")
+
+func create_ball_directly(name: String) -> Node3D:
+	"""Create a ball directly without using PackedScene"""
 	var root = Node3D.new()
-	root.name = "Ball"
-	
-	# Create mesh instance
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.name = "MeshInstance3D"
-	
-	# Create sphere mesh
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 1.0
-	sphere_mesh.height = 2.0
-	sphere_mesh.radial_segments = 16
-	sphere_mesh.rings = 8
-	mesh_instance.mesh = sphere_mesh
+	root.name = name
 	
 	# Create rigid body
 	var rigid_body = RigidBody3D.new()
@@ -115,7 +107,7 @@ func create_ball_scene() -> void:
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.name = "CollisionShape3D"
 	var sphere_shape = SphereShape3D.new()
-	sphere_shape.radius = 1.0
+	sphere_shape.radius = 0.1
 	collision_shape.shape = sphere_shape
 	
 	# Create physics material
@@ -124,13 +116,28 @@ func create_ball_scene() -> void:
 	physics_material.friction = ball_friction
 	rigid_body.physics_material_override = physics_material
 	
+	# Create mesh instance
+	var mesh_instance = MeshInstance3D.new()
+	mesh_instance.name = "MeshInstance3D"
+	
+	# Create sphere mesh
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.1
+	sphere_mesh.height = 0.2
+	sphere_mesh.radial_segments = 48
+	sphere_mesh.rings = 24
+	mesh_instance.mesh = sphere_mesh
+	
 	# Assemble the scene
 	rigid_body.add_child(collision_shape)
 	rigid_body.add_child(mesh_instance)
 	root.add_child(rigid_body)
 	
-	# Pack the scene
-	ball_scene.pack(root)
+	print("Created ball directly: %s" % name)
+	print("Root children: ", root.get_children())
+	print("RigidBody children: ", rigid_body.get_children())
+	
+	return root
 
 func spawn_balls() -> void:
 	# Clear existing balls
@@ -141,8 +148,11 @@ func spawn_balls() -> void:
 	
 	# Spawn new balls
 	for i in range(ball_count):
-		var ball_instance = ball_scene.instantiate()
-		ball_instance.name = "Ball_%d" % i
+		var ball_instance = create_ball_directly("Ball_%d" % i)
+		
+		print("Created ball %d structure:" % i)
+		print("Ball instance children: ", ball_instance.get_children())
+		print("Ball instance name: ", ball_instance.name)
 		
 		# Random position within spawn area
 		var random_pos = Vector3(
@@ -152,9 +162,8 @@ func spawn_balls() -> void:
 		)
 		ball_instance.position = random_pos
 		
-		# Random size between golf ball and hand ball
-		var random_radius = randf_range(min_ball_radius, max_ball_radius)
-		ball_instance.scale = Vector3.ONE * random_radius
+		# Fixed radius; no scaling needed
+		var fixed_radius := 0.1
 		
 		# Random initial velocity
 		var random_vel = Vector3(
@@ -174,10 +183,9 @@ func spawn_balls() -> void:
 		# Apply initial velocity after a short delay to ensure physics is ready
 		await get_tree().process_frame
 		var rigid_body = ball_instance.get_node("RigidBody3D")
-		if rigid_body:
-			rigid_body.linear_velocity = random_vel
+		rigid_body.linear_velocity = random_vel
 		
-		print("Created Ball_%d with radius: %.3f, color: %s" % [i, random_radius, color])
+		print("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])
 
 func get_random_color() -> Color:
 	if palette_keys.is_empty():
@@ -192,7 +200,9 @@ func get_random_color() -> Color:
 	return random_color * color_intensity
 
 func set_ball_color(ball_instance: Node3D, color: Color) -> void:
-	var mesh_instance = ball_instance.get_node("RigidBody3D/MeshInstance3D")
+	var rigid_body = ball_instance.get_node("RigidBody3D")
+	var mesh_instance = rigid_body.get_node("MeshInstance3D")
+	
 	if mesh_instance:
 		var material = StandardMaterial3D.new()
 		material.albedo_color = color
@@ -259,8 +269,7 @@ func get_current_palette_name() -> String:
 	return current_key
 
 func add_ball() -> void:
-	var ball_instance = ball_scene.instantiate()
-	ball_instance.name = "Ball_%d" % balls.size()
+	var ball_instance = create_ball_directly("Ball_%d" % balls.size())
 	
 	var random_pos = Vector3(
 		randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
@@ -269,8 +278,8 @@ func add_ball() -> void:
 	)
 	ball_instance.position = random_pos
 	
-	var random_radius = randf_range(min_ball_radius, max_ball_radius)
-	ball_instance.scale = Vector3.ONE * random_radius
+	# Fixed radius; no scaling needed
+	var fixed_radius := 0.1
 	
 	var color = get_random_color()
 	set_ball_color(ball_instance, color)
@@ -280,14 +289,13 @@ func add_ball() -> void:
 	
 	await get_tree().process_frame
 	var rigid_body = ball_instance.get_node("RigidBody3D")
-	if rigid_body:
-		rigid_body.linear_velocity = Vector3(
-			randf_range(-initial_velocity_range, initial_velocity_range),
-			randf_range(0, initial_velocity_range * 0.5),
-			randf_range(-initial_velocity_range, initial_velocity_range)
-		)
+	rigid_body.linear_velocity = Vector3(
+		randf_range(-initial_velocity_range, initial_velocity_range),
+		randf_range(0, initial_velocity_range * 0.5),
+		randf_range(-initial_velocity_range, initial_velocity_range)
+	)
 	
-	print("Added new ball with radius: %.3f, color: %s" % [random_radius, color])
+	print("Added new ball with radius: %.3f, color: %s" % [fixed_radius, color])
 
 func remove_ball() -> void:
 	if balls.size() > 0:
@@ -304,6 +312,40 @@ func clear_all_balls() -> void:
 	balls.clear()
 	print("Cleared all balls")
 
+func create_ball_at_y(y_position: float = 7.0) -> void:
+	"""Create a single color ball at the specified y position"""
+	var ball_instance = create_ball_directly("Ball_Y_%.1f" % y_position)
+	
+	# Position at y = 7 with random x and z
+	var random_pos = Vector3(
+		randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
+		y_position,
+		randf_range(-spawn_area_size.z/2, spawn_area_size.z/2)
+	)
+	ball_instance.position = random_pos
+	
+	# Fixed radius; no scaling needed
+	var fixed_radius := 0.1
+	
+	# Random color
+	var color = get_random_color()
+	set_ball_color(ball_instance, color)
+	
+	# Add to scene
+	add_child(ball_instance)
+	balls.append(ball_instance)
+	
+	# Apply small initial velocity
+	await get_tree().process_frame
+	var rigid_body = ball_instance.get_node("RigidBody3D")
+	rigid_body.linear_velocity = Vector3(
+		randf_range(-1.0, 1.0),
+		0.0,
+		randf_range(-1.0, 1.0)
+	)
+	
+	print("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		add_ball()
@@ -315,3 +357,5 @@ func _input(event: InputEvent) -> void:
 		regenerate_balls()
 	elif event.is_action_pressed("ui_end"):  # End key
 		clear_all_balls()
+	elif event.is_action_pressed("ui_page_up"):  # Page Up key
+		create_ball_at_y(7.0)

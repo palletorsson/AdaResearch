@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_3 - Walkway Translation Field",
+		"layout": "Asymmetric platform with void gaps bridged by a 90-degree walkway and a transport cube shuttle.",
+		"objective": "Demonstrate translation across voids using walkways, transport cubes, and elevated pickups.",
+		"key_elements": [
+			"`wp:90` walkway launching from the north ridge",
+			"Transport cube `tc:4:z` spanning the central gap",
+			"`pick_up_cube:0:3` elevated grab at (4,3)",
+			"`dark_sphere` observation dome at (3,3)",
+			"Score cube `sp` with teleporter `t` on the south-east platform"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "2", "1", "1"],

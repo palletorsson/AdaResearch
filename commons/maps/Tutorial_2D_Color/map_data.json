@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_2D_Color - Color Interaction Lab",
+		"layout": "7x7 palette floor populated with rotating prisms, shader cubes, and dense pickup clusters.",
+		"objective": "Demonstrate color manipulation widgets and reinforce 2D positioning with multiple grab tasks.",
+		"key_elements": [
+			"Spawn `s` at (0,0) leading into the color grid",
+			"`xyz_coordinates` visualizer at the front row",
+			"Bands of `pick_up_cube` nodes and rotating prisms encircling the center",
+			"`cube_with_shader` focus piece at (3,3)",
+			"Annotation `an`, teleporter `t`, and score cube `sp` aligned along the south edge"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2"],

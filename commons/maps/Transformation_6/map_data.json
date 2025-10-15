@@ -16,6 +16,18 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_6 - Vertical Sequence Stage",
+		"layout": "7x8 platform with a central void layer, single lift column, and staggered pickup markers.",
+		"objective": "Chain vertical motion with sequential pickups to reinforce multi-level transformations.",
+		"key_elements": [
+			"Lift `l:4` column at (1,3)",
+			"`pick_up_cube:0:4` elevated target above the lift",
+			"Secondary `pick_up_cube` at (5,5)",
+			"`dark_sphere` dome at (3,3)",
+			"Teleporter `t` and score cube `sp` at the south-east exit"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

@@ -1,0 +1,136 @@
+combine_primitives: Root Node3D scene with nodes such as cylinder, plane, sphere, and torus.
+combine_torus: Root Node3D scene.
+combine_portals: Root Node3D scene with nodes such as Lowrestorus, OmniLight3D, and Camera3D.
+combine_sphere: Root Node3D scene with nodes such as Camera3D and MeshInstance3D.
+combine_capsule: Root Node3D scene with nodes such as Camera3D.
+diamonds: DiamondTower.gd
+pyramidlong: PyramidLong.gd - Long pyramid with rectangular base (6 faces total)
+geometric_transformations: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, Point, Line, Plane, and Cube.
+value_mapper_example: Root Node3D scene with nodes such as ValueMapper1D, ValueMapper2D, ValueMapper3D, DemoSphere, AudioStreamPlayer3D, and Camera3D.
+chair2: Root Node3D scene with nodes such as WorldEnvironment, Chair, Seat, SeatBevel, Backrest, and LumbarSupport.
+nail_color_controller: Root Node3D scene with nodes such as ValueMapper3D, Camera3D, and DirectionalLight3D.
+gridcolorizer: CubeColorizer3D.gd Simple 3D cube colorizer that finds MeshInstance3D nodes with "cube" in their name and applies the rose vase color pattern to an 11x11 grid
+pillarcolorcollection: Root Node3D scene with nodes such as Camera3D.
+radiolaria: Root Node3D scene with nodes such as Camera3D.
+tartan_demo: Root Node3D scene with nodes such as TartanBoxes3D and Camera3D.
+walkable_sine_bridge: Root Node3D scene with nodes such as Camera3D.
+ColoredLinesVR: res://hallway_lines/ColoredLinesVR.gd A mesmerizing hallway of wall-to-wall colored sine lines
+StaticCables: res://algorithms/wavefunctions/static_cables/StaticCables.gd Static running cables using the line technique from ColoredLinesVR
+doublehelix: Root Node3D scene with nodes such as Camera3D.
+randompoints: Root Node3D scene with nodes such as Camera3D.
+randompoints_gaussian: Root Node3D scene with nodes such as Camera3D.
+randompoints_uniform: Root Node3D scene with nodes such as Camera3D.
+pixel_cloud: Root Node3D scene with nodes such as Camera3D and DirectionalLight3D.
+coordinate_axes_xy: Root Node3D scene with nodes such as AxisX, AxisY, Labels, LabelX, LabelY, and Camera3D.
+randompoint: Root Node3D scene with nodes such as Axes.
+randomlines: Root Node3D scene with nodes such as Camera3D.
+ten_print_maze_3d: Root Node3D scene with nodes such as Camera3D.
+pickup_cube_placer: PickupCubePlacer.gd Script to place multiple pickup cubes in the grid system
+cube_projectile_spawner: CubeSpawner.gd - Main spawner that shoots cubes at the player
+noisetorus: Root Node3D scene with nodes such as Camera3D, MeshInstance3D, and MeshInstance3D3.
+noisetorus_ex_1: Root Node3D scene with nodes such as MeshInstance3D.
+noisetext: Root Node3D scene with nodes such as Camera3D, MeshInstance3D2, and MeshInstance3D.
+noisesphere: Root Node3D scene with nodes such as MeshInstance3D4.
+rainbow: Root Node3D scene with nodes such as DirectionalLight3D, Environment, Sky, Ground, and Camera3D.
+homagetothesquare: Root Node3D scene with nodes such as DirectionalLight3D and Camera3D.
+platonicsolids: Root Node3D scene with nodes such as DirectionalLight, OmniLight1, OmniLight2, OmniLight3, and Camera3D.
+monitorsystem: GameMonitorSystem.gd Creates 4 different monitor displays with camera views: overhead, third person, mirror, and side view
+fallingblocks: Root Node3D scene with nodes such as Camera3D, DetectionArea, CollisionShape3D, and CubeBaseMesh.
+liturgicalambientgen: Root Node3D scene with nodes such as Camera3D and MeshInstance3D.
+john_cage_tech_noir: Root Node3D scene with nodes such as Camera3D.
+mario_test_sound_ui: Root Node3D scene with nodes such as KioskWithCutout, KioskBody, MonitorCutout, MonitorLight, AmbientLight, and Camera3D.
+sine_wave_controller: Root Node3D scene with nodes such as ValueMapper2D, ValueMapper1D, Camera3D, and DirectionalLight3D.
+sine_cylinder_staircase: Root Node3D scene with nodes such as Camera3D.
+rainbow_hallway: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, CSGCombiner3D, CSGBox3D, CSGCylinder3D, and CSGCylinder3D2.
+hallway_scene: Root Node3D scene with nodes such as WorldEnvironment, DirectionalLight3D, and Camera3D.
+fouriertransformshape: Main scene script - attach to a Node3D
+earths_delight: Root Node3D scene with nodes such as Camera3D.
+PipilottiRistWorld: Root Node3D scene with nodes such as Camera3D.
+science_desk: Root Node3D scene with nodes such as Camera3D.
+science_glasses: Root Node3D scene with nodes such as Camera3D and CSGCylinder3D.
+crackpropagation_ca: CrackPropagation.gd Attach to a Node3D. Generates, grows and draws 2D crack lines on XZ-plane.
+dewcoveredfol: Root Node3D scene with nodes such as Camera3D.
+percolationnetwork_ca: PercolationNetwork3D.gd Attach this script to a Node3D in your scene
+WFCCav: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, Environment, UI, CavePanel, and VBoxContainer.
+noiselayers: Root Node3D scene with nodes such as DirectionalLight3D, WorldEnvironment, Camera3D, and MeshInstance3D.
+gridscheckers: Root Node3D scene with nodes such as FloorCollider, CollisionShape3D, FloorSection1, FloorSection2, FloorSection3, and FloorSection4.
+animalpatterns: Root Node3D scene with nodes such as FloorCollider, CollisionShape3D, FloorSection1, FloorSection5, FloorSection2, and FloorSection5.
+rhizome_cave_demo: RhizomeCaveDemoController.gd Simplified cave generation controller - no UI, camera, or VR controls Only generates caves automatically
+fabrics: Root Node3D scene with nodes such as FloorCollider, CollisionShape3D, FloorSection1, FloorSection5, FloorSection2, and FloorSection5.
+truchettiles: Root Node3D scene with nodes such as FloorCollider, CollisionShape3D, FloorSection1, FloorSection5, FloorSection2, and FloorSection5.
+waves: Root Node3D scene with nodes such as FloorCollider, CollisionShape3D, FloorSection1, FloorSection2, FloorSection3, and FloorSection4.
+glassdivider: Root Node3D scene with nodes such as Floor, FloorMesh, FloorCollision, OfficeDivider, DividerStand, and StandMesh.
+fuzzy_cloud: Root Node3D scene.
+force_directed_layout: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, GraphNodes, GraphEdges, ForceIndicator, and EnergyLevel.
+graphspace: Updated GraphSpace.gd with flexible structure system GraphSpace.gd Drop this on a Node3D. Assign room_scene and portal_scene in the Inspector.
+KonigsbergBridge: Root Node3D scene with nodes such as DirectionalLight3D, WorldEnvironment, and Camera3D.
+graphspace3d: Enhanced 3D GraphSpace for VR with volumetric pathways GraphSpace3D.gd - Full 3D navigation with multi-level architecture
+mst_visualization: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, Environment, WorldEnvironment, BasePlane, and CoordinateAxes.
+pathfinding_visualization: Root Node3D scene with nodes such as Camera3D.
+pathfinding3d: Root Node3D scene with nodes such as Camera3D.
+network_analysis: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, NetworkNodes, CentralNodes, PeripheralNodes, and ClusterNodes.
+WFCSculptureGenerator: Simple example showing how to use the WFC Sculpture Generator Attach this to a Node3D in your scene for a quick start
+WFC3DGenerator: Root Node3D scene with nodes such as Camera3D, Rainbow_Dance_Floor_(0, 0, 0), Wall_Corner_(0, 0, 1), Wall_Corner_(0, 0, 2), Rainbow_Dance_Floor_(0, 0, 3), and Floor_Open_(0, 0, 4).
+modelsynthesis: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, UI, InfoPanel, VBoxContainer, and Title.
+spherenetwork: Root Node3D scene with nodes such as Camera3D and SculptureSurface.
+CA_sphere: Root Node3D scene with nodes such as Camera3D.
+softbody3d: Root Node3D scene with nodes such as DirectionalLight, Camera, Floor, FloorMesh, StaticBody3D, and CollisionShape3D.
+fetishtorus: Root Node3D scene with nodes such as DirectionalLight3D, Camera3D, FluidTorus, and FluidTorus2.
+booleans: Root Node3D scene with nodes such as DirectionalLight3D, Camera3D, Floor, OperationsContainer, Union, and TorusBase.
+booleanvariations: Root Node3D scene with nodes such as Camera3D and DirectionalLight3D.
+evolutionary_algorithms: Root Node3D scene with nodes such as Camera3D.
+VectorBasics: Root Node3D scene with nodes such as Camera3D.
+VectorAddition: Root Node3D scene.
+VectorDotProduct: Root Node3D scene with nodes such as Camera3D.
+VectorSubtraction: Root Node3D scene with nodes such as Camera3D.
+VectorForces: Root Node3D scene with nodes such as Camera3D.
+VectorCrossProduct: Root Node3D scene with nodes such as Camera3D.
+VectorProjectionReflection: Root Node3D scene.
+VectorMotion: Root Node3D scene with nodes such as Camera3D.
+VectorTorque: Root Node3D scene.
+VectorFieldFlow: Root Node3D scene with nodes such as Camera3D.
+PendulumPin: Root None scene.
+DoublePendulum: Root Node3D scene with nodes such as Camera3D.
+HingeCrank: Root Node3D scene with nodes such as Camera3D.
+CharacterRagdoll: Root Node3D scene with nodes such as Camera3D.
+SpringSuspension: Root Node3D scene with nodes such as Camera3D.
+ConeTwistBag: Root Node3D scene with nodes such as Camera3D.
+ChainSwing: Root Node3D scene with nodes such as Camera3D.
+DrawbridgeHinge: Root Node3D scene with nodes such as Camera3D.
+GimbalStabilizer: Root Node3D scene with nodes such as Camera3D.
+tscn_joint: Root Node3D scene with nodes such as KleinBottle, GrabCube, CollisionShape3D, HighlightRing, KleinBottle, and CopyMeArea3D.
+colortrails: Root Node3D scene with nodes such as Camera3D.
+colorballs: Root Node3D scene with nodes such as Camera3D, OmniLight3D, StaticBody3D, CollisionShape3D, and MeshInstance3D.
+attractorsphere: res://morphogenesis/AttractorSphere.gd
+AnickaYiLab: Root Node3D scene with nodes such as Camera3D.
+grab_stick: Root None scene with nodes such as Node3D.
+grab_long_stick: Root None scene with nodes such as CollisionShape3D, MeshInstance3D, HighlightRing, Blade, Top, and Displayobjectposition.
+doublestick: Root Node3D scene with nodes such as GrabStick, ForceOne, GrabStick2, and ForceTwo.
+cube_scene_drag_points: VRCubeDeformer.gd - Deformable cube with grab spheres at corners
+grab_stick_scanner: Root None scene with nodes such as MeshInstance3D, GrabStick_ColorScanner#DisplayScreen, GrabStick_ColorScanner#ScannerBody, GrabStick_ColorScanner#ScanningBeam, GrabStick#ColorScanner, and RayCast3D.
+diffusion_limited_aggregation: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, AggregateStructure, WalkingParticles, Seed, and ParticleCount.
+penrose_tilings: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, PenroseTiles, IterationControl, and TileCount.
+voxelnoise: VoxelWorld.gd
+VoxelNoiseROIs: Root Node3D scene with nodes such as WorldEnvironment, Sun, Camera3D, VoxelField, and ROIViewer.
+brick_wall_factory: Root Node3D scene with nodes such as Camera3D.
+grabcolorcollection: Root Node3D scene with nodes such as Camera3D.
+shelf: Shelf4x4CSG.gd Attach this script to a Node3D in your scene Uses CSG subtractive booleans to create the shelf
+shelf_with_stickers: Shelf4x4CSG.gd Attach this script to a Node3D in your scene Uses CSG subtractive booleans to create the shelf
+spherecolors: Root Node3D scene with nodes such as CameraController and Camera3D.
+entropy_visualization: Root None scene.
+grab_cube: Root None scene with nodes such as CollisionShape3D, MeshInstance3D, and HighlightRing.
+wood_cube: Root None scene with nodes such as CollisionShape3D, MeshInstance3D, and HighlightRing.
+ChengSimulationScaled: Root Node3D scene with nodes such as Camera3D and ChengSimulation.
+closest_pair: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, Points, DistanceLines, DivisionLine, and ClosestPairLine.
+distance_fields_sdf: Root Node3D scene with nodes such as Camera3D, DirectionalLight3D, SDFField, PrimitiveShapes, FieldResolution, and DistanceRange.
+voronoi_visualization: Root Node3D scene with nodes such as Camera3D and DirectionalLight3D.
+textureglitch: Root Node3D scene with nodes such as Camera3D.
+boids_2d_in_3d: Root Node3D scene with nodes such as Viewport, Screen, StaticBody3D, CollisionShape3D, and Camera3D.
+renaissancepaintingfloorrattern: Root Node3D scene with nodes such as Camera3D and OmniLight3D.
+forcedirected3d: Root Node3D scene with nodes such as Camera3D.
+networkflow3d: Root Node3D scene with nodes such as Camera3D.
+evolvingflowers: Root Node3D scene with nodes such as Camera3D.
+evolvedcreatures: Root Node3D scene with nodes such as Camera3D.
+techstrider: Root Node3D scene with nodes such as Body, Leg1, Joint1, Segment1, Joint2, and Segment2.
+cavex: Root Node3D scene with nodes such as Camera3D.
+cavetest: res://cave/PlaceWallSpheres.gd

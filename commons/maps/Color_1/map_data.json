@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_1 - Grid Colorizer Lab",
+		"layout": "12x12 illumination grid with corner lights and central colorizing table beneath a dome.",
+		"objective": "Introduce the grid colorizer system and next-cube progression trigger.",
+		"key_elements": [
+			"`gridcolorizer` console at the north-west tile",
+			"Ambient `dark_sphere` dome and `n` next cube at (5,5)",
+			"Overhead extra lights `el` framing the workspace",
+			"Teleporter `t` at (9,10)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
@@ -46,12 +57,12 @@
 		"interactables": [
 			["gridcolorizer", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "hallway_scene", " ", " ", "rainbow_hallway", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "value_mapper_example:0:1.0", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

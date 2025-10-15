@@ -1,0 +1,7608 @@
+{
+  "combine_primitives": {
+    "scene": "commons/primitives/combines/combine_primitives.tscn",
+    "root_node": {
+      "name": "CombinePrimitives",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "cylinder",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "plane",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "sphere",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "torus",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "combine_torus": {
+    "scene": "commons/primitives/combines/combine_torus.tscn",
+    "root_node": {
+      "name": "CombineTorus",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": null
+  },
+  "combine_portals": {
+    "scene": "commons/primitives/combines/combine_portals.tscn",
+    "root_node": {
+      "name": "CombinePortals",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "Lowrestorus",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": "Lowrestorus",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "combine_sphere": {
+    "scene": "commons/primitives/combines/combine_sphere.tscn",
+    "root_node": {
+      "name": "CombineSphere",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "combine_capsule": {
+    "scene": "commons/primitives/combines/combine_capsule.tscn",
+    "root_node": {
+      "name": "CombineCapsule",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "diamonds": {
+    "scene": "commons/primitives/combines/diamonds.tscn",
+    "root_node": {
+      "name": "Diamonds",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "DiamondTower.gd"
+  },
+  "pyramidlong": {
+    "scene": "commons/primitives/pyramid/pyramidlong.tscn",
+    "root_node": {
+      "name": "pyramidlongpink",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "PyramidLong.gd - Long pyramid with rectangular base (6 faces total)"
+  },
+  "geometric_transformations": {
+    "scene": "algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
+    "root_node": {
+      "name": "GeometricTransformations",
+      "type": "Node3D"
+    },
+    "child_count": 10,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Point",
+        "type": "CSGSphere3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Line",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Plane",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Cube",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "TransformationControls",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "RotationIndicator",
+        "type": "CSGCylinder3D",
+        "parent": "TransformationControls",
+        "instance": null
+      },
+      {
+        "name": "ScaleIndicator",
+        "type": "CSGBox3D",
+        "parent": "TransformationControls",
+        "instance": null
+      },
+      {
+        "name": "TranslationIndicator",
+        "type": "CSGSphere3D",
+        "parent": "TransformationControls",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "value_mapper_example": {
+    "scene": "commons/interfaces/value_mapper_example.tscn",
+    "root_node": {
+      "name": "ValueMapperExample",
+      "type": "Node3D"
+    },
+    "child_count": 7,
+    "children": [
+      {
+        "name": "ValueMapper1D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ValueMapper2D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ValueMapper3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DemoSphere",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "AudioStreamPlayer3D",
+        "type": "AudioStreamPlayer3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "chair2": {
+    "scene": "commons/lab/chair/officechair.tscn",
+    "root_node": {
+      "name": "SciFiOfficeChair",
+      "type": "Node3D"
+    },
+    "child_count": 31,
+    "children": [
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Chair",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Seat",
+        "type": "CSGBox3D",
+        "parent": "Chair",
+        "instance": null
+      },
+      {
+        "name": "SeatBevel",
+        "type": "CSGBox3D",
+        "parent": "Chair/Seat",
+        "instance": null
+      },
+      {
+        "name": "Backrest",
+        "type": "CSGBox3D",
+        "parent": "Chair",
+        "instance": null
+      },
+      {
+        "name": "LumbarSupport",
+        "type": "CSGBox3D",
+        "parent": "Chair/Backrest",
+        "instance": null
+      },
+      {
+        "name": "Armrests",
+        "type": "Node3D",
+        "parent": "Chair",
+        "instance": null
+      },
+      {
+        "name": "LeftArmrest",
+        "type": "Node3D",
+        "parent": "Chair/Armrests",
+        "instance": null
+      },
+      {
+        "name": "ArmPad",
+        "type": "CSGBox3D",
+        "parent": "Chair/Armrests/LeftArmrest",
+        "instance": null
+      },
+      {
+        "name": "ArmSupport",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Armrests/LeftArmrest",
+        "instance": null
+      },
+      {
+        "name": "RightArmrest",
+        "type": "Node3D",
+        "parent": "Chair/Armrests",
+        "instance": null
+      },
+      {
+        "name": "ArmPad",
+        "type": "CSGBox3D",
+        "parent": "Chair/Armrests/RightArmrest",
+        "instance": null
+      },
+      {
+        "name": "ArmSupport",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Armrests/RightArmrest",
+        "instance": null
+      },
+      {
+        "name": "Base",
+        "type": "Node3D",
+        "parent": "Chair",
+        "instance": null
+      },
+      {
+        "name": "CenterColumn",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Base",
+        "instance": null
+      },
+      {
+        "name": "GasShock",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Base/CenterColumn",
+        "instance": null
+      },
+      {
+        "name": "StarBase",
+        "type": "Node3D",
+        "parent": "Chair/Base",
+        "instance": null
+      },
+      {
+        "name": "CenterColumn2",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Base",
+        "instance": null
+      },
+      {
+        "name": "GasShock",
+        "type": "CSGCylinder3D",
+        "parent": "Chair/Base/CenterColumn2",
+        "instance": null
+      },
+      {
+        "name": "Lighting",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MainLight",
+        "type": "DirectionalLight3D",
+        "parent": "Lighting",
+        "instance": null
+      },
+      {
+        "name": "RimLight",
+        "type": "SpotLight3D",
+        "parent": "Lighting",
+        "instance": null
+      },
+      {
+        "name": "AccentLight",
+        "type": "SpotLight3D",
+        "parent": "Lighting",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "InfoPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "VBoxContainer",
+        "type": "VBoxContainer",
+        "parent": "UI/InfoPanel",
+        "instance": null
+      },
+      {
+        "name": "Title",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator",
+        "type": "HSeparator",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Features",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Controls",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "nail_color_controller": {
+    "scene": "commons/interfaces/nail_color_controller.tscn",
+    "root_node": {
+      "name": "NailColorController",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "ValueMapper3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "gridcolorizer": {
+    "scene": "algorithms/color/gridcolorizer/gridcolorizer.tscn",
+    "root_node": {
+      "name": "CubeColorizer3D",
+      "type": "Node"
+    },
+    "child_count": 14,
+    "children": [
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "InfoPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "InfoLabel",
+        "type": "Label",
+        "parent": "UI/InfoPanel",
+        "instance": null
+      },
+      {
+        "name": "ControlPanel",
+        "type": "VBoxContainer",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "Title",
+        "type": "Label",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "HSeparator",
+        "type": "HSeparator",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "ApplyPatternButton",
+        "type": "Button",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "HSeparator2",
+        "type": "HSeparator",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "TestRedButton",
+        "type": "Button",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "TestRainbowButton",
+        "type": "Button",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "HSeparator3",
+        "type": "HSeparator",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "ResetButton",
+        "type": "Button",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "HSeparator4",
+        "type": "HSeparator",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      },
+      {
+        "name": "DebugButton",
+        "type": "Button",
+        "parent": "UI/ControlPanel",
+        "instance": null
+      }
+    ],
+    "script_comment": "CubeColorizer3D.gd Simple 3D cube colorizer that finds MeshInstance3D nodes with \"cube\" in their name and applies the rose vase color pattern to an 11x11 grid"
+  },
+  "pillarcolorcollection": {
+    "scene": "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+    "root_node": {
+      "name": "pillarcolorcollection",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "radiolaria": {
+    "scene": "algorithms/computationalbiology/radiolaria/radiolaria.tscn",
+    "root_node": {
+      "name": "Radiolaria",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "tartan_demo": {
+    "scene": "algorithms/misc/tartan_boxes_demo.tscn",
+    "root_node": {
+      "name": "TartanBoxesDemo",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "TartanBoxes3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "walkable_sine_bridge": {
+    "scene": "algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
+    "root_node": {
+      "name": "WalkableSineBridge",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "ColoredLinesVR": {
+    "scene": "algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn",
+    "root_node": {
+      "name": "ColoredLinesVR",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "res://hallway_lines/ColoredLinesVR.gd A mesmerizing hallway of wall-to-wall colored sine lines"
+  },
+  "StaticCables": {
+    "scene": "algorithms/wavefunctions/static_cables/StaticCables.tscn",
+    "root_node": {
+      "name": "StaticCables",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": "res://algorithms/wavefunctions/static_cables/StaticCables.gd Static running cables using the line technique from ColoredLinesVR"
+  },
+  "doublehelix": {
+    "scene": "algorithms/wavefunctions/doublehelix/doublehelix.tscn",
+    "root_node": {
+      "name": "doublehelix",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "randompoints": {
+    "scene": "algorithms/randomness/randompoints/randompoints.tscn",
+    "root_node": {
+      "name": "RandomPoints",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "randompoints_gaussian": {
+    "scene": "algorithms/randomness/randompoints/randompoints_gaussian.tscn",
+    "root_node": {
+      "name": "RandomPointsGaussian",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "randompoints_uniform": {
+    "scene": "algorithms/randomness/randompoints/randompoints_uniform.tscn",
+    "root_node": {
+      "name": "RandomPointsUniform",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "pixel_cloud": {
+    "scene": "algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+    "root_node": {
+      "name": "PixelCloud",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "coordinate_axes_xy": {
+    "scene": "commons/primitives/line/coordinate_axes_xy.tscn",
+    "root_node": {
+      "name": "CoordinateAxesXY",
+      "type": "Node3D"
+    },
+    "child_count": 6,
+    "children": [
+      {
+        "name": "AxisX",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "AxisY",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Labels",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "LabelX",
+        "type": "Label3D",
+        "parent": "Labels",
+        "instance": null
+      },
+      {
+        "name": "LabelY",
+        "type": "Label3D",
+        "parent": "Labels",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "randompoint": {
+    "scene": "algorithms/randomness/randompoint/randompoint.tscn",
+    "root_node": {
+      "name": "RandomPointXY",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Axes",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "randomlines": {
+    "scene": "algorithms/randomness/randomlines/randomlines.tscn",
+    "root_node": {
+      "name": "RandomLines",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "ten_print_maze_3d": {
+    "scene": "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+    "root_node": {
+      "name": "TenPrintMaze3d",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "pickup_cube_placer": {
+    "scene": "algorithms/randomness/pickup_cube_placer.tscn",
+    "root_node": {
+      "name": "PickupCubePlacer",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": "PickupCubePlacer.gd Script to place multiple pickup cubes in the grid system"
+  },
+  "cube_projectile_spawner": {
+    "scene": "commons/primitives/cubes/cube_spawner.tscn",
+    "root_node": {
+      "name": "CubeSpawner",
+      "type": "Node3D"
+    },
+    "child_count": 7,
+    "children": [
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SpawnTimer",
+        "type": "Timer",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SpawnPoint",
+        "type": "Marker3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WarningParticles",
+        "type": "GPUParticles3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SpawnSound",
+        "type": "AudioStreamPlayer3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WarningSound",
+        "type": "AudioStreamPlayer3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Label3D",
+        "type": "Label3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "CubeSpawner.gd - Main spawner that shoots cubes at the player"
+  },
+  "noisetorus": {
+    "scene": "algorithms/randomness/noisetorus/noisetorus.tscn",
+    "root_node": {
+      "name": "Noisetorus",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "noisetorus_ex_1": {
+    "scene": "commons/primitives/torus/noisetorus_ex_1.tscn",
+    "root_node": {
+      "name": "noisetorus_ex1",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "noisetext": {
+    "scene": "algorithms/randomness/noisetext/noisetext.tscn",
+    "root_node": {
+      "name": "Noisetorus",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "noisesphere": {
+    "scene": "algorithms/randomness/noisesphere/noisesphere.tscn",
+    "root_node": {
+      "name": "Noisetorus",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "MeshInstance3D4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "rainbow": {
+    "scene": "algorithms/primitives/rainbow/rainbow.tscn",
+    "root_node": {
+      "name": "DoubleRainbow3D",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Environment",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Sky",
+        "type": "MeshInstance3D",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "Ground",
+        "type": "MeshInstance3D",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "homagetothesquare": {
+    "scene": "algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
+    "root_node": {
+      "name": "AlbersSquare3D",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "platonicsolids": {
+    "scene": "algorithms/primitives/platonicsolids/platonicsolids.tscn",
+    "root_node": {
+      "name": "PlatonicQueer3D",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "DirectionalLight",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight1",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight2",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "monitorsystem": {
+    "scene": "commons/monitor/monitorsystem.tscn",
+    "root_node": {
+      "name": "GameMonitorSystem",
+      "type": "Node3D"
+    },
+    "child_count": 8,
+    "children": [
+      {
+        "name": "MonitorSupport",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SupportPosts",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SupportPost1",
+        "type": "MeshInstance3D",
+        "parent": "SupportPosts",
+        "instance": null
+      },
+      {
+        "name": "SupportPost2",
+        "type": "MeshInstance3D",
+        "parent": "SupportPosts",
+        "instance": null
+      },
+      {
+        "name": "EnvironmentLighting",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MonitorLight1",
+        "type": "OmniLight3D",
+        "parent": "EnvironmentLighting",
+        "instance": null
+      },
+      {
+        "name": "MonitorLight2",
+        "type": "OmniLight3D",
+        "parent": "EnvironmentLighting",
+        "instance": null
+      },
+      {
+        "name": "BackgroundLight",
+        "type": "OmniLight3D",
+        "parent": "EnvironmentLighting",
+        "instance": null
+      }
+    ],
+    "script_comment": "GameMonitorSystem.gd Creates 4 different monitor displays with camera views: overhead, third person, mirror, and side view"
+  },
+  "fallingblocks": {
+    "scene": "commons/scenes/mapobjects/pick_up_cube_danger.tscn",
+    "root_node": {
+      "name": "PickUpCubeDanger",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DetectionArea",
+        "type": "Area3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "DetectionArea",
+        "instance": null
+      },
+      {
+        "name": "CubeBaseMesh",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "liturgicalambientgen": {
+    "scene": "algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
+    "root_node": {
+      "name": "Liturgicalambientgenerator",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "john_cage_tech_noir": {
+    "scene": "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+    "root_node": {
+      "name": "JohnCageTechNoir",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "mario_test_sound_ui": {
+    "scene": "algorithms/wavefunctions/mariocontrol/kiosk.tscn",
+    "root_node": {
+      "name": "SciFiKiosk",
+      "type": "Node3D"
+    },
+    "child_count": 13,
+    "children": [
+      {
+        "name": "KioskWithCutout",
+        "type": "CSGCombiner3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "KioskBody",
+        "type": "CSGBox3D",
+        "parent": "KioskWithCutout",
+        "instance": null
+      },
+      {
+        "name": "MonitorCutout",
+        "type": "CSGBox3D",
+        "parent": "KioskWithCutout",
+        "instance": null
+      },
+      {
+        "name": "MonitorLight",
+        "type": "SpotLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "AmbientLight",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SettingsUI",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Screen",
+        "type": "MeshInstance3D",
+        "parent": "SettingsUI",
+        "instance": null
+      },
+      {
+        "name": "Viewport2Din3D",
+        "type": null,
+        "parent": "SettingsUI/Screen",
+        "instance": null
+      },
+      {
+        "name": "HandPoseArea",
+        "type": null,
+        "parent": "SettingsUI",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "SettingsUI/HandPoseArea",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "sine_wave_controller": {
+    "scene": "commons/interfaces/sine_wave_controller.tscn",
+    "root_node": {
+      "name": "SineWaveController",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "ValueMapper2D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ValueMapper1D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "sine_cylinder_staircase": {
+    "scene": "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+    "root_node": {
+      "name": "SineCylinderStaircase",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "rainbow_hallway": {
+    "scene": "algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
+    "root_node": {
+      "name": "RainbowHallway",
+      "type": "Node3D"
+    },
+    "child_count": 18,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CSGCombiner3D",
+        "type": "CSGCombiner3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CSGBox3D",
+        "type": "CSGBox3D",
+        "parent": "CSGCombiner3D",
+        "instance": null
+      },
+      {
+        "name": "CSGCylinder3D",
+        "type": "CSGCylinder3D",
+        "parent": "CSGCombiner3D",
+        "instance": null
+      },
+      {
+        "name": "CSGCylinder3D2",
+        "type": "CSGCylinder3D",
+        "parent": "CSGCombiner3D",
+        "instance": null
+      },
+      {
+        "name": "CSGCylinder3D3",
+        "type": "CSGCylinder3D",
+        "parent": "CSGCombiner3D",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D2",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D3",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "VBoxContainer",
+        "type": "VBoxContainer",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "Label",
+        "type": "Label",
+        "parent": "UI/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSlider",
+        "type": "HSlider",
+        "parent": "UI/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Label2",
+        "type": "Label",
+        "parent": "UI/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSlider2",
+        "type": "HSlider",
+        "parent": "UI/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Label3",
+        "type": "Label",
+        "parent": "UI/VBoxContainer",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "hallway_scene": {
+    "scene": "algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+    "root_node": {
+      "name": "Hallway",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "fouriertransformshape": {
+    "scene": "algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
+    "root_node": {
+      "name": "FourierTransform",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Main scene script - attach to a Node3D"
+  },
+  "earths_delight": {
+    "scene": "algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
+    "root_node": {
+      "name": "EarthsDelight",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "PipilottiRistWorld": {
+    "scene": "algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
+    "root_node": {
+      "name": "PipilottiRistWorld",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "science_desk": {
+    "scene": "algorithms/criticaltheory/sciencedesk/science_desk.tscn",
+    "root_node": {
+      "name": "ScienceDesk",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "science_glasses": {
+    "scene": "algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
+    "root_node": {
+      "name": "ScienceGlasses",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CSGCylinder3D",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "crackpropagation_ca": {
+    "scene": "algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn",
+    "root_node": {
+      "name": "CrackpropagationCa",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "CrackPropagation.gd Attach to a Node3D. Generates, grows and draws 2D crack lines on XZ-plane."
+  },
+  "dewcoveredfol": {
+    "scene": "algorithms/proceduralgeneration/dewcoveredfoliage/dewcoveredfoliage.tscn",
+    "root_node": {
+      "name": "Dewcoveredfoliage",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "percolationnetwork_ca": {
+    "scene": "algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn",
+    "root_node": {
+      "name": "PercolationnetworkCa",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "PercolationNetwork3D.gd Attach this script to a Node3D in your scene"
+  },
+  "WFCCav": {
+    "scene": "algorithms/proceduralgeneration/wave_function_collapse/WFCCave.tscn",
+    "root_node": {
+      "name": "CaveGenerator",
+      "type": "Node3D"
+    },
+    "child_count": 18,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Environment",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CavePanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "VBoxContainer",
+        "type": "VBoxContainer",
+        "parent": "UI/CavePanel",
+        "instance": null
+      },
+      {
+        "name": "Title",
+        "type": "Label",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator",
+        "type": "HSeparator",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "InfoLabel",
+        "type": "Label",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator2",
+        "type": "HSeparator",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "GridLabel",
+        "type": "Label",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "FeaturesLabel",
+        "type": "Label",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "FeaturesList",
+        "type": "RichTextLabel",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator3",
+        "type": "HSeparator",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "ControlsLabel",
+        "type": "Label",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "ControlsList",
+        "type": "RichTextLabel",
+        "parent": "UI/CavePanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "StatusPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "StatusLabel",
+        "type": "Label",
+        "parent": "UI/StatusPanel",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "noiselayers": {
+    "scene": "algorithms/randomness/noiselayers/noiselayers.tscn",
+    "root_node": {
+      "name": "Noiselayers",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "gridscheckers": {
+    "scene": "algorithms/patterngeneration/gridscheckers/gridscheckers.tscn",
+    "root_node": {
+      "name": "FloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 6,
+    "children": [
+      {
+        "name": "FloorCollider",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "FloorCollider",
+        "instance": null
+      },
+      {
+        "name": "FloorSection1",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "animalpatterns": {
+    "scene": "algorithms/patterngeneration/animalpatterns/animalpatterns.tscn",
+    "root_node": {
+      "name": "FloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 12,
+    "children": [
+      {
+        "name": "FloorCollider",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "FloorCollider",
+        "instance": null
+      },
+      {
+        "name": "FloorSection1",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection1",
+        "instance": null
+      },
+      {
+        "name": "FloorSection2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection2",
+        "instance": null
+      },
+      {
+        "name": "FloorSection3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection3",
+        "instance": null
+      },
+      {
+        "name": "FloorSection4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection4",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection4",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "rhizome_cave_demo": {
+    "scene": "algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
+    "root_node": {
+      "name": "RhizomeCaveDemo",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "Environment",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "CaveGenerator",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "RhizomeCaveDemoController.gd Simplified cave generation controller - no UI, camera, or VR controls Only generates caves automatically"
+  },
+  "fabrics": {
+    "scene": "algorithms/patterngeneration/fabrics/fabrics.tscn",
+    "root_node": {
+      "name": "FloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 11,
+    "children": [
+      {
+        "name": "FloorCollider",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "FloorCollider",
+        "instance": null
+      },
+      {
+        "name": "FloorSection1",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection1",
+        "instance": null
+      },
+      {
+        "name": "FloorSection2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection2",
+        "instance": null
+      },
+      {
+        "name": "FloorSection3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection3",
+        "instance": null
+      },
+      {
+        "name": "FloorSection4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection4",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection4",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "truchettiles": {
+    "scene": "algorithms/patterngeneration/truchettiles/truchettiles.tscn",
+    "root_node": {
+      "name": "FloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 10,
+    "children": [
+      {
+        "name": "FloorCollider",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "FloorCollider",
+        "instance": null
+      },
+      {
+        "name": "FloorSection1",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection1",
+        "instance": null
+      },
+      {
+        "name": "FloorSection2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection2",
+        "instance": null
+      },
+      {
+        "name": "FloorSection3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection3",
+        "instance": null
+      },
+      {
+        "name": "FloorSection4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection5",
+        "type": "MeshInstance3D",
+        "parent": "FloorSection4",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "waves": {
+    "scene": "algorithms/patterngeneration/waves/waves.tscn",
+    "root_node": {
+      "name": "FloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 10,
+    "children": [
+      {
+        "name": "FloorCollider",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "FloorCollider",
+        "instance": null
+      },
+      {
+        "name": "FloorSection1",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorSection4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D3",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D4",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "glassdivider": {
+    "scene": "algorithms/patterngeneration/glassdivider/glassdivider.tscn",
+    "root_node": {
+      "name": "OfficeScene",
+      "type": "Node3D"
+    },
+    "child_count": 30,
+    "children": [
+      {
+        "name": "Floor",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorMesh",
+        "type": "MeshInstance3D",
+        "parent": "Floor",
+        "instance": null
+      },
+      {
+        "name": "FloorCollision",
+        "type": "CollisionShape3D",
+        "parent": "Floor",
+        "instance": null
+      },
+      {
+        "name": "OfficeDivider",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DividerStand",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider",
+        "instance": null
+      },
+      {
+        "name": "StandMesh",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "StandCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "DividerPanel",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider",
+        "instance": null
+      },
+      {
+        "name": "PanelMesh",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "PanelMesh",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider/DividerPanel/PanelMesh",
+        "instance": null
+      },
+      {
+        "name": "PanelCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OfficeDivider2",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DividerStand",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider2",
+        "instance": null
+      },
+      {
+        "name": "StandMesh",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider2/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "StandCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider2/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "DividerPanel",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider2",
+        "instance": null
+      },
+      {
+        "name": "PanelCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider2/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "PanelMesh2",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider2/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider2",
+        "instance": null
+      },
+      {
+        "name": "OfficeDivider3",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DividerStand",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider3",
+        "instance": null
+      },
+      {
+        "name": "StandMesh",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider3/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "StandCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider3/DividerStand",
+        "instance": null
+      },
+      {
+        "name": "DividerPanel",
+        "type": "StaticBody3D",
+        "parent": "OfficeDivider3",
+        "instance": null
+      },
+      {
+        "name": "PanelCollision",
+        "type": "CollisionShape3D",
+        "parent": "OfficeDivider3/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "PanelMesh3",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider3/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider3/DividerPanel",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "OfficeDivider3",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "fuzzy_cloud": {
+    "scene": "algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
+    "root_node": {
+      "name": "FuzzyCloud",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": null
+  },
+  "force_directed_layout": {
+    "scene": "algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+    "root_node": {
+      "name": "ForceDirectedLayout",
+      "type": "Node3D"
+    },
+    "child_count": 6,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GraphNodes",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GraphEdges",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ForceIndicator",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "EnergyLevel",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "graphspace": {
+    "scene": "algorithms/graphtheory/graphspace/graphspace.tscn",
+    "root_node": {
+      "name": "Graphspace",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Updated GraphSpace.gd with flexible structure system GraphSpace.gd Drop this on a Node3D. Assign room_scene and portal_scene in the Inspector."
+  },
+  "KonigsbergBridge": {
+    "scene": "algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+    "root_node": {
+      "name": "Konigsberg3D",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "graphspace3d": {
+    "scene": "algorithms/graphtheory/graphspace3d/graphspace3d.tscn",
+    "root_node": {
+      "name": "GraphSpace3D",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Enhanced 3D GraphSpace for VR with volumetric pathways GraphSpace3D.gd - Full 3D navigation with multi-level architecture"
+  },
+  "mst_visualization": {
+    "scene": "algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+    "root_node": {
+      "name": "MST_Visualization",
+      "type": "Node3D"
+    },
+    "child_count": 9,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Environment",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "BasePlane",
+        "type": "MeshInstance3D",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "CoordinateAxes",
+        "type": "Node3D",
+        "parent": "Environment",
+        "instance": null
+      },
+      {
+        "name": "XAxis",
+        "type": "MeshInstance3D",
+        "parent": "Environment/CoordinateAxes",
+        "instance": null
+      },
+      {
+        "name": "YAxis",
+        "type": "MeshInstance3D",
+        "parent": "Environment/CoordinateAxes",
+        "instance": null
+      },
+      {
+        "name": "Origin",
+        "type": "MeshInstance3D",
+        "parent": "Environment/CoordinateAxes",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "pathfinding_visualization": {
+    "scene": "algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn",
+    "root_node": {
+      "name": "PathfindingVisualization",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "pathfinding3d": {
+    "scene": "algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+    "root_node": {
+      "name": "Pathfinding3D",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "network_analysis": {
+    "scene": "algorithms/graphtheory/network_analysis/network_analysis.tscn",
+    "root_node": {
+      "name": "NetworkAnalysis",
+      "type": "Node3D"
+    },
+    "child_count": 31,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "NetworkNodes",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CentralNodes",
+        "type": "Node3D",
+        "parent": "NetworkNodes",
+        "instance": null
+      },
+      {
+        "name": "PeripheralNodes",
+        "type": "Node3D",
+        "parent": "NetworkNodes",
+        "instance": null
+      },
+      {
+        "name": "ClusterNodes",
+        "type": "Node3D",
+        "parent": "NetworkNodes",
+        "instance": null
+      },
+      {
+        "name": "NetworkLabel",
+        "type": "CSGBox3D",
+        "parent": "NetworkNodes",
+        "instance": null
+      },
+      {
+        "name": "NetworkEdges",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ConnectionLines",
+        "type": "Node3D",
+        "parent": "NetworkEdges",
+        "instance": null
+      },
+      {
+        "name": "AnalysisEngine",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "EngineCore",
+        "type": "CSGBox3D",
+        "parent": "AnalysisEngine",
+        "instance": null
+      },
+      {
+        "name": "EngineLabel",
+        "type": "CSGBox3D",
+        "parent": "AnalysisEngine",
+        "instance": null
+      },
+      {
+        "name": "AnalysisMethods",
+        "type": "Node3D",
+        "parent": "AnalysisEngine",
+        "instance": null
+      },
+      {
+        "name": "CentralityCore",
+        "type": "CSGSphere3D",
+        "parent": "AnalysisEngine/AnalysisMethods",
+        "instance": null
+      },
+      {
+        "name": "ClusteringCore",
+        "type": "CSGSphere3D",
+        "parent": "AnalysisEngine/AnalysisMethods",
+        "instance": null
+      },
+      {
+        "name": "SmallWorldCore",
+        "type": "CSGSphere3D",
+        "parent": "AnalysisEngine/AnalysisMethods",
+        "instance": null
+      },
+      {
+        "name": "CommunityDetection",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CommunityCore",
+        "type": "CSGBox3D",
+        "parent": "CommunityDetection",
+        "instance": null
+      },
+      {
+        "name": "CommunityLabel",
+        "type": "CSGBox3D",
+        "parent": "CommunityDetection",
+        "instance": null
+      },
+      {
+        "name": "Communities",
+        "type": "Node3D",
+        "parent": "CommunityDetection",
+        "instance": null
+      },
+      {
+        "name": "DataFlow",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FlowParticles",
+        "type": "Node3D",
+        "parent": "DataFlow",
+        "instance": null
+      },
+      {
+        "name": "NetworkMetrics",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ClusteringMeter",
+        "type": "Node3D",
+        "parent": "NetworkMetrics",
+        "instance": null
+      },
+      {
+        "name": "ClusteringBase",
+        "type": "CSGBox3D",
+        "parent": "NetworkMetrics/ClusteringMeter",
+        "instance": null
+      },
+      {
+        "name": "ClusteringIndicator",
+        "type": "CSGSphere3D",
+        "parent": "NetworkMetrics/ClusteringMeter",
+        "instance": null
+      },
+      {
+        "name": "ConnectivityMeter",
+        "type": "Node3D",
+        "parent": "NetworkMetrics",
+        "instance": null
+      },
+      {
+        "name": "ConnectivityBase",
+        "type": "CSGBox3D",
+        "parent": "NetworkMetrics/ConnectivityMeter",
+        "instance": null
+      },
+      {
+        "name": "ConnectivityIndicator",
+        "type": "CSGSphere3D",
+        "parent": "NetworkMetrics/ConnectivityMeter",
+        "instance": null
+      },
+      {
+        "name": "Grid",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GridLines",
+        "type": "Node3D",
+        "parent": "Grid",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "WFCSculptureGenerator": {
+    "scene": "algorithms/proceduralgeneration/WFCSculptureGenerator/WFCSculptureGenerator.tscn",
+    "root_node": {
+      "name": "WfcSculptureGenerator",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Simple example showing how to use the WFC Sculpture Generator Attach this to a Node3D in your scene for a quick start"
+  },
+  "WFC3DGenerator": {
+    "scene": "algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn",
+    "root_node": {
+      "name": "Wfc3dGenerator",
+      "type": "Node3D"
+    },
+    "child_count": 423,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(0, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(0, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(0, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(0, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(0, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(0, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(0, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(0, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(0, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(0, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(0, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(0, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(0, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(0, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(0, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(1, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(1, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(1, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(1, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(1, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(1, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(1, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(1, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(1, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(1, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(1, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(1, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(1, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(1, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(1, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(1, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(1, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(1, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(1, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(1, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(1, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(1, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(1, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(1, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(1, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(1, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(1, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(1, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(1, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(1, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(2, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(2, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(2, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(2, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(2, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(2, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(2, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(2, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(2, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(2, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(2, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(2, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(2, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Stairs_Up_(2, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(2, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(2, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(2, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(2, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(2, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(2, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(2, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(2, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(2, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(3, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(3, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(3, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(3, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(3, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(3, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(3, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(3, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(3, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(3, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(3, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(3, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(3, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(3, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(3, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(3, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(3, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(3, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(3, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(3, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(4, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(4, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(4, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(4, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(4, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(4, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(4, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(4, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(4, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(4, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(4, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(4, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(4, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(4, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(4, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(4, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(4, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(4, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(4, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(5, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(5, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(5, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(5, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(5, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(5, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(5, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(5, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(5, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(5, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(5, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(5, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(5, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(5, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(5, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Stairs_Up_(5, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(5, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(5, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(5, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(5, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(5, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(6, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(6, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(6, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(6, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(6, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(6, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(6, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(6, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(6, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(6, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(6, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(6, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(6, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(6, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(6, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(6, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(6, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(6, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(6, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(6, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(6, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(6, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(6, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(7, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(7, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(7, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(7, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(7, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(7, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(7, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(7, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(7, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(7, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(7, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(7, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(7, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(7, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(7, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(7, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(8, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(8, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(8, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(8, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(8, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(8, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(8, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(8, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(8, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(8, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(8, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(8, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(8, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(8, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(8, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(8, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(8, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(8, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(8, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(8, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(8, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(8, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(8, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(8, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(9, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(9, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(9, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(9, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(9, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(9, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(9, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(9, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(9, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(9, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Door_NS_(9, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(9, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(9, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(9, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(9, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(9, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(9, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(9, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(10, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(10, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(10, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(10, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(10, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(10, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(10, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(10, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(10, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(10, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(10, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(10, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Door_NS_(10, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(10, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(10, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(10, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(10, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Stairs_Up_(10, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(10, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(10, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(10, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(10, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(10, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(10, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(10, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(10, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(10, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(10, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(10, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(10, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(10, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(10, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(10, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Celebration_Spiral_(10, 2, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(10, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(10, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 0, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 0, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(11, 0, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Safe_Space_Alcove_(11, 0, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 0, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(11, 0, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 0, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 0, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 0, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Corner_(11, 0, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(11, 0, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 0, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(11, 1, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 1, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 1, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(11, 1, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Door_NS_(11, 1, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Corridor_Straight_(11, 1, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(11, 1, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Trans_Joy_Path_(11, 1, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 1, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Love_Wins_Archway_(11, 1, 9)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 1, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(11, 1, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 2, 0)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(11, 2, 1)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(11, 2, 2)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(11, 2, 3)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Glitter_Fountain_(11, 2, 4)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 2, 5)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_Straight_(11, 2, 6)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Rainbow_Dance_Floor_(11, 2, 7)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Wall_End_(11, 2, 8)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Pride_Flag_Wall_(11, 2, 10)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor_Open_(11, 2, 11)",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "modelsynthesis": {
+    "scene": "algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.tscn",
+    "root_node": {
+      "name": "ModelSynthesis",
+      "type": "Node3D"
+    },
+    "child_count": 18,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "InfoPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "VBoxContainer",
+        "type": "VBoxContainer",
+        "parent": "UI/InfoPanel",
+        "instance": null
+      },
+      {
+        "name": "Title",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator",
+        "type": "HSeparator",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Description",
+        "type": "RichTextLabel",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator2",
+        "type": "HSeparator",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Parameters",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "ParamsList",
+        "type": "RichTextLabel",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator3",
+        "type": "HSeparator",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Controls",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "ControlsList",
+        "type": "RichTextLabel",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "StatusPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "StatusVBox",
+        "type": "VBoxContainer",
+        "parent": "UI/StatusPanel",
+        "instance": null
+      },
+      {
+        "name": "StatusTitle",
+        "type": "Label",
+        "parent": "UI/StatusPanel/StatusVBox",
+        "instance": null
+      },
+      {
+        "name": "StatusInfo",
+        "type": "RichTextLabel",
+        "parent": "UI/StatusPanel/StatusVBox",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "spherenetwork": {
+    "scene": "algorithms/proceduralgeneration/spherenetwork/spherenetwork.tscn",
+    "root_node": {
+      "name": "Spherenetwork",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SculptureSurface",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "CA_sphere": {
+    "scene": "algorithms/proceduralgeneration/CA_sphere/CA_sphere.tscn",
+    "root_node": {
+      "name": "CaSphere",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "softbody3d": {
+    "scene": "algorithms/physicssimulation/softbody3d/softbody3d.tscn",
+    "root_node": {
+      "name": "SoftBodyVariationsScene",
+      "type": "Node3D"
+    },
+    "child_count": 26,
+    "children": [
+      {
+        "name": "DirectionalLight",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FloorMesh",
+        "type": "MeshInstance3D",
+        "parent": "Floor",
+        "instance": null
+      },
+      {
+        "name": "StaticBody3D",
+        "type": "StaticBody3D",
+        "parent": "Floor",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "Floor/StaticBody3D",
+        "instance": null
+      },
+      {
+        "name": "SoftBodyVariations",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody01",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody02",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody04",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody05",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody06",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody07",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody08",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody09",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "SphereSoftBody10",
+        "type": "SoftBody3D",
+        "parent": "SoftBodyVariations",
+        "instance": null
+      },
+      {
+        "name": "UI",
+        "type": "Control",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "InfoPanel",
+        "type": "Panel",
+        "parent": "UI",
+        "instance": null
+      },
+      {
+        "name": "VBoxContainer",
+        "type": "VBoxContainer",
+        "parent": "UI/InfoPanel",
+        "instance": null
+      },
+      {
+        "name": "Title",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "Description",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "HSeparator",
+        "type": "HSeparator",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "SphereInfo",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "BoxInfo",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "CylinderInfo",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      },
+      {
+        "name": "CapsuleInfo",
+        "type": "Label",
+        "parent": "UI/InfoPanel/VBoxContainer",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "fetishtorus": {
+    "scene": "algorithms/primitives/fetishtorus/fetishtorus.tscn",
+    "root_node": {
+      "name": "FluidTorusScene",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FluidTorus",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FluidTorus2",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "booleans": {
+    "scene": "algorithms/primitives/booleans/booleans.tscn",
+    "root_node": {
+      "name": "CSGOperations",
+      "type": "Node3D"
+    },
+    "child_count": 16,
+    "children": [
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Floor",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OperationsContainer",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Union",
+        "type": "CSGCombiner3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      },
+      {
+        "name": "TorusBase",
+        "type": "CSGTorus3D",
+        "parent": "OperationsContainer/Union",
+        "instance": null
+      },
+      {
+        "name": "SphereUnion",
+        "type": "CSGSphere3D",
+        "parent": "OperationsContainer/Union",
+        "instance": null
+      },
+      {
+        "name": "Intersection",
+        "type": "CSGCombiner3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      },
+      {
+        "name": "SphereBase",
+        "type": "CSGSphere3D",
+        "parent": "OperationsContainer/Intersection",
+        "instance": null
+      },
+      {
+        "name": "TorusIntersect",
+        "type": "CSGTorus3D",
+        "parent": "OperationsContainer/Intersection",
+        "instance": null
+      },
+      {
+        "name": "Subtraction",
+        "type": "CSGCombiner3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      },
+      {
+        "name": "SphereBase",
+        "type": "CSGSphere3D",
+        "parent": "OperationsContainer/Subtraction",
+        "instance": null
+      },
+      {
+        "name": "TorusSubtract",
+        "type": "CSGTorus3D",
+        "parent": "OperationsContainer/Subtraction",
+        "instance": null
+      },
+      {
+        "name": "UnionLabel",
+        "type": "Label3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      },
+      {
+        "name": "IntersectionLabel",
+        "type": "Label3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      },
+      {
+        "name": "SubtractionLabel",
+        "type": "Label3D",
+        "parent": "OperationsContainer",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "booleanvariations": {
+    "scene": "algorithms/primitives/booleans/booleanvariations.tscn",
+    "root_node": {
+      "name": "Booleanvariations",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "evolutionary_algorithms": {
+    "scene": "algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+    "root_node": {
+      "name": "EvolutionaryAlgorithmsDemo",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorBasics": {
+    "scene": "algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+    "root_node": {
+      "name": "VectorBasics",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorAddition": {
+    "scene": "algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+    "root_node": {
+      "name": "VectorAddition",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": null
+  },
+  "VectorDotProduct": {
+    "scene": "algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+    "root_node": {
+      "name": "VectorDotProduct",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorSubtraction": {
+    "scene": "algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+    "root_node": {
+      "name": "VectorSubtraction",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorForces": {
+    "scene": "algorithms/vectors/05_vector_forces/VectorForces.tscn",
+    "root_node": {
+      "name": "VectorForces",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorCrossProduct": {
+    "scene": "algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+    "root_node": {
+      "name": "VectorCrossProduct",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorProjectionReflection": {
+    "scene": "algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+    "root_node": {
+      "name": "VectorProjectionReflection",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": null
+  },
+  "VectorMotion": {
+    "scene": "algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+    "root_node": {
+      "name": "VectorMotion",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "VectorTorque": {
+    "scene": "algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+    "root_node": {
+      "name": "VectorTorque",
+      "type": "Node3D"
+    },
+    "child_count": 0,
+    "children": [],
+    "script_comment": null
+  },
+  "VectorFieldFlow": {
+    "scene": "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+    "root_node": {
+      "name": "VectorFieldFlow",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "PendulumPin": {
+    "error": "scene path not found: algoalgorithms/joint/01_pendulum_pin/PendulumPin.tscn"
+  },
+  "DoublePendulum": {
+    "scene": "algorithms/joint/02_double_pendulum/DoublePendulum.tscn",
+    "root_node": {
+      "name": "DoublePendulum",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "HingeCrank": {
+    "scene": "algorithms/joint/03_hinge_crank/HingeCrank.tscn",
+    "root_node": {
+      "name": "HingeCrank",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "CharacterRagdoll": {
+    "scene": "algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
+    "root_node": {
+      "name": "CharacterRagdoll",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "SpringSuspension": {
+    "scene": "algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
+    "root_node": {
+      "name": "SpringSuspension",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "ConeTwistBag": {
+    "scene": "algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+    "root_node": {
+      "name": "ConeTwistBag",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "ChainSwing": {
+    "scene": "algorithms/joint/07_chain_swing/ChainSwing.tscn",
+    "root_node": {
+      "name": "ChainSwing",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "DrawbridgeHinge": {
+    "scene": "algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
+    "root_node": {
+      "name": "DrawbridgeHinge",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "GimbalStabilizer": {
+    "scene": "algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn",
+    "root_node": {
+      "name": "GimbalStabilizer",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "tscn_joint": {
+    "scene": "algorithms/joint/shared/static_exemple.tscn",
+    "root_node": {
+      "name": "helperArm",
+      "type": "Node3D"
+    },
+    "child_count": 25,
+    "children": [
+      {
+        "name": "KleinBottle",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabCube",
+        "type": "RigidBody3D",
+        "parent": "KleinBottle",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "KleinBottle/GrabCube",
+        "instance": null
+      },
+      {
+        "name": "HighlightRing",
+        "type": null,
+        "parent": "KleinBottle/GrabCube",
+        "instance": null
+      },
+      {
+        "name": "KleinBottle",
+        "type": "MeshInstance3D",
+        "parent": "KleinBottle/GrabCube",
+        "instance": null
+      },
+      {
+        "name": "CopyMeArea3D",
+        "type": "Area3D",
+        "parent": "KleinBottle/GrabCube",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "KleinBottle/GrabCube/CopyMeArea3D",
+        "instance": null
+      },
+      {
+        "name": "HingeJoint3D3",
+        "type": "HingeJoint3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "HingeJoint3D",
+        "type": "HingeJoint3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "RigidBody3D_mid",
+        "type": "RigidBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "RigidBody3D_mid",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "RigidBody3D_mid",
+        "instance": null
+      },
+      {
+        "name": "RigidBody3D_first",
+        "type": "RigidBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "RigidBody3D_first",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "RigidBody3D_first",
+        "instance": null
+      },
+      {
+        "name": "HingeJoint3D2",
+        "type": "HingeJoint3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "RigidBody3D_top",
+        "type": "RigidBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "RigidBody3D_top",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "RigidBody3D_top",
+        "instance": null
+      },
+      {
+        "name": "HingeJoint3D4",
+        "type": "HingeJoint3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "RigidBody3D_fixed",
+        "type": "RigidBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "RigidBody3D_fixed",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "RigidBody3D_fixed",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "colortrails": {
+    "scene": "algorithms/color/colortrails/colortrails.tscn",
+    "root_node": {
+      "name": "colortrails",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "colorballs": {
+    "scene": "algorithms/color/colorballs/colorballs.tscn",
+    "root_node": {
+      "name": "ColorBalls",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "StaticBody3D",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "StaticBody3D",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "StaticBody3D",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "attractorsphere": {
+    "scene": "algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
+    "root_node": {
+      "name": "Attractorsphere",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "res://morphogenesis/AttractorSphere.gd"
+  },
+  "AnickaYiLab": {
+    "scene": "algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
+    "root_node": {
+      "name": "AnickaYiLab",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "grab_stick": {
+    "scene": "algorithms/color/color_scanner/grab_stick.tscn",
+    "root_node": {
+      "name": "GrabStick2"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Node3D",
+        "type": "Node3D",
+        "parent": "MeshInstance3D",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "grab_long_stick": {
+    "scene": "commons/primitives/cubes/grab_long_stick.tscn",
+    "root_node": {
+      "name": "GrabStick"
+    },
+    "child_count": 11,
+    "children": [
+      {
+        "name": "CollisionShape3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "HighlightRing",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Blade",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Top",
+        "type": "Node3D",
+        "parent": "Blade",
+        "instance": null
+      },
+      {
+        "name": "Displayobjectposition",
+        "type": null,
+        "parent": "Blade/Top",
+        "instance": null
+      },
+      {
+        "name": "TrackBall",
+        "type": "MeshInstance3D",
+        "parent": "Blade/Top",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": "Blade/Top/TrackBall",
+        "instance": null
+      },
+      {
+        "name": "TextNode",
+        "type": "Node3D",
+        "parent": "Blade/Top/TrackBall",
+        "instance": null
+      },
+      {
+        "name": "Blade",
+        "type": "MeshInstance3D",
+        "parent": "Blade",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "doublestick": {
+    "scene": "commons/primitives/cubes/doublestick.tscn",
+    "root_node": {
+      "name": "Doublestick",
+      "type": "Node3D"
+    },
+    "child_count": 4,
+    "children": [
+      {
+        "name": "GrabStick",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ForceOne",
+        "type": "MeshInstance3D",
+        "parent": "GrabStick",
+        "instance": null
+      },
+      {
+        "name": "GrabStick2",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ForceTwo",
+        "type": "MeshInstance3D",
+        "parent": "GrabStick2",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "cube_scene_drag_points": {
+    "scene": "commons/primitives/cubes/cube_scene_drag_points.tscn",
+    "root_node": {
+      "name": "CubeScene",
+      "type": "Node3D"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": "OmniLight3D",
+        "instance": null
+      }
+    ],
+    "script_comment": "VRCubeDeformer.gd - Deformable cube with grab spheres at corners"
+  },
+  "grab_stick_scanner": {
+    "scene": "algorithms/color/color_scanner/grab_stick_scanner.tscn",
+    "root_node": {
+      "name": "GrabStick"
+    },
+    "child_count": 12,
+    "children": [
+      {
+        "name": "MeshInstance3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabStick_ColorScanner#DisplayScreen",
+        "type": "MeshInstance3D",
+        "parent": "MeshInstance3D",
+        "instance": null
+      },
+      {
+        "name": "GrabStick_ColorScanner#ScannerBody",
+        "type": "MeshInstance3D",
+        "parent": "MeshInstance3D",
+        "instance": null
+      },
+      {
+        "name": "GrabStick_ColorScanner#ScanningBeam",
+        "type": "MeshInstance3D",
+        "parent": "MeshInstance3D",
+        "instance": null
+      },
+      {
+        "name": "GrabStick#ColorScanner",
+        "type": "Node3D",
+        "parent": "MeshInstance3D",
+        "instance": null
+      },
+      {
+        "name": "RayCast3D",
+        "type": "RayCast3D",
+        "parent": "MeshInstance3D/GrabStick#ColorScanner",
+        "instance": null
+      },
+      {
+        "name": "HighlightRing",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabPointHandLeft",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabPointHandRight",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabPointGripLeft",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GrabPointGripRight",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "diffusion_limited_aggregation": {
+    "scene": "algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
+    "root_node": {
+      "name": "DiffusionLimitedAggregation",
+      "type": "Node3D"
+    },
+    "child_count": 7,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "AggregateStructure",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "WalkingParticles",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Seed",
+        "type": "CSGSphere3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ParticleCount",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "StructureSize",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "penrose_tilings": {
+    "scene": "algorithms/patterngeneration/penrose_tilings/penrose_tilings.tscn",
+    "root_node": {
+      "name": "PenroseTilings",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "PenroseTiles",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "IterationControl",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "TileCount",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "voxelnoise": {
+    "scene": "algorithms/randomness/voxelnoise/voxelnoise.tscn",
+    "root_node": {
+      "name": "Voxelnoise",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "VoxelWorld.gd"
+  },
+  "VoxelNoiseROIs": {
+    "scene": "algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn",
+    "root_node": {
+      "name": "VoxelNoiseROIs",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "WorldEnvironment",
+        "type": "WorldEnvironment",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Sun",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "VoxelField",
+        "type": "Node",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ROIViewer",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "brick_wall_factory": {
+    "scene": "algorithms/color/brick_wall_factory/brick_wall_factory.tscn",
+    "root_node": {
+      "name": "BrickWallFactory",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "grabcolorcollection": {
+    "scene": "algorithms/color/grabcolor/grabcolorcollection.tscn",
+    "root_node": {
+      "name": "Grabcolorcollection",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "shelf": {
+    "scene": "algorithms/color/grabcolor/shelf.tscn",
+    "root_node": {
+      "name": "Shelf7x7",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Shelf4x4CSG.gd Attach this script to a Node3D in your scene Uses CSG subtractive booleans to create the shelf"
+  },
+  "shelf_with_stickers": {
+    "scene": "algorithms/color/grabcolor/shelf_with_stickers.tscn",
+    "root_node": {
+      "name": "Shelf7x7",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "Shelf4x4CSG.gd Attach this script to a Node3D in your scene Uses CSG subtractive booleans to create the shelf"
+  },
+  "spherecolors": {
+    "scene": "algorithms/color/spherecolors/spherecolors.tscn",
+    "root_node": {
+      "name": "GeometryColorPlates",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "CameraController",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": "CameraController",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "entropy_visualization": {
+    "error": "scene path not found: algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn"
+  },
+  "grab_cube": {
+    "scene": "commons/primitives/cubes/grab_cube.tscn",
+    "root_node": {
+      "name": "GrabCube"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "CollisionShape3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "HighlightRing",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "wood_cube": {
+    "scene": "commons/primitives/cubes/grab_cube_wood.tscn",
+    "root_node": {
+      "name": "GrabCube"
+    },
+    "child_count": 3,
+    "children": [
+      {
+        "name": "CollisionShape3D",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "MeshInstance3D",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "HighlightRing",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "ChengSimulationScaled": {
+    "scene": "algorithms/computationalgeometry/chengsimulation/ChengSimulationScaled.tscn",
+    "root_node": {
+      "name": "ChengSimulation",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ChengSimulation",
+        "type": null,
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "closest_pair": {
+    "scene": "algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
+    "root_node": {
+      "name": "ClosestPair",
+      "type": "Node3D"
+    },
+    "child_count": 10,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Points",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DistanceLines",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DivisionLine",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ClosestPairLine",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CoordinateGrid",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "GridLines",
+        "type": "Node3D",
+        "parent": "CoordinateGrid",
+        "instance": null
+      },
+      {
+        "name": "AlgorithmStepIndicator",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "ComplexityIndicator",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "distance_fields_sdf": {
+    "scene": "algorithms/computationalgeometry/distance_fields_sdf/distance_fields_sdf.tscn",
+    "root_node": {
+      "name": "DistanceFieldsSDF",
+      "type": "Node3D"
+    },
+    "child_count": 6,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "SDFField",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "PrimitiveShapes",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "FieldResolution",
+        "type": "CSGCylinder3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DistanceRange",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "voronoi_visualization": {
+    "scene": "algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
+    "root_node": {
+      "name": "Voronoi_Visualization",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "textureglitch": {
+    "scene": "algorithms/color/textureglitch/textureglitch.tscn",
+    "root_node": {
+      "name": "textureglitch",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "boids_2d_in_3d": {
+    "scene": "algorithms/emergentsystems/boidflocking/boids_2d_in_3d.tscn",
+    "root_node": {
+      "name": "Boids2Din3D",
+      "type": "Node3D"
+    },
+    "child_count": 5,
+    "children": [
+      {
+        "name": "Viewport",
+        "type": "SubViewport",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Screen",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "StaticBody3D",
+        "type": "StaticBody3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CollisionShape3D",
+        "type": "CollisionShape3D",
+        "parent": "StaticBody3D",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "renaissancepaintingfloorrattern": {
+    "scene": "algorithms/geometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn",
+    "root_node": {
+      "name": "RenaissanceFloorScene",
+      "type": "Node3D"
+    },
+    "child_count": 2,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "forcedirected3d": {
+    "scene": "algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+    "root_node": {
+      "name": "ForceDirected3D",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "networkflow3d": {
+    "scene": "algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+    "root_node": {
+      "name": "NetworkFlow3D",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "evolvingflowers": {
+    "scene": "algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+    "root_node": {
+      "name": "Evolvingflowers",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "evolvedcreatures": {
+    "scene": "algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+    "root_node": {
+      "name": "Evolvedcreatures",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "techstrider": {
+    "scene": "commons/hazards/techstrider/techstrider.tscn",
+    "root_node": {
+      "name": "Walker",
+      "type": "Node3D"
+    },
+    "child_count": 20,
+    "children": [
+      {
+        "name": "Body",
+        "type": "MeshInstance3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Leg1",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Joint1",
+        "type": "MeshInstance3D",
+        "parent": "Leg1",
+        "instance": null
+      },
+      {
+        "name": "Segment1",
+        "type": "MeshInstance3D",
+        "parent": "Leg1/Joint1",
+        "instance": null
+      },
+      {
+        "name": "Joint2",
+        "type": "MeshInstance3D",
+        "parent": "Leg1/Joint1/Segment1",
+        "instance": null
+      },
+      {
+        "name": "Segment2",
+        "type": "MeshInstance3D",
+        "parent": "Leg1/Joint1/Segment1/Joint2",
+        "instance": null
+      },
+      {
+        "name": "Foot",
+        "type": "MeshInstance3D",
+        "parent": "Leg1/Joint1/Segment1/Joint2/Segment2",
+        "instance": null
+      },
+      {
+        "name": "Leg2",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Joint1",
+        "type": "MeshInstance3D",
+        "parent": "Leg2",
+        "instance": null
+      },
+      {
+        "name": "Segment1",
+        "type": "MeshInstance3D",
+        "parent": "Leg2/Joint1",
+        "instance": null
+      },
+      {
+        "name": "Joint2",
+        "type": "MeshInstance3D",
+        "parent": "Leg2/Joint1/Segment1",
+        "instance": null
+      },
+      {
+        "name": "Segment2",
+        "type": "MeshInstance3D",
+        "parent": "Leg2/Joint1/Segment1/Joint2",
+        "instance": null
+      },
+      {
+        "name": "Foot",
+        "type": "MeshInstance3D",
+        "parent": "Leg2/Joint1/Segment1/Joint2/Segment2",
+        "instance": null
+      },
+      {
+        "name": "Leg3",
+        "type": "Node3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Joint1",
+        "type": "MeshInstance3D",
+        "parent": "Leg3",
+        "instance": null
+      },
+      {
+        "name": "Segment1",
+        "type": "MeshInstance3D",
+        "parent": "Leg3/Joint1",
+        "instance": null
+      },
+      {
+        "name": "Joint2",
+        "type": "MeshInstance3D",
+        "parent": "Leg3/Joint1/Segment1",
+        "instance": null
+      },
+      {
+        "name": "Segment2",
+        "type": "MeshInstance3D",
+        "parent": "Leg3/Joint1/Segment1/Joint2",
+        "instance": null
+      },
+      {
+        "name": "Foot",
+        "type": "MeshInstance3D",
+        "parent": "Leg3/Joint1/Segment1/Joint2/Segment2",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "cavex": {
+    "scene": "commons/primitives/cave/cave.tscn",
+    "root_node": {
+      "name": "Cave",
+      "type": "Node3D"
+    },
+    "child_count": 1,
+    "children": [
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": null
+  },
+  "cavetest": {
+    "scene": "commons/primitives/cave/test.tscn",
+    "root_node": {
+      "name": "CaveSpace",
+      "type": "Node3D"
+    },
+    "child_count": 13,
+    "children": [
+      {
+        "name": "Cave",
+        "type": "CSGCombiner3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Cutaway_cube",
+        "type": "CSGBox3D",
+        "parent": "Cave",
+        "instance": null
+      },
+      {
+        "name": "Blob_01_entrence",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Blob_02_enterinter",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Blob_03_innerRoom",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Blob_04_wallblob",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Blob_05_entrenceblob",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Blob_06_wallblob",
+        "type": "CSGSphere3D",
+        "parent": "Cave/Cutaway_cube",
+        "instance": null
+      },
+      {
+        "name": "Floor",
+        "type": "CSGBox3D",
+        "parent": "Cave",
+        "instance": null
+      },
+      {
+        "name": "DirectionalLight3D",
+        "type": "DirectionalLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "OmniLight3D",
+        "type": "OmniLight3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "Camera3D",
+        "type": "Camera3D",
+        "parent": ".",
+        "instance": null
+      },
+      {
+        "name": "CSGBox3D",
+        "type": "CSGBox3D",
+        "parent": ".",
+        "instance": null
+      }
+    ],
+    "script_comment": "res://cave/PlaceWallSpheres.gd"
+  }
+}

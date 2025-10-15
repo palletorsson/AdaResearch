@@ -16,6 +16,21 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Point_Triangle_1_1 - Triangle Applied Lab",
+		"layout": "7x8 grid with elevated tiles at z=4 (x=1-3,5); south recess for exit.",
+		"objective": "Link triangle manipulation to theorem and quadrilateral demonstrations.",
+		"key_elements": [
+			"`la:interactivetriangle` annotation at (1,4)",
+			"`interactivetriangle:180:-0.5:0.2` module at (1,4)",
+			"Clipboard (`pages:line`, `title:A Line`) at (2,4)",
+			"`pythagorean_proof` module scaled 0.1 at (3,4)",
+			"`quad:0:0:0.5` manipulator at (5,4)",
+			"`infokiosk` at (3,5) with rotation/scale overrides",
+			"`dark_sphere` enclosure at (3,3)",
+			"Teleporter `t` at (5,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

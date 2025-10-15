@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions 3D Wave Propagation",
+		"layout": "13x14 arena carved around an 8x8 sunken stage for volumetric wave demonstrations.",
+		"objective": "Visualize a propagating 3D waveform from a safe overlook before advancing to the next study.",
+		"key_elements": [
+			"Spawn `s` at the north-west entry platform",
+			"`wave_propagation_3d` simulator centered at (5,5)",
+			"`dark_sphere` canopy providing contrast over the waveform",
+			"Teleporter `t` at the south-east promenade"
+		]
+	},
 	"layers": {
 		"structure": [
 			["4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4"],

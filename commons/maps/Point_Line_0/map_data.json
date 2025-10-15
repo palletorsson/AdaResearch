@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Point_Line_0 - Line Introduction Chamber",
+		"layout": "7x8 single-height floor with south-east recess; south-west cells voided.",
+		"objective": "Demonstrate line segment defined by two manipulable endpoints.",
+		"key_elements": [
+			"`la:line` annotation at (3,3)",
+			"`line:180` interactable at (3,3)",
+			"`dark_sphere` enclosure at (2,3)",
+			"Teleporter `t` at (5,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

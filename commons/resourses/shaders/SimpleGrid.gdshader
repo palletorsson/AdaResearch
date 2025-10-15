@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
 
 uniform vec4 fill_color : source_color = vec4(0.2, 0.3, 0.8, 0.7);
 uniform vec4 wireframe_color: source_color = vec4(0.0, 1.0, 1.0, 1.0);

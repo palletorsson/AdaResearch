@@ -14,6 +14,10 @@ uniform float gradient_offset : hint_range(0.0, 1.0) = 0.5;
 uniform float glow_intensity : hint_range(0.0, 2.0) = 0.5;
 uniform float emission_strength : hint_range(0.0, 1.0) = 0.3;
 
+// World-space mapping parameters (meters)
+uniform float gradient_start_z = 0.0;     // world Z where gradient begins
+uniform float gradient_length_m = 10.0;   // length in meters over which the gradient covers 0..1
+
 // Varying variable to pass Z position from vertex to fragment shader
 varying float z_position_normalized;
 
@@ -21,11 +25,8 @@ void vertex() {
 	// Calculate the vertex's world position
 	vec4 world_pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
 	
-	// Normalize the Z position from -10 to 10 into a 0.0 to 1.0 range
-	// Adjust these values to match your hallway length
-	float start_z = -10.0;
-	float length = 20.0;
-	z_position_normalized = (world_pos.z - start_z) / length;
+    // Normalize Z over configured range [gradient_start_z, gradient_start_z + gradient_length_m]
+    z_position_normalized = (world_pos.z - gradient_start_z) / max(gradient_length_m, 0.0001);
 }
 
 void fragment() {

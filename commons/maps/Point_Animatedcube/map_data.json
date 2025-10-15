@@ -16,6 +16,16 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Point_Animatedcube - Construction Stage",
+		"layout": "Baseline 7x8 grid with raised pedestals at (2,3) and (4,3); south-east recess for exit.",
+		"objective": "Observe cube assembly animation anchored to point concept.",
+		"key_elements": [
+			"Twin `animatedcubebuilder` rigs at (2,3) and (4,3)",
+			"`dark_sphere` ambient dome at (3,3)",
+			"Teleporter `t` at (5,6)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

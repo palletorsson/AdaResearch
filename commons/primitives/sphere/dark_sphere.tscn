@@ -17,7 +17,9 @@ material_override = SubResource("StandardMaterial3D_r6p2k")
 mesh = SubResource("SphereMesh_s108s")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.695341, 0)
+visible = false
 light_energy = 6.0

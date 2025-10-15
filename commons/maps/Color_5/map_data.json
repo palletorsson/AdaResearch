@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_5 - Pillar Color Gauntlet",
+		"layout": "7x21 columned runway framed by 2-high walls and evenly spaced light pairs.",
+		"objective": "Advance through pillar color stations to reach the exit teleporter.",
+		"key_elements": [
+			"`pillarcolorcollection:0:-0.5` stations along the center lane",
+			"Repeating extra lights `el` guiding progression",
+			"`dark_sphere` observation canopy near the far end",
+			"Teleporter `t` with score cube `sp` at the southern plaza"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2", "2"],

@@ -16,6 +16,17 @@
 			"learning_objectives": ["Y-axis navigation", "Forward movement in VR", "Linear progression", "3D spatial awareness"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Col - Column Focus",
+		"layout": "7x3 strip emphasizing column traversal with spawn and score posts at opposite ends.",
+		"objective": "Teach column indexing with the `row_3_x` widget and coordinate visualizer.",
+		"key_elements": [
+			"Spawn `s` at (0,0)",
+			"`row_3_x` interaction column at (2,1)",
+			"`xyz_coordinates` reference at (6,2)",
+			"Score cube `sp` and teleporter `t` sharing the eastern checkpoint"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2", "2"],

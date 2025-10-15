@@ -16,6 +16,19 @@
 			"learning_objectives": ["Advanced primitives", "Procedural generation", "Architectural forms", "Parametric shapes"]
 		}
 	},
+	"documentation": {
+		"summary": "Primitives_3 - Advanced Primitive Pavilion",
+		"layout": "9x22 runway with repeating plinths for architectural and procedural exemplars; teleporter embedded near the southern terminus.",
+		"objective": "Compare advanced primitives, architectural modules, and parametric assets in sequence.",
+		"key_elements": [
+			"Architectural row (`lshape`, `arch`, `profile_chair`, `portal_frame`) at z=2",
+			"Core primitive row (`rectcube`, `halocube`, `unitcube`, `star_primitive`) at z=6",
+			"`dark_sphere` central enclosure at (4,8)",
+			"Procedural set (`rock_primitive`, `parametric_surface`, `mengersponge`, `steppedpyramid`) at z=10",
+			"Fabrication row (`boxbeam`, `proceduralrock`, `hollowrock`, `modernchair`) at z=14",
+			"Teleporter `t` at (5,20)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
@@ -63,7 +76,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", "plane", " ", " ", " ", " "]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],

@@ -16,6 +16,18 @@
 			"learning_objectives": ["Large 2D arrays", "Pattern recognition", "Interactive tiles", "Spatial navigation"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_Disco - Reactive Floor Showcase",
+		"layout": "11x16 entertainment hall with lighting features, disco floor centerpiece, and projectile demo zone.",
+		"objective": "Expose players to animated surfaces and interactive panels before tackling more complex scenes.",
+		"key_elements": [
+			"`scifi_panel_wall` feature near the entrance",
+			"`disco_floor` active surface at (5,7)",
+			"Platform lift `l` at (8,3) for vertical observation",
+			"`cube_projectile_spawner` at (5,11) for dynamic feedback",
+			"Annotation `an`, score cube `sp`, and teleporter `t` clustered near the stage exit"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2"],

@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Tutorial_2D - Grid Basics",
+		"layout": "7x7 starter pad with spawn at the north-west corner and exit instrumentation along the south edge.",
+		"objective": "Introduce the 4x4 2D grid widget and show players how spawn, annotation, score, and teleporter work together.",
+		"key_elements": [
+			"Spawn `s` at (0,0) with immediate access to the grid",
+			"`grid_2d_4x4` interaction table centered at (1,1)",
+			"Annotation cube `an` and teleporter `t` sharing the south walkway",
+			"Score cube `sp` adjacent to the teleporter for completion feedback"
+		]
+	},
 	"layers": {
 		"structure": [
 			["2", "2", "2", "2", "2", "2"],

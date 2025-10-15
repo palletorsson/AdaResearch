@@ -16,6 +16,17 @@
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
+	"documentation": {
+		"summary": "WaveFunctions Standing Wave Patterns",
+		"layout": "13x14 observation floor with annotation and scoring kiosks flanking the standing wave array.",
+		"objective": "Study interference nodes using the standing wave visualizer before concluding the module.",
+		"key_elements": [
+			"Spawn `s` at the northern entry",
+			"`standing_waves` array at center stage",
+			"Annotation cube `an` and score cube `sp` near the southern exit",
+			"Teleporter `t` to advance"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],

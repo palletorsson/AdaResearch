@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Color_3 - Sphere Palette Chamber",
+		"layout": "8x8 enclosed chamber with central well and south exit alcove.",
+		"objective": "Manipulate the color sphere rig and capture a pickup before advancing.",
+		"key_elements": [
+			"`spherecolors:0:2:0.5` interactive rig at the center",
+			"`pick_up_cube` near the south wall",
+			"`dark_sphere` canopy above the interaction zone",
+			"Teleporter `t` with score cube `sp` on the south-east platform"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1", "1"],

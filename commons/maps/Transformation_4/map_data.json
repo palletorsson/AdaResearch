@@ -16,6 +16,17 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Transformation_4 - Lift Alignment Lab",
+		"layout": "7x8 arena with paired platform lifts and raised pickup pedestals.",
+		"objective": "Explore vertical alignment by combining lifts with timed pickup cubes.",
+		"key_elements": [
+			"Platform lifts `l` at (2,2) and (4,2)",
+			"`pick_up_cube:0:2` targets above each lift",
+			"`dark_sphere` dome at (3,3)",
+			"Score cube `sp` and teleporter `t` at the south-east edge"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

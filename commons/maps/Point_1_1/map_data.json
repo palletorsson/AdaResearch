@@ -16,6 +16,21 @@
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
+	"documentation": {
+		"summary": "Point_1_1 - Extended Point Gallery",
+		"layout": "7x12 corridor with raised ridge (z=4, x=1-4) and tapering southern spine.",
+		"objective": "Survey point variants, metadata surfaces, and axis instrumentation.",
+		"key_elements": [
+			"`la:point` annotation at (2,4)",
+			"`grab_sphere_point` and `grab_sphere_point_with_text` at (2,4)/(3,4)",
+			"Clipboard (`pages:point`, `title:A Points`) at (4,4)",
+			"`infokiosk` at (3,7) with offset/scale overrides",
+			"`vectorpoint` axes display at (2,11)",
+			"`dark_sphere` enclosure at (4,3)",
+			"Teleporter `t` at (5,6)",
+			"`el` extra_light at (2,9)"
+		]
+	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],

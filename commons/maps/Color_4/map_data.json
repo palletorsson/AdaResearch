@@ -6,7 +6,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 12,
-			"depth": 12,
+			"depth": 13,
 			"max_height": 2
 		},
 		"metadata": {
@@ -15,6 +15,17 @@
 			"estimated_time": "3-4 minutes",
 			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
+	},
+	"documentation": {
+		"summary": "Color_4 - Brick Pattern Workshop",
+		"layout": "11x11 lighting grid surrounding a central next cube and brick factory podium.",
+		"objective": "Generate colored brick patterns while managing lighting and progression triggers.",
+		"key_elements": [
+			"Perimeter extra lights `el` with `n` next cube at the center",
+			"`brick_wall_factory` interactable on the south-west edge",
+			"`dark_sphere` dome stabilizing the main stage",
+			"Teleporter `t` at the south-east corner"
+		]
 	},
 	"layers": {
 		"structure": [
@@ -28,20 +39,21 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1"], 
+			["1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"], 
+			["0", "0", "0", "0", "1", "1", "1", "0", "0", "0", "0"], 			
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", " ", " ", " ", " ", "el", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", "n", " ", " ", " ", "el", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "el", " ", " ", " ", "el", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", " ", " ", " ", " ", "el", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " ", " ", " ", "", " "],
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -52,9 +64,9 @@
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "brick_wall_factory", " ", " ", " ", " ", " "],
+			["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "brick_wall_factory:90", " ", " ", " ", " ", " ", " ", " ", "brick_wall_factory:90", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],									
 		]
 	},
