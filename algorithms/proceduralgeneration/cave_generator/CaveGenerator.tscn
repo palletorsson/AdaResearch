@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqymflrgyahvo"]
+
+[ext_resource type="Script" uid="uid://b4blsfwjwhar8" path="res://algorithms/proceduralgeneration/cave_generator/CaveGenerator.gd" id="1_5t4g3"]
+
+[node name="CaveGenerator" type="Node3D"]
+script = ExtResource("1_5t4g3")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0309)

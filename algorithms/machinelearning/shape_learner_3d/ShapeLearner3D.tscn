@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0c6bwsyq5g2w"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.gd" id="1_5t4g3"]
+
+[node name="ShapeLearner3D" type="Node3D"]
+script = ExtResource("1_5t4g3")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]

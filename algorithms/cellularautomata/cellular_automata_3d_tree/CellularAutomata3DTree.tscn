@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://xp56q1mkcc68"]
+
+[ext_resource type="Script" uid="uid://cvdqaph0ligv5" path="res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.gd" id="1_bxje6"]
+
+[node name="CellularAutomata3dTree" type="Node3D"]
+script = ExtResource("1_bxje6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.58826)

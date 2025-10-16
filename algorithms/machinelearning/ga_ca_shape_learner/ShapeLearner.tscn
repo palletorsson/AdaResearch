@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://beourjpyo1ops"]
+
+[ext_resource type="Script" uid="uid://b8rvc6evj01co" path="res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.gd" id="1_5t4g3"]
+
+[node name="ShapeLearner" type="Node2D"]
+script = ExtResource("1_5t4g3")
+
+[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bk80gae11blvt"]
 
 [ext_resource type="Script" uid="uid://e1j22ja3mel2" path="res://algorithms/randomness/plane_effects/plane_manipulator.gd" id="1_abcde"]
-[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/plane/plane.tscn" id="2_fghij"]
+[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/walledcube/walledcube.tscn" id="2_fghij"]
 
 [node name="PlaneManipulator" type="Node3D"]
 script = ExtResource("1_abcde")

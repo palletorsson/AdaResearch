@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1jpudhabea88"]
+
+[ext_resource type="Script" uid="uid://co66jqgcdn6yh" path="res://algorithms/cellularautomata/CA_sphere/CA_sphere.gd" id="1_26kao"]
+
+[node name="CaSphere" type="Node3D"]
+script = ExtResource("1_26kao")
+evolution_mode = null
+sphere_subdivisions = null
+max_iterations = null
+auto_evolve = null
+evolution_speed = null
+ca_growth_rate = null
+ca_survival_min = null
+ca_survival_max = null
+ca_birth_count = null
+walk_step_size = null
+walk_expansion_rate = null
+walk_direction_change = null
+hill_seek_strength = null
+hill_seek_radius = null
+hill_attraction_power = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.779)

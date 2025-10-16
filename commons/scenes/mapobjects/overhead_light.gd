@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 var _static_body: StaticBody3D
 var _light_node: OmniLight3D

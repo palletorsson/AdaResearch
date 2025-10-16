@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb0wbfkkmjels"]
+
+[ext_resource type="Script" uid="uid://cofq8jcbuan0l" path="res://algorithms/cellularautomata/crossway_ca/CrosswayCA.gd" id="1_7ks62"]
+
+[node name="Crossway" type="Node3D"]
+script = ExtResource("1_7ks62")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.979368, 0.202087, 0, -0.202087, 0.979368, 0, 0.700786, 2.54903)

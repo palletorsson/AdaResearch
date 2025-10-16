@@ -1195,10 +1195,10 @@
 		"science_desk": {
 			"name": "science_desk",
 			"lookup_name": "science_desk",
-			"description": "Constructs a lab workstation with cabinets, countertop equipment, and built-in lighting.",
+			"description": "a lab workstation with cabinets, countertop equipment, and built-in lighting.",
 			"scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
 		},	
-				"science_glasses": {
+		"science_glasses": {
 			"name": "science_glasses",
 			"lookup_name": "science_glasses",
 			"description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
@@ -1209,9 +1209,62 @@
 			"name": "3D Koch Curve",
 			"lookup_name": "koch_curve_3d",
 			"description": "Three-dimensional recursive Koch snowflake curve generation",
-			"scene": "res://algorithms/recursiveemergence/koshcurve/KochCurve3D.tscn",
+			"scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn",
 		
 		},
+		"cantor_set": {
+			"name": "cantor_set",
+			"lookup_name": "cantor_set",
+			"description": "cantor_set",
+			"scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
+		
+		},	
+		"romanesco": {
+			"name": "romanesco",
+			"lookup_name": "romanesco",
+			"description": "romanesco",
+			"scene": "res://algorithms/fractals/romanesco/romanesco.tscn",
+		
+		},		
+		"sierpinski_triangle": {
+			"name": "sierpinski_triangle",
+			"lookup_name": "sierpinski_triangle",
+			"description": "sierpinski_trianglet",
+			"scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
+		
+		},			
+		
+		"cube_subdivision": {
+			"name": "cube_subdivision",
+			"lookup_name": "cube_subdivision",
+			"description": "cube_subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn",
+		
+		},		
+		"fibonacci_sequences": {
+			"name": "fibonacci_sequences",
+			"lookup_name": "fibonacci_sequences",
+			"description": "fibonacci_sequences",
+			"scene": "res://algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn",
+		
+		},				
+		
+		"koch_curve_1": {
+			"name": "koch_curve_!",
+			"lookup_name": "koch_curve_1",
+			"description": "koch_curve_1",
+			"scene": "res://algorithms/fractals/koch_curve_1/koch_curve.tscn",
+		
+		},
+		"lattice_gas_automata": {
+			"name": "lattice_gas_automata",
+			"lookup_name": "lattice_gas_automata",
+			"description": "lattice_gas_automata",
+			"scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
+		
+		},
+	 
+		
 		"kochsnowflake": {
 			"name": "kochsnowflake",
 			"lookup_name": "kochsnowflake",
@@ -1220,20 +1273,51 @@
 		
 		},
 		
+		"CrosswayCA": {
+			"name": "CrosswayCA",
+			"lookup_name": "CrosswayCA",
+			"description": "CrosswayCA",
+			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
+			
+		},
 		"recursive_tree": {
 			"name": "Recursive Tree",
 			"lookup_name": "recursive_tree",
 			"description": "Fractal tree generation using recursive branching algorithms",
 			"scene": "res://algorithms/recursiveemergence/recursivetree/recursive_tree.tscn",
 			
-		},
+		},	
 		"rule_30_110": {
 			"name": "Rule 30/110 Cellular Automata",
 			"lookup_name": "rule_30_110",
 			"description": "Elementary cellular automata rules 30 and 110 visualization",
-			"scene": "res://algorithms/recursiveemergence/rule_30_110/rule_30_110.tscn",
-			
+			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
 		},
+		"7_1_elementary_ca_vr": {
+			"name": "7_1_elementary_ca_vr",
+			"lookup_name": "7_1_elementary_ca_vr",
+			"description": "7_1_elementary_ca_vr",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
+		},		
+		"7_2_game_of_life_vr": {
+			"name": "7_2_game_of_life_vr",
+			"lookup_name": "7_2_game_of_life_vr",
+			"description": "7_2_game_of_life_vr",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
+		},		
+		"": {
+			"name": "7_3_game_of_life_oop_vr",
+			"lookup_name": "7_3_game_of_life_oop_vr",
+			"description": "7_3_game_of_life_oop_vr",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
+		},		
+		"7_8_hexagon_ca_vr": {
+			"name": "7_8_hexagon_ca_vr",
+			"lookup_name": "7_8_hexagon_ca_vr",
+			"description": "7_8_hexagon_ca_vr",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
+		},		
+		
 		 "crackpropagation_ca": {
 			"name": "crackpropagation_ca",
 			"lookup_name": "crackpropagation_ca",
@@ -1258,7 +1342,7 @@
 			"name": "Mandelbrot Set",
 			"lookup_name": "mandelbrot_set",
 			"description": "Fractal visualization of the famous Mandelbrot set",
-			"scene": "res://algorithms/recursiveemergence/mandelbrot_set/mandelbrot_set.tscn",
+			"scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn",
 			
 		},
 		"lattice_gas_automata": {
@@ -1279,7 +1363,7 @@
 			"name": "Julia Set",
 			"lookup_name": "julia_set",
 			"description": "Complex plane fractal visualization of Julia sets",
-			"scene": "res://algorithms/recursiveemergence/julia_set/julia_set.tscn",
+			"scene": "res://algorithms/fractals/julia_set/julia_set.tscn",
 			
 		},
 		"fibonacci_sequences": {
@@ -1292,23 +1376,60 @@
 			"name": "3D Cellular Automata",
 			"lookup_name": "cellular_automata_3d",
 			"description": "Three-dimensional cellular automata simulation and visualization",
-			"scene": "res://algorithms/recursiveemergence/cellular_automata_3d/cellular_automata_3d.tscn",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/cellular_automata_3d.tscn",
 			
 		},
+		"CellularAutomata3DStacked": {
+			"name": "CellularAutomata3DStacked",
+			"lookup_name": "CellularAutomata3DStacked",
+			"description": "CellularAutomata3DStacked",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
+		},
+			"CellularAutomata3DTree": {
+			"name": "CellularAutomata3DTree",
+			"lookup_name": "CellularAutomata3DTree",
+			"description": "CellularAutomata3DTree",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
+		},
+		
+		"SierpinskiPyramid": {
+			"name": "SierpinskiPyramid",
+			"lookup_name": "SierpinskiPyramid",
+			"description": "SierpinskiPyramid",
+			"scene": "res://algorithms/proceduralgeneration/sierpinski_pyramid/SierpinskiPyramid.tscn",
+			
+		},		
+		"CaveGenerator": {
+			"name": "CaveGenerator",
+			"lookup_name": "CaveGenerator",
+			"description": "CaveGenerator",
+			"scene": "res://algorithms/proceduralgeneration/cave_generator/CaveGenerator.tscn",
+			
+		},				
+	
 		"cellular_automata_2d": {
 			"name": "2D Cellular Automata",
 			"lookup_name": "cellular_automata_2d",
 			"description": "Two-dimensional cellular automata with Conway's Game of Life rules",
-			"scene": "res://algorithms/recursiveemergence/cellular_automata_2D/cellular_automata_2D.tscn",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_2d/cellular_automata_2D.tscn",
 			
 		},
 		"cellular_automata_1d": {
 			"name": "1D Cellular Automata",
 			"lookup_name": "cellular_automata_1d",
 			"description": "One-dimensional cellular automata rule exploration",
-			"scene": "res://algorithms/recursiveemergence/cellular_automata_1d/cellular_automata_1d.tscn",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_1d/cellular_automata_1d.tscn",
 			
 		},
+		
+		"ca_showcase": {
+			"name": "ca_showcase",
+			"lookup_name": "ca_showcase",
+			"description": "ca_showcase",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
+			
+		},
+		
 		"context_free_grammars": {
 			"name": "Context-Free Grammars",
 			"lookup_name": "context_free_grammars",
@@ -1564,13 +1685,7 @@
 			"description": "Metaball-based implicit surface generation and modeling",
 			"scene": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn",
 		},
-		"cellular_automata_procgen": {
-			"name": "Cellular Automata Procedural",
-			"lookup_name": "cellular_automata_procgen",
-			"description": "Procedural generation using cellular automata rules",
-			"scene": "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn",
-	
-		},
+
 		"WFCSculptureGenerator": {
 			"name": "WFCSculptureGenerator",
 			"lookup_name": "WFCSculptureGenerator",
@@ -1618,7 +1733,7 @@
 			"name": "CA_sphere",
 			"lookup_name": "CA_sphere",
 			"description": "CA_sphere",
-			"scene": "res://algorithms/proceduralgeneration/CA_sphere/CA_sphere.tscn",
+			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
 		},
 		
 		"bouncing_ball": {
@@ -2147,7 +2262,7 @@
 			"name": "Cellular Automata Grabable",
 			"lookup_name": "cellular_automata_grabable",
 			"description": "Grabable cellular automata board for interactive exploration",
-			"scene": "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata_grabable.tscn",
+			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn",
 
 		},
 		"grab_stick": {
@@ -2975,6 +3090,7 @@
 		"description": "Randomized recursive tree with natural variation",
 		"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
 	},
+	
 	"fractal_lsystem_string": {
 		"name": "L-System String",
 		"lookup_name": "fractal_lsystem_string",
@@ -2987,6 +3103,32 @@
 		"description": "L-System tree generation with formal grammar rules",
 		"scene": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
 	},	
+	"recursive_tree": {
+		"name": "recursive_tree",
+		"lookup_name": "recursive_tree",
+		"description": "recursive_tree",
+		"scene": "res://algorithms/fractals/recursive_tree/recursive_tree.tscn",
+	},		
+	
+	"recursive_tree_2": {
+		"name": "recursive_tree_2",
+		"lookup_name": "recursive_tree_2",
+		"description": "recursive_tree_2",
+		"scene": "res://algorithms/fractals/recursivetree/recursive_tree.tscn",
+	},		
+	"fractal_scene": {
+		"name": "fractal_scene",
+		"lookup_name": "fractal_scene",
+		"description": "fractal_scene",
+		"scene": "res://algorithms/fractals/meshfractal/fractal_scene.tscn",
+	},		
+	"menger_sponge": {
+		"name": "menger_sponge",
+		"lookup_name": "menger_sponge",
+		"description": "menger_sponge",
+		"scene": "rres://algorithms/fractals/mengersponge/menger_sponge.tscn",
+	},			
+	
 	"example_2_2_forces_mass_variation_vr": {
 		"name": "example_2_2_forces_mass_variation_vr",
 		"lookup_name": "example_2_2_forces_mass_variation_vr",

@@ -4,7 +4,7 @@ class_name CellularAutomata2DSystem
 var time: float = 0.0
 var generation: int = 0
 var generation_time: float = 0.0
-var generation_interval: float = 0.5
+var generation_interval: float = 3.0
 var density: float = 0.0
 var stability: float = 0.0
 var grid_size: int = 20

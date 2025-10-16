@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5j8qxvxmqjj7"]
+
+[ext_resource type="Script" uid="uid://c3ob65pvnjl68" path="res://algorithms/cellularautomata/CAchairtests/Main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://rhgnw0fmhj2s" path="res://algorithms/cellularautomata/CAchairtests/CAGrid.gd" id="2_grid"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.15, 0.15, 0.2, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="CAGrid" type="Node3D" parent="."]
+script = ExtResource("2_grid")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="CAGrid"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 10, 20, -30)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 20, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/Panel"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Panel/VBox"]
+layout_mode = 2
+text = "Cellular Automata Chair Builder"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="GenLabel" type="Label" parent="UI/Panel/VBox"]
+layout_mode = 2
+text = "Generation: 0"
+
+[node name="CellLabel" type="Label" parent="UI/Panel/VBox"]
+layout_mode = 2
+text = "Cells: 0"
+
+[node name="StrategyLabel" type="Label" parent="UI/Panel/VBox"]
+layout_mode = 2
+text = "Strategy: Simple"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="BtnReset" type="Button" parent="UI/Panel/VBox/HBox1"]
+layout_mode = 2
+text = "Reset"
+
+[node name="BtnStep" type="Button" parent="UI/Panel/VBox/HBox1"]
+layout_mode = 2
+text = "Step"
+
+[node name="BtnPlay" type="Button" parent="UI/Panel/VBox/HBox1"]
+layout_mode = 2
+text = "Play"
+
+[node name="HBox2" type="HBoxContainer" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="BtnStrategy" type="Button" parent="UI/Panel/VBox/HBox2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Change Strategy"
+
+[node name="HBox3" type="HBoxContainer" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="UI/Panel/VBox/HBox3"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedSlider" type="HSlider" parent="UI/Panel/VBox/HBox3"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 2.0
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Panel/VBox"]
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="UI/Panel/VBox"]
+layout_mode = 2
+text = "Controls:
+WASD - Move camera
+Right Mouse - Rotate
+PgUp/PgDn - Zoom"

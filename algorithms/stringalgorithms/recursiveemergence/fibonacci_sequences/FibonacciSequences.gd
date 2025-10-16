@@ -292,4 +292,3 @@ func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max
 			
 			# Recursive call
 			create_recursive_tree(container, branch_pos, depth + 1, max_depth)
-

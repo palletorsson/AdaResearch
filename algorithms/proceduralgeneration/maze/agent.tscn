@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3k9p5jxyqxc8"]
+
+[ext_resource type="Script" path="res://agent.gd" id="1_agent"]
+
+[node name="Agent" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_agent")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 2.0
+omni_range = 6.0
+shadow_enabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 100
+lifetime = 30.0
+local_coords = false

@@ -1,15 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7qp8w3xnk4ym"]
 
-[ext_resource type="Script" path="res://algorithms/fractals/romanesco/romanesco.gd" id="1_romanesco"]
+[ext_resource type="Script" uid="uid://dvm8tiastwtkt" path="res://algorithms/fractals/romanesco/romanesco.gd" id="1_romanesco"]
 
 [node name="Romanesco" type="Node3D"]
 script = ExtResource("1_romanesco")
-growth_interval = 0.5
-max_depth = 4
-auto_start = true
-fibonacci_spiral_count = 13
-base_cone_size = 1.0
-scale_factor = 0.382
+max_depth = 3
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 4, 5, 4)
@@ -19,7 +14,6 @@ fov = 65.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 3, 6, 2)
 light_color = Color(1, 0.95, 0.9, 1)
-light_energy = 1.0
 shadow_enabled = true
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]

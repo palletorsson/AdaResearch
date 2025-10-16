@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnpl6xtbx45gm"]
+
+[ext_resource type="Script" uid="uid://dq3u7crto6ur0" path="res://algorithms/stringalgorithms/recursiveemergence/julia_set/JuliaSet.gd" id="1"]
+
+[node name="JuliaSet" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="JuliaVisualization" type="Node3D" parent="."]
+
+[node name="ParameterSpace" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="IterationDisplay" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="EscapeAnalysis" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)

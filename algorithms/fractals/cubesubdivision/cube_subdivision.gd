@@ -11,6 +11,7 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 @export var subdivision_interval: float = 1.0  # Time between subdivisions in seconds
 @export var max_subdivisions: int = 5  # Maximum number of subdivision iterations
 @export var auto_start: bool = true  # Start subdividing automatically
+@export var cubes_per_iteration: int = 10  # Limit how many cubes to subdivide each iteration
 
 # Internal state
 var subdivision_count: int = 0
@@ -58,9 +59,10 @@ func perform_subdivision():
 
 	print("CubeSubdivision: Found %d cubes to subdivide" % cubes.size())
 
-	# Subdivide each cube
-	for cube in cubes:
-		subdivide_cube(cube)
+	# Subdivide up to the configured number of cubes this iteration
+	var to_process = min(cubes_per_iteration, cubes.size())
+	for i in range(to_process):
+		subdivide_cube(cubes[i])
 
 	print("CubeSubdivision: Subdivision iteration %d complete" % subdivision_count)
 

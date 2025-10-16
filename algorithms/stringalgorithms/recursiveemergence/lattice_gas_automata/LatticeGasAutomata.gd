@@ -7,7 +7,7 @@ var time := 0.0
 var step_timer := 0.0
 
 # Grid parameters
-var grid_size := 20
+var grid_size := 10
 var lattice_grid := []
 var velocity_directions := [
 	Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1),

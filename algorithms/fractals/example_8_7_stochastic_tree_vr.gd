@@ -91,12 +91,20 @@ func _create_branch(start: Vector3, end: Vector3, thickness: float, depth: int) 
 	branch.mesh = cylinder
 	branch.position = mid
 
+	# Orient cylinder along the branch direction
+	# CylinderMesh in Godot is aligned with Y-axis by default
 	if length > 0.001:
-		var up := Vector3.UP
-		if abs(dir.normalized().dot(up)) > 0.99:
-			up = Vector3.RIGHT
-		branch.look_at(end, up)
-		branch.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+		var direction_normalized = dir.normalized()
+		# Create a basis that aligns Y-axis (cylinder's up) with the branch direction
+		var basis = Basis()
+		basis.y = direction_normalized
+		# Choose perpendicular X axis
+		var perp = Vector3.RIGHT
+		if abs(direction_normalized.dot(Vector3.RIGHT)) > 0.9:
+			perp = Vector3.FORWARD
+		basis.x = perp.cross(direction_normalized).normalized()
+		basis.z = basis.x.cross(direction_normalized).normalized()
+		branch.basis = basis
 
 	var depth_ratio := float(depth) / float(recursion_depth)
 	var color := Color(0.8, 0.5, 0.7).lerp(Color(1.0, 0.7, 0.95), 1.0 - depth_ratio)

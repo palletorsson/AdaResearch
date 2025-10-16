@@ -16,10 +16,11 @@ size = Vector2i(400, 400)
 render_target_update_mode = 3
 
 [node name="MirroredCellularAutomata" parent="SubViewport" instance=ExtResource("1_l6bsy")]
-grid_size = 100
-cell_size = 4
-update_interval = 0.5
-symmetry_type = 1
+grid_size = 40
+cell_size = 16
+update_interval = 5.0
+auto_evolve = true
+symmetry_type = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221659, 1.30596, 4.52706)

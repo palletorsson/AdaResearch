@@ -278,7 +278,13 @@
 				"Fractals_4",
 				"Fractals_5",
 				"Fractals_6",
-				"Fractals_7",		
+				"Fractals_7",	
+				"Fractals_8", 
+				"Fractals_9",
+				"Fractals_10",
+				"Fractals_11",
+				"Fractals_12",
+				"Fractals_13",						
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["array_tutorial"],
@@ -286,7 +292,7 @@
 			"lab_map": "Lab/map_data_post_fractals"
 		},
 		"cellularautomata": {
-			"name": "fractals",
+			"name": "ca",
 			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
 			"difficulty": "beginner", 
 			"estimated_time": "20-25 minutes",
@@ -315,12 +321,17 @@
 				"CA_4",
 				"CA_5",
 				"CA_6",
-				"CA_7",		
+				"CA_7",
+				"CA_8",
+				"CA_9",
+				"CA_10",	
+				"CA_11",	
+				"CA_12",										
 			],
 			"return_to": "lab",
 			"unlock_requirements": ["array_tutorial"],
 			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
-			"lab_map": "Lab/map_data_post_fractals"
+			"lab_map": "Lab/map_data_post_ca"
 		},
 		"joints": {
 			"name": "fractals",

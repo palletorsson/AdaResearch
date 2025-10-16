@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://hryjnsk2k5tt"]
+
+[ext_resource type="Script" uid="uid://ycjderbl80dx" path="res://algorithms/fractals/meshfractal/fractal.gd" id="1"]
+[ext_resource type="Material" path="res://algorithms/fractals/meshfractal/fractal_material.tres" id="2"]
+
+[sub_resource type="SphereMesh" id="1"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="BoxMesh" id="2"]
+
+[sub_resource type="Gradient" id="3"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.4, 0.25, 0.1, 0.8, 0.6, 0.4, 0.2, 0.85, 0.8, 0.6, 0.4, 0.9)
+
+[sub_resource type="Gradient" id="4"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.5, 0.3, 0.15, 0.85, 0.7, 0.5, 0.3, 0.9, 0.9, 0.7, 0.5, 0.95)
+
+[node name="Fractal" type="Node3D"]
+script = ExtResource("1")
+branch_mesh = SubResource("1")
+leaf_mesh = SubResource("2")
+material = ExtResource("2")
+gradient_a = SubResource("3")
+gradient_b = SubResource("4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 15, 25)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 5)
+light_energy = 1.5
+omni_range = 50.0

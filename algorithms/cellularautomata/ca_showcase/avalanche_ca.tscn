@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://0m5ya1j4ocol"]
+
+[ext_resource type="Script" uid="uid://cq258t6flnsyv" path="res://algorithms/cellularautomata/ca_showcase/avalanche_ca.gd" id="1_avalanche"]
+
+[node name="AvalancheCA" type="Node3D"]
+script = ExtResource("1_avalanche")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

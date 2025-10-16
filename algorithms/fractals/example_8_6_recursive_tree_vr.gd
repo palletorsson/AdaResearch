@@ -44,8 +44,7 @@ func _ready():
 	create_info_label()
 	create_angle_controller()
 
-	# Start at bottom of tank
-	position = Vector3(0, -0.4, 0)
+	# Use scene/map position; no hardcoded override
 
 	if animate_growth:
 		current_growth_depth = 0
@@ -146,12 +145,20 @@ func create_branch(start: Vector3, end: Vector3, thickness: float, depth: int):
 	branch.mesh = cylinder
 	branch.position = midpoint
 
-	# Orient cylinder
+	# Orient cylinder along the branch direction
+	# CylinderMesh in Godot is aligned with Y-axis by default
 	if length > 0.001:
-		var up = Vector3.UP
-		if abs(direction.normalized().dot(up)) > 0.99:
-			up = Vector3.RIGHT
-		branch.look_at(end, up)
+		var direction_normalized = direction.normalized()
+		# Create a basis that aligns Y-axis (cylinder's up) with the branch direction
+		var basis = Basis()
+		basis.y = direction_normalized
+		# Choose perpendicular X axis
+		var perp = Vector3.RIGHT
+		if abs(direction_normalized.dot(Vector3.RIGHT)) > 0.9:
+			perp = Vector3.FORWARD
+		basis.x = perp.cross(direction_normalized).normalized()
+		basis.z = basis.x.cross(direction_normalized).normalized()
+		branch.basis = basis
 
 	# Color gradient based on depth
 	var depth_ratio = float(depth) / float(recursion_depth)

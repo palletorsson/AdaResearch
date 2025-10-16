@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8x7lam2n3p4q"]
-
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/ca_showcase/recrystallization_ca.gd" id="1_recrystal"]
-
-[node name="RecrystallizationCA" type="Node3D"]
-script = ExtResource("1_recrystal")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
