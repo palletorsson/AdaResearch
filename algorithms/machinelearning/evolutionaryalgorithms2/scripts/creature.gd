@@ -250,7 +250,7 @@ func build_phase_shifting_body(main_body, collision_shape, mesh_instance):
 	
 	# Create a shader material
 	var shader_material = ShaderMaterial.new()
-	var shader = load("res://shaders/phase_shifting.gdshader")
+	var shader = load("res://commons/resourses/shaders/slime.gdshader")
 	if shader:
 		shader_material.shader = shader
 		shader_material.set_shader_parameter("base_color", base_color)
@@ -348,7 +348,7 @@ func build_resonance_body(main_body, collision_shape, mesh_instance):
 	
 	# Create a shader material for wave effect
 	var shader_material = ShaderMaterial.new()
-	var shader = load("res://shaders/resonance.gdshader")
+	var shader = load("res://commons/resourses/shaders/slime.gdshader")
 	if shader:
 		shader_material.shader = shader
 		shader_material.set_shader_parameter("base_color", base_color)
@@ -431,7 +431,7 @@ func build_topology_body(main_body, collision_shape, mesh_instance):
 		mesh_instance.mesh.outer_radius = 0.7 * genome["body_scale"].x
 	
 	var shader_material = ShaderMaterial.new()
-	var shader = load("res://shaders/topology.gdshader")
+	var shader = load("res://commons/resourses/shaders/slime.gdshader")
 	if shader:
 		shader_material.shader = shader
 		shader_material.set_shader_parameter("base_color", base_color)
@@ -605,6 +605,7 @@ func process_topology(delta):
 	
 	if body_parts.size() > 0:
 		body_parts[0].mass = mass
+		body_parts[0].center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 		body_parts[0].center_of_mass = center_of_mass
 
 func update_energy(delta):
@@ -685,7 +686,10 @@ func attempt_reproduction():
 	var offspring_genes = mutate_genes(genome)
 	
 	# Create new creature
-	var offspring_scene = load("res://scenes/creature.tscn")
+	var offspring_scene = load("res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/creature.tscn")
+	if offspring_scene == null:
+		print("Warning: Could not load creature scene")
+		return
 	var offspring = offspring_scene.instantiate()
 	
 	# Position near parent

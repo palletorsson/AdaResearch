@@ -66,10 +66,16 @@ func update_bridge():
 func animate_cells(delta):
 	for i in range(grid_width):
 		for j in range(grid_height):
-			var cell = get_node("cell_" + str(i) + "_" + str(j))
-			var static_body = cell.get_node("CubeBaseStaticBody3D")
+			var cell = get_node_or_null("cell_" + str(i) + "_" + str(j))
+			if not cell:
+				continue
+			var static_body = cell.get_node_or_null("CubeBaseStaticBody3D")
+			if not static_body:
+				continue
 			
-			var collision_shape = static_body.get_node("CollisionShape3D")
+			var collision_shape = static_body.get_node_or_null("CollisionShape3D")
+			if not collision_shape:
+				continue
 			
 			if current_gen[i][j] == 1:
 				cell.visible = true

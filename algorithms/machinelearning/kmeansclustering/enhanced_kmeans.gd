@@ -188,7 +188,7 @@ func setup_environment():
 	# Camera with better positioning
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 20, 30)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	camera.fov = 65
 	add_child(camera)
 
@@ -646,7 +646,7 @@ func create_connection_line(from: Vector3, to: Vector3, color: Color) -> MeshIns
 	var distance = from.distance_to(to)
 	
 	line_mesh.position = center
-	line_mesh.look_at(center + direction, Vector3.UP)
+	line_mesh.look_at_from_position(line_mesh.position, center + direction, Vector3.UP)
 	line_mesh.rotate_object_local(Vector3(1, 0, 0), PI/2)
 	line_mesh.scale.y = distance
 	
@@ -944,7 +944,7 @@ func create_centroid_trail(centroid: Centroid, positions: Array):
 		var distance = from.distance_to(to)
 		
 		trail_line.position = center
-		trail_line.look_at(center + direction, Vector3.UP)
+		trail_line.look_at_from_position(trail_line.position, center + direction, Vector3.UP)
 		trail_line.rotate_object_local(Vector3(1, 0, 0), PI/2)
 		trail_line.scale.y = distance
 		

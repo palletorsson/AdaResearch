@@ -164,7 +164,7 @@ func create_parse_tree_recursive(container: Node3D, symbol: String, position: Ve
 			connection.height = position.distance_to(child_pos)
 			
 			connection.position = (position + child_pos) * 0.5
-			connection.look_at(child_pos, Vector3.UP)
+			connection.look_at_from_position(connection.position, child_pos, Vector3.UP)
 			connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 			
 			var conn_material = StandardMaterial3D.new()
@@ -278,4 +278,3 @@ func generate_string_from_grammar(start_symbol: String, max_steps: int) -> Strin
 			break
 	
 	return current
-

@@ -179,7 +179,7 @@ func create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3)
 	edge.height = distance - 0.6  # Account for node radius
 	
 	edge.position = (from_pos + to_pos) * 0.5
-	edge.look_at(to_pos, Vector3.UP)
+	edge.look_at_from_position(edge.position, to_pos, Vector3.UP)
 	edge.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -193,7 +193,7 @@ func create_directed_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3)
 	arrow.radius = 0.0
 	arrow.height = 0.3
 	arrow.position = to_pos - direction * 0.4
-	arrow.look_at(to_pos, Vector3.UP)
+	arrow.look_at_from_position(arrow.position, to_pos, Vector3.UP)
 	
 	var arrow_material = StandardMaterial3D.new()
 	arrow_material.albedo_color = Color(1.0, 0.2, 0.2)
@@ -212,7 +212,7 @@ func create_undirected_edge(container: Node3D, from_pos: Vector3, to_pos: Vector
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
-	edge.look_at(to_pos, Vector3.UP)
+	edge.look_at_from_position(edge.position, to_pos, Vector3.UP)
 	edge.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -232,7 +232,7 @@ func create_weighted_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3,
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
-	edge.look_at(to_pos, Vector3.UP)
+	edge.look_at_from_position(edge.position, to_pos, Vector3.UP)
 	edge.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -336,7 +336,7 @@ func create_traversal_edge(container: Node3D, from_pos: Vector3, to_pos: Vector3
 	edge.height = distance - 0.6
 	
 	edge.position = (from_pos + to_pos) * 0.5
-	edge.look_at(to_pos, Vector3.UP)
+	edge.look_at_from_position(edge.position, to_pos, Vector3.UP)
 	edge.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()

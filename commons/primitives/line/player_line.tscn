@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://68d6767s7csl"]
+
+[ext_resource type="Script" uid="uid://dplkpy826ulkn" path="res://commons/primitives/line/player_line.gd" id="1_player_line"]
+
+[node name="PlayerLine" type="Node3D"]
+script = ExtResource("1_player_line")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+text = "Player Line"
+outline_size = 4
+
+[node name="OriginMarker" type="MeshInstance3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)

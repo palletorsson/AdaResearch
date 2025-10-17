@@ -1,0 +1,104 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvlp6xq62nqpn"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2qefi"]
+viewport_path = NodePath("ViewportDisplay/ContentViewport")
+
+[node name="clipboard" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0, 0, 0.374449)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
+
+[node name="ViewportDisplay" type="Node3D" parent="."]
+transform = Transform3D(6.955, 0, 0, 0, 6.677, 0, 0, 0, 6.955, -0.216633, 0, -0.725824)
+
+[node name="ContentViewport" type="SubViewport" parent="ViewportDisplay"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1024, 1559)
+render_target_clear_mode = 1
+render_target_update_mode = 3
+
+[node name="ViewportRoot" type="Control" parent="ViewportDisplay/ContentViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1024.0
+offset_bottom = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="ViewportDisplay/ContentViewport/ViewportRoot"]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+text = "ASDGDSGADSGADSG"
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="ViewportDisplay/ContentViewport/ViewportRoot"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 128.0
+offset_right = -32.0
+offset_bottom = -48.0
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "A point - Scene One 
+We start with a point, that is the foreground, in front of the player in space. The atom. 
+Axiom 1: A point in the 3d dimensional coordinate system is a vector representing a position in x, y, z. 
+Code: 
+var point_position = Vector3(0, 0, 0) 
+The vector (0,0,0) is the origin and the root of all vectors. 
+
+It sits in space and so far this point is not visible; it needs representation. 
+
+What is a good size point in space not to feel like a sphere. How small should something be? 1 Godot unit is 1 meter. If the sphere point has a radius of 0.01 it is one centimeter. How does it feel? 
+ 
+Axiom 2: A visible point can be represented by a small sphere at its position.
+
+Code: 
+var sphere_mesh = SphereMesh.new()
+radius = 0.01 # a small sphere
+sphere_mesh.radius = radius
+sphere_mesh.height = radius * 2 # SphereMesh height is double radius 
+
+Axiom 2.5: A mesh must be instantiated as a scene object to exist in the world. 
+
+Code: 
+var mesh_instance = MeshInstance3D.new()
+mesh_instance.mesh = sphere_mesh
+mesh_instance.position = point_position
+
+add_child(mesh_instance)
+Axiom 3: The identity of a point is represented as a text label close to the point.
+var label_3d = Label3D.new()
+label_3d.text = str(point_position)
+off_set = Vector3(0, 0.15, 0)
+label_3d.position = point_position + off_set
+label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+add_child(label_3d)
+Null check and parents
+
+Axiom 4: The text label must update when the point's position changes.
+
+func _process(delta):
+    label_3d.text = str(point_position)
+    label_3d.position = point_position + label_offset
+
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="ViewportSprite" type="Sprite3D" parent="ViewportDisplay"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0528165, 0.000228828, 0.0737728)
+centered = false
+pixel_size = 0.0003
+texture = SubResource("ViewportTexture_2qefi")

@@ -187,7 +187,7 @@ func create_hair_for_blob(parent_node, core_mesh, size):
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Ensure visibility from all angles
 	material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
-	material.depth_test_enabled = true
+	# depth_test_enabled parameter removed - not available in Godot 4
 	
 	hair_instance.material_override = material
 	
@@ -316,7 +316,7 @@ func add_gallery_lights():
 	var dir_light = DirectionalLight3D.new()
 	dir_light.name = "MainLight"
 	dir_light.position = Vector3(5, 8, 5)
-	dir_light.look_at(Vector3(0, 0, 0), Vector3.UP)
+	dir_light.look_at_from_position(dir_light.position, Vector3(0, 0, 0), Vector3.UP)
 	dir_light.light_color = Color(1.0, 0.98, 0.95)
 	dir_light.light_energy = 0.8
 	dir_light.shadow_enabled = true

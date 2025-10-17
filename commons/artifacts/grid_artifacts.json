@@ -117,6 +117,37 @@
 			"description": "Interactive line tool packaged for interface use with grab spheres and dynamic length display.",
 			"scene": "res://commons/interface/line.tscn",
 		},	
+		"perspective_lines": {
+			"name": "perspective_lines",
+			"lookup_name": "perspective_lines",
+			"description": "perspective_lines.",
+			"scene": "res://commons/primitives/line/perspective_lines.tscn",
+		},		
+		"one_meter_line": {
+			"name": "one_meter_line",
+			"lookup_name": "one_meter_line",
+			"description": "one_meter_line.",
+			"scene": "res://commons/primitives/line/one_meter_line.tscn",
+		},				
+				"horizon_plumb_lines": {
+			"name": "horizon_plumb_lines",
+			"lookup_name": "horizon_plumb_lines",
+			"description": "horizon_plumb_lines.",
+			"scene": "res://commons/primitives/line/horizon_plumb_lines.tscn",
+		},	
+		"scale_lines": {
+			"name": "scale_lines",
+			"lookup_name": "scale_lines",
+			"description": "scale_lines.",
+			"scene": "res://commons/primitives/line/scale_lines.tscn",
+		},	
+		"right_triangle_lines": {
+			"name": "right_triangle_lines",
+			"lookup_name": "right_triangle_lines",
+			"description": "right_triangle_lines.",
+			"scene": "res://commons/primitives/line/right_triangle_lines.tscn",
+		},								
+		
 		
 		"animatedcubebuilder": {
 			"name": "animatedcubebuilder",
@@ -136,6 +167,13 @@
 			"description": "Interactive triangle mesh with draggable vertices and presets for equilateral, right-angled, and isosceles shapes.",
 			"scene": "res://commons/primitives/triangle/triangle.tscn",
 		},
+		"pythagorean_triangle": {
+			"name": "pythagorean_triangle",
+			"lookup_name": "pythagorean_triangle",
+			"description": "pythagorean_triangle.",
+			"scene": "res://commons/primitives/triangle/pythagorean_triangle.tscn",
+		},		
+		
 		"righttriangle": {
 			"name": "righttriangle",
 			"lookup_name": "righttriangle",
@@ -2830,6 +2868,21 @@
 		"scene": "res://commons/context/clipboard/clipboard.tscn",
 
 	},
+	"clipboard_large": {
+		"name": "clipboard_large",
+		"lookup_name": "clipboard_large",
+		"description": "clipboard_large",
+		"scene": "res://commons/context/clipboard/clipboard_large.tscn",
+
+	},	
+	"spit_text_3d": {
+		"name": "spit_text_3d",
+		"lookup_name": "spit_text_3d",
+		"description": "spit_text_3d",
+		"scene": "res://commons/visualaid/spittext/spit_text_3d.tscn",
+
+	},	
+
 	
 	"code_display": {
 		"name": "Code Display",

@@ -84,7 +84,7 @@ func _process(delta):
 func create_materials():
 	# Glass material using custom shader
 	glass_material = ShaderMaterial.new()
-	glass_material.shader = load("res://Translucent/Glass.gdshader")
+	glass_material.shader = load("res://commons/resourses/shaders/frosted_glass.gdshader")
 	# Set shader parameters as needed
 	glass_material.set_shader_parameter("albedo", Color(0.9, 0.9, 0.95, 0.6))
 	glass_material.set_shader_parameter("roughness", 0.1)
@@ -93,7 +93,7 @@ func create_materials():
 	
 	# Liquid material using custom shader
 	liquid_material = ShaderMaterial.new()
-	liquid_material.shader = load("res://Translucent/Liquid.gdshader")
+	liquid_material.shader = load("res://commons/resourses/shaders/bitwisewater.gdshader")
 	# Set shader parameters as needed
 	liquid_material.set_shader_parameter("albedo", primary_color)
 	liquid_material.set_shader_parameter("roughness", 0.2)
@@ -102,7 +102,7 @@ func create_materials():
 	
 	# Bacterial material using custom shader
 	bacterial_material = ShaderMaterial.new()
-	bacterial_material.shader = load("res://Translucent/BioMatter.gdshader")
+	bacterial_material.shader = load("res://commons/resourses/shaders/slime.gdshader")
 	# Set shader parameters as needed
 	bacterial_material.set_shader_parameter("albedo", bacterial_color)
 	bacterial_material.set_shader_parameter("roughness", 0.7)
@@ -831,7 +831,7 @@ func create_petri_dishes():
 
 		# Create a new ShaderMaterial for culture medium
 		var culture_material = ShaderMaterial.new()
-		culture_material.shader = load("res://Translucent/BioMatter.gdshader")  # Using BioMatter shader as it seems most appropriate
+		culture_material.shader = load("res://commons/resourses/shaders/slime.gdshader")  # Using slime shader for biological matter
 
 		# Vary colors for different petri dishes
 		var hue_shift = float(i) / petri_dish_count
@@ -860,7 +860,7 @@ func create_petri_dishes():
 
 			# Create a new ShaderMaterial for each colony
 			var colony_material = ShaderMaterial.new()
-			colony_material.shader = load("res://Translucent/BioMatter.gdshader")
+			colony_material.shader = load("res://commons/resourses/shaders/slime.gdshader")
 
 			var colony_color = bacterial_color.lerp(tertiary_color, randf())
 

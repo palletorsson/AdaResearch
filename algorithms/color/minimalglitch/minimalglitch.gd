@@ -16,13 +16,13 @@ func setup_basic_scene():
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 2, 8)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 	
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(5, 5, 5)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 	light.light_energy = 1.0
 	add_child(light)
 	

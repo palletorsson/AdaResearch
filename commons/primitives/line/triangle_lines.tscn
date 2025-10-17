@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://fd2i16luptrp"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+[ext_resource type="Script" uid="uid://c2h2ba4jcgujs" path="res://commons/primitives/line/triangle_lines.gd" id="2_script"]
+
+[node name="TriangleLines" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="Line1" parent="." instance=ExtResource("1_line")]
+
+[node name="Line2" parent="." instance=ExtResource("1_line")]
+
+[node name="Line3" parent="." instance=ExtResource("1_line")]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+text = "Triangle (1m sides)"
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.8, 2)

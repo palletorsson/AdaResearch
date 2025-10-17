@@ -482,11 +482,14 @@ func create_spiral_tubes(parent, rng):
 		)
 		
 		# Orient tube tangent to spiral
-		tube.look_at(Vector3(
+		var target_pos = Vector3(
 			cos(offset_angle) * spiral_radius,
 			sin(offset_angle) * vertical_stretch,
 			sin(offset_angle) * spiral_radius
-		), Vector3.UP)
+		)
+		# Only orient if positions are different
+		if not tube.position.is_equal_approx(target_pos):
+			tube.look_at_from_position(tube.position, target_pos, Vector3.UP)
 		
 		# Create material
 		var tube_material = StandardMaterial3D.new()
@@ -632,7 +635,7 @@ func create_starburst(parent, rng):
 		var z = cos(phi)
 		
 		spike.position = Vector3.ZERO
-		spike.look_at(Vector3(x, y, z), Vector3.UP)
+		spike.look_at_from_position(spike.position, Vector3(x, y, z), Vector3.UP)
 		spike.rotation_degrees.x += 90 # Correct cylinder orientation
 		
 		# Create material
@@ -903,7 +906,7 @@ static func create_hybrid_form(plant, rng):
 		appendage.position = Vector3(x, y, z)
 		
 		# Orient outward from center
-		appendage.look_at(appendage.position * 2, Vector3.UP)
+		appendage.look_at_from_position(appendage.position, appendage.position * 2, Vector3.UP)
 		
 		# Create material with contrasting color
 		var app_material = StandardMaterial3D.new()

@@ -127,7 +127,7 @@ func setup_visual_environment():
 	
 	var camera = Camera3D.new()
 	camera.position = Vector3(15, 12, 15)
-	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera.fov = 60.0
 	add_child(camera)
 
@@ -750,7 +750,7 @@ func create_edge_mesh(start: Vector2, end: Vector2, color: Color) -> MeshInstanc
 	
 	var direction = Vector3(end.x - start.x, 0, end.y - start.y).normalized()
 	if direction != Vector3.ZERO:
-		mesh_instance.look_at(mesh_instance.position + direction, Vector3.UP)
+		mesh_instance.look_at_from_position(mesh_instance.position, mesh_instance.position + direction, Vector3.UP)
 		mesh_instance.rotate_x(PI/2)
 	
 	var material = StandardMaterial3D.new()
@@ -842,7 +842,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(40):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

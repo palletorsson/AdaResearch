@@ -46,7 +46,7 @@ var hill_peaks: PackedVector3Array
 var current_iteration: int = 0
 var evolution_timer: Timer
 var is_evolving: bool = false
-var sphere_material: BaseMaterial3D
+var sphere_material: StandardMaterial3D
 
 func _ready():
 	setup_material()
@@ -57,7 +57,7 @@ func _ready():
 	setup_evolution_timer()
 
 func setup_material():
-	sphere_material = BaseMaterial3D.new()
+	sphere_material = StandardMaterial3D.new()
 	sphere_material.albedo_color = Color(0.2, 0.6, 0.8, 1.0)
 	sphere_material.metallic = 0.3
 	sphere_material.roughness = 0.4

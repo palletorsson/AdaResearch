@@ -181,7 +181,7 @@ func visualize_waveform_source():
 		segment.height = pos1.distance_to(pos2)
 		
 		segment.position = (pos1 + pos2) * 0.5
-		segment.look_at(pos2, Vector3.UP)
+		segment.look_at_from_position(segment.position, pos2, Vector3.UP)
 		segment.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		var material = StandardMaterial3D.new()
@@ -294,7 +294,7 @@ func demonstrate_output_synthesis():
 		segment.height = pos1.distance_to(pos2)
 		
 		segment.position = (pos1 + pos2) * 0.5
-		segment.look_at(pos2, Vector3.UP)
+		segment.look_at_from_position(segment.position, pos2, Vector3.UP)
 		segment.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		var material = StandardMaterial3D.new()
@@ -346,4 +346,3 @@ func update_output_buffer():
 		sample += sin(time * 4 + t * TAU * 2) * 0.1
 		
 		output_buffer.append(sample)
-

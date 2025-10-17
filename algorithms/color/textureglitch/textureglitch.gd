@@ -226,7 +226,7 @@ func setup_scene_environment():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 4, 15)
 	add_child(camera)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	
 	# Camera animation
 	animate_camera(camera)
@@ -245,7 +245,7 @@ func animate_camera(camera: Camera3D):
 		func(angle): 
 			if is_instance_valid(camera):
 				camera.position = Vector3(sin(angle) * 12, 4, cos(angle) * 12)
-				camera.look_at(Vector3.ZERO, Vector3.UP),
+				camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP),
 		0.0, PI * 2.0, 20.0
 	)
 
@@ -270,7 +270,7 @@ func setup_lighting():
 		var angle = i * PI * 0.5
 		light.position = Vector3(cos(angle) * 8, 6, sin(angle) * 8)
 		add_child(light)
-		light.look_at(Vector3.ZERO, Vector3.UP)
+		light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 
 func setup_world_environment():
 	var world_env = WorldEnvironment.new()

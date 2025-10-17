@@ -261,7 +261,7 @@ func create_flow_pipe(from_pos: Vector3, to_pos: Vector3, capacity: float) -> No
 	# Position and orient pipe
 	var mid_point = (from_pos + to_pos) * 0.5
 	mesh_instance.position = mid_point
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	mesh_instance.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	# Material
@@ -465,7 +465,7 @@ func update_ui():
 	"""Update UI statistics"""
 	var labels = []
 	for i in range(15):
-		var label = ui_container.get_node("Panel/VBoxContainer/flow_label_" + str(i))
+		var label = ui_container.get_node_or_null("Panel/VBoxContainer/flow_label_" + str(i))
 		if label:
 			labels.append(label)
 	

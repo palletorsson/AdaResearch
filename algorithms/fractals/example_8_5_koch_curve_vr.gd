@@ -105,7 +105,7 @@ func _create_line_segment(start: Vector3, end: Vector3) -> void:
 		var up := Vector3.UP
 		if abs(dir.normalized().dot(up)) > 0.99:
 			up = Vector3.RIGHT
-		mesh_instance.look_at(end, up)
+		mesh_instance.look_at_from_position(mesh_instance.position, end, up)
 		mesh_instance.rotate_object_local(Vector3.RIGHT, PI / 2.0)
 
 	var material := StandardMaterial3D.new()

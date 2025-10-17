@@ -101,7 +101,7 @@ func setup_environment():
 	# Add directional light
 	var dir_light = DirectionalLight3D.new()
 	dir_light.position = Vector3(5, 10, 5)
-	dir_light.look_at(Vector3.ZERO, Vector3.UP)
+	dir_light.look_at_from_position(dir_light.position, Vector3.ZERO, Vector3.UP)
 	dir_light.light_energy = 0.8
 	dir_light.light_color = Color(1.0, 0.95, 0.9)
 	dir_light.shadow_enabled = true
@@ -429,7 +429,8 @@ func create_single_color_plate(triangle_start: int, color: Color) -> MeshInstanc
 	
 	if wireframe_overlay:
 		material.flags_use_point_size = true
-		material.wireframe = false
+		# Note: wireframe property doesn't exist in Godot 4 StandardMaterial3D
+		# Wireframe rendering is handled at the mesh level in Godot 4
 	
 	plate.material_override = material
 	
@@ -494,7 +495,7 @@ func create_wireframe():
 	wireframe_mesh.mesh = mesh
 	
 	var wireframe_material = StandardMaterial3D.new()
-	wireframe_material.wireframe = true
+	# wireframe_material.wireframe = true  # Godot 3.x parameter not available in Godot 4
 	wireframe_material.albedo_color = Color(0.5, 0.5, 0.5, 0.3)
 	wireframe_material.flags_transparent = true
 	wireframe_mesh.material_override = wireframe_material

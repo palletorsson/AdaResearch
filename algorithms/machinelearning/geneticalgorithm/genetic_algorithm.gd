@@ -1060,7 +1060,7 @@ func create_fitness_landscape():
 	var landscape_material = StandardMaterial3D.new()
 	landscape_material.albedo_color = Color(0.1, 0.3, 0.8, 0.3)
 	landscape_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	landscape_material.wireframe = true
+	# landscape_material.wireframe = true  # Godot 3.x parameter not available in Godot 4
 	fitness_landscape_mesh.material_override = landscape_material
 	
 	fitness_landscape_mesh.position.y = 5.0
@@ -2607,7 +2607,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3, weight: float) -
 	
 	# Position and orient the line
 	line_mesh.position = (from_pos + to_pos) / 2.0
-	line_mesh.look_at(from_pos, Vector3.UP)
+	line_mesh.look_at_from_position(line_mesh.position, from_pos, Vector3.UP)
 	
 	# Color based on weight strength
 	var material = StandardMaterial3D.new()

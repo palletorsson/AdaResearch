@@ -1042,7 +1042,7 @@ func update_wanderer(entity: SimulationEntity, delta: float):
 		# Orient in direction of movement
 		if entity.velocity.length() > 0.1:
 			var look_dir = entity.velocity.normalized()
-			entity.node.look_at(entity.position + look_dir, Vector3.UP)
+			entity.node.look_at_from_position(entity.node.position, entity.position + look_dir, Vector3.UP)
 	
 	# Check for state changes
 	if entity.energy < 30.0:
@@ -1220,7 +1220,7 @@ func update_predator(entity: SimulationEntity, delta: float):
 		# Orient in direction of movement
 		if entity.velocity.length() > 0.1:
 			var look_dir = entity.velocity.normalized()
-			entity.node.look_at(entity.position + look_dir, Vector3.UP)
+			entity.node.look_at_from_position(entity.node.position, entity.position + look_dir, Vector3.UP)
 
 
 func update_builder(entity: SimulationEntity, delta: float):
@@ -1666,7 +1666,7 @@ func update_network_connections(entity: SimulationEntity):
 			
 			# Orient the line
 			if direction.length() > 0.1:
-				line.look_at(connected_entity.position, Vector3.UP)
+				line.look_at_from_position(line.position, connected_entity.position, Vector3.UP)
 				line.rotation.x = PI/2  # Adjust for cylinder orientation
 			
 			# Position at midpoint
@@ -2205,7 +2205,7 @@ func setup_recorder_camera():
 	recorder_camera.rotation_degrees = Vector3(-90, 0, 0)  # Look down
 	recorder_camera.far = 100.0
 	
-	add_child(recorder_camera)
+	add_child.call_deferred(recorder_camera)
 
 func initialize_behavior_networks():
 	# Initialize networks that define relationships between entities
@@ -2235,7 +2235,7 @@ func create_environment_influences():
 		environment.ambient_light_energy = 0.5
 		
 		world_environment.environment = environment
-		get_parent().add_child(world_environment)
+		get_parent().add_child.call_deferred(world_environment)
 
 func update_entities(delta):
 	for entity in entities:

@@ -26,7 +26,7 @@ enum VoxelType {
 }
 
 # Core Model Synthesis classes
-class Voxel:
+class ModelVoxel:
 	var type: VoxelType
 	var position: Vector3i
 	var synthesized: bool = false
@@ -105,7 +105,7 @@ class ModelSynthesis:
 			for y in range(output_size.y):
 				output[x].append([])
 				for z in range(output_size.z):
-					output[x][y].append(Voxel.new(VoxelType.ROCK, Vector3i(x, y, z)))
+					output[x][y].append(ModelVoxel.new(VoxelType.ROCK, Vector3i(x, y, z)))
 	
 	func set_exemplar_voxel(pos: Vector3i, type: VoxelType):
 		if _is_valid_exemplar_pos(pos):
@@ -138,7 +138,7 @@ class ModelSynthesis:
 					
 					if is_exemplar:
 						if _is_valid_exemplar_pos(sample_pos):
-							var voxel = Voxel.new(get_exemplar_voxel(sample_pos), sample_pos)
+							var voxel = ModelVoxel.new(get_exemplar_voxel(sample_pos), sample_pos)
 							neighborhood.add_voxel(voxel)
 						else:
 							# Handle boundary with wrap-around or default
@@ -151,14 +151,14 @@ class ModelSynthesis:
 							if wrapped_pos.y < 0: wrapped_pos.y += exemplar_size.y
 							if wrapped_pos.z < 0: wrapped_pos.z += exemplar_size.z
 							
-							var voxel = Voxel.new(get_exemplar_voxel(wrapped_pos), wrapped_pos)
+							var voxel = ModelVoxel.new(get_exemplar_voxel(wrapped_pos), wrapped_pos)
 							neighborhood.add_voxel(voxel)
 					else:
 						if _is_valid_output_pos(sample_pos):
 							neighborhood.add_voxel(get_output_voxel(sample_pos))
 						else:
 							# Default voxel for out-of-bounds
-							var default_voxel = Voxel.new(VoxelType.ROCK, sample_pos)
+							var default_voxel = ModelVoxel.new(VoxelType.ROCK, sample_pos)
 							neighborhood.add_voxel(default_voxel)
 		
 		return neighborhood

@@ -365,7 +365,7 @@ func create_flow_indicator(from_pos: Vector3, to_pos: Vector3, flow: int, capaci
 	# Position and orient cylinder
 	var mid_pos = (from_pos + to_pos) / 2.0
 	mesh_instance.position = mid_pos
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	
 	# Color based on flow intensity
 	var material = StandardMaterial3D.new()
@@ -697,7 +697,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(30):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

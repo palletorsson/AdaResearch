@@ -25,6 +25,7 @@ func setup_multimesh():
 	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
 	multi_mesh.mesh = box_mesh
 	multi_mesh.instance_count = grid_size.x * grid_size.y * grid_size.z
+	multi_mesh.use_colors = true
 	
 	multimesh_instance.multimesh = multi_mesh
 	multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF

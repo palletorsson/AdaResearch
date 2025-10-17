@@ -454,7 +454,7 @@ func create_joint(body_a, body_b, joint_position, lower_limits, upper_limits):
 	joint.node_b = body_b.get_path()
 	
 	# Set joint position
-	joint.global_position = joint_position
+	joint.position = joint_position
 	
 	# Configure joint limits
 	# X axis rotation (pitch)
@@ -707,7 +707,7 @@ func end_episode():
 	
 	# Move back to starting position
 	if is_instance_valid(core_body):
-		core_body.global_position = Vector3(0, limb_length + limb_radius, 0)
+		core_body.position = Vector3(0, limb_length + limb_radius, 0)
 	
 	# Reset learning variables
 	episode_reward = 0.0

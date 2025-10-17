@@ -169,10 +169,10 @@ func create_four_neck_flask(position, volume):
 	return flask
 
 # --- Two Neck Flask ---
-func create_two_neck_flask(position, volume):
+func create_two_neck_flask(pos, volume):
 	var flask = Node3D.new()
 	flask.name = "TwoNeckFlask"
-	flask.position = position
+	flask.position = pos
 	add_child(flask)
 	
 	# Create the bulb
@@ -1085,14 +1085,14 @@ func create_environment():
 	var light = DirectionalLight3D.new()
 	light.name = "DirectionalLight"
 	light.position = Vector3(0, 10, 0)
-	light.look_at(Vector3(0, 0, 0), Vector3(0, 0, 1))
+	light.look_at_from_position(light.position, Vector3(0, 0, 0), Vector3(0, 0, 1))
 	add_child(light)
 	
 	# Add a camera
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 3, 8)
-	camera.look_at(Vector3(0, 0, 0), Vector3(0, 1, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3(0, 1, 0))
 	add_child(camera)
 	
 	# Add a simple environment

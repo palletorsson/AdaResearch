@@ -35,7 +35,7 @@ func _ready():
 
 func setup_camera():
 	camera.position = camera_target + Vector3(0, 20, -30)
-	camera.look_at(camera_target)
+	camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
 func setup_ui():
 	btn_reset.pressed.connect(_on_reset_pressed)

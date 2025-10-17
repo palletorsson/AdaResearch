@@ -28,7 +28,7 @@ func setup_environment():
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
 	main_light.position = Vector3(5, 8, 5)
-	main_light.look_at(Vector3(0, 0, 0))
+	main_light.look_at_from_position(main_light.position, Vector3(0, 0, 0), Vector3.UP)
 	main_light.light_energy = 1.2
 	main_light.shadow_enabled = true
 	add_child(main_light)
@@ -37,7 +37,7 @@ func setup_environment():
 	var rim_light = DirectionalLight3D.new()
 	rim_light.name = "RimLight"
 	rim_light.position = Vector3(-3, 2, -3)
-	rim_light.look_at(Vector3(0, 0, 0))
+	rim_light.look_at_from_position(rim_light.position, Vector3(0, 0, 0), Vector3.UP)
 	rim_light.light_energy = 0.6
 	rim_light.light_color = Color(0.8, 0.9, 1.0)
 	add_child(rim_light)
@@ -46,7 +46,7 @@ func setup_environment():
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(0, 3, 4)
-	fill_light.look_at(Vector3(0, 0, 0))
+	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
 	fill_light.light_energy = 0.4
 	fill_light.light_color = Color(1.0, 0.95, 0.9)
 	add_child(fill_light)
@@ -129,7 +129,7 @@ func randomize_bucket_properties(bucket_instance, index):
 
 func randomize_bucket_colors(bucket_instance):
 	# Find and randomize bucket material
-	var bucket_mesh = bucket_instance.get_node("FlowerBucket")
+	var bucket_mesh = bucket_instance.get_node_or_null("FlowerBucket")
 	if bucket_mesh and bucket_mesh.material_override:
 		var material = bucket_mesh.material_override.duplicate()
 		# Randomize bucket color
@@ -144,7 +144,7 @@ func randomize_bucket_colors(bucket_instance):
 		bucket_mesh.material_override = material
 	
 	# Find and randomize handle material
-	var handle = bucket_instance.get_node("FlowerBucket/BucketHandle")
+	var handle = bucket_instance.get_node_or_null("FlowerBucket/BucketHandle")
 	if handle and handle.material_override:
 		var material = handle.material_override.duplicate()
 		material.albedo_color = Color(0.1, 0.1, 0.1)  # Very dark for handle

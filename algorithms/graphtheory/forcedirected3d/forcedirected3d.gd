@@ -367,7 +367,7 @@ func create_edge_cylinder(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3D:
 	# Position and orient the cylinder
 	var mid_point = (from_pos + to_pos) * 0.5
 	mesh_instance.position = mid_point
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	mesh_instance.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	# Material
@@ -628,7 +628,7 @@ func update_edge_visuals():
 			# Update position and orientation
 			var mid_point = (from_pos + to_pos) * 0.5
 			edge.visual_object.position = mid_point
-			edge.visual_object.look_at(to_pos, Vector3.UP)
+			edge.visual_object.look_at_from_position(edge.visual_object.position, to_pos, Vector3.UP)
 			edge.visual_object.rotate_object_local(Vector3.RIGHT, PI/2)
 			
 			# Update length
@@ -651,7 +651,7 @@ func update_force_visuals():
 			var force_direction = node.force.normalized()
 			
 			force_arrow.scale = Vector3.ONE * min(force_magnitude * force_visualization_scale, 3.0)
-			force_arrow.look_at(node.position + force_direction, Vector3.UP)
+			force_arrow.look_at_from_position(force_arrow.position, node.position + force_direction, Vector3.UP)
 		else:
 			force_arrow.visible = false
 
@@ -677,7 +677,7 @@ func update_ui_stats():
 	
 	var labels = []
 	for i in range(12):
-		var label = ui_container.get_node("Panel/VBoxContainer/stat_label_" + str(i))
+		var label = ui_container.get_node_or_null("Panel/VBoxContainer/stat_label_" + str(i))
 		if label:
 			labels.append(label)
 	

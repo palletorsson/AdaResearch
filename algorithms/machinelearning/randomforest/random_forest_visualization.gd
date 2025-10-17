@@ -546,7 +546,7 @@ func create_connection_line(from_node: MeshInstance3D, to_position: Vector3, col
 	line.material_override = material
 	
 	line.position = center
-	line.look_at(from_node.position + direction, Vector3.UP)
+	line.look_at_from_position(line.position, from_node.position + direction, Vector3.UP)
 	line.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	from_node.get_parent().add_child(line)
@@ -637,7 +637,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(25):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

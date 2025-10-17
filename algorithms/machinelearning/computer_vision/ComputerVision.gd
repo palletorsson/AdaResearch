@@ -48,7 +48,7 @@ func create_image_pixels():
 		
 		# Position particles in a grid representing image pixels
 		var grid_size = 6
-		var row = i / grid_size
+		var row = i / float(grid_size)
 		var col = i % grid_size
 		var x = (col - grid_size/2.0 + 0.5) * 0.4
 		var y = (row - grid_size/2.0 + 0.5) * 0.4

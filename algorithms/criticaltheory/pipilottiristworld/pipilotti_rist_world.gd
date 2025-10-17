@@ -371,7 +371,7 @@ func create_floating_flower(position: Vector3, size: float) -> Node3D:
 		petal.position = Vector3(cos(angle) * size * 0.3, 0, sin(angle) * size * 0.3)
 		
 		flower.add_child(petal)
-		petal.look_at(position + Vector3(cos(angle), 0.2, sin(angle)), Vector3.UP)
+		petal.look_at_from_position(petal.position, position + Vector3(cos(angle), 0.2, sin(angle)), Vector3.UP)
 	
 	add_child(flower)
 	return flower

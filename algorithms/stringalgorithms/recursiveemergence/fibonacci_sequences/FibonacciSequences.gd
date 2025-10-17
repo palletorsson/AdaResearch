@@ -135,7 +135,7 @@ func create_golden_spiral():
 		connection.height = spiral_points[i].distance_to(spiral_points[i + 1])
 		
 		connection.position = (spiral_points[i] + spiral_points[i + 1]) * 0.5
-		connection.look_at(spiral_points[i + 1], Vector3.UP)
+		connection.look_at_from_position(connection.position, spiral_points[i + 1], Vector3.UP)
 		connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		var conn_material = StandardMaterial3D.new()
@@ -281,7 +281,7 @@ func create_recursive_tree(container: Node3D, position: Vector3, depth: int, max
 			connection.height = position.distance_to(branch_pos)
 			
 			connection.position = (position + branch_pos) * 0.5
-			connection.look_at(branch_pos, Vector3.UP)
+			connection.look_at_from_position(connection.position, branch_pos, Vector3.UP)
 			connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 			
 			var conn_material = StandardMaterial3D.new()

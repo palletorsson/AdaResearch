@@ -899,7 +899,7 @@ func create_path_segment(from: Vector3i, to: Vector3i, segment_index: int):
 	
 	var mid_point = (from_world + to_world) * 0.5
 	segment.position = mid_point
-	segment.look_at(to_world, Vector3.UP)
+	segment.look_at_from_position(segment.position, to_world, Vector3.UP)
 	segment.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	var material = StandardMaterial3D.new()
@@ -929,7 +929,7 @@ func create_flow_arrow(position: Vector3, direction: Vector3):
 	arrow.mesh = mesh
 	
 	arrow.position = position
-	arrow.look_at(position + direction, Vector3.UP)
+	arrow.look_at_from_position(arrow.position, position + direction, Vector3.UP)
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(1.0, 0.5, 0.0)
@@ -983,7 +983,7 @@ func update_ui_stats():
 	
 	var labels = []
 	for i in range(20):
-		var label = ui_container.get_node("Panel/VBoxContainer/stat_label_" + str(i))
+		var label = ui_container.get_node_or_null("Panel/VBoxContainer/stat_label_" + str(i))
 		if label:
 			labels.append(label)
 	

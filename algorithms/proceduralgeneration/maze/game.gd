@@ -110,7 +110,7 @@ func start_new_game():
 	if player and player.has_method("start_new_game"):
 		player.start_new_game(player_pos)
 	elif player:
-		player.global_position = player_pos
+		player.position = player_pos
 	
 	# Place agents outside bottom-left quadrant
 	var half_size = maze_size / 2

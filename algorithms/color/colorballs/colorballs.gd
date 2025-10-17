@@ -182,7 +182,9 @@ func spawn_balls() -> void:
 		
 		# Apply initial velocity after a short delay to ensure physics is ready
 		await get_tree().process_frame
-		var rigid_body = ball_instance.get_node("RigidBody3D")
+		var rigid_body = ball_instance.get_node_or_null("RigidBody3D")
+		if not rigid_body:
+			continue
 		rigid_body.linear_velocity = random_vel
 		
 		print("Created Ball_%d with radius: %.3f, color: %s" % [i, fixed_radius, color])

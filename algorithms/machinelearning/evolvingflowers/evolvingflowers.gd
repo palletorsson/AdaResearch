@@ -178,7 +178,7 @@ func setup_environment():
 	
 	var camera := Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
-	camera.look_at(Vector3(0, 1, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 1, 0), Vector3.UP)
 	add_child(camera)
 	
 	# Info label
@@ -424,8 +424,11 @@ func create_branch_segment(start: Vector3, end: Vector3, thickness: float, color
 	branch.material_override = mat
 
 	branch.position = (start + end) / 2.0
-	branch.look_at(end, Vector3.RIGHT)
-	branch.rotate_object_local(Vector3.RIGHT, PI / 2)
+	# Only orient if positions are different (with tolerance)
+	var distance = start.distance_to(end)
+	if distance > 0.001:  # Use distance check instead of is_equal_approx
+		branch.look_at_from_position(branch.position, end, Vector3.RIGHT)
+		branch.rotate_object_local(Vector3.RIGHT, PI / 2)
 
 	return branch
 

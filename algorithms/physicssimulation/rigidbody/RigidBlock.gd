@@ -30,7 +30,7 @@ func _create_wireframe():
 	# Create wireframe edges for better visualization
 	var wireframe_material = StandardMaterial3D.new()
 	wireframe_material.albedo_color = Color.BLACK
-	wireframe_material.wireframe = true
+	# wireframe_material.wireframe = true  # Godot 3.x parameter not available in Godot 4
 	wireframe_material.albedo_color.a = 0.3
 	wireframe_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	

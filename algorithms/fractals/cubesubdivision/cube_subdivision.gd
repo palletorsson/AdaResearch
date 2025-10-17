@@ -120,7 +120,7 @@ func subdivide_cube(cube: Node3D):
 		var new_cube = CUBE_SCENE.instantiate()
 
 		# Set position and scale
-		new_cube.global_position = cube_position + positions[i]
+		new_cube.position = cube_position + positions[i]
 		new_cube.scale = new_scale
 
 		# Add to the scene

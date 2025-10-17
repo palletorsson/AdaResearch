@@ -239,7 +239,7 @@ func create_dark_brown_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.25, 0.18, 0.12, 1.0)  # Rich dark brown
 	material.roughness = 0.6
 	material.metallic = 0.0
-	material.specular = 0.3
+	# material.specular = 0.3  # Godot 3.x parameter not available in Godot 4
 	
 	# Add slight variation
 	material.rim_enabled = true
@@ -255,7 +255,7 @@ func create_light_brown_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.45, 0.35, 0.25, 1.0)  # Warm light brown
 	material.roughness = 0.5
 	material.metallic = 0.0
-	material.specular = 0.4
+	# material.specular = 0.4  # Godot 3.x parameter not available in Godot 4
 	
 	material.rim_enabled = true
 	material.rim_strength = 0.15
@@ -270,7 +270,7 @@ func create_cream_stone_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.85, 0.78, 0.65, 1.0)  # Warm cream
 	material.roughness = 0.4
 	material.metallic = 0.0
-	material.specular = 0.5
+	# material.specular = 0.5  # Godot 3.x parameter not available in Godot 4
 	
 	material.rim_enabled = true
 	material.rim_strength = 0.25
@@ -285,7 +285,7 @@ func create_red_terracotta_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.65, 0.3, 0.2, 1.0)  # Deep terracotta red
 	material.roughness = 0.7
 	material.metallic = 0.0
-	material.specular = 0.2
+	# specular parameter removed - not available in Godot 4
 	
 	material.rim_enabled = true
 	material.rim_strength = 0.3
@@ -300,7 +300,7 @@ func create_ornate_border_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.7, 0.6, 0.45, 1.0)  # Golden brown
 	material.roughness = 0.3
 	material.metallic = 0.1
-	material.specular = 0.7
+	# material.specular = 0.7  # Godot 3.x parameter not available in Godot 4
 	
 	# Add golden highlights
 	material.rim_enabled = true
@@ -321,7 +321,7 @@ func create_perspective_line_material() -> StandardMaterial3D:
 	material.albedo_color = Color(0.3, 0.25, 0.2, 1.0)  # Dark accent lines
 	material.roughness = 0.9
 	material.metallic = 0.0
-	material.specular = 0.1
+	# material.specular = 0.1  # Godot 3.x parameter not available in Godot 4
 	
 	return material
 

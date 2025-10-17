@@ -163,14 +163,14 @@ class Bloop:
 		get:
 			return root.global_position
 		set(value):
-			root.global_position = value
+			root.position = value
 
 	func init(parent: Node3D, pos: Vector3, dna_value: DNA) -> void:
 		dna = dna_value
 		root = Node3D.new()
 		root.name = "Bloop"
 		parent.add_child(root)
-		root.global_position = pos
+		root.position = pos
 
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
@@ -253,12 +253,12 @@ class FoodItem:
 		get:
 			return root.global_position
 		set(value):
-			root.global_position = value
+			root.position = value
 
 	func init(parent: Node3D, pos: Vector3, material: Material) -> void:
 		root = Node3D.new()
 		root.name = "Food"
-		root.global_position = pos
+		root.position = pos
 		parent.add_child(root)
 
 		mesh = MeshInstance3D.new()

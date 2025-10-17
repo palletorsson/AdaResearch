@@ -256,7 +256,7 @@ func show_particle_flow():
 				# Orient arrow in flow direction
 				var flow_dir = Vector3(cell.velocity.x, 0, cell.velocity.y).normalized()
 				if flow_dir.length() > 0.01:
-					flow_arrow.look_at(flow_arrow.position + flow_dir, Vector3.UP)
+					flow_arrow.look_at_from_position(flow_arrow.position, flow_arrow.position + flow_dir, Vector3.UP)
 					flow_arrow.rotate_object_local(Vector3.RIGHT, -PI / 2)
 				
 				var flow_material = StandardMaterial3D.new()

@@ -310,9 +310,11 @@ func create_trie_edge(parent: TrieNode, child: TrieNode):
 	# Orient edge
 	var direction = (child_pos - parent_pos).normalized()
 	if direction != Vector3.UP:
-		var axis = Vector3.UP.cross(direction).normalized()
-		var angle = acos(Vector3.UP.dot(direction))
-		edge.transform.basis = Basis(axis, angle)
+		var axis = Vector3.UP.cross(direction)
+		if axis.length() > 0.001:  # Check if axis is not zero
+			axis = axis.normalized()
+			var angle = acos(Vector3.UP.dot(direction))
+			edge.transform.basis = Basis(axis, angle)
 	
 	# Edge material with character label color
 	var edge_material = StandardMaterial3D.new()

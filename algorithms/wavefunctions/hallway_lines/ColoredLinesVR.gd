@@ -144,7 +144,7 @@ func _make_metal(color: Color) -> StandardMaterial3D:
 	mat.albedo_color = color
 	mat.metallic = 0.8
 	mat.roughness = 0.12
-	mat.specular = 0.8
+	# mat.specular = 0.8  # Godot 3.x parameter not available in Godot 4
 	return mat
 
 func generate_line_paths() -> void:

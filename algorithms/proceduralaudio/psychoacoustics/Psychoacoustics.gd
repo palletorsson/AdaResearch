@@ -344,7 +344,7 @@ func create_contour_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	connection.height = from.distance_to(to)
 	
 	connection.position = (from + to) * 0.5
-	connection.look_at(to, Vector3.UP)
+	connection.look_at_from_position(connection.position, to, Vector3.UP)
 	connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -353,4 +353,3 @@ func create_contour_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	connection.material_override = material
 	
 	return connection
-

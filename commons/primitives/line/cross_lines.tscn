@@ -1,19 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6rddbsdd3176"]
+[gd_scene load_steps=3 format=3 uid="uid://c6rddbsdd3176"]
 
 [ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+[ext_resource type="Script" uid="uid://b310lvx23v4kk" path="res://commons/primitives/line/cross_lines.gd" id="2_script"]
 
 [node name="CrossLines" type="Node3D"]
+script = ExtResource("2_script")
 
 [node name="Line1" parent="." instance=ExtResource("1_line")]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Line2" parent="." instance=ExtResource("1_line")]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
-text = "Cross (X) Lines"
+text = "Cross (1m lines)"
 outline_size = 4
 
 [node name="Camera3D" type="Camera3D" parent="."]

@@ -1221,12 +1221,23 @@ func _setup_animations(visual_node: Node3D, form_data: Dictionary):
 	
 	# Add animation to player
 	var anim_name = "morph_anim"
-	var lib: AnimationLibrary = anim_player.get_animation_library("")
+	var lib: AnimationLibrary = null
+	
+	# Try to get the default animation library
+	var lib_names = anim_player.get_animation_library_list()
+	if lib_names.size() > 0:
+		lib = anim_player.get_animation_library(lib_names[0])
+	
+	# If no library exists, create one
 	if lib == null:
 		lib = AnimationLibrary.new()
-		anim_player.add_animation_library("", lib)
+		anim_player.add_animation_library("default", lib)
+	
+	# Remove existing animation if it exists
 	if lib.has_animation(anim_name):
 		lib.remove_animation(anim_name)
+	
+	# Add the new animation
 	lib.add_animation(anim_name, anim)
 	anim_player.play(anim_name)
 

@@ -53,7 +53,7 @@ func _ready():
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 10, 20)
-	camera.look_at(Vector3.ZERO)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
 

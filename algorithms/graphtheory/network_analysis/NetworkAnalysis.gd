@@ -43,7 +43,7 @@ func setup_scene():
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 12)
-	camera.look_at(Vector3.ZERO)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
 func _process(delta):
@@ -191,7 +191,7 @@ func update_network_edges(delta):
 		
 		# Position at midpoint
 		var midpoint = (node1_pos + node2_pos) * 0.5
-		container.global_position = midpoint
+		container.position = midpoint
 		
 		# Calculate direction and distance
 		var direction = node2_pos - node1_pos
@@ -205,7 +205,7 @@ func update_network_edges(delta):
 			var up = Vector3.UP
 			if abs(direction.normalized().dot(up)) > 0.99:
 				up = Vector3.RIGHT
-			container.look_at(node2_pos, up)
+			container.look_at_from_position(container.position, node2_pos, up)
 			container.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		# Animate pulse
@@ -311,7 +311,7 @@ func animate_flow_particles(delta):
 		var node1_pos = network_nodes[edge["node1"]]["node"].global_position
 		var node2_pos = network_nodes[edge["node2"]]["node"].global_position
 		
-		particle.global_position = node1_pos.lerp(node2_pos, particle_data["progress"])
+		particle.position = node1_pos.lerp(node2_pos, particle_data["progress"])
 		
 		# Pulse
 		var pulse = 1.0 + sin(time * 4.0 + edge_idx) * 0.3

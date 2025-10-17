@@ -100,7 +100,7 @@ func update_tree(node: int, start: int, end: int, index: int, value: int):
 		segment_tree[node] = segment_tree[left_child] + segment_tree[right_child]
 
 func animate_tree_structure():
-	var container = get_node("TreeStructure")
+	var container = get_node_or_null("TreeStructure")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -204,7 +204,7 @@ func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
 	connection.height = distance
 	
 	connection.position = (from + to) * 0.5
-	connection.look_at(to, Vector3.UP)
+	connection.look_at_from_position(connection.position, to, Vector3.UP)
 	connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -214,7 +214,7 @@ func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
 	container.add_child(connection)
 
 func show_array_representation():
-	var container = get_node("ArrayRepresentation")
+	var container = get_node_or_null("ArrayRepresentation")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -249,7 +249,7 @@ func show_array_representation():
 		container.add_child(index_label)
 
 func demonstrate_range_queries():
-	var container = get_node("RangeQueries")
+	var container = get_node_or_null("RangeQueries")
 	
 	# Clear previous visualization
 	for child in container.get_children():
@@ -302,7 +302,7 @@ func demonstrate_range_queries():
 	container.add_child(result_display)
 
 func show_update_operations():
-	var container = get_node("UpdateOperations")
+	var container = get_node_or_null("UpdateOperations")
 	
 	# Clear previous visualization
 	for child in container.get_children():

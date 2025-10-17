@@ -139,7 +139,7 @@ func create_tunnel_segment(start: Vector3, end: Vector3, index: int):
 	
 	# Position and orient tunnel
 	tunnel.position = (start + end) * 0.5
-	tunnel.look_at(end, Vector3.UP)
+	tunnel.look_at_from_position(tunnel.position, end, Vector3.UP)
 	tunnel.rotate_object_local(Vector3.RIGHT, PI * 0.5)
 	
 	# Apply organic material

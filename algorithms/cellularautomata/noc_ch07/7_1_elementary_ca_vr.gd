@@ -117,9 +117,12 @@ func _update_row_mesh(index: int) -> void:
 	var row := _rows[index]
 	var surface := ImmediateMesh.new()
 	surface.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	var has_vertices := false
+	
 	for c in range(GRID_WIDTH):
 		if row[c] == 0:
 			continue
+		has_vertices = true
 		surface.surface_set_color(Color(1.0, 0.7, 0.95))
 		var x0 := -0.45 + c * CELL_WIDTH
 		var x1 := x0 + CELL_WIDTH
@@ -133,8 +136,13 @@ func _update_row_mesh(index: int) -> void:
 		surface.surface_add_vertex(Vector3(x0, y0, 0))
 		surface.surface_add_vertex(Vector3(x1, y1, 0))
 		surface.surface_add_vertex(Vector3(x0, y1, 0))
-	surface.surface_end()
-	_row_meshes[index].mesh = surface
+	
+	if has_vertices:
+		surface.surface_end()
+		_row_meshes[index].mesh = surface
+	else:
+		# If no vertices were added, set mesh to null or create empty mesh
+		_row_meshes[index].mesh = null
 
 func _update_status() -> void:
 	_status_label.text = "Rule %d" % rule_number

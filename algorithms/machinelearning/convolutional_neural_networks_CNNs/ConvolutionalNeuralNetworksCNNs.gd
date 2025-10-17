@@ -70,8 +70,8 @@ func create_image_grids():
 			pixel.material_override.emission_enabled = true
 			pixel.material_override.emission = Color(0.2, 0.6, 0.8, 1) * 0.3
 			
-			var x = (i - (grid_size-4)/2) * 0.3
-			var z = (j - (grid_size-4)/2) * 0.3
+			var x = (i - (grid_size-4)/2.0) * 0.3
+			var z = (j - (grid_size-4)/2.0) * 0.3
 			pixel.position = Vector3(x, 0, z)
 			conv2_grid.add_child(pixel)
 			layers.append(pixel)
@@ -87,8 +87,8 @@ func create_image_grids():
 			pixel.material_override.emission_enabled = true
 			pixel.material_override.emission = Color(0.6, 0.2, 0.8, 1) * 0.3
 			
-			var x = (i - ((grid_size-4)/2)/2) * 0.6
-			var z = (j - ((grid_size-4)/2)/2) * 0.6
+			var x = (i - ((grid_size-4)/2.0)/2) * 0.6
+			var z = (j - ((grid_size-4)/2.0)/2) * 0.6
 			pixel.position = Vector3(x, 0, z)
 			pool_grid.add_child(pixel)
 			layers.append(pixel)
@@ -169,8 +169,8 @@ func create_feature_maps():
 			pixel.material_override.emission_enabled = true
 			pixel.material_override.emission = Color(0.2, 0.6, 0.8, 1) * 0.3
 			
-			var x = (i - (grid_size-4)/2) * 0.3
-			var z = (j - (grid_size-4)/2) * 0.3
+			var x = (i - (grid_size-4)/2.0) * 0.3
+			var z = (j - (grid_size-4)/2.0) * 0.3
 			pixel.position = Vector3(x, 0, z)
 			feature2_grid.add_child(pixel)
 

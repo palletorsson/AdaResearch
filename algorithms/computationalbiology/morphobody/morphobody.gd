@@ -125,7 +125,7 @@ func _spawn_buds_from_field():
 		var limb = _make_capsule(limb_radius, 0.01)
 		add_child(limb)
 		limb.position = _ellipsoid_scale(p)
-		limb.look_at(limb.position + dir, Vector3.UP)
+		limb.look_at_from_position(limb.position, limb.position + dir, Vector3.UP)
 		buds.append({ "pos": p, "dir": dir, "len": 0.01, "mesh": limb })
 
 func _grow_limbs(delta: float):

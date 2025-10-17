@@ -113,7 +113,7 @@ func update_paper_colors() -> void:
 			print("Updated %s with color: %s" % [paper_name, color])
 
 func set_paper_color(paper_instance: Node3D, color: Color) -> void:
-	var mesh_instance = paper_instance.get_node("MeshInstance3D")
+	var mesh_instance = paper_instance.get_node_or_null("MeshInstance3D")
 	if mesh_instance and mesh_instance.material_override != null:
 		var material = StandardMaterial3D.new()
 		material.albedo_color = color

@@ -292,7 +292,7 @@ func create_lighting():
 	for pos in column_positions:
 		var spotlight = SpotLight3D.new()
 		spotlight.position = pos + Vector3(0, column_height * 1.5, 0)
-		spotlight.look_at(pos)
+		spotlight.look_at_from_position(spotlight.position, pos, Vector3.UP)
 		spotlight.light_energy = 2.0
 		spotlight.light_color = Color(1.0, 0.9, 0.7) # Warm golden light
 		spotlight.spot_range = column_height * 2.0

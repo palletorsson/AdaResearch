@@ -177,7 +177,7 @@ func setup_visual_environment():
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
 	main_light.position = Vector3(5, 8, 5)
-	main_light.look_at(Vector3(0, 0, 0))
+	main_light.look_at_from_position(main_light.position, Vector3(0, 0, 0), Vector3.UP)
 	main_light.light_energy = 1.2
 	main_light.shadow_enabled = true
 	add_child(main_light)
@@ -186,7 +186,7 @@ func setup_visual_environment():
 	var rim_light = DirectionalLight3D.new()
 	rim_light.name = "RimLight"
 	rim_light.position = Vector3(-3, 2, -3)
-	rim_light.look_at(Vector3(0, 0, 0))
+	rim_light.look_at_from_position(rim_light.position, Vector3(0, 0, 0), Vector3.UP)
 	rim_light.light_energy = 0.6
 	rim_light.light_color = Color(0.8, 0.9, 1.0)
 	add_child(rim_light)
@@ -195,7 +195,7 @@ func setup_visual_environment():
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(0, 3, 4)
-	fill_light.look_at(Vector3(0, 0, 0))
+	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
 	fill_light.light_energy = 0.4
 	fill_light.light_color = Color(1.0, 0.95, 0.9)
 	add_child(fill_light)
@@ -295,7 +295,7 @@ func setup_ui():
 
 func setup_particle_effects():
 	# Create floating particle systems around forms
-	var forms_container = get_node("BiologicalForms")
+	var forms_container = get_node_or_null("BiologicalForms")
 	if not forms_container:
 		return
 	
@@ -576,7 +576,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(0.4, 0.4, 0.4)
 				cutter.position = vertex
-				cutter.look_at(Vector3.ZERO, Vector3.UP)
+				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 		
@@ -603,7 +603,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(size, size, size)
 				cutter.position = direction * distance
-				cutter.look_at(Vector3.ZERO, Vector3.UP)
+				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 	
@@ -995,21 +995,21 @@ func setup_environment():
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 3, 5)
-	camera.look_at(Vector3(0, 0, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(camera)
 	
 	# Create directional light
 	var light = DirectionalLight3D.new()
 	light.name = "MainLight"
 	light.position = Vector3(5, 5, 5)
-	light.look_at(Vector3(0, 0, 0))
+	light.look_at_from_position(light.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(light)
 	
 	# Add secondary light for better visibility
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-3, 2, -3)
-	fill_light.look_at(Vector3(0, 0, 0))
+	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
 	fill_light.light_energy = 0.5
 	add_child(fill_light)
 	
@@ -1051,7 +1051,7 @@ func _input(event):
 
 func handle_mouse_click(screen_pos: Vector2):
 	# Cast ray from camera to detect form selection
-	var camera = camera_controller.get_node("Camera")
+	var camera = camera_controller.get_node_or_null("Camera")
 	if not camera:
 		return
 	
@@ -1144,7 +1144,7 @@ func _on_toggle_color_mode_pressed():
 
 func regenerate_forms():
 	# Clear existing forms
-	var forms_container = get_node("BiologicalForms")
+	var forms_container = get_node_or_null("BiologicalForms")
 	if forms_container:
 		for child in forms_container.get_children():
 			child.queue_free()

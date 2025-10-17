@@ -402,7 +402,7 @@ func _update_analysis_ui():
 	
 	var labels = []
 	for i in range(15):
-		var label = analysis_panel.get_node("VBoxContainer/analysis_label_" + str(i))
+		var label = analysis_panel.get_node_or_null("VBoxContainer/analysis_label_" + str(i))
 		if label:
 			labels.append(label)
 	

@@ -9,7 +9,7 @@ const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn
 @export var birth_value: int = 3
 
 var _sim_root: Node3D
-var _cells: Array[Cell] = []
+var _cells: Array[OopCell] = []
 var _mesh: MeshInstance3D
 var _timer: float = 0.0
 var _status_label: Label3D
@@ -87,7 +87,7 @@ func _init_cells() -> void:
 	for y in range(grid_size):
 		for x in range(grid_size):
 			var alive := randf() < 0.3
-			_cells.append(Cell.new(x, y, alive))
+			_cells.append(OopCell.new(x, y, alive))
 	_generation = 1
 	_update_mesh()
 
@@ -103,7 +103,7 @@ func _step_generation() -> void:
 	for i in range(_cells.size()):
 		var cell := _cells[i]
 		var neighbors := _count_neighbors(cell.x, cell.y)
-		var alive := cell.alive
+		var alive = cell.alive
 		var next := 0
 		if alive and (neighbors >= survive_min and neighbors <= survive_max):
 			next = 1
@@ -130,7 +130,7 @@ func _count_neighbors(x: int, y: int) -> int:
 				total += 1
 	return total
 
-func _cell(x: int, y: int) -> Cell:
+func _cell(x: int, y: int) -> OopCell: 
 	return _cells[y * grid_size + x]
 
 func _update_mesh() -> void:
@@ -141,10 +141,10 @@ func _update_mesh() -> void:
 		if not c.alive:
 			continue
 		mesh.surface_set_color(Color(1.0, 0.7, 0.95))
-		var x0 := -0.45 + c.x * cell
-		var x1 := x0 + cell * 0.95
-		var y0 := 0.15 + c.y * cell * 0.6
-		var y1 := y0 + cell * 0.55
+		var x0 = -0.45 + c.x * cell
+		var x1 = x0 + cell * 0.95
+		var y0 = 0.15 + c.y * cell * 0.6
+		var y1 = y0 + cell * 0.55
 		# Triangle 1
 		mesh.surface_add_vertex(Vector3(x0, y0, 0))
 		mesh.surface_add_vertex(Vector3(x1, y0, 0))
@@ -159,7 +159,7 @@ func _update_mesh() -> void:
 func _update_status() -> void:
 	_status_label.text = "OOP Game of Life | Gen %d" % _generation
 
-class Cell:
+class OopCell:
 	var x: int
 	var y: int
 	var alive: bool

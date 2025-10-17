@@ -252,8 +252,8 @@ func convert_to_wireframe(mesh_instance):
 	material.albedo_color.a = 0.6
 	material.no_depth_test = false
 	
-	# In Godot 4, you can use this property for the wireframe effect
-	material.wireframe = true
+	# Wireframe parameter removed - not available in Godot 4
+	# For wireframe effect, consider using a different approach or shader
 	
 	mesh_instance.material_override = material
 

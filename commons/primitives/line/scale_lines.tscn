@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dye0qd8yjb7gl"]
+
+[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+[ext_resource type="Script" uid="uid://wp1kxbuibnah" path="res://commons/primitives/line/scale_lines.gd" id="2_script"]
+
+[node name="ScaleLines" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="Line_10cm" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Label" type="Label3D" parent="Line_10cm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+text = "10 cm"
+font_size = 24
+outline_size = 4
+
+[node name="Line_1m" parent="." instance=ExtResource("1_line")]
+
+[node name="Label" type="Label3D" parent="Line_1m"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+text = "1 m"
+font_size = 24
+outline_size = 4
+
+[node name="Line_10m" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="Label" type="Label3D" parent="Line_10m"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+text = "10 m"
+outline_size = 4
+
+[node name="Line_100m" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+
+[node name="Label" type="Label3D" parent="Line_100m"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+text = "100 m"
+font_size = 40
+outline_size = 4
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 20)

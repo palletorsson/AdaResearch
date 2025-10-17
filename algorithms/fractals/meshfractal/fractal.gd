@@ -86,6 +86,7 @@ func create_multi_mesh_instances():
 	for i in range(depth):
 		var multi_mesh = MultiMesh.new()
 		multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+		multi_mesh.use_colors = true
 		multi_mesh.instance_count = parts[i].size()
 		
 		# Use leaf mesh for last level, branch mesh for others
