@@ -170,7 +170,7 @@ func setup_camera():
 	
 	var camera = Camera3D.new()
 	camera.position = Vector3(8, 12, 8)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
 func initialize_mathematical_components():
@@ -455,10 +455,10 @@ func create_line_segment(from_pos: Vector2, to_pos: Vector2, color: Color) -> Me
 	line.material_override = material
 	
 	# Position at midpoint between from and to
-	var midpoint = (from_pos + to_pos) / 2.0
+	var midpoint = (from_pos + to_pos) / 2
 	var from_z = function_evaluator.evaluate(from_pos) * z_scale + 0.3
 	var to_z = function_evaluator.evaluate(to_pos) * z_scale + 0.3
-	var mid_z = (from_z + to_z) / 2.0
+	var mid_z = (from_z + to_z) / 2
 	
 	line.position = Vector3(midpoint.x, mid_z, midpoint.y)
 	
@@ -558,7 +558,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(16):
-		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

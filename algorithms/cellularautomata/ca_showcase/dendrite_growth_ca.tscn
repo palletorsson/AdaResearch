@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4t9sr8b6r5ju"]
+[gd_scene load_steps=2 format=3 uid="uid://bkipan3flv7rv"]
 
-[ext_resource type="Script" uid="uid://yvvrbimubkkry" path="res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd" id="1_dendrite"]
+[ext_resource type="Script" uid="uid://bnsu67p42grdf" path="res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd" id="1_dendrite"]
 
 [node name="DendriteGrowthCA" type="Node3D"]
 script = ExtResource("1_dendrite")

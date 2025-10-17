@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ij7mpwwbdcatw"]
+[gd_scene load_steps=2 format=3 uid="uid://bug70dlvmbp0u"]
 
-[ext_resource type="Script" uid="uid://r12fne42w6bkt" path="res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.gd" id="1_7walx"]
+[ext_resource type="Script" uid="uid://b5yrw4rylc255" path="res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.gd" id="1_7walx"]
 
 [node name="metaballs" type="Node3D"]
 script = ExtResource("1_7walx")

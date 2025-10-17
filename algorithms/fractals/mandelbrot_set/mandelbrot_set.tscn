@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://4h2m5ovnqvx53"]
+[gd_scene load_steps=2 format=3 uid="uid://3yak7v6m5nqr"]
 
-[ext_resource type="Script" uid="uid://jq9et6t2pawr0" path="res://algorithms/stringalgorithms/recursiveemergence/mandelbrot_set/MandelbrotSet.gd" id="1_mandelbrot"]
+[ext_resource type="Script" uid="uid://c6j7gyym41nf8" path="res://algorithms/stringalgorithms/recursiveemergence/mandelbrot_set/MandelbrotSet.gd" id="1_mandelbrot"]
 
 [node name="MandelbrotSet" type="Node3D"]
 script = ExtResource("1_mandelbrot")

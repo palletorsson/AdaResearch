@@ -136,7 +136,7 @@ func create_transitions():
 				
 				transition.position = center
 				transition.scale.z = length * 0.8  # Slightly shorter to avoid overlap
-				transition.look_at_from_position(transition.position, to_pos, Vector3.UP)
+				transition.look_at(to_pos, Vector3.UP)
 				
 				transitions_node.add_child(transition)
 				transitions.append({

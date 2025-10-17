@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://swhl8srndec9u"]
+[gd_scene load_steps=13 format=3 uid="uid://drf0vc220jksc"]
 
-[ext_resource type="PackedScene" uid="uid://nc6c1gkq2icld" path="res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://hr2r4i4xjtk8x" path="res://addons/godot-xr-tools/hands/model/Hand_low_L.gltf" id="2"]
-[ext_resource type="Script" uid="uid://8zbqjjf62xsst" path="res://addons/godot-xr-tools/hands/hand.gd" id="3"]
-[ext_resource type="Resource" uid="uid://vtrqskkxdl7cm" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="3_wyae6"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://kic3w3ulu3y1x" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="5"]
-[ext_resource type="Material" uid="uid://6c8f20331kw0e" path="res://addons/godot-xr-tools/hands/materials/cleaning_glove.tres" id="6"]
+[ext_resource type="PackedScene" uid="uid://the6y7swe6j0" path="res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://16colgxrw27d" path="res://addons/godot-xr-tools/hands/model/Hand_low_L.gltf" id="2"]
+[ext_resource type="Script" uid="uid://rt6n5myljxfg" path="res://addons/godot-xr-tools/hands/hand.gd" id="3"]
+[ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="3_wyae6"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://dl8yf7ipqotd1" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="5"]
+[ext_resource type="Material" uid="uid://cdb40djkihelq" path="res://addons/godot-xr-tools/hands/materials/cleaning_glove.tres" id="6"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u6ys2"]
 animation = &"Grip"

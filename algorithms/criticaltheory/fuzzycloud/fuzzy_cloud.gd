@@ -585,7 +585,7 @@ func optimize_for_vr(sculpture: Node3D):
 		if mesh_instance.material_override:
 			var material = mesh_instance.material_override
 			# Ensure proper depth testing
-			# material.depth_test_enabled = true  # Godot 3.x parameter not available in Godot 4
+			material.depth_test_enabled = true
 			material.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
 			# Disable culling for better VR visibility
 			material.cull_mode = BaseMaterial3D.CULL_DISABLED

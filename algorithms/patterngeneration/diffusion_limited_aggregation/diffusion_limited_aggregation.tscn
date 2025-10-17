@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://y17z1jf8my3yn"]
+[gd_scene load_steps=2 format=3 uid="uid://dax8k7v6m5nqr"]
 
-[ext_resource type="Script" uid="uid://dqkv7egmuvecx" path="res://algorithms/patterngeneration/diffusion_limited_aggregation/DiffusionLimitedAggregation.gd" id="1_dla"]
+[ext_resource type="Script" uid="uid://ddki6unm44p2y" path="res://algorithms/patterngeneration/diffusion_limited_aggregation/DiffusionLimitedAggregation.gd" id="1_dla"]
 
 [node name="DiffusionLimitedAggregation" type="Node3D"]
 script = ExtResource("1_dla")

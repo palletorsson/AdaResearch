@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://x1zkxdccmkd4g"]
+[gd_scene load_steps=14 format=4 uid="uid://dwmemusg34pgt"]
 
-[ext_resource type="Script" uid="uid://y0mdv9s5ke85b" path="res://commons/body/hands/left_hand_nails.gd" id="1_aid76"]
-[ext_resource type="Script" uid="uid://gppyepku1r7nu" path="res://addons/godot-xr-tools/hands/hand.gd" id="1_bto2y"]
-[ext_resource type="PackedScene" uid="uid://mtgxxr91cyd36" path="res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn" id="4_l1liu"]
+[ext_resource type="Script" uid="uid://bjwwcluhbcosl" path="res://commons/body/hands/left_hand_nails.gd" id="1_aid76"]
+[ext_resource type="Script" uid="uid://rt6n5myljxfg" path="res://addons/godot-xr-tools/hands/hand.gd" id="1_bto2y"]
+[ext_resource type="PackedScene" uid="uid://the6y7swe6j0" path="res://addons/godot-xr-tools/hands/animations/left/AnimationPlayer.tscn" id="4_l1liu"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ke86u"]
 animation = &"Grip"

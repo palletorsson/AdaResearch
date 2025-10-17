@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://aa1za6ly5kzhf"]
+[gd_scene load_steps=5 format=3 uid="uid://c5d4e3f2g1h0i"]
 
-[ext_resource type="Script" uid="uid://o6tneb03tz0ly" path="res://algorithms/randomness/noise/cloudvolume/cloudvolume.gd" id="1_cloud_script"]
-[ext_resource type="Shader" uid="uid://pnag4jtbow9ac" path="res://algorithms/randomness/noise/cloudvolume/cloudvolume.gdshader" id="2_cloud_shader"]
+[ext_resource type="Script" uid="uid://ciidisgn4xs4i" path="res://algorithms/randomness/noise/cloudvolume/cloudvolume.gd" id="1_cloud_script"]
+[ext_resource type="Shader" uid="uid://cacop5bcph2o2" path="res://algorithms/randomness/noise/cloudvolume/cloudvolume.gdshader" id="2_cloud_shader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cloud"]
 render_priority = 0

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://fxyvl4rsd57bf"]
+[gd_scene load_steps=3 format=3 uid="uid://dpheromone123"]
 
-[ext_resource type="Script" uid="uid://oegn2b15ohpb6" path="res://algorithms/randomness/pheromone_terrain/pheromone_terrain.gd" id="1_pheromone"]
-[ext_resource type="PackedScene" uid="uid://d7r26h76ok22m" path="res://commons/primitives/walledcube/walledcube.tscn" id="2_plane"]
+[ext_resource type="Script" uid="uid://cbhn034f653ax" path="res://algorithms/randomness/pheromone_terrain/pheromone_terrain.gd" id="1_pheromone"]
+[ext_resource type="PackedScene" uid="uid://cnn1obxysw0rw" path="res://commons/primitives/walledcube/walledcube.tscn" id="2_plane"]
 
 [node name="PheromonesTerrain" type="Node3D"]
 script = ExtResource("1_pheromone")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://i0p54u0bp7jgx"]
+[gd_scene load_steps=3 format=3 uid="uid://bpin33uw0lvtb"]
 
 [ext_resource type="Script" path="res://test_boolean_direct.gd" id="1_fd5p3"]
-[ext_resource type="PackedScene" uid="uid://dr0m4afdto343" path="res://algorithms/primitives/booleans/booleanvariations.tscn" id="2_lysk5"]
+[ext_resource type="PackedScene" uid="uid://o175phpwkoig" path="res://algorithms/primitives/booleans/booleanvariations.tscn" id="2_lysk5"]
 
 [node name="TestBooleanDirect" type="Node3D"]
 script = ExtResource("1_fd5p3")

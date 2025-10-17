@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://gjvqvn0pfle3q"]
+[gd_scene load_steps=2 format=3 uid="uid://b8w7smd767wsf"]
 
-[ext_resource type="Script" uid="uid://uaq67qq6kbyej" path="res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd" id="1_1vlxq"]
+[ext_resource type="Script" uid="uid://dnd44e1whfgmu" path="res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd" id="1_1vlxq"]
 
 [node name="JointLearnWalk" type="Node3D"]
 script = ExtResource("1_1vlxq")

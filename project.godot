@@ -23,7 +23,6 @@ GameManager="*res://commons/managers/GameManager.gd"
 TextManager="*res://commons/managers/TextManager.gd"
 MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
-SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 
 [editor_plugins]
 
@@ -36,16 +35,6 @@ import/blender/enabled=false
 [gdnative]
 
 singletons=["res://addons/godot-openxr/config/godot_openxr.gdnlib"]
-
-[global_script_classes]
-
-_global_script_class_0="GridMaterialFactory"
-_global_script_class_type_0="Object"
-_global_script_class_path_0="res://commons/primitives/shared/grid_material_factory.gd"
-_global_script_class_1="PrimitiveMeshBuilder"
-_global_script_class_type_1="Object"
-_global_script_class_path_1="res://commons/primitives/shared/primitive_mesh_builder.gd"
-_global_script_classes=["GridMaterialFactory", "PrimitiveMeshBuilder"]
 
 [gui]
 
@@ -99,11 +88,6 @@ jump={
 ]
 }
 fly={
-"deadzone": 0.2,
-"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
-]
-}
-vr_button_a={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://55v4ysx44nav6"]
+[gd_scene load_steps=2 format=3 uid="uid://dyhr7bm4hbrnu"]
 
-[ext_resource type="Script" uid="uid://ng5z7q4ezc86f" path="res://algorithms/wavefunctions/coshlea/CosHLea.gd" id="1_coshlea"]
+[ext_resource type="Script" uid="uid://c71ed4ihibtng" path="res://algorithms/wavefunctions/coshlea/CosHLea.gd" id="1_coshlea"]
 
 [node name="CosHLea" type="Node3D"]
 script = ExtResource("1_coshlea")

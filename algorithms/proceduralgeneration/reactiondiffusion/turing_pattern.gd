@@ -289,10 +289,6 @@ func _process(delta):
 
 func _update_texture():
 	# Update the image based on current concentrations
-	# Safety check: ensure image has valid dimensions
-	if image.get_width() == 0 or image.get_height() == 0:
-		image.create(width, height, false, Image.FORMAT_RGB8)
-	
 	for y in range(height):
 		for x in range(width):
 			var a = grid_a[y][x]
@@ -306,9 +302,7 @@ func _update_texture():
 			color.g = clamp(color.g, 0.0, 1.0)
 			color.b = clamp(color.b, 0.0, 1.0)
 			
-			# Additional bounds check
-			if x < image.get_width() and y < image.get_height():
-				image.set_pixel(x, y, color)
+			image.set_pixel(x, y, color)
 	
 	# Create texture from the image
 	texture = ImageTexture.create_from_image(image)

@@ -864,7 +864,7 @@ func create_dynamic_lighting():
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "DynamicMainLight"
 	main_light.position = Vector3(8, 10, 6)
-	main_light.look_at_from_position(main_light.position, Vector3(0, 0, 0), Vector3.UP)
+	main_light.look_at(Vector3(0, 0, 0), Vector3.UP)
 	main_light.light_energy = 2.0
 	main_light.shadow_enabled = true
 	main_light.light_color = Color(1.0, 0.9, 0.8)

@@ -347,7 +347,7 @@ func create_joint(body_a, body_b, joint_position):
 	joint.node_b = body_b.get_path()
 	
 	# Set joint position
-	joint.position = joint_position
+	joint.global_position = joint_position
 	
 	# Configure joint limits
 	# X axis rotation (pitch)

@@ -859,8 +859,8 @@ func update_self_organization(showcase: Node3D, delta):
 		if randf() < 15.0 * delta:
 			var angle = randf() * TAU
 			var radius = randf() * GRID_SIZE * 0.4
-			var x = int(GRID_SIZE/2.0 + cos(angle) * radius)
-			var z = int(GRID_SIZE/2.0 + sin(angle) * radius)
+			var x = int(GRID_SIZE/2 + cos(angle) * radius)
+			var z = int(GRID_SIZE/2 + sin(angle) * radius)
 			var y = randi() % GRID_SIZE
 			if x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE:
 				var color = Color.from_hsv(randf(), 0.8 + randf() * 0.2, 1.0)  # Rainbow

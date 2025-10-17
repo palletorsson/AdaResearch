@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://xaqmwv33utdn7"]
+[gd_scene load_steps=2 format=3 uid="uid://cn4k7m8j2pqxr"]
 
-[ext_resource type="Script" uid="uid://ifpxka8rlljgd" path="res://algorithms/computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
+[ext_resource type="Script" uid="uid://ceoqcls8um7gi" path="res://algorithms/computationalgeometry/voronoi/voronoi_visualization.gd" id="1_voronoi_script"]
 
 [node name="Voronoi_Visualization" type="Node3D"]
 script = ExtResource("1_voronoi_script")

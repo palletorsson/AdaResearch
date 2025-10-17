@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://xpijedc3cr2mz"]
+[gd_scene load_steps=7 format=3 uid="uid://cu0qtodekjr5r"]
 
-[ext_resource type="PackedScene" uid="uid://02vym8vmyf8ks" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_1t2g7"]
-[ext_resource type="Script" uid="uid://yq8xa82molfl8" path="res://commons/primitives/point/grab_sphere.gd" id="2_3uxjj"]
-[ext_resource type="Script" uid="uid://lzdsrqxjrz4mz" path="res://commons/primitives/point/point_mesh.gd" id="3_3uxjj"]
-[ext_resource type="PackedScene" uid="uid://em1gqg9492fx0" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_nukvf"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_1t2g7"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_3uxjj"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="3_3uxjj"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_nukvf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
 albedo_color = Color(0, 1, 1, 1)

@@ -117,7 +117,7 @@ func run_ca(rules):
 			for z in range(grid_size):
 				grid[x][y][z] = 0
 	
-	grid[grid_size / 2.0][grid_size / 2.0][grid_size / 2.0] = 1
+	grid[grid_size / 2][grid_size / 2][grid_size / 2] = 1
 	grids.append(grid.duplicate(true))
 
 	for i in range(10): # Run the CA for 10 generations
@@ -206,8 +206,6 @@ func update_multimesh(grid):
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	var cube_scene = CUBE_SCENE.instantiate()
-	if not cube_scene:
-		return
 	var cube_mesh = cube_scene.get_node("CubeBaseStaticBody3D/CubeBaseMesh").mesh
 	multimesh.mesh = cube_mesh
 	cube_scene.queue_free()

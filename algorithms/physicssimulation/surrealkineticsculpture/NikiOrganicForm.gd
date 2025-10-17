@@ -93,7 +93,7 @@ func create_flowing_appendages(size: float):
 			
 			current_pos += current_direction * segment.height
 			segment.position = current_pos
-			segment.look_at_from_position(segment.position, current_pos + current_direction, Vector3.UP)
+			segment.look_at(current_pos + current_direction, Vector3.UP)
 			
 			add_child(segment)
 			base_forms.append(segment)

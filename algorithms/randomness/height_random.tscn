@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://veav3pb237pvx"]
+[gd_scene load_steps=2 format=3 uid="uid://e7d11yfmj81g"]
 
-[ext_resource type="Script" uid="uid://tflyuccc6mrgn" path="res://algorithms/randomness/HeightRandomness.gd" id="1_height"]
+[ext_resource type="Script" uid="uid://dv854g1ptx5vx" path="res://algorithms/randomness/HeightRandomness.gd" id="1_height"]
 
 [node name="HeightRandomnessAlgorithm" type="Node3D"]
 script = ExtResource("1_height")

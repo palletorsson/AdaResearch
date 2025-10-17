@@ -245,7 +245,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(0.4, 0.4, 0.4)
 				cutter.position = vertex
-				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
+				cutter.look_at(Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 		
@@ -272,7 +272,7 @@ func create_polyhedral_form(parent, position):
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(size, size, size)
 				cutter.position = direction * distance
-				cutter.look_at_from_position(cutter.position, Vector3.ZERO, Vector3.UP)
+				cutter.look_at(Vector3.ZERO, Vector3.UP)
 				cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 				core.add_child(cutter)
 	
@@ -665,21 +665,21 @@ func setup_environment():
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 3, 5)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at(Vector3(0, 0, 0))
 	add_child(camera)
 	
 	# Create directional light
 	var light = DirectionalLight3D.new()
 	light.name = "MainLight"
 	light.position = Vector3(5, 5, 5)
-	light.look_at_from_position(light.position, Vector3(0, 0, 0), Vector3.UP)
+	light.look_at(Vector3(0, 0, 0))
 	add_child(light)
 	
 	# Add secondary light for better visibility
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-3, 2, -3)
-	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
+	fill_light.look_at(Vector3(0, 0, 0))
 	fill_light.light_energy = 0.5
 	add_child(fill_light)
 	

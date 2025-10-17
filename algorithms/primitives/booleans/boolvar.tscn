@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://4k3qbia79s8xc"]
+[gd_scene load_steps=2 format=3 uid="uid://bxm8p7q2vf3nh"]
 
-[ext_resource type="Script" uid="uid://s3t6h3w3heu8m" path="res://algorithms/primitives/booleans/csg_boolean_editor.gd" id="1_a5k2p"]
+[ext_resource type="Script" uid="uid://fsix0ckx5xnj" path="res://algorithms/primitives/booleans/csg_boolean_editor.gd" id="1_a5k2p"]
 
 [node name="CSGBooleanExplorer" type="Node3D"]
 script = ExtResource("1_a5k2p")

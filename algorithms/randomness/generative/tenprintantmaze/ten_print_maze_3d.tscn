@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://6xyfwtaono46o"]
+[gd_scene load_steps=2 format=3 uid="uid://d0vmtk7ypuno1"]
 
-[ext_resource type="Script" uid="uid://mphvc1ijy197w" path="res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd" id="1_2rw0u"]
+[ext_resource type="Script" uid="uid://thmxjqgmcgvo" path="res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd" id="1_2rw0u"]
 
 [node name="TenPrintMaze3d" type="Node3D"]
 script = ExtResource("1_2rw0u")

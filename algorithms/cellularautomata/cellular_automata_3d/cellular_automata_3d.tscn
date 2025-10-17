@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://80b2v7uubyk37"]
+[gd_scene load_steps=2 format=3 uid="uid://fkdy5yw2xry0"]
 
-[ext_resource type="Script" uid="uid://wuhjqmo1dold9" path="res://algorithms/stringalgorithms/recursiveemergence/cellular_automata_3d/CellularAutomata3D.gd" id="1_ca_3d"]
+[ext_resource type="Script" uid="uid://cjj4l51u8dj6c" path="res://algorithms/stringalgorithms/recursiveemergence/cellular_automata_3d/CellularAutomata3D.gd" id="1_ca_3d"]
 
 [node name="CellularAutomata3D" type="Node3D"]
 script = ExtResource("1_ca_3d")

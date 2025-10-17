@@ -1,12 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://r36al6oqeg0m3"]
+[gd_scene load_steps=24 format=3 uid="uid://b6l85p5wnu2xn"]
 
-[ext_resource type="Shader" uid="uid://s2fia36qbhl6n" path="res://algorithms/patterngeneration/animalpatterns/popleopard.gdshader" id="1_n7ueh"]
-[ext_resource type="Shader" uid="uid://1p47ickkmh1w7" path="res://algorithms/patterngeneration/fabrics/wallpaper.gdshader" id="1_yyhok"]
-[ext_resource type="Shader" uid="uid://dgkntadxpy215" path="res://algorithms/patterngeneration/animalpatterns/wavycheckeredmoire.gdshader" id="2_uaj8q"]
-[ext_resource type="Shader" uid="uid://z6a25uk58okmq" path="res://algorithms/patterngeneration/animalpatterns/neontigerstripes.gdshader" id="3_uaj8q"]
-[ext_resource type="Shader" uid="uid://5359xsv52w0bf" path="res://algorithms/patterngeneration/animalpatterns/eyeswallpaper.gdshader" id="4_n7ueh"]
-[ext_resource type="Script" uid="uid://u0h8a7u9w5smr" path="res://algorithms/patterngeneration/animalpatterns/animatematerial.gd" id="5_gd7d1"]
-[ext_resource type="Shader" uid="uid://ynax261tszhbv" path="res://commons/resourses/shaders/tartan_pattern.gdshader" id="5_tvsoc"]
+[ext_resource type="Shader" uid="uid://b6jnspytbdh0x" path="res://algorithms/patterngeneration/animalpatterns/popleopard.gdshader" id="1_n7ueh"]
+[ext_resource type="Shader" uid="uid://y1fcfjs8yt7l" path="res://algorithms/patterngeneration/fabrics/wallpaper.gdshader" id="1_yyhok"]
+[ext_resource type="Shader" uid="uid://bj6dk82inilrq" path="res://algorithms/patterngeneration/animalpatterns/wavycheckeredmoire.gdshader" id="2_uaj8q"]
+[ext_resource type="Shader" uid="uid://by0auj3od45l1" path="res://algorithms/patterngeneration/animalpatterns/neontigerstripes.gdshader" id="3_uaj8q"]
+[ext_resource type="Shader" uid="uid://dp4704itbttfe" path="res://algorithms/patterngeneration/animalpatterns/eyeswallpaper.gdshader" id="4_n7ueh"]
+[ext_resource type="Script" uid="uid://dxsnxwsy3f8kw" path="res://algorithms/patterngeneration/animalpatterns/animatematerial.gd" id="5_gd7d1"]
+[ext_resource type="Shader" uid="uid://830rfocg1dnk" path="res://commons/resourses/shaders/tartan_pattern.gdshader" id="5_tvsoc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(10, 0.1, 10)

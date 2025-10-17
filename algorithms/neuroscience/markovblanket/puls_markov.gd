@@ -77,7 +77,7 @@ func _setup_scene():
 	# Add lighting
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 10, 10)
-	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
+	light.look_at(Vector3.ZERO, Vector3.UP)
 	add_child(light)
 	
 	# Create inner cell mesh
@@ -279,10 +279,9 @@ func _process_hotspots(delta):
 				hotspot_parent.add_child(trail)
 				
 				# Create a timer to remove the trail
-				var trail_ref = trail
 				get_tree().create_timer(1.0).timeout.connect(func(): 
-					if trail_ref and is_instance_valid(trail_ref):
-						trail_ref.queue_free()
+					if trail and is_instance_valid(trail):
+						trail.queue_free()
 				)
 			
 			# Check if hotspot has reached the membrane
@@ -320,10 +319,9 @@ func _process_hotspots(delta):
 				absorption.emitting = true
 				
 				# Remove absorption effect after it's done
-				var absorption_ref = absorption
 				get_tree().create_timer(2.0).timeout.connect(func(): 
-					if absorption_ref and is_instance_valid(absorption_ref):
-						absorption_ref.queue_free()
+					if absorption and is_instance_valid(absorption):
+						absorption.queue_free()
 				)
 		else:
 			# Once processed, move inside

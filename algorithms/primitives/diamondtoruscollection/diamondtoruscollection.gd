@@ -98,12 +98,7 @@ func create_hanging_arrangement():
 			diamond.position = diamond_position
 			
 			# Orient diamond pointing upward toward the cylinder
-			var direction = (torus_position - diamond.position).normalized()
-			var up_vector = Vector3.UP
-			# Check if direction is colinear with UP vector
-			if abs(direction.dot(Vector3.UP)) > 0.99:
-				up_vector = Vector3.RIGHT
-			diamond.look_at_from_position(diamond.position, torus_position, up_vector)
+			diamond.look_at(torus_position, Vector3.UP)
 			
 			# Apply scale
 			diamond.scale = Vector3.ONE * diamond_scale

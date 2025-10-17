@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://6arfg9chi1pss"]
+[gd_scene load_steps=2 format=3 uid="uid://b1mpnr2ny8l5u"]
 
-[ext_resource type="Script" uid="uid://rrlmf0n8ucabq" path="res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd" id="1_neural"]
+[ext_resource type="Script" uid="uid://dl7hnn82ih02" path="res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd" id="1_neural"]
 
 [node name="NeuralNetworkVisualization" type="Node3D"]
 script = ExtResource("1_neural")

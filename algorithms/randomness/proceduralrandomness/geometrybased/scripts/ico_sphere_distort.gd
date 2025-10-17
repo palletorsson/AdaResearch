@@ -33,7 +33,7 @@ func _ready():
 		var displacement = calculate_positional_displacement(v)
 
 		var _position = (v + displacement).normalized() * structure_radius  # Ensure it remains on the sphere
-		sphere.position = _position
+		sphere.global_transform.origin = _position
 		add_child(sphere)
 		sphere_positions[index_count] = _position
 		index_count += 1
@@ -168,7 +168,7 @@ func draw_cylinder_between_points(start: Vector3, end: Vector3):
 
 	# Position and rotate the cylinder between the start and end points
 	var mid_point = (start + end) * 0.5
-	cylinder.position = mid_point
+	cylinder.global_transform.origin = mid_point
 	
 	# Calculate the direction and rotation for the cylinder
 	var direction = (end - start).normalized()

@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://69nejkp45lip5"]
+[gd_scene load_steps=9 format=3 uid="uid://bwt4esw1futik"]
 
-[ext_resource type="PackedScene" uid="uid://nzmgiapl0he5c" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q2nsk"]
-[ext_resource type="Script" uid="uid://xn0r3z4xyo1bh" path="res://commons/primitives/cubes/grab_cube.gd" id="2_6l87n"]
-[ext_resource type="PackedScene" uid="uid://3oshm64y5jvyu" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_xog5e"]
-[ext_resource type="PackedScene" uid="uid://2kx8dayx66dg7" path="res://commons/primitives/positionlabel/positionlabel.tscn" id="4_cp53c"]
-[ext_resource type="Script" uid="uid://z9m52fnpnraq2" path="res://commons/primitives/constraint/distance_constraint.gd" id="5_q2nsk"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_q2nsk"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_6l87n"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_xog5e"]
+[ext_resource type="PackedScene" uid="uid://ddkksijgplfht" path="res://commons/primitives/positionlabel/positionlabel.tscn" id="4_cp53c"]
+[ext_resource type="Script" uid="uid://ds7ohqeal1so6" path="res://commons/primitives/constraint/distance_constraint.gd" id="5_q2nsk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qrm56"]
 radius = 0.035

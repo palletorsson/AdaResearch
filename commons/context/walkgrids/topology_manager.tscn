@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://6vwoiy9vhhx5z"]
+[gd_scene load_steps=13 format=3 uid="uid://wqwnkfhniclu"]
 
-[ext_resource type="Script" uid="uid://fpjxg49c74txh" path="res://commons/context/walkgrids/TopologyManager.gd" id="1_v503f"]
-[ext_resource type="Script" uid="uid://qw1vxttxg39to" path="res://commons/context/walkgrids/SineSpace.gd" id="2_v503f"]
-[ext_resource type="Script" uid="uid://7xywcvwk9q8le" path="res://commons/context/walkgrids/NoiseSpace.gd" id="3_ey0dh"]
-[ext_resource type="Shader" uid="uid://19xi6sw2rui1a" path="res://commons/resourses/shaders/Grid.gdshader" id="3_v503f"]
-[ext_resource type="Script" uid="uid://n907ntco0d8h0" path="res://commons/context/walkgrids/VoronoiSpace.gd" id="4_cm8s1"]
-[ext_resource type="Script" uid="uid://9dlceinnyfm4j" path="res://commons/context/walkgrids/RandomSpace.gd" id="5_gmykt"]
+[ext_resource type="Script" uid="uid://dqvpbf71jeec0" path="res://commons/context/walkgrids/TopologyManager.gd" id="1_v503f"]
+[ext_resource type="Script" uid="uid://dm5m5m8v1s2qq" path="res://commons/context/walkgrids/SineSpace.gd" id="2_v503f"]
+[ext_resource type="Script" uid="uid://ds5k3srpps23h" path="res://commons/context/walkgrids/NoiseSpace.gd" id="3_ey0dh"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_v503f"]
+[ext_resource type="Script" uid="uid://dm4wj8rar6mwn" path="res://commons/context/walkgrids/VoronoiSpace.gd" id="4_cm8s1"]
+[ext_resource type="Script" uid="uid://di8nmks4jyq0c" path="res://commons/context/walkgrids/RandomSpace.gd" id="5_gmykt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ey0dh"]
 render_priority = 0

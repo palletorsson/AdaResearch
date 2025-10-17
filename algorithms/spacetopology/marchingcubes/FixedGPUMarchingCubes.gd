@@ -75,9 +75,8 @@ func load_compute_shader() -> bool:
 	
 	compute_shader = rd.shader_create_from_spirv(shader_spirv)
 	if not compute_shader.is_valid():
-		print("Warning: Failed to create compute shader, falling back to CPU mode")
-		compute_shader = RID()
-		return true
+		push_error("Failed to create compute shader")
+		return false
 	
 	return true
 
@@ -487,8 +486,7 @@ func generate_mesh_gpu(density_data: PackedFloat32Array) -> ArrayMesh:
 	rd.compute_list_dispatch(compute_list, groups_x, groups_y, groups_z)
 	rd.compute_list_end()
 	rd.submit()
-	# Note: In Godot 4, RenderingDevice doesn't have a wait() function
-	# The GPU will process asynchronously
+	rd.wait()
 	
 	print("FixedGPUMarchingCubes: GPU computation complete")
 	

@@ -34,7 +34,6 @@ func create_wave_surface():
 	tile_mesh.size = Vector3(tile_size, tile_height, tile_size)
 	tile_multimesh.mesh = tile_mesh
 	tile_multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	tile_multimesh.use_colors = true
 	tile_multimesh.set("color_format", 1)  # Fallback for MultiMesh.COLOR_8BIT
 	tile_multimesh.instance_count = grid_size * grid_size
 	tile_multimesh_instance.multimesh = tile_multimesh

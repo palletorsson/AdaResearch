@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://z25ulr9xu1h49"]
+[gd_scene load_steps=2 format=3 uid="uid://cg7sqo2sld3d5"]
 
-[ext_resource type="Script" uid="uid://caqqn5xqpry9b" path="res://commons/primitives/cubes/animationsine/animated_cube_edit.gd" id="1_edit_script"]
+[ext_resource type="Script" uid="uid://b4q873p0k272e" path="res://commons/primitives/cubes/animationsine/animated_cube_edit.gd" id="1_edit_script"]
 
 [node name="EditableCube" type="Node3D"]
 script = ExtResource("1_edit_script")

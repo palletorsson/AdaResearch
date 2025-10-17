@@ -62,7 +62,7 @@ func setup_environment():
 	
 	var camera := Camera3D.new()
 	camera.position = Vector3(8.0, 6.0, 12.0)
-	camera.look_at_from_position(camera.position, Vector3(0.0, 0.0, 0.0), Vector3.UP)
+	camera.look_at(Vector3(0.0, 0.0, 0.0), Vector3.UP)
 	camera.current = true
 	add_child(camera)
 

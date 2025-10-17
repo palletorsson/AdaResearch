@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://4wotr3u5ofyh3"]
+[gd_scene load_steps=7 format=3 uid="uid://dv8or0hnk5nku"]
 
-[ext_resource type="Script" uid="uid://7zy18txxo9jwx" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_control_panel.gd" id="1"]
-[ext_resource type="Script" uid="uid://6d8l3n4xaqpop" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
-[ext_resource type="Script" uid="uid://qk5sqe82ctk5z" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_pickup_cube.gd" id="3"]
+[ext_resource type="Script" uid="uid://cabshqgrvu24o" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_control_panel.gd" id="1"]
+[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" uid="uid://cjk36g18pp1ni" path="res://algorithms/wavefunctions/mariocontrol/xr_slider_pickup_cube.gd" id="3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(0.8, 0.1, 0.1)

@@ -1,10 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bzxiwtnherpwv"]
+[gd_scene load_steps=22 format=3 uid="uid://cac0urxooc0u3"]
 
-[ext_resource type="Shader" uid="uid://fwu40k1anol8o" path="res://algorithms/patterngeneration/fabrics/wallpaper.gdshader" id="1_yyhok"]
-[ext_resource type="Shader" uid="uid://5hg3e2r0t9nrc" path="res://algorithms/patterngeneration/fabrics/normalstone.gdshader" id="2_tvsoc"]
-[ext_resource type="Shader" uid="uid://f6qkpfgx4q8dr" path="res://algorithms/patterngeneration/fabrics/terrain.gdshader" id="3_yyhok"]
-[ext_resource type="Shader" uid="uid://941t4crzmwgox" path="res://algorithms/patterngeneration/fabrics/displacement.gdshader" id="4_yyhok"]
-[ext_resource type="Shader" uid="uid://l4mg6d7naky6d" path="res://commons/resourses/shaders/tartan_pattern.gdshader" id="5_tvsoc"]
+[ext_resource type="Shader" uid="uid://y1fcfjs8yt7l" path="res://algorithms/patterngeneration/fabrics/wallpaper.gdshader" id="1_yyhok"]
+[ext_resource type="Shader" uid="uid://bn6jdw8qa0i6y" path="res://algorithms/patterngeneration/fabrics/normalstone.gdshader" id="2_tvsoc"]
+[ext_resource type="Shader" uid="uid://2u4p4yxwld04" path="res://algorithms/patterngeneration/fabrics/terrain.gdshader" id="3_yyhok"]
+[ext_resource type="Shader" uid="uid://dng3joxidpbi8" path="res://algorithms/patterngeneration/fabrics/displacement.gdshader" id="4_yyhok"]
+[ext_resource type="Shader" uid="uid://830rfocg1dnk" path="res://commons/resourses/shaders/tartan_pattern.gdshader" id="5_tvsoc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(10, 0.1, 10)

@@ -464,9 +464,9 @@ func update_temporal_deformation(delta: float):
 		return
 	
 	for i in range(vertices.size()):
-		var original_v = hull_faces[i/3.0].vertices[i%3]
+		var original_v = hull_faces[i/3].vertices[i%3]
 		var offset = sin(temporal_deformation_time + original_v.x) + cos(temporal_deformation_time + original_v.y)
-		vertices[i] = original_v + hull_faces[i/3.0].normal * offset * 0.1
+		vertices[i] = original_v + hull_faces[i/3].normal * offset * 0.1
 		
 	# This is slow, for demonstration only. A shader would be better.
 	mesh.surface_remove(0)

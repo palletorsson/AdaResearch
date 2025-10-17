@@ -1239,8 +1239,7 @@ func _setup_animations(visual_node: Node3D, form_data: Dictionary):
 	
 	# Add the new animation
 	lib.add_animation(anim_name, anim)
-	if anim_player.has_animation(anim_name):
-		anim_player.play(anim_name)
+	anim_player.play(anim_name)
 
 func _create_pulsing_animation(anim: Animation, visual_node: Node3D, form_data: Dictionary):
 	# Create a pulsing animation where components scale up and down
@@ -1377,11 +1376,7 @@ func _create_gliding_animation(anim: Animation, visual_node: Node3D, form_data: 
 	
 	# Create global movement for the whole entity
 	var root_track_idx = anim.add_track(Animation.TYPE_VALUE)
-	if visual_node.is_inside_tree():
-		anim.track_set_path(root_track_idx, NodePath(str(visual_node.get_path()) + ":position"))
-	else:
-		# Use a relative path if node is not in tree yet
-		anim.track_set_path(root_track_idx, NodePath(".:position"))
+	anim.track_set_path(root_track_idx, NodePath(str(visual_node.get_path()) + ":position"))
 	
 	# Get parameters from first component with animation params
 	var params = null

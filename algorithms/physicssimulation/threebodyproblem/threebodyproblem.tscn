@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://yz48mchhr19nh"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxs"]
 
-[ext_resource type="Script" uid="uid://6kc4ts8xggcoe" path="res://algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd" id="1_0xqxs"]
-[ext_resource type="Script" uid="uid://m7apvkbi7gbuh" path="res://algorithms/physicssimulation/threebodyproblem/CelestialBody.gd" id="2_0xqxs"]
+[ext_resource type="Script" uid="uid://e4h6irqfj14b" path="res://algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd" id="1_0xqxs"]
+[ext_resource type="Script" uid="uid://bgajkg3bnqisf" path="res://algorithms/physicssimulation/threebodyproblem/CelestialBody.gd" id="2_0xqxs"]
 
 [node name="ThreeBodyProblem" type="Node3D"]
 script = ExtResource("1_0xqxs")

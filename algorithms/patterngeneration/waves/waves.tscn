@@ -1,9 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://ghtp7dmcq4gye"]
+[gd_scene load_steps=30 format=3 uid="uid://e6jiwu283ow1"]
 
-[ext_resource type="Shader" uid="uid://7fdkcpix0kx8s" path="res://algorithms/patterngeneration/waves/water2.gdshader" id="1_glfyl"]
-[ext_resource type="Shader" uid="uid://apljbysi36ure" path="res://algorithms/patterngeneration/waves/water.gdshader" id="2_glfyl"]
-[ext_resource type="Shader" uid="uid://rd1pmxsas2uj6" path="res://commons/resourses/shaders/waterfloor.gdshader" id="3_glfyl"]
-[ext_resource type="Shader" uid="uid://8qvsllea4ow2l" path="res://commons/resourses/shaders/see_under_water.gdshader" id="4_agh2p"]
+[ext_resource type="Shader" uid="uid://lsyhprnfv338" path="res://algorithms/patterngeneration/waves/water2.gdshader" id="1_glfyl"]
+[ext_resource type="Shader" uid="uid://b7kg2abgjnwtx" path="res://algorithms/patterngeneration/waves/water.gdshader" id="2_glfyl"]
+[ext_resource type="Shader" uid="uid://b20gaehj2rmii" path="res://commons/resourses/shaders/waterfloor.gdshader" id="3_glfyl"]
+[ext_resource type="Shader" uid="uid://ciguaq4jowxok" path="res://commons/resourses/shaders/see_under_water.gdshader" id="4_agh2p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(10, 0.1, 10)

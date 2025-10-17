@@ -109,7 +109,7 @@ func update_trail():
 		trail_segment.name = "TrailSegment" + str(i)
 		trail_segment.size = Vector3(0.02, 0.02, start.distance_to(end))
 		trail_segment.position = (start + end) / 2
-		trail_segment.look_at_from_position(trail_segment.position, end, Vector3.UP)
+		trail_segment.look_at(end, Vector3.UP)
 		trail_segment.material = trail_material
 		
 		# Add to trails parent

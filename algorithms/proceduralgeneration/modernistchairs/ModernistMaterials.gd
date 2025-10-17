@@ -88,7 +88,7 @@ func create_modernist_materials():
 	clear_acrylic.roughness = 0.0
 	clear_acrylic.metallic = 0.0
 	clear_acrylic.refraction_enabled = true
-	# clear_acrylic.refraction = 1.49  # Godot 3.x parameter not available in Godot 4
+	clear_acrylic.refraction = 1.49
 	materials["clear_acrylic"] = clear_acrylic
 	
 	# Tinted Glass

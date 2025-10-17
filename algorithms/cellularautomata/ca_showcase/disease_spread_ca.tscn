@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://sl482ikrpoh18"]
+[gd_scene load_steps=2 format=3 uid="uid://djwxhw6avockb"]
 
-[ext_resource type="Script" uid="uid://cz3f5h18jrv4f" path="res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd" id="1_disease"]
+[ext_resource type="Script" uid="uid://df3vdfautolqn" path="res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd" id="1_disease"]
 
 [node name="DiseaseSpreadCA" type="Node3D"]
 script = ExtResource("1_disease")

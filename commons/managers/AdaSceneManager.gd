@@ -232,7 +232,7 @@ func _on_artifact_activated(artifact_id: String):
 		_:
 			print("AdaSceneManager: No sequence mapping found for artifact: %s" % artifact_id)
 
-func _on_interactable_activated(object_id: String, _position: Vector3, data: Dictionary):
+func _on_interactable_activated(object_id: String, position: Vector3, data: Dictionary):
 	print("AdaSceneManager: Interactable activated: %s" % object_id)
 	
 	if data.has("transition_trigger"):
@@ -266,7 +266,7 @@ func _on_progression_event(event_name: String, event_data: Dictionary):
 func request_transition(transition_request: Dictionary):
 	print("AdaSceneManager: Processing transition request: %s" % transition_request)
 	
-	var _transition_type = transition_request.get("type", TransitionType.MANUAL_LOAD)
+	var transition_type = transition_request.get("type", TransitionType.MANUAL_LOAD)
 	var action = transition_request.get("action", "")
 	
 	transition_history.append({
@@ -626,7 +626,7 @@ func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
 			print("AdaSceneManager: 🔄 Notifying LabManager of sequence completion: %s" % completed_sequence)
 			lab_manager_ref._on_sequence_completed(completed_sequence)
 
-func _on_staging_scene_visible(scene: Node, _user_data: Dictionary):
+func _on_staging_scene_visible(scene: Node, user_data: Dictionary):
 	"""Handle when staging scene becomes visible"""
 	print("AdaSceneManager: Scene visible: %s" % scene.name)
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://gk87ngbbxpl9k"]
+[gd_scene load_steps=7 format=3 uid="uid://et4e1rwdhx84"]
 
-[ext_resource type="Script" uid="uid://9e9eowsojukzo" path="res://commons/primitives/cubes/grab_cube.gd" id="1_agi6j"]
-[ext_resource type="Shader" uid="uid://4omswhhxclvg7" path="res://commons/resourses/shaders/wood.gdshader" id="2_msbuu"]
-[ext_resource type="PackedScene" uid="uid://tx371t18swy5b" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_ja0n1"]
+[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="1_agi6j"]
+[ext_resource type="Shader" uid="uid://bvosua7kp43yv" path="res://commons/resourses/shaders/wood.gdshader" id="2_msbuu"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_ja0n1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oypbc"]
 radius = 0.035

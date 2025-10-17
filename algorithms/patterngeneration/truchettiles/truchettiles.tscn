@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://i08qhmf37zq31"]
+[gd_scene load_steps=18 format=3 uid="uid://cac0urxooc0u3"]
 
-[ext_resource type="Shader" uid="uid://lpcmklghjqpky" path="res://algorithms/patterngeneration/truchettiles/quarterarcs.gdshader" id="1_7kma8"]
-[ext_resource type="Shader" uid="uid://xvz6fuxja49hz" path="res://algorithms/patterngeneration/truchettiles/diagonalsplit.gdshader" id="2_7kma8"]
-[ext_resource type="Shader" uid="uid://h85ekzvla4uvl" path="res://algorithms/patterngeneration/truchettiles/dots.gdshader" id="3_7kma8"]
-[ext_resource type="Shader" uid="uid://loylylloonbnx" path="res://algorithms/patterngeneration/truchettiles/zigzag.gdshader" id="4_7kma8"]
+[ext_resource type="Shader" uid="uid://b8qayab1ufc2m" path="res://algorithms/patterngeneration/truchettiles/quarterarcs.gdshader" id="1_7kma8"]
+[ext_resource type="Shader" uid="uid://dw4oc0ekbld6i" path="res://algorithms/patterngeneration/truchettiles/diagonalsplit.gdshader" id="2_7kma8"]
+[ext_resource type="Shader" uid="uid://yc7xs20vbg4m" path="res://algorithms/patterngeneration/truchettiles/dots.gdshader" id="3_7kma8"]
+[ext_resource type="Shader" uid="uid://fqq3apbw83nn" path="res://algorithms/patterngeneration/truchettiles/zigzag.gdshader" id="4_7kma8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(10, 0.1, 10)

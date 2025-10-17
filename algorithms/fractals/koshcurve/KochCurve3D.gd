@@ -88,7 +88,7 @@ func create_line_segment(start: Vector3, end: Vector3) -> MeshInstance3D:
 	# Align cylinder with the line direction
 	var direction = (end - start).normalized()
 	if direction.length() > 0.001:
-		mesh_instance.look_at_from_position(mesh_instance.position, center + direction, Vector3.UP)
+		mesh_instance.look_at(center + direction, Vector3.UP)
 		mesh_instance.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	return mesh_instance

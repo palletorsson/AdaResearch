@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://whpxwntzyc52i"]
+[gd_scene load_steps=2 format=3 uid="uid://c3yh6d8do1key"]
 
-[ext_resource type="Script" uid="uid://7080v84ytt7iy" path="res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.gd" id="1_crack"]
+[ext_resource type="Script" uid="uid://dwyrhurkfb7gr" path="res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.gd" id="1_crack"]
 
 [node name="CrackPropagationCA" type="Node3D"]
 script = ExtResource("1_crack")

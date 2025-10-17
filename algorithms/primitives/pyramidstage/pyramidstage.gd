@@ -158,7 +158,7 @@ func add_camera_and_light():
 	# Camera
 	var cam = Camera3D.new()
 	cam.position = Vector3(14, 10, 16)
-	cam.look_at_from_position(cam.position, Vector3(0, plinth_size.y + 2, 0), Vector3.UP)
+	cam.look_at(Vector3(0, plinth_size.y + 2, 0), Vector3.UP)
 	add_child(cam)
 
 	# Environment

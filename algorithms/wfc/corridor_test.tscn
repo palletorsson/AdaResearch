@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://zfccnoam4qnp9"]
+[gd_scene load_steps=3 format=3 uid="uid://bednrounlga5c"]
 
-[ext_resource type="Script" uid="uid://llq4ealzo0w4u" path="res://algorithms/wfc/corridor_tileset.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://ppvi6v3j53hi3" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
+[ext_resource type="Script" uid="uid://b4qupx3edw7ws" path="res://algorithms/wfc/corridor_tileset.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c5y2q8v7n3x1p" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
 
 [node name="CorridorTest" type="Node3D"]
 script = ExtResource("1")

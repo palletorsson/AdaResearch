@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://apo86ohqvb2p0"]
+[gd_scene load_steps=2 format=3 uid="uid://b1m58cmt6o5jw"]
 
-[ext_resource type="Script" uid="uid://dteh16mpuo29c" path="res://algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.gd" id="1_synthesis"]
+[ext_resource type="Script" uid="uid://cmmw3xnvkdoif" path="res://algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.gd" id="1_synthesis"]
 
 [node name="ModelSynthesis" type="Node3D"]
 script = ExtResource("1_synthesis")

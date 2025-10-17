@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://hl7408hhv3erl"]
+[gd_scene load_steps=2 format=3 uid="uid://6yak7v6m5nqr"]
 
-[ext_resource type="Script" uid="uid://o89tpyiddd5q0" path="res://algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd" id="1_fdl"]
+[ext_resource type="Script" uid="uid://hj83qoo7ro4a" path="res://algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd" id="1_fdl"]
 
 [node name="ForceDirectedLayout" type="Node3D"]
 script = ExtResource("1_fdl")

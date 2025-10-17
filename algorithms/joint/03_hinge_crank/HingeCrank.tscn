@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://hpy1jj3cgzy1e"]
+[gd_scene load_steps=2 format=3 uid="uid://bl5rnhj407un"]
 
-[ext_resource type="Script" uid="uid://jcl19hlj75edw" path="res://algorithms/joint/03_hinge_crank/HingeCrank.gd" id="1_v76rp"]
+[ext_resource type="Script" uid="uid://be7q04fndqwrk" path="res://algorithms/joint/03_hinge_crank/HingeCrank.gd" id="1_v76rp"]
 
 [node name="HingeCrank" type="Node3D"]
 script = ExtResource("1_v76rp")

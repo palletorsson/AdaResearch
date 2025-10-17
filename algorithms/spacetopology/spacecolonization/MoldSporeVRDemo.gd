@@ -164,7 +164,7 @@ func create_vr_accent_lighting():
 			1.5,
 			sin(angle) * 1.8
 		)
-		spot_light.look_at_from_position(spot_light.position, Vector3(0.5, 0.5, 0.5), Vector3.UP)
+		spot_light.look_at(Vector3(0.5, 0.5, 0.5), Vector3.UP)
 		
 		add_child(spot_light)
 	

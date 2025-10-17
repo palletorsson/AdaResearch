@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://5a72ip6gd3s6e"]
+[gd_scene load_steps=5 format=3 uid="uid://dkuceypdl7iui"]
 
-[ext_resource type="Script" uid="uid://thiq8n2a6hwj3" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
-[ext_resource type="Script" uid="uid://h1mx2l2n9sm5b" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
+[ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
+[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0, 1, 0, 1)

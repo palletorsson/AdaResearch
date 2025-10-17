@@ -110,7 +110,6 @@ func update_visualization():
 		return
 	
 	multimesh_instance.multimesh.instance_count = occupied_cells.size()
-	multimesh_instance.multimesh.use_colors = true
 	
 	for i in range(occupied_cells.size()):
 		var cell = occupied_cells[i]
@@ -124,5 +123,4 @@ func update_visualization():
 		# Set color based on height
 		var height_ratio = float(pos.z) / float(grid_size.z)
 		var color = Color(0.3 + height_ratio * 0.5, 0.5, 0.3 + height_ratio * 0.3)
-		# Set instance color (use_colors should already be enabled during setup)
 		multimesh_instance.multimesh.set_instance_color(i, color)

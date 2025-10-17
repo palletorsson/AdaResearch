@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://1esgydn1kwqym"]
+[gd_scene load_steps=3 format=3 uid="uid://crfyuhr11v8lk"]
 
-[ext_resource type="Script" uid="uid://zp45ipllhhg68" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd" id="1_nn2xg"]
-[ext_resource type="PackedScene" uid="uid://aazap2585nrdk" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterfly.tscn" id="2_1g2yd"]
+[ext_resource type="Script" uid="uid://b6cxc42b1nu3d" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd" id="1_nn2xg"]
+[ext_resource type="PackedScene" uid="uid://cmavmakrosvt6" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterfly.tscn" id="2_1g2yd"]
 
 [node name="butterflies" type="Node3D"]
 script = ExtResource("1_nn2xg")

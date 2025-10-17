@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://r93hpera7negq"]
+[gd_scene load_steps=7 format=3 uid="uid://d01ajoij5twu0"]
 
-[ext_resource type="Script" uid="uid://x7lcx3wvd2qx2" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
-[ext_resource type="Script" uid="uid://59zpcnxsb11eo" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
+[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
+[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="2_controller"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0, 1, 1, 1)

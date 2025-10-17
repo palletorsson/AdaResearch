@@ -79,7 +79,7 @@ func create_realistic_materials():
 		material.albedo_color = color
 		material.metallic = 0.0
 		material.roughness = 0.3
-		# material.refraction = 0.05  # Godot 3.x parameter not available in Godot 4
+		material.refraction = 0.05
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.albedo_color.a = 0.95
 		

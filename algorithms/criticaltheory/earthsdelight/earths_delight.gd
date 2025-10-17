@@ -112,8 +112,7 @@ func generate_terrain():
 	
 	# Recalculate normals
 	surface_tool.clear()
-	# Note: create_from_blend_shape removed - blend shapes not available in this context
-	# surface_tool.create_from_blend_shape(mesh_data, 0, "0")
+	surface_tool.create_from_blend_shape(mesh_data, 0, "0")
 	
 	# Create a new mesh with the modified vertices
 	arrays[Mesh.ARRAY_VERTEX] = vertices

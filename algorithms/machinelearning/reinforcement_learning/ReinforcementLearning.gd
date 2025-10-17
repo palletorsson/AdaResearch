@@ -45,8 +45,8 @@ func create_environment_particles():
 		
 		# Position particles in a grid pattern
 		var grid_size = 5
-		var x = (i % grid_size - grid_size/2.0) * 0.8
-		var z = (i / float(grid_size) - grid_size/2.0) * 0.8
+		var x = (i % grid_size - grid_size/2) * 0.8
+		var z = (i / grid_size - grid_size/2) * 0.8
 		var y = randf_range(-0.5, 0.5)
 		particle.position = Vector3(x, y, z)
 		

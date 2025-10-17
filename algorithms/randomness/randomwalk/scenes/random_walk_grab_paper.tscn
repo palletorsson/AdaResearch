@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://1egv298j8ox6t"]
+[gd_scene load_steps=7 format=3 uid="uid://d28m400o724g5"]
 
-[ext_resource type="PackedScene" uid="uid://3svhbmb8wou1k" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="1_15hq7"]
-[ext_resource type="Script" uid="uid://t8p2uohgy4hej" path="res://algorithms/randomness/randomwalk/scripts/random_walk_manager.gd" id="1_n8lxf"]
+[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="1_15hq7"]
+[ext_resource type="Script" uid="uid://di872av3eqqvj" path="res://algorithms/randomness/randomwalk/scripts/random_walk_manager.gd" id="1_n8lxf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_uv78k"]
 size = Vector2(0.19, 0.19)

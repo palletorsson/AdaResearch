@@ -104,7 +104,7 @@ func setup_environment():
 func setup_camera():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
 	add_child(camera)
 
 func load_function_preset(preset: String = ""):
@@ -243,7 +243,7 @@ func create_axis_line(start: Vector3, end: Vector3, color: Color) -> MeshInstanc
 	# Position and orient the line
 	var center = (start + end) / 2
 	mesh_instance.position = center
-	mesh_instance.look_at_from_position(mesh_instance.position, end, Vector3.UP)
+	mesh_instance.look_at(end, Vector3.UP)
 	
 	return mesh_instance
 
@@ -445,7 +445,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(8):
-		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

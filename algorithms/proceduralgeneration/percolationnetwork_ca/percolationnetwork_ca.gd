@@ -324,9 +324,9 @@ func update_cube_collision(cube_node: Node3D, state: CellState):
 # Helper function to get cube world position
 func get_cube_world_position(x: int, y: int, z: int) -> Vector3:
 	return Vector3(
-		(x - GRID_SIZE/2.0) * CUBE_SIZE,
-		(y - GRID_SIZE/2.0) * CUBE_SIZE,
-		(z - GRID_SIZE/2.0) * CUBE_SIZE
+		(x - GRID_SIZE/2) * CUBE_SIZE,
+		(y - GRID_SIZE/2) * CUBE_SIZE,
+		(z - GRID_SIZE/2) * CUBE_SIZE
 	)
 
 func check_percolation_status():

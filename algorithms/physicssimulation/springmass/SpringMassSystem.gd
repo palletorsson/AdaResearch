@@ -80,11 +80,7 @@ func _create_spring_visual(spring):
 	
 	# Orient spring to point from point1 to point2
 	var direction = (spring.point2.position - spring.point1.position).normalized()
-	var up_vector = Vector3.UP
-	# Check if direction is colinear with UP vector
-	if abs(direction.dot(Vector3.UP)) > 0.99:
-		up_vector = Vector3.RIGHT
-	spring_line.look_at_from_position(spring_line.position, spring.point2.position, up_vector)
+	spring_line.look_at(spring.point2.position, Vector3.UP)
 	
 	$Springs.add_child(spring_line)
 	spring["visual"] = spring_line
@@ -150,11 +146,7 @@ func _update_spring_visuals():
 		visual.position = mid_point
 		
 		var direction = (point2.position - point1.position).normalized()
-		var up_vector = Vector3.UP
-		# Avoid colinear vectors by using a different up vector if needed
-		if abs(direction.dot(Vector3.UP)) > 0.99:
-			up_vector = Vector3.RIGHT
-		visual.look_at_from_position(visual.position, point2.position, up_vector)
+		visual.look_at(point2.position, Vector3.UP)
 		
 		# Update spring length
 		var current_length = point1.position.distance_to(point2.position)

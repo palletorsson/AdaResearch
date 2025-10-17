@@ -1719,9 +1719,9 @@ func warn_connected_networkers(networker: SimulationEntity, predator: Simulation
 				create_warning_effect(connected_entity.position)
 
 
-func create_warning_effect(pos: Vector3):
+func create_warning_effect(position: Vector3):
 	var warning = CPUParticles3D.new()
-	warning.position = pos
+	warning.position = position
 	
 	warning.amount = 15
 	warning.lifetime = 0.7
@@ -2169,9 +2169,9 @@ func _on_entity_input_event(camera, event, position, normal, shape_idx, entity: 
 			highlighted_entity = entity
 			_on_vr_trigger_pressed()
 
-func create_interaction_effect(pos: Vector3):
+func create_interaction_effect(position: Vector3):
 	var effect = CPUParticles3D.new()
-	effect.position = pos
+	effect.position = position
 	effect.amount = 30
 	effect.lifetime = 0.8
 	effect.explosiveness = 0.8
@@ -2297,15 +2297,15 @@ func constrain_to_environment(entity: SimulationEntity):
 		entity.position.y = half_height
 		entity.velocity.y = -abs(entity.velocity.y) * bounce_factor
 
-func get_entities_in_radius(pos: Vector3, radius: float) -> Array:
+func get_entities_in_radius(position: Vector3, radius: float) -> Array:
 	var result = []
 	
 	if use_spatial_partitioning:
 		# Get the cells in the vicinity
 		var cell_radius = int(radius / grid_cell_size) + 1
-		var center_cell_x = int(pos.x / grid_cell_size)
-		var center_cell_y = int(pos.y / grid_cell_size)
-		var center_cell_z = int(pos.z / grid_cell_size)
+		var center_cell_x = int(position.x / grid_cell_size)
+		var center_cell_y = int(position.y / grid_cell_size)
+		var center_cell_z = int(position.z / grid_cell_size)
 		
 		for x in range(center_cell_x - cell_radius, center_cell_x + cell_radius + 1):
 			for y in range(center_cell_y - cell_radius, center_cell_y + cell_radius + 1):
@@ -2315,7 +2315,7 @@ func get_entities_in_radius(pos: Vector3, radius: float) -> Array:
 						for entity_id in partitioning_grid[cell_key]:
 							if entity_id < entities.size():
 								var entity = entities[entity_id]
-								var distance = pos.distance_to(entity.position)
+								var distance = position.distance_to(entity.position)
 								if distance <= radius:
 									result.append(entity)
 	else:
@@ -2327,25 +2327,25 @@ func get_entities_in_radius(pos: Vector3, radius: float) -> Array:
 	
 	return result
 
-func find_nearest_resource(pos: Vector3):
+func find_nearest_resource(position: Vector3):
 	var nearest_resource = null
 	var nearest_distance = INF
 	
 	for resource in resource_points:
-		var distance = pos.distance_to(resource.position)
+		var distance = position.distance_to(resource.position)
 		if distance < nearest_distance and resource.energy > 10.0:
 			nearest_distance = distance
 			nearest_resource = resource
 	
 	return nearest_resource
 
-func find_nearest_entity_of_type(pos: Vector3, type: String, exclude_id: int = -1):
+func find_nearest_entity_of_type(position: Vector3, type: String, exclude_id: int = -1):
 	var nearest_entity = null
 	var nearest_distance = INF
 	
 	for entity in entities:
 		if entity.type == type and entity.id != exclude_id:
-			var distance = pos.distance_to(entity.position)
+			var distance = position.distance_to(entity.position)
 			if distance < nearest_distance:
 				nearest_distance = distance
 				nearest_entity = entity
@@ -2411,9 +2411,9 @@ func process_entity_removal():
 		
 		entities_to_remove.clear()
 
-func create_death_effect(pos: Vector3, type: String):
+func create_death_effect(position: Vector3, type: String):
 	var particles = CPUParticles3D.new()
-	particles.position = pos
+	particles.position = position
 	particles.amount = 20
 	particles.lifetime = 1.0
 	particles.one_shot = true
@@ -2638,7 +2638,7 @@ func create_environmental_shift():
 			
 			create_terrain_shift(shift_position, shift_radius)
 
-func create_terrain_shift(pos: Vector3, radius: float):
+func create_terrain_shift(position: Vector3, radius: float):
 	var terrain_shift = Node3D.new()
 	terrain_shift.name = "TerrainShift"
 	
@@ -2676,7 +2676,7 @@ func create_terrain_shift(pos: Vector3, radius: float):
 	mdt.commit_to_surface(array_mesh)
 	mesh_instance.mesh = array_mesh
 	
-	terrain_shift.position = pos
+	terrain_shift.position = position
 	terrain_shift.add_child(mesh_instance)
 	
 	# Add collision

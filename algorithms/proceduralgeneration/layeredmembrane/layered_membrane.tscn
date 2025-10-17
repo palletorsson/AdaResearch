@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbivr7u9mg1ke"]
+[gd_scene load_steps=2 format=3 uid="uid://4cu3l3ir4oe2"]
 
-[ext_resource type="Script" uid="uid://ylsszu6pal7fc" path="res://algorithms/proceduralgeneration/layeredmembrane/layered_membrane.gd" id="1_nmmin"]
+[ext_resource type="Script" uid="uid://dht55qbouxsmv" path="res://algorithms/proceduralgeneration/layeredmembrane/layered_membrane.gd" id="1_nmmin"]
 
 [node name="LayeredMembrane" type="Node3D"]
 script = ExtResource("1_nmmin")

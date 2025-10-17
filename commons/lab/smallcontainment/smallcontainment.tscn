@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://t9wo000k7y5cp"]
+[gd_scene load_steps=17 format=3 uid="uid://cyenyttx6qua1"]
 
-[ext_resource type="PackedScene" uid="uid://fwubjx96jpfew" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_2482f"]
-[ext_resource type="PackedScene" uid="uid://anl92iy8i6xxl" path="res://commons/primitives/point/grab_sphere_point_with_text.tscn" id="2_2482f"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_2482f"]
+[ext_resource type="PackedScene" uid="uid://d2r31gpcpho3n" path="res://commons/primitives/point/grab_sphere_point_with_text.tscn" id="2_2482f"]
 
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D

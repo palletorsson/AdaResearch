@@ -70,7 +70,6 @@ func update_multimesh():
 	var cube_mesh = BoxMesh.new()
 	cube_mesh.size = Vector3(1, 1, 1)
 	var multimesh = MultiMesh.new()
-	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.mesh = cube_mesh
 
 	var instance_count = 0

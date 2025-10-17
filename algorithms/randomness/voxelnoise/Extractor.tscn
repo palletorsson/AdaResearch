@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://qxtdw5i22hhlh"]
+[gd_scene load_steps=2 format=3 uid="uid://cxfdpxsf3lv0x"]
 
-[ext_resource type="Script" uid="uid://n3f4aub91b7rh" path="res://algorithms/randomness/voxelnoise/VoxelExtractor.gd" id="1_l1nko"]
+[ext_resource type="Script" uid="uid://ci31yuqu0b131" path="res://algorithms/randomness/voxelnoise/VoxelExtractor.gd" id="1_l1nko"]
 
 [node name="Extractor" type="MeshInstance3D"]
 script = ExtResource("1_l1nko")

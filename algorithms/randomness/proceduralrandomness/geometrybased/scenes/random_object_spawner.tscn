@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ox31ednjsku4c"]
+[gd_scene load_steps=3 format=3 uid="uid://d2jypoo8gd232"]
 
-[ext_resource type="Script" uid="uid://6y3d30dbzpw69" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_object_spawner.gd" id="1_mdwpm"]
-[ext_resource type="PackedScene" uid="uid://hgh12k1y7cb4q" path="res://commons/primitives/cubes/wood_cube.tscn" id="2_padbm"]
+[ext_resource type="Script" uid="uid://m83l6mgcx1dh" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_object_spawner.gd" id="1_mdwpm"]
+[ext_resource type="PackedScene" uid="uid://cjflqm1ksxbai" path="res://commons/primitives/cubes/wood_cube.tscn" id="2_padbm"]
 
 [node name="RandomObjectSpawner" type="Node3D"]
 script = ExtResource("1_mdwpm")

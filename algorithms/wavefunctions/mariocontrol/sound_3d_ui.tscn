@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://8ci6h5ckbbviv"]
+[gd_scene load_steps=10 format=3 uid="uid://bnoumh5vstes"]
 
-[ext_resource type="Script" uid="uid://3r9vir6tntp5m" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_6gg7t"]
-[ext_resource type="Material" uid="uid://2hs2tpge55yjk" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_vl0x6"]
-[ext_resource type="PackedScene" uid="uid://70hyi6m1xyon4" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_c3g87"]
-[ext_resource type="PackedScene" uid="uid://16izaz4bhx2re" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_h6db6"]
-[ext_resource type="PackedScene" uid="uid://cah6pbij8pwmb" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_veq71"]
-[ext_resource type="Resource" uid="uid://foczuukbveqys" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_le3po"]
-[ext_resource type="Resource" uid="uid://w9yz65bw0u5lo" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_hrmy6"]
+[ext_resource type="Script" uid="uid://b7fjcl5fs0cn2" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_6gg7t"]
+[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_vl0x6"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_c3g87"]
+[ext_resource type="PackedScene" uid="uid://bwhjh7wlhpe5" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_h6db6"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_veq71"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_le3po"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_hrmy6"]
 
 [sub_resource type="BoxMesh" id="1"]
 size = Vector3(0.7, 0.7, 0.02)

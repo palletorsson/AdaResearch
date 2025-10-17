@@ -191,12 +191,7 @@ func create_line_mesh(from: Vector3, to: Vector3, thickness: float) -> MeshInsta
 
 	mesh_instance.position = midpoint
 	if distance > 0.001:
-		var direction = (to - from).normalized()
-		var up_vector = Vector3.UP
-		# Avoid colinear vectors by using a different up vector if needed
-		if abs(direction.dot(Vector3.UP)) > 0.99:
-			up_vector = Vector3.RIGHT
-		mesh_instance.look_at_from_position(mesh_instance.position, to, up_vector)
+		mesh_instance.look_at(to, Vector3.UP)
 	mesh_instance.scale.z = distance
 
 	# Material
@@ -317,12 +312,12 @@ func setup_camera():
 	if spawn_player and player:
 		# Position camera behind and above player
 		camera.position = player.position + Vector3(-5, 5, 3)
-		camera.look_at_from_position(camera.position, player.position, Vector3.UP)
+		camera.look_at(player.position, Vector3.UP)
 	else:
 		# Position for overview of entire bridge
 		var bridge_center = bridge_points[bridge_segments / 2]
 		camera.position = bridge_center + Vector3(-bridge_length * 0.3, bridge_length * 0.3, bridge_width * 3)
-		camera.look_at_from_position(camera.position, bridge_center, Vector3.UP)
+		camera.look_at(bridge_center, Vector3.UP)
 
 func update_camera_follow(delta: float):
 	"""Smoothly follow the player with the camera"""
@@ -338,7 +333,7 @@ func update_camera_follow(delta: float):
 	var new_forward = current_forward.lerp(desired_forward, camera_follow_smoothing * delta)
 
 	if new_forward.length() > 0.001:
-		camera.look_at_from_position(camera.position, camera.global_position + new_forward, Vector3.UP)
+		camera.look_at(camera.global_position + new_forward, Vector3.UP)
 
 func create_environment():
 	"""Create lighting and environment"""

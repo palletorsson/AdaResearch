@@ -77,7 +77,7 @@ func setup_environment():
 	# Camera
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 10, 15)
-	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
+	camera.look_at(Vector3.ZERO)
 	add_child(camera)
 
 func queue_insert(value: int):
@@ -285,7 +285,7 @@ func create_connection_line(from: Vector3, to: Vector3):
 	# Position and orient line
 	var center = (from + to) / 2
 	line.position = center
-	line.look_at_from_position(line.position, to, Vector3.UP)
+	line.look_at(to, Vector3.UP)
 	line.scale.y = from.distance_to(to)
 	
 	add_child(line)

@@ -11,7 +11,7 @@ extends Node3D
 var mechanical_parts: Array[RigidBody3D] = []
 var joint_connections: Array[Joint3D] = []
 var soft_bodies: Array[SoftBody3D] = []
-var rainbow_materials: Array[Material] = []
+var rainbow_materials: Array[StandardMaterial3D] = []
 var celebration_particles: Array[GPUParticles3D] = []
 
 # Joyful rainbow shader for mechanical parts
@@ -156,7 +156,7 @@ func setup_joyful_environment():
 	# Warm celebration lighting
 	var celebration_light = DirectionalLight3D.new()
 	celebration_light.position = Vector3(8, 12, 6)
-	celebration_light.look_at_from_position(celebration_light.position, Vector3.ZERO, Vector3.UP)
+	celebration_light.look_at(Vector3.ZERO, Vector3.UP)
 	celebration_light.light_energy = 1.0
 	celebration_light.light_color = Color(1.0, 0.9, 0.8)
 	celebration_light.shadow_enabled = true
@@ -950,9 +950,8 @@ func update_celebration_effects(delta):
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 2.0) * 0.2 + 1.0
 
 	for material in rainbow_materials:
-		# Check if the shader parameter exists by trying to get it
-		var base_glow = material.get_shader_parameter("glow_intensity")
-		if base_glow != null:
+		if material.has_shader_parameter("glow_intensity"):
+			var base_glow = material.get_shader_parameter("glow_intensity")
 			material.set_shader_parameter("glow_intensity", base_glow * time_factor)
 
 func update_physics_interactions(delta):
@@ -980,9 +979,7 @@ func toggle_rainbow_mode(enabled: bool):
 	rainbow_mode = enabled
 	# Update all materials
 	for material in rainbow_materials:
-		# Check if the shader parameter exists by trying to get it
-		var pride_factor = material.get_shader_parameter("pride_factor")
-		if pride_factor != null:
+		if material.has_shader_parameter("pride_factor"):
 			material.set_shader_parameter("pride_factor", 2.0 if enabled else 0.5)
 
 func set_bouncy_factor(factor: float):

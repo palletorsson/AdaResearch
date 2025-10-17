@@ -6,13 +6,13 @@ extends MeshInstance3D
 @export var RESOLUTION: int = 50:
 	set(value):
 		RESOLUTION = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 
 @export var ISO_LEVEL := 0.0:
 	set(value):
 		ISO_LEVEL = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 
 @export var NOISE: FastNoiseLite
@@ -21,17 +21,17 @@ extends MeshInstance3D
 @export var TERRAIN_HEIGHT: float = 15.0:
 	set(value):
 		TERRAIN_HEIGHT = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 @export var USE_HEIGHTMAP_MODE: bool = true:
 	set(value):
 		USE_HEIGHTMAP_MODE = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 @export var PLANE_HEIGHT_OFFSET: float = 0.3:
 	set(value):
 		PLANE_HEIGHT_OFFSET = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 
 # === HOLE-FREE ENHANCEMENTS ===
@@ -39,13 +39,13 @@ extends MeshInstance3D
 @export var USE_ROBUST_INTERPOLATION: bool = true:
 	set(value):
 		USE_ROBUST_INTERPOLATION = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 
 @export var PREVENT_DEGENERATE_TRIANGLES: bool = true:
 	set(value):
 		PREVENT_DEGENERATE_TRIANGLES = value
-		if is_inside_tree():
+		if get_tree():
 			generate()
 
 @export var GENERATE: bool:

@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://rsb8if0wi3big"]
+[gd_scene load_steps=7 format=3 uid="uid://x04jb7ovm1pd"]
 
-[ext_resource type="Script" uid="uid://itp80mm6fp7bc" path="res://commons/primitives/cubes/CubeShaderController.gd" id="2_shader"]
-[ext_resource type="Shader" uid="uid://8v6ohdwwyjz9v" path="res://commons/resourses/shaders/Grid.gdshader" id="3_gridshader"]
+[ext_resource type="Script" uid="uid://k4cxjxxyd8ap" path="res://commons/primitives/cubes/CubeShaderController.gd" id="2_shader"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_gridshader"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_default"]
 friction = 0.7

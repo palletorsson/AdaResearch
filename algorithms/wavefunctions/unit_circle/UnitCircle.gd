@@ -81,7 +81,7 @@ func setup_camera():
 		var camera_node = Camera3D.new()
 		camera_node.name = "Camera3D"
 		camera_node.position = Vector3(0, 0, 12)
-		camera_node.look_at_from_position(camera_node.position, Vector3.ZERO, Vector3.UP)
+		camera_node.look_at(Vector3.ZERO, Vector3.UP)
 		add_child(camera_node)
 
 func create_axes():
@@ -107,7 +107,6 @@ func create_unit_circle_outline():
 	var mm = MultiMesh.new()
 	mm.mesh = sphere_mesh
 	mm.transform_format = MultiMesh.TRANSFORM_3D
-	mm.use_colors = true
 	mm.instance_count = max(circle_resolution, 12)
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.85, 0.85, 0.9)

@@ -76,7 +76,7 @@ func setup_scene():
 	# Add directional light
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(5, 10, 5)
-	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
+	light.look_at(Vector3.ZERO, Vector3.UP)
 	light.light_energy = 1.0
 	add_child(light)
 

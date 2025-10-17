@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7k4jlmqmvwy5"]
+[gd_scene load_steps=6 format=3 uid="uid://ctq1ibdmbs7oi"]
 
-[ext_resource type="Shader" uid="uid://kw43h3pfb16sh" path="res://commons/resourses/shaders/frosted_glass.gdshader" id="1_qjj20"]
-[ext_resource type="Script" uid="uid://51l23tjd0tcc3" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="2_xp6t4"]
-[ext_resource type="PackedScene" uid="uid://1xkhyo4spw8j7" path="res://algorithms/physicssimulation/softbodies/softmill/RotatingArmWithStand.tscn" id="3_qjj20"]
+[ext_resource type="Shader" uid="uid://cn6haqw16yd0n" path="res://commons/resourses/shaders/frosted_glass.gdshader" id="1_qjj20"]
+[ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="2_xp6t4"]
+[ext_resource type="PackedScene" uid="uid://cflnu0r1frky4" path="res://algorithms/physicssimulation/softbodies/softmill/RotatingArmWithStand.tscn" id="3_qjj20"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njui8"]
 render_priority = 0

@@ -65,13 +65,11 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 
 func _initialize_grids():
 	"""Initialize vertex and pheromone grids"""
-	# PlaneMesh doesn't have x_segments/y_segments, so we'll use reasonable defaults
-	x_segments = 50  # Default grid resolution
-	y_segments = 50  # Default grid resolution
+	x_segments = plane_node.x_segments
+	y_segments = plane_node.y_segments
 	
-	# PlaneMesh doesn't have width/height properties, so we'll use reasonable defaults
-	var plane_width = 20.0  # Default plane width
-	var plane_height = 20.0  # Default plane height
+	var plane_width = plane_node.width
+	var plane_height = plane_node.height
 	var half_width = plane_width / 2.0
 	var half_height = plane_height / 2.0
 	var x_step = plane_width / float(x_segments)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://s24wsc0yl2g8n"]
+[gd_scene load_steps=2 format=3 uid="uid://cbmymihrdf3m5"]
 
-[ext_resource type="Script" uid="uid://ykw7yd3mgqv6j" path="res://algorithms/randomness/RandomWalk128Algorithm.gd" id="1_random_walk"]
+[ext_resource type="Script" uid="uid://bfy6yomyjm4oq" path="res://algorithms/randomness/RandomWalk128Algorithm.gd" id="1_random_walk"]
 
 [node name="RandomWalk128" type="Node3D"]
 script = ExtResource("1_random_walk")

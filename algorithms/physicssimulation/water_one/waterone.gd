@@ -146,7 +146,7 @@ func setup_scene():
 	# Add directional sunlight
 	var sun_light = DirectionalLight3D.new()
 	sun_light.position = Vector3(15, 20, 10)
-	sun_light.look_at_from_position(sun_light.position, Vector3.ZERO, Vector3.UP)
+	sun_light.look_at(Vector3.ZERO, Vector3.UP)
 	sun_light.light_energy = 1.0
 	sun_light.light_color = Color(1.0, 0.95, 0.8)
 	sun_light.shadow_enabled = true

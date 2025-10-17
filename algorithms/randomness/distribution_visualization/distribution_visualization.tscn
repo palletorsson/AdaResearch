@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://i0tjri8ox7kc7"]
+[gd_scene load_steps=2 format=3 uid="uid://dax8k7v6m5nqr"]
 
-[ext_resource type="Script" uid="uid://nf8ndf7f1jad9" path="res://algorithms/randomness/distribution_visualization/DistributionVisualization.gd" id="1_distribution"]
+[ext_resource type="Script" uid="uid://daqgiskonf4go" path="res://algorithms/randomness/distribution_visualization/DistributionVisualization.gd" id="1_distribution"]
 
 [node name="DistributionVisualization" type="Node3D"]
 script = ExtResource("1_distribution")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://j0j320c8slv66"]
+[gd_scene load_steps=3 format=3 uid="uid://co00rs3lmd5lq"]
 
-[ext_resource type="Script" uid="uid://lal1h86sa314u" path="res://algorithms/emergentsystems/boidflocking/boid_manager.gd" id="1_fku5t"]
-[ext_resource type="PackedScene" uid="uid://tgpkpv2q3kswe" path="res://algorithms/emergentsystems/boidflocking/boid.tscn" id="2_wo2ik"]
+[ext_resource type="Script" uid="uid://diwbtarss7vib" path="res://algorithms/emergentsystems/boidflocking/boid_manager.gd" id="1_fku5t"]
+[ext_resource type="PackedScene" uid="uid://bq8fmes5xwbuj" path="res://algorithms/emergentsystems/boidflocking/boid.tscn" id="2_wo2ik"]
 
 [node name="BoidManager" type="Node3D"]
 script = ExtResource("1_fku5t")

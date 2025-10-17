@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://qqwmpjt1buxrk"]
+[gd_scene load_steps=7 format=3 uid="uid://b12x1wmigmlmo"]
 
-[ext_resource type="PackedScene" uid="uid://anc78qb5b5hn2" path="res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn" id="1_0f1eu"]
-[ext_resource type="Script" uid="uid://yufa8dqi95ine" path="res://algorithms/randomness/randomwalk/scenes/place_me.gd" id="1_vt5mq"]
-[ext_resource type="PackedScene" uid="uid://dspfsb0pix2e0" path="res://algorithms/color/grabcolor/shelf.tscn" id="3_a6fw8"]
+[ext_resource type="PackedScene" uid="uid://d28m400o724g5" path="res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn" id="1_0f1eu"]
+[ext_resource type="Script" uid="uid://b11b8g0mx4lvc" path="res://algorithms/randomness/randomwalk/scenes/place_me.gd" id="1_vt5mq"]
+[ext_resource type="PackedScene" uid="uid://bqx8y7j2qk0dw" path="res://algorithms/color/grabcolor/shelf.tscn" id="3_a6fw8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_t7wqy"]
 viewport_path = NodePath("placeMe/SubViewport")

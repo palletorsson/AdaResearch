@@ -335,7 +335,7 @@ func _update_educational_display():
 	
 	var labels = []
 	for i in range(25):
-		var label = analysis_ui.get_node_or_null("Panel/VBoxContainer/edu_label_" + str(i))
+		var label = analysis_ui.get_node("Panel/VBoxContainer/edu_label_" + str(i))
 		if label:
 			labels.append(label)
 	

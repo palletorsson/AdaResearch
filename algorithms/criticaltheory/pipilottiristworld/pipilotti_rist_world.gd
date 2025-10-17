@@ -237,9 +237,9 @@ func create_curved_projection_surface(position: Vector3, size: Vector2, arc_degr
 	
 	return surface
 
-func create_flat_projection_surface(pos: Vector3, size: Vector2, rot: Vector3 = Vector3.ZERO) -> Node3D:
+func create_flat_projection_surface(position: Vector3, size: Vector2, rotation: Vector3 = Vector3.ZERO) -> Node3D:
 	var surface = Node3D.new()
-	surface.position = pos
+	surface.position = position
 	surface.rotation_degrees = rotation
 	
 	var mesh_instance = MeshInstance3D.new()

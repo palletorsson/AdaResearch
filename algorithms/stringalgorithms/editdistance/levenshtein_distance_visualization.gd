@@ -118,7 +118,7 @@ func setup_camera():
 	
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 10, 20)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
 func load_transition_preset(preset: String = ""):
@@ -574,7 +574,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(18):
-		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

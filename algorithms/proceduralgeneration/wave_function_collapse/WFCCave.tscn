@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://nqx8bc6pr86a8"]
+[gd_scene load_steps=2 format=3 uid="uid://dy28aoaaukbvj"]
 
-[ext_resource type="Script" uid="uid://ib6w42e7joqkm" path="res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.gd" id="1_cave"]
+[ext_resource type="Script" uid="uid://cunojfvao4tmk" path="res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.gd" id="1_cave"]
 
 [node name="CaveGenerator" type="Node3D"]
 script = ExtResource("1_cave")

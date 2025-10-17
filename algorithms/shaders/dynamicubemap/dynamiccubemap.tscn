@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://q4xaky7nwdcuz"]
+[gd_scene load_steps=2 format=3 uid="uid://f72jie3j6np5"]
 
-[ext_resource type="Script" uid="uid://1lx2gia2o9qgj" path="res://algorithms/shaders/dynamicubemap/dynamiccubemap.gd" id="1_tkj0x"]
+[ext_resource type="Script" uid="uid://um4d534w5q32" path="res://algorithms/shaders/dynamicubemap/dynamiccubemap.gd" id="1_tkj0x"]
 
 [node name="DynamicCubemapVR" type="Node3D"]
 script = ExtResource("1_tkj0x")

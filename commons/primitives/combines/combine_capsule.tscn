@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://1fbx6fu4x5s6o"]
+[gd_scene load_steps=2 format=3 uid="uid://7fa6b14a5766"]
 
-[ext_resource type="Script" uid="uid://46ndac83ac4yt" path="res://commons/primitives/combines/combine_capsule.gd" id="1_k4psl"]
+[ext_resource type="Script" uid="uid://d30kwvqyk8krc" path="res://commons/primitives/combines/combine_capsule.gd" id="1_k4psl"]
 
 [node name="CombineCapsule" type="Node3D"]
 script = ExtResource("1_k4psl")

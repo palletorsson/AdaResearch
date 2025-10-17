@@ -38,15 +38,13 @@ func _ready():
 
 func _initialize_walk(mi: MeshInstance3D):
 	mesh_instance = mi
-	# PlaneMesh doesn't have x_segments/y_segments properties, so we'll use reasonable defaults
-	x_segments = 20  # Default grid resolution
-	y_segments = 20  # Default grid resolution
+	x_segments = plane_node.x_segments
+	y_segments = plane_node.y_segments
 	
 	# The PrimitiveMeshBuilder creates non-indexed geometry (600 vertices, not 121)
 	# So we need to rebuild the grid ourselves with the correct structure
-	# PlaneMesh doesn't have width/height properties, so we'll use reasonable defaults
-	var plane_width = 20.0  # Default plane width
-	var plane_height = 20.0  # Default plane height
+	var plane_width = plane_node.width
+	var plane_height = plane_node.height
 	
 	vertex_grid.clear()
 	var half_width = plane_width / 2.0

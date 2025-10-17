@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://tx6p7u43xzki2"]
+[gd_scene load_steps=3 format=3 uid="uid://bmf61btg4qs25"]
 
-[ext_resource type="Script" uid="uid://6yrxmjyfx5d66" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_jay5v"]
-[ext_resource type="PackedScene" uid="uid://b0cautginw5j4" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn" id="1_quvqh"]
+[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_jay5v"]
+[ext_resource type="PackedScene" uid="uid://di5kf64lrnfv1" path="res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn" id="1_quvqh"]
 
 [node name="randomNumberBookPageCollection" type="Node3D"]
 script = ExtResource("1_jay5v")

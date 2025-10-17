@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ydkbdwmycxmqb"]
+[gd_scene load_steps=3 format=3 uid="uid://c857ayrif1anv"]
 
-[ext_resource type="PackedScene" uid="uid://mt7yxup4w1zin" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_v7j14"]
-[ext_resource type="Script" uid="uid://mcjb87bhsfict" path="res://algorithms/color/color_scanner/color_scanner.gd" id="2_7w5aw"]
+[ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_v7j14"]
+[ext_resource type="Script" uid="uid://dg7i2o5ryotta" path="res://algorithms/color/color_scanner/color_scanner.gd" id="2_7w5aw"]
 
 [node name="GrabStick2" instance=ExtResource("1_v7j14")]
 

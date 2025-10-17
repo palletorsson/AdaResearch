@@ -355,7 +355,7 @@ func add_refractive_elements(parent):
 func setup_camera():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 6)
-	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
 	
 	# Camera settings
 	camera.fov = 60

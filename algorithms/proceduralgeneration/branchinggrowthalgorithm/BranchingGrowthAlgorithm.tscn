@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://27c32hsj7j1pm"]
+[gd_scene load_steps=2 format=3 uid="uid://c31t0ok5c3i20"]
 
-[ext_resource type="Script" uid="uid://jgxniw9skv3s2" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_t43dj"]
+[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_t43dj"]
 
 [node name="BranchingGrowthAlgorithm" type="Node3D"]
 script = ExtResource("1_t43dj")

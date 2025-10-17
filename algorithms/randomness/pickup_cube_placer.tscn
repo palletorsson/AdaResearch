@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://x3zty25ip2e7i"]
+[gd_scene load_steps=2 format=3 uid="uid://bq8x4m2n5ywar"]
 
-[ext_resource type="Script" uid="uid://wakidijfhu7ed" path="res://algorithms/randomness/PickupCubePlacer.gd" id="1_placer"]
+[ext_resource type="Script" uid="uid://cweejaqmp4kjm" path="res://algorithms/randomness/PickupCubePlacer.gd" id="1_placer"]
 
 [node name="PickupCubePlacer" type="Node3D"]
 script = ExtResource("1_placer")
