@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://f4jr4qpjc07e"]
+[gd_scene load_steps=2 format=3 uid="uid://s4ue64pyl7hqo"]
 
-[ext_resource type="Script" uid="uid://bsnc1bwhtaid7" path="res://algorithms/randomness/trng_vs_prng/TrngVsPrng.gd" id="1"]
+[ext_resource type="Script" uid="uid://c6ll8wz1ypec6" path="res://algorithms/randomness/trng_vs_prng/TrngVsPrng.gd" id="1"]
 
 [node name="TrngVsPrng" type="Node3D"]
 script = ExtResource("1")

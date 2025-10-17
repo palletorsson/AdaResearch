@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1aqu5i1078fv"]
+[gd_scene load_steps=3 format=3 uid="uid://agp8e09kpi034"]
 
-[ext_resource type="Script" uid="uid://rexe0g44r51e" path="res://algorithms/wavefunctions/fouriertransform/FourierTransform.gd" id="1_fourier"]
-[ext_resource type="Script" uid="uid://doupfscgaxgk2" path="res://algorithms/wavefunctions/fouriertransform/SignalGenerator.gd" id="2_signal"]
+[ext_resource type="Script" uid="uid://ff10pudo0m3my" path="res://algorithms/wavefunctions/fouriertransform/FourierTransform.gd" id="1_fourier"]
+[ext_resource type="Script" uid="uid://3ude0fckfxckf" path="res://algorithms/wavefunctions/fouriertransform/SignalGenerator.gd" id="2_signal"]
 
 [node name="FourierTransform" type="Node3D"]
 script = ExtResource("1_fourier")

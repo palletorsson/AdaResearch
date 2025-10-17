@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://csvms7xrkyn3h"]
+[gd_scene load_steps=3 format=3 uid="uid://rdf2oq8ny3vqd"]
 
-[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_0863a"]
-[ext_resource type="PackedScene" uid="uid://dvt40x4owdxog" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile.tscn" id="2_vdena"]
+[ext_resource type="Script" uid="uid://yen46hyu9znu9" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_0863a"]
+[ext_resource type="PackedScene" uid="uid://mwsge8h4hztpt" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile.tscn" id="2_vdena"]
 
 [node name="RandomEdgeProfiles" type="Node3D"]
 script = ExtResource("1_0863a")

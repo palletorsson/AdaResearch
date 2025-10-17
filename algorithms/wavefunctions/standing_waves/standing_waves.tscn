@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfrkjjy43b6co"]
+[gd_scene load_steps=2 format=3 uid="uid://332d78aln7te2"]
 
-[ext_resource type="Script" uid="uid://qfp1laaf8pu5" path="res://algorithms/wavefunctions/standing_waves/StandingWaves.gd" id="1_standing_waves"]
+[ext_resource type="Script" uid="uid://4tg83u90ofgif" path="res://algorithms/wavefunctions/standing_waves/StandingWaves.gd" id="1_standing_waves"]
 
 [node name="StandingWaves" type="Node3D"]
 script = ExtResource("1_standing_waves")

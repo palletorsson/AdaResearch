@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b71t61yx02m4x"]
+[gd_scene load_steps=9 format=3 uid="uid://kyr9l30d90zfl"]
 
-[ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectral"]
-[ext_resource type="Script" uid="uid://cama5hno05cd6" path="res://algorithms/wavefunctions/spectralanalysis/SpectralMeter.gd" id="2_spectral"]
-[ext_resource type="Script" uid="uid://5grnriepkjj5" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="3_display"]
-[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="4_waveform"]
+[ext_resource type="Script" uid="uid://81v6kj76xywb8" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectral"]
+[ext_resource type="Script" uid="uid://msxqhrtrxptlk" path="res://algorithms/wavefunctions/spectralanalysis/SpectralMeter.gd" id="2_spectral"]
+[ext_resource type="Script" uid="uid://aqpff8rosjd0a" path="res://algorithms/wavefunctions/spectralanalysis/SpectralDisplayController.gd" id="3_display"]
+[ext_resource type="Script" uid="uid://0vov6g2u2a883" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="4_waveform"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1"]
 size = Vector3(2, 0.8, 0.1)

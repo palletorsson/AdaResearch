@@ -389,7 +389,7 @@ func add_composite_creature(parent):
 		)
 		
 		# Random rotation to point outward
-		limb.look_at(limb.position * 2, Vector3.UP)
+		limb.look_at_from_position(limb.position, limb.position * 2, Vector3.UP)
 		limb.rotation_degrees.x += 90
 		
 		apply_material(limb, "accent")
@@ -1215,7 +1215,7 @@ func apply_lighting():
 		) * 0.8
 		
 		spot_light.position = light_pos
-		spot_light.look_at(Vector3.ZERO, Vector3.UP)
+		spot_light.look_at_from_position(spot_light.position, Vector3.ZERO, Vector3.UP)
 		
 		add_child(spot_light)
 

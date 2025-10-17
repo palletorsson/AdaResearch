@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxlav2m4nq7r"]
+[gd_scene load_steps=5 format=3 uid="uid://s8e8aho5edkyu"]
 
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_cube_base"]
-[ext_resource type="Script" uid="uid://0x221n27dl4" path="res://commons/scenes/mapobjects/transport_cube.gd" id="2_transport_script"]
+[ext_resource type="PackedScene" uid="uid://odv7oqey8mvbp" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_cube_base"]
+[ext_resource type="Script" uid="uid://7ww8pkgzchies" path="res://commons/scenes/mapobjects/transport_cube.gd" id="2_transport_script"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wide_detection"]
 height = 3.0

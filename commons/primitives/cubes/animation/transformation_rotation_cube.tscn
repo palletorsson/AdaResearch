@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://u6bpfxudkduq"]
+[gd_scene load_steps=3 format=3 uid="uid://zgulgvclkj0ag"]
 
-[ext_resource type="PackedScene" uid="uid://182r446nhgrj" path="res://commons/primitives/cubes/animation/transformation_cube.tscn" id="1_3i0az"]
-[ext_resource type="Script" uid="uid://2ga0rsmpymgc" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="2_4k1bx"]
+[ext_resource type="PackedScene" uid="uid://sm72ttnxof7bp" path="res://commons/primitives/cubes/animation/transformation_cube.tscn" id="1_3i0az"]
+[ext_resource type="Script" uid="uid://jskycfhe93szw" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="2_4k1bx"]
 
 [node name="CubeWithTransformationRotation" instance=ExtResource("1_3i0az")]
 

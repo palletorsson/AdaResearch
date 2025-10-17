@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://6jece6qgp8mt"]
+[gd_scene load_steps=3 format=3 uid="uid://7geu2iidywg7w"]
 
-[ext_resource type="Script" uid="uid://gxgv2fh2wpx7" path="res://commons/primitives/point/point.gd" id="1_cn6s8"]
-[ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_sphere"]
+[ext_resource type="Script" uid="uid://qy23dbx6ulyx2" path="res://commons/primitives/point/point.gd" id="1_cn6s8"]
+[ext_resource type="PackedScene" uid="uid://dsmewwnzelufy" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_sphere"]
 
 [node name="Point" type="Node3D"]
 script = ExtResource("1_cn6s8")

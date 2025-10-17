@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8yak7v6m4nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://1puo6ygqp118i"]
 
-[ext_resource type="Script" uid="uid://dha2w2fg01khj" path="res://algorithms/fractals/koch_curve/KochCurve.gd" id="1_koch"]
+[ext_resource type="Script" uid="uid://z6fsdner0kgfc" path="res://algorithms/fractals/koch_curve/KochCurve.gd" id="1_koch"]
 
 [node name="KochCurve" type="Node3D"]
 script = ExtResource("1_koch")

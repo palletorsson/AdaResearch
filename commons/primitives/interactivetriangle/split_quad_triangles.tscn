@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1cq2b5j0bdw0"]
+[gd_scene load_steps=2 format=3 uid="uid://gae901tvpu8x2"]
 
-[ext_resource type="Script" uid="uid://cr8e1y8myckm6" path="res://commons/primitives/interactivetriangle/SplitQuadTriangles.gd" id="1_4k7j2"]
+[ext_resource type="Script" uid="uid://1b6z593cq9h51" path="res://commons/primitives/interactivetriangle/SplitQuadTriangles.gd" id="1_4k7j2"]
 
 [node name="SplitQuadTriangles" type="Node3D"]
 script = ExtResource("1_4k7j2")

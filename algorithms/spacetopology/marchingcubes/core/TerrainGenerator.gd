@@ -466,4 +466,7 @@ func add_terrain_to_scene(parent_node: Node3D):
 		parent_node.add_child(mesh_instance)
 	
 	for collision_body in collision_bodies:
-		parent_node.add_child(collision_body) 
+		if collision_body.get_parent() == null:
+			parent_node.add_child(collision_body)
+		else:
+			print("TerrainGenerator: Collision body already has a parent, skipping add_child") 

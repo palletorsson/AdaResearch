@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene load_steps=11 format=3 uid="uid://xl1hgz2i5np8i"]
 
-[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
-[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
-[ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
-[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
-[ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
+[ext_resource type="PackedScene" uid="uid://xygjjxhrkbaw4" path="res://commons/scenes/base.tscn" id="1_tp52a"]
+[ext_resource type="PackedScene" uid="uid://k58gw1f5gvr24" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
+[ext_resource type="Script" uid="uid://72e2pn4l8rj1v" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
+[ext_resource type="PackedScene" uid="uid://1iwx05csqf9rt" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
+[ext_resource type="Shader" uid="uid://ik3klxkuuxv3z" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://e720mdke8iva"]
+[gd_scene load_steps=3 format=3 uid="uid://u9mzo1ej9sfp3"]
 
-[ext_resource type="Script" uid="uid://rj16f7m6wdy7" path="res://algorithms/spacetopology/convexhull/ConvexHull.gd" id="1_hull"]
-[ext_resource type="Script" uid="uid://hipxqi4sbma7" path="res://algorithms/spacetopology/convexhull/ConvexHullVisualizer.gd" id="2_visual"]
+[ext_resource type="Script" uid="uid://1idzt5t8xxots" path="res://algorithms/spacetopology/convexhull/ConvexHull.gd" id="1_hull"]
+[ext_resource type="Script" uid="uid://qrfn35vwht1mb" path="res://algorithms/spacetopology/convexhull/ConvexHullVisualizer.gd" id="2_visual"]
 
 [node name="ConvexHull" type="Node3D"]
 script = ExtResource("1_hull")

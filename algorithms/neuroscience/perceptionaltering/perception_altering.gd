@@ -30,7 +30,7 @@ var grid_lines: MeshInstance3D
 var distortion_zones = []
 var player: XROrigin3D
 var original_transform: Transform3D
-var grid_shader_path = "res://shaders/perception_grid_shader.gdshader"
+var grid_shader_path = "res://commons/resourses/shaders/slime.gdshader"
 var env_shader_path = "res://shaders/perception_env_shader.gdshader"
 var world_environment: WorldEnvironment
 var regions = []

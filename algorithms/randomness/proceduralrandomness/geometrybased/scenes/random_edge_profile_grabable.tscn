@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtf4qukpj1j7p"]
+[gd_scene load_steps=3 format=3 uid="uid://plgl3hnnoo6g2"]
 
-[ext_resource type="Script" uid="uid://cnmxv8gstb4og" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_t68sp"]
-[ext_resource type="PackedScene" uid="uid://dvt40x4owdxog" path="res://algorithms/randomness/profile_random.tscn" id="4_jql3c"]
+[ext_resource type="Script" uid="uid://alnb43rxylkau" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_t68sp"]
+[ext_resource type="PackedScene" uid="uid://nns6r6m82qth0" path="res://algorithms/randomness/profile_random.tscn" id="4_jql3c"]
 
 [node name="RandomEdgeProfileGrabable" type="Node3D"]
 script = ExtResource("1_t68sp")

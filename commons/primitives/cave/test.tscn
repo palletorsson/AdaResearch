@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://71u8ar2cjm2e"]
+[gd_scene load_steps=2 format=3 uid="uid://fz58oj9g0t2zn"]
 
-[ext_resource type="Script" uid="uid://gy7sld7ey2ky" path="res://commons/primitives/cave/PlaceWallSpheres.gd" id="1_edo2d"]
+[ext_resource type="Script" uid="uid://8i64wu6t80itb" path="res://commons/primitives/cave/PlaceWallSpheres.gd" id="1_edo2d"]
 
 [node name="CaveSpace" type="Node3D"]
 script = ExtResource("1_edo2d")

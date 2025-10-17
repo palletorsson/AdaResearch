@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://qrvbs6euj6d5"]
+[gd_scene load_steps=2 format=3 uid="uid://bqtd5epo40qa6"]
 
-[ext_resource type="Script" uid="uid://4de24h34hofh" path="res://algorithms/cellularautomata/ca_showcase/percolation_ca.gd" id="1_percolation"]
+[ext_resource type="Script" uid="uid://z1pwpmfnup2h6" path="res://algorithms/cellularautomata/ca_showcase/percolation_ca.gd" id="1_percolation"]
 
 [node name="PercolationCA" type="Node3D"]
 script = ExtResource("1_percolation")

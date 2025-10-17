@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://0m5ya1j4ocol"]
+[gd_scene load_steps=2 format=3 uid="uid://s1sfchh7i32ci"]
 
-[ext_resource type="Script" uid="uid://cq258t6flnsyv" path="res://algorithms/cellularautomata/ca_showcase/avalanche_ca.gd" id="1_avalanche"]
+[ext_resource type="Script" uid="uid://w3c6ce8yyj4bu" path="res://algorithms/cellularautomata/ca_showcase/avalanche_ca.gd" id="1_avalanche"]
 
 [node name="AvalancheCA" type="Node3D"]
 script = ExtResource("1_avalanche")

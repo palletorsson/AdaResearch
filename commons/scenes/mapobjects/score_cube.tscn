@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj2lywaa1dhu0"]
+[gd_scene load_steps=5 format=3 uid="uid://skpd4lww1rqxe"]
 
-[ext_resource type="Script" uid="uid://cyisa22ykjoul" path="res://commons/scenes/mapobjects/ScoreCubeController.gd" id="1_score_script"]
-[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
+[ext_resource type="Script" uid="uid://4ai223u7zmdlb" path="res://commons/scenes/mapobjects/ScoreCubeController.gd" id="1_score_script"]
+[ext_resource type="Shader" uid="uid://6uqdqb9yc98lc" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_score"]
 render_priority = 0

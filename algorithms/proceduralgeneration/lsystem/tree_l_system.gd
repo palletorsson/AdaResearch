@@ -112,7 +112,7 @@ func create_branch(start: Vector3, end: Vector3, branch_thickness: float):
 
 	# Position and rotate the cylinder correctly
 	var mid_point = (start + end) * 0.5
-	cylinder.global_transform.origin = mid_point
+	cylinder.position = mid_point
 	
 	var direction = (end - start).normalized()
 	var rotation = Quaternion(Vector3(0, 1, 0), direction)

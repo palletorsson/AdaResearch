@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvseuen1vic1a"]
+[gd_scene load_steps=2 format=3 uid="uid://bbnjvx0rx36si"]
 
-[ext_resource type="Script" uid="uid://df7vapqxt4wqh" path="res://algorithms/proceduralgeneration/WFCSculptureGenerator/SimpleWFCSculptureGenerator.gd" id="1_mv2hu"]
+[ext_resource type="Script" uid="uid://vq9oyvyfcyvpm" path="res://algorithms/proceduralgeneration/WFCSculptureGenerator/SimpleWFCSculptureGenerator.gd" id="1_mv2hu"]
 
 [node name="WfcSculptureGenerator" type="Node3D"]
 script = ExtResource("1_mv2hu")

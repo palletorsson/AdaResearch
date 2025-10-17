@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d6e15yueury0"]
+[gd_scene load_steps=2 format=3 uid="uid://2smr0pdw9pnsn"]
 
-[ext_resource type="Script" uid="uid://d4lmc1ps38x7p" path="res://algorithms/wavefunctions/parametric_shapes/ParametricShapes.gd" id="1_parametric"]
+[ext_resource type="Script" uid="uid://ewgdmpmilbv99" path="res://algorithms/wavefunctions/parametric_shapes/ParametricShapes.gd" id="1_parametric"]
 
 [node name="ParametricShapes" type="Node3D"]
 script = ExtResource("1_parametric")

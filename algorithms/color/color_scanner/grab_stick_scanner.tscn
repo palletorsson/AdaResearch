@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm6vc5eep4k6g"]
+[gd_scene load_steps=6 format=3 uid="uid://4014w3d3gucmj"]
 
-[ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_lnc80"]
-[ext_resource type="Script" uid="uid://dg7i2o5ryotta" path="res://algorithms/color/color_scanner/color_scanner.gd" id="2_7h4kv"]
+[ext_resource type="PackedScene" uid="uid://ae6rb7mxmjs50" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_lnc80"]
+[ext_resource type="Script" uid="uid://z5aac1ylncx1o" path="res://algorithms/color/color_scanner/color_scanner.gd" id="2_7h4kv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2"]
 size = Vector3(0.01, 0.1, 0.165)

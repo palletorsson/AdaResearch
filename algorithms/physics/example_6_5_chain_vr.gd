@@ -173,9 +173,9 @@ func create_joint(node_a: Node3D, node_b: Node3D, index: int) -> Generic6DOFJoin
 
 	# Position joint between links
 	if node_a == anchor:
-		joint.global_position = anchor.global_position + Vector3(0, -link_spacing / 2, 0)
+		joint.position = anchor.position + Vector3(0, -link_spacing / 2, 0)
 	else:
-		joint.global_position = node_a.global_position + Vector3(0, -link_spacing / 2, 0)
+		joint.position = node_a.position + Vector3(0, -link_spacing / 2, 0)
 
 	# Configure joint for chain-like behavior
 	# Allow some angular movement but limit it

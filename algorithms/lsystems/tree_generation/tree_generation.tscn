@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl8yak2v7m4pq"]
+[gd_scene load_steps=2 format=3 uid="uid://ns2aiuz3oakz3"]
 
-[ext_resource type="Script" uid="uid://brgu5v6urprrt" path="res://algorithms/lsystems/tree_generation/TreeGeneration.gd" id="1_tree_gen"]
+[ext_resource type="Script" uid="uid://k9puvuivuj9q0" path="res://algorithms/lsystems/tree_generation/TreeGeneration.gd" id="1_tree_gen"]
 
 [node name="TreeGeneration" type="Node3D"]
 script = ExtResource("1_tree_gen")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwy8w014b5aij"]
+[gd_scene load_steps=2 format=3 uid="uid://7diy0dpuio2my"]
 
-[ext_resource type="Script" uid="uid://ceygok8tdwc3v" path="res://algorithms/randomness/noise/scatter/instancingscatter.gd" id="1_y9k8m"]
+[ext_resource type="Script" uid="uid://f15l5kg8jxa1w" path="res://algorithms/randomness/noise/scatter/instancingscatter.gd" id="1_y9k8m"]
 
 [node name="InstancingScatterVR" type="Node3D"]
 script = ExtResource("1_y9k8m")

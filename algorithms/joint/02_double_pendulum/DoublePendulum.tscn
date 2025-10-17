@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj21y5ljrahgp"]
+[gd_scene load_steps=2 format=3 uid="uid://10jjdbkj7mnck"]
 
-[ext_resource type="Script" uid="uid://bvq3dgcwqruwg" path="res://algorithms/joint/02_double_pendulum/DoublePendulum.gd" id="1_g0n5f"]
+[ext_resource type="Script" uid="uid://ixgt547p1ecou" path="res://algorithms/joint/02_double_pendulum/DoublePendulum.gd" id="1_g0n5f"]
 
 [node name="DoublePendulum" type="Node3D"]
 script = ExtResource("1_g0n5f")

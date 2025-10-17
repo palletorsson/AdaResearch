@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxv6y1ps86btu"]
+[gd_scene load_steps=4 format=3 uid="uid://nqrx3dy4rhjcw"]
 
-[ext_resource type="Script" uid="uid://b0xd0iei4uxuj" path="res://algorithms/graphtheory/graphspace3d/graphspace3d.gd" id="1_8m3vg"]
-[ext_resource type="PackedScene" uid="uid://pukdnpvjavwf" path="res://algorithms/graphtheory/graphspace/room.tscn" id="2_1l5xr"]
-[ext_resource type="PackedScene" uid="uid://tluyu160ehv2" path="res://algorithms/graphtheory/graphspace/portal.tscn" id="3_ats4d"]
+[ext_resource type="Script" uid="uid://1i4lzuhxrnn3l" path="res://algorithms/graphtheory/graphspace3d/graphspace3d.gd" id="1_8m3vg"]
+[ext_resource type="PackedScene" uid="uid://zfkzoe5fbtanr" path="res://algorithms/graphtheory/graphspace/room.tscn" id="2_1l5xr"]
+[ext_resource type="PackedScene" uid="uid://qdbgeuhok84h5" path="res://algorithms/graphtheory/graphspace/portal.tscn" id="3_ats4d"]
 
 [node name="GraphSpace3D" type="Node3D"]
 script = ExtResource("1_8m3vg")

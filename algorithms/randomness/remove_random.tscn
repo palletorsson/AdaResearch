@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8k7iaxm4n2p5"]
+[gd_scene load_steps=2 format=3 uid="uid://cvpnpa3rl9yf9"]
 
-[ext_resource type="Script" uid="uid://ctl6tdrey88ge" path="res://algorithms/randomness/RemoveRandom.gd" id="1_remover"]
+[ext_resource type="Script" uid="uid://cmez0mndwgrpv" path="res://algorithms/randomness/RemoveRandom.gd" id="1_remover"]
 
 [node name="RandomRemovalAlgorithm" type="Node3D"]
 script = ExtResource("1_remover")

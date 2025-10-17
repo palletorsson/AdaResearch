@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8h3m5rkdpq7w"]
+[gd_scene load_steps=3 format=3 uid="uid://ufjolrwzdug74"]
 
 [ext_resource type="Script" path="res://algorithms/fractals/mengersponge/menger_sponge.gd" id="1_menger"]
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube"]
+[ext_resource type="PackedScene" uid="uid://bol8azezh8gyl" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube"]
 
 [node name="MengerSponge" type="Node3D"]
 script = ExtResource("1_menger")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://boqkp7nhe2raj"]
+[gd_scene load_steps=2 format=3 uid="uid://xx2k8j5jhee3l"]
 
-[ext_resource type="Script" uid="uid://bncbo1yypfgd0" path="res://algorithms/computationalgeometry/convexhull/convex_hull_3d.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ojzh5br6iqybs" path="res://algorithms/computationalgeometry/convexhull/convex_hull_3d.gd" id="1_script"]
 
 [node name="ConvexHull3D" type="Node3D"]
 script = ExtResource("1_script")

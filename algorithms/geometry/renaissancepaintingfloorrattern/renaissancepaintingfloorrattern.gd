@@ -258,8 +258,9 @@ func create_light_brown_material() -> StandardMaterial3D:
 	# material.specular = 0.4  # Godot 3.x parameter not available in Godot 4
 	
 	material.rim_enabled = true
-	material.rim_strength = 0.15
-	material.rim_color = Color(0.5, 0.4, 0.3, 1.0)
+	# rim_strength and rim_color parameters removed - not available in Godot 4
+	# material.rim_strength = 0.15
+	# material.rim_color = Color(0.5, 0.4, 0.3, 1.0)
 	
 	return material
 
@@ -304,8 +305,8 @@ func create_ornate_border_material() -> StandardMaterial3D:
 	
 	# Add golden highlights
 	material.rim_enabled = true
-	material.rim_strength = 0.4
-	material.rim_color = Color(0.8, 0.7, 0.5, 1.0)
+	# material.rim_strength = 0.4  # Godot 3.x parameter not available in Godot 4
+	# material.rim_color = Color(0.8, 0.7, 0.5, 1.0)  # Godot 3.x parameter not available in Godot 4
 	
 	# Slight metallic sheen
 	material.clearcoat_enabled = true

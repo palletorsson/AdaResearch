@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm5n8q3p2r7k4"]
+[gd_scene load_steps=3 format=3 uid="uid://90giut2ea2j4k"]
 
 [ext_resource type="Script" path="res://algorithms/wfc/room_corridor_tileset.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://c5y2q8v7n3x1p" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://afpmtbmyih8am" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
 
 [node name="RoomCorridorTest" type="Node3D"]
 script = ExtResource("1")

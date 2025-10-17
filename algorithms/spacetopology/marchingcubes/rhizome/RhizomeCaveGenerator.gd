@@ -314,3 +314,38 @@ func generate_cave_async() -> void:
 	# Emit completion
 	generation_complete.emit()
 	generation_progress.emit(100.0)
+
+func get_cave_info() -> Dictionary:
+	"""Return cave generation statistics"""
+	var mesh_instances = 0
+	var collision_bodies = 0
+	var total_vertices = 0
+	var total_triangles = 0
+	
+	# Count mesh instances, vertices, and triangles
+	for child in get_children():
+		if child is MeshInstance3D:
+			mesh_instances += 1
+			if child.mesh and child.mesh.get_surface_count() > 0:
+				var vertex_array = child.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+				var index_array = child.mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX]
+				total_vertices += vertex_array.size()
+				if index_array.size() > 0:
+					total_triangles += index_array.size() / 3
+				else:
+					total_triangles += vertex_array.size() / 3
+		elif child is StaticBody3D:
+			collision_bodies += 1
+	
+	return {
+		"mesh_instances": mesh_instances,
+		"collision_bodies": collision_bodies,
+		"total_vertices": total_vertices,
+		"total_triangles": total_triangles,
+		"voxel_chunks": 1,  # Placeholder - would need actual chunk count
+		"growth_nodes": 0,  # Placeholder - would need actual growth node count
+		"chambers": 1,  # Placeholder - would need actual chamber count
+		"chunk_size": chunk_size,
+		"voxel_scale": voxel_scale,
+		"threshold": threshold
+	}

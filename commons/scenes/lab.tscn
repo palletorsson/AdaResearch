@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=11 format=3 uid="uid://h327wedrdg89p"]
 
-[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
-[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="2_1qoim"]
-[ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="2_labgrid"]
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="3_cube"]
-[ext_resource type="Script" uid="uid://cx7oruy7bo3pt" path="res://commons/scenes/LabGridScene.gd" id="4_labscene"]
-[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="5_6e2p8"]
-[ext_resource type="Script" uid="uid://gx7u0v8c5iur" path="res://tests/audio_test.gd" id="5_f6pg2"]
+[ext_resource type="PackedScene" uid="uid://pv7rczzaxy9yq" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
+[ext_resource type="Shader" uid="uid://y1972vnwxfjea" path="res://commons/resourses/shaders/sky.gdshader" id="2_1qoim"]
+[ext_resource type="Script" uid="uid://08wtczg62mbj4" path="res://commons/scenes/LabGridSystem.gd" id="2_labgrid"]
+[ext_resource type="PackedScene" uid="uid://sot5wkvviwbam" path="res://commons/primitives/cubes/cube_scene.tscn" id="3_cube"]
+[ext_resource type="Script" uid="uid://d8k6o2lsdfv2f" path="res://commons/scenes/LabGridScene.gd" id="4_labscene"]
+[ext_resource type="PackedScene" uid="uid://30o2ctslc725g" path="res://commons/scenes/reset_area.tscn" id="5_6e2p8"]
+[ext_resource type="Script" uid="uid://9qo3j1b1f8bf2" path="res://tests/audio_test.gd" id="5_f6pg2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6e2p8"]
 shader = ExtResource("2_1qoim")

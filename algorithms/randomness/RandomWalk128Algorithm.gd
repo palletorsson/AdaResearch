@@ -123,7 +123,7 @@ func start_walk():
 	
 	is_running = true
 	current_step = 0
-	walker_position = Vector2i(GRID_SIZE / 2, GRID_SIZE / 2)  # Center
+	walker_position = Vector2i(GRID_SIZE / 2.0, GRID_SIZE / 2.0)  # Center
 	_update_walker_position()
 	
 	step_timer.start()

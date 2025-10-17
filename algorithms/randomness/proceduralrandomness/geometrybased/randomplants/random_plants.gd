@@ -561,7 +561,7 @@ func setup_environment():
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, 5, 10)
-	camera.look_at(Vector3(0, 0, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	add_child(camera)
 	
 	# Create directional light for sun

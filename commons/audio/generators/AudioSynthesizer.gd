@@ -149,11 +149,11 @@ static func _generate_pickup_sound(data: PackedFloat32Array, sample_count: int):
 
 static func _generate_teleport_drone(data: PackedFloat32Array, sample_count: int):
 	# Electrostatic drone with modulation - harsh sawtooth with noise
-	var duration = float(sample_count) / SAMPLE_RATE
+	var _duration = float(sample_count) / SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Base frequency with slow modulation
 		var base_freq = 220.0
@@ -170,12 +170,12 @@ static func _generate_teleport_drone(data: PackedFloat32Array, sample_count: int
 		
 		# Smooth envelope: fade in -> stay -> fade out -> silence
 		var envelope = 0.0
-		if progress < 0.05:  # Quick fade in first 5%
-			envelope = progress / 0.05
-		elif progress < 0.9:  # Stay steady for most of the time
+		if _progress < 0.05:  # Quick fade in first 5%
+			envelope = _progress / 0.05
+		elif _progress < 0.9:  # Stay steady for most of the time
 			envelope = 1.0
-		elif progress < 0.98:  # Quick fade out
-			envelope = (0.98 - progress) / 0.08
+		elif _progress < 0.98:  # Quick fade out
+			envelope = (0.98 - _progress) / 0.08
 		else:  # Silent for last 2%
 			envelope = 0.0
 		
@@ -204,11 +204,11 @@ static func _generate_bass_pulse(data: PackedFloat32Array, sample_count: int):
 
 static func _generate_ghost_drone(data: PackedFloat32Array, sample_count: int):
 	# Ghostly atmospheric drone - designed for seamless looping
-	var duration = float(sample_count) / SAMPLE_RATE
+	var _duration = float(sample_count) / SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = float(i) / sample_count
+		var _progress = float(i) / sample_count
 		
 		# Multiple frequency layers
 		var freq1 = 110.0
@@ -216,7 +216,7 @@ static func _generate_ghost_drone(data: PackedFloat32Array, sample_count: int):
 		var freq3 = 220.0  # Octave
 		
 		# Slow amplitude modulation that completes full cycles
-		var mod_freq = 2.0 / duration  # 2 complete modulation cycles per loop
+		var mod_freq = 2.0 / _duration  # 2 complete modulation cycles per loop
 		var mod = sin(2.0 * PI * mod_freq * t) * 0.3 + 0.7
 		
 		# Layered sine waves
@@ -1068,7 +1068,8 @@ static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_coun
 		var t = float(i) / SAMPLE_RATE
 		
 		# J Dilla-style swing
-		var beat_time = fmod(t / beat_duration, 1.0)
+
+		var _beat_time = fmod(t / beat_duration, 1.0)
 		var swing_offset = 0.0
 		if int(t / beat_duration) % 2 == 1:  # Swing on off-beats
 			swing_offset = 0.1
@@ -1082,7 +1083,7 @@ static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_coun
 		
 		# Sample chop simulation
 		var chop_rate = 16.0  # 16th note chops
-		var chop_index = int((t + swing_offset) * chop_rate) % 32
+		var _chop_index = int((t + swing_offset) * chop_rate) % 32
 		var chop_progress = fmod((t + swing_offset) * chop_rate, 1.0)
 		
 		# Multi-layered samples

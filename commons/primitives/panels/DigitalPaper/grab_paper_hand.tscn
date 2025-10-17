@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpk873ki1ypt6"]
+[gd_scene load_steps=11 format=3 uid="uid://48h68ui406g1w"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_ouhpl"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_7ot0p"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_n47vr"]
-[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="4_1xlp2"]
-[ext_resource type="Animation" uid="uid://ca21ej1p3g2yt" path="res://addons/godot-xr-tools/hands/animations/right/Pinch Tight.res" id="5_yxvhi"]
-[ext_resource type="Script" uid="uid://dnbxhbldklmo7" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_ymcao"]
+[ext_resource type="PackedScene" uid="uid://ddip2nu6a3wt2" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_ouhpl"]
+[ext_resource type="Script" uid="uid://i4rh791jmiu62" path="res://commons/primitives/cubes/grab_cube.gd" id="2_7ot0p"]
+[ext_resource type="PackedScene" uid="uid://ivdmx4c9p5rbp" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_n47vr"]
+[ext_resource type="PackedScene" uid="uid://rojoctzd584g7" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="4_1xlp2"]
+[ext_resource type="Animation" uid="uid://i1qngjqvn0z7u" path="res://addons/godot-xr-tools/hands/animations/right/Pinch Tight.res" id="5_yxvhi"]
+[ext_resource type="Script" uid="uid://gnxzkqaz32318" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_ymcao"]
 
 [sub_resource type="BoxShape3D" id="7"]
 margin = 0.01

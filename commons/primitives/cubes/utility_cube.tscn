@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfqiewrmiswh5"]
+[gd_scene load_steps=4 format=3 uid="uid://lq9b9l52dq1su"]
 
-[ext_resource type="PackedScene" uid="uid://c5n30rf1hhdrl" path="res://commons/scenes/mapobjects/teleport_cube.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://btucn8cjls542" path="res://commons/primitives/cubes/UtilityCubeController.gd" id="2_utility"]
+[ext_resource type="PackedScene" uid="uid://a1cuaehykcd00" path="res://commons/scenes/mapobjects/teleport_cube.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://bzkolwxrovyg3" path="res://commons/primitives/cubes/UtilityCubeController.gd" id="2_utility"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
 size = Vector3(2, 2, 2)

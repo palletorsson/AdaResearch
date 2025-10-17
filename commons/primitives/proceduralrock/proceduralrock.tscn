@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8xp4vw2jkn5m"]
+[gd_scene load_steps=2 format=3 uid="uid://75h8wowukvlu4"]
 
-[ext_resource type="Script" uid="uid://doxw66lseffs4" path="res://commons/primitives/proceduralrock/proceduralrock.gd" id="1_proceduralrock"]
+[ext_resource type="Script" uid="uid://48qb4nkgzyd17" path="res://commons/primitives/proceduralrock/proceduralrock.gd" id="1_proceduralrock"]
 
 [node name="ProceduralRock" type="MeshInstance3D"]
 script = ExtResource("1_proceduralrock")

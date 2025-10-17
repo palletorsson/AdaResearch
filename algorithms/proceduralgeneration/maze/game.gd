@@ -51,6 +51,8 @@ func create_agents():
 		add_child(agents_container)
 	
 	var red_agent = agent_scene.instantiate()
+	if not red_agent:
+		return
 	red_agent.agent_color = Color.RED
 	red_agent.speed = 2.5
 	red_agent.scale = Vector3.ONE * 0.75

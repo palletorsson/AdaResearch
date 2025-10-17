@@ -97,7 +97,7 @@ class TerrainChunk:
 		collision_body.name = "Chunk_Collision_%d_%d_%d" % [coord.x, coord.y, coord.z]
 	
 	func set_up(material: Material, generate_collision: bool):
-		if material:
+		if material and mesh_instance.get_surface_override_material_count() > 0:
 			mesh_instance.set_surface_override_material(0, material)
 		
 		collision_body.visible = false  # Collision doesn't need to be visible

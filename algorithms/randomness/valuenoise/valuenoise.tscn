@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr7j5mra2027q"]
+[gd_scene load_steps=3 format=3 uid="uid://hfeou1bxlygoq"]
 
-[ext_resource type="Script" uid="uid://cnm4mv160os1r" path="res://algorithms/randomness/valuenoise/ValueNoise.gd" id="1_value"]
-[ext_resource type="Script" uid="uid://sb27y88b7klf" path="res://algorithms/randomness/valuenoise/ValueNoiseVisualizer.gd" id="2_value_visual"]
+[ext_resource type="Script" uid="uid://yxs4ojdhz964g" path="res://algorithms/randomness/valuenoise/ValueNoise.gd" id="1_value"]
+[ext_resource type="Script" uid="uid://vjihduzptfisv" path="res://algorithms/randomness/valuenoise/ValueNoiseVisualizer.gd" id="2_value_visual"]
 
 [node name="ValueNoise" type="Node3D"]
 script = ExtResource("1_value")

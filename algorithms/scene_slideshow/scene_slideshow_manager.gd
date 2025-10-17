@@ -68,19 +68,19 @@ func _index_scenes(root_path: String) -> void:
 			continue
 
 		d.list_dir_begin()
-		var name: String = d.get_next()
-		while name != "":
-			if name.begins_with("."):
-				name = d.get_next()
+		var _name: String = d.get_next()
+		while _name != "":
+			if _name.begins_with("."):
+				_name = d.get_next()
 				continue
 
-			var full: String = base.path_join(name)
+			var full: String = base.path_join(_name)
 			if d.current_is_dir():
 				pending.push_back(full)
 			else:
-				if name.ends_with(".tscn"):
+				if _name.ends_with(".tscn"):
 					found_paths.append(full)
-			name = d.get_next()
+			_name = d.get_next()
 		d.list_dir_end()
 
 	found_paths.sort()
@@ -315,8 +315,8 @@ func _write_filenames_list(filenames: Array[String]) -> void:
 	if wf == null:
 		push_error("ERROR: Could not open for write: " + save_path + " (" + str(FileAccess.get_open_error()) + ")")
 		return
-	for name in filenames:
-		wf.store_line(name)
+	for _name in filenames:
+		wf.store_line(_name)
 	wf.close()
 
 # ---------------------------

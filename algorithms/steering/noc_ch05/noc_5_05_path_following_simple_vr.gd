@@ -102,6 +102,7 @@ func _update_path_mesh() -> void:
 	var mesh := ImmediateMesh.new()
 	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	var points := _path.points
+	var has_vertices = false
 	for i in range(points.size() - 1):
 		var a := points[i]
 		var b := points[i + 1]
@@ -113,8 +114,13 @@ func _update_path_mesh() -> void:
 		mesh.surface_add_vertex(b + normal)
 		mesh.surface_add_vertex(b - normal)
 		mesh.surface_add_vertex(a - normal)
-	mesh.surface_end()
-	_path_mesh.mesh = mesh
+		has_vertices = true
+	
+	if has_vertices:
+		mesh.surface_end()
+		_path_mesh.mesh = mesh
+	else:
+		_path_mesh.mesh = null
 
 class Vehicle:
 	var root: Node3D

@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://v5hbim07t5xj"]
+[gd_scene load_steps=4 format=3 uid="uid://tcug5qw4yv3dd"]
 
-[ext_resource type="Script" uid="uid://cnmxv8gstb4og" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_vef34"]
-[ext_resource type="PackedScene" uid="uid://0cbythiosykd" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="2_xfila"]
-[ext_resource type="PackedScene" uid="uid://cm7sauucsn1es" path="res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn" id="3_yltt8"]
+[ext_resource type="Script" uid="uid://2r5vru5cxsilk" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/random_edge_profile_set_parameters.gd" id="1_vef34"]
+[ext_resource type="PackedScene" uid="uid://oft33u2hpn1tv" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="2_xfila"]
+[ext_resource type="PackedScene" uid="uid://z60iw9tpchljw" path="res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn" id="3_yltt8"]
 
 [node name="CellularAutomataProfileGrabable" type="Node3D"]
 script = ExtResource("1_vef34")

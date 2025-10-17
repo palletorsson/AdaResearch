@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dltj4y522mku4"]
+[gd_scene load_steps=3 format=3 uid="uid://h1im5l2e9ia4s"]
 
-[ext_resource type="Script" uid="uid://db7041ew5uuk6" path="res://commons/interfaces/nail_color_controller.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://dg5hn1rbxo8km" path="res://commons/interfaces/value_mapper_3d.tscn" id="2"]
+[ext_resource type="Script" uid="uid://abet3thg763ks" path="res://commons/interfaces/nail_color_controller.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://36wd94e0fzdmd" path="res://commons/interfaces/value_mapper_3d.tscn" id="2"]
 
 [node name="NailColorController" type="Node3D"]
 script = ExtResource("1")

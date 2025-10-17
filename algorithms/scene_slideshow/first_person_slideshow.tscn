@@ -74,7 +74,7 @@ orientation = 1
 
 [node name="SceneSlideshowManager" type="Node" parent="."]
 script = ExtResource("2")
-starting_slide_index = 190
+starting_slide_index = 570
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)

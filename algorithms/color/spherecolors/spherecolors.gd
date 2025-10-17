@@ -394,7 +394,7 @@ func create_color_plates():
 	
 	# Create individual plates for each face
 	for i in range(0, base_indices.size(), 3):
-		var face_index = i / 3
+		var face_index = i / 3.0
 		if face_index >= face_colors.size():
 			continue
 			

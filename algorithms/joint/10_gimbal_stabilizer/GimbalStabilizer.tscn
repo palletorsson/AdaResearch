@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5tiarfp2ps8n"]
+[gd_scene load_steps=2 format=3 uid="uid://dqe8qo8g1dh97"]
 
-[ext_resource type="Script" uid="uid://df1wsplh2upg3" path="res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.gd" id="1_m5pkt"]
+[ext_resource type="Script" uid="uid://7cdsx80cs9820" path="res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.gd" id="1_m5pkt"]
 
 [node name="GimbalStabilizer" type="Node3D"]
 script = ExtResource("1_m5pkt")

@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnos6465ke2dn"]
+[gd_scene load_steps=12 format=3 uid="uid://2yyzk6zo0edrp"]
 
-[ext_resource type="Script" uid="uid://l0s4bo38g142" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation_main.gd" id="1_ln13f"]
-[ext_resource type="Script" uid="uid://cce141t85n5yh" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="2_pcela"]
+[ext_resource type="Script" uid="uid://btvbw44geouss" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation_main.gd" id="1_ln13f"]
+[ext_resource type="Script" uid="uid://ova6nq6xccr48" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="2_pcela"]
 [ext_resource type="Material" path="res://assets/wahooney.itch.io/blue_grid.tres" id="3_nwjdb"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_ah7ke"]
-[ext_resource type="Script" uid="uid://dpxstp6yan68y" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_object.gd" id="5_e68in"]
+[ext_resource type="PackedScene" uid="uid://qhk3bemqbhbe6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_ah7ke"]
+[ext_resource type="Script" uid="uid://f2utf4dcothdg" path="res://algorithms/physicssimulation/magneticsimulation/magnetic_object.gd" id="5_e68in"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r4t3r"]
 margin = 0.01

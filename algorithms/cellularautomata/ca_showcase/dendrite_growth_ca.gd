@@ -11,7 +11,7 @@ func initialize_grid():
 	grid = create_3d_grid()
 	
 	# Central growth point
-	var center = Vector3i(GRID_SIZE/2, GRID_SIZE/2, GRID_SIZE/2)
+	var center = Vector3i(GRID_SIZE/2.0, GRID_SIZE/2.0, GRID_SIZE/2.0)
 	growth_centers.append(center)
 	grid[center.x][center.y][center.z] = 2  # Dendrite state
 

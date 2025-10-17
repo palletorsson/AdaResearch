@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw7x4mrg1j8no"]
+[gd_scene load_steps=3 format=3 uid="uid://qu8f73g0mejr1"]
 
-[ext_resource type="Script" uid="uid://c0x71peko1r5p" path="res://commons/grid/GridSystem.gd" id="1_h4x8j"]
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_d18ry"]
+[ext_resource type="Script" uid="uid://zv5sxduixs5ev" path="res://commons/grid/GridSystem.gd" id="1_h4x8j"]
+[ext_resource type="PackedScene" uid="uid://yvf72fzzbako8" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_d18ry"]
 
 [node name="GridSystem" type="Node3D"]
 script = ExtResource("1_h4x8j")

@@ -182,7 +182,7 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		branch_instance.position = position
 		
 		# Rotate to point in the direction
-		branch_instance.look_at(position + direction, Vector3.UP)
+		branch_instance.look_at_from_position(branch_instance.position, position + direction, Vector3.UP)
 		
 		branch.add_child(branch_instance)
 		

@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b13yw0rx6x7uv"]
+[gd_scene load_steps=6 format=3 uid="uid://8tvb250ip2hl2"]
 
-[ext_resource type="Script" uid="uid://bog6us56g5acm" path="res://commons/interfaces/value_mapper_example.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://b7yq3vr8mnqxc" path="res://commons/interfaces/value_mapper_1d.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://c5x2hp8vwn7yb" path="res://commons/interfaces/value_mapper_2d.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://dg5hn1rbxo8km" path="res://commons/interfaces/value_mapper_3d.tscn" id="4"]
+[ext_resource type="Script" uid="uid://t72snhic0oicy" path="res://commons/interfaces/value_mapper_example.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bi0gq4zj5wwnp" path="res://commons/interfaces/value_mapper_1d.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c3cv529pyrcok" path="res://commons/interfaces/value_mapper_2d.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://poksq7r2hnrr7" path="res://commons/interfaces/value_mapper_3d.tscn" id="4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_demo"]
 radius = 0.15

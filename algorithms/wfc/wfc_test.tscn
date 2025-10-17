@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ri2adkmy34rn"]
+[gd_scene load_steps=3 format=3 uid="uid://vmz4yugrjn5o2"]
 
-[ext_resource type="Script" uid="uid://c1mv73suf4f88" path="res://algorithms/wfc/wfc_test.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://c5y2q8v7n3x1p" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
+[ext_resource type="Script" uid="uid://pxpx2y2gsfqrb" path="res://algorithms/wfc/wfc_test.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://fdvf213bc9xd8" path="res://algorithms/wfc/wfc_grid_3d.tscn" id="2"]
 
 [node name="WFCTest" type="Node3D"]
 script = ExtResource("1")

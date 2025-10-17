@@ -136,7 +136,7 @@ func visualize_true_random():
 		
 		connection.height = 2.0
 		connection.position = source_sphere.position * 0.5
-		connection.look_at(Vector3.ZERO, Vector3.UP)
+		connection.look_at_from_position(connection.position, Vector3.ZERO, Vector3.UP)
 		connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		var conn_material = StandardMaterial3D.new()

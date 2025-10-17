@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://hpxufsmhvnq0"]
+[gd_scene load_steps=3 format=3 uid="uid://aqg6a3qqwukjt"]
 
-[ext_resource type="PackedScene" uid="uid://ytsxet2k47lj" path="res://addons/godot-xr-tools/user_settings/user_settings_ui.tscn" id="1"]
-[ext_resource type="Script" uid="uid://b74y3nd5k458b" path="res://commons/scenes/2din3dui/settings_ui_content.gd" id="1_4ef25"]
+[ext_resource type="PackedScene" uid="uid://absei64yjvhd4" path="res://addons/godot-xr-tools/user_settings/user_settings_ui.tscn" id="1"]
+[ext_resource type="Script" uid="uid://4tk4z4tpki53h" path="res://commons/scenes/2din3dui/settings_ui_content.gd" id="1_4ef25"]
 
 [node name="SettingsUIContent" type="VBoxContainer"]
 offset_right = 250.0

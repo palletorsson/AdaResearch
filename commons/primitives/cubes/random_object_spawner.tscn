@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dijypoo8gd232"]
+[gd_scene load_steps=3 format=3 uid="uid://e76rqbrxurffz"]
 
-[ext_resource type="Script" uid="uid://b58tx1qldwsis" path="res://algorithms/randomness/random_object_spawner.gd" id="1_cn00w"]
-[ext_resource type="PackedScene" uid="uid://c36f75dc0chgs" path="res://commons/primitives/cubes/grab_cube_wood.tscn" id="2_crtyv"]
+[ext_resource type="Script" uid="uid://w8nsx5slfmk9o" path="res://algorithms/randomness/random_object_spawner.gd" id="1_cn00w"]
+[ext_resource type="PackedScene" uid="uid://bh1rg4gwuiyer" path="res://commons/primitives/cubes/grab_cube_wood.tscn" id="2_crtyv"]
 
 [node name="RandomObjectSpawner" type="Node3D"]
 script = ExtResource("1_cn00w")

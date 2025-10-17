@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn5y2kv8mq1pa"]
+[gd_scene load_steps=2 format=3 uid="uid://dvkrcx6kzhw1h"]
 
-[ext_resource type="Script" uid="uid://dehg3qwof8ny3" path="res://algorithms/fractals/cantorset/cantor_set.gd" id="1_cantor"]
+[ext_resource type="Script" uid="uid://0oig5iptc6fnd" path="res://algorithms/fractals/cantorset/cantor_set.gd" id="1_cantor"]
 
 [node name="CantorSet" type="Node3D"]
 script = ExtResource("1_cantor")

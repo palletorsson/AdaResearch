@@ -22,7 +22,7 @@ var entropy: float = 0.4  # Controls randomness/noise
 var queer_factor: float = 0.7  # Controls harmonic shifting
 
 # Create a detection sound (when player enters platform)
-static func create_detection_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_detection_sound(_entropy: float = 0.4, _queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -46,11 +46,11 @@ static func create_detection_sound(entropy: float = 0.4, queer_factor: float = 0
 		# Create a chord with detuned harmonics
 		var sample = 0.0
 		sample += 0.5 * sin(2.0 * PI * base_freq * t)
-		sample += 0.3 * sin(2.0 * PI * (base_freq * 1.5 + sin(phase * 4.0) * queer_factor * 10.0) * t)
+		sample += 0.3 * sin(2.0 * PI * (base_freq * 1.5 + sin(phase * 4.0) * _queer_factor * 10.0) * t)
 		sample += 0.2 * sin(2.0 * PI * (base_freq * 2.02) * t)  # Slightly detuned octave
 		
 		# Add noise that decreases over time
-		sample += randf_range(-0.3, 0.3) * entropy * (1.0 - phase)
+		sample += randf_range(-0.3, 0.3) * _entropy * (1.0 - phase)
 		
 		# Apply envelope
 		var envelope = sin(phase * PI) if phase < 1.0 else 0.0
@@ -137,7 +137,7 @@ static func create_lift_loop_sound(entropy: float = 0.4, queer_factor: float = 0
 	# Create the steady hum of a platform in motion
 	for i in range(sample_count):
 		var t = float(i) / MIX_RATE
-		var cycle = t / loop_duration
+		var _cycle = t / loop_duration
 		
 		# Create a consistent mechanical hum
 		var sample = 0.0

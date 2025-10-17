@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://eml0i34aix88"]
+[gd_scene load_steps=3 format=3 uid="uid://n4eecnevwmude"]
 
-[ext_resource type="Script" uid="uid://bsu2wg5sy4fls" path="res://algorithms/misc/tartan_boxes_3d.gd" id="1_script"]
-[ext_resource type="Shader" uid="uid://c3xb3tgshg1vp" path="res://commons/resourses/shaders/tartanshader.gdshader" id="2_shader"]
+[ext_resource type="Script" uid="uid://8yt2drl7j0i1a" path="res://algorithms/misc/tartan_boxes_3d.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://dvhxsxm8md4c7" path="res://commons/resourses/shaders/tartanshader.gdshader" id="2_shader"]
 
 [node name="TartanBoxes3D" type="Node3D"]
 script = ExtResource("1_script")

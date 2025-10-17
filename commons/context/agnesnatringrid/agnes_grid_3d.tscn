@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckua8mtup1ybl"]
+[gd_scene load_steps=7 format=3 uid="uid://879hqn2i4ps0k"]
 
-[ext_resource type="PackedScene" uid="uid://srq7u85s1v40" path="res://commons/context/agnesnatringrid/agnes_grid.tscn" id="2_yc42q"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="3_vlr6t"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="5_q1qrt"]
+[ext_resource type="PackedScene" uid="uid://2vbgegj68udoa" path="res://commons/context/agnesnatringrid/agnes_grid.tscn" id="2_yc42q"]
+[ext_resource type="Script" uid="uid://jmao73tnft77p" path="res://commons/primitives/cubes/grab_cube.gd" id="3_vlr6t"]
+[ext_resource type="PackedScene" uid="uid://qkh9ocuh0f28o" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="5_q1qrt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ysrvx"]
 margin = 0.01

@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://kpfhe8ow58om"]
+[gd_scene load_steps=14 format=3 uid="uid://vxmpvzib4atzx"]
 
-[ext_resource type="Shader" uid="uid://c1t2n5kkfm7l3" path="res://algorithms/patterngeneration/gridscheckers/checkers.gdshader" id="1_fn5mw"]
-[ext_resource type="Shader" uid="uid://ba41jfva80kxe" path="res://algorithms/patterngeneration/gridscheckers/linegrid.gdshader" id="2_74bsi"]
-[ext_resource type="Shader" uid="uid://ca0b28fh2swso" path="res://algorithms/patterngeneration/gridscheckers/diagonalstripes.gdshader" id="3_7afui"]
-[ext_resource type="Shader" uid="uid://c08ke0r6841lq" path="res://algorithms/patterngeneration/gridscheckers/rotatedcheckers.gdshader" id="4_wiot5"]
+[ext_resource type="Shader" uid="uid://prqo7bw2duoz2" path="res://algorithms/patterngeneration/gridscheckers/checkers.gdshader" id="1_fn5mw"]
+[ext_resource type="Shader" uid="uid://idl648lyayhn4" path="res://algorithms/patterngeneration/gridscheckers/linegrid.gdshader" id="2_74bsi"]
+[ext_resource type="Shader" uid="uid://wdt0em84xr20s" path="res://algorithms/patterngeneration/gridscheckers/diagonalstripes.gdshader" id="3_7afui"]
+[ext_resource type="Shader" uid="uid://3kh09norxg3je" path="res://algorithms/patterngeneration/gridscheckers/rotatedcheckers.gdshader" id="4_wiot5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(10, 0.1, 10)

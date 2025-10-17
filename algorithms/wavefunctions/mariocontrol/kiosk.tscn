@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dla5jk75e7x1f"]
+[gd_scene load_steps=12 format=3 uid="uid://b121fd0a88zui"]
 
-[ext_resource type="Script" uid="uid://b7fjcl5fs0cn2" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_tb2l3"]
-[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_8dssk"]
-[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_1h47w"]
-[ext_resource type="PackedScene" uid="uid://bwhjh7wlhpe5" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_dd5gu"]
-[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_f6bvu"]
-[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_36ypl"]
-[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_n1cvh"]
+[ext_resource type="Script" uid="uid://88u1hcsxmeh2u" path="res://commons/scenes/2din3dui/settings_ui.gd" id="1_tb2l3"]
+[ext_resource type="Material" uid="uid://xix13a17xyz7x" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_8dssk"]
+[ext_resource type="PackedScene" uid="uid://46908pzrqi4l7" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_1h47w"]
+[ext_resource type="PackedScene" uid="uid://78ditw8tik117" path="res://algorithms/wavefunctions/mariocontrol/simple_mario_slider.tscn" id="4_dd5gu"]
+[ext_resource type="PackedScene" uid="uid://8vfgvelxo6z0f" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_f6bvu"]
+[ext_resource type="Resource" uid="uid://hsy9d7b8bxfkn" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_36ypl"]
+[ext_resource type="Resource" uid="uid://tzzg1wb65fhl2" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_n1cvh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.2, 0.25, 0.3, 1)

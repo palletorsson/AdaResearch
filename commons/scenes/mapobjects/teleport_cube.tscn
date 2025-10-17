@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5n30rf1hhdrl"]
+[gd_scene load_steps=10 format=3 uid="uid://fyo8szpxlkise"]
 
-[ext_resource type="PackedScene" uid="uid://c73bw7ms0xqhu" path="res://commons/primitives/cubes/vr_gadget_cube.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://dwp4rxare265l" path="res://commons/scenes/mapobjects/TeleportController.gd" id="2_teleport"]
+[ext_resource type="PackedScene" uid="uid://bwwxfuiazc9no" path="res://commons/primitives/cubes/vr_gadget_cube.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://qd2f4hj1qn995" path="res://commons/scenes/mapobjects/TeleportController.gd" id="2_teleport"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_portal"]
 direction = Vector3(0, 1, 0)

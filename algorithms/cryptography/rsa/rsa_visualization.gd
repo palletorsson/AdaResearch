@@ -147,7 +147,7 @@ func start_key_generation():
 func generate_keys_complete():
 	"""Generate complete RSA key pair"""
 	# Step 1: Generate two large primes
-	var prime_bit_size = key_size_bits / 2
+	var prime_bit_size = key_size_bits / 2.0
 	p = generate_large_prime(prime_bit_size)
 	q = generate_large_prime(prime_bit_size)
 	
@@ -234,7 +234,7 @@ func is_prime(n: int) -> bool:
 	var d = n - 1
 	var r = 0
 	while d % 2 == 0:
-		d = d / 2
+		d = d / 2.0
 		r += 1
 	
 	# Perform Miller-Rabin test
@@ -275,7 +275,7 @@ func mod_inverse(a: int, m: int) -> int:
 	var x1 = 1
 	
 	while a > 1:
-		var q = a / m
+		var q = a / float(m)
 		var t = m
 		m = a % m
 		a = t
@@ -464,12 +464,12 @@ func step_key_generation():
 	match current_operation_step:
 		0:
 			print("Step 1: Generating prime p...")
-			var prime_bit_size = key_size_bits / 2
+			var prime_bit_size = key_size_bits / 2.0
 			p = generate_large_prime(prime_bit_size)
 			current_operation_step += 1
 		1:
 			print("Step 2: Generating prime q...")
-			var prime_bit_size = key_size_bits / 2
+			var prime_bit_size = key_size_bits / 2.0
 			q = generate_large_prime(prime_bit_size)
 			while q == p:
 				q = generate_large_prime(prime_bit_size)
@@ -656,7 +656,7 @@ func create_arrow_display(from_pos: Vector3, to_pos: Vector3, color: Color) -> M
 	
 	var mid_pos = (from_pos + to_pos) / 2.0
 	mesh_instance.position = mid_pos
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	
 	return mesh_instance
 
@@ -681,7 +681,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(40):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

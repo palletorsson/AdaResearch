@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://4yak7v6m5nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://5kko1xpsucvi2"]
 
-[ext_resource type="Script" uid="uid://dd634qp342kjv" path="res://algorithms/computationalgeometry/distance_fields_sdf/DistanceFieldsSDF.gd" id="1_sdf"]
+[ext_resource type="Script" uid="uid://umghoqchp5wds" path="res://algorithms/computationalgeometry/distance_fields_sdf/DistanceFieldsSDF.gd" id="1_sdf"]
 
 [node name="DistanceFieldsSDF" type="Node3D"]
 script = ExtResource("1_sdf")

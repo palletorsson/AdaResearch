@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqj0rbocrgwyj"]
+[gd_scene load_steps=2 format=3 uid="uid://c7eugzex8quor"]
 
-[ext_resource type="Script" uid="uid://c2tbhqcborovv" path="res://commons/context/XYZcoordinates/pickable_xyz.gd" id="1_7udh7"]
+[ext_resource type="Script" uid="uid://m2206jpq8dkre" path="res://commons/context/XYZcoordinates/pickable_xyz.gd" id="1_7udh7"]
 
 [node name="XYZgadget" type="Node3D"]
 script = ExtResource("1_7udh7")

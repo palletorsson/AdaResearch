@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjqsyf6jwrj43"]
+[gd_scene load_steps=2 format=3 uid="uid://dh9b2v958aubz"]
 
-[ext_resource type="Script" uid="uid://bqt6oed3ygejv" path="res://algorithms/shaders/buffer/buffergeometryparticles.gd" id="1_diqw2"]
+[ext_resource type="Script" uid="uid://n0yva8ulfxta3" path="res://algorithms/shaders/buffer/buffergeometryparticles.gd" id="1_diqw2"]
 
 [node name="WebGLBufferGeometryParticlesVR" type="Node3D"]
 script = ExtResource("1_diqw2")

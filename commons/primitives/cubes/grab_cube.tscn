@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://djkjuy7wct10q"]
+[gd_scene load_steps=8 format=3 uid="uid://z7n0793ld897p"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_xxt38"]
+[ext_resource type="PackedScene" uid="uid://0cnq49xqezul8" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://p04ns8zrbucph" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
+[ext_resource type="Script" uid="uid://ywe8md08pttc0" path="res://commons/primitives/cubes/grab_cube.gd" id="2_xxt38"]
 
 [sub_resource type="StandardMaterial3D" id="10"]
 albedo_color = Color(0.2, 0.2, 0.8, 1)

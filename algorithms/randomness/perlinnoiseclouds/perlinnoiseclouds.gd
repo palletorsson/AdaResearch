@@ -116,8 +116,8 @@ func setup_multimesh_rendering():
 		multimesh_instance = MultiMeshInstance3D.new()
 		multimesh = MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
+		multimesh.use_colors = true  # Enable per-instance colors (must be set before instance_count)
 		multimesh.instance_count = particle_count
-		multimesh.use_colors = true  # Enable per-instance colors
 		
 		# Set the mesh if it's already created
 		if cloud_mesh:
@@ -323,13 +323,15 @@ func update_multimesh():
 		
 		# Set per-instance color for opacity
 		var color = Color(1.0, 1.0, 1.0, particle.opacity)
-		multimesh.set_instance_color(visible_count, color)
+		if multimesh.use_colors:
+			multimesh.set_instance_color(visible_count, color)
 		
 		visible_count += 1
 	
 	# Hide unused instances
 	for i in range(visible_count, particle_count):
-		multimesh.set_instance_color(i, Color.TRANSPARENT)
+		if multimesh.use_colors:
+			multimesh.set_instance_color(i, Color.TRANSPARENT)
 
 func monitor_performance(delta):
 	frame_time_accumulator += delta * 1000.0  # Convert to milliseconds

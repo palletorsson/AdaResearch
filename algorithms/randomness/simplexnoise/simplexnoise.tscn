@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs5bsf63pt2ir"]
+[gd_scene load_steps=3 format=3 uid="uid://w722yjrgdf54r"]
 
-[ext_resource type="Script" uid="uid://bnclybrdahi1h" path="res://algorithms/randomness/simplexnoise/SimplexNoise.gd" id="1_simplex"]
-[ext_resource type="Script" uid="uid://bw2rm3o7e8vne" path="res://algorithms/randomness/simplexnoise/SimplexVisualizer.gd" id="2_simplex_visual"]
+[ext_resource type="Script" uid="uid://bpncu3d6czlf2" path="res://algorithms/randomness/simplexnoise/SimplexNoise.gd" id="1_simplex"]
+[ext_resource type="Script" uid="uid://9pv1n0jnfcu54" path="res://algorithms/randomness/simplexnoise/SimplexVisualizer.gd" id="2_simplex_visual"]
 
 [node name="SimplexNoise" type="Node3D"]
 script = ExtResource("1_simplex")

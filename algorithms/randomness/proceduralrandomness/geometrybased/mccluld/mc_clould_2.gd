@@ -78,19 +78,45 @@ func create_terrain():
 	noise.seed = randi()
 	noise.frequency = 0.05
 	
-	# Generate heightmap from noise
-	var mesh_data_tool = MeshDataTool.new()
-	mesh_data_tool.create_from_surface(terrain_mesh, 0)
+	# Generate heightmap from noise using SurfaceTool
+	var surface_tool = SurfaceTool.new()
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	for i in range(mesh_data_tool.get_vertex_count()):
-		var vertex = mesh_data_tool.get_vertex(i)
-		var noise_value = noise.get_noise_2d(vertex.x, vertex.z) * 5.0
-		vertex.y = noise_value
-		mesh_data_tool.set_vertex(i, vertex)
+	# Create a grid of vertices with noise-based height
+	var grid_size = 50
+	var plane_size = 20.0
+	var step = plane_size / float(grid_size)
 	
-	# Create a new array mesh and add the modified surface
-	var array_mesh = ArrayMesh.new()
-	mesh_data_tool.commit_to_surface(array_mesh)
+	for y in range(grid_size + 1):
+		for x in range(grid_size + 1):
+			var world_x = (x - grid_size / 2.0) * step
+			var world_z = (y - grid_size / 2.0) * step
+			var noise_value = noise.get_noise_2d(world_x, world_z) * 5.0
+			
+			surface_tool.set_normal(Vector3.UP)
+			surface_tool.set_uv(Vector2(x / float(grid_size), y / float(grid_size)))
+			surface_tool.add_vertex(Vector3(world_x, noise_value, world_z))
+	
+	# Add triangles
+	for y in range(grid_size):
+		for x in range(grid_size):
+			var i = y * (grid_size + 1) + x
+			var i1 = i + 1
+			var i2 = i + grid_size + 1
+			var i3 = i2 + 1
+			
+			# First triangle
+			surface_tool.add_index(i)
+			surface_tool.add_index(i2)
+			surface_tool.add_index(i1)
+			
+			# Second triangle
+			surface_tool.add_index(i1)
+			surface_tool.add_index(i2)
+			surface_tool.add_index(i3)
+	
+	surface_tool.generate_normals()
+	var array_mesh = surface_tool.commit()
 	terrain.mesh = array_mesh
 	
 	# Add collision
@@ -161,7 +187,7 @@ func create_spiral_formation():
 		petal.position = Vector3(cos(angle) * 1.2, height, sin(angle) * 1.2)
 		
 		# Orient the petal outward
-		petal.look_at(Vector3(petal.position.x * 2, petal.position.y, petal.position.z * 2), Vector3.UP)
+		petal.look_at_from_position(petal.position, Vector3(petal.position.x * 2, petal.position.y, petal.position.z * 2), Vector3.UP)
 		
 		# Material for petals with varying colors
 		var petal_material = StandardMaterial3D.new()
@@ -550,7 +576,7 @@ func setup_camera_and_lighting():
 	var camera = Camera3D.new()
 	camera.name = "MainCamera"
 	camera.position = Vector3(15, 10, 15)
-	camera.look_at(Vector3(0, 5, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 5, 0), Vector3.UP)
 	
 	# Set up camera properties
 	camera.fov = 60
@@ -561,7 +587,7 @@ func setup_camera_and_lighting():
 	var sun = DirectionalLight3D.new()
 	sun.name = "Sun"
 	sun.position = Vector3(0, 20, 0)
-	sun.look_at(Vector3(5, 0, 5), Vector3.UP)
+	sun.look_at_from_position(sun.position, Vector3(5, 0, 5), Vector3.UP)
 	
 	# Set up sun properties
 	sun.light_color = Color(1.0, 0.9, 0.8)

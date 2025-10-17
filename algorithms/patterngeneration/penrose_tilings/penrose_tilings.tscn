@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8yak7v6m4nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://xii0bshyhdxtv"]
 
-[ext_resource type="Script" uid="uid://dhwtt1onmrvth" path="res://algorithms/patterngeneration/penrose_tilings/PenroseTilings.gd" id="1_penrose"]
+[ext_resource type="Script" uid="uid://v0m77va6y4g4d" path="res://algorithms/patterngeneration/penrose_tilings/PenroseTilings.gd" id="1_penrose"]
 
 [node name="PenroseTilings" type="Node3D"]
 script = ExtResource("1_penrose")

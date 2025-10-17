@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj4q6xw7y8cne"]
+[gd_scene load_steps=3 format=3 uid="uid://zub2hwrpe3xhi"]
 
-[ext_resource type="Script" uid="uid://b4ylnrq8x3q5t" path="res://algorithms/fractals/cubesubdivision/cube_subdivision.gd" id="1_cube_subdivision"]
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_initial_cube"]
+[ext_resource type="Script" uid="uid://h7is5jnj1usxz" path="res://algorithms/fractals/cubesubdivision/cube_subdivision.gd" id="1_cube_subdivision"]
+[ext_resource type="PackedScene" uid="uid://b2dv520rcbbm9" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_initial_cube"]
 
 [node name="CubeSubdivision" type="Node3D"]
 script = ExtResource("1_cube_subdivision")

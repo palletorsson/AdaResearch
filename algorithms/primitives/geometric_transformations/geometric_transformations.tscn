@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx8lav2m4nq7r"]
+[gd_scene load_steps=3 format=3 uid="uid://05ici9nl9bfcw"]
 
-[ext_resource type="Script" uid="uid://7js4meu2c5gp" path="res://algorithms/primitives/geometric_transformations/geometric_transformations.gd" id="1_geometric"]
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube_scene"]
+[ext_resource type="Script" uid="uid://n48ou4bl13jqj" path="res://algorithms/primitives/geometric_transformations/geometric_transformations.gd" id="1_geometric"]
+[ext_resource type="PackedScene" uid="uid://u5tm1z9din3yq" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube_scene"]
 
 [node name="GeometricTransformations" type="Node3D"]
 script = ExtResource("1_geometric")

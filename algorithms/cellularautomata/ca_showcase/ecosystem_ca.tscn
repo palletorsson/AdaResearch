@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfnk8h3cmqtlw"]
+[gd_scene load_steps=2 format=3 uid="uid://zojqtjo0i3jej"]
 
-[ext_resource type="Script" uid="uid://dqr5w0fwe2b3j" path="res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.gd" id="1_ecosystem"]
+[ext_resource type="Script" uid="uid://t7ubo6rnychy8" path="res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.gd" id="1_ecosystem"]
 
 [node name="EcosystemCA" type="Node3D"]
 script = ExtResource("1_ecosystem")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://kngvn2jcvpqv"]
+[gd_scene load_steps=2 format=3 uid="uid://w99dioxuroqyi"]
 
-[ext_resource type="Script" uid="uid://dpew3wx2ihsdv" path="res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.gd" id="1_xjw1k"]
+[ext_resource type="Script" uid="uid://7jojr8boh165b" path="res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.gd" id="1_xjw1k"]
 
 [node name="LyapunovExponents" type="Node2D"]
 script = ExtResource("1_xjw1k")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm3llrbxabrdw"]
+[gd_scene load_steps=2 format=3 uid="uid://bolb0p7fcw7hl"]
 
-[ext_resource type="Script" uid="uid://bu7sjetta70wd" path="res://algorithms/proceduralgeneration/metaballs/nakama_metaballs.gd" id="1_igif5"]
+[ext_resource type="Script" uid="uid://uig1vrce6cb7v" path="res://algorithms/proceduralgeneration/metaballs/nakama_metaballs.gd" id="1_igif5"]
 
 [node name="NakamaMetaballs" type="Node3D"]
 script = ExtResource("1_igif5")

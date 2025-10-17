@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtxdoc0aarsqg"]
+[gd_scene load_steps=3 format=3 uid="uid://vh1d47o7t41dw"]
 
-[ext_resource type="Script" uid="uid://fksjid3ik5gn" path="res://algorithms/randomness/perlinnoise/PerlinNoise.gd" id="1_perlin"]
-[ext_resource type="Script" uid="uid://cbalquo2406ud" path="res://algorithms/randomness/perlinnoise/NoiseVisualizer.gd" id="2_visual"]
+[ext_resource type="Script" uid="uid://nbjn07uljiygt" path="res://algorithms/randomness/perlinnoise/PerlinNoise.gd" id="1_perlin"]
+[ext_resource type="Script" uid="uid://80b9zvw6ss4zm" path="res://algorithms/randomness/perlinnoise/NoiseVisualizer.gd" id="2_visual"]
 
 [node name="PerlinNoise" type="Node3D"]
 script = ExtResource("1_perlin")

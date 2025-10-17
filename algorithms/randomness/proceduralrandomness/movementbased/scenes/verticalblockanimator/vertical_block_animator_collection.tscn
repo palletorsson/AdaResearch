@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds4gaqv1supbl"]
+[gd_scene load_steps=3 format=3 uid="uid://pfpz9775vfc9o"]
 
-[ext_resource type="Script" uid="uid://dewa13b3tut8t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_uugr5"]
-[ext_resource type="PackedScene" uid="uid://lkrjsssm4rqm" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/verticalblockanimator/vertical_block_animator.tscn" id="2_jxfvj"]
+[ext_resource type="Script" uid="uid://ce8412b088w4t" path="res://adaresearch/Common/Scripts/Helpers/SceneInstantiator.gd" id="1_uugr5"]
+[ext_resource type="PackedScene" uid="uid://nbv1bpqo7pwkp" path="res://algorithms/randomness/proceduralrandomness/movementbased/scenes/verticalblockanimator/vertical_block_animator.tscn" id="2_jxfvj"]
 
 [node name="VerticalBlockAnimatorCollection" type="Node3D"]
 script = ExtResource("1_uugr5")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://blwsr1vf3i5kv"]
+[gd_scene load_steps=3 format=3 uid="uid://6cgwab6ejsxl1"]
 
-[ext_resource type="Script" uid="uid://cjdgoo30obk7e" path="res://algorithms/physicssimulation/softbodies/softbodystop/stopsoftbody.gd" id="1_juoqt"]
-[ext_resource type="PackedScene" uid="uid://bw75lrwfiq6g4" path="res://algorithms/physicssimulation/softbodies/softbodystop/softbodybody.tscn" id="2_mawbi"]
+[ext_resource type="Script" uid="uid://zc364f3s2alna" path="res://algorithms/physicssimulation/softbodies/softbodystop/stopsoftbody.gd" id="1_juoqt"]
+[ext_resource type="PackedScene" uid="uid://62mvkpoxjbpgk" path="res://algorithms/physicssimulation/softbodies/softbodystop/softbodybody.tscn" id="2_mawbi"]
 
 [node name="Stopscene" type="Node3D"]
 script = ExtResource("1_juoqt")

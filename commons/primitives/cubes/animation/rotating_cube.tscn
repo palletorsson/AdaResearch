@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ssh07babupc5"]
+[gd_scene load_steps=3 format=3 uid="uid://vx8slsh86kc7l"]
 
-[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://2ga0rsmpymgc" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="2_rotation"]
+[ext_resource type="PackedScene" uid="uid://puns29s5tlgr2" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://07belonqjrd27" path="res://commons/primitives/cubes/animation/RotationTween.gd" id="2_rotation"]
 
 [node name="RotatingCube" instance=ExtResource("1_base")]
 

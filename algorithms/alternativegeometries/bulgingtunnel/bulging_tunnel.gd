@@ -60,15 +60,15 @@ func create_bulges():
 	# Create each bulge
 	for i in range(num_bulges):
 		# Calculate position along tunnel
-		var position = spacing * (i + 1)
+		var pos = spacing * (i + 1)
 		
 		# Create bulge
-		var bulge = create_single_bulge(position)
+		var bulge = create_single_bulge(pos)
 		csg_root.add_child(bulge)
 		bulges.append(bulge)
 
 # Creates a single bulge at the specified position
-func create_single_bulge(position: float) -> CSGSphere3D:
+func create_single_bulge(pos: float) -> CSGSphere3D:
 	var bulge = CSGSphere3D.new()
 	
 	# Set bulge properties
@@ -76,18 +76,18 @@ func create_single_bulge(position: float) -> CSGSphere3D:
 		bulge.radius = randf_range(tunnel_radius * 1.2, bulge_max_radius)
 	else:
 		# Calculate radius that varies sinusoidally along the tunnel
-		var t = position / tunnel_length
+		var t = pos / tunnel_length
 		bulge.radius = lerp(tunnel_radius * 1.2, bulge_max_radius, sin(t * PI))
 	
 	# Position the bulge along the tunnel
-	bulge.transform.origin = Vector3(0, 0, position)
+	bulge.transform.origin = Vector3(0, 0, pos)
 	
 	# Set operation to union so bulge adds to the tunnel
 	bulge.operation = CSGShape3D.OPERATION_UNION
 	
 	# Set sufficient detail level
 	bulge.radial_segments = tunnel_segments
-	bulge.rings = tunnel_segments / 2
+	bulge.rings = tunnel_segments / 2.0
 	
 	return bulge
 
@@ -153,7 +153,7 @@ func create_complex_tunnel():
 	for i in range(num_bulges):
 		# Calculate position with offset from regular bulges
 		var offset = randf_range(-0.5, 0.5)  # Random offset
-		var position = (tunnel_length / (num_bulges + 1)) * (i + 1) + offset
+		var pos = (tunnel_length / (num_bulges + 1)) * (i + 1) + offset
 		
 		# Add some variety with different shapes
 		var shape_type = randi() % 3
@@ -173,8 +173,8 @@ func create_complex_tunnel():
 				var torus = shape as CSGTorus3D
 				torus.inner_radius = tunnel_radius * 0.3
 				torus.outer_radius = randf_range(tunnel_radius, bulge_max_radius)
-				torus.sides = tunnel_segments / 2
-				torus.ring_sides = tunnel_segments / 2
+				torus.sides = tunnel_segments / 2.0
+				torus.ring_sides = tunnel_segments / 2.0
 				torus.rotation_degrees.x = 90  # Orient perpendicular to tunnel
 			2:  # Add a cylinder deformation
 				shape = CSGCylinder3D.new()
@@ -185,7 +185,7 @@ func create_complex_tunnel():
 				cylinder.rotation_degrees.z = 90  # Orient perpendicular to tunnel
 		
 		# Position and add the shape
-		shape.transform.origin = Vector3(0, 0, position)
+		shape.transform.origin = Vector3(0, 0, pos)
 		shape.operation = CSGShape3D.OPERATION_UNION
 		
 		csg_root.add_child(shape)

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3nut7rl6j3ys"]
+[gd_scene load_steps=3 format=3 uid="uid://ggmu1rjkl7ky9"]
 
-[ext_resource type="PackedScene" uid="uid://dpectcn2s5gf7" path="res://algorithms/physicssimulation/softbody3d/softbody3d.tscn" id="1_main_scene"]
-[ext_resource type="Script" uid="uid://bm68ltu4vr8y3" path="res://algorithms/physicssimulation/softbody3d/test_softbody.gd" id="2_test_script"]
+[ext_resource type="PackedScene" uid="uid://d8rlf2i9yz9mb" path="res://algorithms/physicssimulation/softbody3d/softbody3d.tscn" id="1_main_scene"]
+[ext_resource type="Script" uid="uid://mixtfmnvtui32" path="res://algorithms/physicssimulation/softbody3d/test_softbody.gd" id="2_test_script"]
 
 [node name="SoftBodyTestScene" type="Node3D"]
 script = ExtResource("2_test_script")

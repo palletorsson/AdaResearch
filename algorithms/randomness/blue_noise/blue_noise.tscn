@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ekey5yw2xry0"]
+[gd_scene load_steps=2 format=3 uid="uid://kzu8xec8huht4"]
 
-[ext_resource type="Script" uid="uid://1rm4pbtwl523" path="res://algorithms/randomness/blue_noise/BlueNoise.gd" id="1_blue_noise"]
+[ext_resource type="Script" uid="uid://yox8o70mrrkbk" path="res://algorithms/randomness/blue_noise/BlueNoise.gd" id="1_blue_noise"]
 
 [node name="BlueNoise" type="Node3D"]
 script = ExtResource("1_blue_noise")

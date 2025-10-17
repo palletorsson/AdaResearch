@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c36f75dc0chgs"]
+[gd_scene load_steps=9 format=3 uid="uid://0vi04otm9d3je"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_xxt38"]
-[ext_resource type="Shader" uid="uid://bvosua7kp43yv" path="res://commons/resourses/shaders/wood.gdshader" id="3_y4kpd"]
+[ext_resource type="PackedScene" uid="uid://4zwuwoce1bw0k" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://xyrac3khvz1h9" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
+[ext_resource type="Script" uid="uid://ok3ccgoz4vr7n" path="res://commons/primitives/cubes/grab_cube.gd" id="2_xxt38"]
+[ext_resource type="Shader" uid="uid://10ej4ww1js9h5" path="res://commons/resourses/shaders/wood.gdshader" id="3_y4kpd"]
 
 [sub_resource type="StandardMaterial3D" id="10"]
 albedo_color = Color(0.2, 0.2, 0.8, 1)

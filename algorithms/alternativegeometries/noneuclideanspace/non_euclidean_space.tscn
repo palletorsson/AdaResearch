@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://byvh5yklhyht1"]
+[gd_scene load_steps=6 format=3 uid="uid://yjcmnngari5mw"]
 
-[ext_resource type="Script" uid="uid://dq7mse4r2pn4t" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.gd" id="1_7e3cb"]
-[ext_resource type="Script" uid="uid://1ktkwoepomts" path="res://algorithms/alternativegeometries/noneuclideanspace/portal_manager.gd" id="2_pqw5i"]
-[ext_resource type="Script" uid="uid://wsioosieur5u" path="res://algorithms/alternativegeometries/noneuclideanspace/impossible_geometry.gd" id="2_sve45"]
-[ext_resource type="Script" uid="uid://bha415upfkoiy" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_room.gd" id="3_0msqp"]
-[ext_resource type="Script" uid="uid://b6vpkbqdksrfk" path="res://algorithms/alternativegeometries/noneuclideanspace/recursive_room.gd" id="4_0msqp"]
+[ext_resource type="Script" uid="uid://u390k633360l4" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.gd" id="1_7e3cb"]
+[ext_resource type="Script" uid="uid://ayh4uhauf3zrs" path="res://algorithms/alternativegeometries/noneuclideanspace/portal_manager.gd" id="2_pqw5i"]
+[ext_resource type="Script" uid="uid://ap6afdqyzp9h7" path="res://algorithms/alternativegeometries/noneuclideanspace/impossible_geometry.gd" id="2_sve45"]
+[ext_resource type="Script" uid="uid://jiib5iu87843o" path="res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_room.gd" id="3_0msqp"]
+[ext_resource type="Script" uid="uid://tg6e16231tkif" path="res://algorithms/alternativegeometries/noneuclideanspace/recursive_room.gd" id="4_0msqp"]
 
 [node name="NonEuclideanSpace" type="Node3D"]
 script = ExtResource("1_7e3cb")

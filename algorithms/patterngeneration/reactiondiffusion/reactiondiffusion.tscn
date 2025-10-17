@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://nlap44cdgn24"]
+[gd_scene load_steps=3 format=3 uid="uid://992eole760puo"]
 
-[ext_resource type="Script" uid="uid://cxloppas50edi" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusion.gd" id="1_reaction"]
-[ext_resource type="Script" uid="uid://rm60cs6rtyqv" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusionVisualizer.gd" id="2_visual"]
+[ext_resource type="Script" uid="uid://0usyn9vjh4702" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusion.gd" id="1_reaction"]
+[ext_resource type="Script" uid="uid://apf891n4ce686" path="res://algorithms/patterngeneration/reactiondiffusion/ReactionDiffusionVisualizer.gd" id="2_visual"]
 
 [node name="ReactionDiffusion" type="Node3D"]
 script = ExtResource("1_reaction")

@@ -714,7 +714,7 @@ func update_ui():
 	
 	var labels = []
 	for i in range(40):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

@@ -921,7 +921,7 @@ class Species:
 				distance += abs(representative.genes[gene] - creature.genes[gene])
 				gene_count += 1
 		
-		return distance / gene_count if gene_count > 0 else 0.0
+		return distance / float(gene_count) if gene_count > 0 else 0.0
 
 # Main ecosystem functions
 func _ready():
@@ -1681,7 +1681,7 @@ func calculate_species_diversity(species: Species) -> float:
 			total_diversity += calculate_genetic_distance(species.members[i], species.members[j])
 			comparisons += 1
 	
-	return total_diversity / comparisons if comparisons > 0 else 0.0
+	return total_diversity / float(comparisons) if comparisons > 0 else 0.0
 
 func calculate_genetic_distance(creature1: EvolutionaryCreature, creature2: EvolutionaryCreature) -> float:
 	"""Calculate genetic distance between two creatures"""
@@ -1693,7 +1693,7 @@ func calculate_genetic_distance(creature1: EvolutionaryCreature, creature2: Evol
 			distance += abs(creature1.genes[gene] - creature2.genes[gene])
 			gene_count += 1
 	
-	return distance / gene_count if gene_count > 0 else 0.0
+	return distance / float(gene_count) if gene_count > 0 else 0.0
 
 func replace_population(new_population: Array):
 	"""Replace old population with new one"""
@@ -1737,7 +1737,7 @@ func calculate_fitness_stats():
 		if creature.fitness < worst_fitness:
 			worst_fitness = creature.fitness
 	
-	average_fitness = total_fitness / population.size()
+	average_fitness = total_fitness / float(population.size())
 	
 	# Calculate diversity metrics
 	diversity_score = calculate_population_diversity()
@@ -1766,7 +1766,7 @@ func calculate_population_diversity() -> float:
 			total_diversity += calculate_genetic_distance(sample_creatures[i], sample_creatures[j])
 			comparisons += 1
 	
-	return total_diversity / comparisons if comparisons > 0 else 0.0
+	return total_diversity / float(comparisons) if comparisons > 0 else 0.0
 
 func calculate_species_stats():
 	"""Calculate species-specific statistics"""
@@ -1778,7 +1778,7 @@ func calculate_species_stats():
 		for member in species.members:
 			species_fitness += member.fitness
 		
-		species.traits["average_fitness"] = species_fitness / species.members.size()
+		species.traits["average_fitness"] = species_fitness / float(species.members.size())
 		species.traits["size"] = species.members.size()
 		species.traits["diversity"] = calculate_species_diversity(species)
 

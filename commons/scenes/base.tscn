@@ -15,11 +15,11 @@
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
 [ext_resource type="Script" uid="uid://rt6n5myljxfg" path="res://addons/godot-xr-tools/hands/hand.gd" id="13_j7xni"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://m85b1gogdums" path="res://addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres" id="14_mjcnw"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://b3dfawtbhn3g8" path="res://addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres" id="14_mjcnw"]
 [ext_resource type="Shader" uid="uid://8lp3am10hjmy" path="res://commons/resourses/shaders/basic_grid.gdshader" id="15_7fdd7"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
-[ext_resource type="Resource" uid="uid://dmpjtk0l8vh6v" path="res://addons/godot-xr-tools/hands/poses/pose_default_right.tres" id="15_to05d"]
-[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
+[ext_resource type="Resource" uid="uid://ctntpcfhy7w3c" path="res://addons/godot-xr-tools/hands/poses/pose_default_right.tres" id="15_to05d"]
+[ext_resource type="PackedScene" uid="uid://c10bg7qd36d2o" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)

@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=4 uid="uid://bqaqcvdoccfdq"]
+[gd_scene load_steps=24 format=4 uid="uid://sz9zkblfbmo5q"]
 
 [ext_resource type="Script" path="res://Common/Scripts/clipboard.gd" id="1_edgjo"]
 [ext_resource type="Script" path="res://scenes/pickable_demo/objects/grab_cube.gd" id="1_f3d0w"]
-[ext_resource type="Material" uid="uid://rffo8pgalbag" path="res://assets/wahooney.itch.io/blue_grid.tres" id="2_2igq3"]
-[ext_resource type="Texture2D" uid="uid://rvkboex0kxkp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_board_Diffuse.png" id="4_kdgph"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_nusvq"]
-[ext_resource type="Texture2D" uid="uid://cqgn256xk30wp" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_page_Diffuse.png" id="5_ku4vn"]
+[ext_resource type="Material" uid="uid://n93wge38i42u4" path="res://assets/wahooney.itch.io/blue_grid.tres" id="2_2igq3"]
+[ext_resource type="Texture2D" uid="uid://cqp14p7ipg4iu" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_board_Diffuse.png" id="4_kdgph"]
+[ext_resource type="PackedScene" uid="uid://q2enljtlt1egp" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_nusvq"]
+[ext_resource type="Texture2D" uid="uid://cqplj25glzkx0" path="res://Common/Models/Table/Clipboard/clipboard_clipboard2_page_Diffuse.png" id="5_ku4vn"]
 [ext_resource type="Script" path="res://Common/Scripts/reset_canvas_trigger.gd" id="7_u53ab"]
 
 [sub_resource type="BoxShape3D" id="7"]

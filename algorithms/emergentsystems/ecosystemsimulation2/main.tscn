@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bs8re6x0w6gqa"]
+[gd_scene load_steps=4 format=3 uid="uid://cb0nkbk11vyqm"]
 
-[ext_resource type="Script" uid="uid://b47cgjbav6ke1" path="res://algorithms/emergentsystems/ecosystemsimulation2/main.gd" id="1_mb3nc"]
-[ext_resource type="Script" uid="uid://dpnw04mw4q8e4" path="res://algorithms/emergentsystems/ecosystemsimulation2/ecosystem_controller.gd" id="2_sej3n"]
-[ext_resource type="Script" uid="uid://mpe4q6v5uuc" path="res://algorithms/emergentsystems/ecosystemsimulation2/camera_3d.gd" id="3_1s7eh"]
+[ext_resource type="Script" uid="uid://h4e18fi0kz933" path="res://algorithms/emergentsystems/ecosystemsimulation2/main.gd" id="1_mb3nc"]
+[ext_resource type="Script" uid="uid://34td8zn1wegmr" path="res://algorithms/emergentsystems/ecosystemsimulation2/ecosystem_controller.gd" id="2_sej3n"]
+[ext_resource type="Script" uid="uid://rfnuv5j6zpndu" path="res://algorithms/emergentsystems/ecosystemsimulation2/camera_3d.gd" id="3_1s7eh"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mb3nc")

@@ -5,9 +5,9 @@ extends Node3D
 @export var spacing: float = 0.021                  # Distance between grid elements
 @export var offset: float = 0.085                  # Distance between grid elements
 # --- Node References ---
-@onready var label3D: Label3D = $Label3D
-@onready var grab_paper = $GrabPaper
-@onready var the_object_scene = $Prism
+var label3D: Label3D
+var grab_paper: Node3D
+var the_object_scene: Node3D
 var decay_on = false
 
 # --- Internal State ---
@@ -15,6 +15,11 @@ var grid_elements: Array[Node3D] = []  # Stores references to all grid elements
 
 # --- Initialization ---
 func _ready():
+	# Safely get node references
+	label3D = get_node_or_null("Label3D")
+	grab_paper = get_node_or_null("GrabPaper")
+	the_object_scene = get_node_or_null("Prism")
+	
 	create_grid()
 
 func _process(delta: float) -> void:

@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc8h405u4ijo2"]
+[gd_scene load_steps=4 format=3 uid="uid://w9qbbfjhewfxg"]
 
-[ext_resource type="PackedScene" uid="uid://cspuds84fvnam" path="res://algorithms/color/k_means_color/k_means_color.tscn" id="1_owsnt"]
-[ext_resource type="Script" uid="uid://3sl7n8qthx7n" path="res://algorithms/color/k_means_color/k_means_color_3d_wrapper.gd" id="1_t2mky"]
+[ext_resource type="PackedScene" uid="uid://lkzd3wuvvckl1" path="res://algorithms/color/k_means_color/k_means_color.tscn" id="1_owsnt"]
+[ext_resource type="Script" uid="uid://brwy171mazoox" path="res://algorithms/color/k_means_color/k_means_color_3d_wrapper.gd" id="1_t2mky"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_btd14"]
 viewport_path = NodePath("SubViewport")

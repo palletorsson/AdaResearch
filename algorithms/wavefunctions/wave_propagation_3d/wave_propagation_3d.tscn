@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8yxk4v5nanop"]
+[gd_scene load_steps=2 format=3 uid="uid://5vy7l1zv6k15m"]
 
-[ext_resource type="Script" uid="uid://dodis85wamcjt" path="res://algorithms/wavefunctions/wave_propagation_3d/WavePropagation3D.gd" id="1_wave_prop"]
+[ext_resource type="Script" uid="uid://xs4ea8cibm56b" path="res://algorithms/wavefunctions/wave_propagation_3d/WavePropagation3D.gd" id="1_wave_prop"]
 
 [node name="WavePropagation3D" type="Node3D"]
 script = ExtResource("1_wave_prop")

@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh0yixpmcvifk"]
+[gd_scene load_steps=5 format=3 uid="uid://n6qdh0s97pnia"]
 
-[ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
-[ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://5hwlfq4capfuu" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
+[ext_resource type="Script" uid="uid://owor6ieummifs" path="res://commons/scenes/vrStaging.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://u6imhgxfiuo94" path="res://splash.png" id="3"]
 
 [sub_resource type="Curve" id="Curve_qsc12"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

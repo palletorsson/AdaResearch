@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://vo8llmcd0sqv"]
+[gd_scene load_steps=3 format=3 uid="uid://g1xyzcdmfrymz"]
 
-[ext_resource type="Script" uid="uid://bsrvmivfa7643" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/ico_sphere_distort.gd" id="1_4hw7w"]
-[ext_resource type="PackedScene" uid="uid://b3p8j8xrwkxmq" path="res://adaresearch/Common/Scenes/Objects/Primitives/Sphere.tscn" id="2_spo3y"]
+[ext_resource type="Script" uid="uid://uag7qz37fces3" path="res://algorithms/randomness/proceduralrandomness/geometrybased/scripts/ico_sphere_distort.gd" id="1_4hw7w"]
+[ext_resource type="PackedScene" uid="uid://nissc1brsozo8" path="res://commons/primitives/sphere.tscn" id="2_spo3y"]
 
 [node name="icoSphereDistort" type="Node3D"]
 script = ExtResource("1_4hw7w")

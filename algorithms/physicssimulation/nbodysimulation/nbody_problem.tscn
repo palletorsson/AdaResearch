@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqt00uid7iouj"]
+[gd_scene load_steps=2 format=3 uid="uid://tl1y665ky9tnk"]
 
-[ext_resource type="Script" uid="uid://ch6nqhx4ioaq0" path="res://algorithms/physicssimulation/nbodysimulation/nbody_problem.gd" id="1_ekfkv"]
+[ext_resource type="Script" uid="uid://gejsi9stjg1j9" path="res://algorithms/physicssimulation/nbodysimulation/nbody_problem.gd" id="1_ekfkv"]
 
 [node name="NbodyProblem" type="Node2D"]
 script = ExtResource("1_ekfkv")

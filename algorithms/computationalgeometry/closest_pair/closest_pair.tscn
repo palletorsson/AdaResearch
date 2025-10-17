@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3k8nav2x7nqr"]
+[gd_scene load_steps=2 format=3 uid="uid://qp2z7l1gcslp3"]
 
-[ext_resource type="Script" uid="uid://d1wmusjghhqop" path="res://algorithms/computationalgeometry/closest_pair/ClosestPair.gd" id="1_closest_pair"]
+[ext_resource type="Script" uid="uid://wcan50yvu8mc6" path="res://algorithms/computationalgeometry/closest_pair/ClosestPair.gd" id="1_closest_pair"]
 
 [node name="ClosestPair" type="Node3D"]
 script = ExtResource("1_closest_pair")

@@ -177,7 +177,7 @@ func create_container():
 func setup_camera():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 5, 15)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
 func simulate_fluid(delta):

@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://5ruomhsxmw3r"]
+[gd_scene load_steps=11 format=3 uid="uid://ect73duunltw5"]
 
-[ext_resource type="Script" uid="uid://ql1fctsnmnrf" path="res://scenes/main_menu/objects/settings_ui.gd" id="1_p5244"]
-[ext_resource type="Material" uid="uid://bhj8fob2pxx4l" path="res://scenes/main_menu/objects/settings_ui_material.tres" id="2_2euin"]
-[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_gh2hq"]
-[ext_resource type="PackedScene" uid="uid://b3wn56kir0avm" path="res://adaresearch/Common/Scenes/Objects/DigitalPaper/TextUIControl.tscn" id="4_2eqye"]
-[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_mmrse"]
-[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_cbktk"]
-[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_vae7a"]
+[ext_resource type="Script" uid="uid://xxrubpsnkovl2" path="res://scenes/main_menu/objects/settings_ui.gd" id="1_p5244"]
+[ext_resource type="Material" uid="uid://3wecpj5bo3gn4" path="res://scenes/main_menu/objects/settings_ui_material.tres" id="2_2euin"]
+[ext_resource type="PackedScene" uid="uid://blt60cm21x8zn" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_gh2hq"]
+[ext_resource type="PackedScene" uid="uid://mjhas8vte7enq" path="res://adaresearch/Common/Scenes/Objects/DigitalPaper/TextUIControl.tscn" id="4_2eqye"]
+[ext_resource type="PackedScene" uid="uid://lynje9gy1mjfp" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_mmrse"]
+[ext_resource type="Resource" uid="uid://ktv7xfj13friw" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_cbktk"]
+[ext_resource type="Resource" uid="uid://xesqkc58qx017" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_vae7a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lidq2"]
 transparency = 1

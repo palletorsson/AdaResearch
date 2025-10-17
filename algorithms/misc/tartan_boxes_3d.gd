@@ -24,7 +24,7 @@ func setup_lighting():
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
 	main_light.position = Vector3(5, 10, 5)
-	main_light.look_at(Vector3.ZERO, Vector3.UP)
+	main_light.look_at_from_position(main_light.position, Vector3.ZERO, Vector3.UP)
 	main_light.light_energy = 1.5  # Increased brightness
 	main_light.shadow_enabled = true
 	add_child(main_light)
@@ -33,7 +33,7 @@ func setup_lighting():
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-3, 8, -3)
-	fill_light.look_at(Vector3.ZERO, Vector3.UP)
+	fill_light.look_at_from_position(fill_light.position, Vector3.ZERO, Vector3.UP)
 	fill_light.light_energy = 0.8
 	fill_light.light_color = Color(1.1, 1.0, 0.9)  # Slightly warm
 	add_child(fill_light)

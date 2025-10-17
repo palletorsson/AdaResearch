@@ -53,8 +53,8 @@ func create_image_grids():
 			pixel.material_override.emission_enabled = true
 			pixel.material_override.emission = Color(0.2, 0.8, 0.2, 1) * 0.3
 			
-			var x = (i - (grid_size-2)/2) * 0.3
-			var z = (j - (grid_size-2)/2) * 0.3
+			var x = (i - (grid_size-2)/2.0) * 0.3
+			var z = (j - (grid_size-2)/2.0) * 0.3
 			pixel.position = Vector3(x, 0, z)
 			conv1_grid.add_child(pixel)
 			layers.append(pixel)
@@ -78,8 +78,8 @@ func create_image_grids():
 	
 	# Create pooling layer grid
 	var pool_grid = $PoolingLayers/PoolLayer1/Pool1Grid
-	for i in range((grid_size - 4) / 2):
-		for j in range((grid_size - 4) / 2):
+	for i in range((grid_size - 4) / 2.0):
+		for j in range((grid_size - 4) / 2.0):
 			var pixel = CSGSphere3D.new()
 			pixel.radius = 0.1
 			pixel.material_override = StandardMaterial3D.new()
@@ -153,8 +153,8 @@ func create_feature_maps():
 			pixel.material_override.emission_enabled = true
 			pixel.material_override.emission = Color(0.2, 0.8, 0.2, 1) * 0.3
 			
-			var x = (i - (grid_size-2)/2) * 0.3
-			var z = (j - (grid_size-2)/2) * 0.3
+			var x = (i - (grid_size-2)/2.0) * 0.3
+			var z = (j - (grid_size-2)/2.0) * 0.3
 			pixel.position = Vector3(x, 0, z)
 			feature1_grid.add_child(pixel)
 	

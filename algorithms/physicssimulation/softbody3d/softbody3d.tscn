@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpectcn2s5gf7"]
+[gd_scene load_steps=8 format=3 uid="uid://cvdmp3iisfjfx"]
 
-[ext_resource type="Script" uid="uid://clw586fh12g8f" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="1_script"]
-[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_i3odx"]
-[ext_resource type="Script" uid="uid://c84t5tsgdhmb8" path="res://algorithms/physicssimulation/softbody3d/softbody3d_scene_controller.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://zdo0a0adkh81c" path="res://algorithms/physicssimulation/softbody3d/softbody3d.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://ogja4mktxof6r" path="res://commons/resourses/shaders/Grid.gdshader" id="2_i3odx"]
+[ext_resource type="Script" uid="uid://cejaduiq68ylp" path="res://algorithms/physicssimulation/softbody3d/softbody3d_scene_controller.gd" id="2_script"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1"]
 size = Vector2(20, 20)

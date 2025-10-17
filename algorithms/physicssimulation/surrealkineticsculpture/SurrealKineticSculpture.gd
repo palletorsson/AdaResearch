@@ -148,7 +148,7 @@ func setup_kinetic_lighting():
 	key_light.light_energy = 0.8
 	key_light.light_color = Color(0.95, 0.95, 1.0)
 	key_light.position = Vector3(5, 10, 5)
-	key_light.look_at(Vector3.ZERO, Vector3.UP)
+	key_light.look_at_from_position(key_light.position, Vector3.ZERO, Vector3.UP)
 	key_light.shadow_enabled = true
 	lighting_system.add_child(key_light)
 	
