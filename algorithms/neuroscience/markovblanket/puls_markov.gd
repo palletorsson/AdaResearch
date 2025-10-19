@@ -77,7 +77,7 @@ func _setup_scene():
 	# Add lighting
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 10, 10)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 	add_child(light)
 	
 	# Create inner cell mesh

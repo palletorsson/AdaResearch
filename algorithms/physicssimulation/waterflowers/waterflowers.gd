@@ -237,7 +237,7 @@ func setup_scene():
 		camera_env.environment = env
 	var sun_light = DirectionalLight3D.new()
 	sun_light.position = Vector3(10, 15, 5)
-	sun_light.look_at(Vector3.ZERO, Vector3.UP)
+	sun_light.look_at_from_position(sun_light.position, Vector3.ZERO, Vector3.UP)
 	sun_light.light_energy = 1.0
 	sun_light.light_color = Color(1.0, 0.95, 0.8)
 	add_child(sun_light)

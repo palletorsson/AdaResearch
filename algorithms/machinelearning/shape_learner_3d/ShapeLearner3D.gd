@@ -2,10 +2,12 @@ extends Node3D
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
-@export var grid_size = 20
-@export var population_size = 100
+@export var grid_size = 10  # Reduced from 20 to 10 (8x fewer cells)
+@export var population_size = 20  # Reduced from 100 to 20
 @export var mutation_rate = 0.01
-@export var generations = 100
+@export var generations = 50  # Reduced from 100 to 50
+@export var ca_generations = 5  # CA iterations per individual
+@export var individuals_per_frame = 5  # Process 5 individuals per frame
 
 enum TargetShape { CUBE, SPHERE, PYRAMID }
 @export var target_shape_enum: TargetShape = TargetShape.CUBE
@@ -20,6 +22,10 @@ var current_generation = 0
 var ca_grids = []
 var ca_grid_index = 0
 
+# Async evaluation state
+var is_evaluating = false
+var current_eval_index = 0
+
 func _ready():
 	multimesh_instance = $MultiMeshInstance3D
 	$Timer.wait_time = 0.1
@@ -29,26 +35,35 @@ func _ready():
 	run_ga_generation()
 
 func _process(delta):
-	pass
+	# Process evaluation asynchronously
+	if is_evaluating:
+		evaluate_population_async()
 
 func run_ga_generation():
 	if current_generation < generations:
-		evaluate_population()
-		var best_fitness = fitness.max()
-		print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
-		if best_fitness == 1.0:
-			set_process(false)
-			return
-		
-		select_new_population()
-		
-		var best_individual_index = fitness.find(fitness.max())
-		var best_rules = population[best_individual_index]
-		ca_grids = run_ca(best_rules)
-		ca_grid_index = 0
-		$Timer.start()
+		# Start async evaluation
+		is_evaluating = true
+		current_eval_index = 0
+		fitness.resize(population_size)
+		fitness.fill(0.0)
 	else:
 		set_process(false)
+
+func finish_ga_generation():
+	var best_fitness = fitness.max()
+	print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
+	if best_fitness == 1.0:
+		is_evaluating = false
+		set_process(false)
+		return
+
+	select_new_population()
+
+	var best_individual_index = fitness.find(fitness.max())
+	var best_rules = population[best_individual_index]
+	ca_grids = run_ca(best_rules)
+	ca_grid_index = 0
+	$Timer.start()
 
 func stamp_ca_generation():
 	if ca_grid_index < ca_grids.size():
@@ -97,12 +112,21 @@ func initialize_population():
 		for j in range(27):
 			population[i][j] = randi() % 2
 
-func evaluate_population():
-	fitness.resize(population_size)
-	for i in range(population_size):
+func evaluate_population_async():
+	# Evaluate a few individuals per frame to avoid freezing
+	var end_index = min(current_eval_index + individuals_per_frame, population_size)
+
+	for i in range(current_eval_index, end_index):
 		var rules = population[i]
 		var grids = run_ca(rules)
 		fitness[i] = calculate_fitness(grids.back())
+
+	current_eval_index = end_index
+
+	# Check if we're done evaluating all individuals
+	if current_eval_index >= population_size:
+		is_evaluating = false
+		finish_ga_generation()
 
 func run_ca(rules):
 	var grids = []
@@ -120,7 +144,7 @@ func run_ca(rules):
 	grid[grid_size / 2][grid_size / 2][grid_size / 2] = 1
 	grids.append(grid.duplicate(true))
 
-	for i in range(10): # Run the CA for 10 generations
+	for i in range(ca_generations):
 		var next_grid = []
 		next_grid.resize(grid_size)
 		for x in range(grid_size):
@@ -143,17 +167,21 @@ func run_ca(rules):
 
 func count_neighbors(grid, x, y, z):
 	var count = 0
-	for i in range(-1, 2):
-		for j in range(-1, 2):
-			for k in range(-1, 2):
-				if i == 0 and j == 0 and k == 0:
+	# Pre-calculate bounds to avoid repeated checks
+	var x_start = max(0, x - 1)
+	var x_end = min(grid_size - 1, x + 1)
+	var y_start = max(0, y - 1)
+	var y_end = min(grid_size - 1, y + 1)
+	var z_start = max(0, z - 1)
+	var z_end = min(grid_size - 1, z + 1)
+
+	for i in range(x_start, x_end + 1):
+		for j in range(y_start, y_end + 1):
+			for k in range(z_start, z_end + 1):
+				if i == x and j == y and k == z:
 					continue
-				var nx = x + i
-				var ny = y + j
-				var nz = z + k
-				if nx >= 0 and nx < grid_size and ny >= 0 and ny < grid_size and nz >= 0 and nz < grid_size:
-					if grid[nx][ny][nz] == 1:
-						count += 1
+				if grid[i][j][k] == 1:
+					count += 1
 	return count
 
 func calculate_fitness(grid):

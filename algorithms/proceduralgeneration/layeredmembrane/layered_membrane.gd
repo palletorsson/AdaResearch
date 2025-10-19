@@ -176,14 +176,14 @@ func setup_environment():
 	var camera = Camera3D.new()
 	camera.name = "Camera"
 	camera.position = Vector3(0, height/2, radius * 2)
-	camera.look_at(Vector3(0, height/2, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, height/2, 0), Vector3.UP)
 	add_child(camera)
 	
 	# Add lighting
 	var main_light = DirectionalLight3D.new()
 	main_light.name = "MainLight"
 	main_light.position = Vector3(radius * 2, height * 2, radius * 2)
-	main_light.look_at(Vector3(0, 0, 0))
+	main_light.look_at_from_position(main_light.position, Vector3(0, 0, 0), Vector3.UP)
 	main_light.light_energy = 1.0
 	add_child(main_light)
 	
@@ -191,7 +191,7 @@ func setup_environment():
 	var fill_light = DirectionalLight3D.new()
 	fill_light.name = "FillLight"
 	fill_light.position = Vector3(-radius * 1.5, height, -radius * 1.5)
-	fill_light.look_at(Vector3(0, 0, 0))
+	fill_light.look_at_from_position(fill_light.position, Vector3(0, 0, 0), Vector3.UP)
 	fill_light.light_energy = 0.5
 	fill_light.light_color = Color(0.9, 0.8, 1.0)  # Slightly bluish light
 	add_child(fill_light)

@@ -118,7 +118,7 @@ func setup_camera():
 	
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 10, 20)
-	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera_controller.add_child(camera)
 
 func load_transition_preset(preset: String = ""):

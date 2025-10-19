@@ -107,7 +107,7 @@ class DirectionalMover:
 		acceleration = Vector3.ZERO
 
 		if velocity.length() > 0.01:
-			root.look_at(position + velocity, Vector3.UP)
+			root.look_at_from_position(root.position, position + velocity, Vector3.UP)
 			root.rotate_object_local(Vector3.RIGHT, -PI / 2)
 
 	func wrap_bounds() -> void:

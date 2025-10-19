@@ -137,7 +137,7 @@ class Spring:
 			line_mesh.position = center
 			
 			# Orient line toward mass2
-			line_mesh.look_at(mass2.position, Vector3.UP)
+			line_mesh.look_at_from_position(line_mesh.position, mass2.position, Vector3.UP)
 			
 			# Scale line to match spring length
 			line_mesh.scale.z = current_length
@@ -311,7 +311,7 @@ func setup_camera():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
 	add_child(camera)
-	camera.look_at(Vector3(0, 3, 0))
+	camera.look_at_from_position(camera.position, Vector3(0, 3, 0), Vector3.UP)
 
 func simulate_physics(delta):
 	var fixed_delta = time_step

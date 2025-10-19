@@ -578,7 +578,7 @@ func process_resonance(delta):
 		part.apply_central_force(force)
 		
 		# Create resonance effects with nearby objects
-		emit_resonance_wave(part.global_transform.origin, base_freq * freq_mod, amplitude)
+		emit_resonance_wave(part.global_position, base_freq * freq_mod, amplitude)
 
 func process_topology(delta):
 	# Change topological genus over time
@@ -694,7 +694,7 @@ func attempt_reproduction():
 	
 	# Position near parent
 	var spawn_offset = Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)).normalized() * 2.0
-	offspring.global_transform.origin = global_transform.origin + spawn_offset
+	offspring.global_position = global_position + spawn_offset
 	
 	# Initialize with mutated genes
 	offspring.initialize_from_genes(offspring_genes)
@@ -909,8 +909,8 @@ func attempt_connection(other_creature):
 			joint.node_b = other_creature.body_parts[0].get_path()
 			
 			# Position halfway between creatures
-			var midpoint = (global_transform.origin + other_creature.global_transform.origin) / 2.0
-			joint.global_transform.origin = midpoint
+			var midpoint = (global_position + other_creature.global_position) / 2.0
+			joint.global_position = midpoint
 			
 			# Add metadata
 			joint.set_meta("symbiotic", true)
@@ -945,7 +945,7 @@ func spawn_recursive_child():
 	
 	# Position near parent
 	var spawn_offset = Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)).normalized()
-	child.global_transform.origin = global_transform.origin + spawn_offset
+	child.global_position = global_position + spawn_offset
 	
 	# Initialize and add to scene
 	child.initialize_from_genes(child_genes)
@@ -964,14 +964,14 @@ func emit_resonance_wave(position, frequency, amplitude):
 		if obj == self:
 			continue
 			
-		var distance = global_transform.origin.distance_to(obj.global_transform.origin)
+		var distance = global_position.distance_to(obj.global_position)
 		var intensity = amplitude * 5.0 / max(1.0, distance)
 		
 		if obj.has_method("receive_resonance"):
 			obj.receive_resonance(frequency, intensity)
 		elif obj is RigidBody3D:
 			# Apply force to physics objects
-			var direction = (obj.global_transform.origin - global_transform.origin).normalized()
+			var direction = (obj.global_position - global_position).normalized()
 			var force = direction * intensity * sin(frequency * age)
 			obj.apply_central_force(force)
 

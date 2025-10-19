@@ -204,7 +204,7 @@ class SensorBeam:
 		node.position = origin
 
 		# orient beam towards tip (cylinder defaults along +Y)
-		node.look_at(tip_pos, Vector3.UP)
+		node.look_at_from_position(node.position, tip_pos, Vector3.UP)
 		node.rotate_x(-PI / 2.0)
 
 		beam_mesh.scale = Vector3(0.08, length, 0.08)

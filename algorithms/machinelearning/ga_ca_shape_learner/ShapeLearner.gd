@@ -21,10 +21,10 @@ func _ready():
 	initialize_population()
 	call_deferred("_start_ga")
 
-async func _start_ga():
+func _start_ga():
 	await run_ga_loop()
 
-async func run_ga_loop():
+func run_ga_loop():
 	while current_generation < generations:
 		await evaluate_population_async()
 		var best_fitness = fitness.max()
@@ -39,7 +39,7 @@ async func run_ga_loop():
 		await get_tree().process_frame
 	set_process(false)
 
-async func evaluate_population_async():
+func evaluate_population_async():
 	fitness.resize(population_size)
 	for i in range(population_size):
 		var rules = population[i]
@@ -48,7 +48,7 @@ async func evaluate_population_async():
 		if i % 5 == 0:
 			await get_tree().process_frame
 
-async func display_ca_sequence(grids):
+func display_ca_sequence(grids):
 	for grid in grids:
 		update_multimesh(grid)
 		timer.start()

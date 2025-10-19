@@ -389,7 +389,7 @@ func add_composite_creature(parent):
 		)
 		
 		# Random rotation to point outward
-		limb.look_at(limb.position * 2, Vector3.UP)
+		limb.look_at_from_position(limb.position, limb.position * 2, Vector3.UP)
 		limb.rotation_degrees.x += 90
 		
 		apply_material(limb, "accent")
@@ -646,7 +646,7 @@ func add_plant_structure(parent):
 		
 		# Point outward for branches
 		if branch.mesh is CylinderMesh:
-			branch.look_at(branch.position + Vector3(cos(angle), 0.2, sin(angle)), Vector3.UP)
+			branch.look_at_from_position(branch.position, branch.position + Vector3(cos(angle), 0.2, sin(angle)), Vector3.UP)
 			branch.rotation_degrees.x += 90
 		
 		parent.add_child(branch)
@@ -898,7 +898,7 @@ func connect_modules():
 		return
 		
 	# Create connections between modules
-	var connections = min(placed_modules.size() / 2, 15) # Limit to prevent too many connections
+	var connections = min(placed_modules.size() / 2.0, 15) # Limit to prevent too many connections
 	for i in range(connections):
 		var index_a = randi() % placed_modules.size()
 		var index_b = randi() % placed_modules.size()
@@ -994,7 +994,7 @@ func create_solid_connector(start_pos, end_pos):
 	var distance = start_pos.distance_to(end_pos)
 	
 	# Figure out rotation to point from start to end
-	connector.look_at(end_pos, Vector3.UP)
+	connector.look_at_from_position(connector.position, end_pos, Vector3.UP)
 	
 	# Adjust scale to match distance
 	connector.scale = Vector3(0.2, 0.2, distance)
@@ -1215,7 +1215,7 @@ func apply_lighting():
 		) * 0.8
 		
 		spot_light.position = light_pos
-		spot_light.look_at(Vector3.ZERO, Vector3.UP)
+		spot_light.look_at_from_position(spot_light.position, Vector3.ZERO, Vector3.UP)
 		
 		add_child(spot_light)
 

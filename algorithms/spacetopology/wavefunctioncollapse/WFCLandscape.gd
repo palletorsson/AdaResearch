@@ -64,7 +64,7 @@ func setup_camera():
 	var camera = Camera3D.new()
 	camera.position = Vector3(GRID_SIZE, GRID_SIZE * 0.8, GRID_SIZE * 1.2)
 	add_child(camera)
-	camera.look_at(Vector3(GRID_SIZE/2, 0, GRID_SIZE/2))
+	camera.look_at_from_position(camera.position, Vector3(GRID_SIZE/2, 0, GRID_SIZE/2), Vector3.UP)
 	
 	# Add some ambient lighting
 	var env = Environment.new()
@@ -79,7 +79,7 @@ func setup_camera():
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 10, 10)
 	add_child(light)
-	light.look_at(Vector3.ZERO, Vector3.UP)
+	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
 
 func initialize_grid():
 	grid.resize(GRID_SIZE)

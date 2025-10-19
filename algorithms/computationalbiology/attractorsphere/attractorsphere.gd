@@ -124,7 +124,7 @@ func _push_attractor_positions_to_shader():
 	var count = min(attractors.size(), MAX_ATTRACTORS)
 	local_positions.resize(count)
 	for i in range(count):
-		local_positions[i] = sphere_mesh_instance.to_local(attractors[i].global_transform.origin)
+		local_positions[i] = sphere_mesh_instance.to_local(attractors[i].global_position)
 
 	shader_mat.set_shader_parameter("u_count", count)
 	# If count < MAX_ATTRACTORS, Godot is fine with shorter arrays

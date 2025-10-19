@@ -656,7 +656,7 @@ func create_arrow_display(from_pos: Vector3, to_pos: Vector3, color: Color) -> M
 	
 	var mid_pos = (from_pos + to_pos) / 2.0
 	mesh_instance.position = mid_pos
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	
 	return mesh_instance
 

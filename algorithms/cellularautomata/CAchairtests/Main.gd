@@ -98,7 +98,7 @@ func handle_camera(delta):
 	if move != Vector3.ZERO:
 		camera_target += move.normalized() * move_speed * delta
 		camera.position = camera_target + Vector3(0, 20, -30)
-		camera.look_at(camera_target)
+		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 	
 	# Mouse wheel zoom
 	if Input.is_action_just_released("ui_page_up"):
@@ -124,7 +124,7 @@ func _unhandled_input(event):
 		offset = offset.rotated(Vector3.UP, camera_rotation.y)
 		offset = offset.rotated(Vector3.RIGHT, camera_rotation.x)
 		camera.position = camera_target + offset
-		camera.look_at(camera_target)
+		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
 func _on_reset_pressed():
 	reset_simulation()

@@ -455,10 +455,10 @@ func update_ui_facing():
 				var camera_pos = camera.global_transform.origin
 				
 				# Make the panel face the camera
-				info_node.look_at(camera_pos, Vector3.UP)
+				info_node.look_at_from_position(info_node.position, camera_pos, Vector3.UP)
 				
 				if button_panel:
-					button_panel.look_at(camera_pos, Vector3.UP)
+					button_panel.look_at_from_position(button_panel.position, camera_pos, Vector3.UP)
 
 # Generate the current distribution
 func generate_distribution():

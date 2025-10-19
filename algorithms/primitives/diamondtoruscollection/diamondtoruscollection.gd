@@ -98,7 +98,7 @@ func create_hanging_arrangement():
 			diamond.position = diamond_position
 			
 			# Orient diamond pointing upward toward the cylinder
-			diamond.look_at(torus_position, Vector3.UP)
+			diamond.look_at_from_position(diamond.position, torus_position, Vector3.UP)
 			
 			# Apply scale
 			diamond.scale = Vector3.ONE * diamond_scale

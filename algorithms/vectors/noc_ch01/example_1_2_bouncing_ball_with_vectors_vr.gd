@@ -98,7 +98,7 @@ func _process(_delta: float) -> void:
 		var arrow_length := vel_length * 2.0
 		_arrow.visible = true
 		_arrow.position = _position + (_velocity * 0.5)
-		_arrow.look_at(_position + _velocity, Vector3.UP)
+		_arrow.look_at_from_position(_arrow.position, _position + _velocity, Vector3.UP)
 		_arrow.rotate_object_local(Vector3.RIGHT, PI / 2)
 		_arrow.scale = Vector3(1, arrow_length, 1)
 	else:

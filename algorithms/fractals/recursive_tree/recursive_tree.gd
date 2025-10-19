@@ -182,7 +182,7 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		branch_instance.position = position
 		
 		# Rotate to point in the direction
-		branch_instance.look_at(position + direction, Vector3.UP)
+		branch_instance.look_at_from_position(branch_instance.position, position + direction, Vector3.UP)
 		
 		branch.add_child(branch_instance)
 		
@@ -241,7 +241,7 @@ func add_detail_blocks(parent_node, branch_instance, branch_size):
 		
 		# Apply rotation of parent branch to the relative position
 		var global_transform = branch_instance.global_transform
-		detail.position = branch_instance.to_local(global_transform.origin + global_transform.basis * relative_position)
+		detail.position = branch_instance.to_local(global_position + global_transform.basis * relative_position)
 		
 		# Match parent rotation
 		detail.rotation = branch_instance.rotation

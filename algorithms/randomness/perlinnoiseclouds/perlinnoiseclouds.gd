@@ -375,7 +375,7 @@ func increase_quality():
 
 func regenerate_random_clouds():
 	# VR-optimized regeneration
-	var count_to_regen = min(25, cloud_particles.size() / 20)  # Reduced for VR
+	var count_to_regen = min(25, cloud_particles.size() / 20.0)  # Reduced for VR
 	
 	for i in range(count_to_regen):
 		var idx = randi() % cloud_particles.size()
