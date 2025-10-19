@@ -161,7 +161,7 @@ func create_spiral_formation():
 		petal.position = Vector3(cos(angle) * 1.2, height, sin(angle) * 1.2)
 		
 		# Orient the petal outward
-		petal.look_at(Vector3(petal.position.x * 2, petal.position.y, petal.position.z * 2), Vector3.UP)
+		petal.look_at_from_position(petal.position, Vector3(petal.position.x * 2, petal.position.y, petal.position.z * 2), Vector3.UP)
 		
 		# Material for petals with varying colors
 		var petal_material = StandardMaterial3D.new()
@@ -550,7 +550,7 @@ func setup_camera_and_lighting():
 	var camera = Camera3D.new()
 	camera.name = "MainCamera"
 	camera.position = Vector3(15, 10, 15)
-	camera.look_at(Vector3(0, 5, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 5, 0), Vector3.UP)
 	
 	# Set up camera properties
 	camera.fov = 60
@@ -561,7 +561,7 @@ func setup_camera_and_lighting():
 	var sun = DirectionalLight3D.new()
 	sun.name = "Sun"
 	sun.position = Vector3(0, 20, 0)
-	sun.look_at(Vector3(5, 0, 5), Vector3.UP)
+	sun.look_at_from_position(sun.position, Vector3(5, 0, 5), Vector3.UP)
 	
 	# Set up sun properties
 	sun.light_color = Color(1.0, 0.9, 0.8)

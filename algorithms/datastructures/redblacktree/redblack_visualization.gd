@@ -767,7 +767,7 @@ func create_connection_line(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3
 	
 	mesh_instance.mesh = mesh
 	mesh_instance.position = (from_pos + to_pos) / 2.0
-	mesh_instance.look_at(to_pos, Vector3.UP)
+	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.5, 0.5, 0.5, 1.0)

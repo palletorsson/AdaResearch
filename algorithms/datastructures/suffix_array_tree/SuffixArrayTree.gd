@@ -261,7 +261,7 @@ func create_tree_edge(container: Node3D, from: Vector3, to: Vector3, edge_char: 
 	edge.height = distance
 	
 	edge.position = (from + to) * 0.5
-	edge.look_at(to, Vector3.UP)
+	edge.look_at_from_position(edge.position, to, Vector3.UP)
 	edge.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	var material = StandardMaterial3D.new()
@@ -388,4 +388,3 @@ func show_string_processing():
 		indicator.material_override = indicator_material
 		
 		container.add_child(indicator)
-

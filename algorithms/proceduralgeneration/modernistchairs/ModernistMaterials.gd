@@ -222,4 +222,3 @@ func hsv_to_rgb(hsv: Vector3) -> Color:
 		3: return Color(p, q, v, 1.0)
 		4: return Color(t, p, v, 1.0)
 		_: return Color(v, p, q, 1.0)
-

@@ -62,8 +62,8 @@ func _initialize_walk(mi: MeshInstance3D):
 		vertex_grid.append(row)
 	walkers.clear()
 	walkers.append({
-		"x": int(x_segments / 2),
-		"y": int(y_segments / 2),
+		"x": int(x_segments / 2.0),
+		"y": int(y_segments / 2.0),
 	})
 	
 	# Generate indices

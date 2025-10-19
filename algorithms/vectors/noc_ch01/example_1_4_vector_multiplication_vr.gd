@@ -89,6 +89,6 @@ func _update_arrow(arrow: MeshInstance3D, origin: Vector3, vec: Vector3) -> void
 
 	arrow.visible = true
 	arrow.position = origin + vec * 0.5
-	arrow.look_at(origin + vec, Vector3.UP)
+	arrow.look_at_from_position(arrow.position, origin + vec, Vector3.UP)
 	arrow.rotate_object_local(Vector3.RIGHT, PI / 2)
 	arrow.scale = Vector3(1, length, 1)

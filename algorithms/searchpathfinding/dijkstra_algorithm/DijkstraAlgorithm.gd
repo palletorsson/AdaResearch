@@ -82,7 +82,7 @@ func create_sample_graph():
 		edge_cylinder.position = (from_pos + to_pos) * 0.5
 		
 		var direction = (to_pos - from_pos).normalized()
-		edge_cylinder.look_at(from_pos + direction, Vector3.UP)
+		edge_cylinder.look_at_from_position(edge_cylinder.position, from_pos + direction, Vector3.UP)
 		edge_cylinder.rotate_object_local(Vector3.RIGHT, PI/2)
 		
 		get_or_create_container("GraphEdges").add_child(edge_cylinder)

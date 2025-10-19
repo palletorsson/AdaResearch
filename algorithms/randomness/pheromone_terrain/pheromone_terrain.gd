@@ -252,4 +252,3 @@ func reset_terrain():
 			vertex_grid[j][i].y = 0.0
 			pheromone_grid[j][i] = 0.0
 	_update_mesh()
-

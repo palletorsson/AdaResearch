@@ -112,8 +112,8 @@ func setup_environment():
 	
 	# Camera setup
 	var camera = Camera3D.new()
-	camera.position = Vector3(grid_width * cell_size / 2, 15, grid_height * cell_size / 2 + 10)
-	camera.look_at(Vector3(grid_width * cell_size / 2, 0, grid_height * cell_size / 2))
+	camera.position = Vector3(grid_width * cell_size / 2.0, 15, grid_height * cell_size / 2.0 + 10)
+	camera.look_at_from_position(camera.position, Vector3(grid_width * cell_size / 2.0, 0, grid_height * cell_size / 2.0), Vector3.UP)
 	add_child(camera)
 
 func initialize_grid():

@@ -232,7 +232,7 @@ func setup_visual_environment():
 	# Add camera
 	camera = Camera3D.new()
 	camera.position = Vector3(10, 8, 10)
-	camera.look_at(Vector3(0, 0, 0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
 	camera.fov = 60.0
 	add_child(camera)
 

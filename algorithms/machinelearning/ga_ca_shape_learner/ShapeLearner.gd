@@ -10,50 +10,49 @@ var population = []
 var fitness = []
 var target_shape = []
 
-var multimesh_instance: MultiMeshInstance2D
-
 var current_generation = 0
-var ca_grids = []
-var ca_grid_index = 0
+
+@onready var multimesh_instance: MultiMeshInstance2D = $MultiMeshInstance2D
+@onready var timer: Timer = $Timer
 
 func _ready():
-	multimesh_instance = $MultiMeshInstance2D
-	$Timer.wait_time = 0.1
-	$Timer.timeout.connect(stamp_ca_generation)
+	timer.wait_time = 0.1
 	create_target_shape()
 	initialize_population()
-	run_ga_generation()
+	call_deferred("_start_ga")
 
-func _process(delta):
-	pass
+async func _start_ga():
+	await run_ga_loop()
 
-func run_ga_generation():
-	if current_generation < generations:
-		evaluate_population()
+async func run_ga_loop():
+	while current_generation < generations:
+		await evaluate_population_async()
 		var best_fitness = fitness.max()
-		print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
-		if best_fitness == 1.0:
-			set_process(false)
-			return
-		
-		select_new_population()
-		
-		var best_individual_index = fitness.find(fitness.max())
+		var best_individual_index = fitness.find(best_fitness)
 		var best_rules = population[best_individual_index]
-		ca_grids = run_ca(best_rules)
-		ca_grid_index = 0
-		$Timer.start()
-	else:
-		set_process(false)
-
-func stamp_ca_generation():
-	if ca_grid_index < ca_grids.size():
-		update_multimesh(ca_grids[ca_grid_index])
-		ca_grid_index += 1
-		$Timer.start()
-	else:
+		print("Generation: ", current_generation, " Best Fitness: ", best_fitness)
+		await display_ca_sequence(run_ca(best_rules))
+		if best_fitness >= 1.0:
+			break
+		select_new_population()
 		current_generation += 1
-		run_ga_generation()
+		await get_tree().process_frame
+	set_process(false)
+
+async func evaluate_population_async():
+	fitness.resize(population_size)
+	for i in range(population_size):
+		var rules = population[i]
+		var grids = run_ca(rules)
+		fitness[i] = calculate_fitness(grids.back())
+		if i % 5 == 0:
+			await get_tree().process_frame
+
+async func display_ca_sequence(grids):
+	for grid in grids:
+		update_multimesh(grid)
+		timer.start()
+		await timer.timeout
 
 func create_target_shape():
 	target_shape.resize(grid_size)
@@ -73,13 +72,6 @@ func initialize_population():
 		population[i].resize(10) # 10 rules for the CA
 		for j in range(10):
 			population[i][j] = randi() % 2
-
-func evaluate_population():
-	fitness.resize(population_size)
-	for i in range(population_size):
-		var rules = population[i]
-		var grids = run_ca(rules)
-		fitness[i] = calculate_fitness(grids.back())
 
 func run_ca(rules):
 	var grids = []

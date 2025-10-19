@@ -62,7 +62,7 @@ func setup_environment():
 	
 	var camera := Camera3D.new()
 	camera.position = Vector3(8.0, 6.0, 12.0)
-	camera.look_at(Vector3(0.0, 0.0, 0.0), Vector3.UP)
+	camera.look_at_from_position(camera.position, Vector3(0.0, 0.0, 0.0), Vector3.UP)
 	camera.current = true
 	add_child(camera)
 
@@ -207,7 +207,7 @@ func create_edge_visual(edge: Dictionary):
 	line.scale.y = distance
 	
 	if distance > 0.001:
-		line_container.look_at(to_pos, Vector3.UP)
+		line_container.look_at_from_position(line_container.position, to_pos, Vector3.UP)
 		line_container.rotate_object_local(Vector3.RIGHT, PI / 2)
 	
 	edge_lines[edge.from + "_" + edge.to] = line_container

@@ -167,6 +167,7 @@ func create_instanced_objects():
 func create_crystal_instances():
 	crystal_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
 	
 	# Create crystal geometry (diamond shape)
 	var crystal_mesh = create_crystal_mesh()
@@ -207,6 +208,7 @@ func create_crystal_instances():
 func create_flower_instances():
 	flower_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
 	
 	# Create flower geometry (simple petals)
 	var flower_mesh = create_flower_mesh()
@@ -237,6 +239,7 @@ func create_flower_instances():
 func create_particle_instances():
 	particle_multi_mesh = MultiMeshInstance3D.new()
 	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
 	
 	# Create small glowing spheres
 	var sphere_mesh = SphereMesh.new()

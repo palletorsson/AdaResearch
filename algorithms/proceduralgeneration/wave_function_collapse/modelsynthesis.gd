@@ -130,7 +130,7 @@ class ModelSynthesis:
 		var neighborhood = Neighborhood.new(pos, size)
 		var bounds = exemplar_size if is_exemplar else output_size
 		
-		var half_size = size / 2
+		var half_size = size / 2.0
 		for dx in range(-half_size, half_size + 1):
 			for dy in range(-half_size, half_size + 1):
 				for dz in range(-half_size, half_size + 1):

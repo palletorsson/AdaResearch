@@ -323,7 +323,7 @@ func create_noise_based_distortion():
 				displacement_line.height = perlin_offset.length()
 				
 				displacement_line.position = base_pos + perlin_offset * 0.5
-				displacement_line.look_at(base_pos + perlin_offset, Vector3.UP)
+				displacement_line.look_at_from_position(displacement_line.position, base_pos + perlin_offset, Vector3.UP)
 				displacement_line.rotate_object_local(Vector3.RIGHT, PI / 2)
 				
 				var line_material = StandardMaterial3D.new()

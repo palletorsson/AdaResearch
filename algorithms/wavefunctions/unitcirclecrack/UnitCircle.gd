@@ -77,7 +77,7 @@ func create_glowing_line(start: Vector3, end: Vector3, color: Color) -> MeshInst
 	line_mesh.position = (start + end) / 2
 	if end != start:
 		var direction = (end - start).normalized()
-		line_mesh.look_at(line_mesh.position + direction, Vector3.UP)
+		line_mesh.look_at_from_position(line_mesh.position, line_mesh.position + direction, Vector3.UP)
 	
 	add_child(line_mesh)
 	return line_mesh
@@ -89,7 +89,7 @@ func update_line(line: MeshInstance3D, start: Vector3, end: Vector3):
 		line.scale.y = distance / original_height
 		line.position = (start + end) / 2
 		var direction = (end - start).normalized()
-		line.look_at(line.position + direction, Vector3.UP)
+		line.look_at_from_position(line.position, line.position + direction, Vector3.UP)
 
 func _process(delta):
 	time += delta

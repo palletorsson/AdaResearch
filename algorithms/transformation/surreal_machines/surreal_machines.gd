@@ -156,7 +156,7 @@ func setup_joyful_environment():
 	# Warm celebration lighting
 	var celebration_light = DirectionalLight3D.new()
 	celebration_light.position = Vector3(8, 12, 6)
-	celebration_light.look_at(Vector3.ZERO, Vector3.UP)
+	celebration_light.look_at_from_position(celebration_light.position, Vector3.ZERO, Vector3.UP)
 	celebration_light.light_energy = 1.0
 	celebration_light.light_color = Color(1.0, 0.9, 0.8)
 	celebration_light.shadow_enabled = true

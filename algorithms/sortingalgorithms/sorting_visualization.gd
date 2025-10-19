@@ -79,8 +79,8 @@ func setup_environment():
 	
 	# Camera
 	var camera = Camera3D.new()
-	camera.position = Vector3(array_size * bar_spacing / 2, 15, 20)
-	camera.look_at(Vector3(array_size * bar_spacing / 2, 5, 0))
+	camera.position = Vector3(array_size * bar_spacing / 2.0, 15, 20)
+	camera.look_at_from_position(camera.position, Vector3(array_size * bar_spacing / 2.0, 5, 0), Vector3.UP)
 	add_child(camera)
 
 func initialize_array():

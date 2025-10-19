@@ -29,8 +29,8 @@ func _process(_delta):
 func _refresh_geometry():
 	if not point_one or not point_two:
 		return
-	var start_global = point_one.global_transform.origin
-	var end_global = point_two.global_transform.origin
+	var start_global = point_one.global_position
+	var end_global = point_two.global_position
 	var start_local = to_local(start_global)
 	var end_local = to_local(end_global)
 	_update_line(start_local, end_local)

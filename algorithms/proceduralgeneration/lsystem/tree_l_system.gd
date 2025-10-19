@@ -112,7 +112,7 @@ func create_branch(start: Vector3, end: Vector3, branch_thickness: float):
 
 	# Position and rotate the cylinder correctly
 	var mid_point = (start + end) * 0.5
-	cylinder.global_transform.origin = mid_point
+	cylinder.position = mid_point
 	
 	var direction = (end - start).normalized()
 	var rotation = Quaternion(Vector3(0, 1, 0), direction)
@@ -123,7 +123,7 @@ func create_branch(start: Vector3, end: Vector3, branch_thickness: float):
 	# Add sphere at each branching node
 	if sphere_scene:
 		var sphere = sphere_scene.instantiate() as Node3D
-		sphere.global_transform.origin = end
+		sphere.position = end
 		sphere.scale = Vector3(branch_thickness, branch_thickness, branch_thickness)
 		add_child(sphere)
 
@@ -136,7 +136,7 @@ func place_flowers():
 	
 	for pos in terminal_nodes:
 		var flower = flower_scene.instantiate() as Node3D
-		flower.global_transform.origin = pos
+		flower.position = pos
 		flower.scale *= randf_range(0.8, 1.2)  # Slight random scaling for variation
 		flower.rotation_degrees = Vector3(randf_range(-10, 10), randf_range(-180, 180), randf_range(-10, 10))  # Random tilt
 		

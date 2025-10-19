@@ -24,7 +24,7 @@ var render_texture: ImageTexture
 
 func _ready():
 	randomize()
-	half_size = grid_size / 2
+	half_size = grid_size / 2.0
 	
 	# Create the TextureRect node if it doesn't exist
 	if not has_node("TextureRect"):

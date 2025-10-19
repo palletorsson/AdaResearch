@@ -81,7 +81,7 @@ func setup_camera():
 		var camera_node = Camera3D.new()
 		camera_node.name = "Camera3D"
 		camera_node.position = Vector3(0, 0, 12)
-		camera_node.look_at(Vector3.ZERO, Vector3.UP)
+		camera_node.look_at_from_position(camera_node.position, Vector3.ZERO, Vector3.UP)
 		add_child(camera_node)
 
 func create_axes():
