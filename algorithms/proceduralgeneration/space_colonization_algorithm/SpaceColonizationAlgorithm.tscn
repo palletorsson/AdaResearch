@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs3r5302qmray"]
+
+[ext_resource type="Script" uid="uid://cv6vqggl63ges" path="res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.gd" id="1_script"]
+
+[node name="SpaceColonizationAlgorithm" type="Node3D"]
+script = ExtResource("1_script")
+show_growth_animation = true

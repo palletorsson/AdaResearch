@@ -162,6 +162,16 @@ func generate_mesh_from_cubes():
 	generated_mesh.material_override = material
 	
 	add_child(generated_mesh)
+
+	# Create collider from generated mesh so the player can walk on the mound
+	var static_body := StaticBody3D.new()
+	static_body.name = "MoundCollider"
+	var collider := CollisionShape3D.new()
+	var tri_shape := surface_mesh.create_trimesh_shape()
+	if tri_shape:
+		collider.shape = tri_shape
+		static_body.add_child(collider)
+		add_child(static_body)
 	
 	# Optionally hide original cubes
 	for cube in cubes:

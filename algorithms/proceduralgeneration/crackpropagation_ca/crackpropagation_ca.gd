@@ -104,8 +104,8 @@ func _make_crack_mesh() -> void:
 		crack_material.emission_energy_multiplier = EMISSIVE
 
 func _add_initial_stress_center() -> void:
-	var cx: int = GRID_SIZE / 2
-	var cz: int = GRID_SIZE / 2
+	var cx: int = int(float(GRID_SIZE) / 2.0)
+	var cz: int = int(float(GRID_SIZE) / 2.0)
 	stress_grid[cx][cz] = 1.0
 	grid[cx][cz] = CellState.STRESSED
 	for dx in range(-2, 3):

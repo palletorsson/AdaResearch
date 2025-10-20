@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://c31t0ok5c3i20"]
 
-[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_t43dj"]
+[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithmcontinued/branching_growth_algorithm.gd" id="1_t43dj"]
 
 [node name="BranchingGrowthAlgorithm" type="Node3D"]
 script = ExtResource("1_t43dj")
+max_branches = 400
 jitter = 0.2
 pulse_strength = 0.4
 rainbow_speed = 1.5

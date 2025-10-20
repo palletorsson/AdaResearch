@@ -145,9 +145,10 @@ func _process(delta: float) -> void:
 	frame_count += 1
 	
 	# 1. Pass the previous frame's texture to the shader's "last_frame" uniform.
+	# Use call_deferred to avoid texture binding conflicts
 	var current_texture = current_buffer.get_texture()
 	if current_texture:
-		sim_material.set_shader_parameter("last_frame", current_texture)
+		call_deferred("_set_shader_texture", "last_frame", current_texture)
 	
 	# 2. Get the mouse position, convert it to UV coordinates (0.0 to 1.0),
 	#    and pass it to the shader. This lets you "paint" with your mouse.
@@ -410,3 +411,8 @@ void fragment() {
 		
 		print("🧬 Manual reaction-diffusion running!")
 		print("   You should see expanding blue rings!")
+
+func _set_shader_texture(param_name: String, texture: Texture2D) -> void:
+	"""Helper function to set shader texture parameters safely"""
+	if sim_material and sim_material.shader:
+		sim_material.set_shader_parameter(param_name, texture)

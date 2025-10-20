@@ -712,9 +712,17 @@ func update_ui():
 	if not ui_display:
 		return
 	
+	# Check if the UI structure exists
+	var panel = ui_display.get_node("Panel")
+	if not panel:
+		return
+	var vbox = panel.get_node("VBoxContainer")
+	if not vbox:
+		return
+	
 	var labels = []
 	for i in range(40):
-		var label = ui_display.get_node("Panel/VBoxContainer/info_label_" + str(i))
+		var label = vbox.get_node("info_label_" + str(i))
 		if label:
 			labels.append(label)
 	

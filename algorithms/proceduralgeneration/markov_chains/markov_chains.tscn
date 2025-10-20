@@ -44,6 +44,7 @@ size = Vector3(4, 0.3, 0.3)
 
 [node name="GenerationEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+visible = false
 
 [node name="EngineCore" type="CSGBox3D" parent="GenerationEngine"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -69,6 +70,7 @@ material_override = SubResource("StandardMaterial3D_3")
 
 [node name="ProbabilityMatrix" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+visible = false
 
 [node name="MatrixCore" type="CSGBox3D" parent="ProbabilityMatrix"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -83,6 +85,7 @@ size = Vector3(3, 0.3, 0.3)
 
 [node name="GeneratedSequence" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+visible = false
 
 [node name="SequenceCore" type="CSGBox3D" parent="GeneratedSequence"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -96,6 +99,7 @@ size = Vector3(4, 0.3, 0.3)
 [node name="SequenceElements" type="Node3D" parent="GeneratedSequence"]
 
 [node name="MarkovMetrics" type="Node3D" parent="."]
+visible = false
 
 [node name="EntropyMeter" type="Node3D" parent="MarkovMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
@@ -122,5 +126,6 @@ material_override = SubResource("StandardMaterial3D_2")
 radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
+visible = false
 
 [node name="GridLines" type="Node3D" parent="Grid"]

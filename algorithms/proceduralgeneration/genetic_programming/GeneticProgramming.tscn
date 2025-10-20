@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx4waiy2r3ini"]
+
+[ext_resource type="Script" uid="uid://ostedrgtux4v" path="res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.gd" id="1_script"]
+
+[node name="GeneticProgramming" type="Node3D"]
+script = ExtResource("1_script")

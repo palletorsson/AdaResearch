@@ -1,0 +1,162 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3djcmjemdw37"]
+
+[ext_resource type="Script" uid="uid://ck5md4c60evit" path="res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.gd" id="1_net_space"]
+[ext_resource type="Script" uid="uid://qb7ndotbdm75" path="res://algorithms/proceduralgeneration/tesseractnetspace/net_space_demo_controller.gd" id="2_controller"]
+
+[node name="TesseractNetSpaceDemo" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="TesseractNetSpace" type="Node3D" parent="."]
+script = ExtResource("1_net_space")
+net_type = 1
+space_size = Vector3i(2, 2, 2)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10.6066, 10, 10.6066)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -300.0
+offset_right = 350.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tesseract Net Space"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="NetTypeLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Net Type:"
+
+[node name="NetTypeOption" type="OptionButton" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpaceSizeLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Space Size:"
+
+[node name="SpaceSizeXSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+
+[node name="SpaceSizeYSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 3.0
+
+[node name="SpaceSizeZSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+
+[node name="CubeSizeSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.2
+max_value = 2.0
+step = 0.1
+value = 1.2
+
+[node name="SpacingSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="HollowCenterCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Hollow Center"
+
+[node name="RotationVarietyCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Rotation Variety"
+
+[node name="OffsetPatternCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Offset Pattern"
+
+[node name="BaseColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+color = Color(0.8, 0.2, 0.2, 1)
+
+[node name="ColorVariationCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Color Variation"
+
+[node name="EmissionSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+
+[node name="WireframeCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Show Wireframe"
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate"
+
+[node name="RandomizeButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomize"
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Stats will appear here"
+vertical_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Controls:
+- Mouse wheel: Zoom
+- Middle drag: Rotate camera
+- Left click: Randomize
+- Right click: Next net type
+- R: Regenerate
+- Space: Randomize
+- 1-4: Switch net types"
+vertical_alignment = 1

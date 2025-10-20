@@ -309,7 +309,14 @@
 	"Procedural Generation": [
 	  "res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
 	  "res://algorithms/proceduralgeneration/lsystem/scenes/tree_l_system.tscn",
-	  "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn"
+	  "res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn",
+	  "res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn",
+	  "res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn",
+	  "res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.tscn",
+	  "res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn",
+	  "res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+	  "res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
+	  "res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn"
 	],
 	"Joint Mechanics": [
 	  "res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",

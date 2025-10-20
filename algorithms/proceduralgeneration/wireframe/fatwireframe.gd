@@ -24,7 +24,7 @@ uniform float glow_intensity : hint_range(0.5, 5.0) = 2.0;
 uniform float pulse_speed : hint_range(0.5, 3.0) = 1.5;
 uniform float thickness_pulse : hint_range(0.0, 1.0) = 0.3;
 uniform float edge_falloff : hint_range(0.1, 2.0) = 0.8;
-uniform bool animate_thickness : hint_default(true, true) = true;
+uniform bool animate_thickness = true;
 
 varying vec3 world_position;
 varying vec3 barycentric;

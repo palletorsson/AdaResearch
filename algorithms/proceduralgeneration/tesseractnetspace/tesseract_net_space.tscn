@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy3tecaktxkiw"]
+
+[ext_resource type="Script" uid="uid://ck5md4c60evit" path="res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.gd" id="1_net_space"]
+
+[node name="TesseractNetSpace" type="Node3D"]
+script = ExtResource("1_net_space")

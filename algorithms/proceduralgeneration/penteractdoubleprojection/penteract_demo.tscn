@@ -1,0 +1,246 @@
+[gd_scene load_steps=4 format=3 uid="uid://penteract_demo_001"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_double_projection.gd" id="1_penteract"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_demo_controller.gd" id="2_controller"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.01, 0.01, 0.02, 1)
+ambient_light_color = Color(0.05, 0.05, 0.1, 1)
+ambient_light_energy = 0.1
+
+[node name="PenteractDemo" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="PenteractDoubleProjection" type="Node3D" parent="."]
+script = ExtResource("1_penteract")
+projection_mode = 0
+penteract_size = 2.0
+projection_distance_5d = 4.0
+projection_distance_4d = 4.0
+rotation_5d_vw = 0.0
+rotation_4d_xw = 0.0
+rotation_4d_yw = 0.0
+rotation_4d_zw = 0.0
+animate_rotation = true
+rotation_speed = 0.3
+inner_color = Color(1, 0.3, 0.3, 1)
+middle_color = Color(0.3, 1, 0.3, 1)
+outer_color = Color(0.3, 0.3, 1, 1)
+edge_thickness = 0.02
+emission_strength = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 6, 10)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_bottom = 900.0
+mouse_filter = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Penteract Double Projection"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProjectionLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Projection: Perspective Both"
+
+[node name="ProjectionOption" type="OptionButton" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Perspective Both"
+item_count = 4
+popup.add_item("Perspective Both", 0)
+popup.add_item("Orthographic Both", 1)
+popup.add_item("Mixed Persp-Ortho", 2)
+popup.add_item("Mixed Ortho-Persp", 3)
+
+[node name="SizeLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Penteract Size: 2.0"
+
+[node name="SizeSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 5.0
+value = 2.0
+step = 0.1
+
+[node name="Dist5DLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "5D Projection Distance: 4.0"
+
+[node name="Dist5DSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 2.0
+max_value = 10.0
+value = 4.0
+step = 0.1
+
+[node name="Dist4DLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "4D Projection Distance: 4.0"
+
+[node name="Dist4DSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 2.0
+max_value = 10.0
+value = 4.0
+step = 0.1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Rot5DVWLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "5D VW Rotation: 0.0"
+
+[node name="Rot5DVWSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 6.28
+value = 0.0
+step = 0.1
+
+[node name="Rot4DXWLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "4D XW Rotation: 0.0"
+
+[node name="Rot4DXWSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 6.28
+value = 0.0
+step = 0.1
+
+[node name="Rot4DYWLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "4D YW Rotation: 0.0"
+
+[node name="Rot4DYWSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 6.28
+value = 0.0
+step = 0.1
+
+[node name="Rot4DZWLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "4D ZW Rotation: 0.0"
+
+[node name="Rot4DZWSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 6.28
+value = 0.0
+step = 0.1
+
+[node name="AnimationCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Animate Rotation"
+button_pressed = true
+
+[node name="SpeedLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Rotation Speed: 0.3"
+
+[node name="SpeedSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 2.0
+value = 0.3
+step = 0.05
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="InnerColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Inner Color"
+
+[node name="InnerColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+color = Color(1, 0.3, 0.3, 1)
+
+[node name="MiddleColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Middle Color"
+
+[node name="MiddleColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+color = Color(0.3, 1, 0.3, 1)
+
+[node name="OuterColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Outer Color"
+
+[node name="OuterColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+color = Color(0.3, 0.3, 1, 1)
+
+[node name="EmissionLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Emission: 1.5"
+
+[node name="EmissionSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 5.0
+value = 1.5
+step = 0.1
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Penteract"
+
+[node name="RandomizeButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomize Parameters"
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Vertices: 32\nEdges: 80"
+autowrap_mode = 3
+

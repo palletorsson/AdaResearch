@@ -133,7 +133,7 @@ func subdivide_cube_menger(cube: Node3D):
 		# Calculate 3D position from 1D index
 		var x = i % 3
 		var y = (i / 3) % 3
-		var z = i / 9
+		var z = i / 9.0
 
 		# Calculate offset from center (-1, 0, or 1 in each dimension)
 		var pos_offset = Vector3(

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://crystal_random_walk_001"]
+
+[ext_resource type="Script" path="res://algorithms/randomness/randomwalk/scripts/crystal_random_walk.gd" id="1_crystal"]
+
+[node name="CrystalRandomWalk" type="Node3D"]
+script = ExtResource("1_crystal")
+

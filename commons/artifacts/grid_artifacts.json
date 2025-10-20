@@ -1361,6 +1361,7 @@
 			"lookup_name": "crackpropagation_ca",
 			"description": "crackpropagation_ca",
 			"scene": "res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn",
+			"todo": "fix this no visuals"
 		},
 		 "dewcoveredfol": {
 			"name": "dewcoveredfol",
@@ -1434,7 +1435,7 @@
 			"name": "SierpinskiPyramid",
 			"lookup_name": "SierpinskiPyramid",
 			"description": "SierpinskiPyramid",
-			"scene": "res://algorithms/proceduralgeneration/sierpinski_pyramid/SierpinskiPyramid.tscn",
+			"scene": "res://algorithms/fractals/sierpinski_pyramid/SierpinskiPyramid.tscn",
 			
 		},		
 		"CaveGenerator": {
@@ -1442,7 +1443,7 @@
 			"lookup_name": "CaveGenerator",
 			"description": "CaveGenerator",
 			"scene": "res://algorithms/proceduralgeneration/cave_generator/CaveGenerator.tscn",
-			
+			"todo": "fix me, now cave is created"
 		},				
 	
 		"cellular_automata_2d": {
@@ -1818,6 +1819,14 @@
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn",
 
 		},
+		"info_display": {
+			"name": "info_display",
+			"lookup_name": "info_display",
+			"description": "info Display",
+			"scene": "res://commons/scenes/mapobjects/infodisplay.tscn",
+
+		},		
+		
 		"booleans": {
 			"name": "booleans",
 			"lookup_name": "booleans",
@@ -2294,8 +2303,86 @@
 			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
 			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn",
 
-		}
-		,
+		},
+		"crystal_random_walk_demo": {
+			"name": "crystal_random_walk_demo",
+			"lookup_name": "crystal_random_walk_demo",
+			"description": "crystal_random_walk_demo",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk_demo.tscn",
+
+		},
+		"tesseract_net_space_showcase": {
+			"name": "tesseract_net_space_showcase",
+			"lookup_name": "tesseract_net_space_showcase",
+			"description": "tesseract_net_space_showcase",
+			"scene": "res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space_showcase.tscn",
+
+		},
+		"sixteen_cell_net_space_showcase": {
+			"name": "sixteen_cell_net_space_showcase",
+			"lookup_name": "sixteen_cell_net_space_showcase",
+			"description": "sixteen_cell_net_space_showcase",
+			"scene": "res://algorithms/proceduralgeneration/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn",
+
+		},
+		
+		"tessellating_portal_demo": {
+			"name": "tessellating_portal_demo",
+			"lookup_name": "tessellating_portal_demo",
+			"description": "tessellating_portal_demo",
+			"scene": "res://algorithms/proceduralgeneration/tessellatingportal/tessellating_portal_demo.tscn",
+
+		},
+		"tessellation_lattice_demo": {
+			"name": "tessellation_lattice_demo",
+			"lookup_name": "tessellation_lattice_demo",
+			"description": "tessellation_lattice_demo",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn",
+
+		},
+			"tesseract_tunnel_demo": {
+			"name": "tesseract_tunnel_demo",
+			"lookup_name": "tesseract_tunnel_demo",
+			"description": "tesseract_tunnel_demo",
+			"scene": "res://algorithms/proceduralgeneration/tesseracttunnel/tesseract_tunnel_demo.tscn",
+		},	
+		
+		"binary_space_partitioning": {
+			"name": "binary_space_partitioning",
+			"lookup_name": "binary_space_partitioning",
+			"description": "binary_space_partitioning",
+			"scene": "res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn",
+		},
+		"markov_chains_tree": {
+			"name": "markov_chains_tree",
+			"lookup_name": "markov_chains_tree",
+			"description": "markov_chains_tree",
+			"scene": "res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.tscn",
+		},
+		"poisson_disk_sampling_3d": {
+			"name": "poisson_disk_sampling_3d",
+			"lookup_name": "poisson_disk_sampling_3d",
+			"description": "poisson_disk_sampling_3d",
+			"scene": "res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn",
+		},
+		"space_colonization_algorithm": {
+			"name": "space_colonization_algorithm",
+			"lookup_name": "space_colonization_algorithm",
+			"description": "space_colonization_algorithm",
+			"scene": "res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+		},
+		"voronoi_diagram_3d": {
+			"name": "voronoi_diagram_3d",
+			"lookup_name": "voronoi_diagram_3d",
+			"description": "voronoi_diagram_3d",
+			"scene": "res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
+		},
+		"delaunay_triangulation_3d_cell": {
+			"name": "delaunay_triangulation_3d_cell",
+			"lookup_name": "delaunay_triangulation_3d_cell",
+			"description": "delaunay_triangulation_3d_cell",
+			"scene": "res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn",
+		},
 		"cellular_automata_grabable": {
 			"name": "Cellular Automata Grabable",
 			"lookup_name": "cellular_automata_grabable",
@@ -2348,6 +2435,13 @@
 			"scale": [1.0, 1.0, 1.0],
 
 		},
+		"cube_mound_scene": {
+			"name": "cube_mound_scene",
+			"lookup_name": "cube_mound_scene",
+			"description": "cube_mound_scene",
+			"scene": "res://algorithms/proceduralgeneration/cubemound/cube_mound_scene.tscn",
+		},
+		
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",
 			"lookup_name": "branching_growth_algorithm",
@@ -2355,6 +2449,16 @@
 			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
 
 		},
+		"caverandomwalk": {
+			"name": "caverandomwalk",
+			"lookup_name": "caverandomwalk",
+			"description": "caverandomwalk",
+			"scene": "res://algorithms/proceduralgeneration/caverandomwalk/caverandomwalk.tscn",
+
+		},
+
+		
+
 		"lsystem_tree": {
 			"name": "L-System Tree",
 			"lookup_name": "lsystem_tree",
@@ -2759,7 +2863,8 @@
 			"lookup_name": "fatwireframe",
 			"description": "Procedural wireframe generation with adjustable line thickness and geometric complexity",
 			"scene": "res://algorithms/proceduralgeneration/wireframe/fatwireframe.tscn",
-			
+			"comment": "fits in shaders",
+			"todo": "test"
 		},
 		"cloudvolume": {
 			"name": "Cloud Volume",
@@ -3596,7 +3701,7 @@
 		"description": "techstrider",
 		"scene": "res://commons/hazards/techstrider/techstrider.tscn",
 	},
-	"cavex": {
+	"cavetest": {
 		"name": "cavetest",
 		"lookup_name": "cavetest",
 		"description": "cavetest",

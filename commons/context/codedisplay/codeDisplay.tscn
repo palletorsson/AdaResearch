@@ -23,6 +23,7 @@ screen_size = Vector2(1, 1)
 scene = ExtResource("4_2eqye")
 viewport_size = Vector2(720, 720)
 unshaded = true
+scene_properties_keys = PackedStringArray()
 
 [node name="Screen2" type="MeshInstance3D" parent="Viewport2Din3D"]
 transform = Transform3D(1.46, 0, 0, 0, 1.48, -2.01367e-08, 0, 2.98023e-08, 1, 0, 0, -0.0133978)

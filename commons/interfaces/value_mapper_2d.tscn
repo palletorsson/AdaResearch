@@ -1,23 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5x2hp8vwn7yb"]
 
-[ext_resource type="Script" path="res://commons/interfaces/value_mapper_2d.gd" id="1"]
+[ext_resource type="Script" uid="uid://bcjne4peqg6bj" path="res://commons/interfaces/value_mapper_2d.gd" id="1"]
 
 [node name="ValueMapper2D" type="Node3D"]
 script = ExtResource("1")
-plane_size = Vector2(1.0, 1.0)
-axis_color_x = Color(1.0, 0.3, 0.3, 1)
-axis_color_y = Color(0.3, 1.0, 0.3, 1)
-grid_color = Color(0.5, 0.5, 0.5, 0.3)
-axis_thickness = 0.008
-output_x_min = 0.0
-output_x_max = 1.0
-output_y_min = 0.0
-output_y_max = 1.0
-show_labels = true
-label_x = "X"
-label_y = "Y"
-show_grid = true
-grid_divisions = 4
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.92388, 0.382683, 0, -0.382683, 0.92388, 0, 0.6, 2)

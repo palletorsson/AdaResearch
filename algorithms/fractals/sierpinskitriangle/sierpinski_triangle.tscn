@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjg4m5xrhqp2n"]
 
-[ext_resource type="Script" path="res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd" id="1_sierpinski"]
+[ext_resource type="Script" uid="uid://cgb2k8pfah7nf" path="res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd" id="1_sierpinski"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.12, 0.14, 0.22, 1)
@@ -19,21 +19,12 @@ ambient_light_color = Color(0.4, 0.45, 0.6, 1)
 ambient_light_energy = 0.5
 tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 0.8
 glow_strength = 1.2
 glow_bloom = 0.3
 glow_blend_mode = 0
 
 [node name="SierpinskiTriangle" type="Node3D"]
 script = ExtResource("1_sierpinski")
-subdivision_interval = 1.0
-max_iterations = 6
-auto_start = true
-triangle_size = 1.0
-triangle_thickness = 0.05
-extrude_on_subdivision = true
-extrusion_height = 0.15
-colorize_by_depth = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_main")
@@ -62,6 +53,5 @@ light_energy = 0.6
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 light_color = Color(1, 0.95, 0.9, 1)
-light_energy = 1.0
 omni_range = 8.0
 omni_attenuation = 0.5

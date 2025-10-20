@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cglvhpjwbdohe"]
+
+[ext_resource type="Script" uid="uid://ck810hwsx4iay" path="res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.gd" id="1_script"]
+
+[node name="VoronoiDiagram3D" type="Node3D"]
+script = ExtResource("1_script")
+region_size = Vector3(1, 1, 1)
+render_mode_enum = null
+render_mode = null
+face_thickness = null
+show_boundaries_only = null
+cull_internal_faces = null
+color_per_cell = null
+cell_colors = null
+resolution = 12
+smooth_normals = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.2301)

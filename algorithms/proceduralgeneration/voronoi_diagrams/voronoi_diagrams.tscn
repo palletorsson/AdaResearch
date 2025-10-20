@@ -30,6 +30,7 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 light_energy = 1.5
 
 [node name="VoronoiSpace" type="Node3D" parent="."]
+visible = false
 
 [node name="SeedPoints" type="Node3D" parent="VoronoiSpace"]
 
@@ -44,6 +45,7 @@ size = Vector3(4, 0.3, 0.3)
 
 [node name="GenerationEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+visible = false
 
 [node name="EngineCore" type="CSGBox3D" parent="GenerationEngine"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -69,6 +71,7 @@ material_override = SubResource("StandardMaterial3D_3")
 
 [node name="DistanceFields" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+visible = false
 
 [node name="FieldCore" type="CSGBox3D" parent="DistanceFields"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -83,6 +86,7 @@ size = Vector3(3, 0.3, 0.3)
 
 [node name="SweepLine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+visible = false
 
 [node name="SweepCore" type="CSGBox3D" parent="SweepLine"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -94,6 +98,7 @@ material_override = SubResource("StandardMaterial3D_1")
 size = Vector3(4, 0.3, 0.3)
 
 [node name="VoronoiMetrics" type="Node3D" parent="."]
+visible = false
 
 [node name="UniformityMeter" type="Node3D" parent="VoronoiMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
@@ -120,5 +125,6 @@ material_override = SubResource("StandardMaterial3D_2")
 radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
+visible = false
 
 [node name="GridLines" type="Node3D" parent="Grid"]

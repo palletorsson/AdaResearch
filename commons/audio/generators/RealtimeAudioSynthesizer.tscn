@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqx8v7k8oax2y"]
+
+[ext_resource type="Script" path="res://commons/audio/generators/RealtimeAudioSynthesizer.gd" id="1_8x9y2"]
+
+[node name="RealtimeAudioSynthesizer" type="Node3D"]
+script = ExtResource("1_8x9y2")
+

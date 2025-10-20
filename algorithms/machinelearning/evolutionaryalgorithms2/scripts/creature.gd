@@ -674,6 +674,10 @@ func evaluate_fitness():
 	
 	fitness = base_fitness
 
+func get_fitness():
+	# Return the current fitness value
+	return fitness
+
 func can_reproduce():
 	# Check if creature can reproduce based on energy, age, and time since last reproduction
 	return (
@@ -1095,6 +1099,10 @@ func get_creature_type():
 	return creature_type
 
 func get_genome():
+	return genome
+
+func get_genes():
+	# Return the genome (genes) for evolutionary algorithms
 	return genome
 
 func _get_body_scale() -> Vector3:

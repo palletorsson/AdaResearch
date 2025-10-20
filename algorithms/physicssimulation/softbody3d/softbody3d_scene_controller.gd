@@ -12,8 +12,8 @@ var current_demonstration = 0
 var demonstration_timer = 0.0
 
 # Interactive elements
-@onready var wind_zone: Area3D = $InteractiveElements/WindZone
-@onready var force_field: Area3D = $InteractiveElements/ForceField
+@onready var wind_zone: Area3D = get_node_or_null("InteractiveElements/WindZone")
+@onready var force_field: Area3D = get_node_or_null("InteractiveElements/ForceField")
 
 # UI elements
 @onready var info_panel: Panel = $UI/InfoPanel

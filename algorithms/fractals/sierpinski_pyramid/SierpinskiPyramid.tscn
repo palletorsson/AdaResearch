@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0c6bwsyq5g2v"]
 
-[ext_resource type="Script" uid="uid://hu1xkh7s186c" path="res://algorithms/proceduralgeneration/sierpinski_pyramid/SierpinskiPyramid.gd" id="1_5t4g3"]
+[ext_resource type="Script" uid="uid://hu1xkh7s186c" path="res://algorithms/fractals/sierpinski_pyramid/SierpinskiPyramid.gd" id="1_5t4g3"]
 
 [node name="SierpinskiPyramid" type="Node3D"]
 script = ExtResource("1_5t4g3")

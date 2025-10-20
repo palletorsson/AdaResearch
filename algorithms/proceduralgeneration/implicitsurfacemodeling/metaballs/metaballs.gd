@@ -1,7 +1,7 @@
 extends Node3D
 
 # Editable parameters
-@export var metaball_count: int = 5
+@export var metaball_count: int = 9
 @export var min_strength: float = 0.8
 @export var max_strength: float = 1.2
 @export var blend_factor: float = 0.4

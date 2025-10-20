@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmhdlr3q6j5hm"]
+[gd_scene load_steps=4 format=3 uid="uid://bmhdlr3q6j5hm"]
 
 [ext_resource type="Script" uid="uid://ct65n0anlcm1p" path="res://algorithms/proceduralgeneration/lsystem/tree_l_system.gd" id="1_r5c75"]
+[ext_resource type="PackedScene" uid="uid://bapvfdrc33ea2" path="res://commons/primitives/diamond/diamond.tscn" id="2_ijet7"]
+[ext_resource type="PackedScene" uid="uid://c8xp4vw2jkn5m" path="res://commons/primitives/proceduralrock/proceduralrock.tscn" id="3_g6nth"]
 
 [node name="Tree_L_system" type="Node3D"]
 script = ExtResource("1_r5c75")
+iterations = 5
+angle = 35.0
+sphere_scene = ExtResource("2_ijet7")
+flower_scene = ExtResource("3_g6nth")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.770858, 0.658724, 2.28147)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.770858, 2.66344, 6.02156)

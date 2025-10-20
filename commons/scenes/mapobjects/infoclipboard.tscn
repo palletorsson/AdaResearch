@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bik00jo7aerkq"]
+
+[ext_resource type="Script" uid="uid://dig18jy1o8b8e" path="res://commons/context/clipboard/clipboard.gd" id="1_jrgsk"]
+[ext_resource type="PackedScene" uid="uid://bxpseco03ygvb" path="res://commons/primitives/cubes/grab_plane.tscn" id="2_bnqss"]
+[ext_resource type="PackedScene" uid="uid://0t3rkx301513" path="res://commons/scenes/mapobjects/infodisplay.tscn" id="3_5pa0i"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2qefi"]
+size = Vector2(0.32, 0.46)
+
+[node name="clipboard" type="Node3D"]
+script = ExtResource("1_jrgsk")
+addxp = 22
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0, 0, 0.374449)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
+
+[node name="GrabPlane" parent="." instance=ExtResource("2_bnqss")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="clipboard" type="Node3D" parent="GrabPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.216633, 0, -0.574639)
+
+[node name="page" type="MeshInstance3D" parent="GrabPlane/clipboard"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.216633, 0.0166395, 0.574638)
+visible = false
+mesh = SubResource("PlaneMesh_2qefi")
+skeleton = NodePath("../..")
+
+[node name="pagenumber" type="Label3D" parent="GrabPlane/clipboard/page"]
+transform = Transform3D(0.1, 0, 0, 0, -0.024243, 0.097017, 0, -0.097017, -0.024243, -0.147626, 0.00226679, -0.281287)
+text = "()"
+font_size = 16
+outline_size = 8
+
+[node name="infoDisplay" parent="." instance=ExtResource("3_5pa0i")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)

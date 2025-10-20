@@ -71,6 +71,8 @@ func update_multimesh():
 	cube_mesh.size = Vector3(1, 1, 1)
 	var multimesh = MultiMesh.new()
 	multimesh.mesh = cube_mesh
+	# Ensure we can set 3D transforms on instances
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 
 	var instance_count = 0
 	for x in range(grid_size):

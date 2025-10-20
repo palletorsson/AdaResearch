@@ -1,8 +1,8 @@
 extends Node2D
 
-# Simulation parameters
-var width = 256
-var height = 256
+# Simulation parameters - Reduced for VR performance
+var width = 128
+var height = 128
 var grid_a = []  # Chemical A concentration
 var grid_b = []  # Chemical B concentration
 var next_a = []  # Next step for A
@@ -20,6 +20,7 @@ var time_scale = 1.0  # Overall speed of the simulation
 var image = Image.new()
 var texture = ImageTexture.new()
 var sprite = Sprite2D.new()
+var frame_counter = 0
 
 # Parameters UI
 var parameter_panel
@@ -279,30 +280,40 @@ func _load_next_preset():
 	_add_random_seeds()
 
 func _process(delta):
-	# Perform multiple simulation steps per frame for faster visualization
-	var steps = int(time_scale * 10 * delta)
+	# Reduced sampling for VR performance - only update every few frames
+	var steps = int(time_scale * 3 * delta)  # Reduced from 10 to 3
 	for i in range(max(1, steps)):
 		_simulate_step(delta)
 	
-	# Update the texture
-	_update_texture()
+	# Update the texture less frequently for VR performance
+	frame_counter += 1
+	if frame_counter % 3 == 0:  # Update every 3rd frame
+		_update_texture()
 
 func _update_texture():
+	# Check if image is properly initialized
+	if image.get_width() == 0 or image.get_height() == 0:
+		print("Image not initialized, recreating...")
+		image.create(width, height, false, Image.FORMAT_RGB8)
+		return
+	
 	# Update the image based on current concentrations
 	for y in range(height):
 		for x in range(width):
-			var a = grid_a[y][x]
-			var b = grid_b[y][x]
-			
-			# Map the concentrations to a color
-			var color = Color(a, a, a) - Color(0, b, b)
-			
-			# Ensure color values are in valid range
-			color.r = clamp(color.r, 0.0, 1.0)
-			color.g = clamp(color.g, 0.0, 1.0)
-			color.b = clamp(color.b, 0.0, 1.0)
-			
-			image.set_pixel(x, y, color)
+			# Bounds checking to prevent errors
+			if x >= 0 and x < width and y >= 0 and y < height and x < image.get_width() and y < image.get_height():
+				var a = grid_a[y][x]
+				var b = grid_b[y][x]
+				
+				# Map the concentrations to a color
+				var color = Color(a, a, a) - Color(0, b, b)
+				
+				# Ensure color values are in valid range
+				color.r = clamp(color.r, 0.0, 1.0)
+				color.g = clamp(color.g, 0.0, 1.0)
+				color.b = clamp(color.b, 0.0, 1.0)
+				
+				image.set_pixel(x, y, color)
 	
 	# Create texture from the image
 	texture = ImageTexture.create_from_image(image)

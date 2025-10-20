@@ -71,16 +71,6 @@ func create_centered_rotating_arm():
 	
 	# Set collision layers
 	collision_layer = 2  # Pusher layer
-	collision_mask = 0   # StaticBody doesn't need to detect anythingthickness)
-	arm_collision.shape = collision_shape
-	
-	# KEY CHANGE: Position collision at center too
-	arm_collision.position = Vector3.ZERO  # Centered collision
-	
-	add_child(arm_collision)
-	
-	# Set collision layers
-	collision_layer = 2  # Pusher layer
 	collision_mask = 0   # StaticBody doesn't need to detect anything
 
 func _physics_process(delta):

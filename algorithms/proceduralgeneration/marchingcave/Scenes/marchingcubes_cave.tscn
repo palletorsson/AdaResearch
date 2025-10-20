@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkjo2r38vn7pq"]
 
-[ext_resource type="Material" uid="uid://c16m6psb2fle8" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
 [ext_resource type="Script" uid="uid://c2aji3u2bgmv8" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd" id="2_kc6u2"]
 
 [sub_resource type="Environment" id="Environment_q07dc"]
@@ -13,7 +13,6 @@ ssao_enabled = true
 ssao_radius = 12.0
 ssao_intensity = 6.0
 ssao_power = 2.5
-ssao_detail = 0.5
 ssao_horizon = 0.15
 ssao_sharpness = 0.6
 ssao_light_affect = 0.8
@@ -35,9 +34,8 @@ volumetric_fog_albedo = Color(0.1, 0.08, 0.06, 1)
 volumetric_fog_emission = Color(0.02, 0.015, 0.01, 1)
 volumetric_fog_emission_energy = 0.3
 volumetric_fog_gi_inject = 0.3
-volumetric_fog_anisotropy = 0.2
 volumetric_fog_length = 40.0
-volumetric_fog_detail_spread = 8.0
+volumetric_fog_detail_spread = 6.0
 volumetric_fog_ambient_inject = 0.1
 volumetric_fog_temporal_reprojection_amount = 0.8
 adjustment_enabled = true
@@ -78,10 +76,10 @@ light_color = Color(1, 0.6, 0.2, 1)
 light_energy = 3.5
 light_indirect_energy = 1.2
 light_volumetric_fog_energy = 6.0
-omni_range = 35.0
-omni_attenuation = 2.0
 shadow_enabled = true
 shadow_opacity = 0.6
+omni_range = 35.0
+omni_attenuation = 2.0
 
 [node name="OmniLight3D_Torch2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5, 10)
@@ -89,10 +87,10 @@ light_color = Color(1, 0.55, 0.15, 1)
 light_energy = 2.8
 light_indirect_energy = 0.9
 light_volumetric_fog_energy = 5.0
-omni_range = 30.0
-omni_attenuation = 2.2
 shadow_enabled = true
 shadow_opacity = 0.5
+omni_range = 30.0
+omni_attenuation = 2.2
 
 [node name="OmniLight3D_Bio1" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5, -20)
@@ -102,7 +100,6 @@ light_indirect_energy = 1.5
 light_volumetric_fog_energy = 4.5
 omni_range = 25.0
 omni_attenuation = 1.8
-shadow_enabled = false
 
 [node name="OmniLight3D_Bio2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -8, 25)
@@ -112,19 +109,18 @@ light_indirect_energy = 1.2
 light_volumetric_fog_energy = 4.0
 omni_range = 28.0
 omni_attenuation = 2.0
-shadow_enabled = false
 
 [node name="SpotLight3D_Crevice" type="SpotLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -10, 20, -5)
 light_color = Color(0.5, 0.4, 0.3, 1)
 light_energy = 1.2
 light_volumetric_fog_energy = 3.5
+shadow_enabled = true
+shadow_opacity = 0.8
 spot_range = 40.0
 spot_attenuation = 1.5
 spot_angle = 35.0
 spot_angle_attenuation = 2.0
-shadow_enabled = true
-shadow_opacity = 0.8
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_q07dc")

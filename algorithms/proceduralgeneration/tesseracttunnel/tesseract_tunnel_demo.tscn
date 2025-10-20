@@ -1,0 +1,202 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdo78kq8gx6uq"]
+
+[ext_resource type="Script" uid="uid://c4m3jptargh12" path="res://algorithms/proceduralgeneration/tesseracttunnel/tesseract_tunnel.gd" id="1_tunnel"]
+[ext_resource type="Script" uid="uid://guymeqsi858u" path="res://algorithms/proceduralgeneration/tesseracttunnel/tunnel_demo_controller.gd" id="2_controller"]
+
+[node name="TesseractTunnelDemo" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="TesseractTunnel" type="Node3D" parent="."]
+script = ExtResource("1_tunnel")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 12)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -380.0
+offset_bottom = 800.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tesseract Tunnel"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProjectionLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Projection: Perspective"
+
+[node name="ProjectionOption" type="OptionButton" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/id = 0
+popup/item_1/id = 1
+popup/item_2/id = 2
+popup/item_3/id = 3
+
+[node name="RadiusSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 2.0
+max_value = 15.0
+step = 0.1
+value = 5.0
+
+[node name="LengthLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tunnel Length: 20.0"
+
+[node name="LengthSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 10.0
+max_value = 50.0
+value = 20.0
+
+[node name="DensityLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Grid Density: 3"
+
+[node name="DensitySlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 3.0
+
+[node name="SizeLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tesseract Size: 1.5"
+
+[node name="SizeSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 4.0
+step = 0.1
+value = 1.5
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="WOffsetLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "W Offset: 0.0"
+
+[node name="WOffsetSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = -5.0
+max_value = 5.0
+step = 0.1
+
+[node name="AnimationCheckBox" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Animate 4D"
+
+[node name="WSpeedLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "W Speed: 0.5"
+
+[node name="WSpeedSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="RotationLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "4D Rotation: 0.0"
+
+[node name="RotationSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 6.28
+step = 0.1
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="EdgeColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Edge Color"
+
+[node name="EdgeColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+color = Color(0.4, 0.7, 1, 1)
+
+[node name="EmissionLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Emission: 2.0"
+
+[node name="EmissionSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 5.0
+step = 0.1
+value = 2.0
+
+[node name="InnerColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Inner Color"
+
+[node name="InnerColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+color = Color(1, 0.5, 0.8, 1)
+
+[node name="OuterColorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Outer Color"
+
+[node name="OuterColorPicker" type="ColorPicker" parent="UI/Control/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+color = Color(0.3, 0.5, 1, 1)
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Tunnel"
+
+[node name="RandomizeButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomize Parameters"
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tesseracts: 0"
+autowrap_mode = 3

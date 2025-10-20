@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://lc7alf6ili53"]
+
+[ext_resource type="Script" uid="uid://dbl23ghq1twrw" path="res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.gd" id="1_script"]
+
+[node name="BinarySpacePartitioning" type="Node3D"]
+script = ExtResource("1_script")
+max_depth = 9

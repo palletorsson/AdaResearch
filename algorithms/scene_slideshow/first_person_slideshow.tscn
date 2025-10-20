@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8p4nan3r2k7q"]
+[gd_scene load_steps=11 format=3 uid="uid://c8p4nan3r2k7q"]
 
 [ext_resource type="Script" uid="uid://iygoqynkwxol" path="res://algorithms/scene_slideshow/first_person_controller.gd" id="1"]
 [ext_resource type="Script" uid="uid://c4mi62heuhmmg" path="res://algorithms/scene_slideshow/scene_slideshow_manager.gd" id="2"]
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="3_c0kms"]
-[ext_resource type="Shader" uid="uid://dg1cd83krkd17" path="res://commons/resourses/shaders/fire.gdshader" id="4_158kl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 height = 1.8
@@ -38,35 +37,12 @@ size = Vector3(100, 0.2, 100)
 subdivide_width = 12
 subdivide_depth = 12
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kdleb"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w4je4"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_umnkw"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4po6d"]
-noise = SubResource("FastNoiseLite_umnkw")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3hht6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdleb"]
-render_priority = 0
-shader = ExtResource("4_158kl")
-shader_parameter/Noise_Texture = SubResource("NoiseTexture2D_4po6d")
-shader_parameter/Coloring_Texture = SubResource("NoiseTexture2D_w4je4")
-shader_parameter/UV_Random = SubResource("NoiseTexture2D_3hht6")
-shader_parameter/Alpha_Texture = SubResource("NoiseTexture2D_kdleb")
-shader_parameter/Speed = Vector2(0.2, 0)
-shader_parameter/Emmision_Power = 1.0
-shader_parameter/Twist_Power = 1.0
-shader_parameter/Displace_Power = 0.5
-shader_parameter/Fresnel_Power = 1.0
-shader_parameter/Random_Power = 1.0
-shader_parameter/Fresnel_Color = Color(0, 0, 0, 1)
-shader_parameter/Tail_Displace_Power = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0kms"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0980392)
 
 [sub_resource type="QuadMesh" id="QuadMesh_w4je4"]
-material = SubResource("ShaderMaterial_kdleb")
+material = SubResource("StandardMaterial3D_c0kms")
 size = Vector2(100, 100)
 orientation = 1
 
@@ -74,7 +50,8 @@ orientation = 1
 
 [node name="SceneSlideshowManager" type="Node" parent="."]
 script = ExtResource("2")
-starting_slide_index = 190
+starting_slide_index = 340
+scan_root = "res://algorithms/proceduralgeneration"
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)

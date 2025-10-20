@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://penteract_double_projection_001"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_double_projection.gd" id="1_penteract"]
+
+[node name="PenteractDoubleProjection" type="Node3D"]
+script = ExtResource("1_penteract")
+projection_mode = 0
+penteract_size = 2.0
+projection_distance_5d = 4.0
+projection_distance_4d = 4.0
+rotation_5d_vw = 0.0
+rotation_4d_xw = 0.0
+rotation_4d_yw = 0.0
+rotation_4d_zw = 0.0
+animate_rotation = true
+rotation_speed = 0.3
+inner_color = Color(1, 0.3, 0.3, 1)
+middle_color = Color(0.3, 1, 0.3, 1)
+outer_color = Color(0.3, 0.3, 1, 1)
+edge_thickness = 0.02
+emission_strength = 1.5
+

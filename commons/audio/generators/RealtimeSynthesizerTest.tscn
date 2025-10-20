@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7y8ya00a1b2c"]
+
+[ext_resource type="Script" path="res://commons/audio/generators/RealtimeSynthesizerTest.gd" id="1_9x0y1"]
+
+[node name="RealtimeSynthesizerTest" type="Node3D"]
+script = ExtResource("1_9x0y1")
+

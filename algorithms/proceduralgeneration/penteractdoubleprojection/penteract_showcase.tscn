@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://drau4f3mjuqy3"]
+
+[ext_resource type="PackedScene" path="res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_double_projection.tscn" id="1_penteract"]
+
+[node name="PenteractShowcase" type="Node3D"]
+
+[node name="PenteractDoubleProjection" parent="." instance=ExtResource("1_penteract")]
+penteract_size = 2.5
+projection_distance_5d = 5.0
+rotation_speed = 0.4
+inner_color = Color(1, 0.2, 0.4, 1)
+middle_color = Color(0.2, 1, 0.6, 1)
+outer_color = Color(0.4, 0.2, 1, 1)
+emission_strength = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 12)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 2.5
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -4, 0)
+
+[node name="PlaneMesh" type="PlaneMesh" parent="Ground/MeshInstance3D"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector2(40, 40)
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+
+[node name="BoxShape3D" type="BoxShape3D" parent="Ground/CollisionShape3D"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+size = Vector3(40, 1, 40)
+script = null

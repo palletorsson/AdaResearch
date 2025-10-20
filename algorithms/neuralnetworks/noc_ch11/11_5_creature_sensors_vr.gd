@@ -204,7 +204,12 @@ class SensorBeam:
 		node.position = origin
 
 		# orient beam towards tip (cylinder defaults along +Y)
-		node.look_at_from_position(node.position, tip_pos, Vector3.UP)
+		var direction_to_tip = (tip_pos - node.position).normalized()
+		var up_vector = Vector3.UP
+		if abs(direction_to_tip.dot(Vector3.UP)) > 0.9:  # If direction is nearly vertical
+			up_vector = Vector3.RIGHT  # Use right vector instead
+		
+		node.look_at_from_position(node.position, tip_pos, up_vector)
 		node.rotate_x(-PI / 2.0)
 
 		beam_mesh.scale = Vector3(0.08, length, 0.08)

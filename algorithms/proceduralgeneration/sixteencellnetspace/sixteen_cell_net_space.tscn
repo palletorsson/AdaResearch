@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://sixteen_cell_net_space_001"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/sixteencellnetspace/sixteen_cell_net_space.gd" id="1_net_space"]
+
+[node name="SixteenCellNetSpace" type="Node3D"]
+script = ExtResource("1_net_space")
+net_pattern = 0
+space_size = Vector3i(5, 3, 5)
+tetrahedron_size = 0.8
+spacing = 0.2
+create_hollow_center = true
+hollow_radius = 2.0
+rotation_variety = true
+offset_pattern = true
+spiral_arrangement = false
+base_color = Color(0.2, 0.8, 0.9, 1)
+use_rainbow_gradient = false
+emission_strength = 0.5
+show_edges = true
+transparency = 0.3
+

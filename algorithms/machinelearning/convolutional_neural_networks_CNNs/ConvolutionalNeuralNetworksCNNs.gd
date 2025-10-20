@@ -78,8 +78,8 @@ func create_image_grids():
 	
 	# Create pooling layer grid
 	var pool_grid = $PoolingLayers/PoolLayer1/Pool1Grid
-	for i in range((grid_size - 4) / 2):
-		for j in range((grid_size - 4) / 2):
+	for i in range((grid_size - 4) / 2.0):
+		for j in range((grid_size - 4) / 2.0):
 			var pixel = CSGSphere3D.new()
 			pixel.radius = 0.1
 			pixel.material_override = StandardMaterial3D.new()

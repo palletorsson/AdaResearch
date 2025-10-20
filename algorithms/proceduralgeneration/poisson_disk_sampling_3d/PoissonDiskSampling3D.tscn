@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxvhxqxqxqxp"]
+
+[ext_resource type="Script" uid="uid://cemo3u3uip2wd" path="res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.gd" id="1_script"]
+
+[node name="PoissonDiskSampling3D" type="Node3D"]
+script = ExtResource("1_script")
+display_mode = 2
+show_radius = true
+show_grid = true
+
+[node name="Camera3D" type="Camera3D" parent="."]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpk0aey6lv1a8"]
+
+[ext_resource type="Script" uid="uid://bjk2u233kku2k" path="res://algorithms/proceduralgeneration/sixteencellnetspace/sixteen_cell_net_space.gd" id="1_net_space"]
+
+[node name="SixteenCellNetSpaceShowcase" type="Node3D"]
+
+[node name="SixteenCellNetSpace" type="Node3D" parent="."]
+script = ExtResource("1_net_space")
+space_size = Vector3i(6, 4, 6)
+tetrahedron_size = 0.7
+spacing = 0.25
+hollow_radius = 2.5
+use_rainbow_gradient = true
+emission_strength = 0.6
+transparency = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 20, 15, 20)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 18, 0)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CameraAnimation" type="Animation" parent="AnimationPlayer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+resource_name = "CameraAnimation"
+length = 25.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.25, 12.5, 18.75, 25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(20, 15, 20), Vector3(-20, 15, 20), Vector3(-20, 15, -20), Vector3(20, 15, -20), Vector3(20, 15, 20)]
+}
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6.25, 12.5, 18.75, 25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0.785398, 0), Vector3(-0.785398, 2.35619, 0), Vector3(-0.785398, 3.92699, 0), Vector3(-0.785398, 5.49779, 0), Vector3(-0.785398, 0.785398, 0)]
+}
+script = null

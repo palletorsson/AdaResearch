@@ -146,7 +146,13 @@ func _update_spring_visuals():
 		visual.position = mid_point
 		
 		var direction = (point2.position - point1.position).normalized()
-		visual.look_at_from_position(visual.position, point2.position, Vector3.UP)
+		
+		# Use a more robust up vector to avoid colinear vector warning
+		var up_vector = Vector3.UP
+		if abs(direction.dot(Vector3.UP)) > 0.9:  # If direction is nearly vertical
+			up_vector = Vector3.RIGHT  # Use right vector instead
+		
+		visual.look_at_from_position(visual.position, point2.position, up_vector)
 		
 		# Update spring length
 		var current_length = point1.position.distance_to(point2.position)

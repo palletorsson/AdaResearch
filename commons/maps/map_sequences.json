@@ -816,16 +816,36 @@
 				"Constraint-based generation"
 			],
 			"temps": [
-				"ProceduralGeneration_Delaunay_Triangulation",
+
+			],
+			"maps": [
+				"ProceduralGeneration_N_grams", 
+				"ProceduralGeneration_Delaunay_Triangulation",	
+				"ProceduralGeneration_CubeMound", 
+				"ProceduralGeneration_MarchingCave",
+				"ProceduralGeneration_Maze", 
+				"ProceduralGeneration_BrancingGrowthAlgorithm",
 				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGeneration_CaveRandomWalk",
+	
 				"ProceduralGeneration_Markov_Chains",
-				"ProceduralGeneration_Poisson_Disk_Sampling",
+				"ProceduralGeneration_Poisson_Disk_Sampling",	
 				"ProceduralGeneration_Space_Colonization_Algorithms",
+				"ProceduralGeneration_Voronoi_Diagrams",												
+				"ProceduralGeneration_12",
+				"ProceduralGeneration_13",
+				"ProceduralGeneration_14",	
+				"ProceduralGeneration_15",
+				"ProceduralGeneration_16",																	
+
+				
+
+
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"ProceduralGeneration_Genetic_Algorithms",
 				"ProceduralGeneration_Evolutionary_Computation",
 				"ProceduralGeneration_Genetic_Programming", 
-				"ProceduralGeneration_Voronoi_Diagrams",
+
 				"ProceduralGeneration_Marching_Cubes_Algorithm", 
 				"ProceduralGeneration_One",
 				"ProceduralGeneration_Two",
@@ -838,10 +858,6 @@
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
 				"ProceduralGeneration_Eleven",	
-			],
-			"maps": [
-				"ProceduralGeneration_N_grams", 
-			
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

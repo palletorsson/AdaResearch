@@ -274,7 +274,9 @@ func create_cream_stone_material() -> StandardMaterial3D:
 	
 	material.rim_enabled = true
 	material.rim_strength = 0.25
-	material.rim_color = Color(0.9, 0.85, 0.75, 1.0)
+	# rim_color parameter not available in Godot 4 - using emission instead for rim effect
+	material.emission_enabled = true
+	material.emission = Color(0.9, 0.85, 0.75, 1.0) * 0.1
 	
 	return material
 
