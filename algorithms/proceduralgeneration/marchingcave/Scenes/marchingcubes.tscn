@@ -43,6 +43,7 @@ material_override = ExtResource("1_gptaj")
 script = ExtResource("2_kc6u2")
 noise_offset = Vector3(152.543, -150, 100)
 iso_level = 1.11
+chunk_scale = 300.0
 use_fallback_cave = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

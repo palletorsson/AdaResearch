@@ -156,3 +156,6 @@ crystal.rotation_chaos = 0.05
 - Memory efficient with single mesh + transforms array
 - Compatible with Godot 4.x rendering pipeline
 
+
+
+

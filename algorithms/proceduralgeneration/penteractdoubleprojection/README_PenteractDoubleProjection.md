@@ -233,3 +233,6 @@ This system represents one of the most advanced mathematical visualizations poss
 
 The PenteractDoubleProjection system pushes the boundaries of mathematical visualization, making the abstract concept of 5-dimensional space tangible and explorable.
 
+
+
+

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ii0sv2i26ri3"]
+
+[ext_resource type="Script" uid="uid://b5g5o63xyd7jr" path="res://algorithms/proceduralgeneration/cubemound/cube_mound.gd" id="1_b0r2d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b0r2d"]
+radius = 2.16722
+
+[node name="CubeMound" type="Node3D"]
+script = ExtResource("1_b0r2d")
+num_cubes = 200
+spawn_height = 12.0
+settle_time = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 12, 8, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 0)
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="UI"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 100.0
+text = "SPACE - Drop new cubes and generate mesh
+T - Toggle cube visibility
+R - Restart scene"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_b0r2d")

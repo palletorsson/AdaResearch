@@ -196,3 +196,6 @@ portal.emission_strength = 1.8
 - **Custom Shapes**: User-defined tessellation patterns
 - **LOD System**: Distance-based detail reduction
 
+
+
+

@@ -268,3 +268,6 @@ func set_audio_parameters(params: Dictionary):
 	if "pan" in params:
 		set_pan(params["pan"])
 
+
+
+

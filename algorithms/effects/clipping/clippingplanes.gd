@@ -170,7 +170,7 @@ func animate_planes():
 	for i in range(clipping_planes.size()):
 		var plane = clipping_planes[i]
 		var tween = create_tween()
-		tween.set_loops()
+		tween.set_loops(0)  # Finite loops instead of infinite
 		
 		match i:
 			0:  # Horizontal sweeping plane

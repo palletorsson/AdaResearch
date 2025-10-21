@@ -46,20 +46,11 @@ func _ready():
 	find_all_boxes()
 	initial_box_count = all_boxes.size()
 	
-	# Display all found box names for inspection
-	print("=== SCENE SCAN RESULTS ===")
-	print("Found ", all_boxes.size(), " boxes total:")
-	for i in range(all_boxes.size()):
-		var box = all_boxes[i]
-		if is_instance_valid(box):
-			print("  ", i+1, ". Name: '", box.name, "' | Type: ", box.get_class(), " | Position: ", box.position)
-		else:
-			print("  ", i+1, ". [INVALID NODE]")
-	print("=========================")
+ 
 	
 	# Start the timer
 	timer.start()
-	print("Started removing boxes every 0.5 seconds.")
+ 
 
 func find_all_boxes():
 	"""Find all box/cube nodes in the scene"""
@@ -80,7 +71,7 @@ func _find_boxes_recursive(node: Node):
 	# Check if this node is a box/cube
 	if _is_box_node(node):
 		all_boxes.append(node)
-		print("Found box: ", node.name, " at position: ", node.position)
+ 
 	
 	# Search children
 	for child in node.get_children():
@@ -176,13 +167,12 @@ func _on_timer_timeout():
 	create_removal_effect(removal_position)
 	
 	# Remove it from the scene
-	print("Removing box: ", box_to_remove.name, " at position: ", removal_position)
+ 
 	box_to_remove.queue_free()
 	
 	# Update UI
 	update_ui()
-	
-	print("Boxes remaining: ", all_boxes.size())
+ 
 
 # Manual function to start/stop the removal process
 func start_removal():
@@ -329,7 +319,7 @@ func highlight_box_for_removal(box: Node3D):
 		
 		# Add pulsing effect
 		var tween = create_tween()
-		tween.set_loops()
+		tween.set_loops(3)  # Limited loops instead of infinite
 		tween.tween_property(mesh_instance, "scale", Vector3.ONE * 1.2, highlight_duration / 2)
 		tween.tween_property(mesh_instance, "scale", Vector3.ONE, highlight_duration / 2)
 

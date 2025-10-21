@@ -1,28 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://tesseract_net_space_showcase_001"]
+[gd_scene load_steps=2 format=3 uid="uid://drb5voahvej4e"]
 
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.gd" id="1_net_space"]
-
-[sub_resource type="Environment" id="Environment_1"]
-background_mode = 1
-background_color = Color(0.05, 0.05, 0.1, 1)
-ambient_light_color = Color(0.3, 0.4, 0.6, 1)
-ambient_light_energy = 0.4
+[ext_resource type="Script" uid="uid://ck5md4c60evit" path="res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.gd" id="1_net_space"]
 
 [node name="TesseractNetSpaceShowcase" type="Node3D"]
 
 [node name="TesseractNetSpace" type="Node3D" parent="."]
 script = ExtResource("1_net_space")
-net_type = 0
+net_type = 2
 space_size = Vector3i(7, 4, 7)
 cube_size = 0.8
 spacing = 0.15
-create_hollow_center = true
-rotation_variety = true
-offset_pattern = true
-base_color = Color(0.8, 0.2, 0.2, 1)
-color_variation = true
 emission_strength = 0.4
-show_wireframe = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 15, 12, 15)
@@ -36,8 +24,27 @@ shadow_enabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="CameraAnimation" type="Animation" parent="AnimationPlayer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
 
-[node name="CameraAnimation" type="Animation" parent="AnimationPlayer"]
+[node name="CameraAnimation2" type="Animation" parent="AnimationPlayer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 resource_name = "CameraAnimation"
 length = 20.0
 loop_mode = 1
@@ -65,4 +72,4 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.785398, 0.785398, 0), Vector3(-0.785398, 2.35619, 0), Vector3(-0.785398, 3.92699, 0), Vector3(-0.785398, 5.49779, 0), Vector3(-0.785398, 0.785398, 0)]
 }
-
+script = null

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://du5oglwhp06g"]
+
+[ext_resource type="PackedScene" uid="uid://bxywkq1m1h8nc" path="res://commons/infoboards_3d/base/InfoBoardUI.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://dw4lf6s14ka2o" path="res://commons/infoboards_3d/boards/RandomWalk/RandomWalkInfoBoard.gd" id="2_script"]
+
+
+[node name="InfoBoardUI" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+board_title = "Random Walk"
+category_color = Color(0.8, 0.5, 0.9, 1)

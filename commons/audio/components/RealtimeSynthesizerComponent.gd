@@ -223,3 +223,6 @@ func export_synthesizer() -> RealtimeAudioSynthesizer:
 func is_playing() -> bool:
 	return synthesizer.playing
 
+
+
+

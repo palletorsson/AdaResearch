@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqjeguw4u7jjg"]
+
+[ext_resource type="Script" path="res://commons/infoboards_3d/boards/Vectors/VectorsTest.gd" id="1_test"]
+[ext_resource type="PackedScene" uid="uid://puqpq31ixv4n" path="res://commons/infoboards_3d/boards/Vectors/VectorsInfoBoard.tscn" id="2_board"]
+
+[node name="VectorsTest" type="Node3D"]
+script = ExtResource("1_test")
+test_scene = ExtResource("2_board")

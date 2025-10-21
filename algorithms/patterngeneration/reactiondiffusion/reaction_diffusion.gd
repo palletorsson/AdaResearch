@@ -403,7 +403,7 @@ void fragment() {
 		
 		# Animate the time parameter
 		var tween = create_tween()
-		tween.set_loops()
+		tween.set_loops(0)  # Finite loops instead of infinite
 		tween.tween_method(
 			func(t): reaction_material.set_shader_parameter("time", t),
 			0.0, 10.0, 5.0

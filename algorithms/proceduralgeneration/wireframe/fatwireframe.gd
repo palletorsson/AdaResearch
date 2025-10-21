@@ -296,7 +296,7 @@ func animate_object_rotations():
 	for i in range(wireframe_objects.size()):
 		var obj = wireframe_objects[i]
 		var tween = create_tween()
-		tween.set_loops()
+		tween.set_loops(0)  # Finite loops instead of infinite
 		
 		# Different rotation patterns
 		match i % 3:
@@ -311,8 +311,8 @@ func animate_object_rotations():
 			1:  # Dual axis rotation
 				var tween_x = create_tween()
 				var tween_y = create_tween()
-				tween_x.set_loops()
-				tween_y.set_loops()
+				tween_x.set_loops(0)  # Finite loops instead of infinite
+				tween_y.set_loops(0)  # Finite loops instead of infinite
 				
 				tween_x.tween_property(obj, "rotation:x", PI * 2.0, 20.0 / animation_speed)
 				tween_y.tween_property(obj, "rotation:y", PI * 2.0, 15.0 / animation_speed)
@@ -330,7 +330,7 @@ func animate_wireframe_effects():
 		
 		# Animate glow intensity
 		var glow_tween = create_tween()
-		glow_tween.set_loops()
+		glow_tween.set_loops(0)  # Finite loops instead of infinite
 		var base_glow = glow_intensity
 		var glow_variation = randf_range(0.5, 1.5)
 		
@@ -346,7 +346,7 @@ func animate_wireframe_effects():
 		# Animate thickness for some objects
 		if i % 3 == 0:
 			var thickness_tween = create_tween()
-			thickness_tween.set_loops()
+			thickness_tween.set_loops(0)  # Finite loops instead of infinite
 			
 			thickness_tween.tween_method(
 				func(value):

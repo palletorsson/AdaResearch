@@ -98,17 +98,18 @@ func _process(delta):
 		if timer > settle_time or all_settled:
 			print("Cubes settled! Generating mesh...")
 			state = "generating"
-			# Generate mesh in next frame to show message
-			await get_tree().process_frame
+			# Wait a moment for physics to fully settle
+			await get_tree().create_timer(0.5).timeout
 			generate_mesh_from_cubes()
 			state = "done"
 			print("Mesh generation complete!")
 
 func generate_mesh_from_cubes():
-	# Get all cube positions
+	# Get all cube positions (using global position for accuracy)
 	var positions = []
 	for cube in cubes:
 		if cube is RigidBody3D:
+			# Store global position for accurate positioning
 			positions.append(cube.global_position)
 	
 	if positions.is_empty():
@@ -162,7 +163,21 @@ func generate_mesh_from_cubes():
 	generated_mesh.material_override = material
 	
 	add_child(generated_mesh)
-
+	
+	# Remove physics from original cubes (disable colliders and freeze them)
+	for cube in cubes:
+		if cube is RigidBody3D:
+			# Disable collision detection
+			cube.collision_layer = 0
+			cube.collision_mask = 0
+			# Freeze the cube to prevent further physics updates
+			cube.freeze = true
+			# Optionally hide them
+			cube.visible = false
+	
+	# Wait a frame to ensure mesh is fully added to scene tree
+	await get_tree().process_frame
+	
 	# Create collider from generated mesh so the player can walk on the mound
 	var static_body := StaticBody3D.new()
 	static_body.name = "MoundCollider"
@@ -172,10 +187,9 @@ func generate_mesh_from_cubes():
 		collider.shape = tri_shape
 		static_body.add_child(collider)
 		add_child(static_body)
-	
-	# Optionally hide original cubes
-	for cube in cubes:
-		cube.visible = false
+		print("Collider created with %d triangles" % [tri_shape.get_faces().size() / 3])
+	else:
+		print("WARNING: Failed to create trimesh shape for collider")
 
 func create_mesh_from_voxels(voxel_grid: Dictionary, min_bounds: Vector3, grid_size: Vector3) -> ArrayMesh:
 	var st = SurfaceTool.new()

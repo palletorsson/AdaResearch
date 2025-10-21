@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7jy4m8vxk2nf"]
+
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="1_viewport2d"]
+[ext_resource type="PackedScene" uid="uid://bxywkq1m1h8nc" path="res://commons/infoboards_3d/base/InfoBoardUI.tscn" id="2_ui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_frame"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+resource_local_to_scene = true
+size = Vector3(1.125, 0.84375, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+resource_local_to_scene = true
+resource_name = "FrameMaterial"
+albedo_color = Color(0.15, 0.15, 0.2, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interact"]
+resource_local_to_scene = true
+size = Vector3(1.035, 0.776, 0.0410164)
+
+[node name="HandheldInfoBoard" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+
+[node name="BoardFrame" type="StaticBody3D" parent="."]
+collision_layer = 5242881
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardFrame"]
+shape = SubResource("BoxShape3D_frame")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoardFrame"]
+mesh = SubResource("BoxMesh_frame")
+
+[node name="TabletFrame" type="Node3D" parent="BoardFrame"]
+
+[node name="Viewport2Din3D" parent="BoardFrame/TabletFrame" instance=ExtResource("1_viewport2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.046)
+screen_size = Vector2(1.035, 0.776)
+scene = ExtResource("2_ui")
+viewport_size = Vector2(2304, 1728)
+unshaded = true
+filter = false
+scene_properties_keys = PackedStringArray("AlgorithmInfoBoardBase.gd", "board_title", "category_color", "auto_advance", "auto_advance_delay")
+board_title = "Algorithm Info Board"
+category_color = Color(0.3, 0.6, 0.9, 1)
+auto_advance = false
+auto_advance_delay = 10.0
+
+[node name="Frame" type="MeshInstance3D" parent="BoardFrame/TabletFrame"]
+mesh = SubResource("BoxMesh_frame")
+surface_material_override/0 = SubResource("StandardMaterial3D_frame")
+
+[node name="InteractionArea" type="StaticBody3D" parent="."]
+collision_layer = 5242881
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.086741)
+shape = SubResource("BoxShape3D_interact")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)

@@ -320,3 +320,6 @@ func _input(event):
 		camera_height = clamp(camera_height - event.relative.y * 0.1, 3.0, 25.0)
 		_update_camera()
 
+
+
+

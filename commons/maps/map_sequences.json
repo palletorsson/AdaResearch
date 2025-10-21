@@ -824,7 +824,7 @@
 				"ProceduralGeneration_CubeMound", 
 				"ProceduralGeneration_MarchingCave",
 				"ProceduralGeneration_Maze", 
-				"ProceduralGeneration_BrancingGrowthAlgorithm",
+				"ProceduralGeneration_BranchingGrowthAlgorithm",
 				"ProceduralGeneration_Space_Partitioning",
 				"ProceduralGeneration_CaveRandomWalk",
 	
@@ -832,18 +832,11 @@
 				"ProceduralGeneration_Poisson_Disk_Sampling",	
 				"ProceduralGeneration_Space_Colonization_Algorithms",
 				"ProceduralGeneration_Voronoi_Diagrams",												
-				"ProceduralGeneration_12",
-				"ProceduralGeneration_13",
-				"ProceduralGeneration_14",	
-				"ProceduralGeneration_15",
-				"ProceduralGeneration_16",																	
-
-				
-
-
-				"ProceduralGeneration_Reaction_Diffusion_Systems",
-				"ProceduralGeneration_Genetic_Algorithms",
-				"ProceduralGeneration_Evolutionary_Computation",
+				"ProceduralGenerationCrystalRandom",
+				"ProceduralGenerationPortals",
+				"ProceduralGenerationNetSpace",	
+				"ProceduralGenerationTesseractErrorTunnel",
+				"ProceduralGenerationSixteenCellNet",																	
 				"ProceduralGeneration_Genetic_Programming", 
 
 				"ProceduralGeneration_Marching_Cubes_Algorithm", 
@@ -858,6 +851,7 @@
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
 				"ProceduralGeneration_Eleven",	
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

@@ -155,6 +155,13 @@ const UTILITY_TYPES = {
 		"description": "Information and instruction displays",
 		"supports_parameters": false
 	},
+	"ib": {
+		"name": "info_board_handheld",
+		"file": "",
+		"category": "educational",
+		"description": "Handheld 3D info board for algorithm education (ib:randomwalk, ib:vectors, ib:forces, etc.)",
+		"supports_parameters": true  # board_type, height_offset
+	},
 	"la": {
 		"name": "label",
 		"file": "info_label.tscn",
@@ -284,6 +291,19 @@ static func validate_utility_grid(grid_data: Array) -> Dictionary:
 			var utility_type = cell_value[0] if not cell_value.is_empty() else " "
 			if ":" in cell_value:
 				utility_type = cell_value.split(":")[0]
+			
+			# Special handling for info board utilities (ib: prefix)
+			if utility_type == "ib":
+				# Validate info board type using InfoBoardRegistry
+				var board_type = cell_value.split(":")[1] if cell_value.split(":").size() > 1 else ""
+				if not InfoBoardRegistry.is_valid_board_type(board_type):
+					validation_result.valid = false
+					validation_result.errors.append(
+						"Invalid info board type '%s' at position [%d, %d]" % [board_type, x, z]
+					)
+					if not validation_result.unknown_types.has("ib:" + board_type):
+						validation_result.unknown_types.append("ib:" + board_type)
+				continue  # Skip regular utility validation for info boards
 			
 			# Check if utility type is valid
 			if not is_valid_utility_type(utility_type):

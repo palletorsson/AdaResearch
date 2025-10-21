@@ -1,0 +1,140 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxywkq1m1h8nc"]
+
+[ext_resource type="Script" path="res://commons/infoboards_3d/base/AlgorithmInfoBoardBase.gd" id="1_base"]
+[ext_resource type="FontFile" uid="uid://blcw8d8hgvbpu" path="res://commons/font/static/Roboto-Bold.ttf" id="2_font_bold"]
+[ext_resource type="FontFile" uid="uid://df7y2n7w64nv1" path="res://commons/font/static/Roboto-Medium.ttf" id="3_font_medium"]
+[ext_resource type="FontFile" uid="uid://c4i34mkiignnf" path="res://commons/font/static/Roboto-Regular.ttf" id="4_font_regular"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+resource_local_to_scene = true
+bg_color = Color(0.05, 0.05, 0.07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3, 0.6, 0.9, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="InfoBoardUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_base")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.07, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="TitleBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TitleBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.9, 1, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.2, 0.3, 0.5)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_font_bold")
+theme_override_font_sizes/font_size = 84
+text = "Algorithm Info Board"
+vertical_alignment = 1
+
+[node name="PageCounter" type="Label" parent="MarginContainer/VBoxContainer/TitleBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_font_medium")
+theme_override_font_sizes/font_size = 54
+text = "1 / 1"
+vertical_alignment = 1
+
+[node name="Separator1" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.3, 0.6, 0.9, 0.4)
+
+[node name="ContentArea" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 400
+
+[node name="TextScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/ContentArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ContentArea/TextScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="VisualizationContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/ContentArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Separator2" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.3, 0.6, 0.9, 0.4)
+
+[node name="NavigationBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationBar"]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_medium")
+theme_override_font_sizes/font_size = 48
+text = "< Previous"
+
+[node name="PlayPauseButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationBar"]
+custom_minimum_size = Vector2(300, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_medium")
+theme_override_font_sizes/font_size = 48
+text = "Pause"
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/NavigationBar"]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.95, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font_medium")
+theme_override_font_sizes/font_size = 48
+text = "Next >"

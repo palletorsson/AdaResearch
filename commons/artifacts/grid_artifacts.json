@@ -1384,13 +1384,7 @@
 			"scene": "res://algorithms/fractals/mandelbrot_set/mandelbrot_set.tscn",
 			
 		},
-		"lattice_gas_automata": {
-			"name": "Lattice Gas Automata",
-			"lookup_name": "lattice_gas_automata",
-			"description": "Particle-based fluid simulation using cellular automata rules",
-			"scene": "res://algorithms/recursiveemergence/lattice_gas_automata/lattice_gas_automata.tscn",
-			
-		},
+
 		"koch_curve": {
 			"name": "Koch Curve",
 			"lookup_name": "koch_curve",
@@ -1541,7 +1535,7 @@
 		},
 		"rhizome_cave_demo": {
 			"name": "rhizome_cave_demo",
-			"lookup_name": "rhizome_cave_demos",
+			"lookup_name": "rhizome_cave_demo",
 			"description": "rhizome_cave_demo",
 			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
 			
@@ -1551,6 +1545,34 @@
 			"lookup_name": "fabrics",
 			"description": "fabrics",
 			"scene": "res://algorithms/patterngeneration/fabrics/fabrics.tscn",
+			
+		},
+		"HandheldInfoBoard": {
+			"name": "HandheldInfoBoard",
+			"lookup_name": "HandheldInfoBoard",
+			"description": "HandheldInfoBoard",
+			"scene": "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+			
+		},
+		"2d_in_3d_vectors_vis": {
+			"name": "2d_in_3d_vectors_vis",
+			"lookup_name": "2d_in_3d_vectors_vis",
+			"description": "2d_in_3d_vectors_vis",
+			"scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn",
+			
+		},
+		"2d_in_3d_randomness_vis": {
+			"name": "2d_in_3d_randomness_vis",
+			"lookup_name": "2d_in_3d_randomness_vis",
+			"description": "2d_in_3d_randomness_vis",
+			"scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn",
+			
+		},
+			"2d_in_3d_point_vis": {
+			"name": "2d_in_3d_point_vis",
+			"lookup_name": "2d_in_3d_point_vis",
+			"description": "2d_in_3d_point_vis",
+			"scene": "res://commons/infoboards_3d/boards/Point/2d_in_3d_point_vis.tscn",
 			
 		},
 		
@@ -1590,11 +1612,11 @@
 
 		},
 		
-		"slime_mold": {
-			"name": "Slime Mold",
-			"lookup_name": "slime_mold",
-			"description": "Slime mold simulation using Dave Stewart's tube algorithm",
-			"scene": "res://algorithms/proceduralgeneration/slimemold/slime.tscn",
+		"GeneticProgramming": {
+			"name": "GeneticProgramming",
+			"lookup_name": "GeneticProgramming",
+			"description": "GeneticProgramming",
+			"scene": "res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn",
 			
 		},
 		"reaction_diffusion": {
@@ -1815,10 +1837,18 @@
 		"marchingcave": {
 			"name": "marchingcave",
 			"lookup_name": "marchingcave",
-			"description": "smarchingcave",
+			"description": "marchingcave",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn",
 
 		},
+		"marchingcubes_cave": {
+			"name": "marchingcubes_cave",
+			"lookup_name": "marchingcubes_cave",
+			"description": "marchingcubes_cave",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_cave.tscn",
+
+		},
+		
 		"info_display": {
 			"name": "info_display",
 			"lookup_name": "info_display",
@@ -2441,6 +2471,13 @@
 			"description": "cube_mound_scene",
 			"scene": "res://algorithms/proceduralgeneration/cubemound/cube_mound_scene.tscn",
 		},
+		"cube_mound_scene_sphere": {
+			"name": "cube_mound_scene_sphere",
+			"lookup_name": "cube_mound_scene_sphere",
+			"description": "cube_mound_scene_sphere",
+			"scene": "res://algorithms/proceduralgeneration/cubemound/cube_mound_scene_sphere.tscn",
+		},
+		
 		
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",

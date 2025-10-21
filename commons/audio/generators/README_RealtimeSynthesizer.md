@@ -108,3 +108,6 @@ var pattern = {
 - Real-time audio generation with minimal CPU overhead
 - Compatible with Godot's audio threading
 
+
+
+

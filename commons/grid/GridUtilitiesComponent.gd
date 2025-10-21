@@ -66,6 +66,10 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 		for warning in validation.warnings:
 			print("  WARNING: %s" % warning)
 	
+	# Separate info board utilities from regular utilities
+	var info_board_data = []
+	var regular_utilities = []
+	
 	# Place utilities
 	for z in range(min(dimensions.z, utility_layout.size())):
 		var row = utility_layout[z]
@@ -75,24 +79,36 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 			if utility_cell.is_empty() or utility_cell == " ":
 				continue
 			
-			# Parse utility cell with parameters
-			var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
-			var utility_type = parsed.type
-			var parameters = parsed.parameters
-			
-			if UtilityRegistry.is_valid_utility_type(utility_type) and utility_type != " ":
-				var y_pos = structure_component.find_highest_y_at(x, z)
-				
-				# Get utility definition if available
-				var utility_definition = utility_definitions.get(utility_type, {})
-				
-				# Ensure utility_definition is always a Dictionary (handle string references)
-				if typeof(utility_definition) != TYPE_DICTIONARY:
-					print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
-					utility_definition = {}
-				
-				_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size)
+			# Check if this is an info board utility (ib: prefix)
+			if utility_cell.begins_with("ib:"):
+				# Handle info board utilities
+				var board_data = _parse_info_board_utility(utility_cell, x, z)
+				if not board_data.is_empty():
+					info_board_data.append(board_data)
 				utility_count += 1
+			else:
+				# Handle regular utilities
+				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
+				var utility_type = parsed.type
+				var parameters = parsed.parameters
+				
+				if UtilityRegistry.is_valid_utility_type(utility_type) and utility_type != " ":
+					var y_pos = structure_component.find_highest_y_at(x, z)
+					
+					# Get utility definition if available
+					var utility_definition = utility_definitions.get(utility_type, {})
+					
+					# Ensure utility_definition is always a Dictionary (handle string references)
+					if typeof(utility_definition) != TYPE_DICTIONARY:
+						print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
+						utility_definition = {}
+					
+					_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size)
+					utility_count += 1
+	
+	# Generate info boards if any were found
+	if not info_board_data.is_empty():
+		_generate_info_boards(info_board_data)
 	
 	print("GridUtilitiesComponent: Added %d utilities" % utility_count)
 	utility_generation_complete.emit(utility_count)
@@ -699,3 +715,98 @@ func get_utility_count() -> int:
 # Get all utility positions
 func get_all_utility_positions() -> Array:
 	return utility_objects.keys()
+
+# Parse info board utility (ib:vectors, ib:forces:1.5, etc.)
+func _parse_info_board_utility(utility_cell: String, x: int, z: int) -> Dictionary:
+	var parts = utility_cell.split(":")
+	if parts.size() < 2:
+		print("GridUtilitiesComponent: Invalid info board format: %s" % utility_cell)
+		return {}
+	
+	var board_type = parts[1]  # e.g., "vectors", "forces"
+	var height_offset = 0.0
+	
+	# Check for height offset parameter
+	if parts.size() > 2:
+		var height_param = parts[2]
+		if height_param.is_valid_float():
+			height_offset = float(height_param)
+	
+	# Validate board type using InfoBoardRegistry
+	if not InfoBoardRegistry.is_valid_board_type(board_type):
+		print("GridUtilitiesComponent: Invalid info board type: %s" % board_type)
+		return {}
+	
+	return {
+		"board_type": board_type,
+		"position": Vector3i(x, 0, z),  # x, y, z - y will be calculated from structure
+		"height_offset": height_offset
+	}
+
+# Generate info boards at their specific locations
+func _generate_info_boards(info_board_data: Array):
+	print("GridUtilitiesComponent: Generating %d info boards at specific locations" % info_board_data.size())
+	
+	# Place each info board at its specific location
+	for board_data in info_board_data:
+		var board_type = board_data.board_type
+		var grid_pos = board_data.position
+		var height_offset = board_data.height_offset
+		
+		# Calculate 3D position
+		var total_size = cube_size + gutter
+		var y_pos = structure_component.find_highest_y_at(grid_pos.x, grid_pos.z)
+		var position = Vector3(grid_pos.x, y_pos, grid_pos.z) * total_size
+		
+		# Apply height offset
+		position.y += height_offset
+		
+		# Generate the info board at this specific location
+		_place_info_board_at_position(board_type, position, height_offset)
+		
+		print("GridUtilitiesComponent: Placed %s info board at %s (height offset: %.1f)" % [board_type, position, height_offset])
+
+# Place a single info board at a specific position
+func _place_info_board_at_position(board_type: String, position: Vector3, height_offset: float):
+	# Get the scene path from InfoBoardRegistry
+	var scene_path = InfoBoardRegistry.get_board_scene_path(board_type)
+	if scene_path.is_empty():
+		print("GridUtilitiesComponent: WARNING - No scene file for info board type '%s'" % board_type)
+		return
+	
+	# Load the scene directly (info boards are in a different directory structure)
+	if not ResourceLoader.exists(scene_path):
+		print("GridUtilitiesComponent: WARNING - Scene file not found: %s" % scene_path)
+		return
+	
+	var scene_resource = ResourceLoader.load(scene_path)
+	if not scene_resource:
+		print("GridUtilitiesComponent: WARNING - Could not load scene for info board type '%s': %s" % [board_type, scene_path])
+		return
+	
+	# Instantiate the info board
+	var info_board = scene_resource.instantiate()
+	if info_board:
+		info_board.position = position
+		
+		# Apply height offset if the board supports it
+		if height_offset != 0.0:
+			info_board.set_meta("height_offset", height_offset)
+			# Some info boards might have a height_offset property
+			if "height_offset" in info_board:
+				info_board.height_offset = height_offset
+		
+		# Add to parent node
+		parent_node.add_child(info_board)
+		
+		# Set owner for editor
+		if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
+			info_board.owner = parent_node.get_tree().edited_scene_root
+		
+		# Store in utility objects for tracking
+		var grid_pos = Vector3i(int(position.x / (cube_size + gutter)), int(position.y), int(position.z / (cube_size + gutter)))
+		utility_objects[grid_pos] = info_board
+		
+		print("GridUtilitiesComponent: ✅ Successfully placed %s info board at %s" % [board_type, position])
+	else:
+		print("GridUtilitiesComponent: ❌ Failed to instantiate info board: %s" % board_type)
