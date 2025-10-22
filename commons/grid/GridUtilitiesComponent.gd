@@ -766,28 +766,62 @@ func _generate_info_boards(info_board_data: Array):
 		
 		print("GridUtilitiesComponent: Placed %s info board at %s (height offset: %.1f)" % [board_type, position, height_offset])
 
+# Create info board using universal template (works with centralized JSON content)
+func _create_info_board_with_universal_template(board_id: String) -> Node3D:
+	# Check if content exists for this board
+	var page_count = InfoBoardContentLoader.get_page_count(board_id)
+	if page_count == 0:
+		return null  # No content, can't create board
+
+	# Load the base handheld InfoBoard scene
+	var base_scene_path = "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn"
+	if not ResourceLoader.exists(base_scene_path):
+		return null
+
+	var board_3d = load(base_scene_path).instantiate()
+
+	# Get the InfoBoardUI control from the Viewport2Din3D structure
+	var ui = board_3d.get_node_or_null("BoardFrame/TabletFrame/Viewport2Din3D/Viewport/InfoBoardUI")
+	if not ui:
+		push_error("GridUtilitiesComponent: Failed to get InfoBoardUI from HandheldInfoBoard for board_id '%s'" % board_id)
+		board_3d.queue_free()
+		return null
+
+	# Apply the UniversalInfoBoard script
+	var universal_script = load("res://commons/infoboards_3d/base/UniversalInfoBoard.gd")
+	ui.set_script(universal_script)
+	ui.board_id = board_id
+
+	print("GridUtilitiesComponent: Created '%s' InfoBoard using UniversalTemplate (Content: %d pages)" % [board_id, page_count])
+
+	return board_3d
+
 # Place a single info board at a specific position
 func _place_info_board_at_position(board_type: String, position: Vector3, height_offset: float):
-	# Get the scene path from InfoBoardRegistry
-	var scene_path = InfoBoardRegistry.get_board_scene_path(board_type)
-	if scene_path.is_empty():
-		print("GridUtilitiesComponent: WARNING - No scene file for info board type '%s'" % board_type)
-		return
-	
-	# Load the scene directly (info boards are in a different directory structure)
-	if not ResourceLoader.exists(scene_path):
-		print("GridUtilitiesComponent: WARNING - Scene file not found: %s" % scene_path)
-		return
-	
-	var scene_resource = ResourceLoader.load(scene_path)
-	if not scene_resource:
-		print("GridUtilitiesComponent: WARNING - Could not load scene for info board type '%s': %s" % [board_type, scene_path])
-		return
-	
-	# Instantiate the info board
-	var info_board = scene_resource.instantiate()
+	# NEW: Try to create using universal template with centralized content
+	var info_board = _create_info_board_with_universal_template(board_type)
+
+	# Fallback: Try loading from registry scene path (for legacy boards)
+	if not info_board:
+		var scene_path = InfoBoardRegistry.get_board_scene_path(board_type)
+		if scene_path.is_empty():
+			print("GridUtilitiesComponent: WARNING - No scene file for info board type '%s'" % board_type)
+			return
+
+		if not ResourceLoader.exists(scene_path):
+			print("GridUtilitiesComponent: WARNING - Scene file not found: %s" % scene_path)
+			return
+
+		var scene_resource = ResourceLoader.load(scene_path)
+		if not scene_resource:
+			print("GridUtilitiesComponent: WARNING - Could not load scene for info board type '%s': %s" % [board_type, scene_path])
+			return
+
+		info_board = scene_resource.instantiate()
 	if info_board:
-		info_board.position = position
+		# Only set position if it's a 3D node
+		if info_board is Node3D:
+			info_board.position = position
 		
 		# Apply height offset if the board supports it
 		if height_offset != 0.0:

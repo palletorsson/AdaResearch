@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd8nt7y5qx7qm"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/AnimatedNoiseExplorer.gd" id="1_animated"]
+
+[sub_resource type="Environment" id="Environment_explorer"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.6, 1)
+ambient_light_energy = 0.8
+ssao_enabled = true
+ssao_radius = 2.0
+glow_enabled = true
+glow_intensity = 1.5
+glow_bloom = 0.3
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributes_explorer"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 10.0
+
+[node name="AnimatedNoiseExplorer" type="Node3D"]
+
+[node name="NoiseChunk" type="MeshInstance3D" parent="."]
+script = ExtResource("1_animated")
+chunk_scale = 1.0
+noise_scale = 0.7
+iso_level = 0.0
+animation_speed = 0.3
+animation_path = Vector3(1, 0.5, 0.3)
+regenerate_interval = 0.15
+auto_start = true
+mesh_color = Color(0.9, 0.8, 0.7)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 1.5, 2.5)
+fov = 60.0
+near = 0.1
+far = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 3, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="OmniLight3D_Key" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 1.5)
+light_color = Color(1, 0.9, 0.8, 1)
+light_energy = 2.5
+omni_range = 5.0
+
+[node name="OmniLight3D_Fill" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, -1)
+light_color = Color(0.8, 0.85, 1, 1)
+light_energy = 1.8
+omni_range = 4.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_explorer")
+camera_attributes = SubResource("CameraAttributes_explorer")
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+text = "🌊 Animated Noise Space Explorer"
+font_size = 24
+
+[node name="Info" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+text = "1x1 Meter | Traveling Through 4D Noise | Press SPACE to pause/resume"
+font_size = 12
+outline_size = 4
+
+[node name="Position" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+text = "Offset: (0, 0, 0)"
+font_size = 14
+outline_size = 4
+

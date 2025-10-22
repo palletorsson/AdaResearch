@@ -1848,7 +1848,56 @@
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_cave.tscn",
 
 		},
-		
+		"marchingcubes_flat_landscape": {
+			"name": "marchingcubes_flat_landscape",
+			"lookup_name": "marchingcubes_flat_landscape",
+			"description": "marchingcubes_flat_landscape",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+
+		},	
+		"marchingcubes_torus_sculpture": {
+			"name": "marchingcubes_torus_sculpture",
+			"lookup_name": "marchingcubes_torus_sculpture",
+			"description": "marchingcubes_torus_sculpture",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+
+		},		
+		"marchingcubes_inside_cave": {
+			"name": "marchingcubes_inside_cave",
+			"lookup_name": "marchingcubes_inside_cave",
+			"description": "marchingcubes_inside_cave",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+
+		},	
+		"wfc_dungeon_generator": {
+			"name": "wfc_dungeon_generator",
+			"lookup_name": "wfc_dungeon_generator",
+			"description": "wfc_dungeon_generator",
+			"scene": "res://algorithms/proceduralgeneration/wfcRooms/wfc_dungeon_generator.tscn",
+
+		},	
+		"boolean_patterns": {
+			"name": "boolean_patterns",
+			"lookup_name": "boolean_patterns",
+			"description": "boolean_patterns",
+			"scene": "res://algorithms/proceduralgeneration/randomboolean/all_patterns_demo.tscn",
+
+		},	
+		"marching_cubes_gallery": {
+			"name": "marching_cubes_gallery",
+			"lookup_name": "marching_cubes_gallery",
+			"description": "marching_cubes_gallery",
+			"scene": "res://algorithms/proceduralgeneration/WFCSculptureGenerator/sculpture_gallery.tscn",
+
+		},		
+		"cave_explorer_3d_ui": {
+			"name": "cave_explorer_3d_ui",
+			"lookup_name": "cave_explorer_3d_ui",
+			"description": "cave_explorer_3d_ui",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_3d_ui.tscn",
+
+		},								
+
 		"info_display": {
 			"name": "info_display",
 			"lookup_name": "info_display",

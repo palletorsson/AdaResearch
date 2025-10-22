@@ -1,0 +1,91 @@
+{
+	"map_info": {
+		"name": "InfoBoard Gallery",
+		"description": "Example map showing how to load Point, Line, and Triangle InfoBoards using the ib: syntax",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 5,
+			"depth": 7,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "example",
+			"estimated_time": "5 minutes",
+			"learning_objectives": ["InfoBoards", "Point", "Line", "Triangle", "Fundamentals"]
+		}
+	},
+	"documentation": {
+		"summary": "InfoBoard Gallery - Demonstrating ib:point, ib:line, ib:triangle syntax",
+		"layout": "Simple 5x7 corridor with three InfoBoards",
+		"objective": "Show how to place InfoBoards in maps using utilities layer",
+		"key_elements": [
+			"ib:point at (1,1) - The Point InfoBoard",
+			"ib:line at (2,3) - The Line InfoBoard",
+			"ib:triangle at (3,5) - The Triangle InfoBoard",
+			"Teleporter 't' at (2,6) to exit"
+		]
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", "ib:point", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "ib:line", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", "ib:triangle", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Exit",
+			"description": "Return to hub",
+			"properties": {
+				"action": "return_to_hub"
+			}
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_energy": 0.8,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.95, 0.9],
+			"energy": 1.0
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"auto_reveal_on_entry": true,
+		"initial_tile_visibility": "all_visible",
+		"background": {
+			"type": "sky",
+			"color": [0.2, 0.25, 0.35]
+		}
+	}
+}

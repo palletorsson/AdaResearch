@@ -1,0 +1,978 @@
+[gd_scene load_steps=95 format=4 uid="uid://s6v6u1w0hviw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suwlt"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1rq1f"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxg00"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fxoc"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nnif5"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plevm"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_giohi"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cx6rk"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jjsf2"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h58uw"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qb20c"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8vn4"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ohxmc"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8l8ff"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1f5uu"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hgtd"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_11l4b"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux1s7"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vqyn"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhaoh"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e8wqs"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oggmy"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brhvg"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bat6s"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5n8q4"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_urre6"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfraq"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxcqc"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7u4u"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r74oj"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xdwn6"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tv8vd"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qw3t5"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6ugw"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikhgo"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_87cju"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eyau"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya4s1"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vt6sl"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2v710"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v5s36"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohp5w"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ur53m"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0pv2"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2b0y7"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1tbo"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f8kat"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihcyk"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbov8"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66rhg"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyoxa"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15ki4"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gtrch"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qpp3q"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wlng"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr8i3"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxelm"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glcn0"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f0oyu"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2oap"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlny0"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdjom"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nyf57"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjm8s"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v16xc"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46x4k"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw45v"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mpeh"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsiel"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrq3t"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ee8jq"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mofk3"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wctqd"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ea5j"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfukp"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwxic"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcnhs"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o7yn8"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2pbq7"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epdy5"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmjwu"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7dor"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1g1b"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qcff6"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udjbb"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jysy"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqj1p"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2txwi"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cpjh"]
+albedo_color = Color(0.8, 0.8, 0.85, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jppgs"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("zMzYP8zM2D/MzNg/zMzYP8zM2D/MzNg/"),
+"format": 34359738377,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAAAAAABA")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi8rm"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r512k"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fooux"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a2r2"]
+albedo_color = Color(0.85, 0.85, 0.9, 1)
+
+[node name="RoomTiles_Aligned" type="Node3D"]
+
+[node name="PreviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.8, -0.308697, 0.514496, 0, 0.857493, 0.514496, -0.6, -0.411597, 0.685994, 6, 6, 8)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+light_energy = 2.0
+
+[node name="Floor" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, -2.6)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_suwlt")
+mesh = SubResource("ArrayMesh_1rq1f")
+
+[node name="Floor" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_kxg00")
+
+[node name="Wall_N" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 0, -2.6)
+metadata/sockets = {
+"E": "open",
+"N": "wall",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Wall_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_7fxoc")
+mesh = SubResource("ArrayMesh_nnif5")
+
+[node name="Floor" type="CSGBox3D" parent="Wall_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_plevm")
+
+[node name="Wall_N" type="CSGBox3D" parent="Wall_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_giohi")
+
+[node name="Wall_E" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, -2.6)
+metadata/sockets = {
+"E": "wall",
+"N": "open",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Wall_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_cx6rk")
+mesh = SubResource("ArrayMesh_jjsf2")
+
+[node name="Floor" type="CSGBox3D" parent="Wall_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_h58uw")
+
+[node name="Wall_E" type="CSGBox3D" parent="Wall_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_qb20c")
+
+[node name="Wall_S" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, -2.6)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "wall",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Wall_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_w8vn4")
+mesh = SubResource("ArrayMesh_ohxmc")
+
+[node name="Floor" type="CSGBox3D" parent="Wall_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_8l8ff")
+
+[node name="Wall_S" type="CSGBox3D" parent="Wall_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_1f5uu")
+
+[node name="Wall_W" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 0, -2.6)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "open",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Wall_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_0hgtd")
+mesh = SubResource("ArrayMesh_11l4b")
+
+[node name="Floor" type="CSGBox3D" parent="Wall_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_ux1s7")
+
+[node name="Wall_W" type="CSGBox3D" parent="Wall_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_1vqyn")
+
+[node name="Corner_NE" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -2.6)
+metadata/sockets = {
+"E": "wall",
+"N": "wall",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Corner_NE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_hhaoh")
+mesh = SubResource("ArrayMesh_e8wqs")
+
+[node name="Floor" type="CSGBox3D" parent="Corner_NE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_oggmy")
+
+[node name="Wall_N" type="CSGBox3D" parent="Corner_NE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_brhvg")
+
+[node name="Wall_E" type="CSGBox3D" parent="Corner_NE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_bat6s")
+
+[node name="Corner_ES" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 0)
+metadata/sockets = {
+"E": "wall",
+"N": "open",
+"S": "wall",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Corner_ES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_5n8q4")
+mesh = SubResource("ArrayMesh_urre6")
+
+[node name="Floor" type="CSGBox3D" parent="Corner_ES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_dfraq")
+
+[node name="Wall_E" type="CSGBox3D" parent="Corner_ES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_gxcqc")
+
+[node name="Wall_S" type="CSGBox3D" parent="Corner_ES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_j7u4u")
+
+[node name="Corner_SW" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 0, 0)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "wall",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Corner_SW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_r74oj")
+mesh = SubResource("ArrayMesh_xdwn6")
+
+[node name="Floor" type="CSGBox3D" parent="Corner_SW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_tv8vd")
+
+[node name="Wall_S" type="CSGBox3D" parent="Corner_SW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_qw3t5")
+
+[node name="Wall_W" type="CSGBox3D" parent="Corner_SW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_g6ugw")
+
+[node name="Corner_WN" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 0)
+metadata/sockets = {
+"E": "open",
+"N": "wall",
+"S": "open",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Corner_WN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_ikhgo")
+mesh = SubResource("ArrayMesh_87cju")
+
+[node name="Floor" type="CSGBox3D" parent="Corner_WN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_0eyau")
+
+[node name="Wall_N" type="CSGBox3D" parent="Corner_WN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_ya4s1")
+
+[node name="Wall_W" type="CSGBox3D" parent="Corner_WN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_vt6sl")
+
+[node name="T_NES" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, 0)
+metadata/sockets = {
+"E": "wall",
+"N": "wall",
+"S": "wall",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="T_NES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_2v710")
+mesh = SubResource("ArrayMesh_v5s36")
+
+[node name="Floor" type="CSGBox3D" parent="T_NES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_ohp5w")
+
+[node name="Wall_N" type="CSGBox3D" parent="T_NES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_ur53m")
+
+[node name="Wall_E" type="CSGBox3D" parent="T_NES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_g0pv2")
+
+[node name="Wall_S" type="CSGBox3D" parent="T_NES"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_2b0y7")
+
+[node name="T_ESW" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 0, 0)
+metadata/sockets = {
+"E": "wall",
+"N": "open",
+"S": "wall",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="T_ESW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_l1tbo")
+mesh = SubResource("ArrayMesh_f8kat")
+
+[node name="Floor" type="CSGBox3D" parent="T_ESW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_ihcyk")
+
+[node name="Wall_E" type="CSGBox3D" parent="T_ESW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_bbov8")
+
+[node name="Wall_S" type="CSGBox3D" parent="T_ESW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_66rhg")
+
+[node name="Wall_W" type="CSGBox3D" parent="T_ESW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_qyoxa")
+
+[node name="T_SWN" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 0)
+metadata/sockets = {
+"E": "open",
+"N": "wall",
+"S": "wall",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="T_SWN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_15ki4")
+mesh = SubResource("ArrayMesh_gtrch")
+
+[node name="Floor" type="CSGBox3D" parent="T_SWN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_qpp3q")
+
+[node name="Wall_N" type="CSGBox3D" parent="T_SWN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_3wlng")
+
+[node name="Wall_S" type="CSGBox3D" parent="T_SWN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_sr8i3")
+
+[node name="Wall_W" type="CSGBox3D" parent="T_SWN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_xxelm")
+
+[node name="T_WNE" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 0, 2.6)
+metadata/sockets = {
+"E": "wall",
+"N": "wall",
+"S": "open",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="T_WNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_glcn0")
+mesh = SubResource("ArrayMesh_f0oyu")
+
+[node name="Floor" type="CSGBox3D" parent="T_WNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_x2oap")
+
+[node name="Wall_N" type="CSGBox3D" parent="T_WNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_vlny0")
+
+[node name="Wall_E" type="CSGBox3D" parent="T_WNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_sdjom")
+
+[node name="Wall_W" type="CSGBox3D" parent="T_WNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_nyf57")
+
+[node name="+_Cross" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 0, 2.6)
+metadata/sockets = {
+"E": "wall",
+"N": "wall",
+"S": "wall",
+"W": "wall"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_qjm8s")
+mesh = SubResource("ArrayMesh_v16xc")
+
+[node name="Floor" type="CSGBox3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_46x4k")
+
+[node name="Wall_N" type="CSGBox3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_yw45v")
+
+[node name="Wall_E" type="CSGBox3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_6mpeh")
+
+[node name="Wall_S" type="CSGBox3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+size = Vector3(2, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_jsiel")
+
+[node name="Wall_W" type="CSGBox3D" parent="+_Cross"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+size = Vector3(0.18, 2.6, 2)
+material = SubResource("StandardMaterial3D_qrq3t")
+
+[node name="Door_N" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 2.6)
+metadata/sockets = {
+"E": "open",
+"N": "door",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Door_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_ee8jq")
+mesh = SubResource("ArrayMesh_mofk3")
+
+[node name="Floor" type="CSGBox3D" parent="Door_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_wctqd")
+
+[node name="Wall_N_L" type="CSGBox3D" parent="Door_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.34, 1.91)
+size = Vector3(0.5, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_3ea5j")
+
+[node name="Wall_N_R" type="CSGBox3D" parent="Door_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 1.34, 1.91)
+size = Vector3(0.5, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_rfukp")
+
+[node name="Lintel_N" type="CSGBox3D" parent="Door_N"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.39, 1.91)
+size = Vector3(1, 0.5, 0.18)
+material = SubResource("StandardMaterial3D_mwxic")
+
+[node name="Door_E" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 0, 2.6)
+metadata/sockets = {
+"E": "door",
+"N": "open",
+"S": "open",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Door_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_bcnhs")
+mesh = SubResource("ArrayMesh_o7yn8")
+
+[node name="Floor" type="CSGBox3D" parent="Door_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_2pbq7")
+
+[node name="Wall_E_B" type="CSGBox3D" parent="Door_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 0.25)
+size = Vector3(0.18, 2.6, 0.5)
+material = SubResource("StandardMaterial3D_epdy5")
+
+[node name="Wall_E_T" type="CSGBox3D" parent="Door_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1.75)
+size = Vector3(0.18, 2.6, 0.5)
+material = SubResource("StandardMaterial3D_xmjwu")
+
+[node name="Lintel_E" type="CSGBox3D" parent="Door_E"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 2.39, 1)
+size = Vector3(0.18, 0.5, 1)
+material = SubResource("StandardMaterial3D_w7dor")
+
+[node name="Door_S" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 0, 2.6)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "door",
+"W": "open"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Door_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_n1g1b")
+mesh = SubResource("ArrayMesh_qcff6")
+
+[node name="Floor" type="CSGBox3D" parent="Door_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_udjbb")
+
+[node name="Wall_S_L" type="CSGBox3D" parent="Door_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.34, 0.09)
+size = Vector3(0.5, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_0jysy")
+
+[node name="Wall_S_R" type="CSGBox3D" parent="Door_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 1.34, 0.09)
+size = Vector3(0.5, 2.6, 0.18)
+material = SubResource("StandardMaterial3D_jqj1p")
+
+[node name="Lintel_S" type="CSGBox3D" parent="Door_S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.39, 0.09)
+size = Vector3(1, 0.5, 0.18)
+material = SubResource("StandardMaterial3D_2txwi")
+
+[node name="Door_W" type="Node3D" parent="." groups=["tile"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, 2.6)
+metadata/sockets = {
+"E": "open",
+"N": "open",
+"S": "open",
+"W": "door"
+}
+
+[node name="Footprint" type="MeshInstance3D" parent="Door_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+material_override = SubResource("StandardMaterial3D_7cpjh")
+mesh = SubResource("ArrayMesh_jppgs")
+
+[node name="Floor" type="CSGBox3D" parent="Door_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+size = Vector3(2, 0.04, 2)
+material = SubResource("StandardMaterial3D_qi8rm")
+
+[node name="Wall_W_B" type="CSGBox3D" parent="Door_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 0.25)
+size = Vector3(0.18, 2.6, 0.5)
+material = SubResource("StandardMaterial3D_r512k")
+
+[node name="Wall_W_T" type="CSGBox3D" parent="Door_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1.75)
+size = Vector3(0.18, 2.6, 0.5)
+material = SubResource("StandardMaterial3D_fooux")
+
+[node name="Lintel_W" type="CSGBox3D" parent="Door_W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 2.39, 1)
+size = Vector3(0.18, 0.5, 1)
+material = SubResource("StandardMaterial3D_3a2r2")

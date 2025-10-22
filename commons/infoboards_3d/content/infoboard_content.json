@@ -1,0 +1,421 @@
+{
+  "_meta": {
+	"title": "AdaResearch InfoBoard Book",
+	"description": "The complete educational progression from points to complex systems",
+	"version": "1.0.0",
+	"last_updated": "2025-10-22",
+	"progression": [
+	  "point",
+	  "line",
+	  "triangle",
+	  "primitives",
+	  "transformation",
+	  "color",
+	  "arrays",
+	  "vectors",
+	  "forces",
+	  "unitcircle",
+	  "randomwalk",
+	  "procedural_generation"
+	]
+  },
+
+  "boards": {
+	"point": {
+	  "board_id": "point",
+	  "title": "The Point",
+	  "subtitle": "The Atom of Space",
+	  "category": "Fundamentals",
+	  "order": 1,
+	  "description": "Understanding points as the fundamental building block of all 3D graphics and simulations",
+	  "pages": [
+		{
+		  "page_number": 1,
+		  "title": "The Point: The Atom of Space",
+		  "text": [
+			"AXIOM 1: A point in 3D space is a vector defining a position (x, y, z).",
+			"",
+			"CODE:[point]",
+			"var point_position_zero = Vector3(0, 0, 0)"
+		  ],
+		  "visualization": "origin",
+		  "concepts": ["Vector3", "position", "origin", "coordinate system"]
+		},
+		{
+		  "page_number": 2,
+		  "title": "Visualizing the Point",
+		  "text": [
+			"AXIOM 2: A visible point can be represented by a small sphere at its designated position.",
+			"",
+			"CODE:[Mesh]",
+			"var sphere_mesh = SphereMesh.new()",
+			"var radius = 0.01  # one centimeter",
+			"sphere_mesh.radius = radius",
+			"sphere_mesh.height = radius * 2  # height is diameter"
+		  ],
+		  "visualization": "origin",
+		  "concepts": ["SphereMesh", "radius", "visualization", "scale"]
+		},
+		{
+		  "page_number": 3,
+		  "title": "Instantiating the Point",
+		  "text": [
+			"AXIOM 2.5: A mesh must be instantiated into the scene tree to exist in the world.",
+			"",
+			"CODE:[Instance]",
+			"var mesh_instance = MeshInstance3D.new()",
+			"mesh_instance.mesh = sphere_mesh",
+			"mesh_instance.position = point_position",
+			"add_child(mesh_instance)",
+			"",
+			"The add_child() call integrates the point into the scene tree, making it part of the rendered world."
+		  ],
+		  "visualization": "origin",
+		  "concepts": ["MeshInstance3D", "scene tree", "add_child", "instantiation"]
+		},
+		{
+		  "page_number": 4,
+		  "title": "Labeling the Point",
+		  "text": [
+			"AXIOM 3: The identity of a point is represented as a text label close to the point.",
+			"",
+			"CODE:",
+			"var label_3d = Label3D.new()",
+			"label_3d.text = str(point_position)",
+			"var offset = Vector3(0, 0.15, 0)",
+			"label_3d.position = point_position + offset",
+			"label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED",
+			"add_child(label_3d)",
+			"",
+			"Billboard mode makes the label always face the camera,",
+			"ensuring readability from any angle."
+		  ],
+		  "visualization": "labels",
+		  "concepts": ["Label3D", "billboard", "text rendering", "offset"]
+		},
+		{
+		  "page_number": 5,
+		  "title": "Dynamic Updates",
+		  "text": [
+			"AXIOM 4: The text label must update when the point's position changes.",
+			"",
+			"CODE:",
+			"func _process(delta):",
+			"\tlabel_3d.text = str(point_position)",
+			"\tlabel_3d.position = point_position + label_offset",
+			""
+		  ],
+		  "visualization": "dynamic",
+		  "concepts": ["_process", "delta", "dynamic updates", "real-time"]
+		}
+	  ]
+	},
+
+	"line": {
+	  "board_id": "line",
+	  "title": "The Line",
+	  "subtitle": "Connecting Points",
+	  "category": "Fundamentals",
+	  "order": 2,
+	  "description": "Lines create direction, distance, and paths through space",
+	  "pages": [
+		{
+		  "page_number": 1,
+		  "title": "The Line: Connecting Points",
+		  "text": [
+			"A line connects two points in space, creating direction and distance.",
+			"",
+			"In 3D graphics, a line is defined by two endpoints: a start and an end.",
+			"The space between them forms a path we can visualize and measure.",
+			"",
+			"AXIOM 1: A line is defined by two points in space.",
+			"",
+			"CODE:",
+			"var point_a = Vector3(0, 0, 0)",
+			"var point_b = Vector3(1, 1, 0)",
+			"",
+			"These two points define a line segment from origin to (1,1,0).",
+			"",
+			"The vector from A to B is: direction = point_b - point_a",
+			"The length of the line is: distance = direction.length()"
+		  ],
+		  "visualization": "basic_line",
+		  "concepts": ["two points", "direction", "distance", "line segment"]
+		},
+		{
+		  "page_number": 2,
+		  "title": "Drawing Lines",
+		  "text": [
+			"Godot provides multiple ways to visualize lines in 3D space.",
+			"",
+			"METHOD 1: ImmediateMesh (Simple, flexible)",
+			"",
+			"CODE:",
+			"var mesh_instance = MeshInstance3D.new()",
+			"var immediate_mesh = ImmediateMesh.new()",
+			"mesh_instance.mesh = immediate_mesh",
+			"",
+			"immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)",
+			"immediate_mesh.surface_add_vertex(point_a)",
+			"immediate_mesh.surface_add_vertex(point_b)",
+			"immediate_mesh.surface_end()",
+			"",
+			"add_child(mesh_instance)",
+			"",
+			"This creates a single line from point A to point B."
+		  ],
+		  "visualization": "drawing_lines",
+		  "concepts": ["ImmediateMesh", "PRIMITIVE_LINES", "surface_add_vertex"]
+		},
+		{
+		  "page_number": 3,
+		  "title": "Line Direction and Magnitude",
+		  "text": [
+			"A line has both direction and magnitude (length).",
+			"",
+			"AXIOM 2: The direction vector points from start to end.",
+			"",
+			"CODE:",
+			"var direction = (point_b - point_a).normalized()",
+			"var distance = point_a.distance_to(point_b)",
+			"",
+			"# Move along the line",
+			"var t = 0.5  # halfway",
+			"var midpoint = point_a + direction * distance * t",
+			"",
+			"The parameter 't' (0 to 1) lets us find any point along the line:",
+			"• t = 0.0 → point_a (start)",
+			"• t = 0.5 → midpoint",
+			"• t = 1.0 → point_b (end)",
+			"",
+			"This is called linear interpolation or 'lerp'."
+		  ],
+		  "visualization": "direction_magnitude",
+		  "concepts": ["normalized", "lerp", "interpolation", "parameter t"]
+		},
+		{
+		  "page_number": 4,
+		  "title": "Cylinders as Lines",
+		  "text": [
+			"For thicker, more visible lines, we can use cylinders.",
+			"",
+			"AXIOM 3: A cylinder can represent a thick line segment.",
+			"",
+			"CODE:",
+			"var cylinder = MeshInstance3D.new()",
+			"var cylinder_mesh = CylinderMesh.new()",
+			"cylinder_mesh.height = distance",
+			"cylinder_mesh.top_radius = 0.02  # thickness",
+			"cylinder_mesh.bottom_radius = 0.02",
+			"cylinder.mesh = cylinder_mesh",
+			"",
+			"# Position at midpoint",
+			"cylinder.position = (point_a + point_b) / 2.0",
+			"",
+			"# Rotate to align with direction",
+			"cylinder.look_at_from_position(",
+			"    cylinder.position, point_b, Vector3.UP",
+			")",
+			"",
+			"add_child(cylinder)"
+		  ],
+		  "visualization": "cylinder_lines",
+		  "concepts": ["CylinderMesh", "look_at", "rotation", "thickness"]
+		},
+		{
+		  "page_number": 5,
+		  "title": "Multiple Lines and Paths",
+		  "text": [
+			"Lines can connect multiple points to create paths and shapes.",
+			"",
+			"AXIOM 4: A sequence of connected lines forms a path.",
+			"",
+			"CODE:",
+			"var points = [",
+			"    Vector3(0, 0, 0),",
+			"    Vector3(1, 1, 0),",
+			"    Vector3(2, 0.5, 0),",
+			"    Vector3(3, 1.5, 0)",
+			"]",
+			"",
+			"immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)",
+			"for point in points:",
+			"    immediate_mesh.surface_add_vertex(point)",
+			"immediate_mesh.surface_end()",
+			"",
+			"LINE_STRIP connects consecutive points with lines.",
+			"LINES requires pairs of points (every 2 vertices = 1 line).",
+			"",
+			"Paths are fundamental to curves, splines, and trajectories."
+		  ],
+		  "visualization": "multiple_lines",
+		  "concepts": ["LINE_STRIP", "paths", "curves", "trajectories"]
+		}
+	  ]
+	},
+
+	"triangle": {
+	  "board_id": "triangle",
+	  "title": "The Triangle",
+	  "subtitle": "The First Surface",
+	  "category": "Fundamentals",
+	  "order": 3,
+	  "description": "The triangle as the threshold between line and surface, the minimal polygon, and the atomic unit of all 3D geometry",
+	  "pages": [
+		{
+		  "page_number": 1,
+		  "title": "The Triangle: Three Points Define a Plane",
+		  "text": [
+			"AXIOM 1: Three non-collinear points uniquely determine a plane.",
+			"",
+			"Where the point was location and the line was distance,",
+			"the triangle introduces INTERIOR, ORIENTATION, and AREA.",
+			"",
+			"CODE:",
+			"var vertex_a = Vector3(-0.25, 0.0, 0.0)  # Left",
+			"var vertex_b = Vector3(0.25, 0.0, 0.0)   # Right",
+			"var vertex_c = Vector3(0.0, 0.5, 0.0)    # Top",
+			"",
+			"Three vertices define the triangle.",
+			"Three edges connect them: AB, BC, CA.",
+			"One face: the planar region bounded by the edges."
+		  ],
+		  "visualization": "basic_triangle",
+		  "concepts": ["three points", "plane", "vertices", "edges", "face"]
+		},
+		{
+		  "page_number": 2,
+		  "title": "Orientation and the Normal",
+		  "text": [
+			"AXIOM 2: A triangle has two sides, determined by vertex winding order.",
+			"",
+			"CODE:",
+			"var edge1 = vertex_b - vertex_a",
+			"var edge2 = vertex_c - vertex_a",
+			"var normal = edge1.cross(edge2).normalized()",
+			"",
+			"The normal defines:",
+			"• Which side is 'front' (normal direction)",
+			"• Which side is 'back' (opposite direction)",
+			"• How light interacts with the surface",
+			"",
+			"The cross product determines surface orientation.",
+			"Change vertex order → normal flips → triangle faces opposite direction."
+		  ],
+		  "visualization": "triangle_normal",
+		  "concepts": ["normal vector", "cross product", "winding order", "front/back"]
+		},
+		{
+		  "page_number": 3,
+		  "title": "Area - The First Measurable Region",
+		  "text": [
+			"AXIOM 3: The triangle has area = ½ |edge1 × edge2|",
+			"",
+			"Area is the first 2D measure. Not distance (1D), but EXPANSE.",
+			"",
+			"CODE:",
+			"func get_triangle_area() -> float:",
+			"    var edge1 = vertex_b - vertex_a",
+			"    var edge2 = vertex_c - vertex_a",
+			"    var cross = edge1.cross(edge2)",
+			"    return cross.length() * 0.5",
+			"",
+			"The cross product's magnitude equals the parallelogram area.",
+			"Divide by 2 to get the triangle area.",
+			"",
+			"This is the first shape that can CONTAIN."
+		  ],
+		  "visualization": "triangle_area",
+		  "concepts": ["area", "cross product magnitude", "2D measure", "containment"]
+		},
+		{
+		  "page_number": 4,
+		  "title": "Creating Triangle Meshes",
+		  "text": [
+			"AXIOM 4: Triangles are built using SurfaceTool.",
+			"",
+			"CODE:",
+			"var st = SurfaceTool.new()",
+			"st.begin(Mesh.PRIMITIVE_TRIANGLES)",
+			"",
+			"# Add the three vertices",
+			"st.set_normal(normal)",
+			"st.add_vertex(vertex_a)",
+			"st.add_vertex(vertex_b)",
+			"st.add_vertex(vertex_c)",
+			"",
+			"# Create the mesh",
+			"var mesh = st.commit()",
+			"mesh_instance.mesh = mesh",
+			"",
+			"Every 3 vertices = 1 triangle.",
+			"This is the foundation of ALL 3D meshes."
+		  ],
+		  "visualization": "triangle_mesh",
+		  "concepts": ["SurfaceTool", "PRIMITIVE_TRIANGLES", "mesh creation"]
+		},
+		{
+		  "page_number": 5,
+		  "title": "Triangles - Foundation of Everything",
+		  "text": [
+			"AXIOM 5: Every 3D mesh is composed of triangles.",
+			"",
+			"A sphere? Hundreds of small triangles.",
+			"A character? Thousands of triangles.",
+			"A landscape? Millions of triangles.",
+			"",
+			"CODE:",
+			"var sphere_mesh = SphereMesh.new()",
+			"sphere_mesh.radial_segments = 32",
+			"sphere_mesh.rings = 16",
+			"# Creates approximately 1024 triangles",
+			"",
+			"Why triangles?",
+			"• Always planar (3 points always lie on a plane)",
+			"• Convex (no angles > 180°)",
+			"• GPUs are optimized for triangle rendering",
+			"• Any polygon can be decomposed into triangles",
+			"",
+			"The triangle is the ATOM of all 3D surfaces."
+		  ],
+		  "visualization": "triangle_foundation",
+		  "concepts": ["triangle mesh", "GPU rendering", "decomposition", "atomic unit"]
+		}
+	  ]
+	},
+
+	"randomwalk": {
+	  "board_id": "randomwalk",
+	  "title": "Random Walk",
+	  "subtitle": "Exploring Through Chance",
+	  "category": "Randomness",
+	  "order": 10,
+	  "description": "Understanding how randomness creates patterns through movement",
+	  "pages": [
+		{
+		  "page_number": 1,
+		  "title": "What is a Random Walk?",
+		  "text": [
+			"A random walk is a path created by taking successive random steps.",
+			"",
+			"At each moment, choose a random direction and take a step.",
+			"Over time, these random choices create emergent patterns.",
+			"",
+			"ALGORITHM:",
+			"1. Start at origin (0,0)",
+			"2. Choose random direction",
+			"3. Take step in that direction",
+			"4. Repeat",
+			"",
+			"Despite being random, patterns emerge:",
+			"• Average distance from origin grows with √steps",
+			"• Creates organic, natural-looking paths",
+			"• Models many real-world phenomena"
+		  ],
+		  "visualization": "basic_random_walk",
+		  "concepts": ["randomness", "emergent patterns", "stochastic process"]
+		}
+	  ]
+	}
+  }
+}

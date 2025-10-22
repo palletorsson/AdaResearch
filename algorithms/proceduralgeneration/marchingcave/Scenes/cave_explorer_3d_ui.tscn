@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8hori0e1ndmt"]
+
+[ext_resource type="Script" uid="uid://dloh8kqn3n3fu" path="res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_ui.gd" id="1_explorer"]
+[ext_resource type="Material" uid="uid://ch0msjlk51010" path="res://commons/scenes/2din3dui/settings_ui_material.tres" id="2_material"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_viewport"]
+[ext_resource type="PackedScene" path="res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_control_panel.tscn" id="4_panel"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_pose"]
+[ext_resource type="Resource" uid="uid://ciw0f7mg4ai0k" path="res://addons/godot-xr-tools/hands/poses/pose_point_left.tres" id="6_left"]
+[ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="7_right"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_screen"]
+size = Vector3(0.8, 0.6, 0.02)
+
+[node name="CaveExplorer3DUI" type="Node3D"]
+script = ExtResource("1_explorer")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_screen")
+surface_material_override/0 = ExtResource("2_material")
+
+[node name="Viewport2Din3D" parent="Screen" instance=ExtResource("3_viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.015)
+screen_size = Vector2(0.75, 0.55)
+scene = ExtResource("4_panel")
+viewport_size = Vector2(600, 450)
+transparent = 0
+scene_properties_keys = PackedStringArray("cave_control_panel.gd")
+
+[node name="MiniCaveDisplay" type="Node3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.4, 0)
+
+[node name="Stand" type="CSGCylinder3D" parent="."]
+radius = 0.05
+height = 0.8
+material = ExtResource("2_material")
+
+[node name="Base" type="CSGBox3D" parent="Stand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+size = Vector3(0.4, 0.05, 0.4)
+material = ExtResource("2_material")
+
+[node name="HandPoseArea" parent="." instance=ExtResource("5_pose")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+left_pose = ExtResource("6_left")
+right_pose = ExtResource("7_right")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.5)
+light_energy = 2.0
+omni_range = 3.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 1.5
+omni_range = 2.0

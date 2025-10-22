@@ -819,6 +819,14 @@
 
 			],
 			"maps": [
+				"ProceduralGenerationMarchingCubesSculpture",
+				"ProceduralGenerationCaveExplorer3dUi",
+				
+				"ProceduralGenerationBooleanPatterns",
+				"ProceduralGenerationWfcDungeonGenerator",
+				"ProceduralGenerationMarchingCubesInsideCave",
+				"ProceduralGenerationMarchingcubesTorusSculpture",
+				"ProceduralGenerationMarchingcubesFlatLandscape",
 				"ProceduralGeneration_N_grams", 
 				"ProceduralGeneration_Delaunay_Triangulation",	
 				"ProceduralGeneration_CubeMound", 
@@ -851,7 +859,7 @@
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
 				"ProceduralGeneration_Eleven",	
-				"ProceduralGeneration_Reaction_Diffusion_Systems",
+				"ProceduralGeneration_Reaction_Diffusion_Systems" 
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

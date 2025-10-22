@@ -1,0 +1,142 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7yak2rmwj3k1"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_control_panel.gd" id="1_panel"]
+
+[node name="CaveControlPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "🏔️ Cave Explorer"
+horizontal_alignment = 1
+
+[node name="NoiseScale" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/NoiseScale"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Noise Scale"
+
+[node name="HBox" type="HBoxContainer" parent="VBoxContainer/NoiseScale"]
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="VBoxContainer/NoiseScale"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="VBoxContainer/NoiseScale"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 18
+text = "3.80"
+horizontal_alignment = 2
+
+[node name="IsoLevel" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/IsoLevel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Iso Level"
+
+[node name="Slider" type="HSlider" parent="VBoxContainer/IsoLevel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="VBoxContainer/IsoLevel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 18
+text = "0.88"
+horizontal_alignment = 2
+
+[node name="ChunkScale" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ChunkScale"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Scale"
+
+[node name="Slider" type="HSlider" parent="VBoxContainer/ChunkScale"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="VBoxContainer/ChunkScale"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 18
+text = "100"
+horizontal_alignment = 2
+
+[node name="Presets" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/Presets"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Presets"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBoxContainer/Presets"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PrevButton" type="Button" parent="VBoxContainer/Presets/HBox"]
+layout_mode = 2
+text = "◄ Prev"
+
+[node name="PresetName" type="Label" parent="VBoxContainer/Presets"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 1, 0.8, 1)
+theme_override_font_sizes/font_size = 18
+text = "Inside Cave"
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="VBoxContainer/Presets/HBox"]
+layout_mode = 2
+text = "Next ►"
+
+[node name="Info" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.8, 1)
+theme_override_font_sizes/font_size = 12
+text = "Scroll sliders or use presets
+Changes update in real-time"
+horizontal_alignment = 1
+
+[connection signal="value_changed" from="VBoxContainer/NoiseScale/Slider" to="." method="_on_noise_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/IsoLevel/Slider" to="." method="_on_iso_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ChunkScale/Slider" to="." method="_on_scale_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Presets/HBox/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Presets/HBox/NextButton" to="." method="_on_next_button_pressed"]
+

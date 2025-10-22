@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bumvvk603qw41"]
+
+[ext_resource type="Script" uid="uid://c3un5edep7bq5" path="res://algorithms/proceduralgeneration/randomboolean/randboolean.gd" id="1_ha7jg"]
+
+[node name="Randomboolean" type="Node3D"]
+script = ExtResource("1_ha7jg")
+
+[node name="CSGCombiner3D_c_x" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0)
+
+[node name="CSGBox3D_body" type="CSGBox3D" parent="CSGCombiner3D_c_x"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+size = Vector3(40, 40, 40)
+
+[node name="CSGSphere3D_substract" type="CSGSphere3D" parent="CSGCombiner3D_c_x"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, 18)
+operation = 2
+radius = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.89338, 42.9699)

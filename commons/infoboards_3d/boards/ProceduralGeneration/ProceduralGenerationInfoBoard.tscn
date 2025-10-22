@@ -23,7 +23,6 @@ resource_local_to_scene = true
 size = Vector3(1.035, 0.776, 0.0410164)
 
 [node name="ProceduralGenerationInfoBoard" instance=ExtResource("1_handheld")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
 
 [node name="CollisionShape3D" parent="BoardFrame" index="0"]
 shape = SubResource("BoxShape3D_procgen")

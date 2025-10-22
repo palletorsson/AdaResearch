@@ -31,6 +31,14 @@ const INFO_BOARD_TYPES = {
 		"color": Color(0.2, 0.8, 1.0),
 		"supports_parameters": true
 	},
+	"triangle": {
+		"name": "Triangle Info Board",
+		"category": "Fundamentals",
+		"scene": "Triangle/TriangleInfoBoard.tscn",
+		"description": "The first surface - triangles, planes, and mesh fundamentals",
+		"color": Color(0.9, 0.3, 0.9),
+		"supports_parameters": true
+	},
 	"vectors": {
 		"name": "Vectors Info Board",
 		"category": "Mathematics",

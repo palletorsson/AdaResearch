@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://cri6r4pmmod8p"]
+
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
+[ext_resource type="Script" uid="uid://27h05ksah6p" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorFlat.gd" id="2_kc6u2"]
+
+[sub_resource type="Environment" id="Environment_q07dc"]
+background_mode = 1
+background_color = Color(0.4, 0.6, 0.8, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.6, 0.7, 1)
+ambient_light_energy = 0.8
+ssao_enabled = true
+ssao_radius = 8.0
+ssao_power = 2.0
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 0.5
+glow_bloom = 0.3
+glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(0.7, 0.8, 0.9, 1)
+fog_light_energy = 0.5
+fog_density = 0.001
+fog_aerial_perspective = 0.5
+adjustment_enabled = true
+adjustment_contrast = 1.05
+adjustment_saturation = 1.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_gptaj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_gptaj")
+script = ExtResource("2_kc6u2")
+noise_offset = Vector3(100, 50, 75)
+chunk_scale = 300.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, -15, 40, 20)
+light_color = Color(1, 0.95, 0.85, 1)
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 2.0
+directional_shadow_mode = 1
+directional_shadow_max_distance = 500.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q07dc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, -30, 60, 80)
+fov = 70.0
+near = 0.5
+far = 1000.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5)
+visible = false
+mesh = SubResource("BoxMesh_gptaj")

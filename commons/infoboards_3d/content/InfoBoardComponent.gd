@@ -105,21 +105,58 @@ func generate_boards(board_data, board_definitions: Dictionary = {}):
 	print("InfoBoardComponent: Added %d info boards" % board_count)
 	board_generation_complete.emit(board_count)
 
+# Create a board using the universal template
+# This allows boards to work with just JSON content, no scene file needed
+func _create_board_with_universal_template(board_id: String) -> Node3D:
+	# Check if content exists for this board
+	var page_count = InfoBoardContentLoader.get_page_count(board_id)
+	if page_count == 0:
+		return null  # No content, can't create board
+
+	# Load the base handheld InfoBoard scene
+	var base_scene_path = "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn"
+	if not ResourceLoader.exists(base_scene_path):
+		print("InfoBoardComponent: WARNING - HandheldInfoBoard base scene not found at: %s" % base_scene_path)
+		return null
+
+	var board_3d = load(base_scene_path).instantiate()
+
+	# Get the InfoBoardUI control from the Viewport2Din3D structure
+	var ui = board_3d.get_node_or_null("BoardFrame/TabletFrame/Viewport2Din3D/Viewport/InfoBoardUI")
+	if not ui:
+		print("InfoBoardComponent: WARNING - Could not find InfoBoardUI in HandheldInfoBoard for board_id '%s'" % board_id)
+		board_3d.queue_free()
+		return null
+
+	# Apply the UniversalInfoBoard script
+	var universal_script = load("res://commons/infoboards_3d/base/UniversalInfoBoard.gd")
+	ui.set_script(universal_script)
+	ui.board_id = board_id
+
+	print("InfoBoardComponent: Created board '%s' using UniversalInfoBoard template (Content: %d pages)" % [board_id, page_count])
+
+	return board_3d
+
 # Place a single info board
 func _place_board(x: int, y: int, z: int, board_type: String, parameters: Array, definition: Dictionary, total_size: float):
 	var position = Vector3(x, y, z) * total_size
 
-	var scene_path = InfoBoardRegistry.get_board_scene_path(board_type)
-	if scene_path.is_empty():
-		print("InfoBoardComponent: WARNING - No scene file for board type '%s'" % board_type)
-		return
+	# NEW: Try to create board using universal template first
+	var board_object = _create_board_with_universal_template(board_type)
 
-	var scene_resource = _load_scene_cached(scene_path)
-	if not scene_resource:
-		print("InfoBoardComponent: WARNING - Could not load scene for board type '%s'" % board_type)
-		return
+	# Fallback: Try loading from registry scene path
+	if not board_object:
+		var scene_path = InfoBoardRegistry.get_board_scene_path(board_type)
+		if scene_path.is_empty():
+			print("InfoBoardComponent: WARNING - No scene file for board type '%s'" % board_type)
+			return
 
-	var board_object = scene_resource.instantiate()
+		var scene_resource = _load_scene_cached(scene_path)
+		if not scene_resource:
+			print("InfoBoardComponent: WARNING - Could not load scene for board type '%s'" % board_type)
+			return
+
+		board_object = scene_resource.instantiate()
 	if board_object:
 		board_object.position = position
 

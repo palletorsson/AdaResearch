@@ -50,7 +50,7 @@ adjustment_saturation = 0.9
 [node name="Terrain" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_gptaj")
 script = ExtResource("2_kc6u2")
-noise_scale = 3.5
+noise_scale = 13.5
 noise_offset = Vector3(200, -120, 150)
 iso_level = 0.85
 chunk_scale = 300.0

@@ -263,3 +263,5 @@ func _on_speed_slider_changed(value):
 	var speed_label = left_panel.get_child(left_panel.get_child_count() - 1).get_child(0)
 	speed_label.text = "Speed: " + str(snappedf(value, 0.1))
 
+
+
