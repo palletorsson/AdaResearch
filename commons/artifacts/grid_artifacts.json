@@ -1343,7 +1343,7 @@
 			"description": "7_2_game_of_life_vr",
 			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
 		},		
-		"": {
+		"7_3_game_of_life_oop_vr": {
 			"name": "7_3_game_of_life_oop_vr",
 			"lookup_name": "7_3_game_of_life_oop_vr",
 			"description": "7_3_game_of_life_oop_vr",
@@ -1876,6 +1876,7 @@
 			"scene": "res://algorithms/proceduralgeneration/wfcRooms/wfc_dungeon_generator.tscn",
 
 		},	
+		
 		"boolean_patterns": {
 			"name": "boolean_patterns",
 			"lookup_name": "boolean_patterns",
@@ -1897,7 +1898,13 @@
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_3d_ui.tscn",
 
 		},								
+		"marchingcubes_portal_landscape": {
+			"name": "marchingcubes_portal_landscape",
+			"lookup_name": "marchingcubes_portal_landscape",
+			"description": "marchingcubes_portal_landscape",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
 
+		},	
 		"info_display": {
 			"name": "info_display",
 			"lookup_name": "info_display",

@@ -254,7 +254,7 @@ void sky() {
 	
 	// Alpha of tint ramp determines transparency of sky texture
 	COLOR = mix(textureLod(tint_ramp, SKY_COORDS.yx, 0.0).rgb, COLOR, textureLod(tint_ramp, SKY_COORDS.yx, 0.0).a);
-}n
+}
 """
 	return shader
 
@@ -396,7 +396,8 @@ func create_sparkle_system():
 	
 	# VR-optimized particle count
 	var particle_count = 200 if target_platform == "mobile_vr" else 500
-	sparkles.amount = int(particle_count * particle_density)
+	var final_count = int(particle_count * particle_density)
+	sparkles.amount = max(1, final_count)  # Ensure at least 1 particle
 	
 	var material = ParticleProcessMaterial.new()
 	
@@ -440,7 +441,8 @@ func create_energy_field_system():
 	energy_field.emitting = true
 	
 	var particle_count = 100 if target_platform == "mobile_vr" else 300
-	energy_field.amount = int(particle_count * particle_density)
+	var final_count = int(particle_count * particle_density)
+	energy_field.amount = max(1, final_count)  # Ensure at least 1 particle
 	
 	var material = ParticleProcessMaterial.new()
 	
@@ -534,9 +536,17 @@ func setup_vr_optimizations():
 	# Additional VR optimizations
 	var viewport = get_viewport()
 	if viewport:
-		# Enable temporal upsampling for better performance
-		viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-		viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
+		# Check if Forward+ renderer is available for FSR
+		var renderer = RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_RENDERER)
+		if renderer == "forward_plus":
+			# Enable temporal upsampling for better performance
+			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
+			viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
+		else:
+			# Fallback to basic scaling for other renderers
+			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+			viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
+			print("FSR not available with renderer: " + str(renderer) + " - using bilinear scaling")
 	
 	print("VR optimizations applied for target FPS: " + str(performance_target_fps))
 
@@ -591,7 +601,8 @@ func update_particle_counts():
 	for particles in particle_systems:
 		var base_amount = particles.get_meta("base_amount", particles.amount)
 		particles.set_meta("base_amount", base_amount)
-		particles.amount = int(base_amount * particle_density)
+		var final_count = int(base_amount * particle_density)
+		particles.amount = max(1, final_count)  # Ensure at least 1 particle
 
 func apply_visual_theme():
 	"""Apply the selected visual theme to all elements"""

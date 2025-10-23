@@ -5,6 +5,15 @@
 extends Node3D
 class_name GridSystem
 
+# Preload component scripts
+const DataComponentScript = preload("res://commons/grid/GridDataComponent.gd")
+const StructureComponentScript = preload("res://commons/grid/GridStructureComponent.gd")
+const UtilitiesComponentScript = preload("res://commons/grid/GridUtilitiesComponent.gd")
+const InteractablesComponentScript = preload("res://commons/grid/GridInteractablesComponent.gd")
+const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
+const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
+const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
+
 # Configuration
 @export var cube_size: float = 1.0
 @export var gutter: float = 0.0
@@ -12,13 +21,13 @@ class_name GridSystem
 @export var reload_map: bool = false : set = reload_map_setter
 
 # Components
-var data_component: GridDataComponent
-var structure_component: GridStructureComponent
-var utilities_component: GridUtilitiesComponent
-var interactables_component: GridInteractablesComponent
-var spawn_component: GridSpawnComponent
-var ceiling_component: GridCeilingComponent
-var audio_component: GridAudioComponent
+var data_component
+var structure_component
+var utilities_component
+var interactables_component
+var spawn_component
+var ceiling_component
+var audio_component
 
 # Scene references
 @onready var base_cube = $CubeScene
@@ -81,31 +90,31 @@ func _initialize_components():
 	print("GridSystem: Initializing components...")
 	
 	# Create and add components as children
-	data_component = GridDataComponent.new()
+	data_component = DataComponentScript.new()
 	data_component.name = "GridDataComponent"
 	add_child(data_component)
 
-	structure_component = GridStructureComponent.new()
+	structure_component = StructureComponentScript.new()
 	structure_component.name = "GridStructureComponent"
 	add_child(structure_component)
 
-	utilities_component = GridUtilitiesComponent.new()
+	utilities_component = UtilitiesComponentScript.new()
 	utilities_component.name = "GridUtilitiesComponent"
 	add_child(utilities_component)
 
-	interactables_component = GridInteractablesComponent.new()
+	interactables_component = InteractablesComponentScript.new()
 	interactables_component.name = "GridInteractablesComponent"
 	add_child(interactables_component)
 
-	spawn_component = GridSpawnComponent.new()
+	spawn_component = SpawnComponentScript.new()
 	spawn_component.name = "GridSpawnComponent"
 	add_child(spawn_component)
 
-	ceiling_component = GridCeilingComponent.new()
+	ceiling_component = CeilingComponentScript.new()
 	ceiling_component.name = "GridCeilingComponent"
 	add_child(ceiling_component)
 
-	audio_component = GridAudioComponent.new()
+	audio_component = AudioComponentScript.new()
 	audio_component.name = "GridAudioComponent"
 	add_child(audio_component)
 

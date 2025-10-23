@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://tbm38263lypr"]
+[gd_scene load_steps=2 format=3 uid="uid://dnxt8u2diqu30"]
 
-[ext_resource type="Script" path="res://commons/grid/InfoBoardIntegrationTest.gd" id="1_test"]
+[ext_resource type="Script" uid="uid://cuyhgivgdb6ha" path="res://commons/grid/InfoBoardIntegrationTest.gd" id="1_test"]
 
 [node name="InfoBoardIntegrationTest" type="Node3D"]
 script = ExtResource("1_test")

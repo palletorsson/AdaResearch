@@ -67,6 +67,79 @@ static func get_page(board_id: String, page_number: int) -> Dictionary:
 
 	return pages[page_index]
 
+# Get a specific slide by its slide_id (e.g., "point_1", "line_3")
+static func get_slide_by_id(slide_id: String) -> Dictionary:
+	if not _is_loaded:
+		load_content()
+
+	var boards = _content_cache.get("boards", {})
+
+	# Search through all boards for the slide_id
+	for board_id in boards.keys():
+		var board = boards[board_id]
+		var pages = board.get("pages", [])
+
+		for page in pages:
+			if page.get("slide_id", "") == slide_id:
+				# Return the slide with board context
+				var slide_data = page.duplicate(true)
+				slide_data["_board_id"] = board_id
+				slide_data["_board_title"] = board.get("title", "")
+				return slide_data
+
+	push_warning("InfoBoardContentLoader: Slide '%s' not found" % slide_id)
+	return {}
+
+# Get all slides across all boards (for full navigation mode)
+static func get_all_slides() -> Array:
+	if not _is_loaded:
+		load_content()
+
+	var all_slides = []
+	var progression = get_progression()
+	var boards = _content_cache.get("boards", {})
+
+	# Follow progression order for consistent navigation
+	for board_id in progression:
+		if not boards.has(board_id):
+			continue
+
+		var board = boards[board_id]
+		var pages = board.get("pages", [])
+
+		for page in pages:
+			var slide_data = page.duplicate(true)
+			slide_data["_board_id"] = board_id
+			slide_data["_board_title"] = board.get("title", "")
+			all_slides.append(slide_data)
+
+	return all_slides
+
+# Get slide IDs for a specific board
+static func get_slide_ids(board_id: String) -> Array:
+	var pages = get_pages(board_id)
+	var slide_ids = []
+
+	for page in pages:
+		var slide_id = page.get("slide_id", "")
+		if not slide_id.is_empty():
+			slide_ids.append(slide_id)
+
+	return slide_ids
+
+# Get all slide IDs across all boards
+static func get_all_slide_ids() -> Array:
+	if not _is_loaded:
+		load_content()
+
+	var all_slide_ids = []
+	var boards = _content_cache.get("boards", {})
+
+	for board_id in boards.keys():
+		all_slide_ids.append_array(get_slide_ids(board_id))
+
+	return all_slide_ids
+
 # Get board metadata
 static func get_board_meta(board_id: String) -> Dictionary:
 	var board_content = get_board_content(board_id)

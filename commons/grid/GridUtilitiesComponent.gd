@@ -773,26 +773,30 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 	if page_count == 0:
 		return null  # No content, can't create board
 
-	# Load the base handheld InfoBoard scene
+	# Load the HandheldInfoBoard base structure (3D frame + viewport)
 	var base_scene_path = "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn"
 	if not ResourceLoader.exists(base_scene_path):
+		push_error("GridUtilitiesComponent: HandheldInfoBoard base scene not found")
 		return null
 
 	var board_3d = load(base_scene_path).instantiate()
 
-	# Get the InfoBoardUI control from the Viewport2Din3D structure
-	var ui = board_3d.get_node_or_null("BoardFrame/TabletFrame/Viewport2Din3D/Viewport/InfoBoardUI")
-	if not ui:
-		push_error("GridUtilitiesComponent: Failed to get InfoBoardUI from HandheldInfoBoard for board_id '%s'" % board_id)
+	# Configure the Viewport2Din3D script properties on the root node
+	# The script automatically loads the scene into the viewport
+	if board_3d.has_method("set") and board_3d.get("scene") != null:
+		# Set the board_id property which will be passed to UniversalInfoBoard
+		board_3d.set("board_id", board_id)
+		board_3d.set("display_mode", 1)  # DisplayMode.SINGLE_BOARD
+		board_3d.set("auto_load_on_ready", true)
+		board_3d.set("enable_navigation", true)
+		
+		print("GridUtilitiesComponent: Configured HandheldInfoBoard - board_id: %s" % board_id)
+	else:
+		push_error("GridUtilitiesComponent: HandheldInfoBoard doesn't have Viewport2Din3D script configured")
 		board_3d.queue_free()
 		return null
 
-	# Apply the UniversalInfoBoard script
-	var universal_script = load("res://commons/infoboards_3d/base/UniversalInfoBoard.gd")
-	ui.set_script(universal_script)
-	ui.board_id = board_id
-
-	print("GridUtilitiesComponent: Created '%s' InfoBoard using UniversalTemplate (Content: %d pages)" % [board_id, page_count])
+	print("GridUtilitiesComponent: Created '%s' InfoBoard using UniversalInfoBoard (Content: %d pages)" % [board_id, page_count])
 
 	return board_3d
 

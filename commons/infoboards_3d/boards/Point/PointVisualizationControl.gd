@@ -187,15 +187,16 @@ func draw_dynamic_visualization(center: Vector2):
 func draw_grid(center: Vector2):
 	"""Draw a subtle grid"""
 	# Vertical lines
-	for x in range(int(-GRID_SIZE / 2), int(GRID_SIZE / 2), GRID_SPACING):
-		var start = center + Vector2(x, -GRID_SIZE / 2)
-		var end = center + Vector2(x, GRID_SIZE / 2)
+	var half_grid = GRID_SIZE / 2.0
+	for x in range(int(-half_grid), int(half_grid), GRID_SPACING):
+		var start = center + Vector2(x, -half_grid)
+		var end = center + Vector2(x, half_grid)
 		draw_line(start, end, GRID_COLOR, 1.0)
 	
 	# Horizontal lines
-	for y in range(int(-GRID_SIZE / 2), int(GRID_SIZE / 2), GRID_SPACING):
-		var start = center + Vector2(-GRID_SIZE / 2, y)
-		var end = center + Vector2(GRID_SIZE / 2, y)
+	for y in range(int(-half_grid), int(half_grid), GRID_SPACING):
+		var start = center + Vector2(-half_grid, y)
+		var end = center + Vector2(half_grid, y)
 		draw_line(start, end, GRID_COLOR, 1.0)
 
 func draw_axes(center: Vector2):
@@ -221,6 +222,3 @@ func draw_arrow(from: Vector2, to: Vector2, color: Color, width: float = 2.0):
 	
 	var points = PackedVector2Array([to, arrow_point1, arrow_point2])
 	draw_colored_polygon(points, color)
-
-
-

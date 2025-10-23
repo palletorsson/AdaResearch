@@ -15,6 +15,14 @@ const INFO_BOARD_TYPES = {
 		"color": Color(0.8, 0.5, 0.9),
 		"supports_parameters": true  # Can have height offset
 	},
+	"coordinate_system": {
+		"name": "Coordinate System Info Board",
+		"category": "Fundamentals",
+		"scene": "CoordinateSystem/CoordinateSystemInfoBoard.tscn",
+		"description": "The stage of space - understanding 3D coordinate systems",
+		"color": Color(0.8, 0.8, 0.8),
+		"supports_parameters": true
+	},
 	"point": {
 		"name": "Point Info Board",
 		"category": "Fundamentals",
@@ -37,6 +45,38 @@ const INFO_BOARD_TYPES = {
 		"scene": "Triangle/TriangleInfoBoard.tscn",
 		"description": "The first surface - triangles, planes, and mesh fundamentals",
 		"color": Color(0.9, 0.3, 0.9),
+		"supports_parameters": true
+	},
+	"cube": {
+		"name": "Cube Info Board",
+		"category": "Primitives",
+		"scene": "Cube/CubeInfoBoard.tscn",
+		"description": "The fundamental 3D primitive - cubes, boxes, and rectangular geometry",
+		"color": Color(0.7, 0.4, 0.2),
+		"supports_parameters": true
+	},
+	"sphere": {
+		"name": "Sphere Info Board",
+		"category": "Primitives",
+		"scene": "Sphere/SphereInfoBoard.tscn",
+		"description": "The perfect curve - spheres, circles, and radial geometry",
+		"color": Color(0.2, 0.7, 0.4),
+		"supports_parameters": true
+	},
+	"cylinder": {
+		"name": "Cylinder Info Board",
+		"category": "Primitives",
+		"scene": "Cylinder/CylinderInfoBoard.tscn",
+		"description": "The tube primitive - cylinders, pipes, and cylindrical geometry",
+		"color": Color(0.4, 0.2, 0.7),
+		"supports_parameters": true
+	},
+	"torus": {
+		"name": "Torus Info Board",
+		"category": "Primitives",
+		"scene": "Torus/TorusInfoBoard.tscn",
+		"description": "The hidden ring form - torus with rings and segments revealed in low resolution",
+		"color": Color(0.6, 0.3, 0.8),
 		"supports_parameters": true
 	},
 	"vectors": {

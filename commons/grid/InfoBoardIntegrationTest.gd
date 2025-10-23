@@ -56,7 +56,7 @@ func _test_info_board_validation():
 	
 	for board_type in test_board_types:
 		var is_valid = InfoBoardRegistry.is_valid_board_type(board_type)
-		print("  %s: %s" % [board_type, "✓ Valid" if is_valid else "✗ Invalid"))
+		print("  %s: %s" % [board_type, "✓ Valid" if is_valid else "✗ Invalid"])
 		
 		if is_valid:
 			var board_info = InfoBoardRegistry.get_board_info(board_type)

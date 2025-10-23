@@ -2,9 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dyj5k8px2vq7h" path="res://commons/infoboards_3d/boards/RandomWalk/RandomWalkInfoBoard.tscn" id="1_board"]
 
-
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sky"]
-panorama = null
 
 [sub_resource type="Sky" id="Sky_sky"]
 sky_material = SubResource("PanoramaSkyMaterial_sky")
@@ -35,6 +33,7 @@ mesh = SubResource("PlaneMesh_ground")
 
 [node name="RandomWalkInfoBoard" parent="." instance=ExtResource("1_board")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = null
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
