@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://by3txwfy2jm3d"]
+
+[ext_resource type="PackedScene" uid="uid://cxbbparbdlmrr" path="res://commons/primitives/origin/origin.tscn" id="1_origin"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="OriginTest" type="Node3D"]
+
+[node name="Origin" parent="." instance=ExtResource("1_origin")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 3)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 0)
+light_energy = 0.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

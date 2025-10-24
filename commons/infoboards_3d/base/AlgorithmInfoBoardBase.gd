@@ -39,8 +39,13 @@ var auto_advance_timer: float = 0.0
 # page_content = [
 #   {
 #     "title": "Page Title",
-#     "text": ["Paragraph 1", "Paragraph 2", ...],
-#     "visualization": "visualization_type"
+#     "visual_id": "visualization_id",
+#     "axiom": "AXIOM 1: ...",
+#     "narrative": ["Paragraph 1", "Paragraph 2"],
+#     "steps": ["Step 1", "Step 2"],
+#     "code": {"block": "var example = 1"},
+#     "poetics": "Reflection...",
+#     "visualization": {"id": "visualization_id"}
 #   }
 # ]
 
@@ -83,12 +88,25 @@ func initialize_content() -> void:
 	page_content = [
 		{
 			"title": "Welcome to Algorithm Info Board",
-			"text": [
-				"This is a handheld 3D info board for exploring algorithms.",
-				"Navigate through pages using the Previous and Next buttons.",
-				"Each page can include text and interactive visualizations."
+			"visual_id": "default",
+			"axiom": "AXIOM 1: This board shares interactive algorithm stories.",
+			"narrative": [
+				"Navigate with the Previous and Next buttons to explore each lesson.",
+				"Each page blends an axiom, narrative context, steps, and runnable code."
 			],
-			"visualization": "default"
+			"steps": [
+				"Select a slide using the controls.",
+				"Study the axiom and supporting narrative.",
+				"Run or adapt the code in your own project."
+			],
+			"code": {
+				"id": "welcome_example",
+				"language": "gdscript",
+				"purpose": "demonstration",
+				"block": "print(\"Welcome to the Info Board\")"
+			},
+			"poetics": "Knowledge lives where insight, code, and imagination meet.",
+			"visualization": {"id": "default", "asset": "", "files": []}
 		}
 	]
 
@@ -132,10 +150,17 @@ func update_page() -> void:
 		page_counter.text = "%d / %d" % [current_page + 1, total_pages]
 
 	# Update text content
-	update_text_content(page.get("text", []))
+	var content_sections = _build_page_sections(page)
+	update_text_content(content_sections)
 
 	# Update visualization
-	update_visualization(page.get("visualization", "none"))
+	var vis_data = page.get("visualization", {})
+	var vis_id = page.get("visual_id", "")
+	if vis_data is Dictionary:
+		vis_id = vis_data.get("id", vis_id)
+	elif typeof(vis_data) == TYPE_STRING and vis_id.is_empty():
+		vis_id = vis_data
+	update_visualization(vis_id)
 
 	# Update navigation buttons
 	if prev_button:
@@ -151,33 +176,119 @@ func update_page() -> void:
 	emit_signal("page_changed", current_page)
 
 # Update text container with new content
-func update_text_content(texts: Array) -> void:
+func update_text_content(entries: Array) -> void:
 	if not text_container:
 		return
 
-	# Clear existing content
 	for child in text_container.get_children():
 		child.queue_free()
 
-	# Add new content
-	var roboto_regular = load("res://commons/font/static/Roboto-Regular.ttf")
+	var roboto_regular: Font = load("res://commons/font/static/Roboto-Regular.ttf")
+	var roboto_bold: Font = load("res://commons/font/static/Roboto-Bold.ttf")
+	var roboto_italic: Font = load("res://commons/font/static/Roboto-Italic.ttf")
 
-	for text in texts:
+	for entry in entries:
+		if entry is Dictionary and entry.get("type", "") == "spacer":
+			var spacer = Control.new()
+			spacer.custom_minimum_size = Vector2(0, 28)
+			text_container.add_child(spacer)
+			continue
+
+		var text := ""
+		var entry_type := "paragraph"
+		if entry is Dictionary:
+			text = entry.get("text", "")
+			entry_type = entry.get("type", "paragraph")
+		else:
+			text = str(entry)
+
+		if typeof(text) != TYPE_STRING:
+			text = str(text)
+		if text.strip_edges().is_empty():
+			continue
+
 		var label = Label.new()
 		label.text = text
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
 		label.add_theme_font_override("font", roboto_regular)
+		label.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
 		label.add_theme_font_size_override("font_size", 42)
-		label.add_theme_constant_override("line_spacing", 12)
+
+		match entry_type:
+			"axiom":
+				label.add_theme_font_override("font", roboto_bold)
+				label.add_theme_font_size_override("font_size", 48)
+				label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.6))
+			"section":
+				label.add_theme_font_override("font", roboto_bold)
+				label.add_theme_color_override("font_color", Color(0.8, 0.9, 1.0))
+				label.add_theme_font_size_override("font_size", 44)
+			"step":
+				label.add_theme_font_size_override("font_size", 40)
+			"code":
+				label.add_theme_font_size_override("font_size", 38)
+				label.add_theme_color_override("font_color", Color(0.8, 0.95, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_OFF
+			"poetics":
+				label.add_theme_font_override("font", roboto_italic)
+				label.add_theme_font_size_override("font_size", 40)
+				label.add_theme_color_override("font_color", Color(0.85, 0.9, 1.0))
+
 		text_container.add_child(label)
 
-		# Add spacing between paragraphs
-		if text_container.get_child_count() > 1:
-			var spacer = Control.new()
-			spacer.custom_minimum_size = Vector2(0, 30)
-			text_container.add_child(spacer)
-			text_container.move_child(spacer, text_container.get_child_count() - 2)
+		var spacer = Control.new()
+		spacer.custom_minimum_size = Vector2(0, 18)
+	text_container.add_child(spacer)
+	
+func _append_spacer_section(sections: Array) -> void:
+	if sections.size() == 0:
+		return
+	var last = sections[sections.size() - 1]
+	if last is Dictionary and last.get("type", "") == "spacer":
+		return
+	sections.append({"type": "spacer"})
+
+func _build_page_sections(page: Dictionary) -> Array:
+	var sections: Array = []
+
+	var axiom = page.get("axiom", "")
+	if typeof(axiom) == TYPE_STRING and not axiom.is_empty():
+		sections.append({"type": "axiom", "text": axiom})
+
+	var narrative = page.get("narrative", [])
+	if narrative is Array:
+		for paragraph in narrative:
+			if typeof(paragraph) == TYPE_STRING and not paragraph.is_empty():
+				sections.append({"type": "paragraph", "text": paragraph})
+
+	var steps = page.get("steps", [])
+	if steps is Array and steps.size() > 0:
+		_append_spacer_section(sections)
+		sections.append({"type": "section", "text": "Steps"})
+		for i in range(steps.size()):
+			var step_text = steps[i]
+			if typeof(step_text) == TYPE_STRING and not step_text.is_empty():
+				sections.append({"type": "step", "text": "%d. %s" % [i + 1, step_text]})
+
+	var code_dict = page.get("code", {})
+	if code_dict is Dictionary:
+		var code_block = code_dict.get("block", "")
+		if typeof(code_block) == TYPE_STRING and not code_block.is_empty():
+			_append_spacer_section(sections)
+			sections.append({"type": "section", "text": "Code"})
+			for line in code_block.split("\n"):
+				sections.append({"type": "code", "text": line})
+
+	var poetics = page.get("poetics", "")
+	if typeof(poetics) == TYPE_STRING and not poetics.is_empty():
+		_append_spacer_section(sections)
+		sections.append({"type": "poetics", "text": poetics})
+
+	if sections.size() > 0 and sections[sections.size() - 1] is Dictionary and sections[sections.size() - 1].get("type", "") == "spacer":
+		sections.pop_back()
+
+	return sections
+
 
 # Update visualization (virtual - override in child classes)
 func update_visualization(vis_type: String) -> void:

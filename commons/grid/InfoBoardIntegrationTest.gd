@@ -145,10 +145,14 @@ func _test_complete_integration():
 					print("  Invalid info board type: %s" % board_type)
 			else:
 				# Regular utility
+				var utility_type = utility_cell.split(":")[0]
+				var utility_params = []
+				if ":" in utility_cell:
+					utility_params = utility_cell.split(":")[1:]
 				regular_utilities.append({
-					"type": utility_cell.split(":")[0],
-					"position": Vector3i(x, z, 0),
-					"parameters": utility_cell.split(":")[1:] if ":" in utility_cell else []
+					"type": utility_type,
+					"position": Vector3i(x, 0, z),
+					"parameters": utility_params
 				})
 				print("  Found regular utility: %s at (%d, %d)" % [utility_cell.split(":")[0], x, z])
 	

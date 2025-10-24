@@ -418,7 +418,7 @@ func draw_vector(start_pos, vector, color, width, dashed = false):
 	var end_pos = start_pos + vector
 
 	if dashed:
-		draw_dashed_line(start_pos, end_pos, color, width)
+		draw_custom_dashed_line(start_pos, end_pos, color, width)
 	else:
 		draw_line(start_pos, end_pos, color, width)
 
@@ -433,7 +433,7 @@ func draw_vector(start_pos, vector, color, width, dashed = false):
 	var points = PackedVector2Array([end_pos, arrow_point1, arrow_point2])
 	draw_colored_polygon(points, color)
 
-func draw_dashed_line(from: Vector2, to: Vector2, color: Color, width: float = 1.0, dash_length: float = 8.0, gap_length: float = 4.0, cap_start: bool = false, cap_end: bool = false):
+func draw_custom_dashed_line(from: Vector2, to: Vector2, color: Color, width: float = 1.0, dash_length: float = 8.0, gap_length: float = 4.0, cap_start: bool = false, cap_end: bool = false):
 	var direction = (to - from).normalized()
 	var distance = from.distance_to(to)
 	var current_distance = 0

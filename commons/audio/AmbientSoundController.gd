@@ -275,9 +275,14 @@ func _on_random_event_timeout(config: Dictionary):
 
 	# Randomize next interval
 	var interval_range = config["interval_range"]
-	var timer = random_event_timers[random_event_timers.find(
-		func(t): return t.timeout.is_connected(_on_random_event_timeout.bind(config))
-	)]
+	
+	# Find the timer that's connected to this specific config
+	var timer = null
+	for t in random_event_timers:
+		if t and t.timeout.is_connected(_on_random_event_timeout.bind(config)):
+			timer = t
+			break
+	
 	if timer:
 		timer.wait_time = randf_range(interval_range[0], interval_range[1])
 

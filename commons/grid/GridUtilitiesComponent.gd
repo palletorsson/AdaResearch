@@ -716,55 +716,92 @@ func get_utility_count() -> int:
 func get_all_utility_positions() -> Array:
 	return utility_objects.keys()
 
-# Parse info board utility (ib:vectors, ib:forces:1.5, etc.)
+# Parse info board utility (ib:vectors, ib:forces:1.5, ib:triangle:90:2:0.2, etc.)
+# Format: ib:board_type[:rotation[:up[:scale]]]
+#   - rotation: Y-axis rotation in degrees (default: 0)
+#   - up: Y position offset (default: 0)
+#   - scale: uniform scale factor (default: 1.0)
+# Special case: Single small float (< 10) assumed to be legacy height for backward compat
 func _parse_info_board_utility(utility_cell: String, x: int, z: int) -> Dictionary:
 	var parts = utility_cell.split(":")
 	if parts.size() < 2:
 		print("GridUtilitiesComponent: Invalid info board format: %s" % utility_cell)
 		return {}
-	
-	var board_type = parts[1]  # e.g., "vectors", "forces"
+
+	var board_type = parts[1]  # e.g., "vectors", "forces", "triangle"
+	var rotation_degrees = 0.0
 	var height_offset = 0.0
-	
-	# Check for height offset parameter
+	var scale_factor = 1.0
+
+	# Parse parameters based on count
 	if parts.size() > 2:
-		var height_param = parts[2]
-		if height_param.is_valid_float():
-			height_offset = float(height_param)
-	
+		# New format priority: ib:board:rotation:up:scale
+
+		if parts.size() == 3:
+			# Single parameter - could be rotation OR legacy height
+			var param = parts[2]
+			if param.is_valid_float():
+				var value = float(param)
+				# If value is small (< 10), assume it's legacy height offset
+				# If value is large (>= 10), assume it's rotation in degrees
+				if value < 10.0:
+					height_offset = value
+				else:
+					rotation_degrees = value
+
+		elif parts.size() == 4:
+			# Two parameters: rotation and up
+			if parts[2].is_valid_float():
+				rotation_degrees = float(parts[2])
+			if parts[3].is_valid_float():
+				height_offset = float(parts[3])
+
+		elif parts.size() >= 5:
+			# Three+ parameters: rotation, up, and scale
+			if parts[2].is_valid_float():
+				rotation_degrees = float(parts[2])
+			if parts[3].is_valid_float():
+				height_offset = float(parts[3])
+			if parts[4].is_valid_float():
+				scale_factor = float(parts[4])
+
 	# Validate board type using InfoBoardRegistry
 	if not InfoBoardRegistry.is_valid_board_type(board_type):
 		print("GridUtilitiesComponent: Invalid info board type: %s" % board_type)
 		return {}
-	
+
 	return {
 		"board_type": board_type,
 		"position": Vector3i(x, 0, z),  # x, y, z - y will be calculated from structure
-		"height_offset": height_offset
+		"rotation_degrees": rotation_degrees,
+		"height_offset": height_offset,
+		"scale": scale_factor
 	}
 
 # Generate info boards at their specific locations
 func _generate_info_boards(info_board_data: Array):
 	print("GridUtilitiesComponent: Generating %d info boards at specific locations" % info_board_data.size())
-	
+
 	# Place each info board at its specific location
 	for board_data in info_board_data:
 		var board_type = board_data.board_type
 		var grid_pos = board_data.position
-		var height_offset = board_data.height_offset
-		
+		var height_offset = board_data.get("height_offset", 0.0)
+		var rotation_degrees = board_data.get("rotation_degrees", 0.0)
+		var scale_factor = board_data.get("scale", 1.0)
+
 		# Calculate 3D position
 		var total_size = cube_size + gutter
 		var y_pos = structure_component.find_highest_y_at(grid_pos.x, grid_pos.z)
 		var position = Vector3(grid_pos.x, y_pos, grid_pos.z) * total_size
-		
+
 		# Apply height offset
 		position.y += height_offset
-		
+
 		# Generate the info board at this specific location
-		_place_info_board_at_position(board_type, position, height_offset)
-		
-		print("GridUtilitiesComponent: Placed %s info board at %s (height offset: %.1f)" % [board_type, position, height_offset])
+		_place_info_board_at_position(board_type, position, rotation_degrees, scale_factor)
+
+		print("GridUtilitiesComponent: Placed %s info board at %s (rotation: %.1f°, scale: %.2f)" % [board_type, position, rotation_degrees, scale_factor])
 
 # Create info board using universal template (works with centralized JSON content)
 func _create_info_board_with_universal_template(board_id: String) -> Node3D:
@@ -801,7 +838,7 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 	return board_3d
 
 # Place a single info board at a specific position
-func _place_info_board_at_position(board_type: String, position: Vector3, height_offset: float):
+func _place_info_board_at_position(board_type: String, position: Vector3, rotation_degrees: float = 0.0, scale_factor: float = 1.0):
 	# NEW: Try to create using universal template with centralized content
 	var info_board = _create_info_board_with_universal_template(board_type)
 
@@ -822,25 +859,27 @@ func _place_info_board_at_position(board_type: String, position: Vector3, height
 			return
 
 		info_board = scene_resource.instantiate()
+
 	if info_board:
-		# Only set position if it's a 3D node
+		# Only set transform if it's a 3D node
 		if info_board is Node3D:
 			info_board.position = position
-		
-		# Apply height offset if the board supports it
-		if height_offset != 0.0:
-			info_board.set_meta("height_offset", height_offset)
-			# Some info boards might have a height_offset property
-			if "height_offset" in info_board:
-				info_board.height_offset = height_offset
-		
+
+			# Apply Y-axis rotation
+			if rotation_degrees != 0.0:
+				info_board.rotation_degrees.y = rotation_degrees
+
+			# Apply uniform scale
+			if scale_factor != 1.0:
+				info_board.scale = Vector3(scale_factor, scale_factor, scale_factor)
+
 		# Add to parent node
 		parent_node.add_child(info_board)
-		
+
 		# Set owner for editor
 		if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 			info_board.owner = parent_node.get_tree().edited_scene_root
-		
+
 		# Store in utility objects for tracking
 		var grid_pos = Vector3i(int(position.x / (cube_size + gutter)), int(position.y), int(position.z / (cube_size + gutter)))
 		utility_objects[grid_pos] = info_board

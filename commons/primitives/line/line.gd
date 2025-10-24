@@ -55,8 +55,8 @@ func create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstanc
 	cylinder.height = distance
 	cylinder.top_radius = line_thickness
 	cylinder.bottom_radius = line_thickness
-	cylinder.radial_segments = 8
-	
+	cylinder.radial_segments = 4
+	cylinder.rings = 0
 	line.mesh = cylinder
 	
 	# Position at center between start and end

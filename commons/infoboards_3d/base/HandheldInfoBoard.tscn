@@ -12,7 +12,7 @@ size = Vector2(1.17, 0.82)
 [sub_resource type="ViewportTexture" id="ViewportTexture_slmkf"]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnm6k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slmkf"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
@@ -37,7 +37,8 @@ size = Vector3(1.22, 0.889, 0.09)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lid"]
 resource_local_to_scene = true
 transparency = 1
-albedo_color = Color(0.2, 0.2, 0.25, 0.7)
+albedo_color = Color(0.2, 0.2, 0.25098, 0.462745)
+metallic_specular = 0.91
 
 [sub_resource type="BoxMesh" id="BoxMesh_lid"]
 resource_local_to_scene = true
@@ -45,7 +46,7 @@ size = Vector3(1.17, 0.82, 0.02)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_clearance"]
 resource_local_to_scene = true
-size = Vector3(1.14551, 1.25781, 0.8)
+size = Vector3(1.4408, 1.73828, 0.8)
 
 [node name="HandheldInfoBoard" type="Node3D"]
 script = ExtResource("1_viewport2d")
@@ -72,10 +73,10 @@ render_target_update_mode = 1
 [node name="Screen" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 0)
 mesh = SubResource("QuadMesh_screen")
-surface_material_override/0 = SubResource("StandardMaterial3D_nnm6k")
+surface_material_override/0 = SubResource("StandardMaterial3D_slmkf")
 
 [node name="ScreenGlow" type="OmniLight3D" parent="Screen"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0431375, 0.156769)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0835141, 0.526585)
 light_color = Color(0.7, 0.8, 1, 1)
 light_energy = 1.2
 light_indirect_energy = 0.5
@@ -113,7 +114,7 @@ monitorable = false
 script = ExtResource("4_clearance")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ViewClearanceZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0885254, -0.421484, -7.45058e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0591181, -0.354101, -1.04308e-07)
 shape = SubResource("BoxShape3D_clearance")
 
 [node name="Camera3D" type="Camera3D" parent="."]

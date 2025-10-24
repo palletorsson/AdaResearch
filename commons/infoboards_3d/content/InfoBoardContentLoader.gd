@@ -282,17 +282,58 @@ static func export_as_book(output_path: String = "res://infoboard_book.txt") -> 
 			book_text += "Page %d: %s\n" % [page.get("page_number", 0), page.get("title", "")]
 			book_text += "-" 
 
-			# Text content
-			var text_lines = page.get("text", [])
-			for line in text_lines:
-				book_text += line + "\n"
+			# Page content blocks
+			var content_lines: Array = []
 
-			book_text += "\n"
+			var axiom = page.get("axiom", "")
+			if typeof(axiom) == TYPE_STRING and not axiom.is_empty():
+				content_lines.append(axiom)
+
+			var narrative = page.get("narrative", [])
+			if narrative is Array:
+				for paragraph in narrative:
+					if typeof(paragraph) == TYPE_STRING and not paragraph.is_empty():
+						content_lines.append(paragraph)
+
+			var steps = page.get("steps", [])
+			if steps is Array and steps.size() > 0:
+				content_lines.append("Steps:")
+				for i in range(steps.size()):
+					var step_text = steps[i]
+					if typeof(step_text) == TYPE_STRING and not step_text.is_empty():
+						content_lines.append("  %d. %s" % [i + 1, step_text])
+
+			var code_block := ""
+			var code_dict = page.get("code", {})
+			if code_dict is Dictionary:
+				code_block = code_dict.get("block", "")
+			if typeof(code_block) == TYPE_STRING and not code_block.is_empty():
+				content_lines.append("Code:\n%s" % code_block)
+
+			var poetics = page.get("poetics", "")
+			if typeof(poetics) == TYPE_STRING and not poetics.is_empty():
+				content_lines.append("Poetics: %s" % poetics)
+
+			for content_line in content_lines:
+				book_text += content_line + "\n"
+
+			if content_lines.size() > 0:
+				book_text += "\n"
 
 			# Concepts
 			var concepts = page.get("concepts", [])
-			if concepts.size() > 0:
-				book_text += "Key Concepts: " + ", ".join(concepts) + "\n"
+			if concepts is Array and concepts.size() > 0:
+				var concept_text := ""
+				for concept in concepts:
+					var concept_value = concept
+					if typeof(concept_value) != TYPE_STRING:
+						concept_value = str(concept_value)
+					if concept_text.is_empty():
+						concept_text = concept_value
+					else:
+						concept_text += ", " + concept_value
+				book_text += "Key Concepts: " + concept_text + "
+"
 
 			book_text += "\n"
 
@@ -359,11 +400,29 @@ static func validate_content() -> Dictionary:
 			if not page.has("title"):
 				validation.warnings.append("Board '%s', page %d missing title" % [board_id, i])
 
-			if not page.has("text"):
-				validation.warnings.append("Board '%s', page %d missing text content" % [board_id, i])
+			var has_axiom = page.get("axiom", "")
+			var narrative = page.get("narrative", [])
+			var steps = page.get("steps", [])
+			var textual_content := false
+			if typeof(has_axiom) == TYPE_STRING and not has_axiom.is_empty():
+				textual_content = true
+			elif narrative is Array and narrative.size() > 0:
+				textual_content = true
+			elif steps is Array and steps.size() > 0:
+				textual_content = true
+			if not textual_content:
+				validation.warnings.append("Board '%s', page %d missing descriptive content" % [board_id, i])
 
-			if not page.has("visualization"):
-				validation.warnings.append("Board '%s', page %d missing visualization" % [board_id, i])
+			var visualization = page.get("visualization", {})
+			if not (visualization is Dictionary) or visualization.get("id", "").is_empty():
+				validation.warnings.append("Board '%s', page %d missing visualization reference" % [board_id, i])
+
+			var code_dict = page.get("code", {})
+			var code_block = ""
+			if code_dict is Dictionary:
+				code_block = code_dict.get("block", "")
+			if not (typeof(code_block) == TYPE_STRING and not code_block.is_empty()):
+				validation.warnings.append("Board '%s', page %d missing code block" % [board_id, i])
 
 	return validation
 

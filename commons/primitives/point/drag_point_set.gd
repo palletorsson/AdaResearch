@@ -89,7 +89,8 @@ func _apply_material_defaults(material: StandardMaterial3D, color: Color) -> voi
 	material.emission = color * 0.3
 	material.roughness = 0.1
 	material.metallic = 0.0
-	material.refraction = 0.05
+	# Note: refraction property removed - not available in Godot 4 StandardMaterial3D
+	# If refraction is needed, use clearcoat or other Godot 4 material properties
 
 func _apply_meta(sphere: Node3D, point_cfg: Dictionary, fallback_id: int) -> Dictionary:
 	var meta_src = point_cfg.get("meta", {})

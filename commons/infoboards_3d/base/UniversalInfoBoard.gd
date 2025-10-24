@@ -149,7 +149,9 @@ func load_all_slides() -> bool:
 # Setup UI elements
 func setup_ui():
 	# Connect navigation buttons
+	prev_button.custom_minimum_size = Vector2(140, 48)
 	prev_button.pressed.connect(_on_prev_button_pressed)
+	next_button.custom_minimum_size = Vector2(140, 48)
 	next_button.pressed.connect(_on_next_button_pressed)
 
 	# Hide navigation in SINGLE_SLIDE mode
@@ -176,7 +178,7 @@ func setup_ui():
 	speed_slider.step = 0.1
 	speed_slider.value = animation_speed
 	speed_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	speed_slider.value_changed.connect(_on_speed_slider_changed)
+	
 
 	speed_container.add_child(speed_label)
 	speed_container.add_child(speed_slider)
@@ -213,7 +215,7 @@ func update_page():
 		child.queue_free()
 
 	# Get current page data from loaded content
-	var current_page_data = page_content[current_page]
+	var current_page_data: Dictionary = page_content[current_page]
 	print("[UniversalInfoBoard] Loading page: %s" % current_page_data.get("title", "No title"))
 
 	# Update title (include board context in ALL_SLIDES mode)
@@ -228,43 +230,117 @@ func update_page():
 	else:
 		title_label.text = page_title
 
-	# Get text array from page data
-	var text_lines_raw = current_page_data.get("text", [])
-	print("[UniversalInfoBoard] Text lines count: %d" % text_lines_raw.size())
-	
-	# Split text by newlines (JSON stores as single strings with \n)
-	var text_lines = []
-	for raw_text in text_lines_raw:
-		var split_lines = raw_text.split("\n")
-		text_lines.append_array(split_lines)
+	# Build display text from structured page data
+	var text_lines: Array = _build_text_lines(current_page_data)
+	print("[UniversalInfoBoard] Text lines count: %d" % text_lines.size())
 
-	for text in text_lines:
-		print("[UniversalInfoBoard] Adding text: %s" % text.substr(0, min(50, text.length())))
+	for entry in text_lines:
+		var entry_type = "paragraph"
+		var entry_text := ""
+
+		if entry is Dictionary:
+			entry_type = entry.get("type", "paragraph")
+			entry_text = entry.get("text", "")
+		else:
+			entry_text = str(entry)
+
+		if typeof(entry_text) != TYPE_STRING:
+			entry_text = str(entry_text)
+
+		print("[UniversalInfoBoard] Adding text (%s): %s" % [entry_type, entry_text.substr(0, min(60, entry_text.length()))])
+
 		var label = Label.new()
-		label.text = text
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.text = entry_text
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		label.add_theme_font_override("font", ROBOTO_FONT)
-		label.add_theme_font_size_override("font_size", 18)  # Increased from 14 to 18
-		label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))  # Bright white-blue
-		# Add glow effect
-		label.add_theme_color_override("font_outline_color", Color(0.5, 0.7, 1.0, 0.8))  # Cyan glow
-		label.add_theme_constant_override("outline_size", 8)  # Thick outline for glow
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.add_theme_font_size_override("font_size", 18)
+		label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
+		label.add_theme_constant_override("outline_size", 8)
+		label.add_theme_color_override("font_outline_color", Color(0.5, 0.7, 1.0, 0.8))
+
+		match entry_type:
+			"axiom":
+				label.add_theme_font_override("font", ROBOTO_FONT)
+				label.add_theme_font_size_override("font_size", 20)
+				label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.65))
+			"section":
+				label.add_theme_font_size_override("font_size", 18)
+				label.add_theme_color_override("font_color", Color(0.85, 0.9, 1.0))
+			"code":
+				label.add_theme_font_size_override("font_size", 17)
+				label.add_theme_color_override("font_color", Color(0.8, 1.0, 0.9))
+				label.autowrap_mode = TextServer.AUTOWRAP_OFF
+			"step":
+				label.add_theme_font_size_override("font_size", 17)
+			"poetics":
+				label.add_theme_font_size_override("font_size", 18)
+				label.add_theme_color_override("font_color", Color(0.85, 0.9, 1.0))
+				label.add_theme_font_override("font", ROBOTO_FONT)
+			"paragraph":
+				label.add_theme_font_size_override("font_size", 18)
+				label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
+
 		text_container.add_child(label)
 
-		print("[UniversalInfoBoard] Label added - visible: %s, size: %s, text length: %d" % [label.visible, label.size, label.text.length()])
-
-		# Add some spacing between paragraphs
 		if text_container.get_child_count() > 1:
 			label.add_theme_constant_override("margin_top", 10)
 
 	# Update visualization
-	update_visualization(current_page_data.get("visualization", ""))
+	var vis_data = current_page_data.get("visualization", {})
+	var vis_id = current_page_data.get("visual_id", "")
+	if vis_data is Dictionary:
+		vis_id = vis_data.get("id", vis_id)
+	elif typeof(vis_data) == TYPE_STRING and vis_id.is_empty():
+		vis_id = vis_data
+	update_visualization(vis_id)
 
 	# Update navigation buttons
 	prev_button.disabled = (current_page == 0)
 	next_button.disabled = (current_page == total_pages - 1)
+
+func _build_text_lines(page: Dictionary) -> Array:
+	var lines: Array = []
+
+	var axiom = page.get("axiom", "")
+	if typeof(axiom) == TYPE_STRING and not axiom.is_empty():
+		lines.append({"type": "axiom", "text": axiom})
+
+	var code_dict = page.get("code", {})
+	if code_dict is Dictionary:
+		var code_block = code_dict.get("block", "")
+		if typeof(code_block) == TYPE_STRING and not code_block.is_empty():
+			lines.append({"type": "section", "text": "Code"})
+			for line in code_block.split("
+"):
+				lines.append({"type": "code", "text": line})
+
+	var narrative = page.get("narrative", [])
+	if narrative is Array:
+		for paragraph in narrative:
+			if typeof(paragraph) == TYPE_STRING and not paragraph.is_empty():
+				lines.append({"type": "paragraph", "text": paragraph})
+
+	var steps = page.get("steps", [])
+	if steps is Array and steps.size() > 0:
+		lines.append({"type": "section", "text": "Steps"})
+		for i in range(steps.size()):
+			var step_text = steps[i]
+			if typeof(step_text) == TYPE_STRING and not step_text.is_empty():
+				lines.append({"type": "step", "text": "%d. %s" % [i + 1, step_text]})
+
+	var poetics = page.get("poetics", "")
+	if typeof(poetics) == TYPE_STRING and not poetics.is_empty():
+		lines.append({"type": "poetics", "text": poetics})
+
+	var visualization = page.get("visualization", {})
+	if visualization is Dictionary:
+		var asset_text = visualization.get("asset", "")
+		if typeof(asset_text) == TYPE_STRING and not asset_text.is_empty():
+			lines.append({"type": "paragraph", "text": asset_text})
+
+	return lines
 
 func update_visualization(vis_type: String):
 	# Clear previous visualization
@@ -329,7 +405,9 @@ func get_visualization_scene_path(board_id_param: String) -> String:
 func show_error_content():
 	page_content = [{
 		"title": "Error Loading Content",
-		"text": [
+		"visual_id": "",
+		"axiom": "",
+		"narrative": [
 			"Failed to load content for board: %s" % board_id,
 			"",
 			"Please check:",
@@ -337,11 +415,15 @@ func show_error_content():
 			"• JSON syntax is valid",
 			"• Content is properly formatted"
 		],
-		"visualization": ""
+		"steps": [],
+		"code": {"id": "", "language": "gdscript", "purpose": "", "block": ""},
+		"poetics": "",
+		"visualization": {"id": "", "asset": "", "files": []}
 	}]
 	total_pages = 1
 	current_page = 0
 	update_page()
+
 
 # Navigation
 func _on_prev_button_pressed():
@@ -362,16 +444,6 @@ func _on_play_button_pressed():
 	if vis_control and is_instance_valid(vis_control):
 		if "animation_playing" in vis_control:
 			vis_control.animation_playing = animation_playing
-
-func _on_speed_slider_changed(value):
-	animation_speed = value
-
-	if vis_control and is_instance_valid(vis_control):
-		if "animation_speed" in vis_control:
-			vis_control.animation_speed = value
-
-	var speed_label = left_panel.get_child(left_panel.get_child_count() - 1).get_child(0)
-	speed_label.text = "Speed: " + str(snappedf(value, 0.1))
 
 # PUBLIC API - Change to different board at runtime
 func switch_to_board(new_board_id: String) -> bool:

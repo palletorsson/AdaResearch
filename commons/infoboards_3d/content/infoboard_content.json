@@ -1,576 +1,1325 @@
 {
-  "_meta": {
-	"title": "AdaResearch InfoBoard Book",
-	"description": "The complete educational progression from points to complex systems",
-	"version": "1.0.0",
-	"last_updated": "2025-10-23",
-	"progression": [
-	  "coordinate_system",
-	  "point",
-	  "vectors",
-	  "line",
-	  "triangle",
-	  "quad",
-	  "cube",
-	  "sphere",
-	  "cylinder",
-	  "torus",
-	  "primitives",
-	  "transformation",
-	  "color",
-	  "arrays",
-	  "forces",
-	  "unitcircle",
-	  "randomwalk",
-	  "procedural_generation"
-	]
-  },
-
-  "boards": {
-	"coordinate_system": {
-	  "board_id": "coordinate_system",
-	  "title": "The Coordinate System",
-	  "subtitle": "The Stage of Space",
-	  "category": "Fundamentals",
-	  "order": 0,
-	  "description": "Understanding the 3D coordinate system that defines the stage upon which all geometry exists",
-	  "pages": [
-		{
-		  "slide_id": "coordinate_1",
-		  "page_number": 1,
-		  "title": "The Origin: Zero Point",
-		  "text": [
-			"AXIOM 0: The origin (0, 0, 0) is the reference point from which all positions are measured.\n\nCODE:[origin]\nvar origin = Vector3(0, 0, 0)\nprint(\"The center of our 3D universe\")",
-			"",
-			"The origin is like the center of a stage - everything else is positioned relative to this fixed point."
-		  ],
-		  "visualization": "origin",
-		  "concepts": ["origin", "reference point", "Vector3(0,0,0)", "coordinate system"]
-		},
-		{
-		  "slide_id": "coordinate_2",
-		  "page_number": 2,
-		  "title": "The Three Axes",
-		  "text": [
-			"AXIOM 0.1: Three perpendicular axes define our 3D space:\n• X-axis: Left-Right (Red)\n• Y-axis: Up-Down (Green) \n• Z-axis: Forward-Back (Blue)\n\nCODE:[axes]\nvar x_axis = Vector3(1, 0, 0)  # Right\nvar y_axis = Vector3(0, 1, 0)  # Up\nvar z_axis = Vector3(0, 0, 1)  # Forward",
-			"",
-			"These axes are like the edges of a room - they define the three dimensions of space."
-		  ],
-		  "visualization": "axes",
-		  "concepts": ["X-axis", "Y-axis", "Z-axis", "perpendicular", "dimensions"]
-		},
-		{
-		  "slide_id": "coordinate_3",
-		  "page_number": 3,
-		  "title": "Right-Handed System",
-		  "text": [
-			"AXIOM 0.2: Our coordinate system is right-handed.\n\nTo determine handedness:\n1. Point your right thumb along the X-axis (right)\n2. Curl your fingers toward the Y-axis (up)\n3. Your fingers should point along the Z-axis (forward)\n\nCODE:[handedness]\n# Right-handed: X × Y = Z\nvar cross_product = Vector3(1, 0, 0).cross(Vector3(0, 1, 0))\nprint(cross_product)  # (0, 0, 1) - points along Z",
-			"",
-			"This matters for rotations and cross products - the 'handedness' determines which way things rotate."
-		  ],
-		  "visualization": "handedness",
-		  "concepts": ["right-handed", "cross product", "rotation", "coordinate system"]
-		},
-		{
-		  "slide_id": "coordinate_4",
-		  "page_number": 4,
-		  "title": "Position in Space",
-		  "text": [
-			"AXIOM 0.3: Any point in 3D space can be described by three numbers (x, y, z).\n\nCODE:[position]\nvar point_a = Vector3(2, 3, 1)  # 2 units right, 3 units up, 1 unit forward\nvar point_b = Vector3(-1, 0, 4)  # 1 unit left, at origin height, 4 units forward",
-			"",
-			"Think of it like giving directions: 'Go 2 steps right, 3 steps up, 1 step forward' from the origin."
-		  ],
-		  "visualization": "positions",
-		  "concepts": ["position", "coordinates", "Vector3", "spatial reference"]
-		}
-	  ]
+	"_meta": {
+		"description": "The complete educational progression from points to complex systems",
+		"last_updated": "2025-10-23",
+		"progression": [
+			"coordinate_system",
+			"point",
+			"vectors",
+			"line",
+			"triangle",
+			"quad",
+			"cube",
+			"sphere",
+			"cylinder",
+			"torus",
+			"primitives",
+			"transformation",
+			"color",
+			"arrays",
+			"forces",
+			"unitcircle",
+			"randomwalk",
+			"procedural_generation"
+		],
+		"title": "AdaResearch InfoBoard Book",
+		"version": "1.0.0"
 	},
-	"point": {
-	  "board_id": "point",
-	  "title": "The Point",
-	  "subtitle": "The Atom of Space",
-	  "category": "Fundamentals",
-	  "order": 1,
-	  "description": "Understanding points as the fundamental building block of all 3D graphics and simulations",
-	  "pages": [
-		{
-		  "slide_id": "point_1",
-		  "page_number": 1,
-		  "title": "The Point: The Atom of Space",
-		  "text": [
-			"AXIOM 1: A point in 3D space is a vector defining a position (x, y, z).\n\nCODE:[point]\nvar point_position_zero = Vector3(0, 0, 0)"
-		  ],
-		  "visualization": "origin",
-		  "concepts": ["Vector3", "position", "origin", "coordinate system"]
+	"boards": {
+		"coordinate_system": {
+			"board_id": "coordinate_system",
+			"category": "Fundamentals",
+			"description": "Understanding the 3D coordinate system that defines the stage upon which all geometry exists",
+			"order": 0.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: The origin (0, 0, 0) is the reference point from which all positions in 3D space are defined.",
+					"code": {
+						"block": "var origin = Vector3(0, 0, 0)\n",
+						"id": "origin",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"origin",
+						"reference point",
+						"Vector3(0,0,0)",
+						"coordinate system"
+					],
+					"definitions": [],
+					"narrative": [
+						"The origin is like the center of a stage - everything else is positioned relative to this fixed point."
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "coordinate_1",
+					"steps": [],
+					"title": "The Origin: Zero Point",
+					"visual_id": "origin",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "origin"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Three perpendicular axes — X, Y, and Z  — define 3D space.",
+					"code": {
+						"block": "var x_axis = Vector3(1, 0, 0)  # Right\nvar y_axis = Vector3(0, 1, 0)  # Up\nvar z_axis = Vector3(0, 0, 1)  # Forward",
+						"id": "axes",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"X-axis",
+						"Y-axis",
+						"Z-axis",
+						"perpendicular",
+						"dimensions"
+					],
+					"definitions": [],
+					"narrative": [
+						"• X-axis: Left-Right (Red)",
+						"• Y-axis: Up-Down (Green)",
+						"• Z-axis: Forward-Back (Blue)"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "coordinate_2",
+					"steps": [],
+					"title": "The Three Axes",
+					"visual_id": "axes",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "axes"
+					}
+				}
+			],
+			"subtitle": "The Stage of Space",
+			"title": "The Coordinate System"
 		},
-		{
-		  "slide_id": "point_2",
-		  "page_number": 2,
-		  "title": "Visualizing the Point",
-		  "text": [
-			"AXIOM 2: A visible point can be represented by a small sphere at its designated position.\n\nCODE:[Mesh]\nvar sphere_mesh = SphereMesh.new()\nvar radius = 0.01  # one centimeter\nsphere_mesh.radius = radius\nsphere_mesh.height = radius * 2  # height is diameter"
-		  ],
-		  "visualization": "origin",
-		  "concepts": ["SphereMesh", "radius", "visualization", "scale"]
+		"cube": {
+			"board_id": "cube",
+			"category": "Fundamentals",
+			"description": "The cube as the simplest volumetric primitive",
+			"order": 5.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: A cube has 6 faces, 12 edges, 8 vertices.",
+					"code": {
+						"block": "var box = BoxMesh.new()\nbox.size = Vector3(1, 1, 1)",
+						"id": "cube_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"six faces",
+						"volume",
+						"edges",
+						"vertices"
+					],
+					"definitions": [],
+					"narrative": [
+						"First closed volumetric primitive All faces perpendicular to neighbors"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "cube_1",
+					"steps": [],
+					"title": "Six Square Faces",
+					"visual_id": "basic_cube",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_cube"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Cube = 12 triangles (2 per face).",
+					"code": {
+						"block": "",
+						"id": "cube_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"mesh structure",
+						"face normals",
+						"vertex sharing"
+					],
+					"definitions": [],
+					"narrative": [
+						"Each face: • 2 triangles • 4 vertices (shared) • Outward-facing normals",
+						"Total: 24 vertices (4 × 6 unique normals)"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "cube_2",
+					"steps": [],
+					"title": "Mesh Structure",
+					"visual_id": "cube_wireframe",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "cube_wireframe"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Volume enables collision detection.",
+					"code": {
+						"block": "var shape = BoxShape3D.new()\nshape.size = Vector3(1, 1, 1)",
+						"id": "cube_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"collision",
+						"physics",
+						"volume",
+						"bounding box"
+					],
+					"definitions": [],
+					"narrative": [
+						"Volumetric presence: • Collision detection • Physics simulation • Spatial partitioning"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "cube_3",
+					"steps": [],
+					"title": "Collision and Physics",
+					"visual_id": "cube_collision",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "cube_collision"
+					}
+				}
+			],
+			"subtitle": "Six Faces, First Volume",
+			"title": "The Cube"
 		},
-		{
-		  "slide_id": "point_3",
-		  "page_number": 3,
-		  "title": "Instantiating the Point",
-		  "text": [
-			"AXIOM 2.5: A mesh must be instantiated into the scene tree to exist in the world.\n\nCODE:[Instance]\nvar mesh_instance = MeshInstance3D.new()\nmesh_instance.mesh = sphere_mesh\nmesh_instance.position = point_position\nadd_child(mesh_instance)\n\nThe add_child() call integrates the point into the scene tree, making it part of the rendered world."
-		  ],
-		  "visualization": "origin",
-		  "concepts": ["MeshInstance3D", "scene tree", "add_child", "instantiation"]
+		"cylinder": {
+			"board_id": "cylinder",
+			"category": "Fundamentals",
+			"description": "The cylinder as a hybrid of planar and curved surfaces",
+			"order": 7.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: Two parallel circles + curved surface.",
+					"code": {
+						"block": "var cyl = CylinderMesh.new()\ncyl.top_radius = 0.5\ncyl.bottom_radius = 0.5\ncyl.height = 2.0",
+						"id": "cylinder_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"circles",
+						"extrusion",
+						"axis",
+						"curved surface"
+					],
+					"definitions": [],
+					"narrative": [
+						"Extruded circle along axis"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "cylinder_1",
+					"steps": [],
+					"title": "Two Circles, One Curve",
+					"visual_id": "basic_cylinder",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_cylinder"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Cylinder = 2 caps + 1 side surface.",
+					"code": {
+						"block": "cyl.top_radius = 0.5\ncyl.bottom_radius = 0.3  # Cone\ncyl.cap_top = true\ncyl.cap_bottom = true",
+						"id": "cylinder_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"caps",
+						"side surface",
+						"cone",
+						"radii"
+					],
+					"definitions": [],
+					"narrative": [
+						"Varying radii creates cones Caps can be toggled"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "cylinder_2",
+					"steps": [],
+					"title": "Caps and Sides",
+					"visual_id": "cylinder_parts",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "cylinder_parts"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Circular sections tessellate to triangles.",
+					"code": {
+						"block": "cyl.radial_segments = 32\ncyl.rings = 8\n\nMore segments = smoother circles",
+						"id": "cylinder_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"radial segments",
+						"rings",
+						"tessellation",
+						"smoothness"
+					],
+					"definitions": [],
+					"narrative": [
+						"Rings add horizontal subdivisions"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "cylinder_3",
+					"steps": [],
+					"title": "Radial Segments",
+					"visual_id": "cylinder_segments",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "cylinder_segments"
+					}
+				}
+			],
+			"subtitle": "Circular Extrusion",
+			"title": "The Cylinder"
 		},
-		{
-		  "slide_id": "point_4",
-		  "page_number": 4,
-		  "title": "Labeling the Point",
-		  "text": [
-			"AXIOM 3: The identity of a point is represented as a text label close to the point.\n\nCODE:\nvar label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nlabel_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED\nadd_child(label_3d)\n\nBillboard mode makes the label always face the camera, ensuring readability from any angle."
-		  ],
-		  "visualization": "labels",
-		  "concepts": ["Label3D", "billboard", "text rendering", "offset"]
+		"line": {
+			"board_id": "line",
+			"category": "Fundamentals",
+			"description": "Lines create direction, distance, and paths through space",
+			"order": 3.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1 1: A line is defined by two points in space.",
+					"code": {
+						"block": "var point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n\n\nThe vector from A to B is: direction = point_b - point_a\nThe length of the line is: distance = direction.length()",
+						"id": "line_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"two points",
+						"direction",
+						"distance",
+						"line segment"
+					],
+					"definitions": [],
+					"narrative": [
+						"A line connects two points in space, creating direction and distance.",
+						"In 3D graphics, a line is defined by two endpoints: a start and an end. The space between them forms a path we can visualize and measure.",
+						"These two points define a line segment from origin to (1,1,0)."
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "line_1",
+					"steps": [],
+					"title": "The Line: Connecting Points",
+					"visual_id": "basic_line",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_line"
+					}
+				},
+				{
+					"axiom": "",
+					"code": {
+						"block": "var mesh_instance = MeshInstance3D.new()\nvar immediate_mesh = ImmediateMesh.new()\nmesh_instance.mesh = immediate_mesh\n\nimmediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)\nimmediate_mesh.surface_add_vertex(point_a)\nimmediate_mesh.surface_add_vertex(point_b)\nimmediate_mesh.surface_end()\n\nadd_child(mesh_instance)",
+						"id": "line_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"ImmediateMesh",
+						"PRIMITIVE_LINES",
+						"surface_add_vertex"
+					],
+					"definitions": [],
+					"narrative": [
+						"Godot provides multiple ways to visualize lines in 3D space.",
+						"METHOD 1: ImmediateMesh (Simple, flexible)",
+						"This creates a single line from point A to point B."
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "line_2",
+					"steps": [],
+					"title": "Drawing Lines",
+					"visual_id": "drawing_lines",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "drawing_lines"
+					}
+				},
+				{
+					"axiom": "AXIOM 2 2: The direction vector points from start to end.",
+					"code": {
+						"block": "var direction = (point_b - point_a).normalized()\nvar distance = point_a.distance_to(point_b)\n\n# Move along the line\nvar t = 0.5  # halfway\nvar midpoint = point_a + direction * distance * t\n\n• t = 0.0 → point_a (start)\n• t = 0.5 → midpoint\n• t = 1.0 → point_b (end)",
+						"id": "line_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"normalized",
+						"lerp",
+						"interpolation",
+						"parameter t"
+					],
+					"definitions": [],
+					"narrative": [
+						"A line has both direction and magnitude (length).",
+						"This is called linear interpolation or 'lerp'.",
+						"The parameter 't' (0 to 1) lets us find any point along the line:"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "line_3",
+					"steps": [],
+					"title": "Line Direction and Magnitude",
+					"visual_id": "direction_magnitude",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "direction_magnitude"
+					}
+				},
+				{
+					"axiom": "AXIOM 3 3: A cylinder can represent a thick line segment.",
+					"code": {
+						"block": "var cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02  # thickness\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint\ncylinder.position = (point_a + point_b) / 2.0\n\n# Rotate to align with direction\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\n\nadd_child(cylinder)",
+						"id": "line_4",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"CylinderMesh",
+						"look_at",
+						"rotation",
+						"thickness"
+					],
+					"definitions": [],
+					"narrative": [
+						"For thicker, more visible lines, we can use cylinders."
+					],
+					"page_number": 4.0,
+					"poetics": "",
+					"slide_id": "line_4",
+					"steps": [],
+					"title": "Cylinders as Lines",
+					"visual_id": "cylinder_lines",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "cylinder_lines"
+					}
+				},
+				{
+					"axiom": "AXIOM 4 4: A sequence of connected lines forms a path.",
+					"code": {
+						"block": "var points = [\n    Vector3(0, 0, 0),\n    Vector3(1, 1, 0),\n    Vector3(2, 0.5, 0),\n    Vector3(3, 1.5, 0)",
+						"id": "line_5",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"LINE_STRIP",
+						"paths",
+						"curves",
+						"trajectories"
+					],
+					"definitions": [],
+					"narrative": [
+						"Lines can connect multiple points to create paths and shapes.",
+						"]",
+						"immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP) for point in points: immediate_mesh.surface_add_vertex(point) immediate_mesh.surface_end()",
+						"LINE_STRIP connects consecutive points with lines. LINES requires pairs of points (every 2 vertices = 1 line).",
+						"Paths are fundamental to curves, splines, and trajectories."
+					],
+					"page_number": 5.0,
+					"poetics": "",
+					"slide_id": "line_5",
+					"steps": [],
+					"title": "Multiple Lines and Paths",
+					"visual_id": "multiple_lines",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "multiple_lines"
+					}
+				}
+			],
+			"subtitle": "Connecting Points",
+			"title": "The Line"
 		},
-		{
-		  "slide_id": "point_5",
-		  "page_number": 5,
-		  "title": "Dynamic Updates",
-		  "text": [
-			"AXIOM 4: The text label must update when the point's position changes.\n\nCODE:\nfunc _process(delta):\n\tlabel_3d.text = str(point_position)\n\tlabel_3d.position = point_position + label_offset"
-		  ],
-		  "visualization": "dynamic",
-		  "concepts": ["_process", "delta", "dynamic updates", "real-time"]
+		"point": {
+			"board_id": "point",
+			"category": "Fundamentals",
+			"description": "Understanding points as the fundamental building block of all 3D graphics and simulations",
+			"order": 1.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 3: A point in 3D space is a vector defining a position (x, y, z).",
+					"code": {
+						"block": "var point_position = Vector3(3.0, 1.5, 4.0)",
+						"id": "point",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"Vector3",
+						"position",
+						"origin",
+						"coordinate system"
+					],
+					"definitions": [],
+					"narrative": [],
+					"page_number": 1.0,
+					"poetics": "test",
+					"slide_id": "point_1",
+					"steps": [],
+					"title": "The Point: The Atom of Space",
+					"visual_id": "origin",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "origin"
+					}
+				},
+				{
+					"axiom": "A visible point can be represented by a small sphere at its designated position.",
+					"code": {
+						"block": "var sphere_mesh = SphereMesh.new()\nvar radius = 0.01  # one centimeter\nsphere_mesh.radius = radius\nsphere_mesh.height = radius * 2  # height is diameter",
+						"id": "Mesh",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"SphereMesh",
+						"radius",
+						"visualization",
+						"scale"
+					],
+					"definitions": [],
+					"narrative": [],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "point_2",
+					"steps": [],
+					"title": "Visualizing the Point",
+					"visual_id": "origin",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "origin"
+					}
+				},
+				{
+					"axiom": "A mesh must be instantiated into the scene tree to exist in the world.",
+					"code": {
+						"block": "var mesh_instance = MeshInstance3D.new()\nmesh_instance.mesh = sphere_mesh\nmesh_instance.position = point_position\nadd_child(mesh_instance)   ",
+						"id": "Instance",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"MeshInstance3D",
+						"scene tree",
+						"add_child",
+						"instantiation"
+					],
+					"definitions": [],
+					"narrative": [
+						"The add_child() add mesh_instace scene"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "point_3",
+					"steps": [],
+					"title": "Instantiating the Point",
+					"visual_id": "origin",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "origin"
+					}
+				},
+				{
+					"axiom": "The identity of a point is represented as a text label close to the point.",
+					"code": {
+						"block": "var label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nlabel_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED \nadd_child(label_3d)",
+						"id": "point_4",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"Label3D",
+						"billboard",
+						"text rendering",
+						"offset"
+					],
+					"definitions": [],
+					"narrative": [
+						"Billboard mode makes the label always face the camera"
+					],
+					"page_number": 4.0,
+					"poetics": "",
+					"slide_id": "point_4",
+					"steps": [],
+					"title": "Labeling the Point",
+					"visual_id": "labels",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "labels"
+					}
+				},
+				{
+					"axiom": "The text label must update when the point's position changes.",
+					"code": {
+						"block": "func _process(delta):\n\tlabel_3d.text = str(point_position)\n\tlabel_3d.position = point_position + label_offset",
+						"id": "point_5",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"_process",
+						"delta",
+						"dynamic updates",
+						"real-time"
+					],
+					"definitions": [],
+					"narrative": [],
+					"page_number": 5.0,
+					"poetics": "",
+					"slide_id": "point_5",
+					"steps": [],
+					"title": "Dynamic Updates",
+					"visual_id": "dynamic",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "dynamic"
+					}
+				}
+			],
+			"subtitle": "The Atom of Space",
+			"title": "The Point"
+		},
+		"quad": {
+			"board_id": "quad",
+			"category": "Fundamentals",
+			"description": "The quad as a planar surface composed of two triangles",
+			"order": 4.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: A quad requires four coplanar points.",
+					"code": {
+						"block": "var v0 = Vector3(-0.5, -0.5, 0)\nvar v1 = Vector3(0.5, -0.5, 0)\nvar v2 = Vector3(0.5, 0.5, 0)\nvar v3 = Vector3(-0.5, 0.5, 0)",
+						"id": "quad_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"four points",
+						"coplanar",
+						"quad",
+						"planarity"
+					],
+					"definitions": [],
+					"narrative": [
+						"Non-planar quads cause rendering artifacts"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "quad_1",
+					"steps": [],
+					"title": "Four Coplanar Points",
+					"visual_id": "basic_quad",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_quad"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: GPUs render quads as two triangles.",
+					"code": {
+						"block": "# Triangle 1: v0, v1, v2\n# Triangle 2: v0, v2, v3",
+						"id": "quad_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"triangulation",
+						"diagonal",
+						"GPU rendering"
+					],
+					"definitions": [],
+					"narrative": [
+						"Triangulation pattern affects shading Diagonal choice matters for non-planar quads"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "quad_2",
+					"steps": [],
+					"title": "Triangulation",
+					"visual_id": "quad_triangulation",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "quad_triangulation"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Quads simplify mesh topology.",
+					"code": {
+						"block": "",
+						"id": "quad_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"topology",
+						"subdivision",
+						"edge loops",
+						"mesh modeling"
+					],
+					"definitions": [],
+					"narrative": [
+						"Advantages: • Easier subdivision • Cleaner edge loops • Natural for rectangular surfaces",
+						"Limitation: Must remain planar"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "quad_3",
+					"steps": [],
+					"title": "Modeling with Quads",
+					"visual_id": "quad_topology",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "quad_topology"
+					}
+				}
+			],
+			"subtitle": "Four Points, Two Triangles",
+			"title": "The Quad"
+		},
+		"randomwalk": {
+			"board_id": "randomwalk",
+			"category": "Randomness",
+			"description": "Understanding how randomness creates patterns through movement",
+			"order": 10.0,
+			"pages": [
+				{
+					"axiom": "",
+					"code": {
+						"block": "",
+						"id": "randomwalk_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"randomness",
+						"emergent patterns",
+						"stochastic process"
+					],
+					"definitions": [],
+					"narrative": [
+						"A random walk is a path created by taking successive random steps.",
+						"At each moment, choose a random direction and take a step. Over time, these random choices create emergent patterns.",
+						"Despite being random, patterns emerge: • Average distance from origin grows with √steps • Creates organic, natural-looking paths • Models many real-world phenomena"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "randomwalk_1",
+					"steps": [
+						"Start at origin (0,0)",
+						"Choose random direction",
+						"Take step in that direction",
+						"Repeat"
+					],
+					"title": "What is a Random Walk?",
+					"visual_id": "basic_random_walk",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_random_walk"
+					}
+				}
+			],
+			"subtitle": "Exploring Through Chance",
+			"title": "Random Walk"
+		},
+		"sphere": {
+			"board_id": "sphere",
+			"category": "Fundamentals",
+			"description": "The sphere as a perfectly curved surface",
+			"order": 6.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: All points equidistant from center.",
+					"code": {
+						"block": "var sphere = SphereMesh.new()\nsphere.radius = 1.0\nsphere.height = 2.0",
+						"id": "sphere_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"radius",
+						"center",
+						"equidistant",
+						"curved surface"
+					],
+					"definitions": [],
+					"narrative": [
+						"Defines: radius, center Perfectly smooth (conceptually)"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "sphere_1",
+					"steps": [],
+					"title": "Equidistant Points",
+					"visual_id": "basic_sphere",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_sphere"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Digital spheres approximate with triangles.",
+					"code": {
+						"block": "sphere.radial_segments = 32\nsphere.rings = 16\n# Creates triangle mesh\n\nMore segments = smoother appearance",
+						"id": "sphere_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"tessellation",
+						"segments",
+						"rings",
+						"approximation"
+					],
+					"definitions": [],
+					"narrative": [
+						"Parameterized by latitude/longitude"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "sphere_2",
+					"steps": [],
+					"title": "Tessellation",
+					"visual_id": "sphere_tessellation",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "sphere_tessellation"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Normal always points from center.",
+					"code": {
+						"block": "",
+						"id": "sphere_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"surface normals",
+						"smooth shading",
+						"lighting",
+						"radial"
+					],
+					"definitions": [],
+					"narrative": [
+						"For point P on sphere: normal = (P - center).normalized()",
+						"Perfect for smooth shading Defines light reflection at every point"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "sphere_3",
+					"steps": [],
+					"title": "Surface Normals",
+					"visual_id": "sphere_normals",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "sphere_normals"
+					}
+				}
+			],
+			"subtitle": "Perfect Curvature",
+			"title": "The Sphere"
+		},
+		"torus": {
+			"board_id": "torus",
+			"category": "Fundamentals",
+			"description": "The torus as a surface of revolution with dual radii",
+			"order": 8.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: A torus requires two radii.",
+					"code": {
+						"block": "var torus = TorusMesh.new()\ntorus.inner_radius = 2.0  # Major radius (center to tube center)\ntorus.outer_radius = 0.5  # Minor radius (tube thickness)",
+						"id": "torus_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"inner_radius",
+						"outer_radius",
+						"major",
+						"minor",
+						"donut"
+					],
+					"definitions": [],
+					"narrative": [
+						"Donut shape: big ring + small tube"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "torus_1",
+					"steps": [],
+					"title": "Two Radii Define the Ring",
+					"visual_id": "basic_torus",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_torus"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Ring segments define tube smoothness.",
+					"code": {
+						"block": "torus.ring_segments = 32\n\nMore segments = smoother tube\nEach segment = one slice of the tube",
+						"id": "torus_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"ring_segments",
+						"tube",
+						"smoothness",
+						"cross-section"
+					],
+					"definitions": [],
+					"narrative": [],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "torus_2",
+					"steps": [],
+					"title": "Ring Segments",
+					"visual_id": "torus_ring_segments",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "torus_ring_segments"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Radial segments define ring smoothness.",
+					"code": {
+						"block": "torus.radial_segments = 16\n\nMore segments = smoother circular path\nEach segment = one slice around the ring",
+						"id": "torus_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"radial_segments",
+						"circular path",
+						"revolution",
+						"smoothness"
+					],
+					"definitions": [],
+					"narrative": [],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "torus_3",
+					"steps": [],
+					"title": "Radial Segments",
+					"visual_id": "torus_radial_segments",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "torus_radial_segments"
+					}
+				},
+				{
+					"axiom": "AXIOM 4: Total triangles = ring_segments × radial_segments × 2",
+					"code": {
+						"block": "torus.ring_segments = 32\ntorus.radial_segments = 16\n# Creates 1024 triangles",
+						"id": "torus_4",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"tessellation",
+						"triangles",
+						"resolution",
+						"structure"
+					],
+					"definitions": [],
+					"narrative": [
+						"Low resolution reveals structure High resolution appears smooth"
+					],
+					"page_number": 4.0,
+					"poetics": "",
+					"slide_id": "torus_4",
+					"steps": [],
+					"title": "Tessellation Combined",
+					"visual_id": "torus_tessellation",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "torus_tessellation"
+					}
+				}
+			],
+			"subtitle": "Donut Topology",
+			"title": "The Torus"
+		},
+		"triangle": {
+			"board_id": "triangle",
+			"category": "Fundamentals",
+			"description": "The triangle as the threshold between line and surface, the minimal polygon, and the atomic unit of all 3D geometry",
+			"order": 3.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: Three non-collinear points uniquely determine a plane.",
+					"code": {
+						"block": "var v_a = Vector3(-0.25, 0, 0)\nvar v_b = Vector3(0.25, 0, 0)\nvar v_c = Vector3(0, 0.5, 0)",
+						"id": "triangle_1",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"three points",
+						"plane",
+						"vertices",
+						"edges",
+						"face"
+					],
+					"definitions": [],
+					"narrative": [
+						"Three vertices → Three edges → One face Introduces: INTERIOR, ORIENTATION, AREA"
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "triangle_1",
+					"steps": [],
+					"title": "Three Points Define a Plane",
+					"visual_id": "basic_triangle",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "basic_triangle"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Vertex order determines face direction.",
+					"code": {
+						"block": "var edge1 = v_b - v_a\nvar edge2 = v_c - v_a\nvar normal = edge1.cross(edge2).normalized()",
+						"id": "triangle_2",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"normal vector",
+						"cross product",
+						"winding order",
+						"front/back"
+					],
+					"definitions": [],
+					"narrative": [
+						"Cross product → Normal vector CCW = front, CW = back Defines light interaction"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "triangle_2",
+					"steps": [],
+					"title": "Winding Order and Normals",
+					"visual_id": "triangle_normal",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "triangle_normal"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: Triangle area = ½ |edge1 × edge2|",
+					"code": {
+						"block": "var cross = edge1.cross(edge2)\nvar area = cross.length() * 0.5",
+						"id": "triangle_3",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"area",
+						"cross product magnitude",
+						"2D measure",
+						"containment"
+					],
+					"definitions": [],
+					"narrative": [
+						"First shape that can CONTAIN",
+						"First 2D measure (not 1D distance)"
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "triangle_3",
+					"steps": [],
+					"title": "Area Calculation",
+					"visual_id": "triangle_area",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "triangle_area"
+					}
+				},
+				{
+					"axiom": "AXIOM 4: Every 3 vertices = 1 triangle.",
+					"code": {
+						"block": "var st = SurfaceTool.new()\nst.begin(Mesh.PRIMITIVE_TRIANGLES)\nst.set_normal(normal)\nst.add_vertex(v_a)\nst.add_vertex(v_b)\nst.add_vertex(v_c)\nvar mesh = st.commit()",
+						"id": "triangle_4",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"SurfaceTool",
+						"PRIMITIVE_TRIANGLES",
+						"mesh creation"
+					],
+					"definitions": [],
+					"narrative": [
+						"Foundation of ALL 3D meshes"
+					],
+					"page_number": 4.0,
+					"poetics": "",
+					"slide_id": "triangle_4",
+					"steps": [],
+					"title": "Building Meshes",
+					"visual_id": "triangle_mesh",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "triangle_mesh"
+					}
+				},
+				{
+					"axiom": "AXIOM 5: Every 3D mesh decomposes into triangles.",
+					"code": {
+						"block": "var sphere = SphereMesh.new()\nsphere.radial_segments = 32\nsphere.rings = 16\n# ≈ 1024 triangles",
+						"id": "triangle_5",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"triangle mesh",
+						"GPU rendering",
+						"decomposition",
+						"atomic unit"
+					],
+					"definitions": [],
+					"narrative": [
+						"Why triangles? • Always planar • GPU optimized • Any polygon → triangles"
+					],
+					"page_number": 5.0,
+					"poetics": "",
+					"slide_id": "triangle_5",
+					"steps": [],
+					"title": "The Atomic Surface",
+					"visual_id": "triangle_foundation",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "triangle_foundation"
+					}
+				}
+			],
+			"subtitle": "The First Surface",
+			"title": "The Triangle"
+		},
+		"vectors": {
+			"board_id": "vectors",
+			"category": "Fundamentals",
+			"description": "Understanding vectors as both positions and directions - the mathematical bridge between points and lines",
+			"order": 2.0,
+			"pages": [
+				{
+					"axiom": "AXIOM 1: A vector can represent two different concepts:",
+					"code": {
+						"block": "var position = Vector3(3, 4, 0)  # A point 3 units right, 4 units up\nvar direction = Vector3(1, 0, 0)  # Direction: 'to the right'",
+						"id": "duality",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"vector duality",
+						"position",
+						"direction",
+						"Vector3",
+						"context"
+					],
+					"definitions": [],
+					"narrative": [
+						"• Position: A point in space relative to the origin • Direction: A magnitude and direction, independent of position",
+						"The same Vector3(3, 4, 0) can mean 'the point at (3,4,0)' or 'move 3 right, 4 up'."
+					],
+					"page_number": 1.0,
+					"poetics": "",
+					"slide_id": "vectors_1",
+					"steps": [],
+					"title": "Vector Duality: Position vs Direction",
+					"visual_id": "duality",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "duality"
+					}
+				},
+				{
+					"axiom": "AXIOM 2: Vector subtraction gives the direction and distance between two points.",
+					"code": {
+						"block": "var point_a = Vector3(1, 2, 3)\nvar point_b = Vector3(4, 6, 3)\nvar direction = point_b - point_a  # Vector3(3, 4, 0)\nprint(\"Direction from A to B: \", direction)",
+						"id": "subtraction",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"vector subtraction",
+						"direction",
+						"distance",
+						"point to point"
+					],
+					"definitions": [],
+					"narrative": [
+						"Subtraction answers: 'If I'm at point A, how do I get to point B?'"
+					],
+					"page_number": 2.0,
+					"poetics": "",
+					"slide_id": "vectors_2",
+					"steps": [],
+					"title": "Vector Subtraction: From Point A to Point B",
+					"visual_id": "subtraction",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "subtraction"
+					}
+				},
+				{
+					"axiom": "AXIOM 3: The magnitude (length) of a vector gives the distance.",
+					"code": {
+						"block": "var direction = Vector3(3, 4, 0)\nvar distance = direction.length()  # 5.0\nprint(\"Distance: \", distance)  # Uses Pythagorean theorem: √(3² + 4² + 0²)",
+						"id": "magnitude",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"magnitude",
+						"length",
+						"distance",
+						"Pythagorean theorem",
+						".length()"
+					],
+					"definitions": [],
+					"narrative": [
+						"The .length() method calculates the straight-line distance using the 3D Pythagorean theorem."
+					],
+					"page_number": 3.0,
+					"poetics": "",
+					"slide_id": "vectors_3",
+					"steps": [],
+					"title": "Vector Magnitude: The Distance",
+					"visual_id": "magnitude",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "magnitude"
+					}
+				},
+				{
+					"axiom": "AXIOM 4: A normalized vector has length 1 and represents pure direction.",
+					"code": {
+						"block": "var direction = Vector3(3, 4, 0)\nvar unit_direction = direction.normalized()  # Vector3(0.6, 0.8, 0)\nprint(\"Unit direction: \", unit_direction)\nprint(\"Length: \", unit_direction.length())  # 1.0",
+						"id": "normalization",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"normalization",
+						"unit vector",
+						".normalized()",
+						"pure direction",
+						"length 1"
+					],
+					"definitions": [],
+					"narrative": [
+						"Normalization removes the distance, keeping only the direction. Perfect for 'which way to go' without 'how far'."
+					],
+					"page_number": 4.0,
+					"poetics": "",
+					"slide_id": "vectors_4",
+					"steps": [],
+					"title": "Vector Normalization: Pure Direction",
+					"visual_id": "normalization",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "normalization"
+					}
+				},
+				{
+					"axiom": "AXIOM 5: A line is defined by a point and a direction vector.",
+					"code": {
+						"block": "var start_point = Vector3(1, 2, 3)\nvar end_point = Vector3(4, 6, 3)\nvar direction = (end_point - start_point).normalized()\nprint(\"Line: start at \", start_point, \" going \", direction)",
+						"id": "line_definition",
+						"language": "gdscript",
+						"purpose": ""
+					},
+					"concepts": [
+						"line definition",
+						"point and direction",
+						"connecting points",
+						"geometry foundation"
+					],
+					"definitions": [],
+					"narrative": [
+						"Now we can connect points with lines! The direction vector tells us which way the line points."
+					],
+					"page_number": 5.0,
+					"poetics": "",
+					"slide_id": "vectors_5",
+					"steps": [],
+					"title": "From Points to Lines",
+					"visual_id": "line_definition",
+					"visualization": {
+						"asset": "",
+						"files": [],
+						"id": "line_definition"
+					}
+				}
+			],
+			"subtitle": "The Bridge Between Points",
+			"title": "Vectors"
 		}
-	  ]
-	},
-	"vectors": {
-	  "board_id": "vectors",
-	  "title": "Vectors",
-	  "subtitle": "The Bridge Between Points",
-	  "category": "Fundamentals",
-	  "order": 2,
-	  "description": "Understanding vectors as both positions and directions - the mathematical bridge between points and lines",
-	  "pages": [
-		{
-		  "slide_id": "vectors_1",
-		  "page_number": 1,
-		  "title": "Vector Duality: Position vs Direction",
-		  "text": [
-			"AXIOM 2.1: A vector can represent two different concepts:\n• Position: A point in space relative to the origin\n• Direction: A magnitude and direction, independent of position\n\nCODE:[duality]\nvar position = Vector3(3, 4, 0)  # A point 3 units right, 4 units up\nvar direction = Vector3(1, 0, 0)  # Direction: 'to the right'",
-			"",
-			"The same Vector3(3, 4, 0) can mean 'the point at (3,4,0)' or 'move 3 right, 4 up'."
-		  ],
-		  "visualization": "duality",
-		  "concepts": ["vector duality", "position", "direction", "Vector3", "context"]
-		},
-		{
-		  "slide_id": "vectors_2",
-		  "page_number": 2,
-		  "title": "Vector Subtraction: From Point A to Point B",
-		  "text": [
-			"AXIOM 2.2: Vector subtraction gives the direction and distance between two points.\n\nCODE:[subtraction]\nvar point_a = Vector3(1, 2, 3)\nvar point_b = Vector3(4, 6, 3)\nvar direction = point_b - point_a  # Vector3(3, 4, 0)\nprint(\"Direction from A to B: \", direction)",
-			"",
-			"Subtraction answers: 'If I'm at point A, how do I get to point B?'"
-		  ],
-		  "visualization": "subtraction",
-		  "concepts": ["vector subtraction", "direction", "distance", "point to point"]
-		},
-		{
-		  "slide_id": "vectors_3",
-		  "page_number": 3,
-		  "title": "Vector Magnitude: The Distance",
-		  "text": [
-			"AXIOM 2.3: The magnitude (length) of a vector gives the distance.\n\nCODE:[magnitude]\nvar direction = Vector3(3, 4, 0)\nvar distance = direction.length()  # 5.0\nprint(\"Distance: \", distance)  # Uses Pythagorean theorem: √(3² + 4² + 0²)",
-			"",
-			"The .length() method calculates the straight-line distance using the 3D Pythagorean theorem."
-		  ],
-		  "visualization": "magnitude",
-		  "concepts": ["magnitude", "length", "distance", "Pythagorean theorem", ".length()"]
-		},
-		{
-		  "slide_id": "vectors_4",
-		  "page_number": 4,
-		  "title": "Vector Normalization: Pure Direction",
-		  "text": [
-			"AXIOM 2.4: A normalized vector has length 1 and represents pure direction.\n\nCODE:[normalization]\nvar direction = Vector3(3, 4, 0)\nvar unit_direction = direction.normalized()  # Vector3(0.6, 0.8, 0)\nprint(\"Unit direction: \", unit_direction)\nprint(\"Length: \", unit_direction.length())  # 1.0",
-			"",
-			"Normalization removes the distance, keeping only the direction. Perfect for 'which way to go' without 'how far'."
-		  ],
-		  "visualization": "normalization",
-		  "concepts": ["normalization", "unit vector", ".normalized()", "pure direction", "length 1"]
-		},
-		{
-		  "slide_id": "vectors_5",
-		  "page_number": 5,
-		  "title": "From Points to Lines",
-		  "text": [
-			"AXIOM 2.5: A line is defined by a point and a direction vector.\n\nCODE:[line_definition]\nvar start_point = Vector3(1, 2, 3)\nvar end_point = Vector3(4, 6, 3)\nvar direction = (end_point - start_point).normalized()\nprint(\"Line: start at \", start_point, \" going \", direction)",
-			"",
-			"Now we can connect points with lines! The direction vector tells us which way the line points."
-		  ],
-		  "visualization": "line_definition",
-		  "concepts": ["line definition", "point and direction", "connecting points", "geometry foundation"]
-		}
-	  ]
-	},
-
-	"line": {
-	  "board_id": "line",
-	  "title": "The Line",
-	  "subtitle": "Connecting Points",
-	  "category": "Fundamentals",
-	  "order": 3,
-	  "description": "Lines create direction, distance, and paths through space",
-	  "pages": [
-		{
-		  "slide_id": "line_1",
-		  "page_number": 1,
-		  "title": "The Line: Connecting Points",
-		  "text": [
-			"A line connects two points in space, creating direction and distance.\n\nIn 3D graphics, a line is defined by two endpoints: a start and an end. The space between them forms a path we can visualize and measure.\n\nAXIOM 1: A line is defined by two points in space.\n\nCODE:\nvar point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n\nThese two points define a line segment from origin to (1,1,0).\n\nThe vector from A to B is: direction = point_b - point_a\nThe length of the line is: distance = direction.length()"
-		  ],
-		  "visualization": "basic_line",
-		  "concepts": ["two points", "direction", "distance", "line segment"]
-		},
-		{
-		  "slide_id": "line_2",
-		  "page_number": 2,
-		  "title": "Drawing Lines",
-		  "text": [
-			"Godot provides multiple ways to visualize lines in 3D space.\n\nMETHOD 1: ImmediateMesh (Simple, flexible)\n\nCODE:\nvar mesh_instance = MeshInstance3D.new()\nvar immediate_mesh = ImmediateMesh.new()\nmesh_instance.mesh = immediate_mesh\n\nimmediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)\nimmediate_mesh.surface_add_vertex(point_a)\nimmediate_mesh.surface_add_vertex(point_b)\nimmediate_mesh.surface_end()\n\nadd_child(mesh_instance)\n\nThis creates a single line from point A to point B."
-		  ],
-		  "visualization": "drawing_lines",
-		  "concepts": ["ImmediateMesh", "PRIMITIVE_LINES", "surface_add_vertex"]
-		},
-		{
-		  "slide_id": "line_3",
-		  "page_number": 3,
-		  "title": "Line Direction and Magnitude",
-		  "text": [
-			"A line has both direction and magnitude (length).\n\nAXIOM 2: The direction vector points from start to end.\n\nCODE:\nvar direction = (point_b - point_a).normalized()\nvar distance = point_a.distance_to(point_b)\n\n# Move along the line\nvar t = 0.5  # halfway\nvar midpoint = point_a + direction * distance * t\n\nThe parameter 't' (0 to 1) lets us find any point along the line:\n• t = 0.0 → point_a (start)\n• t = 0.5 → midpoint\n• t = 1.0 → point_b (end)\n\nThis is called linear interpolation or 'lerp'."
-		  ],
-		  "visualization": "direction_magnitude",
-		  "concepts": ["normalized", "lerp", "interpolation", "parameter t"]
-		},
-		{
-		  "slide_id": "line_4",
-		  "page_number": 4,
-		  "title": "Cylinders as Lines",
-		  "text": [
-			"For thicker, more visible lines, we can use cylinders.\n\nAXIOM 3: A cylinder can represent a thick line segment.\n\nCODE:\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02  # thickness\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint\ncylinder.position = (point_a + point_b) / 2.0\n\n# Rotate to align with direction\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\n\nadd_child(cylinder)"
-		  ],
-		  "visualization": "cylinder_lines",
-		  "concepts": ["CylinderMesh", "look_at", "rotation", "thickness"]
-		},
-		{
-		  "slide_id": "line_5",
-		  "page_number": 5,
-		  "title": "Multiple Lines and Paths",
-		  "text": [
-			"Lines can connect multiple points to create paths and shapes.\n\nAXIOM 4: A sequence of connected lines forms a path.\n\nCODE:\nvar points = [\n    Vector3(0, 0, 0),\n    Vector3(1, 1, 0),\n    Vector3(2, 0.5, 0),\n    Vector3(3, 1.5, 0)\n]\n\nimmediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)\nfor point in points:\n    immediate_mesh.surface_add_vertex(point)\nimmediate_mesh.surface_end()\n\nLINE_STRIP connects consecutive points with lines.\nLINES requires pairs of points (every 2 vertices = 1 line).\n\nPaths are fundamental to curves, splines, and trajectories."
-		  ],
-		  "visualization": "multiple_lines",
-		  "concepts": ["LINE_STRIP", "paths", "curves", "trajectories"]
-		}
-	  ]
-	},
-
-	"triangle": {
-	  "board_id": "triangle",
-	  "title": "The Triangle",
-	  "subtitle": "The First Surface",
-	  "category": "Fundamentals",
-	  "order": 3,
-	  "description": "The triangle as the threshold between line and surface, the minimal polygon, and the atomic unit of all 3D geometry",
-	  "pages": [
-		{
-		  "slide_id": "triangle_1",
-		  "page_number": 1,
-		  "title": "Three Points Define a Plane",
-		  "text": [
-			"AXIOM: Three non-collinear points uniquely determine a plane.\n\nCODE:\nvar v_a = Vector3(-0.25, 0, 0)\nvar v_b = Vector3(0.25, 0, 0)\nvar v_c = Vector3(0, 0.5, 0)\n\nThree vertices → Three edges → One face\nIntroduces: INTERIOR, ORIENTATION, AREA"
-		  ],
-		  "visualization": "basic_triangle",
-		  "concepts": ["three points", "plane", "vertices", "edges", "face"]
-		},
-		{
-		  "slide_id": "triangle_2",
-		  "page_number": 2,
-		  "title": "Winding Order and Normals",
-		  "text": [
-			"AXIOM: Vertex order determines face direction.\n\nCODE:\nvar edge1 = v_b - v_a\nvar edge2 = v_c - v_a\nvar normal = edge1.cross(edge2).normalized()\n\nCross product → Normal vector\nCCW = front, CW = back\nDefines light interaction"
-		  ],
-		  "visualization": "triangle_normal",
-		  "concepts": ["normal vector", "cross product", "winding order", "front/back"]
-		},
-		{
-		  "slide_id": "triangle_3",
-		  "page_number": 3,
-		  "title": "Area Calculation",
-		  "text": [
-			"AXIOM: Triangle area = ½ |edge1 × edge2|\n\nCODE:\nvar cross = edge1.cross(edge2)\nvar area = cross.length() * 0.5\n\nFirst 2D measure (not 1D distance)\nFirst shape that can CONTAIN"
-		  ],
-		  "visualization": "triangle_area",
-		  "concepts": ["area", "cross product magnitude", "2D measure", "containment"]
-		},
-		{
-		  "slide_id": "triangle_4",
-		  "page_number": 4,
-		  "title": "Building Meshes",
-		  "text": [
-			"AXIOM: Every 3 vertices = 1 triangle.\n\nCODE:\nvar st = SurfaceTool.new()\nst.begin(Mesh.PRIMITIVE_TRIANGLES)\nst.set_normal(normal)\nst.add_vertex(v_a)\nst.add_vertex(v_b)\nst.add_vertex(v_c)\nvar mesh = st.commit()\n\nFoundation of ALL 3D meshes"
-		  ],
-		  "visualization": "triangle_mesh",
-		  "concepts": ["SurfaceTool", "PRIMITIVE_TRIANGLES", "mesh creation"]
-		},
-		{
-		  "slide_id": "triangle_5",
-		  "page_number": 5,
-		  "title": "The Atomic Surface",
-		  "text": [
-			"AXIOM: Every 3D mesh decomposes into triangles.\n\nCODE:\nvar sphere = SphereMesh.new()\nsphere.radial_segments = 32\nsphere.rings = 16\n# ≈ 1024 triangles\n\nWhy triangles?\n• Always planar\n• GPU optimized\n• Any polygon → triangles"
-		  ],
-		  "visualization": "triangle_foundation",
-		  "concepts": ["triangle mesh", "GPU rendering", "decomposition", "atomic unit"]
-		}
-	  ]
-	},
-
-	"quad": {
-	  "board_id": "quad",
-	  "title": "The Quad",
-	  "subtitle": "Four Points, Two Triangles",
-	  "category": "Fundamentals",
-	  "order": 4,
-	  "description": "The quad as a planar surface composed of two triangles",
-	  "pages": [
-		{
-		  "slide_id": "quad_1",
-		  "page_number": 1,
-		  "title": "Four Coplanar Points",
-		  "text": [
-			"AXIOM: A quad requires four coplanar points.\n\nCODE:\nvar v0 = Vector3(-0.5, -0.5, 0)\nvar v1 = Vector3(0.5, -0.5, 0)\nvar v2 = Vector3(0.5, 0.5, 0)\nvar v3 = Vector3(-0.5, 0.5, 0)\n\nNon-planar quads cause rendering artifacts"
-		  ],
-		  "visualization": "basic_quad",
-		  "concepts": ["four points", "coplanar", "quad", "planarity"]
-		},
-		{
-		  "slide_id": "quad_2",
-		  "page_number": 2,
-		  "title": "Triangulation",
-		  "text": [
-			"AXIOM: GPUs render quads as two triangles.\n\nCODE:\n# Triangle 1: v0, v1, v2\n# Triangle 2: v0, v2, v3\n\nTriangulation pattern affects shading\nDiagonal choice matters for non-planar quads"
-		  ],
-		  "visualization": "quad_triangulation",
-		  "concepts": ["triangulation", "diagonal", "GPU rendering"]
-		},
-		{
-		  "slide_id": "quad_3",
-		  "page_number": 3,
-		  "title": "Modeling with Quads",
-		  "text": [
-			"AXIOM: Quads simplify mesh topology.\n\nAdvantages:\n• Easier subdivision\n• Cleaner edge loops\n• Natural for rectangular surfaces\n\nLimitation: Must remain planar"
-		  ],
-		  "visualization": "quad_topology",
-		  "concepts": ["topology", "subdivision", "edge loops", "mesh modeling"]
-		}
-	  ]
-	},
-
-	"cube": {
-	  "board_id": "cube",
-	  "title": "The Cube",
-	  "subtitle": "Six Faces, First Volume",
-	  "category": "Fundamentals",
-	  "order": 5,
-	  "description": "The cube as the simplest volumetric primitive",
-	  "pages": [
-		{
-		  "slide_id": "cube_1",
-		  "page_number": 1,
-		  "title": "Six Square Faces",
-		  "text": [
-			"AXIOM: A cube has 6 faces, 12 edges, 8 vertices.\n\nCODE:\nvar box = BoxMesh.new()\nbox.size = Vector3(1, 1, 1)\n\nFirst closed volumetric primitive\nAll faces perpendicular to neighbors"
-		  ],
-		  "visualization": "basic_cube",
-		  "concepts": ["six faces", "volume", "edges", "vertices"]
-		},
-		{
-		  "slide_id": "cube_2",
-		  "page_number": 2,
-		  "title": "Mesh Structure",
-		  "text": [
-			"AXIOM: Cube = 12 triangles (2 per face).\n\nEach face:\n• 2 triangles\n• 4 vertices (shared)\n• Outward-facing normals\n\nTotal: 24 vertices (4 × 6 unique normals)"
-		  ],
-		  "visualization": "cube_wireframe",
-		  "concepts": ["mesh structure", "face normals", "vertex sharing"]
-		},
-		{
-		  "slide_id": "cube_3",
-		  "page_number": 3,
-		  "title": "Collision and Physics",
-		  "text": [
-			"AXIOM: Volume enables collision detection.\n\nCODE:\nvar shape = BoxShape3D.new()\nshape.size = Vector3(1, 1, 1)\n\nVolumetric presence:\n• Collision detection\n• Physics simulation\n• Spatial partitioning"
-		  ],
-		  "visualization": "cube_collision",
-		  "concepts": ["collision", "physics", "volume", "bounding box"]
-		}
-	  ]
-	},
-
-	"sphere": {
-	  "board_id": "sphere",
-	  "title": "The Sphere",
-	  "subtitle": "Perfect Curvature",
-	  "category": "Fundamentals",
-	  "order": 6,
-	  "description": "The sphere as a perfectly curved surface",
-	  "pages": [
-		{
-		  "slide_id": "sphere_1",
-		  "page_number": 1,
-		  "title": "Equidistant Points",
-		  "text": [
-			"AXIOM: All points equidistant from center.\n\nCODE:\nvar sphere = SphereMesh.new()\nsphere.radius = 1.0\nsphere.height = 2.0\n\nDefines: radius, center\nPerfectly smooth (conceptually)"
-		  ],
-		  "visualization": "basic_sphere",
-		  "concepts": ["radius", "center", "equidistant", "curved surface"]
-		},
-		{
-		  "slide_id": "sphere_2",
-		  "page_number": 2,
-		  "title": "Tessellation",
-		  "text": [
-			"AXIOM: Digital spheres approximate with triangles.\n\nCODE:\nsphere.radial_segments = 32\nsphere.rings = 16\n# Creates triangle mesh\n\nMore segments = smoother appearance\nParameterized by latitude/longitude"
-		  ],
-		  "visualization": "sphere_tessellation",
-		  "concepts": ["tessellation", "segments", "rings", "approximation"]
-		},
-		{
-		  "slide_id": "sphere_3",
-		  "page_number": 3,
-		  "title": "Surface Normals",
-		  "text": [
-			"AXIOM: Normal always points from center.\n\nFor point P on sphere:\nnormal = (P - center).normalized()\n\nPerfect for smooth shading\nDefines light reflection at every point"
-		  ],
-		  "visualization": "sphere_normals",
-		  "concepts": ["surface normals", "smooth shading", "lighting", "radial"]
-		}
-	  ]
-	},
-
-	"cylinder": {
-	  "board_id": "cylinder",
-	  "title": "The Cylinder",
-	  "subtitle": "Circular Extrusion",
-	  "category": "Fundamentals",
-	  "order": 7,
-	  "description": "The cylinder as a hybrid of planar and curved surfaces",
-	  "pages": [
-		{
-		  "slide_id": "cylinder_1",
-		  "page_number": 1,
-		  "title": "Two Circles, One Curve",
-		  "text": [
-			"AXIOM: Two parallel circles + curved surface.\n\nCODE:\nvar cyl = CylinderMesh.new()\ncyl.top_radius = 0.5\ncyl.bottom_radius = 0.5\ncyl.height = 2.0\n\nExtruded circle along axis"
-		  ],
-		  "visualization": "basic_cylinder",
-		  "concepts": ["circles", "extrusion", "axis", "curved surface"]
-		},
-		{
-		  "slide_id": "cylinder_2",
-		  "page_number": 2,
-		  "title": "Caps and Sides",
-		  "text": [
-			"AXIOM: Cylinder = 2 caps + 1 side surface.\n\nCODE:\ncyl.top_radius = 0.5\ncyl.bottom_radius = 0.3  # Cone\ncyl.cap_top = true\ncyl.cap_bottom = true\n\nVarying radii creates cones\nCaps can be toggled"
-		  ],
-		  "visualization": "cylinder_parts",
-		  "concepts": ["caps", "side surface", "cone", "radii"]
-		},
-		{
-		  "slide_id": "cylinder_3",
-		  "page_number": 3,
-		  "title": "Radial Segments",
-		  "text": [
-			"AXIOM: Circular sections tessellate to triangles.\n\nCODE:\ncyl.radial_segments = 32\ncyl.rings = 8\n\nMore segments = smoother circles\nRings add horizontal subdivisions"
-		  ],
-		  "visualization": "cylinder_segments",
-		  "concepts": ["radial segments", "rings", "tessellation", "smoothness"]
-		}
-	  ]
-	},
-	"torus": {
-	  "board_id": "torus",
-	  "title": "The Torus",
-	  "subtitle": "Donut Topology",
-	  "category": "Fundamentals",
-	  "order": 8,
-	  "description": "The torus as a surface of revolution with dual radii",
-	  "pages": [
-		{
-		  "slide_id": "torus_1",
-		  "page_number": 1,
-		  "title": "Two Radii Define the Ring",
-		  "text": [
-			"AXIOM: A torus requires two radii.\n\nCODE:\nvar torus = TorusMesh.new()\ntorus.inner_radius = 2.0  # Major radius (center to tube center)\ntorus.outer_radius = 0.5  # Minor radius (tube thickness)\n\nDonut shape: big ring + small tube"
-		  ],
-		  "visualization": "basic_torus",
-		  "concepts": ["inner_radius", "outer_radius", "major", "minor", "donut"]
-		},
-		{
-		  "slide_id": "torus_2",
-		  "page_number": 2,
-		  "title": "Ring Segments",
-		  "text": [
-			"AXIOM: Ring segments define tube smoothness.\n\nCODE:\ntorus.ring_segments = 32\n\nMore segments = smoother tube\nEach segment = one slice of the tube"
-		  ],
-		  "visualization": "torus_ring_segments",
-		  "concepts": ["ring_segments", "tube", "smoothness", "cross-section"]
-		},
-		{
-		  "slide_id": "torus_3",
-		  "page_number": 3,
-		  "title": "Radial Segments",
-		  "text": [
-			"AXIOM: Radial segments define ring smoothness.\n\nCODE:\ntorus.radial_segments = 16\n\nMore segments = smoother circular path\nEach segment = one slice around the ring"
-		  ],
-		  "visualization": "torus_radial_segments",
-		  "concepts": ["radial_segments", "circular path", "revolution", "smoothness"]
-		},
-		{
-		  "slide_id": "torus_4",
-		  "page_number": 4,
-		  "title": "Tessellation Combined",
-		  "text": [
-			"AXIOM: Total triangles = ring_segments × radial_segments × 2\n\nCODE:\ntorus.ring_segments = 32\ntorus.radial_segments = 16\n# Creates 1024 triangles\n\nLow resolution reveals structure\nHigh resolution appears smooth"
-		  ],
-		  "visualization": "torus_tessellation",
-		  "concepts": ["tessellation", "triangles", "resolution", "structure"]
-		}
-	  ]
-	},
-
-	"randomwalk": {
-	  "board_id": "randomwalk",
-	  "title": "Random Walk",
-	  "subtitle": "Exploring Through Chance",
-	  "category": "Randomness",
-	  "order": 10,
-	  "description": "Understanding how randomness creates patterns through movement",
-	  "pages": [
-		{
-		  "slide_id": "randomwalk_1",
-		  "page_number": 1,
-		  "title": "What is a Random Walk?",
-		  "text": [
-			"A random walk is a path created by taking successive random steps.\n\nAt each moment, choose a random direction and take a step. Over time, these random choices create emergent patterns.\n\nALGORITHM:\n1. Start at origin (0,0)\n2. Choose random direction\n3. Take step in that direction\n4. Repeat\n\nDespite being random, patterns emerge:\n• Average distance from origin grows with √steps\n• Creates organic, natural-looking paths\n• Models many real-world phenomena"
-		  ],
-		  "visualization": "basic_random_walk",
-		  "concepts": ["randomness", "emergent patterns", "stochastic process"]
-		}
-	  ]
 	}
-  }
 }

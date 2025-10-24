@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxbbparbdlmrr"]
+
+[ext_resource type="Script" uid="uid://dvkp28kqnkwq8" path="res://commons/primitives/origin/origin.gd" id="1_origin"]
+
+[node name="Origin" type="Node3D"]
+script = ExtResource("1_origin")
