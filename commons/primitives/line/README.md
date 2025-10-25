@@ -106,10 +106,10 @@ Lines send events to TextManager on interaction:
 # Event: "line_drop"
 # Context includes:
 {
-    "length": "1.50",
-    "length_raw": 1.5,
-    "poetic_scale": "an arm's length",
-    "relationship": "diagonal - cutting through space"
+	"length": "1.50",
+	"length_raw": 1.5,
+	"poetic_scale": "an arm's length",
+	"relationship": "diagonal - cutting through space"
 }
 ```
 
@@ -171,4 +171,3 @@ Scale is relative. A line can be a hair or a horizon. In VR, we make this relati
 ---
 
 *Parallelism as ordering principle. X as the unknown. The cross as orientation. These are not just geometric facts – they are ways of being in space.*
-

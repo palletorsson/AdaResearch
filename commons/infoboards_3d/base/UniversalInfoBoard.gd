@@ -159,31 +159,6 @@ func setup_ui():
 		prev_button.visible = false
 		next_button.visible = false
 
-	# Add play/pause button
-	var play_button = Button.new()
-	play_button.text = "Pause Animation"
-	play_button.add_theme_font_override("font", ROBOTO_FONT)
-	play_button.pressed.connect(_on_play_button_pressed)
-	navigation_buttons.add_child(play_button)
-
-	# Add speed slider
-	var speed_container = HBoxContainer.new()
-	var speed_label = Label.new()
-	speed_label.text = "Speed: 1.0"
-	speed_label.add_theme_font_override("font", ROBOTO_FONT)
-	speed_label.add_theme_font_size_override("font_size", 14)
-	var speed_slider = HSlider.new()
-	speed_slider.min_value = 0.5
-	speed_slider.max_value = 3.0
-	speed_slider.step = 0.1
-	speed_slider.value = animation_speed
-	speed_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
-
-	speed_container.add_child(speed_label)
-	speed_container.add_child(speed_slider)
-	left_panel.add_child(speed_container)
-
 	# Show initial page
 	update_page()
 
@@ -247,41 +222,49 @@ func update_page():
 		if typeof(entry_text) != TYPE_STRING:
 			entry_text = str(entry_text)
 
+		if entry_type == "spacer":
+			var spacer = Control.new()
+			spacer.custom_minimum_size = Vector2(0, 14)
+			text_container.add_child(spacer)
+			continue
+
 		print("[UniversalInfoBoard] Adding text (%s): %s" % [entry_type, entry_text.substr(0, min(60, entry_text.length()))])
 
 		var label = Label.new()
-		label.text = entry_text
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		label.add_theme_font_override("font", ROBOTO_FONT)
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.add_theme_font_size_override("font_size", 18)
-		label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
-		label.add_theme_constant_override("outline_size", 8)
-		label.add_theme_color_override("font_outline_color", Color(0.5, 0.7, 1.0, 0.8))
 
 		match entry_type:
 			"axiom":
-				label.add_theme_font_override("font", ROBOTO_FONT)
-				label.add_theme_font_size_override("font_size", 20)
-				label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.65))
+				label.add_theme_font_size_override("font_size", 22)
+				label.add_theme_color_override("font_color", Color(1.0, 0.88, 0.6))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			"section":
-				label.add_theme_font_size_override("font_size", 18)
-				label.add_theme_color_override("font_color", Color(0.85, 0.9, 1.0))
+				label.add_theme_font_size_override("font_size", 19)
+				label.add_theme_color_override("font_color", Color(0.85, 0.92, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			"code":
+				entry_text = entry_text.replace("	", "    ")
 				label.add_theme_font_size_override("font_size", 17)
-				label.add_theme_color_override("font_color", Color(0.8, 1.0, 0.9))
+				label.add_theme_color_override("font_color", Color(0.78, 1.0, 0.82))
 				label.autowrap_mode = TextServer.AUTOWRAP_OFF
+				label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+				label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 			"step":
 				label.add_theme_font_size_override("font_size", 17)
+				label.add_theme_color_override("font_color", Color(0.92, 0.95, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			"poetics":
-				label.add_theme_font_size_override("font_size", 18)
-				label.add_theme_color_override("font_color", Color(0.85, 0.9, 1.0))
-				label.add_theme_font_override("font", ROBOTO_FONT)
+				label.add_theme_font_size_override("font_size", 19)
+				label.add_theme_color_override("font_color", Color(0.85, 0.92, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			"paragraph":
 				label.add_theme_font_size_override("font_size", 18)
 				label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
+				label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
+		label.text = entry_text
 		text_container.add_child(label)
 
 		if text_container.get_child_count() > 1:
@@ -306,6 +289,7 @@ func _build_text_lines(page: Dictionary) -> Array:
 	var axiom = page.get("axiom", "")
 	if typeof(axiom) == TYPE_STRING and not axiom.is_empty():
 		lines.append({"type": "axiom", "text": axiom})
+		lines.append({"type": "spacer", "text": ""})
 
 	var code_dict = page.get("code", {})
 	if code_dict is Dictionary:
@@ -435,11 +419,6 @@ func _on_next_button_pressed():
 	if current_page < total_pages - 1:
 		current_page += 1
 		update_page()
-
-func _on_play_button_pressed():
-	animation_playing = !animation_playing
-	var play_button = navigation_buttons.get_child(2)
-	play_button.text = "Play Animation" if not animation_playing else "Pause Animation"
 
 	if vis_control and is_instance_valid(vis_control):
 		if "animation_playing" in vis_control:

@@ -537,16 +537,17 @@ func setup_vr_optimizations():
 	var viewport = get_viewport()
 	if viewport:
 		# Check if Forward+ renderer is available for FSR
-		var renderer = RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_RENDERER)
-		if renderer == "forward_plus":
-			# Enable temporal upsampling for better performance
-			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-			viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
-		else:
-			# Fallback to basic scaling for other renderers
+		# Note: FSR is available in Godot 4.4+ with Forward+ renderer
+		# We'll try to enable FSR and fallback to bilinear if not supported
+		viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
+		viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
+		
+		# Verify FSR is working by checking if the mode was actually set
+		if viewport.scaling_3d_mode != Viewport.SCALING_3D_MODE_FSR:
+			# Fallback to basic scaling if FSR is not supported
 			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
 			viewport.scaling_3d_scale = 0.8 if target_platform == "mobile_vr" else 1.0
-			print("FSR not available with renderer: " + str(renderer) + " - using bilinear scaling")
+			print("FSR not available - using bilinear scaling")
 	
 	print("VR optimizations applied for target FPS: " + str(performance_target_fps))
 

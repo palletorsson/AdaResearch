@@ -53,7 +53,7 @@ func _ready():
 	var editor_scroll = ScrollContainer.new()
 	editor_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	editor_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	editor_scroll.custom_minimum_size = Vector2(640, 420)
+	editor_scroll.custom_minimum_size = Vector2(640, 820)
 	editor_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	editor_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	center_margin.add_child(editor_scroll)
@@ -109,7 +109,7 @@ func _ready():
 	left_column.add_child(concepts_label)
 
 	concepts_edit = TextEdit.new()
-	concepts_edit.custom_minimum_size = Vector2(280, 110)
+	concepts_edit.custom_minimum_size = Vector2(280, 90)
 	concepts_edit.wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	concepts_edit.placeholder_text = "Vector3\norigin\ncoordinate system"
 	concepts_edit.text_changed.connect(_on_concepts_changed)
@@ -136,7 +136,7 @@ func _ready():
 	left_column.add_child(narrative_label)
 
 	narrative_edit = TextEdit.new()
-	narrative_edit.custom_minimum_size = Vector2(280, 220)
+	narrative_edit.custom_minimum_size = Vector2(280, 120)
 	narrative_edit.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	narrative_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	narrative_edit.text_changed.connect(_on_narrative_changed)
@@ -149,7 +149,7 @@ func _ready():
 	right_column.add_child(steps_label)
 
 	steps_edit = TextEdit.new()
-	steps_edit.custom_minimum_size = Vector2(280, 150)
+	steps_edit.custom_minimum_size = Vector2(280, 90)
 	steps_edit.wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	steps_edit.text_changed.connect(_on_steps_changed)
 	right_column.add_child(steps_edit)
@@ -185,7 +185,7 @@ func _ready():
 	right_column.add_child(code_block_label)
 
 	code_block_edit = TextEdit.new()
-	code_block_edit.custom_minimum_size = Vector2(280, 220)
+	code_block_edit.custom_minimum_size = Vector2(280, 200)
 	code_block_edit.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	code_block_edit.wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	code_block_edit.text_changed.connect(_on_code_block_changed)
@@ -212,7 +212,7 @@ func _ready():
 	right_column.add_child(asset_label)
 
 	asset_edit = TextEdit.new()
-	asset_edit.custom_minimum_size = Vector2(280, 100)
+	asset_edit.custom_minimum_size = Vector2(280, 90)
 	asset_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	asset_edit.placeholder_text = "Describe how the visualization manifests..."
 	asset_edit.text_changed.connect(_on_asset_changed)
@@ -226,7 +226,7 @@ func _ready():
 	right_column.add_child(files_label)
 
 	files_edit = TextEdit.new()
-	files_edit.custom_minimum_size = Vector2(280, 120)
+	files_edit.custom_minimum_size = Vector2(280, 90)
 	files_edit.wrap_mode = TextEdit.LINE_WRAPPING_NONE
 	files_edit.placeholder_text = "res://path/to/file.tscn\nres://path/to/file.gd"
 	files_edit.text_changed.connect(_on_files_changed)

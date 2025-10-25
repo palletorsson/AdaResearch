@@ -97,4 +97,3 @@ From the book pages:
 "One line rushes away as far as the eye can see and becomes the horizon over there. The other, vertical line, could very well be a hair that hangs here barely a decimeter from the eye."
 
 **Scale is relative. Perception is everything. Lines are poetry in space.**
-

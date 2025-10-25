@@ -33,6 +33,8 @@ func _draw():
 	match visualization_type:
 		"origin":
 			draw_origin_visualization(center)
+		"point_example":
+			draw_point_example(center)
 		"point_sizes":
 			draw_point_sizes_visualization(center)
 		"instantiation":
@@ -93,61 +95,46 @@ func draw_point_sizes_visualization(center: Vector2):
 		draw_string(get_theme_default_font(), label_pos, size_data.label, HORIZONTAL_ALIGNMENT_CENTER, 80, 12, LABEL_COLOR)
 
 func draw_instantiation_visualization(center: Vector2):
-	"""Show multiple instantiated points"""
+	"""Show how a mesh resource becomes live MeshInstance3D nodes"""
 	draw_grid(center)
 	draw_axes(center)
-	
-	# Create a pattern of points
-	var point_count = 8
-	var radius = 100
-	
-	for i in range(point_count):
-		var angle = (float(i) / point_count) * TAU + animation_time * 0.5
-		var offset = Vector2(cos(angle), sin(angle)) * radius
-		var pos = center + offset
-		
-		# Draw point
-		draw_circle(pos, 6, POINT_COLOR)
-		
-		# Draw connection line to center
-		draw_line(center, pos, Color(0.4, 0.4, 0.5, 0.3), 1.0)
-		
-		# Draw small coordinate label
-		var coord = "(" + str(int(offset.x / 10)) + ", " + str(int(offset.y / 10)) + ")"
-		draw_string(get_theme_default_font(), pos + Vector2(10, -10), coord, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.7, 0.7, 0.8, 0.6))
+
+	var resource_pos = center + Vector2(-150, -30)
+	draw_circle(resource_pos, 20, Color(POINT_COLOR.r, POINT_COLOR.g, POINT_COLOR.b, 0.15))
+	draw_circle(resource_pos, 8, Color(POINT_COLOR.r, POINT_COLOR.g, POINT_COLOR.b, 0.25))
+	draw_string(get_theme_default_font(), resource_pos + Vector2(-70, 36), "SphereMesh resource", HORIZONTAL_ALIGNMENT_LEFT, 160, 12, Color(0.8, 0.8, 0.9, 0.8))
+
+	var instance_pos = center + Vector2(40, -20)
+	draw_arrow(resource_pos + Vector2(25, 0), instance_pos - Vector2(12, 0), Color(0.6, 0.75, 1.0, 0.6), 2.0)
+
+	draw_circle(instance_pos, 10, POINT_COLOR)
+	draw_string(get_theme_default_font(), instance_pos + Vector2(-40, 26), "MeshInstance3D", HORIZONTAL_ALIGNMENT_LEFT, 120, 12, LABEL_COLOR)
+
+	var offsets = [Vector2(90, 30), Vector2(110, -20), Vector2(70, -70)]
+	for extra in offsets:
+		var pos = center + extra
+		draw_circle(pos, 8, Color(POINT_COLOR.r, POINT_COLOR.g, POINT_COLOR.b, 0.85))
+		draw_line(instance_pos, pos, Color(0.45, 0.55, 0.8, 0.35), 1.4)
+
+	draw_string(get_theme_default_font(), center + Vector2(-110, 120), "add_child(mesh_instance) attaches nodes to the scene tree", HORIZONTAL_ALIGNMENT_LEFT, 280, 12, Color(0.75, 0.75, 0.9, 0.85))
 
 func draw_labels_visualization(center: Vector2):
-	"""Show points with labels"""
+	"""Show a point with Label3D positioned using an offset"""
 	draw_grid(center)
 	draw_axes(center)
-	
-	# Define some points with labels
-	var points = [
-		{"pos": Vector2(-80, -60), "label": "Point A\n(-0.8, 0.6, 0)"},
-		{"pos": Vector2(100, 40), "label": "Point B\n(1.0, -0.4, 0)"},
-		{"pos": Vector2(-40, 80), "label": "Point C\n(-0.4, -0.8, 0)"},
-		{"pos": Vector2(60, -70), "label": "Point D\n(0.6, 0.7, 0)"}
-	]
-	
-	for point_data in points:
-		var pos = center + point_data.pos
-		
-		# Draw point
-		var pulse = 1.0 + sin(animation_time * 2.0 + point_data.pos.x * 0.01) * 0.2
-		draw_circle(pos, 6 * pulse, POINT_COLOR)
-		
-		# Draw label offset
-		var label_offset = Vector2(0, -25)
-		var label_pos = pos + label_offset
-		
-		# Draw label background
-		var label_size = Vector2(100, 30)
-		var label_rect = Rect2(label_pos - label_size / 2, label_size)
-		draw_rect(label_rect, Color(0.1, 0.1, 0.15, 0.8), true)
-		draw_rect(label_rect, Color(0.5, 0.5, 0.6, 0.5), false, 1.0)
-		
-		# Draw label text
-		draw_string(get_theme_default_font(), label_pos + Vector2(-40, 0), point_data.label, HORIZONTAL_ALIGNMENT_LEFT, 90, 11, LABEL_COLOR)
+
+	var point_pos = center + Vector2(80, -40)
+	draw_circle(point_pos, 8, POINT_COLOR)
+
+	var offset = Vector2(0, -45)
+	draw_line(point_pos, point_pos + offset, Color(0.5, 0.8, 1.0, 0.4), 1.5)
+
+	var label_rect = Rect2(point_pos + offset - Vector2(70, 18), Vector2(140, 36))
+	draw_rect(label_rect, Color(0.1, 0.12, 0.2, 0.85), true)
+	draw_rect(label_rect, Color(0.45, 0.55, 0.8, 0.6), false, 1.0)
+	draw_string(get_theme_default_font(), label_rect.position + Vector2(10, 12), "Label3D\n(0, 0.15, 0) offset", HORIZONTAL_ALIGNMENT_LEFT, 120, 12, LABEL_COLOR)
+
+	draw_string(get_theme_default_font(), center + Vector2(-150, 120), "Label follows point thanks to billboard & offset vector", HORIZONTAL_ALIGNMENT_LEFT, 320, 12, Color(0.75, 0.8, 1.0, 0.85))
 
 func draw_dynamic_visualization(center: Vector2):
 	"""Show moving points with updating labels"""
@@ -222,3 +209,15 @@ func draw_arrow(from: Vector2, to: Vector2, color: Color, width: float = 2.0):
 	
 	var points = PackedVector2Array([to, arrow_point1, arrow_point2])
 	draw_colored_polygon(points, color)
+
+
+func draw_point_example(center: Vector2):
+	"""Visualize a single point at a specific position with label"""
+	draw_grid(center)
+	draw_axes(center)
+
+	var position = center + Vector2(120, -80)
+	draw_circle(position, 8, POINT_COLOR)
+	draw_line(center, position, Color(0.4, 0.4, 0.6, 0.4), 1.5)
+	var label_pos = position + Vector2(10, -10)
+	draw_string(get_theme_default_font(), label_pos, "Vector3(3.0, 1.5, 4.0)", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, LABEL_COLOR)

@@ -33,7 +33,7 @@
 			"order": 0.0,
 			"pages": [
 				{
-					"axiom": "AXIOM 1: The origin (0, 0, 0) is the reference point from which all positions in 3D space are defined.",
+					"axiom": "- The origin (0, 0, 0) is the reference point from which all positions in 3D space are defined.",
 					"code": {
 						"block": "var origin = Vector3(0, 0, 0)\n",
 						"id": "origin",
@@ -57,13 +57,15 @@
 					"title": "The Origin: Zero Point",
 					"visual_id": "origin",
 					"visualization": {
-						"asset": "",
-						"files": [],
+						"asset": "See axiom",
+						"files": [
+							"res://commons/primitives/origin/origin.gd"
+						],
 						"id": "origin"
 					}
 				},
 				{
-					"axiom": "AXIOM 2: Three perpendicular axes — X, Y, and Z  — define 3D space.",
+					"axiom": "- Three perpendicular axes — x, y, and z define 3D space.",
 					"code": {
 						"block": "var x_axis = Vector3(1, 0, 0)  # Right\nvar y_axis = Vector3(0, 1, 0)  # Up\nvar z_axis = Vector3(0, 0, 1)  # Forward",
 						"id": "axes",
@@ -78,11 +80,7 @@
 						"dimensions"
 					],
 					"definitions": [],
-					"narrative": [
-						"• X-axis: Left-Right (Red)",
-						"• Y-axis: Up-Down (Green)",
-						"• Z-axis: Forward-Back (Blue)"
-					],
+					"narrative": [],
 					"page_number": 2.0,
 					"poetics": "",
 					"slide_id": "coordinate_2",
@@ -90,8 +88,10 @@
 					"title": "The Three Axes",
 					"visual_id": "axes",
 					"visualization": {
-						"asset": "",
-						"files": [],
+						"asset": "See axiom",
+						"files": [
+							"res://commons/primitives/origin/origin.gd"
+						],
 						"id": "axes"
 					}
 				}
@@ -306,9 +306,9 @@
 			"order": 3.0,
 			"pages": [
 				{
-					"axiom": "AXIOM 1 1: A line is defined by two points in space.",
+					"axiom": "- A line is the relation between two distinct points — the shortest path through space.",
 					"code": {
-						"block": "var point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n\n\nThe vector from A to B is: direction = point_b - point_a\nThe length of the line is: distance = direction.length()",
+						"block": "var point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n",
 						"id": "line_1",
 						"language": "gdscript",
 						"purpose": ""
@@ -320,11 +320,7 @@
 						"line segment"
 					],
 					"definitions": [],
-					"narrative": [
-						"A line connects two points in space, creating direction and distance.",
-						"In 3D graphics, a line is defined by two endpoints: a start and an end. The space between them forms a path we can visualize and measure.",
-						"These two points define a line segment from origin to (1,1,0)."
-					],
+					"narrative": [],
 					"page_number": 1.0,
 					"poetics": "",
 					"slide_id": "line_1",
@@ -333,77 +329,16 @@
 					"visual_id": "basic_line",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/line/line.gd"
+						],
 						"id": "basic_line"
 					}
 				},
 				{
-					"axiom": "",
+					"axiom": "– A cylinder can represent a line segment by connecting two points with a visible 3D form aligned along their direction.",
 					"code": {
-						"block": "var mesh_instance = MeshInstance3D.new()\nvar immediate_mesh = ImmediateMesh.new()\nmesh_instance.mesh = immediate_mesh\n\nimmediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)\nimmediate_mesh.surface_add_vertex(point_a)\nimmediate_mesh.surface_add_vertex(point_b)\nimmediate_mesh.surface_end()\n\nadd_child(mesh_instance)",
-						"id": "line_2",
-						"language": "gdscript",
-						"purpose": ""
-					},
-					"concepts": [
-						"ImmediateMesh",
-						"PRIMITIVE_LINES",
-						"surface_add_vertex"
-					],
-					"definitions": [],
-					"narrative": [
-						"Godot provides multiple ways to visualize lines in 3D space.",
-						"METHOD 1: ImmediateMesh (Simple, flexible)",
-						"This creates a single line from point A to point B."
-					],
-					"page_number": 2.0,
-					"poetics": "",
-					"slide_id": "line_2",
-					"steps": [],
-					"title": "Drawing Lines",
-					"visual_id": "drawing_lines",
-					"visualization": {
-						"asset": "",
-						"files": [],
-						"id": "drawing_lines"
-					}
-				},
-				{
-					"axiom": "AXIOM 2 2: The direction vector points from start to end.",
-					"code": {
-						"block": "var direction = (point_b - point_a).normalized()\nvar distance = point_a.distance_to(point_b)\n\n# Move along the line\nvar t = 0.5  # halfway\nvar midpoint = point_a + direction * distance * t\n\n• t = 0.0 → point_a (start)\n• t = 0.5 → midpoint\n• t = 1.0 → point_b (end)",
-						"id": "line_3",
-						"language": "gdscript",
-						"purpose": ""
-					},
-					"concepts": [
-						"normalized",
-						"lerp",
-						"interpolation",
-						"parameter t"
-					],
-					"definitions": [],
-					"narrative": [
-						"A line has both direction and magnitude (length).",
-						"This is called linear interpolation or 'lerp'.",
-						"The parameter 't' (0 to 1) lets us find any point along the line:"
-					],
-					"page_number": 3.0,
-					"poetics": "",
-					"slide_id": "line_3",
-					"steps": [],
-					"title": "Line Direction and Magnitude",
-					"visual_id": "direction_magnitude",
-					"visualization": {
-						"asset": "",
-						"files": [],
-						"id": "direction_magnitude"
-					}
-				},
-				{
-					"axiom": "AXIOM 3 3: A cylinder can represent a thick line segment.",
-					"code": {
-						"block": "var cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02  # thickness\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint\ncylinder.position = (point_a + point_b) / 2.0\n\n# Rotate to align with direction\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\n\nadd_child(cylinder)",
+						"block": "var cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02   \ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint\ncylinder.position = (point_a + point_b) / 2.0\n\n# Rotate to align with direction\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\n\nadd_child(cylinder)",
 						"id": "line_4",
 						"language": "gdscript",
 						"purpose": ""
@@ -415,9 +350,7 @@
 						"thickness"
 					],
 					"definitions": [],
-					"narrative": [
-						"For thicker, more visible lines, we can use cylinders."
-					],
+					"narrative": [],
 					"page_number": 4.0,
 					"poetics": "",
 					"slide_id": "line_4",
@@ -426,7 +359,9 @@
 					"visual_id": "cylinder_lines",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/line/line.gd"
+						],
 						"id": "cylinder_lines"
 					}
 				},
@@ -460,7 +395,9 @@
 					"visual_id": "multiple_lines",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/line/line.gd"
+						],
 						"id": "multiple_lines"
 					}
 				}
@@ -475,7 +412,7 @@
 			"order": 1.0,
 			"pages": [
 				{
-					"axiom": "AXIOM 3: A point in 3D space is a vector defining a position (x, y, z).",
+					"axiom": "- A point in 3D space is a vector defining a position (x, y, z).",
 					"code": {
 						"block": "var point_position = Vector3(3.0, 1.5, 4.0)",
 						"id": "point",
@@ -491,19 +428,21 @@
 					"definitions": [],
 					"narrative": [],
 					"page_number": 1.0,
-					"poetics": "test",
+					"poetics": "",
 					"slide_id": "point_1",
 					"steps": [],
 					"title": "The Point: The Atom of Space",
 					"visual_id": "origin",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/point/point_mesh.gd"
+						],
 						"id": "origin"
 					}
 				},
 				{
-					"axiom": "A visible point can be represented by a small sphere at its designated position.",
+					"axiom": "- A visible point can be represented by a small sphere.",
 					"code": {
 						"block": "var sphere_mesh = SphereMesh.new()\nvar radius = 0.01  # one centimeter\nsphere_mesh.radius = radius\nsphere_mesh.height = radius * 2  # height is diameter",
 						"id": "Mesh",
@@ -526,12 +465,14 @@
 					"visual_id": "origin",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/point/point_mesh.gd"
+						],
 						"id": "origin"
 					}
 				},
 				{
-					"axiom": "A mesh must be instantiated into the scene tree to exist in the world.",
+					"axiom": "- Instantiat a mesh into the scene tree to hold the sphere.",
 					"code": {
 						"block": "var mesh_instance = MeshInstance3D.new()\nmesh_instance.mesh = sphere_mesh\nmesh_instance.position = point_position\nadd_child(mesh_instance)   ",
 						"id": "Instance",
@@ -555,15 +496,17 @@
 					"title": "Instantiating the Point",
 					"visual_id": "origin",
 					"visualization": {
-						"asset": "",
-						"files": [],
+						"asset": "res://commons/primitives/point/point_mesh.gd",
+						"files": [
+							"res://commons/primitives/point/point_mesh.gd"
+						],
 						"id": "origin"
 					}
 				},
 				{
-					"axiom": "The identity of a point is represented as a text label close to the point.",
+					"axiom": "- The identity of a point is represented as a text label close to the point.",
 					"code": {
-						"block": "var label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nlabel_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED \nadd_child(label_3d)",
+						"block": "var label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nadd_child(label_3d)",
 						"id": "point_4",
 						"language": "gdscript",
 						"purpose": ""
@@ -576,7 +519,7 @@
 					],
 					"definitions": [],
 					"narrative": [
-						"Billboard mode makes the label always face the camera"
+						"What does offset do?"
 					],
 					"page_number": 4.0,
 					"poetics": "",
@@ -586,12 +529,15 @@
 					"visual_id": "labels",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/point/point_mesh.gd",
+							"res://commons/primitives/point/simple_position_text.gd"
+						],
 						"id": "labels"
 					}
 				},
 				{
-					"axiom": "The text label must update when the point's position changes.",
+					"axiom": "- The text label must update when the point's position changes.",
 					"code": {
 						"block": "func _process(delta):\n\tlabel_3d.text = str(point_position)\n\tlabel_3d.position = point_position + label_offset",
 						"id": "point_5",
@@ -614,7 +560,9 @@
 					"visual_id": "dynamic",
 					"visualization": {
 						"asset": "",
-						"files": [],
+						"files": [
+							"res://commons/primitives/point/"
+						],
 						"id": "dynamic"
 					}
 				}
@@ -1003,7 +951,7 @@
 			"order": 3.0,
 			"pages": [
 				{
-					"axiom": "AXIOM 1: Three non-collinear points uniquely determine a plane.",
+					"axiom": "AXIOM 6: Three non-collinear points uniquely determine a plane.",
 					"code": {
 						"block": "var v_a = Vector3(-0.25, 0, 0)\nvar v_b = Vector3(0.25, 0, 0)\nvar v_c = Vector3(0, 0.5, 0)",
 						"id": "triangle_1",

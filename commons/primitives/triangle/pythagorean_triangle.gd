@@ -84,6 +84,17 @@ func create_labels():
 		add_child(label)
 		label_nodes[config["name"]] = label
 
+	# Create Pythagorean formula label
+	var formula_label = Label3D.new()
+	formula_label.name = "FormulaLabel"
+	formula_label.text = "a² + b² = c²"
+	formula_label.font_size = 12
+	formula_label.outline_size = 3
+	formula_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	formula_label.modulate = Color(1.0, 1.0, 0.5, 1.0)  # Yellow color
+	add_child(formula_label)
+	label_nodes["FormulaLabel"] = formula_label
+
 func update_labels():
 	# Calculate side lengths
 	var a = vertex_positions[0].distance_to(vertex_positions[1])  # Base
@@ -106,6 +117,16 @@ func update_labels():
 		var mid_hyp = (vertex_positions[1] + vertex_positions[2]) / 2.0
 		label_nodes["HypotenuseLabel"].position = mid_hyp + Vector3(0.15, 0.2, 0.15)
 		label_nodes["HypotenuseLabel"].modulate = Color(1.0, 0.5, 0.8, 1.0)
+
+	# Update Pythagorean formula label with actual values
+	if label_nodes.has("FormulaLabel"):
+		var a_sq = a * a
+		var b_sq = b * b
+		var c_sq = c * c
+		label_nodes["FormulaLabel"].text = "%.3f² + %.3f² = %.3f²\n%.3f + %.3f = %.3f" % [a, b, c, a_sq, b_sq, c_sq]
+		# Position at center of triangle, elevated
+		var center = (vertex_positions[0] + vertex_positions[1] + vertex_positions[2]) / 3.0
+		label_nodes["FormulaLabel"].position = center + Vector3(0, 0.4, 0)
 
 func update_triangle_mesh():
 	update_single_triangle_mesh(triangle_mesh, triangle_indices)

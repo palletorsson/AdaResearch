@@ -19,22 +19,12 @@ func setup_scale_lines():
 	for scale in scales:
 		var line_node = get_node_or_null(scale["name"] + "/lineContainer")
 		if line_node:
-			var sphere1 = line_node.get_node_or_null("GrabSphere")
-			var sphere2 = line_node.get_node_or_null("GrabSphere2")
-
-			if sphere1 and sphere2:
-				# Position spheres at the correct distance
-				var half_distance = scale["distance"] / 2.0
-				sphere1.position = Vector3(-half_distance, 0, 0)
-				sphere2.position = Vector3(half_distance, 0, 0)
+			# Set positions at the correct distance
+			var half_distance = scale["distance"] / 2.0
+			line_node.set_positions(Vector3(-half_distance, 0, 0), Vector3(half_distance, 0, 0))
 
 			# Set line properties
-			line_node.line_thickness = scale["thickness"]
-			line_node.line_color = scale["color"]
-
-			# Update connections after positioning
-			if line_node.has_method("update_connections"):
-				line_node.update_connections()
+			line_node.set_line_properties(scale["thickness"], scale["color"])
 
 		# Position the parent line node at the correct Y position
 		var parent_line = get_node_or_null(scale["name"])

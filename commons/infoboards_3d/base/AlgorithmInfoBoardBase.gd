@@ -238,7 +238,8 @@ func update_text_content(entries: Array) -> void:
 
 		var spacer = Control.new()
 		spacer.custom_minimum_size = Vector2(0, 18)
-	text_container.add_child(spacer)
+		
+		text_container.add_child(spacer)
 	
 func _append_spacer_section(sections: Array) -> void:
 	if sections.size() == 0:

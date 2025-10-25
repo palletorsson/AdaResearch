@@ -111,8 +111,19 @@
 			"description": "Reusable plus-shaped line rig built from two line segments for crosshair highlights.",
 			"scene": "res://commons/primitives/line/plus_lines.tscn",
 		},
-
-							
+		"cube_lines": {
+			"name": "cube_lines",
+			"lookup_name": "cube_lines",
+			"description": "cube_lines.",
+			"scene": "res://commons/primitives/line/cube_lines.tscn",
+		},
+		"grid_lines": {
+			"name": "grid_lines",
+			"lookup_name": "grid_lines",
+			"description": "grid_lines.",
+			"scene": "res://commons/primitives/line/grid_lines.tscn",
+		},
+						
 		"line_collection": {
 			"name": "line_collection",
 			"lookup_name": "line_collection",
@@ -330,6 +341,13 @@
 			"description": "Procedural tetrahedron mesh rendered with the project grid material.",
 			"scene": "res://commons/primitives/tetrahedron/tetrahedron.tscn",
 		},	
+		"grab_tetrahedron": {
+			"name": "grab_tetrahedron",
+			"lookup_name": "grab_tetrahedron",
+			"description": "grab_tetrahedron.",
+			"scene": "res://commons/primitives/tetrahedron/grab_tetrahedron.tscn",
+		},	
+		
 		"octahedron": {
 			"name": "octahedron",
 			"lookup_name": "octahedron",

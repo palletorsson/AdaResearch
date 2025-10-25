@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dye0qd8yjb7gl"]
 
-[ext_resource type="PackedScene" uid="uid://ow18e0rccxku" path="res://commons/primitives/line/line.tscn" id="1_line"]
+[ext_resource type="PackedScene" uid="uid://static_line_001" path="res://commons/primitives/line/line_static.tscn" id="1_line"]
 [ext_resource type="Script" uid="uid://wp1kxbuibnah" path="res://commons/primitives/line/scale_lines.gd" id="2_script"]
 
 [node name="ScaleLines" type="Node3D"]
