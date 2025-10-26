@@ -79,6 +79,14 @@ const INFO_BOARD_TYPES = {
 		"color": Color(0.6, 0.3, 0.8),
 		"supports_parameters": true
 	},
+	"polyhedra": {
+		"name": "Polyhedra Info Board",
+		"category": "3D Primitives",
+		"scene": "Polyhedra/PolyhedraInfoBoard.tscn",
+		"description": "3D shapes built from flat polygonal faces - from Platonic solids to Johnson solids",
+		"color": Color(0.9, 0.6, 0.7),
+		"supports_parameters": true
+	},
 	"vectors": {
 		"name": "Vectors Info Board",
 		"category": "Mathematics",
@@ -132,6 +140,8 @@ const INFO_BOARD_TYPES = {
 # Category colors for consistent theming
 const CATEGORY_COLORS = {
 	"Fundamentals": Color(1.0, 0.9, 0.2),
+	"Primitives": Color(0.7, 0.4, 0.2),
+	"3D Primitives": Color(0.9, 0.6, 0.7),
 	"Randomness": Color(0.8, 0.5, 0.9),
 	"Mathematics": Color(0.6, 0.8, 0.9),
 	"Graph Theory": Color(0.3, 0.8, 0.5),

@@ -54,7 +54,7 @@ func setup_materials():
 	grid_material.shader = grid_shader
 	
 	# Set shader parameters for tutorial (simpler parameters)
-	grid_material.set_shader_parameter("fill_color", Color(0.2, 0.3, 0.8, 0.7))
+	grid_material.set_shader_parameter("fill_color", Color(0.2, 0.3, 0.8, 1.0))
 	grid_material.set_shader_parameter("wireframe_color", Color.CYAN)
 	grid_material.set_shader_parameter("wireframe_width", 3.0)
 	grid_material.set_shader_parameter("wireframe_brightness", 2.5)

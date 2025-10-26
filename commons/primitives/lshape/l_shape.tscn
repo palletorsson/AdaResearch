@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://l_shape_block"]
+
+[ext_resource type="Script" path="res://commons/primitives/lshape/l_shape.gd" id="1_script"]
+
+[node name="LShape" type="MeshInstance3D"]
+script = ExtResource("1_script")

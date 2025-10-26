@@ -164,7 +164,7 @@ func apply_furniture_material(mesh_instance: MeshInstance3D, color: Color):
 		
 		# Set shader parameters for table
 		material.set_shader_parameter("base_color", color)
-		material.set_shader_parameter("edge_color", Color(0.9, 0.9, 0.7))
+		material.set_shader_parameter("edge_color", Color(0.9, 0.9, 1.0))
 		material.set_shader_parameter("edge_width", 0.8)
 		material.set_shader_parameter("edge_sharpness", 2.5)
 		material.set_shader_parameter("emission_strength", 0.6)

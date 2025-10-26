@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://l0xse04bya00"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_dk8i7"]
+[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_e60ka"]
+[ext_resource type="PackedScene" uid="uid://b8octahedron8" path="res://commons/primitives/octahedron/octahedron.tscn" id="3_ore5s"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_qyvq2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
+radius = 0.1
+
+[node name="GrabOctahedron" instance=ExtResource("1_dk8i7")]
+freeze = true
+script = ExtResource("2_e60ka")
+alternate_material = SubResource("StandardMaterial3D_nukvf")
+alter_freeze = false
+glow_color = Color(1, 0.6, 1, 1)
+glow_emission_energy = 2.0
+pickup_sound_volume_db = -6.0
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_blybu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+
+[node name="Octahedron" parent="MeshInstance3D" index="0" instance=ExtResource("3_ore5s")]
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("4_qyvq2")]

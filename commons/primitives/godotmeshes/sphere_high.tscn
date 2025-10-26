@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sphere_high_poly"]
+
+[ext_resource type="Script" path="res://commons/primitives/godotmeshes/sphere_high.gd" id="1_script"]
+
+[node name="SphereHigh" type="MeshInstance3D"]
+script = ExtResource("1_script")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bapvfdrc33ea2"]
+[gd_scene load_steps=2 format=3 uid="uid://b8octahedron8"]
 
 [ext_resource type="Script" uid="uid://lvuarh476qlo" path="res://commons/primitives/octahedron/octahedron.gd" id="1_qsjim"]
 
@@ -6,4 +6,4 @@
 script = ExtResource("1_qsjim")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.42744)
+transform = Transform3D(0.859772, 0, 0.510678, 0, 1, 0, -0.510678, 0, 0.859772, 0.796593, 0.360964, 1.42744)

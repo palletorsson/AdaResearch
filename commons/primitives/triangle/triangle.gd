@@ -1,7 +1,7 @@
 # Triangle.gd - Creates a single interactive triangle with three grabbable vertices
 extends Node3D
 
-var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
+var vertex_color: Color = Color(0.2, 0.8, 0.3)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.25  # Half the original size
 @export var sphere_y_offset: float = 0.5
 

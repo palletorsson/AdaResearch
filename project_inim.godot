@@ -1,0 +1,18 @@
+; Minimal Engine configuration for testing with Godot 4.1.4
+; This disables problematic extensions
+
+config_version=5
+
+[application]
+
+config/name="Ada Research Zero - Minimal"
+config/features=PackedStringArray("4.1")
+config/icon="res://icon.png"
+
+[filesystem]
+
+import/blender/enabled=false
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true

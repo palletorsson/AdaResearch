@@ -2,8 +2,8 @@
 extends Node3D
 
 var base_color: Color = Color(0.2, 0.8, 1.0)  # Cyan
-var vertical_height: float = 0.8
-var horizontal_length: float = 0.6
+var vertical_height: float = 3.0
+var horizontal_length: float = 1.0
 var thickness: float = 0.2
 
 func _ready():

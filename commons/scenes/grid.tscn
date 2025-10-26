@@ -45,7 +45,7 @@ size = Vector2(100, 100)
 environment = SubResource("Environment_q35sa")
 
 [node name="XROrigin3D" parent="." index="2" groups=["player_body"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.8, 0)
 
 [node name="Label3D" parent="." index="3"]
 visible = false

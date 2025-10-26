@@ -1,47 +1,88 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+// Enable transparency for opacity control - Correct Godot 4 syntax
+render_mode blend_mix, depth_draw_always, cull_disabled;
 
-uniform vec4 fill_color : source_color = vec4(0.2, 0.3, 0.8, 0.7);
-uniform vec4 wireframe_color: source_color = vec4(0.0, 1.0, 1.0, 1.0);
-uniform float wireframe_width : hint_range(0.1, 10.0) = 2.0;
-uniform float wireframe_brightness : hint_range(0.0, 5.0) = 2.0;
-uniform bool show_only_wireframe = false;
+// Uniforms
+uniform vec4 modelColor : source_color = vec4(0.5, 0.5, 0.5, 1.0);       // Main cube color
+uniform vec4 wireframeColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);   // Wireframe color
+uniform vec4 emissionColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);    // Emission color
+uniform float width : hint_range(0.1, 15.0) = 2.0;                       // Edge thickness
+uniform float blur : hint_range(0.1, 5.0) = 1.0;                         // Blur amount
+uniform float emission_strength : hint_range(0.0, 10.0) = 2.0;           // Emission intensity
+uniform float modelOpacity : hint_range(0.0, 1.0) =1.0;                 // Base opacity - NOW WORKS!
+uniform float wireframeOpacity : hint_range(0.0, 1.0) = 1.0;             // Wireframe opacity
+uniform float globalOpacity : hint_range(0.0, 1.0) = 1.0;                // Overall opacity multiplier
+uniform bool show_interior = true;                                       // Show cube interior
 
-// Better barycentric coordinate calculation
-varying vec3 barycentric;
-varying vec3 world_pos;
+// Barycentric coordinates
+varying vec3 baryCoord;
 
 void vertex() {
-    world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-    
-    // More reliable barycentric coordinate assignment
-    // This works better with indexed geometry
-    int vid = VERTEX_ID % 3;
-    barycentric = vec3(0.0);
-    if (vid == 0) barycentric = vec3(1.0, 0.0, 0.0);
-    else if (vid == 1) barycentric = vec3(0.0, 1.0, 0.0);
-    else barycentric = vec3(0.0, 0.0, 1.0);
+    // Calculate barycentric coordinates more reliably
+    int vertexIndex = VERTEX_ID % 3;
+    if (vertexIndex == 0) {
+        baryCoord = vec3(1.0, 0.0, 0.0);
+    } else if (vertexIndex == 1) {
+        baryCoord = vec3(0.0, 1.0, 0.0);
+    } else {
+        baryCoord = vec3(0.0, 0.0, 1.0);
+    }
 }
 
 void fragment() {
-    // Calculate edge distances with proper derivatives
-    vec3 d = fwidth(barycentric);
-    vec3 a3 = smoothstep(vec3(0.0), d * wireframe_width, barycentric);
-    
-    // Find the minimum distance to any edge
-    float edge_factor = min(min(a3.x, a3.y), a3.z);
-    float wireframe_factor = 1.0 - edge_factor;
-    
-    if (show_only_wireframe) {
-        ALBEDO = wireframe_color.rgb;
-        ALPHA = wireframe_factor * wireframe_color.a;
-        if (wireframe_factor < 0.1) {
-            discard;
+    // Calculate edge distances using barycentric coordinates
+    vec3 dBaryCoordX = dFdx(baryCoord);
+    vec3 dBaryCoordY = dFdy(baryCoord);
+    vec3 dBaryCoord = sqrt(dBaryCoordX * dBaryCoordX + dBaryCoordY * dBaryCoordY);
+
+    // Prevent division by zero
+    dBaryCoord = max(dBaryCoord, vec3(0.0001));
+
+    // Calculate distance to edges
+    vec3 edge_distance = baryCoord / (dBaryCoord * width);
+
+    // Apply smoothstep for edge detection
+    vec3 remap = smoothstep(vec3(0.0), vec3(blur), edge_distance);
+
+    // Find the closest edge (minimum distance means closest to an edge)
+    float closestEdge = min(min(remap.x, remap.y), remap.z);
+
+    // Calculate final colors and alpha
+    vec3 finalColor;
+    float finalAlpha;
+
+    if (show_interior) {
+        // Mix wireframe and model colors
+        finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
+        finalAlpha = mix(wireframeOpacity, modelOpacity, closestEdge);
+
+        // Ensure minimum visibility for the model interior
+        if (closestEdge > 0.5) {
+            finalAlpha = max(finalAlpha, 0.1); // Minimum 10% opacity for interior
         }
     } else {
-        ALBEDO = mix(fill_color.rgb, wireframe_color.rgb, wireframe_factor);
-        ALPHA = mix(fill_color.a, wireframe_color.a, wireframe_factor);
+        // Only show wireframe
+        finalColor = wireframeColor.rgb;
+        finalAlpha = wireframeOpacity * (1.0 - closestEdge);
+
+        // If not showing interior, make interior completely transparent
+        if (closestEdge > 0.5) {
+            finalAlpha = 0.0;
+        }
     }
-    
-    EMISSION = wireframe_color.rgb * wireframe_factor * wireframe_brightness;
+
+    // Apply global opacity multiplier
+    finalAlpha *= globalOpacity;
+
+    // Clamp alpha to prevent complete transparency when not intended
+    if (show_interior && modelOpacity > 0.0) {
+        finalAlpha = max(finalAlpha, 0.05);
+    }
+
+    // Apply colors
+    ALBEDO = finalColor;
+    ALPHA = finalAlpha;
+
+    // Add emission to wireframe edges
+    EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;
 }
