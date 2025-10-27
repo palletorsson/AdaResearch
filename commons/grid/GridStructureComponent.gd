@@ -7,7 +7,7 @@ class_name GridStructureComponent
 
 # Grid properties
 var grid_x: int
-var grid_y: int  
+var grid_y: int
 var grid_z: int
 var grid: Array = []
 var cube_map: Dictionary = {}
@@ -19,6 +19,9 @@ var parent_node: Node3D
 # Settings
 var cube_size: float = 1.0
 var gutter: float = 0.0
+
+# Group name for all generated cubes
+const CUBE_GROUP_NAME = "grid_cubes"
 
 # Signals
 signal structure_generation_complete(cube_count: int)
@@ -108,7 +111,7 @@ func _apply_structure_data(structure_data):
 				grid[x][y][z] = true
 				cube_count += 1
 	
-	print("GridStructureComponent: Added %d cubes" % cube_count)
+	print("GridStructureComponent: Added %d cubes (all in group '%s')" % [cube_count, CUBE_GROUP_NAME])
 	structure_generation_complete.emit(cube_count)
 
 # Add a single cube to the grid
@@ -116,17 +119,20 @@ func _add_cube(x: int, y: int, z: int, total_size: float):
 	if not base_cube or not parent_node:
 		print("GridStructureComponent: Missing base_cube or parent_node")
 		return
-		
+
 	var position = Vector3(x, y, z) * total_size
 	var new_cube = base_cube.duplicate()
 	new_cube.position = position
 	new_cube.visible = true
 	parent_node.add_child(new_cube)
-	
+
 	# Set owner for editor
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 		new_cube.owner = parent_node.get_tree().edited_scene_root
-	
+
+	# Add to group for easy access
+	new_cube.add_to_group(CUBE_GROUP_NAME)
+
 	cube_map[Vector3i(x, y, z)] = new_cube
 
 # Find highest Y position at X,Z coordinate
@@ -153,12 +159,15 @@ func get_cube_at(x: int, y: int, z: int) -> Node3D:
 # Clear all cubes
 func clear_structure():
 	print("GridStructureComponent: Clearing all cubes")
-	
+
 	for key in cube_map.keys():
 		var cube = cube_map[key]
 		if is_instance_valid(cube):
+			# Remove from group before freeing
+			if cube.is_in_group(CUBE_GROUP_NAME):
+				cube.remove_from_group(CUBE_GROUP_NAME)
 			cube.queue_free()
-	
+
 	cube_map.clear()
 	grid.clear()
 
@@ -180,3 +189,15 @@ func get_cube_count() -> int:
 # Get all cube positions
 func get_all_cube_positions() -> Array:
 	return cube_map.keys()
+
+# Get all cubes from the group
+func get_all_cubes() -> Array[Node]:
+	"""Returns all cubes in the grid_cubes group"""
+	if not parent_node or not parent_node.get_tree():
+		return []
+	return parent_node.get_tree().get_nodes_in_group(CUBE_GROUP_NAME)
+
+# Get cubes group name
+func get_cubes_group_name() -> String:
+	"""Returns the group name used for all grid cubes"""
+	return CUBE_GROUP_NAME

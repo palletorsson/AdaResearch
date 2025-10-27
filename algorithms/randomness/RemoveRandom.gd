@@ -1,12 +1,22 @@
 extends Node3D
 
-# Configurable range for cube removal
+# Grid selection mode
+@export_enum("Range", "Column", "Row", "All") var selection_mode: String = "Range"
+
+# Column/Row selection (used when selection_mode is "Column" or "Row")
+@export var target_column: int = 0  # X coordinate
+@export var target_row: int = 0     # Z coordinate
+
+# Configurable range for cube removal (used when selection_mode is "Range")
 @export var x_min: float = 2.0
 @export var x_max: float = 4.0
 @export var y_min: float = 0.0
 @export var y_max: float = 2.0
 @export var z_min: float = 2.0  # Start from Z=2 to skip rows 0-1
 @export var z_max: float = 21.0
+
+# Use grid_cubes group instead of recursive search
+@export var use_grid_cubes_group: bool = true
 
 # Visual enhancement parameters
 @export var removal_speed: float = 1.0
@@ -55,24 +65,62 @@ func _ready():
 func find_all_boxes():
 	"""Find all box/cube nodes in the scene"""
 	all_boxes.clear()
-	var parent = get_parent()
-	if not parent:
-		print("No parent node found")
-		return
-	
-	# Recursively find all boxes
-	_find_boxes_recursive(parent)
-	
+
+	if use_grid_cubes_group:
+		# Use the grid_cubes group
+		var all_grid_cubes = get_tree().get_nodes_in_group("grid_cubes")
+		print("RemoveRandom: Found %d cubes in 'grid_cubes' group" % all_grid_cubes.size())
+
+		# Filter based on selection mode
+		for cube in all_grid_cubes:
+			if cube is Node3D and _should_include_cube(cube):
+				all_boxes.append(cube)
+
+		print("RemoveRandom: Selected %d cubes based on mode '%s'" % [all_boxes.size(), selection_mode])
+	else:
+		# Use recursive search (legacy method)
+		var parent = get_parent()
+		if not parent:
+			print("No parent node found")
+			return
+
+		# Recursively find all boxes
+		_find_boxes_recursive(parent)
+
 	# Apply normal material to all found boxes
 	apply_material_to_all_boxes(normal_material)
+
+func _should_include_cube(cube: Node3D) -> bool:
+	"""Check if a cube should be included based on selection mode"""
+	var pos = cube.position
+
+	match selection_mode:
+		"All":
+			return true
+
+		"Column":
+			# Select all cubes in a specific column (X coordinate)
+			# Allow small tolerance for floating point comparison
+			return abs(pos.x - target_column) < 0.1
+
+		"Row":
+			# Select all cubes in a specific row (Z coordinate)
+			return abs(pos.z - target_row) < 0.1
+
+		"Range":
+			# Use the min/max ranges
+			return (pos.x >= x_min and pos.x <= x_max and
+					pos.y >= y_min and pos.y <= y_max and
+					pos.z >= z_min and pos.z <= z_max)
+
+	return false
 
 func _find_boxes_recursive(node: Node):
 	"""Recursively search for box/cube nodes"""
 	# Check if this node is a box/cube
 	if _is_box_node(node):
 		all_boxes.append(node)
- 
-	
+
 	# Search children
 	for child in node.get_children():
 		_find_boxes_recursive(child)

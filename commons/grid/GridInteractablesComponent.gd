@@ -286,15 +286,35 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			artifact_object.scale *= scale_factor
 			print("    Applied uniform scale: %s" % str(scale_factor))
 		
-		# Apply rotation override (e.g., scifi_panel_wall:45 → rotate Y by 45 degrees)
+		# Apply rotation overrides (Z, X, Y axes)
+		var rotation_changed = false
+		var current_rotation = artifact_object.rotation_degrees
+
+		if overrides.has("rotation_z_degrees"):
+			current_rotation.z = float(overrides.get("rotation_z_degrees", 0.0))
+			rotation_changed = true
+		if overrides.has("rotation_x_degrees"):
+			current_rotation.x = float(overrides.get("rotation_x_degrees", 0.0))
+			rotation_changed = true
 		if overrides.has("rotation_y_degrees"):
-			var ry = float(overrides.get("rotation_y_degrees", 0.0))
-			var current = artifact_object.rotation_degrees
-			current.y = ry
-			artifact_object.rotation_degrees = current
-			# Also try to set an exported yaw property if available
-			_try_set_property(artifact_object, "yaw_degrees", ry)
-			print("    Applied Y rotation: %s degrees" % str(ry))
+			current_rotation.y = float(overrides.get("rotation_y_degrees", 0.0))
+			rotation_changed = true
+			# Also try to set an exported yaw property if available (legacy support)
+			_try_set_property(artifact_object, "yaw_degrees", current_rotation.y)
+
+		if rotation_changed:
+			artifact_object.rotation_degrees = current_rotation
+			print("    Applied rotation: Z=%s X=%s Y=%s" % [current_rotation.z, current_rotation.x, current_rotation.y])
+
+		# Apply continuous rotation flags
+		if overrides.has("continuous_rotation_z") or overrides.has("continuous_rotation_x") or overrides.has("continuous_rotation_y"):
+			var cont_z = overrides.get("continuous_rotation_z", false)
+			var cont_x = overrides.get("continuous_rotation_x", false)
+			var cont_y = overrides.get("continuous_rotation_y", false)
+
+			# Add continuous rotation script
+			_add_continuous_rotation(artifact_object, cont_z, cont_x, cont_y)
+			print("    Applied continuous rotation: Z=%s X=%s Y=%s" % [cont_z, cont_x, cont_y])
 			
 	elif artifact_object is Control:
 		# Handle 2D/UI artifacts (like the algorithm overview)
@@ -352,14 +372,24 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	return true
 
 # Parse compact token syntax from map JSON cells.
-# Examples:
-#   "scifi_panel_wall"                    → { lookup_name: "scifi_panel_wall", overrides: {} }
-#   "scifi_panel_wall:45"                 → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45 } }
-#   "random_number_book_page_1955:0:2.5:1.2" → { lookup_name: "random_number_book_page_1955", overrides: { rotation_y_degrees: 0, y_position: 2.5, uniform_scale: 1.2 } }
-#   "scifi_panel_wall:45|Label Text"      → { lookup_name: "scifi_panel_wall", overrides: { rotation_y_degrees: 45, label_text: "Label Text" } }
-#   "clipboard#pages:point,line,triangle" → { lookup_name: "clipboard", config_data: { pages: "point,line,triangle" } }
-#   "clipboard#title:Getting Started"     → { lookup_name: "clipboard", config_data: { title: "Getting Started" } }
-#   "clipboard#pages:point,line#title:My Clipboard" → { lookup_name: "clipboard", config_data: { pages: "point,line", title: "My Clipboard" } }
+#
+# COLON (:) SYNTAX - For rotation and position/scale:
+#   "object"                                   → No overrides
+#   "object:45"                                → Y-axis rotation 45°
+#   "object:45|Label"                          → Y rotation 45° + label text
+#   "object:45:2.5"                            → Y rotation 45° + Y position offset +2.5
+#   "object:45:2.5:1.2"                        → Y rotation 45° + Y offset +2.5 + scale 1.2
+#   "object:45:30:0"                           → 3-axis rotation (Z=45°, X=30°, Y=0°)
+#   "object:45:30:0:true:false:true"           → 3-axis rotation + continuous (Z spin, Y spin)
+#
+# HASH (#) SYNTAX - For complex configuration (RECOMMENDED for non-rotation configs):
+#   "pickup_gate#pickups:5"                    → Config parameter
+#   "pickup_gate#pickups:3#color:blue"         → Multiple configs
+#
+# IMPORTANT: 4-param format is AMBIGUOUS:
+#   - Could be: rot_y:y_pos:scale:? (legacy) OR rot_z:rot_x:rot_y (new 3-axis)
+#   - System assumes 3-axis rotation if all 4 params are numeric
+#   - For position/scale, use 3-param format OR # syntax instead
 func _parse_interactable_token(token: String) -> Dictionary:
 	var result := {"lookup_name": token, "overrides": {}, "config_data": {}}
 	
@@ -379,51 +409,105 @@ func _parse_interactable_token(token: String) -> Dictionary:
 	result.lookup_name = name
 	
 	# Handle different parameter formats:
-	# Format 1: name:rotation|label  (legacy format)
-	# Format 2: name:rotation:y_pos:scale  (new extended format)
-	
+	# Format 1: name:rot_y|label         (legacy Y rotation + label)
+	# Format 2: name:rot_y:y_pos:scale   (legacy Y rotation + position + scale)
+	# Format 3: name:rot_z:rot_x:rot_y   (3-axis rotation) - ONLY if all params are numeric
+	# Format 4: name:rot_z:rot_x:rot_y:cont_z:cont_x:cont_y  (full rotation + continuous)
+
 	if parts.size() == 2:
 		# Legacy format: name:param where param could be rotation or rotation|label
 		var param = parts[1].strip_edges()
 		var rot_part = param
 		var label_part = ""
-		
+
 		if param.find("|") != -1:
 			var p2 = param.split("|", false)
 			rot_part = p2[0].strip_edges()
 			if p2.size() > 1:
 				label_part = p2[1].strip_edges()
-		
-		# rotation part
+
+		# rotation part (Y-axis only for legacy compatibility)
 		if rot_part.is_valid_float():
 			result.overrides["rotation_y_degrees"] = float(rot_part)
 		else:
 			# If it's not numeric and no explicit label part, treat rot_part as label text
 			if label_part == "" and rot_part != "":
 				label_part = rot_part
-		
+
 		# label part
 		if label_part != "":
 			result.overrides["label_text"] = label_part
-			
-	elif parts.size() >= 3:
-		# Extended format: name:rotation:y_pos[:scale]
-		# Parse rotation parameter
-		var rotation_str = parts[1].strip_edges()
-		if rotation_str.is_valid_float():
-			result.overrides["rotation_y_degrees"] = float(rotation_str)
-		
-		# Parse Y position parameter
+
+	elif parts.size() == 4:
+		# Ambiguous: Could be legacy (rot_y:y_pos:scale) OR new 3-axis rotation (rot_z:rot_x:rot_y)
+		# Heuristic: Check if 4th param looks like scale (< 10) or rotation angle (any value)
+		# Better approach: If last param is boolean-like, it's malformed. Otherwise try to guess.
+
+		var param1 = parts[1].strip_edges()
+		var param2 = parts[2].strip_edges()
+		var param3 = parts[3].strip_edges()
+
+		var all_numeric = param1.is_valid_float() and param2.is_valid_float() and param3.is_valid_float()
+
+		if all_numeric:
+			var val1 = float(param1)
+			var val2 = float(param2)
+			var val3 = float(param3)
+
+			# Heuristic: If 3rd value is very small (< 10), assume it's scale → legacy format
+			# Otherwise, assume it's 3-axis rotation
+			if val3 < 10.0 and val3 > 0.0:
+				# Legacy: name:rot_y:y_pos:scale
+				result.overrides["rotation_y_degrees"] = val1
+				result.overrides["y_position"] = val2
+				result.overrides["uniform_scale"] = val3
+				print("GridInteractablesComponent: Interpreted as legacy position/scale format (scale=%s < 10)" % val3)
+			else:
+				# NEW: 3-axis rotation: name:rot_z:rot_x:rot_y
+				result.overrides["rotation_z_degrees"] = val1
+				result.overrides["rotation_x_degrees"] = val2
+				result.overrides["rotation_y_degrees"] = val3
+				print("GridInteractablesComponent: Interpreted as 3-axis rotation (Z=%s, X=%s, Y=%s)" % [val1, val2, val3])
+		else:
+			print("GridInteractablesComponent: WARNING - Non-numeric 4-param format for '%s'" % token)
+
+	elif parts.size() == 3:
+		# Legacy format: name:rot_y:y_pos (or name:rot_y:y_pos:scale if 4 params)
+		# Only Y rotation + Y position offset (no scale in 3-param version)
+		var rot_str = parts[1].strip_edges()
 		var y_pos_str = parts[2].strip_edges()
+
+		if rot_str.is_valid_float():
+			result.overrides["rotation_y_degrees"] = float(rot_str)
+
 		if y_pos_str.is_valid_float():
 			result.overrides["y_position"] = float(y_pos_str)
-		
-		# Parse optional uniform scale parameter
-		if parts.size() >= 4:
-			var scale_str = parts[3].strip_edges()
-			if scale_str.is_valid_float():
-				result.overrides["uniform_scale"] = float(scale_str)
-	
+
+	elif parts.size() == 7:
+		# Full format: name:rot_z:rot_x:rot_y:cont_z:cont_x:cont_y
+		var rot_z = parts[1].strip_edges()
+		var rot_x = parts[2].strip_edges()
+		var rot_y = parts[3].strip_edges()
+		var cont_z = parts[4].strip_edges().to_lower()
+		var cont_x = parts[5].strip_edges().to_lower()
+		var cont_y = parts[6].strip_edges().to_lower()
+
+		# Parse rotation degrees
+		if rot_z.is_valid_float():
+			result.overrides["rotation_z_degrees"] = float(rot_z)
+		if rot_x.is_valid_float():
+			result.overrides["rotation_x_degrees"] = float(rot_x)
+		if rot_y.is_valid_float():
+			result.overrides["rotation_y_degrees"] = float(rot_y)
+
+		# Parse continuous rotation flags (true/false or 1/0)
+		if cont_z == "true" or cont_z == "1":
+			result.overrides["continuous_rotation_z"] = true
+		if cont_x == "true" or cont_x == "1":
+			result.overrides["continuous_rotation_x"] = true
+		if cont_y == "true" or cont_y == "1":
+			result.overrides["continuous_rotation_y"] = true
+
 	return result
 
 # Parse configuration token syntax with # (e.g., "clipboard#pages:point,line,triangle")
@@ -497,6 +581,38 @@ func _try_set_property(obj: Object, prop: String, value) -> void:
 		if typeof(p) == TYPE_DICTIONARY and p.has("name") and str(p["name"]) == prop:
 			obj.set(prop, value)
 			return
+
+# Add continuous rotation to an object
+func _add_continuous_rotation(obj: Node3D, rotate_z: bool, rotate_x: bool, rotate_y: bool) -> void:
+	if not obj:
+		return
+
+	# Create a simple script that rotates the object
+	var script_text = """
+extends Node3D
+
+@export var rotation_speed_z: float = %s
+@export var rotation_speed_x: float = %s
+@export var rotation_speed_y: float = %s
+
+func _process(delta: float) -> void:
+	if rotation_speed_z != 0.0:
+		rotate_z(deg_to_rad(rotation_speed_z * delta))
+	if rotation_speed_x != 0.0:
+		rotate_x(deg_to_rad(rotation_speed_x * delta))
+	if rotation_speed_y != 0.0:
+		rotate_y(deg_to_rad(rotation_speed_y * delta))
+""" % [
+		"30.0" if rotate_z else "0.0",
+		"30.0" if rotate_x else "0.0",
+		"30.0" if rotate_y else "0.0"
+	]
+
+	var script = GDScript.new()
+	script.source_code = script_text
+	script.reload()
+
+	obj.set_script(script)
 
 # Apply transform data from artifact definition
 func _apply_artifact_transform(artifact_object: Node, artifact_info: Dictionary):

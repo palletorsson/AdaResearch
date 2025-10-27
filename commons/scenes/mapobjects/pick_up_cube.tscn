@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_lx240"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lx240"]
+size = Vector3(0.52, 0.52, 0.52)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdpok"]
 render_priority = 0
@@ -36,7 +37,7 @@ collision_layer = 0
 collision_mask = 524288
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.560966, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207, 0.990516, -0.00292969)
 shape = SubResource("BoxShape3D_lx240")
 
 [node name="CubeBaseMesh" type="MeshInstance3D" parent="."]

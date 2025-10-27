@@ -9,7 +9,7 @@ class_name GridSpawnComponent
 var data_component: GridDataComponent
 
 # Default spawn position (fallback if no JSON spawn defined)
-const DEFAULT_SPAWN_POSITION = Vector3(2.5, 1.8, 2.5)
+const DEFAULT_SPAWN_POSITION = Vector3(0.0, 1.8, 0.0)
 const DEFAULT_SPAWN_ROTATION = Vector3(0.0, 0.0, 0.0)
 
 # Signals
@@ -56,7 +56,12 @@ func handle_player_spawn():
 func _get_spawn_data_from_json() -> Dictionary:
 	"""Returns spawn data with position and rotation"""
 
-	# Try to get from map JSON
+	# PRIORITY 1: Check for utility-based spawn (s:x:z:y syntax)
+	var utility_spawn = _check_utility_spawn()
+	if utility_spawn:
+		return utility_spawn
+
+	# PRIORITY 2: Try to get from map JSON spawn_points
 	if data_component:
 		var spawn_points = data_component.get_spawn_points()
 		if spawn_points and not spawn_points.is_empty():
@@ -73,13 +78,67 @@ func _get_spawn_data_from_json() -> Dictionary:
 				print("GridSpawnComponent: Using JSON spawn point: %s" % spawn_data.position)
 				return spawn_data
 
-	# Fallback to default
+	# PRIORITY 3: Fallback to default
 	print("GridSpawnComponent: Using default spawn position: %s" % DEFAULT_SPAWN_POSITION)
 	return {
 		"position": DEFAULT_SPAWN_POSITION,
 		"rotation": DEFAULT_SPAWN_ROTATION,
 		"source": "default"
 	}
+
+# Check for utility-based spawn coordinates (s:x:y:z)
+func _check_utility_spawn() -> Dictionary:
+	"""Check if any spawn utility has coordinates set"""
+	var parent_node = get_parent()
+	if not parent_node:
+		print("GridSpawnComponent: No parent node found")
+		return {}
+
+	# Find GridUtilitiesComponent
+	var utilities_component = parent_node.find_child("GridUtilitiesComponent", false, false)
+	if not utilities_component:
+		print("GridSpawnComponent: No GridUtilitiesComponent found")
+		return {}
+
+	# Get all utility positions from the utilities component
+	var utility_positions = utilities_component.get_all_utility_positions()
+	print("GridSpawnComponent: 🔍 Checking %d utilities for spawn_coordinates..." % utility_positions.size())
+
+	# Check each utility for spawn_coordinates metadata
+	for pos in utility_positions:
+		var utility = utilities_component.get_utility_at(pos.x, pos.y, pos.z)
+		if utility:
+			print("GridSpawnComponent:   - Checking utility at grid(%d,%d,%d): %s" % [pos.x, pos.y, pos.z, utility.name])
+			if utility.has_meta("spawn_coordinates"):
+				var coords = utility.get_meta("spawn_coordinates")
+
+				# Get cube_size and gutter from data component
+				var cube_size = 1.0
+				var gutter = 0.0
+				if data_component:
+					var settings = data_component.get_settings()
+					cube_size = settings.get("cube_size", 1.0)
+					gutter = settings.get("gutter", 0.0)
+
+				# Convert grid coordinates to world position
+				# coords is Vector3(x, y, z) where y is already world height
+				var world_pos = Vector3(
+					coords.x * (cube_size + gutter),
+					coords.y,  # Y is already in world space (height)
+					coords.z * (cube_size + gutter)
+				)
+
+				var spawn_data = {
+					"position": world_pos,
+					"rotation": DEFAULT_SPAWN_ROTATION,
+					"source": "utility_coordinates"
+				}
+
+				print("GridSpawnComponent: ✅ Using utility spawn coordinates: grid(%.1f, %.1f, %.1f) → world%s" % [coords.x, coords.y, coords.z, world_pos])
+				return spawn_data
+
+	print("GridSpawnComponent: No spawn_coordinates metadata found on any utility")
+	return {}
 
 # Position the player at spawn point
 func _position_player(spawn_data: Dictionary):

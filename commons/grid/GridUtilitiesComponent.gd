@@ -226,8 +226,26 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			if parameters.size() > 0 and "height" in utility_object:
 				utility_object.height = float(parameters[0])
 		"s":  # Spawn point
-			if parameters.size() > 0:
+			if parameters.size() >= 3:
+				# Format: s:x:y:z (grid coordinates)
+				var x_param = parameters[0].strip_edges()
+				var y_param = parameters[1].strip_edges()
+				var z_param = parameters[2].strip_edges()
+
+				if x_param.is_valid_float() and y_param.is_valid_float() and z_param.is_valid_float():
+					var spawn_x = float(x_param)
+					var spawn_y = float(y_param)
+					var spawn_z = float(z_param)
+
+					# Store coordinates as metadata for GridSpawnComponent to use
+					utility_object.set_meta("spawn_coordinates", Vector3(spawn_x, spawn_y, spawn_z))
+					print("GridUtilitiesComponent: ✅ Set spawn coordinates to (%.1f, %.1f, %.1f) on utility object: %s" % [spawn_x, spawn_y, spawn_z, utility_object.name])
+				else:
+					print("GridUtilitiesComponent: WARNING - Invalid spawn coordinates in parameters: %s" % parameters)
+			elif parameters.size() > 0:
+				# Legacy support: spawn name parameter
 				utility_object.set_meta("spawn_name", parameters[0])
+				print("GridUtilitiesComponent: Set spawn name to: %s" % parameters[0])
 		"wp":  # Walkable prism
 			if parameters.size() > 0:
 				var rotation_y = float(parameters[0])
@@ -313,7 +331,17 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 							)
 				if "set_transport_parameters" in utility_object:
 					utility_object.set_transport_parameters(distance, direction)
-				print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
+
+				# Check for optional third parameter: "auto"
+				if parameters.size() >= 3:
+					var auto_param = parameters[2].strip_edges().to_lower()
+					if auto_param == "auto" and "set_auto_start" in utility_object:
+						utility_object.set_auto_start(true)
+						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s (AUTO-START)" % [distance, direction])
+					else:
+						print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
+				else:
+					print("GridUtilitiesComponent: Set transport cube to move %.1f units in direction %s" % [distance, direction])
 		"rg":  # Regenerate cube
 			var target_params: Array = []
 			var status_message := ""

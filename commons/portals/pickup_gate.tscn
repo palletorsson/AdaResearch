@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgq4k8m3vx1pq"]
+
+[ext_resource type="Script" uid="uid://ypvviwbom62g" path="res://commons/portals/pickup_gate.gd" id="1_pickup_gate"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gate"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.6)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_gate"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+
+[node name="PickupGate" type="Node3D"]
+script = ExtResource("1_pickup_gate")
+
+[node name="BlockingMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_gate")
+mesh = SubResource("BoxMesh_gate")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_gate")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.1)
+text = "Collect pickups"
+outline_size = 8

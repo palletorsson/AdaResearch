@@ -50,13 +50,13 @@
 			[" ", " ", " ", " ", " ", "t", "sp"]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			["RotateGridCubes:45:0:0:false:false:true", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_scene:0:0:0.8", " ", "", " ", " "],
 			[" ", "", " ", "transformation_cube", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", "rotating_cube:0:0:0.5", " ", " "],
 			[" ", " ", " ", " ", "pick_up_cube", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", "pickup_gate#pickups:1", " "]
 		]
 	},
 	"utility_definitions": {

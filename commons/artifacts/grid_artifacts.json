@@ -604,6 +604,12 @@
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/mapobjects/reset_scene.tscn",
 		},
+		"RotateGridCubes": {
+			"name": "RotateGridCubes",
+			"lookup_name": "RotateGridCubes",
+			"description": "RotateGridCubes",
+			"scene": "res://algorithms/randomness/RotateGridCubes.tscn",
+		},
 		"reset_area": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_area",
@@ -628,6 +634,18 @@
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
 		},
+		"pickup_gate": {
+			"name": "Pickup Gate",
+			"lookup_name": "pickup_gate",
+			"description": "A blocking gate that opens when a specified number of pickup cubes are collected. Use pickup_gate#pickups:5 or pickup_gate#count:3#color:blue",
+			"scene": "res://commons/portals/pickup_gate.tscn",
+		},
+	"agent_spawner": {
+		"name": "Cube Agent Spawner",
+		"lookup_name": "agent_spawner",
+		"description": "Spawns a walking cube-based agent character built from agent_data.json. Use agent_spawner#direction:1,0,0 to set walk direction.",
+		"scene": "res://commons/agent/agent_spawner.tscn",
+	},
 		"cube_with_shader": {
 			"name": "Cube with shader",
 			"lookup_name": "cube_with_shader",

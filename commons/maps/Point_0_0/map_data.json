@@ -40,14 +40,14 @@
 
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],	
+			["s:4.0:1.8:0", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "ib:coordinate_system:180:-0.2", " ", " ", " ", " ", " "],			
+			[" ", "ib:coordinate_system:180:-0.2", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " "] 					
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			["origin", " ", " ", " ", " ", " ", " "],
@@ -71,8 +71,12 @@
 			}
 		},
 		"s": {
+			"type": "spawn_point",
+			"name": "Spawn Point",
+			"description": "Player spawn location using grid coordinates (s:x:y:z)",
 			"properties": {
-				"height": 5.5  
+				"coordinates": "0,1.8,0",
+				"note": "Format: s:x:y:z where x,z are grid coordinates and y is height in world space"
 			}
 		}
 	},
@@ -85,13 +89,6 @@
 			"direction": [-0.4, -0.7, -0.4],
 			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
-		}
-	},
-	"spawn_points": {
-		"default": {
-			"position": [2.5, 1.8, 6.0],
-			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - facing the central table"
 		}
 	},
 	"settings": {

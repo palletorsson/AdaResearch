@@ -133,11 +133,11 @@ const UTILITY_TYPES = {
 		"supports_parameters": true
 	},
 	"tc": {
-		"name": "transport_cube", 
-		"file": "transport_cube.tscn", 
+		"name": "transport_cube",
+		"file": "transport_cube.tscn",
 		"category": "transport",
 		"description": "Cube that carries players across voids with directional movement",
-		"supports_parameters": true  # distance:direction (e.g. "4:z" or "3.5:1,0,0")
+		"supports_parameters": true  # distance:direction[:auto] (e.g. "4:z", "3.5:1,0,0", "3:z:auto")
 	},
 	
 	# UI/Information utilities
