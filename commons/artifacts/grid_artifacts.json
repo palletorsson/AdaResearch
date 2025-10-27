@@ -1201,6 +1201,14 @@
 		"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
 		
 	},
+	"MarioSoundController": {
+		"name": "MarioSoundController",
+		"lookup_name": "MarioSoundController",
+		"description": "MarioSoundController.",
+		"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
+		
+	},
+
 	"sine_wave_controller": {
 		"name": "sine_wave_controller",
 		"lookup_name": "sine_wave_controller",
@@ -1237,6 +1245,13 @@
 		
 	},
 
+	"resonating_metallophone": {
+		"name": "resonating_metallophone",
+		"lookup_name": "resonating_metallophone",
+		"description": "resonating_metallophone",
+		"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+		
+	},
 	"bernini_columns": {
 		"name": "Bernini Columns",
 		"lookup_name": "bernini_columns",
@@ -1279,6 +1294,14 @@
 		"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
 
 	},
+	"SimpleOscillatingBridge": {
+		"name": "SimpleOscillatingBridge",
+		"lookup_name": "SimpleOscillatingBridge",
+		"description": "SimpleOscillatingBridge",
+		"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn",
+
+	},
+	
 	"wave_interference": {
 		"name": "Wave Interference",
 		"lookup_name": "wave_interference",

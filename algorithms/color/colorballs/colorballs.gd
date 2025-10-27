@@ -9,7 +9,7 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var ball_count: int = 20
 @export var min_ball_radius: float = 0.1  # 10cm radius
 @export var max_ball_radius: float = 0.1   # 10cm radius
-@export var ball_mass: float = 0.1
+@export var ball_mass: float = 0.01
 @export var ball_bounce: float = 0.8
 @export var ball_friction: float = 0.3
 

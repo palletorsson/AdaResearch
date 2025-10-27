@@ -404,3 +404,4 @@ func get_portal_stats() -> Dictionary:
 		"block_size": block_size,
 		"portal_thickness": portal_thickness
 	}
+

@@ -13,12 +13,15 @@ shader_parameter/width = 1.0
 shader_parameter/blur = 1.0
 shader_parameter/emission_strength = 2.0
 shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uy3c2"]
 
 [node name="SineSpace" type="Node3D"]
 script = ExtResource("1_yixp5")
-space_size = Vector2(9, 9)
+space_size = Vector2(11, 20)
 resolution = 50
 height_scale = 1.0
 

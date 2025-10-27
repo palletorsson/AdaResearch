@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4j8kxqvn5q7m"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/mariocontrol/MarioSoundController.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dmytaey0ov3m3" path="res://commons/interfaces/value_mapper_3d.tscn" id="2"]
+[ext_resource type="Script" path="res://algorithms/wavefunctions/mariocontrol/PlaySoundButton.gd" id="3"]
+
+[node name="MarioSoundController" type="Node3D"]
+script = ExtResource("1")
+
+[node name="ValueMapper3D" parent="." instance=ExtResource("2")]
+space_size = Vector3(0.6, 0.6, 0.6)
+output_x_min = 200.0
+output_x_max = 800.0
+output_y_min = 400.0
+output_y_max = 1200.0
+output_z_min = 2.0
+output_z_max = 12.0
+label_x = "Freq Start"
+label_y = "Freq End"
+label_z = "Decay Rate"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -6.0
+unit_size = 5.0
+max_distance = 30.0
+
+[node name="PlayButton" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, 0)
+script = ExtResource("3")

@@ -1,12 +1,12 @@
 extends Node3D
 
-const STEP_COUNT := 96
+const STEP_COUNT := 140
 const TOTAL_TURNS := 2.5
 const BASE_RADIUS := 1.6
 const WALKWAY_OFFSET := 0.9
-const STEP_RISE := 0.32
+const STEP_RISE := 0.10
 const STEP_THICKNESS := 0.22
-const STEP_WIDTH := 1.6
+const STEP_WIDTH := 2.0
 const MIN_STEP_DEPTH := 0.4
 const WAVE_AMPLITUDE := 0.45
 const WAVE_FREQUENCY := 2.0
@@ -16,7 +16,7 @@ var _step_material: StandardMaterial3D
 
 func _ready():
 	_step_material = _create_step_material()
-	_create_central_column()
+	#_create_central_column()
 	var step_data = _compute_step_data()
 	_create_staircase(step_data)
 	_create_start_marker(step_data)
@@ -125,6 +125,14 @@ func _create_staircase(step_data: Array) -> void:
 		var box_shape = BoxShape3D.new()
 		box_shape.size = box_mesh.size
 		collision_shape.shape = box_shape
+		
+		# Tilt the collision shape to match the slope
+		var slope_angle = atan(STEP_RISE / (current["radius"] * (TOTAL_TURNS * TAU / STEP_COUNT)))
+		collision_shape.rotation.x = slope_angle  # Rotate around X axis for forward slope
+		
+		static_body.add_child(collision_shape)
+		root.add_child(static_body)
+		
 		static_body.add_child(collision_shape)
 		root.add_child(static_body)
 
@@ -165,4 +173,3 @@ func _create_top_marker(step_data: Array):
 	marker.name = "Summit"
 	marker.position = last_pos + Vector3(0, STEP_THICKNESS * 0.5 + 0.05, 0) + radial * 0.4
 	add_child(marker)
-

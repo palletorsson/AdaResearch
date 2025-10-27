@@ -131,3 +131,4 @@ The Point info board can be placed in maps using:
 - `ib:point:1.5` - Raised 1.5 units
 
 It integrates seamlessly with the grid system's utility layer and VR interaction.
+

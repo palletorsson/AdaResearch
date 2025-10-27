@@ -172,7 +172,92 @@
 			"unlock_requirements": [],
 			"completion_rewards": ["array_explorer_badge", "grid_navigator_badge"]
 		},
+			"oscillation": {
+			"name": "fractals",
+			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
+			"difficulty": "beginner", 
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Piston primitive interactions",
+				"Tartan shader patterns (10x10)",
+				"Simple fish mesh modeling", 
+				"Radiodrama narrative integration"
+			],
+			"temps": [
+
+			],
+			"content": [
+				" One :  ",
+				" Two :  ", 
+				" Three :  ",
+				" Four :  ",
+				" Five :  ",
+				" Six :  ",
+				" Seven :  ",
+			],
+			"maps": [
+				"oscillation_1",
+				"oscillation_2", 
+				"oscillation_3",
+				"oscillation_4",
+				"oscillation_5",
+				"oscillation_6",
+				"oscillation_7",		
+			],
+			"return_to": "lab",
+			"unlock_requirements": ["array_tutorial"],
+			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
+			"lab_map": "Lab/map_data_post_fractals"
+		},
 		
+		"wavefunctions": {
+			"name": "Wavefunctions",
+			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
+			"difficulty": "intermediate",
+			"estimated_time": "20-30 minutes",
+			"learning_objectives": [
+				"Sine waves and harmonics",
+				"Spectral analysis",
+				"Audio-visualization",
+				"Wave interference"
+			],
+			"audio": {
+				"ambient_preset": "techno_noir_subtle",
+				"volume": -10.0,
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
+				}
+			},
+			"content": [
+				" Mario_Sound : Mario Sound Arcade simple_mario_slider",
+				" Sine_Space : Sine Space a space",
+				" Wave_Propagation : Wave Propagation Space",
+				" John_Cage: Audio scape",
+				" Bernini : Bernini columns",
+				" Four : Lines",
+				" Kusama: Kusama",
+			],
+			"maps": [
+		
+				"Wavefunctions_Sky_Stairs",
+				"WaveFunctions_Unit_Circle",				
+				"WaveFunctions_Mario_Sound",
+					"Wavefunctions_Resonating_Metallophone",
+				"WaveFunctions_Fourier_Form",
+				"WaveFunctions_Sine_Space",
+				"Wavefunctions_Cables",				
+				"WaveFunctions_3D_Wave_Propagation",
+				"WaveFunctions_John_Cage",
+				"Wavefunctions_Bernini",
+				"Wavefunctions_Four",
+				"WaveFunctions_Kusama",
+				"Wavefunctions_Six"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_wavefunctions",
+			"unlock_requirements": [],
+			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
+		},
 		"patterngeneration": {
 			"name": "Meshes & Textures",
 			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
@@ -406,43 +491,7 @@
 			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
 			"lab_map": "Lab/map_data_post_particles"
 		},
-		"oscillation": {
-			"name": "fractals",
-			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
-			"difficulty": "beginner", 
-			"estimated_time": "20-25 minutes",
-			"learning_objectives": [
-				"Piston primitive interactions",
-				"Tartan shader patterns (10x10)",
-				"Simple fish mesh modeling", 
-				"Radiodrama narrative integration"
-			],
-			"temps": [
-
-			],
-			"content": [
-				" One :  ",
-				" Two :  ", 
-				" Three :  ",
-				" Four :  ",
-				" Five :  ",
-				" Six :  ",
-				" Seven :  ",
-			],
-			"maps": [
-				"oscillation_1",
-				"oscillation_2", 
-				"oscillation_3",
-				"oscillation_4",
-				"oscillation_5",
-				"oscillation_6",
-				"oscillation_7",		
-			],
-			"return_to": "lab",
-			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
-			"lab_map": "Lab/map_data_post_fractals"
-		},
+	
 		"randomness_exploration": {
 			"name": "Randomness & Probability",
 			"description": "Explore concepts of randomness, probability, and statistical thinking",
@@ -493,52 +542,6 @@
 			"lab_map": "Lab/map_data_post_random",
 			"unlock_requirements": ["array_tutorial"],
 			"completion_rewards": ["probability_pioneer_badge", "chaos_explorer_badge"]
-		},
-		"wavefunctions": {
-			"name": "Wavefunctions",
-			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
-			"difficulty": "intermediate",
-			"estimated_time": "20-30 minutes",
-			"learning_objectives": [
-				"Sine waves and harmonics",
-				"Spectral analysis",
-				"Audio-visualization",
-				"Wave interference"
-			],
-			"audio": {
-				"ambient_preset": "techno_noir_subtle",
-				"volume": -10.0,
-				"interactive_sounds": {
-					"teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
-				}
-			},
-			"content": [
-				" Mario_Sound : Mario Sound Arcade simple_mario_slider",
-				" Sine_Space : Sine Space a space",
-				" Wave_Propagation : Wave Propagation Space",
-				" John_Cage: Audio scape",
-				" Bernini : Bernini columns",
-				" Four : Lines",
-				" Kusama: Kusama",
-			],
-			"maps": [
-				"WaveFunctions_Mario_Sound",
-				"WaveFunctions_Unit_Circle",
-				"WaveFunctions_Fourier_Form",
-				"WaveFunctions_Sine_Space",
-				"Wavefunctions_Cables",
-				"Wavefunctions_Sky_Stairs",
-				"WaveFunctions_3D_Wave_Propagation",
-				"WaveFunctions_John_Cage",
-				"Wavefunctions_Bernini",
-				"Wavefunctions_Four",
-				"WaveFunctions_Kusama",
-				"Wavefunctions_Six"
-			],
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_wavefunctions",
-			"unlock_requirements": [],
-			"completion_rewards": ["wave_researcher_badge", "spectral_sleuth_badge"]
 		},
 
 		"noise": {
