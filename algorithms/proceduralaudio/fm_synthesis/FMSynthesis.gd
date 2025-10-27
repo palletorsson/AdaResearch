@@ -9,10 +9,100 @@ var spectrum_nodes = []
 var modulation_path_nodes = []
 var spectrum_resolution = 32
 
+# Audio synthesis
+var sample_rate := 44100.0
+var audio_stream: AudioStreamGenerator
+var audio_player: AudioStreamPlayer
+var audio_playback: AudioStreamGeneratorPlayback
+var audio_buffer_size := 512
+var carrier_phase := 0.0
+var modulator_phase := 0.0
+var vibrato_phase := 0.0
+var feedback_state := 0.0
+var theme_sequence := ["queer", "sci_fi", "cyberpunk", "epic"]
+var current_theme_index := 0
+var current_theme := ""
+var theme_cycle_duration := 14.0
+var theme_timer := 0.0
+var current_theme_profile := {}
+var theme_profiles := {
+	"queer": {
+		"carrier": 220.0,
+		"carrier_depth": 80.0,
+		"carrier_rate": 0.28,
+		"ratio": 1.5,
+		"ratio_depth": 0.4,
+		"ratio_rate": 0.25,
+		"index": 5.5,
+		"index_depth": 1.8,
+		"index_rate": 0.35,
+		"feedback": 0.18,
+		"harmonic_mix": 0.28,
+		"gain": 0.75,
+		"drive": 0.22,
+		"vibrato_depth": 0.012,
+		"vibrato_rate": 4.0
+	},
+	"sci_fi": {
+		"carrier": 340.0,
+		"carrier_depth": 140.0,
+		"carrier_rate": 0.35,
+		"ratio": 2.0,
+		"ratio_depth": 0.6,
+		"ratio_rate": 0.3,
+		"index": 7.2,
+		"index_depth": 2.0,
+		"index_rate": 0.4,
+		"feedback": 0.25,
+		"harmonic_mix": 0.35,
+		"gain": 0.7,
+		"drive": 0.3,
+		"vibrato_depth": 0.008,
+		"vibrato_rate": 6.0
+	},
+	"cyberpunk": {
+		"carrier": 150.0,
+		"carrier_depth": 110.0,
+		"carrier_rate": 0.22,
+		"ratio": 0.75,
+		"ratio_depth": 0.35,
+		"ratio_rate": 0.2,
+		"index": 9.0,
+		"index_depth": 2.5,
+		"index_rate": 0.28,
+		"feedback": 0.42,
+		"harmonic_mix": 0.4,
+		"gain": 0.8,
+		"drive": 0.45,
+		"vibrato_depth": 0.02,
+		"vibrato_rate": 2.5
+	},
+	"epic": {
+		"carrier": 260.0,
+		"carrier_depth": 120.0,
+		"carrier_rate": 0.26,
+		"ratio": 1.0,
+		"ratio_depth": 0.3,
+		"ratio_rate": 0.22,
+		"index": 6.0,
+		"index_depth": 1.5,
+		"index_rate": 0.32,
+		"feedback": 0.2,
+		"harmonic_mix": 0.25,
+		"gain": 0.78,
+		"drive": 0.27,
+		"vibrato_depth": 0.015,
+		"vibrato_rate": 3.5
+	}
+}
+
 func _ready():
+	randomize()
 	create_modulation_path()
 	create_output_spectrum()
 	setup_materials()
+	setup_audio_synthesis()
+	apply_theme_profile(theme_sequence[0])
 
 func create_modulation_path():
 	var path_parent = $ModulationPath
@@ -103,15 +193,34 @@ func setup_materials():
 
 func _process(delta):
 	time += delta
-	
-	# Update FM parameters
-	carrier_freq = 440.0 + sin(time * 0.2) * 200.0
-	modulator_freq = carrier_freq * fm_ratio
-	modulation_index = 3.0 + sin(time * 0.3) * 4.0
-	fm_ratio = 1.0 + sin(time * 0.15) * 1.5
-	
+
+	if current_theme_profile.is_empty():
+		carrier_freq = 440.0 + sin(time * 0.2) * 200.0
+		fm_ratio = 1.0 + sin(time * 0.15) * 1.5
+		modulator_freq = carrier_freq * fm_ratio
+		modulation_index = 3.0 + sin(time * 0.3) * 4.0
+	else:
+		var profile: Dictionary = current_theme_profile
+		var carrier_base = profile.get("carrier", carrier_freq)
+		var carrier_depth = profile.get("carrier_depth", 120.0)
+		var carrier_rate = profile.get("carrier_rate", 0.28)
+		carrier_freq = carrier_base + sin(time * carrier_rate) * carrier_depth
+
+		var ratio_base = profile.get("ratio", fm_ratio)
+		var ratio_depth = profile.get("ratio_depth", 0.3)
+		var ratio_rate = profile.get("ratio_rate", 0.25)
+		fm_ratio = max(0.1, ratio_base + sin(time * ratio_rate) * ratio_depth)
+		modulator_freq = carrier_freq * fm_ratio
+
+		var index_base = profile.get("index", modulation_index)
+		var index_depth = profile.get("index_depth", 1.5)
+		var index_rate = profile.get("index_rate", 0.35)
+		modulation_index = max(0.05, index_base + sin(time * index_rate) * index_depth)
+
 	animate_fm_synthesis()
 	animate_controls()
+	update_theme_cycle(delta)
+	generate_audio_samples()
 
 func animate_fm_synthesis():
 	# Animate carrier oscillator
@@ -273,3 +382,99 @@ func animate_controls():
 	if modulator_material:
 		var mod_intensity = (sin(time * modulator_freq * 2.0 * PI) + 1.0) * 0.5
 		modulator_material.emission = Color(0.1, 0.1, 0.5, 1.0) * (0.5 + mod_intensity)
+
+func setup_audio_synthesis():
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.2
+
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = -3.0
+	add_child(audio_player)
+	audio_player.play()
+
+	audio_playback = audio_player.get_stream_playback()
+	reset_phases()
+
+func ensure_playback() -> bool:
+	if audio_playback:
+		return true
+	if not audio_player:
+		return false
+	audio_playback = audio_player.get_stream_playback()
+	return audio_playback != null
+
+func reset_phases():
+	carrier_phase = 0.0
+	modulator_phase = 0.0
+	vibrato_phase = 0.0
+	feedback_state = 0.0
+
+func apply_theme_profile(theme_name: String):
+	if not theme_profiles.has(theme_name):
+		return
+
+	current_theme = theme_name
+	current_theme_index = theme_sequence.find(theme_name)
+	if current_theme_index == -1:
+		current_theme_index = 0
+
+	current_theme_profile = theme_profiles[theme_name]
+	carrier_freq = current_theme_profile.get("carrier", carrier_freq)
+	fm_ratio = current_theme_profile.get("ratio", fm_ratio)
+	modulator_freq = carrier_freq * fm_ratio
+	modulation_index = current_theme_profile.get("index", modulation_index)
+	reset_phases()
+	theme_timer = 0.0
+	print("FMSynthesis: activated %s theme" % theme_name)
+
+func update_theme_cycle(delta: float):
+	theme_timer += delta
+	if theme_timer >= theme_cycle_duration:
+		theme_timer = 0.0
+		advance_theme()
+
+func advance_theme():
+	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
+	apply_theme_profile(theme_sequence[current_theme_index])
+
+func generate_audio_samples():
+	if not audio_player or not audio_player.playing:
+		return
+	if current_theme_profile.is_empty():
+		return
+	if not ensure_playback():
+		return
+
+	var available = audio_playback.get_frames_available()
+	if available < audio_buffer_size:
+		return
+
+	var frames = min(audio_buffer_size, available)
+	var profile: Dictionary = current_theme_profile
+	var feedback = profile.get("feedback", 0.0)
+	var harmonic_mix = profile.get("harmonic_mix", 0.25)
+	var gain = profile.get("gain", 0.7)
+	var drive = profile.get("drive", 0.25)
+	var vibrato_depth = profile.get("vibrato_depth", 0.0)
+	var vibrato_rate = profile.get("vibrato_rate", 5.0)
+
+	for _i in range(frames):
+		vibrato_phase = wrapf(vibrato_phase + vibrato_rate * TAU / sample_rate, 0.0, TAU)
+		var vibrato = sin(vibrato_phase) * vibrato_depth
+		var mod_freq = modulator_freq * (1.0 + vibrato)
+		modulator_phase = wrapf(modulator_phase + mod_freq * TAU / sample_rate, 0.0, TAU)
+		var mod_signal = sin(modulator_phase + feedback_state * feedback)
+		var instantaneous_freq = carrier_freq + mod_signal * modulation_index * modulator_freq
+		carrier_phase = wrapf(carrier_phase + instantaneous_freq * TAU / sample_rate, 0.0, TAU)
+		var sample = sin(carrier_phase)
+		sample += sin(carrier_phase * 2.0) * harmonic_mix
+		sample = soft_clip(sample * gain, drive)
+		feedback_state = sample
+		audio_playback.push_frame(Vector2(sample, sample))
+
+func soft_clip(value: float, drive: float) -> float:
+	var amount = 1.0 + clamp(drive, 0.0, 1.0) * 4.5
+	var y = value * amount
+	return clamp(y / (1.0 + abs(y)), -1.0, 1.0)

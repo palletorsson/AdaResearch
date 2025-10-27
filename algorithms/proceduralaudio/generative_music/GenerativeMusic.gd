@@ -18,6 +18,98 @@ var markov_chain := {}
 var current_note := 0
 var note_history := []
 
+# Audio synthesis
+var sample_rate := 44100.0
+var audio_stream: AudioStreamGenerator
+var audio_player: AudioStreamPlayer
+var audio_playback: AudioStreamGeneratorPlayback
+var audio_buffer_size := 512
+var active_notes := []
+var audio_pad_phase := 0.0
+var audio_pad_frequency := 140.0
+var wave_mix := [0.6, 0.3, 0.1]
+var vibrato_phase := 0.0
+var vibrato_rate := 5.0
+var vibrato_depth := 0.0
+var pan_spread := 0.3
+var global_gain := 0.6
+var theme_noise := 0.02
+var bass_interval := -12
+var bass_probability := 0.4
+var note_decay := 0.995
+var theme_sequence := ["queer", "sci_fi", "cyberpunk", "epic"]
+var current_theme_index := 0
+var current_theme := ""
+var theme_cycle_duration := 24.0
+var theme_timer := 0.0
+var current_theme_profile := {}
+var theme_profiles := {
+	"queer": {
+		"scale": [0, 3, 5, 7, 10],
+		"tempo": 112.0,
+		"key": 60,
+		"wave_mix": [0.6, 0.3, 0.15],
+		"vibrato_depth": 0.012,
+		"vibrato_rate": 4.5,
+		"pan_spread": 0.5,
+		"global_gain": 0.65,
+		"bass_interval": -12,
+		"bass_probability": 0.55,
+		"note_decay": 0.996,
+		"pad_freq": 190.0,
+		"noise": 0.02,
+		"accent_prob": 0.4
+	},
+	"sci_fi": {
+		"scale": [0, 2, 3, 6, 8, 11],
+		"tempo": 128.0,
+		"key": 62,
+		"wave_mix": [0.4, 0.4, 0.2],
+		"vibrato_depth": 0.008,
+		"vibrato_rate": 6.0,
+		"pan_spread": 0.35,
+		"global_gain": 0.6,
+		"bass_interval": -12,
+		"bass_probability": 0.4,
+		"note_decay": 0.993,
+		"pad_freq": 240.0,
+		"noise": 0.03,
+		"accent_prob": 0.25
+	},
+	"cyberpunk": {
+		"scale": [0, 1, 3, 5, 7, 10],
+		"tempo": 132.0,
+		"key": 57,
+		"wave_mix": [0.3, 0.45, 0.25],
+		"vibrato_depth": 0.01,
+		"vibrato_rate": 5.5,
+		"pan_spread": 0.6,
+		"global_gain": 0.7,
+		"bass_interval": -12,
+		"bass_probability": 0.65,
+		"note_decay": 0.99,
+		"pad_freq": 120.0,
+		"noise": 0.04,
+		"accent_prob": 0.5
+	},
+	"epic": {
+		"scale": [0, 2, 4, 5, 7, 9, 11],
+		"tempo": 96.0,
+		"key": 55,
+		"wave_mix": [0.55, 0.25, 0.2],
+		"vibrato_depth": 0.009,
+		"vibrato_rate": 3.8,
+		"pan_spread": 0.4,
+		"global_gain": 0.68,
+		"bass_interval": -12,
+		"bass_probability": 0.5,
+		"note_decay": 0.997,
+		"pad_freq": 170.0,
+		"noise": 0.015,
+		"accent_prob": 0.3
+	}
+}
+
 # Cellular automata for rhythm
 var rhythm_cells := []
 var rhythm_generations := []
@@ -27,8 +119,9 @@ var fractal_iteration := 0
 var fractal_seed := [0, 2, 4, 2]
 
 func _ready():
-	beat_duration = 60.0 / tempo
-	initialize_markov_chain()
+	randomize()
+	setup_audio_synthesis()
+	apply_theme_profile(theme_sequence[0])
 	initialize_rhythm_ca()
 	initialize_fractal_system()
 
@@ -41,20 +134,34 @@ func _process(delta):
 	animate_markov_chain()
 	animate_cellular_automata()
 	generate_fractal_melodies()
+	update_theme_cycle(delta)
+	generate_audio_samples()
 
 func initialize_markov_chain():
-	# Create transition probabilities for notes
-	markov_chain = {
-		0: {2: 0.4, 4: 0.3, 7: 0.3},  # Tonic to other notes
-		2: {0: 0.3, 4: 0.4, 5: 0.3},  # Supertonic transitions
-		4: {2: 0.3, 5: 0.4, 7: 0.3},  # Mediant transitions
-		5: {4: 0.4, 7: 0.3, 9: 0.3},  # Subdominant transitions
-		7: {0: 0.4, 5: 0.3, 9: 0.3},  # Dominant transitions
-		9: {7: 0.4, 11: 0.3, 0: 0.3}, # Submediant transitions
-		11: {0: 0.5, 9: 0.3, 7: 0.2}  # Leading tone transitions
-	}
-	current_note = 0
-	note_history = [0]
+	markov_chain = {}
+	if current_scale.is_empty():
+		current_scale = [0, 2, 4, 5, 7, 9, 11]
+
+	for i in range(current_scale.size()):
+		var degree = current_scale[i]
+		var transitions := {}
+		for offset in [-2, -1, 1, 2]:
+			var idx = i + offset
+			if idx >= 0 and idx < current_scale.size():
+				var target = current_scale[idx]
+				transitions[target] = transitions.get(target, 0.0) + 1.0
+		if transitions.is_empty():
+			transitions[degree] = 1.0
+
+		var total := 0.0
+		for value in transitions.values():
+			total += value
+		for key in transitions.keys():
+			transitions[key] = transitions[key] / total
+		markov_chain[degree] = transitions
+
+	current_note = current_scale[0]
+	note_history = [current_note]
 
 func initialize_rhythm_ca():
 	# Initialize 1D cellular automaton for rhythm generation
@@ -162,19 +269,29 @@ func animate_markov_chain():
 					container.add_child(connection)
 
 func generate_next_markov_note():
-	if current_note in markov_chain:
-		var transitions = markov_chain[current_note]
-		var random_value = randf()
-		var cumulative_prob = 0.0
-		
-		for next_note in transitions:
-			cumulative_prob += transitions[next_note]
-			if random_value <= cumulative_prob:
-				current_note = next_note
-				note_history.append(current_note)
-				if note_history.size() > 10:
-					note_history.remove_at(0)
-				break
+	if not markov_chain.has(current_note):
+		return
+
+	var transitions: Dictionary = markov_chain[current_note]
+	if transitions.is_empty():
+		return
+
+	var random_value = randf()
+	var cumulative = 0.0
+
+	for next_note in transitions.keys():
+		cumulative += transitions[next_note]
+		if random_value <= cumulative:
+			current_note = next_note
+			note_history.append(current_note)
+			if note_history.size() > 10:
+				note_history.remove_at(0)
+			var accent = 1.0
+			if not current_theme_profile.is_empty():
+				var accent_prob = current_theme_profile.get("accent_prob", 0.3)
+				accent = 1.2 if randf() < accent_prob else 0.9
+			trigger_audio_note(current_note, accent)
+			break
 
 func get_transition_probability(from_note: int, to_note: int) -> float:
 	if from_note in markov_chain and to_note in markov_chain[from_note]:
@@ -192,6 +309,11 @@ func animate_cellular_automata():
 	if beat_timer > beat_duration:
 		beat_timer = 0.0
 		update_rhythm_ca()
+		if current_theme_profile.is_empty():
+			trigger_bass_note()
+		else:
+			if rhythm_cells[0] == 1 or randf() < bass_probability:
+				trigger_bass_note()
 	
 	# Visualize current generation
 	for i in range(rhythm_cells.size()):
@@ -355,3 +477,159 @@ func create_weighted_connection(from: Vector3, to: Vector3, weight: float) -> CS
 	material.emission = Color(1.0, weight, 0.0) * weight * 0.5
 	
 	return connection
+
+func setup_audio_synthesis():
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.2
+
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = -6.0
+	add_child(audio_player)
+	audio_player.play()
+
+	audio_playback = audio_player.get_stream_playback()
+	reset_audio_state()
+
+func ensure_playback() -> bool:
+	if audio_playback:
+		return true
+	if not audio_player:
+		return false
+	audio_playback = audio_player.get_stream_playback()
+	return audio_playback != null
+
+func reset_audio_state():
+	active_notes.clear()
+	audio_pad_phase = 0.0
+	vibrato_phase = 0.0
+
+func apply_theme_profile(theme_name: String):
+	if not theme_profiles.has(theme_name):
+		return
+
+	current_theme = theme_name
+	current_theme_index = theme_sequence.find(theme_name)
+	if current_theme_index == -1:
+		current_theme_index = 0
+
+	current_theme_profile = theme_profiles[theme_name]
+	current_scale = current_theme_profile.get("scale", current_scale)
+	current_key = current_theme_profile.get("key", current_key)
+	tempo = current_theme_profile.get("tempo", tempo)
+	beat_duration = 60.0 / tempo
+	wave_mix = current_theme_profile.get("wave_mix", wave_mix)
+	vibrato_depth = current_theme_profile.get("vibrato_depth", vibrato_depth)
+	vibrato_rate = current_theme_profile.get("vibrato_rate", vibrato_rate)
+	pan_spread = current_theme_profile.get("pan_spread", pan_spread)
+	global_gain = current_theme_profile.get("global_gain", global_gain)
+	bass_interval = current_theme_profile.get("bass_interval", bass_interval)
+	bass_probability = current_theme_profile.get("bass_probability", bass_probability)
+	note_decay = current_theme_profile.get("note_decay", note_decay)
+	audio_pad_frequency = current_theme_profile.get("pad_freq", audio_pad_frequency)
+	theme_noise = current_theme_profile.get("noise", theme_noise)
+	note_timer = 0.0
+	beat_timer = 0.0
+	reset_audio_state()
+	initialize_markov_chain()
+	theme_timer = 0.0
+	print("GenerativeMusic: activated %s theme" % theme_name)
+
+func update_theme_cycle(delta: float):
+	theme_timer += delta
+	if theme_timer >= theme_cycle_duration:
+		theme_timer = 0.0
+		advance_theme()
+
+func advance_theme():
+	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
+	apply_theme_profile(theme_sequence[current_theme_index])
+
+func trigger_audio_note(scale_degree: int, accent := 1.0):
+	if current_scale.is_empty():
+		return
+	var midi_note = current_key + scale_degree
+	var freq = midi_to_freq(midi_note)
+	var note = {
+		"phase": 0.0,
+		"freq": freq,
+		"velocity": accent,
+		"envelope": 1.0,
+		"decay": note_decay,
+		"pan": clamp(randf_range(-pan_spread, pan_spread), -1.0, 1.0),
+		"type": "lead"
+	}
+	active_notes.append(note)
+
+func trigger_bass_note():
+	var root_degree = current_scale[0] if current_scale.size() > 0 else 0
+	var midi_note = current_key + root_degree + bass_interval
+	var note = {
+		"phase": 0.0,
+		"freq": midi_to_freq(midi_note),
+		"velocity": 0.8,
+		"envelope": 1.0,
+		"decay": pow(note_decay, 0.6),
+		"pan": 0.0,
+		"type": "bass"
+	}
+	active_notes.append(note)
+
+func generate_audio_samples():
+	if not audio_player or not audio_player.playing:
+		return
+	if not ensure_playback():
+		return
+
+	var available = audio_playback.get_frames_available()
+	if available < audio_buffer_size:
+		return
+
+	var frames = min(audio_buffer_size, available)
+
+	for _i in range(frames):
+		vibrato_phase = wrapf(vibrato_phase + vibrato_rate * TAU / sample_rate, 0.0, TAU)
+		var vibrato = sin(vibrato_phase) * vibrato_depth
+		var left = 0.0
+		var right = 0.0
+		var idx = 0
+		while idx < active_notes.size():
+			var note = active_notes[idx]
+			var freq = note.freq * (1.0 + vibrato)
+			note.phase = wrapf(note.phase + freq * TAU / sample_rate, 0.0, TAU)
+			var wave = generate_wave_sample(note.phase, note.type)
+			var sample = wave * note.envelope * note.velocity
+			left += sample * (1.0 - note.pan)
+			right += sample * (1.0 + note.pan)
+			note.envelope *= note.decay
+			if note.envelope < 0.001:
+				active_notes.remove_at(idx)
+				continue
+			active_notes[idx] = note
+			idx += 1
+
+		audio_pad_phase = wrapf(audio_pad_phase + audio_pad_frequency * TAU / sample_rate, 0.0, TAU)
+		var pad = sin(audio_pad_phase) * 0.15
+		var shimmer = sin(audio_pad_phase * 0.5 + time * 0.5) * 0.1
+		var noise = randf_range(-1.0, 1.0) * theme_noise * 0.2
+		var left_sample = clamp((left + pad + shimmer + noise) * global_gain, -1.0, 1.0)
+		var right_sample = clamp((right + pad - shimmer + noise) * global_gain, -1.0, 1.0)
+		audio_playback.push_frame(Vector2(left_sample, right_sample))
+
+func generate_wave_sample(phase: float, note_type: String) -> float:
+	var sine = sin(phase)
+	var saw = 2.0 * (phase / TAU - floor(phase / TAU + 0.5))
+	var triangle = (2.0 / PI) * asin(sine)
+	var square = 1.0 if sine >= 0.0 else -1.0
+	var base = wave_mix[0] * sine + wave_mix[1] * saw + wave_mix[2] * triangle
+	match note_type:
+		"bass":
+			return 0.7 * sine + 0.3 * square
+		"pad":
+			return 0.6 * triangle + 0.4 * sine
+		_:
+			return base
+
+func midi_to_freq(midi_note: int) -> float:
+	return 440.0 * pow(2.0, (midi_note - 69) / 12.0)

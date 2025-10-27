@@ -30,11 +30,118 @@ enum OscillatorType {
 
 var oscillator_count = 4
 
+# Audio synthesis
+var sample_rate := 44100.0
+var audio_stream: AudioStreamGenerator
+var audio_player: AudioStreamPlayer
+var audio_playback: AudioStreamGeneratorPlayback
+var audio_buffer_size := 512
+var audio_oscillators := []
+var audio_noise_amount := 0.12
+var audio_gain := 0.6
+var base_frequency := 110.0
+var target_fundamental := 110.0
+var lfo_phase := 0.0
+var lfo_rate := 0.4
+var lfo_depth := 0.25
+var filter_drive := 0.35
+var filter_lp := 0.0
+var filter_bp := 0.0
+var filter_hp := 0.0
+var theme_sequence := ["queer", "sci_fi", "cyberpunk", "epic"]
+var current_theme_index := 0
+var current_theme := ""
+var theme_cycle_duration := 18.0
+var theme_timer := 0.0
+var current_theme_profile := {}
+var theme_filter_sequence := []
+var theme_filter_index := 0
+var theme_profiles := {
+	"queer": {
+		"fundamental": 196.0,
+		"filter_frequency": 1200.0,
+		"resonance": 0.82,
+		"drive": 0.32,
+		"noise": 0.16,
+		"gain": 0.65,
+		"lfo_rate": 0.42,
+		"lfo_depth": 0.28,
+		"filter_sweep": 160.0,
+		"sweep_rate": 0.32,
+		"sweep": 140.0,
+		"filters": [FilterType.BAND_PASS, FilterType.LOW_PASS],
+		"oscillators": [
+			{"type": OscillatorType.SAWTOOTH, "gain": 0.55, "detune": -0.01},
+			{"type": OscillatorType.TRIANGLE, "gain": 0.42, "detune": 0.012},
+			{"type": OscillatorType.NOISE, "gain": 0.18, "detune": 0.0}
+		]
+	},
+	"sci_fi": {
+		"fundamental": 310.0,
+		"filter_frequency": 1800.0,
+		"resonance": 0.65,
+		"drive": 0.25,
+		"noise": 0.1,
+		"gain": 0.55,
+		"lfo_rate": 0.55,
+		"lfo_depth": 0.18,
+		"filter_sweep": 220.0,
+		"sweep_rate": 0.45,
+		"sweep": 200.0,
+		"filters": [FilterType.HIGH_PASS, FilterType.NOTCH],
+		"oscillators": [
+			{"type": OscillatorType.SAWTOOTH, "gain": 0.5, "detune": 0.0},
+			{"type": OscillatorType.SQUARE, "gain": 0.45, "detune": 0.015}
+		]
+	},
+	"cyberpunk": {
+		"fundamental": 140.0,
+		"filter_frequency": 780.0,
+		"resonance": 0.9,
+		"drive": 0.55,
+		"noise": 0.25,
+		"gain": 0.7,
+		"lfo_rate": 0.3,
+		"lfo_depth": 0.35,
+		"filter_sweep": 190.0,
+		"sweep_rate": 0.28,
+		"sweep": 160.0,
+		"filters": [FilterType.LOW_PASS, FilterType.BAND_PASS],
+		"oscillators": [
+			{"type": OscillatorType.SAWTOOTH, "gain": 0.6, "detune": -0.018},
+			{"type": OscillatorType.SQUARE, "gain": 0.5, "detune": 0.02},
+			{"type": OscillatorType.NOISE, "gain": 0.22, "detune": 0.0}
+		]
+	},
+	"epic": {
+		"fundamental": 260.0,
+		"filter_frequency": 1450.0,
+		"resonance": 0.7,
+		"drive": 0.38,
+		"noise": 0.12,
+		"gain": 0.62,
+		"lfo_rate": 0.36,
+		"lfo_depth": 0.22,
+		"filter_sweep": 210.0,
+		"sweep_rate": 0.3,
+		"sweep": 220.0,
+		"filters": [FilterType.LOW_PASS, FilterType.NOTCH, FilterType.BAND_PASS],
+		"oscillators": [
+			{"type": OscillatorType.SAWTOOTH, "gain": 0.52, "detune": -0.008},
+			{"type": OscillatorType.TRIANGLE, "gain": 0.4, "detune": 0.01},
+			{"type": OscillatorType.SQUARE, "gain": 0.28, "detune": 0.0}
+		]
+	}
+}
+
 func _ready():
+	randomize()
 	create_oscillators()
 	create_filter_stage()
 	create_spectrum_display()
 	setup_materials()
+	setup_audio_synthesis()
+	apply_theme_profile(theme_sequence[0])
 
 func create_oscillators():
 	var osc_parent = $Oscillators
@@ -152,20 +259,34 @@ func setup_materials():
 func _process(delta):
 	time += delta
 	filter_timer += delta
-	
-	# Switch filter types
-	if filter_timer >= filter_interval:
+
+	if theme_filter_sequence.size() > 0 and filter_timer >= filter_interval:
 		filter_timer = 0.0
-		current_filter = (current_filter + 1) % FilterType.size()
-	
-	# Update filter parameters
-	filter_frequency = 500.0 + sin(time * 0.4) * 400.0
-	filter_resonance = 0.3 + cos(time * 0.3) * 0.4
-	
+		theme_filter_index = (theme_filter_index + 1) % theme_filter_sequence.size()
+		current_filter = theme_filter_sequence[theme_filter_index]
+
+	if current_theme_profile.is_empty():
+		filter_frequency = 500.0 + sin(time * 0.4) * 400.0
+		filter_resonance = 0.3 + cos(time * 0.3) * 0.4
+	else:
+		var profile: Dictionary = current_theme_profile
+		lfo_rate = profile.get("lfo_rate", lfo_rate)
+		lfo_depth = profile.get("lfo_depth", lfo_depth)
+		target_fundamental = profile.get("fundamental", target_fundamental)
+		var sweep = profile.get("sweep", 180.0)
+		var sweep_rate = profile.get("sweep_rate", 0.35)
+		filter_frequency = lerp(filter_frequency, profile.get("filter_frequency", filter_frequency) + sin(time * sweep_rate) * sweep, 0.08)
+		filter_resonance = clamp(lerp(filter_resonance, profile.get("resonance", filter_resonance), 0.1), 0.05, 1.25)
+		base_frequency = lerp(base_frequency, target_fundamental, 0.02)
+
+	lfo_phase = wrapf(lfo_phase + lfo_rate * TAU * delta, 0.0, TAU)
+
 	animate_oscillators()
 	animate_filter()
 	animate_spectrum()
 	animate_controls()
+	update_theme_cycle(delta)
+	generate_audio_samples()
 
 func animate_oscillators():
 	# Animate each oscillator's harmonics
@@ -387,3 +508,169 @@ func get_filter_name() -> String:
 			return "Notch"
 		_:
 			return "Unknown"
+
+func setup_audio_synthesis():
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.2
+
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = -3.0
+	add_child(audio_player)
+	audio_player.play()
+
+	audio_playback = audio_player.get_stream_playback()
+	rebuild_audio_oscillators()
+	reset_filter_state()
+
+func ensure_playback() -> bool:
+	if audio_playback:
+		return true
+	if not audio_player:
+		return false
+	audio_playback = audio_player.get_stream_playback()
+	return audio_playback != null
+
+func apply_theme_profile(theme_name: String):
+	if not theme_profiles.has(theme_name):
+		return
+
+	current_theme = theme_name
+	current_theme_index = theme_sequence.find(theme_name)
+	if current_theme_index == -1:
+		current_theme_index = 0
+
+	current_theme_profile = theme_profiles[theme_name]
+	base_frequency = current_theme_profile.get("fundamental", base_frequency)
+	target_fundamental = base_frequency
+	filter_frequency = current_theme_profile.get("filter_frequency", filter_frequency)
+	filter_resonance = current_theme_profile.get("resonance", filter_resonance)
+	filter_drive = current_theme_profile.get("drive", filter_drive)
+	audio_noise_amount = current_theme_profile.get("noise", audio_noise_amount)
+	audio_gain = current_theme_profile.get("gain", audio_gain)
+	lfo_rate = current_theme_profile.get("lfo_rate", lfo_rate)
+	lfo_depth = current_theme_profile.get("lfo_depth", lfo_depth)
+	theme_filter_sequence = current_theme_profile.get("filters", [current_theme_profile.get("filter_type", FilterType.LOW_PASS)])
+	theme_filter_index = 0
+	if theme_filter_sequence.size() > 0:
+		current_filter = theme_filter_sequence[0]
+	reset_filter_state()
+	rebuild_audio_oscillators()
+	theme_timer = 0.0
+	print("SubtractiveSynthesis: activated %s theme" % theme_name)
+
+func rebuild_audio_oscillators():
+	audio_oscillators.clear()
+	if current_theme_profile.is_empty():
+		return
+
+	var osc_settings: Array = current_theme_profile.get("oscillators", [])
+	if osc_settings.is_empty():
+		osc_settings = [
+			{"type": OscillatorType.SAWTOOTH, "gain": 0.6, "detune": 0.0}
+		]
+
+	for osc_data in osc_settings:
+		var osc = {
+			"type": osc_data.get("type", OscillatorType.SAWTOOTH),
+			"gain": osc_data.get("gain", 0.5),
+			"detune": osc_data.get("detune", 0.0),
+			"phase": 0.0
+		}
+		audio_oscillators.append(osc)
+
+func reset_filter_state():
+	filter_lp = 0.0
+	filter_bp = 0.0
+	filter_hp = 0.0
+
+func update_theme_cycle(delta: float):
+	theme_timer += delta
+	if theme_timer >= theme_cycle_duration:
+		theme_timer = 0.0
+		advance_theme()
+
+func advance_theme():
+	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
+	apply_theme_profile(theme_sequence[current_theme_index])
+
+func generate_audio_samples():
+	if not audio_player or not audio_player.playing:
+		return
+	if current_theme_profile.is_empty():
+		return
+	if not ensure_playback():
+		return
+
+	var available = audio_playback.get_frames_available()
+	if available < audio_buffer_size:
+		return
+
+	var frames = min(audio_buffer_size, available)
+	var profile: Dictionary = current_theme_profile
+	var resonance = clamp(profile.get("resonance", filter_resonance), 0.05, 1.25)
+	var filter_sweep = profile.get("filter_sweep", 180.0)
+	var filter_lfo_rate = profile.get("sweep_rate", 0.3)
+
+	for _i in range(frames):
+		var lfo_value = sin(lfo_phase) * lfo_depth
+		lfo_phase = wrapf(lfo_phase + lfo_rate * TAU / sample_rate, 0.0, TAU)
+
+		var osc_sum = 0.0
+		for osc in audio_oscillators:
+			var osc_freq = base_frequency * (1.0 + osc.detune) + base_frequency * lfo_value
+			var increment = osc_freq * TAU / sample_rate
+			osc.phase = wrapf(osc.phase + increment, 0.0, TAU)
+			osc_sum += waveform_sample(osc.type, osc.phase) * osc.gain
+
+		var noise_component = randf_range(-1.0, 1.0) * audio_noise_amount
+		var raw_signal = (osc_sum + noise_component) * audio_gain
+
+		var cutoff = profile.get("filter_frequency", filter_frequency) + sin(time * filter_lfo_rate) * filter_sweep
+		var filtered = process_filter_sample(raw_signal, cutoff, resonance)
+		var driven = soft_clip(filtered, filter_drive)
+		var output = clamp(driven, -1.0, 1.0)
+
+		audio_playback.push_frame(Vector2(output, output))
+
+func process_filter_sample(input_signal: float, cutoff: float, resonance: float) -> float:
+	cutoff = clamp(cutoff, 60.0, sample_rate * 0.45)
+	var g = 2.0 * sin(PI * cutoff / sample_rate)
+	var r = clamp(resonance, 0.01, 1.4)
+	filter_lp += g * filter_bp
+	filter_hp = input_signal - filter_lp - r * filter_bp
+	filter_bp += g * filter_hp
+	filter_lp = clamp(filter_lp, -2.0, 2.0)
+	filter_bp = clamp(filter_bp, -2.0, 2.0)
+	filter_hp = clamp(filter_hp, -2.0, 2.0)
+
+	match current_filter:
+		FilterType.LOW_PASS:
+			return filter_lp
+		FilterType.HIGH_PASS:
+			return filter_hp
+		FilterType.BAND_PASS:
+			return filter_bp
+		FilterType.NOTCH:
+			return filter_hp + filter_lp
+		_:
+			return input_signal
+
+func waveform_sample(osc_type: int, phase: float) -> float:
+	match osc_type:
+		OscillatorType.SAWTOOTH:
+			return 2.0 * (phase / TAU - floor(phase / TAU + 0.5))
+		OscillatorType.SQUARE:
+			return 1.0 if sin(phase) >= 0.0 else -1.0
+		OscillatorType.TRIANGLE:
+			return (2.0 / PI) * asin(sin(phase))
+		OscillatorType.NOISE:
+			return randf_range(-1.0, 1.0)
+		_:
+			return sin(phase)
+
+func soft_clip(value: float, drive: float) -> float:
+	var amount = 1.0 + clamp(drive, 0.0, 1.0) * 5.0
+	var y = value * amount
+	return y / (1.0 + abs(y))

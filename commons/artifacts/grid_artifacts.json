@@ -1287,7 +1287,42 @@
 		"scene": "res://algorithms/proceduralaudio/additive_synthesis/additive_synthesis.tscn",
 		
 	},
-	
+	 "audio_effects": {
+		"name": "audio_effects",
+		"lookup_name": "audio_effects",
+		"description": "audio_effects",
+		"scene": "res://algorithms/proceduralaudio/audio_effects/audio_effects.tscn",
+	},
+	"fm_synthesis": {
+		"name": "fm_synthesis",
+		"lookup_name": "fm_synthesis",
+		"description": "fm_synthesis",
+		"scene": "res://algorithms/proceduralaudio/fm_synthesis/fm_synthesis.tscn",
+	},
+	"generative_music": {
+		"name": "generative_music",
+		"lookup_name": "generative_music",
+		"description": "generative_music",
+		"scene": "res://algorithms/proceduralaudio/generative_music/generative_music.tscn",
+	},
+	"granular_synthesis": {
+		"name": "granular_synthesis",
+		"lookup_name": "granular_synthesis",
+		"description": "granular_synthesis",
+		"scene": "res://algorithms/proceduralaudio/granular_synthesis/granular_synthesis.tscn",
+	},
+	"psychoacoustics": {
+		"name": "psychoacoustics",
+		"lookup_name": "psychoacoustics",
+		"description": "psychoacoustics",
+		"scene": "res://algorithms/proceduralaudio/psychoacoustics/psychoacoustics.tscn",
+	},
+	"subtractive_synthesis": {
+		"name": "subtractive_synthesis",
+		"lookup_name": "subtractive_synthesis",
+		"description": "subtractive_synthesis",
+		"scene": "res://algorithms/proceduralaudio/subtractive_synthesis/subtractive_synthesis.tscn",
+	},
 	"standing_waves": {
 		"name": "Standing Waves",
 		"lookup_name": "standing_waves",
