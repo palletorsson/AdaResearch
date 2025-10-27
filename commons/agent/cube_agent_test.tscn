@@ -6,6 +6,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(20, 0.2, 20)
 
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(20, 0.2, 20)
+
 [node name="CubeAgentTest" type="Node3D"]
 
 [node name="CubeAgent" type="Node3D" parent="."]
@@ -26,7 +29,7 @@ step_height = 80.0
 
 [node name="FloorMesh" type="MeshInstance3D" parent="Environment/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-mesh = BoxMesh.new()
+mesh = SubResource("BoxMesh_floor")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
 shape = SubResource("BoxShape3D_floor")

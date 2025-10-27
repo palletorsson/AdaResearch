@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://foldedpaper_scene"]
+
+[ext_resource type="Script" path="res://commons/primitives/foldedpaper/foldedpaper.gd" id="1"]
+
+[node name="FoldedPaper" type="Node3D"]
+script = ExtResource("1")

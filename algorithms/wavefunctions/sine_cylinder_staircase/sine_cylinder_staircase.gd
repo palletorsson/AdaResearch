@@ -12,6 +12,10 @@ const WAVE_AMPLITUDE := 0.45
 const WAVE_FREQUENCY := 2.0
 const COLUMN_MARGIN := 2.0
 
+# Steppability options
+@export var enable_ramps: bool = true  # Add ramp colliders between steps
+@export var recommended_max_step_height: float = 0.15  # Set XRToolsPlayerBody.max_step_height to this
+
 var _step_material: StandardMaterial3D
 
 func _ready():
@@ -21,6 +25,13 @@ func _ready():
 	_create_staircase(step_data)
 	_create_start_marker(step_data)
 	_create_top_marker(step_data)
+
+	# Auto-configure player body if found
+	call_deferred("_configure_player_body")
+
+	print("SineCylinderStaircase: Ready")
+	print("  STEP_RISE = %.2f (set max_step_height to %.2f or higher)" % [STEP_RISE, recommended_max_step_height])
+	print("  Ramps enabled: %s" % enable_ramps)
 
 func _create_central_column():
 	var total_height = float(STEP_COUNT) * STEP_RISE + COLUMN_MARGIN
@@ -121,20 +132,45 @@ func _create_staircase(step_data: Array) -> void:
 
 		var static_body = StaticBody3D.new()
 		static_body.name = "StepBody"
+
+		# Main step collision
 		var collision_shape = CollisionShape3D.new()
 		var box_shape = BoxShape3D.new()
 		box_shape.size = box_mesh.size
 		collision_shape.shape = box_shape
-		
-		# Tilt the collision shape to match the slope
-		var slope_angle = atan(STEP_RISE / (current["radius"] * (TOTAL_TURNS * TAU / STEP_COUNT)))
-		collision_shape.rotation.x = slope_angle  # Rotate around X axis for forward slope
-		
 		static_body.add_child(collision_shape)
+
+		# Add ramp collider for easier stepping
+		if enable_ramps and i < step_data.size() - 1:
+			_add_ramp_collider(static_body, current, nxt, span_length)
+
 		root.add_child(static_body)
-		
-		static_body.add_child(collision_shape)
-		root.add_child(static_body)
+
+func _add_ramp_collider(static_body: StaticBody3D, current: Dictionary, next: Dictionary, span_length: float) -> void:
+	"""Add a sloped ramp collider between steps for smooth climbing"""
+	var current_pos: Vector3 = current["position"]
+	var next_pos: Vector3 = next["position"]
+
+	# Calculate ramp dimensions
+	var horizontal_dist = Vector3(next_pos.x - current_pos.x, 0, next_pos.z - current_pos.z).length()
+	var vertical_dist = next_pos.y - current_pos.y
+	var ramp_length = sqrt(horizontal_dist * horizontal_dist + vertical_dist * vertical_dist)
+
+	# Create ramp collision shape
+	var ramp_collision = CollisionShape3D.new()
+	var ramp_box = BoxShape3D.new()
+	ramp_box.size = Vector3(STEP_WIDTH * 0.8, 0.02, ramp_length)  # Very thin for smooth slope
+	ramp_collision.shape = ramp_box
+
+	# Position ramp at front edge of step, angled up to next step
+	var ramp_center_y = STEP_THICKNESS * 0.5 + 0.01  # Just above step
+	ramp_collision.position = Vector3(0, ramp_center_y, span_length * 0.5)
+
+	# Calculate angle from current step to next
+	var angle_to_next = atan2(vertical_dist, horizontal_dist)
+	ramp_collision.rotation.x = angle_to_next
+
+	static_body.add_child(ramp_collision)
 
 func _create_step_material() -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()
@@ -173,3 +209,43 @@ func _create_top_marker(step_data: Array):
 	marker.name = "Summit"
 	marker.position = last_pos + Vector3(0, STEP_THICKNESS * 0.5 + 0.05, 0) + radial * 0.4
 	add_child(marker)
+
+func _configure_player_body() -> void:
+	"""Automatically find and configure XRToolsPlayerBody for stair climbing"""
+	# Try to find XROrigin3D and player body
+	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	if not xr_origin:
+		# Try common paths
+		xr_origin = get_node_or_null("/root/*/XROrigin3D")
+
+	if not xr_origin:
+		print("SineCylinderStaircase: XROrigin3D not found - cannot auto-configure player")
+		return
+
+	# Find XRToolsPlayerBody
+	var player_body = null
+	for child in xr_origin.get_children():
+		if child.get_class() == "XRToolsPlayerBody" or child.name.contains("PlayerBody"):
+			player_body = child
+			break
+
+	if not player_body:
+		print("SineCylinderStaircase: XRToolsPlayerBody not found")
+		return
+
+	# Configure for stair climbing
+	var old_step_height = player_body.get("max_step_height")
+	player_body.set("max_step_height", recommended_max_step_height)
+	player_body.set("stop_on_slope", false)  # Allow movement on slopes
+
+	print("SineCylinderStaircase: Configured XRToolsPlayerBody")
+	print("  max_step_height: %.2f → %.2f" % [old_step_height if old_step_height else 0.0, recommended_max_step_height])
+	print("  stop_on_slope: false")
+
+# Public API for manual configuration
+func configure_player_for_stairs(player_body: Node) -> void:
+	"""Manually configure a player body for climbing these stairs"""
+	if player_body.has_method("set"):
+		player_body.set("max_step_height", recommended_max_step_height)
+		player_body.set("stop_on_slope", false)
+		print("SineCylinderStaircase: Manually configured player body")

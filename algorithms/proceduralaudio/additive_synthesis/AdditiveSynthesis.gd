@@ -8,11 +8,39 @@ var summation_nodes = []
 var output_waveform = []
 var waveform_resolution = 64
 
+# Audio generation
+var audio_player: AudioStreamPlayer
+var audio_stream: AudioStreamGenerator
+var audio_phase: Array = []  # Phase for each harmonic
+var sample_rate: float = 44100.0
+var audio_buffer_size: int = 1024
+
 func _ready():
 	create_harmonic_oscillators()
 	create_summation_stage()
 	create_output_waveform()
 	setup_materials()
+	setup_audio_synthesis()
+
+func setup_audio_synthesis():
+	# Create audio stream for real-time synthesis
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = sample_rate
+	audio_stream.buffer_length = 0.1  # 100ms buffer
+	
+	audio_player = AudioStreamPlayer.new()
+	audio_player.stream = audio_stream
+	audio_player.volume_db = 0.0  # Set audible volume
+	add_child(audio_player)
+	audio_player.play()
+	
+	# Initialize phase tracking for each harmonic
+	audio_phase.resize(harmonic_count)
+	for i in range(harmonic_count):
+		audio_phase[i] = 0.0
+	
+	# Connect to audio generation callback
+	print("AdditiveSynthesis: Audio synthesis enabled - %d harmonics at %.1f Hz" % [harmonic_count, fundamental_freq])
 
 func create_harmonic_oscillators():
 	var osc_parent = $HarmonicOscillators
@@ -168,6 +196,9 @@ func _process(delta):
 	animate_summation()
 	animate_output_waveform()
 	animate_controls()
+	
+	# Generate audio samples
+	generate_audio_samples()
 
 func animate_harmonic_oscillators():
 	for i in range(harmonic_oscillators.size()):
@@ -314,3 +345,57 @@ func set_harmonic_series(series_type: String):
 					harmonic.amplitude = 0.0
 			_:
 				harmonic.amplitude = 1.0 / harmonic.harmonic_number
+
+# ============================================================================
+# Real-time audio generation
+# ============================================================================
+
+func generate_audio_samples():
+	if not audio_player or not audio_player.playing:
+		return
+	
+	var playback = audio_player.get_stream_playback()
+	if not playback:
+		return
+	
+	# Generate samples by summing all harmonics
+	var frames_available = playback.get_frames_available()
+	
+	# Fill buffer if we have space (at least 512 frames needed)
+	if frames_available < 512:
+		return
+	
+	# Generate smaller batches to fill available space
+	var frames_to_fill = min(frames_available, 512)
+	
+	for _frame in range(frames_to_fill):
+		var sample: float = 0.0
+		
+		# Sum all harmonics
+		for i in range(harmonic_oscillators.size()):
+			var harmonic = harmonic_oscillators[i]
+			var harmonic_freq = fundamental_freq * harmonic.harmonic_number
+			
+			# Calculate envelope (same as visualization)
+			var envelope = 1.0 + sin(time * 0.5 + i * 0.2) * 0.3
+			var current_amplitude = harmonic.amplitude * envelope
+			
+			# Generate sine wave for this harmonic
+			# Accumulate phase
+			audio_phase[i] += harmonic_freq * 2.0 * PI / sample_rate
+			
+			# Keep phase in range
+			if audio_phase[i] > PI * 2.0:
+				audio_phase[i] -= PI * 2.0
+			elif audio_phase[i] < 0.0:
+				audio_phase[i] += PI * 2.0
+			
+			# Add this harmonic's contribution
+			sample += current_amplitude * sin(audio_phase[i])
+		
+		# Normalize and apply volume control
+		sample = sample / float(harmonic_count) * 0.8  # Volume scaling
+		sample = clamp(sample, -1.0, 1.0)
+		
+		# Push sample to audio stream (stereo)
+		playback.push_frame(Vector2(sample, sample))

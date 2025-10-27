@@ -48,11 +48,14 @@ Move the ball to these positions to recreate the classic sound!
 
 ### In VR
 
-1. Grab the ball and move it around the 3D space
-2. X (Red) controls where the sound starts
-3. Y (Green) controls where the sound ends
-4. Z (Blue) controls how quickly it fades
-5. Touch or grab the green "PLAY" button to hear your sound
+1. **Grab the ball and move it** - Sound plays automatically as you move!
+2. **X (Red)** controls where the sound starts (200-800 Hz)
+3. **Y (Green)** controls where the sound ends (400-1200 Hz)
+4. **Z (Blue)** controls how quickly it fades (2.0-12.0 decay rate)
+5. **Move the ball around** to hear different sounds continuously
+6. Or touch the green "PLAY" button to manually trigger a sound
+
+**NEW: Continuous Playback!** The sound now plays automatically whenever you move the ball. It intelligently spaces plays so they don't overlap.
 
 ### Programmatic Usage
 
@@ -60,7 +63,7 @@ Move the ball to these positions to recreate the classic sound!
 # Get reference
 var sound_controller = $MarioSoundController
 
-# Play with current ball position
+# Play with current ball position (manual trigger)
 sound_controller.play_sound()
 
 # Get current parameters
@@ -68,6 +71,16 @@ var params = sound_controller.get_sound_parameters()
 print("Start: ", params.freq_start)
 print("End: ", params.freq_end)
 print("Decay: ", params.decay_rate)
+
+# Control continuous playback
+sound_controller.set_play_on_move(true)   # Enable auto-play on movement
+sound_controller.set_play_on_move(false)  # Disable (manual mode only)
+
+# Adjust playback interval
+sound_controller.set_play_interval(0.8)  # 0.8 seconds between plays
+
+# Change sound duration
+sound_controller.set_sound_duration(0.7)  # Longer sound
 
 # Trigger button programmatically
 $MarioSoundController/PlayButton.trigger()
@@ -110,7 +123,10 @@ Each controller can control a different aspect of the sound synthesis!
 - **Duration**: 0.5 seconds (configurable)
 - **Waveform**: Square wave (retro chip tune style)
 - **3D Audio**: AudioStreamPlayer3D with spatial positioning
-- **Real-time**: Sound is generated on-demand when you press PLAY
+- **Real-time Generation**: Sound is synthesized on-the-fly based on ball position
+- **Continuous Playback**: Monitors ball movement and plays automatically
+- **Smart Spacing**: Prevents audio overlap with configurable intervals (default 0.6s)
+- **Movement Detection**: Triggers on 0.01 unit movement threshold
 
 ## Future Enhancements
 

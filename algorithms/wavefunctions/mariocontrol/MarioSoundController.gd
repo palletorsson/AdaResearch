@@ -18,9 +18,17 @@ var decay_rate: float = 8.0
 const SAMPLE_RATE = 44100
 var sound_duration: float = 0.5
 
+# Continuous playback settings
+var play_on_move: bool = true  # Play sound when ball moves
+var last_play_time: float = 0.0
+var min_play_interval: float = 0.6  # Minimum time between plays (slightly longer than sound)
+var last_ball_position: Vector3 = Vector3.ZERO
+var movement_threshold: float = 0.01  # How much ball must move to trigger sound
+
 # Preview cube that shows frequency visually
 var preview_cube: MeshInstance3D
 var waveform_visualizer: Node3D
+var grab_sphere: Node3D  # Reference to the grabbable ball
 
 func _ready() -> void:
 	_create_preview_cube()
@@ -33,7 +41,32 @@ func _ready() -> void:
 		var initial = value_mapper.get_values()
 		_on_sound_values_changed(initial.x, initial.y, initial.z)
 
-	print("MarioSoundController: Ready")
+		# Get reference to the grab sphere (the ball you move)
+		grab_sphere = value_mapper.get_node_or_null("SpacePoint")
+		if grab_sphere:
+			last_ball_position = grab_sphere.global_position
+			print("MarioSoundController: Found grab sphere")
+
+	print("MarioSoundController: Ready - Move ball to hear sound!")
+
+func _process(delta: float) -> void:
+	if not play_on_move or not grab_sphere:
+		return
+
+	# Check if ball has moved significantly
+	var current_pos = grab_sphere.global_position
+	var distance_moved = current_pos.distance_to(last_ball_position)
+
+	if distance_moved > movement_threshold:
+		# Check if enough time has passed since last play
+		var current_time = Time.get_ticks_msec() / 1000.0
+		if current_time - last_play_time >= min_play_interval:
+			# Play sound!
+			play_sound()
+			last_play_time = current_time
+
+		# Update last position
+		last_ball_position = current_pos
 
 func _create_preview_cube() -> void:
 	# Create a cube that pulses with the sound
@@ -157,6 +190,7 @@ func _pulse_preview_cube() -> void:
 # Public API
 func set_sound_duration(duration: float) -> void:
 	sound_duration = clamp(duration, 0.1, 2.0)
+	min_play_interval = sound_duration + 0.1  # Update interval to match
 
 func get_sound_parameters() -> Dictionary:
 	return {
@@ -165,3 +199,13 @@ func get_sound_parameters() -> Dictionary:
 		"decay_rate": decay_rate,
 		"duration": sound_duration
 	}
+
+func set_play_on_move(enabled: bool) -> void:
+	"""Enable/disable automatic sound playback when ball moves"""
+	play_on_move = enabled
+	print("MarioSoundController: Play on move = %s" % enabled)
+
+func set_play_interval(interval: float) -> void:
+	"""Set minimum time between automatic plays"""
+	min_play_interval = clamp(interval, 0.1, 5.0)
+	print("MarioSoundController: Play interval = %.2f seconds" % min_play_interval)

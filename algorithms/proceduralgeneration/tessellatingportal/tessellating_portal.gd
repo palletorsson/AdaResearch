@@ -405,3 +405,4 @@ func get_portal_stats() -> Dictionary:
 		"portal_thickness": portal_thickness
 	}
 
+

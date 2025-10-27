@@ -22,7 +22,7 @@ void fragment() {
     vec3 a3 = smoothstep(vec3(0.0), d * wireframe_width, barycentric);
     float edge_factor = min(min(a3.x, a3.y), a3.z);
     float wireframe_factor = 1.0 - edge_factor;
-    
+
     if (show_only_wireframe) {
         ALBEDO = wireframe_color.rgb;
         EMISSION = wireframe_color.rgb * wireframe_brightness;
