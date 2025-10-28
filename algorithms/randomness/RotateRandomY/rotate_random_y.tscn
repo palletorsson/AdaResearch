@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://du38j5kfapo04"]
+
+[ext_resource type="Script" uid="uid://cwp7wr5kwousv" path="res://algorithms/randomness/RotateRandomY/RotateRandomY.gd" id="1_diul4"]
+
+[node name="RotateRandomY" type="Node3D"]
+script = ExtResource("1_diul4")

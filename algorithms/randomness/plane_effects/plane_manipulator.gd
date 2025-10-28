@@ -38,13 +38,31 @@ func _ready():
 
 func _initialize_walk(mi: MeshInstance3D):
 	mesh_instance = mi
-	x_segments = plane_node.x_segments
-	y_segments = plane_node.y_segments
+	# Try to read plane-like segmentation and size properties; otherwise, infer from mesh
+	var xs_prop = plane_node.get("x_segments")
+	var ys_prop = plane_node.get("y_segments")
+	if typeof(xs_prop) != TYPE_NIL and typeof(ys_prop) != TYPE_NIL:
+		x_segments = int(xs_prop)
+		y_segments = int(ys_prop)
+	else:
+		# Fallback: choose reasonable defaults when not a segmented plane
+		x_segments = 20
+		y_segments = 20
 	
 	# The PrimitiveMeshBuilder creates non-indexed geometry (600 vertices, not 121)
 	# So we need to rebuild the grid ourselves with the correct structure
-	var plane_width = plane_node.width
-	var plane_height = plane_node.height
+	var plane_width
+	var plane_height
+	var w_prop = plane_node.get("width")
+	var h_prop = plane_node.get("height")
+	if typeof(w_prop) != TYPE_NIL and typeof(h_prop) != TYPE_NIL:
+		plane_width = float(w_prop)
+		plane_height = float(h_prop)
+	else:
+		# Not a plane primitive; infer width/height from the mesh AABB (x and z extents)
+		var aabb: AABB = mesh_instance.get_aabb() if mesh_instance else AABB()
+		plane_width = aabb.size.x if aabb.size.x > 0.0 else 1.0
+		plane_height = aabb.size.z if aabb.size.z > 0.0 else 1.0
 	
 	vertex_grid.clear()
 	var half_width = plane_width / 2.0

@@ -6,7 +6,7 @@ render_mode blend_mix, depth_draw_always, cull_disabled;
 uniform vec4 modelColor : source_color = vec4(0.5, 0.5, 0.5, 1.0);       // Main cube color
 uniform vec4 wireframeColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);   // Wireframe color
 uniform vec4 emissionColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);    // Emission color
-uniform float width : hint_range(0.1, 15.0) = 2.0;                       // Edge thickness
+uniform float width : hint_range(0.1, 15.0) = 1.0;                       // Edge thickness
 uniform float blur : hint_range(0.1, 5.0) = 1.0;                         // Blur amount
 uniform float emission_strength : hint_range(0.0, 10.0) = 2.0;           // Emission intensity
 uniform float modelOpacity : hint_range(0.0, 1.0) =1.0;                 // Base opacity - NOW WORKS!

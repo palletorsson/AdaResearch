@@ -911,6 +911,50 @@
 			"description": "An algorithmic walker that creates trails through the grid space",
 			"scene": "res://algorithms/randomness/walk_random.tscn",
 		},
+ 		"rotate_random_y": {
+			"name": "rotate_random_y",
+			"lookup_name": "rotate_random_y",
+			"description": "rotate_random_y",
+			"scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn",
+		},
+		 "Random_Rotate_Random_XYZ": {
+			"name": "Random_Rotate_Random_XYZ",
+			"lookup_name": "Random_Rotate_Random_XYZ",
+			"description": "Random_Rotate_Random_XYZ",
+			"scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn",
+		},
+		
+		 "randomize_cubes_over_Z": {
+			"name": "randomize_cubes_over_Z",
+			"lookup_name": "randomize_cubes_over_Z",
+			"description": "randomize_cubes_over_Z",
+			"scene": "res://algorithms/randomness/RandomizeCubesOverZ/randomize_cubes_over_Z.tscn",
+		},
+		 "plane_random": {
+			"name": "plane_random",
+			"lookup_name": "plane_random",
+			"description": "plane_random",
+			"scene": "res://algorithms/randomness/PlaneRandom/plane_random.tscn",
+		},	
+		 "random_bell_curve": {
+			"name": "random_bell_curve",
+			"lookup_name": "random_bell_curve",
+			"description": "random_bell_curve",
+			"scene": "res://algorithms/randomness/randombellcurve/random_bell_curve.tscn",
+		},	
+		 "pipe_dream": {
+			"name": "pipe_dream",
+			"lookup_name": "pipe_dream",
+			"description": "pipe_dream",
+			"scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn",
+		},	
+		 "bell_alley": {
+			"name": "bell_alley",
+			"lookup_name": "bell_alley",
+			"description": "bell_alley",
+			"scene": "res://algorithms/randomness/bell_alley/bell_alley.tscn",
+		},						
+	
 		"remove_random": {
 			"name": "Random Destructor",
 			"lookup_name": "remove_random",
@@ -1665,7 +1709,7 @@
 			"scene": "res://algorithms/proceduralgeneration/voronoi_diagrams/voronoi_diagrams.tscn",
 
 		},
-				"noiselayers": {
+		"noiselayers": {
 			"name": "noiselayers",
 			"lookup_name": "noiselayers",
 			"description": "noiselayers",

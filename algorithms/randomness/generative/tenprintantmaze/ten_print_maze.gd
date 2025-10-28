@@ -46,13 +46,13 @@ var wall_nodes: Array[Node3D] = []
 func _ready():
 	randomize()
 	generate_maze()
-	# build_navigation_grid()
+	build_navigation_grid()
 	create_3d_maze()
 	setup_wall_movement_timer()
 	# for later
-	#create_ant()
-	#create_path_visualization()
-	#place_ant()
+	create_ant()
+	create_path_visualization()
+	place_ant()
 
 func _process(delta):
 	if ant_moving and not found_exit:
@@ -109,8 +109,8 @@ func create_3d_maze():
 	var floor_mesh = PlaneMesh.new()
 	floor_mesh.size = Vector2(grid_width * cell_size, grid_depth * cell_size)
 	
-	var floor_material = StandardMaterial3D.new()
-	floor_material.albedo_color = Color(0.2, 0.2, 0.2)
+	var floor_material = ShaderMaterial.new()
+	floor_material.shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 	
 	var floor_instance = MeshInstance3D.new()
 	floor_instance.mesh = floor_mesh
@@ -146,8 +146,8 @@ func create_diagonal_wall(position, is_forward_slash):
 	var wall_mesh = BoxMesh.new()
 	wall_mesh.size = Vector3(cell_size * sqrt(2), wall_height, wall_thickness)
 	
-	var wall_material = StandardMaterial3D.new()
-	wall_material.albedo_color = Color.WHITE
+	var wall_material = ShaderMaterial.new()
+	wall_material.shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 	
 	var wall_instance = MeshInstance3D.new()
 	wall_instance.mesh = wall_mesh
@@ -366,14 +366,6 @@ func _on_wall_timer_timeout():
 	# Rotate the wall by 90 degrees (switching between / and \)
 	wall_instance.rotate_y(PI/2)
 	
-	# Add some visual feedback - change color briefly
-	if wall_instance.material_override:
-		var original_color = wall_instance.material_override.albedo_color
-		wall_instance.material_override.albedo_color = Color.RED
-		
-		# Reset color after 0.2 seconds
-		await get_tree().create_timer(0.2).timeout
-		if is_instance_valid(wall_instance) and wall_instance.material_override:
-			wall_instance.material_override.albedo_color = original_color
+
 	
 	print("Rotated wall at position: ", random_wall.position)

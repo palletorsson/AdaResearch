@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://5nvtlyvqg1c6"]
+
+[ext_resource type="Script" uid="uid://bi8aihicvrhei" path="res://algorithms/randomness/PlaneRandom/plane_random.gd" id="1_g1pix"]
+
+[node name="PlaneRandom" type="Node3D"]
+script = ExtResource("1_g1pix")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94412357, 0.32959178, 0, -0.32959178, 0.94412357, 0, 0.5801444, 2.607359)
