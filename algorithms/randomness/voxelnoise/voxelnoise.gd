@@ -35,7 +35,7 @@ func _generate_chunk(chunk_pos: Vector3i):
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	for x in range(chunk_size):
-		for y in range(world_height):
+		for y in range(1, world_height + 1):  # Start at Y=1, go up to world_height
 			for z in range(chunk_size):
 				var world_x = chunk_pos.x * chunk_size + x
 				var world_y = y
