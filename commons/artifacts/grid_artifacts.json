@@ -17,7 +17,12 @@
 			"scene": "res://commons/primitives/origin/origin.tscn",
 		},
 	
-		
+	"light_sphere": {
+			"name": "light_sphere",
+			"lookup_name": "light_sphere",
+			"description": "light_sphere.",
+			"scene": "res://commons/primitives/sphere/light_sphere.tscn",
+		},
 		"dark_sphere": {
 			"name": "dark_sphere",
 			"lookup_name": "dark_sphere",
@@ -148,7 +153,7 @@
 			"description": "one_meter_line.",
 			"scene": "res://commons/primitives/line/one_meter_line.tscn",
 		},				
-				"horizon_plumb_lines": {
+		"horizon_plumb_lines": {
 			"name": "horizon_plumb_lines",
 			"lookup_name": "horizon_plumb_lines",
 			"description": "horizon_plumb_lines.",

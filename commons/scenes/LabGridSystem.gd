@@ -104,46 +104,43 @@ func _on_lab_generation_complete():
 		print("LabGridSystem: ✅ Progressive map - artifacts already defined in JSON, skipping filtering")
 
 func _apply_lab_cube_materials():
-	"""Apply lab styling to all grid cubes while preserving grid shader effect"""
+	"""Apply lab styling to MultiMesh grid cubes"""
 	if not structure_component:
 		return
-	
-	var cube_positions = structure_component.get_all_cube_positions()
-	print("LabGridSystem: Applying lab materials to %d cubes" % cube_positions.size())
-	
-	for position in cube_positions:
-		var cube = structure_component.get_cube_at(position.x, position.y, position.z)
-		if cube:
-			_apply_lab_material_to_cube(cube)
 
-func _apply_lab_material_to_cube(cube: Node3D):
-	"""Apply lab styling to cube while keeping grid shader"""
-	# Find the mesh instance in the cube
-	var mesh_instance = _find_mesh_instance_in_cube(cube)
-	if not mesh_instance:
+	var cube_count = structure_component.get_cube_count()
+	print("LabGridSystem: Applying lab materials to MultiMesh (%d instances)" % cube_count)
+
+	# Apply material to the MultiMeshInstance3D
+	if structure_component.multimesh_instance:
+		_apply_lab_material_to_multimesh(structure_component.multimesh_instance)
+
+func _apply_lab_material_to_multimesh(multimesh_inst: MultiMeshInstance3D):
+	"""Apply lab styling to MultiMeshInstance3D"""
+	if not multimesh_inst:
 		return
-	
-	# Check if it already has a shader material
-	var current_material = mesh_instance.material_override
+
+	# Check if it already has a material
+	var current_material = multimesh_inst.material_override
 	if current_material and current_material is ShaderMaterial:
-		# Duplicate the shader material to make it unique for this cube
+		# Duplicate the shader material
 		var lab_shader_material = current_material.duplicate() as ShaderMaterial
-		
+
 		# Update shader parameters for lab styling
 		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
 		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
 		lab_shader_material.set_shader_parameter("emissionColor", Color(0.6, 0.6, 0.6, 1.0))   # Gray emission
 		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
-		lab_shader_material.set_shader_parameter("modelOpacity", 1.0)  # Slightly transparent
-		
+		lab_shader_material.set_shader_parameter("show_interior", true)
+
 		# Apply the modified shader material
-		mesh_instance.material_override = lab_shader_material
+		multimesh_inst.material_override = lab_shader_material
 	else:
-		# Fallback: create new shader material if none exists
+		# Create new shader material
 		var lab_shader_material = ShaderMaterial.new()
 		var grid_shader = load("res://commons/resourses/shaders/Grid.gdshader")
 		lab_shader_material.shader = grid_shader
-		
+
 		# Set lab-appropriate shader parameters
 		lab_shader_material.set_shader_parameter("modelColor", lab_cube_color)
 		lab_shader_material.set_shader_parameter("wireframeColor", Color(0.7, 0.7, 0.7, 1.0))  # Gray wireframe
@@ -151,27 +148,9 @@ func _apply_lab_material_to_cube(cube: Node3D):
 		lab_shader_material.set_shader_parameter("width", 8.0)
 		lab_shader_material.set_shader_parameter("blur", 0.5)
 		lab_shader_material.set_shader_parameter("emission_strength", 0.5)  # Subtle emission
-		lab_shader_material.set_shader_parameter("modelOpacity", 0.95)
-		
-		mesh_instance.material_override = lab_shader_material
+		lab_shader_material.set_shader_parameter("show_interior", true)
 
-func _find_mesh_instance_in_cube(cube: Node3D) -> MeshInstance3D:
-	"""Find MeshInstance3D in cube hierarchy"""
-	# Check if cube itself is a MeshInstance3D
-	if cube is MeshInstance3D:
-		return cube as MeshInstance3D
-	
-	# Search children recursively
-	for child in cube.get_children():
-		if child is MeshInstance3D:
-			return child as MeshInstance3D
-		
-		# Check grandchildren (for nested structures)
-		var nested_mesh = _find_mesh_instance_in_cube(child)
-		if nested_mesh:
-			return nested_mesh
-	
-	return null
+		multimesh_inst.material_override = lab_shader_material
 
 func _apply_lab_lighting():
 	"""Apply lab-appropriate lighting"""

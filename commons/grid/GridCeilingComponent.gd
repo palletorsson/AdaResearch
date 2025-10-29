@@ -309,8 +309,8 @@ func _should_place_light(x: int, z: int) -> bool:
 func _create_ceiling_tile() -> MeshInstance3D:
 	var tile = MeshInstance3D.new()
 	var plane_mesh = PlaneMesh.new()
-	# Make tiles slightly smaller to show T-grid structure (92% of tile_size)
-	var visible_tile_size = tile_size * 0.92
+	# Make tiles nearly full size with minimal gap (98% of tile_size)
+	var visible_tile_size = tile_size * 0.98
 	plane_mesh.size = Vector2(visible_tile_size, visible_tile_size)
 	tile.mesh = plane_mesh
 	tile.material_override = tile_material
@@ -351,8 +351,8 @@ func _create_light_panel() -> Node3D:
 	# Create the glowing panel mesh
 	var panel_mesh = MeshInstance3D.new()
 	var plane = PlaneMesh.new()
-	# Make light panels same size as tiles (92% of tile_size)
-	var visible_tile_size = tile_size * 0.92
+	# Make light panels same size as tiles (98% of tile_size)
+	var visible_tile_size = tile_size * 0.98
 	plane.size = Vector2(visible_tile_size, visible_tile_size)
 	panel_mesh.mesh = plane
 	panel_mesh.material_override = light_material

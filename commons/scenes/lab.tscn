@@ -54,8 +54,8 @@ tonemap_exposure = 0.16
 ssil_enabled = true
 glow_intensity = 1.67
 fog_enabled = true
-fog_light_color = Color(0.24544, 0.558192, 0.903878, 1)
-fog_light_energy = 1.73
+fog_light_color = Color(0.81025255, 0.8915905, 0.99056953, 1)
+fog_light_energy = 6.55
 fog_sun_scatter = 3.5
 fog_density = 0.02
 fog_sky_affect = 0.885
@@ -72,6 +72,9 @@ environment = SubResource("Environment_njeto")
 
 [node name="XROrigin3D" parent="." index="2"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 8, 1)
+
+[node name="XRCamera3D" parent="XROrigin3D" index="0"]
+far = 40.0
 
 [node name="Label3D" parent="." index="3"]
 text = "Base - Lab Grid"
@@ -93,9 +96,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47427, 1, -1.13057)
 
 [node name="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46567, -0.624792, 1.32355)
-
-[node name="MeshInstance3D" parent="StaticBody3D" index="1"]
-visible = false
 
 [node name="AudioTest" type="Node3D" parent="." index="8"]
 visible = false

@@ -1,5 +1,6 @@
 shader_type spatial;
-// Enable transparency for opacity control - Correct Godot 4 syntax
+render_mode depth_draw_always, cull_back;
+// Fully opaque shader with proper depth for VR - no alpha blending
 
 
 // Uniforms
@@ -9,9 +10,6 @@ uniform vec4 emissionColor : source_color = vec4(1.0, 0.0, 0.0, 1.0);    // Emis
 uniform float width : hint_range(0.1, 15.0) = 2.0;                       // Edge thickness
 uniform float blur : hint_range(0.1, 5.0) = 1.0;                         // Blur amount
 uniform float emission_strength : hint_range(0.0, 10.0) = 2.0;           // Emission intensity
-uniform float modelOpacity : hint_range(0.0, 1.0) = 0.8;                 // Base opacity - NOW WORKS!
-uniform float wireframeOpacity : hint_range(0.0, 1.0) = 1.0;             // Wireframe opacity
-uniform float globalOpacity : hint_range(0.0, 1.0) = 1.0;                // Overall opacity multiplier
 uniform bool show_interior = true;                                       // Show cube interior
 
 // Barycentric coordinates
@@ -47,41 +45,20 @@ void fragment() {
     // Find the closest edge (minimum distance means closest to an edge)
     float closestEdge = min(min(remap.x, remap.y), remap.z);
 
-    // Calculate final colors and alpha
+    // Calculate final color - fully opaque, no alpha
     vec3 finalColor;
-    float finalAlpha;
 
     if (show_interior) {
         // Mix wireframe and model colors
         finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
-        finalAlpha = mix(wireframeOpacity, modelOpacity, closestEdge);
-
-        // Ensure minimum visibility for the model interior
-        if (closestEdge > 0.5) {
-            finalAlpha = max(finalAlpha, 0.1); // Minimum 10% opacity for interior
-        }
     } else {
-        // Only show wireframe
-        finalColor = wireframeColor.rgb;
-        finalAlpha = wireframeOpacity * (1.0 - closestEdge);
-
-        // If not showing interior, make interior completely transparent
-        if (closestEdge > 0.5) {
-            finalAlpha = 0.0;
-        }
+        // Only show wireframe on edges, use model color for interior
+        finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
     }
 
-    // Apply global opacity multiplier
-    finalAlpha *= globalOpacity;
-
-    // Clamp alpha to prevent complete transparency when not intended
-    if (show_interior && modelOpacity > 0.0) {
-        finalAlpha = max(finalAlpha, 0.05);
-    }
-
-    // Apply colors
+    // Apply colors - fully opaque
     ALBEDO = finalColor;
-    ALPHA = finalAlpha;
+    // No ALPHA output - fully opaque
 
     // Add emission to wireframe edges
     EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;
