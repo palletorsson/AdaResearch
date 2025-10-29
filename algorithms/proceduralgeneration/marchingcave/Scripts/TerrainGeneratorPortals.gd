@@ -127,4 +127,3 @@ func _create_portal_label(portal: MeshInstance3D, index: int):
 	label.outline_size = 8
 	label.outline_modulate = Color.BLACK
 	portal.add_child(label)
-

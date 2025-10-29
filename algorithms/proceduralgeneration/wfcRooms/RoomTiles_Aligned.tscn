@@ -446,11 +446,13 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_suwlt")
 mesh = SubResource("ArrayMesh_1rq1f")
 
 [node name="Floor" type="CSGBox3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_kxg00")
 
@@ -465,16 +467,19 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Wall_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_7fxoc")
 mesh = SubResource("ArrayMesh_nnif5")
 
 [node name="Floor" type="CSGBox3D" parent="Wall_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_plevm")
 
 [node name="Wall_N" type="CSGBox3D" parent="Wall_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_giohi")
 
@@ -489,16 +494,19 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Wall_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_cx6rk")
 mesh = SubResource("ArrayMesh_jjsf2")
 
 [node name="Floor" type="CSGBox3D" parent="Wall_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_h58uw")
 
 [node name="Wall_E" type="CSGBox3D" parent="Wall_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_qb20c")
 
@@ -513,16 +521,19 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Wall_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_w8vn4")
 mesh = SubResource("ArrayMesh_ohxmc")
 
 [node name="Floor" type="CSGBox3D" parent="Wall_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_8l8ff")
 
 [node name="Wall_S" type="CSGBox3D" parent="Wall_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_1f5uu")
 
@@ -537,16 +548,19 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Wall_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_0hgtd")
 mesh = SubResource("ArrayMesh_11l4b")
 
 [node name="Floor" type="CSGBox3D" parent="Wall_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_ux1s7")
 
 [node name="Wall_W" type="CSGBox3D" parent="Wall_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_1vqyn")
 
@@ -561,21 +575,25 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Corner_NE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_hhaoh")
 mesh = SubResource("ArrayMesh_e8wqs")
 
 [node name="Floor" type="CSGBox3D" parent="Corner_NE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_oggmy")
 
 [node name="Wall_N" type="CSGBox3D" parent="Corner_NE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_brhvg")
 
 [node name="Wall_E" type="CSGBox3D" parent="Corner_NE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_bat6s")
 
@@ -590,21 +608,25 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Corner_ES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_5n8q4")
 mesh = SubResource("ArrayMesh_urre6")
 
 [node name="Floor" type="CSGBox3D" parent="Corner_ES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_dfraq")
 
 [node name="Wall_E" type="CSGBox3D" parent="Corner_ES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_gxcqc")
 
 [node name="Wall_S" type="CSGBox3D" parent="Corner_ES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_j7u4u")
 
@@ -619,21 +641,25 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Corner_SW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_r74oj")
 mesh = SubResource("ArrayMesh_xdwn6")
 
 [node name="Floor" type="CSGBox3D" parent="Corner_SW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_tv8vd")
 
 [node name="Wall_S" type="CSGBox3D" parent="Corner_SW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_qw3t5")
 
 [node name="Wall_W" type="CSGBox3D" parent="Corner_SW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_g6ugw")
 
@@ -648,21 +674,25 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Corner_WN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_ikhgo")
 mesh = SubResource("ArrayMesh_87cju")
 
 [node name="Floor" type="CSGBox3D" parent="Corner_WN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_0eyau")
 
 [node name="Wall_N" type="CSGBox3D" parent="Corner_WN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_ya4s1")
 
 [node name="Wall_W" type="CSGBox3D" parent="Corner_WN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_vt6sl")
 
@@ -677,26 +707,31 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="T_NES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_2v710")
 mesh = SubResource("ArrayMesh_v5s36")
 
 [node name="Floor" type="CSGBox3D" parent="T_NES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_ohp5w")
 
 [node name="Wall_N" type="CSGBox3D" parent="T_NES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_ur53m")
 
 [node name="Wall_E" type="CSGBox3D" parent="T_NES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_g0pv2")
 
 [node name="Wall_S" type="CSGBox3D" parent="T_NES"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_2b0y7")
 
@@ -711,26 +746,31 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="T_ESW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_l1tbo")
 mesh = SubResource("ArrayMesh_f8kat")
 
 [node name="Floor" type="CSGBox3D" parent="T_ESW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_ihcyk")
 
 [node name="Wall_E" type="CSGBox3D" parent="T_ESW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_bbov8")
 
 [node name="Wall_S" type="CSGBox3D" parent="T_ESW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_66rhg")
 
 [node name="Wall_W" type="CSGBox3D" parent="T_ESW"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_qyoxa")
 
@@ -745,6 +785,7 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="T_SWN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_15ki4")
 mesh = SubResource("ArrayMesh_gtrch")
 
@@ -755,16 +796,19 @@ material = SubResource("StandardMaterial3D_qpp3q")
 
 [node name="Wall_N" type="CSGBox3D" parent="T_SWN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_3wlng")
 
 [node name="Wall_S" type="CSGBox3D" parent="T_SWN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_sr8i3")
 
 [node name="Wall_W" type="CSGBox3D" parent="T_SWN"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_xxelm")
 
@@ -779,6 +823,7 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="T_WNE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_glcn0")
 mesh = SubResource("ArrayMesh_f0oyu")
 
@@ -789,16 +834,19 @@ material = SubResource("StandardMaterial3D_x2oap")
 
 [node name="Wall_N" type="CSGBox3D" parent="T_WNE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_vlny0")
 
 [node name="Wall_E" type="CSGBox3D" parent="T_WNE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_sdjom")
 
 [node name="Wall_W" type="CSGBox3D" parent="T_WNE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_nyf57")
 
@@ -813,31 +861,37 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_qjm8s")
 mesh = SubResource("ArrayMesh_v16xc")
 
 [node name="Floor" type="CSGBox3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_46x4k")
 
 [node name="Wall_N" type="CSGBox3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 1.91)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_yw45v")
 
 [node name="Wall_E" type="CSGBox3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_6mpeh")
 
 [node name="Wall_S" type="CSGBox3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.34, 0.09)
+use_collision = true
 size = Vector3(2, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_jsiel")
 
 [node name="Wall_W" type="CSGBox3D" parent="+_Cross"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1)
+use_collision = true
 size = Vector3(0.18, 2.6, 2)
 material = SubResource("StandardMaterial3D_qrq3t")
 
@@ -852,26 +906,31 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Door_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_ee8jq")
 mesh = SubResource("ArrayMesh_mofk3")
 
 [node name="Floor" type="CSGBox3D" parent="Door_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_wctqd")
 
 [node name="Wall_N_L" type="CSGBox3D" parent="Door_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.34, 1.91)
+use_collision = true
 size = Vector3(0.5, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_3ea5j")
 
 [node name="Wall_N_R" type="CSGBox3D" parent="Door_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 1.34, 1.91)
+use_collision = true
 size = Vector3(0.5, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_rfukp")
 
 [node name="Lintel_N" type="CSGBox3D" parent="Door_N"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.39, 1.91)
+use_collision = true
 size = Vector3(1, 0.5, 0.18)
 material = SubResource("StandardMaterial3D_mwxic")
 
@@ -886,26 +945,31 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Door_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_bcnhs")
 mesh = SubResource("ArrayMesh_o7yn8")
 
 [node name="Floor" type="CSGBox3D" parent="Door_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_2pbq7")
 
 [node name="Wall_E_B" type="CSGBox3D" parent="Door_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 0.25)
+use_collision = true
 size = Vector3(0.18, 2.6, 0.5)
 material = SubResource("StandardMaterial3D_epdy5")
 
 [node name="Wall_E_T" type="CSGBox3D" parent="Door_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 1.34, 1.75)
+use_collision = true
 size = Vector3(0.18, 2.6, 0.5)
 material = SubResource("StandardMaterial3D_xmjwu")
 
 [node name="Lintel_E" type="CSGBox3D" parent="Door_E"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91, 2.39, 1)
+use_collision = true
 size = Vector3(0.18, 0.5, 1)
 material = SubResource("StandardMaterial3D_w7dor")
 
@@ -920,26 +984,31 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Door_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_n1g1b")
 mesh = SubResource("ArrayMesh_qcff6")
 
 [node name="Floor" type="CSGBox3D" parent="Door_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_udjbb")
 
 [node name="Wall_S_L" type="CSGBox3D" parent="Door_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.34, 0.09)
+use_collision = true
 size = Vector3(0.5, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_0jysy")
 
 [node name="Wall_S_R" type="CSGBox3D" parent="Door_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 1.34, 0.09)
+use_collision = true
 size = Vector3(0.5, 2.6, 0.18)
 material = SubResource("StandardMaterial3D_jqj1p")
 
 [node name="Lintel_S" type="CSGBox3D" parent="Door_S"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.39, 0.09)
+use_collision = true
 size = Vector3(1, 0.5, 0.18)
 material = SubResource("StandardMaterial3D_2txwi")
 
@@ -954,25 +1023,30 @@ metadata/sockets = {
 
 [node name="Footprint" type="MeshInstance3D" parent="Door_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.001, 1)
+visible = false
 material_override = SubResource("StandardMaterial3D_7cpjh")
 mesh = SubResource("ArrayMesh_jppgs")
 
 [node name="Floor" type="CSGBox3D" parent="Door_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.02, 1)
+use_collision = true
 size = Vector3(2, 0.04, 2)
 material = SubResource("StandardMaterial3D_qi8rm")
 
 [node name="Wall_W_B" type="CSGBox3D" parent="Door_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 0.25)
+use_collision = true
 size = Vector3(0.18, 2.6, 0.5)
 material = SubResource("StandardMaterial3D_r512k")
 
 [node name="Wall_W_T" type="CSGBox3D" parent="Door_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 1.34, 1.75)
+use_collision = true
 size = Vector3(0.18, 2.6, 0.5)
 material = SubResource("StandardMaterial3D_fooux")
 
 [node name="Lintel_W" type="CSGBox3D" parent="Door_W"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09, 2.39, 1)
+use_collision = true
 size = Vector3(0.18, 0.5, 1)
 material = SubResource("StandardMaterial3D_3a2r2")

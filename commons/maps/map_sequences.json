@@ -574,8 +574,9 @@
 
 			],
 			"maps": [
-				"Noise_Voxel",				
+					 			
 				"Noise_One",
+				"Noise_Voxel",
 				"Noise_6_Wall",
 				"Noise_Inside_Noise",
 				"Noise_Volume",
@@ -830,24 +831,7 @@
 
 			],
 			"maps": [
-				"ProceduralGenerationMarchingcubesPortalLandscape",
-				"ProceduralGenerationMarchingCubesSculpture",
-				"ProceduralGenerationCaveExplorer3dUi",
-				
-				"ProceduralGenerationBooleanPatterns",
-				"ProceduralGenerationWfcDungeonGenerator",
-				"ProceduralGenerationMarchingCubesInsideCave",
-				"ProceduralGenerationMarchingcubesTorusSculpture",
-				"ProceduralGenerationMarchingcubesFlatLandscape",
-				"ProceduralGeneration_N_grams", 
-				"ProceduralGeneration_Delaunay_Triangulation",	
-				"ProceduralGeneration_CubeMound", 
-				"ProceduralGeneration_MarchingCave",
-				"ProceduralGeneration_Maze", 
-				"ProceduralGeneration_BranchingGrowthAlgorithm",
-				"ProceduralGeneration_Space_Partitioning",
-				"ProceduralGeneration_CaveRandomWalk",
-	
+				"ProceduralGenerationWfcDungeonGenerator",			
 				"ProceduralGeneration_Markov_Chains",
 				"ProceduralGeneration_Poisson_Disk_Sampling",	
 				"ProceduralGeneration_Space_Colonization_Algorithms",
@@ -871,7 +855,26 @@
 				"ProceduralGeneration_Nine",
 				"ProceduralGeneration_Ten",
 				"ProceduralGeneration_Eleven",	
-				"ProceduralGeneration_Reaction_Diffusion_Systems" 
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
+				"ProceduralGenerationMarchingCubesVovelNoise",
+				"ProceduralGenerationMarchingcubesPortalLandscape",
+				"ProceduralGenerationMarchingCubesSculpture",
+				"ProceduralGenerationCaveExplorer3dUi",
+
+				"ProceduralGenerationBooleanPatterns",
+
+				"ProceduralGenerationMarchingCubesInsideCave",
+				"ProceduralGenerationMarchingcubesTorusSculpture",
+				"ProceduralGenerationMarchingcubesFlatLandscape",
+				"ProceduralGeneration_N_grams", 
+				"ProceduralGeneration_Delaunay_Triangulation",	
+				"ProceduralGeneration_CubeMound", 
+				"ProceduralGeneration_MarchingCave",
+				"ProceduralGeneration_Maze", 
+				"ProceduralGeneration_BranchingGrowthAlgorithm",
+				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGeneration_CaveRandomWalk",
+					
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_proceduralgeneration",

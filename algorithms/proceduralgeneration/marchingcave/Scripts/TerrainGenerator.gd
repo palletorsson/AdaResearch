@@ -5,7 +5,7 @@ extends MeshInstance3D
 @export var noise_offset : Vector3
 @export var iso_level : float = 1
 @export var chunk_scale : float = 1000
-@export var center_position : Vector3 = Vector3.ZERO
+@export var center_position : Vector3 = Vector3(0, 10, 0)
 @export var use_fallback_cave : bool = false  # Force use simple cave for testing
 
 const resolution : int = 8

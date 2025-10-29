@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7r5upmpm2rrm"]
+[gd_scene load_steps=13 format=3 uid="uid://c7r5upmpm2rrm"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_u82vu"]
 [ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_4w1i0"]
@@ -21,6 +21,9 @@ size = Vector3(0.1, 0.1, 0.1)
 [sub_resource type="SphereMesh" id="SphereMesh_w7h7a"]
 radius = 0.05
 height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v82ba"]
+radius = 0.07304194
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ckwi5"]
 top_radius = 0.01
@@ -70,6 +73,11 @@ light_color = Color(1, 0, 1, 1)
 [node name="TextNode" type="Node3D" parent="Blade/Top/TrackBall" index="1"]
 script = ExtResource("6_ckwi5")
 manifesto_text = "o ooo o o o o o o o o o oo o o  o o ooo o o o o o o o o o o o o o o o o o o o ooo o o o o o oooo oo o o o"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Blade/Top/TrackBall" index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blade/Top/TrackBall/StaticBody3D" index="0"]
+shape = SubResource("SphereShape3D_v82ba")
 
 [node name="Blade" type="MeshInstance3D" parent="Blade" index="1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.222, 0, 0)

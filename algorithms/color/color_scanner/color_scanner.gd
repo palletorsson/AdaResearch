@@ -188,17 +188,29 @@ func extract_texture_pixel_color(hit_object: Node, hit_point: Vector3, hit_norma
 
 func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
 	"""Find the MeshInstance3D associated with the hit collider"""
-	
+
 	# Direct mesh hit
 	if hit_object is MeshInstance3D:
 		return hit_object as MeshInstance3D
-	
-	# Physics body with mesh children
+
+	# Check parent (common case: StaticBody3D is child of MeshInstance3D)
+	if hit_object.get_parent() and hit_object.get_parent() is MeshInstance3D:
+		print("Found mesh as parent of: ", hit_object.name)
+		return hit_object.get_parent() as MeshInstance3D
+
+	# Physics body with mesh children (alternative structure)
 	if hit_object.has_method("get_children"):
 		for child in hit_object.get_children():
 			if child is MeshInstance3D:
 				return child as MeshInstance3D
-	
+
+	# Search siblings (if StaticBody3D and MeshInstance3D are siblings)
+	if hit_object.get_parent():
+		for sibling in hit_object.get_parent().get_children():
+			if sibling is MeshInstance3D:
+				print("Found mesh as sibling of: ", hit_object.name)
+				return sibling as MeshInstance3D
+
 	return null
 
 func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector3) -> Vector2:
@@ -215,10 +227,14 @@ func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector
 	# Handle different mesh types
 	if mesh_instance.mesh is BoxMesh:
 		return calculate_box_uv(mesh_instance.mesh as BoxMesh, local_hit)
+	elif mesh_instance.mesh is CylinderMesh:
+		return calculate_cylinder_uv(mesh_instance.mesh as CylinderMesh, local_hit)
 	elif mesh_instance.mesh is PlaneMesh:
 		return calculate_plane_uv(mesh_instance.mesh as PlaneMesh, local_hit)
 	elif mesh_instance.mesh is QuadMesh:
 		return calculate_quad_uv(mesh_instance.mesh as QuadMesh, local_hit)
+	elif mesh_instance.mesh is ArrayMesh:
+		return calculate_arraymesh_uv(mesh_instance.mesh as ArrayMesh, local_hit)
 	else:
 		print("Unsupported mesh type: ", mesh_instance.mesh.get_class())
 		return Vector2(0.5, 0.5)  # Center fallback
@@ -271,12 +287,96 @@ func calculate_plane_uv(plane_mesh: PlaneMesh, local_point: Vector3) -> Vector2:
 
 func calculate_quad_uv(quad_mesh: QuadMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for QuadMesh"""
-	
+
 	var size = quad_mesh.size
 	var u = (local_point.x + size.x/2) / size.x
 	var v = (local_point.y + size.y/2) / size.y
-	
+
 	return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+func calculate_cylinder_uv(cylinder_mesh: CylinderMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for CylinderMesh"""
+
+	var height = cylinder_mesh.height
+	var top_radius = cylinder_mesh.top_radius
+	var bottom_radius = cylinder_mesh.bottom_radius
+
+	# Check if hit top or bottom cap
+	var half_height = height * 0.5
+	var tolerance = 0.01
+
+	if abs(local_point.y - half_height) < tolerance:
+		# Top cap
+		var u = (local_point.x / top_radius + 1.0) * 0.5
+		var v = (local_point.z / top_radius + 1.0) * 0.5
+		return Vector2(clamp(u, 0.0, 1.0), clamp(v, 0.0, 1.0))
+	elif abs(local_point.y + half_height) < tolerance:
+		# Bottom cap
+		var u = (local_point.x / bottom_radius + 1.0) * 0.5
+		var v = (local_point.z / bottom_radius + 1.0) * 0.5
+		return Vector2(clamp(u, 0.0, 1.0), clamp(v, 0.0, 1.0))
+	else:
+		# Cylinder side - use cylindrical coordinates
+		var angle = atan2(local_point.z, local_point.x)
+		var u = (angle + PI) / (2.0 * PI)
+		var v = (local_point.y + half_height) / height
+		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+func calculate_arraymesh_uv(array_mesh: ArrayMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for ArrayMesh by finding closest triangle"""
+
+	if array_mesh.get_surface_count() == 0:
+		print("ArrayMesh has no surfaces")
+		return Vector2(0.5, 0.5)
+
+	var arrays = array_mesh.surface_get_arrays(0)
+	if arrays.size() <= Mesh.ARRAY_VERTEX:
+		print("ArrayMesh has no vertex data")
+		return Vector2(0.5, 0.5)
+
+	var vertices = arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array
+	var uvs = null
+	if arrays.size() > Mesh.ARRAY_TEX_UV and arrays[Mesh.ARRAY_TEX_UV]:
+		uvs = arrays[Mesh.ARRAY_TEX_UV] as PackedVector2Array
+
+	if not uvs or uvs.is_empty():
+		print("ArrayMesh has no UV data, using fallback")
+		# Fallback: create basic UV from position
+		var bounds = _calculate_mesh_bounds(vertices)
+		var u = (local_point.x - bounds[0].x) / (bounds[1].x - bounds[0].x)
+		var v = (local_point.z - bounds[0].z) / (bounds[1].z - bounds[0].z)
+		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+	# Find closest vertex and use its UV
+	var closest_idx = 0
+	var min_dist_sq = INF
+
+	for i in range(vertices.size()):
+		var dist_sq = local_point.distance_squared_to(vertices[i])
+		if dist_sq < min_dist_sq:
+			min_dist_sq = dist_sq
+			closest_idx = i
+
+	print("Closest vertex index: ", closest_idx, " UV: ", uvs[closest_idx])
+	return uvs[closest_idx]
+
+func _calculate_mesh_bounds(vertices: PackedVector3Array) -> Array:
+	"""Calculate bounding box of mesh vertices"""
+	if vertices.is_empty():
+		return [Vector3.ZERO, Vector3.ONE]
+
+	var min_pos = vertices[0]
+	var max_pos = vertices[0]
+
+	for v in vertices:
+		min_pos.x = min(min_pos.x, v.x)
+		min_pos.y = min(min_pos.y, v.y)
+		min_pos.z = min(min_pos.z, v.z)
+		max_pos.x = max(max_pos.x, v.x)
+		max_pos.y = max(max_pos.y, v.y)
+		max_pos.z = max(max_pos.z, v.z)
+
+	return [min_pos, max_pos]
 
 func sample_texture_at_uv(mesh_instance: MeshInstance3D, uv_coord: Vector2) -> Color:
 	"""Sample texture pixel at UV coordinate"""

@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://voxel_noise_marching_cubes"]
+
+[ext_resource type="Script" path="res://algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd" id="1_voxel_noise"]
+
+[node name="VoxelNoiseDemo" type="Node3D"]
+
+[node name="VoxelNoiseMarchingCubes" type="Node3D" parent="."]
+script = ExtResource("1_voxel_noise")
+chunk_size = 32
+num_points_per_axis = 32
+voxel_scale = 1.0
+iso_level = 0.5
+generate_colliders = true
+noise_seed = 1337
+noise_scale = 0.05
+noise_octaves = 4
+noise_persistence = 0.5
+noise_lacunarity = 2.0
+use_shader = true
+glass_color = Color(0.2, 0.4, 1, 1)
+outline_color = Color(1, 0, 0.5, 1)
+outline_width = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 30)
+fov = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
+light_energy = 1.0
+shadow_enabled = true
