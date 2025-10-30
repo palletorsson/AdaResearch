@@ -1,114 +1,61 @@
 extends Node
 
+# Auto-generated from infoboard progression
 var text = '''
-[b][color=cyan]Axiom 1 — The Definition of a Line[/color][/b]
+[center][b]The Line[/b][/center]
+[center][i]Connecting Points[/i][/center]
 
-A Line in the 3-dimensional coordinate system is a vector representing a position in [b]x, y, z[/b].
+Lines create direction, distance, and paths through space
 
-[color=yellow]Code:[/color]
+[hr]
+[b]The Line: Connecting Points[/b]
+- A line is the relation between two distinct points - the shortest path through space.
+[color=yellow]Code[/color]
 [code]
-var Line_position = Vector3(0, 0, 0)
+var point_a = Vector3(0, 0, 0)
+var point_b = Vector3(1, 1, 0)
 [/code]
+[i]Concepts: two points, direction, distance, line segment[/i]
 
-The vector [color=lime](0, 0, 0)[/color] is the [b]origin[/b] — the root of all vectors.
-
-[color=orange]⚠️ This Line is not visible; it needs representation.[/color]
-
-
-[b][color=cyan]Axiom 2 — The Visible Line[/color][/b]
-
-A visible Line can be represented by a small sphere placed at its position.
-
-[color=yellow]Code:[/color]
+[hr]
+[b]Cylinders as Lines[/b]
+- A cylinder can represent a line segment by connecting two points with a visible 3D form aligned along their direction.
+[color=yellow]Code[/color]
 [code]
-var sphere_mesh = SphereMesh.new()
-var radius = 0.02  # a small sphere
-sphere_mesh.radius = radius
-sphere_mesh.height = radius * 2  # SphereMesh height is double radius
+var cylinder = MeshInstance3D.new()
+var cylinder_mesh = CylinderMesh.new()
+cylinder_mesh.height = distance
+cylinder_mesh.top_radius = 0.02   
+cylinder_mesh.bottom_radius = 0.02
+cylinder.mesh = cylinder_mesh
+
+# Position at midpoint
+cylinder.position = (point_a + point_b) / 2.0
+
+# Rotate to align with direction
+cylinder.look_at_from_position(
+    cylinder.position, point_b, Vector3.UP
+)
+
+add_child(cylinder)
 [/code]
+[i]Concepts: CylinderMesh, look_at, rotation, thickness[/i]
 
-
-[b][color=cyan]Axiom 2.5 — The Mesh in the World[/color][/b]
-
-A mesh must be instantiated as a scene object to exist in the world.
-
-[color=yellow]Code:[/color]
+[hr]
+[b]Multiple Lines and Paths[/b]
+AXIOM 4 4: A sequence of connected lines forms a path.
+[color=yellow]Code[/color]
 [code]
-var mesh_instance = MeshInstance3D.new()
-mesh_instance.mesh = sphere_mesh
-mesh_instance.position = Line_position
-add_child(mesh_instance)
+var points = [
+    Vector3(0, 0, 0),
+    Vector3(1, 1, 0),
+    Vector3(2, 0.5, 0),
+    Vector3(3, 1.5, 0)
 [/code]
-
-
-[b][color=cyan]Axiom 3 — Identity of a Line[/color][/b]
-
-The identity of a Line is represented as a [b]text label[/b] positioned close to the Line.
-
-[color=yellow]Code:[/color]
-[code]
-var label_3d = Label3D.new()
-label_3d.text = str(Line_position)
-var label_offset = Vector3(0, 0.15, 0)
-label_3d.position = Line_position + label_offset
-label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-add_child(label_3d)
-[/code]
-
-[i]💡 Tip:[/i] Always ensure proper null checks and that the node has a valid parent before adding children.
-[b][color=cyan]Axiom 1 — The Definition of a Line[/color][/b]
-
-A Line in the 3-dimensional coordinate system is a vector representing a position in [b]x, y, z[/b].
-
-[color=yellow]Code:[/color]
-[code]
-var Line_position = Vector3(0, 0, 0)
-[/code]
-
-The vector [color=lime](0, 0, 0)[/color] is the [b]origin[/b] — the root of all vectors.
-
-[color=orange]⚠️ This Line is not visible; it needs representation.[/color]
-
-
-[b][color=cyan]Axiom 2 — The Visible Line[/color][/b]
-
-A visible Line can be represented by a small sphere placed at its position.
-
-[color=yellow]Code:[/color]
-[code]
-var sphere_mesh = SphereMesh.new()
-var radius = 0.02  # a small sphere
-sphere_mesh.radius = radius
-sphere_mesh.height = radius * 2  # SphereMesh height is double radius
-[/code]
-
-
-[b][color=cyan]Axiom 2.5 — The Mesh in the World[/color][/b]
-
-A mesh must be instantiated as a scene object to exist in the world.
-
-[color=yellow]Code:[/color]
-[code]
-var mesh_instance = MeshInstance3D.new()
-mesh_instance.mesh = sphere_mesh
-mesh_instance.position = Line_position
-add_child(mesh_instance)
-[/code]
-
-
-[b][color=cyan]Axiom 3 — Identity of a Line[/color][/b]
-
-The identity of a Line is represented as a [b]text label[/b] positioned close to the Line.
-
-[color=yellow]Code:[/color]
-[code]
-var label_3d = Label3D.new()
-label_3d.text = str(Line_position)
-var label_offset = Vector3(0, 0.15, 0)
-label_3d.position = Line_position + label_offset
-label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-add_child(label_3d)
-[/code]
-
-[i]💡 Tip:[/i] Always ensure proper null checks and that the node has a valid parent before adding children.
+Lines can connect multiple points to create paths and shapes.
+]
+immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP) for point in points: immediate_mesh.surface_add_vertex(point) immediate_mesh.surface_end()
+LINE_STRIP connects consecutive points with lines. LINES requires pairs of points (every 2 vertices = 1 line).
+Paths are fundamental to curves, splines, and trajectories.
+[i]Concepts: LINE_STRIP, paths, curves, trajectories[/i]
 '''

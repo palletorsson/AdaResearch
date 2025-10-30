@@ -1,9 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for file in *.shader)",
-      "Bash(do mv \"$file\" \"$file%.shader.gdshader\")",
-      "Bash(done)"
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

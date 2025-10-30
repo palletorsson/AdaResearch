@@ -112,8 +112,8 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 func create_info_panel(text: String, position: Vector3) -> Label3D:
 	var label = Label3D.new()
 	label.text = text
-	label.font_size = 24
-	label.modulate = Color(1.0, 1.0, 1.0, 0.9)
+	label.font_size = 16
+	label.modulate = Color.PALE_TURQUOISE
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.position = position
 	info_root.add_child(label)

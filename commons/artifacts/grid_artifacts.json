@@ -85,6 +85,12 @@
 			"description": "Freestanding kiosk combining a 2D-in-3D message console with a vertical status monitor for lab readouts.",
 			"scene": "res://commons/monitor/infokiosk.tscn",
 		},
+		"player_position_to_console": {
+			"name": "player_position_to_console",
+			"lookup_name": "player_position_to_console",
+			"description": "player_position_to_console.",
+			"scene": "res://commons/displays/player_position_to_console.tscn",
+		},		
  
 		"line": {
 			"name": "1.1 A Line",

@@ -14,7 +14,7 @@ func _ready() -> void:
 	point = POINT_SCENE.instantiate()
 	point.name = "ReferencePoint"
 	add_child(point)
-	point.position = Vector3(-3.0, 0.5, -6.0)
+	point.position = Vector3(2.0, 1.5, 2.0)
 	var highlight = point.get_node_or_null("HighlightRing")
 	if highlight:
 		highlight.visible = false

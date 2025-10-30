@@ -16,8 +16,8 @@ func _ready():
 func create_origin_marker():
 	"""Create a small sphere to mark the origin point"""
 	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.05
-	sphere_mesh.height = 0.1
+	sphere_mesh.radius = 0.02
+	sphere_mesh.height = 0.05
 
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = sphere_mesh
@@ -25,7 +25,6 @@ func create_origin_marker():
 
 	# Make it a bright color so it stands out
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.YELLOW
 	material.emission_enabled = true
 	material.emission = Color.YELLOW
 	material.emission_energy = 2.0
@@ -38,6 +37,6 @@ func create_origin_marker():
 	label.text = "ORIGIN (0,0,0)"
 	label.position = Vector3(0, 0.2, 0)
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 32
-	label.modulate = Color.YELLOW
+	label.font_size = 16
+	label.modulate = Color.PINK
 	add_child(label)

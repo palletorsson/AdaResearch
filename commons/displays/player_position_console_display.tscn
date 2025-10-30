@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4mhxbeyu3xwt"]
+
+[ext_resource type="Script" uid="uid://dbeuoqiby62db" path="res://commons/displays/player_position_console_display.gd" id="1"]
+
+[node name="PlayerPositionConsoleDisplay" type="Node"]
+script = ExtResource("1")
