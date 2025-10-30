@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=22 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
 [ext_resource type="Script" uid="uid://rt6n5myljxfg" path="res://addons/godot-xr-tools/hands/hand.gd" id="13_j7xni"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://m85b1gogdums" path="res://addons/godot-xr-tools/hands/animations/right/hand_blend_tree.tres" id="14_mjcnw"]
-[ext_resource type="Shader" uid="uid://8lp3am10hjmy" path="res://commons/resourses/shaders/basic_grid.gdshader" id="15_7fdd7"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="15_8l1pr"]
 [ext_resource type="Resource" uid="uid://dmpjtk0l8vh6v" path="res://addons/godot-xr-tools/hands/poses/pose_default_right.tres" id="15_to05d"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
@@ -26,23 +25,6 @@ size = Vector3(0.126328, 0.0757446, 0.10495)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rldw0"]
 size = Vector3(0.118164, 0.102966, 0.12796)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qiixw"]
-size = Vector3(7.19801, 0.12793, 2.49808)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3jjl"]
-render_priority = 0
-shader = ExtResource("15_7fdd7")
-shader_parameter/line_color = Color(1, 0, 1, 1)
-shader_parameter/fill_color = Color(0, 0, 0, 1)
-shader_parameter/alt_color = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/line_width = 1.5
-shader_parameter/emission_strength = 1.5
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_lr6fa"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_5sk3y"]
-size = Vector3(3.34094, 0.163635, 2.29346)
 
 [node name="Base" instance=ExtResource("1_v5jw7")]
 
@@ -135,24 +117,7 @@ text = "Base "
 [node name="BaseSceneAddon" type="Node3D" parent="." index="3"]
 script = ExtResource("12_qiixw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96911, -0.542583, 1.04907)
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.253602, 0, 1.24598)
-shape = SubResource("BoxShape3D_qiixw")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" index="1"]
-visible = false
-material_override = SubResource("ShaderMaterial_f3jjl")
-mesh = SubResource("PlaneMesh_lr6fa")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69871, -0.01651, -1.16029)
-shape = SubResource("BoxShape3D_5sk3y")
-
-[node name="env" type="Node3D" parent="." index="5"]
+[node name="env" type="Node3D" parent="." index="4"]
 visible = false
 script = ExtResource("2_lr6fa")
 particle_density = -0.98

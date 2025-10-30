@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://hf50cmortdj6"]
+
+[ext_resource type="Script" uid="uid://bi1iisebehc37" path="res://algorithms/shaders/tilesexplained/TilesExplained.gd" id="1"]
+
+[node name="TilesExplained" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 8)
+fov = 55.0

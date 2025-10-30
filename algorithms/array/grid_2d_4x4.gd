@@ -1,5 +1,8 @@
 extends Node3D
 
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 # 4x4 2D grid of cubes arranged in X and Z directions
 # Each cube is spaced 1 units apart
 

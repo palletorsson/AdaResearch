@@ -15,6 +15,7 @@ const COLUMN_MARGIN := 2.0
 # Steppability options
 @export var enable_ramps: bool = true  # Add ramp colliders between steps
 @export var recommended_max_step_height: float = 0.15  # Set XRToolsPlayerBody.max_step_height to this
+@export var debug: bool = false
 
 var _step_material: StandardMaterial3D
 
@@ -29,9 +30,10 @@ func _ready():
 	# Auto-configure player body if found
 	call_deferred("_configure_player_body")
 
-	print("SineCylinderStaircase: Ready")
-	print("  STEP_RISE = %.2f (set max_step_height to %.2f or higher)" % [STEP_RISE, recommended_max_step_height])
-	print("  Ramps enabled: %s" % enable_ramps)
+	if debug:
+		print("SineCylinderStaircase: Ready")
+		print("  STEP_RISE = %.2f (set max_step_height to %.2f or higher)" % [STEP_RISE, recommended_max_step_height])
+		print("  Ramps enabled: %s" % enable_ramps)
 
 func _create_central_column():
 	var total_height = float(STEP_COUNT) * STEP_RISE + COLUMN_MARGIN
@@ -219,7 +221,8 @@ func _configure_player_body() -> void:
 		xr_origin = get_node_or_null("/root/*/XROrigin3D")
 
 	if not xr_origin:
-		print("SineCylinderStaircase: XROrigin3D not found - cannot auto-configure player")
+		if debug:
+			print("SineCylinderStaircase: XROrigin3D not found - cannot auto-configure player")
 		return
 
 	# Find XRToolsPlayerBody
@@ -230,7 +233,8 @@ func _configure_player_body() -> void:
 			break
 
 	if not player_body:
-		print("SineCylinderStaircase: XRToolsPlayerBody not found")
+		if debug:
+			print("SineCylinderStaircase: XRToolsPlayerBody not found")
 		return
 
 	# Configure for stair climbing
@@ -238,9 +242,10 @@ func _configure_player_body() -> void:
 	player_body.set("max_step_height", recommended_max_step_height)
 	player_body.set("stop_on_slope", false)  # Allow movement on slopes
 
-	print("SineCylinderStaircase: Configured XRToolsPlayerBody")
-	print("  max_step_height: %.2f → %.2f" % [old_step_height if old_step_height else 0.0, recommended_max_step_height])
-	print("  stop_on_slope: false")
+	if debug:
+		print("SineCylinderStaircase: Configured XRToolsPlayerBody")
+		print("  max_step_height: %.2f → %.2f" % [old_step_height if old_step_height else 0.0, recommended_max_step_height])
+		print("  stop_on_slope: false")
 
 # Public API for manual configuration
 func configure_player_for_stairs(player_body: Node) -> void:
@@ -248,4 +253,5 @@ func configure_player_for_stairs(player_body: Node) -> void:
 	if player_body.has_method("set"):
 		player_body.set("max_step_height", recommended_max_step_height)
 		player_body.set("stop_on_slope", false)
-		print("SineCylinderStaircase: Manually configured player body")
+		if debug:
+			print("SineCylinderStaircase: Manually configured player body")

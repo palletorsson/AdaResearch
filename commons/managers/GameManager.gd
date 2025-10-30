@@ -24,6 +24,7 @@ var sfx_volume: float = 0.7
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
 
+@export var debug = false
 # Signals
 signal score_updated(new_score: int)
 signal pickup_collected(pickup_position: Vector3)
@@ -42,7 +43,8 @@ signal console_cleared()
 
 # Called when the game starts
 func _ready() -> void:
-	print("GameManager: Singleton initialized")
+	if debug:
+		print("GameManager: Singleton initialized")
 	reset_game_state()
 	add_test_console_messages()
 # Reset the game state
@@ -80,7 +82,8 @@ func end_game() -> void:
 # Score management - UPDATED FUNCTIONALITY
 func add_points(amount: int, pickup_position: Vector3 = Vector3.ZERO) -> void:
 	player_score += amount
-	print("GameManager: Score increased by %d. Total: %d" % [amount, player_score])
+	if debug:
+		print("GameManager: Score increased by %d. Total: %d" % [amount, player_score])
 	
 	# Emit signals for UI updates and score cubes
 	emit_signal("score_updated", player_score)
@@ -132,7 +135,8 @@ func set_max_health(new_max: float, refill: bool = true) -> void:
 		set_health(min(player_health, max_player_health))
 
 func _handle_player_death() -> void:
-	print("GameManager: Player health depleted")
+	if debug:
+		print("GameManager: Player health depleted")
 
 # Message management
 func set_current_map(map_name: String) -> void:
@@ -141,7 +145,8 @@ func set_current_map(map_name: String) -> void:
 		return
 	current_map_name = normalized_name
 	emit_signal("current_map_changed", current_map_name)
-	print("GameManager: Current map set to %s" % current_map_name)
+	if debug:
+		print("GameManager: Current map set to %s" % current_map_name)
 
 func get_current_map() -> String:
 	return current_map_name
@@ -149,7 +154,8 @@ func get_current_map() -> String:
 func set_message(message: String) -> void:
 	current_message = message
 	emit_signal("message_updated", current_message)
-	print("GameManager: Message set to: " + message)
+	if debug:
+		print("GameManager: Message set to: " + message)
 
 func get_message() -> String:
 	return current_message
@@ -169,7 +175,8 @@ func add_console_message(text: String, type: String = "info", source: String = "
 		console_messages.pop_front()
 	
 	emit_signal("console_message_added", message_data)
-	print("Console: [%s] %s: %s" % [type.to_upper(), source, text])
+	if debug:
+		print("Console: [%s] %s: %s" % [type.to_upper(), source, text])
 
 func clear_console() -> void:
 	console_messages.clear()
@@ -187,7 +194,8 @@ func add_test_console_messages():
 
 # Regenerate management
 func request_regenerate(origin: Vector3, targets: Array = [], metadata: Dictionary = {}):
-	print("GameManager: Regenerate requested from %s with %d target(s)" % [origin, targets.size()])
+	if debug:
+		print("GameManager: Regenerate requested from %s with %d target(s)" % [origin, targets.size()])
 	emit_signal("regenerate_requested", origin, targets, metadata)
 
 # Audio management
@@ -196,7 +204,7 @@ func set_sound_enabled(enabled: bool) -> void:
 
 func set_music_volume(volume: float) -> void:
 	music_volume = clamp(volume, 0.0, 1.0)
-
+ 
 func set_sfx_volume(volume: float) -> void:
 	sfx_volume = clamp(volume, 0.0, 1.0)
 
@@ -204,7 +212,8 @@ func set_sfx_volume(volume: float) -> void:
 func set_nail_color(color: Color) -> void:
 	nail_color = color
 	emit_signal("nail_color_changed", nail_color)
-	print("GameManager: Nail color set to %s" % color)
+	if debug:
+		print("GameManager: Nail color set to %s" % color)
 
 func get_nail_color() -> Color:
 	return nail_color
@@ -250,7 +259,8 @@ func load_game() -> bool:
 			emit_signal("nail_color_changed", nail_color)
 
 		emit_signal("score_updated", player_score)
-		print("GameManager: Game loaded successfully - Score: %d" % player_score)
+		if debug:
+			print("GameManager: Game loaded successfully - Score: %d" % player_score)
 		return true
 	else:
 		push_error("GameManager: Failed to load game")
@@ -262,4 +272,5 @@ func add_test_points(amount: int = 10) -> void:
 
 func reset_score() -> void:
 	set_score(0)
-	print("GameManager: Score reset to 0")
+	if debug:
+		print("GameManager: Score reset to 0")

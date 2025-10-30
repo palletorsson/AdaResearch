@@ -84,4 +84,3 @@ func _update_display() -> void:
 
 	label3D.text = "Set %d displayed." % (current_index + 1)
 	pagenumber.text = "(Page: %d of %d pages)" % [current_index + 1, description_sets.size()]
-

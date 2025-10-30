@@ -6,6 +6,7 @@ extends Node3D
 
 var nail_mesh: MeshInstance3D
 var nail_material: StandardMaterial3D
+@export var debug = false 
 
 func _ready() -> void:
 	# Wait a frame to ensure everything is loaded
@@ -34,7 +35,8 @@ func _find_nail_mesh() -> void:
 	for path in possible_paths:
 		nail_mesh = hand_root.get_node_or_null(path)
 		if nail_mesh:
-			print("RightHandNails: Found nail mesh at: ", path)
+			if debug: 
+				print("RightHandNails: Found nail mesh at: ", path)
 			break
 
 	if not nail_mesh:
@@ -60,11 +62,12 @@ func _apply_saved_color() -> void:
 	nail_material.albedo_color = saved_color
 	nail_material.emission = saved_color * 0.3
 	nail_mesh.set_surface_override_material(1, nail_material) # that is accualy the nail 
-
-	print("RightHandNails: Applied saved color: ", saved_color)
+	if debug: 
+		print("RightHandNails: Applied saved color: ", saved_color)
 
 func _on_nail_color_changed(new_color: Color) -> void:
 	if nail_material:
 		nail_material.albedo_color = new_color
 		nail_material.emission = new_color * 0.3
-		print("RightHandNails: Color updated to: ", new_color)
+		if debug: 
+			print("RightHandNails: Color updated to: ", new_color)

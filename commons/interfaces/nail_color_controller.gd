@@ -4,7 +4,7 @@ extends Node3D
 # Maps RGB values from the 3D mapper to both left and right hand nail materials
 
 @onready var value_mapper = $ValueMapper3D
-
+@export var debug = false
 # These will be set dynamically in _ready since the scene can be instantiated at different levels
 var right_hand: Node3D
 var left_hand: Node3D
@@ -14,6 +14,8 @@ var right_hand_mesh: MeshInstance3D
 var nail_material_left: StandardMaterial3D
 var nail_material_right: StandardMaterial3D
 var color_preview_cube: MeshInstance3D
+
+
 
 func _ready() -> void:
 	# Create color preview cube
@@ -35,7 +37,8 @@ func _ready() -> void:
 			var saved_color = GameManager.get_nail_color()
 			value_mapper.set_values(saved_color.r, saved_color.g, saved_color.b)
 			_on_color_values_changed(saved_color.r, saved_color.g, saved_color.b)
-			print("NailColorController: Loaded saved color from GameManager: ", saved_color)
+			if debug:
+				print("NailColorController: Loaded saved color from GameManager: ", saved_color)
 		else:
 			# Set initial color if no GameManager
 			var initial = value_mapper.get_values()
@@ -49,7 +52,7 @@ func _create_color_preview_cube() -> void:
 	color_preview_cube.mesh = box_mesh
 
 	# Position it near the value mapper
-	color_preview_cube.position = Vector3(0, -0.4, 0)
+	color_preview_cube.position = Vector3(0, 0.7, 0)
 
 	# Create material
 	var preview_material = StandardMaterial3D.new()
@@ -74,7 +77,8 @@ func _create_color_preview_cube() -> void:
 	label.scale = Vector3.ONE * 0.08
 	add_child(label)
 
-	print("NailColorController: Color preview cube created")
+	if debug:
+		print("NailColorController: Color preview cube created")
 
 func _find_hand_nodes() -> void:
 	# Try to find XROrigin3D from different possible locations
@@ -88,7 +92,8 @@ func _find_hand_nodes() -> void:
 	for path in possible_paths:
 		xr_origin = get_node_or_null(path)
 		if xr_origin:
-			print("NailColorController: Found XROrigin3D at: ", path)
+			if debug:
+				print("NailColorController: Found XROrigin3D at: ", path)
 			break
 
 	if not xr_origin:
@@ -104,12 +109,14 @@ func _find_hand_nodes() -> void:
 	right_hand = xr_origin.get_node_or_null("RightHand/XRToolsCollisionHand/RightHand")
 
 	if left_hand:
-		print("NailColorController: Found left hand node")
+		if debug:
+			print("NailColorController: Found left hand node")
 	else:
 		push_warning("NailColorController: Could not find left hand node")
 
 	if right_hand:
-		print("NailColorController: Found right hand node")
+		if debug:
+			print("NailColorController: Found right hand node")
 	else:
 		push_warning("NailColorController: Could not find right hand node")
 
@@ -125,15 +132,17 @@ func _find_hand_meshes() -> void:
 		for path in possible_paths:
 			left_hand_mesh = left_hand.get_node_or_null(path)
 			if left_hand_mesh:
-				print("NailColorController: Found left hand mesh at: ", left_hand_mesh.get_path())
+				if debug:
+					print("NailColorController: Found left hand mesh at: ", left_hand_mesh.get_path())
 				break
 
 		if not left_hand_mesh:
 			push_warning("NailColorController: Could not find left hand nail mesh")
 			# Print available children for debugging
-			print("NailColorController: Available children in LeftHand:")
-			for child in left_hand.get_children():
-				print("  - ", child.name)
+			if debug:
+				print("NailColorController: Available children in LeftHand:")
+				for child in left_hand.get_children():
+					print("  - ", child.name)
 	else:
 		push_warning("NailColorController: Left hand node not found")
 
@@ -148,15 +157,17 @@ func _find_hand_meshes() -> void:
 		for path in possible_paths:
 			right_hand_mesh = right_hand.get_node_or_null(path)
 			if right_hand_mesh:
-				print("NailColorController: Found right hand mesh at: ", right_hand_mesh.get_path())
+				if debug:
+					print("NailColorController: Found right hand mesh at: ", right_hand_mesh.get_path())
 				break
 
 		if not right_hand_mesh:
 			push_warning("NailColorController: Could not find right hand nail mesh")
 			# Print available children for debugging
-			print("NailColorController: Available children in RightHand:")
-			for child in right_hand.get_children():
-				print("  - ", child.name)
+			if debug:
+				print("NailColorController: Available children in RightHand:")
+				for child in right_hand.get_children():
+					print("  - ", child.name)
 	else:
 		push_warning("NailColorController: Right hand node not found")
 
@@ -164,7 +175,8 @@ func _setup_nail_materials() -> void:
 	# Create or get materials for the nail meshes
 	# Surface 0 = Nails, Surface 1 = Hand skin
 	if left_hand_mesh:
-		print("NailColorController: Left hand mesh has %d surfaces" % left_hand_mesh.get_surface_override_material_count())
+		if debug:
+			print("NailColorController: Left hand mesh has %d surfaces" % left_hand_mesh.get_surface_override_material_count())
 
 		# Get existing material or create new one for surface 0 (nails)
 		var existing_mat = left_hand_mesh.get_surface_override_material(0)
@@ -178,10 +190,12 @@ func _setup_nail_materials() -> void:
 			nail_material_left.emission_enabled = true
 
 		left_hand_mesh.set_surface_override_material(0, nail_material_left)
-		print("NailColorController: Left nail material setup complete on surface 0")
+		if debug:
+			print("NailColorController: Left nail material setup complete on surface 0")
 
 	if right_hand_mesh:
-		print("NailColorController: Right hand mesh has %d surfaces" % right_hand_mesh.get_surface_override_material_count())
+		if debug:
+			print("NailColorController: Right hand mesh has %d surfaces" % right_hand_mesh.get_surface_override_material_count())
 
 		# Get existing material or create new one for surface 0 (nails)
 		var existing_mat = right_hand_mesh.get_surface_override_material(0)
@@ -195,7 +209,8 @@ func _setup_nail_materials() -> void:
 			nail_material_right.emission_enabled = true
 
 		right_hand_mesh.set_surface_override_material(1, nail_material_right)
-		print("NailColorController: Right nail material setup complete on surface 0")
+		if debug:
+			print("NailColorController: Right nail material setup complete on surface 0")
 
 func _on_color_values_changed(r: float, g: float, b: float) -> void:
 	var color = Color(r, g, b, 1.0)
@@ -215,29 +230,35 @@ func _on_color_values_changed(r: float, g: float, b: float) -> void:
 	if nail_material_left:
 		nail_material_left.albedo_color = color
 		nail_material_left.emission = color * 0.3
-		print("NailColorController: Updated left nail color to ", color)
+		if debug:
+			print("NailColorController: Updated left nail color to ", color)
 	else:
-		print("NailColorController: WARNING - nail_material_left is null!")
+		if debug:
+			print("NailColorController: WARNING - nail_material_left is null!")
 
 	# Update right hand nails
 	if nail_material_right:
 		nail_material_right.albedo_color = color
 		nail_material_right.emission = color * 0.3
-		print("NailColorController: Updated right nail color to ", color)
+		if debug:
+			print("NailColorController: Updated right nail color to ", color)
 	else:
-		print("NailColorController: WARNING - nail_material_right is null!")
+		if debug:
+			print("NailColorController: WARNING - nail_material_right is null!")
 
 	# Verify the materials are still applied to the meshes
 	if left_hand_mesh:
 		var current_mat = left_hand_mesh.get_surface_override_material(0)
 		if current_mat != nail_material_left:
-			print("NailColorController: WARNING - Left hand material changed! Reapplying...")
+			if debug:
+				print("NailColorController: WARNING - Left hand material changed! Reapplying...")
 			left_hand_mesh.set_surface_override_material(0, nail_material_left)
 
 	if right_hand_mesh:
 		var current_mat = right_hand_mesh.get_surface_override_material(0)
 		if current_mat != nail_material_right:
-			print("NailColorController: WARNING - Right hand material changed! Reapplying...")
+			if debug:
+				print("NailColorController: WARNING - Right hand material changed! Reapplying...")
 			right_hand_mesh.set_surface_override_material(1, nail_material_right)
 
 # Public API for programmatic control

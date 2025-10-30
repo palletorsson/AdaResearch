@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpbtmf4p3ogae"]
+
+[ext_resource type="Script" uid="uid://ngwofrr00cfs" path="res://algorithms/voronoi/VoronoiGrid3D.gd" id="1_hcugt"]
+
+[node name="VoronoiGrid3d" type="Node3D"]
+script = ExtResource("1_hcugt")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8214264)

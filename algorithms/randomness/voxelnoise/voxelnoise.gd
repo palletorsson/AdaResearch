@@ -1,6 +1,9 @@
 # VoxelWorld.gd
 extends Node3D
 
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 @export var chunk_size: int = 32
 @export var world_height: int = 64
 @export var voxel_scale: float = 1.0

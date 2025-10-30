@@ -1412,6 +1412,13 @@
 			"description": "Three-dimensional wave dynamics simulation",
 			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
 		},
+		"tiles_explained": {
+			"name": "tiles_explained",
+			"lookup_name": "tiles_explained",
+			"description": "tiles_explained",
+			"scene": "res://algorithms/shaders/tilesexplained/tiles_explained.tscn",
+		},	
+	
 		"boid_flocking": {
 			"name": "Boid Flocking",
 			"lookup_name": "boid_flocking",
@@ -3314,13 +3321,20 @@
 		"scene": "res://commons/visualaid/spittext/spit_text_3d.tscn",
 
 	},	
+		"code": {
+		"name": "code",
+		"lookup_name": "code",
+		"description": "code",
+		"scene": "res://commons/displays/code.tscn",
+
+	},	
 
 	
 	"code_display": {
 		"name": "Code Display",
 		"lookup_name": "code_display",
 		"description": "Display system for showing code and text content",
-		"scene": "res://commons/context/codedisplay/codeDisplay.tscn",
+		"scene": "res://commons/context/clipboard/codeDisplay.tscn",
 
 	},
 	"crystal_ball": {
@@ -3455,6 +3469,13 @@
 		"description": "voronoi_visualization",
 		"scene": "res://algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
 	},	
+	"voronoi_grid_3d": {
+		"name": "voronoi_grid_3d",
+		"lookup_name": "voronoi_grid_3d",
+		"description": "voronoi_grid_3d",
+		"scene": "res://algorithms/voronoi/voronoi_grid_3D.tscn",
+	},	
+	
 	"textureglitch": {
 		"name": "textureglitch",
 		"lookup_name": "textureglitch",
@@ -3526,7 +3547,14 @@
 			"lookup_name": "evolvingflowers",
 			"description": "evolvingflowers",
 			"scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
-		},				
+		},		
+	"learn_world_stacked": {
+			"name": "learn_world_stacked",
+			"lookup_name": "learn_world_stacked",
+			"description": "learn_world_stacked",
+			"scene": "res://algorithms/machinelearning/stacked/learn_world_stacked.tscn	",
+		},		
+			
 	"evolvedcreatures": {
 		"name": "evolvedcreatures",
 		"lookup_name": "evolvedcreatures",

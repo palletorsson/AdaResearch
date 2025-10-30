@@ -1,0 +1,21 @@
+{
+	"_metadata": {
+		"description": "Tutorial text content for codeDisplay system",
+		"format": "BBCode supported text",
+		"version": "1.0"
+	},
+	"tutorials": {
+		"line_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/line_axioms.gd"
+		},
+		"point_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/point_axioms.gd"
+		},
+		"triangle": {
+			"content": "[b]tri[/b]\n\nEdit content..."
+		},
+		"welcome": {
+			"content": "Hello World!"
+		}
+	}
+}

@@ -66,25 +66,33 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 		for warning in validation.warnings:
 			print("  WARNING: %s" % warning)
 	
-	# Separate info board utilities from regular utilities
+	# Separate info board utilities and tutorial text displays from regular utilities
 	var info_board_data = []
+	var tutorial_display_data = []
 	var regular_utilities = []
-	
+
 	# Place utilities
 	for z in range(min(dimensions.z, utility_layout.size())):
 		var row = utility_layout[z]
 		for x in range(min(dimensions.x, row.size())):
 			var utility_cell = str(row[x]).strip_edges()
-			
+
 			if utility_cell.is_empty() or utility_cell == " ":
 				continue
-			
+
 			# Check if this is an info board utility (ib: prefix)
 			if utility_cell.begins_with("ib:"):
 				# Handle info board utilities
 				var board_data = _parse_info_board_utility(utility_cell, x, z)
 				if not board_data.is_empty():
 					info_board_data.append(board_data)
+				utility_count += 1
+			# Check if this is a tutorial text display (tt: prefix)
+			elif utility_cell.begins_with("tt:"):
+				# Handle tutorial text displays
+				var display_data = _parse_tutorial_display_utility(utility_cell, x, z)
+				if not display_data.is_empty():
+					tutorial_display_data.append(display_data)
 				utility_count += 1
 			else:
 				# Handle regular utilities
@@ -109,7 +117,11 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 	# Generate info boards if any were found
 	if not info_board_data.is_empty():
 		_generate_info_boards(info_board_data)
-	
+
+	# Generate tutorial displays if any were found
+	if not tutorial_display_data.is_empty():
+		_generate_tutorial_displays(tutorial_display_data)
+
 	print("GridUtilitiesComponent: Added %d utilities" % utility_count)
 	utility_generation_complete.emit(utility_count)
 
@@ -915,3 +927,137 @@ func _place_info_board_at_position(board_type: String, position: Vector3, rotati
 		print("GridUtilitiesComponent: ✅ Successfully placed %s info board at %s" % [board_type, position])
 	else:
 		print("GridUtilitiesComponent: ❌ Failed to instantiate info board: %s" % board_type)
+
+# Parse tutorial display utility (tt:tutorial_name, tt:tutorial_name:rotation:up:scale)
+# Format: tt:tutorial_name[:rotation[:up[:scale]]]
+#   - tutorial_name: The tutorial key from tutorial_text.json (e.g., "point_axioms", "line")
+#   - rotation: Y-axis rotation in degrees (default: 0)
+#   - up: Y position offset (default: 0)
+#   - scale: uniform scale factor (default: 1.0)
+func _parse_tutorial_display_utility(utility_cell: String, x: int, z: int) -> Dictionary:
+	var parts = utility_cell.split(":")
+	if parts.size() < 2:
+		print("GridUtilitiesComponent: Invalid tutorial display format: %s" % utility_cell)
+		return {}
+
+	var tutorial_name = parts[1]  # e.g., "point_axioms", "line"
+	var rotation_degrees = 0.0
+	var height_offset = 0.0
+	var scale_factor = 1.0
+
+	# Parse parameters based on count (same as info board parsing)
+	if parts.size() > 2:
+		if parts.size() == 3:
+			# Single parameter - could be rotation OR legacy height
+			var param = parts[2]
+			if param.is_valid_float():
+				var value = float(param)
+				# If value is small (< 10), assume it's legacy height offset
+				# If value is large (>= 10), assume it's rotation in degrees
+				if value < 10.0:
+					height_offset = value
+				else:
+					rotation_degrees = value
+
+		elif parts.size() == 4:
+			# Two parameters: rotation and up
+			if parts[2].is_valid_float():
+				rotation_degrees = float(parts[2])
+			if parts[3].is_valid_float():
+				height_offset = float(parts[3])
+
+		elif parts.size() >= 5:
+			# Three+ parameters: rotation, up, and scale
+			if parts[2].is_valid_float():
+				rotation_degrees = float(parts[2])
+			if parts[3].is_valid_float():
+				height_offset = float(parts[3])
+			if parts[4].is_valid_float():
+				scale_factor = float(parts[4])
+
+	return {
+		"tutorial_name": tutorial_name,
+		"position": Vector3i(x, 0, z),  # x, y, z - y will be calculated from structure
+		"rotation_degrees": rotation_degrees,
+		"height_offset": height_offset,
+		"scale": scale_factor
+	}
+
+# Generate tutorial displays at their specific locations
+func _generate_tutorial_displays(tutorial_display_data: Array):
+	print("GridUtilitiesComponent: Generating %d tutorial displays at specific locations" % tutorial_display_data.size())
+
+	# Place each tutorial display at its specific location
+	for display_data in tutorial_display_data:
+		var tutorial_name = display_data.tutorial_name
+		var grid_pos = display_data.position
+		var height_offset = display_data.get("height_offset", 0.0)
+		var rotation_degrees = display_data.get("rotation_degrees", 0.0)
+		var scale_factor = display_data.get("scale", 1.0)
+
+		# Calculate 3D position
+		var total_size = cube_size + gutter
+		var y_pos = structure_component.find_highest_y_at(grid_pos.x, grid_pos.z)
+		var position = Vector3(grid_pos.x, y_pos, grid_pos.z) * total_size
+
+		# Apply height offset
+		position.y += height_offset
+
+		# Generate the tutorial display at this specific location
+		_place_tutorial_display_at_position(tutorial_name, position, rotation_degrees, scale_factor)
+
+		print("GridUtilitiesComponent: Placed '%s' tutorial display at %s (rotation: %.1f°, scale: %.2f)" % [tutorial_name, position, rotation_degrees, scale_factor])
+
+# Place a single tutorial display at a specific position
+func _place_tutorial_display_at_position(tutorial_name: String, position: Vector3, rotation_degrees: float = 0.0, scale_factor: float = 1.0):
+	# Load the codeDisplay scene
+	var scene_path = "res://commons/context/clipboard/codeDisplay.tscn"
+
+	if not ResourceLoader.exists(scene_path):
+		print("GridUtilitiesComponent: WARNING - Tutorial display scene not found: %s" % scene_path)
+		return
+
+	var scene_resource = ResourceLoader.load(scene_path)
+	if not scene_resource:
+		print("GridUtilitiesComponent: WARNING - Could not load tutorial display scene: %s" % scene_path)
+		return
+
+	var display = scene_resource.instantiate()
+
+	if display:
+		# Only set transform if it's a 3D node
+		if display is Node3D:
+			display.position = position
+
+			# Apply Y-axis rotation
+			if rotation_degrees != 0.0:
+				display.rotation_degrees.y = rotation_degrees
+
+			# Apply uniform scale
+			if scale_factor != 1.0:
+				display.scale = Vector3(scale_factor, scale_factor, scale_factor)
+
+		# Add to parent node first so the scene is in the tree
+		parent_node.add_child(display)
+
+		# Set owner for editor
+		if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
+			display.owner = parent_node.get_tree().edited_scene_root
+
+		# Wait a frame for the display to initialize
+		await get_tree().process_frame
+
+		# Apply grid config with tutorial parameter
+		if display.has_method("apply_grid_config"):
+			display.apply_grid_config({"tutorial": tutorial_name})
+			print("GridUtilitiesComponent: Applied tutorial config '%s' to display" % tutorial_name)
+		else:
+			print("GridUtilitiesComponent: WARNING - Tutorial display doesn't have apply_grid_config method")
+
+		# Store in utility objects for tracking
+		var grid_pos = Vector3i(int(position.x / (cube_size + gutter)), int(position.y), int(position.z / (cube_size + gutter)))
+		utility_objects[grid_pos] = display
+
+		print("GridUtilitiesComponent: ✅ Successfully placed '%s' tutorial display at %s" % [tutorial_name, position])
+	else:
+		print("GridUtilitiesComponent: ❌ Failed to instantiate tutorial display for: %s" % tutorial_name)

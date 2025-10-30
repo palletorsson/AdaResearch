@@ -1,5 +1,8 @@
 extends Node3D
 
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 # Rainbow parameters
 const RAINBOW_RADIUS = 15.0
 const RAINBOW_HEIGHT = 8.0

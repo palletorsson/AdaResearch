@@ -6,6 +6,7 @@ const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippe
 @export var dessp: int = -2
 
 @onready var title_node: Node = _first_existing_node([
+	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer/Title",
 	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/Title",
 	"GrabPlane/clipboard/page/Title"
 ])
@@ -13,8 +14,12 @@ const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippe
 	"GrabPlane/clipboard/page/Description"
 ])
 @onready var description_rich_text: RichTextLabel = _first_existing_node([
+	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer/ScrollContainer/Description",
 	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/Description"
 ]) as RichTextLabel
+@onready var scroll_container: ScrollContainer = _first_existing_node([
+	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer/ScrollContainer"
+]) as ScrollContainer
 @onready var grab_cube = $GrabPlane
 @onready var label3D = $GrabPlane/clipboard/page/pagenumber
 @onready var pagenumber = $GrabPlane/clipboard/page/pagenumber
@@ -98,6 +103,10 @@ func _update_display() -> void:
 		_set_text(description_plain_label, _snippet_library.expand_to_plain(raw_text))
 
 	_set_text(pagenumber, "(Page: %d of %d pages)" % [current_index + 1, description_sets.size()])
+
+	# Reset scroll to top when changing pages
+	if scroll_container:
+		scroll_container.scroll_vertical = 0
 
 func _extract_pages_from_metadata() -> Array[String]:
 	if has_meta("clipboard_pages") and typeof(get_meta("clipboard_pages")) == TYPE_ARRAY:

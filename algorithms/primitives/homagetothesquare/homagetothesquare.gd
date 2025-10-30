@@ -1,5 +1,8 @@
 extends Node3D
 
+# Local debug flag to gate prints (default off)
+@export var debug: bool = false
+
 # Plane dimensions
 const PLANE_SIZE = 10.0
 

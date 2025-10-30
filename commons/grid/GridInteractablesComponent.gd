@@ -511,28 +511,50 @@ func _parse_interactable_token(token: String) -> Dictionary:
 	return result
 
 # Parse configuration token syntax with # (e.g., "clipboard#pages:point,line,triangle")
-# Format: "artifact_name#config_key:config_value[#config_key2:config_value2]..."
+# Format: "artifact_name[:rotation:height:scale]#config_key:config_value[#config_key2:config_value2]..."
+# Supports combining : overrides with # config syntax
 # Examples:
-#   "clipboard#pages:point,line,triangle"         → { lookup_name: "clipboard", config_data: { pages: "point,line,triangle" } }
-#   "clipboard#title:Getting Started"             → { lookup_name: "clipboard", config_data: { title: "Getting Started" } }
-#   "clipboard#pages:point,line#title:My Clips"   → { lookup_name: "clipboard", config_data: { pages: "point,line", title: "My Clips" } }
-#   "infokiosk#message:Hello World#color:red"     → { lookup_name: "infokiosk", config_data: { message: "Hello World", color: "red" } }
+#   "clipboard#pages:point,line,triangle"                    → { lookup_name: "clipboard", config_data: { pages: "point,line,triangle" } }
+#   "clipboard#title:Getting Started"                        → { lookup_name: "clipboard", config_data: { title: "Getting Started" } }
+#   "clipboard#pages:point,line#title:My Clips"              → { lookup_name: "clipboard", config_data: { pages: "point,line", title: "My Clips" } }
+#   "code_display:90:0.5:0.2#tutorial:line_axioms"           → { lookup_name: "code_display", overrides: {rotation_y: 90, y_pos: 0.5, scale: 0.2}, config_data: { tutorial: "line_axioms" } }
+#   "infokiosk:180:-0.5#message:Hello World#color:red"      → { lookup_name: "infokiosk", overrides: {rotation_y: 180, y_pos: -0.5}, config_data: { message: "Hello World", color: "red" } }
 func _parse_config_token(token: String) -> Dictionary:
 	var result := {"lookup_name": "", "overrides": {}, "config_data": {}}
-	
+
 	# Split on # to separate artifact name from config parts
 	var hash_parts = token.split("#", false)
 	if hash_parts.size() < 2:
 		result.lookup_name = token
 		return result
-	
-	var artifact_name = hash_parts[0].strip_edges()
-	result.lookup_name = artifact_name
-	
+
+	var artifact_name_part = hash_parts[0].strip_edges()
+
+	# Parse the artifact name part which may contain : overrides
+	# Format: "artifact_name:rotation:height:scale"
+	if artifact_name_part.find(":") != -1:
+		var name_parts = artifact_name_part.split(":", false)
+		result.lookup_name = name_parts[0].strip_edges()
+
+		# Parse positional overrides (rotation, height, scale)
+		if name_parts.size() >= 2 and name_parts[1].is_valid_float():
+			result.overrides["rotation_y_degrees"] = float(name_parts[1])
+
+		if name_parts.size() >= 3 and name_parts[2].is_valid_float():
+			result.overrides["y_position"] = float(name_parts[2])
+
+		if name_parts.size() >= 4 and name_parts[3].is_valid_float():
+			result.overrides["uniform_scale"] = float(name_parts[3])
+
+		if not result.overrides.is_empty():
+			print("GridInteractablesComponent: Parsed combined syntax - artifact='%s', overrides=%s" % [result.lookup_name, result.overrides])
+	else:
+		result.lookup_name = artifact_name_part
+
 	# Process all config parts (supports multiple # configs)
 	for i in range(1, hash_parts.size()):
 		var config_part = hash_parts[i].strip_edges()
-		
+
 		# Parse config part (format: "key:value")
 		if config_part.find(":") != -1:
 			var config_parts = config_part.split(":", false, 1)  # Split only on first ":"
@@ -546,7 +568,7 @@ func _parse_config_token(token: String) -> Dictionary:
 		else:
 			# No colon, treat entire config_part as a key with true value
 			result.config_data[config_part] = true
-	
+
 	return result
 
 # Apply configuration data to an artifact using the # syntax
