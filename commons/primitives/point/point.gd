@@ -48,7 +48,7 @@ func _process(delta):
 
 # Public method to set position and update display
 func set_point_position(new_position: Vector3):
-	position = new_position
+	global_position = new_position
 	if grab_sphere:
 		grab_sphere.global_position = new_position
 	if position_label:

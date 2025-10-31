@@ -136,7 +136,7 @@ func update_column_mesh(column_data: Dictionary, melt_phase: float) -> void:
 		return
 
 	var base_phase: float = column_data.get("base_melt_phase", 0.6)
-	var target_phase := clamp(lerp(base_phase, melt_phase, 0.75), 0.05, 1.0)
+	var target_phase = clamp(lerp(base_phase, melt_phase, 0.75), 0.05, 1.0)
 	shaft.mesh = generate_spiral_column_mesh(target_phase)
 	column_data["base_melt_phase"] = target_phase
 
@@ -210,7 +210,7 @@ func create_spiral_column(color: Color, index: int) -> Dictionary:
 
 	var shaft := MeshInstance3D.new()
 	shaft.name = "ColumnShaft"
-	var base_melt_phase := clamp(0.45 + index * 0.1, 0.05, 1.0)
+	var base_melt_phase = clamp(0.45 + index * 0.1, 0.05, 1.0)
 	shaft.mesh = generate_spiral_column_mesh(base_melt_phase)
 
 	var material := create_shaft_material(color)
@@ -605,7 +605,9 @@ func create_lighting():
 
 		var spotlight = SpotLight3D.new()
 		spotlight.position = pos + Vector3(0, column_height * 1.5, 0)
-		spotlight.look_at(pos)
+		var direction: Vector3 = (pos - spotlight.position).normalized()
+		var up_hint: Vector3 = Vector3.FORWARD if abs(direction.dot(Vector3.UP)) > 0.95 else Vector3.UP
+		spotlight.look_at_from_position(spotlight.position, pos, up_hint)
 		spotlight.light_energy = 3.0
 		spotlight.light_color = color
 		spotlight.spot_range = column_height * 2.5

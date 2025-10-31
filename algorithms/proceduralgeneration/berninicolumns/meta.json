@@ -5,125 +5,125 @@
   "scene": "res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniScene.tscn",
   "script": "res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniColumns.gd",
   "documentation": {
-    "readme": "res://algorithms/proceduralgeneration/berninicolumns/README.md",
-    "tutorial": "res://algorithms/proceduralgeneration/berninicolumns/berninicolumns_tutorial.gd",
-    "prompt": "res://algorithms/proceduralgeneration/berninicolumns/code_prompt.txt"
+	"readme": "res://algorithms/proceduralgeneration/berninicolumns/README.md",
+	"tutorial": "res://algorithms/proceduralgeneration/berninicolumns/berninicolumns_tutorial.gd",
+	"prompt": "res://algorithms/proceduralgeneration/berninicolumns/code_prompt.txt"
   },
   "summary": "Procedurally melts baroque Solomonic columns with an animated noise marble shader, overhang controls, and VR-ready parameters.",
   "keywords": [
-    "procedural generation",
-    "baroque",
-    "columns",
-    "surface tool",
-    "shader displacement",
-    "queer aesthetics",
+	"procedural generation",
+	"baroque",
+	"columns",
+	"surface tool",
+	"shader displacement",
+	"queer aesthetics",
     "marble shader"
   ],
   "difficulty": "intermediate",
   "estimated_duration": "10-15 minutes",
   "last_updated": "2025-10-31",
   "vr_notes": {
-    "comfort": "Rotate columns and melt speed can be disabled for comfort-first sessions.",
-    "performance": "Keep vertical_segments <= 80 for standalone headsets; shader displacement is the heaviest pass.",
-    "interaction": "Parameters expose smoothly lerped values suitable for dial or slider inputs."
+	"comfort": "Rotate columns and melt speed can be disabled for comfort-first sessions.",
+	"performance": "Keep vertical_segments <= 80 for standalone headsets; shader displacement is the heaviest pass.",
+	"interaction": "Parameters expose smoothly lerped values suitable for dial or slider inputs."
   },
   "parameters": [
-    {
-      "name": "column_height",
-      "type": "float",
-      "default": 10.0,
-      "description": "World-space height of each column before melt compression."
-    },
-    {
-      "name": "column_radius",
-      "type": "float",
-      "default": 0.5,
-      "description": "Base radius prior to rib and chaos modifiers."
-    },
-    {
-      "name": "spiral_density",
-      "type": "float",
-      "default": 5.0,
-      "description": "Number of helical turns carved into the shaft."
-    },
-    {
-      "name": "melt_strength",
-      "type": "float",
-      "default": 1.5,
-      "description": "Amount of downward compression applied during melting."
-    },
-    {
-      "name": "overhang_factor",
-      "type": "float",
-      "default": 0.8,
-      "description": "Controls sideward slumping toward the top of the column."
-    },
-    {
-      "name": "bulge_amplitude",
-      "type": "float",
-      "default": 0.6,
-      "description": "Scales radial bulges along the shaft."
-    },
-    {
-      "name": "chaos_factor",
-      "type": "float",
-      "default": 0.3,
-      "description": "Adds sinusoidal noise for organic irregularities."
-    },
-    {
-      "name": "rib_count",
-      "type": "int",
-      "default": 12,
-      "description": "Number of fluted ribs carved around the circumference."
-    },
-    {
-      "name": "rib_depth",
-      "type": "float",
-      "default": 0.15,
-      "description": "Depth of each rib indentation."
-    },
-    {
-      "name": "rib_sharpness",
-      "type": "float",
-      "default": 2.0,
-      "description": "Exponent for rib profile sharpness."
-    },
-    {
-      "name": "rotate_columns",
-      "type": "bool",
-      "default": true,
-      "description": "Enables slow rotation choreography for the column cluster."
-    },
-    {
-      "name": "animate_melting",
-      "type": "bool",
-      "default": true,
-      "description": "When true, regenerates the shaft mesh every frame using update_column_mesh."
-    },
-    {
-      "name": "use_marble_shader",
-      "type": "bool",
-      "default": true,
-      "description": "Toggles the procedural marble shader applied to each column shaft."
-    },
-    {
-      "name": "marble_vein_contrast",
-      "type": "float",
-      "default": 2.2,
-      "description": "Sharpens the sine-driven vein bands in the marble shader."
-    }
+	{
+	  "name": "column_height",
+	  "type": "float",
+	  "default": 10.0,
+	  "description": "World-space height of each column before melt compression."
+	},
+	{
+	  "name": "column_radius",
+	  "type": "float",
+	  "default": 0.5,
+	  "description": "Base radius prior to rib and chaos modifiers."
+	},
+	{
+	  "name": "spiral_density",
+	  "type": "float",
+	  "default": 5.0,
+	  "description": "Number of helical turns carved into the shaft."
+	},
+	{
+	  "name": "melt_strength",
+	  "type": "float",
+	  "default": 1.5,
+	  "description": "Amount of downward compression applied during melting."
+	},
+	{
+	  "name": "overhang_factor",
+	  "type": "float",
+	  "default": 0.8,
+	  "description": "Controls sideward slumping toward the top of the column."
+	},
+	{
+	  "name": "bulge_amplitude",
+	  "type": "float",
+	  "default": 0.6,
+	  "description": "Scales radial bulges along the shaft."
+	},
+	{
+	  "name": "chaos_factor",
+	  "type": "float",
+	  "default": 0.3,
+	  "description": "Adds sinusoidal noise for organic irregularities."
+	},
+	{
+	  "name": "rib_count",
+	  "type": "int",
+	  "default": 12,
+	  "description": "Number of fluted ribs carved around the circumference."
+	},
+	{
+	  "name": "rib_depth",
+	  "type": "float",
+	  "default": 0.15,
+	  "description": "Depth of each rib indentation."
+	},
+	{
+	  "name": "rib_sharpness",
+	  "type": "float",
+	  "default": 2.0,
+	  "description": "Exponent for rib profile sharpness."
+	},
+	{
+	  "name": "rotate_columns",
+	  "type": "bool",
+	  "default": true,
+	  "description": "Enables slow rotation choreography for the column cluster."
+	},
+	{
+	  "name": "animate_melting",
+	  "type": "bool",
+	  "default": true,
+	  "description": "When true, regenerates the shaft mesh every frame using update_column_mesh."
+	},
+	{
+	  "name": "use_marble_shader",
+	  "type": "bool",
+	  "default": true,
+	  "description": "Toggles the procedural marble shader applied to each column shaft."
+	},
+	{
+	  "name": "marble_vein_contrast",
+	  "type": "float",
+	  "default": 2.2,
+	  "description": "Sharpens the sine-driven vein bands in the marble shader."
+	}
   ],
   "links": [
-    {
-      "title": "Gian Lorenzo Bernini - Baldacchino",
-      "type": "reference",
-      "note": "Solomonic columns inspiration",
-      "url": "https://en.wikipedia.org/wiki/Baldachin"
-    },
-    {
-      "title": "Godot 4 SurfaceTool",
-      "type": "documentation",
-      "url": "https://docs.godotengine.org/en/stable/classes/class_surfacetool.html"
-    }
+	{
+	  "title": "Gian Lorenzo Bernini - Baldacchino",
+	  "type": "reference",
+	  "note": "Solomonic columns inspiration",
+	  "url": "https://en.wikipedia.org/wiki/Baldachin"
+	},
+	{
+	  "title": "Godot 4 SurfaceTool",
+	  "type": "documentation",
+	  "url": "https://docs.godotengine.org/en/stable/classes/class_surfacetool.html"
+	}
   ]
 }
