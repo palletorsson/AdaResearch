@@ -36,13 +36,5 @@ current = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qul75")
 
-[node name="Explanation" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
-billboard = 1
-text = "Bernini's Twisted Columns
-Created using Sine and Cosine Displacement"
-font_size = 64
-width = 800.0
-
 [node name="tubetrailmesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("TubeTrailMesh_34kgh")

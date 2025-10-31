@@ -1,0 +1,12 @@
+﻿You are generating a Godot 4.2 GDScript named `MeltingBerniniColumns.gd` for a Node3D scene that showcases melting, overhanging Bernini-inspired columns.
+
+Core requirements
+1. Export parameters to control column height, radius, spiral density, twist, melt strength, bulge amplitude, chaos, rib count, rib depth, and rib sharpness. Provide toggles for rotating the column cluster and animating the melt state.
+2. Preload `res://algorithms/patterngeneration/fabrics/displacement.gdshader` and the local marble shader `res://algorithms/proceduralgeneration/berninicolumns/shaders/marble_column.gdshader`. Preferred material flow: use the marble shader when enabled, fall back to the displacement shader, then to a procedurally generated crackle normal map. Encapsulate the material setup in a helper so it can be reused when the geometry is regenerated.
+3. Generate five columns positioned on a cross layout plus a central pillar. Each column stores references to its Node3D wrapper, shaft mesh, base, capital, material, palette color, and base melt phase in a dictionary so runtime animation logic can reuse them.
+4. Build the column shaft procedurally with SurfaceTool, layering spiral offsets, sine/cosine undulations, ribbing, chaotic noise, bulges, and overhang controls before committing the mesh. Add bespoke functions for the plinth/base and drooping capital geometry.
+5. During `_process`, rotate columns at varied speeds when enabled, stream the marble shader's `u_time`, and tween the melt phase with `lerp` before regenerating only the shaft mesh via `update_column_mesh`. Avoid freeing and recreating the base/capital each frame.
+6. Provide dramatic queer lighting (directional + colored spotlights) and a subtle platform to ground the composition.
+7. Keep inline comments focused on intent (e.g., explain why a deformation term exists) and structure the file with clear section dividers: lifecycle, procedural helpers, geometry, and scene setup.
+
+Deliver the script as valid UTF-8 ASCII-compatible GDScript. Assume other assets (scenes, textures) are already part of the project.

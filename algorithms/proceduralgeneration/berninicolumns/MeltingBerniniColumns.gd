@@ -27,9 +27,25 @@ extends Node3D
 @export var rib_depth: float = 0.15  # How deep the ribs cut into surface
 @export var rib_sharpness: float = 2.0  # How sharp vs smooth the ribs are
 
+@export var use_marble_shader: bool = true
+@export var marble_vein_contrast: float = 2.2
+@export var marble_vein_strength: float = 0.55
+@export var marble_noise_scale: float = 0.4
+@export var marble_turbulence: float = 3.6
+@export var marble_swirl_strength: float = 1.1
+@export var marble_time_speed: float = 0.2
+@export var marble_emission_strength: float = 0.2
+@export var marble_normal_perturb: float = 0.25
+@export var marble_metallic: float = 0.6
+@export var marble_roughness: float = 0.28
+
 # Shader path
 const DISPLACEMENT_SHADER_PATH = "res://algorithms/patterngeneration/fabrics/displacement.gdshader"
-var displacement_shader: Shader
+const DISPLACEMENT_SHADER: Shader = preload("res://algorithms/patterngeneration/fabrics/displacement.gdshader")
+var displacement_shader: Shader = null
+const MARBLE_SHADER_PATH = "res://algorithms/proceduralgeneration/berninicolumns/shaders/marble_column.gdshader"
+const MARBLE_SHADER: Shader = preload("res://algorithms/proceduralgeneration/berninicolumns/shaders/marble_column.gdshader")
+var marble_shader: Shader = null
 
 # For animated rotation and melting
 @export var rotate_columns: bool = true
@@ -39,15 +55,15 @@ var displacement_shader: Shader
 var time: float = 0.0
 
 # -- Scene State --
-var columns = []
+var columns: Array = []  # Holds dictionaries with column node, mesh, material, and metadata
 
 # Column positions with variety
 var column_positions = [
-	Vector3(-3, 0, -3),
-	Vector3(3, 0, -3),
-	Vector3(-3, 0, 3),
-	Vector3(3, 0, 3),
-	Vector3(0, 0, 0)  # Center column for extra queerness
+	Vector3(-3, 0, 0),
+	Vector3(3, 0, 0),
+	Vector3(0, 0, -3),
+	Vector3(0, 0, 3),
+	Vector3(0, 0, 0)  # Center column anchoring the cross
 ]
 
 # Queer color palette
@@ -62,19 +78,26 @@ var queer_colors = [
 # -- Godot Lifecycle Functions --
 
 func _ready():
-	# Load displacement shader
-	displacement_shader = load(DISPLACEMENT_SHADER_PATH)
+	# Confirm displacement shader availability (falls back to procedural normal map when null)
+	displacement_shader = DISPLACEMENT_SHADER if is_instance_valid(DISPLACEMENT_SHADER) else null
 	if not displacement_shader:
-		push_error("Failed to load displacement shader from: " + DISPLACEMENT_SHADER_PATH)
+		push_warning("Displacement shader missing, using procedural normal map fallback.")
+
+	marble_shader = MARBLE_SHADER if is_instance_valid(MARBLE_SHADER) else null
+	if use_marble_shader and not marble_shader:
+		push_warning("Marble shader missing, reverting to standard material fallback.")
 
 	# Create the melting columns with different colors
 	for i in range(column_positions.size()):
 		var pos = column_positions[i]
-		var color = queer_colors[i % queer_colors.size()]
-		var column = create_spiral_column(color, i)
-		column.position = pos
-		add_child(column)
-		columns.append(column)
+		var color = material_color
+		if queer_colors.size() > 0:
+			color = queer_colors[i % queer_colors.size()]
+		var column_data = create_spiral_column(color, i)
+		var column_node: Node3D = column_data["node"]
+		column_node.position = pos
+		add_child(column_node)
+		columns.append(column_data)
 
 	# Create a simple platform/base
 	create_platform()
@@ -86,94 +109,131 @@ func _process(delta):
 	# Animate the columns if enabled
 	time += delta
 
+	for column_data in columns:
+		if column_data.has("material") and column_data["material"] is ShaderMaterial:
+			var shader_material: ShaderMaterial = column_data["material"]
+			if shader_material.shader == marble_shader:
+				shader_material.set_shader_parameter("u_time", time)
+
 	if rotate_columns:
 		for i in range(columns.size()):
-			var column = columns[i]
-			# Varied rotation speeds
-			column.rotation.y = time * rotation_speed * (1.0 + i * 0.3)
+			var column_data: Dictionary = columns[i]
+			var column_node := column_data.get("node") as Node3D
+			if column_node:
+				column_node.rotation.y = time * rotation_speed * (1.0 + i * 0.3)
 
 	if animate_melting:
-		# Regenerate columns with animated melt
 		for i in range(columns.size()):
-			var column = columns[i]
-			# Clear old mesh
-			for child in column.get_children():
-				if child is MeshInstance3D:
-					child.queue_free()
-
-			# Regenerate with time-based melting
-			var color = queer_colors[i % queer_colors.size()]
-			var mesh_instance = MeshInstance3D.new()
-			mesh_instance.mesh = generate_spiral_column_mesh(sin(time * melt_speed + i) * 0.5 + 0.5)
-
-			var material = StandardMaterial3D.new()
-			material.albedo_color = color
-			material.metallic = 0.7
-			material.roughness = 0.3
-			material.emission_enabled = true
-			material.emission = color * 0.3
-			mesh_instance.set_surface_override_material(0, material)
-
-			column.add_child(mesh_instance)
+			var column_data: Dictionary = columns[i]
+			var melt_phase = sin(time * melt_speed + i) * 0.5 + 0.5
+			update_column_mesh(column_data, melt_phase)
 
 # --- Procedural Generation Functions ---
 
-func create_spiral_column(color: Color, index: int) -> Node3D:
-	# Creates a single, complete melting column
-	var column_node = Node3D.new()
+func update_column_mesh(column_data: Dictionary, melt_phase: float) -> void:
+	var shaft := column_data.get("shaft") as MeshInstance3D
+	if not shaft or not is_instance_valid(shaft):
+		return
 
-	# Create the main melting spiral shaft
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = generate_spiral_column_mesh(0.5 + index * 0.1)
+	var base_phase: float = column_data.get("base_melt_phase", 0.6)
+	var target_phase := clamp(lerp(base_phase, melt_phase, 0.75), 0.05, 1.0)
+	shaft.mesh = generate_spiral_column_mesh(target_phase)
+	column_data["base_melt_phase"] = target_phase
 
-	# Use displacement shader if available, otherwise fall back to standard material
-	if displacement_shader:
-		var shader_material = ShaderMaterial.new()
-		shader_material.shader = displacement_shader
+	if column_data.has("material") and column_data["material"] is Material:
+		var material: Material = column_data["material"]
+		if displacement_shader:
+			shaft.material_override = material
+		else:
+			shaft.set_surface_override_material(0, material)
 
-		# Set shader parameters for crackle/displacement effect
+
+func create_shaft_material(color: Color) -> Material:
+	if use_marble_shader and marble_shader:
+		var shader_material := ShaderMaterial.new()
+		shader_material.shader = marble_shader
 		shader_material.set_shader_parameter("base_color", Vector3(color.r, color.g, color.b))
-		shader_material.set_shader_parameter("time_scale", 0.3)
-		shader_material.set_shader_parameter("cell_scale", 8.0)
-		shader_material.set_shader_parameter("displacement_strength", 0.8)
-		shader_material.set_shader_parameter("animation_speed", 0.5)
-		shader_material.set_shader_parameter("vertex_displacement", 0.05)
-		shader_material.set_shader_parameter("roughness", 0.3)
-		shader_material.set_shader_parameter("metallic", 0.7)
-		shader_material.set_shader_parameter("emission_strength", 0.5)
-		shader_material.set_shader_parameter("base_alpha", 1.0)
-		shader_material.set_shader_parameter("animate", true)
-		shader_material.set_shader_parameter("use_vertex_displacement", true)
-		shader_material.set_shader_parameter("use_full_color", false)
-		shader_material.set_shader_parameter("use_pattern_alpha", false)
+		var vein_color := color.lightened(0.25)
+		shader_material.set_shader_parameter("vein_color", Vector3(vein_color.r, vein_color.g, vein_color.b))
+		shader_material.set_shader_parameter("vein_contrast", marble_vein_contrast)
+		shader_material.set_shader_parameter("vein_strength", marble_vein_strength)
+		shader_material.set_shader_parameter("noise_scale", marble_noise_scale)
+		shader_material.set_shader_parameter("turbulence", marble_turbulence)
+		shader_material.set_shader_parameter("swirl_strength", marble_swirl_strength)
+		shader_material.set_shader_parameter("time_speed", marble_time_speed)
+		shader_material.set_shader_parameter("emission_strength", marble_emission_strength)
+		shader_material.set_shader_parameter("normal_perturb", marble_normal_perturb)
+		shader_material.set_shader_parameter("metallic_amount", marble_metallic)
+		shader_material.set_shader_parameter("roughness_amount", marble_roughness)
+		shader_material.set_shader_parameter("u_time", time)
+		return shader_material
 
-		# Set custom color channels for variation
-		shader_material.set_shader_parameter("color_r", Vector3(color.r * 1.2, color.g * 0.8, color.b * 0.8))
-		shader_material.set_shader_parameter("color_g", Vector3(color.r * 0.8, color.g * 1.2, color.b * 0.8))
-		shader_material.set_shader_parameter("color_b", Vector3(color.r * 0.8, color.g * 0.8, color.b * 1.2))
+	if displacement_shader:
+		var displacement_material := ShaderMaterial.new()
+		displacement_material.shader = displacement_shader
+		displacement_material.set_shader_parameter("base_color", Vector3(color.r, color.g, color.b))
+		displacement_material.set_shader_parameter("time_scale", 0.3)
+		displacement_material.set_shader_parameter("cell_scale", 8.0)
+		displacement_material.set_shader_parameter("displacement_strength", 0.8)
+		displacement_material.set_shader_parameter("animation_speed", 0.5)
+		displacement_material.set_shader_parameter("vertex_displacement", 0.05)
+		displacement_material.set_shader_parameter("roughness", 0.3)
+		displacement_material.set_shader_parameter("metallic", 0.7)
+		displacement_material.set_shader_parameter("emission_strength", 0.5)
+		displacement_material.set_shader_parameter("base_alpha", 1.0)
+		displacement_material.set_shader_parameter("animate", true)
+		displacement_material.set_shader_parameter("use_vertex_displacement", true)
+		displacement_material.set_shader_parameter("use_full_color", false)
+		displacement_material.set_shader_parameter("use_pattern_alpha", false)
+		displacement_material.set_shader_parameter("color_r", Vector3(color.r * 1.2, color.g * 0.8, color.b * 0.8))
+		displacement_material.set_shader_parameter("color_g", Vector3(color.r * 0.8, color.g * 1.2, color.b * 0.8))
+		displacement_material.set_shader_parameter("color_b", Vector3(color.r * 0.8, color.g * 0.8, color.b * 1.2))
+		return displacement_material
 
-		mesh_instance.material_override = shader_material
+	var normal_map = create_crackle_normal_map()
+	var material := StandardMaterial3D.new()
+	material.albedo_color = color
+	material.metallic = 0.7
+	material.roughness = 0.3
+	material.emission_enabled = true
+	material.emission = color * 0.3
+	material.normal_enabled = true
+	material.normal_texture = normal_map
+	material.normal_scale = 1.5
+	return material
+
+
+func create_spiral_column(color: Color, index: int) -> Dictionary:
+	# Creates a single, complete melting column and returns metadata for animation
+	var column_node := Node3D.new()
+	column_node.name = "BerniniColumn_%d" % index
+
+	var shaft := MeshInstance3D.new()
+	shaft.name = "ColumnShaft"
+	var base_melt_phase := clamp(0.45 + index * 0.1, 0.05, 1.0)
+	shaft.mesh = generate_spiral_column_mesh(base_melt_phase)
+
+	var material := create_shaft_material(color)
+	if displacement_shader:
+		shaft.material_override = material
 	else:
-		# Fallback to standard material with normal map
-		var normal_map = create_crackle_normal_map()
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color
-		material.metallic = 0.7
-		material.roughness = 0.3
-		material.emission_enabled = true
-		material.emission = color * 0.3
-		material.normal_enabled = true
-		material.normal_texture = normal_map
-		material.normal_scale = 1.5
-		mesh_instance.set_surface_override_material(0, material)
+		shaft.set_surface_override_material(0, material)
 
-	column_node.add_child(mesh_instance)
+	column_node.add_child(shaft)
 
-	# Add the decorative top and bottom parts with same color
-	add_column_base(column_node, color, index)
-	add_column_capital(column_node, color, index)
+	var base := add_column_base(column_node, color, index)
+	var capital := add_column_capital(column_node, color, index)
 
-	return column_node
+	return {
+		"node": column_node,
+		"shaft": shaft,
+		"material": material,
+		"index": index,
+		"color": color,
+		"base": base,
+		"capital": capital,
+		"base_melt_phase": base_melt_phase
+	}
 
 func create_crackle_normal_map() -> ImageTexture:
 	# Create a procedural crackle/crack pattern for surface detail
@@ -426,7 +486,7 @@ func create_tube_trail_base_mesh() -> Mesh:
 	
 	return st.commit()
 
-func add_column_base(column_node: Node3D, color: Color, index: int):
+func add_column_base(column_node: Node3D, color: Color, index: int) -> MeshInstance3D:
 	# Adds a melting base to the bottom of a column
 	var base = MeshInstance3D.new()
 	base.mesh = create_tube_trail_base_mesh()
@@ -459,8 +519,9 @@ func add_column_base(column_node: Node3D, color: Color, index: int):
 		base.set_surface_override_material(0, material)
 
 	column_node.add_child(base)
+	return base
 
-func add_column_capital(column_node: Node3D, color: Color, index: int):
+func add_column_capital(column_node: Node3D, color: Color, index: int) -> MeshInstance3D:
 	# Adds a melting, drooping capital to the top
 	var capital = MeshInstance3D.new()
 	var cylinder_mesh = CylinderMesh.new()
@@ -498,6 +559,7 @@ func add_column_capital(column_node: Node3D, color: Color, index: int):
 		capital.set_surface_override_material(0, material)
 
 	column_node.add_child(capital)
+	return capital
 
 # --- Scene Setup Functions ---
 
@@ -537,7 +599,9 @@ func create_lighting():
 	# Add colored spotlights for each column
 	for i in range(column_positions.size()):
 		var pos = column_positions[i]
-		var color = queer_colors[i % queer_colors.size()]
+		var color = material_color
+		if queer_colors.size() > 0:
+			color = queer_colors[i % queer_colors.size()]
 
 		var spotlight = SpotLight3D.new()
 		spotlight.position = pos + Vector3(0, column_height * 1.5, 0)
