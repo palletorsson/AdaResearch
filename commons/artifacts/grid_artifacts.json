@@ -1321,6 +1321,20 @@
 		"scene": "res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniScene.tscn",
 		
 	},	
+	"line_builder_3d": {
+		"name": "line_builder_3d",
+		"lookup_name": "line_builder_3d",
+		"description": "line_builder_3d",
+		"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn",
+		
+	},	
+		"cable_builder": {
+		"name": "cable_builder",
+		"lookup_name": "cable_builder",
+		"description": "cable_builder",
+		"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+		
+	},	
 	
 	"fourier_transform_advanced": {
 		"name": "Advanced Fourier Transform",
@@ -3566,8 +3580,14 @@
 			"name": "learn_world_stacked",
 			"lookup_name": "learn_world_stacked",
 			"description": "learn_world_stacked",
-			"scene": "res://algorithms/machinelearning/stacked/learn_world_stacked.tscn	",
-		},		
+			"scene": "res://algorithms/machinelearning/stacked/learn_world_stacked.tscn",
+		},
+	"gradient_descent_visualization": {
+			"name": "gradient_descent_visualization",
+			"lookup_name": "gradient_descent_visualization",
+			"description": "gradient_descent_visualization",
+			"scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+		},					
 			
 	"evolvedcreatures": {
 		"name": "evolvedcreatures",

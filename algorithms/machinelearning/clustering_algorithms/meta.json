@@ -1,0 +1,66 @@
+﻿{
+  "id": "machinelearning_clustering_algorithms",
+  "title": "Clustering Algorithms Sandbox",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms.tscn",
+  "script": "res://algorithms/machinelearning/clustering_algorithms/ClusteringAlgorithms.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/clustering_algorithms/README.md",
+    "tutorial": "res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/clustering_algorithms/code_prompt.txt"
+  },
+  "summary": "Synthetic dataset clustered with K-Means, naive agglomerative, and DBSCAN. Visualises centroids, dataset radius, inertia, and silhouette scores.",
+  "keywords": [
+    "machine learning",
+    "clustering",
+    "k-means",
+    "dbscan",
+    "visualisation"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Static environment; only point height animates when clusters are assigned.",
+    "interaction": "Cycle algorithms or reseed the dataset with helper methods bound to controls.",
+    "performance": "<600 lightweight meshes plus centroid spheres; safe for desktop and high-end standalone."
+  },
+  "parameters": [
+    {
+      "name": "sample_count",
+      "type": "int",
+      "default": 180,
+      "description": "Number of synthetic samples to generate."
+    },
+    {
+      "name": "cluster_count",
+      "type": "int",
+      "default": 3,
+      "description": "Target number of clusters for K-Means/Agglomerative."
+    },
+    {
+      "name": "dbscan_eps",
+      "type": "float",
+      "default": 1.2,
+      "description": "Neighbourhood radius for DBSCAN detection."
+    },
+    {
+      "name": "dbscan_min_points",
+      "type": "int",
+      "default": 6,
+      "description": "Minimum neighbours for DBSCAN to promote a core point."
+    }
+  ],
+  "links": [
+    {
+      "title": "MacQueen (1967) - K-Means",
+      "type": "reference",
+      "url": "https://doi.org/10.1145/321561.321575"
+    },
+    {
+      "title": "Ester et al. (1996) - DBSCAN",
+      "type": "reference",
+      "url": "https://www.aaai.org/Papers/KDD/1996/KDD96-037.pdf"
+    }
+  ]
+}

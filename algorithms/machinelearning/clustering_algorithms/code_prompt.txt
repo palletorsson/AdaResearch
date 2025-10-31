@@ -1,0 +1,15 @@
+﻿You are generating a Godot 4.2 GDScript named `ClusteringAlgorithms.gd` for `res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms.tscn`.
+
+Core requirements
+1. Extend `Node3D`. In `_ready()` seed a `RandomNumberGenerator`, create a synthetic 2D dataset (clusters + optional noise), build point meshes under `DataRoot`, and call `run_clustering()`.
+2. Visualise each sample with a `MeshInstance3D` using a small `SphereMesh` (radius ≈ 0.12) on the XZ plane. Store references to each mesh/material inside the sample dictionary for fast updates.
+3. Support three clustering heuristics:
+   - `K_MEANS`: simple Lloyd updates with `kmeans_iterations` iterations and `cluster_count` centres.
+   - `AGGLOMERATIVE`: naive single-link merges until `cluster_count` clusters remain.
+   - `DBSCAN`: region-query expansion with exported `dbscan_eps` and `dbscan_min_points`; mark noise with label `-1`.
+4. After clustering, colour-code points using a palette, lift clustered points slightly on Y when `animate_clusters` is true, and generate glowing centroid spheres inside `CentroidsRoot`.
+5. Keep the translucent `ThresholdVisual` disc scaled to the dataset radius and tinted with the current mode colour. Update HUD labels (`StatsLabels/TitleLabel`, `ModeLabel`, `SummaryLabel`) with algorithm name, effective cluster count, inertia, and silhouette score.
+6. Expose helper methods `run_clustering()`, `cycle_algorithm_mode()`, and `reset_dataset(new_seed)`; annotate everything with explicit types (avoid implicit Variant warnings).
+7. Use ASCII-compatible UTF-8 and gate optional nodes with null/validity checks.
+
+Assume the scene already contains `DataRoot`, `CentroidsRoot`, `ThresholdVisual`, and the three labels under `StatsLabels` alongside camera/light/ground.

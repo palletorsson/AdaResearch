@@ -1,0 +1,66 @@
+{
+  "id": "machinelearning_gradient_descent",
+  "title": "Gradient Descent Sandbox",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+  "script": "res://algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/gradientdescent/README.md",
+    "tutorial": "res://algorithms/machinelearning/gradientdescent/gradient_descent_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/gradientdescent/code_prompt.txt"
+  },
+  "summary": "Random walker performs gradient descent on a procedural heightfield, leaving a trail that visualises optimisation steps.",
+  "keywords": [
+    "machine learning",
+    "gradient descent",
+    "optimisation",
+    "noise",
+    "visualisation"
+  ],
+  "difficulty": "beginner",
+  "estimated_duration": "5-7 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Only the walker moves slowly; camera and terrain stay static.",
+    "interaction": "Call `reset_descent()` to randomise starts or tweak exports for live demos.",
+    "performance": "Single dynamic mesh with <300 segments and two immediate line meshes; negligible cost."
+  },
+  "parameters": [
+    {
+      "name": "learning_rate",
+      "type": "float",
+      "default": 0.85,
+      "description": "Step size multiplier for the downhill update."
+    },
+    {
+      "name": "step_interval",
+      "type": "float",
+      "default": 0.18,
+      "description": "Seconds between descent updates."
+    },
+    {
+      "name": "gradient_sample_distance",
+      "type": "float",
+      "default": 0.25,
+      "description": "Offset used when estimating the gradient via finite differences."
+    },
+    {
+      "name": "stop_gradient_magnitude",
+      "type": "float",
+      "default": 0.02,
+      "description": "Terminate descent when the gradient magnitude falls below this value."
+    }
+  ],
+  "links": [
+    {
+      "title": "Goodfellow et al. (2016) - Deep Learning, Chapter 8",
+      "type": "reference",
+      "url": "https://www.deeplearningbook.org/contents/optimization.html"
+    },
+    {
+      "title": "FastNoiseLite",
+      "type": "documentation",
+      "url": "https://github.com/Auburn/FastNoiseLite"
+    }
+  ]
+}

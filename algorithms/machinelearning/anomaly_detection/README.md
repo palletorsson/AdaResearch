@@ -1,64 +1,37 @@
-# Anomaly Detection
+﻿# Anomaly Detection Sandbox
 
-## Overview
-This algorithm implements various anomaly detection techniques to identify unusual patterns, outliers, and abnormal data points in datasets, providing both statistical and machine learning-based approaches.
+A visual sandbox for comparing simple anomaly scoring strategies on a synthetic 2D dataset. Points are projected onto a ground plane, colour-coded by anomaly score, and rescaled when they cross the active threshold.
 
-## What It Does
-- **Outlier Detection**: Identifies data points that deviate from normal patterns
-- **Pattern Analysis**: Analyzes data distributions and relationships
-- **Anomaly Scoring**: Assigns anomaly scores to data points
-- **Visualization**: Displays data with highlighted anomalies
-- **Real-time Detection**: Continuously monitors for new anomalies
-- **Multiple Methods**: Various detection algorithms and approaches
+## Scene Assets
+- nomaly_detection.tscn – root scene with camera, lighting, threshold disc, labels, and an empty DataRoot container.
+- AnomalyDetection.gd – builds the dataset, computes anomaly scores, colours points, and keeps the threshold disc and labels in sync.
+- code_prompt.txt – instructions for regenerating the controller script via an AI assistant.
+- nomaly_detection_tutorial.gd – in-world BBCode tutorial card.
+- meta.json – catalog metadata for menus/search.
 
-## Key Concepts
+## How It Works
+1. _generate_samples() seeds a reproducible dataset: 70-ish normal points clustered near the origin and a handful of injected anomalies on the perimeter.
+2. _build_points() instantiates SphereMesh instances under DataRoot, attaching individual StandardMaterial3D instances so colours/emission can be tuned per sample.
+3. un_detection() recomputes summary statistics (mean, std-dev, max radius) and scores each sample using the current detection mode:
+   - **Z-Score** – |zₓ| + |zᵧ| relative to the cluster mean.
+   - **Isolation Radius** – Euclidean distance from the cluster centre.
+   - **Autoencoder Error** – reconstruction error against a synthetic sin-wave manifold plus a radial penalty.
+4. Points are lerped between teal (normal) and hot red (anomaly) based on score / threshold; anomalies scale up and float slightly above the plane.
+5. The translucent ThresholdVisual cylinder scales to communicate the active threshold radius, and three Label3D nodes surface the current mode, anomaly counts, and score statistics.
 
-### Anomaly Types
-- **Point Anomalies**: Individual data points that are unusual
-- **Contextual Anomalies**: Points that are anomalous in specific contexts
-- **Collective Anomalies**: Groups of data points that are anomalous together
-- **Temporal Anomalies**: Time-based unusual patterns
+## Public API Highlights
+- un_detection() – recompute colour/scale/state after tweaking exports or dataset.
+- cycle_detection_mode() – iterate Z-Score → Isolation → Autoencoder.
+- eset_dataset(new_seed) – reseed and rebuild the synthetic dataset.
+- Exported parameters (
+ormal_sample_count, thresholds, nomaly_scale_multiplier, etc.) let designers tune density and sensitivity in-editor.
 
-### Detection Methods
-- **Statistical Methods**: Z-score, IQR, and distribution-based approaches
-- **Distance-based**: K-nearest neighbors and density-based methods
-- **Isolation Forest**: Tree-based anomaly detection
-- **One-Class SVM**: Support vector machine for outlier detection
-- **Autoencoders**: Neural network-based reconstruction error
+## Usage Notes
+- Tweak exported thresholds in the inspector, then call un_detection() (or toggle a value) to see the effect.
+- Use cycle_detection_mode() from a debug console or button to compare how each heuristic reacts to the same dataset.
+- The threshold disc is illustrative; its radius mapping differs slightly per mode to keep the visual scale readable.
 
-## Algorithm Features
-- **Multiple Detection Methods**: Various anomaly detection algorithms
-- **Configurable Parameters**: Adjustable detection sensitivity
-- **Real-time Processing**: Continuous data monitoring
-- **Performance Metrics**: Accuracy, precision, and recall tracking
-- **Visual Feedback**: Immediate display of detected anomalies
-- **Export Capabilities**: Save detection results and reports
-
-## Use Cases
-- **Fraud Detection**: Identifying fraudulent transactions and activities
-- **Quality Control**: Detecting defective products or processes
-- **Network Security**: Finding security breaches and attacks
-- **Medical Diagnosis**: Identifying abnormal medical conditions
-- **Financial Analysis**: Detecting market anomalies and risks
-- **Industrial Monitoring**: Equipment failure prediction
-
-## Technical Implementation
-- **GDScript**: Written in Godot's scripting language
-- **Statistical Libraries**: Various statistical analysis functions
-- **Machine Learning**: Neural network and ML algorithm implementations
-- **Data Processing**: Efficient data handling and preprocessing
-- **Performance Optimization**: Optimized for real-time detection
-
-## Performance Considerations
-- Dataset size affects detection speed
-- Algorithm complexity impacts performance
-- Real-time detection requires efficient algorithms
-- Memory usage scales with data size
-
-## Future Enhancements
-- **Additional Algorithms**: More detection methods
-- **Deep Learning**: Advanced neural network approaches
-- **Real-time Streaming**: Continuous data stream processing
-- **Custom Metrics**: User-defined anomaly measures
-- **Batch Processing**: Large dataset processing capabilities
-- **API Integration**: External data source connections
+## Extending Ideas
+- Wire slider UI or VR dials to the threshold exports for live tuning sessions.
+- Swap the synthetic dataset with logged telemetry to demo actual anomaly cases.
+- Replace the colour gradient with per-point glyphs or billboarded score readouts.

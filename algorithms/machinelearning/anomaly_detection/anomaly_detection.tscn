@@ -1,120 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxr"]
+[gd_scene load_steps=6 format=3 uid="uid://bqxvhxqxqxqxr"]
 
-[ext_resource type="Script" uid="uid://cewtkd0yil2ek" path="res://algorithms/MachineLearning/anomaly_detection/AnomalyDetection.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cewtkd0yil2ek" path="res://algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd" id="1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
-albedo_color = Color(0.2, 0.2, 0.2, 1)
-metallic = 0.8
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_color = Color(0.12, 0.12, 0.15, 1)
+metallic = 0.05
+roughness = 0.8
+
+[sub_resource type="PlaneMesh" id="1"]
+size = Vector2(18, 18)
+
+[sub_resource type="StandardMaterial3D" id="4"]
+transparency = 1
+albedo_color = Color(0.3, 0.7, 1, 0.2)
 roughness = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
-albedo_color = Color(0.2, 0.8, 0.2, 1)
 emission_enabled = true
-emission = Color(0.2, 0.8, 0.2, 1)
-emission_energy_multiplier = 0.3
+emission = Color(0.3, 0.7, 1, 1)
+emission_energy_multiplier = 0.15
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
-albedo_color = Color(0.8, 0.2, 0.2, 1)
-emission_enabled = true
-emission = Color(0.8, 0.2, 0.2, 1)
-emission_energy_multiplier = 0.3
+[sub_resource type="CylinderMesh" id="3"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.1
+radial_segments = 48
 
 [node name="AnomalyDetection" type="Node3D"]
-script = ExtResource("1_script")
+script = ExtResource("1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 12)
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
-light_energy = 1.5
+transform = Transform3D(0.965926, -0.12941, 0.224144, 0, 0.866025, 0.5, -0.258819, -0.481139, 0.837759, -2, 6, 4)
+light_energy = 1.6
+shadow_enabled = true
 
-[node name="NormalData" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+material_override = SubResource("2")
+mesh = SubResource("1")
 
-[node name="NormalParticles" type="Node3D" parent="NormalData"]
+[node name="ThresholdVisual" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.05, 0, 0, 0, 2, 0, 0.01, 0)
+material_override = SubResource("4")
+mesh = SubResource("3")
 
-[node name="NormalLabel" type="CSGBox3D" parent="NormalData"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.3, 0.3)
+[node name="DataRoot" type="Node3D" parent="."]
 
-[node name="DetectionEngine" type="Node3D" parent="."]
+[node name="StatsLabels" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -2.5)
 
-[node name="EngineCore" type="CSGBox3D" parent="DetectionEngine"]
-material_override = SubResource("StandardMaterial3D_2")
-size = Vector3(3, 3, 3)
+[node name="TitleLabel" type="Label3D" parent="StatsLabels"]
+billboard = 1
+modulate = Color(0.95, 0.95, 1, 1)
+text = "Anomaly Detection Sandbox"
 
-[node name="EngineLabel" type="CSGBox3D" parent="DetectionEngine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.3, 0.3)
+[node name="ModeLabel" type="Label3D" parent="StatsLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+billboard = 1
+modulate = Color(0.85, 0.95, 1, 1)
+text = "[b]Mode:[/b] Z-Score"
+font_size = 26
 
-[node name="DetectionMethods" type="Node3D" parent="DetectionEngine"]
-
-[node name="StatisticalCore" type="CSGSphere3D" parent="DetectionEngine/DetectionMethods"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_3")
-
-[node name="IsolationForestCore" type="CSGSphere3D" parent="DetectionEngine/DetectionMethods"]
-material_override = SubResource("StandardMaterial3D_3")
-
-[node name="AutoencoderCore" type="CSGSphere3D" parent="DetectionEngine/DetectionMethods"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_3")
-
-[node name="AnomalyOutput" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-
-[node name="AnomalyParticles" type="Node3D" parent="AnomalyOutput"]
-
-[node name="AnomalyLabel" type="CSGBox3D" parent="AnomalyOutput"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.3, 0.3)
-
-[node name="ThresholdBoundary" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-
-[node name="BoundaryCore" type="CSGBox3D" parent="ThresholdBoundary"]
-material_override = SubResource("StandardMaterial3D_2")
-size = Vector3(4, 0.2, 2)
-
-[node name="BoundaryLabel" type="CSGBox3D" parent="ThresholdBoundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.3, 0.3)
-
-[node name="DataFlow" type="Node3D" parent="."]
-
-[node name="FlowParticles" type="Node3D" parent="DataFlow"]
-
-[node name="DetectionMetrics" type="Node3D" parent="."]
-
-[node name="PrecisionMeter" type="Node3D" parent="DetectionMetrics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
-
-[node name="PrecisionBase" type="CSGBox3D" parent="DetectionMetrics/PrecisionMeter"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(4, 0.2, 1)
-
-[node name="PrecisionIndicator" type="CSGSphere3D" parent="DetectionMetrics/PrecisionMeter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.3
-
-[node name="RecallMeter" type="Node3D" parent="DetectionMetrics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 8, 0)
-
-[node name="RecallBase" type="CSGBox3D" parent="DetectionMetrics/RecallMeter"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(4, 0.2, 1)
-
-[node name="RecallIndicator" type="CSGSphere3D" parent="DetectionMetrics/RecallMeter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.3
-
-[node name="Grid" type="Node3D" parent="."]
-
-[node name="GridLines" type="Node3D" parent="Grid"]
+[node name="SummaryLabel" type="Label3D" parent="StatsLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+billboard = 1
+modulate = Color(0.9, 0.95, 0.98, 1)
+text = "Anomalies: -
+Threshold: -
+mu-score: -  med-score: -"
+font_size = 24

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://2x05xo04mdhc"]
+
+[ext_resource type="Script" uid="uid://cnee767738cl" path="res://algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="1"]
+albedo_color = Color(0.12, 0.14, 0.16, 1)
+metallic = 0.05
+roughness = 0.85
+
+[node name="GradientDescentDemo" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 12)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, -0.12941, 0.224144, 0, 0.866025, 0.5, -0.258819, -0.481139, 0.837759, -3, 7, 4)
+light_energy = 1.6
+shadow_enabled = true
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+material_override = SubResource("1")
+
+[node name="Walker" type="MeshInstance3D" parent="."]
+
+[node name="Path" type="MeshInstance3D" parent="."]
+
+[node name="GradientIndicator" type="MeshInstance3D" parent="."]
+
+[node name="HUD" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 4, -8)
+
+[node name="InfoLabel" type="Label3D" parent="HUD"]
+billboard = 1
+modulate = Color(0.95, 0.95, 1, 1)
+font_size = 28
+horizontal_alignment = 0
+vertical_alignment = 0

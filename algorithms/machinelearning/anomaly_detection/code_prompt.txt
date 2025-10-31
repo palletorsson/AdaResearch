@@ -1,0 +1,15 @@
+﻿You are generating a Godot 4.2 GDScript named AnomalyDetection.gd for es://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn.
+
+Core requirements
+1. Extend Node3D and populate the empty DataRoot container at run time with a synthetic dataset: ~70 normal samples near the origin (Gaussian noise) and ~10 perimeter anomalies. Seed randomness via an exported dataset_seed.
+2. Visualise each sample with a small SphereMesh (radius ≈ 0.12) positioned on the XZ plane. Attach an individual StandardMaterial3D so colours/emission can be updated per point.
+3. Support three lightweight scoring modes:
+   - Z_SCORE: |zₓ| + |zᵧ| relative to the mean/std of the cluster.
+   - ISOLATION_RADIUS: Euclidean distance from the cluster mean.
+   - AUTOENCODER_ERROR: reconstruction error against a synthetic sin-wave manifold plus a radial penalty.
+4. Export thresholds for each mode (z_score_threshold, isolation_radius_threshold, utoencoder_error_threshold) and compute is_anomaly := score >= threshold. Scale anomalies by nomaly_scale_multiplier and lift them slightly on the Y axis.
+5. Keep StatsLabels/TitleLabel, ModeLabel, SummaryLabel in sync with the current mode, anomaly counts, threshold, and score statistics (mean & median). Provide cycle_detection_mode() and eset_dataset(new_seed) helpers.
+6. Update ThresholdVisual (a flattened cylinder) so its scale and colour echo the active mode/threshold; use a translucent material and mild emission.
+7. Use deterministic, ASCII-compatible UTF-8 and avoid assumptions about optional nodes—gate lookups with is_instance_valid / null checks.
+
+Assume the scene already contains Camera3D, DirectionalLight3D, Ground, ThresholdVisual, DataRoot, and StatsLabels with the mentioned children.

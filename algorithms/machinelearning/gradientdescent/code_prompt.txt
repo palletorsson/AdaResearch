@@ -1,0 +1,19 @@
+You are generating a Godot 4.2 GDScript named `GradientDescentDemo.gd` for `res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn`.
+
+Core requirements
+1. Extend `Node3D`. In `_ready()`, configure a `FastNoiseLite`, generate a triangulated heightfield mesh (XZ plane, Y = noise), configure the walker mesh, and call `reset_descent(false)`.
+2. Create a `MeshInstance3D` terrain under `$Terrain` by sampling a grid determined by `grid_resolution`/`grid_size`. Use `SurfaceTool` to build triangles and assign a simple `StandardMaterial3D`.
+3. Keep a deterministic `RandomNumberGenerator` seeded via `noise_seed` for both terrain and random restarts.
+4. Implement gradient descent:
+   - Estimate the gradient via central differences (`gradient_sample_distance`) on the height function.
+   - Update the walker’s XZ position with `learning_rate * gradient`, clamp to the terrain bounds, and resample Y from the heightfield.
+   - Append each position to `_path_points` and redraw `$Path` using an `ImmediateMesh` line strip.
+   - Optionally draw a red gradient vector from the walker using `$GradientIndicator`.
+5. Expose exports for noise parametrisation (`noise_frequency`, `noise_octaves`, etc.), optimisation (`learning_rate`, `step_interval`, `max_steps`, `stop_gradient_magnitude`), and visuals (`show_gradient`, `gradient_visual_scale`).
+6. Provide helper methods:
+   - `reset_descent(randomise := true)` – clear the trail, optionally randomise the starting position, and reset timers/state.
+   - `_perform_descent_step()` – single optimisation step with stop conditions.
+   - `_update_info_label()` – update `$HUD/InfoLabel` with step count, gradient magnitude, and state.
+7. Use explicit typing where practical (avoid Variant warnings) and guard optional nodes with null checks.
+
+Assume the scene contains nodes named `Terrain`, `Walker`, `Path`, `GradientIndicator`, `HUD/InfoLabel`, `Camera3D`, and `DirectionalLight3D`.
