@@ -1,0 +1,14 @@
+{
+	"name": "Demo Map",
+	"nodes": [
+		{ "id": "n1", "pos": [120, 80], "text": "Root" },
+		{ "id": "n2", "pos": [380, 200], "text": "Idea A" },
+		{ "id": "n3", "pos": [260, 340], "text": "Idea B" }
+	],
+	"edges": [
+		["n1","n2"],
+		["n1","n3"]
+	]
+}
+
+

@@ -46,6 +46,10 @@ func _setup_throwing_physics() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 
+	# Set collision layer 2 for detection by targets
+	collision_layer = 2  # Balls exist on layer 2
+	collision_mask = 1   # Balls collide with layer 1 (ground, walls, etc.)
+
 func _setup_vectors() -> void:
 	"""Create container for vector arrows"""
 	vectors_container = Node3D.new()
@@ -233,10 +237,49 @@ func _on_dropped(pickable: Variant) -> void:
 
 func _fade_out_vector(arrow: Node3D) -> void:
 	"""Fade out vector arrow after throw"""
+	if not arrow:
+		return
+
+	# Get the shaft and tip meshes
+	var shaft = arrow.get_node_or_null("Shaft")
+	var tip = arrow.get_node_or_null("Tip")
+
+	if not shaft or not tip:
+		arrow.visible = false
+		return
+
+	# Fade out by tweening material transparency
 	var tween = create_tween()
-	tween.tween_property(arrow, "modulate:a", 0.0, 1.0)
-	tween.tween_callback(func(): arrow.visible = false)
-	tween.tween_property(arrow, "modulate:a", 1.0, 0.0)
+	tween.set_parallel(true)
+
+	# Get materials
+	var shaft_mat = shaft.material_override
+	var tip_mat = tip.material_override
+
+	if shaft_mat and tip_mat:
+		# Enable transparency
+		if shaft_mat is StandardMaterial3D:
+			shaft_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		if tip_mat is StandardMaterial3D:
+			tip_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+		# Fade out alpha
+		tween.tween_property(shaft_mat, "albedo_color:a", 0.0, 1.0)
+		tween.tween_property(tip_mat, "albedo_color:a", 0.0, 1.0)
+
+		# Hide and reset after fade
+		tween.chain()
+		tween.tween_callback(func():
+			arrow.visible = false
+			if shaft_mat is StandardMaterial3D:
+				shaft_mat.albedo_color.a = 1.0
+			if tip_mat is StandardMaterial3D:
+				tip_mat.albedo_color.a = 1.0
+		)
+	else:
+		# Fallback: just hide after delay
+		await get_tree().create_timer(1.0).timeout
+		arrow.visible = false
 
 func get_current_velocity() -> Vector3:
 	"""Get the currently calculated velocity"""

@@ -48,13 +48,14 @@ func _setup_effects_chain():
 	"""Create dedicated bus and effects chain for this layer"""
 	
 	# Create dedicated audio bus
-	layer_bus_index = AudioServer.add_bus()
+	AudioServer.add_bus()
+	layer_bus_index = AudioServer.bus_count - 1
 	var bus_name = "Layer_%s" % layer_name
 	AudioServer.set_bus_name(layer_bus_index, bus_name)
 	bus = bus_name
 	
 	# Route to master
-	AudioServer.set_bus_send(layer_bus_index, "Master")
+	AudioServer.set_bus_send(layer_bus_index, "Master")  # Send to Master
 	
 	# Add effects in order
 	_add_compressor(layer_bus_index)
@@ -324,10 +325,10 @@ func set_delay_send(amount: float):
 
 # ===== CLEANUP =====
 
-func stop():
+func stop_playback():
 	"""Stop playback and clean up"""
 	if playing:
-		super.stop()
+		stop()  # Call inherited AudioStreamPlayer.stop()
 
 func _exit_tree():
 	"""Cleanup when removed"""

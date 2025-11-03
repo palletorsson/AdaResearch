@@ -2,8 +2,7 @@ extends Node3D
  
 
 @export var token_count: int = 6 : set = _set_token_count
-@export_range(0.0, 1.0, 0.01) var base_attention: float = 0.0
-@export_range(0.0, 2.0, 0.01) var attention_gain: float = 0.15
+
 @export_range(0.0, 2.0, 0.01) var focus_gain: float = 0.8
 @export var pulse_speed: float = 2.0
 @export var rot_speed: float = 0.7
@@ -17,8 +16,17 @@ extends Node3D
 @export var color_focus := Color(0.8, 0.2, 0.8, 1.0)
 
 var time: float = 0.0
-var attention_score: float = 0.0
+# var attention_score: float = 0.0 # Deprecated
 var focus_intensity: float = 0.0
+
+# New variables for functional attention
+@export var query_index: int = 0 : set = _set_query_index
+@export_range(0.1, 5.0, 0.1) var attention_falloff: float = 1.5
+
+var _query_token: Node3D
+var _key_tokens: Array[Node3D] = []
+var _attention_scores: Array[float] = []
+
 
 @onready var _input_tokens: Node3D = $InputSequence/InputTokens
 @onready var _output_tokens: Node3D = $OutputSequence/OutputTokens
@@ -54,14 +62,41 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	time += delta
-	attention_score = clamp(lerp(attention_score, base_attention + time * attention_gain, delta * 0.8), 0.0, 1.0)
-	focus_intensity = clamp(attention_score * focus_gain, 0.0, 1.0)
+	
+	if _query_token:
+		_calculate_attention_scores()
 
 	_animate_input_tokens(delta)
 	_animate_qkv(delta)
 	_animate_attention_matrix(delta)
 	_animate_focus(delta)
 	_update_training_metrics(delta)
+
+func _calculate_attention_scores():
+	_attention_scores.clear()
+	if not _query_token or _key_tokens.is_empty():
+		return
+
+	var raw_scores: Array[float] = []
+	var score_sum: float = 0.0
+
+	# Add the query token to the list of keys for self-attention
+	var all_tokens = _key_tokens + [_query_token]
+
+	for key_token in all_tokens:
+		var dist = _query_token.global_transform.origin.distance_to(key_token.global_transform.origin)
+		# Inverse distance scoring, with falloff
+		var score = 1.0 / (1.0 + dist * attention_falloff)
+		raw_scores.append(score)
+		score_sum += score
+
+	if score_sum > 0.0:
+		for score in raw_scores:
+			_attention_scores.append(score / score_sum) # Normalize scores (softmax)
+	else:
+		for _ in all_tokens:
+			_attention_scores.append(0.0)
+
 
 # ---------- BUILD / SETUP ----------
 
@@ -93,13 +128,42 @@ func _setup_materials() -> void:
 
 func _create_input_tokens() -> void:
 	_clear_children(_input_tokens)
+	_key_tokens.clear()
 	for i in range(token_count):
 		var mi := MeshInstance3D.new()
 		mi.mesh = _mesh_sphere
-		mi.material_override = _mat_input
+		mi.material_override = _mat_input.duplicate() # Use duplicate materials for individual control
 		var x := (i - token_count / 2.0) * input_spacing
 		mi.position = Vector3(x, 0, 0)
 		_input_tokens.add_child(mi)
+	
+	_update_query_and_keys()
+
+func _update_query_and_keys():
+	if _input_tokens.get_child_count() == 0:
+		return
+
+	query_index = clamp(query_index, 0, _input_tokens.get_child_count() - 1)
+	
+	_key_tokens.clear()
+	for i in range(_input_tokens.get_child_count()):
+		var child = _input_tokens.get_child(i) as Node3D
+		var mat = child.get_node(".").material_override as StandardMaterial3D
+		
+		if i == query_index:
+			_query_token = child
+			mat.albedo_color = color_qkv # Visually distinguish the query token
+			mat.emission = color_qkv * 0.8
+		else:
+			_key_tokens.append(child)
+			mat.albedo_color = color_input
+			mat.emission = color_input * 0.3
+
+func _set_query_index(v: int) -> void:
+	query_index = v
+	if not is_node_ready():
+		return
+	_update_query_and_keys()
 
 func _create_output_tokens() -> void:
 	_clear_children(_output_tokens)
@@ -182,26 +246,22 @@ func _setup_training_metrics() -> void:
 # ---------- ANIMATION ----------
 
 func _animate_input_tokens(delta: float) -> void:
+	if _attention_scores.size() != _input_tokens.get_child_count():
+		return
+
 	for i in range(_input_tokens.get_child_count()):
 		var tkn := _input_tokens.get_child(i) as MeshInstance3D
 		if tkn:
-			var pulse := 1.0 + sin(time * pulse_speed + float(i) * 0.5) * 0.2 * attention_score
+			var score = _attention_scores[i]
+			var pulse := 1.0 + sin(time * pulse_speed + float(i) * 0.5) * 0.2 * score
 			tkn.scale = Vector3.ONE * pulse
 			tkn.rotate_y(delta * (rot_speed + float(i) * 0.15))
-			var intensity := 0.3 + attention_score * 0.7
-			var mat := tkn.material_override as StandardMaterial3D
+			
+			var intensity := 0.3 + score * 0.7
+			var mat = tkn.material_override as StandardMaterial3D
 			if mat:
-				mat.emission = color_input * intensity
-
-	for i in range(_output_tokens.get_child_count()):
-		var tkn := _output_tokens.get_child(i) as MeshInstance3D
-		if tkn:
-			var pulse := 1.0 + sin(time * (pulse_speed * 0.9) + float(i) * 0.35) * 0.16 * attention_score
-			tkn.scale = Vector3.ONE * pulse
-			tkn.rotate_y(delta * (rot_speed * 0.85 + float(i) * 0.12))
-			var mat := tkn.material_override as StandardMaterial3D
-			if mat:
-				mat.emission = color_output * (0.3 + attention_score * 0.6)
+				if i != query_index: # Don't override the query token's special color
+					mat.emission = color_input * intensity
 
 func _animate_qkv(delta: float) -> void:
 	var nodes := [
@@ -217,89 +277,61 @@ func _animate_qkv(delta: float) -> void:
 			mi.scale = Vector3.ONE * (1.0 + sin(time * (2.0 + 0.5 * float(i))) * 0.15)
 			var mat := mi.material_override as StandardMaterial3D
 			if mat:
-				mat.emission = color_qkv * (0.3 + attention_score * 0.7)
+				# Use the query's self-attention score to drive the QKV visuals
+				var q_score = _attention_scores[query_index] if not _attention_scores.is_empty() else 0.0
+				mat.emission = color_qkv * (0.3 + q_score * 0.7)
 
 func _animate_attention_matrix(delta: float) -> void:
-	if _matrix_mm == null:
+	if _matrix_mm == null or _attention_scores.is_empty():
 		return
 
 	var idx := 0
 	for row in range(token_count):
 		for col in range(token_count):
-			var att := (sin(time * 1.5 + float(row) * 0.5) * 0.5 + 0.5)
-			att *= (cos(time * 1.2 + float(col) * 0.35) * 0.5 + 0.5)
-			att *= attention_score
-
+			var score = 0.0
+			if row == query_index and col < _attention_scores.size():
+				score = _attention_scores[col]
+			
 			var x := (row - token_count / 2.0) * matrix_cell_spacing
 			var z := (col - token_count / 2.0) * matrix_cell_spacing
-			var sc := 0.5 + att * 0.55
+			var sc := 0.2 + score * 0.8
 			var t: Transform3D = Transform3D(Basis().scaled(Vector3.ONE * sc), Vector3(x, 0, z))
 			_matrix_mm.set_instance_transform(idx, t)
 
-			var g := 0.6 + att * 0.4
-			var b := 0.6 + att * 0.4
-			_matrix_mm.set_instance_color(idx, Color(0.6, g, b, 0.95))
+			var color = color_matrix_base.lerp(color_focus, score)
+			_matrix_mm.set_instance_color(idx, color)
 			idx += 1
 
 	if _lines_mm:
+		# This part needs a more complex rewrite to look good.
+		# For now, let's just fade it based on the query's self-attention.
+		var q_score = _attention_scores[query_index] if not _attention_scores.is_empty() else 0.0
 		for k in range(_lines_mm.instance_count):
-			var fade := 0.4 + 0.6 * attention_score
+			var fade := 0.1 + 0.8 * q_score
 			_lines_mm.set_instance_color(k, Color(0.4, 0.4, 0.8, fade))
 
-func _animate_focus(delta: float) -> void:
-	for i in range(_focus_spheres.get_child_count()):
-		var sp := _focus_spheres.get_child(i) as MeshInstance3D
-		if sp:
-			var pulse := 1.0 + sin(time * 2.5 + float(i) * 0.3) * 0.3 * focus_intensity
-			sp.scale = Vector3.ONE * pulse
-			var y_off := sin(time * 1.8 + float(i) * 0.4) * 0.2 * focus_intensity
-			var p: Vector3 = sp.position
-			p.y = 1.5 + y_off
-			sp.position = p
-
-			var mat := sp.material_override as StandardMaterial3D
-			if mat:
-				mat.emission = color_focus * (0.3 + focus_intensity * 0.7)
 
 func _update_training_metrics(delta: float) -> void:
-	if _score_indicator:
-		var target_x  = lerp(-4.0, 4.0, attention_score)
+	if _score_indicator and not _attention_scores.is_empty():
+		var avg_score = 0.0
+		for s in _attention_scores:
+			avg_score += s
+		avg_score /= _attention_scores.size()
+
+		var target_x  = lerp(-4.0, 4.0, avg_score)
 		var p: Vector3 = _score_indicator.position
 		p.x = lerp(p.x, target_x, delta * 2.0)
 		_score_indicator.position = p
 
-		var green := 0.2 + 0.8 * attention_score
-		var red := 0.8 - 0.6 * attention_score
+		var green := 0.2 + 0.8 * avg_score
+		var red := 0.8 - 0.6 * avg_score
 		var mat := _score_indicator.material_override as StandardMaterial3D
 		if mat:
 			mat.albedo_color = Color(red, green, 0.2, 1.0)
 
 # ---------- API ----------
 
-func set_attention_score(score: float) -> void:
-	attention_score = clamp(score, 0.0, 1.0)
 
-func set_focus_intensity(intensity: float) -> void:
-	focus_intensity = clamp(intensity, 0.0, 1.0)
-
-func get_attention_score() -> float:
-	return attention_score
-
-func get_focus_intensity() -> float:
-	return focus_intensity
-
-func reset_attention() -> void:
-	time = 0.0
-	attention_score = 0.0
-	focus_intensity = 0.0
-
-func _set_token_count(v: int) -> void:
-	token_count = max(1, v)
-	_create_input_tokens()
-	_create_output_tokens()
-	_create_attention_matrix_multimesh()
-	_create_weight_lines_multimesh()
-	_create_focus_indicators()
 
 # ---------- UTIL ----------
 

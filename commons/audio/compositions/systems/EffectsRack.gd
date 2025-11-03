@@ -64,14 +64,16 @@ func _setup_effects_buses():
 	"""Create send effect buses"""
 	
 	# Create reverb send bus
-	reverb_bus = AudioServer.add_bus()
+	AudioServer.add_bus()
+	reverb_bus = AudioServer.bus_count - 1
 	AudioServer.set_bus_name(reverb_bus, "ReverbSend")
-	AudioServer.set_bus_send(reverb_bus, "Master")
+	AudioServer.set_bus_send(reverb_bus, "Master")  # Send to Master
 	
 	# Create delay send bus
-	delay_bus = AudioServer.add_bus()
+	AudioServer.add_bus()
+	delay_bus = AudioServer.bus_count - 1
 	AudioServer.set_bus_name(delay_bus, "DelaySend")
-	AudioServer.set_bus_send(delay_bus, "Master")
+	AudioServer.set_bus_send(delay_bus, "Master")  # Send to Master
 	
 	_setup_send_effects()
 	
@@ -241,7 +243,9 @@ func apply_delay_throw(layer_bus: String, throw_duration: float = 2.0, feedback_
 		return
 	
 	# Temporarily increase send to delay bus
-	var original_send = AudioServer.get_bus_send(bus_idx, delay_bus)
+	# Note: get_bus_send() only returns the target bus index, not the send level
+	# We'll track the original send target separately if needed
+	var original_send_target = AudioServer.get_bus_send(bus_idx)
 	
 	# Create dramatic send increase
 	var tween = create_tween()

@@ -1,5 +1,5 @@
 # VectorThrowing.gd
-# Main scene for demonstrating projectile motion with velocity and gravity vectors
+# Main scene for demonstrating projectile motion with velocity, gravity vectors, and homing drone targets
 extends "../shared/vector_scene_base.gd"
 
 @export_group("Scene Configuration")
@@ -14,6 +14,15 @@ extends "../shared/vector_scene_base.gd"
 @export var target_distance: float = 3.0
 @export var target_height_offset: float = 1.0
 
+@export_group("Drone Configuration")
+@export var enable_drones: bool = true
+@export var drone_count: int = 1
+@export var drone_spawn_radius: float = 3.5
+@export var drone_spawn_height: float = 1.6
+@export var drone_respawn_time: float = 6.0
+@export var drone_points_value: int = 40
+@export var drone_base_color: Color = Color(1.0, 0.45, 0.1, 1.0)
+
 @export_group("Scoring")
 @export var enable_scoring: bool = true
 @export var show_instructions: bool = true
@@ -24,39 +33,40 @@ var target_cubes: Array[Node3D] = []
 var score_label: Label3D = null
 var instructions_label: Label3D = null
 var info_panel: Label3D = null
+var drone_container: Node3D = null
 
 # Game state
 var total_score: int = 0
 var total_hits: int = 0
 var throws_count: int = 0
+var drones_destroyed: int = 0
+var player_hits_taken: int = 0
+
+var drone_spawn_points: Array[Vector3] = []
+var drones_by_index: Dictionary = {}
 
 # Preloaded scenes
 var throw_ball_scene = preload("res://algorithms/vectors/08_vector_throwing/throw_ball.tscn")
 var hit_target_scene = preload("res://algorithms/vectors/08_vector_throwing/hit_target_cube.tscn")
+var drone_scene = preload("res://algorithms/vectors/08_vector_throwing/vector_drone.tscn")
 
 func _ready() -> void:
 	super._ready()
 	_setup_environment()
 	_spawn_throw_balls()
 	_spawn_target_grid()
+	_spawn_drones()
 	_create_score_display()
 	_create_instructions()
 	_create_physics_info_panel()
 	_update_score_display()
 
 func _setup_environment() -> void:
-	"""Create the throwing environment"""
-	# Create axes for reference
 	create_axes(2.0)
-
-	# Create floor
 	create_floor(10.0, Color(0.2, 0.3, 0.4, 0.5))
-
-	# Create origin marker
 	_create_origin_marker()
 
 func _spawn_throw_balls() -> void:
-	"""Spawn throwable balls at starting positions"""
 	var balls_container = Node3D.new()
 	balls_container.name = "ThrowBalls"
 	add_child(balls_container)
@@ -64,27 +74,19 @@ func _spawn_throw_balls() -> void:
 	for i in range(num_balls):
 		var ball = throw_ball_scene.instantiate()
 		ball.name = "ThrowBall_%d" % i
-
-		# Position balls in a row at chest height
 		var x_offset = (i - (num_balls - 1) / 2.0) * ball_spawn_spacing
 		ball.position = Vector3(x_offset, ball_spawn_height, 0.5)
-
-		# Vary ball colors
 		var hue = float(i) / float(num_balls)
 		var color = Color.from_hsv(hue, 0.8, 1.0)
 		if ball.has_method("set_ball_color"):
 			ball.set_ball_color(color)
 		else:
 			ball.ball_color = color
-
-		# Connect signals
 		ball.dropped.connect(_on_ball_thrown.bind(ball))
-
 		balls_container.add_child(ball)
 		throw_balls.append(ball)
 
 func _spawn_target_grid() -> void:
-	"""Spawn grid of target cubes"""
 	var targets_container = Node3D.new()
 	targets_container.name = "TargetCubes"
 	add_child(targets_container)
@@ -93,30 +95,67 @@ func _spawn_target_grid() -> void:
 		for col in range(target_columns):
 			var target = hit_target_scene.instantiate()
 			target.name = "Target_%d_%d" % [row, col]
-
-			# Calculate position (grid in front of player)
 			var x = (col - (target_columns - 1) / 2.0) * target_spacing
 			var y = target_height_offset + (row * target_spacing)
 			var z = target_distance
-
 			target.position = Vector3(x, y, z)
-
-			# Vary target properties
-			var distance_factor = float(row + 1) / float(target_rows)
-			target.points_value = 10 * (row + 1)  # Higher rows = more points
-
-			# Color based on value
-			var value_hue = 0.0 + (distance_factor * 0.33)  # Red to yellow range
+			var distance_factor = float(row + 1) / float(max(target_rows, 1))
+			target.points_value = 10 * (row + 1)
+			var value_hue = distance_factor * 0.33
 			target.target_color = Color.from_hsv(value_hue, 0.8, 1.0)
-
-			# Connect signals
 			target.target_hit.connect(_on_target_hit)
-
 			targets_container.add_child(target)
 			target_cubes.append(target)
 
+func _spawn_drones() -> void:
+	if not enable_drones or drone_scene == null:
+		return
+	if not drone_container:
+		drone_container = Node3D.new()
+		drone_container.name = "VectorDrones"
+		add_child(drone_container)
+	else:
+		for child in drone_container.get_children():
+			child.queue_free()
+
+	drones_by_index.clear()
+	drone_spawn_points.clear()
+	var camera = get_node_or_null("Camera3D")
+	var count = max(drone_count, 1)
+	for i in range(count):
+		var angle = TAU * float(i) / float(count)
+		var spawn_pos = Vector3(sin(angle), 0.0, cos(angle)) * drone_spawn_radius
+		spawn_pos.y = drone_spawn_height
+		drone_spawn_points.append(spawn_pos)
+	for i in range(drone_spawn_points.size()):
+		_spawn_drone_at_index(i, camera)
+
+func _spawn_drone_at_index(index: int, camera: Node3D = null) -> void:
+	if not enable_drones or drone_scene == null:
+		return
+	if index < 0 or index >= drone_spawn_points.size():
+		return
+	if drones_by_index.has(index):
+		return
+	if not drone_container:
+		return
+
+	var drone = drone_scene.instantiate()
+	drone.name = "VectorDrone_%d" % index
+	drone.position = drone_spawn_points[index]
+	if camera == null:
+		camera = get_node_or_null("Camera3D")
+	if camera:
+		drone.player_path = camera.get_path()
+	drone.base_color = drone_base_color
+	drone.points_value = drone_points_value
+	drone.set_meta("spawn_index", index)
+	drone.player_hit.connect(_on_drone_player_hit)
+	drone.drone_destroyed.connect(_on_drone_destroyed)
+	drone_container.add_child(drone)
+	drones_by_index[index] = drone
+
 func _create_score_display() -> void:
-	"""Create floating score display"""
 	if not enable_scoring:
 		return
 
@@ -131,7 +170,6 @@ func _create_score_display() -> void:
 	add_child(score_label)
 
 func _create_instructions() -> void:
-	"""Create instruction panel"""
 	if not show_instructions:
 		return
 
@@ -142,8 +180,7 @@ func _create_instructions() -> void:
 	instructions_label.outline_modulate = Color.BLACK
 	instructions_label.modulate = Color(0.8, 0.9, 1.0)
 	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.position = Vector3(0, 2.0, 0)
-
+	instructions_label.position = Vector3(0, 2.0, -0.5)
 	instructions_label.text = """VECTOR THROWING DEMO
 
 1. Grab an orange ball with VR controller
@@ -151,91 +188,110 @@ func _create_instructions() -> void:
 3. Release to throw!
 
 Watch the vectors:
-  • CYAN = Velocity (your throw)
-  • RED = Gravity (constant down)
+  - CYAN = Velocity (your throw)
+  - RED = Gravity (constant down)
 
-Hit targets to score points!"""
+New threat:
+  - A tetrahedron drone hunts you
 
+Blast the drone and hit targets to score!"""
 	add_child(instructions_label)
 
 func _create_physics_info_panel() -> void:
-	"""Create panel showing physics equations"""
 	info_panel = create_info_panel("", Vector3(2.0, 1.5, 0))
 	if info_panel:
 		info_panel.modulate = Color(0.7, 1.0, 0.7)
 		_update_physics_info()
 
 func _update_physics_info() -> void:
-	"""Update physics information panel"""
 	if not info_panel:
 		return
 
 	var info_text = """PHYSICS CONCEPTS:
 
-Velocity = Δposition / Δtime
-v = (p₁ - p₀) / Δt
+Velocity = delta_position / delta_time
+v = (p2 - p1) / delta_t
 
-Gravity = 9.8 m/s² (downward)
-F = ma
+Gravity = 9.8 m/s^2 (downward)
+F = m * a
 
 Projectile Motion:
-• Horizontal: constant velocity
-• Vertical: constant acceleration
+- Horizontal: constant velocity
+- Vertical: constant acceleration
 
 Total throws: %d
-Total hits: %d""" % [throws_count, total_hits]
+Target hits: %d
+Drones destroyed: %d
+Drone hits taken: %d""" % [throws_count, total_hits, drones_destroyed, player_hits_taken]
 
 	info_panel.text = info_text
 
 func _on_ball_thrown(_pickable: Node3D, ball: Node3D) -> void:
-	"""Called when a ball is thrown"""
 	throws_count += 1
 	_update_physics_info()
-
-	# Show throw velocity in console
 	if ball.has_method("get_throw_speed"):
 		var speed = ball.get_throw_speed()
 		print("Ball thrown at %.2f m/s" % speed)
 
 func _on_target_hit(target: Node3D, impact_velocity: Vector3) -> void:
-	"""Called when a target is hit"""
 	total_hits += 1
-
 	if enable_scoring:
 		var points = target.get_points_value() if target.has_method("get_points_value") else 10
 		total_score += points
 		_update_score_display()
-
 	_update_physics_info()
-
-	# Show hit info
 	var speed = impact_velocity.length()
 	print("Target hit! Impact: %.2f m/s, Points: %d" % [speed, target.get_points_value() if target.has_method("get_points_value") else 10])
 
+func _on_drone_player_hit(_drone: Node3D) -> void:
+	player_hits_taken += 1
+	print("Drone hit the player! Total hits taken: %d" % player_hits_taken)
+	_update_physics_info()
+
+func _on_drone_destroyed(drone: Node3D, points_awarded: int) -> void:
+	drones_destroyed += 1
+	if enable_scoring:
+		total_score += points_awarded
+		_update_score_display()
+	var spawn_index := -1
+	if drone.has_meta("spawn_index"):
+		spawn_index = int(drone.get_meta("spawn_index"))
+	if spawn_index != -1:
+		drones_by_index.erase(spawn_index)
+		_schedule_drone_respawn(spawn_index)
+	print("Drone destroyed! Points: %d (total drones down: %d)" % [points_awarded, drones_destroyed])
+	_update_physics_info()
+
+func _schedule_drone_respawn(spawn_index: int) -> void:
+	if drone_respawn_time <= 0.0:
+		return
+	await get_tree().create_timer(drone_respawn_time).timeout
+	if not enable_drones:
+		return
+	if drones_by_index.has(spawn_index):
+		return
+	_spawn_drone_at_index(spawn_index)
+	_update_physics_info()
+
 func _update_score_display() -> void:
-	"""Update score label"""
 	if not score_label:
 		return
-
 	score_label.text = "SCORE: %d" % total_score
 
 func _process(_delta: float) -> void:
-	"""Update any dynamic information"""
-	# Could show real-time ball velocities here
 	pass
 
 func reset_game() -> void:
-	"""Reset the game state"""
 	total_score = 0
 	total_hits = 0
 	throws_count = 0
+	drones_destroyed = 0
+	player_hits_taken = 0
 
-	# Reset all targets
 	for target in target_cubes:
 		if target and target.has_method("reset"):
 			target.reset()
 
-	# Reset balls to starting positions
 	for i in range(throw_balls.size()):
 		var ball = throw_balls[i]
 		if ball:
@@ -245,15 +301,19 @@ func reset_game() -> void:
 				ball.linear_velocity = Vector3.ZERO
 				ball.angular_velocity = Vector3.ZERO
 
+	if drone_container:
+		for child in drone_container.get_children():
+			child.queue_free()
+	drones_by_index.clear()
+	_spawn_drones()
+
 	_update_score_display()
 	_update_physics_info()
 
 func get_total_score() -> int:
-	"""Return current total score"""
 	return total_score
 
 func get_hit_accuracy() -> float:
-	"""Calculate hit accuracy percentage"""
 	if throws_count == 0:
 		return 0.0
 	return (float(total_hits) / float(throws_count)) * 100.0

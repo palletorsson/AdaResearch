@@ -524,6 +524,104 @@ Inspired by:
 
 ---
 
+## 🎨 Complete Assembly Library (11 Forms)
+
+### Bodies & Creatures
+
+**VRBody** - Humanoid (13 parts)
+- Head, torso, pelvis
+- L/R arms: shoulder → elbow → hand
+- L/R legs: hip → knee → foot
+- Bilateral symmetry
+
+**Insect** - Six-legged (11 parts)
+- Head, thorax, abdomen (segmented)
+- 6 legs in 3 pairs (bilateral)
+- 2 wings (dorsal)
+- Green/brown coloring
+
+**Spider** - Eight-legged (10 parts)
+- Body + head
+- 8 legs (4 pairs, radial)
+- Arachnid morphology
+
+**Octopus** - Radial cephalopod (9 parts)
+- Central mantle
+- 8 arms (45° radial spacing)
+- Radial symmetry
+
+### Biological Structures
+
+**DNAHelix** - Double helix (8 parts)
+- Cyan nucleotides
+- Alternating left/right positions
+- Rising 0.2m per base
+- Classic Watson-Crick structure
+
+**Molecule** - Octahedral (7 parts)
+- Central atom (medium sphere)
+- 6 bonded atoms (small spheres)
+- Octahedral geometry
+- Chemical compound model
+
+### Alien Forms
+
+**AlienTree** - Fractal organism (10 parts)
+- Purple alien nodes
+- 3-way branching
+- Each branch → 2 leaves
+- Fractal-like growth
+
+**CrystalTree** - Crystalline plant (7 parts)
+- Cyan crystal prisms
+- 3 branches from trunk
+- Purple crystal "fruits"
+- Alien flora
+
+### Furniture Collection
+
+**Chair** - Four-leg (6 parts)
+- Seat panel (50cm × 50cm)
+- Backrest (angled 110°)
+- 4 legs at corners
+- 50cm seat height
+
+**Table** - Classic (5 parts)
+- Large top (80cm × 80cm)
+- 4 thick legs
+- 75cm table height
+- Stable base
+
+**Lamp** - Standing (4 parts)
+- Base platform
+- Thin shaft
+- Bulb (glowing sphere)
+- Shade cylinder
+
+**Shelf** - Wall-mount (4 parts)
+- Tall back panel
+- 3 horizontal shelves
+- 50cm spacing
+- Modular storage
+
+---
+
+## Assembly Cycling
+
+The auto-cycle mode rotates through all 11 assemblies:
+```
+Float (10s) → VRBody (10s) → Float (10s) → Chair (10s) →
+Float (10s) → Table (10s) → ... [continues through all]
+```
+
+Each assembly demonstrates different bonding patterns:
+- **Linear chains**: DNAHelix
+- **Bilateral symmetry**: VRBody, Insect, Spider
+- **Radial symmetry**: Octopus, Molecule
+- **Hierarchical branching**: AlienTree, CrystalTree
+- **Corner attachment**: Chair, Table
+- **Vertical stacking**: Lamp, Shelf
+
 ## License
 
 Same as parent AdaResearch project.

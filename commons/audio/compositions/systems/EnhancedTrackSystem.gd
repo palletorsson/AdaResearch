@@ -147,7 +147,7 @@ func stop_track():
 		for layer_name in layers[category].keys():
 			var layer = layers[category][layer_name]
 			if layer:
-				layer.stop()
+				layer.stop_playback()
 
 func _start_ambient_layers():
 	"""Start continuous ambient layers"""

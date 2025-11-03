@@ -80,6 +80,11 @@ func _setup_hit_detection() -> void:
 	area.name = "HitDetectionArea"
 	area.monitoring = true
 	area.monitorable = true
+
+	# Set collision layers - only detect layer 2 (throwable balls)
+	area.collision_layer = 0  # Area doesn't exist on any layer
+	area.collision_mask = 2   # Only detect objects on layer 2
+
 	add_child(area)
 
 	# Create slightly larger collision shape for area
@@ -111,16 +116,26 @@ func _setup_hit_label() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	"""Handle collision with throwable objects"""
+	print("[HitTarget] Body entered: ", body.name, " Groups: ", body.get_groups())
+
+	# Ignore self-detection (shouldn't happen with proper collision layers, but safety check)
+	if body == self:
+		print("[HitTarget] Ignoring self-detection")
+		return
+
 	if not body.is_in_group("throwable"):
+		print("[HitTarget] Body not in 'throwable' group, ignoring")
 		return
 
 	if is_hit and not destroy_on_hit:
+		print("[HitTarget] Already hit and destroy_on_hit=false, ignoring")
 		return  # Already hit, ignore
 
 	# Get impact velocity
 	var impact_velocity = Vector3.ZERO
 	if body is RigidBody3D:
 		impact_velocity = body.linear_velocity
+		print("[HitTarget] Impact velocity: ", impact_velocity.length(), " m/s")
 
 	_trigger_hit(impact_velocity)
 
@@ -128,6 +143,8 @@ func _trigger_hit(impact_velocity: Vector3) -> void:
 	"""Trigger hit effects and emit signal"""
 	is_hit = true
 	hit_count += 1
+
+	print("[HitTarget] HIT! Count: ", hit_count, " Velocity: ", impact_velocity.length())
 
 	# Emit signal for scoring
 	target_hit.emit(self, impact_velocity)

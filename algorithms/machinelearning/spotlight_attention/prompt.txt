@@ -1,0 +1,11 @@
+You are an expert Godot 4.2 GDScript developer.
+
+Create the full contents of `res://algorithms/machinelearning/spotlight_attention/SpotlightAttention.gd`.
+
+The script should implement a "Spotlight" model of attention, as described in the `README.md`.
+
+The scene should contain:
+- A field of floating objects (the "unattended" information).
+- A `SpotLight3D` node that acts as the "cone of attention".
+- The user should be able to move the spotlight with the mouse.
+- Objects inside the spotlight should be highlighted.

@@ -1,14 +1,15 @@
 # Vector Throwing Demo
 
-An interactive VR demonstration of projectile motion using throwable balls with real-time velocity and gravity vector visualization.
+An interactive VR demonstration of projectile motion with throwable balls, moving targets, and a homing drone built from a truncated tetrahedron.
 
 ## Overview
 
 This example demonstrates fundamental physics concepts:
 - **Velocity Vectors**: Calculated from hand movement while holding the ball
-- **Gravity Vectors**: Constant downward acceleration (9.8 m/s²)
+- **Gravity Vectors**: Constant downward acceleration (9.8 m/s^2)
 - **Projectile Motion**: Combining horizontal velocity with vertical acceleration
 - **Collision Detection**: Hit targets to score points
+- **Reactive Enemies**: Drone chases the player until destroyed by a thrown ball
 
 ## Components
 
@@ -18,7 +19,7 @@ Throwable physics ball with velocity tracking and vector visualization.
 
 **Features:**
 - Tracks hand position history (5 samples by default)
-- Calculates velocity: `v = Δposition / Δtime`
+- Calculates velocity: `v = delta_position / delta_time`
 - Displays real-time velocity vector (cyan arrow)
 - Shows constant gravity vector (red arrow)
 - Applies accumulated velocity on release
@@ -59,18 +60,57 @@ respawn_time: float = 3.0
 show_hit_label: bool = true
 ```
 
-### 3. VectorThrowing (`VectorThrowing.tscn`)
+### 3. VectorDrone (`vector_drone.tscn`)
+
+Homing drone that pursues the player while bobbing and strafing.
+
+**Features:**
+- Uses the truncated tetrahedron primitive for a stylized body
+- Steers toward the player with configurable speed and hover height
+- Reacts to throwable ball hits with knockback, flashes, and destruction
+- Emits player-hit events when it reaches the player
+- Supports respawn timers and point rewards for each takedown
+
+**Exports:**
+```gdscript
+player_path: NodePath                 # Optional explicit target override
+move_speed: float = 3.2
+acceleration: float = 6.0
+hover_height: float = 1.6
+strafe_amplitude: float = 0.6
+strafe_frequency: float = 1.0
+max_health: int = 2
+ball_damage: int = 1
+player_hit_radius: float = 0.5
+player_hit_cooldown: float = 2.0
+knockback_force: float = 5.0
+points_value: int = 40
+base_color: Color = Color(1.0, 0.45, 0.1, 1.0)
+```
+
+### 4. VectorThrowing (`VectorThrowing.tscn`)
 
 Main scene combining all elements.
 
 **Features:**
 - Spawns multiple throwable balls
 - Creates grid of target cubes (increasing difficulty/points)
+- Optional homing drone challenge with respawn timers
 - Real-time score tracking
 - Physics equations info panel
 - Instructions display
 - Game reset functionality
 
+**Drone Settings (scene exports):**
+```gdscript
+enable_drones: bool = true
+drone_count: int = 1
+drone_spawn_radius: float = 3.5
+drone_spawn_height: float = 1.6
+drone_respawn_time: float = 6.0
+drone_points_value: int = 40
+drone_base_color: Color = Color(1.0, 0.45, 0.1, 1.0)
+```
 ## How It Works
 
 ### Velocity Calculation
@@ -278,6 +318,42 @@ This scene can be integrated into the main VR grid system:
 - [ ] Add sound effects for different materials
 - [ ] Create tutorial mode with guided throws
 
+## Moving Targets
+
+New feature! Targets that move in patterns:
+
+### MovingTargetCube
+
+**File**: `moving_target_cube.tscn`
+
+**Movement Patterns:**
+- `"linear"` - Side to side (X axis)
+- `"circular"` - Circle on XZ plane
+- `"figure8"` - Figure-8 pattern
+- `"random"` - Smooth random motion
+- `"vertical"` - Up and down
+- `"horizontal"` - Left and right
+
+**Example:**
+```gdscript
+var moving_target = preload("res://algorithms/vectors/08_vector_throwing/moving_target_cube.tscn").instantiate()
+moving_target.movement_pattern = "circular"
+moving_target.movement_speed = 1.5
+moving_target.movement_range = 2.0
+moving_target.pause_on_hit = true  # Pauses when hit
+add_child(moving_target)
+```
+
+**Properties:**
+```gdscript
+enable_movement: bool = true
+movement_pattern: String = "circular"
+movement_speed: float = 1.0         # Speed multiplier
+movement_range: float = 2.0         # Distance from start
+pause_on_hit: bool = true           # Stop moving when hit
+pause_duration: float = 1.0         # Seconds to pause
+```
+
 ## Troubleshooting
 
 **Ball doesn't throw:**
@@ -291,17 +367,27 @@ This scene can be integrated into the main VR grid system:
 - Verify vector colors aren't black/transparent
 
 **Targets not detecting hits:**
-- Confirm ball is in "throwable" group
-- Check collision layers/masks
+- Check console for debug messages: `[HitTarget] Body entered...`
+- Confirm ball is in "throwable" group (should see in console)
+- Check collision layers/masks (both should be layer 1)
 - Ensure Area3D is monitoring
+- Ball must be unfrozen (happens on drop)
+
+**Targets don't disappear:**
+- Set `destroy_on_hit = true` (now default)
+- Check `respawn_time` to see when they come back
+- Look for `[HitTarget] HIT!` message in console
 
 **Performance issues:**
 - Reduce `num_balls` in main scene
 - Decrease `target_rows` and `target_columns`
 - Disable `show_hit_label` on targets
+- Reduce `movement_speed` for moving targets
 
 ## Credits
 
 Part of the AdaResearch educational VR platform demonstrating vector mathematics and physics principles through interactive gameplay.
 
 Based on the VectorSceneBase architecture from the Nature of Code implementations.
+
+

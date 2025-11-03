@@ -19,10 +19,9 @@ var section_progress: float = 0.0
 
 # Sound bank with enhanced synthesis
 var sound_bank: Dictionary = {}
-const SAMPLE_RATE = 44100
 
-# Section events
-signal section_changed(new_section: String, old_section: String)
+# Section events (overrides parent signal with additional parameter)
+signal section_changed_extended(new_section: String, old_section: String)
 signal section_progress_updated(section: String, progress: float)
 
 func _ready():

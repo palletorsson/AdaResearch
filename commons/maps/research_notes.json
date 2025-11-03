@@ -1,0 +1,14 @@
+{
+	"name": "Research Notes",
+	"nodes": [
+		{ "id": "n1", "pos": [200, 120], "text": "Topic" },
+		{ "id": "n2", "pos": [420, 180], "text": "Hypothesis" },
+		{ "id": "n3", "pos": [320, 320], "text": "Evidence" }
+	],
+	"edges": [
+		["n1","n2"],
+		["n2","n3"]
+	]
+}
+
+
