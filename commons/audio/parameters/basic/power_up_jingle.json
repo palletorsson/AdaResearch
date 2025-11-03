@@ -1,60 +1,64 @@
 {
 	"power_up_jingle": {
 		"_metadata": {
-			"sound_type": "power_up_jingle",
-			"description": "⭐ Power-Up Jingle",
 			"category": "Game Effects",
 			"created_at": "2024-12-24T12:00:00Z",
-			"version": "1.0",
-			"is_default": true
+			"description": "⭐ Power-Up Jingle",
+			"is_default": true,
+			"sound_type": "power_up_jingle",
+			"version": "1.0"
 		},
 		"parameters": {
-			"duration": {
-				"value": 1.5,
-				"min": 0.5,
-				"max": 4.0,
-				"step": 0.1
-			},
-			"root_note": {
-				"value": 262.0,
-				"min": 130.0,
-				"max": 520.0,
-				"step": 1.0
-			},
-			"note_count": {
-				"value": 4,
-				"min": 2,
-				"max": 8,
-				"step": 1
-			},
-			"note_decay": {
-				"value": 3.0,
-				"min": 1.0,
-				"max": 8.0,
-				"step": 0.1
-			},
-			"harmony_amount": {
-				"value": 0.2,
+			"amplitude": {
+				"max": 1.0,
 				"min": 0.0,
-				"max": 0.8,
-				"step": 0.01
+				"step": 0.01,
+				"value": 0.3
 			},
 			"bell_character": {
-				"value": 0.8,
-				"min": 0.0,
 				"max": 1.0,
-				"step": 0.01
+				"min": 0.0,
+				"step": 0.01,
+				"value": 0.8
 			},
-			"amplitude": {
-				"value": 0.3,
+			"duration": {
+				"max": 4.0,
+				"min": 0.5,
+				"step": 0.1,
+				"value": 1.2
+			},
+			"harmony_amount": {
+				"max": 0.8,
 				"min": 0.0,
-				"max": 1.0,
-				"step": 0.01
+				"step": 0.01,
+				"value": 0.2
+			},
+			"note_count": {
+				"max": 8.0,
+				"min": 2.0,
+				"step": 1.0,
+				"value": 4.0
+			},
+			"note_decay": {
+				"max": 8.0,
+				"min": 1.0,
+				"step": 0.1,
+				"value": 3.0
+			},
+			"root_note": {
+				"max": 520.0,
+				"min": 130.0,
+				"step": 1.0,
+				"value": 243.0
 			},
 			"scale_type": {
-				"value": "major",
-				"options": ["major", "minor", "pentatonic"]
+				"options": [
+					"major",
+					"minor",
+					"pentatonic"
+				],
+				"value": "major"
 			}
 		}
 	}
-} 
+}

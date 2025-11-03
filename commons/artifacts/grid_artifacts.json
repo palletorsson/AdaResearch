@@ -731,6 +731,14 @@
 			"scene": "res://algorithms/computationalbiology/radiolaria/radiolaria.tscn",
 
 		},
+		"MolecularDesigner": {
+			"name": "MolecularDesigner",
+			"lookup_name": "MolecularDesigner", 
+			"description": "MolecularDesigner.",
+			"scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+
+		},
+		
 		"tartan_demo": {
 			"name": "tartan_demo",
 			"lookup_name": "tartan_demo", 
@@ -3994,6 +4002,12 @@
 		"lookup_name": "example_6_8_collision_layers_vr",
 		"description": "Collision layers physics demonstration",
 		"scene": "res://algorithms/physics/example_6_8_collision_layers_vr.tscn",
+	},
+	"VectorThrowing": {
+		"name": "VectorThrowing",
+		"lookup_name": "VectorThrowing",
+		"description": "VectorThrowing",
+		"scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
 	},
 	"lshape": {
 		"name": "L Shape",

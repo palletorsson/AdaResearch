@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmciy24fnm8cw"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/VectorThrowing.gd" id="1_vector_throwing"]
+
+[node name="VectorThrowing" type="Node3D"]
+script = ExtResource("1_vector_throwing")
+num_balls = 3
+ball_spawn_height = 1.5
+ball_spawn_spacing = 0.3
+target_rows = 3
+target_columns = 4
+target_spacing = 0.6
+target_distance = 3.0
+target_height_offset = 1.0
+enable_scoring = true
+show_instructions = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 5, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2, 4)

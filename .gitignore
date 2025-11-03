@@ -10,7 +10,9 @@
 
 # Project Directories to Exclude
 # =============================================================================
-/addons/
+/addons/*
+!/addons/audio_catalog_editor/
+!/addons/audio_catalog_editor/**
 /build/
 /assets/
 /android/

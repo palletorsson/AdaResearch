@@ -160,4 +160,3 @@ CNNs are deep learning models that use convolutional operations to extract featu
 ---
 
 *Convolutional Neural Networks have revolutionized computer vision and continue to advance the state-of-the-art in image understanding and analysis.*
-
