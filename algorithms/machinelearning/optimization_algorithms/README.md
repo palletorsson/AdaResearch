@@ -1,5 +1,12 @@
 # Optimization Algorithms
 
+
+## Folder Summary
+
+The `Optimization Algorithms` module provides a 3D sandbox for exploring the ideas behind the Optimization Algorithms workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `optimization_algorithms.tscn` and the controller script `OptimizationAlgorithms.gd`.
+
 ## Overview
 This algorithm demonstrates various optimization algorithms used in machine learning and mathematical optimization to find the best solutions for complex problems, including gradient descent, evolutionary algorithms, and other optimization techniques.
 

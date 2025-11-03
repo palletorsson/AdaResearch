@@ -1,5 +1,12 @@
 # Support Vector Machine Visualization
 
+
+## Folder Summary
+
+The `Support Vector Machine Visualization` module provides a 3D sandbox for exploring the ideas behind the Support Vector Machine Visualization workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `svm_visualization.tscn` and the controller script `svm_visualization.gd`.
+
 ## 🧠 Mathematical Justice & Boundary Politics
 
 A comprehensive implementation of Support Vector Machines (SVM) with real-time visualization of classification boundaries, support vectors, and kernel transformations. This algorithm explores the politics of classification boundaries and demonstrates how mathematical optimization creates separating hyperplanes in high-dimensional identity spaces.

@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_computer_vision",
+  "title": "Computer Vision",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/computer_vision/computer_vision.tscn",
+  "script": "res://algorithms/machinelearning/computer_vision/ComputerVision.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/computer_vision/README.md",
+    "tutorial": "res://algorithms/machinelearning/computer_vision/computer_vision_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/computer_vision/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/computer_vision/summery.md"
+  },
+  "summary": "The `Computer Vision` sandbox investigates concepts from Computer Vision inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "animate",
+    "bounding",
+    "boxes",
+    "convolutional",
+    "create"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

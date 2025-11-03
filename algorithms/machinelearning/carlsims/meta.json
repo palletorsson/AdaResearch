@@ -1,0 +1,55 @@
+{
+  "id": "machinelearning_carlsims",
+  "title": "Karl Sims Evolution",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+  "script": "res://algorithms/machinelearning/carlsims/evolvedcreatures.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/carlsims/README.md",
+    "tutorial": "res://algorithms/machinelearning/carlsims/carlsims_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/carlsims/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/carlsims/summery.md"
+  },
+  "summary": "Simple two-leg walkers evolve hip swing parameters to move forward across a plane.",
+  "keywords": [
+    "evolution",
+    "procedural animation",
+    "physics",
+    "machine learning"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Creatures move slowly; camera stays static.",
+    "interaction": "Modify exports or restart the population at runtime.",
+    "performance": "~30 RigidBodies and 20 hinges active; suitable for desktop."
+  },
+  "parameters": [
+    {
+      "name": "random_seed",
+      "type": "int",
+      "default": 20241103,
+      "description": "Deterministic seed for genome sampling."
+    },
+    {
+      "name": "enable_random_restart",
+      "type": "bool",
+      "default": false,
+      "description": "Inject fresh genomes when respawning beyond the elite set."
+    },
+    {
+      "name": "enable_debug_prints",
+      "type": "bool",
+      "default": true,
+      "description": "Log fitness scores for each generation."
+    }
+  ],
+  "links": [
+    {
+      "title": "Karl Sims (1994) - Evolved Virtual Creatures",
+      "type": "reference",
+      "url": "https://www.karlsims.com/evolved-virtual-creatures.html"
+    }
+  ]
+}

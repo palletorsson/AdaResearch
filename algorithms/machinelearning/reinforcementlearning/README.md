@@ -1,5 +1,12 @@
 # Reinforcement Learning Creature
 
+
+## Folder Summary
+
+The `Reinforcement Learning Creature` module provides a 3D sandbox for exploring the ideas behind the Reinforcement Learning Creature workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `joint_learn_walk.tscn` and the controller script `joint_learn_walk.gd`.
+
 ## Overview
 This implementation demonstrates a reinforcement learning system where a creature with randomly generated joints learns to walk through trial and error. The system combines procedural body generation with Q-learning reinforcement learning to create emergent locomotion behaviors.
 

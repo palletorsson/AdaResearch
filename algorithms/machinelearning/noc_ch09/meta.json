@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_noc_ch09",
+  "title": "Nature of Code Chapter 09",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/noc_ch09/9_1_ga_shakespeare_vr.tscn",
+  "script": "res://algorithms/machinelearning/noc_ch09/9_1_ga_shakespeare_vr.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/noc_ch09/README.md",
+    "tutorial": "res://algorithms/machinelearning/noc_ch09/noc_ch09_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/noc_ch09/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/noc_ch09/summery.md"
+  },
+  "summary": "The `Nature of Code Chapter 09` sandbox investigates concepts from Nature of Code Chapter 09 inside a real-time Godot lab.",
+  "keywords": [
+    "calculate",
+    "character",
+    "controller",
+    "create",
+    "crossover",
+    "dna"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

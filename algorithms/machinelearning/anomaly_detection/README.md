@@ -1,6 +1,11 @@
 ﻿# Anomaly Detection Sandbox
 
-A visual sandbox for comparing simple anomaly scoring strategies on a synthetic 2D dataset. Points are projected onto a ground plane, colour-coded by anomaly score, and rescaled when they cross the active threshold.
+
+## Folder Summary
+
+The `Anomaly Detection` module provides a 3D sandbox for exploring the ideas behind the Anomaly Detection workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `anomaly_detection.tscn`, controller scripts such as `AnomalyDetection.gd` and `anomaly_detection_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
 
 ## Scene Assets
 - nomaly_detection.tscn – root scene with camera, lighting, threshold disc, labels, and an empty DataRoot container.
@@ -12,7 +17,8 @@ A visual sandbox for comparing simple anomaly scoring strategies on a synthetic 
 ## How It Works
 1. _generate_samples() seeds a reproducible dataset: 70-ish normal points clustered near the origin and a handful of injected anomalies on the perimeter.
 2. _build_points() instantiates SphereMesh instances under DataRoot, attaching individual StandardMaterial3D instances so colours/emission can be tuned per sample.
-3. un_detection() recomputes summary statistics (mean, std-dev, max radius) and scores each sample using the current detection mode:
+3. 
+un_detection() recomputes summary statistics (mean, std-dev, max radius) and scores each sample using the current detection mode:
    - **Z-Score** – |zₓ| + |zᵧ| relative to the cluster mean.
    - **Isolation Radius** – Euclidean distance from the cluster centre.
    - **Autoencoder Error** – reconstruction error against a synthetic sin-wave manifold plus a radial penalty.
@@ -20,14 +26,17 @@ A visual sandbox for comparing simple anomaly scoring strategies on a synthetic 
 5. The translucent ThresholdVisual cylinder scales to communicate the active threshold radius, and three Label3D nodes surface the current mode, anomaly counts, and score statistics.
 
 ## Public API Highlights
-- un_detection() – recompute colour/scale/state after tweaking exports or dataset.
+- 
+un_detection() – recompute colour/scale/state after tweaking exports or dataset.
 - cycle_detection_mode() – iterate Z-Score → Isolation → Autoencoder.
-- eset_dataset(new_seed) – reseed and rebuild the synthetic dataset.
+- 
+eset_dataset(new_seed) – reseed and rebuild the synthetic dataset.
 - Exported parameters (
 ormal_sample_count, thresholds, nomaly_scale_multiplier, etc.) let designers tune density and sensitivity in-editor.
 
 ## Usage Notes
-- Tweak exported thresholds in the inspector, then call un_detection() (or toggle a value) to see the effect.
+- Tweak exported thresholds in the inspector, then call 
+un_detection() (or toggle a value) to see the effect.
 - Use cycle_detection_mode() from a debug console or button to compare how each heuristic reacts to the same dataset.
 - The threshold disc is illustrative; its radius mapping differs slightly per mode to keep the visual scale readable.
 

@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_ga_ca_shape_learner",
+  "title": "GA-CA Shape Learner",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.tscn",
+  "script": "res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/ga_ca_shape_learner/README.md",
+    "tutorial": "res://algorithms/machinelearning/ga_ca_shape_learner/ga_ca_shape_learner_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/ga_ca_shape_learner/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/ga_ca_shape_learner/summery.md"
+  },
+  "summary": "The `GA-CA Shape Learner` sandbox investigates concepts from GA-CA Shape Learner inside a real-time Godot lab.",
+  "keywords": [
+    "async",
+    "calculate",
+    "count",
+    "create",
+    "crossover",
+    "display"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

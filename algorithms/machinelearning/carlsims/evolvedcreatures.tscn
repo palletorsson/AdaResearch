@@ -1,9 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl5gbldsbb1om"]
+[gd_scene load_steps=3 format=3 uid="uid://tqo65mscjafw"]
 
-[ext_resource type="Script" uid="uid://c5vmmhcwh006c" path="res://algorithms/machinelearning/carlsims/evolvedcreatures.gd" id="1_0051f"]
+[ext_resource type="Script" uid="uid://c5vmmhcwh006c" path="res://algorithms/machinelearning/carlsims/evolvedcreatures.gd" id="1"]
 
-[node name="Evolvedcreatures" type="Node3D"]
-script = ExtResource("1_0051f")
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+ambient_light_color = Color(0.55, 0.6, 0.7, 1)
+ambient_light_energy = 0.4
+
+[node name="EvolvedCreatures" type="Node3D"]
+script = ExtResource("1")
+enable_random_restart = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.97854)
+transform = Transform3D(0.965926, -0.12941, 0.224144, 0, 0.866025, 0.5, -0.258819, -0.481139, 0.837759, -4, 6, 12)
+current = true
+far = 120.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, -3, 6, 4)
+light_energy = 1.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")

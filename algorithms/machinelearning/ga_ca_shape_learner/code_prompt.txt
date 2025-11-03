@@ -1,0 +1,26 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.tscn`.
+Your implementation must bring the `GA-CA Shape Learner` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# GA-CA Shape Learner
+
+## Folder Summary
+
+The `GA-CA Shape Learner` module provides a 3D sandbox for exploring the ideas behind the GA-CA Shape Learner workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `ShapeLearner.tscn` and the controller script `ShapeLearner.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node2D` and use typed GDScript throughout.
+- Expose inspector controls for `grid_size`, `population_size`, `mutation_rate`, `generations`.
+- Resolve @onready references for `multimesh_instance`, `timer`.
+- Implement the lifecycle helpers `_ready()`, `_start_ga()`, `run_ga_loop()`, `evaluate_population_async()`, `display_ca_sequence()`, `create_target_shape()`.
+- Maintain state containers including `ca_rules`, `population`, `fitness`, `target_shape`, `current_generation`, `best_fitness`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

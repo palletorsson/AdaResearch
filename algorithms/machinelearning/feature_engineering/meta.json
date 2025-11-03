@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_feature_engineering",
+  "title": "Feature Engineering",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/feature_engineering/feature_engineering.tscn",
+  "script": "res://algorithms/machinelearning/feature_engineering/FeatureEngineering.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/feature_engineering/README.md",
+    "tutorial": "res://algorithms/machinelearning/feature_engineering/feature_engineering_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/feature_engineering/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/feature_engineering/summery.md"
+  },
+  "summary": "The `Feature Engineering` sandbox investigates concepts from Feature Engineering inside a real-time Godot lab.",
+  "keywords": [
+    "animate",
+    "create",
+    "engineered",
+    "engineering",
+    "feature",
+    "features"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

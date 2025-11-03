@@ -1,5 +1,12 @@
 # Variational Autoencoders (VAEs)
 
+
+## Folder Summary
+
+The `Variational Autoencoders (VAEs)` module provides a 3D sandbox for exploring the ideas behind the Variational Autoencoders (VAEs) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `variational_autoencoders_VAEs.tscn` and the controller script `VariationalAutoencodersVAEs.gd`.
+
 ## Overview
 This algorithm demonstrates Variational Autoencoders, a type of generative model that learns to encode and decode data while learning a continuous, structured latent space representation.
 

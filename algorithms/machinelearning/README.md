@@ -3,6 +3,11 @@
 ## Overview
 Comprehensive collection of interactive machine learning algorithms implemented in VR/3D space using Godot Engine. This directory contains fundamental ML concepts visualized through immersive, hands-on experiences.
 
+## Folder Summary
+This collection spans foundational supervised and unsupervised learning showcases such as `neural_networks`, `convolutional_neural_networks_CNNs`, `computer_vision`, `gradientdescent`, `optimization_algorithms`, `clustering_algorithms`, `kmeansclustering`, `dimensionality_reduction`, `pca`, `supportvectormachine`, `randomforest`, `time_series_analysis`, `feature_engineering`, `randomwalkermachine`, and `recommendation_systems`. Each scene focuses on the mechanics behind classification, regression, and clustering workflows, pairing parameter controls with 3D visual metaphors so visitors can watch loss surfaces settle, centroids migrate, and boundaries reshape in real time.
+
+More specialized sandboxes explore sequences, generative creativity, and adaptive intelligence: `LSTMs`, `transformers`, `natural_language_processing_NLP`, `attention_mechanisms`, `reinforcementlearning`, `reinforcement_learning`, `anomaly_detection`, `ensemble_methods`, `evolutionaryalgorithms`, `evolutionaryalgorithms2`, `geneticalgorithm`, `carlsims`, `evolvingflowers`, `ga_ca_shape_learner`, `shape_learner_3d`, `stacked`, `noc_ch09`, `variational_autoencoders_VAEs`, `generative_adversarial_networks_GANs`, `neuralnetworkvisualization`, and `explainable_AI_XAI`. Together they cover everything from agent policy tuning and genetic morphogenesis to transparent model introspection, rounding out the AdaResearch machine-learning catalogue.
+
 ## Contents
 
 ### 🧠 **Core Algorithms**

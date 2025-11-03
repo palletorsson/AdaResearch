@@ -1,4 +1,4 @@
-﻿{
+{
   "id": "machinelearning_clustering_algorithms",
   "title": "Clustering Algorithms Sandbox",
   "category": "machine_learning",
@@ -7,7 +7,8 @@
   "documentation": {
     "readme": "res://algorithms/machinelearning/clustering_algorithms/README.md",
     "tutorial": "res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms_tutorial.gd",
-    "prompt": "res://algorithms/machinelearning/clustering_algorithms/code_prompt.txt"
+    "prompt": "res://algorithms/machinelearning/clustering_algorithms/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/clustering_algorithms/summery.md"
   },
   "summary": "Synthetic dataset clustered with K-Means, naive agglomerative, and DBSCAN. Visualises centroids, dataset radius, inertia, and silhouette scores.",
   "keywords": [

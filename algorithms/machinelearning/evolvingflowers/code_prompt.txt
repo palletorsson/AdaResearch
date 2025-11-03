@@ -1,0 +1,25 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/evolvingflowers/evolvingflowers.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn`.
+Your implementation must bring the `Evolving Flowers` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Evolving Flowers
+
+## Folder Summary
+
+The `Evolving Flowers` module provides a 3D sandbox for exploring the ideas behind the Evolving Flowers workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `evolvingflowers.tscn` and the controller script `evolvingflowers.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_init()`, `randomize_genome()`, `crossover()`, `mutate()`, `_ready()`, `setup_environment()`.
+- Retain constant definitions such as `POPULATION_SIZE`, `GENERATION_TIME`, `MUTATION_RATE`, `ELITE_COUNT`.
+- Maintain state containers including `generation`, `timer`, `current_population`, `fitness_scores`, `petal_count`, `petal_length`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

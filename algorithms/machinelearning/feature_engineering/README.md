@@ -1,5 +1,12 @@
 # Feature Engineering
 
+
+## Folder Summary
+
+The `Feature Engineering` module provides a 3D sandbox for exploring the ideas behind the Feature Engineering workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `feature_engineering.tscn` and the controller script `FeatureEngineering.gd`.
+
 ## Overview
 This algorithm demonstrates various feature engineering techniques used in machine learning to create, transform, and select the most relevant features from raw data to improve model performance.
 

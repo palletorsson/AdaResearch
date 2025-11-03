@@ -3589,12 +3589,19 @@
 			"scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
 		},					
 			
-	"evolvedcreatures": {
-		"name": "evolvedcreatures",
-		"lookup_name": "evolvedcreatures",
-		"description": "evolvedcreatures",
-		"scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+	"evolved_creatures": {
+		"name": "evolved_creatures",
+		"lookup_name": "evolved_creatures",
+		"description": "evolved_creatures",
+		"scene": "res://algorithms/machinelearning/carlsims/evolved_creatures.tscn",
 	},
+		"convolutional_neural_networks": {
+		"name": "convolutional_neural_networks",
+		"lookup_name": "convolutional_neural_networks",
+		"description": "convolutional_neural_networks",
+		"scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/convolutional_neural_networks_CNNs.tscn",
+	},
+	
 	"fractal_recursion_1": {
 		"name": "Fractal Recursion 1",
 		"lookup_name": "fractal_recursion_1",

@@ -1,0 +1,89 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/recommendation_systems/RecommendationSystems.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/recommendation_systems/recommendation_systems.tscn`.
+Your implementation must bring the `Recommendation Systems` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Recommendation Systems
+
+
+## Folder Summary
+
+The `Recommendation Systems` module provides a 3D sandbox for exploring the ideas behind the Recommendation Systems workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `recommendation_systems.tscn` and the controller script `RecommendationSystems.gd`.
+
+## Overview
+This algorithm demonstrates various recommendation system approaches used in modern applications to suggest relevant items, content, or actions to users based on their preferences, behavior, and similar users.
+
+## What It Does
+- **Collaborative Filtering**: User-based and item-based recommendations
+- **Content-based Filtering**: Recommendations based on item characteristics
+- **Hybrid Approaches**: Combining multiple recommendation methods
+- **Real-time Recommendations**: Continuous suggestion generation
+- **Performance Evaluation**: Measuring recommendation quality
+- **User Interaction**: Simulating user feedback and preferences
+
+## Key Concepts
+
+### Recommendation Types
+- **Collaborative Filtering**: Using user behavior and preferences
+- **Content-based Filtering**: Using item features and characteristics
+- **Knowledge-based**: Using explicit knowledge and rules
+- **Demographic**: Using user demographic information
+- **Context-aware**: Considering time, location, and context
+
+### Recommendation Algorithms
+- **User-based CF**: Finding similar users and their preferences
+- **Item-based CF**: Finding similar items based on user ratings
+- **Matrix Factorization**: Decomposing user-item interaction matrix
+- **Deep Learning**: Neural network-based recommendation models
+- **Graph-based**: Using graph structures for recommendations
+
+## Algorithm Features
+- **Multiple Approaches**: Various recommendation methods
+- **Real-time Generation**: Continuous recommendation updates
+- **Performance Metrics**: Precision, recall, and diversity tracking
+- **User Simulation**: Simulated user interactions and feedback
+- **Parameter Control**: Adjustable recommendation parameters
+- **Export Capabilities**: Save recommendation results and models
+
+## Use Cases
+- **E-commerce**: Product recommendations and suggestions
+- **Streaming Services**: Content and media recommendations
+- **Social Media**: Friend and content suggestions
+- **News and Articles**: Personalized content delivery
+- **Job Platforms**: Job and candidate matching
+- **Educational Platforms**: Course and resource recommendations
+
+## Technical Implementation
+- **GDScript**: Written in Godot's scripting language
+- **Machine Learning**: Various recommendation algorithm implementations
+- **Data Structures**: Efficient user-item interaction storage
+- **Performance Optimization**: Optimized for real-time recommendations
+- **Memory Management**: Efficient data handling and caching
+
+## Performance Considerations
+- User and item count affects performance
+- Algorithm complexity impacts recommendation speed
+- Real-time updates require optimization
+- Memory usage scales with data size
+
+## Future Enhancements
+- **Additional Algorithms**: More recommendation methods
+- **Deep Learning**: Advanced neural network approaches
+- **Real-time Learning**: Continuous model updates
+- **Custom Metrics**: User-defined evaluation criteria
+- **A/B Testing**: Recommendation system comparison
+- **API Integration**: External recommendation services
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_ready()`, `_process()`, `create_user_particles()`, `create_item_particles()`, `create_flow_particles()`, `setup_recommendation_metrics()`.
+- Maintain state containers including `time`, `recommendation_progress`, `precision_score`, `recall_score`, `particle_count`, `flow_particles`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_neural_networks",
+  "title": "Neural Networks",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/neural_networks/neural_networks.tscn",
+  "script": "res://algorithms/machinelearning/neural_networks/NeuralNetworks.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/neural_networks/README.md",
+    "tutorial": "res://algorithms/machinelearning/neural_networks/neural_networks_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/neural_networks/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/neural_networks/summery.md"
+  },
+  "summary": "The `Neural Networks` sandbox investigates concepts from Neural Networks inside a real-time Godot lab.",
+  "keywords": [
+    "create",
+    "materials",
+    "network",
+    "process",
+    "ready",
+    "setup"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_evolutionaryalgorithms2",
+  "title": "Evolutionary Algorithms 2",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/creature.tscn",
+  "script": "res://algorithms/machinelearning/evolutionaryalgorithms2/scripts/creature.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/evolutionaryalgorithms2/README.md",
+    "tutorial": "res://algorithms/machinelearning/evolutionaryalgorithms2/evolutionaryalgorithms2_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/evolutionaryalgorithms2/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/evolutionaryalgorithms2/summery.md"
+  },
+  "summary": "The `Evolutionary Algorithms 2` sandbox investigates concepts from Evolutionary Algorithms 2 inside a real-time Godot lab.",
+  "keywords": [
+    "active",
+    "add",
+    "adjust",
+    "attempt",
+    "behavior",
+    "behaviors"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

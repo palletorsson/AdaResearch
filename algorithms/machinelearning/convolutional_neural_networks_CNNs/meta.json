@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_convolutional_neural_networks_CNNs",
+  "title": "Convolutional Neural Networks (CNNs)",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/convolutional_neural_networks_CNNs.tscn",
+  "script": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/README.md",
+    "tutorial": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/convolutional_neural_networks_CNNs_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/summery.md"
+  },
+  "summary": "The `Convolutional Neural Networks (CNNs)` sandbox investigates concepts from Convolutional Neural Networks (CNNs) inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "animate",
+    "create",
+    "feature",
+    "get",
+    "grids"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

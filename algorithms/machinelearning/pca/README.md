@@ -1,5 +1,12 @@
 # Principal Component Analysis (PCA) Visualization
 
+
+## Folder Summary
+
+The `Principal Component Analysis (PCA) Visualization` module provides a 3D sandbox for exploring the ideas behind the Principal Component Analysis (PCA) Visualization workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `pca_visualization.tscn` and the controller script `pca_visualization.gd`.
+
 ## 📊 Dimensional Reduction & Identity Compression
 
 A comprehensive implementation of Principal Component Analysis with real-time visualization of eigenvalue decomposition, data projection, and variance explanation. This algorithm explores the politics of dimensionality reduction and demonstrates how high-dimensional identity data can be compressed while preserving essential information.

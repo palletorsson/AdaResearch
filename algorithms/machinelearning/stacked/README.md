@@ -1,6 +1,11 @@
 # BuildEnv - Grammar Discovery RL Environment
 
-Physics-based reinforcement learning environment for discovering construction grammars through trial and error.
+
+## Folder Summary
+
+The `BuildEnv - Grammar Discovery RL Environment` module provides a 3D sandbox for exploring the ideas behind the BuildEnv - Grammar Discovery RL Environment workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with scene files like `diagnostic_test.tscn` and `learn_world_stacked.tscn` and controller scripts such as `DiagnosticTest.gd`, `LearnWorldStacked.gd`, and `TestBuildEnv.gd`.
 
 ## 🎯 Goal
 

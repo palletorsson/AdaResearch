@@ -1,15 +1,66 @@
-﻿You are generating a Godot 4.2 GDScript named AnomalyDetection.gd for es://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn.
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn`.
+Your implementation must bring the `Anomaly Detection` sandbox to life exactly as described below.
 
-Core requirements
-1. Extend Node3D and populate the empty DataRoot container at run time with a synthetic dataset: ~70 normal samples near the origin (Gaussian noise) and ~10 perimeter anomalies. Seed randomness via an exported dataset_seed.
-2. Visualise each sample with a small SphereMesh (radius ≈ 0.12) positioned on the XZ plane. Attach an individual StandardMaterial3D so colours/emission can be updated per point.
-3. Support three lightweight scoring modes:
-   - Z_SCORE: |zₓ| + |zᵧ| relative to the mean/std of the cluster.
-   - ISOLATION_RADIUS: Euclidean distance from the cluster mean.
-   - AUTOENCODER_ERROR: reconstruction error against a synthetic sin-wave manifold plus a radial penalty.
-4. Export thresholds for each mode (z_score_threshold, isolation_radius_threshold, utoencoder_error_threshold) and compute is_anomaly := score >= threshold. Scale anomalies by nomaly_scale_multiplier and lift them slightly on the Y axis.
-5. Keep StatsLabels/TitleLabel, ModeLabel, SummaryLabel in sync with the current mode, anomaly counts, threshold, and score statistics (mean & median). Provide cycle_detection_mode() and eset_dataset(new_seed) helpers.
-6. Update ThresholdVisual (a flattened cylinder) so its scale and colour echo the active mode/threshold; use a translucent material and mild emission.
-7. Use deterministic, ASCII-compatible UTF-8 and avoid assumptions about optional nodes—gate lookups with is_instance_valid / null checks.
+Design brief (authoritative README excerpt):
+"""
+﻿# Anomaly Detection Sandbox
 
-Assume the scene already contains Camera3D, DirectionalLight3D, Ground, ThresholdVisual, DataRoot, and StatsLabels with the mentioned children.
+
+## Folder Summary
+
+The `Anomaly Detection` module provides a 3D sandbox for exploring the ideas behind the Anomaly Detection workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `anomaly_detection.tscn`, controller scripts such as `AnomalyDetection.gd` and `anomaly_detection_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
+
+## Scene Assets
+- nomaly_detection.tscn – root scene with camera, lighting, threshold disc, labels, and an empty DataRoot container.
+- AnomalyDetection.gd – builds the dataset, computes anomaly scores, colours points, and keeps the threshold disc and labels in sync.
+- code_prompt.txt – instructions for regenerating the controller script via an AI assistant.
+- nomaly_detection_tutorial.gd – in-world BBCode tutorial card.
+- meta.json – catalog metadata for menus/search.
+
+## How It Works
+1. _generate_samples() seeds a reproducible dataset: 70-ish normal points clustered near the origin and a handful of injected anomalies on the perimeter.
+2. _build_points() instantiates SphereMesh instances under DataRoot, attaching individual StandardMaterial3D instances so colours/emission can be tuned per sample.
+3. 
+un_detection() recomputes summary statistics (mean, std-dev, max radius) and scores each sample using the current detection mode:
+   - **Z-Score** – |zₓ| + |zᵧ| relative to the cluster mean.
+   - **Isolation Radius** – Euclidean distance from the cluster centre.
+   - **Autoencoder Error** – reconstruction error against a synthetic sin-wave manifold plus a radial penalty.
+4. Points are lerped between teal (normal) and hot red (anomaly) based on score / threshold; anomalies scale up and float slightly above the plane.
+5. The translucent ThresholdVisual cylinder scales to communicate the active threshold radius, and three Label3D nodes surface the current mode, anomaly counts, and score statistics.
+
+## Public API Highlights
+- 
+un_detection() – recompute colour/scale/state after tweaking exports or dataset.
+- cycle_detection_mode() – iterate Z-Score → Isolation → Autoencoder.
+- 
+eset_dataset(new_seed) – reseed and rebuild the synthetic dataset.
+- Exported parameters (
+ormal_sample_count, thresholds, nomaly_scale_multiplier, etc.) let designers tune density and sensitivity in-editor.
+
+## Usage Notes
+- Tweak exported thresholds in the inspector, then call 
+un_detection() (or toggle a value) to see the effect.
+- Use cycle_detection_mode() from a debug console or button to compare how each heuristic reacts to the same dataset.
+- The threshold disc is illustrative; its radius mapping differs slightly per mode to keep the visual scale readable.
+
+## Extending Ideas
+- Wire slider UI or VR dials to the threshold exports for live tuning sessions.
+- Swap the synthetic dataset with logged telemetry to demo actual anomaly cases.
+- Replace the colour gradient with per-point glyphs or billboarded score readouts.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `normal_sample_count`, `anomaly_sample_count`, `dataset_seed`, `z_score_threshold`, `isolation_radius_threshold`, `autoencoder_error_threshold`, `anomaly_scale_multiplier`, `detection_mode`.
+- Resolve @onready references for `data_root`, `threshold_visual`, `title_label`, `mode_label`, `summary_label`.
+- Implement the lifecycle helpers `_ready()`, `_generate_samples()`, `_build_points()`, `run_detection()`, `cycle_detection_mode()`, `reset_dataset()`.
+- Retain constant definitions such as `MODE_SEQUENCE`, `BASE_POINT_RADIUS`.
+- Maintain state containers including `pos`, `angle`, `radius`, `offset`, `sphere_mesh`, `mesh_instance`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

@@ -1,5 +1,12 @@
 # Evolutionary Ecosystem with Topological Data Analysis & Queer Forms Detection
 
+
+## Folder Summary
+
+The `Evolutionary Ecosystem with Topological Data Analysis & Queer Forms Detection` module provides a 3D sandbox for exploring the ideas behind the Evolutionary Ecosystem with Topological Data Analysis & Queer Forms Detection workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `genetic_algorithm.tscn` and controller scripts such as `camera_controller.gd` and `genetic_algorithm.gd`.
+
 ## 🧬 MASTERPIECE-LEVEL IMPLEMENTATION 🌈
 
 **Status**: RESEARCH PUBLICATION READY  

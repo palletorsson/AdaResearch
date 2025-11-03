@@ -1,0 +1,26 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.tscn`.
+Your implementation must bring the `Shape Learner 3D` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Shape Learner 3D
+
+## Folder Summary
+
+The `Shape Learner 3D` module provides a 3D sandbox for exploring the ideas behind the Shape Learner 3D workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `ShapeLearner3D.tscn` and the controller script `ShapeLearner3D.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `grid_size`, `population_size`, `mutation_rate`, `generations`, `ca_generations`, `individuals_per_frame`, `target_shape_enum`.
+- Implement the lifecycle helpers `_ready()`, `_process()`, `run_ga_generation()`, `finish_ga_generation()`, `stamp_ca_generation()`, `create_target_shape()`.
+- Retain constant definitions such as `CUBE_SCENE`.
+- Maintain state containers including `population`, `fitness`, `target_shape`, `multimesh_instance`, `current_generation`, `ca_grids`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

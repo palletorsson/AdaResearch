@@ -1,5 +1,12 @@
 # Reinforcement Learning
 
+
+## Folder Summary
+
+The `Reinforcement Learning` module provides a 3D sandbox for exploring the ideas behind the Reinforcement Learning workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `reinforcement_learning.tscn` and the controller script `ReinforcementLearning.gd`.
+
 ## Overview
 This algorithm demonstrates various reinforcement learning techniques where agents learn to make decisions by interacting with an environment, receiving rewards or penalties, and optimizing their behavior over time.
 

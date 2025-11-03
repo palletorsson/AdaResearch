@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_supportvectormachine",
+  "title": "Support Vector Machine Visualization",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+  "script": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/supportvectormachine/README.md",
+    "tutorial": "res://algorithms/machinelearning/supportvectormachine/supportvectormachine_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/supportvectormachine/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/supportvectormachine/summery.md"
+  },
+  "summary": "The `Support Vector Machine Visualization` sandbox investigates concepts from Support Vector Machine Visualization inside a real-time Godot lab.",
+  "keywords": [
+    "algorithm",
+    "alpha",
+    "alphas",
+    "auto",
+    "bias",
+    "boundary"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

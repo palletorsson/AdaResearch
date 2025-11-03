@@ -1,5 +1,12 @@
 # Natural Language Processing (NLP)
 
+
+## Folder Summary
+
+The `Natural Language Processing (NLP)` module provides a 3D sandbox for exploring the ideas behind the Natural Language Processing (NLP) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `natural_language_processing_NLP.tscn` and the controller script `NaturalLanguageProcessingNLP.gd`.
+
 ## Overview
 This algorithm demonstrates various Natural Language Processing techniques that enable computers to understand, interpret, and generate human language, including text analysis, language modeling, and semantic understanding.
 

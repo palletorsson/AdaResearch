@@ -1,5 +1,12 @@
 # Neural Networks
 
+
+## Folder Summary
+
+The `Neural Networks` module provides a 3D sandbox for exploring the ideas behind the Neural Networks workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `neural_networks.tscn` and the controller script `NeuralNetworks.gd`.
+
 ## Overview
 Neural networks are computational models inspired by biological neural networks in the human brain. They consist of interconnected nodes (neurons) organized in layers and are capable of learning complex patterns from data, making them fundamental to modern machine learning and artificial intelligence.
 

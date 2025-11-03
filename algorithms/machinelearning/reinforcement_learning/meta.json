@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_reinforcement_learning",
+  "title": "Reinforcement Learning",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/reinforcement_learning/reinforcement_learning.tscn",
+  "script": "res://algorithms/machinelearning/reinforcement_learning/ReinforcementLearning.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/reinforcement_learning/README.md",
+    "tutorial": "res://algorithms/machinelearning/reinforcement_learning/reinforcement_learning_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/reinforcement_learning/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/reinforcement_learning/summery.md"
+  },
+  "summary": "The `Reinforcement Learning` sandbox investigates concepts from Reinforcement Learning inside a real-time Godot lab.",
+  "keywords": [
+    "agent",
+    "algorithm",
+    "animate",
+    "count",
+    "create",
+    "environment"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

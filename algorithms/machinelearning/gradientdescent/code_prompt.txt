@@ -1,19 +1,66 @@
-You are generating a Godot 4.2 GDScript named `GradientDescentDemo.gd` for `res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn`.
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn`.
+Your implementation must bring the `Gradient Descent Sandbox` sandbox to life exactly as described below.
 
-Core requirements
-1. Extend `Node3D`. In `_ready()`, configure a `FastNoiseLite`, generate a triangulated heightfield mesh (XZ plane, Y = noise), configure the walker mesh, and call `reset_descent(false)`.
-2. Create a `MeshInstance3D` terrain under `$Terrain` by sampling a grid determined by `grid_resolution`/`grid_size`. Use `SurfaceTool` to build triangles and assign a simple `StandardMaterial3D`.
-3. Keep a deterministic `RandomNumberGenerator` seeded via `noise_seed` for both terrain and random restarts.
-4. Implement gradient descent:
-   - Estimate the gradient via central differences (`gradient_sample_distance`) on the height function.
-   - Update the walker’s XZ position with `learning_rate * gradient`, clamp to the terrain bounds, and resample Y from the heightfield.
-   - Append each position to `_path_points` and redraw `$Path` using an `ImmediateMesh` line strip.
-   - Optionally draw a red gradient vector from the walker using `$GradientIndicator`.
-5. Expose exports for noise parametrisation (`noise_frequency`, `noise_octaves`, etc.), optimisation (`learning_rate`, `step_interval`, `max_steps`, `stop_gradient_magnitude`), and visuals (`show_gradient`, `gradient_visual_scale`).
-6. Provide helper methods:
-   - `reset_descent(randomise := true)` – clear the trail, optionally randomise the starting position, and reset timers/state.
-   - `_perform_descent_step()` – single optimisation step with stop conditions.
-   - `_update_info_label()` – update `$HUD/InfoLabel` with step count, gradient magnitude, and state.
-7. Use explicit typing where practical (avoid Variant warnings) and guard optional nodes with null checks.
+Design brief (authoritative README excerpt):
+"""
+# Gradient Descent Sandbox
 
-Assume the scene contains nodes named `Terrain`, `Walker`, `Path`, `GradientIndicator`, `HUD/InfoLabel`, `Camera3D`, and `DirectionalLight3D`.
+
+## Folder Summary
+
+The `Gradient Descent Sandbox` module provides a 3D sandbox for exploring the ideas behind the Gradient Descent Sandbox workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `gradient_descent.tscn`, controller scripts such as `GradientDescentDemo.gd` and `gradient_descent_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
+
+## Scene Assets
+- `gradient_descent.tscn` - root scene with camera, light, terrain mesh, path/gradient renderers, and HUD label.
+- `GradientDescentDemo.gd` - controller script that builds the noise surface and runs the iterative descent.
+- `code_prompt.txt` - instructions for regenerating the controller with an AI assistant.
+- `gradient_descent_tutorial.gd` - in-world BBCode tutorial card.
+- `meta.json` - catalog entry for menus/search.
+
+## How It Works
+1. `_generate_terrain()` builds a grid of vertices using `FastNoiseLite` so the heightfield acts as a cost surface.
+2. `reset_descent()` positions the walker on the plane (optionally randomised) and clears any previous path.
+3. Each step estimates the gradient via central differences (sampling the height function along X/Z), then subtracts `learning_rate * gradient` from the position.
+4. The walker is re-projected onto the surface, the path line extends, and a red gradient line visualises the local slope.
+5. Descent stops after `max_steps` or when the gradient magnitude drops below `stop_gradient_magnitude`.
+
+## Exported Controls
+- `grid_resolution`, `grid_size`, `height_scale` - control terrain density and scale.
+- `noise_frequency`, `noise_octaves`, `noise_lacunarity`, `noise_gain`, `noise_seed` - shape the underlying heightfield.
+- `walker_start` - initial XZ coordinates for the walker.
+- `learning_rate`, `step_interval`, `gradient_sample_distance`, `max_steps`, `stop_gradient_magnitude` - optimisation behaviour.
+- `show_gradient`, `gradient_visual_scale` - gradient line visualisation.
+
+### Helper Methods
+- `reset_descent(randomise := true)` - clear the trail and optionally randomise the starting position.
+- `_perform_descent_step()` - executes one optimisation tick (called automatically).
+- `_update_info_label()` - updates the HUD with step count, slope magnitude, and state.
+
+## Usage Tips
+- Increase `learning_rate` for larger jumps or decrease it to show slower convergence.
+- Change `walker_start` to drop the walker near different basins.
+- Toggle `show_gradient` to focus on the path trail.
+- Randomise `noise_seed` to showcase how local minima change.
+- Invoke `reset_descent()` repeatedly to compare trajectories from new starting points.
+
+## Extending Ideas
+- Hook a UI slider to `learning_rate` or `step_interval` for interactive pacing.
+- Add a heatmap overlay or contour lines from the height samples.
+- Spawn multiple walkers with different rates to compare convergence behaviour.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Expose inspector controls for `grid_size`, `height_scale`, `noise_frequency`, `noise_lacunarity`, `noise_gain`, `noise_seed`, `walker_start`, `learning_rate`, `step_interval`, `gradient_sample_distance`, `gradient_visual_scale`, `max_steps`, `stop_gradient_magnitude`, `show_gradient`.
+- Resolve @onready references for `terrain_mesh`, `walker_mesh`, `path_mesh`, `gradient_mesh`, `info_label`.
+- Implement the lifecycle helpers `_ready()`, `_init_noise()`, `_generate_terrain()`, `_vertex_for_grid()`, `_add_triangle()`, `_sample_height()`.
+- Retain constant definitions such as `POINT_RADIUS`.
+- Maintain state containers including `grid_resolution`, `noise_octaves`, `st`, `resolution`, `v00`, `v10`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

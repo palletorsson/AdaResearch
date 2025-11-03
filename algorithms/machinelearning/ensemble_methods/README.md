@@ -1,5 +1,12 @@
 # Ensemble Methods
 
+
+## Folder Summary
+
+The `Ensemble Methods` module provides a 3D sandbox for exploring the ideas behind the Ensemble Methods workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `ensemble_methods.tscn` and the controller script `EnsembleMethods.gd`.
+
 ## Overview
 This algorithm demonstrates various ensemble learning techniques that combine multiple machine learning models to improve prediction accuracy, robustness, and generalization performance.
 

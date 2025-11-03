@@ -1,5 +1,12 @@
 # Long Short-Term Memory (LSTMs)
 
+
+## Folder Summary
+
+The `Long Short-Term Memory (LSTMs)` module provides a 3D sandbox for exploring the ideas behind the Long Short-Term Memory (LSTMs) workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `LSTMs.tscn` and the controller script `LSTMs.gd`.
+
 ## Overview
 This algorithm demonstrates Long Short-Term Memory networks, a specialized type of recurrent neural network designed to overcome the vanishing gradient problem and effectively learn long-term dependencies in sequential data.
 

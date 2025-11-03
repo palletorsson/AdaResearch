@@ -1,6 +1,11 @@
 # Gradient Descent Sandbox
 
-A miniature visual explaining gradient descent by dropping a walker on a noisy heightfield. The walker samples the slope, takes downhill steps, and leaves a trail showing its optimisation path.
+
+## Folder Summary
+
+The `Gradient Descent Sandbox` module provides a 3D sandbox for exploring the ideas behind the Gradient Descent Sandbox workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `gradient_descent.tscn`, controller scripts such as `GradientDescentDemo.gd` and `gradient_descent_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
 
 ## Scene Assets
 - `gradient_descent.tscn` - root scene with camera, light, terrain mesh, path/gradient renderers, and HUD label.

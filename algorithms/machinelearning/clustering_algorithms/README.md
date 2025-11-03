@@ -1,6 +1,11 @@
 ﻿# Clustering Algorithms Sandbox
 
-An interactive Godot scene that seeds a synthetic 2D dataset, clusters it with three lightweight heuristics, and visualises the results with colour-coded points and centroid markers. Switch between algorithms to see how cluster assignments and quality scores change in real time.
+
+## Folder Summary
+
+The `Clustering Algorithms` module provides a 3D sandbox for exploring the ideas behind the Clustering Algorithms workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `clustering_algorithms.tscn`, controller scripts such as `ClusteringAlgorithms.gd` and `clustering_algorithms_tutorial.gd`, and supporting assets including `code_prompt.txt` and `meta.json`.
 
 ## Scene Assets
 - `clustering_algorithms.tscn` — root scene with camera, ground plane, data/centroid containers, translucent radius disc, and HUD labels.

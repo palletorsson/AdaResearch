@@ -1,5 +1,12 @@
 # Evolving Creatures Simulation
 
+
+## Folder Summary
+
+The `Evolving Creatures Simulation` module provides a 3D sandbox for exploring the ideas behind the Evolving Creatures Simulation workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `evolving_creatures.tscn` and the controller script `evolving_creatures.gd`.
+
 ## Overview
 This implementation demonstrates evolutionary algorithms applied to creature locomotion. Virtual creatures with randomly generated body structures evolve over generations to improve their walking, running, or swimming abilities through natural selection and genetic variation.
 

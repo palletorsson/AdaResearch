@@ -1,0 +1,25 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/noc_ch09/9_1_ga_shakespeare_vr.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/noc_ch09/9_1_ga_shakespeare_vr.tscn`.
+Your implementation must bring the `Nature of Code Chapter 09` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Nature of Code Chapter 09
+
+## Folder Summary
+
+The `Nature of Code Chapter 09` module provides a 3D sandbox for exploring the ideas behind the Nature of Code Chapter 09 workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with scene files like `9_1_ga_shakespeare_vr.tscn`, `9_2_smart_rockets_basic_vr.tscn`, and `9_3_smart_rockets_vr.tscn` and controller scripts such as `9_1_ga_shakespeare_vr.gd`, `9_2_smart_rockets_basic_vr.gd`, and `9_3_smart_rockets_vr.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_ready()`, `_setup_environment()`, `_create_controller()`, `_init_population()`, `_process()`, `_run_generation()`.
+- Retain constant definitions such as `CONTROLLER_SCENE`, `TARGET_PHRASE`, `POPULATION_SIZE`, `UPDATE_INTERVAL`.
+- Maintain state containers including `mutation_rate`, `mutation_controller`, `best`, `best_fitness`, `mating_pool`, `n`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

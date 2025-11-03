@@ -1,0 +1,24 @@
+You are an expert Godot 4.2 GDScript developer and technical writer.
+Create the full contents of `res://algorithms/machinelearning/evolutionaryalgorithms2/scripts/creature.gd`.
+The script is attached to the scene `res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/creature.tscn`.
+Your implementation must bring the `Evolutionary Algorithms 2` sandbox to life exactly as described below.
+
+Design brief (authoritative README excerpt):
+"""
+# Evolutionary Algorithms 2
+
+## Folder Summary
+
+The `Evolutionary Algorithms 2` module provides a 3D sandbox for exploring the ideas behind the Evolutionary Algorithms 2 workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with scene files like `scenes/creature.tscn` and `scenes/evolved_creatures.tscn` and controller scripts such as `scripts/creature.gd` and `scripts/evolved_creatures.gd`.
+"""
+
+Implementation checklist:
+- Extend `Node3D` and use typed GDScript throughout.
+- Implement the lifecycle helpers `_ready()`, `_process()`, `initialize()`, `initialize_from_genes()`, `generate_random_genome()`, `_add_joint_between()`.
+- Maintain state containers including `creature_type`, `genome`, `age`, `energy`, `last_reproduction_time`, `fitness`.
+- Mirror the behaviours, interactions, and explanations promised in the README.
+- Use idiomatic Godot 4.2 patterns, guard against missing data, and keep the code production-ready.
+
+Return only the final GDScript code, with clear comments where they clarify non-obvious logic.

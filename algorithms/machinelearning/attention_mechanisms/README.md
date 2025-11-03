@@ -1,5 +1,12 @@
 # Attention Mechanisms
 
+
+## Folder Summary
+
+The `Attention Mechanisms` module provides a 3D sandbox for exploring the ideas behind the Attention Mechanisms workflows. It invites visitors to tune parameters, watch spatial feedback evolve in real time, and connect the algorithm's theory to an intuitive scene.
+
+It ships with the scene file `attention_mechanisms.tscn` and the controller script `AttentionMechanisms.gd`.
+
 ## Overview
 This algorithm demonstrates various attention mechanisms used in modern machine learning, particularly in natural language processing and computer vision, showing how models can focus on relevant parts of input data.
 

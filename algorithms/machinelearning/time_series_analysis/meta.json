@@ -1,0 +1,30 @@
+{
+  "id": "machinelearning_time_series_analysis",
+  "title": "Time Series Analysis",
+  "category": "machine_learning",
+  "scene": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
+  "script": "res://algorithms/machinelearning/time_series_analysis/TimeSeriesAnalysis.gd",
+  "documentation": {
+    "readme": "res://algorithms/machinelearning/time_series_analysis/README.md",
+    "tutorial": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis_tutorial.gd",
+    "prompt": "res://algorithms/machinelearning/time_series_analysis/code_prompt.txt",
+    "summary": "res://algorithms/machinelearning/time_series_analysis/summery.md"
+  },
+  "summary": "The `Time Series Analysis` sandbox investigates concepts from Time Series Analysis inside a real-time Godot lab.",
+  "keywords": [
+    "accuracy",
+    "analysis",
+    "animate",
+    "axis",
+    "create",
+    "engine"
+  ],
+  "difficulty": "intermediate",
+  "estimated_duration": "8-12 minutes",
+  "last_updated": "2025-10-31",
+  "vr_notes": {
+    "comfort": "Camera remains steady; motion is driven by the visualization.",
+    "interaction": "Adjust exported parameters or use in-world UI to trigger updates.",
+    "performance": "Lightweight scene suitable for desktop and seated VR demos."
+  }
+}

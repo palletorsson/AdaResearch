@@ -1,0 +1,3 @@
+The `K-Means Clustering` sandbox is a small theatre of learning. Within this chromatic engine room, the scene `enhanced_kmeans.tscn` and its companion script `enhanced_kmeans.gd` lets hypotheses bloom like constellations.
+
+Patient tuning across `data_point_count`, `cluster_count`, `iteration_speed`, `convergence_threshold` change the rhythm of the system in an instant. In the control room, calls to `_init()`, `_ready()`, `_process()` keep the pulse steady. Helper forms like `DataPoint`, `Centroid` hold memory and meaning between beats. The sandbox holds still just long enough for insight to land.
