@@ -391,4 +391,3 @@ func arrays_equal(a: Array, b: Array) -> bool:
 			return false
 	
 	return true
-

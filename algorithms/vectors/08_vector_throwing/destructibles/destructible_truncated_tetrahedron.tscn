@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq4m7n8p5rwx2"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/destructibles/destructible_truncated_tetrahedron.gd" id="1_script"]
+
+[node name="DestructibleTruncatedTetrahedron" type="Node3D"]
+script = ExtResource("1_script")

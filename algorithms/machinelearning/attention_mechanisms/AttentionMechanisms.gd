@@ -1,7 +1,17 @@
 extends Node3D
- 
+
 
 @export var token_count: int = 6 : set = _set_token_count
+
+func _set_token_count(v: int) -> void:
+	token_count = v
+	if not is_node_ready():
+		return
+	_create_input_tokens()
+	_create_output_tokens()
+	_create_attention_matrix_multimesh()
+	_create_weight_lines_multimesh()
+	_create_focus_indicators()
 
 @export_range(0.0, 2.0, 0.01) var focus_gain: float = 0.8
 @export var pulse_speed: float = 2.0
@@ -94,7 +104,7 @@ func _calculate_attention_scores():
 		for score in raw_scores:
 			_attention_scores.append(score / score_sum) # Normalize scores (softmax)
 	else:
-		for _ in all_tokens:
+		for i in range(all_tokens.size()):
 			_attention_scores.append(0.0)
 
 
@@ -280,6 +290,26 @@ func _animate_qkv(delta: float) -> void:
 				# Use the query's self-attention score to drive the QKV visuals
 				var q_score = _attention_scores[query_index] if not _attention_scores.is_empty() else 0.0
 				mat.emission = color_qkv * (0.3 + q_score * 0.7)
+
+func _animate_focus(delta: float) -> void:
+	if _focus_spheres.get_child_count() != token_count:
+		return
+
+	focus_intensity = lerp(focus_intensity, 1.0 if _attention_scores.size() > 0 else 0.0, delta * 5.0)
+
+	for i in range(token_count):
+		var sphere := _focus_spheres.get_child(i) as MeshInstance3D
+		if sphere:
+			var score = 0.0
+			if i < _attention_scores.size():
+				score = _attention_scores[i]
+			
+			var target_scale := Vector3.ONE * (0.1 + score * 1.5) * focus_intensity
+			sphere.scale = sphere.scale.lerp(target_scale, delta * 8.0)
+			
+			var mat := sphere.material_override as StandardMaterial3D
+			if mat:
+				mat.emission = color_focus * (0.2 + score * 0.8) * focus_intensity
 
 func _animate_attention_matrix(delta: float) -> void:
 	if _matrix_mm == null or _attention_scores.is_empty():

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_vaes_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/variational_autoencoders_VAEs/VariationalAutoencodersVAEs_VR.gd" id="1_vaes_vr"]
+
+[node name="VariationalAutoencodersVAEs_VR" type="Node3D"]
+script = ExtResource("1_vaes_vr")
+latent_space_radius = 4.0
+tunnel_length = 8.0
+sample_point_size = 0.15
+latent_dimensions = 3
+num_latent_samples = 30
+num_encoder_layers = 4
+num_decoder_layers = 4
+auto_train = true
+training_speed = 0.12
+show_reconstruction = true
+show_kl_divergence = true
+enable_sample_grabbing = true
+enable_interpolation = true
+enable_generation = true
+show_reparameterization = true
+show_distribution = true

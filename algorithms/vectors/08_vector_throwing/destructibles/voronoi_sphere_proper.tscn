@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0e5blghstfdm"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/destructibles/voronoi_sphere_proper.gd" id="1_script"]
+
+[node name="VoronoiSphereProper" type="RigidBody3D"]
+script = ExtResource("1_script")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_finetuning_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/fine_tuning/FineTuning_VR.gd" id="1_finetuning_vr"]
+
+[node name="FineTuning_VR" type="Node3D"]
+script = ExtResource("1_finetuning_vr")
+layer_height = 1.2
+layer_radius = 1.5
+num_layers = 10
+lock_size = 0.25
+auto_train = true
+training_speed = 0.15
+num_frozen_layers = 6
+show_gradient_flow = true
+enable_layer_locking = true
+enable_data_throwing = true
+show_activation_flow = true
+learning_rate_control = true

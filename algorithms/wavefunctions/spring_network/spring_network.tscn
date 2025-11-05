@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6hj8d9k2l4m6"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/spring_network/spring_network.gd" id="1_spring"]
+
+[node name="SpringNetwork" type="Node3D"]
+script = ExtResource("1_spring")
+grid_size = Vector2i(10, 10)
+node_spacing = 0.5
+network_height = 1.5
+spring_constant = 50.0
+damping = 0.95
+mass = 1.0
+rest_length = 0.5
+excitation_strength = 2.0
+excitation_frequency = 1.0
+auto_excite = true
+show_nodes = true
+show_springs = true
+node_radius = 0.05
+spring_thickness = 0.02
+color_by_velocity = true

@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://0lww343efcy8"]
 
 [ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="1_grab_sphere"]
-[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/throw_ball_sphere.gd" id="2_throw_script"]
+[ext_resource type="Script" uid="uid://v5fasvfxpcnk" path="res://algorithms/vectors/08_vector_throwing/throw_ball_sphere.gd" id="2_throw_script"]
 
 [node name="ThrowBall" instance=ExtResource("1_grab_sphere")]
 script = ExtResource("2_throw_script")
-alter_freeze = false
 velocity_samples = 5
 velocity_multiplier = 1.2
 max_throw_speed = 10.0
@@ -15,3 +14,5 @@ ball_color = Color(1, 0.5, 0, 1)
 show_velocity_vector = true
 show_gravity_vector = true
 velocity_vector_scale = 0.5
+velocity_color = Color(0, 1, 1, 1)
+gravity_color = Color(1, 0.2, 0.2, 1)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_gans_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd" id="1_gans_vr"]
+
+[node name="GenerativeAdversarialNetworksGANs_VR" type="Node3D"]
+script = ExtResource("1_gans_vr")
+room_separation = 8.0
+arena_size = 4.0
+noise_particle_size = 0.12
+auto_train = true
+training_speed = 0.1
+particle_count = 20
+enable_noise_throwing = true
+enable_data_judging = true
+show_feedback_loop = true
+competition_visualization = true

@@ -1293,6 +1293,60 @@
 		"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
 		
 	},	
+	"sine_wall_static": {
+		"name": "sine_wall_static",
+		"lookup_name": "sine_wall_static",
+		"description": "sine_wall_statice.",
+		"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn",
+		
+	},
+	"sine_art_monitor": {
+		"name": "sine_art_monitor",
+		"lookup_name": "sine_art_monitor",
+		"description": "sine_art_monitor.",
+		"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn",
+		
+	},	
+	"sine_wall_corridor": {
+		"name": "sine_wall_corridor",
+		"lookup_name": "sine_wall_corridor",
+		"description": "sine_wall_corridor.",
+		"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+		
+	},			
+	
+	"SplineCables": {
+		"name": "SplineCables",
+		"lookup_name": "SplineCables",
+		"description": "SplineCables.",
+		"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn",
+		
+	},	
+"spring_network": {
+	"name": "SpringNetwork",
+	"lookup_name": "spring_network",
+	"description": "10×10 grid of coupled springs",
+	"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
+},
+"lissajous_curves": {
+	"name": "LissajousCurves",
+	"lookup_name": "lissajous_curves",
+	"description": "Parametric curves with particle tracer",
+	"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
+},
+"coupled_oscillator_lattice": {
+	"name": "CoupledOscillatorLattice",
+	"lookup_name": "coupled_oscillator_lattice",
+	"description": "12×12 oscillator grid",
+	"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+},
+"parametric_pendulum_waves": {
+	"name": "ParametricPendulumWaves",
+	"lookup_name": "parametric_pendulum_waves",
+	"description": "Parametric pendulum waves",
+	"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
+},			
+	
 		"rainbow_hallway": {
 		"name": "rainbow_hallway",
 		"lookup_name": "rainbow_hallway",
@@ -1528,10 +1582,17 @@
 		"sierpinski_triangle": {
 			"name": "sierpinski_triangle",
 			"lookup_name": "sierpinski_triangle",
-			"description": "sierpinski_trianglet",
+			"description": "sierpinski_triangle",
 			"scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
 		
-		},			
+		},		
+		"sierpinski_pyramid": {
+			"name": "sierpinski_pyramid",
+			"lookup_name": "sierpinski_pyramid",
+			"description": "sierpinski_pyramid",
+			"scene": "res://algorithms/fractals/sierpinski_pyramid/sierpinski_pyramid.tscn",
+		
+		},				
 		
 		"cube_subdivision": {
 			"name": "cube_subdivision",
@@ -1592,6 +1653,14 @@
 			"description": "Elementary cellular automata rules 30 and 110 visualization",
 			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
 		},
+	
+		"rule_30_110_gravity": {
+			"name": "rule_30_110_gravity",
+			"lookup_name": "rule_30_110_gravity",
+			"description": "rule_30_110_gravity",
+			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn",
+		}, 
+		
 		"7_1_elementary_ca_vr": {
 			"name": "7_1_elementary_ca_vr",
 			"lookup_name": "7_1_elementary_ca_vr",
@@ -3270,9 +3339,15 @@
 			"lookup_name": "buffergeometryparticles",
 			"description": "High-performance particle system using buffer geometry for efficient rendering and animation",
 			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
-
-	 
 		},
+
+		"degrading_shader_demo": {
+			"name": "degrading_shader_demo",
+			"lookup_name": "degrading_shader_demo",
+			"description": "degrading_shader_demo",
+			"scene": "res://algorithms/shaders/degrading_shader/degrading_shader_demo.tscn",
+		},		
+		
 		"dynamiccubemap": {
 			"name": "Dynamic Cube Map",
 			"lookup_name": "dynamiccubemap",
@@ -3590,6 +3665,61 @@
 			"description": "learn_world_stacked",
 			"scene": "res://algorithms/machinelearning/stacked/learn_world_stacked.tscn",
 		},
+	
+  "neural_networks_vr": {
+	  "name": "NeuralNetworks_VR",
+	  "lookup_name": "neural_networks_vr",
+	  "description": "Walkable neural network with visible weights and backpropagation",
+	  "scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn"
+  },
+  "transformers_vr": {
+	  "name": "Transformers_VR",
+	  "lookup_name": "transformers_vr",
+	  "description": "Interactive transformer with attention beam visualization",
+	  "scene": "res://algorithms/machinelearning/transformers/Transformers_VR.tscn"
+  },
+  "variational_autoencoders_vaes_vr": {
+	  "name": "VariationalAutoencodersVAEs_VR",
+	  "lookup_name": "variational_autoencoders_vaes_vr",
+	  "description": "Walkable latent space with reparameterization trick",
+	  "scene": "res://algorithms/machinelearning/variational_autoencoders_VAEs/VariationalAutoencodersVAEs_VR.tscn"
+  },
+ "fine_tuning_vr": {
+	  "name": "FineTuning_VR",
+	  "lookup_name": "fine_tuning_vr",
+	  "description": "Transfer learning tower with frozen and trainable layers",
+	  "scene": "res://algorithms/machinelearning/fine_tuning/FineTuning_VR.tscn"
+  }, 
+"lstms_vr": {
+	  "name": "LSTMs_VR",
+	  "lookup_name": "lstms_vr",
+	  "description": "Interactive LSTM cell with walkable memory flow",
+	  "scene": "res://algorithms/machinelearning/LSTMs/LSTMs_VR.tscn"
+  },
+  "generative_adversarial_networks_gans_vr": {
+	  "name": "GenerativeAdversarialNetworksGANs_VR",
+	  "lookup_name": "generative_adversarial_networks_gans_vr",
+	  "description": "Spatial GAN arena with generator and discriminator zones",
+	  "scene": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn"
+  },
+ "computer_vision_vr": {
+	  "name": "ComputerVision_VR",
+	  "lookup_name": "computer_vision_vr",
+	  "description": "Interactive image processing with spatial convolution filters",
+	  "scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn"
+  },
+  "convolutional_neural_networks_cnns_vr": {
+	  "name": "ConvolutionalNeuralNetworksCNNs_VR",
+	  "lookup_name": "convolutional_neural_networks_cnns_vr",
+	  "description": "Walkable CNN architecture with interactive kernels",
+	  "scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.tscn"
+  },
+  "explainable_ai_xai_vr": {
+	  "name": "ExplainableAIXAI_VR",
+	  "lookup_name": "explainable_ai_xai_vr",
+	  "description": "Interactive SHAP, LIME, and Grad-CAM explanations",
+	  "scene": "res://algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.tscn"
+  },
 	"gradient_descent_visualization": {
 			"name": "gradient_descent_visualization",
 			"lookup_name": "gradient_descent_visualization",
@@ -3652,6 +3782,12 @@
 		"description": "Randomized recursive tree with natural variation",
 		"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_vr.tscn",
 	},
+	"stochastic_tree_separated": {
+		"name": "stochastic_tree_separated",
+		"lookup_name": "stochastic_tree_separated",
+		"description": "stochastic_tree_separated",
+		"scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
+	},	
 	
 	"fractal_lsystem_string": {
 		"name": "L-System String",
@@ -4008,7 +4144,28 @@
 		"lookup_name": "VectorThrowing",
 		"description": "VectorThrowing",
 		"scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
-	},
+	},	
+		"throw_ball": {
+		"name": "throw_ball",
+		"lookup_name": "throw_ball",
+		"description": "throw_ball.",
+		"scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+	
+	},	
+	"sphere_splitting_showcase": {
+		"name": "sphere_splitting_showcase",
+		"lookup_name": "sphere_splitting_showcase",
+		"description": "sphere_splitting_showcase.",
+		"scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+	},	
+	
+	"destructibles_test_scene": {
+		"name": "destructibles_test_scene",
+		"lookup_name": "destructibles_test_scene",
+		"description": "destructibles_test_scene",
+		"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+	},		
+	 
 	"lshape": {
 		"name": "L Shape",
 		"lookup_name": "lshape",

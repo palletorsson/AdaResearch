@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_computer_vision_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/computer_vision/ComputerVision_VR.gd" id="1_cv_vr"]
+
+[node name="ComputerVision_VR" type="Node3D"]
+script = ExtResource("1_cv_vr")
+image_canvas_size = 4.0
+pixel_size = 0.2
+filter_size = 0.3
+feature_map_spacing = 1.5
+image_resolution = 16
+num_feature_maps = 4
+edge_threshold = 0.5
+show_sobel_filter = true
+show_gaussian_blur = true
+show_sharpen_filter = true
+animate_convolution = true
+enable_pixel_painting = true
+enable_filter_grabbing = true
+enable_object_detection = true
+show_sliding_kernel = true

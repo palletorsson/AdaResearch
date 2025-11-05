@@ -37,6 +37,20 @@ func _ready() -> void:
 	# Add to throwable group for target detection
 	add_to_group("throwable")
 
+	# Reconnect signals to ensure child methods are called
+	# Disconnect parent connections first
+	if picked_up.is_connected(Callable(self, "_on_picked_up")):
+		picked_up.disconnect(Callable(self, "_on_picked_up"))
+	if dropped.is_connected(Callable(self, "_on_dropped")):
+		dropped.disconnect(Callable(self, "_on_dropped"))
+
+	# Connect to child methods
+	picked_up.connect(_on_picked_up)
+	dropped.connect(_on_dropped)
+
+	# Debug: Print collision layers
+	print("[ThrowBall] Collision layer: ", collision_layer, " mask: ", collision_mask)
+
 func _setup_throwing_physics() -> void:
 	"""Configure physics for throwing"""
 	mass = ball_mass
@@ -46,9 +60,9 @@ func _setup_throwing_physics() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 
-	# Set collision layer 2 for detection by targets
-	collision_layer = 2  # Balls exist on layer 2
-	collision_mask = 1   # Balls collide with layer 1 (ground, walls, etc.)
+	# Add layer 2 for target detection, preserve existing layers (like XRTools layer 21)
+	collision_layer |= 2  # Add layer 2 while keeping existing layers
+	collision_mask |= 1   # Add collision with layer 1 (ground, walls, etc.)
 
 func _setup_vectors() -> void:
 	"""Create container for vector arrows"""
@@ -224,6 +238,11 @@ func _on_dropped(pickable: Variant) -> void:
 
 	if enable_gravity_on_throw:
 		gravity_scale = 1.0
+
+	# Ensure collision layer is still correct after drop
+	collision_layer |= 2
+
+	print("[ThrowBall] Dropped - velocity: ", throw_velocity.length(), " freeze: ", freeze, " layer: ", collision_layer)
 
 	# Keep velocity vector visible briefly
 	if velocity_arrow:

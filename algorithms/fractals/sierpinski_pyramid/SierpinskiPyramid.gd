@@ -1,32 +1,52 @@
 extends Node3D
 
-const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
-
-@export var iterations: int = 4
-@export var size: float = 10.0
+var bodies = []
+var max_level = 3
+var size = 5.0
 
 func _ready():
-	generate_sierpinski_pyramid(Vector3(0, 0, 0), size, iterations)
+	generate_sierpinski(Vector3(0, 0, 0), max_level, size)
+	# Unfreeze after a delay
+	var timer = get_tree().create_timer(2.0)
+	timer.timeout.connect(_on_Timer_timeout)
 
-func generate_sierpinski_pyramid(position: Vector3, size: float, iteration: int):
-	if iteration == 0:
-		create_cube(position, size)
+func generate_sierpinski(position, level, current_size):
+	if level == 0:
+		var rigid_body = RigidBody3D.new()
+		rigid_body.position = position
+		rigid_body.freeze = true
+		
+		var mesh_instance = MeshInstance3D.new()
+		var box_mesh = BoxMesh.new()
+		box_mesh.size = Vector3(current_size * 2, current_size * 2, current_size * 2)
+		mesh_instance.mesh = box_mesh
+		
+		var collision_shape = CollisionShape3D.new()
+		var box_shape = BoxShape3D.new()
+		box_shape.size = Vector3(current_size * 2, current_size * 2, current_size * 2)
+		collision_shape.shape = box_shape
+		
+		rigid_body.add_child(mesh_instance)
+		rigid_body.add_child(collision_shape)
+		add_child(rigid_body)
+		bodies.append(rigid_body)
 		return
 
-	var new_size = size / 2.0
-	var new_iteration = iteration - 1
+	var new_size = current_size / 2.0
+	var new_level = level - 1
 
-	# Top pyramid
-	generate_sierpinski_pyramid(position + Vector3(0, new_size / 2.0, 0), new_size, new_iteration)
+	# The 4 vertices of a tetrahedron
+	var positions = [
+		Vector3(1, 1, 1),
+		Vector3(1, -1, -1),
+		Vector3(-1, 1, -1),
+		Vector3(-1, -1, 1)
+	]
 
-	# Bottom pyramids
-	generate_sierpinski_pyramid(position + Vector3(-new_size / 2.0, -new_size / 2.0, -new_size / 2.0), new_size, new_iteration)
-	generate_sierpinski_pyramid(position + Vector3(new_size / 2.0, -new_size / 2.0, -new_size / 2.0), new_size, new_iteration)
-	generate_sierpinski_pyramid(position + Vector3(-new_size / 2.0, -new_size / 2.0, new_size / 2.0), new_size, new_iteration)
-	generate_sierpinski_pyramid(position + Vector3(new_size / 2.0, -new_size / 2.0, new_size / 2.0), new_size, new_iteration)
+	for i in range(4):
+		var new_pos = position + positions[i] * new_size
+		generate_sierpinski(new_pos, new_level, new_size)
 
-func create_cube(position: Vector3, size: float):
-	var cell = CUBE_SCENE.instantiate()
-	cell.scale = Vector3(size, size, size)
-	cell.position = position
-	add_child(cell)
+func _on_Timer_timeout():
+	for body in bodies:
+		body.freeze = false

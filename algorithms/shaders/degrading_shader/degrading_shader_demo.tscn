@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc1d0o8ivvy8c"]
+
+[ext_resource type="Script" uid="uid://blyl1joc6218q" path="res://algorithms/shaders/degrading_shader/DegradingShaderManager.gd" id="1"]
+[ext_resource type="Shader" uid="uid://bwpu4smqvq0ib" path="res://algorithms/shaders/degrading_shader/degrading_shader.gdshader" id="2"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+render_priority = 0
+shader = ExtResource("2")
+shader_parameter/degradation_amount = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ait4"]
+
+[node name="DegradingShaderDemo" type="Node3D" node_paths=PackedStringArray("mesh_instance")]
+log_label_path = NodePath("LogLabel")
+script = ExtResource("1")
+mesh_instance = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("1")
+mesh = SubResource("BoxMesh_0ait4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="LogLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 2.2)
+text = "Degrading shader ready"
+modulate = Color(0.8, 0.95, 1, 1)
+

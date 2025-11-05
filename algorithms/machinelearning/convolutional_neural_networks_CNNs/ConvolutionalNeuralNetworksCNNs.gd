@@ -11,12 +11,12 @@ class_name ConvolutionalNeuralNetworkShowcase
 @export var dense_count: int = 6
 @export var ribbon_particle_count: int = 24
 
-@onready var _input_root: Node3D = /InputPlane
-@onready var _feature_root: Node3D = /FeatureStage
-@onready var _pool_root: Node3D = /PoolStage
-@onready var _dense_root: Node3D = /DenseStage
-@onready var _ribbon_root: Node3D = /RibbonHolder
-@onready var _annotation_root: Node3D = /AnnotationBoard
+@onready var _input_root: Node3D = $InputPlane
+@onready var _feature_root: Node3D = $FeatureStage
+@onready var _pool_root: Node3D = $PoolStage
+@onready var _dense_root: Node3D = $DenseStage
+@onready var _ribbon_root: Node3D = $RibbonHolder
+@onready var _annotation_root: Node3D = $AnnotationBoard
 
 var _time: float = 0.0
 var _input_values: PackedFloat32Array
@@ -28,7 +28,7 @@ var _kernel_window: MeshInstance3D
 
 var _conv_output_size: int
 var _feature_multimeshes: Array[MultiMesh] = []
-var _feature_base: Array[Array[Transform3D]] = []
+var _feature_base: Array = []  # Array[Array[Transform3D]] - nested types not supported
 var _feature_values: Array[PackedFloat32Array] = []
 var _feature_targets: Array[PackedFloat32Array] = []
 var _feature_weights: Array[PackedFloat32Array] = []
@@ -82,7 +82,7 @@ func _build_input_grid() -> void:
 
 	_input_multimesh = MultiMesh.new()
 	_input_multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	_input_multimesh.color_format = MultiMesh.COLOR_8BIT
+	_input_multimesh.use_colors = true
 	_input_multimesh.instance_count = count
 
 	var index := 0
