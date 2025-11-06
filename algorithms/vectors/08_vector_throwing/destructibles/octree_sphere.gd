@@ -105,7 +105,7 @@ func _create_octant_piece(bounds: AABB, offset: Vector3, level: int) -> RigidBod
 
 	return rigid_body
 
-func _create_octant_mesh(bounds: AABB, level: int) -> ArrayMesh:
+func _create_octant_mesh(bounds: AABB, level: int) -> Mesh:
 	"""Create a spherical segment mesh within the bounds"""
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)

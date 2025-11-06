@@ -8,7 +8,7 @@ const VISUAL_SCENE := preload("res://commons/primitives/truncatedtetrahedron/tru
 
 @export_group("Targeting")
 @export var player_path: NodePath
-@export var fallback_player_names: PackedStringArray = PackedStringArray(["XRPlayer", "Player", "Camera3D", "FirstPersonPlayer"])
+@export var fallback_player_names: PackedStringArray = PackedStringArray(["XROrigin3D", "XRPlayer", "Player", "Camera3D", "PlayerBody", "FirstPersonPlayer"])
 @export var move_speed: float = 3.2
 @export var acceleration: float = 6.0
 @export var hover_height: float = 1.6
@@ -24,6 +24,14 @@ const VISUAL_SCENE := preload("res://commons/primitives/truncatedtetrahedron/tru
 @export var knockback_force: float = 5.0
 @export var points_value: int = 25
 @export var destruction_fade_time: float = 0.6
+
+@export_group("Kamikaze Mode")
+@export var enable_kamikaze: bool = true  # Explode and damage player on death
+@export var kamikaze_speed_boost: float = 2.0  # Speed multiplier when kamikaze
+@export var explosion_radius: float = 0.8  # Distance to trigger explosion
+@export var min_damage_percent: float = 20.0  # Min damage to player (% of max health)
+@export var max_damage_percent: float = 40.0  # Max damage to player (% of max health)
+@export var kamikaze_duration: float = 3.0  # Max time in kamikaze mode before auto-explode
 
 @export_group("Visuals")
 @export var base_color: Color = Color(1.0, 0.45, 0.1, 1.0)
@@ -42,6 +50,11 @@ var base_material: Material
 var is_destroyed: bool = false
 var rng := RandomNumberGenerator.new()
 
+# Kamikaze state
+var is_kamikaze: bool = false
+var kamikaze_timer: float = 0.0
+var has_exploded: bool = false
+
 @onready var ball_detector: Area3D = $BallDetector
 @onready var physics_shape: CollisionShape3D = $CollisionShape3D
 
@@ -56,12 +69,28 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if visual_root:
-		visual_root.rotate_y(deg_to_rad(spin_speed_deg) * delta)
-		bob_timer += delta * bob_frequency
-		visual_root.position = Vector3(0.0, sin(bob_timer) * bob_amplitude, 0.0)
+		# Spin faster in kamikaze mode
+		var spin_multiplier = 3.0 if is_kamikaze else 1.0
+		visual_root.rotate_y(deg_to_rad(spin_speed_deg * spin_multiplier) * delta)
+
+		if not is_kamikaze:
+			bob_timer += delta * bob_frequency
+			visual_root.position = Vector3(0.0, sin(bob_timer) * bob_amplitude, 0.0)
+		else:
+			# Violent shake in kamikaze mode
+			visual_root.position = Vector3(
+				rng.randf_range(-0.05, 0.05),
+				rng.randf_range(-0.05, 0.05),
+				rng.randf_range(-0.05, 0.05)
+			)
 
 func _physics_process(delta: float) -> void:
-	if is_destroyed:
+	if is_destroyed or has_exploded:
+		return
+
+	# Kamikaze mode behavior
+	if is_kamikaze:
+		_kamikaze_physics(delta)
 		return
 
 	stun_timer = max(stun_timer - delta, 0.0)
@@ -91,6 +120,35 @@ func _physics_process(delta: float) -> void:
 	if to_target.length() <= player_hit_radius and player_hit_timer <= 0.0:
 		player_hit_timer = player_hit_cooldown
 		_handle_player_hit()
+
+func _kamikaze_physics(delta: float) -> void:
+	"""Kamikaze mode - fly straight at player and explode"""
+	kamikaze_timer += delta
+
+	if not player_node or not is_instance_valid(player_node):
+		_kamikaze_explode()
+		return
+
+	# Auto-explode after duration
+	if kamikaze_timer >= kamikaze_duration:
+		_kamikaze_explode()
+		return
+
+	# Fly directly at player at high speed
+	var target_position = player_node.global_position
+	var to_target = target_position - global_position
+	var distance = to_target.length()
+
+	# Check if close enough to explode
+	if distance <= explosion_radius:
+		_kamikaze_explode()
+		return
+
+	# Accelerate towards player
+	var desired_velocity = to_target.normalized() * (move_speed * kamikaze_speed_boost)
+	velocity = velocity.lerp(desired_velocity, clamp(acceleration * 2.0 * delta, 0.0, 1.0))
+	move_and_slide()
+	_face_target(target_position)
 
 func _configure_body() -> void:
 	collision_layer = 1
@@ -139,12 +197,32 @@ func _acquire_player() -> void:
 	if player_node and is_instance_valid(player_node):
 		return
 
+	# Try explicit path first
 	if player_path != NodePath(""):
 		var candidate := get_node_or_null(player_path) as Node3D
 		if candidate and candidate is Node3D:
 			player_node = candidate
+			print("[Drone] Found player via path: ", player_node.name)
 			return
 
+	# Try finding by group
+	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	if xr_origin:
+		player_node = xr_origin
+		player_path = player_node.get_path()
+		print("[Drone] Found player via xr_origin group: ", player_node.name)
+		return
+
+	# Try finding XROrigin3D directly
+	if get_tree().root:
+		var found_xr = _find_xr_origin_recursive(get_tree().root)
+		if found_xr:
+			player_node = found_xr
+			player_path = player_node.get_path()
+			print("[Drone] Found XROrigin3D: ", player_node.name)
+			return
+
+	# Fallback to searching by name
 	var search_roots: Array = []
 	var parent := get_parent()
 	while parent:
@@ -163,7 +241,22 @@ func _acquire_player() -> void:
 			if found:
 				player_node = found
 				player_path = player_node.get_path()
+				print("[Drone] Found player by name: ", player_node.name)
 				return
+
+	print("[Drone] WARNING: Could not find player!")
+
+func _find_xr_origin_recursive(node: Node) -> Node3D:
+	"""Recursively search for XROrigin3D"""
+	if node is XROrigin3D:
+		return node as Node3D
+
+	for child in node.get_children():
+		var result = _find_xr_origin_recursive(child)
+		if result:
+			return result
+
+	return null
 
 func _strafe_offset() -> Vector3:
 	var time := float(Time.get_ticks_msec()) / 1000.0
@@ -217,6 +310,13 @@ func _apply_knockback_from_source(source: Node) -> void:
 func _handle_destroyed() -> void:
 	if is_destroyed:
 		return
+
+	# Enter kamikaze mode if enabled
+	if enable_kamikaze and not is_kamikaze:
+		_enter_kamikaze_mode()
+		return
+
+	# Otherwise, just destroy normally
 	is_destroyed = true
 	collision_layer = 0
 	collision_mask = 0
@@ -232,6 +332,72 @@ func _handle_destroyed() -> void:
 	if visual_root:
 		tween.tween_property(visual_root, "scale", Vector3.ZERO, destruction_fade_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_callback(queue_free)
+
+func _enter_kamikaze_mode() -> void:
+	"""Enter kamikaze mode - last ditch attack"""
+	is_kamikaze = true
+	kamikaze_timer = 0.0
+	current_health = 1  # Prevent re-entering kamikaze
+
+	# Flash red to indicate kamikaze mode
+	_flash_material(Color(1.0, 0.2, 0.0), 0.1, 0.1)
+
+	print("[Drone] Entering KAMIKAZE mode!")
+
+func _kamikaze_explode() -> void:
+	"""Explode and damage player"""
+	if has_exploded:
+		return
+
+	has_exploded = true
+	is_destroyed = true
+
+	print("[Drone] KAMIKAZE EXPLOSION!")
+
+	# Calculate random damage
+	var damage_percent = rng.randf_range(min_damage_percent, max_damage_percent)
+	var damage_amount = (damage_percent / 100.0) * GameManager.max_player_health
+
+	# Apply damage to player
+	GameManager.apply_health_damage(damage_amount)
+	print("[Drone] Dealt %.1f%% damage (%.1f HP) to player" % [damage_percent, damage_amount])
+
+	# Disable collision
+	collision_layer = 0
+	collision_mask = 0
+	if ball_detector:
+		ball_detector.monitoring = false
+	if physics_shape:
+		physics_shape.disabled = true
+
+	# Explosion visual effect
+	_explosion_effect()
+
+	# Award points for avoiding/destroying the kamikaze
+	emit_signal("drone_destroyed", self, points_value)
+
+	# Remove after explosion
+	await get_tree().create_timer(1.5).timeout
+	queue_free()
+
+func _explosion_effect() -> void:
+	"""Visual explosion effect"""
+	if not visual_root:
+		return
+
+	# Bright flash
+	_apply_material_color(Color(1.5, 1.5, 1.5))
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+
+	# Expand then shrink
+	tween.tween_property(visual_root, "scale", Vector3.ONE * 2.5, 0.2)
+	tween.tween_property(visual_root, "scale", Vector3.ZERO, 0.8).set_delay(0.2)
+
+	# Fade out material
+	tween.chain()
+	tween.tween_method(_apply_material_color, Color(1.5, 0.5, 0.0), Color(1.0, 0.0, 0.0, 0.0), 0.5)
 
 func _flash_material(target_color: Color, time_up: float, time_down: float) -> void:
 	if not base_material:

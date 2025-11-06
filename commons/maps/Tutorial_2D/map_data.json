@@ -24,7 +24,7 @@
 			"Spawn `s` at (0,0) with immediate access to the grid",
 			"`grid_2d_4x4` interaction table centered at (1,1)",
 			"Annotation cube `an` and teleporter `t` sharing the south walkway",
-			"Score cube `sp` adjacent to the teleporter for completion feedback"
+			"Score cube `sp` adjacent to the teleporter for completion feedback blockbuilderentity"
 		]
 	},
 	"layers": {
@@ -52,7 +52,7 @@
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "", " ", " "],
 			[" ", " ", " ", " ", " ", " "]
 		]
 	},

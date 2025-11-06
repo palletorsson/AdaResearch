@@ -4165,6 +4165,12 @@
 		"description": "destructibles_test_scene",
 		"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
 	},		
+	"gravity_gun_test_scene": {
+		"name": "gravity_gun_test_scene",
+		"lookup_name": "gravity_gun_test_scene",
+		"description": "gravity_gun_test_scene",
+		"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
+	},		
 	 
 	"lshape": {
 		"name": "L Shape",
@@ -4268,6 +4274,13 @@
 		"description": "techstrider",
 		"scene": "res://commons/hazards/techstrider/techstrider.tscn",
 	},
+		"blockbuilderentity": {
+		"name": "blockbuilderentity",
+		"lookup_name": "blockbuilderentity",
+		"description": "blockbuilderentity",
+		"scene": "res://commons/hazards/blockbuilderentity/blockbuilderentity.tscn",
+	},
+	
 	"cavetest": {
 		"name": "cavetest",
 		"lookup_name": "cavetest",

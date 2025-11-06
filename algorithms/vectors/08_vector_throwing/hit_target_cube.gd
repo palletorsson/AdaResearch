@@ -172,20 +172,29 @@ func _play_hit_animation() -> void:
 
 	# Color change
 	tween.tween_method(_set_cube_color, target_color, hit_color, color_change_duration * 0.5)
-	tween.tween_method(_set_cube_color, hit_color, target_color, color_change_duration * 0.5).set_delay(color_change_duration * 0.5)
+	var color_back = tween.tween_method(_set_cube_color, hit_color, target_color, color_change_duration * 0.5)
+	if color_back:
+		color_back.set_delay(color_change_duration * 0.5)
 
 	# Scale pulse
 	tween.tween_property(mesh_instance, "scale", Vector3.ONE * pulse_scale, pulse_duration * 0.5)
-	tween.tween_property(mesh_instance, "scale", Vector3.ONE, pulse_duration * 0.5).set_delay(pulse_duration * 0.5)
+	var scale_back = tween.tween_property(mesh_instance, "scale", Vector3.ONE, pulse_duration * 0.5)
+	if scale_back:
+		scale_back.set_delay(pulse_duration * 0.5)
 
 	# Increase emission on hit
 	if mesh_instance and mesh_instance.material_override:
 		tween.tween_property(mesh_instance.material_override, "emission_energy", 1.5, 0.1)
-		tween.tween_property(mesh_instance.material_override, "emission_energy", 0.2, 0.4).set_delay(0.1)
+		var emission_down = tween.tween_property(mesh_instance.material_override, "emission_energy", 0.2, 0.4)
+		if emission_down:
+			emission_down.set_delay(0.1)
 
 	# Reset hit state after animation
 	if not destroy_on_hit:
-		tween.tween_callback(func(): is_hit = false).set_delay(color_change_duration)
+		tween.chain()  # Switch to sequential for callback
+		var callback_tweener = tween.tween_callback(func(): is_hit = false)
+		if callback_tweener:
+			callback_tweener.set_delay(color_change_duration)
 
 func _set_cube_color(color: Color) -> void:
 	"""Update cube color"""

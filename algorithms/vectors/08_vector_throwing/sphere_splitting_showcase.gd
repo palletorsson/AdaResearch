@@ -192,8 +192,24 @@ func _update_sphere_label(sphere_name: String) -> void:
 	var stats = sphere_stats[sphere_name]
 
 	# Find the sphere and its label
+	# Clean up any invalid entries first
+	var invalid_spheres = []
 	for sphere in info_labels.keys():
+		if not is_instance_valid(sphere):
+			invalid_spheres.append(sphere)
+
+	for sphere in invalid_spheres:
+		info_labels.erase(sphere)
+
+	# Now update valid labels
+	for sphere in info_labels.keys():
+		if not is_instance_valid(sphere):
+			continue
+
 		var label: Label3D = info_labels[sphere]
+		if not is_instance_valid(label):
+			continue
+
 		if label.text.begins_with(sphere_name.to_upper()):
 			var lines = label.text.split("\n")
 			if lines.size() >= 3:

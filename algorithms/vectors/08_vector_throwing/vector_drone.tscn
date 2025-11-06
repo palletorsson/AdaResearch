@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://vector_drone_scene"]
+[gd_scene load_steps=4 format=3 uid="uid://hlrgcvns0e3m"]
 
-[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/vector_drone.gd" id="1"]
+[ext_resource type="Script" uid="uid://cidxcvt6d0wkx" path="res://algorithms/vectors/08_vector_throwing/vector_drone.gd" id="1"]
 
 [sub_resource type="SphereShape3D" id="1"]
 radius = 0.45
@@ -9,21 +9,17 @@ radius = 0.45
 radius = 0.6
 
 [node name="VectorDrone" type="CharacterBody3D"]
-script = ExtResource("1")
-collision_layer = 1
 collision_mask = 3
+script = ExtResource("1")
+move_speed = 3.5
 hover_height = 1.7
 player_hit_radius = 0.5
-move_speed = 3.5
-max_health = 2
 points_value = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("1")
 
 [node name="BallDetector" type="Area3D" parent="."]
-monitoring = true
-monitorable = true
 collision_layer = 0
 collision_mask = 2
 
