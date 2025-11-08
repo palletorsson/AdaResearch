@@ -147,7 +147,6 @@ func _build_feature_maps() -> void:
 		var count := _conv_output_size * _conv_output_size
 		var multimesh := MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
-		multimesh.color_format = MultiMesh.COLOR_8BIT
 		multimesh.instance_count = count
 
 		var bases: Array[Transform3D] = []
@@ -185,7 +184,7 @@ func _build_pool_stage() -> void:
 	pool_mesh.top_radius = 0.26
 	pool_mesh.bottom_radius = 0.26
 	pool_mesh.height = 0.2
-	var pool_size := max(1, _conv_output_size / pooling_window)
+	var pool_size: int = max(1, _conv_output_size / pooling_window)
 	var spacing := voxel_spacing * pooling_window * 0.75
 	for z in range(pool_size):
 		for x in range(pool_size):
@@ -220,7 +219,7 @@ func _build_dense_stage() -> void:
 		mat.emission_enabled = true
 		mat.emission = mat.albedo_color * 0.8
 		orb.material_override = mat
-		var angle := lerp(-0.9, 0.9, float(i) / max(1, dense_count - 1))
+		var angle: float = lerp(-0.9, 0.9, float(i) / max(1, dense_count - 1))
 		var radius := 2.2
 		orb.position = Vector3(cos(angle) * radius, (float(i) - (dense_count - 1) * 0.5) * 0.4, sin(angle) * radius * 0.5)
 		orb.scale = Vector3.ONE * 0.7
@@ -330,22 +329,22 @@ func _update_feature_targets() -> void:
 				var weight := weights[ky * kernel_size + kx]
 				accum += weight * _input_values[sample_idx]
 		var bias := _feature_biases[map_idx]
-		var activation := clamp(0.5 + 0.5 * tanh(accum * 0.6 + bias), 0.0, 1.0)
+		var activation: float = clamp(0.5 + 0.5 * tanh(accum * 0.6 + bias), 0.0, 1.0)
 		_feature_targets[map_idx][index] = activation
 
 func _update_feature_maps(delta: float) -> void:
 	for map_idx in range(feature_map_count):
 		var multimesh := _feature_multimeshes[map_idx]
-		var bases := _feature_base[map_idx]
-		var values := _feature_values[map_idx]
-		var targets := _feature_targets[map_idx]
+		var bases: Array[Transform3D] = _feature_base[map_idx] as Array[Transform3D]
+		var values: PackedFloat32Array = _feature_values[map_idx]
+		var targets: PackedFloat32Array = _feature_targets[map_idx]
 		for i in range(values.size()):
 			var current := values[i]
 			var target := targets[i]
-			var updated := lerp(current, target, delta * 3.5)
+			var updated: float = lerp(current, target, delta * 3.5)
 			values[i] = updated
-			var scale_y := 0.18 + updated * height_scale
-			var transform := bases[i]
+			var scale_y: float = 0.18 + updated * height_scale
+			var transform: Transform3D = bases[i]
 			var basis := Basis.IDENTITY.scaled(Vector3(1.0, scale_y, 1.0))
 			transform.basis = basis
 			transform.origin = bases[i].origin + Vector3(0, scale_y * 0.5, 0)
@@ -359,7 +358,7 @@ func _update_pool_stage(delta: float) -> void:
 	var pool_size := int(sqrt(float(_pool_columns.size())))
 	pool_size = max(pool_size, 1)
 	var source_map := 0
-	var values := _feature_values[source_map]
+	var values: PackedFloat32Array = _feature_values[source_map]
 	for z in range(pool_size):
 		for x in range(pool_size):
 			var accum := 0.0
@@ -370,13 +369,13 @@ func _update_pool_stage(delta: float) -> void:
 					if in_x < _conv_output_size and in_z < _conv_output_size:
 						var idx := in_z * _conv_output_size + in_x
 						accum = max(accum, values[idx])
-			var column := _pool_columns[z * pool_size + x]
+			var column: MeshInstance3D = _pool_columns[z * pool_size + x]
 			var current_scale := column.scale
 			var target_height := 0.2 + accum * 1.4
-			var new_height := lerp(current_scale.y, target_height, delta * 2.4)
+			var new_height = lerp(current_scale.y, target_height, delta * 2.4)
 			column.scale = Vector3(1, new_height, 1)
 			column.position.y = new_height * 0.5
-			var mat := column.material_override
+			var mat: StandardMaterial3D = column.material_override as StandardMaterial3D
 			if mat:
 				mat.emission = mat.albedo_color * (0.4 + accum * 1.1)
 
@@ -409,9 +408,9 @@ func _update_ribbon(delta: float) -> void:
 	for particle in _ribbon_particles:
 		var t := fposmod(particle.offset + _time * particle.speed, 1.0)
 		var distance := t * _curve_length
-		var pos := _curve.interpolate_baked(distance)
+		var pos: Vector3 = _curve.interpolate_baked(distance)
 		particle.mesh.position = pos
-		var ahead := _curve.interpolate_baked(fmin(distance + 0.2, _curve_length))
+		var ahead: Vector3 = _curve.interpolate_baked(min(distance + 0.2, _curve_length))
 		particle.mesh.look_at(ahead, Vector3.UP)
 		var flicker := 0.9 + 0.2 * sin((t + _time) * TAU)
 		particle.mesh.scale = Vector3.ONE * (0.1 * flicker)

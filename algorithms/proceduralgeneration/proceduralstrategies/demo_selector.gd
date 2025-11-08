@@ -1,5 +1,6 @@
 # demo_selector.gd - Switch between different mesh generation techniques
 extends Node3D
+const BASE_PATH := "res://algorithms/proceduralgeneration/proceduralstrategies/"
 
 enum Strategy {
 	MARCHING_CUBES,
@@ -16,12 +17,12 @@ var current_demo: Node3D = null
 @onready var label = $UI/Label
 
 var strategy_scripts = {
-	Strategy.MARCHING_CUBES: preload("res://marching_cubes.gd"),
-	Strategy.METABALLS: preload("res://metaballs.gd"),
-	Strategy.DELAUNAY: preload("res://delaunay.gd"),
-	Strategy.HEIGHTMAP: preload("res://heightmap.gd"),
-	Strategy.CONVEX_HULL: preload("res://convex_hull.gd"),
-	Strategy.CURVE_EXTRUSION: preload("res://curve_extrusion.gd")
+	Strategy.MARCHING_CUBES: preload(BASE_PATH + "marching_cubes.gd"),
+	Strategy.METABALLS: preload(BASE_PATH + "metaballs.gd"),
+	Strategy.DELAUNAY: preload(BASE_PATH + "delaunay.gd"),
+	Strategy.HEIGHTMAP: preload(BASE_PATH + "heightmap.gd"),
+	Strategy.CONVEX_HULL: preload(BASE_PATH + "convex_hull.gd"),
+	Strategy.CURVE_EXTRUSION: preload(BASE_PATH + "curve_extrusion.gd")
 }
 
 var strategy_names = {
@@ -80,4 +81,4 @@ func _input(event):
 				load_strategy(current_strategy)
 			KEY_RIGHT:
 				current_strategy = (current_strategy + 1) % strategy_names.size()
-				load_strategy(current_strategy)
+				load_strategy(current_strategy) 

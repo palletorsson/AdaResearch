@@ -3,7 +3,7 @@
 # Based on Paul Bourke's implementation
 
 extends RefCounted
-class_name MarchingCubesLookupTables
+class_name MarchingCubesLookupTablesx
 
 # Edge table - which edges are intersected for each cube configuration
 static var edge_table: Array[int] = [

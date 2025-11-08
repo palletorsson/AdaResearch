@@ -46,7 +46,7 @@ var performance_display: Label
 var heteronormative_pressure: float = 0.0  # Pressure toward single "optimal" solution
 var queer_resistance: float = 0.0          # Collective resistance to normalization
 
-class Particle:
+class Particles:
 	var position: Vector3
 	var velocity: Vector3
 	var personal_best_position: Vector3

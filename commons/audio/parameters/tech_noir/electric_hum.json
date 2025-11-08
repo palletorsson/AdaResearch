@@ -1,0 +1,44 @@
+{
+	"electric_hum": {
+		"_metadata": {
+			"sound_type": "electric_hum",
+			"description": "Power line and fluorescent light electrical hum with harmonics",
+			"tags": "electric, hum, power, electricity, fluorescent, 60hz",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"buffer_length": {
+				"value": 5.0,
+				"min": 2.0,
+				"max": 15.0,
+				"step": 0.5
+			},
+			"hum_freq": {
+				"value": 60.0,
+				"min": 50.0,
+				"max": 120.0,
+				"step": 10.0
+			},
+			"attack": {
+				"value": 0.8,
+				"min": 0.1,
+				"max": 3.0,
+				"step": 0.1
+			},
+			"release": {
+				"value": 1.5,
+				"min": 0.5,
+				"max": 5.0,
+				"step": 0.1
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

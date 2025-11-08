@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://co5kh5fvbbg8i"]
+
+[ext_resource type="Script" uid="uid://b6yaea21x8dt3" path="res://commons/audio/tests/test_sound_suite_sequencer.gd" id="1"]
+
+[node name="SoundSuiteSequencerTest" type="Node"]
+script = ExtResource("1")

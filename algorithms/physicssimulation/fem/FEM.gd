@@ -79,7 +79,8 @@ func create_grid_visualization():
 	
 	# Create sphere grid lines (simplified)
 	for i in range(0, sphere_nodes.size, grid_resolution + 1):
-		if i + grid_resolution < sphere_nodes.size:
+		var x = i + grid_resolution 
+		if x < sphere_nodes.size:
 			var line = create_grid_line(Color.MAGENTA, 0.01)
 			line.position = (sphere_nodes[i] + sphere_nodes[i + grid_resolution]) / 2
 			line.look_at(sphere_nodes[i + grid_resolution])

@@ -233,9 +233,9 @@ func _apply_external_forces(delta):
 func _apply_force(force: Vector3):
 	"""Apply a force to the soft body using the correct Godot 4 API"""
 	# In Godot 4, we need to apply forces to the physics body
-	if has_method("apply_impulse"):
+	if has_method("apply_external_impulse"):
 		# Apply as impulse if force method not available
-		apply_impulse(force * 0.1)  # Scale down for impulse
+		apply_external_impulse(force * 0.1)  # Scale down for impulse
 	else:
 		# Fallback: try to move the body directly
 		global_position += force * 0.01
@@ -262,7 +262,7 @@ func _on_force_field_exited(body):
 		print("SoftBody: %s exited force field" % soft_body_type)
 
 # Public API for external control
-func apply_impulse(force: Vector3):
+func apply_external_impulse(force: Vector3):
 	"""Apply an external impulse to the soft body"""
 	external_forces += force
 	print("SoftBody: %s received impulse: %s" % [soft_body_type, force])

@@ -8,6 +8,8 @@ const JSON_INDENT := "	"
 const ParameterControls := preload("res://commons/audio/components/ParameterControlsComponent.gd")
 const AudioSynthesizer := preload("res://commons/audio/generators/AudioSynthesizer.gd")
 const CustomSoundGenerator := preload("res://commons/audio/generators/CustomSoundGenerator.gd")
+const TechnoNoirGenerator := preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
+const TrapBeatsGenerator := preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
 
 var search_box: LineEdit
 var sound_tree: Tree
@@ -480,11 +482,41 @@ func _format_metadata(entry: Dictionary) -> String:
 ".join(lines)
 
 func _update_action_states(entry: Dictionary) -> void:
-	var sound_type = _resolve_sound_type(entry)
-	play_button.disabled = sound_type == null
+	# Enable play button for tech noir, trap beats, or sounds with valid AudioSynthesizer type
+	var can_play = _is_tech_noir_sound(entry["sound_key"]) or _is_trap_beats_sound(entry["sound_key"]) or (_resolve_sound_type(entry) != null)
+	play_button.disabled = not can_play
 	save_button.disabled = not entry.get("dirty", false)
 	stop_button.disabled = not audio_player.playing
 	export_button.disabled = false
+
+func _is_tech_noir_sound(sound_key: String) -> bool:
+	"""Check if a sound_key is a tech noir sound"""
+	var tech_noir_sounds = [
+		"endless_drone", "drone",
+		"city_ambience", "city", "urban",
+		"distant_siren", "siren",
+		"static_burst", "static",
+		"rain_segment", "rain",
+		"mechanical_whir", "machinery", "mechanical",
+		"typing_segment", "typing", "keyboard",
+		"electric_hum", "hum", "power",
+		"heartbeat_segment", "heartbeat", "pulse"
+	]
+	return sound_key.to_lower() in tech_noir_sounds
+
+func _is_trap_beats_sound(sound_key: String) -> bool:
+	"""Check if a sound_key is a trap beats sound"""
+	var trap_sounds = [
+		"808_kick", "kick", "bass_drum",
+		"trap_snare", "snare",
+		"hihat_closed", "hh_closed", "closed_hat",
+		"hihat_open", "hh_open", "open_hat",
+		"clap", "handclap",
+		"808_rim", "rimshot", "rim",
+		"808_cowbell", "cowbell",
+		"trap_tom", "tom", "drum"
+	]
+	return sound_key.to_lower() in trap_sounds
 
 func _resolve_sound_type(entry: Dictionary):
 	if entry.has("sound_type_enum"):
@@ -617,17 +649,36 @@ func _refresh_preview(auto_play: bool = false) -> bool:
 	if not entries_by_id.has(current_entry_id):
 		return false
 	var entry = entries_by_id[current_entry_id]
-	var sound_type = _resolve_sound_type(entry)
-	if sound_type == null:
-		if auto_play:
-			push_warning("Audio Catalog: No generator for %s" % entry["sound_key"])
-		return false
 	var params = parameter_controls.get_current_parameter_values()
-	var stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
-	if stream == null:
-		if auto_play:
-			push_warning("Audio Catalog: Failed to generate audio for %s" % entry["sound_key"])
-		return false
+	var stream: AudioStreamWAV = null
+
+	# Check if this is a tech noir sound
+	if _is_tech_noir_sound(entry["sound_key"]):
+		stream = TechnoNoirGenerator.generate_sound(entry["sound_key"], params)
+		if stream == null:
+			if auto_play:
+				push_warning("Audio Catalog: Failed to generate tech noir sound: %s" % entry["sound_key"])
+			return false
+	# Check if this is a trap beats sound
+	elif _is_trap_beats_sound(entry["sound_key"]):
+		stream = TrapBeatsGenerator.generate_sound(entry["sound_key"], params)
+		if stream == null:
+			if auto_play:
+				push_warning("Audio Catalog: Failed to generate trap beat: %s" % entry["sound_key"])
+			return false
+	else:
+		# Use AudioSynthesizer for other sounds
+		var sound_type = _resolve_sound_type(entry)
+		if sound_type == null:
+			if auto_play:
+				push_warning("Audio Catalog: No generator for %s" % entry["sound_key"])
+			return false
+		stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
+		if stream == null:
+			if auto_play:
+				push_warning("Audio Catalog: Failed to generate audio for %s" % entry["sound_key"])
+			return false
+
 	preview_stream = stream
 	_update_visualizations_from_stream(stream)
 	if audio_player:
@@ -645,10 +696,19 @@ func _generate_preview_stream() -> AudioStreamWAV:
 	if current_entry_id.is_empty() or not entries_by_id.has(current_entry_id):
 		return null
 	var entry = entries_by_id[current_entry_id]
-	var sound_type = _resolve_sound_type(entry)
-	if sound_type == null:
-		return null
-	return CustomSoundGenerator.generate_custom_sound(sound_type, parameter_controls.get_current_parameter_values())
+	var params = parameter_controls.get_current_parameter_values()
+
+	# Check if this is a tech noir sound
+	if _is_tech_noir_sound(entry["sound_key"]):
+		return TechnoNoirGenerator.generate_sound(entry["sound_key"], params)
+	# Check if this is a trap beats sound
+	elif _is_trap_beats_sound(entry["sound_key"]):
+		return TrapBeatsGenerator.generate_sound(entry["sound_key"], params)
+	else:
+		var sound_type = _resolve_sound_type(entry)
+		if sound_type == null:
+			return null
+		return CustomSoundGenerator.generate_custom_sound(sound_type, params)
 
 func _update_visualizations_from_stream(stream: AudioStreamWAV) -> void:
 	if stream == null:

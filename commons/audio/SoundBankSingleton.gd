@@ -120,6 +120,8 @@ func _generate_sound(sound_id: String) -> AudioStreamWAV:
 			return _generate_synthesizer_sound(sound_name)
 		"techno_noir":
 			return _generate_techno_noir_sound(sound_name)
+		"trap_beats":
+			return _generate_trap_beats_sound(sound_name)
 		"liturgical":
 			return _generate_liturgical_sound(sound_name)
 		"DarkGameTrack":
@@ -217,12 +219,33 @@ func _string_to_sound_type(sound_name: String):
 		_:
 			return null
 
-func _generate_techno_noir_sound(sound_name: String) -> AudioStreamWAV:
+func _generate_techno_noir_sound(sound_name: String, params: Dictionary = {}) -> AudioStreamWAV:
 	"""Generate sound from techno noir generator"""
-	# TODO: Extract techno noir generation logic from john_cage_tech_noir.gd
-	# For now, return null - will implement after refactoring
-	print("ℹ️ Techno noir sound generation not yet implemented: ", sound_name)
-	return null
+	var TechnoNoir = preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
+
+	# Use the static generator method
+	var stream = TechnoNoir.generate_sound(sound_name, params)
+
+	if stream:
+		print("✅ Generated tech noir sound: ", sound_name)
+		return stream
+	else:
+		print("⚠️ Unknown tech noir sound: ", sound_name)
+		return null
+
+func _generate_trap_beats_sound(sound_name: String, params: Dictionary = {}) -> AudioStreamWAV:
+	"""Generate sound from trap beats generator - BANG HARDER"""
+	var TrapBeats = preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
+
+	# Use the static generator method
+	var stream = TrapBeats.generate_sound(sound_name, params)
+
+	if stream:
+		print("✅ Generated trap beat: ", sound_name, " 🔥")
+		return stream
+	else:
+		print("⚠️ Unknown trap beat: ", sound_name)
+		return null
 
 func _generate_liturgical_sound(sound_name: String) -> AudioStreamWAV:
 	"""Generate sound from liturgical generator"""

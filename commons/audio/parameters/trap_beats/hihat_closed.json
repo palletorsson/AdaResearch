@@ -1,0 +1,44 @@
+{
+	"hihat_closed": {
+		"_metadata": {
+			"sound_type": "hihat_closed",
+			"description": "Closed hi-hat with metallic character - CRISPY",
+			"tags": "hihat, hi-hat, closed, trap, percussion",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"decay": {
+				"value": 0.05,
+				"min": 0.02,
+				"max": 0.15,
+				"step": 0.01
+			},
+			"brightness": {
+				"value": 0.8,
+				"min": 0.3,
+				"max": 1.0,
+				"step": 0.05
+			},
+			"tightness": {
+				"value": 0.9,
+				"min": 0.5,
+				"max": 1.0,
+				"step": 0.05
+			},
+			"pitch": {
+				"value": 8000.0,
+				"min": 5000.0,
+				"max": 12000.0,
+				"step": 100.0
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

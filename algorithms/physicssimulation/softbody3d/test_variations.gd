@@ -99,8 +99,8 @@ func _test_physics_differences():
 		# Apply same impulse to different bodies
 		var test_force = Vector3(2.0, 1.0, 0.0)
 		for body in bodies:
-			if body.has_method("apply_impulse"):
-				body.apply_impulse(test_force)
+			if body.has_method("apply_external_impulse"):
+				body.apply_external_impulse(test_force)
 				print("  Applied impulse to %s (P=%.2f)" % [body.name, body.pressure_coefficient])
 		
 		print("⏰ Observe the different deformation behaviors!")

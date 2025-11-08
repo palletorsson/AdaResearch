@@ -1,0 +1,50 @@
+{
+	"heartbeat_segment": {
+		"_metadata": {
+			"sound_type": "heartbeat_segment",
+			"description": "Biological heartbeat with lub-dub rhythm and body resonance",
+			"tags": "heartbeat, pulse, biological, organic, rhythm",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"buffer_length": {
+				"value": 7.0,
+				"min": 3.0,
+				"max": 15.0,
+				"step": 0.5
+			},
+			"bpm": {
+				"value": 70.0,
+				"min": 40.0,
+				"max": 140.0,
+				"step": 5.0
+			},
+			"attack": {
+				"value": 1.0,
+				"min": 0.2,
+				"max": 3.0,
+				"step": 0.1
+			},
+			"sustain": {
+				"value": 4.0,
+				"min": 1.0,
+				"max": 10.0,
+				"step": 0.5
+			},
+			"release": {
+				"value": 2.0,
+				"min": 0.5,
+				"max": 5.0,
+				"step": 0.1
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

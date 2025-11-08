@@ -3,8 +3,7 @@ extends Node3D
 
 ## 3D Neural Network Visualization
 ## Displays neurons as glowing pink spheres with connections
-
-@export var network: NeuralNetwork
+var network: NeuralNetwork
 @export var layer_spacing: float = 0.15  # Distance between layers
 @export var neuron_spacing: float = 0.08  # Distance between neurons in same layer
 

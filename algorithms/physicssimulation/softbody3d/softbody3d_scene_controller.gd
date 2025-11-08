@@ -187,7 +187,7 @@ func _start_collision_demo():
 			randf_range(2.0, 5.0),
 			randf_range(-3.0, 3.0)
 		)
-		body.apply_impulse(random_force)
+		body.apply_external_impulse(random_force)
 
 # Interactive zone handlers
 func _on_wind_zone_body_entered(body):
@@ -230,7 +230,7 @@ func _apply_random_impulse():
 			randf_range(3.0, 8.0),
 			randf_range(-5.0, 5.0)
 		)
-		body.apply_impulse(random_force)
+		body.apply_external_impulse(random_force)
 
 # Public API
 func get_soft_body_count() -> int:

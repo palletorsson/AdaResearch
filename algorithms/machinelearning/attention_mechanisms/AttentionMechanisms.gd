@@ -262,12 +262,12 @@ func _animate_input_tokens(delta: float) -> void:
 	for i in range(_input_tokens.get_child_count()):
 		var tkn := _input_tokens.get_child(i) as MeshInstance3D
 		if tkn:
-			var score = _attention_scores[i]
-			var pulse := 1.0 + sin(time * pulse_speed + float(i) * 0.5) * 0.2 * score
+			var score: float = _attention_scores[i]
+			var pulse: float = 1.0 + sin(time * pulse_speed + float(i) * 0.5) * 0.2 * score
 			tkn.scale = Vector3.ONE * pulse
 			tkn.rotate_y(delta * (rot_speed + float(i) * 0.15))
 			
-			var intensity := 0.3 + score * 0.7
+			var intensity: float = 0.3 + score * 0.7
 			var mat = tkn.material_override as StandardMaterial3D
 			if mat:
 				if i != query_index: # Don't override the query token's special color
@@ -304,7 +304,7 @@ func _animate_focus(delta: float) -> void:
 			if i < _attention_scores.size():
 				score = _attention_scores[i]
 			
-			var target_scale := Vector3.ONE * (0.1 + score * 1.5) * focus_intensity
+			var target_scale: Vector3 = Vector3.ONE * (0.1 + score * 1.5) * focus_intensity
 			sphere.scale = sphere.scale.lerp(target_scale, delta * 8.0)
 			
 			var mat := sphere.material_override as StandardMaterial3D
@@ -324,7 +324,7 @@ func _animate_attention_matrix(delta: float) -> void:
 			
 			var x := (row - token_count / 2.0) * matrix_cell_spacing
 			var z := (col - token_count / 2.0) * matrix_cell_spacing
-			var sc := 0.2 + score * 0.8
+			var sc: float = 0.2 + score * 0.8
 			var t: Transform3D = Transform3D(Basis().scaled(Vector3.ONE * sc), Vector3(x, 0, z))
 			_matrix_mm.set_instance_transform(idx, t)
 
@@ -337,7 +337,7 @@ func _animate_attention_matrix(delta: float) -> void:
 		# For now, let's just fade it based on the query's self-attention.
 		var q_score = _attention_scores[query_index] if not _attention_scores.is_empty() else 0.0
 		for k in range(_lines_mm.instance_count):
-			var fade := 0.1 + 0.8 * q_score
+			var fade: float = 0.1 + 0.8 * q_score
 			_lines_mm.set_instance_color(k, Color(0.4, 0.4, 0.8, fade))
 
 
@@ -353,8 +353,8 @@ func _update_training_metrics(delta: float) -> void:
 		p.x = lerp(p.x, target_x, delta * 2.0)
 		_score_indicator.position = p
 
-		var green := 0.2 + 0.8 * avg_score
-		var red := 0.8 - 0.6 * avg_score
+		var green: float = 0.2 + 0.8 * avg_score
+		var red: float = 0.8 - 0.6 * avg_score
 		var mat := _score_indicator.material_override as StandardMaterial3D
 		if mat:
 			mat.albedo_color = Color(red, green, 0.2, 1.0)

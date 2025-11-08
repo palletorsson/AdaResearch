@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Ada Research Zero"
+config/name="Ada Research Zero One"
 run/main_scene="uid://dh0yixpmcvifk"
 config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
@@ -27,7 +27,7 @@ SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/prezi_mindmap/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [filesystem]
 

@@ -441,9 +441,7 @@ func fit_polynomial_regression():
 	# Matrix A = [[n, sum_x, sum_x2], [sum_x, sum_x2, sum_x3], [sum_x2, sum_x3, sum_x4]]
 	# Vector b = [sum_y, sum_xy, sum_x2y]
 	
-	var det_a = sum_1 * (sum_x2 * sum_x4 - sum_x3 * sum_x3) - 
-				sum_x * (sum_x * sum_x4 - sum_x2 * sum_x3) + 
-				sum_x2 * (sum_x * sum_x3 - sum_x2 * sum_x2)
+	var det_a = sum_1 * (sum_x2 * sum_x4 - sum_x3 * sum_x3) - sum_x * (sum_x * sum_x4 - sum_x2 * sum_x3) + sum_x2 * (sum_x * sum_x3 - sum_x2 * sum_x2)
 	
 	if abs(det_a) < 1e-10:
 		# Fallback to linear regression if singular
@@ -451,17 +449,11 @@ func fit_polynomial_regression():
 		return
 	
 	# Calculate coefficients using Cramer's rule
-	var det_c = sum_y * (sum_x2 * sum_x4 - sum_x3 * sum_x3) - 
-				sum_xy * (sum_x * sum_x4 - sum_x2 * sum_x3) + 
-				sum_x2y * (sum_x * sum_x3 - sum_x2 * sum_x2)
+	var det_c = sum_y * (sum_x2 * sum_x4 - sum_x3 * sum_x3) - sum_xy * (sum_x * sum_x4 - sum_x2 * sum_x3) + sum_x2y * (sum_x * sum_x3 - sum_x2 * sum_x2)
 	
-	var det_b = sum_1 * (sum_xy * sum_x4 - sum_x2y * sum_x3) - 
-				sum_x * (sum_y * sum_x4 - sum_x2y * sum_x2) + 
-				sum_x2 * (sum_y * sum_x3 - sum_xy * sum_x2)
+	var det_b = sum_1 * (sum_xy * sum_x4 - sum_x2y * sum_x3) - sum_x * (sum_y * sum_x4 - sum_x2y * sum_x2) + sum_x2 * (sum_y * sum_x3 - sum_xy * sum_x2)
 	
-	var det_a_coeff = sum_1 * (sum_x2 * sum_x2y - sum_x3 * sum_xy) - 
-					  sum_x * (sum_x * sum_x2y - sum_x2 * sum_y) + 
-					  sum_x2 * (sum_x * sum_xy - sum_x2 * sum_y)
+	var det_a_coeff = sum_1 * (sum_x2 * sum_x2y - sum_x3 * sum_xy) - sum_x * (sum_x * sum_x2y - sum_x2 * sum_y) +  sum_x2 * (sum_x * sum_xy - sum_x2 * sum_y)
 	
 	# Store polynomial coefficients [a, b, c] for y = ax² + bx + c
 	var poly_a = det_a_coeff / det_a
@@ -520,9 +512,7 @@ func fit_multiple_regression():
 	# Matrix: [[n, sum_x1, sum_x2], [sum_x1, sum_x1_x1, sum_x1_x2], [sum_x2, sum_x1_x2, sum_x2_x2]]
 	# Vector: [sum_y, sum_x1_y, sum_x2_y]
 	
-	var det = sum_1 * (sum_x1_x1 * sum_x2_x2 - sum_x1_x2 * sum_x1_x2) -
-			  sum_x1 * (sum_x1 * sum_x2_x2 - sum_x2 * sum_x1_x2) +
-			  sum_x2 * (sum_x1 * sum_x1_x2 - sum_x1_x1 * sum_x2)
+	var det = sum_1 * (sum_x1_x1 * sum_x2_x2 - sum_x1_x2 * sum_x1_x2) -sum_x1 * (sum_x1 * sum_x2_x2 - sum_x2 * sum_x1_x2) +sum_x2 * (sum_x1 * sum_x1_x2 - sum_x1_x1 * sum_x2)
 	
 	if abs(det) < 1e-10:
 		# Fallback if singular matrix
@@ -530,17 +520,11 @@ func fit_multiple_regression():
 		return
 	
 	# Calculate coefficients using Cramer's rule
-	var det_beta0 = sum_y * (sum_x1_x1 * sum_x2_x2 - sum_x1_x2 * sum_x1_x2) -
-					sum_x1_y * (sum_x1 * sum_x2_x2 - sum_x2 * sum_x1_x2) +
-					sum_x2_y * (sum_x1 * sum_x1_x2 - sum_x1_x1 * sum_x2)
+	var det_beta0 = sum_y * (sum_x1_x1 * sum_x2_x2 - sum_x1_x2 * sum_x1_x2) -sum_x1_y * (sum_x1 * sum_x2_x2 - sum_x2 * sum_x1_x2) +sum_x2_y * (sum_x1 * sum_x1_x2 - sum_x1_x1 * sum_x2)
 	
-	var det_beta1 = sum_1 * (sum_x1_y * sum_x2_x2 - sum_x2_y * sum_x1_x2) -
-					sum_x1 * (sum_y * sum_x2_x2 - sum_x2_y * sum_x2) +
-					sum_x2 * (sum_y * sum_x1_x2 - sum_x1_y * sum_x2)
+	var det_beta1 = sum_1 * (sum_x1_y * sum_x2_x2 - sum_x2_y * sum_x1_x2) -sum_x1 * (sum_y * sum_x2_x2 - sum_x2_y * sum_x2) +sum_x2 * (sum_y * sum_x1_x2 - sum_x1_y * sum_x2)
 	
-	var det_beta2 = sum_1 * (sum_x1_x1 * sum_x2_y - sum_x1_x2 * sum_x1_y) -
-					sum_x1 * (sum_x1 * sum_x2_y - sum_x2 * sum_y) +
-					sum_x2 * (sum_x1 * sum_x1_y - sum_x1_x1 * sum_y)
+	var det_beta2 = sum_1 * (sum_x1_x1 * sum_x2_y - sum_x1_x2 * sum_x1_y) -sum_x1 * (sum_x1 * sum_x2_y - sum_x2 * sum_y) +sum_x2 * (sum_x1 * sum_x1_y - sum_x1_x1 * sum_y)
 	
 	var beta0 = det_beta0 / det  # Intercept
 	var beta1 = det_beta1 / det  # Coefficient for x1

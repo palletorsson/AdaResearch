@@ -200,6 +200,7 @@ class Rocket:
 	var max_force_limit: float = 0.08
 	var fitness: float = 0.0
 	var highlight_mesh: MeshInstance3D
+	var target_radius: float = 0.05
 
 	var position: Vector3:
 		get:

@@ -48,7 +48,7 @@ func _test_physics_interactions():
 	# Get sphere soft body and apply impulse
 	var sphere_body = scene_controller.get_soft_body_by_type("sphere")
 	if sphere_body:
-		sphere_body.apply_impulse(Vector3(5.0, 3.0, 0.0))
+		sphere_body.apply_external_impulse(Vector3(5.0, 3.0, 0.0))
 		print("✅ Applied impulse to sphere soft body")
 	
 	# Wait and test state changes

@@ -168,7 +168,7 @@ func update_page():
 		vis_control = null
 
 	# Load and instantiate the new visualization control scene
-	var vis_scene = preload("res://adaresearch/Common/Scenes/Context/infoBoards/UnitCircle/WaveVisualizationControl.tscn")
+	var vis_scene = preload("res://commons/infoboards_3d/boards/Wave/WaveVisualizationControl.tscn")
 
 	vis_control = vis_scene.instantiate()
 	vis_control.visualization_type = page_content[current_page]["visualization"]

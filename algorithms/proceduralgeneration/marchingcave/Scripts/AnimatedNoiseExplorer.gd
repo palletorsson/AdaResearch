@@ -68,19 +68,20 @@ func generate_chunk():
 	
 	# Update mesh
 	array_mesh.clear_surfaces()
-	if mesh_data:
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_data)
+	if mesh_data.is_empty():
+		return
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_data)
 		
-		# Apply material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = mesh_color
-		material.metallic = 0.2
-		material.roughness = 0.6
-		material.cull_mode = StandardMaterial3D.CULL_DISABLED
-		if show_wireframe:
-			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			material.wireframe = true
-		material_override = material
+	# Apply material
+	var material = StandardMaterial3D.new()
+	material.albedo_color = mesh_color
+	material.metallic = 0.2
+	material.roughness = 0.6
+	material.cull_mode = StandardMaterial3D.CULL_DISABLED
+	if show_wireframe:
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		material.wireframe = true
+	material_override = material
 
 func generate_density_field(resolution: int) -> Array:
 	"""Generate 3D density field using noise at current offset"""
@@ -208,7 +209,7 @@ func create_marching_cubes_mesh(density_field: Array, resolution: int) -> Array:
 					vertex_index += 3
 	
 	if vertices.is_empty():
-		return null
+		return []
 	
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -225,4 +226,3 @@ func _input(event):
 			stop_animation()
 		else:
 			start_animation()
-

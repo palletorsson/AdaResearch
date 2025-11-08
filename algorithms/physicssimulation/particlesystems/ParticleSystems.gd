@@ -23,7 +23,7 @@ var queer_colors = [
 	Color(1.0, 0.3, 0.5, 1.0)     # Rose
 ]
 
-class Particle:
+class pParticle:
 	var position: Vector3
 	var velocity: Vector3
 	var lifetime: float
@@ -84,7 +84,7 @@ func _ready():
 
 func initialize_particle_systems():
 	# Create initial particles for each system
-	for i in range(max_particles // 4):
+	for i in range(max_particles / 4):
 		create_smoke_particle()
 		create_fire_particle()
 		create_spark_particle()
@@ -107,7 +107,7 @@ func create_smoke_particle() -> Particle:
 	var color = queer_colors[randi() % queer_colors.size()] * 0.7  # Slightly muted
 	var node = create_particle_node(color, size)
 
-	var particle = Particle.new(pos, vel, particle_lifetime * 2.0, size, color, node)
+	var particle = pParticle.new(pos, vel, particle_lifetime * 2.0, size, color, node)
 	$ParticleEmitters/SmokeEmitter/SmokeParticles.add_child(node)
 	smoke_particles.append(particle)
 
@@ -130,7 +130,7 @@ func create_fire_particle() -> Particle:
 	var color = queer_colors[(randi() % 3) + 3]  # Gold, lime, coral - warm colors
 	var node = create_particle_node(color, size)
 
-	var particle = Particle.new(pos, vel, particle_lifetime * 0.5, size, color, node)
+	var particle = pParticle.new(pos, vel, particle_lifetime * 0.5, size, color, node)
 	$ParticleEmitters/FireEmitter/FireParticles.add_child(node)
 	fire_particles.append(particle)
 
@@ -154,7 +154,7 @@ func create_spark_particle() -> Particle:
 	color.a = 1.0
 	var node = create_particle_node(color, size)
 
-	var particle = Particle.new(pos, vel, particle_lifetime * 0.3, size, color, node)
+	var particle = pParticle.new(pos, vel, particle_lifetime * 0.3, size, color, node)
 	$ParticleEmitters/SparkEmitter/SparkParticles.add_child(node)
 	spark_particles.append(particle)
 
@@ -178,7 +178,7 @@ func create_weather_particle() -> Particle:
 	color.a = 0.7
 	var node = create_particle_node(color, size)
 	
-	var particle = Particle.new(pos, vel, particle_lifetime * 1.5, size, color, node)
+	var particle = pParticle.new(pos, vel, particle_lifetime * 1.5, size, color, node)
 	$ParticleEmitters/WeatherEmitter/WeatherParticles.add_child(node)
 	weather_particles.append(particle)
 	
@@ -228,13 +228,13 @@ func _process(delta):
 
 func emit_new_particles():
 	# Emit new particles if we have room
-	if smoke_particles.size() < max_particles // 4:
+	if smoke_particles.size() < max_particles / 4:
 		create_smoke_particle()
-	if fire_particles.size() < max_particles // 4:
+	if fire_particles.size() < max_particles / 4:
 		create_fire_particle()
-	if spark_particles.size() < max_particles // 4:
+	if spark_particles.size() < max_particles / 4:
 		create_spark_particle()
-	if weather_particles.size() < max_particles // 4:
+	if weather_particles.size() < max_particles / 4:
 		create_weather_particle()
 
 func update_particle_system(particles: Array[Particle], delta: float):

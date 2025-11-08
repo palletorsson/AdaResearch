@@ -1,5 +1,5 @@
 extends Node3D
-# class_name ConvolutionalNeuralNetworkShowcase  # Disabled to avoid conflict with main file
+class_name ConvolutionalNeuralNetworkShowcaseBack
 
 @export_range(6, 16, 1) var grid_size: int = 8
 @export_range(3, 5, 1) var kernel_size: int = 3
@@ -147,7 +147,6 @@ func _build_feature_maps() -> void:
 		var count := _conv_output_size * _conv_output_size
 		var multimesh := MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
-		multimesh.use_colors = true
 		multimesh.instance_count = count
 
 		var bases: Array[Transform3D] = []
@@ -185,7 +184,7 @@ func _build_pool_stage() -> void:
 	pool_mesh.top_radius = 0.26
 	pool_mesh.bottom_radius = 0.26
 	pool_mesh.height = 0.2
-	var pool_size := max(1, _conv_output_size / pooling_window)
+	var pool_size: int = max(1, _conv_output_size / pooling_window)
 	var spacing := voxel_spacing * pooling_window * 0.75
 	for z in range(pool_size):
 		for x in range(pool_size):
@@ -220,7 +219,7 @@ func _build_dense_stage() -> void:
 		mat.emission_enabled = true
 		mat.emission = mat.albedo_color * 0.8
 		orb.material_override = mat
-		var angle := lerp(-0.9, 0.9, float(i) / max(1, dense_count - 1))
+		var angle: float = lerp(-0.9, 0.9, float(i) / max(1, dense_count - 1))
 		var radius := 2.2
 		orb.position = Vector3(cos(angle) * radius, (float(i) - (dense_count - 1) * 0.5) * 0.4, sin(angle) * radius * 0.5)
 		orb.scale = Vector3.ONE * 0.7
@@ -330,13 +329,13 @@ func _update_feature_targets() -> void:
 				var weight := weights[ky * kernel_size + kx]
 				accum += weight * _input_values[sample_idx]
 		var bias := _feature_biases[map_idx]
-		var activation := clamp(0.5 + 0.5 * tanh(accum * 0.6 + bias), 0.0, 1.0)
+		var activation: float = clamp(0.5 + 0.5 * tanh(accum * 0.6 + bias), 0.0, 1.0)
 		_feature_targets[map_idx][index] = activation
 
 func _update_feature_maps(delta: float) -> void:
 	for map_idx in range(feature_map_count):
-		var multimesh: MultiMesh = _feature_multimeshes[map_idx]
-		var bases: Array = _feature_base[map_idx]
+		var multimesh := _feature_multimeshes[map_idx]
+		var bases: Array[Transform3D] = _feature_base[map_idx] as Array[Transform3D]
 		var values: PackedFloat32Array = _feature_values[map_idx]
 		var targets: PackedFloat32Array = _feature_targets[map_idx]
 		for i in range(values.size()):
@@ -359,7 +358,7 @@ func _update_pool_stage(delta: float) -> void:
 	var pool_size := int(sqrt(float(_pool_columns.size())))
 	pool_size = max(pool_size, 1)
 	var source_map := 0
-	var values := _feature_values[source_map]
+	var values: PackedFloat32Array = _feature_values[source_map]
 	for z in range(pool_size):
 		for x in range(pool_size):
 			var accum := 0.0
@@ -370,13 +369,13 @@ func _update_pool_stage(delta: float) -> void:
 					if in_x < _conv_output_size and in_z < _conv_output_size:
 						var idx := in_z * _conv_output_size + in_x
 						accum = max(accum, values[idx])
-			var column := _pool_columns[z * pool_size + x]
+			var column: MeshInstance3D = _pool_columns[z * pool_size + x]
 			var current_scale := column.scale
 			var target_height := 0.2 + accum * 1.4
-			var new_height := lerp(current_scale.y, target_height, delta * 2.4)
+			var new_height = lerp(current_scale.y, target_height, delta * 2.4)
 			column.scale = Vector3(1, new_height, 1)
 			column.position.y = new_height * 0.5
-			var mat := column.material_override
+			var mat: StandardMaterial3D = column.material_override as StandardMaterial3D
 			if mat:
 				mat.emission = mat.albedo_color * (0.4 + accum * 1.1)
 
@@ -411,7 +410,7 @@ func _update_ribbon(delta: float) -> void:
 		var distance := t * _curve_length
 		var pos: Vector3 = _curve.interpolate_baked(distance)
 		particle.mesh.position = pos
-		var ahead: Vector3 = _curve.interpolate_baked(minf(distance + 0.2, _curve_length))
+		var ahead: Vector3 = _curve.interpolate_baked(min(distance + 0.2, _curve_length))
 		particle.mesh.look_at(ahead, Vector3.UP)
 		var flicker := 0.9 + 0.2 * sin((t + _time) * TAU)
 		particle.mesh.scale = Vector3.ONE * (0.1 * flicker)

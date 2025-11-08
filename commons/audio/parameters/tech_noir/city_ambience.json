@@ -1,0 +1,44 @@
+{
+	"city_ambience": {
+		"_metadata": {
+			"sound_type": "city_ambience",
+			"description": "Urban atmosphere with traffic and low frequency rumble",
+			"tags": "ambient, city, urban, traffic, rumble",
+			"created_at": "2025-01-07T00:00:00Z",
+			"version": "1.0",
+			"is_default": true
+		},
+		"parameters": {
+			"buffer_length": {
+				"value": 10.0,
+				"min": 5.0,
+				"max": 30.0,
+				"step": 1.0
+			},
+			"traffic_volume": {
+				"value": 0.1,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"rumble_volume": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"ambient_volume": {
+				"value": 0.15,
+				"min": 0.0,
+				"max": 0.5,
+				"step": 0.01
+			},
+			"seed": {
+				"value": -1,
+				"min": -1,
+				"max": 10000,
+				"step": 1
+			}
+		}
+	}
+}

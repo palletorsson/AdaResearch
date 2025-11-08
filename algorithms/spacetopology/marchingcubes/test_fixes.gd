@@ -6,7 +6,7 @@ extends SceneTree
 
 func _ready():
 	print("🔧 Testing Marching Cubes HOLE FIXES...")
-	print("=" * 60)
+ 
 	
 	# Test 1: Basic terrain generation with hole prevention
 	print("Test 1: Hole-Free Terrain Generation")
@@ -121,7 +121,7 @@ func _ready():
 		else:
 			print("  ⚠️  No mesh generated - this may indicate holes!")
 	
-	print("=" * 60)
+ 
 	print("🎯 HOLE FIX TEST RESULTS:")
 	print("   ✅ Consistent boundary density evaluation")
 	print("   ✅ Robust interpolation with edge case handling")
@@ -135,7 +135,7 @@ func _ready():
 	print("   • Prevent degenerate triangles from being generated")
 	print("   • Smooth distance field prevents abrupt density changes")
 	print("   • Comprehensive validation detects potential issues")
-	print("=" * 60)
+ 
 	
 	# Exit the test
 	quit() 

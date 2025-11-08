@@ -97,7 +97,7 @@ func _process(delta: float) -> void:
 		_run_generation()
 
 func _run_generation() -> void:
-	var best := ""
+	var best: String = ""
 	var best_fitness := -1.0
 
 	for dna in _population:
@@ -135,22 +135,26 @@ func _update_labels() -> void:
 	_sample_label.text = _sample_population_text()
 
 func _sample_population_text() -> String:
-	var builder := PackedStringArray()
-	var sample_count := min(12, _population.size())
+	var builder: Array[String] = []
+	var sample_count = min(12, _population.size())
 	for i in range(sample_count):
 		var idx := randi() % _population.size()
 		builder.append(_population[idx].get_phrase())
-	return builder.join(" \u2022 ")
+	return " | ".join(builder)
 
 class DNA:
-	var genes: PackedStringArray
+	var genes: Array[String]
 	var fitness: float = 0.0
 
+	static func _random_character() -> String:
+		var code := randi_range(32, 126)
+		return char(code)
+
 	func _init(length: int = 0) -> void:
-		genes = PackedStringArray()
+		genes = []
 		genes.resize(length)
 		for i in range(length):
-			genes[i] = _random_character()
+			genes[i] = DNA._random_character()
 
 	func get_phrase() -> String:
 		return "".join(genes)
@@ -172,8 +176,4 @@ class DNA:
 	func mutate(rate: float) -> void:
 		for i in range(genes.size()):
 			if randf() < rate:
-				genes[i] = _random_character()
-
-func _random_character() -> String:
-	var code := randi_range(32, 126)
-	return char(code)
+				genes[i] = DNA._random_character()
