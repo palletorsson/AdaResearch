@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigis6o81tfop"]
+
+[ext_resource type="Script" uid="uid://choxdahyl58kk" path="res://algorithms/wavefunctions/water_land_ride/slide_generator.gd" id="1_5xi40"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_5xi40"]
+outer_radius = 0.593
+rings = 36
+ring_segments = 12
+
+[node name="WaterLandRide" type="Node3D"]
+script = ExtResource("1_5xi40")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1.5, 0, 0, 0, -4.371139e-07, -1.5, 0, 10, -6.556708e-08, 0, 0.5295335, 0)
+mesh = SubResource("TorusMesh_5xi40")

@@ -4,11 +4,13 @@ extends Node3D
 @export_range(4, 256, 1) var columns: int = 200
 @export_range(4, 256, 1) var rows: int = 64
 @export var corridor_length: float = 24.0
-@export var corridor_width: float = 8.0
+@export var corridor_width: float = 1.0
 @export var corridor_height: float = 6.0
 
-@export var base_frequency: float = 1.3
-@export var base_amplitude: float = 1.4
+@export var base_frequency: float = 2.2
+@export var base_amplitude: float = 0.45
+@export var left_wall_frequency_multiplier: float = 1.6
+@export var left_wall_amplitude_multiplier: float = 0.5
 @export var phase: float = 0.0
 @export var phase_offset_between_walls: float = 0.6
 
@@ -27,8 +29,11 @@ extends Node3D
 
 var _left_wall: MeshInstance3D
 var _right_wall: MeshInstance3D
-var _ceiling: MeshInstance3D
 var _floor: MeshInstance3D
+var _left_wall_body: StaticBody3D
+var _right_wall_body: StaticBody3D
+var _left_wall_shape: CollisionShape3D
+var _right_wall_shape: CollisionShape3D
 var _wall_material: StandardMaterial3D
 var _floor_material: StandardMaterial3D
 var _last_signature: String = ""
@@ -51,6 +56,7 @@ func _ensure_nodes() -> void:
 		_wall_material.emission_enabled = true
 		_wall_material.emission = wall_emission
 		_wall_material.emission_energy_multiplier = 0.45
+		_wall_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 	if not _floor_material:
 		_floor_material = StandardMaterial3D.new()
@@ -63,13 +69,21 @@ func _ensure_nodes() -> void:
 
 	_left_wall = _get_or_create_mesh_instance("LeftWall", _left_wall)
 	_right_wall = _get_or_create_mesh_instance("RightWall", _right_wall)
-	_ceiling = _get_or_create_mesh_instance("Ceiling", _ceiling)
 	_floor = _get_or_create_mesh_instance("Floor", _floor)
+	_left_wall_body = _get_or_create_static_body("LeftWallBody", _left_wall_body)
+	_right_wall_body = _get_or_create_static_body("RightWallBody", _right_wall_body)
+	_left_wall_shape = _get_or_create_collision_shape(_left_wall_body, "LeftWallShape", _left_wall_shape)
+	_right_wall_shape = _get_or_create_collision_shape(_right_wall_body, "RightWallShape", _right_wall_shape)
+
+	var existing_ceiling := get_node_or_null("Ceiling")
+	if existing_ceiling:
+		existing_ceiling.queue_free()
 
 	for mesh in [_left_wall, _right_wall]:
 		mesh.material_override = _wall_material
-	for mesh in [_ceiling, _floor]:
-		mesh.material_override = _floor_material
+	_floor.material_override = _floor_material
+	_left_wall_body.transform = Transform3D.IDENTITY
+	_right_wall_body.transform = Transform3D.IDENTITY
 
 func _get_or_create_mesh_instance(name: String, cache: MeshInstance3D) -> MeshInstance3D:
 	if cache and is_instance_valid(cache):
@@ -81,6 +95,26 @@ func _get_or_create_mesh_instance(name: String, cache: MeshInstance3D) -> MeshIn
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 		add_child(node)
 	return node
+
+func _get_or_create_static_body(name: String, cache: StaticBody3D) -> StaticBody3D:
+	if cache and is_instance_valid(cache):
+		return cache
+	var body := get_node_or_null(name) as StaticBody3D
+	if not body:
+		body = StaticBody3D.new()
+		body.name = name
+		add_child(body)
+	return body
+
+func _get_or_create_collision_shape(parent: Node3D, name: String, cache: CollisionShape3D) -> CollisionShape3D:
+	if cache and is_instance_valid(cache):
+		return cache
+	var shape_node := parent.get_node_or_null(name) as CollisionShape3D
+	if not shape_node:
+		shape_node = CollisionShape3D.new()
+		shape_node.name = name
+		parent.add_child(shape_node)
+	return shape_node
 
 func _build_corridor() -> void:
 	if columns < 2 or rows < 2:
@@ -94,19 +128,28 @@ func _build_corridor() -> void:
 	var half_width := corridor_width * 0.5
 	var half_height := corridor_height * 0.5
 
-	_left_wall.mesh = _create_wall_mesh(-1, half_length, half_width, half_height, phase)
-	_right_wall.mesh = _create_wall_mesh(1, half_length, half_width, half_height, phase + phase_offset_between_walls)
-	_ceiling.mesh = _create_plane_mesh(half_length, half_width, half_height, true)
+	_left_wall.mesh = _create_wall_mesh(-1, half_length, half_width, half_height, phase, left_wall_frequency_multiplier, left_wall_amplitude_multiplier)
+	_right_wall.mesh = _create_wall_mesh(1, half_length, half_width, half_height, phase + phase_offset_between_walls, 1.0, 1.0)
 	_floor.mesh = _create_plane_mesh(half_length, half_width, half_height, false)
+	_update_wall_collision(_left_wall, _left_wall_shape)
+	_update_wall_collision(_right_wall, _right_wall_shape)
 
 	_left_wall.transform = Transform3D.IDENTITY
 	_right_wall.transform = Transform3D.IDENTITY
 	_floor.transform = Transform3D.IDENTITY
-	_ceiling.transform = Transform3D.IDENTITY
 
 	_last_signature = signature
 
-func _create_wall_mesh(side: int, half_length: float, half_width: float, half_height: float, phase_shift: float) -> ArrayMesh:
+func _update_wall_collision(mesh_instance: MeshInstance3D, shape_node: CollisionShape3D) -> void:
+	if not shape_node:
+		return
+	var mesh := mesh_instance.mesh
+	if mesh:
+		shape_node.shape = mesh.create_trimesh_shape()
+	else:
+		shape_node.shape = null
+
+func _create_wall_mesh(side: int, half_length: float, half_width: float, half_height: float, phase_shift: float, freq_multiplier: float, amp_multiplier: float) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -121,7 +164,7 @@ func _create_wall_mesh(side: int, half_length: float, half_width: float, half_he
 
 		var z_ratio: float = col / float(columns - 1)
 		var z_pos: float = lerp(-half_length, half_length, z_ratio)
-		var displacement: float = _wave_displacement(z_ratio, phase_shift)
+		var displacement: float = _wave_displacement(z_ratio, phase_shift, freq_multiplier, amp_multiplier)
 		var column_color: Color = _evaluate_color(displacement)
 
 		for row in range(rows):
@@ -204,14 +247,14 @@ func _create_plane_mesh(half_length: float, half_width: float, half_height: floa
 	st.generate_normals()
 	return st.commit()
 
-func _wave_displacement(z_ratio: float, phase_shift: float) -> float:
+func _wave_displacement(z_ratio: float, phase_shift: float, freq_multiplier: float = 1.0, amp_multiplier: float = 1.0) -> float:
 	var z_norm: float = z_ratio * 2.0 - 1.0
 	var offset: float = 0.0
 	for layer in wave_layers:
 		var freq_mul: float = float(layer.get("freq_mul", 1.0))
 		var amp_mul: float = float(layer.get("amp_mul", 1.0))
 		var phase_layer: float = float(layer.get("phase_shift", 0.0))
-		offset += base_amplitude * amp_mul * sin((base_frequency * freq_mul) * z_norm * PI + phase + phase_shift + phase_layer)
+		offset += base_amplitude * amp_multiplier * amp_mul * sin((base_frequency * freq_multiplier * freq_mul) * z_norm * PI + phase + phase_shift + phase_layer)
 	return offset
 
 func _evaluate_color(displacement: float) -> Color:
@@ -223,7 +266,7 @@ func _evaluate_color(displacement: float) -> Color:
 	return color
 
 func _make_signature() -> String:
-	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color)
+	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color)
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():

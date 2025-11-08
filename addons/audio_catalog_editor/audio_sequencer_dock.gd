@@ -52,7 +52,7 @@ func _ready() -> void:
 func _build_ui() -> void:
 	for child in get_children():
 		child.queue_free()
-	
+
 	var main_vbox = VBoxContainer.new()
 	main_vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 	main_vbox.custom_minimum_size = Vector2(0, 720)

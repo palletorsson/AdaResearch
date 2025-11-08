@@ -4,6 +4,13 @@
 	"description": "Artifact definitions for the Lab environment",
 	
 	"artifacts": {
+		"player_presence_indicator": {
+			"name": "player_presence_indicator",
+			"lookup_name": "player_presence_indicator",
+			"description": "player_presence_indicator.",
+			"scene": "res://commons/interfaces/player_presence_indicator.tscn",
+		},
+		
 		"menu": {
 			"name": "menu",
 			"lookup_name": "menu",
@@ -1365,6 +1372,13 @@
 		"lookup_name": "hallway_scene",
 		"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
 		"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+		
+	},
+	"segment_slide": {
+		"name": "segment_slide",
+		"lookup_name": "segment_slide",
+		"description": "segment_slide.",
+		"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn",
 		
 	},
 
@@ -4238,6 +4252,13 @@
 		"description": "Parametric surface with configurable equations",
 		"scene": "res://commons/primitives/parametric/parametric.tscn",
 	},
+	"water_land_ride": {
+		"name": "water_land_ride",
+		"lookup_name": "water_land_ride",
+		"description": "water_land_ride",
+		"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn",
+	},
+	
 	"mengersponge": {
 		"name": "Menger Sponge",
 		"lookup_name": "mengersponge",

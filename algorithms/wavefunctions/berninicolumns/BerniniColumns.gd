@@ -3,6 +3,8 @@
 # Gian Lorenzo Bernini's baroque architectural style.
 extends Node3D
 
+const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolumns/bernini_base.tscn")
+
 # -- Configuration --
 
 # Parameters for column generation
@@ -42,8 +44,6 @@ func _ready():
 		add_child(column)
 		columns.append(column)
 	
-	# Create a simple platform/base
-	create_platform()
 	
 	# Add a light to highlight the columns
 	create_lighting()
@@ -53,14 +53,19 @@ func _process(delta):
 	if rotate_columns:
 		time += delta
 		for column in columns:
-			# Slow continuous rotation
-			column.rotation.y = time * rotation_speed
+			var rotating_root = column.get_node_or_null("RotatingRoot")
+			if rotating_root:
+				# Slow continuous rotation applied only to the shaft/capital
+				rotating_root.rotation.y = time * rotation_speed
 
 # --- Procedural Generation Functions ---
 
 func create_spiral_column() -> Node3D:
 	# Creates a single, complete column with a base, shaft, and capital.
 	var column_node = Node3D.new()
+	var rotating_root = Node3D.new()
+	rotating_root.name = "RotatingRoot"
+	column_node.add_child(rotating_root)
 	
 	# Create the main spiral shaft
 	var mesh_instance = MeshInstance3D.new()
@@ -73,11 +78,11 @@ func create_spiral_column() -> Node3D:
 	material.roughness = 0.2
 	mesh_instance.set_surface_override_material(0, material)
 	
-	column_node.add_child(mesh_instance)
+	rotating_root.add_child(mesh_instance)
 	
 	# Add the decorative top and bottom parts
 	add_column_base(column_node)
-	add_column_capital(column_node)
+	add_column_capital(rotating_root)
 	
 	return column_node
 
@@ -147,80 +152,18 @@ func generate_spiral_column_mesh() -> Mesh:
 	
 	return st.commit()
 
-func create_tube_trail_base_mesh() -> Mesh:
-	"""Create a tube trail mesh for the column base"""
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	# Tube parameters
-	var base_radius = column_radius * 2.0
-	var top_radius = column_radius * 1.5
-	var height = 0.5
-	var segments = radial_segments
-	var rings = 8  # Number of vertical rings for the tube
-	
-	# Generate vertices for the tube
-	for i in range(rings + 1):
-		var v = float(i) / rings  # Vertical progress (0.0 to 1.0)
-		var current_height = v * height
-		var current_radius = lerp(base_radius, top_radius, v)
-		
-		# Create a ring of vertices
-		for j in range(segments + 1):
-			var u = float(j) / segments  # Radial progress (0.0 to 1.0)
-			var angle = u * 2.0 * PI
-			
-			# Calculate vertex position
-			var x = cos(angle) * current_radius
-			var z = sin(angle) * current_radius
-			var vertex = Vector3(x, current_height, z)
-			
-			# Calculate normal (pointing outward from center)
-			var normal = Vector3(x, 0, z).normalized()
-			
-			# Add vertex data
-			st.set_normal(normal)
-			st.set_uv(Vector2(u, v))
-			st.add_vertex(vertex)
-	
-	# Create triangle faces
-	for i in range(rings):
-		for j in range(segments):
-			# Get indices for the four corners of a quad
-			var a = i * (segments + 1) + j
-			var b = i * (segments + 1) + j + 1
-			var c = (i + 1) * (segments + 1) + j
-			var d = (i + 1) * (segments + 1) + j + 1
-			
-			# Create the first triangle of the quad
-			st.add_index(a)
-			st.add_index(b)
-			st.add_index(c)
-			
-			# Create the second triangle of the quad
-			st.add_index(b)
-			st.add_index(d)
-			st.add_index(c)
-	
-	# Finalize the mesh
-	st.generate_normals()
-	st.generate_tangents()
-	
-	return st.commit()
-
 func add_column_base(column_node: Node3D):
-	# Adds a tube trail mesh base to the bottom of a column.
-	var base = MeshInstance3D.new()
-	base.mesh = create_tube_trail_base_mesh()
-	base.position.y = -0.25
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = material_color
-	material.metallic = 0.8
-	material.roughness = 0.2
-	base.set_surface_override_material(0, material)
-	
-	column_node.add_child(base)
+	# Adds the Bernini base scene below the column shaft.
+	var base_instance = BERNINI_BASE_SCENE.instantiate()
+	base_instance.position.y = -0.25
+	var mesh_instance := base_instance.get_node_or_null("StaticBody3D/MeshInstance3D") as MeshInstance3D
+	if mesh_instance:
+		var material = StandardMaterial3D.new()
+		material.albedo_color = material_color
+		material.metallic = 0.8
+		material.roughness = 0.2
+		mesh_instance.set_surface_override_material(0, material)
+	column_node.add_child(base_instance)
 
 func add_column_capital(column_node: Node3D):
 	# Adds a cylindrical capital to the top of a column.
@@ -242,38 +185,6 @@ func add_column_capital(column_node: Node3D):
 	column_node.add_child(capital)
 
 # --- Scene Setup Functions ---
-
-func create_platform():
-	# Creates a three-step base for the columns.
-	var base_material = StandardMaterial3D.new()
-	base_material.albedo_color = Color(0.6, 0.6, 0.6, 1.0) # Gray marble-like color
-
-	# Step 1 (Bottom)
-	var step1 = MeshInstance3D.new()
-	var mesh1 = BoxMesh.new()
-	mesh1.size = Vector3(8.0, 0.2, 8.0)
-	step1.mesh = mesh1
-	step1.position.y = -0.1
-	step1.set_surface_override_material(0, base_material)
-	add_child(step1)
-
-	# Step 2 (Middle)
-	var step2 = MeshInstance3D.new()
-	var mesh2 = BoxMesh.new()
-	mesh2.size = Vector3(7.0, 0.2, 7.0)
-	step2.mesh = mesh2
-	step2.position.y = 0.1
-	step2.set_surface_override_material(0, base_material)
-	add_child(step2)
-
-	# Step 3 (Top)
-	var step3 = MeshInstance3D.new()
-	var mesh3 = BoxMesh.new()
-	mesh3.size = Vector3(6.0, 0.2, 6.0)
-	step3.mesh = mesh3
-	step3.position.y = 0.3
-	step3.set_surface_override_material(0, base_material)
-	add_child(step3)
 
 func create_lighting():
 	# Sets up basic lighting for the scene to make the columns visible.

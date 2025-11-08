@@ -1,16 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7g4dxk5n8yw6"]
+[gd_scene load_steps=2 format=3 uid="uid://b7g4dxk5n8yw6"]
 
 [ext_resource type="Script" uid="uid://v6alv7t3xuf2" path="res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniColumns.gd" id="1_jvgsx"]
-
-[sub_resource type="Environment" id="Environment_qul75"]
-background_mode = 2
-background_color = Color(0.2, 0.2, 0.2, 1)
-ssao_enabled = true
-glow_enabled = true
-glow_bloom = 0.1
-fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.02
 
 [node name="BerniniScene" type="Node3D"]
 
@@ -30,6 +20,3 @@ rotation_speed = 0.2
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5, 5, 5)
 visible = false
 current = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_qul75")

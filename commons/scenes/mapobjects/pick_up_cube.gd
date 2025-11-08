@@ -8,6 +8,12 @@ class_name PickupCube
 @export var bob_height: float = 0.2
 @export var bob_speed: float = 2.0
 
+# Mario-style sound parameters
+@export var freq_start: float = 440.0  ## Start frequency (200-800 Hz)
+@export var freq_end: float = 880.0    ## End frequency (400-1200 Hz)
+@export var decay_rate: float = 8.0    ## Decay rate (2.0-12.0)
+@export var sound_duration: float = 0.5  ## Sound duration in seconds
+
 var original_y: float
 var time_passed: float = 0.0
 var has_been_collected: bool = false
@@ -18,6 +24,13 @@ var pickup_sound: AudioStreamPlayer3D
 # Static variables for shared pickup stream management
 static var shared_pickup_stream: AudioStream = null
 static var default_pickup_stream: AudioStream = null
+
+# Static variables for shared Mario sound parameters
+static var shared_freq_start: float = 440.0
+static var shared_freq_end: float = 880.0
+static var shared_decay_rate: float = 8.0
+static var shared_sound_duration: float = 0.5
+static var use_shared_parameters: bool = false
 
 func _ready() -> void:
 	# Store original position for bobbing motion
@@ -48,71 +61,91 @@ func setup_pickup_sound() -> void:
 	# Create an AudioStreamPlayer3D node for the pickup sound
 	pickup_sound = AudioStreamPlayer3D.new()
 	add_child(pickup_sound)
-	
+
 	# Configure the audio properties
 	pickup_sound.unit_size = 2.0
 	pickup_sound.max_distance = 20.0
 	pickup_sound.volume_db = -6.0  # Moderate volume
-	
-	# Create a synthesized pickup sound (simple sine wave)
-	var sample_rate = 44100
-	var sample_hz = 880  # A5 note
-	var sample_hz_2 = 1318.5  # E6 note
-	
-	var stream = AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = sample_rate
-	
-	# Generate a simple two-tone pickup sound
+
+	# Generate Mario-style pickup sound
+	pickup_sound.stream = _generate_mario_pickup_sound()
+
+func _generate_mario_pickup_sound() -> AudioStreamWAV:
+	"""Generate Mario-style pickup sound with frequency sweep and exponential decay"""
+	const SAMPLE_RATE = 44100
+
+	# Use shared parameters if available (from MarioSoundController)
+	var start_freq = shared_freq_start if use_shared_parameters else freq_start
+	var end_freq = shared_freq_end if use_shared_parameters else freq_end
+	var decay = shared_decay_rate if use_shared_parameters else decay_rate
+	var duration = shared_sound_duration if use_shared_parameters else sound_duration
+
+	# Debug output
+	var source = "SHARED" if use_shared_parameters else "LOCAL"
+	print("PickupCube: Generating %s sound - start:%.1f Hz, end:%.1f Hz, decay:%.2f" % [source, start_freq, end_freq, decay])
+
+	var sample_count = int(SAMPLE_RATE * duration)
 	var data = PackedByteArray()
-	var length = 0.2  # Sound duration in seconds
-	var samples = length * sample_rate
-	
-	for i in range(samples):
-		var t = float(i) / sample_rate
-		var phase_1 = t * sample_hz
-		var phase_2 = t * sample_hz_2
-		
-		# Amplitude envelope (fade out)
-		var amplitude = 0.5 * (1.0 - t / length)
-		
-		# Mix two tones for a more interesting sound
-		var sample_value = amplitude * (sin(TAU * phase_1) + sin(TAU * phase_2))
-		
-		# Convert to 16-bit PCM
+
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		# Rising frequency from start to end (classic Mario pickup sweep)
+		var freq = start_freq + ((end_freq - start_freq) * progress)
+
+		# Exponential decay envelope
+		var envelope = exp(-progress * decay)
+
+		# Square wave for retro Mario feel
+		var wave = 1.0 if sin(2.0 * PI * freq * t) > 0 else -1.0
+
+		# Apply envelope and convert to 16-bit audio
+		var sample_value = wave * envelope * 0.3
 		var sample_int = int(sample_value * 32767.0)
+
+		# Append as 16-bit PCM (little endian)
 		data.append(sample_int & 0xFF)
 		data.append((sample_int >> 8) & 0xFF)
-	
+
+	# Create AudioStreamWAV
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = SAMPLE_RATE
+	stream.stereo = false
 	stream.data = data
-	pickup_sound.stream = stream
+
+	return stream
 
 func collect() -> void:
 	if has_been_collected:
 		return
-	
+
 	has_been_collected = true
-	
+
 	print("PickupCube: Collected! Adding %d points" % points_value)
-	
+
 	# Send signal to GameManager singleton with pickup position
 	GameManager.add_points(points_value, global_position)
-	
+
+	# Regenerate sound with latest parameters (from MarioSoundController if available)
+	var fresh_sound = _generate_mario_pickup_sound()
+
 	# Play pickup sound before removing the cube
 	var sound_clone = AudioStreamPlayer3D.new()
 	get_tree().root.add_child(sound_clone)
-	sound_clone.stream = pickup_sound.stream
+	sound_clone.stream = fresh_sound
 	sound_clone.global_position = global_position
 	sound_clone.volume_db = pickup_sound.volume_db
 	sound_clone.pitch_scale = 1.0
 	sound_clone.play()
-	
+
 	# Free the cloned sound after it finishes playing
 	sound_clone.finished.connect(func(): sound_clone.queue_free())
-	
+
 	# Visual feedback effect
 	_play_collection_effect()
-	
+
 	# Remove the pickup from the scene after a brief delay
 	await get_tree().create_timer(0.1).timeout
 	queue_free()
@@ -150,6 +183,30 @@ static func set_shared_pickup_stream(stream: AudioStream) -> void:
 static func reset_shared_pickup_stream() -> AudioStream:
 	shared_pickup_stream = get_default_pickup_stream()
 	return shared_pickup_stream
+
+static func set_shared_mario_parameters(start_freq: float, end_freq: float, decay: float, duration: float) -> void:
+	"""Called by MarioSoundController to update shared sound parameters"""
+	shared_freq_start = start_freq
+	shared_freq_end = end_freq
+	shared_decay_rate = decay
+	shared_sound_duration = duration
+	use_shared_parameters = true
+	print("PickupCube: Shared Mario sound updated - start:%.1f Hz, end:%.1f Hz, decay:%.2f" % [start_freq, end_freq, decay])
+
+static func get_shared_mario_parameters() -> Dictionary:
+	"""Get the current shared Mario sound parameters"""
+	return {
+		"freq_start": shared_freq_start,
+		"freq_end": shared_freq_end,
+		"decay_rate": shared_decay_rate,
+		"duration": shared_sound_duration,
+		"enabled": use_shared_parameters
+	}
+
+static func disable_shared_parameters() -> void:
+	"""Disable shared parameters, use individual cube settings instead"""
+	use_shared_parameters = false
+	print("PickupCube: Shared parameters disabled, using individual cube settings")
 
 static func _create_default_pickup_stream() -> void:
 	# Create a simple default pickup sound

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4a5bm2l7jith"]
+
+[ext_resource type="Script" uid="uid://cqv2ky04h73w5" path="res://algorithms/wavefunctions/water_land_ride/segment_slide_generator.gd" id="1_3j3tu"]
+
+[node name="SegmentSlide" type="Node3D"]
+script = ExtResource("1_3j3tu")

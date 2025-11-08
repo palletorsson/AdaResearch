@@ -65,6 +65,9 @@ static func create_808_kick(params: Dictionary = {}) -> AudioStreamWAV:
 	var phase = 0.0
 	var dt = 1.0 / SAMPLE_RATE
 
+	# Fade-in duration (to prevent clicks)
+	var fade_in_samples = min(64, frame_count / 10)  # ~1.5ms fade-in
+	
 	for i in range(frame_count):
 		var t = float(i) / SAMPLE_RATE
 
@@ -80,6 +83,22 @@ static func create_808_kick(params: Dictionary = {}) -> AudioStreamWAV:
 		if t < 0.005:  # 5ms punch transient
 			amp_env *= punch
 
+		# Fade-in at the beginning to prevent clicks
+		var fade_in = 1.0
+		if i < fade_in_samples:
+			fade_in = float(i) / float(fade_in_samples)
+			# Smooth fade-in curve (sine curve)
+			fade_in = sin(fade_in * PI * 0.5)
+		
+		# Fade-out at the end to prevent clicks
+		var fade_out = 1.0
+		var fade_out_start = frame_count - 128  # Last ~3ms
+		if i > fade_out_start:
+			var fade_out_progress = float(i - fade_out_start) / 128.0
+			fade_out = 1.0 - fade_out_progress
+			# Smooth fade-out curve
+			fade_out = sin(fade_out * PI * 0.5)
+
 		# Main sine wave oscillator
 		var sample = sin(phase) * amp_env
 
@@ -92,6 +111,9 @@ static func create_808_kick(params: Dictionary = {}) -> AudioStreamWAV:
 
 		# Add tiny noise for texture
 		sample += rng.randf_range(-0.01, 0.01) * amp_env
+
+		# Apply fade-in and fade-out
+		sample *= fade_in * fade_out
 
 		sample = clamp(sample * 0.8, -1.0, 1.0)
 

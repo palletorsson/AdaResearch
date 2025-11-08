@@ -6,6 +6,9 @@ extends Node3D
 ## Y = End Frequency (400-1200 Hz)
 ## Z = Decay Rate (2.0-12.0 - how fast sound fades)
 
+# Load PickupCube class to access static functions
+const PickupCube = preload("res://commons/scenes/mapobjects/pick_up_cube.gd")
+
 @onready var value_mapper = $ValueMapper3D
 @onready var audio_player = $AudioStreamPlayer3D
 
@@ -25,6 +28,10 @@ var min_play_interval: float = 0.6  # Minimum time between plays (slightly longe
 var last_ball_position: Vector3 = Vector3.ZERO
 var movement_threshold: float = 0.01  # How much ball must move to trigger sound
 
+# Auto-save to pickup cubes
+var auto_save_timer: Timer
+var save_interval: float = 3.0  # Save parameters every 3 seconds
+
 # Preview cube that shows frequency visually
 var preview_cube: MeshInstance3D
 var waveform_visualizer: Node3D
@@ -33,6 +40,7 @@ var grab_sphere: Node3D  # Reference to the grabbable ball
 func _ready() -> void:
 	_create_preview_cube()
 	_create_waveform_visualizer()
+	_setup_auto_save_timer()
 
 	if value_mapper:
 		value_mapper.values_changed.connect(_on_sound_values_changed)
@@ -48,6 +56,7 @@ func _ready() -> void:
 			print("MarioSoundController: Found grab sphere")
 
 	print("MarioSoundController: Ready - Move ball to hear sound!")
+	print("MarioSoundController: Auto-saving to pickup cubes every %.1f seconds" % save_interval)
 
 func _process(delta: float) -> void:
 	if not play_on_move or not grab_sphere:
@@ -107,6 +116,24 @@ func _create_waveform_visualizer() -> void:
 	waveform_visualizer.name = "WaveformVisualizer"
 	waveform_visualizer.position = Vector3(0, 0, -0.4)
 	add_child(waveform_visualizer)
+
+func _setup_auto_save_timer() -> void:
+	"""Setup timer to auto-save parameters to pickup cubes every 3 seconds"""
+	auto_save_timer = Timer.new()
+	auto_save_timer.wait_time = save_interval
+	auto_save_timer.autostart = true
+	auto_save_timer.timeout.connect(_on_auto_save_timeout)
+	add_child(auto_save_timer)
+	print("MarioSoundController: Auto-save timer created")
+
+func _on_auto_save_timeout() -> void:
+	"""Save current sound parameters to PickupCube static variables"""
+	_save_to_pickup_cubes()
+
+func _save_to_pickup_cubes() -> void:
+	"""Save current Mario sound parameters to all pickup cubes"""
+	PickupCube.set_shared_mario_parameters(freq_start, freq_end, decay_rate, sound_duration)
+	print("MarioSoundController: Saved parameters to pickup cubes")
 
 func _on_sound_values_changed(x_val: float, y_val: float, z_val: float) -> void:
 	# Map X to start frequency (200-800 Hz)
@@ -209,3 +236,14 @@ func set_play_interval(interval: float) -> void:
 	"""Set minimum time between automatic plays"""
 	min_play_interval = clamp(interval, 0.1, 5.0)
 	print("MarioSoundController: Play interval = %.2f seconds" % min_play_interval)
+
+func set_save_interval(interval: float) -> void:
+	"""Set how often to save parameters to pickup cubes"""
+	save_interval = clamp(interval, 0.5, 60.0)
+	if auto_save_timer:
+		auto_save_timer.wait_time = save_interval
+	print("MarioSoundController: Save interval = %.2f seconds" % save_interval)
+
+func save_now() -> void:
+	"""Manually trigger save to pickup cubes"""
+	_save_to_pickup_cubes()
