@@ -42,8 +42,9 @@ func update_vector(arrow: Node3D, vector: Vector3):
 	var end_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere2")
 	if end_node:
 		end_node.position = vector
-	if arrow.has_method("refresh_connections"):
-		arrow.refresh_connections()
+	var line_container = arrow.get_node_or_null("lineContainer")
+	if line_container and line_container.has_method("refresh_connections"):
+		line_container.refresh_connections()
 
 func get_vector(arrow: Node) -> Vector3:
 	if arrow == null:

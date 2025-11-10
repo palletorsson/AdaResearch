@@ -15,15 +15,20 @@ var field_arrows = []
 var field_points = []
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	# Create the magnetic objects
 	magnet1 = $pickMe_1/MagneticObject1
 	magnet2 = $pickMe_2/MagneticObject2
-	
+
 	# Initialize the field visualization
 	create_field_visualization()
-	
+
 	# Update the field initially
 	update_field()
+
+	print("Magnetic Simulation - VR Ready!")
 
 func _process(delta):
 	# Update the field every frame

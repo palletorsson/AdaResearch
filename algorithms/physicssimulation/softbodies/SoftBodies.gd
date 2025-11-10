@@ -138,6 +138,9 @@ var collision_radii: Array[float] = []
 var time: float = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	# Initialize soft bodies
 	jelly_cube = SoftBody.new(Vector3(-3, 0, 0), $SoftBodyObjects/JellyCube, node_resolution)
 	blob_sphere = SoftBody.new(Vector3(0, 0, 0), $SoftBodyObjects/BlobSphere, node_resolution)

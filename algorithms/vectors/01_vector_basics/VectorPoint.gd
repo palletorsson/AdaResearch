@@ -9,6 +9,7 @@ var z_line: Node3D
 
 func _ready() -> void:
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(1.0)
 	point = POINT_SCENE.instantiate()
 	point.name = "ReferencePoint"

@@ -60,10 +60,10 @@ class pParticle:
 	func is_dead() -> bool:
 		return lifetime <= 0
 
-var smoke_particles: Array[Particle] = []
-var fire_particles: Array[Particle] = []
-var spark_particles: Array[Particle] = []
-var weather_particles: Array[Particle] = []
+var smoke_particles: Array[pParticle] = []
+var fire_particles: Array[pParticle] = []
+var spark_particles: Array[pParticle] = []
+var weather_particles: Array[pParticle] = []
 
 var smoke_emitter_pos: Vector3
 var fire_emitter_pos: Vector3
@@ -74,13 +74,18 @@ var time: float = 0.0
 var emission_timer: float = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	smoke_emitter_pos = $ParticleEmitters/SmokeEmitter.global_position
 	fire_emitter_pos = $ParticleEmitters/FireEmitter.global_position
 	spark_emitter_pos = $ParticleEmitters/SparkEmitter.global_position
 	weather_emitter_pos = $ParticleEmitters/WeatherEmitter.global_position
-	
+
 	# Initialize particle systems
 	initialize_particle_systems()
+
+	print("Particle Systems - VR Ready!")
 
 func initialize_particle_systems():
 	# Create initial particles for each system
@@ -90,7 +95,7 @@ func initialize_particle_systems():
 		create_spark_particle()
 		create_weather_particle()
 
-func create_smoke_particle() -> Particle:
+func create_smoke_particle() -> pParticle:
 	var pos = smoke_emitter_pos + Vector3(
 		randf_range(-0.1, 0.1),
 		randf_range(-0.1, 0.1),
@@ -113,7 +118,7 @@ func create_smoke_particle() -> Particle:
 
 	return particle
 
-func create_fire_particle() -> Particle:
+func create_fire_particle() -> pParticle:
 	var pos = fire_emitter_pos + Vector3(
 		randf_range(-0.1, 0.1),
 		randf_range(-0.1, 0.1),
@@ -136,7 +141,7 @@ func create_fire_particle() -> Particle:
 
 	return particle
 
-func create_spark_particle() -> Particle:
+func create_spark_particle() -> pParticle:
 	var pos = spark_emitter_pos + Vector3(
 		randf_range(-0.1, 0.1),
 		randf_range(-0.1, 0.1),
@@ -160,7 +165,7 @@ func create_spark_particle() -> Particle:
 
 	return particle
 
-func create_weather_particle() -> Particle:
+func create_weather_particle() -> pParticle:
 	var pos = weather_emitter_pos + Vector3(
 		randf_range(-0.5, 0.5),
 		randf_range(-0.1, 0.1),
@@ -237,8 +242,8 @@ func emit_new_particles():
 	if weather_particles.size() < max_particles / 4:
 		create_weather_particle()
 
-func update_particle_system(particles: Array[Particle], delta: float):
-	var dead_particles: Array[Particle] = []
+func update_particle_system(particles: Array[pParticle], delta: float):
+	var dead_particles: Array[pParticle] = []
 	
 	for particle in particles:
 		# Apply forces
@@ -257,7 +262,7 @@ func update_particle_system(particles: Array[Particle], delta: float):
 		if dead_particle.node:
 			dead_particle.node.queue_free()
 
-func apply_particle_forces(particle: Particle, delta: float):
+func apply_particle_forces(particle: pParticle, delta: float):
 	# Apply gravity
 	particle.velocity.y -= gravity_strength * delta
 	
@@ -283,39 +288,47 @@ func apply_particle_forces(particle: Particle, delta: float):
 func animate_emitters(delta: float):
 	# Animate smoke emitter
 	var smoke_source = $ParticleEmitters/SmokeEmitter/SmokeSource
-	smoke_source.scale = Vector3.ONE * (1.0 + sin(time * 3.0) * 0.2)
-	smoke_source.rotation.y += delta * 2.0
-	
+	if smoke_source:
+		smoke_source.scale = Vector3.ONE * (1.0 + sin(time * 3.0) * 0.2)
+		smoke_source.rotation.y += delta * 2.0
+
 	# Animate fire emitter
 	var fire_source = $ParticleEmitters/FireEmitter/FireSource
-	fire_source.scale = Vector3.ONE * (1.0 + sin(time * 5.0) * 0.3)
-	fire_source.material.emission_energy_multiplier = 0.5 + sin(time * 8.0) * 0.3
-	
+	if fire_source:
+		fire_source.scale = Vector3.ONE * (1.0 + sin(time * 5.0) * 0.3)
+		if fire_source.material:
+			fire_source.material.emission_energy_multiplier = 0.5 + sin(time * 8.0) * 0.3
+
 	# Animate spark emitter
 	var spark_source = $ParticleEmitters/SparkEmitter/SparkSource
-	spark_source.scale = Vector3.ONE * (1.0 + sin(time * 4.0) * 0.2)
-	spark_source.rotation.z += delta * 3.0
-	
+	if spark_source:
+		spark_source.scale = Vector3.ONE * (1.0 + sin(time * 4.0) * 0.2)
+		spark_source.rotation.z += delta * 3.0
+
 	# Animate weather emitter
 	var weather_source = $ParticleEmitters/WeatherEmitter/WeatherSource
-	weather_source.position.y = weather_emitter_pos.y + sin(time * 0.5) * 0.3
-	weather_source.scale = Vector3.ONE * (1.0 + sin(time * 2.0) * 0.1)
+	if weather_source:
+		weather_source.position.y = weather_emitter_pos.y + sin(time * 0.5) * 0.3
+		weather_source.scale = Vector3.ONE * (1.0 + sin(time * 2.0) * 0.1)
 
 func animate_particle_controls(delta: float):
 	# Animate emission rate control
 	var emission_rate_node = $ParticleControls/EmissionRate
-	emission_rate_node.scale = Vector3.ONE * (1.0 + sin(time * 2.0) * 0.1)
-	emission_rate_node.rotation.y += delta * 1.0
-	
+	if emission_rate_node:
+		emission_rate_node.scale = Vector3.ONE * (1.0 + sin(time * 2.0) * 0.1)
+		emission_rate_node.rotation.y += delta * 1.0
+
 	# Animate particle lifetime control
 	var particle_lifetime_node = $ParticleControls/ParticleLifetime
-	particle_lifetime_node.scale = Vector3.ONE * (1.0 + sin(time * 3.0) * 0.1)
-	particle_lifetime_node.rotation.z += delta * 1.5
-	
+	if particle_lifetime_node:
+		particle_lifetime_node.scale = Vector3.ONE * (1.0 + sin(time * 3.0) * 0.1)
+		particle_lifetime_node.rotation.z += delta * 1.5
+
 	# Animate particle speed control
 	var particle_speed_node = $ParticleControls/ParticleSpeed
-	particle_speed_node.scale = Vector3.ONE * (1.0 + sin(time * 4.0) * 0.1)
-	particle_speed_node.rotation.x += delta * 2.0
+	if particle_speed_node:
+		particle_speed_node.scale = Vector3.ONE * (1.0 + sin(time * 4.0) * 0.1)
+		particle_speed_node.rotation.x += delta * 2.0
 
 func handle_environment_collisions():
 	# Handle collisions with environment boundaries
@@ -327,7 +340,7 @@ func handle_environment_collisions():
 	handle_boundary_collisions(spark_particles, boundary_min, boundary_max)
 	handle_boundary_collisions(weather_particles, boundary_min, boundary_max)
 
-func handle_boundary_collisions(particles: Array[Particle], min_bound: Vector3, max_bound: Vector3):
+func handle_boundary_collisions(particles: Array[pParticle], min_bound: Vector3, max_bound: Vector3):
 	for particle in particles:
 		var new_pos = particle.position
 		var new_vel = particle.velocity

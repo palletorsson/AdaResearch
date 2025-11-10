@@ -85,6 +85,9 @@ var cloth_springs: Array[Spring] = []
 var time: float = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	create_grid_structure()
 	create_chain_structure()
 	create_cloth_structure()

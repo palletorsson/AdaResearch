@@ -9,6 +9,7 @@ var angle_label: Label3D
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(1.0)
 
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(0.9, 0.55, 0.2), Color(1.0, 0.55, 0.25, 1.0), "Vector a")

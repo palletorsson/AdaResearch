@@ -31,6 +31,9 @@ var queer_colors = [
 var auto_rotate_time = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_initialize_balls()
 	_initialize_obstacles()
 	_connect_ui()

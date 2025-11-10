@@ -20,6 +20,9 @@ var queer_colors = [
 ]
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_create_star_field()
 	_initialize_bodies()
 	_connect_ui()

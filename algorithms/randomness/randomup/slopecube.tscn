@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://clhrs4qr0rjtj"]
+
+[ext_resource type="PackedScene" uid="uid://dwn45auh0bcgc" path="res://commons/scenes/mapobjects/walkableprism.tscn" id="1_c4pro"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_wsp3n"]
+
+[node name="slopecube" type="Node3D"]
+
+[node name="prism" parent="." instance=ExtResource("1_c4pro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="CubeScene" parent="." instance=ExtResource("2_wsp3n")]

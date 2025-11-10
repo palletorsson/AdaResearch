@@ -25,6 +25,9 @@ var pendulum_length = 3.0
 var pendulum_damping = 0.98
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_connect_ui()
 	_initialize_constraints()
 

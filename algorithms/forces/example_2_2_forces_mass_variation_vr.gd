@@ -32,6 +32,9 @@ var drag_controller: ParameterController3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	create_ui()
 	spawn_movers()
 	setup_auto_reset()

@@ -7,6 +7,7 @@ class_name GridUtilitiesComponent
 
 # Path constants - CORRECTED TO MATCH ACTUAL PROJECT STRUCTURE
 const MAP_OBJECTS_PATH = "res://commons/scenes/mapobjects/"
+const DEFAULT_TEXT_DISPLAY := "A POINT IS ENTROPY THAT HAS COOLED INTO MEMORY."
 
 # References
 var parent_node: Node3D
@@ -175,7 +176,8 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 # Add this to GridUtilitiesComponent.gd in the _apply_utility_parameters method
 
 func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
-	match utility_type:
+	var normalized_type = utility_type.to_lower()
+	match normalized_type:
 		"t":  # Teleport
 			var destination = ""
 			var height_offset = 0.0
@@ -313,6 +315,31 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						if mesh_node and mesh_node is Node3D:
 							mesh_node.visible = not hide_flag
 				print("GridUtilitiesComponent: Set extra light fixture hidden=%s" % str(hide_flag))
+		"3t":  # Text display
+			var text_value = _build_text_display_message(parameters)
+			utility_object.set_meta("display_text", text_value)
+			_apply_text_display_text(utility_object, text_value)
+			print("GridUtilitiesComponent: Set 3t text to '%s'" % text_value)
+		"sr":  # Speed reader
+			var sr_key = ""
+			if parameters.size() > 0:
+				sr_key = parameters[0].strip_edges().to_lower()
+			var sr_speed = -1.0
+			var sr_loop = false
+			for i in range(1, parameters.size()):
+				var raw = str(parameters[i]).strip_edges()
+				var lowered = raw.to_lower()
+				if raw.is_valid_float():
+					sr_speed = float(raw)
+				elif lowered in ["loop", "true", "1"]:
+					sr_loop = true
+			if sr_key.is_empty():
+				sr_key = "point_axioms"
+			if utility_object.has_method("configure_speed_reader"):
+				utility_object.configure_speed_reader(sr_key, sr_speed, sr_loop)
+			else:
+				utility_object.set_meta("speed_reader_key", sr_key)
+			print("GridUtilitiesComponent: Configured speed reader '%s' (seconds=%.2f, loop=%s)" % [sr_key, sr_speed, str(sr_loop)])
 		"an":  # Annotation/Info Board
 			print("GridUtilitiesComponent: Info board will load map data automatically")
 		"tc":  # Transport Cube
@@ -484,6 +511,40 @@ func _find_mesh_instance_recursive(node: Node) -> MeshInstance3D:
 	return null
 
 # Apply utility definition properties from JSON
+# Build a display string for 3t text utilities
+func _build_text_display_message(parameters: Array) -> String:
+	if parameters.is_empty():
+		return DEFAULT_TEXT_DISPLAY
+
+	var cleaned_parts: Array[String] = []
+	for param in parameters:
+		var cleaned = str(param).strip_edges()
+		if cleaned.is_empty():
+			continue
+		cleaned_parts.append(cleaned)
+
+	var combined = ":".join(cleaned_parts) if cleaned_parts.size() > 0 else ""
+	combined = combined.replace("_", " ").strip_edges()
+	if combined.is_empty():
+		return DEFAULT_TEXT_DISPLAY
+	return combined
+
+# Apply a text value to the TextMesh used by 3t utilities
+func _apply_text_display_text(utility_object: Node3D, text_value: String):
+	var mesh_instance = _find_mesh_instance_in_utility(utility_object)
+	if not mesh_instance:
+		print("GridUtilitiesComponent: WARNING - 3t utility has no MeshInstance3D child")
+		return
+
+	var mesh_resource = mesh_instance.mesh
+	if mesh_resource and mesh_resource is TextMesh:
+		var text_mesh: TextMesh = mesh_resource.duplicate()
+		text_mesh.text = text_value
+		mesh_instance.mesh = text_mesh
+		print("GridUtilitiesComponent: Updated TextMesh content to '%s'" % text_value)
+	else:
+		print("GridUtilitiesComponent: WARNING - 3t utility missing TextMesh resource")
+
 func _apply_utility_definition(utility_object: Node3D, utility_type: String, definition: Dictionary):
 	if definition.is_empty():
 		return

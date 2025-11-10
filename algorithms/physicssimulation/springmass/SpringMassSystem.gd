@@ -19,6 +19,9 @@ var frame_counter = 0
 var performance_timer = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	print("Creating VR-optimized spring-mass system...")
 	_create_mass_point_grid()
 	_create_spring_connections()

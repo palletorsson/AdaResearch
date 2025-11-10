@@ -20,6 +20,9 @@ var time: float = 0.0
 var spawn_timer: float = 0.0
 
 func _ready() -> void:
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	randomize()
 	fluid_drag_center = $FluidDragField/FluidDragCenter
 	create_particles()

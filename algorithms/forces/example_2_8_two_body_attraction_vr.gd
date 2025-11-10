@@ -30,6 +30,9 @@ var arrow_b: Node3D
 var auto_reset_timer: Timer
 
 func _ready() -> void:
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	create_ui()
 	spawn_bodies()
 	setup_auto_reset()

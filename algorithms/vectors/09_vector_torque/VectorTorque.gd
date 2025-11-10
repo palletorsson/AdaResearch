@@ -8,6 +8,7 @@ var info_label: Label3D
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(3.5)
 	radius_vector = spawn_vector(Vector3.ZERO, Vector3(1.4, 0.8, 0.0), Color(1.0, 0.6, 0.2, 1.0), "r")
 	force_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.4, 1.0), Color(0.2, 0.8, 1.0, 1.0), "F")
@@ -21,7 +22,8 @@ func _ready():
 func _process(_delta):
 	var r = get_vector(radius_vector)
 	var f = get_vector(force_vector)
-	force_vector.global_position = get_arrow_end_position(radius_vector)
+	var r_end = to_local(get_arrow_end_position(radius_vector))
+	force_vector.position = r_end
 	var torque = r.cross(f)
 	update_vector(torque_vector, torque)
 	_update_moment_arm(r, f)
@@ -33,7 +35,7 @@ func _update_moment_arm(r: Vector3, f: Vector3):
 		return
 	var f_dir = f.normalized()
 	var perpendicular = r - f_dir * r.dot(f_dir)
-	moment_arm_vector.global_position = Vector3.ZERO
+	moment_arm_vector.position = Vector3.ZERO
 	update_vector(moment_arm_vector, perpendicular)
 
 func _update_info(r: Vector3, f: Vector3, torque: Vector3):

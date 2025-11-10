@@ -13,6 +13,9 @@ var gravity = Vector3(0, -9.8, 0)
 var damping = 0.98
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_initialize_particles()
 	_connect_ui()
 

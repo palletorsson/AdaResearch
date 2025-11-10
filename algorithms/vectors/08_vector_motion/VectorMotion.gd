@@ -9,24 +9,26 @@ var accumulator := 0.0
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.0)
 	ball = create_ball(Vector3(0.0, 1.0, 0.0), 0.2, 1.0, Color(0.9, 0.4, 0.7, 1.0))
 	ball.linear_damp = 0.02
 	ball.angular_damp = 0.05
-	acceleration_vector = spawn_vector(ball.global_position, Vector3(1.5, 0.5, 0.0), Color(1.0, 0.6, 0.3, 1.0), "Acceleration")
-	velocity_vector = spawn_vector(ball.global_position, Vector3.ZERO, Color(0.3, 0.9, 1.0, 1.0), "Velocity", false)
-	position_vector = spawn_vector(Vector3.ZERO, ball.global_position, Color(0.6, 1.0, 0.6, 1.0), "Position", false)
+	acceleration_vector = spawn_vector(Vector3.ZERO, Vector3(1.5, 0.5, 0.0), Color(1.0, 0.6, 0.3, 1.0), "Acceleration")
+	velocity_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.3, 0.9, 1.0, 1.0), "Velocity", false)
+	position_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 1.0, 0.6, 1.0), "Position", false)
 	info_label = create_info_panel("Motion Vectors", Vector3(-3.2, 2.4, 0.0))
 
 func _physics_process(delta):
 	if not ball:
 		return
-	acceleration_vector.position = ball.global_position
-	velocity_vector.position = ball.global_position
+	var ball_local_pos = to_local(ball.global_position)
+	acceleration_vector.position = ball_local_pos
+	velocity_vector.position = ball_local_pos
 	var accel = get_vector(acceleration_vector)
 	ball.apply_central_force(accel * ball.mass)
 	update_vector(velocity_vector, ball.linear_velocity)
-	update_vector(position_vector, ball.global_position)
+	update_vector(position_vector, ball_local_pos)
 	accumulator += delta
 	if accumulator > 0.1:
 		_update_info(accel)
@@ -44,9 +46,10 @@ func _reset_ball():
 	ball.global_position = Vector3(0.0, 1.0, 0.0)
 	ball.linear_velocity = Vector3.ZERO
 	ball.angular_velocity = Vector3.ZERO
-	acceleration_vector.position = ball.global_position
-	velocity_vector.position = ball.global_position
-	update_vector(position_vector, ball.global_position)
+	var ball_local_pos = to_local(ball.global_position)
+	acceleration_vector.position = ball_local_pos
+	velocity_vector.position = ball_local_pos
+	update_vector(position_vector, ball_local_pos)
 
 func _update_info(accel: Vector3):
 	var builder := []

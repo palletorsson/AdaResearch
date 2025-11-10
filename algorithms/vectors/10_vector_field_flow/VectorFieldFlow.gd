@@ -12,6 +12,7 @@ var elapsed := 0.0
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.5)
 	_create_field_vectors()
 	particle = _create_particle_marker()
@@ -41,8 +42,8 @@ func _create_field_vectors():
 
 func _update_field_vectors():
 	for arrow in field_vectors:
-		var world_origin = arrow.global_position
-		var value = _field_value(world_origin)
+		var local_origin = arrow.position
+		var value = _field_value(local_origin)
 		update_vector(arrow, value)
 
 func _field_value(position: Vector3) -> Vector3:
@@ -77,7 +78,7 @@ func _update_particle(delta: float):
 func reposition_particle(position: Vector3):
 	particle_position = position
 	if particle:
-		particle.global_position = particle_position
+		particle.position = particle_position
 
 func restart_particle():
 	particle_velocity = Vector3.ZERO

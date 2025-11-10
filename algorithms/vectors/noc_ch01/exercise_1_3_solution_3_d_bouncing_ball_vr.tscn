@@ -1,6 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://o1b5nynvbwgw"]
 
-[ext_resource type="Script" path="res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.gd" id="1_g7mlm"]
+[ext_resource type="Script" uid="uid://kvjf76qna5rd" path="res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.gd" id="1_g7mlm"]
 
 [node name="Exercise13Solution3DBouncingBallVR" type="Node3D"]
 script = ExtResource("1_g7mlm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.3695068)

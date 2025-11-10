@@ -12,6 +12,9 @@ var spatial_grid_size = 2.0
 var spatial_grid = {}
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_initialize_objects()
 	_create_spatial_grid()
 	_connect_ui()

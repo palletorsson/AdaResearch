@@ -39,7 +39,7 @@ func get_position_text() -> String:
 		pos = grab_sphere.global_position
 
 	# Format numbers to always show exactly one decimal place
-	return "x:%.1f y:%.1f z:%.1f" % [pos.x, pos.y, pos.z]
+	return "local position: (%.1f, %.1f, %.1f)" % [pos.x, pos.y, pos.z]
 
 func _process(delta):
 	# Update position text continuously

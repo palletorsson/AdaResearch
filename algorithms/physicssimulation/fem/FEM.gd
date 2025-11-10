@@ -16,12 +16,17 @@ var time: float = 0.0
 var force_oscillation: float = 0.0
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	beam_mesh = $DeformableObjects/Beam/BeamMesh
 	membrane_mesh = $DeformableObjects/Membrane/MembraneMesh
 	sphere_mesh = $DeformableObjects/Sphere/SphereMesh
-	
+
 	create_fem_grids()
 	create_grid_visualization()
+
+	print("FEM Simulation - VR Ready!")
 
 func create_fem_grids():
 	# Create beam nodes (vertical grid)
@@ -78,9 +83,10 @@ func create_grid_visualization():
 			$GridLines/MembraneGrid.add_child(v_line)
 	
 	# Create sphere grid lines (simplified)
-	for i in range(0, sphere_nodes.size, grid_resolution + 1):
-		var x = i + grid_resolution 
-		if x < sphere_nodes.size:
+	var step: int = grid_resolution + 1
+	for i in range(0, sphere_nodes.size(), step):
+		var x: int = i + grid_resolution
+		if x < sphere_nodes.size():
 			var line = create_grid_line(Color.MAGENTA, 0.01)
 			line.position = (sphere_nodes[i] + sphere_nodes[i + grid_resolution]) / 2
 			line.look_at(sphere_nodes[i + grid_resolution])

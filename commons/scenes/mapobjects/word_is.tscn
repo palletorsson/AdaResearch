@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://gypv3hx6iq03"]
+
+[sub_resource type="TextMesh" id="TextMesh_hglen"]
+text = "A point is entropy that has cooled into memory."
+uppercase = true
+
+[node name="WordIs" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3, 0)
+mesh = SubResource("TextMesh_hglen")

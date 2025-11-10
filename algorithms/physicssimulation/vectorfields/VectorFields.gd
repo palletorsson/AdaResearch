@@ -14,6 +14,9 @@ var trail_points = []
 var max_trail_points = 100
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_create_grid()
 	_create_vector_field()
 	_connect_ui()

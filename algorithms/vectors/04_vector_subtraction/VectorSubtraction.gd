@@ -9,6 +9,7 @@ var info_label: Label3D
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(3.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.7, -0.4), Color(0.9, 0.5, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.3, 1.1, 0.8), Color(0.2, 0.6, 1.0, 1.0), "Vector b")
@@ -24,7 +25,7 @@ func _process(_delta):
 	var diff = a - b
 	update_vector(difference_vector, diff)
 	update_vector(negative_b, minus_b)
-	var a_tip = get_arrow_end_position(vector_a)
+	var a_tip = to_local(get_arrow_end_position(vector_a))
 	tip_tail_neg_b.position = a_tip
 	update_vector(tip_tail_neg_b, minus_b)
 	_update_info(a, b, diff, minus_b)

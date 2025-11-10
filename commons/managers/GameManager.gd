@@ -24,7 +24,7 @@ var sfx_volume: float = 0.7
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
 
-@export var debug = false
+@export var debug = true
 # Signals
 signal score_updated(new_score: int)
 signal pickup_collected(pickup_position: Vector3)

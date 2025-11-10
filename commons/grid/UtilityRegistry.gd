@@ -56,6 +56,27 @@ const UTILITY_TYPES = {
 	"description": "Displays current map name and description",
 	"supports_parameters": true  # display_mode, text_scale
 	},
+	"3t": {
+		"name": "text_display",
+		"file": "word_is.tscn",
+		"category": "ui",
+		"description": "Displays custom short text using a TextMesh",
+		"supports_parameters": true  # message string (underscores become spaces)
+	},
+	"sr": {
+		"name": "speed_reader",
+		"file": "speed_text.tscn",
+		"category": "ui",
+		"description": "Shows tutorial text one line at a time (3D speed read)",
+		"supports_parameters": true  # key[:seconds[:loop]]
+	},
+	"Sr": {
+		"name": "speed_reader (legacy)",
+		"file": "speed_text.tscn",
+		"category": "ui",
+		"description": "Deprecated alias for 'sr' (use lowercase)",
+		"supports_parameters": true
+	},
 	"r": {
 	"name": "reset_cube", 
 	"file": "reset_cube.tscn", 

@@ -79,6 +79,25 @@
 			"description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
 			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
 		},		
+		"draw_dot": {
+			"name": "draw_dot",
+			"lookup_name": "draw_dot",
+			"description": "draw_dot.",
+			"scene": "res://commons/primitives/point/draw_dot.tscn",
+		},	
+		"point_is": {
+			"name": "point_is",
+			"lookup_name": "point_is",
+			"description": "point_is.",
+			"scene": "res://commons/text/point_is.tscn",
+		},
+				"dome": {
+			"name": "dome",
+			"lookup_name": "dome",
+			"description": "dome.",
+			"scene": "res://commons/primitives/booleans/dome.tscn",
+		},
+		
 		"pythagorean_proof": {
 			"name": "pythagorean_proof",
 			"lookup_name": "pythagorean_proof",
@@ -481,6 +500,7 @@
 			"description": "Triangular wedge primitive with grid shader and convex collision.",
 			"scene": "res://commons/primitives/prismblock/prismblock.tscn",
 		},	
+			
 		 
 		"truncatedtetrahedron": {
 			"name": "truncatedtetrahedron",
@@ -837,7 +857,14 @@
 			"description": "pheromone_terrain",
 			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
 	
-		},		
+		},	
+		"randomup": {
+			"name": "randomup",
+			"lookup_name": "randomup",
+			"description": "randomup",
+			"scene": "res://algorithms/randomness/randomup/randomup.tscn",
+	
+		},				
 		
 		"randompoints": {
 			"name": "randompoints",

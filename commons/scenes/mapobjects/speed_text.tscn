@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://u82t3e5ax6hp"]
+
+[ext_resource type="Script" uid="uid://8esxxnvj1cv6" path="res://commons/scenes/mapobjects/speed_text.gd" id="1_c3g54"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnyl2"]
+transparency = 1
+albedo_color = Color(1, 0.14901961, 1, 0.0627451)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7ah8m"]
+material = SubResource("StandardMaterial3D_jnyl2")
+size = Vector3(1.67, 0.4, 0.1)
+
+[node name="speedText" type="Node3D"]
+script = ExtResource("1_c3g54")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7ah8m")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3D"]
+text = "speed text speed text speed text speed text"
+font_size = 12
+outline_size = 6
+autowrap_mode = 3
+width = 200.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.4220211)

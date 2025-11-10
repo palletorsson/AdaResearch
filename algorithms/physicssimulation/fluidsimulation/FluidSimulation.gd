@@ -23,6 +23,9 @@ var pressure_kernel_constant = 45.0 / (PI * pow(smoothing_length, 6))
 var viscosity_kernel_constant = 45.0 / (PI * pow(smoothing_length, 6))
 
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	_create_fluid_particles()
 	_connect_ui()
 

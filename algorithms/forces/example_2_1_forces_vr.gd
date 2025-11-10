@@ -24,6 +24,8 @@ var wind_enabled: bool = true
 var info_label: Label3D
 
 func _ready():
+	# Scale down for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
 
 	# Create UI
 	create_info_label()

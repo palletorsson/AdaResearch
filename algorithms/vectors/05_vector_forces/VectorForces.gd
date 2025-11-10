@@ -11,20 +11,22 @@ var accumulator := 0.0
 
 func _ready():
 	super._ready()
+	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.0)
 	_create_ground()
 	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, 1.2, Color(0.9, 0.5, 1.0, 1.0))
-	gravity_vector = spawn_vector(ball.global_position, Vector3(0.0, -6.0, 0.0), Color(0.4, 0.8, 1.0, 1.0), "Gravity")
-	thrust_vector = spawn_vector(ball.global_position, Vector3(2.5, 0.0, 0.0), Color(1.0, 0.6, 0.4, 1.0), "Thrust")
-	drag_vector = spawn_vector(ball.global_position, Vector3.ZERO, Color(0.6, 0.7, 1.0, 0.7), "Drag", false)
+	gravity_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, -6.0, 0.0), Color(0.4, 0.8, 1.0, 1.0), "Gravity")
+	thrust_vector = spawn_vector(Vector3.ZERO, Vector3(2.5, 0.0, 0.0), Color(1.0, 0.6, 0.4, 1.0), "Thrust")
+	drag_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 0.7, 1.0, 0.7), "Drag", false)
 	info_label = create_info_panel("Forces", Vector3(-3.0, 2.4, 0.0))
 
 func _physics_process(delta):
 	if not ball:
 		return
-	gravity_vector.position = ball.global_position
-	thrust_vector.position = ball.global_position
-	drag_vector.position = ball.global_position
+	var ball_local_pos = to_local(ball.global_position)
+	gravity_vector.position = ball_local_pos
+	thrust_vector.position = ball_local_pos
+	drag_vector.position = ball_local_pos
 	var gravity_force = get_vector(gravity_vector) * ball.mass
 	var thrust_force = get_vector(thrust_vector)
 	var drag_force = -ball.linear_velocity * DRAG_COEFFICIENT
@@ -48,9 +50,10 @@ func _reset_ball():
 	ball.global_position = Vector3(0.0, 1.2, 0.0)
 	ball.linear_velocity = Vector3.ZERO
 	ball.angular_velocity = Vector3.ZERO
-	gravity_vector.position = ball.global_position
-	thrust_vector.position = ball.global_position
-	drag_vector.position = ball.global_position
+	var ball_local_pos = to_local(ball.global_position)
+	gravity_vector.position = ball_local_pos
+	thrust_vector.position = ball_local_pos
+	drag_vector.position = ball_local_pos
 
 func _update_info(gravity_force: Vector3, thrust_force: Vector3, drag_force: Vector3, net_force: Vector3):
 	var builder := []

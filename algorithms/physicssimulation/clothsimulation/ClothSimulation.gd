@@ -102,11 +102,25 @@ var collision_radii: Array[float] = []
 
 var time: float = 0.0
 
+# VR interaction
+var left_controller: XRController3D
+var right_controller: XRController3D
+var left_grab_active: bool = false
+var right_grab_active: bool = false
+var grabbed_nodes: Array[ClothNode] = []
+var grab_radius: float = 0.15
+
 func _ready():
+	# Scale for VR reachability
+	scale = Vector3(0.8, 0.8, 0.8)
+
 	# Initialize cloth pieces
 	hanging_cloth = ClothPiece.new(Vector2(1.5, 1.5), Vector3(-3, 0, 0), cloth_resolution)
 	floating_cloth = ClothPiece.new(Vector2(1.2, 1.2), Vector3(0, 0, 0), cloth_resolution)
 	draped_cloth = ClothPiece.new(Vector2(1.0, 1.0), Vector3(3, 0, 0), cloth_resolution)
+
+	# Setup VR controllers
+	setup_vr_controllers()
 	
 	# Add cloth nodes to scene
 	for node in hanging_cloth.nodes:
@@ -135,6 +149,8 @@ func _ready():
 	
 	create_wind_streams()
 	create_spring_visualizations()
+
+	print("Interactive Cloth Simulation - VR Ready!")
 
 func create_wind_streams():
 	# Create wind stream particles for each wind source
@@ -181,9 +197,43 @@ func create_spring_line(color: Color, thickness: float) -> CSGCylinder3D:
 	line.material.emission_energy_multiplier = 0.2
 	return line
 
+func setup_vr_controllers():
+	# Try to find VR controllers in the scene
+	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
+	if xr_origin:
+		left_controller = xr_origin.get_node_or_null("LeftController")
+		right_controller = xr_origin.get_node_or_null("RightController")
+
+		if left_controller:
+			left_controller.button_pressed.connect(_on_left_button_pressed)
+			left_controller.button_released.connect(_on_left_button_released)
+
+		if right_controller:
+			right_controller.button_pressed.connect(_on_right_button_pressed)
+			right_controller.button_released.connect(_on_right_button_released)
+
+func _on_left_button_pressed(button_name: String):
+	if button_name == "trigger_click" or button_name == "grip_click":
+		left_grab_active = true
+
+func _on_left_button_released(button_name: String):
+	if button_name == "trigger_click" or button_name == "grip_click":
+		left_grab_active = false
+
+func _on_right_button_pressed(button_name: String):
+	if button_name == "trigger_click" or button_name == "grip_click":
+		right_grab_active = true
+
+func _on_right_button_released(button_name: String):
+	if button_name == "trigger_click" or button_name == "grip_click":
+		right_grab_active = false
+
 func _process(delta):
 	time += delta
-	
+
+	# Update VR grabbing
+	update_vr_grabbing()
+
 	# Apply forces to all cloth pieces
 	apply_forces(hanging_cloth)
 	apply_forces(floating_cloth)
@@ -209,6 +259,33 @@ func _process(delta):
 	
 	# Update cloth meshes
 	update_cloth_meshes()
+
+func update_vr_grabbing():
+	# Update left controller grabbing
+	if left_grab_active and left_controller:
+		var controller_pos = to_local(left_controller.global_position)
+		grab_nearby_cloth_nodes(controller_pos)
+
+	# Update right controller grabbing
+	if right_grab_active and right_controller:
+		var controller_pos = to_local(right_controller.global_position)
+		grab_nearby_cloth_nodes(controller_pos)
+
+func grab_nearby_cloth_nodes(controller_pos: Vector3):
+	# Grab nodes from all cloth pieces
+	var all_cloths = [hanging_cloth, floating_cloth, draped_cloth]
+
+	for cloth in all_cloths:
+		for node in cloth.nodes:
+			if node.is_fixed:
+				continue
+
+			var distance = (node.position - controller_pos).length()
+			if distance < grab_radius:
+				# Pull node towards controller
+				var pull_direction = (controller_pos - node.position).normalized()
+				node.apply_force(pull_direction * 50.0)
+				node.velocity *= 0.8  # Dampen grabbed nodes
 
 func apply_forces(cloth: ClothPiece):
 	for node in cloth.nodes:

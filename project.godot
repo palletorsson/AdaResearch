@@ -27,7 +27,7 @@ SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/tutorial_text_editor/plugin.cfg")
 
 [filesystem]
 
@@ -139,4 +139,5 @@ limits/time/time_rollover_secs=30.0
 openxr/enabled=true
 openxr/foveation_level=3
 openxr/foveation_dynamic=true
+openxr/extensions/debug_utils=0
 shaders/enabled=true
