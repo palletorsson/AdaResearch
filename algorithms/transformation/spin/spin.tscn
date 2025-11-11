@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://di5hsfpd4u2b2"]
+
+[ext_resource type="Script" uid="uid://c8x41dl786q5p" path="res://algorithms/transformation/spin/spin.gd" id="1_7qw3k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_elrhr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x2mcj"]
+material = SubResource("StandardMaterial3D_elrhr")
+size = Vector3(6, 0.25, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o74cd"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="spin" type="Node3D"]
+script = ExtResource("1_7qw3k")
+z_rotation_degrees = -15.0
+
+[node name="background" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("BoxMesh_x2mcj")
+
+[node name="copyandrotate" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -2.4097714, 3, 0.05)
+mesh = SubResource("BoxMesh_o74cd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9286348, 0.37099507, 0, -0.37099507, 0.9286348, 0, 2.8006823, 3.3930435)

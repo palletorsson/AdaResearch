@@ -1,0 +1,86 @@
+[gd_scene load_steps=18 format=3 uid="uid://dw5h8kakx4pn7"]
+
+[ext_resource type="Script" uid="uid://byxhehchqq886" path="res://algorithms/transformation/scaleme/scaleme.gd" id="1_s9k2p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbn1j"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8si7v"]
+material = SubResource("StandardMaterial3D_tbn1j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxxd6"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ogoji"]
+material = SubResource("StandardMaterial3D_fxxd6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bctkn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yo8pq"]
+material = SubResource("StandardMaterial3D_bctkn")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6n15"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_efgb6"]
+material = SubResource("StandardMaterial3D_o6n15")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a4vo"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwhi0"]
+material = SubResource("StandardMaterial3D_1a4vo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3udy6"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_plson"]
+material = SubResource("StandardMaterial3D_3udy6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sd3nt"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hqnrs"]
+material = SubResource("StandardMaterial3D_sd3nt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckdjc"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b4cnu"]
+material = SubResource("StandardMaterial3D_ckdjc")
+
+[node name="ScaleMe" type="Node3D"]
+script = ExtResource("1_s9k2p")
+
+[node name="Cube_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_8si7v")
+
+[node name="Cube_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_ogoji")
+
+[node name="Cube_2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1, 0)
+mesh = SubResource("BoxMesh_yo8pq")
+
+[node name="Cube_3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 2.2, 0)
+mesh = SubResource("BoxMesh_efgb6")
+
+[node name="Cube_4" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.2, 0, 0, 0, 3.2, 0, 0, 0, 3.2, 0, 4.6, 0)
+mesh = SubResource("BoxMesh_cwhi0")
+
+[node name="Cube_5" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.4, 0, 0, 0, 6.4, 0, 0, 0, 6.4, 0, 9.4, 0)
+mesh = SubResource("BoxMesh_plson")
+
+[node name="Cube_6" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.8, 0, 0, 0, 12.8, 0, 0, 0, 12.8, 0, 19, 0)
+mesh = SubResource("BoxMesh_hqnrs")
+
+[node name="Cube_7" type="MeshInstance3D" parent="."]
+transform = Transform3D(25.6, 0, 0, 0, 25.6, 0, 0, 0, 25.6, 0, 38.2, 0)
+mesh = SubResource("BoxMesh_b4cnu")

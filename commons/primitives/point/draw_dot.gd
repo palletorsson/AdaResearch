@@ -7,7 +7,7 @@ extends Node3D
 @export var min_segment_distance: float = 0.01
 @export var record_only_when_grabbed: bool = true
 @export var auto_clear_on_drop: bool = false
-@export var reference_frame_position: Vector3 = Vector3(0, 0, 1.0)
+@export var reference_frame_position: Vector3 = Vector3(0, 0, 0.2)
 @export var reference_frame_size: float = 0.5
 @export var show_reference_frame: bool = true
 

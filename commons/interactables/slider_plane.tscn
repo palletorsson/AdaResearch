@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://btb5pw854d8m6"]
+
+[ext_resource type="Script" uid="uid://dxkr3co8mq0s7" path="res://commons/interactables/slider_plane.gd" id="2"]
+[ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
+[ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.5229553, 0.18814698, 0.6731613)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.02, 0.4, 0.4)
+
+[sub_resource type="SphereShape3D" id="4"]
+radius = 0.03
+
+[sub_resource type="BoxMesh" id="5"]
+size = Vector3(0.02, 0.4, 0.4)
+
+[sub_resource type="SphereMesh" id="6"]
+radius = 0.02
+height = 0.04
+radial_segments = 16
+rings = 8
+
+[sub_resource type="SphereShape3D" id="7"]
+margin = 0.12
+radius = 0.025
+
+[node name="SliderPlane" type="Node3D"]
+script = ExtResource("5_wmxoe")
+
+[node name="Frame" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013519451, -0.084185794, -0.03240888)
+shape = SubResource("1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0010264814, -0.08538824, -0.030651605)
+size = Vector3(0.5, 0.67, 0.159)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Frame/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038146973, -0.07417028, 0.07664114)
+operation = 2
+size = Vector3(0.455, 0.45, 0.05)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Frame/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0011633188, 0.24269898, 0.07664118)
+operation = 2
+size = Vector3(0.455, 0.098, 0.03)
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(0.2, 0, 0, 0, 0.012300297, 0.19962141, 0, -0.19962141, 0.012300297, 0.0034422502, -0.0068787932, -0.27352613)
+pixel_size = 0.01
+text = "Y: 0.00 Z: 0.00"
+
+[node name="SliderOrigin" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+script = ExtResource("2")
+
+[node name="SliderBody" type="StaticBody3D" parent="SliderOrigin/InteractableSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7632977e-10, -0.01547262, 0.15759909)
+
+[node name="PlaneCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
+visible = false
+shape = SubResource("3")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.004733436)
+shape = SubResource("4")
+
+[node name="PlaneMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
+visible = false
+mesh = SubResource("5")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.004733436)
+mesh = SubResource("6")
+
+[node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("4")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
+shape = SubResource("7")
+
+[node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]
+
+[node name="GrabPointRedirectRight" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]

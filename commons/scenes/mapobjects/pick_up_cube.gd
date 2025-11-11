@@ -191,7 +191,7 @@ static func set_shared_mario_parameters(start_freq: float, end_freq: float, deca
 	shared_decay_rate = decay
 	shared_sound_duration = duration
 	use_shared_parameters = true
-	print("PickupCube: Shared Mario sound updated - start:%.1f Hz, end:%.1f Hz, decay:%.2f" % [start_freq, end_freq, decay])
+	#print("PickupCube: Shared Mario sound updated - start:%.1f Hz, end:%.1f Hz, decay:%.2f" % [start_freq, end_freq, decay])
 
 static func get_shared_mario_parameters() -> Dictionary:
 	"""Get the current shared Mario sound parameters"""

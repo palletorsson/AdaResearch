@@ -156,7 +156,7 @@ func _on_sound_values_changed(x_val: float, y_val: float, z_val: float) -> void:
 			preview_mat.albedo_color = color
 			preview_mat.emission = color * 0.5
 
-	print("MarioSoundController: freq_start=%.1f Hz, freq_end=%.1f Hz, decay=%.2f" % [freq_start, freq_end, decay_rate])
+	#print("MarioSoundController: freq_start=%.1f Hz, freq_end=%.1f Hz, decay=%.2f" % [freq_start, freq_end, decay_rate])
 
 func play_sound() -> void:
 	"""Generate and play the Mario-style sound with current parameters"""
@@ -242,7 +242,7 @@ func set_save_interval(interval: float) -> void:
 	save_interval = clamp(interval, 0.5, 60.0)
 	if auto_save_timer:
 		auto_save_timer.wait_time = save_interval
-	print("MarioSoundController: Save interval = %.2f seconds" % save_interval)
+	#print("MarioSoundController: Save interval = %.2f seconds" % save_interval)
 
 func save_now() -> void:
 	"""Manually trigger save to pickup cubes"""

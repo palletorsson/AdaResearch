@@ -23,6 +23,13 @@
 			"description": "origin",
 			"scene": "res://commons/primitives/origin/origin.tscn",
 		},
+		"arrow": {
+			"name": "arrow",
+			"lookup_name": "arrow",
+			"description": "arrow",
+			"scene": "res://commons/primitives/arrow/arrow.tscn",
+		},
+		
 		"coordinates": {
 			"name": "coordinates",
 			"lookup_name": "coordinates",
@@ -333,6 +340,12 @@
 			"description": "Grid-shaded plane mesh (0.8m square) used for flat surface demonstrations.",
 			"scene": "res://commons/primitives/plane/plane.tscn",
 		},
+			"interactable_demo": {
+			"name": "interactable_demo",
+			"lookup_name": "interactable_demo",
+			"description": "interactable_demo.",
+			"scene": "res://commons/interactables/interactable_demo.tscn",
+		},
 		
 		
 		"cube": {
@@ -610,6 +623,13 @@
 			"description": "A mysterious rotating cube that triggers the first learning sequence",
 			"scene": "res://commons/primitives/cubes/animation/rotating_cube.tscn",
 		},
+		"spin": {
+			"name": "spin",
+			"lookup_name": "spin",
+			"description": "spin",
+			"scene": "res://algorithms/transformation/spin/spin.tscn",
+		},
+		
 		"xyz_coordinates": {
 			"name": "XYZ coordinates",
 			"lookup_name": "xyz_coordinates",
@@ -702,6 +722,26 @@
 		  "description": "A futuristic panel wall with procedural greebles and atmospheric lighting",
 		  "scene": "res://commons/primitives/panels/scifi_panel_wall.tscn",
 		},
+		"floor_tiles": {
+		  "lookup_name": "floor_tiles",
+		  "name": "floor_tiles",
+		  "description": "floor_tiles",
+		  "scene": "res://algorithms/transformation/floor_tiles.tscn",
+		},
+		"carousel_cake": {
+		  "lookup_name": "carousel_cake",
+		  "name": "carousel_cake",
+		  "description": "carousel_cake",
+		  "scene": "res://algorithms/transformation/carousel_cake/carousel_cake.tscn",
+		},
+		"scaleme": {
+		  "lookup_name": "scaleme",
+		  "name": "scaleme",
+		  "description": "scaleme",
+		  "scene": "res://algorithms/transformation/scaleme/scaleme.tscn",
+		},
+		
+		
 		"level_entrance": {
 		  "lookup_name": "level_entrance",
 		  "name": "Level Entrance",
@@ -1166,6 +1206,12 @@
 			"interaction": "touch_to_activate",
 			"sequence": "randomness_exploration",
 			"artifact_type": "interactive_algorithm"
+		},
+		"vector_field": {
+		  "lookup_name": "vector_field",
+		  "name": "vector_field",
+		  "description": "vector_field",
+		  "scene": "res://algorithms/transformation/vector_field/vector_field.tscn",
 		},
 		"particle_randomness_perlin": {
 			"name": "Particle Randomness - Perlin",

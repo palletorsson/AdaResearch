@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5qw8h3jyapn2"]
+
+[ext_resource type="Script" uid="uid://cpc7cnthe2wqc" path="res://algorithms/transformation/carousel_cake/carousel_cake.gd" id="1_x7k2m"]
+
+[node name="CarouselCake" type="Node3D"]
+script = ExtResource("1_x7k2m")
+color_a = Color(0.9980827, 0.5375196, 1, 1)
+color_b = Color(0.5399469, 0.8234474, 0.99999994, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96048826, 0.2783207, 0, -0.27832067, 0.96048826, 0, 2.0084488, 7.903329)
