@@ -915,6 +915,26 @@
 			"unlock_requirements": ["proceduralgeneration"],
 			"completion_rewards": ["pathfinding_expert_badge", "optimization_specialist_badge"]
 		},
+		"topology": {
+			"name": "topology",
+			"description": "topology",
+			"difficulty": "intermediate",
+			"estimated_time": "30-35 minutes",
+			"learning_objectives": [
+				"topology",
+				"Pathfinding in complex spaces"
+			],
+			"maps": [
+				"Topology_Riemann_Torus",
+				"Topology_Riemann_PI",
+				"Topology_Gyroid_Cheese",
+				"Topology_Entropy_Morphogenesis",				
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_topology",
+			"unlock_requirements": ["proceduralgeneration"],
+			"completion_rewards": ["pathfinding_expert_badge", "optimization_specialist_badge"]
+		},		
 		"graphtheory": {
 			"name": "Graph Theory",
 			"description": "Explore graph algorithms and network analysis",

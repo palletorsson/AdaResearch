@@ -419,6 +419,7 @@ func _is_sequence_name(name: String) -> bool:
 		"patterngeneration",
 		"proceduralgeneration",
 		"searchpathfinding",
+		"topology",
 		"graphtheory",
 		"computationalgeometry",
 		"machinelearning",

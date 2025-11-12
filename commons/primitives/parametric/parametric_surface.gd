@@ -1,4 +1,4 @@
-﻿extends MeshInstance3D
+extends MeshInstance3D
 
 @export_range(20, 200, 1) var u_resolution: int = 30
 @export_range(20, 200, 1) var v_resolution: int = 30
@@ -10,10 +10,7 @@ func _ready():
 	generate_surface()
 	_update_process_state()
 
-func _notification(what):
-	if what == Object.NOTIFICATION_EDITOR_PROPERTY_CHANGED:
-		generate_surface()
-		_update_process_state()
+
 
 func _update_process_state():
 	set_process(auto_rotate)
@@ -68,4 +65,3 @@ func generate_surface():
 		material.specular = 0.8
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh
-

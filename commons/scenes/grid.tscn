@@ -15,19 +15,15 @@ sky_material = SubResource("ProceduralSkyMaterial_al13m")
 
 [sub_resource type="Environment" id="Environment_q35sa"]
 background_mode = 2
-background_energy_multiplier = 2.74
 sky = SubResource("Sky_al13m")
 ambient_light_source = 3
 ambient_light_color = Color(0.506377, 0.515376, 0.472721, 1)
 tonemap_mode = 3
 tonemap_exposure = 0.16
-ssr_enabled = true
 ssil_enabled = true
-glow_enabled = true
 fog_light_color = Color(0.699675, 0.367402, 0.915893, 1)
 fog_sun_scatter = 0.06
 fog_density = 0.0236
-adjustment_enabled = true
 adjustment_brightness = 0.92
 adjustment_contrast = 1.29
 adjustment_saturation = 1.28

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxynan7p3y2c"]
+
+[ext_resource type="Script" uid="uid://bla40xn7c6h01" path="res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd" id="1"]
+
+[node name="EntropyMorphogenesisVR" type="Node3D"]
+script = ExtResource("1")
+S = null
+base_frequency = null
+high_frequency = null
+base_noise_amp = null
+high_noise_amp = null
+threshold_center = null
+threshold_wobble = null
+box_size = Vector3(5, 10, 5)
+voxel_resolution = null
+base_color = null
+rim_color = null
+metallic = null
+roughness = null
+show_wireframe = null
+regenerate_at_entropy = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 6)

@@ -1266,7 +1266,31 @@
 			"scene": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
 		
 		},
+		"riemann_pi": {
+			"name": "riemann_pi",
+			"lookup_name": "riemann_pi",
+			"description": "riemann_pi",
+			"scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
 		
+		},
+		"riemann_torus": {
+			"name": "riemann_torus",
+			"lookup_name": "riemann_torus",
+			"description": "riemann_torus",
+			"scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
+		},		
+		"gyroid_cheese": {
+			"name": "gyroid_cheese",
+			"lookup_name": "gyroid_cheese",
+			"description": "gyroid_cheese",
+			"scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
+		},		
+				"entropy_morphogenesis": {
+			"name": "entropy_morphogenesis",
+			"lookup_name": "entropy_morphogenesis",
+			"description": "entropy_morphogenesis",
+			"scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+		},	
 
 	"noise_space": {
 		"name": "noise_space",

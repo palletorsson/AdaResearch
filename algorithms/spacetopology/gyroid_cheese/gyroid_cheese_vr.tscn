@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxyg8n7p2x1b"]
+
+[ext_resource type="Script" uid="uid://bb2d2li50hpv" path="res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.gd" id="1"]
+
+[node name="GyroidCheeseVR" type="Node3D"]
+script = ExtResource("1")
+frequency = null
+threshold = null
+noise_amp = null
+noise_freq = null
+box_size = Vector3(16, 16, 16)
+albedo_color = Color(0, 0, 0, 1)
+rim_color = null
+metallic = null
+roughness = null
+generate_collision = null
+show_wireframe = null
+regenerate_mesh = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 6)
