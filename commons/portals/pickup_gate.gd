@@ -73,17 +73,11 @@ func _open_gate() -> void:
 	else:
 		print("  WARNING: collision_body not found!")
 
-	# Fade out and remove blocking mesh
+	# Remove blocking mesh
 	if blocking_mesh and is_instance_valid(blocking_mesh):
-		# Fade out animation
-		var tween = create_tween()
-		tween.tween_property(blocking_mesh, "modulate:a", 0.0, 0.5)
-		tween.finished.connect(func():
-			# Free the blocking mesh after animation
-			if blocking_mesh and is_instance_valid(blocking_mesh):
-				blocking_mesh.queue_free()
-				blocking_mesh = null
-		)
+		# Just remove it directly - no fade animation with shader materials
+		blocking_mesh.queue_free()
+		blocking_mesh = null
 
 	# Update label
 	_update_label()

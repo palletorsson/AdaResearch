@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3v4n5m6l7k8j"]
+
+[ext_resource type="PackedScene" uid="uid://b18v48rxnefil" path="res://commons/primitives/point/grab_sphere_point_with_color.tscn" id="1_scale"]
+[ext_resource type="Script" uid="uid://dy0muq8evgagw" path="res://algorithms/primitives/scaleme/scale_me.gd" id="2_scale"]
+
+[node name="ScaleMe" instance=ExtResource("1_scale")]
+script = ExtResource("2_scale")
+scale_amount = 10.0
+scale_duration = 20.0
+scale_up_time = 2.0
+scale_down_time = 2.0
+world_node_path = NodePath("")
+xr_origin_path = NodePath("../../XROrigin3D")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20428342, 0)
+billboard = 1
+text = "Hold Me"

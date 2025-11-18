@@ -661,7 +661,25 @@
 			"description": "A cube that combines rotation and oscillation with dynamic shader effects",
 			"scene": "res://commons/primitives/cubes/rotation_oscillation_cube.tscn",
 		},
-
+		"boolean_tunnel": {
+			"name": "boolean_tunnel",
+			"lookup_name": "boolean_tunnel",
+			"description": "boolean_tunnel",
+			"scene": "res://algorithms/transformation/booleanTunnel/boolean_tunnel.tscn",
+		},
+		"settings_ui": {
+			"name": "settings_ui",
+			"lookup_name": "settings_ui",
+			"description": "settings_ui",
+			"scene": "res://commons/scenes/main_menu/objects/settings_ui.tscn",
+		},
+		"scale_me": {
+			"name": "scale_me",
+			"lookup_name": "scale_me",
+			"description": "scale_me",
+			"scene": "res://algorithms/primitives/scaleme/scale_me.tscn",
+		},
+		
 		"reset_cube": {
 			"name": "Cube with shader",
 			"lookup_name": "reset_cube",
@@ -1285,7 +1303,7 @@
 			"description": "gyroid_cheese",
 			"scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
 		},		
-				"entropy_morphogenesis": {
+	"entropy_morphogenesis": {
 			"name": "entropy_morphogenesis",
 			"lookup_name": "entropy_morphogenesis",
 			"description": "entropy_morphogenesis",

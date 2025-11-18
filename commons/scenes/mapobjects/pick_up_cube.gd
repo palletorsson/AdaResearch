@@ -151,12 +151,11 @@ func collect() -> void:
 	queue_free()
 
 func _play_collection_effect():
-	"""Simple collection effect - scale up and fade"""
+	"""Simple collection effect - scale up only"""
 	var mesh_instance = find_child("CubeBaseMesh", true, false)
 	if mesh_instance:
 		var tween = create_tween()
-		tween.parallel().tween_property(mesh_instance, "scale", mesh_instance.scale * 1.5, 0.2)
-		tween.parallel().tween_property(mesh_instance, "modulate", Color.TRANSPARENT, 0.2)
+		tween.tween_property(mesh_instance, "scale", mesh_instance.scale * 1.5, 0.2)
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if _is_player(body):

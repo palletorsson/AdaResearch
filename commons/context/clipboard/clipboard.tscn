@@ -24,6 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
 
 [node name="GrabPlane" parent="." instance=ExtResource("3_nuein")]
+transform = Transform3D(1, -9.345284e-09, 3.2866865e-09, 9.842586e-09, 0.89968735, -0.43653488, 1.1225545e-09, 0.43653488, 0.89968735, 0, 0.03304988, 0)
 freeze = true
 
 [node name="clipboard" type="Node3D" parent="GrabPlane"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://4bqaeolnj1lv"]
+
+[ext_resource type="Script" uid="uid://0012mt2k036v" path="res://algorithms/transformation/booleanTunnel/booleanTunnel.gd" id="1_xrtc0"]
+
+[node name="BooleanTunnel" type="Node3D"]
+script = ExtResource("1_xrtc0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9692996, 0.24588262, 0, -0.24588262, 0.9692996, 0, 1.2191784, 4.4870667)
