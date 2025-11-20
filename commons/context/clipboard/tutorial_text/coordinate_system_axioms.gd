@@ -1,6 +1,8 @@
 extends Node
 
-# Auto-generated from infoboard progression
+# Tutorial content file
+# Edit using the Tutorial Text Editor plugin
+
 var text = '''
 [center][b]The Coordinate System[/b][/center]
 [center][i]The Stage of Space[/i][/center]

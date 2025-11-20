@@ -1,6 +1,8 @@
 extends Node
 
-# Auto-generated from infoboard progression
+# Tutorial content file
+# Edit using the Tutorial Text Editor plugin
+
 var text = '''
 [center][b]The Torus[/b][/center]
 [center][i]Donut Topology[/i][/center]

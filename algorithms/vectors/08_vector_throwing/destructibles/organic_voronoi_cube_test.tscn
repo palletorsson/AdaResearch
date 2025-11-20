@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbitc2yo660vp"]
+
+[ext_resource type="Script" uid="uid://btp6f83o5euux" path="res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube.gd" id="1_organic"]
+
+[node name="OrganicVoronoiCubeTest" type="Node3D"]
+
+[node name="OrganicCube" type="Node3D" parent="."]
+script = ExtResource("1_organic")
+explosion_strength = 6.0
+organic_variation = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 6)

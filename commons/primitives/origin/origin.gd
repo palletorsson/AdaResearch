@@ -16,8 +16,7 @@ const ORIGIN_ALIASES := [
 	"The birth of space", 
 	"The coordinate of silence", 
 	"The root of all vectors"
-]
-
+] 
 # The origin - the center of our 3D universe
 var origin = Vector3(0, 0, 0)
 var _origin_label: Label3D

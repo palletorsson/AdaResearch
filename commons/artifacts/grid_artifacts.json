@@ -36,6 +36,12 @@
 			"description": "coordinates",
 			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
 		},	
+		"text_display": {
+			"name": "text_display",
+			"lookup_name": "text_display",
+			"description": "text_display",
+			"scene": "res://commons/context/book/ada_notes.tscn",
+		},			
 	
 	"light_sphere": {
 			"name": "light_sphere",
@@ -4299,7 +4305,14 @@
 		"lookup_name": "destructibles_test_scene",
 		"description": "destructibles_test_scene",
 		"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+	},	
+	"destructible_marching_cube": {
+		"name": "destructible_marching_cube",
+		"lookup_name": "destructible_marching_cube",
+		"description": "destructible_marching_cube",
+		"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube_test.tscn",
 	},		
+	
 	"gravity_gun_test_scene": {
 		"name": "gravity_gun_test_scene",
 		"lookup_name": "gravity_gun_test_scene",

@@ -1,84 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3wn56kir0avm"]
-
-[ext_resource type="Script" uid="uid://ci72klbsn1tur" path="res://adaresearch/Common/Scripts/Objects/rich_text_label.gd" id="1_ta0sx"]
+[gd_scene load_steps=2 format=3 uid="uid://b3wn56kir0avm"]
 
 [sub_resource type="Theme" id="Theme_wtba0"]
-default_font_size = 15
+default_font_size = 32
 
 [node name="Control" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.90300006
+anchor_bottom = 1.1170001
+offset_right = -0.25610352
+offset_bottom = 76.18396
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_right = 1034.0
-offset_bottom = 645.0
+offset_left = 42.0
+offset_right = 914.0
+offset_bottom = 952.0
 theme = SubResource("Theme_wtba0")
 theme_override_colors/default_color = Color(0, 1, 0, 1)
 theme_override_colors/font_outline_color = Color(0.843137, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 0
+theme_override_font_sizes/bold_font_size = 0
 theme_override_font_sizes/bold_italics_font_size = 0
 theme_override_font_sizes/italics_font_size = 0
 theme_override_font_sizes/mono_font_size = 4
-theme_override_font_sizes/normal_font_size = 0
-theme_override_font_sizes/bold_font_size = 0
 bbcode_enabled = true
-text = "text "
-fit_content = true
-scroll_following = true
-script = ExtResource("1_ta0sx")
-init_text = "# Random Walk - local
+text = "[b]The Trace[/b]
+[i]What the Line Refuses to See[/i]
 
-## Overview
-A **random walk** is a mathematical concept that describes a path consisting of a succession of random steps. It is widely used in various fields, including physics, biology, economics, and computer science. In **Ada Research**, the random walk is implemented as an **algorithmic exploration** of emergent patterns in movement and simulation.
+[color=cyan]From the Line:[/color] The Line compressed all movement into two endpoints and one distance. The journey between them—erased. The duration—discarded. The body's wandering—noise.
 
-## How It Works
-A random walk consists of:
-- A starting position (e.g., the center of a grid).
-- A **random direction** chosen at each step.
-- A **step size** that determines how far it moves.
-- **Boundaries** to prevent out-of-bounds movement.
+[b]The Trace refuses this compression.[/b]
 
-Each step follows this simple rule:
-1. Pick a **random direction** (e.g., up, down, left, right).
-2. Move a **fixed step size** in that direction.
-3. If movement exceeds boundaries, **constrain** the position.
+If the Point defined the ideal atom of space—rigid, labeled, and instantly calculated—and if the Line defined the measured relation—efficient, optimal, straight—then the Trace introduces duration and bodily history. It is the first break from the Euclidean norm; an accumulation of vectors created by the player's hand movement, yet one that remains unlabeled and uncounted in the scene's primary index. The Trace is a residue of being-in-motion, a queer excess that resists the algorithm's desire for static, transparent data. 
 
+The Trace is introduced as an unlabeled excess—a continuous expression of the body's duration. However, to tell the tale of the algorithm, we must acknowledge that this Trace is not unlimited and uncontrollable; after all, we are living in a discrete computational world. Every attempt to push against the limits of representation has its own limit.
 
+The code reveals the constraints imposed on the queer entropy by the very system designed to record it:
 
-## **Random Walk in the Ada Research Game**
-In the **Ada Research** game, the random walk is used to:
-- Generate **dynamic movement** for objects.
-- Simulate **procedural textures and noise patterns**.
-- Create **self-organizing behaviors** in environments.
+1.  The Bounded Archive (The Memory Limit)
+The Trace is not an infinite history, but a finite, bounded archive contained within the array _trail_points and managed by trail_max_points: int = 1024.
 
-### **🔹 Godot Implementation**
-This is the core function for the **random walk algorithm** in the game:
-```gdscript
-extends Object
+This maximum capacity forces a constant erasure: as the body moves, the oldest data points are discarded. The system cannot hold all of lived duration. The Trace thus embodies a digital entropy—a necessary loss of history where the past is actively shed to make space for the present. The limit of 1024 points is the algorithmic boundary of memory imposed on embodied time.
 
-class_name RandomWalkHelper
+2.   The Quantified Movement (The Fidelity Limit)
+The continuous motion of the hand is aggressively sampled and filtered by min_segment_distance: float = 0.01.
 
-static func perform_random_walk(img: Image, current_position: Vector2, width: int, height: int, area_size: int):
-    var direction = Vector2(randi_range(-1, 1), randi_range(-1, 1))
-    if direction.length_squared() == 0:
-        return current_position  
+Movement below this threshold is ignored, meaning the most subtle, tentative, or intimate gestures—the small failures and drifts of the hand—are mathematically rendered unreadable by the system. The Trace resists the label, but it is still subject to the algorithm's demand for a minimum geometric magnitude to be recognized. The Trace is only permitted to exist when it is \"loud\" enough to clear the noise threshold.
 
-    current_position += direction * area_size
-    current_position.x = int(current_position.x / area_size) * area_size
-    current_position.y = int(current_position.y / area_size) * area_size
-    current_position.x = clamp(current_position.x, 0, width - area_size)
-    current_position.y = clamp(current_position.y, 0, height - area_size)
+3.  The Reference Frame (The Relational Limit)
+The optional ReferenceFrame (defined by its size and position) explicitly situates the Trace within a predetermined, measurable spatial context.
 
-    for x in range(area_size):
-        for y in range(area_size):
-            var px = int(current_position.x + x)
-            var py = int(current_position.y + y)
-            if px < width and py < height:
-                img.set_pixel(px, py, Color.WHITE if (x + y) % 2 == 0 else Color.PINK)
+Even in its fluid, unindexed state, the Trace must exist in relation to a fixed, objective geometric plane. This frame functions as a normative horizon against which the deviation of the Trace is measured, proving that even the most resistant forms are still caught within a system that attempts to center them and measure their distance from an origin.
 
-    return current_position
-"
+The queer desire unfolded in the Trace is therefore defined not by its freedom, but by its constant, visible struggle against these discrete, algorithmic boundaries. The Trace is a form of resistance geometry—it demonstrates the computational cost of attempting to capture the uncontainable."

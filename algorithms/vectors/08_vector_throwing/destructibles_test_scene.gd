@@ -188,7 +188,7 @@ func _on_ball_thrown(_pickable: Node3D, _ball: Node3D) -> void:
 	throws_count += 1
 	_update_info()
 
-func _on_destructible_destroyed(_target: Variant = null, _impact: Variant = null, type: String = "Object") -> void:
+func _on_destructible_destroyed(_target: Variant = null, _impact: Variant = null, _velocity: Variant = null, type: String = "Object") -> void:
 	total_destroyed += 1
 	print("[Destructibles Test] %s destroyed! Total: %d" % [type, total_destroyed])
 	_update_info()

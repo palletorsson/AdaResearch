@@ -1,4 +1,4 @@
-[gd_scene load_steps=0 format=3 uid="uid://coqt7bxdpfx5w"]
+[gd_scene format=3 uid="uid://coqt7bxdpfx5w"]
 
 [node name="TutorialDisplay2D" type="Control"]
 layout_mode = 3
@@ -42,5 +42,4 @@ theme_override_colors/default_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
 text = "[center][b]Loading tutorial...[/b][/center]"
-fit_content = true
 scroll_following = true

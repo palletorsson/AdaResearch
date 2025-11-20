@@ -142,17 +142,25 @@ func _play_damage_animation() -> void:
 	# Change color to show damage
 	var current_color = target_color.lerp(damaged_color, 1.0 - float(current_health) / float(max_health))
 
-	if mesh_instance.material_override:
-		tween.tween_property(mesh_instance.material_override, "albedo_color", current_color, 0.3)
-		tween.tween_property(mesh_instance.material_override, "emission", current_color, 0.3)
-		tween.tween_property(mesh_instance.material_override, "emission_energy", 1.0, 0.1)
-		tween.tween_property(mesh_instance.material_override, "emission_energy", 0.3, 0.2).set_delay(0.1)
+	if mesh_instance.material_override and mesh_instance.material_override is StandardMaterial3D:
+		var mat = mesh_instance.material_override as StandardMaterial3D
+		mat.emission_enabled = true
+		tween.tween_property(mat, "albedo_color", current_color, 0.3)
+		tween.tween_property(mat, "emission", current_color, 0.3)
+		tween.tween_property(mat, "emission_energy_multiplier", 2.0, 0.1)
+		var delay_tween = tween.tween_property(mat, "emission_energy_multiplier", 0.5, 0.2)
+		if delay_tween:
+			delay_tween.set_delay(0.1)
 
 	# Shake
 	var original_pos = mesh_instance.position
 	tween.tween_property(mesh_instance, "position:x", original_pos.x + 0.05, 0.05)
-	tween.tween_property(mesh_instance, "position:x", original_pos.x - 0.05, 0.05).set_delay(0.05)
-	tween.tween_property(mesh_instance, "position:x", original_pos.x, 0.05).set_delay(0.1)
+	var shake_tween = tween.tween_property(mesh_instance, "position:x", original_pos.x - 0.05, 0.05)
+	if shake_tween:
+		shake_tween.set_delay(0.05)
+	var reset_tween = tween.tween_property(mesh_instance, "position:x", original_pos.x, 0.05)
+	if reset_tween:
+		reset_tween.set_delay(0.1)
 
 func _destroy_with_animation() -> void:
 	"""Explode and remove"""

@@ -37,10 +37,12 @@ shadow_enabled = true
 fov = 71.3
 
 [node name="FunctionGazePointer" parent="XROrigin3D/XRCamera3D" index="0" instance=ExtResource("3_rldw0")]
+visible = false
 click_on_hold = true
 color = Color(1, 0, 1, 1)
 
 [node name="lookat" type="Node3D" parent="XROrigin3D/XRCamera3D" index="1"]
+visible = false
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_q0s61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000147015, 0, 0.00108021)

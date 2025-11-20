@@ -11,33 +11,31 @@ transparency = 1
 albedo_color = Color(0, 0, 0, 0.364706)
 
 [sub_resource type="BoxMesh" id="1"]
-size = Vector3(0.7, 0.7, 0.02)
+size = Vector3(1, 1, 0.02)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7u64y"]
-size = Vector3(0.65, 0.2, 0.650062)
+size = Vector3(1, 1, 0.2)
 
 [node name="codeDisplay" type="Node3D"]
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("3_gh2hq")]
 screen_size = Vector2(1, 1)
 scene = ExtResource("4_2eqye")
-viewport_size = Vector2(720, 720)
+viewport_size = Vector2(1000, 720)
 unshaded = true
-scene_properties_keys = PackedStringArray()
 
 [node name="Screen2" type="MeshInstance3D" parent="Viewport2Din3D"]
-transform = Transform3D(1.46, 0, 0, 0, 1.48, -2.01367e-08, 0, 2.98023e-08, 1, 0, 0, -0.0133978)
+transform = Transform3D(1, 0, 0, 0, 1, -2.0136689e-08, 0, 2.0136689e-08, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_lidq2")
 mesh = SubResource("1")
 skeleton = NodePath("../..")
 
 [node name="HandPoseArea" parent="." instance=ExtResource("5_mmrse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30198, -0.00126704)
 left_pose = ExtResource("6_cbktk")
 right_pose = ExtResource("7_vae7a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0)
 shape = SubResource("BoxShape3D_7u64y")
 
 [node name="Camera3D" type="Camera3D" parent="."]

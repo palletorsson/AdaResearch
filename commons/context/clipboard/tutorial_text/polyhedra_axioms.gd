@@ -1,6 +1,8 @@
 extends Node
 
-# Auto-generated from infoboard progression
+# Tutorial content file
+# Edit using the Tutorial Text Editor plugin
+
 var text = '''
 [center][b]Polyhedra & Their Nets[/b][/center]
 [center][i]From Flat to Solid[/i][/center]

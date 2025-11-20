@@ -1,17 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqaqcvdoccfdq"]
+[gd_scene load_steps=5 format=3 uid="uid://bqaqcvdoccfdq"]
 
 [ext_resource type="Script" uid="uid://dig18jy1o8b8e" path="res://commons/context/clipboard/clipboard.gd" id="1_edgjo"]
+[ext_resource type="PackedScene" uid="uid://qlx2jgqvx1y" path="res://commons/context/clipboard/codeDisplay.tscn" id="3_g1sl6"]
 [ext_resource type="PackedScene" uid="uid://bxpseco03ygvb" path="res://commons/primitives/cubes/grab_plane.tscn" id="3_nuein"]
-[ext_resource type="Script" uid="uid://jnnultxsu2rs" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd" id="3_xr_body"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2qefi"]
 size = Vector2(0.21, 0.297)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
-size = Vector3(0.044937134, 0.005584717, 0.058242798)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_2qefi"]
-viewport_path = NodePath("GrabPlane/clipboard/ViewportDisplay/ContentViewport")
 
 [node name="clipboard" type="Node3D"]
 script = ExtResource("1_edgjo")
@@ -24,14 +18,12 @@ transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
 
 [node name="GrabPlane" parent="." instance=ExtResource("3_nuein")]
-transform = Transform3D(1, -9.345284e-09, 3.2866865e-09, 9.842586e-09, 0.89968735, -0.43653488, 1.1225545e-09, 0.43653488, 0.89968735, 0, 0.03304988, 0)
 freeze = true
 
 [node name="clipboard" type="Node3D" parent="GrabPlane"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.216633, 0, -0.574639)
 
 [node name="page" type="MeshInstance3D" parent="GrabPlane/clipboard"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.216633, 0.0166395, 0.574638)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
 visible = false
 mesh = SubResource("PlaneMesh_2qefi")
 skeleton = NodePath("../..")
@@ -43,144 +35,7 @@ font_size = 16
 outline_size = 8
 
 [node name="ViewportDisplay" type="Node3D" parent="GrabPlane/clipboard"]
-transform = Transform3D(6.955, 0, 0, 0, 6.677, 0, 0, 0, 6.955, 0, 0, -0.151185)
+transform = Transform3D(6.955, 0, 0, 0, 6.677, 0, 0, 0, 6.955, 0, 0, 0)
 
-[node name="ContentViewport" type="SubViewport" parent="GrabPlane/clipboard/ViewportDisplay"]
-disable_3d = true
-transparent_bg = true
-size = Vector2i(1024, 1448)
-render_target_clear_mode = 1
-render_target_update_mode = 3
-
-[node name="ViewportRoot" type="Control" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1024.0
-offset_bottom = 1024.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.95, 0.95, 0.92, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Title" type="Label" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.15, 1)
-theme_override_font_sizes/font_size = 48
-text = "ASDGDSGADSGADSG"
-horizontal_alignment = 1
-
-[node name="Separator" type="ColorRect" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.3, 0.3, 0.35, 1)
-
-[node name="ScrollContainer" type="ScrollContainer" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="Description" type="RichTextLabel" parent="GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/default_color = Color(0.1, 0.1, 0.15, 1)
-theme_override_font_sizes/normal_font_size = 36
-bbcode_enabled = true
-text = "Axiom 1 — The Definition of a Point
-
-A point in the 3-dimensional coordinate system is a vector representing a position in [b]x, y, z[/b].
-
-[color=#CC8800]Code:[/color]
-[font_size=24][code]
-var point_position = Vector3(0, 0, 0)
-[/code][/font_size]
-
-The vector [color=#00AA00](0, 0, 0)[/color] is the [b]origin[/b] — the root of all vectors.
-
-⚠️ This point is not visible; it needs representation.
-
-
-Axiom 2 — The Visible Point
-
-A visible point can be represented by a small sphere placed at its position.
-
-Code:
-[code]
-var sphere_mesh = SphereMesh.new()
-var radius = 0.02  # a small sphere
-sphere_mesh.radius = radius
-sphere_mesh.height = radius * 2  # SphereMesh height is double radius
-[/code]
-
-
-Axiom 2.5 — The Mesh in the World
-
-A mesh must be instantiated as a scene object to exist in the world.
-
-Code:
-[code]
-var mesh_instance = MeshInstance3D.new()
-mesh_instance.mesh = sphere_mesh
-mesh_instance.position = point_position
-add_child(mesh_instance)
-[/code]
-
-
-Axiom 3 — Identity of a Point
-
-The identity of a point is represented as a [b]text label[/b] positioned close to the point.
-
-Code:
-[code]
-var label_3d = Label3D.new()
-label_3d.text = str(point_position)
-var label_offset = Vector3(0, 0.15, 0)
-label_3d.position = point_position + label_offset
-label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-add_child(label_3d)
-[/code]
-
-[i]💡 Tip:[/i] Always ensure proper null checks and that the node has a valid parent before adding children.
-"
-fit_content = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="GrabPlane/clipboard/ViewportDisplay"]
-collision_layer = 5242881
-collision_mask = 0
-script = ExtResource("3_xr_body")
-viewport_size = Vector2(1024, 1448)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabPlane/clipboard/ViewportDisplay/StaticBody3D"]
-transform = Transform3D(0.9998214, 0, 0, 0, 1, 0, 0, 0, 0.9998214, 0.031163728, 0.0009999489, 0.10390591)
-shape = SubResource("BoxShape3D_collision")
-
-[node name="ViewportSprite" type="Sprite3D" parent="GrabPlane/clipboard/ViewportDisplay"]
-transform = Transform3D(-0.19958603, 3.0136654e-08, 1.3173151e-15, 0, -8.724184e-09, 0.19958606, 3.0136654e-08, 0.19958603, 8.724183e-09, 0.052816495, 0.000228828, 0.073772795)
-centered = false
-pixel_size = 0.000205
-texture = SubResource("ViewportTexture_2qefi")
+[node name="UINoiseBlobControl" parent="GrabPlane/clipboard/ViewportDisplay" instance=ExtResource("3_g1sl6")]
+transform = Transform3D(0.049999982, 0, 0, 0, -2.1855695e-09, 0.05, 0, -0.049999982, -2.1855684e-09, 0.0021449362, 0, -0.0003181486)

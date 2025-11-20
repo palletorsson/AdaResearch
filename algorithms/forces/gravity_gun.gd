@@ -7,7 +7,8 @@ extends Node3D
 @export var attraction_radius: float = 1.5  # Range of force field
 @export var attraction_strength: float = 15.0  # Base attraction force (increased to overcome gravity)
 @export var capture_radius: float = 0.2  # Distance to capture objects
-@export var max_captured_objects: int = 5  # Max objects that can be held
+@export var max_captured_objects: int = 20  # Max objects that can be held
+@export var captured_scale: float = 0.3  # Scale of captured objects
 @export var disable_gravity_on_attraction: bool = true  # Disable gravity while attracting
 
 @export_group("Launch Settings")
@@ -32,6 +33,7 @@ var attraction_area: Area3D
 var captured_objects: Array[RigidBody3D] = []
 var attracted_objects: Dictionary = {}  # RigidBody3D -> distance
 var original_gravity_scales: Dictionary = {}  # Store original gravity scales
+var original_scales: Dictionary = {}  # Store original object scales
 
 # Visual components
 var force_field_mesh: MeshInstance3D
@@ -313,6 +315,13 @@ func _capture_object(body: RigidBody3D) -> void:
 
 	captured_objects.append(body)
 
+	# Store original scale
+	if body not in original_scales:
+		original_scales[body] = body.scale
+
+	# Scale down the object
+	body.scale = body.scale * captured_scale
+
 	# Freeze the object
 	body.freeze = true
 	body.linear_velocity = Vector3.ZERO
@@ -320,7 +329,7 @@ func _capture_object(body: RigidBody3D) -> void:
 
 	object_captured.emit(body)
 	if debug:
-		print("[GravityGun] Captured object: ", body.name)
+		print("[GravityGun] Captured object: ", body.name, " (scaled to ", captured_scale, ")")
 
 func _update_captured_objects() -> void:
 	"""Keep captured objects positioned near the muzzle"""
@@ -359,6 +368,9 @@ func launch_one() -> void:
 	# Get the first captured object
 	var obj = captured_objects[0]
 	if not is_instance_valid(obj):
+		# Clean up scale tracking for invalid object
+		if obj in original_scales:
+			original_scales.erase(obj)
 		captured_objects.remove_at(0)
 		return
 
@@ -377,6 +389,11 @@ func launch_one() -> void:
 	)
 
 	var launch_velocity = (launch_direction + spread).normalized() * launch_force
+
+	# Restore original scale
+	if obj in original_scales:
+		obj.scale = original_scales[obj]
+		original_scales.erase(obj)
 
 	# Unfreeze and launch
 	obj.freeze = false
@@ -420,6 +437,11 @@ func launch_all() -> void:
 		)
 
 		var launch_velocity = (launch_direction + spread).normalized() * launch_force
+
+		# Restore original scale
+		if obj in original_scales:
+			obj.scale = original_scales[obj]
+			original_scales.erase(obj)
 
 		# Unfreeze and launch
 		obj.freeze = false
@@ -492,6 +514,10 @@ func release_all() -> void:
 	"""Release all captured objects without launching"""
 	for obj in captured_objects:
 		if is_instance_valid(obj):
+			# Restore original scale
+			if obj in original_scales:
+				obj.scale = original_scales[obj]
+				original_scales.erase(obj)
 			obj.freeze = false
 			obj.gravity_scale = 1.0
 	captured_objects.clear()

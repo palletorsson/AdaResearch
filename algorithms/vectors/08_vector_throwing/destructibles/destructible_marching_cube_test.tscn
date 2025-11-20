@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b25cp8smki0wn"]
+
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_terrain"]
+[ext_resource type="Script" uid="uid://dxfnlnm0ncd4o" path="res://algorithms/vectors/08_vector_throwing/destructibles/destructible_terrain_cube.gd" id="3_destructible"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cube"]
+size = Vector3(2, 2, 2)
+
+[node name="DestructibleCubeTest" type="Node3D"]
+
+[node name="DestructibleCube" type="Node3D" parent="."]
+script = ExtResource("3_destructible")
+fragment_count = 15
+explosion_strength = 8.0
+
+[node name="CubeMesh" type="MeshInstance3D" parent="DestructibleCube"]
+material_override = ExtResource("1_terrain")
+mesh = SubResource("BoxMesh_cube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 10)
+
+[node name="Label3D" type="Label3D" parent="."]
+text = "destruct "
