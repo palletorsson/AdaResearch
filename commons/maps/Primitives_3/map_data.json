@@ -6,10 +6,10 @@
 		"format": "json",
 		"dimensions": {
 			"width": 9,
-			"depth": 22,
+			"depth": 14,
 			"max_height": 4
 		},
-		"metadata": {
+		"metadata": {	
 			"difficulty": "intermediate",
 			"category": "primitives",
 			"estimated_time": "5-6 minutes",
@@ -60,7 +60,7 @@
 			[" ", " ", "tetrahedron:0:0:0.6", " ", "cube:45:0:0.8", " ", "octahedron", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "], 
 			[" ", " ", " ", "dodecahedron", " ", "icosahedron", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["code_display:180:1#tutorial:primitives_axioms", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -73,9 +73,11 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],						
 			[" ", " ", " ", "lshape:0:-0.5", "sphere:0:4", "lshape:180:-0.5", " ",  " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "prism_block:90", " ", "prism_block:90", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],			
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+			["prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90", " ", "prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90"],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],		
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],								
+			[" ", " ", " ", " ", "diamonds:0:1:0.8", " ", " ", " ", " "]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],

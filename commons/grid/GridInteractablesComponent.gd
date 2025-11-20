@@ -555,8 +555,36 @@ func _parse_config_token(token: String) -> Dictionary:
 	for i in range(1, hash_parts.size()):
 		var config_part = hash_parts[i].strip_edges()
 
-		# Parse config part (format: "key:value")
+		# Parse config part (format: "key:value" or "tutorial_id:rot:height:scale")
 		if config_part.find(":") != -1:
+			# Check if this is a shorthand with transform params (e.g., "point_zero:15:-0.3:1.1")
+			var parts = config_part.split(":", false)
+
+			# If we have 2-4 numeric params after first part, treat as tutorial_id with transforms
+			if parts.size() >= 2:
+				var has_numeric_params = true
+				for j in range(1, min(parts.size(), 4)):  # Check up to 3 transform params
+					if not parts[j].is_valid_float():
+						has_numeric_params = false
+						break
+
+				if has_numeric_params and parts.size() >= 2:
+					# This is shorthand syntax: tutorial_id:rotation:height:scale
+					var tutorial_id = parts[0].strip_edges()
+					result.config_data[tutorial_id] = true
+
+					# Extract transform overrides
+					if parts.size() >= 2 and parts[1].is_valid_float():
+						result.overrides["rotation_y_degrees"] = float(parts[1])
+					if parts.size() >= 3 and parts[2].is_valid_float():
+						result.overrides["y_position"] = float(parts[2])
+					if parts.size() >= 4 and parts[3].is_valid_float():
+						result.overrides["uniform_scale"] = float(parts[3])
+
+					print("GridInteractablesComponent: Parsed config shorthand - tutorial='%s', transforms=%s" % [tutorial_id, result.overrides])
+					continue
+
+			# Otherwise, treat as regular key:value config
 			var config_parts = config_part.split(":", false, 1)  # Split only on first ":"
 			if config_parts.size() == 2:
 				var config_key = config_parts[0].strip_edges()

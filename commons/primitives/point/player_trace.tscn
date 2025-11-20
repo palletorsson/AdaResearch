@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkr7m0bhpcx1d"]
+
+[ext_resource type="Script" path="res://commons/primitives/point/player_trace.gd" id="1_player_trace"]
+
+[node name="PlayerTrace" type="Node3D"]
+script = ExtResource("1_player_trace")
+xr_origin_path = NodePath("../../XROrigin3D")
+trail_color = Color(0.2, 0.9, 0.6, 1)
+trail_max_points = 1024
+min_segment_distance = 0.01
+show_reference_frame = true
+reference_frame_size = 1.0
+fade_trail_over_time = false
+fade_duration = 10.0

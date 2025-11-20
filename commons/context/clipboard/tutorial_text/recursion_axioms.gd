@@ -284,11 +284,11 @@ func fibonacci(n: int) -> int:
 [code]
 # fibonacci(5) tree:
 #                 fib(5)
-#          /              \
+#          /              \\
 #       fib(4)           fib(3)
-#      /      \         /      \
+#      /      \\         /      \\
 #   fib(3)  fib(2)   fib(2)  fib(1)
-#   /   \    /  \     /  \
+#   /   \\    /  \\     /  \\
 # fib(2) fib(1) ...  ...  ...
 [/code]
 

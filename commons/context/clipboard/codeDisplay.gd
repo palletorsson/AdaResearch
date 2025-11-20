@@ -33,14 +33,23 @@ func _find_rich_text_label() -> void:
 	print("CodeDisplay: Scene load wait complete")
 
 	# Try to find by path first (faster and more reliable)
-	var direct_path = "Viewport/TutorialDisplay2D/MarginContainer/ScrollContainer/TutorialContent"
-	print("CodeDisplay: Trying direct path: %s" % direct_path)
-	rich_text_label = viewport_2d.get_node_or_null(direct_path)
+	# Try TextUIControl.tscn path first (used by codeDisplay.tscn)
+	var textui_path = "Viewport/Control/ScrollContainer/RichTextLabel"
+	print("CodeDisplay: Trying TextUIControl path: %s" % textui_path)
+	rich_text_label = viewport_2d.get_node_or_null(textui_path)
 	if rich_text_label:
-		print("CodeDisplay: ✅ Found RichTextLabel at path: %s" % direct_path)
+		print("CodeDisplay: ✅ Found RichTextLabel at path: %s" % textui_path)
+		return
+
+	# Fallback to tutorial_display_2d.tscn path
+	var tutorial_path = "Viewport/TutorialDisplay2D/MarginContainer/ScrollContainer/TutorialContent"
+	print("CodeDisplay: Trying TutorialDisplay2D path: %s" % tutorial_path)
+	rich_text_label = viewport_2d.get_node_or_null(tutorial_path)
+	if rich_text_label:
+		print("CodeDisplay: ✅ Found RichTextLabel at path: %s" % tutorial_path)
 		return
 	else:
-		print("CodeDisplay: ❌ Direct path failed")
+		print("CodeDisplay: ❌ Both direct paths failed")
 
 	# Try to get the scene instance from Viewport2Din3D
 	print("CodeDisplay: Checking if viewport_2d has get_scene_instance method...")

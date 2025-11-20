@@ -25,6 +25,11 @@ MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
 SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 
+[display]
+
+window/size/viewport_width=1800
+window/size/viewport_height=1200
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/tutorial_text_editor/plugin.cfg")

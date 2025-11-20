@@ -18,6 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
 
 [node name="GrabPlane" parent="." instance=ExtResource("3_nuein")]
+transform = Transform3D(1, 0, 0, 0, 0.8022657, -0.5969672, 0, 0.5969672, 0.8022657, 0, 0, 0)
 freeze = true
 
 [node name="clipboard" type="Node3D" parent="GrabPlane"]
@@ -37,5 +38,5 @@ outline_size = 8
 [node name="ViewportDisplay" type="Node3D" parent="GrabPlane/clipboard"]
 transform = Transform3D(6.955, 0, 0, 0, 6.677, 0, 0, 0, 6.955, 0, 0, 0)
 
-[node name="UINoiseBlobControl" parent="GrabPlane/clipboard/ViewportDisplay" instance=ExtResource("3_g1sl6")]
-transform = Transform3D(0.049999982, 0, 0, 0, -2.1855695e-09, 0.05, 0, -0.049999982, -2.1855684e-09, 0.0021449362, 0, -0.0003181486)
+[node name="textFrame" parent="GrabPlane/clipboard/ViewportDisplay" instance=ExtResource("3_g1sl6")]
+transform = Transform3D(0.055999987, 0, 0, 0, -2.4478373e-09, 0.056, 0, -0.055999987, -2.4478377e-09, 0.0040836856, -0.00011107692, -0.0011816992)

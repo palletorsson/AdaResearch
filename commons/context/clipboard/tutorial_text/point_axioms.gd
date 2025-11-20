@@ -3,8 +3,7 @@ extends Node
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
 
-var text = '''[font_size=28]
-[b]The Point[/b]
+var text = '''[b]The Point[/b]
 [i]The Atom of Space[/i]
 
 Points are the smallest discrete unit of computational geometry. A point in 3D space is a vector defining a position (x, y, z).
@@ -52,6 +51,7 @@ add_child(label_3d)
 [hr]
 
 - The text label  updates when the point's position changes.
+
 [color=yellow]Code[/color]
 [code]
 func _process(delta):

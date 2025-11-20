@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3wn56kir0avm"]
+[gd_scene load_steps=4 format=3 uid="uid://b3wn56kir0avm"]
+
+[ext_resource type="FontFile" uid="uid://lqbg0pcn08oh" path="res://commons/font/JetBrainsMono-Medium.ttf" id="1_mono"]
+[ext_resource type="Script" uid="uid://dmkwreb4xm3bt" path="res://commons/primitives/panels/DigitalPaper/TouchScrollContainer.gd" id="2_touch_scroll"]
 
 [sub_resource type="Theme" id="Theme_wtba0"]
 default_font_size = 32
@@ -8,23 +11,30 @@ layout_mode = 3
 anchor_right = 0.90300006
 anchor_bottom = 1.1170001
 offset_right = -0.25610352
-offset_bottom = 76.18396
+offset_bottom = 76.09888
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 42.0
-offset_right = 914.0
-offset_bottom = 952.0
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 97.41589
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+script = ExtResource("2_touch_scroll")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource("Theme_wtba0")
-theme_override_colors/default_color = Color(0, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(0.843137, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 0
-theme_override_font_sizes/bold_font_size = 0
-theme_override_font_sizes/bold_italics_font_size = 0
-theme_override_font_sizes/italics_font_size = 0
-theme_override_font_sizes/mono_font_size = 4
+theme_override_colors/default_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_fonts/mono_font = ExtResource("1_mono")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/mono_font_size = 28
 bbcode_enabled = true
 text = "[b]The Trace[/b]
 [i]What the Line Refuses to See[/i]

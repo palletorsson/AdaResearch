@@ -35,12 +35,12 @@ second_hand_grab = 2
 shape = SubResource("7")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D" index="0"]
-size = Vector3(0.366455, 0.0187988, 0.462639)
+size = Vector3(0.4, 0.019, 0.5)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CollisionShape3D/CSGBox3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00357056, 0.0123901, -0.00136042)
 operation = 2
-size = Vector3(0.327087, 0.0435791, 0.414397)
+size = Vector3(0.36, 0.044, 0.45)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 visible = false
@@ -48,3 +48,4 @@ mesh = SubResource("8")
 surface_material_override/0 = SubResource("9")
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_521c3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18922742, 0, 0.22852193)

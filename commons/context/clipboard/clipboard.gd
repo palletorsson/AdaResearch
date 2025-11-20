@@ -1,10 +1,15 @@
 extends Node3D
 
 const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippet_library.gd")
+const TutorialTextLibrary := preload("res://commons/context/clipboard/tutorial_text_library.gd")
 
 @export var addxp: int = 20
 @export var dessp: int = -2
 
+@onready var code_display_node: Node = _first_existing_node([
+	"GrabPlane/clipboard/ViewportDisplay/textFrame",
+	"GrabPlane/clipboard/ViewportDisplay/UINoiseBlobControl"
+])
 @onready var title_node: Node = _first_existing_node([
 	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/MarginContainer/VBoxContainer/Title",
 	"GrabPlane/clipboard/ViewportDisplay/ContentViewport/ViewportRoot/Title",
@@ -36,10 +41,15 @@ const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippe
 var current_index: int = 0
 var is_executed = false
 var _snippet_library := CodeSnippetLibrary.new()
+var _tutorial_library: TutorialTextLibrary
 
 var init_position: Vector3
+var _is_being_held: bool = false
 
 func _ready() -> void:
+	# Initialize tutorial library
+	_tutorial_library = TutorialTextLibrary.new()
+
 	if _content_viewport and _viewport_sprite:
 		_content_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		_viewport_sprite.texture = _content_viewport.get_texture()
@@ -67,6 +77,12 @@ func _ready() -> void:
 		if label3D:
 			_set_text(label3D, "Error: 'item_dropped' signal missing!")
 
+	# Connect to pickup signals for page navigation
+	if grab_cube.has_signal("picked_up"):
+		grab_cube.connect("picked_up", Callable(self, "_on_clipboard_picked_up"))
+	if grab_cube.has_signal("dropped"):
+		grab_cube.connect("dropped", Callable(self, "_on_clipboard_dropped"))
+
 	if description_sets.size() > 0:
 		_update_display()
 	
@@ -86,11 +102,49 @@ func _on_item_dropped() -> void:
 	GameManager.set_xp(xp)
 	_set_text(label3D, "XP/SP updated")
 
+func _on_clipboard_picked_up(_pickable) -> void:
+	_is_being_held = true
+	# Update page display to show current page when picked up
+	if description_sets.size() > 1:
+		_set_text(label3D, "Arrows/Trigger=Next, Grip=Prev")
+
+func _on_clipboard_dropped(_pickable) -> void:
+	_is_being_held = false
+
 func _next_page() -> void:
 	if description_sets.is_empty():
 		return
 	current_index = (current_index + 1) % description_sets.size()
 	_update_display()
+
+func _prev_page() -> void:
+	if description_sets.is_empty():
+		return
+	current_index = (current_index - 1 + description_sets.size()) % description_sets.size()
+	_update_display()
+
+func _input(event: InputEvent) -> void:
+	# Only process input if clipboard has multiple pages
+	if description_sets.size() <= 1:
+		return
+
+	# Keyboard navigation for testing (works anytime)
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_RIGHT or event.keycode == KEY_DOWN:
+			_next_page()
+			get_viewport().set_input_as_handled()
+		elif event.keycode == KEY_LEFT or event.keycode == KEY_UP:
+			_prev_page()
+			get_viewport().set_input_as_handled()
+
+	# VR controller button navigation (only when held)
+	elif _is_being_held and event is InputEventAction and event.pressed:
+		if event.action == "trigger" or event.action == "by_button":
+			_next_page()
+			get_viewport().set_input_as_handled()
+		elif event.action == "grip" or event.action == "ax_button":
+			_prev_page()
+			get_viewport().set_input_as_handled()
 
 func _update_display() -> void:
 	if description_sets.is_empty() or current_index >= description_sets.size():
@@ -177,21 +231,92 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	print("Clipboard: Applying grid configuration: %s" % config_data)
 	var needs_refresh = false
 
+	# Check if there's a direct tutorial ID as a key (shorthand syntax)
+	# e.g., clipboard#point_zero:15:-0.3:1.1 → {"point_zero": "15:-0.3:1.1"}
+	for key in config_data.keys():
+		var key_str = str(key).strip_edges()
+		# Skip known parameter keys
+		if key_str in ["pages", "title", "content"]:
+			continue
+
+		var value = config_data[key]
+
+		# Check if this looks like a tutorial ID (either truthy or has transform params)
+		var is_tutorial_key = false
+
+		# Case 1: Simple boolean or "true" string
+		if typeof(value) == TYPE_BOOL and value:
+			is_tutorial_key = true
+		elif typeof(value) == TYPE_STRING:
+			if value == "true" or value.is_empty():
+				is_tutorial_key = true
+			# Case 2: String with transform parameters (rotation:height:scale)
+			elif value.find(":") != -1:
+				is_tutorial_key = true
+
+		if is_tutorial_key:
+			# Try to use codeDisplay node if available
+			if code_display_node and code_display_node.has_method("set_tutorial"):
+				code_display_node.set_tutorial(key_str)
+				print("  -> Loaded tutorial via codeDisplay: %s" % key_str)
+				return  # Done - codeDisplay handles everything
+			else:
+				# Fallback to loading content directly
+				var tutorial_content = _tutorial_library.get_tutorial_content(key_str)
+				if not tutorial_content.is_empty():
+					description_sets = [tutorial_content]
+					print("  -> Loaded tutorial from shorthand: %s" % key_str)
+					needs_refresh = true
+					break  # Use the first valid tutorial found
+
 	if config_data.has("pages"):
 		var pages_config = str(config_data.pages)
 		description_sets.clear()
+
+		# Handle comma-separated pages
 		if pages_config.find(",") != -1:
 			var page_keys = pages_config.split(",")
 			for page_key in page_keys:
 				var key = page_key.strip_edges()
 				if key.is_empty():
 					continue
-				description_sets.append("code#%s" % key.to_lower())
+
+				# Check if it's a tutorial reference
+				if key.begins_with("tutorial:") or key.begins_with("#tutorial:"):
+					var tutorial_id = key
+					if tutorial_id.begins_with("#"):
+						tutorial_id = tutorial_id.substr(1)
+					if tutorial_id.begins_with("tutorial:"):
+						tutorial_id = tutorial_id.substr(9)
+
+					var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+					if not tutorial_content.is_empty():
+						description_sets.append(tutorial_content)
+					else:
+						description_sets.append("[color=red]Error: Tutorial '%s' not found[/color]" % tutorial_id)
+				else:
+					# Regular code snippet
+					description_sets.append("code#%s" % key.to_lower())
 			print("  -> Set pages from keys: %s" % str(page_keys))
 		else:
 			var single_key = pages_config.strip_edges()
 			if not single_key.is_empty():
-				description_sets.append("code#%s" % single_key.to_lower())
+				# Check if it's a tutorial reference
+				if single_key.begins_with("tutorial:") or single_key.begins_with("#tutorial:"):
+					var tutorial_id = single_key
+					if tutorial_id.begins_with("#"):
+						tutorial_id = tutorial_id.substr(1)
+					if tutorial_id.begins_with("tutorial:"):
+						tutorial_id = tutorial_id.substr(9)
+
+					var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+					if not tutorial_content.is_empty():
+						description_sets.append(tutorial_content)
+					else:
+						description_sets.append("[color=red]Error: Tutorial '%s' not found[/color]" % tutorial_id)
+				else:
+					# Regular code snippet
+					description_sets.append("code#%s" % single_key.to_lower())
 			print("  -> Set single page: %s" % pages_config)
 		needs_refresh = true
 
@@ -202,7 +327,26 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if config_data.has("content"):
 		var content_config = str(config_data.content)
-		if content_config.find("|") != -1:
+
+		# Check if it's a tutorial reference (#tutorial:name or tutorial:name)
+		if content_config.begins_with("#tutorial:") or content_config.begins_with("tutorial:"):
+			var tutorial_id = content_config
+			if tutorial_id.begins_with("#"):
+				tutorial_id = tutorial_id.substr(1)  # Remove leading #
+
+			if tutorial_id.begins_with("tutorial:"):
+				tutorial_id = tutorial_id.substr(9)  # Remove "tutorial:" prefix
+
+			# Load tutorial content
+			var tutorial_content = _tutorial_library.get_tutorial_content(tutorial_id)
+			if not tutorial_content.is_empty():
+				description_sets = [tutorial_content]
+				print("  -> Loaded tutorial: %s" % tutorial_id)
+			else:
+				print("  -> Warning: Tutorial '%s' not found" % tutorial_id)
+				description_sets = ["[color=red]Error: Tutorial '%s' not found[/color]" % tutorial_id]
+		# Handle multiple pages separated by |
+		elif content_config.find("|") != -1:
 			description_sets = content_config.split("|")
 			for i in range(description_sets.size()):
 				description_sets[i] = description_sets[i].strip_edges()

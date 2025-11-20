@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://dmpjtk0l8vh6v" path="res://addons/godot-xr-tools/hands/poses/pose_default_right.tres" id="15_to05d"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="16_3o0oe"]
 [ext_resource type="PackedScene" uid="uid://mwes0vp5s11g" path="res://algorithms/forces/gravity_gun.tscn" id="17_ciyru"]
+[ext_resource type="PackedScene" uid="uid://dkr7m0bhpcx1d" path="res://commons/primitives/point/player_trace.tscn" id="18_player_trace"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -88,6 +89,7 @@ ranged_angle = 10.0
 [node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" instance=ExtResource("13_c1k2x")]
 show_laser = 2
 laser_length = 1
+suppress_radius = 0.05
 
 [node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" instance=ExtResource("10_5sk3y")]
 
@@ -130,3 +132,5 @@ script = ExtResource("12_qiixw")
 visible = false
 script = ExtResource("2_lr6fa")
 particle_density = -0.98
+
+[node name="PlayerTrace" parent="." index="5" instance=ExtResource("18_player_trace")]

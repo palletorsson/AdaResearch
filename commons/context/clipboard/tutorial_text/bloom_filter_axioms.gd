@@ -22,9 +22,31 @@ var text = '''[center][font_size=28][b]Bloom Filters[/b][/font_size][/center]
 - **Bit array** of size m (all bits initially 0)
 - **k hash functions** (each maps element → index in bit array)
 
+[center][img=400x200]diagram://bloom_filter_bits[/img][/center]
+
 [hr]
 
 [b]Operations[/b]
+
+[b]Visual Example:[/b]
+[code]
+Bit Array (m=16 bits):
+┌─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┐
+│0│0│0│0│0│0│0│0│0│0│0│0│0│0│0│0│
+└─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┘
+ 0 1 2 3 4 5 6 7 8 9 ...      15
+
+Add "cat":
+  h1("cat") = 3  →  Set bit 3
+  h2("cat") = 7  →  Set bit 7
+  h3("cat") = 12 →  Set bit 12
+
+┌─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┬─┐
+│0│0│0│1│0│0│0│1│0│0│0│0│1│0│0│0│
+└─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┴─┘
+       ↑       ↑           ↑
+      bit 3   bit 7      bit 12
+[/code]
 
 [color=yellow][b]Insert:[/b][/color]
 1. Hash element with all k hash functions → k indices
