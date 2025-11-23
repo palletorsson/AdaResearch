@@ -1,0 +1,141 @@
+{
+    "description": "Tech-noir lofi pulse that drifts away and leaks back in",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+            "volume_db": -18,
+            "bus": "Beat",
+            "parameters": {
+                "swing": 0.12,
+                "tape_warp": 0.45
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -24,
+            "bus": "Atmosphere",
+            "parameters": {
+                "entropy": 0.4,
+                "queer_factor": 0.7
+            }
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -26,
+            "bus": "Texture"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.TR909_KICK",
+                "AudioSynthesizer.ACID_606_HIHAT",
+                "AudioSynthesizer.AMBIENT_WIND"
+            ],
+            "interval_range": [
+                12.0,
+                36.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "BeatFX"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren",
+                "AudioSynthesizer.APHEX_TWIN_MODULAR"
+            ],
+            "interval_range": [
+                45.0,
+                120.0
+            ],
+            "volume_range": [
+                -30,
+                -24
+            ],
+            "bus": "AtmosphereFX"
+        }
+    ],
+    "buses": {
+        "Beat": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1800
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.7,
+                    "wet": 0.35
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.65,
+                    "tap1_delay_ms": 650,
+                    "tap1_level_db": -7.0
+                }
+            ]
+        },
+        "Atmosphere": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.65,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 900,
+                    "tap1_level_db": -6.0
+                }
+            ]
+        },
+        "Texture": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 500
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "BeatFX": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1400
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 950,
+                    "tap1_level_db": -8.0
+                }
+            ]
+        },
+        "AtmosphereFX": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.55,
+                    "tap1_delay_ms": 1200,
+                    "tap1_level_db": -9.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.75,
+                    "damping": 0.05
+                }
+            ]
+        }
+    }
+}

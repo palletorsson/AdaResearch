@@ -1,0 +1,45 @@
+{
+    "description": "Subtle dark ambient atmosphere using AudioSynthesizer",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -18,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+            "volume_db": -22,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.LASER_SHOT",
+                "AudioSynthesizer.SHIELD_HIT",
+                "AudioSynthesizer.APHEX_TWIN_GLITCH"
+            ],
+            "interval_range": [
+                20.0,
+                60.0
+            ],
+            "volume_range": [
+                -22,
+                -18
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5,
+                    "damping": 0.2
+                }
+            ]
+        }
+    }
+}

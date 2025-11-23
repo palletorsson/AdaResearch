@@ -11,7 +11,7 @@ size = Vector2(3, 2)
 [sub_resource type="ViewportTexture" id="ViewportTexture_icno0"]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icno0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vst1f"]
 transparency = 1
 cull_mode = 2
 albedo_texture = SubResource("ViewportTexture_icno0")
@@ -33,7 +33,18 @@ viewport_size = Vector2(1024, 512)
 alpha_scissor_threshold = 0.25
 unshaded = false
 filter = true
-scene_properties_keys = PackedStringArray("VectorsInfoSheet.gd")
+scene_properties_keys = PackedStringArray("viewport_2d_in_3d.gd", "Physics", "screen_size", "enabled", "collision_layer", "Content", "scene", "viewport_size", "update_mode", "throttle_fps", "Input", "input_keyboard", "input_gamepad", "Rendering", "material", "transparent", "Rendering", "alpha_scissor_threshold", "unshaded", "filter", "scene_properties_keys", "UniversalInfoBoard.gd", "display_mode", "board_id", "slide_id", "auto_load_on_ready", "enable_navigation")
+scene = ExtResource("2_njrth")
+viewport_size = Vector2(1024, 512)
+alpha_scissor_threshold = 0.25
+unshaded = false
+filter = true
+scene_properties_keys = PackedStringArray("viewport_2d_in_3d.gd", "Physics", "screen_size", "enabled", "collision_layer", "Content", "scene", "viewport_size", "update_mode", "throttle_fps", "Input", "input_keyboard", "input_gamepad", "Rendering", "material", "transparent", "Rendering", "alpha_scissor_threshold", "unshaded", "filter", "scene_properties_keys", "UniversalInfoBoard.gd", "display_mode", "board_id", "slide_id", "auto_load_on_ready", "enable_navigation")
+display_mode = 1
+board_id = "point"
+slide_id = ""
+auto_load_on_ready = true
+enable_navigation = true
 
 [node name="Viewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -45,7 +56,7 @@ render_target_update_mode = 1
 [node name="Screen" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14889, 0)
 mesh = SubResource("1")
-surface_material_override/0 = SubResource("StandardMaterial3D_icno0")
+surface_material_override/0 = SubResource("StandardMaterial3D_vst1f")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14889, 0)

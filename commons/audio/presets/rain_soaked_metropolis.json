@@ -1,0 +1,128 @@
+{
+    "description": "TEARS IN RAIN: A recreation of the iconic final scene from Blade Runner. Features the specific Vangelis chord progression (Cmaj9 -> D/C), the mournful CS-80 brass/flute lead, and heavy, relentless rain.",
+    "continuous_layers": [
+        {
+            "sound_id": "Cinematic.tears_in_rain_pad",
+            "volume_db": -10,
+            "bus": "DeepPad",
+            "parameters": {
+                "duration": 16.0,
+                "freq": 261.63
+            }
+        },
+        {
+            "sound_id": "Cinematic.tears_in_rain_melody",
+            "volume_db": -8,
+            "bus": "LeadMelody",
+            "parameters": {
+                "duration": 16.0,
+                "freq": 523.25
+            }
+        },
+        {
+            "sound_id": "Cinematic.cyber_rain_texture",
+            "volume_db": -12,
+            "bus": "RainTexture",
+            "parameters": {
+                "duration": 15.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -18,
+            "bus": "RainWind",
+            "parameters": {
+                "duration": 22.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -20,
+            "bus": "SubFoundation",
+            "parameters": {
+                "duration": 32.0,
+                "freq": 55.0
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                20.0,
+                40.0
+            ],
+            "volume_db": -20,
+            "bus": "DistantCity"
+        }
+    ],
+    "buses": {
+        "DeepPad": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.8,
+                    "damping": 0.1
+                }
+            ]
+        },
+        "LeadMelody": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.92,
+                    "wet": 0.7,
+                    "damping": 0.1
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -6.0
+                }
+            ]
+        },
+        "RainTexture": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 300
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "RainWind": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "SubFoundation": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 100
+                }
+            ]
+        },
+        "DistantCity": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

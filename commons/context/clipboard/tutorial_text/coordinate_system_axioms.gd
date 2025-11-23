@@ -7,7 +7,7 @@ var text = '''
 [center][b]The Coordinate System[/b][/center]
 [center][i]The Stage of Space[/i][/center]
 
-Understanding the 3D coordinate system that defines the stage upon which all geometry exists
+The 3D coordinate system that defines the stage upon which all geometry exists
 
 [hr]
 [b]The Origin: Zero Point[/b]

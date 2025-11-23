@@ -1,0 +1,85 @@
+{
+    "description": "Sacred cathedral atmosphere with choral and organ",
+    "continuous_layers": [
+        {
+            "sound_id": "liturgical.choral_foundation",
+            "volume_db": -8,
+            "bus": "Choir_Hall"
+        },
+        {
+            "sound_id": "liturgical.organ_foundation",
+            "volume_db": -12,
+            "bus": "Organ_Pipes"
+        },
+        {
+            "sound_id": "liturgical.string_atmosphere",
+            "volume_db": -10,
+            "bus": "Strings_Chamber"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "liturgical.cathedral_bell",
+                "liturgical.gregorian_phrase",
+                "liturgical.sacred_whisper",
+                "liturgical.pipe_organ_swell"
+            ],
+            "interval_range": [
+                8.0,
+                25.0
+            ],
+            "volume_range": [
+                -18,
+                -10
+            ],
+            "bus": "Cathedral_Reverb"
+        }
+    ],
+    "buses": {
+        "Cathedral_Reverb": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.7,
+                    "damping": 0.05
+                }
+            ]
+        },
+        "Choir_Hall": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.5,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "Strings_Chamber": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4,
+                    "damping": 0.3
+                }
+            ]
+        },
+        "Organ_Pipes": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6,
+                    "damping": 0.1
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 8000
+                }
+            ]
+        }
+    }
+}

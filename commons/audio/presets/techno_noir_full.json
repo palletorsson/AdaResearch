@@ -1,0 +1,69 @@
+{
+    "description": "Full techno-noir cyberpunk experience",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -10,
+            "bus": "Reverb"
+        },
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -15,
+            "bus": "LowPass"
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -18,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren",
+                "techno_noir.static_burst",
+                "techno_noir.mechanical_whir",
+                "techno_noir.typing_segment"
+            ],
+            "interval_range": [
+                3.0,
+                15.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Delay"
+        }
+    ],
+    "buses": {
+        "Reverb": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.7,
+                    "damping": 0.1
+                }
+            ]
+        },
+        "LowPass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 2000
+                }
+            ]
+        },
+        "Delay": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 250,
+                    "tap1_level": 0.3
+                }
+            ]
+        }
+    }
+}

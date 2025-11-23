@@ -1,0 +1,59 @@
+{
+    "description": "Industrial: Heavy impacts, distortion, mining",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -15,
+            "bus": "Machinery"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -18,
+            "bus": "Hum"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.EXPLOSION",
+                "AudioSynthesizer.SHIELD_HIT"
+            ],
+            "interval_range": [
+                5.0,
+                15.0
+            ],
+            "volume_range": [
+                -12,
+                -8
+            ],
+            "bus": "Impacts"
+        }
+    ],
+    "buses": {
+        "Machinery": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "drive": 0.4
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 400
+                }
+            ]
+        },
+        "Impacts": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Distortion",
+                    "drive": 0.2
+                }
+            ]
+        }
+    }
+}

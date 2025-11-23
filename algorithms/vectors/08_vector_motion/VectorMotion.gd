@@ -9,7 +9,6 @@ var accumulator := 0.0
 
 func _ready():
 	super._ready()
-	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.0)
 	ball = create_ball(Vector3(0.0, 1.0, 0.0), 0.2, 1.0, Color(0.9, 0.4, 0.7, 1.0))
 	ball.linear_damp = 0.02

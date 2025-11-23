@@ -12,7 +12,6 @@ var elapsed := 0.0
 
 func _ready():
 	super._ready()
-	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.5)
 	_create_field_vectors()
 	particle = _create_particle_marker()

@@ -1,0 +1,82 @@
+{
+    "description": "Dune inspired: Deep desert winds, rhythmic thumpers, and spice whispers",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -15,
+            "bus": "Wind"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -10,
+            "bus": "Thumper",
+            "parameters": {
+                "pulse_rate": 0.2
+            }
+        },
+        {
+            "sound_id": "liturgical.choral_foundation",
+            "volume_db": -20,
+            "bus": "VoiceDrone"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "liturgical.sacred_whisper",
+                "AudioSynthesizer.SCI_FI_RESONANT_DRONE"
+            ],
+            "interval_range": [
+                10.0,
+                30.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Whispers"
+        }
+    ],
+    "buses": {
+        "Wind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 100
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Thumper": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 80
+                },
+                {
+                    "type": "Distortion",
+                    "drive": 0.1
+                }
+            ]
+        },
+        "Whispers": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 250,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

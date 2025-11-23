@@ -9,7 +9,6 @@ var _axis_labels: Dictionary = {}
 
 func _ready() -> void:
 	super._ready()
-	scale = Vector3(0.25, 0.25, 0.25)
 	_clear_environment()
 	_spawn_vectors()
 	_refresh_vectors()

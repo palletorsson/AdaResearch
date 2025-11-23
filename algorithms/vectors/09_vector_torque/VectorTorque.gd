@@ -8,7 +8,6 @@ var info_label: Label3D
 
 func _ready():
 	super._ready()
-	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(3.5)
 	radius_vector = spawn_vector(Vector3.ZERO, Vector3(1.4, 0.8, 0.0), Color(1.0, 0.6, 0.2, 1.0), "r")
 	force_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.4, 1.0), Color(0.2, 0.8, 1.0, 1.0), "F")

@@ -23,7 +23,8 @@ var generation_thread: Thread = null
 var generation_mutex: Mutex = null
 
 # Paths
-const PRESETS_PATH = "res://commons/audio/ambient_presets.json"
+const PRESETS_DIR = "res://commons/audio/presets/"
+const MANIFEST_PATH = "res://commons/audio/presets_manifest.json"
 
 # Audio bus management
 var audio_buses_initialized: bool = false
@@ -51,27 +52,56 @@ func _exit_tree():
 # ===== PRESET LOADING =====
 
 func _load_ambient_presets():
-	"""Load ambient preset definitions from JSON"""
-	var file = FileAccess.open(PRESETS_PATH, FileAccess.READ)
-	if not file:
-		print("⚠️ Could not load ambient presets from: ", PRESETS_PATH)
+	"""Load ambient preset definitions from individual JSON files via manifest"""
+	ambient_presets.clear()
+	
+	# 1. Load Manifest
+	var manifest_file = FileAccess.open(MANIFEST_PATH, FileAccess.READ)
+	if not manifest_file:
+		print("⚠️ Could not load presets manifest from: ", MANIFEST_PATH)
 		return
-
-	var json_text = file.get_as_text()
-	file.close()
 
 	var json = JSON.new()
-	var parse_result = json.parse(json_text)
+	var parse_result = json.parse(manifest_file.get_as_text())
+	manifest_file.close()
+
 	if parse_result != OK:
-		print("⚠️ JSON parse error in ambient presets")
+		print("⚠️ JSON parse error in presets manifest")
 		return
 
-	var data = json.data
-	if "presets" in data:
-		ambient_presets = data["presets"]
-		print("✅ Loaded %d ambient presets" % ambient_presets.size())
-	else:
-		print("⚠️ No 'presets' key found in ambient presets JSON")
+	var manifest_data = json.data
+	if not "presets" in manifest_data:
+		print("⚠️ No 'presets' key found in manifest")
+		return
+		
+	var preset_list = manifest_data["presets"]
+	print("📂 Found %d presets in manifest. Loading..." % preset_list.size())
+	
+	# 2. Load Each Preset File
+	for preset_id in preset_list:
+		_load_single_preset(preset_id)
+		
+	print("✅ Successfully loaded %d ambient presets" % ambient_presets.size())
+
+func _load_single_preset(preset_id: String):
+	"""Load a single preset file"""
+	var path = PRESETS_DIR + preset_id + ".json"
+	var file = FileAccess.open(path, FileAccess.READ)
+	
+	if not file:
+		print("⚠️ Could not load preset file: ", path)
+		return
+		
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		print("⚠️ JSON parse error in preset: ", preset_id)
+		return
+		
+	# Store the preset data directly under its ID
+	ambient_presets[preset_id] = json.data
 
 func get_preset(preset_name: String) -> Dictionary:
 	"""Get an ambient preset by name"""
@@ -126,6 +156,8 @@ func _generate_sound(sound_id: String) -> AudioStreamWAV:
 			return _generate_liturgical_sound(sound_name)
 		"DarkGameTrack":
 			return _generate_dark_game_track_sound(sound_name)
+		"Cinematic":
+			return _generate_cinematic_sound(sound_name)
 		_:
 			print("⚠️ Unknown generator: ", generator)
 			return null
@@ -171,51 +203,21 @@ func _generate_synthesizer_sound(sound_name: String) -> AudioStreamWAV:
 
 func _string_to_sound_type(sound_name: String):
 	"""Convert sound name string to AudioSynthesizer.SoundType enum"""
-	var AudioSynth = preload("res://commons/audio/generators/AudioSynthesizer.gd")
+	# Dynamic lookup in the Enum (which acts as a dictionary)
+	if sound_name in AudioSynthesizer.SoundType:
+		return AudioSynthesizer.SoundType[sound_name]
 
+	# Handle aliases (backward compatibility)
 	match sound_name:
-		"BASIC_SINE_WAVE": return AudioSynth.SoundType.BASIC_SINE_WAVE
-		"PICKUP_MARIO": return AudioSynth.SoundType.PICKUP_MARIO
-		"TELEPORT_DRONE": return AudioSynth.SoundType.TELEPORT_DRONE
-		"LIFT_BASS_PULSE": return AudioSynth.SoundType.LIFT_BASS_PULSE
-		"GHOST_DRONE": return AudioSynth.SoundType.GHOST_DRONE
-		"MELODIC_DRONE": return AudioSynth.SoundType.MELODIC_DRONE
-		"LASER_SHOT": return AudioSynth.SoundType.LASER_SHOT
-		"POWER_UP_JINGLE": return AudioSynth.SoundType.POWER_UP_JINGLE
-		"EXPLOSION": return AudioSynth.SoundType.EXPLOSION
-		"RETRO_JUMP": return AudioSynth.SoundType.RETRO_JUMP
-		"SHIELD_HIT": return AudioSynth.SoundType.SHIELD_HIT
-		"AMBIENT_WIND": return AudioSynth.SoundType.AMBIENT_WIND
-		"DARK_808_KICK": return AudioSynth.SoundType.DARK_808_KICK
-		"ACID_606_HIHAT": return AudioSynth.SoundType.ACID_606_HIHAT
-		"DARK_808_SUB_BASS": return AudioSynth.SoundType.DARK_808_SUB_BASS
-		"AMBIENT_AMIGA_DRONE": return AudioSynth.SoundType.AMBIENT_AMIGA_DRONE
-		"MOOG_BASS_LEAD": return AudioSynth.SoundType.MOOG_BASS_LEAD
-		"TB303_ACID_BASS": return AudioSynth.SoundType.TB303_ACID_BASS
-		"DX7_ELECTRIC_PIANO": return AudioSynth.SoundType.DX7_ELECTRIC_PIANO
-		"C64_SID_LEAD": return AudioSynth.SoundType.C64_SID_LEAD
-		"AMIGA_MOD_SAMPLE": return AudioSynth.SoundType.AMIGA_MOD_SAMPLE
-		"PPG_WAVE_PAD": return AudioSynth.SoundType.PPG_WAVE_PAD
-		"TR909_KICK": return AudioSynth.SoundType.TR909_KICK
-		"JUPITER_8_STRINGS": return AudioSynth.SoundType.JUPITER_8_STRINGS
-		"KORG_M1_PIANO": return AudioSynth.SoundType.KORG_M1_PIANO
-		"ARP_2600_LEAD": return AudioSynth.SoundType.ARP_2600_LEAD
-		"SYNARE_3_DISCO_TOM": return AudioSynth.SoundType.SYNARE_3_DISCO_TOM
-		"SYNARE_3_COSMIC_FX": return AudioSynth.SoundType.SYNARE_3_COSMIC_FX
-		"MOOG_KRAFTWERK_SEQUENCER": return AudioSynth.SoundType.MOOG_KRAFTWERK_SEQUENCER
-		"HERBIE_HANCOCK_MOOG_FUSION": return AudioSynth.SoundType.HERBIE_HANCOCK_MOOG_FUSION
-		"APHEX_TWIN_MODULAR": return AudioSynth.SoundType.APHEX_TWIN_MODULAR
-		"FLYING_LOTUS_SAMPLER": return AudioSynth.SoundType.FLYING_LOTUS_SAMPLER
-		# Alternative names (for backward compatibility)
-		"MOOG_MINIMOOG_BASS": return AudioSynth.SoundType.MOOG_BASS_LEAD
-		"ACID_TB303_SQUELCH": return AudioSynth.SoundType.TB303_ACID_BASS
-		"C64_SID_PULSE": return AudioSynth.SoundType.C64_SID_LEAD
-		"GAMEBOY_PULSE": return AudioSynth.SoundType.C64_SID_LEAD  # Similar sound
-		"COMMODORE_AMIGA_WAVE": return AudioSynth.SoundType.AMIGA_MOD_SAMPLE
-		"PPG_WAVE_METALLIC": return AudioSynth.SoundType.PPG_WAVE_PAD
-		"KRAFTWERK_ROBOTIC": return AudioSynth.SoundType.MOOG_KRAFTWERK_SEQUENCER
-		"APHEX_TWIN_GLITCH": return AudioSynth.SoundType.APHEX_TWIN_MODULAR
-		"TELEPORT_WHOOSH": return AudioSynth.SoundType.TELEPORT_DRONE
+		"MOOG_MINIMOOG_BASS": return AudioSynthesizer.SoundType.MOOG_BASS_LEAD
+		"ACID_TB303_SQUELCH": return AudioSynthesizer.SoundType.TB303_ACID_BASS
+		"C64_SID_PULSE": return AudioSynthesizer.SoundType.C64_SID_LEAD
+		"GAMEBOY_PULSE": return AudioSynthesizer.SoundType.C64_SID_LEAD
+		"COMMODORE_AMIGA_WAVE": return AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE
+		"PPG_WAVE_METALLIC": return AudioSynthesizer.SoundType.PPG_WAVE_PAD
+		"KRAFTWERK_ROBOTIC": return AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER
+		"APHEX_TWIN_GLITCH": return AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR
+		"TELEPORT_WHOOSH": return AudioSynthesizer.SoundType.TELEPORT_DRONE
 		_:
 			return null
 
@@ -259,6 +261,22 @@ func _generate_dark_game_track_sound(sound_name: String) -> AudioStreamWAV:
 	# TODO: Extract from DarkGameTrackPlayer
 	print("ℹ️ Dark game track sound generation not yet implemented: ", sound_name)
 	return null
+
+func _generate_cinematic_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from CinematicMusicGenerator"""
+	var CinematicGen = preload("res://commons/audio/generators/CinematicMusicGenerator.gd")
+	
+	# Default params (can be expanded later to accept params from preset)
+	var params = {}
+	
+	var stream = CinematicGen.generate_sound(sound_name, params)
+	
+	if stream:
+		print("✅ Generated cinematic sound: ", sound_name, " 🎬")
+		return stream
+	else:
+		print("⚠️ Unknown cinematic sound: ", sound_name)
+		return null
 
 # ===== BULK GENERATION =====
 

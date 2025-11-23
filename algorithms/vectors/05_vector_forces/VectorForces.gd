@@ -11,7 +11,6 @@ var accumulator := 0.0
 
 func _ready():
 	super._ready()
-	scale = Vector3(0.25, 0.25, 0.25)
 	create_axes(4.0)
 	_create_ground()
 	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, 1.2, Color(0.9, 0.5, 1.0, 1.0))

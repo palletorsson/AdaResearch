@@ -1,0 +1,43 @@
+{
+    "description": "Biopunk: High-pitched bells, rustling, alien plants",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -22,
+            "bus": "Air"
+        },
+        {
+            "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+            "volume_db": -25,
+            "bus": "Lab"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.PPG_WAVE_METALLIC",
+                "AudioSynthesizer.SCI_FI_VENTILATION"
+            ],
+            "interval_range": [
+                5.0,
+                15.0
+            ],
+            "volume_range": [
+                -25,
+                -20
+            ],
+            "bus": "Rustle"
+        }
+    ],
+    "buses": {
+        "Rustle": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2
+                }
+            ]
+        }
+    }
+}

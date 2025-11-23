@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6p6di5cr6xgm"]
+
+[ext_resource type="Script" uid="uid://ej2xio3dfa12" path="res://commons/infoboards_3d/graphics_slideshow.gd" id="1_slideshow"]
+
+[node name="GraphicsSlideshow" type="Node3D"]
+script = ExtResource("1_slideshow")

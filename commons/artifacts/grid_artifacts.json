@@ -36,6 +36,13 @@
 			"description": "coordinates",
 			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
 		},	
+		"CoordinateSystem3M": {
+			"name": "CoordinateSystem3M",
+			"lookup_name": "CoordinateSystem3M",
+			"description": "CoordinateSystem3M",
+			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+		},			
+		
 		"text_display": {
 			"name": "text_display",
 			"lookup_name": "text_display",
@@ -3593,8 +3600,31 @@
 		"name": "Code Display",
 		"lookup_name": "code_display",
 		"description": "Display system for showing code and text content",
-		"scene": "res://commons/context/clipboard/codeDisplay.tscn",
-
+		"scene": "res://commons/context/clipboard/codeDisplay.tscn"
+	},
+	"graphics_slideshow": {
+		"name": "Graphics Slideshow",
+		"lookup_name": "graphics_slideshow",
+		"description": "Non-interactive visualization display that cycles through frames every 5 seconds. Use #topic:vectors, forces, arrays, waves, randomness, or procedural",
+		"scene": "res://commons/infoboards_3d/graphics_slideshow.tscn"
+	},
+	"graphics_monitor": {
+		"name": "Graphics Monitor",
+		"lookup_name": "graphics_monitor",
+		"description": "3D monitor with frame displaying visualization graphics. Use #vectors, #forces, #arrays, #waves, #randomness, or #procedural",
+		"scene": "res://commons/infoboards_3d/graphics_monitor.tscn"
+	},
+	"graphics_slideshow_all": {
+		"name": "Graphics Slideshow All",
+		"lookup_name": "graphics_slideshow_all",
+		"description": "Navigate through all graphics boards - use keyboard (A/D or Left/Right arrows) to flip through topics",
+		"scene": "res://commons/infoboards_3d/graphics_slideshow_all.tscn"
+	},
+	"graphics_slideshow_2d": {
+		"name": "Graphics Slideshow 2D",
+		"lookup_name": "graphics_slideshow_2d",
+		"description": "2D fullscreen slideshow - navigate with A/D, Left/Right, or Space. Press ESC to close",
+		"scene": "res://commons/infoboards_3d/graphics_slideshow_2d.tscn"
 	},
 	"crystal_ball": {
 		"name": "Crystal Ball",

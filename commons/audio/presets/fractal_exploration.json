@@ -1,0 +1,43 @@
+{
+    "description": "Mathematical exploration atmosphere with subtle tones",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.MOOG_MINIMOOG_BASS",
+            "volume_db": -20,
+            "bus": "Ambient"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO",
+                "AudioSynthesizer.PPG_WAVE_METALLIC"
+            ],
+            "interval_range": [
+                12.0,
+                35.0
+            ],
+            "volume_range": [
+                -22,
+                -18
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.8,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

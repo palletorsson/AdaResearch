@@ -5,6 +5,7 @@ var main_screen_instance: Control
 var tab_container: TabContainer
 var catalog_scene: PackedScene
 var sequencer_scene: PackedScene
+var soundtracks_scene: PackedScene
 var current_dock: Control
 
 func _enter_tree():
@@ -19,9 +20,10 @@ func _enter_tree():
 	tab_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	main_screen_instance.add_child(tab_container)
 	
-	# Load both scene files
+	# Load all scene files
 	catalog_scene = preload("res://addons/audio_catalog_editor/audio_catalog_dock.tscn")
 	sequencer_scene = preload("res://addons/audio_catalog_editor/audio_sequencer_dock.tscn")
+	soundtracks_scene = preload("res://addons/audio_catalog_editor/soundtracks_dock.tscn")
 	
 	# Create container for Audio Preset tab
 	var preset_container = Control.new()
@@ -34,6 +36,12 @@ func _enter_tree():
 	sequencer_container.name = "Sequencer"
 	sequencer_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	tab_container.add_child(sequencer_container)
+
+	# Create container for Soundtracks tab
+	var soundtracks_container = Control.new()
+	soundtracks_container.name = "Soundtracks"
+	soundtracks_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+	tab_container.add_child(soundtracks_container)
 	
 	# Load initial tab (Audio Preset)
 	_switch_to_tab(0)
@@ -75,6 +83,8 @@ func _switch_to_tab(tab: int) -> void:
 			scene_to_load = catalog_scene
 		1:  # Sequencer tab
 			scene_to_load = sequencer_scene
+		2:  # Soundtracks tab
+			scene_to_load = soundtracks_scene
 	
 	if scene_to_load:
 		current_dock = scene_to_load.instantiate()

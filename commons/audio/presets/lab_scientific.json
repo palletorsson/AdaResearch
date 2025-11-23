@@ -1,0 +1,43 @@
+{
+    "description": "Clean scientific lab ambience with subtle electrical hum",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -20,
+            "bus": "Ambient",
+            "parameters": {
+                "entropy": 0.3,
+                "queer_factor": 0.5
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SHIELD_HIT",
+                "SyntheticSoundGenerator.detection_sound"
+            ],
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -25,
+                -20
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3,
+                    "damping": 0.5
+                }
+            ]
+        }
+    }
+}

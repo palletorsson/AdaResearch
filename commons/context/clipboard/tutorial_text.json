@@ -40,6 +40,11 @@
 			"order": 0.0,
 			"sequence": "datastructures"
 		},
+		"btorus_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/torus_axioms.gd",
+			"order": 12.0,
+			"sequence": "primitives"
+		},
 		"ca_universe_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/ca_universe_axioms.gd",
 			"order": 2.0,
@@ -147,13 +152,63 @@
 		},
 		"grid_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/grid_axioms.gd",
-			"order": 3.0,
+			"order": 6.0,
 			"sequence": "primitives"
 		},
 		"hilbert_curve_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/hilbert_curve_axioms.gd",
 			"order": 0.0,
 			"sequence": "spacefilling"
+		},
+		"info_arrays": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_arrays.gd",
+			"order": 0.0,
+			"sequence": "infoboards"
+		},
+		"info_forces": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_forces.gd",
+			"order": 1.0,
+			"sequence": "infoboards"
+		},
+		"info_line": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_line.gd",
+			"order": 9.0,
+			"sequence": "infoboards"
+		},
+		"info_point": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_point.gd",
+			"order": 8.0,
+			"sequence": "infoboards"
+		},
+		"info_procedural": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_procedural.gd",
+			"order": 5.0,
+			"sequence": "infoboards"
+		},
+		"info_randomness": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_randomness.gd",
+			"order": 4.0,
+			"sequence": "infoboards"
+		},
+		"info_randomwalk": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_randomwalk.gd",
+			"order": 6.0,
+			"sequence": "infoboards"
+		},
+		"info_unitcircle": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_unitcircle.gd",
+			"order": 7.0,
+			"sequence": "infoboards"
+		},
+		"info_vectors": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_vectors.gd",
+			"order": 2.0,
+			"sequence": "infoboards"
+		},
+		"info_waves": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/info_waves.gd",
+			"order": 3.0,
+			"sequence": "infoboards"
 		},
 		"kmeans_clustering_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/kmeans_clustering_axioms.gd",
@@ -242,11 +297,11 @@
 		},
 		"point_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/point_axioms.gd",
-			"order": 1,
+			"order": 1.0,
 			"sequence": "primitives"
 		},
 		"point_zero": {
-			"content": "[font_size=28][b]0. Point Zero[/b][/font_size]\n\nAda fade from black.\n\nRevealing what was already present.\n\nScene Zero features a [b]Symbolic Arrow[/b] whose trajectory points back through [b]Vector Zero[/b]. If Vector Zero is the origin, the arrow marks the accumulation of prerequisites—the scaffolding that already exists.\n\nIn the virtual world, those prerequisites are the rendering system, the players embodiment in the 3D coordinate grid, and the clock that advances every frame—everything required to compute Euclidean space and its unfolding time.\n\nFor Ada Research, the chosen framework—the Godot game engine paired with the XR toolkit—already encodes functions Ada Research depend on.\n\nThese are structures of endless descent, always partly ignored. They are functions of time, makers of space, reminders of the worlds primal uncomputability. They are the elements we set aside for now or forever—the inexplicable beginnings we circle back to when time permits, the inherent background hum. Indexes turned into dust.\n\nAda Reseach is another onion layer of Heidegger’s thrownness: we arrive already in motion, inside systems we did not author, and we must ignore most of that inheritance just to take the next step.\n\n---\n\n[b]The Symbolic Layer: Forced Convenience [/b]\n\nWe might wish to resist slipping in an arrow of direction, for a pointer inevitably sirens with [b]authorial will to steer[/b]. Yet, this resistance is futile; the world slips into convenience. The arrow introduces a symbolic layer of [b]forced convenience[/b] in stark contrast to the [b]background void[/b]. This layer is the [b]foreground[/b]—the symbolic interface designed to manage the player's [b]dread[/b] and guide their perception. This forces the question: [b]Can creation exist without an interface?[/b]\n\n[hr]\n\n[color=green][b]Code[/b][/color]\n[color=green] [code]\nvar vector_zero = Vector3(0, 0, 0)\nvar vector_pointing = Vector3(0, 0, 1)\n[/code] [/color]\n[hr]\nThis vector has many names: Vector3(0, 0, 0), origin, *, Vector3.ZERO, Zero Vector, World origin, Coordinate zero, The center of the coordinate system, The birth of space, The coordinate of silence, The root of all vectors.\n\n\n\n\n",
+			"content_file": "res://commons/context/clipboard/tutorial_text/point_zero.gd",
 			"order": 0,
 			"sequence": "primitives"
 		},
@@ -370,14 +425,14 @@
 			"order": 0.0,
 			"sequence": "chaos"
 		},
-		"the_trace": {
-			"content": "[b]The Trace[/b]\n[i]What the Line Refuses to See[/i]\n\n[color=cyan]From the Line:[/color] The Line compressed all movement into two endpoints and one distance. The journey between them—erased. The duration—discarded. The body's wandering—noise.\n\n[b]The Trace refuses this compression.[/b]\n\nIf the Point defined the ideal atom of space—rigid, labeled, and instantly calculated—and if the Line defined the measured relation—efficient, optimal, straight—then the Trace introduces duration and bodily history. It is the first break from the Euclidean norm; an accumulation of vectors created by the player's hand movement, yet one that remains unlabeled and uncounted in the scene's primary index. The Trace is a residue of being-in-motion, a queer excess that resists the algorithm's desire for static, transparent data. \n\nThe Trace is introduced as an unlabeled excess—a continuous expression of the body's duration. However, to tell the tale of the algorithm, we must acknowledge that this Trace is not unlimited and uncontrollable; after all, we are living in a discrete computational world. Every attempt to push against the limits of representation has its own limit.\n\nThe code reveals the constraints imposed on the queer entropy by the very system designed to record it:\n\n1.  The Bounded Archive (The Memory Limit)\nThe Trace is not an infinite history, but a finite, bounded archive contained within the array _trail_points and managed by trail_max_points: int = 1024.\n\nThis maximum capacity forces a constant erasure: as the body moves, the oldest data points are discarded. The system cannot hold all of lived duration. The Trace thus embodies a digital entropy—a necessary loss of history where the past is actively shed to make space for the present. The limit of 1024 points is the algorithmic boundary of memory imposed on embodied time.\n\n2.   The Quantified Movement (The Fidelity Limit)\nThe continuous motion of the hand is aggressively sampled and filtered by min_segment_distance: float = 0.01.\n\nMovement below this threshold is ignored, meaning the most subtle, tentative, or intimate gestures—the small failures and drifts of the hand—are mathematically rendered unreadable by the system. The Trace resists the label, but it is still subject to the algorithm's demand for a minimum geometric magnitude to be recognized. The Trace is only permitted to exist when it is \"loud\" enough to clear the noise threshold.\n\n3.  The Reference Frame (The Relational Limit)\nThe optional ReferenceFrame (defined by its size and position) explicitly situates the Trace within a predetermined, measurable spatial context.\n\nEven in its fluid, unindexed state, the Trace must exist in relation to a fixed, objective geometric plane. This frame functions as a normative horizon against which the deviation of the Trace is measured, proving that even the most resistant forms are still caught within a system that attempts to center them and measure their distance from an origin.\n\nThe queer desire unfolded in the Trace is therefore defined not by its freedom, but by its constant, visible struggle against these discrete, algorithmic boundaries. The Trace is a form of resistance geometry—it demonstrates the computational cost of attempting to capture the uncontainable.",
-			"order": 4.0,
+		"text_idenity": {
+			"content": "[font_size=28][b]Text Idenity [/b][/font_size]\n\n- The position of the point is represented as a text label close to the point.\n\n[color=yellow]Code[/color]\n[code]\nvar label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nadd_child(label_3d)\n[/code]\n[hr]\n\n- The text label  updates when the point's position changes.\n\n[color=yellow]Code[/color]\n[code]\nfunc _process(delta):\n\tlabel_3d.text = str(point_position)\n\tlabel_3d.position = point_position + label_offset\n[/code]\n[hr]\n\n[color=yellow]Full Code[/color]\n[code]\nextends Node3D\n\n# Simple World Position Display\n# Attach this script to any 3D object to show its world position\n\n@export var show_position: bool = true\n@export var decimal_places: int = 1\n@export var update_frequency: float = 0.1  # Update every 0.1 seconds\n@export var text_offset: Vector3 = Vector3(0, 0, 0)  # Offset from object center\n@export var text_size: int = 16\n@onready var position_label = $\".\"\n\nvar update_timer: Timer\n\nfunc _ready():\n\tsetup_position_display()\n\tsetup_update_timer()\n\nfunc setup_position_display():\n\n\t# Initial position update\n\tupdate_position_text()\n\nfunc setup_update_timer():\n\tupdate_timer = Timer.new()\n\tupdate_timer.wait_time = update_frequency\n\tupdate_timer.timeout.connect(update_position_text)\n\tupdate_timer.autostart = true\n\tadd_child(update_timer)\n\nfunc update_position_text():\n\tif not show_position:\n\t\treturn\n\t\n\tvar pos = global_position\n\tvar formatted_text = \"(\" + str(pos.x).pad_decimals(decimal_places) + \", \" + str(pos.y).pad_decimals(decimal_places) + \", \" + str(pos.z).pad_decimals(decimal_places) + \")\"\n\tposition_label.text = formatted_text\n\n[/code]\n[hr]\n\n",
+			"order": 3.0,
 			"sequence": "primitives"
 		},
-		"torus_axioms": {
-			"content_file": "res://commons/context/clipboard/tutorial_text/torus_axioms.gd",
-			"order": 12.0,
+		"the_trace": {
+			"content": "[b]The Trace[/b]\n\n[b]The Trace refuses this compression.[/b]\n\nIf the Point defined the ideal atom of space—rigid, labeled, and instantly calculated—and if the Line defined the measured relation—efficient, optimal, straight—then the Trace introduces duration and bodily history. It is the first break from the Euclidean norm; an accumulation of vectors created by the player's hand movement, yet one that remains unlabeled and uncounted in the scene's primary index. The Trace is a residue of being-in-motion, a queer excess that resists the algorithm's desire for static, transparent data. \n\nThe Trace is introduced as an unlabeled excess—a continuous expression of the body's duration. However, to tell the tale of the algorithm, we must acknowledge that this Trace is not unlimited and uncontrollable; after all, we are living in a discrete computational world. Every attempt to push against the limits of representation has its own limit.\n\nThe code reveals the constraints imposed on the queer entropy by the very system designed to record it:\n\n1.  The Bounded Archive (The Memory Limit)\nThe Trace is not an infinite history, but a finite, bounded archive contained within the array _trail_points and managed by trail_max_points: int = 1024.\n\nThis maximum capacity forces a constant erasure: as the body moves, the oldest data points are discarded. The system cannot hold all of lived duration. The Trace thus embodies a digital entropy—a necessary loss of history where the past is actively shed to make space for the present. The limit of 1024 points is the algorithmic boundary of memory imposed on embodied time.\n\n2.   The Quantified Movement (The Fidelity Limit)\nThe continuous motion of the hand is aggressively sampled and filtered by min_segment_distance: float = 0.01.\n\nMovement below this threshold is ignored, meaning the most subtle, tentative, or intimate gestures—the small failures and drifts of the hand—are mathematically rendered unreadable by the system. The Trace resists the label, but it is still subject to the algorithm's demand for a minimum geometric magnitude to be recognized. The Trace is only permitted to exist when it is \"loud\" enough to clear the noise threshold.\n\n3.  The Reference Frame (The Relational Limit)\nThe optional ReferenceFrame (defined by its size and position) explicitly situates the Trace within a predetermined, measurable spatial context.\n\nEven in its fluid, unindexed state, the Trace must exist in relation to a fixed, objective geometric plane. This frame functions as a normative horizon against which the deviation of the Trace is measured, proving that even the most resistant forms are still caught within a system that attempts to center them and measure their distance from an origin.\n\nThe queer desire unfolded in the Trace is therefore defined not by its freedom, but by its constant, visible struggle against these discrete, algorithmic boundaries. The Trace is a form of resistance geometry—it demonstrates the computational cost of attempting to capture the uncontainable.\n\n[i]What the Line Refuses to See[/i]\n\n[color=cyan]From the Line:[/color] The Line compressed all movement into two endpoints and one distance. The journey between them—erased. The duration—discarded. The body's wandering—noise.",
+			"order": 4.0,
 			"sequence": "primitives"
 		},
 		"transformation_axioms": {
@@ -425,9 +480,9 @@
 			"order": 1.0,
 			"sequence": "proceduralgeneration"
 		},
-		"z_ coordinate_system_axioms": {
+		"z_ coordinate_system": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/coordinate_system_axioms.gd",
-			"order": 6.0,
+			"order": 2.0,
 			"sequence": "primitives"
 		}
 	}

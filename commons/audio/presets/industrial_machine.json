@@ -1,0 +1,63 @@
+{
+    "description": "Dark mechanical industrial atmosphere",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -22,
+            "bus": "Ambient"
+        },
+        {
+            "sound_id": "AudioSynthesizer.TB303_ACID_BASS",
+            "volume_db": -26,
+            "bus": "Acid"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.DARK_808_KICK",
+                "AudioSynthesizer.ACID_606_HIHAT",
+                "AudioSynthesizer.SYNARE_3_COSMIC_FX"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -25,
+                -18
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.2
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.4
+                }
+            ]
+        },
+        "Acid": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                },
+                {
+                    "type": "Delay",
+                    "dry": 0.9,
+                    "tap1_delay_ms": 500,
+                    "tap1_level_db": -6.0
+                }
+            ]
+        }
+    }
+}

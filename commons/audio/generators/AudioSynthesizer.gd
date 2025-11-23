@@ -44,7 +44,16 @@ enum SoundType {
 	MOOG_KRAFTWERK_SEQUENCER, # Moog-style Kraftwerk sequencer
 	HERBIE_HANCOCK_MOOG_FUSION, # Herbie Hancock jazz-fusion Moog
 	APHEX_TWIN_MODULAR, # Aphex Twin experimental modular synthesis
-	FLYING_LOTUS_SAMPLER # Flying Lotus beat machine sampler-synth
+	FLYING_LOTUS_SAMPLER, # Flying Lotus beat machine sampler-synth
+	# Sci-Fi / Half-Life inspired sounds
+	SCI_FI_LAB_HUM_CLEAN,    # Sterile, multi-layered sine wave hum
+	SCI_FI_RESONANT_DRONE,   # Evolving metallic swells (FM)
+	SCI_FI_DATA_CHIRPS,      # Randomized computer activity
+	SCI_FI_VENTILATION,      # Filtered air texture
+	SCI_FI_ELECTROMAGNETIC,  # Subtle tech interference
+	# Cinematic / Movie-inspired sounds
+	CS80_BRASS_LEAD,         # Vangelis-style CS-80 brass lead
+	CINEMATIC_432HZ_PAD      # Warm pad tuned to 432Hz base
 }
 
 # Sound generation functions
@@ -118,6 +127,20 @@ static func generate_sound(type: SoundType, duration: float = 1.0) -> AudioStrea
 			_generate_aphex_twin_modular(data, sample_count)
 		SoundType.FLYING_LOTUS_SAMPLER:
 			_generate_flying_lotus_sampler(data, sample_count)
+		SoundType.SCI_FI_LAB_HUM_CLEAN:
+			_generate_sci_fi_lab_hum_clean(data, sample_count)
+		SoundType.SCI_FI_RESONANT_DRONE:
+			_generate_sci_fi_resonant_drone(data, sample_count)
+		SoundType.SCI_FI_DATA_CHIRPS:
+			_generate_sci_fi_data_chirps(data, sample_count)
+		SoundType.SCI_FI_VENTILATION:
+			_generate_sci_fi_ventilation(data, sample_count)
+		SoundType.SCI_FI_ELECTROMAGNETIC:
+			_generate_sci_fi_electromagnetic(data, sample_count)
+		SoundType.CS80_BRASS_LEAD:
+			_generate_cs80_brass_lead(data, sample_count)
+		SoundType.CINEMATIC_432HZ_PAD:
+			_generate_cinematic_432hz_pad(data, sample_count)
 	
 	return _create_audio_stream(data)
 
@@ -1281,5 +1304,218 @@ static func get_sound_type_name(type: SoundType) -> String:
 			return "Aphex Twin Modular"
 		SoundType.FLYING_LOTUS_SAMPLER:
 			return "Flying Lotus Sampler"
+		SoundType.SCI_FI_LAB_HUM_CLEAN:
+			return "Sci-Fi Lab Hum (Clean)"
+		SoundType.SCI_FI_RESONANT_DRONE:
+			return "Sci-Fi Resonant Drone"
+		SoundType.SCI_FI_DATA_CHIRPS:
+			return "Sci-Fi Data Chirps"
+		SoundType.SCI_FI_VENTILATION:
+			return "Sci-Fi Ventilation"
+		SoundType.SCI_FI_ELECTROMAGNETIC:
+			return "Sci-Fi Electromagnetic"
+		SoundType.CS80_BRASS_LEAD:
+			return "CS-80 Brass Lead"
+		SoundType.CINEMATIC_432HZ_PAD:
+			return "Cinematic 432Hz Pad"
 		_:
 			return "Unknown Sound"
+
+static func _generate_sci_fi_lab_hum_clean(data: PackedFloat32Array, sample_count: int):
+	# Sterile, multi-layered sine wave hum
+	# Inspired by clean lab environments
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Pure sine waves at specific resonant frequencies
+		var hum1 = sin(2.0 * PI * 60.0 * t) * 0.5      # Mains hum foundation
+		var hum2 = sin(2.0 * PI * 120.0 * t) * 0.15    # First harmonic
+		var hum3 = sin(2.0 * PI * 180.0 * t) * 0.05    # Second harmonic
+		
+		# High frequency "monitor whine" (very subtle)
+		var whine = sin(2.0 * PI * 15000.0 * t) * 0.02
+		
+		# Slow amplitude modulation (breathing)
+		var breath = sin(2.0 * PI * 0.1 * t) * 0.1 + 0.9
+		
+		data[i] = (hum1 + hum2 + hum3 + whine) * breath * 0.4
+
+static func _generate_sci_fi_resonant_drone(data: PackedFloat32Array, sample_count: int):
+	# Evolving metallic swells using FM synthesis
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# FM Synthesis
+		var carrier_freq = 110.0
+		var mod_freq = 220.0 * 1.5  # Non-integer ratio for metallic sound
+		
+		# Evolving modulation index
+		var mod_index = 2.0 + sin(2.0 * PI * 0.2 * t) * 1.5
+		
+		var modulator = sin(2.0 * PI * mod_freq * t) * mod_index
+		var carrier = sin(2.0 * PI * carrier_freq * t + modulator)
+		
+		# Add a second layer for depth
+		var layer2_freq = 55.0
+		var layer2 = sin(2.0 * PI * layer2_freq * t) * 0.3
+		
+		# Slow panning/movement effect (simulated with amplitude mod)
+		var movement = sin(2.0 * PI * 0.15 * t) * 0.2 + 0.8
+		
+		data[i] = (carrier * 0.6 + layer2) * movement * 0.3
+
+static func _generate_sci_fi_data_chirps(data: PackedFloat32Array, sample_count: int):
+	# Randomized computer activity / data processing sounds
+	# Uses rapid frequency modulation and bursts
+	
+	var burst_interval = 0.15
+	var current_burst = 0
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Determine if we are in a burst
+		var burst_time = fmod(t, burst_interval)
+		
+		var audio_signal = 0.0
+		
+		if burst_time < 0.05: # Active burst duration
+			# High speed arpeggio/data sound
+			var freq_base = 2000.0
+			var freq_mod = sin(2.0 * PI * 100.0 * t) * 500.0
+			
+			# Square wave for digital character
+			var phase = fmod((freq_base + freq_mod) * t, 1.0)
+			audio_signal = 1.0 if phase < 0.5 else -1.0
+			
+			# Apply envelope to burst
+			audio_signal *= exp(-burst_time * 20.0)
+		
+		# Add some background digital noise
+		if randf() < 0.01:
+			audio_signal += (randf() * 2.0 - 1.0) * 0.1
+			
+		data[i] = audio_signal * 0.25
+
+static func _generate_sci_fi_ventilation(data: PackedFloat32Array, sample_count: int):
+	# Filtered air texture
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# White noise generation
+		var noise = randf() * 2.0 - 1.0
+		
+		# Low pass filter simulation (simple moving average approximation)
+		# In a real DSP we'd use state variables, here we simulate the *result*
+		# by summing low frequency sines which is cleaner for generation
+		
+		var air = 0.0
+		# Summing non-harmonic sines to approximate filtered noise texture
+		air += sin(2.0 * PI * 100.0 * t + noise) * 0.5
+		air += sin(2.0 * PI * 230.0 * t + noise) * 0.3
+		air += sin(2.0 * PI * 340.0 * t) * 0.2
+		
+		# Add "wind" modulation
+		var gust = sin(2.0 * PI * 0.05 * t) * 0.2 + 0.8
+		
+		data[i] = air * gust * 0.15
+
+static func _generate_sci_fi_electromagnetic(data: PackedFloat32Array, sample_count: int):
+	# Subtle tech interference / electromagnetic radiation
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# 50Hz/60Hz hum characteristic
+		var hum = sin(2.0 * PI * 50.0 * t)
+		
+		# Add sharp spikes (interference)
+		var spike = 0.0
+		if randf() < 0.001:
+			spike = 1.0
+			
+		# High frequency buzz
+		var buzz = sin(2.0 * PI * 3000.0 * t) * (sin(2.0 * PI * 10.0 * t) * 0.5 + 0.5)
+		
+		data[i] = (hum * 0.4 + spike * 0.3 + buzz * 0.1) * 0.2
+
+static func _generate_cs80_brass_lead(data: PackedFloat32Array, sample_count: int):
+	# Vangelis-style CS-80 brass lead
+	# Characteristic: Sawtooth, filter sweep, aftertouch-like swelling
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Dual oscillator sawtooths with slight detuning
+		var freq1 = 110.0 # A2
+		var freq2 = 110.0 * 1.002 # Slight detune
+		
+		var saw1 = 2.0 * (freq1 * t - floor(freq1 * t)) - 1.0
+		var saw2 = 2.0 * (freq2 * t - floor(freq2 * t)) - 1.0
+		
+		var raw_wave = (saw1 + saw2) * 0.5
+		
+		# Filter simulation (Low Pass opening up)
+		# Simulating the famous CS-80 poly-aftertouch swell
+		var swell = sin(PI * progress) # Swells in middle
+		var cutoff_base = 800.0
+		var cutoff_mod = 2000.0 * swell
+		var cutoff = cutoff_base + cutoff_mod
+		
+		# Simple low-pass approximation
+		var filter_factor = clamp(cutoff / 4000.0, 0.1, 1.0)
+		var filtered = raw_wave * filter_factor
+		
+		# Add some "analog" drift
+		var drift = sin(2.0 * PI * 0.5 * t) * 0.05
+		
+		# Envelope
+		var envelope = 1.0
+		if progress < 0.1: # Attack
+			envelope = progress / 0.1
+		elif progress > 0.8: # Release
+			envelope = (1.0 - progress) / 0.2
+			
+		data[i] = filtered * (1.0 + drift) * envelope * 0.5
+
+static func _generate_cinematic_432hz_pad(data: PackedFloat32Array, sample_count: int):
+	# Warm pad tuned to 432Hz base (approx -32 cents from 440Hz)
+	# 432Hz is approx 0.9818 of 440Hz
+	var tuning_factor = 432.0 / 440.0
+	
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Base frequency (A3 tuned to 432Hz reference)
+		var base_freq = 220.0 * tuning_factor
+		
+		# Multiple detuned sawtooths for thick "analog" sound
+		var wave = 0.0
+		var detune_amounts = [1.0, 1.005, 0.995, 2.0, 2.01] # Unison + Octave
+		
+		for detune in detune_amounts:
+			var f = base_freq * detune
+			# Sawtooth with slow PWM-like movement
+			var phase = f * t
+			var saw = 2.0 * (phase - floor(phase)) - 1.0
+			wave += saw
+			
+		wave /= detune_amounts.size()
+		
+		# Low pass filter (warmth)
+		var filter_cutoff = 1200.0
+		var filter_factor = clamp(filter_cutoff / 4000.0, 0.2, 0.8)
+		wave *= filter_factor
+		
+		# Slow, dreamy envelope
+		var envelope = 1.0
+		if progress < 0.3: # Long attack
+			envelope = progress / 0.3
+		elif progress > 0.7: # Long release
+			envelope = (1.0 - progress) / 0.3
+			
+		# Stereo-like widening (simulated in mono by phase shifting LFOs)
+		var shimmer = sin(2.0 * PI * 3.0 * t) * 0.1 + 0.9
+		
+		data[i] = wave * envelope * shimmer * 0.4
