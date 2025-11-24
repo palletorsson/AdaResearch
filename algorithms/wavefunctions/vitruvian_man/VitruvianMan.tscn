@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bas1h0hhp6o54"]
+
+[ext_resource type="PackedScene" uid="uid://f04k4l7r0gb2" path="res://commons/primitives/point/draw_dot.tscn" id="1_drawdot"]
+[ext_resource type="Script" uid="uid://4n2n8i0alupf" path="res://algorithms/wavefunctions/vitruvian_man/VitruvianRecorder.gd" id="2_recorder"]
+[ext_resource type="Script" uid="uid://b6qhebddk5ry6" path="res://algorithms/wavefunctions/vitruvian_man/VitruvianDemo.gd" id="3_demo"]
+[ext_resource type="Script" uid="uid://c0a7opnbowf06" path="res://algorithms/wavefunctions/vitruvian_man/BodyConnection.gd" id="4_body"]
+
+[node name="VitruvianMan" type="Node3D"]
+script = ExtResource("3_demo")
+
+[node name="BodyConnection" type="Node3D" parent="."]
+script = ExtResource("4_body")
+left_hand_path = NodePath("../LeftHand/GrabPoint/DrawSphere")
+right_hand_path = NodePath("../RightHand/GrabPoint/DrawSphere")
+
+[node name="LeftHand" parent="." instance=ExtResource("1_drawdot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
+record_only_when_grabbed = false
+fade_trail = true
+fade_duration = 20.0
+
+[node name="RightHand" parent="." instance=ExtResource("1_drawdot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
+record_only_when_grabbed = false
+fade_trail = true
+fade_duration = 20.0
+
+[node name="LeftRecorder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
+script = ExtResource("2_recorder")
+recording_node_path = NodePath("../LeftHand/GrabPoint/DrawSphere")
+update_interval = 0.2
+
+[node name="RightRecorder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
+script = ExtResource("2_recorder")
+recording_node_path = NodePath("../RightHand/GrabPoint/DrawSphere")
+update_interval = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.5)

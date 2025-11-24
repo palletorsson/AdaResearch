@@ -36,7 +36,7 @@
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
+			["2", "1", "1", "1", "1", "0", "1"],
 			["0", "0", "0", "0", "1", "1", "1"],
 		],
 		"utilities": [
@@ -50,13 +50,13 @@
 		],
 		"interactables": [
 	
-			["floor_tiles:0:0.3", " ", " ", " ", " ", " ", " "],
+			["floor_tiles:0:-0.3", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
 			[" ", " ", "dark_sphere", "rotatescalecubes:0:12", " ", " ", " "],
 			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", "pickup_gate#pickups:2", " "]
+			["clipboard#translation_axioms:180:-0.2", " ", " ", " ", " ", "pickup_gate#pickups:2", " "]
 		]
 	},
 	"utility_definitions": {

@@ -115,11 +115,11 @@ The cube is the atomic unit of voxel space - the 3D pixel. Minecraft worlds are 
 var voxel_size = 1.0
 
 for x in range(10):
-    for y in range(5):
-        for z in range(10):
-            var position = Vector3(x, y, z) * voxel_size
-            # Each position could hold a cube
-            # The grid is made of cubic cells
+	for y in range(5):
+		for z in range(10):
+			var position = Vector3(x, y, z) * voxel_size
+			# Each position could hold a cube
+			# The grid is made of cubic cells
 [/code]
 
 Cubes tile 3D space perfectly - no gaps, no overlaps. They are the Cartesian grid made solid.
@@ -141,9 +141,9 @@ ray_query.to = Vector3(0, 0, 5)     # Point behind cube
 var result = space.intersect_ray(ray_query)
 
 if result:
-    # Ray hit the cube
-    # Cannot see what is behind it
-    print("Occluded by cube at: ", result.position)
+	# Ray hit the cube
+	# Cannot see what is behind it
+	print("Occluded by cube at: ", result.position)
 [/code]
 
 Occlusion is visual blocking. The cube not only occupies space - it controls visibility.

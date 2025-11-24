@@ -47,7 +47,7 @@
 			[" ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "la:interactivetriangle", "ib:triangle:180:-0.2", " ", " ", " ", " "],
+			[" ", "la:interactivetriangle", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
 			["ib:quad:-0.2", " ", " ", " ", " ", "t", " "]
 		],
@@ -56,7 +56,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			["pythagorean_triangle:0:-0.3:1.5", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", "interactivetriangle:180:-0.5:0.2", "code_display:180:-0.5:1.0#tutorial:triangle_axioms", "pythagorean_proof:0:0:0.1", " ", "quad:0:0:0.5", "code_display:180:-0.5:1.0#tutorial:quad_axioms"],
+			[" ", "interactivetriangle:180:-0.5:0.2", "clipboard#triangle_axioms:180", "pythagorean_proof:0:0:0.1", " ", "quad:0:0:0.5", "clipboard#quad_axioms:180"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]

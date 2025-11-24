@@ -50,6 +50,9 @@ func _setup_trail() -> void:
 	material.emission = trail_color
 	material.emission_energy_multiplier = 1.25
 	_trail_instance.material_override = material
+	
+	# Important: Trail should be in global space, not moving with the hand
+	_trail_instance.set_as_top_level(true)
 
 	add_child(_trail_instance)
 
@@ -59,6 +62,9 @@ func _setup_reference_frame() -> void:
 	_reference_frame.name = "ReferenceFrame"
 	_reference_frame.mesh = frame_mesh
 	_reference_frame.position = reference_frame_position
+	
+	# Reference frame moves with the object (it's a local guide)
+	# So we don't set top_level here
 
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -95,28 +101,60 @@ func _setup_reference_frame() -> void:
 
 	add_child(_reference_frame)
 
-func _process(_delta: float) -> void:
+@export var fade_trail: bool = false
+@export var fade_duration: float = 2.0
+
+var _trail_times: Array[float] = []
+var _time_elapsed: float = 0.0
+
+func _process(delta: float) -> void:
 	if not _draw_sphere:
 		return
+		
+	_time_elapsed += delta
 
 	var current_global = _draw_sphere.global_position
 
 	if record_only_when_grabbed and _grab_point and _grab_point.has_method("is_picked_up"):
 		if not _grab_point.is_picked_up():
 			_last_global_position = current_global
+			# If we are not recording, we should still process fading if enabled
+			if fade_trail:
+				_cleanup_old_points()
+				_rebuild_trail()
 			return
 
 	if current_global.distance_to(_last_global_position) < min_segment_distance:
+		if fade_trail:
+			_cleanup_old_points()
+			_rebuild_trail()
 		return
 
 	_last_global_position = current_global
-	var local_point = to_local(current_global)
-	_trail_points.append(local_point)
+	# Use global position for the trail points since the mesh is top_level
+	_trail_points.append(current_global)
+
+	if fade_trail:
+		_trail_times.append(_time_elapsed)
 
 	if _trail_points.size() > trail_max_points:
 		_trail_points.pop_front()
+		if fade_trail and _trail_times.size() > 0:
+			_trail_times.pop_front()
+			
+	if fade_trail:
+		_cleanup_old_points()
 
 	_rebuild_trail()
+
+func _cleanup_old_points() -> void:
+	if _trail_times.is_empty():
+		return
+		
+	var cutoff = _time_elapsed - fade_duration
+	while _trail_times.size() > 0 and _trail_times[0] < cutoff:
+		_trail_times.pop_front()
+		_trail_points.pop_front()
 
 func _rebuild_trail() -> void:
 	_trail_mesh.clear_surfaces()
@@ -124,9 +162,21 @@ func _rebuild_trail() -> void:
 		return
 
 	_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	for point in _trail_points:
-		_trail_mesh.surface_add_vertex(point)
+	
+	if fade_trail and _trail_times.size() == _trail_points.size():
+		for i in range(_trail_points.size()):
+			var age = _time_elapsed - _trail_times[i]
+			var alpha = 1.0 - clamp(age / fade_duration, 0.0, 1.0)
+			var color = trail_color
+			color.a = alpha
+			_trail_mesh.surface_set_color(color)
+			_trail_mesh.surface_add_vertex(_trail_points[i])
+	else:
+		for point in _trail_points:
+			_trail_mesh.surface_add_vertex(point)
+	
 	_trail_mesh.surface_end()
+
 
 func clear_trail() -> void:
 	_trail_points.clear()

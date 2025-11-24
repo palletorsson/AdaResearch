@@ -54,22 +54,22 @@ var grid_size = Vector2i(20, 20)
 var wfc_grid = []
 
 class WFCCell:
-    var position: Vector2i
-    var possible_states: Array  # All tiles this cell could be
-    var collapsed_state: String = ""  # Empty = not yet collapsed
-    var entropy: int  # Number of possible states
+	var position: Vector2i
+	var possible_states: Array  # All tiles this cell could be
+	var collapsed_state: String = ""  # Empty = not yet collapsed
+	var entropy: int  # Number of possible states
 
 func initialize_grid():
-    wfc_grid = []
+	wfc_grid = []
 
-    for x in range(grid_size.x):
-        wfc_grid.append([])
-        for y in range(grid_size.y):
-            var cell = WFCCell.new()
-            cell.position = Vector2i(x, y)
-            cell.possible_states = tile_types.duplicate()  # All tiles possible
-            cell.entropy = cell.possible_states.size()  # Entropy = 5
-            wfc_grid[x].append(cell)
+	for x in range(grid_size.x):
+		wfc_grid.append([])
+		for y in range(grid_size.y):
+			var cell = WFCCell.new()
+			cell.position = Vector2i(x, y)
+			cell.possible_states = tile_types.duplicate()  # All tiles possible
+			cell.entropy = cell.possible_states.size()  # Entropy = 5
+			wfc_grid[x].append(cell)
 
 # Every cell starts in superposition (all 5 tiles possible)
 [/code]
@@ -90,10 +90,10 @@ func initialize_grid():
 [color=yellow][b]Code: Calculating Entropy[/b][/color]
 [code]
 func calculate_entropy(cell: WFCCell) -> int:
-    if cell.collapsed_state != "":
-        return 0  # Already collapsed, no entropy
+	if cell.collapsed_state != "":
+		return 0  # Already collapsed, no entropy
 
-    return cell.possible_states.size()
+	return cell.possible_states.size()
 
 # Cell with ["grass", "sand", "forest"] has entropy = 3
 # Cell with ["water"] has entropy = 1 (will collapse next)
@@ -116,30 +116,30 @@ WFC repeats two steps until all cells are collapsed:
 [color=yellow][b]Code: Main WFC Loop[/b][/color]
 [code]
 func run_wfc():
-    initialize_grid()
+	initialize_grid()
 
-    while not is_fully_collapsed():
-        # 1. OBSERVE: Find cell with minimum entropy
-        var cell_to_collapse = find_minimum_entropy_cell()
+	while not is_fully_collapsed():
+		# 1. OBSERVE: Find cell with minimum entropy
+		var cell_to_collapse = find_minimum_entropy_cell()
 
-        if cell_to_collapse == null:
-            # All cells collapsed or error
-            break
+		if cell_to_collapse == null:
+			# All cells collapsed or error
+			break
 
-        # 2. COLLAPSE: Choose one state randomly from possibilities
-        collapse_cell(cell_to_collapse)
+		# 2. COLLAPSE: Choose one state randomly from possibilities
+		collapse_cell(cell_to_collapse)
 
-        # 3. PROPAGATE: Update neighbors based on adjacency rules
-        propagate_constraints(cell_to_collapse)
+		# 3. PROPAGATE: Update neighbors based on adjacency rules
+		propagate_constraints(cell_to_collapse)
 
-    return generate_final_map()
+	return generate_final_map()
 
 func is_fully_collapsed() -> bool:
-    for x in range(grid_size.x):
-        for y in range(grid_size.y):
-            if wfc_grid[x][y].collapsed_state == "":
-                return false
-    return true
+	for x in range(grid_size.x):
+		for y in range(grid_size.y):
+			if wfc_grid[x][y].collapsed_state == "":
+				return false
+	return true
 [/code]
 
 **Observe → Collapse → Propagate → Repeat**
@@ -285,34 +285,34 @@ When a cell collapses, **its neighbors' possibilities are constrained** by adjac
 [color=yellow][b]Code: Propagating Constraints[/b][/color]
 [code]
 func propagate_constraints(changed_cell: WFCCell):
-    # Queue of cells to check
-    var queue = [changed_cell]
-    var processed = {}
+	# Queue of cells to check
+	var queue = [changed_cell]
+	var processed = {}
 
-    while not queue.is_empty():
-        var current_cell = queue.pop_front()
+	while not queue.is_empty():
+		var current_cell = queue.pop_front()
 
-        # Skip if already processed
-        var key = str(current_cell.position)
-        if key in processed:
-            continue
-        processed[key] = true
+		# Skip if already processed
+		var key = str(current_cell.position)
+		if key in processed:
+			continue
+		processed[key] = true
 
-        # Get neighbors (north, south, east, west)
-        var neighbors = get_neighbors(current_cell)
+		# Get neighbors (north, south, east, west)
+		var neighbors = get_neighbors(current_cell)
 
-        for direction in neighbors.keys():
-            var neighbor = neighbors[direction]
+		for direction in neighbors.keys():
+			var neighbor = neighbors[direction]
 
-            # Skip already collapsed neighbors
-            if neighbor.collapsed_state != "":
-                continue
+			# Skip already collapsed neighbors
+			if neighbor.collapsed_state != "":
+				continue
 
-            # Calculate new possible states based on current cell
-            var new_possible_states = []
+			# Calculate new possible states based on current cell
+			var new_possible_states = []
 
-            for state in neighbor.possible_states:
-                # Check if this state can be adjacent to current cell's state
+			for state in neighbor.possible_states:
+				# Check if this state can be adjacent to current cell's state
                 if can_be_adjacent(current_cell.collapsed_state, state, direction):
                     new_possible_states.append(state)
 

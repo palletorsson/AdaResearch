@@ -4,6 +4,7 @@
 
 [node name="BooleanTunnel" type="Node3D"]
 script = ExtResource("1_xrtc0")
+num_segments = 11
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9692996, 0.24588262, 0, -0.24588262, 0.9692996, 0, 1.2191784, 4.4870667)

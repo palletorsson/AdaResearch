@@ -11,7 +11,8 @@ func _init():
 		
 	var sounds_to_test = [
 		"tears_in_rain_pad",
-		"tears_in_rain_melody"
+		"tears_in_rain_melody",
+		"neon_glint"
 	]
 	
 	for sound_name in sounds_to_test:

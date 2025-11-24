@@ -13,10 +13,6 @@ var _is_scaled: bool = false
 var _scale_timer: Timer
 var _world_node: Node3D
 var _xr_origin: XROrigin3D
-var _original_player_position: Vector3
-var _move_with_me: Node3D
-var _remote_transform: RemoteTransform3D
-var _original_player_parent: Node
 
 func _ready() -> void:
 	super._ready()
@@ -41,7 +37,6 @@ func _ready() -> void:
 		_xr_origin = XRHelpers.get_xr_origin(self)
 
 	if _xr_origin:
-		_original_player_position = _xr_origin.global_position
 		print("ScaleMe: Found XR Origin at ", _xr_origin.get_path())
 	else:
 		push_warning("ScaleMe: Could not find XR Origin")
@@ -88,36 +83,17 @@ func _scale_world() -> void:
 	if _original_scale == Vector3.ONE and _world_node.scale != Vector3.ONE:
 		_original_scale = _world_node.scale
 
-	# Store current player position
+	# Scale player X,Z by (scale_amount / 5), set Y to 5
 	if _xr_origin:
-		_original_player_position = _xr_origin.global_position
+		var current_pos = _xr_origin.global_position
+		var scale_factor = scale_amount / 5.0
+		var new_x = current_pos.x * scale_factor
+		var new_z = current_pos.z * scale_factor
+		var new_pos = Vector3(new_x, 5.0, new_z)
+		_xr_origin.global_position = new_pos
+		print("ScaleMe: Set player Y to 5, scaled X,Z by ", scale_factor, " - position: ", new_pos)
 
-		# Create a "MoveWithMe" node as a child of the world
-		_move_with_me = Node3D.new()
-		_move_with_me.name = "MoveWithMe"
-		_world_node.add_child(_move_with_me)
-
-		# Calculate position: add 0.5 to Y, scale by half the scale amount
-		var player_pos = _xr_origin.global_position
-		var adjusted_pos = player_pos / (scale_amount / 2.0)
-		adjusted_pos.y += 0.5
-
-		# Set the position relative to the world node
-		_move_with_me.position = adjusted_pos
-
-		print("ScaleMe: MoveWithMe positioned at ", adjusted_pos, " (relative to world)")
-
-		# Create RemoteTransform3D to control the player's position
-		_remote_transform = RemoteTransform3D.new()
-		_remote_transform.remote_path = _xr_origin.get_path()
-		_remote_transform.update_position = true
-		_remote_transform.update_rotation = false
-		_remote_transform.update_scale = false
-		_move_with_me.add_child(_remote_transform)
-
-		print("ScaleMe: Attached player to MoveWithMe node in world")
-
-	# Scale the world (player will automatically follow via RemoteTransform3D)
+	# Scale the world
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -153,7 +129,12 @@ func _on_scale_timer_timeout() -> void:
 	if not _world_node:
 		return
 
-	# Scale the world back down (player will automatically follow)
+	# Don't move player when scaling down - let them stay at current position and fall
+	if _xr_origin:
+		var current_pos = _xr_origin.global_position
+		print("ScaleMe: Player position unchanged at ", current_pos, " - will fall naturally")
+
+	# Scale the world back down
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -165,11 +146,6 @@ func _on_scale_timer_timeout() -> void:
 
 	# Wait for scale-down to complete, then clean up
 	await tween.finished
-
-	# Clean up the MoveWithMe node
-	if _move_with_me:
-		_move_with_me.queue_free()
-		print("ScaleMe: Cleaned up MoveWithMe node")
 
 	# Now we can safely free the object
 	queue_free()

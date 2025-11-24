@@ -7,6 +7,7 @@ const SyntheticSoundGenerator := preload("res://commons/audio/runtime/SyntheticS
 const TechnoNoirGenerator := preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
 const TrapBeatsGenerator := preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
 const CinematicMusicGenerator := preload("res://commons/audio/generators/CinematicMusicGenerator.gd")
+const EpicSynthEngine := preload("res://commons/audio/engines/EpicSynthEngine.gd")
 
 var preset_tree: Tree
 var details_container: VBoxContainer
@@ -101,6 +102,7 @@ func _build_ui() -> void:
 	layers_tree.set_column_title(2, "Volume / Info")
 	layers_tree.set_column_titles_visible(true)
 	layers_tree.item_activated.connect(_on_layer_activated) # Double click
+	layers_tree.button_clicked.connect(_on_layer_button_clicked)
 	details_container.add_child(layers_tree)
 
 	# Audio Player (for single previews)
@@ -181,6 +183,7 @@ func _display_preset(preset_id: String) -> void:
 			item.set_text(2, "%s dB" % layer.get("volume_db", 0))
 			item.set_metadata(0, layer)
 			item.add_button(2, get_theme_icon("Play", "EditorIcons"), 0, false, "Play")
+			item.add_button(2, get_theme_icon("Loop", "EditorIcons"), 1, false, "Play Arpeggio")
 
 	# Random Events
 	if "random_events" in preset:
@@ -197,12 +200,66 @@ func _display_preset(preset_id: String) -> void:
 				item.set_text(2, "Interval: %s" % str(event.get("interval_range", "?")))
 				item.set_metadata(0, {"sound_id": sound_id}) # Mock layer object for playback
 				item.add_button(2, get_theme_icon("Play", "EditorIcons"), 0, false, "Play")
+				item.add_button(2, get_theme_icon("Loop", "EditorIcons"), 1, false, "Play Arpeggio")
 
 func _on_layer_activated() -> void:
 	var item = layers_tree.get_selected()
 	if not item:
 		return
 	_play_layer_item(item)
+
+func _on_layer_button_clicked(item: TreeItem, column: int, id: int, mouse_button_index: int) -> void:
+	if id == 0: # Play
+		_play_layer_item(item)
+	elif id == 1: # Arpeggio
+		_play_arpeggio(item)
+
+func _play_arpeggio(item: TreeItem) -> void:
+	_stop_all_sounds()
+	var data = item.get_metadata(0)
+	if not data or not "sound_id" in data:
+		return
+		
+	var sound_id = data["sound_id"]
+	
+	# Optimize: Generate a shorter version for the arpeggio if possible
+	# This prevents long pads from overlapping too much and saves generation time
+	var params = data.get("parameters", {}).duplicate()
+	if "duration" in params:
+		params["duration"] = 0.8 # Short duration for arp notes
+	else:
+		params["duration"] = 0.8 # Default for new generators
+	
+	# For TechnoNoir/TrapBeats compatibility
+	params["buffer_length"] = 0.8
+		
+	# Generate base stream ONCE
+	var stream = _generate_stream_from_id(sound_id, params)
+	
+	if not stream:
+		print("⚠️ Could not generate base stream for arp")
+		return
+		
+	audio_player.stream = stream
+	
+	# Major 9th Arpeggio intervals: Root, M3, P5, M7, M9
+	var intervals = [1.0, 1.25, 1.5, 1.875, 2.25]
+	
+	print("🎹 Playing Arpeggio for: ", sound_id)
+	
+	for pitch in intervals:
+		if not is_inside_tree(): return # Safety check
+		
+		audio_player.pitch_scale = pitch
+		audio_player.play()
+		
+		# Wait for next note
+		await get_tree().create_timer(0.2).timeout
+		
+	# Let the last note ring out a bit then stop
+	await get_tree().create_timer(0.5).timeout
+	audio_player.stop()
+	audio_player.pitch_scale = 1.0 # Reset
 
 func _play_layer_item(item: TreeItem) -> void:
 	var data = item.get_metadata(0)
@@ -257,7 +314,7 @@ func _play_sound(sound_id: String) -> void:
 	else:
 		push_warning("Could not generate stream for " + sound_id)
 
-func _generate_stream_from_id(sound_id: String) -> AudioStreamWAV:
+func _generate_stream_from_id(sound_id: String, params_override: Dictionary = {}) -> AudioStreamWAV:
 	var parts = sound_id.split(".")
 	if parts.size() < 2:
 		push_warning("Invalid sound ID format: " + sound_id)
@@ -270,18 +327,21 @@ func _generate_stream_from_id(sound_id: String) -> AudioStreamWAV:
 		"AudioSynthesizer":
 			var type = _string_to_sound_type(sound_name)
 			if type != null:
-				return AudioSynthesizer.generate_sound(type)
+				var duration = params_override.get("duration", 1.0)
+				return AudioSynthesizer.generate_sound(type, duration)
 			else:
 				push_warning("Unknown AudioSynthesizer sound: " + sound_name)
 		"SyntheticSoundGenerator":
 			# Default params for preview
 			return SyntheticSoundGenerator.create_ambient_sound(0.4, 0.7) if sound_name == "ambient_sound" else SyntheticSoundGenerator.create_detection_sound(0.4, 0.7)
 		"techno_noir":
-			return TechnoNoirGenerator.generate_sound(sound_name)
+			return TechnoNoirGenerator.generate_sound(sound_name, params_override)
 		"trap_beats":
-			return TrapBeatsGenerator.generate_sound(sound_name)
+			return TrapBeatsGenerator.generate_sound(sound_name, params_override)
 		"Cinematic":
-			return CinematicMusicGenerator.generate_sound(sound_name)
+			return CinematicMusicGenerator.generate_sound(sound_name, params_override)
+		"Epic":
+			return EpicSynthEngine.generate_patch(sound_name, params_override)
 		"DarkGameTrack":
 			# Placeholder as logic is not easily accessible
 			return null

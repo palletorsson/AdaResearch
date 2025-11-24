@@ -158,6 +158,8 @@ func _generate_sound(sound_id: String) -> AudioStreamWAV:
 			return _generate_dark_game_track_sound(sound_name)
 		"Cinematic":
 			return _generate_cinematic_sound(sound_name)
+		"Epic":
+			return _generate_epic_sound(sound_name)
 		_:
 			print("⚠️ Unknown generator: ", generator)
 			return null
@@ -276,6 +278,20 @@ func _generate_cinematic_sound(sound_name: String) -> AudioStreamWAV:
 		return stream
 	else:
 		print("⚠️ Unknown cinematic sound: ", sound_name)
+		return null
+
+func _generate_epic_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from EpicSynthEngine (Analog Domain)"""
+	var EpicGen = preload("res://commons/audio/engines/EpicSynthEngine.gd")
+	var params = {} # Default params
+	
+	var stream = EpicGen.generate_patch(sound_name, params)
+	
+	if stream:
+		print("✅ Generated EPIC sound: ", sound_name, " 🎹")
+		return stream
+	else:
+		print("⚠️ Unknown epic sound: ", sound_name)
 		return null
 
 # ===== BULK GENERATION =====

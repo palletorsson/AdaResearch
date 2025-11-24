@@ -27,12 +27,12 @@ A recursive function has two parts:
 [color=yellow][b]Code: Factorial (Classic Example)[/b][/color]
 [code]
 func factorial(n: int) -> int:
-    # Base case: stop recursion
-    if n <= 1:
-        return 1
+	# Base case: stop recursion
+	if n <= 1:
+		return 1
 
-    # Recursive case: call myself
-    return n * factorial(n - 1)
+	# Recursive case: call myself
+	return n * factorial(n - 1)
 
 # factorial(5) calls factorial(4)
 # factorial(4) calls factorial(3)
@@ -327,14 +327,14 @@ Recursion doesn't require self-reference - **two functions can call each other**
 [color=yellow][b]Code: Mutual Recursion[/b][/color]
 [code]
 func is_even(n: int) -> bool:
-    if n == 0:
-        return true
-    return is_odd(n - 1)
+	if n == 0:
+		return true
+	return is_odd(n - 1)
 
 func is_odd(n: int) -> bool:
-    if n == 0:
-        return false
-    return is_even(n - 1)
+	if n == 0:
+		return false
+	return is_even(n - 1)
 
 # is_even(4) calls is_odd(3)
 # is_odd(3) calls is_even(2)

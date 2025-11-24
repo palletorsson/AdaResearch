@@ -73,7 +73,13 @@
 			"lookup_name": "grab_sphere_point",
 			"description": "XR Tools pickable sphere with highlight ring for repositioning a reference point.",
 			"scene": "res://commons/primitives/point/grab_sphere_point.tscn",
-		},		
+		},	
+		"VitruvianMan": {
+			"name": "VitruvianMan",
+			"lookup_name": "VitruvianMan",
+			"description": "VitruvianMan.",
+			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn",
+		},			
 		
 		"grab_sphere_point_with_color": {
 			"name": "grab_sphere_point_with_color_text",
@@ -881,6 +887,12 @@
 			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
 			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
 		},		
+		"DancingBody": {
+			"name": "DancingBody",
+			"lookup_name": "DancingBody",
+			"description": "DancingBody.",
+			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn",
+		},			
 		
 		"ColoredLinesVR": {
 			"name": "ColoredLinesVR",
