@@ -61,3 +61,23 @@ text = "356"
 font = SubResource("FontFile_kd6s2")
 font_size = 16
 outline_size = 4
+
+[node name="Label3D_BookInfo" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 2.60914e-10, 0.999996, -0.00298451, 8.74224e-08, -0.00298451, -0.999996, -0.101, 2.55, -0.00720661)
+shaded = true
+modulate = Color(0.2, 0.2, 0.2, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "RAND Corporation, 1955"
+font = SubResource("FontFile_kd6s2")
+font_size = 10
+outline_size = 2
+
+[node name="Label3D_BookSubtitle" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 2.60914e-10, 0.999996, -0.00298451, 8.74224e-08, -0.00298451, -0.999996, -0.101, 2.45, -0.00720661)
+shaded = true
+modulate = Color(0.15, 0.15, 0.15, 1)
+outline_modulate = Color(0.299697, 0.265465, 0.0349555, 1)
+text = "A Million Random Digits"
+font = SubResource("FontFile_kd6s2")
+font_size = 9
+outline_size = 2

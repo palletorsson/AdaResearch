@@ -4,3 +4,6 @@
 
 [node name="RandomRotateRandomXyz" type="Node3D"]
 script = ExtResource("1_iwdo8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.9805975)

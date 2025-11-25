@@ -25,6 +25,11 @@
 			"order": 0.0,
 			"sequence": "pathfinding"
 		},
+		"bell_curve_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bell_curve_axioms.gd",
+			"order": 5.0,
+			"sequence": "randomness"
+		},
 		"bezier_curves_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/bezier_curves_axioms.gd",
 			"order": 0.0,
@@ -39,6 +44,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/bloom_filter_axioms.gd",
 			"order": 0.0,
 			"sequence": "datastructures"
+		},
+		"blue_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/blue_noise_axioms.gd",
+			"order": 7.0,
+			"sequence": "randomness"
 		},
 		"btorus_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/torus_axioms.gd",
@@ -85,6 +95,11 @@
 			"order": 18.0,
 			"sequence": "primitives"
 		},
+		"decay_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/decay_axioms.gd",
+			"order": 6.0,
+			"sequence": "randomness"
+		},
 		"delaunay_triangulation_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/delaunay_triangulation_axioms.gd",
 			"order": 0.0,
@@ -94,6 +109,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/dijkstra_algorithm_axioms.gd",
 			"order": 1.0,
 			"sequence": "pathfinding"
+		},
+		"distributions_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/distributions_axioms.gd",
+			"order": 13.0,
+			"sequence": "randomness"
 		},
 		"dual_contouring_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/dual_contouring_axioms.gd",
@@ -144,6 +164,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/genetic_algorithms_axioms.gd",
 			"order": 0.0,
 			"sequence": "optimization"
+		},
+		"glitch_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/glitch_axioms.gd",
+			"order": 17.0,
+			"sequence": "randomness"
 		},
 		"graph_theory_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/graph_theory_axioms.gd",
@@ -216,7 +241,7 @@
 			"sequence": "machinelearning"
 		},
 		"line_axioms": {
-			"content": "[center][font_size=28][b]The Line[/b][/font_size][/center]\n[center][i]Connecting Points and Imposing Measure[/i][/center]\n\nLines create direction, distance, and paths through space.\n\n[b]The Line: Connecting Points[/b]\n- A line is the relation between two distinct points - the shortest path through space.\n\n[color=yellow][b]Code: Defining the Endpoints[/b][/color]\n[code]\nvar point_a = Vector3(0, 0, 0)\nvar point_b = Vector3(1, 1, 0)\n[/code]\n\n\n[hr]\n\n[b]The Ontological Imperative: Line and Length[/b]\nThe Euclidean Line is ontologically defined by its capacity for length. Its existence is its measure. If a line had no length, it would collapse back into a point. The Line asserts that the distance is the only relevant relational property between Point A and Point B. The Line is the normative truth - instantly calculable, prioritizing the single, efficient metric.\n\n[hr]\n\n[b]Cylinders as Lines: Materializing the Metric[/b]\n- A cylinder can represent a line segment by connecting two points with a visible 3D form aligned along their direction. Its height must equal its measured distance, visually enforcing the ontological link.\n\n[color=yellow][b]Code: Building the Measured Form[/b][/color]\n[code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint and enforce straightness\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\n\nadd_child(cylinder)\n[/code]\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe Line is a radical compression. It knows only two points and one distance. Everything between those endpoints - the journey itself - becomes invisible.\n\n[color=orange][b]What the Line Cannot Measure:[/b][/color]\n\n- Duration - How long did it take to traverse this distance?\n- Curvature - Did the path curve, spiral, hesitate?\n- Texture - Was the journey smooth or turbulent?\n- Returns - Did you walk back and forth, circling?\n- Intention - Was this the path you wanted, or were forced to take?\n\nThe Line is the Trace, compressed to its endpoints.\n\nAll the lived history of movement - the body's accumulation of moments - reduced to two coordinates and a single floating-point number. The algorithm sees only start and finish. The rest is noise to be discarded.\n\n[hr]\n\n[b]The Line as Algorithmic Violence[/b]\n\nWhen the system draws a line between A and B, it is making a claim: this is the only path that matters. The straight line. The efficient route. The measured distance.\n\nBut bodies do not move in straight lines. We detour. We wander. We return to places we've already been, not because it's efficient, but because the route holds meaning the algorithm cannot parse.\n\nThe Line is the geometry of optimization - beautiful in its simplicity, violent in what it refuses to see.\n\n[hr]\n\n[color=cyan][b]Next:[/b] The Trace[/color]\nIf the Line erases duration, the Trace insists on it. The Trace is the body's refusal to be reduced to endpoints. It accumulates what the Line discards.\n",
+			"content": "[font_size=28][b]3. The Line[/b][/font_size]\n[i]Connecting Points and Imposing Measure[/i]\n\n[i][color=gray]Summary: A line is the shortest path between two points—the first relation in geometry. With identity established, we can connect one point to another. The line introduces direction and distance. Yet this clarity comes at a cost: it compresses all possible journeys into a single metric, erasing duration, curvature, and intention.[/color][/i]\n\n[hr]\n\n[b]Defining the Line[/b]\n\nA line is the relation between two distinct points—the shortest path through space. If a point is \"that which has no part,\" a line is \"breadthless length\" (Euclid, Definition 2).\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar point_a = Vector3(0, 0, 0)  # The origin\nvar point_b = Vector3(1, 1, 0)  # A point in space\nvar direction = point_b - point_a\nvar distance = direction.length()\n[/code][/color]\n\n[hr]\n\n[b]The Ontological Imperative[/b]\n\nThere is something inherent in the line: its measurement. Line and length are ontologically bound—inseparable. There can be no line without its length. No \"shortest path\" without its distance.\n\nThe Euclidean line is defined by its capacity for measure. Its existence [i]is[/i] its measure. If a line had no length, it would collapse back into a point. The moment we draw a line, we have already measured.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# The line cannot exist without computing its length\nvar line_vector = point_b - point_a\nvar length = line_vector.length()  # Inseparable from the line itself\nvar direction = line_vector.normalized()  # Direction implies distance traveled\n[/code][/color]\n\n[hr]\n\n[b]The Desire to Measure[/b]\n\nThe line awakens our desire to measure.\n\nOnce the line appears, we cannot help but ask: [i]how long?[/i] The line compels quantification. It demands that the space between two points be reduced to a single number—a floating-point confession of distance.\n\nThis is the line's seduction: it promises clarity. It offers the comfort of knowing [i]exactly[/i] how far. The line asserts that distance is the only relevant property between Point A and Point B. It is the normative truth—instantly calculable, prioritizing the single efficient metric.\n\nBut the desire to measure does not stop at length. The line awakens questions that lead beyond itself:\n\n• [b]Width[/b] — How thick is the stroke? (The line has none, but its representation must)\n• [b]Scale[/b] — How does this distance relate to others? (Comparison, ratio, hierarchy)\n• [b]Time[/b] — How long to traverse? (Duration—which the line erases, but the Trace will restore)\n\n[hr]\n\n[b]Materializing the Line[/b]\n\nA cylinder can represent a line segment by connecting two points with a visible 3D form. Its height equals the measured distance, enforcing the ontological link between abstraction and form.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint, orient toward endpoint\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\nadd_child(cylinder)\n[/code][/color]\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe line is a radical compression. It knows only two points and one distance. Everything between those endpoints—the journey itself—becomes invisible.\n\n[color=orange][b]What the Line Cannot Measure:[/b][/color]\n\n• [b]Duration[/b] — How long did it take to traverse?\n• [b]Curvature[/b] — Did the path curve, spiral, hesitate?\n• [b]Texture[/b] — Was the journey smooth or turbulent?\n• [b]Returns[/b] — Did you walk back and forth, circling?\n• [b]Intention[/b] — Was this the path you wanted, or were forced to take?\n\nThe line is the trace compressed to its endpoints. All lived history of movement—the body's accumulation of moments—reduced to two coordinates and a single floating-point number.\n\n[hr]\n\n[b]The Geometry of Optimization[/b]\n\nWhen the system draws a line between A and B, it makes a claim: [i]this is the only path that matters[/i]. The straight line. The efficient route. The measured distance.\n\nBut bodies do not move in straight lines. We detour. We wander. We return to places we've already been—not because it's efficient, but because the route holds meaning the algorithm cannot parse.\n\nThe line is beautiful in its simplicity, and violent in what it refuses to see.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nIf the line erases duration, the trace insists on it. The trace is the body's refusal to be reduced to endpoints—it accumulates what the line discards.\n",
 			"order": 7.0,
 			"sequence": "primitives"
 		},
@@ -265,6 +290,11 @@
 			"order": 2.0,
 			"sequence": "randomness"
 		},
+		"noise_octaves_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/noise_octaves_axioms.gd",
+			"order": 12.0,
+			"sequence": "randomness"
+		},
 		"octree_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/octree_axioms.gd",
 			"order": 1.0,
@@ -290,6 +320,11 @@
 			"order": 3.0,
 			"sequence": "randomness"
 		},
+		"pheromone_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/pheromone_axioms.gd",
+			"order": 18.0,
+			"sequence": "randomness"
+		},
 		"physics_simulation_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/physics_simulation_axioms.gd",
 			"order": 1.0,
@@ -302,7 +337,7 @@
 		},
 		"point_zero": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/point_zero.gd",
-			"order": 0,
+			"order": 0.0,
 			"sequence": "primitives"
 		},
 		"poisson_disk_sampling_axioms": {
@@ -325,6 +360,11 @@
 			"order": 1.0,
 			"sequence": "randomness"
 		},
+		"procedural_placement_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/procedural_placement_axioms.gd",
+			"order": 15.0,
+			"sequence": "randomness"
+		},
 		"quad_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/quad_axioms.gd",
 			"order": 13.0,
@@ -334,6 +374,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/quadtree_axioms.gd",
 			"order": 0.0,
 			"sequence": "datastructures"
+		},
+		"random_transformations_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/random_transformations_axioms.gd",
+			"order": 16.0,
+			"sequence": "randomness"
 		},
 		"random_walk_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/random_walk_axioms.gd",
@@ -380,6 +425,11 @@
 			"order": 1.0,
 			"sequence": "chaos"
 		},
+		"shader_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/shader_noise_axioms.gd",
+			"order": 20.0,
+			"sequence": "randomness"
+		},
 		"simplex_algorithm_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/simplex_algorithm_axioms.gd",
 			"order": 1.0,
@@ -425,13 +475,18 @@
 			"order": 0.0,
 			"sequence": "chaos"
 		},
+		"ten_print_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/ten_print_axioms.gd",
+			"order": 14.0,
+			"sequence": "randomness"
+		},
 		"text_idenity": {
-			"content": "[font_size=28][b]Text Idenity [/b][/font_size]\n\n- The position of the point is represented as a text label close to the point.\n\n[color=yellow]Code[/color]\n[code]\nvar label_3d = Label3D.new()\nlabel_3d.text = str(point_position)\nvar offset = Vector3(0, 0.15, 0)\nlabel_3d.position = point_position + offset\nadd_child(label_3d)\n[/code]\n[hr]\n\n- The text label  updates when the point's position changes.\n\n[color=yellow]Code[/color]\n[code]\nfunc _process(delta):\n\tlabel_3d.text = str(point_position)\n\tlabel_3d.position = point_position + label_offset\n[/code]\n[hr]\n\n[color=yellow]Full Code[/color]\n[code]\nextends Node3D\n\n# Simple World Position Display\n# Attach this script to any 3D object to show its world position\n\n@export var show_position: bool = true\n@export var decimal_places: int = 1\n@export var update_frequency: float = 0.1  # Update every 0.1 seconds\n@export var text_offset: Vector3 = Vector3(0, 0, 0)  # Offset from object center\n@export var text_size: int = 16\n@onready var position_label = $\".\"\n\nvar update_timer: Timer\n\nfunc _ready():\n\tsetup_position_display()\n\tsetup_update_timer()\n\nfunc setup_position_display():\n\n\t# Initial position update\n\tupdate_position_text()\n\nfunc setup_update_timer():\n\tupdate_timer = Timer.new()\n\tupdate_timer.wait_time = update_frequency\n\tupdate_timer.timeout.connect(update_position_text)\n\tupdate_timer.autostart = true\n\tadd_child(update_timer)\n\nfunc update_position_text():\n\tif not show_position:\n\t\treturn\n\t\n\tvar pos = global_position\n\tvar formatted_text = \"(\" + str(pos.x).pad_decimals(decimal_places) + \", \" + str(pos.y).pad_decimals(decimal_places) + \", \" + str(pos.z).pad_decimals(decimal_places) + \")\"\n\tposition_label.text = formatted_text\n\n[/code]\n[hr]\n\n",
+			"content": "[font_size=28][b]2. Identity[/b][/font_size]\n[i]From Position to Entity[/i]\n\n[i][color=gray]Summary: A point is just a position—coordinates in space. Identity transforms a position into an entity: something that persists, can be named, and tracked through time. Before we can draw lines between points or trace paths through space, we must ask: which point is which? Identity is the bridge between geometry and meaning.[/color][/i]\n\n[hr]\n\n[b]Position vs. Identity[/b]\n\nA point at (3, 1, 5) is identical to any other point at (3, 1, 5). Position alone cannot distinguish between two things that happen to occupy the same coordinates at different times.\n\nIdentity adds persistence. An entity [i]is[/i] something—it has continuity beyond its current position.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# A position - anonymous, interchangeable\nvar position = Vector3(3, 1, 5)\n\n# An identity - persistent, distinguishable\nvar entity = {\n    \"id\": \"particle_001\",\n    \"position\": Vector3(3, 1, 5),\n    \"created_at\": Time.get_unix_time_from_system()\n}\n[/code][/color]\n\n[hr]\n\n[b]The Problem of Individuation[/b]\n\nImagine two particles at different positions. They move. They cross paths. They continue moving.\n\n[color=orange][b]Question:[/b][/color] After they cross, which is which?\n\nWithout identity, there is no answer. The positions exist, but the particles do not. They are merely coordinates—interchangeable, anonymous, without history.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# Without identity: just positions\nvar positions = [Vector3(0, 0, 0), Vector3(1, 0, 0)]\n\n# With identity: distinguishable entities\nvar entities = [\n    {\"id\": \"A\", \"position\": Vector3(0, 0, 0)},\n    {\"id\": \"B\", \"position\": Vector3(1, 0, 0)}\n]\n\n# After movement, identity persists\nentities[0].position = Vector3(1, 0, 0)  # A moved here\nentities[1].position = Vector3(0, 0, 0)  # B moved here\n# We still know which is which\n[/code][/color]\n\n[hr]\n\n[b]Naming and Reference[/b]\n\nIdentity begins with naming. To assign an ID is to declare: [i]this thing exists as itself, distinct from all others[/i].\n\nCommon identity schemes:\n\n• [b]Sequential IDs[/b] — 1, 2, 3... (simple but collision-prone)\n• [b]UUIDs[/b] — Universally unique identifiers (robust but opaque)\n• [b]Semantic names[/b] — \"player\", \"target_001\" (meaningful but fragile)\n• [b]Memory addresses[/b] — The machine's native identity (temporary, not portable)\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# Godot's built-in identity\nvar node = Node3D.new()\nvar instance_id = node.get_instance_id()  # Unique per runtime\n\n# Custom identity counter\nstatic var next_id: int = 0\n\nfunc create_entity(position: Vector3) -> Dictionary:\n    var entity = {\n        \"id\": next_id,\n        \"position\": position\n    }\n    next_id += 1\n    return entity\n[/code][/color]\n\n[hr]\n\n[b]Identity and Time[/b]\n\nIdentity implies continuity through time. The entity that exists now is the [i]same[/i] entity that existed a moment ago, even if its position has changed.\n\nThis is the foundation of the trace. Without identity, there is no path—only a scatter of unrelated positions. With identity, positions become a journey.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nclass_name TrackedEntity\nextends RefCounted\n\nvar id: int\nvar position: Vector3\nvar history: Array[Vector3] = []\n\nfunc update_position(new_position: Vector3):\n    history.append(position)  # Remember where we were\n    position = new_position   # Become where we are\n[/code][/color]\n\n[hr]\n\n[b]The Ship of Theseus[/b]\n\nIf every property of an entity changes over time—position, velocity, even structure—what remains constant?\n\nOnly the identity itself. The name. The reference. The thread that binds moments into a continuous existence.\n\nThis is both powerful and arbitrary. Identity is not discovered in the world; it is [i]imposed[/i] by the system that tracks. We decide what counts as the same thing persisting, and what counts as a new thing appearing.\n\n[hr]\n\n[b]Collective Identity[/b]\n\nEntities can be grouped. A collection of points with shared identity becomes a [i]body[/i]—a structure that moves and transforms as one.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nclass_name EntityGroup\nextends RefCounted\n\nvar id: String\nvar members: Array[TrackedEntity] = []\n\nfunc get_centroid() -> Vector3:\n    if members.is_empty():\n        return Vector3.ZERO\n    var sum = Vector3.ZERO\n    for entity in members:\n        sum += entity.position\n    return sum / members.size()\n\nfunc translate(offset: Vector3):\n    for entity in members:\n        entity.update_position(entity.position + offset)\n[/code][/color]\n\n[hr]\n\n[b]The Cost of Identity[/b]\n\nIdentity requires memory. Every entity that persists must be stored, referenced, and tracked. The more identities a system maintains, the more resources it consumes.\n\n[color=orange][b]Design choices:[/b][/color]\n\n• [b]Particles[/b] — Often anonymous (thousands exist, identity would be expensive)\n• [b]Agents[/b] — Usually identified (behavior requires continuity)\n• [b]Players[/b] — Always identified (the self must persist)\n\nWhat deserves identity is a design decision—and a political one.\n\n[hr]\n\n[color=cyan][b]→ Next: The Line[/b][/color]\nWith identity established, we can now connect points. The line is the first relation—the shortest path between two identified positions.",
 			"order": 3.0,
 			"sequence": "primitives"
 		},
 		"the_trace": {
-			"content": "[b]The Trace[/b]\n\n[b]The Trace refuses this compression.[/b]\n\nIf the Point defined the ideal atom of space—rigid, labeled, and instantly calculated—and if the Line defined the measured relation—efficient, optimal, straight—then the Trace introduces duration and bodily history. It is the first break from the Euclidean norm; an accumulation of vectors created by the player's hand movement, yet one that remains unlabeled and uncounted in the scene's primary index. The Trace is a residue of being-in-motion, a queer excess that resists the algorithm's desire for static, transparent data. \n\nThe Trace is introduced as an unlabeled excess—a continuous expression of the body's duration. However, to tell the tale of the algorithm, we must acknowledge that this Trace is not unlimited and uncontrollable; after all, we are living in a discrete computational world. Every attempt to push against the limits of representation has its own limit.\n\nThe code reveals the constraints imposed on the queer entropy by the very system designed to record it:\n\n1.  The Bounded Archive (The Memory Limit)\nThe Trace is not an infinite history, but a finite, bounded archive contained within the array _trail_points and managed by trail_max_points: int = 1024.\n\nThis maximum capacity forces a constant erasure: as the body moves, the oldest data points are discarded. The system cannot hold all of lived duration. The Trace thus embodies a digital entropy—a necessary loss of history where the past is actively shed to make space for the present. The limit of 1024 points is the algorithmic boundary of memory imposed on embodied time.\n\n2.   The Quantified Movement (The Fidelity Limit)\nThe continuous motion of the hand is aggressively sampled and filtered by min_segment_distance: float = 0.01.\n\nMovement below this threshold is ignored, meaning the most subtle, tentative, or intimate gestures—the small failures and drifts of the hand—are mathematically rendered unreadable by the system. The Trace resists the label, but it is still subject to the algorithm's demand for a minimum geometric magnitude to be recognized. The Trace is only permitted to exist when it is \"loud\" enough to clear the noise threshold.\n\n3.  The Reference Frame (The Relational Limit)\nThe optional ReferenceFrame (defined by its size and position) explicitly situates the Trace within a predetermined, measurable spatial context.\n\nEven in its fluid, unindexed state, the Trace must exist in relation to a fixed, objective geometric plane. This frame functions as a normative horizon against which the deviation of the Trace is measured, proving that even the most resistant forms are still caught within a system that attempts to center them and measure their distance from an origin.\n\nThe queer desire unfolded in the Trace is therefore defined not by its freedom, but by its constant, visible struggle against these discrete, algorithmic boundaries. The Trace is a form of resistance geometry—it demonstrates the computational cost of attempting to capture the uncontainable.\n\n[i]What the Line Refuses to See[/i]\n\n[color=cyan]From the Line:[/color] The Line compressed all movement into two endpoints and one distance. The journey between them—erased. The duration—discarded. The body's wandering—noise.",
+			"content": "[font_size=28][b]4. The Trace[/b][/font_size]\n[i]The Body's Refusal to Be Reduced[/i]\n\n[i][color=gray]Summary: The Trace refuses the Line's compression. Where the Line knows only endpoints and distance, the Trace accumulates duration—the body's movement through time. Yet even this resistance has limits: memory caps, sampling thresholds, and reference frames constrain what can be recorded. The Trace is a queer excess that struggles against its own capture.[/color][/i]\n\n[hr]\n\n[b]The Trace Refuses This Compression[/b]\n\nIf the Point defined the ideal atom of space—rigid, labeled, instantly calculated—and if the Line defined the measured relation—efficient, optimal, straight—then the Trace introduces [b]duration[/b] and [b]bodily history[/b].\n\nIt is the first break from the Euclidean norm: an accumulation of vectors created by the player's hand movement, yet one that remains unlabeled and uncounted in the scene's primary index. The Trace is a residue of being-in-motion, a [i]queer excess[/i] that resists the algorithm's desire for static, transparent data.\n\n[hr]\n\n[b]The Dance of the Hand[/b]\n\nIn the scene, the Trace appears as a point you can move through 3D space—and as you move, it leaves a trail behind.\n\nThe movement of the hand dances. From humanity's first cave drawings to the choreography of William Forsythe, the gesture carries meaning that exceeds its coordinates. The hand trembles, hesitates, spirals, returns. It draws in space what language cannot say.\n\nBut here we encounter the limit: [b]it is hard to simulate this with code[/b].\n\nWe must choose a data threshold. The computer cannot register all movement—or rather, the controller only samples every frame. The line resolution is sufficient when we look at it. In this case it might work. But it also speaks to [b]the unregistered[/b]—and to how the line grid, the shortest path between points, truncates possibility.\n\nSometimes the shortest path is convenient. Sometimes it is monoculture, and it erodes worlds.\n\n[hr]\n\n[b]What Is Not Recorded[/b]\n\nThe Trace is introduced as an unlabeled excess—a continuous expression of the body's duration. However, to tell the tale of the algorithm, we must acknowledge that this Trace is not unlimited or uncontrollable. We are living in a discrete computational world.\n\n[color=orange][b]Every attempt to push against the limits of representation has its own limit.[/b][/color]\n\nThe code reveals the constraints imposed on queer entropy by the very system designed to record it:\n\n[hr]\n\n[b]Layer 1: The Bounded Archive[/b]\n[i]The Memory Limit[/i]\n\nThe Trace is not an infinite history, but a finite, bounded archive.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar _trail_points: Array[Vector3] = []\nvar trail_max_points: int = 1024\n\nfunc add_point(pos: Vector3):\n    _trail_points.append(pos)\n    if _trail_points.size() > trail_max_points:\n        _trail_points.pop_front()  # Oldest erased\n[/code][/color]\n\nThis maximum capacity forces constant erasure. As the body moves, the oldest data points are discarded. The system cannot hold all of lived duration.\n\nThe Trace embodies [b]digital entropy[/b]—a necessary loss of history where the past is actively shed to make space for the present. The limit of 1024 points is the algorithmic boundary of memory imposed on embodied time.\n\n[hr]\n\n[b]Layer 2: The Quantified Movement[/b]\n[i]The Fidelity Limit[/i]\n\nThe continuous motion of the hand is aggressively sampled and filtered.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar min_segment_distance: float = 0.01\n\nfunc maybe_record(pos: Vector3):\n    if _trail_points.is_empty():\n        add_point(pos)\n        return\n    \n    var last = _trail_points[-1]\n    if pos.distance_to(last) >= min_segment_distance:\n        add_point(pos)\n    # Else: movement too small, ignored\n[/code][/color]\n\nMovement below this threshold is [b]ignored[/b].\n\nThe most subtle, tentative, or intimate gestures—the small failures and drifts of the hand—are mathematically rendered unreadable by the system. The Trace resists the label, but it is still subject to the algorithm's demand for a [b]minimum geometric magnitude[/b] to be recognized.\n\nThe Trace is only permitted to exist when it is \"loud\" enough to clear the noise threshold.\n\n[hr]\n\n[b]Layer 3: The Reference Frame[/b]\n[i]The Relational Limit[/i]\n\nThe optional ReferenceFrame explicitly situates the Trace within a predetermined, measurable spatial context.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nclass_name ReferenceFrame\nextends Node3D\n\n@export var frame_size: Vector3 = Vector3(1, 1, 1)\n\nfunc world_to_local_normalized(world_pos: Vector3) -> Vector3:\n    var local = to_local(world_pos)\n    return local / frame_size  # Normalized to frame\n[/code][/color]\n\nEven in its fluid, unindexed state, the Trace must exist in relation to a fixed, objective geometric plane.\n\nThis frame functions as a [b]normative horizon[/b] against which the deviation of the Trace is measured—proving that even the most resistant forms are still caught within a system that attempts to center them and measure their distance from an origin.\n\n[hr]\n\n[b]Resistance Geometry[/b]\n\nThe queer desire unfolded in the Trace is defined not by its freedom, but by its [b]constant, visible struggle[/b] against these discrete, algorithmic boundaries.\n\nThe Trace is a form of [i]resistance geometry[/i]—it demonstrates the computational cost of attempting to capture the uncontainable.\n\n[color=orange][b]What escapes capture:[/b][/color]\n\n• The micro-tremor below the sampling threshold\n• The intention behind the gesture\n• The hesitation that never quite became movement\n• The memory older than 1024 points\n• The meaning that exists only in duration\n\n[hr]\n\n[b]What the Line Refused to See[/b]\n\n[color=cyan]From the Line:[/color] The Line compressed all movement into two endpoints and one distance. The journey between them—erased. The duration—discarded. The body's wandering—noise.\n\nThe Trace is the body's refusal to accept this compression. But even the Trace, in its resistance, must negotiate with the system that records it.\n\nThere is always a remainder. Something that will not be captured. The algorithm reaches, and something slips through.\n\n[hr]\n\n[color=cyan][b]→ Next: The Grid[/b][/color]\nPoints, lines, and traces exist in continuous space. But computation requires discretization. The grid imposes structure—a lattice that makes the infinite countable, and in doing so, decides what can exist.\n",
 			"order": 4.0,
 			"sequence": "primitives"
 		},
@@ -455,6 +510,11 @@
 			"order": 3.0,
 			"sequence": "wavefunctions"
 		},
+		"value_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/value_noise_axioms.gd",
+			"order": 8.0,
+			"sequence": "randomness"
+		},
 		"vectors_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/vectors_axioms.gd",
 			"order": 0.0,
@@ -464,6 +524,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/voronoi_axioms.gd",
 			"order": 3.0,
 			"sequence": "proceduralgeneration"
+		},
+		"voxel_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/voxel_noise_axioms.gd",
+			"order": 21.0,
+			"sequence": "randomness"
 		},
 		"wave_desire_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/wave_desire_axioms.gd",
@@ -480,9 +545,19 @@
 			"order": 1.0,
 			"sequence": "proceduralgeneration"
 		},
-		"z_ coordinate_system": {
+		"white_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/white_noise_axioms.gd",
+			"order": 19.0,
+			"sequence": "randomness"
+		},
+		"worley_noise_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/worley_noise_axioms.gd",
+			"order": 11.0,
+			"sequence": "randomness"
+		},
+		"z_coordinate_system": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/coordinate_system_axioms.gd",
-			"order": 2.0,
+			"order": 2,
 			"sequence": "primitives"
 		}
 	}

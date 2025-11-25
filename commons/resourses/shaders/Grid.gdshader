@@ -14,6 +14,7 @@ uniform bool show_interior = true;                                       // Show
 
 // Barycentric coordinates
 varying vec3 baryCoord;
+varying vec4 instanceColor;  // Pass instance color from MultiMesh
 
 void vertex() {
     // Calculate barycentric coordinates more reliably
@@ -25,6 +26,9 @@ void vertex() {
     } else {
         baryCoord = vec3(0.0, 0.0, 1.0);
     }
+
+    // Pass instance color (from MultiMesh) to fragment shader
+    instanceColor = COLOR;
 }
 
 void fragment() {
@@ -45,15 +49,28 @@ void fragment() {
     // Find the closest edge (minimum distance means closest to an edge)
     float closestEdge = min(min(remap.x, remap.y), remap.z);
 
+    // Use instance color if modelColor is white (colorizer mode)
+    // OR if instance color is explicitly set (not default white)
+    vec4 baseColor = modelColor;
+
+    // If modelColor is white, always use instance color (colorizer is active)
+    if (length(modelColor.rgb - vec3(1.0)) < 0.01) {
+        baseColor = instanceColor;
+    }
+    // Otherwise, use instance color only if it's explicitly set (not white)
+    else if (length(instanceColor.rgb - vec3(1.0)) > 0.01 || instanceColor.a < 0.99) {
+        baseColor = instanceColor;
+    }
+
     // Calculate final color - fully opaque, no alpha
     vec3 finalColor;
 
     if (show_interior) {
-        // Mix wireframe and model colors
-        finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
+        // Mix wireframe and model/instance colors
+        finalColor = mix(wireframeColor.rgb, baseColor.rgb, closestEdge);
     } else {
-        // Only show wireframe on edges, use model color for interior
-        finalColor = mix(wireframeColor.rgb, modelColor.rgb, closestEdge);
+        // Only show wireframe on edges, use base color for interior
+        finalColor = mix(wireframeColor.rgb, baseColor.rgb, closestEdge);
     }
 
     // Apply colors - fully opaque

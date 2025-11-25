@@ -934,6 +934,14 @@
 			"scene": "res://algorithms/randomness/profile_random.tscn",
 	
 		},
+				"entropy_axiom": {
+			"name": "entropy_axiom",
+			"lookup_name": "entropy_axiom",
+			"description": "entropy_axiom",
+			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+	
+		},
+		
 		"plane_manipulator": {
 			"name": "plane_manipulator",
 			"lookup_name": "plane_manipulator",

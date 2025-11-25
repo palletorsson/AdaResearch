@@ -60,6 +60,7 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	if mesh_instance and mesh_instance.mesh:
 		multimesh = MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
+		multimesh.use_colors = true  # Enable per-instance colors BEFORE setting instance_count
 		multimesh.mesh = mesh_instance.mesh
 		multimesh_instance.multimesh = multimesh
 

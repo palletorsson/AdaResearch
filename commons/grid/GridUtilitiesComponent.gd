@@ -39,16 +39,101 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, s
 	
 	print("GridUtilitiesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
+# Preprocess map layers for select-repeat (sr) utilities
+static func preprocess_select_repeat(layers: Dictionary) -> Dictionary:
+	if not layers.has("utilities"):
+		return layers
+
+	var utilities = layers.utilities
+	var structure = layers.get("structure", [])
+	var interactables = layers.get("interactables", [])
+
+	# Scan for sr utilities
+	for z in range(utilities.size()):
+		var row = utilities[z]
+		for x in range(row.size()):
+			var cell = str(row[x]).strip_edges()
+			if cell.begins_with("sr:"):
+				# Parse sr:start:end:count
+				var parts = cell.split(":")
+				if parts.size() >= 4:
+					var start_idx = int(parts[1])
+					var end_idx = int(parts[2])
+					var repeat_count = int(parts[3])
+
+					print("GridUtilitiesComponent: Processing sr:%d:%d:%d at position (%d,%d)" % [start_idx, end_idx, repeat_count, x, z])
+
+					# Apply the repeat operation
+					layers = _apply_select_repeat(layers, start_idx, end_idx, repeat_count, z)
+
+	return layers
+
+# Apply select-repeat operation to all layers
+static func _apply_select_repeat(layers: Dictionary, start_idx: int, end_idx: int, repeat_count: int, insert_after: int) -> Dictionary:
+	# Extract the range (in order, not reversed)
+	var selected_rows_structure = []
+	var selected_rows_utilities = []
+	var selected_rows_interactables = []
+
+	# Extract rows from start to end (in order)
+	for i in range(start_idx, end_idx + 1):
+		if layers.structure.size() > i:
+			selected_rows_structure.append(layers.structure[i].duplicate())
+		if layers.utilities.size() > i:
+			selected_rows_utilities.append(layers.utilities[i].duplicate())
+		if layers.has("interactables") and layers.interactables.size() > i:
+			selected_rows_interactables.append(layers.interactables[i].duplicate())
+
+	# Repeat the selection 'repeat_count' times
+	var new_structure = []
+	var new_utilities = []
+	var new_interactables = []
+
+	# Copy everything up to insert_after
+	for i in range(min(insert_after + 1, layers.structure.size())):
+		new_structure.append(layers.structure[i].duplicate())
+		if layers.utilities.size() > i:
+			new_utilities.append(layers.utilities[i].duplicate())
+		if layers.has("interactables") and layers.interactables.size() > i:
+			new_interactables.append(layers.interactables[i].duplicate())
+
+	# Insert repeated selections
+	for rep in range(repeat_count):
+		for row in selected_rows_structure:
+			new_structure.append(row.duplicate())
+		for row in selected_rows_utilities:
+			new_utilities.append(row.duplicate())
+		for row in selected_rows_interactables:
+			new_interactables.append(row.duplicate())
+
+	# Copy the rest
+	for i in range(insert_after + 1, layers.structure.size()):
+		new_structure.append(layers.structure[i].duplicate())
+		if layers.utilities.size() > i:
+			new_utilities.append(layers.utilities[i].duplicate())
+		if layers.has("interactables") and layers.interactables.size() > i:
+			new_interactables.append(layers.interactables[i].duplicate())
+
+	# Update layers
+	layers.structure = new_structure
+	layers.utilities = new_utilities
+	if layers.has("interactables"):
+		layers.interactables = new_interactables
+
+	print("GridUtilitiesComponent: ✅ Applied sr - Selected %d rows, repeated %d times. New grid size: %d" % [selected_rows_structure.size(), repeat_count, new_structure.size()])
+
+	return layers
+
 # Generate utilities from data
 func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 	if not utility_data:
 		print("GridUtilitiesComponent: No utility data provided")
 		return
-		
+
 	if not utility_data.layout_data:
 		print("GridUtilitiesComponent: No layout_data in utility data")
 		return
-		
+
 	print("GridUtilitiesComponent: Generating utilities")
 	
 	var utility_layout = utility_data.layout_data
@@ -94,6 +179,13 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				var display_data = _parse_tutorial_display_utility(utility_cell, x, z)
 				if not display_data.is_empty():
 					tutorial_display_data.append(display_data)
+				utility_count += 1
+			# Check if this is a border frame utility (bf: prefix)
+			elif utility_cell.begins_with("bf:"):
+				# Handle border frame utilities
+				var border_data = _parse_border_frame_utility(utility_cell, x, z)
+				if not border_data.is_empty():
+					_generate_border_frame(border_data)
 				utility_count += 1
 			else:
 				# Handle regular utilities
@@ -1123,3 +1215,138 @@ func _place_tutorial_display_at_position(tutorial_name: String, position: Vector
 		print("GridUtilitiesComponent: ✅ Successfully placed '%s' tutorial display at %s" % [tutorial_name, position])
 	else:
 		print("GridUtilitiesComponent: ❌ Failed to instantiate tutorial display for: %s" % tutorial_name)
+
+# Parse border frame utility string (bf:start_x:start_z:end_x:end_z:thickness:height)
+func _parse_border_frame_utility(utility_cell: String, grid_x: int, grid_z: int) -> Dictionary:
+	# Format: bf:start_x:start_z:end_x:end_z:thickness:height
+	# Example: bf:0:0:5:30:2:1 = Frame from (0,0) to (5,30), 2m thick walls, 1m tall
+
+	var parts = utility_cell.split(":")
+	if parts.size() < 7:
+		print("GridUtilitiesComponent: WARNING - Invalid border frame format '%s'. Expected: bf:start_x:start_z:end_x:end_z:thickness:height" % utility_cell)
+		return {}
+
+	var start_x = parts[1].strip_edges()
+	var start_z = parts[2].strip_edges()
+	var end_x = parts[3].strip_edges()
+	var end_z = parts[4].strip_edges()
+	var thickness = parts[5].strip_edges()
+	var height = parts[6].strip_edges()
+
+	if not (start_x.is_valid_float() and start_z.is_valid_float() and
+			end_x.is_valid_float() and end_z.is_valid_float() and
+			thickness.is_valid_float() and height.is_valid_float()):
+		print("GridUtilitiesComponent: WARNING - Invalid border frame parameters in '%s'" % utility_cell)
+		return {}
+
+	return {
+		"start_x": float(start_x),
+		"start_z": float(start_z),
+		"end_x": float(end_x),
+		"end_z": float(end_z),
+		"thickness": float(thickness),
+		"height": float(height)
+	}
+
+# Generate border frame (4 walls forming a rectangular perimeter)
+func _generate_border_frame(border_data: Dictionary):
+	var start_x = border_data.start_x
+	var start_z = border_data.start_z
+	var end_x = border_data.end_x
+	var end_z = border_data.end_z
+	var thickness = border_data.thickness
+	var wall_height = border_data.height
+
+	# Calculate dimensions and center
+	var total_size = cube_size + gutter
+	var min_x = min(start_x, end_x)
+	var max_x = max(start_x, end_x)
+	var min_z = min(start_z, end_z)
+	var max_z = max(start_z, end_z)
+
+	var width = (max_x - min_x) * total_size
+	var depth = (max_z - min_z) * total_size
+	var center_x = (min_x + max_x) / 2.0
+	var center_z = (min_z + max_z) / 2.0
+
+	# Y position: start at 0.5, center of wall is 0.5 + half height
+	var y_pos = 0.5
+
+	# Load SimpleGrid shader
+	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+
+	# Create shader material with black model color and light blue outline
+	var wall_material = ShaderMaterial.new()
+	wall_material.shader = shader
+	wall_material.set_shader_parameter("modelColor", Color(0.0, 0.0, 0.0, 1.0))  # Black
+	wall_material.set_shader_parameter("wireframeColor", Color(0.3, 0.7, 1.0, 1.0))  # Light blue
+	wall_material.set_shader_parameter("emissionColor", Color(0.3, 0.7, 1.0, 1.0))  # Light blue
+	wall_material.set_shader_parameter("width", 2.0)
+	wall_material.set_shader_parameter("emission_strength", 2.0)
+
+	# Create 4 walls: North, South, East, West
+	# North wall (along X axis, at max Z)
+	_create_wall(
+		Vector3(center_x * total_size, y_pos + wall_height / 2, max_z * total_size + thickness / 2),
+		Vector3(width + thickness * 2, wall_height, thickness),
+		wall_material,
+		"BorderFrame_North"
+	)
+
+	# South wall (along X axis, at min Z)
+	_create_wall(
+		Vector3(center_x * total_size, y_pos + wall_height / 2, min_z * total_size - thickness / 2),
+		Vector3(width + thickness * 2, wall_height, thickness),
+		wall_material,
+		"BorderFrame_South"
+	)
+
+	# East wall (along Z axis, at max X)
+	_create_wall(
+		Vector3(max_x * total_size + thickness / 2, y_pos + wall_height / 2, center_z * total_size),
+		Vector3(thickness, wall_height, depth),
+		wall_material,
+		"BorderFrame_East"
+	)
+
+	# West wall (along Z axis, at min X)
+	_create_wall(
+		Vector3(min_x * total_size - thickness / 2, y_pos + wall_height / 2, center_z * total_size),
+		Vector3(thickness, wall_height, depth),
+		wall_material,
+		"BorderFrame_West"
+	)
+
+	print("GridUtilitiesComponent: Generated border frame from (%.1f,%.1f) to (%.1f,%.1f) - thickness: %.1fm, height: %.1fm" %
+		[start_x, start_z, end_x, end_z, thickness, wall_height])
+
+# Create a single wall segment with collider
+func _create_wall(position: Vector3, size: Vector3, material: Material, wall_name: String):
+	# Create static body for collision
+	var static_body = StaticBody3D.new()
+	static_body.name = wall_name
+	static_body.position = position
+
+	# Create collision shape
+	var collision_shape = CollisionShape3D.new()
+	var box_shape = BoxShape3D.new()
+	box_shape.size = size
+	collision_shape.shape = box_shape
+	static_body.add_child(collision_shape)
+
+	# Create mesh for visual representation
+	var mesh_instance = MeshInstance3D.new()
+	var box_mesh = BoxMesh.new()
+	box_mesh.size = size
+	mesh_instance.mesh = box_mesh
+	mesh_instance.material_override = material
+	static_body.add_child(mesh_instance)
+
+	# Add to scene
+	parent_node.add_child(static_body)
+
+	# Set owner for editor
+	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
+		static_body.owner = parent_node.get_tree().edited_scene_root
+		collision_shape.owner = parent_node.get_tree().edited_scene_root
+		mesh_instance.owner = parent_node.get_tree().edited_scene_root

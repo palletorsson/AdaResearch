@@ -1,7 +1,7 @@
 extends Node3D
 
 ## RotateGridCubes.gd
-## Selects all cubes in the 'grid_cubes' group and rotates them
+## Rotates all MultiMesh instances
 ## Syntax: Z, X, Y rotation in degrees, then Z, X, Y continuous rotation flags
 
 # Initial rotation configuration (Z, X, Y order)
@@ -25,86 +25,131 @@ extends Node3D
 @export var rotation_duration: float = 1.0  # Animation duration in seconds
 @export var use_animation: bool = true
 
+@export_group("MultiMesh")
+@export var multimesh_path: NodePath = "../GridMultiMesh"
+
 # Internal
 var target_rotation_degrees: Vector3 = Vector3.ZERO
+var multimesh_instance: MultiMeshInstance3D = null
+var multimesh: MultiMesh = null
+var animation_tween: Tween = null
+var initial_transforms: Array[Transform3D] = []
 
 func _ready():
 	# Build target rotation from Z, X, Y components
 	target_rotation_degrees = Vector3(rotation_x_degrees, rotation_y_degrees, rotation_z_degrees)
 
-	if rotate_on_ready:
-		rotate_all_cubes()
+	# Find MultiMesh
+	if not multimesh_path.is_empty():
+		multimesh_instance = get_node_or_null(multimesh_path)
+
+	if not multimesh_instance:
+		multimesh_instance = _find_multimesh_instance(get_parent())
+
+	if multimesh_instance:
+		multimesh = multimesh_instance.multimesh
+		if multimesh and multimesh.instance_count > 0:
+			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
+
+			# Store initial transforms
+			for i in range(multimesh.instance_count):
+				initial_transforms.append(multimesh.get_instance_transform(i))
+
+			if rotate_on_ready:
+				rotate_all_cubes()
+		else:
+			push_warning("MultiMesh found but has no instances")
+	else:
+		push_warning("Could not find MultiMeshInstance3D")
+
+func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
+	if node is MultiMeshInstance3D:
+		return node
+	for child in node.get_children():
+		var result = _find_multimesh_instance(child)
+		if result:
+			return result
+	return null
 
 func rotate_all_cubes():
-	"""Rotate all cubes in the grid_cubes group"""
-	var all_cubes = get_tree().get_nodes_in_group("grid_cubes")
-
-	if all_cubes.size() == 0:
-		print("RotateGridCubes: No cubes found in 'grid_cubes' group")
+	"""Rotate all cubes in the MultiMesh"""
+	if not multimesh:
+		print("RotateGridCubes: No MultiMesh found")
 		return
 
-	print("RotateGridCubes: Rotating %d cubes (Z=%s°, X=%s°, Y=%s°)" % [
-		all_cubes.size(),
+	print("RotateGridCubes: Rotating %d instances (Z=%s°, X=%s°, Y=%s°)" % [
+		multimesh.instance_count,
 		rotation_z_degrees,
 		rotation_x_degrees,
 		rotation_y_degrees
 	])
 
-	for cube in all_cubes:
-		if cube is Node3D:
-			if use_animation:
-				animate_rotation(cube)
-			else:
-				apply_instant_rotation(cube)
-
-			# Add continuous rotation if enabled
-			if continuous_rotation_z or continuous_rotation_x or continuous_rotation_y:
-				add_continuous_rotation(cube)
+	if use_animation:
+		animate_rotation()
+	else:
+		apply_instant_rotation()
 
 	print("RotateGridCubes: Rotation complete")
 
-func apply_instant_rotation(cube: Node3D):
-	"""Apply rotation instantly"""
-	cube.rotation_degrees = target_rotation_degrees
-
-func animate_rotation(cube: Node3D):
-	"""Animate rotation with a tween"""
-	var tween = create_tween()
-	tween.tween_property(cube, "rotation_degrees", target_rotation_degrees, rotation_duration)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_CUBIC)
-
-func add_continuous_rotation(cube: Node3D):
-	"""Add continuous rotation script to a cube"""
-	if not cube:
+func apply_instant_rotation():
+	"""Apply rotation instantly to all instances"""
+	if not multimesh:
 		return
 
-	# Create a continuous rotation script
-	var script_text = """
-extends Node3D
+	var rot_basis = Basis()
+	rot_basis = rot_basis.rotated(Vector3.BACK, deg_to_rad(rotation_z_degrees))
+	rot_basis = rot_basis.rotated(Vector3.RIGHT, deg_to_rad(rotation_x_degrees))
+	rot_basis = rot_basis.rotated(Vector3.UP, deg_to_rad(rotation_y_degrees))
 
-var rotation_speed_z: float = %s
-var rotation_speed_x: float = %s
-var rotation_speed_y: float = %s
+	for i in range(multimesh.instance_count):
+		var transform = initial_transforms[i] if i < initial_transforms.size() else multimesh.get_instance_transform(i)
+		transform.basis = rot_basis * Basis()
+		multimesh.set_instance_transform(i, transform)
+
+func animate_rotation():
+	"""Animate rotation with interpolation"""
+	if not multimesh or animation_tween:
+		return
+
+	animation_tween = create_tween()
+	var start_rot = Vector3.ZERO
+	var target_rot = target_rotation_degrees
+
+	animation_tween.tween_method(func(progress: float):
+		var current_rot = start_rot.lerp(target_rot, progress)
+
+		var rot_basis = Basis()
+		rot_basis = rot_basis.rotated(Vector3.BACK, deg_to_rad(current_rot.z))
+		rot_basis = rot_basis.rotated(Vector3.RIGHT, deg_to_rad(current_rot.x))
+		rot_basis = rot_basis.rotated(Vector3.UP, deg_to_rad(current_rot.y))
+
+		for i in range(multimesh.instance_count):
+			var transform = initial_transforms[i] if i < initial_transforms.size() else Transform3D()
+			transform.basis = rot_basis * Basis()
+			multimesh.set_instance_transform(i, transform)
+	, 0.0, 1.0, rotation_duration)
+
+	animation_tween.set_ease(Tween.EASE_IN_OUT)
+	animation_tween.set_trans(Tween.TRANS_CUBIC)
+	animation_tween.finished.connect(func(): animation_tween = null)
 
 func _process(delta: float) -> void:
-	if rotation_speed_z != 0.0:
-		rotate_object_local(Vector3(0, 0, 1), deg_to_rad(rotation_speed_z * delta))
-	if rotation_speed_x != 0.0:
-		rotate_object_local(Vector3(1, 0, 0), deg_to_rad(rotation_speed_x * delta))
-	if rotation_speed_y != 0.0:
-		rotate_object_local(Vector3(0, 1, 0), deg_to_rad(rotation_speed_y * delta))
-""" % [
-		rotation_speed_z if continuous_rotation_z else 0.0,
-		rotation_speed_x if continuous_rotation_x else 0.0,
-		rotation_speed_y if continuous_rotation_y else 0.0
-	]
+	if not multimesh:
+		return
 
-	var script = GDScript.new()
-	script.source_code = script_text
-	script.reload()
+	# Handle continuous rotation
+	if continuous_rotation_z or continuous_rotation_x or continuous_rotation_y:
+		for i in range(multimesh.instance_count):
+			var transform = multimesh.get_instance_transform(i)
 
-	cube.set_script(script)
+			if continuous_rotation_z:
+				transform.basis = transform.basis.rotated(Vector3.BACK, deg_to_rad(rotation_speed_z * delta))
+			if continuous_rotation_x:
+				transform.basis = transform.basis.rotated(Vector3.RIGHT, deg_to_rad(rotation_speed_x * delta))
+			if continuous_rotation_y:
+				transform.basis = transform.basis.rotated(Vector3.UP, deg_to_rad(rotation_speed_y * delta))
+
+			multimesh.set_instance_transform(i, transform)
 
 # Public API for manual control
 
@@ -132,8 +177,6 @@ func set_continuous_rotation(cont_z: bool, cont_x: bool, cont_y: bool):
 	continuous_rotation_z = cont_z
 	continuous_rotation_x = cont_x
 	continuous_rotation_y = cont_y
-	# Re-apply to all cubes
-	rotate_all_cubes()
 
 func reset_rotation():
 	"""Reset all cubes to zero rotation"""

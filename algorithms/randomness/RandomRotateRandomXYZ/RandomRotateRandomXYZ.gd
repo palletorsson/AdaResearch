@@ -1,64 +1,94 @@
 extends Node3D
 ## RotateRandomZXY.gd
-## Randomly rotates cubes in "grid_cubes" group on Z, X, and Y each frame
+## Randomly rotates MultiMesh cube instances on X, Y, and Z each frame
 
-@export var group_name: String = "grid_cubes"
+@export var multimesh_path: NodePath = "../GridMultiMesh"
 
-# Initial random rotation ranges (applied once on _ready)
-@export var min_z_degrees: float = -0.01
-@export var max_z_degrees: float =  0.01
-@export var min_x_degrees: float = -0.01
-@export var max_x_degrees: float =  0.01
-@export var min_y_degrees: float = -0.01
-@export var max_y_degrees: float =  0.01
+# Initial random rotation range (applied once on _ready)
+@export var min_degrees: float = -2.01
+@export var max_degrees: float =  2.01
 
-# Per-frame random rotation step ranges
-@export var min_step_z: float = -2.0
-@export var max_step_z: float =  2.0
-@export var min_step_x: float = -2.0
-@export var max_step_x: float =  2.0
-@export var min_step_y: float = -2.0
-@export var max_step_y: float =  2.0
+# Per-frame random rotation step range
+@export var min_step: float = -2.0
+@export var max_step: float =  2.0
 
 var rng := RandomNumberGenerator.new()
+var multimesh_instance: MultiMeshInstance3D = null
+var multimesh: MultiMesh = null
 
 func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	rng.randomize()
-	rotate_random_initial()
+
+	# Find the MultiMeshInstance3D
+	if not multimesh_path.is_empty():
+		multimesh_instance = get_node_or_null(multimesh_path)
+
+	# If path not set or not found, search for it
+	if not multimesh_instance:
+		multimesh_instance = _find_multimesh_instance(get_parent())
+
+	if multimesh_instance:
+		multimesh = multimesh_instance.multimesh
+		if multimesh and multimesh.instance_count > 0:
+			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
+			rotate_random_initial()
+		else:
+			push_warning("MultiMesh found but has no instances")
+	else:
+		push_warning("Could not find MultiMeshInstance3D - path: %s" % multimesh_path)
+
+func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
+	if node is MultiMeshInstance3D:
+		return node
+	for child in node.get_children():
+		var result = _find_multimesh_instance(child)
+		if result:
+			return result
+	return null
 
 func rotate_random_initial() -> void:
-	var cubes = get_tree().get_nodes_in_group(group_name)
-	if cubes.is_empty():
-		push_warning("No cubes found in group: %s" % group_name)
+	if not multimesh:
 		return
 
-	for cube in cubes:
-		if cube == null or not (cube is Node3D):
-			continue
+	var count = multimesh.instance_count
+	for i in range(count):
+		var transform = multimesh.get_instance_transform(i)
 
-		var rand_z = rng.randf_range(min_z_degrees, max_z_degrees)
-		var rand_x = rng.randf_range(min_x_degrees, max_x_degrees)
-		var rand_y = rng.randf_range(min_y_degrees, max_y_degrees)
+		# Apply random initial rotation
+		var rand_x = deg_to_rad(rng.randf_range(min_degrees, max_degrees))
+		var rand_y = deg_to_rad(rng.randf_range(min_degrees, max_degrees))
+		var rand_z = deg_to_rad(rng.randf_range(min_degrees, max_degrees))
 
-		cube.rotation_degrees = Vector3(rand_x, rand_y, rand_z)
+		# Create rotation basis and apply to transform
+		var rotation_basis = Basis()
+		rotation_basis = rotation_basis.rotated(Vector3.RIGHT, rand_x)
+		rotation_basis = rotation_basis.rotated(Vector3.UP, rand_y)
+		rotation_basis = rotation_basis.rotated(Vector3.BACK, rand_z)
 
-	print("✅ Rotated %d cubes randomly in Z, X, Y (initial)" % cubes.size())
+		transform.basis = rotation_basis * transform.basis
+		multimesh.set_instance_transform(i, transform)
+
+	print("✅ Applied initial rotation to %d MultiMesh instances" % count)
 
 func _process(delta: float) -> void:
-	var cubes = get_tree().get_nodes_in_group(group_name)
-	if cubes.is_empty():
+	if not multimesh or multimesh.instance_count == 0:
 		return
 
-	var cube: Node3D = cubes[rng.randi_range(0, cubes.size() - 1)]
-	if cube == null or not (cube is Node3D):
-		return
+	# Pick a random instance
+	var instance_index = rng.randi_range(0, multimesh.instance_count - 1)
+	var transform = multimesh.get_instance_transform(instance_index)
 
-	var step_z = rng.randf_range(min_step_z, max_step_z)
-	var step_x = rng.randf_range(min_step_x, max_step_x)
-	var step_y = rng.randf_range(min_step_y, max_step_y)
+	# Generate random rotation steps
+	var step_x = deg_to_rad(rng.randf_range(min_step, max_step))
+	var step_y = deg_to_rad(rng.randf_range(min_step, max_step))
+	var step_z = deg_to_rad(rng.randf_range(min_step, max_step))
 
-	cube.rotate_object_local(Vector3(1, 0, 0), deg_to_rad(step_x))
-	cube.rotate_object_local(Vector3(0, 1, 0), deg_to_rad(step_y))
-	cube.rotate_object_local(Vector3(0, 0, 1), deg_to_rad(step_z))
+	# Apply incremental rotation to the basis
+	transform.basis = transform.basis.rotated(Vector3.RIGHT, step_x)
+	transform.basis = transform.basis.rotated(Vector3.UP, step_y)
+	transform.basis = transform.basis.rotated(Vector3.BACK, step_z)
+
+	# Update the instance transform
+	multimesh.set_instance_transform(instance_index, transform)

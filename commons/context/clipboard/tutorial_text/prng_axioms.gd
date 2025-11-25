@@ -18,6 +18,49 @@ A mathematical function that produces a sequence of numbers that **looks** rando
 
 [hr]
 
+[b]Before Algorithms: A Million Random Digits[/b]
+
+Before computers could generate pseudo-random numbers, randomness had to be **physically produced** and **published**.
+
+In **1955**, the RAND Corporation published **"A Million Random Digits with 100,000 Normal Deviates"** - a book containing exactly what the title promised: pages and pages of random numbers.
+
+[color=yellow][b]The Process:[/b][/color]
+- Electronic roulette wheel generating pulses
+- Frequencies converted to digits (0-9)
+- Grouped into **five-digit numbers**
+- Arranged in tables: columns and rows
+- Published as physical book (400+ pages)
+
+[color=yellow][b]Example page format:[/b][/color]
+[code]
+TABLE OF RANDOM DIGITS
+RAND Corporation, 1955
+
+17600    10097  32533  76520  13586  34673
+17601    37542  04805  64894  74296  24805
+17602    08422  68953  19645  09303  23209
+17603    99019  02529  09376  70715  38311
+...
+[/code]
+
+**This was the state of randomness before PRNGs:**
+- Randomness as **material artifact** (physical book)
+- Pre-generated, **stored**, not computed
+- Used for Monte Carlo simulations, statistical sampling
+- Required **looking up** numbers in tables
+
+**The book cost $15 in 1955** (~$175 today). You paid for entropy.
+
+Today, this seems absurd - why buy randomness when `randf()` is free?
+
+But the book reveals something important: **Before PRNGs, randomness was scarce.** It had to be manufactured, archived, distributed. True entropy required **physical process** - roulette wheels, dice throws, radioactive decay.
+
+**PRNGs changed everything:** Randomness became **infinite and free** - just call a function. But at the cost of **authenticity** - algorithmic randomness is fake, reproducible, deterministic.
+
+The 1955 book contained **real randomness** (from physical process). Modern `randf()` contains **simulated randomness** (from equation).
+
+[hr]
+
 [b]The Seed: Origin as Determinant[/b]
 
 Every PRNG starts with a **seed** - a number that initializes the internal state.

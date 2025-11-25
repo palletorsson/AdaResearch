@@ -20,7 +20,7 @@ const MAX_X := 0.45
 
 var _sim_root: Node3D
 var _target: MeshInstance3D
-var _obstacles: Array[Obstacle] = []
+var _obstacles: Array[RocketObstacle] = []
 var _rockets: Array[Rocket] = []
 var _step: int = 0
 var _generation: int = 1
@@ -99,7 +99,7 @@ func _spawn_obstacles() -> void:
 
 	var centers := [Vector3(0.0, 0.45, 0.0), Vector3(0.25, 0.25, 0.0)]
 	for center in centers:
-		var obstacle := Obstacle.new()
+		var obstacle := RocketObstacle.new()
 		obstacle.init(_sim_root, center, Vector3(0.4, obstacle_height, 0.3), MAT_OBSTACLE)
 		_obstacles.append(obstacle)
 
@@ -238,7 +238,7 @@ class Rocket:
 			return
 		acceleration += dna.get_force(step)
 
-	func update(delta: float, target: Vector3, obstacles: Array[Obstacle]) -> void:
+	func update(delta: float, target: Vector3, obstacles: Array[RocketObstacle]) -> void:
 		if done or crashed:
 			return
 
@@ -292,7 +292,7 @@ class DNA:
 	func copy_from(other: DNA) -> void:
 		genes = other.genes.duplicate(true)
 
-class Obstacle:
+class RocketObstacle:
 	var root: Node3D
 	var mesh: MeshInstance3D
 	var size: Vector3

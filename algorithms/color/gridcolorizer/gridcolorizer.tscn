@@ -4,6 +4,7 @@
 
 [node name="CubeColorizer3D" type="Node"]
 script = ExtResource("1_cube3d")
+multimesh_path = NodePath("../GridMultiMesh")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
