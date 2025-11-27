@@ -1,0 +1,34 @@
+{
+    "sequences": {
+        "noise": {
+            "name": "Noise Functions",
+            "description": "Explore Perlin and Simplex noise and their applications",
+            "difficulty": "intermediate",
+            "estimated_time": "25-30 minutes",
+            "learning_objectives": [
+                "Perlin vs Simplex noise",
+                "Octaves and frequency",
+                "3D Noise fields",
+                "Procedural terrain"
+            ],
+            "maps": [
+                "Noise_Columns",
+                "Noise_One",
+                "Noise_Voxel",
+                "Noise_6_Wall",
+                "Noise_Inside_Noise",
+                "Noise_Volume",
+                "Noise_Space_10",
+                "Noise_Functions",
+                "Noise_Perlin_Simplex"
+            ],
+            "return_to": "lab",
+            "unlock_requirements": [
+                "randomness"
+            ],
+            "completion_rewards": [
+                "noise_architect_badge"
+            ]
+        }
+    }
+}

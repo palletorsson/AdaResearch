@@ -156,8 +156,57 @@ func _connect_component_signals():
 func _load_map_data():
 	print("GridSystem: Loading map data for '%s'" % map_name)
 	
+	# Check if map_name is actually a sequence name (should be handled by AdaSceneManager)
+	if _is_sequence_name(map_name):
+		push_warning("GridSystem: '%s' is a sequence name, not a map. Redirecting to AdaSceneManager..." % map_name)
+		var scene_manager = _find_ada_scene_manager()
+		if scene_manager:
+			scene_manager.start_sequence(map_name)
+			return
+		else:
+			push_error("GridSystem: Cannot redirect sequence '%s' - AdaSceneManager not found" % map_name)
+			return
+	
 	if not data_component.load_map_data(map_name):
 		push_error("GridSystem: Failed to load map data for '%s'" % map_name)
+
+# Check if a name is a sequence name
+func _is_sequence_name(name: String) -> bool:
+	var known_sequences = [
+		"primitives", "transformation", "tests", "color", "array_tutorial",
+		"meshestextures", "randomness", "wavefunctions", "vectors", 
+		"fractals", "cellularautomata", "joints", "noise", "forces",
+		"proceduralaudio", "physicssimulation", "softbodies",
+		"recursiveemergence", "lsystems", "swarmintelligence",
+		"patterngeneration", "proceduralgeneration", "searchpathfinding",
+		"topology", "graphtheory", "computationalgeometry",
+		"machinelearning", "criticalalgorithms", "speculativecomputation",
+		"resourcemanagement", "advancedlaboratory", "testmaps"
+	]
+	return name in known_sequences
+
+# Find AdaSceneManager in the scene tree
+func _find_ada_scene_manager():
+	var potential_paths = [
+		"/root/AdaSceneManager",
+		"/root/SceneManager"
+	]
+	
+	for path in potential_paths:
+		var manager = get_node_or_null(path)
+		if manager:
+			return manager
+	
+	# Try to find by class name
+	var tree = get_tree()
+	if tree:
+		var root = tree.current_scene
+		if root:
+			var manager = root.find_child("AdaSceneManager", true, false)
+			if manager:
+				return manager
+	
+	return null
 
 # Handle successful data loading
 func _on_data_loaded(loaded_map_name: String, format: String):

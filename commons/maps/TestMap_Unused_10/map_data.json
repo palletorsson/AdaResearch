@@ -1,0 +1,44 @@
+{
+	"map_info": {
+		"name": "TestMap_Unused_10",
+		"description": "Test map for artifacts: neon_wave_grid, noir_sequencer, noise_terrain, noise_terrain_with_blobs",
+		"dimensions": {
+			"width": 5,
+			"depth": 5,
+			"max_height": 3
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "neon_wave_grid:0:2", " ", "noir_sequencer:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "noise_terrain:0:2", " ", "noise_terrain_with_blobs:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to the next algorithm demonstration",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	}
+}

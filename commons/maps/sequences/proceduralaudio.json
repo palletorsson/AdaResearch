@@ -1,0 +1,34 @@
+{
+    "sequences": {
+        "proceduralaudio": {
+            "name": "Procedural Audio",
+            "description": "Generative sound synthesis and audio effects",
+            "difficulty": "advanced",
+            "estimated_time": "30-40 minutes",
+            "learning_objectives": [
+                "Synthesis types (FM, Subtractive, Additive)",
+                "Granular synthesis",
+                "Generative music",
+                "Psychoacoustics"
+            ],
+            "maps": [
+                "ProceduralAudio_Additive_Synthesis",
+                "ProceduralAudio_Subtractive_Synthesis",
+                "ProceduralAudio_FM_Synthesis",
+                "ProceduralAudio_Granular_Synthesis",
+                "ProceduralAudio_Audio_Effects",
+                "ProceduralAudio_Sound_Synthesis_Drone_Effects",
+                "ProceduralAudio_Generative_Music_Algorithms",
+                "ProceduralAudio_Psychoacoustics"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_proceduralaudio",
+            "unlock_requirements": [
+                "wavefunctions"
+            ],
+            "completion_rewards": [
+                "audio_alchemist_badge"
+            ]
+        }
+    }
+}

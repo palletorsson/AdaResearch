@@ -1,0 +1,44 @@
+{
+	"map_info": {
+		"name": "TestMap_Unused_26",
+		"description": "Test map for artifacts: spring_network, standing_waves, tech_noir_audio, ten_print",
+		"dimensions": {
+			"width": 5,
+			"depth": 5,
+			"max_height": 3
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "spring_network:0:2", " ", "standing_waves:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "tech_noir_audio:0:2", " ", "ten_print:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to the next algorithm demonstration",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	}
+}

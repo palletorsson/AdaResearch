@@ -1,0 +1,44 @@
+{
+	"map_info": {
+		"name": "TestMap_Unused_27",
+		"description": "Test map for artifacts: ten_print_maze_3d, tessellation_lattice_demo, unit_circle, unit_circle_advanced",
+		"dimensions": {
+			"width": 5,
+			"depth": 5,
+			"max_height": 3
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "ten_print_maze_3d:0:2", " ", "tessellation_lattice_demo:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "unit_circle:0:2", " ", "unit_circle_advanced:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to the next algorithm demonstration",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	}
+}

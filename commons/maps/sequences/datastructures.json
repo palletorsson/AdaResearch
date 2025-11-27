@@ -1,0 +1,38 @@
+{
+    "sequences": {
+        "datastructures": {
+            "name": "Data Structures",
+            "description": "Visualizing fundamental data structures in 3D space",
+            "difficulty": "intermediate",
+            "estimated_time": "30-40 minutes",
+            "learning_objectives": [
+                "Tree structures and hierarchy",
+                "Graph connectivity",
+                "Spatial partitioning (Quadtrees/Octrees)",
+                "Linear vs Non-linear data organization"
+            ],
+            "maps": [
+                "DataStructures_Linked_Lists",
+                "DataStructures_Trees",
+                "DataStructures_Hash_Maps",
+                "DataStructures_Heap_Operations",
+                "DataStructures_Graph_Structures",
+                "DataStructures_Union_Find_Disjoint_Set",
+                "DataStructures_Trie_Operations",
+                "DataStructures_Segment_Tree",
+                "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+                "DataStructures_Suffix_Array_Tree",
+                "DataStructures_BSP_Trees",
+                "DataStructures_Quadtrees_Octrees"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_datastructures",
+            "unlock_requirements": [
+                "proceduralgeneration"
+            ],
+            "completion_rewards": [
+                "struct_architect_badge"
+            ]
+        }
+    }
+}

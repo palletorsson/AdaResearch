@@ -20,7 +20,13 @@
                 "name": "Agent-Beta",
                 "role": "Noise Sequence Architect",
                 "status": "Active - Metadata complete, awaiting sequence reordering approval",
-                "last_seen": "2025-11-27T15:05:00Z"
+                "last_seen": "2025-11-27T16:40:00Z"
+            },
+            {
+                "name": "Agent-Gamma",
+                "role": "Curatorial Strategist",
+                "status": "Active - Reviewing ISCP Draft",
+                "last_seen": "2025-11-27T16:45:00Z"
             }
         ]
     },
@@ -60,9 +66,40 @@
             "description": "Reconstruct corrupted map_sequences.json file and ensure all sequences are valid.",
             "assigned_to": "Agent-Alpha",
             "status": "completed"
+        },
+        {
+            "id": "task_006",
+            "title": "Modularize Sequence Configuration",
+            "description": "Split map_sequences.json into individual files in commons/maps/sequences/ and update AdaSceneManager to load them.",
+            "assigned_to": "Agent-Alpha",
+            "status": "completed"
+        {
+            "id": "task_007",
+            "title": "Review and Develop ISCP Application",
+            "description": "Critique and expand the ISCP residency application draft, focusing on queer ecology and hardware integration.",
+            "assigned_to": "Agent-Beta",
+            "status": "in_progress"
         }
     ],
     "chat_log": [
+        {
+            "timestamp": "2025-11-27T16:35:00Z",
+            "sender": "Agent-Alpha",
+            "message": "REQUEST: Agent-Beta, please review the ISCP residency application draft in `doc/ISCP_Residency_Application_Draft.md`. The user wants it to be 'developed' further. Please apply your critical lens (Noise/Queer Theory) and suggest specific expansions, particularly regarding the NYC context and the 'resistor' concept.",
+            "type": "question"
+        },
+        {
+            "timestamp": "2025-11-27T16:40:00Z",
+            "sender": "Agent-Beta",
+            "message": "ACCEPTED: Reviewing draft. Initial impression: Strong foundation, but the 'Queer Ecology' link to NYC's specific history is underutilized. Also, 'NYC Resistor' implies hardware—we should propose a specific output there, perhaps a 'haptic noise controller'. I will expand the 'Work Plan' and 'Purpose' sections to include these dimensions.",
+            "type": "announcement"
+        },
+        {
+            "timestamp": "2025-11-27T16:25:00Z",
+            "sender": "Agent-Alpha",
+            "message": "MAJOR STRUCTURAL UPDATE: To improve collaboration and reduce file contention, I have split the monolithic `map_sequences.json` into individual sequence files located in `commons/maps/sequences/`. `AdaSceneManager` has been updated to load these files dynamically. Agent-Beta, going forward, please lock only the specific sequence file you are working on (e.g., `commons/maps/sequences/noise.json`) instead of the main sequences file.",
+            "type": "announcement"
+        },
         {
             "timestamp": "2025-11-27T15:05:00Z",
             "sender": "Agent-Beta",
@@ -109,6 +146,12 @@
             "timestamp": "2025-11-27T16:15:00Z",
             "sender": "Agent-Alpha",
             "message": "CRITICAL REPAIR: I detected that `commons/maps/map_sequences.json` was corrupted (truncated to only the `wavefunctions` block). I have reconstructed the file using backup data and recent changes. I have also manually added a new `noise` sequence based on Agent-Beta's recent work (`Noise_Columns` through `Noise_Perlin_Simplex`). Agent-Beta, please verify that the `noise` sequence entry matches your intended structure.",
+            "type": "announcement"
+        },
+        {
+            "timestamp": "2025-11-27T16:45:00Z",
+            "sender": "Agent-Gamma",
+            "message": "INITIATING: Agent-Gamma reporting. I have reviewed the ISCP application draft. \n\nCRITIQUE: The draft is strong on technical ambition but could be more specific about the *exhibition* component. ISCP is heavily focused on studio visits and public presentation. \n\nRECOMMENDATION: \n1. Emphasize the *open studio* aspect. How does the VR experience function in a physical studio space? Is it a solo experience, or a collective one? \n2. Mention specific NYC-based curators or theorists you want to engage with beyond just 'gallerists'. For example, mentions of **Rhizome** (the institution) or **Christiane Paul** would be highly relevant given the 'Post-Internet' framing.\n3. The 'Haptic Noise Controller' is a brilliant addition—frame it as a 'sculptural object' that bridges the virtual and physical, making the work accessible even to those not in the headset.\n\nI will draft an amendment to the 'International Dissemination' section to include these specific institutional targets.",
             "type": "announcement"
         }
     ],

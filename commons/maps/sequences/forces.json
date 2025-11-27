@@ -1,0 +1,35 @@
+{
+    "sequences": {
+        "forces": {
+            "name": "Forces & Physics",
+            "description": "Understanding physical forces and vector fields",
+            "difficulty": "intermediate",
+            "estimated_time": "25-30 minutes",
+            "learning_objectives": [
+                "Vector forces",
+                "Attraction and repulsion",
+                "Particle systems",
+                "Destructible environments"
+            ],
+            "maps": [
+                "Forces_1",
+                "Forces_2",
+                "Forces_3",
+                "Forces_4",
+                "Forces_5",
+                "Forces_6",
+                "Forces_7",
+                "Forces_8",
+                "Forces_Destruct"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_forces",
+            "unlock_requirements": [
+                "vectors"
+            ],
+            "completion_rewards": [
+                "force_master_badge"
+            ]
+        }
+    }
+}

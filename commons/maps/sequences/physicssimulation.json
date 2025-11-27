@@ -1,0 +1,42 @@
+{
+    "sequences": {
+        "physicssimulation": {
+            "name": "Physics Simulation",
+            "description": "Advanced physics simulation techniques",
+            "difficulty": "advanced",
+            "estimated_time": "45-60 minutes",
+            "learning_objectives": [
+                "Numerical integration",
+                "Rigid body dynamics",
+                "Fluid simulation (SPH)",
+                "Soft body physics"
+            ],
+            "maps": [
+                "PhysicsSimulation_Newton_s_Laws",
+                "PhysicsSimulation_Vector_Fields",
+                "PhysicsSimulation_Numerical_Integration",
+                "PhysicsSimulation_Verlet_Integration",
+                "PhysicsSimulation_Particle_Systems",
+                "PhysicsSimulation_Mass_Spring_Damper",
+                "PhysicsSimulation_Spring_Mass_Systems",
+                "PhysicsSimulation_Three_Body_Problem",
+                "PhysicsSimulation_Rigid_Body_Dynamics",
+                "PhysicsSimulation_Collision_Detection",
+                "PhysicsSimulation_Constraints",
+                "PhysicsSimulation_Cloth_Simulation",
+                "PhysicsSimulation_Fluid_Simulation_SPH",
+                "PhysicsSimulation_Finite_Element_Method_FEM",
+                "PhysicsSimulation_Force_Fields",
+                "PhysicsSimulation_Bouncing_Ball_Physics"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_physicssimulation",
+            "unlock_requirements": [
+                "forces"
+            ],
+            "completion_rewards": [
+                "physics_engine_badge"
+            ]
+        }
+    }
+}

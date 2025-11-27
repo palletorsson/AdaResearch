@@ -361,17 +361,7 @@
 			"name": "Random Gaussian Texture",
 			"lookup_name": "random_gaussian_texture",
 			"description": "Interactive Gaussian distribution texture generation for natural random patterns",
-			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
-			"position": [
-				20.0,
-				1.0,
-				2.0
-			],
-			"rotation": [
-				0.0,
-				0.0,
-				0.0
-			]
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn"
 		},
 		"probability_distributions_3d": {
 			"name": "Probability Distributions 3D",

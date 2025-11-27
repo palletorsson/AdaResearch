@@ -5,7 +5,7 @@ extends Node3D
 
 @export var points_per_line: int = 120
 @export var animation_speed: float = 0.0  # Set to 0 for static lines
-@export var flow_speed: float = 0.0  # Set to 0 for static colors
+@export var flow_speed: float = 1.0  # Color flow animation enabled
 @export var hallway_width: float = 12.0
 @export var hallway_length: float = 60.0
 @export var hallway_height: float = 8.0
@@ -28,7 +28,7 @@ const FLOOR_OFFSET_Y := -0.1
 
 const LINE_SHADER := """
 shader_type spatial;
-render_mode depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_alpha, cull_disabled, diffuse_lambert, specular_disabled;
 
 uniform float time_offset = 0.0;
 uniform float flow_speed = 0.0;  // Static by default
@@ -51,12 +51,13 @@ void vertex() {
 }
 
 void fragment() {
-	// Static gradient based on position along line
-	float color_wave = line_progress;  // Simple gradient, no time-based animation
+	// Animated gradient flows along the line
+	float color_wave = line_progress + (TIME * flow_speed * 0.1);
+	color_wave = fract(color_wave);  // Loop the animation
 	vec3 flowing_color = mix(color_start.rgb, color_end.rgb, color_wave);
 
-	// Optional rainbow effect, but static
-	float hue_shift = line_progress;  // No time component for static look
+	// Animated rainbow effect
+	float hue_shift = line_progress + (TIME * flow_speed * 0.05);
 	vec3 rainbow = vec3(
 		sin(hue_shift * 6.2831) * 0.5 + 0.5,
 		sin(hue_shift * 6.2831 + 2.094) * 0.5 + 0.5,
@@ -73,7 +74,9 @@ void fragment() {
 
 	ALBEDO = final_color;
 	EMISSION = final_color * glow_intensity * glow;
-	ALPHA = color_start.a;
+	METALLIC = 0.0;
+	ROUGHNESS = 1.0;
+	ALPHA = 0.75;  // Semi-transparent
 }
 """
 
@@ -99,6 +102,7 @@ func _setup_environment() -> void:
 	env.background_color = Color(0.03, 0.03, 0.07)
 	env.ambient_light_color = Color(0.1, 0.1, 0.2)
 	env.ambient_light_energy = 0.5
+	env.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
 	env.glow_enabled = true
 	env.glow_intensity = 0.6
 	env.volumetric_fog_enabled = true
@@ -142,8 +146,8 @@ func _create_hallway_box() -> void:
 func _make_metal(color: Color) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = color
-	mat.metallic = 0.8
-	mat.roughness = 0.12
+	mat.metallic = 0.0
+	mat.roughness = 1.0
 	# mat.specular = 0.8  # Godot 3.x parameter not available in Godot 4
 	return mat
 

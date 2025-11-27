@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8x9k2m1n4p7q"]
+[gd_scene load_steps=2 format=3 uid="uid://c8yak2m1n4p7q"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd" id="1"]
+[ext_resource type="Script" uid="uid://cpeuhirdk28ch" path="res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd" id="1"]
 
 [node name="SphericalHarmonics" type="Node3D"]
 script = ExtResource("1")
@@ -12,7 +12,6 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 6)
-fov = 75.0
 
 [node name="Controls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
@@ -39,7 +38,6 @@ text = "Orbit Speed φ"
 font_size = 16
 
 [node name="SliderPhi" type="Node3D" parent="Controls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="AutoOrbitLabel" type="Label3D" parent="Controls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)

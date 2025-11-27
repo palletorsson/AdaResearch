@@ -1,0 +1,37 @@
+{
+    "sequences": {
+        "recursiveemergence": {
+            "name": "Recursive Emergence",
+            "description": "Fractals, cellular automata, and emergent complexity",
+            "difficulty": "advanced",
+            "estimated_time": "40-50 minutes",
+            "learning_objectives": [
+                "Cellular Automata",
+                "Fractals (Mandelbrot, Julia)",
+                "Recursive systems",
+                "Emergent behavior"
+            ],
+            "maps": [
+                "RecursiveEmergence_Cellular_Automata_1D",
+                "RecursiveEmergence_Cellular_Automata_2D",
+                "RecursiveEmergence_Cellular_Automata_3D",
+                "RecursiveEmergence_Rule_30_110",
+                "RecursiveEmergence_Lattice_Gas_Automata",
+                "RecursiveEmergence_Fibonacci_Sequences",
+                "RecursiveEmergence_Tail_Recursion_Memoization",
+                "RecursiveEmergence_Iterated_Function_Systems_IFS",
+                "RecursiveEmergence_Koch_Curve",
+                "RecursiveEmergence_Mandelbrot_Set",
+                "RecursiveEmergence_Julia_Set"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_recursiveemergence",
+            "unlock_requirements": [
+                "patterngeneration"
+            ],
+            "completion_rewards": [
+                "complexity_theorist_badge"
+            ]
+        }
+    }
+}

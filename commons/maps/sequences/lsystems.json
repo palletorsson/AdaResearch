@@ -1,0 +1,32 @@
+{
+    "sequences": {
+        "lsystems": {
+            "name": "L-Systems",
+            "description": "Algorithmic botany and formal grammars",
+            "difficulty": "intermediate",
+            "estimated_time": "20-25 minutes",
+            "learning_objectives": [
+                "Formal grammars",
+                "Rewriting systems",
+                "Turtle graphics",
+                "Stochastic systems"
+            ],
+            "maps": [
+                "LSystems_Backus_Naur_Form_BNF",
+                "LSystems_Context_Free_Grammars_CFG",
+                "LSystems_Different_Grammar_Types",
+                "LSystems_Shape_Grammars",
+                "LSystems_Stochastic_L_Systems",
+                "LSystems_Tree_L_Systems"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_lsystems",
+            "unlock_requirements": [
+                "proceduralgeneration"
+            ],
+            "completion_rewards": [
+                "botanist_badge"
+            ]
+        }
+    }
+}

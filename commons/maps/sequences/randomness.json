@@ -1,0 +1,35 @@
+{
+    "sequences": {
+        "randomness": {
+            "name": "Randomness & Entropy",
+            "description": "Explore concepts of randomness, probability, and entropy",
+            "difficulty": "intermediate",
+            "estimated_time": "25-30 minutes",
+            "learning_objectives": [
+                "Entropy definition",
+                "TRNG vs PRNG",
+                "Distributions",
+                "Emergent chaos"
+            ],
+            "maps": [
+                "Random_Define",
+                "Randomness_TRNG_vs_PRNG",
+                "Random_Points_Distribution",
+                "Randomness_Distribution_Visualization",
+                "Random_Gaussian",
+                "Random_Bell_Alley",
+                "Randomness_Random_Transformations",
+                "Random_Pheromone",
+                "Randomness_Examples_of_Randomness"
+            ],
+            "return_to": "lab",
+            "unlock_requirements": [
+                "color"
+            ],
+            "completion_rewards": [
+                "entropy_badge",
+                "chaos_explorer_badge"
+            ]
+        }
+    }
+}

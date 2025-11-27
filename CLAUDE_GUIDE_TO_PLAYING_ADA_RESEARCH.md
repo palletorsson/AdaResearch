@@ -430,7 +430,10 @@ Experience:
 ## Key Files Reference
 
 ### Map System
-- **Sequences:** `commons/maps/map_sequences.json`
+- **Base Sequence Configuration:** `commons/maps/map_sequences.json`
+- **Modular Sequence Files:** `commons/maps/sequences/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
+  - `AdaSceneManager` merges these files dynamically at runtime.
+  - Look here for specific sequence definitions like "wavefunctions" or "noise".
 - **Individual maps:** `commons/maps/{MapName}/map_data.json`
 
 ### Tutorial Content
@@ -443,9 +446,11 @@ Experience:
 - **Base scene:** `commons/scenes/base.tscn`
 
 ### Grid System
-- **Artifacts catalog:** `commons/artifacts/grid_artifacts.json` (4454 lines - master lookup table!)
+- **Artifacts catalog:** `commons/artifacts/grid_artifacts.json` (Base lookup table)
+- **Modular Artifact Registry:** `commons/artifacts/registry/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
+  - `GridInteractablesComponent` merges these files dynamically at runtime.
+  - Contains descriptions and metadata for specialized objects.
   - Maps keys like "code_display" → scene files like "res://commons/context/clipboard/codeDisplay.tscn"
-  - Contains descriptions and metadata for all placeable objects
 
 ## Understanding the Pedagogical Strategy
 

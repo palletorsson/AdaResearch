@@ -1,0 +1,31 @@
+{
+    "sequences": {
+        "advancedlaboratory": {
+            "name": "Advanced Laboratory",
+            "description": "Explore complex systems theory and laboratory simulation",
+            "difficulty": "advanced",
+            "estimated_time": "25-30 minutes",
+            "learning_objectives": [
+                "Complex systems modeling",
+                "Cybernetic feedback loops",
+                "Entropy and information theory",
+                "Laboratory equipment simulation"
+            ],
+            "maps": [
+                "AdvancedLaboratory_Lab_Equipment_Simulation",
+                "AdvancedLaboratory_Water_Dynamics",
+                "AdvancedLaboratory_Entropy_Visualization",
+                "AdvancedLaboratory_Feedback_Cybernetics",
+                "AdvancedLaboratory_Systems_Theory"
+            ],
+            "return_to": "lab",
+            "unlock_requirements": [
+                "resourcemanagement"
+            ],
+            "completion_rewards": [
+                "systems_master_badge",
+                "laboratory_architect_badge"
+            ]
+        }
+    }
+}

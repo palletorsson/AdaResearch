@@ -272,6 +272,8 @@ func _get_sequence_color() -> Color:
 			return Color.GREEN
 		"advanced_concepts":
 			return Color.YELLOW
+		"testmaps":
+			return Color.ORANGE
 		_:
 			return Color.WHITE
 

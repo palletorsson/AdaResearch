@@ -1,0 +1,29 @@
+{
+    "sequences": {
+        "meshes": {
+            "name": "Mesh Generation",
+            "description": "Procedural mesh generation and manipulation",
+            "difficulty": "intermediate",
+            "estimated_time": "15-20 minutes",
+            "learning_objectives": [
+                "Vertex manipulation",
+                "Mesh topology",
+                "Procedural geometry"
+            ],
+            "maps": [
+                "Meshes_One",
+                "Meshes_Two",
+                "Meshes_Three",
+                "Meshes_Four"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_meshes",
+            "unlock_requirements": [
+                "computationalgeometry"
+            ],
+            "completion_rewards": [
+                "mesh_weaver_badge"
+            ]
+        }
+    }
+}

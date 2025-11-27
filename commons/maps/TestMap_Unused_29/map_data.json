@@ -1,0 +1,44 @@
+{
+	"map_info": {
+		"name": "TestMap_Unused_29",
+		"description": "Test map for artifacts: walkingsphere, water_land_ride, wave_interference, wave_propagation_3d",
+		"dimensions": {
+			"width": 5,
+			"depth": 5,
+			"max_height": 3
+		}
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "s", " ", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " "],
+			[" ", "walkingsphere:0:2", " ", "water_land_ride:0:2", " "],
+			[" ", " ", " ", " ", " "],
+			[" ", "wave_interference:0:2", " ", "wave_propagation_3d:0:2", " "],
+			[" ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next Lesson",
+			"description": "Continue to the next algorithm demonstration",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	}
+}

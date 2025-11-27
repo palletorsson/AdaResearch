@@ -1,0 +1,32 @@
+{
+    "sequences": {
+        "criticalalgorithms": {
+            "name": "Critical Algorithms",
+            "description": "Explore algorithmic bias, ethics, and societal impact of algorithms",
+            "difficulty": "advanced",
+            "estimated_time": "25-30 minutes",
+            "learning_objectives": [
+                "Algorithmic bias analysis",
+                "Ethics in AI systems",
+                "Societal impact assessment",
+                "Surveillance system critique"
+            ],
+            "maps": [
+                "CriticalAlgorithms_Algorithmic_Misframing",
+                "CriticalAlgorithms_Societal_Impact",
+                "CriticalAlgorithms_Ethics_in_AI",
+                "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+                "CriticalAlgorithms_Surveillance_Systems",
+                "CriticalAlgorithms_Attention_Economy"
+            ],
+            "return_to": "lab",
+            "unlock_requirements": [
+                "machinelearning"
+            ],
+            "completion_rewards": [
+                "critical_thinker_badge",
+                "algorithm_ethicist_badge"
+            ]
+        }
+    }
+}

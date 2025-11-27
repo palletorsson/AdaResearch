@@ -1,0 +1,34 @@
+{
+    "sequences": {
+        "computationalgeometry": {
+            "name": "Computational Geometry",
+            "description": "Explore geometric algorithms and spatial computation",
+            "difficulty": "advanced",
+            "estimated_time": "30-35 minutes",
+            "learning_objectives": [
+                "Geometric algorithm design",
+                "Spatial data structures",
+                "Distance field computation",
+                "Morphological operations"
+            ],
+            "maps": [
+                "ComputationalGeometry_Medial_Axis_Transform",
+                "ComputationalGeometry_Distance_Fields_SDF",
+                "ComputationalGeometry_Morphological_Operations",
+                "ComputationalGeometry_Closest_Pair_Problem",
+                "ComputationalGeometry_Line_Intersection",
+                "ComputationalGeometry_Point_in_Polygon",
+                "ComputationalGeometry_Convex_Hull_Algorithms",
+                "ComputationalGeometry_Euclidean_Distance_Transform"
+            ],
+            "return_to": "lab",
+            "unlock_requirements": [
+                "graphtheory"
+            ],
+            "completion_rewards": [
+                "geometry_expert_badge",
+                "spatial_computation_badge"
+            ]
+        }
+    }
+}

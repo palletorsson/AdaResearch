@@ -1,0 +1,31 @@
+{
+    "sequences": {
+        "patterngeneration": {
+            "name": "Pattern Generation",
+            "description": "Algorithms for generating visual patterns and tiling",
+            "difficulty": "intermediate",
+            "estimated_time": "20-30 minutes",
+            "learning_objectives": [
+                "Tiling systems",
+                "Diffusion Limited Aggregation",
+                "Penrose tiling",
+                "Wang tiles"
+            ],
+            "maps": [
+                "PatternGeneration_Diffusion_Limited_Aggregation_DLA",
+                "PatternGeneration_Narrative_Generation",
+                "PatternGeneration_Penrose_Tilings",
+                "PatternGeneration_Typography_Generation",
+                "PatternGeneration_Wang_Tiles"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_patterngeneration",
+            "unlock_requirements": [
+                "randomness"
+            ],
+            "completion_rewards": [
+                "pattern_weaver_badge"
+            ]
+        }
+    }
+}

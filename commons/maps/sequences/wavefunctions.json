@@ -1,0 +1,62 @@
+{
+    "sequences": {
+        "wavefunctions": {
+            "name": "Wavefunctions",
+            "description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
+            "difficulty": "intermediate",
+            "estimated_time": "20-30 minutes",
+            "learning_objectives": [
+                "Sine waves and harmonics",
+                "Spectral analysis",
+                "Audio-visualization",
+                "Wave interference"
+            ],
+            "audio": {
+                "ambient_preset": "techno_noir_subtle",
+                "volume": -10.0,
+                "interactive_sounds": {
+                    "teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
+                }
+            },
+            "content": [
+                "Sine_Space: Sine wave visualization",
+                "Oscillating_Wave: Amplitude, frequency, and phase",
+                "Mario_Sound: Audio reactivity",
+                "Beat_Frequencies: Interference and beats",
+                "Harmonic_Builder: Additive synthesis",
+                "Fourier_Form: Fourier transform on 2D shapes",
+                "Spherical_Harmonics: Quantum orbitals",
+                "Wave_Propagation: Spatial wave physics",
+                "Kusama: Pattern and interference",
+                "Dancing_Body: Procedural kinematics",
+                "Vitruvian_Man: Proportion and spectral body",
+                "Cables: Catenary curves and simulation",
+                "Bernini: Procedural form and displacement",
+                "John_Cage: Silence and aleatoric noise"
+            ],
+            "maps": [
+                "WaveFunctions_Sine_Space",
+                "WaveFunctions_Oscillating_Wave",
+                "WaveFunctions_Mario_Sound",
+                "WaveFunctions_Beat_Frequencies",
+                "WaveFunctions_Harmonic_Builder",
+                "WaveFunctions_Fourier_Form",
+                "WaveFunctions_Spherical_Harmonics",
+                "WaveFunctions_3D_Wave_Propagation",
+                "WaveFunctions_Kusama",
+                "WaveFunctions_Dancing_Body",
+                "WaveFunctions_Vitruvian_Man",
+                "Wavefunctions_Cables",
+                "Wavefunctions_Bernini",
+                "WaveFunctions_John_Cage"
+            ],
+            "return_to": "lab",
+            "lab_map": "Lab/map_data_post_wavefunctions",
+            "unlock_requirements": [],
+            "completion_rewards": [
+                "wave_researcher_badge",
+                "spectral_sleuth_badge"
+            ]
+        }
+    }
+}

@@ -38,6 +38,7 @@ var map_progression_manager_ref = null
 # Sequence data loaded from JSON
 var sequence_configs: Dictionary = {}
 const SEQUENCES_JSON_PATH = "res://commons/maps/map_sequences.json"
+const SEQUENCE_REGISTRY_PATH = "res://commons/maps/sequences/"
 
 # Signals
 signal scene_transition_started(from_scene: String, to_scene: String, transition_type: TransitionType)
@@ -131,18 +132,52 @@ func connect_to_grid_system(grid_system: Node):
 # =============================================================================
 
 func _load_sequence_configurations():
-	"""Load sequence configurations from JSON file - REQUIRED"""
+	"""Load sequence configurations from JSON file and registry directory - REQUIRED"""
 	if debug:
-		print("AdaSceneManager: Loading sequence configurations from JSON...")
+		print("AdaSceneManager: Loading sequence configurations...")
 	
-	if not FileAccess.file_exists(SEQUENCES_JSON_PATH):
-		push_error("AdaSceneManager: CRITICAL - Sequences JSON file not found: %s" % SEQUENCES_JSON_PATH)
-		push_error("AdaSceneManager: Create the file with proper sequence definitions")
+	# 1. Load main sequence file (Base)
+	if FileAccess.file_exists(SEQUENCES_JSON_PATH):
+		_load_single_sequence_file(SEQUENCES_JSON_PATH)
+	else:
+		push_warning("AdaSceneManager: Main sequences file not found: %s" % SEQUENCES_JSON_PATH)
+		
+	# 2. Load individual sequence files from registry directory
+	var dir = DirAccess.open(SEQUENCE_REGISTRY_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".json"):
+				_load_single_sequence_file(SEQUENCE_REGISTRY_PATH + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	else:
+		if debug:
+			print("AdaSceneManager: No sequence registry directory found at %s" % SEQUENCE_REGISTRY_PATH)
+
+	if sequence_configs.is_empty():
+		push_error("AdaSceneManager: CRITICAL - No sequences found in any file")
 		return
 	
-	var file = FileAccess.open(SEQUENCES_JSON_PATH, FileAccess.READ)
+	if debug:
+		print("AdaSceneManager: ✅ Successfully loaded %d sequence configurations" % sequence_configs.size())
+	
+	# Log loaded sequences for verification
+	for sequence_name in sequence_configs.keys():
+		var config = sequence_configs[sequence_name]
+		var maps = config.get("maps", [])
+		if debug:
+			print("  → %s: %d maps" % [sequence_name, maps.size()])
+
+func _load_single_sequence_file(path: String):
+	"""Helper to load a single sequence JSON file"""
+	if debug:
+		print("AdaSceneManager: Loading sequence file: %s" % path)
+		
+	var file = FileAccess.open(path, FileAccess.READ)
 	if not file:
-		push_error("AdaSceneManager: CRITICAL - Could not open sequences file: %s" % SEQUENCES_JSON_PATH)
+		push_error("AdaSceneManager: Could not open sequence file: %s" % path)
 		return
 	
 	var json_text = file.get_as_text()
@@ -152,27 +187,17 @@ func _load_sequence_configurations():
 	var parse_result = json.parse(json_text)
 	
 	if parse_result != OK:
-		push_error("AdaSceneManager: CRITICAL - Failed to parse sequences JSON: %s" % json.get_error_message())
-		push_error("AdaSceneManager: Check JSON syntax in: %s" % SEQUENCES_JSON_PATH)
+		push_error("AdaSceneManager: Failed to parse sequence JSON: %s in %s" % [json.get_error_message(), path])
 		return
 	
 	var json_data = json.data
-	sequence_configs = json_data.get("sequences", {})
+	var sequences = json_data.get("sequences", {})
 	
-	if sequence_configs.is_empty():
-		push_error("AdaSceneManager: CRITICAL - No sequences found in JSON file")
-		push_error("AdaSceneManager: Check 'sequences' section in: %s" % SEQUENCES_JSON_PATH)
-		return
-	
-	if debug:
-		print("AdaSceneManager: ✅ Successfully loaded %d sequence configurations from JSON" % sequence_configs.size())
-	
-	# Log loaded sequences for verification
-	for sequence_name in sequence_configs.keys():
-		var config = sequence_configs[sequence_name]
-		var maps = config.get("maps", [])
+	# Merge into main config
+	for seq_name in sequences.keys():
+		sequence_configs[seq_name] = sequences[seq_name]
 		if debug:
-			print("  → %s: %d maps (%s)" % [sequence_name, maps.size(), str(maps)])
+			print("    Loaded sequence: %s" % seq_name)
 
 # =============================================================================
 # ARTIFACT SEQUENCE MAPPING
