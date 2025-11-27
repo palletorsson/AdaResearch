@@ -105,63 +105,51 @@ func build_navigation_grid():
 						nav_grid[nz][nx] = 1  # 1 = wall
 
 func create_3d_maze():
-	# Create the floor
-	var floor_mesh = PlaneMesh.new()
-	floor_mesh.size = Vector2(grid_width * cell_size, grid_depth * cell_size)
-	
-	var floor_material = ShaderMaterial.new()
-	floor_material.shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
-	
-	var floor_instance = MeshInstance3D.new()
-	floor_instance.mesh = floor_mesh
-	floor_instance.material_override = floor_material
-	floor_instance.position = Vector3(grid_width * cell_size / 3, -1, grid_depth * cell_size / 2)
-	add_child(floor_instance)
-	
 	# Clear existing wall nodes
 	wall_nodes.clear()
-	
-	# Create maze walls
+
+	# Create maze walls (in ZY plane)
 	for z in range(grid_depth):
 		for x in range(grid_width):
-			var wall_position = Vector3(x * cell_size, 3, z * cell_size)
-			
+			var wall_position = Vector3(0, z * cell_size, x * cell_size)
+
 			if maze[z][x] == 0:  # / diagonal
 				create_diagonal_wall(wall_position, true)
 			else:  # \ diagonal
 				create_diagonal_wall(wall_position, false)
-	
-	# Create entrance and exit markers
-	create_marker(Vector3(0, 0.05, start_pos.y * cell_size + cell_size/2), Color.GREEN)
-	create_marker(Vector3(grid_width * cell_size, 0.05, exit_pos.y * cell_size + cell_size/2), Color.BLUE)
+
+	# Create entrance and exit markers (now in ZY plane)
+	create_marker(Vector3(ant_size, start_pos.y * cell_size + cell_size/2, 0), Color.GREEN)
+	create_marker(Vector3(ant_size, exit_pos.y * cell_size + cell_size/2, grid_width * cell_size), Color.BLUE)
 
 func create_diagonal_wall(position, is_forward_slash):
 	var wall_node = Node3D.new()
 	wall_node.position = position
 	add_child(wall_node)
-	
+
 	# Store reference to wall node for movement
 	wall_nodes.append(wall_node)
-	
+
+	# Wall in ZY plane: thin in X, diagonal length, line thickness
 	var wall_mesh = BoxMesh.new()
-	wall_mesh.size = Vector3(cell_size * sqrt(2), wall_height, wall_thickness)
-	
+	wall_mesh.size = Vector3(wall_thickness, wall_thickness, cell_size * sqrt(2))
+
 	var wall_material = ShaderMaterial.new()
 	wall_material.shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
-	
+
 	var wall_instance = MeshInstance3D.new()
 	wall_instance.mesh = wall_mesh
 	wall_instance.material_override = wall_material
-	
-	# Position adjustments
-	wall_instance.position = Vector3(cell_size/2, wall_height/2, cell_size/2)
-	
-	# Rotate based on diagonal type
-	if is_forward_slash:  # /
-		wall_instance.rotate_y(PI/4)
-	else:  # \
-		wall_instance.rotate_y(-PI/4)
-	
+
+	# Position at center of cell in ZY plane
+	wall_instance.position = Vector3(0, cell_size/2, cell_size/2)
+
+	# Rotate around X axis to create diagonals in ZY plane
+	if is_forward_slash:  # / (bottom-left to top-right)
+		wall_instance.rotation = Vector3(-PI/4, 0, 0)
+	else:  # \ (top-left to bottom-right)
+		wall_instance.rotation = Vector3(PI/4, 0, 0)
+
 	wall_node.add_child(wall_instance)
 
 func create_marker(position, color):
@@ -214,16 +202,16 @@ func create_path_visualization():
 	# We'll create the actual path mesh in update_path_visualization()
 
 func place_ant():
-	# Place ant at start (left side)
+	# Place ant at start (bottom side in ZY plane)
 	var start_z = start_pos.y * nav_grid_scale + nav_grid_scale / 2
 	ant_nav_pos = Vector2i(0, start_z)
 	ant_path = [ant_nav_pos]
-	
-	# Set 3D position
-	var ant_3d_x = ant_nav_pos.x * cell_size / nav_grid_scale
-	var ant_3d_z = ant_nav_pos.y * cell_size / nav_grid_scale
-	ant_node.position = Vector3(ant_3d_x, ant_size, ant_3d_z)
-	
+
+	# Set 3D position (now in ZY plane)
+	var ant_3d_y = ant_nav_pos.y * cell_size / nav_grid_scale
+	var ant_3d_z = ant_nav_pos.x * cell_size / nav_grid_scale
+	ant_node.position = Vector3(ant_size, ant_3d_y, ant_3d_z)
+
 	ant_moving = true
 	visited = {ant_nav_pos: true}
 
@@ -252,10 +240,10 @@ func move_ant(delta):
 	update_ant_3d_position()
 
 func update_ant_3d_position():
-	# Update the 3D position of the ant based on its navigation grid position
-	var ant_3d_x = ant_nav_pos.x * cell_size / nav_grid_scale
-	var ant_3d_z = ant_nav_pos.y * cell_size / nav_grid_scale
-	ant_node.position = Vector3(ant_3d_x, ant_size, ant_3d_z)
+	# Update the 3D position of the ant based on its navigation grid position (ZY plane)
+	var ant_3d_y = ant_nav_pos.y * cell_size / nav_grid_scale
+	var ant_3d_z = ant_nav_pos.x * cell_size / nav_grid_scale
+	ant_node.position = Vector3(ant_size, ant_3d_y, ant_3d_z)
 
 func is_at_exit():
 	# Check if ant has reached right edge of maze
@@ -314,31 +302,31 @@ func update_path_visualization():
 	# Remove previous path
 	if path_mesh_instance != null:
 		path_mesh_instance.queue_free()
-	
+
 	if ant_path.size() <= 1:
 		return
-	
+
 	# Create a new path using ImmediateMesh
 	var path_immediate_mesh = ImmediateMesh.new()
 	path_mesh_instance = MeshInstance3D.new()
 	path_mesh_instance.mesh = path_immediate_mesh
-	
+
 	var path_material = StandardMaterial3D.new()
 	path_material.albedo_color = path_color
 	path_material.emission_enabled = true
 	path_material.emission = path_color
 	path_material.emission_energy_multiplier = 1.0
 	path_mesh_instance.material_override = path_material
-	
-	# Draw the path
+
+	# Draw the path (now in ZY plane)
 	path_immediate_mesh.clear_surfaces()
 	path_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP, path_material)
-	
+
 	for point in ant_path:
-		var x = point.x * cell_size / nav_grid_scale
-		var z = point.y * cell_size / nav_grid_scale
-		path_immediate_mesh.surface_add_vertex(Vector3(x, ant_size, z))
-	
+		var y = point.y * cell_size / nav_grid_scale
+		var z = point.x * cell_size / nav_grid_scale
+		path_immediate_mesh.surface_add_vertex(Vector3(ant_size, y, z))
+
 	path_immediate_mesh.surface_end()
 	path_node.add_child(path_mesh_instance)
 
@@ -354,18 +342,14 @@ func _on_wall_timer_timeout():
 	"""Rotate a random wall to change its diagonal direction"""
 	if wall_nodes.is_empty():
 		return
-	
+
 	# Pick a random wall
 	var random_wall = wall_nodes[randi() % wall_nodes.size()]
-	
+
 	# Get the wall's mesh instance
 	var wall_instance = random_wall.get_child(0) as MeshInstance3D
 	if not wall_instance:
 		return
-	
-	# Rotate the wall by 90 degrees (switching between / and \)
-	wall_instance.rotate_y(PI/2)
-	
 
-	
-	print("Rotated wall at position: ", random_wall.position)
+	# Rotate the wall by 90 degrees around X axis (switching between / and \ in ZY plane)
+	wall_instance.rotate_x(PI/2)

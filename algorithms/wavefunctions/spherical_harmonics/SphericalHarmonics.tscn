@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8x9k2m1n4p7q"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd" id="1"]
+
+[node name="SphericalHarmonics" type="Node3D"]
+script = ExtResource("1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3, 6)
+fov = 75.0
+
+[node name="Controls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "Controls"
+font_size = 24
+
+[node name="OrbitSpeedTheta" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "Orbit Speed θ"
+font_size = 16
+
+[node name="SliderTheta" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="OrbitSpeedPhi" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+text = "Orbit Speed φ"
+font_size = 16
+
+[node name="SliderPhi" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AutoOrbitLabel" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+billboard = 1
+text = "Auto Orbit"
+font_size = 16
+
+[node name="AutoOrbitButton" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

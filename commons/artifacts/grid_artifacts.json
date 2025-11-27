@@ -892,8 +892,25 @@
 			"lookup_name": "DancingBody",
 			"description": "DancingBody.",
 			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn",
-		},			
-		
+		},	
+		"OscillatingWave": {
+			"name": "OscillatingWave",
+			"lookup_name": "OscillatingWave",
+			"description": "OscillatingWave.",
+			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn",
+		},	
+		"HarmonicBuilder": {
+			"name": "HarmonicBuilder",
+			"lookup_name": "HarmonicBuilder",
+			"description": "HarmonicBuilder.",
+			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn",
+		},							
+			"BeatFrequencies": {
+			"name": "BeatFrequencies",
+			"lookup_name": "BeatFrequencies",
+			"description": "BeatFrequencies.",
+			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn",
+		},		
 		"ColoredLinesVR": {
 			"name": "ColoredLinesVR",
 			"lookup_name": "ColoredLinesVR",
@@ -1133,7 +1150,36 @@
 			"scene": "res://algorithms/randomness/gaussian_random.tscn",
 
 		},
+		"GaussianPaintSplatter": {
+			"name": "GaussianPaintSplatter",
+			"lookup_name": "GaussianPaintSplatter",
+			"description": "GaussianPaintSplatter",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn",
 
+		},
+		
+		"RandomGaussianTexture": {
+			"name": "RandomGaussianTexture",
+			"lookup_name": "RandomGaussianTexture",
+			"description": "RandomGaussianTexture",
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
+
+		},		
+		"GaussianBlurCircle": {
+			"name": "GaussianBlurCircle",
+			"lookup_name": "GaussianBlurCircle",
+			"description": "GaussianBlurCircle",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurCircle.tscn",
+
+		},	
+	"GaussianBlurShader": {
+			"name": "GaussianBlurShader",
+			"lookup_name": "GaussianBlurShader",
+			"description": "GaussianBlurShader",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn",
+
+		},			
+		
 		 "blue_noise": {
 			"name": "blue_noise",
 			"lookup_name": "blue_noise",
@@ -1370,6 +1416,14 @@
 		"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
 		
 	},
+		"resonance_frequencies_visualizer": {
+		"name": "resonance_frequencies_visualizer",
+		"lookup_name": "resonance_frequencies_visualizer",
+		"description": "resonance_frequencies_visualizer",
+		"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn",
+		
+	},
+	
 	"spectral_analyzer": {
 		"name": "Spectral Analyzer",
 		"lookup_name": "spectral_analyzer",

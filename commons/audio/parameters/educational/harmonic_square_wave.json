@@ -1,0 +1,62 @@
+{
+	"harmonic_square_wave": {
+		"_metadata": {
+			"sound_type": "harmonic_series",
+			"description": "8-Bit Square Wave (Retro Game Sound)",
+			"category": "Educational/Synthesizer",
+			"created_at": "2025-01-27",
+			"version": "1.0",
+			"educational_concept": "Square wave = odd harmonics only",
+			"preset_name": "square"
+		},
+		"parameters": {
+			"fundamental_freq": {
+				"value": 523.25,
+				"description": "C5 note for pickup sounds"
+			},
+			"num_harmonics": {
+				"value": 8
+			},
+			"harmonic_1": {
+				"value": 1.0,
+				"description": "Fundamental (strong)"
+			},
+			"harmonic_2": {
+				"value": 0.0,
+				"description": "Even harmonic (absent in square wave)"
+			},
+			"harmonic_3": {
+				"value": 0.333,
+				"description": "3rd harmonic (1/3 amplitude)"
+			},
+			"harmonic_4": {
+				"value": 0.0,
+				"description": "Even harmonic (absent)"
+			},
+			"harmonic_5": {
+				"value": 0.2,
+				"description": "5th harmonic (1/5 amplitude)"
+			},
+			"harmonic_6": {
+				"value": 0.0,
+				"description": "Even harmonic (absent)"
+			},
+			"harmonic_7": {
+				"value": 0.143,
+				"description": "7th harmonic (1/7 amplitude)"
+			},
+			"harmonic_8": {
+				"value": 0.0,
+				"description": "Even harmonic (absent)"
+			},
+			"duration": {
+				"value": 0.3,
+				"description": "Short for game pickup sounds"
+			},
+			"overall_amplitude": {
+				"value": 0.6
+			}
+		},
+		"use_cases": ["retro_game_sounds", "8bit_pickups", "ui_beeps", "mario_style_sounds"]
+	}
+}

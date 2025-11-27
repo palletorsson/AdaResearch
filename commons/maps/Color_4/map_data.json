@@ -17,12 +17,12 @@
 		}
 	},
 	"documentation": {
-		"summary": "Color_4 - Brick Pattern Workshop",
-		"layout": "11x11 lighting grid surrounding a central next cube and brick factory podium.",
-		"objective": "Generate colored brick patterns while managing lighting and progression triggers.",
+		"summary": "Color_4 - Glitch Color Workshop",
+		"layout": "11x11 lighting grid surrounding a central next cube and glitch podiums.",
+		"objective": "Experience the impossible color (magenta) through glitch artifacts.",
 		"key_elements": [
 			"Perimeter extra lights `el` with `n` next cube at the center",
-			"`brick_wall_factory` interactable on the south-west edge",
+			"`glitchcolor` interactables on the edges",
 			"`dark_sphere` dome stabilizing the main stage",
 			"Teleporter `t` at the south-east corner"
 		]
@@ -40,7 +40,7 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"], 
-			["0", "0", "0", "0", "1", "1", "1", "0", "0", "0", "0"], 			
+			["0", "0", "0", "0", "1", "1", "1", "0", "0", "0", "0"] 			
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -53,7 +53,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " ", " ", " ", "", " "],
+			[" ", " ", " ", " ", " ", "s", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -64,10 +65,10 @@
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "clipboard#magenta_axioms:180:1.5", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "brick_wall_factory:90", " ", " ", " ", " ", " ", " ", " ", "brick_wall_factory:90", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],									
+			[" ", "glitchcolor", " ", " ", " ", " ", " ", " ", " ", "glitchcolor", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]									
 		]
 	},
 	"utility_definitions": {
@@ -108,4 +109,4 @@
 			"color": [0.2, 0.3, 0.7]
 		}
 	}
-} 
+}

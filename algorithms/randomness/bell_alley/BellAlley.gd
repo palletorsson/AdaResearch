@@ -2,8 +2,8 @@ extends Node3D
 ## BellCurveAlley.gd
 ## Builds an alley (corridor) of cubes along Z, widening outwards in X using a bell curve.
 
-@export var grid_x: int = 10
-@export var grid_z: int = 20
+@export var grid_x: int = 30
+@export var grid_z: int = 60
 @export var cube_spacing: float = 1.0
 @export var spread: float = 4.0           # how wide the bell curve spreads
 @export var height_y: float = 0.0         # cube Y position (ground level)

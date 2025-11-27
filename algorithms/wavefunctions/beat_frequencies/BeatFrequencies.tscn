@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpidrkl7rdera"]
+
+[ext_resource type="Script" uid="uid://dew8b0fhbvtgv" path="res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdua" path="res://commons/interactables/slider_smooth.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="3"]
+
+[node name="BeatFrequencies" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Slider1" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1, 0)
+
+[node name="Slider2" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1, 0)
+
+[node name="ToggleButton" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.3)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+max_distance = 20.0

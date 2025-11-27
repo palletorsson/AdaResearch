@@ -12,6 +12,12 @@ extends XRToolsPickable
 @export var glow_emission_energy: float = 2.0
 @export var pickup_sound_volume_db: float = -6.0
 
+## Haptic Feedback Parameters
+@export var haptic_pickup_intensity: float = 0.5
+@export var haptic_pickup_duration: float = 0.1
+@export var haptic_drop_intensity: float = 0.3
+@export var haptic_drop_duration: float = 0.05
+
 # Original material
 var _original_material : Material
 var _glow_material : Material
@@ -113,12 +119,18 @@ func _play_pickup_sound() -> void:
 		_pickup_player.stop()
 	_pickup_player.play()
 
+func _trigger_haptic(controller: XRController3D, intensity: float, duration: float) -> void:
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 100.0, intensity, duration, 0)
 
 # Called when this object is picked up
 func _on_picked_up(_pickable) -> void:
 	# Listen for button events on the associated controller
 	_current_controller = get_picked_up_by_controller()
 	if _current_controller:
+		# Haptic Feedback for Pickup
+		_trigger_haptic(_current_controller, haptic_pickup_intensity, haptic_pickup_duration)
+		
 		_current_controller.button_pressed.connect(_on_controller_button_pressed)
 		_current_controller.button_released.connect(_on_controller_button_released)
 		if _current_controller not in _active_controllers:
@@ -140,6 +152,9 @@ func _on_dropped(_pickable) -> void:
 	
 	# Unsubscribe to controller button events when dropped
 	if _current_controller:
+		# Haptic Feedback for Drop
+		_trigger_haptic(_current_controller, haptic_drop_intensity, haptic_drop_duration)
+		
 		_current_controller.button_pressed.disconnect(_on_controller_button_pressed)
 		_current_controller.button_released.disconnect(_on_controller_button_released)
 		_active_controllers.erase(_current_controller)

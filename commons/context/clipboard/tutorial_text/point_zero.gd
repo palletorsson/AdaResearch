@@ -35,6 +35,8 @@ Ada Research is another layer of what Heidegger called [i]thrownness[/i]: we arr
 
 We might wish to resist introducing an arrow of direction—for a pointer inevitably carries [b]authorial intent[/b], a will to steer. Yet this resistance is futile; the world slips toward convenience.
 
+[color=yellow]Try turning around. The arrow points forward, but space exists behind you too. The system optimizes for the forward view, but the void is omnidirectional. Why does the tutorial only want you to look one way?[/color]
+
 The arrow introduces a symbolic layer of [b]forced convenience[/b] against the [b]background void[/b]. This layer is the [b]foreground[/b]—a symbolic interface designed to guide perception and manage the vertigo of infinite possibility. It forces us to ask: [b]How did we get here?[/b]
 
 [hr]

@@ -6,14 +6,15 @@ extends Node3D
 @export var quads_x: int = 20
 @export var quads_z: int = 20
 @export var cell_size: float = 1.0
-@export_range(0.1, 2.0, 0.1) var height_scale: float = 1.0   # overall height of the bell
+@export_range(0.1, 10.0, 0.1) var height_scale: float = 5.0   # overall height of the bell (Y-axis)
 @export_range(0.1, 5.0, 0.1) var spread: float = 2.0          # width of the bell
-@export var randomize_on_ready: bool = true
+@export var randomize_on_ready: bool = false                  # disabled - create once only
 @export var update_interval: float = 2.0                      # seconds between new bell randomizations
-@export var add_noise: bool = true                            # small random surface noise
-@export var noise_strength: float = 0.5
+@export var add_noise: bool = true                            # small random surface noise on Z-axis
+@export var noise_strength: float = 0.05                      # subtle Z-axis noise variation
 
 var verts: PackedVector3Array
+var original_verts: PackedVector3Array  # Store original flat grid positions
 var uvs: PackedVector2Array
 var indices: PackedInt32Array
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 	rng.randomize()
 	_build_nodes()
 	_build_flat_grid()
+	original_verts = verts.duplicate()  # Save original positions
 	_make_bell_curve()
 	_commit_mesh()
 	_update_collider()
@@ -96,7 +98,7 @@ func _build_flat_grid() -> void:
 # ---------------------------------------------------------------------
 # --- bell-curve deformation -----------------------------------------
 func _make_bell_curve() -> void:
-	if verts.is_empty():
+	if verts.is_empty() or original_verts.is_empty():
 		return
 
 	var center_x := 0.0
@@ -105,15 +107,21 @@ func _make_bell_curve() -> void:
 	var s := spread * rng.randf_range(0.8, 1.2)
 
 	for i in range(verts.size()):
-		var v := verts[i]
-		var dx := v.x - center_x
-		var dz := v.z - center_z
+		# Start from the original flat grid position
+		var orig := original_verts[i]
+		var dx := orig.x - center_x
+		var dz := orig.z - center_z
 		var dist_sq := (dx * dx + dz * dz) / (s * s)
+
+		# Apply bell curve to Y (height)
 		var y := h * exp(-dist_sq)
+
+		# Apply subtle random noise to Z-axis only
+		var z_noise := 0.0
 		if add_noise:
-			y += rng.randf_range(-noise_strength, noise_strength)
-		v.y = y
-		verts[i] = v
+			z_noise = rng.randf_range(-noise_strength, noise_strength)
+
+		verts[i] = Vector3(orig.x, y, orig.z + z_noise)
 
 # ---------------------------------------------------------------------
 # --- mesh + collider update -----------------------------------------

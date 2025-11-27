@@ -289,12 +289,12 @@ Turing's life and work embody **resistance to normalization**:
 [code]
 # Heteronormative computation: input → deterministic function → output
 func straight_computation(input):
-    return input * 2  # Predictable, reproductive (same input always same output)
+	return input * 2  # Predictable, reproductive (same input always same output)
 
 # Queer computation: input + randomness → emergence
 func queer_computation(input):
-    var noise = randf()
-    return input + noise  # Unpredictable, non-reproductive, generative
+	var noise = randf()
+	return input + noise  # Unpredictable, non-reproductive, generative
 [/code]
 
 **Queer energy is entropic energy** - resisting reduction to pattern, creating through disorder, generating without reproducing.

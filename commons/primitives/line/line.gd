@@ -5,6 +5,14 @@ extends Node3D
 @export var line_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var update_frequency: float = 0.1  # Update every 0.1 seconds
 
+# Critical Interaction Parameters
+@export_group("Critical Interaction")
+@export var enable_resistance: bool = true
+@export var resistance_threshold: float = 0.08  # Distance to integer to start glitching
+@export var max_jitter: float = 0.02  # Max position jitter in meters
+@export var haptic_intensity_max: float = 0.8  # Max haptic feedback
+@export var glitch_sound_volume_db: float = -10.0
+
 @onready var point_one = $GrabSphere
 @onready var point_two = $GrabSphere2
 
@@ -13,9 +21,14 @@ var current_line: MeshInstance3D
 var length_label: Label3D
 var last_distance: float = 0.0
 
+# Glitch Audio
+var _glitch_player: AudioStreamPlayer3D
+var _glitch_stream: AudioStreamWAV
+
 func _ready():
 	create_length_label()
 	update_connections()
+	_setup_glitch_audio()
 	
 	# Connect to point drop events to send educational messages
 	if point_one and point_one.has_signal("dropped"):
@@ -35,6 +48,40 @@ func create_length_label():
 	length_label.scale = Vector3.ONE * 0.1
 	add_child(length_label)
 
+func _setup_glitch_audio():
+	_glitch_stream = _generate_glitch_stream()
+	_glitch_player = AudioStreamPlayer3D.new()
+	_glitch_player.name = "GlitchPlayer"
+	_glitch_player.stream = _glitch_stream
+	_glitch_player.unit_size = 5.0
+	_glitch_player.volume_db = -80.0 # Start silent
+	_glitch_player.autoplay = true   # Always playing, volume controlled
+	add_child(_glitch_player)
+
+func _generate_glitch_stream() -> AudioStreamWAV:
+	var stream := AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 22050
+	stream.stereo = false
+	var duration := 0.5 # Short loop
+	var length := int(stream.mix_rate * duration)
+	var data := PackedByteArray()
+	data.resize(length * 2)
+	
+	for i in length:
+		# White noise with some crackle
+		var sample: float = randf_range(-1.0, 1.0) * 0.8
+		# Occasional spike
+		if randf() > 0.95:
+			sample = sign(sample) * 1.0
+			
+		var int_sample: int = int(sample * 32767.0)
+		data[2 * i] = int_sample & 0xFF
+		data[2 * i + 1] = (int_sample >> 8) & 0xFF
+	stream.data = data
+	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	return stream
+
 func update_connections():
 	clear_connections()
 	if point_one and point_two and is_instance_valid(point_one) and is_instance_valid(point_two):
@@ -45,6 +92,76 @@ func _process(delta):
 	if point_one and point_two and is_instance_valid(point_one) and is_instance_valid(point_two):
 		update_line_transform(point_one.position, point_two.position)
 		update_length_label(point_one.position, point_two.position)
+		
+		if enable_resistance:
+			_process_resistance(point_one.position.distance_to(point_two.position))
+
+func _process_resistance(distance: float):
+	# Calculate proximity to nearest integer (representing "perfect" measure)
+	var remainder = fmod(distance, 1.0)
+	var dist_to_int = min(remainder, 1.0 - remainder)
+	
+	if dist_to_int < resistance_threshold:
+		# We are in the resistance zone
+		var t = 1.0 - (dist_to_int / resistance_threshold) # 0 to 1 intensity
+		var intensity = pow(t, 2.0) # Non-linear increase
+		
+		# 1. Visual Glitch (Jitter)
+		if current_line:
+			var jitter = Vector3(
+				randf_range(-1, 1),
+				randf_range(-1, 1),
+				randf_range(-1, 1)
+			) * max_jitter * intensity
+			current_line.position += jitter
+			
+			# Occasionally flash the material
+			if randf() < intensity * 0.1:
+				var mat = current_line.material_override as StandardMaterial3D
+				if mat:
+					mat.emission_energy = 5.0
+			else:
+				var mat = current_line.material_override as StandardMaterial3D
+				if mat:
+					mat.emission_energy = 1.0
+
+		# 2. Audio Glitch
+		if _glitch_player:
+			var target_vol = lerp(-40.0, glitch_sound_volume_db, intensity)
+			_glitch_player.volume_db = target_vol
+			_glitch_player.pitch_scale = 1.0 + (randf() - 0.5) * intensity # Pitch jitter
+
+		# 3. Haptic Feedback
+		_trigger_resistance_haptics(intensity)
+		
+		# 4. Label Glitch (Optional - make text shake?)
+		if length_label and randf() < intensity * 0.2:
+			length_label.modulate = Color.RED
+		else:
+			length_label.modulate = Color(1.0, 1.0, 1.0, 0.8)
+			
+	else:
+		# Reset effects
+		if _glitch_player:
+			_glitch_player.volume_db = -80.0
+		
+		if current_line:
+			var mat = current_line.material_override as StandardMaterial3D
+			if mat:
+				mat.emission_energy = 1.0
+				
+		if length_label:
+			length_label.modulate = Color(1.0, 1.0, 1.0, 0.8)
+
+func _trigger_resistance_haptics(intensity: float):
+	# Apply haptics to controllers holding the points
+	for point in [point_one, point_two]:
+		if point and point.has_method("get_picked_up_by_controller"):
+			var controller = point.get_picked_up_by_controller()
+			if controller:
+				# Higher frequency for "electric" resistance feel
+				var freq = 100.0 + (intensity * 200.0) 
+				controller.trigger_haptic_pulse("haptic", freq, intensity * haptic_intensity_max, 0.05, 0)
 
 func create_connection_line(start_pos: Vector3, end_pos: Vector3) -> MeshInstance3D:
 	var line = MeshInstance3D.new()
@@ -156,4 +273,4 @@ func _on_point_dropped(_pickable):
 		handled = TextManager.trigger_event("line_drop", context)
 	if handled:
 		return
-	push_warning("Line: Missing line_drop text entry for current map")
+	# push_warning("Line: Missing line_drop text entry for current map")

@@ -1,0 +1,95 @@
+{
+	"harmonic_brass_lead": {
+		"_metadata": {
+			"sound_type": "harmonic_series",
+			"description": "Bright Brass Lead Synth",
+			"category": "Educational/Synthesizer",
+			"created_at": "2025-01-27",
+			"version": "1.0",
+			"educational_concept": "Fourier synthesis and harmonic timbre",
+			"preset_name": "brass"
+		},
+		"parameters": {
+			"fundamental_freq": {
+				"value": 440.0,
+				"min": 110.0,
+				"max": 880.0,
+				"step": 1.0,
+				"description": "Base frequency (A4 = 440 Hz)"
+			},
+			"num_harmonics": {
+				"value": 8,
+				"description": "Number of harmonics"
+			},
+			"harmonic_1": {
+				"value": 1.0,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Fundamental (1x)"
+			},
+			"harmonic_2": {
+				"value": 0.7,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Octave (2x)"
+			},
+			"harmonic_3": {
+				"value": 0.8,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Fifth (3x)"
+			},
+			"harmonic_4": {
+				"value": 0.5,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Two octaves (4x)"
+			},
+			"harmonic_5": {
+				"value": 0.6,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Major third (5x)"
+			},
+			"harmonic_6": {
+				"value": 0.3,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Fifth above octave (6x)"
+			},
+			"harmonic_7": {
+				"value": 0.4,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Seventh harmonic (7x)"
+			},
+			"harmonic_8": {
+				"value": 0.2,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01,
+				"description": "Three octaves (8x)"
+			},
+			"duration": {
+				"value": 2.0,
+				"min": 0.1,
+				"max": 10.0,
+				"step": 0.1
+			},
+			"overall_amplitude": {
+				"value": 0.5,
+				"min": 0.0,
+				"max": 1.0,
+				"step": 0.01
+			}
+		},
+		"use_cases": ["synth_lead", "brass_section", "fanfare", "game_music", "ui_sounds"]
+	}
+}

@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://bldy1qs2yvi0"]
+
+[ext_resource type="Script" uid="uid://b6uncq545kd6l" path="res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.gd" id="1"]
+
+[node name="OscillatingWave" type="Node3D"]
+script = ExtResource("1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2, 8)
+
+[node name="Controls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "Controls"
+font_size = 24
+
+[node name="FrequencyLabel" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
+text = "Oscillation Frequency"
+font_size = 16
+
+[node name="FrequencySlider" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="AmplitudeLabel" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+text = "Oscillation Amplitude"
+font_size = 16
+
+[node name="AmplitudeSlider" type="Node3D" parent="Controls"]
+
+[node name="SpeedLabel" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+billboard = 1
+text = "Horizontal Speed"
+font_size = 16
+
+[node name="SpeedSlider" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="ToggleLabel" type="Label3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+billboard = 1
+text = "Show Reference"
+font_size = 16
+
+[node name="ToggleButton" type="Node3D" parent="Controls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)

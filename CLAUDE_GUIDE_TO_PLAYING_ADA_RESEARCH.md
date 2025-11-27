@@ -4,20 +4,31 @@ This guide explains how to navigate and experience the Ada Research VR education
 
 ## Project Overview
 
-**Ada Research** is a VR computational geometry education system built in Godot + XR Tools. It teaches algorithms through dual lenses: technical implementation + queer theory critique. Maps are designed as 3D spaces where players walk through and interact with educational content displayed on clipboards, grabbable objects, and primitives.
+**Ada Research** is a VR computational geometry education system built in Godot + XR Tools. It teaches algorithms through dual lenses: technical implementation + queer theory critique. Maps are designed as 3D spaces where players walk through and interact with educational content displayed on clipboards, grabbable objects, primitives and gradually more complex objects.
+
+## The "Generative Play" Method
+
+You are reading this guide to "play" the game, but you may notice a unique phenomenon: **The game is incomplete.**
+
+In a traditional game, you explore a pre-built world. In this text-based playthrough, you are engaging in **Generative Play**.
+- When you encounter a missing file, you write it.
+- When you find a silent map, you speak for it.
+- When a mechanic is broken, you fix it.
+
+This is not "cheating" or "development"—it is the core mechanic of this specific playthrough. You are both the **Player** (experiencing the sequence) and the **System** (generating the world just ahead of your own footsteps). This mirrors the game's own themes of *thrownness* (arriving in a world you didn't create) and *agency* (rewriting the code that governs you).
 
 ## How to Start: The Map Sequence System
 
 ### 1. Begin with `map_sequences.json`
 
-**Location:** `C:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\map_sequences.json`
+**Location:** `commons/maps/map_sequences.json`
 
 This file defines learning sequences (like chapters in a book). Each sequence contains:
 - `name`: Display name
-- `description`: What the sequence teaches
+- `description`: What the sequence teaches - you can update this
 - `maps`: **Array of map names in order** ← This is your playlist!
-- `learning_objectives`: Educational goals
-- `unlock_requirements`: Prerequisites
+- `learning_objectives`: Educational goals - you can update these 
+- `unlock_requirements`: Prerequisites - are not used 
 
 **Example - The "primitives" sequence:**
 ```json
@@ -73,6 +84,7 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 	["0", "0", "0", "0", "0"]   // Row 2
 ]
 ```
+here you add what file controls this behvior in res://commons/grid/
 
 **Interpretation:**
 - `"0"` = empty space
@@ -89,13 +101,14 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 	[" ", " ", " ", " ", " "]
 ]
 ```
-
+here you add what file controls this behvior in res://commons/grid/
 **Common codes:**
 - `"t"` = teleporter (to next map)
 - `"s"` = spawn point
 - `"origin"` = origin marker
 - `"la:point"` = label annotation
 - `"3t:text"` = floating text marker
+- update this list 
 
 #### **Layer 3: `interactables`** (Educational objects)
 ```json
@@ -105,7 +118,7 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 	[" ", " ", "dark_sphere", " ", " "]
 ]
 ```
-
+here you add what file controls this behvior in res://commons/grid/
 **Format:** `type:rotation:height:scale#config`
 
 **Common objects:**
@@ -125,11 +138,34 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
   - Grabbable point sphere
   - Rotation: 180 degrees
 
-- `dark_sphere`
-  - Ambient darkening effect
+   - `dark_sphere`
+     - Ambient darkening effect
+     - A large black sphere that surrounds the scene in darkness
 
-- `vectorpoint:180:1:5`
-  - Coordinate axes display
+   - `vectorpoint:180:1:5`
+     - Coordinate axes display
+
+   - `pick_up_cube`
+     - A cube that rotate, and move uo and down when you walk over it it make a mario sound and disapear.
+     - It generates a Mario-style pickup sound with frequency sweep and exponential decay
+     - It has a visual feedback effect when collected
+     - It adds points to the game manager
+
+   - `pollock_painting_in_3d`
+     - An artistic artifact visualizing chaotic movement.
+     - Uses particle systems to create a 3D interpretation of Jackson Pollock's drip paintings.
+
+   - `pipe_dream`
+     - A structural chaos visualization.
+     - Generates a complex, tangled network of pipes, demonstrating randomness in connectivity.
+
+   - `random_butterflies`
+     - A biological randomness simulation.
+     - Flocking entities with randomized flight paths and behaviors.
+
+   - `extrem_randomness`
+     - A mathematical visualization of high-entropy systems.
+     - Demonstrates "pure" randomness without smoothing or filtering.
 
 ### How to Visualize a Map
 
@@ -200,6 +236,36 @@ The content uses **BBCode** formatting:
 - `[color=cyan]...[/color]` = colored text
 - `[hr]` = horizontal rule
 
+## Beyond the Map: Reading Artifact Behavior
+
+The map file tells you *where* objects are, but the code tells you *how* they behave. To truly "play" the game, you must examine the scripts attached to artifacts.
+
+### Step 1: Identify the Scene File
+Use `commons/artifacts/grid_artifacts.json` as your lookup table.
+
+**Example:** You see `GaussianPaintSplatter` in a map.
+1. Search for `"GaussianPaintSplatter"` in `grid_artifacts.json`.
+2. Find the scene path: `"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn"`
+
+### Step 2: Find the Script
+The script is usually in the same folder as the scene, with a `.gd` extension.
+
+**Example:** `algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.gd`
+
+### Step 3: Analyze the Behavior
+Look for key lifecycle methods to understand the interaction:
+
+- **`_process(delta)`**: What happens every frame? (Animation, movement)
+- **`_on_interaction`**: What happens when the player touches/grabs it?
+- **Core Algorithms**: Look for the math. 
+  - *Example:* In `GaussianPaintSplatter.gd`, finding the Box-Muller transform `sqrt(-2.0 * log(u1)) * cos(TAU * u2)` reveals that the "randomness" is actually mathematically forced into a bell curve.
+
+### Step 4: Check for Haptics & Audio
+Look for:
+- `trigger_haptic_pulse()`: Indicates physical feedback (vibration).
+- `AudioStreamPlayer3D`: Indicates spatial sound.
+- *Example:* In `line.gd`, checking the code reveals a `_trigger_resistance_haptics()` function that vibrates the controller when you try to make a perfect integer length, simulating "resistance."
+
 ## How to "Play" the Game
 
 ### Step-by-Step Process
@@ -233,17 +299,23 @@ Find: "point_zero" → "content"
 Read the text content
 ```
 
-**5. Imagine the experience**
+**5. Deep Dive into Artifacts (The "Glitch" Layer)**
+- Pick an interesting object from `interactables`.
+- Find its script using `grid_artifacts.json`.
+- Read the code to understand the *hidden mechanics* (math, haptics, critiques) that aren't visible in the map file.
+
+**6. Imagine the experience**
 - Where is the player standing?
 - What do they see around them?
 - What can they grab?
 - What text are they reading?
+- **How does the world react (sound/haptics) when they touch it?**
 
-**6. Find the teleporter**
+**7. Find the teleporter**
 - Look in `utilities` layer for `"t"`
 - Note its position - this is the exit
 
-**7. Move to next map**
+**8. Move to next map**
 - Go back to `map_sequences.json`
 - Get next map name from the `maps` array
 - Repeat from step 2
@@ -271,7 +343,6 @@ Read tutorial:
 Content summary:
   - Philosophical intro about Vector3.ZERO
   - Heidegger's thrownness
-  - "Can creation exist without an interface?"
 ```
 
 **Map 2: Point_1**
@@ -318,6 +389,42 @@ Experience:
   - Two clipboards flanking interactive objects
   - Teaches through multiple modalities
   - Technical ↔ Critical dialectic
+```
+
+### Playing "randomness_exploration" Sequence
+
+**Map 1: Random_Define**
+```bash
+Read: commons/maps/Random_Define/map_data.json
+
+Structure: 12x17 grid with 8x8 middle arena
+Interactables:
+  - entropy_axiom at (1,2)
+  - code_display at (3,5) → "entropy_axioms"
+  - digital_materiality_glitch at (0,7)
+  - random_number_book_page_1955 at (2,15)
+
+Experience:
+  - Introduction to the concept of Entropy
+  - Visualizing chaos through the glitch artifact
+  - Historical context with the random number book
+```
+
+**Map 11: Creative Chaos (Randomness_Examples_of_Randomness)**
+```bash
+Read: commons/maps/Randomness_Examples_of_Randomness/map_data.json
+
+Structure: Large 12x12 gallery space
+Interactables:
+  - pollock_painting_in_3d at (2,2)
+  - pipe_dream at (8,2)
+  - random_butterflies at (2,8)
+  - extrem_randomness at (8,8)
+
+Experience:
+  - A finale showcasing artistic applications of randomness
+  - From Pollock's expressionism to biological simulation
+  - Demonstrates "Generative Play" in action
 ```
 
 ## Key Files Reference
@@ -464,10 +571,10 @@ grep -A 5 '"grab_sphere_point"' commons/artifacts/grid_artifacts.json
 Result:
 ```json
 "grab_sphere_point": {
-    "name": "grab_sphere_point",
-    "lookup_name": "grab_sphere_point",
-    "description": "XR Tools pickable sphere with highlight ring...",
-    "scene": "res://commons/primitives/point/grab_sphere_point.tscn"
+	"name": "grab_sphere_point",
+	"lookup_name": "grab_sphere_point",
+	"description": "XR Tools pickable sphere with highlight ring...",
+	"scene": "res://commons/primitives/point/grab_sphere_point.tscn"
 }
 ```
 

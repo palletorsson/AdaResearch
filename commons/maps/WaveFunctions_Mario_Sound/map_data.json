@@ -54,17 +54,17 @@
 			[" ", " ", " ", " ", " ", "t", " "]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", "player_presence_indicator", " "],
+			["HarmonicBuilder", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "pick_up_cube", " ", " ", " ", "sine_art_monitor:-90:-0.5"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "MarioSoundController:180", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "pick_up_cube", " "],
+			["BeatFrequencies", " ", " ", " ", " ", "pick_up_cube", " "],
 			[" ", " ", " ", " ", " ", "pick_up_cube", " "],
 			[" ", " ", " ", " ", " ", "pick_up_cube", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", "pick_up_cube", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "parametric_pendulum_waves:0:3", " ", " ", "DancingBody"]
+			["OscillatingWave", " ", " ", "parametric_pendulum_waves:0:3", " ", " ", "DancingBody"]
 		]
 
 	},

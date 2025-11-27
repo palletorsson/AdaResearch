@@ -29,11 +29,18 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # destination, spawn point
 	},
 	"t": {
-		"name": "teleport", 
-		"file": "teleport_scene.tscn", 
+		"name": "teleport",
+		"file": "teleport_scene.tscn",
 		"category": "transport",
 		"description": "Instant location changes",
 		"supports_parameters": true  # destination, spawn point
+	},
+	"m": {
+		"name": "move_player",
+		"file": "move_player.tscn",
+		"category": "transport",
+		"description": "Moves player to specific location after delay",
+		"supports_parameters": true  # x, y, z, delay
 	},
 	"s": {
 		"name": "spawn_point", 

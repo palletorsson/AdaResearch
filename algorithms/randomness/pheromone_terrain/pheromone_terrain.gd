@@ -11,10 +11,14 @@ extends Node3D
 @export var max_height: float = 3.0
 
 @export_category("Pheromone Settings")
-@export var pheromone_deposit: float = 1.0  # Amount of pheromone deposited per step
-@export var pheromone_decay_rate: float = 0.1  # How fast pheromones decay per second
-@export var pheromone_attraction: float = 0.7  # 0-1: How much walkers are attracted (vs random)
+@export var pheromone_deposit: float = 0.5  # Amount of pheromone deposited per step
+@export var pheromone_decay_rate: float = 0.2  # How fast pheromones decay per second
+@export var pheromone_attraction: float = 0.3  # 0-1: How much walkers are attracted (vs random)
 @export var sensor_distance: int = 2  # How far ahead walkers sense pheromones
+@export var pheromone_color: Color = Color(1.0, 0.0, 1.0) # Magenta for "Queer Energy"
+
+@export_category("Terrain Settings")
+@export var border_size: int = 10  # Unmanipulated border size (in segments) for walkable edges
 
 @onready var plane_node = $Plane
 
@@ -44,7 +48,37 @@ func _ready():
 	if not mesh_instance:
 		push_error("PheromoneeTerrain: No MeshInstance3D found!")
 		return
-	
+
+	# Read dimensions from PlaneMesh before converting
+	if mesh_instance.mesh is PlaneMesh:
+		var plane_mesh = mesh_instance.mesh as PlaneMesh
+		x_segments = plane_mesh.subdivide_width
+		y_segments = plane_mesh.subdivide_depth
+		# Store size as metadata for later use
+		mesh_instance.set_meta("plane_width", plane_mesh.size.x)
+		mesh_instance.set_meta("plane_height", plane_mesh.size.y)
+
+	# Convert PrimitiveMesh to ArrayMesh for dynamic modification
+	if mesh_instance.mesh is PrimitiveMesh:
+		var primitive_mesh = mesh_instance.mesh as PrimitiveMesh
+		var array_mesh = ArrayMesh.new()
+		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, primitive_mesh.get_mesh_arrays())
+		
+		# Create/Ensure material supports vertex colors
+		var material = primitive_mesh.material
+		if material:
+			if material is StandardMaterial3D:
+				material.vertex_color_use_as_albedo = true
+			array_mesh.surface_set_material(0, material)
+		else:
+			# Create default material if none exists
+			var new_mat = StandardMaterial3D.new()
+			new_mat.vertex_color_use_as_albedo = true
+			new_mat.albedo_color = Color.WHITE
+			array_mesh.surface_set_material(0, new_mat)
+			
+		mesh_instance.mesh = array_mesh
+
 	_initialize_grids()
 	_create_walkers()
 	
@@ -65,29 +99,15 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 
 func _initialize_grids():
 	"""Initialize vertex and pheromone grids"""
-	# Try to read plane-like segmentation and size properties; otherwise, infer from mesh
-	var xs_prop = plane_node.get("x_segments")
-	var ys_prop = plane_node.get("y_segments")
-	if typeof(xs_prop) != TYPE_NIL and typeof(ys_prop) != TYPE_NIL:
-		x_segments = int(xs_prop)
-		y_segments = int(ys_prop)
-	else:
-		# Fallback: choose reasonable defaults when not a segmented plane
-		x_segments = 20
-		y_segments = 20
-	
-	var plane_width
-	var plane_height
-	var w_prop = plane_node.get("width")
-	var h_prop = plane_node.get("height")
-	if typeof(w_prop) != TYPE_NIL and typeof(h_prop) != TYPE_NIL:
-		plane_width = float(w_prop)
-		plane_height = float(h_prop)
-	else:
-		# Not a plane primitive; infer width/height from the mesh AABB (x and z extents)
-		var aabb: AABB = mesh_instance.get_aabb() if mesh_instance else AABB()
-		plane_width = aabb.size.x if aabb.size.x > 0.0 else 1.0
-		plane_height = aabb.size.z if aabb.size.z > 0.0 else 1.0
+	# Use dimensions stored as metadata (set during initialization)
+	var plane_width: float = mesh_instance.get_meta("plane_width", 20.0)
+	var plane_height: float = mesh_instance.get_meta("plane_height", 20.0)
+
+	# x_segments and y_segments are already set in _ready()
+	if x_segments == 0:
+		x_segments = 100
+	if y_segments == 0:
+		y_segments = 100
 	var half_width = plane_width / 2.0
 	var half_height = plane_height / 2.0
 	var x_step = plane_width / float(x_segments)
@@ -129,12 +149,17 @@ func _build_indices():
 			indices.append(d)
 
 func _create_walkers():
-	"""Create walkers at random positions"""
+	"""Create walkers at random positions (inside border)"""
 	walkers.clear()
+	var min_x = border_size
+	var max_x = x_segments - border_size
+	var min_y = border_size
+	var max_y = y_segments - border_size
+
 	for i in range(walker_count):
 		walkers.append({
-			"x": randi_range(0, x_segments),
-			"y": randi_range(0, y_segments),
+			"x": randi_range(min_x, max_x),
+			"y": randi_range(min_y, max_y),
 			"active": true
 		})
 
@@ -167,16 +192,23 @@ func _walk_step():
 	for walker in walkers:
 		if not walker.active:
 			continue
-		
+
+		# Check if walker is inside the allowed area (not in border)
+		if _is_in_border(walker.x, walker.y):
+			# Move walker back to allowed area
+			walker.x = clamp(walker.x, border_size, x_segments - border_size)
+			walker.y = clamp(walker.y, border_size, y_segments - border_size)
+			continue
+
 		# Deposit pheromone at current location
 		pheromone_grid[walker.y][walker.x] += pheromone_deposit
-		
-		# Raise terrain at current location
+
+		# Raise terrain at current location (only if not in border)
 		var current_vertex = vertex_grid[walker.y][walker.x]
 		if current_vertex.y < max_height:
 			current_vertex.y += raise_amount
 			vertex_grid[walker.y][walker.x] = current_vertex
-		
+
 		# Decide next move based on pheromones
 		var next_pos = _choose_next_position(walker.x, walker.y)
 		walker.x = next_pos.x
@@ -227,35 +259,59 @@ func _choose_next_position(x: int, y: int) -> Vector2i:
 		return Vector2i(new_x, new_y)
 
 func _update_mesh():
-	"""Update mesh with modified vertices and proper normals"""
+	"""Update mesh with modified vertices, normals, and colors"""
 	if not mesh_instance:
 		return
 	
 	# Flatten vertex grid to array
 	var new_vertices = PackedVector3Array()
-	for row in vertex_grid:
-		for vertex in row:
-			new_vertices.append(vertex)
+	var new_colors = PackedColorArray()
+	
+	for j in range(vertex_grid.size()):
+		var row = vertex_grid[j]
+		var pheromone_row = pheromone_grid[j]
+		for i in range(row.size()):
+			new_vertices.append(row[i])
+			
+			# Calculate color based on pheromone intensity
+			var intensity = clamp(pheromone_row[i], 0.0, 1.0)
+			# Base color (white) mixed with pheromone color
+			var color = Color.WHITE.lerp(pheromone_color, intensity)
+			new_colors.append(color)
 	
 	var mesh: ArrayMesh = mesh_instance.mesh
-	
+
+	# Save the material before clearing surfaces
+	var saved_material = null
+	if mesh.get_surface_count() > 0:
+		saved_material = mesh.surface_get_material(0)
+
 	# Use SurfaceTool for proper normal generation
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
+
 	for i in range(0, indices.size(), 3):
-		st.add_vertex(new_vertices[indices[i]])
-		st.add_vertex(new_vertices[indices[i + 1]])
-		st.add_vertex(new_vertices[indices[i + 2]])
-	
+		var idx1 = indices[i]
+		var idx2 = indices[i+1]
+		var idx3 = indices[i+2]
+		
+		st.set_color(new_colors[idx1])
+		st.add_vertex(new_vertices[idx1])
+		
+		st.set_color(new_colors[idx2])
+		st.add_vertex(new_vertices[idx2])
+		
+		st.set_color(new_colors[idx3])
+		st.add_vertex(new_vertices[idx3])
+
 	st.generate_normals()
-	
+
 	mesh.clear_surfaces()
 	st.commit(mesh)
-	
-	# Preserve material
-	if mesh_instance.material_override:
-		mesh.surface_set_material(0, mesh_instance.material_override)
+
+	# Restore the material
+	if saved_material:
+		mesh.surface_set_material(0, saved_material)
 
 func get_pheromone_at(x: int, y: int) -> float:
 	"""Get pheromone level at grid position"""
@@ -270,3 +326,8 @@ func reset_terrain():
 			vertex_grid[j][i].y = 0.0
 			pheromone_grid[j][i] = 0.0
 	_update_mesh()
+
+func _is_in_border(x: int, y: int) -> bool:
+	"""Check if position is in the border area"""
+	return x < border_size or x > x_segments - border_size or \
+		   y < border_size or y > y_segments - border_size

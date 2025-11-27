@@ -6,11 +6,11 @@ class_name RandomWalk128Algorithm
 extends Node3D
 
 # Grid configuration
-const GRID_SIZE = 64  # 128x128 grid
-const GRID_AREA_SIZE = 8.0  # 8x8 meters
+const GRID_SIZE = 32  # 128x128 grid
+const GRID_AREA_SIZE = 10.0  # 8x8 meters
 const CUBE_SIZE = GRID_AREA_SIZE / GRID_SIZE  # 0.0625m = 6.25cm per cube
 const CUBE_SCALE = CUBE_SIZE  # Scale factor for cube_scene.tscn
-const RAISE_AMOUNT = CUBE_SIZE * 0.5  # Half cube height
+const RAISE_AMOUNT = CUBE_SIZE * 0.1  # Half cube height
 
 # Cube scene reference
 const CUBE_SCENE_PATH = "res://commons/primitives/cubes/cube_scene.tscn"
@@ -27,11 +27,17 @@ var walker_position: Vector2i = Vector2i(GRID_SIZE / 2, GRID_SIZE / 2)  # Start 
 @export var auto_start: bool = true
 @export var show_walker: bool = true
 
+# Audio settings
+@export var enable_audio: bool = true
+@export var base_pitch: float = 1.0
+@export var pitch_height_scale: float = 0.1
+
 # State tracking
 var current_step: int = 0
 var is_running: bool = false
 var walker_cube: Node3D
 var step_timer: Timer
+var audio_player: AudioStreamPlayer3D
 
 # Signals
 signal walk_step_complete(position: Vector2i, height: float)
@@ -54,6 +60,10 @@ func _ready():
 	# Initialize grid
 	_initialize_grid()
 	
+	# Setup audio
+	if enable_audio:
+		_setup_audio()
+	
 	# Setup timer for smooth animation
 	step_timer = Timer.new()
 	step_timer.wait_time = 0.016  # ~60 FPS
@@ -69,6 +79,38 @@ func _ready():
 		call_deferred("start_walk")
 	else:
 		print("RandomWalk128: Auto-start disabled. Use Space to start manually.")
+
+func _setup_audio():
+	"""Setup procedural audio for steps"""
+	audio_player = AudioStreamPlayer3D.new()
+	audio_player.unit_size = 5.0
+	audio_player.max_distance = 20.0
+	audio_player.stream = _generate_step_sound()
+	add_child(audio_player)
+
+func _generate_step_sound() -> AudioStreamWAV:
+	"""Generate a short 'tick' sound"""
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 44100
+	stream.stereo = false
+	
+	var duration = 0.05 # Very short tick
+	var sample_count = int(44100 * duration)
+	var data = PackedByteArray()
+	data.resize(sample_count * 2)
+	
+	for i in sample_count:
+		var t = float(i) / 44100.0
+		var envelope = exp(-200.0 * t) # Sharp decay
+		var wave = sin(TAU * 880.0 * t) * envelope
+		if i < 100: wave = (randf() * 2.0 - 1.0) * envelope # Initial noise burst
+		
+		var sample_int = int(clamp(wave, -1.0, 1.0) * 32767.0)
+		data.encode_s16(i*2, sample_int)
+		
+	stream.data = data
+	return stream
 
 func _initialize_grid():
 	"""Initialize the 128x128 grid arrays"""
@@ -94,9 +136,6 @@ func _create_walker_indicator():
 	walker_cube = cube_scene_resource.instantiate()
 	walker_cube.name = "Walker"
 	walker_cube.scale = Vector3.ONE * CUBE_SCALE * 2.0  # Bigger for visibility
-	
-
-	
 	
 	add_child(walker_cube)
 	_update_walker_position()
@@ -139,19 +178,27 @@ func _step_walk():
 	if not is_running:
 		return
 	
+	var last_height = 0.0
+	
 	for i in range(steps_per_frame):
 		if current_step >= total_steps:
 			_finish_walk()
 			return
 		
-		_execute_single_step()
+		last_height = _execute_single_step()
 		current_step += 1
 	
 	# Update walker position after batch
 	_update_walker_position()
+	
+	# Play audio once per frame, pitch modulated by height
+	if enable_audio and audio_player and not audio_player.playing:
+		var pitch = base_pitch + (last_height * pitch_height_scale)
+		audio_player.pitch_scale = clamp(pitch, 0.5, 3.0)
+		audio_player.play()
 
-func _execute_single_step():
-	"""Execute a single random walk step"""
+func _execute_single_step() -> float:
+	"""Execute a single random walk step. Returns new height."""
 	# Choose random direction (4-directional: N, E, S, W)
 	var directions = [
 		Vector2i(0, 1),   # North
@@ -175,6 +222,8 @@ func _execute_single_step():
 	# Emit step signal
 	var height = grid[walker_position.x][walker_position.y]
 	walk_step_complete.emit(walker_position, height)
+	
+	return height
 
 func _raise_cube_at(x: int, z: int):
 	"""Raise the cube at the specified grid position"""
@@ -223,6 +272,9 @@ func _update_walker_position():
 		var world_pos = _grid_to_world_position(walker_position.x, walker_position.y)
 		var walker_height = grid[walker_position.x][walker_position.y] + CUBE_SIZE * 2.0
 		walker_cube.position = Vector3(world_pos.x, walker_height, world_pos.y)
+		# Move audio source to walker
+		if audio_player:
+			audio_player.position = walker_cube.position
 
 func _finish_walk():
 	"""Complete the random walk"""

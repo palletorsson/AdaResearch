@@ -57,7 +57,7 @@
 				"Primitives_5",				
 			],
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_one",
+			"lab_map": "Lab/map_data_post_primitives",
 			"unlock_requirements": [],
 			"completion_rewards": ["test_badge"]
 		},
@@ -89,30 +89,32 @@
 			"completion_rewards": ["test_badge"]
 		},
 		"color": {
-			"name": "name translation",
-			"description": "This is the basic",
+			"name": "Color & Perception",
+			"description": "Explore the physics, biology, and phenomenology of color",
 			"difficulty": "beginner",
 			"estimated_time": "15-20 minutes",
 			"learning_objectives": [
-				"test"
+				"RGB vs Wavelength",
+				"Perceptual construction",
+				"Color spaces",
+				"Queer ontology of color"
 			],
 			"temps":[ 	
-				"Color_3",			
+				"Color_Nails", 
+				"Color_Grabbable",
+				"Color_Gradiant"
 			],
 			"maps": [
-				"Color_Nails", 
-				"Color_Grabbable",					
 				"Color_1",
 				"Color_2",	
 				"Color_3",
-				"Color_Gradiant", 	
 				"Color_4",						
-				"Color_5",												
+				"Color_5"												
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
 			"unlock_requirements": [],
-			"completion_rewards": ["test_badge"]
+			"completion_rewards": ["color_theorist_badge"]
 		},
 		"tests": {
 			"name": "TestSequence",
@@ -511,14 +513,6 @@
 		 
 			],
 			"content": [
-				" One : Random Remove, TD: placement",
-				" Two : Random Topology", 
-				" Three : ",
-				" Random_Seven",
-				" Random_Four",
-				" Random_Walk",
-				" Random_Seven",
-
 				"Randomness_10_PRINT_Algorithm",
 				"Randomness_Digital_Materiality_Glitch",
 				"Randomness_Distribution_Visualization",
@@ -526,28 +520,20 @@
 				"Randomness_Random_Transformations",
 				"Randomness_Random_Walk",
 				"Randomness_TRNG_vs_PRNG",
+				"Random_Bell_Alley"
 			],
 			"maps": [
-				"Random_One",	
-				"Random_Rotate_Random_XYZ",
-				
-				"Randomness_10_PRINT_Algorithm",
+				"Random_Define",
+				"Randomness_TRNG_vs_PRNG",
+				"Random_Points_Distribution",
+				"Randomness_Distribution_Visualization",
+				"Random_Gaussian",
 				"Random_Bell_Alley",
-				"Random_Plane",
-				"Random_Random_Bell_Curve", 
-
-				"Random_Two",
-				"Random_Seven",
-				"Random_Five",  				
-				"Random_Three",
-				"Random_Four",
-				"Random_Points_Distribution", 
-				"Random_Walk",				
-				"Random_Five", 
-				"Random_Six", 
-				"Random_Seven", 
-									
-				"Random_Game", 			
+				"Randomness_Random_Transformations",
+				"Random_Walk",
+				"Randomness_10_PRINT_Algorithm",
+				"Random_Pheromone",
+				"Randomness_Examples_of_Randomness"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_random",

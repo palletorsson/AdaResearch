@@ -498,6 +498,28 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					print("GridUtilitiesComponent: Set label keyid to: %s" % keyid)
 				else:
 					print("GridUtilitiesComponent: Warning - Label object doesn't have set_keyid method")
+		"m":  # Move player to specific location after delay
+			if parameters.size() >= 3:
+				var target_x = float(parameters[0])
+				var target_y = float(parameters[1])
+				var target_z = float(parameters[2])
+				var delay = 0.5  # Default delay
+
+				# Optional 4th parameter for custom delay
+				if parameters.size() >= 4 and parameters[3].is_valid_float():
+					delay = float(parameters[3])
+
+				# Store move parameters as metadata
+				utility_object.set_meta("move_target", Vector3(target_x, target_y, target_z))
+				utility_object.set_meta("move_delay", delay)
+
+				# If utility has a method to set these, use it
+				if utility_object.has_method("set_move_parameters"):
+					utility_object.set_move_parameters(Vector3(target_x, target_y, target_z), delay)
+
+				print("GridUtilitiesComponent: Set move player to (%.1f, %.1f, %.1f) after %.1fs" % [target_x, target_y, target_z, delay])
+			else:
+				print("GridUtilitiesComponent: WARNING - Move utility requires at least 3 parameters (x, y, z)")
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)

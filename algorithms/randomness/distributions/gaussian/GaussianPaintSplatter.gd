@@ -1,0 +1,229 @@
+extends MeshInstance3D
+class_name GaussianPaintSplatter
+
+# Export variables for customization
+@export var splatter_width: int = 640
+@export var splatter_height: int = 640
+@export var stddev: float = 80.0  # Standard deviation for splatter distribution
+@export var splatter_update_interval: float = 0.05  # Timer interval for updating splatter
+@export var safe_zone_radius: float = 80.0  # Radius of the safe zone where no splatter will occur
+@export var dot_radius: int = 5  # Radius of splatter dots
+@export var dot_alpha: float = 0.6  # Alpha (transparency) value for the dots
+@export var edge_toggle: bool = true  # Toggle for showing/hiding the edge outline
+@export var edge_detection_frequency: int = 50  # Detect edges every N splatter updates
+@export var color_palette: Array[Color] = [
+	Color(1.0, 0.4, 0.4, 0.6),  # Red
+	Color(0.4, 1.0, 0.4, 0.6),  # Green
+	Color(0.4, 0.4, 1.0, 0.6),  # Blue
+	Color(1.0, 1.0, 0.4, 0.6),  # Yellow
+	Color(1.0, 0.4, 1.0, 0.6),  # Magenta
+]
+
+# Internal variables
+var img: Image
+var texture: ImageTexture
+var edge_points: Array = []
+var splatter_count: int = 0
+var timer: Timer
+
+# Outline mesh
+var outline_mesh: ImmediateMesh
+var outline_mesh_instance: MeshInstance3D
+
+func _ready():
+	randomize()
+	_initialize_texture()
+	_setup_timer()
+	_setup_outline_mesh()
+	print("GaussianPaintSplatter: Initialized with safe zone radius %.0f" % safe_zone_radius)
+
+# Initialize the image and texture
+func _initialize_texture() -> void:
+	img = Image.create(splatter_width, splatter_height, false, Image.FORMAT_RGBA8)
+	texture = ImageTexture.new()
+
+	# Fill background with white
+	img.fill(Color.WHITE)
+
+	texture = ImageTexture.create_from_image(img)
+	_update_material(texture)
+
+# Set up the timer for continuous splatter
+func _setup_timer() -> void:
+	timer = Timer.new()
+	timer.wait_time = splatter_update_interval
+	timer.autostart = true
+	timer.one_shot = false
+	timer.timeout.connect(_on_timer_timeout)
+	add_child(timer)
+
+# Set up the outline mesh
+func _setup_outline_mesh() -> void:
+	outline_mesh = ImmediateMesh.new()
+	outline_mesh_instance = MeshInstance3D.new()
+	outline_mesh_instance.mesh = outline_mesh
+
+	# Create material for outline
+	var outline_material = StandardMaterial3D.new()
+	outline_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	outline_material.albedo_color = Color.BLACK
+	outline_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	outline_mesh_instance.material_override = outline_material
+
+	add_child(outline_mesh_instance)
+	outline_mesh_instance.visible = edge_toggle
+
+# Timer callback
+func _on_timer_timeout():
+	_add_gaussian_splatter()
+	texture.update(img)
+
+	splatter_count += 1
+
+	# Periodically detect edges
+	if splatter_count % edge_detection_frequency == 0:
+		_detect_edges()
+		_create_outline_mesh()
+		print("GaussianPaintSplatter: Edge detection at splatter count %d" % splatter_count)
+
+# Add a splatter dot using Gaussian distribution
+func _add_gaussian_splatter() -> void:
+	var x := _random_gaussian(splatter_width / 2.0, stddev)
+	var y := _random_gaussian(splatter_height / 2.0, stddev)
+
+	# Calculate distance from center
+	var center := Vector2(splatter_width / 2.0, splatter_height / 2.0)
+	var splatter_pos := Vector2(x, y)
+	var dist_from_center := center.distance_to(splatter_pos)
+
+	# Skip if within safe zone
+	if dist_from_center < safe_zone_radius:
+		return
+
+	# Pick a random color from palette
+	var color := color_palette[randi() % color_palette.size()]
+
+	# Draw circular splatter
+	_draw_circle(int(x), int(y), dot_radius, color)
+
+# Draw a circular splatter on the image
+func _draw_circle(center_x: int, center_y: int, radius: int, color: Color) -> void:
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			# Check if point is inside circle
+			if dx * dx + dy * dy <= radius * radius:
+				var px = clamp(center_x + dx, 0, splatter_width - 1)
+				var py = clamp(center_y + dy, 0, splatter_height - 1)
+
+				# Blend with existing pixel
+				var current_color := img.get_pixel(px, py)
+				var blended := current_color.blend(color)
+				img.set_pixel(px, py, blended)
+
+# Detect edges using radial sampling
+func _detect_edges() -> void:
+	edge_points.clear()
+
+	var center := Vector2(splatter_width / 2.0, splatter_height / 2.0)
+	var num_directions := 360  # Number of radial directions
+	var max_distance := splatter_width / 2
+	var color_threshold := 0.9  # Threshold to detect non-white pixels
+
+	for angle in range(num_directions):
+		var radian_angle := deg_to_rad(float(angle))
+		var direction := Vector2(cos(radian_angle), sin(radian_angle))
+
+		var found_edge := false
+		for distance in range(int(safe_zone_radius), max_distance):
+			var point := center + direction * distance
+
+			# Check bounds
+			if point.x < 0 or point.x >= splatter_width or point.y < 0 or point.y >= splatter_height:
+				break
+
+			# Check if pixel is colored (not white)
+			var pixel_color := img.get_pixel(int(point.x), int(point.y))
+			if pixel_color.r < color_threshold or pixel_color.g < color_threshold or pixel_color.b < color_threshold:
+				# Found edge - store normalized coordinates
+				edge_points.append(point)
+				found_edge = true
+				break
+
+# Create outline mesh from detected edge points
+func _create_outline_mesh() -> void:
+	if edge_points.is_empty():
+		return
+
+	outline_mesh.clear_surfaces()
+	outline_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+
+	# Scale factor to convert image coordinates to 3D coordinates
+	var scale_factor := 2.0 / float(splatter_width)
+	var offset := Vector2(splatter_width / 2.0, splatter_height / 2.0)
+
+	for point in edge_points:
+		# Convert from image space to 3D space
+		var normalized = (point - offset) * scale_factor
+		outline_mesh.surface_add_vertex(Vector3(normalized.x, 0, normalized.y))
+
+	# Close the loop
+	if edge_points.size() > 0:
+		var first_point = edge_points[0]
+		var normalized = (first_point - offset) * scale_factor
+		outline_mesh.surface_add_vertex(Vector3(normalized.x, 0, normalized.y))
+
+	outline_mesh.surface_end()
+	outline_mesh_instance.visible = edge_toggle
+
+# Generate Gaussian random number using Box-Muller transform
+func _random_gaussian(mean: float, stddev: float) -> float:
+	var u1 := randf()
+	var u2 := randf()
+
+	# Prevent log(0)
+	if u1 < 0.0001:
+		u1 = 0.0001
+
+	var z0 := sqrt(-2.0 * log(u1)) * cos(TAU * u2)
+	return mean + stddev * z0
+
+# Update material with texture
+func _update_material(tex: ImageTexture) -> void:
+	var material := StandardMaterial3D.new()
+	material.albedo_texture = tex
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
+	material_override = material
+
+# Public API
+func reset() -> void:
+	"""Reset the splatter"""
+	img.fill(Color.WHITE)
+	texture.update(img)
+	edge_points.clear()
+	splatter_count = 0
+	_create_outline_mesh()
+	print("GaussianPaintSplatter: Reset")
+
+func pause() -> void:
+	"""Pause splatter generation"""
+	timer.paused = true
+
+func resume() -> void:
+	"""Resume splatter generation"""
+	timer.paused = false
+
+func set_safe_zone_radius(radius: float) -> void:
+	"""Change the safe zone radius"""
+	safe_zone_radius = radius
+	print("GaussianPaintSplatter: Safe zone radius set to %.0f" % radius)
+
+func set_standard_deviation(new_stddev: float) -> void:
+	"""Change the standard deviation"""
+	stddev = new_stddev
+	print("GaussianPaintSplatter: Standard deviation set to %.1f" % stddev)
+
+func toggle_edge_outline() -> void:
+	"""Toggle edge outline visibility"""
+	edge_toggle = !edge_toggle
+	outline_mesh_instance.visible = edge_toggle
