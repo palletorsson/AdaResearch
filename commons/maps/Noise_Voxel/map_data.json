@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Voxel Noise: Discretizing the Continuum",
+		"description": "Experience how continuous noise fields become discrete voxel structures through sampling and thresholding. Explore the fundamental algorithm behind Minecraft-style procedural generation.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "intermediate",
+			"category": "noise",
+			"estimated_time": "6-8 minutes",
+			"learning_objectives": [
+				"Sampling continuous fields into discrete voxels",
+				"Threshold-based placement algorithms",
+				"3D noise field visualization",
+				"Grid discretization critique"
+			]
 		}
 	},
 	"layers": {

@@ -61,7 +61,7 @@ func _check_for_progressive_map():
 			"map_data_post_array":
 				progression_state = "post_array_tutorial"
 			"map_data_post_random":
-				progression_state = "post_randomness_exploration"
+				progression_state = "post_randomness"
 			"map_data_post_geometric":
 				progression_state = "post_geometric_algorithms"
 			"map_data_complete":
@@ -180,7 +180,7 @@ func _apply_progressive_lighting(env: Environment):
 		"post_array_tutorial":
 			env.ambient_light_color = Color(0.2, 0.2, 0.3)
 			env.ambient_light_energy = 0.2
-		"post_randomness_exploration":
+		"post_randomness":
 			env.ambient_light_color = Color(0.3, 0.3, 0.4)
 			env.ambient_light_energy = 0.3
 		"post_geometric_algorithms":
@@ -399,7 +399,7 @@ func _is_sequence_name(name: String) -> bool:
 		"tests",
 		"array_tutorial",
 		"meshestextures",
-		"randomness_exploration",
+		"randomness",
 		"wavefunctions",
 		"vectors", 
 		"fractals", 

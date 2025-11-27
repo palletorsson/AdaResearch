@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Noise Layers: The Symphony of Frequencies",
+		"description": "Explore noise octaves through interactive torus and layered visualization. Demonstrates fractal summation - how multiple frequencies combine to create natural complexity. Includes VR brush for experimentation.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "intermediate",
+			"category": "noise",
+			"estimated_time": "7-10 minutes",
+			"learning_objectives": [
+				"Noise octaves and fractal summation",
+				"Frequency/amplitude relationships (1/2^n)",
+				"Interactive parameter control (frequency, persistence)",
+				"Layered complexity in procedural generation"
+			]
 		}
 	},
 	"layers": {

@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Noise Space: Interactive Noise Exploration",
+		"description": "An interactive space for exploring noise parameters, frequencies, and amplitudes. Experiment with different noise types and see how parameter changes affect the resulting patterns.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "intermediate",
+			"category": "noise",
+			"estimated_time": "10-12 minutes",
+			"learning_objectives": [
+				"Interactive noise parameter manipulation",
+				"Real-time noise visualization",
+				"Understanding frequency and amplitude relationships",
+				"Comparative noise type exploration"
+			]
 		}
 	},
 	"layers": {

@@ -338,8 +338,8 @@ func fix_progression_issue():
 	print("🔍 Current progression before fix: %s" % str(completed_sequences))
 	
 	# If geometric_algorithms is present but randomness_exploration is not, it's incorrect
-	if "geometric_algorithms" in completed_sequences and "randomness_exploration" not in completed_sequences:
-		print("🚨 DETECTED ISSUE: geometric_algorithms completed without randomness_exploration!")
+	if "geometric_algorithms" in completed_sequences and "randomness" not in completed_sequences:
+		print("🚨 DETECTED ISSUE: geometric_algorithms completed without randomness!")
 		print("🔧 Fixing progression to correct state...")
 		
 		# Reset to correct progression: only array_tutorial if that's what should be completed

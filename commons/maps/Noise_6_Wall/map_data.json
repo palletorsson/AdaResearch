@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Shader Noise: GPU Randomness and Hash Functions",
+		"description": "Explore shader-based procedural generation on the GPU. Experience massively parallel noise computation, hash functions, and real-time procedural textures without memory storage.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "advanced",
+			"category": "noise",
+			"estimated_time": "12-15 minutes",
+			"learning_objectives": [
+				"GPU-based noise generation techniques",
+				"Hash functions for deterministic pseudo-randomness",
+				"Shader implementations (Perlin, Simplex, Worley, fBm)",
+				"Performance optimization for parallel computation"
+			]
 		}
 	},
 	"layers": {

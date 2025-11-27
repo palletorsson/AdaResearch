@@ -822,7 +822,7 @@ func _is_sequence_name(name: String) -> bool:
 		"color", 
 		"array_tutorial",
 		"meshestextures",
-		"randomness_exploration",
+		"randomness",
 		"vectors", 
 		"fractals", 
 		"cellularautomata", 

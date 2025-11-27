@@ -1272,7 +1272,7 @@
 			"description": "Random geometric transform visualization",
 			"scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
 			"interaction": "look",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"random_transformations_stochastic": {
@@ -1281,7 +1281,7 @@
 			"description": "Stochastic distribution demonstrations",
 			"scene": "res://algorithms/randomness/random_transformations/stochastic_operations/stochastic_operations.tscn",
 			"interaction": "look",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"random_transformations_matrices": {
@@ -1290,7 +1290,7 @@
 			"description": "Random matrix visualization",
 			"scene": "res://algorithms/randomness/random_transformations/random_matrices/random_matrices.tscn",
 			"interaction": "look",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"random_transformations_noise": {
@@ -1299,7 +1299,7 @@
 			"description": "Noise-based distortion grid",
 			"scene": "res://algorithms/randomness/random_transformations/noise_based_distortion/noise_based_distortion.tscn",
 			"interaction": "look",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"particle_randomness_pure": {
@@ -1308,7 +1308,7 @@
 			"description": "Pure random particle movement",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn",
 			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"vector_field": {
@@ -1323,7 +1323,7 @@
 			"description": "Perlin-noise-driven particles",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn",
 			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"particle_randomness_patterns": {
@@ -1332,7 +1332,7 @@
 			"description": "Procedural pattern particles",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn",
 			"interaction": "touch_to_activate",
-			"sequence": "randomness_exploration",
+			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
 		},
 		"particle_randomness_emergent": {

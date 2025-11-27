@@ -139,21 +139,21 @@ here you add what file controls this behvior in res://commons/grid/
   - Rotation: 180 degrees
 
    - `dark_sphere`
-     - Ambient darkening effect
-     - A large black sphere that surrounds the scene in darkness
+	 - Ambient darkening effect
+	 - A large black sphere that surrounds the scene in darkness
 
    - `vectorpoint:180:1:5`
-     - Coordinate axes display
+	 - Coordinate axes display
 
    - `pick_up_cube`
-     - A cube that rotate, and move uo and down when you walk over it it make a mario sound and disapear.
-     - It generates a Mario-style pickup sound with frequency sweep and exponential decay
-     - It has a visual feedback effect when collected
-     - It adds points to the game manager
+	 - A cube that rotate, and move uo and down when you walk over it it make a mario sound and disapear.
+	 - It generates a Mario-style pickup sound with frequency sweep and exponential decay
+	 - It has a visual feedback effect when collected
+	 - It adds points to the game manager
 
    - `pollock_painting_in_3d`
-     - An artistic artifact visualizing chaotic movement.
-     - Uses particle systems to create a 3D interpretation of Jackson Pollock's drip paintings.
+	 - An artistic artifact visualizing chaotic movement.
+	 - Uses particle systems to create a 3D interpretation of Jackson Pollock's drip paintings.
 
    - `pipe_dream`
      - A structural chaos visualization.

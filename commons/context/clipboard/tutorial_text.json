@@ -25,10 +25,20 @@
 			"order": 0.0,
 			"sequence": "pathfinding"
 		},
+		"audio_reactivity_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/audio_reactivity_axioms.gd",
+			"order": 6.0,
+			"sequence": "wavefunctions"
+		},
 		"bell_curve_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/bell_curve_axioms.gd",
 			"order": 5.0,
 			"sequence": "randomness"
+		},
+		"bernini_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/bernini_axioms.gd",
+			"order": 7.0,
+			"sequence": "wavefunctions"
 		},
 		"bezier_curves_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/bezier_curves_axioms.gd",
@@ -59,6 +69,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/ca_universe_axioms.gd",
 			"order": 2.0,
 			"sequence": "cellularautomata"
+		},
+		"cables_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/cables_axioms.gd",
+			"order": 9.0,
+			"sequence": "wavefunctions"
 		},
 		"catmull_rom_splines_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/catmull_rom_splines_axioms.gd",
@@ -235,10 +250,20 @@
 			"order": 3.0,
 			"sequence": "infoboards"
 		},
+		"john_cage_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/john_cage_axioms.gd",
+			"order": 10.0,
+			"sequence": "wavefunctions"
+		},
 		"kmeans_clustering_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/kmeans_clustering_axioms.gd",
 			"order": 1.0,
 			"sequence": "machinelearning"
+		},
+		"kusama_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/kusama_axioms.gd",
+			"order": 11.0,
+			"sequence": "wavefunctions"
 		},
 		"line_axioms": {
 			"content": "[font_size=28][b]3. The Line[/b][/font_size]\n[i]Connecting Points and Imposing Measure[/i]\n\n[i][color=gray]Summary: A line is the shortest path between two points—the first relation in geometry. With identity established, we can connect one point to another. The line introduces direction and distance. Yet this clarity comes at a cost: it compresses all possible journeys into a single metric, erasing duration, curvature, and intention.[/color][/i]\n\n[hr]\n\n[b]Defining the Line[/b]\n\nA line is the relation between two distinct points—the shortest path through space. If a point is \"that which has no part,\" a line is \"breadthless length\" (Euclid, Definition 2).\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar point_a = Vector3(0, 0, 0)  # The origin\nvar point_b = Vector3(1, 1, 0)  # A point in space\nvar direction = point_b - point_a\nvar distance = direction.length()\n[/code][/color]\n\n[hr]\n\n[b]The Ontological Imperative[/b]\n\nThere is something inherent in the line: its measurement. Line and length are ontologically bound—inseparable. There can be no line without its length. No \"shortest path\" without its distance.\n\nThe Euclidean line is defined by its capacity for measure. Its existence [i]is[/i] its measure. If a line had no length, it would collapse back into a point. The moment we draw a line, we have already measured.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# The line cannot exist without computing its length\nvar line_vector = point_b - point_a\nvar length = line_vector.length()  # Inseparable from the line itself\nvar direction = line_vector.normalized()  # Direction implies distance traveled\n[/code][/color]\n\n[hr]\n\n[b]The Desire to Measure[/b]\n\nThe line awakens our desire to measure.\n\nOnce the line appears, we cannot help but ask: [i]how long?[/i] The line compels quantification. It demands that the space between two points be reduced to a single number—a floating-point confession of distance.\n\nThis is the line's seduction: it promises clarity. It offers the comfort of knowing [i]exactly[/i] how far. The line asserts that distance is the only relevant property between Point A and Point B. It is the normative truth—instantly calculable, prioritizing the single efficient metric.\n\nBut the desire to measure does not stop at length. The line awakens questions that lead beyond itself:\n\n• [b]Width[/b] — How thick is the stroke? (The line has none, but its representation must)\n• [b]Scale[/b] — How does this distance relate to others? (Comparison, ratio, hierarchy)\n• [b]Time[/b] — How long to traverse? (Duration—which the line erases, but the Trace will restore)\n\n[hr]\n\n[b]Materializing the Line[/b]\n\nA cylinder can represent a line segment by connecting two points with a visible 3D form. Its height equals the measured distance, enforcing the ontological link between abstraction and form.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint, orient toward endpoint\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\nadd_child(cylinder)\n[/code][/color]\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe line is a radical compression. It knows only two points and one distance. Everything between those endpoints—the journey itself—becomes invisible.\n\n[color=orange][b]What the Line Cannot Measure:[/b][/color]\n\n• [b]Duration[/b] — How long did it take to traverse?\n• [b]Curvature[/b] — Did the path curve, spiral, hesitate?\n• [b]Texture[/b] — Was the journey smooth or turbulent?\n• [b]Returns[/b] — Did you walk back and forth, circling?\n• [b]Intention[/b] — Was this the path you wanted, or were forced to take?\n\nThe line is the trace compressed to its endpoints. All lived history of movement—the body's accumulation of moments—reduced to two coordinates and a single floating-point number.\n\n[hr]\n\n[b]The Geometry of Optimization[/b]\n\nWhen the system draws a line between A and B, it makes a claim: [i]this is the only path that matters[/i]. The straight line. The efficient route. The measured distance.\n\nBut bodies do not move in straight lines. We detour. We wander. We return to places we've already been—not because it's efficient, but because the route holds meaning the algorithm cannot parse.\n\nThe line is beautiful in its simplicity, and violent in what it refuses to see.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nIf the line erases duration, the trace insists on it. The trace is the body's refusal to be reduced to endpoints—it accumulates what the line discards.\n",
@@ -445,6 +470,11 @@
 			"order": 4.0,
 			"sequence": "randomness"
 		},
+		"sine_space_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/sine_space_axioms.gd",
+			"order": 8.0,
+			"sequence": "wavefunctions"
+		},
 		"sine_wave_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/sine_wave_axioms.gd",
 			"order": 0.0,
@@ -543,6 +573,11 @@
 		"wave_desire_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/wave_desire_axioms.gd",
 			"order": 2.0,
+			"sequence": "wavefunctions"
+		},
+		"wave_propagation_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/wave_propagation_axioms.gd",
+			"order": 12.0,
 			"sequence": "wavefunctions"
 		},
 		"wavelength_axioms": {

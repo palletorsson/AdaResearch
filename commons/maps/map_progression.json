@@ -63,11 +63,11 @@
 			"name": "Array Tutorial Sequence",
 			"description": "Complete tutorial sequence covering single elements, rows, 2D grids, and disco effects",
 			"maps": ["Tutorial_Single", "Tutorial_Row", "Tutorial_2D", "Tutorial_Disco"],
-			"unlocks": ["randomness_exploration"],
+			"unlocks": ["randomness"],
 			"estimated_time": "10-15 minutes",
 			"category": "tutorial"
 		},
-		"randomness_exploration": {
+		"randomness": {
 			"name": "Randomness and Distribution",
 			"description": "Explore random number generation and data distribution patterns",
 			"maps": ["Random_Dice", "Random_Distribution", "Random_Clustering"],

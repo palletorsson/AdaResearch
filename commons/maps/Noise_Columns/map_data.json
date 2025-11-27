@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Melting Bernini: Noise as Sculptor",
+		"description": "Experience 3D Perlin noise as an erosion sculptor - watch perfect classical columns melt through coherent field distortion. Demonstrates reversible entropy and noise as creative force.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,9 +11,14 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "algorithms",
+			"category": "noise",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"3D Perlin noise fundamentals",
+				"Vertex displacement via noise sampling",
+				"Coherent noise fields vs random chaos",
+				"Reversible entropy as aesthetic"
+			]
 		}
 	},
 	"layers": {

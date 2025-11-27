@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Noise Functions: Implementation Gallery",
+		"description": "A comprehensive gallery of noise function implementations. Compare and contrast different noise algorithms, hash functions, and interpolation techniques in one interactive space.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "advanced",
+			"category": "noise",
+			"estimated_time": "10-15 minutes",
+			"learning_objectives": [
+				"Noise function implementation comparison",
+				"Hash function variations and quality",
+				"Interpolation technique differences",
+				"Algorithm performance characteristics"
+			]
 		}
 	},
 	"layers": {

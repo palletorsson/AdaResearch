@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Perlin vs Simplex: The Evolution of Gradient Noise",
+		"description": "Compare the two foundational gradient noise algorithms. Experience Perlin noise (1983, Academy Award) and Simplex noise (2001, improved version). See how iterative refinement creates better quality and performance.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,15 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
-			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"difficulty": "intermediate",
+			"category": "noise",
+			"estimated_time": "10-12 minutes",
+			"learning_objectives": [
+				"Perlin noise gradient interpolation",
+				"Simplex noise triangular grid optimization",
+				"Comparative analysis of noise algorithms",
+				"Terrain generation applications"
+			]
 		}
 	},
 	"layers": {
