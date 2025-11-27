@@ -1,0 +1,304 @@
+{
+	"artifacts": {
+		"VitruvianMan": {
+			"name": "VitruvianMan",
+			"lookup_name": "VitruvianMan",
+			"description": "VitruvianMan.",
+			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn"
+		},
+		"spectral_analyzer": {
+			"name": "Spectral Analyzer",
+			"lookup_name": "spectral_analyzer",
+			"description": "Real-time audio frequency spectrum visualization",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn"
+		},
+		"spectrum_display": {
+			"name": "Frequency Spectrum Analyzer",
+			"lookup_name": "spectrum_display",
+			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn"
+		},
+		"spectral_sine_wave": {
+			"name": "Spectral Sine Wave",
+			"lookup_name": "spectral_sine_wave",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn"
+		},
+		"walkable_sine_bridge": {
+			"name": "walkable_sine_bridge",
+			"lookup_name": "walkable_sine_bridge",
+			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
+			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn"
+		},
+		"DancingBody": {
+			"name": "DancingBody",
+			"lookup_name": "DancingBody",
+			"description": "DancingBody.",
+			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn"
+		},
+		"OscillatingWave": {
+			"name": "OscillatingWave",
+			"lookup_name": "OscillatingWave",
+			"description": "OscillatingWave.",
+			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn"
+		},
+		"HarmonicBuilder": {
+			"name": "HarmonicBuilder",
+			"lookup_name": "HarmonicBuilder",
+			"description": "HarmonicBuilder.",
+			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn"
+		},
+		"BeatFrequencies": {
+			"name": "BeatFrequencies",
+			"lookup_name": "BeatFrequencies",
+			"description": "BeatFrequencies.",
+			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn"
+		},
+		"ColoredLinesVR": {
+			"name": "ColoredLinesVR",
+			"lookup_name": "ColoredLinesVR",
+			"description": "Builds a VR hallway filled with glowing sine-wave tubes rendered from procedural meshes.",
+			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn"
+		},
+		"StaticCables": {
+			"name": "StaticCables",
+			"lookup_name": "StaticCables",
+			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
+			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn"
+		},
+		"doublehelix": {
+			"name": "doublehelix",
+			"lookup_name": "doublehelix",
+			"description": "Procedurally models an adjustable DNA-style double helix with strands, rungs, and rebuild-on-change controls.",
+			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn"
+		},
+		"dual_display_test": {
+			"name": "dual_display_test",
+			"lookup_name": "dual_display_test",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn"
+		},
+		"fourier_transform": {
+			"name": "Fourier Transform",
+			"lookup_name": "fourier_transform",
+			"description": "Frequency domain analysis and signal processing",
+			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn"
+		},
+		"resonance_frequencies_visualizer": {
+			"name": "resonance_frequencies_visualizer",
+			"lookup_name": "resonance_frequencies_visualizer",
+			"description": "resonance_frequencies_visualizer",
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn"
+		},
+		"unit_circle": {
+			"name": "Unit Circle",
+			"lookup_name": "unit_circle",
+			"description": "Trigonometric functions visualization on unit circle",
+			"scene": "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn"
+		},
+		"tech_noir_audio": {
+			"name": "Tech Noir Audio",
+			"lookup_name": "tech_noir_audio",
+			"description": "John Cage inspired algorithmic audio composition",
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
+		},
+		"liturgicalambientgen": {
+			"name": "liturgicalambientgenera",
+			"lookup_name": "liturgicalambientgen",
+			"description": "Threaded ambient generator that layers choral drones, organ swells, and cathedral effects with progress visualization.",
+			"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn"
+		},
+		"resonance_frequencies": {
+			"name": "Resonance Frequencies",
+			"lookup_name": "resonance_frequencies",
+			"description": "Visualization of resonant frequency patterns",
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn"
+		},
+		"noir_sequencer": {
+			"name": "Noir Sequencer",
+			"lookup_name": "noir_sequencer",
+			"description": "Film noir style algorithmic music sequencer",
+			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn"
+		},
+		"kusama_sine": {
+			"name": "Kusama Sine",
+			"lookup_name": "kusama_sine",
+			"description": "Yayoi Kusama inspired sine wave patterns",
+			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn"
+		},
+		"john_cage_tech_noir": {
+			"name": "john_cage_tech_noir",
+			"lookup_name": "john_cage_tech_noir",
+			"description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
+		},
+		"mario_test_sound_ui": {
+			"name": "mario_test_sound_ui",
+			"lookup_name": "mario_test_sound_ui",
+			"description": "Sci-fi kiosk hosting the Mario slider UI with XR hand poses and 2D-in-3D controls.",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
+		},
+		"MarioSoundController": {
+			"name": "MarioSoundController",
+			"lookup_name": "MarioSoundController",
+			"description": "MarioSoundController.",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn"
+		},
+		"coshlea": {
+			"name": "coshlea",
+			"lookup_name": "coshlea",
+			"description": "Creates a hyperbolic cosine helicoid surface with adjustable domain sampling.",
+			"scene": "algorithms/wavefunctions/coshlea/coshlea.tscn"
+		},
+		"sine_cylinder_staircase": {
+			"name": "sine_cylinder_staircase",
+			"lookup_name": "sine_cylinder_staircase",
+			"description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
+			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn"
+		},
+		"sine_wall_static": {
+			"name": "sine_wall_static",
+			"lookup_name": "sine_wall_static",
+			"description": "sine_wall_statice.",
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn"
+		},
+		"sine_art_monitor": {
+			"name": "sine_art_monitor",
+			"lookup_name": "sine_art_monitor",
+			"description": "sine_art_monitor.",
+			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn"
+		},
+		"sine_wall_corridor": {
+			"name": "sine_wall_corridor",
+			"lookup_name": "sine_wall_corridor",
+			"description": "sine_wall_corridor.",
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn"
+		},
+		"SplineCables": {
+			"name": "SplineCables",
+			"lookup_name": "SplineCables",
+			"description": "SplineCables.",
+			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn"
+		},
+		"spring_network": {
+			"name": "SpringNetwork",
+			"lookup_name": "spring_network",
+			"description": "10\u00d710 grid of coupled springs",
+			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn"
+		},
+		"lissajous_curves": {
+			"name": "LissajousCurves",
+			"lookup_name": "lissajous_curves",
+			"description": "Parametric curves with particle tracer",
+			"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn"
+		},
+		"coupled_oscillator_lattice": {
+			"name": "CoupledOscillatorLattice",
+			"lookup_name": "coupled_oscillator_lattice",
+			"description": "12\u00d712 oscillator grid",
+			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn"
+		},
+		"parametric_pendulum_waves": {
+			"name": "ParametricPendulumWaves",
+			"lookup_name": "parametric_pendulum_waves",
+			"description": "Parametric pendulum waves",
+			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn"
+		},
+		"rainbow_hallway": {
+			"name": "rainbow_hallway",
+			"lookup_name": "rainbow_hallway",
+			"description": "CSG hallway coated with animated rainbow shader controls and glow-rich lighting.",
+			"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn"
+		},
+		"hallway_scene": {
+			"name": "hallway_scene",
+			"lookup_name": "hallway_scene",
+			"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
+			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn"
+		},
+		"segment_slide": {
+			"name": "segment_slide",
+			"lookup_name": "segment_slide",
+			"description": "segment_slide.",
+			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn"
+		},
+		"resonating_metallophone": {
+			"name": "resonating_metallophone",
+			"lookup_name": "resonating_metallophone",
+			"description": "resonating_metallophone",
+			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn"
+		},
+		"bernini_columns": {
+			"name": "Bernini Columns",
+			"lookup_name": "bernini_columns",
+			"description": "Baroque architectural wave patterns",
+			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn"
+		},
+		"line_builder_3d": {
+			"name": "line_builder_3d",
+			"lookup_name": "line_builder_3d",
+			"description": "line_builder_3d",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn"
+		},
+		"cable_builder": {
+			"name": "cable_builder",
+			"lookup_name": "cable_builder",
+			"description": "cable_builder",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn"
+		},
+		"fourier_transform_advanced": {
+			"name": "Advanced Fourier Transform",
+			"lookup_name": "fourier_transform_advanced",
+			"description": "Enhanced frequency domain signal analysis",
+			"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn"
+		},
+		"parametric_shapes": {
+			"name": "Parametric Shapes",
+			"lookup_name": "parametric_shapes",
+			"description": "Mathematical curve and surface generation",
+			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn"
+		},
+		"standing_waves": {
+			"name": "Standing Waves",
+			"lookup_name": "standing_waves",
+			"description": "Stationary wave pattern visualization",
+			"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn"
+		},
+		"unit_circle_advanced": {
+			"name": "Advanced Unit Circle",
+			"lookup_name": "unit_circle_advanced",
+			"description": "Enhanced trigonometric visualization",
+			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn"
+		},
+		"SimpleOscillatingBridge": {
+			"name": "SimpleOscillatingBridge",
+			"lookup_name": "SimpleOscillatingBridge",
+			"description": "SimpleOscillatingBridge",
+			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn"
+		},
+		"wave_interference": {
+			"name": "Wave Interference",
+			"lookup_name": "wave_interference",
+			"description": "Superposition and interference patterns",
+			"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn"
+		},
+		"fouriertransformshape": {
+			"name": "fouriertransformshape",
+			"lookup_name": "fouriertransformshape",
+			"description": "Shows nested rotating circles that trace a Fourier drawing with emissive connections.",
+			"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn"
+		},
+		"wave_propagation_3d": {
+			"name": "3D Wave Propagation",
+			"lookup_name": "wave_propagation_3d",
+			"description": "Three-dimensional wave dynamics simulation",
+			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
+		},
+		"water_land_ride": {
+			"name": "water_land_ride",
+			"lookup_name": "water_land_ride",
+			"description": "water_land_ride",
+			"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn"
+		}
+	}
+}

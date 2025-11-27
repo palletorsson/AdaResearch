@@ -7,6 +7,7 @@ class_name GridInteractablesComponent
 
 # Path constants
 const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
+const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 
 # References
 var parent_node: Node3D
@@ -61,24 +62,34 @@ func _load_artifact_registries():
 	
 	print("GridInteractablesComponent: ✅ Loaded %d validated artifacts from %d registries" % [total_loaded, artifact_paths.size()])
 
-# Get artifact registry paths from map data
+# Get artifact registry paths from map data and registry directory
 func _get_artifact_registry_paths() -> Array[String]:
 	var paths: Array[String] = []
 	
-	# Try to get from map's external references
+	# 1. Add the main default file
+	paths.append(DEFAULT_ARTIFACTS_JSON_PATH)
+	
+	# 2. Add all JSON files from the registry directory
+	var dir = DirAccess.open(REGISTRY_DIR_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".json"):
+				paths.append(REGISTRY_DIR_PATH + file_name)
+			file_name = dir.get_next()
+	
+	# 3. Try to get additional overrides from map's external references
 	if map_data_component and map_data_component.json_loader:
 		var external_refs = map_data_component.json_loader.map_data.get("external_references", {})
-		var artifact_registries = external_refs.get("artifact_registries", [])
+		var map_specific_registries = external_refs.get("artifact_registries", [])
 		
-		if artifact_registries.size() > 0:
-			print("GridInteractablesComponent: Using artifact registries from map: %s" % str(artifact_registries))
-			for path in artifact_registries:
-				paths.append(str(path))
-			return paths
+		if map_specific_registries.size() > 0:
+			print("GridInteractablesComponent: Adding map-specific registries: %s" % str(map_specific_registries))
+			for path in map_specific_registries:
+				if not paths.has(path):
+					paths.append(str(path))
 	
-	# Fallback to default
-	print("GridInteractablesComponent: Using default artifact registry")
-	paths.append(DEFAULT_ARTIFACTS_JSON_PATH)
 	return paths
 
 # Load a single artifact registry file
