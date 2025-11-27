@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Wavefunctions Level One",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Bernini's Twist: The Baroque Algorithm",
+		"description": "The Solomonic columns of St. Peter's Baldachin spiral upward, defying stone's rigidity. Use sine waves to displace mesh vertices, transforming cylinders into twisting baroque forms. Layer noise for organic erosion. Discover procedural geometry as the new Baroque—favoring the variable, mutating, and complex over the static and ideal. Baroque was a glitch in Renaissance order.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,17 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Vertex displacement: twisting via rotation matrix in shader",
+				"Rotation matrix around Y-axis (angle = VERTEX.y * twist)",
+				"Adding noise for organic detail: VERTEX += NORMAL * noise",
+				"Digital grotesque: animating the twist, breathing columns",
+				"Critical: Baroque as glitch in Renaissance order",
+				"Procedural geometry as new Baroque: variable over ideal"
+			]
 		}
 	},
 	"documentation": {
@@ -65,7 +72,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "clipboard#bernini_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", "bernini_columns", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "resonance_frequencies_visualizer:0:2", " ", " ", " ", " ", " ", " "],

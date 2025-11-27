@@ -10,10 +10,16 @@
 			"max_height": 4
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "intermediate",
 			"category": "wavefunctions",
-			"estimated_time": "5-10 minutes",
-			"learning_objectives": ["Audio amplitude visualization", "Simple waveform mapping"]
+			"estimated_time": "8-12 minutes",
+			"learning_objectives": [
+				"Audio bus and amplitude analysis",
+				"FFT spectrum: breaking waveforms into frequencies",
+				"Frequency bands: bass, mids, highs",
+				"Quantization noise and sampling gaps",
+				"Critical: Latency as reacting to the past, not present"
+			]
 		}
 	},
 	"layers": {

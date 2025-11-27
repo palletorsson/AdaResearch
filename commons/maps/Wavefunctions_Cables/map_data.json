@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Wavefunctions Level Six",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Cables & Catenaries: The Weight of Connection",
+		"description": "A cable is a line with weight. Gravity pulls it down; tension holds it up. The shape is a catenary (hyperbolic cosine). Simulate physical connections using Verlet integration and stick constraints. Learn slack and tension. Discover that real connections have weight—they sag, require maintenance, are affected by gravity (context). Slack is not inefficiency; it's the buffer that prevents snapping.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,17 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Catenary curve: y = a * cosh(x/a)",
+				"Verlet integration: simulating physics with particles and velocity",
+				"Stick constraints: keeping segments at fixed distance",
+				"Slack and tension: excess length vs. straight line",
+				"Network theory: straight lines are lies—connections have weight",
+				"Critical: Slack as buffer, not inefficiency"
+			]
 		}
 	},
 	"documentation": {
@@ -64,7 +71,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "clipboard#cables_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "cable_builder", " ", "StaticCables:0:5", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],

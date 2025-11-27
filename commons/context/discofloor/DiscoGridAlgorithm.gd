@@ -217,8 +217,7 @@ func _place_cube_at(x: int, y: int, z: int):
 		return
 	
 	# Create new cube using the grid system's method
-	var total_size = structure_component.cube_size + structure_component.gutter
-	structure_component._add_cube(x, y, z, total_size)
+	structure_component.add_cube_at(x, y, z)
 
 func _process(delta):
 	"""Main disco animation loop"""

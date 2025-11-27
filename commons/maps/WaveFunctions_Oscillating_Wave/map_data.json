@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Oscillating Wave",
-		"description": "Visualizing basic wave oscillation",
+		"name": "Oscillating Wave: Energy in Motion",
+		"description": "Experience the fundamental wave equation through interactive visualization. Manipulate amplitude, frequency, and phase while observing how energy moves through space. Learn why perpetual motion is a digital lie.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -12,8 +12,14 @@
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "wavefunctions",
-			"estimated_time": "5-10 minutes",
-			"learning_objectives": ["Oscillation basics", "Amplitude and frequency"]
+			"estimated_time": "7-10 minutes",
+			"learning_objectives": [
+				"Wave equation: y = A*sin(B*(x-C)) + D",
+				"Amplitude, frequency, phase shift, and vertical offset",
+				"Transverse vs longitudinal wave motion",
+				"Damping and exponential decay",
+				"Critical: Perpetual motion as digital illusion"
+			]
 		}
 	},
 	"layers": {

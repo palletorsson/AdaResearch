@@ -295,3 +295,42 @@ func get_all_cubes() -> Array[Node]:
 func get_cubes_group_name() -> String:
 	"""Returns the group name used for all grid cubes"""
 	return CUBE_GROUP_NAME
+
+# Add a cube dynamically at the specified position
+# This method allows algorithms to add cubes after initial generation
+func add_cube_at(x: int, y: int, z: int) -> bool:
+	"""Add a cube at the specified grid coordinates. Returns true if successful."""
+	if not _is_valid_xyz(x, y, z):
+		push_warning("GridStructureComponent: Cannot add cube at invalid position (%d, %d, %d)" % [x, y, z])
+		return false
+	
+	# Check if cube already exists
+	if grid[x][y][z]:
+		return false  # Cube already exists
+	
+	# Mark position as occupied
+	grid[x][y][z] = true
+	
+	# Add to positions array
+	var pos = Vector3i(x, y, z)
+	cube_positions.append(pos)
+	
+	# Update MultiMesh instance count
+	if multimesh:
+		var current_count = multimesh.instance_count
+		multimesh.instance_count = cube_positions.size()
+		
+		# Set transform for the new instance
+		var total_size = cube_size + gutter
+		var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
+		var transform = Transform3D()
+		transform.origin = world_pos
+		multimesh.set_instance_transform(current_count, transform)
+		
+		# Create collision shape
+		_create_collision_at(world_pos, cube_size)
+		
+		print("GridStructureComponent: Added cube at (%d, %d, %d)" % [x, y, z])
+		return true
+	
+	return false

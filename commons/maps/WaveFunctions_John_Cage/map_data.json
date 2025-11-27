@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "4'33\": The Impossibility of Silence",
+		"description": "In 1952, John Cage presented four minutes and thirty-three seconds of 'silence.' But it wasn't silent—the audience coughed, rain fell, chairs creaked. Silence is not absence of sound, but presence of unintended noise. Explore aleatoric algorithms (chance as life), noise floor (thermal noise, blood in ear), and ambient computation (simulating the uneventful). Cage reframed silence as space of infinite potential. The algorithm is running, but not 'working.' It is just breathing.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,17 @@
 			"max_height": 6
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
+			"difficulty": "advanced",
+			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Aleatoric algorithms: chance operations via randf() as life, not chaos",
+				"Noise floor: you cannot have signal of 0, thermal noise in circuit",
+				"Ambient computation: simulating the uneventful, code that does nothing beautifully",
+				"Drift without destination: noise.get_noise_1d() for wandering",
+				"Queer silence: reframing silence as space of infinite potential",
+				"Critical: Do not look for the puzzle. Just listen. The algorithm is just breathing."
+			]
 		}
 	},
 	"documentation": {
@@ -64,7 +71,7 @@
 			[" ", " ", " ", " ", " ", "dual_display_test:180", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", "", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "clipboard#john_cage_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "doublehelix", "doublehelix", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "john_cage_tech_noir", "", " ", " ", " ", " ", " "],
 			[" ", " ", "", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],

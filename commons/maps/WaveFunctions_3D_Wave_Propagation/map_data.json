@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Wave Propagation: The Medium is the Message",
+		"description": "A wave is not an object—it's a disturbance traveling through a medium. Watch waves emanate from sources, diminishing by inverse square law. Learn distance fields, phase propagation (sin(time - dist)), attenuation, and interference. Discover that identity is permeable: you are not a static entity, but a point of intersection for the world's noise.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,16 @@
 			"max_height": 5
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "algorithms",
+			"difficulty": "intermediate",
+			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Distance fields: calculating propagation from source to every point",
+				"Wave function: sin(time * speed - dist * frequency)",
+				"Attenuation: inverse square law (energy = 1 / (1 + dist²))",
+				"Interference: wave summation creates peaks and cancellation",
+				"Critical: Identity is permeable—to exist in a medium is to be distorted by it"
+			]
 		}
 	},
 	"documentation": {
@@ -62,7 +68,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "clipboard#wave_propagation_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "wave_propagation_3d:0:0:0.5", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Spherical Harmonics",
-		"description": "Visualizing spherical harmonics and quantum orbitals",
+		"name": "Spherical Harmonics: Vibrating the Void",
+		"description": "When a wave is confined to a sphere's surface, it cannot be any shape—it must fit perfectly, or cancel itself. These allowed shapes are spherical harmonics, the standing waves of the 3D world. Explore s, p, and d orbitals. Learn why they're the basis functions for 3D lighting. Discover that matter is music—the hardness of the table is just a stable vibration mode of a field.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +13,14 @@
 			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "10-15 minutes",
-			"learning_objectives": ["Spherical harmonics", "Quantum probability clouds"]
+			"learning_objectives": [
+				"Standing waves on sphere surfaces: quantization via geometry",
+				"Quantum numbers (l, m) and Legendre polynomials",
+				"Orbital shapes: s-orbital (sphere), p-orbital (dumbbell), d-orbital (cloverleaf)",
+				"Basis functions: spherical harmonics as 'pixels' for 3D lighting (light probes)",
+				"Probability clouds: electrons as shapes, not positions",
+				"Critical: Matter is music—stable vibrations, not static solids"
+			]
 		}
 	},
 	"layers": {

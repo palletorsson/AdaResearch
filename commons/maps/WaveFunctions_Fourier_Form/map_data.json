@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Wavefunctions Level Four",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "Fourier Transform Shape: Drawing with Circles",
+		"description": "Any 2D drawing can be recreated by a series of rotating circles (epicycles). Watch as complex shapes emerge from layered rotations. Learn how DFT encodes shapes into frequency spectra, and discover that your handwriting is just a list of phasors—complexity requiring no complex parts, only accumulated cycles.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -10,10 +10,16 @@
 			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
+			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": [
+				"Epicycles: nested rotating circles creating complex curves",
+				"Discrete Fourier Transform (DFT): encoding shapes as frequency spectra",
+				"Compression via low-pass filtering (discarding small circles)",
+				"Phasor representation: radius, frequency, phase",
+				"Critical: Is handwriting personal, or just a frequency spectrum?"
+			]
 		}
 	},
 	"documentation": {
@@ -63,7 +69,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "clipboard#fourier_transform_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "fouriertransformshape:0:3", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
