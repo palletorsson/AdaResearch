@@ -198,6 +198,19 @@
 			"description": "GaussianBlurShader",
 			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn"
 		},
+		"WhiteNoiseGallery": {
+			"name": "WhiteNoiseGallery",
+			"lookup_name": "WhiteNoiseGallery",
+			"description": "WhiteNoiseGallery",
+			"scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn"
+		},
+		"NoiseColors3D": {
+			"name": "NoiseColors3D",
+			"lookup_name": "NoiseColors3D",
+			"description": "NoiseColors3Dy",
+			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn"
+		},
+		
 		"blue_noise": {
 			"name": "Blue Noise",
 			"lookup_name": "blue_noise",

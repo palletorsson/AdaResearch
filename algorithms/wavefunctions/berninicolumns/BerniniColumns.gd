@@ -23,6 +23,13 @@ const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolum
 @export var rotation_speed: float = 0.2
 var time: float = 0.0
 
+# Audio System
+var audio_player: AudioStreamPlayer3D
+var audio_stream: AudioStreamGenerator
+var playback: AudioStreamGeneratorPlayback
+const SAMPLE_RATE = 44100.0
+var audio_phase: float = 0.0
+
 # -- Scene State --
 var columns = []
 
@@ -37,6 +44,8 @@ var column_positions = [
 # -- Godot Lifecycle Functions --
 
 func _ready():
+	_setup_audio()
+	
 	# Create the Baldacchino columns
 	for pos in column_positions:
 		var column = create_spiral_column()
@@ -48,6 +57,21 @@ func _ready():
 	# Add a light to highlight the columns
 	create_lighting()
 
+func _setup_audio():
+	audio_player = AudioStreamPlayer3D.new()
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = SAMPLE_RATE
+	audio_stream.buffer_length = 0.1
+	
+	audio_player.stream = audio_stream
+	audio_player.unit_size = 15.0
+	audio_player.max_db = -5.0
+	audio_player.autoplay = true
+	
+	add_child(audio_player)
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
+
 func _process(delta):
 	# Animate the columns if enabled
 	if rotate_columns:
@@ -57,6 +81,43 @@ func _process(delta):
 			if rotating_root:
 				# Slow continuous rotation applied only to the shaft/capital
 				rotating_root.rotation.y = time * rotation_speed
+	
+	_generate_audio_samples()
+
+func _generate_audio_samples():
+	if not playback:
+		return
+		
+	var frames_available = playback.get_frames_available()
+	if frames_available < 1:
+		return
+		
+	for i in range(frames_available):
+		var sample = 0.0
+		
+		# Generate a chord based on the 4 columns
+		# Frequencies based on a low D minor chord (approximate)
+		# Modulate slightly with rotation speed
+		var freqs = [146.83, 185.00, 220.00, 293.66] # D3, F#3, A3, D4 (D Major-ish for gold)
+		
+		for j in range(4):
+			var f = freqs[j] + sin(time * 0.5 + j) * 2.0 # Slight detuning
+			
+			# Sawtooth-ish wave for metallic sound
+			var wave = 2.0 * (fmod(audio_phase * f / SAMPLE_RATE + float(j) * 0.25, 1.0) - 0.5)
+			
+			# Soften it to triangle
+			wave = abs(wave) * 2.0 - 1.0
+			
+			sample += wave
+			
+		sample *= 0.1 * rotation_speed # Volume based on rotation
+		
+		playback.push_frame(Vector2(sample, sample))
+		
+		audio_phase += 1.0
+		if audio_phase > SAMPLE_RATE:
+			audio_phase -= SAMPLE_RATE
 
 # --- Procedural Generation Functions ---
 

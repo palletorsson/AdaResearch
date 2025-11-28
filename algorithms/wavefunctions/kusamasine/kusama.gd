@@ -60,12 +60,37 @@ var orbital_elements: Array = []
 var harmonic_dots: Array = []
 var energy_streams: Array = []
 
+# Audio System
+var audio_player: AudioStreamPlayer3D
+var audio_stream: AudioStreamGenerator
+var playback: AudioStreamGeneratorPlayback
+const SAMPLE_RATE = 44100.0
+var audio_phase: float = 0.0
+
 func _ready():
 	detail_scale_clamped = clamp(detail_scale, 0.35, 1.3)
 	if abs(vertical_offset) > 0.001:
 		translate(Vector3(0, vertical_offset, 0))
+	
+	_setup_audio()
+	
 	if generate_on_ready:
 		generate_ultra_vivid_sculpture()
+
+func _setup_audio():
+	audio_player = AudioStreamPlayer3D.new()
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = SAMPLE_RATE
+	audio_stream.buffer_length = 0.1
+	
+	audio_player.stream = audio_stream
+	audio_player.unit_size = 10.0
+	audio_player.max_db = -10.0
+	audio_player.autoplay = true
+	
+	add_child(audio_player)
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
 
 func _process(delta):
 	time += delta * animation_intensity
@@ -74,6 +99,36 @@ func _process(delta):
 	pulse_time += delta * 1.5
 	
 	animate_all_elements(delta)
+	_generate_audio_samples()
+
+func _generate_audio_samples():
+	if not playback:
+		return
+		
+	var frames_available = playback.get_frames_available()
+	if frames_available < 1:
+		return
+		
+	for i in range(frames_available):
+		# Base frequency modulated by animation intensity and slow sine
+		var freq = 220.0 + sin(time * 0.5) * 50.0 + animation_intensity * 20.0
+		
+		# "Shimmer" effect matching the dots: add high frequency modulation
+		var shimmer = sin(audio_phase * 5.0) * 0.2
+		
+		# Amplitude modulated by morphing
+		var amp = 0.3 * (0.5 + morphing_amplitude * 0.5)
+		
+		# Simple sine wave synthesis
+		var sample = sin(audio_phase * 2.0 * PI * freq / SAMPLE_RATE + shimmer) * amp
+		
+		playback.push_frame(Vector2(sample, sample))
+		
+		# Increment phase
+		audio_phase += 1.0
+		if audio_phase > SAMPLE_RATE:
+			audio_phase -= SAMPLE_RATE
+
 
 func generate_ultra_vivid_sculpture():
 	# Create the hyper-dynamic center core

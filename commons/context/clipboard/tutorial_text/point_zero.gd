@@ -37,7 +37,7 @@ We might wish to resist introducing an arrow of direction—for a pointer inevit
 
 [color=yellow]Try turning around. The arrow points forward, but space exists behind you too. The system optimizes for the forward view, but the void is omnidirectional. Why does the tutorial only want you to look one way?[/color]
 
-The arrow introduces a symbolic layer of [b]forced convenience[/b] against the [b]background void[/b]. This layer is the [b]foreground[/b]—a symbolic interface designed to guide perception and manage the vertigo of infinite possibility. It forces us to ask: [b]How did we get here?[/b]
+The arrow introduces a symbolic layer of [b]forced convenience[/b] against the [b]background void[/b]. This layer is the [b]foreground[/b]—a symbolic interface designed to guide perception and manage the vertigo of infinite possibility. It forces us to ask: [b]How did we get here? An accumulade halting problem: yes we are here now but resource should we allocate to understand the past? /b]
 
 [hr]
 

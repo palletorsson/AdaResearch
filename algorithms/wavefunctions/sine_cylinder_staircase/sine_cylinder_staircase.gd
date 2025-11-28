@@ -185,6 +185,17 @@ func _add_center_pole(h: float) -> void:
 	mi.position.y = h * 0.5
 	add_child(mi)
 
+	# collider
+	var body := StaticBody3D.new()
+	var cs := CollisionShape3D.new()
+	var shape := CylinderShape3D.new()
+	shape.radius = BASE_RADIUS
+	shape.height = h
+	cs.shape = shape
+	body.add_child(cs)
+	body.position = mi.position
+	add_child(body)
+
 func _make_step_mat() -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = Color(0.85, 0.85, 0.85)

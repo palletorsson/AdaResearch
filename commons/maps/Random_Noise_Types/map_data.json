@@ -40,15 +40,15 @@
 			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "randompoint:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", ""],
-			[" ", " ", " ", "clipboard#blue_noise_axioms:194:1.0", " ", "clipboard#white_noise_axioms:194:1.0", " "],
-			[" ", "randompoints:-90", " ", "randompoints_gaussian:-90", " ", "randompoints_uniform:-90", " "],
+			[" ", " ", " ", "clipboard#white_noise_axioms:194:1.0", " ", "clipboard#blue_noise_axioms:194:1.0", " "],
+			[" ", "randompoints:-90", " ", "WhiteNoiseGallery:180:-0.5:0.05", " ", "NoiseColors3D:180:-0.5:0.1", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
-			[" ", " ", " ", " ", " ", " ", " "]
+			["", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {

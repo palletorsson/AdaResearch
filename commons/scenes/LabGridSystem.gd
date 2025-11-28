@@ -346,13 +346,13 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
 	"""Override utility activation for lab-specific handling"""
 	print("LabGridSystem: Lab utility activated - %s" % utility_type)
-	
+
 	# Handle lab teleporter differently
 	if utility_type == "t":
 		print("LabGridSystem: 🚀 Lab teleporter activated")
-		
+
 		var destination = data.get("destination", "")
-		
+
 		# Check if destination is a sequence name (no map extension)
 		var sequence_name = ""
 		if _is_sequence_name(destination):
@@ -362,8 +362,19 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 			# Legacy: map name, try to determine sequence
 			sequence_name = _get_sequence_for_map(destination)
 			print("LabGridSystem: Map-based teleporter '%s' -> sequence '%s'" % [destination, sequence_name])
-		
-		# Find SceneManager and request transition
+
+		# Check if we're in desktop mode (no XR interface)
+		var xr_interface = XRServer.get_primary_interface()
+		var is_vr_mode = xr_interface != null and xr_interface.is_initialized()
+
+		if not is_vr_mode:
+			print("LabGridSystem: Desktop mode - emitting lab_sequence_triggered signal instead of using SceneManager")
+			# In desktop mode, emit the signal for DesktopLabManager to handle
+			if sequence_name:
+				lab_sequence_triggered.emit(sequence_name)
+			return
+
+		# VR mode - use SceneManager
 		var scene_manager = _find_scene_manager()
 		if scene_manager:
 			if sequence_name:

@@ -1,5 +1,8 @@
 extends Node
 
+# Tutorial content file
+# Edit using the Tutorial Text Editor plugin
+
 var text = '''[center][font_size=28][b]Binary Space Partitioning (BSP)[/b][/font_size][/center]
 [center][i]Recursive Division, Dungeon Generation[/i][/center]
 

@@ -67,8 +67,22 @@ func _on_body_entered(body: Node3D):
 	print("ResetTeleporter: Player detected in reset area - initiating reset")
 	is_resetting = true
 	await get_tree().create_timer(reset_delay).timeout
+	
+	# Reset velocity FIRST
 	_reset_velocity(body)
+	
+	# Wait for physics frame to process velocity reset
+	await get_tree().physics_frame
+	
+	# THEN teleport
 	_teleport_player(body)
+	
+	# Reset velocity AGAIN after teleport
+	_reset_velocity(body)
+	
+	# Wait for physics frame to ensure position sticks
+	await get_tree().physics_frame
+	
 	is_resetting = false
 
 func _reset_velocity(body: Node3D):

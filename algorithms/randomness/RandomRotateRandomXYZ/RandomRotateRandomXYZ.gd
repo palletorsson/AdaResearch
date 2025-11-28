@@ -1,9 +1,29 @@
 extends Node3D
-## RotateRandomZXY.gd
+## RandomRotateRandomXYZ.gd
 ## Randomly rotates MultiMesh cube instances on X, Y, and Z each frame
+## Supports different selection modes for determining which instances rotate.
 
+enum SelectionMode {
+	UNIFORM,
+	CENTER_BELL,
+	NOISE
+}
+
+@export_group("Targeting")
 @export var multimesh_path: NodePath = "../GridMultiMesh"
+@export var selection_mode: SelectionMode = SelectionMode.UNIFORM
 
+@export_subgroup("Bell Curve Settings")
+@export var bell_center: Vector3 = Vector3.ZERO
+@export var bell_radius: float = 10.0 ## The standard deviation (sigma) of the bell curve
+
+@export_subgroup("Noise Settings")
+@export var noise_source: FastNoiseLite
+@export var noise_scale: float = 1.0
+@export var noise_threshold: float = 0.0 ## Minimum probability cutoff
+@export var noise_scroll_speed: Vector3 = Vector3(0.1, 0.1, 0.1)
+
+@export_group("Rotation Settings")
 # Initial random rotation range (applied once on _ready)
 @export var min_degrees: float = -2.01
 @export var max_degrees: float =  2.01
@@ -15,11 +35,18 @@ extends Node3D
 var rng := RandomNumberGenerator.new()
 var multimesh_instance: MultiMeshInstance3D = null
 var multimesh: MultiMesh = null
+var _time: float = 0.0
 
 func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	rng.randomize()
+	
+	if selection_mode == SelectionMode.NOISE and not noise_source:
+		# Create default noise if missing
+		noise_source = FastNoiseLite.new()
+		noise_source.noise_type = FastNoiseLite.TYPE_PERLIN
+		noise_source.frequency = 0.1
 
 	# Find the MultiMeshInstance3D
 	if not multimesh_path.is_empty():
@@ -34,6 +61,12 @@ func _ready() -> void:
 		if multimesh and multimesh.instance_count > 0:
 			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
 			rotate_random_initial()
+			
+			# Auto-detect center if bell center is zero (optional UX convenience)
+			if selection_mode == SelectionMode.CENTER_BELL and bell_center == Vector3.ZERO:
+				var aabb = multimesh.get_aabb()
+				bell_center = aabb.get_center()
+				print("Centered bell curve at: ", bell_center)
 		else:
 			push_warning("MultiMesh found but has no instances")
 	else:
@@ -75,10 +108,50 @@ func rotate_random_initial() -> void:
 func _process(delta: float) -> void:
 	if not multimesh or multimesh.instance_count == 0:
 		return
+		
+	_time += delta
 
-	# Pick a random instance
-	var instance_index = rng.randi_range(0, multimesh.instance_count - 1)
-	var transform = multimesh.get_instance_transform(instance_index)
+	var chosen_index = -1
+	var max_attempts = 20 # Try to find a valid instance up to 20 times per frame
+	
+	for _attempt in range(max_attempts):
+		# Pick a random instance
+		var idx = rng.randi_range(0, multimesh.instance_count - 1)
+		
+		if selection_mode == SelectionMode.UNIFORM:
+			chosen_index = idx
+			break
+		
+		var transform = multimesh.get_instance_transform(idx)
+		var pos = transform.origin
+		var probability = 0.0
+		
+		if selection_mode == SelectionMode.CENTER_BELL:
+			var dist = pos.distance_to(bell_center)
+			# Gaussian: e^(-x^2 / 2s^2)
+			# Result is 1.0 at center, near 0 at edges
+			probability = exp(-(dist * dist) / (2.0 * bell_radius * bell_radius))
+			
+		elif selection_mode == SelectionMode.NOISE:
+			if noise_source:
+				var noise_pos = (pos * noise_scale) + (noise_scroll_speed * _time)
+				var n = noise_source.get_noise_3dv(noise_pos)
+				# Remap -1..1 to 0..1
+				probability = (n + 1.0) * 0.5
+				if probability < noise_threshold:
+					probability = 0.0
+		
+		# Rejection sampling
+		if rng.randf() < probability:
+			chosen_index = idx
+			break
+	
+	# If we failed to find a target after max_attempts, we simply skip rotation this frame
+	if chosen_index == -1:
+		return
+
+	# Perform the rotation on the chosen instance
+	var transform = multimesh.get_instance_transform(chosen_index)
 
 	# Generate random rotation steps
 	var step_x = deg_to_rad(rng.randf_range(min_step, max_step))
@@ -91,4 +164,4 @@ func _process(delta: float) -> void:
 	transform.basis = transform.basis.rotated(Vector3.BACK, step_z)
 
 	# Update the instance transform
-	multimesh.set_instance_transform(instance_index, transform)
+	multimesh.set_instance_transform(chosen_index, transform)

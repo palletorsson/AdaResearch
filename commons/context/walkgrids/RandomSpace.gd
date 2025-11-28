@@ -22,7 +22,6 @@ enum AnimationType {
 	WAVE,
 	RIPPLE,
 	RANDOM_WALK,
-	PERLIN_NOISE,
 	CHAOTIC
 }
 
@@ -33,7 +32,6 @@ var animation_time: float = 0.0
 var update_timer: float = 0.0
 var collision_timer: float = 0.0
 var rng: RandomNumberGenerator
-var noise: FastNoiseLite
 var player_node: Node3D
 var last_player_distance: float = 0.0
 
@@ -41,9 +39,6 @@ func _ready():
 	super._ready()
 	rng = RandomNumberGenerator.new()
 	rng.seed = seed_value
-	noise = FastNoiseLite.new()
-	noise.seed = seed_value
-	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	_find_player()
 	_generate_base_heights()
 
@@ -132,8 +127,6 @@ func _animate_heights(lod_factor: float = 1.0):
 			_animate_ripple(effective_amplitude)
 		AnimationType.RANDOM_WALK:
 			_animate_random_walk(effective_amplitude)
-		AnimationType.PERLIN_NOISE:
-			_animate_perlin_noise(effective_amplitude)
 		AnimationType.CHAOTIC:
 			_animate_chaotic(effective_amplitude)
 
@@ -163,26 +156,10 @@ func _animate_random_walk(amplitude: float):
 	for z in range(resolution + 1):
 		for x in range(resolution + 1):
 			var index = z * (resolution + 1) + x
-			var noise_x = sin(animation_time * animation_frequency + x * 0.3) * 0.5
-			var noise_z = cos(animation_time * animation_frequency + z * 0.3) * 0.5
-			var walk = (noise_x + noise_z) * amplitude
+			var val_x = sin(animation_time * animation_frequency + x * 0.3) * 0.5
+			var val_z = cos(animation_time * animation_frequency + z * 0.3) * 0.5
+			var walk = (val_x + val_z) * amplitude
 			current_heights[index] = base_heights[index] + walk
-
-func _animate_perlin_noise(amplitude: float):
-	"""Perlin noise animation - natural-looking terrain movement"""
-	# Ensure noise is initialized
-	if not noise:
-		noise = FastNoiseLite.new()
-		noise.seed = seed_value
-		noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	
-	for z in range(resolution + 1):
-		for x in range(resolution + 1):
-			var index = z * (resolution + 1) + x
-			var noise_x = x * 0.1 + animation_time * animation_frequency
-			var noise_z = z * 0.1 + animation_time * animation_frequency
-			var noise_value = noise.get_noise_2d(noise_x, noise_z) * amplitude
-			current_heights[index] = base_heights[index] + noise_value
 
 func _animate_chaotic(amplitude: float):
 	"""Chaotic animation - pure mathematical chaos"""

@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3qxr8yvn7kqo"]
+
+[ext_resource type="Material" path="res://algorithms/shaders/queer_materials/mat_leather.tres" id="1_leather"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_materials/mat_fur_velvet.tres" id="2_fur"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_materials/mat_pop_plastic.tres" id="3_pop"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_ecology/mat_super_green.tres" id="4_green"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_ecology/mat_techno_fungus.tres" id="5_fungus"]
+[ext_resource type="Shader" uid="uid://bwpu4smqvq0ib" path="res://algorithms/shaders/degrading_shader/degrading_shader.gdshader" id="6_degrading"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_degrading"]
+render_priority = 0
+shader = ExtResource("6_degrading")
+shader_parameter/degradation_amount = 0.65
+shader_parameter/intact_color = Color(0.42, 0.45, 0.5, 1)
+shader_parameter/damage_color = Color(0.12, 0.08, 0.02, 1)
+shader_parameter/roughness_boost = 0.35
+shader_parameter/metallic_boost = 0.05
+shader_parameter/emission_strength = 0.25
+shader_parameter/grain_strength = 0.08
+
+[node name="ShaderGallery" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 5)
+
+[node name="LeatherSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("1_leather")
+
+[node name="Label3D" type="Label3D" parent="LeatherSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Leather"
+
+[node name="FurSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("2_fur")
+
+[node name="Label3D" type="Label3D" parent="FurSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Velvet Fur"
+
+[node name="PopSphere" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("3_pop")
+
+[node name="Label3D" type="Label3D" parent="PopSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Pop Plastic"
+
+[node name="GreenSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("4_green")
+
+[node name="Label3D" type="Label3D" parent="GreenSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Super Green"
+
+[node name="FungusSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("5_fungus")
+
+[node name="Label3D" type="Label3D" parent="FungusSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Techno Fungus"
+
+[node name="DegradingSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("ShaderMaterial_degrading")
+
+[node name="Label3D" type="Label3D" parent="DegradingSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Degrading Rust"

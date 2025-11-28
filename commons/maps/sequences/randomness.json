@@ -1,35 +1,40 @@
 {
-    "sequences": {
-        "randomness": {
-            "name": "Randomness & Entropy",
-            "description": "Explore concepts of randomness, probability, and entropy",
-            "difficulty": "intermediate",
-            "estimated_time": "25-30 minutes",
-            "learning_objectives": [
-                "Entropy definition",
-                "TRNG vs PRNG",
-                "Distributions",
+	"sequences": {
+		"randomness": {
+			"name": "Randomness & Entropy",
+			"description": "Explore concepts of randomness, probability, and entropy",
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Entropy definition",
+				"TRNG vs PRNG",
+				"Distributions",
                 "Emergent chaos"
-            ],
-            "maps": [
-                "Random_Define",
-                "Randomness_TRNG_vs_PRNG",
-                "Random_Points_Distribution",
-                "Randomness_Distribution_Visualization",
-                "Random_Gaussian",
-                "Random_Bell_Alley",
-                "Randomness_Random_Transformations",
-                "Random_Pheromone",
-                "Randomness_Examples_of_Randomness"
-            ],
-            "return_to": "lab",
-            "unlock_requirements": [
+			],
+			"maps": [
+				"Random_Definition",	
+				"Randomness_10_PRINT_Algorithm", 
+				"Random_Noise_Types",
+				"Random_Cubes",
+				"Random_Rotate_Random_XYZ",
+				"Random_Walk",  
+				"Random_Gaussian",
+				"Random_Random_Bell_Curve",				
+				"Random_Pheromone",
+				"Random_Mushrooms",
+				"Random_Space_Geometry",
+				"Randomness_Examples_of_Randomness",
+				"Random_Space",				
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_one.json",
+			"unlock_requirements": [
                 "color"
-            ],
-            "completion_rewards": [
-                "entropy_badge",
+			],
+			"completion_rewards": [
+				"entropy_badge",
                 "chaos_explorer_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

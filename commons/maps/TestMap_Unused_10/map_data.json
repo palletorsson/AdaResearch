@@ -5,7 +5,7 @@
 		"dimensions": {
 			"width": 5,
 			"depth": 5,
-			"max_height": 3
+			"max_height": 5
 		}
 	},
 	"layers": {
@@ -25,9 +25,9 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " "],
-			[" ", "neon_wave_grid:0:2", " ", "noir_sequencer:0:2", " "],
+			[" ", "neon_wave_grid:0:2", " ", " ", " "],
 			[" ", " ", " ", " ", " "],
-			[" ", "noise_terrain:0:2", " ", "noise_terrain_with_blobs:0:2", " "],
+			[" ", " ", " ", "noise_terrain_with_blobs", " "],
 			[" ", " ", " ", " ", " "]
 		]
 	},

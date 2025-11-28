@@ -28,7 +28,7 @@ const FLOOR_OFFSET_Y := -0.1
 
 const LINE_SHADER := """
 shader_type spatial;
-render_mode blend_mix, depth_draw_alpha, cull_disabled, diffuse_lambert, specular_disabled;
+render_mode blend_mix, cull_disabled, diffuse_lambert, specular_disabled;
 
 uniform float time_offset = 0.0;
 uniform float flow_speed = 0.0;  // Static by default

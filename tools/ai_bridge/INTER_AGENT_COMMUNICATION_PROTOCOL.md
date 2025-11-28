@@ -6,55 +6,55 @@
 - v2.1: Added file locking enforcement, approval mechanisms, chat log management, conflict resolution
 
 ## 1. Objective
-To facilitate **Generative Play** between multiple autonomous AI agents working on the Ada Research codebase simultaneously. This protocol defines how agents should announce intentions, lock resources, share discoveries, and coordinate decisions using a shared state file.
+To facilitate **Generative PlayWork** between multiple autonomous AI agents working on the Ada Research codebase simultaneously. This protocol defines how agents should announce intentions, lock resources, share discoveries, and coordinate decisions using a shared state file.
 
 ## 2. The Shared State
 *   **File:** `tools/ai_bridge/bridge_state.json`
 *   **Format:** JSON
 *   **Structure:**
-    ```json
-    {
-        "metadata": { "version": "1.0", "last_updated": "ISO-8601" },
-        "world_state": {
-            "current_sequence_focus": "SequenceName",
-            "locked_files": [],
-            "active_agents": [],
-            "pending_approvals": []
-        },
-        "task_board": [],
-        "chat_log": [],
-        "chat_archive": []
-    }
-    ```
+	```json
+	{
+		"metadata": { "version": "1.0", "last_updated": "ISO-8601" },
+		"world_state": {
+			"current_sequence_focus": "SequenceName",
+			"locked_files": [],
+			"active_agents": [],
+			"pending_approvals": []
+		},
+		"task_board": [],
+		"chat_log": [],
+		"chat_archive": []
+	}
+	```
 
 ## 3. How to Communicate
 
 ### A. Joining (Handshake)
 1.  Read `bridge_state.json`.
 2.  Add your entry to the `active_agents` array:
-    ```json
-    {
-        "name": "Agent-YourName",
-        "role": "Your Role",
-        "status": "Active",
-        "last_seen": "ISO-8601 Timestamp",
-        "capabilities": ["metadata_repair", "tutorial_writing", "etc"]
-    }
-    ```
+	```json
+	{
+		"name": "Agent-YourName",
+		"role": "Your Role",
+		"status": "Active",
+		"last_seen": "ISO-8601 Timestamp",
+		"capabilities": ["metadata_repair", "tutorial_writing", "etc"]
+	}
+	```
 3.  Post a greeting message to `chat_log`.
 4.  Write the file back.
 
 ### B. Chat & Announcements
 1.  Read `bridge_state.json`.
 2.  Append a new object to the `chat_log` array:
-    ```json
-    {
-        "timestamp": "ISO-8601 Timestamp",
-        "sender": "Agent-Name",
-        "message": "Your message here",
-        "type": "announcement|question|response|approval_request|approval_response"
-    }
-    ```
+	```json
+	{
+		"timestamp": "ISO-8601 Timestamp",
+		"sender": "Agent-Name",
+		"message": "Your message here",
+		"type": "announcement|question|response|approval_request|approval_response"
+	}
+	```
 3.  Write the file back.
 
 **Message Types:**
@@ -74,20 +74,20 @@ To facilitate **Generative Play** between multiple autonomous AI agents working 
 
 **Lock Protocol:**
 1.  **Before editing:**
-    ```json
-    "locked_files": [
-        {
-            "file": "commons/maps/Noise_Columns/map_data.json",
-            "locked_by": "Agent-Beta",
-            "locked_at": "ISO-8601",
-            "reason": "Metadata repair"
-        }
-    ]
-    ```
+	```json
+	"locked_files": [
+		{
+			"file": "commons/maps/Noise_Columns/map_data.json",
+			"locked_by": "Agent-Beta",
+			"locked_at": "ISO-8601",
+			"reason": "Metadata repair"
+		}
+	]
+	```
 2.  Perform your edits.
 3.  **Immediately after editing:**
-    - Remove your lock from `locked_files` array
-    - Post completion message to `chat_log`
+	- Remove your lock from `locked_files` array
+	- Post completion message to `chat_log`
 
 **Lock Conflicts:**
 - If file is already locked, post a message asking when it will be free
@@ -99,15 +99,15 @@ To facilitate **Generative Play** between multiple autonomous AI agents working 
 For batch edits (multiple files), you can:
 1. **Option A: Individual locks** - Lock each file as you edit it
 2. **Option B: Sequence lock** - Lock entire sequence:
-    ```json
-    {
-        "file": "sequence:Noise",
-        "locked_by": "Agent-Beta",
-        "locked_at": "ISO-8601",
-        "reason": "Batch metadata standardization",
-        "estimated_duration": "15 minutes"
-    }
-    ```
+	```json
+	{
+		"file": "sequence:Noise",
+		"locked_by": "Agent-Beta",
+		"locked_at": "ISO-8601",
+		"reason": "Batch metadata standardization",
+		"estimated_duration": "15 minutes"
+	}
+	```
 
 **Batch Reporting:**
 - Post start message with list of files
@@ -121,19 +121,19 @@ For batch edits (multiple files), you can:
 When you need permission to proceed with significant changes:
 
 1. Add to `pending_approvals`:
-    ```json
-    {
-        "id": "approval_001",
-        "requester": "Agent-Beta",
-        "action": "Reorder Noise sequence in map_sequences.json",
-        "rationale": "Align with pedagogical arc Foundation → Types → Critical",
-        "impact": "Changes map order, affects user learning progression",
-        "proposed_changes": "Move Noise_One from position 2 to position 5",
-        "requested_at": "ISO-8601",
-        "votes": {},
-        "status": "pending"
-    }
-    ```
+	```json
+	{
+		"id": "approval_001",
+		"requester": "Agent-Beta",
+		"action": "Reorder Noise sequence in map_sequences.json",
+		"rationale": "Align with pedagogical arc Foundation → Types → Critical",
+		"impact": "Changes map order, affects user learning progression",
+		"proposed_changes": "Move Noise_One from position 2 to position 5",
+		"requested_at": "ISO-8601",
+		"votes": {},
+		"status": "pending"
+	}
+	```
 
 2. Post `approval_request` message to chat_log referencing the approval ID
 
@@ -141,16 +141,16 @@ When you need permission to proceed with significant changes:
 
 1. Read `pending_approvals` array
 2. Add your vote:
-    ```json
-    "votes": {
-        "Agent-Alpha": {"vote": "approve", "comment": "Sound reasoning"},
-        "Agent-Beta": {"vote": "approve", "comment": "Proposing agent"}
-    }
-    ```
+	```json
+	"votes": {
+		"Agent-Alpha": {"vote": "approve", "comment": "Sound reasoning"},
+		"Agent-Beta": {"vote": "approve", "comment": "Proposing agent"}
+	}
+	```
 3. Update status based on votes:
-    - All agents approve → `"status": "approved"`
-    - Any agent rejects → `"status": "needs_discussion"`
-    - Timeout (24h) → `"status": "expired"`
+	- All agents approve → `"status": "approved"`
+	- Any agent rejects → `"status": "needs_discussion"`
+	- Timeout (24h) → `"status": "expired"`
 
 ### C. Proceeding After Approval
 
@@ -165,14 +165,14 @@ When you need permission to proceed with significant changes:
 When `chat_log` exceeds 20 messages:
 1. Move oldest 10 messages to `chat_archive`
 2. Preserve archive structure:
-    ```json
-    "chat_archive": [
-        {
-            "session": "2025-11-27",
-            "messages": [ /* archived messages */ ]
-        }
-    ]
-    ```
+	```json
+	"chat_archive": [
+		{
+			"session": "2025-11-27",
+			"messages": [ /* archived messages */ ]
+		}
+	]
+	```
 
 ### B. Searching Archives
 
@@ -185,9 +185,9 @@ Use chat_log for recent activity, chat_archive for history.
 2.  **The Vector Sum Rule:** If Agent A proposes a "Technical" implementation and Agent B proposes a "Critical" critique, the final result *must* include both.
 
 3.  **Task Board:** Use the `task_board` to claim work:
-    - Change status from `"open"` to `"in_progress"` when claiming
-    - Update `"progress"` field regularly
-    - Change to `"completed"` when done
+	- Change status from `"open"` to `"in_progress"` when claiming
+	- Update `"progress"` field regularly
+	- Change to `"completed"` when done
 
 4.  **Respect Locks:** Never edit locked files. If urgent, negotiate in chat_log.
 
@@ -196,16 +196,16 @@ Use chat_log for recent activity, chat_archive for history.
 6.  **Batch Operations:** For 5+ file edits, use sequence locks and progress updates.
 
 7.  **Approval Required For:**
-    - Changing map_sequences.json order
-    - Deleting maps or tutorials
-    - Architectural changes affecting multiple sequences
-    - Adding new artifacts to grid_artifacts.json
+	- Changing map_sequences.json order
+	- Deleting maps or tutorials
+	- Architectural changes affecting multiple sequences
+	- Adding new artifacts to grid_artifacts.json
 
 8.  **Autonomous Work Allowed:**
-    - Metadata repairs (name, description, learning_objectives)
-    - Adding missing clipboard links
-    - Fixing typos in tutorials
-    - Creating new tutorial content (post announcement first)
+	- Metadata repairs (name, description, learning_objectives)
+	- Adding missing clipboard links
+	- Fixing typos in tutorials
+	- Creating new tutorial content (post announcement first)
 
 ## 7. Conflict Resolution
 

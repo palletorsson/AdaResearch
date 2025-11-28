@@ -1,25 +1,20 @@
 # MovePlayerController.gd
 # Move Player Utility - Utility type "m"
-# Moves the player to a specific location after a delay
+# Automatically moves the player to a specific location after a delay
 
 extends Node3D
 
 @export var xr_origin_path: NodePath = NodePath("../../XROrigin3D")
 @export var move_delay: float = 0.5
 @export var move_target: Vector3 = Vector3.ZERO
-@export var activation_method: String = "proximity"  # "proximity" or "touch"
 
 var player_node: Node3D
 var xr_origin: Node3D
 var is_moving: bool = false
-var player_in_area: bool = false
 
 # Signals
 signal player_move_started(target: Vector3)
 signal player_move_complete()
-
-# Area3D for detection
-@onready var move_area: Area3D = $MoveArea
 
 func _ready():
 	print("MovePlayerController: Initializing move player utility...")
@@ -28,38 +23,23 @@ func _ready():
 	_find_player_node()
 	_find_xr_origin()
 
-	# Setup move area collision detection
-	_setup_move_area()
-
 	print("MovePlayerController: Move player utility ready (target: %s, delay: %.1fs)" % [move_target, move_delay])
+	print("MovePlayerController: Will automatically move player after %.1fs" % move_delay)
+	
+	# Automatically start the move sequence after delay
+	_start_automatic_move()
 
-func _setup_move_area():
-	"""Setup the Area3D for proper collision detection with XR-Tools PlayerBody"""
-	if not move_area:
-		push_error("MovePlayerController: MoveArea not found! Scene structure incorrect.")
+func _start_automatic_move():
+	"""Start the automatic move sequence"""
+	# Wait a brief moment for the scene to fully initialize
+	await get_tree().create_timer(0.1).timeout
+	
+	if not player_node:
+		print("MovePlayerController: ❌ Cannot start move - Player not found!")
 		return
-
-	print("MovePlayerController: Setting up move area collision detection...")
-
-	# CRITICAL: Set collision mask to detect Player Body (layer 20 in XR-Tools)
-	# Layer 20 = 2^19 = 524288
-	move_area.collision_layer = 0  # This area doesn't provide collision
-	move_area.collision_mask = 1048576  # Detect layer 20 (Player Body)
-
-	# Enable monitoring
-	move_area.monitoring = true
-	move_area.monitorable = false  # Other areas don't need to detect this
-
-	# Connect signals
-	if not move_area.is_connected("body_entered", Callable(self, "_on_move_area_body_entered")):
-		move_area.body_entered.connect(_on_move_area_body_entered)
-		print("MovePlayerController: ✅ Connected body_entered signal")
-
-	if not move_area.is_connected("body_exited", Callable(self, "_on_move_area_body_exited")):
-		move_area.body_exited.connect(_on_move_area_body_exited)
-		print("MovePlayerController: ✅ Connected body_exited signal")
-
-	print("MovePlayerController: Move area collision_layer=%d, collision_mask=%d" % [move_area.collision_layer, move_area.collision_mask])
+	
+	print("MovePlayerController: Starting automatic move in %.1fs..." % move_delay)
+	_activate_move()
 
 func _find_player_node():
 	"""Find the player node - specifically the XR-Tools PlayerBody"""
@@ -103,58 +83,6 @@ func _find_xr_origin():
 
 	print("MovePlayerController: WARNING - No XROrigin3D found!")
 
-# SIGNAL HANDLERS
-func _on_move_area_body_entered(body: Node3D):
-	"""Handle player entering the move area"""
-	print("MovePlayerController: 🔍 BODY ENTERED MOVE AREA: %s (type: %s)" % [body.name, body.get_class()])
-
-	# Check if it's the player body
-	if _is_player_body(body):
-		print("MovePlayerController: ✅ PLAYER DETECTED IN MOVE AREA!")
-		player_in_area = true
-
-		if activation_method == "proximity":
-			# Auto-activate on proximity
-			_activate_move()
-		else:
-			# Wait for manual activation
-			print("MovePlayerController: Player in area, waiting for activation...")
-	else:
-		print("MovePlayerController: ❌ Not recognized as player body")
-
-func _on_move_area_body_exited(body: Node3D):
-	"""Handle player exiting the move area"""
-	if _is_player_body(body):
-		print("MovePlayerController: Player exited move area")
-		player_in_area = false
-
-func _is_player_body(body: Node3D) -> bool:
-	"""Check if the body is the player"""
-	if not body:
-		return false
-
-	# Check if it's in the player_body group (XR-Tools)
-	if body.has_method("is_in_group") and body.is_in_group("player_body"):
-		return true
-
-	# Check if it's in the player group
-	if body.has_method("is_in_group") and body.is_in_group("player"):
-		return true
-
-	# Check if it matches our found player node
-	if player_node and (body == player_node or body.get_parent() == player_node):
-		return true
-
-	# Check for XR-Tools PlayerBody class
-	if body.get_class() == "XRToolsPlayerBody":
-		return true
-
-	# Check if it's a CharacterBody3D (common for players)
-	if body is CharacterBody3D:
-		return true
-
-	return false
-
 func _activate_move():
 	"""Activate the player move"""
 	if is_moving:
@@ -180,7 +108,7 @@ func _perform_move():
 	_execute_move()
 
 func _execute_move():
-	"""Execute the player move using the same approach as ResetTeleporter"""
+	"""Execute the player move - properly synchronized with physics"""
 	if not player_node:
 		print("MovePlayerController: ❌ Cannot execute move - Player not found!")
 		is_moving = false
@@ -188,8 +116,11 @@ func _execute_move():
 
 	print("MovePlayerController: Moving player to %s" % move_target)
 
-	# Reset velocity on player body and root
+	# CRITICAL: Reset velocity FIRST, before any position changes
 	_reset_velocity(player_node)
+	
+	# Wait for the physics frame to process the velocity reset
+	await get_tree().physics_frame
 
 	# Find the player root (XROrigin3D)
 	var player_root = _find_player_root(player_node)
@@ -201,6 +132,12 @@ func _execute_move():
 	else:
 		print("MovePlayerController: ⚠️ Could not find player root, moving player node directly")
 		player_node.global_position = move_target
+	
+	# Reset velocity AGAIN after the move to prevent physics from moving player away
+	_reset_velocity(player_node)
+	
+	# Wait one more physics frame to ensure the position sticks
+	await get_tree().physics_frame
 
 	is_moving = false
 	player_move_complete.emit()

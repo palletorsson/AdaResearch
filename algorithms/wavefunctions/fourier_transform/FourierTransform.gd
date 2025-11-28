@@ -19,15 +19,40 @@ var fundamental_freq: float = 1.0
 var harmonics: Array = [1.0, 0.5, 0.3, 0.2, 0.1]  # Harmonic amplitudes
 var noise_level: float = 0.1
 
+# Audio System
+var audio_player: AudioStreamPlayer3D
+var audio_stream: AudioStreamGenerator
+var playback: AudioStreamGeneratorPlayback
+const SAMPLE_RATE = 44100.0
+var audio_phase: float = 0.0
+
 func _ready():
 	# Initialize Fourier Transform visualization
 	print("Fourier Transform Visualization initialized")
+	
+	_setup_audio()
+	
 	create_time_waveform()
 	create_frequency_spectrum()
 	create_wave_components()
 	create_complex_numbers()
 	create_flow_particles()
 	setup_fourier_metrics()
+
+func _setup_audio():
+	audio_player = AudioStreamPlayer3D.new()
+	audio_stream = AudioStreamGenerator.new()
+	audio_stream.mix_rate = SAMPLE_RATE
+	audio_stream.buffer_length = 0.1
+	
+	audio_player.stream = audio_stream
+	audio_player.unit_size = 10.0
+	audio_player.max_db = -5.0
+	audio_player.autoplay = true
+	
+	add_child(audio_player)
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
 
 func _process(delta):
 	time += delta
@@ -42,6 +67,42 @@ func _process(delta):
 	animate_wave_components(delta)
 	animate_data_flow(delta)
 	update_fourier_metrics(delta)
+	
+	_generate_audio_samples()
+
+func _generate_audio_samples():
+	if not playback:
+		return
+		
+	var frames_available = playback.get_frames_available()
+	if frames_available < 1:
+		return
+		
+	# Base frequency for audio (visual frequency is too low for hearing)
+	# Visual 1.0 Hz -> Audio 220.0 Hz
+	var audio_base_freq = 220.0 * fundamental_freq
+		
+	for i in range(frames_available):
+		var sample = 0.0
+		
+		# Additive synthesis matching the visualization
+		for j in range(harmonics.size()):
+			var h_freq = audio_base_freq * (j + 1)
+			var h_amp = harmonics[j]
+			
+			sample += sin(audio_phase * 2.0 * PI * h_freq / SAMPLE_RATE) * h_amp
+			
+		# Add noise
+		sample += (randf() * 2.0 - 1.0) * noise_level
+		
+		# Normalize roughly
+		sample *= 0.3
+		
+		playback.push_frame(Vector2(sample, sample))
+		
+		audio_phase += 1.0
+		if audio_phase > SAMPLE_RATE:
+			audio_phase -= SAMPLE_RATE
 
 func create_time_waveform():
 	# Create time domain waveform points

@@ -84,7 +84,7 @@ func create_datamosh_effect(container: Node3D, base_pos: Vector3):
 		
 		var original_pos = base_pos + Vector3(
 			(i % 4) * 0.4 - 0.6,
-			0,
+			3,
 			(i / 4) * 0.4 - 0.6
 		)
 		
@@ -403,7 +403,7 @@ func show_error_propagation():
 		var error_wave = CSGCylinder3D.new()
 		error_wave.radius = wave_radius + 0.2
 		error_wave.height = 0.1
-		error_wave.position = Vector3(0, 0, 0)
+		error_wave.position = Vector3(0, 7, 0)
 		
 		var material = StandardMaterial3D.new()
 		var alpha = 1.0 - (wave_radius / 4.0)

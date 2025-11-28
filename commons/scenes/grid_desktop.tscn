@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://grid_desktop_001"]
+
+[ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
+[ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
+[ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
+[ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
+[ext_resource type="PackedScene" uid="uid://desktop_player_001" path="res://commons/scenes/desktop_player.tscn" id="6_desktop"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
+sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
+ground_bottom_color = Color(0.775322, 0.714533, 0.644928, 1)
+
+[sub_resource type="Sky" id="Sky_al13m"]
+sky_material = SubResource("ProceduralSkyMaterial_al13m")
+
+[sub_resource type="Environment" id="Environment_q35sa"]
+background_mode = 2
+sky = SubResource("Sky_al13m")
+ambient_light_source = 3
+ambient_light_color = Color(0.506377, 0.515376, 0.472721, 1)
+tonemap_mode = 3
+tonemap_exposure = 0.16
+ssil_enabled = true
+fog_light_color = Color(0.699675, 0.367402, 0.915893, 1)
+fog_sun_scatter = 0.06
+fog_density = 0.0236
+adjustment_brightness = 0.92
+adjustment_contrast = 1.29
+adjustment_saturation = 1.28
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o8e0"]
+render_priority = 0
+shader = ExtResource("5_al13m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jli6m"]
+size = Vector2(100, 100)
+
+[node name="GridDesktop" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q35sa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DesktopPlayer" parent="." groups=["player_body"] instance=ExtResource("6_desktop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
+text = "Grid Desktop"
+
+[node name="GridSystem" parent="." instance=ExtResource("2_s4bvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="ResetArea3D" parent="GridSystem" index="1" instance=ExtResource("4_al13m")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
+
+[node name="GridScene" type="Node3D" parent="."]
+visible = false
+script = ExtResource("3_0u7bn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_6o8e0")
+mesh = SubResource("PlaneMesh_jli6m")

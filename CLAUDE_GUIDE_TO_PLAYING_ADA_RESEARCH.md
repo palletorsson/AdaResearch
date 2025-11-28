@@ -108,6 +108,7 @@ here you add what file controls this behvior in res://commons/grid/
 - `"origin"` = origin marker
 - `"la:point"` = label annotation
 - `"3t:text"` = floating text marker
+- `"sr:15:17:10"` = copies the last cell to expand the map
 - update this list 
 
 #### **Layer 3: `interactables`** (Educational objects)

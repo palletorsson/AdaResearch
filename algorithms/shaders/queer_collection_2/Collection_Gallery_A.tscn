@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://collectiongallerya001"]
+
+[ext_resource type="Material" path="res://algorithms/shaders/queer_collection_2/mat_oil_slick.tres" id="1_oil"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_collection_2/mat_memory_skin.tres" id="2_skin"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_collection_2/mat_crushed_pearl.tres" id="3_pearl"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_collection_2/mat_sad_metal.tres" id="4_metal"]
+[ext_resource type="Material" path="res://algorithms/shaders/queer_collection_2/mat_melted_candy.tres" id="5_candy"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.08, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.3, 0.35, 1)
+glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.2
+
+[node name="CollectionGalleryA" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 2.0
+spot_angle = 60.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6)
+
+[node name="OilSlickSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("1_oil")
+
+[node name="Label3D" type="Label3D" parent="OilSlickSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Oil-Slick Latex"
+font_size = 32
+
+[node name="MemorySkinSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("2_skin")
+
+[node name="Label3D" type="Label3D" parent="MemorySkinSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Memory Skin"
+font_size = 32
+
+[node name="PearlSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("3_pearl")
+
+[node name="Label3D" type="Label3D" parent="PearlSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Crushed Pearl"
+font_size = 32
+
+[node name="SadMetalSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("4_metal")
+
+[node name="Label3D" type="Label3D" parent="SadMetalSphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Sad Metal"
+font_size = 32
+
+[node name="CandySphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = ExtResource("5_candy")
+
+[node name="Label3D" type="Label3D" parent="CandySphere"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Melted Candy"
+font_size = 32

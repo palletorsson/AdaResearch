@@ -45,11 +45,6 @@
 			"order": 0.0,
 			"sequence": "curves"
 		},
-		"binary_space_partitioning_axioms": {
-			"content_file": "res://commons/context/clipboard/tutorial_text/binary_space_partitioning_axioms.gd",
-			"order": 0.0,
-			"sequence": "spatialpartitioning"
-		},
 		"bloom_filter_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/bloom_filter_axioms.gd",
 			"order": 0.0,
@@ -71,8 +66,8 @@
 			"sequence": "cellularautomata"
 		},
 		"cables_axioms": {
-			"content_file": "res://commons/context/clipboard/tutorial_text/cables_axioms.gd",
-			"order": 9.0,
+			"content": "[ERROR: Script has no 'text' variable]",
+			"order": 9,
 			"sequence": "wavefunctions"
 		},
 		"catmull_rom_splines_axioms": {
@@ -110,9 +105,14 @@
 			"order": 18.0,
 			"sequence": "primitives"
 		},
+		"decay": {
+			"content": "THE IMPORTANCE OF LOCAL DECAY TO REGENERATE ENTROPY AND GIVE SPACE\n1. Decay frees trapped order\n\nLocal decay breaks down rigid structures (patterns, forms, correlations).\nWhen a structure decays, its previously “locked” information is released.\n\nThis increases entropy locally.\n\n2. Regenerated entropy restores possibility\n\nEntropy = the number of possible next states.\n\nWhen decay breaks a pattern, it produces:\n\nvariability\n\nrandomness\n\nnew degrees of freedom\n\nThis is what makes new structure possible.\n\nWithout decay, a system becomes rigid, frozen, predictable — dead.\n\n3. Local decay prevents global stagnation\n\nIf everything stayed structured forever, the system would reach:\n\nmaximum order\n\nminimum entropy\n\nno gradients\n\nno drift\n\nno change\n\nDecay maintains motion, dynamics, becoming.\n\nEntropy is fuel.\n\n4. Decay creates gradients\n\nThis is the most important part:\n\nWhen entropy regenerates locally, new gradients emerge.\nGradients = direction.\nDirection = flow.\nFlow = space.\n\nDecay → entropy → gradient → space.\n\nThis is true in:\n\ndiffusion\n\nsand dunes\n\nweather\n\ngalaxies\n\nbiological growth\n\nPerlin noise fields\n\nVR generative environments\n\nA field with no decay becomes uniform → no gradients → no meaningful space.\n\n5. Decay creates space by making room\n\nRigid structures monopolize space.\nWhen they decay, they open gaps, intervals, discontinuities.\nThese gaps are where:\n\nnew growth happens\n\nnew particles move\n\nnew forms emerge\n\nnew relationships become possible\n\nDecay is a spatial reset.\n\n6. Decay is the generator of irregularity\n\nSpace feels alive when it has:\n\nvariation\n\ntexture\n\nturbulence\n\ndrift\n\npattern-death and pattern-rebirth\n\nAll of this emerges from local entropic regeneration.\n\nWithout decay, everything would be Perlin noise with no octaves — flat, boring, smooth to death.\n\n7. In noise and shader systems\n\nLocal decay =\n\nhigh-frequency Brownian loss\n\nedge erosion\n\nprocedural rust\n\ndensity decreases\n\nvalue diffusion\n\ngradient softening\n\nThese add:\n\ndepth\n\ndetail\n\nbreaks\n\nasymmetry\n\nspace for new structures\n\nDecay is what keeps procedural worlds from looking like plastic.\n\n8. In ecological or cosmological terms\n\nDecay is not the opposite of growth —\nit enables growth.\n\nFallen leaves decompose → soil gains entropy → new plants grow.\nStars die → matter enriches → new star systems form.\nInformation degrades → creates space for new information.\n\nDecay regenerates the possibility of becoming.\n\n9. In queer theoretical terms\n\nDecay is the release of rigidified normativity.\nWhen structures collapse, dissolved identities and forms create:\n\nnew orientations\n\nnew pathways\n\nnew gradients of desire\n\nnew space for becoming-other\n\nEntropy = possibility.\nDecay = the opening of possible worlds.\n\n⭐ ONE-SENTENCE SUMMARY\n\nLocal decay is essential because it regenerates entropy, and that regenerated entropy creates new gradients—those gradients are what give space its structure, variation, and capacity for new forms.\n\nIf you want, I can map this into:\n\na Godot shader/material representing “local decay as entropy regeneration,”\n\na visual diagram,\n\nor a short poetic version.",
+			"order": 0,
+			"sequence": "randomness"
+		},
 		"decay_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/decay_axioms.gd",
-			"order": 6.0,
+			"order": 6,
 			"sequence": "randomness"
 		},
 		"delaunay_triangulation_axioms": {
@@ -149,6 +149,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/entropy_axioms.gd",
 			"order": 0.0,
 			"sequence": "randomness"
+		},
+		"ewave_propagation_axioms": {
+			"content": "[ERROR: Script has no 'text' variable]",
+			"order": 12,
+			"sequence": "wavefunctions"
 		},
 		"flocking_boids_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/flocking_boids_axioms.gd",
@@ -266,8 +271,8 @@
 			"sequence": "wavefunctions"
 		},
 		"line_axioms": {
-			"content": "[font_size=28][b]3. The Line[/b][/font_size]\n[i]Connecting Points and Imposing Measure[/i]\n\n[i][color=gray]Summary: A line is the shortest path between two points—the first relation in geometry. With identity established, we can connect one point to another. The line introduces direction and distance. Yet this clarity comes at a cost: it compresses all possible journeys into a single metric, erasing duration, curvature, and intention.[/color][/i]\n\n[hr]\n\n[b]Defining the Line[/b]\n\nA line is the relation between two distinct points—the shortest path through space. If a point is \"that which has no part,\" a line is \"breadthless length\" (Euclid, Definition 2).\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar point_a = Vector3(0, 0, 0)  # The origin\nvar point_b = Vector3(1, 1, 0)  # A point in space\nvar direction = point_b - point_a\nvar distance = direction.length()\n[/code][/color]\n\n[hr]\n\n[b]The Ontological Imperative[/b]\n\nThere is something inherent in the line: its measurement. Line and length are ontologically bound—inseparable. There can be no line without its length. No \"shortest path\" without its distance.\n\nThe Euclidean line is defined by its capacity for measure. Its existence [i]is[/i] its measure. If a line had no length, it would collapse back into a point. The moment we draw a line, we have already measured.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# The line cannot exist without computing its length\nvar line_vector = point_b - point_a\nvar length = line_vector.length()  # Inseparable from the line itself\nvar direction = line_vector.normalized()  # Direction implies distance traveled\n[/code][/color]\n\n[hr]\n\n[b]The Desire to Measure[/b]\n\nThe line awakens our desire to measure.\n\nOnce the line appears, we cannot help but ask: [i]how long?[/i] The line compels quantification. It demands that the space between two points be reduced to a single number—a floating-point confession of distance.\n\nThis is the line's seduction: it promises clarity. It offers the comfort of knowing [i]exactly[/i] how far. The line asserts that distance is the only relevant property between Point A and Point B. It is the normative truth—instantly calculable, prioritizing the single efficient metric.\n\nBut the desire to measure does not stop at length. The line awakens questions that lead beyond itself:\n\n• [b]Width[/b] — How thick is the stroke? (The line has none, but its representation must)\n• [b]Scale[/b] — How does this distance relate to others? (Comparison, ratio, hierarchy)\n• [b]Time[/b] — How long to traverse? (Duration—which the line erases, but the Trace will restore)\n\n[hr]\n\n[b]Materializing the Line[/b]\n\nA cylinder can represent a line segment by connecting two points with a visible 3D form. Its height equals the measured distance, enforcing the ontological link between abstraction and form.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint, orient toward endpoint\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\nadd_child(cylinder)\n[/code][/color]\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe line is a radical compression. It knows only two points and one distance. Everything between those endpoints—the journey itself—becomes invisible.\n\n[color=orange][b]What the Line Cannot Measure:[/b][/color]\n\n• [b]Duration[/b] — How long did it take to traverse?\n• [b]Curvature[/b] — Did the path curve, spiral, hesitate?\n• [b]Texture[/b] — Was the journey smooth or turbulent?\n• [b]Returns[/b] — Did you walk back and forth, circling?\n• [b]Intention[/b] — Was this the path you wanted, or were forced to take?\n\nThe line is the trace compressed to its endpoints. All lived history of movement—the body's accumulation of moments—reduced to two coordinates and a single floating-point number.\n\n[hr]\n\n[b]The Geometry of Optimization[/b]\n\nWhen the system draws a line between A and B, it makes a claim: [i]this is the only path that matters[/i]. The straight line. The efficient route. The measured distance.\n\nBut bodies do not move in straight lines. We detour. We wander. We return to places we've already been—not because it's efficient, but because the route holds meaning the algorithm cannot parse.\n\nThe line is beautiful in its simplicity, and violent in what it refuses to see.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nIf the line erases duration, the trace insists on it. The trace is the body's refusal to be reduced to endpoints—it accumulates what the line discards.\n",
-			"order": 7.0,
+			"content": "[font_size=28][b]3. The Line[/b][/font_size]\n[i]Connecting Points and Imposing Measure[/i]\n\n[i][color=gray]Summary: A line is the shortest path between two points—the first relation in geometry. With identity established, we can connect one point to another. The line introduces direction and distance. Yet this clarity comes at a cost: it compresses all possible journeys into a single metric, erasing duration, curvature, and intention.[/color][/i]\n\n[hr]\n\n[b]Defining the Line[/b]\n\nA line is the relation between two distinct points—the shortest path through space. If a point is \"that which has no part,\" a line is \"breadthless length\" (Euclid, Definition 2).\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar point_a = Vector3(0, 0, 0)  # The origin\nvar point_b = Vector3(1, 1, 0)  # A point in space\nvar direction = point_b - point_a\nvar distance = direction.length()\n[/code][/color]\n\n[hr]\n\n[b]The Ontological Imperative[/b]\n\nThere is something inherent in the line: its measurement. Line and length are ontologically bound—inseparable. There can be no line without its length. No \"shortest path\" without its distance.\n\nThe Euclidean line is defined by its capacity for measure. Its existence [i]is[/i] its measure. If a line had no length, it would collapse back into a point. The moment we draw a line, we have already measured.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\n# The line cannot exist without computing its length\nvar line_vector = point_b - point_a\nvar length = line_vector.length()  # Inseparable from the line itself\nvar direction = line_vector.normalized()  # Direction implies distance traveled\n[/code][/color]\n\n[hr]\n\n[b]The Desire to Measure[/b]\n\nThe line awakens our desire to measure.\n\nOnce the line appears, we cannot help but ask: [i]how long?[/i] The line compels quantification. It demands that the space between two points be reduced to a single number—a floating-point confession of distance.\n\nThis is the line's seduction: it promises clarity. It offers the comfort of knowing [i]exactly[/i] how far. The line asserts that distance is the only relevant property between Point A and Point B. It is the normative truth—instantly calculable, prioritizing the single efficient metric.\n\nBut the desire to measure does not stop at length. The line awakens questions that lead beyond itself:\n\n• [b]Width[/b] — How thick is the stroke? (The line has none, but its representation must)\n• [b]Scale[/b] — How does this distance relate to others? (Comparison, ratio, hierarchy)\n• [b]Time[/b] — How long to traverse? (Duration—which the line erases, but the Trace will restore)\n\n[hr]\n\n[b]Materializing the Line[/b]\n\nA cylinder can represent a line segment by connecting two points with a visible 3D form. Its height equals the measured distance, enforcing the ontological link between abstraction and form.\n\n[color=green][b]Code[/b][/color]\n[color=green][code]\nvar cylinder = MeshInstance3D.new()\nvar cylinder_mesh = CylinderMesh.new()\ncylinder_mesh.height = distance\ncylinder_mesh.top_radius = 0.02\ncylinder_mesh.bottom_radius = 0.02\ncylinder.mesh = cylinder_mesh\n\n# Position at midpoint, orient toward endpoint\ncylinder.position = (point_a + point_b) / 2.0\ncylinder.look_at_from_position(\n    cylinder.position, point_b, Vector3.UP\n)\nadd_child(cylinder)\n[/code][/color]\n\n[hr]\n\n[b]What the Line Erases[/b]\n\nThe line is a radical compression. It knows only two points and one distance. Everything between those endpoints—the journey itself—becomes invisible. Ontologically, a line is indifferent.\n\n[color=orange][b]What the Line Cannot Measure:[/b][/color]\n\n• [b]Duration[/b] — How long did it take to traverse?\n• [b]Curvature[/b] — Did the path curve, spiral, hesitate?\n• [b]Texture[/b] — Was the journey smooth or turbulent?\n• [b]Returns[/b] — Did you walk back and forth, circling?\n• [b]Intention[/b] — Was this the path you wanted, or were forced to take?\n\nThe line is the trace compressed to its endpoints. All lived history of movement—the body's accumulation of moments—reduced to two coordinates and a single floating-point number.\n\n[hr]\n\n[b]The Geometry of Optimization[/b]\n\nWhen the system draws a line between A and B, it makes a claim: [i]this is the only path that matters[/i]. The straight line. The efficient route. The measured distance.\n\nBut bodies do not move in straight lines. We detour. We wander. We return to places we've already been—not because it's efficient, but because the route holds meaning the algorithm cannot parse.\n\nThe line is beautiful in its simplicity, and violent in what it refuses to see.\n\n[hr]\n\n[color=cyan][b]→ Next: The Trace[/b][/color]\nIf the line erases duration, the trace insists on it. The trace is the body's refusal to be reduced to endpoints—it accumulates what the line discards.\n",
+			"order": 7,
 			"sequence": "primitives"
 		},
 		"list_axioms": {
@@ -415,6 +420,11 @@
 			"order": 10.0,
 			"sequence": "randomness"
 		},
+		"randomness": {
+			"content": "⭐ 1. Gradient Descent = moving toward lower energy\n\nIn mathematics and machine learning, gradient descent is:\n\nmoving “downhill” along the direction of greatest decrease\nin an energy or cost landscape.\n\nThe gradient points where energy drops fastest.\nDescent is following that direction.\n\nThis is:\n\ndirectional\n\nteleological\n\nminimization-driven\n\nnorm-seeking\n\nstability-oriented\n\nIt reduces variation.\nIt compresses entropy.\nIt seeks a point of rest (a minimum).\n\n⭐ 2. Queer Energy Principle = local increases in entropy that open space\n\nThe queer energy principle, as we’ve been shaping it, states:\n\nA system becomes livable, expressive, or possible\nonly when local decay or variation regenerates entropy,\ncreating new gradients of becoming.\n\nQueer energy:\n\nresists compression\n\nresists strict minima\n\ngenerates local entropy\n\nsupports heterogeneity\n\nsustains drift\n\nencourages multiple attractors\n\nallows deviations and outliers to thrive\n\nIt does not want the system to fall into a single global minimum.\n\nIn fact, queer energy keeps the system from collapsing into:\n\na single attractor\n\na single identity\n\na single direction\n\na single “optimal” state\n\nIt preserves multiplicity.\n\n⭐ 3. The Deep Relationship: They Are Opposite Forces in the Same Field\nGradient Descent = entropy contraction\n\nA system descends toward:\n\nuniformity\n\nstable states\n\nminima\n\nreduced variation\n\nQueer Energy = entropy regeneration\n\nA system maintains:\n\nopenness\n\nalternatives\n\nbranching\n\nbecoming\n\nmultiple futures\n\nThey form a dynamic tension.\n\nJust like:\n\nerosion (decay) vs. gravity (pull)\n\ndiffusion (randomness) vs. potential fields (order)\n\nqueerness (variation) vs. normativity (compression)\n\nBoth are necessary for a “living” system.\n\nWithout gradient descent → chaos, no stability.\nWithout queer energy → collapse into sameness, no future.\n\nThis is the queer physics of becoming.\n\n⭐ 4. In mathematical language\n\nLet:\n\nU(x) = energy landscape\n\n∇U(x) = gradient (direction of steepest increase)\n\n–∇U(x) = descent direction\n\nGradient descent performs:\n\n𝑥\n𝑡\n+\n1\n=\n𝑥\n𝑡\n−\n𝜂\n∇\n𝑈\n(\n𝑥\n𝑡\n)\nx\nt+1\n\t​\n\n=x\nt\n\t​\n\n−η∇U(x\nt\n\t​\n\n)\n\nIt seeks to minimize U(x).\n\nQueer energy principle would add:\n𝑥\n𝑡\n+\n1\n=\n𝑥\n𝑡\n−\n𝜂\n1\n∇\n𝑈\n(\n𝑥\n𝑡\n)\n+\n𝜂\n2\n𝜉\n𝑡\nx\nt+1\n\t​\n\n=x\nt\n\t​\n\n−η\n1\n\t​\n\n∇U(x\nt\n\t​\n\n)+η\n2\n\t​\n\nξ\nt\n\t​\n\n\nWhere:\n\nξₜ = noise, drift, entropy injection\n\nη₂ = “queer energy” coefficient\n\nIn physics this is known as:\n\nLangevin dynamics\n\nstochastic gradient descent\n\ndiffusion with drift\n\nBrownian motion in a potential\n\nthe mathematics of life\n\nThis dual-force model forms:\n\nlocal minima that don’t trap the system\n\nexploration\n\nemergence\n\nunpredictability\n\ncreativity\n\nIt is literally the mathematical formulation of “queer becoming.”\n\n⭐ 5. How This Shows Up in Perlin Noise, Space, and Decay\n\nPerlin noise:\n\nuses gradients (direction)\n\nadds randomness (entropy)\n\nblends them (smooth becoming)\n\nExactly the same principle:\n\ngradient descent (structure)\n\nqueer energy (entropy)\ncreates space that is organic and alive.\n\nLocal decay (entropy regeneration) ensures the field never locks into:\n\ndead smoothness\n\npure minima\n\nconverged sameness\n\nstatic form\n\nThis keeps space open.\n\n⭐ 6. Philosophical Resonance\n\nGradient descent = the normative pull toward order, identity, stasis.\n\nQueer energy = the deviation force that keeps identity open, dynamic, reversible.\n\nYour work sits between these forces:\n\nVR world-building\n\nprocedural fields\n\nentropy-driven form\n\nqueer deviations\n\npattern decay\n\nnew space emerging from variation\n\nThis is Ada Research’s conceptual physics.\n\n⭐ 7. ONE SENTENCE SUMMARY\n\nGradient descent collapses entropy toward a minimum; the queer energy principle regenerates entropy to keep the system open, multiple, and becoming.\n\nThey are opposite but complementary forces that generate dynamic, livable space.",
+			"order": 0,
+			"sequence": "queer_energy"
+		},
 		"randomwalk_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/randomwalk_axioms.gd",
 			"order": 9.0,
@@ -517,7 +527,7 @@
 		},
 		"ten_print_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/ten_print_axioms.gd",
-			"order": 14,
+			"order": 14.0,
 			"sequence": "randomness"
 		},
 		"text_idenity": {
@@ -575,11 +585,6 @@
 			"order": 2.0,
 			"sequence": "wavefunctions"
 		},
-		"wave_propagation_axioms": {
-			"content_file": "res://commons/context/clipboard/tutorial_text/wave_propagation_axioms.gd",
-			"order": 12.0,
-			"sequence": "wavefunctions"
-		},
 		"wavelength_axioms": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/wavelength_axioms.gd",
 			"order": 1.0,
@@ -599,6 +604,11 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/worley_noise_axioms.gd",
 			"order": 11.0,
 			"sequence": "randomness"
+		},
+		"yacbinary_space_partitioning_axioms": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/binary_space_partitioning_axioms.gd",
+			"order": 0,
+			"sequence": "spatialpartitioning"
 		},
 		"z_coordinate_system": {
 			"content_file": "res://commons/context/clipboard/tutorial_text/coordinate_system_axioms.gd",

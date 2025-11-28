@@ -249,13 +249,16 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		
 		# Connect signals if utility has them
 		_connect_utility_signals(utility_object, utility_type)
-		
+
+		# Add to utility group for desktop interaction
+		utility_object.add_to_group("utility")
+
 		parent_node.add_child(utility_object)
-		
+
 		# Set owner for editor
 		if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 			utility_object.owner = parent_node.get_tree().edited_scene_root
-		
+
 		utility_objects[Vector3i(x, y, z)] = utility_object
 		
 		var param_info = ""
