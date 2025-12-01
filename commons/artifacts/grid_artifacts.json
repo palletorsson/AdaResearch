@@ -33,6 +33,13 @@
 			"description": "coordinates",
 			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn"
 		},
+		"ForceMagnitudeDemo": {
+			"name": "ForceMagnitudeDemo",
+			"lookup_name": "ForceMagnitudeDemo",
+			"description": "ForceMagnitudeDemo",
+			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn"
+		},
+		
 		"CoordinateSystem3M": {
 			"name": "CoordinateSystem3M",
 			"lookup_name": "CoordinateSystem3M",
@@ -3005,6 +3012,13 @@
 			"description": "Particle repeller system demonstration",
 			"scene": "res://algorithms/particles/example_4_6_particle_repeller_vr.tscn"
 		},
+				"example_particle_body": {
+			"name": "example_particle_body",
+			"lookup_name": "example_particle_body",
+			"description": "example_particle_body",
+			"scene": "res://algorithms/particles/example_particle_body.tscn"
+		},
+		
 		"example_6_1_basic_rigidbody_vr": {
 			"name": "Basic Rigidbody VR",
 			"lookup_name": "example_6_1_basic_rigidbody_vr",

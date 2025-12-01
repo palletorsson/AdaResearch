@@ -1,0 +1,38 @@
+{
+	"sequences": {
+		"particles": {
+			"name": "Particle Systems",
+			"description": "Explore the emergent behavior of particle systems, from single particles to complex emitters and repellers.",
+			"difficulty": "intermediate",
+			"estimated_time": "45-60 minutes",
+			"learning_objectives": [
+				"Understanding particle physics and lifecycle",
+				"Managing particle arrays and memory",
+				"Creating particle emitters",
+				"Implementing inheritance and polymorphism in systems",
+				"Applying forces like repellers"
+			],
+			"content": [
+				"Single Particle & Arrays: Basic movement and batch processing",
+				"Particle Emitter: Continuous generation systems",
+				"Multiple Emitters: Managing complex scenes",
+				"Inheritance & Polymorphism: Extensible particle classes",
+				"Particle Repellers: Interaction forces and fields"
+			],
+			"maps": [
+				"Particles_1",
+				"Particles_2",
+				"Particles_3",
+				"Particles_4",
+				"Particles_5"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_particles",
+			"unlock_requirements": ["vectors"],
+			"completion_rewards": [
+				"system_architect_badge",
+				"chaos_theory_badge"
+			]
+		}
+	}
+}

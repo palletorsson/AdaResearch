@@ -22,7 +22,7 @@ var max_lifespan: float = 4.0
 # Visual properties (legacy - kept for compatibility)
 var mesh_instance: MeshInstance3D
 var material: StandardMaterial3D
-var size: float = 0.05
+var size: float = 0.02  # Smaller particles for blobfish
 
 # Agent-PerformanceEngineer: MultiMesh instancing support
 var multimesh_instance: MultiMeshInstance3D = null
@@ -104,17 +104,21 @@ func update_visual():
 	
 	# Agent-PerformanceEngineer: MultiMesh mode
 	if use_multimesh and multimesh_instance and instance_id >= 0:
-		# Update transform
-		multimesh_instance.multimesh.set_instance_transform(instance_id, Transform3D(Basis(), global_position))
-		
-		# Update color/alpha via instance color
-		var color = primary_pink
-		color.a = alpha
-		multimesh_instance.multimesh.set_instance_color(instance_id, color)
-		
-		# Store emission strength in custom data (x component)
-		var custom_data = Color(alpha, 0, 0, 0)  # Use alpha for emission strength
-		multimesh_instance.multimesh.set_instance_custom_data(instance_id, custom_data)
+		# Safety check: Ensure MultiMesh is valid and index is in bounds
+		if multimesh_instance.multimesh and instance_id < multimesh_instance.multimesh.instance_count:
+			# Update transform
+			multimesh_instance.multimesh.set_instance_transform(instance_id, Transform3D(Basis(), global_position))
+			
+			# Update color/alpha via instance color (if enabled)
+			if multimesh_instance.multimesh.use_colors:
+				var color = primary_pink
+				color.a = alpha
+				multimesh_instance.multimesh.set_instance_color(instance_id, color)
+			
+			# Store emission strength in custom data (if enabled)
+			if multimesh_instance.multimesh.use_custom_data:
+				var custom_data = Color(alpha, 0, 0, 0)  # Use alpha for emission strength
+				multimesh_instance.multimesh.set_instance_custom_data(instance_id, custom_data)
 	
 	# Legacy material mode
 	elif material:

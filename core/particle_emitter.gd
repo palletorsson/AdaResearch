@@ -28,7 +28,8 @@ var emission_timer: float = 0.0
 var particle_container: Node3D
 
 # Agent-PerformanceEngineer: MultiMesh instancing (Phase 2)
-@export var use_instancing: bool = true  # Enable MultiMesh optimization
+# NOTE: Disabled by default until ParticleResources singleton is set up as autoload
+@export var use_instancing: bool = false  # Enable MultiMesh optimization
 var multimesh_instance: MultiMeshInstance3D = null
 var available_instance_ids: Array[int] = []  # Pool of reusable instance IDs
 var next_instance_id: int = 0

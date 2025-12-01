@@ -5,6 +5,10 @@ extends Node
 ## Provides shared meshes and materials for particle system optimization
 ## Created by: Agent-PerformanceEngineer
 ## Protocol: IACP v2.2
+## Pattern: Instance-based singleton with global accessor
+
+# Global singleton instance
+static var instance: ParticleResources = null
 
 # Shared meshes (created once, reused by all particles)
 var sphere_mesh: SphereMesh
@@ -14,15 +18,16 @@ var box_mesh: BoxMesh
 var particle_material: StandardMaterial3D
 var confetti_materials: Array[StandardMaterial3D] = []
 
-# MultiMesh instances (managed by emitters)
-var multimesh_pool: Dictionary = {}
+func _init():
+	if instance == null:
+		instance = self
+		_create_shared_meshes()
+		_create_shared_materials()
 
 func _ready():
-	create_shared_meshes()
-	create_shared_materials()
 	print("ParticleResources: Shared resources initialized")
 
-func create_shared_meshes():
+func _create_shared_meshes():
 	"""Create shared mesh resources"""
 	# Sphere for regular particles
 	sphere_mesh = SphereMesh.new()
@@ -35,7 +40,7 @@ func create_shared_meshes():
 	box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(0.08, 0.02, 0.05)
 
-func create_shared_materials():
+func _create_shared_materials():
 	"""Create shared material resources"""
 	# Default particle material (pink emission)
 	particle_material = StandardMaterial3D.new()
@@ -68,23 +73,32 @@ func create_shared_materials():
 		mat.vertex_color_use_as_albedo = true
 		confetti_materials.append(mat)
 
-func get_sphere_mesh() -> SphereMesh:
+# Static accessor methods
+static func get_sphere_mesh() -> SphereMesh:
 	"""Get shared sphere mesh for particles"""
-	return sphere_mesh
+	if instance == null:
+		instance = ParticleResources.new()
+	return instance.sphere_mesh
 
-func get_box_mesh() -> BoxMesh:
+static func get_box_mesh() -> BoxMesh:
 	"""Get shared box mesh for confetti"""
-	return box_mesh
+	if instance == null:
+		instance = ParticleResources.new()
+	return instance.box_mesh
 
-func get_particle_material() -> StandardMaterial3D:
+static func get_particle_material() -> StandardMaterial3D:
 	"""Get shared particle material"""
-	return particle_material
+	if instance == null:
+		instance = ParticleResources.new()
+	return instance.particle_material
 
-func get_random_confetti_material() -> StandardMaterial3D:
+static func get_random_confetti_material() -> StandardMaterial3D:
 	"""Get random confetti material"""
-	return confetti_materials[randi() % confetti_materials.size()]
+	if instance == null:
+		instance = ParticleResources.new()
+	return instance.confetti_materials[randi() % instance.confetti_materials.size()]
 
-func create_multimesh(max_instances: int, mesh: Mesh) -> MultiMesh:
+static func create_multimesh(max_instances: int, mesh: Mesh) -> MultiMesh:
 	"""Create a MultiMesh for particle instancing"""
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
