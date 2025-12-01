@@ -1,0 +1,34 @@
+{
+	"artifacts": {
+		"CityGenerator": {
+			"name": "City Generator",
+			"lookup_name": "CityGenerator",
+			"description": "Procedural pipe network using orthogonal L-System rules",
+			"scene": "res://algorithms/l_systems/Architecture/CityGenerator.tscn"
+		},
+		"Hilbert3D": {
+			"name": "3D Hilbert Curve",
+			"lookup_name": "Hilbert3D",
+			"description": "Space-filling curve visualization demonstrating efficient 3D traversal",
+			"scene": "res://algorithms/l_systems/Hilbert3D.tscn"
+		},
+		"AnimatedTree": {
+			"name": "Animated Tree Growth",
+			"lookup_name": "AnimatedTree",
+			"description": "Time-sliced L-System interpretation showing organic growth animation",
+			"scene": "res://algorithms/l_systems/Growth/AnimatedTree.tscn"
+		},
+		"ForestCompetition": {
+			"name": "Forest Ecosystem",
+			"lookup_name": "ForestCompetition",
+			"description": "Multiple L-System trees with competing growth strategies and health mechanics",
+			"scene": "res://algorithms/l_systems/Ecosystem/ForestCompetition.tscn"
+		},
+		"ContextSensitiveTree": {
+			"name": "Context-Sensitive Tree",
+			"lookup_name": "ContextSensitiveTree",
+			"description": "L-System tree with physics-based environmental awareness and branch pruning",
+			"scene": "res://algorithms/l_systems/ContextSensitive/ContextSensitiveTree.tscn"
+		}
+	}
+}

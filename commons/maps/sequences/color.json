@@ -1,33 +1,33 @@
 {
-    "sequences": {
-        "color": {
-            "name": "Color & Perception",
-            "description": "Explore the physics and perception of color",
-            "difficulty": "beginner",
-            "estimated_time": "20-25 minutes",
-            "learning_objectives": [
-                "RGB color space",
-                "Color mixing",
-                "Perception theory",
+	"sequences": {
+		"color": {
+			"name": "Color & Perception",
+			"description": "Explore the physics and perception of color",
+			"difficulty": "beginner",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"RGB color space",
+				"Color mixing",
+				"Perception theory",
                 "Digital materiality"
-            ],
-            "maps": [
-                "Color_1",
-                "Color_2",
-                "Color_3",
-                "Color_4",
-                "Color_5",
-                "Color_Grabbable",
-                "Color_Gradiant",
+			],
+			"maps": [
+				"Color_1",
+				"Color_2",
+				"Color_3",
+				"Color_4",
+				"Color_5",
+				"Color_Grabbable",
+				"Color_Gradiant",
                 "Color_Nails"
-            ],
-            "return_to": "lab",
-            "unlock_requirements": [
+			],
+			"return_to": "lab",
+			"unlock_requirements": [
                 "primitives"
-            ],
-            "completion_rewards": [
+			],
+			"completion_rewards": [
                 "chromatic_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

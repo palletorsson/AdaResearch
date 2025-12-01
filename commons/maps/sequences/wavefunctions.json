@@ -1,23 +1,17 @@
 {
 	"sequences": {
 		"wavefunctions": {
-			"name": "Wavefunctions",
-			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
-			"difficulty": "intermediate",
-			"estimated_time": "20-30 minutes",
-			"learning_objectives": [
-				"Sine waves and harmonics",
-				"Spectral analysis",
-				"Audio-visualization",
-                "Wave interference"
-			],
 			"audio": {
 				"ambient_preset": "techno_noir_subtle",
-				"volume": -10.0,
 				"interactive_sounds": {
 					"teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
-				}
+				},
+				"volume": -10.0
 			},
+			"completion_rewards": [
+				"wave_researcher_badge",
+				"spectral_sleuth_badge"
+			],
 			"content": [
 				"Sine_Space: Sine wave visualization",
 				"Oscillating_Wave: Amplitude, frequency, and phase",
@@ -32,21 +26,42 @@
 				"Vitruvian_Man: Proportion and spectral body",
 				"Cables: Catenary curves and simulation",
 				"Bernini: Procedural form and displacement",
-                "John_Cage: Silence and aleatoric noise"
+				"John_Cage: Silence and aleatoric noise"
+			],
+			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
+			"difficulty": "intermediate",
+			"estimated_time": "20-30 minutes",
+			"lab_map": "Lab/map_data_post_wavefunctions",
+			"learning_objectives": [
+				"Sine waves and harmonics",
+				"Spectral analysis",
+				"Audio-visualization",
+				"Wave interference"
 			],
 			"maps": [
+								
+				"WaveFunctions_OscillationDriver",
+				"WaveFunctions_OscillationCurve",
+				"WaveFunctions_UnitCircleTrig",
+				"WaveFunctions_PendulumWave",
+				"WaveFunctions_TrigWalkingPath",
+				"WaveFunctions_CircleSpiral",
+				"WaveFunctions_DoubleHelix",
+				"WaveFunctions_Lissajous3D",
+				"WaveFunctions_DoublePendulum",
+				"WaveFunctions_PendulumCircle",
+				"WaveFunctions_Spherical_Harmonics",
 				"WaveFunctions_Sine_Space",
-				"Wavefunctions_Sky_Stairs",				
 				"WaveFunctions_Oscillating_Wave",
 				"WaveFunctions_Mario_Sound",
 				"WaveFunctions_Beat_Frequencies",
 				"WaveFunctions_Harmonic_Builder",
 				"WaveFunctions_Fourier_Form",
-				"WaveFunctions_Spherical_Harmonics",
 				"WaveFunctions_3D_Wave_Propagation",
 				"WaveFunctions_Kusama",
 				"WaveFunctions_Dancing_Body",
 				"WaveFunctions_Vitruvian_Man",
+				"Wavefunctions_Sky_Stairs",
 				"Wavefunctions_Cables",
 				"Wavefunctions_Bernini",
 				"WaveFunctions_John_Cage",
@@ -56,20 +71,15 @@
 				"WaveFunctions_Fourier_Transforms",
 				"Wavefunctions_Resonating_Metallophone",
 				"Wavefunctions_Six",
-
 				"WaveFunctions_Standing_Wave_Patterns",
 				"Wavefunctions_Three",
 				"Wavefunctions_Two",
 				"WaveFunctions_Unit_Circle",
-                "WaveFunctions_Wave_Interference_Patterns"
+				"WaveFunctions_Wave_Interference_Patterns"
 			],
+			"name": "Wavefunctions",
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_wavefunctions",
-			"unlock_requirements": [],
-			"completion_rewards": [
-				"wave_researcher_badge",
-                "spectral_sleuth_badge"
-			]
+			"unlock_requirements": []
 		}
 	}
 }

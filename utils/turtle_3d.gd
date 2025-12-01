@@ -4,9 +4,8 @@ extends Node3D
 ## 3D Turtle Graphics for L-System visualization
 ## Chapter 08: Fractals
 
-var current_position: Vector3 = Vector3.ZERO
-var current_direction: Vector3 = Vector3.UP  # Start pointing up
-var current_rotation: Basis = Basis.IDENTITY
+# Cursor state
+var cursor_transform: Transform3D = Transform3D.IDENTITY
 
 # Drawing settings
 var branch_length: float = 0.1
@@ -34,9 +33,7 @@ func _ready():
 
 func reset():
 	"""Reset turtle to origin"""
-	current_position = Vector3.ZERO
-	current_direction = Vector3.UP
-	current_rotation = Basis.IDENTITY
+	cursor_transform = Transform3D.IDENTITY
 	state_stack.clear()
 
 	# Clear all branches and leaves
@@ -53,76 +50,62 @@ func forward(length: float = -1.0):
 	if length < 0:
 		length = branch_length
 
-	var start_pos = current_position
-	current_position += current_direction * length
+	var start_pos = cursor_transform.origin
+	# Move along local Y (Up) which is our Forward
+	cursor_transform = cursor_transform.translated_local(Vector3.UP * length)
+	var end_pos = cursor_transform.origin
 
 	# Create branch mesh
-	create_branch(start_pos, current_position)
+	create_branch(start_pos, end_pos)
 
 func move_forward(length: float = -1.0):
 	"""Move forward without drawing"""
 	if length < 0:
 		length = branch_length
-
-	current_position += current_direction * length
+	cursor_transform = cursor_transform.translated_local(Vector3.UP * length)
 
 func turn_left(angle_deg: float = -1.0):
-	"""Rotate left (around Z axis)"""
+	"""Rotate left (around Local Z axis - Yaw)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(current_direction.cross(Vector3.UP).normalized(), turn_angle)
-	update_direction()
+	# Rotate around local Z (Back)
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.z, turn_angle)
 
 func turn_right(angle_deg: float = -1.0):
-	"""Rotate right (around Z axis)"""
+	"""Rotate right (around Local Z axis - Yaw)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(current_direction.cross(Vector3.UP).normalized(), -turn_angle)
-	update_direction()
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.z, -turn_angle)
 
 func pitch_up(angle_deg: float = -1.0):
-	"""Rotate up (around X axis)"""
+	"""Rotate up (around Local X axis - Pitch)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(Vector3.RIGHT, turn_angle)
-	update_direction()
+	# Rotate around local X (Right)
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.x, turn_angle)
 
 func pitch_down(angle_deg: float = -1.0):
-	"""Rotate down (around X axis)"""
+	"""Rotate down (around Local X axis - Pitch)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(Vector3.RIGHT, -turn_angle)
-	update_direction()
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.x, -turn_angle)
 
 func roll_clockwise(angle_deg: float = -1.0):
-	"""Roll clockwise (around Y axis)"""
+	"""Roll clockwise (around Local Y axis - Roll)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(current_direction, turn_angle)
-	update_direction()
+	# Rotate around local Y (Forward/Up)
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.y, turn_angle)
 
 func roll_counterclockwise(angle_deg: float = -1.0):
-	"""Roll counter-clockwise (around Y axis)"""
+	"""Roll counter-clockwise (around Local Y axis - Roll)"""
 	var turn_angle = deg_to_rad(angle_deg) if angle_deg >= 0 else angle
-	current_rotation = current_rotation.rotated(current_direction, -turn_angle)
-	update_direction()
-
-func update_direction():
-	"""Update current direction vector from rotation basis"""
-	current_direction = current_rotation * Vector3.UP
+	cursor_transform.basis = cursor_transform.basis.rotated(cursor_transform.basis.y, -turn_angle)
 
 func push_state():
 	"""Save current state to stack"""
-	state_stack.append({
-		"position": current_position,
-		"direction": current_direction,
-		"rotation": current_rotation
-	})
+	state_stack.append(cursor_transform)
 
 func pop_state():
 	"""Restore state from stack"""
 	if state_stack.is_empty():
 		return
-
-	var state = state_stack.pop_back()
-	current_position = state["position"]
-	current_direction = state["direction"]
-	current_rotation = state["rotation"]
+	cursor_transform = state_stack.pop_back()
 
 func create_branch(start: Vector3, end: Vector3):
 	"""Create a cylindrical branch between two points"""
@@ -141,13 +124,10 @@ func create_branch(start: Vector3, end: Vector3):
 	branch.mesh = cylinder
 	branch.position = midpoint
 
-	# Orient cylinder to connect points
-	if length > 0.001:
-		var up = Vector3.UP
-		if abs(direction.normalized().dot(up)) > 0.99:
-			up = Vector3.RIGHT
-		branch.look_at(end, up)
-		branch.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+	# Orient cylinder to match turtle's rotation
+	# Since we move along local Y (Up), and Cylinder is Y-aligned, 
+	# we can just copy the basis.
+	branch.basis = cursor_transform.basis
 
 	# Material
 	var material = StandardMaterial3D.new()
@@ -167,7 +147,7 @@ func create_leaf():
 	sphere.height = branch_thickness * 4
 	leaf.mesh = sphere
 
-	leaf.position = current_position
+	leaf.position = cursor_transform.origin
 
 	var material = StandardMaterial3D.new()
 	material.albedo_color = leaf_color
@@ -203,6 +183,10 @@ func interpret_lsystem(instructions: String, step_length: float = 0.1, turn_angl
 			"\\": # Roll left
 				roll_counterclockwise()
 			"/":  # Roll right
+				roll_clockwise()
+			"<":  # Roll left (alias)
+				roll_counterclockwise()
+			">":  # Roll right (alias)
 				roll_clockwise()
 			"|":  # Turn around
 				turn_left(180)

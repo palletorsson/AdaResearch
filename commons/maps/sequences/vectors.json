@@ -1,15 +1,9 @@
 {
 	"sequences": {
 		"vectors": {
-			"name": "Vector Mathematics",
-			"description": "Master the fundamental language of 3D space: direction, magnitude, and operations.",
-			"difficulty": "beginner",
-			"estimated_time": "45-60 minutes",
-			"learning_objectives": [
-				"Coordinate systems and spatial reasoning",
-				"Vector decomposition and arithmetic",
-				"Dot and Cross products",
-				"Forces, reflection, and field flow"
+			"completion_rewards": [
+				"spatial_architect_badge",
+				"physics_engine_badge"
 			],
 			"content": [
 				"VectorBasics: Components and magnitude",
@@ -24,10 +18,20 @@
 				"VectorTorque: Rotational forces",
 				"VectorFieldFlow: Vector fields and fluids"
 			],
+			"description": "Master the fundamental language of 3D space: direction, magnitude, and operations.",
+			"difficulty": "beginner",
+			"estimated_time": "45-60 minutes",
+			"lab_map": "Lab/map_data_post_vectors",
+			"learning_objectives": [
+				"Coordinate systems and spatial reasoning",
+				"Vector decomposition and arithmetic",
+				"Dot and Cross products",
+				"Forces, reflection, and field flow"
+			],
 			"maps": [
-				"VectorBasics",
 				"VectorAddition",
 				"VectorDotProduct",
+				"VectorBasics",
 				"VectorSubtraction",
 				"VectorForces",
 				"VectorCrossProduct",
@@ -37,13 +41,9 @@
 				"VectorTorque",
 				"VectorFieldFlow"
 			],
+			"name": "Vector Mathematics",
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_vectors",
-			"unlock_requirements": [],
-			"completion_rewards": [
-				"spatial_architect_badge",
-				"physics_engine_badge"
-			]
+			"unlock_requirements": []
 		}
 	}
 }
