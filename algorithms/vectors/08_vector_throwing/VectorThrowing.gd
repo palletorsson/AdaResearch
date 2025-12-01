@@ -35,6 +35,11 @@ var instructions_label: Label3D = null
 var info_panel: Label3D = null
 var drone_container: Node3D = null
 
+# Trajectory Visualization
+var _trajectory_mesh: ImmediateMesh = null
+var _trajectory_points: PackedVector3Array = []
+var _time_since_last_text_update: float = 0.0
+
 # Game state
 var total_score: int = 0
 var total_hits: int = 0
@@ -52,6 +57,7 @@ var drone_scene = preload("res://algorithms/vectors/08_vector_throwing/vector_dr
 
 func _ready() -> void:
 	super._ready()
+	_setup_trajectory_vis()
 	_setup_environment()
 	_spawn_throw_balls()
 	_spawn_target_grid()
@@ -60,6 +66,23 @@ func _ready() -> void:
 	_create_instructions()
 	_create_physics_info_panel()
 	_update_score_display()
+
+func _setup_trajectory_vis() -> void:
+	_trajectory_mesh = ImmediateMesh.new()
+	var mesh_instance = MeshInstance3D.new()
+	mesh_instance.mesh = _trajectory_mesh
+	mesh_instance.name = "TrajectoryLine"
+	
+	var material = StandardMaterial3D.new()
+	material.albedo_color = Color(1.0, 1.0, 1.0, 0.4)
+	material.emission_enabled = true
+	material.emission = Color(1.0, 1.0, 1.0)
+	material.emission_energy_multiplier = 0.5
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mesh_instance.material_override = material
+	
+	environment_root.add_child(mesh_instance)
 
 func _setup_environment() -> void:
 	create_axes(2.0)
@@ -75,7 +98,10 @@ func _spawn_throw_balls() -> void:
 		var ball = throw_ball_scene.instantiate()
 		ball.name = "ThrowBall_%d" % i
 		var x_offset = (i - (num_balls - 1) / 2.0) * ball_spawn_spacing
-		ball.position = Vector3(x_offset, ball_spawn_height, 0.5)
+		# Apply global SCENE_SCALE to position and size
+		ball.position = Vector3(x_offset, ball_spawn_height, 0.5) * SCENE_SCALE
+		ball.scale = Vector3.ONE * SCENE_SCALE
+		
 		var hue = float(i) / float(num_balls)
 		var color = Color.from_hsv(hue, 0.8, 1.0)
 		if ball.has_method("set_ball_color"):
@@ -98,7 +124,10 @@ func _spawn_target_grid() -> void:
 			var x = (col - (target_columns - 1) / 2.0) * target_spacing
 			var y = target_height_offset + (row * target_spacing)
 			var z = target_distance
-			target.position = Vector3(x, y, z)
+			# Apply global SCENE_SCALE
+			target.position = Vector3(x, y, z) * SCENE_SCALE
+			target.scale = Vector3.ONE * SCENE_SCALE
+			
 			var distance_factor = float(row + 1) / float(max(target_rows, 1))
 			target.points_value = 10 * (row + 1)
 			var value_hue = distance_factor * 0.33
@@ -126,7 +155,7 @@ func _spawn_drones() -> void:
 		var angle = TAU * float(i) / float(count)
 		var spawn_pos = Vector3(sin(angle), 0.0, cos(angle)) * drone_spawn_radius
 		spawn_pos.y = drone_spawn_height
-		drone_spawn_points.append(spawn_pos)
+		drone_spawn_points.append(spawn_pos * SCENE_SCALE) # Apply scale
 	for i in range(drone_spawn_points.size()):
 		_spawn_drone_at_index(i, camera)
 
@@ -143,6 +172,8 @@ func _spawn_drone_at_index(index: int, camera: Node3D = null) -> void:
 	var drone = drone_scene.instantiate()
 	drone.name = "VectorDrone_%d" % index
 	drone.position = drone_spawn_points[index]
+	drone.scale = Vector3.ONE * SCENE_SCALE # Apply scale
+	
 	if camera == null:
 		camera = get_node_or_null("Camera3D")
 	if camera:
@@ -161,12 +192,12 @@ func _create_score_display() -> void:
 
 	score_label = Label3D.new()
 	score_label.name = "ScoreLabel"
-	score_label.font_size = 48
+	score_label.font_size = 48 * SCENE_SCALE
 	score_label.outline_size = 8
 	score_label.outline_modulate = Color.BLACK
 	score_label.modulate = Color.YELLOW
 	score_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	score_label.position = Vector3(0, 2.5, 0)
+	score_label.position = Vector3(0, 2.5, 0) * SCENE_SCALE
 	add_child(score_label)
 
 func _create_instructions() -> void:
@@ -175,12 +206,12 @@ func _create_instructions() -> void:
 
 	instructions_label = Label3D.new()
 	instructions_label.name = "Instructions"
-	instructions_label.font_size = 24
+	instructions_label.font_size = 24 * SCENE_SCALE
 	instructions_label.outline_size = 4
 	instructions_label.outline_modulate = Color.BLACK
 	instructions_label.modulate = Color(0.8, 0.9, 1.0)
 	instructions_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	instructions_label.position = Vector3(0, 2.0, -0.5)
+	instructions_label.position = Vector3(0, 2.0, -0.5) * SCENE_SCALE
 	instructions_label.text = """VECTOR THROWING DEMO
 
 1. Grab an orange ball with VR controller
@@ -198,7 +229,7 @@ Blast the drone and hit targets to score!"""
 	add_child(instructions_label)
 
 func _create_physics_info_panel() -> void:
-	info_panel = create_info_panel("", Vector3(2.0, 1.5, 0))
+	info_panel = create_info_panel("", Vector3(2.0, 1.5, 0)) # Base class handles pos scale
 	if info_panel:
 		info_panel.modulate = Color(0.7, 1.0, 0.7)
 		_update_physics_info()
@@ -278,8 +309,61 @@ func _update_score_display() -> void:
 		return
 	score_label.text = "SCORE: %d" % total_score
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	_update_trajectory()
+	
+	# We don't need constant text updates as they are event-driven in this scene
 	pass
+
+func _update_trajectory() -> void:
+	if not _trajectory_mesh:
+		return
+		
+	_trajectory_mesh.clear_surfaces()
+	
+	# Find held ball
+	var held_ball: Node3D = null
+	for ball in throw_balls:
+		if is_instance_valid(ball) and ball.get("is_being_held") == true:
+			held_ball = ball
+			break
+			
+	if not held_ball:
+		return
+
+	# Calculate path: p(t) = p0 + v0*t + 0.5*g*t^2
+	var p0 = held_ball.global_position
+	var v0 = Vector3.ZERO
+	
+	if held_ball.has_method("get_current_velocity"):
+		var raw_vel = held_ball.get_current_velocity()
+		var mult = held_ball.velocity_multiplier if "velocity_multiplier" in held_ball else 1.2
+		v0 = raw_vel * mult
+	
+	# If velocity is too low, don't draw to avoid clutter
+	if v0.length_squared() < 0.1:
+		return
+
+	var g = Vector3(0, -9.8, 0)
+	if "enable_gravity_on_throw" in held_ball and not held_ball.enable_gravity_on_throw:
+		g = Vector3.ZERO
+	
+	_trajectory_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	var steps = 40
+	var time_step = 0.05 # 2.0 seconds prediction
+	
+	for i in range(steps):
+		var t = i * time_step
+		var pos = p0 + v0 * t + 0.5 * g * t * t
+		
+		# Stop if we hit floor (approximate at y=0)
+		if pos.y < 0.0:
+			_trajectory_mesh.surface_add_vertex(pos)
+			break
+			
+		_trajectory_mesh.surface_add_vertex(pos)
+		
+	_trajectory_mesh.surface_end()
 
 func reset_game() -> void:
 	total_score = 0

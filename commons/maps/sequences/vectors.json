@@ -1,0 +1,49 @@
+{
+	"sequences": {
+		"vectors": {
+			"name": "Vector Mathematics",
+			"description": "Master the fundamental language of 3D space: direction, magnitude, and operations.",
+			"difficulty": "beginner",
+			"estimated_time": "45-60 minutes",
+			"learning_objectives": [
+				"Coordinate systems and spatial reasoning",
+				"Vector decomposition and arithmetic",
+				"Dot and Cross products",
+				"Forces, reflection, and field flow"
+			],
+			"content": [
+				"VectorBasics: Components and magnitude",
+				"VectorAddition: Visualizing combined forces",
+				"VectorDotProduct: Projections and angles",
+				"VectorSubtraction: Relative position and direction",
+				"VectorForces: Application of vectors as forces",
+				"VectorCrossProduct: Orthogonality and torque",
+				"VectorProjectionReflection: Mirrors and collisions",
+				"VectorMotion: Velocity and acceleration",
+				"VectorThrowing: Physics interaction",
+				"VectorTorque: Rotational forces",
+				"VectorFieldFlow: Vector fields and fluids"
+			],
+			"maps": [
+				"VectorBasics",
+				"VectorAddition",
+				"VectorDotProduct",
+				"VectorSubtraction",
+				"VectorForces",
+				"VectorCrossProduct",
+				"VectorProjectionReflection",
+				"VectorMotion",
+				"VectorThrowing",
+				"VectorTorque",
+				"VectorFieldFlow"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_vectors",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"spatial_architect_badge",
+				"physics_engine_badge"
+			]
+		}
+	}
+}

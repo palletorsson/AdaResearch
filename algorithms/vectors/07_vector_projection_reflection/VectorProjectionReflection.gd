@@ -7,6 +7,16 @@ var reflection_vector: Node3D
 var plane_mesh: MeshInstance3D
 var info_label: Label3D
 
+# Cached nodes
+var _cached_incident_nodes: Dictionary = {}
+var _cached_normal_nodes: Dictionary = {}
+var _cached_proj_nodes: Dictionary = {}
+var _cached_refl_nodes: Dictionary = {}
+
+# Throttling
+var _time_since_last_text_update: float = 0.0
+const TEXT_UPDATE_INTERVAL: float = 0.1
+
 func _ready():
 	super._ready()
 	create_axes(3.5)
@@ -14,28 +24,42 @@ func _ready():
 	normal_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.6, 0.6), Color(0.3, 0.8, 1.0, 1.0), "Normal")
 	plane_projection = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.7, 1.0, 0.5, 1.0), "Plane Projection", false)
 	reflection_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 0.7, 1.0, 1.0), "Reflection", false)
+	
 	plane_mesh = _create_plane_mesh()
 	environment_root.add_child(plane_mesh)
 	info_label = create_info_panel("Projection & Reflection", Vector3(-3.0, 2.3, 0.0))
 
-func _process(_delta):
-	var incident = get_vector(incident_vector)
-	var normal = get_vector(normal_vector)
+	# Cache nodes
+	_cache_vector_nodes(incident_vector, _cached_incident_nodes)
+	_cache_vector_nodes(normal_vector, _cached_normal_nodes)
+	_cache_vector_nodes(plane_projection, _cached_proj_nodes)
+	_cache_vector_nodes(reflection_vector, _cached_refl_nodes)
+
+func _process(delta):
+	var incident = _get_vector_fast(incident_vector, _cached_incident_nodes)
+	var normal = _get_vector_fast(normal_vector, _cached_normal_nodes)
 	if normal.length() < 0.001:
 		normal = Vector3.UP
 	var n_unit = normal.normalized()
+	
 	var projection = incident - n_unit * incident.dot(n_unit)
 	var reflection = incident - 2.0 * n_unit * incident.dot(n_unit)
-	update_vector(plane_projection, projection)
-	update_vector(reflection_vector, reflection)
+	
+	_update_vector_fast(plane_projection, projection, _cached_proj_nodes)
+	_update_vector_fast(reflection_vector, reflection, _cached_refl_nodes)
 	_update_plane_orientation(n_unit)
-	_update_info(incident, normal, projection, reflection)
+	
+	_time_since_last_text_update += delta
+	if _time_since_last_text_update >= TEXT_UPDATE_INTERVAL:
+		_time_since_last_text_update = 0.0
+		_update_info(incident, normal, projection, reflection)
 
 func _create_plane_mesh() -> MeshInstance3D:
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "ProjectionPlane"
 	var plane = PlaneMesh.new()
-	plane.size = Vector2(6.0, 6.0)
+	# Apply SCENE_SCALE to plane size
+	plane.size = Vector2(6.0, 6.0) * SCENE_SCALE
 	mesh_instance.mesh = plane
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.2, 0.4, 0.6, 0.2)
@@ -70,5 +94,27 @@ func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, refle
 	builder.append("Angle to Plane Normal ~= %.1f deg" % rad_to_deg(angle))
 	info_label.text = "\n".join(builder)
 
+# --- Caching Helpers (Local Implementation) ---
 
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+	if arrow == null: return
+	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
+	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
+	cache_dict["line_container"] = arrow.get_node_or_null("lineContainer")
 
+func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
+	var start: Node3D = cache_dict.get("start")
+	var end: Node3D = cache_dict.get("end")
+	if start and end:
+		return (end.global_position - start.global_position) / SCENE_SCALE
+	if arrow.has_method("get_vector"):
+		return arrow.get_vector()
+	return Vector3.ZERO
+
+func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+	var end_node: Node3D = cache_dict.get("end")
+	if end_node:
+		end_node.position = vector * SCENE_SCALE
+	var line_container: Node3D = cache_dict.get("line_container")
+	if line_container and line_container.has_method("refresh_connections"):
+		line_container.refresh_connections()

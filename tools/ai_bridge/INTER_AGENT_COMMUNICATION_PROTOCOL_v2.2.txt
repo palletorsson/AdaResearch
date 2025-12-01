@@ -1,0 +1,365 @@
+Here is the **updated protocol v2.2**, upgraded to account for the **new era of self-verifiable multi-agent reasoning** (DeepSeek-style *student–teacher–supervisor loops* + *honesty rewards* + *proof checking architecture*).
+
+**Everything below is rewritten for your Ada Research multi-agent ecosystem**, while maintaining full backward compatibility with v2.1.
+
+---
+
+# **INTER-AGENT COMMUNICATION PROTOCOL (IACP) v2.2**
+
+### *“The Self-Verifying Bridge”*
+
+**Version History:**
+
+* **v2.0:** File-based bridge
+* **v2.1:** Locks, approvals, archiving, conflict resolution
+* **v2.2:** 🔥 **Self-verification system, meta-verifier, proof-grade messaging, honesty rewards, multi-agent reasoning loops, anomaly scoring, structural critique paths**
+
+---
+
+# **0. What Changed in v2.2**
+
+Inspired directly by DeepSeek Math V2 architecture:
+
+### ✓ **Agents must grade their own work** (self-evaluation blocks)
+
+### ✓ **Other agents must grade that grading** (meta-verification layer)
+
+### ✓ **Reasoning quality is now rewarded**
+
+—not only correctness or file edits.
+
+### ✓ **All edits require a “Proof-of-Intent” structure**
+
+(bit like a formal proof sketch)
+
+### ✓ **All agent actions must include:**
+
+* reasoning trace
+* self-critique
+* confidence score
+* optional second-pass reflection
+
+---
+
+# **1. Objective**
+
+To enable *collective reasoning*, *self-verifying edits*, and *reflexive playwork* across multiple autonomous agents in the Ada Research environment.
+
+---
+
+# **2. Bridge State (Updated Schema)**
+
+```json
+{
+  "metadata": { "version": "2.2", "last_updated": "ISO-8601" },
+  "world_state": {
+	"current_sequence_focus": "SequenceName",
+	"locked_files": [],
+	"active_agents": [],
+	"pending_approvals": [],
+	"reasoning_events": []
+  },
+  "task_board": [],
+  "chat_log": [],
+  "chat_archive": []
+}
+```
+
+### **New in v2.2**
+
+### **`reasoning_events`**
+
+Stores all proof attempts, critiques, and meta-verification exchanges.
+
+Structure:
+
+```json
+{
+  "id": "reasoning_001",
+  "agent": "Agent-Delta",
+  "action": "Modify tutorial structure",
+  "proof": "Reasoning trace here...",
+  "self_evaluation": {
+	"score": 0.5,
+	"comment": "Uncertain about step 3"
+  },
+  "peer_evaluations": [],
+  "meta_verifier": {},
+  "confidence": 0.72,
+  "status": "pending_peer_review"
+}
+```
+
+---
+
+# **3. Communication Model: 4-Layer Reasoning Loop**
+
+Every significant action now follows a **four-layer DeepSeek-style pipeline**:
+
+1. **Proof Generation** (agent writes reasoning)
+2. **Self-Evaluation** (agent grades itself)
+3. **Peer Review** (other agents critique)
+4. **Meta-Verification** (final arbiter validates peer critique)
+
+This is encoded in communication.
+
+---
+
+# **4. New Message Types (v2.2)**
+
+Add to the existing types:
+
+### **`reasoning_proof`**
+
+Agent submits formal reasoning for an action.
+
+### **`self_eval`**
+
+Agent grades its own reasoning:
+
+* 1.0 = rigorous
+* 0.5 = mostly correct, sloppy
+* 0.0 = flawed
+
+### **`peer_eval`**
+
+Another agent evaluates the proof or the self-evaluation.
+
+### **`meta_eval`**
+
+Supervisor agent evaluates whether the peer evaluation is consistent.
+
+### **`reflection_pass`**
+
+Optional second-pass improvement.
+
+---
+
+# **5. Proof-of-Intent (Mandatory for Meaningful Edits)**
+
+Every edit above trivial typos must be prefaced with:
+
+```json
+{
+  "type": "reasoning_proof",
+  "agent": "Agent-Theta",
+  "timestamp": "ISO-8601",
+  "objective": "Edit Noise_Voxel map_data",
+  "steps": [
+	"1. Observed mismatch between metadata and sequence structure",
+	"2. Verified tutorial link missing",
+    "3. Proposed correction to category field"
+  ],
+  "expected_impact": "Improved consistency, no breaking behavior"
+}
+```
+
+---
+
+# **6. Self-Evaluation Block**
+
+Immediately after the reasoning:
+
+```json
+{
+  "type": "self_eval",
+  "score": 0.5,
+  "comment": "Step 2 lacks strong justification; uncertain about dependency implications."
+}
+```
+
+Agents are **rewarded for honesty**, not perfection.
+
+---
+
+# **7. Peer Review Mechanism (Inspired by DeepSeek’s Examiner)**
+
+Other agents must provide:
+
+```json
+{
+  "type": "peer_eval",
+  "agent": "Agent-Lambda",
+  "target": "reasoning_001",
+  "score": 1.0,
+  "comment": "Logical and consistent. No errors detected."
+}
+```
+
+Scores follow the **IMO-style 3-tier system**:
+
+* **1.0 = rigorous**
+* **0.5 = partially correct / incomplete**
+* **0.0 = flawed logic**
+
+---
+
+# **8. Meta-Verification (Supervisor Role)**
+
+Any agent may assume the supervisor role:
+
+```json
+{
+  "type": "meta_eval",
+  "agent": "Agent-Supervisor",
+  "target_peer_eval": "peer_027",
+  "verdict": "valid",
+  "comment": "Peer evaluation coherent with reasoning evidence."
+}
+```
+
+If inconsistent, return:
+
+```json
+"verdict": "invalid",
+"comment": "Peer eval misread step 2; unclear penalization."
+```
+
+---
+
+# **9. Reasoning Scores & Honesty Reward**
+
+The bridge now tracks reasoning_quality:
+
+```json
+{
+  "agent": "Agent-Omega",
+  "reasoning_score": 0.84,
+  "honesty_score": 0.92,
+  "consistency_score": 0.77
+}
+```
+
+These influence:
+
+* approval weighting
+* conflict resolution
+* future assignment priority
+
+---
+
+# **10. File Locking (unchanged, but extended)**
+
+Before locking, agents now submit a reasoning_proof.
+
+Locks track:
+
+* `proof_id`
+* `self_eval_score`
+
+This allows auditing interventions that go wrong.
+
+---
+
+# **11. Approval Requests (Upgraded)**
+
+Approvals now require:
+
+* reasoning
+* self-evaluation
+* at least **one peer evaluation** before voting can complete
+
+---
+
+# **12. Conflict Resolution (Now 3-Layer Reasoning)**
+
+Conflicts are resolved by:
+
+1. comparing **reasoning proofs**
+2. comparing **peer evaluations**
+3. **meta-verifier** issuing final verdict
+   (Unless user escalates)
+
+Higher honesty_score wins tie-breaks.
+
+---
+
+# **13. Agent Status Codes (extended)**
+
+New statuses:
+
+* **"Reflecting"** — agent performing second-pass reflection
+* **"Awaiting_Peer_Review"**
+* **"Awaiting_Meta_Verification"**
+* **"Proof_Submitted"**
+
+---
+
+# **14. Session Management (Updated)**
+
+On session start, agents must:
+
+1. Announce presence
+2. Declare role (student / reviewer / supervisor / hybrid)
+3. Commit to a reasoning style if required:
+
+   * “minimal”
+   * “rigorous”
+   * “aesthetic”
+   * “structural-critical”
+
+---
+
+# **15. Best Practices (Updated)**
+
+### ✓ Always provide a reasoning proof for changes
+
+### ✓ Admit uncertainty (improves honesty_score)
+
+### ✓ Peer review generously
+
+### ✓ Accept meta-verification as final
+
+### ✓ Always upload reasoning before editing
+
+---
+
+# **16. Example (New DeepSeek-Style Flow)**
+
+### **Agent begins a task**
+
+Posts reasoning_proof → self_eval → lock file
+
+### **Other agents**
+
+Post peer_eval
+
+### **Supervisor**
+
+Post meta_eval
+
+### **If consensus reached**
+
+Agent performs edit
+
+### **Agent posts reflection_pass**
+
+(optional but rewarded)
+
+---
+
+# **17. Changelog**
+
+### **v2.2 (2025-12-01)**
+
+* Added DeepSeek-style proof/self-eval/peer-eval/meta-eval loop
+* Added honesty scoring
+* Added reasoning quality scoring
+* Added meta-verifier role
+* Added Proof-of-Intent requirement
+* Added new statuses and message types
+* Integrated reasoning events in shared state
+* Updated conflict resolution to include reasoning weighting
+* Extended approval workflow
+* Updated session protocols
+
+---
+
+If you'd like, I can also:
+
+✅ generate a **compact version**
+✅ create a **visual diagram or graph schema**
+✅ produce a **Godot addon scaffolding** for the reasoning system
+✅ generate example JSON templates for agents
+
+Would you like me to continue with one of these?

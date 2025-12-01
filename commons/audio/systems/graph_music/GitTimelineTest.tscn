@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://git_timeline_test"]
+[gd_scene load_steps=5 format=3 uid="uid://b0mlwsque0ptf"]
 
-[ext_resource type="Script" path="res://commons/audio/systems/graph_music/GitTimelineSystem.gd" id="1_sys"]
-[ext_resource type="Script" path="res://commons/audio/systems/graph_music/GraphSynth.gd" id="2_synth"]
-[ext_resource type="Script" path="res://commons/audio/systems/graph_music/GraphVisualizer.gd" id="3_viz"]
-[ext_resource type="Script" path="res://commons/audio/systems/IntensityController.gd" id="4_ctrl"]
+[ext_resource type="Script" uid="uid://bjn5mqhqy48kw" path="res://commons/audio/systems/graph_music/GitTimelineSystem.gd" id="1_sys"]
+[ext_resource type="Script" uid="uid://dkf2xnyjakn2e" path="res://commons/audio/systems/graph_music/GraphSynth.gd" id="2_synth"]
+[ext_resource type="Script" uid="uid://b7wfpklmltljy" path="res://commons/audio/systems/graph_music/GraphVisualizer.gd" id="3_viz"]
+[ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="4_ctrl"]
 
 [node name="GitTimelineTest" type="Node3D"]
 
@@ -32,4 +32,3 @@ size = 20.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)
-

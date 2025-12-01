@@ -17,17 +17,22 @@ func _ready() -> void:
 	var highlight = point.get_node_or_null("HighlightRing")
 	if highlight:
 		highlight.visible = false
+	
+	# Lock point in place
 	if point.has_method("set_freeze_enabled"):
 		point.set_freeze_enabled(true)
 	else:
 		point.set("freeze", true)
+		
 	x_line = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color.RED, "X-line", false)
 	y_line = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color.GREEN, "Y-line", false)
 	z_line = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color.BLUE, "Z-line", false)
+	
+	# Initial update only - no process loop needed for static scene
 	_update_vectors()
-
-func _process(_delta: float) -> void:
-	_update_vectors()
+	
+	# Disable processing as this is a static visualization
+	set_process(false)
 
 func _update_vectors() -> void:
 	if point == null:

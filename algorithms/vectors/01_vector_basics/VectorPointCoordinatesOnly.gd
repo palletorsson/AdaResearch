@@ -12,9 +12,8 @@ func _ready() -> void:
 	_clear_environment()
 	_spawn_vectors()
 	_refresh_vectors()
-
-func _process(_delta: float) -> void:
-	_refresh_vectors()
+	# Static scene - no process loop needed
+	set_process(false)
 
 func _spawn_vectors() -> void:
 	x_line = _spawn_axis(Vector3.RIGHT, Color.RED, "X")
