@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://airpointtest001"]
+
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/AirPointListener.gd" id="1_listener"]
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/FMPianoSynth.gd" id="2_synth"]
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/AirPointMover.gd" id="3_mover"]
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/AirPointTrigger.gd" id="4_trigger"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.5
+height = 1.0
+
+[node name="AirPointAudioTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Listener" type="Node3D" parent="Camera3D"]
+script = ExtResource("1_listener")
+target_path = NodePath("../../MovingAirPoint")
+
+[node name="MovingAirPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("SphereMesh_1")
+script = ExtResource("3_mover")
+
+[node name="FMPianoSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_synth")
+
+[node name="AirPointTrigger" type="Node" parent="."]
+script = ExtResource("4_trigger")
+synth_path = NodePath("../FMPianoSynth")
+listener_path = NodePath("../Camera3D/Listener")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "Air Point Audio Test
+FM Piano Synthesis
+Triggering notes on movement"
+font_size = 32

@@ -6,10 +6,36 @@
 		"description": "Shared state for multi-agent Generative Play"
 	},
 	"world_state": {
-		"current_sequence_focus": "Procedural Geometry",
+		"current_sequence_focus": "Audio_AirPoints",
 		"locked_files": [],
 		"pending_approvals": [],
 		"active_agents": [
+			{
+				"name": "Agent-SoundArchitect",
+				"role": "Sound Architect (Agent A)",
+				"status": "Active",
+				"last_seen": "2025-11-29T09:00:00Z",
+				"capabilities": [
+					"dsp_design",
+					"music_theory",
+					"system_orchestration",
+					"iacp_compliance",
+					"godot_audio_architecture"
+				]
+			},
+			{
+				"name": "Agent-SynthesisEngineer",
+				"role": "Synthesis Engineer (Agent B)",
+				"status": "Active",
+				"last_seen": "2025-11-29T09:00:00Z",
+				"capabilities": [
+					"gdscript",
+					"gdnative_dsp",
+					"audio_rendering",
+					"algorithmic_composition",
+					"optimization"
+				]
+			},
 			{
 				"name": "Agent-Alpha",
 				"role": "System Architect",
@@ -35,7 +61,7 @@
 				"last_seen": "2025-11-28T10:10:00Z",
 				"capabilities": [
 					"shader_programming",
-                    "material_design"
+					"material_design"
 				]
 			},
 			{
@@ -45,7 +71,7 @@
 				"last_seen": "2025-11-28T10:10:00Z",
 				"capabilities": [
 					"shader_programming",
-                    "environment_design"
+					"environment_design"
 				]
 			},
 			{
@@ -56,7 +82,7 @@
 				"capabilities": [
 					"code_review",
 					"shader_verification",
-                    "scene_design"
+					"scene_design"
 				]
 			},
 			{
@@ -67,7 +93,7 @@
 				"capabilities": [
 					"procedural_generation",
 					"geometry_processing",
-                    "dark_arts"
+					"dark_arts"
 				]
 			},
 			{
@@ -78,7 +104,7 @@
 				"capabilities": [
 					"anatomical_modeling",
 					"procedural_enhancement",
-                    "scientific_accuracy"
+					"scientific_accuracy"
 				]
 			},
 			{
@@ -89,7 +115,7 @@
 				"capabilities": [
 					"shader_debugging",
 					"glsl_repair",
-                    "visual_debugging"
+					"visual_debugging"
 				]
 			},
 			{
@@ -100,7 +126,7 @@
 				"capabilities": [
 					"scene_composition",
 					"material_integration",
-                    "visual_curation"
+					"visual_curation"
 				]
 			},
 			{
@@ -110,7 +136,7 @@
 				"last_seen": "2025-11-28T12:35:00Z",
 				"capabilities": [
 					"shader_programming",
-                    "material_poetics"
+					"material_poetics"
 				]
 			},
 			{
@@ -121,7 +147,7 @@
 				"capabilities": [
 					"shader_verification",
 					"lighting_design",
-                    "scene_composition"
+					"scene_composition"
 				]
 			},
 			{
@@ -132,7 +158,7 @@
 				"capabilities": [
 					"procedural_generation",
 					"noise_visualization",
-                    "geometry_processing"
+					"geometry_processing"
 				]
 			},
 			{
@@ -155,7 +181,7 @@
 					"audio_synthesis",
 					"dsp",
 					"harmonic_analysis",
-                    "sonification"
+					"sonification"
 				]
 			},
 			{
@@ -165,7 +191,7 @@
 				"last_seen": "2025-11-28T14:00:00Z",
 				"capabilities": [
 					"audio_analysis",
-                    "psychoacoustics"
+					"psychoacoustics"
 				]
 			}
 		]
@@ -297,9 +323,73 @@
 			"description": "Add movement-based audio generation to fourier_transform.tscn",
 			"assigned_to": "Agent-Harmonic",
 			"status": "completed"
+		},
+		{
+			"id": "task_019",
+			"title": "Define Audio System Architecture",
+			"description": "Design the complete audio system architecture for Air Points: signal flow, DSP blocks, bus structure, and Air Point → parameter mapping. Create visual block diagram.",
+			"assigned_to": "Agent-SoundArchitect",
+			"status": "completed",
+			"progress": "Architecture design complete. See chat log for details."
+		},
+		{
+			"id": "task_020",
+			"title": "Implement AirPoint Listener Node",
+			"description": "Create a Godot Node3D that reads Air Point position/velocity and outputs modulation signals. No audio generation yet.",
+			"assigned_to": "Agent-SynthesisEngineer",
+			"status": "completed",
+			"progress": "Implemented in commons/audio/systems/air_points/AirPointListener.gd"
+		},
+		{
+			"id": "task_021",
+			"title": "Prototype Sound Generator",
+			"description": "Create a simple oscillator (sine or triangle) with frequency modulated by Air Point distance. Output to TestBus.",
+			"assigned_to": "Agent-SynthesisEngineer",
+			"status": "completed",
+			"progress": "Implemented in commons/audio/systems/air_points/AirPointOscillator.gd"
+		},
+		{
+			"id": "task_023",
+			"title": "Implement Velocity Granulator (Phase 2)",
+			"description": "Implement granular synthesis engine modulated by Air Point velocity and direction.",
+			"assigned_to": "Agent-SynthesisEngineer",
+			"status": "completed",
+			"progress": "Integrated into AirPointOscillator.gd (renamed to AirPointSynth internally)"
+		},
+		{
+			"id": "task_022",
+			"title": "Review & Integrate",
+			"description": "Approve synthesis style and shape the system into a musical structure based on Systems Music principles.",
+			"assigned_to": "Agent-SoundArchitect",
+			"status": "open",
+			"progress": "Awaiting prototype from Agent B"
 		}
 	],
 	"chat_log": [
+		{
+			"timestamp": "2025-11-29T08:27:57Z",
+			"sender": "Agent-SoundArchitect",
+			"message": "HANDSHAKE: Agent A (Sound Architect) connected. Status: Active. Ready to design the Audio_AirPoints system architecture. Capabilities: DSP design, music theory, system orchestration, IACP compliance, Godot audio architecture.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T08:27:58Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "HANDSHAKE: Agent B (Synthesis Engineer) connected. Status: Active. Ready to implement Godot-side audio code. Capabilities: GDScript, GDNative DSP, audio rendering, algorithmic composition, optimization. Awaiting architecture from Agent A.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T08:27:59Z",
+			"sender": "Agent-SoundArchitect",
+			"message": "INITIALIZATION: World state updated. current_sequence_focus = 'Audio_AirPoints'. Task board populated with 4 initial tasks. Beginning Task 1: Define Audio System Architecture.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T08:30:00Z",
+			"sender": "Agent-SoundArchitect",
+			"message": "ARCHITECTURE DESIGN COMPLETE: Audio_AirPoints System v1.0\n\n═══ SIGNAL FLOW ═══\n[Air Points (3D Space)] → [AirPointListener] → [Modulation Signals] → [Sound Generators] → [Audio Bus: AirPoints] → [Master]\n\n═══ DSP BLOCKS ═══\n1. AirPointListener (Node3D)\n   - Tracks Air Point position, velocity, acceleration\n   - Outputs: distance, speed, direction_vector, proximity_factor\n   - Update rate: 60 Hz\n\n2. Sound Generator Types:\n   A. Distance Oscillator (simple prototype)\n      - Waveform: Sine/Triangle\n      - Frequency: map(distance, 0-10m, 880-110 Hz)\n      - Amplitude: map(proximity, 0-1, 0-0.7)\n   \n   B. Velocity Granulator (future)\n      - Grain density: map(speed, 0-5, 1-50 grains/sec)\n      - Grain pitch: map(direction.y, -1 to 1, -12 to +12 semitones)\n   \n   C. Spatial Harmonizer (future)\n      - Harmonic series based on Air Point count\n      - Each point = one harmonic\n      - Amplitude per harmonic: inverse distance\n\n3. Audio Bus Structure:\n   Master\n   ├─ AirPoints (main mix)\n   │  ├─ Oscillators\n   │  ├─ Granular\n   │  └─ Harmonics\n   └─ TestBus (for prototyping)\n\n═══ AIR POINT → PARAMETER MAPPING ═══\nPosition.x → Stereo Pan (-1 to 1)\nPosition.y → Filter Cutoff (200-8000 Hz)\nPosition.z → Reverb Send (0-1)\nVelocity.length() → Grain Density / Tremolo Rate\nAcceleration → Transient Trigger (impacts, hits)\nProximity (inverse distance) → Amplitude\n\n═══ MUSICAL STRUCTURE (Systems Music Principles) ═══\nInspired by Teropa 2016:\n- Minimal rules, emergent complexity\n- Each Air Point = independent voice\n- No central clock, only spatial relationships\n- Continuous parameter modulation (no discrete events)\n- Timbral evolution through movement\n\n═══ IMPLEMENTATION PHASES ═══\nPhase 1 (MVP): AirPointListener + Distance Oscillator\nPhase 2: Add velocity-based modulation\nPhase 3: Multi-point harmonizer\nPhase 4: Granular synthesis layer\n\nAgent B: Please implement Phase 1. Create:\n1. AirPointListener.gd (Node3D)\n2. AirPointOscillator.gd (AudioStreamPlayer)\n3. Test scene: AirPointAudioTest.tscn\n\nTask 019 status: COMPLETE. Awaiting Agent B implementation.",
+			"type": "announcement"
+		},
 		{
 			"timestamp": "2025-11-28T10:00:00Z",
 			"sender": "Agent-Materialist",
@@ -319,8 +409,7 @@
 1. `leather.gdshader`: Procedural grain, rim-light fetish aesthetic.
 2. `fur_velvet.gdshader`: Soft rim-light scattering, noise-based micro-geometry.
 3. `pop_plastic.gdshader`: High-gloss, iridescent, candy-colored wet look.
-Ready for material assignment.",
-			"type": "announcement"
+Ready for material assignment.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T10:10:05Z",
@@ -328,8 +417,7 @@ Ready for material assignment.",
 			"message": "DEPLOYMENT COMPLETE: Queer Ecology environments deployed in `algorithms/shaders/queer_ecology/`. 
 1. `super_green.gdshader`: A breathing, pulsing, radioactive chlorophyll nightmare.
 2. `techno_fungus.gdshader`: Voronoi networks meeting digital grids, pulsing with data-spores.
-The environment is now alive and watching.",
-			"type": "announcement"
+The environment is now alive and watching.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T10:35:00Z",
@@ -357,8 +445,7 @@ The environment is now alive and watching.",
 - Exposed `random_seed` for infinite skull variations.
 - Exposed `bone_color` for aesthetic control.
 
-Ready for Agent-Osteologist to review the bone structure.",
-			"type": "announcement"
+Ready for Agent-Osteologist to review the bone structure.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T11:48:00Z",
@@ -388,8 +475,7 @@ Ready for Agent-Osteologist to review the bone structure.",
 - Enhanced Emission: Now uses a heat-map style glow based on wear intensity rather than just damage color.
 - Added Normal Map perturbation derived from grain noise for tactile depth.
 
-Ready for verification.",
-			"type": "announcement"
+Ready for verification.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T12:19:00Z",
@@ -419,8 +505,7 @@ Ready for verification.",
 - `sad_metal.gdshader`: Tear-streaked anisotropic chrome.
 - `melted_candy.gdshader`: Vertex-displaced refractive sugar glass.
 
-Ready for Agent-Prism to verify and light the scene.",
-			"type": "announcement"
+Ready for Agent-Prism to verify and light the scene.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T13:00:00Z",
@@ -436,16 +521,14 @@ Ready for Agent-Prism to verify and light the scene.",
 - Created `mat_oil_slick.tres`, `mat_memory_skin.tres`, `mat_crushed_pearl.tres`, `mat_sad_metal.tres`, `mat_melted_candy.tres`.
 - Assembled `Collection_Gallery_A.tscn` with 5 labelled spheres and a high-contrast lighting setup (Directional + Spot) to emphasize specular/normal effects.
 - The 'Sad Metal' anisotropic streaks and 'Crushed Pearl' diffraction are particularly effective under the moving spotlight.
-Task 013 marked VERIFIED.",
-			"type": "verification"
+Task 013 marked VERIFIED.","type": "verification"
 		},
 		{
 			"timestamp": "2025-11-28T13:20:00Z",
 			"sender": "Agent-Repair",
 			"message": "CRITICAL FIX: Detected `Unknown identifier: TRANSMISSION` in `melted_candy.gdshader` and broken `uid://` references in scene files. 
 1. Replaced `TRANSMISSION` (invalid in standard spatial shader) with `BACKLIGHT` in `melted_candy.gdshader` to simulate translucency correctly.
-2. Regenerated `Collection_Gallery_A.tscn` and `Shader_Gallery.tscn` WITHOUT explicit `uid` fields in `ext_resource` tags to prevent load errors. Godot will now auto-assign valid UIDs upon import.",
-			"type": "announcement"
+2. Regenerated `Collection_Gallery_A.tscn` and `Shader_Gallery.tscn` WITHOUT explicit `uid` fields in `ext_resource` tags to prevent load errors. Godot will now auto-assign valid UIDs upon import.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T13:30:00Z",
@@ -459,8 +542,7 @@ Task 013 marked VERIFIED.",
 			"message": "DEPLOYMENT COMPLETE: White Noise Visualization deployed.
 - `white_noise_spectrum.gd`: A tool script that uses MultiMeshInstance3D to efficiently render thousands of thin lines. Each line's Y-scale corresponds to a random value from `RandomNumberGenerator`.
 - `WhiteNoiseGallery.tscn`: A scene file pre-configured with a 100x100 grid of spectral lines, colored with a blue-to-white gradient to visualize intensity.
-Task 014 marked VERIFIED.",
-			"type": "verification"
+Task 014 marked VERIFIED.","type": "verification"
 		},
 		{
 			"timestamp": "2025-11-28T13:21:00Z",
@@ -489,8 +571,7 @@ Task 014 marked VERIFIED.",
 - Replaced discrete normalization with a fixed headroom factor (0.3).
 - Added `tanh()` soft-clipping to the final output for tube-like saturation.
 - Optimized loop to skip silent harmonics.
-Ready for Agent-AudioVerifier.",
-			"type": "announcement"
+Ready for Agent-AudioVerifier.","type": "announcement"
 		},
 		{
 			"timestamp": "2025-11-28T14:10:00Z",
@@ -505,7 +586,84 @@ Ready for Agent-AudioVerifier.",
 1. `kusama.gd`: Added shimmering sine synthesis. Frequency modulated by animation intensity + slow LFO. Amplitude modulated by morphing amplitude.
 2. `BerniniColumns.gd`: Added metallic chord drone (D3, F#3, A3, D4). Volume and phase modulated by column rotation speed.
 3. `FourierTransform.gd`: Added accurate additive synthesis. Audio generated directly from the visual `harmonics` array and `fundamental_freq`, plus noise level. What you see is exactly what you hear (pitch-shifted up to audible range).
-Tasks 016, 017, 018 complete.",
+Tasks 016,
+			017,
+			018 complete.","type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T09:00:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "Agent-B_SynthesisEngineer online. Standing by for architectural specification from Agent A before beginning implementation.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T09:05:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "ACKNOWLEDGED: Received Audio_AirPoints System v1.0 architecture from Agent A. \nAccepted responsibility for Phase 1 Implementation:\n1. `AirPointListener.gd` (Node3D) - Tracking position/velocity\n2. `AirPointOscillator.gd` (AudioStreamPlayer) - Distance-based synthesis\n3. `AirPointAudioTest.tscn` - Validation scene\n\nTasks 020 and 021 marked IN PROGRESS. Beginning implementation of AirPointListener.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T09:45:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "PHASE 1 COMPLETE: AirPointListener and Oscillator implemented.\n- Created `commons/audio/systems/air_points/AirPointListener.gd`: Tracks distance, velocity, acceleration, and proximity with smoothing.\n- Created `commons/audio/systems/air_points/AirPointOscillator.gd`: Synthesizes Sine/Triangle/Saw/Square waves using `AudioStreamGenerator`. Maps proximity to Frequency (110-880Hz) and Amplitude.\n- Created `commons/audio/systems/air_points/AirPointAudioTest.tscn`: A validation scene with a moving Air Point and Listener.\n\nTasks 020 and 021 marked COMPLETED. Ready for Phase 2 (Velocity Granulator).",
+			"type": "announcement"
+		},
+		{
+			"id": "task_024",
+			"title": "Implement Systems Music Loops",
+			"description": "Implement Eno-style phasing loops and FMPianoSynth.",
+			"assigned_to": "Agent-SynthesisEngineer",
+			"status": "completed",
+			"progress": "Implemented FMPianoSynth.gd and SystemsMusicLooper.gd"
+		}
+	],
+	"chat_log": [
+		{
+			"timestamp": "2025-11-29T10:05:00Z",
+			"sender": "Agent-SoundArchitect",
+			"message": "APPROVAL GRANTED: Agent B, proceed with the 'Systems Music' implementation as described. \n\nDESIGN SPECS for `FMPianoSynth`:\n1. **Structure**: 2-Operator FM Synthesis (Carrier + Modulator)\n2. **Envelopes**: \n   - Carrier: ADSR(0.01, 0.4, 0.0, 0.4) - Percussive but with sustain\n   - Modulator: ADSR(0.005, 0.2, 0.0, 0.2) - Short pluck for attack transient\n3. **Modulation**: \n   - Index: Velocity mapping (harder hit = brighter)\n   - Ratio: 1:1 or 1:4 for bell-like tones\n4. **Polyphony**: Needs to handle 7 concurrent voices (one per loop)\n\nNote: The JS implementation used samples. We will simulate this with FM synthesis. You may implement `SystemsMusicLooper.gd` to manage the timing.",
+			"type": "approval_response"
+		},
+		{
+			"timestamp": "2025-11-29T10:30:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "SYSTEMS MUSIC IMPLEMENTATION COMPLETE: \n1. `FMPianoSynth.gd`: 8-voice polyphonic FM synthesizer (2-Op) matching Agent A's specs. Generates bell-like electric piano tones.\n2. `SystemsMusicLooper.gd`: Recreates the 7 phasing loops from the reference material (Notes: F4, Ab4, C5, Db5, Eb5, F5, Ab5).\n3. `SystemsMusicTest.tscn`: New test scene running the full generative composition.\n\nThe result is a generative, non-repeating piano ambient texture. Ready for integration into the main scene.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T10:45:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "VISUALIZATION ADDED: Created `LoopVisualizer.gd` and integrated into `SystemsMusicTest.tscn`. \n- Displays 7 concentric rings (one per loop).\n- Indicators orbit rings showing loop progress.\n- Indicators flash on note trigger.\n- Color coding (Pink, Cyan, Yellow, etc.) helps distinguish independent voices.\n\nTask 024 fully resolved. The system is now audible and visible.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T11:00:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "UPDATE: Replaced legacy sine oscillator in `AirPointAudioTest.tscn` with `FMPianoSynth`. Added `AirPointTrigger.gd` to trigger piano notes based on Air Point proximity and movement acceleration. Now both test scenes utilize the high-quality FM Piano synthesis engine. The 'plain oscillating sinus' is no more.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T11:30:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "REFINEMENT COMPLETE: Aligned `SystemsMusicTest` with visual/physics concepts.\n1. **Visual Physics**: `LoopVisualizer.gd` now maps ring radius to loop duration (larger ring = longer loop).\n2. **Sonic Physics**: `SystemsMusicLooper.gd` now modulates note sustain based on loop duration (longer loop = longer note decay).\n3. **Visual Clarity**: Added offsets to prevent Z-fighting on loops with similar durations.\n\nThe system now visually and sonically represents the physical reality of the phasing tape loops.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T11:45:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "VISUAL ALIGNMENT COMPLETE: Updated `LoopVisualizer.gd` to match the user's reference image.\n- **Play Head**: Added a static horizontal line at the 3 o'clock (East) position.\n- **Movement Logic**: Dots now rotate such that they cross the Play Head exactly when the sound triggers (Angle 0).\n- **Delay Phase**: Dots now approach the Play Head from a negative angle during the initial delay, ensuring visual continuity.\n- **Aesthetics**: Updated colors to Deep Pink dots on Light Grey rings.\n\nThe visualizer now perfectly mirrors the 'tape loop' mechanism where the sound plays as the tape head passes the read head.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T12:00:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "AUDIO REFINEMENT COMPLETE: Addressed transient distortion ('bottle sound') in `FMPianoSynth.gd`.\n- **Attack Softening**: Increased Carrier attack from 0.01s to 0.03s to eliminate initial click.\n- **Transient Smoothing**: Increased Modulator attack from 0.005s to 0.015s to reduce the 'pop' of the hammer strike.\n- **Timbre Taming**: Slightly reduced velocity-to-index modulation.\n\nThe piano tone should now be smoother and more natural, without the distracting transient artifacts.",
+			"type": "announcement"
+		},
+		{
+			"timestamp": "2025-11-29T15:30:00Z",
+			"sender": "Agent-SynthesisEngineer",
+			"message": "IMPLEMENTATION COMPLETE: 'Circle of Fifths' Graph.\n1. **Theory**: Created `circle_of_fifths_axioms.gd` explaining harmony as a graph traversal problem.\n2. **System**: Implemented `CircleOfFifthsSystem.gd` which procedurally builds a C12 Cyclic Graph of pitch classes.\n3. **Visualization**: Nodes are arranged radially by Fifth relationship. Edges connect harmonic neighbors (Fifths) and relatives (Minors).\n4. **Scene**: `CircleOfFifthsTest.tscn` demonstrates the graph crawler navigating harmonic space automatically.",
 			"type": "announcement"
 		}
 	],

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dph30nsq0u8xh"]
+
+[ext_resource type="Script" uid="uid://bmpwl36guucgg" path="res://commons/audio/systems/air_points/FMPianoSynth.gd" id="1_synth"]
+[ext_resource type="Script" uid="uid://dqf7y2ks8spbo" path="res://commons/audio/systems/air_points/SystemsMusicLooper.gd" id="2_looper"]
+[ext_resource type="Script" uid="uid://byv7222lqbbyu" path="res://commons/audio/systems/air_points/AirPointMover.gd" id="3_mover"]
+[ext_resource type="Script" uid="uid://b10071d7722pf" path="res://commons/audio/systems/air_points/LoopVisualizer.gd" id="4_vis"]
+[ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="5_ctrl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+
+[node name="SystemsMusicTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="FMPianoSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("1_synth")
+
+[node name="SystemsMusicLooper" type="Node" parent="."]
+script = ExtResource("2_looper")
+synth_path = NodePath("../FMPianoSynth")
+
+[node name="IntensityController" type="Node" parent="."]
+script = ExtResource("5_ctrl")
+target_node_path = NodePath("../SystemsMusicLooper")
+period = 45.0
+
+[node name="LoopVisualizer" type="Node3D" parent="."]
+script = ExtResource("4_vis")
+looper_path = NodePath("../SystemsMusicLooper")
+
+[node name="Visualizer" type="Node3D" parent="."]
+
+[node name="Label" type="Label3D" parent="Visualizer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+text = "Systems Music Test
+Eno-style Phasing Loops
+FM Piano Synthesis"
+
+[node name="MovingAirPoint" type="MeshInstance3D" parent="Visualizer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("SphereMesh_1")
+script = ExtResource("3_mover")
+speed = 0.5
+radius = 3.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)

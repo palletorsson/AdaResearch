@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://airpointtest001"]
+
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/AirPointListener.gd" id="1_listener"]
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/FMPianoSynth.gd" id="2_synth"]
+[ext_resource type="Script" path="res://commons/audio/airpoints/AirPointAudioTest.gd" id="3_controller"]
+[ext_resource type="Script" path="res://commons/audio/systems/air_points/AirPointTrigger.gd" id="4_trigger"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_airpoint"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_airpoint"]
+albedo_color = Color(0.2, 0.8, 1.0, 1.0)
+emission_enabled = true
+emission = Color(0.2, 0.8, 1.0, 1.0)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_reference"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reference"]
+albedo_color = Color(1.0, 0.5, 0.2, 1.0)
+emission_enabled = true
+emission = Color(1.0, 0.5, 0.2, 1.0)
+emission_energy_multiplier = 1.5
+
+[node name="AirPointAudioTest" type="Node3D"]
+script = ExtResource("3_controller")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)
+fov = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="ReferencePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ReferencePoint"]
+mesh = SubResource("SphereMesh_reference")
+surface_material_override/0 = SubResource("StandardMaterial3D_reference")
+
+[node name="AirPointListener" type="Node3D" parent="ReferencePoint"]
+script = ExtResource("1_listener")
+target_path = NodePath("../../AirPoint")
+
+[node name="AirPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AirPoint"]
+mesh = SubResource("SphereMesh_airpoint")
+surface_material_override/0 = SubResource("StandardMaterial3D_airpoint")
+
+[node name="FMPianoSynth" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_synth")
+
+[node name="AirPointTrigger" type="Node" parent="."]
+script = ExtResource("4_trigger")
+synth_path = NodePath("../FMPianoSynth")
+listener_path = NodePath("../ReferencePoint/AirPointListener")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+text = "Air Point Audio Test
+FM Piano Mode
+Move with Arrow Keys"
+font_size = 24
+outline_size = 8

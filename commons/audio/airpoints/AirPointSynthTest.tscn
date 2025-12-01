@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=3 uid="uid://bg5koltrs8eb7"]
+
+[ext_resource type="Script" uid="uid://dt4k18d8rh3c7" path="res://commons/audio/airpoints/SystemsMusicListener.gd" id="1"]
+[ext_resource type="Script" uid="uid://xy8g3owgibuu" path="res://commons/audio/airpoints/SystemsMusicSynth.gd" id="2"]
+[ext_resource type="Script" uid="uid://cfl6i42cbga43" path="res://commons/audio/airpoints/AirPointSynthTest.gd" id="3"]
+
+[sub_resource type="Environment" id="Environment_ambient"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.4, 0.6, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.5
+glow_strength = 1.2
+glow_bloom = 0.3
+
+[sub_resource type="SphereMesh" id="SphereMesh_reference"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_reference"]
+albedo_color = Color(1, 0.6, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.5, 0.1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_airpoint"]
+radius = 0.3
+height = 0.6
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_airpoint"]
+albedo_color = Color(0.2, 0.7, 1, 1)
+metallic = 0.5
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.3, 0.8, 1, 1)
+emission_energy_multiplier = 3.0
+
+[node name="AirPointSynthTest" type="Node3D"]
+script = ExtResource("3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ambient")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 10)
+fov = 70.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 8, 0)
+light_energy = 0.6
+light_indirect_energy = 0.5
+shadow_enabled = true
+shadow_opacity = 0.7
+
+[node name="ReferencePoint" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ReferencePoint"]
+mesh = SubResource("SphereMesh_reference")
+surface_material_override/0 = SubResource("StandardMaterial3D_reference")
+
+[node name="Label3D" type="Label3D" parent="ReferencePoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+text = "Reference"
+font_size = 16
+outline_size = 4
+
+[node name="AirPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AirPoint"]
+mesh = SubResource("SphereMesh_airpoint")
+surface_material_override/0 = SubResource("StandardMaterial3D_airpoint")
+
+[node name="Label3D" type="Label3D" parent="AirPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+text = "Air Point"
+font_size = 20
+outline_size = 6
+
+[node name="SystemsMusicListener" type="Node3D" parent="."]
+script = ExtResource("1")
+target_air_point = NodePath("../AirPoint")
+reference_position = NodePath("../ReferencePoint")
+max_distance = 10.0
+update_rate = 60.0
+
+[node name="SystemsMusicSynth" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+script = ExtResource("2")
+listener = NodePath("../SystemsMusicListener")
+
+[node name="InfoLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+text = "Air Point Synth Test
+Teropa-Style Discreet Music Synthesis
+
+Controls:
+Arrow Keys: Move Air Point (X/Z)
+Q/E: Move Air Point (Y)
+Space: Reset Position
+V: Toggle Voice Mix
+H: Adjust Harmonicity
++/-: Movement Speed"
+font_size = 18
+outline_size = 6
+horizontal_alignment = 0
