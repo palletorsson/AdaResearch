@@ -51,6 +51,10 @@ func _process(delta):
 	
 	# --- THE PRODUCT (CURVE) ---
 	# Add new point at current ball position
+	# driver_ball is a direct child, and we are moving it in local Y.
+	# So driver_ball.position is already local.
+	# However, if we want to be safe against parent transforms, we just use position as is
+	# because trail is drawn in local space of the same parent.
 	points.push_front(Vector3(0, y_pos, 0))
 	
 	# Move all existing points to the right (Time flowing)

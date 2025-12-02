@@ -8,11 +8,12 @@ extends Node3D
 @export var subdivision_interval: float = 1.0  # Time between subdivisions
 @export var max_iterations: int = 6  # Maximum subdivision depth
 @export var auto_start: bool = true  # Auto-start subdivision
-@export var triangle_size: float = 1.0  # Size of initial triangle (meters)
-@export var triangle_thickness: float = 0.05  # Thickness of 3D triangles
+@export var triangle_size: float = 10.0  # Size of initial triangle (meters) - much larger for walking
+@export var triangle_thickness: float = 0.5  # Thickness of 3D triangles - thicker for visibility
 @export var extrude_on_subdivision: bool = true  # Extrude triangles upward with each iteration
-@export var extrusion_height: float = 0.15  # How much to extrude per iteration
+@export var extrusion_height: float = 1.5  # How much to extrude per iteration - larger for walking
 @export var colorize_by_depth: bool = true  # Color triangles by subdivision depth
+@export var initial_rotation_degrees: float = 90.0  # Rotate triangle to stand vertical for walking through
 
 # Internal state
 var current_iteration: int = 0
@@ -23,6 +24,10 @@ var current_triangles: Array = []  # Array of triangle data
 func _ready():
 	print("SierpinskiTriangle: Ready")
 	print("SierpinskiTriangle: Will subdivide to %d iterations" % max_iterations)
+
+	# Apply rotation to make triangle vertical for walking through
+	var rotation_rad = deg_to_rad(initial_rotation_degrees)
+	rotate_x(rotation_rad)
 
 	# Create the initial triangle
 	create_initial_triangle()
@@ -165,6 +170,9 @@ func create_triangle_mesh(triangle: Dictionary):
 
 	material.metallic = 0.3
 	material.roughness = 0.6
+
+	# Make material double-sided for walking through
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 	# Add slight emission for glowing effect
 	if triangle.depth > 0:

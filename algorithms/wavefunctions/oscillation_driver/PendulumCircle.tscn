@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://pendulum_circle_demo"]
+[gd_scene load_steps=9 format=3 uid="uid://pendulum_circle_demo"]
 
 [ext_resource type="Script" path="res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://drawingcanvas001" path="res://commons/context/drawingboard/DrawingCanvas.tscn" id="7"]
 
 [sub_resource type="CylinderMesh" id="1"]
 top_radius = 0.03
@@ -53,6 +54,20 @@ surface_material_override = SubResource("6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
 mesh = SubResource("3")
 surface_material_override = SubResource("4")
+
+[node name="RayCast3D" type="RayCast3D" parent="PendulumPivot/BobCenter/CirclePivot/Ball"]
+target_position = Vector3(0, -10, 0)
+collide_with_areas = true
+collide_with_bodies = true
+
+[node name="DrawingCanvas" parent="." instance=ExtResource("7")]
+
+[node name="GroundLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+billboard = 1
+text = "Point: (0.00, 0.00)"
+font_size = 24
+outline_size = 4
 
 [node name="Trail" type="MeshInstance3D" parent="."]
 

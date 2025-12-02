@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://by481kyfqpad1"]
+[gd_scene load_steps=3 format=3 uid="uid://dfly78n4hqosg"]
 
-[ext_resource type="Script" uid="uid://cvk25lyk6v3ay" path="res://algorithms/audio/EuclideanRhythmGenerator.gd" id="1_gen"]
-[ext_resource type="Script" uid="uid://5yjje7bhk050" path="res://algorithms/audio/demos/EuclideanDemo.gd" id="1_script"]
+[ext_resource type="Script" path="res://algorithms/audio/EuclideanRhythmGenerator.gd" id="1_gen"]
+[ext_resource type="Script" path="res://algorithms/audio/demos/EuclideanDemo.gd" id="1_script"]
 
 [node name="EuclideanDemo" type="Node3D"]
 script = ExtResource("1_script")

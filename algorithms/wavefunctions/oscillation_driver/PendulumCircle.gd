@@ -14,10 +14,14 @@ extends Node3D
 # The Secondary Driver (Circle)
 @onready var circle_pivot: Node3D = $PendulumPivot/BobCenter/CirclePivot
 @onready var ball: MeshInstance3D = $PendulumPivot/BobCenter/CirclePivot/Ball
+@onready var raycast: RayCast3D = $PendulumPivot/BobCenter/CirclePivot/Ball/RayCast3D
 
 # The Product (Complex Trail)
 @onready var trail_mesh: ImmediateMesh
 @onready var trail_instance: MeshInstance3D = $Trail
+
+# Ground Label
+@onready var ground_label: Label3D = $GroundLabel
 
 # Physics Parameters (Pendulum)
 @export var pendulum_length: float = 2.5
@@ -49,6 +53,9 @@ func _ready():
 	rod.mesh.height = pendulum_length
 	bob_center.position.y = -pendulum_length
 	ball.position.x = circle_radius
+	
+	# Enable raycast
+	raycast.enabled = true
 
 func _setup_visuals():
 	trail_mesh = ImmediateMesh.new()
@@ -80,11 +87,21 @@ func _process(delta):
 	circle_pivot.rotate_z(rotation_speed * delta)
 	
 	# --- 3. TRAIL GENERATION ---
-	# Get absolute world position of the ball
-	var ball_pos = ball.global_position
+	# Get local position of the ball relative to this PendulumCircle node
+	# Hierarchy: PendulumCircle (Root) -> PendulumPivot -> BobCenter -> CirclePivot -> Ball
+	# So ball.global_position is World. We need it in Root's local space.
+	# Since "this" is the root, we can use to_local() or transform * ball.position (if ball was direct child)
+	# Safest way for deep hierarchy:
+	var ball_local_pos = to_local(ball.global_position)
 	
 	# Add new point (using X and Y from ball, Z starts at 0)
-	trail_points.push_front(Vector3(ball_pos.x, ball_pos.y, 0.0))
+	# Note: We use the local X and Y, but Z is part of the time-scrolling mechanism,
+	# so we might want to reset Z to 0 relative to the "origin" plane or keep its physical Z offset?
+	# In this demo, the circle rotates in Z-plane but the whole thing might be swinging.
+	# Let's stick to the pattern: X/Y = Value, Z = Time.
+	# However, the ball physically moves in Z due to pendulum swing if it's 3D.
+	# But the trail is usually "unrolled" time.
+	trail_points.push_front(Vector3(ball_local_pos.x, ball_local_pos.y, 0.0))
 	
 	# Move all existing points along Z (Time flowing away)
 	for i in range(trail_points.size()):
@@ -96,6 +113,9 @@ func _process(delta):
 	
 	# Render
 	_draw_trail()
+	
+	# --- 4. RAYCAST TO GROUND ---
+	_update_ground_interaction()
 
 func _draw_trail():
 	trail_mesh.clear_surfaces()
@@ -107,3 +127,37 @@ func _draw_trail():
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+func _update_ground_interaction():
+	if raycast.is_colliding():
+		var hit_point = raycast.get_collision_point()
+		var collider = raycast.get_collider()
+		
+		# Position label at hit point, slightly above ground
+		ground_label.global_position = hit_point + Vector3(0, 0.01, 0)
+		
+		# Convert to local space for display
+		var local_hit = to_local(hit_point)
+		
+		# Update label text with coordinates
+		ground_label.text = "Point: (%.2f, %.2f)" % [local_hit.x, local_hit.z]
+		ground_label.visible = true
+		
+		# Try to draw on the surface
+		var drawable = _find_drawable(collider)
+		if drawable:
+			drawable.draw_at_world_position(hit_point, Color.BLACK)
+			ground_label.text += "\nDrawing..."
+	else:
+		ground_label.visible = false
+
+func _find_drawable(node: Node) -> Node:
+	if not node:
+		return null
+	if node.has_method("draw_at_world_position"):
+		return node
+	for child in node.get_children():
+		if child.has_method("draw_at_world_position"):
+			return child
+	return null
+

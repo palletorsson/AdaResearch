@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8k7n4m2q5vwx"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/example_8_4_cantor_pagoda_vr.gd" id="1_script"]
+
+[node name="Example_8_4_Cantor_Pagoda" type="Node3D"]
+script = ExtResource("1_script")
+max_depth = 5
+base_width = 20.0
+base_depth = 20.0
+block_height = 2.5
+block_thickness = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 8, 6, 12)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 8, 0)
+shadow_enabled = true

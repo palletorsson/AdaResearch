@@ -2328,6 +2328,13 @@
 			"description": "grab_cube",
 			"scene": "res://commons/primitives/cubes/grab_cube.tscn"
 		},
+		"subdivision_cube": {
+			"name": "subdivision_cube",
+			"lookup_name": "subdivision_cube",
+			"description": "subdivision_cube",
+			"scene": "res://commons/primitives/cubes/subdivision_cube.tscn"
+		},
+		
 		"wood_cube": {
 			"name": "wood_cube",
 			"lookup_name": "wood_cube",
@@ -2694,6 +2701,25 @@
 			"description": "Classic Cantor set fractal demonstrating infinite subdivision",
 			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
 		},
+		"Hilbert3D": {
+			"name": "Hilbert3D",
+			"lookup_name": "Hilbert3D",
+			"description": "Hilbert3D",
+			"scene": "res://algorithms/l_systems/Hilbert3D.tscn"
+		},		
+		"cantor_pagoda_vr": {
+			"name": "cantor_pagoda_vr",
+			"lookup_name": "cantor_pagoda_vr",
+			"description": "cantor_pagoda_vr",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn"
+		},	
+		"inverted_tree_cloud": {
+			"name": "inverted_tree_cloud",
+			"lookup_name": "inverted_tree_cloud",
+			"description": "inverted_tree_cloud",
+			"scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn"
+		},					
+		
 		"fractal_koch_curve": {
 			"name": "Koch Curve",
 			"lookup_name": "fractal_koch_curve",
@@ -2746,8 +2772,15 @@
 			"name": "menger_sponge",
 			"lookup_name": "menger_sponge",
 			"description": "menger_sponge",
-			"scene": "rres://algorithms/fractals/mengersponge/menger_sponge.tscn"
+			"scene": "res://algorithms/fractals/mengersponge/menger_sponge.tscn"
 		},
+		"fractal_space": {
+			"name": "fractal_space",
+			"lookup_name": "fractal_space",
+			"description": "fractal_space",
+			"scene": "res://commons/context/walkgrids/fractal_space.tscn"
+		},		
+		
 		"example_2_2_forces_mass_variation_vr": {
 			"name": "example_2_2_forces_mass_variation_vr",
 			"lookup_name": "example_2_2_forces_mass_variation_vr",

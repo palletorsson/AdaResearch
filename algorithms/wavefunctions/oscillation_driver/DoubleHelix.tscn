@@ -1,57 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://double_helix_demo"]
+[gd_scene load_steps=4 format=3 uid="uid://dli47lf48p833"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.gd" id="1"]
+[ext_resource type="Script" uid="uid://cesayax1wb6ah" path="res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.gd" id="1"]
 
 [sub_resource type="SphereMesh" id="1"]
 radius = 0.2
 height = 0.4
 
-[sub_resource type="StandardMaterial3D" id="2"]
-albedo_color = Color(0, 0.8, 1, 1)
-emission_enabled = true
-emission = Color(0, 0.8, 1, 1)
-emission_energy_multiplier = 0.5
-
-[sub_resource type="StandardMaterial3D" id="3"]
-albedo_color = Color(1, 0, 0.8, 1)
-emission_enabled = true
-emission = Color(1, 0, 0.8, 1)
-emission_energy_multiplier = 0.5
-
 [sub_resource type="TorusMesh" id="4"]
-inner_radius = 1.45
-outer_radius = 1.55
-rings = 64
+inner_radius = 0.95
+outer_radius = 1.05
 ring_segments = 4
-
-[sub_resource type="StandardMaterial3D" id="5"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.2)
-shading_mode = 0
 
 [node name="DoubleHelix" type="Node3D"]
 script = ExtResource("1")
+max_trail_length = 100
 
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Ball1" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 mesh = SubResource("1")
-surface_material_override = SubResource("2")
 
 [node name="Ball2" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 mesh = SubResource("1")
-surface_material_override = SubResource("3")
 
 [node name="Trail1" type="MeshInstance3D" parent="."]
 
 [node name="Trail2" type="MeshInstance3D" parent="."]
 
 [node name="ReferenceCircle" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("4")
-surface_material_override = SubResource("5")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 4, 1.5, 4)
@@ -65,4 +44,3 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 billboard = 1
 text = "Double Helix (DNA)"
-font_size = 32

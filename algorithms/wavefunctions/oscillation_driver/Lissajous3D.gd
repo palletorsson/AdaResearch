@@ -65,6 +65,9 @@ func _process(delta):
 	
 	# --- TRAIL GENERATION ---
 	# Unlike previous demos, we don't scroll Z. The shape exists in static space.
+	# Using local position relative to the Lissajous3D node
+	# The ball's position is already set locally via ball.position = pos
+	
 	trail_points.push_front(pos)
 	
 	if trail_points.size() > max_trail_length:

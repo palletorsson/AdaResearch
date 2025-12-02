@@ -64,6 +64,8 @@ func _update_connection():
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	# Draw line from ball to cube
+	# Use positions relative to the OscillationDriver node (which is parent to both)
+	# driver_ball.position and product_cube.position are already local to this node.
 	mesh.surface_add_vertex(driver_ball.position)
 	mesh.surface_add_vertex(product_cube.position)
 	

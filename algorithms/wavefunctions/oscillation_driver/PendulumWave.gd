@@ -69,12 +69,12 @@ func _process(delta):
 	_update_pendulum_visuals()
 	
 	# --- WAVE GENERATION (The Product) ---
-	# The "Value" is the Bob's current world position
-	var bob_pos = bob.global_position
+	# The "Value" is the Bob's current position relative to the PendulumWave node
+	var bob_local_pos = to_local(bob.global_position)
 	
 	# Add new point at the bob's current location (Z=0 relative to start)
 	# We only care about X and Y from the bob, Z is the timeline
-	trail_points.push_front(Vector3(bob_pos.x, bob_pos.y, 0.0))
+	trail_points.push_front(Vector3(bob_local_pos.x, bob_local_pos.y, 0.0))
 	
 	# Move all existing points along Z (Time flowing away)
 	for i in range(trail_points.size()):

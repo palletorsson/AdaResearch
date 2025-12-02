@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp2w643jxf1i0"]
+
+[ext_resource type="Script" uid="uid://52ovsv2sa6b4" path="res://commons/context/walkgrids/FractalSpace.gd" id="1_fractal"]
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fractal"]
+render_priority = 0
+shader = ExtResource("2_grid")
+shader_parameter/modelColor = Color(0.6, 0.4, 0.8, 1)
+shader_parameter/wireframeColor = Color(0.8, 0.5, 1, 1)
+shader_parameter/emissionColor = Color(0.8, 0.5, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/show_interior = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fractal"]
+
+[node name="FractalSpace" type="Node3D"]
+script = ExtResource("1_fractal")
+initial_displacement = 1.0
+roughness = 0.4
+height_scale = 0.5
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("ShaderMaterial_fractal")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_fractal")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.905495, 0.424357, 0, -0.424357, 0.905495, 0, 3.08208, 7.02245)

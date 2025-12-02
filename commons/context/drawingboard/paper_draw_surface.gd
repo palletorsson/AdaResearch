@@ -29,7 +29,8 @@ func _ready():
 	drawing_texture_data = ImageTexture.create_from_image(drawing_texture)
 	
 	update_material(drawing_texture_data)
-	debug_label.text = "Drawing initialized."
+	if debug_label:
+		debug_label.text = "Drawing initialized."
 
 # Draw random dots around the pen tip
 func draw_random_dots(uv_position: Vector2):
@@ -49,7 +50,8 @@ func reset_canvas():
 	drawing_texture.fill(Color(1, 1, 1, 0.2))  # White background
 	drawing_texture_data = ImageTexture.create_from_image(drawing_texture)
 	update_material(drawing_texture_data)
-	debug_label.text = "Drawing reset."
+	if debug_label:
+		debug_label.text = "Drawing reset."
 
 # Snap a UV position to the nearest grid point
 func snap_to_grid(uv_position: Vector2) -> Vector2:
@@ -161,6 +163,23 @@ func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
 	if pentip_ray_cast:
 		# Get the current snap_grid_size
 		active_pen_properties["snap_grid_size"] = pentip_ray_cast.snap_grid_size
-		debug_label.text = "Current Resolution: " + str(active_pen_properties["snap_grid_size"])
+		if debug_label:
+			debug_label.text = "Current Resolution: " + str(active_pen_properties["snap_grid_size"])
 	else:
-		debug_label.text = "PentipRayCast node not found!"
+		if debug_label:
+			debug_label.text = "PentipRayCast node not found!"
+
+# Helper to convert world position to UV
+func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:
+	var local_pos = to_local(world_pos)
+	# Assuming PlaneMesh of size 2x2 (default)
+	# Local X/Z range from -1 to 1
+	var uv_x = (local_pos.x + 1.0) / 2.0
+	var uv_y = (local_pos.z + 1.0) / 2.0
+	return Vector2(uv_x, uv_y)
+
+# Draw at a specific world position
+func draw_at_world_position(world_pos: Vector3, color: Color = Color.BLACK):
+	var uv = get_uv_from_world_pos(world_pos)
+	if uv.x >= 0.0 and uv.x <= 1.0 and uv.y >= 0.0 and uv.y <= 1.0:
+		draw_point(uv, color)

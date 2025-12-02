@@ -82,11 +82,13 @@ func _process(delta):
 	
 	# --- TRAIL GENERATION ---
 	# Sine Trail
+	# Use local position relative to UnitCircleTrig node
 	sine_points.push_front(sine_ball.position)
 	_update_trail_points(sine_points, delta)
 	_draw_trail(sine_mesh, sine_points)
 	
 	# Cosine Trail
+	# Use local position relative to UnitCircleTrig node
 	cosine_points.push_front(cosine_ball.position)
 	_update_trail_points(cosine_points, delta)
 	_draw_trail(cosine_mesh, cosine_points)
@@ -127,7 +129,7 @@ func _draw_connections():
 	mesh.surface_add_vertex(cosine_ball.position)
 	
 	# Line to Center (Radius)
-	mesh.surface_add_vertex(Vector3.ZERO)
+	mesh.surface_add_vertex(Vector3.ZERO) # Center of UnitCircleTrig
 	mesh.surface_add_vertex(center)
 	
 	mesh.surface_end()

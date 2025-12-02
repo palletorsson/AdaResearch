@@ -1,17 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://djkjuy7wct10q"]
+[gd_scene load_steps=8 format=3 uid="uid://c7n4m8k5qaxyw"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2"]
-[ext_resource type="Script" uid="uid://b2b1wja16xkmt" path="res://commons/primitives/cubes/grab_cube.gd" id="2_xxt38"]
-[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="3_xr71e"]
+[ext_resource type="Script" path="res://commons/primitives/cubes/subdivision_cube.gd" id="3_subdivision"]
+[ext_resource type="Shader" uid="uid://bxelpi3jd8aev" path="res://commons/resourses/shaders/SimpleGrid.gdshader" id="4_shader"]
 
 [sub_resource type="BoxShape3D" id="7"]
 margin = 0.01
 size = Vector3(0.1, 0.1, 0.1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7aij"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_subdivision"]
 render_priority = 0
-shader = ExtResource("3_xr71e")
+shader = ExtResource("4_shader")
 shader_parameter/modelColor = Color(0.34130228, 0.46391684, 0.8974577, 1)
 shader_parameter/wireframeColor = Color(7.70092e-07, 0.5903984, 0.74686724, 1)
 shader_parameter/emissionColor = Color(0.930299, 2.6375652e-05, 0.65065306, 1)
@@ -24,25 +24,13 @@ shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="BoxMesh" id="8"]
-material = SubResource("ShaderMaterial_x7aij")
+material = SubResource("ShaderMaterial_subdivision")
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="GrabCube" instance=ExtResource("1")]
-script = ExtResource("2_xxt38")
-alternate_material = null
-snap_to_shelf = null
-snap_max_distance = null
-snap_match_rotation = null
-snap_falloff_distance = null
-enabled = null
-press_to_hold = null
-picked_up_layer = null
-release_mode = null
-ranged_grab_method = null
-second_hand_grab = null
-ranged_grab_speed = null
-picked_by_exclude = null
-picked_by_require = null
+[node name="SubdivisionCube" instance=ExtResource("1")]
+script = ExtResource("3_subdivision")
+max_divisions = 3
+division_color_shift = 0.15
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("7")

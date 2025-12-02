@@ -1,24 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://oscillation_driver_demo"]
+[gd_scene load_steps=4 format=3 uid="uid://8m67oeex6ow3"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.gd" id="1"]
+[ext_resource type="Script" uid="uid://dtf245n446itm" path="res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.gd" id="1"]
 
 [sub_resource type="SphereMesh" id="1"]
 radius = 0.3
 height = 0.6
 
-[sub_resource type="StandardMaterial3D" id="2"]
-albedo_color = Color(1, 0.2, 0.2, 1)
-emission_enabled = true
-emission = Color(1, 0.2, 0.2, 1)
-emission_energy_multiplier = 0.5
-
 [sub_resource type="BoxMesh" id="3"]
-size = Vector3(1, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="4"]
-albedo_color = Color(0.2, 0.5, 1, 1)
-roughness = 0.2
-metallic = 0.5
 
 [node name="OscillationDriver" type="Node3D"]
 script = ExtResource("1")
@@ -26,7 +14,6 @@ script = ExtResource("1")
 [node name="DriverBall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("1")
-surface_material_override = SubResource("2")
 
 [node name="Label3D" type="Label3D" parent="DriverBall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -36,7 +23,6 @@ font_size = 24
 
 [node name="ProductCube" type="MeshInstance3D" parent="."]
 mesh = SubResource("3")
-surface_material_override = SubResource("4")
 
 [node name="Label3D" type="Label3D" parent="ProductCube"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)

@@ -10,7 +10,7 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 # Menger sponge settings
 @export var subdivision_interval: float = 1.0  # Time between subdivisions in seconds
-@export var max_iterations: int = 4  # Maximum number of iterations (4 is visually impressive)
+@export var max_iterations: int = 2  # 2-stage Menger sponge
 @export var auto_start: bool = true  # Start subdividing automatically
 
 # Internal state
@@ -94,8 +94,8 @@ func find_all_cube_scenes() -> Array:
 
 # Recursive function to find cube scenes
 func _find_cubes_recursive(node: Node, cubes: Array):
-	# Check if this node is a cube_scene
-	if node.name == "CubeScene" or node.name.begins_with("CubeScene"):
+	# Check if this node is a cube_scene (including "InitialCube")
+	if node.name == "CubeScene" or node.name.begins_with("CubeScene") or node.name == "InitialCube" or node.scene_file_path == "res://commons/primitives/cubes/cube_scene.tscn":
 		cubes.append(node)
 
 	# Recurse into children
@@ -105,6 +105,11 @@ func _find_cubes_recursive(node: Node, cubes: Array):
 # Subdivide a single cube into Menger sponge pattern
 func subdivide_cube_menger(cube: Node3D):
 	if not is_instance_valid(cube):
+		return
+
+	# Check if cube is in the tree before accessing global_position
+	if not cube.is_inside_tree():
+		print("MengerSponge: Cube not in tree, skipping")
 		return
 
 	# Get the cube's current transform
@@ -144,11 +149,14 @@ func subdivide_cube_menger(cube: Node3D):
 
 		# Create new cube
 		var new_cube = CUBE_SCENE.instantiate()
-		new_cube.global_position = cube_position + pos_offset
 		new_cube.scale = new_scale
 
-		# Add to the scene
+		# Add to the scene first
 		parent.add_child(new_cube)
+
+		# Then set position after it's in the tree
+		new_cube.global_position = cube_position + pos_offset
+
 		cubes_created += 1
 
 	print("MengerSponge: Created %d sub-cubes, removed original at %s" % [cubes_created, cube_position])

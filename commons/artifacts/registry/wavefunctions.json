@@ -294,6 +294,13 @@
 			"description": "SimpleOscillatingBridge",
 			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn"
 		},
+		"SystemsMusicTest": {
+			"name": "SystemsMusicTest",
+			"lookup_name": "SystemsMusicTest",
+			"description": "SystemsMusicTest",
+			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn"
+		},
+		
 		"wave_interference": {
 			"name": "Wave Interference",
 			"lookup_name": "wave_interference",
@@ -324,6 +331,19 @@
 			"description": "Basic oscillation driving a property",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.tscn"
 		},
+		"double_helix_scene": {
+			"name": "double_helix_scene",
+			"lookup_name": "double_helix_scene",
+			"description": "double_helix_scene",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn"
+		},	
+		"circle_spiral_scene": {
+			"name": "circle_spiral_scene",
+			"lookup_name": "circle_spiral_scene",
+			"description": "circle_spiral_scene",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn"
+		},				
+		
 		"OscillationCurve": {
 			"name": "OscillationCurve",
 			"lookup_name": "OscillationCurve",
