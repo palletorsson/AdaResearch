@@ -13,6 +13,7 @@ const VISUALIZATION_STEP = 4
 # Common variables
 var grid: Array = []
 var mesh_instance: MeshInstance3D
+var multi_mesh_instance: MultiMeshInstance3D
 var materials: Dictionary = {}
 var iteration_count = 0
 var is_running = false
@@ -47,6 +48,24 @@ func setup_common_materials():
 func create_mesh_instance():
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
+
+func configure_multimesh(mesh: Mesh, max_instances: int):
+	if multi_mesh_instance:
+		multi_mesh_instance.queue_free()
+	
+	multi_mesh_instance = MultiMeshInstance3D.new()
+	add_child(multi_mesh_instance)
+	
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = mesh
+	mm.instance_count = max_instances
+	multi_mesh_instance.multimesh = mm
+	
+	# Hide all initially
+	for i in range(max_instances):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 
 func initialize_grid():
 	# Override in subclasses

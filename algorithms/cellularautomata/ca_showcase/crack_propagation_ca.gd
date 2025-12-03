@@ -8,6 +8,15 @@ const STRESS_POINTS = 3
 var stress_points: Array = []
 
 func initialize_grid():
+	# Configure MultiMesh
+	var step = 3
+	var cube_size = CUBE_SIZE * step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_3d_grid()
 	
 	# Add initial stress concentrators
@@ -34,39 +43,37 @@ func propagate_cracks():
 					grid[neighbor.x][neighbor.y][neighbor.z] = 2  # Cracked state
 
 func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create separate surfaces for different states
-	create_mesh_surface(array_mesh, 1, material_active)    # Stress points
-	create_mesh_surface(array_mesh, 2, material_occupied)  # Cracks
-	
-	mesh_instance.mesh = array_mesh
-
-func create_mesh_surface(array_mesh: ArrayMesh, target_state: int, material: StandardMaterial3D):
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var vertex_index = 0
-	
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 3
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
-				if grid[x][y][z] == target_state:
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, z)
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		var surface_index = array_mesh.get_surface_count()
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		array_mesh.surface_set_material(surface_index, material)
+				var state = grid[x][y][z]
+				if state == 1 or state == 2:
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						(y - GRID_SIZE/2) * CUBE_SIZE,
+						(z - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					
+					# Color logic
+					if state == 1:
+						mm.set_instance_color(idx, Color.RED) # Stress point
+					else:
+						mm.set_instance_color(idx, Color.GRAY) # Crack
+					
+					idx += 1
 
 func get_crack_count() -> int:
 	var count = 0

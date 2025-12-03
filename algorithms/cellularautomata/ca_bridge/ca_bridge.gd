@@ -1,0 +1,108 @@
+@tool
+extends Node3D
+
+const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
+
+@export_category("Bridge Settings")
+@export var width: int = 21 # Width of the bridge (X axis)
+@export var length: int = 100 # Length of the bridge (Z axis / Time)
+@export var cell_size: float = 0.5 # Half size as requested (standard is 1.0)
+@export var generation_speed: float = 0.1
+@export var auto_generate: bool = true
+
+@export_category("Rule Settings")
+@export var rule: int = 30 # Wolfram 1D Rule (0-255)
+@export var random_initial_row: bool = false
+@export var initial_density: float = 0.5
+
+var current_z: int = 0
+var current_row: Array = []
+var timer: float = 0.0
+var is_generating: bool = false
+var generated_cubes: Array = []
+
+func _ready():
+	if auto_generate:
+		start_generation()
+
+func _process(delta):
+	if is_generating:
+		timer += delta
+		if timer >= generation_speed:
+			timer = 0.0
+			step()
+
+func start_generation():
+	_clear_bridge()
+	_initialize_row()
+	current_z = 0
+	is_generating = true
+
+func stop_generation():
+	is_generating = false
+
+func _clear_bridge():
+	for cube in generated_cubes:
+		if is_instance_valid(cube):
+			cube.queue_free()
+	generated_cubes.clear()
+	current_z = 0
+	is_generating = false
+
+func _initialize_row():
+	current_row = []
+	current_row.resize(width)
+	
+	if random_initial_row:
+		for i in range(width):
+			current_row[i] = 1 if randf() < initial_density else 0
+	else:
+		# Single point in center
+		for i in range(width):
+			current_row[i] = 0
+		current_row[width / 2] = 1
+
+func step():
+	if current_z >= length:
+		is_generating = false
+		return
+
+	_spawn_row(current_row, current_z)
+	current_row = _calculate_next_row(current_row)
+	current_z += 1
+
+func _spawn_row(row: Array, z_index: int):
+	var offset_x = (width * cell_size) / 2.0
+	
+	for i in range(width):
+		if row[i] == 1:
+			var cube = CUBE_SCENE.instantiate()
+			add_child(cube)
+			generated_cubes.append(cube)
+			
+			# Position
+			var x_pos = (i * cell_size) - offset_x
+			var z_pos = z_index * cell_size
+			cube.position = Vector3(x_pos, 0, z_pos)
+			
+			# Scale (Half size)
+			cube.scale = Vector3(0.5, 0.5, 0.5)
+
+func _calculate_next_row(row: Array) -> Array:
+	var next_row = []
+	next_row.resize(width)
+	
+	for i in range(width):
+		var left = row[(i - 1 + width) % width]
+		var center = row[i]
+		var right = row[(i + 1) % width]
+		next_row[i] = _apply_rule(left, center, right)
+		
+	return next_row
+
+func _apply_rule(a, b, c) -> int:
+	var index = (a << 2) | (b << 1) | c
+	if (rule >> index) & 1:
+		return 1
+	else:
+		return 0

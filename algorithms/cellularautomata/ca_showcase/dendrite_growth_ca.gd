@@ -8,6 +8,15 @@ const BRANCHING_FACTOR = 0.15
 var growth_centers: Array = []
 
 func initialize_grid():
+	# Configure MultiMesh
+	var step = 3
+	var cube_size = CUBE_SIZE * step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_3d_grid()
 	
 	# Central growth point
@@ -41,35 +50,35 @@ func add_dendrite_branch(center: Vector3i):
 					growth_centers.append(new_pos)
 
 func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create mesh for dendrite cells
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var vertex_index = 0
-	
-	# Sample subset for performance
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 3
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
 				if grid[x][y][z] == 2:  # Dendrite
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, z)
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		array_mesh.surface_set_material(0, material_active)
-	
-	mesh_instance.mesh = array_mesh
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						(y - GRID_SIZE/2) * CUBE_SIZE,
+						(z - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					
+					# Color logic: Distance from center for gradient
+					var dist = Vector3(x,y,z).distance_to(Vector3(GRID_SIZE/2, GRID_SIZE/2, GRID_SIZE/2))
+					var hue = fmod(dist / (GRID_SIZE/2.0), 1.0)
+					mm.set_instance_color(idx, Color.from_hsv(hue, 0.8, 1.0))
+					
+					idx += 1
 
 func get_dendrite_count() -> int:
 	var count = 0

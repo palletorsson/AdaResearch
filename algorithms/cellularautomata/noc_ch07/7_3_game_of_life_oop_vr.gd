@@ -10,7 +10,7 @@ const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn
 
 var _sim_root: Node3D
 var _cells: Array[OopCell] = []
-var _mesh: MeshInstance3D
+var _multi_mesh: MultiMeshInstance3D
 var _timer: float = 0.0
 var _status_label: Label3D
 var _generation: int = 1
@@ -24,9 +24,27 @@ func _setup_environment() -> void:
 	_sim_root = Node3D.new()
 	add_child(_sim_root)
 
-
-	_mesh = MeshInstance3D.new()
-	_sim_root.add_child(_mesh)
+	_multi_mesh = MultiMeshInstance3D.new()
+	_sim_root.add_child(_multi_mesh)
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = BoxMesh.new()
+	var cell_size = 0.9 / grid_size
+	mm.mesh.size = Vector3(cell_size * 0.95, cell_size * 0.55, 0.01)
+	mm.instance_count = grid_size * grid_size
+	_multi_mesh.multimesh = mm
+	
+	# Initialize transforms
+	var idx = 0
+	for y in range(grid_size):
+		for x in range(grid_size):
+			var x_pos = -0.45 + x * cell_size + cell_size * 0.5
+			var y_pos = 0.15 + y * cell_size * 0.6 + cell_size * 0.275
+			var t = Transform3D(Basis(), Vector3(x_pos, y_pos, 0))
+			mm.set_instance_transform(idx, t)
+			mm.set_instance_color(idx, Color(0,0,0,0))
+			idx += 1
 
 	_status_label = Label3D.new()
 	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -134,27 +152,15 @@ func _cell(x: int, y: int) -> OopCell:
 	return _cells[y * grid_size + x]
 
 func _update_mesh() -> void:
-	var mesh := ImmediateMesh.new()
-	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	var cell := 0.9 / grid_size
-	for c in _cells:
-		if not c.alive:
-			continue
-		mesh.surface_set_color(Color(1.0, 0.7, 0.95))
-		var x0 = -0.45 + c.x * cell
-		var x1 = x0 + cell * 0.95
-		var y0 = 0.15 + c.y * cell * 0.6
-		var y1 = y0 + cell * 0.55
-		# Triangle 1
-		mesh.surface_add_vertex(Vector3(x0, y0, 0))
-		mesh.surface_add_vertex(Vector3(x1, y0, 0))
-		mesh.surface_add_vertex(Vector3(x1, y1, 0))
-		# Triangle 2
-		mesh.surface_add_vertex(Vector3(x0, y0, 0))
-		mesh.surface_add_vertex(Vector3(x1, y1, 0))
-		mesh.surface_add_vertex(Vector3(x0, y1, 0))
-	mesh.surface_end()
-	_mesh.mesh = mesh
+	var mm = _multi_mesh.multimesh
+	var active_color = Color(1.0, 0.7, 0.95)
+	var inactive_color = Color(0,0,0,0)
+	
+	for i in range(_cells.size()):
+		if _cells[i].alive:
+			mm.set_instance_color(i, active_color)
+		else:
+			mm.set_instance_color(i, inactive_color)
 
 func _update_status() -> void:
 	_status_label.text = "OOP Game of Life | Gen %d" % _generation

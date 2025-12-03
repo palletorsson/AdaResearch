@@ -1,31 +1,32 @@
 {
 	"map_info": {
-		"name": "Fractals_1",
-		"description": "Introduction to Fractals - explore basic recursion patterns",
+		"name": "CA_Highlights",
+		"description": "Persian Rug, Columns, Bridge, Screen",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
 			"depth": 9,
-			"max_height": 2
+			"max_height": 4
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "fractals",
-			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["Recursion basics", "Fractal patterns", "Self-similarity", "Iterative structures"]
+			"difficulty": "intermediate",
+			"category": "cellular_automata",
+			"estimated_time": "5 minutes",
+			"learning_objectives": ["Artistic CA", "Structural CA", "Complex patterns"]
 		}
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "0", "0", "0", "1", "1"],
-			["1", "1", "1", "0", "1", "1", "1"],
-			["1", "1", "0", "0", "0", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"],			
+			["1", "1", "4", "4", "4", "4", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "1", "1", "1", "1", "1", "4"],
+			["4", "4", "4", "4", "4", "0", "4"],
+			["4", "4", "4", "4", "4", "1", "4"],		
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -33,18 +34,19 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", "t", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "dark_sphere", " ", " ", " "],
+			[" ", " ", " ", "persian_rug:0:-0.49", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "7_1_elementary_ca_vr:0:2:3", " ", " ", " "],
+			[" ", " ", "ca_screen:180:2:5", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "cellular_automata_grabable", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -55,21 +57,27 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		},
-		"s": {
-			"properties": {
-				"height": 5.5  
-			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -82,7 +90,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
-} 
+}

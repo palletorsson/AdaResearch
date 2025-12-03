@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://persian_rug_scene"]
+
+[ext_resource type="Script" path="res://algorithms/cellularautomata/persian_rug/persian_rug.gd" id="1_script"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rug"]
+size = Vector2(2.56, 3.84)
+
+[node name="PersianRug" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="RugMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_rug")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3, 2)

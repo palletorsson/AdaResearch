@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bls14jqde1xui"]
+
+[ext_resource type="PackedScene" uid="uid://26nrsntghpo7" path="res://commons/primitives/parametric/dini_surface.tscn" id="1_qch4l"]
+[ext_resource type="PackedScene" uid="uid://b8qp4yx5kn7wa" path="res://commons/primitives/parametric/double_enneper.tscn" id="2_64h0u"]
+[ext_resource type="PackedScene" uid="uid://cqy8x5b3rw8n1" path="res://commons/primitives/parametric/parametric.tscn" id="3_xwiwh"]
+[ext_resource type="PackedScene" uid="uid://c8qw4yx5bp2ka" path="res://commons/primitives/parametric/seashell.tscn" id="4_vbco7"]
+[ext_resource type="PackedScene" uid="uid://dt3ey8v2m7xqk" path="res://commons/primitives/parametric/wave_torus.tscn" id="5_gdpvx"]
+
+[node name="MathObjects" type="Node3D"]
+
+[node name="DiniSurface" parent="." instance=ExtResource("1_qch4l")]
+u_min = 0.0
+u_max = 12.56
+u_steps = 96
+v_min = 0.1
+v_max = 2.0
+v_steps = 48
+a = 1.0
+b = 0.2
+scale_factor = 0.1
+base_color = Color(0.9, 0.6, 0.2, 1)
+
+[node name="DoubleEnneper" parent="." instance=ExtResource("2_64h0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+u_min = -2.0
+u_max = 2.0
+u_steps = 64
+v_min = -2.0
+v_max = 2.0
+v_steps = 64
+scale_factor = 0.1
+base_color = Color(0.8, 0.4, 0.9, 1)
+
+[node name="Parametric" parent="." instance=ExtResource("3_xwiwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Seashell" parent="." instance=ExtResource("4_vbco7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+u_min = 0.0
+u_max = 12.56
+u_steps = 96
+v_min = 0.0
+v_max = 6.28
+v_steps = 32
+spiral_tightness = 0.15
+shell_opening = 0.1
+base_color = Color(0.95, 0.85, 0.7, 1)
+
+[node name="WaveTorus" parent="." instance=ExtResource("5_gdpvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+u_min = 0.0
+u_max = 6.28
+u_steps = 64
+v_min = 0.0
+v_max = 6.28
+v_steps = 32
+major_radius = 0.15
+minor_radius = 0.05
+wave_amplitude = 0.02
+wave_frequency_u = 8.0
+wave_frequency_v = 5.0
+base_color = Color(0.3, 0.9, 0.5, 1)

@@ -3,7 +3,7 @@ extends Node3D
 
 # ----------------- Parameters -----------------
 @export var STEP_COUNT: int = 80
-@export var TOTAL_TURNS: float = 2.5
+@export var TOTAL_TURNS: float = 2.0
 @export var BASE_RADIUS: float = 1.6
 @export var WALKWAY_OFFSET: float = 0.9
 @export var STEP_RISE: float = 0.10

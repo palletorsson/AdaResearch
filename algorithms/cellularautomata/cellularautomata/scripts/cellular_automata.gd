@@ -10,6 +10,8 @@ extends Node3D
 @export var start_rule: int = 90  # Initial Wolfram Rule
 @export var rule_change_chance: float = 0.01  # Probability of rule change per step
 @export var rule_set_collection := [142, 235, 30, 110, 57, 62, 75, 22]  # Cool rules
+@export var auto_play: bool = false # Automatically play the animation
+@export var update_interval: float = 0.05 # Time between updates
 
 # Core cellular automaton data
 var rule_set: Array = []  # Stores rule in binary format
@@ -45,7 +47,7 @@ func _ready():
 		_generate_next_row()  # Generate the next row and push it to history
 
 	# Timer for automata updates (controls scrolling)
-	TimerHelper.create_timer(self, 0.05, Callable(self, "_update_automaton"))
+	TimerHelper.create_timer(self, update_interval, Callable(self, "_update_automaton"))
 
 # ==============================
 # AUTOMATA UPDATE LOGIC
@@ -59,9 +61,9 @@ func _set_rules(rule_value: int):
 		rule_set.append(int(char))
 
 func _update_automaton():
-	""" Updates the cellular automaton only if grabbed. """
-	if not scroll_on:
-		return  # Stop scrolling if not grabbed
+	""" Updates the cellular automaton only if grabbed or auto_play is on. """
+	if not scroll_on and not auto_play:
+		return  # Stop scrolling if not grabbed and not auto playing
 
 	if randf() < rule_change_chance:
 		var new_rule = rule_set_collection.pick_random()

@@ -24,6 +24,8 @@ extends Node3D
 @export var mid_color: Color = Color(0.28, 0.65, 0.85, 1.0)
 @export var top_color: Color = Color(0.9, 0.95, 1.0, 1.0)
 @export var wall_emission: Color = Color(0.05, 0.16, 0.28, 1.0)
+@export var enable_collision: bool = true
+@export var use_plush_shader: bool = true
 
 @export var auto_update_in_editor: bool = true
 
@@ -34,7 +36,7 @@ var _left_wall_body: StaticBody3D
 var _right_wall_body: StaticBody3D
 var _left_wall_shape: CollisionShape3D
 var _right_wall_shape: CollisionShape3D
-var _wall_material: StandardMaterial3D
+var _wall_material: Material
 var _floor_material: StandardMaterial3D
 var _last_signature: String = ""
 
@@ -48,15 +50,37 @@ func rebuild_corridor() -> void:
 	_build_corridor()
 
 func _ensure_nodes() -> void:
+	# Check if material needs to be switched
+	if _wall_material:
+		var is_shader = _wall_material is ShaderMaterial
+		if is_shader != use_plush_shader:
+			_wall_material = null
+
 	if not _wall_material:
-		_wall_material = StandardMaterial3D.new()
-		_wall_material.vertex_color_use_as_albedo = true
-		_wall_material.roughness = 0.45
-		_wall_material.metallic = 0.1
-		_wall_material.emission_enabled = true
-		_wall_material.emission = wall_emission
-		_wall_material.emission_energy_multiplier = 0.45
-		_wall_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		if use_plush_shader:
+			var shader = load("res://algorithms/wavefunctions/sine_wall/plush_red.gdshader")
+			if shader:
+				var sm = ShaderMaterial.new()
+				sm.shader = shader
+				_wall_material = sm
+			else:
+				var sm = StandardMaterial3D.new()
+				sm.albedo_color = Color(0.6, 0.0, 0.1)
+				_wall_material = sm
+		else:
+			var sm = StandardMaterial3D.new()
+			sm.vertex_color_use_as_albedo = true
+			sm.roughness = 0.45
+			sm.metallic = 0.1
+			sm.emission_enabled = true
+			sm.emission = wall_emission
+			sm.emission_energy_multiplier = 0.45
+			sm.cull_mode = BaseMaterial3D.CULL_DISABLED
+			_wall_material = sm
+
+	# Re-assign material to meshes in case it changed
+	if _left_wall: _left_wall.material_override = _wall_material
+	if _right_wall: _right_wall.material_override = _wall_material
 
 	if not _floor_material:
 		_floor_material = StandardMaterial3D.new()
@@ -142,6 +166,9 @@ func _build_corridor() -> void:
 
 func _update_wall_collision(mesh_instance: MeshInstance3D, shape_node: CollisionShape3D) -> void:
 	if not shape_node:
+		return
+	if not enable_collision:
+		shape_node.shape = null
 		return
 	var mesh := mesh_instance.mesh
 	if mesh:
@@ -266,7 +293,7 @@ func _evaluate_color(displacement: float) -> Color:
 	return color
 
 func _make_signature() -> String:
-	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color)
+	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color, enable_collision, use_plush_shader)
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():

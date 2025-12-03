@@ -242,44 +242,20 @@ func evolve_hill_seeking():
 			vertices[i] += radial_expansion
 
 func update_mesh():
-	var array_mesh = ArrayMesh.new()
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_INDEX] = indices
+	# Add vertices
+	for v in vertices:
+		st.add_vertex(v)
 	
-	var normals = calculate_smooth_normals()
-	arrays[Mesh.ARRAY_NORMAL] = normals
+	# Add indices
+	for idx in indices:
+		st.add_index(idx)
 	
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	if array_mesh.get_surface_count() > 0:
-		mesh_instance.mesh = array_mesh
-
-func calculate_smooth_normals() -> PackedVector3Array:
-	var normals = PackedVector3Array()
-	normals.resize(vertices.size())
-	
-	for i in range(vertices.size()):
-		normals[i] = Vector3.ZERO
-	
-	for i in range(0, indices.size(), 3):
-		var v0 = indices[i]
-		var v1 = indices[i + 1]
-		var v2 = indices[i + 2]
-		
-		var edge1 = vertices[v1] - vertices[v0]
-		var edge2 = vertices[v2] - vertices[v0]
-		var face_normal = edge1.cross(edge2).normalized()
-		
-		normals[v0] += face_normal
-		normals[v1] += face_normal
-		normals[v2] += face_normal
-	
-	for i in range(vertices.size()):
-		normals[i] = normals[i].normalized()
-	
-	return normals
+	# Generate normals and commit
+	st.generate_normals()
+	mesh_instance.mesh = st.commit()
 
 func start_evolution():
 	if not is_evolving:

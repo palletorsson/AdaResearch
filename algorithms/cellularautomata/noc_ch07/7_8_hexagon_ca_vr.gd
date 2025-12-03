@@ -15,7 +15,7 @@ const HEX_DIRECTIONS := [
 var _sim_root: Node3D
 var _cells := {} # Dictionary Vector2 -> bool
 var _coords: Array[Vector2] = []
-var _mesh_root: Node3D
+var _multi_mesh: MultiMeshInstance3D
 var _timer: float = 0.0
 var _generation: int = 1
 var _status_label: Label3D
@@ -29,10 +29,11 @@ func _setup_environment() -> void:
 	_sim_root = Node3D.new()
 	add_child(_sim_root)
 
-
-
-	_mesh_root = Node3D.new()
-	_sim_root.add_child(_mesh_root)
+	_multi_mesh = MultiMeshInstance3D.new()
+	_sim_root.add_child(_multi_mesh)
+	
+	# We don't know exact count yet, but max is roughly (2*radius+1)^2
+	# We will configure multimesh in _initialize_grid
 
 	_status_label = Label3D.new()
 	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -60,8 +61,6 @@ func _setup_environment() -> void:
 	_update_status()
 
 func _initialize_grid() -> void:
-	for child in _mesh_root.get_children():
-		child.queue_free()
 	_cells.clear()
 	_coords.clear()
 
@@ -73,25 +72,41 @@ func _initialize_grid() -> void:
 			var alive := randf() < 0.35
 			_cells[coord] = alive
 			_coords.append(coord)
-			_create_hex_instance(coord, alive)
-
-	_generation = 1
-
-func _create_hex_instance(coord: Vector2, alive: bool) -> void:
-	var hex := MeshInstance3D.new()
+	
+	# Setup MultiMesh
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
 	var hex_mesh := CylinderMesh.new()
 	hex_mesh.radial_segments = 6
 	hex_mesh.top_radius = 0.065
 	hex_mesh.bottom_radius = 0.065
 	hex_mesh.height = 0.02
-	hex.mesh = hex_mesh
-	hex.position = _hex_to_world(coord)
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(1.0, 0.7, 0.95) if alive else Color(1.0, 0.7, 0.95, 0.18)
-	mat.emission_enabled = alive
-	mat.emission = Color(1.0, 0.6, 0.95) * 0.4 if alive else Color(0, 0, 0)
-	hex.material_override = mat
-	_mesh_root.add_child(hex)
+	mm.mesh = hex_mesh
+	mm.instance_count = _coords.size()
+	_multi_mesh.multimesh = mm
+	
+	# Initialize transforms
+	for i in range(_coords.size()):
+		var coord = _coords[i]
+		var pos = _hex_to_world(coord)
+		# Rotate cylinder to face Z (if needed, but here they seem flat on Y?)
+		# Original code: default cylinder is upright (Y axis).
+		# Original position logic: x, y, 0. It seems they are arranged in XY plane?
+		# Wait, original code:
+		# hex.position = _hex_to_world(coord) -> Vector3(x, y, 0)
+		# Cylinder is Y-up. So the hexagons are standing up like wheels?
+		# Actually, CylinderMesh default is Y-axis aligned.
+		# If placed at (x,y,0), they look like circles/hexagons viewed from front if camera is looking at Z.
+		# But usually hex grids are flat on ground (XZ).
+		# Let's check camera. It's VR, so probably looking forward.
+		# If I want them to face the user (Z axis), I should rotate them 90 deg around X.
+		
+		var t = Transform3D(Basis().rotated(Vector3(1,0,0), deg_to_rad(90)), pos)
+		mm.set_instance_transform(i, t)
+	
+	_generation = 1
+	_update_mesh_colors()
 
 func _hex_to_world(coord: Vector2) -> Vector3:
 	var x := (sqrt(3.0) * coord.x + sqrt(3.0) / 2.0 * coord.y) * 0.085
@@ -134,15 +149,16 @@ func _count_neighbors(coord: Vector2) -> int:
 	return total
 
 func _update_mesh_colors() -> void:
+	var mm = _multi_mesh.multimesh
+	var active_color = Color(1.0, 0.7, 0.95)
+	var inactive_color = Color(1.0, 0.7, 0.95, 0.18)
+	
 	for i in range(_coords.size()):
 		var alive = _cells[_coords[i]]
-		var hex := _mesh_root.get_child(i)
-		if hex is MeshInstance3D:
-			var mat := StandardMaterial3D.new()
-			mat.albedo_color = Color(1.0, 0.7, 0.95) if alive else Color(1.0, 0.7, 0.95, 0.2)
-			mat.emission_enabled = alive
-			mat.emission = Color(1.0, 0.6, 0.95) * 0.4 if alive else Color(0, 0, 0)
-			(hex as MeshInstance3D).material_override = mat
+		if alive:
+			mm.set_instance_color(i, active_color)
+		else:
+			mm.set_instance_color(i, inactive_color)
 
 func _update_status() -> void:
 	_status_label.text = "Hex CA | Gen %d | Flip %.2f" % [_generation, random_flip]

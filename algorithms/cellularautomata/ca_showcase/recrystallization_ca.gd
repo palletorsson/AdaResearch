@@ -8,6 +8,15 @@ const NUCLEATION_SITES = 5
 var nucleation_sites: Array = []
 
 func initialize_grid():
+	# Configure MultiMesh
+	var step = 4
+	var cube_size = CUBE_SIZE * step
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	
+	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
+	configure_multimesh(mesh, max_instances)
+	
 	grid = create_3d_grid()
 	
 	# Add random nucleation sites
@@ -36,35 +45,34 @@ func grow_crystal_at_site(site: Vector3i):
 			grid[neighbor.x][neighbor.y][neighbor.z] = 1  # Crystal state
 
 func update_visualization():
-	var array_mesh = ArrayMesh.new()
-	
-	# Create mesh for occupied cells
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	var vertex_index = 0
-	
-	# Sample subset for performance (every 4th cell)
+	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
+		return
+		
+	var mm = multi_mesh_instance.multimesh
+	var idx = 0
 	var step = 4
+	
+	# Reset remaining instances
+	for i in range(mm.instance_count):
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
 				if grid[x][y][z] == 1:  # Crystal
-					create_cube_at_position(vertices, normals, indices, vertex_index, x, y, z)
-					vertex_index += 8
-	
-	if vertices.size() > 0:
-		var arrays = []
-		arrays.resize(Mesh.ARRAY_MAX)
-		arrays[Mesh.ARRAY_VERTEX] = vertices
-		arrays[Mesh.ARRAY_NORMAL] = normals
-		arrays[Mesh.ARRAY_INDEX] = indices
-		
-		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		array_mesh.surface_set_material(0, material_occupied)
-	
-	mesh_instance.mesh = array_mesh
+					var world_pos = Vector3(
+						(x - GRID_SIZE/2) * CUBE_SIZE,
+						(y - GRID_SIZE/2) * CUBE_SIZE,
+						(z - GRID_SIZE/2) * CUBE_SIZE
+					)
+					
+					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					
+					# Color logic: Randomize slightly for crystal effect
+					var col = Color.CYAN.lightened(randf() * 0.2)
+					mm.set_instance_color(idx, col)
+					
+					idx += 1
 
 func get_crystal_count() -> int:
 	var count = 0

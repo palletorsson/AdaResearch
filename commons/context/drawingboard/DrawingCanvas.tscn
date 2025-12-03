@@ -1,17 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cegs7vwkkgmd1"]
+[gd_scene load_steps=5 format=3 uid="uid://dcem3sru71oql"]
 
 [ext_resource type="Script" uid="uid://fcj7gexxscxa" path="res://commons/context/drawingboard/paper_draw_surface.gd" id="1_script"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_canvas"]
-size = Vector3(2.0, 0.1, 2.0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_canvas"]
-size = Vector2(2, 2)
+size = Vector3(2, 0.1, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_canvas"]
 resource_local_to_scene = true
 transparency = 1
-albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_canvas"]
 
 [node name="DrawingCanvas" type="Node3D"]
 
@@ -27,6 +25,8 @@ mesh = SubResource("PlaneMesh_canvas")
 script = ExtResource("1_script")
 texture_size = Vector2i(1024, 1024)
 default_brush_size = 5
+default_snap_grid_size = 1024
+wet_paint_flow = true
 
 [node name="Label3D" type="Label3D" parent="CanvasBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

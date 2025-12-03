@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8qw4yx5bp2ka"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/parametric/seashell.gd" id="2_seashell"]
+
+[node name="Seashell" instance=ExtResource("1_pickable")]
+script = ExtResource("2_seashell")

@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://ccdgu3u74suh8"]
 
-[ext_resource type="Script" path="res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://btnpelsw3hl0g" path="res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.gd" id="1_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5th6p"]
+size = Vector3(2.095, 1, 0.375)
 
 [node name="ElementaryCAVR" type="Node3D"]
 script = ExtResource("1_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.2718)
+mesh = SubResource("BoxMesh_5th6p")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.4248333)

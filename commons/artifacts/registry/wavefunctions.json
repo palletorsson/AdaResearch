@@ -270,6 +270,13 @@
 			"description": "DoublePendulum",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn"
 		},
+		"math_objects": {
+			"name": "math_objects",
+			"lookup_name": "math_objects",
+			"description": "math_objects",
+			"scene": "res://commons/primitives/parametric/math_objects.tscn"
+		},
+		
 		"CircleSpiral": {
 			"name": "CircleSpiral",
 			"lookup_name": "CircleSpiral",
@@ -300,6 +307,12 @@
 			"description": "SystemsMusicTest",
 			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn"
 		},
+		"ruth_asawa_sculpture": {
+			"name": "ruth_asawa_sculpture",
+			"lookup_name": "ruth_asawa_sculpture",
+			"description": "ruth_asawa_sculpture",
+			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn"
+		},		
 		
 		"wave_interference": {
 			"name": "Wave Interference",

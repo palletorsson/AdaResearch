@@ -32,7 +32,6 @@ extends Node3D
 # Visualization Parameters
 @export var time_speed: float = 1.0 # Speed of Z-axis movement
 @export var max_trail_length: int = 1000
-
 # State variables
 var theta1: float = 0.0
 var theta2: float = 0.0
@@ -53,6 +52,7 @@ func _ready():
 	joint1.position.y = -l1
 	
 	rod2.position.y = -l2 / 2.0
+	rod2.mesh.height = l2
 	rod2.mesh.height = l2
 	bob2.position.y = -l2
 
@@ -140,6 +140,7 @@ func _process(delta):
 		trail_points.pop_back()
 	
 	_draw_trail()
+	_update_drawing()
 
 func _draw_trail():
 	trail_mesh.clear_surfaces()
@@ -149,3 +150,32 @@ func _draw_trail():
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+# --- DRAWING ON CANVAS ---
+@onready var raycast: RayCast3D = $Pivot/Joint1/Bob2/RayCast3D
+var hue_timer: float = 0.0
+@export var color_cycle_speed: float = 0.05
+
+func _update_drawing():
+	if not raycast: return
+	
+	if raycast.is_colliding():
+		var hit_point = raycast.get_collision_point()
+		var collider = raycast.get_collider()
+		
+		# Cycle color
+		hue_timer += get_process_delta_time() * color_cycle_speed
+		if hue_timer > 1.0: hue_timer -= 1.0
+		var current_color = Color.from_hsv(hue_timer, 1.0, 1.0)
+		
+		# Try to draw
+		var drawable = _find_drawable(collider)
+		if drawable:
+			drawable.draw_at_world_position(hit_point, current_color)
+
+func _find_drawable(node: Node) -> Node:
+	if not node: return null
+	if node.has_method("draw_at_world_position"): return node
+	for child in node.get_children():
+		if child.has_method("draw_at_world_position"): return child
+	return null

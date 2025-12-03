@@ -14,12 +14,17 @@ var rule_change_interval = 0.25
 var turn_counter = 0
 var current_row_to_change = 0
 
+var cell_nodes = []
+
 func _ready():
 	# Initialize the grid
 	current_gen.resize(grid_width)
+	cell_nodes.resize(grid_width)
 	for i in range(grid_width):
 		current_gen[i] = []
 		current_gen[i].resize(grid_height)
+		cell_nodes[i] = []
+		cell_nodes[i].resize(grid_height)
 		for j in range(grid_height):
 			current_gen[i][j] = 0
 	
@@ -34,6 +39,7 @@ func _ready():
 			cell.position = Vector3(i * cell_size, 0, j * cell_size)  # Z forward
 			cell.visible = false
 			add_child(cell)
+			cell_nodes[i][j] = cell
 	
 	# Set initial state (random)
 	for i in range(grid_width):
@@ -66,7 +72,7 @@ func update_bridge():
 func animate_cells(delta):
 	for i in range(grid_width):
 		for j in range(grid_height):
-			var cell = get_node_or_null("cell_" + str(i) + "_" + str(j))
+			var cell = cell_nodes[i][j]
 			if not cell:
 				continue
 			var static_body = cell.get_node_or_null("CubeBaseStaticBody3D")

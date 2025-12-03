@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5hhepbefal7r"]
+[gd_scene load_steps=7 format=3 uid="uid://c5hhepbefal7r"]
 
 [ext_resource type="Script" uid="uid://brog8xxt4yiu1" path="res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dcem3sru71oql" path="res://commons/context/drawingboard/DrawingCanvas.tscn" id="2"]
 
 [sub_resource type="CylinderMesh" id="1"]
 top_radius = 0.03
@@ -41,6 +42,13 @@ mesh = SubResource("1")
 [node name="Bob2" type="MeshInstance3D" parent="Pivot/Joint1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("5")
+
+[node name="RayCast3D" type="RayCast3D" parent="Pivot/Joint1/Bob2"]
+target_position = Vector3(0, 0, -10)
+collide_with_areas = true
+
+[node name="DrawingCanvas" parent="." instance=ExtResource("2")]
+transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, -2)
 
 [node name="Trail" type="MeshInstance3D" parent="."]
 
