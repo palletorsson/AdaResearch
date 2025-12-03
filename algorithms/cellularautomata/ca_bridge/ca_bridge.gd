@@ -21,7 +21,12 @@ var timer: float = 0.0
 var is_generating: bool = false
 var generated_cubes: Array = []
 
+# Collision
+var static_body: StaticBody3D
+var box_shape: BoxShape3D
+
 func _ready():
+	_setup_collision()
 	if auto_generate:
 		start_generation()
 
@@ -31,6 +36,19 @@ func _process(delta):
 		if timer >= generation_speed:
 			timer = 0.0
 			step()
+
+func _setup_collision():
+	# Create a single StaticBody for the bridge to hold all shapes
+	if not static_body:
+		static_body = StaticBody3D.new()
+		static_body.name = "BridgeCollision"
+		add_child(static_body)
+	
+	# Shared shape resource
+	if not box_shape:
+		box_shape = BoxShape3D.new()
+		# Match the visual scale (0.5)
+		box_shape.size = Vector3(cell_size, cell_size, cell_size)
 
 func start_generation():
 	_clear_bridge()
@@ -46,6 +64,12 @@ func _clear_bridge():
 		if is_instance_valid(cube):
 			cube.queue_free()
 	generated_cubes.clear()
+	
+	# Clear collision shapes
+	if static_body:
+		for child in static_body.get_children():
+			child.queue_free()
+			
 	current_z = 0
 	is_generating = false
 
@@ -76,6 +100,7 @@ func _spawn_row(row: Array, z_index: int):
 	
 	for i in range(width):
 		if row[i] == 1:
+			# Visual
 			var cube = CUBE_SCENE.instantiate()
 			add_child(cube)
 			generated_cubes.append(cube)
@@ -83,10 +108,18 @@ func _spawn_row(row: Array, z_index: int):
 			# Position
 			var x_pos = (i * cell_size) - offset_x
 			var z_pos = z_index * cell_size
-			cube.position = Vector3(x_pos, 0, z_pos)
+			var pos = Vector3(x_pos, 0, z_pos)
 			
-			# Scale (Half size)
+			cube.position = pos
+			# Scale (Half size) - Visual only
 			cube.scale = Vector3(0.5, 0.5, 0.5)
+			
+			# Collision
+			if static_body:
+				var col_shape = CollisionShape3D.new()
+				col_shape.shape = box_shape
+				static_body.add_child(col_shape)
+				col_shape.position = pos
 
 func _calculate_next_row(row: Array) -> Array:
 	var next_row = []

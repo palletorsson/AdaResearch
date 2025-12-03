@@ -16,7 +16,7 @@ size = Vector2i(400, 400)
 render_target_update_mode = 3
 
 [node name="MirroredCellularAutomata" parent="SubViewport" instance=ExtResource("1_l6bsy")]
-grid_size = 40
+grid_size = 100
 cell_size = 16
 update_interval = 5.0
 auto_evolve = true

@@ -32,6 +32,9 @@ enum CAType {
 	SELF_ORGANIZATION     # Emergence studies
 }
 
+const DendriteGrowthCA = preload("res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd")
+const DiseaseSpreadCA = preload("res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd")
+
 func _ready():
  
 	initialize_ca_showcases()
@@ -95,7 +98,10 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 		CAType.RECRYSTALLIZATION:
 			create_recrystallization_ca(showcase)
 		CAType.DENDRITE_GROWTH:
-			create_dendrite_growth_ca(showcase)
+			# Use the refactored class
+			var ca = DendriteGrowthCA.new()
+			showcase.add_child(ca)
+			showcase.set_meta("type", "dendrite_refactored")
 		CAType.PERCOLATION:
 			create_percolation_ca(showcase)
 		CAType.CRACK_PROPAGATION:
@@ -109,7 +115,10 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 		CAType.ECOSYSTEM:
 			create_ecosystem_ca(showcase)
 		CAType.DISEASE_SPREAD:
-			create_disease_spread_ca(showcase)
+			# Use the refactored class
+			var ca = DiseaseSpreadCA.new()
+			showcase.add_child(ca)
+			showcase.set_meta("type", "disease_refactored")
 		CAType.BLOOD_FLOW:
 			create_blood_flow_ca(showcase)
 		CAType.DROPLET_BEHAVIOR:
@@ -155,36 +164,7 @@ func create_recrystallization_ca(parent: Node3D):
 	parent.set_meta("nucleation_sites", nucleation_sites)
 	parent.set_meta("growth_rate", 0.02)
 
-func create_dendrite_growth_ca(parent: Node3D):
-	# Crystal dendrite formation
-	var grid = create_3d_grid(parent, "Dendrite Growth")
-	var growth_centers = []
-	
-	# Central growth point
-	var center = Vector3i(GRID_SIZE/2, GRID_SIZE/2, GRID_SIZE/2)
-	growth_centers.append(center)
-	
-	# Create visual center point
-	var center_marker = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.15
-	sphere_mesh.height = 0.3  # Fix elongated sphere
-	center_marker.mesh = sphere_mesh
-	var center_material = StandardMaterial3D.new()
-	center_material.albedo_color = Color(0.3, 0.7, 1.0)
-	center_material.emission_enabled = true
-	center_material.emission = Color(0.3, 0.7, 1.0) * 0.9
-	center_material.metallic = 0.4
-	center_material.roughness = 0.1
-	center_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	center_marker.material_override = center_material
-	parent.add_child(center_marker)
-	
-	parent.set_meta("type", "dendrite")
-	parent.set_meta("grid", grid)
-	parent.set_meta("growth_centers", growth_centers)
-	parent.set_meta("growth_probability", 0.3)
-	parent.set_meta("branching_factor", 0.15)
+
 
 func create_percolation_ca(parent: Node3D):
 	# Fluid percolation through porous medium
@@ -313,34 +293,7 @@ func create_ecosystem_ca(parent: Node3D):
 	parent.set_meta("predator_death_rate", 0.05)
 	parent.set_meta("hunt_success_rate", 0.3)
 
-func create_disease_spread_ca(parent: Node3D):
-	# Epidemic spread model (SIR)
-	var population_grid = create_3d_grid(parent, "Disease Spread")
-	
-	# Create population visualization
-	for i in range(30):
-		var person = MeshInstance3D.new()
-		var box_mesh = BoxMesh.new()
-		box_mesh.size = Vector3(0.05, 0.1, 0.05)
-		person.mesh = box_mesh
-		person.position = Vector3(
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5)
-		)
-		var person_material = StandardMaterial3D.new()
-		if i < 5:  # Initially infected
-			person_material.albedo_color = Color(1.0, 0.2, 0.2)
-		else:  # Susceptible
-			person_material.albedo_color = Color(0.2, 0.8, 0.2)
-		person.material_override = person_material
-		parent.add_child(person)
-	
-	parent.set_meta("type", "disease")
-	parent.set_meta("grid", population_grid)
-	parent.set_meta("infection_rate", 0.2)
-	parent.set_meta("recovery_rate", 0.1)
-	parent.set_meta("initial_infected", 5)
+
 
 func create_blood_flow_ca(parent: Node3D):
 	# Lattice Boltzmann blood flow
@@ -613,8 +566,8 @@ func update_current_showcase(delta):
 	match ca_type:
 		"recrystallization":
 			update_recrystallization(showcase, delta)
-		"dendrite":
-			update_dendrite_growth(showcase, delta)
+		"dendrite_refactored":
+			pass # Handled by the class itself
 		"percolation":
 			update_percolation(showcase, delta)
 		"crack":
@@ -627,8 +580,8 @@ func update_current_showcase(delta):
 			update_flood_propagation(showcase, delta)
 		"ecosystem":
 			update_ecosystem(showcase, delta)
-		"disease":
-			update_disease_spread(showcase, delta)
+		"disease_refactored":
+			pass # Handled by the class itself
 		"blood_flow":
 			update_blood_flow(showcase, delta)
 		"droplet":
@@ -642,31 +595,31 @@ func update_all_showcases(delta):
 		var showcase = showcases[i]
 		var ca_type = showcase.get_meta("type")
 		
-		match ca_type:
-			"recrystallization":
-				update_recrystallization(showcase, delta)
-			"dendrite":
-				update_dendrite_growth(showcase, delta)
-			"percolation":
-				update_percolation(showcase, delta)
-			"crack":
-				update_crack_propagation(showcase, delta)
-			"avalanche":
-				update_avalanche(showcase, delta)
-			"traffic":
-				update_traffic_flow(showcase, delta)
-			"flood":
-				update_flood_propagation(showcase, delta)
-			"ecosystem":
-				update_ecosystem(showcase, delta)
-			"disease":
-				update_disease_spread(showcase, delta)
-			"blood_flow":
-				update_blood_flow(showcase, delta)
-			"droplet":
-				update_droplet_behavior(showcase, delta)
-			"self_org":
-				update_self_organization(showcase, delta)
+	match ca_type:
+		"recrystallization":
+			update_recrystallization(showcase, delta)
+		"dendrite_refactored":
+			pass # Handled by the class itself
+		"percolation":
+			update_percolation(showcase, delta)
+		"crack":
+			update_crack_propagation(showcase, delta)
+		"avalanche":
+			update_avalanche(showcase, delta)
+		"traffic":
+			update_traffic_flow(showcase, delta)
+		"flood":
+			update_flood_propagation(showcase, delta)
+		"ecosystem":
+			update_ecosystem(showcase, delta)
+		"disease_refactored":
+			pass # Handled by the class itself
+		"blood_flow":
+			update_blood_flow(showcase, delta)
+		"droplet":
+			update_droplet_behavior(showcase, delta)
+		"self_org":
+			update_self_organization(showcase, delta)
 
 func update_recrystallization(showcase: Node3D, delta):
 	"""Growing crystals - Orange spheres expanding from centers"""
@@ -695,30 +648,7 @@ func update_recrystallization(showcase: Node3D, delta):
 					var color = Color(1.0, 0.6 + randf() * 0.4, 0.0)
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_dendrite_growth(showcase: Node3D, delta):
-	"""Branching crystals - Blue/cyan tendrils"""
-	if not showcase.has_meta("active_cells"):
-		return
-	var active_cells = showcase.get_meta("active_cells")
-	
-	# Grow dendrites from existing cells
-	if active_cells.size() < 800:
-		for i in range(min(5, active_cells.size())):  # Multiple growth points
-			var cell = active_cells[randi() % max(1, active_cells.size())]
-			if randf() < 3.0 * delta:
-				# Prefer growing in one direction (tendril-like)
-				var direction = Vector3i(
-					randi_range(-1, 1),
-					randi_range(-2, 2),  # Prefer vertical
-					randi_range(-1, 1)
-				)
-				var new_pos = cell + direction
-				
-				if new_pos.x >= 0 and new_pos.x < GRID_SIZE and \
-				   new_pos.y >= 0 and new_pos.y < GRID_SIZE and \
-				   new_pos.z >= 0 and new_pos.z < GRID_SIZE:
-					var color = Color(0.2, 0.7 + randf() * 0.3, 1.0)  # Cyan/blue
-					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
+
 
 func update_percolation(showcase: Node3D, delta):
 	"""Water flowing down - Green/aqua droplets"""
@@ -811,20 +741,7 @@ func update_ecosystem(showcase: Node3D, delta):
 			var color = Color(0.2 + randf() * 0.3, 0.8, 0.2)  # Green
 			activate_cell(showcase, x, y, z, color)
 
-func update_disease_spread(showcase: Node3D, delta):
-	"""Disease - Purple/magenta infection spreading"""
-	if not showcase.has_meta("active_cells"):
-		return
-	var active_cells = showcase.get_meta("active_cells")
-	if active_cells.size() < 800:
-		for i in range(min(6, active_cells.size())):
-			var cell = active_cells[randi() % max(1, active_cells.size())]
-			if randf() < 4.0 * delta:
-				var direction = Vector3i(randi_range(-1, 1), randi_range(-1, 1), randi_range(-1, 1))
-				var new_pos = cell + direction
-				if new_pos.x >= 0 and new_pos.x < GRID_SIZE and new_pos.y >= 0 and new_pos.y < GRID_SIZE and new_pos.z >= 0 and new_pos.z < GRID_SIZE:
-					var color = Color(0.9, 0.1, 0.9 + randf() * 0.1)  # Magenta
-					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
+
 
 func update_blood_flow(showcase: Node3D, delta):
 	"""Blood flow - Dark red pulsing"""
@@ -874,8 +791,20 @@ func cycle_to_next_showcase():
 func highlight_current_showcase():
 	# Hide all showcases except the current one
 	for i in range(showcases.size()):
-		showcases[i].visible = (i == current_showcase)
-		info_panels[i].visible = (i == current_showcase)
+		var showcase = showcases[i]
+		var is_active = (i == current_showcase)
+		showcase.visible = is_active
+		info_panels[i].visible = is_active
+		
+		# Handle BaseCA instances (start/stop simulation)
+		for child in showcase.get_children():
+			if child.has_method("start_simulation"):
+				if is_active:
+					if not child.is_running:
+						child.start_simulation()
+				else:
+					if child.is_running:
+						child.stop_simulation()
 
 func get_ca_name(index: int) -> String:
 	var names = [
@@ -893,18 +822,7 @@ func grow_crystal_at_site(grid: Array, site: Vector3i):
 		if is_valid_3d_position(neighbor) and randf() < 0.1:
 			grid[neighbor.x][neighbor.y][neighbor.z] = 1  # Crystal state
 
-func add_dendrite_branch(grid: Array, center: Vector3i):
-	# Implement dendrite branching - probabilistic growth
-	var growth_directions = [
-		Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
-		Vector3i(0, 1, 0), Vector3i(0, -1, 0),
-		Vector3i(0, 0, 1), Vector3i(0, 0, -1)
-	]
-	
-	for direction in growth_directions:
-		var new_pos = center + direction
-		if is_valid_3d_position(new_pos) and randf() < 0.15:
-			grid[new_pos.x][new_pos.y][new_pos.z] = 2  # Dendrite state
+
 
 func percolate_fluid(grid: Array, rate: float):
 	# Implement percolation logic - fluid flow through connected sites
@@ -989,30 +907,7 @@ func update_population_dynamics(grid: Array, birth_rate: float, death_rate: floa
 						if randf() < death_rate:
 							grid[x][y][z] = 0  # Die
 
-func spread_disease(grid: Array, infection_rate: float, recovery_rate: float):
-	# Implement SIR epidemic model
-	var new_grid = duplicate_3d_grid(grid)
-	
-	for x in range(GRID_SIZE):
-		for y in range(GRID_SIZE):
-			for z in range(GRID_SIZE):
-				var cell = grid[x][y][z]
-				match cell:
-					0:  # Susceptible
-						var infected_neighbors = count_infected_neighbors(grid, Vector3i(x, y, z))
-						if infected_neighbors > 0 and randf() < infection_rate:
-							new_grid[x][y][z] = 1  # Become infected
-					1:  # Infected
-						if randf() < recovery_rate:
-							new_grid[x][y][z] = 2  # Recover
-					2:  # Recovered
-						pass  # Immune
-	
-	# Update grid
-	for x in range(GRID_SIZE):
-		for y in range(GRID_SIZE):
-			for z in range(GRID_SIZE):
-				grid[x][y][z] = new_grid[x][y][z]
+
 
 func simulate_blood_flow(vessels: Array, viscosity: float):
 	# Implement lattice Boltzmann flow simulation
@@ -1081,13 +976,7 @@ func duplicate_3d_grid(grid: Array) -> Array:
 	
 	return new_grid
 
-func count_infected_neighbors(grid: Array, pos: Vector3i) -> int:
-	var count = 0
-	var neighbors = get_3d_neighbors(pos)
-	for neighbor in neighbors:
-		if is_valid_3d_position(neighbor) and grid[neighbor.x][neighbor.y][neighbor.z] == 1:
-			count += 1
-	return count
+
 
 # VR Interaction handlers
 func on_vr_controller_input(controller_id: int, input_type: String):

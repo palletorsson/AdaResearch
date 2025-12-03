@@ -18,15 +18,18 @@ var generation_timer = 0.0
 var grid = {}  # Dictionary to store 3D grid: Vector3i -> 1/0
 var is_growing = false
 
-@onready var multi_mesh_instance: MultiMeshInstance3D = $MultiMeshInstance3D
+var multi_mesh_instance: MultiMeshInstance3D
 
 func _ready():
-	if not multi_mesh_instance:
+	# Try to get existing MultiMeshInstance3D node, or create one
+	if has_node("MultiMeshInstance3D"):
+		multi_mesh_instance = get_node("MultiMeshInstance3D")
+	else:
 		_setup_multimesh()
-	
+
 	if not gradient:
 		_setup_default_gradient()
-		
+
 	if auto_play:
 		start_growth()
 
@@ -52,11 +55,18 @@ func _setup_multimesh():
 
 func _setup_default_gradient():
 	gradient = Gradient.new()
-	gradient.remove_point(0)
-	gradient.remove_point(0)
-	gradient.add_point(0.0, Color("5d4037")) # Brown (Trunk)
-	gradient.add_point(0.4, Color("388e3c")) # Green (Leaves)
-	gradient.add_point(1.0, Color("81c784")) # Light Green (Top)
+	# Default gradient has 2 points at 0.0 and 1.0
+	
+	# Set first point (Trunk)
+	gradient.set_offset(0, 0.0)
+	gradient.set_color(0, Color("5d4037"))
+	
+	# Set last point (Top)
+	gradient.set_offset(1, 1.0)
+	gradient.set_color(1, Color("81c784"))
+	
+	# Add middle point (Leaves)
+	gradient.add_point(0.4, Color("388e3c"))
 
 func start_growth():
 	current_level = 0

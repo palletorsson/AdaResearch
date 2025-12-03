@@ -42,6 +42,12 @@
 			"description": "Simulation of crystal dendrite growth.",
 			"scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn"
 		},
+		"ca_growth_network": {
+			"name": "ca_growth_network",
+			"lookup_name": "ca_growth_network",
+			"description": "ca_growth_network.",
+			"scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn"
+		},
 		"disease_spread_ca": {
 			"name": "Disease Spread CA",
 			"lookup_name": "disease_spread_ca",
@@ -95,6 +101,12 @@
 			"lookup_name": "hexagon_ca_vr",
 			"description": "Cellular Automata on a hexagonal grid.",
 			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn"
+		},
+		"hexagon_cave_vr": {
+			"name": "Hexagon Cave VR",
+			"lookup_name": "hexagon_cave_vr",
+			"description": "Hexagonal CA generating a cave-like structure with varying radius.",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.tscn"
 		},
 		"cellular_automata_3d": {
 			"name": "Cellular Automata 3D",
@@ -185,6 +197,42 @@
 			"lookup_name": "cellular_automata_grabable",
 			"description": "Grabable Cellular Automata.",
 			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn"
+		},
+		"mirrored_cellular_automata": {
+			"name": "Mirrored Cellular Automata",
+			"lookup_name": "mirrored_cellular_automata",
+			"description": "Symmetric cellular automata pattern generator.",
+			"scene": "res://algorithms/proceduralgeneration/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn"
+		},
+		"decaying_bridge": {
+			"name": "Decaying Bridge",
+			"lookup_name": "decaying_bridge",
+			"description": "A bridge that decays when stepped on.",
+			"scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn"
+		},
+		"volumetric_fog_ca": {
+			"name": "Volumetric Fog CA",
+			"lookup_name": "volumetric_fog_ca",
+			"description": "3D Cellular Automata driving a volumetric fog.",
+			"scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn"
+		},
+		"line_network_ca": {
+			"name": "Line Network CA",
+			"lookup_name": "line_network_ca",
+			"description": "Base class visualization for line-based cellular automata.",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn"
+		},
+		"pulsing_ca": {
+			"name": "Pulsing CA",
+			"lookup_name": "pulsing_ca",
+			"description": "Base class visualization for pulsing sphere cellular automata.",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn"
+		},
+		"sierpinski_pyramid": {
+			"name": "Sierpinski Pyramid",
+			"lookup_name": "sierpinski_pyramid",
+			"description": "Recursive Sierpinski Pyramid construction using cubes.",
+			"scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn"
 		}
 	}
 }

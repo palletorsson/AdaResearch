@@ -8,3 +8,8 @@
 auto_play = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.057462625)
+light_color = Color(0.7322011, 0.00041248053, 0.732661, 1)
+light_energy = 0.5

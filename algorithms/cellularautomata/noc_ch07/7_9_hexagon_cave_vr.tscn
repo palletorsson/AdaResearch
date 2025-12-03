@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://csrbpomoh3su1"]
+
+[ext_resource type="Script" uid="uid://bkxv3r7povyyt" path="res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.gd" id="1_script"]
+
+[node name="HexagonCAVR" type="Node3D"]
+script = ExtResource("1_script")
+hex_size = 0.5
+max_generations = 10
+layer_height = 0.3
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9324247, 0.36136422, 0, -0.36136422, 0.9324247, 0, 2.7248042, 4.9158034)

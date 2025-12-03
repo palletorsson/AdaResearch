@@ -1,27 +1,19 @@
 # DiseaseSpreadCA.gd
 # Epidemic spread model (SIR)
-extends BaseCA
+extends PulsingCA
 
 const INFECTION_RATE = 0.2
 const RECOVERY_RATE = 0.1
 const INITIAL_INFECTED = 5
 
-var white_material: StandardMaterial3D
-
-func _ready():
-	# Create and configure the single white material
-	white_material = StandardMaterial3D.new()
-	white_material.albedo_color = Color.WHITE
-
 func initialize_grid():
-	# Configure MultiMesh
-	var step = 4
-	var cube_size = CUBE_SIZE * VISUALIZATION_STEP
-	var mesh = BoxMesh.new()
-	mesh.size = Vector3(cube_size, cube_size, cube_size)
+	# Configure PulsingCA settings
+	pulse_speed = 3.0
+	pulse_amount = 0.2
+	base_scale = 1.2
 	
-	var max_instances = (GRID_SIZE / step) * (GRID_SIZE / step) * (GRID_SIZE / step)
-	configure_multimesh(mesh, max_instances)
+	# Base class sets up the sphere mesh
+	super.initialize_grid()
 	
 	grid = create_3d_grid()
 	
@@ -79,24 +71,24 @@ func update_visualization():
 	var mm = multi_mesh_instance.multimesh
 	var idx = 0
 	var step = 4
-	var cube_size = CUBE_SIZE * VISUALIZATION_STEP
+	var time = Time.get_ticks_msec() / 1000.0
 	
 	# Reset remaining instances
-	for i in range(mm.instance_count):
-		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
+	mm.visible_instance_count = 0
 	
 	for x in range(0, GRID_SIZE, step):
 		for y in range(0, GRID_SIZE, step):
 			for z in range(0, GRID_SIZE, step):
 				var state = grid[x][y][z]
 				if state == 1 or state == 2:  # Infected or Recovered
-					var world_pos = Vector3(
-						(x - GRID_SIZE/2) * CUBE_SIZE,
-						(y - GRID_SIZE/2) * CUBE_SIZE,
-						(z - GRID_SIZE/2) * CUBE_SIZE
-					)
+					var pos = _grid_to_world(Vector3i(x, y, z))
 					
-					mm.set_instance_transform(idx, Transform3D(Basis(), world_pos))
+					# Pulse effect
+					var pulse = 1.0 + sin(time * pulse_speed + x * 0.1 + y * 0.1) * pulse_amount
+					var scale = Vector3.ONE * pulse * base_scale
+					
+					var t = Transform3D(Basis().scaled(scale), pos)
+					mm.set_instance_transform(idx, t)
 					
 					# Color logic
 					if state == 1:
@@ -105,8 +97,8 @@ func update_visualization():
 						mm.set_instance_color(idx, Color.GREEN) # Recovered
 						
 					idx += 1
-
- 
+	
+	mm.visible_instance_count = idx
 
 func get_disease_counts() -> Dictionary:
 	var susceptible = 0

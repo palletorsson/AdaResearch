@@ -1,4 +1,4 @@
-class_name Cell
+class_name ChairCell
 extends RefCounted
 
 enum CellType { EMPTY, STRUCTURE, FRONT_LEFT, FRONT_RIGHT, BACK_LEFT, BACK_RIGHT }

@@ -46,7 +46,12 @@ func setup_ui():
 
 func reset_simulation():
 	ca_grid.reset()
-	ca_grid.seed_chair_base()
+	
+	if strategy_type == CAStrategy.StrategyType.DOWNWARD_COLUMNS:
+		ca_grid.seed_floating_platform()
+	else:
+		ca_grid.seed_chair_base()
+		
 	current_strategy = CAStrategy.new(ca_grid, strategy_type)
 	is_playing = false
 	update_ui()
@@ -77,7 +82,8 @@ func update_ui():
 		"Simple Rule Switching",
 		"Cell Memory Based",
 		"Gradient/Chemical",
-		"Pure CA"
+		"Pure CA",
+		"Downward Columns"
 	]
 	strategy_label.text = "Strategy: " + strategy_names[strategy_type]
 
@@ -137,7 +143,7 @@ func _on_play_pressed():
 	btn_play.text = "Pause" if is_playing else "Play"
 
 func _on_strategy_pressed():
-	strategy_type = (strategy_type + 1) % 4
+	strategy_type = (strategy_type + 1) % 5
 	reset_simulation()
 
 func _on_speed_changed(value: float):

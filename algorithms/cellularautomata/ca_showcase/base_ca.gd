@@ -82,6 +82,7 @@ func stop_simulation():
 func _process(delta):
 	if is_running:
 		update_simulation(delta)
+		update_visualization()
 		iteration_count += 1
 
 func update_simulation(delta):

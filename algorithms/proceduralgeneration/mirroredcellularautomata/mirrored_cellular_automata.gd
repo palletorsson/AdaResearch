@@ -277,11 +277,11 @@ func update_render_texture():
 						img.set_pixel(x * cell_size + px, y * cell_size + py, Color(0, 0, 0, 1))
 	
 	# Draw grid lines
-	for y in range(grid_size + 1):
+	for y in range(grid_size):
 		for x in range(grid_size * cell_size):
 			img.set_pixel(x, y * cell_size, Color(0.7, 0.7, 0.7, 1))
 	
-	for x in range(grid_size + 1):
+	for x in range(grid_size):
 		for y in range(grid_size * cell_size):
 			img.set_pixel(x * cell_size, y, Color(0.7, 0.7, 0.7, 1))
 	

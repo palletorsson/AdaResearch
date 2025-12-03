@@ -14,11 +14,13 @@ extends Node3D
 @export_range(0.0, 1.0) var initial_density: float = 0.1
 @export var auto_generate: bool = true
 @export var generation_speed: float = 0.05
+@export var continuous_mode: bool = false
 
 @export_category("Rendering")
-@export_category("Rendering")
-@export var gradient: Gradient
 @export var use_gradient: bool = true
+@export var color_start: Color = Color(0.1, 0.3, 0.8, 1)
+@export var color_end: Color = Color(0.8, 0.2, 0.8, 1)
+@export var gradient: Gradient
 
 var current_generation: int = 0
 var grid_2d: Array = [] # 2D array for current state
@@ -26,24 +28,27 @@ var history_3d: Array = [] # Array of 2D arrays
 var timer: float = 0.0
 var is_generating: bool = false
 
-@onready var multi_mesh_instance: MultiMeshInstance3D = $MultiMeshInstance3D
+var multi_mesh_instance: MultiMeshInstance3D
 
 func _ready():
 	if not gradient:
-		_setup_default_gradient()
-		
-	if not multi_mesh_instance:
+		_setup_gradient_from_colors()
+
+	# Try to get existing MultiMeshInstance3D node, or create one
+	if has_node("MultiMeshInstance3D"):
+		multi_mesh_instance = get_node("MultiMeshInstance3D")
+	else:
 		_setup_multimesh()
-	
+
 	if auto_generate:
 		start_generation()
 
-func _setup_default_gradient():
+func _setup_gradient_from_colors():
 	gradient = Gradient.new()
 	gradient.remove_point(0)
 	gradient.remove_point(0)
-	gradient.add_point(0.0, Color.BLUE)
-	gradient.add_point(1.0, Color.CYAN)
+	gradient.add_point(0.0, color_start)
+	gradient.add_point(1.0, color_end)
 
 func _process(delta):
 	if is_generating:
@@ -79,14 +84,19 @@ func clear():
 		multi_mesh_instance.multimesh.instance_count = 0
 
 func step():
-	if current_generation >= max_height:
-		is_generating = false
-		_spawn_walkers() # Start walkers!
-		return
+	if history_3d.size() >= max_height:
+		if continuous_mode:
+			history_3d.pop_front()
+		else:
+			is_generating = false
+			_spawn_walkers() # Start walkers!
+			return
 
 	_evolve_grid()
 	_update_multimesh()
-	current_generation += 1
+	
+	if not continuous_mode:
+		current_generation += 1
 
 func _initialize_grid():
 	grid_2d = []
@@ -142,8 +152,17 @@ func _setup_multimesh():
 	
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	multimesh.mesh = BoxMesh.new()
-	multimesh.mesh.size = Vector3(cell_size, cell_size, cell_size)
+	
+	var mesh = BoxMesh.new()
+	mesh.size = Vector3(cell_size, cell_size, cell_size)
+	
+	# Create material that uses vertex colors
+	var material = StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
+	mesh.material = material
+	
+	multimesh.mesh = mesh
+	
 	# Pre-allocate enough instances for the whole volume (worst case)
 	# This might be too much memory if grid is huge, but for 64x64x128 it's ~500k instances.
 	# MultiMesh handles this fine usually.

@@ -4,11 +4,19 @@ var bodies = []
 var max_level = 3
 var size = 5.0
 
+var pyramid_material: ShaderMaterial
+
 func _ready():
+	_setup_material()
 	generate_sierpinski(Vector3(0, 0, 0), max_level, size)
 	# Unfreeze after a delay
 	var timer = get_tree().create_timer(2.0)
 	timer.timeout.connect(_on_Timer_timeout)
+
+func _setup_material():
+	var shader = preload("res://algorithms/fractals/sierpinski_pyramid/pyramid_shader.gdshader")
+	pyramid_material = ShaderMaterial.new()
+	pyramid_material.shader = shader
 
 func generate_sierpinski(position, level, current_size):
 	if level == 0:
@@ -19,6 +27,7 @@ func generate_sierpinski(position, level, current_size):
 		var mesh_instance = MeshInstance3D.new()
 		var box_mesh = BoxMesh.new()
 		box_mesh.size = Vector3(current_size * 2, current_size * 2, current_size * 2)
+		box_mesh.material = pyramid_material # Apply the shader material
 		mesh_instance.mesh = box_mesh
 		
 		var collision_shape = CollisionShape3D.new()

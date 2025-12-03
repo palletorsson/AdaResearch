@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca_columns_scene"]
+[gd_scene load_steps=4 format=3 uid="uid://bihkahuw7n1wm"]
 
-[ext_resource type="Script" path="res://algorithms/cellularautomata/ca_columns/ca_columns.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://du2g5e7b6d0q2" path="res://algorithms/cellularautomata/ca_columns/ca_columns.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_jt2ee"]
+offsets = PackedFloat32Array(0, 1, 1)
+colors = PackedColorArray(0.1, 0.3, 0.8, 1, 1, 1, 1, 1, 0.8, 0.2, 0.8, 1)
 
 [sub_resource type="Environment" id="Environment_sky"]
 background_mode = 1
@@ -14,12 +18,10 @@ grid_size = 40
 max_height = 80
 cell_size = 0.2
 gap = 0.02
-rule_born = [3]
-rule_survive = [2, 3]
 initial_density = 0.15
-generation_speed = 0.02
-color_start = Color(0.1, 0.3, 0.8, 1)
-color_end = Color(0.8, 0.2, 0.8, 1)
+generation_speed = 0.6
+continuous_mode = true
+gradient = SubResource("Gradient_jt2ee")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 15, 15, 15)

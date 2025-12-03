@@ -3,12 +3,18 @@ extends Node3D
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const TERRAIN_SHADER := preload("res://algorithms/cellularautomata/noc_ch07/hex_terrain.gdshader")
 
-@export var radius: int = 20 # Much larger grid
-@export var update_interval: float = 0.1 # Faster updates
-@export var random_flip: float = 0.01
-@export var hex_size: float = 1.0 # Walkable size
-@export var max_generations: int = 40 # Stack height
+@export var radius: int = 40 # Grid radius (max possible extent)
+@export var update_interval: float = 0.05 # Fast growth
+@export var random_flip: float = 0.02
+@export var hex_size: float = 0.1 # Small hexes for detail
+@export var max_generations: int = 60 # Total layers
 @export var layer_height: float = 0.1 # Step up amount
+
+# Cave Shape Parameters
+@export var start_diameter: float = 1.0 # 1m at bottom
+@export var pinch_height: float = 2.0 # Narrowest point at 2m
+@export var pinch_diameter: float = 0.4 # Narrowest diameter
+@export var top_diameter: float = 3.0 # Diameter at max height
 
 const HEX_DIRECTIONS := [
 	Vector2(1, 0), Vector2(1, -1), Vector2(0, -1),
@@ -43,7 +49,7 @@ func _setup_environment() -> void:
 	_status_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_status_label.font_size = 32
 	_status_label.modulate = Color(1.0, 0.85, 1.0)
-	_status_label.position = Vector3(0, 5.0, 0) # Higher up
+	_status_label.position = Vector3(0, 5.0, 0)
 	_sim_root.add_child(_status_label)
 
 	var controller_root := Node3D.new()
@@ -67,14 +73,22 @@ func _initialize_grid() -> void:
 	_cells.clear()
 	_coords.clear()
 
+	# Initialize coords for the full potential grid
 	for q in range(-radius, radius + 1):
 		var r_min = max(-radius, -q - radius)
 		var r_max = min(radius, -q + radius)
 		for r in range(r_min, r_max + 1):
 			var coord := Vector2(q, r)
-			var alive := randf() < 0.85 # "Quite full seed map"
-			_cells[coord] = alive
 			_coords.append(coord)
+			
+			# Initial seed: Only within start radius
+			var dist = _hex_distance(coord) * hex_size
+			var allowed_radius = start_diameter / 2.0
+			
+			if dist <= allowed_radius:
+				_cells[coord] = randf() < 0.9 # Dense seed
+			else:
+				_cells[coord] = false
 	
 	# Setup MultiMesh
 	var mm = MultiMesh.new()
@@ -86,26 +100,21 @@ func _initialize_grid() -> void:
 	hex_mesh.radial_segments = 6
 	hex_mesh.top_radius = hex_size
 	hex_mesh.bottom_radius = hex_size
-	hex_mesh.height = layer_height # Thin layers
+	hex_mesh.height = layer_height
 	
-	# Create Shader Material
 	var mat = ShaderMaterial.new()
 	mat.shader = TERRAIN_SHADER
-	
-	# Generate Noise Texture
 	var noise = FastNoiseLite.new()
 	noise.frequency = 0.1
 	var noise_tex = NoiseTexture2D.new()
 	noise_tex.noise = noise
 	mat.set_shader_parameter("noise_tex", noise_tex)
-	mat.set_shader_parameter("perturb_strength", hex_size * 0.1) # Reduced perturb for stacking
+	mat.set_shader_parameter("perturb_strength", hex_size * 0.1)
 	
 	hex_mesh.material = mat
 	mm.mesh = hex_mesh
 	
-	# Allocate enough instances for all generations
 	mm.instance_count = _coords.size() * (max_generations + 1)
-	# Initially hide all
 	mm.visible_instance_count = 0
 	
 	_multi_mesh.multimesh = mm
@@ -115,10 +124,24 @@ func _initialize_grid() -> void:
 	_add_colliders_for_current_layer()
 
 func _hex_to_world(coord: Vector2) -> Vector3:
-	# Pointy topped hexes
 	var x := (sqrt(3.0) * coord.x + sqrt(3.0) / 2.0 * coord.y) * hex_size
 	var z := (3.0 / 2.0 * coord.y) * hex_size
 	return Vector3(x, 0, z)
+
+func _hex_distance(coord: Vector2) -> float:
+	# Axial distance from (0,0)
+	return (abs(coord.x) + abs(coord.x + coord.y) + abs(coord.y)) / 2.0
+
+func _get_radius_for_height(h: float) -> float:
+	# Interpolate radius based on height
+	if h <= pinch_height:
+		var t = h / pinch_height
+		return lerp(start_diameter, pinch_diameter, t) / 2.0
+	else:
+		var t = (h - pinch_height) / (max_generations * layer_height - pinch_height)
+		# Clamp t to avoid weirdness if max_generations is small
+		t = max(0.0, t)
+		return lerp(pinch_diameter, top_diameter, t) / 2.0
 
 func _process(delta: float) -> void:
 	if _generation >= max_generations:
@@ -131,25 +154,39 @@ func _process(delta: float) -> void:
 
 func _step_generation() -> void:
 	var next := {}
+	var current_height = (_generation + 1) * layer_height
+	var allowed_radius = _get_radius_for_height(current_height)
+	
 	for coord in _coords:
+		var dist = _hex_distance(coord) * hex_size
+		
+		# If outside allowed radius, kill it
+		if dist > allowed_radius:
+			next[coord] = false
+			continue
+			
 		var neighbors := _count_neighbors(coord)
-		var alive = _cells[coord]
+		var alive = _cells.get(coord, false)
 		var new_state = alive
 		
-		# Standard Life-like rules for Hex
-		# B2/S34? Or something more terrain-like?
-		# Let's stick to a cave-like generation rule: B5678/S345678 (smoothing)
-		# Or the original logic:
-		if alive and (neighbors == 2 or neighbors == 3):
-			new_state = true
-		elif not alive and neighbors == 2:
-			new_state = true
+		# Robust Growth Rules
+		# Survive: 2-6 neighbors
+		# Born: 3 neighbors
+		if alive:
+			if neighbors >= 2 and neighbors <= 6: new_state = true
+			else: new_state = false
 		else:
-			new_state = false
+			if neighbors == 3: new_state = true
 			
+		# Random noise
 		if randf() < random_flip:
 			new_state = !new_state
+			
 		next[coord] = new_state
+	
+	# Force center stem to ensure continuity through pinch
+	if _hex_distance(Vector2.ZERO) * hex_size <= allowed_radius:
+		next[Vector2.ZERO] = true
 
 	_cells = next
 	_generation += 1
@@ -161,7 +198,7 @@ func _count_neighbors(coord: Vector2) -> int:
 	var total := 0
 	for dir in HEX_DIRECTIONS:
 		var neighbor = coord + dir
-		if _cells.has(neighbor) and _cells[neighbor]:
+		if _cells.get(neighbor, false):
 			total += 1
 	return total
 
@@ -170,11 +207,9 @@ func _update_visuals_layer(layer_index: int) -> void:
 	var start_idx = layer_index * _coords.size()
 	var y_pos = layer_index * layer_height
 	
-	var active_in_layer = 0
-	
 	for i in range(_coords.size()):
 		var coord = _coords[i]
-		var alive = _cells[coord]
+		var alive = _cells.get(coord, false)
 		var idx = start_idx + i
 		
 		if alive:
@@ -184,20 +219,16 @@ func _update_visuals_layer(layer_index: int) -> void:
 			var t = Transform3D(Basis(), pos)
 			mm.set_instance_transform(idx, t)
 			
-			# Color gradient based on height/generation
 			var hue = float(layer_index) / float(max_generations)
 			var color = Color.from_hsv(hue, 0.8, 0.8)
 			mm.set_instance_color(idx, color)
 			mm.set_instance_custom_data(idx, Color(1.0, 0, 0, 0))
 		else:
-			# Hide dead cells by scaling to 0
 			mm.set_instance_transform(idx, Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO))
 	
-	# Update visible count to include this new layer
 	mm.visible_instance_count = (layer_index + 1) * _coords.size()
 
 func _add_colliders_for_current_layer() -> void:
-	# Add colliders for the current layer incrementally
 	var shape = CylinderShape3D.new()
 	shape.height = layer_height
 	shape.radius = hex_size
@@ -205,7 +236,7 @@ func _add_colliders_for_current_layer() -> void:
 	var y_pos = _generation * layer_height
 	
 	for coord in _coords:
-		if _cells[coord]:
+		if _cells.get(coord, false):
 			var pos = _hex_to_world(coord)
 			pos.y = y_pos
 			
@@ -215,4 +246,4 @@ func _add_colliders_for_current_layer() -> void:
 			_static_body.add_child(col)
 
 func _update_status() -> void:
-	_status_label.text = "Hex Stack | Layer %d/%d" % [_generation, max_generations]
+	_status_label.text = "Cave Gen | Layer %d/%d" % [_generation, max_generations]

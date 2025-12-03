@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqw8n5y3xjm4r"]
+
+[ext_resource type="Script" uid="uid://csnq5ngydctp" path="res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.gd" id="1_growth"]
+
+[sub_resource type="Gradient" id="Gradient_owvmc"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.4, 0.2, 0.1, 1, 0.2, 0.6, 0.3, 1, 0.3, 0.8, 0.4, 1)
+
+[node name="CAGrowthNetwork" type="Node3D"]
+script = ExtResource("1_growth")
+seed_count = 6
+attractor_count = 12
+attractor_strength = 2.5
+growth_probability = 0.35
+branch_probability = 0.2
+generation_interval = 0.05
+max_generations = 200
+gradient = SubResource("Gradient_owvmc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.363018)

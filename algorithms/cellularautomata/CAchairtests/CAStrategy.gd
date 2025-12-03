@@ -1,9 +1,9 @@
 class_name CAStrategy
 extends RefCounted
 
-const Cell = preload("res://algorithms/cellularautomata/CAchairtests/Cell.gd")
 
-enum StrategyType { SIMPLE_SWITCHED, MEMORY_BASED, GRADIENT_BASED, PURE_CA }
+
+enum StrategyType { SIMPLE_SWITCHED, MEMORY_BASED, GRADIENT_BASED, PURE_CA, DOWNWARD_COLUMNS }
 
 var grid: CAGrid
 var strategy_type: StrategyType
@@ -23,9 +23,63 @@ func step():
 			strategy_gradient_based()
 		StrategyType.PURE_CA:
 			strategy_pure_ca()
+		StrategyType.DOWNWARD_COLUMNS:
+			strategy_downward_columns()
 	
 	grid.generation += 1
 	grid.update_visualization()
+
+func strategy_downward_columns():
+	"""Strategy 5: Start with platform, grow legs down using Rule 110"""
+	var z = 6 - grid.generation
+	if z < 0 or z >= 6:
+		return
+
+	var new_states = []
+	var prev_z = z + 1
+	
+	# Define the axes for the legs (inset by 1 from 8x8 corners)
+	# Platform is 6..13. Corners 6, 13. Inset: 7, 12.
+	var leg_axes = [7, 12]
+	
+	# 1. Simulate along X-axis for fixed Y rows (Y=7, Y=12)
+	for y in leg_axes:
+		for x in range(1, grid.grid_size.x - 1):
+			var l = 1 if is_occupied(x - 1, y, prev_z) else 0
+			var c = 1 if is_occupied(x, y, prev_z) else 0
+			var r = 1 if is_occupied(x + 1, y, prev_z) else 0
+			
+			if apply_rule_110(l, c, r):
+				var cell = grid.get_cell(x, y, z)
+				if cell and not cell.is_occupied:
+					new_states.append([cell, ChairCell.CellType.STRUCTURE])
+
+	# 2. Simulate along Y-axis for fixed X columns (X=7, X=12)
+	for x in leg_axes:
+		for y in range(1, grid.grid_size.y - 1):
+			var l = 1 if is_occupied(x, y - 1, prev_z) else 0
+			var c = 1 if is_occupied(x, y, prev_z) else 0
+			var r = 1 if is_occupied(x, y + 1, prev_z) else 0
+			
+			if apply_rule_110(l, c, r):
+				var cell = grid.get_cell(x, y, z)
+				if cell and not cell.is_occupied:
+					new_states.append([cell, ChairCell.CellType.STRUCTURE])
+	
+	# Apply new states
+	for state in new_states:
+		state[0].set_occupied(state[1], grid.generation)
+
+func is_occupied(x: int, y: int, z: int) -> bool:
+	var cell = grid.get_cell(x, y, z)
+	return cell != null and cell.is_occupied
+
+func apply_rule_110(l: int, c: int, r: int) -> int:
+	# Rule 110: 01101110
+	# Patterns: 111(0), 110(1), 101(1), 100(0), 011(1), 010(1), 001(1), 000(0)
+	var key = (l << 2) | (c << 1) | r
+	var rule = 110
+	return (rule >> key) & 1
 
 func strategy_simple_switched():
 	"""Strategy 1: Simple time-based rule switching"""
@@ -47,13 +101,13 @@ func strategy_simple_switched():
 				var type = cell.memory_type
 
 				# Back pillars continue up
-				if type in [Cell.CellType.BACK_LEFT, Cell.CellType.BACK_RIGHT]:
+				if type in [ChairCell.CellType.BACK_LEFT, ChairCell.CellType.BACK_RIGHT]:
 					var above = grid.get_cell(cell.position.x, cell.position.y, cell.position.z + 1)
 					if above and not above.is_occupied:
 						new_states.append([above, type])
 
 				# Front pillars spread horizontally (with constraints)
-				elif type in [Cell.CellType.FRONT_LEFT, Cell.CellType.FRONT_RIGHT]:
+				elif type in [ChairCell.CellType.FRONT_LEFT, ChairCell.CellType.FRONT_RIGHT]:
 					# Only edge cells can spread
 					var horiz_neighbors = count_horizontal_neighbors(cell)
 
@@ -97,14 +151,14 @@ func strategy_memory_based():
 					
 			# Divergent behavior based on type
 			else:
-				if type in [Cell.CellType.BACK_LEFT, Cell.CellType.BACK_RIGHT]:
+				if type in [ChairCell.CellType.BACK_LEFT, ChairCell.CellType.BACK_RIGHT]:
 					# Back pillars: continue up
 					if age < 18:
 						var above = grid.get_cell(cell.position.x, cell.position.y, cell.position.z + 1)
 						if above and not above.is_occupied:
 							new_states.append([above, type])
 							
-				elif type in [Cell.CellType.FRONT_LEFT, Cell.CellType.FRONT_RIGHT]:
+				elif type in [ChairCell.CellType.FRONT_LEFT, ChairCell.CellType.FRONT_RIGHT]:
 					# Front pillars: spread toward center
 					if age < 13:
 						var center_x = grid.grid_size.x / 2
@@ -129,7 +183,7 @@ func compute_gradient():
 	var back_cells = []
 	
 	for cell in grid.cells:
-		if cell.is_occupied and cell.memory_type in [Cell.CellType.BACK_LEFT, Cell.CellType.BACK_RIGHT]:
+		if cell.is_occupied and cell.memory_type in [ChairCell.CellType.BACK_LEFT, ChairCell.CellType.BACK_RIGHT]:
 			back_cells.append(cell)
 	
 	if back_cells.is_empty():
@@ -222,7 +276,7 @@ func strategy_pure_ca():
 	for state in new_states:
 		state[0].set_occupied(state[1], grid.generation)
 
-func count_horizontal_neighbors(cell: Cell) -> int:
+func count_horizontal_neighbors(cell: ChairCell) -> int:
 	"""Count neighbors in the same horizontal layer (Z level)"""
 	var count = 0
 	for dx in [-1, 0, 1]:
@@ -238,20 +292,20 @@ func count_horizontal_neighbors(cell: Cell) -> int:
 				count += 1
 	return count
 
-func get_pillar_origin(type: Cell.CellType) -> Vector2i:
+func get_pillar_origin(type: ChairCell.CellType) -> Vector2i:
 	"""Get the original position of a pillar type"""
 	var center_x = grid.grid_size.x / 2
 	var center_y = grid.grid_size.y / 2
 	var spacing = 3
 
 	match type:
-		Cell.CellType.FRONT_LEFT:
+		ChairCell.CellType.FRONT_LEFT:
 			return Vector2i(center_x - spacing, center_y - spacing)
-		Cell.CellType.FRONT_RIGHT:
+		ChairCell.CellType.FRONT_RIGHT:
 			return Vector2i(center_x + spacing, center_y - spacing)
-		Cell.CellType.BACK_LEFT:
+		ChairCell.CellType.BACK_LEFT:
 			return Vector2i(center_x - spacing, center_y + spacing)
-		Cell.CellType.BACK_RIGHT:
+		ChairCell.CellType.BACK_RIGHT:
 			return Vector2i(center_x + spacing, center_y + spacing)
 		_:
 			return Vector2i(center_x, center_y)

@@ -1,18 +1,26 @@
 class_name CAGrid
 extends Node3D
 
-const Cell = preload("res://algorithms/cellularautomata/CAchairtests/Cell.gd")
+
 
 var grid_size: Vector3i = Vector3i(20, 20, 25)
 var cells: Array = []
 var generation: int = 0
 
 # Visualization
-@onready var multimesh_instance: MultiMeshInstance3D = $MultiMeshInstance3D
+var multimesh_instance: MultiMeshInstance3D
 var cell_positions: PackedVector3Array = []
 var cell_colors: PackedColorArray = []
 
 func _ready():
+	# Get or create MultiMeshInstance3D
+	if has_node("MultiMeshInstance3D"):
+		multimesh_instance = get_node("MultiMeshInstance3D")
+	else:
+		multimesh_instance = MultiMeshInstance3D.new()
+		multimesh_instance.name = "MultiMeshInstance3D"
+		add_child(multimesh_instance)
+
 	setup_multimesh()
 	initialize_grid()
 
@@ -39,17 +47,17 @@ func initialize_grid():
 		for y in range(grid_size.y):
 			for z in range(grid_size.z):
 				var idx = get_cell_index(x, y, z)
-				cells[idx] = Cell.new(Vector3i(x, y, z))
+				cells[idx] = ChairCell.new(Vector3i(x, y, z))
 
 func get_cell_index(x: int, y: int, z: int) -> int:
 	return x + y * grid_size.x + z * grid_size.x * grid_size.y
 
-func get_cell(x: int, y: int, z: int) -> Cell:
+func get_cell(x: int, y: int, z: int) -> ChairCell:
 	if x < 0 or x >= grid_size.x or y < 0 or y >= grid_size.y or z < 0 or z >= grid_size.z:
 		return null
 	return cells[get_cell_index(x, y, z)]
 
-func get_cell_by_index(idx: int) -> Cell:
+func get_cell_by_index(idx: int) -> ChairCell:
 	if idx >= 0 and idx < cells.size():
 		return cells[idx]
 	return null
@@ -76,10 +84,10 @@ func seed_chair_base():
 	]
 	
 	var types = [
-		Cell.CellType.FRONT_LEFT,
-		Cell.CellType.FRONT_RIGHT,
-		Cell.CellType.BACK_LEFT,
-		Cell.CellType.BACK_RIGHT,
+		ChairCell.CellType.FRONT_LEFT,
+		ChairCell.CellType.FRONT_RIGHT,
+		ChairCell.CellType.BACK_LEFT,
+		ChairCell.CellType.BACK_RIGHT,
 	]
 	
 	for i in range(positions.size()):
@@ -87,6 +95,20 @@ func seed_chair_base():
 		var cell = get_cell(pos.x, pos.y, pos.z)
 		if cell:
 			cell.set_occupied(types[i], generation)
+
+func seed_floating_platform():
+	"""Seed 8x8 platform at height 6"""
+	var start_x = 6
+	var end_x = 13
+	var start_y = 6
+	var end_y = 13
+	var z = 6
+	
+	for x in range(start_x, end_x + 1):
+		for y in range(start_y, end_y + 1):
+			var cell = get_cell(x, y, z)
+			if cell:
+				cell.set_occupied(ChairCell.CellType.STRUCTURE, generation)
 
 func get_occupied_count() -> int:
 	var count = 0
@@ -116,9 +138,9 @@ func update_visualization():
 		var pos = cell.position
 		
 		# Set transform
-		var transform = Transform3D()
-		transform.origin = Vector3(pos.x, pos.z, pos.y)  # Y is up in Godot
-		multimesh_instance.multimesh.set_instance_transform(i, transform)
+		var xform = Transform3D()
+		xform.origin = Vector3(pos.x, pos.z, pos.y)  # Y is up in Godot
+		multimesh_instance.multimesh.set_instance_transform(i, xform)
 		
 		# Set color based on height
 		var height_ratio = float(pos.z) / float(grid_size.z)
