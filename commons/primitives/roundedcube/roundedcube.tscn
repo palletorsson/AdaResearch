@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgkcone2in053"]
+
+[ext_resource type="Script" path="res://commons/primitives/roundedcube/roundedcube.gd" id="1_roundedcube"]
+
+[node name="RoundedCube" type="Node3D"]
+script = ExtResource("1_roundedcube")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)

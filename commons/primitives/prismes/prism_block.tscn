@@ -5,11 +5,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lc12h"]
 render_priority = 0
 shader = ExtResource("1_d57hu")
-shader_parameter/fill_color = Color(0.2, 0.3, 0.8, 0.7)
-shader_parameter/wireframe_color = Color(0, 1, 1, 1)
-shader_parameter/wireframe_width = 2.0
-shader_parameter/wireframe_brightness = 2.0
-shader_parameter/show_only_wireframe = false
+shader_parameter/modelColor = Color(0.767907, 0.7090423, 0.90659946, 1)
+shader_parameter/wireframeColor = Color(1, 0, 0, 1)
+shader_parameter/emissionColor = Color(0.8104055, 0.002108897, 0.9823683, 1)
+shader_parameter/width = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/emission_strength = 2.0
+shader_parameter/modelOpacity = 1.0
+shader_parameter/wireframeOpacity = 1.0
+shader_parameter/globalOpacity = 1.0
+shader_parameter/show_interior = true
 
 [sub_resource type="PrismMesh" id="PrismMesh_1ginq"]
 material = SubResource("ShaderMaterial_lc12h")
@@ -29,3 +34,4 @@ shape = SubResource("ConcavePolygonShape3D_11eks")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.11999)
+visible = false

@@ -1744,6 +1744,62 @@
 			"description": "Deformable soft body physics simulation",
 			"scene": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn"
 		},
+		"rounded_softbody_test": {
+			"name": "rounded_softbody_test",
+			"lookup_name": "rounded_softbody_test",
+			"description": "rounded_softbody_test",
+			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn"
+		},	
+		"revolving_joy_ride": {
+			"name": "revolving_joy_ride",
+			"lookup_name": "revolving_joy_ride",
+			"description": "revolving_joy_ride",
+			"scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn"
+		},				
+		
+		"softbodytest": {
+			"name": "softbodytest",
+			"lookup_name": "softbodytest",
+			"description": "softbodytest",
+			"scene": "res://algorithms/softbodies/softbodytest.tscn"
+		},	
+		"softbody_gallery_part2": {
+			"name": "softbody_gallery_part2",
+			"lookup_name": "softbody_gallery_part2",
+			"description": "softbody_gallery_part2",
+			"scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn"
+		},	
+		"softbody_gallery_part3": {
+			"name": "softbody_gallery_part3",
+			"lookup_name": "softbody_gallery_part3",
+			"description": "softbody_gallery_part3",
+			"scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn"
+		},	
+		"softbody_gallery_part1": {
+			"name": "softbody_gallery_part1",
+			"lookup_name": "softbody_gallery_part1",
+			"description": "softbody_gallery_part1",
+			"scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn"
+		},		
+		"pendulum_slap": {
+			"name": "pendulum_slap",
+			"lookup_name": "pendulum_slap",
+			"description": "pendulum_slap",
+			"scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn"
+		},	
+		"cloth_straps": {
+			"name": "cloth_straps",
+			"lookup_name": "cloth_straps",
+			"description": "cloth_straps",
+			"scene": "res://algorithms/softbodies/cloth_straps/cloth_straps.tscn"
+		},	
+		"soft_mushroom": {
+			"name": "soft_mushroom",
+			"lookup_name": "soft_mushroom",
+			"description": "soft_mushroom",
+			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn"
+		},										
+		
 		"spring_mass_system": {
 			"name": "Spring Mass System",
 			"lookup_name": "spring_mass_system",

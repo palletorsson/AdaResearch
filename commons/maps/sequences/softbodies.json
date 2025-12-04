@@ -1,0 +1,36 @@
+{
+	"sequences": {
+		"softbodies": {
+			"name": "Soft Bodies",
+			"description": "Explore cloth physics, deformation, and tactile interaction systems",
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Cloth physics simulation",
+				"Soft body deformation",
+				"Tactile interaction design",
+				"Affect theory in digital spaces"
+			],
+			"content": [
+				"SoftBodies_Soft_Body_Deformation",
+				"SoftBodies_Playground_of_Joy",
+				"SoftBodies_Affect_Theory_Visualization",
+			],
+			"maps": [
+				"SoftBodies_Carusell",
+				"SoftBodies_Obsticals",
+				"SoftBodies_Obsticals_Part2",
+				"SoftBodies_Obsticals_Part3",
+				"SoftBodies_Cloth_Physics",
+				"SoftBodies_Soft_Body_Deformation",
+				"SoftBodies_Playground_of_Joy",
+				"SoftBodies_Affect_Theory_Visualization",
+
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_softbodies",
+			"unlock_requirements": ["physicssimulation"],
+			"completion_rewards": ["soft_body_badge", "tactile_explorer_badge"]
+		}
+	}
+}

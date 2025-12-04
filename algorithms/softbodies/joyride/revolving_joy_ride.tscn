@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp16oqa1f7frn"]
+
+[ext_resource type="Script" uid="uid://b1vt04o2itepj" path="res://algorithms/softbodies/joyride/revolving_joy_ride.gd" id="1_joyride"]
+
+[node name="RevolvingJoyRide" type="Node3D"]
+script = ExtResource("1_joyride")
+obstacle_radius_offset = 1.5
+obstacle_height = 5.0
+obstacle_y_pos = 2.5

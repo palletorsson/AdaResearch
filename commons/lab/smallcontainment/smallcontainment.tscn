@@ -109,8 +109,8 @@ func update_energy_field_visuals():
 	# Pulsing intensity for unstable fields
 	if field_strength < 80.0:
 		var pulse_tween = create_tween()
-		pulse_tween.tween_property(energy_field, 'material_override:emission_energy', 2.0, 0.5)
-		pulse_tween.tween_property(energy_field, 'material_override:emission_energy', 1.0, 0.5)
+		pulse_tween.tween_property(energy_field, 'material_override:emission_energy_multiplier', 2.0, 0.5)
+		pulse_tween.tween_property(energy_field, 'material_override:emission_energy_multiplier', 1.0, 0.5)
 
 func trigger_breach_warning():
 	#print('⚠️ CONTAINMENT CUBE: Field integrity compromised - Breach risk elevated')
@@ -141,8 +141,8 @@ func reinforce_containment_field():
 	
 	# Visual reinforcement effect
 	var reinforce_tween = create_tween()
-	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy', 3.0, 1.0)
-	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy', 1.5, 1.0)
+	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy_multiplier', 3.0, 1.0)
+	reinforce_tween.tween_property(energy_field, 'material_override:emission_energy_multiplier', 1.5, 1.0)
 	
 	emit_signal('containment_stabilized')
 
@@ -166,8 +166,8 @@ func specimen_interaction_detected():
 	
 	# Specimen becomes more active
 	var reaction_tween = create_tween()
-	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy', 2.5, 1.0)
-	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy', 1.0, 2.0)
+	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy_multiplier', 2.5, 1.0)
+	reaction_tween.tween_property(contained_specimen, 'material_override:emission_energy_multiplier', 1.0, 2.0)
 	
 	# Slight field fluctuation in response
 	field_strength -= 10.0
