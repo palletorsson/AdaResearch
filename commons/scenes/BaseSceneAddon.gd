@@ -31,8 +31,9 @@ func _setup_scene_manager():
 	scene_manager = SceneManager
 	scene_manager.name = "SceneManager"
 	
-	# Use call_deferred to add child safely
-	base_scene_root.call_deferred("add_child", scene_manager)
+	# SceneManager is an Autoload, so we just reference it.
+	# Do NOT add it as a child, as it already has a parent (root).
+	# base_scene_root.call_deferred("add_child", scene_manager)
 	
 	# Wait for the child to be added, then continue setup
 	await get_tree().process_frame

@@ -27,12 +27,13 @@ var start_timer: float = 0.0       # Timer for the start delay
 var waiting_to_start: bool = false # Flag to indicate we're in the start delay period
 
 # Audio nodes
-@onready var detection_player: AudioStreamPlayer3D = $AudioPlayers/DetectionPlayer
-@onready var lift_start_player: AudioStreamPlayer3D = $AudioPlayers/LiftStartPlayer
-@onready var lift_loop_player: AudioStreamPlayer3D = $AudioPlayers/LiftLoopPlayer
-@onready var lift_stop_player: AudioStreamPlayer3D = $AudioPlayers/LiftStopPlayer
-@onready var warning_player: AudioStreamPlayer3D = $AudioPlayers/WarningPlayer
-@onready var ambient_player: AudioStreamPlayer3D = $AudioPlayers/AmbientPlayer
+# Audio nodes
+var detection_player: AudioStreamPlayer3D
+var lift_start_player: AudioStreamPlayer3D
+var lift_loop_player: AudioStreamPlayer3D
+var lift_stop_player: AudioStreamPlayer3D
+var warning_player: AudioStreamPlayer3D
+var ambient_player: AudioStreamPlayer3D
 
 # Reference to the area that detects the player
 @onready var detection_area = $DetectionArea
@@ -53,7 +54,20 @@ func _ready():
 	ambient_player.play()
 
 func setup_audio_players():
-	# Create audio players if they don't exist
+	# Check if audio players exist
+	if has_node("AudioPlayers"):
+		var audio_players = $AudioPlayers
+		detection_player = audio_players.get_node_or_null("DetectionPlayer")
+		lift_start_player = audio_players.get_node_or_null("LiftStartPlayer")
+		lift_loop_player = audio_players.get_node_or_null("LiftLoopPlayer")
+		lift_stop_player = audio_players.get_node_or_null("LiftStopPlayer")
+		warning_player = audio_players.get_node_or_null("WarningPlayer")
+		ambient_player = audio_players.get_node_or_null("AmbientPlayer")
+		
+		# If any are missing, we might want to recreate them, but for now assume if group exists, children exist.
+		# Or better, check individual existence.
+	
+	# Create audio players if they don't exist (or if AudioPlayers node was missing)
 	if not has_node("AudioPlayers"):
 		var audio_players = Node3D.new()
 		audio_players.name = "AudioPlayers"

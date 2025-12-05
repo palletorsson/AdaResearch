@@ -315,8 +315,7 @@ func create_magical_orb_lights():
 
 func start_lighting_animation():
 	"""Start animated lighting effects"""
-	var tween = create_tween()
-	tween.set_loops()
+
 	
 	# Animate sun color cycling
 	if sun_color_cycle:
@@ -539,17 +538,13 @@ func setup_vr_optimizations():
 		var rendering_method: String = ProjectSettings.get_setting("rendering/renderer/rendering_method", "")
 		var supports_fsr: bool = rendering_method == "forward_plus"
 		var desired_scale: float = 0.8 if target_platform == "mobile_vr" else 1.0
+		# FSR check can be unreliable if project settings don't match runtime renderer
+		# Fallback to Bilinear to prevent errors
+		viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+		viewport.scaling_3d_scale = desired_scale
+		
 		if supports_fsr:
-			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR
-			viewport.scaling_3d_scale = desired_scale
-			if viewport.scaling_3d_mode != Viewport.SCALING_3D_MODE_FSR:
-				supports_fsr = false
-				print("FSR requested but not applied; falling back")
-		if not supports_fsr:
-			viewport.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
-			viewport.scaling_3d_scale = desired_scale
-			if rendering_method != "forward_plus":
-				print("FSR requires Forward+ renderer; using bilinear scaling")
+			print("VR Environment: Using Bilinear scaling (FSR disabled to prevent renderer mismatch errors)")
 	
 	print("VR optimizations applied for target FPS: " + str(performance_target_fps))
 
