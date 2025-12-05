@@ -754,6 +754,13 @@
 			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
 			"scene": "res://commons/interfaces/nail_color_controller.tscn"
 		},
+		"hand_color_controller": {
+			"lookup_name": "hand_color_controller",
+			"name": "hand_color_controller",
+			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
+			"scene": "res://commons/interfaces/hand_color_controller.tscn"
+		},		
+		
 		"gridcolorizer": {
 			"lookup_name": "gridcolorizer",
 			"name": "gridcolorizer",

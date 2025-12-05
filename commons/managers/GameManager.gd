@@ -23,6 +23,7 @@ var sfx_volume: float = 0.7
 
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
+var hand_color: Color = Color(0.8, 0.6, 0.5, 1.0)  # Default skin tone
 
 @export var debug = true
 # Signals
@@ -35,6 +36,7 @@ signal health_updated(new_health: float)
 signal player_damaged(amount: float, new_health: float)
 signal current_map_changed(map_name: String)
 signal nail_color_changed(new_color: Color)
+signal hand_color_changed(new_color: Color)
 var console_messages: Array[Dictionary] = []
 var max_console_messages: int = 100
 
@@ -212,11 +214,20 @@ func set_sfx_volume(volume: float) -> void:
 func set_nail_color(color: Color) -> void:
 	nail_color = color
 	emit_signal("nail_color_changed", nail_color)
-	if debug:
-		print("GameManager: Nail color set to %s" % color)
+
 
 func get_nail_color() -> Color:
 	return nail_color
+
+# Hand color management
+func set_hand_color(color: Color) -> void:
+	hand_color = color
+	emit_signal("hand_color_changed", hand_color)
+	if debug:
+		print("GameManager: Hand color set to %s" % color)
+
+func get_hand_color() -> Color:
+	return hand_color
 
 # Save and load game state
 func save_game() -> void:
@@ -226,6 +237,7 @@ func save_game() -> void:
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"nail_color": {"r": nail_color.r, "g": nail_color.g, "b": nail_color.b, "a": nail_color.a},
+		"hand_color": {"r": hand_color.r, "g": hand_color.g, "b": hand_color.b, "a": hand_color.a},
 		"timestamp": Time.get_datetime_string_from_system()
 	}
 	
@@ -257,6 +269,12 @@ func load_game() -> bool:
 		if color_data:
 			nail_color = Color(color_data.get("r", 1.0), color_data.get("g", 0.5), color_data.get("b", 0.7), color_data.get("a", 1.0))
 			emit_signal("nail_color_changed", nail_color)
+
+		# Load hand color
+		var hand_color_data = save_data.get("hand_color", null)
+		if hand_color_data:
+			hand_color = Color(hand_color_data.get("r", 0.8), hand_color_data.get("g", 0.6), hand_color_data.get("b", 0.5), hand_color_data.get("a", 1.0))
+			emit_signal("hand_color_changed", hand_color)
 
 		emit_signal("score_updated", player_score)
 		if debug:

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc34f2c4nemd5"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/sound_box/SoundBox.gd" id="1_soundbox"]
+[ext_resource type="PackedScene" uid="uid://d3x7y6z5w4v3u" path="res://algorithms/wavefunctions/sound_box/SoundTriggerButton.tscn" id="2_trigger"]
+
+[node name="SoundBox" type="Node3D"]
+script = ExtResource("1_soundbox")
+
+[node name="GridContainer" type="Node3D" parent="."]
+
+[node name="Kick" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.4, 0)
+sound_id = "trap_beats.kick_heavy"
+text = "KICK"
+color = Color(1, 0, 0, 1)
+
+[node name="Snare" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+sound_id = "trap_beats.snare_sharp"
+text = "SNARE"
+color = Color(1, 0.5, 0, 1)
+
+[node name="HiHat" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, 0)
+sound_id = "trap_beats.hihat_closed"
+text = "HI-HAT"
+color = Color(1, 1, 0, 1)
+
+[node name="Bass" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+sound_id = "techno_noir.bass_pulse"
+text = "BASS"
+color = Color(0, 0, 1, 1)
+
+[node name="Synth" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+sound_id = "techno_noir.synth_stab"
+text = "SYNTH"
+color = Color(0, 1, 1, 1)
+
+[node name="Drone" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+sound_id = "techno_noir.drone_low"
+text = "DRONE"
+color = Color(0.5, 0, 1, 1)
+
+[node name="Glitch" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.4, 0)
+sound_id = "AudioSynthesizer.APHEX_TWIN_GLITCH"
+text = "GLITCH"
+color = Color(1, 0, 1, 1)
+
+[node name="Squelch" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+sound_id = "AudioSynthesizer.ACID_TB303_SQUELCH"
+text = "ACID"
+color = Color(0, 1, 0, 1)
+
+[node name="Whoosh" parent="GridContainer" instance=ExtResource("2_trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.4, 0)
+sound_id = "AudioSynthesizer.TELEPORT_WHOOSH"
+text = "WHOOSH"
+color = Color(1, 1, 1, 1)

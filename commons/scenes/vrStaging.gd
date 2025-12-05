@@ -20,10 +20,35 @@ var map_progression_manager = null
 var grid_system_manager = null
 
 func _ready() -> void:
-	# Call parent ready function
-	super()
+	# Do not initialise if in the editor
+	if Engine.is_editor_hint():
+		return
+
+	# Specify the camera to track (logic from XRToolsStaging)
+	if xr_camera:
+		xr_camera.current = true # Ensure camera is active
+		var loading_screen = find_child("LoadingScreen", true, false)
+		if loading_screen:
+			loading_screen.set_camera(xr_camera)
+			# Ensure loading screen is hidden so we can see the menu
+			loading_screen.visible = false
+	
+	# Disable prompt for continue to avoid blocking input
+	prompt_for_continue = false
 	
 	print("AdaVRStaging: Starting initialization with consolidated architecture...")
+	
+	# Ensure pointers are visible
+	var left_pointer = find_child("FunctionPointerLeft", true, false)
+	var right_pointer = find_child("FunctionPointerRight", true, false)
+	if left_pointer: left_pointer.visible = true
+	if right_pointer: right_pointer.visible = true
+	
+	# Ensure menu is visible
+	var menu = find_child("MainMenu3D", true, false)
+	if menu:
+		menu.visible = true
+		print("AdaVRStaging: MainMenu3D set to visible")
 	
 	# FIX: Set up the loading screen curve to prevent errors
 	_fix_loading_screen_curve()
@@ -86,12 +111,46 @@ func _connect_staging_signals():
 		print("AdaVRStaging: Connected to scene_exiting signal")
 
 func _start_game():
+	# Check for MainMenu3D
+	var menu = find_child("MainMenu3D", true, false)
+	if menu:
+		print("AdaVRStaging: Menu found, waiting for user input")
+		if not menu.start_game_requested.is_connected(_on_menu_start_game):
+			menu.start_game_requested.connect(_on_menu_start_game)
+		if not menu.quit_requested.is_connected(_on_menu_quit):
+			menu.quit_requested.connect(_on_menu_quit)
+		return
+
 	print("AdaVRStaging: Starting game with consolidated system")
 	
 	if use_lab_system:
 		await _setup_lab_system()
 	else:
 		await _setup_basic_vr_scene()
+
+func _on_menu_start_game():
+	var menu = find_child("MainMenu3D", true, false)
+	if menu:
+		menu.visible = false
+		# Disable pointers on staging rig to avoid conflict with game rig
+		var left_pointer = find_child("FunctionPointerLeft", true, false)
+		var right_pointer = find_child("FunctionPointerRight", true, false)
+		if left_pointer: left_pointer.visible = false
+		if right_pointer: right_pointer.visible = false
+	
+	print("AdaVRStaging: Menu start requested")
+	
+	# Force prompt_for_continue to false just in case
+	prompt_for_continue = false
+	
+	if use_lab_system:
+		await _setup_lab_system()
+	else:
+		await _setup_basic_vr_scene()
+
+func _on_menu_quit():
+	print("AdaVRStaging: Menu quit requested")
+	get_tree().quit()
 
 func _setup_lab_system():
 	"""Setup lab system - loads lab.tscn directly"""

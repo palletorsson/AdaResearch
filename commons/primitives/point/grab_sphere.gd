@@ -33,6 +33,10 @@ var _is_glowing := false
 var _current_controller : XRController3D
 var _active_controllers: Array[XRController3D] = []
 
+# Value mapper color updating
+var _parent_value_mapper: Node3D = null
+var _color_update_enabled := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Call the super
@@ -48,6 +52,9 @@ func _ready() -> void:
 	# Listen for when this object is picked up or dropped
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
+
+	# Check if parent has value mapper functionality (detects value_mapper_3d, value_mapper_2d, etc.)
+	_check_for_value_mapper_parent()
 
 
 
@@ -212,3 +219,51 @@ func _duplicate_for_second_controller(controller: XRController3D) -> void:
 		parent = get_tree().root
 	parent.add_child(instance)
 	instance.global_transform = global_transform.translated(Vector3(0.1, 0, 0))
+
+func _check_for_value_mapper_parent() -> void:
+	# Check if this grab_sphere is part of a value mapper
+	var parent = get_parent()
+	if parent and parent.has_signal("values_changed"):
+		_parent_value_mapper = parent
+		_color_update_enabled = true
+		# Connect to value changes
+		_parent_value_mapper.values_changed.connect(_on_value_mapper_changed)
+
+func _on_value_mapper_changed(r: float, g: float, b: float) -> void:
+	if not _color_update_enabled:
+		return
+
+	var new_color = Color(r, g, b, 1.0)
+
+	# Update the sphere's material color
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		# Get current material
+		var current_mat = mesh_instance.get_surface_override_material(0)
+		if not current_mat:
+			current_mat = mesh_instance.get_active_material(0)
+
+		# Create a new material based on current or create new one
+		var new_mat: BaseMaterial3D
+		if current_mat and current_mat is BaseMaterial3D:
+			new_mat = current_mat.duplicate()
+		else:
+			new_mat = StandardMaterial3D.new()
+
+		# Update color
+		new_mat.albedo_color = new_color
+
+		# If it's glowing, also update emission
+		if _is_glowing and new_mat is StandardMaterial3D:
+			var standard_mat = new_mat as StandardMaterial3D
+			standard_mat.emission_enabled = true
+			standard_mat.emission = new_color
+			standard_mat.emission_energy_multiplier = glow_emission_energy
+
+		# Apply the material
+		mesh_instance.set_surface_override_material(0, new_mat)
+
+		# Update stored materials
+		_original_material = new_mat
+		if _is_glowing:
+			_glow_material = _build_glow_material(_original_material)

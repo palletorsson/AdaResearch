@@ -6,6 +6,20 @@
 			"description": "VitruvianMan.",
 			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn"
 		},
+		
+		"SoundBoxLong": {
+			"name": "SoundBoxLong",
+			"lookup_name": "SoundBoxLong",
+			"description": "SoundBoxLong",
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn"
+		},
+			"SoundBoxShort": {
+			"name": "SoundBoxShort",
+			"lookup_name": "SoundBoxShort",
+			"description": "SoundBoxShort",
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn"
+		},
+
 		"spectral_analyzer": {
 			"name": "Spectral Analyzer",
 			"lookup_name": "spectral_analyzer",

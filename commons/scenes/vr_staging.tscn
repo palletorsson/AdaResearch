@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh0yixpmcvifk"]
+[gd_scene load_steps=7 format=3 uid="uid://dh0yixpmcvifk"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3"]
+[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_pointer"]
 
 [sub_resource type="Curve" id="Curve_qsc12"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -15,9 +17,21 @@ start_with_grid_system = true
 main_lab_scene = "res://commons/scenes/lab.tscn"
 preferred_grid_map = "Lab"
 main_scene = "uid://cgrljkfrmkgda"
-prompt_for_continue = false
+
+[node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" instance=ExtResource("5_pointer")]
+show_laser = 2
+laser_length = 1
+distance = 5.0
+
+[node name="FunctionPointerRight" parent="XROrigin3D/RightHandController" index="0" instance=ExtResource("5_pointer")]
+show_laser = 2
+laser_length = 1
+distance = 5.0
 
 [node name="LoadingScreen" parent="." index="2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)
 follow_speed = SubResource("Curve_qsc12")
 splash_screen = ExtResource("3")
+
+[node name="MainMenu3D" parent="." index="4" instance=ExtResource("4_menu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
