@@ -1,40 +1,41 @@
 {
-    "sequences": {
-        "proceduralgeneration": {
-            "name": "Procedural Generation",
-            "description": "Explore advanced procedural content generation systems",
-            "difficulty": "advanced",
-            "estimated_time": "40-50 minutes",
-            "learning_objectives": [
-                "Spatial partitioning algorithms",
-                "Genetic algorithms",
-                "Markov chain systems",
+	"sequences": {
+		"proceduralgeneration": {
+			"name": "Procedural Generation",
+			"description": "Explore advanced procedural content generation systems",
+			"difficulty": "advanced",
+			"estimated_time": "40-50 minutes",
+			"learning_objectives": [
+				"Spatial partitioning algorithms",
+				"Genetic algorithms",
+				"Markov chain systems",
                 "Constraint-based generation"
-            ],
-            "maps": [
-                "ProceduralGeneration_Voronoi_Diagrams",
-                "ProceduralGeneration_Delaunay_Triangulation",
-                "ProceduralGeneration_Space_Partitioning",
-                "ProceduralGeneration_CaveRandomWalk",
-                "ProceduralGeneration_Markov_Chains",
-                "ProceduralGeneration_N_grams",
-                "ProceduralGeneration_Poisson_Disk_Sampling",
-                "ProceduralGeneration_Wave_Function_Collapse",
-                "ProceduralGeneration_Space_Colonization_Algorithms",
-                "ProceduralGeneration_Reaction_Diffusion_Systems",
-                "ProceduralGeneration_Genetic_Algorithms",
-                "ProceduralGeneration_Evolutionary_Computation",
-                "ProceduralGeneration_Genetic_Programming",
+			],
+			"maps": [
+				"ProceduralGenerationMarchingcubesFlatLandscape",
+				"ProceduralGeneration_Voronoi_Diagrams",
+				"ProceduralGeneration_Delaunay_Triangulation",
+				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGeneration_CaveRandomWalk",
+				"ProceduralGeneration_Markov_Chains",
+				"ProceduralGeneration_N_grams",
+				"ProceduralGeneration_Poisson_Disk_Sampling",
+				"ProceduralGeneration_Wave_Function_Collapse",
+				"ProceduralGeneration_Space_Colonization_Algorithms",
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
+				"ProceduralGeneration_Genetic_Algorithms",
+				"ProceduralGeneration_Evolutionary_Computation",
+				"ProceduralGeneration_Genetic_Programming",
                 "ProceduralGeneration_Marching_Cubes_Algorithm"
-            ],
-            "return_to": "lab",
-            "unlock_requirements": [
+			],
+			"return_to": "lab",
+			"unlock_requirements": [
                 "noise"
-            ],
-            "completion_rewards": [
-                "procedural_master_badge",
+			],
+			"completion_rewards": [
+				"procedural_master_badge",
                 "generation_specialist_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

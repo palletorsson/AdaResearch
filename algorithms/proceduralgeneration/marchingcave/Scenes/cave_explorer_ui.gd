@@ -116,10 +116,8 @@ func update_mini_cave():
 		mini_cave.chunk_scale = chunk_scale
 		
 		# Trigger regeneration if the script supports it
-		if mini_cave.has_method("init_compute"):
-			mini_cave.call("init_compute")
-			mini_cave.call("run_compute")
-			mini_cave.call("fetch_and_process_compute_data")
+		# Parameters updated, the automatic process loop in TerrainGeneratorBase will pick them up
+
 
 # Called from UI sliders
 func on_noise_scale_changed(value: float):

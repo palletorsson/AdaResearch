@@ -1,4 +1,5 @@
 extends Node
+class_name QueerTextureGenerator
 
 # Queer Texture Generator
 # Creates vibrant, pride-inspired textures for cave lighting

@@ -58,7 +58,7 @@ func _create_terrain():
 	terrain_mesh.set("iso_level", 0.0)
 	terrain_mesh.set("chunk_scale", 400.0)
 	terrain_mesh.set("center_position", Vector3.ZERO)
-	terrain_mesh.set("use_fallback_cave", use_fallback)
+	terrain_mesh.set("use_fallback", use_fallback)
 	
 	# Add to tree AFTER configuration - this will trigger _ready()
 	add_child(terrain_mesh)
