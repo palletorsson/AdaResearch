@@ -9,13 +9,23 @@
 				"Spatial partitioning algorithms",
 				"Genetic algorithms",
 				"Markov chain systems",
-                "Constraint-based generation"
+				"Constraint-based generation"
 			],
 			"maps": [
+				"ProceduralGenerationBooleanPatterns",
+				"ProceduralGenerationMarchingCubesVovelNoise",
+				"ProceduralGenerationWfcDungeonGenerator",
+				"ProceduralGenerationMarchingcubesTorusSculpture",
+				"ProceduralGenerationMarchingCubesSculpture",
 				"ProceduralGenerationMarchingcubesFlatLandscape",
 				"ProceduralGeneration_Voronoi_Diagrams",
+				"ProceduralGeneration_Three",
 				"ProceduralGeneration_Delaunay_Triangulation",
 				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGenerationTesseractErrorTunnel",
+				"ProceduralGenerationNetSpace",
+				"ProceduralGenerationSixteenCellNet",
+				"ProceduralGenerationPortals",
 				"ProceduralGeneration_CaveRandomWalk",
 				"ProceduralGeneration_Markov_Chains",
 				"ProceduralGeneration_N_grams",
@@ -26,15 +36,20 @@
 				"ProceduralGeneration_Genetic_Algorithms",
 				"ProceduralGeneration_Evolutionary_Computation",
 				"ProceduralGeneration_Genetic_Programming",
-                "ProceduralGeneration_Marching_Cubes_Algorithm"
+				"ProceduralGeneration_Marching_Cubes_Algorithm",
+				"ProceduralGeneration_Context_Free_Grammars",
+				"ProceduralGeneration_L_System_Tree",
+				"ProceduralGeneration_Recursive_Tree",
+				"ProceduralGeneration_Fibonacci_Sequences",
+				"ProceduralGeneration_Branching_Growth"
 			],
 			"return_to": "lab",
 			"unlock_requirements": [
-                "noise"
+				"noise"
 			],
 			"completion_rewards": [
 				"procedural_master_badge",
-                "generation_specialist_badge"
+				"generation_specialist_badge"
 			]
 		}
 	}

@@ -1,16 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl8yak2v7m4pq"]
+[gd_scene load_steps=5 format=3 uid="uid://bl8yak2v7m4pq"]
 
 [ext_resource type="Script" uid="uid://brgu5v6urprrt" path="res://algorithms/lsystems/tree_generation/TreeGeneration.gd" id="1_tree_gen"]
+[ext_resource type="Script" path="res://algorithms/lsystems/tree_generation/TreeUI.gd" id="2_ui"]
+
+[sub_resource type="Environment" id="Environment_tree"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.2, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_tree"]
 
 [node name="TreeGeneration" type="Node3D"]
 script = ExtResource("1_tree_gen")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 8)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 12)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 light_energy = 1.5
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tree")
+camera_attributes = SubResource("CameraAttributesPractical_tree")
 
 [node name="TreeRoot" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
@@ -27,3 +43,70 @@ size = Vector3(0.3, 1, 0.2)
 [node name="RuleDisplay" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -2, 0)
 size = Vector3(0.5, 0.3, 0.2)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "L-System Tree"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AutoCheck" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Auto Grow"
+
+[node name="GrowButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Step Growth"
+
+[node name="ResetButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Generation: 0 / 6"
+
+[connection signal="toggled" from="UI/Control/Panel/VBoxContainer/AutoCheck" to="UI/Control" method="_on_auto_toggled"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/GrowButton" to="UI/Control" method="_on_grow_pressed"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/ResetButton" to="UI/Control" method="_on_reset_pressed"]

@@ -3,6 +3,8 @@ extends Node3D
 # Fibonacci Sequences Visualization
 # Mathematical recursion patterns in nature and computation
 
+@export var auto_play: bool = true
+
 var time := 0.0
 var sequence_timer := 0.0
 var current_index := 0
@@ -14,11 +16,13 @@ func _ready():
 
 func _process(delta):
 	time += delta
-	sequence_timer += delta
 	
-	if sequence_timer > 0.8:
-		sequence_timer = 0.0
-		current_index = (current_index + 1) % fibonacci_numbers.size()
+	if auto_play:
+		sequence_timer += delta
+		
+		if sequence_timer > 0.8:
+			sequence_timer = 0.0
+			current_index = (current_index + 1) % fibonacci_numbers.size()
 	
 	visualize_number_sequence()
 	create_golden_spiral()
@@ -31,6 +35,9 @@ func generate_fibonacci_sequence(count: int):
 	for i in range(2, count):
 		var next_fib = fibonacci_numbers[i-1] + fibonacci_numbers[i-2]
 		fibonacci_numbers.append(next_fib)
+
+func next_step():
+	current_index = (current_index + 1) % fibonacci_numbers.size()
 
 func visualize_number_sequence():
 	var container = $NumberSequence

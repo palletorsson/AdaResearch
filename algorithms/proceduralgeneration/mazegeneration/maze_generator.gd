@@ -40,7 +40,8 @@ var directions = [
 ]
 
 func _ready():
-	setup_environment()
+	# Removed setup_environment() as it's now in the scene
+	# setup_environment() 
 	initialize_maze()
 	create_maze_visuals()
 	
@@ -54,27 +55,7 @@ func _process(delta):
 			generation_step()
 			generation_timer = 0.0
 
-func setup_environment():
-	# Lighting
-	var light = DirectionalLight3D.new()
-	light.light_energy = 1.0
-	light.rotation_degrees = Vector3(-45, 30, 0)
-	add_child(light)
-	
-	# Environment
-	var env = WorldEnvironment.new()
-	var environment = Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color(0.1, 0.1, 0.2)
-	environment.ambient_light_energy = 0.5
-	env.environment = environment
-	add_child(env)
-	
-	# Camera
-	var camera = Camera3D.new()
-	camera.position = Vector3(maze_width, maze_height * 1.5, maze_height)
-	camera.look_at(Vector3(maze_width / 2, 0, maze_height / 2))
-	add_child(camera)
+# setup_environment removed - scene file handles this
 
 func initialize_maze():
 	# Initialize maze grid - true = wall, false = path
@@ -97,6 +78,11 @@ func initialize_maze():
 			maze[y][x] = false  # Create path cell
 
 func create_maze_visuals():
+	# Clear existing visuals cleanly
+	for child in get_children():
+		if child is MeshInstance3D or child is StaticBody3D:
+			child.queue_free()
+			
 	cell_meshes.clear()
 	wall_meshes.clear()
 	wall_colliders.clear()
@@ -378,4 +364,4 @@ func debug_collision_info() -> Dictionary:
 		"maze_size": Vector2i(maze_width, maze_height),
 		"cell_size": cell_size,
 		"wall_height": wall_height
-	} 
+	}

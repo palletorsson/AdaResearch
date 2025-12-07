@@ -1,13 +1,130 @@
-[gd_scene load_steps=2 format=3 uid="uid://c31t0ok5c3i20"]
+[gd_scene load_steps=5 format=3 uid="uid://c8k2y3m4n5p6q"]
 
-[ext_resource type="Script" uid="uid://cdswj66fc5evr" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithmcontinued/branching_growth_algorithm.gd" id="1_t43dj"]
+[ext_resource type="Script" uid="uid://d3y4j5k6l7m8n" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/branching_growth_algorithm.gd" id="1_growth"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingUI.gd" id="2_ui"]
+
+[sub_resource type="Environment" id="Environment_br"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.1, 0.1, 0.1, 1)
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.2
+glow_strength = 0.9
+glow_bloom = 0.1
+glow_blend_mode = 0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_br"]
 
 [node name="BranchingGrowthAlgorithm" type="Node3D"]
-script = ExtResource("1_t43dj")
-max_branches = 400
-jitter = 0.2
-pulse_strength = 0.4
-rainbow_speed = 1.5
+
+[node name="BranchingGrowthAlgorithm" type="Node3D" parent="."]
+script = ExtResource("1_growth")
+max_branches = 500
+attractor_count = 200
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.792194, 0.61027, 0, -0.61027, 0.792194, 0, 1.71594, 3.49372)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 8)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 5, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_br")
+camera_attributes = SubResource("CameraAttributesPractical_br")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Branching Growth"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="BranchLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Max Branches: 500"
+
+[node name="BranchSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 100.0
+max_value = 2000.0
+step = 50.0
+value = 500.0
+
+[node name="AttractorLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Attractors: 200"
+
+[node name="AttractorSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 50.0
+max_value = 500.0
+step = 10.0
+value = 200.0
+
+[node name="RainbowCheck" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Pride Colors"
+
+[node name="SparkleCheck" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Sparkles"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Restart Growth"
+
+[node name="StatsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Branches: 0"
+
+[connection signal="drag_ended" from="UI/Control/Panel/VBoxContainer/BranchSlider" to="UI/Control" method="_on_restart_pressed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/BranchSlider" to="UI/Control" method="_on_branch_changed"]
+[connection signal="drag_ended" from="UI/Control/Panel/VBoxContainer/AttractorSlider" to="UI/Control" method="_on_restart_pressed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/AttractorSlider" to="UI/Control" method="_on_attractor_changed"]
+[connection signal="toggled" from="UI/Control/Panel/VBoxContainer/RainbowCheck" to="UI/Control" method="_on_rainbow_toggled"]
+[connection signal="toggled" from="UI/Control/Panel/VBoxContainer/SparkleCheck" to="UI/Control" method="_on_sparkle_toggled"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/RestartButton" to="UI/Control" method="_on_restart_pressed"]

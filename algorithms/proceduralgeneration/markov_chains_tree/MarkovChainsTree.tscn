@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxvhxqxqxqxm"]
+[gd_scene load_steps=6 format=3 uid="uid://bqxvhxqxqxqxm"]
 
 [ext_resource type="Script" path="res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.gd" id="1_script"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/markov_chains_tree/MarkovUI.gd" id="2_ui"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
 albedo_color = Color(0.4, 0.25, 0.15, 1)
@@ -12,19 +13,30 @@ albedo_color = Color(0.2, 0.6, 0.2, 1)
 metallic = 0.0
 roughness = 0.8
 
+[sub_resource type="Environment" id="Environment_mc"]
+background_mode = 1
+background_color = Color(0.1, 0.1, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.2, 0.2, 1)
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="MarkovChainsTree" type="Node3D"]
+
+[node name="MarkovChainsTree" type="Node3D" parent="."]
 script = ExtResource("1_script")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 5, 12)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 light_energy = 1.2
+shadow_enabled = true
 
-[node name="TreeBranches" type="Node3D" parent="."]
-
-[node name="TreeLeaves" type="Node3D" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mc")
 
 [node name="MarkovEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
@@ -54,91 +66,78 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 material_override = SubResource("StandardMaterial3D_2")
 radius = 0.3
 
-[node name="Parameters" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ParameterCore" type="CSGBox3D" parent="Parameters"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(2, 2, 2)
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
 
-[node name="ParameterLabel" type="CSGBox3D" parent="Parameters"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(2, 0.2, 0.2)
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
 
-[node name="ParameterIndicators" type="Node3D" parent="Parameters"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="HeightIndicator" type="CSGSphere3D" parent="Parameters/ParameterIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.15
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Markov Chains Tree"
+horizontal_alignment = 1
 
-[node name="BranchIndicator" type="CSGSphere3D" parent="Parameters/ParameterIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.15
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
 
-[node name="RandomIndicator" type="CSGSphere3D" parent="Parameters/ParameterIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.15
+[node name="HeightLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Tree Height: 10.0"
 
-[node name="GrowthVisualization" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+[node name="HeightSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 20.0
+step = 1.0
+value = 10.0
 
-[node name="GrowthCore" type="CSGBox3D" parent="GrowthVisualization"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(8, 0.2, 0.5)
+[node name="RandomLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomness: 0.3"
 
-[node name="GrowthLabel" type="CSGBox3D" parent="GrowthVisualization"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(4, 0.2, 0.2)
+[node name="RandomSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.3
 
-[node name="GrowthIndicators" type="Node3D" parent="GrowthVisualization"]
+[node name="AnimateCheck" type="CheckBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Animate Growth"
 
-[node name="GrowthNode1" type="CSGSphere3D" parent="GrowthVisualization/GrowthIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.2
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate"
 
-[node name="GrowthNode2" type="CSGSphere3D" parent="GrowthVisualization/GrowthIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.15
-
-[node name="GrowthNode3" type="CSGSphere3D" parent="GrowthVisualization/GrowthIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.15
-
-[node name="GrowthNode4" type="CSGSphere3D" parent="GrowthVisualization/GrowthIndicators"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.1
-
-[node name="Metrics" type="Node3D" parent="."]
-
-[node name="ComplexityMeter" type="Node3D" parent="Metrics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 0)
-
-[node name="ComplexityBase" type="CSGBox3D" parent="Metrics/ComplexityMeter"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.2, 0.5)
-
-[node name="ComplexityIndicator" type="CSGSphere3D" parent="Metrics/ComplexityMeter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.2
-
-[node name="GrowthMeter" type="Node3D" parent="Metrics"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 8, 0)
-
-[node name="GrowthBase" type="CSGBox3D" parent="Metrics/GrowthMeter"]
-material_override = SubResource("StandardMaterial3D_1")
-size = Vector3(3, 0.2, 0.5)
-
-[node name="GrowthIndicator" type="CSGSphere3D" parent="Metrics/GrowthMeter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-material_override = SubResource("StandardMaterial3D_2")
-radius = 0.2
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/HeightSlider" to="UI/Control" method="_on_height_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/RandomSlider" to="UI/Control" method="_on_random_changed"]
+[connection signal="toggled" from="UI/Control/Panel/VBoxContainer/AnimateCheck" to="UI/Control" method="_on_animate_toggled"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/RegenerateButton" to="UI/Control" method="_on_regenerate_pressed"]

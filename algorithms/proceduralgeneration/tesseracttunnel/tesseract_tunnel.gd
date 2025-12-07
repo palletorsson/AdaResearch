@@ -28,25 +28,60 @@ enum ProjectionType {
 @export var outer_color: Color = Color(0.3, 0.5, 1.0)
 
 var time: float = 0.0
+var _mesh_instance: MeshInstance3D
+var _immediate_mesh: ImmediateMesh
 
 func _ready():
+	_setup_mesh()
 	generate_tunnel()
+
+func _setup_mesh():
+	# Clean up children first
+	for child in get_children():
+		child.queue_free()
+		
+	# Create single mesh instance for the tunnel
+	_mesh_instance = MeshInstance3D.new()
+	_immediate_mesh = ImmediateMesh.new()
+	_mesh_instance.mesh = _immediate_mesh
+	
+	# Create glowing material
+	var material = StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.vertex_color_use_as_albedo = true
+	material.emission_enabled = true
+	material.emission = edge_color
+	material.emission_energy_multiplier = emission_strength
+	material.albedo_color = edge_color
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	
+	_mesh_instance.material_override = material
+	add_child(_mesh_instance)
 
 func _process(delta):
 	if animate_w:
 		time += delta
 		w_offset = sin(time * w_speed) * 2.0
 		rotation_4d = time * 0.3
+		
+		# Update mesh if material properties changed
+		if _mesh_instance and _mesh_instance.material_override:
+			_mesh_instance.material_override.emission = edge_color
+			_mesh_instance.material_override.albedo_color = edge_color
+			_mesh_instance.material_override.emission_energy_multiplier = emission_strength
+			
 		generate_tunnel()
 
 func generate_tunnel():
 	"""Generate tunnel from 4D tesseract tessellation"""
-	# Clear existing
-	for child in get_children():
-		child.queue_free()
+	if not _mesh_instance:
+		_setup_mesh()
+		
+	_immediate_mesh.clear_surfaces()
+	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
-	# Create tesseracts in 4D grid arranged as hollow cylinder
-	var tesseract_positions = []
+	# Pre-calculate edges connectivity once
+	var edges = get_tesseract_edges()
 	
 	# Arrange tesseracts in cylindrical pattern in 4D
 	for ring in range(tesseract_grid_density):
@@ -58,46 +93,63 @@ func generate_tunnel():
 			
 			# Position along tunnel
 			for z in range(int(tunnel_length / tesseract_size)):
-				var pos_4d = Vector4D.new(
+				var center_4d = Vector4D.new(
 					cos(angle) * ring_radius,
 					sin(angle) * ring_radius,
 					z * tesseract_size - tunnel_length / 2,
 					w_offset + ring * 0.5  # Offset in 4th dimension
 				)
 				
-				tesseract_positions.append(pos_4d)
-	
-	# Project each tesseract to 3D and render
-	for pos_4d in tesseract_positions:
-		create_projected_tesseract(pos_4d)
+				_add_tesseract_to_mesh(center_4d, edges)
+				
+	_immediate_mesh.surface_end()
 
-func create_projected_tesseract(center_4d: Vector4D):
-	"""Create a 3D projection of a tesseract at 4D position"""
+func _add_tesseract_to_mesh(center_4d: Vector4D, edges: Array):
 	# Generate 16 vertices of tesseract in 4D
-	var vertices_4d = []
-	for i in range(16):
-		var x = -1.0 if (i & 1) else 1.0
-		var y = -1.0 if (i & 2) else 1.0
-		var z = -1.0 if (i & 4) else 1.0
-		var w = -1.0 if (i & 8) else 1.0
-		
-		var v = Vector4D.new(x, y, z, w)._mul(tesseract_size * 0.5)
-		
-		# Apply 4D rotation
-		v = rotate_4d(v, rotation_4d)
-		
-		vertices_4d.append(center_4d._add(v))
-	
-	# Project to 3D
 	var vertices_3d = []
-	for v4 in vertices_4d:
+	
+	# Pre-calculate rotation terms
+	var cos_a = cos(rotation_4d)
+	var sin_a = sin(rotation_4d)
+	var half_size = tesseract_size * 0.5
+	
+	for i in range(16):
+		var x = half_size if not (i & 1) else -half_size
+		var y = half_size if not (i & 2) else -half_size
+		var z = half_size if not (i & 4) else -half_size
+		var w = half_size if not (i & 8) else -half_size
+		
+		# Rotate 4D
+		var rx = x * cos_a - w * sin_a
+		var rw = x * sin_a + w * cos_a
+		
+		# Add center
+		var v4 = Vector4D.new(center_4d.x + rx, center_4d.y + y, center_4d.z + z, center_4d.w + rw)
+		
 		vertices_3d.append(project_to_3d(v4))
 	
-	# Create edges
-	var edges = get_tesseract_edges()
+	# Color based on W position
+	var t = (center_4d.w - w_offset) / 3.0 + 0.5
+	t = clamp(t, 0.0, 1.0)
+	var color = outer_color.lerp(inner_color, t)
+	color.a = 0.8
 	
-	# Render as line mesh
-	create_edge_mesh(vertices_3d, edges, center_4d.w)
+	# Add edges to surface
+	for edge in edges:
+		_immediate_mesh.surface_set_color(color)
+		_immediate_mesh.surface_add_vertex(vertices_3d[edge[0]])
+		_immediate_mesh.surface_set_color(color)
+		_immediate_mesh.surface_add_vertex(vertices_3d[edge[1]])
+
+func regenerate():
+	"""Regenerate tunnel"""
+	_setup_mesh() # Reset mesh
+	generate_tunnel()
+
+func set_projection_type(type: ProjectionType):
+	"""Change projection type and regenerate"""
+	projection_type = type
+	generate_tunnel()
 
 func rotate_4d(v: Vector4D, angle: float) -> Vector4D:
 	"""Rotate in 4D space (XY-ZW plane rotation)"""
@@ -158,53 +210,6 @@ func get_tesseract_edges() -> Array:
 	
 	return edges
 
-func create_edge_mesh(vertices: Array, edges: Array, w_position: float):
-	"""Create a mesh from vertices and edges"""
-	var immediate_mesh = ImmediateMesh.new()
-	var mesh_instance = MeshInstance3D.new()
-	
-	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	
-	for edge in edges:
-		var v1 = vertices[edge[0]]
-		var v2 = vertices[edge[1]]
-		
-		# Color based on W position
-		var t = (w_position - w_offset) / 3.0 + 0.5
-		t = clamp(t, 0.0, 1.0)
-		var color = outer_color.lerp(inner_color, t)
-		
-		immediate_mesh.surface_set_color(color)
-		immediate_mesh.surface_add_vertex(v1)
-		immediate_mesh.surface_set_color(color)
-		immediate_mesh.surface_add_vertex(v2)
-	
-	immediate_mesh.surface_end()
-	
-	mesh_instance.mesh = immediate_mesh
-	
-	# Create glowing material
-	var material = StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.vertex_color_use_as_albedo = true
-	material.emission_enabled = true
-	material.emission = edge_color
-	material.emission_energy_multiplier = emission_strength
-	material.albedo_color = edge_color
-	
-	mesh_instance.material_override = material
-	
-	add_child(mesh_instance)
-
-func regenerate():
-	"""Regenerate tunnel"""
-	generate_tunnel()
-
-func set_projection_type(type: ProjectionType):
-	"""Change projection type and regenerate"""
-	projection_type = type
-	generate_tunnel()
-
 func get_tunnel_stats() -> Dictionary:
 	"""Get statistics about the generated tunnel"""
 	var total_tesseracts = 0
@@ -233,20 +238,3 @@ class Vector4D:
 		y = py
 		z = pz
 		w = pw
-	
-	func _add(other: Vector4D) -> Vector4D:
-		return Vector4D.new(x + other.x, y + other.y, z + other.z, w + other.w)
-	
-	func _mul(scalar: float) -> Vector4D:
-		return Vector4D.new(x * scalar, y * scalar, z * scalar, w * scalar)
-	
-	# Operator overloads
-	func __add(other):
-		return _add(other)
-	
-	func __mul(scalar):
-		return _mul(scalar)
-	
-	# Additional operator for right-side multiplication
-	func __rmul(scalar):
-		return _mul(scalar)
