@@ -34,11 +34,19 @@ var detected_color: Color = Color.BLACK
 # UV and texture data
 var last_uv_coord: Vector2
 var last_texture_data: Dictionary = {}
+var texture_image_cache: Dictionary = {} # Cache for texture images to avoid expensive get_image() calls
 var current_direction: Vector3 = Vector3(0, 0, -1)
+# Optical Scanning System
+var scan_viewport: SubViewport
+var scan_camera: Camera3D
+var scan_texture: ViewportTexture
+var viewport_ready: bool = false
+
 
 func _ready():
 	print("=== UV TEXTURE PIXEL SCANNER STARTING ===")
 	setup_components()
+	setup_optical_scanner()
 	setup_visual_ray()
 	setup_raycast()
 	
@@ -122,6 +130,11 @@ func setup_raycast():
 func _process(delta):
 	scan_timer += delta
 	
+	# Update Scan Camera to match RayCast/Scanner direction
+	if viewport_ready and scan_camera:
+		# Sync camera global transform with this node
+		scan_camera.global_transform = global_transform
+	
 	if scan_timer >= (1.0 / scan_frequency):
 		perform_uv_texture_scan()
 		scan_timer = 0.0
@@ -140,12 +153,14 @@ func perform_uv_texture_scan():
 		var hit_normal = raycast.get_collision_normal()
 		var hit_distance = global_position.distance_to(hit_point)
 		
-		print("=== UV TEXTURE SCAN ===")
-		print("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
-		print("Hit point: ", hit_point)
+		if uv_debug:
+			print("=== UV TEXTURE SCAN ===")
+			print("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
+			print("Hit point: ", hit_point)
 		
-		# Extract color using UV texture sampling
-		detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
+		# Extract color using Optical Scanning (Primary) or UV texture sampling (Fallback)
+		# detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
+		detected_color = scan_actual_color()
 		
 		update_ray_for_hit(hit_distance)
 		update_display_hit(hit_object, hit_distance)
@@ -173,7 +188,7 @@ func extract_texture_pixel_color(hit_object: Node, hit_point: Vector3, hit_norma
 		print("UV calculation failed")
 		return fallback_material_color(mesh_instance)
 	
-	print("UV coordinates: ", uv_coord)
+	if uv_debug: print("UV coordinates: ", uv_coord)
 	last_uv_coord = uv_coord
 	
 	# Get material and sample texture
@@ -213,6 +228,38 @@ func find_mesh_instance(hit_object: Node) -> MeshInstance3D:
 
 	return null
 
+func scan_actual_color() -> Color:
+	if not viewport_ready or not scan_viewport:
+		return Color.BLACK
+		
+	# Get the image from the viewport
+	# Optimization: Only scan every N frames is handled by scan_frequency in _process
+	
+	var img = scan_viewport.get_texture().get_image()
+	if img:
+		# Sample the center pixel (1, 1) of 2x2 viewport
+		return img.get_pixel(1, 1)
+	return Color.BLACK
+
+func setup_optical_scanner():
+	# Create a tiny viewport for fetching render data
+	scan_viewport = SubViewport.new()
+	scan_viewport.size = Vector2i(2, 2) # Very small for performance
+	scan_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	scan_viewport.handle_input_locally = false
+	scan_viewport.gui_disable_input = true
+	add_child(scan_viewport)
+	
+	# Create camera for the viewport
+	scan_camera = Camera3D.new()
+	scan_camera.fov = 5.0 # Narrow FOV to focus on the "ray"
+	scan_camera.near = 0.05
+	scan_camera.far = 100.0
+	scan_viewport.add_child(scan_camera)
+	
+	viewport_ready = true
+	if texture_debug: print("Optical scanner initialized")
+
 func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector3) -> Vector2:
 	"""Calculate precise UV coordinates for the hit point"""
 	
@@ -222,7 +269,7 @@ func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector
 	# Convert to local space
 	var local_hit = mesh_instance.to_local(world_hit_point)
 	
-	print("Local hit point: ", local_hit)
+	# if uv_debug: print("Local hit point: ", local_hit)
 	
 	# Handle different mesh types
 	if mesh_instance.mesh is BoxMesh:
@@ -235,6 +282,8 @@ func calculate_precise_uv(mesh_instance: MeshInstance3D, world_hit_point: Vector
 		return calculate_quad_uv(mesh_instance.mesh as QuadMesh, local_hit)
 	elif mesh_instance.mesh is ArrayMesh:
 		return calculate_arraymesh_uv(mesh_instance.mesh as ArrayMesh, local_hit)
+	elif mesh_instance.mesh is SphereMesh:
+		return calculate_sphere_uv(mesh_instance.mesh as SphereMesh, local_hit)
 	else:
 		print("Unsupported mesh type: ", mesh_instance.mesh.get_class())
 		return Vector2(0.5, 0.5)  # Center fallback
@@ -243,38 +292,43 @@ func calculate_box_uv(box_mesh: BoxMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for BoxMesh at local hit point"""
 	
 	var size = box_mesh.size
-	print("Box size: ", size)
+	# if uv_debug: print("Box size: ", size)
 	
-	# Find which face was hit by checking which coordinate is at the edge
-	var abs_point = Vector3(abs(local_point.x), abs(local_point.y), abs(local_point.z))
 	var half_size = size * 0.5
+	# Normalize point relative to size to find dominant axis
+	var relative_p = Vector3(
+		local_point.x / half_size.x,
+		local_point.y / half_size.y,
+		local_point.z / half_size.z
+	)
+	var abs_p = relative_p.abs()
+	var max_axis = abs_p.max_axis_index() # 0=x, 1=y, 2=z
 	
-	# Determine which face by finding the coordinate closest to the edge
-	var face_tolerance = 0.01
-	
-	if abs(abs_point.x - half_size.x) < face_tolerance:
+	if max_axis == 0:
 		# Hit X face (left/right side)
 		var u = (local_point.z + half_size.z) / size.z
 		var v = (local_point.y + half_size.y) / size.y
-		print("Hit X face, UV: ", Vector2(u, 1.0 - v))
+		# Flip U if on negative side? Depends on Godot mapping.
+		if local_point.x < 0: u = 1.0 - u
+		
+		# if uv_debug: print("Hit X face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 		
-	elif abs(abs_point.y - half_size.y) < face_tolerance:
+	elif max_axis == 1:
 		# Hit Y face (top/bottom)
 		var u = (local_point.x + half_size.x) / size.x
 		var v = (local_point.z + half_size.z) / size.z
-		print("Hit Y face, UV: ", Vector2(u, 1.0 - v))
+		# if uv_debug: print("Hit Y face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 		
-	elif abs(abs_point.z - half_size.z) < face_tolerance:
+	else: # max_axis == 2
 		# Hit Z face (front/back)
 		var u = (local_point.x + half_size.x) / size.x
 		var v = (local_point.y + half_size.y) / size.y
-		print("Hit Z face, UV: ", Vector2(u, 1.0 - v))
+		if local_point.z > 0: u = 1.0 - u # Flip for front face logic
+		
+		# if uv_debug: print("Hit Z face, UV: ", Vector2(u, 1.0 - v))
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
-	
-	print("Could not determine hit face")
-	return Vector2(0.5, 0.5)
 
 func calculate_plane_uv(plane_mesh: PlaneMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for PlaneMesh"""
@@ -321,6 +375,13 @@ func calculate_cylinder_uv(cylinder_mesh: CylinderMesh, local_point: Vector3) ->
 		var u = (angle + PI) / (2.0 * PI)
 		var v = (local_point.y + half_height) / height
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
+
+func calculate_sphere_uv(sphere_mesh: SphereMesh, local_point: Vector3) -> Vector2:
+	"""Calculate UV for SphereMesh"""
+	var normalized = local_point.normalized()
+	var u = 0.5 + atan2(normalized.z, normalized.x) / (2.0 * PI)
+	var v = 0.5 - asin(normalized.y) / PI
+	return Vector2(clamp(u, 0.0, 1.0), clamp(v, 0.0, 1.0))
 
 func calculate_arraymesh_uv(array_mesh: ArrayMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for ArrayMesh by finding closest triangle"""
@@ -443,18 +504,30 @@ func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
 	
 	var image: Image = null
 	
-	# Get image from texture
-	if texture is ImageTexture:
-		image = (texture as ImageTexture).get_image()
-	elif texture.has_method("get_image"):
-		image = texture.get_image()
+	# Check cache first
+	var cache_key = texture.get_instance_id()
+	if texture_image_cache.has(cache_key):
+		image = texture_image_cache[cache_key]
+	else:
+		# Get image from texture and cache it
+		if texture is ImageTexture:
+			image = (texture as ImageTexture).get_image()
+		elif texture.has_method("get_image"):
+			image = texture.get_image()
+			
+		if image:
+			texture_image_cache[cache_key] = image
 	
 	if not image:
-		print("Could not get image from texture")
+		if texture_debug: print("Could not get image from texture")
 		return Color.BLACK
 	
+	# Ensure image was properly loaded/cached
+	if image.is_empty():
+		return Color.BLACK
+		
 	var texture_size = image.get_size()
-	print("Texture size: ", texture_size)
+	# if texture_debug: print("Texture size: ", texture_size)
 	
 	# Convert UV to pixel coordinates
 	var pixel_x = int(uv_coord.x * (texture_size.x - 1))
@@ -471,7 +544,7 @@ func sample_texture_pixel(texture: Texture2D, uv_coord: Vector2) -> Color:
 		return sample_texture_area(image, pixel_x, pixel_y, sample_area_size)
 	else:
 		var pixel_color = image.get_pixel(pixel_x, pixel_y)
-		print("Sampled pixel color: ", pixel_color)
+		# if texture_debug: print("Sampled pixel color: ", pixel_color)
 		return pixel_color
 
 func sample_texture_area(image: Image, center_x: int, center_y: int, area_size: int) -> Color:

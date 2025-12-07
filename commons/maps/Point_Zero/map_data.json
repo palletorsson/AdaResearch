@@ -50,12 +50,12 @@
 			[" ", " ", " ", " ", "", " ", " "]
 		],
 		"interactables": [
-			["origin", " ", " ", " ", " ", " ", " "],
+			["origin", " ", " ", " ", " ", " ", "player_position:-90"],
 			["arrow:180:1:0.2", " ", " ", "clipboard#point_zero:-105:0.9", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", ""],
-			[" ", " ", " ", " ", " ", " ", ""],
+			["speed_display:180", "frames_display:180", "game_time_display:180", "draw_calls_display:180", "memory_display:180", " ", ""],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]

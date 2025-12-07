@@ -1,0 +1,24 @@
+extends Node3D
+
+# Single cube with index label [0]
+
+func _ready():
+	create_single_cube()
+
+func create_single_cube():
+	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
+	var cube_instance = pickup_cube_scene.instantiate()
+	cube_instance.name = "Cube_Single"
+	cube_instance.position = Vector3(0, 0, 0)
+	
+	# Add Index Label
+	var label = Label3D.new()
+	label.text = "[0]"
+	label.font_size = 48
+	label.pixel_size = 0.005
+	label.position = Vector3(0, 1.0, 0)
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.modulate = Color.BLACK
+	cube_instance.add_child(label)
+	
+	add_child(cube_instance)

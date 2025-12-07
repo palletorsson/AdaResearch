@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bagt28h74e1yj"]
+[gd_scene load_steps=11 format=3 uid="uid://bagt28h74e1yj"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_tp52a"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
-[ext_resource type="PackedScene" path="res://commons/interfaces/hand_color_controller.tscn" id="4_6o8e0"]
 [ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 
@@ -56,8 +55,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
 [node name="ResetArea3D2" parent="GridSystem" index="2" instance=ExtResource("4_al13m")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 42.13726, 0)
-
-[node name="HandColorController" parent="GridSystem" index="3" instance=ExtResource("4_6o8e0")]
 
 [node name="GridScene" type="Node3D" parent="." index="7"]
 visible = false

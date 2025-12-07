@@ -562,6 +562,18 @@ static func generate_sound(sound_name: String, params: Dictionary = {}) -> Audio
 			return create_808_cowbell(params)
 		"trap_tom", "tom", "drum":
 			return create_trap_tom(params)
+		"kick_heavy":
+			# Heavy kick with more punch and distortion
+			if not params.has("punch"): params["punch"] = 1.8
+			if not params.has("distortion"): params["distortion"] = 0.3
+			if not params.has("decay"): params["decay"] = 1.5
+			return create_808_kick(params)
+		"snare_sharp":
+			# Sharp snare with more snap and brightness
+			if not params.has("snap"): params["snap"] = 1.0
+			if not params.has("brightness"): params["brightness"] = 0.8
+			if not params.has("tone_decay"): params["tone_decay"] = 0.05
+			return create_trap_snare(params)
 		_:
 			push_warning("TrapBeatsGenerator: Unknown sound name: " + sound_name)
 			return null

@@ -15,7 +15,17 @@ func create_row():
 		var cube_instance = pickup_cube_scene.instantiate()
 		cube_instance.name = "Cube_" + str(i)
 		
-		# Position cubes 2 units apart in X direction
+		# Position cubes 1 units apart in X direction
 		cube_instance.position = Vector3(i * 1.0, 0, 0)
+		
+		# Add Index Label
+		var label = Label3D.new()
+		label.text = "[%d]" % i
+		label.font_size = 48
+		label.pixel_size = 0.005
+		label.position = Vector3(0, 1.0, 0)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.modulate = Color.BLACK
+		cube_instance.add_child(label)
 		
 		add_child(cube_instance)

@@ -34,6 +34,50 @@ var light_pattern: String = "sparse"  # Pattern type: sparse, random, sine, grow
 var ceiling_tiles: Array[Node3D] = []
 var ceiling_lights: Array[Node3D] = []
 
+# Grid dimensions in cells (stored after generation)
+var grid_width_cells: int = 0
+var grid_depth_cells: int = 0
+
+# Disco / Array Learning State
+var array_learning_enabled: bool = false
+var light_map: Dictionary = {}
+var disco_timer: float = 0.0
+var current_lesson: int = 0
+var animation_step: int = 0
+var step_timer: float = 0.0
+var animation_speed: float = 0.05
+var lesson_duration: float = 10.0
+
+enum ArrayLesson {
+	CORNER_BLINK,
+	ROW_LIGHTING,
+	COLUMN_LIGHTING,
+	SNAKE_PATTERN,
+	SPIRAL_INWARD,
+	PULSE_CENTER,
+	WAVE_DIAGONAL,
+	DISCO_CELEBRATION,
+	INDEX_LINEAR_SCAN,
+	INDEX_STRIDE,
+	SUBARRAY_REGION,
+	DIAGONAL_ACCESS
+}
+
+var lesson_colors: Dictionary = {
+	ArrayLesson.CORNER_BLINK: Color.YELLOW,
+	ArrayLesson.ROW_LIGHTING: Color.CYAN,
+	ArrayLesson.COLUMN_LIGHTING: Color.MAGENTA,
+	ArrayLesson.SNAKE_PATTERN: Color.GREEN,
+	ArrayLesson.SPIRAL_INWARD: Color.ORANGE,
+	ArrayLesson.PULSE_CENTER: Color.RED,
+	ArrayLesson.WAVE_DIAGONAL: Color.BLUE,
+	ArrayLesson.DISCO_CELEBRATION: Color.WHITE,
+	ArrayLesson.INDEX_LINEAR_SCAN: Color.LIME,
+	ArrayLesson.INDEX_STRIDE: Color.PURPLE,
+	ArrayLesson.SUBARRAY_REGION: Color.TEAL,
+	ArrayLesson.DIAGONAL_ACCESS: Color.PINK
+}
+
 # Signals
 signal ceiling_generation_complete(tile_count: int, light_count: int)
 
@@ -130,6 +174,10 @@ func generate_ceiling(ceiling_config: Dictionary = {}):
 	print("GridCeilingComponent: Creating ceiling with 0.5m cells covering %.1fm × %.1fm (%d×%d cells) at height %.1fm" % [coverage_width_m, coverage_depth_m, width, depth, ceiling_height])
 	print("  Grid dimensions: %dx%d (cube_size: %.1fm, gutter: %.1fm)" % [dimensions.x, dimensions.z, cube_size, gutter])
 
+	# Store dimensions for disco mode
+	grid_width_cells = width
+	grid_depth_cells = depth
+
 	# Generate T-grid structure
 	_generate_grid_structure(width, depth)
 
@@ -196,6 +244,10 @@ func _parse_ceiling_config(config: Dictionary):
 		light_intensity = config.get("light_intensity")
 	if config.has("pattern"):
 		light_pattern = config.get("pattern")
+		
+	if config.has("array_learning") and config.get("array_learning"):
+		# Auto-start array learning (deferred to ensure generation is complete)
+		call_deferred("start_array_learning")
 
 # Generate T-grid structure
 func _generate_grid_structure(width: int, depth: int):
@@ -326,6 +378,8 @@ func _generate_light_panels(width: int, depth: int) -> int:
 	var lights_container = Node3D.new()
 	lights_container.name = "CeilingLights"
 	grid_system.add_child(lights_container)
+	
+	light_map.clear()
 
 	var light_count = 0
 
@@ -340,6 +394,7 @@ func _generate_light_panels(width: int, depth: int) -> int:
 				)
 				lights_container.add_child(light_panel)
 				ceiling_lights.append(light_panel)
+				light_map[Vector2i(x, z)] = light_panel
 				light_count += 1
 
 	return light_count
@@ -355,7 +410,9 @@ func _create_light_panel() -> Node3D:
 	var visible_tile_size = tile_size * 0.98
 	plane.size = Vector2(visible_tile_size, visible_tile_size)
 	panel_mesh.mesh = plane
-	panel_mesh.material_override = light_material
+	panel_mesh.name = "PanelMesh"
+	# Create unique material instance for this panel so we can change its color
+	panel_mesh.material_override = light_material.duplicate()
 	panel_mesh.rotation_degrees = Vector3(180, 0, 0)  # Flip to face downward
 	light_panel.add_child(panel_mesh)
 
@@ -401,6 +458,7 @@ func clear_ceiling():
 		if light and is_instance_valid(light):
 			light.queue_free()
 	ceiling_lights.clear()
+	light_map.clear()
 
 	# Clear container nodes
 	if grid_system:
@@ -440,3 +498,344 @@ func set_light_color(color: Color):
 		var light = light_panel.find_child("OmniLight3D", false, false)
 		if light:
 			light.light_color = color
+
+func _process(delta: float):
+	if array_learning_enabled:
+		_process_array_learning(delta)
+
+func start_array_learning():
+	if ceiling_lights.is_empty():
+		print("GridCeilingComponent: ❌ Cannot start array learning - no lights generated")
+		return
+		
+	array_learning_enabled = true
+	current_lesson = 0
+	animation_step = 0
+	disco_timer = 0.0
+	step_timer = 0.0
+	
+	# Clear current lighting
+	_clear_all_lights()
+	print("GridCeilingComponent: 🎓 Array Learning Mode STARTED. Lights: %d, Size: %dx%d" % [ceiling_lights.size(), grid_width_cells, grid_depth_cells])
+	_print_current_lesson()
+
+func stop_array_learning():
+	array_learning_enabled = false
+	_restore_normal_lighting()
+	print("GridCeilingComponent: Array Learning Mode STOPPED")
+
+func next_lesson():
+	current_lesson = (current_lesson + 1) % ArrayLesson.size()
+	disco_timer = 0.0
+	animation_step = 0
+	step_timer = 0.0
+	_clear_all_lights()
+	_print_current_lesson()
+
+func _process_array_learning(delta: float):
+	disco_timer += delta
+	step_timer += delta
+	
+	# Auto-advance lesson
+	if disco_timer >= lesson_duration:
+		next_lesson()
+		return
+		
+	match current_lesson:
+		ArrayLesson.CORNER_BLINK:
+			_lesson_corner_blink()
+		ArrayLesson.ROW_LIGHTING:
+			_lesson_row_lighting()
+		ArrayLesson.COLUMN_LIGHTING:
+			_lesson_column_lighting()
+		ArrayLesson.SNAKE_PATTERN:
+			_lesson_snake_pattern()
+		ArrayLesson.SPIRAL_INWARD:
+			_lesson_spiral_inward()
+		ArrayLesson.PULSE_CENTER:
+			_lesson_pulse_center()
+		ArrayLesson.WAVE_DIAGONAL:
+			_lesson_wave_diagonal()
+		ArrayLesson.DISCO_CELEBRATION:
+			_lesson_disco_celebration()
+		ArrayLesson.INDEX_LINEAR_SCAN:
+			_lesson_linear_scan()
+		ArrayLesson.INDEX_STRIDE:
+			_lesson_stride()
+		ArrayLesson.SUBARRAY_REGION:
+			_lesson_subarray()
+		ArrayLesson.DIAGONAL_ACCESS:
+			_lesson_diagonal()
+
+func _clear_all_lights():
+	for light_panel in ceiling_lights:
+		var light = light_panel.find_child("OmniLight3D", false, false)
+		if light:
+			light.light_color = Color.BLACK
+			light.light_energy = 0.0
+			
+		var input_mesh = light_panel.find_child("PanelMesh", false, false)
+		if input_mesh and input_mesh.material_override:
+			input_mesh.material_override.albedo_color = Color.BLACK
+			input_mesh.material_override.emission = Color.BLACK
+
+func _restore_normal_lighting():
+	for light_panel in ceiling_lights:
+		var light = light_panel.find_child("OmniLight3D", false, false)
+		if light:
+			light.light_color = light_color
+			light.light_energy = light_intensity
+			
+		var input_mesh = light_panel.find_child("PanelMesh", false, false)
+		if input_mesh and input_mesh.material_override:
+			input_mesh.material_override.albedo_color = light_color
+			input_mesh.material_override.emission = light_color
+
+func _light_ceiling_at(x: int, z: int, color: Color):
+	if light_map.has(Vector2i(x, z)):
+		var panel = light_map[Vector2i(x, z)]
+		var light = panel.find_child("OmniLight3D", false, false)
+		if light:
+			if color == Color.BLACK:
+				light.light_energy = 0.0
+			else:
+				light.light_color = color
+				light.light_energy = 3.0 # Boost for visibility
+		
+		var input_mesh = panel.find_child("PanelMesh", false, false)
+		if input_mesh and input_mesh.material_override:
+			input_mesh.material_override.albedo_color = color
+			input_mesh.material_override.emission = color
+
+# === LESSONS ===
+
+func _lesson_corner_blink():
+	if step_timer >= animation_speed * 10.0: # Slower blink
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		var corners = [
+			Vector2i(0, 0),
+			Vector2i(grid_width_cells - 1, 0),
+			Vector2i(0, grid_depth_cells - 1),
+			Vector2i(grid_width_cells - 1, grid_depth_cells - 1)
+		]
+		
+		var corner = corners[animation_step % corners.size()]
+		_light_ceiling_at(corner.x, corner.y, lesson_colors[ArrayLesson.CORNER_BLINK])
+		animation_step += 1
+
+func _lesson_row_lighting():
+	if step_timer >= animation_speed:
+		step_timer = 0.0
+		
+		# Clear previous ONLY if starting new row? No, keep it building?
+		# Original disco cleared every step? No.
+		# Let's clear row by row.
+		
+		var current_row = animation_step % grid_depth_cells
+		if current_row == 0:
+			_clear_all_lights()
+			
+		for x in range(grid_width_cells):
+			_light_ceiling_at(x, current_row, lesson_colors[ArrayLesson.ROW_LIGHTING])
+		
+		animation_step += 1
+
+func _lesson_column_lighting():
+	if step_timer >= animation_speed:
+		step_timer = 0.0
+		
+		var current_col = animation_step % grid_width_cells
+		if current_col == 0:
+			_clear_all_lights()
+			
+		for z in range(grid_depth_cells):
+			_light_ceiling_at(current_col, z, lesson_colors[ArrayLesson.COLUMN_LIGHTING])
+			
+		animation_step += 1
+
+func _lesson_snake_pattern():
+	if step_timer >= animation_speed * 0.5:
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		# Generate snake pattern on the fly or cached
+		# For large grids, simple logic is better
+		var total_cells = grid_width_cells * grid_depth_cells
+		var current_idx = animation_step % total_cells
+		
+		var z = current_idx / grid_width_cells
+		var x = current_idx % grid_width_cells
+		if z % 2 == 1: # Zigzag
+			x = (grid_width_cells - 1) - x
+			
+		_light_ceiling_at(x, z, lesson_colors[ArrayLesson.SNAKE_PATTERN])
+		
+		# Trail
+		for i in range(1, 5):
+			var trail_idx = (current_idx - i + total_cells) % total_cells
+			var tz = trail_idx / grid_width_cells
+			var tx = trail_idx % grid_width_cells
+			if tz % 2 == 1: tx = (grid_width_cells - 1) - tx
+			_light_ceiling_at(tx, tz, lesson_colors[ArrayLesson.SNAKE_PATTERN] * (1.0 - i/5.0))
+			
+		animation_step += 1
+
+func _lesson_spiral_inward():
+	if step_timer >= animation_speed:
+		step_timer = 0.0
+		
+		# Generating full spiral list might be needed
+		# Let's implement robust spiral generator
+		var positions = _generate_spiral_pattern()
+		if positions.is_empty():
+			return
+			
+		var idx = animation_step % positions.size()
+		if idx == 0: _clear_all_lights()
+		
+		var pos = positions[idx]
+		_light_ceiling_at(pos.x, pos.y, lesson_colors[ArrayLesson.SPIRAL_INWARD])
+		
+		animation_step += 1
+
+func _lesson_pulse_center():
+	var center = Vector2(grid_width_cells / 2.0, grid_depth_cells / 2.0)
+	var max_dist = max(grid_width_cells, grid_depth_cells) * 0.7
+	var pulse_r = (sin(disco_timer * 2.0) * 0.5 + 0.5) * max_dist
+	
+	_clear_all_lights()
+	for x in range(grid_width_cells):
+		for z in range(grid_depth_cells):
+			var dist = Vector2(x, z).distance_to(center)
+			if abs(dist - pulse_r) < 1.0:
+				var inten = 1.0 - abs(dist - pulse_r)
+				_light_ceiling_at(x, z, lesson_colors[ArrayLesson.PULSE_CENTER] * inten)
+
+func _lesson_wave_diagonal():
+	_clear_all_lights()
+	for x in range(grid_width_cells):
+		for z in range(grid_depth_cells):
+			var val = sin(disco_timer * 3.0 + (x + z) * 0.2)
+			if val > 0.0:
+				_light_ceiling_at(x, z, lesson_colors[ArrayLesson.WAVE_DIAGONAL] * val)
+
+func _lesson_disco_celebration():
+	var colors = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN]
+	for x in range(grid_width_cells):
+		for z in range(grid_depth_cells):
+			var t = disco_timer + x * 0.1 + z * 0.1
+			var col_idx = int(t) % colors.size()
+			var pulse = sin(t * 5.0) * 0.5 + 0.5
+			if pulse > 0.2:
+				_light_ceiling_at(x, z, colors[col_idx] * pulse)
+
+func _lesson_linear_scan():
+	if step_timer >= animation_speed * 0.2: # Fast scan
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		var total_cells = grid_width_cells * grid_depth_cells
+		var current_idx = animation_step % total_cells
+		
+		# Simple row-major mapping (flat array simulation)
+		var z = current_idx / grid_width_cells
+		var x = current_idx % grid_width_cells
+		
+		# Highlight current index
+		_light_ceiling_at(x, z, lesson_colors[ArrayLesson.INDEX_LINEAR_SCAN])
+		
+		# Show "past" indices fading out
+		for i in range(1, 10):
+			var past_idx = (current_idx - i + total_cells) % total_cells
+			var pz = past_idx / grid_width_cells
+			var px = past_idx % grid_width_cells
+			_light_ceiling_at(px, pz, lesson_colors[ArrayLesson.INDEX_LINEAR_SCAN] * (1.0 - i/10.0))
+			
+		animation_step += 1
+
+func _lesson_stride():
+	if step_timer >= animation_speed * 5.0:
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		var stride = 3
+		var offset = animation_step % stride
+		
+		var total_cells = grid_width_cells * grid_depth_cells
+		for i in range(total_cells):
+			if (i % stride) == offset:
+				var z = i / grid_width_cells
+				var x = i % grid_width_cells
+				_light_ceiling_at(x, z, lesson_colors[ArrayLesson.INDEX_STRIDE])
+		
+		animation_step += 1
+
+func _lesson_subarray():
+	if step_timer >= animation_speed * 10.0:
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		# Simulate a sliding window or random region
+		# 4x4 window moving across
+		var window_size = 4
+		var max_x = max(1, grid_width_cells - window_size)
+		var max_z = max(1, grid_depth_cells - window_size)
+		
+		var total_windows = max_x * max_z
+		var win_idx = animation_step % total_windows
+		
+		var start_z = win_idx / max_x
+		var start_x = win_idx % max_x
+		
+		for x in range(start_x, min(start_x + window_size, grid_width_cells)):
+			for z in range(start_z, min(start_z + window_size, grid_depth_cells)):
+				_light_ceiling_at(x, z, lesson_colors[ArrayLesson.SUBARRAY_REGION])
+				
+		animation_step += 1
+
+func _lesson_diagonal():
+	if step_timer >= animation_speed:
+		step_timer = 0.0
+		_clear_all_lights()
+		
+		var size = min(grid_width_cells, grid_depth_cells)
+		var idx = animation_step % (size * 2)
+		
+		# Main diagonal
+		if idx < size:
+			_light_ceiling_at(idx, idx, lesson_colors[ArrayLesson.DIAGONAL_ACCESS])
+			# Anti-diagonal
+			var anti_x = (grid_width_cells - 1) - idx
+			if anti_x >= 0 and idx < grid_depth_cells:
+				_light_ceiling_at(anti_x, idx, lesson_colors[ArrayLesson.DIAGONAL_ACCESS] * 0.5)
+		else:
+			# Sweep back? Or just clear.
+			pass
+			
+		animation_step += 1
+
+func _generate_spiral_pattern() -> Array[Vector2i]:
+	var positions: Array[Vector2i] = []
+	var top = 0
+	var bottom = grid_depth_cells - 1
+	var left = 0
+	var right = grid_width_cells - 1
+	
+	while top <= bottom and left <= right:
+		for x in range(left, right + 1): positions.append(Vector2i(x, top))
+		top += 1
+		for z in range(top, bottom + 1): positions.append(Vector2i(right, z))
+		right -= 1
+		if top <= bottom:
+			for x in range(right, left - 1, -1): positions.append(Vector2i(x, bottom))
+			bottom -= 1
+		if left <= right:
+			for z in range(bottom, top - 1, -1): positions.append(Vector2i(left, z))
+			left += 1
+	return positions
+
+func _print_current_lesson():
+	var lesson_name = ArrayLesson.keys()[current_lesson]
+	print("GridCeiling: 🎓 LESSON %d: %s" % [current_lesson + 1, lesson_name])

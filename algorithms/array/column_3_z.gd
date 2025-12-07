@@ -18,4 +18,14 @@ func create_column():
 		# Position cubes 2 units apart in Z direction
 		cube_instance.position = Vector3(0, 0, i * 1.0)
 		
+		# Add Index Label
+		var label = Label3D.new()
+		label.text = "[%d]" % i
+		label.font_size = 48
+		label.pixel_size = 0.005
+		label.position = Vector3(0, 1.0, 0)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.modulate = Color.BLACK
+		cube_instance.add_child(label)
+		
 		add_child(cube_instance)

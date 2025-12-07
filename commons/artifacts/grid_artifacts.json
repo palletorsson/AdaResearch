@@ -797,6 +797,13 @@
 			"description": "Populates a 4x4x4 lattice of pickup cubes for volumetric layouts.",
 			"scene": "res://algorithms/array/grid_3d_4x4x4.tscn"
 		},
+		"grid_snapper": {
+			"name": "grid_snapper",
+			"lookup_name": "grid_snapper",
+			"description": "grid_snapper",
+			"scene": "res://algorithms/array/grid_snapper.tscn"
+		},
+		
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor",
@@ -2173,6 +2180,13 @@
 			"description": "grab_stick_scanner",
 			"scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn"
 		},
+		"dark_side_prism": {
+			"name": "dark_side_prism",
+			"lookup_name": "dark_side_prism",
+			"description": "dark_side_prism",
+			"scene": "res://algorithms/color/dark_side_prism.tscn"
+		},
+		
 		"cube_mound_scene": {
 			"name": "cube_mound_scene",
 			"lookup_name": "cube_mound_scene",
@@ -2434,6 +2448,43 @@
 			"description": "spit_text_3d",
 			"scene": "res://commons/visualaid/spittext/spit_text_3d.tscn"
 		},
+		"player_position": {
+			"name": "player_position",
+			"lookup_name": "player_position",
+			"description": "player_position",
+			"scene": "res://commons/visualaid/playerposition/player_position.tscn"
+		},
+		"game_time_display": {
+			"name": "game_time_display",
+			"lookup_name": "game_time_display",
+			"description": "game_time_display",
+			"scene": "res://commons/visualaid/time/game_time_display.tscn"
+		},
+		"speed_display": {
+			"name": "speed_display",
+			"lookup_name": "speed_display",
+			"description": "speed_display",
+			"scene": "res://commons/visualaid/speed/speed_display.tscn"
+		},
+		"frames_display": {
+			"name": "frames_display",
+			"lookup_name": "frames_display",
+			"description": "frames_displayy",
+			"scene": "res://commons/visualaid/frames/frames_display.tscn"
+		},	
+				"memory_display": {
+			"name": "memory_display",
+			"lookup_name": "memory_display",
+			"description": "Display memory usage",
+			"scene": "res://commons/visualaid/memory/memory_display.tscn"
+		},
+		"draw_calls_display": {
+			"name": "draw_calls_display",
+			"lookup_name": "draw_calls_display",
+			"description": "Display draw calls",
+			"scene": "res://commons/visualaid/performance/draw_calls_display.tscn"
+		},
+
 		"code": {
 			"name": "code",
 			"lookup_name": "code",

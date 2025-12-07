@@ -20,4 +20,14 @@ func create_grid_3d():
 				# Position cubes in a 4x4x4 grid, 1 units apart
 				cube_instance.position = Vector3(x * 1.0, y * 1.0, z * 1.0)
 				
+				# Add Index Label
+				var label = Label3D.new()
+				label.text = "[%d, %d, %d]" % [x, y, z]
+				label.font_size = 48
+				label.pixel_size = 0.005
+				label.position = Vector3(0, 0.6, 0)
+				label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				label.modulate = Color.BLACK
+				cube_instance.add_child(label)
+				
 				add_child(cube_instance)
