@@ -1,9 +1,5 @@
-# res://RoomTilesBuilder.gd
-# Godot 4.x — Run from the Script Editor (EditorScript → Run).
-# Generates res://algorithms/proceduralgeneration/wfcRooms/RoomTiles_Aligned.tscn with clean, edge-aligned WFC tiles.
 @tool
-extends EditorScript
-
+extends SceneTree
 
 const TILE_SIZE   := 2.0
 const FLOOR_THICK := 0.04
@@ -13,9 +9,15 @@ const DOOR_WIDTH  := 1.0
 const DOOR_HEIGHT := 2.1
 
 const GRID_COLS   := 6
-const GRID_GAP    := 2.6   # visual spacing between tiles in the preview grid
+const GRID_GAP    := 2.6
 
-func _run() -> void:
+func _init() -> void:
+	print("🚀 Starting CLI Tile Generation...")
+	generate_tiles()
+	print("✅ Done. Quitting.")
+	quit()
+
+func generate_tiles() -> void:
 	# --- define the tile set (name + sockets) ---
 	var tiles : Array = [
 		["Floor",    {"N":"open","E":"open","S":"open","W":"open"}],
@@ -79,13 +81,13 @@ func _run() -> void:
 		for o in built:
 			o.transform.origin -= offset
 
-	# --- save as .tscn and open ---
+	# --- save as .tscn ---
 	print("Packing scene with ", root.get_child_count(), " children...")
 	
 	var scene := PackedScene.new()
 	var ok := scene.pack(root)
 	if ok != OK:
-		push_error("Failed to pack scene. Error code: ", ok)
+		push_error("Failed to pack scene. Error code: " + str(ok))
 		return
 	
 	print("Scene packed successfully!")
@@ -97,7 +99,6 @@ func _run() -> void:
 		return
 
 	print("✅ Saved: ", path, " with ", built.size(), " tiles")
-	get_editor_interface().open_scene_from_path(path)
 
 # ===== helpers =====
 
@@ -135,9 +136,7 @@ func _build_tile(name: String, sockets: Dictionary) -> Node3D:
 	tile.add_child(floor_box, false)
 
 	# walls / doors per side
-	# Track if we are fully enclosed or open to determine prop logic
 	var wall_count = 0
-	
 	for side in ["N","E","S","W"]:
 		var state := String(sockets.get(side, "open"))
 		if state == "wall":
@@ -148,28 +147,22 @@ func _build_tile(name: String, sockets: Dictionary) -> Node3D:
 			_place_wall_edge(tile, side, true, mat_wall)
 	
 	# Add Prop Markers
-	# We use Marker3D so the solver can find them and instantiate props
 	var marker_name = ""
 	var marker_pos = Vector3(TILE_SIZE/2, 0, TILE_SIZE/2)
 	
 	if name == "Floor":
-		# Open floor - good for desks or center pieces
 		marker_name = "Prop_Center"
 	elif wall_count == 1:
-		# One wall - good for shelves or paintings
 		marker_name = "Prop_Wall"
 	elif wall_count == 2:
-		# Corner - good for plants or lamps
 		marker_name = "Prop_Corner"
 		
 	if marker_name != "":
 		var marker = Marker3D.new()
 		marker.name = marker_name
 		marker.position = marker_pos
-		tile.add_child(marker, true) # internal but saved? No, we need it accessible. 
-		# If we save scene, markers should be saved.
-		# Note: owner must be set later in the loop.
-
+		tile.add_child(marker, true)
+			
 	return tile
 
 func _place_wall_edge(parent: Node3D, side: String, with_door: bool, material: Material) -> void:
@@ -240,7 +233,6 @@ func _add_box_csg(name: String, min_v: Vector3, max_v: Vector3, material: Materi
 	
 	box.material = material
 	return box
-
 
 func _make_plane_mesh(w: float, h: float, col: Color) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()

@@ -273,8 +273,17 @@ func generate_interactables(interactable_data):
 func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
 	var position = Vector3(x, y, z) * total_size
 	
+	# Determine if object should be pickable/grabbable
+	var is_pickable = false
+	if config_data.has("pickable"):
+		var val = config_data["pickable"]
+		is_pickable = (str(val).to_lower() == "true")
+	elif config_data.has("grab"):
+		var val = config_data["grab"]
+		is_pickable = (str(val).to_lower() == "true")
+	
 	# Create object using API
-	var mc_object = MarchingCubesAPI.create(lookup_name, position)
+	var mc_object = MarchingCubesAPI.create(lookup_name, position, 1.0, is_pickable)
 	if not mc_object:
 		return false
 		
@@ -297,7 +306,10 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 
 	# Apply material if specified
 	if config_data.has("material"):
+		print("GridInteractables: Applying material '%s' to '%s'" % [str(config_data.get("material")), lookup_name])
 		MarchingCubesAPI.apply_material(mc_object, str(config_data.get("material")))
+	else:
+		print("GridInteractables: No material in config_data for '%s'. Data keys: %s" % [lookup_name, config_data.keys()])
 
 	parent_node.add_child(mc_object)
 	interactable_objects[Vector3i(x, y, z)] = mc_object
@@ -842,6 +854,44 @@ func _connect_artifact_signals(artifact_object: Node, lookup_name: String):
 	
 	if artifact_object.has_signal("artifact_activated"):
 		artifact_object.artifact_activated.connect(_on_artifact_activated.bind(lookup_name, artifact_object))
+
+	# Connect TELEPORTER signals (for Portal artifacts)
+	if artifact_object.has_signal("teleporter_activated"):
+		artifact_object.teleporter_activated.connect(_on_teleporter_artifact_activated.bind(lookup_name, artifact_object))
+		print("GridInteractables: Connected teleporter signal for '%s'" % lookup_name)
+
+func _on_teleporter_artifact_activated(lookup_name: String, artifact_object: Node):
+	print("GridInteractables: 🚀 Teleporter Artifact activated: %s" % lookup_name)
+	
+	var destination = artifact_object.get_meta("destination", "")
+	var action = artifact_object.get_meta("action", "")
+	
+	# If no explicit destination/action, default to 'next_in_sequence'
+	if destination == "" and action == "":
+		action = "next_in_sequence"
+		print("GridInteractables: No destination/action found, defaulting to 'next_in_sequence'")
+	elif destination != "" and action == "":
+		action = "load_map" # Default action if map name is provided
+	
+	# Find SceneManager (it's an Autoload, usually 'SceneManager' or accessible via tree)
+	# Assuming 'SceneManager' singleton exists as per your project structure
+	var scene_manager = get_node_or_null("/root/SceneManager") 
+	if not scene_manager and utilities_component:
+		# Try to find it via utilities component helper if available
+		if utilities_component.has_method("_find_scene_manager"):
+			scene_manager = utilities_component._find_scene_manager()
+			
+	if scene_manager:
+		scene_manager.request_transition({
+			"type": 1, # TRANSITION_TYPE.TELEPORT (assuming index 1)
+			"action": action,
+			"destination": destination,
+			"source": "teleporter_artifact",
+			"position": artifact_object.global_position
+		})
+		print("GridInteractables: Requested transition to '%s' (action: %s)" % [destination, action])
+	else:
+		printerr("GridInteractables: ❌ Could not find SceneManager to trigger teleport!")
 
 # Handle artifact interaction
 func _on_artifact_interact(lookup_name: String, artifact_object: Node):

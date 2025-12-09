@@ -275,7 +275,7 @@ func _update_info_board_with_map_data():
 	var level_number = _extract_level_number(current_map_name)
 	
 	# Update level number
-	if show_level_number and level_number > 0:
+	if show_level_number and level_number >= 0:
 		level_number_label.text = "%02d" % level_number
 	else:
 		level_number_label.text = "??"
@@ -321,7 +321,7 @@ func _extract_level_number(map_name: String) -> int:
 		elif "Disco" in map_name:
 			return 3
 	
-	return 0
+	return -1
 
 func _get_map_category(map_name: String) -> String:
 	"""Get category based on map name"""

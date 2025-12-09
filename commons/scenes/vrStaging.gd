@@ -27,6 +27,10 @@ func _ready() -> void:
 	# Specify the camera to track (logic from XRToolsStaging)
 	if xr_camera:
 		xr_camera.current = true # Ensure camera is active
+		
+		# FIX: Clear default staging environment so WorldEnvironment can take over
+		xr_camera.environment = null
+		
 		var loading_screen = find_child("LoadingScreen", true, false)
 		if loading_screen:
 			loading_screen.set_camera(xr_camera)
@@ -37,6 +41,11 @@ func _ready() -> void:
 	prompt_for_continue = false
 	
 	print("AdaVRStaging: Starting initialization with consolidated architecture...")
+	
+	# DEBUG: Check for duplicate WorldEnvironments
+	var envs = find_children("*", "WorldEnvironment", true, false)
+	if envs.size() > 1:
+		print("AdaVRStaging: WARNING - Found %d WorldEnvironment nodes (Parent might contain one)" % envs.size())
 	
 	# Ensure pointers are visible
 	var left_pointer = find_child("FunctionPointerLeft", true, false)

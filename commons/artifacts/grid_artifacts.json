@@ -9,6 +9,12 @@
 			"description": "player_presence_indicator.",
 			"scene": "res://commons/interfaces/player_presence_indicator.tscn"
 		},
+		"portal": {
+			"name": "Portal",
+			"lookup_name": "portal",
+			"description": "A vertical portal frame that teleports the player to a destination.",
+			"scene": "res://commons/scenes/mapobjects/portal.tscn"
+		},
 		"menu": {
 			"name": "menu",
 			"lookup_name": "menu",
@@ -39,7 +45,6 @@
 			"description": "ForceMagnitudeDemo",
 			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn"
 		},
-		
 		"CoordinateSystem3M": {
 			"name": "CoordinateSystem3M",
 			"lookup_name": "CoordinateSystem3M",
@@ -759,8 +764,7 @@
 			"name": "hand_color_controller",
 			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
 			"scene": "res://commons/interfaces/hand_color_controller.tscn"
-		},		
-		
+		},
 		"gridcolorizer": {
 			"lookup_name": "gridcolorizer",
 			"name": "gridcolorizer",
@@ -803,7 +807,6 @@
 			"description": "grid_snapper",
 			"scene": "res://algorithms/array/grid_snapper.tscn"
 		},
-		
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor",
@@ -1014,7 +1017,6 @@
 			"description": "Shader_Gallery",
 			"scene": "res://algorithms/shaders/Shader_Gallery.tscn"
 		},
-		
 		"boid_flocking": {
 			"name": "Boid Flocking",
 			"lookup_name": "boid_flocking",
@@ -1281,6 +1283,13 @@
 			"description": "WFCCav",
 			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.tscn"
 		},
+		"wfc_3d_demo": {
+			"name": "wfc_3d_demo",
+			"lookup_name": "wfc_3d_demo",
+			"description": "wfc_3d_demo",
+			"scene": "res://algorithms/proceduralgeneration/wfc3D/wfc_3d_demo.tscn"
+		},
+		
 		"voronoi_diagrams": {
 			"name": "Voronoi Diagrams",
 			"lookup_name": "voronoi_diagrams",
@@ -1644,7 +1653,7 @@
 			"description": "marchingcubes_portal_landscape",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn"
 		},
-			"GyroidDemo": {
+		"GyroidDemo": {
 			"name": "GyroidDemo",
 			"lookup_name": "GyroidDemo",
 			"description": "GyroidDemo",
@@ -1656,7 +1665,6 @@
 			"description": "marching_cubes_gallery",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marching_cubes_gallery.tscn"
 		},
-		
 		"info_display": {
 			"name": "info_display",
 			"lookup_name": "info_display",
@@ -1776,57 +1784,55 @@
 			"lookup_name": "rounded_softbody_test",
 			"description": "rounded_softbody_test",
 			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn"
-		},	
+		},
 		"revolving_joy_ride": {
 			"name": "revolving_joy_ride",
 			"lookup_name": "revolving_joy_ride",
 			"description": "revolving_joy_ride",
 			"scene": "res://algorithms/softbodies/joyride/revolving_joy_ride.tscn"
-		},				
-		
+		},
 		"softbodytest": {
 			"name": "softbodytest",
 			"lookup_name": "softbodytest",
 			"description": "softbodytest",
 			"scene": "res://algorithms/softbodies/softbodytest.tscn"
-		},	
+		},
 		"softbody_gallery_part2": {
 			"name": "softbody_gallery_part2",
 			"lookup_name": "softbody_gallery_part2",
 			"description": "softbody_gallery_part2",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part2.tscn"
-		},	
+		},
 		"softbody_gallery_part3": {
 			"name": "softbody_gallery_part3",
 			"lookup_name": "softbody_gallery_part3",
 			"description": "softbody_gallery_part3",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part3.tscn"
-		},	
+		},
 		"softbody_gallery_part1": {
 			"name": "softbody_gallery_part1",
 			"lookup_name": "softbody_gallery_part1",
 			"description": "softbody_gallery_part1",
 			"scene": "res://algorithms/softbodies/softbody_gallery_part1.tscn"
-		},		
+		},
 		"pendulum_slap": {
 			"name": "pendulum_slap",
 			"lookup_name": "pendulum_slap",
 			"description": "pendulum_slap",
 			"scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn"
-		},	
+		},
 		"cloth_straps": {
 			"name": "cloth_straps",
 			"lookup_name": "cloth_straps",
 			"description": "cloth_straps",
 			"scene": "res://algorithms/softbodies/cloth_straps/cloth_straps.tscn"
-		},	
+		},
 		"soft_mushroom": {
 			"name": "soft_mushroom",
 			"lookup_name": "soft_mushroom",
 			"description": "soft_mushroom",
 			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn"
-		},										
-		
+		},
 		"spring_mass_system": {
 			"name": "Spring Mass System",
 			"lookup_name": "spring_mass_system",
@@ -2199,7 +2205,6 @@
 			"description": "dark_side_prism",
 			"scene": "res://algorithms/color/dark_side_prism.tscn"
 		},
-		
 		"cube_mound_scene": {
 			"name": "cube_mound_scene",
 			"lookup_name": "cube_mound_scene",
@@ -2424,7 +2429,6 @@
 			"description": "subdivision_cube",
 			"scene": "res://commons/primitives/cubes/subdivision_cube.tscn"
 		},
-		
 		"wood_cube": {
 			"name": "wood_cube",
 			"lookup_name": "wood_cube",
@@ -2484,8 +2488,8 @@
 			"lookup_name": "frames_display",
 			"description": "frames_displayy",
 			"scene": "res://commons/visualaid/frames/frames_display.tscn"
-		},	
-				"memory_display": {
+		},
+		"memory_display": {
 			"name": "memory_display",
 			"lookup_name": "memory_display",
 			"description": "Display memory usage",
@@ -2497,7 +2501,6 @@
 			"description": "Display draw calls",
 			"scene": "res://commons/visualaid/performance/draw_calls_display.tscn"
 		},
-
 		"code": {
 			"name": "code",
 			"lookup_name": "code",
@@ -2833,20 +2836,19 @@
 			"lookup_name": "Hilbert3D",
 			"description": "Hilbert3D",
 			"scene": "res://algorithms/l_systems/Hilbert3D.tscn"
-		},		
+		},
 		"cantor_pagoda_vr": {
 			"name": "cantor_pagoda_vr",
 			"lookup_name": "cantor_pagoda_vr",
 			"description": "cantor_pagoda_vr",
 			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn"
-		},	
+		},
 		"inverted_tree_cloud": {
 			"name": "inverted_tree_cloud",
 			"lookup_name": "inverted_tree_cloud",
 			"description": "inverted_tree_cloud",
 			"scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn"
-		},					
-		
+		},
 		"fractal_koch_curve": {
 			"name": "Koch Curve",
 			"lookup_name": "fractal_koch_curve",
@@ -2906,8 +2908,7 @@
 			"lookup_name": "fractal_space",
 			"description": "fractal_space",
 			"scene": "res://commons/context/walkgrids/fractal_space.tscn"
-		},		
-		
+		},
 		"example_2_2_forces_mass_variation_vr": {
 			"name": "example_2_2_forces_mass_variation_vr",
 			"lookup_name": "example_2_2_forces_mass_variation_vr",
@@ -3172,13 +3173,12 @@
 			"description": "Particle repeller system demonstration",
 			"scene": "res://algorithms/particles/example_4_6_particle_repeller_vr.tscn"
 		},
-				"example_particle_body": {
+		"example_particle_body": {
 			"name": "example_particle_body",
 			"lookup_name": "example_particle_body",
 			"description": "example_particle_body",
 			"scene": "res://algorithms/particles/example_particle_body.tscn"
 		},
-		
 		"example_6_1_basic_rigidbody_vr": {
 			"name": "Basic Rigidbody VR",
 			"lookup_name": "example_6_1_basic_rigidbody_vr",

@@ -238,6 +238,133 @@ float humanSDF(vec3 p) {
 	return body;
 }
 
+// --- Lab Items SDFs ---
+
+float microscopeSDF(vec3 p) {
+	// Base
+	float base = sdBoxRound(p - vec3(0, -10, -5), vec3(8, 2, 10), 0.5);
+	// Arm curving up
+	float armVertical = sdBoxRound(p - vec3(0, 0, -12), vec3(3, 10, 3), 0.5);
+	float armTop = sdBoxRound(p - vec3(0, 8, -6), vec3(3, 3, 8), 0.5);
+	// Eyepiece/Tube
+	float tube = sdCappedCylinder(p - vec3(0, 5, 0), 8.0, 2.5);
+	float eyepiece = sdCappedCylinder(p - vec3(0, 14, 0), 2.0, 3.0);
+	// Stage
+	float stage = sdBox(p - vec3(0, -2, 0), vec3(6, 0.5, 6));
+	
+	float res = opUnion(base, armVertical);
+	res = opUnion(res, armTop);
+	res = opUnion(res, tube);
+	res = opUnion(res, eyepiece);
+	res = opUnion(res, stage);
+	return res;
+}
+
+float flaskSDF(vec3 p) {
+	// Erlenmeyer-ish shape
+	// Cone body
+	vec3 q = p;
+	q.y += 10.0;
+	float cone = sdCappedCylinder(q, 8.0, 8.0 * (1.0 - clamp(q.y/15.0, 0.0, 1.0)) + 3.0); // Rough approximation
+	float sphereBody = sdSphere(p - vec3(0, -10, 0), 10.0); // Florence flask style is easier with sphere
+	float neck = sdCappedCylinder(p - vec3(0, 5, 0), 10.0, 3.0);
+	float rim = sdTorus(p - vec3(0, 15, 0), vec2(3.0, 0.8));
+	
+	float res = opSmoothUnion(sphereBody, neck, 3.0);
+	res = opUnion(res, rim);
+	return res;
+}
+
+float dnaSDF(vec3 p) {
+	// Double Helix
+	// Twist space
+	float twist = p.y * 0.15;
+	float c = cos(twist);
+	float s = sin(twist);
+	mat2  m = mat2(c, -s, s, c);
+	vec3  q = vec3(m * p.xz, p.y);
+	
+	// Two strands
+	vec3 q1 = q - vec3(6, 0, 0); // Offset in twisted x
+	vec3 q2 = q - vec3(-6, 0, 0);
+	
+	float strand1 = length(q1.xz) - 1.5; // Vertical cylinder in twisted space
+	float strand2 = length(q2.xz) - 1.5;
+	
+	// Rungs (horizontal connectors)
+	// Repeating every X units
+	float rungY = mod(p.y, 6.0) - 3.0; // Repetition
+	float rungDist = sdBox(vec3(q.x, rungY, q.z), vec3(6, 1.0, 1.0));
+	
+	float strands = opUnion(strand1, strand2);
+	// Limit height
+	float heightLimit = sdBox(p, vec3(20, 25, 20));
+	
+	return opIntersection(opUnion(strands, rungDist), heightLimit);
+}
+
+float atomSDF(vec3 p) {
+	// Nucleus
+	float nucleus = sdSphere(p, 4.0);
+	
+	// Electrons / Orbitals
+	// Ring 1: Flat
+	float ring1 = sdTorus(p, vec2(14.0, 0.5));
+	
+	// Ring 2: Rotated 60 deg X
+	float c = cos(1.047); // 60 deg
+	float s = sin(1.047);
+	vec3 p2 = p;
+	p2.yz = mat2(c, -s, s, c) * p2.yz;
+	float ring2 = sdTorus(p2, vec2(14.0, 0.5));
+	
+	// Ring 3: Rotated -60 deg X
+	vec3 p3 = p;
+	p3.yz = mat2(c, s, -s, c) * p3.yz;
+	float ring3 = sdTorus(p3, vec2(14.0, 0.5));
+	
+	// Electrons (spheres on rings)
+	// Animate them? Need time. For now static.
+	float e1 = sdSphere(p - vec3(14,0,0), 1.5);
+	float e2 = sdSphere(p2 - vec3(14,0,0), 1.5);
+	float e3 = sdSphere(p3 - vec3(14,0,0), 1.5);
+
+	float res = opUnion(nucleus, ring1);
+	res = opUnion(res, ring2);
+	res = opUnion(res, ring3);
+	res = opUnion(res, e1);
+	res = opUnion(res, e2);
+	res = opUnion(res, e3);
+	return res;
+}
+
+float sculptureSDF(vec3 p) {
+	// A non-closed torus with 20 bulges flowing the radius
+	
+	// 1. Get Angle
+	float angle = atan(p.z, p.x);
+	
+	// 2. Create 20 bulges modulated by angle
+	// 20 repetitions around the circle
+	float bulgeSignal = cos(angle * 20.0);
+	
+	// 3. Modulate thickness/radius
+	// Base major radius 12.0
+	// Base minor radius 2.0, varying +/- 1.0
+	float variation = 1.0 * bulgeSignal;
+	
+	vec2 t = vec2(length(p.xz) - 12.0, p.y);
+	float rawTorus = length(t) - (2.5 + variation);
+	
+	// 4. Make it non-closed (Gap at the back, angle ~ PI)
+	// We subtract a wedge or box at the back (where x is negative and z is near 0)
+	// Let's cut where angle is > 3.0 or < -3.0 (small slice at -x axis)
+	
+	float gap = sdBox(p - vec3(-15, 0, 0), vec3(5, 5, 5));
+	
+	return opSubtraction(gap, rawTorus);
+}
+
 // --- Combined Evaluate Function ---
 vec4 evaluate(vec3 coord)
 {   
@@ -260,14 +387,13 @@ vec4 evaluate(vec3 coord)
 	else if (id == 3) dist = bottleSDF(worldPos);
 	else if (id == 4) dist = cupSDF(worldPos);
 	else if (id == 5) dist = computerSDF(worldPos);
+	else if (id == 6) dist = microscopeSDF(worldPos);
+	else if (id == 7) dist = flaskSDF(worldPos);
+	else if (id == 8) dist = dnaSDF(worldPos);
+	else if (id == 9) dist = atomSDF(worldPos);
+	else if (id == 10) dist = sculptureSDF(worldPos);
 	else dist = humanSDF(worldPos); // Default
 
-	// Invert distance for density (negative inside -> positive inside surface logic usually requires inverted SDF if we march towards surface?)
-	// TerrainGeneratorBase iso_level is usually 0.0. 
-	// Marching cubes usually expects: value < isoLevel -> inside.
-	// SDF: negative inside.
-	// So if SDF < 0, it's inside.
-	
 	return vec4(worldPos, dist);
 }
 

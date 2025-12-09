@@ -6,7 +6,12 @@ enum ShapeType {
 	HOUSE = 2,
 	BOTTLE = 3,
 	CUP = 4,
-	COMPUTER = 5
+	COMPUTER = 5,
+	MICROSCOPE = 6,
+	FLASK = 7,
+	DNA = 8,
+	ATOM = 9,
+	SCULPTURE = 10
 }
 
 @export var shape_type : ShapeType = ShapeType.HUMAN

@@ -1,14 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh0yixpmcvifk"]
+[gd_scene load_steps=11 format=3 uid="uid://dh0yixpmcvifk"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3"]
-[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
+[ext_resource type="PackedScene" uid="uid://c8x7y605w4v3v" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_pointer"]
+[ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="6_qxsll"]
 
 [sub_resource type="Curve" id="Curve_qsc12"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kbl5"]
+shader = ExtResource("6_qxsll")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(1, 0.3, 0.8, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.1
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_x6klc"]
+sky_material = SubResource("ShaderMaterial_3kbl5")
+
+[sub_resource type="Environment" id="Environment_hmfpo"]
+background_mode = 2
+background_energy_multiplier = 1.43
+sky = SubResource("Sky_x6klc")
+ambient_light_source = 3
+ambient_light_color = Color(0.67207, 0.682537, 0.672356, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.16
+ssil_enabled = true
+glow_intensity = 1.67
+fog_enabled = true
+fog_light_color = Color(0.81025255, 0.8915905, 0.99056953, 1)
+fog_light_energy = 6.55
+fog_sun_scatter = 3.5
+fog_density = 0.02
+fog_sky_affect = 0.885
+fog_height = -1.3
+adjustment_enabled = true
+adjustment_brightness = 0.92
+adjustment_contrast = 1.02
+adjustment_saturation = 1.01
 
 [node name="VRStaging" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -19,14 +77,14 @@ preferred_grid_map = "Lab"
 main_scene = "uid://cgrljkfrmkgda"
 
 [node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" instance=ExtResource("5_pointer")]
+distance = 5.0
 show_laser = 2
 laser_length = 1
-distance = 5.0
 
 [node name="FunctionPointerRight" parent="XROrigin3D/RightHandController" index="0" instance=ExtResource("5_pointer")]
+distance = 5.0
 show_laser = 2
 laser_length = 1
-distance = 5.0
 
 [node name="LoadingScreen" parent="." index="2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)
@@ -35,3 +93,6 @@ splash_screen = ExtResource("3")
 
 [node name="MainMenu3D" parent="." index="4" instance=ExtResource("4_menu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="6"]
+environment = SubResource("Environment_hmfpo")

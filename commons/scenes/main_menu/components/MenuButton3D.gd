@@ -66,6 +66,9 @@ func _setup_audio() -> void:
 			_click_sound = sound_bank.get_sound("SyntheticSoundGenerator.lift_start_sound")
 
 func _process(delta: float) -> void:
+	if not is_visible_in_tree():
+		return
+
 	if _is_hovering:
 		_hover_timer += delta
 		
@@ -86,6 +89,9 @@ func _process(delta: float) -> void:
 			_hover_timer = 0.0
 
 func pointer_event(event: XRToolsPointerEvent) -> void:
+	if not is_visible_in_tree():
+		return
+
 	# Capture controller for haptics
 	if event.pointer and event.pointer.get_parent() is XRController3D:
 		_current_controller = event.pointer.get_parent()

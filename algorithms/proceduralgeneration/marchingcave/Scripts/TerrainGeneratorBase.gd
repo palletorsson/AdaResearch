@@ -374,6 +374,59 @@ func _create_collision():
 		print("⚠️ Cannot create collision: No mesh surface available")
 		return
 	
+	# Check if parent is a RigidBody3D (e.g., XRToolsPickable)
+	var parent_node = get_parent()
+	if parent_node is RigidBody3D:
+		print("TerrainGeneratorBase: Parent is RigidBody3D, attaching collision shape to parent.")
+		
+		# Find or create CollisionShape3D on parent
+		var collision_node = parent_node.find_child("CollisionShape3D", false)
+		if not collision_node:
+			collision_node = CollisionShape3D.new()
+			collision_node.name = "CollisionShape3D"
+			parent_node.add_child(collision_node)
+			if parent_node.owner:
+				collision_node.owner = parent_node.owner
+		
+		# For RigidBodies, creating a Convex Hull from a complex MC mesh is too slow (causes freeze).
+		# Instead, we use a simple Bounding Box (AABB) which is instant and stable.
+		var aabb = array_mesh.get_aabb()
+		var center = aabb.position + (aabb.size / 2.0)
+		
+		# RE-CENTER VISUALS:
+		# Move the mesh instance (self) so that its visual center aligns with the RigidBody origin (0,0,0).
+		# This ensures that when you grab the object, you grab it by its center.
+		self.position = -center
+		
+		var shape = BoxShape3D.new()
+		shape.size = aabb.size * 0.9 # Shrink slightly to avoid snagging
+		
+		collision_node.shape = shape
+		# Collision shape is centered on RigidBody origin (0,0,0), which now matches the visual center.
+		collision_node.position = Vector3.ZERO
+		
+		# --- DEBUG VISUALIZATION ---
+		# Add a visible box so user can see the grab volume
+		var debug_mesh = MeshInstance3D.new()
+		debug_mesh.name = "DebugGrabBox"
+		var box = BoxMesh.new()
+		box.size = aabb.size * 0.9
+		debug_mesh.mesh = box
+		
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(1.0, 0.0, 0.0, 0.3) # Transparent Red
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		debug_mesh.material_override = mat
+		
+		parent_node.add_child(debug_mesh)
+		if parent_node.owner: debug_mesh.owner = parent_node.owner
+		# ---------------------------
+		
+		print("✅ Created FAST Box collision shape for Pickable (Size: %s) and Re-Centered Object." % str(shape.size))
+		return
+
+	# Standard StaticBody3D logic for static placement
 	# Remove old collision if it exists
 	for child in get_children():
 		if child is StaticBody3D:
