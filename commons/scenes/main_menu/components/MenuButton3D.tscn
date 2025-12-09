@@ -7,11 +7,11 @@
 [ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="4_pose_right"]
 [ext_resource type="Shader" uid="uid://fgffmigpyumy" path="res://commons/scenes/main_menu/components/linear_progress.gdshader" id="5_linear_shader"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(1, 0.2, 0.1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_interaction"]
+size = Vector3(0.15, 0.15, 0.15)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1"]
-size = Vector3(1, 0.2, 0.1)
+[sub_resource type="BoxMesh" id="BoxMesh_interaction"]
+size = Vector3(0.15, 0.15, 0.15)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uu75s"]
 render_priority = 0
@@ -47,7 +47,7 @@ shader_parameter/show_interior = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_a7qoq"]
 material = SubResource("ShaderMaterial_o6ps3")
-size = Vector3(0.96, 0.16, 0.1)
+size = Vector3(0.96, 0.16, 0.035)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_progress"]
 render_priority = 0
@@ -65,22 +65,25 @@ collision_mask = 0
 script = ExtResource("1_menu_button")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+shape = SubResource("BoxShape3D_interaction")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_1")
+[node name="InteractionCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+mesh = SubResource("BoxMesh_interaction")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+[node name="MainDisplay" type="Node3D" parent="."]
+
+[node name="VisualMesh" type="CSGMesh3D" parent="MainDisplay"]
 mesh = SubResource("BoxMesh_buum5")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGMesh3D"]
+[node name="InnerMesh" type="CSGMesh3D" parent="MainDisplay/VisualMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05123362)
 operation = 2
 mesh = SubResource("BoxMesh_a7qoq")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.008040722)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.036863323)
 text = "Button"
 font_size = 24
 outline_size = 4
@@ -96,4 +99,5 @@ left_pose = ExtResource("3_pose_left")
 right_pose = ExtResource("4_pose_right")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
-shape = SubResource("BoxShape3D_1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+shape = SubResource("BoxShape3D_interaction")

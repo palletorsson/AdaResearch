@@ -9,6 +9,9 @@ sky_horizon_color = Color(0.2, 0.2, 0.3, 1)
 ground_bottom_color = Color(0.1, 0.1, 0.15, 1)
 ground_horizon_color = Color(0.2, 0.2, 0.3, 1)
 
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_wfc")
+
 [sub_resource type="Environment" id="Environment_wfc"]
 background_mode = 2
 sky = SubResource("Sky_env")
@@ -17,9 +20,6 @@ ambient_light_color = Color(0.3, 0.3, 0.4, 1)
 tonemap_mode = 2
 glow_enabled = true
 glow_strength = 0.8
-
-[sub_resource type="Sky" id="Sky_env"]
-sky_material = SubResource("ProceduralSkyMaterial_wfc")
 
 [node name="WaveFunctionCollapse" type="Node3D"]
 script = ExtResource("1_wfc")

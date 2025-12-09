@@ -12,12 +12,14 @@
 				"Constraint-based generation"
 			],
 			"maps": [
+				"ProceduralGeneration_MarchingGallery",
 				"ProceduralGenerationBooleanPatterns",
 				"ProceduralGenerationMarchingCubesVovelNoise",
 				"ProceduralGenerationWfcDungeonGenerator",
 				"ProceduralGenerationMarchingcubesTorusSculpture",
-				"ProceduralGenerationMarchingCubesSculpture",
+
 				"ProceduralGenerationMarchingcubesFlatLandscape",
+				"ProceduralGenerationMarchingCubesSculpture",
 				"ProceduralGeneration_Voronoi_Diagrams",
 				"ProceduralGeneration_Three",
 				"ProceduralGeneration_Delaunay_Triangulation",
@@ -41,7 +43,8 @@
 				"ProceduralGeneration_L_System_Tree",
 				"ProceduralGeneration_Recursive_Tree",
 				"ProceduralGeneration_Fibonacci_Sequences",
-				"ProceduralGeneration_Branching_Growth"
+				"ProceduralGeneration_Branching_Growth",
+				"ProceduralGenerationMarchingCubesSculpture",				
 			],
 			"return_to": "lab",
 			"unlock_requirements": [

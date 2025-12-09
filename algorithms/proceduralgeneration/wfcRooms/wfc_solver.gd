@@ -61,6 +61,18 @@ func generate_dungeon() -> bool:
 
 ## Load all tile prototypes from the generated scene
 func _load_tile_prototypes() -> bool:
+	# Clean up previous generation data
+	if tile_prototypes.size() > 0:
+		tile_prototypes.clear()
+		# If we have an old root holding these tiles, we should free it.
+		# But since we didn't track it before, we rely on the group cleanup in _place_tiles_in_world 
+		# or just the array clearing to avoid the crash.
+		
+		# Better approach: Find the old "TilePrototypes" node if it exists
+		var old_root = get_node_or_null("TilePrototypes")
+		if old_root:
+			old_root.queue_free()
+
 	var scene = load(tiles_scene_path)
 	if not scene:
 		push_error("❌ Could not load tiles scene: " + tiles_scene_path)
@@ -72,6 +84,9 @@ func _load_tile_prototypes() -> bool:
 		return false
 	
 	var root = scene.instantiate()
+	root.name = "TilePrototypes"
+	root.visible = false # Hide the templates
+	add_child(root) # Add to tree so they persist and are managed
 	
 	# Find all tiles (they're in the "tile" group)
 	for child in root.get_children():
@@ -87,9 +102,6 @@ func _load_tile_prototypes() -> bool:
 	
 	# Build socket compatibility rules
 	_build_socket_rules()
-	
-	# Don't add root to scene, just use it as template
-	root.queue_free()
 	
 	return true
 

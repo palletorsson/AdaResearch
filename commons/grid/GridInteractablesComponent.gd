@@ -233,6 +233,18 @@ func generate_interactables(interactable_data):
 				var overrides: Dictionary = parsed.get("overrides", {})
 				var config_data: Dictionary = parsed.get("config_data", {})
 				
+				# Check for custom Marching Cubes syntax mc:shape_name
+				if lookup_name.begins_with("mc:"):
+					var y_pos = structure_component.find_highest_y_at(x, z)
+					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
+						y_pos += 1
+						
+					if _place_marching_cubes_object(x, y_pos, z, lookup_name, total_size, overrides, config_data):
+						interactable_count += 1
+					else:
+						placement_errors.append("Failed to place Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
+					continue
+
 				if has_artifact(lookup_name):
 					var y_pos = structure_component.find_highest_y_at(x, z)
 					
@@ -256,6 +268,42 @@ func generate_interactables(interactable_data):
 	
 	print("GridInteractablesComponent: ✅ Successfully placed %d interactables" % interactable_count)
 	interactables_generation_complete.emit(interactable_count)
+
+# Place a Marching Cubes object using API
+func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
+	var position = Vector3(x, y, z) * total_size
+	
+	# Create object using API
+	var mc_object = MarchingCubesAPI.create(lookup_name, position)
+	if not mc_object:
+		return false
+		
+	# Apply common transforms
+	if overrides.has("y_position"):
+		mc_object.position.y += float(overrides.get("y_position", 0.0))
+		
+	if overrides.has("uniform_scale"):
+		var s = float(overrides.get("uniform_scale", 1.0))
+		mc_object.scale = Vector3.ONE * s
+		print("GridInteractables: Applied uniform scale %f -> Final scale: %s" % [s, str(mc_object.scale)])
+		
+	# Apply rotation
+	if overrides.has("rotation_y_degrees"):
+		mc_object.rotation_degrees.y = float(overrides.get("rotation_y_degrees", 0.0))
+	if overrides.has("rotation_x_degrees"):
+		mc_object.rotation_degrees.x = float(overrides.get("rotation_x_degrees", 0.0))
+	if overrides.has("rotation_z_degrees"):
+		mc_object.rotation_degrees.z = float(overrides.get("rotation_z_degrees", 0.0))
+
+	# Apply material if specified
+	if config_data.has("material"):
+		MarchingCubesAPI.apply_material(mc_object, str(config_data.get("material")))
+
+	parent_node.add_child(mc_object)
+	interactable_objects[Vector3i(x, y, z)] = mc_object
+	
+	print("  ✅ Placed Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y, z])
+	return true
 
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
@@ -413,6 +461,39 @@ func _parse_interactable_token(token: String) -> Dictionary:
 		return result
 	
 	var parts = token.split(":", false)
+
+		# SPECIAL HANDLING FOR MARCHING CUBES (mc:) OBJECTS
+	# Format: mc:id:rot_y:y_pos:scale
+	if parts.size() >= 2 and parts[0] == "mc":
+		result.lookup_name = "mc:" + parts[1].strip_edges()
+		
+		# Parse parameters if present
+		# parts[0]=mc, parts[1]=id
+		
+		if parts.size() >= 3:
+			var p = parts[2].strip_edges()
+			if p.is_valid_float():
+				result.overrides["rotation_y_degrees"] = float(p)
+			else:
+				print("GridInteractables: Param 2 (rot) invalid float: '%s'" % p)
+			
+		if parts.size() >= 4:
+			var p = parts[3].strip_edges()
+			if p.is_valid_float():
+				result.overrides["y_position"] = float(p)
+			else:
+				print("GridInteractables: Param 3 (pos) invalid float: '%s'" % p)
+			
+		if parts.size() >= 5:
+			var p = parts[4].strip_edges()
+			if p.is_valid_float():
+				result.overrides["uniform_scale"] = float(p)
+				print("GridInteractables: Found scale param in token: %f" % float(p))
+			else:
+				print("GridInteractables: Param 4 (scale) invalid float: '%s'" % p)
+			
+		return result
+	
 	if parts.size() < 2:
 		return result
 		
@@ -543,7 +624,25 @@ func _parse_config_token(token: String) -> Dictionary:
 
 	# Parse the artifact name part which may contain : overrides
 	# Format: "artifact_name:rotation:height:scale"
-	if artifact_name_part.find(":") != -1:
+	
+	# Handle Marching Cubes (mc:) prefix within config token
+	# Format: mc:id:rot_y:y_pos:scale#config...
+	if artifact_name_part.begins_with("mc:"):
+		var name_parts = artifact_name_part.split(":", false)
+		if name_parts.size() >= 2:
+			result.lookup_name = "mc:" + name_parts[1].strip_edges()
+			
+			if name_parts.size() >= 3 and name_parts[2].is_valid_float():
+				result.overrides["rotation_y_degrees"] = float(name_parts[2])
+				
+			if name_parts.size() >= 4 and name_parts[3].is_valid_float():
+				result.overrides["y_position"] = float(name_parts[3])
+				
+			if name_parts.size() >= 5 and name_parts[4].is_valid_float():
+				result.overrides["uniform_scale"] = float(name_parts[4])
+				print("GridInteractables: (Config token) Found mc scale: %f" % result.overrides["uniform_scale"])
+				
+	elif artifact_name_part.find(":") != -1:
 		var name_parts = artifact_name_part.split(":", false)
 		result.lookup_name = name_parts[0].strip_edges()
 

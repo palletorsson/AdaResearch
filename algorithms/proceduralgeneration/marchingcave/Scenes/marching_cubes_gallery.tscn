@@ -70,10 +70,6 @@ light_indirect_energy = 1.5
 shadow_enabled = true
 spot_range = 50.0
 
-[node name="GalleryFloor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 9)
-size = Vector3(80, 0.5, 50)
-
 [node name="Title" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -10)
 text = "🎨 Marching Cubes Gallery - 7 Forms"

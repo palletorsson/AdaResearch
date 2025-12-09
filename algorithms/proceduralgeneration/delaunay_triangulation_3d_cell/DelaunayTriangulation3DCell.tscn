@@ -20,6 +20,9 @@ sky_horizon_color = Color(0.1, 0.2, 0.2, 1)
 ground_bottom_color = Color(0.05, 0.05, 0.1, 1)
 ground_horizon_color = Color(0.1, 0.2, 0.2, 1)
 
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_bio")
+
 [sub_resource type="Environment" id="Environment_bio"]
 background_mode = 2
 sky = SubResource("Sky_env")
@@ -30,9 +33,6 @@ glow_enabled = true
 glow_intensity = 0.6
 glow_strength = 0.9
 glow_bloom = 0.2
-
-[sub_resource type="Sky" id="Sky_env"]
-sky_material = SubResource("ProceduralSkyMaterial_bio")
 
 [node name="DelaunayTriangulation3DCell" type="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_glass")

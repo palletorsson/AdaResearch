@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0quvjqenm1yr"]
 
 [ext_resource type="Script" uid="uid://b671la8wjdg1h" path="res://algorithms/proceduralgeneration/wfcRooms/wfc_solver.gd" id="1_main"]
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/wfcRooms/WFCDungeonUI.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://c5dmmoy3y3hdt" path="res://algorithms/proceduralgeneration/wfcRooms/WFCDungeonUI.gd" id="2_ui"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -106,7 +106,7 @@ text = "Seed (-1 = Random)"
 [node name="SeedSpinBox" type="SpinBox" parent="UI/Control/Panel/VBoxContainer"]
 layout_mode = 2
 min_value = -1.0
-max_value = 9.99999e+06
+max_value = 9999990.0
 value = -1.0
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]

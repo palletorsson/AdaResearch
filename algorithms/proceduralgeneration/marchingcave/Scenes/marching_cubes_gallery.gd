@@ -3,74 +3,26 @@
 extends Node3D
 
 @export var sculptures_per_row : int = 4
-@export var spacing : float = 15.0
+@export var spacing : float = 4.0 # Reduced spacing for smaller human-scale objects
 @export var auto_generate : bool = true
-@export var sculpture_scale : float = 0.4  # Scale down for gallery display
-@export var enable_rotation : bool = true
-@export var rotation_speed : float = 0.1
+@export var sculpture_scale : float = 0.04  # Scaled down to be roughly human size (1.8m tall)
+@export var enable_rotation : bool = false
+@export var rotation_speed : float = 0.0
 @export var trace_individual_elements : bool = false  # Extract connected components
 
 var sculptures : Array[MeshInstance3D] = []
 var sculpture_configs = [
-	{
-		"name": "Smooth Sphere",
-		"noise_scale": 0.7,
-		"iso_level": 0.0,
-		"noise_offset": Vector3(100, 50, 75),
-		"chunk_scale": 3.0,
-		"color": Color(0.9, 0.8, 0.7)
-	},
-	{
-		"name": "Organic Blob",
-		"noise_scale": 0.85,
-		"iso_level": 0.08,
-		"noise_offset": Vector3(50, 100, 200),
-		"chunk_scale": 3.5,
-		"color": Color(0.7, 0.9, 0.85)
-	},
-	{
-		"name": "Flowing Form",
-		"noise_scale": 1.0,
-		"iso_level": 0.12,
-		"noise_offset": Vector3(200, 150, 100),
-		"chunk_scale": 3.2,
-		"color": Color(0.8, 0.9, 1.0)
-	},
-	{
-		"name": "Soft Torus",
-		"noise_scale": 0.75,
-		"iso_level": 0.0,
-		"noise_offset": Vector3(0, 0, 0),
-		"chunk_scale": 3.0,
-		"color": Color(1.0, 0.85, 0.7)
-	},
-	{
-		"name": "Pebble",
-		"noise_scale": 1.1,
-		"iso_level": 0.15,
-		"noise_offset": Vector3(150, -100, 200),
-		"chunk_scale": 2.8,
-		"color": Color(0.85, 0.75, 0.6)
-	},
-	{
-		"name": "Bean Shape",
-		"noise_scale": 0.9,
-		"iso_level": 0.1,
-		"noise_offset": Vector3(300, 200, 100),
-		"chunk_scale": 3.3,
-		"color": Color(1.0, 0.7, 1.0)
-	},
-	{
-		"name": "Rounded Form",
-		"noise_scale": 1.2,
-		"iso_level": 0.14,
-		"noise_offset": Vector3(50, -50, 100),
-		"chunk_scale": 3.1,
-		"color": Color(0.7, 1.0, 0.8)
-	}
+	{ "name": "Human", "shape_type": 0, "color": Color(0.9, 0.7, 0.6) },
+	{ "name": "Chair", "shape_type": 1, "color": Color(0.6, 0.4, 0.2) },
+	{ "name": "House", "shape_type": 2, "color": Color(0.8, 0.3, 0.3) },
+	{ "name": "Bottle", "shape_type": 3, "color": Color(0.2, 0.8, 0.4) },
+	{ "name": "Cup", "shape_type": 4, "color": Color(0.9, 0.9, 0.9) },
+	{ "name": "Computer", "shape_type": 5, "color": Color(0.3, 0.3, 0.4) }
 ]
 
 func _ready():
+	spacing = 15.0 # Distinct grid spacing
+	# sculpture_scale is used from export
 	if auto_generate:
 		call_deferred("generate_gallery")
 
@@ -81,28 +33,30 @@ func _process(delta):
 				sculpture.rotation.y += rotation_speed * delta
 
 func generate_gallery():
-	print("🎨 Generating Marching Cubes Gallery with 7 forms...")
+	print("🎨 Generating Marching Cubes Gallery with SDF Shapes...")
 	
 	for i in range(sculpture_configs.size()):
 		var config = sculpture_configs[i]
 		var row = i / sculptures_per_row
 		var col = i % sculptures_per_row
 		
+		# Grid positioning
 		var pos = Vector3(
 			col * spacing - (sculptures_per_row - 1) * spacing * 0.5,
 			0,
 			row * spacing
-		)
-		
+		) + Vector3(10, 0, 10) # Shift away from 0,0,0 to avoid player stuck
+
+		print("Creating item ", i, " at ", pos)
 		await create_sculpture(config, pos, i)
+		# Wait a bit more to let physics settling and memory cleanup happen
+		await get_tree().create_timer(1.0).timeout
 	
 	print("✅ Gallery complete with ", sculptures.size(), " sculptures!")
-	
-	if trace_individual_elements:
-		trace_all_elements()
 
 func create_sculpture(config: Dictionary, position: Vector3, index: int):
-	var terrain_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGenerator.gd")
+	# Load the SHAPES generator, not the base one
+	var terrain_script = load("res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorShapes.gd")
 	
 	# Create container node
 	var container = Node3D.new()
@@ -117,10 +71,11 @@ func create_sculpture(config: Dictionary, position: Vector3, index: int):
 	terrain.set_script(terrain_script)
 	
 	# Set parameters
-	terrain.noise_scale = config["noise_scale"]
-	terrain.noise_offset = config["noise_offset"]
-	terrain.iso_level = config["iso_level"]
-	terrain.chunk_scale = config["chunk_scale"]
+	terrain.shape_type = config["shape_type"]
+	terrain.noise_scale = 1.0
+	terrain.iso_level = 0.0
+	# Important: Scale up chunk_scale to fit the SDFs
+	terrain.chunk_scale = 120.0 
 	
 	# Create custom material with unique color
 	var material = StandardMaterial3D.new()
@@ -130,6 +85,8 @@ func create_sculpture(config: Dictionary, position: Vector3, index: int):
 	material.emission_enabled = true
 	material.emission = config["color"] * 0.1
 	material.emission_energy = 0.3
+	# Double-sided rendering
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	terrain.material_override = material
 	
 	container.add_child(terrain)
@@ -139,10 +96,12 @@ func create_sculpture(config: Dictionary, position: Vector3, index: int):
 	var label = Label3D.new()
 	label.name = "Label"
 	label.text = config["name"]
-	label.font_size = 20
-	label.outline_size = 8
+	label.font_size = 64 # High res font
+	label.outline_size = 12
 	label.modulate = config["color"]
-	label.position = Vector3(0, -5, 0)
+	label.position = Vector3(0, 45, 0) # Relative to scaled container
+	# Compensate scale for label so it's readable
+	label.scale = Vector3.ONE * 2.5 
 	container.add_child(label)
 	
 	# Add local light

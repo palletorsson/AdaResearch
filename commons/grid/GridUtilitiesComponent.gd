@@ -436,7 +436,31 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.set_meta("speed_reader_key", sr_key)
 			print("GridUtilitiesComponent: Configured speed reader '%s' (seconds=%.2f, loop=%s)" % [sr_key, sr_speed, str(sr_loop)])
 		"an":  # Annotation/Info Board
-			print("GridUtilitiesComponent: Info board will load map data automatically")
+			var map_info = {}
+			# Try to fetch map info from the parent GridSystem
+			if parent_node and "map_data" in parent_node:
+				var m_data = parent_node.map_data
+				if m_data is Dictionary and m_data.has("info"):
+					map_info = m_data.info
+			
+			if not map_info.is_empty():
+				var title = map_info.get("title", "Untitled Map")
+				var description = map_info.get("description", "")
+				
+				# Apply to utility object properties
+				# We try multiple property names to cover different board implementations
+				utility_object.set("title", title)
+				utility_object.set("description", description)
+				utility_object.set("header_text", title)
+				utility_object.set("body_text", description)
+				
+				# Fallback: some boards might need a specific method call
+				if utility_object.has_method("set_content"):
+					utility_object.set_content(title, description)
+					
+				print("GridUtilitiesComponent: Populated 'an' board with map info: %s" % title)
+			else:
+				print("GridUtilitiesComponent: 'an' board placed, but no map info found in parent")
 		"tc":  # Transport Cube
 			if parameters.size() >= 2:
 				var distance = float(parameters[0])

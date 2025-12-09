@@ -6,7 +6,7 @@ signal clicked
 @export var color: Color = Color("ff00ff") # Ada Research Pink
 @export var hover_time_required: float = 1.5
 
-@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var interaction_cube: MeshInstance3D = $InteractionCube
 @onready var label: Label3D = $Label3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var progress_indicator: MeshInstance3D = $ProgressIndicator
@@ -24,8 +24,8 @@ func _ready() -> void:
 	if label:
 		label.text = text
 	
-	if mesh_instance:
-		_original_scale = mesh_instance.scale
+	if interaction_cube:
+		_original_scale = interaction_cube.scale
 		var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 		var material = ShaderMaterial.new()
 		material.shader = shader
@@ -33,10 +33,10 @@ func _ready() -> void:
 		material.set_shader_parameter("wireframeColor", color)
 		material.set_shader_parameter("emissionColor", color)
 		material.set_shader_parameter("width", 2.0) # Slightly thicker edges
-		material.set_shader_parameter("modelOpacity", 0.3) # Transparent
+		material.set_shader_parameter("modelOpacity", 0.8) # More opaque for the small cube
 		material.set_shader_parameter("wireframeOpacity", 0.8)
-		material.set_shader_parameter("emission_strength", 3.0) # Strong glow
-		mesh_instance.material_override = material
+		material.set_shader_parameter("emission_strength", 1.0) # Standard glow
+		interaction_cube.material_override = material
 		
 	if progress_indicator:
 		progress_indicator.visible = false
@@ -59,7 +59,6 @@ func _setup_audio() -> void:
 	add_child(_audio_player)
 	
 	# Try to load sounds from SoundBank
-	# We use get_node("/root/SoundBank") to access the singleton safely if it exists
 	if has_node("/root/SoundBank"):
 		var sound_bank = get_node("/root/SoundBank")
 		if sound_bank.has_method("get_sound"):
@@ -72,7 +71,9 @@ func _process(delta: float) -> void:
 		
 		# Update progress shader
 		if progress_indicator:
-			progress_indicator.visible = true
+			if not progress_indicator.visible:
+				progress_indicator.visible = true
+				
 			if progress_indicator.material_override:
 				var progress = clamp(_hover_timer / hover_time_required, 0.0, 1.0)
 				progress_indicator.material_override.set_shader_parameter("progress", progress)
@@ -103,24 +104,20 @@ func pointer_entered() -> void:
 	_is_hovering = true
 	_hover_timer = 0.0
 	
-	# Play hover sound - REMOVED per user request
-	# if _audio_player and _hover_sound:
-	# 	_audio_player.stream = _hover_sound
-	# 	_audio_player.pitch_scale = 1.2
-	# 	_audio_player.play()
-		
 	# Trigger hover haptic
 	if _current_controller:
 		_current_controller.trigger_haptic_pulse("haptic", 100.0, 0.2, 0.05, 0)
 	
-	if mesh_instance:
+	if interaction_cube:
 		var tween = create_tween()
-		tween.tween_property(mesh_instance, "scale", _original_scale * 1.1, 0.1)
-		if mesh_instance.material_override:
-			# ShaderMaterial update
-			mesh_instance.material_override.set_shader_parameter("modelColor", Color.BLACK)
-			mesh_instance.material_override.set_shader_parameter("emissionColor", Color.BLACK)
-			mesh_instance.material_override.set_shader_parameter("emission_strength", 5.0) # Boost emission for wireframe contrast if needed, or 0 if black
+		tween.tween_property(interaction_cube, "scale", _original_scale * 1.2, 0.1)
+		
+		# Change color on hover
+		if interaction_cube.material_override:
+			# White/Bright on hover
+			interaction_cube.material_override.set_shader_parameter("modelColor", Color.WHITE)
+			interaction_cube.material_override.set_shader_parameter("emissionColor", Color.WHITE)
+			interaction_cube.material_override.set_shader_parameter("emission_strength", 3.0)
 
 func pointer_exited() -> void:
 	_is_hovering = false
@@ -131,32 +128,29 @@ func pointer_exited() -> void:
 		if progress_indicator.material_override:
 			progress_indicator.material_override.set_shader_parameter("progress", 0.0)
 	
-	if mesh_instance:
+	if interaction_cube:
 		var tween = create_tween()
-		tween.tween_property(mesh_instance, "scale", _original_scale, 0.1)
-		if mesh_instance.material_override:
-			# ShaderMaterial reset
-			mesh_instance.material_override.set_shader_parameter("modelColor", color)
-			mesh_instance.material_override.set_shader_parameter("emissionColor", color)
-			mesh_instance.material_override.set_shader_parameter("emission_strength", 3.0) # Reset emission strength to 3.0
+		tween.tween_property(interaction_cube, "scale", _original_scale, 0.1)
+		
+		# Reset color
+		if interaction_cube.material_override:
+			interaction_cube.material_override.set_shader_parameter("modelColor", color)
+			interaction_cube.material_override.set_shader_parameter("emissionColor", color)
+			interaction_cube.material_override.set_shader_parameter("emission_strength", 1.0)
 
 func _trigger_click() -> void:
 	clicked.emit()
 	
-	# Play click sound - REMOVED per user request
-	# if _audio_player and _click_sound:
-	# 	_audio_player.stream = _click_sound
-	# 	_audio_player.pitch_scale = 1.0
-	# 	_audio_player.play()
-		
 	# Trigger click haptic
 	if _current_controller:
 		_current_controller.trigger_haptic_pulse("haptic", 100.0, 0.8, 0.1, 0)
 		
-	if mesh_instance:
+	if interaction_cube:
 		var tween = create_tween()
-		tween.tween_property(mesh_instance, "scale", _original_scale * 0.9, 0.05)
-		tween.tween_property(mesh_instance, "scale", _original_scale * 1.1, 0.05)
+		# Pulse effect
+		tween.tween_property(interaction_cube, "scale", _original_scale * 0.8, 0.05)
+		tween.tween_property(interaction_cube, "scale", _original_scale * 1.2, 0.05)
+		tween.tween_property(interaction_cube, "scale", _original_scale, 0.05)
 	
 	# Reset progress
 	if progress_indicator:

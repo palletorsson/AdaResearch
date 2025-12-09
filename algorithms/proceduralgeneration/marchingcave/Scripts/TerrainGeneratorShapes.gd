@@ -1,0 +1,40 @@
+class_name TerrainGeneratorShapes extends TerrainGeneratorBase
+
+enum ShapeType {
+	HUMAN = 0,
+	CHAIR = 1,
+	HOUSE = 2,
+	BOTTLE = 3,
+	CUP = 4,
+	COMPUTER = 5
+}
+
+@export var shape_type : ShapeType = ShapeType.HUMAN
+
+func get_class_name() -> String:
+	return "TerrainGeneratorShapes"
+
+func get_compute_shader_path() -> String:
+	return "res://algorithms/proceduralgeneration/marchingcave/Compute/MarchingCubesShapes.glsl"
+
+func get_params_array():
+	# Get base parameters first
+	var params = super.get_params_array()
+	# Append our specific shape ID
+	params.append(float(shape_type))
+	return params
+
+func _create_fallback_mesh():
+	print("TerrainGeneratorShapes: Creating fallback mesh...")
+	var sphere = SphereMesh.new()
+	sphere.radius = 10.0
+	sphere.height = 20.0
+	mesh = sphere
+	_create_collision()
+	print("✅ Fallback mesh created")
+
+func create_mesh():
+	super.create_mesh()
+	# Stop rebuilding triangles after first generation (static shape)
+	set_process(false)
+	print("TerrainGeneratorShapes: Static generation complete, stopping updates.")

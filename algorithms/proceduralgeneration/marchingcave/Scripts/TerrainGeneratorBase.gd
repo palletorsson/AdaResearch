@@ -7,6 +7,7 @@ class_name TerrainGeneratorBase extends MeshInstance3D
 @export var chunk_scale : float = 1000
 @export var center_position : Vector3 = Vector3(0, 10, 0)
 @export var use_fallback : bool = false  # Force use simple mesh for testing
+@export var invert_faces : bool = false # Flip triangle winding and normals (useful for objects vs caves)
 
 const resolution : int = 8
 const num_waitframes_gpusync : int = 12
@@ -249,6 +250,13 @@ func process_mesh_data():
 	num_triangles = counter_data_bytes.to_int32_array()[0]
 	print("%s: Compute shader generated %d triangles" % [get_class_name(), num_triangles])
 	
+	# SAFETY CAP: Prevent device hang if shader outputs garbage or too much density
+	# 65k triangles is plenty for a single prop. Processing 100k+ in GDScript will freeze Quest.
+	if num_triangles > 65000:
+		print("❌ SAFETY ABORT: Triangle count %d exceeds safety limit (65000). Expected ~100-2000 for objects. Aborting to prevent hang." % num_triangles)
+		num_triangles = 0
+		return
+	
 	var num_verts : int = num_triangles * 3
 	verts.resize(num_verts)
 	normals.resize(num_verts)
@@ -263,6 +271,14 @@ func process_mesh_data():
 		var posB = Vector3(triangle_data[i + 4], triangle_data[i + 5], triangle_data[i + 6])
 		var posC = Vector3(triangle_data[i + 8], triangle_data[i + 9], triangle_data[i + 10])
 		var norm = Vector3(triangle_data[i + 12], triangle_data[i + 13], triangle_data[i + 14])
+		
+		# Invert winding/normals if requested (e.g. for objects viewed from outside vs caves viewed from inside)
+		if invert_faces:
+			var temp = posB
+			posB = posC
+			posC = temp
+			norm = -norm
+			
 		verts[tri_index * 3 + 0] = posA
 		verts[tri_index * 3 + 1] = posB
 		verts[tri_index * 3 + 2] = posC
@@ -272,7 +288,10 @@ func process_mesh_data():
 		
 	
 func create_mesh():
-	thread.wait_to_finish()
+	if thread and thread.is_started():
+		thread.wait_to_finish()
+		thread = null
+	
 	waiting_for_meshthread = false
 	print("%s: Creating mesh - Triangles: %d Vertices: %d FPS: %f" % [get_class_name(), num_triangles, len(verts), Engine.get_frames_per_second()])
 	
@@ -371,6 +390,11 @@ func _create_collision():
 	static_body.add_child(collision_shape)
 	
 	# Generate trimesh collision shape from the mesh
+	# Safety check: Don't generate collision for extremely complex meshes to avoid physics crashes
+	if num_triangles > 30000:
+		print("⚠️ Skipping collision generation for high-polygon mesh (%d triangles)" % num_triangles)
+		return
+
 	var shape = array_mesh.create_trimesh_shape()
 	if shape:
 		collision_shape.shape = shape
