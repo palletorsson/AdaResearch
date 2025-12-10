@@ -1042,6 +1042,25 @@
 			"description": "Complex ecosystem with morphology generation, resource systems, and relationship networks",
 			"scene": "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn"
 		},
+		"AntColonyV2": {
+			"name": "AntColonyV2",
+			"lookup_name": "AntColonyV2",
+			"description": "AntColonyV2",
+			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn"
+		},
+		"FlowFieldMain": {
+			"name": "FlowFieldMain",
+			"lookup_name": "FlowFieldMain",
+			"description": "FlowFieldMain",
+			"scene": "res://algorithms/pathfinding/flow_field/FlowFieldMain.tscn"
+		},
+		"PhysarumColony": {
+			"name": "PhysarumColony",
+			"lookup_name": "PhysarumColony",
+			"description": "PhysarumColony",
+			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn"
+		},		
+
 		"self_organizing_patterns": {
 			"name": "Self-Organizing Patterns",
 			"lookup_name": "self_organizing_patterns",
@@ -2688,6 +2707,19 @@
 			"description": "boids_2d_in_3d",
 			"scene": "res://algorithms/emergentsystems/boidflocking/boids_2d_in_3d.tscn"
 		},
+		"boid_manager": {
+			"name": "boid_manager",
+			"lookup_name": "boid_manager",
+			"description": "boid_manager",
+			"scene": "res://algorithms/emergentsystems/boidflocking/boid_manager.tscn"
+		},
+		"ant_colony_optimization": {
+			"name": "ant_colony_optimization",
+			"lookup_name": "ant_colony_optimization",
+			"description": "ant_colony_optimization",
+			"scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn"
+		},
+		
 		"renaissancepaintingfloorrattern": {
 			"name": "renaissancepaintingfloorrattern",
 			"lookup_name": "renaissancepaintingfloorrattern",

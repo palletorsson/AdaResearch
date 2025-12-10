@@ -13,11 +13,12 @@ enum AntState {
 # Ant parameters
 @export var speed: float = 2.0
 @export var turning_speed: float = 4.0
-@export var wander_strength: float = 0.3
-@export var pheromone_strength: float = 1.0
-@export var pheromone_drop_interval: float = 0.5
-@export var perception_radius: int = 3
-@export var detection_radius: float = 5.0
+@export var wander_strength: float = 0.8
+@export var pheromone_strength: float = 1.2
+@export var pheromone_drop_interval: float = 0.2
+@export var pheromone_drop_amount: float = 1.0
+@export var perception_radius: int = 1
+@export var detection_radius: float = 2.0
 @export var colony_color: Color = Color(0, 0, 0)  # Black by default
 @export var carrying_capacity: float = 1.0
 
@@ -208,6 +209,8 @@ func process_returning_home(delta):
 		# Drop off food and switch state
 		if colony.has_method("deposit_food"):
 			colony.deposit_food(carrying_food)
+		elif pheromone_system and pheromone_system.has_method("deposit_food"):
+			pheromone_system.deposit_food(carrying_food)
 		
 		carrying_food = 0.0
 		state = AntState.SEARCHING_FOOD
@@ -348,10 +351,10 @@ func drop_pheromone():
 	match state:
 		AntState.SEARCHING_FOOD:
 			# When searching, drop home pheromone
-			pheromone_system.add_pheromone(position, "home", 1.0)
+			pheromone_system.add_pheromone(position, "home", pheromone_drop_amount)
 		AntState.RETURNING_HOME:
 			# When returning with food, drop food pheromone
-			pheromone_system.add_pheromone(position, "food", 1.0)
+			pheromone_system.add_pheromone(position, "food", pheromone_drop_amount)
 	
 	last_pheromone_pos = position
 

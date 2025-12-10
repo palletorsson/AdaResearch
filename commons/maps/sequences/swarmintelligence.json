@@ -1,0 +1,29 @@
+{
+	"sequences": {
+		"swarmintelligence": {
+			"name": "Swarm Intelligence",
+			"description": "Explore collective behavior and distributed intelligence systems",
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+			"learning_objectives": [
+				"Collective behavior patterns",
+				"Distributed problem solving",
+				"Agent-based modeling",
+				"Optimization through swarms"
+			],
+			"maps": [
+				"SwarmIntelligence_PhysarumColony",
+				"SwarmIntelligence_FlowFeilds",
+				"SwarmIntelligence_Boids_Algorithm",
+				"SwarmIntelligence_Agent_Based_Modeling_ABM",
+				"SwarmIntelligence_Ant_Colony_Optimization",
+				"SwarmIntelligence_Particle_Swarm_Optimization",
+				"SwarmIntelligence_Swarm_Intelligence_Algorithms"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_swarmintelligence",
+			"unlock_requirements": ["lsystems"],
+			"completion_rewards": ["swarm_coordinator_badge", "collective_intelligence_badge"]
+		}
+	}
+}

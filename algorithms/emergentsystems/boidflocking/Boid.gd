@@ -51,6 +51,13 @@ func _ready():
 	if parent and parent.has_method("get_boids"):
 		boid_manager = parent
 
+	# Attach Ribbon Trail
+	var trail_ref = load("res://algorithms/emergentsystems/boidflocking/TrailRibbon.gd")
+	if trail_ref:
+		var trail = trail_ref.new()
+		trail.color = Color(1, 0.2, 1, 0.5)
+		add_child(trail)
+
 
 func _physics_process(delta):
 	# Calculate all steering forces

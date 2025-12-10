@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://csd5nliqoasbg"]
+
+[ext_resource type="Script" uid="uid://cl1jcv0jm4lqf" path="res://algorithms/pathfinding/flow_field/FlowFieldMain.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://algorithms/pathfinding/flow_field/FlowAgent.tscn" id="2_agent_scene"]
+[ext_resource type="Script" uid="uid://bb4qrxeucsp68" path="res://algorithms/pathfinding/flow_field/FieldVisualizer.gd" id="3_viz"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+material = SubResource("StandardMaterial3D_ground")
+size = Vector3(50, 0.1, 50)
+
+[node name="FlowFieldMain" type="Node3D"]
+script = ExtResource("1_main")
+agent_scene = ExtResource("2_agent_scene")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 35, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ground")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ground")
+
+[node name="FieldVisualizer" type="MeshInstance3D" parent="."]
+script = ExtResource("3_viz")
