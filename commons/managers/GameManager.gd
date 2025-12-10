@@ -10,8 +10,8 @@ var current_message: String = ""
 var game_started: bool = false
 var game_paused: bool = false
 
-var max_player_health: float = 3.0
-var player_health: float = 3.0
+var max_player_health: float = 100.0
+var player_health: float = 100.0
 
 # Map tracking
 var current_map_name: String = ""

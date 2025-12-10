@@ -207,6 +207,14 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # direction, destination
 	},
 	
+	"bp": {
+		"name": "big_pipe", 
+		"file": "", 
+		"category": "structure",
+		"description": "Procedural pipe system (bp:f,f,s,u...)",
+		"supports_parameters": true  # pipe code string
+	},
+	
 	# Empty space
 	" ": {
 		"name": "none", 

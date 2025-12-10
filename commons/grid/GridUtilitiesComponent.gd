@@ -42,40 +42,22 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, s
 	print("GridUtilitiesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 # Generate Big Pipe System
-func _generate_big_pipe(bp_code: String) -> void:
-	print("GridUtilitiesComponent: Generating Big Pipe System with code: %s" % bp_code)
+func _generate_big_pipe(bp_code: String, start_pos: Vector3 = Vector3.ZERO) -> void:
+	print("GridUtilitiesComponent: Generating Big Pipe System at %s with code: %s" % [start_pos, bp_code])
 	
-	# Create BigPipeSystem instance
-	# Assuming BigPipeSystem class_name is available globally.
-	# If not, use load()
-	# var big_pipe_script = load("res://algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd")
-	# var pipe_system = big_pipe_script.new()
-	
-	# Using global class_name
+	# Create BigPipeSystem instance (using global class_name)
 	var pipe_system = BigPipeSystem.new()
 	pipe_system.name = "BigPipeSystem"
+	pipe_system.position = start_pos
 	
-	# Pass grid parameters if needed? 
-	# The pipe system uses internal defaults (radius 0.8, length 2.0).
-	# This matches our grid size 1.0?? NO.
-	# Grid size is usually 1.0. A 2m pipe is huge.
-	# The user asked for "Big pipe system".
-	# If grid cube is 1m. Pipe segment length 2m = 2 cubes?
-	# Let's align it.
-	pipe_system.segment_length = cube_size * 2.0 # Assume each segment spans 2 blocks?
-	# Or make it 1 block?
-	# "f,f,f" usually implies stepping through grid.
-	# If I use segment_length = cube_size + gutter, it aligns perfect with grid.
+	# Configure pipe parameters to align with grid
 	pipe_system.segment_length = cube_size + gutter
-	pipe_system.pipe_radius = (cube_size / 2.0) * 0.8 # fit inside
+	pipe_system.pipe_radius = (cube_size * 0.5) * 0.8 # Fit inside grid cell
 	
-	# Generate
+	# Generate geometry
 	pipe_system.generate_pipes(bp_code)
 	
-	# Position roughly? 
-	# Starts at (0,0,0) of the utility component (which is 0,0,0 of Grid).
-	# Pipes will grow from 0,0,0 relative to parent.
-	
+	# Add to scene
 	parent_node.add_child(pipe_system)
 
 
@@ -227,6 +209,12 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				if not border_data.is_empty():
 					_generate_border_frame(border_data)
 				utility_count += 1
+			# Check if this is a Big Pipe System (bp: prefix)
+			elif utility_cell.begins_with("bp:"):
+				var bp_data = _parse_big_pipe_utility(utility_cell, x, z)
+				if not bp_data.is_empty():
+					_generate_big_pipe(bp_data.code, bp_data.position)
+				utility_count += 1
 			else:
 				# Handle regular utilities
 				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
@@ -255,14 +243,34 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 	if not tutorial_display_data.is_empty():
 		_generate_tutorial_displays(tutorial_display_data)
 
-	# Generate Big Pipe System if defined in settings
-	if map_settings.has("bp"):
-		var bp_code = str(map_settings["bp"])
-		_generate_big_pipe(bp_code)
-
-
 	print("GridUtilitiesComponent: Added %d utilities" % utility_count)
 	utility_generation_complete.emit(utility_count)
+
+# Parse Big Pipe utility string
+func _parse_big_pipe_utility(cell_value: String, x: int, z: int) -> Dictionary:
+	# Format: bp:code or bp:code
+	# Code: f,f,s,u...
+	var parts = cell_value.split(":")
+	var code = ""
+	
+	if parts.size() > 1:
+		# Join rest of parts back together in case code has colons (unlikely but safe)
+		# Actually code is usually comma separated.
+		# bp:f,f,s
+		code = parts[1]
+	
+	if code.is_empty():
+		return {}
+		
+	# Calculate position
+	var y = structure_component.find_highest_y_at(x, z)
+	var total_size = cube_size + gutter
+	var pos = Vector3(x, y, z) * total_size
+	
+	return {
+		"code": code,
+		"position": pos
+	}
 
 # Place a single utility object
 func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float):

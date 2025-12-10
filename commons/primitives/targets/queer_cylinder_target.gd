@@ -17,19 +17,16 @@ class_name QueerCylinderTarget
 @onready var audio_player = $AudioStreamPlayer3D
 @onready var hit_particles = $GPUParticles3D
 
-# Colors based on the Progress Pride Flag + Traditional Rainbow
+# Colors based on the Progress Pride Flag (removed outer yellow/orange/red)
 var palette: Array[Color] = [
-	Color("#E40303"), # Life (Red) - Outer
-	Color("#FF8C00"), # Healing (Orange)
-	Color("#FFED00"), # Sunlight (Yellow)
-	Color("#008026"), # Nature (Green)
+	Color("#008026"), # Nature (Green) - Outer
 	Color("#004DFF"), # Harmony (Blue)
 	Color("#750787"), # Spirit (Purple)
 	Color("#FFFFFF"), # Magic/Nonbinary (White)
 	Color("#F5A9B8"), # Trans Pink
 	Color("#5BCEFA"), # Trans Blue
 	Color("#613915"), # POC Inclusion (Brown)
-	Color("#000000"), # HIV/AIDS Awareness (Black) - Inner
+	Color("#000000"), # HIV/AIDS Awareness (Black) - Inner (bullseye)
 ]
 
 var rings: Array[MeshInstance3D] = []
@@ -53,39 +50,40 @@ func _generate_rings() -> void:
 		container = Node3D.new()
 		container.name = "RingsContainer"
 		add_child(container)
-		# Rotate container 90 degrees on Z so the stack lies horizontally
-		container.rotation_degrees.z = 90.0
-	
-	# Create a "Totem" stack of cylinders (Horizontal Bar)
-	# Stripe sequence: Red -> Purple -> White -> Black
-	
-	var num_segments = palette.size()
-	var segment_height = 0.15 # Length of each stripe
-	var total_length = segment_height * num_segments
-	var radius = 0.3 # Thickness of the bar
-	
-	# Center the stack
-	var start_y = -total_length * 0.5
-	
-	for i in range(num_segments):
-		var y_pos = start_y + (i * segment_height) + (segment_height * 0.5)
-		var color = palette[i]
-		
-		_create_segment(radius, segment_height, color, y_pos)
 
-func _create_segment(radius: float, height: float, color: Color, y_offset: float) -> void:
+	# Create concentric rings like a traditional target (bullseye)
+	# Rings are horizontal flat disks stacked with slight z-offset
+	# Outer rings are larger, inner rings are smaller
+
+	var num_rings = palette.size()
+	var ring_thickness = 0.1  # Height of each cylinder (thin disks)
+	var max_radius = target_radius
+	var radius_step = max_radius / num_rings
+
+	for i in range(num_rings):
+		# Outer rings first (palette[0] is outermost)
+		var ring_radius = max_radius - (i * radius_step)
+		var color = palette[i]
+		# Small z-offset so inner rings appear on top
+		var z_offset = i * 0.001
+
+		_create_ring(ring_radius, ring_thickness, color, z_offset)
+
+func _create_ring(radius: float, thickness: float, color: Color, z_offset: float) -> void:
 	var mesh_inst = MeshInstance3D.new()
-	
+
 	var cyl = CylinderMesh.new()
 	cyl.top_radius = radius
 	cyl.bottom_radius = radius
-	cyl.height = height
+	cyl.height = thickness
 	cyl.radial_segments = 32
-	
+
 	mesh_inst.mesh = cyl
 	mesh_inst.material_override = _create_material(color)
-	mesh_inst.position.y = y_offset
-	
+	# Rotate 90 degrees on X axis so the disk is horizontal (facing forward)
+	mesh_inst.rotation_degrees.x = 90.0
+	mesh_inst.position.z = z_offset
+
 	container.add_child(mesh_inst)
 	rings.append(mesh_inst)
 

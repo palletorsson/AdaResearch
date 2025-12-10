@@ -57,6 +57,7 @@ var drone_scene = preload("res://algorithms/vectors/08_vector_throwing/vector_dr
 
 func _ready() -> void:
 	super._ready()
+	
 	_setup_trajectory_vis()
 	_setup_environment()
 	_spawn_throw_balls()
@@ -276,8 +277,9 @@ func _on_target_hit(target: Node3D, impact_velocity: Vector3) -> void:
 
 func _on_drone_player_hit(_drone: Node3D) -> void:
 	player_hits_taken += 1
-	print("Drone hit the player! Total hits taken: %d" % player_hits_taken)
+	print("Drone hit the player! Total hits taken: %d. Health: %.1f" % [player_hits_taken, GameManager.get_health()])
 	_update_physics_info()
+
 
 func _on_drone_destroyed(drone: Node3D, points_awarded: int) -> void:
 	drones_destroyed += 1

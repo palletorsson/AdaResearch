@@ -43,6 +43,3 @@ process_material = SubResource("ParticleProcessMaterial_1")
 draw_pass_1 = SubResource("BoxMesh_1")
 
 [node name="RingsContainer" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2205067)

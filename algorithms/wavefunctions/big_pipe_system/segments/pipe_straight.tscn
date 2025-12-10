@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://pipe_straight_001"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pipe"]
-albedo_color = Color(0.3, 0.3, 0.35, 1.0)
-metallic = 0.5
-roughness = 0.4
+cull_mode = 2
+albedo_color = Color(0.7, 0.7, 0.8, 1.0)
+metallic = 0.8
+roughness = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pipe"]
 top_radius = 0.8
@@ -14,10 +15,10 @@ radial_segments = 16
 [node name="PipeStraight" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1)
 material_override = SubResource("StandardMaterial3D_pipe")
 mesh = SubResource("CylinderMesh_pipe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1)
 shape = SubResource("CylinderMesh_pipe")

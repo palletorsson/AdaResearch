@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var damage: float = 1.0
+@export var damage: float = 5.0
 @export var speed: float = 8.0
 @export var lifetime: float = 5.0
 

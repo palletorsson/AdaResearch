@@ -106,6 +106,7 @@ func _physics_process(delta: float) -> void:
 	# Update timers
 	stun_timer = max(stun_timer - delta, 0.0)
 	state_timer = max(state_timer - delta, 0.0)
+	player_hit_timer = max(player_hit_timer - delta, 0.0)
 
 	if not player_node or not is_instance_valid(player_node):
 		_acquire_player()
@@ -130,6 +131,14 @@ func _physics_process(delta: float) -> void:
 			_process_cooldown(target_pos, delta)
 
 	move_and_slide()
+	
+	# Check for collisions with player
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider == player_node or collider.is_in_group("player") or collider.is_in_group("player_body"):
+			_handle_player_hit()
+
 
 # AI States
 func _process_chase(target_pos: Vector3, delta: float) -> void:
@@ -400,9 +409,24 @@ func _face_target(target_position: Vector3) -> void:
 	look_at(target_position, Vector3.UP)
 
 func _handle_player_hit() -> void:
+	if player_hit_timer > 0.0:
+		return
+
+	player_hit_timer = player_hit_cooldown
 	stun_timer = stun_duration
 	_flash_material(base_color.lerp(Color(1, 0.2, 0.2), 0.6), 0.1, 0.25)
+	
+	# Deal 5 damage
+	# Note: VectorThrowing.gd will handle "3 hits logic" via signals if needed,
+	# but GameManager handles global health.
+	GameManager.apply_health_damage(5.0)
+	
 	emit_signal("player_hit", self)
+	
+	# Bounce back from player
+	if player_node:
+		var dir = (global_position - player_node.global_position).normalized()
+		velocity += dir * 8.0
 
 func _on_ball_detector_body_entered(body: Node) -> void:
 	if is_destroyed:
