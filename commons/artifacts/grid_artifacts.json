@@ -777,6 +777,13 @@
 			"description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
 			"scene": "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn"
 		},
+		"strobe_lasers": {
+			"lookup_name": "strobe_lasers",
+			"name": "strobe_lasers",
+			"description": "strobe_lasers.",
+			"scene": "res://algorithms/color/strobe_lasers/strobe_lasers.tscnn"
+		},		
+		
 		"row_3_x": {
 			"name": "row_3_x",
 			"lookup_name": "row_3_x",
@@ -2501,6 +2508,18 @@
 			"description": "Display draw calls",
 			"scene": "res://commons/visualaid/performance/draw_calls_display.tscn"
 		},
+		"health_display": {
+			"name": "health_display",
+			"lookup_name": "health_display",
+			"description": "Dealth_display",
+			"scene": "res://commons/visualaid/gameplay/health_display.tscn"
+		},
+		"hits_reset_display": {
+			"name": "hits_reset_display",
+			"lookup_name": "hits_reset_display",
+			"description": "hits_reset_display",
+			"scene": "res://commons/visualaid/gameplay/hits_reset_display.tscn"
+		},
 		"code": {
 			"name": "code",
 			"lookup_name": "code",
@@ -2957,6 +2976,19 @@
 			"description": "N-body attraction demonstration",
 			"scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn"
 		},
+		"vector_drone": {
+			"name": "vector_drone",
+			"lookup_name": "vector_drone",
+			"description": "vector_drone",
+			"scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn"
+		},
+		"queer_cylinder_target": {
+			"name": "queer_cylinder_target",
+			"lookup_name": "queer_cylinder_target",
+			"description": "queer_cylinder_target",
+			"scene": "res://commons/primitives/targets/queer_cylinder_target.tscn"
+		},
+		
 		"example_1_10_accelerating_towards_the_mouse_vr": {
 			"name": "example_1_10_accelerating_towards_the_mouse_vr",
 			"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",

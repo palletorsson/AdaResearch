@@ -101,8 +101,9 @@ func _build_input_grid() -> void:
 			_input_multimesh.set_instance_color(index, base_color)
 			index += 1
 
+	_input_multimesh.mesh = mesh
+	
 	var instance := MultiMeshInstance3D.new()
-	instance.mesh = mesh
 	instance.multimesh = _input_multimesh
 	_input_root.add_child(instance, true)
 

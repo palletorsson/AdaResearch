@@ -4,7 +4,7 @@ extends CharacterBody3D
 signal player_hit(drone: Node3D)
 signal drone_destroyed(drone: Node3D, points_awarded: int)
 
-const VISUAL_SCENE := preload("res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn")
+
 
 @export_group("Targeting")
 @export var player_path: NodePath
@@ -38,6 +38,21 @@ const VISUAL_SCENE := preload("res://commons/primitives/truncatedtetrahedron/tru
 @export var spin_speed_deg: float = 65.0
 @export var bob_amplitude: float = 0.15
 @export var bob_frequency: float = 1.4
+
+@export_group("Shooter AI")
+@export var projectile_scene: PackedScene = preload("res://algorithms/vectors/08_vector_throwing/drone_projectile.tscn")
+@export var ideal_distance: float = 4.0
+@export var shoot_interval: float = 0.5
+@export var prepare_time: float = 1.0
+@export var cooldown_time: float = 2.0
+@export var burst_count: int = 3
+
+enum State { CHASE, PREPARE, SHOOT, COOLDOWN }
+var current_state: State = State.CHASE
+var state_timer: float = 0.0
+var shots_fired: int = 0
+var held_projectiles: Array[Node3D] = []
+
 
 var current_health: int = 0
 var stun_timer: float = 0.0
@@ -88,13 +103,9 @@ func _physics_process(delta: float) -> void:
 	if is_destroyed or has_exploded:
 		return
 
-	# Kamikaze mode behavior
-	if is_kamikaze:
-		_kamikaze_physics(delta)
-		return
-
+	# Update timers
 	stun_timer = max(stun_timer - delta, 0.0)
-	player_hit_timer = max(player_hit_timer - delta, 0.0)
+	state_timer = max(state_timer - delta, 0.0)
 
 	if not player_node or not is_instance_valid(player_node):
 		_acquire_player()
@@ -102,24 +113,134 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.lerp(Vector3.ZERO, delta * 3.0)
 			move_and_slide()
 			return
+			
+	var ideal_height = ideal_distance * tan(deg_to_rad(35.0)) # 35 degrees elevation
+	var target_pos = player_node.global_position + Vector3(0, ideal_height, 0)
+	_face_target(player_node.global_position + Vector3(0, 1.0, 0)) # Look at player, not the spot above them
 
-	var target_position = player_node.global_position + Vector3(0, hover_height, 0)
-	var to_target = target_position - global_position
+	match current_state:
+		State.CHASE:
+			_process_chase(target_pos, delta)
+
+		State.PREPARE:
+			_process_prepare(delta)
+		State.SHOOT:
+			_process_shoot(delta)
+		State.COOLDOWN:
+			_process_cooldown(target_pos, delta)
+
+	move_and_slide()
+
+# AI States
+func _process_chase(target_pos: Vector3, delta: float) -> void:
+	var to_target = target_pos - global_position
+	var dist = to_target.length()
 	var desired_velocity = Vector3.ZERO
 
-	if to_target.length() > 0.1:
+	if dist > ideal_distance + 0.5:
+		# Too far, approach
 		desired_velocity = to_target.normalized() * move_speed
-		desired_velocity += _strafe_offset()
-	if stun_timer > 0.0:
-		desired_velocity *= 0.4
+	elif dist < ideal_distance - 0.5:
+		# Too close, back up
+		desired_velocity = -to_target.normalized() * move_speed
+	else:
+		# In range, maybe strafe a bit?
+		desired_velocity = _strafe_offset() * 2.0
+		# If stable in range, switch state
+		if stun_timer <= 0.0:
+			_switch_state(State.PREPARE)
+	
+	velocity = velocity.lerp(desired_velocity, delta * acceleration)
 
-	velocity = velocity.lerp(desired_velocity, clamp(acceleration * delta, 0.0, 1.0))
-	move_and_slide()
-	_face_target(target_position)
+func _process_prepare(_delta: float) -> void:
+	velocity = velocity.lerp(Vector3.ZERO, _delta * 2.0)
+	if state_timer <= 0.0:
+		_switch_state(State.SHOOT)
 
-	if to_target.length() <= player_hit_radius and player_hit_timer <= 0.0:
-		player_hit_timer = player_hit_cooldown
-		_handle_player_hit()
+func _process_shoot(_delta: float) -> void:
+	velocity = velocity.lerp(Vector3.ZERO, _delta * 5.0) # Stop to shoot
+	if state_timer <= 0.0:
+		if shots_fired < burst_count:
+			_fire_projectile()
+			shots_fired += 1
+			state_timer = shoot_interval
+		else:
+			_switch_state(State.COOLDOWN)
+
+func _process_cooldown(target_pos: Vector3, delta: float) -> void:
+	# Strafe while cooling down
+	var to_target = target_pos - global_position
+	var strafe = to_target.cross(Vector3.UP).normalized() * (move_speed * 0.5)
+	if sin(Time.get_ticks_msec() * 0.001) < 0:
+		strafe = -strafe
+	
+	velocity = velocity.lerp(strafe, delta * acceleration)
+	
+	if state_timer <= 0.0:
+		_switch_state(State.CHASE)
+
+func _switch_state(new_state: State) -> void:
+	current_state = new_state
+	match new_state:
+		State.CHASE:
+			pass
+		State.PREPARE:
+			state_timer = prepare_time
+			_spawn_held_projectiles()
+		State.SHOOT:
+			shots_fired = 0
+			state_timer = 0.0 # Start shooting immediately
+		State.COOLDOWN:
+			state_timer = cooldown_time
+			_clear_held_projectiles()
+
+func _spawn_held_projectiles() -> void:
+	_clear_held_projectiles()
+	for i in range(burst_count):
+		if not projectile_scene: break
+		var proj = projectile_scene.instantiate() as RigidBody3D
+		if not proj: continue
+		
+		proj.freeze = true
+		proj.scale = Vector3.ONE * 0.5 # Start small?
+		add_child(proj)
+		
+		# Position in a triangle or arc in front
+		var angle = (i - (burst_count-1)/2.0) * 0.5
+		proj.position = Vector3(sin(angle)*0.8, 0.5, cos(angle)*0.8)
+		held_projectiles.append(proj)
+
+func _fire_projectile() -> void:
+	if held_projectiles.is_empty():
+		return
+	
+	var proj = held_projectiles.pop_front() as RigidBody3D
+	if not is_instance_valid(proj): 
+		return
+		
+	# Detach and fire
+	var global_pos = proj.global_position
+	remove_child(proj)
+	get_parent().add_child(proj)
+	proj.global_position = global_pos
+	proj.scale = Vector3.ONE
+	proj.freeze = false
+	
+	if player_node:
+		var target = player_node.global_position + Vector3(0, 1.0, 0) # Head approx
+		# Predict? Naah, just shoot directly + slight lead
+		var dir = (target - global_pos).normalized()
+		proj.linear_velocity = dir * 12.0 # Fast shot
+		proj.look_at(global_pos + dir, Vector3.UP)
+	
+	# Small recoil/sound effect could go here
+
+func _clear_held_projectiles() -> void:
+	for p in held_projectiles:
+		if is_instance_valid(p):
+			p.queue_free()
+	held_projectiles.clear()
+
 
 func _kamikaze_physics(delta: float) -> void:
 	"""Kamikaze mode - fly straight at player and explode"""
@@ -168,17 +289,17 @@ func _configure_detector() -> void:
 		ball_detector.body_entered.connect(_on_ball_detector_body_entered)
 
 func _ensure_visual() -> void:
-	if visual_root and is_instance_valid(visual_root):
-		visual_root.queue_free()
-	visual_root = Node3D.new()
-	visual_root.name = "VisualRoot"
-	visual_root.position = Vector3.ZERO
-	add_child(visual_root)
+	if not visual_root:
+		visual_root = get_node_or_null("VisualRoot")
+	
+	if not visual_root:
+		push_warning("[VectorDrone] VisualRoot not found in scene!")
+		return
 
-	var visual_scene: Node3D = VISUAL_SCENE.instantiate()
-	visual_scene.scale = Vector3.ONE * 1.45
-	visual_scene.rotation_degrees = Vector3.ZERO
-	visual_root.add_child(visual_scene)
+	var visual_scene = visual_root.get_node_or_null("Truncatedtetrahedron")
+	if not visual_scene:
+		push_warning("[VectorDrone] Truncatedtetrahedron visual not found in VisualRoot!")
+		return
 
 	var helper_camera := visual_scene.get_node_or_null("Camera3D")
 	if helper_camera:
@@ -195,6 +316,14 @@ func _ensure_visual() -> void:
 
 func _acquire_player() -> void:
 	if player_node and is_instance_valid(player_node):
+		return
+
+	# Method 1: Ask GameManager (The "Real" Way)
+	var gm_player = GameManager.get_player()
+	if gm_player and is_instance_valid(gm_player):
+		player_node = gm_player
+		player_path = player_node.get_path()
+		print("[Drone] Found player via GameManager: ", player_node.name)
 		return
 
 	# Try explicit path first

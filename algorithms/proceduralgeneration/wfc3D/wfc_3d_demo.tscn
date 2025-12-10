@@ -16,7 +16,6 @@ glow_enabled = true
 
 [node name="WFC_Solver_3D" type="Node3D" parent="."]
 script = ExtResource("1_solver")
-grid_size = Vector3i(20, 10, 20)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")

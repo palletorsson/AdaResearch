@@ -18,8 +18,24 @@ func _ready():
 	# Get the root of base scene (the XRToolsSceneBase)
 	base_scene_root = get_parent()
 	
+	# Register player (XROrigin3D) with GameManager
+	_register_player_with_gamemanager()
+	
 	# Defer scene manager creation to avoid timing issues
 	call_deferred("_setup_scene_manager")
+
+func _register_player_with_gamemanager() -> void:
+	if not base_scene_root:
+		return
+		
+	# Look for XROrigin3D sibling/child
+	# Since this addon is a child of root, the root's child named "XROrigin3D" is the player
+	var player = base_scene_root.get_node_or_null("XROrigin3D")
+	if player:
+		GameManager.register_player(player)
+	else:
+		push_warning("BaseSceneAddon: Could not find XROrigin3D to register as player")
+
 
 func _setup_scene_manager():
 	"""Create and configure the SceneManager"""

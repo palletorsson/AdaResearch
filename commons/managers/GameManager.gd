@@ -10,11 +10,16 @@ var current_message: String = ""
 var game_started: bool = false
 var game_paused: bool = false
 
-var max_player_health: float = 100.0
-var player_health: float = 100.0
+var max_player_health: float = 3.0
+var player_health: float = 3.0
 
 # Map tracking
 var current_map_name: String = ""
+
+# Player tracking
+var current_player: Node3D = null
+signal player_registered(player: Node3D)
+
 
 # Game settings
 var sound_enabled: bool = true
@@ -55,10 +60,20 @@ func reset_game_state() -> void:
 	current_message = ""
 	game_started = false
 	game_paused = false
-	player_health = max_player_health
+	reset_level_state()
 	emit_signal("game_state_changed", game_started, game_paused)
 	emit_signal("score_updated", player_score)
+
+func reset_level_state() -> void:
+	player_health = max_player_health
 	emit_signal("health_updated", player_health)
+
+func _reload_scene() -> void:
+	var tree = get_tree()
+	if tree:
+		tree.reload_current_scene()
+		# Only reset level-specific state (health), preserving score and game config
+		reset_level_state()
 
 # Game state management
 func start_game() -> void:
@@ -136,9 +151,25 @@ func set_max_health(new_max: float, refill: bool = true) -> void:
 	else:
 		set_health(min(player_health, max_player_health))
 
-func _handle_player_death() -> void:
+# Player registration
+func register_player(player: Node3D) -> void:
+	current_player = player
+	emit_signal("player_registered", player)
 	if debug:
-		print("GameManager: Player health depleted")
+		print("GameManager: Player registered: %s" % player.name)
+
+func get_player() -> Node3D:
+	return current_player
+
+func _handle_player_death() -> void:
+
+	if debug:
+		print("GameManager: Player health depleted. Resetting level...")
+	
+	# Give a short delay or effect before reload if possible, but for now direct reload
+	call_deferred("_reload_scene")
+
+
 
 # Message management
 func set_current_map(map_name: String) -> void:
