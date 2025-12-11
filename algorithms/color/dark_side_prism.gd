@@ -89,15 +89,19 @@ func _create_line_segment(parent, p1, p2):
 	
 	line.position = (p1 + p2) / 2.0
 	
-	# Align cylinder (which is along Y) to the vector p2-p1
-	# look_at aligns -Z... we need to align Y.
-	# Standard way:
+	# Align cylinder (along Y) to p2-p1 using local Basis
 	if p1 != p2:
-		var direction = (p2 - p1).normalized()
-		# Create a basis where Y is direction
-		# Or use look_at and rotate 90 deg?
-		line.look_at(p2, Vector3.UP if abs(direction.y) < 0.99 else Vector3.RIGHT)
-		line.rotate_object_local(Vector3(1, 0, 0), -PI/2) # Rotate so cylinder Y aligns with look_at Z
+		var dir = (p2 - p1).normalized()
+		var up = Vector3.UP
+		if abs(dir.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+			
+		var basis = Basis.looking_at(dir, up)
+		# Basis.looking_at aligns -Z to dir.
+		# Rotate -90 on X to align Y (cylinder) to -Z (dir).
+		basis = basis.rotated(Vector3(1, 0, 0), -PI/2)
+		
+		line.transform.basis = basis
 	
 	parent.add_child(line)
 
@@ -160,6 +164,15 @@ func _create_beam_mesh(start: Vector3, end: Vector3, color: Color, thickness: fl
 	beam.material_override = material
 	
 	beam.position = (start + end) / 2.0
-	beam.look_at(end)
+	
+	if start != end:
+		var dir = (end - start).normalized()
+		var up = Vector3.UP
+		if abs(dir.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+		
+		# BoxMesh length is on Z. Basis.looking_at aligns -Z to dir.
+		# So the Z axis aligns with the direction vector.
+		beam.transform.basis = Basis.looking_at(dir, up)
 	
 	return beam

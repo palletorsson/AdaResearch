@@ -333,6 +333,19 @@
 			"description": "Folded pink zigzag profile built from alternating peaks with drag points to edit the pleated surface.",
 			"scene": "res://commons/primitives/triangleprofiles/triangleprofiles.tscn"
 		},
+		"pythagorean_triangle_angles": {
+			"name": "1.2: A pythagorean_triangle_angles",
+			"lookup_name": "pythagorean_triangle_angles",
+			"description": "pythagorean_triangle_angles",
+			"scene": "res://commons/primitives/triangle/pythagorean_triangle_angles.tscn"
+		},	
+		"folded_strip": {
+			"name": "1.2: folded_strip",
+			"lookup_name": "folded_strip",
+			"description": "pfolded_strip",
+			"scene": "res://commons/primitives/folded_strip/folded_strip.tscn"
+		},				
+		
 		"zigzagprofile": {
 			"name": "1.2: A zigzagprofile",
 			"lookup_name": "zigzagprofile",
