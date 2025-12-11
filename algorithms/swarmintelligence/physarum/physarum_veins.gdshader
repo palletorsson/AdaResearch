@@ -2,8 +2,8 @@ shader_type spatial;
 
 uniform sampler2D slime_texture;
 uniform float vein_height : hint_range(0.0, 5.0) = 1.0;
-uniform vec3 ground_color : source_color = vec3(0.1, 0.1, 0.1); # Dark soil
-uniform vec3 vein_color : source_color = vec3(0.8, 1.0, 0.1); # Yellow-Green slime
+uniform vec3 ground_color : source_color = vec3(0.1, 0.1, 0.1); 
+uniform vec3 vein_color : source_color = vec3(0.8, 1.0, 0.1);
 
 void vertex() {
 	// Sample slime intensity

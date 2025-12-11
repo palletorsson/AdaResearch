@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "A Point",
-		"description": "In geometry, a point is an abstract idealization of an exact position, without size, in physical space,[1] or its generalization to other kinds of mathematical spaces. As zero-dimensional objects, points are usually taken to be the fundamental indivisible elements comprising the space, of which one-dimensional curves, two-dimensional surfaces, and higher-dimensional objects consist.",
+		"name": "01 A Point",
+		"description": "The Atom of Space. A single, indivisible unit. It has position but no magnitude. It is the seed from which all dimensions grow. Hold it, and you hold the coordinate of existence.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +13,7 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["The Atom of Space"]
 		}
 	},
 	"documentation": {
@@ -47,7 +47,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "3t:that_which_has_no_part.", " ", " ", " "],			 			
+			[" ", "an", " ", "3t:that_which_has_no_part.", " ", " ", " "],			 			
 		],
 		"interactables": [
 			["CoordinateSystem3M", " ", " ", " ", " ", " ", " "],

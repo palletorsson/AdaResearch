@@ -17,25 +17,6 @@ class_name VerticalWaveLines
 @export var base_color: Color = Color(0.1, 0.1, 0.8): set = set_base_color
 @export var wave_color: Color = Color(0.4, 0.8, 1.0): set = set_wave_color
 
-func _setup_system() -> void:
-    ...
-	# Create Line Geometry
-	var mesh = BoxMesh.new()
-	mesh.size = Vector3(line_thickness, line_height, line_thickness) 
-	multimesh_instance.multimesh.mesh = mesh
-    ...
-
-func _update_grid() -> void:
-    ...
-			# We want it to grow FROM the floor.
-			# So translate up by 0.5 * BaseHeight.
-			t = t.translated(Vector3(0, line_height * 0.5, 0))
-			
-			mm.set_instance_transform(idx, t)
-			idx += 1
-
-...
-
 func set_line_height(val: float) -> void:
 	line_height = val
 	if is_inside_tree():

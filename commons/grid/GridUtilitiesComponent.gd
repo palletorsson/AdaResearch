@@ -515,6 +515,12 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				print("GridUtilitiesComponent: Populated 'an' board with map info: %s" % title)
 			else:
 				print("GridUtilitiesComponent: 'an' board placed, but no map info found in parent")
+			
+			# Apply rotation if specified as parameter (an:90)
+			if parameters.size() > 0:
+				var rot_y = float(parameters[0])
+				utility_object.rotation_degrees.y = rot_y
+				print("GridUtilitiesComponent: Set 'an' board rotation to %.1f degrees" % rot_y)
 		"tc":  # Transport Cube
 			if parameters.size() >= 2:
 				var distance = float(parameters[0])

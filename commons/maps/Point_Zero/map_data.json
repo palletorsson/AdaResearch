@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "00 Point Zero",
-		"description": "In geometry, a point is an abstract idealization of an exact position, without size, in physical space,[1] or its generalization to other kinds of mathematical spaces. As zero-dimensional objects, points are usually taken to be the fundamental indivisible elements comprising the space, of which one-dimensional curves, two-dimensional surfaces, and higher-dimensional objects consist.",
+		"description": "Zero. The origin (0,0,0) is where measurement begins and the hidden systems of rendering, time, and embodiment make play possible.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,9 +11,9 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "tutorial",
-			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"category": "primitives",
+			"estimated_time": "1-2 minutes",
+			"learning_objectives": ["Point Zero"]
 		}
 	},
 	"documentation": {
@@ -24,7 +24,8 @@
 			"`la:point` annotation at (3,3)",
 			"`grab_sphere_point` pickup at (3,3)",
 			"`dark_sphere` ambient enclosure at (3,2)",
-			"Teleporter `t` at (5,6)"
+			"Teleporter `t` at (5,6)",
+			"speed_display:180", "frames_display:180", "game_time_display:180", "draw_calls_display:180", "memory_display:180", 
 		]
 	},
 	"layers": {
@@ -36,26 +37,26 @@
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
-			["1", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
 
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "an:-90", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "3t:Point Zero", " ", " ", " ", " "],
-			["an", " ", " ", " ", "", " ", " "]
+			[" ", " ", " ", " ", "", " ", " "]
 		],
 		"interactables": [
 			["origin", " ", " ", " ", " ", " ", "player_position:-90"],
 			["arrow:180:1:0.2", " ", " ", "clipboard#point_zero:-105:0.9", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "game_time_display:-90"],
 			[" ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", ""],
-			["speed_display:180", "frames_display:180", "game_time_display:180", "draw_calls_display:180", "memory_display:180", " ", ""],
+			[" ", " ", " ", " ", " ", " ", ""],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]

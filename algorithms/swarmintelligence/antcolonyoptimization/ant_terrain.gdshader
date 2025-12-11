@@ -3,7 +3,7 @@ shader_type spatial;
 uniform sampler2D pheromone_texture;
 uniform float valley_depth = 0.5;
 uniform float mountain_height = 5.0; // From previous logic
-uniform vec3 ground_color : source_color = vec3(0.5, 0.4, 0.2);
+uniform vec3 ground_color = vec3(0.5, 0.4, 0.2);
 uniform float roughness = 0.9;
 
 void vertex() {

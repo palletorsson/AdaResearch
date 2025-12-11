@@ -38,6 +38,13 @@ func _ready():
 		GameManager.score_updated.connect(_update_xp_display)
 		_update_xp_display(GameManager.get_score())
 	
+	# Connect to GameManager for Health updates if available
+	if GameManager and GameManager.has_signal("health_updated"):
+		GameManager.health_updated.connect(_on_health_updated_signal)
+		# Initial update handled by _update_completion_status later, but can force here too
+		# but _delayed_initialization calls update_info_board which calls _update_completion_status
+
+	
 	# Delay initialization to allow utilities to be placed first
 	call_deferred("_delayed_initialization")
 
@@ -249,12 +256,13 @@ func _update_info_board_with_sequence_data():
 	if not current_description.is_empty():
 		summary_text += "\n\nCurrent Map: %s" % current_description
 	
-	if show_metadata and sequence_data.has("learning_objectives"):
-		var objectives = sequence_data.get("learning_objectives", [])
-		if objectives is Array and objectives.size() > 0:
-			summary_text += "\n\nLearning Objectives:"
-			for obj in objectives:
-				summary_text += "\n• %s" % obj
+	# User requested to hide objectives
+	# if show_metadata and sequence_data.has("learning_objectives"):
+	# 	var objectives = sequence_data.get("learning_objectives", [])
+	# 	if objectives is Array and objectives.size() > 0:
+	# 		summary_text += "\n\nLearning Objectives:"
+	# 		for obj in objectives:
+	# 			summary_text += "\n• %s" % obj
 	
 	summary_label.text = summary_text
 	
@@ -332,24 +340,15 @@ func _get_map_category(map_name: String) -> String:
 	elif map_name.begins_with("Algorithm"):
 		return "algorithm"
 	else:
-		return "level"
+		return "map"
 
 func _format_metadata_summary() -> String:
 	"""Format metadata into readable summary"""
 	var metadata_text = ""
+
 	
-	if current_metadata.has("difficulty"):
-		metadata_text += "\n\nDifficulty: %s" % current_metadata["difficulty"].capitalize()
-	
-	if current_metadata.has("estimated_time"):
-		metadata_text += "\nTime: %s" % current_metadata["estimated_time"]
-	
-	if current_metadata.has("learning_objectives"):
-		var objectives = current_metadata["learning_objectives"]
-		if objectives is Array and objectives.size() > 0:
-			metadata_text += "\n\nObjectives:"
-			for obj in objectives:
-				metadata_text += "\n• %s" % obj
+	# User requested to hide difficulty, time, and objectives
+	# Keeping function structure in case other metadata needs to be added later
 	
 	return metadata_text
 
@@ -368,13 +367,22 @@ func _generate_barcode_pattern(map_name: String) -> String:
 
 func _update_completion_status():
 	"""Update health label to show completion status"""
-	# This could be enhanced to show actual completion data
-	health_label.text = "Status: Active"
+	# Show actual health if available, or default to 100%
+	var health_val = 100
+	if is_instance_valid(GameManager) and "player_health" in GameManager:
+		health_val = GameManager.player_health
+	
+	health_label.text = "Health: %d%%" % health_val
+
+func _on_health_updated_signal(_new_health: float):
+	"""Signal handler for health updates"""
+	_update_completion_status()
+
 
 func _update_xp_display(new_score: int):
 	"""Update XP display from GameManager"""
 	if xp_label:
-		xp_label.text = "Score: %d" % new_score
+		xp_label.text = "XP: %d" % new_score
 
 # Public API
 func force_update():

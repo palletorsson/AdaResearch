@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbpjx3b6wajb4"]
+[gd_scene load_steps=12 format=3 uid="uid://dbpjx3b6wajb4"]
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_qxwn1"]
 [ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="2_1qoim"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cx7oruy7bo3pt" path="res://commons/scenes/LabGridScene.gd" id="4_labscene"]
 [ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="5_6e2p8"]
 [ext_resource type="Script" uid="uid://gx7u0v8c5iur" path="res://tests/audio_test.gd" id="5_f6pg2"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="6_x6klc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6e2p8"]
 shader = ExtResource("2_1qoim")
@@ -86,6 +87,8 @@ script = ExtResource("2_labgrid")
 
 [node name="ResetArea3D" parent="LabGridSystem" index="1" instance=ExtResource("5_6e2p8")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="PickableObject" parent="LabGridSystem" index="2" instance=ExtResource("6_x6klc")]
 
 [node name="LabGridScene" type="Node3D" parent="." index="6"]
 visible = false

@@ -28,6 +28,7 @@ var _glitch_stream: AudioStreamWAV
 func _ready():
 	create_length_label()
 	update_connections()
+
 	_setup_glitch_audio()
 	
 	# Connect to point drop events to send educational messages

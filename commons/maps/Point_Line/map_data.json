@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"description": "The Line. A connection. Stretching between two points, it creates distance and direction. It is the first measure, the first path, the primary bond of geometry. Here, space is no longer static; it is traversed.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -36,7 +36,7 @@
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "1", "0", "0", "1", "1", "1"], 
+			["2", "1", "0", "0", "1", "1", "1"], 
 			["0", "1", "0", "0", "0", "0", "0"],
 			["1", "1", "1", "0", "0", "0", "0"],
 			["1", "0", "1", "0", "0", "0", "0"],
@@ -51,7 +51,7 @@
 			[" ", " ", " ", "", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
 			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "],			
+			["an", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "],			
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", ""],

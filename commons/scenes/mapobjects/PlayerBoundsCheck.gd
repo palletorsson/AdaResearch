@@ -154,4 +154,3 @@ func _find_player_node():
 				
 	if player_node:
 		print("PlayerBoundsCheck: Tracking player node '", player_node.name, "'")
-
