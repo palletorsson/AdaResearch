@@ -1,0 +1,23 @@
+{
+    "name": "Pop Generative",
+    "description": "Procedurally generated pop music with interactive transitions",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.POP_INTERACTIVE_SONG",
+            "volume_db": -5.0,
+            "bus": "Music"
+        }
+    ],
+    "random_events": [],
+    "buses": {
+        "Music": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.2
+                }
+            ]
+        }
+    }
+}

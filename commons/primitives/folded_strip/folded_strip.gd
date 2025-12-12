@@ -19,10 +19,12 @@ var vertex_positions: Array[Vector3] = []
 func _ready():
 	strip_mesh = MeshInstance3D.new()
 	strip_mesh.name = "StripMesh"
-	add_child(strip_mesh)
 
 	_initialize_zig_zag_strip()
 	update_mesh()
+
+	# Add child after mesh is initialized to avoid null material errors
+	add_child(strip_mesh)
 
 func _initialize_zig_zag_strip():
 	# Badakine / Baldachin around a square
@@ -63,7 +65,7 @@ func _initialize_zig_zag_strip():
 		
 		vertex_positions.append(Vector3(pos_on_perim.x, y + strip_y_offset, pos_on_perim.z))
 
-func _get_point_on_square_path(t: float, corners: Array[Vector3]) -> Vector3:
+func _get_point_on_square_path(t: float, corners: Array) -> Vector3:
 	var total_len = 0.0
 	var lengths = []
 	for i in range(corners.size() - 1):

@@ -3,6 +3,64 @@
 	"description": "Ambient sound presets for Ada Research VR educational system",
 	"last_updated": "2025-01-20",
 	"presets": {
+		"organic_sanctuary": {
+			"description": "Organic nature atmosphere with wind, subtle drones and random piano notes",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
+					"volume_db": -12,
+					"bus": "Ambient"
+				},
+				{
+					"sound_id": "AudioSynthesizer.AMBIENT_AMIGA_DRONE",
+					"volume_db": -24,
+					"bus": "DeepDrone",
+					"parameters": {
+						"pitch_scale": 0.8
+					}
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.KORG_M1_PIANO",
+						"AudioSynthesizer.DX7_ELECTRIC_PIANO"
+					],
+					"interval_range": [
+						8.0,
+						20.0
+					],
+					"volume_range": [
+						-24,
+						-18
+					],
+					"bus": "Effects"
+				}
+			],
+			"buses": {
+				"Ambient": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 800
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.3,
+							"wet": 0.2
+						}
+					]
+				},
+				"DeepDrone": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 400
+						}
+					]
+				}
+			}
+		},
 		"silent": {
 			"description": "No ambient sound - complete silence",
 			"continuous_layers": [],
@@ -26,7 +84,7 @@
 				{
 					"sound_pool": [
 						"AudioSynthesizer.SHIELD_HIT",
-                        "SyntheticSoundGenerator.detection_sound"
+						"SyntheticSoundGenerator.detection_sound"
 					],
 					"interval_range": [
 						15.0,
@@ -76,7 +134,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.SCI_FI_DATA_CHIRPS",
 						"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                        "AudioSynthesizer.SHIELD_HIT"
+						"AudioSynthesizer.SHIELD_HIT"
 					],
 					"interval_range": [
 						5.0,
@@ -140,7 +198,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.LASER_SHOT",
 						"AudioSynthesizer.SHIELD_HIT",
-                        "AudioSynthesizer.APHEX_TWIN_GLITCH"
+						"AudioSynthesizer.APHEX_TWIN_GLITCH"
 					],
 					"interval_range": [
 						20.0,
@@ -191,7 +249,7 @@
 						"techno_noir.distant_siren",
 						"techno_noir.static_burst",
 						"techno_noir.mechanical_whir",
-                        "techno_noir.typing_segment"
+						"techno_noir.typing_segment"
 					],
 					"interval_range": [
 						3.0,
@@ -260,7 +318,7 @@
 						"liturgical.cathedral_bell",
 						"liturgical.gregorian_phrase",
 						"liturgical.sacred_whisper",
-                        "liturgical.pipe_organ_swell"
+						"liturgical.pipe_organ_swell"
 					],
 					"interval_range": [
 						8.0,
@@ -338,7 +396,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.C64_SID_PULSE",
 						"AudioSynthesizer.GAMEBOY_PULSE",
-                        "AudioSynthesizer.COMMODORE_AMIGA_WAVE"
+						"AudioSynthesizer.COMMODORE_AMIGA_WAVE"
 					],
 					"interval_range": [
 						10.0,
@@ -386,7 +444,7 @@
 				{
 					"sound_pool": [
 						"DarkGameTrack.GLITCH_STAB",
-                        "DarkGameTrack.BLADE_RUNNER_HIT"
+						"DarkGameTrack.BLADE_RUNNER_HIT"
 					],
 					"interval_range": [
 						8.0,
@@ -455,7 +513,7 @@
 				{
 					"sound_pool": [
 						"AudioSynthesizer.KORG_M1_PIANO",
-                        "AudioSynthesizer.PPG_WAVE_METALLIC"
+						"AudioSynthesizer.PPG_WAVE_METALLIC"
 					],
 					"interval_range": [
 						12.0,
@@ -502,7 +560,7 @@
 				{
 					"sound_pool": [
 						"AudioSynthesizer.SHIELD_HIT",
-                        "AudioSynthesizer.ACID_TB303_SQUELCH"
+						"AudioSynthesizer.ACID_TB303_SQUELCH"
 					],
 					"interval_range": [
 						5.0,
@@ -551,7 +609,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.LASER_SHOT",
 						"AudioSynthesizer.SHIELD_HIT",
-                        "AudioSynthesizer.APHEX_TWIN_GLITCH"
+						"AudioSynthesizer.APHEX_TWIN_GLITCH"
 					],
 					"interval_range": [
 						25.0,
@@ -619,7 +677,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.DARK_808_KICK",
 						"AudioSynthesizer.ACID_606_HIHAT",
-                        "AudioSynthesizer.SYNARE_3_COSMIC_FX"
+						"AudioSynthesizer.SYNARE_3_COSMIC_FX"
 					],
 					"interval_range": [
 						8.0,
@@ -681,7 +739,7 @@
 				{
 					"sound_pool": [
 						"AudioSynthesizer.FLYING_LOTUS_SAMPLER",
-                        "AudioSynthesizer.APHEX_TWIN_MODULAR"
+						"AudioSynthesizer.APHEX_TWIN_MODULAR"
 					],
 					"interval_range": [
 						40.0,
@@ -760,7 +818,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.KORG_M1_PIANO",
 						"AudioSynthesizer.DX7_ELECTRIC_PIANO",
-                        "AudioSynthesizer.ARP_2600_LEAD"
+						"AudioSynthesizer.ARP_2600_LEAD"
 					],
 					"interval_range": [
 						30.0,
@@ -909,7 +967,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.MOOG_KRAFTWERK_SEQUENCER",
 						"AudioSynthesizer.GHOST_DRONE",
-                        "techno_noir.static_burst"
+						"techno_noir.static_burst"
 					],
 					"interval_range": [
 						18.0,
@@ -1016,7 +1074,7 @@
 					"sound_pool": [
 						"AudioSynthesizer.TR909_KICK",
 						"AudioSynthesizer.ACID_606_HIHAT",
-                        "AudioSynthesizer.AMBIENT_WIND"
+						"AudioSynthesizer.AMBIENT_WIND"
 					],
 					"interval_range": [
 						12.0,
@@ -1031,7 +1089,7 @@
 				{
 					"sound_pool": [
 						"techno_noir.distant_siren",
-                        "AudioSynthesizer.APHEX_TWIN_MODULAR"
+						"AudioSynthesizer.APHEX_TWIN_MODULAR"
 					],
 					"interval_range": [
 						45.0,
@@ -1152,7 +1210,7 @@
 			"random_events": [
 				{
 					"sound_pool": [
-                        "AudioSynthesizer.CS80_BRASS_LEAD"
+						"AudioSynthesizer.CS80_BRASS_LEAD"
 					],
 					"interval_range": [
 						15.0,
@@ -1167,7 +1225,7 @@
 				{
 					"sound_pool": [
 						"techno_noir.distant_siren",
-                        "techno_noir.mechanical_whir"
+						"techno_noir.mechanical_whir"
 					],
 					"interval_range": [
 						20.0,
@@ -1226,741 +1284,741 @@
 			}
 		},
 		"arrakis_desert": {
-					"description": "Dune inspired: Deep desert winds, rhythmic thumpers, and spice whispers",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.AMBIENT_WIND",
-							"volume_db": -15,
-							"bus": "Wind"
-						},
-						{
-							"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-							"volume_db": -10,
-							"bus": "Thumper",
-							"parameters": {
-								"pulse_rate": 0.2
-							}
-						},
-						{
-							"sound_id": "liturgical.choral_foundation",
-							"volume_db": -20,
-							"bus": "VoiceDrone"
-						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"liturgical.sacred_whisper",
-                                "AudioSynthesizer.SCI_FI_RESONANT_DRONE"
-							],
-							"interval_range": [
-								10.0,
-								30.0
-							],
-							"volume_range": [
-								-18,
-								-12
-							],
-							"bus": "Whispers"
-						}
-					],
-					"buses": {
-						"Wind": {
-							"effects": [
-								{
-									"type": "HighPassFilter",
-									"cutoff_hz": 100
-								},
-								{
-									"type": "Reverb",
-									"room_size": 1.0,
-									"wet": 0.3
-								}
-							]
-						},
-						"Thumper": {
-							"effects": [
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 80
-								},
-								{
-									"type": "Distortion",
-									"drive": 0.1
-								}
-							]
-						},
-						"Whispers": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.8,
-									"tap1_delay_ms": 250,
-									"tap1_level_db": -10.0
-								},
-								{
-									"type": "Reverb",
-									"room_size": 0.6,
-									"wet": 0.4
-								}
-							]
-						}
+			"description": "Dune inspired: Deep desert winds, rhythmic thumpers, and spice whispers",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
+					"volume_db": -15,
+					"bus": "Wind"
+				},
+				{
+					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+					"volume_db": -10,
+					"bus": "Thumper",
+					"parameters": {
+						"pulse_rate": 0.2
 					}
 				},
-				"heptapod_chamber": {
-					"description": "Arrival inspired: Minimalist, avant-garde, deep bass and strange textures",
-					"continuous_layers": [
-						{
-							"sound_id": "liturgical.string_atmosphere",
-							"volume_db": -18,
-							"bus": "Strings"
-						},
-						{
-							"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-							"volume_db": -12,
-							"bus": "GravityBass"
-						}
+				{
+					"sound_id": "liturgical.choral_foundation",
+					"volume_db": -20,
+					"bus": "VoiceDrone"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"liturgical.sacred_whisper",
+						"AudioSynthesizer.SCI_FI_RESONANT_DRONE"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                                "AudioSynthesizer.GHOST_DRONE"
-							],
-							"interval_range": [
-								15.0,
-								45.0
-							],
-							"volume_range": [
-								-15,
-								-10
-							],
-							"bus": "AlienVocals"
-						}
+					"interval_range": [
+						10.0,
+						30.0
 					],
-					"buses": {
-						"Strings": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.9,
-									"wet": 0.7
-								}
-							]
+					"volume_range": [
+						-18,
+						-12
+					],
+					"bus": "Whispers"
+				}
+			],
+			"buses": {
+				"Wind": {
+					"effects": [
+						{
+							"type": "HighPassFilter",
+							"cutoff_hz": 100
 						},
-						"GravityBass": {
-							"effects": [
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 60
-								}
-							]
-						},
-						"AlienVocals": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.6,
-									"tap1_delay_ms": 800,
-									"tap1_level_db": -5.0
-								},
-								{
-									"type": "Reverb",
-									"room_size": 1.0,
-									"wet": 0.8
-								}
-							]
+						{
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.3
 						}
+					]
+				},
+				"Thumper": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 80
+						},
+						{
+							"type": "Distortion",
+							"drive": 0.1
+						}
+					]
+				},
+				"Whispers": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.8,
+							"tap1_delay_ms": 250,
+							"tap1_level_db": -10.0
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.6,
+							"wet": 0.4
+						}
+					]
+				}
+			}
+		},
+		"heptapod_chamber": {
+			"description": "Arrival inspired: Minimalist, avant-garde, deep bass and strange textures",
+			"continuous_layers": [
+				{
+					"sound_id": "liturgical.string_atmosphere",
+					"volume_db": -18,
+					"bus": "Strings"
+				},
+				{
+					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+					"volume_db": -12,
+					"bus": "GravityBass"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+						"AudioSynthesizer.GHOST_DRONE"
+					],
+					"interval_range": [
+						15.0,
+						45.0
+					],
+					"volume_range": [
+						-15,
+						-10
+					],
+					"bus": "AlienVocals"
+				}
+			],
+			"buses": {
+				"Strings": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 0.9,
+							"wet": 0.7
+						}
+					]
+				},
+				"GravityBass": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 60
+						}
+					]
+				},
+				"AlienVocals": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.6,
+							"tap1_delay_ms": 800,
+							"tap1_level_db": -5.0
+						},
+						{
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.8
+						}
+					]
+				}
+			}
+		},
+		"the_shimmer": {
+			"description": "Annihilation inspired: Unsettling, refracted beauty, detuned synths",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
+					"volume_db": -16,
+					"bus": "Refraction"
+				},
+				{
+					"sound_id": "AudioSynthesizer.CINEMATIC_432HZ_PAD",
+					"volume_db": -20,
+					"bus": "Pad"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"liturgical.cathedral_bell",
+						"AudioSynthesizer.SCI_FI_DATA_CHIRPS"
+					],
+					"interval_range": [
+						8.0,
+						20.0
+					],
+					"volume_range": [
+						-18,
+						-14
+					],
+					"bus": "GlassFX"
+				}
+			],
+			"buses": {
+				"Refraction": {
+					"effects": [
+						{
+							"type": "Chorus",
+							"dry": 0.5,
+							"wet": 0.8,
+							"rate_hz": 0.2
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.95,
+							"wet": 0.6
+						}
+					]
+				},
+				"GlassFX": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.7,
+							"tap1_delay_ms": 150,
+							"tap1_level_db": -8.0
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.8,
+							"wet": 0.5
+						}
+					]
+				}
+			}
+		},
+		"the_sprawl_market": {
+			"description": "Cyberpunk market: Chaotic, rhythmic, multi-cultural, busy",
+			"continuous_layers": [
+				{
+					"sound_id": "techno_noir.city_ambience",
+					"volume_db": -12,
+					"bus": "City"
+				},
+				{
+					"sound_id": "trap_beats.hihat_loop",
+					"volume_db": -24,
+					"bus": "Rhythm"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_DATA_CHIRPS",
+						"techno_noir.distant_siren",
+						"AudioSynthesizer.FLYING_LOTUS_SAMPLER"
+					],
+					"interval_range": [
+						3.0,
+						10.0
+					],
+					"volume_range": [
+						-18,
+						-12
+					],
+					"bus": "Ads"
+				}
+			],
+			"buses": {
+				"City": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 3000
+						}
+					]
+				},
+				"Ads": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.8,
+							"tap1_delay_ms": 120,
+							"tap1_level_db": -12.0
+						}
+					]
+				}
+			}
+		},
+		"the_data_heist": {
+			"description": "High-security server room: Clean hums, high-pitched chirps",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+					"volume_db": -15,
+					"bus": "ServerHum"
+				},
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+					"volume_db": -20,
+					"bus": "Cooling"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_DATA_CHIRPS",
+						"AudioSynthesizer.SCI_FI_ELECTROMAGNETIC"
+					],
+					"interval_range": [
+						2.0,
+						8.0
+					],
+					"volume_range": [
+						-22,
+						-16
+					],
+					"bus": "Processing"
+				}
+			],
+			"buses": {
+				"ServerHum": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 0.2,
+							"wet": 0.1
+						}
+					]
+				},
+				"Processing": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.9,
+							"tap1_delay_ms": 50,
+							"tap1_level_db": -15.0
+						}
+					]
+				}
+			}
+		},
+		"the_leviathan_interior": {
+			"description": "Biopunk: Organic pulsing, wet textures, living ship",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+					"volume_db": -14,
+					"bus": "Heartbeat",
+					"parameters": {
+						"pulse_rate": 0.8
 					}
 				},
-				"the_shimmer": {
-					"description": "Annihilation inspired: Unsettling, refracted beauty, detuned synths",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.APHEX_TWIN_MODULAR",
-							"volume_db": -16,
-							"bus": "Refraction"
-						},
-						{
-							"sound_id": "AudioSynthesizer.CINEMATIC_432HZ_PAD",
-							"volume_db": -20,
-							"bus": "Pad"
-						}
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+					"volume_db": -20,
+					"bus": "GutDrone"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.ACID_TB303_SQUELCH",
+						"AudioSynthesizer.GHOST_DRONE"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"liturgical.cathedral_bell",
-                                "AudioSynthesizer.SCI_FI_DATA_CHIRPS"
-							],
-							"interval_range": [
-								8.0,
-								20.0
-							],
-							"volume_range": [
-								-18,
-								-14
-							],
-							"bus": "GlassFX"
-						}
+					"interval_range": [
+						10.0,
+						25.0
 					],
-					"buses": {
-						"Refraction": {
-							"effects": [
-								{
-									"type": "Chorus",
-									"dry": 0.5,
-									"wet": 0.8,
-									"rate_hz": 0.2
-								},
-								{
-									"type": "Reverb",
-									"room_size": 0.95,
-									"wet": 0.6
-								}
-							]
-						},
-						"GlassFX": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.7,
-									"tap1_delay_ms": 150,
-									"tap1_level_db": -8.0
-								},
-								{
-									"type": "Reverb",
-									"room_size": 0.8,
-									"wet": 0.5
-								}
-							]
+					"volume_range": [
+						-24,
+						-18
+					],
+					"bus": "Fluids"
+				}
+			],
+			"buses": {
+				"Heartbeat": {
+					"effects": [
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 100
 						}
-					}
+					]
 				},
-				"the_sprawl_market": {
-					"description": "Cyberpunk market: Chaotic, rhythmic, multi-cultural, busy",
-					"continuous_layers": [
+				"Fluids": {
+					"effects": [
 						{
-							"sound_id": "techno_noir.city_ambience",
-							"volume_db": -12,
-							"bus": "City"
-						},
-						{
-							"sound_id": "trap_beats.hihat_loop",
-							"volume_db": -24,
-							"bus": "Rhythm"
+							"type": "Reverb",
+							"room_size": 0.4,
+							"wet": 0.6
 						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.SCI_FI_DATA_CHIRPS",
-								"techno_noir.distant_siren",
-                                "AudioSynthesizer.FLYING_LOTUS_SAMPLER"
-							],
-							"interval_range": [
-								3.0,
-								10.0
-							],
-							"volume_range": [
-								-18,
-								-12
-							],
-							"bus": "Ads"
-						}
-					],
-					"buses": {
-						"City": {
-							"effects": [
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 3000
-								}
-							]
-						},
-						"Ads": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.8,
-									"tap1_delay_ms": 120,
-									"tap1_level_db": -12.0
-								}
-							]
-						}
-					}
+					]
+				}
+			}
+		},
+		"xeno_flora_lab": {
+			"description": "Biopunk: High-pitched bells, rustling, alien plants",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
+					"volume_db": -22,
+					"bus": "Air"
 				},
-				"the_data_heist": {
-					"description": "High-security server room: Clean hums, high-pitched chirps",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
-							"volume_db": -15,
-							"bus": "ServerHum"
-						},
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
-							"volume_db": -20,
-							"bus": "Cooling"
-						}
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+					"volume_db": -25,
+					"bus": "Lab"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.PPG_WAVE_METALLIC",
+						"AudioSynthesizer.SCI_FI_VENTILATION"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.SCI_FI_DATA_CHIRPS",
-                                "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC"
-							],
-							"interval_range": [
-								2.0,
-								8.0
-							],
-							"volume_range": [
-								-22,
-								-16
-							],
-							"bus": "Processing"
-						}
+					"interval_range": [
+						5.0,
+						15.0
 					],
-					"buses": {
-						"ServerHum": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.2,
-									"wet": 0.1
-								}
-							]
-						},
-						"Processing": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.9,
-									"tap1_delay_ms": 50,
-									"tap1_level_db": -15.0
-								}
-							]
+					"volume_range": [
+						-25,
+						-20
+					],
+					"bus": "Rustle"
+				}
+			],
+			"buses": {
+				"Rustle": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 0.3,
+							"wet": 0.2
 						}
-					}
+					]
+				}
+			}
+		},
+		"the_aerostat_spire": {
+			"description": "Solarpunk: Constant wind, chimes, high altitude",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.AMBIENT_WIND",
+					"volume_db": -12,
+					"bus": "HighWind"
 				},
-				"the_leviathan_interior": {
-					"description": "Biopunk: Organic pulsing, wet textures, living ship",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-							"volume_db": -14,
-							"bus": "Heartbeat",
-							"parameters": {
-								"pulse_rate": 0.8
-							}
-						},
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-							"volume_db": -20,
-							"bus": "GutDrone"
-						}
+				{
+					"sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+					"volume_db": -22,
+					"bus": "Ether"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.KORG_M1_PIANO",
+						"AudioSynthesizer.DX7_ELECTRIC_PIANO"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.ACID_TB303_SQUELCH",
-                                "AudioSynthesizer.GHOST_DRONE"
-							],
-							"interval_range": [
-								10.0,
-								25.0
-							],
-							"volume_range": [
-								-24,
-								-18
-							],
-							"bus": "Fluids"
-						}
+					"interval_range": [
+						10.0,
+						30.0
 					],
-					"buses": {
-						"Heartbeat": {
-							"effects": [
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 100
-								}
-							]
-						},
-						"Fluids": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.4,
-									"wet": 0.6
-								}
-							]
+					"volume_range": [
+						-20,
+						-15
+					],
+					"bus": "Chimes"
+				}
+			],
+			"buses": {
+				"HighWind": {
+					"effects": [
+						{
+							"type": "HighPassFilter",
+							"cutoff_hz": 200
 						}
-					}
+					]
 				},
-				"xeno_flora_lab": {
-					"description": "Biopunk: High-pitched bells, rustling, alien plants",
-					"continuous_layers": [
+				"Chimes": {
+					"effects": [
 						{
-							"sound_id": "AudioSynthesizer.AMBIENT_WIND",
-							"volume_db": -22,
-							"bus": "Air"
+							"type": "Delay",
+							"dry": 0.8,
+							"tap1_delay_ms": 300,
+							"tap1_level_db": -10.0
 						},
 						{
-							"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
-							"volume_db": -25,
-							"bus": "Lab"
+							"type": "Reverb",
+							"room_size": 0.8,
+							"wet": 0.4
 						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.PPG_WAVE_METALLIC",
-                                "AudioSynthesizer.SCI_FI_VENTILATION"
-							],
-							"interval_range": [
-								5.0,
-								15.0
-							],
-							"volume_range": [
-								-25,
-								-20
-							],
-							"bus": "Rustle"
-						}
-					],
-					"buses": {
-						"Rustle": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.3,
-									"wet": 0.2
-								}
-							]
-						}
-					}
+					]
+				}
+			}
+		},
+		"hydro_garden_complex": {
+			"description": "Solarpunk: Watery sounds, soft motors, automated farming",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+					"volume_db": -20,
+					"bus": "Motors"
 				},
-				"the_aerostat_spire": {
-					"description": "Solarpunk: Constant wind, chimes, high altitude",
-					"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+					"volume_db": -18,
+					"bus": "WaterFlow"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_DATA_CHIRPS"
+					],
+					"interval_range": [
+						8.0,
+						20.0
+					],
+					"volume_range": [
+						-25,
+						-22
+					],
+					"bus": "Servos"
+				}
+			],
+			"buses": {
+				"WaterFlow": {
+					"effects": [
 						{
-							"sound_id": "AudioSynthesizer.AMBIENT_WIND",
-							"volume_db": -12,
-							"bus": "HighWind"
+							"type": "LowPassFilter",
+							"cutoff_hz": 800
 						},
 						{
-							"sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
-							"volume_db": -22,
-							"bus": "Ether"
+							"type": "Reverb",
+							"room_size": 0.5,
+							"wet": 0.5
 						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.KORG_M1_PIANO",
-                                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
-							],
-							"interval_range": [
-								10.0,
-								30.0
-							],
-							"volume_range": [
-								-20,
-								-15
-							],
-							"bus": "Chimes"
-						}
-					],
-					"buses": {
-						"HighWind": {
-							"effects": [
-								{
-									"type": "HighPassFilter",
-									"cutoff_hz": 200
-								}
-							]
-						},
-						"Chimes": {
-							"effects": [
-								{
-									"type": "Delay",
-									"dry": 0.8,
-									"tap1_delay_ms": 300,
-									"tap1_level_db": -10.0
-								},
-								{
-									"type": "Reverb",
-									"room_size": 0.8,
-									"wet": 0.4
-								}
-							]
-						}
-					}
+					]
+				}
+			}
+		},
+		"mainframe_terminal": {
+			"description": "Retro-Futurism: Computer chirps, fan noise, tape loading",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC",
+					"volume_db": -15,
+					"bus": "CRT_Hum"
 				},
-				"hydro_garden_complex": {
-					"description": "Solarpunk: Watery sounds, soft motors, automated farming",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
-							"volume_db": -20,
-							"bus": "Motors"
-						},
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
-							"volume_db": -18,
-							"bus": "WaterFlow"
-						}
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+					"volume_db": -18,
+					"bus": "Fans"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.C64_SID_LEAD",
+						"AudioSynthesizer.AMIGA_MOD_SAMPLE",
+						"techno_noir.typing_segment"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-                                "AudioSynthesizer.SCI_FI_DATA_CHIRPS"
-							],
-							"interval_range": [
-								8.0,
-								20.0
-							],
-							"volume_range": [
-								-25,
-								-22
-							],
-							"bus": "Servos"
-						}
+					"interval_range": [
+						2.0,
+						8.0
 					],
-					"buses": {
-						"WaterFlow": {
-							"effects": [
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 800
-								},
-								{
-									"type": "Reverb",
-									"room_size": 0.5,
-									"wet": 0.5
-								}
-							]
+					"volume_range": [
+						-18,
+						-12
+					],
+					"bus": "Compute"
+				}
+			],
+			"buses": {
+				"CRT_Hum": {
+					"effects": [
+						{
+							"type": "Distortion",
+							"drive": 0.1
 						}
-					}
+					]
 				},
-				"mainframe_terminal": {
-					"description": "Retro-Futurism: Computer chirps, fan noise, tape loading",
-					"continuous_layers": [
+				"Compute": {
+					"effects": [
 						{
-							"sound_id": "AudioSynthesizer.SCI_FI_ELECTROMAGNETIC",
-							"volume_db": -15,
-							"bus": "CRT_Hum"
-						},
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
-							"volume_db": -18,
-							"bus": "Fans"
+							"type": "Distortion",
+							"drive": 0.3
 						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.C64_SID_LEAD",
-								"AudioSynthesizer.AMIGA_MOD_SAMPLE",
-                                "techno_noir.typing_segment"
-							],
-							"interval_range": [
-								2.0,
-								8.0
-							],
-							"volume_range": [
-								-18,
-								-12
-							],
-							"bus": "Compute"
-						}
-					],
-					"buses": {
-						"CRT_Hum": {
-							"effects": [
-								{
-									"type": "Distortion",
-									"drive": 0.1
-								}
-							]
-						},
-						"Compute": {
-							"effects": [
-								{
-									"type": "Distortion",
-									"drive": 0.3
-								}
-							]
-						}
-					}
+					]
+				}
+			}
+		},
+		"the_event_horizon": {
+			"description": "Cosmic Horror: Deep drones, dissonance, endless falling",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.GHOST_DRONE",
+					"volume_db": -12,
+					"bus": "Void"
 				},
-				"the_event_horizon": {
-					"description": "Cosmic Horror: Deep drones, dissonance, endless falling",
-					"continuous_layers": [
-						{
-							"sound_id": "AudioSynthesizer.GHOST_DRONE",
-							"volume_db": -12,
-							"bus": "Void"
-						},
-						{
-							"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
-							"volume_db": -15,
-							"bus": "Sub"
-						}
+				{
+					"sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+					"volume_db": -15,
+					"bus": "Sub"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+						"liturgical.sacred_whisper"
 					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                                "liturgical.sacred_whisper"
-							],
-							"interval_range": [
-								20.0,
-								60.0
-							],
-							"volume_range": [
-								-20,
-								-15
-							],
-							"bus": "Whispers"
-						}
+					"interval_range": [
+						20.0,
+						60.0
 					],
-					"buses": {
-						"Void": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 1.0,
-									"wet": 0.9,
-									"damping": 0.0
-								}
-							]
-						},
-						"Whispers": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 1.0,
-									"wet": 0.8
-								}
-							]
+					"volume_range": [
+						-20,
+						-15
+					],
+					"bus": "Whispers"
+				}
+			],
+			"buses": {
+				"Void": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.9,
+							"damping": 0.0
 						}
-					}
+					]
 				},
-				"asteroid_processing_plant": {
-					"description": "Industrial: Heavy impacts, distortion, mining",
-					"continuous_layers": [
+				"Whispers": {
+					"effects": [
 						{
-							"sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
-							"volume_db": -15,
-							"bus": "Machinery"
-						},
-						{
-							"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
-							"volume_db": -18,
-							"bus": "Hum"
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.8
 						}
-					],
-					"random_events": [
-						{
-							"sound_pool": [
-								"AudioSynthesizer.EXPLOSION",
-                                "AudioSynthesizer.SHIELD_HIT"
-							],
-							"interval_range": [
-								5.0,
-								15.0
-							],
-							"volume_range": [
-								-12,
-								-8
-							],
-							"bus": "Impacts"
-						}
-					],
-					"buses": {
-						"Machinery": {
-							"effects": [
-								{
-									"type": "Distortion",
-									"drive": 0.4
-								},
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 400
-								}
-							]
-						},
-						"Impacts": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.6,
-									"wet": 0.3
-								},
-								{
-									"type": "Distortion",
-									"drive": 0.2
-								}
-							]
-						}
-					}
+					]
+				}
+			}
+		},
+		"asteroid_processing_plant": {
+			"description": "Industrial: Heavy impacts, distortion, mining",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+					"volume_db": -15,
+					"bus": "Machinery"
 				},
-				"nostromo_corridors": {
-					"description": "Alien inspired: Wind in vents, mechanical groans, isolation",
-					"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+					"volume_db": -18,
+					"bus": "Hum"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.EXPLOSION",
+						"AudioSynthesizer.SHIELD_HIT"
+					],
+					"interval_range": [
+						5.0,
+						15.0
+					],
+					"volume_range": [
+						-12,
+						-8
+					],
+					"bus": "Impacts"
+				}
+			],
+			"buses": {
+				"Machinery": {
+					"effects": [
 						{
-							"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
-							"volume_db": -12,
-							"bus": "Vents"
+							"type": "Distortion",
+							"drive": 0.4
 						},
 						{
-							"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
-							"volume_db": -20,
-							"bus": "ShipHum"
+							"type": "LowPassFilter",
+							"cutoff_hz": 400
 						}
-					],
-					"random_events": [
+					]
+				},
+				"Impacts": {
+					"effects": [
 						{
-							"sound_pool": [
-								"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                                "techno_noir.mechanical_whir"
-							],
-							"interval_range": [
-								15.0,
-								40.0
-							],
-							"volume_range": [
-								-22,
-								-16
-							],
-							"bus": "Groans"
-						}
-					],
-					"buses": {
-						"Vents": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.4,
-									"wet": 0.3
-								}
-							]
+							"type": "Reverb",
+							"room_size": 0.6,
+							"wet": 0.3
 						},
-						"Groans": {
-							"effects": [
-								{
-									"type": "Reverb",
-									"room_size": 0.7,
-									"wet": 0.5
-								},
-								{
-									"type": "LowPassFilter",
-									"cutoff_hz": 600
-								}
-							]
+						{
+							"type": "Distortion",
+							"drive": 0.2
 						}
-					}
+					]
+				}
+			}
+		},
+		"nostromo_corridors": {
+			"description": "Alien inspired: Wind in vents, mechanical groans, isolation",
+			"continuous_layers": [
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_VENTILATION",
+					"volume_db": -12,
+					"bus": "Vents"
+				},
+				{
+					"sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
+					"volume_db": -20,
+					"bus": "ShipHum"
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"AudioSynthesizer.SCI_FI_RESONANT_DRONE",
+						"techno_noir.mechanical_whir"
+					],
+					"interval_range": [
+						15.0,
+						40.0
+					],
+					"volume_range": [
+						-22,
+						-16
+					],
+					"bus": "Groans"
+				}
+			],
+			"buses": {
+				"Vents": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 0.4,
+							"wet": 0.3
+						}
+					]
+				},
+				"Groans": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 0.7,
+							"wet": 0.5
+						},
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 600
+						}
+					]
 				}
 			}
 		}
+	}
+}

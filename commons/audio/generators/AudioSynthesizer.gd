@@ -1,14 +1,326 @@
 # AudioSynthesizer.gd
 # Path: res://commons/audio/AudioSynthesizer.gd
-# Chapter: Audio - Procedural Sound Generation
-# Creates and saves synthesized sounds for the cube system
+# Procedural Audio Synthesizer for generating sound effects and music
+# Generates 16-bit PCM WAV data based on mathematical functions
 
-extends RefCounted
+extends Node
 class_name AudioSynthesizer
 
-# Audio configuration
 const SAMPLE_RATE = 44100
+const BAR_DURATION = 2.0 # Seconds per bar at 120 BPM (4/4)
+
+# Threading
+static var generation_thread: Thread
+static var mutex: Mutex = Mutex.new()
+static var is_generating = false
+
+# signal song_ready(stream: AudioStreamInteractive) - Unused
+
+# Audio configuration
+# const SAMPLE_RATE = 44100.0 # This was replaced by the new SAMPLE_RATE above
 const CHANNELS = 1
+
+# Constants
+const BPM = 100.0
+# const BAR_DURATION = 240.0 / BPM # This was replaced by the new BAR_DURATION above
+
+static func generate_pop_interactive_song(_parameters: Dictionary = {}) -> AudioStreamInteractive:
+	# 1. Pick Key and Progression
+	randomize()
+	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "4"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)
+	var progression = PopMusicTheory.PROG_POP_4 # Default
+	
+	print("AudioSynthesizer: Generating Pop Song in ", root_note)
+	
+	# Create Interactive Stream
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 3
+	playback.initial_clip = 0
+	
+	# 2. Generate Sections
+	# Intro: Pad only
+	var intro_stream = _generate_pop_section_stream(progression, scale, ["pad"])
+	playback.set_clip_stream(0, intro_stream)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1) # Intro -> Verse
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Verse: Bass + Keys + Drums
+	var verse_stream = _generate_pop_section_stream(progression, scale, ["bass", "keys", "drums"])
+	playback.set_clip_stream(1, verse_stream)
+	playback.set_clip_name(1, "Verse")
+	playback.set_clip_auto_advance(1, 1) # Verse -> Chorus
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Chorus: Full Mix
+	var chorus_stream = _generate_pop_section_stream(progression, scale, ["bass", "keys", "pad", "lead", "drums"])
+	playback.set_clip_stream(2, chorus_stream)
+	playback.set_clip_name(2, "Chorus")
+	playback.set_clip_auto_advance(2, 1) # Chorus -> Verse (Loop back)
+	playback.set_clip_auto_advance_next_clip(2, 1)
+	
+	# 3. Transitions
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 2.0)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 1.0)
+	playback.add_transition(2, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 2.0)
+	
+	return playback
+
+static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	# Aphex Twin "Ambient Works 85-92" Style Generator
+	# Characteristics: Warm analogue pads, lo-fi breakbeats, tape drift, acid bass
+	
+	randomize()
+	# Slower tempo for ambient techno (85-95 BPM)
+	var bpm = 90.0
+	var bar_duration = 240.0 / bpm
+	
+	# Key selection (often minor/dorean for this style)
+	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3" # Lower register
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	var progression = [1, 5, 6, 4] # Simple emotive progression
+	
+	print("AudioSynthesizer: Generating Ambient Works Song in ", root_note)
+	
+	# Create Interactive Stream
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4 # Intro, Build, Main, Outro
+	playback.initial_clip = 0
+	
+	# 1. Intro: Tape Keys + Drift
+	var intro_stream = _generate_ambient_section_stream(progression, scale, ["keys", "noise"], bar_duration)
+	playback.set_clip_stream(0, intro_stream)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)  # Auto-advance to Build
+	playback.set_clip_auto_advance_next_clip(0, 1)
+
+	# 2. Build: Add Warm Pad, Bass, and Drums (Groove starts)
+	var build_stream = _generate_ambient_section_stream(progression, scale, ["keys", "pad", "bass", "drums", "noise"], bar_duration)
+	playback.set_clip_stream(1, build_stream)
+	playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1)  # Auto-advance to Main
+	playback.set_clip_auto_advance_next_clip(1, 2)
+
+	# 3. Main: Full Groove (Breakbeat + Acid Bass)
+	var main_stream = _generate_ambient_section_stream(progression, scale, ["keys", "pad", "bass", "drums", "noise"], bar_duration)
+	playback.set_clip_stream(2, main_stream)
+	playback.set_clip_name(2, "Main")
+	playback.set_clip_auto_advance(2, 1)  # Auto-advance to Outro
+	playback.set_clip_auto_advance_next_clip(2, 3)
+
+	# 4. Outro: Fade to Pad
+	var outro_stream = _generate_ambient_section_stream(progression, scale, ["pad", "noise"], bar_duration)
+	playback.set_clip_stream(3, outro_stream)
+	playback.set_clip_name(3, "Outro")
+	playback.set_clip_auto_advance(3, 1)  # Auto-advance back to Intro (loop)
+	playback.set_clip_auto_advance_next_clip(3, 0)
+
+	# Transitions (Long crossfades for ambient feel)
+	var xfade = 4.0
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+static func _generate_ambient_section_stream(progression: Array, scale: Array, instruments: Array, bar_duration: float, panning: String = "center") -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2 # Double length bars for slower feel
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# INSTRUMENTS
+		
+		if "pad" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_warm_juno_pad(data, samples_per_chord, chord_freqs)
+			_mix_into(chord_mix, data, 0.6)
+			
+		if "keys" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_tape_drift_keys(data, samples_per_chord, chord_freqs)
+			_mix_into(chord_mix, data, 0.5)
+			
+		if "bass" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_acid_bass_sub(data, samples_per_chord, root_freq)
+			_mix_into(chord_mix, data, 0.7)
+			
+		if "drums" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_lofi_breakbeat(data, samples_per_chord)
+			_mix_into(chord_mix, data, 0.8)
+			
+		if "noise" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_tape_hiss(data, samples_per_chord)
+			_mix_into(chord_mix, data, 0.15) # Subtle background texture
+
+		# Mix into final buffer
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				# Sanitize NaN/Inf values that would kill audio
+				if is_nan(sample) or is_inf(sample):
+					sample = 0.0
+				# Clamp to prevent clipping
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+
+	if panning == "right_to_left":
+		# Create stereo mix with panning (Right -> Left)
+		var stereo_mix = PackedFloat32Array()
+		stereo_mix.resize(total_samples * 2)
+		
+		for i in range(total_samples):
+			var t_prog = float(i) / float(total_samples)
+			var pan_l = t_prog        # 0.0 -> 1.0 (Left channel gain)
+			var pan_r = 1.0 - t_prog  # 1.0 -> 0.0 (Right channel gain)
+			
+			var mono_sample = final_mix[i]
+			stereo_mix[i * 2] = mono_sample * pan_l     # Left
+			stereo_mix[i * 2 + 1] = mono_sample * pan_r # Right
+			
+		return _create_stereo_audio_stream(stereo_mix, AudioStreamWAV.LOOP_DISABLED)
+	else:
+		# Center panning: Duplicate mono to L/R for consistent Stereo output
+		var stereo_mix = PackedFloat32Array()
+		stereo_mix.resize(total_samples * 2)
+		
+		for i in range(total_samples):
+			var sample = final_mix[i]
+			stereo_mix[i * 2] = sample      # Left
+			stereo_mix[i * 2 + 1] = sample  # Right
+			
+		return _create_stereo_audio_stream(stereo_mix, AudioStreamWAV.LOOP_DISABLED)
+
+static func generate_pop_song_async(parameters: Dictionary, callback_object: Object, callback_method: String):
+	if is_generating:
+		print("AudioSynthesizer: Already generating sound")
+		return
+
+	if not generation_thread:
+		generation_thread = Thread.new()
+	
+	is_generating = true
+	print("AudioSynthesizer: Starting background generation...")
+	
+	# Pass data as a single dictionary to the thread function
+	var thread_data = {
+		"params": parameters,
+		"callback_obj": callback_object,
+		"callback_method": callback_method
+	}
+	
+	generation_thread.start(_thread_generate_pop_song.bind(thread_data))
+
+static func _thread_generate_pop_song(data: Dictionary):
+	print("AudioSynthesizer: Thread started")
+	var stream = null
+	if data.params.get("type") == "AMBIENT":
+		stream = generate_ambient_works_song(data.params)
+	else:
+		stream = generate_pop_interactive_song(data.params)
+	
+	_on_generation_complete.call_deferred(stream, data)
+
+static func _on_generation_complete(stream: AudioStreamInteractive, data: Dictionary):
+	print("AudioSynthesizer: Background generation complete")
+	
+	if generation_thread.is_alive():
+		generation_thread.wait_to_finish()
+	
+	is_generating = false
+	
+	if data.callback_obj and data.callback_obj.has_method(data.callback_method):
+		data.callback_obj.call(data.callback_method, stream)
+
+static func _generate_pop_section_stream(progression: Array, scale: Array, instruments: Array) -> AudioStreamWAV:
+	var total_duration = progression.size() * BAR_DURATION
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	
+	var samples_per_chord = int(BAR_DURATION * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var bass_freq = root_freq * 0.25
+		
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		if "pad" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_juno_chorus_pad(data, samples_per_chord, chord_freqs)
+			_mix_into(chord_mix, data, 0.5)
+			
+		if "keys" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_dx7_ballad_keys(data, samples_per_chord, chord_freqs)
+			_mix_into(chord_mix, data, 0.6)
+			
+		if "bass" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_funk_bass(data, samples_per_chord, bass_freq)
+			_mix_into(chord_mix, data, 0.7)
+
+		if "lead" in instruments:
+			var data = PackedFloat32Array(); data.resize(samples_per_chord)
+			_generate_obxa_brass(data, samples_per_chord, chord_freqs)
+			_mix_into(chord_mix, data, 0.4)
+
+		if "drums" in instruments:
+			var beat_samples = int(samples_per_chord / 4.0)
+			var kick_data = PackedFloat32Array(); kick_data.resize(int(SAMPLE_RATE * 0.2))
+			_generate_tr909_kick(kick_data, kick_data.size())
+			var hat_data = PackedFloat32Array(); hat_data.resize(int(SAMPLE_RATE * 0.1))
+			_generate_acid_606_hihat(hat_data, hat_data.size())
+			
+			var drum_mix = PackedFloat32Array(); drum_mix.resize(samples_per_chord); drum_mix.fill(0.0)
+			_mix_at_offset(drum_mix, kick_data, 0, 0.8)
+			_mix_at_offset(drum_mix, kick_data, beat_samples * 2, 0.8)
+			var hat_offset = int(beat_samples * 0.5)
+			for b in range(4):
+				_mix_at_offset(drum_mix, hat_data, b * beat_samples + hat_offset, 0.4)
+			_mix_into(chord_mix, drum_mix, 1.0)
+
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				if is_nan(sample) or is_inf(sample):
+					sample = 0.0
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+				
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+static func _mix_into(target: PackedFloat32Array, source: PackedFloat32Array, level: float):
+	for i in range(min(target.size(), source.size())):
+		target[i] += source[i] * level
+
+static func _mix_at_offset(target: PackedFloat32Array, source: PackedFloat32Array, offset: int, level: float):
+	var end = min(target.size(), offset + source.size())
+	for i in range(offset, end):
+		target[i] += source[i - offset] * level
 
 # Sound type definitions
 enum SoundType {
@@ -53,16 +365,28 @@ enum SoundType {
 	SCI_FI_ELECTROMAGNETIC,  # Subtle tech interference
 	# Cinematic / Movie-inspired sounds
 	CS80_BRASS_LEAD,         # Vangelis-style CS-80 brass lead
-	CINEMATIC_432HZ_PAD      # Warm pad tuned to 432Hz base
+	CINEMATIC_432HZ_PAD,      # Warm pad tuned to 432Hz base
+	# Pop Music / Synth Legends
+	POP_JUNO_CHORUS_PAD,     # Roland Juno-106 Lush Pad
+	POP_DX7_BALLAD_KEYS,     # Yamaha DX7 E-Piano
+	POP_OBXA_BRASS,          # Oberheim OB-Xa Jump Brass
+	POP_PROPHET_LEAD,        # Prophet-5 Sync Lead
+	POP_FUNK_BASS,           # Minimoog Funk Bass
+	POP_INTERACTIVE_SONG,    # Procedural Pop Song (Interactive Stream)
+	AMBIENT_WORKS_SONG       # Aphex Twin Style Ambient (Interactive Stream)
 }
 
 # Sound generation functions
-static func generate_sound(type: SoundType, duration: float = 1.0) -> AudioStreamWAV:
+static func generate_sound(type: SoundType, duration: float = 1.0, parameters: Dictionary = {}) -> AudioStream:
 	var sample_count = int(SAMPLE_RATE * duration)
 	var data = PackedFloat32Array()
 	data.resize(sample_count)
 	
 	match type:
+		SoundType.POP_INTERACTIVE_SONG:
+			return generate_pop_interactive_song(parameters)
+		SoundType.AMBIENT_WORKS_SONG:
+			return generate_ambient_works_song(parameters)
 		SoundType.BASIC_SINE_WAVE:
 			_generate_basic_sine_wave(data, sample_count)
 		SoundType.PICKUP_MARIO:
@@ -141,6 +465,16 @@ static func generate_sound(type: SoundType, duration: float = 1.0) -> AudioStrea
 			_generate_cs80_brass_lead(data, sample_count)
 		SoundType.CINEMATIC_432HZ_PAD:
 			_generate_cinematic_432hz_pad(data, sample_count)
+		SoundType.POP_JUNO_CHORUS_PAD:
+			_generate_juno_chorus_pad(data, sample_count)
+		SoundType.POP_DX7_BALLAD_KEYS:
+			_generate_dx7_ballad_keys(data, sample_count)
+		SoundType.POP_OBXA_BRASS:
+			_generate_obxa_brass(data, sample_count)
+		SoundType.POP_PROPHET_LEAD:
+			_generate_prophet_lead(data, sample_count)
+		SoundType.POP_FUNK_BASS:
+			_generate_funk_bass(data, sample_count)
 	
 	return _create_audio_stream(data)
 
@@ -172,7 +506,7 @@ static func _generate_pickup_sound(data: PackedFloat32Array, sample_count: int):
 
 static func _generate_teleport_drone(data: PackedFloat32Array, sample_count: int):
 	# Electrostatic drone with modulation - harsh sawtooth with noise
-	var duration = float(sample_count) / SAMPLE_RATE
+	var _duration = float(sample_count) / SAMPLE_RATE
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
@@ -798,8 +1132,162 @@ static func _generate_korg_m1_piano(data: PackedFloat32Array, sample_count: int)
 			envelope = progress / 0.01
 		else:  # Exponential decay
 			envelope = exp(-(progress - 0.01) * 3.0)
+			
+		data[i] = wave * envelope * 0.35
+
+static func _generate_juno_chorus_pad(data: PackedFloat32Array, sample_count: int, chord_freqs: Array = [220.0]):
+	# Roland Juno-106 Lush Pad (Polyphonic)
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
 		
-		data[i] = wave * envelope * 0.5
+		# PWM LFO
+		var pwm_lfo = sin(2.0 * PI * 0.5 * t) * 0.4 + 0.5
+		
+		var mixed = 0.0
+		
+		for freq in chord_freqs:
+			# Layer 1: Center Pulse-Saw
+			var wave1 = _get_pulse_saw(freq, t, pwm_lfo)
+			
+			# Layer 2: Left Detune (Chorus I)
+			var detune1 = sin(2.0 * PI * 0.5 * t) * 0.003
+			var wave2 = _get_pulse_saw(freq * (1.0 + detune1), t, pwm_lfo)
+			
+			# Layer 3: Right Detune (Chorus II)
+			var detune2 = cos(2.0 * PI * 0.8 * t) * 0.005
+			var wave3 = _get_pulse_saw(freq * (1.0 - detune2), t, pwm_lfo) 
+			
+			mixed += (wave1 * 0.5) + (wave2 * 0.3) + (wave3 * 0.3)
+		
+		# Normalize gain based on voice count
+		mixed /= max(1, chord_freqs.size())
+		
+		# ADSR Pad Envelope
+		var envelope = 1.0
+		if progress < 0.3: envelope = progress / 0.3
+		elif progress > 0.6: envelope = (1.0 - progress) / 0.4
+			
+		data[i] = mixed * envelope * 0.3
+
+static func _get_pulse_saw(freq: float, t: float, width: float) -> float:
+	# Hybrid Sawtooth / Pulse wave
+	var phase = fmod(freq * t, 1.0)
+	var saw = 2.0 * phase - 1.0
+	var pulse = 1.0 if phase < width else -1.0
+	return saw * 0.5 + pulse * 0.5
+
+static func _generate_dx7_ballad_keys(data: PackedFloat32Array, sample_count: int, chord_freqs: Array = [329.63]):
+	# Yamaha DX7 Electric Piano (FM) - Polyphonic
+	# Algorithm: Modulator -> Carrier
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var mixed = 0.0
+		for freq in chord_freqs:
+			# Modulator (Metal/Tine character)
+			# Ratio 14.0 for bell like tone
+			var mod_ratio = 14.0
+			var mod_env = exp(-progress * 10.0) # Quick decay
+			var mod_index = 2.0 * mod_env
+			var modulator = sin(2.0 * PI * freq * mod_ratio * t) * mod_index
+			
+			# Carrier 1 (Body)
+			# Ratio 1.0
+			var car1_env = exp(-progress * 2.0)
+			var car1 = sin(2.0 * PI * freq * t + modulator) * car1_env
+			
+			# Carrier 2 (Thump/Bass)
+			var car2_env = exp(-progress * 5.0)
+			var car2 = sin(2.0 * PI * freq * t) * car2_env * 0.5
+			
+			mixed += (car1 + car2) * 0.5
+			
+		mixed /= max(1, chord_freqs.size())
+		data[i] = mixed * 0.5
+
+static func _generate_obxa_brass(data: PackedFloat32Array, sample_count: int, chord_freqs: Array = [130.81]):
+	# Oberheim OB-Xa "Jump" Brass - Polyphonic
+	# Detuned Sawtooths + Filter Envelope
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var mixed = 0.0
+		for freq in chord_freqs:
+			var osc1 = _get_saw(freq, t)
+			var osc2 = _get_saw(freq * 1.01, t) # Detuned
+			var osc3 = _get_saw(freq * 0.995, t) # Detuned flat
+			
+			mixed += (osc1 + osc2 + osc3) * 0.33
+			
+		mixed /= max(1, chord_freqs.size())
+		
+		# Filter Envelope (Bright attack, sustain)
+		var filter_env = 0.0
+		if progress < 0.1: filter_env = progress / 0.1 + 0.5
+		else: filter_env = max(0.5, 1.5 - (progress - 0.1) * 2.0)
+		
+		# Simulate filter by scaling amplitude of a high-pass layer? 
+		# Or just cheat: Bright saw vs Dull saw mix
+		# "Jump" sound is VERY bright. Let's just use the raw saw with a volume envelope.
+		
+		var amp_env = 1.0
+		if progress < 0.05: amp_env = progress / 0.05
+		elif progress > 0.8: amp_env = (1.0 - progress) / 0.2
+		
+		data[i] = mixed * amp_env * filter_env * 0.4
+
+static func _get_saw(freq: float, t: float) -> float:
+	return 2.0 * (freq * t - floor(freq * t)) - 1.0
+
+static func _generate_prophet_lead(data: PackedFloat32Array, sample_count: int, freq: float = 440.0):
+	# Prophet-5 Sync Lead (Monophonic)
+	# Oscillator Sync effect
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var master_freq = freq
+		# Slave freq sweeps up
+		var slave_freq = freq * (1.0 + sin(2.0 * PI * 2.0 * t) * 0.5 + 1.0) 
+		
+		# Master resets Slave phase
+		var _master_phase = fmod(master_freq * t, 1.0)
+		var _slave_phase = fmod(slave_freq * t, 1.0)
+		
+		# Hard Sync simulation: 
+		# Real hard sync resets slave phase when master phase resets.
+		# analytically: 
+		var sync_time = floor(master_freq * t) / master_freq
+		var time_since_sync = t - sync_time
+		var synced_slave_phase = fmod(slave_freq * time_since_sync, 1.0)
+		
+		var wave = 2.0 * synced_slave_phase - 1.0
+		
+		var env = 1.0
+		if progress > 0.9: env = (1.0 - progress) / 0.1
+		
+		data[i] = wave * env * 0.3
+
+static func _generate_funk_bass(data: PackedFloat32Array, sample_count: int, freq: float = 55.0):
+	# Minimoog Funk Bass (Monophonic)
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var saw = _get_saw(freq, t)
+		var square = 1.0 if sin(2.0 * PI * freq * t) > 0 else -1.0
+		var mix = saw * 0.7 + square * 0.3
+		
+		# Filter Env (Snap)
+		var f_env = exp(-progress * 15.0)
+		
+		# Amp Env
+		var a_env = exp(-progress * 5.0)
+		
+		data[i] = mix * a_env * (0.5 + 0.5 * f_env) * 0.6
 
 static func _generate_arp_2600_lead(data: PackedFloat32Array, sample_count: int):
 	# ARP 2600 analog lead synthesizer
@@ -1074,6 +1562,168 @@ static func _generate_aphex_twin_modular(data: PackedFloat32Array, sample_count:
 		
 		data[i] = total_wave * envelope * 0.6
 
+static func _generate_warm_juno_pad(data: PackedFloat32Array, sample_count: int, freqs: Array):
+	# Warm, drifting pad inspired by Juno-106
+	if sample_count <= 0 or freqs.is_empty():
+		return
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		var sample = 0.0
+		var chorus_lfo = sin(2.0 * PI * 0.5 * t) * 0.002
+		
+		for freq in freqs:
+			# Sawtooth with slight PWM character logic
+			# Using dual detuned saws for thickness
+			var f1 = freq * (1.0 + chorus_lfo)
+			var f2 = freq * (0.998 - chorus_lfo)
+			
+			var saw1 = 2.0 * (f1 * t - floor(f1 * t)) - 1.0
+			var saw2 = 2.0 * (f2 * t - floor(f2 * t)) - 1.0
+			
+			sample += (saw1 + saw2) * 0.5
+			
+		sample /= max(1, freqs.size())
+		
+		# Low Pass Filter (Simulated via simple moving average / sine sum approximation for stability)
+		# For procedural, simpler to just use soft sine approximation of filter cutoff
+		# Here we multiply by a "dullness" factor based on harmonics
+		
+		# Amplitude Envelope (Slow attack/release)
+		var envelope = 1.0
+		if progress < 0.2: envelope = progress / 0.2
+		elif progress > 0.8: envelope = (1.0 - progress) / 0.2
+		
+		# Filter Sweep
+		var cutoff_mod = sin(2.0 * PI * 0.1 * t) * 0.3 + 0.7
+		
+		data[i] = sample * envelope * cutoff_mod * 0.4
+
+static func _generate_tape_drift_keys(data: PackedFloat32Array, sample_count: int, freqs: Array):
+	# Triangle/Sine keys with pitch wow/flutter
+	if sample_count <= 0 or freqs.is_empty():
+		return
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Tape Wow/Flutter LFOs
+		var wow = sin(2.0 * PI * 0.5 * t) * 0.003 # Slow drift
+		var flutter = sin(2.0 * PI * 6.0 * t) * 0.001 # Fast jitter
+		var pitch_mod = 1.0 + wow + flutter
+		
+		var sample = 0.0
+		for freq in freqs:
+			var f = freq * pitch_mod
+			# Triangle wave
+			var tri = abs(4.0 * (f * t - floor(f * t + 0.75)) - 2.0) - 1.0
+			sample += tri
+			
+		sample /= max(1, freqs.size())
+		
+		# Lo-Fi Bandpass Filter simulation (simulated by reducing high freq clarity)
+		
+		# Pluckish envelope but soft
+		var envelope = exp(-progress * 4.0) 
+		
+		data[i] = sample * envelope * 0.5
+
+static func _generate_acid_bass_sub(data: PackedFloat32Array, sample_count: int, freq: float):
+	# Deep, resonant, slightly distorted bass
+	if sample_count <= 0 or freq <= 0.0:
+		return
+	var octaved_freq = freq * 0.5 # Sub octave
+
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+		
+		# Sawtooth -> Lowpass -> Distortion
+		var saw = 2.0 * (octaved_freq * t - floor(octaved_freq * t)) - 1.0
+		
+		# Filter envelope (Acid pluck)
+		var filter_env = exp(-progress * 10.0)
+		var cutoff_mult = 1.0 + filter_env * 3.0
+		
+		# Simple Lowpass approx
+		# In real DSP we'd run a state filter, here we simulate the result
+		# A dark saw is like a sine + some lower harmonics
+		
+		# Let's cheat and synthesize the filtered result directly for clean generation
+		var filtered = sin(2.0 * PI * octaved_freq * t) # Fundamental
+		filtered += sin(2.0 * PI * octaved_freq * 2.0 * t) * 0.5 * cutoff_mult # 2nd harmonic
+		
+		# Distortion/Saturation
+		filtered = tanh(filtered * 1.5)
+		
+		# Amp envelope
+		var amp_env = 1.0
+		if progress > 0.9: amp_env = (1.0 - progress) / 0.1
+		
+		data[i] = filtered * amp_env * 0.6
+
+static func _generate_lofi_breakbeat(data: PackedFloat32Array, sample_count: int):
+	# Procedural breakbeat pattern
+	if sample_count <= 0:
+		return
+	var beat_len = float(sample_count)
+	var steps = 16
+	var step_len = beat_len / steps
+
+	# Prevent division by zero
+	if step_len < 1.0:
+		step_len = 1.0
+
+	# Basic "Amen-ish" pattern
+	var kicks = [0, 10]
+	var snares = [4, 12, 15]
+	var hats = [0, 2, 4, 6, 8, 10, 12, 14]
+
+	# Add micro-timing offset for "human/MPC" feel
+	@warning_ignore("unused_variable")
+	var swing = 0.05
+
+	for i in range(sample_count):
+		@warning_ignore("unused_variable")
+		var t = float(i) / SAMPLE_RATE
+		var current_step = int(float(i) / step_len)
+		var step_progress = fmod(float(i), step_len) / step_len
+		
+		var sample = 0.0
+		
+		# KICK (Sine sweep + click)
+		if current_step in kicks and step_progress < 0.3:
+			var kt = step_progress * 0.5 # Time relative to kick start
+			var kfreq = 150.0 * exp(-kt * 20.0) # Sweep down
+			sample += sin(2.0 * PI * kfreq * kt) * exp(-kt * 10.0) * 0.8
+			
+		# SNARE (Noise + Tone)
+		if current_step in snares and step_progress < 0.2:
+			var st = step_progress * 0.5
+			var tone = sin(2.0 * PI * 200.0 * st) * exp(-st * 15.0)
+			var noise = (randf() * 2.0 - 1.0) * exp(-st * 20.0)
+			sample += (tone * 0.5 + noise * 0.6) * 0.7
+			
+		# HIHAT (High noise)
+		if current_step in hats and step_progress < 0.05:
+			var ht = step_progress * 0.1
+			var noise = (randf() * 2.0 - 1.0) * exp(-ht * 50.0)
+			sample += noise * 0.3
+			
+		data[i] = sample
+
+static func _generate_tape_hiss(data: PackedFloat32Array, sample_count: int):
+	for i in range(sample_count):
+		# Pink noise approximation or just soft white noise
+		var white = randf() * 2.0 - 1.0
+		# Apply simple lowpass
+		# In this static context, previous sample access is tricky without state, 
+		# so we interpret noise as random volume fluctuations
+		
+		data[i] = white * 0.05 # Very quiet floor
+
+
 static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_count: int):
 	# Flying Lotus sampler - hip-hop beats with jazz fusion and experimental elements
 	var bpm = 85.0
@@ -1091,7 +1741,7 @@ static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_coun
 		var t = float(i) / SAMPLE_RATE
 		
 		# J Dilla-style swing
-		var beat_time = fmod(t / beat_duration, 1.0)
+		var _beat_time = fmod(t / beat_duration, 1.0)
 		var swing_offset = 0.0
 		if int(t / beat_duration) % 2 == 1:  # Swing on off-beats
 			swing_offset = 0.1
@@ -1105,7 +1755,7 @@ static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_coun
 		
 		# Sample chop simulation
 		var chop_rate = 16.0  # 16th note chops
-		var chop_index = int((t + swing_offset) * chop_rate) % 32
+		var _chop_index = int((t + swing_offset) * chop_rate) % 32
 		var chop_progress = fmod((t + swing_offset) * chop_rate, 1.0)
 		
 		# Multi-layered samples
@@ -1141,12 +1791,12 @@ static func _generate_flying_lotus_sampler(data: PackedFloat32Array, sample_coun
 		
 		data[i] = total_wave * envelope * 0.7
 
-static func _create_audio_stream(data: PackedFloat32Array) -> AudioStreamWAV:
+static func _create_audio_stream(data: PackedFloat32Array, loop_mode: int = AudioStreamWAV.LOOP_FORWARD) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS
 	stream.mix_rate = SAMPLE_RATE
 	stream.stereo = false
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD  # Enable looping
+	stream.loop_mode = loop_mode
 	stream.loop_begin = 0
 	stream.loop_end = data.size()
 	
@@ -1161,6 +1811,31 @@ static func _create_audio_stream(data: PackedFloat32Array) -> AudioStreamWAV:
 		# Little-endian 16-bit encoding
 		byte_array[byte_index] = sample & 0xFF          # Low byte
 		byte_array[byte_index + 1] = (sample >> 8) & 0xFF  # High byte
+	
+	stream.data = byte_array
+	return stream
+
+static func _create_stereo_audio_stream(data_stereo: PackedFloat32Array, loop_mode: int = AudioStreamWAV.LOOP_FORWARD) -> AudioStreamWAV:
+	# Expects interleaved stereo data (L, R, L, R...)
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = SAMPLE_RATE
+	stream.stereo = true
+	stream.loop_mode = loop_mode
+	
+	var frame_count = data_stereo.size() / 2
+	stream.loop_begin = 0
+	stream.loop_end = frame_count
+	
+	# Convert float data to 16-bit integers
+	var byte_array = PackedByteArray()
+	byte_array.resize(data_stereo.size() * 2)
+	
+	for i in range(data_stereo.size()):
+		var sample = int(clamp(data_stereo[i], -1.0, 1.0) * 32767.0)
+		var byte_index = i * 2
+		byte_array[byte_index] = sample & 0xFF
+		byte_array[byte_index + 1] = (sample >> 8) & 0xFF
 	
 	stream.data = byte_array
 	return stream
@@ -1370,7 +2045,7 @@ static func _generate_sci_fi_data_chirps(data: PackedFloat32Array, sample_count:
 	# Uses rapid frequency modulation and bursts
 	
 	var burst_interval = 0.15
-	var current_burst = 0
+	var _current_burst = 0
 	
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE

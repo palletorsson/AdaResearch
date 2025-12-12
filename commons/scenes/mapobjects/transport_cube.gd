@@ -288,7 +288,8 @@ func set_movement_speed(speed: float):
 func set_auto_start(enabled: bool):
 	"""Enable or disable auto-start mode"""
 	auto_start = enabled
-	if enabled and not is_moving and not waiting_to_start:
+	# Only start if already in tree, otherwise _ready() will handle it
+	if enabled and is_inside_tree() and not is_moving and not waiting_to_start:
 		print("TransportCube: Auto-start enabled, beginning transport sequence")
 		start_transport()
 

@@ -412,6 +412,12 @@
 			"lookup_name": "PendulumCircle",
 			"description": "Compound motion of pendulum and circle",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.tscn"
+		},
+		"WaveRideScene": {
+			"name": "WaveRideScene",
+			"lookup_name": "WaveRideScene",
+			"description": "WaveRideScene",
+			"scene": "res://algorithms/wavefunctions/wave_function_ride/WaveRideScene.tscn"
 		}
 	}
 }

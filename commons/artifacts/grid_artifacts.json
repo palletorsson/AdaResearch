@@ -338,14 +338,13 @@
 			"lookup_name": "pythagorean_triangle_angles",
 			"description": "pythagorean_triangle_angles",
 			"scene": "res://commons/primitives/triangle/pythagorean_triangle_angles.tscn"
-		},	
+		},
 		"folded_strip": {
 			"name": "1.2: folded_strip",
 			"lookup_name": "folded_strip",
 			"description": "pfolded_strip",
 			"scene": "res://commons/primitives/folded_strip/folded_strip.tscn"
-		},				
-		
+		},
 		"zigzagprofile": {
 			"name": "1.2: A zigzagprofile",
 			"lookup_name": "zigzagprofile",
@@ -682,6 +681,12 @@
 			"description": "settings_ui",
 			"scene": "res://commons/scenes/main_menu/objects/settings_ui.tscn"
 		},
+		"pop_music_demo": {
+			"name": "Pop Music Demo",
+			"lookup_name": "pop_music_demo",
+			"description": "Interactive generative pop music sequencer with dynamic chord progressions.",
+			"scene": "res://commons/scenes/demos/PopMusicDemo.tscn"
+		},
 		"scale_me": {
 			"name": "scale_me",
 			"lookup_name": "scale_me",
@@ -795,8 +800,7 @@
 			"name": "strobe_lasers",
 			"description": "strobe_lasers.",
 			"scene": "res://algorithms/color/strobe_lasers/strobe_lasers.tscnn"
-		},		
-		
+		},
 		"row_3_x": {
 			"name": "row_3_x",
 			"lookup_name": "row_3_x",
@@ -1072,8 +1076,7 @@
 			"lookup_name": "PhysarumColony",
 			"description": "PhysarumColony",
 			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn"
-		},		
-
+		},
 		"self_organizing_patterns": {
 			"name": "Self-Organizing Patterns",
 			"lookup_name": "self_organizing_patterns",
@@ -1328,7 +1331,6 @@
 			"description": "wfc_3d_demo",
 			"scene": "res://algorithms/proceduralgeneration/wfc3D/wfc_3d_demo.tscn"
 		},
-		
 		"voronoi_diagrams": {
 			"name": "Voronoi Diagrams",
 			"lookup_name": "voronoi_diagrams",
@@ -2732,7 +2734,6 @@
 			"description": "ant_colony_optimization",
 			"scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn"
 		},
-		
 		"renaissancepaintingfloorrattern": {
 			"name": "renaissancepaintingfloorrattern",
 			"lookup_name": "renaissancepaintingfloorrattern",
@@ -3033,7 +3034,6 @@
 			"description": "queer_cylinder_target",
 			"scene": "res://commons/primitives/targets/queer_cylinder_target.tscn"
 		},
-		
 		"example_1_10_accelerating_towards_the_mouse_vr": {
 			"name": "example_1_10_accelerating_towards_the_mouse_vr",
 			"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",

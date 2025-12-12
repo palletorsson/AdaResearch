@@ -9,6 +9,7 @@ signal sound_bank_ready
 signal preset_loaded(preset_name: String)
 signal sound_generated(sound_id: String)
 signal generation_progress(current: int, total: int, sound_name: String)
+signal request_ambient_change(preset_name: String) # Global request to change ambient
 
 # Sound registry - stores all generated AudioStreamWAV sounds
 var sound_registry: Dictionary = {}
@@ -111,26 +112,54 @@ func get_preset(preset_name: String) -> Dictionary:
 		print("⚠️ Preset not found: ", preset_name, " - using 'silent' preset")
 		return ambient_presets.get("silent", {})
 
+func trigger_ambient_change(preset_name: String):
+	"""Trigger a global change of ambient preset"""
+	print("🔊 SoundBank: Requesting global ambient change to: ", preset_name)
+	request_ambient_change.emit(preset_name)
+
 # ===== SOUND GENERATION =====
 
-func get_sound(sound_id: String) -> AudioStreamWAV:
+func get_sound(sound_id: String) -> AudioStream:
 	"""Get a sound from the registry, generating it if needed"""
 
 	# Check if already cached
 	if sound_id in sound_registry:
 		return sound_registry[sound_id]
 
-	# Generate the sound
+# Generate the sound
 	var sound = _generate_sound(sound_id)
 	if sound:
 		sound_registry[sound_id] = sound
 		sound_generated.emit(sound_id)
 		return sound
 	else:
+		# Check if it supports async generation (only pop songs for now)
+		if sound_id.contains("POP_INTERACTIVE_SONG"):
+			print("SoundBank: Triggering async generation for ", sound_id)
+			_request_async_generation(sound_id)
+			return null # Caller must listen to sound_generated signal
+			
 		print("⚠️ Failed to generate sound: ", sound_id)
 		return null
 
-func _generate_sound(sound_id: String) -> AudioStreamWAV:
+func _request_async_generation(sound_id: String):
+	if sound_id.contains("POP_INTERACTIVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({}, self, "_on_async_sound_ready")
+	elif sound_id.contains("AMBIENT_WORKS_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "AMBIENT"}, self, "_on_async_sound_ready") # Reusing generation thread wrapper
+
+func _on_async_sound_ready(stream: AudioStream):
+	# Assuming single active generation for now, mapped to the ID
+	# TODO: Pass ID through callback for robustness
+	var sound_id = "AudioSynthesizer.POP_INTERACTIVE_SONG" # Hardcoded fallback matches current usage
+	if stream:
+		sound_registry[sound_id] = stream
+		print("SoundBank: Async sound ready: ", sound_id)
+		sound_generated.emit(sound_id)
+	else:
+		print("SoundBank: Async generation failed")
+
+func _generate_sound(sound_id: String) -> AudioStream:
 	"""Generate a sound based on its ID"""
 
 	# Parse the sound ID (format: "generator.sound_name" or "SoundClass.METHOD")
@@ -220,6 +249,7 @@ func _string_to_sound_type(sound_name: String):
 		"KRAFTWERK_ROBOTIC": return AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER
 		"APHEX_TWIN_GLITCH": return AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR
 		"TELEPORT_WHOOSH": return AudioSynthesizer.SoundType.TELEPORT_DRONE
+		"POP_INTERACTIVE_SONG": return AudioSynthesizer.SoundType.POP_INTERACTIVE_SONG
 		_:
 			return null
 

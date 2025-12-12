@@ -42,11 +42,32 @@ func _on_start_clicked():
 	print("MainMenu: Start Game clicked")
 	start_game_requested.emit()
 
+const SETTINGS_SCENE = preload("res://commons/scenes/main_menu/objects/settings_ui.tscn")
+var settings_instance: Node3D = null
+
 func _on_settings_clicked():
 	print("MainMenu: Settings clicked")
-	# TODO: Implement settings
-	if about_display.has_method("set_tutorial_from_text"):
-		about_display.set_tutorial_from_text("Settings are not implemented yet.\n\nStay tuned for updates!")
+	
+	# If already open, close it (toggle behavior)
+	if settings_instance:
+		settings_instance.queue_free()
+		settings_instance = null
+		if about_display:
+			about_display.visible = true
+		return
+
+	# Instantiate Settings UI
+	settings_instance = SETTINGS_SCENE.instantiate()
+	add_child(settings_instance)
+	
+	# Swap in position: Use exact transform of About Display
+	if about_display:
+		settings_instance.transform = about_display.transform
+		about_display.visible = false
+	else:
+		# Fallback if About Display is missing
+		settings_instance.position = Vector3(0.6, 0, 0)
+		settings_instance.rotation_degrees.y = 0
 
 func _on_quit_clicked():
 	print("MainMenu: Quit clicked")

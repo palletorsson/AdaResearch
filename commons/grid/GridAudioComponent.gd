@@ -55,32 +55,47 @@ func resolve_audio_config() -> Dictionary:
 
 	var config = {}
 
-	# Try to load map_sequences.json for global and sequence config
-	var sequences_data = _load_map_sequences()
-	print("🔍 Loaded map_sequences.json: %s" % (not sequences_data.is_empty()))
-
-	if sequences_data:
-		# 1. Apply global defaults
-		if "audio_defaults" in sequences_data:
-			config = sequences_data["audio_defaults"].duplicate(true)
+	# Try to get sequence data from MapProgressionManager
+	var sequence_data = {}
+	if MapProgressionManager and "sequences" in MapProgressionManager:
+		print("🔍 Accessing MapProgressionManager sequences")
+		var full_sequences = MapProgressionManager.sequences
+		
+		# 1. Apply global audio defaults (if available in MapProgressionManager or hardcoded fallback)
+		if MapProgressionManager.get("progression_config") and "audio_defaults" in MapProgressionManager.progression_config:
+			config = MapProgressionManager.progression_config["audio_defaults"].duplicate(true)
 			print("GridAudioComponent: Applied global audio defaults: %s" % config)
-
-		# 2. Apply sequence-level config (if we can determine sequence)
-		print("🔍 Checking sequence config - sequence_id: '%s'" % sequence_id)
-		if not sequence_id.is_empty() and "sequences" in sequences_data:
-			print("🔍 Sequences available: %s" % str(sequences_data["sequences"].keys()))
-			if sequence_id in sequences_data["sequences"]:
-				var sequence = sequences_data["sequences"][sequence_id]
-				print("🔍 Found sequence: %s" % str(sequence))
+			
+		# 2. Apply sequence-level config
+		if not sequence_id.is_empty():
+			if sequence_id in full_sequences:
+				var sequence = full_sequences[sequence_id]
+				print("🔍 Found sequence in MapProgressionManager: %s" % str(sequence))
+				
+				# Check for direct ambient_preset in sequence (new format)
+				if "ambient_preset" in sequence:
+					config["ambient_preset"] = sequence["ambient_preset"]
+					print("GridAudioComponent: Applied sequence ambient preset: %s" % sequence["ambient_preset"])
+				
+				# Check for audio object (old format)
 				if "audio" in sequence:
 					config.merge(sequence["audio"], true)
-					print("GridAudioComponent: Applied sequence audio config: %s → %s" % [sequence_id, config])
-				else:
-					print("🔍 Sequence has no 'audio' key")
+					print("GridAudioComponent: Applied sequence audio config: %s" % config)
 			else:
-				print("🔍 Sequence '%s' not found in sequences" % sequence_id)
-		else:
-			print("🔍 Skipping sequence config (empty ID or no sequences)")
+				print("🔍 Sequence '%s' not found in MapProgressionManager" % sequence_id)
+	else:
+		print("GridAudioComponent: WARNING - MapProgressionManager not available")
+		
+		# Fallback to local load (legacy)
+		var sequences_data = _load_map_sequences()
+		if sequences_data:
+			if "audio_defaults" in sequences_data:
+				config = sequences_data["audio_defaults"].duplicate(true)
+			
+			if not sequence_id.is_empty() and "sequences" in sequences_data and sequence_id in sequences_data["sequences"]:
+				var sequence = sequences_data["sequences"][sequence_id]
+				if "audio" in sequence:
+					config.merge(sequence["audio"], true)
 
 	# 3. Apply map-level config (highest priority)
 	if data_component:

@@ -219,6 +219,11 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				# Handle regular utilities
 				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)
 				var utility_type = parsed.type
+				
+				# Check settings for Infoboard ("an")
+				if utility_type == "an" and not GameManager.show_infoboard:
+					print("GridUtilitiesComponent: Skipping Infoboard due to user setting")
+					continue
 				var parameters = parsed.parameters
 				
 				if UtilityRegistry.is_valid_utility_type(utility_type) and utility_type != " ":

@@ -8,9 +8,17 @@ var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 ## Freeze behavior options
 @export var alter_freeze : bool = false  # Keep quad fixed; points move freely
 
-# Two triangle mesh instances - one pink, one black
-var triangle_mesh_a: MeshInstance3D
-var triangle_mesh_b: MeshInstance3D
+# Two triangle mesh instances - each with front and back faces (bi-reflection)
+var triangle_mesh_a_front: MeshInstance3D
+var triangle_mesh_a_back: MeshInstance3D
+var triangle_mesh_b_front: MeshInstance3D
+var triangle_mesh_b_back: MeshInstance3D
+
+# Colors for bi-reflection
+@export var color_a_front: Color = Color.DEEP_PINK
+@export var color_a_back: Color = Color.CYAN
+@export var color_b_front: Color = Color.BLACK
+@export var color_b_back: Color = Color.GOLD
 var drag_points: DragPointSet
 
 # Quad has 4 corner points that define 2 triangles
@@ -36,14 +44,25 @@ func _ready():
 	drag_points.point_dropped.connect(_on_point_dropped)
 	drag_points.point_moved.connect(_on_point_moved)
 
-	triangle_mesh_a = MeshInstance3D.new()
-	triangle_mesh_a.name = "TriangleMesh_A"
-	triangle_mesh_b = MeshInstance3D.new()
-	triangle_mesh_b.name = "TriangleMesh_B"
-	add_child(triangle_mesh_a)
-	add_child(triangle_mesh_b)
-	_apply_material(triangle_mesh_a, Color.DEEP_PINK)
-	_apply_material(triangle_mesh_b, Color.BLACK)
+	# Create front and back meshes for triangle A (bi-reflection)
+	triangle_mesh_a_front = MeshInstance3D.new()
+	triangle_mesh_a_front.name = "TriangleMesh_A_Front"
+	triangle_mesh_a_back = MeshInstance3D.new()
+	triangle_mesh_a_back.name = "TriangleMesh_A_Back"
+	add_child(triangle_mesh_a_front)
+	add_child(triangle_mesh_a_back)
+	_apply_material(triangle_mesh_a_front, color_a_front, BaseMaterial3D.CULL_BACK)
+	_apply_material(triangle_mesh_a_back, color_a_back, BaseMaterial3D.CULL_FRONT)
+
+	# Create front and back meshes for triangle B (bi-reflection)
+	triangle_mesh_b_front = MeshInstance3D.new()
+	triangle_mesh_b_front.name = "TriangleMesh_B_Front"
+	triangle_mesh_b_back = MeshInstance3D.new()
+	triangle_mesh_b_back.name = "TriangleMesh_B_Back"
+	add_child(triangle_mesh_b_front)
+	add_child(triangle_mesh_b_back)
+	_apply_material(triangle_mesh_b_front, color_b_front, BaseMaterial3D.CULL_BACK)
+	_apply_material(triangle_mesh_b_back, color_b_back, BaseMaterial3D.CULL_FRONT)
 
 	_setup_drag_points()
 	_update_meshes()
@@ -68,9 +87,11 @@ func _setup_drag_points():
 	})
 
 func _update_meshes():
-	# Update both triangle meshes
-	update_single_triangle_mesh(triangle_mesh_a, triangle_a_indices)
-	update_single_triangle_mesh(triangle_mesh_b, triangle_b_indices)
+	# Update all triangle meshes (front and back for bi-reflection)
+	update_single_triangle_mesh(triangle_mesh_a_front, triangle_a_indices)
+	update_single_triangle_mesh(triangle_mesh_a_back, triangle_a_indices)
+	update_single_triangle_mesh(triangle_mesh_b_front, triangle_b_indices)
+	update_single_triangle_mesh(triangle_mesh_b_back, triangle_b_indices)
 
 func update_single_triangle_mesh(mesh_instance: MeshInstance3D, indices: Array[int]):
 	var st = SurfaceTool.new()
@@ -182,39 +203,14 @@ func set_vertex_color(color: Color):
 				material.refraction = 0.05
 	)
 
-func _apply_material(mesh_instance: MeshInstance3D, color: Color):
-	var material = ShaderMaterial.new()
-	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
-	if shader:
-		material.shader = shader
-
-		# Use the input color parameter to determine which triangle gets which color
-		var chosen_color: Color
-		if color == Color.DEEP_PINK:
-			chosen_color = Color.DEEP_PINK
-		elif color == Color.BLACK:
-			chosen_color = Color.BLACK
-		else:
-			# Fallback to random selection for other colors
-			var rand = randi() % 3
-			if rand == 0:
-				chosen_color = Color.BLACK
-			elif rand == 1:
-				chosen_color = Color.DEEP_PINK
-			else:  # rand == 2
-				chosen_color = Color.RED
-
-		material.set_shader_parameter("wireframe_color", Color.DARK_VIOLET)
-		material.set_shader_parameter("fill_color", chosen_color)
-		mesh_instance.material_override = material
-	else:
-		# Fallback to standard material if shader fails to load
-		var standard_material = StandardMaterial3D.new()
-		standard_material.albedo_color = color
-		standard_material.emission_enabled = true
-		standard_material.emission = color * 0.3
-		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-		mesh_instance.material_override = standard_material
+func _apply_material(mesh_instance: MeshInstance3D, color: Color, cull_mode: int):
+	# Use StandardMaterial3D for bi-reflection (different front/back colors)
+	var material = StandardMaterial3D.new()
+	material.albedo_color = color
+	material.emission_enabled = true
+	material.emission = color * 0.3
+	material.cull_mode = cull_mode
+	mesh_instance.material_override = material
 
 func reset_to_square():
 	# Reset to perfect square

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1eusq5l2d40q"]
+
+[ext_resource type="Script" uid="uid://b1mxy734fd4y1" path="res://commons/audio/debug/AmbientWorksPlayer.gd" id="1_script"]
+
+[node name="AmbientWorksPlayer" type="Node"]
+script = ExtResource("1_script")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 100.0
+text = "Initializing..."

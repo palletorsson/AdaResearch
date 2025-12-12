@@ -815,6 +815,8 @@ func _apply_artifact_transform(artifact_object: Node, artifact_info: Dictionary)
 func _load_and_instantiate_artifact(scene_path: String) -> Node:
 	var scene_resource = _load_scene_cached(scene_path)
 	if scene_resource:
+		# Log which scene is being instantiated (helps debug convex hull errors)
+		print("GridInteractablesComponent: Instantiating artifact: %s" % scene_path)
 		return scene_resource.instantiate()
 	return null
 

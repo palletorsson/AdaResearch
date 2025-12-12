@@ -35,6 +35,16 @@ func _ready():
 
 	# Create event players
 	_create_event_players()
+	
+	# Connect to global ambient change request
+	if sound_bank.has_signal("request_ambient_change"):
+		sound_bank.request_ambient_change.connect(_on_global_ambient_request)
+
+func _on_global_ambient_request(new_preset: String):
+	print("AmbientSoundController: Received global request for: ", new_preset)
+	# Only switch if different
+	if new_preset != preset_name:
+		crossfade_to_preset(new_preset)
 
 func _exit_tree():
 	# Clean up
@@ -181,26 +191,42 @@ func _create_continuous_player(config: Dictionary) -> AudioStreamPlayer:
 		# TODO: Implement parameter passing to sound bank
 		stream = sound_bank.get_sound(sound_id)
 
-	if not stream:
-		print("⚠️ Failed to get sound: ", sound_id)
-		return null
-
-	# Create player
+	# Create player (even if stream is missing initially)
 	var player = AudioStreamPlayer.new()
 	player.name = "ContinuousLayer_%s" % sound_id.replace(".", "_")
-	player.stream = stream
 	player.volume_db = config.get("volume_db", -10) + volume_adjustment
 	player.bus = config.get("bus", "Master")
-
-	# Enable looping for continuous sounds
-	if stream is AudioStreamWAV:
-		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-
 	add_child(player)
-	player.play()
 
-	print("✅ Started continuous layer: ", sound_id, " on bus ", player.bus)
+	if stream:
+		player.stream = stream
+		# Enable looping for continuous sounds
+		if stream is AudioStreamWAV:
+			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		player.play()
+		print("✅ Started continuous layer: ", sound_id, " on bus ", player.bus)
+	else:
+		print("⏳ Continuous layer waiting for sound: ", sound_id)
+		# Listen for this specific sound
+		sound_bank.sound_generated.connect(_on_sound_generated.bind(player, sound_id))
+
 	return player
+
+func _on_sound_generated(sound_id: String, player: AudioStreamPlayer, target_id: String):
+	if sound_id == target_id:
+		var stream = sound_bank.get_sound(sound_id)
+		if stream:
+			player.stream = stream
+			if stream is AudioStreamWAV:
+				stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+			
+			if is_playing: # Only play if we are still in playing state
+				player.play()
+				print("✅ Started delayed continuous layer: ", sound_id)
+			
+			# Disconnect to avoid double handling
+			if sound_bank.sound_generated.is_connected(_on_sound_generated):
+				sound_bank.sound_generated.disconnect(_on_sound_generated)
 
 func _start_random_events(preset: Dictionary):
 	"""Start random event system"""

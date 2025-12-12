@@ -3,15 +3,17 @@
 		"primitives": {
 			"name": "Primitives",
 			"description": "Fundamental geometric primitives and their axioms",
+			"ambient_preset": "pop_generative",
 			"difficulty": "beginner",
 			"estimated_time": "15-20 minutes",
 			"learning_objectives": [
 				"Understanding Vector3",
 				"Point visualization",
 				"Line topology",
-                "Triangle rasterization"
+				"Triangle rasterization"
 			],
 			"maps": [
+				"Primitives_Load", 
 				"Point_Zero",
 				"Point_1",
 				"Point_Context",
@@ -21,13 +23,13 @@
 				"Point_Animatedcube",
 				"Primitives_Ignorance",
 				"Primitives_Portals",
-                "Primitives_Melencolia"
+				"Primitives_Melencolia"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_primitives",
 			"unlock_requirements": [],
 			"completion_rewards": [
-                "primitive_badge"
+				"primitive_badge"
 			]
 		}
 	}

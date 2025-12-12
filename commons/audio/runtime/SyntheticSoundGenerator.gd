@@ -22,7 +22,7 @@ var entropy: float = 0.4  # Controls randomness/noise
 var queer_factor: float = 0.7  # Controls harmonic shifting
 
 # Create a detection sound (when player enters platform)
-static func create_detection_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_detection_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -46,11 +46,11 @@ static func create_detection_sound(entropy: float = 0.4, queer_factor: float = 0
 		# Create a chord with detuned harmonics
 		var sample = 0.0
 		sample += 0.5 * sin(2.0 * PI * base_freq * t)
-		sample += 0.3 * sin(2.0 * PI * (base_freq * 1.5 + sin(phase * 4.0) * queer_factor * 10.0) * t)
+		sample += 0.3 * sin(2.0 * PI * (base_freq * 1.5 + sin(phase * 4.0) * p_queer_factor * 10.0) * t)
 		sample += 0.2 * sin(2.0 * PI * (base_freq * 2.02) * t)  # Slightly detuned octave
 		
 		# Add noise that decreases over time
-		sample += randf_range(-0.3, 0.3) * entropy * (1.0 - phase)
+		sample += randf_range(-0.3, 0.3) * p_entropy * (1.0 - phase)
 		
 		# Apply envelope
 		var envelope = sin(phase * PI) if phase < 1.0 else 0.0
@@ -65,7 +65,7 @@ static func create_detection_sound(entropy: float = 0.4, queer_factor: float = 0
 	return stream
 
 # Create lift start sound (mechanical startup)
-static func create_lift_start_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_lift_start_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -101,11 +101,11 @@ static func create_lift_start_sound(entropy: float = 0.4, queer_factor: float = 
 			sample += 0.2
 		
 		# Add gear-like overtones
-		sample += 0.2 * sin(2.0 * PI * (motor_freq * 2.7 + sin(phase * 3.0) * queer_factor * 15.0) * t)
+		sample += 0.2 * sin(2.0 * PI * (motor_freq * 2.7 + sin(phase * 3.0) * p_queer_factor * 15.0) * t)
 		sample += 0.15 * sin(2.0 * PI * (motor_freq * 4.13) * t)
 		
 		# Add noise component (mechanical friction)
-		sample += randf_range(-0.15, 0.15) * entropy * phase
+		sample += randf_range(-0.15, 0.15) * p_entropy * phase
 		
 		# Envelope: quick fade in, sustain
 		var envelope = min(t * 10.0, 1.0)
@@ -120,7 +120,7 @@ static func create_lift_start_sound(entropy: float = 0.4, queer_factor: float = 
 	return stream
 
 # Create lift loop sound (continuous mechanical movement)
-static func create_lift_loop_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_lift_loop_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -154,10 +154,10 @@ static func create_lift_loop_sound(entropy: float = 0.4, queer_factor: float = 0
 		sample *= 1.0 + 0.2 * sin(2.0 * PI * pulse_rate * t)
 		
 		# Queer harmonic modulation - subtle frequency shifts
-		sample += 0.15 * sin(2.0 * PI * (130.0 + sin(t * 4.0) * queer_factor * 10.0) * t)
+		sample += 0.15 * sin(2.0 * PI * (130.0 + sin(t * 4.0) * p_queer_factor * 10.0) * t)
 		
 		# Add consistent mechanical noise
-		sample += randf_range(-0.1, 0.1) * entropy
+		sample += randf_range(-0.1, 0.1) * p_entropy
 		
 		# Convert to 16-bit
 		var sample_int = int(clamp(sample * 32767.0 * 0.7, -32768.0, 32767.0))
@@ -172,7 +172,7 @@ static func create_lift_loop_sound(entropy: float = 0.4, queer_factor: float = 0
 	return stream
 
 # Create lift stop sound (winding down mechanical sound)
-static func create_lift_stop_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_lift_stop_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -205,7 +205,7 @@ static func create_lift_stop_sound(entropy: float = 0.4, queer_factor: float = 0
 		
 		# Add gear-like overtones
 		sample += 0.2 * sin(2.0 * PI * (motor_freq * 2.12) * t)
-		sample += 0.15 * sin(2.0 * PI * (motor_freq * 3.74 + sin(phase * 2.0) * queer_factor * 12.0) * t)
+		sample += 0.15 * sin(2.0 * PI * (motor_freq * 3.74 + sin(phase * 2.0) * p_queer_factor * 12.0) * t)
 		
 		# Add a subtle thunk at the end
 		if phase > 0.8:
@@ -213,7 +213,7 @@ static func create_lift_stop_sound(entropy: float = 0.4, queer_factor: float = 0
 		
 		# Add mechanical friction noise that increases then decreases
 		var noise_env = sin(phase * PI)
-		sample += randf_range(-0.2, 0.2) * entropy * noise_env
+		sample += randf_range(-0.2, 0.2) * p_entropy * noise_env
 		
 		# Envelope: sustain then fade out
 		var envelope = 1.0 - pow(phase, 4) if phase > 0.7 else 1.0
@@ -228,7 +228,7 @@ static func create_lift_stop_sound(entropy: float = 0.4, queer_factor: float = 0
 	return stream
 
 # Create warning sound (repeating alert beep)
-static func create_warning_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_warning_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -258,7 +258,7 @@ static func create_warning_sound(entropy: float = 0.4, queer_factor: float = 0.7
 			sample += 0.3 * sin(2.0 * PI * 1046.5 * t)
 			
 			# Add queer modulation
-			sample += 0.2 * sin(2.0 * PI * (933.0 + sin(t * 20.0) * queer_factor * 30.0) * t)
+			sample += 0.2 * sin(2.0 * PI * (933.0 + sin(t * 20.0) * p_queer_factor * 30.0) * t)
 			
 			# Brief envelope within the beep
 			var beep_env = sin(phase * PI)
@@ -266,7 +266,7 @@ static func create_warning_sound(entropy: float = 0.4, queer_factor: float = 0.7
 		
 		
 		# Add subtle noise throughout
-		sample += randf_range(-0.1, 0.1) * entropy * (1.0 - phase)
+		sample += randf_range(-0.1, 0.1) * p_entropy * (1.0 - phase)
 		
 		# Convert to 16-bit
 		var sample_int = int(clamp(sample * 32767.0, -32768.0, 32767.0))
@@ -281,7 +281,7 @@ static func create_warning_sound(entropy: float = 0.4, queer_factor: float = 0.7
 	return stream
 
 # Create ambient sound (subtle electrical hum)
-static func create_ambient_sound(entropy: float = 0.4, queer_factor: float = 0.7) -> AudioStreamWAV:
+static func create_ambient_sound(p_entropy: float = 0.4, p_queer_factor: float = 0.7) -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
 	
 	# Set audio format
@@ -313,11 +313,11 @@ static func create_ambient_sound(entropy: float = 0.4, queer_factor: float = 0.7
 		sample += 0.06 * sin(2.0 * PI * 440.0 * t)
 		
 		# Add queer harmonic modulation - very subtle pitch shifts
-		var mod_freq = 3.0 + sin(t * 0.5) * queer_factor * 2.0
+		var mod_freq = 3.0 + sin(t * 0.5) * p_queer_factor * 2.0
 		sample += 0.07 * sin(2.0 * PI * (240.0 + sin(t * mod_freq) * 5.0) * t)
 		
 		# Add subtle electrical noise
-		sample += randf_range(-0.05, 0.05) * entropy
+		sample += randf_range(-0.05, 0.05) * p_entropy
 		
 		# Ensure smooth looping by fading at ends
 		if i < MIX_RATE * 0.1:  # First 0.1 seconds

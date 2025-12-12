@@ -25,6 +25,7 @@ signal player_registered(player: Node3D)
 var sound_enabled: bool = true
 var music_volume: float = 0.8
 var sfx_volume: float = 0.7
+var show_infoboard: bool = true # New setting
 
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
@@ -42,6 +43,7 @@ signal player_damaged(amount: float, new_health: float)
 signal current_map_changed(map_name: String)
 signal nail_color_changed(new_color: Color)
 signal hand_color_changed(new_color: Color)
+signal settings_changed(setting_name: String, value: Variant) # New signal
 var console_messages: Array[Dictionary] = []
 var max_console_messages: int = 100
 
@@ -241,6 +243,11 @@ func set_music_volume(volume: float) -> void:
 func set_sfx_volume(volume: float) -> void:
 	sfx_volume = clamp(volume, 0.0, 1.0)
 
+func set_show_infoboard(enabled: bool) -> void:
+	show_infoboard = enabled
+	emit_signal("settings_changed", "show_infoboard", enabled)
+	save_game()
+
 # Nail color management
 func set_nail_color(color: Color) -> void:
 	nail_color = color
@@ -267,6 +274,7 @@ func save_game() -> void:
 		"sound_enabled": sound_enabled,
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
+		"show_infoboard": show_infoboard,
 		"nail_color": {"r": nail_color.r, "g": nail_color.g, "b": nail_color.b, "a": nail_color.a},
 		"hand_color": {"r": hand_color.r, "g": hand_color.g, "b": hand_color.b, "a": hand_color.a},
 		"timestamp": Time.get_datetime_string_from_system()
@@ -294,6 +302,7 @@ func load_game() -> bool:
 		sound_enabled = save_data.get("sound_enabled", true)
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
+		show_infoboard = save_data.get("show_infoboard", true)
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)

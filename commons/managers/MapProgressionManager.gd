@@ -86,9 +86,59 @@ func load_progression_config() -> bool:
 	navigation_config = progression_config.get("navigation", {})
 	settings = progression_config.get("settings", {})
 	
-	print("MapProgressionManager: Loaded %d sequences and %d maps" % [sequences.size(), map_metadata.size()])
+	print("MapProgressionManager: Loaded %d sequences and %d maps from core config" % [sequences.size(), map_metadata.size()])
+	
+	# Load external sequences from commons/maps/sequences/
+	_load_external_sequences("res://commons/maps/sequences/")
+	
 	progression_loaded.emit()
 	return true
+
+func _load_external_sequences(path: String):
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".json"):
+				print("MapProgressionManager: Loading sequence file: " + file_name)
+				var file = FileAccess.open(path + "/" + file_name, FileAccess.READ)
+				if file:
+					var json = JSON.new()
+					var err = json.parse(file.get_as_text())
+					if err == OK:
+						var data = json.data
+						if data.has("sequences"):
+							for seq_id in data.sequences:
+								sequences[seq_id] = data.sequences[seq_id]
+								print("  - Loaded sequence: " + seq_id)
+			file_name = dir.get_next()
+	else:
+		print("MapProgressionManager: Could not open sequences directory: " + path)
+
+func _check_audio_for_map(map_name: String):
+	# Find which sequence this map belongs to
+	for seq_id in sequences:
+		var seq = sequences[seq_id]
+		if seq.has("maps") and map_name in seq.maps:
+			# Check for ambient preset
+			if seq.has("ambient_preset"):
+				var preset = seq.ambient_preset
+				print("MapProgressionManager: Map '%s' implies ambient preset '%s'" % [map_name, preset])
+				# Trigger audio change via SoundBank
+				if is_instance_valid(SoundBank) and SoundBank.has_method("trigger_ambient_change"):
+					SoundBank.trigger_ambient_change(preset)
+			return
+
+# Hook into set_current_map to trigger audio check
+func set_current_map(map_name: String):
+	current_map = map_name
+	
+	# Check and trigger audio for this map/sequence
+	_check_audio_for_map(map_name)
+	
+	if typeof(GameManager) != TYPE_NIL and GameManager.has_method("set_current_map"):
+		GameManager.set_current_map(map_name)
 
 # Load player progress from save file
 func load_player_progress() -> void:
@@ -437,9 +487,3 @@ func get_previous_map(current_map_name: String) -> String:
 # Mark map as completed (alias for complete_map)
 func mark_map_completed(map_name: String):
 	complete_map(map_name)
-
-# Set current map
-func set_current_map(map_name: String):
-	current_map = map_name
-	if typeof(GameManager) != TYPE_NIL and GameManager.has_method("set_current_map"):
-		GameManager.set_current_map(map_name)
