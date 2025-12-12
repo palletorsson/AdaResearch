@@ -144,6 +144,14 @@ func reset_ball(position: Vector3 = Vector3.ZERO):
 	physics_ball.angular_velocity = Vector3.ZERO
 	update_force_vector_positions()
 
+func update_force_vector_positions():
+	"""Update all force vector positions to follow ball"""
+	var ball_pos_scaled = physics_ball.global_position
+	for vector_name in force_vectors:
+		var vector = force_vectors[vector_name]
+		vector.position = ball_pos_scaled
+
+
 func update_info_text(lines: Array):
 	"""Update info label with array of strings"""
 	info_label.text = "\n".join(lines)

@@ -26,6 +26,14 @@ func _ready():
 	# Capture mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	# Auto-bootstrap if running standalone
+	if get_parent() == get_tree().root:
+		print("DesktopPlayer: Running standalone - redirecting to Lab Desktop scene...")
+		call_deferred("_redirect_to_lab")
+
+func _redirect_to_lab():
+	get_tree().change_scene_to_file("res://commons/scenes/lab_desktop.tscn")
+
 func _input(event):
 	# Mouse look
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://desktop_player_001"]
+[gd_scene load_steps=3 format=3 uid="uid://b33u6sl8s1ook"]
 
-[ext_resource type="Script" path="res://commons/scenes/DesktopPlayer.gd" id="1"]
+[ext_resource type="Script" uid="uid://djouaaayjptll" path="res://commons/scenes/DesktopPlayer.gd" id="1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.3
@@ -17,7 +17,6 @@ shape = SubResource("CapsuleShape3D_1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-fov = 75.0
 
 [node name="Crosshair" type="ColorRect" parent="Head/Camera3D"]
 anchors_preset = 8
@@ -36,4 +35,3 @@ color = Color(1, 1, 1, 0.8)
 [node name="InteractionRaycast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -5)
 collide_with_areas = true
-collide_with_bodies = true

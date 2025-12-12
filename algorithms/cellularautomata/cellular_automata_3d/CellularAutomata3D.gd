@@ -40,7 +40,6 @@ func _setup_multimesh():
 		
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	multimesh.color_format = MultiMesh.COLOR_FLOAT # Godot 3 style, but for G4 use_colors
 	multimesh.use_colors = true
 	multimesh.mesh = SphereMesh.new()
 	multimesh.mesh.radius = 0.1

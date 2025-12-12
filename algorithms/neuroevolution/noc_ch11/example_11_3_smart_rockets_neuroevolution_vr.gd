@@ -136,7 +136,7 @@ class NeuroRocket extends VREntity:
 			fitness += 1.0 / (frame_count + 1)
 
 # Obstacle
-class Obstacle extends Node3D:
+class RocketObstacle extends Node3D:
 	var size: float = 0.15
 	var mesh_instance: MeshInstance3D
 
@@ -154,7 +154,7 @@ class Obstacle extends Node3D:
 		add_child(mesh_instance)
 
 # Target
-class Target extends Node3D:
+class RocketTarget extends Node3D:
 	var radius: float = 0.08
 	var mesh_instance: MeshInstance3D
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 1.0)
@@ -178,8 +178,8 @@ class Target extends Node3D:
 var population: Array[NeuroRocket] = []
 var population_size: int = 25
 var generation: int = 1
-var target: Target
-var obstacles: Array[Obstacle] = []
+var target: RocketTarget
+var obstacles: Array[RocketObstacle] = []
 var mutation_rate: float = 0.1
 
 var simulation_running: bool = true
@@ -191,7 +191,7 @@ var best_label: Label3D
 
 func _ready():
 	# Create target
-	target = Target.new()
+	target = RocketTarget.new()
 	target.position = Vector3(0, 0.35, -0.3)
 	add_child(target)
 
@@ -206,12 +206,12 @@ func _ready():
 
 func create_obstacles():
 	"""Create obstacles in the path"""
-	var obs1 = Obstacle.new()
+	var obs1 = RocketObstacle.new()
 	obs1.position = Vector3(0, 0.1, -0.1)
 	add_child(obs1)
 	obstacles.append(obs1)
 
-	var obs2 = Obstacle.new()
+	var obs2 = RocketObstacle.new()
 	obs2.position = Vector3(-0.15, 0.2, -0.2)
 	add_child(obs2)
 	obstacles.append(obs2)

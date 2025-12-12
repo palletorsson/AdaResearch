@@ -7,7 +7,15 @@
 		"volume": -12.0,
 		"crossfade_duration": 3.0
 	},
-	"sequences": {},
+	"sequences": {
+		"phoneme_cloud": {
+			"name": "Phoneme Cloud",
+			"description": "Spatial speech synthesis prototype",
+			"scene_path": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn",
+			"thumbnail_path": "",
+			"unlock_condition": "always"
+		}
+	},
 	"sequence_metadata": {
 		"progression_rules": {
 			"allow_sequence_skipping": false,

@@ -83,7 +83,7 @@ func _create_controllers() -> void:
 	gap_controller.set_value(obstacle_gap_height)
 
 func _spawn_target() -> void:
-	_target = Target.new()
+	_target = RocketTarget.new()
 	_target.init(_sim_root, MAT_TARGET, Vector3(0.38, 0.78, 0), 0.05)
 
 func _spawn_obstacles() -> void:
@@ -95,9 +95,9 @@ func _spawn_obstacles() -> void:
 	var thickness := 0.04
 	var height := obstacle_gap_height
 
-	var upper := Obstacle.new()
+	var upper := RocketObstacle.new()
 	upper.init(_sim_root, center + Vector3(0, height * 0.5 + 0.08, 0), Vector3(0.4, 0.08, thickness), MAT_OBSTACLE)
-	var lower := Obstacle.new()
+	var lower := RocketObstacle.new()
 	lower.init(_sim_root, center - Vector3(0, height * 0.5 + 0.08, 0), Vector3(0.4, 0.08, thickness), MAT_OBSTACLE)
 	_obstacles.append(upper)
 	_obstacles.append(lower)
@@ -242,7 +242,7 @@ class Rocket:
 			return
 		acceleration += dna.get_force(step)
 
-	func update(delta: float, target: Vector3, obstacles: Array[Obstacle]) -> void:
+	func update(delta: float, target: Vector3, obstacles: Array[RocketObstacle]) -> void:
 		if done:
 			return
 
@@ -295,7 +295,7 @@ class DNA:
 	func copy_from(other: DNA) -> void:
 		genes = other.genes.duplicate(true)
 
-class Target:
+class RocketTarget:
 	var root: Node3D
 	var mesh: MeshInstance3D
 	var radius: float
@@ -323,7 +323,7 @@ class Target:
 	func contains(point: Vector3) -> bool:
 		return root.global_position.distance_to(point) <= radius
 
-class Obstacle:
+class RocketObstacle:
 	var root: Node3D
 	var mesh: MeshInstance3D
 	var half_extents: Vector3

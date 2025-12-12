@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"description": "Translation introduces displacement without deformation. By moving objects uniformly through space, the map isolates position as a variable independent of form, orientation, or scale. The player experiences translation as a pure shift of reference, clarifying how motion can be described without invoking force, intention, or change in identity. This map establishes movement as an operation rather than an event.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +13,12 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": [
+				"2D arrays",
+				"Grid navigation",
+				"X-Y coordinate system",
+				"Multi-dimensional thinking"
+			]
 		}
 	},
 	"documentation": {
@@ -30,33 +35,208 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["2", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"1"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1"
+			],
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "p", " ", "p", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "p", " ", "p", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", "t", " "]
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"p",
+				" ",
+				"p",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"p",
+				" ",
+				"p",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" "
+			]
 		],
 		"interactables": [
-	
-			["floor_tiles:0:-0.3", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
-			[" ", " ", "dark_sphere", "rotatescalecubes:0:12", " ", " ", " "],
-			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			["clipboard#translation_axioms:180:-0.2", " ", " ", " ", " ", "pickup_gate#pickups:2", " "]
+			[
+				"floor_tiles:0:-0.3",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"transformation_cube",
+				" ",
+				"transformation_cube",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"dark_sphere",
+				"rotatescalecubes:0:12",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"transformation_cube",
+				" ",
+				"transformation_cube",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"clipboard#translation_axioms:180:-0.2",
+				" ",
+				" ",
+				" ",
+				" ",
+				"pickup_gate#pickups:2",
+				" "
+			]
 		]
 	},
 	"utility_definitions": {
@@ -70,18 +250,29 @@
 		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -94,7 +285,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
-} 
+}

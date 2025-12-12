@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "01 A Point",
-		"description": "The Atom of Space. A single, indivisible unit. It has position but no magnitude. It is the seed from which all dimensions grow. Hold it, and you hold the coordinate of existence.",
+		"description": "The Point introduces discreteness and memory into space. By allowing the player to place or encounter isolated points, the map demonstrates how continuous space is discretized into countable, nameable units. A point here is not yet measurement, but a declaration: a moment where position stabilizes into memory. The map explores how abstraction begins by freezing motion and how every point carries the trace of the body that instantiated it.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +13,9 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["The Atom of Space"]
+			"learning_objectives": [
+				"The Atom of Space"
+			]
 		}
 	},
 	"documentation": {
@@ -29,35 +31,237 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"]
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"1"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1"
+			]
 		],
 		"utilities": [
-			["origin", " ", " ", " ", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],			
-			[" ", " ", " ", "la:point", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "an", " ", "3t:that_which_has_no_part.", " ", " ", " "],			 			
+			[
+				"origin",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"la:point",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"an",
+				" ",
+				"3t:that_which_has_no_part.",
+				" ",
+				" ",
+				" "
+			],
 		],
 		"interactables": [
-			["CoordinateSystem3M", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", "clipboard#point_axioms:125:0.9", "grab_sphere_point", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[
+				"CoordinateSystem3M",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"dark_sphere",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"clipboard#point_axioms:125:0.9",
+				"grab_sphere_point",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
 		]
 	},
 	"utility_definitions": {
@@ -71,18 +275,29 @@
 		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -95,7 +310,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
-} 
+}

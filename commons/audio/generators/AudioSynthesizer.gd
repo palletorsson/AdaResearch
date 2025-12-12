@@ -181,6 +181,9 @@ static func _generate_ambient_section_stream(progression: Array, scale: Array, i
 				# Clamp to prevent clipping
 				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
 
+	# Anti-Pop Fade (10ms fade in/out)
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.01))
+
 	if panning == "right_to_left":
 		# Create stereo mix with panning (Right -> Left)
 		var stereo_mix = PackedFloat32Array()
@@ -310,8 +313,24 @@ static func _generate_pop_section_stream(progression: Array, scale: Array, instr
 				if is_nan(sample) or is_inf(sample):
 					sample = 0.0
 				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+
+	# Anti-Pop Fade (10ms fade in/out) ensures zero-crossing at clip boundaries
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.01))
 				
 	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+static func _apply_fade_envelope(buffer: PackedFloat32Array, fade_length: int):
+	var size = buffer.size()
+	if size < fade_length * 2:
+		fade_length = size / 2
+		
+	for i in range(fade_length):
+		var t = float(i) / float(fade_length)
+		# Fade In
+		buffer[i] *= t
+		# Fade Out
+		buffer[size - 1 - i] *= t
+
 
 static func _mix_into(target: PackedFloat32Array, source: PackedFloat32Array, level: float):
 	for i in range(min(target.size(), source.size())):

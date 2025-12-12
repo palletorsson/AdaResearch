@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"description": "Scale is reframed as a transformation acting on relations rather than objects. Through controlled scaling operations, the player observes how distances, proportions, and perceived mass change while topological structure remains intact. The map highlights scale as a global modifier that reconfigures spatial meaning without introducing new geometry. This establishes scale as a central operator in both simulation and abstraction.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +13,12 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": [
+				"2D arrays",
+				"Grid navigation",
+				"X-Y coordinate system",
+				"Multi-dimensional thinking"
+			]
 		}
 	},
 	"documentation": {
@@ -30,33 +35,208 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "2", "1", "1"],
-			["1", "1", "1", "0", "1", "0", "2"],
-			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "1", "1", "1"],
-			["2", "1", "1", "2", "1", "0", "1"],
-			["0", "0", "0", "0", "1", "1", "1"],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"0",
+				"1",
+				"0",
+				"2"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"0",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"2",
+				"1",
+				"0",
+				"1"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1"
+			],
 		],
 		"utilities": [
-			[" ", " ", " ", "wp:90", " ", " ", " "],
-			[" ", " ", " ", "", " ", "tc:3:z", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", "t", "sp"]
+			[
+				" ",
+				" ",
+				" ",
+				"wp:90",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"",
+				" ",
+				"tc:3:z",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				"sp"
+			]
 		],
 		"interactables": [
-	
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "dark_sphere", " ", "pick_up_cube:0:1", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			["clipboard#scale_axioms:180:-0.2", "scaleme", " ", " ", " ", "pickup_gate#pickups:3", " "]
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"dark_sphere",
+				" ",
+				"pick_up_cube:0:1",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"clipboard#scale_axioms:180:-0.2",
+				"scaleme",
+				" ",
+				" ",
+				" ",
+				"pickup_gate#pickups:3",
+				" "
+			]
 		]
 	},
 	"utility_definitions": {
@@ -70,18 +250,29 @@
 		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
 			"energy": 1.2
 		}
 	},
@@ -94,7 +285,11 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [
+				0.2,
+				0.3,
+				0.7
+			]
 		}
 	}
-} 
+}

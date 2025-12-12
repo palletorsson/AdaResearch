@@ -28,17 +28,8 @@ environment = SubResource("Environment_1")
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
 shadow_enabled = true
 
-[node name="RideStick1" parent="." instance=ExtResource("1_stick")]
+[node name="RideStick" parent="." instance=ExtResource("1_stick")]
 start_delay = 0.0
-
-[node name="RideStick2" parent="." instance=ExtResource("1_stick")]
-start_delay = 4.0
-
-[node name="RideStick3" parent="." instance=ExtResource("1_stick")]
-start_delay = 8.0
-
-[node name="RideStick4" parent="." instance=ExtResource("1_stick")]
-start_delay = 12.0
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
