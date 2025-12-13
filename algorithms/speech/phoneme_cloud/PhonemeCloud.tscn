@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bx3t884yx8jwf" path="res://algorithms/speech/phoneme_cloud/PhonemeCloud.gd" id="1_cloud"]
 [ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_cursor"]
-[ext_resource type="PackedScene" uid="uid://bwoxcvj414612" path="res://addons/godot-xr-tools/player/player_body.tscn" id="3_player"]
+
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cloud"]
 sky_top_color = Color(0.1, 0.1, 0.15, 1)
@@ -35,6 +35,5 @@ shadow_enabled = true
 [node name="Cursor" parent="." instance=ExtResource("2_cursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="PlayerRig" parent="." instance=ExtResource("3_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
 

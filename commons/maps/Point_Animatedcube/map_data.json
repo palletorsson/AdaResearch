@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation—how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.",
+		"name": "06 The Quad",
+		"description": "A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.",
+		"description_2": "Volume introduces enclosure and scalar comparison. With the emergence of bounded three-dimensional form, space becomes something that can be contained, filled, and compared. Through interaction with volumetric primitives, the player encounters scale not as abstraction but as bodily negotiation—how size, reach, and proximity reconfigure perception. The map establishes volume as the condition for material intuition in computational space.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -38,7 +39,7 @@
 			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "an:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

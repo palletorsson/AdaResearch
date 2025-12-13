@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"name": "08 Portals",
+		"description": "A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.",
+		"description_2": "2D Array Navigation - explore both X and Y axes in a grid structure",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -65,7 +66,7 @@
 			["0", "0", "0", "1", "1", "1", "0"],
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "an:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

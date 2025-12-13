@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation—an accumulation of finite decisions that can never exhaust the curve they simulate. Dürer’s Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
+		"name": "09 Melencolia",
+		"description": "Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude—where knowing and not knowing interlock.",
+		"description_2": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation—an accumulation of finite decisions that can never exhaust the curve they simulate. Dürer's Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -47,7 +48,7 @@
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "an", " ", " ", " "],
+			[" ", " ", " ", "an:90", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			["wp", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
