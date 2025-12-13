@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"description": "The point leads to the trace and the line; the line multiplies into grids and vectors; a third point closes into a triangle, the triangle extends into quads, and quads decompose into meshes. The cube and the Platonic primitives mark moments of maximal stabilization, where geometry appears complete and self-sufficient. Yet this entire construction rests on a fundamental tension: polygons are built from discrete line segments, while they endlessly aspire toward the smoothness of the infinite circle. What computation produces is not continuity, but its approximation—an accumulation of finite decisions that can never exhaust the curve they simulate. Dürer’s Melencolia I marks this limit, where geometric mastery confronts its own insufficiency.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -47,7 +47,7 @@
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "an", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			["wp", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

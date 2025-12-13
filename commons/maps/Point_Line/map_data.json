@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "The Line introduces relation, direction, and the possibility of measurement. By stretching between points or extending through space, the line transforms isolated positions into ordered relations. Length, direction, and orientation emerge as measurable properties, revealing how geometry begins not with form but with comparison. The player’s embodied action makes explicit that a line is not an object but a negotiated distance between at least two commitments in space.",
+		"description": "The Line introduces relation, direction, and the possibility of measurement. By stretching between points or extending through space, the line transforms isolated positions into ordered relations. Length, direction, and orientation emerge as measurable properties, revealing how geometry begins not with form but with comparison. The player's embodied action makes explicit that a line is not an object but a negotiated distance between at least two commitments in space.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,12 +13,7 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": [
-				"2D arrays",
-				"Grid navigation",
-				"X-Y coordinate system",
-				"Multi-dimensional thinking"
-			]
+			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
 	"documentation": {
@@ -34,271 +29,39 @@
 	},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"0",
-				"1"
-			],
-			[
-				"2",
-				"1",
-				"0",
-				"0",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"0",
-				"1",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"1",
-				"0",
-				"1",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			]
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "0", "1"],
+			["2", "1", "0", "0", "1", "1", "1"],
+			["0", "1", "0", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["1", "0", "1", "0", "0", "0", "0"],
+			["1", "1", "1", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"]
 		],
 		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				"la:line",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				"",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"t",
-				" "
-			],
-			[
-				"an",
-				" ",
-				" ",
-				"3t:stretching_between_two_points,_the_line_that_measures",
-				" ",
-				" ",
-				" "
-			],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "la:line", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " "],
+			["an", " ", " ", "3t:stretching_between_two_points,_the_line_that_measures", " ", " ", " "]
 		],
 		"interactables": [
-			[
-				"VectorBasics",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				""
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"player_trace",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"dark_sphere",
-				"line:180",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			]
+			["VectorBasics", " ", " ", " ", " ", " ", ""],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["player_trace", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "dark_sphere", "line:180", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -317,24 +80,12 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
+		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
 		}
 	},
@@ -347,11 +98,7 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
+			"color": [0.2, 0.3, 0.7]
 		}
 	}
 }

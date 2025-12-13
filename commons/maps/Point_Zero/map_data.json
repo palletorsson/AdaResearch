@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "00 Point Zero",
-		"description": "Point Zero introduces the origin as a prerequisite rather than an object. The map stages the moment before geometry, where spatial measurement becomes possible only by establishing a shared reference point. Through embodied presence and minimal interaction, the player encounters the origin (0,0,0) not as a visible marker but as an implicit agreement between body, coordinate system, and time. This scene foregrounds the invisible scaffolding—rendering, reference frames, and temporal update loops—that must already be in place before any point, line, or measurement can appear.",
+		"description": "Point Zero introduces the origin not as an object, but as a prerequisite. The map stages the moment before geometry, where spatial measurement becomes possible only through the establishment of a shared reference. The origin (0,0,0) is not presented as a visible marker, but as an implicit agreement between body, coordinate system, and time—an abstraction sustained by the simulation itself. Through embodied presence and minimal interaction, the player encounters the conditions that make a stable origin returnable: rendering pipelines, reference frames, memory, and temporal update loops. These invisible scaffolds must already be in place before any point, line, or measurement can appear. The scene thus reveals the origin as infrastructural rather than foundational—an effect of system stability, not its ground.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,9 +13,7 @@
 			"difficulty": "beginner",
 			"category": "primitives",
 			"estimated_time": "1-2 minutes",
-			"learning_objectives": [
-				"Point Zero"
-			]
+			"learning_objectives": ["Point Zero"]
 		}
 	},
 	"audio": {
@@ -36,242 +34,40 @@
 			"frames_display:180",
 			"game_time_display:180",
 			"draw_calls_display:180",
-			"memory_display:180",
+			"memory_display:180"
 		]
 	},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"1",
-				"1",
-				"1",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"1",
-				"0",
-				"1",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"1",
-				"1",
-				"1",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0",
-				"0"
-			],
+			["1", "1", "1", "1", "0", "0", "0"],
+			["0", "1", "1", "1", "0", "0", "0"],
+			["0", "1", "0", "1", "0", "0", "0"],
+			["0", "1", "1", "1", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"]
 		],
 		"utilities": [
-			[
-				"m:1:1:-4:0.1",
-				" ",
-				" ",
-				" ",
-				" ",
-				"an:-90",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"t",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"3t:Point Zero",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				"",
-				" ",
-				" "
-			]
+			["m:1:1:-4:0.1", " ", " ", " ", " ", "an:-90", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "t", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "3t:Point Zero", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "", " ", " "]
 		],
 		"interactables": [
-			[
-				"origin",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"player_position:-90"
-			],
-			[
-				"arrow:180:1:0.2",
-				" ",
-				" ",
-				"clipboard#point_zero:-105:0.9",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				"",
-				" ",
-				" ",
-				"game_time_display:-90"
-			],
-			[
-				" ",
-				" ",
-				"PhonemeCloud",
-				"dark_sphere",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				""
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				""
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"CoordinateSystem3M:0:1"
-			]
+			["origin", " ", " ", " ", " ", " ", "player_position:-90"],
+			["arrow:180:1:0.2", " ", " ", "clipboard#point_zero:-105:0.9", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", "game_time_display:-90"],
+			[" ", " ", "PhonemeCloud", "dark_sphere", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", ""],
+			[" ", " ", " ", " ", " ", " ", ""],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]
 		]
 	},
 	"utility_definitions": {
@@ -294,24 +90,12 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
+		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
 		}
 	},
@@ -324,11 +108,7 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
+			"color": [0.2, 0.3, 0.7]
 		}
 	}
 }
