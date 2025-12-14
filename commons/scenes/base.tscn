@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=27 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -22,7 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://mwes0vp5s11g" path="res://algorithms/forces/gravity_gun.tscn" id="17_ciyru"]
 [ext_resource type="PackedScene" uid="uid://dkr7m0bhpcx1d" path="res://commons/primitives/point/player_trace.tscn" id="18_player_trace"]
 [ext_resource type="Script" uid="uid://dp16jbaa5uj0v" path="res://commons/scenes/mapobjects/PlayerBoundsCheck.gd" id="19_bounds"]
-[ext_resource type="PackedScene" path="res://commons/structures/corridor/CorridorScene.tscn" id="23_to05d"]
+[ext_resource type="PackedScene" uid="uid://b8x7y203a4w1" path="res://commons/structures/corridor/CorridorScene.tscn" id="23_to05d"]
+[ext_resource type="PackedScene" path="res://commons/structures/entry/OneCubeEntry.tscn" id="24_onecube"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -140,10 +141,5 @@ particle_density = -0.98
 [node name="PlayerBoundsCheck" type="Node3D" parent="." index="6"]
 script = ExtResource("19_bounds")
 
-[node name="CorridorScene" parent="." index="7" instance=ExtResource("23_to05d")]
-regenerate = false
-position_offset = null
-grid_width = null
-grid_height = null
-grid_depth = null
-cube_size = null
+[node name="EntryZone" type="Node3D" parent="." index="7"]
+

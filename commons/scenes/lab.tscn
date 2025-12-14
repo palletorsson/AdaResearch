@@ -89,6 +89,7 @@ script = ExtResource("2_labgrid")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="PickableObject" parent="LabGridSystem" index="2" instance=ExtResource("6_x6klc")]
+visible = false
 
 [node name="LabGridScene" type="Node3D" parent="." index="6"]
 visible = false

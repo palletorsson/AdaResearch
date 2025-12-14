@@ -75,9 +75,54 @@ func _on_map_generation_complete():
 	"""Handle grid system completing map generation"""
 	print("GridScene: Map generation complete")
 	
+	# Handle entry type selection
+	_update_entry_type()
+	
 	# Add exit trigger if in sequence
 	if not sequence_data.is_empty():
 		_setup_sequence_exit_trigger()
+
+const CORRIDOR_SCENE = preload("res://commons/structures/corridor/CorridorScene.tscn")
+const ONE_CUBE_ENTRY = preload("res://commons/structures/entry/OneCubeEntry.tscn")
+
+func _update_entry_type():
+	"""Update entry type via dynamic instantiation"""
+	# Default to one_cube
+	var enter_type = "one_cube"
+	
+	# Check map settings via GridSystem
+	if grid_system and grid_system.get_data_component():
+		var settings = grid_system.get_data_component().get_settings()
+		if settings.has("enter_type"):
+			enter_type = settings["enter_type"]
+	
+	print("GridScene: Setting entry type to '%s'" % enter_type)
+	
+	# Access EntryZone
+	var entry_zone = find_child("EntryZone", true, false)
+	if not entry_zone:
+		print("GridScene: EntryZone not found in scene tree")
+		return
+		
+	# Clear existing entries
+	for child in entry_zone.get_children():
+		child.queue_free()
+		
+	# Instantiate requested scene
+	var scene_to_spawn: PackedScene = null
+	
+	if enter_type == "corridor":
+		scene_to_spawn = CORRIDOR_SCENE
+	elif enter_type == "one_cube" or enter_type == "default":
+		scene_to_spawn = ONE_CUBE_ENTRY
+		
+	if scene_to_spawn:
+		var instance = scene_to_spawn.instantiate()
+		entry_zone.add_child(instance)
+		print("GridScene: Dynamically spawned %s" % instance.name)
+
+
+
 
 func _setup_sequence_exit_trigger():
 	"""Setup automatic sequence progression trigger"""

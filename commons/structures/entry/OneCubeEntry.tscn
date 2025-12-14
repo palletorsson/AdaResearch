@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://one_cube_entry_v1"]
+
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="1_cube"]
+
+[node name="OneCubeEntry" type="Node3D"]
+
+[node name="CubeScene" parent="." instance=ExtResource("1_cube")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
