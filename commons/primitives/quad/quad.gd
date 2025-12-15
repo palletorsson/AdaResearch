@@ -24,9 +24,9 @@ var drag_points: DragPointSet
 # Quad has 4 corner points that define 2 triangles
 var vertex_positions: Array[Vector3] = [
 	Vector3(-0.8, sphere_y_offset - 0.8, 0.0),  # Bottom-left (0)
-	Vector3(0.8, sphere_y_offset - 0.8, 0.0),   # Bottom-right (1)
+	Vector3(0.8, sphere_y_offset - 0.8, -0.2),   # Bottom-right (1)
 	Vector3(0.8, sphere_y_offset + 0.8, 0.0),   # Top-right (2)
-	Vector3(-0.8, sphere_y_offset + 0.8, 0.0)   # Top-left (3)
+	Vector3(-1.0, sphere_y_offset + 0.8, -0.2)   # Top-left (3)
 ]
 
 # Define the two triangles from the quad

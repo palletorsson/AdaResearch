@@ -193,7 +193,7 @@ func set_vertex_color(color: Color) -> void:
 		material.albedo_color = vertex_color
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission = Color(0.1, 0.4, 0.2) * 0.3
-		material.roughness = 0.1
+		material.roughness = 0.8
 		material.metallic = 0.0
 		material.refraction = 0.05
 	)

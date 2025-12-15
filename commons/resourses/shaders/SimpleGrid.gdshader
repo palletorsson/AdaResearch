@@ -99,6 +99,10 @@ void fragment() {
     // Apply colors
     ALBEDO = finalColor;
     ALPHA = finalAlpha;
+    
+    // Ensure matte finish
+    ROUGHNESS = 1.0;
+    SPECULAR = 0.0;
 
     // Add emission to wireframe edges
     EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;

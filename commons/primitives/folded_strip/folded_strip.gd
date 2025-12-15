@@ -6,7 +6,7 @@ extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 1.0)
 @export var sphere_size_multiplier: float = 0.5
-@export var strip_y_offset: float = 1.0
+@export var strip_y_offset: float = 0.25
 @export var num_triangles: int = 24
 
 ## Freeze behavior options
@@ -30,11 +30,11 @@ func _initialize_zig_zag_strip():
 	# Badakine / Baldachin around a square
 	vertex_positions.clear()
 	
-	var height_top = 2.5
-	var height_bot = 0.5
-	
+	var height_top = 0.625
+	var height_bot = 0.125
+
 	# Square perimeter path
-	var side_len = 5.0
+	var side_len = 1.25
 	var total_perimeter = side_len * 4.0
 	var segment_len = total_perimeter / (num_triangles + 1)
 	

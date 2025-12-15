@@ -5,7 +5,7 @@ extends Node3D
 
 @export var base_y: float = 0.5
 @export var segment_width: float = 0.5
-@export var height: float = 0.8
+@export var height: float = 0.2
 @export var segment_count: int = 32 # Higher res for perimeter
 @export var double_sided: bool = true
 @export var sphere_scale: float = 0.3
