@@ -132,6 +132,8 @@ func _find_player_root(body: Node3D) -> Node3D:
 func _find_player_node():
 	# Strategy 1: Look for XR Origin (common in VR)
 	player_node = get_tree().get_first_node_in_group("player")
+	if not player_node:
+		player_node = get_tree().get_first_node_in_group("player_body")
 	
 	if not player_node:
 		# Strategy 2: Look for specific names

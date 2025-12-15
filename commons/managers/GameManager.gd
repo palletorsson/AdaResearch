@@ -25,7 +25,7 @@ signal player_registered(player: Node3D)
 var sound_enabled: bool = true
 var music_volume: float = 0.8
 var sfx_volume: float = 0.7
-var show_infoboard: bool = true # New setting
+var show_infoboard: bool = false # New setting
 
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink
@@ -302,7 +302,7 @@ func load_game() -> bool:
 		sound_enabled = save_data.get("sound_enabled", true)
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
-		show_infoboard = save_data.get("show_infoboard", true)
+		show_infoboard = save_data.get("show_infoboard", false)
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)

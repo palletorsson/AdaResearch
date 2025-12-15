@@ -277,6 +277,28 @@ func _generate_grid():
 	var structure_data = data_component.get_structure_data()
 	structure_component.generate_structure(structure_data, dimensions)
 
+	# Update PlayerBoundsCheck if found
+	_update_player_bounds(dimensions)
+
+func _update_player_bounds(dimensions: Vector3i):
+	var bounds_check = get_tree().current_scene.find_child("PlayerBoundsCheck", true, false)
+	if bounds_check:
+		# Calculate bounds based on grid size
+		# Assuming grid is roughly centered or we want to allow movement within the grid area
+		# Adding a generous buffer (e.g., 20 units + grid size)
+		
+		var bounds_x = (dimensions.x * cube_size) + 2.0
+		var bounds_y = (dimensions.y * cube_size) + 2.0 
+		var bounds_z = (dimensions.z * cube_size) + 2.0
+		
+		# If height is small (flat map), give minimum vertical headroom
+		if bounds_y < 5.0: bounds_y = 5.0
+		
+		bounds_check.box_bounds = Vector3(bounds_x, bounds_y, bounds_z)
+		print("GridSystem: Updated PlayerBoundsCheck limits to %s" % bounds_check.box_bounds)
+	else:
+		print("GridSystem: PlayerBoundsCheck node not found")
+
 # Handle structure generation completion
 func _on_structure_complete(cube_count: int):
 	print("GridSystem: Structure generation complete (%d cubes)" % cube_count)

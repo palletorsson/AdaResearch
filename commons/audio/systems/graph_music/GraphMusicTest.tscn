@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://graphmusic001"]
+[gd_scene load_steps=5 format=3 uid="uid://cvutvkxjw45aa"]
 
-[ext_resource type="Script" uid="uid://bxvn2ujkxnr2" path="res://commons/audio/systems/graph_music/MusicGraphSystem.gd" id="1_sys"]
+[ext_resource type="Script" uid="uid://cdphbkp7ejcb2" path="res://commons/audio/systems/graph_music/MusicGraphSystem.gd" id="1_sys"]
 [ext_resource type="Script" uid="uid://dkf2xnyjakn2e" path="res://commons/audio/systems/graph_music/GraphSynth.gd" id="2_synth"]
 [ext_resource type="Script" uid="uid://b7wfpklmltljy" path="res://commons/audio/systems/graph_music/GraphVisualizer.gd" id="3_viz"]
-[ext_resource type="Script" path="res://commons/audio/systems/IntensityController.gd" id="4_ctrl"]
+[ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="4_ctrl"]
 
 [node name="GraphMusicTest" type="Node3D"]
 

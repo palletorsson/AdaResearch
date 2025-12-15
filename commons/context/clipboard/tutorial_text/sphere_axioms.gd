@@ -3,247 +3,226 @@ extends Node
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
 
-var text = '''[center][font_size=28][b]The Sphere[/b][/font_size][/center]
-[center][i]Breaking the Fold of Pi[/i][/center]
+var text = '''[center][font_size=28][b]The Torus[/b][/font_size][/center]
+[center][i]Archimedean Curvature and Donut Topology[/i][/center]
 
-The sphere is not a Platonic solid. It cannot be.
+The torus is not a Platonic solid.
+It is not perfect, not closed, not exhausted.
 
-The cube had 8 vertices - exact, rational, perfect. The sphere has infinite points on its surface. To render a sphere, we must negotiate with infinity. We must choose a ring count and accept: this will never be perfect.
+The torus is a surface of revolution defined by two radii, endlessly looping back into itself. It has no beginning, no end, no privileged face.
 
-The Sphere is where computation meets the transcendental.
-
-[hr]
-
-[b]The Platonic Solids Were Complete[/b]
-
-Before the sphere, we had perfect forms:
-- Cube: 8 vertices, 12 edges, 6 faces (all integers)
-- Tetrahedron, Octahedron, Icosahedron (all rational)
-
-These are the Platonic solids - the five perfect forms that Plato claimed existed eternally in a realm beyond matter. They are discrete. Foldable. Computable.
-
-"Let no one ignorant of geometry enter here" - the inscription above Plato's Academy. Geometry meant these perfect, knowable forms.
-
-The divine craftsman, Plato wrote, built the world from these solids.
-
-But the sphere breaks this perfection.
+If the Platonic solids were the fantasy of perfect enclosure,
+the torus is the geometry of return.
 
 [hr]
 
-[b]Infinite Points, Finite Representation[/b]
+[b]Two Radii Define the Ring[/b]
+[b]AXIOM 1:[/b] A torus requires two radii.
 
-A perfect sphere is defined mathematically: all points equidistant from a center.
-
-[color=yellow][b]Code: The Mathematical Definition[/b][/color]
+[color=yellow]Code[/color]
 [code]
-# Perfect sphere equation:
-# For all points P on surface:
-# distance(P, center) = radius
-
-var center = Vector3(0, 0, 0)
-var radius = 1.0
-
-# But "all points" is infinite
-# The computer cannot store infinity
+var torus = TorusMesh.new()
+torus.inner_radius = 2.0 # Major radius (center to tube center)
+torus.outer_radius = 0.5 # Minor radius (tube thickness)
 [/code]
 
-The sphere exists perfectly in mathematics. In computation, it can only be approximated.
+One radius defines the loop.
+The other defines the body that loops.
+
+This duality matters.
+
+The torus is not built from faces.
+It is built from relation between circles.
+
+[i]Concepts: major radius, minor radius, loop, body, return[/i]
 
 [hr]
 
-[b]Ring Count as Negotiation with Infinity[/b]
+[b]The Archimedean Move[/b]
 
-Archimedes showed us the sphere's volume: (4/3)πr³. But π itself - 3.14159265358979... - never terminates, never repeats. It is irrational.
+The torus belongs to a different lineage than the Platonic solids.
 
-To render a sphere, we must choose how many rings and segments to use. This is not a technical detail. This is an ontological compromise.
+Plato sought perfect, closed forms.
+Archimedes accepted approximation, repetition, and limit.
 
-[color=yellow][b]Code: The Negotiation[/b][/color]
+The torus is generated not by folding polygons, but by:
+• rotating a circle,
+• repeating that rotation,
+• approximating continuity through segments.
+
+This is Archimedean geometry:
+truth approached, never completed.
+
+[hr]
+
+[b]Ring Segments[/b]
+[b]AXIOM 2:[/b] Ring segments define tube smoothness.
+
+[color=yellow]Code[/color]
 [code]
-var sphere_mesh = SphereMesh.new()
-
-sphere_mesh.rings = 16        # Fewer = angular, fast
-sphere_mesh.radial_segments = 32
-
-# Or:
-sphere_mesh.rings = 64        # More = smoother, expensive
-sphere_mesh.radial_segments = 128
-
-# Or:
-sphere_mesh.rings = 999999    # Approaching smoothness
-                               # But never arriving
-
-# The perfect sphere would require:
-sphere_mesh.rings = infinity   # Impossible
+torus.ring_segments = 32
 [/code]
 
-Every ring count is a confession: **I am approximating**.
+Each ring segment is a slice of the tube’s circumference.
 
-16 rings creates 512 triangles. 64 rings creates 8,192 triangles. But zoom in close enough, and you will always see the facets - the triangular cuts that betray the sphere's discrete implementation.
+More segments:
+• smoother tube
+• higher triangle count
+• stronger illusion of continuity
+
+Fewer segments:
+• visible structure
+• faceting
+• emergent rhythm
+
+[i]Concepts: tube, cross-section, repetition, discretization[/i]
 
 [hr]
 
-[b]The Unfoldable Form[/b]
+[b]Radial Segments[/b]
+[b]AXIOM 3:[/b] Radial segments define loop smoothness.
 
-The Platonic solids were foldable. You could draw their nets on paper and fold them into 3D forms:
-- Cube net: 6 squares in a cross
-- Tetrahedron net: 4 triangles
-
-But the sphere cannot be folded from a flat surface. It emerges from rotation - the continuous sweep of a circle through 3D space.
-
-[color=yellow][b]Code: Revolution, Not Construction[/b][/color]
+[color=yellow]Code[/color]
 [code]
-# The sphere is conceptually generated by:
-# 1. Take a circle
-# 2. Rotate it 360 degrees around a diameter
-# 3. The swept surface forms a sphere
-
-# But rotation is motion
-# Motion is time
-# Time is continuous
-# The algorithm only has discrete frames
+torus.radial_segments = 16
 [/code]
 
-The sphere is born from continuous motion, but must be represented in discrete snapshots.
+Each radial segment is a step around the loop.
+
+This is the torus’s time dimension:
+a repeated return around the ring.
+
+[i]Concepts: revolution, loop, periodicity, return[/i]
 
 [hr]
 
-[b]Pi: The Number That Breaks the Fold[/b]
+[b]Tessellation as Negotiation[/b]
+[b]AXIOM 4:[/b] Total triangles emerge from repetition.
 
-The ratio of circumference to diameter is π. This number:
-- Never terminates (3.14159265358979323846264338327950288...)
-- Never repeats (not a repeating decimal)
-- Cannot be expressed as a fraction (irrational)
-- Transcends algebraic equations (transcendental)
-
-[color=yellow][b]Code: Pi in the Engine[/b][/color]
+[color=yellow]Code[/color]
 [code]
-var circumference = 2 * PI * radius
+torus.ring_segments = 32
+torus.radial_segments = 16
 
-# PI in Godot is approximately:
-# 3.14159265358979323846
+Total triangles = ring_segments * radial_segments * 2
+= 1024 triangles
 
-# But the real π continues forever
-# The algorithm uses a truncated approximation
-# We have negotiated with infinity and accepted a limit
 [/code]
 
-Every sphere rendered involves π. Every π used is an approximation. The perfect sphere requires the infinite decimal. The GPU uses 32-bit floats.
+Low resolution reveals the scaffold.
+High resolution performs smoothness.
 
-This is the gap between the ideal and the material.
+Smoothness is not real.
+It is an agreement.
+
+[i]Concepts: tessellation, illusion, density, agreement[/i]
 
 [hr]
 
-[b]Surface Normals: Infinite Directions[/b]
+[b]Breaking Symmetry[/b]
 
-At every point on the sphere's surface, the normal vector points directly away from the center. But "every point" on a continuous sphere is uncountably infinite.
+Unlike Platonic solids, the torus does not demand symmetry.
 
-[color=yellow][b]Code: Normal Calculation[/b][/color]
+Change the segment counts asymmetrically:
+
+[color=yellow]Code[/color]
 [code]
-# For a point P on the sphere surface:
-var normal = (point_position - center).normalized()
-
-# But we only calculate normals at vertices
-# Between vertices, normals are interpolated
-# Smooth shading creates the illusion of continuity
-
-var mesh_instance = MeshInstance3D.new()
-mesh_instance.mesh = sphere_mesh
-add_child(mesh_instance)
-
-# The shader interpolates between discrete normals
-# Creating the appearance of continuous curvature
+torus.ring_segments = 7
+torus.radial_segments = 23
 [/code]
 
-The smoothness is an illusion - a very good one, but an illusion nonetheless.
+Suddenly:
+• rhythms appear
+• patterns drift
+• symmetry dissolves
+• queer geometries emerge
+
+The torus does not collapse when symmetry breaks.
+It becomes expressive.
+
+This is impossible in Platonic solids.
+They fail when symmetry fails.
 
 [hr]
 
-[b]Materialism vs Idealism[/b]
+[b]The 3-Segment Torus: A Portal[/b]
 
-The sphere forces a philosophical question:
+A special case:
 
-**Idealist Position (Plato):**
-The perfect sphere exists eternally in a realm of forms. What we render is merely a shadow of that perfection - an imperfect copy of the ideal.
-
-**Materialist Position:**
-Only the approximated sphere exists. The "perfect sphere" is a mathematical abstraction with no physical reality. The 32-ring version is not inferior - it is the only version that exists in matter (or in computation).
-
-**The GPU's Confession:**
-```
-I render what I can represent.
-I cannot render infinity.
-Am I showing you shadows of perfection,
-or is this approximation all there ever was?
-```
-
-[hr]
-
-[b]The Algorithm Meets the Transcendental[/b]
-
-The Platonic solids were computable:
-- All vertices expressible as rational coordinates
-- All angles calculable
-- All volumes known exactly
-
-The sphere is transcendental:
-- Surface points require π (irrational)
-- Smooth curvature requires infinity (uncountable)
-- Perfect representation requires unlimited precision (impossible)
-
-[color=yellow][b]Code: The Limit of Computation[/b][/color]
+[color=yellow]Code[/color]
 [code]
-# This is as smooth as we can afford:
-sphere_mesh.rings = 32
-sphere_mesh.radial_segments = 64
-
-# This creates 4096 triangles
-# Each triangle is flat (a Platonic primitive)
-# Together they approximate a curve
-
-# The sphere is built from straight edges
-# pretending to be continuous
+torus.ring_segments = 3
+torus.radial_segments = 24
 [/code]
 
-The sphere is Platonic triangles assembled to mimic Archimedean curves.
+With only three segments around the tube:
+• the torus opens visually
+• voids appear
+• the form becomes portal-like
+
+It no longer reads as a solid object.
+It reads as a threshold.
+
+This is not enclosure.
+This is passage.
 
 [hr]
 
-[b]What the Sphere Reveals[/b]
+[b]Topology Over Form[/b]
 
-The sphere is the first primitive that admits: **the algorithm cannot capture everything**.
+The torus introduces topology.
 
-It introduces:
-- Approximation (ring count)
-- Irrationality (π)
-- Infinity (continuous surface)
-- Transcendence (beyond algebraic)
-- Negotiation (smoothness vs performance)
+Unlike the sphere:
+• it has a hole
+• it supports looping paths
+• it allows non-contractible cycles
 
-Where the cube was honest about its discrete nature, the sphere **performs** continuity through dense enough triangulation.
+A path around the torus is never closed in the same way twice.
+
+The torus is not about surface perfection.
+It is about connectivity.
 
 [hr]
 
-[b]Archimedes vs Plato[/b]
+[b]Toward π and Endless Return[/b]
 
-Plato said: Perfect forms exist outside space and time.
-Archimedes said: We must negotiate with these forms using finite methods.
+Both radii of the torus rely on circles.
+Circles invoke π.
 
-Archimedes calculated π by inscribing and circumscribing polygons around a circle - approaching the truth through approximation, never arriving at perfection.
+Every loop:
+• approximates π
+• never completes it
+• returns again
 
-This is what we do every time we set `sphere.rings = 32`.
+The torus does not resolve π.
+It rehearses it.
 
-We are following Archimedes, not Plato. We accept: the perfect is unreachable, but the approximate is sufficient.
+This is geometry as process, not product.
+
+[hr]
+
+[b]The Torus as Anti-Platonic Form[/b]
+
+Where Platonic solids claim:
+• closure
+• perfection
+• finality
+
+The torus insists on:
+• repetition
+• approximation
+• endless return
+
+It is not an ideal form.
+It is a procedure.
 
 [hr]
 
 [color=cyan][b]Summary:[/b][/color]
-The Sphere is the first curvilinear primitive - all points equidistant from center. Unlike Platonic solids (discrete, rational, perfect), the sphere requires approximation through ring count and involves π (irrational, transcendental). It is where computation meets infinity, where the discrete GPU renders continuous curvature through illusion. Every sphere confesses: I am only an approximation of the ideal.
+The Torus is an Archimedean surface defined by two radii and constructed through repetition and approximation. Unlike Platonic solids, it does not require perfect symmetry or closure. By varying ring and radial segments, the torus reveals rhythmic, asymmetric, and queer geometries. It introduces topology, looping paths, and endless return—leading directly toward π as process rather than number.
 
 [hr]
 
-[color=orange][b]Question:[/b][/color]
-Is the world algorithmic and discrete (Platonic cubes), or continuous and transcendental (spheres requiring π)?
-
-The GPU renders both. What does that mean?
-
-'''
+[color=orange][b]→ Next[/b][/color]
+From the torus, geometry opens into fields, curvature everywhere, and surfaces that no longer enclose but connect.
+The argument now belongs to topology, morphology, and learning systems.'''

@@ -13,11 +13,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore the Speculative Computation wing",
-				"Access the Speculative Computation overview sequence",
-				"Navigate expanded lab space"
-			]
+			"learning_objectives": ["Explore the Speculative Computation wing", "Access the Speculative Computation overview sequence", "Navigate expanded lab space"]
 		}
 	},
 	"layers": {
@@ -128,10 +124,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -162,7 +155,8 @@
 			"mood": "brightening_discovery"
 		}
 	},
-	"settings": { "enter_type": "corridor",
+	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
@@ -177,4 +171,3 @@
 		}
 	}
 }
-

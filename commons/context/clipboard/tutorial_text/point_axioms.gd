@@ -4,28 +4,54 @@ extends Node
 # Edit using the Tutorial Text Editor plugin
 
 var text = '''[b]The Point[/b]
-[i]The Atom of Space[/i]
+[i]The atom of space[/i]
 
-Points are the smallest discrete unit of computational geometry. A point in 3D space is a vector defining a position (x, y, z) and defined as that which has no part.
+A point is the smallest unit of computational geometry.
+
+In three-dimensional space, a point [b]is a position[/b], defined by three numbers:
+[b]x, y, and z[/b].
+
+A point has:
+• no size
+• no shape
+• no direction
+
+It is defined only by [i]where it is[/i].
+
+[hr]
+
+[b]Position in the engine[/b]
+
+In a game engine like Godot, every point always has a position.
+The engine stores this position continuously as a vector.
 
 [color=yellow]Code[/color]
 [code]
 var point_position = Vector3(3.0, 1.5, 4.0)
 [/code]
+
+This vector [i]is[/i] the point.
+
 [hr]
 
-- A visible point can be represented by a small sphere.
+[b]Making a point visible[/b]
+
+To see a point, we represent it with a small sphere.
+The sphere is not the point — it is a visual marker for a position.
 
 [color=yellow]Code[/color]
 [code]
 var sphere_mesh = SphereMesh.new()
-var radius = 0.01  # one centimeter
+var radius = 0.01
 sphere_mesh.radius = radius
-sphere_mesh.height = radius * 2  # height is diameter
+sphere_mesh.height = radius * 2.0
+[/code]
 
 [hr]
 
-- Instantiat a mesh into the scene tree to hold the sphere.
+[b]Placing the point[/b]
+
+The marker is placed at the point’s coordinates.
 
 [color=yellow]Code[/color]
 [code]
@@ -34,78 +60,19 @@ mesh_instance.mesh = sphere_mesh
 mesh_instance.position = point_position
 add_child(mesh_instance)
 [/code]
-The add_child() add mesh_instace scene
+
+The scene now shows [b]where[/b] the point is.
+
+Nothing has been added to the point itself.
+Only its position has been made visible.
 
 [hr]
 
-- The position of the point is represented as a text label close to the point.
+[b]What comes next[/b]
 
-[color=yellow]Code[/color]
-[code]
-var label_3d = Label3D.new()
-label_3d.text = str(point_position)
-var offset = Vector3(0, 0.15, 0)
-label_3d.position = point_position + offset
-add_child(label_3d)
-[/code]
-[hr]
+The point already has a position.
+The next step is not to give it one.
 
-- The text label  updates when the point's position changes.
+The next step is to make the position [i]readable and comparable[/i].
 
-[color=yellow]Code[/color]
-[code]
-func _process(delta):
-	label_3d.text = str(point_position)
-	label_3d.position = point_position + label_offset
-[/code]
-[hr]
-
-[color=yellow]Full Code[/color]
-[code]
-# PointMesh.gd - Standalone sphere mesh configuration
-extends Node
-
-# Target mesh instance
-var target_mesh: MeshInstance3D = null
-
-# Sphere settings
-@export var radius: float = 0.02
-
-func _ready():
-	# Try to find target mesh in parent if not set
-	if not target_mesh:
-		if get_parent() is MeshInstance3D:
-			target_mesh = get_parent()
-		else:
-			# Search for MeshInstance3D in parent's children
-			for child in get_parent().get_children():
-				if child is MeshInstance3D:
-					target_mesh = child
-					break
-
-	# Apply sphere mesh if target exists
-	if target_mesh:
-		create_sphere()
-
-# Set the target mesh instance
-func set_target_mesh(mesh: MeshInstance3D):
-	target_mesh = mesh
-	if target_mesh:
-		create_sphere()
-
-# Create sphere mesh
-func create_sphere():
-	if not target_mesh:
-		return
-
-	var sphere = SphereMesh.new()
-	sphere.radius = radius
-	sphere.height = radius * 2.0
-	target_mesh.mesh = sphere
-
-# Update radius
-func set_radius(new_radius: float):
-	radius = new_radius
-	create_sphere()
-[/code]
 [hr]'''

@@ -13,12 +13,7 @@
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": [
-				"Explore the Advanced Laboratory wing",
-				"Access the Advanced Laboratory overview sequence",
-				"Navigate the ultimate expanded lab space",
-				"Master all 20 algorithmic categories"
-			]
+			"learning_objectives": ["Explore the Advanced Laboratory wing", "Access the Advanced Laboratory overview sequence", "Navigate the ultimate expanded lab space", "Master all 20 algorithmic categories"]
 		}
 	},
 	"layers": {
@@ -137,10 +132,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -171,7 +163,8 @@
 			"mood": "ultimate_mastery_achieved"
 		}
 	},
-	"settings": { "enter_type": "corridor",
+	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
@@ -187,4 +180,3 @@
 		}
 	}
 }
-

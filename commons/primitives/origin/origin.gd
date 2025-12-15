@@ -33,30 +33,32 @@ func _ready():
 
 func create_origin_marker():
 	"""Create a small sphere to mark the origin point"""
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = 0.01
-	sphere_mesh.height = 0.025
-
-	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.mesh = sphere_mesh
-	mesh_instance.position = origin  # At (0, 0, 0)
-
-	# Make it a bright color so it stands out
-	var material = StandardMaterial3D.new()
-	material.emission_enabled = true
-	material.emission = Color.WHITE
-	material.emission_energy = 10.0
-	mesh_instance.set_surface_override_material(0, material)
-
-	add_child(mesh_instance)
+	# Use the requested scene: grab_sphere_point.tscn
+	var point_scene = load("res://commons/primitives/point/grab_sphere_point.tscn")
+	if point_scene:
+		var point_instance = point_scene.instantiate()
+		point_instance.position = origin
+		add_child(point_instance)
+	else:
+		# Fallback if scene not found
+		var sphere_mesh = SphereMesh.new()
+		sphere_mesh.radius = 0.01
+		sphere_mesh.height = 0.025
+		var mesh_instance = MeshInstance3D.new()
+		mesh_instance.mesh = sphere_mesh
+		mesh_instance.position = origin
+		add_child(mesh_instance)
 
 	# Add a label
 	var label = Label3D.new()
 	label.text = ORIGIN_ALIASES[_alias_index]
-	label.position = Vector3(0, 0.2, 0)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 12
-	label.modulate = Color.PINK
+	label.position = Vector3(0, 0.15, 0) # Slightly above
+	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	# Small 3D text
+	label.pixel_size = 0.001 # Even smaller
+	label.font_size = 64 # High res texture
+	label.outline_size = 8
+	label.modulate = Color(1.0, 0.5, 0.8) # Pinkish
 	add_child(label)
 	_origin_label = label
 

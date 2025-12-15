@@ -13,11 +13,7 @@
 			"difficulty": "hub",
 			"category": "laboratory",
 			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Central hub for all learning sequences",
-				"Progressive artifact discovery",
-				"Interactive lab environment"
-			]
+			"learning_objectives": ["Central hub for all learning sequences", "Progressive artifact discovery", "Interactive lab environment"]
 		}
 	},
 	"layers": {
@@ -69,7 +65,7 @@
 		"2": {
 			"name": "raised_platform",
 			"description": "Raised platform areas",
-			"material": "lab_platform_material", 
+			"material": "lab_platform_material",
 			"height": 0.2,
 			"color": [0.9, 0.9, 1.0, 1.0]
 		},
@@ -116,17 +112,14 @@
 		}
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
 	"artifact_definitions": {
 		"note": "Artifacts are now referenced by lookup_name from external registry files",
 		"rotating_cube": "References lab_artifacts.json rotating_cube definition",
-		"xyz_coordinates": "References grid_artifacts.json xyz_coordinates definition", 
+		"xyz_coordinates": "References grid_artifacts.json xyz_coordinates definition",
 		"grid_display": "References lab_artifacts.json grid_display definition",
 		"probability_sphere": "References grid_artifacts.json probability_sphere definition"
 	},
@@ -157,7 +150,8 @@
 			"mood": "bright_scientific"
 		}
 	},
-	"settings": { "enter_type": "corridor",
+	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
@@ -175,4 +169,3 @@
 		}
 	}
 }
-

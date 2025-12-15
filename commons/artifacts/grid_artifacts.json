@@ -93,6 +93,13 @@
 			"description": "Pickable point sphere preset with a floating Label3D that shows its coordinates.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn"
 		},
+		"grab_sphere_point_snap": {
+			"name": "grab_sphere_point_snap",
+			"lookup_name": "grab_sphere_point_snap",
+			"description": "grab_sphere_point_snap.",
+			"scene": "res://commons/primitives/point/grab_sphere_point_snap.tscn"
+		},		
+		
 		"grab_sphere_point_color_with_text": {
 			"name": "grab_sphere_point_color_with_text",
 			"lookup_name": "grab_sphere_point_color_with_text",

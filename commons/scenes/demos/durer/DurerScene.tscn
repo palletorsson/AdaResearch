@@ -1,0 +1,213 @@
+[gd_scene load_steps=18 format=4 uid="uid://278bn6syps2c"]
+
+[ext_resource type="Script" uid="uid://b6v47ymjr82hm" path="res://commons/scenes/demos/durer/DurerPolyhedron.gd" id="1_poly"]
+[ext_resource type="Script" uid="uid://6ayor0slbx72" path="res://commons/scenes/demos/durer/MagicSquare.gd" id="2_magic"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stone"]
+albedo_color = Color(0.6, 0.6, 0.65, 1)
+metallic = 0.1
+roughness = 0.7
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_arwxg"]
+_surfaces = [{
+"aabb": AABB(-0.64000005, -1.2, -0.4, 1.2800001, 2.4, 0.8),
+"format": 34359738375,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAM3MTD/NzMy+Ctcjv+xROD/NzMw+CtcjP+xROD/NzMw+AAAAAM3MTL/NzMw+CtcjP+xROL/NzMy+Ctcjv+xROL/NzMy+AAAAAJqZmT/NzMy+C9cjv7gehT/NzMw+C9cjP7gehT/NzMw+AAAAAJqZmb/NzMw+C9cjP7gehb/NzMy+C9cjv7gehb/NzMy+/39c9K8Ma7//f1z0rwxrv/9/XPSvDGu//39c9K8Ma7//f1z0rwxrv/9/XPSvDGu//3+p6sYY7r3/f6nqxhjuvf9/qerGGO69/3+p6sYY7r3/f6nqxhjuvf9/qerGGO69")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphere"]
+albedo_color = Color(0.7, 0.7, 0.75, 1)
+metallic = 0.5
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_durer"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brass"]
+albedo_color = Color(0.7, 0.5, 0.2, 1)
+metallic = 0.9
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_compass"]
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.4, 0.3, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ladder_rail"]
+top_radius = 0.04
+bottom_radius = 0.04
+height = 5.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ladder_rung"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glass"]
+transparency = 1
+albedo_color = Color(0.8, 0.9, 1, 0.3)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_bulb"]
+radius = 0.08
+height = 0.16
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bell"]
+top_radius = 0.08
+bottom_radius = 0.15
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iron"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rod"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pan"]
+top_radius = 0.08
+bottom_radius = 0.06
+height = 0.02
+
+[node name="DurerScene" type="Node3D"]
+
+[node name="Polyhedron" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -2.2623308, 1.0833457, -0.5)
+material_override = SubResource("StandardMaterial3D_stone")
+mesh = SubResource("ArrayMesh_arwxg")
+script = ExtResource("1_poly")
+size = 0.8
+material = SubResource("StandardMaterial3D_stone")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.1160722, 1)
+material_override = SubResource("StandardMaterial3D_sphere")
+mesh = SubResource("SphereMesh_durer")
+
+[node name="MagicSquare" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2, 1.1768744)
+script = ExtResource("2_magic")
+font_size = 32
+
+[node name="Compass" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0.5, 0.8, 0.26733875)
+
+[node name="Leg1" type="MeshInstance3D" parent="Compass"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_brass")
+mesh = SubResource("CylinderMesh_compass")
+
+[node name="Leg2" type="MeshInstance3D" parent="Compass"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_brass")
+mesh = SubResource("CylinderMesh_compass")
+
+[node name="Ladder" type="Node3D" parent="."]
+transform = Transform3D(0.30257532, 0.36035457, -0.8823791, -0.15588476, 0.9320184, 0.3271725, 0.9402915, 0.038555104, 0.3381795, -1.9655286, 2.5, -3.3270397)
+
+[node name="RailL" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rail")
+
+[node name="RailR" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rail")
+
+[node name="Rungs" type="Node3D" parent="Ladder"]
+
+[node name="Rung1" type="MeshInstance3D" parent="Ladder/Rungs"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rung")
+
+[node name="Rung2" type="MeshInstance3D" parent="Ladder/Rungs"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rung")
+
+[node name="Rung3" type="MeshInstance3D" parent="Ladder/Rungs"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rung")
+
+[node name="Rung4" type="MeshInstance3D" parent="Ladder/Rungs"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_wood")
+mesh = SubResource("CylinderMesh_ladder_rung")
+
+[node name="Hourglass" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.069186, 2, -0.67627394)
+
+[node name="FrameTop" type="CSGBox3D" parent="Hourglass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+size = Vector3(0.2, 0.02, 0.2)
+material = SubResource("StandardMaterial3D_wood")
+
+[node name="FrameBot" type="CSGBox3D" parent="Hourglass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+size = Vector3(0.2, 0.02, 0.2)
+material = SubResource("StandardMaterial3D_wood")
+
+[node name="BulbTop" type="MeshInstance3D" parent="Hourglass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+material_override = SubResource("StandardMaterial3D_glass")
+mesh = SubResource("SphereMesh_bulb")
+
+[node name="BulbBot" type="MeshInstance3D" parent="Hourglass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0)
+material_override = SubResource("StandardMaterial3D_glass")
+mesh = SubResource("SphereMesh_bulb")
+
+[node name="Bell" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07881, 2.8, 0.79624796)
+
+[node name="BellMesh" type="MeshInstance3D" parent="Bell"]
+material_override = SubResource("StandardMaterial3D_brass")
+mesh = SubResource("CylinderMesh_bell")
+
+[node name="Scales" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1321492, 2.5, -1.5)
+
+[node name="Beam" type="MeshInstance3D" parent="Scales"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_iron")
+mesh = SubResource("CylinderMesh_rod")
+
+[node name="PanL" type="MeshInstance3D" parent="Scales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.3, 0)
+material_override = SubResource("StandardMaterial3D_brass")
+mesh = SubResource("CylinderMesh_pan")
+
+[node name="PanR" type="MeshInstance3D" parent="Scales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.3, 0)
+material_override = SubResource("StandardMaterial3D_brass")
+mesh = SubResource("CylinderMesh_pan")
+
+[node name="StringL" type="CSGCylinder3D" parent="Scales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.15, 0)
+radius = 0.002
+height = 0.3
+material = SubResource("StandardMaterial3D_iron")
+
+[node name="StringR" type="CSGCylinder3D" parent="Scales"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.15, 0)
+radius = 0.002
+height = 0.3
+material = SubResource("StandardMaterial3D_iron")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 3.5)

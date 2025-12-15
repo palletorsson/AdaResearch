@@ -3,6 +3,10 @@
 
 extends Node3D
 
+# Entry scene preloads
+const CORRIDOR_SCENE = preload("res://commons/structures/corridor/CorridorScene.tscn")
+const ONE_CUBE_ENTRY = preload("res://commons/structures/entry/OneCubeEntry.tscn")
+
 @onready var grid_system = $"../GridSystem"
 
 # Sequence management
@@ -11,17 +15,22 @@ var current_map_index: int = 0
 
 func _ready():
 	print("GridScene: Initializing with SceneManagerHelper integration")
-	
+
+	# Connect to grid system signal BEFORE any await
+	if grid_system:
+		if grid_system.has_signal("map_generation_complete"):
+			grid_system.map_generation_complete.connect(_on_map_generation_complete)
+			print("GridScene: Connected to map_generation_complete signal")
+
+		# Deferred fallback in case signal was missed
+		call_deferred("_deferred_entry_check")
+
 	# Wait for SceneManager to be ready
 	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
-	
+
 	# Connect to grid system if available
 	if grid_system:
 		scene_manager.connect_to_grid_system(grid_system)
-		
-		# Connect to grid system signals for sequence management
-		if grid_system.has_signal("map_generation_complete"):
-			grid_system.map_generation_complete.connect(_on_map_generation_complete)
 	
 	# Handle scene user data from staging
 	call_deferred("_process_scene_user_data")
@@ -71,58 +80,54 @@ func _configure_grid_system_for_map(map_name: String):
 		# Fallback: reload the scene
 		get_tree().reload_current_scene()
 
-func _on_map_generation_complete():
-	"""Handle grid system completing map generation"""
-	print("GridScene: Map generation complete")
-	
-	# Handle entry type selection
-	_update_entry_type()
-	
-	# Add exit trigger if in sequence
-	if not sequence_data.is_empty():
-		_setup_sequence_exit_trigger()
+func _spawn_entry_by_type():
+	"""Spawn entry based on map settings - corridor for Lab, one_cube for others"""
+	var enter_type = "one_cube"  # Default
 
-const CORRIDOR_SCENE = preload("res://commons/structures/corridor/CorridorScene.tscn")
-const ONE_CUBE_ENTRY = preload("res://commons/structures/entry/OneCubeEntry.tscn")
-
-func _update_entry_type():
-	"""Update entry type via dynamic instantiation"""
-	# Default to one_cube
-	var enter_type = "one_cube"
-	
-	# Check map settings via GridSystem
+	# Get enter_type from map settings
 	if grid_system and grid_system.get_data_component():
 		var settings = grid_system.get_data_component().get_settings()
 		if settings.has("enter_type"):
 			enter_type = settings["enter_type"]
-	
-	print("GridScene: Setting entry type to '%s'" % enter_type)
-	
-	# Access EntryZone
-	var entry_zone = find_child("EntryZone", true, false)
-	if not entry_zone:
-		print("GridScene: EntryZone not found in scene tree")
-		return
-		
-	# Clear existing entries
-	for child in entry_zone.get_children():
-		child.queue_free()
-		
-	# Instantiate requested scene
-	var scene_to_spawn: PackedScene = null
-	
+
+	print("GridScene: Spawning entry type '%s'" % enter_type)
+
+	# Clear any existing entry
+	var existing = get_node_or_null("ActiveEntry")
+	if existing:
+		existing.queue_free()
+
+	# Spawn based on type
+	var instance: Node3D
 	if enter_type == "corridor":
-		scene_to_spawn = CORRIDOR_SCENE
-	elif enter_type == "one_cube" or enter_type == "default":
-		scene_to_spawn = ONE_CUBE_ENTRY
-		
-	if scene_to_spawn:
-		var instance = scene_to_spawn.instantiate()
-		entry_zone.add_child(instance)
-		print("GridScene: Dynamically spawned %s" % instance.name)
+		instance = CORRIDOR_SCENE.instantiate()
+		instance.position = Vector3.ZERO
+	else:
+		instance = ONE_CUBE_ENTRY.instantiate()
+		instance.position = Vector3(0, 0, -1)
 
+	instance.name = "ActiveEntry"
+	add_child(instance)
+	print("GridScene: Spawned %s at position %s" % [enter_type, instance.position])
 
+func _deferred_entry_check():
+	"""Fallback check after a frame - spawn entry if not already done"""
+	await get_tree().process_frame  # Wait one more frame for map data
+	var existing = get_node_or_null("ActiveEntry")
+	if not existing:
+		print("GridScene: Deferred fallback - spawning entry")
+		_spawn_entry_by_type()
 
+func _on_map_generation_complete():
+	"""Handle grid system completing map generation"""
+	print("GridScene: Map generation complete")
+
+	# Spawn entry based on map settings
+	_spawn_entry_by_type()
+	
+	# Add exit trigger if in sequence
+	if not sequence_data.is_empty():
+		_setup_sequence_exit_trigger()
 
 func _setup_sequence_exit_trigger():
 	"""Setup automatic sequence progression trigger"""

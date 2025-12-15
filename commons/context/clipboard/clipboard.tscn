@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqaqcvdoccfdq"]
 
 [ext_resource type="Script" uid="uid://dig18jy1o8b8e" path="res://commons/context/clipboard/clipboard.gd" id="1_edgjo"]
-[ext_resource type="PackedScene" uid="uid://qlx2jgqvx1y" path="res://commons/context/clipboard/codeDisplay.tscn" id="3_g1sl6"]
 [ext_resource type="PackedScene" uid="uid://bxpseco03ygvb" path="res://commons/primitives/cubes/grab_plane.tscn" id="3_nuein"]
+[ext_resource type="PackedScene" path="res://commons/context/clipboard/clipboard_text_frame.tscn" id="3_textframe_new"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2qefi"]
 size = Vector2(0.21, 0.297)
@@ -36,7 +36,6 @@ font_size = 16
 outline_size = 8
 
 [node name="ViewportDisplay" type="Node3D" parent="GrabPlane/clipboard"]
-transform = Transform3D(6.955, 0, 0, 0, 6.677, 0, 0, 0, 6.955, 0, 0, 0)
 
-[node name="textFrame" parent="GrabPlane/clipboard/ViewportDisplay" instance=ExtResource("3_g1sl6")]
-transform = Transform3D(0.055999987, 0, 0, 0, -2.4478373e-09, 0.056, 0, -0.055999987, -2.4478377e-09, 0.0040836856, -0.00011107692, -0.0011816992)
+[node name="textFrame" parent="GrabPlane/clipboard/ViewportDisplay" instance=ExtResource("3_textframe_new")]
+transform = Transform3D(1, 0, 0, 0, -1.7881393e-07, 0.99999976, 0, -0.99999976, -1.7881393e-07, 0.0036, 0.0064626373, -0.0017850852)

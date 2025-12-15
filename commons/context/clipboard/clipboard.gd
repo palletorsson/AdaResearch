@@ -38,6 +38,9 @@ const TutorialTextLibrary := preload("res://commons/context/clipboard/tutorial_t
 
 @export var title = ""
 @export var description_sets: Array[String] = []
+@export var fade_min_dist: float = 1.5 # Max opacity at this distance
+@export var fade_max_dist: float = 2.0 # Zero opacity at this distance
+
 var current_index: int = 0
 var is_executed = false
 var _snippet_library := CodeSnippetLibrary.new()
@@ -46,9 +49,154 @@ var _tutorial_library: TutorialTextLibrary
 var init_position: Vector3
 var _is_being_held: bool = false
 
+func _process(delta: float) -> void:
+	# Proximity Reveal Logic (Smart Screen)
+	var camera = get_viewport().get_camera_3d()
+	if not camera: return
+	
+	var dist = global_position.distance_to(camera.global_position)
+	var reveal = clamp(remap(dist, fade_min_dist, fade_max_dist, 1.0, 0.0), 0.0, 1.0)
+	
+	if _screen_material:
+		_screen_material.set_shader_parameter("reveal_height", reveal)
+		
+	if _body_material:
+		_body_material.set_shader_parameter("reveal_height", reveal)
+		
+	if _inner_material:
+		_inner_material.set_shader_parameter("reveal_height", reveal)
+
+	# Fallbacks for other elements (Title, Page Number)
+	if pagenumber:
+		pagenumber.modulate.a = reveal
+		pagenumber.outline_modulate.a = reveal
+		
+	if title_node and title_node is Label3D:
+		title_node.modulate.a = reveal
+		title_node.outline_modulate.a = reveal
+
+var _screen_mesh: MeshInstance3D
+var _screen_material: ShaderMaterial
+var _body_mesh: Node # Can be MeshInstance3D or CSGShape3D
+var _body_material: ShaderMaterial
+var _inner_mesh: Node
+var _inner_material: ShaderMaterial
+
 func _ready() -> void:
 	# Initialize tutorial library
 	_tutorial_library = TutorialTextLibrary.new()
+	
+	# Setup Smart Screen Shader
+	var viewport_2d = null
+	if code_display_node:
+		viewport_2d = code_display_node.get_node_or_null("Viewport2Din3D")
+		if viewport_2d:
+			_find_screen_mesh_recursive(viewport_2d)
+			
+	if _screen_mesh:
+		var shader = load("res://commons/context/clipboard/smart_screen_reveal.gdshader")
+		var mat = ShaderMaterial.new()
+		mat.shader = shader
+		# Get texture from existing material or viewport
+
+		
+		# Assuming standard godot-xr-tools viewport_2d setup which uses a "Screen" child
+		# or apply to mesh override
+		
+		# We need the texture!
+		# Viewport2Din3D typically sets material_override or surface_material_override
+		var old_mat = _screen_mesh.get_active_material(0)
+		if old_mat and old_mat is StandardMaterial3D:
+			mat.set_shader_parameter("texture_albedo", old_mat.albedo_texture)
+		elif viewport_2d:
+			# Try to get viewport texture directly
+			var sub_viewport = viewport_2d.get_node_or_null("Viewport")
+			if sub_viewport:
+				mat.set_shader_parameter("texture_albedo", sub_viewport.get_texture())
+		
+		_screen_material = mat
+		_screen_mesh.material_override = mat
+
+	# Setup Body Reveal Shader
+	var grab_plane = get_node_or_null("GrabPlane")
+	if grab_plane:
+		# Check for CSG nodes first as seen in tscn analysis
+		var collision_shape = grab_plane.get_node_or_null("CollisionShape3D")
+		if collision_shape:
+			var csg_box = collision_shape.get_node_or_null("CSGBox3D")
+			if csg_box and csg_box is CSGShape3D:
+				_body_mesh = csg_box
+		
+		# Fallback to MeshInstance3D if CSG structure is different or hidden
+		if not _body_mesh:
+			_body_mesh = grab_plane.get_node_or_null("MeshInstance3D")
+			
+	if _body_mesh:
+		# Also look for the inner subtractor mesh (child CSG)
+		# In grab_plane.tscn: CollisionShape3D -> CSGBox3D (body) -> CSGBox3D (subtractor)
+		for child in _body_mesh.get_children():
+			if child is CSGShape3D:
+				_inner_mesh = child
+				break
+				
+		var shader = load("res://commons/context/clipboard/smart_screen_reveal.gdshader")
+		var mat = ShaderMaterial.new()
+		mat.shader = shader
+		
+		# For body, we want the original color, not a texture usually
+		# But key is to preserve ALBEDO
+		# The shader expects a texture. Creating a simple color texture or modifying shader?
+		# Existing shader uses texture_albedo. Let's create a small viewport texture or noise?
+		# Or better: check if body has material and get texture. If not, use white or color.
+		
+		var old_mat = null
+		if _body_mesh is MeshInstance3D:
+			old_mat = _body_mesh.get_active_material(0)
+		elif _body_mesh is CSGShape3D:
+			old_mat = _body_mesh.material
+			
+		# Force Black texture for the clipboard body style
+		var img = Image.create(4, 4, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0.05, 0.05, 0.05, 1)) # Dark Grey/Black
+		var tex = ImageTexture.create_from_image(img)
+		mat.set_shader_parameter("texture_albedo", tex)
+
+		_body_material = mat
+		if _body_mesh is CSGShape3D:
+			_body_mesh.material = mat
+		elif _body_mesh is MeshInstance3D:
+			_body_mesh.material_override = mat
+
+		# Apply to inner mesh if found
+		if _inner_mesh:
+			# Inner mesh usually needs a different color (darker for the hole?)
+			# Or we can reuse _body_material if we want same reveal
+			# But if we reuse, it shares uniform updates automatically!
+			
+			# Wait, if we use same material instance, set_shader_parameter updates both.
+			# But inner mesh might need different texture (dark hole).
+			
+			var inner_mat = mat.duplicate()
+			# Darker texture for inner hole
+			var img_inner = Image.create(4, 4, false, Image.FORMAT_RGBA8)
+			img_inner.fill(Color(0.1, 0.1, 0.1, 1)) # Dark grey for inside
+			var tex_inner = ImageTexture.create_from_image(img_inner)
+			inner_mat.set_shader_parameter("texture_albedo", tex_inner)
+			
+			_inner_material = inner_mat
+			if _inner_mesh is CSGShape3D:
+				_inner_mesh.material = inner_mat
+			elif _inner_mesh is MeshInstance3D:
+				_inner_mesh.material_override = inner_mat
+
+func _find_screen_mesh_recursive(node: Node):
+	if node is MeshInstance3D:
+		_screen_mesh = node
+		return
+	for child in node.get_children():
+		_find_screen_mesh_recursive(child)
+		if _screen_mesh: return
+
 
 	if _content_viewport and _viewport_sprite:
 		_content_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -70,7 +218,8 @@ func _ready() -> void:
 	init_position = grab_pos.position
 
 	if grab_cube.has_signal("item_dropped"):
-		grab_cube.connect("item_dropped", Callable(self, "_on_item_dropped"))
+		if not grab_cube.is_connected("item_dropped", Callable(self, "_on_item_dropped")):
+			grab_cube.connect("item_dropped", Callable(self, "_on_item_dropped"))
 		_set_text(label3D, "Grab me: " + str(init_position))
 	else:
 		print("GrabCube does not have 'item_dropped' signal!")
@@ -79,9 +228,11 @@ func _ready() -> void:
 
 	# Connect to pickup signals for page navigation
 	if grab_cube.has_signal("picked_up"):
-		grab_cube.connect("picked_up", Callable(self, "_on_clipboard_picked_up"))
+		if not grab_cube.is_connected("picked_up", Callable(self, "_on_clipboard_picked_up")):
+			grab_cube.connect("picked_up", Callable(self, "_on_clipboard_picked_up"))
 	if grab_cube.has_signal("dropped"):
-		grab_cube.connect("dropped", Callable(self, "_on_clipboard_dropped"))
+		if not grab_cube.is_connected("dropped", Callable(self, "_on_clipboard_dropped")):
+			grab_cube.connect("dropped", Callable(self, "_on_clipboard_dropped"))
 
 	if description_sets.size() > 0:
 		_update_display()

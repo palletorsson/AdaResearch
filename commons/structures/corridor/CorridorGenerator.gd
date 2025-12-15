@@ -57,12 +57,20 @@ func _generate():
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.mesh = mesh_instance.mesh
 	multimesh.use_colors = true
+	# Set huge custom AABB to prevent culling issues with procedural generation
+	multimesh.custom_aabb = AABB(Vector3(-1000, -1000, -1000), Vector3(2000, 2000, 2000))
+	multimesh.visible_instance_count = -1
 	multimesh_instance.multimesh = multimesh
+	multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	
-	# Apply Material (if any)
-	if mesh_instance.material_override:
-		multimesh_instance.material_override = mesh_instance.material_override.duplicate()
-	
+	# Apply Material - use simple material for MultiMesh compatibility
+	# (Shader materials often don't work with MultiMesh instancing)
+	var corridor_material = StandardMaterial3D.new()
+	corridor_material.albedo_color = Color(0.15, 0.15, 0.18, 1.0)  # Dark gray
+	corridor_material.metallic = 0.1
+	corridor_material.roughness = 0.8
+	multimesh_instance.material_override = corridor_material
+
 	temp_node.queue_free()
 	
 	# Calculate Position List
@@ -113,6 +121,8 @@ func _generate():
 	for i in range(transforms.size()):
 		multimesh.set_instance_transform(i, transforms[i])
 		multimesh.set_instance_color(i, Color.WHITE) # Can customize later
+
+	print("CorridorGenerator: Created corridor with %d blocks" % transforms.size())
 
 func _create_collision(pos: Vector3):
 	var static_body = StaticBody3D.new()

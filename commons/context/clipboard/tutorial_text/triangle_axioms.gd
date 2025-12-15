@@ -6,15 +6,16 @@ extends Node
 var text = '''[center][font_size=28][b]The Triangle[/b][/font_size][/center]
 [center][i]The First Enclosure[/i][/center]
 
-If the Point was discrete, the Line measured, and the Grid indexed, then the Triangle is the first geometry that creates an inside and an outside. Three points. Three lines. One enclosed space.
+If the Point is position, the Line is measured relation, and the Grid is indexed space, then the Triangle is the first geometry that closes. Three positions connected by three relations produce something new: an inside and an outside.
 
-The Triangle introduces the boundary.
+The Triangle introduces enclosure.
 
 [hr]
 
-[b]Three Points Define a Plane[/b]
+[b]Three Positions, One Closure[/b]
 
-Where two points created a line (1D), three non-collinear points define a plane (2D) and enclose space within their perimeter.
+Two positions define a line.
+Three non-collinear positions define a plane and enclose space.
 
 [color=yellow][b]Code: Defining the Triangle[/b][/color]
 [code]
@@ -22,21 +23,23 @@ var point_a = Vector3(0, 0, 0)
 var point_b = Vector3(2, 0, 0)
 var point_c = Vector3(1, 0, 2)
 
-# Three points, three edges
 var edges = [
-    [point_a, point_b],
-    [point_b, point_c],
-    [point_c, point_a]
+[point_a, point_b],
+[point_b, point_c],
+[point_c, point_a]
 ]
 [/code]
 
-Three vertices. Three edges. One face. The triangle introduces interior, orientation, and area.
+Three vertices. Three edges. One face.
+
+The triangle is the first structure where relations close upon themselves.
 
 [hr]
 
-[b]Winding Order and Normals: The Triangle Has a Face[/b]
+[b]Orientation and Normal[/b]
 
-Unlike the line, the triangle has orientation. It faces a direction. The normal vector points outward from the surface - defining front versus back.
+Unlike the line, the triangle has orientation.
+It faces a direction.
 
 [color=yellow][b]Code: Computing the Normal[/b][/color]
 [code]
@@ -45,15 +48,16 @@ var edge2 = point_c - point_a
 var normal = edge1.cross(edge2).normalized()
 [/code]
 
-The cross product determines which direction the triangle is facing. Counter-clockwise winding = front face. Clockwise = back face.
+The cross product determines which side is front and which is back.
+Winding order matters.
 
-The triangle knows which way it is looking. It distinguishes the side that sees from the side that is seen.
+The triangle distinguishes between the side that sees and the side that is seen.
 
 [hr]
 
-[b]Area: The Measure of Enclosure[/b]
+[b]Area: Measure of Capture[/b]
 
-If the Line measured distance, the Triangle measures area - the quantity of 2D space captured within its perimeter.
+If the line measured distance, the triangle measures area.
 
 [color=yellow][b]Code: Computing Triangle Area[/b][/color]
 [code]
@@ -61,15 +65,16 @@ var cross = edge1.cross(edge2)
 var area = cross.length() * 0.5
 [/code]
 
-Area is the metric of capture. How much space has been enclosed. How much territory claimed.
+Area quantifies enclosure.
+How much space has been captured.
 
-The triangle is the first shape that can contain.
+This is the first moment geometry can contain.
 
 [hr]
 
-[b]The Mesh: Materializing the Boundary[/b]
+[b]From Relation to Surface[/b]
 
-To render the triangle as a visible surface, we construct a mesh - vertices connected by faces that the GPU can rasterize.
+To render the triangle, relations become surface.
 
 [color=yellow][b]Code: Creating the Triangle Mesh[/b][/color]
 [code]
@@ -88,61 +93,75 @@ mesh_instance.mesh = triangle_mesh
 add_child(mesh_instance)
 [/code]
 
-The triangle now exists as a renderable surface - a boundary that divides space.
+The triangle now exists as a visible boundary.
+Space is divided.
 
 [hr]
 
-[b]Inside and Outside: The Binary of Enclosure[/b]
+[b]Inside and Outside[/b]
 
-The triangle creates the most fundamental spatial binary: you are either inside the boundary or outside it. There is no third position. The perimeter enforces the distinction.
+The triangle introduces a decisive binary.
 
-The algorithm returns a boolean. True or false. Inside or outside. No ambiguity permitted.
+A position is either inside the boundary or outside it.
+There is no third state.
+
+The algorithm returns a boolean.
+Inside or outside. True or false.
+
+Ambiguity is excluded.
 
 [hr]
 
 [b]The Atomic Surface[/b]
 
-All polygons can be reduced to triangles. Every complex mesh is ultimately a collection of triangular faces. The triangle is the primitive unit of 3D rendering.
+All polygonal surfaces reduce to triangles.
+Every mesh rendered by the GPU is composed of triangular faces.
 
-[color=yellow][b]Code: Why Triangles?[/b][/color]
+[color=yellow][b]Code: Triangles Everywhere[/b][/color]
 [code]
 var sphere = SphereMesh.new()
 sphere.radial_segments = 32
 sphere.rings = 16
-# Creates approximately 1024 triangles
 [/code]
 
-Why triangles?
-- Always planar (three points always lie on one plane)
-- GPU optimized (hardware accelerated triangle rasterization)
-- Any polygon can be decomposed into triangles
+Triangles are used because:
 
-Complex forms are always decomposable into the simplest enclosure. All boundaries reduce to triangles.
+• Three points always lie on a plane
+• They are computationally stable
+• Hardware is optimized to render them
+
+Every complex surface is a repetition of the simplest enclosure.
 
 [hr]
 
 [b]What the Triangle Cannot Hold[/b]
 
-The boundary is a line of zero thickness. It has no depth, no porosity, no gradual transition. You are inside or you are outside. The triangle cannot represent:
+The boundary has no thickness.
 
-- The threshold - The space of crossing, of being between
-- The permeable - Boundaries that leak, that allow passage
-- The fuzzy edge - Where inside and outside blur together
-- The refusal - The point that will not be classified
+It cannot express:
+
+• thresholds
+• porous edges
+• gradual transitions
+• ambiguous belonging
+
+Inside and outside are absolute.
 
 [hr]
 
 [b]The Triangle as Governance[/b]
 
-To draw a triangle is to assert: this space is now bounded. What was open is now enclosed. What was continuous is now divided. The triangle is the geometry of territory - the minimal unit of spatial claim.
+To draw a triangle is to declare territory.
 
-Every mesh you render is thousands of tiny boundaries, each one asserting inside/outside, each one measuring area, each one facing a direction.
+What was continuous becomes bounded.
+What was open becomes enclosed.
 
-The Grid made space indexed. The Triangle makes space enclosed. Both are systems of containment.
+Every rendered object is composed of countless small acts of enclosure—each triangle asserting inside and outside, orientation and area.
+
+The Grid made space indexable.
+The Triangle makes space containable.
 
 [hr]
 
 [color=cyan][b]Summary:[/b][/color]
-The Triangle is the first polygon - three points creating enclosed 2D space. It has orientation (normal vector), area (measure of containment), and defines the inside/outside binary. All 3D meshes decompose into triangles - the atomic unit of rendered surfaces.
-
-'''
+The Triangle is the first closed geometry. It introduces enclosure, orientation, and area, producing an inside/outside distinction. All rendered surfaces reduce to triangles—the atomic unit of computational boundaries.'''

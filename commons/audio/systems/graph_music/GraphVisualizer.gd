@@ -7,10 +7,6 @@ var _nodes_visuals: Dictionary = {} # ID -> MeshInstance3D
 var _cursor_visuals: Array[MeshInstance3D] = []
 var _initialized: bool = false
 
-# Visual Settings
-const COLOR_DEFAULT = Color(0.2, 0.2, 0.8)
-const COLOR_ACTIVE = Color(1.0, 0.7, 0.2) # Golden Orange
-const COLOR_EDGE_DEFAULT = Color(0.5, 0.5, 0.5, 0.3)
 
 func _process(delta):
 	if not system: 
@@ -23,6 +19,12 @@ func _process(delta):
 		
 	if _initialized:
 		_update_visuals(delta)
+
+# Visual Settings
+const COLOR_DEFAULT = Color(0.1, 0.1, 0.2) # Dark background node
+const COLOR_ACTIVE = Color(0.0, 1.0, 0.8) # Cyan Neon
+const COLOR_PIANO = Color(1.0, 0.2, 0.6) # Magenta Neon
+const COLOR_EDGE_DEFAULT = Color(0.2, 0.4, 0.5, 0.3)
 
 func _build_static_graph():
 	# Clear existing
@@ -66,7 +68,7 @@ func _create_node_visual(node_data):
 	# Label
 	var label = Label3D.new()
 	# Show Note Name clearly
-	label.text = node_data.note
+	label.text = node_data.get_label()
 	label.font_size = 48
 	label.outline_size = 12
 	label.position = Vector3(0, 0.6, 0)
@@ -118,46 +120,60 @@ func _update_visuals(delta):
 		mesh.scale = mesh.scale.lerp(Vector3.ONE, delta * 5.0)
 		
 		if label:
-			label.modulate = label.modulate.lerp(Color(0.8, 0.8, 1.0, 0.5), delta * 3.0)
+			label.modulate = label.modulate.lerp(Color(0.5, 0.7, 1.0, 0.3), delta * 3.0)
 			label.font_size = lerp(float(label.font_size), 48.0, delta * 5.0)
 
-	# Manage Cursors & Highlight Active Nodes
-	while _cursor_visuals.size() < system.active_cursors.size():
+	# Manage Agents
+	# Ensure pool size
+	while _cursor_visuals.size() < system.active_agents.size():
 		_cursor_visuals.append(_create_cursor_visual())
 		
 	for i in range(_cursor_visuals.size()):
 		var vis = _cursor_visuals[i]
 		
-		if i < system.active_cursors.size():
+		if i < system.active_agents.size():
 			vis.visible = true
-			var cursor_data = system.active_cursors[i]
-			var node_id = cursor_data.current_node
+			var agent = system.active_agents[i]
 			
-			if _nodes_visuals.has(node_id):
-				var node_vis = _nodes_visuals[node_id]
+			if _nodes_visuals.has(agent.current_node_id):
+				# Interpolate Position
+				var start_pos = _nodes_visuals[agent.current_node_id].position
+				var end_pos = start_pos # Default if no target
 				
-				# Snap cursor to node
-				vis.position = node_vis.position
+				if agent.target_node_id != "" and _nodes_visuals.has(agent.target_node_id):
+					end_pos = _nodes_visuals[agent.target_node_id].position
 				
-				# Pulse Cursor
-				var t = cursor_data.timer
-				var pulse = 1.0 + sin(t * 10.0) * 0.1
-				vis.scale = Vector3.ONE * 0.5 * pulse
+				vis.position = start_pos.lerp(end_pos, agent.progress)
 				
-				# Activate Node Visuals
-				var mat = node_vis.material_override
-				mat.albedo_color = COLOR_ACTIVE
-				mat.emission = COLOR_ACTIVE
-				node_vis.scale = Vector3.ONE * 1.5
+				# Face direction
+				if start_pos.distance_squared_to(end_pos) > 0.1:
+					vis.look_at(end_pos, Vector3.UP)
 				
-				# Highlight Label
-				var label = node_vis.get_child(0) as Label3D
-				if label:
-					label.modulate = Color.WHITE
-					label.outline_modulate = COLOR_ACTIVE
-					label.font_size = 64
+				# Trigger visual effect on arrival (handled by decay, but we can boost it if progress is near 0)
+				if agent.progress < 0.1 and agent.target_node_id == "":
+					# Just arrived at current_node_id (logic sets target to "" on arrival)
+					_highlight_node(agent.current_node_id, agent.instrument_override)
+					
 		else:
 			vis.visible = false
+
+func _highlight_node(node_id, instr):
+	if not _nodes_visuals.has(node_id): return
+	var node_vis = _nodes_visuals[node_id]
+	var mat = node_vis.material_override
+	
+	var col = COLOR_ACTIVE
+	if instr == "piano": col = COLOR_PIANO
+	
+	mat.albedo_color = col
+	mat.emission = col
+	node_vis.scale = Vector3.ONE * 1.5
+	
+	var label = node_vis.get_child(0) as Label3D
+	if label:
+		label.modulate = Color.WHITE
+		label.outline_modulate = col
+		label.font_size = 64
 
 func _create_cursor_visual() -> MeshInstance3D:
 	# Ring cursor

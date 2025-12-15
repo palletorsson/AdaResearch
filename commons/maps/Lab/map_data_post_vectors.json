@@ -13,11 +13,7 @@
 			"difficulty": "hub",
 			"category": "laboratory",
 			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Central hub after primitives completion",
-				"Access to more advanced sequences",
-				"Progressive artifact discovery"
-			]
+			"learning_objectives": ["Central hub after primitives completion", "Access to more advanced sequences", "Progressive artifact discovery"]
 		}
 	},
 	"layers": {
@@ -51,7 +47,7 @@
 			[" ", " ", " ", " ", "t:array_tutorial", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "]
-		], 
+		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "shelf_with_stickers:0:1", " "],
@@ -65,10 +61,7 @@
 		]
 	},
 	"external_references": {
-		"artifact_registries": [
-			"res://commons/artifacts/lab_artifacts.json",
-			"res://commons/artifacts/grid_artifacts.json"
-		],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},
@@ -112,7 +105,8 @@
 			"mood": "bright_scientific"
 		}
 	},
-	"settings": { "enter_type": "corridor",
+	"settings": {
+		"enter_type": "corridor",
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": false,
@@ -130,4 +124,3 @@
 		}
 	}
 }
-

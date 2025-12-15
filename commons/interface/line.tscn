@@ -6,7 +6,7 @@
 [sub_resource type="CylinderMesh" id="CylinderMesh_550wj"]
 top_radius = 0.01
 bottom_radius = 0.01
-height = 0.7
+height = 0.04
 
 [node name="Line" type="Node3D"]
 
@@ -14,10 +14,10 @@ height = 0.7
 script = ExtResource("1_ejps8")
 
 [node name="GrabSphere" parent="lineContainer" instance=ExtResource("2_c0ogx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, 0)
 
 [node name="GrabSphere2" parent="lineContainer" instance=ExtResource("2_c0ogx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0, 0)
 
 [node name="line" type="MeshInstance3D" parent="lineContainer"]
 transform = Transform3D(-0.00396184, 0.999992, 0, -0.999992, -0.00396184, 0, 0, 0, 1, 0, 0, 0)
