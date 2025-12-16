@@ -15,7 +15,7 @@ extends Node3D
 @export var show_ray: bool = true
 @export var ray_color_scanning: Color = Color(1, 0, 0, 0.8)
 @export var ray_color_hit: Color = Color(0, 1, 0, 0.8)
-@export var ray_thickness: float = 0.02
+@export var ray_thickness: float = 0.005
 
 @export_category("Display Screen Settings")
 @export var enable_screen_updates: bool = true
@@ -63,19 +63,35 @@ func setup_components():
 		raycast.name = "UVScannerRayCast"
 		add_child(raycast)
 	
-	# Label
-	color_data_label = find_child("ColorDataLabel", true, false)
-	if not color_data_label:
-		color_data_label = Label3D.new()
-		color_data_label.name = "ColorDisplay"
-		color_data_label.position = Vector3(0, 0.1, 0)
-		color_data_label.font_size = 28
-		color_data_label.outline_size = 2
-		add_child(color_data_label)
-	
 	# Find display screen
 	display_screen = get_node_or_null("../GrabStick_ColorScanner#DisplayScreen")
+	# If parent not found, try finding it by name under this node's parent's parent structure (Scene dependent)
+	if not display_screen:
+		# Search up the tree or siblings
+		var parent = get_parent()
+		if parent:
+			display_screen = parent.get_node_or_null("GrabStick_ColorScanner#DisplayScreen")
+
 	setup_display_screen()
+	
+	# Setup Label ON the display screen
+	if display_screen:
+		color_data_label = display_screen.find_child("ColorDisplay", false, false)
+		if not color_data_label:
+			color_data_label = Label3D.new()
+			color_data_label.name = "ColorDisplay"
+			display_screen.add_child(color_data_label)
+			
+		color_data_label.position = Vector3(0, 0.06, 0) # Just above surface
+	# Updated rotation per user request: -x 90, 0 z
+		color_data_label.rotation_degrees = Vector3(-90, 0, 0) 
+		color_data_label.font_size = 128
+		color_data_label.outline_size = 8
+		# Inverse scale to counteract parent's non-uniform scale
+		# Screen is approx (2.7, 4.4, 1.0) ? Wait, let's just try small uniform scale first.
+		color_data_label.scale = Vector3(0.05, 0.05, 0.05)
+	else:
+		print("Warning: Display Screen not found for Label attachment")
 
 func setup_display_screen():
 	"""Setup display screen"""
@@ -108,6 +124,7 @@ func setup_visual_ray():
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(ray_thickness, ray_thickness, scan_range)
 	visual_ray.mesh = box_mesh
+	visual_ray.scale = Vector3(0.15, 1.0, 1.0) # Fix scale distortion
 	visual_ray.position = Vector3(0, 0, -scan_range / 2)
 	
 	ray_material = StandardMaterial3D.new()
@@ -158,9 +175,9 @@ func perform_uv_texture_scan():
 			print("HIT: ", hit_object.name, " (", hit_object.get_class(), ")")
 			print("Hit point: ", hit_point)
 		
-		# Extract color using Optical Scanning (Primary) or UV texture sampling (Fallback)
-		# detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
-		detected_color = scan_actual_color()
+		# Extract color using Optical Scanning (Secondary) or UV texture sampling (Primary)
+		detected_color = extract_texture_pixel_color(hit_object, hit_point, hit_normal)
+		# detected_color = scan_actual_color()
 		
 		update_ray_for_hit(hit_distance)
 		update_display_hit(hit_object, hit_distance)
@@ -646,14 +663,8 @@ func update_display_hit(hit_object: Node, distance: float):
 	var g = int(detected_color.g * 255)
 	var b = int(detected_color.b * 255)
 	
-	var info_text = "TEXTURE PIXEL!\n%s\nRGB: %d,%d,%d\n%.1fm" % [
-		hit_object.name,
-		r, g, b,
-		distance
-	]
-	
-	# Add UV info
-	info_text += "\nUV: %.3f,%.3f" % [last_uv_coord.x, last_uv_coord.y]
+	# Simplified display: Only RGB values per user request
+	var info_text = "%d, %d, %d" % [r, g, b]
 	
 	color_data_label.text = info_text
 	
@@ -668,7 +679,8 @@ func update_display_miss():
 	if not color_data_label:
 		return
 	
-	color_data_label.text = "UV SCANNING...\nRange: %.1fm" % scan_range
+	# Simplified display for miss state
+	color_data_label.text = "---" 
 	color_data_label.modulate = Color.WHITE
 
 func update_display_screen(color: Color, is_active: bool):

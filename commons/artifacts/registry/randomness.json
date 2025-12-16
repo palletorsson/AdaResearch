@@ -1,10 +1,10 @@
 {
 	"artifacts": {
 		"RotateGridCubes": {
-			"name": "RotateGridCubes",
+			"name": "Slope Gradient Cubes",
 			"lookup_name": "RotateGridCubes",
-			"description": "RotateGridCubes",
-			"scene": "res://algorithms/randomness/RotateGridCubes.tscn"
+			"description": "Gradient slope test with animated rotation for walkability check.",
+			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn"
 		},
 		"random_edge_profile": {
 			"name": "Random Edge Profile",
@@ -210,7 +210,6 @@
 			"description": "NoiseColors3Dy",
 			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn"
 		},
-		
 		"blue_noise": {
 			"name": "Blue Noise",
 			"lookup_name": "blue_noise",

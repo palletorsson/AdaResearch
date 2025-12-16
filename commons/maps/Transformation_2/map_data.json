@@ -13,230 +13,43 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": [
-				"2D arrays",
-				"Grid navigation",
-				"X-Y coordinate system",
-				"Multi-dimensional thinking"
-			]
+			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
 		}
 	},
 	"documentation": {
 		"summary": "Transformation_2 - Symmetry Grid",
 		"layout": "7x8 floor with mirrored workstations flanking a central manipulation lane.",
 		"objective": "Practice mirrored cube transformations and observe combined rotate-scale sequences.",
-		"key_elements": [
-			"Utility pickups `p` framing the north and south rows",
-			"`transformation_cube` pairs at (2,2) (4,2) (2,4) (4,4)",
-			"`rotatescalecubes:0:12` centerpiece at (3,3)",
-			"`dark_sphere` dome over the active zone",
-			"Teleporter `t` stationed at (5,6)"
-		]
+		"key_elements": ["Utility pickups `p` framing the north and south rows", "`transformation_cube` pairs at (2,2) (4,2) (2,4) (4,4)", "`rotatescalecubes:0:12` centerpiece at (3,3)", "`dark_sphere` dome over the active zone", "Teleporter `t` stationed at (5,6)"]
 	},
 	"layers": {
 		"structure": [
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1",
-				"1"
-			],
-			[
-				"2",
-				"1",
-				"1",
-				"1",
-				"1",
-				"0",
-				"1"
-			],
-			[
-				"0",
-				"0",
-				"0",
-				"0",
-				"1",
-				"1",
-				"1"
-			],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["2", "1", "1", "1", "1", "0", "1"],
+			["0", "0", "0", "0", "1", "1", "1"]
 		],
 		"utilities": [
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"p",
-				" ",
-				"p",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"p",
-				" ",
-				"p",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				"t",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "p", " ", "p", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "p", " ", "p", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " "]
 		],
 		"interactables": [
-			[
-				"floor_tiles:0:-0.3",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"transformation_cube",
-				" ",
-				"transformation_cube",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"dark_sphere",
-				"rotatescalecubes:0:12",
-				" ",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				"transformation_cube",
-				" ",
-				"transformation_cube",
-				" ",
-				" "
-			],
-			[
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" ",
-				" "
-			],
-			[
-				"clipboard#translation_axioms:180:-0.2",
-				" ",
-				" ",
-				" ",
-				" ",
-				"pickup_gate#pickups:2",
-				" "
-			]
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
+			[" ", " ", "dark_sphere", " ", " ", " ", " "],
+			[" ", " ", "transformation_cube", " ", "transformation_cube", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			["clipboard#translation_axioms:180:-0.2", " ", " ", " ", " ", "pickup_gate#pickups:2", " "]
 		]
 	},
 	"utility_definitions": {
@@ -255,24 +68,12 @@
 		}
 	},
 	"lighting": {
-		"ambient_color": [
-			0.4,
-			0.4,
-			0.5
-		],
+		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
 		"directional_light": {
 			"enabled": true,
-			"direction": [
-				-0.4,
-				-0.7,
-				-0.4
-			],
-			"color": [
-				1.0,
-				0.9,
-				0.8
-			],
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.9, 0.8],
 			"energy": 1.2
 		}
 	},
@@ -285,11 +86,7 @@
 		"initial_tile_visibility": "hidden_except_corners",
 		"background": {
 			"type": "sky",
-			"color": [
-				0.2,
-				0.3,
-				0.7
-			]
+			"color": [0.2, 0.3, 0.7]
 		}
 	}
 }

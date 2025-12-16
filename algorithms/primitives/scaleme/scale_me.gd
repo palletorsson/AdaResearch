@@ -7,6 +7,7 @@ extends "res://commons/primitives/point/grab_sphere.gd"
 @export var scale_down_time: float = 5.0  # seconds to scale down
 @export var world_node_path: NodePath = NodePath("")  # Optional: specific node to scale
 @export var xr_origin_path: NodePath = NodePath("../../XROrigin3D")  # Path to player
+@export var auto_revert: bool = true # If true, scales back after duration. If false, stays scaled.
 
 var _original_scale: Vector3 = Vector3.ONE
 var _is_scaled: bool = false
@@ -50,13 +51,33 @@ func _find_world_node() -> void:
 			print("ScaleMe: Using specified world node at ", world_node_path)
 			return
 
-	# Otherwise, use the parent node of scale_me (the local area to scale)
+	# 2. Look specifically for "DarkSphere" as requested by user
+	# We search the entire current scene for it
+	var dark_sphere = _find_node_by_name(get_tree().current_scene, "DarkSphere")
+	if dark_sphere:
+		_world_node = dark_sphere
+		_original_scale = _world_node.scale
+		print("ScaleMe: Found DarkSphere to scale: ", _world_node.name)
+		return
+
+	# 3. Otherwise, use the parent node of scale_me (the local area to scale)
 	_world_node = get_parent()
 	if _world_node and _world_node is Node3D:
 		_original_scale = _world_node.scale
 		print("ScaleMe: Scaling parent node: ", _world_node.name)
 	else:
 		push_warning("ScaleMe: Could not find valid world node to scale")
+
+func _find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+	
+	for child in node.get_children():
+		var result = _find_node_by_name(child, target_name)
+		if result:
+			return result
+			
+	return null
 
 # Override the pickup handler
 func _on_picked_up(pickable) -> void:
@@ -101,8 +122,11 @@ func _scale_world() -> void:
 
 	print("ScaleMe: World scaling to ", _original_scale * scale_amount)
 
-	# Start timer to scale back down
-	_scale_timer.start(scale_duration)
+	# Start timer to scale back down ONLY if auto_revert is true
+	if auto_revert:
+		_scale_timer.start(scale_duration)
+	else:
+		print("ScaleMe: Auto-revert disabled, world will stay scaled.")
 
 	# Properly drop the object first, then hide and free
 	call_deferred("_cleanup_pill")

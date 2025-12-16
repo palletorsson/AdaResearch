@@ -20,17 +20,7 @@
 		"summary": "Transformation_7 - The Cubic Carousel",
 		"layout": "10x12 transport hub with isolated platforms, multi-axis transport cubes, and strategic voids requiring precise navigation.",
 		"objective": "Navigate through a 3D space using automated and manual transport cubes across X, Y, and Z axes to collect pickups and reach the exit.",
-		"key_elements": [
-			"Spawn platform at (0,0) - player entry point",
-			"Auto-lift `tc:4:y:auto` at (1,1) - introduces vertical automation",
-			"Z-axis bridge `tc:3:z` at (4,3) - horizontal north-south transport",
-			"X-axis bridge `tc:3:x` at (5,7) - horizontal east-west transport",
-			"Manual high-rise `tc:5:y` at (8,5) - player-controlled elevation",
-			"Orbital auto-transport `tc:2:z:auto` at (5,9) - automated carousel movement",
-			"Three `pick_up_cube` targets at different elevations and positions",
-			"Visual landmarks: `toruscylinder` towers and `dark_sphere` markers",
-			"Exit via teleporter `t` and score cube `sp` at (9,11)"
-		],
+		"key_elements": ["Spawn platform at (0,0) - player entry point", "Auto-lift `tc:4:y:auto` at (1,1) - introduces vertical automation", "Z-axis bridge `tc:3:z` at (4,3) - horizontal north-south transport", "X-axis bridge `tc:3:x` at (5,7) - horizontal east-west transport", "Manual high-rise `tc:5:y` at (8,5) - player-controlled elevation", "Orbital auto-transport `tc:2:z:auto` at (5,9) - automated carousel movement", "Three `pick_up_cube` targets at different elevations and positions", "Visual landmarks: `toruscylinder` towers and `dark_sphere` markers", "Exit via teleporter `t` and score cube `sp` at (9,11)"],
 		"strategy": "Player must chain transport cube movements, timing jumps with auto-transports, and understanding that each axis can be traversed independently."
 	},
 	"layers": {
@@ -47,7 +37,7 @@
 			["0", "2", "0", "2", "1", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "3", "3", "3", "3", "3", "3"],
 			["0", "0", "0", "0", "3", "3", "3", "0", "3", "3"],
-			["0", "0", "0", "0", "3", "3", "3", "3", "3", "3"]			
+			["0", "0", "0", "0", "3", "3", "3", "3", "3", "3"]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -61,8 +51,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "tc:3:y:auto", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "t", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ",  " ", "sp"]			
+			[" ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "sp"]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -94,7 +84,6 @@
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.3, 0.35, 0.5],
 		"ambient_energy": 0.7,

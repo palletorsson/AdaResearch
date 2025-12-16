@@ -1,13 +1,13 @@
 {
 	"map_info": {
 		"name": "Tutorial_2D",
-		"description": "Local and global transformations reveal the hierarchy of reference frames. By contrasting transformations applied relative to an object versus the world, the map exposes how context governs spatial behavior. The player experiences how the same operation yields different outcomes depending on its frame of application. This scene foregrounds the layered structure of coordinate systems and the importance of relational context in computation.",
+		"description": "Rotation is revisited as an operational transformation rather than a primitive relation. Here rotation is no longer an isolated phenomenon but part of a formal system of spatial change. By applying rotation through explicit parameters or controls, the player encounters orientation as a manipulable variable governed by rules rather than intuition. The map reinforces the idea that transformation formalizes embodied action into repeatable instruction.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 12,
+			"width": 7,
 			"depth": 16,
-			"max_height": 5
+			"max_height": 4
 		},
 		"metadata": {
 			"difficulty": "beginner",
@@ -17,10 +17,10 @@
 		}
 	},
 	"documentation": {
-		"summary": "Transformation_5 - Torus Translation Runway",
-		"layout": "Expanded 12x14 field with northern staging pads, a mid-lane transport cube, and southern return deck.",
-		"objective": "Combine long-form translations with torus-cylinder manipulation and distant pickup goals.",
-		"key_elements": ["Transport cube `tc:3:z` positioned along the north lane", "`toruscylinder:0:4` demo tower at (5,2)", "`dark_sphere` canopy over the runway", "Remote `pick_up_cube:0:0:1` target at (1,12)", "Teleporter `t` and score cube `sp` sharing the south platform"]
+		"summary": "Transformation_4 - Lift Alignment Lab",
+		"layout": "7x8 arena with paired platform lifts and raised pickup pedestals.",
+		"objective": "Explore vertical alignment by combining lifts with timed pickup cubes.",
+		"key_elements": ["Platform lifts `l` at (2,2) and (4,2)", "`pick_up_cube:0:2` targets above each lift", "`dark_sphere` dome at (3,3)", "Score cube `sp` and teleporter `t` at the south-east edge"]
 	},
 	"layers": {
 		"structure": [
@@ -50,7 +50,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", "sp"],
+			[" ", " ", " ", "3t:Translation produces space as navigable extent", " ", "t", "sp"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

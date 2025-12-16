@@ -5,14 +5,23 @@
 
 [node name="ScaleMe" instance=ExtResource("1_scale")]
 script = ExtResource("2_scale")
-scale_amount = 4.0
-scale_duration = 20.0
+scale_amount = 10.0
+scale_duration = 1000.0
 scale_up_time = 2.0
 scale_down_time = 2.0
 world_node_path = NodePath("")
 xr_origin_path = NodePath("../../XROrigin3D")
+auto_revert = true
+haptic_pickup_intensity = 0.5
+haptic_pickup_duration = 0.1
+haptic_drop_intensity = 0.3
+haptic_drop_duration = 0.05
+
+[node name="Sphere" parent="MeshInstance3D" index="0"]
+radius = 0.06
 
 [node name="Label3D" type="Label3D" parent="MeshInstance3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20428342, 0)
+visible = false
 billboard = 1
 text = "Hold Me"

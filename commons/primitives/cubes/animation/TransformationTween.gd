@@ -1,76 +1,60 @@
 # TransformationTween.gd
-# Simple position/movement animation using Tween
-# Moves the cube from one position to another and back
+# Matched to pick_up_cube.gd logic for synchronization
+# Uses simple sine wave bobbing instead of Tween
 
 extends Node
 
-@export_group("Movement Settings")
-@export var movement_distance: Vector3 = Vector3(0, 3, 0)  # How far to move
-@export var duration: float = 2.0  # How long each movement takes
-@export var auto_start: bool = true  # Start animation automatically
-@export var loop_animation: bool = true  # Keep moving back and forth
+@export_group("Bobbing Settings")
+@export var bob_height: float = 0.2  # Height of the bob
+@export var bob_speed: float = 2.0   # Speed of the bob
+@export var auto_start: bool = true
 
 var target_node: Node3D
 var initial_position: Vector3
-var tween: Tween
-var is_moving_forward: bool = true
+var time_passed: float = 0.0
+var is_active: bool = false
 
 func _ready():
 	# Find the cube to animate
-	target_node = get_parent().get_node("CubeBaseStaticBody3D")
+	# Assuming structure: Parent -> [ThisScript, CubeBaseStaticBody3D]
+	target_node = get_parent().get_node_or_null("CubeBaseStaticBody3D")
+	
+	# Fallback: try to animate parent if specific node not found (for flexibility)
 	if not target_node:
-		print("TransformationTween: Could not find target cube node!")
-		return
+		target_node = get_parent()
 	
-	# Store the starting position
-	initial_position = target_node.position
-	
-	# Start animation if enabled
-	if auto_start:
-		start_movement()
-
-func start_movement():
-	"""Start the movement animation"""
-	if not target_node:
-		return
-	
-	# Create a new tween
-	if tween:
-		tween.kill()
-	tween = create_tween()
-	
-	# Move to the target position
-	var target_position = initial_position + movement_distance
-	tween.tween_property(target_node, "position", target_position, duration)
-	tween.tween_callback(_on_movement_complete)
-
-func _on_movement_complete():
-	"""Called when one movement is finished"""
-	if not loop_animation:
-		return
-	
-	# Switch direction and move again
-	is_moving_forward = !is_moving_forward
-	
-	# Create new tween for return movement
-	tween = create_tween()
-	
-	var target_position: Vector3
-	if is_moving_forward:
-		target_position = initial_position + movement_distance
+	if target_node:
+		initial_position = target_node.position
+		if auto_start:
+			is_active = true
 	else:
-		target_position = initial_position
+		print("TransformationTween: No target node found")
+
+func _process(delta: float):
+	if not is_active or not target_node:
+		return
+		
+	time_passed += delta
 	
-	tween.tween_property(target_node, "position", target_position, duration)
-	tween.tween_callback(_on_movement_complete)
+	# Match pick_up_cube.gd logic:
+	# var bob_offset = sin(time_passed * bob_speed) * bob_height
+	# global_position.y = original_y + bob_offset
+	
+	# We apply to local position here to be safe within the scene hierarchy
+	var bob_offset = sin(time_passed * bob_speed) * bob_height
+	
+	# Apply strictly to Y axis for "bobbing" (Standard Pickup Behavior)
+	var new_pos = initial_position
+	new_pos.y += bob_offset
+	target_node.position = new_pos
 
 func stop_movement():
-	"""Stop the animation"""
-	if tween:
-		tween.kill()
+	is_active = false
+
+func start_movement():
+	is_active = true
 
 func reset_position():
-	"""Reset cube to starting position"""
 	if target_node:
 		target_node.position = initial_position
-		is_moving_forward = true 
+	time_passed = 0.0

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1m45glbn4di2"]
+
+[ext_resource type="Script" uid="uid://dfw0wlsg7pebu" path="res://algorithms/randomness/SlopeGradientCubes.gd" id="1_logic"]
+
+[node name="SlopeGradientCubes" type="Node3D"]
+script = ExtResource("1_logic")
+grid_size = Vector2i(7, 30)
+max_slope_angle = 30.0
+gradient_start_offset = 2.0
+gradient_length = 25.0
+animate_slope = false
+animation_speed = 1.0

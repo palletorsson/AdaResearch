@@ -5,9 +5,9 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 12,
-			"depth": 16,
-			"max_height": 5
+			"width": 120,
+			"depth": 180,
+			"max_height": 50
 		},
 		"metadata": {
 			"difficulty": "beginner",
@@ -20,59 +20,51 @@
 		"summary": "Transformation_5 - Torus Translation Runway",
 		"layout": "Expanded 12x14 field with northern staging pads, a mid-lane transport cube, and southern return deck.",
 		"objective": "Combine long-form translations with torus-cylinder manipulation and distant pickup goals.",
-		"key_elements": [
-			"Transport cube `tc:3:z` positioned along the north lane",
-			"`toruscylinder:0:4` demo tower at (5,2)",
-			"`dark_sphere` canopy over the runway",
-			"Remote `pick_up_cube:0:0:1` target at (1,12)",
-			"Teleporter `t` and score cube `sp` sharing the south platform"
-		]
+		"key_elements": ["Transport cube `tc:3:z` positioned along the north lane", "`toruscylinder:0:4` demo tower at (5,2)", "`dark_sphere` canopy over the runway", "Remote `pick_up_cube:0:0:1` target at (1,12)", "Teleporter `t` and score cube `sp` sharing the south platform"]
 	},
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "1", "1", "1", "0", "1"],
+			["2", "2", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "0", "1", "1", "1", "0", "1"],
 			["1", "1", "1", "0", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],				
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", "1", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "3t:Scale me", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "t", " ", " ", " ", "t", " "],
+			[" ", " ", " ", "t", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 			
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 		
-			[" ", " ", " ", " ", " ", " ", " "], 	
-			[" ", " ", " ", "t", " ", " ", " "], 	
-			[" ", " ", " ", " ", " ", " ", " "], 																			
+			[" ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-	
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "scale_me", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "], 
-			["prism_block:90", "prism_block:90", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "prism_block:90", "prism_block:90"],
-			[" ", " ", " ", " ", " ", " ", " "],					
-			[" ", " ", " ", "pick_up_cube", " ", " ", " "],
-			[" ", "scale_me", " ", " ", " ", " ", " "],
+			["clipboard#scale_axioms:180:-0.2", "scale_me", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			["prism_block:90", "prism_block:90", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "cube_scene:45:0.2:0.6", "prism_block:90", "prism_block:90"],
-			[" ", " ", " ", " ", " ", " ", " "],	
-			[" ", " ", " ", "pick_up_cube", " ", " ", " "],						
-			[" ", " ", " ", " ", " ", " ", " "]				
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "dark_sphere", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "prism_block:90", " ", " ", " ", "prism_block:90", " "],
+			[" ", " ", " ", "prism_block:90", " ", " ", " "],
+
 		]
 	},
 	"utility_definitions": {
@@ -86,11 +78,10 @@
 		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
@@ -113,4 +104,4 @@
 			"color": [0.2, 0.3, 0.7]
 		}
 	}
-} 
+}

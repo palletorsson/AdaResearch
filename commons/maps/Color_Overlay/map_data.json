@@ -6,7 +6,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 12,
-			"depth": 12,
+			"depth": 13,
 			"max_height": 2
 		},
 		"metadata": {
@@ -17,14 +17,14 @@
 		}
 	},
 	"documentation": {
-		"summary": "Color_1 - Grid Colorizer Lab",
-		"layout": "12x12 illumination grid with corner lights and central colorizing table beneath a dome.",
-		"objective": "Introduce the grid colorizer system and next-cube progression trigger.",
+		"summary": "Color_4 - Glitch Color Workshop",
+		"layout": "11x11 lighting grid surrounding a central next cube and glitch podiums.",
+		"objective": "Experience the impossible color (magenta) through glitch artifacts.",
 		"key_elements": [
-			"`gridcolorizer` console at the north-west tile",
-			"Ambient `dark_sphere` dome and `n` next cube at (5,5)",
-			"Overhead extra lights `el` framing the workspace",
-			"Teleporter `t` at (9,10)"
+			"Perimeter extra lights `el` with `n` next cube at the center",
+			"`glitchcolor` interactables on the edges",
+			"`dark_sphere` dome stabilizing the main stage",
+			"Teleporter `t` at the south-east corner"
 		]
 	},
 	"layers": {
@@ -39,33 +39,35 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1"]
+			["1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"], 
+			["0", "0", "0", "0", "1", "1", "1", "0", "0", "0", "0"] 			
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", " ", " ", " ", " ", "el", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", "n", " ", " ", " ", "el", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "el", " ", " ", " ", "el", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "el", " ", " ", " ", " ", " ", " ", " ", "el", " "],
-			[" ", " ", " ", " ", " ", "s", " ", " ", " ", "t", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "s", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			["gridcolorizer", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "textureglitch", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "clipboard#magenta_axioms:180:1.5", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "textureglitch", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "clipboard#rgb_axioms:180:1.5", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "glitchcolor", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]									
 		]
 	},

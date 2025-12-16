@@ -730,6 +730,43 @@
 			"description": "Cartesian coordinate system, x y z godot",
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn"
 		},
+		"pickup_cube_static": {
+			"name": "Static Pickup Cube",
+			"lookup_name": "pickup_cube_static",
+			"description": "A static pickup cube that can be collected.",
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_static.tscn"
+		},
+		"pickup_cube_transforming": {
+			"name": "Transforming Pickup Cube",
+			"lookup_name": "pickup_cube_transforming",
+			"description": "A pickup cube that moves up and down.",
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_transforming.tscn"
+		},
+		"pickup_cube_rotating": {
+			"name": "Rotating Pickup Cube",
+			"lookup_name": "pickup_cube_rotating",
+			"description": "A pickup cube that rotates.",
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_rotating.tscn"
+		},
+		"pickup_cube_scaling": {
+			"name": "Scaling Pickup Cube",
+			"lookup_name": "pickup_cube_scaling",
+			"description": "A pickup cube that pulsates in size.",
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_scaling.tscn"
+		},
+		"combo_cube_visual": {
+			"name": "Transformation Rotation Scale Cube",
+			"lookup_name": "combo_cube_visual",
+			"description": "A visual-only cube that moves, rotates, and scales simultaneously (Not a pickup).",
+			"scene": "res://commons/primitives/cubes/animation/transformation_rotation_scale_cube.tscn"
+		},	
+		"pickup_cube_combo": {
+			"name": "Combo Pickup Cube",
+			"lookup_name": "pickup_cube_combo",
+			"description": "A pickup cube that moves, rotates, and scales simultaneously.",
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_transformation_rotation_scale.tscn"
+		},
+			
 		"pickup_gate": {
 			"name": "Pickup Gate",
 			"lookup_name": "pickup_gate",
@@ -796,6 +833,14 @@
 			"description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
 			"scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn"
 		},
+		
+		"spectrum_forest": {
+			"lookup_name": "spectrum_forest",
+			"name": "spectrum_forest",
+			"description": "spectrum_forest.",
+			"scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn"
+		},
+		
 		"pillarcolorcollection": {
 			"lookup_name": "pillarcolorcollection",
 			"name": "pillarcolorcollection",

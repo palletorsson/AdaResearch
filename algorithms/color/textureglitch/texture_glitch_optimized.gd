@@ -58,13 +58,13 @@ func initialize_layer_system():
 func setup_scene_environment():
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 3, 12)
-	camera.look_at(Vector3.ZERO, Vector3.UP)
 	add_child(camera)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
 	
 	var camera_tween = create_tween()
 	camera_tween.set_loops()
-	camera_tween.tween_method(func(pos): camera.position = pos, Vector3(8, 3, 8), Vector3(-8, 3, 8), 10.0)
-	camera_tween.tween_method(func(pos): camera.look_at(Vector3.ZERO, Vector3.UP); camera.position = pos, Vector3(-8, 3, 8), Vector3(8, 3, 8), 10.0)
+	camera_tween.tween_method(func(pos): camera.position = pos; camera.look_at(Vector3.ZERO, Vector3.UP), Vector3(8, 3, 8), Vector3(-8, 3, 8), 10.0)
+	camera_tween.tween_method(func(pos): camera.position = pos; camera.look_at(Vector3.ZERO, Vector3.UP), Vector3(-8, 3, 8), Vector3(8, 3, 8), 10.0)
 	
 	setup_dynamic_lighting()
 

@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="GDScript_1"]
 script/source = "extends Node3D
 
-@onready var containment_walls = [$CubeStructure/BackWall, $CubeStructure/LeftWall, $CubeStructure/RightWall, $CubeStructure/TopWall, $CubeStructure/BottomWall]
+@onready var containment_walls = [$CubeStructure/BackWall, $CubeStructure/LeftWall, $CubeStructure/RightWall, $CubeStructure/TopWall, $CubeStructure/StaticBody3D/BottomWall]
 @onready var contained_specimen = $CubeStructure/ContainedSpecimen
 @onready var energy_field = $CubeStructure/EnergyField
 @onready var status_indicators = [$CubeStructure/StatusIndicator1, $CubeStructure/StatusIndicator2, $CubeStructure/StatusIndicator3]
