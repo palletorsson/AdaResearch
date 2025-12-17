@@ -26,12 +26,16 @@ func setup_hallway():
 	# Create gradient texture
 	gradient_texture = GradientTexture1D.new()
 	var gradient = Gradient.new()
-	
-	# Set up rainbow colors
-	gradient.add_point(0.0, Color(0.2, 0.8, 0.2))  # Green
-	gradient.add_point(0.33, Color(0.8, 0.8, 0.2)) # Yellow
-	gradient.add_point(0.66, Color(0.8, 0.2, 0.2)) # Red
-	gradient.add_point(1.0, Color(0.2, 0.2, 0.8))  # Blue
+
+	# Set up rainbow colors (looping - first and last colors match)
+	gradient.offsets = PackedFloat32Array([0.0, 0.25, 0.5, 0.75, 1.0])
+	gradient.colors = PackedColorArray([
+		Color(0.2, 0.8, 0.2),   # Green
+		Color(0.8, 0.8, 0.2),   # Yellow
+		Color(0.8, 0.2, 0.2),   # Red
+		Color(0.2, 0.2, 0.8),   # Blue
+		Color(0.2, 0.8, 0.2)    # Green (loops back)
+	])
 	
 	gradient_texture.gradient = gradient
 	shader_material.set_shader_parameter("rainbow_gradient", gradient_texture)

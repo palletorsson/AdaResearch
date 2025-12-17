@@ -5,6 +5,7 @@ extends Node3D
 # Demonstrates Subtractive (CMY) and Additive (RGB) color mixing using transparent planes.
 
 @export var plane_size: float = 2.0
+@export var plane_thickness: float = 0.15
 @export var plane_opacity: float = 0.5
 @export var separation: float = 0.5 # Distance between planes centers
 
@@ -62,7 +63,7 @@ func _create_plane(parent: Node, name: String, color: Color, pos: Vector3, addit
 	mesh_inst.name = name
 	
 	var mesh = BoxMesh.new() # Use thin box for plane
-	mesh.size = Vector3(plane_size, plane_size, 0.01)
+	mesh.size = Vector3(plane_size, plane_size, plane_thickness)
 	mesh_inst.mesh = mesh
 	
 	var mat = StandardMaterial3D.new()

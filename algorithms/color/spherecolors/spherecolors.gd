@@ -11,6 +11,12 @@ extends Node3D
 @export var plate_separation: float = 0.02
 @export var plate_scaling: float = 1.0
 
+@export_category("Dot Mode")
+@export var use_dots: bool = true
+@export var fill_volume: bool = true
+@export var dot_count: int = 2000
+@export var dot_size: float = 0.03
+
 @export_category("Color Settings")
 @export var color_mode: String = "Rainbow"  # "Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random"
 @export var color_intensity: float = 1.0
@@ -47,6 +53,11 @@ var color_plates: Array = []
 var wireframe_mesh: MeshInstance3D
 var main_geometry: MeshInstance3D
 
+# Dot mode
+var dot_positions: PackedVector3Array = []
+var dot_colors: PackedColorArray = []
+var dots_mesh_instance: MultiMeshInstance3D
+
 # Animation variables
 var time: float = 0.0
 var original_scale: float
@@ -57,23 +68,33 @@ var color_modes_list: Array = ["Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "
 func _ready():
 	original_scale = geometry_scale
 	setup_environment()
-	generate_geometry()
-	create_color_plates()
-	if wireframe_overlay:
-		create_wireframe()
+
+	if use_dots:
+		generate_dots()
+		create_dots_mesh()
+	else:
+		generate_geometry()
+		create_color_plates()
+		if wireframe_overlay:
+			create_wireframe()
+
 	setup_camera_orbit()
 
 func _process(delta):
 	time += delta
-	
+
 	# Handle automatic slideshow
 	if slideshow_enabled:
 		handle_slideshow(delta)
-	
+
 	animate_geometry(delta)
-	update_colors(delta)
-	if enable_morphing:
-		apply_morphing(delta)
+
+	if use_dots:
+		update_dot_colors(delta)
+	else:
+		update_colors(delta)
+		if enable_morphing:
+			apply_morphing(delta)
 
 func setup_environment():
 	# Create atmospheric environment
@@ -120,8 +141,103 @@ func generate_geometry():
 			generate_torus()
 		_:
 			generate_icosphere()
-	
+
 	generate_colors()
+
+func generate_dots():
+	dot_positions.clear()
+	dot_colors.clear()
+
+	for i in range(dot_count):
+		var pos: Vector3
+		if fill_volume:
+			# Fill entire volume using rejection sampling for uniform distribution
+			var r = pow(randf(), 1.0/3.0) * geometry_scale  # Cube root for uniform volume
+			var theta = randf() * TAU
+			var phi = acos(2.0 * randf() - 1.0)
+			pos = Vector3(
+				r * sin(phi) * cos(theta),
+				r * sin(phi) * sin(theta),
+				r * cos(phi)
+			)
+		else:
+			# Surface only
+			var theta = randf() * TAU
+			var phi = acos(2.0 * randf() - 1.0)
+			pos = Vector3(
+				sin(phi) * cos(theta),
+				sin(phi) * sin(theta),
+				cos(phi)
+			) * geometry_scale
+
+		dot_positions.append(pos)
+
+		# Color based on position (RGB cube mapping)
+		var normalized = pos / geometry_scale
+		var color: Color
+		match color_mode:
+			"Rainbow":
+				var angle = atan2(pos.z, pos.x) + PI
+				var hue = angle / TAU
+				color = Color.from_hsv(hue, 0.9, 0.9) * color_intensity
+			"HSV_Sweep":
+				var hue = (normalized.y + 1.0) * 0.5
+				color = Color.from_hsv(hue, 0.9, 0.9) * color_intensity
+			"RGB_Cube":
+				color = Color(
+					(normalized.x + 1.0) * 0.5,
+					(normalized.y + 1.0) * 0.5,
+					(normalized.z + 1.0) * 0.5
+				) * color_intensity
+			"Gradient":
+				var dist = pos.length() / geometry_scale
+				color = Color(0.2, 0.4, 0.8).lerp(Color(0.8, 0.2, 0.4), dist) * color_intensity
+			_:
+				color = Color(randf(), randf(), randf()) * color_intensity
+
+		dot_colors.append(color)
+
+func create_dots_mesh():
+	if dots_mesh_instance and is_instance_valid(dots_mesh_instance):
+		dots_mesh_instance.queue_free()
+		dots_mesh_instance = null
+
+	# Create a MultiMesh for efficient rendering of many small spheres
+	var multi_mesh = MultiMesh.new()
+	multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+	multi_mesh.use_colors = true
+	multi_mesh.instance_count = dot_positions.size()
+
+	# Create small sphere mesh for each dot
+	var sphere = SphereMesh.new()
+	sphere.radius = dot_size
+	sphere.height = dot_size * 2.0
+	sphere.radial_segments = 8
+	sphere.rings = 4
+	multi_mesh.mesh = sphere
+
+	# Set transforms and colors for each dot
+	for i in range(dot_positions.size()):
+		var transform = Transform3D(Basis(), dot_positions[i])
+		multi_mesh.set_instance_transform(i, transform)
+		multi_mesh.set_instance_color(i, dot_colors[i])
+
+	# Create MultiMeshInstance3D
+	var multi_mesh_instance = MultiMeshInstance3D.new()
+	multi_mesh_instance.multimesh = multi_mesh
+
+	# Material with vertex colors
+	var material = StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
+	material.emission_enabled = true
+	material.emission = Color(1, 1, 1)  # Base emission color, tinted by vertex color
+	material.emission_energy_multiplier = emission_strength
+	material.metallic = metallic_factor
+	material.roughness = roughness_factor
+
+	multi_mesh_instance.material_override = material
+	add_child(multi_mesh_instance)
+	dots_mesh_instance = multi_mesh_instance
 
 func generate_icosphere():
 	# Generate icosphere using iterative subdivision
@@ -510,25 +626,35 @@ func create_wireframe():
 	add_child(wireframe_mesh)
 
 func setup_camera_orbit():
-	# Add camera with orbital movement
+	# Only add camera if scene doesn't have one
+	var existing_camera = get_viewport().get_camera_3d()
+	if existing_camera:
+		return
+
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, geometry_scale * 2.5)
 	camera.fov = 60
+	camera.current = true
 	add_child(camera)
 
 func handle_slideshow(delta):
 	slideshow_timer += delta
-	
+
 	if slideshow_timer >= slide_duration:
 		# Simply change to next color mode without transitions
 		current_slide_index = (current_slide_index + 1) % color_modes_list.size()
 		var new_color_mode = color_modes_list[current_slide_index]
-		
+
 		# Change color mode and regenerate colors
 		color_mode = new_color_mode
-		generate_colors()
-		update_existing_plate_colors()
-		
+
+		if use_dots:
+			generate_dots()
+			create_dots_mesh()
+		else:
+			generate_colors()
+			update_existing_plate_colors()
+
 		# Reset timer
 		slideshow_timer = 0.0
 
@@ -555,19 +681,35 @@ func animate_geometry(delta):
 func update_colors(delta):
 	# Animate colors over time
 	var color_time_offset = time * color_wave_speed
-	
+
 	for i in range(color_plates.size()):
 		if i < color_plates.size():
 			var plate = color_plates[i]
 			var material = plate.material_override as StandardMaterial3D
-			
+
 			if material:
 				var base_color = face_colors[i] if i < face_colors.size() else Color.WHITE
 				var wave_factor = sin(color_time_offset + i * 0.1) * 0.3 + 0.7
 				var animated_color = base_color * wave_factor * color_intensity
-				
+
 				material.albedo_color = animated_color
 				material.emission = animated_color * emission_strength
+
+func update_dot_colors(delta):
+	if not dots_mesh_instance:
+		return
+
+	var multi_mesh = dots_mesh_instance.multimesh
+	if not multi_mesh:
+		return
+
+	var color_time_offset = time * color_wave_speed
+
+	for i in range(dot_positions.size()):
+		var base_color = dot_colors[i]
+		var wave_factor = sin(color_time_offset + i * 0.05) * 0.2 + 0.8
+		var animated_color = base_color * wave_factor
+		multi_mesh.set_instance_color(i, animated_color)
 
 func apply_morphing(delta):
 	# Subtle vertex displacement for organic feel

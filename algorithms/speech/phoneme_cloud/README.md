@@ -1,42 +1,44 @@
-# Vowel Synthesis & Phoneme Cloud
+# Vowel Synthesis: "The Field"
 
-This system provides a **parametric, formant-based speech synthesizer** designed for the Quest (running offline in Godot 4). It is not a sample player but a real-time DSP instrument.
+This system implements the **Ada Research Vowel Theory**, treating vowels not as audio samples but as **Resonant Field Configurations**.
 
-## 1. Architecture
+> "The Vowel is a Field Configuration constraining a Harmonic Source."
 
-### The Engine (`vowel_synth.gd`)
-*   **Source**: Band-limited sawtooth oscillator (simulating vocal fold buzz).
-*   **Resonance**: 3 Parallel Biquad Bandpass Filters (`F1`, `F2`, `F3`).
-    *   **F1**: Correlates to Jaw Openness (Low=Open, High=Closed).
-    *   **F2**: Correlates to Tongue Position (Low=Back, High=Front).
-*   **Noise**: High-passed White Noise generator for fricatives (s, sh, ch).
+## 1. Core Architecture (`vowel_synth.gd`)
 
-### Data (`vowels.json`)
-Stores the formant frequencies for each vowel.
-*   `/a/`: F1=800, F2=1150 (Open Back)
-*   `/i/`: F1=270, F2=2290 (Closed Front)
-*   `/u/`: F1=300, F2=870 (Closed Back)
+The synthesizer implements the **Minimal Vowel Model**:
+*   **Source**: Band-Limited Sawtooth Oscillator (Harmonic richness).
+*   **Topology**: **Parallel** Band-Pass Filters.
+*   **Parameters**:
+    *   **F1 (Openness)**: Vertical axis (200Hz - 900Hz).
+    *   **Delta (Identity)**: Horizontal axis (F2 - F1). This single parameter effectively distinguishes vowels (e.g., /i/ vs /u/).
+    *   **Drift (Life)**: Parameters are never static; slight LFO modulation prevents "synthy" death.
 
-## 2. "Saying Ada Research"
+### The Anchor Points
+We navigate this field using 5 primary anchors (hardcoded):
+*   `/i/`: F1=240, Delta=2160 (Closed, Front)
+*   `/e/`: F1=390, Delta=1910
+*   `/a/`: F1=850, Delta=760  (Open, Back)
+*   `/o/`: F1=360, Delta=280
+*   `/u/`: F1=250, Delta=345  (Closed, Back)
 
-The Sequence in `test_vowel.gd` demonstrates dynamic control:
+## 2. The Sound Board (`vowel_sound_board.tscn`)
 
-1.  **"Ada"**
-    *   Sustain `/a/`.
-    *   **Articulation**: Rapidly shift F1/F2 to the alveolar plosive locus (/d/ is implied by the rapid movement toward `F1=200`, `F2=1800`) + momentary silence (closure).
-    *   Burst back to `/a/`.
+A 3D interface for embodied exploration of the vowel space.
+*   **Interface**: Uses `ValueMapper3D` (Cube).
+    *   **X-Axis**: Delta (Vowel Color).
+    *   **Y-Axis**: F1 (Jaw Height).
+    *   **Z-Axis**: Intensity.
+*   **Visualization**:
+    *   **Anchors**: Visible 3D labels (`/i/`, `/a/`) show the phoneme locations in the field.
+    *   **Trace**: A glowing magenta line trails the cursor, allowing you to "read" the geometric shape of words in the air (e.g., "Ada" forms a triangle).
 
-2.  **"Research"**
-    *   **"Re"**: Glide from `/r/` formants to `/i/` formants.
-    *   **"s"**: Cut Voice Intensity, boost **Noise Intensity**. This creates the hiss.
-    *   **"ear"**: Glide formants from `/er/` (Schwa) to `/r/` (coloring).
-    *   **"ch"**: Silence (stop) followed by a short, sharp **Noise Burst**. The noise is high-passed to sound crisp rather than "thumpy".
+## 3. Automation ("Ada Research")
 
-## 3. Embodied Control (`vowel_instrument.gd`)
+The `vowel_sound_board.gd` script includes an **Ambient Loop**:
+1.  **"Ada"**: A sequence of tweened field configurations (Start A -> Plosive Shift -> Return A).
+2.  **"Research"**: A complex glide sequence (R -> i -> S-gap -> er -> ch-cut).
+3.  **"Now and Then"**: The sequence repeats with a 4-second pause, acting as an installation piece.
 
-Maps physical VR hand position to the vocal tract:
-*   **Hand Height (Y)** -> **F1** (Jaw)
-*   **Hand Forward (Z)** -> **F2** (Tongue)
-*   **Trigger** -> **Air Pressure** (Volume)
-
-This allows you to "sculpt" the vowel sound in 3D space.
+## 4. Theory
+See [theory_vowel_field.md](theory_vowel_field.md) for the philosophical basis of the "Point, Line, Trace" mapping.
