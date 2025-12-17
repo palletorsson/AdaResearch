@@ -63,6 +63,13 @@ const UTILITY_TYPES = {
 	"description": "Displays current map name and description",
 	"supports_parameters": true  # display_mode, text_scale
 	},
+	"tts": {
+		"name": "text_to_speech", 
+		"file": "tts_speaker.tscn", 
+		"category": "audio",
+		"description": "Speaks text on load",
+		"supports_parameters": true  # message string
+	},
 	"3t": {
 		"name": "text_display",
 		"file": "word_is.tscn",

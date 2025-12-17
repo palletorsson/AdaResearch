@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://boi2bh6wjvbed"]
+
+[ext_resource type="Script" uid="uid://bi8te04j8pf25" path="res://commons/grid/tts_test.gd" id="1_script"]
+
+[node name="TtsTest" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

@@ -5,7 +5,7 @@ extends Node3D
 # Uses ImmediateMesh for thin, glowing "trace" lines.
 
 @export_category("Forest Settings")
-@export var forest_size: Vector2 = Vector2(20.0, 20.0):
+@export var forest_size: Vector2 = Vector2(5.0, 5.0):
 	set(value):
 		forest_size = value
 		if is_inside_tree(): generate_forest()

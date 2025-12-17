@@ -1,32 +1,33 @@
 {
-    "sequences": {
-        "array_tutorial": {
-            "name": "Array Tutorial Sequence",
-            "description": "Progressive tutorial introducing array concepts through VR navigation",
-            "difficulty": "beginner",
-            "estimated_time": "15-20 minutes",
-            "learning_objectives": [
-                "Basic VR navigation",
-                "Single element interaction",
-                "Linear array traversal",
-                "2D grid understanding",
+	"sequences": {
+		"array_tutorial": {
+			"name": "Array Tutorial Sequence",
+			"description": "Progressive tutorial introducing array concepts through VR navigation",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Basic VR navigation",
+				"Single element interaction",
+				"Linear array traversal",
+				"2D grid understanding",
                 "Pattern recognition"
-            ],
-            "maps": [
-                "Tutorial_Single",
-                "Tutorial_Col",
-                "Tutorial_Row",
-                "Tutorial_2D",
-                "Tutorial_2D_Color",
+			],
+			"maps": [
+				"Tutorial_Single",
+				"Tutorial_Col",
+				"Tutorial_Row",
+				
+				"Tutorial_2D",
+				"Tutorial_2D_Color",
                 "Tutorial_Disco"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_array",
-            "unlock_requirements": [],
-            "completion_rewards": [
-                "array_explorer_badge",
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_array",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"array_explorer_badge",
                 "grid_navigator_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

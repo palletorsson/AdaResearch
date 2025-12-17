@@ -98,8 +98,7 @@
 			"lookup_name": "grab_sphere_point_snap",
 			"description": "grab_sphere_point_snap.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_snap.tscn"
-		},		
-		
+		},
 		"grab_sphere_point_color_with_text": {
 			"name": "grab_sphere_point_color_with_text",
 			"lookup_name": "grab_sphere_point_color_with_text",
@@ -759,14 +758,13 @@
 			"lookup_name": "combo_cube_visual",
 			"description": "A visual-only cube that moves, rotates, and scales simultaneously (Not a pickup).",
 			"scene": "res://commons/primitives/cubes/animation/transformation_rotation_scale_cube.tscn"
-		},	
+		},
 		"pickup_cube_combo": {
 			"name": "Combo Pickup Cube",
 			"lookup_name": "pickup_cube_combo",
 			"description": "A pickup cube that moves, rotates, and scales simultaneously.",
 			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_transformation_rotation_scale.tscn"
 		},
-			
 		"pickup_gate": {
 			"name": "Pickup Gate",
 			"lookup_name": "pickup_gate",
@@ -833,14 +831,12 @@
 			"description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
 			"scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn"
 		},
-		
 		"spectrum_forest": {
 			"lookup_name": "spectrum_forest",
 			"name": "spectrum_forest",
 			"description": "spectrum_forest.",
 			"scene": "res://algorithms/color/spectrumforest/spectrum_forest.tscn"
 		},
-		
 		"pillarcolorcollection": {
 			"lookup_name": "pillarcolorcollection",
 			"name": "pillarcolorcollection",
@@ -2154,6 +2150,18 @@
 			"description": "colorballs",
 			"scene": "res://algorithms/color/colorballs/colorballs.tscn"
 		},
+		"color_mixing": {
+			"name": "color_mixing",
+			"lookup_name": "color_mixing",
+			"description": "color_mixing",
+			"scene": "res://algorithms/color/color_mixing/color_mixing.tscn"
+		},
+		"flashlight_demo": {
+			"name": "flashlight_demo",
+			"lookup_name": "flashlight_demo",
+			"description": "flashlight_demog",
+			"scene": "res://algorithms/light/flashlight_demo/flashlight_demo.tscn"
+		},
 		"mondrian_3d_display": {
 			"name": "Mondrian 3D Display",
 			"lookup_name": "mondrian_3d_display",
@@ -2172,6 +2180,19 @@
 			"description": "A charming metal bucket filled with colorful tulips, bringing natural beauty and algorithmic growth patterns to the laboratory space",
 			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn"
 		},
+		"tts_test": {
+			"name": "TTS Test",
+			"lookup_name": "tts_test",
+			"description": "Test scene for TTS",
+			"scene": "res://commons/grid/tts_test.tscn"
+		},
+		"vowel_sound_board": {
+			"name": "vowel_sound_board",
+			"lookup_name": "vowel_sound_board",
+			"description": "vowel_sound_board",
+			"scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn"
+		},
+		
 		"attractorsphere": {
 			"name": "attractorsphere",
 			"lookup_name": "attractorsphere",

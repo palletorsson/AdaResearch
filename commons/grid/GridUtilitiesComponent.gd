@@ -474,6 +474,11 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			utility_object.set_meta("display_text", text_value)
 			_apply_text_display_text(utility_object, text_value)
 			print("GridUtilitiesComponent: Set 3t text to '%s'" % text_value)
+		"tts":  # Text to Speech
+			var message = _build_text_display_message(parameters)
+			if "message" in utility_object:
+				utility_object.message = message
+				print("GridUtilitiesComponent: Set TTS message to '%s'" % message)
 		"sr":  # Speed reader
 			var sr_key = ""
 			if parameters.size() > 0:

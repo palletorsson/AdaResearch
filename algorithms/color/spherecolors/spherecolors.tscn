@@ -9,10 +9,11 @@ dof_blur_far_transition = 8.0
 
 [node name="GeometryColorPlates" type="Node3D"]
 script = ExtResource("1")
-geometry_resolution = 3
+geometry_resolution = 2
 geometry_scale = 10.0
 plate_thickness = 0.2
 plate_separation = 0.05
+plate_scaling = 1.5
 color_intensity = 2.0
 wireframe_overlay = true
 

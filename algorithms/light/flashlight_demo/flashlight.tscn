@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwj7igy7ibn87"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="2_highlight"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="3_grab_right"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_grab_left"]
+
+[sub_resource type="CylinderShape3D" id="Shape_Handle"]
+height = 0.2
+radius = 0.02
+
+[sub_resource type="StandardMaterial3D" id="Mat_Flashlight"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="Mesh_Handle"]
+material = SubResource("Mat_Flashlight")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.2
+
+[node name="Flashlight" instance=ExtResource("1_pickable")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("Shape_Handle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("Mesh_Handle")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="HandleMesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+mesh = SubResource("Mesh_Handle")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.11309296)
+light_color = Color(1, 0.95, 0.8, 1)
+light_energy = 5.0
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+spot_range = 20.0
+spot_angle = 30.0
+
+[node name="HighlightRing" parent="." index="3" instance=ExtResource("2_highlight")]
+visible = false
+
+[node name="GrabPointHandLeft" parent="." index="4" instance=ExtResource("4_grab_left")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0)
+
+[node name="GrabPointHandRight" parent="." index="5" instance=ExtResource("3_grab_right")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)

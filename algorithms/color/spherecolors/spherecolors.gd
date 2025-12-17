@@ -9,6 +9,7 @@ extends Node3D
 @export var geometry_scale: float = 0.5
 @export var plate_thickness: float = 0.15
 @export var plate_separation: float = 0.02
+@export var plate_scaling: float = 1.0
 
 @export_category("Color Settings")
 @export var color_mode: String = "Rainbow"  # "Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random"
@@ -413,6 +414,12 @@ func create_single_color_plate(triangle_start: int, color: Color) -> MeshInstanc
 	# Calculate face normal and center
 	var normal = (v2 - v1).cross(v3 - v1).normalized()
 	var center = (v1 + v2 + v3) / 3.0
+	
+	# Apply scaling relative to center
+	if plate_scaling != 1.0:
+		v1 = center + (v1 - center) * plate_scaling
+		v2 = center + (v2 - center) * plate_scaling
+		v3 = center + (v3 - center) * plate_scaling
 	
 	# Create plate geometry (extruded triangle)
 	var mesh = create_plate_mesh(v1, v2, v3, normal)
