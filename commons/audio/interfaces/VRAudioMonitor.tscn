@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkvrnpnoen1oh"]
+
+[ext_resource type="Script" uid="uid://co0lielaeip03" path="res://commons/audio/interfaces/VRAudioMonitor.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="2_v4m4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+size = Vector3(0.3, 0.22, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
+albedo_color = Color(0.04, 0.04, 0.05, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_screen"]
+size = Vector2(0.28, 0.18)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v4m4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_v4m4")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = SubResource("ViewportTexture_v4m4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
+size = Vector3(0.32, 0.24, 0.12)
+
+[node name="VRAudioMonitor" type="Node3D"]
+script = ExtResource("1_v4m4")
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_chassis")
+surface_material_override/0 = SubResource("StandardMaterial3D_chassis")
+
+[node name="LabelName" type="Label3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.051)
+pixel_size = 0.0005
+text = "PRINCIPAL MONITOR"
+font_size = 28
+outline_size = 4
+uppercase = true
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.051)
+mesh = SubResource("PlaneMesh_screen")
+surface_material_override/0 = SubResource("StandardMaterial3D_screen")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(512, 320)
+render_target_update_mode = 4
+
+[node name="WaveformDisplay" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_v4m4")
+background_color = Color(0, 0.05, 0.1, 0.7)
+line_width = 4.0
+sample_count = 128
+amplitude_scale = 120.0
+time_scale = 3.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_chassis")

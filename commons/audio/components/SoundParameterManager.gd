@@ -110,20 +110,35 @@ static func initialize():
 	print("SoundParameterManager: Initialized")
 
 static func get_sound_parameters(sound_key: String) -> Dictionary:
-	"""Get parameters for a specific sound type"""
+	"""Get parameters for a specific sound type, always merged with defaults"""
 	initialize()
 	
-	# Check cache first
-	if parameter_cache.has(sound_key):
-		return parameter_cache[sound_key]
+	# Try to load from user or resource directory
+	var loaded_params = _load_sound_parameters(sound_key)
 	
-	# Try to load from user directory first, then resource directory
-	var parameters = _load_sound_parameters(sound_key)
+	# Get basic defaults for this sound type (or fallback)
+	var base_defaults = default_parameters.get(sound_key, default_parameters.get("basic_sine_wave", {})).duplicate(true)
+	var merged_params = base_defaults
 	
-	# Cache the loaded parameters
-	parameter_cache[sound_key] = parameters
-	
-	return parameters
+	# Merge loaded values into the default structures
+	for p_name in loaded_params.keys():
+		var p_val = loaded_params[p_name]
+		if merged_params.has(p_name):
+			if p_val is Dictionary:
+				# It's a rich dict, use it (it likely came from a default file)
+				merged_params[p_name] = p_val
+			else:
+				# It's a flat value, update the "value" field in the default rich dict
+				if merged_params[p_name] is Dictionary:
+					merged_params[p_name]["value"] = p_val
+				else:
+					# This shouldn't happen with standard defaults, but handle it
+					merged_params[p_name] = p_val
+		else:
+			# New parameter not in defaults, add it as-is
+			merged_params[p_name] = p_val
+			
+	return merged_params
 
 static func _load_sound_parameters(sound_key: String) -> Dictionary:
 	"""Load parameters from JSON file with fallback to defaults"""

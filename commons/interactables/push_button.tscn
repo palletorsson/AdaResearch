@@ -63,7 +63,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8y3ah")
 
 [node name="InteractableAreaButton" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 131072
+collision_mask = 393216
 script = ExtResource("2")
 button = NodePath("../Button")
 

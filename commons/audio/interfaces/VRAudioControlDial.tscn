@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx6m7xj7q8xv7"]
+
+[ext_resource type="Script" path="res://commons/audio/interfaces/VRAudioControlDial.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://ccvkvky7vqx7x" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_v4m4"]
+[ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rack"]
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.4
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
+albedo_color = Color(0.3, 0.7, 1.0, 1)
+metallic = 0.5
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.3, 0.7, 1.0, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.03
+radial_segments = 16
+
+[sub_resource type="BoxMesh" id="BoxMesh_indicator"]
+size = Vector3(0.005, 0.015, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_base"]
+size = Vector3(0.06, 0.06, 0.02)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
+radius = 0.03
+
+[node name="VRAudioControlDial" type="Node3D"]
+script = ExtResource("1_v4m4")
+
+[node name="Frame" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("BoxShape3D_base")
+
+[node name="Backing" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.01)
+mesh = SubResource("CylinderMesh_base")
+surface_material_override/0 = SubResource("StandardMaterial3D_rack")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0.01)
+pixel_size = 0.0005
+text = "0.5"
+font_size = 32
+outline_size = 6
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.045, 0.01)
+pixel_size = 0.0005
+text = "PARAM"
+font_size = 24
+font_color = Color(0.7, 0.7, 0.7, 1)
+outline_size = 4
+uppercase = true
+
+[node name="DialOrigin" type="Node3D" parent="."]
+
+[node name="InteractableHinge" type="Node3D" parent="DialOrigin"]
+script = ExtResource("2_v4m4")
+hinge_limit_min = -150.0
+hinge_limit_max = 150.0
+
+[node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.01)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("StandardMaterial3D_handle")
+
+[node name="Indicator" type="MeshInstance3D" parent="DialOrigin/InteractableHinge/KnobMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, -0.015)
+mesh = SubResource("BoxMesh_indicator")
+surface_material_override/0 = SubResource("StandardMaterial3D_handle")
+
+[node name="HandleOrigin" type="Node3D" parent="DialOrigin/InteractableHinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="DialOrigin/InteractableHinge/HandleOrigin"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DialOrigin/InteractableHinge/HandleOrigin/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="GrabPointRedirectLeft" parent="DialOrigin/InteractableHinge/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.05, 0, 0)
+
+[node name="GrabPointRedirectRight" parent="DialOrigin/InteractableHinge/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_size = 1.0
+max_db = -12.0

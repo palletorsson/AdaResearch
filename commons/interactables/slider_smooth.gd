@@ -4,6 +4,8 @@ extends Node3D
 @export var slider_node: NodePath = NodePath("SliderOrigin/InteractableSlider")
 @export var label_node: NodePath = NodePath("Frame/Label3DValue")
 @export_range(0, 6) var decimal_places: int = 2
+
+signal slider_moved(value)
  
 @onready var _slider: Node = get_node_or_null(slider_node)
 @onready var _label: Label3D = get_node_or_null(label_node)
@@ -12,6 +14,13 @@ var _last_display_text: String = ""
 func _ready() -> void:
 	_connect_slider_signal()
 	_update_label(_current_slider_value())
+
+func _process(_delta: float) -> void:
+	# Keep the handle on the board (lock Y and Z local to its origin)
+	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
+	if handle and handle.is_picked_up():
+		handle.transform.origin.y = 0
+		handle.transform.origin.z = 0
 
 func _connect_slider_signal() -> void:
 	if not _slider:
@@ -23,6 +32,23 @@ func _connect_slider_signal() -> void:
 func _on_slider_moved(position) -> void:
 	print("SliderSmooth: _on_slider_moved called with position: ", position)
 	_update_label(position)
+	slider_moved.emit(position)
+
+func get_normalized_value() -> float:
+	if not _slider: return 0.5
+	var val = _slider.get("slider_position")
+	var s_min = _slider.get("slider_limit_min")
+	var s_max = _slider.get("slider_limit_max")
+	if s_max == s_min: return 0.0
+	return remap(val, s_min, s_max, 0.0, 1.0)
+
+func set_normalized_value(val: float):
+	if not _slider: return
+	var s_min = _slider.get("slider_limit_min")
+	var s_max = _slider.get("slider_limit_max")
+	var pos = remap(val, 0.0, 1.0, s_min, s_max)
+	_slider.set("slider_position", pos)
+	_update_label(pos)
 
 func _current_slider_value():
 	if not _slider:
@@ -41,6 +67,10 @@ func _update_label(value) -> void:
 	_last_display_text = text
 	_label.text = text
 	print("SliderSmooth: Label updated to: ", text)
+
+func set_param_name(text: String):
+	var name_label = get_node_or_null("Frame/LabelName")
+	if name_label: name_label.text = text
 
 func _ensure_label() -> bool:
 	if _label:

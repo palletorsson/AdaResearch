@@ -892,6 +892,18 @@
 			"description": "A shimmering grid that pulses with disco energy",
 			"scene": "res://commons/context/discofloor/discofloor.tscn"
 		},
+		"rorschach_scan": {
+			"name": "Rorschach Brain Scan",
+			"lookup_name": "rorschach_scan",
+			"description": "Animated mirrored inkblot pattern like a brain CT scan",
+			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_scan.tscn"
+		},
+		"rorschach_monitor": {
+			"name": "Rorschach Monitor",
+			"lookup_name": "rorschach_monitor",
+			"description": "Medical monitor displaying animated Rorschach brain scan layers",
+			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn"
+		},
 		"radiolaria": {
 			"name": "radiolaria",
 			"lookup_name": "radiolaria",
@@ -1084,6 +1096,19 @@
 			"description": "subtractive_synthesis",
 			"scene": "res://algorithms/proceduralaudio/subtractive_synthesis/subtractive_synthesis.tscn"
 		},
+		"UniversalVRAudioController": {
+			"name": "UniversalVRAudioController",
+			"lookup_name": "UniversalVRAudioController",
+			"description": "UniversalVRAudioController",
+			"scene": "res://commons/audio/UniversalVRAudioController.tscn"
+		},
+		"VRAudioMonitor": {
+			"name": "VRAudioMonitor",
+			"lookup_name": "VRAudioMonitor",
+			"description": "VRAudioMonitor",
+			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn"
+		},		
+
 		"tiles_explained": {
 			"name": "tiles_explained",
 			"lookup_name": "tiles_explained",
