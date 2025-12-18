@@ -594,32 +594,32 @@ func update_all_showcases(delta):
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
 		var ca_type = showcase.get_meta("type")
-		
-	match ca_type:
-		"recrystallization":
-			update_recrystallization(showcase, delta)
-		"dendrite_refactored":
-			pass # Handled by the class itself
-		"percolation":
-			update_percolation(showcase, delta)
-		"crack":
-			update_crack_propagation(showcase, delta)
-		"avalanche":
-			update_avalanche(showcase, delta)
-		"traffic":
-			update_traffic_flow(showcase, delta)
-		"flood":
-			update_flood_propagation(showcase, delta)
-		"ecosystem":
-			update_ecosystem(showcase, delta)
-		"disease_refactored":
-			pass # Handled by the class itself
-		"blood_flow":
-			update_blood_flow(showcase, delta)
-		"droplet":
-			update_droplet_behavior(showcase, delta)
-		"self_org":
-			update_self_organization(showcase, delta)
+
+		match ca_type:
+			"recrystallization":
+				update_recrystallization(showcase, delta)
+			"dendrite_refactored":
+				pass # Handled by the class itself
+			"percolation":
+				update_percolation(showcase, delta)
+			"crack":
+				update_crack_propagation(showcase, delta)
+			"avalanche":
+				update_avalanche(showcase, delta)
+			"traffic":
+				update_traffic_flow(showcase, delta)
+			"flood":
+				update_flood_propagation(showcase, delta)
+			"ecosystem":
+				update_ecosystem(showcase, delta)
+			"disease_refactored":
+				pass # Handled by the class itself
+			"blood_flow":
+				update_blood_flow(showcase, delta)
+			"droplet":
+				update_droplet_behavior(showcase, delta)
+			"self_org":
+				update_self_organization(showcase, delta)
 
 func update_recrystallization(showcase: Node3D, delta):
 	"""Growing crystals - Orange spheres expanding from centers"""

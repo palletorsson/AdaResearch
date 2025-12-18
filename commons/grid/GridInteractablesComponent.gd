@@ -18,6 +18,7 @@ var map_data_component: GridDataComponent  # Add reference to data component
 # Settings
 var cube_size: float = 1.0
 var gutter: float = 0.0
+var current_palette: String = ""
 
 # Interactable objects tracking
 var interactable_objects: Dictionary = {}
@@ -190,6 +191,7 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, u
 	# Apply settings
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
+	current_palette = settings.get("palette", "")
 	
 	# Load artifact registries based on map configuration
 	_load_artifact_registries()
@@ -425,25 +427,28 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Connect signals if artifact has them
 	_connect_artifact_signals(artifact_object, lookup_name)
 	
-	# Apply configuration data if provided (using # syntax)
 	if not config_data.is_empty():
 		_apply_artifact_config(artifact_object, config_data, lookup_name)
 	
+	# Apply map-wide palette if available
+	if current_palette != "":
+		_try_set_property(artifact_object, "default_palette", current_palette)
+		print("    Applied map palette: '%s'" % current_palette)
+
 	parent_node.add_child(artifact_object)
 	
 	# Set owner for editor
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 		artifact_object.owner = parent_node.get_tree().edited_scene_root
 	
-	interactable_objects[Vector3i(x, y, z)] = artifact_object
-	
+# Handle successful placement
 	var display_name = artifact_info.get("name", lookup_name)
 	print("  ✅ Placed artifact '%s' (%s) at (%d,%d,%d)" % [display_name, lookup_name, x, y, z])
 	
 	return true
 
-# Parse compact token syntax from map JSON cells.
-#
+
+
 # COLON (:) SYNTAX - For rotation and position/scale:
 #   "object"                                   → No overrides
 #   "object:45"                                → Y-axis rotation 45°
@@ -682,15 +687,17 @@ func _parse_config_token(token: String) -> Dictionary:
 			# Check if this is a shorthand with transform params (e.g., "point_zero:15:-0.3:1.1")
 			var parts = config_part.split(":", false)
 
-			# If we have 2-4 numeric params after first part, treat as tutorial_id with transforms
-			if parts.size() >= 2:
+			# If we have 2+ numeric params after first part, treat as tutorial_id with transforms
+			# IMPORTANT: Require at least 2 numeric params to distinguish from simple "key:value" config
+			# e.g., "point_zero:15:-0.3" is shorthand, but "min_x:3" is key:value
+			if parts.size() >= 3:  # Need at least id + 2 numeric params for shorthand
 				var has_numeric_params = true
 				for j in range(1, min(parts.size(), 4)):  # Check up to 3 transform params
 					if not parts[j].is_valid_float():
 						has_numeric_params = false
 						break
 
-				if has_numeric_params and parts.size() >= 2:
+				if has_numeric_params:
 					# This is shorthand syntax: tutorial_id:rotation:height:scale
 					var tutorial_id = parts[0].strip_edges()
 					result.config_data[tutorial_id] = true

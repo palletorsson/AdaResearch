@@ -18,7 +18,7 @@ extends Node3D
 @export var dot_size: float = 0.03
 
 @export_category("Color Settings")
-@export var color_mode: String = "Rainbow"  # "Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random"
+@export var color_mode: String = "Rainbow"  # "Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random", "Pixel_Grid", "Additive_Mixing"
 @export var color_intensity: float = 1.0
 @export var color_variation_speed: float = 0.5
 @export var use_vertex_colors: bool = true
@@ -58,12 +58,15 @@ var dot_positions: PackedVector3Array = []
 var dot_colors: PackedColorArray = []
 var dots_mesh_instance: MultiMeshInstance3D
 
+# Labels
+var explanation_label: Label3D
+
 # Animation variables
 var time: float = 0.0
 var original_scale: float
 var slideshow_timer: float = 0.0
 var current_slide_index: int = 0
-var color_modes_list: Array = ["Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random"]
+var color_modes_list: Array = ["Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random", "Pixel_Grid", "Additive_Mixing"]
 
 func _ready():
 	original_scale = geometry_scale
@@ -145,8 +148,25 @@ func generate_geometry():
 	generate_colors()
 
 func generate_dots():
+	# Clear previous data
 	dot_positions.clear()
 	dot_colors.clear()
+
+	# Custom generation for specific modes
+	if color_mode == "Pixel_Grid":
+		_generate_pixel_grid_dots()
+		_update_labels("Pixel Grid: R+G=Yellow | Screen Deception")
+		return
+	elif color_mode == "Additive_Mixing":
+		_generate_additive_mixing_dots()
+		_update_labels("Additive Mixing: Light upon Light")
+		return
+	elif color_mode == "RGB_Cube":
+		_generate_rgb_cube_dots()
+		_update_labels("RGB Cube: The Color Space")
+		return
+
+	_update_labels("%s Mode" % color_mode)
 
 	for i in range(dot_count):
 		var pos: Vector3
@@ -183,12 +203,6 @@ func generate_dots():
 			"HSV_Sweep":
 				var hue = (normalized.y + 1.0) * 0.5
 				color = Color.from_hsv(hue, 0.9, 0.9) * color_intensity
-			"RGB_Cube":
-				color = Color(
-					(normalized.x + 1.0) * 0.5,
-					(normalized.y + 1.0) * 0.5,
-					(normalized.z + 1.0) * 0.5
-				) * color_intensity
 			"Gradient":
 				var dist = pos.length() / geometry_scale
 				color = Color(0.2, 0.4, 0.8).lerp(Color(0.8, 0.2, 0.4), dist) * color_intensity
@@ -723,3 +737,124 @@ func apply_morphing(delta):
 func _input(event):
 	# Removed all input handling for clean automatic slideshow
 	pass
+
+# --- New Visualization Logic ---
+
+func _generate_pixel_grid_dots():
+	# Visualizes the "screen deception" - overlapping R, G, B dots forming colors
+	var dim = int(pow(dot_count / 3.0, 1.0/3.0))  # Dimensions for a cube of subpixels
+	if dim < 2: dim = 2
+	
+	var spacing = geometry_scale * 2.0 / dim
+	var offset = -geometry_scale
+	
+	for x in range(dim):
+		for y in range(dim):
+			for z in range(dim):
+				# Normalize positions 0-1
+				var nx = float(x) / (dim - 1)
+				var ny = float(y) / (dim - 1)
+				var nz = float(z) / (dim - 1)
+				
+				# Base position for this "pixel"
+				var base_pos = Vector3(
+					offset + nx * geometry_scale * 2.0,
+					offset + ny * geometry_scale * 2.0,
+					offset + nz * geometry_scale * 2.0
+				)
+				
+				# Generate 3 subpixel dots slightly offset
+				var sub_offset = spacing * 0.25
+				
+				# Red subpixel
+				dot_positions.append(base_pos + Vector3(-sub_offset, 0, 0))
+				dot_colors.append(Color(nx, 0, 0) * color_intensity)
+				
+				# Green subpixel
+				dot_positions.append(base_pos + Vector3(sub_offset, 0, 0))
+				dot_colors.append(Color(0, ny, 0) * color_intensity)
+				
+				# Blue subpixel (vertical offset)
+				dot_positions.append(base_pos + Vector3(0, sub_offset * 1.5, 0))
+				dot_colors.append(Color(0, 0, nz) * color_intensity)
+
+func _generate_additive_mixing_dots():
+	# Three overlapping spheres: Red, Green, Blue
+	var particles_per_sphere = dot_count / 3
+	var sphere_radius = geometry_scale * 0.6
+	var center_offset = geometry_scale * 0.3
+	
+	# Red Sphere (top)
+	_generate_sphere_cluster(
+		Vector3(0, center_offset, 0), 
+		sphere_radius, 
+		particles_per_sphere, 
+		Color(1, 0, 0) * color_intensity
+	)
+	
+	# Green Sphere (bottom left)
+	_generate_sphere_cluster(
+		Vector3(-center_offset * 0.866, -center_offset * 0.5, 0), 
+		sphere_radius, 
+		particles_per_sphere, 
+		Color(0, 1, 0) * color_intensity
+	)
+	
+	# Blue Sphere (bottom right)
+	_generate_sphere_cluster(
+		Vector3(center_offset * 0.866, -center_offset * 0.5, 0), 
+		sphere_radius, 
+		particles_per_sphere, 
+		Color(0, 0, 1) * color_intensity
+	)
+
+func _generate_sphere_cluster(center: Vector3, radius: float, count: int, color: Color):
+	for i in range(count):
+		# Random point inside sphere
+		var r = pow(randf(), 1.0/3.0) * radius
+		var theta = randf() * TAU
+		var phi = acos(2.0 * randf() - 1.0)
+		
+		var pos = Vector3(
+			r * sin(phi) * cos(theta),
+			r * sin(phi) * sin(theta),
+			r * cos(phi)
+		)
+		
+		dot_positions.append(center + pos)
+		dot_colors.append(color)
+
+func _generate_rgb_cube_dots():
+	# Structured grid representing color space
+	var dim = int(pow(dot_count, 1.0/3.0))
+	var spacing = geometry_scale * 2.0 / dim
+	var offset = -geometry_scale
+	
+	for x in range(dim):
+		for y in range(dim):
+			for z in range(dim):
+				var nx = float(x) / (dim - 1)
+				var ny = float(y) / (dim - 1)
+				var nz = float(z) / (dim - 1)
+				
+				var pos = Vector3(
+					offset + nx * geometry_scale * 2.0,
+					offset + ny * geometry_scale * 2.0,
+					offset + nz * geometry_scale * 2.0
+				)
+				
+				dot_positions.append(pos)
+				dot_colors.append(Color(nx, ny, nz) * color_intensity)
+
+func _update_labels(text: String):
+	if not explanation_label:
+		explanation_label = Label3D.new()
+		explanation_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		explanation_label.no_depth_test = true
+		explanation_label.fixed_size = true
+		explanation_label.font_size = 32
+		explanation_label.outline_render_priority = 10
+		explanation_label.position = Vector3(0, geometry_scale * 1.5, 0)
+		add_child(explanation_label)
+	
+	explanation_label.text = text

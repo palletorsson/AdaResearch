@@ -591,6 +591,13 @@ func _restore_normal_lighting():
 			input_mesh.material_override.albedo_color = light_color
 			input_mesh.material_override.emission = light_color
 
+# Public API for external control (DiscoGridAlgorithm)
+func light_ceiling_at(x: int, z: int, color: Color):
+	_light_ceiling_at(x, z, color)
+
+func clear_all_lights():
+	_clear_all_lights()
+
 func _light_ceiling_at(x: int, z: int, color: Color):
 	if light_map.has(Vector2i(x, z)):
 		var panel = light_map[Vector2i(x, z)]

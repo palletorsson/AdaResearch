@@ -28,6 +28,8 @@ height = 0.1
 
 [node name="CubeSpawner" type="Node3D"]
 script = ExtResource("1_spawner")
+spawn_interval = 6.0
+max_projectiles = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_spawner")

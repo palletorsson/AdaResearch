@@ -56,11 +56,19 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	parent_node.add_child(multimesh_instance)
 
 	# Extract mesh from base cube
+	print("GridStructureComponent: Inspecting base_cube: %s" % base_cube)
+	_print_tree(base_cube)
 	var mesh_instance = _find_mesh_instance(base_cube)
+	if mesh_instance:
+		print("GridStructureComponent: Found mesh instance: %s" % mesh_instance.name)
+	else:
+		print("GridStructureComponent: Failed to find mesh instance in %s" % base_cube.name)
+
 	if mesh_instance and mesh_instance.mesh:
 		multimesh = MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
 		multimesh.use_colors = true  # Enable per-instance colors BEFORE setting instance_count
+		multimesh.use_custom_data = true  # Enable custom data for algorithms like DiscoFloor
 		multimesh.mesh = mesh_instance.mesh
 		multimesh_instance.multimesh = multimesh
 
@@ -86,6 +94,49 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 			var basic_mat = StandardMaterial3D.new()
 			basic_mat.albedo_color = Color.WHITE
 			multimesh_instance.material_override = basic_mat
+
+		# Apply color overrides from map settings
+		if settings.has("color_overrides"):
+			var overrides = settings["color_overrides"]
+			var override_mat = multimesh_instance.material_override
+			print("GridStructureComponent: Applying color overrides: %s" % overrides)
+
+			if override_mat is ShaderMaterial:
+				# Map JSON keys to Shader Uniforms
+				var key_map = {
+					"model_color": "modelColor",
+					"wireframe_color": "wireframeColor",
+					"emission_color": "emissionColor",
+					"emission_strength": "emission_strength",
+					"model_opacity": "modelOpacity",
+					"wireframe_opacity": "wireframeOpacity",
+					"width": "width",
+					"blur": "blur"
+				}
+				
+				for key in overrides.keys():
+					if key_map.has(key):
+						var uniform_name = key_map[key]
+						var value = overrides[key]
+						
+						# Convert string colors to Color types
+						if key.ends_with("_color") and value is String:
+							value = _parse_color_string(value)
+						
+						override_mat.set_shader_parameter(uniform_name, value)
+						print("  -> Set shader param '%s' = %s" % [uniform_name, str(value)])
+					else:
+						print("  -> Warning: Unknown override key '%s'" % key)
+			
+			# Fallback for StandardMaterial3D (unlikely but safe)
+			elif override_mat is StandardMaterial3D:
+				if overrides.has("model_color"):
+					override_mat.albedo_color = _parse_color_string(str(overrides["model_color"]))
+					override_mat.emission_enabled = true
+					if overrides.has("emission_color"):
+						override_mat.emission = _parse_color_string(str(overrides["emission_color"]))
+					if overrides.has("emission_strength"):
+						override_mat.emission_energy_multiplier = float(overrides["emission_strength"])
 	else:
 		push_error("GridStructureComponent: Could not find MeshInstance3D in base_cube")
 
@@ -100,6 +151,14 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 		if result:
 			return result
 	return null
+
+# Debug helper to print tree
+func _print_tree(node: Node, depth: int = 0):
+	if not node: return
+	var prefix = "  ".repeat(depth)
+	print("%s- %s (%s)" % [prefix, node.name, node.get_class()])
+	for child in node.get_children():
+		_print_tree(child, depth + 1)
 
 # Generate structure from data
 func generate_structure(structure_data, dimensions: Vector3i):
@@ -270,6 +329,19 @@ func _is_valid_xyz(x: int, y: int, z: int) -> bool:
 
 func _is_valid_xz(x: int, z: int) -> bool:
 	return x >= 0 and x < grid_x and z >= 0 and z < grid_z
+
+# Helper to parse "r,g,b,a" string to Color
+func _parse_color_string(color_str: String) -> Color:
+	var parts = color_str.split(",")
+	if parts.size() >= 3:
+		var r = parts[0].strip_edges().to_float()
+		var g = parts[1].strip_edges().to_float()
+		var b = parts[2].strip_edges().to_float()
+		var a = 1.0
+		if parts.size() >= 4:
+			a = parts[3].strip_edges().to_float()
+		return Color(r, g, b, a)
+	return Color.WHITE
 
 # Get grid dimensions
 func get_grid_dimensions() -> Vector3i:

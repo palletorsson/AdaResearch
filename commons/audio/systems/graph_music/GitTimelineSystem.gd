@@ -7,6 +7,8 @@ class_name GitTimelineSystem
 ## - "Feature" branches: Experimental forks.
 ## - "Release" branch (v2): An extended timeline that opens up "after a while" (Purple).
 
+var active_cursors: Array = []
+
 func _ready():
 	if synth_path: synth = get_node(synth_path)
 	_build_git_graph()

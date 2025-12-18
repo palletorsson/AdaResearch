@@ -23,11 +23,19 @@ func create_grid_3d():
 				# Add Index Label
 				var label = Label3D.new()
 				label.text = "[%d, %d, %d]" % [x, y, z]
-				label.font_size = 48
-				label.pixel_size = 0.005
+				
+				# Font Settings (White Roboto)
+				var font = load("res://commons/font/static/Roboto-Regular.ttf")
+				if font:
+					label.font = font
+				
+				label.font_size = 32
+				label.pixel_size = 0.003
+				label.outline_size = 0
+				
 				label.position = Vector3(0, 0.6, 0)
 				label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-				label.modulate = Color.BLACK
+				label.modulate = Color.WHITE
 				cube_instance.add_child(label)
 				
 				add_child(cube_instance)

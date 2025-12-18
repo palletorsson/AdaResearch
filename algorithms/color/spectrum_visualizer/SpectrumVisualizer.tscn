@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm5y3x8j2n1k"]
+
+[ext_resource type="Script" path="res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.gd" id="1_m4n2b"]
+
+[node name="SpectrumVisualizer" type="Node3D"]
+script = ExtResource("1_m4n2b")

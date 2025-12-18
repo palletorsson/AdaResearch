@@ -353,7 +353,7 @@ func _create_explosion_effect():
 
 func _on_lifetime_expired():
 	"""Handle projectile lifetime expiration"""
-	print("ProjectileCube: Lifetime expired")
+	#print("ProjectileCube: Lifetime expired")
 	_destroy_projectile()
 
 func _destroy_projectile():

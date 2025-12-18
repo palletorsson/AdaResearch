@@ -44,8 +44,63 @@ signal current_map_changed(map_name: String)
 signal nail_color_changed(new_color: Color)
 signal hand_color_changed(new_color: Color)
 signal settings_changed(setting_name: String, value: Variant) # New signal
+
 var console_messages: Array[Dictionary] = []
 var max_console_messages: int = 100
+
+# Color Manager (migrated from GridColorizer)
+var gradient_palettes: Dictionary = {
+	"rainbow_gradient": [
+		Color(1.0, 0.0, 0.8),   # Magenta
+		Color(1.0, 0.2, 0.4),   # Hot pink
+		Color(1.0, 0.5, 0.0),   # Orange
+		Color(1.0, 0.9, 0.0),   # Yellow
+		Color(0.5, 1.0, 0.0),   # Lime
+		Color(0.2, 0.9, 0.4),   # Green
+		Color(0.0, 0.8, 0.8),   # Cyan
+		Color(0.2, 0.6, 1.0),   # Blue
+		Color(0.6, 0.2, 1.0)    # Purple
+	],
+	"sunset_gradient": [
+		Color(0.1, 0.1, 0.3),   # Deep purple (night)
+		Color(0.4, 0.1, 0.5),   # Purple
+		Color(0.8, 0.2, 0.4),   # Magenta
+		Color(1.0, 0.4, 0.2),   # Orange-red
+		Color(1.0, 0.6, 0.1),   # Orange
+		Color(1.0, 0.8, 0.3),   # Yellow-orange
+		Color(1.0, 0.9, 0.7),   # Warm yellow
+		Color(0.9, 0.9, 0.8)    # Pale yellow
+	],
+	"ocean_gradient": [
+		Color(0.0, 0.1, 0.2),   # Deep ocean
+		Color(0.0, 0.2, 0.4),   # Deep blue
+		Color(0.0, 0.4, 0.6),   # Ocean blue
+		Color(0.1, 0.6, 0.8),   # Bright blue
+		Color(0.3, 0.8, 0.9),   # Light blue
+		Color(0.5, 0.9, 0.9),   # Cyan
+		Color(0.7, 0.95, 0.95), # Light cyan
+		Color(0.9, 0.98, 0.98)  # Almost white
+	],
+	"pink_gradient": [
+		Color(0.4, 0.1, 0.2),   # Deep magenta
+		Color(0.6, 0.2, 0.4),   # Dark pink
+		Color(0.8, 0.3, 0.5),   # Medium pink
+		Color(0.9, 0.4, 0.6),   # Rose pink
+		Color(1.0, 0.5, 0.7),   # Hot pink
+		Color(1.0, 0.7, 0.8),   # Light pink
+		Color(1.0, 0.85, 0.9),  # Very light pink
+		Color(1.0, 0.95, 0.97)  # Almost white pink
+	]
+}
+
+func get_gradient_palette(palette_name: String) -> Array:
+	if gradient_palettes.has(palette_name):
+		return gradient_palettes[palette_name]
+	return [Color.WHITE] # Fallback
+
+func get_all_gradient_names() -> Array:
+	return gradient_palettes.keys()
+
 
 signal console_message_added(message_data: Dictionary)
 signal console_cleared()

@@ -15,6 +15,7 @@ uniform bool show_interior = true;                                       // Show
 // Barycentric coordinates
 varying vec3 baryCoord;
 varying vec4 instanceColor;  // Pass instance color from MultiMesh
+varying vec4 customData;     // Pass custom data (e.g., emission) from MultiMesh
 
 void vertex() {
     // Calculate barycentric coordinates more reliably
@@ -29,6 +30,7 @@ void vertex() {
 
     // Pass instance color (from MultiMesh) to fragment shader
     instanceColor = COLOR;
+    customData = INSTANCE_CUSTOM;
 }
 
 void fragment() {
@@ -78,5 +80,12 @@ void fragment() {
     // No ALPHA output - fully opaque
 
     // Add emission to wireframe edges
-    EMISSION = emissionColor.rgb * (1.0 - closestEdge) * emission_strength;
+    vec3 finalEmission = emissionColor.rgb;
+    
+    // If customData is provided (not zeroed), use it as the emission color
+    if (length(customData.rgb) > 0.001) {
+        finalEmission = customData.rgb;
+    }
+    
+    EMISSION = finalEmission * (1.0 - closestEdge) * emission_strength;
 }

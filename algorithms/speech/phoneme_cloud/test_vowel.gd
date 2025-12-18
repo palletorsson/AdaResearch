@@ -4,16 +4,60 @@ extends Node3D
 @onready var label = $Label3D
 
 func _ready():
-	print("--- Vowel Synth: Saying 'Ada' ---")
+	print("--- Vowel Synth: Ada Research Lab One ---")
 	await get_tree().create_timer(1.0).timeout
 	
-	say_alphabet()
-	
-	await get_tree().create_timer(1.0).timeout
 	say_ada()
-	
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(0.4).timeout
 	say_research()
+	await get_tree().create_timer(0.4).timeout
+	say_lab_one()
+
+func say_lab_one():
+	label.text = "Lab One"
+	print("Saying 'Lab One'...")
+	
+	# "Lab"
+	# /l/ -> F1=400, Delta=800
+	synth.f1 = 400.0
+	synth.delta = 800.0
+	synth.is_speaking = true
+	synth.target_intensity = 1.0
+	
+	# Glide to /ae/ (Lab)
+	# /ae/ -> F1=750, Delta=850
+	move_field(750.0, 850.0, 0.3)
+	await get_tree().create_timer(0.4).timeout
+	
+	# /b/ (Plosive)
+	synth.target_intensity = 0.0
+	await get_tree().create_timer(0.04).timeout
+	synth.trigger_plosive()
+	
+	await get_tree().create_timer(0.2).timeout # Gap
+	
+	# "One"
+	# /w/ -> F1=300, Delta=300
+	synth.f1 = 300.0
+	synth.delta = 300.0
+	synth.is_speaking = true
+	synth.target_intensity = 1.0
+	
+	# Glide to /uh/ (One)
+	# /uh/ -> F1=600, Delta=600
+	move_field(600.0, 600.0, 0.4)
+	await get_tree().create_timer(0.5).timeout
+	
+	# /n/ (Nasal fade)
+	# Drift F1 down, intensity down
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(synth, "f1", 400.0, 0.4)
+	tween.tween_property(synth, "target_intensity", 0.0, 0.4)
+	
+	await get_tree().create_timer(0.5).timeout
+	synth.stop()
+	print("Finished 'Lab One'.")
 
 func say_alphabet():
 	print("Saying Alphabet (Vowel Cycle)...")
@@ -71,8 +115,9 @@ func say_ada():
 func say_research():
 	label.text = "Research"
 	print("Saying 'Research'...")
+	
 	# "Re" (/r/ -> /i/)
-	# R approx: F1=450, F2=1200 -> Delta=750
+	# R approx: F1=450, Delta=750
 	synth.f1 = 450.0
 	synth.delta = 750.0
 	synth.is_speaking = true
@@ -80,35 +125,36 @@ func say_research():
 	
 	# Glide to /i/ ("Reeeee")
 	# i: 240, 2160
-	move_field(240.0, 2160.0, 0.15)
-	
+	move_field(240.0, 2160.0, 0.2)
 	await get_tree().create_timer(0.3).timeout
 	
-	# "S" (Silence)
-	synth.is_speaking = false
-	synth.target_intensity = 0.0
+	# "S" (Fricative Event)
+	# Crossfade to Noise (High Band)
+	synth.trigger_fricative("s")
 	
 	await get_tree().create_timer(0.15).timeout # S duration
 	
-	# "Search" (/s/ -> /er/ -> /ch/)
-	# Voice On
-	# er approx (schwa-like): F1=500, F2=1500 -> Delta=1000
+	# Release S -> Glide to "er"
+	# er approx: F1=500, Delta=1000
+	synth.release_fricative()
+	# Pre-set formant targets for return?
+	# Synth smooths to them, so we just set them.
 	synth.f1 = 500.0
 	synth.delta = 1000.0
-	synth.is_speaking = true
-	synth.target_intensity = 1.0
 	
 	await get_tree().create_timer(0.2).timeout
 	
 	# Glide to /r/ ("Seerrr")
-	# R: 450, 750
 	move_field(450.0, 750.0, 0.25)
 	
 	await get_tree().create_timer(0.25).timeout
 	
-	# "Ch" (Stop + Noise Burst)
-	synth.target_intensity = 0.0 
+	# "Ch" (Fricative Burst)
+	synth.trigger_fricative("ch")
 	
-	await get_tree().create_timer(0.12).timeout # Gap
+	await get_tree().create_timer(0.15).timeout # Ch duration
+	
 	synth.stop()
+	# Reset mix for next time (handled by stop? need to ensure release)
+	synth.release_fricative()
 	print("Finished sequence.")

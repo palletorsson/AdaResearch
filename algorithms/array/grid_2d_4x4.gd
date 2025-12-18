@@ -25,11 +25,12 @@ func create_grid_2d():
 			# Add Index Label
 			var label = Label3D.new()
 			label.text = "[%d, %d]" % [x, z]
-			label.font_size = 48
-			label.pixel_size = 0.005
+			label.font_size = 24
+			label.pixel_size = 0.003
+			label.outline_size = 0
 			label.position = Vector3(0, 1.0, 0)
 			label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			label.modulate = Color.BLACK
+			label.modulate = Color(1.0, 0.7, 0.8)  # Light pink
 			cube_instance.add_child(label)
 			
 			add_child(cube_instance)

@@ -82,28 +82,61 @@ func _reset_player():
 	if spawn_node:
 		target_pos = spawn_node.global_position
 	
-	# Reset velocity FIRST
-	_reset_velocity(player_node)
+	# Try to find Fly Mode controller
+	var flight_controller = _find_flight_controller(player_node)
+	if flight_controller:
+		print("PlayerBoundsCheck: Enabling Fly Mode to kill momentum")
+		flight_controller.set_flying(true)
+
+	# 1. Reset velocity immediately
+	if reset_velocity:
+		_reset_velocity(player_node)
 	
-	# Wait for physics frame to process velocity reset
+	# 2. Wait for physics frame
 	await get_tree().physics_frame
 	
-	# THEN teleport the root
+	# 3. Teleport
 	var root = _find_player_root(player_node)
 	if root:
 		root.global_position = target_pos
+		# Force update transform immediately
+		if root is Node3D:
+			root.global_transform.origin = target_pos
+			root.global_position = target_pos # Redundant but safe
 		print("PlayerBoundsCheck: Teleported player root '%s' to %s" % [root.name, target_pos])
 	else:
 		player_node.global_position = target_pos
-		print("PlayerBoundsCheck: Teleported player node to %s" % target_pos)
 	
-	# Reset velocity AGAIN after teleport
-	_reset_velocity(player_node)
+	# 4. Aggressively reset velocity for next few frames to kill momentum
+	if reset_velocity:
+		for i in range(5): # Reset for 5 frames to be absolutely sure
+			_reset_velocity(player_node)
+			await get_tree().physics_frame
 	
-	# Wait for physics frame to ensure position sticks
-	await get_tree().physics_frame
+	# Disable Fly Mode
+	if flight_controller:
+		print("PlayerBoundsCheck: Disabling Fly Mode")
+		flight_controller.set_flying(false)
 	
 	is_resetting = false
+
+func _find_flight_controller(start_node: Node) -> Node:
+	var root = _find_player_root(start_node)
+	if not root: return null
+	return _find_flight_recursive(root)
+
+func _find_flight_recursive(node: Node) -> Node:
+	# Check for XRToolsMovementFlight using string check to avoid circular deps or class loading issues
+	if node.has_method("is_xr_class") and node.is_xr_class("XRToolsMovementFlight"):
+		return node
+	# Also check script name as fallback
+	if node.get_script() and node.get_script().resource_path.contains("movement_flight.gd"):
+		return node
+		
+	for child in node.get_children():
+		var found = _find_flight_recursive(child)
+		if found: return found
+	return null
 
 func _reset_velocity(body: Node3D):
 	if "velocity" in body:

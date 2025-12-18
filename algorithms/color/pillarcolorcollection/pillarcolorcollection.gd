@@ -8,6 +8,7 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var rows: int = 8
 @export var spacing: Vector3 = Vector3(2.0, 0.0, 2.0)
 @export var origin_offset: Vector3 = Vector3.ZERO
+@export var default_palette: String = "rainbow_gradient"
 
 var palette_keys: Array = []
 var current_palette_index: int = 0
@@ -18,6 +19,12 @@ func _ready() -> void:
 	if palette_keys.is_empty():
 		push_warning("PillarColorCollection: No color palettes available")
 		return
+		
+	# Find default palette index
+	var idx = palette_keys.find(default_palette)
+	if idx != -1:
+		current_palette_index = idx
+		
 	_spawn_pillars()
 
 func _ensure_palette_resource() -> void:
@@ -29,10 +36,18 @@ func _ensure_palette_resource() -> void:
 		push_warning("PillarColorCollection: Palette resource not found at %s" % DEFAULT_PALETTE_PATH)
 
 func _collect_palette_keys() -> Array:
+	var keys = []
+	
+	# 1. From Resource
 	var palettes_dict = _get_palettes_dict()
-	if palettes_dict.is_empty():
-		return []
-	return Array(palettes_dict.keys())
+	if not palettes_dict.is_empty():
+		keys.append_array(palettes_dict.keys())
+		
+	# 2. From GameManager
+	var gradient_names = GameManager.get_all_gradient_names()
+	keys.append_array(gradient_names)
+	
+	return keys
 
 func _get_palettes_dict() -> Dictionary:
 	if color_palette_resource and "palettes" in color_palette_resource:
@@ -48,15 +63,22 @@ func _get_palette_entry(palette_name: String) -> Dictionary:
 	return {}
 
 func _get_palette_colors(palette_name: String) -> Array:
+	# 1. Check Resource
 	var entry = _get_palette_entry(palette_name)
-	if entry.is_empty():
-		return []
-	var source = entry.get("colors", [])
-	var result: Array = []
-	for value in source:
-		if value is Color:
-			result.append(value)
-	return result
+	if not entry.is_empty():
+		var source = entry.get("colors", [])
+		var result: Array = []
+		for value in source:
+			if value is Color:
+				result.append(value)
+		return result
+		
+	# 2. Check GameManager
+	var gradients = GameManager.get_gradient_palette(palette_name)
+	if not gradients.is_empty() and gradients[0] != Color.WHITE: # simplistic check
+		return gradients
+		
+	return []
 
 func _get_palette_title(palette_name: String) -> String:
 	var entry = _get_palette_entry(palette_name)

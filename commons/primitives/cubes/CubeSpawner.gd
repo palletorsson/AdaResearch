@@ -201,7 +201,7 @@ func _spawn_projectile():
 		projectile.projectile_destroyed.connect(_on_projectile_destroyed.bind(projectile))
 	
 	# Play spawn sound
-	if spawn_sound:
+	if spawn_sound and spawn_sound.stream:
 		spawn_sound.play()
 	
 	projectile_spawned.emit(projectile)

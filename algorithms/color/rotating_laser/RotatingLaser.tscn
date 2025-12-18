@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b76shaygchbdp"]
+
+[ext_resource type="Script" uid="uid://df2fs5q8f1eef" path="res://algorithms/color/rotating_laser/RotatingLaser.gd" id="1_rotatinglaser"]
+
+[node name="RotatingLaser" type="Node3D"]
+script = ExtResource("1_rotatinglaser")
+color_change_interval = null
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.238056)

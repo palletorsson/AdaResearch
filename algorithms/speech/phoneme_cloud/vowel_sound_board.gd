@@ -59,6 +59,27 @@ func _ready():
 	label_mode.text = "Mode: Manual (Grab Point)"
 	label_word.text = ""
 	
+	# Style LabelWord
+	var font = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
+	label_word.font = font
+	label_word.font_size = 18 # Even Smaller
+	label_word.position.x += 0.15
+	label_word.position.y -= 0.15
+	
+	# Add Frame to LabelWord
+	var word_bg_mesh = QuadMesh.new()
+	word_bg_mesh.size = Vector2(0.4, 0.12) # Smaller Frame
+	var word_bg = MeshInstance3D.new()
+	word_bg.mesh = word_bg_mesh
+	var mat_w = StandardMaterial3D.new()
+	mat_w.albedo_color = Color(0.0, 0.0, 0.0, 0.5)
+	mat_w.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat_w.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat_w.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	word_bg.material_override = mat_w
+	word_bg.position = Vector3(0, 0, -0.01)
+	label_word.add_child(word_bg)
+	
 	# Visuals
 	_spawn_visual_anchors()
 	_setup_trail()
@@ -72,15 +93,62 @@ func _start_ambient_loop():
 		if not is_inside_tree(): return
 		
 		play_word("ada")
-		# Wait for it to finish (approx 1s) plus gap
 		await get_tree().create_timer(1.5).timeout
 		
 		play_word("research")
-		# Wait for finish (approx 1.5s)
+		await get_tree().create_timer(2.0).timeout
+		
+		# New Request
+		play_word("iloveyou")
 		await get_tree().create_timer(2.0).timeout
 		
 		# "Now and then" -> Pause
 		await get_tree().create_timer(4.0).timeout
+
+func _play_iloveyou():
+	# 1. I (/a/ -> /i/)
+	_set_mapper_pos(ANCHORS["a"], 0.0)
+	label_word.text = "I"
+	_tween_mapper(ANCHORS["a"], 1.0, 0.1) # Fade In /a/
+	await get_tree().create_timer(0.3).timeout
+	
+	_tween_mapper(ANCHORS["i"], 1.0, 0.2) # Glide /i/
+	await get_tree().create_timer(0.3).timeout
+	
+	# Gap
+	_tween_mapper(ANCHORS["i"], 0.0, 0.2)
+	await get_tree().create_timer(0.25).timeout
+	
+	# 2. Love (/l/ -> /uh/ -> /v/)
+	label_word.text = "Love"
+	# /l/ approx
+	var pos_l = Vector2(800, 400) # F1=400, Delta=800
+	_set_mapper_pos(pos_l, 0.0)
+	_tween_mapper(pos_l, 1.0, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	
+	# /uh/ (Central)
+	_tween_mapper(ANCHORS["a"], 1.0, 0.2)
+	await get_tree().create_timer(0.3).timeout
+	
+	# /v/ (Fade out)
+	_tween_mapper(ANCHORS["i"], 0.0, 0.2) 
+	await get_tree().create_timer(0.2).timeout
+	
+	# 3. You (/y/ -> /u/)
+	label_word.text = "You"
+	# /y/ (semivowel /j/ is like /i/)
+	_set_mapper_pos(ANCHORS["i"], 0.0)
+	_tween_mapper(ANCHORS["i"], 1.0, 0.1)
+	await get_tree().create_timer(0.15).timeout
+	
+	# /u/
+	_tween_mapper(ANCHORS["u"], 1.0, 0.3)
+	await get_tree().create_timer(0.8).timeout # Hold
+	
+	# Fade
+	_tween_mapper(ANCHORS["u"], 0.0, 0.5)
+
 
 func _process(delta):
 	if not mapper.point: return
@@ -140,6 +208,9 @@ func _rebuild_trail():
 
 
 func _spawn_visual_anchors():
+	# Load Font
+	var font = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
+	
 	# Create labels in the 3D graph space at the correct coordinates
 	for vowel in ANCHORS:
 		var coords = ANCHORS[vowel] # Vector2(F1, Delta)
@@ -157,13 +228,34 @@ func _spawn_visual_anchors():
 			mapper.space_size.z * 0.5 # Center Z plane
 		)
 		
+		# Offset per user request (Down Y, Right X)
+		pos.x += 0.05
+		pos.y -= 0.05
+		
 		var viz = Label3D.new()
 		viz.text = "/" + vowel + "/"
-		viz.font_size = 32
+		viz.font = font
+		viz.font_size = 24 # Smaller
 		viz.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		viz.modulate = Color(1, 1, 1, 0.5)
+		viz.modulate = Color(1, 1, 1, 0.8) # More opaque
 		viz.position = pos
-		viz.scale = Vector3.ONE * 0.1
+		viz.scale = Vector3.ONE * 0.08 # Smaller scale
+		
+		# Frame Background
+		var bg_mesh = QuadMesh.new()
+		bg_mesh.size = Vector2(0.8, 0.8) # Relative to label scale
+		var bg = MeshInstance3D.new()
+		bg.mesh = bg_mesh
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color(0.1, 0.1, 0.1, 0.6) # Dark transparent frame
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		bg.material_override = mat
+		
+		# Parent BG to Label and push back
+		bg.position = Vector3(0, 0, -0.01)
+		viz.add_child(bg)
 		
 		# Add as child of mapper so it stays local to graph
 		mapper.add_child(viz)
@@ -195,6 +287,8 @@ func play_word(word: String):
 			await _play_ada()
 		"research":
 			await _play_research()
+		"iloveyou":
+			await _play_iloveyou()
 		"alphabet":
 			await _play_alphabet()
 	

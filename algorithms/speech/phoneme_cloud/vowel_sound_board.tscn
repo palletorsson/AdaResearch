@@ -14,11 +14,11 @@ space_size = Vector3(0.5, 0.5, 0.5)
 
 [node name="LabelMode" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
 text = "Mode: Manual"
 font_size = 24
 
 [node name="LabelWord" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-modulate = Color(1, 0.8, 0.2, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19822967, 0.43620747, 0)
 text = "..."
 font_size = 48

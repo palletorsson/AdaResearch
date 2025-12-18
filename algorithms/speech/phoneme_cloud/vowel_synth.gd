@@ -61,6 +61,21 @@ var audio_target_f1: float = 500.0
 var audio_target_delta: float = 1000.0
 var audio_current_f1: float = 500.0
 var audio_current_delta: float = 1000.0
+
+# Fricative / Noise Mix Strategy
+var voiced_mix: float = 1.0 # 1.0 = Full Vowel
+var noise_mix: float = 0.0  # 0.0 = Silence
+var voiced_mix_target: float = 1.0
+var noise_mix_target: float = 0.0
+
+# Fricative Filter State
+var noise_filter_state = FilterState.new()
+var noise_c: PackedFloat32Array = PackedFloat32Array([0,0,0,0,0])
+var noise_center: float = 4000.0
+var noise_q: float = 3.0
+var audio_target_noise_center: float = 4000.0
+var audio_current_noise_center: float = 4000.0
+
 const BLOCK_SIZE: int = 32 # Re-calc coeffs every 32 samples (~0.7ms)
 
 # DC Blocker
@@ -176,6 +191,29 @@ func stop():
 	target_intensity = 0.0
 	env_target = 0.0
 
+func trigger_fricative(type: String):
+	# "Noise Event" override
+	if type == "s":
+		audio_target_noise_center = 6000.0
+		noise_q = 3.0
+	elif type == "sh" or type == "ch":
+		audio_target_noise_center = 3500.0
+		noise_q = 2.0
+	
+	# Crossfade: Vowel -> Noise
+	voiced_mix_target = 0.0
+	noise_mix_target = 1.0
+	
+	# Ensure envelope is open for the noise to be heard!
+	# Fricatives need "lung pressure" too.
+	env_target = 1.0 
+	is_speaking = true
+
+func release_fricative():
+	# Crossfade: Noise -> Vowel (or Silence if stop called)
+	voiced_mix_target = 1.0
+	noise_mix_target = 0.0
+
 func trigger_plosive():
 	var closure_samples = int(0.03 * sample_rate)
 	var burst_samples = int(0.015 * sample_rate)
@@ -207,17 +245,22 @@ func _process_audio_chunk(frames: int):
 	var phase_inc = pulse_hz / sample_rate
 	
 	for i in range(frames):
-		# 0. Block-Rate Parameter Smoothing (Anti-Zipper)
+		# 0. Block-Rate Parameter Smoothing
 		if sample_clock % BLOCK_SIZE == 0:
-			# Asymptotic smooth step
+			# Frequencies
 			audio_current_f1 += (audio_target_f1 - audio_current_f1) * 0.1
 			audio_current_delta += (audio_target_delta - audio_current_delta) * 0.1
+			audio_current_noise_center += (audio_target_noise_center - audio_current_noise_center) * 0.1
 			
 			var curr_f2 = audio_current_f1 + audio_current_delta
 			curr_f2 = min(curr_f2, sample_rate * 0.45)
 			
+			# Vowel Filters
 			_recalculate_filter_coeffs(audio_current_f1, c1)
 			_recalculate_filter_coeffs(curr_f2, c2)
+			
+			# Noise Filter
+			_recalculate_filter_coeffs_noise(audio_current_noise_center, noise_q, noise_c)
 			
 			# Recalc Gain
 			g1 = 1.0
@@ -230,10 +273,16 @@ func _process_audio_chunk(frames: int):
 				_apply_event(e)
 				events.remove_at(j)
 		
-		var vowel_signal = 0.0
-		var noise_signal = 0.0
+		# 1.5 Smooth Mixes (Simple Lowpass per sample for silky crossfade)
+		# Time constant ~10ms -> coeff ~0.005
+		voiced_mix += (voiced_mix_target - voiced_mix) * 0.005
+		noise_mix += (noise_mix_target - noise_mix) * 0.005
 		
-		# A. Burst
+		var vowel_signal = 0.0
+		var fricative_signal = 0.0
+		var plosive_noise = 0.0
+		
+		# A. Burst (Legacy Plosive - "The Pop")
 		if plosive_state == PlosiveState.BURST:
 			if plosive_counter < burst_dur_samples:
 				var t = float(plosive_counter) / float(burst_dur_samples)
@@ -241,35 +290,50 @@ func _process_audio_chunk(frames: int):
 				if t < 0.2: burst_env = t / 0.2
 				elif t > 0.8: burst_env = (1.0 - t) / 0.2
 				else: burst_env = 1.0
-				noise_signal = (randf() * 2.0 - 1.0) * burst_amp * burst_env
+				plosive_noise = (randf() * 2.0 - 1.0) * burst_amp * burst_env
 				plosive_counter += 1
 			else:
 				plosive_state = PlosiveState.NONE
 				
-		# B. Vowel (With Source Gating)
-		# Only generate source if there is meaningful envelope
+		# B. Vowel Path (Voiced)
 		var source = 0.0
 		if env > 0.0001 or env_target > 0.0001:
 			phase += phase_inc
 			if phase >= 1.0: phase -= 1.0
 			var naive_saw = (phase * 2.0) - 1.0
 			var poly = _poly_blep(phase, phase_inc)
-			source = (naive_saw - poly) * 0.5 # Headroom
+			source = (naive_saw - poly) * 0.5 
+			source *= env # Pre-filter envelope (pressure)
 		
-		# Always run filters to allow decay/state update, but with 0 input during silence
 		var out1 = _process_filter(source, filter1_state, c1) * g1
 		var out2 = _process_filter(source, filter2_state, c2) * g2
-		vowel_signal = (out1 + out2) * 0.15
+		vowel_signal = (out1 + out2) * 0.15 * voiced_mix
+		
+		# C. Fricative Path (Noise)
+		# Valid if noise_mix > 0.001
+		if noise_mix > 0.001:
+			var raw_noise = (randf() * 2.0 - 1.0) * 0.5
+			# Apply Envelope (Lung Pressure) to noise too!
+			raw_noise *= env 
 			
-		# C. Envelope
+			fricative_signal = _process_filter(raw_noise, noise_filter_state, noise_c)
+			fricative_signal *= noise_mix * 2.0 # Boost noise a bit
+			
+		# D. Envelope (Applied Pre-Filter for Source, but globally for cleanup?)
+		# No, we applied it pre-filter.
+		# But wait, original code applied it POST filter too.
+		# "vowel_signal *= env" was at the end.
+		# Now we apply it to source.
+		# Should we apply distinct envelope to fricative? Same env.
+		
+		# E. Mix & Envelope
 		var coeff = env_coeff_attack if env_target > env else env_coeff_release
 		env = env_target + (env - env_target) * coeff
-		vowel_signal *= env
 		
-		# D. Mix
-		var output_sample = vowel_signal + noise_signal
+		# Final output
+		var output_sample = vowel_signal + fricative_signal + plosive_noise
 		
-		# E. DC Blocker
+		# DC Blocker
 		var y = output_sample - dc_x1 + DC_R * dc_y1
 		dc_x1 = output_sample
 		dc_y1 = y
@@ -312,6 +376,22 @@ func _recalculate_filter_coeffs(freq: float, c: PackedFloat32Array):
 	c[1] = 0.0
 	c[2] = -alpha * inv_a0
 	c[3] = (-2.0 * cos_w0) * inv_a0
+	c[4] = (1.0 - alpha) * inv_a0
+
+func _recalculate_filter_coeffs_noise(freq: float, q_val: float, c: PackedFloat32Array):
+	# BandPass Filter (Biquad)
+	# H(s) = s / (s^2 + s/Q + 1) -> normalized BPF
+	# Check Audio Eq Cookbook
+	
+	var w0 = TAU * freq / sample_rate
+	var alpha = sin(w0) / (2.0 * q_val)
+	var a0 = 1.0 + alpha
+	var inv_a0 = 1.0 / a0
+	
+	c[0] = alpha * inv_a0
+	c[1] = 0.0
+	c[2] = -alpha * inv_a0
+	c[3] = (-2.0 * cos(w0)) * inv_a0
 	c[4] = (1.0 - alpha) * inv_a0
 
 func _process_filter(input: float, s: FilterState, c: PackedFloat32Array) -> float:

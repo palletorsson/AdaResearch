@@ -4,3 +4,6 @@
 
 [node name="DiscoGridAlgorithm" type="Node3D"]
 script = ExtResource("1_disco")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7512349, 2.2975178)

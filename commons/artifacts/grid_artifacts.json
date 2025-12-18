@@ -879,6 +879,13 @@
 			"description": "grid_snapper",
 			"scene": "res://algorithms/array/grid_snapper.tscn"
 		},
+		"mondrian_run": {
+			"name": "mondrian_run",
+			"lookup_name": "mondrian_run",
+			"description": "mondrian_run",
+			"scene": "res://algorithms/array/mondrian_grid/mondrian_run.tscn"
+		},
+		
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor",
@@ -2192,7 +2199,6 @@
 			"description": "vowel_sound_board",
 			"scene": "res://algorithms/speech/phoneme_cloud/vowel_sound_board.tscn"
 		},
-		
 		"attractorsphere": {
 			"name": "attractorsphere",
 			"lookup_name": "attractorsphere",
@@ -2403,6 +2409,31 @@
 			"description": "brick_wall_factory",
 			"scene": "res://algorithms/color/brick_wall_factory/brick_wall_factory.tscn"
 		},
+		"SimultaneousContrast": {
+			"name": "SimultaneousContrast",
+			"lookup_name": "SimultaneousContrast",
+			"description": "SimultaneousContrast",
+			"scene": "res://algorithms/color/simultaneous_contrast/SimultaneousContrast.tscn"
+		},
+		"MetamerismLab": {
+			"name": "MetamerismLab",
+			"lookup_name": "MetamerismLab",
+			"description": "MetamerismLab",
+			"scene": "res://algorithms/color/metamerism_lab/MetamerismLab.tscn"
+		},
+		"SpectrumVisualizer": {
+			"name": "SpectrumVisualizer",
+			"lookup_name": "SpectrumVisualizer",
+			"description": "SpectrumVisualizer",
+			"scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn"
+		},
+		"IndexVisualizer": {
+			"name": "IndexVisualizer",
+			"lookup_name": "IndexVisualizer",
+			"description": "Visualizes current grid index above player",
+			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn"
+		},
+		
 		"grabcolorcollection": {
 			"name": "grabcolorcollection",
 			"lookup_name": "grabcolorcollection",

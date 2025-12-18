@@ -43,7 +43,7 @@ func animate_field_projectors():
 		
 		var projector_tween = create_tween()
 		projector_tween.set_loops()
-		projector_tween.tween_method(pulse_field_projector.bind(projector, phase_offset), 0.0, TAU, 3.0)
+		projector_tween.tween_method(func(t): pulse_field_projector(t, projector, phase_offset), 0.0, TAU, 3.0)
 
 func pulse_field_projector(time: float, projector: Node3D, phase_offset: float):
 	var intensity = sin(time + phase_offset) * 0.3 + 0.7

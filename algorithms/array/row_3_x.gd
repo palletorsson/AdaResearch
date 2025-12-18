@@ -11,7 +11,7 @@ func create_row():
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	
 	# Create 3 cubes in X direction
-	for i in range(3):
+	for i in range(4):
 		var cube_instance = pickup_cube_scene.instantiate()
 		cube_instance.name = "Cube_" + str(i)
 		
@@ -21,11 +21,12 @@ func create_row():
 		# Add Index Label
 		var label = Label3D.new()
 		label.text = "[%d]" % i
-		label.font_size = 48
-		label.pixel_size = 0.005
+		label.font_size = 24
+		label.pixel_size = 0.003
+		label.outline_size = 0
 		label.position = Vector3(0, 1.0, 0)
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		label.modulate = Color.BLACK
+		label.modulate = Color(1.0, 0.7, 0.8)  # Light pink
 		cube_instance.add_child(label)
 		
 		add_child(cube_instance)

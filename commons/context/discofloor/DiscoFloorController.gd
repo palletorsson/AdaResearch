@@ -8,6 +8,8 @@ var disco_algorithm: DiscoGridAlgorithm
 var disco_music = null  # Optional music component
 var music_enabled: bool = false
 
+var _pending_config: Dictionary = {}
+
 func _ready():
 	print("🎉 DiscoFloorController: Setting up grid-based disco system")
 	
@@ -19,6 +21,12 @@ func _ready():
 	# Connect to algorithm signals for feedback
 	disco_algorithm.lesson_changed.connect(_on_lesson_changed)
 	disco_algorithm.algorithm_finished.connect(_on_algorithm_finished)
+	
+	# Apply any pending config that arrived before ready
+	if not _pending_config.is_empty():
+		print("DiscoFloorController: Applying pending configuration...")
+		apply_grid_config(_pending_config)
+		_pending_config.clear()
 	
 	# Optional: Add music (if desired)
 	if music_enabled:
@@ -42,6 +50,22 @@ func _on_lesson_changed(lesson_name: String):
 func _on_algorithm_finished():
 	"""Handle algorithm completion"""
 	print("🎉 DiscoFloorController: All lessons completed!")
+
+func apply_grid_config(data: Dictionary):
+	"""Apply configuration from map data (GridInteractablesComponent)"""
+	print("DiscoFloorController: Applying config: %s" % data)
+	if not disco_algorithm:
+		print("DiscoFloorController: Deferring config (not ready)")
+		_pending_config = data
+		return
+	
+	# Delegate configuration to the algorithm
+	disco_algorithm.apply_grid_config(data)
+	
+	# Algorithm already restarts itself inside apply_grid_config if grid_reference is present.
+	# But we'll force a start here too just in case it wasn't running.
+	if not disco_algorithm.is_running:
+		disco_algorithm.start_algorithm()
 
 # === PUBLIC API (maintains compatibility with old disco floor) ===
 
