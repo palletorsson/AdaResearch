@@ -83,12 +83,17 @@ var dc_x1: float = 0.0
 var dc_y1: float = 0.0
 const DC_R: float = 0.995
 
+# Noise Source
+var noise = FastNoiseLite.new()
+var noise_phase: float = 0.0
+
 # Event Scheduling
 class AudioEvent:
 	var at_sample: int
 	var type: String
 	var duration_samples: int
 	var amplitude: float
+	var params: Dictionary = {}
 
 var events: Array[AudioEvent] = []
 var sample_clock: int = 0
@@ -99,6 +104,50 @@ var plosive_state: int = PlosiveState.NONE
 var plosive_counter: int = 0
 var burst_amp: float = 0.0
 var burst_dur_samples: int = 0
+var burst_spectrum: float = 2000.0
+
+# === NEW: Fricative State ===
+enum FricativeState { NONE, ACTIVE }
+var fricative_state: int = FricativeState.NONE
+var fricative_counter: int = 0
+var fricative_dur_samples: int = 0
+var fricative_amp: float = 0.0
+var fricative_cutoff: float = 5000.0
+var fricative_voiced: bool = false
+
+# === NEW: Nasal State ===
+enum NasalState { NONE, ACTIVE }
+var nasal_state: int = NasalState.NONE
+var nasal_counter: int = 0
+var nasal_dur_samples: int = 0
+var nasal_f1: float = 250.0
+var nasal_delta: float = 800.0
+
+# === NEW: Consonant Parameters ===
+const FRICATIVE_PARAMS = {
+	"s": {"cutoff": 6000, "amp": 0.8, "voiced": false},
+	"z": {"cutoff": 5500, "amp": 0.7, "voiced": true},
+	"f": {"cutoff": 4000, "amp": 0.6, "voiced": false},
+	"v": {"cutoff": 3500, "amp": 0.5, "voiced": true},
+	"sh": {"cutoff": 3000, "amp": 0.7, "voiced": false},
+	"th": {"cutoff": 5000, "amp": 0.5, "voiced": false},
+	"h": {"cutoff": 2000, "amp": 0.4, "voiced": false},
+}
+
+const PLOSIVE_PARAMS = {
+	"p": {"closure_ms": 50, "burst_ms": 15, "amp": 0.4, "locus": 800},
+	"b": {"closure_ms": 30, "burst_ms": 12, "amp": 0.3, "locus": 800, "voiced": true},
+	"t": {"closure_ms": 40, "burst_ms": 12, "amp": 0.35, "locus": 1800},
+	"d": {"closure_ms": 25, "burst_ms": 10, "amp": 0.25, "locus": 1800, "voiced": true},
+	"k": {"closure_ms": 45, "burst_ms": 18, "amp": 0.45, "locus": 2500},
+	"g": {"closure_ms": 30, "burst_ms": 15, "amp": 0.35, "locus": 2500, "voiced": true},
+}
+
+const NASAL_PARAMS = {
+	"m": {"f1": 280, "delta": 800, "amp": 0.4},
+	"n": {"f1": 280, "delta": 1400, "amp": 0.35},
+	"ng": {"f1": 280, "delta": 2000, "amp": 0.3}
+}
 
 # Buffer
 var _buffer: PackedVector2Array = PackedVector2Array()
@@ -128,6 +177,11 @@ func _ready():
 	audio_target_delta = delta
 	audio_current_f1 = f1
 	audio_current_delta = delta
+	
+	# Init Noise
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
+	noise.frequency = 0.5
+	noise.seed = randi()
 
 func _ms_to_coeff(ms: float) -> float:
 	var tau = max(0.001, ms / 1000.0)
@@ -191,44 +245,72 @@ func stop():
 	target_intensity = 0.0
 	env_target = 0.0
 
-func trigger_fricative(type: String):
-	# "Noise Event" override
-	if type == "s":
-		audio_target_noise_center = 6000.0
-		noise_q = 3.0
-	elif type == "sh" or type == "ch":
-		audio_target_noise_center = 3500.0
-		noise_q = 2.0
-	
-	# Crossfade: Vowel -> Noise
-	voiced_mix_target = 0.0
-	noise_mix_target = 1.0
-	
-	# Ensure envelope is open for the noise to be heard!
-	# Fricatives need "lung pressure" too.
-	env_target = 1.0 
-	is_speaking = true
 
-func release_fricative():
-	# Crossfade: Noise -> Vowel (or Silence if stop called)
-	voiced_mix_target = 1.0
-	noise_mix_target = 0.0
-
-func trigger_plosive():
-	var closure_samples = int(0.03 * sample_rate)
-	var burst_samples = int(0.015 * sample_rate)
+# === NEW: Fricative Synthesis ===
+func trigger_fricative(consonant: String = "s", duration_ms: float = 120):
+	if not consonant in FRICATIVE_PARAMS:
+		consonant = "s"
 	
+	var params = FRICATIVE_PARAMS[consonant]
+	
+	var e = AudioEvent.new()
+	e.at_sample = sample_clock
+	e.type = "fricative"
+	e.duration_samples = int((duration_ms / 1000.0) * sample_rate)
+	e.amplitude = params.amp
+	e.params = params
+	events.append(e)
+
+# === NEW: Plosive Synthesis ===
+func trigger_plosive(consonant: String = "t"):
+	if not consonant in PLOSIVE_PARAMS:
+		consonant = "t"
+	
+	var params = PLOSIVE_PARAMS[consonant]
+	
+	var closure_samples = int((params.closure_ms / 1000.0) * sample_rate)
+	var burst_samples = int((params.burst_ms / 1000.0) * sample_rate)
+	
+	# Closure event
 	var e1 = AudioEvent.new()
 	e1.at_sample = sample_clock
 	e1.type = "closure"
 	events.append(e1)
 	
+	# Burst event
 	var e2 = AudioEvent.new()
 	e2.at_sample = sample_clock + closure_samples
 	e2.type = "burst"
 	e2.duration_samples = burst_samples
-	e2.amplitude = 0.35
+	e2.amplitude = params.amp
+	e2.params = {"locus": params.locus, "voiced": params.get("voiced", false)}
 	events.append(e2)
+
+# === NEW: Nasal Synthesis ===
+func trigger_nasal(consonant: String = "m", duration_ms: float = 150):
+	if not consonant in NASAL_PARAMS:
+		consonant = "m"
+		
+	var params = NASAL_PARAMS[consonant]
+	var dur_samples = int((duration_ms / 1000.0) * sample_rate)
+	
+	var e1 = AudioEvent.new()
+	e1.at_sample = sample_clock
+	e1.type = "nasal_start"
+	e1.params = params
+	events.append(e1)
+	
+	var e2 = AudioEvent.new()
+	e2.at_sample = sample_clock + dur_samples
+	e2.type = "nasal_end"
+	events.append(e2)
+
+func release_fricative():
+	print("Synth: Release fricative - Not implemented in Phase 1")
+	# Maintain voiced mix for compatibility
+	voiced_mix_target = 1.0
+	noise_mix_target = 0.0
+
 
 func _fill_until(min_free: int):
 	if not playback: return
@@ -279,9 +361,32 @@ func _process_audio_chunk(frames: int):
 		noise_mix += (noise_mix_target - noise_mix) * 0.005
 		
 		var vowel_signal = 0.0
-		var fricative_signal = 0.0
+		var noise_signal = 0.0
 		var plosive_noise = 0.0
 		
+		# === NEW: Fricative Generation (Triggered) ===
+		if fricative_state == FricativeState.ACTIVE:
+			if fricative_counter < fricative_dur_samples:
+				var t = float(fricative_counter) / float(fricative_dur_samples)
+				var fric_env = sin(t * PI)
+				
+				noise_phase += 1.0
+				var noise_val = noise.get_noise_2d(
+					cos(noise_phase * 0.05) * 100.0,
+					sin(noise_phase * 0.05) * 100.0
+				)
+				
+				var shaped = noise_val * (fricative_cutoff / 10000.0)
+				
+				if fricative_voiced:
+					var voice_phase = (sample_clock * pulse_hz / sample_rate)
+					shaped += sin(voice_phase * TAU) * 0.2
+				
+				noise_signal += shaped * fricative_amp * fric_env
+				fricative_counter += 1
+			else:
+				fricative_state = FricativeState.NONE
+				
 		# A. Burst (Legacy Plosive - "The Pop")
 		if plosive_state == PlosiveState.BURST:
 			if plosive_counter < burst_dur_samples:
@@ -290,7 +395,10 @@ func _process_audio_chunk(frames: int):
 				if t < 0.2: burst_env = t / 0.2
 				elif t > 0.8: burst_env = (1.0 - t) / 0.2
 				else: burst_env = 1.0
-				plosive_noise = (randf() * 2.0 - 1.0) * burst_amp * burst_env
+				
+				# Use F2 locus resonance if available
+				var locus_res = sin(plosive_counter * burst_spectrum * TAU / sample_rate) * 0.2
+				noise_signal += ((randf() * 2.0 - 1.0) + locus_res) * burst_amp * burst_env
 				plosive_counter += 1
 			else:
 				plosive_state = PlosiveState.NONE
@@ -309,29 +417,19 @@ func _process_audio_chunk(frames: int):
 		var out2 = _process_filter(source, filter2_state, c2) * g2
 		vowel_signal = (out1 + out2) * 0.15 * voiced_mix
 		
-		# C. Fricative Path (Noise)
-		# Valid if noise_mix > 0.001
+		# C. Legacy Fricative / Breath Path (noise_mix)
 		if noise_mix > 0.001:
 			var raw_noise = (randf() * 2.0 - 1.0) * 0.5
-			# Apply Envelope (Lung Pressure) to noise too!
 			raw_noise *= env 
+			var filtered_noise = _process_filter(raw_noise, noise_filter_state, noise_c)
+			noise_signal += filtered_noise * noise_mix * 2.0
 			
-			fricative_signal = _process_filter(raw_noise, noise_filter_state, noise_c)
-			fricative_signal *= noise_mix * 2.0 # Boost noise a bit
-			
-		# D. Envelope (Applied Pre-Filter for Source, but globally for cleanup?)
-		# No, we applied it pre-filter.
-		# But wait, original code applied it POST filter too.
-		# "vowel_signal *= env" was at the end.
-		# Now we apply it to source.
-		# Should we apply distinct envelope to fricative? Same env.
-		
-		# E. Mix & Envelope
+		# D. Envelope Tracking
 		var coeff = env_coeff_attack if env_target > env else env_coeff_release
 		env = env_target + (env - env_target) * coeff
 		
 		# Final output
-		var output_sample = vowel_signal + fricative_signal + plosive_noise
+		var output_sample = vowel_signal + noise_signal
 		
 		# DC Blocker
 		var y = output_sample - dc_x1 + DC_R * dc_y1
@@ -351,7 +449,24 @@ func _apply_event(e: AudioEvent):
 		plosive_counter = 0
 		burst_dur_samples = e.duration_samples
 		burst_amp = e.amplitude
-
+		burst_spectrum = e.params.get("locus", 2000)
+	elif e.type == "fricative":
+		fricative_state = FricativeState.ACTIVE
+		fricative_counter = 0
+		fricative_dur_samples = e.duration_samples
+		fricative_amp = e.amplitude
+		fricative_cutoff = e.params.get("cutoff", 5000)
+		fricative_voiced = e.params.get("voiced", false)
+	elif e.type == "nasal_start":
+		nasal_state = NasalState.ACTIVE
+		audio_target_f1 = e.params.f1
+		audio_target_delta = e.params.delta
+		target_intensity = e.params.amp
+		is_speaking = true
+	elif e.type == "nasal_end":
+		nasal_state = NasalState.NONE
+		# We don't stop here, we leave it to the next vowel or manual stop
+		
 func _poly_blep(t: float, dt: float) -> float:
 	if t < dt:
 		t /= dt

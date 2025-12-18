@@ -27,6 +27,14 @@ const ANCHORS = {
 	"d_locus": Vector2(200, 1600) # Locus
 }
 
+const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+const TEST_PHONEMES = {
+	"Vowels": ["i", "e", "a", "o", "u"],
+	"Fricatives": ["s", "z", "f", "v", "sh", "th", "h"],
+	"Plosives": ["p", "b", "t", "d", "k", "g"],
+	"Nasals": ["m", "n", "ng"]
+}
+
 # Playback State
 var is_playing_sequence: bool = false
 
@@ -83,6 +91,7 @@ func _ready():
 	# Visuals
 	_spawn_visual_anchors()
 	_setup_trail()
+	_create_test_panel()
 	
 	# Auto-Play Loop ("Now and then")
 	_start_ambient_loop()
@@ -356,6 +365,58 @@ func _play_alphabet():
 		await get_tree().create_timer(0.1).timeout
 
 # Utils to drive the Mapper (which drives the synth)
+func _create_test_panel():
+	var panel = Node3D.new()
+	panel.name = "PhonemeTestPanel"
+	add_child(panel)
+	panel.position = Vector3(0.4, 0.4, 0.0) # Positioned to the right of mapper
+	
+	var row_y = 0.0
+	for category in TEST_PHONEMES:
+		# Category Label
+		var cat_label = Label3D.new()
+		cat_label.text = category
+		cat_label.font_size = 18
+		cat_label.position = Vector3(0.0, row_y + 0.08, 0.0)
+		cat_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		panel.add_child(cat_label)
+		
+		var col_x = 0.0
+		for phoneme in TEST_PHONEMES[category]:
+			var btn = BUTTON_SCENE.instantiate()
+			panel.add_child(btn)
+			btn.position = Vector3(col_x, row_y, 0.0)
+			btn.scale = Vector3(0.5, 0.5, 0.5) # Half size for grid
+			btn.rotation_degrees = Vector3(-90, 0, 0) # Face user
+			
+			# Label on button
+			var lbl = Label3D.new()
+			lbl.text = phoneme
+			lbl.font_size = 32
+			lbl.position = Vector3(0, 0.06, 0) # Slightly above surface
+			lbl.rotation_degrees = Vector3(90, 0, 0) # Correct orientation relative to button
+			btn.add_child(lbl)
+			
+			# Connect signal (using category to route)
+			var callback = func(): _on_test_button_pressed(category, phoneme)
+			btn.pressed.connect(callback)
+			
+			col_x += 0.08
+		
+		row_y -= 0.15
+
+func _on_test_button_pressed(category: String, phoneme: String):
+	label_word.text = phoneme
+	match category:
+		"Vowels":
+			play_word(phoneme) # This handles vowels
+		"Fricatives":
+			synth.trigger_fricative(phoneme)
+		"Plosives":
+			synth.trigger_plosive(phoneme)
+		"Nasals":
+			synth.trigger_nasal(phoneme)
+
 func _set_mapper_pos(target_field: Vector2, target_intensity: float):
 	mapper.set_values(target_field.y, target_field.x, target_intensity)
 

@@ -1,5 +1,7 @@
 extends Node3D
 
+signal pressed
+
 @export var pressed_color: Color = Color(0.2, 0.8, 1.0, 1.0)
 @export var released_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 
@@ -60,6 +62,7 @@ func _is_interactable_pressed() -> bool:
 	return bool(_interactable.get("pressed"))
 
 func _on_button_pressed(_button) -> void:
+	pressed.emit()
 	_set_visual_state(true)
 
 func _on_button_released(_button) -> void:
