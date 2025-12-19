@@ -1,6 +1,6 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
+		"name": "Wavefunctions Level Six",
 		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
 		"version": "1.0",
 		"format": "json",
@@ -11,16 +11,16 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "algorithms",
+			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
 			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
 		}
 	},
 	"documentation": {
-		"summary": "WaveFunctions Wave Interference",
-		"layout": "13x14 lecture grid with annotation, scoring station, and the interference board at the center.",
-		"objective": "Adjust the wave interference widget to visualize constructive and destructive regions.",
-		"key_elements": ["Spawn `s` at the north", "`wave_interference` board centrally located", "Annotation `an` and score cube `sp` near the teleporter", "Teleporter `t` along the southern edge"]
+		"summary": "Wavefunctions Level Six",
+		"layout": "13x14 amphitheater packed with multiple wave exhibits, annotation, and scoring booths.",
+		"objective": "Survey advanced wavefunction apparatus including colored lines, cables, and sine staircases.",
+		"key_elements": ["Spawn `s` at the north", "Interactive set: `ColoredLinesVR`, `StaticCables`, `sine_cylinder_staircase`, `coshlea`", "`dark_sphere` ambience across the stage", "Annotation `an`, score cube `sp`, and teleporter banks `t` along the exit"]
 	},
 	"layers": {
 		"structure": [
@@ -35,8 +35,8 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2", "2", "0", "1", "1", "2"]
+			["2", "2", "2", "2", "2", "2", "2", "2", "1", "0", "1", "2"],
+			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -47,21 +47,21 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ",  " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "wave_interference", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "ColoredLinesVR", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

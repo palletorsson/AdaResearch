@@ -51,6 +51,35 @@ func create_fourier_drone(wheels: Array) -> AudioStreamWAV:
 	stream.data = data
 	return stream
 
+func create_harmonic(freq_multiplier: float, amplitude_scale: float, phase_offset: float) -> AudioStreamWAV:
+	"""Generate a single harmonic oscillator loop"""
+	var sample_rate = 44100
+	var duration = 2.0
+	var num_samples = int(sample_rate * duration)
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	stream.loop_begin = 0
+	stream.loop_end = num_samples
+	
+	var data = PackedByteArray()
+	data.resize(num_samples * 2)
+	
+	var base_carrier = 110.0
+	var audio_freq = base_carrier * freq_multiplier
+	
+	for i in range(num_samples):
+		var t = float(i) / sample_rate
+		# Sine wave with phase offset
+		var sample = sin(2.0 * PI * audio_freq * t + phase_offset) * amplitude_scale * 0.25
+		
+		var int_sample = int(clamp(sample, -1.0, 1.0) * 32767.0)
+		data.encode_s16(i * 2, int_sample)
+		
+	stream.data = data
+	return stream
+
 func create_nebula_pad() -> AudioStreamWAV:
 	# A more ethereal fallback or complementary sound
 	# Using tri-waves for a softer, breathier space feel

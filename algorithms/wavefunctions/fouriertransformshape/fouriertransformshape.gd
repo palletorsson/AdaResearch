@@ -20,7 +20,10 @@ var time = 0.0
 var trace_material: StandardMaterial3D
 var light_nodes: Array = []
 var lights_spawned := false
-var audio_player: AudioStreamPlayer3D
+var wheel_audio_players: Array[AudioStreamPlayer3D] = []
+var audio_playbacks: Array[AudioStreamGeneratorPlayback] = []
+const SAMPLE_RATE = 44100.0
+const BASE_FREQ = 110.0
 
 func _ready():
 	setup_camera()
@@ -29,16 +32,23 @@ func _ready():
 	setup_audio()
 
 func setup_audio():
-	audio_player = AudioStreamPlayer3D.new()
-	add_child(audio_player)
-	audio_player.unit_size = 20.0
-	audio_player.max_db = 0.0
+	for i in range(wheels.size()):
+		var wheel_data = wheels[i]
+		var player = AudioStreamPlayer3D.new()
+		add_child(player)
+		player.unit_size = 15.0
+		player.max_db = -6.0
+		
+		var generator = AudioStreamGenerator.new()
+		generator.mix_rate = SAMPLE_RATE
+		generator.buffer_length = 0.1
+		player.stream = generator
+		
+		wheel_audio_players.append(player)
+		player.play()
+		audio_playbacks.append(player.get_stream_playback())
 	
-	if has_node("/root/SoundBank"):
-		var sb = get_node("/root/SoundBank")
-		if sb.has_method("get_sound"):
-			audio_player.stream = sb.get_sound("fourier_space:drone")
-			audio_player.play()
+	print("FourierTransform: Ready with %d spatial harmonics" % wheels.size())
 
 func setup_camera():
 	var camera = Camera3D.new()
@@ -116,6 +126,7 @@ func _process(delta):
 	update_wheels()
 	update_trace()
 	ensure_trace_lights()
+	_generate_audio_samples()
 
 func update_wheels():
 	var current_pos = Vector3.ZERO
@@ -156,6 +167,10 @@ func update_wheels():
 			up = right.cross(line_direction).normalized()
 			line_node.basis = Basis(right, line_direction, up)
 
+		# Update audio position to follow wheel tip
+		if i < wheel_audio_players.size():
+			wheel_audio_players[i].position = arm_end
+			
 		current_pos = arm_end
 
 	# Add current end position to trace
@@ -166,9 +181,6 @@ func update_wheels():
 		trace_points.append(current_pos)
 
 func update_trace():
-	if is_instance_valid(audio_player) and not trace_points.is_empty():
-		audio_player.position = trace_points[-1]
-		
 	trace_line.clear_points()
 
 	if trace_points.size() < 2:
@@ -201,3 +213,21 @@ func ensure_trace_lights():
 
 	if light_nodes.size() > 0:
 		lights_spawned = true
+
+func _generate_audio_samples():
+	for i in range(audio_playbacks.size()):
+		var playback = audio_playbacks[i]
+		if not playback: continue
+		
+		var wheel_data = wheels[i]
+		var frames_available = playback.get_frames_available()
+		
+		if frames_available > 0:
+			var freq = BASE_FREQ * wheel_data.freq
+			var amplitude = wheel_data.radius * 0.15
+			
+			for _f in range(frames_available):
+				# Use a global phase based on time for coherence if needed, 
+				# or just track local phase. Using time * freq is simplest.
+				var sample = sin(2.0 * PI * freq * time) * amplitude
+				playback.push_frame(Vector2(sample, sample))
