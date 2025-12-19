@@ -885,7 +885,6 @@
 			"description": "mondrian_run",
 			"scene": "res://algorithms/array/mondrian_grid/mondrian_run.tscn"
 		},
-		
 		"disco_floor": {
 			"name": "Disco Grid",
 			"lookup_name": "disco_floor",
@@ -1107,8 +1106,7 @@
 			"lookup_name": "VRAudioMonitor",
 			"description": "VRAudioMonitor",
 			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn"
-		},		
-
+		},
 		"tiles_explained": {
 			"name": "tiles_explained",
 			"lookup_name": "tiles_explained",
@@ -1780,10 +1778,10 @@
 			"description": "GyroidDemo",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/GyroidDemo.tscn"
 		},
-		"marching_cubes_gallery": {
-			"name": "marching_cubes_gallery",
-			"lookup_name": "marching_cubes_gallery",
-			"description": "marching_cubes_gallery",
+		"marching_cubes_cave_gallery": {
+			"name": "marching_cubes_cave_gallery",
+			"lookup_name": "marching_cubes_cave_gallery",
+			"description": "marching_cubes_cave_gallery",
 			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marching_cubes_gallery.tscn"
 		},
 		"info_display": {
@@ -2458,7 +2456,6 @@
 			"description": "Visualizes current grid index above player",
 			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn"
 		},
-		
 		"grabcolorcollection": {
 			"name": "grabcolorcollection",
 			"lookup_name": "grabcolorcollection",
@@ -3582,6 +3579,12 @@
 			"lookup_name": "cavetest",
 			"description": "cavetest",
 			"scene": "res://commons/primitives/cave/test.tscn"
+		},
+		"soundboxes": {
+			"name": "Dynamic Sound Box",
+			"lookup_name": "soundboxes",
+			"description": "SoundBox: Procedural Sound Gallery. Use #collections:synthetic, retro, legends, drums, body, machine, synth, sacred, noir, weather, game for presets.",
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBox.tscn"
 		}
 	}
 }

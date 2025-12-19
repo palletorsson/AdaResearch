@@ -20,11 +20,25 @@ var time = 0.0
 var trace_material: StandardMaterial3D
 var light_nodes: Array = []
 var lights_spawned := false
+var audio_player: AudioStreamPlayer3D
 
 func _ready():
 	setup_camera()
 	setup_wheels()
 	setup_trace()
+	setup_audio()
+
+func setup_audio():
+	audio_player = AudioStreamPlayer3D.new()
+	add_child(audio_player)
+	audio_player.unit_size = 20.0
+	audio_player.max_db = 0.0
+	
+	if has_node("/root/SoundBank"):
+		var sb = get_node("/root/SoundBank")
+		if sb.has_method("get_sound"):
+			audio_player.stream = sb.get_sound("fourier_space:drone")
+			audio_player.play()
 
 func setup_camera():
 	var camera = Camera3D.new()
@@ -152,6 +166,9 @@ func update_wheels():
 		trace_points.append(current_pos)
 
 func update_trace():
+	if is_instance_valid(audio_player) and not trace_points.is_empty():
+		audio_player.position = trace_points[-1]
+		
 	trace_line.clear_points()
 
 	if trace_points.size() < 2:

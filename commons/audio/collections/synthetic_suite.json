@@ -1,0 +1,46 @@
+{
+    "collection_name": "Synthetic Suite",
+    "layout_columns": 3,
+    "items": [
+        {
+            "sound_id": "SyntheticSoundGenerator.detection_sound",
+            "label": "Detection",
+            "color": "#00ffff"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.lift_start_sound",
+            "label": "Lift Start",
+            "color": "#0000ff"
+        },
+        {
+            "id": "SyntheticSoundGenerator.lift_loop_sound",
+            "label": "Lift Loop",
+            "color": "#0000aa"
+        },
+        {
+            "id": "STOP_ALL",
+            "label": "STOP",
+            "color": "#ff0000"
+        },
+        {
+            "id": "SyntheticSoundGenerator.lift_stop_sound",
+            "label": "Lift Stop",
+            "color": "#000055"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.warning_sound",
+            "label": "Warning",
+            "color": "#ffaa00"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "label": "Ambient",
+            "color": "#aa00ff"
+        },
+        {
+            "sound_id": "STOP_ALL",
+            "label": "STOP",
+            "color": "#ff0000"
+        }
+    ]
+}

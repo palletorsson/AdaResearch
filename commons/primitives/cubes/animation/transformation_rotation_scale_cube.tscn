@@ -9,12 +9,9 @@
 
 [node name="TransformationTween" type="Node" parent="." index="1"]
 script = ExtResource("2_trans")
-movement_distance = Vector3(0, 1.5, 0)
-duration = 1.5
 
 [node name="RotationTween" type="Node" parent="." index="2"]
 script = ExtResource("3_rot")
-rotation_amount = Vector3(0, 360, 360)
 
 [node name="ScaleTween" type="Node" parent="." index="3"]
 script = ExtResource("4_scale")

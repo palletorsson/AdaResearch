@@ -17,11 +17,25 @@ var _hover_timer: float = 0.0
 var _current_controller: XRController3D
 
 func _ready() -> void:
+	_update_visuals()
+
+func setup(p_sound_id: String, p_text: String, p_color: Color) -> void:
+	sound_id = p_sound_id
+	text = p_text
+	color = p_color
+	_update_visuals()
+
+func _update_visuals() -> void:
 	if label:
 		label.text = text
 	
 	if mesh_instance:
-		_original_scale = mesh_instance.scale
+		_original_scale = mesh_instance.get_parent().scale if mesh_instance.get_parent() is Node3D else Vector3.ONE
+		# In many cases the script is on the StaticBody3D, and mesh_instance is a child.
+		# But let's use the local scale of the mesh_instance if it's not setup yet.
+		if _original_scale == Vector3.ONE:
+			_original_scale = mesh_instance.scale
+
 		var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 		var material = ShaderMaterial.new()
 		material.shader = shader

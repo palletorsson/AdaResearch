@@ -590,6 +590,69 @@ static func create_heartbeat_segment(params: Dictionary = {}) -> AudioStreamWAV:
 	stream.data = data
 	return stream
 
+static func create_hydraulic_hiss(params: Dictionary = {}) -> AudioStreamWAV:
+	"""
+	Generate a pressurized hydraulic release sound
+	"""
+	var rng = _create_rng(params.get("seed", -1))
+	var stream = _create_stream_base(true)
+	
+	var buffer_length = params.get("buffer_length", 2.0)
+	var volume = params.get("volume", 0.4)
+	
+	var frame_count = int(SAMPLE_RATE * buffer_length)
+	var data = PackedByteArray()
+	data.resize(frame_count * 4)
+	
+	for i in range(frame_count):
+		var t = float(i) / SAMPLE_RATE
+		
+		# Envelope: sharp attack, curved decay
+		var env = exp(-t * 6.0)
+		
+		# Filtered noise
+		var noise = rng.randf_range(-1.0, 1.0)
+		var sample = noise * env * volume
+		
+		data.encode_s16(i * 4, int(sample * 32767.0))
+		data.encode_s16(i * 4 + 2, int(sample * 32767.0))
+		
+	stream.data = data
+	return stream
+
+static func create_data_chirp(params: Dictionary = {}) -> AudioStreamWAV:
+	"""
+	Generate short high-pitched digital data chirps
+	"""
+	var rng = _create_rng(params.get("seed", -1))
+	var stream = _create_stream_base(true)
+	
+	var buffer_length = params.get("buffer_length", 1.5)
+	var volume = params.get("volume", 0.3)
+	
+	var frame_count = int(SAMPLE_RATE * buffer_length)
+	var data = PackedByteArray()
+	data.resize(frame_count * 4)
+	
+	for i in range(frame_count):
+		var t = float(i) / SAMPLE_RATE
+		var sample = 0.0
+		
+		# 3 short bursts
+		for b in range(3):
+			var start = 0.2 + b * 0.4
+			if t >= start and t < start + 0.1:
+				var bt = t - start
+				var freq = 2000.0 + sin(bt * 100.0) * 500.0
+				sample += sin(2.0 * PI * freq * t) * 0.5 * exp(-bt * 30.0)
+		
+		sample = clamp(sample * volume, -1.0, 1.0)
+		data.encode_s16(i * 4, int(sample * 32767.0))
+		data.encode_s16(i * 4 + 2, int(sample * 32767.0))
+		
+	stream.data = data
+	return stream
+
 # ===== GENERATION ROUTER =====
 
 static func generate_sound(sound_name: String, params: Dictionary = {}) -> AudioStreamWAV:
@@ -612,7 +675,7 @@ static func generate_sound(sound_name: String, params: Dictionary = {}) -> Audio
 	match normalized_name:
 		"drone", "endless_drone":
 			return create_endless_drone(params)
-		"city_ambience", "city", "urban":
+		"city_ambience", "city", "urban", "city_hum":
 			return create_city_ambience(params)
 		"distant_siren", "siren":
 			return create_distant_siren(params)
@@ -620,7 +683,7 @@ static func generate_sound(sound_name: String, params: Dictionary = {}) -> Audio
 			return create_static_burst(params)
 		"rain_segment", "rain":
 			return create_rain_segment(params)
-		"mechanical_whir", "machinery", "mechanical":
+		"mechanical_whir", "machinery", "mechanical", "motor_whir":
 			return create_mechanical_whir(params)
 		"typing_segment", "typing", "keyboard":
 			return create_typing_segment(params)
@@ -628,6 +691,10 @@ static func generate_sound(sound_name: String, params: Dictionary = {}) -> Audio
 			return create_electric_hum(params)
 		"heartbeat_segment", "heartbeat", "pulse":
 			return create_heartbeat_segment(params)
+		"hydraulic_hiss":
+			return create_hydraulic_hiss(params)
+		"data_chirp":
+			return create_data_chirp(params)
 		_:
 			push_warning("TechnoNoirGenerator: Unknown sound name: " + sound_name)
 			return null

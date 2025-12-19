@@ -162,20 +162,24 @@ func _on_async_sound_ready(stream: AudioStream):
 func _generate_sound(sound_id: String) -> AudioStream:
 	"""Generate a sound based on its ID"""
 
-	# Parse the sound ID (format: "generator.sound_name" or "SoundClass.METHOD")
-	var parts = sound_id.split(".")
+	# Parse the sound ID (format: "generator.sound_name" or "generator:sound_name")
+	var separator = "."
+	if sound_id.contains(":"):
+		separator = ":"
+	
+	var parts = sound_id.split(separator)
 	if parts.size() != 2:
-		print("⚠️ Invalid sound_id format: ", sound_id)
+		print("⚠️ Invalid sound_id format (needs generator.sound or generator:sound): ", sound_id)
 		return null
 
 	var generator = parts[0]
 	var sound_name = parts[1]
 
-	# Route to appropriate generator
-	match generator:
-		"SyntheticSoundGenerator":
+	# Route to appropriate generator (case-insensitive for convenience)
+	match generator.to_lower():
+		"syntheticsoundgenerator":
 			return _generate_synthetic_sound(sound_name)
-		"AudioSynthesizer":
+		"audiosynthesizer":
 			return _generate_synthesizer_sound(sound_name)
 		"techno_noir":
 			return _generate_techno_noir_sound(sound_name)
@@ -183,15 +187,25 @@ func _generate_sound(sound_id: String) -> AudioStream:
 			return _generate_trap_beats_sound(sound_name)
 		"liturgical":
 			return _generate_liturgical_sound(sound_name)
-		"DarkGameTrack":
+		"darkgametrack":
 			return _generate_dark_game_track_sound(sound_name)
-		"Cinematic":
+		"cinematic":
 			return _generate_cinematic_sound(sound_name)
-		"Epic":
+		"epic":
 			return _generate_epic_sound(sound_name)
+		"fourier_space":
+			return _generate_fourier_space_sound(sound_name)
 		_:
-			print("⚠️ Unknown generator: ", generator)
-			return null
+			# Fallback for original casing if needed
+			match generator:
+				"SyntheticSoundGenerator": return _generate_synthetic_sound(sound_name)
+				"AudioSynthesizer": return _generate_synthesizer_sound(sound_name)
+				"DarkGameTrack": return _generate_dark_game_track_sound(sound_name)
+				"Cinematic": return _generate_cinematic_sound(sound_name)
+				"Epic": return _generate_epic_sound(sound_name)
+				_:
+					print("⚠️ Unknown generator: ", generator)
+					return null
 
 # ===== GENERATOR WRAPPERS =====
 
@@ -282,17 +296,35 @@ func _generate_trap_beats_sound(sound_name: String, params: Dictionary = {}) -> 
 		return null
 
 func _generate_liturgical_sound(sound_name: String) -> AudioStreamWAV:
-	"""Generate sound from liturgical generator"""
-	# TODO: Extract liturgical generation logic from liturgicalambientgenerator.gd
-	# For now, return null - will implement after refactoring
-	print("ℹ️ Liturgical sound generation not yet implemented: ", sound_name)
-	return null
+	"""Generate sound from liturgical generator bridge"""
+	var LitGen = preload("res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.gd").new()
+	
+	match sound_name.to_lower():
+		"cathedral_bell", "cathedral_bells": return LitGen.create_cathedral_bell()
+		"pipe_organ_swell": return LitGen.create_pipe_organ_swell()
+		"sacred_whisper", "sacred_whispers": return LitGen.create_sacred_whisper()
+		"choral_texture", "angelic_texture": return LitGen.create_angelic_texture()
+		"gregorian_phrase": return LitGen.create_gregorian_phrase()
+		"divine_breath": return LitGen.create_divine_breath()
+		_:
+			print("⚠️ Unknown liturgical sound: ", sound_name, " - falling back to choir")
+			return LitGen.create_angelic_texture()
 
 func _generate_dark_game_track_sound(sound_name: String) -> AudioStreamWAV:
-	"""Generate sound from dark game track"""
-	# TODO: Extract from DarkGameTrackPlayer
-	print("ℹ️ Dark game track sound generation not yet implemented: ", sound_name)
-	return null
+	"""Generate sound from dark game track bridge (reusing trap_beats logic)"""
+	var TrapBeats = preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
+	
+	match sound_name.to_lower():
+		"808_kick", "dark_808_kick": return TrapBeats.create_808_kick()
+		"606_hihat", "acid_606_hihat": return TrapBeats.create_hihat_909() # Using hihat fallback
+		"808_sub_bass", "sub_bass": return TrapBeats.create_808_kick({"decay": 2.0, "punch": 0.5}) # Long sub
+		"ambient_drone": return _generate_cinematic_sound("blade_runner_pad")
+		"acid_606_snare", "snare": return TrapBeats.create_trap_snare()
+		"glitch_stab": return TrapBeats.create_808_cowbell({"pitch": 800})
+		"blade_runner_hit": return _generate_cinematic_sound("vangelis_brass_lead")
+		_:
+			print("⚠️ Unknown game track sound: ", sound_name, " - falling back to kick")
+			return TrapBeats.create_808_kick()
 
 func _generate_cinematic_sound(sound_name: String) -> AudioStreamWAV:
 	"""Generate sound from CinematicMusicGenerator"""
@@ -461,6 +493,24 @@ func _create_audio_effect(config: Dictionary) -> AudioEffect:
 			return null
 
 	return effect
+
+func _generate_fourier_space_sound(sound_name: String) -> AudioStream:
+	var generator = load("res://commons/audio/generators/FourierSpaceGenerator.gd").new()
+	
+	match sound_name.to_lower():
+		"drone":
+			# Default wheels as defined in fouriertransformshape.gd
+			var wheels = [
+				{"freq": 1.0, "radius": 2.0, "phase": 0.0},
+				{"freq": 3.0, "radius": 0.8, "phase": 0.0},
+				{"freq": 5.0, "radius": 0.4, "phase": PI / 2},
+				{"freq": 7.0, "radius": 0.2, "phase": PI / 4}
+			]
+			return generator.create_fourier_drone(wheels)
+		"nebula":
+			return generator.create_nebula_pad()
+		_:
+			return generator.create_fourier_drone([])
 
 # ===== CLEANUP =====
 

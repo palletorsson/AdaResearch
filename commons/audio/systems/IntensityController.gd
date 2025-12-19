@@ -8,8 +8,8 @@ class_name IntensityController
 enum WaveShape { SINE, TRIANGLE }
 
 @export var target_node_path: NodePath
-@export var min_intensity: float = 0.01
-@export var max_intensity: float = 0.3
+@export var min_intensity: float = 0.05
+@export var max_intensity: float = 0.7
 @export var period: float = 60.0 # Seconds for full cycle
 @export var shape: WaveShape = WaveShape.SINE
 @export var active: bool = true
