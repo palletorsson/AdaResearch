@@ -20,12 +20,7 @@
 		"summary": "Wavefunctions Level Six",
 		"layout": "13x14 amphitheater packed with multiple wave exhibits, annotation, and scoring booths.",
 		"objective": "Survey advanced wavefunction apparatus including colored lines, cables, and sine staircases.",
-		"key_elements": [
-			"Spawn `s` at the north",
-			"Interactive set: `ColoredLinesVR`, `StaticCables`, `sine_cylinder_staircase`, `coshlea`",
-			"`dark_sphere` ambience across the stage",
-			"Annotation `an`, score cube `sp`, and teleporter banks `t` along the exit"
-		]
+		"key_elements": ["Spawn `s` at the north", "Interactive set: `ColoredLinesVR`, `StaticCables`, `sine_cylinder_staircase`, `coshlea`", "`dark_sphere` ambience across the stage", "Annotation `an`, score cube `sp`, and teleporter banks `t` along the exit"]
 	},
 	"layers": {
 		"structure": [
@@ -39,7 +34,7 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],		
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "0", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"]
 		],
@@ -55,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -69,9 +64,9 @@
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -82,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

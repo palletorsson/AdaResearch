@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Fourier Transform Shape: Drawing with Circles",
-		"description": "Any 2D drawing can be recreated by a series of rotating circles (epicycles). Watch as complex shapes emerge from layered rotations. Learn how DFT encodes shapes into frequency spectra, and discover that your handwriting is just a list of phasors—complexity requiring no complex parts, only accumulated cycles.",
+		"description": "Any 2D drawing can be recreated by a series of rotating circles (epicycles). Watch as complex shapes emerge from layered rotations. Learn how DFT encodes shapes into frequency spectra, and discover that your handwriting is just a list of phasors\u2014complexity requiring no complex parts, only accumulated cycles.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,25 +13,14 @@
 			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": [
-				"Epicycles: nested rotating circles creating complex curves",
-				"Discrete Fourier Transform (DFT): encoding shapes as frequency spectra",
-				"Compression via low-pass filtering (discarding small circles)",
-				"Phasor representation: radius, frequency, phase",
-				"Critical: Is handwriting personal, or just a frequency spectrum?"
-			]
+			"learning_objectives": ["Epicycles: nested rotating circles creating complex curves", "Discrete Fourier Transform (DFT): encoding shapes as frequency spectra", "Compression via low-pass filtering (discarding small circles)", "Phasor representation: radius, frequency, phase", "Critical: Is handwriting personal, or just a frequency spectrum?"]
 		}
 	},
 	"documentation": {
 		"summary": "WaveFunctions Fourier Form",
 		"layout": "13x14 chamber with central dais focused on sculpting Fourier shapes under a light dome.",
 		"objective": "Explore how Fourier components construct complex forms using the interactive shape tool.",
-		"key_elements": [
-			"Spawn `s` along the northern rim",
-			"`fouriertransformshape` workstation at (5,6)",
-			"`dark_sphere` enclosure enhancing visual contrast",
-			"Teleporter `t` on the south-east walkway"
-		]
+		"key_elements": ["Spawn `s` along the northern rim", "`fouriertransformshape` workstation at (5,6)", "`dark_sphere` enclosure enhancing visual contrast", "Teleporter `t` on the south-east walkway"]
 	},
 	"layers": {
 		"structure": [
@@ -47,7 +36,7 @@
 			["3", "1", "0", "0", "0", "0", "0", "0", "0", "0", "1", "3"],
 			["3", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3"],
 			["3", "3", "3", "3", "3", "3", "3", "3", "3", "0", "3", "3"],
-			["3", "3", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"],
+			["3", "3", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -61,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -75,9 +64,9 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", "", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -88,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

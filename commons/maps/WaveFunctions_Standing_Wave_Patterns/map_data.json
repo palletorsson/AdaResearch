@@ -20,12 +20,7 @@
 		"summary": "WaveFunctions Standing Wave Patterns",
 		"layout": "13x14 observation floor with annotation and scoring kiosks flanking the standing wave array.",
 		"objective": "Study interference nodes using the standing wave visualizer before concluding the module.",
-		"key_elements": [
-			"Spawn `s` at the northern entry",
-			"`standing_waves` array at center stage",
-			"Annotation cube `an` and score cube `sp` near the southern exit",
-			"Teleporter `t` to advance"
-		]
+		"key_elements": ["Spawn `s` at the northern entry", "`standing_waves` array at center stage", "Annotation cube `an` and score cube `sp` near the southern exit", "Teleporter `t` to advance"]
 	},
 	"layers": {
 		"structure": [
@@ -39,7 +34,7 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],		
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"]
 		],
@@ -55,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -70,8 +65,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]		
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -82,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
@@ -112,4 +106,4 @@
 			"color": [0.2, 0.3, 0.7]
 		}
 	}
-} 
+}

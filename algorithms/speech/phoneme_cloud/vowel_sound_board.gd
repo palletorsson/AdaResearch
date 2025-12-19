@@ -32,7 +32,9 @@ const TEST_PHONEMES = {
 	"Vowels": ["i", "e", "a", "o", "u"],
 	"Fricatives": ["s", "z", "f", "v", "sh", "th", "h"],
 	"Plosives": ["p", "b", "t", "d", "k", "g"],
-	"Nasals": ["m", "n", "ng"]
+	"Nasals": ["m", "n", "ng"],
+	"Liquids": ["l", "r", "w", "y"],
+	"Affricates": ["ch", "j"]
 }
 
 # Playback State
@@ -416,6 +418,10 @@ func _on_test_button_pressed(category: String, phoneme: String):
 			synth.trigger_plosive(phoneme)
 		"Nasals":
 			synth.trigger_nasal(phoneme)
+		"Liquids":
+			synth.trigger_approximant(phoneme)
+		"Affricates":
+			synth.trigger_affricate(phoneme)
 
 func _set_mapper_pos(target_field: Vector2, target_intensity: float):
 	mapper.set_values(target_field.y, target_field.x, target_intensity)

@@ -149,6 +149,18 @@ const NASAL_PARAMS = {
 	"ng": {"f1": 280, "delta": 2000, "amp": 0.3}
 }
 
+const APPROXIMANT_PARAMS = {
+	"l": {"f1": 400, "delta": 800, "amp": 0.5},
+	"r": {"f1": 450, "delta": 750, "amp": 0.6},
+	"w": {"f1": 300, "delta": 300, "amp": 0.5},
+	"y": {"f1": 300, "delta": 1800, "amp": 0.5}
+}
+
+const AFFRICATE_PARAMS = {
+	"ch": {"closure_ms": 40, "burst_ms": 100, "cutoff": 3500, "amp": 0.7, "voiced": false},
+	"j": {"closure_ms": 30, "burst_ms": 80, "cutoff": 3000, "amp": 0.6, "voiced": true}
+}
+
 # Buffer
 var _buffer: PackedVector2Array = PackedVector2Array()
 
@@ -303,6 +315,48 @@ func trigger_nasal(consonant: String = "m", duration_ms: float = 150):
 	var e2 = AudioEvent.new()
 	e2.at_sample = sample_clock + dur_samples
 	e2.type = "nasal_end"
+	events.append(e2)
+
+# === NEW: Approximant (Liquids/Glides) ===
+func trigger_approximant(consonant: String = "l", duration_ms: float = 120):
+	if not consonant in APPROXIMANT_PARAMS:
+		consonant = "l"
+		
+	var params = APPROXIMANT_PARAMS[consonant]
+	var dur_samples = int((duration_ms / 1000.0) * sample_rate)
+	
+	var e1 = AudioEvent.new()
+	e1.at_sample = sample_clock
+	e1.type = "approximant_start"
+	e1.params = params
+	events.append(e1)
+	
+	var e2 = AudioEvent.new()
+	e2.at_sample = sample_clock + dur_samples
+	e2.type = "approximant_end"
+	events.append(e2)
+
+# === NEW: Affricate (Plosive + Fricative) ===
+func trigger_affricate(consonant: String = "ch"):
+	if not consonant in AFFRICATE_PARAMS:
+		consonant = "ch"
+		
+	var params = AFFRICATE_PARAMS[consonant]
+	var closure_samples = int((params.closure_ms / 1000.0) * sample_rate)
+	
+	# 1. Closure (Silence)
+	var e1 = AudioEvent.new()
+	e1.at_sample = sample_clock
+	e1.type = "closure"
+	events.append(e1)
+	
+	# 2. Release (Fricative Noise)
+	var e2 = AudioEvent.new()
+	e2.at_sample = sample_clock + closure_samples
+	e2.type = "fricative"
+	e2.duration_samples = int((params.burst_ms / 1000.0) * sample_rate)
+	e2.amplitude = params.amp
+	e2.params = {"cutoff": params.cutoff, "voiced": params.voiced}
 	events.append(e2)
 
 func release_fricative():
@@ -466,6 +520,14 @@ func _apply_event(e: AudioEvent):
 	elif e.type == "nasal_end":
 		nasal_state = NasalState.NONE
 		# We don't stop here, we leave it to the next vowel or manual stop
+	elif e.type == "approximant_start":
+		audio_target_f1 = e.params.f1
+		audio_target_delta = e.params.delta
+		target_intensity = e.params.amp
+		is_speaking = true
+	elif e.type == "approximant_end":
+		# We don't stop, just leave the state (can glide into vowels)
+		pass
 		
 func _poly_blep(t: float, dt: float) -> float:
 	if t < dt:

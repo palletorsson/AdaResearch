@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Cables & Catenaries: The Weight of Connection",
-		"description": "A cable is a line with weight. Gravity pulls it down; tension holds it up. The shape is a catenary (hyperbolic cosine). Simulate physical connections using Verlet integration and stick constraints. Learn slack and tension. Discover that real connections have weight—they sag, require maintenance, are affected by gravity (context). Slack is not inefficiency; it's the buffer that prevents snapping.",
+		"description": "A cable is a line with weight. Gravity pulls it down; tension holds it up. The shape is a catenary (hyperbolic cosine). Simulate physical connections using Verlet integration and stick constraints. Learn slack and tension. Discover that real connections have weight\u2014they sag, require maintenance, are affected by gravity (context). Slack is not inefficiency; it's the buffer that prevents snapping.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,26 +13,14 @@
 			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": [
-				"Catenary curve: y = a * cosh(x/a)",
-				"Verlet integration: simulating physics with particles and velocity",
-				"Stick constraints: keeping segments at fixed distance",
-				"Slack and tension: excess length vs. straight line",
-				"Network theory: straight lines are lies—connections have weight",
-				"Critical: Slack as buffer, not inefficiency"
-			]
+			"learning_objectives": ["Catenary curve: y = a * cosh(x/a)", "Verlet integration: simulating physics with particles and velocity", "Stick constraints: keeping segments at fixed distance", "Slack and tension: excess length vs. straight line", "Network theory: straight lines are lies\u2014connections have weight", "Critical: Slack as buffer, not inefficiency"]
 		}
 	},
 	"documentation": {
 		"summary": "Wavefunctions Level Six",
 		"layout": "13x14 amphitheater packed with multiple wave exhibits, annotation, and scoring booths.",
 		"objective": "Survey advanced wavefunction apparatus including colored lines, cables, and sine staircases.",
-		"key_elements": [
-			"Spawn `s` at the north",
-			"Interactive set: `ColoredLinesVR`, `StaticCables`, `sine_cylinder_staircase`, `coshlea`",
-			"`dark_sphere` ambience across the stage",
-			"Annotation `an`, score cube `sp`, and teleporter banks `t` along the exit"
-		]
+		"key_elements": ["Spawn `s` at the north", "Interactive set: `ColoredLinesVR`, `StaticCables`, `sine_cylinder_staircase`, `coshlea`", "`dark_sphere` ambience across the stage", "Annotation `an`, score cube `sp`, and teleporter banks `t` along the exit"]
 	},
 	"layers": {
 		"structure": [
@@ -46,8 +34,8 @@
 			["5", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "5"],
 			["5", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "5"],
 			["5", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "5"],
-			["5", "1", "1", "1", "1", "1", "1", "5", "1", "1", "1", "5"],		
-			["5", "1", "1", "1", "1", "1", "1", "5", "1", "0", "1", "5"],		
+			["5", "1", "1", "1", "1", "1", "1", "5", "1", "1", "1", "5"],
+			["5", "1", "1", "1", "1", "1", "1", "5", "1", "0", "1", "5"],
 			["5", "5", "5", "5", "5", "5", "5", "5", "1", "1", "1", "5"]
 		],
 		"utilities": [
@@ -62,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -76,9 +64,9 @@
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -89,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

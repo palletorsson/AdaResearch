@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "WaveFunctions_Lissajous3D",
-		"description": "Lissajous 3D",
+		"name": "WaveFunctions_PendulumWave",
+		"description": "Pendulum Wave",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -17,7 +17,7 @@
 		}
 	},
 	"documentation": {
-		"summary": "Lissajous 3D",
+		"summary": "Pendulum Wave",
 		"layout": "Standard layout",
 		"objective": "Observe the wave function",
 		"key_elements": ["Teleporter"]
@@ -59,12 +59,12 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "Lissajous3D:-90:-0.1", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "PendulumWave:-90:-0.1", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "PendulumCircle", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "DoublePendulum", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", "OscillationCurve:-90:-0.1", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

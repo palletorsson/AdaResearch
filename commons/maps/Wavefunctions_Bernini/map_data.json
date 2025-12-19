@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Bernini's Twist: The Baroque Algorithm",
-		"description": "The Solomonic columns of St. Peter's Baldachin spiral upward, defying stone's rigidity. Use sine waves to displace mesh vertices, transforming cylinders into twisting baroque forms. Layer noise for organic erosion. Discover procedural geometry as the new Baroque—favoring the variable, mutating, and complex over the static and ideal. Baroque was a glitch in Renaissance order.",
+		"description": "The Solomonic columns of St. Peter's Baldachin spiral upward, defying stone's rigidity. Use sine waves to displace mesh vertices, transforming cylinders into twisting baroque forms. Layer noise for organic erosion. Discover procedural geometry as the new Baroque\u2014favoring the variable, mutating, and complex over the static and ideal. Baroque was a glitch in Renaissance order.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,26 +13,14 @@
 			"difficulty": "advanced",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": [
-				"Vertex displacement: twisting via rotation matrix in shader",
-				"Rotation matrix around Y-axis (angle = VERTEX.y * twist)",
-				"Adding noise for organic detail: VERTEX += NORMAL * noise",
-				"Digital grotesque: animating the twist, breathing columns",
-				"Critical: Baroque as glitch in Renaissance order",
-				"Procedural geometry as new Baroque: variable over ideal"
-			]
+			"learning_objectives": ["Vertex displacement: twisting via rotation matrix in shader", "Rotation matrix around Y-axis (angle = VERTEX.y * twist)", "Adding noise for organic detail: VERTEX += NORMAL * noise", "Digital grotesque: animating the twist, breathing columns", "Critical: Baroque as glitch in Renaissance order", "Procedural geometry as new Baroque: variable over ideal"]
 		}
 	},
 	"documentation": {
 		"summary": "Wavefunctions Bernini Gallery",
 		"layout": "13x14 hall with colonnades and mirrored hallway scenes framing the Bernini centerpiece.",
 		"objective": "Appreciate wave-inspired architecture while traversing the double hallway experience.",
-		"key_elements": [
-			"Spawn `s` at the northern portico",
-			"`bernini_columns` installation paired with `hallway_scene` lighting",
-			"`dark_sphere` canopy over the showcase",
-			"Teleporter `t` to exit"
-		]
+		"key_elements": ["Spawn `s` at the northern portico", "`bernini_columns` installation paired with `hallway_scene` lighting", "`dark_sphere` canopy over the showcase", "Teleporter `t` to exit"]
 	},
 	"layers": {
 		"structure": [
@@ -47,9 +35,9 @@
 			["3", "1", "2", "2", "2", "2", "2", "2", "2", "1", "3"],
 			["3", "1", "2", "2", "2", "2", "2", "2", "2", "1", "3"],
 			["3", "1", "2", "2", "2", "2", "2", "2", "2", "1", "3"],
-			["3", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3"],	
+			["3", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3"],
 			["3", "2", "3", "2", "3", "0", "3", "2", "3", "2", "3"],
-			["3", "2", "3", "2", "3", "1", "3", "2", "3", "2", "3"]			
+			["3", "2", "3", "2", "3", "1", "3", "2", "3", "2", "3"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -64,7 +52,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -79,7 +67,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -90,14 +78,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

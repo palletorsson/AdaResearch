@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Wave Propagation: The Medium is the Message",
-		"description": "A wave is not an object—it's a disturbance traveling through a medium. Watch waves emanate from sources, diminishing by inverse square law. Learn distance fields, phase propagation (sin(time - dist)), attenuation, and interference. Discover that identity is permeable: you are not a static entity, but a point of intersection for the world's noise.",
+		"description": "A wave is not an object\u2014it's a disturbance traveling through a medium. Watch waves emanate from sources, diminishing by inverse square law. Learn distance fields, phase propagation (sin(time - dist)), attenuation, and interference. Discover that identity is permeable: you are not a static entity, but a point of intersection for the world's noise.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,25 +13,14 @@
 			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": [
-				"Distance fields: calculating propagation from source to every point",
-				"Wave function: sin(time * speed - dist * frequency)",
-				"Attenuation: inverse square law (energy = 1 / (1 + dist²))",
-				"Interference: wave summation creates peaks and cancellation",
-				"Critical: Identity is permeable—to exist in a medium is to be distorted by it"
-			]
+			"learning_objectives": ["Distance fields: calculating propagation from source to every point", "Wave function: sin(time * speed - dist * frequency)", "Attenuation: inverse square law (energy = 1 / (1 + dist\u00b2))", "Interference: wave summation creates peaks and cancellation", "Critical: Identity is permeable\u2014to exist in a medium is to be distorted by it"]
 		}
 	},
 	"documentation": {
 		"summary": "WaveFunctions 3D Wave Propagation",
 		"layout": "13x14 arena carved around an 8x8 sunken stage for volumetric wave demonstrations.",
 		"objective": "Visualize a propagating 3D waveform from a safe overlook before advancing to the next study.",
-		"key_elements": [
-			"Spawn `s` at the north-west entry platform",
-			"`wave_propagation_3d` simulator centered at (5,5)",
-			"`dark_sphere` canopy providing contrast over the waveform",
-			"Teleporter `t` at the south-east promenade"
-		]
+		"key_elements": ["Spawn `s` at the north-west entry platform", "`wave_propagation_3d` simulator centered at (5,5)", "`dark_sphere` canopy providing contrast over the waveform", "Teleporter `t` at the south-east promenade"]
 	},
 	"layers": {
 		"structure": [
@@ -47,7 +36,7 @@
 			["3", "1", "0", "0", "0", "0", "0", "0", "0", "0", "1", "3"],
 			["3", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3"],
 			["3", "3", "3", "3", "3", "3", "3", "3", "3", "0", "3", "3"],
-			["3", "3", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"],			
+			["3", "3", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -61,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -76,8 +65,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]		
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -88,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
@@ -118,4 +106,4 @@
 			"color": [0.2, 0.3, 0.7]
 		}
 	}
-} 
+}

@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "Harmonic Builder: The Architecture of Timbre",
-		"description": "Any complex repeating wave can be built by summing simple sine waves at integer multiples of a fundamental frequency. Construct square, sawtooth, and triangle waves by manually adjusting harmonic amplitudes. Act as a Fourier Synthesizer and discover that complexity is reducible—the strangest waveform is just a choir of sines singing in perfect ratios.",
+		"description": "Any complex repeating wave can be built by summing simple sine waves at integer multiples of a fundamental frequency. Construct square, sawtooth, and triangle waves by manually adjusting harmonic amplitudes. Act as a Fourier Synthesizer and discover that complexity is reducible\u2014the strangest waveform is just a choir of sines singing in perfect ratios.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,13 +13,7 @@
 			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-10 minutes",
-			"learning_objectives": [
-				"Harmonic series: fundamental + overtones at integer multiples (f, 2f, 3f...)",
-				"Additive synthesis: building complex waves from simple sines",
-				"Wave recipes: square (odd harmonics), sawtooth (all harmonics), triangle (odd 1/n²)",
-				"Amplitude decay: 1/n for sawtooth, 1/n² for triangle",
-				"Critical: Complexity is reducible—chaos is often undecomposed order"
-			]
+			"learning_objectives": ["Harmonic series: fundamental + overtones at integer multiples (f, 2f, 3f...)", "Additive synthesis: building complex waves from simple sines", "Wave recipes: square (odd harmonics), sawtooth (all harmonics), triangle (odd 1/n\u00b2)", "Amplitude decay: 1/n for sawtooth, 1/n\u00b2 for triangle", "Critical: Complexity is reducible\u2014chaos is often undecomposed order"]
 		}
 	},
 	"layers": {
@@ -36,7 +30,7 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],			
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -57,7 +51,7 @@
 			[" ", " ", "HarmonicBuilder", " ", "clipboard#harmonic_builder_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "math_objects", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

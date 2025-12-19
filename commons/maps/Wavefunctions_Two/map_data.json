@@ -20,11 +20,7 @@
 		"summary": "Wavefunctions Level Two",
 		"layout": "13x14 stage with annotation kiosks and a sine space sculpture guiding the lesson.",
 		"objective": "Connect sine wave motion to spatial geometry while tracking progression via score cube.",
-		"key_elements": [
-			"Spawn `s` at the north",
-			"`sine_space` installation with `dark_sphere` lighting",
-			"Annotation `an`, teleporter array `t`, and score cube `sp` near the exit"
-		]
+		"key_elements": ["Spawn `s` at the north", "`sine_space` installation with `dark_sphere` lighting", "Annotation `an`, teleporter array `t`, and score cube `sp` near the exit"]
 	},
 	"layers": {
 		"structure": [
@@ -38,7 +34,7 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],		
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "0", "1", "2"]
 		],
@@ -54,8 +50,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "an", "t", "t", "t", "sp", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -68,9 +64,9 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -81,14 +77,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

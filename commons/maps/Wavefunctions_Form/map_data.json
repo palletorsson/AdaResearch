@@ -20,12 +20,7 @@
 		"summary": "Wavefunctions Level Five",
 		"layout": "13x14 structured grid with annotation and scoring pods leading to a unit circle analyzer.",
 		"objective": "Refine understanding of circular harmonics using the advanced unit circle tool.",
-		"key_elements": [
-			"Spawn `s` at the north",
-			"`unit_circle_advanced` device paired with `dark_sphere` ambiance",
-			"Annotation cube `an` and score cube `sp` at the exit",
-			"Teleporter `t` to proceed"
-		]
+		"key_elements": ["Spawn `s` at the north", "`unit_circle_advanced` device paired with `dark_sphere` ambiance", "Annotation cube `an` and score cube `sp` at the exit", "Teleporter `t` to proceed"]
 	},
 	"layers": {
 		"structure": [
@@ -39,10 +34,10 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],		
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "1", "0", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"],			
+			["2", "2", "2", "2", "2", "2", "2", "2", "1", "1", "1", "2"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -56,8 +51,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -70,9 +65,9 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "water_land_ride", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", "", " ", " ", "segment_slide", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "", " ", " ", "segment_slide", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -83,14 +78,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 5.5  
+				"height": 5.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

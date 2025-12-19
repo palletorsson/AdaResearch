@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "The Dancing Body: Kinematic Waves",
-		"description": "Animate characters not with keyframes (recorded history) but with functions (living math). Pass sine waves through the skeletal hierarchy to create procedural dance—fluid, infinite, algorithmic movement. Learn phase lag, Perlin noise improvisation, and inverse kinematics. Discover that freedom is just improvisation within constraints.",
+		"description": "Animate characters not with keyframes (recorded history) but with functions (living math). Pass sine waves through the skeletal hierarchy to create procedural dance\u2014fluid, infinite, algorithmic movement. Learn phase lag, Perlin noise improvisation, and inverse kinematics. Discover that freedom is just improvisation within constraints.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,13 +13,7 @@
 			"difficulty": "intermediate",
 			"category": "wavefunctions",
 			"estimated_time": "5-10 minutes",
-			"learning_objectives": [
-				"Phase lag: offsetting sine waves down bone chains for serpentine motion",
-				"Perlin noise: adding drift and breath to avoid robotic perfection",
-				"Inverse kinematics (IK): waving the target, letting solver calculate joints",
-				"Algorithmic choreography: revealing the geometry of intent",
-				"Critical: Freedom is improvisation within constraints—we are all bound"
-			]
+			"learning_objectives": ["Phase lag: offsetting sine waves down bone chains for serpentine motion", "Perlin noise: adding drift and breath to avoid robotic perfection", "Inverse kinematics (IK): waving the target, letting solver calculate joints", "Algorithmic choreography: revealing the geometry of intent", "Critical: Freedom is improvisation within constraints\u2014we are all bound"]
 		}
 	},
 	"layers": {
@@ -36,7 +30,7 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],			
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

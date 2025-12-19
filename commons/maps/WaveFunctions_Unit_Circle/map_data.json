@@ -20,12 +20,7 @@
 		"summary": "WaveFunctions Unit Circle",
 		"layout": "13x14 floor with a walkway leading to an elevated unit circle platform under a dark dome.",
 		"objective": "Navigate the walkway to explore the advanced unit circle animator.",
-		"key_elements": [
-			"Spawn `s` at the start of the ramp",
-			"Walkway `wp` guiding players across the span",
-			"`unit_circle_advanced` feature at the platform",
-			"Teleporter `t` beyond the exhibit"
-		]
+		"key_elements": ["Spawn `s` at the start of the ramp", "Walkway `wp` guiding players across the span", "`unit_circle_advanced` feature at the platform", "Teleporter `t` beyond the exhibit"]
 	},
 	"layers": {
 		"structure": [
@@ -45,7 +40,7 @@
 			["2", "1", "2", "0", "0", "0", "0", "0", "0", "0", "2", "1", "2"],
 			["0", "1", "2", "0", "0", "0", "0", "0", "0", "0", "2", "1", "0"],
 			["0", "0", "2", "0", "0", "0", "0", "0", "0", "0", "2", "0", "0"],
-			["0", "0", "2", "0", "0", "0", "0", "0", "0", "0", "2", "0", "0"],
+			["0", "0", "2", "0", "0", "0", "0", "0", "0", "0", "2", "0", "0"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -59,8 +54,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -74,8 +69,8 @@
 			[" ", " ", " ", " ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],				
-			["SimpleOscillatingBridge:0:2", "OscillationCurve:90:2", " ", "vector_drone", " ", "vector_drone", "dark_sphere", " ", " ", " ", " ", "OscillationCurve:90:2", "SimpleOscillatingBridge:0:2"]		
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["SimpleOscillatingBridge:0:2", "OscillationCurve:90:2", " ", "vector_drone", " ", "vector_drone", "dark_sphere", " ", " ", " ", " ", "OscillationCurve:90:2", "SimpleOscillatingBridge:0:2"]
 		]
 	},
 	"utility_definitions": {
@@ -86,14 +81,13 @@
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
+		},
 		"s": {
 			"properties": {
-				"height": 1.5  
+				"height": 1.5
 			}
 		}
 	},
-
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,
@@ -116,4 +110,4 @@
 			"color": [0.2, 0.3, 0.7]
 		}
 	}
-} 
+}
