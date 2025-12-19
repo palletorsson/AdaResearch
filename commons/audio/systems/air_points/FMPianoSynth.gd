@@ -1,14 +1,17 @@
 extends Node
 class_name FMPianoSynth
 
-## FMPianoSynth (Baked Version)
-## Uses pre-generated FM samples for performance.
-## Manages a pool of AudioStreamPlayers.
+## FMPianoSynth (Non-Blocking Version)
+## Uses background threads for FM sample generation to prevent frame stutters.
+## Manages a pool of AudioStreamPlayers and a thread-safe sample cache.
 
 @export var gain: float = 0.4
 
 # Cache: "freq_velocity_sustain" -> AudioStreamWAV
+# Guarded by _cache_mutex
 var _sample_cache: Dictionary = {}
+var _cache_mutex: Mutex = Mutex.new()
+
 var _players: Array[AudioStreamPlayer] = []
 var _max_polyphony: int = 12
 
@@ -46,22 +49,38 @@ func _setup_reverb():
 
 func play_note(freq: float, vel: float, sustain_time: float = 1.5):
 	# Quantize params to reduce cache size
-	# Round freq to 2 decimals, vel to 1 decimal, sustain to 1 decimal
 	var q_freq = snapped(freq, 0.01)
 	var q_vel = snapped(vel, 0.1) 
 	var q_sustain = snapped(sustain_time, 0.1)
 	
 	var cache_key = "%s_%s_%s" % [q_freq, q_vel, q_sustain]
 	
-	if not _sample_cache.has(cache_key):
-		# Generate on demand
-		var stream = FMPianoGenerator.generate_note(q_freq, q_vel, q_sustain)
-		_sample_cache[cache_key] = stream
-		
-	var stream = _sample_cache[cache_key]
-	_play_stream(stream)
+	_cache_mutex.lock()
+	var cached_stream = _sample_cache.get(cache_key)
+	_cache_mutex.unlock()
+	
+	if cached_stream:
+		_play_stream(cached_stream)
+	else:
+		# Generate in background thread to prevent blocking
+		WorkerThreadPool.add_task(
+			func(): _generate_and_cache(cache_key, q_freq, q_vel, q_sustain)
+		)
+
+func _generate_and_cache(key: String, f: float, v: float, s: float):
+	# HEAVY MATH HAPPENING HERE (InBackground)
+	var new_stream = FMPianoGenerator.generate_note(f, v, s)
+	
+	_cache_mutex.lock()
+	_sample_cache[key] = new_stream
+	_cache_mutex.unlock()
+	
+	# Hand off to main thread for playback
+	call_deferred("_play_stream", new_stream)
 
 func _play_stream(stream: AudioStream):
+	if not stream: return
+	
 	# Find free player
 	for p in _players:
 		if not p.playing:
@@ -74,7 +93,7 @@ func _play_stream(stream: AudioStream):
 	p.stop()
 	p.stream = stream
 	p.play()
-	_players.pop_front()
+	_players.remove_at(0)
 	_players.append(p)
 
 # Helper for Linear -> DB conversion

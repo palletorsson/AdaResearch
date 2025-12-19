@@ -16,14 +16,22 @@ var tile_multimesh_instance: MultiMeshInstance3D
 var tile_multimesh: MultiMesh
 var wave_rings: Array = []
 var tile_collision_bodies: Array[StaticBody3D] = []
+var soundscape: Node3D
 
 var base_tile_color := Color(0.22, 0.55, 0.85, 1.0)
 var peak_tile_color := Color(0.95, 0.85, 0.4, 1.0)
 
 func _ready():
 	create_wave_surface()
-	#create_wave_rings()
+	create_wave_rings() # Enable rings for the soundscape
 	setup_materials()
+	setup_soundscape()
+
+func setup_soundscape():
+	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
+	soundscape = WaveSoundscape.new()
+	add_child(soundscape)
+	print("WavePropagation: Soundscape component initialized.")
 
 func create_wave_surface():
 	var surface_parent = $WaveSurface
@@ -108,6 +116,9 @@ func _process(delta):
 	animate_3d_wave_propagation()
 	animate_wave_rings()
 	animate_controls()
+	
+	if soundscape:
+		soundscape.update_parameters(frequency, amplitude, time, wave_rings)
 
 func animate_3d_wave_propagation():
 	if tile_multimesh == null:

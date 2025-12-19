@@ -25,6 +25,11 @@ var audio_playbacks: Array[AudioStreamGeneratorPlayback] = []
 const SAMPLE_RATE = 44100.0
 const BASE_FREQ = 110.0
 
+var theremin_player: AudioStreamPlayer3D
+var theremin_playback: AudioStreamGeneratorPlayback
+var theremin_phase := 0.0
+var last_tip_pos := Vector3.ZERO
+
 func _ready():
 	setup_camera()
 	setup_wheels()
@@ -49,6 +54,22 @@ func setup_audio():
 		audio_playbacks.append(player.get_stream_playback())
 	
 	print("FourierTransform: Ready with %d spatial harmonics" % wheels.size())
+	
+	setup_theremin()
+
+func setup_theremin():
+	theremin_player = AudioStreamPlayer3D.new()
+	add_child(theremin_player)
+	theremin_player.unit_size = 25.0
+	theremin_player.max_db = 0.0 # Master voice
+	
+	var generator = AudioStreamGenerator.new()
+	generator.mix_rate = SAMPLE_RATE
+	generator.buffer_length = 0.1
+	theremin_player.stream = generator
+	
+	theremin_player.play()
+	theremin_playback = theremin_player.get_stream_playback()
 
 func setup_camera():
 	var camera = Camera3D.new()
@@ -127,6 +148,7 @@ func _process(delta):
 	update_trace()
 	ensure_trace_lights()
 	_generate_audio_samples()
+	_generate_theremin_audio()
 
 func update_wheels():
 	var current_pos = Vector3.ZERO
@@ -229,5 +251,44 @@ func _generate_audio_samples():
 			for _f in range(frames_available):
 				# Use a global phase based on time for coherence if needed, 
 				# or just track local phase. Using time * freq is simplest.
-				var sample = sin(2.0 * PI * freq * time) * amplitude
+				var sample = sin(2.0 * PI * freq * time) * amplitude * 0.3 # Reduced volume
 				playback.push_frame(Vector2(sample, sample))
+
+func _generate_theremin_audio():
+	if not theremin_playback: return
+	var frames = theremin_playback.get_frames_available()
+	if frames <= 0: return
+
+	# Tip position is the last point in trace_points
+	if trace_points.is_empty(): return
+	var tip_pos = trace_points[-1]
+	
+	# Update player position
+	theremin_player.position = tip_pos
+	
+	# THE THEREMIN LOGIC
+	# 1. Pitch: Map Y position to Frequency
+	# Range: Y=-5 to Y=5 maps to ~100Hz to ~1200Hz
+	var target_freq = 300.0 + (tip_pos.y * 150.0)
+	target_freq = clamp(target_freq, 50.0, 3000.0)
+	
+	# 2. Expression: Speed determines Vibrato/Timbre
+	var speed = tip_pos.distance_to(last_tip_pos) * 60.0
+	last_tip_pos = tip_pos
+	
+	var vibrato_rate = 5.0 + (speed * 0.1)
+	var vibrato_depth = 2.0 + (speed * 0.5)
+	
+	for i in range(frames):
+		# Complex Frequency (FM-ish Vibrato)
+		var current_freq = target_freq + sin(time * TAU * vibrato_rate) * vibrato_depth
+		theremin_phase += current_freq / SAMPLE_RATE
+		if theremin_phase > 1.0: theremin_phase -= 1.0
+		
+		# Waveform: Ghostly Sine + subtle Triangle
+		var s1 = sin(theremin_phase * TAU)
+		# Add a bit of "static/buzz" based on speed
+		var noise = (randf() * 2.0 - 1.0) * (speed * 0.005)
+		
+		var sample = (s1 * 0.7 + noise) * 0.5
+		theremin_playback.push_frame(Vector2(sample, sample))

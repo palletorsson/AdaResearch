@@ -97,6 +97,8 @@ func _find_grid_resources():
 			material.set_shader_parameter("show_interior", true)
 			material.set_shader_parameter("wireframeOpacity", 0.3)
 			print("DiscoGrid: Adjusted material (modelColor=WHITE, show_interior=true)")
+		elif material == null:
+			print("DiscoGrid: WARNING - material_override is null, shader parameters not set")
 	else:
 		print("DiscoGrid: ERROR - GridMultiMesh not found!")
 

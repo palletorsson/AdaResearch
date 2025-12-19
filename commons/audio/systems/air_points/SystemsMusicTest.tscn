@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dph30nsq0u8xh"]
+[gd_scene load_steps=6 format=3 uid="uid://dph30nsq0u8xh"]
 
 [ext_resource type="Script" uid="uid://bmpwl36guucgg" path="res://commons/audio/systems/air_points/FMPianoSynth.gd" id="1_synth"]
 [ext_resource type="Script" uid="uid://dqf7y2ks8spbo" path="res://commons/audio/systems/air_points/SystemsMusicLooper.gd" id="2_looper"]
 [ext_resource type="Script" uid="uid://b10071d7722pf" path="res://commons/audio/systems/air_points/LoopVisualizer.gd" id="4_vis"]
 [ext_resource type="Script" uid="uid://bvk4mahgdwm1f" path="res://commons/audio/systems/IntensityController.gd" id="5_ctrl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_63pm7"]
 
 [node name="SystemsMusicTest" type="Node3D"]
 
@@ -36,3 +38,6 @@ FM Piano Synthesis"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_63pm7")

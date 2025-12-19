@@ -39,6 +39,7 @@ const TEST_PHONEMES = {
 
 # Playback State
 var is_playing_sequence: bool = false
+var is_ambient_enabled: bool = true
 
 # --- Trail / Trace Logic ---
 var _trail_mesh: ImmediateMesh
@@ -98,20 +99,45 @@ func _ready():
 	# Auto-Play Loop ("Now and then")
 	_start_ambient_loop()
 
+func apply_grid_config(data: Dictionary):
+	print("VowelSoundBoard: Received grid config: ", data)
+	if data.has("say"):
+		is_ambient_enabled = false
+		var phrase = str(data["say"]).to_lower()
+		var should_repeat = str(data.get("repeat", "false")).to_lower() == "true"
+		
+		# Clean phrase: remove punctuation and spaces for matching
+		var cleaned = phrase.replace(",", "").replace(".", "").replace("!", "").replace("?", "").replace(" ", "")
+		print("VowelSoundBoard: Configured to say path (cleaned): ", cleaned, " (repeat: ", should_repeat, ")")
+		
+		# Delay slightly to ensure everything is ready
+		await get_tree().create_timer(1.0).timeout
+		
+		if should_repeat:
+			while not is_ambient_enabled: # Loop while custom speech is active
+				await play_word(cleaned)
+				await get_tree().create_timer(3.0).timeout # Interval between repeats
+		else:
+			play_word(cleaned)
+
 func _start_ambient_loop():
 	await get_tree().create_timer(1.0).timeout
 	while true:
 		if not is_inside_tree(): return
+		if not is_ambient_enabled: break # Exit the loop if ambient is disabled
 		
 		play_word("ada")
 		await get_tree().create_timer(1.5).timeout
+		if not is_ambient_enabled: break
 		
 		play_word("research")
 		await get_tree().create_timer(2.0).timeout
+		if not is_ambient_enabled: break
 		
 		# New Request
 		play_word("iloveyou")
 		await get_tree().create_timer(2.0).timeout
+		if not is_ambient_enabled: break
 		
 		# "Now and then" -> Pause
 		await get_tree().create_timer(4.0).timeout
@@ -287,11 +313,12 @@ func _on_mapper_changed(delta_val: float, f1_val: float, intensity_val: float):
 
 # --- Automatic Pattern Playback ---
 
-func play_word(word: String):
+func play_word(word: String, pitch: float = 130.0):
 	if is_playing_sequence: return
 	is_playing_sequence = true
 	label_mode.text = "Mode: Automatic"
 	label_word.text = word
+	synth.pulse_hz = pitch
 	
 	match word.to_lower():
 		"ada":
@@ -302,6 +329,20 @@ func play_word(word: String):
 			await _play_iloveyou()
 		"alphabet":
 			await _play_alphabet()
+		"righthererightnow":
+			await _play_right_here_right_now()
+		"funk":
+			await _play_funk()
+		"hello world":
+			await _play_hello_world()
+		"rightaboutnow":
+			await _play_right_about_now()
+		"soulbrother":
+			await _play_soul_brother()
+		"checkitout":
+			await _play_check_it_out()
+		"rockafeller":
+			await _play_rockafeller()
 	
 	is_playing_sequence = false
 	label_mode.text = "Mode: Manual (Grab Point)"
@@ -355,6 +396,193 @@ func _play_research():
 	# 6. Cut (ch)
 	_tween_mapper(ANCHORS["r"], 0.0, 0.05)
 
+
+func _play_right_here_right_now():
+	# "Right Here, Right Now"
+	# Right
+	await _play_right()
+	await get_tree().create_timer(0.2).timeout
+	# Here
+	await _play_here()
+	await get_tree().create_timer(0.3).timeout
+	# Right
+	await _play_right()
+	await get_tree().create_timer(0.2).timeout
+	# Now
+	await _play_now()
+
+func _play_right():
+	# /r/ -> /ai/ -> /t/
+	_set_mapper_pos(ANCHORS["r"], 0.0)
+	_tween_mapper(ANCHORS["r"], 0.8, 0.1)
+	await get_tree().create_timer(0.15).timeout
+	
+	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	_tween_mapper(ANCHORS["i"], 1.0, 0.15)
+	await get_tree().create_timer(0.15).timeout
+	
+	synth.trigger_plosive("t")
+	_tween_mapper(ANCHORS["i"], 0.0, 0.05)
+	await get_tree().create_timer(0.1).timeout
+
+func _play_here():
+	# /h/ -> /ia/ -> /r/
+	synth.trigger_fricative("h", 100)
+	await get_tree().create_timer(0.05).timeout
+	
+	_set_mapper_pos(ANCHORS["i"], 0.0)
+	_tween_mapper(ANCHORS["i"], 0.9, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	
+	_tween_mapper(ANCHORS["a"], 0.7, 0.15)
+	await get_tree().create_timer(0.15).timeout
+	
+	_tween_mapper(ANCHORS["r"], 0.8, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	_tween_mapper(ANCHORS["r"], 0.0, 0.1)
+
+func _play_now():
+	# /n/ -> /au/
+	synth.trigger_nasal("n", 150)
+	await get_tree().create_timer(0.1).timeout
+	
+	_set_mapper_pos(ANCHORS["a"], 0.0)
+	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	
+	_tween_mapper(ANCHORS["u"], 1.0, 0.2)
+	await get_tree().create_timer(0.4).timeout
+	_tween_mapper(ANCHORS["u"], 0.0, 0.2)
+
+func _play_funk():
+	# "The funk soul brother"
+	# Funk: /f/ -> /uh/ -> /ng/ -> /k/
+	synth.trigger_fricative("f", 120)
+	await get_tree().create_timer(0.08).timeout
+	
+	_set_mapper_pos(ANCHORS["a"], 0.0) # Central-ish
+	_tween_mapper(ANCHORS["a"], 1.0, 0.1)
+	await get_tree().create_timer(0.25).timeout
+	
+	synth.trigger_nasal("ng", 150)
+	await get_tree().create_timer(0.15).timeout
+	
+	synth.trigger_plosive("k")
+	_tween_mapper(ANCHORS["a"], 0.0, 0.05)
+
+func _play_hello_world():
+	# Hello: /h/ -> /e/ -> /l/ -> /o/
+	synth.trigger_fricative("h", 100)
+	await get_tree().create_timer(0.05).timeout
+	_tween_mapper(ANCHORS["e"], 1.0, 0.2)
+	await get_tree().create_timer(0.3).timeout
+	_tween_mapper(ANCHORS["r"], 0.8, 0.2) # /l/ is like /r/ central
+	await get_tree().create_timer(0.3).timeout
+	_tween_mapper(ANCHORS["o"], 1.0, 0.3)
+	await get_tree().create_timer(0.5).timeout
+	_tween_mapper(ANCHORS["o"], 0.0, 0.2)
+	
+	await get_tree().create_timer(0.3).timeout
+	
+	# World: /w/ -> /er/ -> /l/ -> /d/
+	# /w/ sequence
+	_set_mapper_pos(ANCHORS["u"], 0.0)
+	_tween_mapper(ANCHORS["u"], 1.0, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	
+	_tween_mapper(ANCHORS["r"], 0.9, 0.3)
+	await get_tree().create_timer(0.4).timeout
+	
+	synth.trigger_plosive("d")
+	_tween_mapper(ANCHORS["r"], 0.0, 0.1)
+
+func _play_right_about_now():
+	await _play_right()
+	await get_tree().create_timer(0.1).timeout
+	await _play_about()
+	await get_tree().create_timer(0.1).timeout
+	await _play_now()
+
+func _play_about():
+	# /a/ -> /b/ -> /au/ -> /t/
+	_tween_mapper(ANCHORS["a"], 0.7, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	synth.trigger_plosive("b")
+	await get_tree().create_timer(0.05).timeout
+	_tween_mapper(ANCHORS["u"], 0.9, 0.15)
+	await get_tree().create_timer(0.15).timeout
+	synth.trigger_plosive("t")
+	_tween_mapper(ANCHORS["u"], 0.0, 0.05)
+
+func _play_soul_brother():
+	# Soul: /s/ -> /o/ -> /l/
+	synth.trigger_fricative("s", 120)
+	await get_tree().create_timer(0.08).timeout
+	_tween_mapper(ANCHORS["o"], 1.0, 0.25)
+	await get_tree().create_timer(0.25).timeout
+	_tween_mapper(ANCHORS["r"], 0.7, 0.15) # /l/
+	await get_tree().create_timer(0.15).timeout
+	_tween_mapper(ANCHORS["r"], 0.0, 0.1)
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	# Brother: /b/ -> /r/ -> /uh/ -> /th/ -> /er/
+	synth.trigger_plosive("b")
+	await get_tree().create_timer(0.05).timeout
+	_tween_mapper(ANCHORS["r"], 0.8, 0.15)
+	await get_tree().create_timer(0.15).timeout
+	_tween_mapper(ANCHORS["a"], 0.9, 0.1) # /uh/
+	await get_tree().create_timer(0.1).timeout
+	synth.trigger_fricative("th", 80)
+	await get_tree().create_timer(0.08).timeout
+	_tween_mapper(ANCHORS["r"], 0.8, 0.1)
+	await get_tree().create_timer(0.2).timeout
+	_tween_mapper(ANCHORS["r"], 0.0, 0.1)
+
+func _play_check_it_out():
+	# Check: /ch/ -> /e/ -> /k/
+	synth.trigger_affricate("ch")
+	await get_tree().create_timer(0.15).timeout
+	_tween_mapper(ANCHORS["e"], 1.0, 0.1)
+	await get_tree().create_timer(0.15).timeout
+	synth.trigger_plosive("k")
+	_tween_mapper(ANCHORS["e"], 0.0, 0.05)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	# It: /i/ -> /t/
+	_tween_mapper(ANCHORS["i"], 0.8, 0.08)
+	await get_tree().create_timer(0.1).timeout
+	synth.trigger_plosive("t")
+	_tween_mapper(ANCHORS["i"], 0.0, 0.05)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	# Out: /au/ -> /t/
+	_tween_mapper(ANCHORS["a"], 0.8, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	_tween_mapper(ANCHORS["u"], 0.9, 0.15)
+	await get_tree().create_timer(0.15).timeout
+	synth.trigger_plosive("t")
+	_tween_mapper(ANCHORS["u"], 0.0, 0.05)
+
+func _play_rockafeller():
+	# "Right about now, the funk soul brother, check it out now!"
+	# Melodic (Singing) - Varying pitch
+	await _play_right_about_now()
+	await get_tree().create_timer(0.2).timeout
+	# Funk (higher pitch)
+	var old_pitch = synth.pulse_hz
+	synth.pulse_hz = 160.0 # Higher
+	await _play_funk()
+	synth.pulse_hz = old_pitch
+	await get_tree().create_timer(0.1).timeout
+	await _play_soul_brother()
+	await get_tree().create_timer(0.2).timeout
+	await _play_check_it_out()
+	await get_tree().create_timer(0.1).timeout
+	await _play_now()
 
 func _play_alphabet():
 	var cycle = ["i", "e", "a", "o", "u"]
@@ -423,29 +651,23 @@ func _on_test_button_pressed(category: String, phoneme: String):
 		"Affricates":
 			synth.trigger_affricate(phoneme)
 
-func _set_mapper_pos(target_field: Vector2, target_intensity: float):
+func _set_mapper_pos(target_field: Vector2, target_intensity: float, target_pitch: float = -1.0):
 	mapper.set_values(target_field.y, target_field.x, target_intensity)
+	if target_pitch > 0:
+		synth.pulse_hz = target_pitch
 
-func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float):
+func _tween_mapper(target_field: Vector2, target_intensity: float, duration: float, target_pitch: float = -1.0):
 	var tween = create_tween()
-	var start_val = mapper.get_values() # Vector3(delta, f1, int)
+	var start_val = mapper.get_values()
+	var start_pitch = synth.pulse_hz
 	
-	# Tween ValueMapper's set_values logic manually or just tween helper
-	# Since set_values updates position, we can tween the 'point.position' directly if we knew it,
-	# but mapper relies on internal state.
-	# Better to just use a proxy generic tween that calls set_values each frame? 
-	# Or tween a dummy value and update? 
-	# Actually, simpler: Tween independent floats and call set_values in _process?
-	# For now, let's just use a method tween.
+	var update_lambda = func(val: float):
+		var cur_delta = lerp(start_val.x, target_field.y, val)
+		var cur_f1 = lerp(start_val.y, target_field.x, val)
+		var cur_int = lerp(start_val.z, target_intensity, val)
+		mapper.set_values(cur_delta, cur_f1, cur_int)
+		if target_pitch > 0:
+			synth.pulse_hz = lerp(start_pitch, target_pitch, val)
 	
-	tween.tween_method(
-		func(val: float): 
-			# We need to interpolate X, Y, Z together.
-			# Method tweening a single float 0->1 is easiest.
-			var cur_delta = lerp(start_val.x, target_field.y, val)
-			var cur_f1 = lerp(start_val.y, target_field.x, val)
-			var cur_int = lerp(start_val.z, target_intensity, val)
-			mapper.set_values(cur_delta, cur_f1, cur_int),
-		0.0, 1.0, duration
-	)
+	tween.tween_method(update_lambda, 0.0, 1.0, duration)
 	await tween.finished

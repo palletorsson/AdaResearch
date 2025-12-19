@@ -7,7 +7,8 @@ class_name MaterialHelper
 static func set_material_texture(mesh: MeshInstance3D, tex: ImageTexture) -> void:
 	if mesh.material_override is ShaderMaterial:
 		var shader_material = mesh.material_override as ShaderMaterial
-		shader_material.set_shader_parameter("texture_albedo", tex)
+		if shader_material:
+			shader_material.set_shader_parameter("texture_albedo", tex)
 	else:
 		var material = StandardMaterial3D.new()
 		material.albedo_texture = tex
