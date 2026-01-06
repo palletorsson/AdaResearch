@@ -10,6 +10,11 @@
             "sound_id": "trap_beats.hihat_loop",
             "volume_db": -24,
             "bus": "Rhythm"
+        },
+        {
+            "sound_id": "SciFi.space_ambience",
+            "volume_db": -20,
+            "bus": "City"
         }
     ],
     "random_events": [
@@ -17,7 +22,8 @@
             "sound_pool": [
                 "AudioSynthesizer.SCI_FI_DATA_CHIRPS",
                 "techno_noir.distant_siren",
-                "AudioSynthesizer.FLYING_LOTUS_SAMPLER"
+                "AudioSynthesizer.FLYING_LOTUS_SAMPLER",
+                "techno_noir.static_burst"
             ],
             "interval_range": [
                 3.0,

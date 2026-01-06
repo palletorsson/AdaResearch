@@ -8,6 +8,9 @@ const TechnoNoirGenerator := preload("res://commons/audio/generators/TechnoNoirG
 const TrapBeatsGenerator := preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
 const CinematicMusicGenerator := preload("res://commons/audio/generators/CinematicMusicGenerator.gd")
 const EpicSynthEngine := preload("res://commons/audio/engines/EpicSynthEngine.gd")
+const SciFiPreviewGenerator := preload("res://commons/audio/generators/SciFiPreviewGenerator.gd")
+const LiturgicalAmbientGenerator := preload("res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.gd")
+const FourierSpaceGenerator := preload("res://commons/audio/generators/FourierSpaceGenerator.gd")
 
 var preset_tree: Tree
 var details_container: VBoxContainer
@@ -342,6 +345,12 @@ func _generate_stream_from_id(sound_id: String, params_override: Dictionary = {}
 			return CinematicMusicGenerator.generate_sound(sound_name, params_override)
 		"Epic":
 			return EpicSynthEngine.generate_patch(sound_name, params_override)
+		"SciFi", "sci_fi":
+			return SciFiPreviewGenerator.generate_preview(sound_name)
+		"Liturgical", "liturgical":
+			return _generate_liturgical_sound(sound_name)
+		"Fourier", "fourier_space":
+			return _generate_fourier_sound(sound_name)
 		"DarkGameTrack":
 			# Placeholder as logic is not easily accessible
 			return null
@@ -372,3 +381,28 @@ func _notification(what):
 			pass
 	elif what == NOTIFICATION_PREDELETE:
 		_stop_all_sounds()
+
+func _generate_liturgical_sound(sound_key: String) -> AudioStreamWAV:
+	var lit_gen = LiturgicalAmbientGenerator.new()
+	match sound_key.to_lower():
+		"cathedral_bell", "cathedral_bells": return lit_gen.create_cathedral_bell()
+		"pipe_organ_swell": return lit_gen.create_pipe_organ_swell()
+		"sacred_whisper", "sacred_whispers": return lit_gen.create_sacred_whisper()
+		"choral_texture", "angelic_texture": return lit_gen.create_angelic_texture()
+		"gregorian_phrase": return lit_gen.create_gregorian_phrase()
+		"divine_breath": return lit_gen.create_divine_breath()
+		_: return lit_gen.create_angelic_texture()
+
+func _generate_fourier_sound(sound_key: String) -> AudioStreamWAV:
+	var gen = FourierSpaceGenerator.new()
+	match sound_key.to_lower():
+		"drone":
+			var wheels = [
+				{"freq": 1.0, "radius": 2.0, "phase": 0.0},
+				{"freq": 3.0, "radius": 0.8, "phase": 0.0},
+				{"freq": 5.0, "radius": 0.4, "phase": PI / 2},
+				{"freq": 7.0, "radius": 0.2, "phase": PI / 4}
+			]
+			return gen.create_fourier_drone(wheels)
+		"nebula": return gen.create_nebula_pad()
+		_: return gen.create_fourier_drone([])

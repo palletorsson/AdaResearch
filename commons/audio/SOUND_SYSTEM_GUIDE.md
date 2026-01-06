@@ -151,6 +151,10 @@ This map will use `techno_noir_full` instead of the sequence's `techno_noir_subt
 
 ### 1. Add Preset to ambient_presets.json
 
+> [!TIP]
+> You can use the **Audio Catalog Editor** plugin to browse, preview, and edit sound parameters visually instead of editing JSON files manually.
+
+
 ```json
 {
   "presets": {

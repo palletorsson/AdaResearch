@@ -10,13 +10,20 @@
             "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
             "volume_db": -15,
             "bus": "Sub"
+        },
+        {
+            "sound_id": "Fourier.drone",
+            "volume_db": -18,
+            "bus": "Void"
         }
     ],
     "random_events": [
         {
             "sound_pool": [
                 "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                "liturgical.sacred_whisper"
+                "liturgical.sacred_whisper",
+                "Epic.trailer_rise",
+                "SciFi.dystopian_alarm"
             ],
             "interval_range": [
                 20.0,

@@ -1,0 +1,25 @@
+{
+    "drone": {
+        "_metadata": {
+            "generator": "Fourier",
+            "description": "Additive synthesis drone using Fourier transforms",
+            "tags": "drone, additive, fourier, math",
+            "version": "1.0",
+            "created_at": "2025-01-20T12:00:00Z"
+        },
+        "parameters": {
+            "base_freq": {
+                "value": 1.0,
+                "min": 0.5,
+                "max": 5.0,
+                "step": 0.1
+            },
+            "complexity": {
+                "value": 4.0,
+                "min": 1.0,
+                "max": 10.0,
+                "step": 1.0
+            }
+        }
+    }
+}

@@ -10,6 +10,12 @@ const AudioSynthesizer := preload("res://commons/audio/generators/AudioSynthesiz
 const CustomSoundGenerator := preload("res://commons/audio/generators/CustomSoundGenerator.gd")
 const TechnoNoirGenerator := preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
 const TrapBeatsGenerator := preload("res://commons/audio/generators/TrapBeatsGenerator.gd")
+const CinematicMusicGenerator := preload("res://commons/audio/generators/CinematicMusicGenerator.gd")
+const EpicSynthEngine := preload("res://commons/audio/engines/EpicSynthEngine.gd")
+const SciFiPreviewGenerator := preload("res://commons/audio/generators/SciFiPreviewGenerator.gd")
+const LiturgicalAmbientGenerator := preload("res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.gd")
+const FourierSpaceGenerator := preload("res://commons/audio/generators/FourierSpaceGenerator.gd")
+
 
 var search_box: LineEdit
 var sound_tree: Tree
@@ -652,32 +658,33 @@ func _refresh_preview(auto_play: bool = false) -> bool:
 	var params = parameter_controls.get_current_parameter_values()
 	var stream: AudioStreamWAV = null
 
-	# Check if this is a tech noir sound
-	if _is_tech_noir_sound(entry["sound_key"]):
+	# Detect generator type
+	var generator_type = _detect_generator_type(entry)
+	
+	if generator_type == "TechnoNoir":
 		stream = TechnoNoirGenerator.generate_sound(entry["sound_key"], params)
-		if stream == null:
-			if auto_play:
-				push_warning("Audio Catalog: Failed to generate tech noir sound: %s" % entry["sound_key"])
-			return false
-	# Check if this is a trap beats sound
-	elif _is_trap_beats_sound(entry["sound_key"]):
+	elif generator_type == "TrapBeats":
 		stream = TrapBeatsGenerator.generate_sound(entry["sound_key"], params)
-		if stream == null:
-			if auto_play:
-				push_warning("Audio Catalog: Failed to generate trap beat: %s" % entry["sound_key"])
-			return false
+	elif generator_type == "Cinematic":
+		stream = CinematicMusicGenerator.generate_sound(entry["sound_key"], params)
+	elif generator_type == "Epic":
+		stream = EpicSynthEngine.generate_patch(entry["sound_key"], params)
+	elif generator_type == "SciFi":
+		stream = SciFiPreviewGenerator.generate_preview(entry["sound_key"])
+	elif generator_type == "Liturgical":
+		stream = _generate_liturgical_sound(entry["sound_key"])
+	elif generator_type == "Fourier":
+		stream = _generate_fourier_sound(entry["sound_key"])
 	else:
 		# Use AudioSynthesizer for other sounds
 		var sound_type = _resolve_sound_type(entry)
-		if sound_type == null:
-			if auto_play:
-				push_warning("Audio Catalog: No generator for %s" % entry["sound_key"])
-			return false
-		stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
-		if stream == null:
-			if auto_play:
-				push_warning("Audio Catalog: Failed to generate audio for %s" % entry["sound_key"])
-			return false
+		if sound_type != null:
+			stream = CustomSoundGenerator.generate_custom_sound(sound_type, params)
+	
+	if stream == null:
+		if auto_play:
+			push_warning("Audio Catalog: Failed to generate audio for %s using %s" % [entry["sound_key"], generator_type])
+		return false
 
 	preview_stream = stream
 	_update_visualizations_from_stream(stream)
@@ -698,12 +705,23 @@ func _generate_preview_stream() -> AudioStreamWAV:
 	var entry = entries_by_id[current_entry_id]
 	var params = parameter_controls.get_current_parameter_values()
 
-	# Check if this is a tech noir sound
-	if _is_tech_noir_sound(entry["sound_key"]):
+	# Check for specific generators based on sound key or metadata
+	var generator_type = _detect_generator_type(entry)
+
+	if generator_type == "TechnoNoir":
 		return TechnoNoirGenerator.generate_sound(entry["sound_key"], params)
-	# Check if this is a trap beats sound
-	elif _is_trap_beats_sound(entry["sound_key"]):
+	elif generator_type == "TrapBeats":
 		return TrapBeatsGenerator.generate_sound(entry["sound_key"], params)
+	elif generator_type == "Cinematic":
+		return CinematicMusicGenerator.generate_sound(entry["sound_key"], params)
+	elif generator_type == "Epic":
+		return EpicSynthEngine.generate_patch(entry["sound_key"], params)
+	elif generator_type == "SciFi":
+		return SciFiPreviewGenerator.generate_preview(entry["sound_key"])
+	elif generator_type == "Liturgical":
+		return _generate_liturgical_sound(entry["sound_key"])
+	elif generator_type == "Fourier":
+		return _generate_fourier_sound(entry["sound_key"])
 	else:
 		var sound_type = _resolve_sound_type(entry)
 		if sound_type == null:
@@ -811,3 +829,63 @@ func _refresh_action_states() -> void:
 		_update_action_states(entries_by_id[current_entry_id])
 	else:
 		_disable_actions()
+
+func _detect_generator_type(entry: Dictionary) -> String:
+	# 1. Check explicit metadata
+	if entry["metadata"].has("generator"):
+		return entry["metadata"]["generator"]
+
+	# 2. Check directory structure
+	var relative_dir = entry.get("relative_dir", "")
+	if relative_dir.begins_with("tech_noir"):
+		return "TechnoNoir"
+	if relative_dir.begins_with("trap_beats"):
+		return "TrapBeats"
+	if relative_dir.begins_with("cinematic"):
+		return "Cinematic"
+	if relative_dir.begins_with("epic"):
+		return "Epic"
+	if relative_dir.begins_with("sci_fi"):
+		return "SciFi"
+	if relative_dir.begins_with("liturgical"):
+		return "Liturgical"
+	if relative_dir.begins_with("fourier"):
+		return "Fourier"
+
+	# 3. Check sound key (Legacy)
+	var key = entry.get("sound_key", "")
+	if _is_tech_noir_sound(key): return "TechnoNoir"
+	if _is_trap_beats_sound(key): return "TrapBeats"
+	
+	# 4. Check specific sound names for other generators
+	if key in ["blade_runner_pad", "vangelis_brass_lead", "hans_zimmer_braam"]: return "Cinematic"
+	if key in ["epic_brass_swarm", "trailer_rise"]: return "Epic"
+	if key in ["space_ambience", "dystopian_alarm"]: return "SciFi"
+	if key in ["cathedral_bell", "pipe_organ_swell", "sacred_whisper", "gregorian_phrase"]: return "Liturgical"
+
+	return "Default"
+
+func _generate_liturgical_sound(sound_key: String) -> AudioStreamWAV:
+	var lit_gen = LiturgicalAmbientGenerator.new()
+	match sound_key.to_lower():
+		"cathedral_bell", "cathedral_bells": return lit_gen.create_cathedral_bell()
+		"pipe_organ_swell": return lit_gen.create_pipe_organ_swell()
+		"sacred_whisper", "sacred_whispers": return lit_gen.create_sacred_whisper()
+		"choral_texture", "angelic_texture": return lit_gen.create_angelic_texture()
+		"gregorian_phrase": return lit_gen.create_gregorian_phrase()
+		"divine_breath": return lit_gen.create_divine_breath()
+		_: return lit_gen.create_angelic_texture()
+
+func _generate_fourier_sound(sound_key: String) -> AudioStreamWAV:
+	var gen = FourierSpaceGenerator.new()
+	match sound_key.to_lower():
+		"drone":
+			var wheels = [
+				{"freq": 1.0, "radius": 2.0, "phase": 0.0},
+				{"freq": 3.0, "radius": 0.8, "phase": 0.0},
+				{"freq": 5.0, "radius": 0.4, "phase": PI / 2},
+				{"freq": 7.0, "radius": 0.2, "phase": PI / 4}
+			]
+			return gen.create_fourier_drone(wheels)
+		"nebula": return gen.create_nebula_pad()
+		_: return gen.create_fourier_drone([])

@@ -1,0 +1,123 @@
+{
+    "description": "The Opus Magnum: A perfect fusion of Noir, Space, and Spirit.",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -12,
+            "bus": "City"
+        },
+        {
+            "sound_id": "Fourier.drone",
+            "volume_db": -18,
+            "bus": "Sub"
+        },
+        {
+            "sound_id": "Fourier.nebula",
+            "volume_db": -15,
+            "bus": "Pad"
+        },
+        {
+            "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
+            "volume_db": -10,
+            "bus": "Bass"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "cyber_jazz.noir_sax",
+                "cyber_jazz.market_pluck"
+            ],
+            "interval_range": [
+                4.0,
+                12.0
+            ],
+            "volume_range": [
+                -12,
+                -8
+            ],
+            "bus": "Lead"
+        },
+        {
+            "sound_pool": [
+                "Liturgical.divine_breath",
+                "liturgical.sacred_whisper"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -18,
+                -14
+            ],
+            "bus": "Choir"
+        },
+        {
+            "sound_pool": [
+                "Epic.trailer_rise",
+                "SciFi.dystopian_alarm"
+            ],
+            "interval_range": [
+                30.0,
+                60.0
+            ],
+            "volume_range": [
+                -15,
+                -10
+            ],
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "City": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 4000
+                }
+            ]
+        },
+        "Pad": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "Lead": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Delay",
+                    "tap1_delay_ms": 300,
+                    "tap1_level_db": -10
+                }
+            ]
+        },
+        "Choir": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.8
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

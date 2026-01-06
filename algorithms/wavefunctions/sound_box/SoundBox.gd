@@ -38,6 +38,9 @@ func configure(data: Dictionary) -> void:
 				# Try direct path if it looks like one
 				if coll.begins_with("res://"):
 					path = coll
+				# Try to find it in collections folder directly
+				elif FileAccess.file_exists("res://commons/audio/collections/" + coll + ".json"):
+					path = "res://commons/audio/collections/" + coll + ".json"
 				else:
 					print("SoundBox: Unknown collection shorthand: ", coll)
 		

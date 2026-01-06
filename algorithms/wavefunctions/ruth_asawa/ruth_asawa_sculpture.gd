@@ -13,14 +13,81 @@ extends MeshInstance3D
 @export var auto_rotate: bool = true
 @export var rotation_speed: float = 0.5
 
+@export_category("Audio Reactivity")
+@export var audio_reactive: bool = false
+@export var frequency_influence: float = 2.0  # How much frequency affects shape
+@export var volume_pulse: float = 0.5  # How much volume affects scale
+@export var audio_smoothing: float = 0.2  # Smoothing factor (lower = smoother)
+@export var spectrum_bands: int = 16  # Number of frequency bands to use
+@export var debug_audio: bool = false  # Print audio levels
+
+# Audio analysis
+var spectrum_analyzer: AudioEffectSpectrumAnalyzer
+var spectrum_instance: AudioEffectSpectrumAnalyzerInstance
+var band_values: PackedFloat32Array
+var smoothed_bands: PackedFloat32Array
+var current_volume: float = 0.0
+var smoothed_volume: float = 0.0
+var base_scale: Vector3
+var audio_initialized: bool = false
+var debug_timer: float = 0.0
+
 func _ready():
 	if not radius_curve:
 		_create_default_curve()
 	generate_surface()
+	base_scale = scale
+
+func _ensure_audio_initialized():
+	if audio_initialized:
+		return
+
+	_setup_audio_analysis()
+	band_values.resize(spectrum_bands)
+	band_values.fill(0.0)
+	smoothed_bands.resize(spectrum_bands)
+	smoothed_bands.fill(0.0)
+	audio_initialized = true
+	print("Ruth Asawa: Audio initialized, spectrum_instance = ", spectrum_instance != null)
+
+func _setup_audio_analysis():
+	var master_bus_index = AudioServer.get_bus_index("Master")
+	print("Ruth Asawa: Setting up audio on Master bus (index ", master_bus_index, ")")
+
+	# Check if spectrum analyzer already exists
+	var effect_count = AudioServer.get_bus_effect_count(master_bus_index)
+	for i in range(effect_count):
+		var effect = AudioServer.get_bus_effect(master_bus_index, i)
+		if effect is AudioEffectSpectrumAnalyzer:
+			spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, i) as AudioEffectSpectrumAnalyzerInstance
+			print("Ruth Asawa: Found existing spectrum analyzer")
+			return
+
+	# Create new spectrum analyzer
+	spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
+	spectrum_analyzer.buffer_length = 2.0
+	spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_2048
+
+	AudioServer.add_bus_effect(master_bus_index, spectrum_analyzer)
+	effect_count = AudioServer.get_bus_effect_count(master_bus_index)
+	spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
+	print("Ruth Asawa: Created new spectrum analyzer, instance = ", spectrum_instance != null)
 
 func _process(delta):
 	if auto_rotate:
 		rotation.y += rotation_speed * delta
+
+	if audio_reactive and not Engine.is_editor_hint():
+		_ensure_audio_initialized()
+		if spectrum_instance:
+			_update_audio_data()
+			_apply_audio_to_mesh()
+
+			if debug_audio:
+				debug_timer += delta
+				if debug_timer > 0.5:
+					debug_timer = 0.0
+					print("Ruth Asawa: volume=%.2f, bands[0]=%.2f, bands[8]=%.2f" % [smoothed_volume, smoothed_bands[0] if smoothed_bands.size() > 0 else 0, smoothed_bands[8] if smoothed_bands.size() > 8 else 0])
 
 func _create_default_curve():
 	radius_curve = Curve.new()
@@ -107,5 +174,116 @@ func generate_surface():
 			material.roughness = 0.5
 			material.cull_mode = BaseMaterial3D.CULL_DISABLED # Show both sides
 			
+		generated_mesh.surface_set_material(0, material)
+		mesh = generated_mesh
+
+func _update_audio_data():
+	if not spectrum_instance:
+		return
+
+	var max_freq = 4000.0  # Focus on 0-4kHz range
+	var freq_step = max_freq / spectrum_bands
+	var total_magnitude = 0.0
+
+	for i in range(spectrum_bands):
+		var freq = i * freq_step
+		var magnitude = spectrum_instance.get_magnitude_for_frequency_range(
+			freq,
+			freq + freq_step,
+			AudioEffectSpectrumAnalyzerInstance.MAGNITUDE_AVERAGE
+		)
+
+		var linear_mag = magnitude.length()
+		var db_mag = linear_to_db(linear_mag + 0.0001)
+		var normalized = clamp((db_mag + 60.0) / 60.0, 0.0, 1.0)
+
+		band_values[i] = normalized
+		smoothed_bands[i] = lerp(smoothed_bands[i], normalized, audio_smoothing)
+		total_magnitude += normalized
+
+	current_volume = total_magnitude / spectrum_bands
+	smoothed_volume = lerp(smoothed_volume, current_volume, audio_smoothing)
+
+func _apply_audio_to_mesh():
+	# Apply volume pulse to scale
+	var pulse = 1.0 + smoothed_volume * volume_pulse
+	scale = base_scale * pulse
+
+	# Regenerate mesh with frequency-modulated shape
+	generate_audio_reactive_surface()
+
+func generate_audio_reactive_surface():
+	var st := SurfaceTool.new()
+
+	if wireframe:
+		st.begin(Mesh.PRIMITIVE_LINES)
+	else:
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var u_max := TAU
+
+	for i in range(v_resolution + 1):
+		var v_ratio = float(i) / float(v_resolution)
+		var y = (v_ratio - 0.5) * height
+
+		# Base radius from curve
+		var r = 1.0
+		if radius_curve:
+			r = radius_curve.sample(v_ratio) * max_radius
+
+		# Map vertical position to frequency band
+		var band_index = int(v_ratio * (spectrum_bands - 1))
+		var band_influence = smoothed_bands[band_index] if band_index < smoothed_bands.size() else 0.0
+
+		# Modulate radius by frequency
+		r *= 1.0 + band_influence * frequency_influence
+
+		for j in range(u_resolution + 1):
+			var u_ratio = float(j) / float(u_resolution)
+			var u = u_ratio * u_max
+
+			var x = r * cos(u)
+			var z = r * sin(u)
+
+			st.set_uv(Vector2(u_ratio, v_ratio))
+			st.add_vertex(Vector3(x, -y, z))
+
+	# Generate indices
+	for i in range(v_resolution):
+		for j in range(u_resolution):
+			var current = i * (u_resolution + 1) + j
+			var next_row = (i + 1) * (u_resolution + 1) + j
+
+			if wireframe:
+				st.add_index(current)
+				st.add_index(current + 1)
+				st.add_index(current)
+				st.add_index(next_row)
+			else:
+				st.add_index(current)
+				st.add_index(current + 1)
+				st.add_index(next_row)
+				st.add_index(current + 1)
+				st.add_index(next_row + 1)
+				st.add_index(next_row)
+
+	if not wireframe:
+		st.generate_normals()
+		st.generate_tangents()
+
+	var generated_mesh := st.commit()
+	if generated_mesh:
+		var material := StandardMaterial3D.new()
+		if wireframe:
+			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			# Color shifts with volume - darker at low volume, brighter at high
+			var brightness = 0.2 + smoothed_volume * 0.6
+			material.albedo_color = Color(brightness * 0.8, brightness, brightness * 1.2)
+		else:
+			material.albedo_color = Color(0.6, 0.6, 0.6)
+			material.metallic = 0.5
+			material.roughness = 0.5
+			material.cull_mode = BaseMaterial3D.CULL_DISABLED
+
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh

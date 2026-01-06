@@ -10,13 +10,20 @@
             "sound_id": "AudioSynthesizer.SCI_FI_LAB_HUM_CLEAN",
             "volume_db": -20,
             "bus": "ShipHum"
+        },
+        {
+            "sound_id": "SciFi.space_ambience",
+            "volume_db": -22,
+            "bus": "ShipHum"
         }
     ],
     "random_events": [
         {
             "sound_pool": [
                 "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                "techno_noir.mechanical_whir"
+                "techno_noir.mechanical_whir",
+                "SciFi.dystopian_alarm",
+                "techno_noir.static_burst"
             ],
             "interval_range": [
                 15.0,

@@ -195,6 +195,10 @@ func _generate_sound(sound_id: String) -> AudioStream:
 			return _generate_epic_sound(sound_name)
 		"fourier_space":
 			return _generate_fourier_space_sound(sound_name)
+		"sci_fi":
+			return _generate_sci_fi_dystopia_sound(sound_name)
+		"cyber_jazz":
+			return _generate_cyber_jazz_sound(sound_name)
 		_:
 			# Fallback for original casing if needed
 			match generator:
@@ -355,6 +359,37 @@ func _generate_epic_sound(sound_name: String) -> AudioStreamWAV:
 	else:
 		print("⚠️ Unknown epic sound: ", sound_name)
 		return null
+
+func _generate_sci_fi_dystopia_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from SciFiPreviewGenerator (Space Dystopia)"""
+	var SciFiGen = preload("res://commons/audio/generators/SciFiPreviewGenerator.gd")
+	var stream = SciFiGen.generate_preview(sound_name)
+	
+	if stream:
+		print("✅ Generated SciFi Dystopia preview: ", sound_name, " 🎷")
+		return stream
+	else:
+		print("⚠️ Unknown sci_fi sound: ", sound_name)
+		return null
+
+func _generate_cyber_jazz_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from CyberJazzGenerator"""
+	var JazzGen = preload("res://commons/audio/generators/CyberJazzGenerator.gd")
+	var stream = null
+	
+	match sound_name.to_lower():
+		"sax", "saxophone", "noir_sax":
+			stream = JazzGen.generate_sax()
+		"pluck", "koto_pluck", "market_pluck":
+			stream = JazzGen.generate_pluck()
+		_:
+			print("⚠️ Unknown cyber jazz sound: ", sound_name)
+			return null
+			
+	if stream:
+		print("✅ Generated Cyber Jazz sound: ", sound_name, " 🎷")
+		return stream
+	return null
 
 # ===== BULK GENERATION =====
 

@@ -10,13 +10,20 @@
             "sound_id": "AudioSynthesizer.DARK_808_SUB_BASS",
             "volume_db": -12,
             "bus": "GravityBass"
+        },
+        {
+            "sound_id": "Fourier.nebula",
+            "volume_db": -18,
+            "bus": "Strings"
         }
     ],
     "random_events": [
         {
             "sound_pool": [
                 "AudioSynthesizer.SCI_FI_RESONANT_DRONE",
-                "AudioSynthesizer.GHOST_DRONE"
+                "AudioSynthesizer.GHOST_DRONE",
+                "Liturgical.divine_breath",
+                "Cinematic.vangelis_brass_lead"
             ],
             "interval_range": [
                 15.0,

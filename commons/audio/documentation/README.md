@@ -150,7 +150,13 @@ var all_categories = EnhancedParameterLoader.get_all_categories()
 ```
 
 ### 2. Sound Design Interfaces
-**SoundDesignerInterface.gd**: Full-featured development tool
+
+**Audio Catalog Editor (Plugin)**: `addons/audio_catalog_editor/`
+- **Main Dock**: Comprehensive main screen editor plugin
+- **Features**: Preset browsing, spectrogram/waveform visualization, real-time parameter editing
+- **Generators**: Supports AudioSynthesizer, TechnoNoir, and TrapBeats
+
+**SoundDesignerInterface.gd**: Full-featured development tool (Runtime)
 - Real-time parameter editing with sliders and dropdowns
 - Live audio preview with looping
 - Waveform and spectrum visualization
