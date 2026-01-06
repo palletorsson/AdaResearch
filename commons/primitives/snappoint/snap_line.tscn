@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7yqn5r3m8wvp"]
+
+[ext_resource type="Script" path="res://commons/primitives/snappoint/snap_line.gd" id="1_line"]
+
+[node name="SnapLine" type="Node3D"]
+script = ExtResource("1_line")
+line_thickness = 0.01
+line_color = Color(0.8, 0.5, 1, 1)
+emission_strength = 1.5
+
