@@ -122,8 +122,19 @@
 			"lookup_name": "snap_demo",
 			"description": "snap_demo.",
 			"scene": "res://commons/primitives/snappoint/snap_demo.tscn"
-		},		
-		
+		},
+		"snap_wedge_puzzle": {
+			"name": "Snap Wedge Puzzle",
+			"lookup_name": "snap_wedge_puzzle",
+			"description": "Interactive puzzle where connecting 6 snap points forms a wedge/prism that spawns a walkable ramp.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn"
+		},
+		"snap_line": {
+			"name": "Snap Line",
+			"lookup_name": "snap_line",
+			"description": "snap_line.",
+			"scene": "res://commons/primitives/snappoint/demos/line_demo.tscn"
+		},
 		"player_trace": {
 			"name": "player_trace",
 			"lookup_name": "player_trace",
@@ -2651,6 +2662,14 @@
 			"description": "game_time_display",
 			"scene": "res://commons/visualaid/time/game_time_display.tscn"
 		},
+		
+		"frame_counter_display": {
+			"name": "frame_counter_display",
+			"lookup_name": "frame_counter_display",
+			"description": "frame_counter_display",
+			"scene": "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+		},
+		
 		"speed_display": {
 			"name": "speed_display",
 			"lookup_name": "speed_display",
@@ -3592,6 +3611,12 @@
 			"lookup_name": "soundboxes",
 			"description": "SoundBox: Procedural Sound Gallery. Use #collections:synthetic, retro, legends, drums, body, machine, synth, sacred, noir, weather, game for presets.",
 			"scene": "res://algorithms/wavefunctions/sound_box/SoundBox.tscn"
+		},
+		"algo_gun": {
+			"name": "Algo-Gun",
+			"lookup_name": "algo_gun",
+			"description": "Evolved gravity gun that captures and directs Grid Agents. Use GRIP button to capture agents, then aim and GRIP again to direct them to modify grid structures.",
+			"scene": "res://algorithms/forces/algo_gun.tscn"
 		}
 	}
 }

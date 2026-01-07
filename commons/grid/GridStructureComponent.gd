@@ -380,29 +380,103 @@ func add_cube_at(x: int, y: int, z: int) -> bool:
 	if grid[x][y][z]:
 		return false  # Cube already exists
 	
+	# Ensure multimesh exists before proceeding
+	if not multimesh:
+		push_warning("GridStructureComponent: Cannot add cube - MultiMesh not initialized")
+		return false
+	
 	# Mark position as occupied
 	grid[x][y][z] = true
 	
 	# Add to positions array
 	var pos = Vector3i(x, y, z)
+	var old_count = cube_positions.size()
 	cube_positions.append(pos)
+	var new_count = cube_positions.size()
 	
-	# Update MultiMesh instance count
-	if multimesh:
-		var current_count = multimesh.instance_count
-		multimesh.instance_count = cube_positions.size()
+	# IMPORTANT: Store existing transforms before changing instance count
+	# This is necessary because in some Godot versions, changing instance_count
+	# can reset transforms
+	var existing_transforms: Array[Transform3D] = []
+	existing_transforms.resize(old_count)
+	for i in range(old_count):
+		existing_transforms[i] = multimesh.get_instance_transform(i)
+	
+	# Increase instance count
+	multimesh.instance_count = new_count
+	
+	# Restore existing transforms
+	var total_size = cube_size + gutter
+	for i in range(old_count):
+		multimesh.set_instance_transform(i, existing_transforms[i])
+	
+	# Set transform for the new instance
+	var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
+	var transform = Transform3D()
+	transform.origin = world_pos
+	multimesh.set_instance_transform(old_count, transform)
+	
+	# Create collision shape
+	_create_collision_at(world_pos, cube_size)
+	
+	print("GridStructureComponent: Added cube at (%d, %d, %d) - count: %d->%d" % [x, y, z, old_count, new_count])
+	return true
+
+func remove_cube_at(x: int, y: int, z: int) -> bool:
+	"""Remove a cube at the specified grid coordinates. Returns true if successful."""
+	if not _is_valid_xyz(x, y, z):
+		push_warning("GridStructureComponent: Cannot remove cube at invalid position (%d, %d, %d)" % [x, y, z])
+		return false
+	
+	# Check if cube exists
+	if not grid[x][y][z]:
+		return false  # No cube to remove
+	
+	# Ensure multimesh exists
+	if not multimesh:
+		push_warning("GridStructureComponent: Cannot remove cube - MultiMesh not initialized")
+		return false
+	
+	# Find the index of this cube in cube_positions
+	var pos_to_remove = Vector3i(x, y, z)
+	var index_to_remove = -1
+	for i in range(cube_positions.size()):
+		if cube_positions[i] == pos_to_remove:
+			index_to_remove = i
+			break
+	
+	if index_to_remove == -1:
+		push_warning("GridStructureComponent: Cube at (%d, %d, %d) not found in cube_positions" % [x, y, z])
+		return false
+	
+	# Mark position as unoccupied
+	grid[x][y][z] = false
+	
+	var old_count = cube_positions.size()
+	var last_index = old_count - 1
+	
+	# If we're removing from the middle, swap with the last element
+	# This avoids having to rebuild all transforms
+	if index_to_remove < last_index:
+		var last_pos = cube_positions[last_index]
+		cube_positions[index_to_remove] = last_pos
 		
-		# Set transform for the new instance
+		# Update the transform at index_to_remove to match the swapped cube
 		var total_size = cube_size + gutter
-		var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
+		var world_pos = Vector3(last_pos.x, last_pos.y, last_pos.z) * total_size
 		var transform = Transform3D()
 		transform.origin = world_pos
-		multimesh.set_instance_transform(current_count, transform)
-		
-		# Create collision shape
-		_create_collision_at(world_pos, cube_size)
-		
-		print("GridStructureComponent: Added cube at (%d, %d, %d)" % [x, y, z])
-		return true
+		multimesh.set_instance_transform(index_to_remove, transform)
 	
-	return false
+	# Remove the last element
+	cube_positions.pop_back()
+	var new_count = cube_positions.size()
+	
+	# Update instance count
+	multimesh.instance_count = new_count
+	
+	# TODO: Remove collision shape at this position
+	# (would need to track collision shapes to remove them)
+	
+	print("GridStructureComponent: Removed cube at (%d, %d, %d) - count: %d->%d" % [x, y, z, old_count, new_count])
+	return true

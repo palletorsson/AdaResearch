@@ -1,0 +1,90 @@
+{
+	"map_info": {
+		"name": "Puzzle 01: Copy - The Duplicator",
+		"description": "Learn COPY: Use the agent to duplicate cubes and complete the pattern. This teaches the fundamental concept: 'I can make more of what exists.'",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 9,
+			"depth": 9,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "tutorial",
+			"category": "gridagent_tutorial",
+			"tier": "1_copy",
+			"estimated_time": "3 minutes",
+			"learning_objective": "Understand algorithmic duplication"
+		}
+	},
+	"documentation": {
+		"summary": "Puzzle 01 - COPY Tier: Complete the pattern by duplicating cubes",
+		"layout": "Simple platform with missing cubes in a pattern",
+		"objective": "Capture COPY agent, direct it to duplicate cubes and fill the gaps",
+		"solution": "Agent copies adjacent cubes into empty spaces"
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "0", "1", "0", "1", "0", "1", "1"],
+			["1", "0", "1", "0", "1", "0", "1", "0", "1"],
+			["1", "1", "0", "1", "0", "1", "0", "1", "1"],
+			["1", "0", "1", "0", "1", "0", "1", "0", "1"],
+			["1", "1", "0", "1", "0", "1", "0", "1", "1"],
+			["1", "0", "1", "0", "1", "0", "1", "0", "1"],
+			["1", "1", "0", "1", "0", "1", "0", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			["s", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", "t"],
+			["an", " ", "3t:COPY:_Duplicate_cubes_to_fill_pattern", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "algo_gun", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "gridagent:copy", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next Puzzle",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"artifact_definitions": {
+		"algo_gun": {
+			"scene": "res://algorithms/forces/algo_gun.tscn",
+			"name": "Algo-Gun"
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.5, 0.7, 0.9],
+		"ambient_energy": 1.0,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.4, -0.7, -0.3],
+			"color": [1.0, 0.95, 0.85],
+			"energy": 1.5
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0
+	}
+}
+

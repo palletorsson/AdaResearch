@@ -82,8 +82,8 @@ func _ready() -> void:
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 	
-	# Register with connection manager
-	_register_with_manager()
+	# Register with connection manager (deferred to ensure manager is ready)
+	call_deferred("_register_with_manager")
 	
 	_last_position = global_position
 
@@ -94,13 +94,22 @@ func _register_with_manager() -> void:
 		# Search in the scene tree
 		manager = _find_connection_manager(get_tree().root)
 	
-	if manager and manager.has_method("register_snap_point"):
+	if manager and is_instance_valid(manager) and manager.has_method("register_snap_point"):
 		manager.register_snap_point(self)
+	else:
+		push_warning("SnapPoint: Could not find valid SnapConnectionManager in scene")
 
 func _find_connection_manager(node: Node) -> Node:
 	# Recursively search for SnapConnectionManager
-	if node.get_script() == load("res://commons/primitives/snappoint/snap_connection_manager.gd"):
+	# Check by class name instead of script comparison
+	if node is SnapConnectionManager:
 		return node
+	
+	# Also check by class name string for compatibility
+	if node.get_class() == "Node" and node.get_script():
+		var script = node.get_script()
+		if script and script.resource_path == "res://commons/primitives/snappoint/snap_connection_manager.gd":
+			return node
 	
 	for child in node.get_children():
 		var result = _find_connection_manager(child)

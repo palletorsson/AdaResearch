@@ -230,22 +230,46 @@ func generate_interactables(interactable_data):
 			var token = str(row[x]).strip_edges()
 			
 			if token != " " and not token.is_empty():
-				var parsed = _parse_interactable_token(token)
-				var lookup_name: String = parsed.get("lookup_name", "")
-				var overrides: Dictionary = parsed.get("overrides", {})
-				var config_data: Dictionary = parsed.get("config_data", {})
+				# Check for special prefixes BEFORE parsing (mc:, gridagent:, etc.)
+				# These use the colon as part of their identifier, not as parameter separator
 				
 				# Check for custom Marching Cubes syntax mc:shape_name
-				if lookup_name.begins_with("mc:"):
+				if token.begins_with("mc:"):
+					var parsed = _parse_interactable_token(token)
+					var overrides: Dictionary = parsed.get("overrides", {})
+					var config_data: Dictionary = parsed.get("config_data", {})
+					
 					var y_pos = structure_component.find_highest_y_at(x, z)
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
 						
-					if _place_marching_cubes_object(x, y_pos, z, lookup_name, total_size, overrides, config_data):
+					if _place_marching_cubes_object(x, y_pos, z, token, total_size, overrides, config_data):
 						interactable_count += 1
 					else:
-						placement_errors.append("Failed to place Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
+						placement_errors.append("Failed to place Marching Cubes object '%s' at (%d,%d,%d)" % [token, x, y_pos, z])
 					continue
+				
+				# Check for Grid Agent syntax gridagent:tier
+				if token.begins_with("gridagent:"):
+					var parsed = _parse_interactable_token(token)
+					var overrides: Dictionary = parsed.get("overrides", {})
+					var config_data: Dictionary = parsed.get("config_data", {})
+					
+					var y_pos = structure_component.find_highest_y_at(x, z)
+					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
+						y_pos += 1
+						
+					if _place_grid_agent(x, y_pos, z, token, total_size, overrides, config_data):
+						interactable_count += 1
+					else:
+						placement_errors.append("Failed to place grid agent '%s' at (%d,%d,%d)" % [token, x, y_pos, z])
+					continue
+				
+				# Normal artifact handling (parse token for regular artifacts)
+				var parsed = _parse_interactable_token(token)
+				var lookup_name: String = parsed.get("lookup_name", "")
+				var overrides: Dictionary = parsed.get("overrides", {})
+				var config_data: Dictionary = parsed.get("config_data", {})
 
 				if has_artifact(lookup_name):
 					var y_pos = structure_component.find_highest_y_at(x, z)
@@ -317,6 +341,58 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 	interactable_objects[Vector3i(x, y, z)] = mc_object
 	
 	print("  ✅ Placed Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y, z])
+	return true
+
+# Place a Grid Agent using gridagent:tier syntax
+func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
+	# Parse: gridagent:tier
+	var parts = lookup_name.split(":")
+	if parts.size() < 2:
+		print("GridInteractablesComponent: Invalid grid agent format: %s" % lookup_name)
+		return false
+	
+	var tier = parts[1].to_lower()  # copy, translate, rotate, scale, color, array, sine, random, ca
+	
+	# Load appropriate agent scene based on tier
+	var scene_path = "res://commons/hazards/gridagent/variants/grid_agent_%s.tscn" % tier
+	if not ResourceLoader.exists(scene_path):
+		# Fallback to base agent
+		scene_path = "res://commons/hazards/gridagent/grid_agent_base.tscn"
+		print("GridInteractablesComponent: Tier-specific scene not found, using base agent: %s" % scene_path)
+	
+	if not ResourceLoader.exists(scene_path):
+		print("GridInteractablesComponent: Grid agent base scene not found: %s" % scene_path)
+		return false
+	
+	var agent_scene = load(scene_path)
+	var agent = agent_scene.instantiate()
+	
+	# Position
+	var position = Vector3(x, y, z) * total_size
+	agent.position = position
+	
+	# Apply overrides (rotation, y_offset, scale)
+	if overrides.has("rotation_y_degrees"):
+		agent.rotation_degrees.y = float(overrides.get("rotation_y_degrees", 0.0))
+	if overrides.has("y_position"):
+		agent.position.y += float(overrides.get("y_position", 0.0))
+	if overrides.has("uniform_scale"):
+		var s = float(overrides.get("uniform_scale", 1.0))
+		agent.scale = Vector3.ONE * s
+	
+	# Set agent tier via metadata
+	agent.set_meta("agent_tier", tier)
+	agent.set_meta("spawn_position", Vector3i(x, y, z))
+	
+	# Initialize agent if it has setup method
+	if agent.has_method("set_tier"):
+		agent.set_tier(tier)
+	
+	# Add to scene
+	parent_node.add_child(agent)
+	interactable_objects[Vector3i(x, y, z)] = agent
+	
+	print("  ✅ Placed grid agent '%s' (tier: %s) at (%d,%d,%d)" % [lookup_name, tier, x, y, z])
 	return true
 
 # Place a single artifact using lookup_name

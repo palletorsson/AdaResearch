@@ -33,14 +33,16 @@ func _create_line_mesh() -> void:
 	
 	_mesh_instance.mesh = _cylinder_mesh
 	
-	# Create material
+	# Create material (transparent and emissive)
 	var material = StandardMaterial3D.new()
-	material.albedo_color = line_color
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = Color(line_color.r, line_color.g, line_color.b, 0.5)  # 50% transparent
 	material.metallic = 0.6
 	material.roughness = 0.2
 	material.emission_enabled = true
 	material.emission = line_color
 	material.emission_energy_multiplier = emission_strength
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show from both sides
 	
 	_mesh_instance.material_override = material
 
@@ -110,4 +112,3 @@ func get_length() -> float:
 	if point_a and point_b and is_instance_valid(point_a) and is_instance_valid(point_b):
 		return point_a.global_position.distance_to(point_b.global_position)
 	return 0.0
-

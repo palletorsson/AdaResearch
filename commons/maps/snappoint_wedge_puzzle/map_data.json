@@ -1,0 +1,104 @@
+{
+	"map_info": {
+		"name": "Snap Point Wedge Puzzle",
+		"description": "Use snap points to build a wedge shape that spawns a walkable ramp",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 9,
+			"depth": 9,
+			"max_height": 4
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "puzzle",
+			"estimated_time": "5 minutes",
+			"learning_objectives": ["Snap points", "Geometry construction", "Wedge shapes", "Prism construction"]
+		}
+	},
+	"documentation": {
+		"summary": "Wedge Puzzle - Construct to Progress",
+		"layout": "9x9 platform with elevated section requiring a ramp",
+		"objective": "Connect 6 snap points to form a wedge/prism. When complete, a walkable ramp appears.",
+		"key_elements": [
+			"snap_wedge_puzzle - 6 interactive points (4 base + 2 top edge)",
+			"Elevated platform with teleporter (3 blocks high)",
+			"Spawned ramp bridges gap when puzzle is solved"
+		]
+	},
+	"layers": {
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "3", "3", "3", "1", "1", "1"],
+			["1", "1", "1", "3", "3", "3", "1", "1", "1"],
+			["1", "1", "1", "3", "3", "3", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["3t:Form a wedge with the 6 points.", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "snap_wedge_puzzle", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Exit",
+			"description": "Complete the puzzle to reach here",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"artifact_definitions": {
+		"snap_wedge_puzzle": {
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn",
+			"name": "Snap Wedge Puzzle",
+			"description": "6 snap points to form a wedge/prism slope",
+			"scale": 1.0
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.5, 0.5, 0.6],
+		"ambient_energy": 0.8,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.4, -0.7, -0.4],
+			"color": [1.0, 0.95, 0.9],
+			"energy": 1.3
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"auto_reveal_on_entry": true,
+		"initial_tile_visibility": "all_visible",
+		"background": {
+			"type": "sky",
+			"color": [0.3, 0.4, 0.7]
+		}
+	}
+}

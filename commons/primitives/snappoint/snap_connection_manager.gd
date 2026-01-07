@@ -14,6 +14,7 @@ var _connections: Dictionary = {}  # String key -> SnapLine instance
 var _triangles: Dictionary = {}  # String key -> SnapTriangle
 var _quads: Dictionary = {}  # String key -> SnapQuad
 var _tetrahedrons: Dictionary = {}  # String key -> SnapTetrahedron
+var _wedges: Dictionary = {}  # String key -> Array of 5 points
 
 # Scene references for instantiation
 var _snap_line_scene: PackedScene
@@ -27,6 +28,7 @@ signal connection_broken(point_a: Node3D, point_b: Node3D)
 signal triangle_formed(points: Array)
 signal quad_formed(points: Array)
 signal tetrahedron_formed(points: Array)
+signal wedge_formed(points: Array)
 
 func _ready() -> void:
 	# Preload scenes
@@ -158,6 +160,9 @@ func _detect_and_create_shapes() -> void:
 	# Detect tetrahedrons (complete graph K4)
 	_detect_tetrahedrons()
 	
+	# Detect wedges (5 points: rectangle base + apex on one edge)
+	_detect_wedges()
+	
 	# Note: Quads are detected from triangles sharing edges
 
 func _detect_triangles() -> void:
@@ -254,6 +259,106 @@ func _detect_tetrahedrons() -> void:
 	
 	for key in keys_to_remove:
 		_destroy_tetrahedron(key)
+
+func _detect_wedges() -> void:
+	var found_wedges: Dictionary = {}
+	
+	# A wedge/prism needs 6 points:
+	# - 4 points forming a rectangle (base)
+	# - 2 points forming the top edge (creating the sloped faces)
+	# The wedge has 2 triangular ends + 3 rectangular faces (base + 2 slopes)
+	
+	# Strategy: Find all sets of 4 points forming rectangles, then check for 2 more points
+	# that form the top edge to create the wedge shape
+	
+	for point_a in _adjacency.keys():
+		if not is_instance_valid(point_a):
+			continue
+		
+		var neighbors_a = _adjacency[point_a]
+		if neighbors_a.size() < 2:
+			continue
+		
+		# Try all combinations of 4 points that might form a rectangle
+		for i in range(neighbors_a.size()):
+			var point_b = neighbors_a[i]
+			if not is_instance_valid(point_b):
+				continue
+			
+			for j in range(i + 1, neighbors_a.size()):
+				var point_c = neighbors_a[j]
+				if not is_instance_valid(point_c):
+					continue
+				
+				# Now we have A, B, C - check if there's a D that completes a rectangle
+				# Rectangle pattern: A connects to B and C, and B connects to D, C connects to D
+				var neighbors_b = _adjacency[point_b]
+				var neighbors_c = _adjacency[point_c]
+				
+				for point_d in neighbors_b:
+					if not is_instance_valid(point_d):
+						continue
+					if point_d == point_a or point_d == point_c:
+						continue
+					
+					# Check if D is also connected to C (forming rectangle A-B-D-C)
+					if are_points_connected(point_c, point_d):
+						# We have a potential rectangle: A-B-D-C (base of wedge)
+						# Now look for 2 more points (E and F) that form the top edge
+						
+						var rect_points = [point_a, point_b, point_d, point_c]
+						
+						# Check all pairs of remaining points for the top edge
+						for point_e in _adjacency.keys():
+							if not is_instance_valid(point_e):
+								continue
+							if point_e in rect_points:
+								continue
+							
+							for point_f in _adjacency.keys():
+								if not is_instance_valid(point_f):
+									continue
+								if point_f in rect_points or point_f == point_e:
+									continue
+								
+								# Check if E and F are connected to each other (top edge)
+								if not are_points_connected(point_e, point_f):
+									continue
+								
+								# Check if E and F each connect to 2 corners of the rectangle
+								# This forms the proper wedge/prism shape
+								var e_connections = 0
+								var f_connections = 0
+								for rect_point in rect_points:
+									if are_points_connected(point_e, rect_point):
+										e_connections += 1
+									if are_points_connected(point_f, rect_point):
+										f_connections += 1
+								
+								# For a valid wedge: each top point connects to 2 base corners
+								if e_connections >= 2 and f_connections >= 2:
+									var wedge_points = rect_points + [point_e, point_f]
+									var key = _make_shape_key(wedge_points)
+									
+									if not found_wedges.has(key):
+										found_wedges[key] = wedge_points
+
+	# Emit signals for new wedges
+	for key in found_wedges.keys():
+		if not _wedges.has(key):
+			_wedges[key] = found_wedges[key]
+			wedge_formed.emit(found_wedges[key])
+			print("SnapConnectionManager: Detected wedge with 6 points")
+
+	# Remove wedges that no longer exist
+	var keys_to_remove: Array[String] = []
+	for key in _wedges.keys():
+		if not found_wedges.has(key):
+			keys_to_remove.append(key)
+	
+	for key in keys_to_remove:
+		_wedges.erase(key)
+		print("SnapConnectionManager: Removed wedge")
 
 func _create_triangle(points: Array) -> void:
 	var key = _make_shape_key(points)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh7m3qr8xnvke"]
+
+[ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="1_line"]
+[ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="2_manager"]
+
+[node name="LineDemo" type="Node3D"]
+
+[node name="SnapConnectionManager" type="Node" parent="."]
+script = ExtResource("2_manager")
+
+[node name="SnapPoint1" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1.5, 0)
+
+[node name="SnapPoint2" parent="." instance=ExtResource("1_line")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.5, 0)
+
+[node name="InstructionLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+pixel_size = 0.001
+billboard = 1
+text = "Grab and connect the two points"
+outline_size = 8
