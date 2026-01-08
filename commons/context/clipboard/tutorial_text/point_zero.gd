@@ -5,8 +5,6 @@ extends Node
 
 var text = '''[font_size=28][b]0. Point Zero[/b][/font_size]
 
-[i][color=gray]Summary: The origin (0,0,0) is where all spatial measurement begins. Before we can explore algorithms and mathematics, we must acknowledge the invisible scaffolding—the rendering engine, coordinate system, and time itself—that makes computation possible. This scene marks the threshold between the void and the symbolic world we are about to construct.[/color][/i]
-
 [hr]
 
 [b]The Invisible Infrastructure[/b]

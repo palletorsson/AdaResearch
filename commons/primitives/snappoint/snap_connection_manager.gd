@@ -14,7 +14,9 @@ var _connections: Dictionary = {}  # String key -> SnapLine instance
 var _triangles: Dictionary = {}  # String key -> SnapTriangle
 var _quads: Dictionary = {}  # String key -> SnapQuad
 var _tetrahedrons: Dictionary = {}  # String key -> SnapTetrahedron
-var _wedges: Dictionary = {}  # String key -> Array of 5 points
+var _wedges: Dictionary = {}  # String key -> Array of 6 points
+var _octahedrons: Dictionary = {}  # String key -> Array of 6 points
+var _square_pyramids: Dictionary = {}  # String key -> Array of 5 points
 
 # Scene references for instantiation
 var _snap_line_scene: PackedScene
@@ -29,6 +31,8 @@ signal triangle_formed(points: Array)
 signal quad_formed(points: Array)
 signal tetrahedron_formed(points: Array)
 signal wedge_formed(points: Array)
+signal octahedron_formed(points: Array)
+signal square_pyramid_formed(points: Array)
 
 func _ready() -> void:
 	# Preload scenes
@@ -160,7 +164,13 @@ func _detect_and_create_shapes() -> void:
 	# Detect tetrahedrons (complete graph K4)
 	_detect_tetrahedrons()
 	
-	# Detect wedges (5 points: rectangle base + apex on one edge)
+	# Detect octahedrons (6 points: 4 equatorial + 2 polar)
+	_detect_octahedrons()
+	
+	# Detect square pyramids (5 points: 4 base + 1 apex)
+	_detect_square_pyramids()
+	
+	# Detect wedges (6 points: rectangle base + top edge)
 	_detect_wedges()
 	
 	# Note: Quads are detected from triangles sharing edges
@@ -359,6 +369,224 @@ func _detect_wedges() -> void:
 	for key in keys_to_remove:
 		_wedges.erase(key)
 		print("SnapConnectionManager: Removed wedge")
+
+func _detect_octahedrons() -> void:
+	var found_octahedrons: Dictionary = {}
+	
+	# An octahedron has 6 vertices: 4 forming an equatorial plane, 2 polar vertices (top/bottom)
+	# Each polar vertex connects to all 4 equatorial vertices
+	# Equatorial vertices each have exactly 4 connections: 2 to other equatorial points, 2 to polar points
+	# Polar vertices each have exactly 4 connections: all to equatorial points
+	
+	# Debug: count all points and their connections
+	var total_points = 0
+	var points_with_4_connections = 0
+	for point in _adjacency.keys():
+		if is_instance_valid(point):
+			total_points += 1
+			if _adjacency[point].size() == 4:
+				points_with_4_connections += 1
+	
+	if total_points == 6:
+		print("SnapConnectionManager: Checking octahedron - %d total points, %d with 4 connections" % [total_points, points_with_4_connections])
+	
+	# Find all points with exactly 4 connections (potential octahedron vertices)
+	var candidates = []
+	for point in _adjacency.keys():
+		if is_instance_valid(point) and _adjacency[point].size() == 4:
+			candidates.append(point)
+	
+	# Need at least 6 points for an octahedron
+	if candidates.size() < 6:
+		if total_points == 6 and candidates.size() > 0:
+			print("SnapConnectionManager: Not enough candidates with 4 connections (%d/6)" % candidates.size())
+		return
+	
+	# Try all combinations of 6 points
+	for i in range(candidates.size()):
+		var p1 = candidates[i]
+		for j in range(i + 1, candidates.size()):
+			var p2 = candidates[j]
+			for k in range(j + 1, candidates.size()):
+				var p3 = candidates[k]
+				for l in range(k + 1, candidates.size()):
+					var p4 = candidates[l]
+					for m in range(l + 1, candidates.size()):
+						var p5 = candidates[m]
+						for n in range(m + 1, candidates.size()):
+							var p6 = candidates[n]
+							
+							var test_points = [p1, p2, p3, p4, p5, p6]
+							
+							# Debug: Check connection count for these 6 points
+							var all_connected_properly = true
+							for pt in test_points:
+								var connections_in_set = 0
+								for other_pt in test_points:
+									if other_pt != pt and are_points_connected(pt, other_pt):
+										connections_in_set += 1
+								if connections_in_set != 4:
+									all_connected_properly = false
+									break
+							
+							if not all_connected_properly:
+								continue  # Skip this combination
+							
+							# All 6 points have exactly 4 connections to each other - potential octahedron!
+							print("SnapConnectionManager: Testing 6-point set where all have 4 connections")
+							
+							# Find the two polar vertices: they are the only pair NOT connected to each other
+							var polar_points = []
+							var found_polar_pair = false
+							
+							for p_i in range(test_points.size()):
+								for p_j in range(p_i + 1, test_points.size()):
+									if not are_points_connected(test_points[p_i], test_points[p_j]):
+										# Found the two points that aren't connected - these are the polar vertices!
+										polar_points = [test_points[p_i], test_points[p_j]]
+										found_polar_pair = true
+										print("SnapConnectionManager: Found polar pair (not connected to each other)")
+										break
+								if found_polar_pair:
+									break
+							
+							if polar_points.size() != 2:
+								print("SnapConnectionManager: ✗ No polar pair found (all points connected)")
+								continue
+							
+							# The remaining 4 points are the equatorial square
+							var equatorial_points = []
+							for point in test_points:
+								if point not in polar_points:
+									equatorial_points.append(point)
+							
+							# Validate: Each polar connects to all 4 equatorial
+							var valid_octahedron = true
+							for polar in polar_points:
+								for eq in equatorial_points:
+									if not are_points_connected(polar, eq):
+										valid_octahedron = false
+										print("SnapConnectionManager: ✗ Polar not connected to equatorial")
+										break
+								if not valid_octahedron:
+									break
+							
+							# Validate: Equatorial points form a square (4-cycle)
+							if valid_octahedron:
+								for eq in equatorial_points:
+									var eq_to_eq_connections = 0
+									for other_eq in equatorial_points:
+										if other_eq != eq and are_points_connected(eq, other_eq):
+											eq_to_eq_connections += 1
+									if eq_to_eq_connections != 2:
+										valid_octahedron = false
+										print("SnapConnectionManager: ✗ Equatorial square invalid")
+										break
+							
+							if valid_octahedron:
+								print("SnapConnectionManager: ✓✓✓ FOUND VALID OCTAHEDRON! 2 polar + 4 equatorial")
+								var key = _make_shape_key(test_points)
+								if not found_octahedrons.has(key):
+									found_octahedrons[key] = test_points
+	
+	# Emit signals for new octahedrons
+	for key in found_octahedrons.keys():
+		if not _octahedrons.has(key):
+			_octahedrons[key] = found_octahedrons[key]
+			octahedron_formed.emit(found_octahedrons[key])
+			print("SnapConnectionManager: Detected octahedron with 6 points")
+	
+	# Remove octahedrons that no longer exist
+	var keys_to_remove: Array[String] = []
+	for key in _octahedrons.keys():
+		if not found_octahedrons.has(key):
+			keys_to_remove.append(key)
+	
+	for key in keys_to_remove:
+		_octahedrons.erase(key)
+		print("SnapConnectionManager: Removed octahedron")
+
+func _detect_square_pyramids() -> void:
+	var found_pyramids: Dictionary = {}
+	
+	# A square pyramid has 5 vertices: 4 forming the base square, 1 apex above/below
+	# The apex connects to all 4 base vertices
+	# Base vertices form a square (4-cycle)
+	
+	for point_a in _adjacency.keys():
+		if not is_instance_valid(point_a):
+			continue
+		
+		var neighbors_a = _adjacency[point_a]
+		if neighbors_a.size() < 2:
+			continue
+		
+		# Try to find a square base starting with A
+		for i in range(neighbors_a.size()):
+			var point_b = neighbors_a[i]
+			if not is_instance_valid(point_b):
+				continue
+			
+			# Try to find point C that forms angle at B
+			var neighbors_b = _adjacency[point_b]
+			for point_c in neighbors_b:
+				if not is_instance_valid(point_c):
+					continue
+				if point_c == point_a:
+					continue
+				
+				# Try to find point D that completes the square A-B-C-D
+				var neighbors_c = _adjacency[point_c]
+				for point_d in neighbors_c:
+					if not is_instance_valid(point_d):
+						continue
+					if point_d == point_a or point_d == point_b:
+						continue
+					
+					# Check if D connects back to A (completing the square base)
+					if not are_points_connected(point_d, point_a):
+						continue
+					
+					# We have a potential square base: A-B-C-D
+					var base_points = [point_a, point_b, point_c, point_d]
+					
+					# Now find an apex that connects to all 4 base points
+					for point_apex in _adjacency.keys():
+						if not is_instance_valid(point_apex):
+							continue
+						if point_apex in base_points:
+							continue
+						
+						# Check if apex connects to all 4 base points
+						var connects_to_all = true
+						for base_point in base_points:
+							if not are_points_connected(point_apex, base_point):
+								connects_to_all = false
+								break
+						
+						if connects_to_all:
+							var pyramid_points = base_points + [point_apex]
+							var key = _make_shape_key(pyramid_points)
+							
+							if not found_pyramids.has(key):
+								found_pyramids[key] = pyramid_points
+	
+	# Emit signals for new square pyramids
+	for key in found_pyramids.keys():
+		if not _square_pyramids.has(key):
+			_square_pyramids[key] = found_pyramids[key]
+			square_pyramid_formed.emit(found_pyramids[key])
+			print("SnapConnectionManager: Detected square pyramid with 5 points")
+	
+	# Remove square pyramids that no longer exist
+	var keys_to_remove: Array[String] = []
+	for key in _square_pyramids.keys():
+		if not found_pyramids.has(key):
+			keys_to_remove.append(key)
+	
+	for key in keys_to_remove:
+		_square_pyramids.erase(key)
+		print("SnapConnectionManager: Removed square pyramid")
 
 func _create_triangle(points: Array) -> void:
 	var key = _make_shape_key(points)

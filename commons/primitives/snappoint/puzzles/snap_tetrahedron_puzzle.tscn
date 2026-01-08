@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5r7n8t4mjedx"]
+
+[ext_resource type="Script" uid="uid://cuqcw3y7gfvj1" path="res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.gd" id="1_tetrahedron"]
+[ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="2_snappoint"]
+[ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="3_manager"]
+
+[node name="SnapTetrahedronPuzzle" type="Node3D"]
+script = ExtResource("1_tetrahedron")
+spawn_position = Vector3(0, -1.66, 1.96)
+spawn_scale = 1.0
+
+[node name="SnapConnectionManager" type="Node" parent="."]
+script = ExtResource("3_manager")
+
+[node name="Point1_Base1" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.6, -0.05)
+
+[node name="Point2_Base2" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.6, -0.05)
+
+[node name="Point3_Base3" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.12)
+
+[node name="Point4_Apex" parent="." instance=ExtResource("2_snappoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.02)
+
+[node name="InstructionLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.001
+billboard = 1
+text = "Connect all 4 points to form a tetrahedron"
+font_size = 28
+outline_size = 6

@@ -53,7 +53,7 @@ func create_origin_marker():
 	var label = Label3D.new()
 	label.text = ORIGIN_ALIASES[_alias_index]
 	label.position = Vector3(0, 0.15, 0) # Slightly above
-	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y  # Billboard with Y-axis only rotation
 	# Small 3D text
 	label.pixel_size = 0.001 # Even smaller
 	label.font_size = 64 # High res texture

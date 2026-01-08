@@ -79,7 +79,11 @@ func divide_cube():
 
 func create_child_cube(pos: Vector3, new_scale: Vector3, rot: Vector3, division_level: int):
 	"""Create a new subdivision cube at the specified position"""
-	var new_cube = preload("res://commons/primitives/cubes/subdivision_cube.tscn").instantiate()
+	var scene = load("res://commons/primitives/cubes/subdivision_cube.tscn")
+	if not scene:
+		push_error("SubdivisionCube: Failed to load scene")
+		return
+	var new_cube = scene.instantiate()
 
 	# Set division level before adding to tree
 	new_cube.current_division = division_level

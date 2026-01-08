@@ -15,6 +15,12 @@
 			"description": "A vertical portal frame that teleports the player to a destination.",
 			"scene": "res://commons/scenes/mapobjects/portal.tscn"
 		},
+		"cctv": {
+			"name": "CCTV Monitor",
+			"lookup_name": "cctv",
+			"description": "Security camera monitor. Use cctv:rotation:ytrans:scale to configure.",
+			"scene": "res://commons/monitor/cctv.tscn"
+		},
 		"menu": {
 			"name": "menu",
 			"lookup_name": "menu",
@@ -128,6 +134,24 @@
 			"lookup_name": "snap_wedge_puzzle",
 			"description": "Interactive puzzle where connecting 6 snap points forms a wedge/prism that spawns a walkable ramp.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn"
+		},
+	"snap_octahedron_puzzle": {
+		"name": "Snap Octahedron Puzzle",
+		"lookup_name": "snap_octahedron_puzzle",
+		"description": "Interactive puzzle where connecting 6 snap points forms an octahedron that spawns a walkable prism.",
+		"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn"
+	},
+		"snap_tetrahedron_puzzle": {
+			"name": "Snap Tetrahedron Puzzle",
+			"lookup_name": "snap_tetrahedron_puzzle",
+			"description": "Interactive puzzle where connecting 4 snap points forms a tetrahedron that spawns a cube.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn"
+		},
+		"snap_pyramid_puzzle": {
+			"name": "Snap Pyramid Puzzle",
+			"lookup_name": "snap_pyramid_puzzle",
+			"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn"
 		},
 		"snap_line": {
 			"name": "Snap Line",
@@ -441,6 +465,14 @@
 			"description": "Grid-shaded capsule primitive with glowing wireframe overlay.",
 			"scene": "res://commons/primitives/capsule/capsule.tscn"
 		},
+		
+		"capsules": {
+			"name": "capsules",
+			"lookup_name": "capsules",
+			"description": "caps.",
+			"scene": "res://commons/primitives/capsule/capsules.tscn"
+		},
+
 		"torus": {
 			"name": "torus",
 			"lookup_name": "torus",

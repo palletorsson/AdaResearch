@@ -1,7 +1,7 @@
 {
 	"map_info": {
 		"name": "00 Point Zero",
-		"description": "Introduces the origin not as a thing but as a prerequisite of spatial measurement. The origin (0,0,0) appears not as a marker but as an implicit agreement between body, coordinate system, and update loop. This map foregrounds the invisible scaffolding\u2014rendering, reference frames, and temporal loops\u2014that must be in place before any geometry can exist.",
+		"description": "Vector Zero - You arrive late. Before you see anything, a lineage has already survived: physics, bodies, tools, code, and the long history that makes “now” possible. Heidegger called this thrownness—we begin inside conditions we did not choose. In this world, what is “already there” is the renderer, the headset body, the frame-loop, and the 3D coordinate system that holds time as motion. Vector3(0,0,0) is not just a point. It is the fact of beginning inside an inheritance.",
 		"description_2": "Point Zero introduces the origin not as an object, but as a prerequisite. The map stages the moment before geometry, where spatial measurement becomes possible only through the establishment of a shared reference. The origin (0,0,0) is not presented as a visible marker, but as an implicit agreement between body, coordinate system, and time\u2014an abstraction sustained by the simulation itself. Through embodied presence and minimal interaction, the player encounters the conditions that make a stable origin returnable: rendering pipelines, reference frames, memory, and temporal update loops. These invisible scaffolds must already be in place before any point, line, or measurement can appear. The scene thus reveals the origin as infrastructural rather than foundational\u2014an effect of system stability, not its ground.",
 		"version": "1.0",
 		"format": "json",
@@ -30,8 +30,8 @@
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "0", "0", "0"],
-			["0", "1", "1", "1", "0", "0", "0"],
+			["1", "1", "1", "1", "0", "1", "0"],
+			["2", "1", "1", "1", "0", "0", "0"],
 			["0", "1", "0", "1", "0", "0", "0"],
 			["0", "1", "1", "1", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
@@ -40,7 +40,7 @@
 			["0", "0", "0", "0", "0", "0", "0"]
 		],
 		"utilities": [
-			["m:0:3:-1:0.1", " ", " ", " ", " ", "an:-90", " "],
+			["m:0:3:-1:0.1", " ", " ", " ", " ", "an:-90:2", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -51,8 +51,8 @@
 		],
 		"interactables": [
 			["origin:180:-1", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "clipboard#point_zero:-105:0.9", " ", " ", " "],
-			[" ", " ", " ", "", " ", " ", " "],
+			["clipboard#point_zero:180", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

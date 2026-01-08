@@ -25,7 +25,7 @@ signal player_registered(player: Node3D)
 var sound_enabled: bool = true
 var music_volume: float = 0.8
 var sfx_volume: float = 0.7
-var show_infoboard: bool = false # New setting
+var show_infoboard: bool = true  
 
 # Player customization
 var nail_color: Color = Color(1.0, 0.5, 0.7, 1.0)  # Default pink

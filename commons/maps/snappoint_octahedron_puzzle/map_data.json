@@ -1,7 +1,7 @@
 {
 	"map_info": {
-		"name": "Snap Point Wedge Puzzle",
-		"description": "Use snap points to build a wedge shape that spawns a walkable ramp",
+		"name": "Snap Point Pyramid Puzzle",
+		"description": "Use snap points to build a pyramid that spawns a walkable prism",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,17 +13,17 @@
 			"difficulty": "beginner",
 			"category": "puzzle",
 			"estimated_time": "5 minutes",
-			"learning_objectives": ["Snap points", "Geometry construction", "Wedge shapes", "Prism construction"]
+			"learning_objectives": ["Snap points", "Geometry construction", "Pyramid shapes", "Square base with apex"]
 		}
 	},
 	"documentation": {
-		"summary": "Wedge Puzzle - Construct to Progress",
+		"summary": "Pyramid Puzzle - Build to Progress",
 		"layout": "9x9 platform with elevated section requiring a ramp",
-		"objective": "Connect 6 snap points to form a wedge/prism. When complete, a walkable ramp appears.",
+		"objective": "Connect 5 snap points to form a pyramid. When complete, a walkable prism appears.",
 		"key_elements": [
-			"snap_wedge_puzzle - 6 interactive points (4 base + 2 top edge)",
+			"snap_pyramid_puzzle - 5 interactive points (4 base + 1 apex)",
 			"Elevated platform with teleporter (3 blocks high)",
-			"Spawned ramp bridges gap when puzzle is solved"
+			"Spawned prism bridges gap when puzzle is solved"
 		]
 	},
 	"layers": {
@@ -42,7 +42,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			["3t:Form a wedge with the 6 points.", " ", " ", " ", " ", " ", " ", " ", " "],
+			["3t:Form a pyramid with 4 base + 1 apex points.", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "t", " ", " ", " ", " "],
@@ -53,7 +53,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "snap_wedge_puzzle", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "snap_pyramid_puzzle", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -72,10 +72,10 @@
 		}
 	},
 	"artifact_definitions": {
-		"snap_wedge_puzzle": {
-			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn",
-			"name": "Snap Wedge Puzzle",
-			"description": "6 snap points to form a wedge/prism slope",
+		"snap_pyramid_puzzle": {
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+			"name": "Snap Pyramid Puzzle",
+			"description": "5 snap points to form a pyramid that spawns a walkable prism",
 			"scale": 1.0
 		}
 	},
