@@ -84,7 +84,29 @@ signal square_pyramid_formed(points: Array)    # 5 points (4 base + 1 apex)
 
 ## Puzzle System
 
-Three pre-built puzzles demonstrating different behaviors:
+Four pre-built puzzles demonstrating different behaviors:
+
+### Triangle Puzzle (`snap_triangle_puzzle.gd/tscn`)
+
+**Points:** 3 (forming equilateral triangle)
+**On Complete:** Spawns a configurable object (default: 0.5-unit cube)
+**Use Case:** Simple introduction puzzle, highly configurable reward
+
+**Configuration:**
+```gdscript
+@export var auto_solve: bool = true
+@export var spawn_scene_path: String = "res://commons/primitives/cubes/cube_scene.tscn"
+@export var spawn_position: Vector3 = Vector3(0, 0, 1)
+@export var spawn_scale: float = 0.5
+@export var spawn_rotation: Vector3 = Vector3(0, 0, 0)
+```
+
+**Behavior:**
+1. Player connects 3 points to form triangle (3 edges total)
+2. Configured object spawns at specified position
+3. Success message displays (3 seconds)
+4. After 1 second delay, points and connections fade away
+5. Spawned object remains
 
 ### Octahedron Puzzle (`snap_octahedron_puzzle.gd/tscn`)
 
@@ -156,9 +178,10 @@ In map JSON `interactables` layer:
 
 ```json
 "interactables": [
-    [" ", "snap_octahedron_puzzle", " "],
+    [" ", "snap_triangle_puzzle", " "],
     [" ", "snap_tetrahedron_puzzle", " "],
-    [" ", "snap_pyramid_puzzle", " "]
+    [" ", "snap_pyramid_puzzle", " "],
+    [" ", "snap_octahedron_puzzle", " "]
 ]
 ```
 

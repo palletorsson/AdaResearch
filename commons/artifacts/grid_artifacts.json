@@ -147,12 +147,48 @@
 			"description": "Interactive puzzle where connecting 4 snap points forms a tetrahedron that spawns a cube.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn"
 		},
-		"snap_pyramid_puzzle": {
-			"name": "Snap Pyramid Puzzle",
-			"lookup_name": "snap_pyramid_puzzle",
-			"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
-			"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn"
-		},
+	"snap_pyramid_puzzle": {
+		"name": "Snap Pyramid Puzzle",
+		"lookup_name": "snap_pyramid_puzzle",
+		"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
+		"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn"
+	},
+	"snap_triangle_puzzle": {
+		"name": "Snap Triangle Puzzle",
+		"lookup_name": "snap_triangle_puzzle",
+		"description": "Interactive puzzle where connecting 3 snap points forms a triangle that spawns a configurable object.",
+		"scene": "res://commons/primitives/snappoint/puzzles/snap_triangle_puzzle.tscn"
+	},
+	"cross_line_puzzle": {
+		"name": "Cross Line Puzzle",
+		"lookup_name": "cross_line_puzzle",
+		"description": "Interactive puzzle: drag line endpoints to form an X cross from two horizontal lines.",
+		"scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn"
+	},
+	"plus_line_puzzle": {
+		"name": "Plus Line Puzzle",
+		"lookup_name": "plus_line_puzzle",
+		"description": "Interactive puzzle: drag line endpoints to form a + (plus) with perpendicular lines.",
+		"scene": "res://commons/primitives/line/puzzles/plus_line_puzzle.tscn"
+	},
+	"parallel_line_puzzle": {
+		"name": "Parallel Line Puzzle",
+		"lookup_name": "parallel_line_puzzle",
+		"description": "Interactive puzzle: drag line endpoints to align two lines to be parallel.",
+		"scene": "res://commons/primitives/line/puzzles/parallel_line_puzzle.tscn"
+	},
+	"triangle_line_puzzle": {
+		"name": "Triangle Line Puzzle",
+		"lookup_name": "triangle_line_puzzle",
+		"description": "Interactive puzzle: drag 3 line endpoints to form an equilateral triangle.",
+		"scene": "res://commons/primitives/line/puzzles/triangle_line_puzzle.tscn"
+	},
+	"quad_line_puzzle": {
+		"name": "Quad Line Puzzle",
+		"lookup_name": "quad_line_puzzle",
+		"description": "Interactive puzzle: drag 4 line endpoints to form a square.",
+		"scene": "res://commons/primitives/line/puzzles/quad_line_puzzle.tscn"
+	},
 		"snap_line": {
 			"name": "Snap Line",
 			"lookup_name": "snap_line",

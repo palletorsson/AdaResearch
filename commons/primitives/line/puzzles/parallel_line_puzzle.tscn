@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpv3qr51ym8wh"]
+
+[ext_resource type="Script" path="res://commons/primitives/line/puzzles/parallel_line_puzzle.gd" id="1_parallel"]
+
+[node name="ParallelLinePuzzle" type="Node3D"]
+script = ExtResource("1_parallel")
+auto_validate = true
+show_ghost_guides = true
+ghost_alpha = 0.3
+ghost_color = Color(0.5, 0.5, 1, 0.3)
+ghost_line_width = 0.008
+success_message = "Parallel Complete! Lines aligned"
+lock_on_complete = true
+show_success_label = true
+success_display_duration = 3.0
+
+[node name="InstructionLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+pixel_size = 0.001
+billboard = 1
+text = "Drag endpoints to YELLOW/ORANGE crosses
+Align lines to be parallel
+Snap within 15cm - Lines turn GREEN!"
+font_size = 26
+outline_size = 8
+
+[node name="GhostGuides" type="Node3D" parent="."]

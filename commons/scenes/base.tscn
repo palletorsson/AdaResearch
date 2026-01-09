@@ -119,6 +119,7 @@ light_energy = 1.5
 
 [node name="GravityGun" parent="XROrigin3D/RightHand" index="4" instance=ExtResource("17_ciyru")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0635249, -0.042175055, 0.117234945)
+visible = false
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
 
