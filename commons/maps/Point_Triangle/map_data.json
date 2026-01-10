@@ -2,6 +2,7 @@
 	"map_info": {
 		"name": "Tutorial_2D",
 		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"manual_file": "res://commons/context/clipboard/tutorial_text/triangle_axioms.md",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -24,13 +25,7 @@
 		"summary": "Point_Triangle_1_0 - Triangle Basics Studio",
 		"layout": "7x8 floor with standard south void; single-height working surface.",
 		"objective": "Manipulate basic triangle vertices and review profile set.",
-		"key_elements": [
-			"`la:triangle` annotation at (3,3)",
-			"`triangleprofiles:-90:0.3:0.3` display at (6,0)",
-			"`triangle` manipulator at (3,3)",
-			"`dark_sphere` enclosure at (3,2)",
-			"Teleporter `t` at (5,6)"
-		]
+		"key_elements": ["`la:triangle` annotation at (3,3)", "`triangleprofiles:-90:0.3:0.3` display at (6,0)", "`triangle` manipulator at (3,3)", "`dark_sphere` enclosure at (3,2)", "Teleporter `t` at (5,6)"]
 	},
 	"layers": {
 		"structure": [

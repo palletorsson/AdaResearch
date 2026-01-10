@@ -22,6 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://mwes0vp5s11g" path="res://algorithms/forces/gravity_gun.tscn" id="17_ciyru"]
 [ext_resource type="PackedScene" uid="uid://dkr7m0bhpcx1d" path="res://commons/primitives/point/player_trace.tscn" id="18_player_trace"]
 [ext_resource type="Script" uid="uid://dp16jbaa5uj0v" path="res://commons/scenes/mapobjects/PlayerBoundsCheck.gd" id="19_bounds"]
+[ext_resource type="Script" path="res://commons/player/velocity_deadzone.gd" id="20_deadzone"]
+[ext_resource type="Script" path="res://commons/player/drift_debugger.gd" id="21_drift_debug"]
+[ext_resource type="Script" path="res://commons/player/joystick_deadzone_fix.gd" id="22_joystick_fix"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -122,6 +125,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0635249, -0.042175055, 0.11
 visible = false
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
+
+[node name="VelocityDeadzone" type="Node" parent="XROrigin3D" index="4"]
+script = ExtResource("20_deadzone")
+
+[node name="DriftDebugger" type="Node" parent="XROrigin3D" index="5"]
+script = ExtResource("21_drift_debug")
+enabled = false
+
+[node name="JoystickDeadzoneFix" type="Node" parent="XROrigin3D" index="6"]
+script = ExtResource("22_joystick_fix")
 
 [node name="Label3D" type="Label3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)

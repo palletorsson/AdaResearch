@@ -108,6 +108,7 @@ func _update_line_geometry() -> void:
 	var line_length = line_vector.length()
 	var line_center = (start + end) / 2.0
 	
+	# Hide if line is too short (prevents degenerate basis)
 	if line_length < 0.001:
 		line_mesh.visible = false
 		return
@@ -128,14 +129,21 @@ func _update_line_geometry() -> void:
 	line_mesh.global_position = line_center
 	
 	# Rotate to align with line direction
-	var up = Vector3.UP
 	var direction = line_vector.normalized()
+	var up = Vector3.UP
 	
-	# Avoid gimbal lock when line is vertical
+	# Avoid parallel vectors (prevents degenerate basis)
 	if abs(direction.dot(up)) > 0.999:
 		up = Vector3.FORWARD
 	
-	line_mesh.global_transform.basis = Basis.looking_at(direction, up) * Basis(Vector3(1, 0, 0), PI/2)
+	# Safely create basis
+	var basis = Basis.looking_at(direction, up)
+	# Check if basis is valid (non-zero determinant)
+	if abs(basis.determinant()) > 0.001:
+		line_mesh.global_transform.basis = basis * Basis(Vector3(1, 0, 0), PI/2)
+	else:
+		# Fallback: use identity basis if degenerate
+		line_mesh.global_transform.basis = Basis()
 
 func _process(_delta: float) -> void:
 	"""Update target markers to show proximity"""

@@ -1,0 +1,515 @@
+# MapManual.gd
+# Toggleable map information display that rotates in/out when player presses X button
+# Uses MarkdownLabel for rendering markdown text
+
+extends Node3D
+class_name MapManual
+
+# Configuration
+@export var display_distance: float = 1.8  # Perfect VR reading distance (was 2.0)
+@export var height_offset: float = -0.3  # Offset below eye level (negative = down)
+@export var hint_distance: float = 1.1 # Distance from camera (closer than manual)
+@export var hint_height_offset: float = -0.9 # Vertical offset (relative to camera height)
+@export var hint_horizontal_offset: float = 0.0 # Horizontal offset (centered)
+
+# ...
+
+
+
+# ... (variables remain the same) ...
+
+func _setup_hint_label() -> void:
+	hint_label = Label3D.new()
+	hint_label.name = "HintLabel"
+	hint_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	hint_label.no_depth_test = true # Render on top
+	hint_label.render_priority = 10
+	hint_label.text = ""
+	hint_label.font_size = 12 # Very small
+	hint_label.outline_render_priority = 9
+	hint_label.modulate = Color(1.0, 0.3, 0.3, 0.9) # Red text
+	hint_label.visible = false
+	add_child(hint_label)
+
+# ... (rest of file) ...
+
+
+@export var hidden_distance: float = -0.5  # Behind player
+@export var animation_duration: float = 0.4
+@export var follow_speed: float = 3.0
+@export var tilt_angle: float = -7.5 # Degrees to tilt back (negative for top-away)
+
+# State
+var is_visible: bool = false
+var is_animating: bool = false
+var current_page: int = 0
+var pages: Array[String] = []
+var map_name_for_hint: String = ""
+
+# Scrolling
+@export var scroll_speed: float = 300.0  # Pixels per second
+
+# VR controller references
+var left_controller: XRController3D
+var right_controller: XRController3D
+
+# Node references
+@onready var viewport_2d = $Viewport2Din3D
+var hint_label: Label3D
+
+# Internal referencing (dynmically found)
+var scroll_container: ScrollContainer
+var markdown_label: RichTextLabel
+var title_label: Label
+var page_label: Label
+var prev_button: Button
+var next_button: Button
+
+func _ready() -> void:
+	# Ensure root is visible so we can show hint/manual independently
+	visible = true
+	
+	# Setup UI nodes
+	call_deferred("_find_ui_nodes_and_setup")
+	_setup_hint_label()
+	
+	# Initially hide manual content (scale ~0)
+	if viewport_2d:
+		viewport_2d.scale = Vector3.ONE * 0.001
+	
+	# Find VR controllers
+	_find_vr_controllers()
+	
+	# Connect to controller button signals
+	_connect_controller_signals()
+	
+	# Connect to SceneManager for auto-close and auto-load
+	if AdaSceneManager.instance:
+		if not AdaSceneManager.instance.scene_transition_started.is_connected(_on_scene_transition_started):
+			AdaSceneManager.instance.scene_transition_started.connect(_on_scene_transition_started)
+		if not AdaSceneManager.instance.scene_transition_completed.is_connected(_on_scene_transition_completed):
+			AdaSceneManager.instance.scene_transition_completed.connect(_on_scene_transition_completed)
+	
+	# Load map data when ready
+	call_deferred("_load_map_data")
+
+func _find_ui_nodes_and_setup() -> void:
+	if not viewport_2d: return
+	
+	# Wait for content
+	if viewport_2d.get_viewport().get_child_count() == 0:
+		await get_tree().process_frame
+		
+	_find_ui_nodes()
+
+
+
+func _on_scene_transition_started(_from, _to, _type):
+	"""Auto-close manual when teleporting/transitioning"""
+	if is_visible:
+		hide_manual()
+	# Also hide hint during transition
+	if hint_label:
+		hint_label.visible = false
+
+func _on_scene_transition_completed(_scene, _data):
+	"""Reload data when new map is ready"""
+	call_deferred("_load_map_data")
+
+func _process(delta: float) -> void:
+	# ALWAYS UPDATE POSITION to follow camera (so manual opens in front, and hint stays visible)
+	
+	var camera = _find_camera()
+	if not camera:
+		return
+	
+	# Calculate target position in front of camera
+	var camera_forward = -camera.global_transform.basis.z
+	camera_forward.y = 0
+	if camera_forward.length_squared() < 0.01:
+		camera_forward = Vector3.FORWARD
+	else:
+		camera_forward = camera_forward.normalized()
+	
+	var target_pos = camera.global_position + camera_forward * display_distance
+	target_pos.y = camera.global_position.y + height_offset
+	
+	# Smoothly interpolate root position
+	global_position = global_position.lerp(target_pos, delta * follow_speed)
+	
+	# Look at camera
+	var look_target = camera.global_position
+	look_target.y = global_position.y
+	
+	if global_position.distance_to(look_target) > 0.1:
+		var look_away_target = 2 * global_position - look_target
+		var target_transform = global_transform.looking_at(look_away_target, Vector3.UP)
+		
+		# Apply drafting-table tilt (rotate around local X axis)
+		var tilt_basis = Basis(Vector3.RIGHT, deg_to_rad(tilt_angle))
+		target_transform.basis = target_transform.basis * tilt_basis
+		
+		global_transform = global_transform.interpolate_with(target_transform, delta * follow_speed)
+
+	# Update Hint Visibility
+	if hint_label:
+		# Show hint if: Manual ClOSED, Not Animating, Has Content
+		var should_show_hint = not is_visible and not is_animating and not pages.is_empty()
+		hint_label.visible = should_show_hint
+		
+		if should_show_hint:
+			# Update text if needed
+			if map_name_for_hint != "":
+				hint_label.text = "(X) Info: %s" % map_name_for_hint
+			else:
+				hint_label.text = "(X) Info"
+			
+			# Hint position relative to root
+			# Root is at display_distance (1.8). Hint is at hint_distance (1.1).
+			# Z+ is towards camera. So we move + (display - hint)
+			var z_offset = display_distance - hint_distance
+			
+			hint_label.position = Vector3(hint_horizontal_offset, hint_height_offset - height_offset, z_offset) 
+			# Note: hint_height_offset is absolute relative to cam, but position is local to root.
+			# Root is at cam + height_offset.
+			# So local hint y = hint_height - height_offset.
+			# e.g. -0.6 - (-0.3) = -0.3 (lower than manual)
+
+func toggle_manual() -> void:
+	if is_animating:
+		return
+	
+	if is_visible:
+		hide_manual()
+	else:
+		show_manual()
+
+func show_manual() -> void:
+	if is_visible or is_animating:
+		return
+	
+	print("MapManual: Showing manual...")
+	
+	# Reload map data each time we show (in case map changed)
+	_load_map_data()
+	
+	is_animating = true
+	is_visible = true
+	
+	if hint_label:
+		hint_label.visible = false
+	
+	# Animate Viewport2D scale
+	if viewport_2d:
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_BACK)
+		
+		viewport_2d.scale = Vector3.ONE * 0.001
+		tween.tween_property(viewport_2d, "scale", Vector3.ONE, animation_duration)
+		tween.tween_callback(_on_show_complete)
+	else:
+		_on_show_complete()
+
+func hide_manual() -> void:
+	if not is_visible or is_animating:
+		return
+	
+	is_animating = true
+	
+	# Animate Viewport2D scale out
+	if viewport_2d:
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_BACK)
+		
+		tween.tween_property(viewport_2d, "scale", Vector3.ONE * 0.001, animation_duration * 0.7)
+		tween.tween_callback(_on_hide_complete)
+	else:
+		_on_hide_complete()
+
+func _on_show_complete() -> void:
+	is_animating = false
+	is_visible = true
+
+func _on_hide_complete() -> void:
+	is_animating = false
+	is_visible = false
+	# Hint will reappear automatically in _process if conditions met
+
+func _load_map_data() -> void:
+	"""Load map information from current map's data"""
+	pages.clear()
+	print("MapManual: Loading map data...")
+	
+	# Find GridSystem
+	var grid_system = get_tree().get_first_node_in_group("grid_system")
+	if not grid_system:
+		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")
+	
+	if grid_system:
+		print("MapManual: Found GridSystem")
+		var data_component = grid_system.get_data_component()
+		if data_component:
+			if data_component.json_loader and data_component.json_loader.map_data:
+				print("MapManual: Got map data from GridSystem.data_component.json_loader")
+				_parse_map_data(data_component.json_loader.map_data)
+				return
+	
+	# Fallback: show default message if nothing found
+	print("MapManual: No map data found, using fallback")
+	pages.append("# Map Manual\n\nNo map data available.\n\nPress **X** to close.")
+	_update_display()
+
+func _parse_map_data(map_data: Dictionary) -> void:
+	"""Parse map_data.json and create pages"""
+	var content: String = ""
+	map_name_for_hint = "" 
+	
+	if map_data.has("map_info") and map_data.map_info.has("name"):
+		map_name_for_hint = map_data.map_info.name
+	
+	# Try to auto-detect manual.md in the map directory
+	if map_data.has("map_info") and map_data.map_info.has("name"):
+		var map_name = map_data.map_info.name
+		var auto_manual_path = "res://commons/maps/%s/manual.md" % map_name
+		if FileAccess.file_exists(auto_manual_path):
+			var file_content = _load_markdown_file(auto_manual_path)
+			if not file_content.is_empty():
+				print("MapManual: Auto-loaded manual.md from %s" % auto_manual_path)
+				_split_and_add_pages(file_content)
+				return
+	
+	# Check explicit manual_file reference in map_info
+	if map_data.has("map_info") and map_data.map_info.has("manual_file"):
+		var manual_path = map_data.map_info.manual_file
+		var file_content = _load_markdown_file(manual_path)
+		if not file_content.is_empty():
+			_split_and_add_pages(file_content)
+			return
+	
+	# Fallback - inline data
+	if map_data.has("map_info"):
+		var info = map_data.map_info
+		content = "# %s\n\n" % info.get("name", "Unknown Map")
+		content += "%s\n\n" % info.get("description", "")
+		pages.append(content)
+	
+	if pages.is_empty():
+		pages.append("# Map Manual\n\nNo content available.")
+	
+	current_page = 0
+	_update_display()
+
+func _split_and_add_pages(file_content: String) -> void:
+	var page_parts = file_content.split("\n---PAGE---\n")
+	if page_parts.size() > 1:
+		for part in page_parts:
+			pages.append(part.strip_edges())
+	else:
+		pages.append(file_content)
+	current_page = 0
+	_update_display()
+
+func _load_markdown_file(file_path: String) -> String:
+	if not FileAccess.file_exists(file_path):
+		return ""
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if not file:
+		return ""
+	var content = file.get_as_text()
+	file.close()
+	return content
+
+func _update_display() -> void:
+	if pages.is_empty():
+		return
+	var content = pages[current_page]
+	
+	if markdown_label:
+		markdown_label.bbcode_enabled = true
+		markdown_label.text = _parse_markdown(content)
+	
+	if page_label:
+		page_label.text = "Page %d / %d" % [current_page + 1, pages.size()]
+	
+	if scroll_container:
+		scroll_container.scroll_vertical = 0
+
+func _parse_markdown(md: String) -> String:
+	var text = md
+	# 1. Code Blocks
+	var block_code = RegEx.new()
+	block_code.compile("```([^`]+)```")
+	text = block_code.sub(text, "[font_size=28][color=#aaddff][code]$1[/code][/color][/font_size]", true)
+	# 2. Headers
+	var h3 = RegEx.new()
+	h3.compile("(^|\\n)### (.*)")
+	text = h3.sub(text, "$1[font_size=40][b]$2[/b][/font_size]", true)
+	var h2 = RegEx.new()
+	h2.compile("(^|\\n)## (.*)")
+	text = h2.sub(text, "$1[font_size=48][b]$2[/b][/font_size]", true)
+	var h1 = RegEx.new()
+	h1.compile("(^|\\n)# (.*)")
+	text = h1.sub(text, "$1[font_size=60][b]$2[/b][/font_size]", true)
+	# 3. Bold
+	var bold = RegEx.new()
+	bold.compile("\\*\\*([^*]+)\\*\\*")
+	text = bold.sub(text, "[b]$1[/b]", true)
+	# 4. Italic
+	var italic_simple = RegEx.new()
+	italic_simple.compile("\\*([^*]+)\\*")
+	text = italic_simple.sub(text, "[i]$1[/i]", true)
+	# 5. Lists
+	text = text.replace("\n- ", "\n• ")
+	text = text.replace("\n* ", "\n• ")
+	# 6. Inline Code
+	var inline_code = RegEx.new()
+	inline_code.compile("`([^`]+)`")
+	text = inline_code.sub(text, "[color=#aaddff][code]$1[/code][/color]", true)
+	# 7. HR
+	var hr = RegEx.new()
+	hr.compile("(?m)^---$")
+	text = hr.sub(text, "\n[color=#ffffff44]________________________________________[/color]\n", true)
+	return text
+
+func next_page() -> void:
+	if pages.size() <= 1: return
+	current_page = (current_page + 1) % pages.size()
+	_update_display()
+
+func prev_page() -> void:
+	if pages.size() <= 1: return
+	current_page = (current_page - 1 + pages.size()) % pages.size()
+	_update_display()
+
+# --- MISSING FUNCTIONS RESTORED BELOW ---
+
+func _find_ui_nodes() -> void:
+	if not viewport_2d: return
+	
+	var ui_instance = null
+	if viewport_2d.has_method("get_scene_instance"):
+		ui_instance = viewport_2d.get_scene_instance()
+	
+	if not ui_instance:
+		var viewport = viewport_2d.get_node_or_null("Viewport")
+		if viewport and viewport.get_child_count() > 0:
+			ui_instance = viewport.get_child(0)
+			
+	if not ui_instance:
+		print("MapManual: UI instance not found")
+		return
+		
+	title_label = ui_instance.get_node_or_null("TitleBar/Title")
+	scroll_container = ui_instance.get_node_or_null("ScrollContainer")
+	if scroll_container:
+		markdown_label = scroll_container.get_node_or_null("MarkdownLabel")
+	
+	var page_bar = ui_instance.get_node_or_null("PageBar")
+	if page_bar:
+		page_label = page_bar.get_node_or_null("PageLabel")
+		prev_button = page_bar.get_node_or_null("PrevButton")
+		next_button = page_bar.get_node_or_null("NextButton")
+		
+		# Connect buttons
+		if prev_button:
+			if not prev_button.pressed.is_connected(prev_page):
+				prev_button.pressed.connect(prev_page)
+		if next_button:
+			if not next_button.pressed.is_connected(next_page):
+				next_button.pressed.connect(next_page)
+
+func _find_vr_controllers() -> void:
+	# First try to find our parent XROrigin3D (since MapManual is a child of it)
+	var xr_origin = get_parent()
+	if not xr_origin or not xr_origin.name.contains("XROrigin"):
+		xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	
+	if xr_origin:
+		# Try both naming conventions
+		left_controller = xr_origin.find_child("LeftHandController", true, false)
+		if not left_controller:
+			left_controller = xr_origin.find_child("LeftController", true, false)
+		
+		right_controller = xr_origin.find_child("RightHandController", true, false)
+		if not right_controller:
+			right_controller = xr_origin.find_child("RightController", true, false)
+		
+		print("MapManual: Found controllers - Left: %s, Right: %s" % [left_controller != null, right_controller != null])
+	
+	# Fallback: search for any XRController3D nodes
+	if not left_controller:
+		var controllers = get_tree().get_nodes_in_group("xr_controllers")
+		for controller in controllers:
+			if controller is XRController3D:
+				if not left_controller:
+					left_controller = controller
+				elif not right_controller:
+					right_controller = controller
+					break
+
+func _connect_controller_signals() -> void:
+	if left_controller:
+		if not left_controller.button_pressed.is_connected(_on_controller_button_pressed):
+			left_controller.button_pressed.connect(_on_controller_button_pressed.bind(left_controller))
+	
+	if right_controller:
+		if not right_controller.button_pressed.is_connected(_on_controller_button_pressed):
+			right_controller.button_pressed.connect(_on_controller_button_pressed.bind(right_controller))
+
+func _on_controller_button_pressed(button: String, _controller: XRController3D) -> void:
+	# Toggle on X button (ax_button)
+	if button == "ax_button":
+		toggle_manual()
+
+func _input(event: InputEvent) -> void:
+	# Desktop fallback: M key toggles manual
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_M:
+			print("MapManual: M key pressed, toggling manual")
+			toggle_manual()
+		elif is_visible:
+			if event.keycode == KEY_RIGHT or event.keycode == KEY_DOWN:
+				next_page()
+			elif event.keycode == KEY_LEFT or event.keycode == KEY_UP:
+				prev_page()
+			elif event.keycode == KEY_ESCAPE:
+				hide_manual()
+			elif event.keycode == KEY_PAGEDOWN:
+				_scroll_by(200)
+			elif event.keycode == KEY_PAGEUP:
+				_scroll_by(-200)
+	
+	# Mouse wheel scrolling
+	if is_visible and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_scroll_by(-50)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_scroll_by(50)
+
+func _scroll_by(amount: int) -> void:
+	"""Scroll the content by the given amount"""
+	if scroll_container:
+		scroll_container.scroll_vertical += amount
+
+func _find_camera() -> Camera3D:
+	"""Find any available camera in the scene"""
+	var camera = get_viewport().get_camera_3d()
+	if camera: return camera
+	camera = get_tree().root.find_child("XRCamera3D", true, false)
+	if camera: return camera
+	var cameras = get_tree().get_nodes_in_group("cameras")
+	if cameras.size() > 0: return cameras[0]
+	camera = get_tree().root.find_child("Camera3D", true, false)
+	if camera: return camera
+	return null
+
+func _find_node_by_class(node: Node, target_class_name: String) -> Node:
+	if node == null: return null
+	if node.get_script() and node.get_script().get_global_name() == target_class_name:
+		return node
+	for child in node.get_children():
+		var result = _find_node_by_class(child, target_class_name)
+		if result: return result
+	return null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dh0yixpmcvifk"]
+[gd_scene load_steps=12 format=3 uid="uid://dh0yixpmcvifk"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8x7y605w4v3v" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_pointer"]
 [ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="6_qxsll"]
+[ext_resource type="PackedScene" path="res://commons/scenes/mapobjects/MapManual.tscn" id="7_mapmanual"]
 
 [sub_resource type="Curve" id="Curve_qsc12"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -86,6 +87,8 @@ distance = 5.0
 show_laser = 2
 laser_length = 1
 
+[node name="MapManual" parent="XROrigin3D" index="4" instance=ExtResource("7_mapmanual")]
+
 [node name="LoadingScreen" parent="." index="2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)
 follow_speed = SubResource("Curve_qsc12")
@@ -96,3 +99,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="6"]
 environment = SubResource("Environment_hmfpo")
+

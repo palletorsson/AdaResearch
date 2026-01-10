@@ -341,3 +341,29 @@ func reset_puzzle() -> void:
 		instruction_label.modulate = Color(1, 1, 1, 1)
 	
 	print("LineSnapPuzzleBase: Puzzle reset")
+
+func _find_grid_scene() -> Node:
+	"""Find the GridScene node to spawn objects in"""
+	# Search up the parent chain
+	var current = self
+	while current:
+		if current.name == "GridScene":
+			return current
+		current = current.get_parent()
+	
+	# Search the entire scene tree
+	var root = get_tree().current_scene
+	if not root:
+		root = get_tree().root
+	
+	return _find_grid_scene_recursive(root)
+
+func _find_grid_scene_recursive(node: Node) -> Node:
+	"""Recursively search for GridScene node"""
+	if node.name == "GridScene":
+		return node
+	for child in node.get_children():
+		var result = _find_grid_scene_recursive(child)
+		if result:
+			return result
+	return null

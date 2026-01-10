@@ -1,0 +1,220 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6n4y04anwcfg"]
+
+[ext_resource type="Script" uid="uid://dmkwreb4xm3bt" path="res://commons/primitives/panels/DigitalPaper/TouchScrollContainer.gd" id="1_touch_scroll"]
+[ext_resource type="FontFile" uid="uid://lqbg0pcn08oh" path="res://commons/font/JetBrainsMono-Medium.ttf" id="2_mono"]
+[ext_resource type="FontFile" uid="uid://bus4k2vontseu" path="res://commons/font/static/Roboto-Regular.ttf" id="3_roboto"]
+[ext_resource type="FontFile" uid="uid://placeholder_bold" path="res://commons/font/static/Roboto-Bold.ttf" id="4_roboto_bold"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.5, 0.8, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title"]
+bg_color = Color(0.15, 0.2, 0.35, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[node name="ManualUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TitleBar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_title")
+
+[node name="Title" type="Label" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "Map Manual"
+vertical_alignment = 1
+
+[node name="CloseHint" type="Label" parent="TitleBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_font_sizes/font_size = 32
+text = "[X] Close"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 90.0
+offset_right = -15.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+script = ExtResource("1_touch_scroll")
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("3_roboto")
+theme_override_fonts/bold_font = ExtResource("4_roboto_bold")
+theme_override_fonts/mono_font = ExtResource("2_mono")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/mono_font_size = 26
+bbcode_enabled = true
+text = "# The Point
+##The atom of space ##
+
+A point is the smallest unit of computational geometry.
+
+In three-dimensional space, a point **is a position**, defined by three numbers:
+**x, y, and z**.
+
+A point has:
+• no size
+• no shape
+• no direction
+
+It is defined only by *where it is*.
+
+---
+
+## Position in the engine
+
+In a game engine like Godot, every point always has a position.
+The engine stores this position continuously as a vector.
+
+Code
+
+```
+var point_position = Vector3(3.0, 1.5, 4.0)
+```
+
+This vector *is* the point.
+
+---
+
+## Making a point visible
+
+To see a point, we represent it with a small sphere.
+The sphere is not the point — it is a visual marker for a position.
+
+Code
+
+```
+var sphere_mesh = SphereMesh.new()
+var radius = 0.01
+sphere_mesh.radius = radius
+sphere_mesh.height = radius * 2.0
+```
+
+---
+
+## Placing the point
+
+The marker is placed at the point’s coordinates.
+
+Code
+
+```
+var mesh_instance = MeshInstance3D.new()
+mesh_instance.mesh = sphere_mesh
+mesh_instance.position = point_position
+add_child(mesh_instance)
+```
+
+The scene now shows **where** the point is.
+
+Nothing has been added to the point itself.
+Only its position has been made visible.
+
+---
+
+## What comes next
+
+The point already has a position.
+The next step is not to give it one.
+
+The next step is to make the position *readable and comparable*.
+
+---"
+fit_content = true
+scroll_active = false
+
+[node name="PageBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -70.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="PageBar"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "← Prev"
+
+[node name="PageLabel" type="Label" parent="PageBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Page 1 / 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="PageBar"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Next →"
