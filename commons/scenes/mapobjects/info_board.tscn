@@ -23,6 +23,7 @@ viewport_path = NodePath("Viewport")
 [node name="InfoBoard" type="Node3D"]
 transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
 script = ExtResource("1_wlbfx")
+animate_text = true
 
 [node name="Viewport" type="SubViewport" parent="."]
 transparent_bg = true

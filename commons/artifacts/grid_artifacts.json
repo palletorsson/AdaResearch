@@ -621,6 +621,14 @@
 			"description": "Triangular block mesh with matched convex collision for kitbashing.",
 			"scene": "res://commons/primitives/triangularblock/triangularblock.tscn"
 		},
+		
+		"SDFDrawTool": {
+			"name": "SDFDrawTool",
+			"lookup_name": "SDFDrawTool",
+			"description": "SDFDrawTool.",
+			"scene": "res://commons/primitives/mesh_draw/SDFDrawTool.tscn"
+		},
+		
 		"prismblock": {
 			"name": "prismblock",
 			"lookup_name": "prismblock",

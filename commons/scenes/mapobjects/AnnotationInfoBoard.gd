@@ -77,37 +77,23 @@ func _check_for_sequence_parameter():
 		_load_sequence_data()
 
 func _load_sequence_data():
-	"""Load sequence data from map_sequences.json"""
-	var sequence_file_path = "res://commons/maps/map_sequences.json"
-	
-	if not FileAccess.file_exists(sequence_file_path):
-		push_error("AnnotationInfoBoard: map_sequences.json not found!")
+	"""Load sequence data from MapProgressionManager"""
+	# Use the global manager if available
+	if not MapProgressionManager:
+		print("AnnotationInfoBoard: MapProgressionManager not found")
 		return
-	
-	var file = FileAccess.open(sequence_file_path, FileAccess.READ)
-	if not file:
-		push_error("AnnotationInfoBoard: Could not open map_sequences.json")
-		return
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		push_error("AnnotationInfoBoard: Failed to parse map_sequences.json")
-		return
-	
-	var json_data = json.data
-	var sequences = json_data.get("sequences", {})
+
+	# Access sequences directly from manager
+	var sequences = MapProgressionManager.sequences
 	
 	# Find the specific sequence
 	if sequences.has(sequence_name):
 		var sequence = sequences[sequence_name]
 		sequence_data = sequence.duplicate()
 		sequence_data["sequence_name"] = sequence_name
-		sequence_data["map_index"] = 0  # Default to first map
+		
+		# Map index will be calculated in _update_info_board based on current map
+		sequence_data["map_index"] = 0 
 		sequence_data["total_maps"] = sequence.get("maps", []).size()
 		print("AnnotationInfoBoard: ✅ Loaded sequence data for: " + sequence_name)
 		
@@ -187,7 +173,10 @@ func _on_map_loaded(map_name: String, format: String):
 	# Find grid system to get data
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
 	if grid_system:
+		grid_system_ref = grid_system # Cache it
 		_load_current_map_info(grid_system)
+
+var grid_system_ref: Node # Cache for ID lookup
 
 func _load_current_map_info(grid_system):
 	"""Load map info from grid system data component"""
@@ -218,7 +207,42 @@ func _load_current_map_info(grid_system):
 
 func _update_info_board():
 	"""Update the info board with current map information"""
+	print("DEBUG INFOBOARD: Current Map: '%s'" % current_map_name)
 	
+	# If sequence not explicitly set, try to find one that contains this map
+	if sequence_data.is_empty() and MapProgressionManager:
+		var check_id = MapProgressionManager.current_map
+		if check_id.is_empty() and grid_system_ref: 
+			# Try to get from grid system if manager is empty (e.g. direct scene load)
+			if "map_name" in grid_system_ref:
+				check_id = grid_system_ref.map_name
+			elif "current_map_name" in grid_system_ref: 
+				check_id = grid_system_ref.current_map_name
+		
+		# Fallback: Get from scene filename
+		if check_id.is_empty():
+			var scene_path = get_tree().current_scene.scene_file_path
+			if not scene_path.is_empty():
+				check_id = scene_path.get_file().get_basename()
+				print("AnnotationInfoBoard: Extracted ID '%s' from scene path" % check_id)
+		
+		# If we still don't have an ID, we can't strict match
+		
+		if not check_id.is_empty():
+			print("AnnotationInfoBoard: Auto-detecting sequence for Map ID: '%s'" % check_id)
+			for seq_id in MapProgressionManager.sequences:
+				var seq = MapProgressionManager.sequences[seq_id]
+				if seq.has("maps") and check_id in seq.maps:
+					print("AnnotationInfoBoard: Auto-detected sequence '%s' for map ID '%s'" % [seq_id, check_id])
+					sequence_name = seq_id
+					_load_sequence_data() # Load it
+					break
+		else:
+			print("AnnotationInfoBoard: Could not determine Map ID for sequence detection. Using Display Name '%s'" % current_map_name)
+				
+	if sequence_data.is_empty():
+		print("DEBUG INFOBOARD: Still no sequence data found. sequence_name='%s'" % sequence_name)
+
 	# Use sequence data if available, otherwise fall back to map data
 	if not sequence_data.is_empty():
 		_update_info_board_with_sequence_data()
@@ -226,19 +250,29 @@ func _update_info_board():
 		_update_info_board_with_map_data()
 
 func _update_info_board_with_sequence_data():
-	"""Update info board using sequence data from map_sequences.json"""
+	"""Update info board using sequence data from MapProgressionManager"""
 	var sequence_name = sequence_data.get("sequence_name", "Unknown")
-	var map_index = sequence_data.get("map_index", 0)
+	
+	# Calculate correct map index based on current map name
+	var map_index = 0
+	if sequence_data.has("maps"):
+		var maps = sequence_data["maps"]
+		var found = maps.find(current_map_name)
+		if found != -1:
+			map_index = found
+			
 	var total_maps = sequence_data.get("total_maps", 1)
 	
 	# Update level number (show progress in sequence)
 	if show_level_number:
-		level_number_label.text = "%02d" % (map_index + 1)
+		# Use 0-based indexing as requested (00, 01, 02...)
+		level_number_label.text = "%02d" % map_index
 	else:
 		level_number_label.text = "??"
 	
 	# Update level ID (sequence/progress format + current map name)
-	var level_id_text = "%s/%d of %d" % [sequence_name, map_index + 1, total_maps]
+	# Also using 0-based index for consistency in the ID string
+	var level_id_text = "%s/%02d of %d" % [sequence_name, map_index, total_maps]
 	if not current_map_name.is_empty():
 		level_id_text += " - %s" % current_map_name
 	level_id_label.text = level_id_text

@@ -20,7 +20,8 @@ var _profile := {
 	"mesh": null,
 	"verts": [],
 	"drag_points": null,
-	"color": null
+	"color": null,
+	"collision_shape": null
 }
 
 func _ready() -> void:
@@ -45,6 +46,16 @@ func _create_profile_folded_narrow(z_offset: float) -> void:
 	var mi := MeshInstance3D.new()
 	mi.name = "Mesh_Folded_Pink"
 	parent.add_child(mi)
+	
+	# Collision Setup
+	var sb := StaticBody3D.new()
+	sb.name = "StaticBody"
+	parent.add_child(sb)
+	
+	var col := CollisionShape3D.new()
+	col.name = "CollisionShape"
+	sb.add_child(col)
+	_profile["collision_shape"] = col
 
 	# Ridge vertices: alternate crest/trough above baseline
 	var verts: Array[Vector3] = []
@@ -177,6 +188,11 @@ func _update_profile_mesh_from_verts() -> void:
 	var mesh := st.commit()
 	mi.mesh = mesh
 	mi.material_override = mat
+	
+	# Update Collision
+	if _profile["collision_shape"]:
+		var col_shape_node: CollisionShape3D = _profile["collision_shape"]
+		col_shape_node.shape = mesh.create_trimesh_shape()
 
 func _on_drag_point_moved(index: int, position: Vector3, meta: Dictionary) -> void:
 	var verts: Array = _profile["verts"]

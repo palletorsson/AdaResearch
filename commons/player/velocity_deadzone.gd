@@ -2,7 +2,7 @@ extends Node
 ## Prevents micro-drift by zeroing tiny velocities on the player body.
 ## Add this as a child of your XROrigin3D.
 
-@export var deadzone: float = 0.05  # Increased from 0.01
+@export var deadzone: float = 0.15  # Increased to catch residual velocity
 @export var zero_ground_control: bool = true
 
 var _player_body: XRToolsPlayerBody

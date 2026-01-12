@@ -11,9 +11,6 @@ size = Vector2(0.21, 0.297)
 script = ExtResource("1_edgjo")
 addxp = 22
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.963574, 0.26744, 0, -0.26744, 0.963574, 0, 0, 0.374449)
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343761, 0)
 

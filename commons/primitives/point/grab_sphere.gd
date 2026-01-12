@@ -12,6 +12,9 @@ extends XRToolsPickable
 @export var glow_emission_energy: float = 2.0
 @export var pickup_sound_volume_db: float = -6.0
 
+## XP awarded on pickup
+@export var xp_on_pickup: int = 1
+
 ## Haptic Feedback Parameters
 @export var haptic_pickup_intensity: float = 0.5
 @export var haptic_pickup_duration: float = 0.1
@@ -137,7 +140,7 @@ func _on_picked_up(_pickable) -> void:
 	if _current_controller:
 		# Haptic Feedback for Pickup
 		_trigger_haptic(_current_controller, haptic_pickup_intensity, haptic_pickup_duration)
-		
+
 		_current_controller.button_pressed.connect(_on_controller_button_pressed)
 		_current_controller.button_released.connect(_on_controller_button_released)
 		if _current_controller not in _active_controllers:
@@ -147,6 +150,7 @@ func _on_picked_up(_pickable) -> void:
 
 	_apply_glow()
 	_play_pickup_sound()
+	# XP is handled globally by PickupXPListener using xp_on_pickup property
 
 
 # Called when this object is dropped

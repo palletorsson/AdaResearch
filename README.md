@@ -14,6 +14,7 @@ AdaResearch is a VR/desktop research platform built in Godot 4 for exploring alg
 
 - **`commons/`** - Shared systems and utilities
   - `audio/` - **[Recently Restructured]** Comprehensive audio synthesis system
+  - `globals/` - Global autoloads and state management
   - `grid/` - Grid-based interaction systems
   - `primitives/` - Basic 3D objects and animations
   - `scenes/` - Reusable scene components
@@ -60,6 +61,13 @@ commons/audio/
 ```
 
 ### Recent Achievements
+
+**January 2026 - Trace & Movement Unlock System:**
+- ✅ **Global Trace Data**: Persistent storage for user-drawn traces.
+- ✅ **Movement Unlock Mechanic**: interactive "DrawDot" tool with unlock meter.
+- ✅ **Tag Integration**: Removing obstacles via movement threshold.
+- ✅ **Grid Visualization**: Auto-centering, scaling, and clamping (max 5m).
+- ✅ **Shadow Line**: Green, grid-snapped shadow trace.
 
 **January 2025 - Singleton Sound Bank System:**
 - ✅ Centralized sound management with SoundBankSingleton (AutoLoad)

@@ -1,6 +1,6 @@
 {
 	"map_info": {
-		"name": "05 The Triangle",
+		"name": "Triangles",
 		"description": "Marks the first closed relational structure. With three points and their connecting lines, stability emerges: measurements become invariant and mutual constraints appear. This map is the decisive threshold where geometry becomes rigid, and metric relations such as those expressed in the Pythagorean theorem first reside.",
 		"description_2": "The Triangle introduces closure and rigidity. With three points, relations become mutually constrained, producing the first stable unit of space. Unlike lines or angles, a triangle cannot deform without changing its measurements. This closure makes distance, area, and projection possible, forming the basis for planes, meshes, and geometric computation.",
 		"version": "1.0",
@@ -41,7 +41,7 @@
 			["1", "2", "2", "2", "1", "2", "2"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "0", "1"],
-			["1", "0", "0", "0", "1", "1", "1"]
+			["1", "1", "1", "0", "1", "1", "1"]
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -60,7 +60,7 @@
 			[" ", "interactivetriangle:180:-1.0:0.2", "clipboard#triangle_axioms:180", "pythagorean_triangle_angles:180:-0.2:0.2", " ", "quad:0:0:0.5", "clipboard#quad_axioms:180"],
 			[" ", " ", " ", "triangleprofiles:0:2", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[" ", "SDFDrawTool", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
