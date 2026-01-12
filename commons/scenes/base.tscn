@@ -51,6 +51,7 @@ visible = false
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_q0s61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000147015, 0, 0.00108021)
+mode = 1
 
 [node name="MovementDirect" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="0" instance=ExtResource("7_i0uie")]
 strafe = true
@@ -81,6 +82,7 @@ light_color = Color(0, 1, 0, 1)
 light_energy = 1.5
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" instance=ExtResource("4_q0s61")]
+mode = 1
 
 [node name="MovementDirect" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="0" instance=ExtResource("7_i0uie")]
 

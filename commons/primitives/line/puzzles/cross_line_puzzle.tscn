@@ -1,22 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://cc5jq4ytxbmf3"]
 
-[ext_resource type="Script" path="res://commons/primitives/line/puzzles/cross_line_puzzle.gd" id="1_cross"]
+[ext_resource type="Script" uid="uid://dtlnr7aye24q" path="res://commons/primitives/line/puzzles/cross_line_puzzle.gd" id="1_cross"]
 
 [node name="CrossLinePuzzle" type="Node3D"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 script = ExtResource("1_cross")
-auto_validate = true
-show_ghost_guides = true
-ghost_alpha = 0.3
-ghost_color = Color(0.5, 0.5, 1, 0.3)
-ghost_line_width = 0.008
-success_message = "Cross Complete! Lines form an X"
-lock_on_complete = true
-show_success_label = true
-success_display_duration = 3.0
-spawn_reward_on_complete = true
-reward_scene_path = "res://commons/primitives/cubes/cube_scene.tscn"
-reward_spawn_height = 3.0
-reward_spawn_offset = Vector3(0, 0, 0)
 
 [node name="InstructionLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

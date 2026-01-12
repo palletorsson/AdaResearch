@@ -2,7 +2,7 @@ extends Node
 ## Increases joystick deadzone to prevent drift from controller stick.
 ## Add this as a child of your XROrigin3D or scene root.
 
-@export var y_deadzone: float = 0.15
+@export var y_deadzone: float = 0.3  # Increased - left joystick Y drift
 @export var x_deadzone: float = 0.25
 
 func _ready() -> void:

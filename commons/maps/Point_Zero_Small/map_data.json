@@ -1,9 +1,10 @@
 {
 	"map_info": {
 		"name": "00 Point Zero",
-		"description": "Vector Zero - You arrive late. Before you see anything, a lineage has already survived: physics, bodies, tools, code, and the long history that makes 'now' possible. Heidegger called this thrownness—we begin inside conditions we did not choose. In this world, what is 'already there' is the renderer, the headset body, the frame-loop, and the 3D coordinate system that holds time as motion. Vector3(0,0,0) is not just a point. It is the fact of beginning inside an inheritance.",
+		"description": "Frames flicker, render passes. Point Zero marks the beginning of all the things that were already there, the infrastructure. With time there was light and somewhere to stand. In the beginning, there was the void, darkness was on the faces of the depths of a simulation.",
+		"description_1": "Vector Zero - You arrive late. Before you see anything, a lineage has already survived: physics, bodies, tools, code, and the long history that makes 'now' possible. Heidegger called this thrownness—we begin inside conditions we did not choose. In this world, what is 'already there' is the renderer, the headset body, the frame-loop, and the 3D coordinate system that holds time as motion. Vector3(0,0,0) is not just a point. It is the fact of beginning inside an inheritance.",
 		"description_2": "Point Zero introduces the origin not as an object, but as a prerequisite. The map stages the moment before geometry, where spatial measurement becomes possible only through the establishment of a shared reference. The origin (0,0,0) is not presented as a visible marker, but as an implicit agreement between body, coordinate system, and time—an abstraction sustained by the simulation itself. Through embodied presence and minimal interaction, the player encounters the conditions that make a stable origin returnable: rendering pipelines, reference frames, memory, and temporal update loops. These invisible scaffolds must already be in place before any point, line, or measurement can appear. The scene thus reveals the origin as infrastructural rather than foundational—an effect of system stability, not its ground.",
-		"manual_file": "res://commons/context/clipboard/tutorial_text/point_axioms.md",
+		"manual_file": "res://commons/context/clipboard/tutorial_text/point_zero.md",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -32,26 +33,26 @@
 	"layers": {
 		"structure": [
 			["1", "1", "1", "1", "0", "1", "0"],
-			["1", "1", "1", "1", "1", "0", "0"],
-			["1", "1", "1", "0", "1", "0", "0"],
-			["0", "1", "1", "1", "1", "0", "0"],
+			["1", "1", "0", "1", "0", "0", "0"],
+			["1", "1", "1", "1", "0", "0", "0"],
+			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"]
 		],
 		"utilities": [
-			["la:point", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "an:-90", "m:0:3:-0.5:0.1"],
 			[" ", " ", "t", " ", " ", " ", " "],
-			[" ", " ", "m:0:3:-1:0.1", " ", " ", " ", " "],
+			[" ", " ", "", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "3t:Point Zero", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "", " ", " "]
 		],
 		"interactables": [
-			["origin:180:-1", " ", " ", " ", " ", " ", " "],
+			["origin:180", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],

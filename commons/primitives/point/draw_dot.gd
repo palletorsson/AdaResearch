@@ -19,9 +19,27 @@ var _trail_points: Array[Vector3] = []
 var _last_global_position: Vector3 = Vector3.ZERO
 var _reference_frame: MeshInstance3D
 
+var _progress_label: Label3D
+
 func _ready() -> void:
+	print("DrawDot: _ready called")
+	var trace_data = get_node_or_null("/root/TraceData")
+	print("DrawDot: TraceData status: " + str(trace_data))
+
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
+	
+	# Setup progress label
+	_progress_label = Label3D.new()
+	_progress_label.pixel_size = 0.002
+	_progress_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_progress_label.no_depth_test = true
+	_progress_label.render_priority = 100
+	_progress_label.outline_size = 4
+	_progress_label.position = Vector3(0, 0.25, 0) # Higher
+	_progress_label.text = "Unlock: 0%" # Show immediately
+	_progress_label.visible = true
+	add_child(_progress_label)
 
 	if not _grab_point or not _draw_sphere:
 		push_warning("DrawDot: Missing grab point or draw sphere in scene.")
@@ -34,8 +52,10 @@ func _ready() -> void:
 	_last_global_position = _draw_sphere.global_position
 	set_process(true)
 
-	if auto_clear_on_drop and _grab_point.has_signal("dropped"):
-		_grab_point.dropped.connect(_on_grab_point_dropped)
+	# Always connect to dropped to handle saving, regardless of auto-clear
+	if _grab_point.has_signal("dropped"):
+		if not _grab_point.is_connected("dropped", _on_grab_point_dropped):
+			_grab_point.dropped.connect(_on_grab_point_dropped)
 
 func _setup_trail() -> void:
 	_trail_mesh = ImmediateMesh.new()
@@ -104,8 +124,18 @@ func _setup_reference_frame() -> void:
 @export var fade_trail: bool = false
 @export var fade_duration: float = 2.0
 
+# Movement Unlock System
+@export_group("Unlock System")
+@export var trigger_tag: String = ""
+@export var movement_threshold: float = 2.0 # Meters of movement required
+@export var unlock_progress_color: Color = Color(0.2, 1.0, 0.4) # Green when finished
+
 var _trail_times: Array[float] = []
 var _time_elapsed: float = 0.0
+
+var _total_movement: float = 0.0
+var _triggered: bool = false
+var _original_color: Color
 
 func _process(delta: float) -> void:
 	if not _draw_sphere:
@@ -123,8 +153,15 @@ func _process(delta: float) -> void:
 				_cleanup_old_points()
 				_rebuild_trail()
 			return
+	
+	# Calculate movement since last frame
+	var dist = current_global.distance_to(_last_global_position)
+	
+	if dist > 0:
+		_total_movement += dist
+		_check_unlock_progress()
 
-	if current_global.distance_to(_last_global_position) < min_segment_distance:
+	if dist < min_segment_distance:
 		if fade_trail:
 			_cleanup_old_points()
 			_rebuild_trail()
@@ -146,6 +183,43 @@ func _process(delta: float) -> void:
 		_cleanup_old_points()
 
 	_rebuild_trail()
+
+func _check_unlock_progress() -> void:
+	if _triggered or trigger_tag == "":
+		return
+		
+	var progress = clamp(_total_movement / movement_threshold, 0.0, 1.0)
+	
+	if _progress_label:
+		_progress_label.visible = true
+		_progress_label.text = "Unlock: %d%%" % int(progress * 100)
+	
+	# Visual feedback: Lerp color to unlock color
+	if _trail_instance and _trail_instance.material_override:
+		_trail_instance.material_override.albedo_color = trail_color.lerp(unlock_progress_color, progress)
+		_trail_instance.material_override.emission = trail_color.lerp(unlock_progress_color, progress)
+	
+	if progress >= 1.0:
+		_trigger_unlock()
+
+func _trigger_unlock() -> void:
+	_triggered = true
+	if _progress_label:
+		_progress_label.text = "UNLOCKED!"
+		_progress_label.modulate = Color.GREEN
+	
+	print("DrawDot: Movement threshold reached! Triggering tag '%s'" % trigger_tag)
+	
+	# Trigger "remove" action on the tag (to remove blocking cube)
+	# Assuming TagSystem is a global class or autoload
+	if TagSystem:
+		TagSystem.trigger_tag_action(trigger_tag, "remove")
+		
+		# Also try "reveal" just in case user meant that, 
+		# but usually blocks are removed.
+		# Or generic "trigger" if supported.
+	else:
+		push_warning("DrawDot: TagSystem not found!")
 
 func _cleanup_old_points() -> void:
 	if _trail_times.is_empty():
@@ -186,4 +260,12 @@ func clear_trail() -> void:
 		_last_global_position = _draw_sphere.global_position
 
 func _on_grab_point_dropped(_pickable) -> void:
-	clear_trail()
+	var trace_data = get_node_or_null("/root/TraceData")
+	if trace_data:
+		trace_data.add_trace(_trail_points)
+	
+	if _progress_label:
+		_progress_label.visible = false
+		
+	if auto_clear_on_drop:
+		clear_trail()

@@ -29,6 +29,7 @@ func _setup_hint_label() -> void:
 	hint_label.outline_render_priority = 9
 	hint_label.modulate = Color(1.0, 0.3, 0.3, 0.9) # Red text
 	hint_label.visible = false
+	hint_label.top_level = true # Decouple from parent rotation/smoothing
 	add_child(hint_label)
 
 # ... (rest of file) ...
@@ -45,6 +46,7 @@ var is_animating: bool = false
 var current_page: int = 0
 var pages: Array[String] = []
 var map_name_for_hint: String = ""
+var has_content: bool = false
 
 # Scrolling
 @export var scroll_speed: float = 300.0  # Pixels per second
@@ -154,8 +156,9 @@ func _process(delta: float) -> void:
 	# Update Hint Visibility
 	if hint_label:
 		# Show hint if: Manual ClOSED, Not Animating, Has Content
-		var should_show_hint = not is_visible and not is_animating and not pages.is_empty()
-		hint_label.visible = should_show_hint
+		var should_show_hint = not is_visible and not is_animating and has_content
+		# hint_label.visible = should_show_hint
+		hint_label.visible = false # Disabled by request
 		
 		if should_show_hint:
 			# Update text if needed
@@ -164,12 +167,24 @@ func _process(delta: float) -> void:
 			else:
 				hint_label.text = "(X) Info"
 			
-			# Hint position relative to root
-			# Root is at display_distance (1.8). Hint is at hint_distance (1.1).
-			# Z+ is towards camera. So we move + (display - hint)
-			var z_offset = display_distance - hint_distance
+			# STRICT Position update (No smoothing for hint)
+			# Calculate position directly from camera
+			var h_forward = -camera.global_transform.basis.z
+			h_forward.y = 0
+			if h_forward.length_squared() > 0.01:
+				h_forward = h_forward.normalized()
+			else:
+				h_forward = Vector3.FORWARD
+				
+			var h_pos = camera.global_position + h_forward * hint_distance
+			h_pos.y = camera.global_position.y + hint_height_offset
 			
-			hint_label.position = Vector3(hint_horizontal_offset, hint_height_offset - height_offset, z_offset) 
+			# Apply horizontal offset? (Assuming 0 for now based on recent edits, or relative to forward right)
+			if abs(hint_horizontal_offset) > 0.001:
+				var h_right = h_forward.cross(Vector3.UP).normalized()
+				h_pos += h_right * hint_horizontal_offset
+			
+			hint_label.global_position = h_pos 
 			# Note: hint_height_offset is absolute relative to cam, but position is local to root.
 			# Root is at cam + height_offset.
 			# So local hint y = hint_height - height_offset.
@@ -240,6 +255,7 @@ func _on_hide_complete() -> void:
 func _load_map_data() -> void:
 	"""Load map information from current map's data"""
 	pages.clear()
+	has_content = false
 	print("MapManual: Loading map data...")
 	
 	# Find GridSystem
@@ -277,6 +293,7 @@ func _parse_map_data(map_data: Dictionary) -> void:
 			var file_content = _load_markdown_file(auto_manual_path)
 			if not file_content.is_empty():
 				print("MapManual: Auto-loaded manual.md from %s" % auto_manual_path)
+				has_content = true
 				_split_and_add_pages(file_content)
 				return
 	
@@ -285,6 +302,7 @@ func _parse_map_data(map_data: Dictionary) -> void:
 		var manual_path = map_data.map_info.manual_file
 		var file_content = _load_markdown_file(manual_path)
 		if not file_content.is_empty():
+			has_content = true
 			_split_and_add_pages(file_content)
 			return
 	
@@ -293,6 +311,7 @@ func _parse_map_data(map_data: Dictionary) -> void:
 		var info = map_data.map_info
 		content = "# %s\n\n" % info.get("name", "Unknown Map")
 		content += "%s\n\n" % info.get("description", "")
+		has_content = true
 		pages.append(content)
 	
 	if pages.is_empty():

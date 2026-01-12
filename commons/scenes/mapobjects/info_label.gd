@@ -83,8 +83,8 @@ func _update_label_text():
 		print("InfoLabel: Artifact not found for keyid '%s'" % keyid)
 	else:
 		artifact_name = artifact.get("name", keyid)
-		label_node.text = artifact_name
-		print("InfoLabel: Displaying '%s' for keyid '%s'" % [artifact_name, keyid])
+		label_node.text = "(x) " + artifact_name
+		print("InfoLabel: Displaying '%s' with hint for keyid '%s'" % [label_node.text, keyid])
 
 # Find artifact by lookup_name (keyid)
 func _find_artifact_by_keyid(id: String) -> Dictionary:

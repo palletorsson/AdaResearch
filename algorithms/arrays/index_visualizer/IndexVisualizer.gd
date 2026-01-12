@@ -1,4 +1,3 @@
-																																@tool
 extends Node3D
 
 @export var tracked_node_name: String = "XRPlayer" 

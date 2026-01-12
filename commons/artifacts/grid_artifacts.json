@@ -28,7 +28,7 @@
 			"scene": "res://commons/primitives/menu/menu.tscn"
 		},
 		"origin": {
-			"name": "origin",
+			"name": "Point Zero",
 			"lookup_name": "origin",
 			"description": "origin",
 			"scene": "res://commons/primitives/origin/origin.tscn"
@@ -111,6 +111,12 @@
 			"description": "Pickable point sphere combining color tint control with a live coordinate label.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_color_with_text.tscn"
 		},
+		"interactive_point_origin": {
+			"name": "1.0.1 Interactive Point with Origin Line",
+			"lookup_name": "interactive_point_origin",
+			"description": "Pickable point that displays its position and draws a thin line to origin (0,0,0) when held.",
+			"scene": "res://commons/primitives/point/interactive_point_origin.tscn"
+		},
 		"vectorpoint": {
 			"name": "VectorPoint",
 			"lookup_name": "vectorpoint",
@@ -135,64 +141,64 @@
 			"description": "Interactive puzzle where connecting 6 snap points forms a wedge/prism that spawns a walkable ramp.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn"
 		},
-	"snap_octahedron_puzzle": {
-		"name": "Snap Octahedron Puzzle",
-		"lookup_name": "snap_octahedron_puzzle",
-		"description": "Interactive puzzle where connecting 6 snap points forms an octahedron that spawns a walkable prism.",
-		"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn"
-	},
+		"snap_octahedron_puzzle": {
+			"name": "Snap Octahedron Puzzle",
+			"lookup_name": "snap_octahedron_puzzle",
+			"description": "Interactive puzzle where connecting 6 snap points forms an octahedron that spawns a walkable prism.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn"
+		},
 		"snap_tetrahedron_puzzle": {
 			"name": "Snap Tetrahedron Puzzle",
 			"lookup_name": "snap_tetrahedron_puzzle",
 			"description": "Interactive puzzle where connecting 4 snap points forms a tetrahedron that spawns a cube.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn"
 		},
-	"snap_pyramid_puzzle": {
-		"name": "Snap Pyramid Puzzle",
-		"lookup_name": "snap_pyramid_puzzle",
-		"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
-		"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn"
-	},
-	"snap_triangle_puzzle": {
-		"name": "Snap Triangle Puzzle",
-		"lookup_name": "snap_triangle_puzzle",
-		"description": "Interactive puzzle where connecting 3 snap points forms a triangle that spawns a configurable object.",
-		"scene": "res://commons/primitives/snappoint/puzzles/snap_triangle_puzzle.tscn"
-	},
-	"cross_line_puzzle": {
-		"name": "Cross Line Puzzle",
-		"lookup_name": "cross_line_puzzle",
-		"description": "Interactive puzzle: drag line endpoints to form an X cross from two horizontal lines.",
-		"scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn"
-	},
-	"plus_line_puzzle": {
-		"name": "Plus Line Puzzle",
-		"lookup_name": "plus_line_puzzle",
-		"description": "Interactive puzzle: drag line endpoints to form a + (plus) with perpendicular lines.",
-		"scene": "res://commons/primitives/line/puzzles/plus_line_puzzle.tscn"
-	},
-	"parallel_line_puzzle": {
-		"name": "Parallel Line Puzzle",
-		"lookup_name": "parallel_line_puzzle",
-		"description": "Interactive puzzle: drag line endpoints to align two lines to be parallel.",
-		"scene": "res://commons/primitives/line/puzzles/parallel_line_puzzle.tscn"
-	},
-	"triangle_line_puzzle": {
-		"name": "Triangle Line Puzzle",
-		"lookup_name": "triangle_line_puzzle",
-		"description": "Interactive puzzle: drag 3 line endpoints to form an equilateral triangle.",
-		"scene": "res://commons/primitives/line/puzzles/triangle_line_puzzle.tscn"
-	},
-	"quad_line_puzzle": {
-		"name": "Quad Line Puzzle",
-		"lookup_name": "quad_line_puzzle",
-		"description": "Interactive puzzle: drag 4 line endpoints to form a square.",
-		"scene": "res://commons/primitives/line/puzzles/quad_line_puzzle.tscn"
-	},
-		"snap_line": {
-			"name": "Snap Line",
-			"lookup_name": "snap_line",
-			"description": "snap_line.",
+		"snap_pyramid_puzzle": {
+			"name": "Snap Pyramid Puzzle",
+			"lookup_name": "snap_pyramid_puzzle",
+			"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn"
+		},
+		"snap_triangle_puzzle": {
+			"name": "Snap Triangle Puzzle",
+			"lookup_name": "snap_triangle_puzzle",
+			"description": "Interactive puzzle where connecting 3 snap points forms a triangle that spawns a configurable object.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_triangle_puzzle.tscn"
+		},
+		"cross_line_puzzle": {
+			"name": "Cross Line Puzzle",
+			"lookup_name": "cross_line_puzzle",
+			"description": "Interactive puzzle: drag line endpoints to form an X cross from two horizontal lines. Tag syntax: cross_line_puzzle:rot:ytrans:scale#tagname:action (e.g., cross_line_puzzle:0:0:1#fillhole:reveal triggers 'reveal' action on all nodes tagged 'fillhole' when solved)",
+			"scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn"
+		},
+		"plus_line_puzzle": {
+			"name": "Plus Line Puzzle",
+			"lookup_name": "plus_line_puzzle",
+			"description": "Interactive puzzle: drag line endpoints to form a + (plus) with perpendicular lines.",
+			"scene": "res://commons/primitives/line/puzzles/plus_line_puzzle.tscn"
+		},
+		"parallel_line_puzzle": {
+			"name": "Parallel Line Puzzle",
+			"lookup_name": "parallel_line_puzzle",
+			"description": "Interactive puzzle: drag line endpoints to align two lines to be parallel.",
+			"scene": "res://commons/primitives/line/puzzles/parallel_line_puzzle.tscn"
+		},
+		"triangle_line_puzzle": {
+			"name": "Triangle Line Puzzle",
+			"lookup_name": "triangle_line_puzzle",
+			"description": "Interactive puzzle: drag 3 line endpoints to form an equilateral triangle.",
+			"scene": "res://commons/primitives/line/puzzles/triangle_line_puzzle.tscn"
+		},
+		"quad_line_puzzle": {
+			"name": "Quad Line Puzzle",
+			"lookup_name": "quad_line_puzzle",
+			"description": "Interactive puzzle: drag 4 line endpoints to form a square.",
+			"scene": "res://commons/primitives/line/puzzles/quad_line_puzzle.tscn"
+		},
+		"line_demo": {
+			"name": "line_demo",
+			"lookup_name": "line_demo",
+			"description": "line_demo.",
 			"scene": "res://commons/primitives/snappoint/demos/line_demo.tscn"
 		},
 		"player_trace": {
@@ -330,7 +336,7 @@
 		"cube_scene": {
 			"name": "Basic Cube Scene",
 			"lookup_name": "cube_scene",
-			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive.",
+			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive. Tag syntax: cube_scene:rot:ytrans:scale#group:tagname (e.g., cube_scene:0:0:1#group:fillhole registers cube with tag 'fillhole' for puzzle events). Use 'visible':false in artifact_definitions to hide initially.",
 			"scene": "res://commons/primitives/cubes/cube_scene.tscn"
 		},
 		"triangle": {
@@ -501,14 +507,12 @@
 			"description": "Grid-shaded capsule primitive with glowing wireframe overlay.",
 			"scene": "res://commons/primitives/capsule/capsule.tscn"
 		},
-		
 		"capsules": {
 			"name": "capsules",
 			"lookup_name": "capsules",
 			"description": "caps.",
 			"scene": "res://commons/primitives/capsule/capsules.tscn"
 		},
-
 		"torus": {
 			"name": "torus",
 			"lookup_name": "torus",
@@ -976,6 +980,12 @@
 			"lookup_name": "disco_floor",
 			"description": "A shimmering grid that pulses with disco energy",
 			"scene": "res://commons/context/discofloor/discofloor.tscn"
+		},
+		"grid_editor_main": {
+			"name": "grid_editor_main",
+			"lookup_name": "grid_editor_main",
+			"description": "grid_editor_main",
+			"scene": "res://algorithms/array/grid_editor/grid_editor_main.tscn"
 		},
 		"rorschach_scan": {
 			"name": "Rorschach Brain Scan",
@@ -2730,14 +2740,12 @@
 			"description": "game_time_display",
 			"scene": "res://commons/visualaid/time/game_time_display.tscn"
 		},
-		
 		"frame_counter_display": {
 			"name": "frame_counter_display",
 			"lookup_name": "frame_counter_display",
 			"description": "frame_counter_display",
 			"scene": "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
 		},
-		
 		"speed_display": {
 			"name": "speed_display",
 			"lookup_name": "speed_display",

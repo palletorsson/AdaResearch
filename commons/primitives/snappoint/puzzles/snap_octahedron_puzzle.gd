@@ -200,6 +200,9 @@ func _hide_snap_points() -> void:
 	# Update state
 	current_state = PuzzleState.COMPLETED
 	
+	# Play completion sound
+	_play_completion_sound()
+	
 	# Show success message
 	if success_label:
 		success_label.visible = true
@@ -340,3 +343,29 @@ func reset_puzzle() -> void:
 	
 	current_state = PuzzleState.BUILDING
 	print("SnapOctahedronPuzzle: Puzzle reset")
+
+func _play_completion_sound() -> void:
+	"""Play a happy sound when puzzle is completed"""
+	if not has_node("/root/SoundBank"):
+		print("SnapOctahedronPuzzle: SoundBank not found, skipping completion sound")
+		return
+	
+	var sound_bank = get_node("/root/SoundBank")
+	var sound_stream = sound_bank.get_sound("AudioSynthesizer.POWER_UP_JINGLE")
+	
+	if not sound_stream:
+		print("SnapOctahedronPuzzle: Could not get completion sound")
+		return
+	
+	var player = AudioStreamPlayer3D.new()
+	player.name = "CompletionSoundPlayer"
+	player.stream = sound_stream
+	player.volume_db = 0.0
+	player.max_distance = 20.0
+	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	player.global_position = global_position
+	add_child(player)
+	
+	player.finished.connect(player.queue_free)
+	player.play()
+	print("SnapOctahedronPuzzle: Playing completion sound")

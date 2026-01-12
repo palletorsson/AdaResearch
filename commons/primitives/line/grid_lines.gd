@@ -4,9 +4,114 @@ extends Node3D
 
 @export var grid_size: int = 5  # Number of grid cells (will have grid_size+1 lines in each direction)
 @export var cell_spacing: float = 1.0  # Distance between grid lines in meters
+@export var trace_scale: float = 5.0 # Scale factor for saved traces
 
 func _ready():
+	print("GridLines: _ready called")
 	setup_grid()
+	
+	# Setup trace visualization
+	var trace_data = get_node_or_null("/root/TraceData")
+	print("GridLines: TraceData status: " + str(trace_data))
+	
+	if trace_data:
+		trace_data.trace_added.connect(_on_trace_added)
+		for trace in trace_data.get_all_traces():
+			_create_trace_mesh(trace)
+
+func _on_trace_added(points: Array) -> void:
+	_create_trace_mesh(points)
+
+func _create_trace_mesh(points: Array) -> void:
+	if points.is_empty():
+		return
+		
+	# Calculate Center & Size
+	var min_p = points[0]
+	var max_p = points[0]
+	for p in points:
+		min_p = min_p.min(p)
+		max_p = max_p.max(p)
+	var center = (min_p + max_p) / 2.0
+	var size = max_p - min_p
+	var max_dim = max(size.x, max(size.y, size.z))
+	
+	# Calculate scale with clamping
+	var final_scale = trace_scale
+	if max_dim * trace_scale > 5.0:
+		if max_dim > 0.001:
+			final_scale = 5.0 / max_dim
+			
+	print("GridLines: Creating trace mesh with %d points. Centered at: %s. Size: %s. Final Scale: %.2f" % [points.size(), center, size, final_scale])
+	
+	_create_shadow_trace(points, center, final_scale)
+	
+	var mesh = ImmediateMesh.new()
+	var instance = MeshInstance3D.new()
+	instance.mesh = mesh
+	instance.name = "SavedTrace"
+	add_child(instance)
+	
+	var mat = StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1, 0.4, 0.9, 1) # Same as default trail
+	mat.emission_enabled = true
+	mat.emission = Color(1, 0.4, 0.9, 1)
+	instance.material_override = mat
+	
+	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for p in points:
+		# Use local coordinates centered on the grid and scaled
+		mesh.surface_add_vertex((p - center) * final_scale)
+	mesh.surface_end()
+	
+	# Bubble Animation
+	instance.scale = Vector3.ZERO
+	var tween = create_tween()
+	tween.tween_property(instance, "scale", Vector3.ONE, 1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+
+func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -> void:
+	var shadow_points = []
+	var last_snapped = Vector3.INF
+	
+	for p in points:
+		var scaled = (p - center) * scale_factor
+		# Snap to grid
+		var snapped = scaled.snapped(Vector3.ONE * cell_spacing)
+		
+		# Filter duplicates
+		if snapped.distance_squared_to(last_snapped) > 0.001:
+			shadow_points.append(snapped)
+			last_snapped = snapped
+			
+	if shadow_points.size() < 2:
+		return
+
+	var mesh = ImmediateMesh.new()
+	var instance = MeshInstance3D.new()
+	instance.name = "ShadowTrace"
+	instance.mesh = mesh
+	add_child(instance)
+	
+	# Green Emissive Material (matching GrabSpherePointSnap)
+	var mat = StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(0.2, 1.0, 0.6, 0.8) 
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(0.2, 1.0, 0.6, 1.0)
+	mat.emission_energy_multiplier = 1.5
+	instance.material_override = mat
+	
+	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for p in shadow_points:
+		# Lift slightly to avoid z-fighting
+		mesh.surface_add_vertex(p + Vector3(0, 0.03, 0))
+	mesh.surface_end()
+	
+	instance.scale = Vector3.ZERO
+	var tween = create_tween()
+	tween.tween_property(instance, "scale", Vector3.ONE, 1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func setup_grid():
 	var half_size = (grid_size * cell_spacing) / 2.0

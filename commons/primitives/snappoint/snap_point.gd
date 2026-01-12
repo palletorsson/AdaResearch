@@ -88,6 +88,9 @@ func _ready() -> void:
 	_last_position = global_position
 
 func _register_with_manager() -> void:
+	if not is_inside_tree():
+		return
+		
 	# Find SnapConnectionManager in scene (autoload or scene child)
 	var manager = get_node_or_null("/root/SnapConnectionManager")
 	if not manager:

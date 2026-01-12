@@ -158,6 +158,9 @@ func _validate_and_complete() -> void:
 	
 	current_state = PuzzleState.LOCKED
 	
+	# Play completion sound
+	_play_completion_sound()
+	
 	# Spawn the walkable prism if auto_solve is enabled
 	if auto_solve:
 		_spawn_walkable_prism()
@@ -348,3 +351,29 @@ func _search_for_grid_scene(node: Node) -> Node:
 			return result
 	
 	return null
+
+func _play_completion_sound() -> void:
+	"""Play a happy sound when puzzle is completed"""
+	if not has_node("/root/SoundBank"):
+		print("SnapPyramidPuzzle: SoundBank not found, skipping completion sound")
+		return
+	
+	var sound_bank = get_node("/root/SoundBank")
+	var sound_stream = sound_bank.get_sound("AudioSynthesizer.POWER_UP_JINGLE")
+	
+	if not sound_stream:
+		print("SnapPyramidPuzzle: Could not get completion sound")
+		return
+	
+	var player = AudioStreamPlayer3D.new()
+	player.name = "CompletionSoundPlayer"
+	player.stream = sound_stream
+	player.volume_db = 0.0
+	player.max_distance = 20.0
+	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	player.global_position = global_position
+	add_child(player)
+	
+	player.finished.connect(player.queue_free)
+	player.play()
+	print("SnapPyramidPuzzle: Playing completion sound")

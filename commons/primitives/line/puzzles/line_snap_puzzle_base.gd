@@ -18,6 +18,10 @@ class_name LineSnapPuzzleBase
 @export var show_success_label: bool = true
 @export var success_display_duration: float = 3.0
 
+@export_group("Tag System")
+@export var trigger_tag: String = ""  # Tag to trigger on puzzle completion
+@export var trigger_action: String = ""  # Action to execute (reveal, remove, hide, etc.)
+
 ## Internal state
 var line_definitions: Array[Dictionary] = []  # Defined by child classes
 var snap_lines: Array[SnapLineSegment] = []
@@ -40,7 +44,11 @@ func _ready() -> void:
 		push_error("LineSnapPuzzleBase: line_definitions not set by child class!")
 		return
 	
+	# Wait for transform to be fully applied (rotation from GridInteractablesComponent)
+	await get_tree().process_frame
+	
 	print("LineSnapPuzzleBase: Puzzle global_position = ", global_position)
+	print("LineSnapPuzzleBase: Puzzle rotation_degrees = ", rotation_degrees)
 	
 	# Create the snap lines
 	call_deferred("_setup_lines")
@@ -93,13 +101,14 @@ func _setup_lines() -> void:
 		
 		# Set initial endpoint positions (relative to this node)
 		if snap_line.endpoint_a and snap_line.endpoint_b:
-			snap_line.endpoint_a.global_position = global_position + definition["start_pos"]
-			snap_line.endpoint_b.global_position = global_position + definition["end_pos"]
+			# Use transform to account for rotation
+			snap_line.endpoint_a.global_position = global_transform * definition["start_pos"]
+			snap_line.endpoint_b.global_position = global_transform * definition["end_pos"]
 			print("    Set endpoints at: A=", snap_line.endpoint_a.global_position, " B=", snap_line.endpoint_b.global_position)
 			
-			# Set target positions (convert to global coordinates)
-			var target_start_global = global_position + definition["target_start"]
-			var target_end_global = global_position + definition["target_end"]
+			# Set target positions (convert to global coordinates accounting for rotation)
+			var target_start_global = global_transform * definition["target_start"]
+			var target_end_global = global_transform * definition["target_end"]
 			snap_line.set_targets(target_start_global, target_end_global)
 			print("    Set targets (global) at: A=", target_start_global, " B=", target_end_global)
 			
@@ -131,13 +140,14 @@ func _setup_ghost_guides() -> void:
 		return
 	
 	print("LineSnapPuzzleBase: Creating ghost guides...")
+	print("  Puzzle rotation: ", rotation_degrees)
 	for i in range(line_definitions.size()):
 		var definition = line_definitions[i]
 		print("  Ghost guide %d:" % (i + 1))
 		print("    Start (local): ", definition["target_start"])
 		print("    End (local):   ", definition["target_end"])
-		print("    Start (global): ", global_position + definition["target_start"])
-		print("    End (global):   ", global_position + definition["target_end"])
+		print("    Start (global): ", global_transform * definition["target_start"])
+		print("    End (global):   ", global_transform * definition["target_end"])
 		
 		var ghost_line = _create_ghost_line(
 			definition["target_start"],
@@ -252,6 +262,9 @@ func _complete_puzzle() -> void:
 	
 	print("LineSnapPuzzleBase: Puzzle completed!")
 	
+	# Play completion sound
+	_play_completion_sound()
+	
 	# First, snap ALL lines to exact target positions and hide ALL endpoint spheres
 	for line in snap_lines:
 		if line.has_method("_hide_endpoint_spheres"):
@@ -278,6 +291,11 @@ func _complete_puzzle() -> void:
 	if ghost_guides_container:
 		ghost_guides_container.visible = false
 	
+	# Trigger tag-based action if configured
+	if trigger_tag != "" and trigger_action != "":
+		print("LineSnapPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, trigger_action])
+		TagSystem.trigger_tag_action(trigger_tag, trigger_action)
+	
 	# Show success message
 	if success_label:
 		success_label.visible = true
@@ -296,6 +314,32 @@ func _complete_puzzle() -> void:
 	# Emit signals
 	all_lines_aligned.emit()
 	puzzle_completed.emit()
+
+func _play_completion_sound() -> void:
+	"""Play a happy sound when puzzle is completed"""
+	if not has_node("/root/SoundBank"):
+		print("LineSnapPuzzleBase: SoundBank not found, skipping completion sound")
+		return
+	
+	var sound_bank = get_node("/root/SoundBank")
+	var sound_stream = sound_bank.get_sound("AudioSynthesizer.POWER_UP_JINGLE")
+	
+	if not sound_stream:
+		print("LineSnapPuzzleBase: Could not get completion sound")
+		return
+	
+	var player = AudioStreamPlayer3D.new()
+	player.name = "CompletionSoundPlayer"
+	player.stream = sound_stream
+	player.volume_db = 0.0
+	player.max_distance = 20.0
+	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	player.global_position = global_position
+	add_child(player)
+	
+	player.finished.connect(player.queue_free)
+	player.play()
+	print("LineSnapPuzzleBase: Playing completion sound")
 
 func get_completion_percentage() -> float:
 	"""Return percentage of lines at their targets (0.0 to 1.0)"""

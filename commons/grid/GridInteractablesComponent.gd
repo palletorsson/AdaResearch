@@ -270,6 +270,8 @@ func generate_interactables(interactable_data):
 				var lookup_name: String = parsed.get("lookup_name", "")
 				var overrides: Dictionary = parsed.get("overrides", {})
 				var config_data: Dictionary = parsed.get("config_data", {})
+				var tag: String = parsed.get("tag", "")
+				var trigger_action: String = parsed.get("trigger_action", "")
 
 				if has_artifact(lookup_name):
 					var y_pos = structure_component.find_highest_y_at(x, z)
@@ -278,7 +280,7 @@ func generate_interactables(interactable_data):
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
 					
-					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides, config_data):
+					if _place_artifact(x, y_pos, z, lookup_name, total_size, overrides, config_data, tag, trigger_action):
 						interactable_count += 1
 					else:
 						placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
@@ -396,7 +398,7 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	return true
 
 # Place a single artifact using lookup_name
-func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
+func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
 	var position = Vector3(x, y, z) * total_size
 	
 	var artifact_info = get_artifact_info(lookup_name)
@@ -412,6 +414,14 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	if not artifact_object:
 		print("GridInteractablesComponent: WARNING - Failed to load scene for artifact '%s'" % lookup_name)
 		return false
+	
+	# Handle visibility override from artifact_definitions
+	if artifact_info.has("visible"):
+		var should_be_visible = artifact_info.get("visible", true)
+		if "visible" in artifact_object:
+			artifact_object.visible = should_be_visible
+			if not should_be_visible:
+				print("    Set artifact '%s' to invisible (from artifact_definitions)" % lookup_name)
 	
 	# Handle different node types (Node3D vs Control)
 	if artifact_object is Node3D:
@@ -446,14 +456,19 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			current_rotation.x = float(overrides.get("rotation_x_degrees", 0.0))
 			rotation_changed = true
 		if overrides.has("rotation_y_degrees"):
-			current_rotation.y = float(overrides.get("rotation_y_degrees", 0.0))
+			# Use rotate_y() to properly rotate around Y-axis, adding to existing rotation
+			# This works correctly even when the scene has a transform matrix
+			var y_rotation = float(overrides.get("rotation_y_degrees", 0.0))
+			artifact_object.rotate_y(deg_to_rad(y_rotation))
 			rotation_changed = true
 			# Also try to set an exported yaw property if available (legacy support)
-			_try_set_property(artifact_object, "yaw_degrees", current_rotation.y)
+			_try_set_property(artifact_object, "yaw_degrees", artifact_object.rotation_degrees.y)
 
 		if rotation_changed:
-			artifact_object.rotation_degrees = current_rotation
-			print("    Applied rotation: Z=%s X=%s Y=%s" % [current_rotation.z, current_rotation.x, current_rotation.y])
+			# Only update rotation_degrees if we changed Z or X (Y is handled by rotate_y above)
+			if overrides.has("rotation_z_degrees") or overrides.has("rotation_x_degrees"):
+				artifact_object.rotation_degrees = current_rotation
+			print("    Applied rotation: Z=%s X=%s Y=%s" % [artifact_object.rotation_degrees.z, artifact_object.rotation_degrees.x, artifact_object.rotation_degrees.y])
 
 		# Apply continuous rotation flags
 		if overrides.has("continuous_rotation_z") or overrides.has("continuous_rotation_x") or overrides.has("continuous_rotation_y"):
@@ -510,6 +525,22 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	if current_palette != "":
 		_try_set_property(artifact_object, "default_palette", current_palette)
 		print("    Applied map palette: '%s'" % current_palette)
+	
+	# Handle tag system registration
+	if tag != "":
+		# Register entity with tag (e.g., cube_scene:0:0:0#group:fillhole)
+		TagSystem.register_tagged_node(tag, artifact_object)
+		print("    Registered artifact with tag: '%s'" % tag)
+	
+	# Handle puzzle trigger setup
+	if trigger_action != "":
+		# Set properties on puzzle to trigger action on tag (e.g., cross_line_puzzle#fillhole:reveal)
+		if "trigger_tag" in artifact_object:
+			artifact_object.trigger_tag = tag
+			print("    Set puzzle trigger_tag: '%s'" % tag)
+		if "trigger_action" in artifact_object:
+			artifact_object.trigger_action = trigger_action
+			print("    Set puzzle trigger_action: '%s'" % trigger_action)
 
 	parent_node.add_child(artifact_object)
 	
@@ -542,20 +573,16 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 #   - Could be: rot_y:y_pos:scale:? (legacy) OR rot_z:rot_x:rot_y (new 3-axis)
 #   - System assumes 3-axis rotation if all 4 params are numeric
 #   - For position/scale, use 3-param format OR # syntax instead
-func _parse_interactable_token(token: String) -> Dictionary:
-	var result := {"lookup_name": token, "overrides": {}, "config_data": {}}
-	
-	# Handle # configuration syntax first (e.g., "clipboard#pages:point,line,triangle")
-	if token.find("#") != -1:
-		return _parse_config_token(token)
-	
+# Helper function to parse token parameters (without the tag part)
+func _parse_token_params(token: String, result: Dictionary) -> Dictionary:
 	# Handle legacy : syntax for overrides
 	if token.find(":") == -1:
+		result.lookup_name = token
 		return result
 	
 	var parts = token.split(":", false)
 
-		# SPECIAL HANDLING FOR MARCHING CUBES (mc:) OBJECTS
+	# SPECIAL HANDLING FOR MARCHING CUBES (mc:) OBJECTS
 	# Format: mc:id:rot_y:y_pos:scale
 	if parts.size() >= 2 and parts[0] == "mc":
 		result.lookup_name = "mc:" + parts[1].strip_edges()
@@ -588,6 +615,7 @@ func _parse_interactable_token(token: String) -> Dictionary:
 		return result
 	
 	if parts.size() < 2:
+		result.lookup_name = token
 		return result
 		
 	var name = parts[0].strip_edges()
@@ -625,9 +653,6 @@ func _parse_interactable_token(token: String) -> Dictionary:
 
 	elif parts.size() == 4:
 		# Ambiguous: Could be legacy (rot_y:y_pos:scale) OR new 3-axis rotation (rot_z:rot_x:rot_y)
-		# Heuristic: Check if 4th param looks like scale (< 10) or rotation angle (any value)
-		# Better approach: If last param is boolean-like, it's malformed. Otherwise try to guess.
-
 		var param1 = parts[1].strip_edges()
 		var param2 = parts[2].strip_edges()
 		var param3 = parts[3].strip_edges()
@@ -646,19 +671,14 @@ func _parse_interactable_token(token: String) -> Dictionary:
 				result.overrides["rotation_y_degrees"] = val1
 				result.overrides["y_position"] = val2
 				result.overrides["uniform_scale"] = val3
-				print("GridInteractablesComponent: Interpreted as legacy position/scale format (scale=%s < 10)" % val3)
 			else:
 				# NEW: 3-axis rotation: name:rot_z:rot_x:rot_y
 				result.overrides["rotation_z_degrees"] = val1
 				result.overrides["rotation_x_degrees"] = val2
 				result.overrides["rotation_y_degrees"] = val3
-				print("GridInteractablesComponent: Interpreted as 3-axis rotation (Z=%s, X=%s, Y=%s)" % [val1, val2, val3])
-		else:
-			print("GridInteractablesComponent: WARNING - Non-numeric 4-param format for '%s'" % token)
 
 	elif parts.size() == 3:
-		# Legacy format: name:rot_y:y_pos (or name:rot_y:y_pos:scale if 4 params)
-		# Only Y rotation + Y position offset (no scale in 3-param version)
+		# Legacy format: name:rot_y:y_pos
 		var rot_str = parts[1].strip_edges()
 		var y_pos_str = parts[2].strip_edges()
 
@@ -668,32 +688,46 @@ func _parse_interactable_token(token: String) -> Dictionary:
 		if y_pos_str.is_valid_float():
 			result.overrides["y_position"] = float(y_pos_str)
 
-	elif parts.size() == 7:
-		# Full format: name:rot_z:rot_x:rot_y:cont_z:cont_x:cont_y
-		var rot_z = parts[1].strip_edges()
-		var rot_x = parts[2].strip_edges()
-		var rot_y = parts[3].strip_edges()
-		var cont_z = parts[4].strip_edges().to_lower()
-		var cont_x = parts[5].strip_edges().to_lower()
-		var cont_y = parts[6].strip_edges().to_lower()
-
-		# Parse rotation degrees
-		if rot_z.is_valid_float():
-			result.overrides["rotation_z_degrees"] = float(rot_z)
-		if rot_x.is_valid_float():
-			result.overrides["rotation_x_degrees"] = float(rot_x)
-		if rot_y.is_valid_float():
-			result.overrides["rotation_y_degrees"] = float(rot_y)
-
-		# Parse continuous rotation flags (true/false or 1/0)
-		if cont_z == "true" or cont_z == "1":
-			result.overrides["continuous_rotation_z"] = true
-		if cont_x == "true" or cont_x == "1":
-			result.overrides["continuous_rotation_x"] = true
-		if cont_y == "true" or cont_y == "1":
-			result.overrides["continuous_rotation_y"] = true
-
 	return result
+
+func _parse_interactable_token(token: String) -> Dictionary:
+	var result := {"lookup_name": token, "overrides": {}, "config_data": {}, "tag": "", "trigger_action": ""}
+	
+	# Handle # configuration syntax first - could be tag OR config
+	# Tag syntax: artifact:params#group:tagname OR artifact:params#tagname:action
+	if token.find("#") != -1:
+		# Check if it's a tag (group:tagname or tagname:action) or config (other # usage)
+		var parts = token.split("#", false, 1)  # Split on first # only
+		if parts.size() == 2:
+			var before_hash = parts[0]
+			var after_hash = parts[1]
+			
+			# Check if after_hash looks like a tag: "group:tagname" or "tagname:action"
+			if after_hash.begins_with("group:"):
+				# Entity tag: artifact:params#group:tagname
+				result.lookup_name = before_hash
+				result.tag = after_hash.substr(6)  # Remove "group:" prefix
+				# Continue parsing the before_hash part for params
+				return _parse_token_params(before_hash, result)
+			elif after_hash.find(":") != -1:
+				# Could be puzzle trigger: artifact:params#tagname:action
+				var tag_parts = after_hash.split(":", false, 1)
+				if tag_parts.size() == 2:
+					var tag_name = tag_parts[0].strip_edges()
+					var action_name = tag_parts[1].strip_edges()
+					# Validate that action_name looks like an action (not a number/param)
+					if action_name in ["remove", "reveal", "hide", "freeze", "unfreeze", "enable_physics", "disable_physics"]:
+						result.lookup_name = before_hash
+						result.tag = tag_name
+						result.trigger_action = action_name
+						# Continue parsing the before_hash part for params
+						return _parse_token_params(before_hash, result)
+			
+			# Otherwise, treat as config syntax (clipboard#pages:point,line,triangle)
+			return _parse_config_token(token)
+	
+	# Handle legacy : syntax for overrides (no # found)
+	return _parse_token_params(token, result)
 
 # Parse configuration token syntax with # (e.g., "clipboard#pages:point,line,triangle")
 # Format: "artifact_name[:rotation:height:scale]#config_key:config_value[#config_key2:config_value2]..."

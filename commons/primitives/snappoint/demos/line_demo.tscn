@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="1_line"]
 [ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="2_manager"]
+[ext_resource type="Script" path="res://commons/primitives/snappoint/demos/line_demo.gd" id="3_script"]
 
 [node name="LineDemo" type="Node3D"]
+script = ExtResource("3_script")
 
 [node name="SnapConnectionManager" type="Node" parent="."]
 script = ExtResource("2_manager")

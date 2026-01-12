@@ -1,0 +1,248 @@
+@tool
+extends XRToolsPickable
+
+## Interactive point that shows position and draws line to origin when held
+
+# Visual feedback
+@export var glow_color: Color = Color(1.0, 0.6, 1.0)
+@export var glow_emission_energy: float = 2.0
+@export var pickup_sound_volume_db: float = -6.0
+
+# Line to origin settings
+@export var line_color: Color = Color(0.3, 0.8, 1.0, 0.7)
+@export var line_width: float = 0.003  # Very thin line
+@export var origin_point: Vector3 = Vector3.ZERO
+
+# Haptic feedback
+@export var haptic_pickup_intensity: float = 0.5
+@export var haptic_pickup_duration: float = 0.1
+@export var haptic_drop_intensity: float = 0.3
+@export var haptic_drop_duration: float = 0.05
+
+# Internal references
+var _original_material: Material
+var _glow_material: Material
+var _pickup_player: AudioStreamPlayer3D
+var _pickup_stream: AudioStreamWAV
+var _is_glowing := false
+var _current_controller: XRController3D
+
+# Line to origin
+var _line_mesh_instance: MeshInstance3D
+var _line_material: StandardMaterial3D
+var _is_held := false
+
+# Position label
+var _position_label: Label3D
+var _display_format_index: int = 2 # Start at 2 so first pickup cycles to 0 (default)
+
+func _ready() -> void:
+	super()
+	
+	# Get mesh and materials
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		_original_material = mesh_instance.get_active_material(0)
+		_glow_material = _build_glow_material(_original_material)
+	
+	# Setup audio
+	_setup_pickup_audio()
+	
+	# Setup line to origin
+	_setup_line_to_origin()
+	
+	# Find or create position label
+	_position_label = get_node_or_null("MeshInstance3D/Label3D")
+	if _position_label:
+		_position_label.visible = false  # Hidden until picked up
+	
+	# Connect signals
+	picked_up.connect(_on_picked_up)
+	dropped.connect(_on_dropped)
+
+func _process(_delta: float) -> void:
+	if _is_held:
+		_update_line_to_origin()
+		_update_position_label()
+
+func _setup_line_to_origin() -> void:
+	# Create line mesh instance
+	_line_mesh_instance = MeshInstance3D.new()
+	_line_mesh_instance.name = "LineToOrigin"
+	add_child(_line_mesh_instance)
+	
+	# Create material for line
+	_line_material = StandardMaterial3D.new()
+	_line_material.albedo_color = line_color
+	_line_material.emission_enabled = true
+	_line_material.emission = line_color
+	_line_material.emission_energy_multiplier = 1.5
+	_line_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_line_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_line_material.disable_receive_shadows = true
+	_line_material.no_depth_test = true
+	
+	_line_mesh_instance.material_override = _line_material
+	_line_mesh_instance.visible = false
+
+func _update_line_to_origin() -> void:
+	if not _line_mesh_instance:
+		return
+	
+	var current_pos = global_position
+	var direction = origin_point - current_pos
+	var distance = direction.length()
+	
+	if distance < 0.001:
+		_line_mesh_instance.visible = false
+		return
+	
+	_line_mesh_instance.visible = true
+	
+	# Create cylinder mesh for the line
+	var cylinder = CylinderMesh.new()
+	cylinder.height = distance
+	cylinder.top_radius = line_width
+	cylinder.bottom_radius = line_width
+	cylinder.radial_segments = 8
+	cylinder.rings = 1
+	
+	_line_mesh_instance.mesh = cylinder
+	
+	# Position at midpoint between current position and origin
+	var midpoint = (current_pos + origin_point) / 2.0
+	_line_mesh_instance.global_position = midpoint
+	
+	# Rotate to point from current position to origin
+	var up = Vector3.UP
+	if abs(direction.normalized().dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	
+	_line_mesh_instance.look_at(origin_point, up)
+	_line_mesh_instance.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+
+func _update_position_label() -> void:
+	if not _position_label:
+		return
+	
+	var pos = global_position
+	match _display_format_index:
+		0:
+			_position_label.visible = true
+			_position_label.text = "(%.2f, %.2f, %.2f)" % [pos.x, pos.y, pos.z]
+		1:
+			_position_label.visible = true
+			_position_label.text = "(x:%.2f, y:%.2f, z:%.2f)" % [pos.x, pos.y, pos.z]
+		2:
+			_position_label.visible = true
+			_position_label.text = "Vector3(%.2f, %.2f, %.2f)" % [pos.x, pos.y, pos.z]
+		3:
+			_position_label.visible = false
+
+func _build_glow_material(source: Material) -> Material:
+	var material := source
+	if material:
+		material = material.duplicate()
+	else:
+		material = StandardMaterial3D.new()
+	
+	if material is BaseMaterial3D:
+		var base_mat := material as BaseMaterial3D
+		base_mat.emission_enabled = true
+		base_mat.emission = glow_color
+		base_mat.emission_energy_multiplier = glow_emission_energy
+		base_mat.albedo_color = base_mat.albedo_color.lerp(glow_color, 0.3)
+	
+	return material
+
+func _setup_pickup_audio() -> void:
+	_pickup_stream = _build_pickup_stream()
+	_pickup_player = AudioStreamPlayer3D.new()
+	_pickup_player.name = "PickupPlayer"
+	_pickup_player.stream = _pickup_stream
+	_pickup_player.autoplay = false
+	_pickup_player.volume_db = pickup_sound_volume_db
+	_pickup_player.unit_size = 0.5
+	_pickup_player.attenuation_filter_cutoff_hz = 6000
+	add_child(_pickup_player)
+
+func _build_pickup_stream() -> AudioStreamWAV:
+	var stream := AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = 22050
+	stream.stereo = false
+	var duration := 0.18
+	var tone := 880.0
+	var length := int(stream.mix_rate * duration)
+	var data := PackedByteArray()
+	data.resize(length * 2)
+	for i in length:
+		var t: float = float(i) / stream.mix_rate
+		var envelope: float = min(t / 0.02, 1.0) * exp(-3.0 * t)
+		var sample: float = sin(TAU * tone * t) * 0.45 * envelope
+		var int_sample: int = int(sample * 32767.0)
+		data[2 * i] = int_sample & 0xFF
+		data[2 * i + 1] = (int_sample >> 8) & 0xFF
+	stream.data = data
+	return stream
+
+func _apply_glow() -> void:
+	if not _glow_material:
+		_glow_material = _build_glow_material(_original_material)
+	_is_glowing = true
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		mesh_instance.set_surface_override_material(0, _glow_material)
+
+func _restore_original_material() -> void:
+	_is_glowing = false
+	var mesh_instance = get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		mesh_instance.set_surface_override_material(0, _original_material)
+
+func _play_pickup_sound() -> void:
+	if not _pickup_player:
+		return
+	if _pickup_player.playing:
+		_pickup_player.stop()
+	_pickup_player.play()
+
+func _trigger_haptic(controller: XRController3D, intensity: float, duration: float) -> void:
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 100.0, intensity, duration, 0)
+
+func _on_picked_up(_pickable) -> void:
+	# Cycle through display formats (0 -> 1 -> 2 -> 3 -> 0)
+	_display_format_index = (_display_format_index + 1) % 4
+
+	_current_controller = get_picked_up_by_controller()
+	if _current_controller:
+		_trigger_haptic(_current_controller, haptic_pickup_intensity, haptic_pickup_duration)
+	
+	_apply_glow()
+	_play_pickup_sound()
+	_is_held = true
+	
+	# Show position label
+	if _position_label:
+		_position_label.visible = true
+	
+	# Show line to origin
+	if _line_mesh_instance:
+		_line_mesh_instance.visible = true
+
+func _on_dropped(_pickable) -> void:
+	if _current_controller:
+		_trigger_haptic(_current_controller, haptic_drop_intensity, haptic_drop_duration)
+		_current_controller = null
+	
+	_restore_original_material()
+	_is_held = false
+	
+	# Hide position label
+	if _position_label:
+		_position_label.visible = false
+	
+	# Hide line to origin
+	if _line_mesh_instance:
+		_line_mesh_instance.visible = false
