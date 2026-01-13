@@ -5,6 +5,7 @@
 
 [node name="GridLines" type="Node3D"]
 script = ExtResource("2_script")
+shadow_snap_subdivisions = 6
 
 [node name="LineX1" parent="." instance=ExtResource("1_line")]
 

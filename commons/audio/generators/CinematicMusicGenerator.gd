@@ -55,6 +55,10 @@ static func generate_sound(sound_name: String, params: Dictionary = {}) -> Audio
 			return _generate_distant_thunder_rumble(params)
 		"glass_droplet_chime":
 			return _generate_glass_droplet_chime(params)
+		"deep_dark_cello_drone":
+			return _generate_deep_dark_cello_drone(params)
+		"hans_zimmer_cello_drone":
+			return _generate_deep_dark_cello_drone(params)  # Alias
 		_:
 			push_warning("CinematicMusicGenerator: Unknown sound '%s'" % sound_name)
 			return null
@@ -859,6 +863,83 @@ static func _generate_distant_thunder_rumble(params: Dictionary) -> AudioStreamW
 
 		_write_sample16_stereo(data, i, sig * 0.28, sig * 0.28)
 
+	return _create_stream(data)
+
+# 14. DEEP DARK CELLO DRONE - Hans Zimmer style cello drone
+# Principle: Deep resonant cello tones with rich harmonics, slow movement, epic sub-bass
+static func _generate_deep_dark_cello_drone(params: Dictionary) -> AudioStreamWAV:
+	var duration = params.get("duration", 15.0)  # Reasonable length for catalog playback
+	var base_freq = params.get("freq", 65.41)  # C2 - deep cello range
+	var attack_time = params.get("attack", 6.0)  # Very slow attack for cinematic feel
+	var vibrato_depth = params.get("vibrato_depth", 0.01)  # Subtle vibrato
+	var vibrato_rate = params.get("vibrato_rate", 4.5)  # Slow, expressive vibrato
+	
+	var sample_count = int(duration * MIX_RATE)
+	var data = PackedByteArray()
+	data.resize(sample_count * 4)
+	
+	for i in range(sample_count):
+		var t = float(i) / MIX_RATE
+		var progress = t / duration
+		
+		# MOVEMENT: Slow pitch drift (breathing, evolving)
+		var drift1 = sin(t * 0.12 * 2.0 * PI) * 0.003 * base_freq  # Very slow drift
+		var drift2 = sin(t * 0.18 * 2.0 * PI) * 0.002 * base_freq  # Polyrhythmic
+		var freq = base_freq + drift1 + drift2
+		
+		# MOVEMENT: Expressive vibrato (cello-like, grows over time)
+		var vibrato_growth = smoothstep(0.0, 0.3, progress)  # Vibrato increases over first 30%
+		var vibrato = sin(t * vibrato_rate * 2.0 * PI) * vibrato_depth * vibrato_growth * freq
+		freq += vibrato
+		
+		# LAYERING: Cello fundamental - rich sine with saw character
+		# Cello has strong fundamental with rich harmonics
+		var fundamental = sin(2.0 * PI * freq * t) * 0.5
+		var saw_char = _saw_wave(freq, t) * 0.15  # Add sawtooth for cello character
+		
+		# LAYERING: Strong 2nd harmonic (octave) - cello characteristic
+		var h2 = sin(2.0 * PI * freq * 2.0 * t) * 0.25
+		
+		# LAYERING: 3rd harmonic (fifth) for warmth
+		var h3 = sin(2.0 * PI * freq * 3.0 * t) * 0.12
+		
+		# LAYERING: 4th harmonic (octave up) for presence
+		var h4 = sin(2.0 * PI * freq * 4.0 * t) * 0.08
+		
+		# LAYERING: Epic sub-bass (Zimmer signature) - octave below
+		var sub = sin(2.0 * PI * freq * 0.5 * t) * 0.35  # Strong sub for depth
+		
+		# LAYERING: Detuned layer for width and richness
+		var detune1 = sin(2.0 * PI * freq * 0.998 * t) * 0.15
+		var detune2 = sin(2.0 * PI * freq * 1.002 * t) * 0.15
+		
+		var core = fundamental + saw_char + h2 + h3 + h4 + sub + detune1 + detune2
+		
+		# MOVEMENT: Slow filter sweep (dark to slightly brighter, then back)
+		var filter_lfo = sin(t * 0.08 * 2.0 * PI)  # Very slow filter movement
+		var cutoff = lerp(150.0, 600.0, (filter_lfo + 1.0) * 0.5)  # Low-mid range
+		var filter_env = cutoff / 800.0
+		
+		# TEXTURE: Subtle bow noise (cello string texture)
+		var bow_noise = (sin(t * 234.5) + sin(t * 456.7)) * 0.02  # Very subtle
+		
+		# Stereo: Wide, immersive
+		var sig_l = (core + bow_noise) * filter_env
+		var sig_r = (fundamental * 1.001 + saw_char + h2 + h3 + h4 + sub + detune1 * 1.001 + detune2 + bow_noise) * filter_env
+		
+		# DYNAMIC RANGE: Very slow breathing envelope (cinematic)
+		var env = 1.0
+		var attack_ratio = attack_time / duration
+		if progress < attack_ratio:
+			env = smoothstep(0.0, 1.0, progress / attack_ratio)  # Smooth cinematic attack
+		elif progress > 0.9:
+			env = smoothstep(1.0, 0.0, (progress - 0.9) / 0.1)  # Gentle release
+		
+		# MOVEMENT: Subtle tremolo for life (very slow)
+		var tremolo = sin(t * 0.5 * 2.0 * PI) * 0.05 + 0.95  # Very subtle breathing
+		
+		_write_sample16_stereo(data, i, sig_l * env * tremolo * 0.32, sig_r * env * tremolo * 0.32)
+	
 	return _create_stream(data)
 
 # 13. GLASS DROPLET CHIME - High frequency rain impacts (for random events)

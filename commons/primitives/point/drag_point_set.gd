@@ -139,6 +139,30 @@ func set_points_positions(positions: Array[Vector3]) -> void:
 	for i in range(min(positions.size(), _spheres.size())):
 		set_point_position(i, positions[i], true, false)
 
+func replace_sphere(index: int, new_sphere: Node3D) -> void:
+	if index < 0 or index >= _spheres.size():
+		return
+	
+	var old_sphere = _spheres[index]
+	if old_sphere == new_sphere:
+		return
+		
+	# Update the reference
+	_spheres[index] = new_sphere
+	_last_positions[index] = new_sphere.position
+	_points[index]["position"] = new_sphere.position
+	
+	# Connect signals for the new sphere if it has them
+	if new_sphere.has_signal("picked_up"):
+		# We might need to disconnect old one or handle multiple listeners
+		# For this use case, we just want it to emit signals that this set listens to
+		new_sphere.connect("picked_up", _on_sphere_picked_up.bind(index))
+	if new_sphere.has_signal("dropped"):
+		new_sphere.connect("dropped", _on_sphere_dropped.bind(index))
+	
+	# Note: We don't queue_free old_sphere here to let caller decide
+	# but usually it should be removed.
+
 func for_each_sphere(callback: Callable) -> void:
 	for sphere in _spheres:
 		callback.call(sphere)
@@ -161,6 +185,8 @@ func _on_sphere_dropped(index: int, pickable) -> void:
 func _process(_delta: float) -> void:
 	for i in range(_spheres.size()):
 		var sphere := _spheres[i]
+		if not is_instance_valid(sphere):
+			continue
 		var current_pos: Vector3 = sphere.position
 		if current_pos != _last_positions[i]:
 			_last_positions[i] = current_pos

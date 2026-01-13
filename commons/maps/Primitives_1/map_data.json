@@ -1,7 +1,8 @@
 {
 	"map_info": {
 		"name": "The First Primitive",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"lookup_name": "Primitives_1",			
+		"description": "A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space. It is not a closed solid by itself, but a spatial junction—an elementary expression of volume beginning to form.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -51,9 +52,9 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "pyramid_edit:90:0:0.4", "snap_tetrahedron_puzzle",  "clipboard#polyhedra_axioms:190:-0.2", " ", " "],
+			[" ", " ", "trihedron:90:0:0.4", "snap_tetrahedron_puzzle:0:0:0#fillhole:reveal",  " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
 			[" ", " ", " ", " ", " ", " ", " "]
 		]

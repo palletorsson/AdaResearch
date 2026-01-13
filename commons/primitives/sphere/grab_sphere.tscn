@@ -37,9 +37,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00162586, 0, 0.0739675)
 [node name="positionlabel" parent="." index="3" instance=ExtResource("4_cp53c")]
 transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0.0245838, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.300491)
-
-[node name="DistanceConstraint" type="Node3D" parent="." index="5"]
+[node name="DistanceConstraint" type="Node3D" parent="." index="4"]
 visible = false
 script = ExtResource("5_q2nsk")

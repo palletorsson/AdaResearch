@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="1_line"]
 [ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="2_manager"]
 [ext_resource type="Script" path="res://commons/primitives/snappoint/demos/line_demo.gd" id="3_script"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7m9k" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="4_display"]
 
 [node name="LineDemo" type="Node3D"]
 script = ExtResource("3_script")
@@ -16,9 +17,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1.5, 0)
 [node name="SnapPoint2" parent="." instance=ExtResource("1_line")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.5, 0)
 
-[node name="InstructionLabel" type="Label3D" parent="."]
+[node name="CategoryLogicDisplay" parent="." instance=ExtResource("4_display")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-pixel_size = 0.001
-billboard = 1
-text = "Grab and connect the two points"
-outline_size = 8
+equation = ["point", "plus", "point", "arrow", "line"]

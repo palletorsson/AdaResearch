@@ -11,16 +11,18 @@ func _init() -> void:
 	# Target: Two parallel vertical lines in ZY plane, separated horizontally
 	line_definitions = [
 		{
-			"start_pos": Vector3(-0.2, 0.15, 0),    # Left end of top line
-			"end_pos": Vector3(0.2, 0.15, 0),       # Right end of top line
-			"target_start": Vector3(0, -0.2, -0.1), # a: Bottom of left parallel line
-			"target_end": Vector3(0, 0.2, -0.1)     # b: Top of left parallel line
+			# Line 1: Horizontal line, in front of puzzle, top
+			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
+			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
+			"target_start": Vector3(0, -0.2, -0.1),     # a: Bottom of left parallel line
+			"target_end": Vector3(0, 0.2, -0.1)         # b: Top of left parallel line
 		},
 		{
-			"start_pos": Vector3(-0.2, -0.15, 0),   # Left end of bottom line
-			"end_pos": Vector3(0.2, -0.15, 0),      # Right end of bottom line
-			"target_start": Vector3(0, -0.2, 0.1),  # c: Bottom of right parallel line
-			"target_end": Vector3(0, 0.2, 0.1)      # d: Top of right parallel line
+			# Line 2: Horizontal line, in front of puzzle, bottom
+			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
+			"target_start": Vector3(0, -0.2, 0.1),      # c: Bottom of right parallel line
+			"target_end": Vector3(0, 0.2, 0.1)          # d: Top of right parallel line
 		}
 	]
 	
@@ -36,3 +38,11 @@ func _ready() -> void:
 	print("  Top line (reddish): y=+0.15m, targets a->b (left vertical)")
 	print("  Bottom line (bluish): y=-0.15m, targets c->d (right vertical)")
 	print("  Target: Two parallel vertical lines in ZY plane, 20cm apart")
+
+func _complete_puzzle() -> void:
+	# Hide logic display instead of success label if needed
+	var display = get_node_or_null("CategoryLogicDisplay")
+	if display:
+		display.visible = false
+		
+	super._complete_puzzle()

@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgw83kmnec5mv"]
+
+[ext_resource type="PackedScene" uid="uid://djkjuy7wct10q" path="res://commons/primitives/cubes/grab_cube.tscn" id="1_grab_cube"]
+[ext_resource type="PackedScene" uid="uid://dgjmmu8itghpj" path="res://commons/primitives/tetrahedron/grab_tetrahedron.tscn" id="2_grab_tetra"]
+[ext_resource type="PackedScene" uid="uid://l0xse04bya00" path="res://commons/primitives/octahedron/grab_octahedron.tscn" id="3_grab_octa"]
+[ext_resource type="PackedScene" path="res://commons/primitives/icosahedron/grab_icosahedron.tscn" id="4_grab_ico"]
+[ext_resource type="PackedScene" path="res://commons/primitives/dodecahedron/grab_dodecahedron.tscn" id="5_grab_dode"]
+[ext_resource type="PackedScene" uid="uid://cbp11dfeoeb1e" path="res://commons/primitives/trihedron/grab_trihedron.tscn" id="6_grab_tri"]
+
+[node name="PlatonicDemo" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 0, 1.2, 3.5)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 4, 0)
+shadow_enabled = true
+
+[node name="GrabCube_1" parent="." instance=ExtResource("1_grab_cube")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 0.5, -1.0)
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+enabled = true
+press_to_hold = true
+picked_up_layer = 65536
+release_mode = -1
+ranged_grab_method = 1
+second_hand_grab = 0
+ranged_grab_speed = 20.0
+picked_by_exclude = ""
+picked_by_require = ""
+
+[node name="GrabCube_2" parent="." instance=ExtResource("1_grab_cube")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 0.5, 0)
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+
+[node name="GrabCube_3" parent="." instance=ExtResource("1_grab_cube")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.5, 0.5, 1.0)
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+
+[node name="GrabTetrahedron_1" parent="." instance=ExtResource("2_grab_tetra")]
+transform = Transform3D(0.83, 0, 0, 0, 0.83, 0, 0, 0, 0.83, -1.2, 0.5, -1.0)
+
+[node name="GrabTetrahedron_2" parent="." instance=ExtResource("2_grab_tetra")]
+transform = Transform3D(0.83, 0, 0, 0, 0.83, 0, 0, 0, 0.83, -1.2, 0.5, -0.5)
+
+[node name="GrabTetrahedron_3" parent="." instance=ExtResource("2_grab_tetra")]
+transform = Transform3D(0.83, 0, 0, 0, 0.83, 0, 0, 0, 0.83, -1.2, 0.5, 0)
+
+[node name="GrabOctahedron_1" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -1.2)
+
+[node name="GrabOctahedron_2" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -0.8)
+
+[node name="GrabOctahedron_3" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -0.4)
+
+[node name="GrabIcosahedron_1" parent="." instance=ExtResource("4_grab_ico")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 1.2, 0.5, -1.0)
+
+[node name="GrabIcosahedron_2" parent="." instance=ExtResource("4_grab_ico")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 1.2, 0.5, -0.5)
+
+[node name="GrabIcosahedron_3" parent="." instance=ExtResource("4_grab_ico")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 1.2, 0.5, 0)
+
+[node name="GrabDodecahedron_1" parent="." instance=ExtResource("5_grab_dode")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 2.5, 0.5, -1.0)
+
+[node name="GrabDodecahedron_2" parent="." instance=ExtResource("5_grab_dode")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 2.5, 0.5, 0)
+
+[node name="GrabDodecahedron_3" parent="." instance=ExtResource("5_grab_dode")]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 2.5, 0.5, 1.0)
+
+[node name="GrabTrihedron_1" parent="." instance=ExtResource("6_grab_tri")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, 0.5, 0.8)
+
+[node name="GrabTrihedron_2" parent="." instance=ExtResource("6_grab_tri")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, 0.5, 1.2)
+
+[node name="GrabTrihedron_3" parent="." instance=ExtResource("6_grab_tri")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, 0.5, 1.6)

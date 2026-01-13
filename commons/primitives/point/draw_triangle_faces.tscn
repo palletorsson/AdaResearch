@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsryyi3a6xrlh"]
+
+[ext_resource type="Script" uid="uid://dhck7c41sx6ib" path="res://commons/primitives/point/draw_triangle_faces.gd" id="1_draw"]
+[ext_resource type="PackedScene" uid="uid://d2r31gpcpho3n" path="res://commons/primitives/point/grab_sphere_point_with_text.tscn" id="2_grab"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drawdot"]
+albedo_color = Color(1, 0.8, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.8, 0.2, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_drawdot"]
+radius = 0.025
+height = 0.05
+
+[node name="DrawTriangleFaces" type="Node3D"]
+script = ExtResource("1_draw")
+
+[node name="GrabPoint" parent="." instance=ExtResource("2_grab")]
+xp_on_pickup = 1
+haptic_pickup_intensity = 0.6
+haptic_pickup_duration = 0.1
+haptic_drop_intensity = 0.4
+haptic_drop_duration = 0.08
+
+[node name="DrawSphere" type="MeshInstance3D" parent="GrabPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12)
+material_override = SubResource("StandardMaterial3D_drawdot")
+mesh = SubResource("SphereMesh_drawdot")

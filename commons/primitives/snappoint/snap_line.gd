@@ -4,7 +4,7 @@ class_name SnapLine
 ## Dynamic line that connects two snap points
 ## Updates geometry in real-time as points move
 
-@export var line_thickness: float = 0.01
+@export var line_thickness: float = 0.003
 @export var line_color: Color = Color(0.8, 0.5, 1.0, 1.0)  # Purple-ish
 @export var emission_strength: float = 1.5
 

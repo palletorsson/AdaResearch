@@ -3,6 +3,7 @@ extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
+@export var triangle_scale: float = 0.5 # Scale of the triangle vertices
 @export var sphere_y_offset: float = 0.0
 
 ## Freeze behavior options
@@ -14,11 +15,7 @@ var triangle_mesh_black: MeshInstance3D
 var drag_points: DragPointSet
 
 # Standing triangle has 3 corner points that define 1 triangle (vertical/standing)
-var vertex_positions: Array[Vector3] = [
-	Vector3(-1.0, sphere_y_offset - 1.0, 0.0),  # Bottom-left (0)
-	Vector3(1.0, sphere_y_offset - 1.0, 0.0),   # Bottom-right (1)
-	Vector3(0.0, sphere_y_offset + 1.0, 0.0)    # Top-center (2)
-]
+var vertex_positions: Array[Vector3] = []
 
 # Define the single standing triangle
 # Triangle: Bottom-left, Bottom-right, Top-center (indices 0,1,2)
@@ -26,6 +23,14 @@ var triangle1_indices: Array[int] = [0, 1, 2]  # Pink triangle
 var triangle2_indices: Array[int] = [0, 1, 2]  # Same triangle (for compatibility)
 
 func _ready():
+	# Initialize with scaled positions if not already set (e.g. from scene file)
+	if vertex_positions.is_empty():
+		vertex_positions = [
+			Vector3(-1.0 * triangle_scale, (sphere_y_offset - 1.0) * triangle_scale, 0.0),  # Bottom-left (0)
+			Vector3(1.0 * triangle_scale, (sphere_y_offset - 1.0) * triangle_scale, 0.0),   # Bottom-right (1)
+			Vector3(0.0 * triangle_scale, (sphere_y_offset + 1.0) * triangle_scale, 0.0)    # Top-center (2)
+		]
+	
 	drag_points = DragPointSet.new()
 	drag_points.name = "DragPoints"
 	add_child(drag_points)

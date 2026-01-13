@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cuqcw3y7gfvj1" path="res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.gd" id="1_tetrahedron"]
 [ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="2_snappoint"]
 [ext_resource type="Script" uid="uid://csnkuxp3jotry" path="res://commons/primitives/snappoint/snap_connection_manager.gd" id="3_manager"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="4_display"]
 
 [node name="SnapTetrahedronPuzzle" type="Node3D"]
 script = ExtResource("1_tetrahedron")
@@ -24,11 +25,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.12)
 [node name="Point4_Apex" parent="." instance=ExtResource("2_snappoint")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.02)
 
-[node name="InstructionLabel" type="Label3D" parent="."]
+[node name="CategoryLogicDisplay" parent="." instance=ExtResource("4_display")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-pixel_size = 0.001
-billboard = 1
-text = "Connect all 4 points to form a tetrahedron"
-font_size = 28
-outline_size = 6
+equation = ["point", "times", "4", "equals", "tetrahedron"]

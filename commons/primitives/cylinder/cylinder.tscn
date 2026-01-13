@@ -12,11 +12,7 @@ shader_parameter/line_width = 3.651
 shader_parameter/emission_strength = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4ip7n"]
-top_radius = 0.05
-bottom_radius = 0.005
-height = 0.195
-radial_segments = 9
-rings = 17
+radial_segments = 4
 
 [node name="cylinder" type="Node3D"]
 

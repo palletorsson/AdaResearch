@@ -225,6 +225,13 @@
 			"description": "Interactive right-triangle construction with draggable vertices and animated area proof squares.",
 			"scene": "res://commons/primitives/pythagorean_proof/pythagorean_proof.tscn"
 		},
+		"draw_triangle_faces": {
+			"name": "draw_triangle_faces",
+			"lookup_name": "draw_triangle_faces",
+			"description": "draw_triangle_faces.",
+			"scene": "res://commons/primitives/point/draw_triangle_faces.tscn"
+		},		
+		
 		"point_collection": {
 			"name": "point_collection",
 			"lookup_name": "point_collection",
@@ -297,6 +304,30 @@
 			"description": "Interactive line tool packaged for interface use with grab spheres and dynamic length display.",
 			"scene": "res://commons/interface/line.tscn"
 		},
+		"grab_line": {
+			  "name": "grab_line",
+			  "lookup_name": "grab_line",
+			  "description": "Adjustable length grabbable line with trigger+joystick length control and optional length display.",
+			  "scene": "res://commons/primitives/line/grab_line.tscn"
+		  },
+		  "grab_line_pusher": {
+			  "name": "grab_line_pusher",
+			  "lookup_name": "grab_line_pusher",
+			  "description": "Grabbable line with sphere collider at tip for pushing objects away.",
+			  "scene": "res://commons/primitives/line/grab_line_pusher.tscn"
+		  },
+		  "grab_line_drawer": {
+			  "name": "grab_line_drawer",
+			  "lookup_name": "grab_line_drawer",
+			  "description": "Grabbable line that draws fading trails from the tip when trigger is held.",
+			  "scene": "res://commons/primitives/line/grab_line_drawer.tscn"
+		  },
+		  "grab_line_music": {
+			  "name": "grab_line_music",
+			  "lookup_name": "grab_line_music",
+			  "description": "Grabbable line that produces music based on movement speed and length, with selectable waveforms.",
+			  "scene": "res://commons/primitives/line/grab_line_music.tscn"
+		  },
 		"perspective_lines": {
 			"name": "perspective_lines",
 			"lookup_name": "perspective_lines",
@@ -423,6 +454,14 @@
 			"description": "Folded pink zigzag profile built from alternating peaks with drag points to edit the pleated surface.",
 			"scene": "res://commons/primitives/triangleprofiles/triangleprofiles.tscn"
 		},
+		"ConnectedTriangles": {
+			"name": "ConnectedTriangles",
+			"lookup_name": "ConnectedTriangles",
+			"description": "ConnectedTriangles.",
+			"scene": "res://commons/scenes/experiments/ConnectedTriangles.tscn"
+		},		
+		
+		
 		"pythagorean_triangle_angles": {
 			"name": "1.2: A pythagorean_triangle_angles",
 			"lookup_name": "pythagorean_triangle_angles",
@@ -549,6 +588,19 @@
 			"description": "Arranges capsule meshes in a matrix while iterating through height and radial segment combinations.",
 			"scene": "res://commons/primitives/combines/combine_capsule.tscn"
 		},
+		"trihedron": {
+			"name": "trihedron",
+			"lookup_name": "trihedron",
+			"description": "trihedron",
+			"scene": "res://commons/primitives/trihedron/trihedron.tscn"
+		},	
+		"grab_trihedron": {
+			"name": "grab_trihedron",
+			"lookup_name": "grab_trihedron",
+			"description": "grab_trihedron",
+			"scene": "res://commons/primitives/trihedron/grab_trihedron.tscn"
+		},	
+		
 		"pyramid": {
 			"name": "pyramid",
 			"lookup_name": "pyramid",
@@ -597,6 +649,13 @@
 			"description": "Procedural icosahedron primitive for sphere approximations.",
 			"scene": "res://commons/primitives/icosahedron/icosahedron.tscn"
 		},
+		"platonic_demo": {
+			"name": "platonic_demo",
+			"lookup_name": "platonic_demo",
+			"description": "platonic_demo.",
+			"scene": "res://commons/primitives/platonic_demo.tscn"
+		},		
+		
 		"diamond": {
 			"name": "diamond",
 			"lookup_name": "diamond",

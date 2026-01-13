@@ -1,6 +1,7 @@
 {
 	"map_info": {
 		"name": "The Trace",
+		"lookup_name": "Point_Trace",
 		"description": "The Trace introduces duration and embodied residue into geometry. Unlike points and lines that resolve instantly into abstraction, traces accumulate over time as records of movement. The map emphasizes gesture, repetition, and error, foregrounding how space remembers interaction. The trace resists full discretization, functioning as a counterpoint to the clean logic of primitives and revealing geometry as a lived process rather than a static system.",
 		"version": "1.0",
 		"format": "json",
@@ -36,12 +37,12 @@
 			["1", "1", "1", "1", "1", "0", "0"],
 			["1", "1", "1", "1", "1", "0", "1"],
 			["1", "1", "1", "1", "1", "0", "0"],
-			["1", "1", "1", "1", "1", "1", "0"],
-			["1", "1", "1", "2", "2", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "0", "1"],
-			["0", "1", "0", "0", "1", "1", "1"],
-			["0", "0", "0", "0", "0", "0", "0"],
+			["0", "0", "1", "1", "1", "1", "0"],
+			["0", "0", "2", "2", "1", "1", "1"],
+			["0", "0", "1", "1", "1", "2", "2"],
+			["0", "0", "1", "1", "1", "1", "1"],
+			["0", "0", "0", "0", "1", "0", "1"],
+			["0", "0", "0", "0", "1", "1", "1"],
 			["0", "0", "0", "0", "0", "0", "0"],
 			["0", "0", "0", "0", "0", "0", "0"],
 		],
@@ -50,30 +51,24 @@
 			[" ", " ", " ", " ", " ", " ", "an:-90"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "la:point", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", "3t:the_trace", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " "],
-			[" ", " ", " ", "grab_sphere_point_snap:180", "draw_dot:180", " ", " "],
+			[" ", " ", "grab_sphere_point_snap:180", "draw_dot:0:0:0#fillhole:remove", "cube_scene:0:0:0.90#group:fillhole", " ", " "],
+			[" ", " ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			["clipboard#z_coordinate_system:180", " ", "vectorpoint:180:0", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+ 
 		]
 	},
 	"utility_definitions": {
@@ -102,6 +97,7 @@
 		}
 	},
 	"settings": {
+		"enter_type": "I",		
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": true,

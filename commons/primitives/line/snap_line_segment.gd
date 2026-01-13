@@ -349,10 +349,10 @@ func _create_cross_marker(color: Color) -> Node3D:
 	# Create a larger, more visible sphere marker
 	var sphere_mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
-	sphere.radius = 0.04  # 4cm radius sphere - very visible!
-	sphere.height = 0.08
-	sphere.radial_segments = 16
-	sphere.rings = 8
+	sphere.radius = 0.02  # 2cm radius sphere - smaller, less distracting
+	sphere.height = 0.04
+	sphere.radial_segments = 12
+	sphere.rings = 6
 	
 	sphere_mesh.mesh = sphere
 	
@@ -361,7 +361,7 @@ func _create_cross_marker(color: Color) -> Node3D:
 	mat.albedo_color = color
 	mat.emission_enabled = true
 	mat.emission = color
-	mat.emission_energy_multiplier = 4.0  # Very bright
+	mat.emission_energy_multiplier = 3.0  # Slightly dimmer
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	
@@ -370,18 +370,18 @@ func _create_cross_marker(color: Color) -> Node3D:
 	
 	# Create three perpendicular lines forming a 3D cross
 	var axes = [
-		[Vector3(-0.06, 0, 0), Vector3(0.06, 0, 0)],  # X axis (12cm wide)
-		[Vector3(0, -0.06, 0), Vector3(0, 0.06, 0)],  # Y axis
-		[Vector3(0, 0, -0.06), Vector3(0, 0, 0.06)]   # Z axis
+		[Vector3(-0.03, 0, 0), Vector3(0.03, 0, 0)],  # X axis (6cm wide - smaller)
+		[Vector3(0, -0.03, 0), Vector3(0, 0.03, 0)],  # Y axis
+		[Vector3(0, 0, -0.03), Vector3(0, 0, 0.03)]   # Z axis
 	]
 	
 	for axis in axes:
 		var line_mesh = MeshInstance3D.new()
 		var cylinder = CylinderMesh.new()
-		cylinder.top_radius = 0.005  # 5mm thick - thicker
-		cylinder.bottom_radius = 0.005
-		cylinder.height = 0.12  # 12cm long
-		cylinder.radial_segments = 6
+		cylinder.top_radius = 0.003  # 3mm thick - thinner
+		cylinder.bottom_radius = 0.003
+		cylinder.height = 0.06  # 6cm long - shorter
+		cylinder.radial_segments = 4
 		
 		line_mesh.mesh = cylinder
 		
@@ -390,7 +390,7 @@ func _create_cross_marker(color: Color) -> Node3D:
 		mat2.albedo_color = color
 		mat2.emission_enabled = true
 		mat2.emission = color
-		mat2.emission_energy_multiplier = 3.0
+		mat2.emission_energy_multiplier = 2.5
 		mat2.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		mat2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		

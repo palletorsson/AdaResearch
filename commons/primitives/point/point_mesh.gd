@@ -5,7 +5,7 @@ extends Node
 var target_mesh: MeshInstance3D = null
 
 # Sphere settings
-@export var radius: float = 0.02
+@export var radius: float = 0.012
 
 func _ready():
 	# Try to find target mesh in parent if not set

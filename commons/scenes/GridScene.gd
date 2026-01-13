@@ -81,7 +81,7 @@ func _configure_grid_system_for_map(map_name: String):
 		get_tree().reload_current_scene()
 
 func _spawn_entry_by_type():
-	"""Spawn entry based on map settings - corridor for Lab, one_cube for others"""
+	"""Spawn entry based on map settings - corridor for Lab, one_cube for others, I for two cubes"""
 	var enter_type = "one_cube"  # Default
 
 	# Get enter_type from map settings
@@ -101,6 +101,24 @@ func _spawn_entry_by_type():
 	var instance: Node3D
 	if enter_type == "corridor":
 		instance = CORRIDOR_SCENE.instantiate()
+		instance.position = Vector3.ZERO
+	elif enter_type == "I" or enter_type == "i":
+		# Create two cubes: one default, one in +X direction
+		instance = Node3D.new()
+		instance.name = "ActiveEntry"
+		
+		# First cube at default position
+		var cube1 = ONE_CUBE_ENTRY.instantiate()
+		cube1.position = Vector3(0, 0, -1)
+		cube1.name = "Cube1"
+		instance.add_child(cube1)
+		
+		# Second cube in +X direction
+		var cube2 = ONE_CUBE_ENTRY.instantiate()
+		cube2.position = Vector3(1, 0, -1)  # +1 meter in X direction
+		cube2.name = "Cube2"
+		instance.add_child(cube2)
+		
 		instance.position = Vector3.ZERO
 	else:
 		instance = ONE_CUBE_ENTRY.instantiate()

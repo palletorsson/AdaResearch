@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu6cdani6dk22"]
+
+[ext_resource type="Script" uid="uid://ite22i0qrnn2" path="res://commons/primitives/shapes_test.gd" id="1_2wtbx"]
+
+[node name="shapes" type="Node3D"]
+script = ExtResource("1_2wtbx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.86230165, 0.506395, 0, -0.506395, 0.86230165, 8.592138, 3.9669018, 13.90279)

@@ -11,16 +11,18 @@ func _init() -> void:
 	# Target: Diagonal cross (X shape) in ZY plane (vertical, facing player)
 	line_definitions = [
 		{
-			"start_pos": Vector3(-0.2, 0.15, 0),    # Left end of top horizontal line (15cm above center)
-			"end_pos": Vector3(0.2, 0.15, 0),       # Right end of top horizontal line
-			"target_start": Vector3(0, 0.2, -0.2),  # a: Top-back diagonal
-			"target_end": Vector3(0, -0.2, 0.2)     # b: Bottom-front diagonal (forms \ line)
+			# Line 1: Horizontal line, in front of puzzle, top
+			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
+			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
+			"target_start": Vector3(0, 0.2, -0.2),       # a: Top-back diagonal
+			"target_end": Vector3(0, -0.2, 0.2)          # b: Bottom-front diagonal (forms \ line)
 		},
 		{
-			"start_pos": Vector3(-0.2, -0.15, 0),   # Left end of bottom horizontal line (15cm below center)
-			"end_pos": Vector3(0.2, -0.15, 0),      # Right end of bottom horizontal line
-			"target_start": Vector3(0, -0.2, -0.2), # c: Bottom-back diagonal
-			"target_end": Vector3(0, 0.2, 0.2)      # d: Top-front diagonal (forms / line)
+			# Line 2: Horizontal line, in front of puzzle, bottom
+			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
+			"target_start": Vector3(0, -0.2, -0.2),      # c: Bottom-back diagonal
+			"target_end": Vector3(0, 0.2, 0.2)           # d: Top-front diagonal (forms / line)
 		}
 	]
 	
@@ -36,3 +38,12 @@ func _ready() -> void:
 	print("  Top line (reddish): y=+0.15m, targets a->b")
 	print("  Bottom line (bluish): y=-0.15m, targets c->d")
 	print("  Target: X cross formation in ZY plane (vertical, facing player)")
+
+func _complete_puzzle() -> void:
+	# Hide logic display instead of success label if needed
+	# But for now, let's keep success_label behavior from base and just hide the display
+	var display = get_node_or_null("CategoryLogicDisplay")
+	if display:
+		display.visible = false
+		
+	super._complete_puzzle()

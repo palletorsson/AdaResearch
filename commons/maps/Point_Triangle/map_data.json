@@ -1,7 +1,8 @@
 {
 	"map_info": {
 		"name": "Triangle",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"lookup_name": "Point_Triangle",			
+		"description": "The triangle is the first figure that produces a surface.With three points, a boundary is closed and an interior appears. Unlike the line, which only connects, the triangle defines an area and establishes orientation: front and back, inside and outside.",
 		"manual_file": "res://commons/context/clipboard/tutorial_text/triangle_axioms.md",
 		"version": "1.0",
 		"format": "json",
@@ -32,11 +33,11 @@
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"],
+			["2", "2", "1", "1", "1", "2", "2"],
+			["1", "1", "2", "1", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],			
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "0", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1"]		
 		],
 		"utilities": [
@@ -46,17 +47,18 @@
 			[" ", " ", " ", "la:triangle", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t", " ", "", " "]
+			[" ", " ", " ", " ", " ", " ", " "],			
+			[" ", " ", " ", "t", " ", " ", " "]
 		],
 		"interactables": [
 			["", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "", " ", " ", " "],
-			[" ", " ", " ", "triangle_line_puzzle", " ", " ", " "],
-			[" ", " ", " ", "triangle", " ", " ", " "],
+			[" ", " ", " ", "triangle_line_puzzle:0:0:0#fillhole:remove", " ", " ", " "],
+			[" ", " ", "", "triangle", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
+			[" ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "triangleprofiles", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", " ", "triangleprofiles:0:0:0.5", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {

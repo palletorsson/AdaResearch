@@ -1,48 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgjmmu8itghpj"]
+[gd_scene load_steps=4 format=3 uid="uid://grab_tetrahedron_001"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_tav2s"]
-[ext_resource type="Script" uid="uid://dcbql4hdxn8w7" path="res://commons/primitives/point/grab_sphere.gd" id="2_bu8fj"]
-[ext_resource type="Shader" uid="uid://o8yneg8743my" path="res://commons/resourses/shaders/pimp_shader.gdshader" id="3_bu8fj"]
-[ext_resource type="PackedScene" uid="uid://byuwcdrdcjojv" path="res://commons/primitives/tetrahedron/tetrahedron.tscn" id="3_tav2s"]
-[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="4_judvt"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/tetrahedron/grab_tetrahedron.gd" id="2_grab_tetrahedron"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nukvf"]
-albedo_color = Color(0, 1, 1, 1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tetrahedron"]
+points = PackedVector3Array(0.6, 0.6, 0.6, 0.6, -0.6, -0.6, -0.6, 0.6, -0.6, -0.6, -0.6, 0.6)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_blybu"]
-radius = 0.1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_35noi"]
-render_priority = 0
-shader = ExtResource("3_bu8fj")
-shader_parameter/amplitude = 0.595
-shader_parameter/frequency = 6.0
-shader_parameter/speed = 0.0
-shader_parameter/base_color = Color(0.5, 0.2, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_35noi"]
-material = SubResource("ShaderMaterial_35noi")
-radial_segments = 7
-rings = 7
-
-[node name="GrabTetrahedron" instance=ExtResource("1_tav2s")]
-freeze = true
-script = ExtResource("2_bu8fj")
-alternate_material = SubResource("StandardMaterial3D_nukvf")
-alter_freeze = false
-glow_color = Color(1, 0.6, 1, 1)
-glow_emission_energy = 2.0
-pickup_sound_volume_db = -6.0
-ranged_grab_method = 0
-second_hand_grab = 2
+[node name="GrabTetrahedron" instance=ExtResource("1_pickable")]
+script = ExtResource("2_grab_tetrahedron")
+alternate_material = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+base_color = Color(1, 0, 1, 1)
+tetrahedron_scale = 0.6
 
 [node name="CollisionShape3D" parent="." index="0"]
-shape = SubResource("SphereShape3D_blybu")
+shape = SubResource("ConvexPolygonShape3D_tetrahedron")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0303633, 0, 0)
-mesh = SubResource("SphereMesh_35noi")
 
-[node name="Tetrahedron" parent="MeshInstance3D" index="0" instance=ExtResource("3_tav2s")]
-
-[node name="HighlightRing" parent="." index="2" instance=ExtResource("4_judvt")]
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]

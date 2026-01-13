@@ -80,7 +80,9 @@ static func _execute_action(node: Node, action: String) -> bool:
 			if "visible" in node:
 				node.visible = true
 				node.show()
-				print("  - '%s': visible = true" % node.name)
+				# Re-enable collision shapes
+				_set_collision_enabled(node, true)
+				print("  - '%s': visible = true (collisions enabled)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': No 'visible' property (action: reveal)" % node.name)
@@ -90,7 +92,9 @@ static func _execute_action(node: Node, action: String) -> bool:
 			if "visible" in node:
 				node.visible = false
 				node.hide()
-				print("  - '%s': visible = false" % node.name)
+				# Disable collision shapes to prevent invisible collisions
+				_set_collision_enabled(node, false)
+				print("  - '%s': visible = false (collisions disabled)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': No 'visible' property (action: hide)" % node.name)
@@ -133,6 +137,17 @@ static func _execute_action(node: Node, action: String) -> bool:
 			else:
 				push_warning("  - '%s': Not a RigidBody3D (action: disable_physics)" % node.name)
 				return false
+				
+		"shrink_and_remove":
+			print("  - '%s': scaling down and removing" % node.name)
+			if "scale" in node:
+				var tween = node.create_tween()
+				tween.tween_property(node, "scale", Vector3.ZERO, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+				tween.tween_callback(node.queue_free)
+				return true
+			else:
+				push_warning("  - '%s': No 'scale' property (action: shrink_and_remove)" % node.name)
+				return false
 		
 		_:
 			push_warning("  - '%s': Unknown action '%s'" % [node.name, action])
@@ -160,3 +175,25 @@ static func debug_print_tags() -> void:
 				print("    - %s" % node.name)
 			else:
 				print("    - [INVALID]")
+
+## Helper: Enable/disable collision shapes recursively
+static func _set_collision_enabled(node: Node, enabled: bool) -> void:
+	# Handle CollisionShape3D
+	if node is CollisionShape3D:
+		node.disabled = not enabled
+	
+	# Handle CollisionShape2D
+	if node is CollisionShape2D:
+		node.disabled = not enabled
+	
+	# Handle CollisionPolygon3D
+	if node is CollisionPolygon3D:
+		node.disabled = not enabled
+	
+	# Handle CollisionPolygon2D
+	if node is CollisionPolygon2D:
+		node.disabled = not enabled
+	
+	# Recurse through children
+	for child in node.get_children():
+		_set_collision_enabled(child, enabled)

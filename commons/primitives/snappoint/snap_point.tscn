@@ -9,7 +9,7 @@
 albedo_color = Color(1, 0.8, 0.3, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_snap"]
-radius = 0.0455009
+radius = 0.09
 
 [node name="SnapPoint" instance=ExtResource("1_snap")]
 freeze = true
@@ -40,6 +40,7 @@ shape = SubResource("SphereShape3D_snap")
 
 [node name="Sphere" type="Node3D" parent="MeshInstance3D" index="0"]
 script = ExtResource("3_snap")
+radius = 0.018
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("4_snap")]
 

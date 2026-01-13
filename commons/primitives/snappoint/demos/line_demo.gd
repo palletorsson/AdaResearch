@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var manager = $SnapConnectionManager
-@onready var label = $InstructionLabel
+@onready var logic_display = $CategoryLogicDisplay
 
 func _ready() -> void:
 	if manager:
@@ -9,11 +9,11 @@ func _ready() -> void:
 		manager.connection_broken.connect(_on_connection_broken)
 
 func _on_connection_created(_point_a, _point_b, _line) -> void:
-	# Hide instruction text when a connection is made
-	if label:
-		label.visible = false
+	# Hide instruction display when a connection is made
+	if logic_display:
+		logic_display.visible = false
 
 func _on_connection_broken(_point_a, _point_b) -> void:
-	# Show instruction text again if connection is broken
-	if label:
-		label.visible = true
+	# Show instruction display again if connection is broken
+	if logic_display:
+		logic_display.visible = true

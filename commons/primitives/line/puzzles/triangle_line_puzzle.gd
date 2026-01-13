@@ -14,22 +14,25 @@ func _init() -> void:
 	
 	line_definitions = [
 		{
-			"start_pos": Vector3(-0.25, 0.2, 0),     # Line 1: Top horizontal
-			"end_pos": Vector3(0.25, 0.2, 0),
-			"target_start": Vector3(0, -0.173, -0.2),  # a: Bottom-left
-			"target_end": Vector3(0, -0.173, 0.2)      # b: Bottom-right (base of triangle)
+			# Line 1: Horizontal line, in front of puzzle, top
+			"start_pos": Vector3(0.2, -0.2, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.2, 0.15),          # Front end
+			"target_start": Vector3(0, -0.173, -0.2),     # a: Bottom-left
+			"target_end": Vector3(0, -0.173, 0.2)         # b: Bottom-right (base of triangle)
 		},
 		{
-			"start_pos": Vector3(-0.25, 0, 0),       # Line 2: Middle horizontal
-			"end_pos": Vector3(0.25, 0, 0),
-			"target_start": Vector3(0, -0.173, -0.2),  # c: Bottom-left (reuse)
-			"target_end": Vector3(0, 0.173, 0)         # d: Top apex (left side)
+			# Line 2: Horizontal line, in front of puzzle, middle
+			"start_pos": Vector3(0.2, -0.3, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.3, 0.15),          # Front end
+			"target_start": Vector3(0, -0.173, -0.2),     # c: Bottom-left (reuse)
+			"target_end": Vector3(0, 0.173, 0)            # d: Top apex (left side)
 		},
 		{
-			"start_pos": Vector3(-0.25, -0.2, 0),    # Line 3: Bottom horizontal
-			"end_pos": Vector3(0.25, -0.2, 0),
-			"target_start": Vector3(0, -0.173, 0.2),   # e: Bottom-right (reuse)
-			"target_end": Vector3(0, 0.173, 0)         # f: Top apex (right side)
+			# Line 3: Horizontal line, in front of puzzle, bottom
+			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
+			"target_start": Vector3(0, -0.173, 0.2),      # e: Bottom-right (reuse)
+			"target_end": Vector3(0, 0.173, 0)            # f: Top apex (right side)
 		}
 	]
 	
@@ -45,4 +48,13 @@ func _ready() -> void:
 	print("  Line 1: y=+0.2m, targets a->b (base)")
 	print("  Line 2: y=0.0m, targets c->d (left side)")
 	print("  Line 3: y=-0.2m, targets e->f (right side)")
+	print("  Line 3: y=-0.2m, targets e->f (right side)")
 	print("  Target: Equilateral triangle in ZY plane")
+
+func _complete_puzzle() -> void:
+	# Hide logic display if needed
+	var display = get_node_or_null("CategoryLogicDisplay")
+	if display:
+		display.visible = false
+		
+	super._complete_puzzle()

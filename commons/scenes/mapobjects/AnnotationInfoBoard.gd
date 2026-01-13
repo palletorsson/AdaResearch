@@ -22,6 +22,8 @@ class_name AnnotationInfoBoard
 
 # Current map info
 var current_map_name: String = ""
+var current_lookup_name: String = ""
+var current_map_id: String = ""
 var current_description: String = ""
 var current_metadata: Dictionary = {}
 
@@ -41,8 +43,6 @@ func _ready():
 	# Connect to GameManager for Health updates if available
 	if GameManager and GameManager.has_signal("health_updated"):
 		GameManager.health_updated.connect(_on_health_updated_signal)
-		# Initial update handled by _update_completion_status later, but can force here too
-		# but _delayed_initialization calls update_info_board which calls _update_completion_status
 
 	
 	# Delay initialization to allow utilities to be placed first
@@ -89,12 +89,24 @@ func _load_sequence_data():
 	# Find the specific sequence
 	if sequences.has(sequence_name):
 		var sequence = sequences[sequence_name]
-		sequence_data = sequence.duplicate()
+		sequence_data = sequence.duplicate(true)  # Deep copy to preserve array types
 		sequence_data["sequence_name"] = sequence_name
+		
+		# Ensure maps array is properly typed and accessible
+		if sequence.has("maps"):
+			var maps_array = sequence["maps"]
+			# Convert to Array[String] if needed to ensure type consistency
+			var typed_maps: Array[String] = []
+			for map_id in maps_array:
+				typed_maps.append(str(map_id).strip_edges())  # Strip whitespace
+			sequence_data["maps"] = typed_maps
+			print("AnnotationInfoBoard: Loaded %d maps from sequence: %s" % [typed_maps.size(), typed_maps])
+		else:
+			sequence_data["maps"] = []
 		
 		# Map index will be calculated in _update_info_board based on current map
 		sequence_data["map_index"] = 0 
-		sequence_data["total_maps"] = sequence.get("maps", []).size()
+		sequence_data["total_maps"] = sequence_data["maps"].size()
 		print("AnnotationInfoBoard: ✅ Loaded sequence data for: " + sequence_name)
 		
 		# Also load current map info so we can display both sequence and map details
@@ -119,6 +131,7 @@ func _load_current_map_info_for_display():
 			if data_component.json_loader and data_component.json_loader.map_data:
 				var map_info = data_component.json_loader.map_data.get("map_info", {})
 				current_map_name = map_info.get("name", "Unknown Map")
+				current_lookup_name = map_info.get("lookup_name", "")
 				current_description = map_info.get("description", "No description available")
 				current_metadata = map_info.get("metadata", {})
 				
@@ -127,6 +140,7 @@ func _load_current_map_info_for_display():
 				# Fallback to metadata method
 				var metadata = data_component.get_map_metadata()
 				current_map_name = metadata.get("name", "Unknown Map")
+				current_lookup_name = metadata.get("lookup_name", "")
 				current_description = metadata.get("description", "No description available")
 				current_metadata = metadata
 				print("AnnotationInfoBoard: Loaded current map info from metadata fallback")
@@ -189,6 +203,7 @@ func _load_current_map_info(grid_system):
 	if data_component.json_loader and data_component.json_loader.map_data:
 		var map_info = data_component.json_loader.map_data.get("map_info", {})
 		current_map_name = map_info.get("name", "Unknown Map")
+		current_lookup_name = map_info.get("lookup_name", "")
 		current_description = map_info.get("description", "No description available")
 		current_metadata = map_info.get("metadata", {})
 		
@@ -198,6 +213,7 @@ func _load_current_map_info(grid_system):
 		# Fallback to metadata method
 		var metadata = data_component.get_map_metadata()
 		current_map_name = metadata.get("name", "Unknown Map")
+		current_lookup_name = metadata.get("lookup_name", "")
 		current_description = metadata.get("description", "No description available")
 		current_metadata = metadata
 		print("AnnotationInfoBoard: Loaded from metadata fallback")
@@ -209,39 +225,72 @@ func _update_info_board():
 	"""Update the info board with current map information"""
 	print("DEBUG INFOBOARD: Current Map: '%s'" % current_map_name)
 	
-	# If sequence not explicitly set, try to find one that contains this map
-	if sequence_data.is_empty() and MapProgressionManager:
-		var check_id = MapProgressionManager.current_map
-		if check_id.is_empty() and grid_system_ref: 
-			# Try to get from grid system if manager is empty (e.g. direct scene load)
-			if "map_name" in grid_system_ref:
-				check_id = grid_system_ref.map_name
-			elif "current_map_name" in grid_system_ref: 
-				check_id = grid_system_ref.current_map_name
+	# ALWAYS try to determine the true Map ID (filename)
+	var check_id = MapProgressionManager.current_map if MapProgressionManager else ""
+	
+	if check_id.is_empty() and grid_system_ref: 
+		# Try to get from grid system if manager is empty (e.g. direct scene load)
+		var gs_map_name = grid_system_ref.get("map_name")
+		if gs_map_name:
+			check_id = gs_map_name
+			print("AnnotationInfoBoard: Got ID '%s' from GridSystem.map_name" % check_id)
+		elif "current_map_name" in grid_system_ref:
+			check_id = grid_system_ref.current_map_name
+			print("AnnotationInfoBoard: Got ID '%s' from GridSystem.current_map_name" % check_id)
 		
-		# Fallback: Get from scene filename
+		# If GridSystem property failed, try DataComponent (MOST RELIABLE)
 		if check_id.is_empty():
-			var scene_path = get_tree().current_scene.scene_file_path
-			if not scene_path.is_empty():
-				check_id = scene_path.get_file().get_basename()
-				print("AnnotationInfoBoard: Extracted ID '%s' from scene path" % check_id)
-		
-		# If we still don't have an ID, we can't strict match
-		
-		if not check_id.is_empty():
-			print("AnnotationInfoBoard: Auto-detecting sequence for Map ID: '%s'" % check_id)
+			var data_comp = grid_system_ref.get_data_component()
+			if data_comp and data_comp.has_method("get_current_map_name"):
+				var dc_name = data_comp.get_current_map_name()
+				if not dc_name.is_empty():
+					check_id = dc_name
+					print("AnnotationInfoBoard: Got ID '%s' from GridDataComponent.get_current_map_name()" % check_id)
+	
+	# Fallback: Get from scene filename
+	if check_id.is_empty():
+		var scene_path = get_tree().current_scene.scene_file_path
+		if not scene_path.is_empty():
+			check_id = scene_path.get_file().get_basename()
+			print("AnnotationInfoBoard: Extracted ID '%s' from scene path" % check_id)
+			
+	if not check_id.is_empty():
+		current_map_id = str(check_id).strip_edges() # Store valid ID for index lookup (normalized)
+		print("AnnotationInfoBoard: Stored normalized map ID: '%s'" % current_map_id)
+	
+	# 1. Primary Check: current_map_id
+	var candidates = []
+	if not current_map_id.is_empty():
+		candidates.append(current_map_id)
+		# candidates.append(str(current_map_id).strip_edges()) # Duplicate if normalized above
+
+	# 2. Secondary Check: Lookup Name (Explicit Override)
+	if not current_lookup_name.is_empty():
+		candidates.append(current_lookup_name)
+		print("AnnotationInfoBoard: Added lookup_name candidate: '%s'" % current_lookup_name)
+
+	
+	# 2. Secondary Check: Display Name -> ID conversion (Point Zero -> Point_Zero)
+	if not current_map_name.is_empty():
+		var underscores = current_map_name.replace(" ", "_")
+		candidates.append(underscores)
+		# Also try stripping edges from name
+		candidates.append(current_map_name.strip_edges())
+
+	if sequence_data.is_empty() and MapProgressionManager:
+		for cand in candidates:
+			if cand.is_empty(): continue
+			
 			for seq_id in MapProgressionManager.sequences:
 				var seq = MapProgressionManager.sequences[seq_id]
-				if seq.has("maps") and check_id in seq.maps:
-					print("AnnotationInfoBoard: Auto-detected sequence '%s' for map ID '%s'" % [seq_id, check_id])
-					sequence_name = seq_id
-					_load_sequence_data() # Load it
-					break
-		else:
-			print("AnnotationInfoBoard: Could not determine Map ID for sequence detection. Using Display Name '%s'" % current_map_name)
-				
-	if sequence_data.is_empty():
-		print("DEBUG INFOBOARD: Still no sequence data found. sequence_name='%s'" % sequence_name)
+				if seq.has("maps"):
+					if cand in seq.maps:
+						sequence_name = seq_id
+						current_map_id = cand # Update to the working ID
+						_load_sequence_data()
+						break
+			if not sequence_data.is_empty():
+				break
 
 	# Use sequence data if available, otherwise fall back to map data
 	if not sequence_data.is_empty():
@@ -253,11 +302,26 @@ func _update_info_board_with_sequence_data():
 	"""Update info board using sequence data from MapProgressionManager"""
 	var sequence_name = sequence_data.get("sequence_name", "Unknown")
 	
-	# Calculate correct map index based on current map name
+	# Calculate correct map index based on current map ID
 	var map_index = 0
 	if sequence_data.has("maps"):
 		var maps = sequence_data["maps"]
-		var found = maps.find(current_map_name)
+		var found = maps.find(current_map_id)
+		
+		# If exact ID not found, try the fallback candidates again within the known sequence
+		if found == -1:
+			var candidates = []
+			if not current_lookup_name.is_empty():
+				candidates.append(current_lookup_name)
+			candidates.append(current_map_name.replace(" ", "_"))
+			candidates.append(current_map_name)
+			
+			for cand in candidates:
+				found = maps.find(cand)
+				if found != -1:
+					print("AnnotationInfoBoard: Found map ID '%s' at index %d via fallback search" % [cand, found])
+					break
+		
 		if found != -1:
 			map_index = found
 			
@@ -268,7 +332,7 @@ func _update_info_board_with_sequence_data():
 		# Use 0-based indexing as requested (00, 01, 02...)
 		level_number_label.text = "%02d" % map_index
 	else:
-		level_number_label.text = "??"
+		level_number_label.text = map_index
 	
 	# Update level ID (sequence/progress format + current map name)
 	# Also using 0-based index for consistency in the ID string
@@ -277,28 +341,18 @@ func _update_info_board_with_sequence_data():
 		level_id_text += " - %s" % current_map_name
 	level_id_label.text = level_id_text
 	
-	# Update title (use sequence name + current map name)
-	var title_text = sequence_data.get("name", "Unknown Sequence")
+	# Update title (use map name only)
 	if not current_map_name.is_empty():
-		title_text += " - %s" % current_map_name
-	title_label.text = title_text
+		title_label.text = current_map_name
+	else:
+		title_label.text = sequence_data.get("name", "Unknown Sequence")
 	
-	# Update summary (use sequence description + objectives + current map info)
-	var summary_text = sequence_data.get("description", "No description available")
-	
-	# Add current map description if available
+	# Update summary (prioritize current map info, no prefixes)
 	if not current_description.is_empty():
-		summary_text += "\n\nCurrent Map: %s" % current_description
-	
-	# User requested to hide objectives
-	# if show_metadata and sequence_data.has("learning_objectives"):
-	# 	var objectives = sequence_data.get("learning_objectives", [])
-	# 	if objectives is Array and objectives.size() > 0:
-	# 		summary_text += "\n\nLearning Objectives:"
-	# 		for obj in objectives:
-	# 			summary_text += "\n• %s" % obj
-	
-	summary_label.text = summary_text
+		summary_label.text = current_description
+	else:
+		# Fallback to sequence description only if map has no description
+		summary_label.text = sequence_data.get("description", "No description available")
 	
 	# Update barcode (decorative) - use combination of sequence and map name
 	var barcode_text = sequence_name
@@ -308,8 +362,6 @@ func _update_info_board_with_sequence_data():
 	
 	# Update health to show completion status
 	_update_completion_status()
-	
-	print("AnnotationInfoBoard: ✅ Updated info board with sequence data")
 
 func _update_info_board_with_map_data():
 	"""Update info board using map data from map_data.json"""
@@ -317,10 +369,10 @@ func _update_info_board_with_map_data():
 	var level_number = _extract_level_number(current_map_name)
 	
 	# Update level number
-	if show_level_number and level_number >= 0:
+	if show_level_number:
 		level_number_label.text = "%02d" % level_number
 	else:
-		level_number_label.text = "??"
+		level_number_label.text = str(level_number)
 	
 	# Update level ID (category/name format)
 	var category = _get_map_category(current_map_name)
@@ -341,8 +393,6 @@ func _update_info_board_with_map_data():
 	
 	# Update health to show completion status
 	_update_completion_status()
-	
-	print("AnnotationInfoBoard: ✅ Updated info board with map data")
 
 func _extract_level_number(map_name: String) -> int:
 	"""Extract level number from map name"""
@@ -353,15 +403,6 @@ func _extract_level_number(map_name: String) -> int:
 	
 	if result:
 		return int(result.get_string())
-	
-	# Fallback for tutorial sequence
-	if map_name.begins_with("Tutorial"):
-		if "Row" in map_name:
-			return 1
-		elif "2D" in map_name:
-			return 2
-		elif "Disco" in map_name:
-			return 3
 	
 	return -1
 

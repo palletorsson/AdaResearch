@@ -5,6 +5,19 @@ extends Node3D
 @export var grid_size: int = 5  # Number of grid cells (will have grid_size+1 lines in each direction)
 @export var cell_spacing: float = 1.0  # Distance between grid lines in meters
 @export var trace_scale: float = 5.0 # Scale factor for saved traces
+@export var shadow_snap_subdivisions: int = 4 # How many snap points per cell for the shadow trace (higher = smoother)
+
+@export var trace_height: float = 0.5 # Elevation above grid
+@export var rotation_speed: float = 10.0 # Degrees per second
+
+var _rotating_instances: Array[Node3D] = []
+
+func _process(delta: float) -> void:
+	for instance in _rotating_instances:
+		if is_instance_valid(instance):
+			instance.rotate_y(deg_to_rad(rotation_speed * delta))
+		else:
+			_rotating_instances.erase(instance)
 
 func _ready():
 	print("GridLines: _ready called")
@@ -50,7 +63,9 @@ func _create_trace_mesh(points: Array) -> void:
 	var instance = MeshInstance3D.new()
 	instance.mesh = mesh
 	instance.name = "SavedTrace"
+	instance.position.y = trace_height
 	add_child(instance)
+	_rotating_instances.append(instance)
 	
 	var mat = StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -76,8 +91,9 @@ func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -
 	
 	for p in points:
 		var scaled = (p - center) * scale_factor
-		# Snap to grid
-		var snapped = scaled.snapped(Vector3.ONE * cell_spacing)
+		# Snap to grid (with subdivisions)
+		var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
+		var snapped = scaled.snapped(Vector3.ONE * snap_step)
 		
 		# Filter duplicates
 		if snapped.distance_squared_to(last_snapped) > 0.001:
@@ -91,7 +107,9 @@ func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -
 	var instance = MeshInstance3D.new()
 	instance.name = "ShadowTrace"
 	instance.mesh = mesh
+	instance.position.y = trace_height
 	add_child(instance)
+	_rotating_instances.append(instance)
 	
 	# Green Emissive Material (matching GrabSpherePointSnap)
 	var mat = StandardMaterial3D.new()
@@ -105,8 +123,9 @@ func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -
 	
 	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for p in shadow_points:
-		# Lift slightly to avoid z-fighting
-		mesh.surface_add_vertex(p + Vector3(0, 0.03, 0))
+		# Lift slightly to avoid z-fighting (relative to instance position)
+		# Since instance is already at trace_height, we just add a tiny bit more or 0
+		mesh.surface_add_vertex(p) 
 	mesh.surface_end()
 	
 	instance.scale = Vector3.ZERO

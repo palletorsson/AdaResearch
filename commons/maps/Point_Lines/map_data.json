@@ -1,6 +1,7 @@
 {
 	"map_info": {
 		"name": "Lines",
+		"lookup_name": "Point_Lines", 
 		"description": "Multiplies lines into context: parallels, crossings, and grids. This map shows how lines interact with each other, producing orientation, metric frameworks, and initial systems of measure. It is where discrete relations begin to behave as a network rather than a sequence.",
 		"description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
 		"version": "1.0",
@@ -39,49 +40,50 @@
 		"structure": [
 			["1", "1", "1", "1", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
-			["1", "2", "1", "2", "1", "2", "1"],
+			["1", "1", "1", "2", "1", "1", "1"],
 			["1", "1", "1", "1", "1", "1", "1"],
 			["2", "2", "2", "1", "2", "2", "2"],
-			["0", "1", "1", "1", "1", "1", "0"],
-			["0", "0", "1", "1", "1", "0", "0"],
-			["0", "0", "1", "0", "1", "0", "0"],
-			["0", "0", "1", "1", "1", "0", "0"],
+			["1", "1", "1", "1", "1", "1", "0"],
+			["1", "1", "1", "1", "1", "1", "1"],
+			["1", "2", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "1"],			
 
 		],
 		"utilities": [
-			["m:0:3:-1:0.1", " ", " ", " ", " ", " ", " "],
+			["m:0:3:-1:0.1", " ", " ", " ", " ", " ", "an:-90"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "  ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "t", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "3t:lines", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "3t:lines", " ", " ", " "]
+			[" ", " ", " ", "", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "parallel_line_puzzle", " ", "cross_line_puzzle:0:0:0#fillhole:remove", " ", "parallel_line_puzzle", " "],
+			[" ", "", " ", "parallel_line_puzzle:0:0:0#fillhole:remove", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " "],
+			["grab_line_drawer", "grab_line_pusher", "grab_line", "cube_scene:0:0:0.90#group:fillhole", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "line", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "line_builder_3d:0:1:0.8", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "scale_lines:0:1", " ", " ", " "],
-			[" ", " ", "line_builder_3d:0:1:0.8", " ", "VectorBasics", " ", " "],
+			[" ", "perspective_lines:0:2", " ", "scale_lines:0:1", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "perspective_lines", "grid_lines", " ", " ", " ", " "]
+			[" ", " ", " ", " ", " ", " ", "VectorBasics"],
+			[" ", " ", "grid_lines", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
@@ -110,6 +112,7 @@
 		}
 	},
 	"settings": {
+		"enter_type": "I",		
 		"cube_size": 1.0,
 		"gutter": 0.0,
 		"show_grid": true,

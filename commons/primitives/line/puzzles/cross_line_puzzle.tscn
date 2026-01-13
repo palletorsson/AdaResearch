@@ -1,19 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc5jq4ytxbmf3"]
+[gd_scene load_steps=3 format=3 uid="uid://cc5jq4ytxbmf3"]
 
 [ext_resource type="Script" uid="uid://dtlnr7aye24q" path="res://commons/primitives/line/puzzles/cross_line_puzzle.gd" id="1_cross"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="2_display"]
 
 [node name="CrossLinePuzzle" type="Node3D"]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 script = ExtResource("1_cross")
 
-[node name="InstructionLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-pixel_size = 0.001
-billboard = 1
-text = "Drag endpoints to YELLOW/ORANGE crosses
-Match blue ghost guides
-Snap within 15cm - Lines turn GREEN!"
-font_size = 26
-outline_size = 8
+[node name="CategoryLogicDisplay" parent="." instance=ExtResource("2_display")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 0)
+equation = ["line", "plus", "line", "equals", "cross"]
 
 [node name="GhostGuides" type="Node3D" parent="."]

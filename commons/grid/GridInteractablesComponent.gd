@@ -527,10 +527,12 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		print("    Applied map palette: '%s'" % current_palette)
 	
 	# Handle tag system registration
-	if tag != "":
-		# Register entity with tag (e.g., cube_scene:0:0:0#group:fillhole)
+	# Only register ENTITIES (with #group:tag), not PUZZLES (with #tag:action)
+	# Puzzles set trigger_tag/trigger_action properties but don't register themselves
+	if tag != "" and trigger_action == "":
+		# This is an entity (e.g., cube_scene:0:0:0#group:fillhole)
 		TagSystem.register_tagged_node(tag, artifact_object)
-		print("    Registered artifact with tag: '%s'" % tag)
+		print("    Registered entity with tag: '%s'" % tag)
 	
 	# Handle puzzle trigger setup
 	if trigger_action != "":

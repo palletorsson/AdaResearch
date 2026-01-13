@@ -11,16 +11,18 @@ func _init() -> void:
 	# Target: + shape in ZY plane (one horizontal, one vertical, intersecting at center)
 	line_definitions = [
 		{
-			"start_pos": Vector3(-0.2, 0.15, 0),    # Left end of top horizontal line
-			"end_pos": Vector3(0.2, 0.15, 0),       # Right end of top horizontal line
-			"target_start": Vector3(0, 0, -0.2),    # a: Center-back (horizontal line in ZY)
-			"target_end": Vector3(0, 0, 0.2)        # b: Center-front (horizontal line)
+			# Line 1: Horizontal line, in front of puzzle, top
+			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
+			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
+			"target_start": Vector3(0, 0, -0.2),         # a: Center-back (horizontal line in ZY)
+			"target_end": Vector3(0, 0, 0.2)             # b: Center-front (horizontal line)
 		},
 		{
-			"start_pos": Vector3(-0.2, -0.15, 0),   # Left end of bottom horizontal line
-			"end_pos": Vector3(0.2, -0.15, 0),      # Right end of bottom horizontal line
-			"target_start": Vector3(0, -0.2, 0),    # c: Bottom-center (vertical line in ZY)
-			"target_end": Vector3(0, 0.2, 0)        # d: Top-center (vertical line)
+			# Line 2: Horizontal line, in front of puzzle, bottom
+			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
+			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
+			"target_start": Vector3(0, -0.2, 0),         # c: Bottom-center (vertical line in ZY)
+			"target_end": Vector3(0, 0.2, 0)             # d: Top-center (vertical line)
 		}
 	]
 	

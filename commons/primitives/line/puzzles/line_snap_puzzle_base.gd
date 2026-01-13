@@ -265,6 +265,9 @@ func _complete_puzzle() -> void:
 	# Play completion sound
 	_play_completion_sound()
 	
+	# Wait for 1 second before visual cleanup/action
+	await get_tree().create_timer(1.0).timeout
+	
 	# First, snap ALL lines to exact target positions and hide ALL endpoint spheres
 	for line in snap_lines:
 		if line.has_method("_hide_endpoint_spheres"):
@@ -292,9 +295,14 @@ func _complete_puzzle() -> void:
 		ghost_guides_container.visible = false
 	
 	# Trigger tag-based action if configured
-	if trigger_tag != "" and trigger_action != "":
-		print("LineSnapPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, trigger_action])
-		TagSystem.trigger_tag_action(trigger_tag, trigger_action)
+	if trigger_tag != "":
+		# Default to shrink_and_remove if action is not specified or set to remove
+		var action = trigger_action
+		if action == "" or action == "remove":
+			action = "shrink_and_remove"
+			
+		print("LineSnapPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, action])
+		TagSystem.trigger_tag_action(trigger_tag, action)
 	
 	# Show success message
 	if success_label:

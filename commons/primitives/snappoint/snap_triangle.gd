@@ -4,7 +4,7 @@ class_name SnapTriangle
 ## Triangle mesh that dynamically updates based on 3 snap point positions
 ## Maintains references to point handles - never hides or destroys them
 
-@export var triangle_color: Color = Color(0.9, 0.3, 0.7, 0.8)  # Pink with transparency
+@export var triangle_color: Color = Color(0.9, 0.3, 0.7, 0.05)  # Pink with high transparency
 @export var wireframe_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 # References to the 3 snap points
@@ -35,13 +35,18 @@ func _create_mesh_instance() -> void:
 	_mesh_instance.name = "TriangleMesh"
 	add_child(_mesh_instance)
 	
-	# Create material
-	var material = GridMaterialFactory.make(triangle_color, {
-		"wireframe_color": wireframe_color,
-		"wireframe_width": 2.0,
-		"wireframe_brightness": 2.0,
-		"double_sided": true
-	})
+	# Create transparent material using StandardMaterial3D for better transparency support
+	var material = StandardMaterial3D.new()
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = triangle_color
+	material.metallic = 0.2
+	material.roughness = 0.8
+	material.emission_enabled = true
+	material.emission = triangle_color
+	material.emission_energy_multiplier = 0.5
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Double-sided
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED  # For better transparency
+	
 	_mesh_instance.material_override = material
 
 func _process(_delta: float) -> void:
@@ -156,11 +161,15 @@ func get_centroid() -> Vector3:
 func set_triangle_color(color: Color) -> void:
 	triangle_color = color
 	if _mesh_instance:
-		var material = GridMaterialFactory.make(color, {
-			"wireframe_color": wireframe_color,
-			"wireframe_width": 2.0,
-			"wireframe_brightness": 2.0,
-			"double_sided": true
-		})
+		var material = StandardMaterial3D.new()
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.albedo_color = color
+		material.metallic = 0.2
+		material.roughness = 0.8
+		material.emission_enabled = true
+		material.emission = color
+		material.emission_energy_multiplier = 0.5
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Double-sided
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED  # For better transparency
 		_mesh_instance.material_override = material
 

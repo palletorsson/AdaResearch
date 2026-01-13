@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8j2k3l4m5n6"]
+
+[ext_resource type="Script" path="res://commons/scenes/experiments/TriangleConnectionManager.gd" id="1_manager"]
+[ext_resource type="PackedScene" uid="uid://bqxr8nt2y5wh" path="res://commons/primitives/interactivetriangle/interactivetriangle.tscn" id="2_triangle"]
+
+[node name="ConnectedTriangles" type="Node3D"]
+script = ExtResource("1_manager")
+
+[node name="TriangleLeft" parent="." instance=ExtResource("2_triangle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+sphere_size_multiplier = 0.2
+triangle_scale = 0.3
+
+[node name="TriangleCenter" parent="." instance=ExtResource("2_triangle")]
+sphere_size_multiplier = 0.2
+triangle_scale = 0.3
+
+[node name="TriangleRight" parent="." instance=ExtResource("2_triangle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+sphere_size_multiplier = 0.2
+triangle_scale = 0.3
