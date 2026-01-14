@@ -207,6 +207,7 @@
 			"description": "player_trace.",
 			"scene": "res://commons/primitives/point/player_trace.tscn"
 		},
+		
 		"point_is": {
 			"name": "point_is",
 			"lookup_name": "point_is",
@@ -286,6 +287,13 @@
 			"description": "cube_lines.",
 			"scene": "res://commons/primitives/line/cube_lines.tscn"
 		},
+		"modulor_man_demo": {
+			"name": "modulor_man_demo",
+			"lookup_name": "modulor_man_demo",
+			"description": "modulor_man_demo.",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_demo.tscn"
+		},		
+		
 		"grid_lines": {
 			"name": "grid_lines",
 			"lookup_name": "grid_lines",
@@ -982,6 +990,13 @@
 			"description": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube.",
 			"scene": "res://commons/interfaces/hand_color_controller.tscn"
 		},
+		"hand_model": {
+			"lookup_name": "hand_model",
+			"name": "hand_model",
+			"description": "hand_model.",
+			"scene": "res://commons/visualaid/hand_model/hand_model.tscn"
+		},
+		
 		"gridcolorizer": {
 			"lookup_name": "gridcolorizer",
 			"name": "gridcolorizer",

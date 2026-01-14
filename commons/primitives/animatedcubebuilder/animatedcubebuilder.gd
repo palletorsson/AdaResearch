@@ -175,7 +175,7 @@ func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
 	var material = StandardMaterial3D.new()
 	material.albedo_color = edge_color
 	material.emission_enabled = false
-	material.roughness = 0.3
+	material.roughness = 0.9
 	material.metallic = 0.0
 	mesh_instance.material_override = material
 	

@@ -5,8 +5,8 @@
 extends Node
 
 @export_group("Bobbing Settings")
-@export var bob_height: float = 0.2  # Height of the bob
-@export var bob_speed: float = 2.0   # Speed of the bob
+@export var bob_height: float = 0.4  # Height of the bob
+@export var bob_speed: float = 3.0   # Speed of the bob
 @export var auto_start: bool = true
 
 var target_node: Node3D

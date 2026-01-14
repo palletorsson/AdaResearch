@@ -20,8 +20,8 @@ const MAX_Z := 0.2
 
 var _sim_root: Node3D
 var _rockets: Array[Rocket] = []
-var _obstacles: Array[Obstacle] = []
-var _target: Target
+var _obstacles: Array[RocketObstacle] = []
+var _target: RocketTarget
 var _status_label: Label3D
 var _generation: int = 1
 var _step: int = 0

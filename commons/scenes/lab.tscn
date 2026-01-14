@@ -80,6 +80,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 8, 
 far = 40.0
 
 [node name="Label3D" parent="." index="3"]
+visible = false
 text = "Base - Lab Grid"
 
 [node name="LabGridSystem" type="Node3D" parent="." index="5"]
@@ -102,8 +103,7 @@ visible = false
 script = ExtResource("5_f6pg2")
 
 [node name="CorridorScene" parent="EntryZone" index="0" instance=ExtResource("9_gudac")]
-visible = true
-regenerate = true
+regenerate = false
 
 [node name="OneCubeEntry" parent="EntryZone" index="1" instance=ExtResource("10_ngsxs")]
 visible = false

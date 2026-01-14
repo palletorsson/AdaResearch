@@ -122,6 +122,14 @@ func _scale_world() -> void:
 
 	print("ScaleMe: World scaling to ", _original_scale * scale_amount)
 
+	# Wait for scale-up to complete, then check for collisions
+	await tween.finished
+	
+	# Check if player is stuck inside geometry after scaling up
+	if _xr_origin:
+		await get_tree().physics_frame  # Wait for physics to update
+		_ensure_player_not_stuck()
+
 	# Start timer to scale back down ONLY if auto_revert is true
 	if auto_revert:
 		_scale_timer.start(scale_duration)
@@ -171,5 +179,129 @@ func _on_scale_timer_timeout() -> void:
 	# Wait for scale-down to complete, then clean up
 	await tween.finished
 
+	# Check if player is stuck inside geometry and move to safe position
+	if _xr_origin:
+		await get_tree().physics_frame  # Wait for physics to update
+		_ensure_player_not_stuck()
+
 	# Now we can safely free the object
 	queue_free()
+
+## Ensure the player is not stuck inside geometry after scaling
+func _ensure_player_not_stuck() -> void:
+	if not _xr_origin:
+		return
+
+	var space_state = _xr_origin.get_world_3d().direct_space_state
+	var player_pos = _xr_origin.global_position
+
+	# Check multiple points to better detect if player is inside geometry
+	# Check at head, chest, and feet level
+	var check_points = [
+		player_pos + Vector3(0, 1.7, 0),  # Head height
+		player_pos + Vector3(0, 1.0, 0),  # Chest height
+		player_pos + Vector3(0, 0.1, 0),  # Feet height
+	]
+	
+	var is_stuck = false
+	var query = PhysicsShapeQueryParameters3D.new()
+	var sphere_shape = SphereShape3D.new()
+	sphere_shape.radius = 0.4  # Player collision radius (slightly larger for safety)
+	query.shape = sphere_shape
+	query.collision_mask = 1  # Check against world geometry
+	
+	# Check each point
+	for check_point in check_points:
+		query.transform = Transform3D(Basis.IDENTITY, check_point)
+		var results = space_state.intersect_shape(query, 1)
+		if results.size() > 0:
+			is_stuck = true
+			break
+	
+	if is_stuck:
+		print("ScaleMe: Player stuck inside geometry, finding safe position...")
+		_move_player_to_safe_position(space_state, player_pos)
+
+func _move_player_to_safe_position(space_state: PhysicsDirectSpaceState3D, current_pos: Vector3) -> void:
+	# Try multiple strategies to find a safe position
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.collision_mask = 1
+	
+	# Strategy 1: Try moving upward in steps to find open space
+	var test_heights = [2.0, 5.0, 10.0, 20.0, 50.0]
+	var safe_pos: Vector3 = current_pos
+	var found_safe = false
+	
+	for height_offset in test_heights:
+		var test_pos = current_pos + Vector3(0, height_offset, 0)
+		
+		# Check if this position is clear using shape query
+		var query = PhysicsShapeQueryParameters3D.new()
+		var sphere_shape = SphereShape3D.new()
+		sphere_shape.radius = 0.5
+		query.shape = sphere_shape
+		query.transform = Transform3D(Basis.IDENTITY, test_pos)
+		query.collision_mask = 1
+		
+		var results = space_state.intersect_shape(query, 1)
+		if results.size() == 0:
+			# This position is clear, now find ground below it
+			ray_query.from = test_pos + Vector3(0, 5.0, 0)
+			ray_query.to = test_pos + Vector3(0, -100.0, 0)
+			
+			var down_result = space_state.intersect_ray(ray_query)
+			if down_result:
+				# Found ground, place player slightly above it
+				safe_pos = down_result.position + Vector3(0, 0.2, 0)
+				found_safe = true
+				break
+			else:
+				# No ground, but position is clear - use it
+				safe_pos = test_pos
+				found_safe = true
+				break
+	
+	# Strategy 2: If upward search failed, try raycasting in multiple directions
+	if not found_safe:
+		var directions = [
+			Vector3(0, 1, 0),    # Up
+			Vector3(1, 0, 0),    # Right
+			Vector3(-1, 0, 0),   # Left
+			Vector3(0, 0, 1),    # Forward
+			Vector3(0, 0, -1),   # Back
+			Vector3(0.7, 0.7, 0), # Up-right
+			Vector3(-0.7, 0.7, 0), # Up-left
+		]
+		
+		for dir in directions:
+			ray_query.from = current_pos
+			ray_query.to = current_pos + dir.normalized() * 20.0
+			
+			var result = space_state.intersect_ray(ray_query)
+			if result:
+				# Found a surface, try position just before it
+				var surface_pos = result.position
+				var safe_candidate = surface_pos - dir.normalized() * 1.0
+				
+				# Verify this position is clear
+				var query = PhysicsShapeQueryParameters3D.new()
+				var sphere_shape = SphereShape3D.new()
+				sphere_shape.radius = 0.5
+				query.shape = sphere_shape
+				query.transform = Transform3D(Basis.IDENTITY, safe_candidate)
+				query.collision_mask = 1
+				
+				var results = space_state.intersect_shape(query, 1)
+				if results.size() == 0:
+					safe_pos = safe_candidate
+					found_safe = true
+					break
+	
+	# Strategy 3: Last resort - move significantly upward
+	if not found_safe:
+		safe_pos = current_pos + Vector3(0, 10.0, 0)
+		print("ScaleMe: Warning - using fallback position")
+	
+	# Apply the safe position
+	_xr_origin.global_position = safe_pos
+	print("ScaleMe: Moved player to safe position at ", safe_pos)

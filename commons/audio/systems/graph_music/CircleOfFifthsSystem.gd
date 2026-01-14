@@ -6,7 +6,8 @@ func _ready():
 	_build_circle_graph()
 	
 	# Start single cursor for cleaner polyphony (will fork over time)
-	active_cursors.append({"current_node": "C4", "timer": 0.0})
+	var start_agent = GraphAgent.new("C4")
+	active_agents.append(start_agent)
 
 func _build_circle_graph():
 	var notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]

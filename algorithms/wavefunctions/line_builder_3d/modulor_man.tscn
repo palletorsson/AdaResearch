@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5m8vh3nqp2rt"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man.gd" id="1"]
+[ext_resource type="Material" uid="uid://c4ykukgcxntmi" path="res://commons/resourses/shaders/line_shader.tres" id="2"]
+
+[node name="ModulorMan" type="Node3D"]
+script = ExtResource("1")
+
+[node name="LineMesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2")

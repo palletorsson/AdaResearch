@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3572lqu1prwv"]
+
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn" id="1_modulor"]
+[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="2_display"]
+
+[node name="ModulorManDemo" type="Node3D"]
+
+[node name="ModulorMan" parent="." instance=ExtResource("1_modulor")]
+
+[node name="TitleDisplay" parent="." instance=ExtResource("2_display")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+equation = ["Le Corbusier", "dash", "Modulor Man"]
+
+[node name="ProportionLabel1" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.26, 0)
+visible = false
+text = "2.26m
+Arm Raised
+(Red 226)"
+font_size = 20
+outline_size = 2
+
+[node name="ProportionLabel2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.83, 0)
+visible = false
+text = "1.83m
+Standing
+(Red 183)"
+font_size = 20
+outline_size = 2
+
+[node name="ProportionLabel3" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1.13, 0)
+visible = false
+text = "1.13m
+Navel
+(Red 113)"
+font_size = 20
+outline_size = 2
+
+[node name="LimbLabel_LowerLeg" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.22, 0)
+visible = false
+text = "Lower Leg
+0.43m
+(Blue 43)"
+font_size = 18
+outline_size = 2
+
+[node name="LimbLabel_Thigh" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.75, 0)
+visible = false
+text = "Thigh
+~0.70m"
+font_size = 18
+outline_size = 2
+
+[node name="LimbLabel_Forearm" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.3, 0)
+visible = false
+text = "Forearm
+0.43m
+(Blue 43)"
+font_size = 18
+outline_size = 2
+
+[node name="LimbLabel_UpperArm" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.55, 0)
+visible = false
+text = "Upper Arm
+0.27m
+(Blue 27)"
+font_size = 18
+outline_size = 2
+
+[node name="LimbLabel_Hand" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.95, 0)
+visible = false
+text = "Hand
+0.18m
+(Blue 18)"
+font_size = 18
+outline_size = 2
+
+[node name="LimbLabel_Foot" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.1, 0)
+visible = false
+text = "Foot
+0.27m
+(Blue 27)"
+font_size = 18
+outline_size = 2
+
+[node name="InfoLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+visible = false
+text = "Single continuous line
+Golden ratio proportions (φ ≈ 1.618)
+Red series: 226, 183, 140, 113...
+Blue series: 86, 70, 43, 27, 18..."
+font_size = 16
+outline_size = 2

@@ -26,7 +26,7 @@ func _create_position_display():
 	position_label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
 	position_label.font_size = 20
 	position_label.modulate = Color(0, 1, 0.3)  # Green
-	position_label.text = \"Waiting for position...\"
+	position_label.text = \"\"
 	position_label.outline_size = 4
 	position_label.outline_modulate = Color.BLACK
 	add_child(position_label)

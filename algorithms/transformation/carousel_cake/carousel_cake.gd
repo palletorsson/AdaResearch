@@ -13,9 +13,17 @@ extends Node3D
 @export var collision_mask: int = 1
 @export_group("Materials")
 @export var alternating_colors: bool = true
+@export var use_stripe_shader: bool = true
 @export var color_a: Color = Color(0.992, 0.323, 0.882, 1.0)  # Cake color
 @export var color_b: Color = Color(0.228, 0.867, 1.0, 1.0)  # Frosting color
+@export_subgroup("Stripe Shader Settings")
+@export var base_stripe_count: float = 12.0
+@export var stripe_width: float = 0.5
+@export var stripe_density_multiplier: float = 1.3  # Match rotation_speed_multiplier for visual sync
+@export var stripe_time_scale: float = 0.0  # Set >0 for shader animation preview
 @export var regenerate: bool = false: set = _set_regenerate
+
+const STRIPE_SHADER = preload("res://algorithms/transformation/carousel_cake/carousel_stripes.gdshader")
 
 @onready var mm_inst: MultiMeshInstance3D = MultiMeshInstance3D.new()
 var _rotation_angle: float = 0.0
@@ -49,7 +57,6 @@ func generate_carousel() -> void:
 
 	var mm := MultiMesh.new()
 	mm_inst.multimesh = mm
-	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = alternating_colors
 
 	# Validate arrays
@@ -66,12 +73,28 @@ func generate_carousel() -> void:
 	cylinder.bottom_radius = 1.0
 	cylinder.radial_segments = base_radial_segments
 
-	# Create material with vertex color support
-	var mat := StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
+	# Create material
+	var mat: Material
+	if use_stripe_shader:
+		var shader_mat := ShaderMaterial.new()
+		shader_mat.shader = STRIPE_SHADER
+		shader_mat.set_shader_parameter("color_a", color_a)
+		shader_mat.set_shader_parameter("color_b", color_b)
+		shader_mat.set_shader_parameter("base_stripe_count", base_stripe_count)
+		shader_mat.set_shader_parameter("stripe_width", stripe_width)
+		shader_mat.set_shader_parameter("stripe_density_multiplier", stripe_density_multiplier)
+		shader_mat.set_shader_parameter("time_scale", stripe_time_scale)
+		shader_mat.set_shader_parameter("layer_count", float(layer_count))
+		mat = shader_mat
+	else:
+		var std_mat := StandardMaterial3D.new()
+		std_mat.vertex_color_use_as_albedo = true
+		mat = std_mat
 	cylinder.material = mat
 
 	mm.mesh = cylinder
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_custom_data = true  # Enable custom data for layer index
 	mm.instance_count = layer_count
 
 	var cumulative_y: float = 0.0
@@ -91,8 +114,11 @@ func generate_carousel() -> void:
 
 		mm.set_instance_transform(i, transform)
 
-		# Set alternating colors
-		if alternating_colors:
+		# Set layer index as custom data for shader (x = layer index)
+		mm.set_instance_custom_data(i, Color(float(i), 0.0, 0.0, 1.0))
+
+		# Set alternating colors (only used when not using stripe shader)
+		if alternating_colors and not use_stripe_shader:
 			var use_color_a := i % 2 == 0
 			mm.set_instance_color(i, color_a if use_color_a else color_b)
 

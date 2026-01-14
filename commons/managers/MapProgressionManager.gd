@@ -249,9 +249,15 @@ func complete_map(map_name: String) -> Array[String]:
 	if map_name in completed_maps:
 		print("MapProgressionManager: Map '%s' already completed" % map_name)
 		return []
-	
+
 	print("MapProgressionManager: Completing map '%s'" % map_name)
 	completed_maps.append(map_name)
+
+	# Award XP for completing the map
+	var xp_reward := get_map_xp_reward(map_name)
+	if xp_reward > 0 and is_instance_valid(GameManager):
+		GameManager.add_points(xp_reward)
+		print("MapProgressionManager: Awarded %d XP for completing '%s'" % [xp_reward, map_name])
 	
 	# Get newly unlocked maps
 	var newly_unlocked = get_unlocked_by_completion(map_name)
@@ -403,15 +409,23 @@ func get_map_estimated_time(map_name: String) -> String:
 func get_map_prerequisites(map_name: String) -> Array[String]:
 	if not map_metadata.has(map_name):
 		return []
-	
+
 	var prerequisites = map_metadata[map_name].get("prerequisites", [])
-	
+
 	# Convert to typed array
 	var result: Array[String] = []
 	for prereq in prerequisites:
 		result.append(str(prereq))
-	
+
 	return result
+
+# Get XP reward for completing a map (default 10)
+func get_map_xp_reward(map_name: String) -> int:
+	const DEFAULT_XP_REWARD := 10
+	if not map_metadata.has(map_name):
+		return DEFAULT_XP_REWARD
+
+	return map_metadata[map_name].get("xp_reward", DEFAULT_XP_REWARD)
 
 
 
