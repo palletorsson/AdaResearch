@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg3l6qpflnlky"]
+
+[ext_resource type="Script" path="res://algorithms/color/color_mixing/interactive_color_mixing.gd" id="1_adv_mix"]
+[ext_resource type="PackedScene" uid="uid://grabdisk001" path="res://commons/primitives/disks/grab_disk.tscn" id="2_disk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pedestal"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_result_adv"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+roughness = 0.2
+
+[node name="AdvancedMixingExamples" type="Node3D" node_paths=PackedStringArray("output_mesh")]
+script = ExtResource("1_adv_mix")
+output_mesh = NodePath("GlitchSphere")
+
+[node name="Pedestal" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+size = Vector3(1.5, 0.1, 1.5)
+material = SubResource("StandardMaterial3D_pedestal")
+
+[node name="MixingZone" type="CSGCylinder3D" parent="Pedestal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+radius = 0.6
+height = 0.01
+sides = 32
+material = SubResource("StandardMaterial3D_pedestal")
+
+[node name="GlitchSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_result_adv")
+mesh = null 
+# Mesh created in script if null
+
+[node name="Disks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="GlitchDisk_A" parent="Disks" instance=ExtResource("2_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.3)
+disk_color = Color(1, 0, 1, 1)
+
+[node name="GlitchDisk_B" parent="Disks" instance=ExtResource("2_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.3)
+disk_color = Color(0, 1, 1, 1)
+
+[node name="GlitchDisk_C" parent="Disks" instance=ExtResource("2_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+disk_color = Color(1, 1, 0, 1)
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+text = "Advanced Glitch Mixing
+'Glitch' disks trigger chaotic effects"
+font_size = 24
+billboard = 1

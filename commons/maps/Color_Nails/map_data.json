@@ -5,7 +5,7 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 6,
+			"width": 8,
 			"depth": 15,
 			"max_height": 2
 		},
@@ -58,13 +58,13 @@
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "nail_color_controller:-90:1.0"],
+			[" ", " ", " ", " ", " ", "hand_model:180"],
 			[" ", " ", " ", " ", " ", "hand_color_controller:-90:1.0"],
-			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_side_prism:0:1.5", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " "],
-			[" ", " ", "colorballs", " ", " ", " "],
-			[" ", " ", "colorballs", " ", " ", " "],
+			[" ", "grab_stick_scanner:0:1", "colorballs", " ", " ", " "],
+			["brick_wall_factory:90", " ", "colorballs", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " "],						
 									
 		]

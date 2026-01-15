@@ -4,7 +4,6 @@
 
 [node name="RotatingLaser" type="Node3D"]
 script = ExtResource("1_rotatinglaser")
-color_change_interval = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.238056)

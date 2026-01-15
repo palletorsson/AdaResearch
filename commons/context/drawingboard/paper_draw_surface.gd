@@ -178,10 +178,10 @@ func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
 # Helper to convert world position to UV
 func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:
 	var local_pos = to_local(world_pos)
-	# Assuming PlaneMesh of size 2x2 (default)
-	# Local X/Z range from -1 to 1
-	var uv_x = (local_pos.x + 1.0) / 2.0
-	var uv_y = (local_pos.z + 1.0) / 2.0
+	# PlaneMesh of size 4x4
+	# Local X/Z range from -2 to 2
+	var uv_x = (local_pos.x + 2.0) / 4.0
+	var uv_y = (local_pos.z + 2.0) / 4.0
 	return Vector2(uv_x, uv_y)
 
 # Draw at a specific world position

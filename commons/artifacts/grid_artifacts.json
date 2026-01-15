@@ -1003,6 +1003,13 @@
 			"description": "Finds cube meshes in the scene and recolors an 11x11 grid to match the rose vase palette.",
 			"scene": "res://algorithms/color/gridcolorizer/gridcolorizer.tscn"
 		},
+		"RotatingLaser": {
+			"lookup_name": "RotatingLaser",
+			"name": "RotatingLaser",
+			"description": "RotatingLaser.",
+			"scene": "res://algorithms/color/rotating_laser/RotatingLaser.tscn"
+		},		
+		
 		"spectrum_forest": {
 			"lookup_name": "spectrum_forest",
 			"name": "spectrum_forest",
@@ -2362,8 +2369,15 @@
 			"name": "color_mixing",
 			"lookup_name": "color_mixing",
 			"description": "color_mixing",
-			"scene": "res://algorithms/color/color_mixing/color_mixing.tscn"
+			"scene": "res://algorithms/color/color_mixing/interactive_color_mixing.tscn"
 		},
+		"ball_painting_demo": {
+			"name": "ball_painting_demo",
+			"lookup_name": "ball_painting_demo",
+			"description": "ball_painting_demo",
+			"scene": "res://commons/context/drawingboard/ball_painting_demo.tscn"
+		},
+		
 		"flashlight_demo": {
 			"name": "flashlight_demo",
 			"lookup_name": "flashlight_demo",

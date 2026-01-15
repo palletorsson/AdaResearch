@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://b6hi7uhr7p53p" path="res://commons/context/drawingboard/reset_canvas_trigger.gd" id="10_npaj0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tvjed"]
-size = Vector3(1.97204, 0.140366, 2.00322)
+size = Vector3(3.94408, 0.140366, 4.00644)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_et178"]
 transparency = 1
@@ -21,6 +21,7 @@ emission = Color(0.813258, 0.813258, 0.813258, 1)
 disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y7rkn"]
+size = Vector2(4, 4)
 
 [sub_resource type="ConvexPolygonShape3D" id="20"]
 margin = 0.01

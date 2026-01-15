@@ -16,14 +16,16 @@ line_thickness = 0.01
 line_color = Color(0.788235, 0.462745, 0.996078, 1)
 
 [node name="GrabSphere" parent="lineContainer" instance=ExtResource("2_c0ogx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12020509, 0, 0)
+xp_on_pickup = 1
 haptic_pickup_intensity = 0.5
 haptic_pickup_duration = 0.1
 haptic_drop_intensity = 0.3
 haptic_drop_duration = 0.05
 
 [node name="GrabSphere2" parent="lineContainer" instance=ExtResource("2_c0ogx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1278853, 0, 0)
+xp_on_pickup = 1
 haptic_pickup_intensity = 0.5
 haptic_pickup_duration = 0.1
 haptic_drop_intensity = 0.3
