@@ -67,6 +67,18 @@ var page_label: Label
 var prev_button: Button
 var next_button: Button
 
+# Tab menu buttons
+var tab_menu: HBoxContainer
+var summary_tab: Button
+var technical_tab: Button
+var critical_tab: Button
+var blurb_tab: Button
+
+# Available md files for current map
+var available_md_files: Dictionary = {}  # {"summary": "path", "technical": "path", etc.}
+var current_md_type: String = ""  # Currently selected tab
+var current_map_name: String = ""
+
 func _ready() -> void:
 	# Ensure root is visible so we can show hint/manual independently
 	visible = true
@@ -280,23 +292,34 @@ func _load_map_data() -> void:
 func _parse_map_data(map_data: Dictionary) -> void:
 	"""Parse map_data.json and create pages"""
 	var content: String = ""
-	map_name_for_hint = "" 
-	
+	map_name_for_hint = ""
+	available_md_files.clear()
+
 	if map_data.has("map_info") and map_data.map_info.has("name"):
 		map_name_for_hint = map_data.map_info.name
-	
-	# Try to auto-detect manual.md in the map directory
-	if map_data.has("map_info") and map_data.map_info.has("name"):
-		var map_name = map_data.map_info.name
-		var auto_manual_path = "res://commons/maps/%s/manual.md" % map_name
-		if FileAccess.file_exists(auto_manual_path):
-			var file_content = _load_markdown_file(auto_manual_path)
-			if not file_content.is_empty():
-				print("MapManual: Auto-loaded manual.md from %s" % auto_manual_path)
-				has_content = true
-				_split_and_add_pages(file_content)
-				return
-	
+		current_map_name = map_data.map_info.name
+
+	# Detect available md files in map directory
+	if not current_map_name.is_empty():
+		var map_dir = "res://commons/maps/%s/" % current_map_name
+		var md_types = ["summary", "technical", "critical", "blurb", "manual"]
+		for md_type in md_types:
+			var md_path = map_dir + md_type + ".md"
+			if FileAccess.file_exists(md_path):
+				available_md_files[md_type] = md_path
+				print("MapManual: Found %s.md" % md_type)
+
+	# Update tab visibility based on available files
+	_update_tab_visibility()
+
+	# Auto-select first available tab
+	var tab_priority = ["summary", "technical", "critical", "blurb", "manual"]
+	for tab_type in tab_priority:
+		if available_md_files.has(tab_type):
+			_select_tab(tab_type)
+			has_content = true
+			return
+
 	# Check explicit manual_file reference in map_info
 	if map_data.has("map_info") and map_data.map_info.has("manual_file"):
 		var manual_path = map_data.map_info.manual_file
@@ -305,7 +328,7 @@ func _parse_map_data(map_data: Dictionary) -> void:
 			has_content = true
 			_split_and_add_pages(file_content)
 			return
-	
+
 	# Fallback - inline data
 	if map_data.has("map_info"):
 		var info = map_data.map_info
@@ -313,10 +336,10 @@ func _parse_map_data(map_data: Dictionary) -> void:
 		content += "%s\n\n" % info.get("description", "")
 		has_content = true
 		pages.append(content)
-	
+
 	if pages.is_empty():
 		pages.append("# Map Manual\n\nNo content available.")
-	
+
 	current_page = 0
 	_update_display()
 
@@ -406,31 +429,31 @@ func prev_page() -> void:
 
 func _find_ui_nodes() -> void:
 	if not viewport_2d: return
-	
+
 	var ui_instance = null
 	if viewport_2d.has_method("get_scene_instance"):
 		ui_instance = viewport_2d.get_scene_instance()
-	
+
 	if not ui_instance:
 		var viewport = viewport_2d.get_node_or_null("Viewport")
 		if viewport and viewport.get_child_count() > 0:
 			ui_instance = viewport.get_child(0)
-			
+
 	if not ui_instance:
 		print("MapManual: UI instance not found")
 		return
-		
+
 	title_label = ui_instance.get_node_or_null("TitleBar/Title")
 	scroll_container = ui_instance.get_node_or_null("ScrollContainer")
 	if scroll_container:
 		markdown_label = scroll_container.get_node_or_null("MarkdownLabel")
-	
+
 	var page_bar = ui_instance.get_node_or_null("PageBar")
 	if page_bar:
 		page_label = page_bar.get_node_or_null("PageLabel")
 		prev_button = page_bar.get_node_or_null("PrevButton")
 		next_button = page_bar.get_node_or_null("NextButton")
-		
+
 		# Connect buttons
 		if prev_button:
 			if not prev_button.pressed.is_connected(prev_page):
@@ -438,6 +461,24 @@ func _find_ui_nodes() -> void:
 		if next_button:
 			if not next_button.pressed.is_connected(next_page):
 				next_button.pressed.connect(next_page)
+
+	# Find tab menu
+	tab_menu = ui_instance.get_node_or_null("TabMenu")
+	if tab_menu:
+		summary_tab = tab_menu.get_node_or_null("SummaryTab")
+		technical_tab = tab_menu.get_node_or_null("TechnicalTab")
+		critical_tab = tab_menu.get_node_or_null("CriticalTab")
+		blurb_tab = tab_menu.get_node_or_null("BlurbTab")
+
+		# Connect tab buttons
+		if summary_tab and not summary_tab.pressed.is_connected(_on_tab_pressed):
+			summary_tab.pressed.connect(_on_tab_pressed.bind("summary"))
+		if technical_tab and not technical_tab.pressed.is_connected(_on_tab_pressed):
+			technical_tab.pressed.connect(_on_tab_pressed.bind("technical"))
+		if critical_tab and not critical_tab.pressed.is_connected(_on_tab_pressed):
+			critical_tab.pressed.connect(_on_tab_pressed.bind("critical"))
+		if blurb_tab and not blurb_tab.pressed.is_connected(_on_tab_pressed):
+			blurb_tab.pressed.connect(_on_tab_pressed.bind("blurb"))
 
 func _find_vr_controllers() -> void:
 	# First try to find our parent XROrigin3D (since MapManual is a child of it)
@@ -532,3 +573,62 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 		var result = _find_node_by_class(child, target_class_name)
 		if result: return result
 	return null
+
+# --- TAB MENU FUNCTIONS ---
+
+func _update_tab_visibility() -> void:
+	"""Show/hide tabs based on which md files exist"""
+	if summary_tab:
+		summary_tab.visible = available_md_files.has("summary")
+	if technical_tab:
+		technical_tab.visible = available_md_files.has("technical")
+	if critical_tab:
+		critical_tab.visible = available_md_files.has("critical")
+	if blurb_tab:
+		blurb_tab.visible = available_md_files.has("blurb")
+
+	# Hide entire tab menu if no files available (or only one file)
+	if tab_menu:
+		var visible_count = 0
+		if available_md_files.has("summary"): visible_count += 1
+		if available_md_files.has("technical"): visible_count += 1
+		if available_md_files.has("critical"): visible_count += 1
+		if available_md_files.has("blurb"): visible_count += 1
+		tab_menu.visible = visible_count > 1
+
+func _on_tab_pressed(tab_type: String) -> void:
+	"""Handle tab button press"""
+	_select_tab(tab_type)
+
+func _select_tab(tab_type: String) -> void:
+	"""Select and load a specific tab"""
+	if not available_md_files.has(tab_type):
+		return
+
+	current_md_type = tab_type
+	pages.clear()
+
+	# Update tab button states
+	_update_tab_button_states()
+
+	# Load the md file content
+	var file_path = available_md_files[tab_type]
+	var file_content = _load_markdown_file(file_path)
+
+	if not file_content.is_empty():
+		_split_and_add_pages(file_content)
+	else:
+		pages.append("# %s\n\nNo content available." % tab_type.capitalize())
+		current_page = 0
+		_update_display()
+
+func _update_tab_button_states() -> void:
+	"""Update visual state of tab buttons"""
+	if summary_tab:
+		summary_tab.button_pressed = (current_md_type == "summary")
+	if technical_tab:
+		technical_tab.button_pressed = (current_md_type == "technical")
+	if critical_tab:
+		critical_tab.button_pressed = (current_md_type == "critical")
+	if blurb_tab:
+		blurb_tab.button_pressed = (current_md_type == "blurb")

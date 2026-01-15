@@ -1,0 +1,1 @@
+Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude—where knowing and not knowing interlock.

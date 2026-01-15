@@ -123,7 +123,7 @@ func _load_current_map_info_for_display():
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
 	if not grid_system:
 		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")
-	
+
 	if grid_system:
 		var data_component = grid_system.get_data_component()
 		if data_component:
@@ -132,17 +132,21 @@ func _load_current_map_info_for_display():
 				var map_info = data_component.json_loader.map_data.get("map_info", {})
 				current_map_name = map_info.get("name", "Unknown Map")
 				current_lookup_name = map_info.get("lookup_name", "")
-				current_description = map_info.get("description", "No description available")
 				current_metadata = map_info.get("metadata", {})
-				
+
+				# Try to load blurb.md first, fall back to description
+				current_description = _load_blurb_or_description(current_map_name, map_info.get("description", "No description available"))
+
 				print("AnnotationInfoBoard: Loaded current map info for display - Name: '%s'" % current_map_name)
 			else:
 				# Fallback to metadata method
 				var metadata = data_component.get_map_metadata()
 				current_map_name = metadata.get("name", "Unknown Map")
 				current_lookup_name = metadata.get("lookup_name", "")
-				current_description = metadata.get("description", "No description available")
 				current_metadata = metadata
+
+				# Try to load blurb.md first, fall back to description
+				current_description = _load_blurb_or_description(current_map_name, metadata.get("description", "No description available"))
 				print("AnnotationInfoBoard: Loaded current map info from metadata fallback")
 		else:
 			print("AnnotationInfoBoard: No data component found for map info display")
@@ -198,15 +202,17 @@ func _load_current_map_info(grid_system):
 	if not data_component:
 		print("AnnotationInfoBoard: No data component found")
 		return
-	
+
 	# Get map_info section directly from JSON
 	if data_component.json_loader and data_component.json_loader.map_data:
 		var map_info = data_component.json_loader.map_data.get("map_info", {})
 		current_map_name = map_info.get("name", "Unknown Map")
 		current_lookup_name = map_info.get("lookup_name", "")
-		current_description = map_info.get("description", "No description available")
 		current_metadata = map_info.get("metadata", {})
-		
+
+		# Try to load blurb.md first, fall back to description
+		current_description = _load_blurb_or_description(current_map_name, map_info.get("description", "No description available"))
+
 		print("AnnotationInfoBoard: Loaded from map_info - Name: '%s'" % current_map_name)
 		print("AnnotationInfoBoard: Description: '%s'" % current_description)
 	else:
@@ -214,10 +220,12 @@ func _load_current_map_info(grid_system):
 		var metadata = data_component.get_map_metadata()
 		current_map_name = metadata.get("name", "Unknown Map")
 		current_lookup_name = metadata.get("lookup_name", "")
-		current_description = metadata.get("description", "No description available")
 		current_metadata = metadata
+
+		# Try to load blurb.md first, fall back to description
+		current_description = _load_blurb_or_description(current_map_name, metadata.get("description", "No description available"))
 		print("AnnotationInfoBoard: Loaded from metadata fallback")
-	
+
 	# Update the info board display
 	_update_info_board()
 
@@ -458,6 +466,23 @@ func _update_xp_display(new_score: int):
 	"""Update XP display from GameManager"""
 	if xp_label:
 		xp_label.text = "XP: %d" % new_score
+
+func _load_blurb_or_description(map_name: String, fallback_description: String) -> String:
+	"""Load blurb.md content if it exists, otherwise return the fallback description"""
+	if map_name.is_empty():
+		return fallback_description
+
+	var blurb_path = "res://commons/maps/%s/blurb.md" % map_name
+	if FileAccess.file_exists(blurb_path):
+		var file = FileAccess.open(blurb_path, FileAccess.READ)
+		if file:
+			var content = file.get_as_text().strip_edges()
+			file.close()
+			if not content.is_empty():
+				print("AnnotationInfoBoard: Loaded blurb.md for '%s'" % map_name)
+				return content
+
+	return fallback_description
 
 # Public API
 func force_update():

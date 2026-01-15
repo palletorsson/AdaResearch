@@ -1,0 +1,1 @@
+A deliberate epistemic reset. "Primitive" here names not a lowest form but a stage of unknowing: the point, line, and shape are re-encountered as constructs rather than givens. This map undermines formal mastery, revealing assumptions and blind spots that underlie geometric forms.

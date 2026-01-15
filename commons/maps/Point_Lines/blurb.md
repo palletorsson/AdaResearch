@@ -1,0 +1,1 @@
+Multiplies lines into context: parallels, crossings, and grids. This map shows how lines interact with each other, producing orientation, metric frameworks, and initial systems of measure. It is where discrete relations begin to behave as a network rather than a sequence.

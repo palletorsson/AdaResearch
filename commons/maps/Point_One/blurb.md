@@ -1,0 +1,1 @@
+A single instantiated point beyond the zero reference. This map isolates the minimal act of individuation within an infrastructural field. It reveals how a point only exists as a callable, indexed abstraction within a larger system, not as a native entity of space.

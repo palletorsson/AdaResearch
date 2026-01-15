@@ -1,0 +1,1 @@
+Marks the first closed relational structure. With three points and their connecting lines, stability emerges: measurements become invariant and mutual constraints appear. This map is the decisive threshold where geometry becomes rigid, and metric relations such as those expressed in the Pythagorean theorem first reside.

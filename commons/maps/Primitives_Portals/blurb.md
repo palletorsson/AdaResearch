@@ -1,0 +1,1 @@
+A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.

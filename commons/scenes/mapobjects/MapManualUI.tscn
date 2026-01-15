@@ -22,6 +22,16 @@ bg_color = Color(0.15, 0.2, 0.35, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_active"]
+bg_color = Color(0.25, 0.35, 0.55, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_inactive"]
+bg_color = Color(0.12, 0.15, 0.22, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
 [node name="ManualUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -79,13 +89,60 @@ text = "[X] Close"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="TabMenu" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 85.0
+offset_right = -15.0
+offset_bottom = 135.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="SummaryTab" type="Button" parent="TabMenu"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+toggle_mode = true
+text = "Summary"
+
+[node name="TechnicalTab" type="Button" parent="TabMenu"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+toggle_mode = true
+text = "Technical"
+
+[node name="CriticalTab" type="Button" parent="TabMenu"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+toggle_mode = true
+text = "Critical"
+
+[node name="BlurbTab" type="Button" parent="TabMenu"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_tab_inactive")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tab_active")
+toggle_mode = true
+text = "Blurb"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 15.0
-offset_top = 90.0
+offset_top = 145.0
 offset_right = -15.0
 offset_bottom = -50.0
 grow_horizontal = 2

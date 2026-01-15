@@ -1,0 +1,1 @@
+Captures trace into a line. Here relational history becomes discipline: the trace is formalized into directed relation. This map stages the first formal link between discrete moments, converting duration into geometry. Lines are not given; they are captured traces.

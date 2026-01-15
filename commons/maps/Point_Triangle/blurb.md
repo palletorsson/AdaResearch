@@ -1,0 +1,1 @@
+The triangle is the first figure that produces a surface. With three points, a boundary is closed and an interior appears. Unlike the line, which only connects, the triangle defines an area and establishes orientation: front and back, inside and outside.
