@@ -102,6 +102,9 @@ script = ExtResource("4_labscene")
 visible = false
 script = ExtResource("5_f6pg2")
 
+[node name="PlayerTrace" parent="." index="9"]
+visible = false
+
 [node name="CorridorScene" parent="EntryZone" index="0" instance=ExtResource("9_gudac")]
 regenerate = false
 

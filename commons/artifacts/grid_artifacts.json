@@ -2371,6 +2371,14 @@
 			"description": "color_mixing",
 			"scene": "res://algorithms/color/color_mixing/interactive_color_mixing.tscn"
 		},
+		
+		"visual_color_mixing": {
+			"name": "visual_color_mixing",
+			"lookup_name": "visual_color_mixing",
+			"description": "visual_color_mixing",
+			"scene": "res://algorithms/color/color_mixing/visual_color_mixing.tscn"
+		},
+		
 		"ball_painting_demo": {
 			"name": "ball_painting_demo",
 			"lookup_name": "ball_painting_demo",

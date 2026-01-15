@@ -8,19 +8,22 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var paper_scale: Vector3 = Vector3(1.0, 1.0, 1.0)
 @export var color_palette_resource: Resource
 
-# Grid layout settings
-@export var grid_columns: int = 5
-@export var grid_rows: int = 2  # Number of rows in horizontal plane
-@export var grid_layers: int = 3  # Number of vertical layers (Y axis)
+# Grid layout settings - horizontal XZ plane only
+@export var grid_columns: int = 5  # Number of stickers horizontally (X axis)
+@export var grid_rows: int = 2     # Number of stickers in depth (Z axis)
 @export var sticker_width: float = 0.195  # From grab_paper mesh size
 @export var grid_gutter: float = 0.03  # Small gutter between stickers
-@export var layer_spacing: float = 0.05  # Vertical spacing between layers
+@export var vertical_snap_spacing: float = 0.05  # Vertical snap grid spacing for Y axis
 
 var palette_keys: Array = []
 var current_palette_index: int = 0
-var snap_points: Array = []  # 3D grid snap points
+var snap_points: Array = []  # Grid snap points
+var snap_point_group_name: String  # Unique group name for this collection's snap points
 
 func _ready() -> void:
+	# Create unique group name for this collection's snap points
+	snap_point_group_name = "shelf_snap_point_%s" % str(get_instance_id())
+
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
 	if palette_keys.is_empty():
@@ -85,25 +88,31 @@ func _create_grid_snap_points() -> void:
 	# Calculate grid spacing (sticker width + gutter)
 	var cell_spacing = sticker_width + grid_gutter
 
-	# Create snap points in a 3D grid layout
+	# Create snap points in XZ grid with vertical snap layers
+	# Create multiple Y levels for vertical snapping
+	var vertical_levels = 10  # Create 10 levels of snap points vertically
 	var point_index = 0
-	for layer in range(grid_layers):
+
+	for y_level in range(vertical_levels):
 		for row in range(grid_rows):
 			for col in range(grid_columns):
 				var snap_point = Node3D.new()
 				snap_point.name = "GridSnapPoint_%d" % point_index
+				# Add to both the global group and this collection's unique group
 				snap_point.add_to_group("shelf_snap_point")
+				snap_point.add_to_group(snap_point_group_name)
 
-				# Position in 3D grid layout
+				# Position in XZ grid with Y levels
 				var x_pos = col * cell_spacing
-				var y_pos = stack_height + (layer * layer_spacing)
+				var y_pos = stack_height + (y_level * vertical_snap_spacing)
 				var z_pos = row * cell_spacing
 				snap_point.position = Vector3(x_pos, y_pos, z_pos)
 
 				add_child(snap_point)
 				snap_points.append(snap_point)
-				print("Created snap point %d at position: %s (layer %d)" % [point_index, snap_point.position, layer])
 				point_index += 1
+
+	print("Created %d snap points for collection '%s' in group '%s'" % [snap_points.size(), name, snap_point_group_name])
 
 func create_grab_paper_stack() -> void:
 	for child in get_children():
@@ -113,21 +122,18 @@ func create_grab_paper_stack() -> void:
 	# Calculate grid spacing
 	var cell_spacing = sticker_width + grid_gutter
 
-	# Create papers matching the number of snap points (or 10, whichever is appropriate)
+	# Create 10 papers in a simple XZ grid layout
 	var total_papers = 10
 	for i in range(total_papers):
 		var paper_instance = GRAB_PAPER_SCENE.instantiate()
 		paper_instance.name = "GrabPaper_%d" % i
 
-		# Calculate 3D grid position
-		var papers_per_layer = grid_columns * grid_rows
-		var layer = i / papers_per_layer
-		var position_in_layer = i % papers_per_layer
-		var row = position_in_layer / grid_columns
-		var col = position_in_layer % grid_columns
+		# Calculate position in XZ grid (single layer)
+		var row = i / grid_columns
+		var col = i % grid_columns
 
 		var x_pos = col * cell_spacing
-		var y_pos = stack_height + (layer * layer_spacing)
+		var y_pos = stack_height
 		var z_pos = row * cell_spacing
 		paper_instance.position = Vector3(x_pos, y_pos, z_pos)
 		paper_instance.scale = paper_scale
@@ -136,7 +142,7 @@ func create_grab_paper_stack() -> void:
 		set_paper_color(paper_instance, color)
 
 		add_child(paper_instance)
-		print("Created GrabPaper_%d at grid position (col:%d, row:%d, layer:%d) with color: %s" % [i, col, row, layer, color])
+		print("Created GrabPaper_%d at grid position (col:%d, row:%d) with color: %s" % [i, col, row, color])
 
 func get_color_from_current_palette(paper_index: int) -> Color:
 	if palette_keys.is_empty():
@@ -206,15 +212,12 @@ func add_paper_to_top() -> void:
 	# Calculate grid spacing
 	var cell_spacing = sticker_width + grid_gutter
 
-	# Calculate 3D grid position
-	var papers_per_layer = grid_columns * grid_rows
-	var layer = paper_count / papers_per_layer
-	var position_in_layer = paper_count % papers_per_layer
-	var row = position_in_layer / grid_columns
-	var col = position_in_layer % grid_columns
+	# Calculate position in XZ grid
+	var row = paper_count / grid_columns
+	var col = paper_count % grid_columns
 
 	var x_pos = col * cell_spacing
-	var y_pos = stack_height + (layer * layer_spacing)
+	var y_pos = stack_height
 	var z_pos = row * cell_spacing
 	paper_instance.position = Vector3(x_pos, y_pos, z_pos)
 	paper_instance.scale = paper_scale
@@ -222,17 +225,8 @@ func add_paper_to_top() -> void:
 	var color = get_color_from_current_palette(paper_count)
 	set_paper_color(paper_instance, color)
 
-	# Create new snap point if needed
-	if paper_count >= snap_points.size():
-		var snap_point = Node3D.new()
-		snap_point.name = "GridSnapPoint_%d" % paper_count
-		snap_point.add_to_group("shelf_snap_point")
-		snap_point.position = Vector3(x_pos, y_pos, z_pos)
-		add_child(snap_point)
-		snap_points.append(snap_point)
-
 	add_child(paper_instance)
-	print("Added paper at grid position (col:%d, row:%d, layer:%d) with color: %s" % [col, row, layer, color])
+	print("Added paper at grid position (col:%d, row:%d) with color: %s" % [col, row, color])
 
 func cycle_to_next_palette() -> void:
 	if palette_keys.is_empty():

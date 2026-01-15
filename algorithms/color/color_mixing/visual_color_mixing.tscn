@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://colormix_visual01"]
+[gd_scene load_steps=4 format=3 uid="uid://clx2klbrxiwew"]
 
 [ext_resource type="PackedScene" uid="uid://grabdisk001" path="res://commons/primitives/disks/grab_disk.tscn" id="1_disk"]
 
@@ -12,63 +12,126 @@ albedo_color = Color(1, 1, 1, 1)
 
 [node name="AdditiveTable" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
-size = Vector3(1.0, 0.05, 1.0)
+size = Vector3(1.2, 0.05, 1.2)
 material = SubResource("StandardMaterial3D_table")
 
 [node name="AdditiveLabel" type="Label3D" parent="AdditiveTable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+billboard = 1
 text = "ADDITIVE (RGB)
 Red + Green + Blue = White
 (Dark background)"
 font_size = 20
-billboard = 1
 
-[node name="RedDisk" parent="AdditiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.1, 0)
+[node name="Red1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, -0.3)
 disk_color = Color(1, 0, 0, 1)
 blend_type = 0
 
-[node name="GreenDisk" parent="AdditiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.1, 0)
+[node name="Red2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0)
+disk_color = Color(1, 0, 0, 1)
+blend_type = 0
+
+[node name="Red3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0.3)
+disk_color = Color(1, 0, 0, 1)
+blend_type = 0
+
+[node name="Green1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.3)
 disk_color = Color(0, 1, 0, 1)
 blend_type = 0
 
-[node name="BlueDisk" parent="AdditiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.2)
+[node name="Green2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+disk_color = Color(0, 1, 0, 1)
+blend_type = 0
+
+[node name="Green3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.3)
+disk_color = Color(0, 1, 0, 1)
+blend_type = 0
+
+[node name="Blue1" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, -0.3)
+disk_color = Color(0, 0, 1, 1)
+blend_type = 0
+
+[node name="Blue2" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0)
+disk_color = Color(0, 0, 1, 1)
+blend_type = 0
+
+[node name="Blue3" parent="AdditiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0.3)
 disk_color = Color(0, 0, 1, 1)
 blend_type = 0
 
 [node name="SubtractiveTable" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
-size = Vector3(1.0, 0.05, 1.0)
+size = Vector3(1.2, 0.05, 1.2)
 material = SubResource("StandardMaterial3D_white_bg")
 
 [node name="SubtractiveLabel" type="Label3D" parent="SubtractiveTable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+billboard = 1
 text = "SUBTRACTIVE (CMY)
 Cyan + Magenta + Yellow = Black
 (White background)"
 font_size = 20
-billboard = 1
 
-[node name="CyanDisk" parent="SubtractiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.1, 0)
+[node name="Cyan1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, -0.3)
 disk_color = Color(0, 1, 1, 1)
 blend_type = 1
 
-[node name="MagentaDisk" parent="SubtractiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.1, 0)
+[node name="Cyan2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0)
+disk_color = Color(0, 1, 1, 1)
+blend_type = 1
+
+[node name="Cyan3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.1, 0.3)
+disk_color = Color(0, 1, 1, 1)
+blend_type = 1
+
+[node name="Magenta1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.3)
 disk_color = Color(1, 0, 1, 1)
 blend_type = 1
 
-[node name="YellowDisk" parent="SubtractiveTable" instance=ExtResource("1_disk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.2)
+[node name="Magenta2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+disk_color = Color(1, 0, 1, 1)
+blend_type = 1
+
+[node name="Magenta3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.3)
+disk_color = Color(1, 0, 1, 1)
+blend_type = 1
+
+[node name="Yellow1" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, -0.3)
+disk_color = Color(1, 1, 0, 1)
+blend_type = 1
+
+[node name="Yellow2" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0)
+disk_color = Color(1, 1, 0, 1)
+blend_type = 1
+
+[node name="Yellow3" parent="SubtractiveTable" instance=ExtResource("1_disk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.1, 0.3)
 disk_color = Color(1, 1, 0, 1)
 blend_type = 1
 
 [node name="Instructions" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+visible = false
+billboard = 1
 text = "VISUAL COLOR MIXING
 Drag disks to overlap them and see the colors blend!"
 font_size = 28
-billboard = 1
