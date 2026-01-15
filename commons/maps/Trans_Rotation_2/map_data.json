@@ -1,6 +1,7 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
+		"name": "Rotation Two",
+		"lookup_name": "Trans_Rotation_2",	
 		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
 		"version": "1.0",
 		"format": "json",
@@ -112,7 +113,7 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",  ""],
-			[" ", " ", " ", " ", "clipboard#rotation_axioms:-90:-0.2", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "boolean_tunnel:0:-0.05", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],

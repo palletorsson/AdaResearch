@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://uh4t3h6fp6x5"]
+[gd_scene load_steps=5 format=3 uid="uid://d3bwv0e6tutts"]
 
-[ext_resource type="Script" uid="uid://d25fx3nfix7ly" path="res://algorithms/color/color_mixing/interactive_color_mixing.gd" id="1_mix"]
-[ext_resource type="PackedScene" uid="uid://grabdisk001" path="res://commons/primitives/disks/grab_disk.tscn" id="2_disk"]
+[ext_resource type="Script" path="res://algorithms/color/color_mixing/interactive_color_mixing.gd" id="1_mix"]
+[ext_resource type="PackedScene" path="res://commons/primitives/disks/grab_disk.tscn" id="2_disk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pedestal"]
 albedo_color = Color(0.2, 0.2, 0.2, 1)
@@ -35,14 +35,17 @@ material_override = SubResource("StandardMaterial3D_g0l7i")
 [node name="Disks#RedDisk" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.18298, 0)
 disk_color = Color(1, 0, 0, 1)
+blend_type = 0
 
 [node name="Disks#GreenDisk" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.18298, 0)
 disk_color = Color(0, 1, 0, 1)
+blend_type = 0
 
 [node name="Disks#BlueDisk" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18298, 0.4)
 disk_color = Color(0, 0, 1, 1)
+blend_type = 0
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

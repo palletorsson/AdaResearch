@@ -62,19 +62,13 @@ func _create_dot(color: Color) -> MeshInstance3D:
 	return mi
 
 func _animate():
-	# Animation now ping-pongs: Linear -> Circular -> Linear -> ...
-	# Full cycle: 0.0-0.5 forward, 0.5-1.0 backward
+	# 0.0 - 0.4: Linear Mode (Physics)
+	# 0.4 - 0.6: Transition
+	# 0.6 - 1.0: Circular Mode (Perception)
 	
 	var phase = fmod(time / cycle_duration, 1.0)
-	
-	# Create ping-pong effect
-	var linear_phase: float
-	if phase < 0.5:
-		linear_phase = phase * 2.0  # 0.0 -> 1.0
-	else:
-		linear_phase = (1.0 - phase) * 2.0  # 1.0 -> 0.0
-	
-	var smooth_t = smoothstep(0.0, 1.0, linear_phase)
+	var smooth_t = clamp((phase - 0.4) * 5.0, 0.0, 1.0)
+	smooth_t = smoothstep(0.0, 1.0, smooth_t)
 	
 	# Radius for circular mode
 	var radius = spectrum_length / PI * 0.5

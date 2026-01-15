@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg3l6qpflnlky"]
+[gd_scene load_steps=5 format=3 uid="uid://17kyuch3ll5a"]
 
 [ext_resource type="Script" path="res://algorithms/color/color_mixing/interactive_color_mixing.gd" id="1_adv_mix"]
-[ext_resource type="PackedScene" uid="uid://grabdisk001" path="res://commons/primitives/disks/grab_disk.tscn" id="2_disk"]
+[ext_resource type="PackedScene" uid="uid://jhj23qqrld8p" path="res://commons/primitives/disks/grab_disk.tscn" id="2_disk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pedestal"]
 albedo_color = Color(0.1, 0.1, 0.1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_result_adv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jauqj"]
 albedo_color = Color(0, 0, 0, 1)
-metallic = 1.0
-roughness = 0.2
+emission_enabled = true
+emission_energy_multiplier = 0.0
 
 [node name="AdvancedMixingExamples" type="Node3D" node_paths=PackedStringArray("output_mesh")]
 script = ExtResource("1_adv_mix")
+max_mix_distance = 0.5
 output_mesh = NodePath("GlitchSphere")
 
 [node name="Pedestal" type="CSGBox3D" parent="."]
@@ -29,28 +30,26 @@ material = SubResource("StandardMaterial3D_pedestal")
 
 [node name="GlitchSphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = SubResource("StandardMaterial3D_result_adv")
-mesh = null 
-# Mesh created in script if null
+material_override = SubResource("StandardMaterial3D_jauqj")
 
-[node name="Disks" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-
-[node name="GlitchDisk_A" parent="Disks" instance=ExtResource("2_disk")]
+[node name="Disks#GlitchDisk_A" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.3)
 disk_color = Color(1, 0, 1, 1)
+blend_type = 0
 
-[node name="GlitchDisk_B" parent="Disks" instance=ExtResource("2_disk")]
+[node name="Disks#GlitchDisk_B" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.3)
 disk_color = Color(0, 1, 1, 1)
+blend_type = 0
 
-[node name="GlitchDisk_C" parent="Disks" instance=ExtResource("2_disk")]
+[node name="Disks#GlitchDisk_C" parent="." instance=ExtResource("2_disk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 disk_color = Color(1, 1, 0, 1)
+blend_type = 0
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+billboard = 1
 text = "Advanced Glitch Mixing
 'Glitch' disks trigger chaotic effects"
 font_size = 24
-billboard = 1

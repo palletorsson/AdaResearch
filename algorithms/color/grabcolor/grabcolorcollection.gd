@@ -13,17 +13,10 @@ const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 @export var grid_rows: int = 2     # Number of stickers in depth (Z axis)
 @export var sticker_width: float = 0.195  # From grab_paper mesh size
 @export var grid_gutter: float = 0.03  # Small gutter between stickers
-@export var vertical_snap_spacing: float = 0.05  # Vertical snap grid spacing for Y axis
-
 var palette_keys: Array = []
 var current_palette_index: int = 0
-var snap_points: Array = []  # Grid snap points
-var snap_point_group_name: String  # Unique group name for this collection's snap points
 
 func _ready() -> void:
-	# Create unique group name for this collection's snap points
-	snap_point_group_name = "shelf_snap_point_%s" % str(get_instance_id())
-
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
 	if palette_keys.is_empty():
@@ -32,7 +25,6 @@ func _ready() -> void:
 
 	var name_hash = name.hash()
 	current_palette_index = abs(name_hash) % palette_keys.size()
-	_create_grid_snap_points()
 	create_grab_paper_stack()
 
 func _ensure_palette_resource() -> void:
@@ -78,41 +70,7 @@ func _get_palette_title(palette_name: String) -> String:
 	var entry = _get_palette_entry(palette_name)
 	return entry.get("title", palette_name)
 
-func _create_grid_snap_points() -> void:
-	# Clear existing snap points
-	for point in snap_points:
-		if is_instance_valid(point):
-			point.queue_free()
-	snap_points.clear()
 
-	# Calculate grid spacing (sticker width + gutter)
-	var cell_spacing = sticker_width + grid_gutter
-
-	# Create snap points in XZ grid with vertical snap layers
-	# Create multiple Y levels for vertical snapping
-	var vertical_levels = 10  # Create 10 levels of snap points vertically
-	var point_index = 0
-
-	for y_level in range(vertical_levels):
-		for row in range(grid_rows):
-			for col in range(grid_columns):
-				var snap_point = Node3D.new()
-				snap_point.name = "GridSnapPoint_%d" % point_index
-				# Add to both the global group and this collection's unique group
-				snap_point.add_to_group("shelf_snap_point")
-				snap_point.add_to_group(snap_point_group_name)
-
-				# Position in XZ grid with Y levels
-				var x_pos = col * cell_spacing
-				var y_pos = stack_height + (y_level * vertical_snap_spacing)
-				var z_pos = row * cell_spacing
-				snap_point.position = Vector3(x_pos, y_pos, z_pos)
-
-				add_child(snap_point)
-				snap_points.append(snap_point)
-				point_index += 1
-
-	print("Created %d snap points for collection '%s' in group '%s'" % [snap_points.size(), name, snap_point_group_name])
 
 func create_grab_paper_stack() -> void:
 	for child in get_children():

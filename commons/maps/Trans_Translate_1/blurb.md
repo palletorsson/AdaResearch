@@ -1,0 +1,1 @@
+Walkways extend over void. Transport cubes shuttle across gaps that feet cannot cross. Translation is the first transformation: not rotation's reorientation, not scale's resizing, but pure displacement. Here becomes there. The body learns what code already knows - that position is mutable, that space is traversable, that gaps are invitations rather than barriers.

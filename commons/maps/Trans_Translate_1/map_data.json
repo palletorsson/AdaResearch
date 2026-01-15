@@ -1,6 +1,7 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
+		"name": "Translate 1",
+		"lookup_name": "Trans_Translate_2",	
 		"description": "Scale is reframed as a transformation acting on relations rather than objects. Through controlled scaling operations, the player observes how distances, proportions, and perceived mass change while topological structure remains intact. The map highlights scale as a global modifier that reconfigures spatial meaning without introducing new geometry. This establishes scale as a central operator in both simulation and abstraction.",
 		"version": "1.0",
 		"format": "json",
@@ -51,7 +52,7 @@
  
 		],
 		"utilities": [
-			[" ", " ", " ", "wp:90", " ", " ", "an:-90"],
+			["s", " ", " ", "wp:90", " ", " ", "an:-90"],
 			[" ", " ", " ", "", " ", "tc:3:z", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -84,7 +85,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "", " ", " ", " ", "pickup_gate#pickups:3", " "],
-			[" ", " ", " ", " ", " ", " ", "clipboard#rotation_axioms:90:-0.2"],
+			[" ", " ", " ", " ", " ", " ", ""],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],

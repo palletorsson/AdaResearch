@@ -1,34 +1,39 @@
 extends MeshInstance3D
 
 @export var texture_size: Vector2i = Vector2i(1440, 1000)  # Resolution of the drawing texture
-@export var default_brush_size: int = 10  # Default size of the brush stroke
+@export var default_brush_size: int = 12  # Default size of the brush stroke
 @export var default_brush_color: Color = Color(0, 0, 0, 1)  # Default brush color
-@export var default_snap_grid_size: int = 16  # Default snap grid size
+@export var default_snap_grid_size: int = 8  # Default snap grid size
 @export var random_dot_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW]  # Colors for the random dots
 
-var drawing_texture: Image
-var drawing_texture_data: ImageTexture
-var last_uv_position: Vector2 = Vector2(-1, -1)  # Keeps track of the last UV position
+# --- WET PAINT EFFECT (GPU) ---
+@export var wet_paint: bool = false:
+	set(value):
+		wet_paint = value
+		_update_paint_params()
+		
+@export var flow_speed: float = 0.0005:
+	set(value):
+		flow_speed = value
+		_update_paint_params()
+
+const WET_PAINT_SCENE = preload("res://commons/context/drawingboard/wet_paint_canvas.tscn")
+var viewport: SubViewport
+var brush_layer: Node2D
+var simulation_rect: ColorRect
 
 # Active pen settings
 var active_pen_properties = {
 	"brush_size": 10,
 	"brush_color": Color(0, 0, 0, 1),
-	"snap_size": 16,
+	"snap_size": 8,
 	"random_dots_active": false
 }
-
-
 
 @onready var debug_label: Label3D = $"../Label3D"
 
 func _ready():
-	# Create a blank drawing texture
-	drawing_texture = Image.create(texture_size.x, texture_size.y, false, Image.FORMAT_RGBA8)
-	drawing_texture.fill(Color(1, 1, 1, 0.2))  # White background
-	drawing_texture_data = ImageTexture.create_from_image(drawing_texture)
-	
-	update_material(drawing_texture_data)
+	_setup_gpu_painting()
 	
 	# Initialize active properties from exports
 	active_pen_properties["brush_size"] = default_brush_size
@@ -36,7 +41,45 @@ func _ready():
 	active_pen_properties["snap_size"] = default_snap_grid_size
 	
 	if debug_label:
-		debug_label.text = "Drawing initialized."
+		debug_label.text = "GPU Drawing initialized."
+
+func _setup_gpu_painting():
+	# Instance the viewport scene
+	var canvas = WET_PAINT_SCENE.instantiate()
+	canvas.name = "WetPaintCanvas"
+	add_child(canvas)
+	
+	viewport = canvas
+	brush_layer = canvas.get_node("BrushLayer")
+	var sim_pass = canvas.get_node("SimulationPass")
+	simulation_rect = sim_pass.get_node("SimulationRect")
+	
+	# Resize viewport to match texture size
+	viewport.size = texture_size
+	
+	# Explicitly resize the ColorRect because it's inside a Node2D (BackBufferCopy)
+	# and anchors won't work automatically to fill the Viewport
+	simulation_rect.size = Vector2(texture_size)
+	
+	# Get the viewport texture
+	var vp_tex = viewport.get_texture()
+	
+	# Assign to material
+	var material = StandardMaterial3D.new()
+	material.albedo_texture = vp_tex
+	# Ensure material is local and unique
+	self.material_override = material
+	
+	_update_paint_params()
+	
+	# Initial clear to white
+	reset_canvas()
+
+func _update_paint_params():
+	if simulation_rect and simulation_rect.material:
+		# If wet paint is off, set flow to 0
+		var speed = flow_speed if wet_paint else 0.0
+		simulation_rect.material.set_shader_parameter("flow_speed", speed)
 
 # Draw random dots around the pen tip
 func draw_random_dots(uv_position: Vector2):
@@ -53,9 +96,11 @@ func draw_random_dots(uv_position: Vector2):
 
 # Function to reset the canvas
 func reset_canvas():
-	drawing_texture.fill(Color(1, 1, 1, 0.2))  # White background
-	drawing_texture_data = ImageTexture.create_from_image(drawing_texture)
-	update_material(drawing_texture_data)
+	# To reset a feedback loop viewport, we need to clear it.
+	# The easiest way for a "Fade/Clear" is to draw a giant rect on the BrushLayer
+	if brush_layer:
+		brush_layer.add_splat(Vector2(texture_size.x/2, texture_size.y/2), max(texture_size.x, texture_size.y), Color(1, 1, 1, 1))
+	
 	if debug_label:
 		debug_label.text = "Drawing reset."
 
@@ -70,32 +115,15 @@ func snap_to_grid(uv_position: Vector2) -> Vector2:
 func draw_point(uv_position: Vector2, color: Color):
 	# Snap the UV position to the grid
 	uv_position = snap_to_grid(uv_position)
-
+	
 	# Convert UV to pixel coordinates
-	var x = int(uv_position.x * texture_size.x)
-	var y = int(uv_position.y * texture_size.y)
+	var x = uv_position.x * texture_size.x
+	var y = uv_position.y * texture_size.y
+	
+	# Delegate to BrushLayer
+	if brush_layer:
+		brush_layer.add_splat(Vector2(x, y), active_pen_properties["brush_size"], color)
 
-	# Draw a circle for the brush stroke
-	for offset_x in range(-active_pen_properties["brush_size"], active_pen_properties["brush_size"] + 1):
-		for offset_y in range(-active_pen_properties["brush_size"], active_pen_properties["brush_size"] + 1):
-			if offset_x * offset_x + offset_y * offset_y <= active_pen_properties["brush_size"] ** 2:
-				var px = x + offset_x
-				var py = y + offset_y
-				if px >= 0 and px < texture_size.x and py >= 0 and py < texture_size.y:
-					drawing_texture.set_pixel(px, py, color)
-
-	# Update the texture
-	drawing_texture_data.update(drawing_texture)
-
-# Function to update the material's albedo texture
-func update_material(tex: ImageTexture):
-	if self.material_override is ShaderMaterial:
-		var shader_material = self.material_override as ShaderMaterial
-		shader_material.set_shader_parameter("texture_albedo", tex)
-	else:
-		var material = StandardMaterial3D.new()
-		material.albedo_texture = tex
-		self.material_override = material
 
 # Function to draw while tracking the pen tip position
 func draw_with_pen(uv_position: Vector2):
@@ -124,43 +152,17 @@ func draw_line(from_uv: Vector2, to_uv: Vector2, color: Color):
 		return
 
 	# Interpolate between the points and draw along the line
-	var from_x = int(from_uv.x * texture_size.x)
-	var from_y = int(from_uv.y * texture_size.y)
-	var to_x = int(to_uv.x * texture_size.x)
-	var to_y = int(to_uv.y * texture_size.y)
-
-	# Use Bresenham's line algorithm to draw a line
-	var delta_x = abs(to_x - from_x)
-	var delta_y = abs(to_y - from_y)
-	var sx = -1 if from_x > to_x else 1
-	var sy = -1 if from_y > to_y else 1
-	var err = delta_x - delta_y
-
-	while true:
-		# Draw a point at the current position
-		for offset_x in range(-active_pen_properties["brush_size"], active_pen_properties["brush_size"] + 1):
-			for offset_y in range(-active_pen_properties["brush_size"], active_pen_properties["brush_size"] + 1):
-				if offset_x * offset_x + offset_y * offset_y <= active_pen_properties["brush_size"] ** 2:
-					var px = from_x + offset_x
-					var py = from_y + offset_y
-					if px >= 0 and px < texture_size.x and py >= 0 and py < texture_size.y:
-						drawing_texture.set_pixel(px, py, color)
-
-		# Check if we have reached the end of the line
-		if from_x == to_x and from_y == to_y:
-			break
-
-		# Calculate the next point
-		var e2 = 2 * err
-		if e2 > -delta_y:
-			err -= delta_y
-			from_x += sx
-		if e2 < delta_x:
-			err += delta_x
-			from_y += sy
-
-	# Update the texture
-	drawing_texture_data.update(drawing_texture)
+	var from_pos = from_uv * Vector2(texture_size)
+	var to_pos = to_uv * Vector2(texture_size)
+	
+	var steps = int(from_pos.distance_to(to_pos) / (active_pen_properties["brush_size"] * 0.5))
+	steps = max(1, steps)
+	
+	for i in range(steps + 1):
+		var t = float(i) / float(steps)
+		var p = from_pos.lerp(to_pos, t)
+		if brush_layer:
+			brush_layer.add_splat(p, active_pen_properties["brush_size"], color)
 
 
 func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
@@ -190,48 +192,6 @@ func draw_at_world_position(world_pos: Vector3, color: Color = Color.BLACK):
 	if uv.x >= 0.0 and uv.x <= 1.0 and uv.y >= 0.0 and uv.y <= 1.0:
 		draw_point(uv, color)
 
-# --- WET PAINT EFFECT ---
-@export var wet_paint_flow: bool = false
-@export var flow_speed: float = 60.0 # Pixels per second
-var flow_accumulator: float = 0.0
-
 func _process(delta):
-	if wet_paint_flow:
-		flow_accumulator += flow_speed * delta
-		if flow_accumulator >= 1.0:
-			var pixels_to_shift = int(flow_accumulator)
-			flow_accumulator -= pixels_to_shift
-			
-			_apply_flow_down(pixels_to_shift)
-
-func _apply_flow_down(pixels: int):
-	# Create a temporary copy
-	var temp_img = drawing_texture.duplicate()
-	
-	# Dissipation Step:
-	# Slightly downscale the image to lose detail and "shrink" the paint
-	# This creates a blurring/fading effect over time
-	var dissipate_w = int(texture_size.x * 0.995)
-	var dissipate_h = int(texture_size.y * 0.995)
-	temp_img.resize(dissipate_w, dissipate_h, Image.INTERPOLATE_BILINEAR)
-	temp_img.resize(texture_size.x, texture_size.y, Image.INTERPOLATE_BILINEAR)
-	
-	# Shift down: Copy the dissipated image back, offset by 'pixels'
-	# We copy the whole thing, but shifted down.
-	var src_rect = Rect2i(0, 0, texture_size.x, texture_size.y - pixels)
-	var dst_pos = Vector2i(0, pixels)
-	
-	# Clear the texture first (or just the top/sides if we want to be precise)
-	# But blitting over it is faster.
-	# We need to clear the "exposed" areas (top and maybe sides due to shrink)
-	# Actually, since we resize back to full size, sides are fine.
-	# Just the top needs clearing.
-	
-	drawing_texture.blit_rect(temp_img, src_rect, dst_pos)
-	
-	# Clear the top rows (fresh canvas)
-	for y in range(pixels):
-		for x in range(texture_size.x):
-			drawing_texture.set_pixel(x, y, Color(1, 1, 1, 0.2)) # Clear color
-			
-	drawing_texture_data.update(drawing_texture)
+	# GPU simulation runs automatically in the shader/viewport
+	pass

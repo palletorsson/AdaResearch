@@ -214,9 +214,13 @@ func toggle_manual() -> void:
 func show_manual() -> void:
 	if is_visible or is_animating:
 		return
-	
+
 	print("MapManual: Showing manual...")
-	
+
+	# Ensure UI nodes are found (in case they weren't during _ready)
+	if not tab_menu:
+		_find_ui_nodes()
+
 	# Reload map data each time we show (in case map changed)
 	_load_map_data()
 	
@@ -300,14 +304,27 @@ func _parse_map_data(map_data: Dictionary) -> void:
 		current_map_name = map_data.map_info.name
 
 	# Detect available md files in map directory
+	# Try both original name and with underscores (e.g., "Point Zero" -> "Point_Zero")
+	print("MapManual: Detecting md files for map: '%s'" % current_map_name)
 	if not current_map_name.is_empty():
-		var map_dir = "res://commons/maps/%s/" % current_map_name
+		var folder_candidates = [
+			current_map_name,
+			current_map_name.replace(" ", "_")
+		]
 		var md_types = ["summary", "technical", "critical", "blurb", "manual"]
-		for md_type in md_types:
-			var md_path = map_dir + md_type + ".md"
-			if FileAccess.file_exists(md_path):
-				available_md_files[md_type] = md_path
-				print("MapManual: Found %s.md" % md_type)
+
+		for folder_name in folder_candidates:
+			var map_dir = "res://commons/maps/%s/" % folder_name
+			print("MapManual: Checking folder: %s" % map_dir)
+			for md_type in md_types:
+				if available_md_files.has(md_type):
+					continue  # Already found this type
+				var md_path = map_dir + md_type + ".md"
+				if FileAccess.file_exists(md_path):
+					available_md_files[md_type] = md_path
+					print("MapManual: Found %s.md in %s" % [md_type, folder_name])
+
+		print("MapManual: Total md files found: %d - %s" % [available_md_files.size(), str(available_md_files.keys())])
 
 	# Update tab visibility based on available files
 	_update_tab_visibility()
@@ -578,6 +595,16 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 
 func _update_tab_visibility() -> void:
 	"""Show/hide tabs based on which md files exist"""
+	print("MapManual: _update_tab_visibility called, available_md_files: %s" % str(available_md_files.keys()))
+
+	if not tab_menu:
+		print("MapManual: Tab menu not found yet, trying to find UI nodes now...")
+		_find_ui_nodes()
+		
+	if not tab_menu:
+		print("MapManual: Tab menu STILL not found, skipping visibility update")
+		return
+
 	if summary_tab:
 		summary_tab.visible = available_md_files.has("summary")
 	if technical_tab:
@@ -587,14 +614,14 @@ func _update_tab_visibility() -> void:
 	if blurb_tab:
 		blurb_tab.visible = available_md_files.has("blurb")
 
-	# Hide entire tab menu if no files available (or only one file)
-	if tab_menu:
-		var visible_count = 0
-		if available_md_files.has("summary"): visible_count += 1
-		if available_md_files.has("technical"): visible_count += 1
-		if available_md_files.has("critical"): visible_count += 1
-		if available_md_files.has("blurb"): visible_count += 1
-		tab_menu.visible = visible_count > 1
+	# Show tab menu if any tab-able md files available (summary, technical, critical, blurb)
+	var visible_count = 0
+	if available_md_files.has("summary"): visible_count += 1
+	if available_md_files.has("technical"): visible_count += 1
+	if available_md_files.has("critical"): visible_count += 1
+	if available_md_files.has("blurb"): visible_count += 1
+	tab_menu.visible = visible_count >= 1
+	print("MapManual: Tab menu visible: %s (tab count: %d)" % [tab_menu.visible, visible_count])
 
 func _on_tab_pressed(tab_type: String) -> void:
 	"""Handle tab button press"""
@@ -602,7 +629,9 @@ func _on_tab_pressed(tab_type: String) -> void:
 
 func _select_tab(tab_type: String) -> void:
 	"""Select and load a specific tab"""
+	print("MapManual: _select_tab called with: %s" % tab_type)
 	if not available_md_files.has(tab_type):
+		print("MapManual: Tab type '%s' not in available_md_files" % tab_type)
 		return
 
 	current_md_type = tab_type
@@ -613,11 +642,14 @@ func _select_tab(tab_type: String) -> void:
 
 	# Load the md file content
 	var file_path = available_md_files[tab_type]
+	print("MapManual: Loading content from: %s" % file_path)
 	var file_content = _load_markdown_file(file_path)
 
 	if not file_content.is_empty():
+		print("MapManual: Loaded %d characters from %s" % [file_content.length(), tab_type])
 		_split_and_add_pages(file_content)
 	else:
+		print("MapManual: File was empty for %s" % tab_type)
 		pages.append("# %s\n\nNo content available." % tab_type.capitalize())
 		current_page = 0
 		_update_display()
