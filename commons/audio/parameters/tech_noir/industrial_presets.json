@@ -1,0 +1,58 @@
+{
+    "hydraulic_hiss": {
+        "_metadata": {
+            "generator": "TechnoNoir",
+            "description": "Pressure release hiss",
+            "tags": "industrial, mechanic, steam"
+        },
+        "parameters": {
+            "buffer_length": {
+                "value": 2.0,
+                "min": 1.0,
+                "max": 5.0
+            }
+        }
+    },
+    "data_chirp": {
+        "_metadata": {
+            "generator": "TechnoNoir",
+            "description": "Digital data processing",
+            "tags": "industrial, computer, glitch"
+        },
+        "parameters": {}
+    },
+    "motor_whir": {
+        "_metadata": {
+            "generator": "TechnoNoir",
+            "description": "Electric motor servo",
+            "tags": "industrial, mechanic, robot"
+        },
+        "parameters": {
+            "motor_freq": {
+                "value": 120.0,
+                "min": 50.0,
+                "max": 300.0
+            }
+        }
+    },
+    "body_neural_surge": {
+        "_metadata": {
+            "generator": "TechnoNoir",
+            "description": "Cybernetic neural surge",
+            "tags": "body, electric, glitch",
+            "sound_type": "electric_hum"
+        },
+        "parameters": {
+            "hum_freq": {
+                "value": 120.0,
+                "min": 50.0,
+                "max": 200.0
+            },
+            "attack": {
+                "value": 0.1,
+                "min": 0.0,
+                "max": 1.0
+            }
+        }
+    }
+}

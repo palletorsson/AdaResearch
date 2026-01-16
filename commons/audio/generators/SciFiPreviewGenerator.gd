@@ -8,27 +8,13 @@ const PREVIEW_RATE = 44100
 const PREVIEW_DURATION = 8.0
 
 static func generate_preview(track_request: String) -> AudioStreamWAV:
+	# Handle "sci_fi:" prefix
+	if track_request.begins_with("sci_fi:"):
+		track_request = track_request.replace("sci_fi:", "")
+	
 	var parts = track_request.split("_")
 	var track = parts[0] # "drift", "noir", "neon"
 	var layer = parts[ parts.size() - 1 ] # "mix", "bass", "piano", "sax", "drums", "rain"
-	
-	if track_request == "track_1" or track_request == "drift": track = "drift"; layer = "mix"
-	if track_request == "track_4" or track_request == "noir":  track = "noir";  layer = "mix"
-	if track_request == "track_6" or track_request == "neon":  track = "neon";  layer = "mix"
-
-	# Cleanup aliases
-	if track == "sci_fi:foundry": track = "foundry"
-	if track == "sci_fi:skyline": track = "skyline"
-	if track == "sci_fi:market": track = "market"
-	if track == "sci_fi:finale": track = "finale"
-	
-	# Handle stem formats like "sci_fi:drift_mix" -> track="drift", layer="mix"
-	if parts.size() > 2 and parts[0] == "sci":
-		# e.g. sci_fi:drift_mix -> parts=["sci", "fi:drift", "mix"] ... wait split("_") might be tricky with ":"
-		# The input is actually e.g. "sci_fi:drift_mix".
-		# split("_") -> ["sci", "fi:drift", "mix"] ? No.
-		# The ID in json is "sci_fi:drift_mix".
-		pass
 
 	match track:
 		"drift": return _render_track_1(layer)

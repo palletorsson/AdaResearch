@@ -84,9 +84,9 @@ func _process(_delta):
 
 			# Always draw a line from the last position to the new position
 			if last_uv_position != Vector2(-1, -1):
-				paper_surface.call("draw_line", last_uv_position, smoothed_uv_position, brush_color)
+				paper_surface.call("draw_line", last_uv_position, smoothed_uv_position, brush_color, brush_size, snap_grid_size)
 			else:
-				paper_surface.call("draw_point", smoothed_uv_position, brush_color)
+				paper_surface.call("draw_point", smoothed_uv_position, brush_color, brush_size, snap_grid_size)
 
 			# Optionally draw random dots
 			if use_random_dots and is_experimental:

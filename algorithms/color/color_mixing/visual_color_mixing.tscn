@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfkeatfaxb5qp"]
+[gd_scene load_steps=5 format=3 uid="uid://cfkeatfaxb5qp"]
 
 [ext_resource type="PackedScene" uid="uid://jhj23qqrld8p" path="res://commons/primitives/disks/grab_disk.tscn" id="1_disk"]
+[ext_resource type="Script" uid="uid://c6vr5mimwql4u" path="res://algorithms/color/color_mixing/color_display_disk.gd" id="2_display"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
 albedo_color = Color(0.05, 0.05, 0.05, 1)
@@ -180,6 +181,79 @@ blend_type = 0
 radius = 0.1
 height = 0.02
 snap_to_shelf = true
+
+[node name="Red1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red1")
+
+[node name="Red2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red2")
+
+[node name="Red3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Red3")
+
+[node name="Green1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green1")
+
+[node name="Green2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green2")
+
+[node name="Green3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Green3")
+
+[node name="Blue1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue1")
+
+[node name="Blue2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue2")
+
+[node name="Blue3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../AdditiveTable/Blue3")
+
+[node name="Cyan1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan1")
+
+[node name="Cyan2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan2")
+
+[node name="Cyan3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Cyan3")
+
+[node name="Magenta1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta1")
+
+[node name="Magenta2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta2")
+
+[node name="Magenta3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Magenta3")
+
+[node name="Yellow1Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow1")
+
+[node name="Yellow2Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow2")
+
+[node name="Yellow3Display" type="Node3D" parent="."]
+script = ExtResource("2_display")
+tracked_disk_path = NodePath("../SubtractiveTable/Yellow3")
+
 
 [node name="Instructions" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

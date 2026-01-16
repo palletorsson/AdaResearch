@@ -105,16 +105,21 @@ func reset_canvas():
 		debug_label.text = "Drawing reset."
 
 # Snap a UV position to the nearest grid point
-func snap_to_grid(uv_position: Vector2) -> Vector2:
-	var grid_size = Vector2(1.0 / active_pen_properties["snap_size"], 1.0 / active_pen_properties["snap_size"])
+func snap_to_grid(uv_position: Vector2, snap_size: int = -1) -> Vector2:
+	var s_size = snap_size if snap_size > 0 else active_pen_properties["snap_size"]
+	
+	var grid_size = Vector2(1.0 / s_size, 1.0 / s_size)
 	var snapped_x = round(uv_position.x / grid_size.x) * grid_size.x
 	var snapped_y = round(uv_position.y / grid_size.y) * grid_size.y
 	return Vector2(snapped_x, snapped_y)
 
 # Draw a single point
-func draw_point(uv_position: Vector2, color: Color):
+# Draw a single point
+func draw_point(uv_position: Vector2, color: Color, size: int = -1, snap_size: int = -1):
+	var b_size = size if size > 0 else active_pen_properties["brush_size"]
+	
 	# Snap the UV position to the grid
-	uv_position = snap_to_grid(uv_position)
+	uv_position = snap_to_grid(uv_position, snap_size)
 	
 	# Convert UV to pixel coordinates
 	var x = uv_position.x * texture_size.x
@@ -122,7 +127,7 @@ func draw_point(uv_position: Vector2, color: Color):
 	
 	# Delegate to BrushLayer
 	if brush_layer:
-		brush_layer.add_splat(Vector2(x, y), active_pen_properties["brush_size"], color)
+		brush_layer.add_splat(Vector2(x, y), b_size, color)
 
 
 # Function to draw while tracking the pen tip position
@@ -142,27 +147,29 @@ func update_pen(brush_size: int, brush_color: Color, snap_size: int, random_dots
 
 
 
-func draw_line(from_uv: Vector2, to_uv: Vector2, color: Color):
+func draw_line(from_uv: Vector2, to_uv: Vector2, color: Color, size: int = -1, snap_size: int = -1):
+	var b_size = size if size > 0 else active_pen_properties["brush_size"]
+
 	# Snap the UV positions to the grid
-	from_uv = snap_to_grid(from_uv)
-	to_uv = snap_to_grid(to_uv)
+	from_uv = snap_to_grid(from_uv, snap_size)
+	to_uv = snap_to_grid(to_uv, snap_size)
 
 	if from_uv == Vector2(-1, -1):  # No previous point to connect from
-		draw_point(to_uv, color)
+		draw_point(to_uv, color, size, snap_size)
 		return
 
 	# Interpolate between the points and draw along the line
 	var from_pos = from_uv * Vector2(texture_size)
 	var to_pos = to_uv * Vector2(texture_size)
 	
-	var steps = int(from_pos.distance_to(to_pos) / (active_pen_properties["brush_size"] * 0.5))
+	var steps = int(from_pos.distance_to(to_pos) / (b_size * 0.5))
 	steps = max(1, steps)
 	
 	for i in range(steps + 1):
 		var t = float(i) / float(steps)
 		var p = from_pos.lerp(to_pos, t)
 		if brush_layer:
-			brush_layer.add_splat(p, active_pen_properties["brush_size"], color)
+			brush_layer.add_splat(p, b_size, color)
 
 
 func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:

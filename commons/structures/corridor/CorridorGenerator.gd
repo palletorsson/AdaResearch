@@ -66,9 +66,13 @@ func _generate():
 	# Apply Material - use simple material for MultiMesh compatibility
 	# (Shader materials often don't work with MultiMesh instancing)
 	var corridor_material = StandardMaterial3D.new()
-	corridor_material.albedo_color = Color(0.15, 0.15, 0.18, 1.0)  # Dark gray
-	corridor_material.metallic = 0.1
-	corridor_material.roughness = 0.8
+	corridor_material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)  # Pure white
+	corridor_material.metallic = 0.0
+	corridor_material.roughness = 0.3
+	# Add emission for bright glowing effect
+	corridor_material.emission_enabled = true
+	corridor_material.emission = Color(1.0, 1.0, 1.0)  # White emission
+	corridor_material.emission_energy_multiplier = 0.8  # Bright but not blinding
 	multimesh_instance.material_override = corridor_material
 
 	temp_node.queue_free()

@@ -11,6 +11,7 @@ extends XRToolsStaging
 @export var start_with_grid_system: bool = true
 @export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
+@export var skip_menu: bool = true  # Skip menu and load directly into lab
 
 # Signal emitted when staging is complete
 signal staging_complete
@@ -122,20 +123,151 @@ func _connect_staging_signals():
 func _start_game():
 	# Check for MainMenu3D
 	var menu = find_child("MainMenu3D", true, false)
+
+	# Skip menu if configured - go directly to lab with loading screen
+	if skip_menu:
+		print("AdaVRStaging: Skipping menu, loading directly into lab...")
+		if menu:
+			menu.visible = false
+		# Hide pointers during load
+		var left_pointer = find_child("FunctionPointerLeft", true, false)
+		var right_pointer = find_child("FunctionPointerRight", true, false)
+		if left_pointer: left_pointer.visible = false
+		if right_pointer: right_pointer.visible = false
+
+		# Show loading screen and load lab
+		await _load_lab_with_loading_screen()
+		return
+
 	if menu:
 		print("AdaVRStaging: Menu found, waiting for user input")
 		if not menu.start_game_requested.is_connected(_on_menu_start_game):
 			menu.start_game_requested.connect(_on_menu_start_game)
 		if not menu.quit_requested.is_connected(_on_menu_quit):
 			menu.quit_requested.connect(_on_menu_quit)
+
+		# Preload the lab scene in background while showing menu
+		_preload_lab_scene()
 		return
 
 	print("AdaVRStaging: Starting game with consolidated system")
-	
+
 	if use_lab_system:
 		await _setup_lab_system()
 	else:
 		await _setup_basic_vr_scene()
+
+var _preload_started: bool = false
+
+func _load_lab_with_loading_screen():
+	"""Load lab scene directly with loading screen visible"""
+	var loading_screen = $LoadingScreen
+	if loading_screen:
+		# Show loading screen immediately
+		loading_screen.progress = 0.0
+		loading_screen.enable_press_to_continue = false
+		loading_screen.follow_camera = true
+		loading_screen.visible = true
+
+	# Start threaded loading
+	ResourceLoader.load_threaded_request(main_lab_scene)
+
+	# Update progress bar while loading
+	if loading_screen:
+		while true:
+			var progress := []
+			var status = ResourceLoader.load_threaded_get_status(main_lab_scene, progress)
+
+			if status == ResourceLoader.THREAD_LOAD_LOADED:
+				loading_screen.progress = 1.0
+				print("AdaVRStaging: Lab scene loaded!")
+				break
+			elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				loading_screen.progress = progress[0]
+				await get_tree().create_timer(0.05).timeout
+			elif status == ResourceLoader.THREAD_LOAD_FAILED:
+				print("AdaVRStaging: ERROR - Lab scene failed to load!")
+				break
+			else:
+				await get_tree().create_timer(0.05).timeout
+
+		# Brief pause at 100%
+		await get_tree().create_timer(0.3).timeout
+		loading_screen.visible = false
+
+	# Now setup the lab system (scene is cached, will be instant)
+	prompt_for_continue = false
+	if use_lab_system:
+		await _setup_lab_system()
+	else:
+		await _setup_basic_vr_scene()
+
+func _preload_lab_scene():
+	"""Start preloading the lab scene in the background while menu is visible"""
+	if _preload_started:
+		return
+
+	_preload_started = true
+	print("AdaVRStaging: Starting background preload of lab scene...")
+
+	# Start threaded loading - this runs in background
+	ResourceLoader.load_threaded_request(main_lab_scene)
+
+	# Optionally monitor preload progress (for debugging)
+	if OS.is_debug_build():
+		_monitor_preload()
+
+func _monitor_preload():
+	"""Monitor preload progress in debug builds"""
+	while true:
+		var progress := []
+		var status = ResourceLoader.load_threaded_get_status(main_lab_scene, progress)
+
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			print("AdaVRStaging: Lab scene preloaded successfully!")
+			break
+		elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			print("AdaVRStaging: Preload progress: %.0f%%" % (progress[0] * 100))
+			await get_tree().create_timer(0.5).timeout
+		elif status == ResourceLoader.THREAD_LOAD_FAILED:
+			print("AdaVRStaging: ERROR - Lab scene preload failed!")
+			break
+		else:
+			# THREAD_LOAD_INVALID_RESOURCE
+			await get_tree().create_timer(0.1).timeout
+
+func _show_loading_progress():
+	"""Show loading screen with progress bar while scene loads"""
+	var loading_screen = $LoadingScreen
+	if not loading_screen:
+		return
+
+	# Show loading screen
+	loading_screen.progress = 0.0
+	loading_screen.enable_press_to_continue = false
+	loading_screen.follow_camera = true
+	loading_screen.visible = true
+
+	# Update progress until loaded
+	while true:
+		var progress := []
+		var status = ResourceLoader.load_threaded_get_status(main_lab_scene, progress)
+
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			loading_screen.progress = 1.0
+			break
+		elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			loading_screen.progress = progress[0]
+			await get_tree().create_timer(0.1).timeout
+		else:
+			# Failed or invalid
+			break
+
+	# Brief pause at 100% for visual feedback
+	await get_tree().create_timer(0.2).timeout
+
+	# Hide loading screen (load_scene will handle actual scene transition)
+	loading_screen.visible = false
 
 func _on_menu_start_game():
 	var menu = find_child("MainMenu3D", true, false)
@@ -146,9 +278,15 @@ func _on_menu_start_game():
 		var right_pointer = find_child("FunctionPointerRight", true, false)
 		if left_pointer: left_pointer.visible = false
 		if right_pointer: right_pointer.visible = false
-	
+
 	print("AdaVRStaging: Menu start requested")
-	
+
+	# Check if preload is still in progress - if so, show loading screen
+	var status = ResourceLoader.load_threaded_get_status(main_lab_scene)
+	if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		print("AdaVRStaging: Scene still loading, showing loading screen...")
+		await _show_loading_progress()
+
 	# Force prompt_for_continue to false just in case
 	prompt_for_continue = false
 	

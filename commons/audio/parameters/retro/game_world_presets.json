@@ -1,0 +1,89 @@
+{
+    "retro_jump": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Classic 8-bit jump sound",
+            "tags": "retro, game, jump"
+        },
+        "parameters": {
+            "start_freq": {
+                "value": 150.0,
+                "min": 50.0,
+                "max": 500.0
+            },
+            "peak_freq": {
+                "value": 400.0,
+                "min": 200.0,
+                "max": 1000.0
+            },
+            "wave_type": {
+                "value": "square",
+                "options": [
+                    "square",
+                    "triangle",
+                    "sawtooth"
+                ]
+            }
+        }
+    },
+    "power_up_jingle": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Positive power-up sound",
+            "tags": "retro, game, reward"
+        },
+        "parameters": {
+            "root_note": {
+                "value": 262.0,
+                "min": 100.0,
+                "max": 1000.0
+            },
+            "scale_type": {
+                "value": "major",
+                "options": [
+                    "major",
+                    "minor",
+                    "pentatonic"
+                ]
+            }
+        }
+    },
+    "pickup_mario": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "Coin pickup sound",
+            "tags": "retro, game, coin"
+        },
+        "parameters": {
+            "start_freq": {
+                "value": 440.0,
+                "min": 200.0,
+                "max": 800.0
+            },
+            "end_freq": {
+                "value": 880.0,
+                "min": 400.0,
+                "max": 1600.0
+            }
+        }
+    },
+    "explosion": {
+        "_metadata": {
+            "generator": "Default",
+            "description": "8-bit explosion",
+            "tags": "retro, game, impact"
+        },
+        "parameters": {
+            "low_rumble_freq": {
+                "value": 30.0,
+                "min": 20.0,
+                "max": 100.0
+            },
+            "mid_crack_freq": {
+                "value": 400.0,
+                "min": 100.0,
+                "max": 1000.0
+            }
+        }
+    }
+}
