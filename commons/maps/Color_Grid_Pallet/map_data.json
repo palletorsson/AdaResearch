@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"name": "Color Grid Pallet",
+		"lookup_name": "Color_Grid_Pallet",
+		"description": "The grid becomes a canvas. Each cell awaits its color assignment - use the gridcolorizer to paint the floor while the spectrum forest grows above.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,9 +12,9 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "tutorial",
+			"category": "color",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Grid colorization", "Systematic color assignment", "Pattern construction"]
 		}
 	},
 	"documentation": {

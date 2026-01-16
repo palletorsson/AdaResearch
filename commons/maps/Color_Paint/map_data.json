@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"name": "Color Paint",
+		"lookup_name": "Color_Paint",
+		"description": "Paint meets physics. The ball painting demo turns spheres into canvases - throw paint, watch it splash, see color as action applied through motion.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,9 +12,9 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "tutorial",
+			"category": "color",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Physical painting", "Color application", "Gestural interaction"]
 		}
 	},
 	"documentation": {
@@ -32,7 +33,7 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
-			["1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1"], 
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "2", "2", "2", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"], 

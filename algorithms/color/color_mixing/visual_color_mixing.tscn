@@ -254,7 +254,6 @@ tracked_disk_path = NodePath("../SubtractiveTable/Yellow2")
 script = ExtResource("2_display")
 tracked_disk_path = NodePath("../SubtractiveTable/Yellow3")
 
-
 [node name="Instructions" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 visible = false

@@ -1,7 +1,7 @@
 extends Node3D
 class_name MirroredDisplayDisk
 
-## A large disk that mirrors a single small disk's position and color
+## A large disk that mirrors a single small disk's position, rotation, color, and blend mode
 ## Positioned 3 meters in front of the tracked disk
 
 @export var tracked_disk_path: NodePath
@@ -35,6 +35,7 @@ func _create_display_mesh() -> void:
 	# Create material
 	var mat = StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.albedo_color = Color.WHITE
 	_mesh_instance.material_override = mat
 
@@ -49,11 +50,20 @@ func _update_from_tracked_disk() -> void:
 	if not _tracked_disk or not _mesh_instance:
 		return
 	
-	# Update color to match the tracked disk
+	# Update material to match the tracked disk's blend mode and color
 	var mat = _mesh_instance.material_override as StandardMaterial3D
 	if mat:
-		mat.albedo_color = _tracked_disk.disk_color
+		# Match blend type (ADDITIVE or SUBTRACTIVE)
+		if _tracked_disk.blend_type == GrabDisk.BlendType.ADDITIVE:
+			mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+			mat.albedo_color = Color(_tracked_disk.disk_color.r, _tracked_disk.disk_color.g, _tracked_disk.disk_color.b, 0.7)
+		else:  # SUBTRACTIVE
+			mat.blend_mode = BaseMaterial3D.BLEND_MODE_MUL
+			mat.albedo_color = Color(_tracked_disk.disk_color.r, _tracked_disk.disk_color.g, _tracked_disk.disk_color.b, 0.8)
 	
-	# Update position: mirror the small disk's position, offset 3 meters forward (negative Z)
+	# Update position: mirror the small disk's position, offset 3 meters to opposite side (positive Z)
 	var tracked_pos = _tracked_disk.global_position
-	global_position = tracked_pos + Vector3(0, 0, -offset_distance)
+	global_position = tracked_pos + Vector3(0, 0, offset_distance)
+	
+	# Update rotation: mirror the small disk's rotation
+	global_rotation = _tracked_disk.global_rotation

@@ -4,7 +4,7 @@
 
 extends Node3D
 
-@export var fade_duration: float = 0.5
+@export var fade_duration: float = 0.0  # Disabled - was causing delays
 @export var warning_distance: float = 2.0
 @export var reset_delay: float = 1.0
 @export var activation_method: String = "proximity"  # "proximity" or "touch"

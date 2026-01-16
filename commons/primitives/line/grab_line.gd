@@ -114,26 +114,26 @@ func _update_line_mesh() -> void:
 	_cylinder_mesh.height = line_length
 
 	if _line_mesh:
-		# Line extends along X axis from handle
-		_line_mesh.position = Vector3(line_length / 2.0, 0, 0)
-		_line_mesh.rotation_degrees = Vector3(0, 0, 90)
+		# Line extends along Y axis (vertical) from handle
+		_line_mesh.position = Vector3(0, line_length / 2.0, 0)
+		_line_mesh.rotation_degrees = Vector3.ZERO
 
 	if _tip_marker:
-		_tip_marker.position = Vector3(line_length, 0, 0)
+		_tip_marker.position = Vector3(0, line_length, 0)
 
 	# Update tip pickable position (only if not being dragged)
 	if _tip_pickable and not _tip_grabbed:
-		_tip_pickable.position = Vector3(line_length, 0, 0)
+		_tip_pickable.position = Vector3(0, line_length, 0)
 
 	if _length_label:
 		_length_label.text = "%.2fm" % line_length
-		_length_label.position = Vector3(line_length / 2.0, 0.05, 0)
+		_length_label.position = Vector3(0.05, line_length / 2.0, 0)
 
 func _process(_delta: float) -> void:
 	if _tip_grabbed and _tip_pickable:
 		# Calculate new length from tip position
 		var tip_local = _tip_pickable.position
-		line_length = tip_local.x
+		line_length = tip_local.y
 
 func _on_tip_picked_up(_pickable) -> void:
 	_tip_grabbed = true
@@ -142,10 +142,10 @@ func _on_tip_dropped(_pickable) -> void:
 	_tip_grabbed = false
 	# Snap tip back to correct position
 	if _tip_pickable:
-		_tip_pickable.position = Vector3(line_length, 0, 0)
+		_tip_pickable.position = Vector3(0, line_length, 0)
 
 func get_tip_position() -> Vector3:
-	return _tip_marker.global_position if _tip_marker else global_position + global_transform.basis.x * line_length
+	return _tip_marker.global_position if _tip_marker else global_position + global_transform.basis.y * line_length
 
 func get_tip_transform() -> Transform3D:
 	return _tip_marker.global_transform if _tip_marker else Transform3D(global_transform.basis, get_tip_position())

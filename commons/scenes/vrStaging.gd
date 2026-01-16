@@ -11,7 +11,7 @@ extends XRToolsStaging
 @export var start_with_grid_system: bool = true
 @export var main_lab_scene: String = "res://commons/scenes/lab.tscn"
 @export var preferred_grid_map: String = "Lab"
-@export var skip_menu: bool = true  # Skip menu and load directly into lab
+@export var skip_menu: bool = false  # Skip menu and load directly into lab
 
 # Signal emitted when staging is complete
 signal staging_complete

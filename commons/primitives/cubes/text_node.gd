@@ -773,6 +773,10 @@ func handle_letter_emission(delta: float):
 			emit_next_letter()
 
 func emit_next_letter():
+	# Safety check: ensure manifesto_text is not empty
+	if manifesto_text.length() == 0:
+		return
+	
 	# Check if we've reached the end of the text
 	if current_char_index >= manifesto_text.length():
 		current_char_index = 0  # Loop back to beginning

@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Tutorial_2D",
-		"description": "2D Array Navigation - explore both X and Y axes in a grid structure",
+		"name": "Color Pillar",
+		"lookup_name": "Color_Pillar",
+		"description": "Pillars of color rise along the runway. Grab color sticks, watch the flashlight demo, see visual color mixing - here color is gathered, mixed, and understood as process.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -11,9 +12,9 @@
 		},
 		"metadata": {
 			"difficulty": "beginner",
-			"category": "tutorial",
+			"category": "color",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Color collection", "Light and color", "Visual color mixing"]
 		}
 	},
 	"documentation": {
@@ -45,12 +46,12 @@
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],
+			["2", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1","2"],
+			["2", "1", "2", "2", "2", "1", "1", "1", "1", "1", "1","2"],
+			["2", "1", "2", "2", "2", "1", "1", "1", "1", "1", "1","2"],
+			["2", "1", "2", "2", "2", "1", "1", "1", "1", "1", "1","2"],
 			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "0", "2"],
-				["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],		
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1","2"],		
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -68,11 +69,11 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "el", " ", "el",  " ", "el", " ", "el", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "wp", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", " ", " "],					
 			[" ", "s", " ", " ", " ", " ", " "],
-			[" ", "an:90", " ", " ", " ", " ", " "],
+			["an:90", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", "sp"]
 		],
 		"interactables": [
@@ -83,18 +84,18 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "visual_color_mixing:0:-0.4:0.9", " ", " ", "grabcolorcollection:90:1"],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", "flashlight_demo", " ", " ", " ", " ", "grabcolorcollection:90:1", " ", "grabcolorcollection:-90:1"],
-			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1"],
-			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1", " ", "grabcolorcollection:-90:1"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1", " ", "grabcolorcollection:-90:1"],
-			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1"],
 			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "dark_sphere", " ", " ", "grabcolorcollection:90:1"],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1", " ", "grabcolorcollection:-90:1"],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "grabcolorcollection:90:1"],
+			[" ", " ", "grab_rainbow_stick:-90:1", " ", "grab_rainbow_stick:-90:1", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "SpectrumVisualizer", " ", " ", " "]
 		]

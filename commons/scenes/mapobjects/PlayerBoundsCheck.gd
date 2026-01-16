@@ -22,12 +22,14 @@ enum CheckType {
 @export var scalar_limit: float = 30.0
 
 @export_group("Reset")
-@export var reset_position: Vector3 = Vector3(0.0, 1.0, 0.0)
+@export var reset_position: Vector3 = Vector3(0.0, 2.0, 0.0)  # Higher default
 @export var reset_velocity: bool = true
+@export var reset_cooldown: float = 2.0  # Seconds before allowing another reset
 
 var player_node: Node3D
 var _timer: float = 0.0
 var is_resetting: bool = false
+var _reset_cooldown_timer: float = 0.0
 
 func _ready():
 	_find_player_node()
@@ -35,7 +37,12 @@ func _ready():
 func _physics_process(delta):
 	if not active:
 		return
-		
+
+	# Cooldown after reset
+	if _reset_cooldown_timer > 0:
+		_reset_cooldown_timer -= delta
+		return
+
 	# Timer check
 	if check_interval > 0:
 		_timer += delta
@@ -72,16 +79,20 @@ func _physics_process(delta):
 func _reset_player():
 	if is_resetting:
 		return
-		
+
 	print("PlayerBoundsCheck: ⚠️ Player out of bounds! Initiating reset...")
 	is_resetting = true
-	
-	# Find a target position if we haven't yet, or if we want to respect the scene's spawn
+	_reset_cooldown_timer = reset_cooldown  # Start cooldown
+
+	# Find a target position - use SpawnPoint but ensure Y is high enough
 	var target_pos = reset_position
 	var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
 	if spawn_node:
 		target_pos = spawn_node.global_position
-	
+		# Ensure minimum height to avoid spawning underground
+		if target_pos.y < 1.5:
+			target_pos.y = 1.5
+
 	# Try to find Fly Mode controller
 	var flight_controller = _find_flight_controller(player_node)
 	if flight_controller:
@@ -91,33 +102,30 @@ func _reset_player():
 	# 1. Reset velocity immediately
 	if reset_velocity:
 		_reset_velocity(player_node)
-	
-	# 2. Wait for physics frame
-	await get_tree().physics_frame
-	
-	# 3. Teleport
+
+	# 2. Teleport immediately (no physics frame wait - faster reset)
 	var root = _find_player_root(player_node)
 	if root:
 		root.global_position = target_pos
-		# Force update transform immediately
-		if root is Node3D:
-			root.global_transform.origin = target_pos
-			root.global_position = target_pos # Redundant but safe
 		print("PlayerBoundsCheck: Teleported player root '%s' to %s" % [root.name, target_pos])
 	else:
 		player_node.global_position = target_pos
-	
-	# 4. Aggressively reset velocity for next few frames to kill momentum
+
+	# 3. Reset velocity again after teleport
 	if reset_velocity:
-		for i in range(5): # Reset for 5 frames to be absolutely sure
-			_reset_velocity(player_node)
-			await get_tree().physics_frame
-	
+		_reset_velocity(player_node)
+
+	# 4. Wait one frame then disable fly mode
+	await get_tree().physics_frame
+
+	if reset_velocity:
+		_reset_velocity(player_node)
+
 	# Disable Fly Mode
 	if flight_controller:
 		print("PlayerBoundsCheck: Disabling Fly Mode")
 		flight_controller.set_flying(false)
-	
+
 	is_resetting = false
 
 func _find_flight_controller(start_node: Node) -> Node:

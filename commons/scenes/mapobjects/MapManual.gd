@@ -299,9 +299,16 @@ func _parse_map_data(map_data: Dictionary) -> void:
 	map_name_for_hint = ""
 	available_md_files.clear()
 
-	if map_data.has("map_info") and map_data.map_info.has("name"):
-		map_name_for_hint = map_data.map_info.name
-		current_map_name = map_data.map_info.name
+	if map_data.has("map_info"):
+		# Prefer lookup_name for folder matching
+		if map_data.map_info.has("lookup_name"):
+			current_map_name = map_data.map_info.lookup_name
+		elif map_data.map_info.has("name"):
+			current_map_name = map_data.map_info.name
+
+		# Use display name for hint
+		if map_data.map_info.has("name"):
+			map_name_for_hint = map_data.map_info.name
 
 	# Detect available md files in map directory
 	# Try both original name and with underscores (e.g., "Point Zero" -> "Point_Zero")
@@ -311,6 +318,10 @@ func _parse_map_data(map_data: Dictionary) -> void:
 			current_map_name,
 			current_map_name.replace(" ", "_")
 		]
+		# Also try display name if different from lookup name
+		if not map_name_for_hint.is_empty() and map_name_for_hint != current_map_name:
+			folder_candidates.append(map_name_for_hint)
+			folder_candidates.append(map_name_for_hint.replace(" ", "_"))
 		var md_types = ["summary", "technical", "critical", "blurb", "manual"]
 
 		for folder_name in folder_candidates:
