@@ -29,36 +29,36 @@ Create a new `.json` file in this directory:
 ```json
 {
   "rack_info": {
-    "name": "My Custom Rack",
-    "description": "Description of what this rack does",
-    "version": "1.0",
-    "sound_type": "basic_sine_wave"
+	"name": "My Custom Rack",
+	"description": "Description of what this rack does",
+	"version": "1.0",
+	"sound_type": "basic_sine_wave"
   },
   "layout": {
-    "col_spacing": 0.22,
-    "row_spacing": 0.1
+	"col_spacing": 0.22,
+	"row_spacing": 0.1
   },
   "grid": [
-    ["sl_1", "nb_1"],
-    ["sl_2", "nb_2"]
+	["sl_1", "nb_1"],
+	["sl_2", "nb_2"]
   ],
   "control_definitions": {
-    "sl_1": {
-      "type": "slider",
-      "label": "Frequency",
-      "parameter": "freq",
-      "min": 20.0,
-      "max": 2000.0,
-      "default": 440.0
-    },
-    "nb_1": {
-      "type": "knob",
-      "label": "Amplitude",
-      "parameter": "amp",
-      "min": 0.0,
-      "max": 1.0,
-      "default": 0.5
-    }
+	"sl_1": {
+	  "type": "slider",
+	  "label": "Frequency",
+	  "parameter": "freq",
+	  "min": 20.0,
+	  "max": 2000.0,
+	  "default": 440.0
+	},
+	"nb_1": {
+	  "type": "knob",
+	  "label": "Amplitude",
+	  "parameter": "amp",
+	  "min": 0.0,
+	  "max": 1.0,
+	  "default": 0.5
+	}
   }
 }
 ```
@@ -91,14 +91,37 @@ Metadata about the rack configuration.
 
 ### `layout` Section
 
-Controls the spacing between grid cells. All values optional with defaults shown:
+Controls the spacing and layout of the rack. Supports fixed or auto-spacing.
 
+**Fixed Spacing:**
 ```json
 {
   "col_spacing": 0.22,    // Horizontal spacing between columns (meters)
   "row_spacing": 0.1      // Vertical spacing between rows (meters)
 }
 ```
+
+**Auto-Spacing (Recommended):**
+```json
+{
+  "auto_spacing": true,   // Enable smart spacing based on control sizes
+  "padding": 0.02,        // Padding around the entire rack (meters)
+  "gap": 0.02             // Gap between controls (meters)
+}
+```
+
+When `auto_spacing` is true (or col_spacing is 0), the system automatically calculates spacing based on each control type's size:
+
+| Control Type | Default Size (W x H) |
+|-------------|---------------------|
+| slider | 0.22 x 0.06 m |
+| slv (vertical) | 0.06 x 0.15 m |
+| knob | 0.08 x 0.08 m |
+| xy/pad | 0.15 x 0.15 m |
+| button | 0.06 x 0.06 m |
+| monitor | 0.30 x 0.22 m |
+| meter | 0.04 x 0.12 m |
+| label | 0.20 x 0.03 m |
 
 ### `grid` Section
 
@@ -147,21 +170,185 @@ Dictionary mapping control IDs to their specifications.
 }
 ```
 
-## Control Naming Conventions
+**Vertical Slider Example:**
+```json
+"slv_1": {
+  "type": "slv",            // Vertical fader
+  "label": "Volume",
+  "parameter": "amp",
+  "min": 0.0,
+  "max": 1.0
+}
+```
 
-Use these prefixes for control IDs:
+**Snap Slider Example (Discrete Steps):**
+```json
+"sls_1": {
+  "type": "sls",            // Stepped slider
+  "label": "Octave",
+  "parameter": "octave",
+  "min": -2,
+  "max": 2,
+  "step": 1                 // Step size (1 = whole numbers)
+}
+```
 
-| Prefix | Type | Example | Description |
-|--------|------|---------|-------------|
-| `sl_N` | Slider | `sl_1`, `sl_2` | Horizontal slider control |
-| `nb_N` | Knob | `nb_1`, `nb_2` | Rotary dial/knob control |
+**Zero-Centered Slider Example:**
+```json
+"slz_1": {
+  "type": "slz",            // Returns to center on release
+  "label": "Pitch Bend",
+  "parameter": "pitch",
+  "min": -1.0,
+  "max": 1.0,
+  "return_to_zero": true    // Default: true
+}
+```
 
-**Future extensions (not yet implemented):**
-- `b_N` - Button controls
-- `2df_N` - 2D field (XY pad)
-- `3df_N` - 3D field (XYZ spatial control)
+**XY Pad Example (2 Parameters):**
+```json
+"xy_1": {
+  "type": "xy",             // XY pad controls 2 parameters
+  "label": "Filter",
+  "parameter_x": "cutoff",  // X-axis parameter
+  "parameter_y": "resonance", // Y-axis parameter
+  "min_x": 20.0,
+  "max_x": 2000.0,
+  "min_y": 0.0,
+  "max_y": 1.0,
+  "size": 0.1               // Pad size in meters
+}
+```
 
-Where `N` is any number (1, 2, 3, ...). Numbers don't need to be sequential.
+**Button Example:**
+```json
+"btn_1": {
+  "type": "btn",
+  "label": "Play",
+  "action": "play"          // "play", "stop", or "toggle"
+}
+```
+
+**Toggle Button Example:**
+```json
+"btn_2": {
+  "type": "btn",
+  "label": "Mute",
+  "parameter": "mute",      // Maps to parameter when toggled
+  "action": "toggle"
+}
+```
+
+**Wheel Example (Pitch Bend Style):**
+```json
+"whl_1": {
+  "type": "wheel",
+  "label": "Mod",
+  "parameter": "mod_amount",
+  "min": 0.0,
+  "max": 1.0
+}
+```
+
+**Lever Example:**
+```json
+"lv_1": {
+  "type": "lever",
+  "label": "Throw",
+  "parameter": "intensity",
+  "min": 0.0,
+  "max": 1.0
+}
+```
+
+**Monitor Example (Waveform Display):**
+```json
+"mon_1": {
+  "type": "monitor",
+  "label": "Output"
+}
+```
+
+**VU Meter Example:**
+```json
+"mtr_L": {
+  "type": "meter",
+  "label": "L",
+  "source": "output_left"     // Audio source to monitor
+}
+```
+
+**Label Example:**
+```json
+"lbl_osc": {
+  "type": "label",
+  "text": "OSCILLATOR",
+  "font_size": 28,
+  "color": "#aaaaaa"
+}
+```
+
+**Group Container Example:**
+```json
+"grp_filter": {
+  "type": "group",
+  "label": "FILTER",
+  "color": "#4a2a6a",         // Accent color for border
+  "width": 0.3,               // Width in meters
+  "height": 0.2               // Height in meters
+}
+```
+
+## Control Types (Ableton-Style)
+
+All available control types for your rack:
+
+### Sliders (Faders)
+
+| Type | Aliases | Description |
+|------|---------|-------------|
+| `slider` | `slh`, `slider_horizontal`, `fader` | Horizontal slider (default) |
+| `slv` | `slider_vertical`, `vfader` | Vertical slider |
+| `sls` | `slider_snap`, `stepped` | Snap slider with discrete steps |
+| `slz` | `slider_zero`, `bipolar` | Zero-centered, returns to center |
+
+### Rotary Controls
+
+| Type | Aliases | Description |
+|------|---------|-------------|
+| `knob` | `dial`, `nb`, `rotary` | Rotary knob/dial |
+| `wheel` | `whl`, `pitchbend` | Scroll wheel (like pitch bend) |
+
+### 2D Controls
+
+| Type | Aliases | Description |
+|------|---------|-------------|
+| `xy` | `xypad`, `2df`, `pad` | XY pad (controls 2 parameters) |
+| `js` | `joystick` | Joystick (alternative 2D control) |
+
+### Discrete Controls
+
+| Type | Aliases | Description |
+|------|---------|-------------|
+| `btn` | `button`, `trigger` | Push button (trigger or toggle) |
+| `lv` | `lever`, `throw` | Lever (vertical throw) |
+
+### Displays & Meters
+
+| Type | Aliases | Description |
+|------|---------|-------------|
+| `mon` | `monitor`, `waveform`, `scope` | Waveform/spectrum monitor |
+| `mtr` | `meter`, `vu`, `level` | VU/level meter with peak hold |
+| `lbl` | `label`, `text` | Text label/header |
+| `grp` | `group`, `container` | Group container with background |
+
+### Naming Convention
+
+Use prefixes for control IDs: `type_N` where N is any number.
+
+Examples: `sl_1`, `slv_2`, `knob_freq`, `xy_filter`, `btn_play`, `mon_out`, `mtr_L`
+
+Numbers don't need to be sequential.
 
 ## Audio Parameters
 
@@ -320,9 +507,9 @@ In JSON mode, `active_controls` uses this structure:
 ```gdscript
 active_controls = {
   "sl_1": {
-    "instance": Node,           // The instantiated control scene
-    "parameter": "freq",        // Parameter name from JSON
-    "config": { ... }           // Full config from control_definitions
+	"instance": Node,           // The instantiated control scene
+	"parameter": "freq",        // Parameter name from JSON
+	"config": { ... }           // Full config from control_definitions
   }
 }
 ```

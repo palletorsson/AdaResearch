@@ -1,0 +1,118 @@
+{
+	"rack_info": {
+		"name": "Full Featured Rack",
+		"description": "Demonstrates all control types with auto-spacing and groups",
+		"version": "1.0",
+		"sound_type": "synth_wave"
+	},
+	"layout": {
+		"auto_spacing": true,
+		"padding": 0.03,
+		"gap": 0.025
+	},
+	"grid": [
+		["lbl_title", "", "", "", "mon_out"],
+		["lbl_osc", "sl_freq", "knob_detune", "mtr_L", "mtr_R"],
+		["lbl_filter", "xy_filter", "", "slv_env", "slv_res"],
+		["btn_play", "btn_stop", "knob_mix", "knob_drive", ""]
+	],
+	"control_definitions": {
+		"lbl_title": {
+			"type": "label",
+			"text": "SYNTH RACK",
+			"font_size": 36,
+			"color": "#88aaff"
+		},
+		"lbl_osc": {
+			"type": "label",
+			"text": "OSC",
+			"font_size": 24
+		},
+		"lbl_filter": {
+			"type": "label",
+			"text": "FILTER",
+			"font_size": 24
+		},
+		"sl_freq": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "freq",
+			"min": 20.0,
+			"max": 2000.0,
+			"default": 440.0
+		},
+		"knob_detune": {
+			"type": "knob",
+			"label": "Detune",
+			"parameter": "detune",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.0
+		},
+		"xy_filter": {
+			"type": "xy",
+			"label": "Filter XY",
+			"parameter_x": "cutoff",
+			"parameter_y": "resonance",
+			"min_x": 100.0,
+			"max_x": 8000.0,
+			"min_y": 0.0,
+			"max_y": 1.0,
+			"size": 0.08
+		},
+		"slv_env": {
+			"type": "slv",
+			"label": "Env",
+			"parameter": "envelope",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.5
+		},
+		"slv_res": {
+			"type": "slv",
+			"label": "Res",
+			"parameter": "resonance",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.3
+		},
+		"knob_mix": {
+			"type": "knob",
+			"label": "Mix",
+			"parameter": "mix",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.5
+		},
+		"knob_drive": {
+			"type": "knob",
+			"label": "Drive",
+			"parameter": "drive",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.0
+		},
+		"btn_play": {
+			"type": "btn",
+			"label": "Play",
+			"action": "play"
+		},
+		"btn_stop": {
+			"type": "btn",
+			"label": "Stop",
+			"action": "stop"
+		},
+		"mtr_L": {
+			"type": "meter",
+			"label": "L"
+		},
+		"mtr_R": {
+			"type": "meter",
+			"label": "R"
+		},
+		"mon_out": {
+			"type": "monitor",
+			"label": "Output"
+		}
+	}
+}
