@@ -2019,6 +2019,188 @@
 					]
 				}
 			}
+		},
+		"space_station_isolation": {
+			"description": "Deep space isolation - eerie loneliness with mechanical ambience and hull sounds",
+			"category": "sci_fi_lofi",
+			"continuous_layers": [
+				{
+					"sound_id": "techno_noir.drone",
+					"volume_db": -18,
+					"bus": "Ambient",
+					"parameters": {
+						"base_freq": 30.0
+					}
+				},
+				{
+					"sound_id": "techno_noir.city_ambience",
+					"volume_db": -25,
+					"bus": "Ambient",
+					"parameters": {
+						"traffic_density": 0.1
+					}
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"techno_noir.static_burst",
+						"techno_noir.mechanical_whir"
+					],
+					"interval_range": [
+						15.0,
+						45.0
+					],
+					"volume_range": [
+						-28,
+						-20
+					],
+					"bus": "Effects"
+				},
+				{
+					"sound_pool": [
+						"techno_noir.distant_siren"
+					],
+					"interval_range": [
+						30.0,
+						90.0
+					],
+					"volume_range": [
+						-35,
+						-25
+					],
+					"bus": "Effects"
+				}
+			],
+			"buses": {
+				"Ambient": {
+					"effects": [
+						{
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.8,
+							"damping": 0.05
+						},
+						{
+							"type": "LowPassFilter",
+							"cutoff_hz": 800
+						}
+					]
+				},
+				"Effects": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.7,
+							"tap1_delay_ms": 1200,
+							"tap1_level_db": -6.0
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.95,
+							"wet": 0.6
+						}
+					]
+				}
+			}
+		},
+		"abandoned_factory": {
+			"description": "Industrial decay with wind through broken windows and falling debris",
+			"category": "sci_fi_lofi",
+			"continuous_layers": [
+				{
+					"sound_id": "techno_noir.drone",
+					"volume_db": -14,
+					"bus": "Ambient",
+					"parameters": {
+						"base_freq": 70.0
+					}
+				},
+				{
+					"sound_id": "techno_noir.rain_segment",
+					"volume_db": -20,
+					"bus": "Wind",
+					"parameters": {
+						"intensity": 0.08
+					}
+				}
+			],
+			"random_events": [
+				{
+					"sound_pool": [
+						"techno_noir.static_burst",
+						"techno_noir.mechanical_whir"
+					],
+					"interval_range": [
+						8.0,
+						25.0
+					],
+					"volume_range": [
+						-22,
+						-15
+					],
+					"bus": "Effects"
+				},
+				{
+					"sound_pool": [
+						"techno_noir.distant_siren"
+					],
+					"interval_range": [
+						20.0,
+						60.0
+					],
+					"volume_range": [
+						-28,
+						-18
+					],
+					"bus": "Effects"
+				}
+			],
+			"buses": {
+				"Ambient": {
+					"effects": [
+						{
+							"type": "Distortion",
+							"mode": 0,
+							"drive": 0.15
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.9,
+							"wet": 0.5,
+							"damping": 0.2
+						}
+					]
+				},
+				"Wind": {
+					"effects": [
+						{
+							"type": "HighPassFilter",
+							"cutoff_hz": 200
+						},
+						{
+							"type": "Reverb",
+							"room_size": 0.95,
+							"wet": 0.7
+						}
+					]
+				},
+				"Effects": {
+					"effects": [
+						{
+							"type": "Delay",
+							"dry": 0.8,
+							"tap1_delay_ms": 1000,
+							"tap1_level_db": -8.0
+						},
+						{
+							"type": "Reverb",
+							"room_size": 1.0,
+							"wet": 0.6
+						}
+					]
+				}
+			}
 		}
 	}
 }

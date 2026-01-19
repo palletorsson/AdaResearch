@@ -1,0 +1,104 @@
+[gd_scene load_steps=2 format=3 uid="uid://0yq75k6qkguj"]
+
+[ext_resource type="Script" path="res://commons/audio/tests/soundscape_preview.gd" id="1_script"]
+
+[node name="SoundscapePreview" type="Node"]
+script = ExtResource("1_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "🎧 Soundscape Preview"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Preview ambient soundscapes in desktop mode"
+horizontal_alignment = 1
+modulate = Color(0.7, 0.7, 0.7, 1)
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="PresetLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Select Preset:"
+
+[node name="PresetDropdown" type="OptionButton" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+theme_override_font_sizes/font_size = 16
+
+[node name="DescriptionLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 60)
+theme_override_font_sizes/font_size = 14
+text = ""
+autowrap_mode = 2
+modulate = Color(0.8, 0.9, 1.0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 50)
+theme_override_font_sizes/font_size = 20
+text = "▶️ Play"
+
+[node name="StopButton" type="Button" parent="CanvasLayer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 50)
+theme_override_font_sizes/font_size = 20
+text = "⏹️ Stop"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Ready"
+horizontal_alignment = 1
+modulate = Color(0.5, 1.0, 0.5, 1)
+
+[node name="SpacerControl" type="Control" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InstructionsLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Run this scene with F6 to test soundscapes.
+★ = New sci-fi lo-fi soundscapes"
+horizontal_alignment = 1
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[connection signal="item_selected" from="CanvasLayer/Panel/VBoxContainer/PresetDropdown" to="." method="_on_preset_dropdown_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/HBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]

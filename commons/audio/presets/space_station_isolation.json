@@ -1,0 +1,84 @@
+{
+    "description": "Deep space isolation - eerie loneliness with mechanical ambience and hull sounds",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -18,
+            "bus": "Ambient",
+            "parameters": {
+                "base_freq": 30.0
+            }
+        },
+        {
+            "sound_id": "techno_noir.city_ambience",
+            "volume_db": -25,
+            "bus": "Ambient",
+            "parameters": {
+                "traffic_density": 0.1
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.static_burst",
+                "techno_noir.mechanical_whir"
+            ],
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -28,
+                -20
+            ],
+            "bus": "Effects"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                30.0,
+                90.0
+            ],
+            "volume_range": [
+                -35,
+                -25
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.8,
+                    "damping": 0.05
+                },
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 800
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 1200,
+                    "tap1_level_db": -6.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,161 @@
+{
+    "description": "Quantum Lab with downtempo beats - cerebral science with trip-hop groove",
+    "category": "sci_fi_lofi_beats",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -18,
+            "bus": "Ambient",
+            "parameters": {
+                "base_freq": 45.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.MOOG_BASS_LEAD",
+            "volume_db": -16,
+            "bus": "Bass"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PPG_WAVE_PAD",
+            "volume_db": -22,
+            "bus": "Pad"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "house_drums.909_kick"
+            ],
+            "interval_range": [
+                2.5,
+                6.0
+            ],
+            "volume_range": [
+                -18,
+                -12
+            ],
+            "bus": "Kicks"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_hihat_closed"
+            ],
+            "interval_range": [
+                0.5,
+                1.5
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "HiHats"
+        },
+        {
+            "sound_pool": [
+                "house_drums.909_snare"
+            ],
+            "interval_range": [
+                5.0,
+                12.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Snares"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
+            ],
+            "interval_range": [
+                15.0,
+                40.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Keys"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.35
+                }
+            ]
+        },
+        "Bass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.15
+                }
+            ]
+        },
+        "Pad": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "dry": 0.8,
+                    "wet": 0.3
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.7,
+                    "wet": 0.45
+                }
+            ]
+        },
+        "Kicks": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.1
+                }
+            ]
+        },
+        "HiHats": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 3000
+                }
+            ]
+        },
+        "Snares": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Keys": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 632,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.4
+                }
+            ]
+        }
+    }
+}

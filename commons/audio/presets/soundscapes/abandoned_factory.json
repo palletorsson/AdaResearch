@@ -1,0 +1,161 @@
+{
+    "name": "Abandoned Factory",
+    "description": "Industrial decay, rust, wind through broken windows, falling debris",
+    "category": "pure_ambient",
+    "bpm": 0,
+    "continuous_layers": [
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_endless_drone",
+            "params": {
+                "base_freq": 70.0,
+                "buffer_length": 30.0,
+                "harmonic_brightness": 0.4
+            },
+            "volume_db": -14,
+            "bus": "Ambient"
+        },
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_rain_segment",
+            "params": {
+                "buffer_length": 12.0,
+                "intensity": 0.08,
+                "base_noise": 0.15
+            },
+            "volume_db": -20,
+            "bus": "Wind"
+        }
+    ],
+    "random_events": [
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_static_burst",
+            "params": {
+                "buffer_length": 1.5,
+                "intensity": 0.2
+            },
+            "interval_range": [
+                8.0,
+                25.0
+            ],
+            "volume_range": [
+                -22,
+                -15
+            ],
+            "bus": "Effects"
+        },
+        {
+            "generator": "TechnoNoirGenerator",
+            "method": "create_distant_siren",
+            "params": {
+                "buffer_length": 3.0,
+                "base_freq": 150.0,
+                "freq_range": 30.0,
+                "volume": 0.15
+            },
+            "interval_range": [
+                20.0,
+                60.0
+            ],
+            "volume_range": [
+                -28,
+                -18
+            ],
+            "bus": "Effects"
+        },
+        {
+            "generator": "TrapBeatsGenerator",
+            "method": "create_808_kick",
+            "params": {
+                "pitch": 45.0,
+                "decay": 0.8,
+                "distortion": 0.1
+            },
+            "interval_range": [
+                25.0,
+                70.0
+            ],
+            "volume_range": [
+                -30,
+                -22
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Ambient": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.15
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.5,
+                    "damping": 0.2
+                }
+            ]
+        },
+        "Wind": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 1000,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.6
+                }
+            ]
+        }
+    },
+    "abstract_parameters": {
+        "intensity": {
+            "default": 0.4,
+            "affects": [
+                "event_frequency",
+                "drone_volume"
+            ]
+        },
+        "tension": {
+            "default": 0.5,
+            "affects": [
+                "distortion_drive",
+                "reverb_wet"
+            ]
+        },
+        "space": {
+            "default": 0.7,
+            "affects": [
+                "reverb_room_size",
+                "delay_time"
+            ]
+        },
+        "darkness": {
+            "default": 0.6,
+            "affects": [
+                "lowpass_cutoff",
+                "sub_bass_volume"
+            ]
+        }
+    }
+}

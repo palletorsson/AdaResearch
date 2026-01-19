@@ -1,0 +1,144 @@
+{
+    "description": "Retro arcade with 8-bit sounds, coin sounds, electronic bleeps - energetic chiptune vibes",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -22,
+            "bus": "SubBass",
+            "parameters": {
+                "base_freq": 50.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.C64_SID_LEAD",
+            "volume_db": -18,
+            "bus": "Chiptune"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.GAMEBOY_DMG_WAVE",
+                "AudioSynthesizer.AMIGA_MOD_SAMPLE"
+            ],
+            "interval_range": [
+                4.0,
+                12.0
+            ],
+            "volume_range": [
+                -20,
+                -14
+            ],
+            "bus": "Bleeps"
+        },
+        {
+            "sound_pool": [
+                "trap_beats.hihat_closed",
+                "trap_beats.hihat_open"
+            ],
+            "interval_range": [
+                2.0,
+                6.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "Rhythm"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO"
+            ],
+            "interval_range": [
+                15.0,
+                35.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Melody"
+        },
+        {
+            "sound_pool": [
+                "trap_beats.808_kick"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Beats"
+        }
+    ],
+    "buses": {
+        "SubBass": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 120
+                }
+            ]
+        },
+        "Chiptune": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.2
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "Bleeps": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.8,
+                    "tap1_delay_ms": 375,
+                    "tap1_level_db": -10.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "HighPassFilter",
+                    "cutoff_hz": 2000
+                }
+            ]
+        },
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35
+                }
+            ]
+        },
+        "Beats": {
+            "effects": [
+                {
+                    "type": "Distortion",
+                    "mode": 0,
+                    "drive": 0.15
+                }
+            ]
+        }
+    }
+}

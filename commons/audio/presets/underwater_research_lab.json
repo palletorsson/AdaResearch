@@ -1,0 +1,120 @@
+{
+    "description": "Submerged facility with ocean pressure, sonar pings, and marine life sounds",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -18,
+            "bus": "Pressure",
+            "parameters": {
+                "base_freq": 35.0
+            }
+        },
+        {
+            "sound_id": "techno_noir.rain_segment",
+            "volume_db": -16,
+            "bus": "Water",
+            "parameters": {
+                "intensity": 0.25,
+                "base_noise": 0.2
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "techno_noir.distant_siren"
+            ],
+            "interval_range": [
+                5.0,
+                12.0
+            ],
+            "volume_range": [
+                -22,
+                -16
+            ],
+            "bus": "Sonar",
+            "parameters": {
+                "base_freq": 1000.0,
+                "freq_range": 200.0,
+                "buffer_length": 0.5
+            }
+        },
+        {
+            "sound_pool": [
+                "techno_noir.mechanical_whir",
+                "techno_noir.static_burst"
+            ],
+            "interval_range": [
+                15.0,
+                40.0
+            ],
+            "volume_range": [
+                -26,
+                -18
+            ],
+            "bus": "Effects"
+        }
+    ],
+    "buses": {
+        "Pressure": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 150
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.7
+                }
+            ]
+        },
+        "Water": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1500
+                },
+                {
+                    "type": "Chorus",
+                    "dry": 0.7,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.8
+                }
+            ]
+        },
+        "Sonar": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.6,
+                    "tap1_delay_ms": 800,
+                    "tap1_level_db": -4.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 1.0,
+                    "wet": 0.9
+                }
+            ]
+        },
+        "Effects": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 2000
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.8,
+                    "wet": 0.6
+                }
+            ]
+        }
+    }
+}

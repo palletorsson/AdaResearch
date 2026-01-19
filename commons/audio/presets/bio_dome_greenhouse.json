@@ -1,0 +1,129 @@
+{
+    "description": "Organic technology with plant growth pulses, natural rhythms, and living systems sounds",
+    "category": "sci_fi_lofi",
+    "continuous_layers": [
+        {
+            "sound_id": "techno_noir.drone",
+            "volume_db": -18,
+            "bus": "Growth",
+            "parameters": {
+                "base_freq": 45.0
+            }
+        },
+        {
+            "sound_id": "AudioSynthesizer.AMBIENT_WIND",
+            "volume_db": -22,
+            "bus": "Breeze"
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": [
+                "AudioSynthesizer.KORG_M1_PIANO",
+                "AudioSynthesizer.DX7_ELECTRIC_PIANO"
+            ],
+            "interval_range": [
+                8.0,
+                20.0
+            ],
+            "volume_range": [
+                -26,
+                -20
+            ],
+            "bus": "Chimes"
+        },
+        {
+            "sound_pool": [
+                "techno_noir.rain_segment"
+            ],
+            "interval_range": [
+                15.0,
+                45.0
+            ],
+            "volume_range": [
+                -24,
+                -18
+            ],
+            "bus": "Water"
+        },
+        {
+            "sound_pool": [
+                "AudioSynthesizer.SHIELD_HIT"
+            ],
+            "interval_range": [
+                25.0,
+                60.0
+            ],
+            "volume_range": [
+                -30,
+                -24
+            ],
+            "bus": "Scanner"
+        }
+    ],
+    "buses": {
+        "Growth": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 300
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35
+                }
+            ]
+        },
+        "Breeze": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 1200
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.25
+                }
+            ]
+        },
+        "Chimes": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "dry": 0.7,
+                    "tap1_delay_ms": 400,
+                    "tap1_level_db": -8.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.6,
+                    "wet": 0.45
+                }
+            ]
+        },
+        "Water": {
+            "effects": [
+                {
+                    "type": "LowPassFilter",
+                    "cutoff_hz": 2500
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.35,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "Scanner": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.3,
+                    "wet": 0.15
+                }
+            ]
+        }
+    }
+}

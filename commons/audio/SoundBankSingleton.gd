@@ -199,6 +199,8 @@ func _generate_sound(sound_id: String) -> AudioStream:
 			return _generate_sci_fi_dystopia_sound(sound_name)
 		"cyber_jazz":
 			return _generate_cyber_jazz_sound(sound_name)
+		"house_drums", "909":
+			return _generate_house_drums_sound(sound_name)
 		_:
 			# Fallback for original casing if needed
 			match generator:
@@ -390,6 +392,19 @@ func _generate_cyber_jazz_sound(sound_name: String) -> AudioStreamWAV:
 		print("✅ Generated Cyber Jazz sound: ", sound_name, " 🎷")
 		return stream
 	return null
+
+func _generate_house_drums_sound(sound_name: String) -> AudioStreamWAV:
+	"""Generate sound from HouseDrumGenerator (TR-909 style)"""
+	var HouseDrums = preload("res://commons/audio/generators/HouseDrumGenerator.gd")
+	
+	var stream = HouseDrums.generate_sound(sound_name)
+	
+	if stream:
+		print("✅ Generated House Drum: ", sound_name, " 🥁")
+		return stream
+	else:
+		print("⚠️ Unknown house drum: ", sound_name)
+		return null
 
 # ===== BULK GENERATION =====
 
