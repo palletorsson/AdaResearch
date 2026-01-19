@@ -2,6 +2,19 @@
 
 JSON-based configuration system for defining VR audio controller interfaces declaratively, similar to the `map_data.json` pattern used in the grid system.
 
+## Desktop Preview
+
+A 3D desktop preview scene is available for testing rack configurations without VR:
+
+**To use:**
+1. Open `res://commons/audio/rack_configs/RackPreview.tscn` in Godot
+2. Run the scene (F6 or Play Scene button)
+3. Use the dropdown to select different rack configurations
+4. Use Right-Click + Drag to rotate the camera around the rack
+5. Click "Play Sound" to test the audio output
+
+The preview instantiates the actual 3D `UniversalVRAudioController` and its controls, allowing you to verify the 3D layout and visual appearance on a desktop.
+
 ## Overview
 
 This system allows you to define complete audio rack interfaces in JSON files with:
@@ -392,19 +405,19 @@ Available in `rack_info.sound_type`:
 ```json
 {
   "rack_info": {
-    "name": "Simple Synth",
-    "version": "1.0",
-    "sound_type": "basic_sine_wave"
+	"name": "Simple Synth",
+	"version": "1.0",
+	"sound_type": "basic_sine_wave"
   },
   "grid": [
-    ["sl_1"]
+	["sl_1"]
   ],
   "control_definitions": {
-    "sl_1": {
-      "type": "slider",
-      "label": "Frequency",
-      "parameter": "freq"
-    }
+	"sl_1": {
+	  "type": "slider",
+	  "label": "Frequency",
+	  "parameter": "freq"
+	}
   }
 }
 ```
@@ -414,30 +427,30 @@ Available in `rack_info.sound_type`:
 ```json
 {
   "rack_info": {
-    "name": "Advanced Modular Synth",
-    "version": "1.0",
-    "sound_type": "synth_wave"
+	"name": "Advanced Modular Synth",
+	"version": "1.0",
+	"sound_type": "synth_wave"
   },
   "layout": {
-    "col_spacing": 0.20,
-    "row_spacing": 0.12
+	"col_spacing": 0.20,
+	"row_spacing": 0.12
   },
   "grid": [
-    ["sl_1", "sl_2", "sl_3"],
-    ["nb_1", "nb_2", "nb_3"],
-    ["nb_4", "nb_5", "nb_6"],
-    ["sl_4", "", "sl_5"]
+	["sl_1", "sl_2", "sl_3"],
+	["nb_1", "nb_2", "nb_3"],
+	["nb_4", "nb_5", "nb_6"],
+	["sl_4", "", "sl_5"]
   ],
   "control_definitions": {
-    "sl_1": {
-      "type": "slider",
-      "label": "Freq 1",
-      "parameter": "freq",
-      "min": 20.0,
-      "max": 2000.0,
-      "default": 220.0
-    },
-    // ... more controls
+	"sl_1": {
+	  "type": "slider",
+	  "label": "Freq 1",
+	  "parameter": "freq",
+	  "min": 20.0,
+	  "max": 2000.0,
+	  "default": 220.0
+	},
+	// ... more controls
   }
 }
 ```

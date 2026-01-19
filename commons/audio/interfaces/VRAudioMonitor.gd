@@ -8,12 +8,34 @@ extends Node3D
 @export var audio_bus: String = "Master"
 @export var auto_connect: bool = true
 
-@onready var viewport = $SubViewport
-@onready var display = $SubViewport/WaveformDisplay
+@onready var viewport_2d = $ScreenOrigin/Viewport2Din3D
 @onready var name_label = $Chassis/LabelName
+var display: Node
 
 func _ready():
 	if name_label: name_label.text = monitor_name
+	
+	# Access the instantiated scene from Viewport2Din3D
+	# It usually instantiates 'scene' as a child of its internal SubViewport
+	if viewport_2d:
+		# Wait for the scene to likely be ready or access it if already there
+		var scene_instance = viewport_2d.get_scene_instance()
+		if scene_instance:
+			display = scene_instance.get_node_or_null("WaveformDisplay")
+		
+		# Fallback if get_scene_instance isn't immediate or available (depends on XR Tools version)
+		if not display:
+			# Try to find it manually in the viewport
+			var vp = viewport_2d.get_node_or_null("Viewport") 
+			if vp:
+				for child in vp.get_children():
+					var wd = child.get_node_or_null("WaveformDisplay")
+					if wd:
+						display = wd
+						break
+					if child.name == "VRAudioMonitorUI": # The root of our scene
+						display = child.get_node_or_null("WaveformDisplay")
+						break
 	
 	# If we are in the same scene as a UVAC, try to connect to it
 	if auto_connect:

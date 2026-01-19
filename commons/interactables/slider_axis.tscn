@@ -1,66 +1,94 @@
-[gd_scene load_steps=10 format=3 uid="uid://p10gc2gtduud"]
+[gd_scene load_steps=18 format=3 uid="uid://p10gc2gtduud"]
 
-[ext_resource type="Script" uid="uid://d3oukdhcflss2" path="res://commons/interactables/slider_axis.gd" id="1"]
-[ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="2"]
+[ext_resource type="Script" path="res://commons/interactables/slider_axis.gd" id="1"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="3"]
+[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://b8y2x3g5q7v8n" path="res://commons/interactables/materials/rack_accent.tres" id="MatAccent"]
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.1, 0.5, 0.1)
+size = Vector3(0.08, 0.22, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Panel"]
+size = Vector3(0.08, 0.22, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="MatTrack"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Track"]
+size = Vector3(0.01, 0.16, 0.001)
 
 [sub_resource type="BoxShape3D" id="2"]
-size = Vector3(0.02, 0.4, 0.02)
+size = Vector3(0.01, 0.16, 0.01)
 
-[sub_resource type="SphereShape3D" id="3"]
-radius = 0.03
+[sub_resource type="BoxMesh" id="BoxMesh_Rod"]
+size = Vector3(0.005, 0.16, 0.005)
 
-[sub_resource type="BoxMesh" id="4"]
-size = Vector3(0.02, 0.4, 0.02)
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.04, 0.01, 0.03)
 
-[sub_resource type="SphereMesh" id="5"]
-radius = 0.025
-height = 0.05
-radial_segments = 16
-rings = 8
+[sub_resource type="BoxMesh" id="BoxMesh_Handle"]
+size = Vector3(0.04, 0.015, 0.03)
 
-[sub_resource type="SphereShape3D" id="6"]
-margin = 0.05
-radius = 0.03
+[sub_resource type="BoxShape3D" id="6"]
+size = Vector3(0.04, 0.02, 0.04)
 
 [node name="SliderAxis" type="Node3D"]
 
 [node name="Frame" type="StaticBody3D" parent="."]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
 shape = SubResource("1")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Frame"]
-size = Vector3(0.1, 0.5, 0.1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame"]
+mesh = SubResource("BoxMesh_Panel")
+surface_material_override/0 = ExtResource("MatPanel")
 
-[node name="Slot" type="CSGBox3D" parent="Frame/CSGBox3D"]
-operation = 2
-size = Vector3(0.05, 0.45, 0.05)
+[node name="TrackMesh" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.006)
+mesh = SubResource("BoxMesh_Track")
+surface_material_override/0 = SubResource("MatTrack")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.01)
+pixel_size = 0.001
+text = "0.00"
+font_size = 12
+outline_size = 0
 
 [node name="SliderOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0.01)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
 script = ExtResource("1")
 default_on_release = true
 auto_drive = true
+slider_limit_max = 0.14
+slider_position = 0.07
 
 [node name="SliderBody" type="StaticBody3D" parent="SliderOrigin/InteractableSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
 
 [node name="RodCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+visible = false
 shape = SubResource("2")
 
 [node name="HandleCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
 shape = SubResource("3")
 
 [node name="RodMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-mesh = SubResource("4")
+visible = false
+mesh = SubResource("BoxMesh_Rod")
 
 [node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-mesh = SubResource("5")
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatMetal")
+
+[node name="AccentMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatAccent")
 
 [node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
 
@@ -75,6 +103,3 @@ picked_up_layer = 0
 shape = SubResource("6")
 
 [node name="GrabPointRedirect" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("3")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.920143, 0, -0.39158252, 0, 1, 0, 0.39158252, 0, -0.920143, 0, 0, -0.48961616)

@@ -292,6 +292,9 @@ static func _get_sound_description(sound_key: String) -> String:
 
 static func get_available_sound_types() -> Array[String]:
 	"""Get list of all available sound types"""
+	if sound_type_files == null:
+		return []
+		
 	var keys = sound_type_files.keys()
 	var string_array: Array[String] = []
 	for key in keys:

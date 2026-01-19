@@ -1,49 +1,62 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcwa500yc5w2p"]
+[gd_scene load_steps=10 format=3 uid="uid://dcwa500yc5w2p"]
 
 [ext_resource type="PackedScene" uid="uid://bvgjfffe0w2uu" path="res://commons/interactables/joystick_smooth.tscn" id="1_5v1m4"]
 [ext_resource type="PackedScene" uid="uid://btb5pw854d8m6" path="res://commons/interactables/slider_plane.tscn" id="1_yww16"]
-[ext_resource type="PackedScene" uid="uid://bnckmqfewiysy" path="res://commons/interactables/joystick_snap.tscn" id="2_haqrj"]
-[ext_resource type="PackedScene" uid="uid://dtrftty6i383g" path="res://commons/interactables/joystick_zero.tscn" id="3_yww16"]
 [ext_resource type="PackedScene" uid="uid://cs6dxfu5owcgo" path="res://commons/interactables/lever_smooth.tscn" id="4_ojpe8"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="5_lyxvk"]
 [ext_resource type="PackedScene" uid="uid://cpwdvy41fqdua" path="res://commons/interactables/slider_smooth.tscn" id="6_24yqt"]
 [ext_resource type="PackedScene" uid="uid://d2td5hwh2oluy" path="res://commons/interactables/wheel_smooth.tscn" id="7_qiivc"]
-[ext_resource type="PackedScene" uid="uid://b4j8kxqvn5q7m" path="res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn" id="9_ojpe8"]
-[ext_resource type="PackedScene" uid="uid://c7ja1dbhhmexg" path="res://commons/interactables/slider_time.tscn" id="10_ojpe8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dark"]
+sky_top_color = Color(0.05, 0.05, 0.05, 1)
+sky_horizon_color = Color(0.1, 0.1, 0.12, 1)
+ground_bottom_color = Color(0.02, 0.02, 0.03, 1)
+ground_horizon_color = Color(0.1, 0.1, 0.12, 1)
+
+[sub_resource type="Sky" id="Sky_dark"]
+sky_material = SubResource("ProceduralSkyMaterial_dark")
+
+[sub_resource type="Environment" id="Environment_dark"]
+background_mode = 2
+sky = SubResource("Sky_dark")
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.3, 0.35, 1)
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 0.9
 
 [node name="InteractableDemo" type="Node3D"]
 
-[node name="SliderPlane" parent="." instance=ExtResource("1_yww16")]
-transform = Transform3D(1, 0, 0, 0, 0.92089313, -0.38981518, 0, 0.38981518, 0.92089313, 4.060077, 0.97677183, 0.12838352)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dark")
 
-[node name="JoystickSmooth" parent="." instance=ExtResource("1_5v1m4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)
+shadow_enabled = true
 
-[node name="JoystickSnap" parent="." instance=ExtResource("2_haqrj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+[node name="RackMockup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
-[node name="JoystickZero" parent="." instance=ExtResource("3_yww16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+[node name="SliderSmooth" parent="RackMockup" instance=ExtResource("6_24yqt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.15, 0)
 
-[node name="LeverSmooth" parent="." instance=ExtResource("4_ojpe8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -0.067)
+[node name="LeverSmooth" parent="RackMockup" instance=ExtResource("4_ojpe8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 
-[node name="PushButton" parent="." instance=ExtResource("5_lyxvk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+[node name="PushButton" parent="RackMockup" instance=ExtResource("5_lyxvk")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0.15, 0)
 
-[node name="SliderSmooth" parent="." instance=ExtResource("6_24yqt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
-script = null
+[node name="JoystickSmooth" parent="RackMockup" instance=ExtResource("1_5v1m4")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, -0.15, 0)
 
-[node name="WheelSmooth" parent="." instance=ExtResource("7_qiivc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+[node name="WheelSmooth" parent="RackMockup" instance=ExtResource("7_qiivc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 
-[node name="SliderSmooth2" parent="." instance=ExtResource("6_24yqt")]
-transform = Transform3D(0.495, 0, 0, 0, 0.19182023, 0.45632225, 0, -0.45632225, 0.19182023, 2.4297128, 1, 0)
-script = null
+[node name="SliderPlane" parent="RackMockup" instance=ExtResource("1_yww16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.15, 0)
 
-[node name="MarioSoundController" parent="." instance=ExtResource("9_ojpe8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0187166, 0.7822689, 0.10117817)
-
-[node name="SliderTime" parent="." instance=ExtResource("10_ojpe8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3987851, 1.1560686, 0)
+[node name="Label" type="Label3D" parent="RackMockup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+text = "RACK MODULES"
+font_size = 48

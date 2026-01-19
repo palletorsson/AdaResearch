@@ -1,31 +1,37 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpwdvy41fqdua"]
+[gd_scene load_steps=15 format=3 uid="uid://cpwdvy41fqdua"]
 
 [ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
 [ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
 [ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
+[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
+[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://b8y2x3g5q7v8n" path="res://commons/interactables/materials/rack_accent.tres" id="MatAccent"]
+[ext_resource type="Material" uid="uid://c8v4y5z6a7b8c" path="res://commons/interactables/materials/ui_shadow.tres" id="MatShadow"]
 
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.2, 0.6, 0.1)
+size = Vector3(0.08, 0.22, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Panel"]
+size = Vector3(0.08, 0.22, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="MatTrack"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Track"]
+size = Vector3(0.01, 0.16, 0.001)
 
 [sub_resource type="BoxShape3D" id="3"]
-size = Vector3(0.02, 0.02, 0.2)
+size = Vector3(0.04, 0.01, 0.03)
 
-[sub_resource type="SphereShape3D" id="4"]
-radius = 0.03
+[sub_resource type="BoxMesh" id="BoxMesh_Handle"]
+size = Vector3(0.04, 0.015, 0.03)
 
-[sub_resource type="BoxMesh" id="5"]
-size = Vector3(0.02, 0.02, 0.2)
+[sub_resource type="BoxShape3D" id="7"]
+size = Vector3(0.04, 0.02, 0.03)
 
-[sub_resource type="SphereMesh" id="6"]
-radius = 0.02
-height = 0.04
-radial_segments = 16
-rings = 8
-
-[sub_resource type="SphereShape3D" id="7"]
-margin = 0.12
-radius = 0.025
+[sub_resource type="QuadMesh" id="QuadMesh_Shadow"]
+size = Vector2(0.06, 0.06)
 
 [node name="SliderSmooth" type="Node3D"]
 script = ExtResource("5_wmxoe")
@@ -35,56 +41,61 @@ script = ExtResource("5_wmxoe")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
 shape = SubResource("1")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Frame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08538818, -0.029443359)
-size = Vector3(0.2, 1, 0.15888672)
+[node name="BaseMesh" type="MeshInstance3D" parent="Frame"]
+mesh = SubResource("BoxMesh_Panel")
+surface_material_override/0 = ExtResource("MatPanel")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Frame/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038146973, -0.0015411377, 0.07664114)
-operation = 2
-size = Vector3(0.03, 0.8, 0.02)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Frame/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038146973, 0.4550534, 0.07664114)
-operation = 2
-size = Vector3(0.155, 0.072, 0.03)
+[node name="TrackMesh" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.006)
+mesh = SubResource("BoxMesh_Track")
+surface_material_override/0 = SubResource("MatTrack")
 
 [node name="Label3DValue" type="Label3D" parent="Frame"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.3725087, 0.035247535)
-pixel_size = 0.01
-text = "0.2"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.01)
+pixel_size = 0.001
+text = "0.50"
+font_size = 12
+outline_size = 0
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.01)
+pixel_size = 0.001
+font_size = 10
+outline_size = 0
 
 [node name="SliderOrigin" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0.01)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2")
-slider_limit_max = 0.4
-slider_position = 0.2
-default_position = 0.2
+slider_limit_max = 0.14
+slider_position = 0.07
+default_position = 0.07
 
 [node name="SliderBody" type="StaticBody3D" parent="SliderOrigin/InteractableSlider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
-
-[node name="BarCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
-shape = SubResource("3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 1
+collision_mask = 0
 
 [node name="HandleCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.004733436)
-shape = SubResource("4")
-
-[node name="BarMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
-mesh = SubResource("5")
+shape = SubResource("3")
 
 [node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.004733436)
-mesh = SubResource("6")
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatMetal")
+
+[node name="AccentMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatAccent")
+
+[node name="ShadowMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.005)
+mesh = SubResource("QuadMesh_Shadow")
+surface_material_override/0 = ExtResource("MatShadow")
 
 [node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
 
 [node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin"]
 collision_layer = 262144
@@ -94,7 +105,6 @@ script = ExtResource("4")
 picked_up_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10473344)
 shape = SubResource("7")
 
 [node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]

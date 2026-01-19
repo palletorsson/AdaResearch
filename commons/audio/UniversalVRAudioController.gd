@@ -6,8 +6,9 @@ extends Node3D
 ## Supports Ableton-style controls: sliders, knobs, XY pads, buttons
 
 # Control scene preloads
-const SLIDER_SCENE = preload("res://commons/audio/interfaces/VRAudioControlSlider.tscn")
-const DIAL_SCENE = preload("res://commons/audio/interfaces/VRAudioControlDial.tscn")
+const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
+const SLIDER_HORIZONTAL_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
+const DIAL_SCENE = preload("res://commons/interactables/dial_smooth.tscn")
 
 # Additional Ableton-style controls from interactables
 const SLIDER_VERTICAL_SCENE = preload("res://commons/interactables/slider_axis.tscn")
@@ -24,14 +25,18 @@ const WAVEFORM_MONITOR_SCENE = preload("res://commons/audio/interfaces/VRAudioMo
 
 # Default spacing by control type (width, height in meters)
 const CONTROL_SIZES = {
-	"slider": Vector2(0.22, 0.06),
-	"slv": Vector2(0.06, 0.15),
-	"knob": Vector2(0.08, 0.08),
-	"xy": Vector2(0.15, 0.15),
-	"btn": Vector2(0.06, 0.06),
+	"slider": Vector2(0.08, 0.22),
+	"slh": Vector2(0.22, 0.08),
+	"slv": Vector2(0.08, 0.22),
+	"knob": Vector2(0.10, 0.10),
+	"wheel": Vector2(0.12, 0.12),
+	"xy": Vector2(0.16, 0.16),
+	"btn": Vector2(0.08, 0.08),
+	"lv": Vector2(0.08, 0.15),
 	"monitor": Vector2(0.30, 0.22),
 	"meter": Vector2(0.04, 0.12),
-	"label": Vector2(0.20, 0.03),
+	"label": Vector2(0.20, 0.04),
+	"grp": Vector2(0.25, 0.20),
 	"default": Vector2(0.10, 0.08)
 }
 
@@ -58,36 +63,21 @@ signal sound_played(stream)
 
 @onready var parameter_container = $ParameterGrid
 @onready var preview_player = $AudioStreamPlayer3D
-@onready var category_label = $SelectionPanel/CategoryLabel
-@onready var sound_label = $SelectionPanel/SoundLabel
 
-var current_category: String = "basic"
 var current_sound_key: String = "basic_sine_wave"
 var active_controls: Dictionary = {}
+var active_buttons: Dictionary = {}
 var rack_config: Dictionary = {}
-var use_json_config: bool = false
-
-var categories = ["basic", "synth", "noir", "trap"]
-var sounds_in_category = []
+var use_json_config: bool = true
 
 const RACK_CONFIG_BASE_PATH = "res://commons/audio/rack_configs/"
 
 func _ready():
-	# Connect buttons
-	$Buttons/PlayButton/InteractableAreaButton.button_pressed.connect(_on_play_pressed)
-	$Buttons/SaveButton/InteractableAreaButton.button_pressed.connect(_on_save_pressed)
-
-	# Connect selection dials
-	$SelectionPanel/CategoryDial.hinge_moved.connect(_on_category_dial_moved)
-	$SelectionPanel/SoundDial.hinge_moved.connect(_on_sound_dial_moved)
-
-	# Check if we should use JSON config or traditional mode
+	# Check if we should use JSON config
 	if rack_config_path != "" and FileAccess.file_exists(rack_config_path):
 		load_rack_config(rack_config_path)
-	else:
-		# Traditional mode
-		_update_category(0)
-		load_sound(current_sound_key)
+	elif rack_config_path != "":
+		push_warning("UniversalVRAudioController: Config path set but file not found: %s" % rack_config_path)
 
 # Called by GridInteractablesComponent when using # syntax
 # Supported parameters:
@@ -203,14 +193,23 @@ func load_rack_config(path: String):
 	# Update rack info
 	if rack_config.has("rack_info"):
 		var info = rack_config["rack_info"]
-		if info.has("name"):
-			sound_label.text = info["name"]
 		if info.has("sound_type"):
 			current_sound_key = info["sound_type"]
 
 	# Spawn controls from JSON config
 	_clear_controls()
 	_spawn_controls_from_json()
+
+	# Apply layout visibility settings
+	var layout = rack_config.get("layout", {})
+	if layout.has("hide_selection"):
+		var should_hide = layout["hide_selection"]
+		if has_node("SelectionPanel"):
+			$SelectionPanel.visible = not should_hide
+	if layout.has("hide_buttons"):
+		var should_hide = layout["hide_buttons"]
+		if has_node("Buttons"):
+			$Buttons.visible = not should_hide
 
 	print("Loaded rack config: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
 
@@ -247,7 +246,24 @@ func _validate_rack_config(data: Dictionary) -> bool:
 			push_error("Control '" + control_id + "' missing 'type' field")
 			return false
 
+		# Visual controls don't need parameters
+		var type = control.get("type", "slider")
+		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "waveform", "meter", "mtr", "vu"]:
+			continue
+			
+		# XY controls need parameter_x and parameter_y (or just parameter)
+		if type in ["xy", "xypad", "2df", "pad", "js", "joystick"]:
+			if not control.has("parameter") and (not control.has("parameter_x") or not control.has("parameter_y")):
+				push_error("Control '" + control_id + "' must have 'parameter' OR 'parameter_x' and 'parameter_y'")
+				return false
+			continue
+
+		# Standard controls need parameter
 		if not control.has("parameter"):
+			# Buttons can have 'action' instead of 'parameter'
+			if type in ["btn", "button", "trigger"] and control.has("action"):
+				continue
+			
 			push_error("Control '" + control_id + "' missing 'parameter' field")
 			return false
 
@@ -338,7 +354,7 @@ func _spawn_controls_from_json():
 				x = col_idx * col_spacing
 				y = -row_idx * row_spacing
 
-			control.transform.origin = Vector3(x, y, 0)
+			control.transform.origin = Vector3(x, y, 0.03)
 
 			# Apply control-specific configuration
 			_configure_control(control, control_config, control_type)
@@ -374,10 +390,10 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 
 	match control_type:
 		# Sliders
-		"slider", "slh", "slider_horizontal", "fader":
+		"slider", "slv", "slider_vertical", "vfader", "fader":
 			control_scene = SLIDER_SCENE
-		"slv", "slider_vertical", "vfader":
-			control_scene = SLIDER_VERTICAL_SCENE
+		"slh", "slider_horizontal":
+			control_scene = SLIDER_HORIZONTAL_SCENE
 		"sls", "slider_snap", "stepped":
 			control_scene = SLIDER_SNAP_SCENE
 		"slz", "slider_zero", "bipolar":
@@ -430,7 +446,7 @@ func _create_meter(control_id: String) -> Node3D:
 	bg_mesh.size = Vector3(0.03, 0.12, 0.01)
 	bg.mesh = bg_mesh
 	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.1, 0.1, 0.1)
+	bg_mat.albedo_color = Color(0.3, 0.3, 0.35)
 	bg.material_override = bg_mat
 	meter.add_child(bg)
 
@@ -535,7 +551,7 @@ func _create_group(control_id: String) -> Node3D:
 	bg_mesh.size = Vector3(0.25, 0.2, 0.005)  # Will be resized based on contents
 	bg.mesh = bg_mesh
 	var bg_mat = StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.08, 0.08, 0.12, 0.9)
+	bg_mat.albedo_color = Color(0.25, 0.25, 0.3, 0.9)
 	bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	bg.material_override = bg_mat
 	bg.position.z = -0.01
@@ -584,7 +600,13 @@ func _get_control_size(control_type: String) -> Vector2:
 			base_type = "xy"
 		"button", "trigger":
 			base_type = "btn"
-		"waveform", "scope", "mon":
+		"wheel", "whl", "pitchbend":
+			base_type = "wheel"
+		"lv", "lever", "throw":
+			base_type = "lv"
+		"grp", "group", "container":
+			base_type = "grp"
+		"monitor", "mon", "waveform", "scope":
 			base_type = "monitor"
 		"vu", "level", "mtr":
 			base_type = "meter"
@@ -612,6 +634,10 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 		control.limit_min = p_min
 	if "limit_max" in control:
 		control.limit_max = p_max
+
+	# Set display range if supported (for custom controls like slider_smooth)
+	if control.has_method("set_range"):
+		control.set_range(p_min, p_max)
 
 	# Set initial value
 	var norm = remap(p_default, p_min, p_max, 0.0, 1.0)
@@ -646,6 +672,16 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 				var size = config.get("size", 0.1)
 				control.limit_min = -size
 				control.limit_max = size
+
+		"wheel", "whl", "pitchbend":
+			# Rotate wheel to face forward (if it's a flat wheel)
+			# Assuming wheel_smooth is flat on XZ, rotate 90 deg on X
+			control.rotation_degrees.x = 90
+		
+		"lv", "lever", "throw":
+			# Rotate lever to face forward
+			# Assuming lever_smooth is vertical (Y-up), rotate -90 on X so it sticks out Z
+			control.rotation_degrees.x = -90
 
 		"lbl", "label", "text":
 			# Label text configuration
@@ -786,35 +822,7 @@ func _on_parameter_changed_json(_value, control_id: String):
 		play_current_sound()
 	)
 
-func _on_category_dial_moved(angle):
-	var idx = int(remap(angle, -150, 150, 0, categories.size() - 1))
-	if categories[idx] != current_category:
-		_update_category(idx)
 
-func _on_sound_dial_moved(angle):
-	if sounds_in_category.is_empty(): return
-	var idx = int(remap(angle, -150, 150, 0, sounds_in_category.size() - 1))
-	if sounds_in_category[idx] != current_sound_key:
-		load_sound(sounds_in_category[idx])
-
-func _update_category(idx: int):
-	current_category = categories[idx]
-	category_label.text = current_category.to_upper()
-	# Get all available sound types and filter by category (or just show all for now)
-	sounds_in_category = SoundParameterManager.get_available_sound_types()
-	
-	# Simple filter for demo purposes
-	if current_category != "all":
-		var filtered = []
-		for s in sounds_in_category:
-			if current_category in s.to_lower():
-				filtered.append(s)
-		if filtered.is_empty(): filtered = [sounds_in_category[0]]
-		sounds_in_category = filtered
-		
-	current_sound_key = sounds_in_category[0]
-	sound_label.text = current_sound_key.capitalize().replace("_", " ")
-	load_sound(current_sound_key)
 
 func _on_play_pressed(_btn):
 	play_current_sound()
@@ -828,69 +836,16 @@ func _get_mock_sounds_for_category(_cat: String) -> Array:
 
 func load_sound(sound_key: String):
 	current_sound_key = sound_key
-	var params = SoundParameterManager.get_sound_parameters(sound_key)
-	_clear_controls()
-	_spawn_controls(params)
+	
+	# Traditional mode is deprecated. Ensure we are using JSON config or just update the sound key.
+	print("UniversalVRAudioController: Switched sound to %s" % current_sound_key)
 
 func _clear_controls():
 	for child in parameter_container.get_children():
 		child.queue_free()
 	active_controls.clear()
 
-func _spawn_controls(params: Dictionary):
-	var count = 0
-	# Get defaults to fill in missing min/max if we have flat params
-	var defaults = SoundParameterManager.get_sound_parameters(current_sound_key)
-	
-	for p_name in params.keys():
-		var p_data = params[p_name]
-		
-		# Define range and current value
-		var val = 0.5
-		var p_min = 0.0
-		var p_max = 1.0
-		
-		if p_data is Dictionary:
-			val = p_data.get("value", 0.5)
-			p_min = p_data.get("min", 0.0)
-			p_max = p_data.get("max", 1.0)
-		else:
-			# Flat param, try to find range in defaults
-			val = float(p_data)
-			var d_data = defaults.get(p_name, {})
-			if d_data is Dictionary:
-				p_min = d_data.get("min", 0.0)
-				p_max = d_data.get("max", 1.0)
-			else:
-				# Fallback range logic
-				if "freq" in p_name: p_max = 2000.0
-				elif "amp" in p_name: p_max = 1.0
-				elif "dur" in p_name: p_max = 10.0
-		
-		# Choose Dial for specific keywords
-		var control
-		if _is_dial_param(p_name):
-			control = DIAL_SCENE.instantiate()
-		else:
-			control = SLIDER_SCENE.instantiate()
-			
-		parameter_container.add_child(control)
-		control.transform.origin = _get_layout_position(count)
-		control.set_param_name(p_name)
-		
-		# Set initial values
-		var norm = remap(val, p_min, p_max, 0.0, 1.0)
-		if control.has_method("set_normalized_value"):
-			control.set_normalized_value(norm)
-			
-		# Connect real-time updates
-		if control.has_signal("slider_moved"):
-			control.slider_moved.connect(_on_parameter_changed.bind(p_name))
-		elif control.has_signal("hinge_moved"):
-			control.hinge_moved.connect(_on_parameter_changed.bind(p_name))
-			
-		active_controls[p_name] = control
-		count += 1
+
 
 var _update_timer: SceneTreeTimer = null
 
@@ -904,23 +859,7 @@ func _on_parameter_changed(_value, _p_name: String):
 		play_current_sound()
 	)
 
-func _is_dial_param(p_name: String) -> bool:
-	var dial_keywords = ["hard", "qual", "ring", "mod", "detune", "blend", "category", "sound"]
-	for k in dial_keywords:
-		if k in p_name.to_lower(): return true
-	return false
 
-func _get_layout_position(index: int) -> Vector3:
-	# 2 columns for wider horizontal sliders
-	var col_spacing = 0.22
-	var row_spacing = 0.1
-	var cols = 2
-	
-	var x = (index % cols) * col_spacing
-	var y = -floor(index / float(cols)) * row_spacing
-	
-	# Center the grid and move up towards the display
-	return Vector3(x - ((cols-1) * col_spacing * 0.5), y + 0.05, 0)
 
 func play_current_sound():
 	var values = _get_current_values()
@@ -935,88 +874,61 @@ func play_current_sound():
 func _get_current_values() -> Dictionary:
 	var values = {}
 
-	if use_json_config:
-		# JSON config mode - use new structure with support for all control types
-		for control_id in active_controls.keys():
-			var control_data = active_controls[control_id]
-			var control = control_data["instance"]
-			var config = control_data["config"]
-			var control_type = control_data.get("type", "slider")
+	# JSON config mode - use new structure with support for all control types
+	for control_id in active_controls.keys():
+		var control_data = active_controls[control_id]
+		var control = control_data["instance"]
+		var config = control_data["config"]
+		var control_type = control_data.get("type", "slider")
 
-			# Handle different control types
-			match control_type:
-				"xy", "xypad", "2df", "pad", "js", "joystick":
-					# XY controls map to two parameters
-					var param_x = config.get("parameter_x", config.get("parameter", "") + "_x")
-					var param_y = config.get("parameter_y", config.get("parameter", "") + "_y")
-					var min_x = config.get("min_x", config.get("min", 0.0))
-					var max_x = config.get("max_x", config.get("max", 1.0))
-					var min_y = config.get("min_y", config.get("min", 0.0))
-					var max_y = config.get("max_y", config.get("max", 1.0))
+		# Handle different control types
+		match control_type:
+			"xy", "xypad", "2df", "pad", "js", "joystick":
+				# XY controls map to two parameters
+				var param_x = config.get("parameter_x", config.get("parameter", "") + "_x")
+				var param_y = config.get("parameter_y", config.get("parameter", "") + "_y")
+				var min_x = config.get("min_x", config.get("min", 0.0))
+				var max_x = config.get("max_x", config.get("max", 1.0))
+				var min_y = config.get("min_y", config.get("min", 0.0))
+				var max_y = config.get("max_y", config.get("max", 1.0))
 
-					# Get stored XY values or read from control
-					var x_val = control_data.get("last_x", 0.0)
-					var y_val = control_data.get("last_y", 0.0)
+				# Get stored XY values or read from control
+				var x_val = control_data.get("last_x", 0.0)
+				var y_val = control_data.get("last_y", 0.0)
 
-					# Normalize and remap
-					var size = config.get("size", 0.1)
-					var norm_x = remap(x_val, -size, size, 0.0, 1.0)
-					var norm_y = remap(y_val, -size, size, 0.0, 1.0)
+				# Normalize and remap
+				var size = config.get("size", 0.1)
+				var norm_x = remap(x_val, -size, size, 0.0, 1.0)
+				var norm_y = remap(y_val, -size, size, 0.0, 1.0)
 
-					values[param_x] = lerp(min_x, max_x, norm_x)
-					values[param_y] = lerp(min_y, max_y, norm_y)
+				values[param_x] = lerp(min_x, max_x, norm_x)
+				values[param_y] = lerp(min_y, max_y, norm_y)
 
-				"btn", "button", "trigger":
-					# Buttons - check toggle state or skip if momentary
-					var param_name = config.get("parameter", "")
-					if param_name != "" and control_data.has("toggle_state"):
-						values[param_name] = 1.0 if control_data["toggle_state"] else 0.0
+			"btn", "button", "trigger":
+				# Buttons - check toggle state or skip if momentary
+				var param_name = config.get("parameter", "")
+				if param_name != "" and control_data.has("toggle_state"):
+					values[param_name] = 1.0 if control_data["toggle_state"] else 0.0
 
-				_:
-					# Standard 1D controls (sliders, knobs, wheels, levers)
-					var param_name = control_data["parameter"]
-					if param_name == "":
-						continue
+			_:
+				# Standard 1D controls (sliders, knobs, wheels, levers)
+				var param_name = control_data["parameter"]
+				if param_name == "":
+					continue
 
-					var norm = 0.5
-					if control.has_method("get_normalized_value"):
-						norm = control.get_normalized_value()
-					elif "slider_value" in control:
-						var p_min = config.get("min", 0.0)
-						var p_max = config.get("max", 1.0)
-						norm = remap(control.slider_value, p_min, p_max, 0.0, 1.0)
-
-					# Get range from config
+				var norm = 0.5
+				if control.has_method("get_normalized_value"):
+					norm = control.get_normalized_value()
+				elif "slider_value" in control:
 					var p_min = config.get("min", 0.0)
 					var p_max = config.get("max", 1.0)
+					norm = remap(control.slider_value, p_min, p_max, 0.0, 1.0)
 
-					values[param_name] = lerp(p_min, p_max, norm)
-	else:
-		# Traditional mode - old structure
-		var defaults = SoundParameterManager.get_sound_parameters(current_sound_key)
+				# Get range from config
+				var p_min = config.get("min", 0.0)
+				var p_max = config.get("max", 1.0)
 
-		for p_name in active_controls.keys():
-			var control = active_controls[p_name]
-			var norm = 0.5
-			if control.has_method("get_normalized_value"):
-				norm = control.get_normalized_value()
-
-			# Map back to real range
-			var p_min = 0.0
-			var p_max = 1.0
-
-			# Look for range in defaults
-			var d_data = defaults.get(p_name, {})
-			if d_data is Dictionary:
-				p_min = d_data.get("min", 0.0)
-				p_max = d_data.get("max", 1.0)
-			else:
-				# Fallback if not in defaults
-				if "freq" in p_name: p_max = 2000.0
-				elif "amp" in p_name: p_max = 1.0
-				elif "dur" in p_name: p_max = 10.0
-
-			values[p_name] = lerp(p_min, p_max, norm)
+				values[param_name] = lerp(p_min, p_max, norm)
 
 	return values
 

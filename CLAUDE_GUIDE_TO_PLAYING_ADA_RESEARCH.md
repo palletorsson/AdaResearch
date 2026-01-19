@@ -392,6 +392,71 @@ Experience:
   - Technical ↔ Critical dialectic
 ```
 
+**Map 11: Primitives_Ignorance**
+```bash
+Read: commons/maps/Primitives_Ignorance/map_data.json
+
+Structure: Long 9x22 gallery with repeating plinths and void rhythm
+Interactables:
+  - Plato inscription text at (4,6)
+  - platonic_demo and grabbable octahedra
+  - sphere_low/mid/high and organic roughrock
+  - architectural lshape and prism_block
+Utilities:
+  - teleporter at (4,20)
+
+Summary:
+  - Ignorance is a structural limit; what cannot be formalized persists as remainder
+  - Frames ignorance as orientation at the edge of what models can contain
+
+Experience:
+  - Abundance makes limits felt, not just stated
+  - Spheres expose triangulated approximation; primitives are a bounded vocabulary
+```
+
+**Map 12: Primitives_Portals**
+```bash
+Read: commons/maps/Primitives_Portals/map_data.json
+
+Structure: 7x40 corridor, single-tile walkway over void
+Interactables:
+  - combine_portals near entrance
+  - clipboard with btorus_axioms
+  - dark_sphere at midpoint
+Utilities:
+  - teleporter at (4,33)
+
+Summary:
+  - Approximation as process: rings refine toward pi without arrival
+  - Archimedes-style exhaustion tightens bounds while remainder persists
+
+Experience:
+  - Long corridor makes convergence bodily
+  - The portal is convergence, not passage
+```
+
+**Map 13: Primitives_Melencolia**
+```bash
+Read: commons/maps/Primitives_Melencolia/map_data.json
+
+Structure: Compact multi-tier plaza with central dais
+Interactables:
+  - corner pyramids, pyramidlong, snap_pyramid_puzzle
+  - cube_scene cluster
+  - diamondtoruscollection on elevated platform
+  - code_display with melencolia_axioms
+Utilities:
+  - twin teleporters at (1,8) and (5,8)
+
+Summary:
+  - Abstraction sees its limits; tools remain, completion withheld
+  - Melancholy as suspension between mastery and the decision to build
+
+Experience:
+  - Durer-inspired stillness; refinement continues without closure
+  - Exit reads as pause, not triumph
+```
+
 ### Playing "randomness_exploration" Sequence
 
 **Map 1: Random_Define**

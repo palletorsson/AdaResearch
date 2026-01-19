@@ -55,9 +55,9 @@
 			["MarioSoundController#mode:laser_zap", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", " ", " ", " ", ""],
 			["MarioSoundController#mode:techno_kick", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", " ", " ", " ", ""],
 			[" ", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", "pick_up_cube", " ", " ", " ", ""],
-			[" ", "VRAudioMonitor", "AudioContr#config:synth_rack", "", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "AudioContr#config:slide_rack", " ", "VRAudioMonitor", " ", "AudioContr#config:full_rack", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " dark_sphere", " ", " ", " ", " ", " "],
-			[" ", "pick_up_cube", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "pick_up_cube", " ", " ", " ", " ", " ", " ", " ", " ", "interactable_demo", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},

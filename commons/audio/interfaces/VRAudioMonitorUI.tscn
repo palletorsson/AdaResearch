@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3yq8v5gq2r1"]
+
+[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
+
+[node name="VRAudioMonitorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.05, 0.1, 1)
+
+[node name="Grid" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="ColorRect" parent="Grid"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.3, 0.4, 0.5)
+
+[node name="Line2" type="ColorRect" parent="Grid"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.3, 0.4, 0.5)
+
+[node name="WaveformDisplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_waveform")
+background_color = Color(0, 0, 0, 0)
+line_color = Color(0.2, 1, 0.4, 1)
+line_width = 3.0
+sample_count = 128
+amplitude_scale = 100.0
+time_scale = 2.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 36.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.2, 1, 0.4, 1)
+text = "OSC 1"
+horizontal_alignment = 2
