@@ -215,13 +215,22 @@ const UTILITY_TYPES = {
 	},
 	
 	"bp": {
-		"name": "big_pipe", 
-		"file": "", 
+		"name": "big_pipe",
+		"file": "",
 		"category": "structure",
 		"description": "Procedural pipe system (bp:f,f,s,u...)",
 		"supports_parameters": true  # pipe code string
 	},
-	
+
+	# Player body customization
+	"pb": {
+		"name": "player_body_trigger",
+		"file": "player_body_trigger.tscn",
+		"category": "interactive",
+		"description": "Triggers player body customization (pb:dress, pb:skin_color, pb:dress_wicked)",
+		"supports_parameters": true  # feature_name, optional color/params
+	},
+
 	# Empty space
 	" ": {
 		"name": "none", 

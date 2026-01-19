@@ -13,7 +13,7 @@
 	},
 	"grid": [
 		[
-			"sl_1", "slider_pan"
+			"sl_1", "sl_2",  "slider_pan"
 		]
 	],
 	"control_definitions": {
@@ -23,16 +23,23 @@
 			"parameter": "freq",
 			"min": 200.0,
 			"max": 1000.0,
-			"default": 440.0
+			"default": 880.0
 		},
+		"sl_2": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "freq",
+			"min": 200.0,
+			"max": 1000.0,
+			"default": 880.0
+		},		
 		"slider_pan": {
-			"row": 0,
-			"col": 1,
+
 			"type": "slider_horizontal",
 			"label": "Pan",
 			"parameter": "pan",
-			"min": -1.0,
-			"max": 1.0,
+			"min": -5.0,
+			"max": 5.0,
 			"default": 0.0
 		}
 	}

@@ -5,6 +5,9 @@ extends Node3D
 ## The central brain of the modular synth rack.
 ## Supports Ableton-style controls: sliders, knobs, XY pads, buttons
 
+# Load PickupCube for shared Mario parameter sync
+const PickupCube = preload("res://commons/scenes/mapobjects/pick_up_cube.gd")
+
 # Control scene preloads
 const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
 const SLIDER_HORIZONTAL_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
@@ -22,6 +25,8 @@ const WHEEL_SCENE = preload("res://commons/interactables/wheel_smooth.tscn")
 
 # Monitors and meters
 const WAVEFORM_MONITOR_SCENE = preload("res://commons/audio/interfaces/VRAudioMonitor.tscn")
+const SPECTRUM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
+const WAVEFORM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRWaveformDisplay.tscn")
 
 # Default spacing by control type (width, height in meters)
 const CONTROL_SIZES = {
@@ -34,6 +39,8 @@ const CONTROL_SIZES = {
 	"btn": Vector2(0.08, 0.08),
 	"lv": Vector2(0.08, 0.15),
 	"monitor": Vector2(0.30, 0.22),
+	"spectrum": Vector2(0.32, 0.24),
+	"waveform": Vector2(0.32, 0.24),
 	"meter": Vector2(0.04, 0.12),
 	"label": Vector2(0.20, 0.04),
 	"grp": Vector2(0.25, 0.20),
@@ -70,14 +77,41 @@ var active_buttons: Dictionary = {}
 var rack_config: Dictionary = {}
 var use_json_config: bool = true
 
+# Auto-save timer for syncing Mario parameters (like MarioSoundController)
+var _auto_save_timer: Timer
+var _auto_save_interval: float = 2.0
+
 const RACK_CONFIG_BASE_PATH = "res://commons/audio/rack_configs/"
 
 func _ready():
+	# Setup auto-save timer for parameter syncing
+	_setup_auto_save_timer()
+
 	# Check if we should use JSON config
 	if rack_config_path != "" and FileAccess.file_exists(rack_config_path):
 		load_rack_config(rack_config_path)
 	elif rack_config_path != "":
 		push_warning("UniversalVRAudioController: Config path set but file not found: %s" % rack_config_path)
+
+func _setup_auto_save_timer():
+	_auto_save_timer = Timer.new()
+	_auto_save_timer.wait_time = _auto_save_interval
+	_auto_save_timer.autostart = true
+	_auto_save_timer.timeout.connect(_on_auto_save_timeout)
+	add_child(_auto_save_timer)
+
+func _on_auto_save_timeout():
+	# Sync Mario parameters globally so pickup cubes always use current settings
+	if current_sound_key == "pickup_mario":
+		_sync_mario_parameters()
+
+func _sync_mario_parameters():
+	var values = _get_current_values()
+	var start_freq = values.get("start_freq", 540.0)
+	var end_freq = values.get("end_freq", 880.0)
+	var decay_rate = values.get("decay_rate", 8.0)
+	var duration = values.get("duration", 0.36)
+	PickupCube.set_shared_mario_parameters(start_freq, end_freq, decay_rate, duration)
 
 # Called by GridInteractablesComponent when using # syntax
 # Supported parameters:
@@ -246,9 +280,9 @@ func _validate_rack_config(data: Dictionary) -> bool:
 			push_error("Control '" + control_id + "' missing 'type' field")
 			return false
 
-		# Visual controls don't need parameters
+		# Visual/display controls don't need parameters
 		var type = control.get("type", "slider")
-		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "waveform", "meter", "mtr", "vu"]:
+		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "meter", "mtr", "vu", "level"]:
 			continue
 			
 		# XY controls need parameter_x and parameter_y (or just parameter)
@@ -418,8 +452,12 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 			control_scene = LEVER_SCENE
 
 		# Monitors and displays
-		"mon", "monitor", "waveform", "scope":
+		"mon", "monitor", "scope":
 			control_scene = WAVEFORM_MONITOR_SCENE
+		"spectrum", "spec", "fft":
+			control_scene = SPECTRUM_DISPLAY_SCENE
+		"waveform", "wave", "osc":
+			control_scene = WAVEFORM_DISPLAY_SCENE
 		"mtr", "meter", "vu", "level":
 			return _create_meter(control_id)
 		"lbl", "label", "text":
@@ -718,12 +756,26 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 				if border and border.mesh:
 					border.mesh.size.x = width
 
-		"mon", "monitor", "waveform", "scope":
+		"mon", "monitor", "scope":
 			# Monitor configuration
 			if config.has("label"):
 				var label_node = control.get_node_or_null("Chassis/LabelName")
 				if label_node:
 					label_node.text = config.get("label", "MONITOR").to_upper()
+
+		"spectrum", "spec", "fft":
+			# Spectrum display configuration
+			if config.has("label"):
+				var label_node = control.get_node_or_null("Chassis/LabelName")
+				if label_node:
+					label_node.text = config.get("label", "SPECTRUM").to_upper()
+
+		"waveform", "wave", "osc":
+			# Waveform display configuration
+			if config.has("label"):
+				var label_node = control.get_node_or_null("Chassis/LabelName")
+				if label_node:
+					label_node.text = config.get("label", "WAVEFORM").to_upper()
 
 		"mtr", "meter", "vu", "level":
 			# Meter connects to audio output for level
@@ -804,23 +856,20 @@ func _on_button_pressed(control_id: String):
 	print("Button pressed: %s (action: %s)" % [control_id, action])
 
 func _trigger_sound_update():
-	if _update_timer:
+	# Time-based debounce for auto-play
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time < min_play_interval:
 		return
-	_update_timer = get_tree().create_timer(0.05)
-	_update_timer.timeout.connect(func():
-		_update_timer = null
-		play_current_sound()
-	)
+	_last_play_time = current_time
+	play_current_sound()
 
 func _on_parameter_changed_json(_value, control_id: String):
-	# Real-time tweak with debounce for JSON-based controls
-	if _update_timer: return
-
-	_update_timer = get_tree().create_timer(0.05)
-	_update_timer.timeout.connect(func():
-		_update_timer = null
-		play_current_sound()
-	)
+	# Real-time tweak with time-based debounce to prevent rapid firing
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time < min_play_interval:
+		return
+	_last_play_time = current_time
+	play_current_sound()
 
 
 
@@ -848,28 +897,42 @@ func _clear_controls():
 
 
 var _update_timer: SceneTreeTimer = null
+var _last_play_time: float = 0.0
+var min_play_interval: float = 0.5  # 500ms between auto-plays (like MarioSoundController)
 
 func _on_parameter_changed(_value, _p_name: String):
-	# Real-time tweak with debounce to prevent stuttering
-	if _update_timer: return
-	
-	_update_timer = get_tree().create_timer(0.05) # 50ms is enough for snappy feedback
-	_update_timer.timeout.connect(func(): 
-		_update_timer = null
-		play_current_sound()
-	)
+	# Real-time tweak with time-based debounce to prevent rapid firing
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - _last_play_time < min_play_interval:
+		return
+	_last_play_time = current_time
+	play_current_sound()
 
 
 
 func play_current_sound():
 	var values = _get_current_values()
 	var sound_type = _resolve_sound_type(current_sound_key)
-	
+
+	print("UVAC: Playing sound - key: %s, type: %s" % [current_sound_key, sound_type])
+	print("UVAC: Values: %s" % str(values))
+
+	# Sync Mario parameters globally so pickup cubes use them too
+	if current_sound_key == "pickup_mario":
+		var start_freq = values.get("start_freq", 540.0)
+		var end_freq = values.get("end_freq", 880.0)
+		var decay_rate = values.get("decay_rate", 8.0)
+		var duration = values.get("duration", 0.36)
+		PickupCube.set_shared_mario_parameters(start_freq, end_freq, decay_rate, duration)
+		print("UVAC: Synced Mario params - start: %s, end: %s, decay: %s, dur: %s" % [start_freq, end_freq, decay_rate, duration])
+
 	var stream = CustomSoundGenerator.generate_custom_sound(sound_type, values)
 	if stream:
 		preview_player.stream = stream
 		preview_player.play()
 		sound_played.emit(stream)
+	else:
+		push_warning("UVAC: Failed to generate sound stream")
 
 func _get_current_values() -> Dictionary:
 	var values = {}

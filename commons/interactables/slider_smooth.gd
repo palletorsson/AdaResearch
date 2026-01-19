@@ -1,6 +1,9 @@
 @tool
 extends Node3D
 
+# Dedicated script for Vertical Sliders
+# The InteractableSlider is rotated 90 degrees to slide along the Y axis
+
 @export var slider_node: NodePath = NodePath("SliderOrigin/InteractableSlider")
 @export var label_node: NodePath = NodePath("Frame/Label3DValue")
 @export_range(0, 6) var decimal_places: int = 2
@@ -9,22 +12,36 @@ var range_min: float = 0.0
 var range_max: float = 1.0
 
 signal slider_moved(value)
- 
+
 @onready var _slider: Node = get_node_or_null(slider_node)
 @onready var _label: Label3D = get_node_or_null(label_node)
 var _last_display_text: String = ""
 
-# ... (rest of _ready and process)
+func _ready() -> void:
+	_connect_slider_signal()
+	_update_label(_current_slider_value())
+
+func _process(_delta: float) -> void:
+	# Keep the handle on the slider track (lock Y and Z drift in local space)
+	# The slider moves along its local X axis; Y and Z are drift axes
+	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
+	if handle and handle.is_picked_up():
+		handle.transform.origin.y = 0
+		handle.transform.origin.z = 0
+
+func _connect_slider_signal() -> void:
+	if not _slider:
+		push_warning("SliderSmooth: Slider node not found at %s" % slider_node)
+		return
+	if _slider.has_signal("slider_moved") and not _slider.is_connected("slider_moved", Callable(self, "_on_slider_moved")):
+		_slider.connect("slider_moved", Callable(self, "_on_slider_moved"))
 
 func set_range(p_min: float, p_max: float) -> void:
 	range_min = p_min
 	range_max = p_max
 	_update_label(_current_slider_value())
 
-# ...
-
 func _on_slider_moved(position) -> void:
-	# print("SliderSmooth: _on_slider_moved called with position: ", position)
 	_update_label(position)
 	slider_moved.emit(position)
 
@@ -51,16 +68,19 @@ func set_normalized_value(val: float):
 func _current_slider_value():
 	if not _slider:
 		return null
-	var value = _slider.get("slider_position")
-	# print("SliderSmooth: _current_slider_value returning: ", value)
-	return value
-
-# ...
+	return _slider.get("slider_position")
 
 func _update_label(value) -> void:
 	if not _ensure_label():
 		return
-	
+
+	# Handle Vector2 input (use x component for 1D slider)
+	var scalar_value: float = 0.0
+	if value is Vector2:
+		scalar_value = value.x
+	elif value != null:
+		scalar_value = float(value)
+
 	# Calculate normalized value from physical position
 	var norm = 0.0
 	if _slider:
@@ -68,18 +88,16 @@ func _update_label(value) -> void:
 		var s_max = _slider.get("slider_limit_max")
 		if s_min == null: s_min = 0.0
 		if s_max == null: s_max = 1.0
-		norm = remap(value, s_min, s_max, 0.0, 1.0)
-	
+		norm = remap(scalar_value, s_min, s_max, 0.0, 1.0)
+
 	# Map to logical range
 	var logical_value = lerp(range_min, range_max, norm)
-	
+
 	var text := _format_value(logical_value)
-	# print("SliderSmooth: _update_label - value: ", value, " norm: ", norm, " logical: ", logical_value, " formatted: ", text)
 	if text == _last_display_text:
 		return
 	_last_display_text = text
 	_label.text = text
-	print("SliderSmooth: Label updated to: ", text)
 
 func set_param_name(text: String):
 	var name_label = get_node_or_null("Frame/LabelName")

@@ -31,11 +31,25 @@ var _timer: float = 0.0
 var is_resetting: bool = false
 var _reset_cooldown_timer: float = 0.0
 
+# Continuous stuck detection
+var _post_reset_monitor_time: float = 0.0
+var _post_reset_last_position: Vector3 = Vector3.ZERO
+var _post_reset_stuck_checks: int = 0
+const POST_RESET_MONITOR_DURATION: float = 3.0  # Monitor for 3 seconds after reset
+const STUCK_MOVEMENT_THRESHOLD: float = 0.05  # Must move at least 5cm to be "not stuck"
+const MAX_STUCK_FIXES: int = 3  # Max attempts to fix stuck position
+
 func _ready():
 	_find_player_node()
 
 func _physics_process(delta):
 	if not active:
+		return
+
+	# Continuous stuck detection after reset
+	if _post_reset_monitor_time > 0:
+		_post_reset_monitor_time -= delta
+		_check_post_reset_stuck(delta)
 		return
 
 	# Cooldown after reset
@@ -115,11 +129,14 @@ func _reset_player():
 	if reset_velocity:
 		_reset_velocity(player_node)
 
-	# 4. Wait one frame then disable fly mode
+	# 4. Wait one frame then check if stuck
 	await get_tree().physics_frame
 
 	if reset_velocity:
 		_reset_velocity(player_node)
+
+	# 5. Check if player is stuck inside geometry and try to fix
+	await _check_and_fix_stuck_position(root if root else player_node, target_pos)
 
 	# Disable Fly Mode
 	if flight_controller:
@@ -127,6 +144,96 @@ func _reset_player():
 		flight_controller.set_flying(false)
 
 	is_resetting = false
+
+	# Start post-reset monitoring for stuck detection
+	_start_post_reset_monitoring()
+
+func _check_and_fix_stuck_position(player_root: Node3D, original_target: Vector3):
+	"""Check if player is stuck inside geometry and try alternate positions"""
+	if not player_root:
+		return
+
+	# Wait a frame for physics to settle
+	await get_tree().physics_frame
+
+	# Get the camera to check if it's inside something
+	var camera = get_viewport().get_camera_3d()
+	if not camera:
+		return
+
+	# Use a raycast from slightly above to check if we're in solid geometry
+	var space_state = get_world_3d().direct_space_state
+	if not space_state:
+		return
+
+	var camera_pos = camera.global_position
+	var check_pos = player_root.global_position
+
+	# Cast ray from above player down to check for obstructions
+	var ray_start = check_pos + Vector3(0, 2.0, 0)
+	var ray_end = check_pos
+
+	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end)
+	query.collision_mask = 1  # Check against world geometry (layer 1)
+	query.exclude = _get_player_bodies(player_root)
+
+	var result = space_state.intersect_ray(query)
+
+	if result and result.position.y > check_pos.y + 0.5:
+		# We're likely inside geometry - try moving up
+		print("PlayerBoundsCheck: ⚠️ Player may be stuck! Attempting to fix...")
+
+		# Try positions: up, then cardinal directions
+		var offsets = [
+			Vector3(0, 1.0, 0),   # Up
+			Vector3(0, 2.0, 0),   # Higher up
+			Vector3(1, 0.5, 0),   # Right + up
+			Vector3(-1, 0.5, 0),  # Left + up
+			Vector3(0, 0.5, 1),   # Forward + up
+			Vector3(0, 0.5, -1),  # Back + up
+		]
+
+		for offset in offsets:
+			var test_pos = original_target + offset
+			if _is_position_clear(test_pos, space_state, player_root):
+				player_root.global_position = test_pos
+				print("PlayerBoundsCheck: ✅ Found clear position at offset %s" % offset)
+				return
+
+		# Last resort: move significantly higher
+		player_root.global_position = original_target + Vector3(0, 3.0, 0)
+		print("PlayerBoundsCheck: ⚠️ Moved player up 3m as fallback")
+
+func _is_position_clear(pos: Vector3, space_state: PhysicsDirectSpaceState3D, player_root: Node3D) -> bool:
+	"""Check if a position is clear of geometry"""
+	# Check a small sphere around the position
+	var query = PhysicsShapeQueryParameters3D.new()
+	var sphere = SphereShape3D.new()
+	sphere.radius = 0.3
+	query.shape = sphere
+	query.transform = Transform3D(Basis.IDENTITY, pos + Vector3(0, 1.0, 0))  # Check at head height
+	query.collision_mask = 1
+	query.exclude = _get_player_bodies(player_root)
+
+	var results = space_state.intersect_shape(query, 1)
+	return results.is_empty()
+
+func _get_player_bodies(player_root: Node3D) -> Array[RID]:
+	"""Get RIDs of player physics bodies to exclude from collision checks"""
+	var rids: Array[RID] = []
+	if not player_root:
+		return rids
+
+	# Find all physics bodies in player hierarchy
+	var bodies_to_check = [player_root]
+	while not bodies_to_check.is_empty():
+		var node = bodies_to_check.pop_back()
+		if node is PhysicsBody3D:
+			rids.append(node.get_rid())
+		for child in node.get_children():
+			bodies_to_check.append(child)
+
+	return rids
 
 func _find_flight_controller(start_node: Node) -> Node:
 	var root = _find_player_root(start_node)
@@ -175,13 +282,13 @@ func _find_player_node():
 	player_node = get_tree().get_first_node_in_group("player")
 	if not player_node:
 		player_node = get_tree().get_first_node_in_group("player_body")
-	
+
 	if not player_node:
 		# Strategy 2: Look for specific names
 		var root = get_tree().current_scene
 		if root:
 			player_node = root.find_child("XROrigin3D", true, false)
-			
+
 	if not player_node:
 		# Strategy 3: Look for CharacterBody3D or RigidBody3D that might be the player
 		# Use the parent of the camera if possible
@@ -194,6 +301,86 @@ func _find_player_node():
 					player_node = p
 					break
 				p = p.get_parent()
-				
+
 	if player_node:
 		print("PlayerBoundsCheck: Tracking player node '", player_node.name, "'")
+
+func _start_post_reset_monitoring():
+	"""Start monitoring player position after reset to detect if still stuck"""
+	if not is_instance_valid(player_node):
+		return
+	_post_reset_monitor_time = POST_RESET_MONITOR_DURATION
+	_post_reset_last_position = player_node.global_position
+	_post_reset_stuck_checks = 0
+	print("PlayerBoundsCheck: Starting post-reset stuck monitoring")
+
+func _check_post_reset_stuck(_delta: float):
+	"""Check if player is stuck after reset (hasn't moved)"""
+	if not is_instance_valid(player_node):
+		_post_reset_monitor_time = 0.0
+		return
+
+	var current_pos = player_node.global_position
+	var movement = current_pos.distance_to(_post_reset_last_position)
+
+	# If player moved enough, they're not stuck
+	if movement > STUCK_MOVEMENT_THRESHOLD:
+		print("PlayerBoundsCheck: ✅ Player moved %.2fm, not stuck" % movement)
+		_post_reset_monitor_time = 0.0
+		_post_reset_stuck_checks = 0
+		return
+
+	# Check if monitor period ended and player still hasn't moved
+	if _post_reset_monitor_time <= 0:
+		_post_reset_stuck_checks += 1
+		if _post_reset_stuck_checks < MAX_STUCK_FIXES:
+			print("PlayerBoundsCheck: ⚠️ Player still stuck after reset! Attempt %d/%d" % [_post_reset_stuck_checks, MAX_STUCK_FIXES])
+			_emergency_unstuck()
+		else:
+			print("PlayerBoundsCheck: ❌ Max stuck fix attempts reached. Player may need manual intervention.")
+			_post_reset_stuck_checks = 0
+
+func _emergency_unstuck():
+	"""Emergency unstuck - try more aggressive position fixes"""
+	var root = _find_player_root(player_node)
+	if not root:
+		root = player_node
+
+	# Reset velocity first
+	_reset_velocity(root)
+
+	# Try progressively higher positions
+	var base_pos = reset_position
+	var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
+	if spawn_node:
+		base_pos = spawn_node.global_position
+
+	# Emergency offsets - more aggressive than normal
+	var emergency_offsets = [
+		Vector3(0, 2.0 + _post_reset_stuck_checks, 0),  # Higher each attempt
+		Vector3(1.0, 1.5, 0),
+		Vector3(-1.0, 1.5, 0),
+		Vector3(0, 1.5, 1.0),
+		Vector3(0, 1.5, -1.0),
+		Vector3(0, 5.0, 0),  # Very high as last resort
+	]
+
+	var space_state = get_world_3d().direct_space_state
+	if space_state:
+		for offset in emergency_offsets:
+			var test_pos = base_pos + offset
+			if _is_position_clear(test_pos, space_state, root):
+				root.global_position = test_pos
+				_reset_velocity(root)
+				print("PlayerBoundsCheck: 🚨 Emergency unstuck to %s" % test_pos)
+				# Restart monitoring
+				_post_reset_last_position = test_pos
+				_post_reset_monitor_time = POST_RESET_MONITOR_DURATION
+				return
+
+	# Last resort - just move up
+	root.global_position = base_pos + Vector3(0, 3.0 + _post_reset_stuck_checks * 2, 0)
+	_reset_velocity(root)
+	print("PlayerBoundsCheck: 🚨 Emergency fallback - moved player up significantly")
+	_post_reset_last_position = root.global_position
+	_post_reset_monitor_time = POST_RESET_MONITOR_DURATION

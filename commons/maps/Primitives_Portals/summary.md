@@ -2,7 +2,7 @@
 
 ## Overview
 Primitives_Portals is a **transition map** - a long, narrow corridor (7×40) that serves as threshold between the primitives sequence and other sequences. The map features **combine_portals** which demonstrates transitions and connections, staging movement through space as **liminal passage** rather than destination.
-
+Portals enact approximation as an embodied process. An array of toroidal rings increases in number and resolution as the player advances, converging toward π without ever reaching it. Like Archimedes’ method of exhaustion, each refinement tightens the bounds while preserving the limit. The mesh improves, but the remainder persists. The portal is not passage, but convergence without arrival.
 ## Spatial Layout
 - **Dimensions**: 7×40 grid (extreme elongation - longest map in sequence)
 - **Architecture**: Single-tile-wide walkway (column 3) suspended over void

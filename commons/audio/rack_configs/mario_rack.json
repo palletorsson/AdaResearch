@@ -1,0 +1,74 @@
+{
+	"rack_info": {
+		"name": "Mario Sound Rack",
+		"description": "Classic video game pickup sound with frequency sweep controls",
+		"version": "1.0",
+		"sound_type": "pickup_mario"
+	},
+	"layout": {
+		"col_spacing": 0.12,
+		"row_spacing": 0.12,
+		"hide_selection": true,
+		"hide_buttons": false
+	},
+	"grid": [
+		[" ", "lbl_title", " ", " ", " "],
+		["sl_start", "sl_end", "sl_decay", "disp_spectrum", "disp_waveform"],
+		[" ", "sl_amp", "sl_dur", " ", " "]
+	],
+	"control_definitions": {
+		"lbl_title": {
+			"type": "label",
+			"label": "MARIO SOUND",
+			"col_span": 3
+		},
+		"sl_start": {
+			"type": "slider",
+			"label": "Start Freq",
+			"parameter": "start_freq",
+			"min": 100.0,
+			"max": 1000.0,
+			"default": 540.0
+		},
+		"sl_end": {
+			"type": "slider",
+			"label": "End Freq",
+			"parameter": "end_freq",
+			"min": 200.0,
+			"max": 2000.0,
+			"default": 880.0
+		},
+		"sl_decay": {
+			"type": "slider",
+			"label": "Decay",
+			"parameter": "decay_rate",
+			"min": 1.0,
+			"max": 20.0,
+			"default": 8.0
+		},
+		"sl_amp": {
+			"type": "slider",
+			"label": "Volume",
+			"parameter": "amplitude",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.3
+		},
+		"sl_dur": {
+			"type": "slider",
+			"label": "Duration",
+			"parameter": "duration",
+			"min": 0.1,
+			"max": 1.0,
+			"default": 0.36
+		},
+		"disp_spectrum": {
+			"type": "spectrum",
+			"label": "SPECTRUM"
+		},
+		"disp_waveform": {
+			"type": "waveform",
+			"label": "WAVEFORM"
+		}
+	}
+}

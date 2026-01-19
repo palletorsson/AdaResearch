@@ -1,24 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2td5hwh2oluy"]
+[gd_scene load_steps=16 format=3 uid="uid://d2td5hwh2oluy"]
 
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3"]
+[ext_resource type="Script" uid="uid://cy30p5fnbjvuq" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
+[ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="4_2vgo6"]
 [ext_resource type="Resource" uid="uid://bd1dxftyxdgup" path="res://commons/interactables/pose_grab_wheel_left.tres" id="5_gt8jj"]
 [ext_resource type="Resource" uid="uid://dsiujx4dllwvd" path="res://commons/interactables/pose_grab_wheel_right.tres" id="6_ss5gc"]
-[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
 [ext_resource type="Material" uid="uid://b8y2x3g5q7v8n" path="res://commons/interactables/materials/rack_accent.tres" id="MatAccent"]
-[ext_resource type="Material" uid="uid://c8v4y5z6a7b8c" path="res://commons/interactables/materials/ui_shadow.tres" id="MatShadow"]
+[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://d304x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.1, 0.1, 0.02)
+[sub_resource type="CylinderShape3D" id="1"]
+height = 0.02
+radius = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_Base"]
 size = Vector3(0.1, 0.1, 0.02)
-
-[sub_resource type="CylinderShape3D" id="2"]
-height = 0.02
-radius = 0.04
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_Wheel"]
 top_radius = 0.04
@@ -27,8 +23,11 @@ height = 0.02
 radial_segments = 32
 rings = 0
 
-[sub_resource type="SphereShape3D" id="3"]
-radius = 0.008
+[sub_resource type="BoxMesh" id="BoxMesh_00slk"]
+size = Vector3(0.01, 0.01, 0.01)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.02, 0.08, 0.1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_Handle"]
 radius = 0.006
@@ -63,12 +62,15 @@ hinge_limit_max = 360.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HingeOrigin/InteractableHinge/WheelBody"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HingeOrigin/InteractableHinge/WheelBody"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_Wheel")
 surface_material_override/0 = ExtResource("MatMetal")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="HingeOrigin/InteractableHinge/WheelBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01228784, 0.029867955, -5.371186e-10)
+mesh = SubResource("BoxMesh_00slk")
 
 [node name="Handles" type="Node3D" parent="HingeOrigin/InteractableHinge"]
 

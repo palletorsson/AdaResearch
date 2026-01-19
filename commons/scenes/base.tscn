@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=29 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://bwjg64php4soj" path="res://commons/player/velocity_deadzone.gd" id="20_deadzone"]
 [ext_resource type="Script" uid="uid://c7wk6syqdkr1m" path="res://commons/player/joystick_deadzone_fix.gd" id="22_joystick_fix"]
 [ext_resource type="Script" uid="uid://dwor4ga117nwk" path="res://commons/player/pickup_xp_listener.gd" id="23_pickup_xp"]
+[ext_resource type="Script" uid="uid://do86cuqep43oi" path="res://commons/player/PlayerCustomization.gd" id="24_customization"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -138,6 +139,10 @@ debug_joystick = false
 
 [node name="PickupXPListener" type="Node" parent="XROrigin3D" index="6"]
 script = ExtResource("23_pickup_xp")
+
+[node name="PlayerCustomization" type="Node" parent="XROrigin3D" index="7"]
+script = ExtResource("24_customization")
+debug_mode = true
 
 [node name="Label3D" type="Label3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)

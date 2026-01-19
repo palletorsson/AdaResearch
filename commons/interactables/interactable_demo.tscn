@@ -51,10 +51,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, -0.15, 0)
 
 [node name="WheelSmooth" parent="RackMockup" instance=ExtResource("7_qiivc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3543284, 0)
 
 [node name="SliderPlane" parent="RackMockup" instance=ExtResource("1_yww16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74582154, -0.14999998, 0)
 
 [node name="Label" type="Label3D" parent="RackMockup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)

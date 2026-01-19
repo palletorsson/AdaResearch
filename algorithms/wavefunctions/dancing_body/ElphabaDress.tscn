@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn1bf38alc1h7"]
+
+[ext_resource type="Script" uid="uid://de8ccgw7xpygw" path="res://algorithms/wavefunctions/dancing_body/ElphabaDress.gd" id="1_dress"]
+
+[node name="ElphabaDress" type="Node3D"]
+script = ExtResource("1_dress")
+hem_radius = 0.45
+dress_length = 0.9
+wave_amplitude = 0.035
+flutter_intensity = 0.025
+primary_color = Color(0, 0.25, 0.08, 1)
+secondary_color = Color(0, 0.5, 0.15, 1)
+wireframe_color = Color(0.2, 1, 0.4, 1)
+emission_strength = 1.8
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.30552)

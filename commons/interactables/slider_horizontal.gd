@@ -8,6 +8,9 @@ extends Node3D
 @export var label_node: NodePath = NodePath("Frame/Label3DValue")
 @export_range(0, 6) var decimal_places: int = 2
 
+var range_min: float = 0.0
+var range_max: float = 1.0
+
 signal slider_moved(value)
 
 @onready var _slider: Node = get_node_or_null(slider_node)
@@ -36,6 +39,11 @@ func _connect_slider_signal() -> void:
 		return
 	if _slider.has_signal("slider_moved") and not _slider.is_connected("slider_moved", Callable(self, "_on_slider_moved")):
 		_slider.connect("slider_moved", Callable(self, "_on_slider_moved"))
+
+func set_range(p_min: float, p_max: float) -> void:
+	range_min = p_min
+	range_max = p_max
+	_update_label(_current_slider_value())
 
 func _on_slider_moved(position) -> void:
 	_update_label(position)
@@ -70,7 +78,27 @@ func _current_slider_value():
 func _update_label(value) -> void:
 	if not _ensure_label():
 		return
-	var text := _format_value(value)
+
+	# Handle Vector2 input (use x component for 1D slider)
+	var scalar_value: float = 0.0
+	if value is Vector2:
+		scalar_value = value.x
+	elif value != null:
+		scalar_value = float(value)
+
+	# Calculate normalized value from physical position
+	var norm = 0.0
+	if _slider:
+		var s_min = _slider.get("slider_limit_min")
+		var s_max = _slider.get("slider_limit_max")
+		if s_min == null: s_min = 0.0
+		if s_max == null: s_max = 1.0
+		norm = remap(scalar_value, s_min, s_max, 0.0, 1.0)
+
+	# Map to logical range
+	var logical_value = lerp(range_min, range_max, norm)
+
+	var text := _format_value(logical_value)
 	if text == _last_display_text:
 		return
 	_last_display_text = text

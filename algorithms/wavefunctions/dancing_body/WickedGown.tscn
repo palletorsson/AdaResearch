@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://blxjs2bvw0vlg"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/dancing_body/WickedGown.gd" id="1_gown"]
+
+[node name="WickedGown" type="Node3D"]
+script = ExtResource("1_gown")
+num_layers = 3
+layer_separation = 0.08
+layer1_radius_top = 0.12
+layer1_radius_bottom = 0.38
+layer1_length = 0.88
+layer1_spiral_intensity = 0.35
+layer2_radius_top = 0.15
+layer2_radius_bottom = 0.52
+layer2_length = 0.78
+layer2_wave_frequency = 6.0
+layer2_wave_amplitude = 0.045
+layer3_radius_top = 0.18
+layer3_radius_bottom = 0.65
+layer3_length = 1.0
+layer3_a = 0.35
+layer3_b = 0.18
+animation_speed = 1.8
+flutter_base = 0.025
+wind_direction = Vector3(0.8, 0, 0.4)
+color_layer1 = Color(0, 0.12, 0.04, 1)
+color_layer2 = Color(0, 0.22, 0.07, 1)
+color_layer3 = Color(0, 0.32, 0.1, 1)
+wireframe_color = Color(0.15, 0.85, 0.35, 1)
+emission_strength = 1.5
