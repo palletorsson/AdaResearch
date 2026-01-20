@@ -1,0 +1,1 @@
+Any shape is a sum of sine waves. Fourier's radical insight: even a square wave, even a saw tooth, even arbitrary complexity can be decomposed into simple oscillations of different frequency. Complexity emerges from simplicity, stacked infinitely deep.

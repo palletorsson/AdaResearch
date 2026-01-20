@@ -185,7 +185,7 @@ func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
 			debug_label.text = "PentipRayCast node not found!"
 
 # Debug: set to true to see coordinate transformation values
-var _debug_uv_transform: bool = true
+var _debug_uv_transform: bool = false
 
 # Helper to convert world position to UV
 func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:

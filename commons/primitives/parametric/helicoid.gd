@@ -1,0 +1,117 @@
+# Helicoid - A ruled minimal surface
+# The shape of a spiral staircase, a screw thread, DNA backbone
+# The only ruled minimal surface besides the plane
+# Connects to: oscillation extended through space, wave as helix
+
+extends XRToolsPickable
+
+@export var u_min: float = -1.0
+@export var u_max: float = 1.0
+@export var u_steps: int = 32
+@export var v_min: float = -6.28  # -2π
+@export var v_max: float = 6.28  # 2π (two full turns)
+@export var v_steps: int = 96
+@export var pitch: float = 0.3  # How fast it rises per rotation
+@export var scale_factor: float = 0.1
+@export var base_color: Color = Color(0.5, 0.9, 0.4)  # Green
+
+var mesh_instance: MeshInstance3D
+
+func _ready():
+	super._ready()
+	create_parametric_surface()
+
+func create_parametric_surface():
+	var surface_tool = SurfaceTool.new()
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var u_step_size = (u_max - u_min) / float(u_steps)
+	var v_step_size = (v_max - v_min) / float(v_steps)
+
+	var vertices = []
+	for i in range(u_steps + 1):
+		var row = []
+		for j in range(v_steps + 1):
+			var u = u_min + i * u_step_size
+			var v = v_min + j * v_step_size
+
+			# Helicoid parametric equations
+			# x = u * cos(v)
+			# y = u * sin(v)
+			# z = pitch * v
+			# (where u is the radial parameter, v is the angular/height parameter)
+			var x = u * cos(v)
+			var y = u * sin(v)
+			var z = pitch * v
+
+			row.append(Vector3(x, z, y) * scale_factor)
+		vertices.append(row)
+
+	# Create faces
+	for i in range(u_steps):
+		for j in range(v_steps):
+			var v0 = vertices[i][j]
+			var v1 = vertices[i + 1][j]
+			var v2 = vertices[i + 1][j + 1]
+			var v3 = vertices[i][j + 1]
+
+			var edge1 = v1 - v0
+			var edge2 = v3 - v0
+			var normal = edge1.cross(edge2).normalized()
+
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v0)
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v1)
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v2)
+
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v0)
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v2)
+			surface_tool.set_normal(normal)
+			surface_tool.add_vertex(v3)
+
+	surface_tool.generate_normals()
+	var generated_mesh = surface_tool.commit()
+
+	mesh_instance = MeshInstance3D.new()
+	mesh_instance.mesh = generated_mesh
+	add_child(mesh_instance)
+
+	apply_material()
+	create_collision()
+
+func apply_material():
+	if not mesh_instance:
+		return
+
+	var material = ShaderMaterial.new()
+	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+	if shader:
+		material.shader = shader
+		material.set_shader_parameter("modelColor", base_color)
+		material.set_shader_parameter("wireframeColor", Color.WHITE)
+		material.set_shader_parameter("emissionColor", base_color * 1.2)
+		material.set_shader_parameter("width", 1.0)
+		material.set_shader_parameter("emission_strength", 1.5)
+		material.set_shader_parameter("show_interior", true)
+		mesh_instance.material_override = material
+	else:
+		var standard_material = StandardMaterial3D.new()
+		standard_material.albedo_color = base_color
+		standard_material.metallic = 0.3
+		standard_material.roughness = 0.4
+		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mesh_instance.mesh.surface_set_material(0, standard_material)
+
+func create_collision():
+	var collision = CollisionShape3D.new()
+	var cylinder = CylinderShape3D.new()
+	cylinder.radius = u_max * scale_factor * 1.1
+	cylinder.height = pitch * (v_max - v_min) * scale_factor
+	collision.shape = cylinder
+	collision.name = "CollisionShape3D"
+	add_child(collision)
+	move_child(collision, 0)

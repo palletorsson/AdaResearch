@@ -10,7 +10,7 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 # Menger sponge settings
 @export var subdivision_interval: float = 1.0  # Time between subdivisions in seconds
-@export var max_iterations: int = 2  # 2-stage Menger sponge
+@export var max_iterations: int = 2  # 2-stage Menger sponge (walkable at 9m initial size)
 @export var auto_start: bool = true  # Start subdividing automatically
 
 # Internal state

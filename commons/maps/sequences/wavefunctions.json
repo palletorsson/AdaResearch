@@ -1,80 +1,85 @@
 {
 	"sequences": {
 		"wavefunctions": {
+			"name": "Wavefunctions: Everything Oscillates",
+			"truth": "Everything oscillates. Fourier shows every signal is a sum of sines. The wave is the fundamental pattern of non-rest—perpetual movement between poles.",
+			"qfep_term": "dynamics",
+			"qfep_connection": "Wavefunctions are the mathematical form of edge-of-chaos dynamics. Oscillation is neither static order nor chaotic randomness—it is periodic motion at the boundary. In QFEP terms, waves drive the temporal evolution φΔE(S,t) through rhythmic alternation.",
+			"formula": "sin(t) = projection of rotation, f(x) = Σ aₙsin(nωx + φₙ)",
+			"demonstration": "See rotation become sine on the unit circle. Hear Fourier synthesis build complex sounds from simple waves. Watch the double pendulum transition from periodic to chaotic.",
+
+			"description": "The sine wave is the fundamental pattern of non-rest—perpetual oscillation between poles. From rotation projected to line, to sound as material wave, to chaos as pattern breaking. Waves are the mathematical form of desire: always moving toward opposite, never settling.",
+			"layer": "behaviors",
+			"prerequisites": ["primitives", "vectors"],
+			"unlocks": ["physicssimulation", "proceduralaudio"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+
+			"learning_objectives": [
+				"Rotation creates oscillation (unit circle → sine)",
+				"Parameters of oscillation: amplitude, frequency, phase",
+				"Fourier synthesis: any signal is a sum of sines",
+				"Interference and resonance: when waves meet",
+				"Beat frequencies: slow modulation from fast waves",
+				"From periodic to chaotic: the double pendulum transition"
+			],
+
+			"content": [
+				"Unit_Circle: Rotation as the origin of sine and cosine",
+				"Sine_Space: The wave in spatial form—oscillation made visible",
+				"Pendulum: Simple harmonic motion—gravity creates oscillation",
+				"3D_Wave_Propagation: Waves moving through space",
+				"Fourier_Form: Any shape is a sum of sine waves",
+				"Mario_Sound: Game audio as waveform manipulation",
+				"Beat_Frequencies: When waves of different frequency combine",
+				"Kusama: Pattern from interference—art as wave",
+				"Bernini: Baroque columns as frozen waves",
+				"Sky_Stairs: Ascending oscillation in space",
+				"John_Cage: Silence as the space between waves"
+			],
+
+			"maps": [
+				"WaveFunctions_Unit_Circle",
+				"WaveFunctions_Sine_Space",
+				"WaveFunctions_Pendulum",
+				"WaveFunctions_3D_Wave_Propagation",
+				"WaveFunctions_Fourier_Form",
+				"WaveFunctions_Mario_Sound",
+				"WaveFunctions_Kusama",
+				"Wavefunctions_Bernini",
+				"Wavefunctions_Sky_Stairs",
+				"WaveFunctions_John_Cage"
+			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/wavefunction_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/fourier_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/oscillation_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"WaveFunctions_Unit_Circle": "res://algorithms/wavefunctions/unitcircle/",
+				"WaveFunctions_Fourier_Form": "res://algorithms/wavefunctions/fourier_transform/",
+				"WaveFunctions_Pendulum": "res://algorithms/wavefunctions/oscillation_driver/"
+			},
+
 			"audio": {
-				"ambient_preset": "space_station_isolation" ,
+				"ambient_preset": "space_station_isolation",
 				"interactive_sounds": {
 					"teleport": "AudioSynthesizer.MOOG_MINIMOOG_BASS"
 				},
 				"volume": -10.0
 			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_wavefunctions",
+			"unlock_requirements": ["primitives"],
 			"completion_rewards": [
 				"wave_researcher_badge",
-				"spectral_sleuth_badge"
-			],
-			"content": [
-				"Sine_Space: Sine wave visualization",
-				"Oscillating_Wave: Amplitude, frequency, and phase",
-				"Mario_Sound: Audio reactivity",
-				"Beat_Frequencies: Interference and beats",
-				"Harmonic_Builder: Additive synthesis",
-				"Fourier_Form: Fourier transform on 2D shapes",
-				"Spherical_Harmonics: Quantum orbitals",
-				"Wave_Propagation: Spatial wave physics",
-				"Kusama: Pattern and interference",
-				"Dancing_Body: Procedural kinematics",
-				"Vitruvian_Man: Proportion and spectral body",
-				"Cables: Catenary curves and simulation",
-				"Bernini: Procedural form and displacement",
-				"John_Cage: Silence and aleatoric noise"
-			],
-			"description": "Explore sinusoidal waves, spectra, and audio-driven patterns",
-			"difficulty": "intermediate",
-			"estimated_time": "20-30 minutes",
-			"lab_map": "Lab/map_data_post_wavefunctions",
-			"learning_objectives": [
-				"Sine waves and harmonics",
-				"Spectral analysis",
-				"Audio-visualization",
-				"Wave interference", 
- 
-				"WaveFunctions_Spherical_Harmonics",
-				"Wavefunctions_Cables",
-
-				"Wavefunctions_Form_Slide",
-				"Wavefunctions_Colors",
-				"WaveFunctions_Fourier_Transforms",
-				"Wavefunctions_Resonating_Metallophone",
-					"WaveFunctions_DoubleHelix",				
-				"WaveFunctions_Unused",	
-				"WaveFunctions_Oscillating_Wave",	
-				"WaveFunctions_MathObjects",							
-			],
-			"maps": [
-							
- 				"WaveFunctions_Mario_Sound",
-				"Wavefunctions_Bernini",	
-				"WaveFunctions_Unit_Circle",							
-				"WaveFunctions_Sine_Space",
-				"WaveFunctions_Pendulum",
-				"WaveFunctions_3D_Wave_Propagation",	
-				"WaveFunctions_Fourier_Form",
-				"WaveFunctions_Kusama",
- 				"WaveFunctions_SpaceDystopiaPreview",
-	 
-				"Wavefunctions_Sky_Stairs",
-
-				"WaveFunctions_John_Cage",
- 		
-				"Wavefunctions_ColoredLinesVRCorridor",
-				"WaveFunctions_SpaceDystopiaPreview",
-				"WaveFunctions_AudioLib",								
-				"WaveFunctions_AirMusic",
-			],
-			"name": "Wavefunctions",
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_color",
-			"unlock_requirements": []
+				"oscillation_intuition_badge",
+				"fourier_master_badge"
+			]
 		}
 	}
 }

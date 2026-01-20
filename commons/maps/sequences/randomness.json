@@ -1,39 +1,60 @@
 {
 	"sequences": {
 		"randomness": {
-			"name": "Randomness & Entropy",
-			"description": "Explore concepts of randomness, probability, and entropy",
+			"name": "Randomness: Freedom from Pattern",
+			"description": "Entropy is not decay—entropy is freedom. High-dimensional possibility space too vast to map, too free to control. Where the algorithm cannot predict, where indices fail, where normalization is refused. Randomness is computational wilderness: the vital space from which patterns emerge without blueprint.",
 			"difficulty": "intermediate",
 			"estimated_time": "25-30 minutes",
 			"learning_objectives": [
-				"Entropy definition",
-				"TRNG vs PRNG",
-				"Distributions",
-                "Emergent chaos"
+				"Entropy as possibility space, not destruction",
+				"PRNG vs TRNG: deterministic chaos vs physical noise",
+				"Distributions: uniform, Gaussian, and the shapes of chance",
+				"Random walk: non-teleological movement, queer navigation",
+				"Emergence: Turing morphogenesis, patterns from noise"
+			],
+			"content": [
+				"Definition: Entropy is freedom from pattern—high-dimensional liberation",
+				"10_PRINT: Complexity from simplest random rule (Commodore 64 aesthetic)",
+				"Noise_Types: Taxonomy of disorder—white, pink, brown, blue",
+				"Random_Walk: Non-teleological movement, √N displacement, queer wandering",
+				"Gaussian: Bell curves and the Central Limit Theorem—structure within chaos",
+				"Pheromone: Stigmergy—when randomness leaves traces, emergence begins",
+				"Mushrooms: RAND Corporation 1955, fungal spores, historical randomness",
+				"Space_Geometry: Random at the structural level—non-Euclidean possibility",
+				"Examples: Pollock drips, butterfly wings, pipes, extremes",
+				"Space: Integration—all QFEP terms visible, synthesis through experience"
 			],
 			"maps": [
-				"Random_Definition",	
-				"Randomness_10_PRINT_Algorithm", 
+				"Random_Definition",
+				"Randomness_10_PRINT_Algorithm",
 				"Random_Noise_Types",
 				"Random_Cubes",
 				"Random_Rotate_Random_XYZ",
-				"Random_Walk",  
+				"Random_Walk",
 				"Random_Gaussian",
-				"Random_Random_Bell_Curve",				
+				"Random_Random_Bell_Curve",
 				"Random_Pheromone",
 				"Random_Mushrooms",
 				"Random_Space_Geometry",
 				"Randomness_Examples_of_Randomness",
-				"Random_Space",				
+				"Random_Space"
 			],
+			"audio": {
+				"ambient_preset": "white_noise_drift",
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.NOISE_BURST"
+				},
+				"volume": -12.0
+			},
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_color",
+			"lab_map": "Lab/map_data_post_random",
 			"unlock_requirements": [
-                "color"
+				"color"
 			],
 			"completion_rewards": [
 				"entropy_badge",
-                "chaos_explorer_badge"
+				"chaos_explorer_badge",
+				"computational_wilderness_badge"
 			]
 		}
 	}

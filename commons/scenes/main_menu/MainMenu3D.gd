@@ -18,22 +18,29 @@ func _ready():
 
 func _setup_about_text():
 	var about_text = """[center][b]Ada Research[/b][/center]
+[center][i]Algorithms as Living Systems[/i][/center]
 
-[b]Purpose and Aims[/b]
-With the increasing role of algorithms in our daily lives, there is a growing need to understand the black boxes that shape our world.
+[b]What This Is[/b]
+An embodied journey through computational thinking. Not tutorials—explorations. Walk through the mathematics that shapes our world, from the simplest point to emergent swarm intelligence.
 
-This project is a collaboration between Konstfack, The Royal Institute of Technology Stockholm and Design.
+[b]The Progression[/b]
+[color=yellow]Primitives[/color] → Ordered foundations (points, lines, cubes)
+[color=yellow]Wavefunctions[/color] → Oscillation between poles (sine, Fourier, chaos)
+[color=yellow]Randomness[/color] → Freedom from pattern (entropy as possibility)
+[color=yellow]Emergence[/color] → Patterns without blueprint (swarm, cellular automata)
 
-[b]Instructions:[/b]
-- Hover over buttons to select.
-- Explore the labs to discover new algorithms.
-- Use the clipboard to collect code snippets.
+[b]The Principle[/b]
+Systems survive by oscillating between order and chaos—never crystallizing, never dissolving. This is the edge of chaos, where adaptation happens.
 
-[b]Credits:[/b]
-Developed by the Ada Research Team.
-Powered by Godot Engine 4.
+[b]Instructions[/b]
+- Wander. There is no correct path.
+- Collect code snippets to your clipboard.
+- Each sequence unlocks new territory.
 
-[i]"We can only see a short distance ahead, but we can see plenty there that needs to be done." - Alan Turing[/i]
+[b]Credits[/b]
+A collaboration between Konstfack, KTH Stockholm, and the edges of computational possibility. Powered by Godot Engine 4.
+
+[i]"Entropy is not decay. Entropy is freedom."[/i]
 """
 	if about_display.has_method("set_tutorial_from_text"):
 		about_display.set_tutorial_from_text(about_text)

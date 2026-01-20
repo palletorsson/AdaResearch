@@ -1,0 +1,1 @@
+Divide the cube, remove the center. The Cantor principle extends into three dimensions—each face loses its middle, each edge its center. What remains is neither solid nor hollow: infinite surface, zero volume, walkable absence.

@@ -1,0 +1,1 @@
+Baroque columns twist like frozen waves. Bernini's solomonic spirals are sine functions wrapped around cylinders—architecture as helical oscillation, stone as solidified motion. The wave captured mid-dance, held for centuries.

@@ -1,0 +1,1 @@
+Branch, branch again. The recursive tree encodes growth without memory—no DNA database, no stored blueprint. Just a rule: divide, reduce, repeat. From one trunk, a forest of possibility emerges. Organic form from pure algorithm.

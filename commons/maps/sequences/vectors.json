@@ -1,33 +1,46 @@
 {
 	"sequences": {
 		"vectors": {
-			"completion_rewards": [
-				"spatial_architect_badge",
-				"physics_engine_badge"
-			],
-			"content": [
-				"VectorBasics: Components and magnitude",
-				"VectorAddition: Visualizing combined forces",
-				"VectorDotProduct: Projections and angles",
-				"VectorSubtraction: Relative position and direction",
-				"VectorForces: Application of vectors as forces",
-				"VectorCrossProduct: Orthogonality and torque",
-				"VectorProjectionReflection: Mirrors and collisions",
-				"VectorMotion: Velocity and acceleration",
-				"VectorThrowing: Physics interaction",
-				"VectorTorque: Rotational forces",
-				"VectorFieldFlow: Vector fields and fluids"
-			],
-			"description": "Master the fundamental language of 3D space: direction, magnitude, and operations.",
+			"name": "Vectors: Direction + Magnitude = Everything",
+			"truth": "Direction + magnitude = vector. Decomposition reveals hidden structure. Every motion, every force, every relationship in space is a vector.",
+			"qfep_term": "S",
+			"qfep_connection": "Vectors define system states—the S in QFEP. They are how we measure and describe the world: position, velocity, force, direction. Without vectors, we cannot speak about change.",
+			"formula": "v = (x, y, z), |v| = √(x² + y² + z²), v̂ = v/|v|",
+			"demonstration": "Add vectors head-to-tail. See dot product measure alignment. Watch cross product create perpendicular vectors. Decompose complex motion into components.",
+
+			"description": "The fundamental language of 3D space. Vectors encode direction and magnitude—the building blocks of physics, graphics, and simulation. Master vectors, master space.",
+			"layer": "properties",
+			"prerequisites": ["primitives"],
+			"unlocks": ["forces", "transformations", "noise"],
+
 			"difficulty": "beginner",
 			"estimated_time": "45-60 minutes",
-			"lab_map": "Lab/map_data_post_vectors",
+
 			"learning_objectives": [
 				"Coordinate systems and spatial reasoning",
-				"Vector decomposition and arithmetic",
-				"Dot and Cross products",
-				"Forces, reflection, and field flow"
+				"Vector components: x, y, z as decomposed direction",
+				"Magnitude: length as √(x² + y² + z²)",
+				"Unit vectors: direction without magnitude",
+				"Addition: combining vectors head-to-tail",
+				"Dot product: measuring alignment (a·b = |a||b|cos θ)",
+				"Cross product: creating perpendicular vectors",
+				"Projection and reflection: mirrors and collisions"
 			],
+
+			"content": [
+				"VectorBasics: Components and magnitude—what vectors are",
+				"VectorAddition: Visualizing combined forces and velocities",
+				"VectorSubtraction: Relative position and direction",
+				"VectorDotProduct: Projections, angles, and alignment",
+				"VectorCrossProduct: Orthogonality, torque, and normals",
+				"VectorProjectionReflection: Mirrors and collision response",
+				"VectorForces: Vectors as physical forces",
+				"VectorMotion: Velocity and acceleration as vectors",
+				"VectorThrowing: Physics interaction with vectors",
+				"VectorTorque: Rotational forces from cross products",
+				"VectorFieldFlow: Vector fields and fluid dynamics"
+			],
+
 			"maps": [
 				"VectorAddition",
 				"VectorDotProduct",
@@ -41,9 +54,27 @@
 				"VectorTorque",
 				"VectorFieldFlow"
 			],
-			"name": "Vector Mathematics",
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"VectorBasics": "res://algorithms/vectors/basics/",
+				"VectorAddition": "res://algorithms/vectors/addition/",
+				"VectorFieldFlow": "res://algorithms/vectors/flowfield/"
+			},
+
 			"return_to": "lab",
-			"unlock_requirements": []
+			"lab_map": "Lab/map_data_post_vectors",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"spatial_architect_badge",
+				"physics_engine_badge",
+				"vector_master_badge"
+			]
 		}
 	}
 }

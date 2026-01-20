@@ -1,0 +1,35 @@
+{
+	"sequences": {
+		"bricolage": {
+			"name": "Bricolage: From Parts to Structures",
+			"description": "Construction without blueprint—discover structures by recombining primitives until constraints are satisfied",
+			"difficulty": "intermediate",
+			"estimated_time": "30-40 minutes",
+			"learning_objectives": [
+				"Inventory thinking (parts as potentials)",
+				"Affordance discovery (what parts can do)",
+				"Constraint literacy (what pushes back)",
+				"Emergent structure (assembly without blueprint)"
+			],
+			"maps": [
+				"Bricolage_Inventory",
+				"Bricolage_Affordances",
+				"Bricolage_Arrays_as_Probes",
+				"Bricolage_Constraints",
+				"Bricolage_Chair",
+				"Bricolage_Sculpture",
+				"Bricolage_Dome"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_primitives",
+			"unlock_requirements": [
+				"primitives",
+				"array_tutorial"
+			],
+			"completion_rewards": [
+				"bricoleur_badge",
+				"structural_intuition_badge"
+			]
+		}
+	}
+}

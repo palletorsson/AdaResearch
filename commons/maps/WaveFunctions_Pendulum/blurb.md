@@ -1,0 +1,1 @@
+Gravity creates rhythm. A weight on a string swings, tracing time with its body. The pendulum is sine made physical—restoring force proportional to displacement, perpetual return toward equilibrium that momentum always overshoots.

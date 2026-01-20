@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://oqi7a2q05em7"]
+
+[ext_resource type="Script" path="res://commons/primitives/parametric/torus_knot.gd" id="1_script"]
+
+[node name="TorusKnot" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_script")

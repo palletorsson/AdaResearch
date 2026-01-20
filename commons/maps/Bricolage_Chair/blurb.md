@@ -1,0 +1,3 @@
+# Bricolage_Chair
+
+The chair is vernacular bricolage frozen in time. Plane affords seat. Cylinders afford legs. Bonds distribute load. When you can sit without falling, the chair has emerged—not designed, but discovered.

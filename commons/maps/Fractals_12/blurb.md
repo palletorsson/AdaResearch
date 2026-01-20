@@ -1,0 +1,1 @@
+A forest of recursive trees, a scene composed entirely of fractals. Here the algorithm becomes environment—not isolated specimens but an ecology of self-similar forms. Walk through computed wilderness, where every trunk branches by the same rule.

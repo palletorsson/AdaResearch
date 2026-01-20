@@ -1,0 +1,1 @@
+Waves move through space. Ripples spreading from a dropped stone, sound radiating from a speaker, light expanding from a star. Here oscillation gains direction—amplitude at every point, phase shifting with distance, interference where waves meet.

@@ -1,16 +1,44 @@
 {
 	"sequences": {
 		"forces": {
-			"name": "Forces & Physics",
-			"description": "Understanding physical forces and vector fields",
+			"name": "Forces: F = ma and the Feel of Change",
+			"truth": "F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+			"qfep_term": "dynamics",
+			"qfep_connection": "Forces introduce change into the system—they are the mechanism by which states evolve. In QFEP terms, forces drive the temporal evolution φΔE(S,t). Without forces, systems are static; with forces, systems become dynamic.",
+			"formula": "F = m × a → a = F/m → v += a × dt → p += v × dt",
+			"demonstration": "Feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
+
+			"description": "Physical forces and their effects on motion. Newton's laws in action: every force produces acceleration, every acceleration changes velocity, every velocity changes position. This is the engine of dynamics.",
+			"layer": "behaviors",
+			"prerequisites": ["vectors"],
+			"unlocks": ["physicssimulation", "swarmintelligence", "softbodies"],
+
 			"difficulty": "intermediate",
 			"estimated_time": "25-30 minutes",
+
 			"learning_objectives": [
-				"Vector forces",
-				"Attraction and repulsion",
-				"Particle systems",
-                "Destructible environments"
+				"F = ma: Force equals mass times acceleration",
+				"Vector forces: direction and magnitude combine",
+				"Gravity: constant downward acceleration (9.8 m/s²)",
+				"Attraction and repulsion: inverse square laws",
+				"Friction: resistance proportional to normal force",
+				"Particle systems: many bodies under forces",
+				"Integration: Euler, Verlet, RK4 methods"
 			],
+
+			"content": [
+				"Forces_Drone_Game: Applied forces in interactive context",
+				"Forces_Destruct: Destructible environments—forces break things",
+				"Forces_1: Introduction to force application",
+				"Forces_2: Gravity and falling objects",
+				"Forces_3: Attraction between masses",
+				"Forces_4: Repulsion and collision",
+				"Forces_5: Friction and drag",
+				"Forces_6: Combined forces—superposition",
+				"Forces_7: Particle systems under forces",
+				"Forces_8: Advanced force fields"
+			],
+
 			"maps": [
 				"Forces_Drone_Game",
 				"Forces_Destruct",
@@ -21,16 +49,26 @@
 				"Forces_5",
 				"Forces_6",
 				"Forces_7",
-				"Forces_8",
-			
+				"Forces_8"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
+				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"Forces_1": "res://algorithms/physics/forces/",
+				"Forces_Destruct": "res://algorithms/physics/destruction/"
+			},
+
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
-			"unlock_requirements": [
-                "vectors"
-			],
+			"unlock_requirements": ["vectors"],
 			"completion_rewards": [
-                "force_master_badge"
+				"force_master_badge",
+				"newton_badge"
 			]
 		}
 	}

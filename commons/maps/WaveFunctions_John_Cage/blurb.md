@@ -1,0 +1,1 @@
+Silence is the space between waves. John Cage's 4'33" reveals that music is not sound but attention—the framework that makes waves meaningful. Absence as frequency zero, the pause that gives oscillation its shape, the rest that makes rhythm possible.

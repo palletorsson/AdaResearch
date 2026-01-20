@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=30 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://c7wk6syqdkr1m" path="res://commons/player/joystick_deadzone_fix.gd" id="22_joystick_fix"]
 [ext_resource type="Script" uid="uid://dwor4ga117nwk" path="res://commons/player/pickup_xp_listener.gd" id="23_pickup_xp"]
 [ext_resource type="Script" uid="uid://do86cuqep43oi" path="res://commons/player/PlayerCustomization.gd" id="24_customization"]
+[ext_resource type="Script" uid="uid://d31t45rigq080" path="res://commons/scenes/mapobjects/MapInfoLabel.gd" id="25_mapinfo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -50,6 +51,15 @@ color = Color(1, 0, 1, 1)
 
 [node name="lookat" type="Node3D" parent="XROrigin3D/XRCamera3D" index="1"]
 visible = false
+
+[node name="MapInfo" type="Label3D" parent="XROrigin3D/XRCamera3D" index="2"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.15, -0.5)
+pixel_size = 0.001
+modulate = Color(1, 1, 1, 0.8)
+text = "Loading..."
+font_size = 48
+outline_size = 8
+script = ExtResource("25_mapinfo")
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/LeftHand" index="0" instance=ExtResource("4_q0s61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000147015, 0, 0.00108021)

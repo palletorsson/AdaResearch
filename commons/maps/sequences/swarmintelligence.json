@@ -1,16 +1,40 @@
 {
 	"sequences": {
 		"swarmintelligence": {
-			"name": "Swarm Intelligence",
-			"description": "Explore collective behavior and distributed intelligence systems",
+			"name": "Swarm Intelligence: No Leader, Yet Coordinated",
+			"truth": "No leader, yet coordinated. Stigmergy: the environment is the message. Local rules produce global intelligence.",
+			"qfep_term": "λ",
+			"qfep_connection": "Swarm systems operate at the edge of chaos—the λ parameter that modulates between order and entropy. φΔE(S,t) manifests as collective adaptive capacity: the swarm's rate of entropy change determines its survival.",
+			"formula": "Agent_i = Σ local_rules(neighbors_i)",
+			"demonstration": "Watch boids flock without a leader. See ants find shortest paths through pheromone trails. Observe particles converge on optima through collective memory.",
+
+			"description": "Collective behavior and distributed intelligence. Individual agents follow simple local rules, yet global coordination emerges. This is queer intelligence—non-hierarchical, decentralized, resistant to single points of failure.",
+			"layer": "systems",
+			"prerequisites": ["vectors", "forces", "lsystems"],
+			"unlocks": ["machinelearning", "recursiveemergence"],
+
 			"difficulty": "intermediate",
 			"estimated_time": "25-30 minutes",
+
 			"learning_objectives": [
-				"Collective behavior patterns",
-				"Distributed problem solving",
-				"Agent-based modeling",
-				"Optimization through swarms"
+				"Collective behavior from local rules: no central controller needed",
+				"Stigmergy: indirect communication through environment modification",
+				"Separation, alignment, cohesion: the three rules of Boids",
+				"Ant Colony Optimization: pheromone-based pathfinding",
+				"Particle Swarm Optimization: collective memory finds optima",
+				"Agent-based modeling: simulating societies from individuals"
 			],
+
+			"content": [
+				"SwarmIntelligence_PhysarumColony: Slime mold intelligence—brainless computation",
+				"SwarmIntelligence_FlowFields: Vector fields guide collective motion",
+				"SwarmIntelligence_Boids_Algorithm: Reynolds' flocking—separation, alignment, cohesion",
+				"SwarmIntelligence_Agent_Based_Modeling_ABM: Societies from simple agents",
+				"SwarmIntelligence_Ant_Colony_Optimization: Pheromone trails find shortest paths",
+				"SwarmIntelligence_Particle_Swarm_Optimization: Collective memory, personal best, global best",
+				"SwarmIntelligence_Swarm_Intelligence_Algorithms: Overview of swarm paradigms"
+			],
+
 			"maps": [
 				"SwarmIntelligence_PhysarumColony",
 				"SwarmIntelligence_FlowFeilds",
@@ -20,10 +44,29 @@
 				"SwarmIntelligence_Particle_Swarm_Optimization",
 				"SwarmIntelligence_Swarm_Intelligence_Algorithms"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/swarm_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/boids_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/stigmergy_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/ant_colony_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"SwarmIntelligence_Boids_Algorithm": "res://algorithms/emergentsystems/boidflocking/",
+				"SwarmIntelligence_Ant_Colony_Optimization": "res://algorithms/swarmintelligence/antcolony/",
+				"SwarmIntelligence_Particle_Swarm_Optimization": "res://algorithms/swarmintelligence/particleswarm/",
+				"SwarmIntelligence_PhysarumColony": "res://algorithms/swarmintelligence/physarum/"
+			},
+
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_swarmintelligence",
 			"unlock_requirements": ["lsystems"],
-			"completion_rewards": ["swarm_coordinator_badge", "collective_intelligence_badge"]
+			"completion_rewards": [
+				"swarm_coordinator_badge",
+				"collective_intelligence_badge",
+				"stigmergy_master_badge"
+			]
 		}
 	}
 }

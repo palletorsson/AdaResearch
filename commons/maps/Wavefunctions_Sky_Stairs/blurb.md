@@ -1,0 +1,1 @@
+Ascent through oscillation. Stairs that climb along sine curves—each step a moment in a wave cycle. Rising through space by following frequency, the spiral staircase as helix, vertical progress as rotational persistence.

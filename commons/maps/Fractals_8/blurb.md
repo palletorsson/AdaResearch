@@ -1,0 +1,1 @@
+The Cantor set and cube subdivision meet in contemplation. Here, 1D deletion and 3D removal stand side by side—different dimensions, same principle. What the line loses in thirds, the cube loses in centers. Structure through systematic absence.

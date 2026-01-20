@@ -1,0 +1,1 @@
+Sound is oscillation made audible. Waveforms become bleeps and bloops—the 8-bit aesthetic of classic games built from square waves and frequency sweeps. Play with the building blocks of chiptune music, hear mathematics sing.

@@ -1,22 +1,22 @@
 {
 	"artifacts": {
 		"VitruvianMan": {
-			"name": "VitruvianMan",
+			"name": "Vitruvian Man",
 			"lookup_name": "VitruvianMan",
-			"description": "VitruvianMan.",
+			"description": "Da Vinci's proportional man reinterpreted—the human body inscribed in circle and square, demonstrating that anatomy is geometry, that limbs sweep arcs, that the body itself is a measurement system oscillating between ideal forms.",
 			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn"
 		},
 		
 		"SoundBoxLong": {
-			"name": "SoundBoxLong",
+			"name": "Sound Box (Long)",
 			"lookup_name": "SoundBoxLong",
-			"description": "SoundBoxLong",
+			"description": "Extended resonant chamber—a longer tube means lower fundamental frequency. This is why cellos are larger than violins: wavelength determines pitch, and pitch determines the physical size of instruments.",
 			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn"
 		},
-			"SoundBoxShort": {
-			"name": "SoundBoxShort",
+		"SoundBoxShort": {
+			"name": "Sound Box (Short)",
 			"lookup_name": "SoundBoxShort",
-			"description": "SoundBoxShort",
+			"description": "Compact resonant chamber—a shorter tube means higher fundamental frequency. The relationship between length and pitch is the physical basis of all wind and string instruments.",
 			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn"
 		},
 
@@ -45,27 +45,27 @@
 			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn"
 		},
 		"DancingBody": {
-			"name": "DancingBody",
+			"name": "Dancing Body",
 			"lookup_name": "DancingBody",
-			"description": "DancingBody.",
+			"description": "Kinematic waves—sine functions propagated through a skeletal hierarchy create procedural dance. The body becomes an instrument played by oscillation; movement emerges from phase lag down the bone chain.",
 			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn"
 		},
 		"OscillatingWave": {
-			"name": "OscillatingWave",
+			"name": "Oscillating Wave",
 			"lookup_name": "OscillatingWave",
-			"description": "OscillatingWave.",
+			"description": "The fundamental wave made visible—a 3D sine wave oscillating in real-time. Adjust amplitude, frequency, and phase to feel how these parameters shape the perpetual motion between poles.",
 			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn"
 		},
 		"HarmonicBuilder": {
-			"name": "HarmonicBuilder",
+			"name": "Harmonic Builder",
 			"lookup_name": "HarmonicBuilder",
-			"description": "HarmonicBuilder.",
+			"description": "Fourier synthesis in action—stack sine waves of different frequencies to build complex shapes. Any waveform is a sum of simple oscillations; this tool lets you construct them one harmonic at a time.",
 			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn"
 		},
 		"BeatFrequencies": {
-			"name": "BeatFrequencies",
+			"name": "Beat Frequencies",
 			"lookup_name": "BeatFrequencies",
-			"description": "BeatFrequencies.",
+			"description": "When two waves of slightly different frequency combine, they create a pulsing envelope—the 'beat'. This is how piano tuners work, how interference patterns form, how waves negotiate difference.",
 			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn"
 		},
 		"ColoredLinesVR": {
@@ -99,9 +99,9 @@
 			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn"
 		},
 		"resonance_frequencies_visualizer": {
-			"name": "resonance_frequencies_visualizer",
+			"name": "Resonance Frequencies Visualizer",
 			"lookup_name": "resonance_frequencies_visualizer",
-			"description": "resonance_frequencies_visualizer",
+			"description": "Every object has frequencies at which it wants to vibrate—its resonant modes. This visualizer reveals those hidden harmonics, showing how systems amplify certain frequencies while damping others. Resonance is selective listening.",
 			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn"
 		},
 		"unit_circle": {
@@ -135,9 +135,9 @@
 			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn"
 		},
 		"SphericalHarmonics": {
-			"name": "SphericalHarmonics",
+			"name": "Spherical Harmonics",
 			"lookup_name": "SphericalHarmonics",
-			"description": "SphericalHarmonics",
+			"description": "Waves on a sphere—the mathematical functions that describe electron orbitals, planetary magnetic fields, and 3D audio spatialization. These are the 3D cousins of sine waves, oscillating across spherical surfaces.",
 			"scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn"
 		},
 		"kusama_sine": {
@@ -177,27 +177,27 @@
 			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn"
 		},
 		"sine_wall_static": {
-			"name": "sine_wall_static",
+			"name": "Sine Wall (Static)",
 			"lookup_name": "sine_wall_static",
-			"description": "sine_wall_statice.",
+			"description": "Architecture frozen mid-oscillation—a wall whose surface undulates in a sine pattern. This is what waves look like when time stops: pure spatial frequency without temporal change.",
 			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn"
 		},
 		"sine_art_monitor": {
-			"name": "sine_art_monitor",
+			"name": "Sine Art Monitor",
 			"lookup_name": "sine_art_monitor",
-			"description": "sine_art_monitor.",
+			"description": "Wave as artwork—a display showing sine functions rendered as visual compositions. The same mathematics that describes sound and light becomes aesthetic object.",
 			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn"
 		},
 		"sine_wall_corridor": {
-			"name": "sine_wall_corridor",
+			"name": "Sine Wall Corridor",
 			"lookup_name": "sine_wall_corridor",
-			"description": "sine_wall_corridor.",
+			"description": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",
 			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn"
 		},
 		"SplineCables": {
-			"name": "SplineCables",
+			"name": "Spline Cables",
 			"lookup_name": "SplineCables",
-			"description": "SplineCables.",
+			"description": "Smooth curves connecting points—cables that hang in catenary arcs, the natural shape a flexible line takes under gravity. Infrastructure as frozen wave.",
 			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn"
 		},
 		"spring_network": {
@@ -237,15 +237,15 @@
 			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn"
 		},
 		"segment_slide": {
-			"name": "segment_slide",
+			"name": "Segment Slide",
 			"lookup_name": "segment_slide",
-			"description": "segment_slide.",
+			"description": "A ride segment following wave contours—slide down a sine curve, feel acceleration as slope changes. The body learns wave mathematics through gravity and motion.",
 			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn"
 		},
 		"resonating_metallophone": {
-			"name": "resonating_metallophone",
+			"name": "Resonating Metallophone",
 			"lookup_name": "resonating_metallophone",
-			"description": "resonating_metallophone",
+			"description": "Metal bars that ring—each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
 			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn"
 		},
 		"bernini_columns": {
@@ -255,15 +255,15 @@
 			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn"
 		},
 		"line_builder_3d": {
-			"name": "line_builder_3d",
+			"name": "Line Builder 3D",
 			"lookup_name": "line_builder_3d",
-			"description": "line_builder_3d",
+			"description": "Draw curves in space—each line segment becomes a building block for wave forms. Connect points to see how discrete positions approximate continuous curves.",
 			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn"
 		},
 		"cable_builder": {
-			"name": "cable_builder",
+			"name": "Cable Builder",
 			"lookup_name": "cable_builder",
-			"description": "cable_builder",
+			"description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
 			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn"
 		},
 		"fourier_transform_advanced": {
@@ -279,29 +279,29 @@
 			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn"
 		},
 		"DoublePendulum": {
-			"name": "DoublePendulum",
+			"name": "Double Pendulum",
 			"lookup_name": "DoublePendulum",
-			"description": "DoublePendulum",
+			"description": "Deterministic chaos—two connected pendulums create wildly unpredictable motion from simple physics. This is where periodic oscillation breaks down; tiny differences in starting conditions lead to radically different trajectories.",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn"
 		},
 		"PendulumGrid3x3": {
-			"name": "PendulumGrid3x3",
+			"name": "Pendulum Grid 3x3",
 			"lookup_name": "PendulumGrid3x3",
-			"description": "PendulumGrid3x3",
+			"description": "Nine pendulums in a grid—each swinging independently but visible together. Watch for emergent patterns: when do they synchronize? When do they diverge? Collective oscillation reveals hidden coupling.",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn"
-		},		
-		
+		},
+
 		"math_objects": {
-			"name": "math_objects",
+			"name": "Mathematical Objects",
 			"lookup_name": "math_objects",
-			"description": "math_objects",
+			"description": "A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.",
 			"scene": "res://commons/primitives/parametric/math_objects.tscn"
 		},
-		
+
 		"CircleSpiral": {
-			"name": "CircleSpiral",
+			"name": "Circle Spiral",
 			"lookup_name": "CircleSpiral",
-			"description": "CircleSpiral",
+			"description": "Rotation extended through time becomes spiral—a circle that doesn't close but climbs. This is what happens when circular motion gains a third dimension: the helix, the spring, the DNA strand.",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/CircleSpiral.tscn"
 		},
 		"standing_waves": {
@@ -317,33 +317,33 @@
 			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn"
 		},
 		"SimpleOscillatingBridge": {
-			"name": "SimpleOscillatingBridge",
+			"name": "Simple Oscillating Bridge",
 			"lookup_name": "SimpleOscillatingBridge",
-			"description": "SimpleOscillatingBridge",
+			"description": "A walkable surface that breathes—rising and falling in sine wave motion. Cross it to feel oscillation in your body, the ground itself becoming unstable in a predictable rhythm.",
 			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn"
 		},
 		"SystemsMusicTest": {
-			"name": "SystemsMusicTest",
+			"name": "Systems Music Test",
 			"lookup_name": "SystemsMusicTest",
-			"description": "SystemsMusicTest",
+			"description": "Music as system—notes triggered by spatial position, harmony emerging from movement through space. Steve Reich meets VR: phase relationships create texture.",
 			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn"
 		},
 		"ruth_asawa_sculpture": {
-			"name": "ruth_asawa_sculpture",
+			"name": "Ruth Asawa Sculpture",
 			"lookup_name": "ruth_asawa_sculpture",
-			"description": "ruth_asawa_sculpture",
+			"description": "Wire forms inspired by Ruth Asawa's crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.",
 			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn"
-		},		
+		},
 		"ElphabaDemo": {
-			"name": "ElphabaDemo",
+			"name": "Elphaba Demo",
 			"lookup_name": "ElphabaDemo",
-			"description": "ElphabaDemo",
+			"description": "Character animation driven by oscillation—the Wicked witch moves through wave functions. Procedural performance where sine waves become gesture, mathematics becomes drama.",
 			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDemo.tscn"
-		},	
+		},
 		"ElphabaDress": {
-			"name": "ElphabaDress",
+			"name": "Elphaba Dress",
 			"lookup_name": "ElphabaDress",
-			"description": "ElphabaDress",
+			"description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
 			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn"
 		},			
 		

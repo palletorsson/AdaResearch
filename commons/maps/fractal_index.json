@@ -1,0 +1,144 @@
+{
+	"format_version": "1.0",
+	"description": "Fractal Index - Navigate from project overview to deep implementation logic",
+	"last_updated": "2026-01-20",
+
+	"project": {
+		"name": "AdaResearch",
+		"principle": "QFE = F − λE(S) + φΔE(S,t)",
+		"truth": "Adaptive systems thrive at the edge of chaos",
+		"description": "VR educational system demonstrating the Queer Free Energy Principle through algorithm visualization. Systems strategically oscillate between order and chaos, between minimizing and maximizing entropy."
+	},
+
+	"layers": {
+		"primitives": {
+			"qfep_term": "F",
+			"description": "Stable foundations - the atoms of space. Order before entropy enters.",
+			"sequences": ["primitives", "meshes", "datastructures"]
+		},
+		"properties": {
+			"qfep_term": "S",
+			"description": "System states - what things have. Measurable attributes.",
+			"sequences": ["color", "transformations", "vectors"]
+		},
+		"behaviors": {
+			"qfep_term": "dynamics",
+			"description": "How things move - introduces time, change, oscillation.",
+			"sequences": ["forces", "wavefunctions", "physicssimulation", "softbodies"]
+		},
+		"emergence": {
+			"qfep_term": "E(S)",
+			"description": "Entropy - patterns from chaos. Turing instability, morphogenesis.",
+			"sequences": ["randomness", "noise", "cellularautomata", "fractals"]
+		},
+		"systems": {
+			"qfep_term": "λ",
+			"description": "Edge of chaos - self-organization. Collective intelligence, adaptive capacity.",
+			"sequences": ["swarmintelligence", "proceduralgeneration", "machinelearning", "lsystems", "patterngeneration"]
+		},
+		"integration": {
+			"qfep_term": "φΔE(S,t)",
+			"description": "Queer ecology - oscillating between order and disorder. Rate of entropy change.",
+			"sequences": ["recursiveemergence", "speculativecomputation", "criticalalgorithms"]
+		}
+	},
+
+	"special_categories": {
+		"cross_cutting": {
+			"description": "Sequences that span multiple layers",
+			"sequences": ["graphtheory", "searchpathfinding", "computationalgeometry", "particles", "proceduralaudio"]
+		},
+		"experimental": {
+			"description": "Work in progress or specialized sequences",
+			"sequences": ["bricolage", "testmaps", "advancedlaboratory", "resourcemanagement"]
+		}
+	},
+
+	"cross_references": {
+		"primitives": {
+			"requires": [],
+			"enables": ["vectors", "transformations", "meshes", "color"],
+			"related_axioms": ["primitives_axioms.md", "point_axioms.md", "line_axioms.md"]
+		},
+		"vectors": {
+			"requires": ["primitives"],
+			"enables": ["forces", "transformations", "noise"],
+			"related_axioms": ["vectors_axioms.md"]
+		},
+		"forces": {
+			"requires": ["vectors", "primitives"],
+			"enables": ["physicssimulation", "swarmintelligence", "softbodies"],
+			"related_axioms": ["forces_axioms.md", "newtons_laws.md"]
+		},
+		"randomness": {
+			"requires": ["primitives"],
+			"enables": ["noise", "proceduralgeneration", "machinelearning"],
+			"related_axioms": ["randomness_axioms.md", "entropy_axioms.md"]
+		},
+		"noise": {
+			"requires": ["randomness", "vectors"],
+			"enables": ["proceduralgeneration", "fractals"],
+			"related_axioms": ["noise_axioms.md"]
+		},
+		"fractals": {
+			"requires": ["primitives", "transformations"],
+			"enables": ["proceduralgeneration", "lsystems"],
+			"related_axioms": ["fractals_axioms.md", "recursion_axioms.md"]
+		},
+		"cellularautomata": {
+			"requires": ["primitives", "randomness"],
+			"enables": ["swarmintelligence", "proceduralgeneration"],
+			"related_axioms": ["cellularautomata_axioms.md", "wolfram_rules.md"]
+		},
+		"swarmintelligence": {
+			"requires": ["vectors", "forces", "lsystems"],
+			"enables": ["machinelearning", "recursiveemergence"],
+			"related_axioms": ["swarm_axioms.md", "stigmergy_axioms.md", "boids_axioms.md"]
+		},
+		"wavefunctions": {
+			"requires": ["primitives", "vectors"],
+			"enables": ["physicssimulation", "proceduralaudio"],
+			"related_axioms": ["wavefunction_axioms.md", "fourier_axioms.md", "oscillation_axioms.md"]
+		},
+		"lsystems": {
+			"requires": ["primitives", "fractals"],
+			"enables": ["swarmintelligence", "proceduralgeneration"],
+			"related_axioms": ["lsystems_axioms.md", "grammar_axioms.md"]
+		},
+		"proceduralgeneration": {
+			"requires": ["noise", "fractals", "cellularautomata"],
+			"enables": ["machinelearning", "speculativecomputation"],
+			"related_axioms": ["procgen_axioms.md", "wfc_axioms.md"]
+		},
+		"machinelearning": {
+			"requires": ["vectors", "randomness", "swarmintelligence"],
+			"enables": ["criticalalgorithms", "speculativecomputation"],
+			"related_axioms": ["ml_axioms.md", "gradient_descent.md", "neural_networks.md"]
+		}
+	},
+
+	"navigation_queries": {
+		"example_queries": [
+			{
+				"question": "What is this project about?",
+				"path": "project.truth",
+				"answer": "Adaptive systems thrive at the edge of chaos"
+			},
+			{
+				"question": "What QFEP term does noise relate to?",
+				"path": "layers.emergence.qfep_term",
+				"answer": "E(S) - entropy, structured randomness"
+			},
+			{
+				"question": "What do I need before swarm intelligence?",
+				"path": "cross_references.swarmintelligence.requires",
+				"answer": ["vectors", "forces", "lsystems"]
+			},
+			{
+				"question": "Where is the edge of chaos?",
+				"path": "layers.systems",
+				"answer": "Layer 5: swarmintelligence, proceduralgeneration, machinelearning, lsystems, patterngeneration"
+			}
+		]
+	}
+}

@@ -1,31 +1,65 @@
 {
 	"sequences": {
 		"color": {
-			"name": "Color & Perception",
-			"description": "Explore the physics and perception of color",
+			"name": "Color: Perception, Not Physics",
+			"truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
+			"qfep_term": "S",
+			"qfep_connection": "Color is a system state—part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
+			"formula": "RGB = (r, g, b) ∈ [0,1]³, HSV = (h, s, v) ∈ [0,360)×[0,1]²",
+			"demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
+
+			"description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
+			"layer": "properties",
+			"prerequisites": ["primitives"],
+			"unlocks": ["proceduralgeneration", "machinelearning"],
+
 			"difficulty": "beginner",
 			"estimated_time": "20-25 minutes",
+
 			"learning_objectives": [
-				"RGB color space",
-				"Color mixing",
-				"Perception theory",
-                "Digital materiality"
+				"RGB color space: additive mixing of red, green, blue",
+				"HSV color space: hue, saturation, value—more intuitive",
+				"Color mixing: additive vs subtractive",
+				"Perception theory: color constancy, simultaneous contrast",
+				"Digital materiality: how screens create color",
+				"Gradients: interpolation between colors"
 			],
-			"maps": [		
-				"Color_Nails",					
+
+			"content": [
+				"Color_Nails: Physical color on surfaces",
+				"Color_Grid_Pallet: Organized color exploration",
+				"Color_Rainbow: Spectral progression",
+				"Color_Pillar: Vertical color mapping",
+				"Color_Paint: Interactive color mixing",
+				"Color_Gradiant: Interpolation between colors"
+			],
+
+			"maps": [
+				"Color_Nails",
 				"Color_Grid_Pallet",
 				"Color_Rainbow",
 				"Color_Pillar",
 				"Color_Paint",
-				"Color_Gradiant",
+				"Color_Gradiant"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/color_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/perception_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"Color_Paint": "res://algorithms/color/paint/",
+				"Color_Grid_Pallet": "res://algorithms/color/palette/"
+			},
+
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
-			"unlock_requirements": [
-                "primitives"
-			],
+			"unlock_requirements": ["primitives"],
 			"completion_rewards": [
-                "chromatic_badge"
+				"chromatic_badge",
+				"perception_badge"
 			]
 		}
 	}

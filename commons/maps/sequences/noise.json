@@ -1,15 +1,28 @@
 {
 	"sequences": {
 		"noise": {
-			"name": "Noise Functions",
-			"description": "Explore Perlin and Simplex noise and their applications",
+			"name": "Noise: Entropy with Memory",
+			"description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuity—each value smoothly related to those around it. This is the λ parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usable—random enough to be surprising, continuous enough to be natural.",
 			"difficulty": "intermediate",
 			"estimated_time": "25-30 minutes",
 			"learning_objectives": [
-				"Perlin vs Simplex noise",
-				"Octaves and frequency",
-				"3D Noise fields",
-                "Procedural terrain"
+				"Noise as structured entropy: randomness with continuity constraints",
+				"White noise vs. smooth noise: the λ spectrum of coherence",
+				"Octaves as fractal layering: multiple scales of structured randomness",
+				"Perlin/Simplex: grid + gradient + interpolation algorithms",
+				"Procedural generation: noise as substrate for worlds"
+			],
+			"content": [
+				"Noise_Columns: Vertical extrusion of 2D noise field",
+				"Noise_One: Single-dimensional noise visualization",
+				"Noise_Voxel: 3D noise discretized into voxel space",
+				"Noise_6_Wall: Six-sided noise projection",
+				"Noise_Inside_Noise: Nested noise—noise modulating noise",
+				"Noise_Volume: Volumetric noise visualization",
+				"Noise_Space_10: Noise in spatial context",
+				"Noise_Functions: Comparative noise function gallery",
+				"Noise_Perlin_Simplex: Perlin vs. Simplex comparison",
+				"Noise_Blue: Anti-aliased, evenly-distributed noise"
 			],
 			"maps": [
 				"Noise_Columns",
@@ -20,15 +33,18 @@
 				"Noise_Volume",
 				"Noise_Space_10",
 				"Noise_Functions",
-                "Noise_Perlin_Simplex"
+				"Noise_Perlin_Simplex",
+				"Noise_Blue"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_color",
 			"unlock_requirements": [
-                "randomness"
+				"randomness"
 			],
 			"completion_rewards": [
-                "noise_architect_badge"
+				"noise_architect_badge",
+				"coherent_chaos_badge",
+				"procedural_mind_badge"
 			]
 		}
 	}

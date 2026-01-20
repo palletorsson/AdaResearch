@@ -1,0 +1,1 @@
+Rotation becomes oscillation. A point traveling in a circle traces a sine wave when watched from the side. The unit circle is where trigonometry begins—where angle becomes number, where spinning becomes swinging.

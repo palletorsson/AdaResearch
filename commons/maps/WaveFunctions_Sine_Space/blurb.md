@@ -1,0 +1,1 @@
+The wave made spatial. Walk through a sine function frozen in three dimensions—amplitude as height, frequency as compression, phase as shift. The mathematics of oscillation becomes architecture you can inhabit.

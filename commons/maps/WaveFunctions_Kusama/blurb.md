@@ -1,0 +1,1 @@
+Infinity through repetition. Yayoi Kusama's dots are interference patterns of perception—waves of attention oscillating across visual field. Art as standing wave, pattern as frozen interference, obsession as sustained frequency.

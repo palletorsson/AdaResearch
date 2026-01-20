@@ -1,31 +1,48 @@
 {
 	"sequences": {
-				"cellularautomata": {
-			"name": "ca",
-			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
-			"difficulty": "beginner", 
-			"estimated_time": "20-25 minutes",
-			"learning_objectives": [
-				"Piston primitive interactions",
-				"Tartan shader patterns (10x10)",
-				"Simple fish mesh modeling", 
-				"Radiodrama narrative integration"
-			],
-			"temps": [
+		"cellularautomata": {
+			"name": "Cellular Automata: Local Rules, Global Patterns",
+			"truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing complete—simple rules can compute anything.",
+			"qfep_term": "E(S)",
+			"qfep_connection": "Cellular automata demonstrate emergence—the E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
+			"formula": "cell(t+1) = rule(cell(t), neighbors(t))",
+			"demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
 
+			"description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structures—gliders, oscillators, even computers—emerge. This is computation at the edge of chaos.",
+			"layer": "emergence",
+			"prerequisites": ["primitives", "randomness"],
+			"unlocks": ["swarmintelligence", "proceduralgeneration"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+
+			"learning_objectives": [
+				"Cellular automata basics: cells, states, neighborhoods, rules",
+				"1D automata: Wolfram's 256 rules, Rule 30, Rule 110",
+				"2D automata: Conway's Game of Life—birth, survival, death",
+				"Emergent structures: gliders, oscillators, still lifes",
+				"Computational universality: Rule 110 is Turing complete",
+				"Edge of chaos: where complex behavior emerges"
 			],
+
 			"content": [
-				" One :  ",
-				" Two :  ", 
-				" Three :  ",
-				" Four :  ",
-				" Five :  ",
-				" Six :  ",
-				" Seven :  ",
+				"CA_1: Introduction to cellular automata concepts",
+				"CA_2: 1D automata—Wolfram's rule numbering",
+				"CA_3: Rule 30—chaos from simple rules",
+				"CA_4: Rule 110—computation at the edge",
+				"CA_5: Conway's Game of Life basics",
+				"CA_6: Gliders and spaceships",
+				"CA_7: Oscillators and still lifes",
+				"CA_8: Building with Life patterns",
+				"CA_9: 3D cellular automata",
+				"CA_10: Continuous automata",
+				"CA_11: Custom rule exploration",
+				"CA_12: Computational universality"
 			],
+
 			"maps": [
 				"CA_1",
-				"CA_2", 
+				"CA_2",
 				"CA_3",
 				"CA_4",
 				"CA_5",
@@ -33,14 +50,31 @@
 				"CA_7",
 				"CA_8",
 				"CA_9",
-				"CA_10",	
-				"CA_11",	
-				"CA_12",										
+				"CA_10",
+				"CA_11",
+				"CA_12"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/wolfram_rules.md",
+				"res://commons/context/clipboard/tutorial_text/game_of_life_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"CA_1": "res://algorithms/cellularautomata/basic/",
+				"CA_5": "res://algorithms/cellularautomata/gameoflife/",
+				"CA_9": "res://algorithms/cellularautomata/3d/"
+			},
+
 			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_ca",
 			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
-			"lab_map": "Lab/map_data_post_ca"
+			"completion_rewards": [
+				"automaton_badge",
+				"emergence_badge",
+				"turing_complete_badge"
+			]
 		}
 	}
 }

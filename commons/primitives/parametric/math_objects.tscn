@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bls14jqde1xui"]
+[gd_scene load_steps=12 format=3 uid="uid://bls14jqde1xui"]
 
 [ext_resource type="PackedScene" uid="uid://26nrsntghpo7" path="res://commons/primitives/parametric/dini_surface.tscn" id="1_qch4l"]
 [ext_resource type="PackedScene" uid="uid://b8qp4yx5kn7wa" path="res://commons/primitives/parametric/double_enneper.tscn" id="2_64h0u"]
 [ext_resource type="PackedScene" uid="uid://cqy8x5b3rw8n1" path="res://commons/primitives/parametric/parametric.tscn" id="3_xwiwh"]
 [ext_resource type="PackedScene" uid="uid://c8qw4yx5bp2ka" path="res://commons/primitives/parametric/seashell.tscn" id="4_vbco7"]
 [ext_resource type="PackedScene" uid="uid://dt3ey8v2m7xqk" path="res://commons/primitives/parametric/wave_torus.tscn" id="5_gdpvx"]
+[ext_resource type="PackedScene" uid="uid://ctr3f01lkn0t1" path="res://commons/primitives/parametric/trefoil_knot.tscn" id="6_trefoil"]
+[ext_resource type="PackedScene" uid="uid://cat3n01d5urf1" path="res://commons/primitives/parametric/catenoid.tscn" id="7_catenoid"]
+[ext_resource type="PackedScene" uid="uid://h3l1c01d5urf1" path="res://commons/primitives/parametric/helicoid.tscn" id="8_helicoid"]
+[ext_resource type="PackedScene" uid="uid://br34th3r5urf1" path="res://commons/primitives/parametric/breather_surface.tscn" id="9_breather"]
+[ext_resource type="PackedScene" uid="uid://f1g8kn0t5urf1" path="res://commons/primitives/parametric/figure_eight_knot.tscn" id="10_fig8"]
+[ext_resource type="PackedScene" uid="uid://t0ru5kn0t5rf1" path="res://commons/primitives/parametric/torus_knot.tscn" id="11_torusknot"]
 
 [node name="MathObjects" type="Node3D"]
 
@@ -60,3 +66,29 @@ wave_amplitude = 0.02
 wave_frequency_u = 8.0
 wave_frequency_v = 5.0
 base_color = Color(0.3, 0.9, 0.5, 1)
+
+[node name="TrefoilKnot" parent="." instance=ExtResource("6_trefoil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+base_color = Color(0.9, 0.3, 0.5, 1)
+
+[node name="Catenoid" parent="." instance=ExtResource("7_catenoid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.5)
+base_color = Color(0.4, 0.8, 0.95, 1)
+
+[node name="Helicoid" parent="." instance=ExtResource("8_helicoid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.5)
+base_color = Color(0.5, 0.9, 0.4, 1)
+
+[node name="BreatherSurface" parent="." instance=ExtResource("9_breather")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 1)
+base_color = Color(0.95, 0.5, 0.2, 1)
+
+[node name="FigureEightKnot" parent="." instance=ExtResource("10_fig8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -1)
+base_color = Color(0.3, 0.5, 0.9, 1)
+
+[node name="TorusKnot" parent="." instance=ExtResource("11_torusknot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+p = 3
+q = 7
+base_color = Color(0.9, 0.7, 0.2, 1)

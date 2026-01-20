@@ -1,0 +1,1 @@
+Infinity lives in finite rules. A simple instruction—divide, repeat—becomes unbounded complexity. Here, recursion reveals its paradox: order generates chaos, the whole contains copies of itself, and dimension refuses to be an integer.

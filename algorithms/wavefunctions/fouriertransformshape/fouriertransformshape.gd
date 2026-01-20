@@ -237,58 +237,85 @@ func ensure_trace_lights():
 		lights_spawned = true
 
 func _generate_audio_samples():
+	# ETHEREAL PAD - Soft evolving chord tones
+	# Each wheel generates a note of a chord instead of harsh harmonics
+	var chord_freqs = [130.8, 164.8, 196.0, 261.6]  # C3, E3, G3, C4 - C major
+	
 	for i in range(audio_playbacks.size()):
 		var playback = audio_playbacks[i]
 		if not playback: continue
 		
-		var wheel_data = wheels[i]
 		var frames_available = playback.get_frames_available()
+		if frames_available <= 0: continue
 		
-		if frames_available > 0:
-			var freq = BASE_FREQ * wheel_data.freq
-			var amplitude = wheel_data.radius * 0.15
+		var wheel_data = wheels[i]
+		var freq = chord_freqs[i % chord_freqs.size()]
+		
+		# Subtle detuning for richness
+		freq *= 1.0 + sin(time * 0.2 + i) * 0.005
+		
+		var amplitude = wheel_data.radius * 0.08  # Quiet
+		
+		for _f in range(frames_available):
+			var t = time + float(_f) / SAMPLE_RATE
 			
-			for _f in range(frames_available):
-				# Use a global phase based on time for coherence if needed, 
-				# or just track local phase. Using time * freq is simplest.
-				var sample = sin(2.0 * PI * freq * time) * amplitude * 0.3 # Reduced volume
-				playback.push_frame(Vector2(sample, sample))
+			# Layered sine waves for pad texture
+			var sample = sin(2.0 * PI * freq * t) * 0.5
+			sample += sin(2.0 * PI * freq * 2.0 * t) * 0.2  # Octave
+			sample += sin(2.0 * PI * freq * 1.5 * t) * 0.15  # Fifth
+			
+			# Gentle tremolo
+			var tremolo = 0.8 + 0.2 * sin(time * 2.0 + i)
+			sample *= tremolo * amplitude
+			
+			playback.push_frame(Vector2(sample, sample))
 
 func _generate_theremin_audio():
 	if not theremin_playback: return
 	var frames = theremin_playback.get_frames_available()
 	if frames <= 0: return
 
-	# Tip position is the last point in trace_points
 	if trace_points.is_empty(): return
 	var tip_pos = trace_points[-1]
 	
-	# Update player position
 	theremin_player.position = tip_pos
 	
-	# THE THEREMIN LOGIC
-	# 1. Pitch: Map Y position to Frequency
-	# Range: Y=-5 to Y=5 maps to ~100Hz to ~1200Hz
-	var target_freq = 300.0 + (tip_pos.y * 150.0)
-	target_freq = clamp(target_freq, 50.0, 3000.0)
+	# ETHEREAL LEAD - Soft singing tone following the trace
+	# Pitch follows Y position gently
+	var base_freq = 220.0 + (tip_pos.y * 30.0)  # More subtle range
+	base_freq = clamp(base_freq, 150.0, 400.0)
 	
-	# 2. Expression: Speed determines Vibrato/Timbre
+	# Speed affects vibrato depth
 	var speed = tip_pos.distance_to(last_tip_pos) * 60.0
 	last_tip_pos = tip_pos
 	
-	var vibrato_rate = 5.0 + (speed * 0.1)
-	var vibrato_depth = 2.0 + (speed * 0.5)
+	var vibrato_rate = 4.0
+	var vibrato_depth = 3.0 + speed * 0.2
+	
+	var master_volume = 0.12  # Quiet
 	
 	for i in range(frames):
-		# Complex Frequency (FM-ish Vibrato)
-		var current_freq = target_freq + sin(time * TAU * vibrato_rate) * vibrato_depth
+		var t = time + float(i) / SAMPLE_RATE
+		
+		# Gentle vibrato
+		var vibrato = sin(t * TAU * vibrato_rate) * vibrato_depth
+		var current_freq = base_freq + vibrato
+		
 		theremin_phase += current_freq / SAMPLE_RATE
 		if theremin_phase > 1.0: theremin_phase -= 1.0
 		
-		# Waveform: Ghostly Sine + subtle Triangle
-		var s1 = sin(theremin_phase * TAU)
-		# Add a bit of "static/buzz" based on speed
-		var noise = (randf() * 2.0 - 1.0) * (speed * 0.005)
+		# Pure ethereal tone
+		var fundamental = sin(theremin_phase * TAU)
+		var octave = sin(theremin_phase * TAU * 2.0) * 0.2
+		var shimmer = sin(theremin_phase * TAU * 3.0) * 0.08
 		
-		var sample = (s1 * 0.7 + noise) * 0.5
+		# Soft envelope based on motion
+		var envelope = 0.6 + 0.4 * (1.0 / (1.0 + speed * 0.5))
+		
+		var sample = (fundamental + octave + shimmer) * envelope * master_volume
+		
+		# Soft limiting
+		sample = tanh(sample * 2.0) * 0.5
+		
 		theremin_playback.push_frame(Vector2(sample, sample))
+

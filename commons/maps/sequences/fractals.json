@@ -1,44 +1,97 @@
 {
 	"sequences": {
 		"fractals": {
-			"name": "fractals",
-			"description": "Explore 3D meshes, texturing techniques, and visual rendering concepts",
-			"difficulty": "beginner", 
-			"estimated_time": "20-25 minutes",
-			"learning_objectives": [
-				"Piston primitive interactions",
-				"Tartan shader patterns (10x10)",
-				"Simple fish mesh modeling", 
-				"Radiodrama narrative integration"
-			],
-			"temps": [
+			"name": "Fractals: Infinite Within Finite",
+			"truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
+			"qfep_term": "E(S) + F",
+			"qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + λE(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaos—infinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+			"formula": "D = log(N)/log(S), z_{n+1} = z_n² + c",
+			"demonstration": "Walk inside the Menger sponge. Watch the stochastic tree grow with random variation. Zoom into the Mandelbrot boundary and see infinite detail.",
 
+			"description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions—they exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+			"layer": "emergence",
+			"prerequisites": ["primitives", "transformations"],
+			"unlocks": ["proceduralgeneration", "lsystems"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-35 minutes",
+
+			"learning_objectives": [
+				"Self-similarity: the whole contains copies of itself",
+				"Fractal dimension: D = log(N)/log(S) — between integers",
+				"Recursion as emergence: simple rules, infinite complexity",
+				"Edge of chaos: Mandelbrot boundary, Julia variations",
+				"L-Systems: grammar creates form without blueprint",
+				"Stochastic fractals: randomness within recursive structure"
 			],
+
 			"content": [
-				" One :  ",
-				" Two :  ", 
-				" Three :  ",
-				" Four :  ",
-				" Five :  ",
-				" Six :  ",
-				" Seven :  ",
+				"Fractals_1: Stochastic trees—random branching, natural form",
+				"Fractals_2: Deterministic trees—pure recursive structure",
+				"Fractals_3: Radial fractal—self-similarity in circular form",
+				"Fractals_4: Cantor Set—infinitely many points, zero length",
+				"Fractals_5: Koch Curve—infinite perimeter, finite area",
+				"Fractals_6: Sierpinski Triangle—D ≈ 1.585, between line and plane",
+				"Fractals_7: Sierpinski Carpet—2D Cantor principle",
+				"Fractals_8: Menger Sponge—D ≈ 2.727, walkable fractal",
+				"Fractals_9: Fibonacci Spiral—golden ratio in recursive form",
+				"Fractals_10: Julia Sets—parameter space exploration",
+				"Fractals_11: Dragon Curve—folding creates fractal",
+				"Fractals_12: Composite fractals—multiple algorithms together",
+				"Fractals_13: Mandelbrot Set—the master fractal, infinite boundary",
+				"Fractals_14: QFEP Synthesis—all principles integrated"
 			],
+
 			"maps": [
 				"Fractals_1",
-				"Fractals_2", 
+				"Fractals_2",
 				"Fractals_3",
 				"Fractals_4",
+				"Fractals_5",
+				"Fractals_6",
+				"Fractals_7",
+				"Fractals_8",
 				"Fractals_9",
 				"Fractals_10",
 				"Fractals_11",
 				"Fractals_12",
-				"Fractals_13",						
+				"Fractals_13",
+				"Fractals_14"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/recursion_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/mandelbrot_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"Fractals_1": "res://algorithms/fractals/stochastictree/",
+				"Fractals_4": "res://algorithms/fractals/cantorset/",
+				"Fractals_5": "res://algorithms/fractals/kochcurve/",
+				"Fractals_6": "res://algorithms/fractals/sierpinskitriangle/",
+				"Fractals_8": "res://algorithms/fractals/mengersponge/",
+				"Fractals_10": "res://algorithms/fractals/juliasets/",
+				"Fractals_13": "res://algorithms/fractals/mandelbrot/"
+			},
+
+			"audio": {
+				"ambient_preset": "recursive_depths",
+				"interactive_sounds": {
+					"teleport": "AudioSynthesizer.FRACTAL_ZOOM"
+				},
+				"volume": -10.0
+			},
+
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_color",
+			"lab_map": "Lab/map_data_post_fractals",
 			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": ["mesh_sculptor_badge", "texture_artist_badge"],
-			"lab_map": "Lab/map_data_post_fractals"
+			"completion_rewards": [
+				"fractal_explorer_badge",
+				"dimensional_rebel_badge",
+				"self_similarity_badge",
+				"mandelbrot_master_badge"
+			]
 		}
 	}
 }
