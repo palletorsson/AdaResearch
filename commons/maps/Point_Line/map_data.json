@@ -9,21 +9,21 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 16,
+			"depth": 13,
 			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Line as relation", "Measurement", "Direction and length"]
 		}
 	},
 	"documentation": {
-		"summary": "Point_Line_0 - Line Introduction Chamber",
-		"layout": "7x8 single-height floor with south-east recess; south-west cells voided.",
-		"objective": "Demonstrate line segment defined by two manipulable endpoints.",
-		"key_elements": ["`la:line` annotation at (3,3)", "`line:180` interactable at (3,3)", "`dark_sphere` enclosure at (2,3)", "Teleporter `t` at (5,6)"]
+		"summary": "Point_Line - Line Introduction Chamber",
+		"layout": "7x13 grid with varied heights; south-west cells voided.",
+		"objective": "Demonstrate line segment as relation between two points; embodied measurement.",
+		"key_elements": ["`la:line` annotation at (3,4)", "`line_demo` at (3,4) height -1.3m", "`dark_sphere` enclosure at (3,2)", "Teleporter `t` at (5,6)"]
 	},
 	"layers": {
 		"structure": [

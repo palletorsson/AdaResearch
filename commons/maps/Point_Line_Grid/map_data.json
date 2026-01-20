@@ -7,33 +7,27 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 9,
-			"depth": 21,
+			"width": 8,
+			"depth": 10,
 			"max_height": 3
 		},
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Grid structure", "Trace recording", "Coordinate system politics"]
 		}
 	},
 	"documentation": {
-		"summary": "Point_Line_1 - Line Families Workshop",
-		"layout": "7x8 grid with multiple 2-high markers at east and south positions.",
-		"objective": "Compare coordinate, cross, plus, and parallel line constructs.",
+		"summary": "Point_Line_Grid - Grid and Trace Space",
+		"layout": "8x10 grid with central void; U-shaped walkway framing empty space.",
+		"objective": "Combine grid structure with trace recording; addressable space meets duration.",
 		"key_elements": [
-			"`la:line` annotation at (2,4)",
-			"`coordinate_lines` at (6,0)",
-			"`techstrider` autonomous walker at (1,2)",
-			"`plus_lines` at (6,2)",
-			"`cross_lines` at (0,6)",
-			"`parallel_lines` array at (2,6)",
-			"Clipboard (`pages:line`, `title:A Line`) at (2,4)",
-			"`line:180` interactable at (3,4)",
-			"`infokiosk` at (3,5) with rotation/scale overrides",
-			"`dark_sphere` enclosure at (3,3)",
-			"Teleporter `t` at (5,6)"
+			"`player_trace` at (0,0)",
+			"`grid_lines` at (4,3)",
+			"`dark_sphere` enclosure at (3,4)",
+			"Teleporter `t` at (4,8)",
+			"Floating text: the_grid/the_trace"
 		]
 	},
 	"layers": {

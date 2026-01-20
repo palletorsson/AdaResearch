@@ -1,0 +1,3 @@
+# Random_Pheromone
+
+Randomness with memory, trails that decay. Pheromone systems bridge individual chaos and collective order—each agent random, the swarm intelligent. Here randomness becomes stigmergy: communication through environment.

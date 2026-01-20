@@ -12,6 +12,7 @@ extends Node3D
 @onready var joint1: Node3D = $Pivot/Joint1
 @onready var rod2: MeshInstance3D = $Pivot/Joint1/Rod2
 @onready var bob2: MeshInstance3D = $Pivot/Joint1/Bob2
+@onready var raycast: RayCast3D = $Pivot/Joint1/Bob2/RayCast3D
 
 # The Product (Chaotic Trail)
 @onready var trail_mesh: ImmediateMesh
@@ -41,20 +42,23 @@ var trail_points: Array[Vector3] = []
 
 func _ready():
 	_setup_visuals()
-	
+
 	# Initialize angles
 	theta1 = deg_to_rad(theta1_start)
 	theta2 = deg_to_rad(theta2_start)
-	
+
 	# Setup visual lengths
 	rod1.position.y = -l1 / 2.0
 	rod1.mesh.height = l1
 	joint1.position.y = -l1
-	
+
 	rod2.position.y = -l2 / 2.0
 	rod2.mesh.height = l2
-	rod2.mesh.height = l2
 	bob2.position.y = -l2
+
+	# Enable raycast for canvas drawing
+	if raycast:
+		raycast.enabled = true
 
 func _setup_visuals():
 	trail_mesh = ImmediateMesh.new()
@@ -152,7 +156,6 @@ func _draw_trail():
 	trail_mesh.surface_end()
 
 # --- DRAWING ON CANVAS ---
-@onready var raycast: RayCast3D = $Pivot/Joint1/Bob2/RayCast3D
 var hue_timer: float = 0.0
 @export var color_cycle_speed: float = 0.01  # Slower = more color variation on canvas
 @onready var product_cube: MeshInstance3D = $ProductCube

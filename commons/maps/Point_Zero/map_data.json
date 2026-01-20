@@ -8,8 +8,8 @@
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 13,
-			"depth": 9,
+			"width": 7,
+			"depth": 8,
 			"max_height": 2
 		},
 		"metadata": {
@@ -25,9 +25,9 @@
 		"override_sequence": true
 	},
 	"documentation": {
-		"summary": "Point_1_0 - Foundational Point Lab",
-		"layout": "7x8 grid with twin 2-high plinths at (1,3) and (5,3); south-west corner void and south-east recess for exit.",
-		"objective": "Introduce zero-dimensional reference; interact with point representation and advance via teleporter.",
+		"summary": "Point_Zero - Origin Infrastructure",
+		"layout": "7x8 grid with L-shaped platform in northwest; mostly empty void.",
+		"objective": "Introduce origin as infrastructural prerequisite; encounter coordinate system before geometry.",
 		"key_elements": ["`la:point` annotation at (3,3)", "`grab_sphere_point` pickup at (3,3)", "`dark_sphere` ambient enclosure at (3,2)", "Teleporter `t` at (5,6)", "speed_display:180", "frames_display:180", "game_time_display:180", "draw_calls_display:180", "memory_display:180"]
 	},
 	"layers": {

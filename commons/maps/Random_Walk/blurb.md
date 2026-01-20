@@ -1,0 +1,1 @@
+No destination, no plan—only the next step. The random walker drifts through possibility space, accumulating history without purpose, tracing paths that look intentional but aren't. Brownian motion made visible.

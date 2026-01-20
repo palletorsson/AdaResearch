@@ -73,54 +73,76 @@ func _process(delta):
 func _generate_audio_samples():
 	if not playback:
 		return
-		
+
 	var frames_available = playback.get_frames_available()
 	if frames_available < 1:
 		return
+
+	# SCI-FI / THEREMIN STYLE - Wavering, eerie, space-age
+	# Classic theremin-like tones with vibrato and portamento
 	
-	# Subtle crystalline tones - pentatonic frequencies
-	var base_frequencies = [220.0, 261.6, 293.7, 349.2, 392.0]  # A3, C4, D4, F4, G4
+	# Theremin frequencies - eerie intervals
+	var base_freq = 440.0 + sin(time * 0.5) * 100.0  # Slow pitch drift
 	
-	# Volume envelope based on transform progress (subtle background)
-	var master_volume = 0.08 * transform_progress  # Very quiet, increases with progress
-	
+	var master_volume = 0.10
+
 	for i in range(frames_available):
 		var sample = 0.0
 		var t = audio_phase / SAMPLE_RATE
 		
-		# Generate each harmonic tone based on visualization state
-		for j in range(min(harmonics.size(), base_frequencies.size())):
-			var freq = base_frequencies[j] * (1.0 + sin(time * 0.1 + j) * 0.02)  # Subtle pitch drift
-			var harmonic_amp = harmonics[j] * 0.3
-			
-			# Smooth sine with subtle harmonic
-			var fundamental = sin(2.0 * PI * freq * t) * 0.7
-			var overtone = sin(2.0 * PI * freq * 2.0 * t) * 0.2
-			var shimmer = sin(2.0 * PI * freq * 3.0 * t) * 0.1
-			
-			# Activity envelope from frequency spectrum
-			var activity = 0.5 + 0.5 * sin(time * (j + 1) * 0.3)
-			
-			sample += (fundamental + overtone + shimmer) * harmonic_amp * activity
+		# 1. Main theremin voice - sine with vibrato
+		var vibrato_rate = 5.5 + sin(time * 0.3) * 1.0  # Varying vibrato speed
+		var vibrato_depth = 8.0 + sin(time * 0.7) * 4.0  # Varying vibrato depth
+		var vibrato = sin(2.0 * PI * vibrato_rate * t) * vibrato_depth
 		
-		# Gentle amplitude modulation (tremolo)
-		var tremolo = 0.85 + 0.15 * sin(time * 2.0)
-		sample *= tremolo
+		var theremin_freq = base_freq + vibrato
+		var theremin = sin(2.0 * PI * theremin_freq * t)
 		
-		# Very soft noise floor
-		sample += (randf() * 2.0 - 1.0) * 0.01
+		# Add slight waveshaping for classic theremin timbre
+		theremin = theremin * 0.7 + sin(theremin * PI) * 0.3
+		sample += theremin * 0.5
+		
+		# 2. Harmony voice - fifth above with different vibrato
+		var harmony_freq = (base_freq * 1.5) + sin(2.0 * PI * 4.5 * t) * 6.0
+		var harmony = sin(2.0 * PI * harmony_freq * t) * 0.25
+		
+		# Fade harmony based on transform progress
+		harmony *= transform_progress
+		sample += harmony
+		
+		# 3. Sub oscillator - octave below, subtle
+		var sub_freq = base_freq * 0.5
+		var sub = sin(2.0 * PI * sub_freq * t) * 0.15
+		sample += sub
+		
+		# 4. Sci-fi texture - high frequency shimmer
+		var shimmer_freq = base_freq * 3.0 + sin(time * 2.0) * 50.0
+		var shimmer = sin(2.0 * PI * shimmer_freq * t) * 0.05
+		shimmer *= 0.5 + 0.5 * sin(time * 1.5)  # Pulsing
+		sample += shimmer
+		
+		# 5. Space ambience - filtered noise bursts
+		var noise = (randf() * 2.0 - 1.0)
+		noise *= 0.02 * max(0.0, sin(time * 0.8))  # Occasional bursts
+		sample += noise
+		
+		# Apply volume envelope based on frequency activity
+		var envelope = 0.6 + 0.4 * frequency_resolution
+		sample *= envelope
 		
 		# Apply master volume
 		sample *= master_volume
 		
-		# Soft clipping
-		sample = clamp(sample, -0.5, 0.5)
+		# Soft limiting
+		sample = tanh(sample * 2.0) * 0.6
 		
 		playback.push_frame(Vector2(sample, sample))
-		
+
 		audio_phase += 1.0
 		if audio_phase > SAMPLE_RATE * 10.0:
 			audio_phase -= SAMPLE_RATE * 10.0
+
+
 
 
 func create_time_waveform():

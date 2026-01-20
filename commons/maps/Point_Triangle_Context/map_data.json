@@ -15,20 +15,19 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Triangle rigidity", "Pythagorean theorem", "Quad decomposition"]
 		}
 	},
 	"documentation": {
-		"summary": "Point_Triangle_1_1 - Triangle Applied Lab",
-		"layout": "7x8 grid with elevated tiles at z=4 (x=1-3,5); south recess for exit.",
-		"objective": "Link triangle manipulation to theorem and quadrilateral demonstrations.",
+		"summary": "Point_Triangle_Context - Triangles Applied",
+		"layout": "7x10 grid with elevated tiles; varied heights creating workshop space.",
+		"objective": "Apply triangle knowledge: Pythagorean theorem, quadrilateral transition.",
 		"key_elements": [
 			"`la:interactivetriangle` annotation at (1,4)",
-			"`interactivetriangle:180:-0.5:0.2` module at (1,4)",
-			"Clipboard (`pages:line`, `title:A Line`) at (2,4)",
-			"`pythagorean_proof` module scaled 0.1 at (3,4)",
-			"`quad:0:0:0.5` manipulator at (5,4)",
-			"`infokiosk` at (3,5) with rotation/scale overrides",
+			"`interactivetriangle` at (1,4)",
+			"`pythagorean_triangle_angles` at (2,4)",
+			"`quad_line_puzzle` and `quad` at (4-5,4)",
+			"`triangleprofiles` gallery at (3,5)",
 			"`dark_sphere` enclosure at (3,3)",
 			"Teleporter `t` at (5,6)"
 		]

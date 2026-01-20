@@ -8,32 +8,27 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 21,
+			"depth": 10,
 			"max_height": 3
 		},
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Line networks", "Parallels and crossings", "Grid formation"]
 		}
 	},
 	"documentation": {
-		"summary": "Point_Line_1 - Line Families Workshop",
-		"layout": "7x8 grid with multiple 2-high markers at east and south positions.",
-		"objective": "Compare coordinate, cross, plus, and parallel line constructs.",
+		"summary": "Point_Lines - Line Networks Workshop",
+		"layout": "7x10 grid with 2-high markers; varied platform heights.",
+		"objective": "Explore line multiplication: parallels, crossings, grids, and networks.",
 		"key_elements": [
-			"`la:line` annotation at (2,4)",
-			"`coordinate_lines` at (6,0)",
-			"`techstrider` autonomous walker at (1,2)",
-			"`plus_lines` at (6,2)",
-			"`cross_lines` at (0,6)",
-			"`parallel_lines` array at (2,6)",
-			"Clipboard (`pages:line`, `title:A Line`) at (2,4)",
-			"`line:180` interactable at (3,4)",
-			"`infokiosk` at (3,5) with rotation/scale overrides",
+			"`parallel_line_puzzle` at (3,2)",
+			"`grab_line_drawer`, `grab_line_pusher`, `grab_line` at row 4",
+			"`modulor_man_demo` at (0,7)",
+			"`line_builder_3d` at (3,9)",
 			"`dark_sphere` enclosure at (3,3)",
-			"Teleporter `t` at (5,6)"
+			"Teleporter `t` at (5,8)"
 		]
 	},
 	"layers": {

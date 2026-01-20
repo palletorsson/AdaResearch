@@ -184,37 +184,38 @@ func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
 		if debug_label:
 			debug_label.text = "PentipRayCast node not found!"
 
+# Debug: set to true to see coordinate transformation values
+var _debug_uv_transform: bool = true
+
 # Helper to convert world position to UV
 func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:
-	# Get the canvas bounds from the parent DrawingCanvas transform
-	# The canvas transform contains scale which determines the world-space size
-	var parent = get_parent()
-	if parent:
-		var canvas_transform = parent.global_transform
-		# The canvas scale in X and Y determines the canvas size
-		# SharedCanvas has transform with 5.4 scale, so it covers -2.7 to +2.7
-		var scale_x = canvas_transform.basis.x.length()
-		var scale_y = canvas_transform.basis.y.length()
-		var canvas_center = canvas_transform.origin
-		
-		# Map world position to UV (0-1)
-		# World X maps to UV X, World Y maps to UV Y
-		var half_width = scale_x / 2.0
-		var half_height = scale_y / 2.0
-		
-		var uv_x = (world_pos.x - canvas_center.x + half_width) / scale_x
-		var uv_y = (world_pos.y - canvas_center.y + half_height) / scale_y
-		
-		return Vector2(uv_x, uv_y)
-	
-	# Fallback: use local transform
-	var local_pos = global_transform.affine_inverse() * world_pos
+	# Explicitly get the current global transform (forces update)
+	var gt = get_global_transform()
+
+	# Transform world position to local space
+	var local_pos = gt.affine_inverse() * world_pos
+
+	# Get mesh size (default PlaneMesh is 2x2 in local XZ plane)
 	var mesh_size = Vector2(2.0, 2.0)
 	if mesh and mesh is PlaneMesh:
-		mesh_size = mesh.size
+		mesh_size = (mesh as PlaneMesh).size
+
 	var half_size = mesh_size / 2.0
+
+	# PlaneMesh lies in local XZ plane with Y as normal
+	# Local X ranges from -half_size.x to +half_size.x
+	# Local Z ranges from -half_size.y to +half_size.y
 	var uv_x = (local_pos.x + half_size.x) / mesh_size.x
-	var uv_y = (local_pos.z + half_size.y) / mesh_size.y
+	# The canvas rotation causes local.z to be negated relative to world Y
+	# Correct for this by using -local_pos.z, then apply UV inversion
+	var uv_y = 1.0 - (-local_pos.z + half_size.y) / mesh_size.y
+
+	if _debug_uv_transform:
+		var parent_name = get_parent().get_parent().get_parent().name if get_parent() and get_parent().get_parent() and get_parent().get_parent().get_parent() else "unknown"
+		print("Canvas [%s]: world=%s, gt.origin=%s, local=%s, uv=(%0.2f, %0.2f)" % [
+			parent_name, world_pos, gt.origin, local_pos, uv_x, uv_y
+		])
+
 	return Vector2(uv_x, uv_y)
 
 # Draw at a specific world position

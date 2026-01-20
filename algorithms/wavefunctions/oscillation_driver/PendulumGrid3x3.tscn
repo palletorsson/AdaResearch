@@ -20,9 +20,6 @@ ambient_light_energy = 1.2
 
 [node name="PendulumGrid3x3" type="Node3D"]
 script = ExtResource("1_grid")
-cell_spacing = 5.0
-pendulum_scale = 0.5
-angle_variation = 8.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)

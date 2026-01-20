@@ -7,20 +7,20 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 40,
+			"depth": 35,
 			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Toroidal forms", "Circular approximation", "Continuity vs discretization"]
 		}
 	},
 	"documentation": {
-		"summary": "Primitives_Portals - Portal Corridor",
-		"layout": "7x40 longitudinal spine suspended over void with a single-tile walkway and distant exit alcove.",
-		"objective": "Demonstrate the portal combination system along an extended traversal path.",
+		"summary": "Primitives_Portals - Toroidal Corridor",
+		"layout": "7x35 longitudinal spine with narrowing walkway toward southern exit.",
+		"objective": "Experience circular approximation through toroidal portals; discrete rings approaching continuity.",
 		"key_elements": [
 			"`combine_portals` rig at (3,4)",
 			"Mid-corridor `dark_sphere` enclosure at (3,18)",

@@ -7,24 +7,24 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 10,
+			"depth": 9,
 			"max_height": 2
 		},
 		"metadata": {
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["Cube construction", "Volume and enclosure", "Animated assembly"]
 		}
 	},
 	"documentation": {
-		"summary": "Point_Animatedcube - Construction Stage",
-		"layout": "Baseline 7x8 grid with raised pedestals at (2,3) and (4,3); south-east recess for exit.",
-		"objective": "Observe cube assembly animation anchored to point concept.",
+		"summary": "Point_Animatedcube - Cube Construction Animation",
+		"layout": "7x9 grid with raised pedestals at (2,4) and (4,4); south-east exit.",
+		"objective": "Observe cube assembly from primitives; animation shows construction process.",
 		"key_elements": [
-			"Twin `animatedcubebuilder` rigs at (2,3) and (4,3)",
-			"`dark_sphere` ambient dome at (3,3)",
-			"Teleporter `t` at (5,6)"
+			"Twin `animatedcubebuilder` rigs at (2,4) and (4,4)",
+			"`dark_sphere` ambient dome at (3,4)",
+			"Teleporter `t` at (5,7)"
 		]
 	},
 	"layers": {

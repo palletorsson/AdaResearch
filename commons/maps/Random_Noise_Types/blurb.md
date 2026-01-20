@@ -1,0 +1,1 @@
+White noise screams chaos—every frequency, every sample independent, pure static. Blue noise whispers structure—random but refusing to clump, maintaining distance. Between them: the spectrum of coherent randomness.

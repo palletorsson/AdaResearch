@@ -18,16 +18,20 @@
 		}
 	},
 	"documentation": {
-		"summary": "Primitives_3 - Advanced Primitive Pavilion",
-		"layout": "9x22 runway with repeating plinths for architectural and procedural exemplars; teleporter embedded near the southern terminus.",
-		"objective": "Compare advanced primitives, architectural modules, and parametric assets in sequence.",
+		"summary": "Primitives_Ignorance - Epistemic Reset Pavilion",
+		"layout": "9x23 runway with repeating plinths; Platonic inscription entrance.",
+		"objective": "Re-encounter primitives as constructs; challenge formal mastery through variety.",
 		"key_elements": [
-			"Architectural row (`lshape`, `arch`, `profile_chair`, `portal_frame`) at z=2",
-			"Core primitive row (`rectcube`, `halocube`, `unitcube`, `star_primitive`) at z=6",
-			"`dark_sphere` central enclosure at (4,8)",
-			"Procedural set (`rock_primitive`, `parametric_surface`, `mengersponge`, `steppedpyramid`) at z=10",
-			"Fabrication row (`boxbeam`, `proceduralrock`, `hollowrock`, `modernchair`) at z=14",
-			"Teleporter `t` at (5,20)"
+			"`platonic_demo` at (4,2)",
+			"Sphere LOD comparison (high/mid/low) at rows 9,11,13",
+			"`lefttriangle`, `righttriangle` variations",
+			"`star_primitive`, `truncatedtetrahedron`, `capsule`",
+			"`snap_octahedron_puzzle` at (4,15)",
+			"`prism_block` row at row 19",
+			"`diamonds` collection at (4,23)",
+			"`dark_sphere` at (4,6)",
+			"Teleporter `t` at (4,21)",
+			"Floating text: Let_no_one_ignorant_of_geometry_enter_here"
 		]
 	},
 	"layers": {

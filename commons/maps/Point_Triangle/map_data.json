@@ -15,7 +15,7 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["First closure", "Inside/outside boundary", "Triangle as surface"]
 		}
 	},
 	"audio": {
@@ -23,10 +23,10 @@
 		"volume": -10.0
 	},
 	"documentation": {
-		"summary": "Point_Triangle_1_0 - Triangle Basics Studio",
-		"layout": "7x8 floor with standard south void; single-height working surface.",
-		"objective": "Manipulate basic triangle vertices and review profile set.",
-		"key_elements": ["`la:triangle` annotation at (3,3)", "`triangleprofiles:-90:0.3:0.3` display at (6,0)", "`triangle` manipulator at (3,3)", "`dark_sphere` enclosure at (3,2)", "Teleporter `t` at (5,6)"]
+		"summary": "Point_Triangle - First Closed Geometry",
+		"layout": "7x9 grid with varied heights; central workspace.",
+		"objective": "Introduce triangle as first closure; editable vertices, inside/outside distinction.",
+		"key_elements": ["`la:triangle` annotation at (3,3)", "`triangle` manipulator at (3,3)", "`triangle_line_puzzle` at (3,2)", "`dark_sphere` enclosure at (3,4)", "Teleporter `t` at (3,7)"]
 	},
 	"layers": {
 		"structure": [
