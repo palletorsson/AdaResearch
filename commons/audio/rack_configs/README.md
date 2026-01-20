@@ -351,6 +351,7 @@ All available control types for your rack:
 | Type | Aliases | Description |
 |------|---------|-------------|
 | `mon` | `monitor`, `waveform`, `scope` | Waveform/spectrum monitor |
+| `lissajous` | `liss`, `xy_wave`, `paramwave` | Lissajous XY figure from two frequency params |
 | `mtr` | `meter`, `vu`, `level` | VU/level meter with peak hold |
 | `lbl` | `label`, `text` | Text label/header |
 | `grp` | `group`, `container` | Group container with background |

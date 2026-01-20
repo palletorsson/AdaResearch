@@ -154,7 +154,8 @@ func _draw_trail():
 # --- DRAWING ON CANVAS ---
 @onready var raycast: RayCast3D = $Pivot/Joint1/Bob2/RayCast3D
 var hue_timer: float = 0.0
-@export var color_cycle_speed: float = 0.05
+@export var color_cycle_speed: float = 0.01  # Slower = more color variation on canvas
+@onready var product_cube: MeshInstance3D = $ProductCube
 
 func _update_drawing():
 	if not raycast: return
@@ -163,15 +164,22 @@ func _update_drawing():
 		var hit_point = raycast.get_collision_point()
 		var collider = raycast.get_collider()
 		
-		# Cycle color
+		# Cycle color (slower speed for more variety)
 		hue_timer += get_process_delta_time() * color_cycle_speed
 		if hue_timer > 1.0: hue_timer -= 1.0
 		var current_color = Color.from_hsv(hue_timer, 1.0, 1.0)
 		
-		# Try to draw
+		# Update ProductCube color to match
+		_update_cube_color(current_color)
+		
+		# Try to draw with larger brush
 		var drawable = _find_drawable(collider)
 		if drawable:
-			drawable.draw_at_world_position(hit_point, current_color)
+			if drawable.has_method("draw_point"):
+				var uv = drawable.get_uv_from_world_pos(hit_point)
+				drawable.draw_point(uv, current_color, 25)  # Larger brush size
+			else:
+				drawable.draw_at_world_position(hit_point, current_color)
 
 func _find_drawable(node: Node) -> Node:
 	if not node: return null
@@ -179,3 +187,18 @@ func _find_drawable(node: Node) -> Node:
 	for child in node.get_children():
 		if child.has_method("draw_at_world_position"): return child
 	return null
+
+func _update_cube_color(color: Color):
+	"""Update the ProductCube to match the current painting color"""
+	if not product_cube:
+		return
+	
+	var material = product_cube.get_active_material(0)
+	if not material:
+		material = StandardMaterial3D.new()
+		product_cube.material_override = material
+	
+	if material is StandardMaterial3D:
+		material.albedo_color = color
+		material.emission_enabled = true
+		material.emission = color * 0.5

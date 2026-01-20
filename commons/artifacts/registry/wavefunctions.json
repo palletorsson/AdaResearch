@@ -284,6 +284,13 @@
 			"description": "DoublePendulum",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn"
 		},
+		"PendulumGrid3x3": {
+			"name": "PendulumGrid3x3",
+			"lookup_name": "PendulumGrid3x3",
+			"description": "PendulumGrid3x3",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn"
+		},		
+		
 		"math_objects": {
 			"name": "math_objects",
 			"lookup_name": "math_objects",
@@ -358,6 +365,25 @@
 			"description": "Three-dimensional wave dynamics simulation",
 			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
 		},
+		"MelodySoundBoard": {
+			"name": "MelodySoundBoard",
+			"lookup_name": "MelodySoundBoard",
+			"description": "MelodySoundBoard",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn"
+		},
+		"MelodyChaser3D": {
+			"name": "MelodyChaser3D",
+			"lookup_name": "MelodyChaser3D",
+			"description": "Follow-the-leader musical instrument - a glowing point traces a helix pattern through pitch space, play notes by following it with your hand",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn"
+		},
+		"SoundscapeRadioRack": {
+			"name": "SoundscapeRadioRack",
+			"lookup_name": "SoundscapeRadioRack",
+			"description": "SoundscapeRadioRack",
+			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn"
+		},				
+		
 		"water_land_ride": {
 			"name": "water_land_ride",
 			"lookup_name": "water_land_ride",
@@ -436,7 +462,13 @@
 			"lookup_name": "PhonemeCloud",
 			"description": "PhonemeCloud",
 			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn"
-		}		
-		
+		},
+		"MelodySoundBoard": {
+			"name": "MelodySoundBoard",
+			"lookup_name": "MelodySoundBoard",
+			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn"
+		}
+
 	}
 }

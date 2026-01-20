@@ -186,11 +186,35 @@ func _on_scribel_pen_pen_grabbed(pickable: Variant, by: Variant) -> void:
 
 # Helper to convert world position to UV
 func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:
-	var local_pos = to_local(world_pos)
-	# PlaneMesh of size 4x4
-	# Local X/Z range from -2 to 2
-	var uv_x = (local_pos.x + 2.0) / 4.0
-	var uv_y = (local_pos.z + 2.0) / 4.0
+	# Get the canvas bounds from the parent DrawingCanvas transform
+	# The canvas transform contains scale which determines the world-space size
+	var parent = get_parent()
+	if parent:
+		var canvas_transform = parent.global_transform
+		# The canvas scale in X and Y determines the canvas size
+		# SharedCanvas has transform with 5.4 scale, so it covers -2.7 to +2.7
+		var scale_x = canvas_transform.basis.x.length()
+		var scale_y = canvas_transform.basis.y.length()
+		var canvas_center = canvas_transform.origin
+		
+		# Map world position to UV (0-1)
+		# World X maps to UV X, World Y maps to UV Y
+		var half_width = scale_x / 2.0
+		var half_height = scale_y / 2.0
+		
+		var uv_x = (world_pos.x - canvas_center.x + half_width) / scale_x
+		var uv_y = (world_pos.y - canvas_center.y + half_height) / scale_y
+		
+		return Vector2(uv_x, uv_y)
+	
+	# Fallback: use local transform
+	var local_pos = global_transform.affine_inverse() * world_pos
+	var mesh_size = Vector2(2.0, 2.0)
+	if mesh and mesh is PlaneMesh:
+		mesh_size = mesh.size
+	var half_size = mesh_size / 2.0
+	var uv_x = (local_pos.x + half_size.x) / mesh_size.x
+	var uv_y = (local_pos.z + half_size.y) / mesh_size.y
 	return Vector2(uv_x, uv_y)
 
 # Draw at a specific world position

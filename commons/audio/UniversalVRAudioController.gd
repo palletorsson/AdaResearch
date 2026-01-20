@@ -27,6 +27,7 @@ const WHEEL_SCENE = preload("res://commons/interactables/wheel_smooth.tscn")
 const WAVEFORM_MONITOR_SCENE = preload("res://commons/audio/interfaces/VRAudioMonitor.tscn")
 const SPECTRUM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
 const WAVEFORM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRWaveformDisplay.tscn")
+const LISSAJOUS_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRLissajousDisplay.tscn")
 
 # Default spacing by control type (width, height in meters)
 const CONTROL_SIZES = {
@@ -41,6 +42,7 @@ const CONTROL_SIZES = {
 	"monitor": Vector2(0.30, 0.22),
 	"spectrum": Vector2(0.32, 0.24),
 	"waveform": Vector2(0.32, 0.24),
+	"lissajous": Vector2(0.30, 0.30),
 	"meter": Vector2(0.04, 0.12),
 	"label": Vector2(0.20, 0.04),
 	"grp": Vector2(0.25, 0.20),
@@ -282,7 +284,7 @@ func _validate_rack_config(data: Dictionary) -> bool:
 
 		# Visual/display controls don't need parameters
 		var type = control.get("type", "slider")
-		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "meter", "mtr", "vu", "level"]:
+		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "lissajous", "liss", "xy_wave", "paramwave", "meter", "mtr", "vu", "level"]:
 			continue
 			
 		# XY controls need parameter_x and parameter_y (or just parameter)
@@ -458,6 +460,8 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 			control_scene = SPECTRUM_DISPLAY_SCENE
 		"waveform", "wave", "osc":
 			control_scene = WAVEFORM_DISPLAY_SCENE
+		"lissajous", "liss", "xy_wave", "paramwave":
+			control_scene = LISSAJOUS_DISPLAY_SCENE
 		"mtr", "meter", "vu", "level":
 			return _create_meter(control_id)
 		"lbl", "label", "text":
@@ -466,7 +470,7 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 			return _create_group(control_id)
 
 		_:
-			push_warning("Unknown control type '%s' for %s. Available: slider, slv, sls, slz, knob, wheel, xy, js, btn, lv, mon, mtr, lbl, grp" % [control_type, control_id])
+			push_warning("Unknown control type '%s' for %s. Available: slider, slv, sls, slz, knob, wheel, xy, js, btn, lv, mon, spectrum, waveform, lissajous, mtr, lbl, grp" % [control_type, control_id])
 			return null
 
 	if control_scene:
@@ -646,6 +650,8 @@ func _get_control_size(control_type: String) -> Vector2:
 			base_type = "grp"
 		"monitor", "mon", "waveform", "scope":
 			base_type = "monitor"
+		"lissajous", "liss", "xy_wave", "paramwave":
+			base_type = "lissajous"
 		"vu", "level", "mtr":
 			base_type = "meter"
 		"text", "lbl":
@@ -776,6 +782,22 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 				var label_node = control.get_node_or_null("Chassis/LabelName")
 				if label_node:
 					label_node.text = config.get("label", "WAVEFORM").to_upper()
+
+		"lissajous", "liss", "xy_wave", "paramwave":
+			# Lissajous display configuration
+			if config.has("label"):
+				var label_node = control.get_node_or_null("Chassis/LabelName")
+				if label_node:
+					label_node.text = config.get("label", "LISSAJOUS").to_upper()
+			
+			# Store param bindings for frequency updates
+			if config.has("params"):
+				var params = config.get("params", [])
+				control.set_meta("param_x", params[0] if params.size() > 0 else "")
+				control.set_meta("param_y", params[1] if params.size() > 1 else "")
+			
+			# Store control reference for updates
+			control.set_meta("is_lissajous", true)
 
 		"mtr", "meter", "vu", "level":
 			# Meter connects to audio output for level

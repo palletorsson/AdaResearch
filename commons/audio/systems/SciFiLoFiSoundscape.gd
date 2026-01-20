@@ -1,14 +1,17 @@
 extends Node3D
 class_name SciFiLoFiSoundscape
 
-## SciFiLoFiSoundscape - Lightweight orchestrator for sci-fi lo-fi ambient soundscapes
+## SciFiLoFiSoundscape - Non-Blocking Soundscape Orchestrator
+## Uses threaded audio generation to avoid blocking the main thread
 ## Composes existing generators (TechnoNoirGenerator, TrapBeatsGenerator, etc.)
-## instead of implementing new synthesis from scratch.
 
 # Signals
 signal soundscape_started()
 signal soundscape_stopped()
 signal parameter_changed(param_name: String, value: float)
+signal generation_started()
+signal generation_progress(progress: float, layer_name: String)
+signal generation_complete()
 
 # Configuration loaded from JSON or set directly
 var soundscape_config: Dictionary = {}
@@ -16,6 +19,9 @@ var soundscape_config: Dictionary = {}
 # Audio players
 var continuous_players: Array[AudioStreamPlayer3D] = []
 var effect_players: Array[AudioStreamPlayer3D] = []
+
+# Pre-generated streams (for non-blocking playback)
+var precreated_streams: Dictionary = {}
 
 # Abstract parameters (0.0 - 1.0 range)
 var abstract_params: Dictionary = {
@@ -31,6 +37,15 @@ var event_timers: Array[Timer] = []
 # State
 var is_playing: bool = false
 var volume_adjustment: float = 0.0
+
+# Threading for non-blocking generation
+var generation_thread: Thread
+var mutex: Mutex
+var is_generating: bool = false
+var generation_complete_flag: bool = false
+var stop_requested: bool = false
+var layers_to_generate: Array = []
+var layers_generated: int = 0
 
 # Generator references (static classes)
 const TechnoNoirGenerator = preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
@@ -50,6 +65,8 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
+	mutex = Mutex.new()
+	generation_thread = Thread.new()
 	
 	# Try to load optional generators
 	_load_optional_generators()
@@ -60,6 +77,11 @@ func _ready():
 	# Load config if path specified
 	if not config_path.is_empty():
 		load_config_from_file(config_path)
+
+func _exit_tree():
+	stop_requested = true
+	if generation_thread.is_started():
+		generation_thread.wait_to_finish()
 
 func _load_optional_generators():
 	# Try to load generators that may not exist
@@ -103,8 +125,8 @@ func load_config(config: Dictionary):
 	print("🎵 Applied soundscape config: ", soundscape_config.get("name", "Unknown"))
 
 func start():
-	"""Start the soundscape"""
-	if is_playing:
+	"""Start the soundscape (non-blocking)"""
+	if is_playing or is_generating:
 		return
 	
 	if soundscape_config.is_empty():
@@ -113,14 +135,16 @@ func start():
 	
 	print("▶️ Starting soundscape: ", soundscape_config.get("name", "Unknown"))
 	
-	_start_continuous_layers()
-	_start_random_events()
-	
-	is_playing = true
-	soundscape_started.emit()
+	# Start generation in background thread
+	_start_threaded_generation()
 
 func stop():
 	"""Stop the soundscape"""
+	stop_requested = true
+	
+	if generation_thread.is_started():
+		generation_thread.wait_to_finish()
+	
 	if not is_playing:
 		return
 	
@@ -145,7 +169,10 @@ func stop():
 			timer.queue_free()
 	event_timers.clear()
 	
+	precreated_streams.clear()
 	is_playing = false
+	is_generating = false
+	stop_requested = false
 	soundscape_stopped.emit()
 
 func set_parameter(param_name: String, value: float):
@@ -158,50 +185,131 @@ func set_parameter(param_name: String, value: float):
 func get_parameter(param_name: String) -> float:
 	return abstract_params.get(param_name, 0.5)
 
-# ===== INTERNAL: CONTINUOUS LAYERS =====
+# ===== THREADED GENERATION =====
 
-func _start_continuous_layers():
-	if not "continuous_layers" in soundscape_config:
+func _start_threaded_generation():
+	"""Start generating audio in background thread"""
+	is_generating = true
+	generation_complete_flag = false
+	stop_requested = false
+	layers_generated = 0
+	layers_to_generate.clear()
+	precreated_streams.clear()
+	
+	# Collect layers to generate
+	if "continuous_layers" in soundscape_config:
+		for i in range(soundscape_config["continuous_layers"].size()):
+			layers_to_generate.append({
+				"type": "continuous",
+				"index": i,
+				"config": soundscape_config["continuous_layers"][i]
+			})
+	
+	generation_started.emit()
+	
+	# Start generation thread
+	if generation_thread.start(_thread_generate_sounds) != OK:
+		push_error("SciFiLoFiSoundscape: Failed to start generation thread")
+		is_generating = false
+		return
+
+func _thread_generate_sounds():
+	"""Generate all sounds in background thread"""
+	for layer_data in layers_to_generate:
+		if stop_requested:
+			return
+		
+		var config = layer_data["config"]
+		var generator_name = config.get("generator", "TechnoNoirGenerator")
+		var method_name = config.get("method", "create_endless_drone")
+		var params = config.get("params", {})
+		
+		# Generate stream (this is the blocking part, now in thread)
+		var stream = _call_generator(generator_name, method_name, params)
+		
+		if stop_requested:
+			return
+		
+		# Store result thread-safely
+		mutex.lock()
+		var key = "layer_%d" % layer_data["index"]
+		precreated_streams[key] = {
+			"stream": stream,
+			"config": config
+		}
+		layers_generated += 1
+		var progress = float(layers_generated) / max(1, layers_to_generate.size())
+		mutex.unlock()
+		
+		# Emit progress on main thread
+		call_deferred("_emit_generation_progress", progress, "%s.%s" % [generator_name, method_name])
+		
+		# Small delay to prevent CPU spike
+		OS.delay_msec(50)
+	
+	# Generation complete
+	mutex.lock()
+	generation_complete_flag = true
+	mutex.unlock()
+	
+	call_deferred("_on_generation_complete")
+
+func _emit_generation_progress(progress: float, layer_name: String):
+	generation_progress.emit(progress, layer_name)
+
+func _on_generation_complete():
+	"""Called on main thread when generation finishes"""
+	if generation_thread.is_started():
+		generation_thread.wait_to_finish()
+	
+	is_generating = false
+	
+	if stop_requested:
 		return
 	
-	for layer_config in soundscape_config["continuous_layers"]:
-		var player = _create_continuous_player(layer_config)
-		if player:
-			continuous_players.append(player)
+	# Now create players with pre-generated streams
+	_create_players_from_precreated()
+	
+	# Start random events
+	_start_random_events()
+	
+	is_playing = true
+	generation_complete.emit()
+	soundscape_started.emit()
+	
+	print("✅ Soundscape generation complete, playback started")
 
-func _create_continuous_player(config: Dictionary) -> AudioStreamPlayer3D:
-	"""Create and start a continuous layer player"""
-	var generator_name = config.get("generator", "TechnoNoirGenerator")
-	var method_name = config.get("method", "create_endless_drone")
-	var params = config.get("params", {})
-	var volume_db = config.get("volume_db", -12.0)
-	var bus = config.get("bus", "Master")
-	
-	# Generate the audio stream
-	var stream = _call_generator(generator_name, method_name, params)
-	if not stream:
-		push_warning("SciFiLoFiSoundscape: Failed to generate sound for layer")
-		return null
-	
-	# Create player
-	var player = AudioStreamPlayer3D.new()
-	player.stream = stream
-	player.volume_db = volume_db + volume_adjustment
-	player.bus = bus
-	player.max_distance = 50.0
-	player.unit_size = 5.0
-	
-	# Enable looping if the stream supports it
-	if stream is AudioStreamWAV:
-		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-		stream.loop_begin = 0
-		stream.loop_end = stream.data.size() / 4  # 16-bit stereo
-	
-	add_child(player)
-	player.play()
-	
-	print("  ✓ Started layer: %s.%s" % [generator_name, method_name])
-	return player
+func _create_players_from_precreated():
+	"""Create audio players from pre-generated streams"""
+	for key in precreated_streams.keys():
+		var data = precreated_streams[key]
+		var stream = data["stream"]
+		var config = data["config"]
+		
+		if not stream:
+			continue
+		
+		var volume_db = config.get("volume_db", -12.0)
+		var bus = config.get("bus", "Master")
+		
+		var player = AudioStreamPlayer3D.new()
+		player.stream = stream
+		player.volume_db = volume_db + volume_adjustment
+		player.bus = bus
+		player.max_distance = 50.0
+		player.unit_size = 5.0
+		
+		# Enable looping if the stream supports it
+		if stream is AudioStreamWAV:
+			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+			stream.loop_begin = 0
+			stream.loop_end = stream.data.size() / 4  # 16-bit stereo
+		
+		add_child(player)
+		player.play()
+		continuous_players.append(player)
+		
+		print("  ✓ Started layer from precreated stream")
 
 # ===== INTERNAL: RANDOM EVENTS =====
 
@@ -222,7 +330,7 @@ func _start_random_events():
 		timer.start()
 
 func _on_event_timeout(config: Dictionary):
-	if not is_playing:
+	if not is_playing or stop_requested:
 		return
 	
 	# Find available effect player
@@ -231,7 +339,7 @@ func _on_event_timeout(config: Dictionary):
 		_reschedule_event(config)
 		return
 	
-	# Generate the sound
+	# Generate the sound (quick sounds are OK on main thread)
 	var generator_name = config.get("generator", "TechnoNoirGenerator")
 	var method_name = config.get("method", "create_static_burst")
 	var params = config.get("params", {})

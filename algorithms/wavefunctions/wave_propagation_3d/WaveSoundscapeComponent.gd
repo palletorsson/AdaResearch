@@ -1,52 +1,37 @@
 extends Node3D
 
-# WaveSoundscapeComponent (Humpback Whale Aesthetic)
-# Inspired by "Songs of the Humpback Whale" by Roger Payne.
-# 
-# Features:
-# - Deep Brownian Drone (Ocean Rumble)
-# - Unit-based Vocalizations: Complex sweeps, harmonic moans, and gritty whoops.
-# - Rhythmic Theme: The wave frequency drives the "song" pulse.
+# WaveSoundscapeComponent - Subtle Crystalline Wave Sound
+# Creates gentle, ethereal tones that follow the wave propagation
+# Designed to be subtle and complement other soundscapes
 
 @export var ring_count: int = 4
-@export var base_pitch: float = 30.0 # Deep rumble
+@export var base_pitch: float = 220.0  # A3 - musical base
+@export var master_volume_db: float = -24.0  # Very subtle
 
-var drone_player: AudioStreamPlayer
 var ring_players: Array[AudioStreamPlayer3D] = []
 var ring_playbacks: Array[AudioStreamGeneratorPlayback] = []
 
 var sample_rate: float = 44100.0
-var time: float = 0.0
+var phases: Array[float] = []
 
-# State for synthesis
-var whale_phases: Array[float] = [0.0, 0.0, 0.0, 0.0]
-var brown_noise_state: float = 0.0
-
-# Humpbacks use "units" - rhythmic patterns.
-# We'll map the wave frequency to a "song tempo".
-var last_unit_trigger: float = 0.0
+# Pentatonic scale ratios for musical harmony
+var scale_ratios: Array[float] = [1.0, 1.125, 1.25, 1.5, 1.667, 2.0]
 
 func _ready():
-	_setup_drone()
-	_setup_rings()
+	_setup_ring_sounds()
 
-func _setup_drone():
-	drone_player = AudioStreamPlayer.new()
-	add_child(drone_player)
-	
-	var generator = AudioStreamGenerator.new()
-	generator.mix_rate = sample_rate
-	generator.buffer_length = 0.1
-	drone_player.stream = generator
-	drone_player.volume_db = -10.0
-	drone_player.play()
-
-func _setup_rings():
+func _setup_ring_sounds():
+	"""Create subtle pitched tones for each wave ring"""
 	for i in range(ring_count):
 		var player = AudioStreamPlayer3D.new()
+		player.name = "RingSound_%d" % i
 		add_child(player)
-		player.unit_size = 30.0
-		player.max_db = 0.0 # Stronger presence for the "vocal" units
+		
+		# 3D audio settings - subtle presence
+		player.unit_size = 8.0
+		player.max_db = -6.0
+		player.volume_db = master_volume_db - (i * 3)  # Fade with ring index
+		player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
 		
 		var generator = AudioStreamGenerator.new()
 		generator.mix_rate = sample_rate
@@ -54,86 +39,80 @@ func _setup_rings():
 		player.stream = generator
 		
 		ring_players.append(player)
+		phases.append(0.0)
 		player.play()
 		ring_playbacks.append(player.get_stream_playback())
 
 func update_parameters(frequency: float, amplitude: float, current_time: float, ring_data: Array):
-	time = current_time
-	
-	# 1. Update Drone (Submerged Floor)
-	drone_player.volume_db = lerp(-30.0, -12.0, clamp(amplitude * 1.2, 0.0, 1.0))
-	
-	# 2. Update Vocalization Units (The Whale Songs)
-	for i in range(ring_players.size()):
-		if i < ring_data.size():
-			var ring_node = ring_data[i]
-			ring_players[i].global_position = ring_node.global_position
-			
-			# Humpback-specific synthesis logic
-			_generate_humpback_unit(i, frequency, amplitude, ring_node.radius)
+	"""Called by WavePropagation3D to sync sound with visuals"""
+	for i in range(min(ring_players.size(), ring_data.size())):
+		var ring_node = ring_data[i]
+		var player = ring_players[i]
+		
+		# Follow ring position
+		player.global_position = ring_node.global_position + Vector3(0, 0.5, 0)
+		
+		# Generate sound based on ring state
+		_generate_ring_tone(i, frequency, amplitude, ring_node.radius)
 
 func _process(_delta):
-	_generate_ocean_rumble()
+	pass  # All generation happens in update_parameters
 
-func _generate_ocean_rumble():
-	var playback = drone_player.get_stream_playback()
-	if not playback: return
-	
-	var frames = playback.get_frames_available()
-	for i in range(frames):
-		# Deep, slow-moving Brownian rumble
-		var random_step = (randf() * 2.0 - 1.0) * 0.015
-		brown_noise_state = clamp(brown_noise_state * 0.999 + random_step, -0.7, 0.7)
-		
-		# Fundamental oceanic resonance
-		var fundamental = sin(time * TAU * base_pitch) * 0.4
-		
-		# Combine and push
-		var sample = (brown_noise_state + fundamental) * 0.4
-		playback.push_frame(Vector2(sample, sample))
-
-func _generate_humpback_unit(index: int, freq: float, amp: float, radius: float):
+func _generate_ring_tone(index: int, freq: float, amp: float, radius: float):
+	"""Generate subtle crystalline tone for a wave ring"""
 	var playback = ring_playbacks[index]
-	if not playback: return
+	if not playback:
+		return
 	
 	var frames = playback.get_frames_available()
-	if frames <= 0: return
+	if frames <= 0:
+		return
 	
-	# HUMPBACK SYNTHESIS LOGIC
-	# -------------------------
-	# Complex sweeps: Glissando is often non-linear
-	var song_phase = time * freq * 0.4 + (index * 0.8)
-	var sweep = sin(song_phase) * cos(song_phase * 0.5) # More organic glissando shape
+	# Ring fades as it expands
+	var fade = clamp(1.0 - (radius / 8.0), 0.0, 1.0)
+	if fade < 0.01:
+		# Silent when fully expanded
+		for j in range(frames):
+			playback.push_frame(Vector2.ZERO)
+		return
 	
-	# Base target pitch (Mid-low moans to high whoops)
-	var target_pitch = 120.0 + (sweep * 180.0) 
+	# Musical pitch based on ring index (pentatonic harmony)
+	var scale_index = index % scale_ratios.size()
+	var pitch = base_pitch * scale_ratios[scale_index]
 	
-	# Add organic jitter (vocal flutter)
-	var jitter = sin(time * 25.0) * (2.0 + (amp * 10.0))
-	target_pitch += jitter
+	# Subtle modulation based on wave frequency
+	var pitch_mod = 1.0 + sin(freq * 2.0) * 0.02
+	pitch *= pitch_mod
 	
-	# Distance/Radius attenuation (Unit fades as it spreads)
-	var intensity = clamp(1.0 - (radius / 10.0), 0.0, 1.0) * amp
-	
-	# "Units" are often rhythmic bursts. Apply a slow envelope based on intensity.
-	var envelope = clamp(intensity * 1.5, 0.0, 1.0)
+	# Envelope - smooth attack/release
+	var envelope = fade * fade * amp * 0.3  # Quadratic fade for smooth tail
 	
 	for j in range(frames):
-		# Cumulative phase
-		whale_phases[index] += target_pitch / sample_rate
-		if whale_phases[index] > 1.0: whale_phases[index] -= 1.0
+		# Phase accumulation
+		phases[index] += pitch / sample_rate
+		if phases[index] > 1.0:
+			phases[index] -= 1.0
 		
-		# HARMONIC RICHNESS
-		# Humpbacks sound moany because of their harmonic content.
-		# f, 2f (dominant), 3f (breathier)
-		var f_phase = whale_phases[index] * TAU
-		var s1 = sin(f_phase) * 0.6
-		var s2 = sin(f_phase * 2.0) * 0.3 # Stronger octave
-		var s3 = sin(f_phase * 3.0) * 0.1 # Some edge
+		var phase = phases[index] * TAU
 		
-		# Grittiness/Texture - add a tiny bit of filtered noise during peaks
-		var noise_grit = (randf() * 2.0 - 1.0) * 0.02 * envelope
+		# Crystalline synthesis: sine with subtle harmonics
+		var fundamental = sin(phase) * 0.7
+		var harmonic2 = sin(phase * 2.0) * 0.15  # Octave
+		var harmonic3 = sin(phase * 3.0) * 0.08  # Fifth above octave
+		var harmonic5 = sin(phase * 5.0) * 0.05  # Two octaves + third
 		
-		var sample = (s1 + s2 + s3 + noise_grit) * envelope * 0.4
+		# Combine harmonics for bell-like quality
+		var sample = (fundamental + harmonic2 + harmonic3 + harmonic5) * envelope
 		
-		playback.push_frame(Vector2(sample, sample))
+		# Gentle stereo spread based on ring index
+		var pan = (float(index) / float(ring_count) - 0.5) * 0.3
+		var left = sample * (1.0 - pan)
+		var right = sample * (1.0 + pan)
+		
+		playback.push_frame(Vector2(left, right))
+
+func set_master_volume(volume_db: float):
+	"""Adjust overall volume"""
+	master_volume_db = volume_db
+	for i in range(ring_players.size()):
+		ring_players[i].volume_db = master_volume_db - (i * 3)

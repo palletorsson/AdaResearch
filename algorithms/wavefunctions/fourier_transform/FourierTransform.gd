@@ -77,32 +77,51 @@ func _generate_audio_samples():
 	var frames_available = playback.get_frames_available()
 	if frames_available < 1:
 		return
-		
-	# Base frequency for audio (visual frequency is too low for hearing)
-	# Visual 1.0 Hz -> Audio 220.0 Hz
-	var audio_base_freq = 220.0 * fundamental_freq
-		
+	
+	# Subtle crystalline tones - pentatonic frequencies
+	var base_frequencies = [220.0, 261.6, 293.7, 349.2, 392.0]  # A3, C4, D4, F4, G4
+	
+	# Volume envelope based on transform progress (subtle background)
+	var master_volume = 0.08 * transform_progress  # Very quiet, increases with progress
+	
 	for i in range(frames_available):
 		var sample = 0.0
+		var t = audio_phase / SAMPLE_RATE
 		
-		# Additive synthesis matching the visualization
-		for j in range(harmonics.size()):
-			var h_freq = audio_base_freq * (j + 1)
-			var h_amp = harmonics[j]
+		# Generate each harmonic tone based on visualization state
+		for j in range(min(harmonics.size(), base_frequencies.size())):
+			var freq = base_frequencies[j] * (1.0 + sin(time * 0.1 + j) * 0.02)  # Subtle pitch drift
+			var harmonic_amp = harmonics[j] * 0.3
 			
-			sample += sin(audio_phase * 2.0 * PI * h_freq / SAMPLE_RATE) * h_amp
+			# Smooth sine with subtle harmonic
+			var fundamental = sin(2.0 * PI * freq * t) * 0.7
+			var overtone = sin(2.0 * PI * freq * 2.0 * t) * 0.2
+			var shimmer = sin(2.0 * PI * freq * 3.0 * t) * 0.1
 			
-		# Add noise
-		sample += (randf() * 2.0 - 1.0) * noise_level
+			# Activity envelope from frequency spectrum
+			var activity = 0.5 + 0.5 * sin(time * (j + 1) * 0.3)
+			
+			sample += (fundamental + overtone + shimmer) * harmonic_amp * activity
 		
-		# Normalize roughly
-		sample *= 0.3
+		# Gentle amplitude modulation (tremolo)
+		var tremolo = 0.85 + 0.15 * sin(time * 2.0)
+		sample *= tremolo
+		
+		# Very soft noise floor
+		sample += (randf() * 2.0 - 1.0) * 0.01
+		
+		# Apply master volume
+		sample *= master_volume
+		
+		# Soft clipping
+		sample = clamp(sample, -0.5, 0.5)
 		
 		playback.push_frame(Vector2(sample, sample))
 		
 		audio_phase += 1.0
-		if audio_phase > SAMPLE_RATE:
-			audio_phase -= SAMPLE_RATE
+		if audio_phase > SAMPLE_RATE * 10.0:
+			audio_phase -= SAMPLE_RATE * 10.0
+
 
 func create_time_waveform():
 	# Create time domain waveform points
