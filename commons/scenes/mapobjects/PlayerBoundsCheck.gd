@@ -26,10 +26,21 @@ enum CheckType {
 @export var reset_velocity: bool = true
 @export var reset_cooldown: float = 2.0  # Seconds before allowing another reset
 
+@export_group("Safe Position Tracking")
+## How often to save the player's safe position (seconds)
+@export var safe_position_interval: float = 3.0
+## Minimum height above ground to consider position safe
+@export var min_safe_height: float = -5.0
+
 var player_node: Node3D
 var _timer: float = 0.0
 var is_resetting: bool = false
 var _reset_cooldown_timer: float = 0.0
+
+# Safe position tracking - saves last known good position
+var _last_safe_position: Vector3 = Vector3.ZERO
+var _safe_position_timer: float = 0.0
+var _has_safe_position: bool = false
 
 # Continuous stuck detection
 var _post_reset_monitor_time: float = 0.0
@@ -56,6 +67,12 @@ func _physics_process(delta):
 	if _reset_cooldown_timer > 0:
 		_reset_cooldown_timer -= delta
 		return
+	
+	# Track safe position periodically
+	_safe_position_timer += delta
+	if _safe_position_timer >= safe_position_interval:
+		_safe_position_timer = 0.0
+		_try_save_safe_position()
 
 	# Timer check
 	if check_interval > 0:
@@ -94,18 +111,28 @@ func _reset_player():
 	if is_resetting:
 		return
 
-	print("PlayerBoundsCheck: ⚠️ Player out of bounds! Initiating reset...")
+	print("PlayerBoundsCheck: ⚠️ Player out of bounds! Teleporting to last safe position...")
 	is_resetting = true
 	_reset_cooldown_timer = reset_cooldown  # Start cooldown
 
-	# Find a target position - use SpawnPoint but ensure Y is high enough
+	# Determine target position - prefer last safe position, then spawn point, then default
 	var target_pos = reset_position
-	var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
-	if spawn_node:
-		target_pos = spawn_node.global_position
-		# Ensure minimum height to avoid spawning underground
-		if target_pos.y < 1.5:
-			target_pos.y = 1.5
+	
+	if _has_safe_position:
+		target_pos = _last_safe_position
+		print("PlayerBoundsCheck: Using last safe position: %s" % target_pos)
+	else:
+		# Fall back to spawn point
+		var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
+		if spawn_node:
+			target_pos = spawn_node.global_position
+			print("PlayerBoundsCheck: Using SpawnPoint: %s" % target_pos)
+		else:
+			print("PlayerBoundsCheck: Using default reset position: %s" % target_pos)
+	
+	# Ensure minimum height
+	if target_pos.y < 1.0:
+		target_pos.y = 1.0
 
 	# Try to find Fly Mode controller
 	var flight_controller = _find_flight_controller(player_node)
@@ -305,6 +332,57 @@ func _find_player_node():
 	if player_node:
 		print("PlayerBoundsCheck: Tracking player node '", player_node.name, "'")
 
+func _try_save_safe_position():
+	"""Try to save the player's current position as a safe fallback position"""
+	if not is_instance_valid(player_node):
+		_find_player_node()
+		if not player_node:
+			return
+	
+	var root = _find_player_root(player_node)
+	if not root:
+		return
+	
+	var current_pos = root.global_position
+	
+	# Check if current position is valid (within bounds and above minimum height)
+	var is_valid = _is_position_in_bounds(current_pos) and current_pos.y > min_safe_height
+	
+	# Also verify there's ground below (not falling through void)
+	if is_valid:
+		is_valid = _has_ground_below(current_pos)
+	
+	if is_valid:
+		_last_safe_position = current_pos
+		_has_safe_position = true
+		# Uncomment for debug: print("PlayerBoundsCheck: 📍 Saved safe position: %s" % current_pos)
+
+func _is_position_in_bounds(pos: Vector3) -> bool:
+	"""Check if a position is within the defined bounds"""
+	match check_type:
+		CheckType.BOX:
+			return abs(pos.x) <= box_bounds.x and abs(pos.y) <= box_bounds.y and abs(pos.z) <= box_bounds.z
+		CheckType.MANHATTAN:
+			return (abs(pos.x) + abs(pos.y) + abs(pos.z)) <= scalar_limit
+		CheckType.EUCLIDEAN_SQUARED:
+			return pos.length_squared() <= (scalar_limit * scalar_limit)
+	return true
+
+func _has_ground_below(pos: Vector3) -> bool:
+	"""Check if there's solid ground below the position"""
+	var space_state = get_world_3d().direct_space_state
+	if not space_state:
+		return true  # Assume valid if we can't check
+	
+	var ray_query = PhysicsRayQueryParameters3D.create(
+		pos + Vector3(0, 0.5, 0),
+		pos + Vector3(0, -10.0, 0)
+	)
+	ray_query.collision_mask = 1
+	
+	var result = space_state.intersect_ray(ray_query)
+	return result != null and not result.is_empty()
+
 func _start_post_reset_monitoring():
 	"""Start monitoring player position after reset to detect if still stuck"""
 	if not is_instance_valid(player_node):
@@ -384,3 +462,199 @@ func _emergency_unstuck():
 	print("PlayerBoundsCheck: 🚨 Emergency fallback - moved player up significantly")
 	_post_reset_last_position = root.global_position
 	_post_reset_monitor_time = POST_RESET_MONITOR_DURATION
+
+func _ensure_safe_spawn_position(player_root: Node3D):
+	"""Ensure player is on safe ground, not inside geometry or outside grid"""
+	if not player_root:
+		return
+	
+	var current_pos = player_root.global_position
+	print("PlayerBoundsCheck: Checking spawn safety at %s" % current_pos)
+	
+	# Get physics space state
+	var space_state = get_world_3d().direct_space_state
+	if not space_state:
+		return
+	
+	# Check if player is inside geometry at multiple heights
+	var is_inside_geometry = _check_if_inside_geometry(space_state, current_pos, player_root)
+	
+	# Check if player is above ground (has solid ground below)
+	var ground_check = _find_ground_below(space_state, current_pos, player_root)
+	
+	if is_inside_geometry or not ground_check.has_ground:
+		print("PlayerBoundsCheck: ⚠️ Player in unsafe position - inside_geo=%s, has_ground=%s" % [is_inside_geometry, ground_check.has_ground])
+		_move_to_safe_ground(player_root, space_state)
+	else:
+		# Player is safe but might be floating - snap to ground if close
+		if ground_check.has_ground and ground_check.distance < 3.0:
+			var safe_y = ground_check.position.y + 0.2  # Slightly above ground
+			if abs(current_pos.y - safe_y) > 0.5:
+				player_root.global_position.y = safe_y
+				print("PlayerBoundsCheck: Snapped player to ground at y=%.2f" % safe_y)
+		print("PlayerBoundsCheck: ✅ Player in safe position")
+
+func _check_if_inside_geometry(space_state: PhysicsDirectSpaceState3D, pos: Vector3, player_root: Node3D) -> bool:
+	"""Check if player position is inside solid geometry"""
+	var check_heights = [0.1, 0.8, 1.5]  # feet, torso, head
+	
+	var query = PhysicsShapeQueryParameters3D.new()
+	var sphere = SphereShape3D.new()
+	sphere.radius = 0.25
+	query.shape = sphere
+	query.collision_mask = 1  # World geometry layer
+	query.exclude = _get_player_bodies(player_root)
+	
+	for height in check_heights:
+		query.transform = Transform3D(Basis.IDENTITY, pos + Vector3(0, height, 0))
+		var results = space_state.intersect_shape(query, 1)
+		if results.size() > 0:
+			return true
+	
+	return false
+
+func _find_ground_below(space_state: PhysicsDirectSpaceState3D, pos: Vector3, player_root: Node3D) -> Dictionary:
+	"""Find ground below player position"""
+	var ray_query = PhysicsRayQueryParameters3D.create(
+		pos + Vector3(0, 0.5, 0),  # Start slightly above feet
+		pos + Vector3(0, -50.0, 0)  # Check far below
+	)
+	ray_query.collision_mask = 1
+	ray_query.exclude = _get_player_bodies(player_root)
+	
+	var result = space_state.intersect_ray(ray_query)
+	
+	if result:
+		return {
+			"has_ground": true,
+			"position": result.position,
+			"distance": pos.y - result.position.y
+		}
+	
+	return {"has_ground": false, "position": Vector3.ZERO, "distance": INF}
+
+func _move_to_safe_ground(player_root: Node3D, space_state: PhysicsDirectSpaceState3D):
+	"""Move player to a safe position on solid ground, avoiding enclosing objects"""
+	print("PlayerBoundsCheck: 🔄 Finding safe ground for player...")
+	
+	# Get grid system for spawn data and bounds
+	var grid_system = _find_grid_system()
+	var grid_bounds = Vector3(10, 10, 10)  # Default
+	var spawn_from_json = Vector3(1.5, 1.2, 1.5)  # Default safe position on grid
+	
+	if grid_system:
+		if "structure_component" in grid_system and grid_system.structure_component:
+			var dims = grid_system.structure_component.get_grid_dimensions()
+			grid_bounds = Vector3(dims.x, dims.y, dims.z)
+		
+		# Try to get spawn position from data component
+		if "data_component" in grid_system and grid_system.data_component:
+			var spawn_points = grid_system.data_component.get_spawn_points()
+			if spawn_points and spawn_points.has("default"):
+				var default_spawn = spawn_points["default"]
+				if default_spawn.has("position"):
+					var pos = default_spawn["position"]
+					spawn_from_json = Vector3(pos[0], pos[1], pos[2])
+					print("PlayerBoundsCheck: Using spawn from JSON: %s" % spawn_from_json)
+	
+	# Also check for SpawnPoint node
+	var spawn_point = get_tree().current_scene.find_child("SpawnPoint", true, false)
+	var base_pos = spawn_from_json
+	if spawn_point:
+		base_pos = spawn_point.global_position
+	
+	# Build list of test positions - prioritize positions on the grid floor
+	# Avoid the center/far areas where large objects like DarkSphere might be
+	var test_positions = [
+		spawn_from_json,  # JSON spawn point (should be safe)
+		base_pos,  # SpawnPoint node position
+		Vector3(1, 2, 1),  # Near origin corner (usually safe)
+		Vector3(2, 2, 1),
+		Vector3(1, 2, 2),
+		Vector3(2, 2, 2),
+		base_pos + Vector3(0, 2, 0),  # Elevated base
+	]
+	
+	# Add more positions along the edges of the grid (less likely to have enclosing objects)
+	for x in range(0, int(grid_bounds.x), 2):
+		test_positions.append(Vector3(x, 2, 0))
+		test_positions.append(Vector3(x, 2, 1))
+	
+	for test_pos in test_positions:
+		# Check if this position is clear of collision geometry
+		if not _check_if_inside_geometry(space_state, test_pos, player_root):
+			# Also check if we're inside any large mesh (like DarkSphere) by raycast test
+			if not _is_inside_enclosing_mesh(test_pos):
+				# Find ground below this position
+				var ground = _find_ground_below(space_state, test_pos, player_root)
+				if ground.has_ground and ground.distance < 10.0:  # Must have ground within 10m
+					var safe_pos = Vector3(test_pos.x, ground.position.y + 0.2, test_pos.z)
+					player_root.global_position = safe_pos
+					_reset_velocity(player_root)
+					print("PlayerBoundsCheck: ✅ Moved player to safe ground at %s" % safe_pos)
+					return
+	
+	# Last resort: teleport to JSON spawn position elevated
+	var final_pos = spawn_from_json + Vector3(0, 2, 0)
+	player_root.global_position = final_pos
+	_reset_velocity(player_root)
+	print("PlayerBoundsCheck: ⚠️ Used elevated spawn fallback at %s" % final_pos)
+
+func _is_inside_enclosing_mesh(pos: Vector3) -> bool:
+	"""Check if position is inside a large enclosing mesh like DarkSphere by raycasting outward"""
+	# If we raycast in multiple directions and ALL hit something close, we're probably enclosed
+	var space_state = get_world_3d().direct_space_state
+	if not space_state:
+		return false
+	
+	var directions = [
+		Vector3(1, 0, 0), Vector3(-1, 0, 0),
+		Vector3(0, 1, 0), Vector3(0, -1, 0),
+		Vector3(0, 0, 1), Vector3(0, 0, -1)
+	]
+	
+	var hits_count = 0
+	var check_distance = 5.0  # If all directions hit within 5m, we're probably enclosed
+	
+	for dir in directions:
+		var ray_query = PhysicsRayQueryParameters3D.create(pos, pos + dir * check_distance)
+		ray_query.collision_mask = 1
+		var result = space_state.intersect_ray(ray_query)
+		if result:
+			hits_count += 1
+	
+	# If most directions hit something close, we're likely inside an enclosing mesh
+	# But we need to be careful - this could also be a small room
+	# Only consider it "enclosed" if we hit in ALL directions
+	var is_enclosed = (hits_count >= 5)
+	if is_enclosed:
+		print("PlayerBoundsCheck: ⚠️ Position %s appears to be inside enclosing mesh (%d/6 directions blocked)" % [pos, hits_count])
+	
+	return is_enclosed
+
+func _find_grid_system() -> Node:
+	"""Find the GridSystem in the scene tree"""
+	# Try common names
+	var grid_system = get_tree().current_scene.find_child("GridSystem", true, false)
+	if grid_system:
+		return grid_system
+	
+	# Try to find by class/group
+	var nodes_in_group = get_tree().get_nodes_in_group("grid_system")
+	if nodes_in_group.size() > 0:
+		return nodes_in_group[0]
+	
+	# Try to find any node with reload_map property
+	return _find_node_with_property(get_tree().current_scene, "reload_map")
+
+func _find_node_with_property(node: Node, property_name: String) -> Node:
+	"""Recursively find a node that has a specific property"""
+	if property_name in node:
+		return node
+	
+	for child in node.get_children():
+		var result = _find_node_with_property(child, property_name)
+		if result:
+			return result
+	
+	return null

@@ -259,11 +259,11 @@ func _check_trigger_input() -> void:
 	# Debug: Print every 60 frames (once per second at 60fps) to show we're polling
 	if debug and Engine.get_physics_frames() % 60 == 0:
 		print("[GravityGun] Polling - Controller: ", controller.name,
-		      " Active: ", controller.get_is_active(),
-		      " Button: '", trigger_button_action, "'",
-		      " Pressed: ", trigger_pressed,
-		      " LastState: ", last_trigger_state,
-		      " Captured: ", captured_objects.size())
+			  " Active: ", controller.get_is_active(),
+			  " Button: '", trigger_button_action, "'",
+			  " Pressed: ", trigger_pressed,
+			  " LastState: ", last_trigger_state,
+			  " Captured: ", captured_objects.size())
 
 	# Detect rising edge (button just pressed)
 	if trigger_pressed and not last_trigger_state:

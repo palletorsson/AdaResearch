@@ -168,8 +168,8 @@ func create_triangle_mesh(triangle: Dictionary):
 		# Classic fractal colors
 		material.albedo_color = Color(0.2, 0.6, 0.9)
 
-	material.metallic = 0.3
-	material.roughness = 0.6
+	material.metallic = 0.0
+	material.roughness = 1.0
 
 	# Make material double-sided for walking through
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -184,6 +184,10 @@ func create_triangle_mesh(triangle: Dictionary):
 
 	# Position at y_offset
 	mesh_instance.position.y = triangle.y_offset
+
+	# Hide first iteration (depth 0)
+	if triangle.depth == 0:
+		mesh_instance.visible = false
 
 	add_child(mesh_instance)
 

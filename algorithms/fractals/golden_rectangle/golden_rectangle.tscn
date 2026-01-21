@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgoldenrect001"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/golden_rectangle/golden_rectangle.gd" id="1_golden"]
+
+[node name="GoldenRectangle" type="Node3D"]
+script = ExtResource("1_golden")
+initial_width = 5.0
+max_subdivisions = 10
+extrusion_height = 0.1
+animate = true
+subdivision_delay = 0.6
+spiral_draw_speed = 2.0
+use_fibonacci_colors = true
+base_hue = 0.0
+hue_shift_per_level = 0.08
+show_spiral = true
+show_numbers = true
+spiral_color = Color(1, 0.84, 0, 1)
+outline_color = Color(0.1, 0.1, 0.1, 1)

@@ -40,6 +40,8 @@ var generation_in_progress: bool = false
 signal map_loaded(map_name: String, format: String)
 signal map_generation_complete()
 signal interactable_activated(object_id, position, data)
+signal grid_animation_started()
+signal grid_animation_complete()
 
 func _ready():
 	print("GridSystem: Initializing component-based grid system...")
@@ -131,6 +133,8 @@ func _connect_component_signals():
 	
 	# Structure component signals
 	structure_component.structure_generation_complete.connect(_on_structure_complete)
+	structure_component.animation_started.connect(_on_grid_animation_started)
+	structure_component.animation_complete.connect(_on_grid_animation_complete)
 	
 	# Utilities component signals
 	utilities_component.utility_generation_complete.connect(_on_utilities_complete)
@@ -212,6 +216,14 @@ func _find_ada_scene_manager():
 func _on_data_loaded(loaded_map_name: String, format: String):
 	print("GridSystem: Data loaded successfully - %s (%s)" % [loaded_map_name, format])
 	
+	# Try to get base_cube if invalid (structure_component can use cached data if unavailable)
+	if not is_instance_valid(base_cube):
+		base_cube = get_node_or_null("CubeScene")
+		if base_cube:
+			print("GridSystem: Re-acquired base_cube reference in _on_data_loaded")
+		else:
+			print("GridSystem: base_cube unavailable, structure_component will use cached data")
+	
 	# Get settings from data and apply them
 	var settings = data_component.get_settings()
 	cube_size = settings.get("cube_size", cube_size)
@@ -222,6 +234,10 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 		"cube_size": cube_size,
 		"gutter": gutter
 	}
+	
+	# Pass animation settings if present
+	if settings.has("grid_animation"):
+		component_settings["grid_animation"] = settings["grid_animation"]
 	
 	structure_component.initialize(self, base_cube, component_settings)
 	utilities_component.initialize(self, structure_component, component_settings)
@@ -267,7 +283,9 @@ func _generate_grid():
 	generation_in_progress = true
 	print("GridSystem: Starting component-based grid generation...")
 	
-	base_cube.visible = false
+	# Hide base_cube if it exists (it's just a template, not needed visually)
+	if is_instance_valid(base_cube):
+		base_cube.visible = false
 	
 	# Get grid dimensions from data
 	var dimensions = data_component.get_grid_dimensions()
@@ -307,6 +325,16 @@ func _on_structure_complete(cube_count: int):
 	var utility_data = data_component.get_utility_data()
 	var utility_definitions = data_component.get_utility_definitions()
 	utilities_component.generate_utilities(utility_data, utility_definitions)
+
+# Handle grid animation started
+func _on_grid_animation_started():
+	print("GridSystem: 🎬 Grid animation started")
+	grid_animation_started.emit()
+
+# Handle grid animation complete
+func _on_grid_animation_complete():
+	print("GridSystem: 🎬 Grid animation complete")
+	grid_animation_complete.emit()
 
 # Handle utilities generation completion
 func _on_utilities_complete(utility_count: int):
@@ -510,8 +538,17 @@ func _reload_current_map():
 	# Clear all components
 	_clear_all_components()
 	
-	# Wait one frame
+	# Wait one frame for queue_free() to complete
 	await get_tree().process_frame
+	
+	# Try to re-validate base_cube reference (it might have become invalid)
+	# But don't fail - structure_component caches mesh data from first init
+	if not is_instance_valid(base_cube):
+		base_cube = get_node_or_null("CubeScene")
+		if base_cube:
+			print("GridSystem: Re-acquired base_cube reference")
+		else:
+			print("GridSystem: base_cube unavailable, will use cached mesh data")
 	
 	# Reload map data
 	_load_map_data()
@@ -651,7 +688,7 @@ func _show_error_state(failed_map_name: String, error: String):
 	print("GridSystem: Error: %s" % error)
 	
 	# Create a simple error display cube
-	if base_cube:
+	if is_instance_valid(base_cube):
 		var error_cube = base_cube.duplicate()
 		error_cube.position = Vector3.ZERO
 		error_cube.visible = true

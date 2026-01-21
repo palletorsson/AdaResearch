@@ -150,5 +150,51 @@ The recursion formula contains unbounded potential:
 
 The computer imposes practical limits (memory, time, floating-point precision), but the mathematical object has no such bounds.
 
+## Selective Recursion: Fractals as Search
+
+Pure fractals like the Menger sponge subdivide uniformly. But **functional forms** emerge from selective subdivision:
+
+```gdscript
+# Recursive chair: subdivide then prune
+func make_chair_from_cube():
+    # Step 1: Subdivide 3x3x3 (exploration)
+    var parts = subdivide_3x3x3(cube)
+
+    # Step 2: Keep only useful regions (exploitation)
+    for part in parts:
+        var keep = false
+        if part.layer == "bottom" and part.is_corner():
+            keep = true  # Legs
+        elif part.layer == "middle":
+            keep = true  # Seat
+        elif part.layer == "top" and part.is_back_row():
+            keep = true  # Backrest
+
+        if not keep:
+            part.queue_free()  # Prune non-functional space
+
+    # Step 3: Reshape remaining parts (refinement)
+    flatten_seat()
+    elongate_legs()
+    extend_back()
+```
+
+This is **search with constraints**—using fractal subdivision to explore the space of possible forms while pruning regions that don't fit functional criteria.
+
+## QFEP Connection
+
+In the Queer Free Energy Principle (**QFE = F − λE(S) + φΔE(S,t)**):
+
+| QFEP Term | Fractal Interpretation |
+|-----------|----------------------|
+| **F** | The subdivision rule itself (deterministic, ordered) |
+| **E(S)** | Entropy of resulting structures (complexity, variety) |
+| **λ** | Exploration/exploitation balance (uniform vs selective) |
+| **φΔE(S,t)** | Rate of complexity change per iteration |
+
+**Menger sponge**: λ = 1, uniform entropy generation, pure exploration
+**Recursive chair**: λ tuned, selective pruning, balanced search
+**Single cube**: λ = 0, no subdivision, pure exploitation of known form
+
 ## Key Takeaway
-Fractals demonstrate that **complexity need not be designed**. A simple rule, self-applied, generates infinite structure. This is the F term of QFEP generating unbounded E(S) through iteration (φΔE(S,t)).
+Fractals demonstrate that **complexity need not be designed**—a simple rule, self-applied, generates infinite structure. But more than that: **selective recursion is a search strategy** for finding useful forms in vast possibility spaces. The λ parameter determines how much we explore (subdivide everything) versus exploit (prune to known-good regions).

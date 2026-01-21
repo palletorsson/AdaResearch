@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://fn7tfomij4pb"]
+
+[ext_resource type="Script" uid="uid://qlmj201gngux" path="res://algorithms/fractals/cubesubdivision/recursive_table.gd" id="1_script"]
+
+[node name="RecursiveTable" type="Node3D"]
+script = ExtResource("1_script")
+step_delay = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 3, 2, 3.5)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 4, 0)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, -2, 3, 2)
+light_energy = 0.35

@@ -254,17 +254,34 @@ func generate_interactables(interactable_data):
 					var parsed = _parse_interactable_token(token)
 					var overrides: Dictionary = parsed.get("overrides", {})
 					var config_data: Dictionary = parsed.get("config_data", {})
-					
+
 					var y_pos = structure_component.find_highest_y_at(x, z)
 					if utilities_component and utilities_component.has_utility_at(x, y_pos, z):
 						y_pos += 1
-						
+
 					if _place_grid_agent(x, y_pos, z, token, total_size, overrides, config_data):
 						interactable_count += 1
 					else:
 						placement_errors.append("Failed to place grid agent '%s' at (%d,%d,%d)" % [token, x, y_pos, z])
 					continue
-				
+
+				# Check for Critical Info / Dialectic Panel syntax criticalinfo:name:rotation:scale
+				if token.begins_with("criticalinfo:"):
+					var parts = token.split(":")
+					var dialectic_name = parts[1] if parts.size() > 1 else ""
+					var rotation = float(parts[2]) if parts.size() > 2 else 0.0
+					var scale_factor = float(parts[3]) if parts.size() > 3 else 1.0
+
+					var y_pos = structure_component.find_highest_y_at(x, z)
+					var origin = Vector3(x * total_size, y_pos * total_size, z * total_size)
+
+					if _place_dialectic_panels(dialectic_name, origin, rotation, scale_factor):
+						interactable_count += 1
+						print("GridInteractablesComponent: ✅ Placed dialectic panels '%s' at (%d,%d,%d)" % [dialectic_name, x, y_pos, z])
+					else:
+						placement_errors.append("Failed to place dialectic panels '%s' at (%d,%d,%d)" % [dialectic_name, x, y_pos, z])
+					continue
+
 				# Normal artifact handling (parse token for regular artifacts)
 				var parsed = _parse_interactable_token(token)
 				var lookup_name: String = parsed.get("lookup_name", "")
@@ -395,6 +412,29 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	interactable_objects[Vector3i(x, y, z)] = agent
 	
 	print("  ✅ Placed grid agent '%s' (tier: %s) at (%d,%d,%d)" % [lookup_name, tier, x, y, z])
+	return true
+
+# Place dialectic panels using DialecticPanelGenerator
+func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: float, scale_factor: float) -> bool:
+	if dialectic_name.is_empty():
+		push_error("GridInteractablesComponent: Empty dialectic name provided")
+		return false
+
+	# Create the generator node
+	var generator = DialecticPanelGenerator.new()
+	generator.name = "DialecticPanels_%s" % dialectic_name
+
+	# Add to parent first so it's in the scene tree
+	parent_node.add_child(generator)
+
+	# Generate panels from the dialectic JSON
+	var success = generator.generate_from_dialectic(dialectic_name, origin, rotation, scale_factor)
+
+	if not success:
+		generator.queue_free()
+		return false
+
+	print("GridInteractablesComponent: ✅ Generated %d dialectic panels for '%s'" % [generator.get_panel_count(), dialectic_name])
 	return true
 
 # Place a single artifact using lookup_name

@@ -1,9 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctdrewn30to4w"]
 
-[ext_resource type="Script" uid="uid://crvl3m7d3j3yu" path="res://algorithms/fractals/example_8_1_recursion.gd" id="1"]
+[ext_resource type="Script" uid="uid://caqvcwfm7yhp7" path="res://algorithms/fractals/example_8_1_recursion_vr.gd" id="1"]
 
 [node name="Example_8_1_Recursion" type="Node3D"]
 script = ExtResource("1")
+max_depth = 6
+initial_radius = 0.4
+show_animation = false
+show_frame = true
+frame_thickness = 0.025
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 2)

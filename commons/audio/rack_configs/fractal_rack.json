@@ -1,0 +1,84 @@
+{
+	"name": "Fractal Sound Rack",
+	"description": "Self-similar audio patterns at multiple time scales",
+	"version": "1.0",
+	"bpm": 120,
+	"components": [
+		{
+			"type": "fractal_generator",
+			"name": "FractalOsc1",
+			"params": {
+				"base_frequency": 110.0,
+				"waveform": "saw",
+				"fractal_depth": 4,
+				"base_pattern": [1.0, 0.0, 0.5, 0.0, 0.75, 0.0, 0.25, 0.0],
+				"filter_cutoff": 0.6,
+				"filter_resonance": 0.3
+			}
+		},
+		{
+			"type": "fractal_generator",
+			"name": "FractalOsc2",
+			"params": {
+				"base_frequency": 220.0,
+				"waveform": "sine",
+				"fractal_depth": 3,
+				"base_pattern": [0.0, 0.5, 0.0, 0.75, 0.0, 0.25, 1.0, 0.0],
+				"filter_cutoff": 0.8,
+				"filter_resonance": 0.2
+			}
+		},
+		{
+			"type": "fractal_generator",
+			"name": "FractalBass",
+			"params": {
+				"base_frequency": 55.0,
+				"waveform": "square",
+				"fractal_depth": 2,
+				"base_pattern": [1.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0],
+				"filter_cutoff": 0.4,
+				"filter_resonance": 0.5
+			}
+		}
+	],
+	"effects": [
+		{
+			"type": "delay",
+			"params": {
+				"time": 0.375,
+				"feedback": 0.4,
+				"mix": 0.3
+			}
+		},
+		{
+			"type": "reverb",
+			"params": {
+				"room_size": 0.7,
+				"damping": 0.5,
+				"mix": 0.25
+			}
+		}
+	],
+	"presets": {
+		"minimal": {
+			"FractalOsc1": {"base_pattern": [1.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0]},
+			"FractalOsc2": {"base_pattern": [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0]}
+		},
+		"complex": {
+			"FractalOsc1": {"base_pattern": [1.0, 0.25, 0.5, 0.25, 0.75, 0.25, 0.5, 0.125]},
+			"FractalOsc2": {"base_pattern": [0.5, 0.125, 0.25, 0.5, 0.125, 0.75, 0.25, 0.5]}
+		},
+		"ambient": {
+			"FractalOsc1": {"fractal_depth": 5, "filter_cutoff": 0.3},
+			"FractalOsc2": {"fractal_depth": 5, "filter_cutoff": 0.25},
+			"FractalBass": {"fractal_depth": 3, "base_pattern": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
+		}
+	},
+	"scales": {
+		"minor_pentatonic": [0, 3, 5, 7, 10],
+		"major_pentatonic": [0, 2, 4, 7, 9],
+		"dorian": [0, 2, 3, 5, 7, 9, 10],
+		"phrygian": [0, 1, 3, 5, 7, 8, 10],
+		"whole_tone": [0, 2, 4, 6, 8, 10]
+	}
+}

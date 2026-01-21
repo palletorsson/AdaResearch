@@ -5,6 +5,7 @@
 
 [node name="CubeSubdivision" type="Node3D"]
 script = ExtResource("1_cube_subdivision")
+max_subdivisions = 12
 
 [node name="InitialCube" parent="." instance=ExtResource("2_initial_cube")]
 

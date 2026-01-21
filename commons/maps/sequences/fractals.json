@@ -14,49 +14,44 @@
 			"unlocks": ["proceduralgeneration", "lsystems"],
 
 			"difficulty": "intermediate",
-			"estimated_time": "25-35 minutes",
+			"estimated_time": "30-40 minutes",
 
 			"learning_objectives": [
 				"Self-similarity: the whole contains copies of itself",
 				"Fractal dimension: D = log(N)/log(S) — between integers",
 				"Recursion as emergence: simple rules, infinite complexity",
 				"Edge of chaos: Mandelbrot boundary, Julia variations",
-				"L-Systems: grammar creates form without blueprint",
-				"Stochastic fractals: randomness within recursive structure"
+				"Natural fractals: trees, coastlines, romanesco"
 			],
 
 			"content": [
-				"Fractals_1: Stochastic trees—random branching, natural form",
-				"Fractals_2: Deterministic trees—pure recursive structure",
-				"Fractals_3: Radial fractal—self-similarity in circular form",
-				"Fractals_4: Cantor Set—infinitely many points, zero length",
-				"Fractals_5: Koch Curve—infinite perimeter, finite area",
-				"Fractals_6: Sierpinski Triangle—D ≈ 1.585, between line and plane",
-				"Fractals_7: Sierpinski Carpet—2D Cantor principle",
-				"Fractals_8: Menger Sponge—D ≈ 2.727, walkable fractal",
-				"Fractals_9: Fibonacci Spiral—golden ratio in recursive form",
-				"Fractals_10: Julia Sets—parameter space exploration",
-				"Fractals_11: Dragon Curve—folding creates fractal",
-				"Fractals_12: Composite fractals—multiple algorithms together",
-				"Fractals_13: Mandelbrot Set—the master fractal, infinite boundary",
-				"Fractals_14: QFEP Synthesis—all principles integrated"
+				"Fractals_1: Recursion Introduction — the function that calls itself",
+				"Fractals_2: Recursive Trees — branching structures, deterministic vs stochastic",
+				"Fractals_3: Cantor Set — infinite subdivision, existence without extension",
+				"Fractals_4: Koch Curve — infinite perimeter enclosing finite area",
+				"Fractals_5: Sierpinski — triangles and pyramids, D ≈ 1.585",
+				"Fractals_6: Menger Sponge — walkable 3D fractal, D ≈ 2.727",
+				"Fractals_7: Golden Spiral — Fibonacci, 137.5°, romanesco",
+				"Fractals_8: Julia Set — parameter space, connected vs disconnected",
+				"Fractals_9: Mandelbrot Set — the master fractal, infinite boundary",
+				"Fractals_10: Synthesis — fractals as edge of chaos, QFEP complete"
 			],
 
 			"maps": [
+
+
+				"Fractals_7",
 				"Fractals_1",
 				"Fractals_2",
 				"Fractals_3",
 				"Fractals_4",
+					"Fractals_7",	
+								"Fractals_8",
 				"Fractals_5",
+							"SpeculativeComputation_Rhizome_Network", 	
 				"Fractals_6",
-				"Fractals_7",
-				"Fractals_8",
-				"Fractals_9",
-				"Fractals_10",
-				"Fractals_11",
-				"Fractals_12",
-				"Fractals_13",
-				"Fractals_14"
+ 
+ 
 			],
 
 			"axiom_files": [
@@ -66,32 +61,27 @@
 			],
 
 			"algorithm_paths": {
-				"Fractals_1": "res://algorithms/fractals/stochastictree/",
-				"Fractals_4": "res://algorithms/fractals/cantorset/",
-				"Fractals_5": "res://algorithms/fractals/kochcurve/",
-				"Fractals_6": "res://algorithms/fractals/sierpinskitriangle/",
-				"Fractals_8": "res://algorithms/fractals/mengersponge/",
-				"Fractals_10": "res://algorithms/fractals/juliasets/",
-				"Fractals_13": "res://algorithms/fractals/mandelbrot/"
+				"Fractals_1": "res://algorithms/fractals/cubesubdivision/",
+				"Fractals_2": "res://algorithms/fractals/recursivetree/",
+				"Fractals_3": "res://algorithms/fractals/cantorset/",
+				"Fractals_4": "res://algorithms/fractals/koch_curve/",
+				"Fractals_5": "res://algorithms/fractals/sierpinskitriangle/",
+				"Fractals_6": "res://algorithms/fractals/mengersponge/",
+				"Fractals_7": "res://algorithms/fractals/fibonacci_sequences/",
+				"Fractals_8": "res://algorithms/fractals/julia_set/",
+				"Fractals_9": "res://algorithms/fractals/mandelbrot_set/"
 			},
 
 			"audio": {
 				"ambient_preset": "recursive_depths",
-				"interactive_sounds": {
-					"teleport": "AudioSynthesizer.FRACTAL_ZOOM"
-				},
+				"interactive_sounds": { "teleport": "AudioSynthesizer.FRACTAL_ZOOM" },
 				"volume": -10.0
 			},
 
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_fractals",
 			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": [
-				"fractal_explorer_badge",
-				"dimensional_rebel_badge",
-				"self_similarity_badge",
-				"mandelbrot_master_badge"
-			]
+			"completion_rewards": ["fractal_explorer_badge", "dimensional_rebel_badge", "self_similarity_badge", "mandelbrot_master_badge"]
 		}
 	}
 }

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6mirdcyoc42w"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/cubesubdivision/cube_staircase.gd" id="1_staircase"]
+
+[node name="CubeStaircase" type="Node3D"]
+script = ExtResource("1_staircase")
+stair_size = 2.0
+step_count = 6
+show_construction = true
+step_delay = 0.3

@@ -223,4 +223,87 @@ The **Mandelbrot set** (Benoît Mandelbrot, 1980) is defined by iterating a simp
 **z_{n+1} = z_n² + c**
 - Start with z_0 = 0
 - Iterate equation with complex number c
-- If |z| stays bounded (doesn
+- If |z| stays bounded (doesn't escape to infinity), c is **in** the Mandelbrot set
+- If |z| escapes, c is **outside** (colored by escape speed)
+
+**The boundary is infinitely complex** - zoom in anywhere on the edge and find more detail, forever.
+
+---
+
+## Fractals as Search Strategy: QFEP and Entropy Management
+
+**The deeper insight:** Fractals are not just pretty patterns - they are **search strategies** for navigating high-dimensional spaces efficiently.
+
+**The Problem:** Design spaces are vast. Searching uniformly across all possibilities is computationally wasteful - most regions contain nothing useful.
+
+**The Fractal Solution:**
+1. **Start coarse** (high entropy, broad exploration)
+2. **Identify promising regions** (where useful structures exist)
+3. **Subdivide only those regions** (concentrate free energy)
+4. **Repeat at finer scales**
+
+This is **selective recursion** - unlike a Menger sponge that subdivides everything uniformly, functional forms like chairs and tables emerge from **choosing which subspaces to explore**.
+
+### Connection to the Queer Free Energy Principle (QFEP)
+
+**QFE = F − λE(S) + φΔE(S,t)**
+
+Fractal subdivision embodies the **λ parameter** - the entropy drive modulator:
+
+| λ Value | Search Behavior | Fractal Analogy |
+|---------|-----------------|-----------------|
+| **λ high** | Explore broadly, subdivide everything | Menger sponge (uniform recursion) |
+| **λ low** | Exploit known good regions only | Chair construction (selective pruning) |
+| **λ tuned** | Balance exploration and exploitation | Adaptive subdivision based on fitness |
+
+**The Menger sponge** is pure λ=1: equal subdivision everywhere, maximum entropy exploration.
+
+**The recursive chair** is tuned λ: subdivide the cube, but only keep corners (legs), top (seat), back row (backrest). This is **search with constraints** - exploring the space of possible forms while pruning regions that don't fit "chair-like" criteria.
+
+### Algorithms Enable Capabilities
+
+This reveals why teaching algorithms matters: **each algorithm is a new search strategy**, a new way of navigating possibility space.
+
+| Algorithm | Search Strategy | Capability Gained |
+|-----------|-----------------|-------------------|
+| **Recursion** | Divide into self-similar subproblems | See wholes as nested parts |
+| **Fourier** | Decompose into frequency components | See signals as sum of waves |
+| **Swarm** | Distribute search across many agents | See collective behavior as local rules |
+| **Noise** | Sample with controlled randomness | See texture as coherent chaos |
+
+A designer who knows subdivision can **imagine forms** a non-algorithmic designer literally cannot conceive. The algorithm doesn't just solve problems - it **expands what problems you can see**.
+
+### Practical Implications
+
+**For creative work:**
+- **Scheduled chaos**: Periodically increase λ (exploration phases) to escape local optima
+- **Prototype variety**: Generate many rough forms before refining one
+- **Research sprints**: Dedicated time for divergent thinking before convergence
+
+**For system design:**
+- Living systems spend free energy searching **where it matters**
+- The fitness landscape provides gradients for selective subdivision
+- Fractals are how nature searches efficiently - lungs, blood vessels, neural branching
+
+**The recursive chair is not just a chair** - it's a demonstration that functional forms emerge from constrained search through subdivision space. The same principle powers L-systems (trees), WFC (worlds), and evolution (organisms).
+
+**Fractals as search: asking "which subspaces contain useful objects?" and pruning the rest.**
+
+---
+
+## Summary: Fractals as Queer Mathematics
+
+**What fractals prove:**
+- **Dimensions are not integers** - reality exists between categories
+- **Infinity fits in finite space** - unbounded complexity in bounded area
+- **Self-reference generates complexity** - simple rules, infinite detail
+- **Search is structured** - not random, but recursively selective
+
+**Fractals are mathematically queer:**
+- They refuse categorical placement (not 1D, not 2D, but between)
+- They embody infinite regress (the structure contains itself)
+- They reveal that smooth, differentiable, "normal" geometry is the exception
+
+**Nature is fractal** - coastlines, clouds, mountains, trees, blood vessels, neurons.
+
+**And now you can generate them** - with recursion, with subdivision, with code that calls itself.

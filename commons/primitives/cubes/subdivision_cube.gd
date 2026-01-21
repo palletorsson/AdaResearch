@@ -1,14 +1,18 @@
 extends XRToolsPickable
 
-## Subdivision Cube - Recursive Division on Pickup
-## When picked up, the cube halves in size and creates two copies
-## Stops after 3 divisions
+## Subdivision Cube - Recursive Division on Touch/Pickup
+## When touched or picked up, the cube halves in size and creates two copies
+## Stops after max_divisions
 
 @export var max_divisions: int = 3
 @export var division_color_shift: float = 0.15
+@export var divide_on_touch: bool = true  # Enable touch-to-divide
+@export var touch_cooldown: float = 0.5  # Prevent rapid re-triggering
+@export var impulse_strength: float = 1.0  # How hard children fly apart
 
 var current_division: int = 0
 var has_divided: bool = false
+var touch_cooldown_timer: float = 0.0
 
 # Store references
 var mesh_instance: MeshInstance3D
@@ -21,24 +25,68 @@ func _ready():
 	mesh_instance = find_child("MeshInstance3D", true, false)
 	collision_shape = find_child("CollisionShape3D", true, false)
 
+	# Connect body_entered signal for touch detection
+	if divide_on_touch:
+		body_entered.connect(_on_body_entered)
+
 	# Update initial color
 	update_color_by_division()
+
+func _process(delta: float):
+	if touch_cooldown_timer > 0:
+		touch_cooldown_timer -= delta
+
+func _on_body_entered(body: Node):
+	"""Handle touch/collision to trigger division"""
+	if not divide_on_touch:
+		return
+
+	if has_divided or current_division >= max_divisions:
+		return
+
+	if touch_cooldown_timer > 0:
+		return
+
+	# Check if it's a hand/controller or another physics body
+	var is_hand = body.name.contains("Hand") or body.name.contains("Controller")
+	var is_player = body.is_in_group("player") or body.name.contains("Player")
+
+	# Divide on hand touch or player collision
+	if is_hand or is_player or body is CharacterBody3D:
+		touch_cooldown_timer = touch_cooldown
+		print("SubdivisionCube: Touched by %s, dividing!" % body.name)
+		divide_cube_delayed()
 
 func pick_up(by: Node3D) -> void:
 	"""Override XRToolsPickable pick_up to trigger division"""
 	if not has_divided and current_division < max_divisions:
-		# Disable pickable immediately to prevent further interaction
-		enabled = false
+		# Don't actually pick up - just divide
+		# We need to reject the pickup gracefully without causing errors
+		# Mark as divided first to prevent re-entry
+		has_divided = true
 
-		# Set collision to non-interactive layer to prevent physics issues
-		if collision_shape:
-			collision_shape.disabled = true
+		# Use call_deferred to let the pickup system complete its frame
+		call_deferred("_do_division_from_pickup")
+		return
 
-		# Divide after a brief delay to let physics system release
-		divide_cube_delayed()
-	else:
-		# If at max divisions, act like a normal pickable
-		super.pick_up(by)
+	# If at max divisions, act like a normal pickable
+	super.pick_up(by)
+
+func _do_division_from_pickup():
+	"""Deferred division to avoid pickup system conflicts"""
+	# Reset has_divided so divide_cube can set it properly
+	has_divided = false
+
+	# Disable pickable
+	enabled = false
+
+	# Disable collision
+	if collision_shape:
+		collision_shape.disabled = true
+
+	# Small delay then divide
+	await get_tree().create_timer(0.05).timeout
+	divide_cube()
 
 func divide_cube_delayed():
 	"""Divide with a small delay to avoid physics system issues"""
@@ -96,9 +144,18 @@ func create_child_cube(pos: Vector3, new_scale: Vector3, rot: Vector3, division_
 	new_cube.scale = new_scale
 	new_cube.global_rotation = rot
 
-	# Apply slight velocity for visual effect
+	# Apply impulse for visual effect - scales with division level
 	var direction = (pos - global_position).normalized()
-	new_cube.apply_central_impulse(direction * 0.5)
+	var impulse_scale = impulse_strength * (1.0 + current_division * 0.5)
+	new_cube.apply_central_impulse(direction * impulse_scale)
+
+	# Add some spin for visual interest
+	var random_torque = Vector3(
+		randf_range(-1, 1),
+		randf_range(-1, 1),
+		randf_range(-1, 1)
+	).normalized() * impulse_scale * 0.3
+	new_cube.apply_torque_impulse(random_torque)
 
 func set_division_level(level: int):
 	"""Set the division level for this cube"""

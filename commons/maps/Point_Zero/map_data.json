@@ -63,6 +63,12 @@
 			["frame_counter_display:180", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]
 		]
 	},
+	"spawn_points": {
+		"default": {
+			"position": [1.5, 1.2, 1.5],
+			"rotation": [0, 0, 0]
+		}
+	},
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
@@ -77,7 +83,7 @@
 			"name": "Spawn Point",
 			"description": "Player spawn location using grid coordinates (s:x:y:z)",
 			"properties": {
-				"coordinates": "0,1.8,0",
+				"coordinates": "1.5,1.2,1.5",
 				"note": "Format: s:x:y:z where x,z are grid coordinates and y is height in world space"
 			}
 		}
@@ -103,6 +109,14 @@
 		"background": {
 			"type": "sky",
 			"color": [0.2, 0.3, 0.7]
+		},
+		"grid_animation": {
+			"enabled": true,
+			"type": "scale_up",
+			"duration": 0.3,
+			"delay_between": 0.05,
+			"order": "spiral",
+			"easing": "ease_out"
 		}
 	}
 }

@@ -31,6 +31,9 @@ size = Vector3(0.1, 0.1, 0.1)
 script = ExtResource("3_subdivision")
 max_divisions = 3
 division_color_shift = 0.15
+divide_on_touch = true
+touch_cooldown = 0.5
+impulse_strength = 1.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("7")

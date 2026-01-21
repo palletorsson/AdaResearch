@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlsysdungeon01"]
+
+[ext_resource type="Script" path="res://algorithms/fractals/lsystem_dungeon/lsystem_dungeon.gd" id="1_dungeon"]
+
+[node name="LSystemDungeon" type="Node3D"]
+script = ExtResource("1_dungeon")
+axiom = "F"
+iterations = 3
+rules = {
+"F": "F[+F]F[-F]F"
+}
+room_size = 4.0
+corridor_length = 6.0
+turn_angle = 90.0
+branch_probability = 0.7
+use_csg_carving = false
+show_construction = true
+step_delay = 0.15

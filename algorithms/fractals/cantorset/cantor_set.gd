@@ -55,6 +55,9 @@ func create_bar(position: Vector3, length: float) -> RigidBody3D:
 	var rigid_body = RigidBody3D.new()
 	rigid_body.position = position
 
+	# Prevent gravity gun from picking up these objects
+	rigid_body.add_to_group("no_gravity_gun")
+
 	# Create collision shape
 	var collision_shape = CollisionShape3D.new()
 	var box_shape = BoxShape3D.new()
@@ -71,8 +74,8 @@ func create_bar(position: Vector3, length: float) -> RigidBody3D:
 	var material = StandardMaterial3D.new()
 	var hue = current_iteration / float(max_iterations)
 	material.albedo_color = Color.from_hsv(hue, 0.8, 0.9)
-	material.metallic = 0.3
-	material.roughness = 0.7
+	material.metallic = 0.0
+	material.roughness = 1.0
 	mesh_instance.material_override = material
 
 	# Assemble the bar

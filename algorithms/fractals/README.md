@@ -15,9 +15,22 @@ This directory contains 3D visualizations of recursive and emergent computationa
 - **Mandelbrot Set** (`mandelbrot_set/`) - Classic fractal with infinite complexity
 - **Julia Set** (`julia_set/`) - Parameter-space fractal variants
 - **Koch Curve** (`koch_curve/`) - Recursive geometric construction
+- **Fractal Clouds** (`fractal_clouds/`) - Volumetric clouds using fBm noise
+- **L-System Dungeon** (`lsystem_dungeon/`) - Procedural dungeon generation
 
 ### Mathematical Sequences
 - **Fibonacci Sequences** (`fibonacci_sequences/`) - Golden ratio and natural patterns
+- **Golden Rectangle** (`golden_rectangle/`) - Classic φ subdivision with spiral
+- **Fibonacci Terrain** (`fibonacci_terrain/`) - Terrain via golden ratio subdivision
+
+### Cube Subdivision
+- **Cube Subdivision** (`cubesubdivision/`) - Furniture and objects via recursive subdivision
+  - `recursive_table` - Table with recursive legs
+  - `recursive_chair` - Chair through subdivision
+  - `cube_bookshelf` - Bookshelf with shelves grid
+  - `cube_staircase` - Staircase with handrail
+  - `cube_desk` - Desk with drawer unit
+  - `cube_cabin` - Architectural cabin/house
 
 ## Key Concepts
 

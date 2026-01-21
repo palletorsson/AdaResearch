@@ -20,6 +20,10 @@ var parent_node: Node3D
 var multimesh_instance: MultiMeshInstance3D
 var multimesh: MultiMesh
 
+# Cached mesh data (persists across reloads)
+var _cached_mesh: Mesh = null
+var _cached_material: Material = null
+
 # Collision parent for static bodies
 var collision_parent: Node3D
 
@@ -27,11 +31,25 @@ var collision_parent: Node3D
 var cube_size: float = 1.0
 var gutter: float = 0.0
 
+# Animation settings
+var animation_enabled: bool = false
+var animation_type: String = "scale_up"  # "scale_up", "drop_in", "fade_in", "wave"
+var animation_duration: float = 0.3
+var animation_delay: float = 0.05
+var animation_order: String = "sequential"  # "sequential", "spiral", "random", "wave_x", "wave_z"
+var animation_easing: String = "ease_out"
+
+# Animation state
+var _animation_in_progress: bool = false
+var _pending_cube_data: Array = []  # Stores {index, position, world_pos} for animation
+
 # Group name for all generated cubes (kept for compatibility)
 const CUBE_GROUP_NAME = "grid_cubes"
 
 # Signals
 signal structure_generation_complete(cube_count: int)
+signal animation_started()
+signal animation_complete()
 
 func _ready():
 	print("GridStructureComponent: Initialized")
@@ -39,11 +57,25 @@ func _ready():
 # Initialize with references and settings
 func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary = {}):
 	parent_node = grid_parent
-	base_cube = cube_template
+	
+	# Only update base_cube if the template is valid
+	if is_instance_valid(cube_template):
+		base_cube = cube_template
 
 	# Apply settings
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
+	
+	# Apply animation settings if provided
+	var anim_settings = settings.get("grid_animation", {})
+	if not anim_settings.is_empty():
+		animation_enabled = anim_settings.get("enabled", false)
+		animation_type = anim_settings.get("type", "scale_up")
+		animation_duration = anim_settings.get("duration", 0.3)
+		animation_delay = anim_settings.get("delay_between", 0.05)
+		animation_order = anim_settings.get("order", "sequential")
+		animation_easing = anim_settings.get("easing", "ease_out")
+		print("GridStructureComponent: Animation enabled - type=%s, order=%s, duration=%.2f" % [animation_type, animation_order, animation_duration])
 
 	# Create collision parent
 	collision_parent = Node3D.new()
@@ -55,35 +87,49 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	multimesh_instance.name = "GridMultiMesh"
 	parent_node.add_child(multimesh_instance)
 
-	# Extract mesh from base cube
-	print("GridStructureComponent: Inspecting base_cube: %s" % base_cube)
-	_print_tree(base_cube)
-	var mesh_instance = _find_mesh_instance(base_cube)
-	if mesh_instance:
-		print("GridStructureComponent: Found mesh instance: %s" % mesh_instance.name)
+	# Try to extract mesh from base cube, or use cached data
+	var mesh_to_use: Mesh = _cached_mesh
+	var mat_to_use: Material = _cached_material
+	
+	if is_instance_valid(base_cube):
+		print("GridStructureComponent: Inspecting base_cube: %s" % base_cube)
+		_print_tree(base_cube)
+		var mesh_instance = _find_mesh_instance(base_cube)
+		if mesh_instance:
+			print("GridStructureComponent: Found mesh instance: %s" % mesh_instance.name)
+			if mesh_instance.mesh:
+				mesh_to_use = mesh_instance.mesh
+				_cached_mesh = mesh_to_use  # Cache for future reloads
+				
+				# Get material
+				if mesh_instance.material_override:
+					mat_to_use = mesh_instance.material_override
+				elif mesh_instance.get_surface_override_material_count() > 0:
+					mat_to_use = mesh_instance.get_surface_override_material(0)
+				elif mesh_instance.mesh.get_surface_count() > 0:
+					mat_to_use = mesh_instance.mesh.surface_get_material(0)
+				
+				if mat_to_use:
+					_cached_material = mat_to_use  # Cache for future reloads
+		else:
+			print("GridStructureComponent: Failed to find mesh instance in %s" % base_cube.name)
+	elif _cached_mesh:
+		print("GridStructureComponent: Using cached mesh data (base_cube unavailable)")
 	else:
-		print("GridStructureComponent: Failed to find mesh instance in %s" % base_cube.name)
+		push_error("GridStructureComponent: No base_cube and no cached mesh data!")
+		return
 
-	if mesh_instance and mesh_instance.mesh:
+	if mesh_to_use:
 		multimesh = MultiMesh.new()
 		multimesh.transform_format = MultiMesh.TRANSFORM_3D
 		multimesh.use_colors = true  # Enable per-instance colors BEFORE setting instance_count
 		multimesh.use_custom_data = true  # Enable custom data for algorithms like DiscoFloor
-		multimesh.mesh = mesh_instance.mesh
+		multimesh.mesh = mesh_to_use
 		multimesh_instance.multimesh = multimesh
 
-		# Copy material if available - handle both material_override and surface materials
-		var mat = null
-		if mesh_instance.material_override:
-			mat = mesh_instance.material_override
-		elif mesh_instance.get_surface_override_material_count() > 0:
-			mat = mesh_instance.get_surface_override_material(0)
-		elif mesh_instance.mesh.get_surface_count() > 0:
-			mat = mesh_instance.mesh.surface_get_material(0)
-
-		if mat:
+		if mat_to_use:
 			# Duplicate material to avoid modifying the original
-			var duplicated_mat = mat.duplicate()
+			var duplicated_mat = mat_to_use.duplicate()
 			multimesh_instance.material_override = duplicated_mat
 
 			# If it's a shader material, ensure show_interior is enabled
@@ -138,7 +184,7 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 					if overrides.has("emission_strength"):
 						override_mat.emission_energy_multiplier = float(overrides["emission_strength"])
 	else:
-		push_error("GridStructureComponent: Could not find MeshInstance3D in base_cube")
+		push_error("GridStructureComponent: Could not find mesh to use")
 
 	print("GridStructureComponent: Initialized with MultiMesh, cube_size=%f, gutter=%f" % [cube_size, gutter])
 
@@ -238,21 +284,252 @@ func _apply_structure_data(structure_data):
 		multimesh.instance_count = cube_count
 		cube_positions = temp_positions
 
-		# Second pass: set transforms and create collision shapes
-		for i in range(cube_count):
-			var pos = temp_positions[i]
-			var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
-
-			# Set visual transform
-			var transform = Transform3D()
-			transform.origin = world_pos
-			multimesh.set_instance_transform(i, transform)
-
-			# Create collision shape
-			_create_collision_at(world_pos, cube_size)
+		# Check if animation is enabled
+		if animation_enabled:
+			# Prepare for animated generation
+			_prepare_animated_generation(temp_positions, total_size)
+		else:
+			# Immediate generation (no animation)
+			_generate_cubes_immediate(temp_positions, total_size)
 
 	print("GridStructureComponent: Added %d cubes using MultiMesh with collisions" % cube_count)
 	structure_generation_complete.emit(cube_count)
+
+# Generate cubes immediately without animation
+func _generate_cubes_immediate(positions: Array, total_size: float):
+	for i in range(positions.size()):
+		var pos = positions[i]
+		var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
+
+		# Set visual transform
+		var transform = Transform3D()
+		transform.origin = world_pos
+		multimesh.set_instance_transform(i, transform)
+
+		# Create collision shape
+		_create_collision_at(world_pos, cube_size)
+
+# Prepare and start animated cube generation
+func _prepare_animated_generation(positions: Array, total_size: float):
+	print("GridStructureComponent: Starting animated cube generation (%d cubes)" % positions.size())
+	animation_started.emit()
+	_animation_in_progress = true
+	
+	# Build animation data with world positions
+	_pending_cube_data.clear()
+	for i in range(positions.size()):
+		var pos = positions[i]
+		var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
+		_pending_cube_data.append({
+			"index": i,
+			"grid_pos": pos,
+			"world_pos": world_pos
+		})
+	
+	# Sort based on animation order
+	_sort_cubes_for_animation()
+	
+	# Initialize all cubes to hidden state based on animation type
+	_initialize_cubes_for_animation(total_size)
+	
+	# Create all collision shapes immediately (physics shouldn't wait for animation)
+	for data in _pending_cube_data:
+		_create_collision_at(data.world_pos, cube_size)
+	
+	# Start the animation coroutine
+	_animate_cubes()
+
+# Sort cubes based on animation order
+func _sort_cubes_for_animation():
+	match animation_order:
+		"sequential":
+			# Already in order (z then x then y)
+			pass
+		"spiral":
+			_sort_spiral()
+		"random":
+			_pending_cube_data.shuffle()
+		"wave_x":
+			_pending_cube_data.sort_custom(func(a, b): return a.grid_pos.x < b.grid_pos.x)
+		"wave_z":
+			_pending_cube_data.sort_custom(func(a, b): return a.grid_pos.z < b.grid_pos.z)
+		"wave_y":
+			_pending_cube_data.sort_custom(func(a, b): return a.grid_pos.y < b.grid_pos.y)
+		"center_out":
+			_sort_center_out()
+		"corners_first":
+			_sort_corners_first()
+
+# Sort cubes in a spiral pattern from center
+func _sort_spiral():
+	var center_x = grid_x / 2.0
+	var center_z = grid_z / 2.0
+	
+	# Sort by angle and distance from center
+	_pending_cube_data.sort_custom(func(a, b):
+		var da = Vector2(a.grid_pos.x - center_x, a.grid_pos.z - center_z)
+		var db = Vector2(b.grid_pos.x - center_x, b.grid_pos.z - center_z)
+		var angle_a = da.angle()
+		var angle_b = db.angle()
+		var dist_a = da.length()
+		var dist_b = db.length()
+		# Sort primarily by distance, then by angle
+		if abs(dist_a - dist_b) > 0.5:
+			return dist_a < dist_b
+		return angle_a < angle_b
+	)
+
+# Sort cubes from center outward
+func _sort_center_out():
+	var center = Vector3(grid_x / 2.0, grid_y / 2.0, grid_z / 2.0)
+	_pending_cube_data.sort_custom(func(a, b):
+		var dist_a = Vector3(a.grid_pos).distance_to(center)
+		var dist_b = Vector3(b.grid_pos).distance_to(center)
+		return dist_a < dist_b
+	)
+
+# Sort cubes starting from corners
+func _sort_corners_first():
+	var center = Vector3(grid_x / 2.0, grid_y / 2.0, grid_z / 2.0)
+	_pending_cube_data.sort_custom(func(a, b):
+		var dist_a = Vector3(a.grid_pos).distance_to(center)
+		var dist_b = Vector3(b.grid_pos).distance_to(center)
+		return dist_a > dist_b  # Reverse - corners (far from center) first
+	)
+
+# Initialize cubes to their starting animation state
+func _initialize_cubes_for_animation(total_size: float):
+	for data in _pending_cube_data:
+		var transform = Transform3D()
+		
+		match animation_type:
+			"scale_up":
+				# Start at scale 0
+				transform.basis = Basis.IDENTITY.scaled(Vector3.ZERO)
+				transform.origin = data.world_pos
+			"drop_in":
+				# Start above final position
+				transform.origin = data.world_pos + Vector3(0, 10.0, 0)
+			"fade_in":
+				# Start at correct position but will use color alpha
+				transform.origin = data.world_pos
+			"wave":
+				# Start below final position
+				transform.origin = data.world_pos + Vector3(0, -2.0, 0)
+			"pop":
+				# Start at scale 0 like scale_up but with overshoot
+				transform.basis = Basis.IDENTITY.scaled(Vector3.ZERO)
+				transform.origin = data.world_pos
+			_:
+				transform.origin = data.world_pos
+		
+		multimesh.set_instance_transform(data.index, transform)
+
+# Animate cubes one by one (or in groups)
+func _animate_cubes():
+	var tween_group = create_tween()
+	tween_group.set_parallel(false)  # Sequential tweens
+	
+	for i in range(_pending_cube_data.size()):
+		var data = _pending_cube_data[i]
+		var index = data.index
+		var world_pos = data.world_pos
+		
+		# Add delay between cubes
+		if i > 0:
+			tween_group.tween_interval(animation_delay)
+		
+		# Create animation based on type
+		match animation_type:
+			"scale_up":
+				_tween_scale_up(tween_group, index, world_pos)
+			"drop_in":
+				_tween_drop_in(tween_group, index, world_pos)
+			"wave":
+				_tween_wave(tween_group, index, world_pos)
+			"pop":
+				_tween_pop(tween_group, index, world_pos)
+			_:
+				_tween_scale_up(tween_group, index, world_pos)
+	
+	# Connect completion callback
+	tween_group.finished.connect(_on_animation_complete)
+
+# Tween: Scale up from 0 to 1
+func _tween_scale_up(tween: Tween, index: int, target_pos: Vector3):
+	var start_transform = Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO), target_pos)
+	var end_transform = Transform3D(Basis.IDENTITY, target_pos)
+	
+	tween.tween_method(
+		func(t: float): _set_transform_interpolated(index, start_transform, end_transform, t),
+		0.0, 1.0, animation_duration
+	).set_ease(_get_tween_ease()).set_trans(_get_tween_trans())
+
+# Tween: Drop in from above
+func _tween_drop_in(tween: Tween, index: int, target_pos: Vector3):
+	var start_pos = target_pos + Vector3(0, 10.0, 0)
+	var start_transform = Transform3D(Basis.IDENTITY, start_pos)
+	var end_transform = Transform3D(Basis.IDENTITY, target_pos)
+	
+	tween.tween_method(
+		func(t: float): _set_transform_interpolated(index, start_transform, end_transform, t),
+		0.0, 1.0, animation_duration
+	).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BOUNCE)
+
+# Tween: Wave up from below
+func _tween_wave(tween: Tween, index: int, target_pos: Vector3):
+	var start_pos = target_pos + Vector3(0, -2.0, 0)
+	var start_transform = Transform3D(Basis.IDENTITY, start_pos)
+	var end_transform = Transform3D(Basis.IDENTITY, target_pos)
+	
+	tween.tween_method(
+		func(t: float): _set_transform_interpolated(index, start_transform, end_transform, t),
+		0.0, 1.0, animation_duration
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+
+# Tween: Pop in with overshoot
+func _tween_pop(tween: Tween, index: int, target_pos: Vector3):
+	var start_transform = Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO), target_pos)
+	var end_transform = Transform3D(Basis.IDENTITY, target_pos)
+	
+	tween.tween_method(
+		func(t: float): _set_transform_interpolated(index, start_transform, end_transform, t),
+		0.0, 1.0, animation_duration
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+
+# Helper: Interpolate and set transform
+func _set_transform_interpolated(index: int, from: Transform3D, to: Transform3D, t: float):
+	if not multimesh:
+		return
+	var interpolated = from.interpolate_with(to, t)
+	multimesh.set_instance_transform(index, interpolated)
+
+# Get tween ease type from string
+func _get_tween_ease() -> Tween.EaseType:
+	match animation_easing:
+		"ease_in": return Tween.EASE_IN
+		"ease_out": return Tween.EASE_OUT
+		"ease_in_out": return Tween.EASE_IN_OUT
+		_: return Tween.EASE_OUT
+
+# Get tween transition type
+func _get_tween_trans() -> Tween.TransitionType:
+	match animation_type:
+		"pop": return Tween.TRANS_BACK
+		"drop_in": return Tween.TRANS_BOUNCE
+		"wave": return Tween.TRANS_SINE
+		_: return Tween.TRANS_CUBIC
+
+# Animation completion callback
+func _on_animation_complete():
+	print("GridStructureComponent: Animation complete")
+	_animation_in_progress = false
+	_pending_cube_data.clear()
+	animation_complete.emit()
+
+# Check if animation is in progress
+func is_animating() -> bool:
+	return _animation_in_progress
 
 # Create a collision shape at the specified position
 func _create_collision_at(world_pos: Vector3, size: float):
@@ -311,11 +588,13 @@ func clear_structure():
 
 	cube_positions.clear()
 	grid.clear()
+	_pending_cube_data.clear()
+	_animation_in_progress = false
 
-	# Clean up collision shapes
+	# Clean up collision parent and all its children
 	if collision_parent and is_instance_valid(collision_parent):
-		for child in collision_parent.get_children():
-			child.queue_free()
+		collision_parent.queue_free()
+		collision_parent = null
 
 	# Clean up the MultiMeshInstance3D node if it exists
 	if multimesh_instance and is_instance_valid(multimesh_instance):

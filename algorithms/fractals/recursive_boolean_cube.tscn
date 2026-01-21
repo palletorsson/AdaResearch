@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ahxwtf7ac73"]
+
+[ext_resource type="Script" uid="uid://2684kcnasdw0" path="res://algorithms/fractals/recursive_boolean_cube.gd" id="1_script"]
+
+[node name="RecursiveBooleanCube" type="Node3D"]
+script = ExtResource("1_script")
+max_iterations = 2
+cube_size = 1.5
+frame_thickness = 0.04
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 1.5, 2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 3, 0)
+shadow_enabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=31 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dwor4ga117nwk" path="res://commons/player/pickup_xp_listener.gd" id="23_pickup_xp"]
 [ext_resource type="Script" uid="uid://do86cuqep43oi" path="res://commons/player/PlayerCustomization.gd" id="24_customization"]
 [ext_resource type="Script" uid="uid://d31t45rigq080" path="res://commons/scenes/mapobjects/MapInfoLabel.gd" id="25_mapinfo"]
+[ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="30_wall_walk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.126328, 0.0757446, 0.10495)
@@ -140,17 +141,19 @@ visible = false
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
 
-[node name="VelocityDeadzone" type="Node" parent="XROrigin3D" index="4"]
+[node name="MovementWallWalk" parent="XROrigin3D" index="4" instance=ExtResource("30_wall_walk")]
+
+[node name="VelocityDeadzone" type="Node" parent="XROrigin3D" index="5"]
 script = ExtResource("20_deadzone")
 
-[node name="JoystickDeadzoneFix" type="Node" parent="XROrigin3D" index="5"]
+[node name="JoystickDeadzoneFix" type="Node" parent="XROrigin3D" index="6"]
 script = ExtResource("22_joystick_fix")
 debug_joystick = false
 
-[node name="PickupXPListener" type="Node" parent="XROrigin3D" index="6"]
+[node name="PickupXPListener" type="Node" parent="XROrigin3D" index="7"]
 script = ExtResource("23_pickup_xp")
 
-[node name="PlayerCustomization" type="Node" parent="XROrigin3D" index="7"]
+[node name="PlayerCustomization" type="Node" parent="XROrigin3D" index="8"]
 script = ExtResource("24_customization")
 debug_mode = true
 

@@ -3,6 +3,12 @@
 	"format": "lab_artifacts",
 	"description": "Artifact definitions for the Lab environment",
 	"artifacts": {
+		"mobius_world": {
+			"name": "Möbius World",
+			"lookup_name": "mobius_world",
+			"description": "Walkable Möbius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
+			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn"
+		},
 		"player_presence_indicator": {
 			"name": "player_presence_indicator",
 			"lookup_name": "player_presence_indicator",
@@ -750,15 +756,15 @@
 			"description": "Desk-scale containment cube with animated field projectors and floating specimen.",
 			"scene": "res://commons/lab/smallcontainment/smallcontainment.tscn"
 		},
-		"test_scene_1": {
-			"name": "test",
-			"lookup_name": "test_scene_1",
-			"description": "this is the test",
+		"example_8_6_recursive_tree_vr": {
+			"name": "example_8_6_recursive_tree_vr",
+			"lookup_name": "example_8_6_recursive_tree_vr",
+			"description": "texample_8_6_recursive_tree_vr",
 			"scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn"
 		},
-		"test_scene_2": {
-			"name": "This is just a test",
-			"lookup_name": "test_scene_2",
+		"example_8_3_recursion_circles_vr": {
+			"name": "example_8_3_recursion_circles_vr",
+			"lookup_name": "example_8_3_recursion_circles_vr",
 			"description": "this is the test",
 			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn"
 		},
@@ -1406,6 +1412,19 @@
 			"description": "cube_subdivision",
 			"scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn"
 		},
+		"recursive_chair": {
+			"name": "recursive_chair",
+			"lookup_name": "recursive_chair",
+			"description": "recursive_chair",
+			"scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn"
+		},
+		"recursive_table": {
+			"name": "recursive_table",
+			"lookup_name": "recursive_table",
+			"description": "recursive_table",
+			"scene": "res://algorithms/fractals/cubesubdivision/recursive_table.tscn"
+		},		
+		
 		"fibonacci_sequences": {
 			"name": "Fibonacci Sequences",
 			"lookup_name": "fibonacci_sequences",
@@ -2797,10 +2816,10 @@
 			"description": "grab_cube",
 			"scene": "res://commons/primitives/cubes/grab_cube.tscn"
 		},
-		"subdivision_cube": {
-			"name": "subdivision_cube",
-			"lookup_name": "subdivision_cube",
-			"description": "subdivision_cube",
+		"small_subdivision_cube": {
+			"name": "small_subdivision_cube",
+			"lookup_name": "small_subdivision_cube",
+			"description": "small_subdivision_cube",
 			"scene": "res://commons/primitives/cubes/subdivision_cube.tscn"
 		},
 		"wood_cube": {
@@ -3229,6 +3248,14 @@
 			"description": "Circular recursive fractal patterns demonstrating self-similarity",
 			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn"
 		},
+
+		"recursive_boolean_cube": {
+			"name": "recursive_boolean_cube",
+			"lookup_name": "recursive_boolean_cube",
+			"description": "recursive_boolean_cube",
+			"scene": "res://algorithms/fractals/recursive_boolean_cube.tscn"
+		},		
+		
 		"fractal_cantor_set": {
 			"name": "Cantor Set",
 			"lookup_name": "fractal_cantor_set",
@@ -3245,6 +3272,18 @@
 			"name": "cantor_pagoda_vr",
 			"lookup_name": "cantor_pagoda_vr",
 			"description": "cantor_pagoda_vr",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn"
+		},
+		"example_8_4_cantor_set_vr": {
+			"name": "example_8_4_cantor_set_vr",
+			"lookup_name": "example_8_4_cantor_set_vr",
+			"description": "Cantor Set - infinite subdivision creating zero measure infinite set",
+			"scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn"
+		},
+		"example_8_4_cantor_pagoda_vr": {
+			"name": "example_8_4_cantor_pagoda_vr",
+			"lookup_name": "example_8_4_cantor_pagoda_vr",
+			"description": "Cantor Pagoda - 3D extension of Cantor set principle",
 			"scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn"
 		},
 		"inverted_tree_cloud": {
@@ -3804,6 +3843,66 @@
 			"lookup_name": "algo_gun",
 			"description": "Evolved gravity gun that captures and directs Grid Agents. Use GRIP button to capture agents, then aim and GRIP again to direct them to modify grid structures.",
 			"scene": "res://algorithms/forces/algo_gun.tscn"
+		},
+		"cube_bookshelf": {
+			"name": "Cube Bookshelf",
+			"lookup_name": "cube_bookshelf",
+			"description": "Bookshelf created through cube subdivision - grid of shelves with frame and trim",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_bookshelf.tscn"
+		},
+		"cube_staircase": {
+			"name": "Cube Staircase",
+			"lookup_name": "cube_staircase",
+			"description": "Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn"
+		},
+		"cube_desk": {
+			"name": "Cube Desk",
+			"lookup_name": "cube_desk",
+			"description": "Modern desk with drawer unit created through cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_desk.tscn"
+		},
+		"cube_cabin": {
+			"name": "Cube Cabin",
+			"lookup_name": "cube_cabin",
+			"description": "Rustic cabin created through architectural cube subdivision - walls, door, windows, gabled roof, chimney and porch",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_cabin.tscn"
+		},
+		"lsystem_dungeon": {
+			"name": "L-System Dungeon",
+			"lookup_name": "lsystem_dungeon",
+			"description": "Procedural dungeon using L-system grammar. Presets: linear, branching, maze, organic, symmetric, dense, spiral",
+			"scene": "res://algorithms/fractals/lsystem_dungeon/lsystem_dungeon.tscn"
+		},
+		"fractal_clouds": {
+			"name": "Fractal Clouds",
+			"lookup_name": "fractal_clouds",
+			"description": "Volumetric clouds using fractal Brownian motion noise. Presets: cumulus, stratus, cirrus, storm",
+			"scene": "res://algorithms/fractals/fractal_clouds/fractal_clouds.tscn"
+		},
+		"recursive_chair": {
+			"name": "Recursive Chair",
+			"lookup_name": "recursive_chair",
+			"description": "Chair created through recursive cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn"
+		},
+		"cube_chair": {
+			"name": "Cube Chair",
+			"lookup_name": "cube_chair",
+			"description": "Chair created through cube subdivision",
+			"scene": "res://algorithms/fractals/cubesubdivision/cube_chair.tscn"
+		},
+		"fibonacci_terrain": {
+			"name": "Fibonacci Terrain",
+			"lookup_name": "fibonacci_terrain",
+			"description": "Terrain generated through golden ratio subdivision - plane subdivides, random non-edge faces lift and subdivide. Presets: gentle_hills, mountain_peak, plateau, archipelago, fibonacci_spiral",
+			"scene": "res://algorithms/fractals/fibonacci_terrain/fibonacci_terrain.tscn"
+		},
+		"golden_rectangle": {
+			"name": "Golden Rectangle",
+			"lookup_name": "golden_rectangle",
+			"description": "Classic golden ratio rectangle subdivision with Fibonacci spiral. Shows numbers 1,1,2,3,5,8,13,21... Presets: classic, minimal, rainbow, deep, fast",
+			"scene": "res://algorithms/fractals/golden_rectangle/golden_rectangle.tscn"
 		}
 	}
 }

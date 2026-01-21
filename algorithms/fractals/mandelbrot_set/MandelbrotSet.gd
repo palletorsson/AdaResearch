@@ -1,168 +1,182 @@
-# This script generates a VR-optimized Mandelbrot set.
-# It uses incremental calculation and a single ArrayMesh for high performance.
+# Mandelbrot Set Visualization - MultiMesh Optimized
+# VR-optimized with GPU instancing for high performance
 
 extends Node3D
 
-# VR-Optimized State Variables
-var time = 0.0
-var resolution = 200  # Increased resolution for more detail
-var max_iterations = 100
-var zoom = 1.0
-var center = Vector2(-0.5, 0.0)
+# Fractal parameters
+@export var resolution := 100
+@export var max_iterations := 100
+@export var zoom := 1.0
+@export var center := Vector2(-0.5, 0.0)
+@export var point_size := 0.08
+@export var height_scale := 2.0
+@export var use_3d_height := true
 
-# Incremental generation state
-var current_x = 0
-var current_y = 0
-var is_generating = false
+var time := 0.0
 
-# VR-Optimized rendering
-var fractal_mesh_instance: MeshInstance3D
-var array_mesh: ArrayMesh
-var vertices = PackedVector3Array()
-var colors = PackedColorArray()
+# MultiMesh for GPU instancing
+var fractal_multimesh_instance: MultiMeshInstance3D
+var fractal_multimesh: MultiMesh
+var point_mesh: BoxMesh
 
-# Materials
+# Material
 var fractal_material: StandardMaterial3D
 
+# Generation state for incremental updates
+var is_generating := false
+var generation_progress := 0.0
+
 func _ready():
-	"""Initializes the scene, materials, and starts the initial generation."""
-	setup_vr_optimized_scene()
-	setup_materials()
-	start_generation()
+	_setup_mesh()
+	_setup_material()
+	_setup_multimesh()
+	_generate_fractal()
 
-func setup_vr_optimized_scene():
-	"""Sets up the single MeshInstance3D for rendering the fractal."""
-	fractal_mesh_instance = MeshInstance3D.new()
-	fractal_mesh_instance.name = "MandelbrotMesh"
-	add_child(fractal_mesh_instance)
+func _setup_mesh():
+	# Small cube for each point
+	point_mesh = BoxMesh.new()
+	point_mesh.size = Vector3(point_size, point_size, point_size)
 
-func setup_materials():
-	"""Sets up the material for the fractal mesh."""
+func _setup_material():
 	fractal_material = StandardMaterial3D.new()
-	# VR optimization: Unshaded material for better performance and glow
-	fractal_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	fractal_material.vertex_color_use_as_albedo = true
-	fractal_material.point_size = 2.0  # VR friendly point size
-	fractal_material.albedo_color = Color.WHITE
-	fractal_mesh_instance.material_override = fractal_material
+	fractal_material.emission_enabled = true
+	fractal_material.emission_energy_multiplier = 0.4
+
+func _setup_multimesh():
+	fractal_multimesh = MultiMesh.new()
+	fractal_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	fractal_multimesh.use_colors = true
+	fractal_multimesh.mesh = point_mesh
+
+	fractal_multimesh_instance = MultiMeshInstance3D.new()
+	fractal_multimesh_instance.name = "MandelbrotMultiMesh"
+	fractal_multimesh_instance.multimesh = fractal_multimesh
+	fractal_multimesh_instance.material_override = fractal_material
+	add_child(fractal_multimesh_instance)
 
 func _process(delta):
-	"""Handles animation and incremental generation."""
 	time += delta
-	
-	# Only generate if the flag is set
-	if is_generating:
-		generate_batch_of_points()
-	
-	animate_fractal()
+	_animate_fractal()
 
-func start_generation():
-	"""Resets generation state and prepares for a new fractal."""
-	vertices.clear()
-	colors.clear()
-	current_x = 0
-	current_y = 0
-	is_generating = true
-	# Reset the mesh instance's mesh to clear the previous fractal
-	fractal_mesh_instance.mesh = null
-	
-func generate_batch_of_points():
-	"""
-	Calculates a small batch of points each frame to smooth out performance.
-	"""
-	var batch_size = 50  # Adjust this value for performance
-	var points_generated_this_frame = 0
+func _generate_fractal():
+	# Pre-calculate all points
+	var point_data: Array[Dictionary] = []
+	var scale_factor = 4.0 / zoom / resolution
 
-	# Continue calculating points until the batch size is met or the grid is complete
-	while points_generated_this_frame < batch_size and is_generating:
-		# Calculate the current point
-		var real = center.x + (float(current_x) - resolution/2.0) * (4.0 / zoom) / resolution
-		var imag = center.y + (float(current_y) - resolution/2.0) * (4.0 / zoom) / resolution
-		
-		var iterations = mandelbrot_iterations(real, imag)
-		var normalized_iter = float(iterations) / max_iterations
-		
-		# Define the point's position in 3D space
-		var pos = Vector3(
-			(float(current_x) - resolution/2.0) * 0.1,
-			(float(current_y) - resolution/2.0) * 0.1,
-			0
-		)
-		
-		# Define the point's color based on iterations
-		var point_color
-		if iterations >= max_iterations:
-			point_color = Color.BLACK  # In the set
-		else:
-			# Outside the set, a colorful gradient
-			var hue = normalized_iter * 360.0
-			point_color = Color.from_hsv(hue / 360.0, 0.8, 1.0)
-		
-		# Add the calculated point and color to our arrays
-		vertices.append(pos)
-		colors.append(point_color)
-		
-		# Move to the next point in the grid
-		current_x += 1
-		if current_x >= resolution:
-			current_x = 0
-			current_y += 1
-		
-		# Check if generation is complete
-		if current_y >= resolution:
-			is_generating = false
-		
-		points_generated_this_frame += 1
-	
-	# Update the mesh instance with the new points
-	update_mesh()
+	for y in range(resolution):
+		for x in range(resolution):
+			var real = center.x + (float(x) - resolution / 2.0) * scale_factor
+			var imag = center.y + (float(y) - resolution / 2.0) * scale_factor
 
-func update_mesh():
-	"""Updates the ArrayMesh with the current points."""
-	if not array_mesh:
-		array_mesh = ArrayMesh.new()
-	
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_COLOR] = colors
-	
-	if array_mesh.get_surface_count() > 0:
-		array_mesh.clear_surfaces()
-	
-	# Use a single surface with PRIMITIVE_POINTS
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_POINTS, arrays)
-	fractal_mesh_instance.mesh = array_mesh
+			var iterations = _mandelbrot_iterations(real, imag)
+			var normalized_iter = float(iterations) / max_iterations
 
-func mandelbrot_iterations(c_real: float, c_imag: float) -> int:
-	"""Calculates the number of iterations for a given complex number."""
-	var z_real = 0.0
-	var z_imag = 0.0
-	var iterations = 0
-	
-	while iterations < max_iterations and (z_real * z_real + z_imag * z_imag) < 4.0:
-		var new_real = z_real * z_real - z_imag * z_imag + c_real
+			# Calculate position
+			var pos_x = (float(x) - resolution / 2.0) * point_size * 1.2
+			var pos_z = (float(y) - resolution / 2.0) * point_size * 1.2
+			var pos_y = 0.0
+
+			if use_3d_height and iterations < max_iterations:
+				# Use iteration count for height - creates a 3D landscape
+				pos_y = normalized_iter * height_scale
+
+			# Calculate color
+			var point_color: Color
+			if iterations >= max_iterations:
+				point_color = Color.BLACK
+			else:
+				# Smooth coloring using continuous potential
+				var hue = fmod(normalized_iter * 5.0, 1.0)
+				point_color = Color.from_hsv(hue, 0.85, 1.0)
+
+			point_data.append({
+				"position": Vector3(pos_x, pos_y, pos_z),
+				"color": point_color,
+				"iterations": iterations
+			})
+
+	# Update MultiMesh in one batch
+	var instance_count = point_data.size()
+	fractal_multimesh.instance_count = instance_count
+
+	for idx in range(instance_count):
+		var data = point_data[idx]
+		var transform = Transform3D(Basis(), data.position)
+		fractal_multimesh.set_instance_transform(idx, transform)
+		fractal_multimesh.set_instance_color(idx, data.color)
+
+	print("Mandelbrot: Generated %d points" % instance_count)
+
+func _mandelbrot_iterations(c_real: float, c_imag: float) -> int:
+	var z_real := 0.0
+	var z_imag := 0.0
+	var iteration := 0
+
+	while iteration < max_iterations:
+		var z_real_sq = z_real * z_real
+		var z_imag_sq = z_imag * z_imag
+
+		if z_real_sq + z_imag_sq > 4.0:
+			break
+
+		var new_real = z_real_sq - z_imag_sq + c_real
 		var new_imag = 2.0 * z_real * z_imag + c_imag
 		z_real = new_real
 		z_imag = new_imag
-		iterations += 1
-	
-	return iterations
+		iteration += 1
 
-func animate_fractal():
-	"""Applies a subtle animation to the fractal."""
-	if not fractal_mesh_instance:
+	return iteration
+
+func _animate_fractal():
+	if not fractal_multimesh_instance:
 		return
-	
+
 	# Gentle pulsing animation
-	var pulse = 1.0 + sin(time * 2.0) * 0.1
-	fractal_mesh_instance.scale = Vector3.ONE * pulse
+	var pulse = 1.0 + sin(time * 2.0) * 0.05
+	fractal_multimesh_instance.scale = Vector3.ONE * pulse
+
+	# Slow rotation for visual interest
+	fractal_multimesh_instance.rotation.y = time * 0.1
 
 func _input(event):
-	"""Handles user input to manually trigger a new generation."""
-	if event.is_action_pressed("ui_accept"):  # Space key
-		# Randomly select a new zoom and center
-		zoom = 1.0 + randf() * 1000.0
+	if event.is_action_pressed("ui_accept"):
+		# Generate new view
+		zoom = 1.0 + randf() * 500.0
 		center = Vector2(randf() * 2.0 - 1.5, randf() * 2.0 - 1.0)
-		start_generation()
-		print("🌟 Starting new fractal generation...")
+		_generate_fractal()
+		print("Mandelbrot: New zoom=%.1f center=(%.3f, %.3f)" % [zoom, center.x, center.y])
+
+# Public API
+func set_zoom_level(new_zoom: float):
+	zoom = new_zoom
+	_generate_fractal()
+
+func set_center_point(new_center: Vector2):
+	center = new_center
+	_generate_fractal()
+
+func set_resolution_level(new_resolution: int):
+	resolution = new_resolution
+	_generate_fractal()
+
+func zoom_to_point(point: Vector2, new_zoom: float):
+	center = point
+	zoom = new_zoom
+	_generate_fractal()
+
+# Interesting locations to explore
+func goto_seahorse_valley():
+	center = Vector2(-0.75, 0.1)
+	zoom = 50.0
+	_generate_fractal()
+
+func goto_elephant_valley():
+	center = Vector2(0.275, 0.0)
+	zoom = 30.0
+	_generate_fractal()
+
+func goto_spiral():
+	center = Vector2(-0.761574, -0.0847596)
+	zoom = 200.0
+	_generate_fractal()
