@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://capsule_radials_rings_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/capsule/capsule_radials_rings.gd" id="1_capsule"]
+
+[node name="CapsuleRadialsRings" type="Node3D"]
+script = ExtResource("1_capsule")
+radial_segments = 8
+rings = 4
+height = 1.0
+radius = 0.25

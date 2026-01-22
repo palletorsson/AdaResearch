@@ -1,7 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8qp4yx5kn7wa"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
-[ext_resource type="Script" path="res://commons/primitives/parametric/double_enneper.gd" id="2_double_enneper"]
+[ext_resource type="Script" uid="uid://vemw60f4bl6f" path="res://commons/primitives/parametric/double_enneper.gd" id="2_double_enneper"]
 
 [node name="DoubleEnneper" instance=ExtResource("1_pickable")]
 script = ExtResource("2_double_enneper")
+u_min = -2.0
+u_max = 2.0
+u_steps = 64
+v_min = -2.0
+v_max = 2.0
+v_steps = 64
+scale_factor = 0.1
+base_color = Color(0.8, 0.4, 0.9, 1)
+
+[node name="Camera3D" type="Camera3D" parent="." index="1"]
+transform = Transform3D(0.9507486, 0, 0.309963, 0, 1, 0, -0.309963, 0, 0.9507486, 0.38621706, 0, 2.2216923)

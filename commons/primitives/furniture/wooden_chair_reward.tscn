@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://wooden_chair_reward_001"]
+
+[ext_resource type="Shader" uid="uid://bvosua7kp43yv" path="res://commons/resourses/shaders/wood.gdshader" id="1_wood"]
+
+[sub_resource type="ShaderMaterial" id="wood_material"]
+render_priority = 0
+shader = ExtResource("1_wood")
+shader_parameter/light_color = Vector4(0.952941, 0.858824, 0.74902, 1)
+shader_parameter/dark_color = Vector4(0.74902, 0.619608, 0.490196, 1)
+shader_parameter/ring_scale = 4.045
+shader_parameter/wave_scale = 9.189
+shader_parameter/random_scale = 4.75
+shader_parameter/noise_scale = 0.03
+shader_parameter/cube_position = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="seat_mesh"]
+size = Vector3(0.4, 0.05, 0.4)
+
+[sub_resource type="BoxMesh" id="leg_mesh"]
+size = Vector3(0.05, 0.45, 0.05)
+
+[sub_resource type="BoxMesh" id="back_mesh"]
+size = Vector3(0.4, 0.4, 0.05)
+
+[node name="WoodenChairReward" type="Node3D"]
+
+[node name="Seat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+material_override = SubResource("wood_material")
+mesh = SubResource("seat_mesh")
+
+[node name="LegFL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, 0.225, 0.175)
+material_override = SubResource("wood_material")
+mesh = SubResource("leg_mesh")
+
+[node name="LegFR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175, 0.225, 0.175)
+material_override = SubResource("wood_material")
+mesh = SubResource("leg_mesh")
+
+[node name="LegBL" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, 0.225, -0.175)
+material_override = SubResource("wood_material")
+mesh = SubResource("leg_mesh")
+
+[node name="LegBR" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175, 0.225, -0.175)
+material_override = SubResource("wood_material")
+mesh = SubResource("leg_mesh")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.175)
+material_override = SubResource("wood_material")
+mesh = SubResource("back_mesh")

@@ -75,8 +75,7 @@
 			"name": "Next Lesson",
 			"description": "Continue to the next speculative computation module",
 			"properties": {
-				"destination": "next",
-				"visual_effect": "portal_glow"
+				"action": "next_in_sequence"
 			}
 		},
 		"s": {

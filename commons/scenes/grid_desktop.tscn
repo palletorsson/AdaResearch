@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://grid_desktop_001"]
+[gd_scene load_steps=12 format=3 uid="uid://grid_desktop_001"]
 
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_s4bvx"]
 [ext_resource type="Script" uid="uid://m0efb6r2gupf" path="res://commons/scenes/GridScene.gd" id="3_0u7bn"]
 [ext_resource type="PackedScene" uid="uid://c0myy6lvui8ey" path="res://commons/scenes/reset_area.tscn" id="4_al13m"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 [ext_resource type="PackedScene" uid="uid://desktop_player_001" path="res://commons/scenes/desktop_player.tscn" id="6_desktop"]
+[ext_resource type="PackedScene" uid="uid://c5qk2vrlbft8y" path="res://commons/primitives/furniture/chair_assembly_puzzle.tscn" id="7_chair"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
@@ -60,7 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
 [node name="GridScene" type="Node3D" parent="."]
-visible = false
+visible = true
 script = ExtResource("3_0u7bn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GridScene"]
@@ -68,3 +69,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 visible = false
 material_override = SubResource("ShaderMaterial_6o8e0")
 mesh = SubResource("PlaneMesh_jli6m")
+
+[node name="ChairAssemblyPuzzle" parent="GridScene" instance=ExtResource("7_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

@@ -2,10 +2,10 @@
 extends MeshInstance3D
 
 @export_group("Box Profile Dimensions")
-@export var height: float = 1.0  # Length of the beam (Y axis)
-@export var width: float = 0.50  # Width (X axis)
-@export var depth: float = 2.0   # Depth (Z axis)
-@export var thickness: float = 0.10  # Wall thickness
+@export var height: float = 2.5  # Height of the portal (Y axis)
+@export var width: float = 2.0   # Width of opening (X axis)
+@export var depth: float = 0.3   # Depth/thickness in Z (how deep the frame is)
+@export var thickness: float = 0.15  # Wall thickness of the frame
 
 @export_group("Settings")
 @export var create_on_ready: bool = true
@@ -18,79 +18,64 @@ func _ready():
 func create_beam() -> void:
 	rotation = Vector3.ZERO
 	scale = Vector3.ONE
-	# Base vertices from Blender (normalized to unit dimensions)
-	var base_vertices = [
-		Vector3(0.25, 1.0, 0.5),
-		Vector3(-0.25, 1.0, 0.5),
-		Vector3(-0.25, 1.0, -0.5),
-		Vector3(0.25, 1.0, -0.5),
-		Vector3(0.15, 1.0, 0.4),
-		Vector3(-0.15, 1.0, 0.4),
-		Vector3(-0.15, 1.0, -0.4),
-		Vector3(0.15, 1.0, -0.4),
-		Vector3(0.25, -1.0, 0.5),
-		Vector3(-0.25, -1.0, 0.5),
-		Vector3(-0.25, -1.0, -0.5),
-		Vector3(0.25, -1.0, -0.5),
-		Vector3(0.15, -1.0, 0.4),
-		Vector3(-0.15, -1.0, 0.4),
-		Vector3(-0.15, -1.0, -0.4),
-		Vector3(0.15, -1.0, -0.4)
+
+	# Calculate dimensions
+	# Inner opening: width x height (walkable area)
+	# Outer dimensions include thickness on all sides
+	var half_w = width / 2.0
+	var half_h = height / 2.0
+	var half_d = depth / 2.0
+	var t = thickness
+
+	# Vertices for a hollow rectangular frame (portal)
+	# Front face outer corners (0-3), front face inner corners (4-7)
+	# Back face outer corners (8-11), back face inner corners (12-15)
+	var scaled_vertices = [
+		# Front outer (0-3): bottom-left, bottom-right, top-right, top-left
+		Vector3(-half_w - t, -half_h - t, half_d),
+		Vector3(half_w + t, -half_h - t, half_d),
+		Vector3(half_w + t, half_h + t, half_d),
+		Vector3(-half_w - t, half_h + t, half_d),
+		# Front inner (4-7): bottom-left, bottom-right, top-right, top-left
+		Vector3(-half_w, -half_h, half_d),
+		Vector3(half_w, -half_h, half_d),
+		Vector3(half_w, half_h, half_d),
+		Vector3(-half_w, half_h, half_d),
+		# Back outer (8-11): bottom-left, bottom-right, top-right, top-left
+		Vector3(-half_w - t, -half_h - t, -half_d),
+		Vector3(half_w + t, -half_h - t, -half_d),
+		Vector3(half_w + t, half_h + t, -half_d),
+		Vector3(-half_w - t, half_h + t, -half_d),
+		# Back inner (12-15): bottom-left, bottom-right, top-right, top-left
+		Vector3(-half_w, -half_h, -half_d),
+		Vector3(half_w, -half_h, -half_d),
+		Vector3(half_w, half_h, -half_d),
+		Vector3(-half_w, half_h, -half_d),
 	]
 
-	# Face definitions from Blender
+	# Face definitions (quads as vertex indices)
 	var faces = [
-		[0, 1, 5, 4],
-		[1, 2, 6, 5],
-		[2, 3, 7, 6],
-		[3, 0, 4, 7],
-		[8, 9, 13, 12],
-		[9, 10, 14, 13],
-		[10, 11, 15, 14],
-		[11, 8, 12, 15],
-		[0, 1, 9, 8],
-		[1, 2, 10, 9],
-		[2, 3, 11, 10],
-		[3, 0, 8, 11],
-		[4, 5, 13, 12],
-		[5, 6, 14, 13],
-		[6, 7, 15, 14],
-		[7, 4, 12, 15]
+		# Front face - 4 strips between outer and inner
+		[0, 1, 5, 4],   # Bottom strip
+		[1, 2, 6, 5],   # Right strip
+		[2, 3, 7, 6],   # Top strip
+		[3, 0, 4, 7],   # Left strip
+		# Back face - 4 strips between outer and inner
+		[9, 8, 12, 13],   # Bottom strip
+		[10, 9, 13, 14],  # Right strip
+		[11, 10, 14, 15], # Top strip
+		[8, 11, 15, 12],  # Left strip
+		# Outer walls (connecting front outer to back outer)
+		[0, 8, 9, 1],   # Bottom outer
+		[1, 9, 10, 2],  # Right outer
+		[2, 10, 11, 3], # Top outer
+		[3, 11, 8, 0],  # Left outer
+		# Inner walls (connecting front inner to back inner)
+		[4, 5, 13, 12],  # Bottom inner
+		[5, 6, 14, 13],  # Right inner
+		[6, 7, 15, 14],  # Top inner
+		[7, 4, 12, 15],  # Left inner
 	]
-
-	# Scale vertices based on parameters
-	# The base model uses: width=0.5, height=2.0, depth=1.0, thickness=0.1
-	var base_width = 0.5
-	var base_height = 2.0
-	var base_depth = 1.0
-	var base_thickness = 0.1
-
-	# Calculate inner dimensions based on thickness
-	var outer_width = width
-	var outer_depth = depth
-	var inner_width = max(0.01, outer_width - thickness * 2.0)
-	var inner_depth = max(0.01, outer_depth - thickness * 2.0)
-
-	var scaled_vertices = []
-	for v in base_vertices:
-		var scaled_v = Vector3.ZERO
-
-		# Scale X (width) - outer vs inner
-		if abs(v.x) > 0.2:  # Outer wall
-			scaled_v.x = sign(v.x) * outer_width / 2.0
-		else:  # Inner wall
-			scaled_v.x = sign(v.x) * inner_width / 2.0
-
-		# Scale Y (height/length)
-		scaled_v.y = v.y * height / 2.0
-
-		# Scale Z (depth) - outer vs inner
-		if abs(v.z) > 0.45:  # Outer wall
-			scaled_v.z = sign(v.z) * outer_depth / 2.0
-		else:  # Inner wall
-			scaled_v.z = sign(v.z) * inner_depth / 2.0
-
-		scaled_vertices.append(scaled_v)
 
 	# Create mesh using SurfaceTool
 	var surface_tool = SurfaceTool.new()
@@ -131,15 +116,13 @@ func create_beam() -> void:
 	# Apply material
 	apply_queer_material()
 
-	# Rotate to align along +X
-	rotate_z(deg_to_rad(90.0))
+	# No rotation - keep upright as a portal/doorframe
+	# The beam is now oriented with Y as height, X as width, Z as depth
 
 	# Add collision
 	var collision_body := create_collision()
-	if collision_body:
-		collision_body.rotate_z(deg_to_rad(90.0))
 
-	print("Beam created: Height=%.2f, Width=%.2f, Depth=%.2f, Thickness=%.2f" % [height, width, depth, thickness])
+	print("Portal frame created: Opening=%.2fx%.2f, Depth=%.2f, Wall=%.2f" % [width, height, depth, thickness])
 
 func apply_queer_material():
 	var material = ShaderMaterial.new()
@@ -166,13 +149,42 @@ func create_collision() -> StaticBody3D:
 	static_body.name = "BoxBeamCollision"
 	add_child(static_body)
 
-	# Approximate collision with box (outer dimensions)
-	var collision = CollisionShape3D.new()
-	var box = BoxShape3D.new()
-	box.size = Vector3(width, height, depth)
-	collision.shape = box
-	collision.position = Vector3(0, 0, 0)
-	static_body.add_child(collision)
+	var outer_w = width + thickness * 2
+	var outer_h = height + thickness * 2
+	var inner_w = width
+	var inner_h = height
+
+	# Left wall
+	var left_col = CollisionShape3D.new()
+	var left_box = BoxShape3D.new()
+	left_box.size = Vector3(thickness, outer_h, depth)
+	left_col.shape = left_box
+	left_col.position = Vector3(-inner_w / 2 - thickness / 2, 0, 0)
+	static_body.add_child(left_col)
+
+	# Right wall
+	var right_col = CollisionShape3D.new()
+	var right_box = BoxShape3D.new()
+	right_box.size = Vector3(thickness, outer_h, depth)
+	right_col.shape = right_box
+	right_col.position = Vector3(inner_w / 2 + thickness / 2, 0, 0)
+	static_body.add_child(right_col)
+
+	# Top wall
+	var top_col = CollisionShape3D.new()
+	var top_box = BoxShape3D.new()
+	top_box.size = Vector3(inner_w, thickness, depth)
+	top_col.shape = top_box
+	top_col.position = Vector3(0, inner_h / 2 + thickness / 2, 0)
+	static_body.add_child(top_col)
+
+	# Bottom wall
+	var bottom_col = CollisionShape3D.new()
+	var bottom_box = BoxShape3D.new()
+	bottom_box.size = Vector3(inner_w, thickness, depth)
+	bottom_col.shape = bottom_box
+	bottom_col.position = Vector3(0, -inner_h / 2 - thickness / 2, 0)
+	static_body.add_child(bottom_col)
 
 	return static_body
 

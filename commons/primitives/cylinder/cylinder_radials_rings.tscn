@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gnthb16a6ey6"]
+
+[ext_resource type="Script" path="res://commons/primitives/cylinder/cylinder_radials_rings.gd" id="1_cylinder"]
+
+[node name="CylinderRadialsRings" type="Node3D"]
+script = ExtResource("1_cylinder")
+radial_segments = 8
+rings = 1
+height = 1.0
+radius = 0.5

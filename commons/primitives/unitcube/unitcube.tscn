@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4pg2wbkxfm3n"]
 
-[ext_resource type="Script" path="res://commons/primitives/unitcube/unitcube.gd" id="1_unitcube"]
+[ext_resource type="Script" uid="uid://d0kcs2mtlfnud" path="res://commons/primitives/unitcube/unitcube.gd" id="1_unitcube"]
 
 [node name="UnitCube" type="Node3D"]
 script = ExtResource("1_unitcube")

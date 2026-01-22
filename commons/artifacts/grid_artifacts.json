@@ -530,6 +530,13 @@
 			"description": "grab_cube_show.",
 			"scene": "res://commons/primitives/cube/grab_cube_show.tscn"
 		},
+		"pickable_showcase": {
+			"name": "pickable_showcase",
+			"lookup_name": "pickable_showcase",
+			"description": "pickable_showcase.",
+			"scene": "res://commons/scenes/pickable_showcase.tscn"
+		},		
+		
 		"sphere": {
 			"name": "sphere",
 			"lookup_name": "sphere",
@@ -768,6 +775,13 @@
 			"description": "this is the test",
 			"scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn"
 		},
+		"fibonacci_pagoda": {
+			"name": "fibonacci_pagoda",
+			"lookup_name": "fibonacci_pagoda",
+			"description": "fibonacci_pagoda",
+			"scene": "res://algorithms/fractals/pillar/fibonacci_pagoda.tscn"
+		},
+		
 		"test_scene_3": {
 			"name": "test",
 			"lookup_name": "test_scene_3",
@@ -3903,6 +3917,24 @@
 			"lookup_name": "golden_rectangle",
 			"description": "Classic golden ratio rectangle subdivision with Fibonacci spiral. Shows numbers 1,1,2,3,5,8,13,21... Presets: classic, minimal, rainbow, deep, fast",
 			"scene": "res://algorithms/fractals/golden_rectangle/golden_rectangle.tscn"
+		},
+		"plus": {
+			"name": "Plus",
+			"lookup_name": "plus",
+			"description": "Plus/cross shape (+) with 4 arms at 90 degree angles. Classic health pickup shape.",
+			"scene": "res://commons/primitives/plus/plus.tscn"
+		},
+		"trafficcone": {
+			"name": "Traffic Cone",
+			"lookup_name": "trafficcone",
+			"description": "Orange traffic cone with white stripes and square base. Construction site safety marker.",
+			"scene": "res://commons/primitives/trafficcone/trafficcone.tscn"
+		},
+		"hole_with_cones": {
+			"name": "Hole With Cones",
+			"lookup_name": "hole_with_cones",
+			"description": "Ground plane with circular hole and 3 traffic cones around it. Construction site warning setup.",
+			"scene": "res://commons/primitives/combines/hole_with_cones.tscn"
 		}
 	}
 }

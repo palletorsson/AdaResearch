@@ -7,7 +7,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 9,
-			"depth": 23,
+			"depth": 26,
 			"max_height": 4
 		},
 		"metadata": {	
@@ -83,11 +83,13 @@
 			[" ", " ", " ", "lshape:0:-0.5", " ", "lshape:180:-0.5", " ", " ", " "],
 			["prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90", " ", "prism_block:90", "prism_block:90", "prism_block:90", "prism_block:90"],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],	
+			[" ", "torus_radials_rings#inner:0.2#outer:0.6", " ", "capsule_radials_rings#radial:6#rings:3", " ", "cylinder_radials_rings:90:1:#config:12:8", " ", " ", " "],	
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],								
-			[" ", " ", " ", " ", "diamonds:0:1:0.8", " ", " ", " ", " "],
+			[" ", "plus:90:1", " ", " ", "diamonds:0:1:0.8", " ", "trafficcone:0:0", " ", "hole_with_cones:90:1"],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],					
 			
+
+
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],

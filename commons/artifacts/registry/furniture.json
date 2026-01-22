@@ -1,0 +1,46 @@
+{
+	"artifacts": {
+		"chair_assembly_puzzle": {
+			"name": "Chair Assembly Puzzle",
+			"lookup_name": "chair_assembly_puzzle",
+			"description": "Interactive puzzle where players assemble a Judd-inspired chair by scaling, rotating, and positioning cube pieces to match ghost guides.",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+		},
+		"scalable_wood_cube": {
+			"name": "Scalable Wood Cube",
+			"lookup_name": "scalable_wood_cube",
+			"description": "Grabbable wood cube with two-handed scaling support. Scale snaps to discrete values (0.05x to 4.0x) per axis.",
+			"scene": "res://commons/primitives/cubes/grab_cube_scalable.tscn"
+		},
+		"attachable_wood_cube": {
+			"name": "Attachable Wood Cube",
+			"lookup_name": "attachable_wood_cube",
+			"description": "Scalable wood cube with attachment points on all faces. Pieces snap together when attachment points align and face each other.",
+			"scene": "res://commons/primitives/cubes/grab_cube_attachable.tscn"
+		},
+		"snappable_wood_cube": {
+			"name": "Snappable Wood Cube",
+			"lookup_name": "snappable_wood_cube",
+			"description": "Scalable wood cube with grid-based face snapping. Faces snap to 0.05m grid alignment when parallel and close.",
+			"scene": "res://commons/primitives/cubes/grab_cube_snappable.tscn"
+		},
+		"stool_assembly_puzzle": {
+			"name": "Stool Assembly Puzzle",
+			"lookup_name": "stool_assembly_puzzle",
+			"description": "Assembly puzzle for a simple stool (seat + 4 legs).",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"config": {
+				"furniture_type": 1
+			}
+		},
+		"table_assembly_puzzle": {
+			"name": "Table Assembly Puzzle",
+			"lookup_name": "table_assembly_puzzle",
+			"description": "Assembly puzzle for a minimal table (top + 4 legs).",
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"config": {
+				"furniture_type": 2
+			}
+		}
+	}
+}

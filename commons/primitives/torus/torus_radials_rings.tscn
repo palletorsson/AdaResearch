@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://torus_radials_rings_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/torus/torus_radials_rings.gd" id="1_torus"]
+
+[node name="TorusRadialsRings" type="Node3D"]
+script = ExtResource("1_torus")
+rings = 16
+ring_segments = 8
+inner_radius = 0.3
+outer_radius = 0.5
