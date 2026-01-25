@@ -644,6 +644,16 @@
 			"content_file": "res://commons/context/clipboard/tutorial_text/coordinate_system_axioms.gd",
 			"order": 2.0,
 			"sequence": "primitives"
+		},
+		"vr_scale_controls": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/vr_scale_controls.gd",
+			"order": 0.0,
+			"sequence": "controls"
+		},
+		"vr_controls_full": {
+			"content_file": "res://commons/context/clipboard/tutorial_text/vr_controls_full.gd",
+			"order": 1.0,
+			"sequence": "controls"
 		}
 	}
 }

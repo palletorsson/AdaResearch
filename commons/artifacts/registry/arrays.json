@@ -1,0 +1,72 @@
+{
+	"artifacts": {
+		"pattern_tile_puzzle": {
+			"name": "Pattern Tile Puzzle",
+			"lookup_name": "pattern_tile_puzzle",
+			"description": "Create patterns on a small tile grid. Watch them repeat across a carpet. Handmade meets computational - from textile traditions to pixel art.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn"
+		},
+		"pattern_tile_4x4": {
+			"name": "4x4 Pattern Tile",
+			"lookup_name": "pattern_tile_4x4",
+			"description": "Basic 4x4 tile pattern editor. Simple repeat mode.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"config": {
+				"tile_size": 4,
+				"repeat_mode": 0
+			}
+		},
+		"pattern_tile_mirror": {
+			"name": "Mirror Pattern Tile",
+			"lookup_name": "pattern_tile_mirror",
+			"description": "4x4 tile with mirror symmetry (kaleidoscope effect).",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"config": {
+				"tile_size": 4,
+				"repeat_mode": 3
+			}
+		},
+		"pattern_tile_8x8": {
+			"name": "8x8 Pattern Tile",
+			"lookup_name": "pattern_tile_8x8",
+			"description": "Larger 8x8 tile for more complex patterns.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"config": {
+				"tile_size": 8,
+				"repeat_mode": 0
+			}
+		},
+		"pattern_tile_brick": {
+			"name": "Brick Pattern Tile",
+			"lookup_name": "pattern_tile_brick",
+			"description": "Tile with brick/half-drop offset. Classic masonry pattern.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"config": {
+				"tile_size": 4,
+				"repeat_mode": 6
+			}
+		},
+		"pattern_tile_herringbone": {
+			"name": "Herringbone Pattern Tile",
+			"lookup_name": "pattern_tile_herringbone",
+			"description": "Tile with herringbone weave pattern.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"config": {
+				"tile_size": 4,
+				"repeat_mode": 8
+			}
+		},
+		"index_visualizer": {
+			"name": "Index Visualizer",
+			"lookup_name": "index_visualizer",
+			"description": "Displays current grid position as array index [row, col].",
+			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn"
+		},
+		"pattern_tile_cube": {
+			"name": "Pattern Tile Cube",
+			"lookup_name": "pattern_tile_cube",
+			"description": "Small grabbable color cube for pattern tile puzzle. Drag to grid cells to place colors.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn"
+		}
+	}
+}

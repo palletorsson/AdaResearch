@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://quest_controller_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/questcontroller/quest_controller.gd" id="1_controller"]
+
+[node name="QuestController" type="Node3D"]
+script = ExtResource("1_controller")

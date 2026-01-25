@@ -1,16 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3572lqu1prwv"]
+[gd_scene load_steps=2 format=3 uid="uid://c3572lqu1prwv"]
 
-[ext_resource type="PackedScene" uid="uid://c5m8vh3nqp2rt" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn" id="1_modulor"]
-[ext_resource type="PackedScene" uid="uid://c8j5k2v0n7nak" path="res://commons/primitives/logic_display/CategoryLogicDisplay.tscn" id="2_display"]
+[ext_resource type="PackedScene" uid="uid://dpk7m2xqh4n6r" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn" id="1_modulor"]
 
 [node name="ModulorManDemo" type="Node3D"]
 
 [node name="ModulorMan" parent="." instance=ExtResource("1_modulor")]
-
-[node name="TitleDisplay" parent="." instance=ExtResource("2_display")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
-visible = false
-equation = ["Le Corbusier", "dash", "Modulor Man"]
 
 [node name="ProportionLabel1" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.26, 0)

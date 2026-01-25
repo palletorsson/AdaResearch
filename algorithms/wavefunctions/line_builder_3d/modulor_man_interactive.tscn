@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpk7m2xqh4n6r"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.gd" id="1_interactive"]
+[ext_resource type="Material" uid="uid://c4ykukgcxntmi" path="res://commons/resourses/shaders/line_shader.tres" id="2_material"]
+
+[node name="ModulorManInteractive" type="Node3D"]
+script = ExtResource("1_interactive")
+
+[node name="LineMesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_material")
+
+[node name="Points" type="Node3D" parent="."]

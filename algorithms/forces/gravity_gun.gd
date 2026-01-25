@@ -393,9 +393,9 @@ func _update_gravity_restoration(delta: float) -> void:
 func _on_capture_zone_entered(body: Node3D) -> void:
 	if not body is RigidBody3D:
 		return
-	
+
 	var rb = body as RigidBody3D
-	
+
 	# Check if it's a valid object to capture
 	if rb in captured_objects:
 		return
@@ -403,7 +403,7 @@ func _on_capture_zone_entered(body: Node3D) -> void:
 		return
 	if rb in recently_launched:
 		return
-	
+
 	# Check if the object is currently being held by a hand (XRToolsPickable)
 	# We only capture objects that are NOT currently picked up
 	# This allows the user to grab with hand first, then place into zone
@@ -411,53 +411,87 @@ func _on_capture_zone_entered(body: Node3D) -> void:
 		# Object is held by hand - don't capture yet
 		# It will be captured when dropped into the zone
 		return
-	
-	# Object entered zone and is not held - capture it!
+
+	# Only capture objects that:
+	# 1. Are being actively attracted by the gravity gun (targeted_object)
+	# 2. Were recently dropped (in gravity restore queue = was being manipulated)
+	# This prevents the torus from grabbing random objects it bumps into
+	var is_being_attracted = (rb == targeted_object and is_attracting)
+	var was_recently_manipulated = rb in gravity_restore_queue
+
+	if not is_being_attracted and not was_recently_manipulated:
+		return
+
+	# Object entered zone and was being manipulated - capture it!
 	_capture_object(rb)
 
 func _capture_object(body: RigidBody3D) -> void:
 	if body in captured_objects:
 		return
-	
+
 	if captured_objects.size() >= max_captured_objects:
 		if debug:
 			print("[GravityGun] Max captured objects reached")
 		return
-	
+
 	captured_objects.append(body)
-	
+
 	# Store and modify scale
 	if body not in original_scales:
 		original_scales[body] = body.scale
 	body.scale = body.scale * captured_scale
-	
+
 	# Remove from gravity restore queue (captured objects stay zero-g)
 	if body in gravity_restore_queue:
 		gravity_restore_queue.erase(body)
-	
+
 	# Freeze the object
 	body.freeze = true
 	body.gravity_scale = 0.0
 	body.linear_velocity = Vector3.ZERO
 	body.angular_velocity = Vector3.ZERO
-	
+
 	if highlight_targeted:
 		_set_highlight(body, false)
-	
+
 	# Clear as targeted if it was
 	if targeted_object == body:
 		targeted_object = null
-	
+
+	# Connect to picked_up signal so we can release when another hand grabs it
+	if body.has_signal("picked_up") and not body.is_connected("picked_up", _on_captured_object_picked_up):
+		body.picked_up.connect(_on_captured_object_picked_up)
+
 	object_captured.emit(body)
 	if debug:
 		print("[GravityGun] Captured: ", body.name, " (total: ", captured_objects.size(), ")")
 
+## Called when a captured object is picked up by a hand - release it from capture
+func _on_captured_object_picked_up(pickable) -> void:
+	if pickable not in captured_objects:
+		return
+
+	# Restore original scale
+	if pickable in original_scales:
+		pickable.scale = original_scales[pickable]
+		original_scales.erase(pickable)
+
+	# Remove from captured list
+	captured_objects.erase(pickable)
+
+	# Disconnect signal
+	if pickable.has_signal("picked_up") and pickable.is_connected("picked_up", _on_captured_object_picked_up):
+		pickable.picked_up.disconnect(_on_captured_object_picked_up)
+
+	if debug:
+		print("[GravityGun] Released to hand: ", pickable.name, " (remaining: ", captured_objects.size(), ")")
+
 func _update_captured_objects() -> void:
 	if captured_objects.is_empty():
 		return
-	
+
 	var bracelet_pos = capture_zone_area.global_position
-	
+
 	# Clean up invalid objects
 	var to_remove = []
 	for obj in captured_objects:
@@ -467,6 +501,9 @@ func _update_captured_objects() -> void:
 		captured_objects.erase(obj)
 		if obj in original_scales:
 			original_scales.erase(obj)
+		# Disconnect signal if still connected (for valid objects being removed)
+		if is_instance_valid(obj) and obj.has_signal("picked_up") and obj.is_connected("picked_up", _on_captured_object_picked_up):
+			obj.picked_up.disconnect(_on_captured_object_picked_up)
 	
 	var count = captured_objects.size()
 	if count == 0:
@@ -580,31 +617,35 @@ func _update_cooldowns(delta: float) -> void:
 func launch_one() -> void:
 	if captured_objects.is_empty():
 		return
-	
+
 	var obj = captured_objects.pop_front()
 	if not is_instance_valid(obj):
 		return
-	
+
 	# Restore scale
 	if obj in original_scales:
 		obj.scale = original_scales[obj]
 		original_scales.erase(obj)
-	
+
+	# Disconnect picked_up signal
+	if obj.has_signal("picked_up") and obj.is_connected("picked_up", _on_captured_object_picked_up):
+		obj.picked_up.disconnect(_on_captured_object_picked_up)
+
 	# Unfreeze and launch
 	obj.freeze = false
 	obj.gravity_scale = 1.0  # Restore normal gravity on launch
-	
+
 	var launch_dir = -global_transform.basis.z
 	var spread = Vector3(
 		randf_range(-launch_spread, launch_spread),
 		randf_range(-launch_spread, launch_spread),
 		randf_range(-launch_spread, launch_spread)
 	)
-	
+
 	obj.linear_velocity = (launch_dir + spread).normalized() * launch_force
-	
+
 	recently_launched[obj] = launch_cooldown
-	
+
 	object_launched.emit(obj, obj.linear_velocity)
 	if debug:
 		print("[GravityGun] Launched: ", obj.name)
@@ -630,6 +671,9 @@ func release_all() -> void:
 			if obj in original_scales:
 				obj.scale = original_scales[obj]
 				original_scales.erase(obj)
+			# Disconnect picked_up signal
+			if obj.has_signal("picked_up") and obj.is_connected("picked_up", _on_captured_object_picked_up):
+				obj.picked_up.disconnect(_on_captured_object_picked_up)
 			obj.freeze = false
 			obj.gravity_scale = 1.0
 	captured_objects.clear()

@@ -2,70 +2,102 @@
 	"map_info": {
 		"name": "Composition",
 		"lookup_name": "Trans_Composition",
-		"description": "Form as ongoing negotiation. Inspired by Donald Judd's furniture: a chair is just rectangles with the right transforms. Scale, rotate, position—the grammar of making. Complex forms emerge from primitive combinations through systematic transformation.",
+		"description": "from singel primitives to compution a form as ongoing negotiation. Inspired by Donald Judd's furniture: a chair is just rectangles with the right transforms. Scale, rotate, position—the grammar of making. Complex forms emerge from primitive combinations through systematic transformation.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 9,
-			"depth": 9,
-			"max_height": 2
+			"depth": 24,
+			"max_height": 4
 		},
 		"metadata": {
 			"difficulty": "intermediate",
 			"category": "transformations",
-			"estimated_time": "5-10 minutes",
+			"estimated_time": "10-15 minutes",
 			"learning_objectives": [
 				"Transform composition",
 				"Scale as form-giving",
-				"Spatial reasoning",
-				"Assembly thinking"
+				"Primitive combination",
+				"Assembly sequencing",
+				"Relief construction",
+				"Emergent form through physics"
 			]
 		}
 	},
 	"documentation": {
-		"summary": "Trans_Composition - Furniture Assembly Puzzle",
-		"layout": "9x9 platform with central assembly area and workbench for pieces",
-		"objective": "Assemble a chair from primitive cubes by scaling, rotating, and positioning each piece to match ghost guides.",
+		"summary": "Trans_Composition - Assembly Puzzles",
+		"layout": "9x9 platform with multiple assembly stations exploring form composition",
+		"objective": "Build complex forms from primitive shapes. Houses from cubes and pyramids on the conveyor, furniture from scaled cubes, relief compositions, and the balance puzzle where your creation comes alive.",
 		"key_elements": [
-			"chair_assembly_puzzle at center",
-			"6 scalable wood cubes on workbench",
-			"Ghost guides showing target transforms",
-			"Completion grows chair to real size"
+			"assembly_line_puzzle - conveyor belt house building",
+			"chair_assembly_puzzle - Judd-inspired furniture",
+			"shelf_assembly_puzzle - Judd-style shelf construction",
+			"biederman_relief - constructivist relief composition",
+			"lab_assembly_puzzle - Half-Life style lab equipment",
+			"scientific_assembly_puzzle - build real lab equipment (microscope, scales, multimeter)",
+			"equipment_assembly_puzzle - combine equipment into workstations (Level 2 composition)",
+			"balance_puzzle - stack freely, reach height, watch it walk away"
 		]
 	},
 	"layers": {
 		"structure": [
-			["2", "2", "2", "2", "2", "2", "2", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "2", "2", "2", "2", "2", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["3", "2", "3", "2", "2", "2", "3", "1", "3"],
+			["3", "3", "3", "3", "3", "3", "3", "1", "3"],
+			["2", "1", "1", "2", "2", "2", "1", "1", "3"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "3"],
+			["2", "1", "1", "1", "1", "1", "1", "2", "3"],
+			["2", "1", "1", "1", "1", "1", "1", "2", "3"],
+			["2", "1", "1", "1", "1", "1", "1", "2", "3"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "3"],
+			["2", "3", "3", "3", "1", "3", "3", "3", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],			
+			["2", "1", "1", "2", "2", "2", "1", "1", "2"],
+			["2", "1", "1", "3", "2", "3", "1", "1", "2"],
 			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "2", "2", "3", "1", "1", "2"],
-			["2", "1", "1", "2", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
-			["2", "2", "2", "2", "2", "2", "2", "2", "2"]
+			["1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["1", "1", "2", "2", "0", "2", "2", "1", "2"],		
+			["1", "1", "2", "2", "2", "2", "2", "2", "2"]				
 		],
 		"utilities": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", "an:-90"],
-			[" ", "s", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "t", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[" ", "", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],					
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],						
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " ", " ", " "]
 		],
 		"interactables": [
+			[" ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "balance_puzzle:180:-0.5", " ", " ", "biederman_relief:180:-0.5#biederman", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "chair_assembly_puzzle:180:-0.5", " ", " ", " ", " "],
+			[" ", " ", " ", "clipboard#vr_scale_controls:10:0:0.5", "chair_assembly_puzzle:0:-0.5#furniture_type:chair", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			["pattern_tile_puzzle:90#mirror", " ", " ", " ", "", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", "", " "],
+			["pattern_tile_puzzle:90#4x4", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "equipment_assembly_puzzle:180:-0.5#analysis", " ", " ", " ", " "],
+			["chair_assembly_puzzle:-90:-0.5#furniture_type:shelf", " ", " ", " ", "", " ", " ", " ", "assembly_line_puzzle:-90:-0.5#scales"],
+			[" ", " ", " ", " ", "assembly_line_puzzle:180:-0.7#puzzle_type:houses", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+			[" ", " ", "", " ", " ", " ", " ", " ", "assembly_line_puzzle:-90:-0.5#microscope"]
 		]
 	},
 	"utility_definitions": {

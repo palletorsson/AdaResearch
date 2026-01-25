@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs5u2tp5yq6qf"]
+
+[ext_resource type="Script" uid="uid://dtlg6if0wfioi" path="res://commons/glass_rack/GlassRackController.gd" id="1_controller"]
+
+[node name="GlassRack" type="Node3D"]
+script = ExtResource("1_controller")
+auto_build = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.091265)

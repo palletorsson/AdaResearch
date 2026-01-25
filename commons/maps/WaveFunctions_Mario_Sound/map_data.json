@@ -47,9 +47,9 @@
 			[" ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "pick_up_cube", " ", " ", " ", " ", " ", " ", ""],
-			[" ", " ", " ", "AudioContr:-90#config:mario_rack", "pick_up_cube", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "AudioContr#config:sine_wave_rack", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "pick_up_cube", " ", " ", " ", " ", "GlassRack#config:simple_tube", " ", ""],
+			[" ", " ", " ", "AudioContr:-90#config:mario_rack", "pick_up_cube", " ", " ", "GlassRack:#config:simple_tube", " ", "science_glasses", " ", " "],
 			[" ", " ", " ", " ", "pick_up_cube", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

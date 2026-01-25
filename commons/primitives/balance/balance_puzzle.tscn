@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5qb3xk8t1uvn"]
+
+[ext_resource type="Script" path="res://commons/primitives/balance/balance_puzzle.gd" id="1_balance"]
+
+[node name="BalancePuzzle" type="Node3D"]
+script = ExtResource("1_balance")
+height_threshold = 0.4
+stability_time = 1.5
+piece_count = 6
+cube_ratio = 0.7
+piece_scale = 0.08
+spawn_offset = Vector3(0.3, 0.1, 0)
+platform_size = Vector3(0.5, 0.05, 0.5)
+platform_color = Color(0.3, 0.3, 0.35, 1)
+walker_speed = 0.15
+walker_step_height = 0.03
+walker_step_frequency = 3.0

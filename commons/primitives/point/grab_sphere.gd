@@ -45,6 +45,9 @@ func _ready() -> void:
 	# Call the super
 	super()
 
+	# Prevent gravity gun from affecting drag points
+	add_to_group("no_gravity_gun")
+
 	# Get the original material
 	var mesh_instance = get_node_or_null("MeshInstance3D")
 	if mesh_instance:

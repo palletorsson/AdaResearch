@@ -1,0 +1,73 @@
+{
+	"rack_info": {
+		"name": "Sine Wave Rack",
+		"description": "Simple sine wave oscillator with frequency control and waveform display",
+		"version": "1.0",
+		"sound_type": "basic_sine_wave"
+	},
+	"layout": {
+		"col_spacing": 0.14,
+		"row_spacing": 0.14,
+		"hide_selection": true,
+		"hide_buttons": true
+	},
+	"grid": [
+		["lbl_title", " ", " ", "mtr_vol", "disp_waveform"],
+		["btn_on", "sl_freq", "sl_amp"],
+		["btn_off", "sl_dur"]
+	],
+	"control_definitions": {
+		"lbl_title": {
+			"type": "label",
+			"label": "SINE WAVE"
+		},
+		"btn_on": {
+			"type": "btn",
+			"label": "PLAY",
+			"action": "play",
+			"color": "#00ff00"
+		},
+		"btn_off": {
+			"type": "btn",
+			"label": "STOP",
+			"action": "stop",
+			"color": "#ff0000"
+		},
+		"sl_freq": {
+			"type": "slider",
+			"label": "Frequency",
+			"parameter": "frequency",
+			"min": 20.0,
+			"max": 2000.0,
+			"default": 440.0
+		},
+		"sl_amp": {
+			"type": "slider",
+			"label": "Volume",
+			"parameter": "amplitude",
+			"min": 0.0,
+			"max": 1.0,
+			"default": 0.3
+		},
+		"sl_dur": {
+			"type": "slider",
+			"label": "Duration",
+			"parameter": "duration",
+			"min": 0.5,
+			"max": 10.0,
+			"default": 2.0
+		},
+		"mtr_vol": {
+			"type": "meter",
+			"label": "VU",
+			"source": "rack"
+		},
+		"disp_waveform": {
+			"type": "simple_waveform",
+			"label": "OUTPUT",
+			"source": "rack",
+			"freq_param": "frequency",
+			"amp_param": "amplitude"
+		}
+	}
+}

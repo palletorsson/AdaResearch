@@ -1,13 +1,14 @@
 {
 	"map_info": {
 		"name": "Point One",
+		"lookup_name": "Point_One",		
 		"description": "A single instantiated point beyond the zero reference. This map isolates the minimal act of individuation within an infrastructural field. It reveals how a point only exists as a callable, indexed abstraction within a larger system, not as a native entity of space.",
 		"description_2": "The Point introduces discreteness and memory into space. By allowing the player to place or encounter isolated points, the map demonstrates how continuous space is discretized into countable, nameable units. A point here is not yet measurement, but a declaration: a moment where position stabilizes into memory. The map explores how abstraction begins by freezing motion and how every point carries the trace of the body that instantiated it.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 7,
+			"depth": 12,
 			"max_height": 2
 		},
 		"metadata": {
@@ -31,9 +32,9 @@
 	},
 	"layers": {
 		"structure": [
+			["0", "1", "1", "0", "1", "0", "0"],
 			["1", "1", "1", "0", "0", "0", "0"],
 			["1", "1", "1", "0", "0", "0", "0"],
-			["1", "1", "1", "0", "1", "0", "0"],
 			["1", "1", "1", "0", "0", "0", "0"],
 			["1", "1", "1", "0", "0", "0", "0"],
 			["1", "0", "1", "0", "0", "0", "0"],
@@ -41,10 +42,10 @@
  	
 		],
 		"utilities": [
-			["m:0:3:-0.5:0.1", " ", " ", " ", " ", " ", " "],
+			["m:0:3:-0.5:0.1", " ", " ", " ", "an:-90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "an:-90", " ", " "],
-			[" ", "la:point", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "t", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "", " "],
@@ -52,16 +53,16 @@
 			[" ", "3t:that_which_has_no_part", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
-			["CoordinateSystem3M:0:-1.45", " ", " ", " ", " ", " ", " "],
+			["origin:180:-0.5", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			[" ", "interactive_point_origin", " ", " ", " ", " ", " "],
+			[" ", "interactive_point_origin:0:1", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "], 
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
-			[" ", " ", " ", " ", " ", " ", " "]
+			["frame_counter_display:180", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]
 		]
 	},
 	"utility_definitions": {

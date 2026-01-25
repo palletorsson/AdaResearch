@@ -1,5 +1,7 @@
 # Composition
 
-A first chair is just rectangles. Scale, rotate, position. The grammar of making.
+A chair is just rectangles. A house is a cube and a pyramid. Lab equipment is stacked shapes with the right transforms.
 
-Form emerges from negotiation—between material and tool, body and time, primitive and rule.
+Scale, rotate, position. The grammar of making.
+
+Form emerges from negotiation—between primitive and rule, sequence and completion.

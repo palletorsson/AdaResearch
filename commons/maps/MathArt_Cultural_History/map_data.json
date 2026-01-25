@@ -1,0 +1,121 @@
+{
+	"map_info": {
+		"name": "Mathematics and Art: A Cultural History",
+		"description": "From construction to abstraction - explore the deep resonance between mathematics and visual art through hands-on assembly puzzles and geometric compositions.",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 11,
+			"depth": 11,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "intermediate",
+			"category": "art_mathematics",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Spatial reasoning through construction",
+				"Geometric abstraction principles",
+				"Mathematical structure in visual art",
+				"Form as arrangement of primitives"
+			],
+			"references": [
+				"Lynn Gamwell - Mathematics and Art: A Cultural History",
+				"Charles Biederman - Art as the Evolution of Visual Knowledge",
+				"Piet Mondrian - Neo-Plasticism",
+				"Josef Albers - Interaction of Color"
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "s", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"artifacts": [
+			" ",
+			" ",
+			"3:2:shelf_assembly_puzzle",
+			" ",
+			" ",
+			"2:5:biederman_relief:90",
+			" ",
+			"8:7:mondrian_relief:270",
+			" ",
+			"5:9:albers_relief",
+			" "
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "penrose_tiling_3d", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Continue",
+			"description": "Proceed to next experience",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		},
+		"s": {
+			"properties": {
+				"height": 5.5
+			}
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.5, 0.5, 0.55],
+		"ambient_energy": 0.7,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.3],
+			"color": [1.0, 0.98, 0.95],
+			"energy": 1.0
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"auto_reveal_on_entry": true,
+		"initial_tile_visibility": "visible",
+		"background": {
+			"type": "sky",
+			"color": [0.85, 0.85, 0.9]
+		}
+	}
+}

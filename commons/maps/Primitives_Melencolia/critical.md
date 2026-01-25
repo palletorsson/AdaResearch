@@ -158,3 +158,113 @@ The question left unanswered: **What do you build with complete tools and incomp
 This is not failure. This is **geometric melancholy** - the beautiful sadness of perfect knowledge confronting imperfect world.
 
 The final lesson: **Master the tools. Recognize their limits. Build anyway.**
+
+---
+
+## Chirimuuta, Heidegger, and the Weight of Knowing
+
+M. Chirimuuta's philosophical framework deepens Dürer's Melencolia into contemporary epistemology. Her work on neuroscience and cognition speaks directly to this map's staging of "the weight of knowing."
+
+### Finitude as Constitutive, Not Defect
+
+Chirimuuta, drawing on Heidegger: "The desire to transcend embodiment assumes that limitation is a defect. Heidegger suggests instead that finitude is constitutive of meaning."
+
+The wingèd angel sits grounded not despite her wings but **because** of them. Wings that could fly anywhere reveal: **without constraint, there is no orientation**.
+
+This inverts the melancholy:
+- Not: "I am limited, therefore sad"
+- But: "Limits constitute the very possibility of understanding"
+
+The discrete primitives don't **fail** at continuity—they provide the **finite frame** within which form becomes intelligible. Remove the frame, remove meaning.
+
+### The Transhumanist Misunderstanding
+
+Chirimuuta frames transhumanist dreams as misunderstandings of what it means to know:
+
+The wish to transcend:
+- Discrete for continuous
+- Finite for infinite
+- Bounded for boundless
+
+—assumes limitation is obstacle. But:
+- Orientation requires limits
+- Understanding arises **within** constraint, not beyond it
+- Meaning is produced by what is **excluded**, not only by what is included
+
+The magic square's perfection **within** 4×4 is not diminished by its boundedness. The boundedness is the **condition** of its perfection.
+
+### Embodiment and Stake
+
+Chirimuuta argues that human cognition is sensorimotor, metabolically constrained, temporally embedded. A disembodied language model may simulate competence but lacks:
+- Vulnerability
+- Action-consequence coupling
+- Stakes
+
+Dürer's angel has **stakes**: she could fly but doesn't. The dog could wake but sleeps. The tools could build but rest.
+
+This map forces the player to **walk through** geometric mastery, not merely view it. Your body moves through the forms. You have stake in the traversal—attention, time, orientation.
+
+A disembodied viewer would miss the **metabolic cost** of understanding. Melancholy is not intellectual but **felt**.
+
+### Understanding as Enacted
+
+Chirimuuta: "Understanding is enacted, not extracted."
+
+The scattered tools are not failed extraction but **suspended enaction**. The angel knows everything but has not yet **done** anything with the knowledge.
+
+This is the map's question: **What do you enact with what you know?**
+
+Knowing geometry is not understanding geometry. Understanding emerges from **building**, not from possessing the tools to build.
+
+The melancholy is: Having tools is not having enacted understanding. You must still **make** something.
+
+### Scientific Realism Pushed Too Far
+
+Chirimuuta warns against "scientific realism pushed too far—the assumption that if a model works, it must correspond directly to the underlying ontology."
+
+Primitives **work**. They render worlds, enable interaction, support calculation.
+
+But: Do primitives **correspond** to how form "really is"?
+
+The melancholy discovers: **No**. Primitives are one model among possible models. Their success does not establish their metaphysical priority.
+
+This is not failure but **mature recognition**: The model worked. The model was contingent. Both are true.
+
+### Ada Research and Haptic Epistemology
+
+What Chirimuuta's framework offers this map is a name for what Ada Research practices: **haptic epistemology**.
+
+Ada Research does not reject computation or modeling. It:
+- Exposes their seams (the faceted sphere)
+- Stages their failures (the unreachable circle)
+- Gives form to what does not compress (melancholy itself)
+
+Haptic epistemology: learning by engagement rather than representation alone.
+
+The queer, in this framework, is not identity-based but **epistemic**:
+- What persists outside optimization
+- What exceeds representational closure
+- What forces models to remain provisional
+
+Melancholy is such a queer remainder—the feeling that escapes the formal system, present in Dürer's engraving, present here.
+
+---
+
+## Conclusion: Melancholy as Method
+
+Chirimuuta provides vocabulary for what the primitives sequence has practiced:
+
+1. **Abstraction is necessary but dangerous** (primitives enable and constrain)
+2. **Models explain by omission** (discrete excludes continuous)
+3. **Understanding is enacted, not extracted** (you must build, not merely know)
+4. **Finitude is not bug but condition** (limits constitute meaning)
+
+Dürer's angel sits with these recognitions. The map ends with them.
+
+Not paralysis, but **pause**. Not failure, but **orientation**.
+
+The question remains: **What do you build, knowing that building is always within limits?**
+
+The answer is not in geometry. It is in what you choose to make—with full knowledge that your tools are contingent, your models partial, your understanding enacted through making.
+
+**Master the tools. Recognize their limits. Build anyway. And know that the melancholy is part of the wisdom, not its opposite.**

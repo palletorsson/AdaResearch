@@ -4,17 +4,30 @@ extends Node3D
 @export var grab_point_path: NodePath = NodePath("GrabPoint")
 @export var draw_sphere_path: NodePath = NodePath("GrabPoint/DrawSphere")
 
+# Drawing mode
+@export var continuous_drawing: bool = true  # Keep drawing after placing points (no need to re-grab)
+
 # Grid snapping
 @export var snap_to_grid: bool = true
 @export var grid_size: float = 0.1
 @export var point_snap_distance: float = 0.15  # Distance to snap to existing points
 
+# Haptic feedback
+@export var haptic_snap_intensity: float = 0.5
+@export var haptic_snap_duration: float = 0.1
+@export var haptic_triangle_intensity: float = 0.8
+@export var haptic_triangle_duration: float = 0.2
+
 # Visual settings
-@export var point_indicator_size: float = 0.03
+@export var point_indicator_size: float = 0.003  # Tiny vertex dots
 @export var line_color: Color = Color(0.2, 1.0, 0.6, 1.0)
 @export var active_line_color: Color = Color(1.0, 0.8, 0.2, 1.0)
 @export var point_color: Color = Color(0.3, 0.7, 1.0, 1.0)
 @export var snap_indicator_color: Color = Color(1.0, 0.3, 0.3, 1.0)
+@export var editable_points: bool = true  # Allow grabbing and moving points
+
+# Preload pickable scene for editable points
+const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 
 # Triangle mesh settings
 @export var triangle_colors: Array[Color] = [
@@ -32,7 +45,7 @@ var _is_grabbed: bool = false
 
 # Point tracking
 var placed_points: Array[Vector3] = []
-var point_indicators: Array[MeshInstance3D] = []
+var point_indicators: Array[Node3D] = []  # Can be MeshInstance3D or pickable RigidBody3D
 var current_path: Array[int] = []  # Indices into placed_points
 
 # Line visualization
@@ -48,28 +61,32 @@ var triangle_color_index: int = 0
 # Snap indicator
 var snap_indicator: MeshInstance3D
 var snap_target_index: int = -1
+var _draw_ring: MeshInstance3D
+var _ring_pulse_time: float = 0.0
+var _previous_snap_target: int = -1
 
 func _ready() -> void:
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
-	
+	_draw_ring = get_node_or_null("GrabPoint/DrawRing")
+
 	if not _grab_point:
 		push_warning("DrawTriangleFaces: Missing grab point in scene.")
 		set_process(false)
 		return
-	
+
 	if not _draw_sphere:
 		_draw_sphere = _grab_point
-	
+
 	_setup_line_visualization()
 	_setup_snap_indicator()
-	
+
 	# Connect to grab point signals
 	if _grab_point.has_signal("dropped"):
 		_grab_point.dropped.connect(_on_grab_point_dropped)
 	if _grab_point.has_signal("picked_up"):
 		_grab_point.picked_up.connect(_on_grab_point_picked_up)
-	
+
 	set_process(true)
 	print("DrawTriangleFaces: Ready! Pick up the sphere and start drawing.")
 
@@ -123,23 +140,38 @@ func _setup_snap_indicator() -> void:
 	snap_indicator.set_as_top_level(true)
 	add_child(snap_indicator)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# Pulse the ring when grabbed
+	if _draw_ring and _is_grabbed:
+		_ring_pulse_time += delta * 3.0
+		var pulse = 0.8 + sin(_ring_pulse_time) * 0.2
+		_draw_ring.scale = Vector3.ONE * pulse
+
 	if not _draw_sphere or not _is_grabbed:
 		return
-	
+
 	var current_pos = _draw_sphere.global_position
 	var snapped_pos = snap_position_to_grid(current_pos)
-	
+
 	# Check if near an existing point
 	snap_target_index = _find_nearby_point(snapped_pos)
-	
+
+	# Haptic feedback when entering snap range
+	if snap_target_index >= 0 and snap_target_index != _previous_snap_target:
+		if snap_target_index != _get_last_point_in_path():
+			_trigger_haptic(haptic_snap_intensity * 0.5, haptic_snap_duration * 0.5)
+	_previous_snap_target = snap_target_index
+
 	# Update snap indicator
 	if snap_target_index >= 0 and snap_target_index != _get_last_point_in_path():
 		snap_indicator.global_position = placed_points[snap_target_index]
 		snap_indicator.visible = true
+		# Pulse snap indicator
+		var pulse = 1.0 + sin(_ring_pulse_time * 2.0) * 0.15
+		snap_indicator.scale = Vector3.ONE * pulse
 	else:
 		snap_indicator.visible = false
-	
+
 	# Update active line preview
 	_update_active_line_preview(snapped_pos)
 
@@ -165,84 +197,180 @@ func _update_active_line_preview(current_pos: Vector3) -> void:
 
 func _on_grab_point_picked_up(_pickable) -> void:
 	_is_grabbed = true
-	print("DrawTriangleFaces: Grabbed! Move to place points.")
+
+	# If path is empty but we have points, allow starting from any existing point
+	if current_path.is_empty() and not placed_points.is_empty():
+		# Find nearest point to start from
+		var nearest_idx = _find_nearby_point(_draw_sphere.global_position)
+		if nearest_idx >= 0:
+			current_path.append(nearest_idx)
+			print("DrawTriangleFaces: Continuing from point %d" % nearest_idx)
+		else:
+			print("DrawTriangleFaces: Grabbed! Move near a point or place a new one.")
+	else:
+		print("DrawTriangleFaces: Grabbed! Continue drawing.")
 
 func _on_grab_point_dropped(_pickable) -> void:
 	if not _is_grabbed:
 		return
-	
-	_is_grabbed = false
+
 	var drop_pos = _draw_sphere.global_position
 	var snapped_pos = snap_position_to_grid(drop_pos)
-	
+
 	# Check if we're snapping to an existing point
 	var nearby_index = _find_nearby_point(snapped_pos)
-	
+
 	if nearby_index >= 0:
 		# Snapping to existing point
 		_handle_snap_to_point(nearby_index)
 	else:
 		# Create new point
 		_create_new_point(snapped_pos)
-	
+
 	# Rebuild line visualization
 	_rebuild_lines()
-	
-	# Clear active line
-	active_line_mesh.clear_surfaces()
-	snap_indicator.visible = false
+
+	# In continuous mode, keep drawing active
+	if continuous_drawing:
+		# Stay in grabbed state - drawing continues
+		# Just clear the snap indicator, keep active line showing
+		snap_indicator.visible = false
+		print("DrawTriangleFaces: Point placed, continue drawing...")
+	else:
+		# Standard mode - stop drawing until next pickup
+		_is_grabbed = false
+		active_line_mesh.clear_surfaces()
+		snap_indicator.visible = false
 
 func _handle_snap_to_point(point_index: int) -> void:
 	var last_point = _get_last_point_in_path()
-	
+
 	# Don't snap to the same point we just placed
 	if point_index == last_point:
 		print("DrawTriangleFaces: Cannot snap to the last placed point.")
 		return
-	
+
 	# Add this point to current path
 	current_path.append(point_index)
-	
+
+	# Haptic feedback for snap
+	_trigger_haptic(haptic_snap_intensity, haptic_snap_duration)
+
 	# Check if we've closed a loop with at least 3 points
 	if _is_loop_closed():
 		var loop_size = current_path.size()
 		print("DrawTriangleFaces: Loop closed with %d points!" % loop_size)
-		
+
+		# Stronger haptic for triangle completion
+		_trigger_haptic(haptic_triangle_intensity, haptic_triangle_duration)
+		_play_triangle_sound()
+
 		# Create triangles from the closed loop
 		_create_triangles_from_path()
-		
+
 		# Start new path from this point
 		current_path.clear()
 		current_path.append(point_index)
-	
+
 	print("DrawTriangleFaces: Snapped to point %d" % point_index)
 
 func _create_new_point(position: Vector3) -> void:
 	var point_index = placed_points.size()
 	placed_points.append(position)
 	current_path.append(point_index)
-	
-	# Create visual indicator
+
+	if editable_points:
+		_create_editable_point(point_index, position)
+	else:
+		_create_static_point(point_index, position)
+
+	print("DrawTriangleFaces: Created point %d at %v" % [point_index, position])
+
+func _create_editable_point(point_index: int, position: Vector3) -> void:
+	# Create pickable point that can be grabbed and moved
+	var pickable = PICKABLE_SCENE.instantiate()
+	pickable.name = "Point_%d" % point_index
+	pickable.set_meta("point_index", point_index)
+
+	# Configure pickable
+	pickable.ranged_grab_method = 0  # Raycast
+	pickable.freeze = true  # Start frozen
+	pickable.collision_layer = 1
+	pickable.collision_mask = 0
+
+	# Add collision shape
+	var collision = CollisionShape3D.new()
+	var shape = SphereShape3D.new()
+	shape.radius = point_indicator_size * 2.0  # Larger for easier grabbing
+	collision.shape = shape
+	pickable.add_child(collision)
+
+	# Add mesh
+	var mesh_instance = MeshInstance3D.new()
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = point_indicator_size
+	sphere_mesh.height = point_indicator_size * 2
+	sphere_mesh.radial_segments = 16
+	sphere_mesh.rings = 8
+	mesh_instance.mesh = sphere_mesh
+
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = point_color
+	material.emission_enabled = true
+	material.emission = point_color
+	material.emission_energy_multiplier = 1.5
+	mesh_instance.material_override = material
+	pickable.add_child(mesh_instance)
+
+	# Add to tree and position
+	pickable.set_as_top_level(true)
+	add_child(pickable)
+	pickable.global_position = position
+
+	# Connect signals for editing
+	pickable.picked_up.connect(_on_edit_point_picked_up.bind(point_index))
+	pickable.dropped.connect(_on_edit_point_dropped.bind(point_index))
+
+	point_indicators.append(pickable)
+
+func _create_static_point(point_index: int, position: Vector3) -> void:
+	# Create non-editable visual indicator
 	var indicator = MeshInstance3D.new()
 	indicator.name = "Point_%d" % point_index
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = point_indicator_size
 	sphere_mesh.height = point_indicator_size * 2
 	indicator.mesh = sphere_mesh
-	
+
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_color = point_color
 	material.emission_enabled = true
 	material.emission = point_color
 	indicator.material_override = material
-	
-	indicator.global_position = position
+
 	indicator.set_as_top_level(true)
 	add_child(indicator)
+	indicator.global_position = position
 	point_indicators.append(indicator)
-	
-	print("DrawTriangleFaces: Created point %d at %v" % [point_index, position])
+
+func _on_edit_point_picked_up(_pickable, point_index: int) -> void:
+	print("DrawTriangleFaces: Editing point %d" % point_index)
+
+func _on_edit_point_dropped(_pickable, point_index: int) -> void:
+	# Update the point position in our array
+	var new_pos = point_indicators[point_index].global_position
+	if snap_to_grid:
+		new_pos = snap_position_to_grid(new_pos)
+		point_indicators[point_index].global_position = new_pos
+
+	placed_points[point_index] = new_pos
+	print("DrawTriangleFaces: Point %d moved to %v" % [point_index, new_pos])
+
+	# Rebuild all visuals
+	_rebuild_lines()
+	_rebuild_all_triangles()
 
 func _find_nearby_point(position: Vector3) -> int:
 	for i in range(placed_points.size()):
@@ -378,19 +506,74 @@ func _create_triangles_from_path() -> void:
 
 func _rebuild_lines() -> void:
 	line_mesh.clear_surfaces()
-	
+
 	if current_path.size() < 2:
 		return
-	
+
 	line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	
+
 	for i in range(current_path.size() - 1):
 		var p0 = placed_points[current_path[i]]
 		var p1 = placed_points[current_path[i + 1]]
 		line_mesh.surface_add_vertex(p0)
 		line_mesh.surface_add_vertex(p1)
-	
+
 	line_mesh.surface_end()
+
+func _rebuild_all_triangles() -> void:
+	# Rebuild all triangle meshes with updated point positions
+	for tri_data in completed_triangles:
+		var loop_points: Array = tri_data.points
+		var mesh_instance: MeshInstance3D = tri_data.mesh
+
+		if loop_points.size() < 3:
+			continue
+
+		# Rebuild the mesh
+		var st = SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+		# Get the existing material color
+		var tri_color = Color.WHITE
+		if mesh_instance.material_override:
+			tri_color = mesh_instance.material_override.albedo_color
+
+		# Fan triangulation from first point
+		var first_point = placed_points[loop_points[0]]
+
+		for i in range(1, loop_points.size() - 1):
+			var v0 = first_point
+			var v1 = placed_points[loop_points[i]]
+			var v2 = placed_points[loop_points[i + 1]]
+
+			# Calculate normal
+			var edge1 = v1 - v0
+			var edge2 = v2 - v0
+			var normal = edge1.cross(edge2).normalized()
+
+			# Front face
+			st.set_normal(normal)
+			st.set_color(tri_color)
+			st.add_vertex(v0)
+			st.set_normal(normal)
+			st.set_color(tri_color)
+			st.add_vertex(v1)
+			st.set_normal(normal)
+			st.set_color(tri_color)
+			st.add_vertex(v2)
+
+			# Back face
+			st.set_normal(-normal)
+			st.set_color(tri_color)
+			st.add_vertex(v0)
+			st.set_normal(-normal)
+			st.set_color(tri_color)
+			st.add_vertex(v2)
+			st.set_normal(-normal)
+			st.set_color(tri_color)
+			st.add_vertex(v1)
+
+		mesh_instance.mesh = st.commit()
 
 func snap_position_to_grid(pos: Vector3) -> Vector3:
 	if not snap_to_grid:
@@ -424,18 +607,65 @@ func clear_all() -> void:
 func undo_last_point() -> void:
 	if placed_points.is_empty():
 		return
-	
+
 	# Remove last point indicator
 	var last_indicator = point_indicators.pop_back()
 	last_indicator.queue_free()
-	
+
 	# Remove from placed points
 	placed_points.pop_back()
-	
+
 	# Remove from current path if it's there
 	if not current_path.is_empty() and current_path[-1] == placed_points.size():
 		current_path.pop_back()
-	
+
 	_rebuild_lines()
 	print("DrawTriangleFaces: Undid last point")
 
+
+func _trigger_haptic(intensity: float, duration: float) -> void:
+	if not _grab_point:
+		return
+
+	# Find the hand holding this object
+	var picker = _grab_point.get("picked_up_by") if _grab_point.has_method("get") else null
+	if not picker:
+		# Try alternative property names
+		if "picked_up_by" in _grab_point:
+			picker = _grab_point.picked_up_by
+
+	if picker and picker.has_method("trigger_haptic_pulse"):
+		picker.trigger_haptic_pulse("haptic", intensity, duration, 0.0, 0.0)
+
+
+func _play_triangle_sound() -> void:
+	if not has_node("/root/SoundBank"):
+		return
+
+	var sound_bank = get_node("/root/SoundBank")
+	var sound_stream = sound_bank.get_sound("AudioSynthesizer.COIN_COLLECT")
+
+	if not sound_stream:
+		sound_stream = sound_bank.get_sound("AudioSynthesizer.BLIP_SELECT")
+
+	if not sound_stream:
+		return
+
+	var player = AudioStreamPlayer3D.new()
+	player.stream = sound_stream
+	player.volume_db = -3.0
+	player.max_distance = 10.0
+	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	add_child(player)
+	player.global_position = _draw_sphere.global_position if _draw_sphere else global_position
+
+	player.finished.connect(player.queue_free)
+	player.play()
+
+
+func get_stats() -> Dictionary:
+	return {
+		"points": placed_points.size(),
+		"triangles": completed_triangles.size(),
+		"current_path_length": current_path.size()
+	}

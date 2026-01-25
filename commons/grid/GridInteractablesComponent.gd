@@ -9,6 +9,14 @@ class_name GridInteractablesComponent
 const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 
+# Known config parameter names (NOT to be treated as tutorial shorthand)
+# These are artifact configuration keys that can have numeric values
+const CONFIG_PARAM_NAMES = [
+	"radial", "rings", "inner", "outer", "config", "height", "radius",
+	"width", "depth", "segments", "sides", "rows", "cols", "count",
+	"size", "scale", "speed", "delay", "duration", "intensity"
+]
+
 # References
 var parent_node: Node3D
 var structure_component: GridStructureComponent
@@ -706,13 +714,16 @@ func _parse_token_params(token: String, result: Dictionary) -> Dictionary:
 			var val2 = float(param2)
 			var val3 = float(param3)
 
-			# Heuristic: If 3rd value is very small (< 10), assume it's scale → legacy format
-			# Otherwise, assume it's 3-axis rotation
-			if val3 < 10.0 and val3 > 0.0:
+			# Heuristic: If 3rd value is a typical scale (0-10 range), assume legacy format
+			# Scale of 0 means "use default scale" (1.0)
+			# Otherwise (val3 >= 10), assume it's 3-axis rotation
+			if val3 < 10.0:
 				# Legacy: name:rot_y:y_pos:scale
 				result.overrides["rotation_y_degrees"] = val1
 				result.overrides["y_position"] = val2
-				result.overrides["uniform_scale"] = val3
+				# Scale of 0 means use default (1.0), otherwise use the value
+				if val3 > 0.0:
+					result.overrides["uniform_scale"] = val3
 			else:
 				# NEW: 3-axis rotation: name:rot_z:rot_x:rot_y
 				result.overrides["rotation_z_degrees"] = val1
@@ -839,17 +850,28 @@ func _parse_config_token(token: String) -> Dictionary:
 			# Check if this is a shorthand with transform params (e.g., "point_zero:15:-0.3:1.1")
 			var parts = config_part.split(":", false)
 
-			# If we have 2+ numeric params after first part, treat as tutorial_id with transforms
-			# IMPORTANT: Require at least 2 numeric params to distinguish from simple "key:value" config
-			# e.g., "point_zero:15:-0.3" is shorthand, but "min_x:3" is key:value
-			if parts.size() >= 3:  # Need at least id + 2 numeric params for shorthand
-				var has_numeric_params = true
-				for j in range(1, min(parts.size(), 4)):  # Check up to 3 transform params
-					if not parts[j].is_valid_float():
-						has_numeric_params = false
-						break
+			# If we have numeric params after first part, treat as tutorial_id with transforms
+			# Check for shorthand syntax: either single rotation or multiple transform params
+			# e.g., "vr_scale_controls:190" (rotation only) or "point_zero:15:-0.3:1.1" (all transforms)
+			# BUT NOT config params like "radial:9" or "rings:4" - those are key:value pairs
+			var is_shorthand = false
+			var first_part_lower = parts[0].strip_edges().to_lower()
 
-				if has_numeric_params:
+			# Skip shorthand detection if first part is a known config parameter name
+			if first_part_lower not in CONFIG_PARAM_NAMES:
+				# Case 1: Single numeric param (rotation only) - e.g., "tutorial_id:180"
+				if parts.size() == 2 and parts[1].is_valid_float():
+					is_shorthand = true
+				# Case 2: Multiple numeric params - e.g., "tutorial_id:180:0.5:1.0"
+				elif parts.size() >= 3:
+					var has_numeric_params = true
+					for j in range(1, min(parts.size(), 4)):  # Check up to 3 transform params
+						if not parts[j].is_valid_float():
+							has_numeric_params = false
+							break
+					is_shorthand = has_numeric_params
+
+			if is_shorthand:
 					# This is shorthand syntax: tutorial_id:rotation:height:scale
 					var tutorial_id = parts[0].strip_edges()
 					result.config_data[tutorial_id] = true

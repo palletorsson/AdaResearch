@@ -501,8 +501,18 @@ func _tween_pop(tween: Tween, index: int, target_pos: Vector3):
 func _set_transform_interpolated(index: int, from: Transform3D, to: Transform3D, t: float):
 	if not multimesh:
 		return
-	var interpolated = from.interpolate_with(to, t)
-	multimesh.set_instance_transform(index, interpolated)
+	# Check if from basis is degenerate (zero scale) - can't use interpolate_with
+	# because it requires valid rotation for quaternion conversion
+	var from_scale = from.basis.get_scale()
+	if from_scale.length_squared() < 0.0001:
+		# Scale animation from zero - lerp scale manually
+		var to_scale = to.basis.get_scale()
+		var lerped_scale = from_scale.lerp(to_scale, t)
+		var interpolated = Transform3D(Basis.IDENTITY.scaled(lerped_scale), from.origin.lerp(to.origin, t))
+		multimesh.set_instance_transform(index, interpolated)
+	else:
+		var interpolated = from.interpolate_with(to, t)
+		multimesh.set_instance_transform(index, interpolated)
 
 # Get tween ease type from string
 func _get_tween_ease() -> Tween.EaseType:

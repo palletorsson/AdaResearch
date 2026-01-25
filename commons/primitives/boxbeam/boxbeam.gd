@@ -16,7 +16,8 @@ func _ready():
 		create_beam()
 
 func create_beam() -> void:
-	rotation = Vector3.ZERO
+	# Preserve any rotation applied externally (e.g., by grid system)
+	# Only reset scale
 	scale = Vector3.ONE
 
 	# Calculate dimensions

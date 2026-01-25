@@ -1,32 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cere1c27phe1e"]
+[gd_scene load_steps=4 format=3 uid="uid://cere1c27phe1e"]
 
 [ext_resource type="Script" uid="uid://0huwd4te6ec3" path="res://commons/primitives/furniture/furniture_assembly_puzzle.gd" id="1_furniture"]
 [ext_resource type="PackedScene" path="res://commons/primitives/cubes/grab_cube_scalable.tscn" id="2_scalable_cube"]
 [ext_resource type="PackedScene" uid="uid://wooden_chair_reward_001" path="res://commons/primitives/furniture/wooden_chair_reward.tscn" id="3_reward_chair"]
 
-[sub_resource type="BoxMesh" id="workbench_mesh"]
-size = Vector3(0.8, 0.02, 0.6)
-
 [node name="ChairAssemblyPuzzle" type="Node3D"]
 script = ExtResource("1_furniture")
 piece_scene = ExtResource("2_scalable_cube")
-workbench_offset = Vector3(0, 0.1, 0)
+workbench_offset = Vector3(0.4, 0.1, 0)
 extra_pieces = 4
 reward_chair_scene = ExtResource("3_reward_chair")
 reward_scale = 1.2
 success_message = "Chair Assembled!"
 
 [node name="GhostGuides" type="Node3D" parent="."]
-
-[node name="Workbench" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.4728279, 0.18158871)
-mesh = SubResource("workbench_mesh")
-
-[node name="InstructionLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0.3)
-pixel_size = 0.002
-billboard = 1
-text = "Scale and position the pieces
-to match the ghost guides"
-font_size = 24
-outline_size = 4

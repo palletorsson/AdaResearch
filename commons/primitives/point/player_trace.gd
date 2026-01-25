@@ -11,6 +11,7 @@ extends Node3D
 @export var reference_frame_size: float = 1.0
 @export var fade_trail_over_time: bool = false
 @export var fade_duration: float = 10.0  # Seconds before oldest points fade
+@export var trace_height_offset: float = 0.05  # Height above ground (0.05 = 5cm)
 
 var _xr_origin: Node3D
 var _trail_mesh: ImmediateMesh
@@ -125,9 +126,9 @@ func _process(delta: float) -> void:
 		return
 
 	_last_global_position = current_global
-	# Convert to local space and add offset to keep trail 1 unit above player
+	# Convert to local space and add height offset
 	var local_point = to_local(current_global)
-	local_point.y += 1.0  # Offset trail 1 unit up from player position
+	local_point.y += trace_height_offset  # Offset trail above ground
 	_trail_points.append(local_point)
 	_trail_times.append(_time_elapsed)
 

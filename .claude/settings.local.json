@@ -28,7 +28,9 @@
       "Bash(ls:*)",
       "Bash(wc:*)",
       "Bash(tree:*)",
-      "Bash(Select-String -Pattern \"sphere\" -SimpleMatch)"
+      "Bash(Select-String -Pattern \"sphere\" -SimpleMatch)",
+      "Bash(git -C \"c:/Users/palle/Documents/GitHub/AdaResearch\" status)",
+      "Bash(git -C \"c:/Users/palle/Documents/GitHub/AdaResearch\" diff --stat)"
     ],
     "deny": [],
     "ask": []

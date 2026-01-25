@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://trafficcone_001"]
+[gd_scene load_steps=2 format=3 uid="uid://bn301dknjnjao"]
 
-[ext_resource type="Script" path="res://commons/primitives/trafficcone/trafficcone.gd" id="1_cone"]
+[ext_resource type="Script" uid="uid://radxma0n31mr" path="res://commons/primitives/trafficcone/trafficcone.gd" id="1_cone"]
 
 [node name="TrafficCone" type="Node3D"]
 script = ExtResource("1_cone")

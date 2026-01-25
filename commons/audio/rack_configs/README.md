@@ -238,7 +238,18 @@ Dictionary mapping control IDs to their specifications.
 "btn_1": {
   "type": "btn",
   "label": "Play",
-  "action": "play"          // "play", "stop", or "toggle"
+  "action": "play",         // "play", "stop", or "toggle"
+  "color": "#00ff00"        // Optional: button color (glows in VR)
+}
+```
+
+**Button with Color:**
+```json
+"btn_stop": {
+  "type": "btn",
+  "label": "STOP",
+  "action": "stop",
+  "color": "#ff0000"        // Red stop button with glow
 }
 ```
 
@@ -282,12 +293,30 @@ Dictionary mapping control IDs to their specifications.
 }
 ```
 
+**Simple Waveform (Oscilloscope-Style):**
+```json
+"disp_wave": {
+  "type": "simple_waveform",
+  "label": "OUTPUT",
+  "source": "rack",           // "rack" = this rack's audio only, "master" = all audio
+  "freq_param": "frequency",  // Link to frequency slider for wave visualization
+  "amp_param": "amplitude"    // Link to amplitude slider for wave height
+}
+```
+
+The `simple_waveform` type shows a classic oscilloscope display:
+- Green phosphor-style sine wave with glow effect
+- Grid lines and tick marks
+- Frequency/amplitude readout on screen
+- Wave cycles adjust based on linked frequency parameter (20Hz = stretched, 2000Hz = compressed)
+- Wave height adjusts based on linked amplitude parameter
+
 **VU Meter Example:**
 ```json
 "mtr_L": {
   "type": "meter",
   "label": "L",
-  "source": "output_left"     // Audio source to monitor
+  "source": "rack"            // "rack" = this rack's audio, "master" = all audio
 }
 ```
 
@@ -351,6 +380,7 @@ All available control types for your rack:
 | Type | Aliases | Description |
 |------|---------|-------------|
 | `mon` | `monitor`, `waveform`, `scope` | Waveform/spectrum monitor |
+| `simple_waveform` | `srcwave`, `rack_wave` | Oscilloscope-style sine wave display |
 | `lissajous` | `liss`, `xy_wave`, `paramwave` | Lissajous XY figure from two frequency params |
 | `mtr` | `meter`, `vu`, `level` | VU/level meter with peak hold |
 | `lbl` | `label`, `text` | Text label/header |
@@ -422,6 +452,48 @@ Available in `rack_info.sound_type`:
   }
 }
 ```
+
+### Sine Wave Rack (with Oscilloscope Display)
+
+A complete example showing buttons, sliders, meter, and waveform display:
+
+```json
+{
+  "rack_info": {
+	"name": "Sine Wave Rack",
+	"sound_type": "basic_sine_wave"
+  },
+  "layout": {
+	"col_spacing": 0.14,
+	"row_spacing": 0.14,
+	"hide_selection": true,
+	"hide_buttons": true
+  },
+  "grid": [
+	["lbl_title", " ", " ", "mtr_vol", "disp_waveform"],
+	["btn_on", "sl_freq", "sl_amp"],
+	["btn_off", "sl_dur"]
+  ],
+  "control_definitions": {
+	"lbl_title": { "type": "label", "label": "SINE WAVE" },
+	"btn_on": { "type": "btn", "label": "PLAY", "action": "play", "color": "#00ff00" },
+	"btn_off": { "type": "btn", "label": "STOP", "action": "stop", "color": "#ff0000" },
+	"sl_freq": { "type": "slider", "label": "Frequency", "parameter": "frequency", "min": 20.0, "max": 2000.0, "default": 440.0 },
+	"sl_amp": { "type": "slider", "label": "Volume", "parameter": "amplitude", "min": 0.0, "max": 1.0, "default": 0.3 },
+	"sl_dur": { "type": "slider", "label": "Duration", "parameter": "duration", "min": 0.5, "max": 10.0, "default": 2.0 },
+	"mtr_vol": { "type": "meter", "label": "VU", "source": "rack" },
+	"disp_waveform": { "type": "simple_waveform", "label": "OUTPUT", "source": "rack", "freq_param": "frequency", "amp_param": "amplitude" }
+  }
+}
+```
+
+This creates:
+- Green PLAY button and red STOP button (with glow)
+- Frequency slider (20-2000 Hz) linked to waveform display
+- Volume slider (0-100%) linked to waveform amplitude
+- Duration slider for sound length
+- VU meter showing rack audio level
+- Oscilloscope display showing sine wave that responds to frequency/volume settings
 
 ### Complex Layout
 

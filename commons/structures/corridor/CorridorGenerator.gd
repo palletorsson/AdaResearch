@@ -20,6 +20,10 @@ class_name CorridorGenerator
 @export var grid_depth: int = 6
 @export var cube_size: float = 1.0
 
+# Closing walls
+@export var close_back_wall: bool = true  # Close the entrance (z = -grid_depth + 1)
+@export var close_front_wall: bool = false  # Close the exit (z = 0)
+
 # MultiMesh
 var multimesh_instance: MultiMeshInstance3D
 var collision_parent: Node3D
@@ -105,19 +109,23 @@ func _generate():
 				else:
 					is_wall = true # 1 wide is all wall? or no wall? Let's keep simple.
 				
-				# Place blocks only on boundary (tunnel)
-				if is_floor or is_ceiling or is_wall:
-					
-					# Don't ensure walkability on z=0 at center? 
+				# Check for back/front closing walls
+				var is_back_wall = close_back_wall and (z == -grid_depth + 1)
+				var is_front_wall = close_front_wall and (z == 0)
+
+				# Place blocks only on boundary (tunnel) or closing walls
+				if is_floor or is_ceiling or is_wall or is_back_wall or is_front_wall:
+
+					# Don't ensure walkability on z=0 at center?
 					# User said "3 units wide, meaning 1 walkable units wide"
 					# So x=-1 is wall, x=1 is wall, x=0 is empty space.
 					# y=0 is floor, y=3 is ceiling.
-					
+
 					var pos = Vector3(x, y, z) + position_offset
 					var t = Transform3D()
 					t.origin = pos * cube_size
 					transforms.append(t)
-					
+
 					_create_collision(pos * cube_size)
 
 	# Apply instances

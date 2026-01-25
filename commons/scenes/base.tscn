@@ -156,6 +156,8 @@ script = ExtResource("23_pickup_xp")
 script = ExtResource("24_customization")
 debug_mode = true
 
+[node name="Node3D" type="Node3D" parent="XROrigin3D" index="9"]
+
 [node name="Label3D" type="Label3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
 text = "Base "

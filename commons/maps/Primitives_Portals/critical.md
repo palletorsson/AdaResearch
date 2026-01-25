@@ -136,3 +136,103 @@ The question left unanswered: **If the circle is impossible in discrete space, w
 We construct approximations of smoothness, knowing smoothness itself lies beyond the system. This is not failure - it's the **condition of discrete geometry**: endlessly approaching the continuous, never arriving.
 
 The portals lead not to arrival, but to **another stage of approximation**. The circle remains, forever, just beyond reach.
+
+---
+
+## Chirimuuta and the Boundaries of Systems
+
+M. Chirimuuta's philosophy of neuroscience provides framework for understanding what portals stage: the **transition between epistemic systems**, not merely spatial locations.
+
+### Computationalism as Regulative Ideal
+
+Chirimuuta asks: "If anything can be described computationally, what explanatory work is the metaphor actually doing?"
+
+The portal corridor answers: **Computation describes the passage but not the destination**.
+
+The circle (π) cannot be computed—only approximated. The portal leads to another system (color, sound, waves) where different abstractions apply. Each system has its own:
+- Regulative ideals (what counts as fundamental)
+- Experimental constraints (what can be measured)
+- Explanatory limits (what can be said)
+
+Portals stage: **Systems do not connect seamlessly**. Crossing requires transformation, not transport.
+
+### Purpose-Relative Abstraction
+
+Chirimuuta: neuroscience produces "usable abstractions that are purpose-relative, historically contingent, shaped by experimental constraints."
+
+The primitives sequence is such an abstraction:
+- **Purpose-relative**: optimized for GPU rendering, not mathematical completeness
+- **Historically contingent**: emerged from hardware constraints (triangles rasterize efficiently)
+- **Shaped by experimental constraints**: what can be computed in real-time
+
+The portal acknowledges: **This system was useful here. Another system is useful there.**
+
+No system reveals "how geometry really works" in absolute sense. Each produces usable models within its domain.
+
+### The Reification Danger
+
+Chirimuuta warns against **reification**—mistaking the model's format for the thing's intrinsic organization.
+
+The 40-row walk is **anti-reification**:
+- Takes time (computation is not instant)
+- Forces embodiment (you must walk, not teleport)
+- Has no content (only passage)
+
+This duration **de-naturalizes** the portal. You feel the transition as transition, not as seamless equivalence.
+
+Reification would say: "Primitives ARE the foundation of form."
+The portal says: "Primitives were ONE foundation. You're crossing to another."
+
+### Epistemic Boundaries as Constitutive
+
+Chirimuuta, drawing on Heidegger: "Finitude is constitutive of meaning. Orientation requires limits."
+
+The portal corridor **is** the limit—architecturally staged. You walk through the boundary itself.
+
+This teaches: **Systems end**. Not in failure, but in their very constitution. Primitives were always bounded; the portal makes the boundary walkable.
+
+The question shifts from "What can primitives represent?" to "What does it mean that primitives must stop somewhere?"
+
+### Embodied Crossing
+
+Chirimuuta argues that human cognition is:
+- Sensorimotor (you learn by moving)
+- Temporally embedded (understanding requires duration)
+- Metabolically constrained (attention is resource)
+
+The 40-row walk embodies this:
+- You **move** through the boundary (sensorimotor)
+- It takes **time** (temporal embedding)
+- It requires **attention** with nothing to distract (metabolic constraint)
+
+A disembodied system would teleport instantly. An embodied learner must **walk through** epistemic transitions.
+
+### Situated Success, Not Metaphysical Disclosure
+
+The portal sequence demonstrates Chirimuuta's reframing: understanding as **situated success**, not metaphysical disclosure.
+
+Primitives were successful for:
+- Teaching geometric fundamentals
+- Building spatial intuition
+- Demonstrating computational geometry
+
+They never claimed to disclose "what form really is." The portal honestly says: **This success ends here. Different success begins there.**
+
+---
+
+## Portals as Epistemic Ethics
+
+The portal corridor practices an **ethics of epistemic modesty**:
+
+1. **Acknowledge limits** (the system ends)
+2. **Stage transitions** (don't hide the boundary)
+3. **Require duration** (don't pretend crossing is free)
+4. **Refuse totalization** (another system awaits)
+
+Chirimuuta: "The mistake she targets is scientific realism pushed too far—the assumption that if a model works, it must correspond directly to the underlying ontology."
+
+The portal refuses this mistake: **The model worked. The model ends. This is not contradiction but condition.**
+
+The circle remains impossible. The portal leads elsewhere. Both are true.
+
+**Abstraction is necessary but bounded. Systems succeed within domains. Transitions transform, not merely transport. The boundary is not failure—it is where understanding actually occurs.**

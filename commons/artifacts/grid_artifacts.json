@@ -45,6 +45,24 @@
 			"description": "arrow",
 			"scene": "res://commons/primitives/arrow/arrow.tscn"
 		},
+		"dgrid": {
+			"name": "Dürer Grid",
+			"lookup_name": "dgrid",
+			"description": "Standing perspective grid frame inspired by Albrecht Dürer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
+			"scene": "res://commons/primitives/frame/durer_grid.tscn"
+		},
+		"lightrod": {
+			"name": "Light Rod",
+			"lookup_name": "lightrod",
+			"description": "Glowing vertical blue light rods. Use lightrod:90:0:1#config:4:1 for 4 rods with 1m spacing.",
+			"scene": "res://commons/primitives/line/light_rod.tscn"
+		},
+		"tetrahedron_edit": {
+			"name": "Editable Tetrahedron",
+			"lookup_name": "tetrahedron_edit",
+			"description": "Tetrahedron with draggable vertex handles. 4 vertices, 4 faces.",
+			"scene": "res://commons/primitives/pyramid/tetrahedron_edit.tscn"
+		},
 		"coordinates": {
 			"name": "coordinates",
 			"lookup_name": "coordinates",
@@ -86,6 +104,12 @@
 			"lookup_name": "point",
 			"description": "Pickable point sphere that continuously displays its world coordinates with a floating label.",
 			"scene": "res://commons/primitives/point/point.tscn"
+		},
+		"static_point": {
+			"name": "Static Point",
+			"lookup_name": "static_point",
+			"description": "Non-pickable point marker that displays position. Cannot be grabbed by hands or captured by gravity gun.",
+			"scene": "res://commons/primitives/point/static_point.tscn"
 		},
 		"grab_sphere_point": {
 			"name": "grab_sphere_point",
@@ -561,6 +585,12 @@
 			"description": "Basic grid-lined cylinder primitive for quick scale checks.",
 			"scene": "res://commons/primitives/cylinder/cylinder.tscn"
 		},
+		"cylinder_radials_rings": {
+			"name": "Cylinder Radials Rings",
+			"lookup_name": "cylinder_radials_rings",
+			"description": "Configurable cylinder with radial segments and rings. Usage: cylinder_radials_rings:90:1:#config:12:8 for 12 radial segments and 8 rings.",
+			"scene": "res://commons/primitives/cylinder/cylinder_radials_rings.tscn"
+		},
 		"capsule": {
 			"name": "capsule",
 			"lookup_name": "capsule",
@@ -573,11 +603,23 @@
 			"description": "caps.",
 			"scene": "res://commons/primitives/capsule/capsules.tscn"
 		},
+		"capsule_radials_rings": {
+			"name": "Capsule Radials Rings",
+			"lookup_name": "capsule_radials_rings",
+			"description": "Configurable capsule with radial segments and rings. Usage: capsule_radials_rings:90:1:#radial:6#rings:3 for 6 radial segments and 3 rings.",
+			"scene": "res://commons/primitives/capsule/capsule_radials_rings.tscn"
+		},
 		"torus": {
 			"name": "torus",
 			"lookup_name": "torus",
 			"description": "Grid material torus primitive for layout and shading tests.",
 			"scene": "res://commons/primitives/torus/torus.tscn"
+		},
+		"torus_radials_rings": {
+			"name": "Torus Radials Rings",
+			"lookup_name": "torus_radials_rings",
+			"description": "Configurable torus with rings and ring segments. Usage: torus_radials_rings:90:1:#inner:0.2#outer:0.6 or #config:16:8 for 16 rings and 8 ring segments.",
+			"scene": "res://commons/primitives/torus/torus_radials_rings.tscn"
 		},
 		"combine_primitives": {
 			"name": "combine_primitives",
@@ -675,8 +717,14 @@
 			"lookup_name": "platonic_demo",
 			"description": "platonic_demo.",
 			"scene": "res://commons/primitives/platonic_demo.tscn"
-		},		
-		
+		},
+		"durer_scene": {
+			"name": "Dürer Melencolia Scene",
+			"lookup_name": "durer_scene",
+			"description": "Dürer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
+			"scene": "res://commons/scenes/demos/durer/DurerScene.tscn"
+		},
+
 		"diamond": {
 			"name": "diamond",
 			"lookup_name": "diamond",
@@ -1389,6 +1437,12 @@
 			"lookup_name": "science_glasses",
 			"description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
 			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn"
+		},
+		"GlassRack": {
+			"name": "GlassRack",
+			"lookup_name": "GlassRack",
+			"description": "Modular glass apparatus system - configurable lab glassware with spiral, wobbly, flask segments",
+			"scene": "res://commons/glass_rack/GlassRack.tscn"
 		},
 		"koch_curve_3d": {
 			"name": "3D Koch Curve",
@@ -3804,9 +3858,9 @@
 			"description": "Stepped pyramid/ziggurat with 10 levels",
 			"scene": "res://commons/primitives/steppedpyramid/steppedpyramid.tscn"
 		},
-		"boxbeam": {
-			"name": "Box Beam",
-			"lookup_name": "boxbeam",
+		"bigframe": {
+			"name": "bigframe",
+			"lookup_name": "bigframe",
 			"description": "Hollow rectangular beam with configurable dimensions",
 			"scene": "res://commons/primitives/boxbeam/boxbeam.tscn"
 		},
@@ -3935,6 +3989,12 @@
 			"lookup_name": "hole_with_cones",
 			"description": "Ground plane with circular hole and 3 traffic cones around it. Construction site warning setup.",
 			"scene": "res://commons/primitives/combines/hole_with_cones.tscn"
+		},
+		"quest_controller": {
+			"name": "Quest Controller",
+			"lookup_name": "quest_controller",
+			"description": "Procedural Quest Touch controller model for tutorials. Use #highlight:trigger/grip/thumbstick/button_a/button_b/menu and #right:true/false",
+			"scene": "res://commons/primitives/questcontroller/quest_controller.tscn"
 		}
 	}
 }

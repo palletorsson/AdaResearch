@@ -53,7 +53,7 @@ size = Vector3(0.96, 0.16, 0.035)
 render_priority = 0
 shader = ExtResource("5_linear_shader")
 shader_parameter/progress = 0.0
-shader_parameter/color = Color(0.4, 0.75, 1.0, 0.8)
+shader_parameter/color = Color(0.4, 0.75, 1, 0.8)
 
 [sub_resource type="QuadMesh" id="QuadMesh_progress"]
 material = SubResource("ShaderMaterial_progress")

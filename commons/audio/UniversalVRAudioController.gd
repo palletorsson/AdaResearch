@@ -28,6 +28,7 @@ const WAVEFORM_MONITOR_SCENE = preload("res://commons/audio/interfaces/VRAudioMo
 const SPECTRUM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
 const WAVEFORM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRWaveformDisplay.tscn")
 const LISSAJOUS_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRLissajousDisplay.tscn")
+const SIMPLE_WAVEFORM_SCENE = preload("res://commons/audio/interfaces/VRSimpleWaveform.tscn")
 
 # Default spacing by control type (width, height in meters)
 const CONTROL_SIZES = {
@@ -42,6 +43,7 @@ const CONTROL_SIZES = {
 	"monitor": Vector2(0.30, 0.22),
 	"spectrum": Vector2(0.32, 0.24),
 	"waveform": Vector2(0.32, 0.24),
+	"simple_waveform": Vector2(0.32, 0.24),
 	"lissajous": Vector2(0.30, 0.30),
 	"meter": Vector2(0.04, 0.12),
 	"label": Vector2(0.20, 0.04),
@@ -79,6 +81,10 @@ var active_buttons: Dictionary = {}
 var rack_config: Dictionary = {}
 var use_json_config: bool = true
 
+# Dedicated audio bus for this rack's output (allows waveform display to show only rack audio)
+var dedicated_bus_name: String = ""
+var _dedicated_bus_index: int = -1
+
 # Auto-save timer for syncing Mario parameters (like MarioSoundController)
 var _auto_save_timer: Timer
 var _auto_save_interval: float = 2.0
@@ -86,6 +92,9 @@ var _auto_save_interval: float = 2.0
 const RACK_CONFIG_BASE_PATH = "res://commons/audio/rack_configs/"
 
 func _ready():
+	# Setup dedicated audio bus for this rack
+	_setup_dedicated_bus()
+
 	# Setup auto-save timer for parameter syncing
 	_setup_auto_save_timer()
 
@@ -94,6 +103,33 @@ func _ready():
 		load_rack_config(rack_config_path)
 	elif rack_config_path != "":
 		push_warning("UniversalVRAudioController: Config path set but file not found: %s" % rack_config_path)
+
+func _setup_dedicated_bus():
+	"""Create a dedicated audio bus for this rack's output"""
+	# Generate unique bus name based on instance ID
+	dedicated_bus_name = "RackBus_%d" % get_instance_id()
+
+	# Check if bus already exists
+	_dedicated_bus_index = AudioServer.get_bus_index(dedicated_bus_name)
+	if _dedicated_bus_index != -1:
+		print("UniversalVRAudioController: Using existing bus '%s'" % dedicated_bus_name)
+	else:
+		# Create new bus
+		var bus_count = AudioServer.bus_count
+		AudioServer.add_bus(bus_count)
+		AudioServer.set_bus_name(bus_count, dedicated_bus_name)
+		AudioServer.set_bus_send(bus_count, "Master")  # Route to Master
+		_dedicated_bus_index = bus_count
+		print("UniversalVRAudioController: Created dedicated bus '%s' (index %d)" % [dedicated_bus_name, _dedicated_bus_index])
+
+	# Route preview player to dedicated bus
+	if preview_player:
+		preview_player.bus = dedicated_bus_name
+		print("UniversalVRAudioController: Routed audio player to '%s'" % dedicated_bus_name)
+
+func get_dedicated_bus_name() -> String:
+	"""Return the dedicated bus name for this rack"""
+	return dedicated_bus_name
 
 func _setup_auto_save_timer():
 	_auto_save_timer = Timer.new()
@@ -114,6 +150,60 @@ func _sync_mario_parameters():
 	var decay_rate = values.get("decay_rate", 8.0)
 	var duration = values.get("duration", 0.36)
 	PickupCube.set_shared_mario_parameters(start_freq, end_freq, decay_rate, duration)
+
+# Audio level for meters
+var _rack_spectrum_instance: AudioEffectSpectrumAnalyzerInstance
+var _rack_spectrum_setup: bool = false
+
+func _process(_delta: float):
+	_update_rack_meters()
+
+func _update_rack_meters():
+	"""Update any meters that monitor the rack bus"""
+	# Setup spectrum analyzer on rack bus if needed
+	if not _rack_spectrum_setup and _dedicated_bus_index >= 0:
+		_setup_rack_spectrum_analyzer()
+
+	if not _rack_spectrum_instance:
+		return
+
+	# Get audio level from rack bus
+	var total_magnitude = 0.0
+	for freq in [100.0, 200.0, 400.0, 800.0, 1600.0, 3200.0]:
+		var mag = _rack_spectrum_instance.get_magnitude_for_frequency_range(freq * 0.8, freq * 1.2)
+		total_magnitude += mag.length()
+	var audio_level = clamp(total_magnitude * 10.0, 0.0, 1.0)
+
+	# Update all rack meters
+	for control_id in active_controls:
+		var control_data = active_controls[control_id]
+		var control = control_data.get("instance")  # Controls stored as "instance"
+		if not control:
+			continue
+		if control.has_meta("audio_source") and control.get_meta("audio_source") == "rack":
+			if "level" in control:
+				control.level = audio_level
+
+func _setup_rack_spectrum_analyzer():
+	"""Setup spectrum analyzer on the dedicated rack bus"""
+	_rack_spectrum_setup = true
+
+	# Find existing or create spectrum analyzer
+	for i in range(AudioServer.get_bus_effect_count(_dedicated_bus_index)):
+		var effect = AudioServer.get_bus_effect(_dedicated_bus_index, i)
+		if effect is AudioEffectSpectrumAnalyzer:
+			_rack_spectrum_instance = AudioServer.get_bus_effect_instance(_dedicated_bus_index, i)
+			return
+
+	# Create new analyzer
+	var analyzer = AudioEffectSpectrumAnalyzer.new()
+	analyzer.buffer_length = 0.1
+	analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_512
+	AudioServer.add_bus_effect(_dedicated_bus_index, analyzer)
+
+	var effect_idx = AudioServer.get_bus_effect_count(_dedicated_bus_index) - 1
+	_rack_spectrum_instance = AudioServer.get_bus_effect_instance(_dedicated_bus_index, effect_idx)
+	print("UniversalVRAudioController: Created spectrum analyzer for rack meters")
 
 # Called by GridInteractablesComponent when using # syntax
 # Supported parameters:
@@ -284,7 +374,7 @@ func _validate_rack_config(data: Dictionary) -> bool:
 
 		# Visual/display controls don't need parameters
 		var type = control.get("type", "slider")
-		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "lissajous", "liss", "xy_wave", "paramwave", "meter", "mtr", "vu", "level"]:
+		if type in ["label", "lbl", "text", "group", "grp", "container", "monitor", "mon", "scope", "spectrum", "spec", "fft", "waveform", "wave", "osc", "simple_waveform", "srcwave", "rack_wave", "lissajous", "liss", "xy_wave", "paramwave", "meter", "mtr", "vu", "level"]:
 			continue
 			
 		# XY controls need parameter_x and parameter_y (or just parameter)
@@ -460,6 +550,8 @@ func _instantiate_control(control_type: String, control_id: String) -> Node:
 			control_scene = SPECTRUM_DISPLAY_SCENE
 		"waveform", "wave", "osc":
 			control_scene = WAVEFORM_DISPLAY_SCENE
+		"simple_waveform", "srcwave", "rack_wave":
+			control_scene = SIMPLE_WAVEFORM_SCENE
 		"lissajous", "liss", "xy_wave", "paramwave":
 			control_scene = LISSAJOUS_DISPLAY_SCENE
 		"mtr", "meter", "vu", "level":
@@ -707,8 +799,17 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 			# Button configuration
 			if config.has("toggle") and "toggle_mode" in control:
 				control.toggle_mode = config.get("toggle", false)
-			if config.has("color") and "pressed_color" in control:
-				control.pressed_color = Color(config.get("color"))
+			if config.has("color"):
+				var base_color = Color(config.get("color"))
+				# Released color = the config color (visible when not pressed)
+				if "released_color" in control:
+					control.released_color = base_color
+				# Pressed color = brighter version when pressed
+				if "pressed_color" in control:
+					control.pressed_color = base_color.lightened(0.3)
+				# Force update the visual state with new colors
+				if control.has_method("update_colors"):
+					control.update_colors()
 
 		"xy", "xypad", "2df", "pad", "js", "joystick":
 			# XY pad size configuration
@@ -782,6 +883,36 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 				var label_node = control.get_node_or_null("Chassis/LabelName")
 				if label_node:
 					label_node.text = config.get("label", "WAVEFORM").to_upper()
+
+			# Configure audio source: "rack" = dedicated bus, "master" or omitted = Master bus
+			var source = config.get("source", "master")
+			if source == "rack" and dedicated_bus_name != "":
+				if control.has_method("set_source_bus"):
+					control.set_source_bus(dedicated_bus_name)
+				elif "source_bus" in control:
+					control.source_bus = dedicated_bus_name
+				print("UniversalVRAudioController: Waveform display set to monitor rack bus '%s'" % dedicated_bus_name)
+
+		"simple_waveform", "srcwave", "rack_wave":
+			# Simple waveform display - shows only the rack's audio
+			if config.has("label"):
+				var label_node = control.get_node_or_null("Chassis/LabelName")
+				if label_node:
+					label_node.text = config.get("label", "WAVEFORM").to_upper()
+
+			# Always use rack bus for simple_waveform (that's its purpose)
+			var source = config.get("source", "rack")
+			if source == "rack" and dedicated_bus_name != "":
+				if control.has_method("set_source_bus"):
+					control.set_source_bus(dedicated_bus_name)
+				print("UniversalVRAudioController: Simple waveform set to rack bus '%s'" % dedicated_bus_name)
+
+			# Store parameter bindings for frequency/amplitude display
+			if config.has("freq_param"):
+				control.set_meta("freq_param", config.get("freq_param"))
+			if config.has("amp_param"):
+				control.set_meta("amp_param", config.get("amp_param"))
+			control.set_meta("is_simple_waveform", true)
 
 		"lissajous", "liss", "xy_wave", "paramwave":
 			# Lissajous display configuration
@@ -886,12 +1017,39 @@ func _trigger_sound_update():
 	play_current_sound()
 
 func _on_parameter_changed_json(_value, control_id: String):
+	# Update any waveform displays that are bound to this parameter
+	_update_waveform_displays()
+
 	# Real-time tweak with time-based debounce to prevent rapid firing
 	var current_time = Time.get_ticks_msec() / 1000.0
 	if current_time - _last_play_time < min_play_interval:
 		return
 	_last_play_time = current_time
 	play_current_sound()
+
+func _update_waveform_displays():
+	"""Update any waveform displays with current parameter values"""
+	var values = _get_current_values()
+
+	for control_id in active_controls:
+		var control_data = active_controls[control_id]
+		var control = control_data.get("instance")  # Controls stored as "instance", not "node"
+		if not control:
+			continue
+
+		# Update simple waveform displays
+		if control.has_meta("is_simple_waveform"):
+			var freq_param = control.get_meta("freq_param") if control.has_meta("freq_param") else ""
+			var amp_param = control.get_meta("amp_param") if control.has_meta("amp_param") else ""
+
+			if freq_param != "" and values.has(freq_param):
+				var freq_val = values[freq_param]
+				if control.has_method("set_frequency"):
+					control.set_frequency(freq_val)
+			if amp_param != "" and values.has(amp_param):
+				var amp_val = values[amp_param]
+				if control.has_method("set_amplitude"):
+					control.set_amplitude(amp_val)
 
 
 

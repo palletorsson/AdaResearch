@@ -404,6 +404,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			# Case 2: String with transform parameters (rotation:height:scale)
 			elif value.find(":") != -1:
 				is_tutorial_key = true
+			# Case 3: Single numeric value (just rotation, e.g., "180" or "-90")
+			elif value.is_valid_float():
+				is_tutorial_key = true
 
 		if is_tutorial_key:
 			# Try to use codeDisplay node if available

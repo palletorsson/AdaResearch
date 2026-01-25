@@ -30,6 +30,9 @@ var _last_global_position: Vector3 = Vector3.ZERO
 var _reference_frame: MeshInstance3D
 
 func _ready() -> void:
+	# Prevent gravity gun from affecting drag points
+	add_to_group("no_gravity_gun")
+
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
 

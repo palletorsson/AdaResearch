@@ -63,10 +63,14 @@ var _active_controllers: Array[XRController3D] = []
 var _nearby_snap_points: Array[Node3D] = []
 var _closest_snap_point: Node3D = null
 var _last_position: Vector3 = Vector3.ZERO
+var _registered_manager: Node = null  # The SnapConnectionManager this point belongs to
 
 func _ready() -> void:
 	# Call the super
 	super()
+
+	# Prevent gravity gun from affecting snap points
+	add_to_group("no_gravity_gun")
 
 	# Get the original material
 	var mesh_instance = get_node_or_null("MeshInstance3D")
@@ -90,36 +94,45 @@ func _ready() -> void:
 func _register_with_manager() -> void:
 	if not is_inside_tree():
 		return
-		
-	# Find SnapConnectionManager in scene (autoload or scene child)
-	var manager = get_node_or_null("/root/SnapConnectionManager")
-	if not manager:
-		# Search in the scene tree
-		manager = _find_connection_manager(get_tree().root)
-	
-	if manager and is_instance_valid(manager) and manager.has_method("register_snap_point"):
-		manager.register_snap_point(self)
-	else:
-		push_warning("SnapPoint: Could not find valid SnapConnectionManager in scene")
 
-func _find_connection_manager(node: Node) -> Node:
-	# Recursively search for SnapConnectionManager
-	# Check by class name instead of script comparison
+	# Search for SnapConnectionManager in ancestors and their children only (scoped to puzzle)
+	# This prevents cross-puzzle interference
+	var manager = _find_local_connection_manager()
+
+	if manager and is_instance_valid(manager) and manager.has_method("register_snap_point"):
+		_registered_manager = manager
+		manager.register_snap_point(self)
+	# Note: It's OK to not have a manager - standalone snap points work independently
+
+func _find_local_connection_manager() -> Node:
+	# Search UP the tree through ancestors and their direct children
+	# This ensures we only find managers that belong to the same puzzle
+	var current = get_parent()
+	while current:
+		# Check if current node is a SnapConnectionManager
+		if _is_connection_manager(current):
+			return current
+
+		# Check direct children of current ancestor
+		for child in current.get_children():
+			if _is_connection_manager(child):
+				return child
+
+		current = current.get_parent()
+
+	return null
+
+func _is_connection_manager(node: Node) -> bool:
 	if node is SnapConnectionManager:
-		return node
-	
-	# Also check by class name string for compatibility
-	if node.get_class() == "Node" and node.get_script():
+		return true
+
+	# Also check by script path for compatibility
+	if node.get_script():
 		var script = node.get_script()
 		if script and script.resource_path == "res://commons/primitives/snappoint/snap_connection_manager.gd":
-			return node
-	
-	for child in node.get_children():
-		var result = _find_connection_manager(child)
-		if result:
-			return result
-	
-	return null
+			return true
+
+	return false
 
 func _process(delta: float) -> void:
 	# Check if position changed
@@ -138,21 +151,28 @@ func _process(delta: float) -> void:
 func _detect_nearby_snap_points() -> void:
 	_nearby_snap_points.clear()
 	_closest_snap_point = null
-	
+
 	var closest_distance := snap_distance
-	
+
 	# Find all other snap points in the scene
 	var all_snap_points = get_tree().get_nodes_in_group("snap_points")
-	
+
 	for point in all_snap_points:
 		if point == self or not is_instance_valid(point):
 			continue
-		
+
+		# Only consider snap points that share the same manager (same puzzle)
+		# If both have no manager, they can interact (standalone points)
+		if _registered_manager != null:
+			var point_manager = point._registered_manager if "_registered_manager" in point else null
+			if point_manager != _registered_manager:
+				continue
+
 		var distance = global_position.distance_to(point.global_position)
-		
+
 		if distance <= snap_distance:
 			_nearby_snap_points.append(point)
-			
+
 			if distance < closest_distance:
 				closest_distance = distance
 				_closest_snap_point = point
@@ -331,14 +351,10 @@ func _attempt_snap(target_point: Node3D) -> void:
 		return
 	
 	snap_requested.emit(target_point)
-	
-	# Find connection manager
-	var manager = get_node_or_null("/root/SnapConnectionManager")
-	if not manager:
-		manager = _find_connection_manager(get_tree().root)
-	
-	if manager and manager.has_method("create_connection"):
-		manager.create_connection(self, target_point)
+
+	# Use the registered manager (scoped to this puzzle)
+	if _registered_manager and _registered_manager.has_method("create_connection"):
+		_registered_manager.create_connection(self, target_point)
 	
 	# Add to connected points
 	if target_point not in connected_points:

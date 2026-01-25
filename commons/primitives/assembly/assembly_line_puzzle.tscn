@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/primitives/assembly/assembly_line_puzzle.gd" id="1_script"]
+
+[node name="AssemblyLinePuzzle" type="Node3D"]
+script = ExtResource("1_script")
+spawn_interval = 2.5
+input_speed = 0.10
+input_start = Vector3(1, 0.5, 0)
+input_end = Vector3(-0.8, 0.5, 0)
+station_position = Vector3(0, 0.5, -0.4)
+ghost_color = Color(0.3, 0.8, 1, 0.4)
+slot_match_distance = 0.08
+snap_duration = 0.25
+output_speed = 0.12
+output_start = Vector3(0, 0.5, -0.4)
+output_end = Vector3(0, 0.5, -1.4)
+conveyor_color = Color(0.9, 0.9, 0.95, 1)
+shape_scale = 0.07

@@ -200,32 +200,42 @@ func _setup_table_targets() -> void:
 		piece_targets.append(leg)
 
 
-## Shelf: Vertical supports + horizontal planes (5 pieces)
+## Shelf: Simple shelf with just 3 pieces (2 supports + 1 shelf)
+## Using larger, easier-to-scale dimensions
 func _setup_shelf_targets() -> void:
-	# Two vertical supports
+	# Two vertical supports - simple tall blocks
 	var support_left = PieceTarget.new("support_left",
-		Vector3(-0.25, 0.4, 0),
+		Vector3(-0.20, 0.25, 0),
 		Vector3.ZERO,
-		Vector3(0.04, 0.8, 0.2)
+		Vector3(0.08, 0.5, 0.15)  # Thicker, easier to scale
 	)
+	support_left.position_tolerance = 0.10
+	support_left.rotation_tolerance = 20.0
+	support_left.scale_tolerance = 0.04
 	piece_targets.append(support_left)
 
 	var support_right = PieceTarget.new("support_right",
-		Vector3(0.25, 0.4, 0),
+		Vector3(0.20, 0.25, 0),
 		Vector3.ZERO,
-		Vector3(0.04, 0.8, 0.2)
+		Vector3(0.08, 0.5, 0.15)  # Same as left
 	)
+	support_right.position_tolerance = 0.10
+	support_right.rotation_tolerance = 20.0
+	support_right.scale_tolerance = 0.04
 	piece_targets.append(support_right)
 
-	# Three horizontal shelves
-	var shelf_heights = [0.2, 0.45, 0.7]
-	for i in range(3):
-		var shelf = PieceTarget.new("shelf_%d" % i,
-			Vector3(0, shelf_heights[i], 0),
-			Vector3.ZERO,
-			Vector3(0.46, 0.03, 0.18)
-		)
-		piece_targets.append(shelf)
+	# One horizontal shelf - simple flat piece
+	var shelf = PieceTarget.new("shelf_0",
+		Vector3(0, 0.52, 0),
+		Vector3.ZERO,
+		Vector3(0.48, 0.06, 0.15)  # Wide, thick enough to scale easily
+	)
+	shelf.position_tolerance = 0.10
+	shelf.rotation_tolerance = 20.0
+	shelf.scale_tolerance = 0.04
+	piece_targets.append(shelf)
+
+	print("FurnitureAssemblyPuzzle: Setup %d simple shelf targets" % piece_targets.size())
 
 
 ## Spawn pieces at workbench positions
@@ -405,3 +415,102 @@ func get_furniture_type_name() -> String:
 		FurnitureType.CUSTOM:
 			return "Custom"
 	return "Unknown"
+
+
+## Override completion sound to play for only 3 seconds
+func _play_completion_sound() -> void:
+	if not has_node("/root/SoundBank"):
+		return
+
+	var sound_bank = get_node("/root/SoundBank")
+	var sound_stream = sound_bank.get_sound("AudioSynthesizer.POWER_UP_JINGLE")
+
+	if not sound_stream:
+		return
+
+	var player = AudioStreamPlayer3D.new()
+	player.stream = sound_stream
+	player.volume_db = 0.0
+	player.max_distance = 20.0
+	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	add_child(player)
+
+	if is_inside_tree():
+		player.global_position = global_position
+
+	player.finished.connect(player.queue_free)
+	player.play()
+
+
+## Apply configuration from grid system / artifact registry
+## Accepts explicit names: "chair", "stool", "table", "shelf" or numbers
+func apply_grid_config(config_data: Dictionary) -> void:
+	print("FurnitureAssemblyPuzzle: Applying config: %s" % config_data)
+
+	if config_data.has("furniture_type"):
+		var new_type = _parse_furniture_type(config_data["furniture_type"])
+		if new_type != furniture_type:
+			furniture_type = new_type
+			_rebuild_for_new_type()
+
+
+## Parse furniture type from string name or number
+func _parse_furniture_type(value) -> FurnitureType:
+	if value is int:
+		return value as FurnitureType
+
+	var type_str = str(value).to_lower().strip_edges()
+
+	match type_str:
+		"chair", "0":
+			return FurnitureType.CHAIR
+		"stool", "1":
+			return FurnitureType.STOOL
+		"table", "2":
+			return FurnitureType.TABLE
+		"shelf", "3":
+			return FurnitureType.SHELF
+		"custom", "4":
+			return FurnitureType.CUSTOM
+		_:
+			# Try parsing as int
+			if type_str.is_valid_int():
+				return int(type_str) as FurnitureType
+			push_warning("FurnitureAssemblyPuzzle: Unknown furniture_type '%s', defaulting to CHAIR" % value)
+			return FurnitureType.CHAIR
+
+
+## Rebuild puzzle for a new furniture type
+func _rebuild_for_new_type() -> void:
+	# Clear existing pieces
+	for piece in furniture_pieces:
+		if is_instance_valid(piece):
+			piece.queue_free()
+	furniture_pieces.clear()
+
+	for piece in final_pieces:
+		if is_instance_valid(piece):
+			piece.queue_free()
+	final_pieces.clear()
+
+	# Clear existing ghosts
+	for ghost_id in ghost_guides.keys():
+		var ghost = ghost_guides[ghost_id]
+		if is_instance_valid(ghost):
+			ghost.queue_free()
+	ghost_guides.clear()
+
+	# Clear targets
+	piece_targets.clear()
+
+	# Setup new targets
+	_setup_furniture_targets()
+
+	# Rebuild ghosts
+	_setup_ghost_guides()
+
+	# Respawn pieces if auto-spawn enabled
+	if auto_spawn_pieces and piece_scene:
+		call_deferred("_spawn_pieces")
+
+	print("FurnitureAssemblyPuzzle: Rebuilt for %s" % get_furniture_type_name())

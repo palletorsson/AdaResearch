@@ -10,13 +10,21 @@ signal pressed
 var _button_material: StandardMaterial3D
 var _is_pressed_visual := false
 
+var _colors_initialized: bool = false
+
 func _ready() -> void:
 	_button_material = _get_button_material()
 	_connect_signals()
-	_sync_color_to_state()
+	# Defer initial color sync to allow controller to set colors first
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not _colors_initialized:
+		_sync_color_to_state()
+		_colors_initialized = true
 
 func _process(_delta: float) -> void:
-	_sync_color_to_state()
+	if _colors_initialized:
+		_sync_color_to_state()
 
 func _connect_signals() -> void:
 	if not _interactable:
@@ -29,11 +37,16 @@ func _connect_signals() -> void:
 func _sync_color_to_state() -> void:
 	_set_visual_state(_is_interactable_pressed())
 
-func _set_visual_state(pressed: bool) -> void:
-	if _is_pressed_visual == pressed:
+func _set_visual_state(pressed: bool, force: bool = false) -> void:
+	if not force and _is_pressed_visual == pressed:
 		return
 	_is_pressed_visual = pressed
 	_apply_color(pressed_color if pressed else released_color)
+
+func update_colors():
+	"""Call this after changing pressed_color or released_color externally"""
+	_colors_initialized = true
+	_set_visual_state(_is_interactable_pressed(), true)
 
 func _get_button_material() -> StandardMaterial3D:
 	if not _button_mesh:
@@ -53,6 +66,10 @@ func _apply_color(color: Color) -> void:
 		_button_material = _get_button_material()
 	if _button_material:
 		_button_material.albedo_color = color
+		# Add emission for visibility in VR
+		_button_material.emission_enabled = true
+		_button_material.emission = color
+		_button_material.emission_energy_multiplier = 0.5
 
 func _is_interactable_pressed() -> bool:
 	if not _interactable or not _interactable.has_method("is_xr_class"):

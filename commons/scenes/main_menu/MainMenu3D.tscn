@@ -49,14 +49,20 @@ distance = 2.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
 
 [node name="StartButton" parent="Buttons" instance=ExtResource("2_menu_button")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 text = "Start"
 
+[node name="BrowseButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+text = "Browse"
+color = Color(0.2, 0.8, 0.4, 1)
+
 [node name="SettingsButton" parent="Buttons" instance=ExtResource("2_menu_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 text = "Settings"
 
 [node name="QuitButton" parent="Buttons" instance=ExtResource("2_menu_button")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 text = "Quit"
 
 [node name="AboutDisplay" parent="." instance=ExtResource("3_code_display")]
