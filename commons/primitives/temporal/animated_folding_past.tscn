@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3v8kj2m5fxlp"]
+
+[ext_resource type="Script" path="res://commons/primitives/temporal/animated_folding_past.gd" id="1_script"]
+
+[node name="AnimatedFoldingPast" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_script")
+frame_width = 6.0
+frame_height = 4.8
+frame_count = 10
+cycle_duration = 4.0
+scale_ratio = 0.85
+frame_color = Color(0.7, 0.8, 0.9, 0.8)

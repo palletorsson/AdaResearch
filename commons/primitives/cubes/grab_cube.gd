@@ -9,12 +9,18 @@ extends XRToolsPickable
 @export var snap_match_rotation: bool = false
 @export var snap_falloff_distance: float = 1.0
 
+## Debug: Enable collision logging to find invisible pushers
+@export var debug_collisions: bool = false
 
 # Original material
 var _original_material : Material
 
 # Current controller holding this object
 var _current_controller : XRController3D
+
+# Debug: Track last velocity for push detection
+var _last_position: Vector3
+var _push_cooldown: float = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +30,13 @@ func _ready() -> void:
 
 	if not Engine.is_editor_hint():
 		set_process(true)
+		_last_position = global_position
+
+		# Enable contact monitoring for debug
+		if debug_collisions:
+			contact_monitor = true
+			max_contacts_reported = 4
+			body_entered.connect(_on_debug_body_entered)
 
 	# Get the original material
 	_original_material = $MeshInstance3D.get_active_material(0)
@@ -34,14 +47,53 @@ func _ready() -> void:
 
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+
+	# Debug: Detect being pushed
+	if debug_collisions and not _current_controller:
+		_push_cooldown -= delta
+		var velocity = (global_position - _last_position) / delta
+		_last_position = global_position
+
+		# If we're moving fast and not held, something is pushing us
+		if velocity.length() > 0.5 and _push_cooldown <= 0.0:
+			_push_cooldown = 1.0  # Don't spam
+			print("=== GRAB_CUBE PUSHED ===")
+			print("  Name: %s" % name)
+			print("  Velocity: %s (%.2f m/s)" % [str(velocity), velocity.length()])
+			print("  Position: %s" % str(global_position))
+			_print_contacting_bodies()
+
 	if not snap_to_shelf:
 		return
 	if _current_controller:
 		return
 	_snap_to_nearest_shelf_point(true)
+
+
+func _on_debug_body_entered(body: Node) -> void:
+	if not debug_collisions:
+		return
+	print("=== GRAB_CUBE COLLISION ===")
+	print("  %s touched by: %s" % [name, body.name])
+	print("  Body path: %s" % str(body.get_path()))
+	print("  Body class: %s" % body.get_class())
+	if body is Node3D:
+		print("  Body position: %s" % str(body.global_position))
+	if body is PhysicsBody3D:
+		print("  Body collision_layer: %d" % body.collision_layer)
+
+
+func _print_contacting_bodies() -> void:
+	var contacts = get_colliding_bodies()
+	if contacts.is_empty():
+		print("  No contacting bodies detected (contact_monitor may be off)")
+		return
+	print("  Contacting bodies (%d):" % contacts.size())
+	for body in contacts:
+		print("    - %s (%s) at %s" % [body.name, str(body.get_path()), str(body.global_position) if body is Node3D else "N/A"])
 
 # Called when this object is picked up
 func _on_picked_up(_pickable) -> void:

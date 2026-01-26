@@ -1,49 +1,35 @@
 extends LineSnapPuzzleBase
 class_name CrossLinePuzzle
 
-## CrossLinePuzzle - Interactive puzzle to form an X cross from two horizontal lines
-## Starting: Two horizontal parallel lines (20cm apart, 40cm long)
-## Target: X cross formation (diagonal lines)
+## CrossLinePuzzle - Interactive puzzle to form an X cross from two lines
+## Any endpoint can snap to any of the 4 corner targets
 
 func _init() -> void:
-	# Define the line configurations
-	# Starting: Two horizontal lines in XY plane (30cm apart vertically)
-	# Target: Diagonal cross (X shape) in ZY plane (vertical, facing player)
-	line_definitions = [
-		{
-			# Line 1: Horizontal line, in front of puzzle, top
-			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
-			"target_start": Vector3(0, 0.2, -0.2),       # a: Top-back diagonal
-			"target_end": Vector3(0, -0.2, 0.2)          # b: Bottom-front diagonal (forms \ line)
-		},
-		{
-			# Line 2: Horizontal line, in front of puzzle, bottom
-			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
-			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
-			"target_start": Vector3(0, -0.2, -0.2),      # c: Bottom-back diagonal
-			"target_end": Vector3(0, 0.2, 0.2)           # d: Top-front diagonal (forms / line)
-		}
+	# Define the 4 target vertices for X cross (shared pool)
+	target_positions = [
+		Vector3(0, 0.2, -0.2),   # Top-back
+		Vector3(0, -0.2, 0.2),   # Bottom-front
+		Vector3(0, -0.2, -0.2),  # Bottom-back
+		Vector3(0, 0.2, 0.2)     # Top-front
 	]
-	
-	# Customize success message
+
+	# Define starting positions for each line [start, end]
+	line_start_positions = [
+		[Vector3(0.2, -0.25, -0.15), Vector3(0.2, -0.25, 0.15)],  # Line 1: top
+		[Vector3(0.2, -0.4, -0.15), Vector3(0.2, -0.4, 0.15)]     # Line 2: bottom
+	]
+
 	success_message = "Cross Complete! Lines form an X"
 
+	# Form constraints: X cross requires perpendicular lines intersecting at centers
+	form_constraints = FormConstraint.cross_constraints()
+
 func _ready() -> void:
-	# Call parent ready
 	super._ready()
-	
-	print("CrossLinePuzzle: Initialized with 2 lines")
-	print("  Starting: Two horizontal lines in XY plane (30cm apart, 40cm long)")
-	print("  Top line (reddish): y=+0.15m, targets a->b")
-	print("  Bottom line (bluish): y=-0.15m, targets c->d")
-	print("  Target: X cross formation in ZY plane (vertical, facing player)")
+	print("CrossLinePuzzle: 2 lines, 4 vertices, constraints: PERPENDICULAR + INTERSECT_CENTER")
 
 func _complete_puzzle() -> void:
-	# Hide logic display instead of success label if needed
-	# But for now, let's keep success_label behavior from base and just hide the display
 	var display = get_node_or_null("CategoryLogicDisplay")
 	if display:
 		display.visible = false
-		
 	super._complete_puzzle()

@@ -1,48 +1,35 @@
 extends LineSnapPuzzleBase
 class_name ParallelLinePuzzle
 
-## ParallelLinePuzzle - Interactive puzzle to align two lines to be parallel
-## Starting: Two lines at different angles
-## Target: Two parallel vertical lines side by side
+## ParallelLinePuzzle - Interactive puzzle to align two parallel lines
+## Any endpoint can snap to any of the 4 targets
 
 func _init() -> void:
-	# Define the line configurations
-	# Starting: Two lines at different angles/positions
-	# Target: Two parallel vertical lines in ZY plane, separated horizontally
-	line_definitions = [
-		{
-			# Line 1: Horizontal line, in front of puzzle, top
-			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
-			"target_start": Vector3(0, -0.2, -0.1),     # a: Bottom of left parallel line
-			"target_end": Vector3(0, 0.2, -0.1)         # b: Top of left parallel line
-		},
-		{
-			# Line 2: Horizontal line, in front of puzzle, bottom
-			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
-			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
-			"target_start": Vector3(0, -0.2, 0.1),      # c: Bottom of right parallel line
-			"target_end": Vector3(0, 0.2, 0.1)          # d: Top of right parallel line
-		}
+	# Define the 4 target vertices for parallel lines (shared pool)
+	target_positions = [
+		Vector3(0, -0.2, -0.1),  # Bottom of left line
+		Vector3(0, 0.2, -0.1),   # Top of left line
+		Vector3(0, -0.2, 0.1),   # Bottom of right line
+		Vector3(0, 0.2, 0.1)     # Top of right line
 	]
-	
-	# Customize success message
+
+	# Define starting positions for each line [start, end]
+	line_start_positions = [
+		[Vector3(0.2, -0.25, -0.15), Vector3(0.2, -0.25, 0.15)],  # Line 1: top
+		[Vector3(0.2, -0.4, -0.15), Vector3(0.2, -0.4, 0.15)]     # Line 2: bottom
+	]
+
 	success_message = "Parallel Complete! Lines aligned"
 
+	# Form constraints: Two lines must be parallel
+	form_constraints = FormConstraint.parallel_constraints()
+
 func _ready() -> void:
-	# Call parent ready
 	super._ready()
-	
-	print("ParallelLinePuzzle: Initialized with 2 lines")
-	print("  Starting: Two horizontal lines at different heights")
-	print("  Top line (reddish): y=+0.15m, targets a->b (left vertical)")
-	print("  Bottom line (bluish): y=-0.15m, targets c->d (right vertical)")
-	print("  Target: Two parallel vertical lines in ZY plane, 20cm apart")
+	print("ParallelLinePuzzle: 2 lines, 4 vertices, constraints: PARALLEL")
 
 func _complete_puzzle() -> void:
-	# Hide logic display instead of success label if needed
 	var display = get_node_or_null("CategoryLogicDisplay")
 	if display:
 		display.visible = false
-		
 	super._complete_puzzle()

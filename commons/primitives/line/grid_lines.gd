@@ -10,7 +10,19 @@ extends Node3D
 @export var trace_height: float = 0.5 # Elevation above grid
 @export var rotation_speed: float = 10.0 # Degrees per second
 
+# Data Table Display
+@export_group("Data Table")
+@export var show_data_table: bool = true
+@export var data_table_position: Vector3 = Vector3(0, 2.5, 0)  # Above the trace
+@export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+@export var data_table_font_size: int = 20
+@export var data_table_page_duration: float = 2.0  # Seconds per page
+
 var _rotating_instances: Array[Node3D] = []
+var _data_table_label: Label3D
+var _trace_data_list: Array[Dictionary] = []  # Store info about each trace
+var _data_table_page: int = 0  # Current page of points to display
+var _data_table_timer: float = 0.0  # Timer for page cycling
 
 func _process(delta: float) -> void:
 	for instance in _rotating_instances:
@@ -19,21 +31,34 @@ func _process(delta: float) -> void:
 		else:
 			_rotating_instances.erase(instance)
 
+	# Cycle through data table pages
+	if _data_table_label and _data_table_label.visible:
+		_data_table_timer += delta
+		if _data_table_timer >= data_table_page_duration:
+			_data_table_timer = 0.0
+			_data_table_page += 1
+			_update_data_table()
+
 func _ready():
 	print("GridLines: _ready called")
 	setup_grid()
-	
+	_setup_data_table()
+
 	# Setup trace visualization
 	var trace_data = get_node_or_null("/root/TraceData")
 	print("GridLines: TraceData status: " + str(trace_data))
-	
+
 	if trace_data:
 		trace_data.trace_added.connect(_on_trace_added)
 		for trace in trace_data.get_all_traces():
 			_create_trace_mesh(trace)
+			_add_trace_to_data(trace)
+		_update_data_table()
 
 func _on_trace_added(points: Array) -> void:
 	_create_trace_mesh(points)
+	_add_trace_to_data(points)
+	_update_data_table()
 
 func _create_trace_mesh(points: Array) -> void:
 	if points.is_empty():
@@ -165,3 +190,97 @@ func setup_grid():
 				line_node.set_line_properties(0.01, Color(0.3, 0.3, 1.0, 1.0))  # Blue for Z axis
 			else:
 				line_node.set_line_properties(0.006, Color(0.6, 0.6, 0.6, 0.8))
+
+func _setup_data_table() -> void:
+	if not show_data_table:
+		return
+
+	_data_table_label = Label3D.new()
+	_data_table_label.name = "TraceDataTable"
+	_data_table_label.font_size = data_table_font_size
+	_data_table_label.pixel_size = 0.001  # Sharper text
+	_data_table_label.modulate = data_table_color
+	_data_table_label.outline_size = 2
+	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
+
+	# Billboard Y only - rotate to face camera but stay upright
+	_data_table_label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+	_data_table_label.fixed_size = false
+
+	# Horizontal alignment
+	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	# Scale bigger
+	_data_table_label.scale = Vector3(2.0, 2.0, 2.0)
+
+	_data_table_label.position = data_table_position
+	_data_table_label.visible = false
+
+	add_child(_data_table_label)
+
+func _add_trace_to_data(points: Array) -> void:
+	if points.is_empty():
+		return
+
+	# Calculate trace metrics
+	var total_length: float = 0.0
+	for i in range(1, points.size()):
+		total_length += points[i].distance_to(points[i - 1])
+
+	# Calculate bounding box
+	var min_p = points[0]
+	var max_p = points[0]
+	for p in points:
+		min_p = min_p.min(p)
+		max_p = max_p.max(p)
+	var size = max_p - min_p
+
+	var trace_info = {
+		"points": points.size(),
+		"length": total_length,
+		"size": size,
+		"raw_points": points.duplicate()
+	}
+	_trace_data_list.append(trace_info)
+
+	# Keep only last 10 traces in data list
+	while _trace_data_list.size() > 10:
+		_trace_data_list.pop_front()
+
+func _update_data_table() -> void:
+	if not _data_table_label or _trace_data_list.is_empty():
+		return
+
+	var total_points = 0
+	var total_length = 0.0
+	for trace in _trace_data_list:
+		total_points += trace.points
+		total_length += trace.length
+
+	# Get raw points from the most recent trace
+	var latest_trace = _trace_data_list[_trace_data_list.size() - 1]
+	var raw_pts = latest_trace.raw_points
+	var pts_per_page = 10
+	var total_pages = max(1, ceili(float(raw_pts.size()) / pts_per_page))
+
+	# Wrap page if needed
+	if _data_table_page >= total_pages:
+		_data_table_page = 0
+
+	# Build full table with raw data points
+	var table_text = "GRID TRACE ARCHIVE\n"
+	table_text += "─────────────────────────────────\n"
+	table_text += "Traces: %d  Points: %d  Length: %.2f m\n" % [_trace_data_list.size(), total_points, total_length]
+	table_text += "─────────────────────────────────\n"
+	table_text += "RAW DATA POINTS (Page %d/%d)\n" % [_data_table_page + 1, total_pages]
+	table_text += "─────────────────────────────────\n"
+
+	# Show 10 points for current page
+	var start_idx = _data_table_page * pts_per_page
+	var end_idx = min(start_idx + pts_per_page, raw_pts.size())
+	for i in range(start_idx, end_idx):
+		var pt = raw_pts[i]
+		table_text += "%3d: (%.2f, %.2f, %.2f)\n" % [i + 1, pt.x, pt.y, pt.z]
+
+	_data_table_label.text = table_text
+	_data_table_label.visible = true

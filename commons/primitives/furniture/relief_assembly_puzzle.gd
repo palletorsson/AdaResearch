@@ -29,7 +29,7 @@ enum ReliefType {
 @export_group("Piece Configuration")
 @export var piece_scene: PackedScene
 @export var auto_spawn_pieces: bool = true
-@export var workbench_offset: Vector3 = Vector3(0.5, 0.2, 0.5)
+@export var workbench_offset: Vector3 = Vector3(0.35, 0.1, 0.25)  # Moved back to stay on platform
 @export var extra_pieces: int = 3
 
 ## Color Palette (Biederman-style)

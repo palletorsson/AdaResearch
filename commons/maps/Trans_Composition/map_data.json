@@ -93,11 +93,11 @@
 			["pattern_tile_puzzle:90#4x4", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "equipment_assembly_puzzle:180:-0.5#analysis", " ", " ", " ", " "],
-			["chair_assembly_puzzle:-90:-0.5#furniture_type:shelf", " ", " ", " ", "", " ", " ", " ", "assembly_line_puzzle:-90:-0.5#scales"],
-			[" ", " ", " ", " ", "assembly_line_puzzle:180:-0.7#puzzle_type:houses", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "", " ", " ", " ", " ", " ", "assembly_line_puzzle:-90:-0.5#microscope"]
+			["chair_assembly_puzzle:-90:-0.5#furniture_type:shelf", " ", " ", " ", "", " ", " ", " ", "assembly_line_puzzle:-90:-0.9#scales"],
+			[" ", " ", " ", " ", "assembly_line_puzzle:180:-0.9#puzzle_type:houses", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "", " ", " ", " ", " ", " ", "assembly_line_puzzle:-90:-0.9#microscope"]
 		]
 	},
 	"utility_definitions": {

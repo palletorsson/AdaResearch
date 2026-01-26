@@ -82,15 +82,18 @@ var current_map_name: String = ""
 func _ready() -> void:
 	# Ensure root is visible so we can show hint/manual independently
 	visible = true
-	
+
 	# Setup UI nodes
 	call_deferred("_find_ui_nodes_and_setup")
 	_setup_hint_label()
-	
-	# Initially hide manual content (scale ~0)
-	if viewport_2d:
-		viewport_2d.scale = Vector3.ONE * 0.001
-	
+
+	# Initially hide manual content - set invisible to disable collision
+	# The Viewport2Din3D has a StaticBody3D collision that must be disabled
+	# when the manual is hidden to prevent pushing objects
+	# NOTE: Must be deferred so Viewport2Din3D._ready() runs first and connects
+	# its visibility_changed signal, otherwise _update_enabled() never fires
+	call_deferred("_disable_viewport_on_startup")
+
 	# Find VR controllers
 	_find_vr_controllers()
 	
@@ -106,6 +109,27 @@ func _ready() -> void:
 	
 	# Load map data when ready
 	call_deferred("_load_map_data")
+
+func _disable_viewport_on_startup() -> void:
+	# Called deferred so Viewport2Din3D._ready() has run and connected signals
+	print("MapManual: _disable_viewport_on_startup called")
+	if viewport_2d:
+		print("MapManual: viewport_2d found at %s" % str(viewport_2d.get_path()))
+		viewport_2d.visible = false
+		viewport_2d.scale = Vector3.ONE * 0.001
+		# Also directly disable collision as a safety measure
+		var collision = viewport_2d.get_node_or_null("StaticBody3D/CollisionShape3D")
+		if collision:
+			collision.disabled = true
+			print("MapManual: Collision DISABLED - was at %s, disabled=%s" % [str(collision.get_path()), collision.disabled])
+		else:
+			print("MapManual: ERROR - CollisionShape3D not found at StaticBody3D/CollisionShape3D!")
+			# Try to find it another way
+			var static_body = viewport_2d.get_node_or_null("StaticBody3D")
+			if static_body:
+				print("MapManual: StaticBody3D found, children: %s" % str(static_body.get_children()))
+	else:
+		print("MapManual: ERROR - viewport_2d is null!")
 
 func _find_ui_nodes_and_setup() -> void:
 	if not viewport_2d: return
@@ -223,19 +247,26 @@ func show_manual() -> void:
 
 	# Reload map data each time we show (in case map changed)
 	_load_map_data()
-	
+
 	is_animating = true
 	is_visible = true
-	
+
 	if hint_label:
 		hint_label.visible = false
-	
+
 	# Animate Viewport2D scale
 	if viewport_2d:
+		# Make visible FIRST (enables collision for interaction)
+		viewport_2d.visible = true
+		# Explicitly enable collision for pointer interaction
+		var collision = viewport_2d.get_node_or_null("StaticBody3D/CollisionShape3D")
+		if collision:
+			collision.disabled = false
+
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_BACK)
-		
+
 		viewport_2d.scale = Vector3.ONE * 0.001
 		tween.tween_property(viewport_2d, "scale", Vector3.ONE, animation_duration)
 		tween.tween_callback(_on_show_complete)
@@ -245,15 +276,15 @@ func show_manual() -> void:
 func hide_manual() -> void:
 	if not is_visible or is_animating:
 		return
-	
+
 	is_animating = true
-	
+
 	# Animate Viewport2D scale out
 	if viewport_2d:
 		var tween = create_tween()
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_BACK)
-		
+
 		tween.tween_property(viewport_2d, "scale", Vector3.ONE * 0.001, animation_duration * 0.7)
 		tween.tween_callback(_on_hide_complete)
 	else:
@@ -266,6 +297,14 @@ func _on_show_complete() -> void:
 func _on_hide_complete() -> void:
 	is_animating = false
 	is_visible = false
+	# CRITICAL: Hide viewport to disable its collision shape
+	# This prevents the invisible StaticBody3D from pushing objects
+	if viewport_2d:
+		viewport_2d.visible = false
+		# Explicitly disable collision as safety measure
+		var collision = viewport_2d.get_node_or_null("StaticBody3D/CollisionShape3D")
+		if collision:
+			collision.disabled = true
 	# Hint will reappear automatically in _process if conditions met
 
 func _load_map_data() -> void:

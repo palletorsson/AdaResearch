@@ -21,6 +21,18 @@ extends Node3D
 @export var reference_frame_size: float = 0.5
 @export var show_reference_frame: bool = false
 
+# Data Table Display
+@export_group("Data Table")
+@export var show_data_table: bool = true
+@export var data_table_height_offset: float = -0.35
+@export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+@export var data_table_font_size: int = 20
+@export var data_table_update_interval: float = 0.15  # Seconds between updates
+
+var _data_table_label: Label3D
+var _data_table_timer: float = 0.0
+var _total_trail_length: float = 0.0
+
 var _grab_point: Node3D
 var _draw_sphere: Node3D
 var _trail_mesh: ImmediateMesh
@@ -48,6 +60,7 @@ func _ready() -> void:
 	_setup_trail()
 	if show_reference_frame:
 		_setup_reference_frame()
+	_setup_data_table()
 	_last_global_position = _draw_sphere.global_position
 	set_process(true)
 
@@ -104,7 +117,7 @@ func _setup_reference_frame() -> void:
 
 	add_child(_reference_frame)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not _draw_sphere:
 		return
 
@@ -114,6 +127,9 @@ func _process(_delta: float) -> void:
 	if record_only_when_grabbed and _grab_point and _grab_point.has_method("is_picked_up"):
 		if not _grab_point.is_picked_up():
 			_last_global_position = current_global
+			# Hide data table when not grabbed
+			if _data_table_label:
+				_data_table_label.visible = false
 			return
 
 	# Snap current position to grid for tracing
@@ -127,6 +143,9 @@ func _process(_delta: float) -> void:
 	# But maybe they want lines between grid nodes?
 	# Let's assume connecting grid points is what "trace the grid means"
 	
+	# Track trail length
+	_total_trail_length += snapped_global.distance_to(_last_global_position)
+
 	_last_global_position = snapped_global
 	_trail_points.append(snapped_global)
 
@@ -134,6 +153,12 @@ func _process(_delta: float) -> void:
 		_trail_points.pop_front()
 
 	_rebuild_trail()
+
+	# Update data table (throttled)
+	_data_table_timer += delta
+	if _data_table_timer >= data_table_update_interval:
+		_data_table_timer = 0.0
+		_update_data_table()
 
 	# Optional: visually snap the draw sphere if we want the object to look like it's on grid?
 	# _draw_sphere.global_position = snapped_global # This might jitter against hand smoothness
@@ -179,10 +204,75 @@ func _on_grab_point_picked_up(_pickable) -> void:
 
 func clear_trail() -> void:
 	_trail_points.clear()
+	_total_trail_length = 0.0
 	if _trail_mesh:
 		_trail_mesh.clear_surfaces()
 	if _draw_sphere:
 		_last_global_position = _draw_sphere.global_position
+	if _data_table_label:
+		_data_table_label.visible = false
 
 func get_trail_points() -> Array[Vector3]:
 	return _trail_points.duplicate()
+
+func _setup_data_table() -> void:
+	if not show_data_table:
+		return
+
+	_data_table_label = Label3D.new()
+	_data_table_label.name = "DataTable"
+	_data_table_label.font_size = data_table_font_size
+	_data_table_label.pixel_size = 0.001  # Sharper text
+	_data_table_label.modulate = data_table_color
+	_data_table_label.outline_size = 2
+	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
+
+	# NOT billboard - fixed orientation
+	_data_table_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_data_table_label.fixed_size = false
+
+	# World-space positioning
+	_data_table_label.set_as_top_level(true)
+	_data_table_label.visible = false
+
+	# Horizontal alignment
+	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	# Rotate 90° in X (parallel to ground) and 180° in Y
+	_data_table_label.rotation_degrees.x = -90
+	_data_table_label.rotation_degrees.y = 180
+
+	# Scale for sharper text
+	_data_table_label.scale = Vector3(1.0, 1.0, 1.0)
+
+	add_child(_data_table_label)
+
+func _update_data_table() -> void:
+	if not _data_table_label or _trail_points.is_empty():
+		return
+
+	var current_pos = _draw_sphere.global_position if _draw_sphere else Vector3.ZERO
+	var snapped_pos = snap_position_to_grid(current_pos)
+	var point_count = _trail_points.size()
+
+	# Build table text with two columns: Point (raw) | Snap (grid)
+	var table_text = "GRID TRACE DATA\n"
+	table_text += "Points: %d  Length: %.2f m\n" % [point_count, _total_trail_length]
+	table_text += "─────────────────────────────────\n"
+	table_text += "  POINT (raw)      │  SNAP (grid)\n"
+	table_text += "─────────────────────────────────\n"
+
+	# Show last 10 points with both raw and snapped values
+	var start_idx = max(0, _trail_points.size() - 10)
+	for i in range(start_idx, _trail_points.size()):
+		var pt = _trail_points[i]
+		var snapped = snap_position_to_grid(pt)
+		var grid = snapped / grid_size
+		table_text += "(%.1f,%.1f,%.1f) │ (%d,%d,%d)\n" % [pt.x, pt.y, pt.z, int(grid.x), int(grid.y), int(grid.z)]
+
+	_data_table_label.text = table_text
+	_data_table_label.visible = true
+
+	# Position near trail start, offset to the side and forward
+	var start_pos = _trail_points[0]
+	_data_table_label.global_position = start_pos + Vector3(0.15, data_table_height_offset - 0.1, 0.2)

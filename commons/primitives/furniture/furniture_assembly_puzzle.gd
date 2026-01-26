@@ -34,7 +34,7 @@ enum FurnitureType {
 @export_group("Piece Configuration")
 @export var piece_scene: PackedScene  # Scene to use for pieces (grab_cube_scalable)
 @export var auto_spawn_pieces: bool = true  # Spawn pieces automatically
-@export var workbench_offset: Vector3 = Vector3(0.0, 0.4, 0.4)  # Where pieces start
+@export var workbench_offset: Vector3 = Vector3(0.3, 0.1, 0.3)  # Where pieces start (centered on 1x1 platform)
 @export var extra_pieces: int = 3  # Extra cubes in case some fall off
 
 ## Reward Configuration

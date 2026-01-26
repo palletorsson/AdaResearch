@@ -7,7 +7,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 7,
-			"depth": 11,
+			"depth": 14,
 			"max_height": 2
 		},
 		"metadata": {
@@ -65,8 +65,8 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "  ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " "],
-			[" ", " ", "draw_dot:180:0:0#fillhole:remove", "cube_scene:0:0:0.90#group:fillhole", " ", "", " "],
-			[" ", " ", "dgrid:90:1.15:0.9#config:5:5", " ", " ", "", " "],
+			[" ", " ", "draw_dot:0:0:0#fillhole:remove", "cube_scene:0:0:0.90#group:fillhole", " ", "", " "],
+			[" ", " ", " ", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
  

@@ -76,7 +76,7 @@ var initial_delay = 0.5  # Shorter delay before starting animation
 # Colors optimized for VR - Marble green balls, transparent triangles, black edges
 var vertex_color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 var vertex_color_alt = Color(0.2, 0.8, 0.3, 0.7)  # Same marble green for all
-var edge_color = Color(0.1, 0.1, 0.1)    # Black edges
+var edge_color = Color(1.0, 1.0, 1.0)    # White edges
 var triangle_color = Color(0.8, 0.2, 0.4, 0.6)  # Transparent dark pink
 var triangle_color_alt1 = Color(0.8, 0.1, 0.1, 0.6)  # Transparent red
 var triangle_color_alt2 = Color(0.1, 0.1, 0.1, 0.6)  # Transparent black
@@ -171,12 +171,13 @@ func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
 	
 	mesh_instance.transform = transform
 	
-	# Create black material for edges
+	# Create matte white material for edges
 	var material = StandardMaterial3D.new()
 	material.albedo_color = edge_color
 	material.emission_enabled = false
-	material.roughness = 0.9
+	material.roughness = 1.0
 	material.metallic = 0.0
+	material.metallic_specular = 0.0
 	mesh_instance.material_override = material
 	
 	return mesh_instance
@@ -225,6 +226,10 @@ func create_triangle_meshes():
 		material.albedo_color = color
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission_enabled = false
+		material.roughness = 1.0
+		material.metallic = 0.0
+		material.metallic_specular = 0.0
+		material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides in VR
 		mesh_instance.material_override = material
 		

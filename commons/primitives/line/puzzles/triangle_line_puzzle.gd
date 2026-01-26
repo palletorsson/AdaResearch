@@ -2,59 +2,39 @@ extends LineSnapPuzzleBase
 class_name TriangleLinePuzzle
 
 ## TriangleLinePuzzle - Interactive puzzle to form a triangle from three lines
-## Starting: Three horizontal lines at different heights
-## Target: Three lines forming an equilateral triangle
+## Any endpoint can snap to any of the 3 triangle vertices
 
 func _init() -> void:
-	# Define the line configurations
-	# Starting: Three horizontal lines in XY plane
-	# Target: Equilateral triangle in ZY plane
-	# Triangle centered at origin, 40cm sides
-	var height = 0.346  # Height of equilateral triangle with 40cm sides ≈ 34.6cm
-	
-	line_definitions = [
-		{
-			# Line 1: Horizontal line, in front of puzzle, top
-			"start_pos": Vector3(0.2, -0.2, -0.15),       # Back end
-			"end_pos": Vector3(0.2, -0.2, 0.15),          # Front end
-			"target_start": Vector3(0, -0.173, -0.2),     # a: Bottom-left
-			"target_end": Vector3(0, -0.173, 0.2)         # b: Bottom-right (base of triangle)
-		},
-		{
-			# Line 2: Horizontal line, in front of puzzle, middle
-			"start_pos": Vector3(0.2, -0.3, -0.15),       # Back end
-			"end_pos": Vector3(0.2, -0.3, 0.15),          # Front end
-			"target_start": Vector3(0, -0.173, -0.2),     # c: Bottom-left (reuse)
-			"target_end": Vector3(0, 0.173, 0)            # d: Top apex (left side)
-		},
-		{
-			# Line 3: Horizontal line, in front of puzzle, bottom
-			"start_pos": Vector3(0.2, -0.4, -0.15),       # Back end
-			"end_pos": Vector3(0.2, -0.4, 0.15),          # Front end
-			"target_start": Vector3(0, -0.173, 0.2),      # e: Bottom-right (reuse)
-			"target_end": Vector3(0, 0.173, 0)            # f: Top apex (right side)
-		}
+	# Define the 3 target vertices of the triangle (shared pool)
+	# Equilateral triangle in ZY plane, ~40cm sides
+	target_positions = [
+		Vector3(0, -0.173, -0.2),  # Bottom-left vertex
+		Vector3(0, -0.173, 0.2),   # Bottom-right vertex
+		Vector3(0, 0.173, 0)       # Top apex
 	]
-	
+
+	# Define starting positions for each line [start, end]
+	# Three horizontal lines in front of the player
+	line_start_positions = [
+		[Vector3(0.2, -0.2, -0.15), Vector3(0.2, -0.2, 0.15)],  # Line 1: top
+		[Vector3(0.2, -0.3, -0.15), Vector3(0.2, -0.3, 0.15)],  # Line 2: middle
+		[Vector3(0.2, -0.4, -0.15), Vector3(0.2, -0.4, 0.15)]   # Line 3: bottom
+	]
+
 	# Customize success message
 	success_message = "Triangle Complete!"
 
+	# Form constraints: Triangle requires 3 connected lines forming a closed loop
+	form_constraints = FormConstraint.triangle_constraints()
+
 func _ready() -> void:
-	# Call parent ready
 	super._ready()
-	
-	print("TriangleLinePuzzle: Initialized with 3 lines")
-	print("  Starting: Three horizontal lines at different heights")
-	print("  Line 1: y=+0.2m, targets a->b (base)")
-	print("  Line 2: y=0.0m, targets c->d (left side)")
-	print("  Line 3: y=-0.2m, targets e->f (right side)")
-	print("  Line 3: y=-0.2m, targets e->f (right side)")
-	print("  Target: Equilateral triangle in ZY plane")
+	print("TriangleLinePuzzle: 3 lines, 3 vertices, constraints: CONNECTED + CLOSED_LOOP")
 
 func _complete_puzzle() -> void:
 	# Hide logic display if needed
 	var display = get_node_or_null("CategoryLogicDisplay")
 	if display:
 		display.visible = false
-		
+
 	super._complete_puzzle()

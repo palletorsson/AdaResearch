@@ -486,13 +486,74 @@ func _update_output_conveyor(delta: float) -> void:
 
 		if product.position.z < output_end.z:
 			to_remove.append(product)
-			# Fade out and remove
-			var tween = create_tween()
-			tween.tween_property(product, "scale", Vector3.ONE * 0.01, 0.3)
-			tween.tween_callback(product.queue_free)
+			# Let the artifact fall off and become grabbable!
+			_release_artifact_to_world(product)
 
 	for product in to_remove:
 		_output_products.erase(product)
+
+
+## Release artifact from conveyor - it falls and becomes grabbable
+func _release_artifact_to_world(artifact: Node3D) -> void:
+	var reward_type = artifact.get_meta("reward_type", "unknown")
+	print("AssemblyLine: Releasing artifact '%s' to world" % reward_type)
+
+	# Store world transform before reparenting
+	var world_pos = artifact.global_position
+	var world_rot = artifact.global_rotation
+	var local_scale = artifact.scale  # Store local scale (global_scale is read-only)
+
+	# Find GridScene to reparent to (so artifact persists)
+	var grid_scene = _find_grid_scene()
+	var new_parent = grid_scene if grid_scene else get_parent()
+
+	# Reparent artifact
+	artifact.get_parent().remove_child(artifact)
+	new_parent.add_child(artifact)
+
+	# Restore world transform
+	artifact.global_position = world_pos
+	artifact.global_rotation = world_rot
+	artifact.scale = local_scale  # Restore local scale
+
+	# Enable physics if artifact is a RigidBody3D
+	if artifact is RigidBody3D:
+		artifact.freeze = false
+		artifact.sleeping = false
+
+	# Register with EquipmentRegistry
+	var eq_id = "eq_%s_%d" % [reward_type, Time.get_ticks_msec()]
+	if EquipmentRegistry:
+		EquipmentRegistry.register(eq_id, artifact, reward_type, {
+			"source": "assembly_line",
+			"puzzle_type": PuzzleType.keys()[puzzle_type]
+		})
+	else:
+		artifact.set_meta("equipment_id", eq_id)
+
+
+## Find GridScene for proper artifact parenting
+func _find_grid_scene() -> Node:
+	var current = self
+	while current:
+		if current.name == "GridScene":
+			return current
+		current = current.get_parent()
+
+	var root = get_tree().current_scene
+	if root:
+		return _find_node_by_name(root, "GridScene")
+	return null
+
+
+func _find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+	for child in node.get_children():
+		var result = _find_node_by_name(child, target_name)
+		if result:
+			return result
+	return null
 
 func _check_slot_matches() -> void:
 	var product = _get_current_product()
@@ -595,29 +656,37 @@ func _check_product_complete() -> void:
 	_setup_current_product_ghost()
 
 func _move_product_to_output() -> void:
-	# Create a container for the completed product
-	var product_container = Node3D.new()
-	product_container.name = "CompletedProduct_%d" % _products_completed
-	product_container.position = output_start
-	add_child(product_container)
+	var product = _get_current_product()
+	if not product:
+		return
 
-	# Reparent all slot pieces to the container
+	# Delete the assembled shape pieces (they were just for building)
 	for piece in _slot_pieces:
 		if is_instance_valid(piece):
-			var world_pos = piece.global_position
-			piece.get_parent().remove_child(piece)
-			product_container.add_child(piece)
-			piece.global_position = world_pos
-
-	# Animate moving to output start
-	var tween = create_tween()
-	tween.tween_property(product_container, "position", output_start, 0.4)
-	await tween.finished
-
-	_output_products.append(product_container)
-
-	# Clear slot tracking
+			piece.queue_free()
 	_slot_pieces.clear()
+
+	# Spawn the ACTUAL artifact based on reward_type
+	var artifact = _create_artifact(product.reward_type)
+	if artifact:
+		add_child(artifact)
+		artifact.global_position = _ghost_container.global_position
+
+		# Scale artifact to match conveyor size
+		var artifact_scale = 0.3  # Reasonable size for conveyor
+		artifact.scale = Vector3.ONE * artifact_scale
+
+		# Store reward type for later use
+		artifact.set_meta("reward_type", product.reward_type)
+		artifact.set_meta("equipment_type", product.reward_type)
+
+		# Animate slide to output start
+		var tween = create_tween()
+		tween.tween_property(artifact, "position", output_start, 0.4)
+		await tween.finished
+
+		_output_products.append(artifact)
+		print("AssemblyLine: Artifact '%s' moving to output" % product.reward_type)
 
 func _show_completion_message() -> void:
 	var label = get_node_or_null("ProductLabel")
@@ -842,6 +911,33 @@ func _create_scientific_equipment_reward(reward_type: String = "microscope") -> 
 		push_warning("AssemblyLine: Could not load scene: %s" % scene_path)
 		# Fallback to procedural mesh
 		return _create_fallback_equipment_mesh()
+
+
+## Create the actual artifact for the output conveyor
+## This spawns real equipment scenes that can be grabbed after falling off
+func _create_artifact(reward_type: String) -> Node3D:
+	var scene_paths := {
+		"microscope": "res://commons/lab/microscope/microscope.tscn",
+		"electronicscales": "res://commons/lab/electronicscales/electronicscales.tscn",
+		"multimeter": "res://commons/lab/multimeter/multimeter.tscn"
+	}
+
+	var scene_path = scene_paths.get(reward_type)
+	if scene_path:
+		var scene = load(scene_path)
+		if scene:
+			var artifact = scene.instantiate()
+			artifact.name = "Artifact_%s_%d" % [reward_type, _products_completed]
+			return artifact
+
+	# Fallback for houses and other types: create procedural mesh
+	match reward_type:
+		"house", "tower":
+			return _create_house_mesh()
+		"health_charger", "security_camera", "specimen_jar":
+			return _create_lab_equipment_mesh()
+		_:
+			return _create_fallback_equipment_mesh()
 
 
 func _create_fallback_equipment_mesh() -> Node3D:

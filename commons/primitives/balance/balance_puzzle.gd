@@ -30,7 +30,7 @@ class_name BalancePuzzle
 @export var piece_scale: float = 0.08
 
 ## Spawn area offset from puzzle center
-@export var spawn_offset: Vector3 = Vector3(0.3, 0.1, 0)
+@export var spawn_offset: Vector3 = Vector3(0.0, 0.1, 0.0)  # Centered on platform
 
 ## Platform size
 @export var platform_size: Vector3 = Vector3(0.5, 0.05, 0.5)

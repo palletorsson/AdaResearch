@@ -2,66 +2,38 @@ extends LineSnapPuzzleBase
 class_name QuadLinePuzzle
 
 ## QuadLinePuzzle - Interactive puzzle to form a square from four lines
-## Starting: Four horizontal lines at different heights
-## Target: Four lines forming a square outline
+## Any endpoint can snap to any of the 4 corner targets
 
 func _init() -> void:
-	# Define the line configurations
-	# Starting: Four horizontal lines in XY plane
-	# Target: Square outline in ZY plane (40cm x 40cm)
 	var half_size = 0.2  # 20cm from center
-	
-	line_definitions = [
-		{
-			# Line 1: Horizontal line, in front of puzzle, topmost
-			"start_pos": Vector3(0.2, -0.15, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.15, 0.15),         # Front end
-			"target_start": Vector3(0, half_size, -half_size),  # a: Top-left
-			"target_end": Vector3(0, half_size, half_size)      # b: Top-right (top edge)
-		},
-		{
-			# Line 2: Horizontal line, in front of puzzle, upper-mid
-			"start_pos": Vector3(0.2, -0.25, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.25, 0.15),         # Front end
-			"target_start": Vector3(0, half_size, half_size),   # c: Top-right
-			"target_end": Vector3(0, -half_size, half_size)     # d: Bottom-right (right edge)
-		},
-		{
-			# Line 3: Horizontal line, in front of puzzle, lower-mid
-			"start_pos": Vector3(0.2, -0.35, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.35, 0.15),         # Front end
-			"target_start": Vector3(0, -half_size, half_size),  # e: Bottom-right
-			"target_end": Vector3(0, -half_size, -half_size)    # f: Bottom-left (bottom edge)
-		},
-		{
-			# Line 4: Horizontal line, in front of puzzle, bottommost
-			"start_pos": Vector3(0.2, -0.45, -0.15),      # Back end
-			"end_pos": Vector3(0.2, -0.45, 0.15),         # Front end
-			"target_start": Vector3(0, -half_size, -half_size), # g: Bottom-left
-			"target_end": Vector3(0, half_size, -half_size)     # h: Top-left (left edge)
-		}
+
+	# Define the 4 corner vertices of the square (shared pool)
+	target_positions = [
+		Vector3(0, half_size, -half_size),   # Top-left
+		Vector3(0, half_size, half_size),    # Top-right
+		Vector3(0, -half_size, half_size),   # Bottom-right
+		Vector3(0, -half_size, -half_size)   # Bottom-left
 	]
-	
-	# Customize success message
+
+	# Define starting positions for each line [start, end]
+	line_start_positions = [
+		[Vector3(0.2, -0.15, -0.15), Vector3(0.2, -0.15, 0.15)],  # Line 1: topmost
+		[Vector3(0.2, -0.25, -0.15), Vector3(0.2, -0.25, 0.15)],  # Line 2: upper-mid
+		[Vector3(0.2, -0.35, -0.15), Vector3(0.2, -0.35, 0.15)],  # Line 3: lower-mid
+		[Vector3(0.2, -0.45, -0.15), Vector3(0.2, -0.45, 0.15)]   # Line 4: bottommost
+	]
+
 	success_message = "Square Complete!"
 
+	# Form constraints: Quad requires 4 connected lines forming a closed loop
+	form_constraints = FormConstraint.quad_constraints()
+
 func _ready() -> void:
-	# Call parent ready
 	super._ready()
-	
-	print("QuadLinePuzzle: Initialized with 4 lines")
-	print("  Starting: Four horizontal lines at different heights")
-	print("  Line 1: y=+0.25m, targets a->b (top edge)")
-	print("  Line 2: y=+0.08m, targets c->d (right edge)")
-	print("  Line 3: y=-0.08m, targets e->f (bottom edge)")
-	print("  Line 4: y=-0.25m, targets g->h (left edge)")
-	print("  Line 4: y=-0.25m, targets g->h (left edge)")
-	print("  Target: 40cm x 40cm square in ZY plane")
+	print("QuadLinePuzzle: 4 lines, 4 vertices, constraints: CONNECTED + CLOSED_LOOP")
 
 func _complete_puzzle() -> void:
-	# Hide logic display if needed
 	var display = get_node_or_null("CategoryLogicDisplay")
 	if display:
 		display.visible = false
-		
 	super._complete_puzzle()

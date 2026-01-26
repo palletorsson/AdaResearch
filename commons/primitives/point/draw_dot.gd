@@ -85,15 +85,124 @@ func _setup_reference_frame() -> void:
 
 	add_child(_reference_frame)
 
+func _setup_progress_indicator() -> void:
+	# Create progress indicator as world-space element (not child of grab point)
+	var progress_shader = load("res://commons/scenes/main_menu/components/linear_progress.gdshader")
+	if not progress_shader:
+		push_warning("DrawDot: Could not load progress shader")
+		return
+
+	_progress_indicator = MeshInstance3D.new()
+	_progress_indicator.name = "ProgressIndicator"
+
+	var quad_mesh = QuadMesh.new()
+	quad_mesh.size = Vector2(0.2, 0.04)
+	_progress_indicator.mesh = quad_mesh
+
+	var material = ShaderMaterial.new()
+	material.render_priority = 100
+	material.shader = progress_shader
+	material.set_shader_parameter("progress", 0.0)
+	material.set_shader_parameter("color", unlock_progress_color)
+	_progress_indicator.material_override = material
+
+	# Make it world-space so it doesn't follow the hand
+	_progress_indicator.set_as_top_level(true)
+	_progress_indicator.visible = false
+
+	add_child(_progress_indicator)
+
+func _update_progress_indicator_position() -> void:
+	if not _progress_indicator or _trail_points.is_empty():
+		return
+
+	# Position above the first trail point (start of drawing)
+	var start_pos = _trail_points[0]
+	_progress_indicator.global_position = start_pos + Vector3(0, progress_bar_height_offset, 0)
+
+func _setup_data_table() -> void:
+	if not show_data_table:
+		return
+
+	_data_table_label = Label3D.new()
+	_data_table_label.name = "DataTable"
+	_data_table_label.font_size = data_table_font_size
+	_data_table_label.pixel_size = 0.001  # Sharper text
+	_data_table_label.modulate = data_table_color
+	_data_table_label.outline_size = 2
+	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
+
+	# NOT billboard - fixed orientation
+	_data_table_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_data_table_label.fixed_size = false
+
+	# World-space positioning
+	_data_table_label.set_as_top_level(true)
+	_data_table_label.visible = false
+
+	# Horizontal alignment
+	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	# Rotate 90° in X (parallel to ground) and 180° in Y
+	_data_table_label.rotation_degrees.x = -90
+	_data_table_label.rotation_degrees.y = 180
+
+	# Scale for sharper text
+	_data_table_label.scale = Vector3(1.0, 1.0, 1.0)
+
+	add_child(_data_table_label)
+
+func _update_data_table() -> void:
+	if not _data_table_label or _trail_points.is_empty():
+		return
+
+	var current_pos = _draw_sphere.global_position if _draw_sphere else Vector3.ZERO
+	var trail_length = _total_movement
+	var point_count = _trail_points.size()
+	var dist_from_origin = current_pos.length()
+
+	# Build table text with last 10 points
+	var table_text = "TRACE DATA\n"
+	table_text += "─────────────────\n"
+	table_text += "Points: %d  Length: %.2f m\n" % [point_count, trail_length]
+	table_text += "─────────────────\n"
+	table_text += "LAST 10 POSITIONS\n"
+
+	# Show last 10 points (or fewer if less than 10 exist)
+	var start_idx = max(0, _trail_points.size() - 10)
+	for i in range(start_idx, _trail_points.size()):
+		var pt = _trail_points[i]
+		var idx = i - start_idx + 1
+		table_text += "%2d: (%.2f, %.2f, %.2f)\n" % [idx, pt.x, pt.y, pt.z]
+
+	_data_table_label.text = table_text
+	_data_table_label.visible = true
+
+	# Position near trail start, offset to the side and forward
+	var start_pos = _trail_points[0]
+	_data_table_label.global_position = start_pos + Vector3(0.15, data_table_height_offset - 0.1, 0.2)
+
 @export var fade_trail: bool = false
 @export var fade_duration: float = 2.0
+@export var progress_bar_height_offset: float = 0.15  # Height above trail start point
+
+# Data Table Display
+@export_group("Data Table")
+@export var show_data_table: bool = true
+@export var data_table_height_offset: float = -0.35  # Height relative to trail start
+@export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+@export var data_table_font_size: int = 20
+@export var data_table_update_interval: float = 0.15  # Seconds between updates
+
+var _data_table_label: Label3D
+var _data_table_timer: float = 0.0
 
 
 # Tag System
 @export_group("Tag System")
 @export var trigger_tag: String = ""
 @export var trigger_action: String = "shrink_and_remove"
-@export var movement_threshold: float = 2.0 # Meters of movement required
+@export var movement_threshold: float = 6.0 # Meters of drawing movement required (trail length)
 @export var unlock_progress_color: Color = Color(0.2, 1.0, 0.4) # Green when finished
 
 @export var unlock_sound: AudioStream
@@ -115,12 +224,13 @@ func _ready() -> void:
 
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
-	
-	if _grab_point:
-		_progress_indicator = _grab_point.get_node_or_null("ProgressIndicator")
-		if _progress_indicator:
-			_progress_indicator.visible = false
-	
+
+	# Setup progress indicator as world-space (not child of grab point)
+	_setup_progress_indicator()
+
+	# Setup data table display
+	_setup_data_table()
+
 	if not _grab_point or not _draw_sphere:
 		push_warning("DrawDot: Missing grab point or draw sphere in scene.")
 		set_process(false)
@@ -154,18 +264,16 @@ func _process(delta: float) -> void:
 				_cleanup_old_points()
 				_rebuild_trail()
 			
-			# Hide progress indicator when not grabbed
+			# Hide progress indicator and data table when not grabbed
 			if _progress_indicator:
 				_progress_indicator.visible = false
-				
+			if _data_table_label:
+				_data_table_label.visible = false
+
 			return
 	
 	# Calculate movement since last frame
 	var dist = current_global.distance_to(_last_global_position)
-	
-	if dist > 0:
-		_total_movement += dist
-		_check_unlock_progress()
 
 	if dist < min_segment_distance:
 		if fade_trail:
@@ -176,6 +284,19 @@ func _process(delta: float) -> void:
 	_last_global_position = current_global
 	# Use global position for the trail points since the mesh is top_level
 	_trail_points.append(current_global)
+
+	# Only count movement when actually drawing (adding trail points)
+	_total_movement += dist
+	_check_unlock_progress()
+
+	# Position progress indicator above trail start point
+	_update_progress_indicator_position()
+
+	# Update data table (throttled)
+	_data_table_timer += delta
+	if _data_table_timer >= data_table_update_interval:
+		_data_table_timer = 0.0
+		_update_data_table()
 
 	if fade_trail:
 		_trail_times.append(_time_elapsed)
