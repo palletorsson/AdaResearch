@@ -1,0 +1,120 @@
+{
+	"constants": {
+		"shape_scale": 0.07,
+		"slot_match_distance": 0.08,
+		"snap_duration": 0.25,
+		"spawn_interval": 2.5,
+		"input_speed": 0.10,
+		"output_speed": 0.12
+	},
+	"categories": {
+		"houses": {
+			"name": "Houses",
+			"products": {
+				"house": {
+					"name": "House",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "pyramid", "offset": [0, 0.14, 0]}
+					],
+					"reward_type": "house"
+				},
+				"tower": {
+					"name": "Tower",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "cube", "offset": [0, 0.14, 0]},
+						{"type": "pyramid", "offset": [0, 0.28, 0]}
+					],
+					"reward_type": "tower"
+				}
+			},
+			"default_sequence": ["house", "house", "tower"]
+		},
+		"lab_equipment": {
+			"name": "Lab Equipment",
+			"products": {
+				"health_charger": {
+					"name": "Health Station",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "cube", "offset": [0, 0.14, 0]}
+					],
+					"reward_type": "health_charger"
+				},
+				"security_camera": {
+					"name": "Camera",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "pyramid", "offset": [0, 0.07, 0.07]}
+					],
+					"reward_type": "security_camera"
+				},
+				"specimen_jar": {
+					"name": "Specimen Jar",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "cube", "offset": [0, 0.14, 0]},
+						{"type": "pyramid", "offset": [0, 0.28, 0]}
+					],
+					"reward_type": "specimen_jar"
+				}
+			},
+			"default_sequence": ["health_charger", "security_camera", "specimen_jar"]
+		},
+		"scientific_equipment": {
+			"name": "Scientific Equipment",
+			"products": {
+				"microscope": {
+					"name": "Microscope",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "cube", "offset": [0, 0.14, 0]},
+						{"type": "pyramid", "offset": [0.07, 0.21, 0]}
+					],
+					"reward_scene": "res://commons/lab/microscope/microscope.tscn"
+				},
+				"scales": {
+					"name": "Scales",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0], "scale": [1.5, 0.7, 1.2]},
+						{"type": "disc", "offset": [0, 0.07, 0], "scale": [1.2, 1.0, 1.2]}
+					],
+					"reward_scene": "res://commons/lab/electronicscales/electronicscales.tscn"
+				},
+				"multimeter": {
+					"name": "Multimeter",
+					"slots": [
+						{"type": "cube", "offset": [0, 0, 0]},
+						{"type": "pyramid", "offset": [0, 0.112, 0]},
+						{"type": "cube", "offset": [0.14, 0.042, 0]}
+					],
+					"reward_scene": "res://commons/lab/multimeter/multimeter.tscn"
+				}
+			},
+			"default_sequence": ["microscope", "scales", "multimeter"]
+		}
+	},
+	"aliases": {
+		"house": {"category": "houses", "product": "house"},
+		"tower": {"category": "houses", "product": "tower"},
+		"tall_house": {"category": "houses", "product": "tower"},
+		"charger": {"category": "lab_equipment", "product": "health_charger"},
+		"health_charger": {"category": "lab_equipment", "product": "health_charger"},
+		"camera": {"category": "lab_equipment", "product": "security_camera"},
+		"security_camera": {"category": "lab_equipment", "product": "security_camera"},
+		"jar": {"category": "lab_equipment", "product": "specimen_jar"},
+		"specimen_jar": {"category": "lab_equipment", "product": "specimen_jar"},
+		"microscope": {"category": "scientific_equipment", "product": "microscope"},
+		"scales": {"category": "scientific_equipment", "product": "scales"},
+		"scale": {"category": "scientific_equipment", "product": "scales"},
+		"electronicscales": {"category": "scientific_equipment", "product": "scales"},
+		"multimeter": {"category": "scientific_equipment", "product": "multimeter"},
+		"houses": {"category": "houses"},
+		"lab": {"category": "lab_equipment"},
+		"lab_equipment": {"category": "lab_equipment"},
+		"scientific": {"category": "scientific_equipment"},
+		"scientific_equipment": {"category": "scientific_equipment"},
+		"science": {"category": "scientific_equipment"}
+	}
+}

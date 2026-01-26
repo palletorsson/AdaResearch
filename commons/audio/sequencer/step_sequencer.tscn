@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cstep_seq_001"]
+
+[ext_resource type="Script" path="res://commons/audio/sequencer/step_sequencer.gd" id="1_stepseq"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="2_viewport"]
+[ext_resource type="PackedScene" uid="uid://cseq_ui_001" path="res://commons/audio/sequencer/sequencer_ui.tscn" id="3_seqscene"]
+
+[node name="StepSequencer" type="Node3D"]
+script = ExtResource("1_stepseq")
+num_tracks = 4
+num_steps = 16
+bpm = 120.0
+sound_preset = "808_kit"
+auto_play = false
+
+[node name="Viewport2Din3D" parent="." instance=ExtResource("2_viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+screen_size = Vector2(0.6, 0.25)
+scene = ExtResource("3_seqscene")
+viewport_size = Vector2(800, 300)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.2)
+light_color = Color(1, 0.5, 0.2, 1)
+light_energy = 0.4
+light_indirect_energy = 0.2
+omni_range = 0.8
+omni_attenuation = 1.5

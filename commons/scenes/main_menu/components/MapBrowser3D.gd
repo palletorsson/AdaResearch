@@ -31,9 +31,23 @@ var _button_instances: Array = []
 func _ready() -> void:
 	_load_data()
 	_setup_navigation()
-	show_sequences()
+	# Default to showing Lab Maps (more useful for quick navigation)
+	show_maps()
 
-## Main sequences to show in browser (curated list)
+## Main Lab maps to show in browser (direct map access)
+const LAB_MAPS := [
+	{"name": "Color", "path": "Lab/map_data_post_color"},
+	{"name": "Randomness", "path": "Lab/map_data_post_random"},
+	{"name": "Wavefunctions", "path": "Lab/map_data_post_wavefunctions"},
+	{"name": "Fractals", "path": "Lab/map_data_post_fractals"},
+	{"name": "Primitives", "path": "Lab/map_data_post_primitives"},
+	{"name": "Arrays", "path": "Lab/map_data_post_array"},
+	{"name": "Transformation", "path": "Lab/map_data_post_transformation"},
+	{"name": "Forces", "path": "Lab/map_data_post_forces"},
+	{"name": "Geometric", "path": "Lab/map_data_post_geometric"},
+]
+
+## Legacy sequences (kept for compatibility)
 const MAIN_SEQUENCES := [
 	"post_primitive",
 	"post_transformation",
@@ -42,16 +56,23 @@ const MAIN_SEQUENCES := [
 ]
 
 func _load_data() -> void:
-	# Load only curated main sequences
+	# Load Lab maps directly (primary navigation)
+	for lab_map in LAB_MAPS:
+		var map_path = "res://commons/maps/%s.json" % lab_map["path"]
+		if FileAccess.file_exists(map_path):
+			maps.append(lab_map)
+
+	# Also load sequences if available
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager and scene_manager.sequence_configs:
 		for seq_name in MAIN_SEQUENCES:
 			if scene_manager.sequence_configs.has(seq_name):
 				sequences.append(seq_name)
 
-	# Load individual maps by scanning map directories
-	maps = _scan_map_directories()
-	maps.sort()
+	# Scan other map directories (excluding Lab since we handle it above)
+	var other_maps = _scan_map_directories()
+	for map_name in other_maps:
+		maps.append({"name": map_name, "path": map_name})
 
 func _scan_map_directories() -> Array:
 	var map_list: Array = []
@@ -102,7 +123,7 @@ func _update_display() -> void:
 
 	# Update title
 	if title_label:
-		title_label.text = "Sequences" if current_mode == BrowseMode.SEQUENCES else "Maps"
+		title_label.text = "Sequences" if current_mode == BrowseMode.SEQUENCES else "Lab Maps"
 
 	# Calculate page info
 	var total_pages = ceil(float(current_items.size()) / items_per_page)
@@ -115,14 +136,19 @@ func _update_display() -> void:
 
 	# Create buttons for each item
 	for i in range(start_idx, end_idx):
-		var item_name = current_items[i]
+		var item = current_items[i]
 		var local_idx = i - start_idx
-		_create_item_button(item_name, local_idx)
+
+		# Handle both dictionary (maps) and string (sequences) formats
+		if item is Dictionary:
+			_create_item_button(item["name"], local_idx, item["path"])
+		else:
+			_create_item_button(item, local_idx, item)
 
 	# Update nav button states
 	_update_nav_buttons()
 
-func _create_item_button(item_name: String, index: int) -> void:
+func _create_item_button(display_name: String, index: int, item_path: String = "") -> void:
 	if not button_scene:
 		# Try to load default button scene
 		button_scene = load("res://commons/scenes/main_menu/components/MenuButton3D.tscn")
@@ -138,15 +164,16 @@ func _create_item_button(item_name: String, index: int) -> void:
 	button.position = Vector3(0, -index * item_spacing, 0)
 
 	# Set button text - format nicely
-	var display_name = _format_name(item_name)
+	var formatted_name = _format_name(display_name)
 	if button.has_method("set_text"):
-		button.set_text(display_name)
+		button.set_text(formatted_name)
 	elif button.get("text") != null:
-		button.text = display_name
+		button.text = formatted_name
 
-	# Connect click signal
+	# Connect click signal - use path if provided, otherwise use display_name
+	var click_value = item_path if item_path != "" else display_name
 	if button.has_signal("clicked"):
-		button.clicked.connect(_on_item_clicked.bind(item_name))
+		button.clicked.connect(_on_item_clicked.bind(click_value))
 
 	_button_instances.append(button)
 

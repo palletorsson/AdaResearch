@@ -392,7 +392,10 @@ enum SoundType {
 	POP_PROPHET_LEAD,        # Prophet-5 Sync Lead
 	POP_FUNK_BASS,           # Minimoog Funk Bass
 	POP_INTERACTIVE_SONG,    # Procedural Pop Song (Interactive Stream)
-	AMBIENT_WORKS_SONG       # Aphex Twin Style Ambient (Interactive Stream)
+	AMBIENT_WORKS_SONG,      # Aphex Twin Style Ambient (Interactive Stream)
+	# Biological / Ambient sounds
+	HEARTBEAT,               # Biological heartbeat with lub-dub rhythm
+	LAB_HUM                  # Sterile lab ambience with multi-layered sine hum
 }
 
 # Sound generation functions

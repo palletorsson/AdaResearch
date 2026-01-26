@@ -43,6 +43,43 @@ enum RepeatMode {
 		_update_preview()
 		repeat_mode_changed.emit(v)
 
+## Symmetry mode - switch between legacy RepeatMode and WallpaperGroups
+enum SymmetryMode {
+	LEGACY,     ## Use RepeatMode enum (original 10 modes)
+	WALLPAPER   ## Use WallpaperGroups (17 mathematical groups)
+}
+
+@export var symmetry_mode: SymmetryMode = SymmetryMode.LEGACY:
+	set(v):
+		symmetry_mode = v
+		_update_preview()
+		_update_mode_label()
+
+## Current wallpaper group (when symmetry_mode == WALLPAPER)
+@export var wallpaper_group: WallpaperGroups.Group = WallpaperGroups.Group.P1:
+	set(v):
+		wallpaper_group = v
+		_update_preview()
+		_update_mode_label()
+		wallpaper_group_changed.emit(v)
+
+## Lattice order for VR navigation (B/Y cycles through these)
+const LATTICE_ORDER: Array[String] = ["oblique", "rectangular", "rhombic", "square", "hexagonal"]
+
+## Groups per lattice for VR navigation (A/X cycles within current lattice)
+const GROUPS_BY_LATTICE: Dictionary = {
+	"oblique": [WallpaperGroups.Group.P1, WallpaperGroups.Group.P2],
+	"rectangular": [WallpaperGroups.Group.PM, WallpaperGroups.Group.PG, WallpaperGroups.Group.PMM,
+					WallpaperGroups.Group.PMG, WallpaperGroups.Group.PGG],
+	"rhombic": [WallpaperGroups.Group.CM, WallpaperGroups.Group.CMM],
+	"square": [WallpaperGroups.Group.P4, WallpaperGroups.Group.P4M, WallpaperGroups.Group.P4G],
+	"hexagonal": [WallpaperGroups.Group.P3, WallpaperGroups.Group.P3M1, WallpaperGroups.Group.P31M,
+				  WallpaperGroups.Group.P6, WallpaperGroups.Group.P6M]
+}
+
+## Current lattice index for navigation
+var _current_lattice_index: int = 0
+
 ## Color palette (like yarn colors)
 @export var palette: Array[Color] = [
 	Color(0.95, 0.92, 0.85),  # Cream/natural
@@ -68,6 +105,7 @@ enum RepeatMode {
 signal cell_changed(x: int, y: int, color_index: int)
 signal pattern_complete()
 signal repeat_mode_changed(mode: RepeatMode)
+signal wallpaper_group_changed(group: WallpaperGroups.Group)
 signal color_selected(color_index: int)
 
 ## Cube size for grabbable pieces
@@ -75,6 +113,37 @@ signal color_selected(color_index: int)
 
 ## Spawn offset for cube dispensers
 @export var spawner_offset: Vector3 = Vector3(0.25, 0, 0)
+
+## === CURSOR VISUALIZATION ===
+## The cursor makes array indexing visible - it's the index incarnate
+
+@export_group("Cursor")
+## Enable cursor visualization
+@export var cursor_enabled: bool = false:
+	set(v):
+		cursor_enabled = v
+		if is_inside_tree():
+			_update_cursor_visibility()
+
+## Cursor animation speed (cells per second)
+@export var cursor_speed: float = 2.0
+
+## Show index math label
+@export var show_index_math: bool = true
+
+## Cursor signals
+signal cursor_moved(preview_x: int, preview_y: int, source_x: int, source_y: int)
+
+## Cursor state
+var _cursor_position: Vector2i = Vector2i.ZERO  # Position in preview grid
+var _cursor_animating: bool = false
+var _cursor_timer: float = 0.0
+
+## Cursor visuals
+var _cursor_highlight: MeshInstance3D  # Highlight on preview
+var _source_highlight: MeshInstance3D  # Highlight on editor grid (source cell)
+var _index_label: Label3D  # Shows the index math
+var _cursor_trail: Array[MeshInstance3D] = []  # Optional: show recent positions
 
 ## Internal state
 var _grid_data: Array = []  # 2D array of color indices
@@ -108,7 +177,23 @@ func _ready() -> void:
 	_create_preview()
 	_create_cube_spawners()
 	_create_mode_label()
+	_create_cursor_visuals()
 	_update_preview()
+
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
+	if not cursor_enabled or not _cursor_animating:
+		return
+
+	_cursor_timer += delta
+	var step_time = 1.0 / cursor_speed
+
+	if _cursor_timer >= step_time:
+		_cursor_timer -= step_time
+		cursor_step()
 
 
 func _initialize_grid_data() -> void:
@@ -403,19 +488,294 @@ func _update_mode_label() -> void:
 	if not _mode_label:
 		return
 
-	var mode_names = {
-		RepeatMode.SIMPLE: "Simple Tile",
-		RepeatMode.MIRROR_X: "Mirror X",
-		RepeatMode.MIRROR_Y: "Mirror Y",
-		RepeatMode.MIRROR_XY: "Mirror XY",
-		RepeatMode.ROTATE_90: "Rotate 90°",
-		RepeatMode.ROTATE_180: "Rotate 180°",
-		RepeatMode.BRICK_X: "Brick (Rows)",
-		RepeatMode.BRICK_Y: "Brick (Cols)",
-		RepeatMode.HERRINGBONE: "Herringbone",
-		RepeatMode.DIAMOND: "Diamond"
-	}
-	_mode_label.text = mode_names.get(repeat_mode, "Unknown")
+	if symmetry_mode == SymmetryMode.WALLPAPER:
+		# Show wallpaper group info
+		var group_info = WallpaperGroups.get_group_info(wallpaper_group)
+		var group_name = group_info.get("name", "?").to_upper()
+		var lattice = group_info.get("lattice", "unknown")
+		var description = group_info.get("description", "")
+		_mode_label.text = "%s (%s)\n%s" % [group_name, lattice.capitalize(), description]
+	else:
+		# Show legacy repeat mode
+		var mode_names = {
+			RepeatMode.SIMPLE: "Simple Tile",
+			RepeatMode.MIRROR_X: "Mirror X",
+			RepeatMode.MIRROR_Y: "Mirror Y",
+			RepeatMode.MIRROR_XY: "Mirror XY",
+			RepeatMode.ROTATE_90: "Rotate 90°",
+			RepeatMode.ROTATE_180: "Rotate 180°",
+			RepeatMode.BRICK_X: "Brick (Rows)",
+			RepeatMode.BRICK_Y: "Brick (Cols)",
+			RepeatMode.HERRINGBONE: "Herringbone",
+			RepeatMode.DIAMOND: "Diamond"
+		}
+		_mode_label.text = mode_names.get(repeat_mode, "Unknown")
+
+
+## === CURSOR VISUALIZATION METHODS ===
+
+func _create_cursor_visuals() -> void:
+	# Cursor highlight on preview (where we're reading)
+	_cursor_highlight = MeshInstance3D.new()
+	_cursor_highlight.name = "CursorHighlight"
+	var cursor_mesh = BoxMesh.new()
+	cursor_mesh.size = Vector3(cell_size * 1.1, cell_size * 1.1, 0.005)
+	_cursor_highlight.mesh = cursor_mesh
+
+	var cursor_mat = StandardMaterial3D.new()
+	cursor_mat.albedo_color = Color(1.0, 1.0, 0.2, 0.8)
+	cursor_mat.emission_enabled = true
+	cursor_mat.emission = Color(1.0, 1.0, 0.2)
+	cursor_mat.emission_energy_multiplier = 2.0
+	cursor_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_cursor_highlight.material_override = cursor_mat
+
+	if _preview_container:
+		_preview_container.add_child(_cursor_highlight)
+	_cursor_highlight.visible = false
+
+	# Source highlight on editor grid (where the value comes from)
+	_source_highlight = MeshInstance3D.new()
+	_source_highlight.name = "SourceHighlight"
+	var source_mesh = BoxMesh.new()
+	source_mesh.size = Vector3(cell_size * 1.2, cell_size * 1.2, 0.008)
+	_source_highlight.mesh = source_mesh
+
+	var source_mat = StandardMaterial3D.new()
+	source_mat.albedo_color = Color(0.2, 1.0, 0.4, 0.9)
+	source_mat.emission_enabled = true
+	source_mat.emission = Color(0.2, 1.0, 0.4)
+	source_mat.emission_energy_multiplier = 3.0
+	source_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_source_highlight.material_override = source_mat
+
+	if _editor_container:
+		_editor_container.add_child(_source_highlight)
+	_source_highlight.visible = false
+
+	# Index math label
+	_index_label = Label3D.new()
+	_index_label.name = "IndexLabel"
+	_index_label.font_size = 18
+	_index_label.pixel_size = 0.001
+	_index_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_index_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_index_label.modulate = Color(1.0, 1.0, 0.8)
+	_index_label.position = Vector3(0, -tile_size * cell_size / 2 - 0.12, 0)
+
+	if _preview_container:
+		_preview_container.add_child(_index_label)
+	_index_label.visible = false
+
+
+func _update_cursor_visibility() -> void:
+	if _cursor_highlight:
+		_cursor_highlight.visible = cursor_enabled
+	if _source_highlight:
+		_source_highlight.visible = cursor_enabled
+	if _index_label:
+		_index_label.visible = cursor_enabled and show_index_math
+
+	if cursor_enabled:
+		_update_cursor_display()
+
+
+func _update_cursor_display() -> void:
+	if not cursor_enabled:
+		return
+
+	var px = _cursor_position.x
+	var py = _cursor_position.y
+
+	# Calculate source position using the same logic as _get_tiled_color
+	var source_x: int
+	var source_y: int
+
+	if symmetry_mode == SymmetryMode.WALLPAPER:
+		# For wallpaper groups, we need to reverse-engineer the source
+		# For now, use simple modulo (the actual transform is in the color lookup)
+		source_x = px % tile_size
+		source_y = py % tile_size
+	else:
+		# Calculate based on repeat mode
+		var result = _calculate_source_index(px, py)
+		source_x = result.x
+		source_y = result.y
+
+	# Update cursor highlight position on preview
+	if _cursor_highlight and _preview_container:
+		var preview_width = preview_repeats.x * tile_size
+		var preview_height = preview_repeats.y * tile_size
+		var total_w = preview_width * cell_size
+		var total_h = preview_height * cell_size
+
+		_cursor_highlight.position = Vector3(
+			-total_w / 2 + (px + 0.5) * cell_size,
+			-total_h / 2 + (py + 0.5) * cell_size,
+			0.01
+		)
+
+	# Update source highlight position on editor
+	if _source_highlight and _editor_container:
+		var grid_total = tile_size * cell_size
+		var offset = -grid_total / 2.0
+
+		_source_highlight.position = Vector3(
+			offset + (source_x + 0.5) * cell_size,
+			offset + (source_y + 0.5) * cell_size,
+			0.01
+		)
+
+	# Update index label with the math
+	if _index_label and show_index_math:
+		var math_text = "Index: (%d, %d)\n" % [px, py]
+
+		if symmetry_mode == SymmetryMode.WALLPAPER:
+			var group_name = WallpaperGroups.get_group_name(wallpaper_group)
+			math_text += "%s transform\n" % group_name.to_upper()
+			math_text += "→ source: (%d, %d)" % [source_x, source_y]
+		else:
+			# Show the modulo math
+			math_text += "%d %% %d = %d\n" % [px, tile_size, px % tile_size]
+			math_text += "%d %% %d = %d\n" % [py, tile_size, py % tile_size]
+			math_text += "→ source: (%d, %d)" % [source_x, source_y]
+
+		_index_label.text = math_text
+
+	# Emit signal
+	cursor_moved.emit(px, py, source_x, source_y)
+
+
+## Calculate the source index for a preview position (reverse of _get_tiled_color)
+func _calculate_source_index(px: int, py: int) -> Vector2i:
+	var tx: int
+	var ty: int
+
+	match repeat_mode:
+		RepeatMode.SIMPLE:
+			tx = px % tile_size
+			ty = py % tile_size
+
+		RepeatMode.MIRROR_X:
+			var tile_x = px / tile_size
+			tx = px % tile_size
+			if tile_x % 2 == 1:
+				tx = tile_size - 1 - tx
+			ty = py % tile_size
+
+		RepeatMode.MIRROR_Y:
+			tx = px % tile_size
+			var tile_y = py / tile_size
+			ty = py % tile_size
+			if tile_y % 2 == 1:
+				ty = tile_size - 1 - ty
+
+		RepeatMode.MIRROR_XY:
+			var tile_x = px / tile_size
+			var tile_y = py / tile_size
+			tx = px % tile_size
+			ty = py % tile_size
+			if tile_x % 2 == 1:
+				tx = tile_size - 1 - tx
+			if tile_y % 2 == 1:
+				ty = tile_size - 1 - ty
+
+		RepeatMode.ROTATE_90:
+			var tile_idx = (px / tile_size + py / tile_size) % 4
+			tx = px % tile_size
+			ty = py % tile_size
+			for i in range(tile_idx):
+				var new_tx = tile_size - 1 - ty
+				var new_ty = tx
+				tx = new_tx
+				ty = new_ty
+
+		RepeatMode.ROTATE_180:
+			var tile_x = px / tile_size
+			var tile_y = py / tile_size
+			tx = px % tile_size
+			ty = py % tile_size
+			if (tile_x + tile_y) % 2 == 1:
+				tx = tile_size - 1 - tx
+				ty = tile_size - 1 - ty
+
+		_:
+			tx = px % tile_size
+			ty = py % tile_size
+
+	return Vector2i(clampi(tx, 0, tile_size - 1), clampi(ty, 0, tile_size - 1))
+
+
+## Cursor control methods
+
+func cursor_play() -> void:
+	cursor_enabled = true
+	_cursor_animating = true
+	_update_cursor_visibility()
+
+
+func cursor_pause() -> void:
+	_cursor_animating = false
+
+
+func cursor_stop() -> void:
+	_cursor_animating = false
+	_cursor_position = Vector2i.ZERO
+	_update_cursor_display()
+
+
+func cursor_toggle() -> void:
+	if _cursor_animating:
+		cursor_pause()
+	else:
+		cursor_play()
+
+
+func cursor_step() -> void:
+	cursor_enabled = true
+	_update_cursor_visibility()
+
+	var preview_width = preview_repeats.x * tile_size
+	var preview_height = preview_repeats.y * tile_size
+
+	# Move to next position (row by row)
+	_cursor_position.x += 1
+	if _cursor_position.x >= preview_width:
+		_cursor_position.x = 0
+		_cursor_position.y += 1
+		if _cursor_position.y >= preview_height:
+			_cursor_position.y = 0  # Wrap around
+
+	_update_cursor_display()
+
+
+func cursor_step_back() -> void:
+	cursor_enabled = true
+	_update_cursor_visibility()
+
+	var preview_width = preview_repeats.x * tile_size
+	var preview_height = preview_repeats.y * tile_size
+
+	_cursor_position.x -= 1
+	if _cursor_position.x < 0:
+		_cursor_position.x = preview_width - 1
+		_cursor_position.y -= 1
+		if _cursor_position.y < 0:
+			_cursor_position.y = preview_height - 1
+
+	_update_cursor_display()
+
+
+func cursor_goto(x: int, y: int) -> void:
+	cursor_enabled = true
+	var preview_width = preview_repeats.x * tile_size
+	var preview_height = preview_repeats.y * tile_size
+
+	_cursor_position.x = clampi(x, 0, preview_width - 1)
+	_cursor_position.y = clampi(y, 0, preview_height - 1)
+
+	_update_cursor_visibility()
+	_update_cursor_display()
 
 
 func _get_material_for_color(color_idx: int) -> Material:
@@ -569,6 +929,10 @@ func _update_preview() -> void:
 
 ## Get the color index for a position in the tiled pattern
 func _get_tiled_color(px: int, py: int) -> int:
+	# Use WallpaperGroups when in wallpaper mode
+	if symmetry_mode == SymmetryMode.WALLPAPER:
+		return WallpaperGroups.get_symmetric_color(px, py, tile_size, _grid_data, wallpaper_group)
+
 	var tx: int  # Tile-local x
 	var ty: int  # Tile-local y
 
@@ -657,17 +1021,130 @@ func _get_tiled_color(px: int, py: int) -> int:
 	return _grid_data[ty][tx]
 
 
-## Cycle to next repeat mode
+## Cycle to next repeat mode (legacy mode)
 func next_repeat_mode() -> void:
-	var next = (repeat_mode + 1) % RepeatMode.size()
-	repeat_mode = next as RepeatMode
-	_update_mode_label()
+	if symmetry_mode == SymmetryMode.WALLPAPER:
+		# In wallpaper mode, cycle to next group within current lattice
+		next_wallpaper_group()
+	else:
+		var next = (repeat_mode + 1) % RepeatMode.size()
+		repeat_mode = next as RepeatMode
+		_update_mode_label()
 
 
 ## Set repeat mode
 func set_repeat_mode(mode: RepeatMode) -> void:
 	repeat_mode = mode
 	_update_mode_label()
+
+
+## Toggle between legacy and wallpaper symmetry modes
+func toggle_symmetry_mode() -> void:
+	if symmetry_mode == SymmetryMode.LEGACY:
+		symmetry_mode = SymmetryMode.WALLPAPER
+	else:
+		symmetry_mode = SymmetryMode.LEGACY
+
+
+## Get current lattice name
+func get_current_lattice() -> String:
+	var group_info = WallpaperGroups.get_group_info(wallpaper_group)
+	return group_info.get("lattice", "oblique")
+
+
+## Cycle to next lattice type (B/Y buttons in VR)
+## This selects the first group in the next lattice
+func next_lattice() -> void:
+	# Ensure we're in wallpaper mode
+	if symmetry_mode != SymmetryMode.WALLPAPER:
+		symmetry_mode = SymmetryMode.WALLPAPER
+
+	# Find current lattice index
+	var current_lattice = get_current_lattice()
+	_current_lattice_index = LATTICE_ORDER.find(current_lattice)
+	if _current_lattice_index < 0:
+		_current_lattice_index = 0
+
+	# Move to next lattice
+	_current_lattice_index = (_current_lattice_index + 1) % LATTICE_ORDER.size()
+	var next_lattice_name = LATTICE_ORDER[_current_lattice_index]
+
+	# Select first group in that lattice
+	var groups = GROUPS_BY_LATTICE.get(next_lattice_name, [])
+	if groups.size() > 0:
+		wallpaper_group = groups[0]
+
+
+## Cycle to previous lattice type
+func prev_lattice() -> void:
+	# Ensure we're in wallpaper mode
+	if symmetry_mode != SymmetryMode.WALLPAPER:
+		symmetry_mode = SymmetryMode.WALLPAPER
+
+	# Find current lattice index
+	var current_lattice = get_current_lattice()
+	_current_lattice_index = LATTICE_ORDER.find(current_lattice)
+	if _current_lattice_index < 0:
+		_current_lattice_index = 0
+
+	# Move to previous lattice
+	_current_lattice_index = (_current_lattice_index - 1 + LATTICE_ORDER.size()) % LATTICE_ORDER.size()
+	var prev_lattice_name = LATTICE_ORDER[_current_lattice_index]
+
+	# Select first group in that lattice
+	var groups = GROUPS_BY_LATTICE.get(prev_lattice_name, [])
+	if groups.size() > 0:
+		wallpaper_group = groups[0]
+
+
+## Cycle to next wallpaper group within current lattice (A/X buttons in VR)
+func next_wallpaper_group() -> void:
+	# Ensure we're in wallpaper mode
+	if symmetry_mode != SymmetryMode.WALLPAPER:
+		symmetry_mode = SymmetryMode.WALLPAPER
+
+	var current_lattice = get_current_lattice()
+	var groups = GROUPS_BY_LATTICE.get(current_lattice, [])
+
+	if groups.size() == 0:
+		return
+
+	# Find current index in the lattice's groups
+	var current_idx = groups.find(wallpaper_group)
+	if current_idx < 0:
+		current_idx = 0
+
+	# Cycle to next
+	var next_idx = (current_idx + 1) % groups.size()
+	wallpaper_group = groups[next_idx]
+
+
+## Cycle to previous wallpaper group within current lattice
+func prev_wallpaper_group() -> void:
+	# Ensure we're in wallpaper mode
+	if symmetry_mode != SymmetryMode.WALLPAPER:
+		symmetry_mode = SymmetryMode.WALLPAPER
+
+	var current_lattice = get_current_lattice()
+	var groups = GROUPS_BY_LATTICE.get(current_lattice, [])
+
+	if groups.size() == 0:
+		return
+
+	# Find current index in the lattice's groups
+	var current_idx = groups.find(wallpaper_group)
+	if current_idx < 0:
+		current_idx = 0
+
+	# Cycle to previous
+	var prev_idx = (current_idx - 1 + groups.size()) % groups.size()
+	wallpaper_group = groups[prev_idx]
+
+
+## Set a specific wallpaper group
+func set_wallpaper_group(group: WallpaperGroups.Group) -> void:
+	symmetry_mode = SymmetryMode.WALLPAPER
+	wallpaper_group = group
 
 
 ## Clear the grid
@@ -795,6 +1272,8 @@ func _on_pointer_pressed(_position: Vector3) -> void:
 
 
 ## Keyboard input for mode cycling
+## VR mapping: B/Y = lattice (up/down), A/X = group within lattice (left/right)
+## Keyboard: Tab = next mode, W = toggle symmetry mode, Q/E = lattice, A/D = group
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -804,13 +1283,72 @@ func _input(event: InputEvent) -> void:
 		if key.pressed and not key.echo:
 			if key.keycode == KEY_TAB:
 				next_repeat_mode()
+			elif key.keycode == KEY_W:
+				# Toggle between legacy and wallpaper modes
+				toggle_symmetry_mode()
+			elif key.keycode == KEY_Q:
+				# Previous lattice (like B button in VR)
+				prev_lattice()
+			elif key.keycode == KEY_E:
+				# Next lattice (like Y button in VR)
+				next_lattice()
+			elif key.keycode == KEY_A:
+				# Previous group in lattice (like X button in VR)
+				prev_wallpaper_group()
+			elif key.keycode == KEY_D:
+				# Next group in lattice (like A button in VR)
+				next_wallpaper_group()
 			elif key.keycode >= KEY_1 and key.keycode <= KEY_8:
 				select_color(key.keycode - KEY_1)
+			# Cursor controls
+			elif key.keycode == KEY_SPACE:
+				cursor_toggle()
+			elif key.keycode == KEY_C:
+				# Toggle cursor visibility
+				cursor_enabled = not cursor_enabled
+			elif key.keycode == KEY_RIGHT:
+				cursor_step()
+			elif key.keycode == KEY_LEFT:
+				cursor_step_back()
+			elif key.keycode == KEY_UP:
+				# Move cursor up one row
+				var preview_width = preview_repeats.x * tile_size
+				cursor_goto(_cursor_position.x, _cursor_position.y - 1)
+			elif key.keycode == KEY_DOWN:
+				# Move cursor down one row
+				cursor_goto(_cursor_position.x, _cursor_position.y + 1)
+			elif key.keycode == KEY_HOME:
+				cursor_goto(0, 0)
+			elif key.keycode == KEY_END:
+				cursor_stop()
+
+
+## VR Controller button handling
+## Call this from XRController3D button_pressed signal
+## button: "ax_button", "by_button", "primary_click", "secondary_click", etc.
+func handle_vr_button(button: String, controller_name: String) -> void:
+	match button:
+		"by_button":
+			# B/Y cycles lattices
+			if controller_name.contains("left"):
+				prev_lattice()  # Left hand B = previous
+			else:
+				next_lattice()  # Right hand Y = next
+		"ax_button":
+			# A/X cycles groups within lattice
+			if controller_name.contains("left"):
+				prev_wallpaper_group()  # Left hand X = previous
+			else:
+				next_wallpaper_group()  # Right hand A = next
+		"primary_click":
+			# Trigger click - could toggle symmetry mode
+			toggle_symmetry_mode()
 
 
 ## Apply configuration from grid system / artifact registry
 ## Accepts explicit names: "mirror", "4x4", "brick", etc.
 ## Shorthand: #mirror, #4x4, #8x8, #brick, #herringbone
+## Wallpaper groups: #p1, #p2, #pm, #p4m, #p6m, etc. or wallpaper_group: "p4m"
 func apply_grid_config(config_data: Dictionary) -> void:
 	print("PatternTilePuzzle: Applying config: %s" % config_data)
 
@@ -829,8 +1367,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if new_mode != repeat_mode:
 			repeat_mode = new_mode
 
+	# Check for symmetry_mode
+	if config_data.has("symmetry_mode"):
+		var mode_str = str(config_data["symmetry_mode"]).to_lower()
+		if mode_str == "wallpaper" or mode_str == "1":
+			symmetry_mode = SymmetryMode.WALLPAPER
+		else:
+			symmetry_mode = SymmetryMode.LEGACY
+
+	# Check for wallpaper_group
+	if config_data.has("wallpaper_group"):
+		var parsed_group = _parse_wallpaper_group(config_data["wallpaper_group"])
+		if parsed_group >= 0:
+			wallpaper_group = parsed_group as WallpaperGroups.Group
+			symmetry_mode = SymmetryMode.WALLPAPER  # Auto-switch to wallpaper mode
+
+	# Check for cursor settings
+	if config_data.has("cursor_enabled"):
+		cursor_enabled = _to_bool(config_data["cursor_enabled"])
+	if config_data.has("cursor_speed"):
+		cursor_speed = float(config_data["cursor_speed"])
+	if config_data.has("show_index_math"):
+		show_index_math = _to_bool(config_data["show_index_math"])
+
 	# Shorthand configs: just the key name without value
-	# e.g., #mirror, #4x4, #brick
+	# e.g., #mirror, #4x4, #brick, #p4m, #hexagonal, #cursor
 	# Grid system may set value to true (boolean), "" (string), or null
 	for key in config_data.keys():
 		var val = config_data[key]
@@ -842,6 +1403,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				needs_rebuild = true
 			if parsed.has("repeat_mode") and parsed["repeat_mode"] != repeat_mode:
 				repeat_mode = parsed["repeat_mode"]
+			if parsed.has("wallpaper_group"):
+				wallpaper_group = parsed["wallpaper_group"]
+				symmetry_mode = SymmetryMode.WALLPAPER
+			if parsed.has("lattice"):
+				# Set to first group in that lattice
+				var groups = GROUPS_BY_LATTICE.get(parsed["lattice"], [])
+				if groups.size() > 0:
+					wallpaper_group = groups[0]
+					symmetry_mode = SymmetryMode.WALLPAPER
+			if parsed.has("cursor_enabled"):
+				cursor_enabled = parsed["cursor_enabled"]
 
 	if needs_rebuild:
 		_rebuild_grid()
@@ -902,9 +1474,48 @@ func _parse_repeat_mode(value) -> RepeatMode:
 			return repeat_mode
 
 
+## Parse wallpaper group from string
+## Returns group enum value or -1 if not found
+func _parse_wallpaper_group(value) -> int:
+	if value is int:
+		if value >= 0 and value < WallpaperGroups.Group.size():
+			return value
+		return -1
+
+	var group_str = str(value).to_lower().strip_edges()
+
+	# Map group names to enum values
+	var group_map = {
+		"p1": WallpaperGroups.Group.P1,
+		"p2": WallpaperGroups.Group.P2,
+		"pm": WallpaperGroups.Group.PM,
+		"pg": WallpaperGroups.Group.PG,
+		"cm": WallpaperGroups.Group.CM,
+		"pmm": WallpaperGroups.Group.PMM,
+		"pmg": WallpaperGroups.Group.PMG,
+		"pgg": WallpaperGroups.Group.PGG,
+		"cmm": WallpaperGroups.Group.CMM,
+		"p4": WallpaperGroups.Group.P4,
+		"p4m": WallpaperGroups.Group.P4M,
+		"p4g": WallpaperGroups.Group.P4G,
+		"p3": WallpaperGroups.Group.P3,
+		"p3m1": WallpaperGroups.Group.P3M1,
+		"p31m": WallpaperGroups.Group.P31M,
+		"p6": WallpaperGroups.Group.P6,
+		"p6m": WallpaperGroups.Group.P6M
+	}
+
+	if group_str in group_map:
+		return group_map[group_str]
+
+	return -1
+
+
 ## Parse shorthand config (just key name, no value)
 ## e.g., "mirror" -> {repeat_mode: MIRROR_XY}
 ## e.g., "4x4" -> {tile_size: 4}
+## e.g., "p4m" -> {wallpaper_group: P4M}
+## e.g., "hexagonal" -> {lattice: "hexagonal"}
 func _parse_shorthand(key: String) -> Dictionary:
 	var result := {}
 	var k = key.to_lower().strip_edges()
@@ -941,4 +1552,25 @@ func _parse_shorthand(key: String) -> Dictionary:
 	elif k == "diamond":
 		result["repeat_mode"] = RepeatMode.DIAMOND
 
+	# Wallpaper group shorthands
+	var parsed_group = _parse_wallpaper_group(k)
+	if parsed_group >= 0:
+		result["wallpaper_group"] = parsed_group as WallpaperGroups.Group
+
+	# Lattice type shorthands
+	if k in LATTICE_ORDER:
+		result["lattice"] = k
+
+	# Cursor shorthand
+	if k == "cursor" or k == "index" or k == "cursor_enabled":
+		result["cursor_enabled"] = true
+
 	return result
+
+
+## Convert value to boolean
+func _to_bool(value) -> bool:
+	if value is bool:
+		return value
+	var s = str(value).to_lower().strip_edges()
+	return s == "true" or s == "1" or s == "yes" or s == "on"

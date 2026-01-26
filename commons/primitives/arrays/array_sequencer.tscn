@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://carray_seq_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/array_sequencer.gd" id="1_sequencer"]
+
+[node name="ArraySequencer" type="Node3D"]
+script = ExtResource("1_sequencer")
+num_tracks = 4
+num_steps = 8
+cell_size = 0.05
+bpm = 120.0
+swing = 0.0
+sound_preset = "808_kit"
+playhead_enabled = true
+auto_play = false
+loop = true

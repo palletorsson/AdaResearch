@@ -77,7 +77,11 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_aphex_twin_modular(data, sample_count, params)
 		AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER:
 			generate_custom_flying_lotus_sampler(data, sample_count, params)
-	
+		AudioSynthesizer.SoundType.HEARTBEAT:
+			generate_custom_heartbeat(data, sample_count, params)
+		AudioSynthesizer.SoundType.LAB_HUM:
+			generate_custom_lab_hum(data, sample_count, params)
+
 	return create_audio_stream(data)
 
 static func generate_custom_basic_sine_wave(data: PackedFloat32Array, sample_count: int, params: Dictionary):
@@ -2468,3 +2472,122 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 		
 		# Final output
 		data[i] = (reverbed_wave + stereo_component) * amplitude
+
+# =============================================================================
+# HEARTBEAT - Biological heartbeat with lub-dub rhythm
+# =============================================================================
+static func generate_custom_heartbeat(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var bpm = params.get("bpm", 70.0)
+	var amplitude = params.get("amplitude", 0.4)
+	var depth = params.get("depth", 0.8)
+
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+	var beat_interval = 60.0 / bpm  # Time between heartbeats
+
+	# Heartbeat frequencies - low thump
+	var lub_freq = 40.0  # First beat (lub) - lower
+	var dub_freq = 55.0  # Second beat (dub) - slightly higher
+	var lub_dub_gap = 0.15  # Gap between lub and dub in seconds
+
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		# Find position within current beat cycle
+		var beat_phase = fmod(t, beat_interval)
+
+		# Generate lub-dub pattern
+		var wave = 0.0
+
+		# LUB (first thump) - occurs at start of beat
+		var lub_duration = 0.08
+		if beat_phase < lub_duration:
+			var lub_progress = beat_phase / lub_duration
+			var lub_envelope = sin(PI * lub_progress)  # Smooth bump
+			var lub_wave = sin(2.0 * PI * lub_freq * beat_phase)
+			# Add harmonics for body resonance
+			lub_wave += 0.3 * sin(2.0 * PI * lub_freq * 2.0 * beat_phase)
+			wave += lub_wave * lub_envelope * depth
+
+		# DUB (second thump) - occurs after gap
+		var dub_start = lub_dub_gap
+		var dub_duration = 0.06
+		if beat_phase > dub_start and beat_phase < dub_start + dub_duration:
+			var dub_local = beat_phase - dub_start
+			var dub_progress = dub_local / dub_duration
+			var dub_envelope = sin(PI * dub_progress) * 0.7  # Slightly softer
+			var dub_wave = sin(2.0 * PI * dub_freq * dub_local)
+			dub_wave += 0.2 * sin(2.0 * PI * dub_freq * 2.0 * dub_local)
+			wave += dub_wave * dub_envelope * depth
+
+		# Add subtle body resonance between beats
+		var body_resonance = sin(2.0 * PI * 25.0 * t) * 0.02 * depth
+		wave += body_resonance
+
+		# Overall envelope for fade in/out
+		var overall_envelope = 1.0
+		if progress < 0.05:
+			overall_envelope = progress / 0.05
+		elif progress > 0.95:
+			overall_envelope = (1.0 - progress) / 0.05
+
+		data[i] = wave * overall_envelope * amplitude
+
+# =============================================================================
+# LAB_HUM - Sterile sci-fi lab ambience with multi-layered sine hum
+# =============================================================================
+static func generate_custom_lab_hum(data: PackedFloat32Array, sample_count: int, params: Dictionary):
+	var base_freq = params.get("base_freq", 60.0)  # Electrical hum frequency (50Hz EU / 60Hz US)
+	var amplitude = params.get("amplitude", 0.25)
+	var mod_depth = params.get("mod_depth", 0.3)
+
+	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
+
+	# Multiple harmonic layers for rich lab ambience
+	var harmonics = [1.0, 2.0, 3.0, 5.0]  # Fundamental + harmonics
+	var harmonic_levels = [1.0, 0.3, 0.15, 0.08]  # Decreasing levels
+
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		var wave = 0.0
+
+		# Layer 1: Base electrical hum with harmonics
+		for h in range(harmonics.size()):
+			var freq = base_freq * harmonics[h]
+			var level = harmonic_levels[h]
+			wave += sin(2.0 * PI * freq * t) * level
+
+		# Layer 2: Slow amplitude modulation (breathing effect)
+		var slow_mod = 1.0 + sin(2.0 * PI * 0.1 * t) * mod_depth * 0.3
+		wave *= slow_mod
+
+		# Layer 3: Subtle high-frequency shimmer (fluorescent light flicker)
+		var flicker_freq = 120.0  # Double mains frequency
+		var flicker = sin(2.0 * PI * flicker_freq * t) * 0.05
+		wave += flicker
+
+		# Layer 4: Very low drone for depth
+		var sub_drone = sin(2.0 * PI * 30.0 * t) * 0.15 * mod_depth
+		wave += sub_drone
+
+		# Layer 5: Random subtle variation (air circulation texture)
+		var noise_mod = sin(2.0 * PI * 0.3 * t + sin(2.0 * PI * 0.7 * t) * 2.0)
+		wave *= (1.0 + noise_mod * mod_depth * 0.1)
+
+		# Sterile clinical character - slight phase shift for width
+		var stereo_component = sin(2.0 * PI * base_freq * 1.001 * t) * 0.1
+		wave += stereo_component
+
+		# Overall envelope
+		var envelope = 1.0
+		if progress < 0.1:
+			envelope = progress / 0.1  # Slow fade in
+		elif progress > 0.9:
+			envelope = (1.0 - progress) / 0.1  # Slow fade out
+
+		# Smoothstep the envelope
+		envelope = envelope * envelope * (3.0 - 2.0 * envelope)
+
+		data[i] = wave * envelope * amplitude * 0.5  # Keep levels moderate

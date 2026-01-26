@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpulsar_tubes_001"]
+
+[ext_resource type="Script" path="res://algorithms/arrays/pulsar/pulsar_glass_tubes.gd" id="1_tubes"]
+
+[node name="PulsarGlassTubes" type="Node3D"]
+script = ExtResource("1_tubes")
+tube_spacing_x = 0.015
+tube_spacing_z = 0.025
+max_height = 0.25
+tube_radius = 0.004
+rows_to_show = 40
+cols_per_row = 50
+min_intensity = 0.05
+glass_color = Color(0.85, 0.92, 1, 0.25)
+glow_color = Color(1, 1, 1, 0.8)
+use_emission = true
+visualization_mode = 0
+animate = false
+animation_speed = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.3, 0.8)

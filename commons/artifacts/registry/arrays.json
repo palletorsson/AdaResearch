@@ -67,6 +67,220 @@
 			"lookup_name": "pattern_tile_cube",
 			"description": "Small grabbable color cube for pattern tile puzzle. Drag to grid cells to place colors.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn"
+		},
+		"step_sequencer": {
+			"name": "Step Sequencer",
+			"lookup_name": "step_sequencer",
+			"description": "2D step sequencer with click-to-toggle grid. Arrays as sound - playhead reads indices, triggers sounds.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn"
+		},
+		"step_sequencer_trap": {
+			"name": "Trap Sequencer",
+			"lookup_name": "step_sequencer_trap",
+			"description": "Trap beat sequencer with 16 steps.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 85,
+				"sound_preset": "trap_beats"
+			}
+		},
+		"step_sequencer_synth": {
+			"name": "Synth Sequencer",
+			"lookup_name": "step_sequencer_synth",
+			"description": "Synthesizer sequencer with classic synth sounds.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 120,
+				"sound_preset": "synth_kit"
+			}
+		},
+		"step_sequencer_house": {
+			"name": "90s House Sequencer",
+			"lookup_name": "step_sequencer_house",
+			"description": "Crystal Waters / Gypsy Woman style 90s house. TR-909 kick, M1 piano stabs, acid bass.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 122,
+				"sound_preset": "90s_house"
+			}
+		},
+		"step_sequencer_pads": {
+			"name": "Juno Pads Sequencer",
+			"lookup_name": "step_sequencer_pads",
+			"description": "Lush analog pads. Juno-106, Jupiter-8, PPG Wave. Slow atmospheric builds.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 8,
+				"bpm": 80,
+				"sound_preset": "juno_pads"
+			}
+		},
+		"step_sequencer_kraftwerk": {
+			"name": "Kraftwerk Sequencer",
+			"lookup_name": "step_sequencer_kraftwerk",
+			"description": "1970s Germany. Moog sequencer pulse, robotic precision. The birth of electronic music.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 112,
+				"sound_preset": "kraftwerk"
+			}
+		},
+		"step_sequencer_disco": {
+			"name": "Disco Sequencer",
+			"lookup_name": "step_sequencer_disco",
+			"description": "1970s funk and groove. Four-on-floor, Synare disco tom, funky bass.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 120,
+				"sound_preset": "disco"
+			}
+		},
+		"step_sequencer_ambient": {
+			"name": "Ambient Works Sequencer",
+			"lookup_name": "step_sequencer_ambient",
+			"description": "1990s Aphex Twin style. Modular textures, drones, ethereal atmosphere.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 8,
+				"bpm": 75,
+				"sound_preset": "ambient_works"
+			}
+		},
+		"step_sequencer_jazz": {
+			"name": "Jazz Fusion Sequencer",
+			"lookup_name": "step_sequencer_jazz",
+			"description": "1970s Herbie Hancock. Jazz meets electronics, Moog fusion, DX7 piano.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 100,
+				"sound_preset": "jazz_fusion"
+			}
+		},
+		"step_sequencer_chiptune": {
+			"name": "Chiptune Sequencer",
+			"lookup_name": "step_sequencer_chiptune",
+			"description": "1980s 8-bit. C64 SID chip, Amiga tracker, retro game sounds.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 140,
+				"sound_preset": "chiptune"
+			}
+		},
+		"step_sequencer_scifi": {
+			"name": "Sci-Fi Lab Sequencer",
+			"lookup_name": "step_sequencer_scifi",
+			"description": "Laboratory atmosphere. Hums, data chirps, electromagnetic interference.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 8,
+				"bpm": 90,
+				"sound_preset": "sci_fi_lab"
+			}
+		},
+		"step_sequencer_cinematic": {
+			"name": "Cinematic Sequencer",
+			"lookup_name": "step_sequencer_cinematic",
+			"description": "1980s Blade Runner. CS-80 brass, Jupiter strings, Vangelis influence.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 8,
+				"bpm": 85,
+				"sound_preset": "cinematic"
+			}
+		},
+		"step_sequencer_breakbeat": {
+			"name": "Breakbeat Sequencer",
+			"lookup_name": "step_sequencer_breakbeat",
+			"description": "1990s jungle/DnB. Syncopation, chopped samples, fast hi-hats.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 160,
+				"sound_preset": "breakbeat"
+			}
+		},
+		"step_sequencer_cosmic": {
+			"name": "Cosmic Sequencer",
+			"lookup_name": "step_sequencer_cosmic",
+			"description": "1970s-80s space disco. Jean-Michel Jarre, ARP 2600, cosmic FX.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 16,
+				"bpm": 110,
+				"sound_preset": "cosmic"
+			}
+		},
+		"step_sequencer_lofi": {
+			"name": "Lo-Fi Sequencer",
+			"lookup_name": "step_sequencer_lofi",
+			"description": "2010s chill beats. Warm DX7 piano, mellow 808, study music vibes.",
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"config": {
+				"num_tracks": 4,
+				"num_steps": 8,
+				"bpm": 85,
+				"sound_preset": "lo_fi"
+			}
+		},
+		"binary_table": {
+			"name": "Binary Table Display",
+			"lookup_name": "binary_table",
+			"description": "Show any 2D array as a grid of values. See the data structure made visible.",
+			"scene": "res://algorithms/arrays/binary_table/binary_table_display.tscn"
+		},
+		"pulsar_glass_tubes": {
+			"name": "Pulsar Glass Tubes",
+			"lookup_name": "pulsar_glass_tubes",
+			"description": "3D glass tube visualization of Pulsar B1919+21 radio waves. Height = signal intensity. Arrays as art.",
+			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn"
+		},
+		"pulsar_visualizer": {
+			"name": "Pulsar B1919+21 Visualizer",
+			"lookup_name": "pulsar_visualizer",
+			"description": "The first pulsar discovered (1967). Binary table + 3D glass tubes. Joy Division's Unknown Pleasures made interactive.",
+			"scene": "res://algorithms/arrays/pulsar/pulsar_visualizer.tscn"
+		},
+		"pulsar_compact": {
+			"name": "Pulsar Compact",
+			"lookup_name": "pulsar_compact",
+			"description": "Smaller pulsar visualization. 20 rows of glass tubes.",
+			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+			"config": {
+				"rows": 20,
+				"cols": 30,
+				"max_height": 0.15
+			}
+		},
+		"pulsar_lines": {
+			"name": "Pulsar Lines",
+			"lookup_name": "pulsar_lines",
+			"description": "Pulsar visualization using lines instead of tubes. Better performance.",
+			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+			"config": {
+				"visualization_mode": 1,
+				"rows": 60,
+				"cols": 50
+			}
 		}
 	}
 }
