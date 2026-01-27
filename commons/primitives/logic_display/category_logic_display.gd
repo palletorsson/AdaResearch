@@ -9,9 +9,13 @@ extends Node3D
 
 func _ready() -> void:
 	# Fix ViewportTexture issue by assigning it manually
-	var material = screen.get_active_material(0)
-	if material:
+	# IMPORTANT: Duplicate the material so each instance has its own copy
+	# Otherwise all instances share the same material and show the same content
+	var original_material = screen.get_active_material(0)
+	if original_material:
+		var material = original_material.duplicate()
 		material.albedo_texture = viewport.get_texture()
+		screen.set_surface_override_material(0, material)
 	
 	# If equation is set in editor, display it deferred to ensure UI is ready
 	if not equation.is_empty():

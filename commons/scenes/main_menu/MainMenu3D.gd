@@ -23,30 +23,14 @@ func _ready():
 	_setup_about_text()
 
 func _setup_about_text():
-	var about_text = """[center][b]Ada Research[/b][/center]
-[center][i]Algorithms as Living Systems[/i][/center]
+	var about_text = """[center][font_size=48][b]THRESHOLD PROTOCOL[/b][/font_size][/center]
 
-[b]What This Is[/b]
-An embodied journey through computational thinking. Not tutorials—explorations. Walk through the mathematics that shapes our world, from the simplest point to emergent swarm intelligence.
+[font_size=36]The outside is no longer survivable; the lab and its simulations endure as a shrinking threshold, where the subject must reassemble [b]X[/b]—a queer energy principle—to make return possible.[/font_size]
 
-[b]The Progression[/b]
-[color=yellow]Primitives[/color] → Ordered foundations (points, lines, cubes)
-[color=yellow]Wavefunctions[/color] → Oscillation between poles (sine, Fourier, chaos)
-[color=yellow]Randomness[/color] → Freedom from pattern (entropy as possibility)
-[color=yellow]Emergence[/color] → Patterns without blueprint (swarm, cellular automata)
+[center][font_size=32][color=cyan][b]QFE = F − λE(S) + φΔE(S,t)[/b][/color][/font_size][/center]
 
-[b]The Principle[/b]
-Systems survive by oscillating between order and chaos—never crystallizing, never dissolving. This is the edge of chaos, where adaptation happens.
-
-[b]Instructions[/b]
-- Wander. There is no correct path.
-- Collect code snippets to your clipboard.
-- Each sequence unlocks new territory.
-
-[b]Credits[/b]
-A collaboration between Konstfack, KTH Stockholm, and the edges of computational possibility. Powered by Godot Engine 4.
-
-[i]"Entropy is not decay. Entropy is freedom."[/i]
+[center][font_size=28][color=gray][i]"We can only see a short distance ahead, but we can see plenty there that needs to be done."[/i]
+— Alan Turing[/color][/font_size][/center]
 """
 	if about_display.has_method("set_tutorial_from_text"):
 		about_display.set_tutorial_from_text(about_text)

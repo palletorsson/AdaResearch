@@ -70,6 +70,53 @@ Handles utility object placement and configuration.
 - `s` - Spawn points (with height and rotation)
 - `l` - Platform lifts (with height and speed)
 - `d` - Doors, `w` - Windows, `a` - Walls, `b` - Tables
+- `sub` - Subtitle triggers (Portal 2-style text popups)
+
+### 📝 **Subtitle Trigger System**
+
+The subtitle system shows Portal 2-style text when the player walks over trigger points. Triggers display as transparent "i" spheres that the player must physically walk through.
+
+**Grid Syntax:**
+```
+sub:map                    - Shows blurb.md or JSON description for the map
+sub:intro                  - Looks up "intro" in map_data.json "subtitles" section
+sub:Welcome_text           - Direct text (underscores become spaces)
+sub:tt:point_axioms        - Looks up key in tutorial_text.json
+sub:key:speaker            - Text with custom speaker name
+sub:key:speaker:1          - Text + speaker + level (1=essential, 2=info, 3=verbose)
+```
+
+**Map-Specific Subtitles in map_data.json:**
+```json
+{
+  "subtitles": {
+	"intro": "Welcome to this map!",
+	"hint1": {"text": "Try jumping here", "speaker": "Guide"},
+	"point_zero": "Point Zero? Point One."
+  }
+}
+```
+
+**Example utilities layer:**
+```json
+"utilities": [
+  [" ", "sub:map", " "],
+  [" ", "sub:intro", " "],
+  [" ", "sub:hint1", " "]
+]
+```
+
+**Trigger Behavior:**
+- Small collision area (0.5m) - player must walk directly over the "i" sphere
+- One-shot by default (triggers once per map load)
+- Plays soft "pling" notification sound
+- 1.5 second startup delay to prevent triggering during spawn
+- Distance check: player must be within 0.75m horizontally
+
+**Text Levels:**
+- Level 1 (Essential): Always shown
+- Level 2 (Info): Default level, shown for most players
+- Level 3 (Verbose): Extra details for players who want more context
 
 ### 🎮 **GridInteractablesComponent.gd** (~180 lines)
 Manages interactive artifacts and objects.

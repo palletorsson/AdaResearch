@@ -44,7 +44,7 @@
 		"utilities": [
 			["m:0:3:-0.5:0.1", " ", " ", " ", "an:-90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", "sub:point_zero", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "t", " ", " ", " ", " ", " "],
@@ -65,6 +65,10 @@
 			["frame_counter_display:180", " ", " ", " ", " ", " ", "CoordinateSystem3M:0:1"]
 		]
 	},
+"subtitles": {
+	"point_zero": "Point Zero? Point One.",
+   
+  },
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",

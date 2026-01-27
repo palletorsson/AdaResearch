@@ -1,2 +1,4 @@
-Frames flicker, render passes. Point Zero marks the beginning of all the things that were already there, the infrastructure. With time there was light and somewhere to stand. In the beginning, there was the void, darkness was on the faces of the depths of a simulation.
- A single instantiated point beyond the zero reference. This map isolates the minimal act of individuation within an infrastructural field. It reveals how a point only exists as a callable, indexed abstraction within a larger system, not as a native entity of space.
+Before the point, infrastructure. The origin is not a point but a 
+prerequisite — coordinate systems, render loops, the void made 
+addressable. Point_One is the first mark: position without extension, 
+existence without duration. You arrive late. The system was running.

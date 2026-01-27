@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://y2b0bdmt3oyc"]
+[gd_scene load_steps=46 format=3 uid="uid://y2b0bdmt3oyc"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="2_dark_sphere"]
 [ext_resource type="PackedScene" uid="uid://b228p8k6sonve" path="res://addons/godot-xr-tools/player/fade/fade_collision.tscn" id="3_ocaqi"]
 [ext_resource type="PackedScene" uid="uid://bjcxf427un2wp" path="res://addons/godot-xr-tools/player/poke/poke.tscn" id="4_eoo0b"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5"]
@@ -282,7 +283,9 @@ auto_translate_mode = 0
 editor_description = ""
 script = null
 
-[node name="Demos" type="Node3D" parent="." index="2"]
+[node name="DarkSphere" parent="." index="2" instance=ExtResource("2_dark_sphere")]
+
+[node name="Demos" type="Node3D" parent="." index="3"]
 
 [node name="ToAudioDemo" parent="Demos" index="0"]
 _import_path = NodePath("")
@@ -590,7 +593,7 @@ spawn_point_position = Vector3(0, 0, 0)
 spawn_point_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = null
 
-[node name="SettingsUI" parent="." index="3" instance=ExtResource("26_0uyxa")]
+[node name="SettingsUI" parent="." index="4" instance=ExtResource("26_0uyxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
 [connection signal="child_entered_tree" from="Demos" to="." method="_on_Demos_child_entered_tree"]

@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func _complete_puzzle() -> void:
 	# Hide logic display if needed
-	var display = get_node_or_null("CategoryLogicDisplay")
+	var display = get_node_or_null("TriangleLogicDisplay")
 	if display:
 		display.visible = false
 

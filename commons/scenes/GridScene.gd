@@ -142,10 +142,37 @@ func _on_map_generation_complete():
 
 	# Spawn entry based on map settings
 	_spawn_entry_by_type()
-	
+
+	# NOTE: Subtitles are now triggered by walking over "sub:" triggers in the map
+	# (see subtitle_trigger.gd) rather than showing automatically on map entry
+
 	# Add exit trigger if in sequence
 	if not sequence_data.is_empty():
 		_setup_sequence_exit_trigger()
+
+func _show_map_subtitle():
+	"""Show map description as Portal 2-style subtitle overlay"""
+	if not grid_system:
+		return
+
+	var data_component = grid_system.get_data_component()
+	if not data_component:
+		return
+
+	var map_name = data_component.get_map_name()
+	var description = data_component.get_description()
+
+	# Skip if no description
+	if description.is_empty():
+		return
+
+	# Use Subtitles autoload if available
+	var subtitles = get_node_or_null("/root/Subtitles")
+	if subtitles:
+		# Format map name nicely (replace underscores with spaces)
+		var display_name = map_name.replace("_", " ")
+		subtitles.show_map_entry(display_name, description)
+		print("GridScene: Showing subtitle for '%s'" % map_name)
 
 func _setup_sequence_exit_trigger():
 	"""Setup automatic sequence progression trigger"""

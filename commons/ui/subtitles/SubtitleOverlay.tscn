@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/ui/subtitles/SubtitleOverlay.gd" id="1_script"]
+
+[node name="SubtitleOverlay" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_script")
+typewriter_speed = 0.02
+display_duration = 6.0
+fade_duration = 0.4

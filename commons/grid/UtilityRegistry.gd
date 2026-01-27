@@ -64,11 +64,18 @@ const UTILITY_TYPES = {
 	"supports_parameters": true  # display_mode, text_scale
 	},
 	"tts": {
-		"name": "text_to_speech", 
-		"file": "tts_speaker.tscn", 
+		"name": "text_to_speech",
+		"file": "tts_speaker.tscn",
 		"category": "audio",
 		"description": "Speaks text on load",
 		"supports_parameters": true  # message string
+	},
+	"sub": {
+		"name": "subtitle_trigger",
+		"file": "subtitle_trigger.tscn",
+		"category": "ui",
+		"description": "Shows Portal 2-style subtitle when player enters area",
+		"supports_parameters": true  # key: 'map' for map desc, or custom text/key
 	},
 	"3t": {
 		"name": "text_display",

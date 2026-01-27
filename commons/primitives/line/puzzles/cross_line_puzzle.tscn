@@ -7,8 +7,8 @@
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 script = ExtResource("1_cross")
 
-[node name="CategoryLogicDisplay" parent="." instance=ExtResource("2_display")]
+[node name="CrossLogicDisplay" parent="." instance=ExtResource("2_display")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 0)
-equation = ["line", "plus", "line", "equals", "cross"]
+equation = ["line", "plus", "line", "arrow", "cross"]
 
 [node name="GhostGuides" type="Node3D" parent="."]

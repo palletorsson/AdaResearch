@@ -30,6 +30,15 @@ var theremin_playback: AudioStreamGeneratorPlayback
 var theremin_phase := 0.0
 var last_tip_pos := Vector3.ZERO
 
+# Mario sound trigger state
+var last_quadrant: int = 0
+var sound_time: float = 0.0
+var is_playing_sound: bool = false
+var sound_start_freq: float = 540.0
+var sound_end_freq: float = 880.0
+var sound_decay: float = 8.0
+const SOUND_DURATION: float = 0.36
+
 func _ready():
 	setup_camera()
 	setup_wheels()
@@ -147,28 +156,55 @@ func _process(delta):
 	update_wheels()
 	update_trace()
 	ensure_trace_lights()
-	_generate_audio_samples()
 	_generate_theremin_audio()
 
 func update_wheels():
 	var current_pos = Vector3.ZERO
+
+	# After 3 cycles, start adding modulation
+	var modulation_start = 3.0 * TAU
+	var mod_amount = 0.0
+	if time > modulation_start:
+		# Gradually increase modulation over the next 2 cycles
+		mod_amount = clamp((time - modulation_start) / (2.0 * TAU), 0.0, 1.0)
 
 	for i in range(wheels.size()):
 		var wheel_data = wheels[i]
 		var wheel_node = wheel_nodes[i]
 		var line_node = connection_lines[i]
 
-		# Calculate wheel rotation
+		# Base wheel rotation
 		var angle = time * wheel_data.freq + wheel_data.phase
+
+		# After 3 cycles, add subtle modulations to each wheel
+		if mod_amount > 0.0:
+			# Each wheel gets unique modulation based on its harmonic number
+			var harmonic = wheel_data.freq
+
+			# Frequency wobble - subtle variation in rotation speed
+			var freq_mod = sin(time * 0.3 * harmonic) * 0.05 * mod_amount
+			angle += freq_mod * time
+
+			# Phase drift - slow wandering of phase
+			var phase_mod = sin(time * 0.1 + i * PI / 2) * 0.2 * mod_amount
+			angle += phase_mod
+
+			# Radius breathing - subtle pulsing (affects arm_end calculation below)
+			var radius_mod = 1.0 + sin(time * 0.2 * (i + 1)) * 0.08 * mod_amount
+			wheel_data["_radius_mod"] = radius_mod
+		else:
+			wheel_data["_radius_mod"] = 1.0
+
 		wheel_node.rotation.z = angle
 
 		# Position wheel at current position
 		wheel_node.position = current_pos
 
-		# Calculate next position (end of this wheel's arm)
+		# Calculate next position (end of this wheel's arm) with radius modulation
+		var effective_radius = wheel_data.radius * wheel_data.get("_radius_mod", 1.0)
 		var arm_end = current_pos + Vector3(
-			cos(angle) * wheel_data.radius,
-			sin(angle) * wheel_data.radius,
+			cos(angle) * effective_radius,
+			sin(angle) * effective_radius,
 			0
 		)
 
@@ -237,37 +273,40 @@ func ensure_trace_lights():
 		lights_spawned = true
 
 func _generate_audio_samples():
-	# ETHEREAL PAD - Soft evolving chord tones
-	# Each wheel generates a note of a chord instead of harsh harmonics
-	var chord_freqs = [130.8, 164.8, 196.0, 261.6]  # C3, E3, G3, C4 - C major
-	
+	# MATHEMATICAL BEAUTY - Pure, clean harmonic tones
+	# Each wheel represents a Fourier harmonic - pure mathematical relationship
+	# Using perfect fifths and octaves for clean interference patterns
+	var harmonic_freqs = [110.0, 165.0, 220.0, 330.0]  # A2, E3, A3, E4 - pure fifths
+
 	for i in range(audio_playbacks.size()):
 		var playback = audio_playbacks[i]
 		if not playback: continue
-		
+
 		var frames_available = playback.get_frames_available()
 		if frames_available <= 0: continue
-		
+
 		var wheel_data = wheels[i]
-		var freq = chord_freqs[i % chord_freqs.size()]
-		
-		# Subtle detuning for richness
-		freq *= 1.0 + sin(time * 0.2 + i) * 0.005
-		
-		var amplitude = wheel_data.radius * 0.08  # Quiet
-		
+		var freq = harmonic_freqs[i % harmonic_freqs.size()]
+
+		# Very subtle detuning - almost imperceptible
+		freq *= 1.0 + sin(time * 0.05 + i * 0.7) * 0.001
+
+		# Quiet amplitude based on wheel size
+		var amplitude = wheel_data.radius * 0.04
+
 		for _f in range(frames_available):
 			var t = time + float(_f) / SAMPLE_RATE
-			
-			# Layered sine waves for pad texture
-			var sample = sin(2.0 * PI * freq * t) * 0.5
-			sample += sin(2.0 * PI * freq * 2.0 * t) * 0.2  # Octave
-			sample += sin(2.0 * PI * freq * 1.5 * t) * 0.15  # Fifth
-			
-			# Gentle tremolo
-			var tremolo = 0.8 + 0.2 * sin(time * 2.0 + i)
-			sample *= tremolo * amplitude
-			
+
+			# Pure sine wave - mathematical clarity
+			var sample = sin(TAU * freq * t)
+
+			# Gentle slow swell - breathing
+			var swell = 0.6 + 0.4 * sin(t * 0.15 + i * 0.5)
+			sample *= swell * amplitude
+
+			# Soft limiting
+			sample = tanh(sample * 3.0) * 0.33
+
 			playback.push_frame(Vector2(sample, sample))
 
 func _generate_theremin_audio():
@@ -275,47 +314,64 @@ func _generate_theremin_audio():
 	var frames = theremin_playback.get_frames_available()
 	if frames <= 0: return
 
-	if trace_points.is_empty(): return
+	# Need enough points to make a wavetable
+	if trace_points.size() < 16: return
+
 	var tip_pos = trace_points[-1]
-	
 	theremin_player.position = tip_pos
-	
-	# ETHEREAL LEAD - Soft singing tone following the trace
-	# Pitch follows Y position gently
-	var base_freq = 220.0 + (tip_pos.y * 30.0)  # More subtle range
-	base_freq = clamp(base_freq, 150.0, 400.0)
-	
-	# Speed affects vibrato depth
-	var speed = tip_pos.distance_to(last_tip_pos) * 60.0
-	last_tip_pos = tip_pos
-	
-	var vibrato_rate = 4.0
-	var vibrato_depth = 3.0 + speed * 0.2
-	
-	var master_volume = 0.12  # Quiet
-	
+
+	# The trace IS the waveform - use Y values as wavetable
+	# Playback rate determines pitch
+	var base_freq = 55.0  # Low A - the form cycles at this pitch
+	var master_volume = 0.15
+
+	var modulation_start = 3.0 * TAU
+
 	for i in range(frames):
 		var t = time + float(i) / SAMPLE_RATE
-		
-		# Gentle vibrato
-		var vibrato = sin(t * TAU * vibrato_rate) * vibrato_depth
-		var current_freq = base_freq + vibrato
-		
-		theremin_phase += current_freq / SAMPLE_RATE
+
+		# Modulation after 3 cycles
+		var mod_amount = 0.0
+		if time > modulation_start:
+			mod_amount = clamp((time - modulation_start) / TAU, 0.0, 1.0)
+
+		# Advance through wavetable
+		theremin_phase += base_freq / SAMPLE_RATE
 		if theremin_phase > 1.0: theremin_phase -= 1.0
-		
-		# Pure ethereal tone
-		var fundamental = sin(theremin_phase * TAU)
-		var octave = sin(theremin_phase * TAU * 2.0) * 0.2
-		var shimmer = sin(theremin_phase * TAU * 3.0) * 0.08
-		
-		# Soft envelope based on motion
-		var envelope = 0.6 + 0.4 * (1.0 / (1.0 + speed * 0.5))
-		
-		var sample = (fundamental + octave + shimmer) * envelope * master_volume
-		
-		# Soft limiting
-		sample = tanh(sample * 2.0) * 0.5
-		
+
+		# Sample the trace shape as waveform
+		var table_size = trace_points.size()
+		var pos = theremin_phase * table_size
+		var idx = int(pos) % table_size
+		var next_idx = (idx + 1) % table_size
+		var frac = pos - floor(pos)
+
+		# Linear interpolation between points
+		var y1 = trace_points[idx].y
+		var y2 = trace_points[next_idx].y
+		var sample = lerp(y1, y2, frac)
+
+		# Normalize to audio range (trace Y is roughly -3 to 3)
+		sample = sample / 3.0
+
+		# After 3 cycles, add X dimension as second voice (detuned)
+		if mod_amount > 0.0:
+			var phase2 = fmod(theremin_phase * 1.002, 1.0)  # Slight detune
+			var pos2 = phase2 * table_size
+			var idx2 = int(pos2) % table_size
+			var next_idx2 = (idx2 + 1) % table_size
+			var frac2 = pos2 - floor(pos2)
+
+			var x1 = trace_points[idx2].x
+			var x2 = trace_points[next_idx2].x
+			var sample2 = lerp(x1, x2, frac2) / 3.0
+
+			sample = sample * (1.0 - mod_amount * 0.3) + sample2 * mod_amount * 0.3
+
+		sample *= master_volume
+
+		# Gentle limiting
+		sample = tanh(sample * 1.5) * 0.6
+
 		theremin_playback.push_frame(Vector2(sample, sample))
 

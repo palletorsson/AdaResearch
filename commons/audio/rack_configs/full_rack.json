@@ -1,14 +1,13 @@
 {
 	"rack_info": {
 		"name": "Full Featured Rack",
-		"description": "Demonstrates all control types with auto-spacing and groups",
-		"version": "1.0",
+		"description": "Demonstrates all control types with blueprint-based layout",
+		"version": "2.0",
 		"sound_type": "synth_wave"
 	},
 	"layout": {
-		"auto_spacing": true,
-		"padding": 0.03,
-		"gap": 0.025
+		"padding_px": 25,
+		"gap_px": 20
 	},
 	"grid": [
 		["lbl_title", "", "", "", "mon_out"],

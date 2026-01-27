@@ -336,15 +336,15 @@ func _update_info_board_with_sequence_data():
 	var total_maps = sequence_data.get("total_maps", 1)
 	
 	# Update level number (show progress in sequence)
+	# Use 1-based indexing for human readability (01, 02, 03...)
+	var display_index = map_index + 1
 	if show_level_number:
-		# Use 0-based indexing as requested (00, 01, 02...)
-		level_number_label.text = "%02d" % map_index
+		level_number_label.text = "%02d" % display_index
 	else:
-		level_number_label.text = map_index
-	
+		level_number_label.text = str(display_index)
+
 	# Update level ID (sequence/progress format + current map name)
-	# Also using 0-based index for consistency in the ID string
-	var level_id_text = "%s/%02d of %d" % [sequence_name, map_index, total_maps]
+	var level_id_text = "%s/%02d of %d" % [sequence_name, display_index, total_maps]
 	if not current_map_name.is_empty():
 		level_id_text += " - %s" % current_map_name
 	level_id_label.text = level_id_text
@@ -472,16 +472,35 @@ func _load_blurb_or_description(map_name: String, fallback_description: String) 
 	if map_name.is_empty():
 		return fallback_description
 
-	var blurb_path = "res://commons/maps/%s/blurb.md" % map_name
-	if FileAccess.file_exists(blurb_path):
-		var file = FileAccess.open(blurb_path, FileAccess.READ)
-		if file:
-			var content = file.get_as_text().strip_edges()
-			file.close()
-			if not content.is_empty():
-				print("AnnotationInfoBoard: Loaded blurb.md for '%s'" % map_name)
-				return content
+	# Try multiple path candidates:
+	# 1. lookup_name (folder name, e.g., "Point_One")
+	# 2. map_name with spaces replaced by underscores
+	# 3. map_name as-is (unlikely but try anyway)
+	var path_candidates: Array[String] = []
 
+	if not current_lookup_name.is_empty():
+		path_candidates.append(current_lookup_name)
+
+	var underscored_name = map_name.replace(" ", "_")
+	if underscored_name != current_lookup_name:
+		path_candidates.append(underscored_name)
+
+	if map_name != underscored_name and map_name != current_lookup_name:
+		path_candidates.append(map_name)
+
+	for candidate in path_candidates:
+		var blurb_path = "res://commons/maps/%s/blurb.md" % candidate
+		print("AnnotationInfoBoard: Trying blurb path: %s" % blurb_path)
+		if FileAccess.file_exists(blurb_path):
+			var file = FileAccess.open(blurb_path, FileAccess.READ)
+			if file:
+				var content = file.get_as_text().strip_edges()
+				file.close()
+				if not content.is_empty():
+					print("AnnotationInfoBoard: ✅ Loaded blurb.md from '%s'" % blurb_path)
+					return content
+
+	print("AnnotationInfoBoard: No blurb.md found, using JSON description")
 	return fallback_description
 
 # Public API

@@ -6,10 +6,12 @@
 		"sound_type": "lab_hum"
 	},
 	"layout": {
-		"col_spacing": 0.14,
-		"row_spacing": 0.14,
+		"padding_px": 20,
+		"gap_px": 15,
 		"hide_selection": true,
-		"hide_buttons": true
+		"hide_buttons": true,
+		"cable_accent_color": "#00ccff",
+		"cable_glow": 0.5
 	},
 	"grid": [
 		["lbl_title", " ", " ", "mtr_vol", "disp_waveform"],

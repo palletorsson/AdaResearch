@@ -630,6 +630,26 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if parameters.size() > 1:
 					utility_object.color_param = parameters[1]
 			print("GridUtilitiesComponent: Configured player body trigger for '%s'" % (parameters[0] if parameters.size() > 0 else "dress"))
+
+		"sub":  # Subtitle trigger - Portal 2-style subtitle on player entry
+			# Format: sub:key or sub:key:speaker or sub:key:speaker:level
+			# Examples: sub:map, sub:welcome, sub:tt:point_axioms, sub:hello:GLaDOS:1
+			if utility_object.has_method("configure"):
+				utility_object.configure(parameters)
+			else:
+				# Manual configuration
+				if parameters.size() > 0:
+					utility_object.subtitle_key = parameters[0]
+				if parameters.size() > 1:
+					utility_object.speaker_name = parameters[1]
+				if parameters.size() > 2:
+					var param2 = parameters[2]
+					if param2 in ["1", "2", "3"]:
+						utility_object.text_level = int(param2)
+					else:
+						utility_object.duration = float(param2)
+			print("GridUtilitiesComponent: Configured subtitle trigger for '%s'" % (parameters[0] if parameters.size() > 0 else "map"))
+
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
 	var color = _parse_color_parameter(color_param)

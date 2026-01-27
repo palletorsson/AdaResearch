@@ -337,7 +337,31 @@ func load_rack_config(path: String):
 		if has_node("Buttons"):
 			$Buttons.visible = not should_hide
 
+	# Configure cable case colors from layout
+	_configure_cable_case(layout)
+
 	print("Loaded rack config: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
+
+func _configure_cable_case(layout: Dictionary):
+	"""Configure cable case decoration colors based on layout settings"""
+	var cable_case = get_node_or_null("CableCase")
+	if not cable_case:
+		return
+
+	# Set accent color from layout (matches button colors, etc.)
+	if layout.has("cable_accent_color"):
+		var color = Color(layout["cable_accent_color"])
+		if "accent_color" in cable_case:
+			cable_case.accent_color = color
+
+	# Check for cable visibility toggle
+	if layout.has("show_cables"):
+		cable_case.visible = layout["show_cables"]
+
+	# Set glow intensity
+	if layout.has("cable_glow"):
+		if "glow_intensity" in cable_case:
+			cable_case.glow_intensity = float(layout["cable_glow"])
 
 func _validate_rack_config(data: Dictionary) -> bool:
 	# Check for required top-level keys
@@ -399,64 +423,76 @@ func _spawn_controls_from_json():
 	if not rack_config.has("grid") or not rack_config.has("control_definitions"):
 		return
 
+	var control_defs = rack_config["control_definitions"]
+	var layout = rack_config.get("layout", {})
+
+	# Check for legacy manual spacing mode
+	var use_legacy = layout.has("col_spacing") and layout.get("col_spacing", 0.0) > 0
+	if use_legacy:
+		_spawn_controls_legacy()
+		return
+
+	# Use new blueprint-based layout calculator
+	var layout_result = RackLayoutCalculator.calculate_layout(rack_config)
+
+	print("RackLayout: Total size %.2fm x %.2fm, %d controls" % [
+		layout_result.total_width,
+		layout_result.total_height,
+		layout_result.positions.size()
+	])
+
+	# Spawn controls at calculated positions
+	for control_id in layout_result.positions.keys():
+		if not control_defs.has(control_id):
+			continue
+
+		var control_config = control_defs[control_id]
+		var control_type = control_config.get("type", "slider")
+		var control = _instantiate_control(control_type, control_id)
+		if not control:
+			continue
+
+		parameter_container.add_child(control)
+
+		# Apply calculated position
+		var pos: Vector3 = layout_result.positions[control_id]
+		control.transform.origin = pos
+
+		# Apply control-specific configuration
+		_configure_control(control, control_config, control_type)
+
+		# Connect signals based on control type
+		_connect_control_signals(control, control_id, control_type, control_config)
+
+		# Store control with structure
+		active_controls[control_id] = {
+			"instance": control,
+			"parameter": control_config.get("parameter", ""),
+			"parameter_x": control_config.get("parameter_x", ""),
+			"parameter_y": control_config.get("parameter_y", ""),
+			"config": control_config,
+			"type": control_type
+		}
+
+# Legacy spawn method for configs with explicit col_spacing/row_spacing
+func _spawn_controls_legacy():
 	var grid = rack_config["grid"]
 	var control_defs = rack_config["control_definitions"]
 	var layout = rack_config.get("layout", {})
 
-	# Layout settings
-	var col_spacing = layout.get("col_spacing", 0.0)  # 0 = auto-spacing
-	var row_spacing = layout.get("row_spacing", 0.0)  # 0 = auto-spacing
-	var auto_spacing = layout.get("auto_spacing", col_spacing == 0.0)
-	var padding = layout.get("padding", 0.02)
-	var gap = layout.get("gap", 0.02)  # Gap between controls
+	var col_spacing = layout.get("col_spacing", 0.12)
+	var row_spacing = layout.get("row_spacing", 0.10)
 
-	# First pass: calculate row heights and column widths for auto-spacing
-	var row_heights = []
-	var col_widths = []
-
-	if auto_spacing:
-		for row_idx in range(grid.size()):
-			var max_height = 0.0
-			var row = grid[row_idx]
-			for col_idx in range(row.size()):
-				var control_id = row[col_idx]
-				if control_id == "" or control_id == " ":
-					continue
-				if control_defs.has(control_id):
-					var control_type = control_defs[control_id].get("type", "slider")
-					var size = _get_control_size(control_type)
-					max_height = max(max_height, size.y)
-					# Expand col_widths array if needed
-					while col_widths.size() <= col_idx:
-						col_widths.append(0.0)
-					col_widths[col_idx] = max(col_widths[col_idx], size.x)
-			row_heights.append(max_height)
-
-	# Second pass: spawn controls with calculated positions
-	var y_offset = 0.0
 	for row_idx in range(grid.size()):
 		var row = grid[row_idx]
-		var x_offset = 0.0
-
 		for col_idx in range(row.size()):
 			var control_id = row[col_idx]
-
-			# Skip empty cells but still advance x position
 			if control_id == "" or control_id == " ":
-				if auto_spacing and col_idx < col_widths.size():
-					x_offset += col_widths[col_idx] + gap
-				elif col_spacing > 0:
-					x_offset += col_spacing
 				continue
-
-			# Get control definition
 			if not control_defs.has(control_id):
-				push_warning("Control ID '" + control_id + "' in grid but not in control_definitions")
 				continue
 
 			var control_config = control_defs[control_id]
-
-			# Get control type and instantiate appropriate scene
 			var control_type = control_config.get("type", "slider")
 			var control = _instantiate_control(control_type, control_id)
 			if not control:
@@ -464,51 +500,21 @@ func _spawn_controls_from_json():
 
 			parameter_container.add_child(control)
 
-			# Calculate position
-			var x: float
-			var y: float
-
-			if auto_spacing:
-				x = x_offset + padding
-				y = -y_offset - padding
-				# Center control within its cell
-				if col_idx < col_widths.size():
-					var cell_width = col_widths[col_idx]
-					var control_size = _get_control_size(control_type)
-					x += (cell_width - control_size.x) / 2.0
-			else:
-				x = col_idx * col_spacing
-				y = -row_idx * row_spacing
-
+			var x = col_idx * col_spacing
+			var y = -row_idx * row_spacing
 			control.transform.origin = Vector3(x, y, 0.03)
 
-			# Apply control-specific configuration
 			_configure_control(control, control_config, control_type)
-
-			# Connect signals based on control type
 			_connect_control_signals(control, control_id, control_type, control_config)
 
-			# Store control with structure
 			active_controls[control_id] = {
 				"instance": control,
 				"parameter": control_config.get("parameter", ""),
-				"parameter_x": control_config.get("parameter_x", ""),  # For XY pads
-				"parameter_y": control_config.get("parameter_y", ""),  # For XY pads
+				"parameter_x": control_config.get("parameter_x", ""),
+				"parameter_y": control_config.get("parameter_y", ""),
 				"config": control_config,
 				"type": control_type
 			}
-
-			# Advance x position
-			if auto_spacing and col_idx < col_widths.size():
-				x_offset += col_widths[col_idx] + gap
-			elif col_spacing > 0:
-				x_offset += col_spacing
-
-		# Advance y position for next row
-		if auto_spacing and row_idx < row_heights.size():
-			y_offset += row_heights[row_idx] + gap
-		elif row_spacing > 0:
-			y_offset += row_spacing
 
 # Instantiate the correct control scene based on type
 func _instantiate_control(control_type: String, control_id: String) -> Node:

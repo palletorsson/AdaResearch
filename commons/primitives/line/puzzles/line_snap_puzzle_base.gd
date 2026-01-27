@@ -165,10 +165,11 @@ func _create_success_label() -> void:
 	success_label = Label3D.new()
 	success_label.name = "SuccessLabel"
 	success_label.text = success_message
-	success_label.font_size = 36
-	success_label.outline_size = 10
+	success_label.font_size = 64
+	success_label.outline_size = 16
 	success_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	success_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
+	success_label.outline_modulate = Color(0.0, 0.3, 0.0, 1.0)
 	success_label.visible = false
 	add_child(success_label)
 
@@ -256,8 +257,22 @@ func _complete_puzzle() -> void:
 	is_completed = true
 	print("LineSnapPuzzleBase: Puzzle completed!")
 
+	# Show success message IMMEDIATELY
+	if success_label:
+		success_label.visible = true
+		success_label.global_position = global_position + Vector3(0, 0.5, 0)
+
+	# Update instruction label immediately
+	if instruction_label:
+		instruction_label.text = success_message
+		instruction_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
+
 	# Play completion sound
 	_play_completion_sound()
+
+	# Emit signals immediately
+	all_lines_aligned.emit()
+	puzzle_completed.emit()
 
 	# Wait before cleanup
 	await get_tree().create_timer(1.0).timeout
@@ -285,26 +300,13 @@ func _complete_puzzle() -> void:
 		print("LineSnapPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, action])
 		TagSystem.trigger_tag_action(trigger_tag, action)
 
-	# Show success message
+	# Hide success message after display duration
+	await get_tree().create_timer(success_display_duration).timeout
 	if success_label:
-		success_label.visible = true
-		success_label.global_position = global_position + Vector3(0, 0.5, 0)
-
-		await get_tree().create_timer(success_display_duration).timeout
-		if success_label:
-			success_label.visible = false
-
-	# Update instruction label
-	if instruction_label:
-		instruction_label.text = success_message
-		instruction_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
-
-	# Emit signals
-	all_lines_aligned.emit()
-	puzzle_completed.emit()
+		success_label.visible = false
 
 func _play_completion_sound() -> void:
-	"""Play a happy sound when puzzle is completed"""
+	"""Play a happy sound when puzzle is completed (max 3 seconds)"""
 	if not has_node("/root/SoundBank"):
 		return
 
@@ -325,6 +327,13 @@ func _play_completion_sound() -> void:
 
 	player.finished.connect(player.queue_free)
 	player.play()
+
+	# Stop sound after 3 seconds max
+	get_tree().create_timer(3.0).timeout.connect(func():
+		if is_instance_valid(player):
+			player.stop()
+			player.queue_free()
+	)
 
 func get_completion_percentage() -> float:
 	"""Return percentage of lines complete (0.0 to 1.0)"""

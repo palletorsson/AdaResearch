@@ -13,7 +13,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0092692375, 0, 0)
 script = ExtResource("1")
 STEP_RISE = 0.11
 WAVE_AMPLITUDE = 0.45
-show_center_pole = true
+show_center_pole = false
 debug = true
 
 [node name="Camera3D" type="Camera3D" parent="."]

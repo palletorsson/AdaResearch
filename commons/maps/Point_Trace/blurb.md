@@ -1,1 +1,4 @@
-The Trace introduces duration and embodied residue into geometry. Unlike points and lines that resolve instantly into abstraction, traces accumulate over time as records of movement. The map emphasizes gesture, repetition, and error, foregrounding how space remembers interaction. The trace resists full discretization, functioning as a counterpoint to the clean logic of primitives and revealing geometry as a lived process rather than a static system.
+Now: duration. The trace records what the line forgets — your hand 
+moved through space, hesitated, curved, returned. Time accumulates 
+as visible residue. The line will compress this to two points. 
+The trace resists.

@@ -5,7 +5,7 @@ class_name FMPianoSynth
 ## Uses background threads for FM sample generation to prevent frame stutters.
 ## Manages a pool of AudioStreamPlayers and a thread-safe sample cache.
 
-@export var gain: float = 0.4
+@export var gain: float = 0.25  # Reduced for ambient clarity
 
 # Cache: "freq_velocity_sustain" -> AudioStreamWAV
 # Guarded by _cache_mutex
@@ -36,11 +36,11 @@ func _setup_reverb():
 		AudioServer.set_bus_name(idx, bus_name)
 		
 		var reverb = AudioEffectReverb.new()
-		reverb.room_size = 0.95 # Massive "Eno" Hall
-		reverb.damping = 0.1 # Minimal damping
+		reverb.room_size = 0.98  # Cathedral-like "Eno" Hall
+		reverb.damping = 0.15  # Slight high-frequency damping for warmth
 		reverb.spread = 1.0
-		reverb.dry = 0.6
-		reverb.wet = 0.7 # Air wash
+		reverb.dry = 0.4  # Less dry for more ambient wash
+		reverb.wet = 0.85  # More wet for floating quality
 		
 		AudioServer.add_bus_effect(idx, reverb)
 		

@@ -183,6 +183,18 @@ func is_data_loaded() -> bool:
 func get_current_map_name() -> String:
 	return map_name
 
+# Get map name from loaded data (for display)
+func get_map_name() -> String:
+	if json_loader:
+		return json_loader.get_map_name()
+	return map_name
+
+# Get map description from loaded data
+func get_description() -> String:
+	if json_loader:
+		return json_loader.get_map_description()
+	return ""
+
 # Get current format
 func get_current_format() -> String:
 	return current_map_format

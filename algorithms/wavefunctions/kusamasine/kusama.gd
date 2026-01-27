@@ -104,30 +104,76 @@ func _process(delta):
 func _generate_audio_samples():
 	if not playback:
 		return
-		
+
 	var frames_available = playback.get_frames_available()
 	if frames_available < 1:
 		return
-		
+
+	# Kusama-style ethereal infinity sound
+	# Dreamy, hypnotic drones with polka-dot pulsing
+
+	# Base frequencies - ethereal chord (Cm7 voicing for dreamy quality)
+	var base_freqs = [
+		130.81,  # C3 - root
+		155.56,  # Eb3 - minor third
+		196.00,  # G3 - fifth
+		233.08,  # Bb3 - minor seventh
+	]
+
+	# Master volume - soft and dreamy
+	var master_vol = 0.08 * (0.6 + morphing_amplitude * 0.4)
+
 	for i in range(frames_available):
-		# Base frequency modulated by animation intensity and slow sine
-		var freq = 220.0 + sin(time * 0.5) * 50.0 + animation_intensity * 20.0
-		
-		# "Shimmer" effect matching the dots: add high frequency modulation
-		var shimmer = sin(audio_phase * 5.0) * 0.2
-		
-		# Amplitude modulated by morphing
-		var amp = 0.3 * (0.5 + morphing_amplitude * 0.5)
-		
-		# Simple sine wave synthesis
-		var sample = sin(audio_phase * 2.0 * PI * freq / SAMPLE_RATE + shimmer) * amp
-		
+		var t = time + float(i) / SAMPLE_RATE
+		var sample = 0.0
+
+		# Layer 1: Ethereal pad - soft detuned voices
+		for j in range(base_freqs.size()):
+			var freq = base_freqs[j]
+			# Subtle detuning for richness (infinity feel)
+			var detune = 1.0 + sin(t * 0.1 + j * 1.5) * 0.003
+			freq *= detune
+
+			# Phase for this voice
+			var phase = t * freq
+
+			# Soft sine with gentle harmonics
+			var voice = sin(phase * TAU) * 0.4
+			voice += sin(phase * TAU * 2.0) * 0.15  # Soft octave
+			voice += sin(phase * TAU * 3.0) * 0.05  # Touch of fifth harmonic
+
+			# Gentle tremolo (polka dot pulsing)
+			var tremolo = 0.7 + 0.3 * sin(t * (1.5 + j * 0.3))
+
+			sample += voice * tremolo * 0.25
+
+		# Layer 2: High ethereal shimmer - very soft
+		var shimmer_freq = 523.25  # C5 - high octave
+		var shimmer_phase = t * shimmer_freq
+		var shimmer = sin(shimmer_phase * TAU) * 0.1
+		shimmer += sin(shimmer_phase * TAU * 1.5) * 0.05  # Fifth
+		# Slow breathing on shimmer
+		shimmer *= 0.4 + 0.6 * sin(t * 0.3) * sin(t * 0.3)
+		sample += shimmer * 0.15
+
+		# Layer 3: Deep sub-bass drone (infinity depth)
+		var sub_freq = 65.41  # C2 - low octave
+		var sub_phase = t * sub_freq
+		var sub = sin(sub_phase * TAU) * 0.3
+		# Very slow pulse
+		sub *= 0.5 + 0.5 * sin(t * 0.2)
+		sample += sub * 0.2
+
+		# Apply master volume with soft limiting
+		sample *= master_vol
+		sample = tanh(sample * 2.0) * 0.5  # Soft saturation
+
 		playback.push_frame(Vector2(sample, sample))
-		
-		# Increment phase
-		audio_phase += 1.0
-		if audio_phase > SAMPLE_RATE:
-			audio_phase -= SAMPLE_RATE
+
+	# Update phase tracking for continuity (not critical with t-based synthesis)
+	audio_phase += frames_available
+	if audio_phase > SAMPLE_RATE * 10.0:
+		audio_phase -= SAMPLE_RATE * 10.0
 
 
 func generate_ultra_vivid_sculpture():

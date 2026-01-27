@@ -27,6 +27,8 @@ script = ExtResource("1_script")
 texture_size = Vector2i(1024, 1024)
 default_brush_size = 5
 default_snap_grid_size = 1024
+wet_paint = true
+flow_speed = 0.0005
 
 [node name="Label3D" type="Label3D" parent="CanvasBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

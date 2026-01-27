@@ -29,7 +29,7 @@ func _ready() -> void:
 	print("ParallelLinePuzzle: 2 lines, 4 vertices, constraints: PARALLEL")
 
 func _complete_puzzle() -> void:
-	var display = get_node_or_null("CategoryLogicDisplay")
+	var display = get_node_or_null("ParallelLogicDisplay")
 	if display:
 		display.visible = false
 	super._complete_puzzle()

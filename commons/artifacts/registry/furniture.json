@@ -161,6 +161,20 @@
 			"config": {
 				"workstation_type": 3
 			}
+		},
+		"world_map_tablet": {
+			"name": "World Map Tablet",
+			"lookup_name": "world_map_tablet",
+			"description": "Metro-style map showing your learning journey. 6 colored lines represent QFEP layers. Stations unlock as you complete sequences.",
+			"scene": "res://commons/scenes/world_map/WorldMapOverview3D.tscn",
+			"category": "navigation"
+		},
+		"audio_catalog_tablet": {
+			"name": "Audio Catalog Tablet",
+			"lookup_name": "audio_catalog_tablet",
+			"description": "Handheld sound library. Browse 73+ audio presets across 15 categories, preview sounds, edit parameters in VR.",
+			"scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
+			"category": "audio"
 		}
 	}
 }
