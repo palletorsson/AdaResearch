@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6as742it1fm1"]
+
+[ext_resource type="Script" uid="uid://nmu3rhpdnh30" path="res://commons/primitives/puzzles/rotation_match_puzzle.gd" id="1_script"]
+
+[node name="RotationMatchPuzzle" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0860395)

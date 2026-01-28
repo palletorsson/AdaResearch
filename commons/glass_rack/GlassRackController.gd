@@ -1,16 +1,12 @@
 # GlassRackController.gd - Modular Glass Apparatus System
-# Like the audio rack but for laboratory glassware
-# JSON config defines segments, connections, and layout
-extends Node3D
+# Extends TurtlePipeBase for turtle-graphics pipe building
+# Specialized for laboratory glassware with transparency and liquid flow
+extends TurtlePipeBase
 class_name GlassRackController
 
 signal apparatus_built
 signal liquid_flow_started
 signal liquid_flow_stopped
-
-@export_file("*.json") var config_path: String = ""
-@export var auto_build: bool = true
-@export var rack_scale: float = 1.0
 
 @export_group("Glass Material")
 @export var glass_color: Color = Color(0.85, 0.92, 1.0, 0.25)
@@ -22,29 +18,16 @@ signal liquid_flow_stopped
 @export var show_liquid: bool = true
 @export var liquid_flow_speed: float = 1.0
 
-# Segment scenes (procedurally generated)
-const SEGMENT_SCRIPTS = {
-	"straight": "res://commons/glass_rack/segments/glass_straight.gd",
-	"spiral": "res://commons/glass_rack/segments/glass_spiral.gd",
-	"wobbly": "res://commons/glass_rack/segments/glass_wobbly.gd",
-	"flask": "res://commons/glass_rack/segments/glass_flask.gd",
-	"junction": "res://commons/glass_rack/segments/glass_junction.gd",
-	"corner": "res://commons/glass_rack/segments/glass_corner.gd",
-}
-
-var config_data: Dictionary = {}
-var active_segments: Dictionary = {}  # id -> node
+# Materials
 var glass_material: StandardMaterial3D
 var liquid_material: StandardMaterial3D
 
-# Turtle state for path-based building
-var cursor_pos: Vector3 = Vector3.ZERO
-var cursor_basis: Basis = Basis.IDENTITY
-
 func _ready() -> void:
+	# Set glass-appropriate defaults
+	pipe_radius = 0.02
+	segment_length = 0.3
 	_setup_materials()
-	if auto_build and config_path != "":
-		load_config(config_path)
+	super._ready()
 
 func _setup_materials() -> void:
 	# Glass material
@@ -66,200 +49,81 @@ func _setup_materials() -> void:
 	liquid_material.emission = liquid_color
 	liquid_material.emission_energy_multiplier = 0.5
 
-func load_config(path: String) -> void:
-	var file = FileAccess.open(path, FileAccess.READ)
-	if not file:
-		push_error("GlassRackController: Failed to open config: %s" % path)
-		return
+# =============================================================================
+# COMMAND REGISTRATION
+# =============================================================================
 
-	var json = JSON.new()
-	var parse_result = json.parse(file.get_as_text())
-	file.close()
+func _register_custom_commands() -> void:
+	_command_handlers["spiral"] = _cmd_spiral
+	_command_handlers["coil"] = _cmd_spiral
+	_command_handlers["wobbly"] = _cmd_wobbly
+	_command_handlers["wavy"] = _cmd_wobbly
+	_command_handlers["flask"] = _cmd_flask
+	_command_handlers["bulb"] = _cmd_flask
+	_command_handlers["junction"] = _cmd_junction
+	_command_handlers["t"] = _cmd_junction
+	_command_handlers["tee"] = _cmd_junction
 
-	if parse_result != OK:
-		push_error("GlassRackController: JSON parse error: %s" % json.get_error_message())
-		return
-
-	config_data = json.data
-	build_apparatus()
-
-func load_config_from_dict(data: Dictionary) -> void:
-	config_data = data
-	build_apparatus()
-
-func build_apparatus() -> void:
-	# Clear existing
-	_clear_apparatus()
-
-	if config_data.is_empty():
-		return
-
-	# Reset cursor
-	cursor_pos = Vector3.ZERO
-	cursor_basis = Basis.IDENTITY
-
-	# Get rack info
-	var rack_info = config_data.get("rack_info", {})
-	var layout = config_data.get("layout", {})
-
-	# Build using either path code or segment definitions
-	if config_data.has("path"):
-		_build_from_path(config_data["path"])
-	elif config_data.has("segments"):
-		_build_from_segments(config_data["segments"])
-
-	# Apply layout settings
-	if layout.has("position"):
-		var pos = layout["position"]
-		position = Vector3(pos[0], pos[1], pos[2]) if pos is Array else Vector3.ZERO
-
-	apparatus_built.emit()
-
-func _build_from_path(path_code: String) -> void:
-	# Turtle-graphics style: "f,f,spiral,l,f,flask,r,f,wobbly"
-	var commands = path_code.split(",")
-	var segment_length = config_data.get("layout", {}).get("segment_length", 0.3) * rack_scale
-
-	for i in range(commands.size()):
-		var cmd = commands[i].strip_edges().to_lower()
-		var segment_id = "seg_%d" % i
-
-		match cmd:
-			"f", "forward", "straight":
-				_add_segment(segment_id, "straight", {"length": segment_length})
-			"spiral", "coil":
-				_add_segment(segment_id, "spiral", {"height": segment_length * 2})
-			"wobbly", "wavy":
-				_add_segment(segment_id, "wobbly", {"length": segment_length * 2})
-			"flask", "bulb":
-				_add_segment(segment_id, "flask", {"radius": segment_length * 0.5})
-			"junction", "t", "tee":
-				_add_segment(segment_id, "junction", {})
-			"l", "left":
-				_add_corner(segment_id, Vector3.UP, 90)
-			"r", "right":
-				_add_corner(segment_id, Vector3.UP, -90)
-			"u", "up":
-				_add_corner(segment_id, Vector3.RIGHT, 90)
-			"d", "down":
-				_add_corner(segment_id, Vector3.RIGHT, -90)
-
-func _build_from_segments(segments: Array) -> void:
-	# Grid-based or explicit position segments
-	for seg_def in segments:
-		var seg_id = seg_def.get("id", "seg_%d" % active_segments.size())
-		var seg_type = seg_def.get("type", "straight")
-		var params = seg_def.get("params", {})
-
-		# Position modes
-		if seg_def.has("position"):
-			var pos = seg_def["position"]
-			cursor_pos = Vector3(pos[0], pos[1], pos[2]) * rack_scale
-
-		if seg_def.has("rotation"):
-			var rot = seg_def["rotation"]
-			cursor_basis = Basis.from_euler(Vector3(
-				deg_to_rad(rot[0]) if rot.size() > 0 else 0,
-				deg_to_rad(rot[1]) if rot.size() > 1 else 0,
-				deg_to_rad(rot[2]) if rot.size() > 2 else 0
-			))
-
-		_add_segment(seg_id, seg_type, params)
-
-		# Connect to previous if specified
-		if seg_def.has("connect_to"):
-			_connect_segments(seg_def["connect_to"], seg_id)
-
-func _add_segment(id: String, type: String, params: Dictionary) -> Node3D:
-	var segment: Node3D
-
-	match type:
-		"straight":
-			segment = _create_straight_segment(params)
-		"spiral":
-			segment = _create_spiral_segment(params)
-		"wobbly":
-			segment = _create_wobbly_segment(params)
-		"flask":
-			segment = _create_flask_segment(params)
-		"junction":
-			segment = _create_junction_segment(params)
-		"corner":
-			segment = _create_corner_segment(params)
-		_:
-			push_warning("GlassRackController: Unknown segment type: %s" % type)
-			return null
-
+func _cmd_spiral() -> void:
+	var segment = _create_segment("spiral", {"height": segment_length * 2})
 	if segment:
-		segment.name = id
-		segment.position = cursor_pos
-		segment.transform.basis = cursor_basis
-		add_child(segment)
-		active_segments[id] = segment
+		_place_segment(segment)
+		cursor_pos += Vector3.UP * segment_length * 2
 
-		# Advance cursor based on segment
-		_advance_cursor(type, params)
-
-	return segment
-
-func _add_corner(id: String, axis: Vector3, angle_deg: float) -> void:
-	var segment = _create_corner_segment({"axis": axis, "angle": angle_deg})
+func _cmd_wobbly() -> void:
+	var segment = _create_segment("wobbly", {"length": segment_length * 2})
 	if segment:
-		segment.name = id
-		segment.position = cursor_pos
-		segment.transform.basis = cursor_basis
-		add_child(segment)
-		active_segments[id] = segment
+		_place_segment(segment)
+		_advance_cursor_forward(segment_length * 2)
 
-		# Update cursor for corner
-		var radius = config_data.get("layout", {}).get("segment_length", 0.3) * rack_scale
-		var forward = cursor_basis.z
-		var up = cursor_basis.y
-		var right = cursor_basis.x
+func _cmd_flask() -> void:
+	var segment = _create_segment("flask", {"radius": segment_length * 0.5})
+	if segment:
+		_place_segment(segment)
+		_advance_cursor_forward(segment_length)
 
-		if axis == Vector3.UP:
-			if angle_deg > 0:  # Left
-				cursor_pos += forward * radius - right * radius
-				cursor_basis = cursor_basis.rotated(cursor_basis.y, deg_to_rad(90))
-			else:  # Right
-				cursor_pos += forward * radius + right * radius
-				cursor_basis = cursor_basis.rotated(cursor_basis.y, deg_to_rad(-90))
-		elif axis == Vector3.RIGHT:
-			if angle_deg > 0:  # Up
-				cursor_pos += forward * radius + up * radius
-				cursor_basis = cursor_basis.rotated(cursor_basis.x, deg_to_rad(-90))
-			else:  # Down
-				cursor_pos += forward * radius - up * radius
-				cursor_basis = cursor_basis.rotated(cursor_basis.x, deg_to_rad(90))
-
-func _advance_cursor(type: String, params: Dictionary) -> void:
-	var segment_length = config_data.get("layout", {}).get("segment_length", 0.3) * rack_scale
-	var forward = cursor_basis.z
-
-	match type:
-		"straight":
-			var length = params.get("length", segment_length)
-			cursor_pos += forward * length
-		"spiral":
-			var height = params.get("height", segment_length * 2)
-			cursor_pos += Vector3.UP * height
-		"wobbly":
-			var length = params.get("length", segment_length * 2)
-			cursor_pos += forward * length
-		"flask":
-			var radius = params.get("radius", segment_length * 0.5)
-			cursor_pos += forward * radius * 2
-		"junction":
-			cursor_pos += forward * segment_length
+func _cmd_junction() -> void:
+	var segment = _create_segment("junction", {})
+	if segment:
+		_place_segment(segment)
+		_advance_cursor_forward(segment_length)
 
 # =============================================================================
 # SEGMENT CREATION
 # =============================================================================
 
+func _create_segment(segment_type: String, params: Dictionary) -> Node3D:
+	var scaled_params = _scale_params(params)
+
+	match segment_type:
+		"straight":
+			return _create_straight_segment(scaled_params)
+		"spiral":
+			return _create_spiral_segment(scaled_params)
+		"wobbly":
+			return _create_wobbly_segment(scaled_params)
+		"flask":
+			return _create_flask_segment(scaled_params)
+		"junction":
+			return _create_junction_segment(scaled_params)
+		"corner":
+			return _create_corner_segment(scaled_params)
+		_:
+			push_warning("GlassRackController: Unknown segment type: %s" % segment_type)
+			return null
+
+func _scale_params(params: Dictionary) -> Dictionary:
+	# Apply rack scale to dimension parameters
+	var scaled = params.duplicate()
+	for key in ["length", "height", "radius", "spiral_radius", "tube_radius", "corner_radius"]:
+		if scaled.has(key):
+			scaled[key] = scaled[key]
+	return scaled
+
 func _create_straight_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var length = params.get("length", 0.3) * rack_scale
-	var radius = params.get("radius", 0.02) * rack_scale
+	var length = params.get("length", segment_length)
+	var radius = params.get("radius", pipe_radius)
 
 	var mesh_instance = MeshInstance3D.new()
 	var cylinder = CylinderMesh.new()
@@ -288,9 +152,9 @@ func _create_straight_segment(params: Dictionary) -> Node3D:
 
 func _create_spiral_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var height = params.get("height", 0.5) * rack_scale
-	var spiral_radius = params.get("spiral_radius", 0.1) * rack_scale
-	var tube_radius = params.get("tube_radius", 0.015) * rack_scale
+	var height = params.get("height", 0.5)
+	var spiral_radius = params.get("spiral_radius", 0.1)
+	var tube_radius = params.get("tube_radius", pipe_radius * 0.75)
 	var turns = params.get("turns", 4)
 	var resolution = params.get("resolution", 24)
 
@@ -311,9 +175,9 @@ func _create_spiral_segment(params: Dictionary) -> Node3D:
 
 func _create_wobbly_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var length = params.get("length", 0.5) * rack_scale
-	var tube_radius = params.get("tube_radius", 0.02) * rack_scale
-	var amplitude = params.get("amplitude", 0.05) * rack_scale
+	var length = params.get("length", 0.5)
+	var tube_radius = params.get("tube_radius", pipe_radius)
+	var amplitude = params.get("amplitude", 0.05)
 	var frequency = params.get("frequency", 3.0)
 
 	var mesh = _generate_wobbly_mesh(length, tube_radius, amplitude, frequency)
@@ -333,9 +197,9 @@ func _create_wobbly_segment(params: Dictionary) -> Node3D:
 
 func _create_flask_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var flask_radius = params.get("radius", 0.08) * rack_scale
-	var neck_radius = params.get("neck_radius", 0.02) * rack_scale
-	var neck_length = params.get("neck_length", 0.1) * rack_scale
+	var flask_radius = params.get("radius", 0.08)
+	var neck_radius = params.get("neck_radius", pipe_radius)
+	var neck_length = params.get("neck_length", 0.1)
 
 	# Flask body (sphere)
 	var body = MeshInstance3D.new()
@@ -373,8 +237,8 @@ func _create_flask_segment(params: Dictionary) -> Node3D:
 
 func _create_junction_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var radius = params.get("radius", 0.02) * rack_scale
-	var length = params.get("length", 0.15) * rack_scale
+	var radius = params.get("radius", pipe_radius)
+	var length = params.get("length", segment_length * 0.5)
 
 	# Main tube (forward)
 	var main_tube = MeshInstance3D.new()
@@ -410,8 +274,8 @@ func _create_junction_segment(params: Dictionary) -> Node3D:
 
 func _create_corner_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
-	var radius = params.get("radius", 0.02) * rack_scale
-	var corner_radius = params.get("corner_radius", 0.1) * rack_scale
+	var radius = params.get("radius", pipe_radius)
+	var corner_radius = params.get("corner_radius", segment_length)
 
 	var mesh = _generate_corner_mesh(radius, corner_radius)
 	var mesh_instance = MeshInstance3D.new()
@@ -557,22 +421,12 @@ func _add_tube_faces(st: SurfaceTool, rings: Array, sides: int) -> void:
 			st.set_normal(face_normal)
 			st.add_vertex(v3)
 
-func _connect_segments(_from_id: String, _to_id: String) -> void:
-	# Future: Add connecting tube between segments
-	pass
-
-func _clear_apparatus() -> void:
-	for child in get_children():
-		child.queue_free()
-	active_segments.clear()
-
 # =============================================================================
 # LIQUID ANIMATION
 # =============================================================================
 
 func start_liquid_flow() -> void:
 	liquid_flow_started.emit()
-	# Future: Animate liquid through segments
 
 func stop_liquid_flow() -> void:
 	liquid_flow_stopped.emit()
@@ -582,14 +436,7 @@ func stop_liquid_flow() -> void:
 # =============================================================================
 
 func apply_grid_config(config: Dictionary) -> void:
-	# Called by GridInteractablesComponent when placed on map
-	# config format: {"config": "simple_tube"} from "GlassRack#config:simple_tube"
-	if config.has("config"):
-		var config_name = config["config"]
-		var config_file = "res://commons/glass_rack/configs/%s.json" % config_name
-		load_config(config_file)
-
-	# Also support direct parameters
+	# Handle glass-specific config first
 	if config.has("glass_color") and config["glass_color"] is Array:
 		var c = config["glass_color"]
 		glass_color = Color(c[0], c[1], c[2], c[3] if c.size() > 3 else 0.25)
@@ -603,5 +450,27 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("show_liquid"):
 		show_liquid = config["show_liquid"]
 
-	if config.has("rack_scale"):
-		rack_scale = config["rack_scale"]
+	# Call base class for path/config handling
+	super.apply_grid_config(config)
+
+func _get_config_directory() -> String:
+	return "res://commons/glass_rack/configs"
+
+# =============================================================================
+# LEGACY COMPATIBILITY
+# =============================================================================
+
+## Load config from file path (legacy API)
+func load_config(path: String) -> void:
+	super.load_config(path)
+	apparatus_built.emit()
+
+## Load config from dictionary (legacy API)
+func load_config_from_dict(data: Dictionary) -> void:
+	super.load_config_from_dict(data)
+	apparatus_built.emit()
+
+## Build apparatus (legacy API - now calls generate_from_code)
+func build_apparatus() -> void:
+	# For backwards compatibility with old configs
+	pass

@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8xmjk2qf4l6n"]
+
+[ext_resource type="PackedScene" uid="uid://bnfmsrmelyuhq" path="res://commons/primitives/cubes/grab_stick.tscn" id="1_grab_stick"]
+[ext_resource type="Script" path="res://commons/primitives/laser_measure/laser_measure.gd" id="2_laser_measure"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(0.04, 0.025, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+albedo_color = Color(0.02, 0.02, 0.02, 1)
+metallic = 0.1
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_lens"]
+size = Vector3(0.015, 0.015, 0.008)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lens"]
+shading_mode = 0
+albedo_color = Color(0.3, 0.05, 0.05, 1)
+emission_enabled = true
+emission = Color(0.8, 0.1, 0.1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ring"]
+top_radius = 0.012
+bottom_radius = 0.012
+height = 0.004
+radial_segments = 16
+
+[node name="GrabLaserMeasure" instance=ExtResource("1_grab_stick")]
+freeze = true
+ranged_grab_method = 1
+second_hand_grab = 0
+
+[node name="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+
+[node name="LaserMeasure#Body" type="MeshInstance3D" parent="MeshInstance3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.02)
+mesh = SubResource("BoxMesh_body")
+surface_material_override/0 = SubResource("StandardMaterial3D_body")
+
+[node name="LaserMeasure#Lens" type="MeshInstance3D" parent="MeshInstance3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("BoxMesh_lens")
+surface_material_override/0 = SubResource("StandardMaterial3D_lens")
+
+[node name="LaserMeasure#Ring" type="MeshInstance3D" parent="MeshInstance3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, -0.044)
+mesh = SubResource("CylinderMesh_ring")
+surface_material_override/0 = SubResource("StandardMaterial3D_lens")
+
+[node name="LaserMeasure" type="Node3D" parent="MeshInstance3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
+script = ExtResource("2_laser_measure")
+max_range = 50.0
+scan_frequency = 30.0
+unit = "m"
+decimal_places = 2
+show_laser = true
+laser_color = Color(1, 0.1, 0.1, 0.9)
+laser_hit_color = Color(0.1, 1, 0.3, 0.9)
+laser_thickness = 0.002
+show_hit_dot = true
+hit_dot_size = 0.015
+
+[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D/LaserMeasure" index="0"]
+target_position = Vector3(0, 0, -50)
+
+[node name="HighlightRing" parent="." index="2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.08)
+
+[node name="GrabPointHandLeft" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0, 0.04)
+visible = true
+
+[node name="GrabPointHandRight" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0, 0.04)

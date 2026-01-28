@@ -29,8 +29,10 @@ enum ReliefType {
 @export_group("Piece Configuration")
 @export var piece_scene: PackedScene
 @export var auto_spawn_pieces: bool = true
+@export var use_direct_mesh: bool = true  # Create pieces as direct box meshes (matches ghost size exactly)
 @export var workbench_offset: Vector3 = Vector3(0.35, 0.1, 0.25)  # Moved back to stay on platform
 @export var extra_pieces: int = 3
+@export var pieces_all_white: bool = true  # Make all pieces white (neutral) for placement
 
 ## Color Palette (Biederman-style)
 @export_group("Color Palette")
@@ -252,10 +254,50 @@ func _setup_constructivist_targets() -> void:
 		piece_colors[bar[0]] = soviet_palette[bar[6]]
 
 
+## Pickable scene for grabbable pieces
+var pickable_scene: PackedScene = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+
+
+## Create a direct box mesh piece with exact size (no scaling needed)
+func _create_direct_mesh_piece(piece_name: String, size: Vector3, color: Color) -> Node3D:
+	# Use XR Tools pickable as base for grab functionality
+	var piece = pickable_scene.instantiate()
+	piece.name = piece_name
+
+	# Make piece float (no gravity)
+	if piece is RigidBody3D:
+		piece.gravity_scale = 0.0
+
+	# Find and update collision shape
+	var collision = piece.get_node_or_null("CollisionShape3D")
+	if collision:
+		var shape = BoxShape3D.new()
+		shape.size = size
+		collision.shape = shape
+
+	# Find existing mesh or create new one
+	var mesh_instance = piece.get_node_or_null("MeshInstance3D")
+	if not mesh_instance:
+		mesh_instance = MeshInstance3D.new()
+		mesh_instance.name = "MeshInstance3D"
+		piece.add_child(mesh_instance)
+
+	var box = BoxMesh.new()
+	box.size = size  # Use size directly, not as scale
+	mesh_instance.mesh = box
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.roughness = 0.7
+	mesh_instance.material_override = mat
+
+	return piece
+
+
 ## Spawn pieces at workbench
 func _spawn_pieces() -> void:
-	if not piece_scene:
-		push_error("ReliefAssemblyPuzzle: No piece_scene assigned!")
+	if not use_direct_mesh and not piece_scene:
+		push_error("ReliefAssemblyPuzzle: No piece_scene assigned and use_direct_mesh is false!")
 		return
 
 	var total_pieces = piece_targets.size() + extra_pieces
@@ -264,44 +306,55 @@ func _spawn_pieces() -> void:
 	for i in range(piece_targets.size()):
 		var target = piece_targets[i]
 		var spawn_pos = piece_spawn_positions[i] if i < piece_spawn_positions.size() else workbench_offset + Vector3(i * 0.12, 0, 0)
+		var color = Color.WHITE if pieces_all_white else piece_colors.get(target.piece_id, Color.WHITE)
 
-		var piece = piece_scene.instantiate()
-		piece.name = "Piece_" + target.piece_id
+		var piece: Node3D
+		if use_direct_mesh:
+			# Create box mesh with exact target size
+			piece = _create_direct_mesh_piece("Piece_" + target.piece_id, target.target_scale, color)
+		else:
+			# Use piece_scene and scale it
+			piece = piece_scene.instantiate()
+			piece.name = "Piece_" + target.piece_id
+			piece.scale = target.target_scale
+			if piece.has_method("set_scale_index"):
+				piece.set_scale_index(2)
+			_set_piece_color(piece, color)
+
 		add_child(piece)
-
 		piece.position = spawn_pos
-		piece.scale = Vector3.ONE * 0.1
-
-		if piece.has_method("set_scale_index"):
-			piece.set_scale_index(2)
-
-		# Set piece color if it has the method
-		var color = piece_colors.get(target.piece_id, Color.WHITE)
-		_set_piece_color(piece, color)
 
 		register_piece(target.piece_id, piece)
 		relief_pieces.append(piece)
 
-		print("ReliefAssemblyPuzzle: Spawned piece '%s' (color: %s)" % [target.piece_id, color])
+		print("ReliefAssemblyPuzzle: Spawned piece '%s' size=%s" % [target.piece_id, target.target_scale])
 
-	# Spawn extra pieces
+	# Spawn extra pieces (use average target size)
+	var avg_size = Vector3(0.15, 0.15, 0.05)  # Default size for extras
+	if piece_targets.size() > 0:
+		var total_size = Vector3.ZERO
+		for t in piece_targets:
+			total_size += t.target_scale
+		avg_size = total_size / piece_targets.size()
+
 	for i in range(extra_pieces):
 		var spawn_idx = piece_targets.size() + i
 		var spawn_pos = piece_spawn_positions[spawn_idx] if spawn_idx < piece_spawn_positions.size() else workbench_offset + Vector3(spawn_idx * 0.12, 0, 0)
+		var color = Color.WHITE if pieces_all_white else palette[i % palette.size()]
 
-		var piece = piece_scene.instantiate()
-		piece.name = "Piece_extra_%d" % i
+		var piece: Node3D
+		if use_direct_mesh:
+			piece = _create_direct_mesh_piece("Piece_extra_%d" % i, avg_size, color)
+		else:
+			piece = piece_scene.instantiate()
+			piece.name = "Piece_extra_%d" % i
+			piece.scale = avg_size
+			if piece.has_method("set_scale_index"):
+				piece.set_scale_index(2)
+			_set_piece_color(piece, color)
+
 		add_child(piece)
-
 		piece.position = spawn_pos
-		piece.scale = Vector3.ONE * 0.1
-
-		if piece.has_method("set_scale_index"):
-			piece.set_scale_index(2)
-
-		# Random color for extra pieces
-		var color = palette[i % palette.size()]
-		_set_piece_color(piece, color)
 
 		register_piece("extra_%d" % i, piece)
 		relief_pieces.append(piece)
@@ -440,6 +493,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			print("ReliefAssemblyPuzzle: Changing relief type to %s" % get_relief_type_name())
 			relief_type = new_type
 			_rebuild_for_new_type()
+
+	# Piece color config: white:true or colored:true
+	if config_data.has("white"):
+		pieces_all_white = str(config_data["white"]).to_lower() != "false"
+	if config_data.has("colored"):
+		pieces_all_white = str(config_data["colored"]).to_lower() != "true"
+
+	# Mesh mode: direct_mesh:true (default) or direct_mesh:false to use piece_scene
+	if config_data.has("direct_mesh"):
+		use_direct_mesh = str(config_data["direct_mesh"]).to_lower() != "false"
 
 	# Shorthand configs: just the key name without value
 	# e.g., #biederman, #mondrian

@@ -46,51 +46,44 @@ func _create_blocking_obstacle(
 	slide_max: float,
 	color: Color
 ) -> Node3D:
-	# Create the slider node
-	var slider = RigidBody3D.new()
+	# Instantiate the axis_slider scene (includes XRToolsPickable setup)
+	var axis_slider_scene = load("res://commons/primitives/translation/axis_slider.tscn")
+	var slider = axis_slider_scene.instantiate()
+
 	slider.position = start_pos
-	slider.collision_layer = 2
-	slider.collision_mask = 1
-	slider.gravity_scale = 0.0
-	slider.freeze = true
 
-	# Attach axis_slider script
-	var script = load("res://commons/primitives/translation/axis_slider.gd")
-	slider.set_script(script)
-	slider.set("slide_axis", axis)
-	slider.set("slide_min", slide_min)
-	slider.set("slide_max", slide_max)
-	slider.set("snap_to_grid", false)
-	slider.set("show_rail", true)
-	slider.set("alter_freeze", false)
-	slider.set("freeze", true)
+	# Configure axis restriction
+	slider.slide_axis = axis
+	slider.slide_min = slide_min
+	slider.slide_max = slide_max
+	slider.snap_to_grid = false
+	slider.show_rail = true
+	slider.show_position_marker = false
 
-	# Create mesh
-	var mesh_instance = MeshInstance3D.new()
-	var box_mesh = BoxMesh.new()
-	box_mesh.size = size
-	mesh_instance.mesh = box_mesh
+	# Get the mesh instance and update it with custom size
+	var mesh_instance = slider.get_node_or_null("MeshInstance3D")
+	if mesh_instance:
+		var box_mesh = BoxMesh.new()
+		box_mesh.size = size
+		mesh_instance.mesh = box_mesh
 
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.emission_enabled = true
-	material.emission = color * 0.5
-	material.roughness = 1.0
-	material.metallic = 0.0
-	material.metallic_specular = 0.0
-	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
-	mesh_instance.material_override = material
+		var material = StandardMaterial3D.new()
+		material.albedo_color = color
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.emission_enabled = true
+		material.emission = color * 0.5
+		material.roughness = 1.0
+		material.metallic = 0.0
+		material.metallic_specular = 0.0
+		material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
+		mesh_instance.material_override = material
 
-	slider.add_child(mesh_instance)
-	mesh_instance.name = "MeshInstance3D"
-
-	# Create collision
-	var collision = CollisionShape3D.new()
-	var box_shape = BoxShape3D.new()
-	box_shape.size = size
-	collision.shape = box_shape
-	slider.add_child(collision)
+	# Update collision shape to match size
+	var collision = slider.get_node_or_null("CollisionShape3D")
+	if collision:
+		var box_shape = BoxShape3D.new()
+		box_shape.size = size
+		collision.shape = box_shape
 
 	return slider
 

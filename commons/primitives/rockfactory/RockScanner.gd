@@ -14,7 +14,6 @@ var scan_direction: float = 1.0
 
 func _ready():
 	create_scan_plane()
-	# create_display_canvas()  # Disabled - only show scanning plane
 	current_height = scan_range.x
 
 func _process(delta):
@@ -32,7 +31,6 @@ func _process(delta):
 
 		scan_height = current_height
 		update_scan_plane()
-		# update_cross_section_display()  # Disabled
 
 func create_scan_plane():
 	"""Create visual plane that shows scan position"""

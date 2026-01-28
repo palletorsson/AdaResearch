@@ -28,6 +28,7 @@
 			"`modulor_man_demo` at (0,7)",
 			"`line_builder_3d` at (3,9)",
 			"`dark_sphere` enclosure at (3,3)",
+			"`laser_measure` at (0,3) - distance measurement tool",
 			"Teleporter `t` at (5,8)"
 		]
 	},
@@ -72,17 +73,17 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "line_demo:90", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],	
-			[" ", " ", " ", " ", " ", " ", " "],					
-			[" ", " ", " ", " ", " ", " ", " "],					
+			[" ", " ", " ", " ", " ", " ", " "],
+			["", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "", " ", " ", " ", " ", " "],
 			[" ", " ", "plus_line_puzzle:0:1.2:0#plusfillhole:remove", " ", "parallel_line_puzzle:0:1.2:0#fillhole:remove", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_scene:0:0:0.90#group:plusfillhole", " ", "cube_scene:0:0:0.90#group:fillhole", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
-			["cube_scene:0:1:0.6", "line:0:1", " ", " ", " ", " ", " "],			
-			["cube_scene:0:1:0.4", "line:0:1", " ", " ", " ", " ",  " ", "line_builder_3d:90:1:0.8"],
-			["cube_scene:0:1:0.2", "line:0:1", " ", " ", " ", " ", " "],
+			["cube_scene:0:1:0.6", "line:0:1", " ", " ", "laser_measure:0:1", " ", " "],			
+			["cube_scene:0:1:0.4", "line:0:1", " ", " ", "laser_measure:0:1", " ",  " ", "line_builder_3d:90:1:0.8"],
+			["cube_scene:0:1:0.2", "line:0:1", " ", " ", "laser_measure:0:1", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -111,6 +112,7 @@
 	},
 	"subtitles": {
 			"line_measures": "The line measures because it has no room to escape comparison.",
+			"laser_distance": "Distance is the first gift of the line: a number that speaks of separation."
 		},
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],

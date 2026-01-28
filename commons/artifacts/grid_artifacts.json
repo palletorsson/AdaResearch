@@ -9,6 +9,12 @@
 			"description": "Walkable Möbius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
 			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn"
 		},
+		"rotation_match_puzzle": {
+			"name": "Rotation Match Puzzle",
+			"lookup_name": "rotation_match_puzzle",
+			"description": "Vera Molnár-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
+			"scene": "res://commons/primitives/puzzles/rotation_match_puzzle.tscn"
+		},
 		"player_presence_indicator": {
 			"name": "player_presence_indicator",
 			"lookup_name": "player_presence_indicator",
@@ -1447,8 +1453,20 @@
 		"GlassRack": {
 			"name": "GlassRack",
 			"lookup_name": "GlassRack",
-			"description": "Modular glass apparatus system - configurable lab glassware with spiral, wobbly, flask segments",
+			"description": "Modular glass apparatus system - configurable lab glassware with spiral, wobbly, flask segments. Turtle commands: f,l,r,u,d,spiral,wobbly,flask,junction",
 			"scene": "res://commons/glass_rack/GlassRack.tscn"
+		},
+		"BigPipe": {
+			"name": "BigPipe",
+			"lookup_name": "BigPipe",
+			"description": "Large drain pipe system with segments. Turtle commands: f,l,r,u,d,s(s-bend). Use BigPipe#path:f,f,l,f,u,f",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn"
+		},
+		"PipeLayout": {
+			"name": "PipeLayout",
+			"lookup_name": "PipeLayout",
+			"description": "High-level pipe network controller with anchor points. Supports glass and drain pipe types. Use PipeLayout#layout:network_name or PipeLayout#pipe_type:glass",
+			"scene": "res://commons/primitives/pipes/PipeLayout.tscn"
 		},
 		"koch_curve_3d": {
 			"name": "3D Koch Curve",
@@ -2641,6 +2659,12 @@
 			"lookup_name": "grab_stick_scanner",
 			"description": "grab_stick_scanner",
 			"scene": "res://algorithms/color/color_scanner/grab_stick_scanner.tscn"
+		},
+		"laser_measure": {
+			"name": "laser_measure",
+			"lookup_name": "laser_measure",
+			"description": "Handheld laser distance measurement tool with LCD display",
+			"scene": "res://commons/primitives/laser_measure/grab_laser_measure.tscn"
 		},
 		"dark_side_prism": {
 			"name": "dark_side_prism",

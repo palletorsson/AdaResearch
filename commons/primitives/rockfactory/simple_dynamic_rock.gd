@@ -8,6 +8,8 @@ extends RigidBody3D
 @export var radial_segments: int = 4
 @export var rock_color: Color = Color(0.6, 0.6, 0.65)
 
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 func _ready():
 	generate_rock()
 	add_random_rotation()
@@ -15,20 +17,20 @@ func _ready():
 func add_random_rotation():
 	"""Add random rotation to make each rock look different"""
 	# Use instance ID as seed for unique rotation per rock
-	var rng = RandomNumberGenerator.new()
-	rng.seed = get_instance_id() + rock_seed
+	_rng.seed = get_instance_id() + rock_seed
 
 	rotation = Vector3(
-		rng.randf_range(0, TAU),
-		rng.randf_range(0, TAU),
-		rng.randf_range(0, TAU)
+		_rng.randf_range(0, TAU),
+		_rng.randf_range(0, TAU),
+		_rng.randf_range(0, TAU)
 	)
 
 func generate_rock():
+	# Set up instance-based RNG (avoids affecting global state)
 	if rock_seed != 0:
-		seed(rock_seed)
+		_rng.seed = rock_seed
 	else:
-		randomize()
+		_rng.randomize()
 
 	# Create low-poly sphere mesh
 	var sphere_mesh = SphereMesh.new()
@@ -47,19 +49,19 @@ func generate_rock():
 	var vertices = arrays[Mesh.ARRAY_VERTEX]
 
 	# Wiggle each vertex deterministically based on position (fixes seam issue)
+	# Reuse the same RNG instance for efficiency, just reseed per vertex
 	for i in range(vertices.size()):
 		var vert = vertices[i]
 
-		# Create deterministic random generator based on vertex position
+		# Create deterministic seed based on vertex position
 		# Round to avoid floating point issues with duplicate verts
 		var pos_hash = int(vert.x * 1000) + int(vert.y * 1000) * 7919 + int(vert.z * 1000) * 7919 * 7919
-		var rng = RandomNumberGenerator.new()
-		rng.seed = pos_hash + rock_seed
+		_rng.seed = pos_hash + rock_seed
 
 		var wiggle = Vector3(
-			rng.randf_range(-wiggle_amount, wiggle_amount),
-			rng.randf_range(-wiggle_amount, wiggle_amount),
-			rng.randf_range(-wiggle_amount, wiggle_amount)
+			_rng.randf_range(-wiggle_amount, wiggle_amount),
+			_rng.randf_range(-wiggle_amount, wiggle_amount),
+			_rng.randf_range(-wiggle_amount, wiggle_amount)
 		)
 		vertices[i] = vert + wiggle
 

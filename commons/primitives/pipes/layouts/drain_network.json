@@ -1,0 +1,37 @@
+{
+	"layout_info": {
+		"name": "Drain Pipe Network",
+		"description": "Large scale drain pipe system with s-bends"
+	},
+	"settings": {
+		"pipe_type": "drain",
+		"show_anchors": false
+	},
+	"layout": {
+		"segment_length": 2.0,
+		"pipe_radius": 0.8
+	},
+	"anchors": {
+		"inlet": [0, 4, 0],
+		"junction": [4, 2, 0],
+		"outlet_left": [0, 0, 0],
+		"outlet_right": [8, 0, 0]
+	},
+	"paths": [
+		{
+			"id": "main_drop",
+			"from": "inlet",
+			"code": "f,d,f,s,f"
+		},
+		{
+			"id": "left_branch",
+			"from": "junction",
+			"code": "l,f,f"
+		},
+		{
+			"id": "right_branch",
+			"from": "junction",
+			"code": "r,f,f"
+		}
+	]
+}

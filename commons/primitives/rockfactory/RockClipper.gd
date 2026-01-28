@@ -6,6 +6,7 @@ extends Node3D
 @export var scan_range: Vector2 = Vector2(0.5, 2.5)
 @export var auto_scan: bool = true
 @export var plane_size: float = 5.0
+@export var debug_output: bool = false
 
 var scan_plane: MeshInstance3D
 var clipping_plane_position: Vector3 = Vector3.ZERO
@@ -103,9 +104,10 @@ func find_and_clip_rocks():
 	var root = get_tree().root
 	find_rocks_recursive(root)
 
-	print("RockClipper: Found ", rocks.size(), " rock meshes to clip")
+	if debug_output:
+		print("RockClipper: Found ", rocks.size(), " rock meshes to clip")
 
-	if rocks.size() == 0:
+	if rocks.size() == 0 and debug_output:
 		print("RockClipper: WARNING - No rocks found! Searching for RigidBody3D nodes with 'Rock' in name...")
 		debug_scene_tree(root, 0)
 
@@ -116,11 +118,14 @@ func find_and_clip_rocks():
 func find_rocks_recursive(node: Node):
 	# Look for MeshInstance3D children of RigidBody3D rocks
 	if node is RigidBody3D and node.name.contains("Rock"):
-		print("RockClipper: Found RigidBody3D rock: ", node.name, " with ", node.get_child_count(), " children")
+		if debug_output:
+			print("RockClipper: Found RigidBody3D rock: ", node.name, " with ", node.get_child_count(), " children")
 		for child in node.get_children():
-			print("  - Child: ", child.name, " (", child.get_class(), ")")
+			if debug_output:
+				print("  - Child: ", child.name, " (", child.get_class(), ")")
 			if child is MeshInstance3D:
-				print("    -> Adding MeshInstance3D to clip list")
+				if debug_output:
+					print("    -> Adding MeshInstance3D to clip list")
 				rocks.append(child)
 
 	for child in node.get_children():
@@ -137,7 +142,8 @@ func debug_scene_tree(node: Node, depth: int):
 
 func apply_clipping_shader(mesh_inst: MeshInstance3D):
 	"""Apply clipping shader material to a mesh"""
-	print("Applying clipping shader to: ", mesh_inst.name)
+	if debug_output:
+		print("RockClipper: Applying clipping shader to: ", mesh_inst.name)
 
 	var material = ShaderMaterial.new()
 	var shader = Shader.new()
@@ -160,7 +166,8 @@ func apply_clipping_shader(mesh_inst: MeshInstance3D):
 	material.set_shader_parameter("plane_distance", 0.0)
 
 	mesh_inst.set_surface_override_material(0, material)
-	print("Shader applied successfully")
+	if debug_output:
+		print("RockClipper: Shader applied successfully")
 
 func _process(delta):
 	if auto_scan:

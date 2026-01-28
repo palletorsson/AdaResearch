@@ -911,11 +911,17 @@ func _parse_config_token(token: String) -> Dictionary:
 # This is a general system that allows any artifact to receive custom configuration
 func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, lookup_name: String):
 	print("GridInteractablesComponent: Applying config to '%s': %s" % [lookup_name, config_data])
-	
+
 	# Set config data as metadata for the artifact to read
 	for config_key in config_data.keys():
 		var config_value = config_data[config_key]
-		var meta_key = "config_%s" % config_key
+		# Sanitize the key to be a valid identifier (letters, numbers, underscore only)
+		var sanitized_key = config_key.replace(":", "_").replace(",", "_").replace(" ", "_").replace("-", "_")
+		if not sanitized_key.is_valid_identifier():
+			# Skip keys that can't be made valid
+			print("  → Skipping invalid config key: '%s'" % config_key)
+			continue
+		var meta_key = "config_%s" % sanitized_key
 		artifact_object.set_meta(meta_key, config_value)
 		print("  → Set metadata '%s' = '%s'" % [meta_key, str(config_value)])
 	

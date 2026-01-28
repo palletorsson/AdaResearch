@@ -6,6 +6,12 @@
 			"description": "Gradient slope test with animated rotation for walkability check.",
 			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn"
 		},
+		"rotate_grid_cubes": {
+			"name": "Rotate Grid Cubes",
+			"lookup_name": "rotate_grid_cubes",
+			"description": "Rotates grid cubes with configurable patterns including alternating directions and phase offsets for passable slopes.",
+			"scene": "res://algorithms/randomness/RotateGridCubes.tscn"
+		},
 		"random_edge_profile": {
 			"name": "Random Edge Profile",
 			"lookup_name": "random_edge_profile",

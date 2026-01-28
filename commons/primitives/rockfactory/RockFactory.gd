@@ -7,6 +7,9 @@ class_name RockFactory
 @export var number_of_rocks: int = 20
 @export var generation_seed: int = 0  # 0 = random seed each time
 @export var auto_generate: bool = true
+@export var debug_output: bool = false  # Enable for debugging
+
+var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 @export_group("Spawn Area")
 @export var spawn_mode: SpawnMode = SpawnMode.BOX
@@ -57,7 +60,8 @@ const PRIDE_COLORS = [
 ]
 
 func _ready():
-	print("RockFactory: _ready() called, auto_generate=%s, number_of_rocks=%d" % [auto_generate, number_of_rocks])
+	if debug_output:
+		print("RockFactory: _ready() called, auto_generate=%s, number_of_rocks=%d" % [auto_generate, number_of_rocks])
 	if auto_generate:
 		generate_rocks()
 
@@ -68,19 +72,23 @@ func apply_grid_config(config: Dictionary):
 
 	if config.has("number_of_rocks"):
 		number_of_rocks = int(config["number_of_rocks"])
-		print("RockFactory: Config set number_of_rocks = %d" % number_of_rocks)
+		if debug_output:
+			print("RockFactory: Config set number_of_rocks = %d" % number_of_rocks)
 
 	if config.has("generation_seed"):
 		generation_seed = int(config["generation_seed"])
-		print("RockFactory: Config set generation_seed = %d" % generation_seed)
+		if debug_output:
+			print("RockFactory: Config set generation_seed = %d" % generation_seed)
 
 	if config.has("spawn_mode"):
 		spawn_mode = int(config["spawn_mode"])
-		print("RockFactory: Config set spawn_mode = %d" % spawn_mode)
+		if debug_output:
+			print("RockFactory: Config set spawn_mode = %d" % spawn_mode)
 
 	if config.has("container_height"):
 		container_height = float(config["container_height"])
-		print("RockFactory: Config set container_height = %.2f" % container_height)
+		if debug_output:
+			print("RockFactory: Config set container_height = %.2f" % container_height)
 
 	if config.has("spawn_area_x"):
 		spawn_area.x = float(config["spawn_area_x"])
@@ -97,16 +105,19 @@ func apply_grid_config(config: Dictionary):
 	if config.has("use_pride_colors"):
 		var val = config["use_pride_colors"]
 		use_pride_colors = val if val is bool else (val == "true")
-		print("RockFactory: Config set use_pride_colors = %s" % str(use_pride_colors))
+		if debug_output:
+			print("RockFactory: Config set use_pride_colors = %s" % str(use_pride_colors))
 
 	if config.has("enable_gravity"):
 		var val = config["enable_gravity"]
 		enable_gravity = val if val is bool else (val == "true")
 		make_rocks_static = not enable_gravity
-		print("RockFactory: Config set enable_gravity = %s" % str(enable_gravity))
+		if debug_output:
+			print("RockFactory: Config set enable_gravity = %s" % str(enable_gravity))
 
 	# Generate with new configuration
-	print("RockFactory: Generating rocks with grid config")
+	if debug_output:
+		print("RockFactory: Generating rocks with grid config")
 	generate_rocks()
 
 func generate_rocks():
@@ -114,22 +125,24 @@ func generate_rocks():
 	# Clear existing rocks
 	clear_rocks()
 
-	# Set up random seed
+	# Set up random seed using instance-based RNG (avoids affecting global state)
 	if generation_seed != 0:
-		seed(generation_seed)
+		_rng.seed = generation_seed
 	else:
-		randomize()
+		_rng.randomize()
 
 	# Load rock scene
 	rock_scene = preload("res://commons/primitives/proceduralrock/proceduralrock.tscn")
 
-	print("RockFactory: Generating %d rocks in %s mode" % [number_of_rocks, SpawnMode.keys()[spawn_mode]])
+	if debug_output:
+		print("RockFactory: Generating %d rocks in %s mode" % [number_of_rocks, SpawnMode.keys()[spawn_mode]])
 
 	# Generate rocks based on spawn mode
 	for i in range(number_of_rocks):
 		_create_rock(i)
 
-	print("RockFactory: Generated %d rocks" % rocks.size())
+	if debug_output:
+		print("RockFactory: Generated %d rocks" % rocks.size())
 
 func _create_rock(index: int):
 	"""Create a single rock with randomized properties"""
@@ -152,10 +165,10 @@ func _create_rock(index: int):
 		rigid_body.add_child(rock)
 
 		# Configure rock properties
-		rock.random_seed = randi()
-		rock.base_radius = randf_range(rock_size_min, rock_size_max)
-		rock.deformation = randf_range(deformation_min, deformation_max)
-		rock.roughness = randf_range(roughness_min, roughness_max)
+		rock.random_seed = _rng.randi()
+		rock.base_radius = _rng.randf_range(rock_size_min, rock_size_max)
+		rock.deformation = _rng.randf_range(deformation_min, deformation_max)
+		rock.roughness = _rng.randf_range(roughness_min, roughness_max)
 		rock.subdivisions = subdivisions
 		rock.create_on_ready = false
 
@@ -177,16 +190,17 @@ func _create_rock(index: int):
 			static_body.queue_free()
 
 		rocks.append(rigid_body)
-		print("RockFactory: ✅ Created dynamic rock %d" % index)
+		if debug_output:
+			print("RockFactory: Created dynamic rock %d" % index)
 	else:
 		# Create static rock (original simple approach)
 		var rock = rock_scene.instantiate()
 		add_child(rock)
 
-		rock.random_seed = randi()
-		rock.base_radius = randf_range(rock_size_min, rock_size_max)
-		rock.deformation = randf_range(deformation_min, deformation_max)
-		rock.roughness = randf_range(roughness_min, roughness_max)
+		rock.random_seed = _rng.randi()
+		rock.base_radius = _rng.randf_range(rock_size_min, rock_size_max)
+		rock.deformation = _rng.randf_range(deformation_min, deformation_max)
+		rock.roughness = _rng.randf_range(roughness_min, roughness_max)
 		rock.subdivisions = subdivisions
 		rock.create_on_ready = false
 
@@ -199,7 +213,8 @@ func _create_rock(index: int):
 		rock.generate_rocks()
 
 		rocks.append(rock)
-		print("RockFactory: Created static rock %d" % index)
+		if debug_output:
+			print("RockFactory: Created static rock %d" % index)
 
 func _get_spawn_position(index: int) -> Vector3:
 	"""Calculate spawn position based on spawn mode"""
@@ -219,15 +234,15 @@ func _get_spawn_position(index: int) -> Vector3:
 func _box_position() -> Vector3:
 	"""Random position within box volume"""
 	return Vector3(
-		randf_range(-spawn_area.x / 2, spawn_area.x / 2),
-		randf_range(container_height, container_height + spawn_area.y),
-		randf_range(-spawn_area.z / 2, spawn_area.z / 2)
+		_rng.randf_range(-spawn_area.x / 2, spawn_area.x / 2),
+		_rng.randf_range(container_height, container_height + spawn_area.y),
+		_rng.randf_range(-spawn_area.z / 2, spawn_area.z / 2)
 	)
 
 func _pile_position(index: int) -> Vector3:
 	"""Pile rocks on ground with slight height variation"""
-	var radius = sqrt(randf()) * spawn_area.x / 2
-	var angle = randf() * TAU
+	var radius = sqrt(_rng.randf()) * spawn_area.x / 2
+	var angle = _rng.randf() * TAU
 	var layer = float(index) / number_of_rocks
 	return Vector3(
 		cos(angle) * radius,
@@ -244,9 +259,9 @@ func _grid_position(index: int) -> Vector3:
 	var spacing_z = spawn_area.z / grid_size
 
 	return Vector3(
-		-spawn_area.x / 2 + x_idx * spacing_x + randf_range(-spacing_x * 0.2, spacing_x * 0.2),
+		-spawn_area.x / 2 + x_idx * spacing_x + _rng.randf_range(-spacing_x * 0.2, spacing_x * 0.2),
 		container_height,
-		-spawn_area.z / 2 + z_idx * spacing_z + randf_range(-spacing_z * 0.2, spacing_z * 0.2)
+		-spawn_area.z / 2 + z_idx * spacing_z + _rng.randf_range(-spacing_z * 0.2, spacing_z * 0.2)
 	)
 
 func _ring_position(index: int) -> Vector3:
@@ -262,18 +277,18 @@ func _ring_position(index: int) -> Vector3:
 func _cluster_position() -> Vector3:
 	"""Tight cluster at center"""
 	var offset = Vector3(
-		randf_range(-spawn_area.x * 0.2, spawn_area.x * 0.2),
-		randf_range(0, spawn_area.y * 0.3),
-		randf_range(-spawn_area.z * 0.2, spawn_area.z * 0.2)
+		_rng.randf_range(-spawn_area.x * 0.2, spawn_area.x * 0.2),
+		_rng.randf_range(0, spawn_area.y * 0.3),
+		_rng.randf_range(-spawn_area.z * 0.2, spawn_area.z * 0.2)
 	)
 	return Vector3(0, container_height, 0) + offset
 
 func _vary_color(base: Color, variation: float) -> Color:
 	"""Create slight color variation from base color"""
 	return Color(
-		clamp(base.r + randf_range(-variation, variation), 0.0, 1.0),
-		clamp(base.g + randf_range(-variation, variation), 0.0, 1.0),
-		clamp(base.b + randf_range(-variation, variation), 0.0, 1.0),
+		clamp(base.r + _rng.randf_range(-variation, variation), 0.0, 1.0),
+		clamp(base.g + _rng.randf_range(-variation, variation), 0.0, 1.0),
+		clamp(base.b + _rng.randf_range(-variation, variation), 0.0, 1.0),
 		base.a
 	)
 
