@@ -1,16 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btl4p6m2xwf8k"]
 
-[ext_resource type="Script" path="res://commons/primitives/arrays/pattern_tile_puzzle.gd" id="1_pattern"]
+[ext_resource type="Script" uid="uid://byde5n587tno1" path="res://commons/primitives/arrays/pattern_tile_puzzle.gd" id="1_pattern"]
 
 [node name="PatternTilePuzzle" type="Node3D"]
 script = ExtResource("1_pattern")
-tile_size = 4
-preview_repeats = Vector2i(4, 4)
-cell_size = 0.05
-repeat_mode = 0
-palette = Array[Color]([Color(0.95, 0.92, 0.85, 1), Color(0.8, 0.2, 0.15, 1), Color(0.15, 0.25, 0.5, 1), Color(0.7, 0.55, 0.2, 1), Color(0.2, 0.4, 0.25, 1), Color(0.4, 0.2, 0.15, 1), Color(0.1, 0.1, 0.12, 1), Color(0.6, 0.3, 0.5, 1)])
-selected_color = 1
-preview_offset = Vector3(0, 0, -0.8)
-show_grid_lines = true
-cube_size_ratio = 0.8
-spawner_offset = Vector3(0.25, 0, 0)

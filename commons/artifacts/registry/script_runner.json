@@ -1,0 +1,17 @@
+{
+	"artifacts": {
+		"script_runner": {
+			"name": "Script Runner",
+			"lookup_name": "script_runner",
+			"description": "Live code display with real Expression evaluation! Shows code executing line-by-line with actual results. Scripts: #point, #vector_math, #array, #pattern, #loop. Example: script_runner#point:90:1",
+			"scene": "res://commons/primitives/script_runner/script_runner.tscn",
+			"config_mapping": {
+				"point": {"script_name": "point"},
+				"vector_math": {"script_name": "vector_math"},
+				"array": {"script_name": "array"},
+				"pattern": {"script_name": "pattern"},
+				"loop": {"script_name": "loop"}
+			}
+		}
+	}
+}
