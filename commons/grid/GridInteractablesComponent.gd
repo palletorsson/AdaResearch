@@ -14,7 +14,12 @@ const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 const CONFIG_PARAM_NAMES = [
 	"radial", "rings", "inner", "outer", "config", "height", "radius",
 	"width", "depth", "segments", "sides", "rows", "cols", "count",
-	"size", "scale", "speed", "delay", "duration", "intensity"
+	"size", "scale", "speed", "delay", "duration", "intensity",
+	"number_of_rocks", "container_height", "spawn_area_x", "spawn_area_y", "spawn_area_z",
+	"rock_size_min", "rock_size_max", "deformation_min", "deformation_max",
+	"roughness_min", "roughness_max", "subdivisions", "generation_seed",
+	"rock_mass", "rock_friction", "rock_bounce", "spawn_mode",
+	"enable_gravity", "use_pride_colors", "make_rocks_static", "color_variation"
 ]
 
 # References

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://3ahxwtf7ac73"]
+[gd_scene load_steps=3 format=3 uid="uid://3ahxwtf7ac73"]
 
 [ext_resource type="Script" uid="uid://2684kcnasdw0" path="res://algorithms/fractals/recursive_boolean_cube.gd" id="1_script"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_04h0b"]
 
 [node name="RecursiveBooleanCube" type="Node3D"]
 script = ExtResource("1_script")
@@ -14,3 +16,6 @@ transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.43
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 3, 0)
 shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_04h0b")

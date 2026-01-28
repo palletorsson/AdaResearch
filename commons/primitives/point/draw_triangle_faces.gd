@@ -19,15 +19,15 @@ extends Node3D
 @export var haptic_triangle_duration: float = 0.2
 
 # Visual settings
-@export var point_indicator_size: float = 0.003  # Tiny vertex dots
+@export var point_indicator_size: float = 0.025  # Grab sphere size
 @export var line_color: Color = Color(0.2, 1.0, 0.6, 1.0)
 @export var active_line_color: Color = Color(1.0, 0.8, 0.2, 1.0)
-@export var point_color: Color = Color(0.3, 0.7, 1.0, 1.0)
+@export var point_color: Color = Color(0.2, 0.8, 0.3, 0.7)
 @export var snap_indicator_color: Color = Color(1.0, 0.3, 0.3, 1.0)
 @export var editable_points: bool = true  # Allow grabbing and moving points
 
-# Preload pickable scene for editable points
-const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+# Preload grab sphere scene for editable points (same as animatedcubebuilder)
+const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
 # Triangle mesh settings
 @export var triangle_colors: Array[Color] = [
@@ -103,6 +103,10 @@ func _setup_line_visualization() -> void:
 	line_material.albedo_color = line_color
 	line_material.emission_enabled = true
 	line_material.emission = line_color
+	line_material.roughness = 1.0
+	line_material.metallic = 0.0
+	line_material.metallic_specular = 0.0
+	line_material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	line_instance.material_override = line_material
 	add_child(line_instance)
 	
@@ -118,6 +122,10 @@ func _setup_line_visualization() -> void:
 	active_material.albedo_color = active_line_color
 	active_material.emission_enabled = true
 	active_material.emission = active_line_color
+	active_material.roughness = 1.0
+	active_material.metallic = 0.0
+	active_material.metallic_specular = 0.0
+	active_material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	active_line_instance.material_override = active_material
 	add_child(active_line_instance)
 
@@ -135,6 +143,10 @@ func _setup_snap_indicator() -> void:
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.emission_enabled = true
 	material.emission = snap_indicator_color
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
+	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	snap_indicator.material_override = material
 	snap_indicator.visible = false
 	snap_indicator.set_as_top_level(true)
@@ -287,52 +299,30 @@ func _create_new_point(position: Vector3) -> void:
 	print("DrawTriangleFaces: Created point %d at %v" % [point_index, position])
 
 func _create_editable_point(point_index: int, position: Vector3) -> void:
-	# Create pickable point that can be grabbed and moved
-	var pickable = PICKABLE_SCENE.instantiate()
-	pickable.name = "Point_%d" % point_index
-	pickable.set_meta("point_index", point_index)
+	# Create grab sphere point (same as animatedcubebuilder)
+	var handle = GRAB_SPHERE_SCENE.instantiate()
+	handle.name = "Point_%d" % point_index
+	handle.position = position
+	handle.alter_freeze = false
+	handle.freeze = true
+	handle.set_meta("point_index", point_index)
 
-	# Configure pickable
-	pickable.ranged_grab_method = 0  # Raycast
-	pickable.freeze = true  # Start frozen
-	pickable.collision_layer = 1
-	pickable.collision_mask = 0
+	# Scale the grab sphere to match point_indicator_size
+	var scale_factor = point_indicator_size / 0.05  # grab_sphere default is ~0.05
+	handle.scale = Vector3.ONE * scale_factor
 
-	# Add collision shape
-	var collision = CollisionShape3D.new()
-	var shape = SphereShape3D.new()
-	shape.radius = point_indicator_size * 2.0  # Larger for easier grabbing
-	collision.shape = shape
-	pickable.add_child(collision)
-
-	# Add mesh
-	var mesh_instance = MeshInstance3D.new()
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = point_indicator_size
-	sphere_mesh.height = point_indicator_size * 2
-	sphere_mesh.radial_segments = 16
-	sphere_mesh.rings = 8
-	mesh_instance.mesh = sphere_mesh
-
-	var material := StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.albedo_color = point_color
-	material.emission_enabled = true
-	material.emission = point_color
-	material.emission_energy_multiplier = 1.5
-	mesh_instance.material_override = material
-	pickable.add_child(mesh_instance)
-
-	# Add to tree and position
-	pickable.set_as_top_level(true)
-	add_child(pickable)
-	pickable.global_position = position
+	# Add to tree
+	add_child(handle)
+	if owner:
+		handle.owner = owner
 
 	# Connect signals for editing
-	pickable.picked_up.connect(_on_edit_point_picked_up.bind(point_index))
-	pickable.dropped.connect(_on_edit_point_dropped.bind(point_index))
+	if handle.has_signal("picked_up"):
+		handle.picked_up.connect(_on_edit_point_picked_up.bind(point_index))
+	if handle.has_signal("dropped"):
+		handle.dropped.connect(_on_edit_point_dropped.bind(point_index))
 
-	point_indicators.append(pickable)
+	point_indicators.append(handle)
 
 func _create_static_point(point_index: int, position: Vector3) -> void:
 	# Create non-editable visual indicator
@@ -348,6 +338,10 @@ func _create_static_point(point_index: int, position: Vector3) -> void:
 	material.albedo_color = point_color
 	material.emission_enabled = true
 	material.emission = point_color
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
+	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	indicator.material_override = material
 
 	indicator.set_as_top_level(true)
@@ -360,10 +354,10 @@ func _on_edit_point_picked_up(_pickable, point_index: int) -> void:
 
 func _on_edit_point_dropped(_pickable, point_index: int) -> void:
 	# Update the point position in our array
-	var new_pos = point_indicators[point_index].global_position
+	var new_pos = point_indicators[point_index].position
 	if snap_to_grid:
 		new_pos = snap_position_to_grid(new_pos)
-		point_indicators[point_index].global_position = new_pos
+		point_indicators[point_index].position = new_pos
 
 	placed_points[point_index] = new_pos
 	print("DrawTriangleFaces: Point %d moved to %v" % [point_index, new_pos])
@@ -493,6 +487,10 @@ func _create_triangles_from_path() -> void:
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.emission_enabled = true
 	material.emission = tri_color * 0.5
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
+	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mesh_instance.material_override = material
 	

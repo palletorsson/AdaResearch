@@ -3882,6 +3882,48 @@
 			"description": "Hollow rock using torus with varied openings",
 			"scene": "res://commons/primitives/hollowrock/hollowrock.tscn"
 		},
+		"rockfactory": {
+			"name": "Rock Factory",
+			"lookup_name": "rockfactory",
+			"description": "Generates collections of irregular procedural rocks to demonstrate gaps and packing. Supports multiple spawn modes (box, pile, grid, ring, cluster) and optional gravity.",
+			"scene": "res://commons/primitives/rockfactory/RockFactory.tscn"
+		},
+		"rockfactory_gravity": {
+			"name": "Rock Factory (Gravity)",
+			"lookup_name": "rockfactory_gravity",
+			"description": "Rock factory pre-configured with gravity enabled - spawns rocks that fall and settle into containers, demonstrating natural packing and gaps between irregular forms.",
+			"scene": "res://commons/primitives/rockfactory/RockFactoryGravity.tscn"
+		},
+		"dynamic_rock": {
+			"name": "Dynamic Rock",
+			"lookup_name": "dynamic_rock",
+			"description": "Single procedural rock with gravity enabled - falls naturally with physics",
+			"scene": "res://commons/primitives/rockfactory/DynamicRock.tscn"
+		},
+		"falling_cube": {
+			"name": "Falling Cube",
+			"lookup_name": "falling_cube",
+			"description": "Simple falling cube for physics testing",
+			"scene": "res://commons/primitives/rockfactory/FallingCube.tscn"
+		},
+		"simple_rock": {
+			"name": "Simple Dynamic Rock",
+			"lookup_name": "simple_rock",
+			"description": "Simple irregular rock made from wiggled low-poly sphere - falls with physics",
+			"scene": "res://commons/primitives/rockfactory/SimpleDynamicRock.tscn"
+		},
+		"rock_scanner": {
+			"name": "Rock Scanner",
+			"lookup_name": "rock_scanner",
+			"description": "Dimensional scanner - reveals 2D cross-sections of 3D irregular forms, showing how dimensionality affects perception",
+			"scene": "res://commons/primitives/rockfactory/RockScanner.tscn"
+		},
+		"rock_spawner": {
+			"name": "Rock Spawner",
+			"lookup_name": "rock_spawner",
+			"description": "Spawns multiple irregular rocks with physics - demonstrates packing inefficiency and gaps",
+			"scene": "res://commons/primitives/rockfactory/RockSpawner.tscn"
+		},
 		"modernchair": {
 			"name": "Modern Chair",
 			"lookup_name": "modernchair",
@@ -4001,6 +4043,30 @@
 			"lookup_name": "quest_controller",
 			"description": "Procedural Quest Touch controller model for tutorials. Use #highlight:trigger/grip/thumbstick/button_a/button_b/menu and #right:true/false",
 			"scene": "res://commons/primitives/questcontroller/quest_controller.tscn"
+		},
+		"sliding_door": {
+			"name": "Sliding Door",
+			"lookup_name": "sliding_door",
+			"description": "Door that slides left/right on X axis. Teaches translation along a single axis with visual rail and position marker.",
+			"scene": "res://commons/primitives/translation/sliding_door.tscn"
+		},
+		"elevator_platform": {
+			"name": "Elevator Platform",
+			"lookup_name": "elevator_platform",
+			"description": "Platform that slides up/down on Y axis. Teaches vertical translation with grid snapping to floor levels.",
+			"scene": "res://commons/primitives/translation/elevator_platform.tscn"
+		},
+		"translation_demo": {
+			"name": "Translation Demo",
+			"lookup_name": "translation_demo",
+			"description": "Two blocking obstacles demonstrating X and Y axis translation. Red obstacle slides horizontally, blue obstacle slides vertically. Obstacles turn green when path is cleared.",
+			"scene": "res://commons/primitives/translation/translation_demo.tscn"
+		},
+		"translation_cube_demo": {
+			"name": "Translation Cube Demo",
+			"lookup_name": "translation_cube_demo",
+			"description": "Compact 1m³ demonstration of X-axis translation. Two door elements (red/blue) slide along X axis with visual path indicators showing movement sequence.",
+			"scene": "res://commons/primitives/translation/translation_cube_demo.tscn"
 		}
 	}
 }

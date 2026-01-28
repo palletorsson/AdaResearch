@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://rock_spawner_456"]
+
+[ext_resource type="Script" path="res://commons/primitives/rockfactory/RockSpawner.gd" id="1_spawner"]
+
+[node name="RockSpawner" type="Node3D"]
+script = ExtResource("1_spawner")
+rock_count = 30
+spawn_area = Vector3(3, 2, 3)
+spawn_height = 3.5
+generation_seed = 0

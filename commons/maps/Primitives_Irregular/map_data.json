@@ -6,7 +6,7 @@
 		"format": "json",
 		"dimensions": {
 			"width": 9,
-			"depth": 10,
+			"depth": 12,
 			"max_height": 4
 		},
 		"metadata": {
@@ -18,31 +18,39 @@
 	},
 	"documentation": {
 		"summary": "Primitives_Irregular - Beyond Perfect Symmetry",
-		"layout": "9x4 platform showcasing irregular and semi-regular polyhedra",
-		"objective": "Explore forms that break from perfect regularity while maintaining interesting properties",
+		"layout": "9x10 platform with container structure showcasing irregular forms",
+		"objective": "Explore forms that break from perfect regularity - watch how irregular rocks create unavoidable gaps when filling space",
 		"key_elements": [
-			"Roughrock - procedural irregular polyhedron",
-			"Crystal - faceted quartz-style form",
-			"Diamond - multifaceted gem shape",
-			"Bipyramid - double pyramid structure",
-			"Johnson Solids: Square Pyramid (J1), Triangular Cupola (J3)",
-			"Truncated Tetrahedron - Archimedean solid",
+			"Rock Spawner - 30 irregular rocks fall from above demonstrating packing inefficiency",
+			"Container walls (height 3) - the crate that holds irregular forms",
+			"Dimensional Scanner - moving plane reveals 2D cross-sections of 3D rocks",
+			"Category Theory: A line is stuck in 1D (2 points), but a 2D plane reveals the true shape",
+			"Irregular convex hulls - each rock is a unique wiggled low-poly sphere",
+			"Accurate collision - ConvexPolygonShape3D matches actual mesh geometry",
+			"The gap is not failure - the gap is where something else can happen",
+			"Watch how rocks settle: irregular forms cannot tile space perfectly",
 			"Teleporter at exit"
 		]
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-			["4", "4", "4", "4", "4", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "4", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "4", "2", "1", "0", "1"],
-			["1", "1", "1", "1", "4", "2", "1", "1", "1"],
-			["1", "1", "1", "1", "4", "2", "1", "1", "1"],			
-			["4", "4", "4", "4", "4", "2", "1", "1", "1"],			
+			["1", "1", "1", "1", "2", "2", "1", "1", "1"],
+			["1", "1", "1", "1", "2", "2", "1", "2", "1"],
+			["1", "1", "2", "2", "2", "2", "1", "1", "1"],
+			["1", "1", "3", "3", "3", "3", "3", "1", "1"],
+			["1", "1", "3", "1", "1", "1", "3", "1", "1"],
+			["1", "1", "3", "1", "1", "1", "3", "1", "1"],
+			["1", "1", "3", "1", "1", "1", "3", "1", "1"],
+			["1", "1", "3", "3", "1", "3", "3", "1", "1"],			
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],	
+			["1", "1", "1", "1", "1", "1", "1", "0", "1"],	
+			["1", "1", "1", "1", "1", "1", "1", "1", "1"],									
 		],
 		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "wp:90", " ", " ", " ", "an:-90", " "],
+			[" ", " ", " ", " ", " ", "wp", "", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -53,14 +61,14 @@
  	
 		],
 		"interactables": [
-			[" ", " ", " ", " ", " ", " ", "square_pyramid", "crystal", "diamond"],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "cctv", " ", " ", " ", " ", " ", " ", " "],						
-			[" ", " ", " ", " ", "", " ", " ", " ", " "],
-			[" ", " ", " ", "dark_sphere", " ", " ", " ", " ", " "],		
-			[" ", " ", " ", " ", " ", " ", " ", "roughrock", " "],										
-			[" ", "capsule", " ", " ", " ", " ", "bipyramid", " ", " "],
-			[" ", " ", " ", "triangular_cupola", " ", "truncatedtetrahedron", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "rock_spawner#rock_count:30#spawn_height:3.5#spawn_area_x:3#spawn_area_y:2#spawn_area_z:3", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "rock_scanner", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},

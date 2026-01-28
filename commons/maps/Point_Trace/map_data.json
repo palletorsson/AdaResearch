@@ -55,7 +55,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", "sub:encodings", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", "3t:the_trace", " ", " ", " "]
@@ -72,6 +72,10 @@
  
 		]
 	},
+	"subtitles": {
+		"encodings": "There is no original behind the trace — only encodings at different scales, each erasing differently, each affording differently, none closer to the real..",
+	},
+	
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",

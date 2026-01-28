@@ -81,10 +81,13 @@ func _setup_drag_points():
 func update_mesh():
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
+
 	var mat = StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
-	mat.roughness = 0.9
+	mat.roughness = 1.0
+	mat.metallic = 0.0
+	mat.metallic_specular = 0.0
+	mat.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	strip_mesh.material_override = mat
 	
@@ -145,10 +148,12 @@ func add_double_sided_triangle(st: SurfaceTool, v1, v2, v3, color: Color):
 func apply_paper_material(mesh_instance: MeshInstance3D, color: Color):
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.9, 0.9, 0.95) # Paper white
-	material.roughness = 0.8
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
 	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED # Render both sides anyway
-	
+
 	# To make it look cool, maybe use the shader?
 	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
 	if shader:

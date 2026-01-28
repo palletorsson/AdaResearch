@@ -61,8 +61,7 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-
+			[" ", " ", "sub:line_measures", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],			
 			[" ", " ", " ", " ", " ", "t", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
@@ -93,8 +92,9 @@
 			[" ", "", " ", "lightrod:0:0:1#config:4:1", " ", " ", " "],
 			["modulor_man_demo:90:-0.5", " ", " ", " ", " ", " ", "dgrid:90:1.15:0.9#config:5:5"]
 		]
-	},
-	"utility_definitions": {
+	}, 
+		
+		"utility_definitions": {
 		"t": {
 			"type": "teleporter",
 			"name": "Next",
@@ -109,6 +109,9 @@
 			}
 		}
 	},
+	"subtitles": {
+			"line_measures": "The line measures because it has no room to escape comparison.",
+		},
 	"lighting": {
 		"ambient_color": [0.4, 0.4, 0.5],
 		"ambient_energy": 0.6,

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4qy8xr3m5pke"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/translation/axis_slider.gd" id="2_axis_slider"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="AxisSlider" instance=ExtResource("1_pickable")]
+collision_layer = 2
+collision_mask = 1
+freeze = true
+script = ExtResource("2_axis_slider")
+alter_freeze = false
+slide_axis = "X"
+slide_min = -2.0
+slide_max = 2.0
+snap_to_grid = false
+grid_spacing = 0.5
+show_rail = true
+rail_color = Color(0.3, 0.6, 1, 0.5)
+show_position_marker = true
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

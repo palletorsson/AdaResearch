@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://rock_clipper_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/rockfactory/RockClipper.gd" id="1_clipper"]
+
+[node name="RockClipper" type="Node3D"]
+script = ExtResource("1_clipper")
+scan_height = 1.5
+scan_speed = 0.3
+scan_range = Vector2(0.5, 2.5)
+auto_scan = true
+plane_size = 5.0

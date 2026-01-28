@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpq9w8xr5m7pn"]
+
+[ext_resource type="Script" path="res://commons/primitives/translation/translation_demo.gd" id="1_demo"]
+
+[node name="TranslationDemo" type="Node3D"]
+script = ExtResource("1_demo")
+obstacle_material_blocked = Color(1, 0.3, 0.3, 0.8)
+obstacle_material_clear = Color(0.3, 1, 0.3, 0.8)
+check_clearance = true
+clearance_threshold = 0.8
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+text = "Translation on X, Y, Z Axes
+Grab obstacles and slide them"
+font_size = 48
+pixel_size = 0.006
+billboard = 1

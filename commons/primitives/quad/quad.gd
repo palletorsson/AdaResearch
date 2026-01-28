@@ -198,8 +198,10 @@ func set_vertex_color(color: Color):
 				material.albedo_color = vertex_color
 				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 				material.emission = Color(0.1, 0.4, 0.2) * 0.3
-				material.roughness = 0.1
+				material.roughness = 1.0
 				material.metallic = 0.0
+				material.metallic_specular = 0.0
+				material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 				material.refraction = 0.05
 	)
 
@@ -209,6 +211,10 @@ func _apply_material(mesh_instance: MeshInstance3D, color: Color, cull_mode: int
 	material.albedo_color = color
 	material.emission_enabled = true
 	material.emission = color * 0.3
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
+	material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
 	material.cull_mode = cull_mode
 	mesh_instance.material_override = material
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5j8kx0yv8qfm"]
+
+[ext_resource type="Script" path="res://commons/primitives/rockfactory/RockFactory.gd" id="1_rockfactory"]
+
+[node name="RockFactory" type="Node3D"]
+script = ExtResource("1_rockfactory")
+number_of_rocks = 20
+generation_seed = 0
+auto_generate = true
+spawn_mode = 0
+spawn_area = Vector3(2, 1, 2)
+container_height = 0.5
+rock_size_min = 0.15
+rock_size_max = 0.35
+deformation_min = 3.0
+deformation_max = 7.0
+roughness_min = 2.0
+roughness_max = 4.0
+subdivisions = 2
+base_color = Color(0.6, 0.6, 0.65, 1)
+color_variation = 0.1
+use_pride_colors = false
+create_collisions = true
+make_rocks_static = true
+enable_gravity = false

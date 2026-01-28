@@ -88,8 +88,8 @@
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
 			[" ", " ", " ", "clipboard#vr_scale_controls:10:0:0.5", "chair_assembly_puzzle:0:-0.5#furniture_type:chair", " ", " ", " ", " "],
 			[" r", " ", " ", " ", " ", " ", " ", " ", ""],
-			[" ", " ", " ", " ", "", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", "", " "],
+			[" ", " ", " ", " ", "", " ", " ", "pattern_tile_puzzle:-90#cursor", " "],
+			[" ", " ", " ", " ", "translation_cube_demo:0:1", " ", " ", "", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "step_sequencer:-90#house", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "", " ", " ", " ", " "],
@@ -103,7 +103,7 @@
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
-			"name": "Next",
+			"name":	 "Next",
 			"description": "Continue to next step",
 			"properties": {
 				"action": "next_in_sequence"

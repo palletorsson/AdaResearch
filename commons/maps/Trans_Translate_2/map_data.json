@@ -1,8 +1,8 @@
 {
 	"map_info": {
 		"name": "Translate 2",
-		"lookup_name": "Trans_Translate_2",		
-		"description": "Rotation is revisited as an operational transformation rather than a primitive relation. Here rotation is no longer an isolated phenomenon but part of a formal system of spatial change. By applying rotation through explicit parameters or controls, the player encounters orientation as a manipulable variable governed by rules rather than intuition. The map reinforces the idea that transformation formalizes embodied action into repeatable instruction.",
+		"lookup_name": "Trans_Translate_2",
+		"description": "Translation deconstructed into individual axes. Movement along X, Y, and Z becomes explicit and constrained, revealing how three independent directions compose all position in space. By sliding objects along single axes, translation transforms from intuitive motion into a formal system of coordinate displacement.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -14,14 +14,14 @@
 			"difficulty": "beginner",
 			"category": "tutorial",
 			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["2D arrays", "Grid navigation", "X-Y coordinate system", "Multi-dimensional thinking"]
+			"learning_objectives": ["X, Y, Z axis translation", "Constrained movement", "Coordinate displacement", "Sliding obstacles"]
 		}
 	},
 	"documentation": {
-		"summary": "Transformation_4 - Lift Alignment Lab",
-		"layout": "7x8 arena with paired platform lifts and raised pickup pedestals.",
-		"objective": "Explore vertical alignment by combining lifts with timed pickup cubes.",
-		"key_elements": ["Platform lifts `l` at (2,2) and (4,2)", "`pick_up_cube:0:2` targets above each lift", "`dark_sphere` dome at (3,3)", "Score cube `sp` and teleporter `t` at the south-east edge"]
+		"summary": "Translation 2 - Axis Sliders",
+		"layout": "7x16 arena with axis-constrained sliding obstacles and demonstration objects.",
+		"objective": "Understand translation along individual axes by sliding objects constrained to X, Y, or Z movement.",
+		"key_elements": ["Sliding door (X-axis)", "Elevator platform (Y-axis)", "Translation demo with blocking obstacles", "Visual rails showing movement paths"]
 	},
 	"layers": {
 		"structure": [
@@ -63,16 +63,16 @@
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "toruscylinder:0:4", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "translation_cube_demo:0:1.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "pickup_gate#pickups:6", " "],
+			[" ", " ", " ", "sliding_door:0:1.25", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
-			["cube_scene:0:3", "cube_scene:0:3", "cube_scene:0:3", " ", " ", " ", " "],
+			["cube_scene:0:3", "cube_scene:0:3", "cube_scene:0:3", " ", "elevator_platform:0:0.1", " ", " "],
 			["cube_scene:0:3", " ", "cube_scene:0:3", " ", " ", " ", " "],
 			["cube_scene:0:3", " ", "cube_scene:0:3", " ", " ", " ", " "],
 			["cube_scene:0:3", "pick_up_cube", "cube_scene:0:3", " ", " ", " ", " "]

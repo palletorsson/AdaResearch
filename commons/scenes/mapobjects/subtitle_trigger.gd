@@ -29,9 +29,9 @@ signal subtitle_shown(text: String)
 
 @export_group("Visual")
 @export var trigger_color: Color = Color(0.4, 0.8, 1.0, 0.2)
-@export var trigger_size: Vector3 = Vector3(0.5, 0.5, 0.5)  # Small box - must walk over it (like pickup cube)
+@export var trigger_size: Vector3 = Vector3(1.2, 1.2, 1.2)  # Small box - must walk over it (like pickup cube)
 @export var sphere_color: Color = Color(0.3, 0.7, 1.0, 0.15)  # Very transparent cyan
-@export var sphere_radius: float = 0.25  # Slightly smaller sphere
+@export var sphere_radius: float = 0.15  # Slightly smaller sphere
 
 var _has_triggered: bool = false
 var _startup_complete: bool = false  # Prevent triggering during scene load
@@ -53,9 +53,9 @@ func _ready():
 		var box = BoxShape3D.new()
 		box.size = trigger_size
 		collision.shape = box
-		# Position collision at same height as info sphere (y=0.5)
-		# Player must physically walk through the sphere area
-		collision.position.y = 0.5
+		# Position collision at player body height (torso level)
+		# Adjust to match player center of mass around 0.9-1.0m
+		collision.position.y = 1.0
 		add_child(collision)
 
 	# Create visual indicator (for debug)
@@ -174,8 +174,8 @@ func _create_info_sphere():
 	# Create "i" text inside sphere
 	_info_text = Label3D.new()
 	_info_text.text = "i"
-	_info_text.font_size = 64
-	_info_text.pixel_size = 0.005
+	_info_text.font_size = 32
+	_info_text.pixel_size = 0.003
 	_info_text.modulate = Color(0.4, 0.85, 1.0, 0.8)  # Cyan-ish, slightly transparent
 	_info_text.outline_modulate = Color(0.1, 0.3, 0.5, 0.5)
 	_info_text.outline_size = 4
