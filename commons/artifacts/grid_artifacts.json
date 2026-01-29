@@ -1262,7 +1262,7 @@
 			"name": "Marching Cubes VR Sculpt",
 			"lookup_name": "marching_cubes_sculpt_vr",
 			"description": "VR paintable marching cubes - sculpt in 3D with your controllers using GPU compute shaders",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/MarchingCubesSculptVR.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn"
 		},
 		"rhizome_cave_system": {
 			"name": "Rhizomatic Cave System",
@@ -1835,7 +1835,7 @@
 			"name": "Metaballs",
 			"lookup_name": "metaballs",
 			"description": "Interactive metaball visualization demonstrating implicit surface modeling",
-			"scene": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
 			"position": [
 				9.0,
 				1.0,
@@ -1928,7 +1928,7 @@
 			"name": "Implicit Surface Modeling",
 			"lookup_name": "implicit_surface_modeling",
 			"description": "Metaball-based implicit surface generation and modeling",
-			"scene": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn"
 		},
 		"WFCSculptureGenerator": {
 			"name": "WFCSculptureGenerator",
@@ -2006,31 +2006,31 @@
 			"name": "marchingcave",
 			"lookup_name": "marchingcave",
 			"description": "marchingcave",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn"
 		},
 		"marchingcubes_cave": {
 			"name": "marchingcubes_cave",
 			"lookup_name": "marchingcubes_cave",
 			"description": "marchingcubes_cave",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_cave.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn"
 		},
 		"marchingcubes_flat_landscape": {
 			"name": "marchingcubes_flat_landscape",
 			"lookup_name": "marchingcubes_flat_landscape",
 			"description": "marchingcubes_flat_landscape",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_flat_landscape.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn"
 		},
 		"marchingcubes_torus_sculpture": {
 			"name": "marchingcubes_torus_sculpture",
 			"lookup_name": "marchingcubes_torus_sculpture",
 			"description": "marchingcubes_torus_sculpture",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn"
 		},
 		"marchingcubes_inside_cave": {
 			"name": "marchingcubes_inside_cave",
 			"lookup_name": "marchingcubes_inside_cave",
 			"description": "marchingcubes_inside_cave",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_inside_cave.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn"
 		},
 		"marchingcubes_voxel_noise_demo": {
 			"name": "marchingcubes_voxel_noise_demo",
@@ -2066,25 +2066,25 @@
 			"name": "cave_explorer_3d_ui",
 			"lookup_name": "cave_explorer_3d_ui",
 			"description": "cave_explorer_3d_ui",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_3d_ui.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/cave_explorer_3d_ui.tscn"
 		},
 		"marchingcubes_portal_landscape": {
 			"name": "marchingcubes_portal_landscape",
 			"lookup_name": "marchingcubes_portal_landscape",
 			"description": "marchingcubes_portal_landscape",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn"
 		},
 		"GyroidDemo": {
 			"name": "GyroidDemo",
 			"lookup_name": "GyroidDemo",
 			"description": "GyroidDemo",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/GyroidDemo.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn"
 		},
 		"marching_cubes_cave_gallery": {
 			"name": "marching_cubes_cave_gallery",
 			"lookup_name": "marching_cubes_cave_gallery",
 			"description": "marching_cubes_cave_gallery",
-			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/marching_cubes_gallery.tscn"
+			"scene": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marching_cubes_gallery.tscn"
 		},
 		"info_display": {
 			"name": "info_display",

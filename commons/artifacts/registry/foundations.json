@@ -1,0 +1,110 @@
+{
+  "registry_info": {
+    "name": "foundations",
+    "description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
+    "category": "integration",
+    "theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
+  },
+  "artifacts": {
+    "godel_statement_plaque": {
+      "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
+      "class_name": "GodelStatementPlaque",
+      "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
+      "gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
+      "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
+      "signals": ["statement_changed", "paradox_triggered"],
+      "interactions": ["click to advance statement", "grab to cycle"],
+      "parameters": {
+        "current_index": "Starting statement (0-8)",
+        "grabbable": "Enable XR grab interaction"
+      }
+    },
+    "russell_set_box": {
+      "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
+      "class_name": "RussellSetBox",
+      "description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
+      "gamwell_reference": "Chapter 5: Russell's Paradox (1901)",
+      "qfep_connection": "Self-reference creates edges in formal systems",
+      "signals": ["paradox_observed", "box_opened", "infinite_regress_detected"],
+      "interactions": ["click to open layers", "reveals infinite regress"],
+      "parameters": {
+        "max_visible_depth": "How many nested boxes before infinite indicator",
+        "size": "Outer box dimensions"
+      }
+    },
+    "magritte_pipe": {
+      "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
+      "class_name": "MagrittePipe",
+      "description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
+      "gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
+      "qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
+      "signals": ["representation_questioned", "layer_revealed"],
+      "interactions": ["click to cycle through meta-layers of representation"],
+      "parameters": {
+        "current_layer": "Current level of representation questioning (0-5)"
+      }
+    },
+    "escher_staircase": {
+      "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
+      "class_name": "EscherStaircase",
+      "description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
+      "gamwell_reference": "Chapter 9: Escher's impossible objects",
+      "qfep_connection": "Local validity does not guarantee global consistency",
+      "signals": ["step_taken", "paradox_completed"],
+      "interactions": ["climb_step() to ascend forever and return to start"],
+      "parameters": {
+        "steps_per_side": "Number of steps on each side of the square",
+        "rotate_view": "Auto-rotate for viewing"
+      }
+    },
+    "florensky_sphere": {
+      "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
+      "class_name": "FlorenskySphere",
+      "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
+      "gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
+      "qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
+      "signals": ["state_observed", "superposition_entered", "superposition_collapsed"],
+      "interactions": ["left-click to observe (collapses temporarily)", "right-click to cycle states"],
+      "parameters": {
+        "current_state": "A, NOT_A, BOTH, or NEITHER",
+        "allow_observation": "Whether observation collapses superposition"
+      }
+    },
+    "bifurcation_diagram": {
+      "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
+      "class_name": "BifurcationDiagram",
+      "description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
+      "gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
+      "qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
+      "signals": ["r_changed", "regime_changed"],
+      "interactions": ["set_r_value() to highlight different regimes", "animate_r() for transitions"],
+      "parameters": {
+        "current_r": "Current r value (2.5-4.0)",
+        "r_steps": "Resolution of diagram",
+        "width": "Physical width of visualization"
+      }
+    }
+  },
+  "sequence_mapping": {
+    "foundationscrisis": [
+      "godel_statement_plaque",
+      "russell_set_box",
+      "escher_staircase",
+      "florensky_sphere"
+    ],
+    "artmathematics": [
+      "magritte_pipe",
+      "escher_staircase"
+    ],
+    "qfeplaboratory": [
+      "bifurcation_diagram",
+      "florensky_sphere"
+    ]
+  },
+  "theoretical_connections": {
+    "self_reference_artifacts": ["godel_statement_plaque", "russell_set_box", "escher_staircase"],
+    "representation_gap_artifacts": ["magritte_pipe"],
+    "paraconsistent_artifacts": ["florensky_sphere"],
+    "edge_of_chaos_artifacts": ["bifurcation_diagram"]
+  }
+}

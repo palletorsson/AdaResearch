@@ -5,7 +5,7 @@ FOLDER: ProceduralGenerationBooleanPatterns
 ----------------------------------------
 FOLDER: ProceduralGenerationCaveExplorer3dUi
   KEY: cave_explorer_3d_ui
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_3d_ui.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/cave_explorer_3d_ui.tscn
   DESC: cave_explorer_3d_ui
 ----------------------------------------
 FOLDER: ProceduralGenerationCrystalRandom
@@ -16,7 +16,7 @@ FOLDER: ProceduralGenerationMarchingCubesInsideCave
   SCENE: res://commons/primitives/sphere/dark_sphere.tscn
   DESC: Large reflective black sphere used as an ambient dome for isolating demos.
   KEY: marchingcubes_inside_cave
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_inside_cave.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn
   DESC: marchingcubes_inside_cave
 ----------------------------------------
 FOLDER: ProceduralGenerationMarchingCubesSculpture
@@ -27,13 +27,13 @@ FOLDER: ProceduralGenerationMarchingCubesSculpture
 Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationMarchingCubesVovelNoise\map_data.json: Expecting value: line 50 column 3 (char 2303)
 FOLDER: ProceduralGenerationMarchingcubesFlatLandscape
   KEY: marchingcubes_flat_landscape
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_flat_landscape.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn
   DESC: marchingcubes_flat_landscape
 ----------------------------------------
 Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationMarchingcubesPortalLandscape\map_data.json: Expecting value: line 30 column 3 (char 840)
 FOLDER: ProceduralGenerationMarchingcubesTorusSculpture
   KEY: marchingcubes_torus_sculpture
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn
   DESC: marchingcubes_torus_sculpture
 ----------------------------------------
 FOLDER: ProceduralGenerationNetSpace
@@ -144,15 +144,15 @@ FOLDER: ProceduralGeneration_Genetic_Programming
 ----------------------------------------
 FOLDER: ProceduralGeneration_MarchingCave
   KEY: marchingcave
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes.tscn
   DESC: marchingcave
   KEY: marchingcubes_cave
-  SCENE: res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_cave.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn
   DESC: marchingcubes_cave
 ----------------------------------------
 FOLDER: ProceduralGeneration_Marching_Cubes_Algorithm
   KEY: implicit_surface_modeling
-  SCENE: res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn
+  SCENE: res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn
   DESC: Metaball-based implicit surface generation and modeling
 ----------------------------------------
 FOLDER: ProceduralGeneration_Markov_Chains

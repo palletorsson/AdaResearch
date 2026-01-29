@@ -37,10 +37,10 @@
 			],
 
 			"algorithm_paths": {
-				"marching_cubes": "res://algorithms/proceduralgeneration/marchingcave/",
-				"marching_squares": "res://algorithms/proceduralgeneration/marchingsquares/",
-				"metaballs": "res://algorithms/proceduralgeneration/metaballs/",
-				"implicit": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/"
+				"marching_cubes": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/",
+				"marching_squares": "res://algorithms/proceduralgeneration/isosurfaces/marchingsquares/",
+				"metaballs": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/",
+				"implicit": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/"
 			},
 
 			"return_to": "lab",
