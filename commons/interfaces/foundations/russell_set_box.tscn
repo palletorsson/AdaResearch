@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://russell_set_box"]
+
+[ext_resource type="Script" path="res://commons/interfaces/foundations/russell_set_box.gd" id="1_script"]
+
+[node name="RussellSetBox" type="Node3D"]
+script = ExtResource("1_script")

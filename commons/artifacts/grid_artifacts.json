@@ -1910,7 +1910,7 @@
 			"name": "Markov Chains",
 			"lookup_name": "markov_chains",
 			"description": "Procedural generation using Markov chain algorithms",
-			"scene": "res://algorithms/proceduralgeneration/markov_chains/markov_chains.tscn"
+			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains/markov_chains.tscn"
 		},
 		"lsystem_tree": {
 			"name": "L-System Tree",
@@ -2597,7 +2597,7 @@
 			"name": "markov_chains_tree",
 			"lookup_name": "markov_chains_tree",
 			"description": "markov_chains_tree",
-			"scene": "res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.tscn"
+			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains_tree/MarkovChainsTree.tscn"
 		},
 		"poisson_disk_sampling_3d": {
 			"name": "poisson_disk_sampling_3d",
