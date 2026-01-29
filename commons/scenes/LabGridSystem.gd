@@ -439,7 +439,13 @@ func _is_sequence_name(name: String) -> bool:
 		"resourcemanagement",
 		"advancedlaboratory",
 		"qfeplaboratory",
-		"testmaps"
+		"testmaps",
+		"grammar_systems",
+		"spatial_partitioning",
+		"constraint_solvers",
+		"isosurfaces",
+		"higher_dimensions",
+		"morphogenesis"
 	]
 	return name in known_sequences
 
