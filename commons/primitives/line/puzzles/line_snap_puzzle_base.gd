@@ -223,18 +223,27 @@ func _validate_puzzle() -> void:
 
 	# Check position requirements (hybrid mode or position-only mode)
 	if require_all_at_targets:
-		for line in snap_lines:
+		var all_at_targets = true
+		for i in range(snap_lines.size()):
+			var line = snap_lines[i]
 			if not line.is_at_target():
-				return  # Not all lines at targets yet
+				print("  Line %d not at target yet" % i)
+				all_at_targets = false
+		if not all_at_targets:
+			return  # Not all lines at targets yet
+		print("LineSnapPuzzleBase: All lines at targets, checking constraints...")
 
 	# Check form constraints (relationship-based validation)
 	if use_form_constraints and not form_constraints.is_empty():
 		var line_data = _get_line_endpoint_data()
 		for constraint in form_constraints:
-			if not constraint.validate(line_data):
+			var valid = constraint.validate(line_data)
+			print("  Constraint '%s': %s" % [constraint.description, "PASS" if valid else "FAIL"])
+			if not valid:
 				return  # Constraint not satisfied
 
 	# All validations passed
+	print("LineSnapPuzzleBase: All validations passed!")
 	_complete_puzzle()
 
 

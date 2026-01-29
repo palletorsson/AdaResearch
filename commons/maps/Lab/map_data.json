@@ -31,7 +31,7 @@
 		"utilities": [
 			["m:1:1:1:0.3", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "t:transformation", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "sub:Lab_One_Info", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "sub:Lab_One_Info", " ", " ", "t:morphogenesis", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "bp:f,f,s,f,f,u,f,f,f,d,f,f", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:primitives", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "t:color", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -41,11 +41,11 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "bernini_columns", " ", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", "homagetothesquare:0:1:0.2", " "],
+			[" ", "escher_staircase", " ", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", "homagetothesquare:0:1:0.2", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_scene:0:2:0.6", " ", " ", "", " ", " ", "rainbow:45:1.5:0.02", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "world_map_tablet:180:0.2:2", "artifact_catalog_kiosk:180:0.2:2", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 		 
 		]
 	},
@@ -53,7 +53,7 @@
 		"Lab_One_Info": " Find First Simulation. ",
 	},
 	"external_references": {
-		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
+		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json"],
 		"utility_registry": "res://commons/utilities/utility_registry.json",
 		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
 	},

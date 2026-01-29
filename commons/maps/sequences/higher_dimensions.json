@@ -9,7 +9,7 @@
 
 			"description": "Explore geometry beyond three dimensions. Tesseracts, penteracts, 16-cells—polytopes that exist in 4D and 5D space, visualized through projection into 3D. Walk through the nets, see rotations through the fourth dimension.",
 			"layer": "systems",
-			"prerequisites": ["primitives", "transformations", "vectors"],
+			"prerequisites": ["primitives", "transformation", "vectors"],
 			"unlocks": ["speculativecomputation"],
 
 			"difficulty": "advanced",
@@ -30,7 +30,6 @@
 			"ProceduralGenerationNetSpace",
 			"ProceduralGenerationPortals"
 		],
-			],
 
 			"algorithm_paths": {
 				"tesseract": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/",

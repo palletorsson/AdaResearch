@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqw8x7m5n4pv1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/catalog/DesktopArtifactCatalog.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c5m6j4r8yx0kl" path="res://commons/artifacts/catalog/ui/ArtifactCatalogUI.tscn" id="2"]
+
+[node name="DesktopArtifactCatalog" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1")
+
+[node name="ArtifactCatalogUI" parent="." instance=ExtResource("2")]

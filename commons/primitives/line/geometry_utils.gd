@@ -90,6 +90,7 @@ static func get_angle_between(line_a_start: Vector3, line_a_end: Vector3,
 static func forms_closed_loop(line_endpoints: Array, tolerance: float = DEFAULT_POSITION_TOLERANCE) -> bool:
 	# line_endpoints is Array of [start: Vector3, end: Vector3] pairs
 	if line_endpoints.size() < 3:
+		print("GeometryUtils.forms_closed_loop: Need at least 3 lines, got %d" % line_endpoints.size())
 		return false
 
 	# Build vertex adjacency: count how many line endpoints touch each point
@@ -103,14 +104,25 @@ static func forms_closed_loop(line_endpoints: Array, tolerance: float = DEFAULT_
 		_add_or_increment_vertex(vertices, vertex_counts, start, tolerance)
 		_add_or_increment_vertex(vertices, vertex_counts, end, tolerance)
 
+	# Debug output
+	print("GeometryUtils.forms_closed_loop: Found %d unique vertices for %d lines" % [vertices.size(), line_endpoints.size()])
+	for i in range(vertices.size()):
+		print("  Vertex %d: %s (count=%d)" % [i, vertices[i], vertex_counts[i]])
+
 	# For a closed loop, each vertex should have exactly 2 connections
 	# (one line coming in, one going out)
-	for count in vertex_counts:
-		if count != 2:
+	for i in range(vertex_counts.size()):
+		if vertex_counts[i] != 2:
+			print("  FAIL: Vertex %d has %d connections (need 2)" % [i, vertex_counts[i]])
 			return false
 
 	# Also need exactly N vertices for N lines
-	return vertices.size() == line_endpoints.size()
+	if vertices.size() != line_endpoints.size():
+		print("  FAIL: %d vertices != %d lines" % [vertices.size(), line_endpoints.size()])
+		return false
+
+	print("  PASS: Valid closed loop!")
+	return true
 
 
 ## Helper: Add vertex to list or increment count if it exists

@@ -241,16 +241,13 @@ static func plus_constraints() -> Array[FormConstraint]:
 
 
 ## Rectangle/Quad: 4 lines forming a closed loop
+## Flexible: only requires closed loop, not specific connection order
 static func quad_constraints() -> Array[FormConstraint]:
 	var constraints: Array[FormConstraint] = []
 
-	# Adjacent pairs connected
-	constraints.append(FormConstraint.new(Type.CONNECTED, [0, 1], "Side 1-2 connected"))
-	constraints.append(FormConstraint.new(Type.CONNECTED, [1, 2], "Side 2-3 connected"))
-	constraints.append(FormConstraint.new(Type.CONNECTED, [2, 3], "Side 3-4 connected"))
-	constraints.append(FormConstraint.new(Type.CONNECTED, [3, 0], "Side 4-1 connected"))
-
-	# Must form closed loop
+	# Only require closed loop - lines can be placed in any order
+	# The CLOSED_LOOP check validates that each vertex has exactly 2 connections
+	# and there are exactly 4 vertices for 4 lines
 	constraints.append(FormConstraint.new(Type.CLOSED_LOOP, [0, 1, 2, 3], "Forms closed quad"))
 
 	return constraints

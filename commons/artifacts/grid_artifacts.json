@@ -1735,10 +1735,10 @@
 			"description": "animalpatterns",
 			"scene": "res://algorithms/patterngeneration/animalpatterns/animalpatterns.tscn"
 		},
-		"Marching_Cubes": {
-			"name": "Marching_Cubes",
-			"lookup_name": "Marching_Cubes",
-			"description": "Marching Cubes",
+		"marching_cubes_static": {
+			"name": "Marching Cubes Static",
+			"lookup_name": "marching_cubes_static",
+			"description": "Static marching cubes demonstration",
 			"scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn"
 		},
 		"rhizome_cave_demo": {
@@ -4097,6 +4097,96 @@
 			"lookup_name": "translation_cube_demo",
 			"description": "Compact 1m³ demonstration of X-axis translation. Two door elements (red/blue) slide along X axis with visual path indicators showing movement sequence.",
 			"scene": "res://commons/primitives/translation/translation_cube_demo.tscn"
+		},
+		"godel_statement_plaque": {
+			"name": "Gödel Statement Plaque",
+			"lookup_name": "godel_statement_plaque",
+			"description": "Self-referential plaque cycling through 9 statements culminating in Gödel's incompleteness. Click to advance. Gamwell Ch 9.",
+			"scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn"
+		},
+		"russell_set_box": {
+			"name": "Russell's Set Box",
+			"lookup_name": "russell_set_box",
+			"description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves. Click to open layers. Gamwell Ch 5.",
+			"scene": "res://commons/interfaces/foundations/russell_set_box.tscn"
+		},
+		"magritte_pipe": {
+			"name": "Magritte Pipe",
+			"lookup_name": "magritte_pipe",
+			"description": "Ceci n'est pas une pipe - The gap between representation and reality. Click to cycle through meta-layers. Gamwell Ch 9.",
+			"scene": "res://commons/interfaces/foundations/magritte_pipe.tscn"
+		},
+		"escher_staircase": {
+			"name": "Escher Staircase",
+			"lookup_name": "escher_staircase",
+			"description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel. Climb forever and return to start. Gamwell Ch 9.",
+			"scene": "res://commons/interfaces/foundations/escher_staircase.tscn"
+		},
+		"florensky_sphere": {
+			"name": "Florensky Sphere",
+			"lookup_name": "florensky_sphere",
+			"description": "Paraconsistent logic sphere - holds A and not-A simultaneously. Left-click to observe (collapses), right-click to cycle. Gamwell Ch 3.",
+			"scene": "res://commons/interfaces/foundations/florensky_sphere.tscn"
+		},
+		"bifurcation_diagram": {
+			"name": "Bifurcation Diagram",
+			"lookup_name": "bifurcation_diagram",
+			"description": "Interactive 3D logistic map bifurcation diagram. Walk through the edge of chaos. 10,000 points showing order→period-doubling→chaos. Gamwell Ch 12.",
+			"scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn"
+		},
+		"lambda_slider": {
+			"name": "Lambda Slider",
+			"lookup_name": "lambda_slider",
+			"description": "QFEP λ parameter controller. Controls entropy drive: λ=0 (order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). XR grabbable.",
+			"scene": "res://commons/interfaces/qfep/lambda_slider.tscn"
+		},
+		"phi_slider": {
+			"name": "Phi Slider",
+			"lookup_name": "phi_slider",
+			"description": "QFEP φ parameter controller. Controls rate of entropy change: φ=-1 (resist) → φ=0 (neutral) → φ=+1 (embrace). Positive φ = queer signature.",
+			"scene": "res://commons/interfaces/qfep/phi_slider.tscn"
+		},
+		"qfep_formula_3d": {
+			"name": "QFEP Formula 3D",
+			"lookup_name": "qfep_formula_3d",
+			"description": "3D visualization of QFE = F - λE(S) + φΔE(S,t). Shows formula with animated terms responding to parameter changes.",
+			"scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn"
+		},
+		"qfep_reactor": {
+			"name": "QFEP Reactor",
+			"lookup_name": "qfep_reactor",
+			"description": "Visual QFEP reactor showing the interplay of order and chaos. Responds to λ and φ parameters.",
+			"scene": "res://commons/interfaces/qfep/qfep_reactor.tscn"
+		},
+		"qfep_oscilloscope": {
+			"name": "QFEP Oscilloscope",
+			"lookup_name": "qfep_oscilloscope",
+			"description": "Oscilloscope display showing QFEP dynamics over time. Visualizes the oscillation between F and E(S).",
+			"scene": "res://commons/interfaces/qfep/qfep_oscilloscope.tscn"
+		},
+		"turing_pattern": {
+			"name": "Turing Pattern",
+			"lookup_name": "turing_pattern",
+			"description": "Reaction-diffusion Turing pattern generator. Shows morphogenesis - order emerging from chaos through instability.",
+			"scene": "res://commons/interfaces/qfep/turing_pattern.tscn"
+		},
+		"edge_detector": {
+			"name": "Edge Detector",
+			"lookup_name": "edge_detector",
+			"description": "Detects when system is at edge of chaos. Glows when λ is in critical range (~0.3-0.5).",
+			"scene": "res://commons/interfaces/qfep/edge_detector.tscn"
+		},
+		"phase_cube": {
+			"name": "Phase Cube",
+			"lookup_name": "phase_cube",
+			"description": "3D phase space visualization showing system state. Maps F, E(S), and ΔE to X, Y, Z axes.",
+			"scene": "res://commons/interfaces/qfep/phase_cube.tscn"
+		},
+		"entropy_meter": {
+			"name": "Entropy Meter",
+			"lookup_name": "entropy_meter",
+			"description": "Visual meter showing current system entropy E(S). Bar fills from order (blue) to chaos (red).",
+			"scene": "res://commons/interfaces/qfep/entropy_meter.tscn"
 		}
 	}
 }

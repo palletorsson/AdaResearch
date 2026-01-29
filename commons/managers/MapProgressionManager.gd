@@ -50,6 +50,63 @@ func _ready():
 	update_unlocked_maps()
 	
 	print("MapProgressionManager: Initialized with %d completed maps" % completed_maps.size())
+	
+	# Check for ada CLI launch intent
+	call_deferred("_check_ada_launch_intent")
+
+# Check if ada CLI requested a specific map/sequence launch
+func _check_ada_launch_intent():
+	const LAUNCH_FILE = "user://ada_launch.json"
+	
+	if not FileAccess.file_exists(LAUNCH_FILE):
+		return
+	
+	var file = FileAccess.open(LAUNCH_FILE, FileAccess.READ)
+	if not file:
+		return
+	
+	var json_text = file.get_as_text()
+	file.close()
+	
+	# Delete the file so we don't re-trigger on next launch
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(LAUNCH_FILE))
+	
+	var json = JSON.new()
+	if json.parse(json_text) != OK:
+		print("MapProgressionManager: Invalid ada launch file")
+		return
+	
+	var launch_data: Dictionary = json.data
+	var map_name: String = launch_data.get("map", "")
+	var sequence_name: String = launch_data.get("sequence", "")
+	
+	# Check timestamp - ignore if older than 30 seconds
+	var timestamp: float = launch_data.get("timestamp", 0)
+	var age = Time.get_unix_time_from_system() - timestamp
+	if age > 30:
+		print("MapProgressionManager: Stale ada launch intent (%.1fs old), ignoring" % age)
+		return
+	
+	print("MapProgressionManager: Ada launch intent - map: '%s', sequence: '%s'" % [map_name, sequence_name])
+	
+	if not map_name.is_empty():
+		# Direct map launch
+		current_target_map = map_name
+		call_deferred("_navigate_to_target_map")
+	elif not sequence_name.is_empty():
+		# Sequence launch - go to first map
+		var seq_maps = get_sequence_maps(sequence_name)
+		if seq_maps.size() > 0:
+			current_target_map = seq_maps[0]
+			call_deferred("_navigate_to_target_map")
+		else:
+			print("MapProgressionManager: Sequence '%s' not found or empty" % sequence_name)
+
+func _navigate_to_target_map():
+	if current_target_map.is_empty():
+		return
+	print("MapProgressionManager: Navigating to target map: %s" % current_target_map)
+	SceneManager.load_map(current_target_map)
 
 # Load the central progression configuration
 func load_progression_config() -> bool:

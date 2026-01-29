@@ -46,6 +46,9 @@ signal grid_animation_complete()
 func _ready():
 	print("GridSystem: Initializing component-based grid system...")
 
+	# Add to group so other systems can find us
+	add_to_group("grid_system")
+
 	if not base_cube:
 		push_error("GridSystem: Base cube reference not found!")
 		return

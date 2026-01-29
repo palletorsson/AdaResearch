@@ -175,6 +175,13 @@
 			"description": "Handheld sound library. Browse 73+ audio presets across 15 categories, preview sounds, edit parameters in VR.",
 			"scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
 			"category": "audio"
+		},
+		"artifact_catalog_kiosk": {
+			"name": "Artifact Catalog Kiosk",
+			"lookup_name": "artifact_catalog_kiosk",
+			"description": "VR kiosk for browsing and spawning artifacts. Filter by theme and complexity, search by tags. 318+ artifacts organized into 10 thematic categories. Dev tool that becomes player inventory through progression.",
+			"scene": "res://commons/artifacts/catalog/ArtifactCatalogTablet3D.tscn",
+			"category": "navigation"
 		}
 	}
 }

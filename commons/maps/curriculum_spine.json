@@ -1,0 +1,279 @@
+{
+  "_meta": {
+    "description": "Explicit curriculum spine - recommended progression through QFEP",
+    "version": "1.0",
+    "last_updated": "2026-01-29"
+  },
+
+  "spine": {
+    "description": "The recommended path through Ada Research, ordered by QFEP phases",
+    "sequences": [
+      {
+        "name": "primitives",
+        "phase": "F_order",
+        "qfep_role": "Foundation - the Euclidean world",
+        "lab_post": "Lab/map_data_post_primitives",
+        "order": 1
+      },
+      {
+        "name": "vectors",
+        "phase": "F_order",
+        "qfep_role": "Direction and magnitude",
+        "lab_post": "Lab/map_data_post_vectors",
+        "order": 2
+      },
+      {
+        "name": "transformations",
+        "phase": "F_order",
+        "qfep_role": "Invariants - what stays the same",
+        "lab_post": "Lab/map_data_post_transformation",
+        "order": 3
+      },
+      {
+        "name": "wavefunctions",
+        "phase": "oscillation",
+        "qfep_role": "F ↔ E oscillation - sine creates curves",
+        "lab_post": "Lab/map_data_post_wavefunctions",
+        "order": 4
+      },
+      {
+        "name": "forces",
+        "phase": "oscillation",
+        "qfep_role": "Newton's laws - what drives change",
+        "lab_post": "Lab/map_data_post_forces",
+        "order": 5
+      },
+      {
+        "name": "randomness",
+        "phase": "E_entropy",
+        "qfep_role": "Disorder as creative force",
+        "lab_post": "Lab/map_data_post_random",
+        "order": 6
+      },
+      {
+        "name": "noise",
+        "phase": "E_entropy",
+        "qfep_role": "Structured randomness - Perlin, Simplex",
+        "lab_post": "Lab/map_data_post_noise",
+        "order": 7
+      },
+      {
+        "name": "cellularautomata",
+        "phase": "E_entropy",
+        "qfep_role": "Simple rules → complex behavior",
+        "lab_post": "Lab/map_data_post_cellularautomata",
+        "order": 8
+      },
+      {
+        "name": "fractals",
+        "phase": "lambda_edge",
+        "qfep_role": "Self-similarity, infinite detail",
+        "lab_post": "Lab/map_data_post_fractals",
+        "order": 9
+      },
+      {
+        "name": "lsystems",
+        "phase": "lambda_edge",
+        "qfep_role": "Generative grammars",
+        "lab_post": "Lab/map_data_post_lsystems",
+        "order": 10
+      },
+      {
+        "name": "proceduralgeneration",
+        "phase": "lambda_edge",
+        "qfep_role": "WFC, Markov, emergence from rules",
+        "lab_post": "Lab/map_data_post_proceduralgeneration",
+        "order": 11
+      },
+      {
+        "name": "morphogenesis",
+        "phase": "integration",
+        "qfep_role": "Turing patterns - order from chaos",
+        "lab_post": "Lab/map_data_post_morphogenesis",
+        "order": 12
+      },
+      {
+        "name": "swarmintelligence",
+        "phase": "integration",
+        "qfep_role": "Collective behavior, stigmergy",
+        "lab_post": "Lab/map_data_post_swarmintelligence",
+        "order": 13
+      },
+      {
+        "name": "softbodies",
+        "phase": "integration",
+        "qfep_role": "Deformable matter, cloth, fluid",
+        "lab_post": "Lab/map_data_post_softbodies",
+        "order": 14
+      },
+      {
+        "name": "machinelearning",
+        "phase": "integration",
+        "qfep_role": "Learning systems, neural networks",
+        "lab_post": "Lab/map_data_post_machinelearning",
+        "order": 15
+      },
+      {
+        "name": "foundationscrisis",
+        "phase": "synthesis",
+        "qfep_role": "Gödel, Russell - limits of formal systems",
+        "lab_post": "Lab/map_data_post_foundationscrisis",
+        "order": 16
+      },
+      {
+        "name": "qfeplaboratory",
+        "phase": "synthesis",
+        "qfep_role": "The complete QFEP formula embodied",
+        "lab_post": "Lab/map_data_post_qfeplaboratory",
+        "order": 17
+      },
+      {
+        "name": "speculativecomputation",
+        "phase": "synthesis",
+        "qfep_role": "Queer futures, non-normative algorithms",
+        "lab_post": "Lab/map_data_post_speculativecomputation",
+        "order": 18
+      },
+      {
+        "name": "criticalalgorithms",
+        "phase": "synthesis",
+        "qfep_role": "Ethics of computation, algorithmic bias",
+        "lab_post": "Lab/map_data_post_criticalalgorithms",
+        "order": 19
+      }
+    ]
+  },
+
+  "phases": {
+    "F_order": {
+      "name": "Order (F)",
+      "color": "#4A90D9",
+      "description": "Free energy minimization - prediction, stability, structure",
+      "gamwell_chapters": "Ch 1-4: Euclid, Formalism"
+    },
+    "oscillation": {
+      "name": "Oscillation (F ↔ E)",
+      "color": "#9B59B6",
+      "description": "Dynamic balance between order and entropy",
+      "gamwell_chapters": "Ch 7-8: Symmetry, Bauhaus"
+    },
+    "E_entropy": {
+      "name": "Entropy (E(S))",
+      "color": "#E74C3C",
+      "description": "System entropy - disorder as creative force",
+      "gamwell_chapters": "Ch 10: Turing Morphogenesis"
+    },
+    "lambda_edge": {
+      "name": "Edge of Chaos (λ)",
+      "color": "#F39C12",
+      "description": "The λ parameter - tuning between order and chaos",
+      "gamwell_chapters": "Ch 12: Fractals, Complexity"
+    },
+    "integration": {
+      "name": "Integration (φΔE)",
+      "color": "#2ECC71",
+      "description": "Rate of entropy change - emergence, self-organization",
+      "gamwell_chapters": "Ch 10-12: Turing, Emergence"
+    },
+    "synthesis": {
+      "name": "Synthesis",
+      "color": "#E91E63",
+      "description": "Full QFEP - edges, paradoxes, queer futures",
+      "gamwell_chapters": "Ch 3-6, 9, 13: Foundations Crisis"
+    }
+  },
+
+  "branches": {
+    "description": "Optional sequences that unlock from spine points",
+    "branch_points": {
+      "primitives": {
+        "unlocks": ["meshes", "datastructures", "color"],
+        "note": "Foundation tools for building"
+      },
+      "vectors": {
+        "unlocks": ["computationalgeometry", "graphtheory"],
+        "note": "Spatial and relational structures"
+      },
+      "forces": {
+        "unlocks": ["physicssimulation", "particles"],
+        "note": "Physics engines and particle systems"
+      },
+      "wavefunctions": {
+        "unlocks": ["proceduralaudio"],
+        "note": "Sound synthesis"
+      },
+      "proceduralgeneration": {
+        "unlocks": ["spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "grammar_systems"],
+        "note": "The split procgen sub-sequences"
+      },
+      "machinelearning": {
+        "unlocks": ["recursiveemergence", "artmathematics"],
+        "note": "Recursive patterns and art history"
+      },
+      "criticalalgorithms": {
+        "unlocks": ["advancedlaboratory"],
+        "note": "Post-game content"
+      }
+    }
+  },
+
+  "lab_evolution": {
+    "description": "How the Lab changes at each spine completion",
+    "patterns": [
+      {
+        "after": "primitives",
+        "changes": ["trace_visible", "ramp_to_vectors", "side_doors_mesh_color_data"]
+      },
+      {
+        "after": "vectors",
+        "changes": ["vector_arrows_on_walls", "elevator_to_transformations"]
+      },
+      {
+        "after": "transformations",
+        "changes": ["rotating_structures", "bridge_to_wavefunctions"]
+      },
+      {
+        "after": "wavefunctions",
+        "changes": ["oscillating_elements", "sound_activated", "stairs_to_forces"]
+      },
+      {
+        "after": "forces",
+        "changes": ["physics_objects_falling", "ladder_to_randomness"]
+      },
+      {
+        "after": "randomness",
+        "changes": ["entropy_particles", "noise_textures", "tunnel_to_noise"]
+      },
+      {
+        "after": "cellularautomata",
+        "changes": ["ca_patterns_on_floor", "portal_to_fractals"]
+      },
+      {
+        "after": "fractals",
+        "changes": ["fractal_structures_grow", "menger_sponge_corner"]
+      },
+      {
+        "after": "morphogenesis",
+        "changes": ["turing_patterns_walls", "organic_portals"]
+      },
+      {
+        "after": "qfeplaboratory",
+        "changes": ["qfep_formula_floating", "lambda_phi_sliders_everywhere"]
+      }
+    ]
+  },
+
+  "visualization": {
+    "layout": "metro_map",
+    "spine_style": {
+      "line_width": 8,
+      "station_size": 24,
+      "glow": true
+    },
+    "branch_style": {
+      "line_width": 4,
+      "station_size": 16,
+      "dashed": true
+    }
+  }
+}

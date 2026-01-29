@@ -10,7 +10,7 @@
 
 			"description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions—they exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
 			"layer": "emergence",
-			"prerequisites": ["primitives", "transformations"],
+			"prerequisites": ["primitives", "transformation"],
 			"unlocks": ["proceduralgeneration", "lsystems"],
 
 			"difficulty": "intermediate",
@@ -38,20 +38,14 @@
 			],
 
 			"maps": [
-
-
-				"Fractals_7",
 				"Fractals_1",
 				"Fractals_2",
 				"Fractals_3",
 				"Fractals_4",
-					"Fractals_7",	
-								"Fractals_8",
 				"Fractals_5",
-					
 				"Fractals_6",
- 
- 
+				"Fractals_7",
+				"Fractals_8"
 			],
 
 			"axiom_files": [

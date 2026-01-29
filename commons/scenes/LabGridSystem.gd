@@ -18,12 +18,19 @@ var unlocked_artifacts: Array[String] = []
 # Additional lab signals
 signal lab_artifact_activated(artifact_id: String)
 signal lab_sequence_triggered(sequence_name: String)
- 
+
 var show_grid
+
+# Artifact catalog system
+var artifact_spawn_manager: ArtifactSpawnManager = null
+var desktop_catalog: DesktopArtifactCatalog = null
 
 func _ready():
 	print("LabGridSystem: Initializing lab variant of grid system...")
-	
+
+	# Add to lab_system group so catalog can find us
+	add_to_group("lab_system")
+
 	# Set default map_name for lab if not already set
 	if map_name.is_empty() or map_name == "Tutorial_Start":
 		map_name = "Lab"
@@ -47,6 +54,10 @@ func _ready():
 	
 	# Call parent ready
 	super()
+
+	# Connect to map generation complete to initialize catalog after map loads
+	if not map_generation_complete.is_connected(_on_lab_map_ready_for_catalog):
+		map_generation_complete.connect(_on_lab_map_ready_for_catalog)
 
 func _check_for_progressive_map():
 	"""Check if this is a progressive map file"""
@@ -74,6 +85,88 @@ func _check_for_progressive_map():
 		is_progressive_map = false
 		progression_state = "initial"
 		print("LabGridSystem: Standard lab map - using legacy progression system")
+
+func _on_lab_map_ready_for_catalog():
+	"""Called when map generation is complete - safe to initialize catalog"""
+	print("LabGridSystem: Map generation complete, initializing artifact catalog...")
+	_setup_artifact_catalog_system()
+
+
+func _setup_artifact_catalog_system():
+	"""Initialize artifact spawn manager and desktop catalog"""
+	print("LabGridSystem: Setting up artifact catalog system...")
+
+	# Verify GridInteractablesComponent is loaded and has artifacts
+	if not has_node("GridInteractablesComponent"):
+		push_warning("LabGridSystem: GridInteractablesComponent not found, skipping catalog setup")
+		return
+
+	var interactables = get_node("GridInteractablesComponent")
+	if not "grid_artifact_registry" in interactables or interactables.grid_artifact_registry.is_empty():
+		push_warning("LabGridSystem: Artifact registry is empty, skipping catalog setup")
+		return
+
+	print("LabGridSystem: Found %d artifacts, proceeding with catalog setup" % interactables.grid_artifact_registry.size())
+
+	# Create and add spawn manager
+	artifact_spawn_manager = ArtifactSpawnManager.new()
+	artifact_spawn_manager.name = "ArtifactSpawnManager"
+	add_child(artifact_spawn_manager)
+
+	# Connect spawn manager signals
+	artifact_spawn_manager.artifact_spawned.connect(_on_artifact_spawned_from_catalog)
+	artifact_spawn_manager.spawn_failed.connect(_on_artifact_spawn_failed)
+
+	print("LabGridSystem: Artifact spawn manager initialized")
+
+	# Check if in VR mode
+	var xr_interface = XRServer.get_primary_interface()
+	var is_vr = xr_interface != null and xr_interface.is_initialized()
+
+	# Add desktop catalog only in desktop mode
+	if not is_vr:
+		var catalog_scene = load("res://commons/artifacts/catalog/DesktopArtifactCatalog.tscn")
+		if catalog_scene:
+			desktop_catalog = catalog_scene.instantiate()
+			get_tree().root.add_child(desktop_catalog)
+
+			# Pass references directly to avoid scene tree search issues
+			desktop_catalog.set_references(self, artifact_spawn_manager)
+
+			# Connect catalog signals
+			desktop_catalog.artifact_spawn_requested.connect(_on_catalog_spawn_requested)
+			desktop_catalog.catalog_opened.connect(_on_catalog_opened)
+			desktop_catalog.catalog_closed.connect(_on_catalog_closed)
+
+			print("LabGridSystem: Desktop artifact catalog initialized (Tab key to toggle)")
+		else:
+			push_warning("LabGridSystem: Could not load desktop catalog scene")
+	else:
+		print("LabGridSystem: VR mode - using kiosk in Lab map")
+
+func _on_artifact_spawned_from_catalog(lookup_name: String, artifact: Node):
+	"""Handle artifact spawned from catalog"""
+	print("LabGridSystem: Artifact spawned from catalog: %s" % lookup_name)
+	lab_artifact_activated.emit(lookup_name)
+
+func _on_artifact_spawn_failed(lookup_name: String, error: String):
+	"""Handle artifact spawn failure"""
+	push_warning("LabGridSystem: Failed to spawn artifact '%s': %s" % [lookup_name, error])
+
+func _on_catalog_spawn_requested(lookup_name: String):
+	"""Handle spawn request from catalog (fallback if spawn manager not found)"""
+	if artifact_spawn_manager:
+		artifact_spawn_manager.spawn_artifact(lookup_name)
+	else:
+		push_warning("LabGridSystem: Spawn requested but spawn manager not initialized")
+
+func _on_catalog_opened():
+	"""Handle catalog opened"""
+	print("LabGridSystem: Artifact catalog opened")
+
+func _on_catalog_closed():
+	"""Handle catalog closed"""
+	print("LabGridSystem: Artifact catalog closed")
 
 func _apply_lab_styling():
 	"""Apply lab-specific visual styling"""
