@@ -36,11 +36,11 @@
 			],
 
 			"algorithm_paths": {
-				"tesseract": "res://algorithms/proceduralgeneration/tesseractnetspace/",
-				"tesseract_tunnel": "res://algorithms/proceduralgeneration/tesseracttunnel/",
-				"sixteen_cell": "res://algorithms/proceduralgeneration/sixteencellnetspace/",
-				"penteract": "res://algorithms/proceduralgeneration/penteractdoubleprojection/",
-				"portals": "res://algorithms/proceduralgeneration/tessellatingportal/"
+				"tesseract": "res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/",
+				"tesseract_tunnel": "res://algorithms/proceduralgeneration/higher_dimensional/tesseracttunnel/",
+				"sixteen_cell": "res://algorithms/proceduralgeneration/higher_dimensional/sixteencellnetspace/",
+				"penteract": "res://algorithms/proceduralgeneration/higher_dimensional/penteractdoubleprojection/",
+				"portals": "res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/"
 			},
 
 			"return_to": "lab",
