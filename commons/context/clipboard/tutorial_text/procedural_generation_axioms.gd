@@ -16,7 +16,7 @@ res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpaceParti
 
 [hr]
 [b]Constraint Weavers & Tile Grammars[/b]
-res://algorithms/proceduralgeneration/wave_function_collapse/WaveFunctionCollapse.tscn, WFCCave.tscn, and modelsynthesis.tscn walk through entropy-based collapse, adjacency dictionaries, and backtracking metrics. res://algorithms/proceduralgeneration/wfcRooms/wfc_rooms.tscn plus tile_template_examples.gd document how to author tiles, sockets, and metadata before solving, while res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn and res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn lift the technique into voxels and gallery sculptures. Use these once your macro layout exists: feed each solver tile sets derived from BSP leaves or maze corridors so constraints lock everything together.
+res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WaveFunctionCollapse.tscn, WFCCave.tscn, and modelsynthesis.tscn walk through entropy-based collapse, adjacency dictionaries, and backtracking metrics. res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_rooms.tscn plus tile_template_examples.gd document how to author tiles, sockets, and metadata before solving, while res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn and res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn lift the technique into voxels and gallery sculptures. Use these once your macro layout exists: feed each solver tile sets derived from BSP leaves or maze corridors so constraints lock everything together.
 
 [i]Concepts: entropy ordering, adjacency matrices, tile tagging, constraint satisfaction, failure recovery[/i]
 [i]Constraints are the grammar rules that keep infinite rearrangements coherent.[/i]
@@ -59,7 +59,7 @@ sampler.sample_region = bsp.space_size
 sampler.min_distance = 1.5
 sampler.generate_samples()
 
-var wfc := preload("res://algorithms/proceduralgeneration/wave_function_collapse/WaveFunctionCollapse.gd").new()
+var wfc := preload("res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WaveFunctionCollapse.gd").new()
 wfc.grid_size = 24
 wfc.adjacency_rules = {
     "empty": ["empty", "wall"],

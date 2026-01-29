@@ -35,10 +35,10 @@
 			],
 
 			"algorithm_paths": {
-				"wfc": "res://algorithms/proceduralgeneration/wave_function_collapse/",
-				"wfc_3d": "res://algorithms/proceduralgeneration/wfc3D/",
-				"wfc_dungeon": "res://algorithms/proceduralgeneration/wfcRooms/",
-				"boolean": "res://algorithms/proceduralgeneration/randomboolean/"
+				"wfc": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/",
+				"wfc_3d": "res://algorithms/proceduralgeneration/constraint_solvers/wfc3D/",
+				"wfc_dungeon": "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/",
+				"boolean": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/"
 			},
 
 			"return_to": "lab",

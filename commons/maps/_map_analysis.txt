@@ -1,6 +1,6 @@
 FOLDER: ProceduralGenerationBooleanPatterns
   KEY: boolean_patterns
-  SCENE: res://algorithms/proceduralgeneration/randomboolean/all_patterns_demo.tscn
+  SCENE: res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn
   DESC: boolean_patterns
 ----------------------------------------
 FOLDER: ProceduralGenerationCaveExplorer3dUi
@@ -232,6 +232,6 @@ FOLDER: ProceduralGeneration_Voronoi_Diagrams
 ----------------------------------------
 FOLDER: ProceduralGeneration_Wave_Function_Collapse
   KEY: wave_function_collapse
-  SCENE: res://algorithms/proceduralgeneration/wave_function_collapse/wave_function_collapse.tscn
+  SCENE: res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/wave_function_collapse.tscn
   DESC: Procedural generation using wave function collapse algorithm
 ----------------------------------------

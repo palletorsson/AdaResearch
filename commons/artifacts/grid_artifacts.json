@@ -1697,19 +1697,19 @@
 			"name": "Wave Function Collapse",
 			"lookup_name": "wave_function_collapse",
 			"description": "Procedural generation using wave function collapse algorithm",
-			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/wave_function_collapse.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/wave_function_collapse.tscn"
 		},
 		"WFCCav": {
 			"name": "WFCCav",
 			"lookup_name": "WFCCav",
 			"description": "WFCCav",
-			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/WFCCave.tscn"
 		},
 		"wfc_3d_demo": {
 			"name": "wfc_3d_demo",
 			"lookup_name": "wfc_3d_demo",
 			"description": "wfc_3d_demo",
-			"scene": "res://algorithms/proceduralgeneration/wfc3D/wfc_3d_demo.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfc3D/wfc_3d_demo.tscn"
 		},
 		"voronoi_diagrams": {
 			"name": "Voronoi Diagrams",
@@ -1946,7 +1946,7 @@
 			"name": "modelsynthesis",
 			"lookup_name": "modelsynthesis",
 			"description": "modelsynthesis",
-			"scene": "res://algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wave_function_collapse/modelsynthesis.tscn"
 		},
 		"spherenetwork": {
 			"name": "spherenetwork",
@@ -2042,13 +2042,13 @@
 			"name": "wfc_dungeon_generator",
 			"lookup_name": "wfc_dungeon_generator",
 			"description": "wfc_dungeon_generator",
-			"scene": "res://algorithms/proceduralgeneration/wfcRooms/wfc_dungeon_generator.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_dungeon_generator.tscn"
 		},
 		"boolean_patterns": {
 			"name": "boolean_patterns",
 			"lookup_name": "boolean_patterns",
 			"description": "boolean_patterns",
-			"scene": "res://algorithms/proceduralgeneration/randomboolean/all_patterns_demo.tscn"
+			"scene": "res://algorithms/proceduralgeneration/constraint_solvers/randomboolean/all_patterns_demo.tscn"
 		},
 		"VRBrush": {
 			"name": "VRBrush",
