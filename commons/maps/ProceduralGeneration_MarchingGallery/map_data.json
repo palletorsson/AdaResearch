@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "20 Some Marching Cube Computor",
-		"description": "nothing else so far",
+		"name": "PG: Marching Cubes Gallery",
+		"lookup_name": "ProceduralGeneration_MarchingGallery",
+		"description": "Gallery of marching cubes sculptures: DNA, atoms, humans, and abstract forms",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +14,7 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": ["Isosurface extraction", "Scalar field visualization", "Procedural sculpture", "Marching cubes showcase"]
 		}
 	},
 	"layers": {

@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "PG: MC Gyroid Sculpture",
+		"lookup_name": "ProceduralGenerationMarchingCubesSculpture",
+		"description": "Gyroid minimal surface sculpture via marching cubes",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +14,7 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": ["Gyroid minimal surface", "Triply periodic surfaces", "Implicit functions", "Sculptural mesh"]
 		}
 	},
 	"layers": {

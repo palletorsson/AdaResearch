@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "PG: MC Flat Landscape",
+		"lookup_name": "ProceduralGenerationMarchingcubesFlatLandscape",
+		"description": "Flat terrain landscape generated with marching cubes",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +14,7 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": ["Terrain generation", "Heightmap to mesh", "Surface smoothing", "Procedural landscapes"]
 		}
 	},
 	"layers": {

@@ -1,7 +1,8 @@
 {
 	"map_info": {
-		"name": "Random Algorithms Arena",
-		"description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+		"name": "PG: Voronoi Diagrams",
+		"lookup_name": "ProceduralGeneration_Voronoi_Diagrams",
+		"description": "3D Voronoi tessellation and cell-based spatial partitioning",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
@@ -13,7 +14,7 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5-7 minutes",
-			"learning_objectives": ["Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations"]
+			"learning_objectives": ["Voronoi cells", "Nearest neighbor regions", "Seed point distribution", "Dual of Delaunay"]
 		}
 	},
 	"layers": {
