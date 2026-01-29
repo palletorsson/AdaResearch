@@ -1,48 +1,68 @@
 {
 	"sequences": {
 		"proceduralgeneration": {
-			"name": "Procedural Generation",
-			"description": "Explore advanced procedural content generation systems",
-			"difficulty": "advanced",
-			"estimated_time": "40-50 minutes",
-			"learning_objectives": [
-				"Wave function collapse and constraint propagation",
-				"Marching cubes and isosurface extraction",
-				"Spatial partitioning algorithms (Voronoi, Delaunay, BSP)",
-				"Grammar systems (Markov, N-grams, L-systems)",
-				"Evolutionary and genetic algorithms",
-				"Higher-dimensional geometry (4D polytopes)"
-			],
-			"maps": [
+			"name": "Procedural Generation Hub",
+			"description": "Hub for procedural content generation. This sequence has been split into focused sub-sequences for better learning progression.",
+			"difficulty": "intermediate-advanced",
+			"estimated_time": "See sub-sequences",
+			
+			"sub_sequences": {
+				"grammar_systems": {
+					"name": "Grammar Systems",
+					"description": "Rules generate structure: Markov chains, N-grams, L-systems basics",
+					"estimated_time": "25-30 minutes"
+				},
+				"spatial_partitioning": {
+					"name": "Spatial Partitioning", 
+					"description": "Dividing space: Voronoi, Delaunay, BSP, Poisson",
+					"estimated_time": "25-30 minutes"
+				},
+				"constraint_solvers": {
+					"name": "Constraint Solvers",
+					"description": "Rules become worlds: Wave Function Collapse, Boolean patterns",
+					"estimated_time": "30-35 minutes"
+				},
+				"isosurfaces": {
+					"name": "Isosurfaces",
+					"description": "Implicit to explicit: Marching Cubes, metaballs, terrain",
+					"estimated_time": "30-40 minutes"
+				},
+				"higher_dimensions": {
+					"name": "Higher Dimensions",
+					"description": "Beyond 3D: Tesseract, Penteract, 16-cell projections",
+					"estimated_time": "25-30 minutes"
+				}
+			},
 
+			"learning_objectives": [
+				"Grammar systems for sequential generation",
+				"Spatial partitioning for world organization",
+				"Constraint propagation for coherent generation",
+				"Isosurface extraction from scalar fields",
+				"Higher-dimensional geometry visualization"
+			],
+
+			"progression_note": "Start with grammar_systems or spatial_partitioning. constraint_solvers builds on cellularautomata. isosurfaces builds on noise. higher_dimensions builds on transformations.",
+
+			"legacy_maps": [
 				"ProceduralGeneration_Markov_Chains",
 				"ProceduralGenerationCaveExplorer3dUi", 
 				"ProceduralGeneration_CaveRandomWalk",
 				"ProceduralGeneration_Maze",
-
-
 				"ProceduralGeneration_Genetic_Programming",
-
 				"ProceduralGeneration_Space_Colonization_Algorithms",
 				"ProceduralGeneration_BranchingGrowthAlgorithm",
 				"ProceduralGenerationBooleanPatterns",
 				"ProceduralGenerationCrystalRandom",
-
 				"ProceduralGenerationNetSpace",
 				"ProceduralGenerationSixteenCellNet",
 				"ProceduralGenerationTesseractErrorTunnel",
 				"ProceduralGenerationPortals",
-				
 				"ProceduralGeneration_Reaction_Diffusion_Systems",
-
-			
-
 				"ProceduralGeneration_Voronoi_Diagrams",
 				"ProceduralGeneration_Delaunay_Triangulation",
 				"ProceduralGeneration_Space_Partitioning",
 				"ProceduralGeneration_Poisson_Disk_Sampling",
-
-				
 				"ProceduralGeneration_Wave_Function_Collapse",
 				"ProceduralGenerationWfcDungeonGenerator",
 				"ProceduralGeneration_Marching_Cubes_Algorithm",
@@ -51,16 +71,12 @@
 				"ProceduralGenerationMarchingCubesSculpture",
 				"ProceduralGenerationMarchingcubesTorusSculpture",
 				"ProceduralGenerationMarchingcubesFlatLandscape",
-				"ProceduralGeneration_MarchingCave",				
+				"ProceduralGeneration_MarchingCave"
 			],
+
 			"return_to": "lab",
-			"unlock_requirements": [
-				"noise"
-			],
-			"completion_rewards": [
-				"procedural_master_badge",
-				"generation_specialist_badge"
-			]
+			"unlock_requirements": ["noise"],
+			"completion_rewards": ["procedural_master_badge"]
 		}
 	}
 }

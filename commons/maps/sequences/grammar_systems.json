@@ -1,0 +1,53 @@
+{
+	"sequences": {
+		"grammar_systems": {
+			"name": "Grammar Systems: Rules Generate Structure",
+			"truth": "A handful of rules, iterated, becomes a forest. Grammars are the DNA of procedural generation.",
+			"qfep_term": "F→E(S)→F",
+			"qfep_connection": "Grammars are pure F (deterministic rules) that generate E(S) (structural variety). Stochastic grammars add controlled entropy. L-systems are morphogenesis made computational.",
+			"formula": "axiom + rules + iterations → structure",
+
+			"description": "Formal grammars as generative systems. Markov chains predict from history, N-grams capture local patterns, L-systems grow plants and cities. Context-free, context-sensitive, stochastic—different rule types for different generations.",
+			"layer": "systems",
+			"prerequisites": ["primitives", "randomness"],
+			"unlocks": ["lsystems", "machinelearning"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+
+			"learning_objectives": [
+				"Formal grammars: rules that rewrite symbols",
+				"Markov chains: probability from history",
+				"N-grams: local context patterns",
+				"L-systems basics: turtle graphics, branching",
+				"Stochastic grammars: controlled randomness",
+				"Applications: text, music, architecture, plants"
+			],
+
+			"maps": [
+				"GrammarSystems_Intro",
+				"GrammarSystems_Markov_Chains",
+				"GrammarSystems_N_grams",
+				"GrammarSystems_Context_Free",
+				"GrammarSystems_LSystem_Basics",
+				"GrammarSystems_Stochastic",
+				"GrammarSystems_Tree_Growth",
+				"GrammarSystems_Synthesis"
+			],
+
+			"algorithm_paths": {
+				"markov": "res://algorithms/proceduralgeneration/markov_chains/",
+				"markov_tree": "res://algorithms/proceduralgeneration/markov_chains_tree/",
+				"lsystem": "res://algorithms/l_systems/"
+			},
+
+			"related_sequences": ["lsystems"],
+
+			"return_to": "lab",
+			"completion_rewards": [
+				"grammar_badge",
+				"generative_rules_badge"
+			]
+		}
+	}
+}

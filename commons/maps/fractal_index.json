@@ -34,7 +34,7 @@
 		"systems": {
 			"qfep_term": "λ",
 			"description": "Edge of chaos - self-organization. Collective intelligence, adaptive capacity.",
-			"sequences": ["swarmintelligence", "proceduralgeneration", "machinelearning", "lsystems", "patterngeneration"]
+			"sequences": ["grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "swarmintelligence", "machinelearning", "lsystems", "patterngeneration"]
 		},
 		"integration": {
 			"qfep_term": "φΔE(S,t)",
@@ -108,7 +108,33 @@
 		"proceduralgeneration": {
 			"requires": ["noise", "fractals", "cellularautomata"],
 			"enables": ["machinelearning", "speculativecomputation"],
-			"related_axioms": ["procgen_axioms.md", "wfc_axioms.md"]
+			"related_axioms": ["procgen_axioms.md", "wfc_axioms.md"],
+			"note": "Split into sub-sequences: grammar_systems, spatial_partitioning, constraint_solvers, isosurfaces, higher_dimensions"
+		},
+		"grammar_systems": {
+			"requires": ["primitives", "randomness"],
+			"enables": ["lsystems", "machinelearning"],
+			"related_axioms": ["grammar_axioms.md", "markov_axioms.md"]
+		},
+		"spatial_partitioning": {
+			"requires": ["primitives", "vectors", "randomness"],
+			"enables": ["computationalgeometry", "proceduralgeneration"],
+			"related_axioms": ["voronoi_axioms.md", "delaunay_axioms.md"]
+		},
+		"constraint_solvers": {
+			"requires": ["randomness", "cellularautomata"],
+			"enables": ["proceduralgeneration"],
+			"related_axioms": ["wfc_axioms.md", "constraint_propagation_axioms.md"]
+		},
+		"isosurfaces": {
+			"requires": ["noise", "vectors"],
+			"enables": ["proceduralgeneration", "physicssimulation"],
+			"related_axioms": ["marching_cubes_axioms.md", "implicit_surfaces_axioms.md"]
+		},
+		"higher_dimensions": {
+			"requires": ["primitives", "transformations", "vectors"],
+			"enables": ["speculativecomputation"],
+			"related_axioms": ["tesseract_axioms.md", "projection_axioms.md"]
 		},
 		"machinelearning": {
 			"requires": ["vectors", "randomness", "swarmintelligence"],

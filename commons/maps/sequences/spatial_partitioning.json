@@ -1,0 +1,52 @@
+{
+	"sequences": {
+		"spatial_partitioning": {
+			"name": "Spatial Partitioning: Dividing Space",
+			"truth": "To understand space, divide it. Every partition reveals structure hidden in continuity.",
+			"qfep_term": "λ",
+			"qfep_connection": "Spatial partitioning algorithms find order in continuous space—the λ parameter tuned for organization. Voronoi finds natural territories, Delaunay optimal connections, BSP recursive divisions.",
+			"formula": "space → regions → relationships",
+
+			"description": "Algorithms that divide space into meaningful regions. Voronoi diagrams partition by proximity, Delaunay triangulation connects optimally, BSP trees divide recursively, Poisson sampling distributes evenly.",
+			"layer": "systems",
+			"prerequisites": ["primitives", "vectors", "randomness"],
+			"unlocks": ["proceduralgeneration_advanced", "computationalgeometry"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+
+			"learning_objectives": [
+				"Voronoi diagrams: regions of closest proximity",
+				"Delaunay triangulation: dual of Voronoi, optimal connections",
+				"Binary Space Partitioning: recursive spatial division",
+				"Poisson disk sampling: even random distribution",
+				"Applications: terrain, cities, networks, game levels"
+			],
+
+			"maps": [
+				"SpatialPartitioning_Voronoi_Intro",
+				"SpatialPartitioning_Voronoi_3D",
+				"SpatialPartitioning_Delaunay",
+				"SpatialPartitioning_Voronoi_Delaunay_Dual",
+				"SpatialPartitioning_BSP",
+				"SpatialPartitioning_Poisson_Disk",
+				"SpatialPartitioning_Applications",
+				"SpatialPartitioning_Synthesis"
+			],
+
+			"algorithm_paths": {
+				"voronoi": "res://algorithms/proceduralgeneration/voronoi_diagrams/",
+				"voronoi_3d": "res://algorithms/proceduralgeneration/voronoi_diagram_3d/",
+				"delaunay": "res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/",
+				"bsp": "res://algorithms/proceduralgeneration/binary_space_partitioning/",
+				"poisson": "res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/"
+			},
+
+			"return_to": "lab",
+			"completion_rewards": [
+				"space_divider_badge",
+				"voronoi_master_badge"
+			]
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"sequences": {
+		"isosurfaces": {
+			"name": "Isosurfaces: Implicit to Explicit",
+			"truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
+			"qfep_term": "λ",
+			"qfep_connection": "Marching algorithms find the edge—the threshold between states. This IS the edge of chaos made geometric: where density crosses zero, form emerges.",
+			"formula": "f(x,y,z) = threshold → mesh",
+
+			"description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries, Marching Squares does 2D contours. Metaballs merge implicit surfaces. The implicit becomes explicit.",
+			"layer": "systems",
+			"prerequisites": ["noise", "vectors"],
+			"unlocks": ["proceduralgeneration_advanced", "physicssimulation"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "30-40 minutes",
+
+			"learning_objectives": [
+				"Implicit surfaces: functions that define inside/outside",
+				"Marching Cubes: the 256-case lookup table",
+				"Isovalues: choosing where to extract",
+				"Metaballs: smooth organic shapes from distance fields",
+				"Terrain, caves, sculptures from noise fields"
+			],
+
+			"maps": [
+				"Isosurfaces_Intro",
+				"Isosurfaces_Marching_Squares",
+				"Isosurfaces_Marching_Cubes_Basic",
+				"Isosurfaces_Marching_Cubes_Cases",
+				"Isosurfaces_Noise_Terrain",
+				"Isosurfaces_Cave",
+				"Isosurfaces_Sculpture",
+				"Isosurfaces_Metaballs",
+				"Isosurfaces_Gallery",
+				"Isosurfaces_Synthesis"
+			],
+
+			"algorithm_paths": {
+				"marching_cubes": "res://algorithms/proceduralgeneration/marchingcave/",
+				"marching_squares": "res://algorithms/proceduralgeneration/marchingsquares/",
+				"metaballs": "res://algorithms/proceduralgeneration/metaballs/",
+				"implicit": "res://algorithms/proceduralgeneration/implicitsurfacemodeling/"
+			},
+
+			"return_to": "lab",
+			"completion_rewards": [
+				"isosurface_badge",
+				"marching_master_badge",
+				"implicit_explicit_badge"
+			]
+		}
+	}
+}

@@ -316,17 +316,93 @@
 			"res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
 			"res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn"
 		],
-		"Procedural Generation": [
-			"res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
-			"res://algorithms/proceduralgeneration/lsystem/scenes/tree_l_system.tscn",
-			"res://algorithms/proceduralgeneration/cellularautomata/scenes/cellular_automata.tscn",
+		"Grammar Systems": [
+			"res://algorithms/proceduralgeneration/markov_chains/markov_chains.tscn",
+			"res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.tscn",
+			"res://algorithms/proceduralgeneration/lsystem/tree_l_system.tscn",
+			"res://algorithms/proceduralgeneration/treegen/gen_tree.tscn"
+		],
+		"Spatial Partitioning": [
+			"res://algorithms/proceduralgeneration/voronoi_diagrams/voronoi_diagrams.tscn",
+			"res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
 			"res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn",
 			"res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn",
-			"res://algorithms/proceduralgeneration/markov_chains_tree/MarkovChainsTree.tscn",
 			"res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn",
+			"res://algorithms/proceduralgeneration/spherenetwork/spherenetwork.tscn"
+		],
+		"Constraint Solvers (WFC)": [
+			"res://algorithms/proceduralgeneration/wave_function_collapse/wave_function_collapse.tscn",
+			"res://algorithms/proceduralgeneration/wave_function_collapse/WFC.tscn",
+			"res://algorithms/proceduralgeneration/wave_function_collapse/WFCCave.tscn",
+			"res://algorithms/proceduralgeneration/wave_function_collapse/modelsynthesis.tscn",
+			"res://algorithms/proceduralgeneration/wfc3D/wfc_3d_demo.tscn",
+			"res://algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn",
+			"res://algorithms/proceduralgeneration/wfcRooms/wfc_dungeon_generator.tscn",
+			"res://algorithms/proceduralgeneration/wfcRooms/wfc_rooms.tscn",
+			"res://algorithms/proceduralgeneration/wfcRooms/wfc_office_generator.tscn",
+			"res://algorithms/proceduralgeneration/randomboolean/randboolean.tscn",
+			"res://algorithms/proceduralgeneration/randomboolean/all_patterns_demo.tscn",
+			"res://algorithms/proceduralgeneration/tilepatterns/tilepattern.tscn"
+		],
+		"Isosurfaces (Marching)": [
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_cave.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marchingcubes_torus_sculpture.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/MarchingShapesGallery.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/marching_cubes_gallery.tscn",
+			"res://algorithms/proceduralgeneration/marchingcave/Scenes/cave_explorer_3d_ui.tscn",
+			"res://algorithms/proceduralgeneration/marchingsquares/marching_squares_scene.tscn",
+			"res://algorithms/proceduralgeneration/metaballs/nakama_metaballs.tscn",
+			"res://algorithms/proceduralgeneration/metaballgenerator/metaballworld.tscn",
+			"res://algorithms/proceduralgeneration/implicitsurfacemodeling/metaballs/metaballs.tscn",
+			"res://algorithms/proceduralgeneration/WFCSculptureGenerator/sculpture_gallery.tscn"
+		],
+		"Higher Dimensions (4D/5D)": [
+			"res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.tscn",
+			"res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space_grid_vr.tscn",
+			"res://algorithms/proceduralgeneration/tesseracttunnel/tesseract_tunnel.tscn",
+			"res://algorithms/proceduralgeneration/tesseracttunnel/tesseract_showcase.tscn",
+			"res://algorithms/proceduralgeneration/sixteencellnetspace/sixteen_cell_net_space.tscn",
+			"res://algorithms/proceduralgeneration/sixteencellnetspace/sixteen_cell_net_space_showcase.tscn",
+			"res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_double_projection.tscn",
+			"res://algorithms/proceduralgeneration/penteractdoubleprojection/penteract_showcase.tscn",
+			"res://algorithms/proceduralgeneration/tessellatingportal/tessellating_portal.tscn",
+			"res://algorithms/proceduralgeneration/tessellatingportal/tessellating_portal_grid_vr.tscn"
+		],
+		"Morphogenesis (Reaction-Diffusion)": [
+			"res://algorithms/proceduralgeneration/reactiondiffusion/reaction_diffusion_vr.tscn",
+			"res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern.tscn",
+			"res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern_reaction_diffusion.tscn",
+			"res://algorithms/proceduralgeneration/reactiondiffusion/scenes/reaction_diffusion.tscn",
+			"res://algorithms/proceduralgeneration/slimemold/slime.tscn"
+		],
+		"Growth Algorithms": [
 			"res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
-			"res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn",
-			"res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn"
+			"res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+			"res://algorithms/proceduralgeneration/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn",
+			"res://algorithms/proceduralgeneration/dewcoveredfoliage/dewcoveredfoliage.tscn",
+			"res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn"
+		],
+		"Caves & Mazes": [
+			"res://algorithms/proceduralgeneration/caverandomwalk/caverandomwalk.tscn",
+			"res://algorithms/proceduralgeneration/cave_generator/CaveGenerator.tscn",
+			"res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn",
+			"res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.tscn",
+			"res://algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn",
+			"res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn"
+		],
+		"Procedural Misc": [
+			"res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn",
+			"res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn",
+			"res://algorithms/proceduralgeneration/cubemound/cube_mound_scene.tscn",
+			"res://algorithms/proceduralgeneration/layeredmembrane/layered_membrane.tscn",
+			"res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn",
+			"res://algorithms/proceduralgeneration/modernistchairs/ModernistChairGallery.tscn",
+			"res://algorithms/proceduralgeneration/infinite_voxel_floor/InfiniteVoxelFloor.tscn",
+			"res://algorithms/proceduralgeneration/wireframe/fatwireframe.tscn"
 		],
 		"Joint Mechanics": [
 			"res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",

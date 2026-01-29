@@ -31,7 +31,10 @@
       "Bash(Select-String -Pattern \"sphere\" -SimpleMatch)",
       "Bash(git -C \"c:/Users/palle/Documents/GitHub/AdaResearch\" status)",
       "Bash(git -C \"c:/Users/palle/Documents/GitHub/AdaResearch\" diff --stat)",
-      "Bash(git show:*)"
+      "Bash(git show:*)",
+      "Bash(git mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nTest move: wireframe to hybrid_complex/\n\nMoved algorithms/proceduralgeneration/wireframe/ to hybrid_complex/ group.\n\nPre-move audit:\n- No references in sequence JSON files\n- Found 1 reference in grid_artifacts.json\n- Found 1 reference in procedural_generation_axioms.gd\n\nUpdates made:\n- Created algorithms/proceduralgeneration/hybrid_complex/ folder\n- Moved wireframe/ into hybrid_complex/wireframe/\n- Updated grid_artifacts.json line 2865 with new path\n- Updated procedural_generation_axioms.gd line 26 with new path\n\nPost-move verification:\n- Confirmed old path no longer exists\n- Confirmed new path contains all files\n- Confirmed zero remaining references to old path\n\nThis is the first test move proving the link tracking methodology works.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": [],
     "ask": []

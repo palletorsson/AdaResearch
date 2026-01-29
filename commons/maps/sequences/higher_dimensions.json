@@ -1,0 +1,53 @@
+{
+	"sequences": {
+		"higher_dimensions": {
+			"name": "Higher Dimensions: Beyond 3D",
+			"truth": "We are 3D creatures projecting 4D shadows. The tesseract rotates through dimensions we cannot directly perceive.",
+			"qfep_term": "F",
+			"qfep_connection": "Higher-dimensional geometry extends F (order) into spaces we cannot inhabit. Pure structure, revealed through projection—the Platonic forms casting shadows into our world.",
+			"formula": "4D → 3D projection → perception",
+
+			"description": "Explore geometry beyond three dimensions. Tesseracts, penteracts, 16-cells—polytopes that exist in 4D and 5D space, visualized through projection into 3D. Walk through the nets, see rotations through the fourth dimension.",
+			"layer": "systems",
+			"prerequisites": ["primitives", "transformations", "vectors"],
+			"unlocks": ["speculativecomputation"],
+
+			"difficulty": "advanced",
+			"estimated_time": "25-30 minutes",
+
+			"learning_objectives": [
+				"Dimensional analogy: point→line→square→cube→tesseract",
+				"Projection: how higher-D casts shadows into lower-D",
+				"Tesseract (4D hypercube): 8 cubic cells",
+				"16-cell: 4D analog of octahedron",
+				"Penteract (5D hypercube): 10 tesseract cells",
+				"Nets: unfolding higher-D shapes into 3D"
+			],
+
+			"maps": [
+				"HigherDimensions_Intro",
+				"HigherDimensions_Tesseract_Net",
+				"HigherDimensions_Tesseract_Rotation",
+				"HigherDimensions_Tesseract_Tunnel",
+				"HigherDimensions_SixteenCell_Net",
+				"HigherDimensions_Penteract",
+				"HigherDimensions_Portals",
+				"HigherDimensions_Synthesis"
+			],
+
+			"algorithm_paths": {
+				"tesseract": "res://algorithms/proceduralgeneration/tesseractnetspace/",
+				"tesseract_tunnel": "res://algorithms/proceduralgeneration/tesseracttunnel/",
+				"sixteen_cell": "res://algorithms/proceduralgeneration/sixteencellnetspace/",
+				"penteract": "res://algorithms/proceduralgeneration/penteractdoubleprojection/",
+				"portals": "res://algorithms/proceduralgeneration/tessellatingportal/"
+			},
+
+			"return_to": "lab",
+			"completion_rewards": [
+				"fourth_dimension_badge",
+				"hypercube_badge"
+			]
+		}
+	}
+}

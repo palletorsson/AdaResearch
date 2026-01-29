@@ -1,0 +1,51 @@
+{
+	"sequences": {
+		"constraint_solvers": {
+			"name": "Constraint Solvers: Rules Become Worlds",
+			"truth": "Define the rules, let emergence do the rest. Wave Function Collapse: observe and propagate until the world resolves.",
+			"qfep_term": "λ",
+			"qfep_connection": "Constraint propagation is F (rules) meeting E(S) (random selection). WFC collapses superposition into specific states—quantum mechanics as world-building.",
+			"formula": "constraints + entropy → coherent structure",
+
+			"description": "Algorithms that generate content by satisfying constraints. Wave Function Collapse propagates adjacency rules, Boolean patterns combine logical operations, Model Synthesis builds 3D structures from examples.",
+			"layer": "systems",
+			"prerequisites": ["randomness", "cellularautomata"],
+			"unlocks": ["proceduralgeneration_advanced"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "30-35 minutes",
+
+			"learning_objectives": [
+				"Wave Function Collapse: entropy-based cell selection",
+				"Constraint propagation: local rules, global coherence",
+				"Tile adjacency: what can be next to what",
+				"Backtracking: recovering from contradictions",
+				"3D WFC: dungeons, buildings, sculptures"
+			],
+
+			"maps": [
+				"ConstraintSolvers_WFC_Intro",
+				"ConstraintSolvers_WFC_Entropy",
+				"ConstraintSolvers_WFC_Propagation",
+				"ConstraintSolvers_WFC_Tiles",
+				"ConstraintSolvers_WFC_Dungeon",
+				"ConstraintSolvers_WFC_3D",
+				"ConstraintSolvers_Boolean_Patterns",
+				"ConstraintSolvers_Synthesis"
+			],
+
+			"algorithm_paths": {
+				"wfc": "res://algorithms/proceduralgeneration/wave_function_collapse/",
+				"wfc_3d": "res://algorithms/proceduralgeneration/wfc3D/",
+				"wfc_dungeon": "res://algorithms/proceduralgeneration/wfcRooms/",
+				"boolean": "res://algorithms/proceduralgeneration/randomboolean/"
+			},
+
+			"return_to": "lab",
+			"completion_rewards": [
+				"constraint_master_badge",
+				"wfc_architect_badge"
+			]
+		}
+	}
+}

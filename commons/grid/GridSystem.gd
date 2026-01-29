@@ -214,7 +214,9 @@ func _is_sequence_name(name: String) -> bool:
 		"patterngeneration", "proceduralgeneration", "searchpathfinding",
 		"topology", "graphtheory", "computationalgeometry",
 		"machinelearning", "criticalalgorithms", "speculativecomputation",
-		"resourcemanagement", "advancedlaboratory", "qfeplaboratory", "testmaps"
+		"resourcemanagement", "advancedlaboratory", "qfeplaboratory", "testmaps",
+		"grammar_systems", "spatial_partitioning", "constraint_solvers", 
+		"isosurfaces", "higher_dimensions", "morphogenesis"
 	]
 	return name in known_sequences
 
@@ -478,7 +480,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
-		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory"]:
+		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
 			action = "start_sequence"
 			sequence = destination
 			destination = ""
