@@ -13,6 +13,8 @@ extends Node3D
 ## - Push Button: Toggle sound on/off
 ##
 ## Use case: Tuning instruments - when beats slow down, frequencies are matching
+##
+## OPTIMIZED: Uses WavefunctionResources + MultiMesh (224 nodes → 4 nodes)
 
 @onready var slider1 = $Slider1/SliderOrigin/InteractableSlider
 @onready var slider2 = $Slider2/SliderOrigin/InteractableSlider
@@ -32,53 +34,51 @@ var audio_phase2: float = 0.0
 const SAMPLE_RATE = 44100.0
 var is_playing: bool = false
 
-# Visualization
+# Visualization - MultiMesh containers
 var waveform_viz: Node3D
 var beat_envelope_viz: Node3D
 var frequency_labels: Array[Label3D] = []
 
-# Wave visualization arrays
-var wave1_points: Array[MeshInstance3D] = []
-var wave2_points: Array[MeshInstance3D] = []
-var combined_points: Array[MeshInstance3D] = []
+# MultiMesh instances (replaces 224 individual MeshInstance3D)
+var wave1_multimesh: MultiMeshInstance3D
+var wave2_multimesh: MultiMeshInstance3D
+var combined_multimesh: MultiMeshInstance3D
+var envelope_multimesh: MultiMeshInstance3D
+
 const WAVE_RESOLUTION = 64
+const ENVELOPE_BARS = 32
 
 func _ready() -> void:
 	_setup_audio()
 	_create_visualizations()
 	_setup_controls()
 	_update_frequency_labels()
-	print("BeatFrequencies: Ready! Move sliders to hear beating")
+	print("BeatFrequencies: Ready! Move sliders to hear beating (Optimized)")
 	print("BeatFrequencies: Current beat frequency = %.2f Hz" % abs(freq1 - freq2))
 
 func _setup_audio() -> void:
-	# Create audio stream generator
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = SAMPLE_RATE
-	audio_stream.buffer_length = 0.1  # 100ms buffer
+	audio_stream.buffer_length = 0.1
 
 	audio_player.stream = audio_stream
-	audio_player.volume_db = -6.0  # Comfortable listening level
+	audio_player.volume_db = -6.0
 	audio_player.play()
 	is_playing = true
 
 	print("BeatFrequencies: Audio synthesis enabled at %.1f Hz" % SAMPLE_RATE)
 
 func _setup_controls() -> void:
-	# Setup slider 1
 	if slider1:
 		slider1.slider_moved.connect(_on_slider1_changed)
-		# Set initial value (440 Hz mapped to slider range 0-1)
 		var initial1 = inverse_lerp(freq_min, freq_max, freq1)
 		slider1.slider_position = initial1
 
-	# Setup slider 2
 	if slider2:
 		slider2.slider_moved.connect(_on_slider2_changed)
 		var initial2 = inverse_lerp(freq_min, freq_max, freq2)
 		slider2.slider_position = initial2
 
-	# Setup toggle button
 	if toggle_button:
 		toggle_button.button_pressed.connect(_on_toggle_pressed)
 
@@ -94,69 +94,100 @@ func _create_visualizations() -> void:
 	beat_envelope_viz.position = Vector3(0, -1.5, -1.0)
 	add_child(beat_envelope_viz)
 
-	# Create waveform visualization points
-	for i in range(WAVE_RESOLUTION):
-		var x_pos = -2.0 + (i / float(WAVE_RESOLUTION)) * 4.0
-
-		# Wave 1 (red)
-		var point1 = _create_wave_point(Vector3(x_pos, 0.5, 0), Color.RED)
-		waveform_viz.add_child(point1)
-		wave1_points.append(point1)
-
-		# Wave 2 (blue)
-		var point2 = _create_wave_point(Vector3(x_pos, 0, 0), Color.BLUE)
-		waveform_viz.add_child(point2)
-		wave2_points.append(point2)
-
-		# Combined wave (yellow)
-		var point_combined = _create_wave_point(Vector3(x_pos, -0.8, 0), Color.YELLOW, 0.06)
-		waveform_viz.add_child(point_combined)
-		combined_points.append(point_combined)
-
-	# Create beat envelope visualization
-	_create_beat_envelope_viz()
-
-	# Create labels
+	# OPTIMIZED: Create MultiMesh waveforms instead of individual spheres
+	_create_wave_multimesh()
+	_create_beat_envelope_multimesh()
 	_create_labels()
 
-func _create_wave_point(pos: Vector3, color: Color, size: float = 0.04) -> MeshInstance3D:
-	var point = MeshInstance3D.new()
-	var sphere = SphereMesh.new()
-	sphere.radius = size
-	sphere.height = size * 2.0
-	point.mesh = sphere
+	print("BeatFrequencies: Using MultiMesh (4 nodes instead of 224)")
 
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.6
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	point.material_override = material
+func _create_wave_multimesh() -> void:
+	var wave_sphere = SphereMesh.new()
+	wave_sphere.radius = 0.04
+	wave_sphere.height = 0.08
+	wave_sphere.radial_segments = 8
+	wave_sphere.rings = 4
+	
+	# Wave 1 (red)
+	wave1_multimesh = MultiMeshInstance3D.new()
+	wave1_multimesh.name = "Wave1MultiMesh"
+	var mm1 = MultiMesh.new()
+	mm1.transform_format = MultiMesh.TRANSFORM_3D
+	mm1.use_colors = false
+	mm1.instance_count = WAVE_RESOLUTION
+	mm1.mesh = wave_sphere
+	wave1_multimesh.multimesh = mm1
+	wave1_multimesh.material_override = WavefunctionResources.get_emissive_material(Color.RED, 1.0, 0.6)
+	_init_wave_positions(mm1, 0.5)
+	waveform_viz.add_child(wave1_multimesh)
+	
+	# Wave 2 (blue)
+	wave2_multimesh = MultiMeshInstance3D.new()
+	wave2_multimesh.name = "Wave2MultiMesh"
+	var mm2 = MultiMesh.new()
+	mm2.transform_format = MultiMesh.TRANSFORM_3D
+	mm2.use_colors = false
+	mm2.instance_count = WAVE_RESOLUTION
+	mm2.mesh = wave_sphere
+	wave2_multimesh.multimesh = mm2
+	wave2_multimesh.material_override = WavefunctionResources.get_emissive_material(Color.BLUE, 1.0, 0.6)
+	_init_wave_positions(mm2, 0.0)
+	waveform_viz.add_child(wave2_multimesh)
+	
+	# Combined wave (yellow, slightly larger)
+	var combined_sphere = SphereMesh.new()
+	combined_sphere.radius = 0.06
+	combined_sphere.height = 0.12
+	combined_sphere.radial_segments = 8
+	combined_sphere.rings = 4
+	
+	combined_multimesh = MultiMeshInstance3D.new()
+	combined_multimesh.name = "CombinedMultiMesh"
+	var mm3 = MultiMesh.new()
+	mm3.transform_format = MultiMesh.TRANSFORM_3D
+	mm3.use_colors = false
+	mm3.instance_count = WAVE_RESOLUTION
+	mm3.mesh = combined_sphere
+	combined_multimesh.multimesh = mm3
+	combined_multimesh.material_override = WavefunctionResources.get_emissive_material(Color.YELLOW, 1.0, 0.6)
+	_init_wave_positions(mm3, -0.8)
+	waveform_viz.add_child(combined_multimesh)
 
-	point.position = pos
-	return point
+func _init_wave_positions(mm: MultiMesh, y_base: float) -> void:
+	for i in range(WAVE_RESOLUTION):
+		var x_pos = -2.0 + (float(i) / float(WAVE_RESOLUTION)) * 4.0
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(x_pos, y_base, 0)))
 
-func _create_beat_envelope_viz() -> void:
-	# Create visual representation of beat envelope
-	for i in range(32):
-		var x_pos = -2.0 + (i / 32.0) * 4.0
-		var bar = MeshInstance3D.new()
-		var box = BoxMesh.new()
-		box.size = Vector3(0.1, 0.5, 0.05)
-		bar.mesh = box
-
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0, 1, 0.5, 0.7)
-		material.emission_enabled = true
-		material.emission = Color(0, 0.5, 0.25, 1)
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		bar.material_override = material
-
-		bar.position = Vector3(x_pos, 0, 0)
-		beat_envelope_viz.add_child(bar)
+func _create_beat_envelope_multimesh() -> void:
+	# Create bar mesh for envelope visualization
+	var bar_mesh = BoxMesh.new()
+	bar_mesh.size = Vector3(0.1, 0.5, 0.05)
+	
+	envelope_multimesh = MultiMeshInstance3D.new()
+	envelope_multimesh.name = "EnvelopeMultiMesh"
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = ENVELOPE_BARS
+	mm.mesh = bar_mesh
+	envelope_multimesh.multimesh = mm
+	
+	# Use vertex colors for per-bar coloring
+	var mat = StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	envelope_multimesh.material_override = mat
+	
+	# Initialize bar positions
+	for i in range(ENVELOPE_BARS):
+		var x_pos = -2.0 + (float(i) / float(ENVELOPE_BARS)) * 4.0
+		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(x_pos, 0.25, 0)))
+		mm.set_instance_color(i, Color(0, 1, 0.5, 0.7))
+	
+	beat_envelope_viz.add_child(envelope_multimesh)
 
 func _create_labels() -> void:
-	# Title label
 	var title = Label3D.new()
 	title.text = "Beat Frequencies"
 	title.position = Vector3(0, 1.5, -1.0)
@@ -167,7 +198,6 @@ func _create_labels() -> void:
 	title.outline_modulate = Color(0, 0, 0, 1)
 	add_child(title)
 
-	# Frequency 1 label
 	var label1 = Label3D.new()
 	label1.text = "F1: 440.0 Hz"
 	label1.position = Vector3(-1.0, 1.0, -1.0)
@@ -179,7 +209,6 @@ func _create_labels() -> void:
 	add_child(label1)
 	frequency_labels.append(label1)
 
-	# Frequency 2 label
 	var label2 = Label3D.new()
 	label2.text = "F2: 442.0 Hz"
 	label2.position = Vector3(1.0, 1.0, -1.0)
@@ -191,7 +220,6 @@ func _create_labels() -> void:
 	add_child(label2)
 	frequency_labels.append(label2)
 
-	# Beat frequency label
 	var beat_label = Label3D.new()
 	beat_label.text = "Beat: 2.0 Hz"
 	beat_label.position = Vector3(0, 0.5, -1.0)
@@ -203,7 +231,6 @@ func _create_labels() -> void:
 	add_child(beat_label)
 	frequency_labels.append(beat_label)
 
-	# Educational hint
 	var hint = Label3D.new()
 	hint.text = "Slow beats = frequencies match (tuning)"
 	hint.position = Vector3(0, -2.0, -1.0)
@@ -221,16 +248,14 @@ func _update_frequency_labels() -> void:
 		var beat_freq = abs(freq1 - freq2)
 		frequency_labels[2].text = "Beat: %.2f Hz" % beat_freq
 
-		# Color code beat label based on how close frequencies are
 		if beat_freq < 1.0:
-			frequency_labels[2].modulate = Color(0, 1, 0, 1)  # Green - very close
+			frequency_labels[2].modulate = Color(0, 1, 0, 1)
 		elif beat_freq < 5.0:
-			frequency_labels[2].modulate = Color(1, 1, 0, 1)  # Yellow - close
+			frequency_labels[2].modulate = Color(1, 1, 0, 1)
 		else:
-			frequency_labels[2].modulate = Color(1, 0.5, 0, 1)  # Orange - far apart
+			frequency_labels[2].modulate = Color(1, 0.5, 0, 1)
 
 func _on_slider1_changed(value: float) -> void:
-	# Map slider value (0-1) to frequency range
 	freq1 = lerp(freq_min, freq_max, value)
 	_update_frequency_labels()
 	print("BeatFrequencies: F1 = %.1f Hz, Beat = %.2f Hz" % [freq1, abs(freq1 - freq2)])
@@ -249,11 +274,9 @@ var time: float = 0.0
 func _process(delta: float) -> void:
 	time += delta
 
-	# Generate audio samples
 	if is_playing:
 		_generate_audio_samples()
 
-	# Update visualizations
 	_update_waveform_visualization()
 	_update_beat_envelope()
 
@@ -272,92 +295,85 @@ func _generate_audio_samples() -> void:
 	var frames_to_fill = min(frames_available, 256)
 
 	for _frame in range(frames_to_fill):
-		# Generate two sine waves
-		var sample1 = sin(audio_phase1)
-		var sample2 = sin(audio_phase2)
+		# Generate two sine waves using lookup table
+		var phase1 = fposmod(audio_phase1 / TAU, 1.0)
+		var phase2 = fposmod(audio_phase2 / TAU, 1.0)
+		var sample1 = WavefunctionResources.fast_sine(phase1)
+		var sample2 = WavefunctionResources.fast_sine(phase2)
 
-		# Combine (superposition)
-		var combined = (sample1 + sample2) * 0.4  # Scale down to prevent clipping
-
-		# Clamp
+		var combined = (sample1 + sample2) * 0.4
 		combined = clamp(combined, -1.0, 1.0)
 
-		# Push stereo sample
 		playback.push_frame(Vector2(combined, combined))
 
-		# Update phases
 		audio_phase1 += freq1 * TAU / SAMPLE_RATE
 		audio_phase2 += freq2 * TAU / SAMPLE_RATE
 
-		# Wrap phases
 		if audio_phase1 > TAU:
 			audio_phase1 -= TAU
 		if audio_phase2 > TAU:
 			audio_phase2 -= TAU
 
 func _update_waveform_visualization() -> void:
-	# Safety check - make sure visualization is created
-	if wave1_points.size() != WAVE_RESOLUTION or wave2_points.size() != WAVE_RESOLUTION or combined_points.size() != WAVE_RESOLUTION:
+	if not wave1_multimesh or not wave2_multimesh or not combined_multimesh:
 		return
-
-	# Visualize the two waves and their combination
+	
+	var mm1 = wave1_multimesh.multimesh
+	var mm2 = wave2_multimesh.multimesh
+	var mm3 = combined_multimesh.multimesh
+	
 	for i in range(WAVE_RESOLUTION):
-		var x_normalized = i / float(WAVE_RESOLUTION)
-		var phase = x_normalized * TAU * 4.0 + time * 2.0  # Show 4 cycles
+		var x_pos = -2.0 + (float(i) / float(WAVE_RESOLUTION)) * 4.0
+		var x_normalized = float(i) / float(WAVE_RESOLUTION)
+		var phase = x_normalized * TAU * 4.0 + time * 2.0
 
 		# Wave 1
 		var val1 = sin(phase)
-		wave1_points[i].position.y = 0.5 + val1 * 0.3
+		var y1 = 0.5 + val1 * 0.3
+		var scale1 = 0.7 + abs(val1) * 0.3
+		mm1.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ONE * scale1), Vector3(x_pos, y1, 0)))
 
-		# Wave 2 (slightly different frequency creates the visible beat pattern)
+		# Wave 2 (different frequency ratio)
 		var freq_ratio = freq2 / freq1
 		var val2 = sin(phase * freq_ratio)
-		wave2_points[i].position.y = 0.0 + val2 * 0.3
-
-		# Combined wave (shows interference)
-		var combined = (val1 + val2) * 0.5
-		combined_points[i].position.y = -0.8 + combined * 0.3
-
-		# Pulse size based on amplitude
-		var scale1 = 0.7 + abs(val1) * 0.3
-		wave1_points[i].scale = Vector3.ONE * scale1
-
+		var y2 = 0.0 + val2 * 0.3
 		var scale2 = 0.7 + abs(val2) * 0.3
-		wave2_points[i].scale = Vector3.ONE * scale2
+		mm2.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ONE * scale2), Vector3(x_pos, y2, 0)))
 
-		var scale_combined = 0.8 + abs(combined) * 0.4
-		combined_points[i].scale = Vector3.ONE * scale_combined
+		# Combined wave
+		var combined_val = (val1 + val2) * 0.5
+		var y3 = -0.8 + combined_val * 0.3
+		var scale3 = 0.8 + abs(combined_val) * 0.4
+		mm3.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ONE * scale3), Vector3(x_pos, y3, 0)))
 
 func _update_beat_envelope() -> void:
-	# Visualize the beat envelope (amplitude modulation)
+	if not envelope_multimesh:
+		return
+	
+	var mm = envelope_multimesh.multimesh
 	var beat_freq = abs(freq1 - freq2)
 	if beat_freq < 0.01:
-		beat_freq = 0.01  # Avoid division by zero
+		beat_freq = 0.01
 
-	for i in range(beat_envelope_viz.get_child_count()):
-		var bar = beat_envelope_viz.get_child(i) as MeshInstance3D
-		if bar:
-			var x_normalized = i / float(beat_envelope_viz.get_child_count())
+	for i in range(ENVELOPE_BARS):
+		var x_pos = -2.0 + (float(i) / float(ENVELOPE_BARS)) * 4.0
+		var x_normalized = float(i) / float(ENVELOPE_BARS)
 
-			# Beat envelope: amplitude = 2 * |cos(pi * beat_freq * t)|
-			var envelope_phase = x_normalized * beat_freq * 8.0 + time * beat_freq
-			var envelope = abs(cos(envelope_phase * PI))
+		var envelope_phase = x_normalized * beat_freq * 8.0 + time * beat_freq
+		var envelope = abs(cos(envelope_phase * PI))
 
-			# Scale bar height
-			var height = 0.2 + envelope * 0.8
-			var mesh = bar.mesh as BoxMesh
-			if mesh:
-				mesh.size.y = height
-				bar.position.y = height / 2.0
+		var height = 0.2 + envelope * 0.8
+		var y_pos = height / 2.0
+		
+		# Scale the bar by adjusting Y basis
+		var basis = Basis()
+		basis = basis.scaled(Vector3(1.0, height / 0.5, 1.0))  # Original height is 0.5
+		mm.set_instance_transform(i, Transform3D(basis, Vector3(x_pos, y_pos, 0)))
 
-			# Color based on envelope
-			var material = bar.material_override as StandardMaterial3D
-			if material:
-				var brightness = 0.3 + envelope * 0.7
-				material.albedo_color = Color(0, brightness, brightness * 0.5, 0.7)
-				material.emission = Color(0, brightness * 0.5, brightness * 0.25, 1)
+		var brightness = 0.3 + envelope * 0.7
+		mm.set_instance_color(i, Color(0, brightness, brightness * 0.5, 0.7))
 
-# Public API for saving parameters
+# Public API
 
 func get_audio_parameters() -> Dictionary:
 	return {

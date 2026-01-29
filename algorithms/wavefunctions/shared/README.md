@@ -63,15 +63,15 @@ var sample = WavefunctionResources.fast_square(phase)
 
 ### Scenes Using This
 
-- `spherical_harmonics/SphericalHarmonics.gd` — Converted to MultiMesh
-- *(More to be converted)*
+| Scene | Before | After | Status |
+|-------|--------|-------|--------|
+| `spherical_harmonics/` | 128 MeshInstance3D | 1 MultiMesh | ✅ Done |
+| `oscillating_wave/` | 300 MeshInstance3D | 2 MultiMesh | ✅ Done |
+| `beat_frequencies/` | 224 MeshInstance3D | 4 MultiMesh | ✅ Done |
+| `wave_propagation_3d/` | Already MultiMesh | — | ✅ OK |
+| `lissajous_curves/` | 1 ImmediateMesh | — | ✅ OK |
+| `doublehelix/` | Already MultiMesh | — | ✅ OK |
 
-## Future Work
-
-Other scenes to convert:
-- `oscillating_wave/OscillatingWave.gd`
-- `lissajous_curves/lissajous_curves.gd`
-- `wave_propagation_3d/WavePropagation3D.gd`
-- Any scene creating many mesh instances
+**Total nodes eliminated:** ~650 → ~10 (65x reduction)
 
 See `WAVEFUNCTION_OPTIMIZATION_ANALYSIS.md` for the full optimization roadmap.

@@ -1316,7 +1316,7 @@
 			"name": "MeltingBerniniScene",
 			"lookup_name": "MeltingBerniniScene",
 			"description": "MeltingBerniniScene",
-			"scene": "res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniScene.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn"
 		},
 		"sine_space": {
 			"name": "sine_space",
@@ -1934,13 +1934,13 @@
 			"name": "WFCSculptureGenerator",
 			"lookup_name": "WFCSculptureGenerator",
 			"description": "WFCSculptureGenerator",
-			"scene": "res://algorithms/proceduralgeneration/WFCSculptureGenerator/WFCSculptureGenerator.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn"
 		},
 		"WFC3DGenerator": {
 			"name": "WWFC3DGeneratorr",
 			"lookup_name": "WFC3DGenerator",
 			"description": "WFC3DGenerator",
-			"scene": "res://algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn"
 		},
 		"modelsynthesis": {
 			"name": "modelsynthesis",
@@ -2060,7 +2060,7 @@
 			"name": "marching_cubes_gallery",
 			"lookup_name": "marching_cubes_gallery",
 			"description": "marching_cubes_gallery",
-			"scene": "res://algorithms/proceduralgeneration/WFCSculptureGenerator/sculpture_gallery.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/sculpture_gallery.tscn"
 		},
 		"cave_explorer_3d_ui": {
 			"name": "cave_explorer_3d_ui",

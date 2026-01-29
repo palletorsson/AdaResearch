@@ -5,7 +5,7 @@ var text = '''
 [center][b]Procedural Generation Atlas[/b][/center]
 [center][i]Mapping the living examples inside [code]res://algorithms/proceduralgeneration/[/code][/i][/center]
 
-Every folder under that root is a playable laboratory: each couples a .tscn rig, a focused GDScript, and a README that explains the knobs. Use this map beside the clipboard tutorial stack so you can jump from BinarySpacePartitioning.tscn to WFC3DGenerator.tscn knowing why each scene exists and which data it emits.
+Every folder under that root is a playable laboratory: each couples a .tscn rig, a focused GDScript, and a README that explains the knobs. Use this map beside the clipboard tutorial stack so you can jump from BinarySpacePartitioning.tscn to hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn knowing why each scene exists and which data it emits.
 
 [hr]
 [b]Macro Layout Sculptors[/b]
@@ -16,7 +16,7 @@ res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpaceParti
 
 [hr]
 [b]Constraint Weavers & Tile Grammars[/b]
-res://algorithms/proceduralgeneration/wave_function_collapse/WaveFunctionCollapse.tscn, WFCCave.tscn, and modelsynthesis.tscn walk through entropy-based collapse, adjacency dictionaries, and backtracking metrics. res://algorithms/proceduralgeneration/wfcRooms/wfc_rooms.tscn plus tile_template_examples.gd document how to author tiles, sockets, and metadata before solving, while res://algorithms/proceduralgeneration/WFC3DGenerator/WFC3DGenerator.tscn and WFCSculptureGenerator/WFCSculptureGenerator.tscn lift the technique into voxels and gallery sculptures. Use these once your macro layout exists: feed each solver tile sets derived from BSP leaves or maze corridors so constraints lock everything together.
+res://algorithms/proceduralgeneration/wave_function_collapse/WaveFunctionCollapse.tscn, WFCCave.tscn, and modelsynthesis.tscn walk through entropy-based collapse, adjacency dictionaries, and backtracking metrics. res://algorithms/proceduralgeneration/wfcRooms/wfc_rooms.tscn plus tile_template_examples.gd document how to author tiles, sockets, and metadata before solving, while res://algorithms/proceduralgeneration/hybrid_complex/WFC3DGenerator/WFC3DGenerator.tscn and res://algorithms/proceduralgeneration/hybrid_complex/WFCSculptureGenerator/WFCSculptureGenerator.tscn lift the technique into voxels and gallery sculptures. Use these once your macro layout exists: feed each solver tile sets derived from BSP leaves or maze corridors so constraints lock everything together.
 
 [i]Concepts: entropy ordering, adjacency matrices, tile tagging, constraint satisfaction, failure recovery[/i]
 [i]Constraints are the grammar rules that keep infinite rearrangements coherent.[/i]
@@ -37,7 +37,7 @@ res://algorithms/l_systems/Growth/AnimatedTree.tscn decodes rewriting rules into
 
 [hr]
 [b]Design Studies & Hybrid Strategies[/b]
-res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn composes parametric furniture families; each chair script (Barcelona, Bauhaus, GridWire, etc.) exposes sliders that demonstrate how procedural rules encode typologies. res://algorithms/proceduralgeneration/berninicolumns/MeltingBerniniScene.tscn, res://algorithms/proceduralgeneration/hybrid_complex/dewcoveredfoliage/dewcoveredfoliage.tscn, and res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/tilepattern.tscn mix art direction with algorithmic tessellation, noise, and shader animation. res://algorithms/proceduralgeneration/proceduralstrategies/demo_scene.tscn functions as a sampler platter--convex hulls, curve extrusions, marching cubes, metaballs--while folders like layeredmembrane, wireframe, and modernistmaterials reveal how the same algorithms double as material studies.
+res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn composes parametric furniture families; each chair script (Barcelona, Bauhaus, GridWire, etc.) exposes sliders that demonstrate how procedural rules encode typologies. res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn, res://algorithms/proceduralgeneration/hybrid_complex/dewcoveredfoliage/dewcoveredfoliage.tscn, and res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/tilepattern.tscn mix art direction with algorithmic tessellation, noise, and shader animation. res://algorithms/proceduralgeneration/proceduralstrategies/demo_scene.tscn functions as a sampler platter--convex hulls, curve extrusions, marching cubes, metaballs--while folders like layeredmembrane, wireframe, and modernistmaterials reveal how the same algorithms double as material studies.
 
 [i]Concepts: parametric product families, ornamental systems, hybrid procedural + art direction workflows[/i]
 [i]Procedural rules are also a design language, not just a content factory.[/i]
