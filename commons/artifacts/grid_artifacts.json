@@ -1715,7 +1715,7 @@
 			"name": "Voronoi Diagrams",
 			"lookup_name": "voronoi_diagrams",
 			"description": "Spatial partitioning using Voronoi tessellation algorithms",
-			"scene": "res://algorithms/proceduralgeneration/voronoi_diagrams/voronoi_diagrams.tscn"
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/voronoi_diagrams.tscn"
 		},
 		"tree_gen": {
 			"name": "Tree Generator",
@@ -2591,7 +2591,7 @@
 			"name": "binary_space_partitioning",
 			"lookup_name": "binary_space_partitioning",
 			"description": "binary_space_partitioning",
-			"scene": "res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn"
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn"
 		},
 		"markov_chains_tree": {
 			"name": "markov_chains_tree",
@@ -2603,7 +2603,7 @@
 			"name": "poisson_disk_sampling_3d",
 			"lookup_name": "poisson_disk_sampling_3d",
 			"description": "poisson_disk_sampling_3d",
-			"scene": "res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn"
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn"
 		},
 		"space_colonization_algorithm": {
 			"name": "space_colonization_algorithm",
@@ -2615,13 +2615,13 @@
 			"name": "voronoi_diagram_3d",
 			"lookup_name": "voronoi_diagram_3d",
 			"description": "voronoi_diagram_3d",
-			"scene": "res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn"
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/VoronoiDiagram3D.tscn"
 		},
 		"delaunay_triangulation_3d_cell": {
 			"name": "delaunay_triangulation_3d_cell",
 			"lookup_name": "delaunay_triangulation_3d_cell",
 			"description": "delaunay_triangulation_3d_cell",
-			"scene": "res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn"
+			"scene": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn"
 		},
 		"cellular_automata_grabable": {
 			"name": "Cellular Automata Grabable",

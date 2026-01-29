@@ -87,7 +87,7 @@ FOLDER: ProceduralGeneration_CubeMound
 ----------------------------------------
 FOLDER: ProceduralGeneration_Delaunay_Triangulation
   KEY: delaunay_triangulation_3d_cell
-  SCENE: res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/DelaunayTriangulation3DCell.tscn
   DESC: delaunay_triangulation_3d_cell
   KEY: info_display
   SCENE: res://commons/scenes/mapobjects/infodisplay.tscn
@@ -170,7 +170,7 @@ FOLDER: ProceduralGeneration_N_grams
 ----------------------------------------
 FOLDER: ProceduralGeneration_Poisson_Disk_Sampling
   KEY: poisson_disk_sampling_3d
-  SCENE: res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.tscn
   DESC: poisson_disk_sampling_3d
 ----------------------------------------
 FOLDER: ProceduralGeneration_Reaction_Diffusion_Systems
@@ -196,7 +196,7 @@ FOLDER: ProceduralGeneration_Space_Colonization_Algorithms
 ----------------------------------------
 FOLDER: ProceduralGeneration_Space_Partitioning
   KEY: binary_space_partitioning
-  SCENE: res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn
   DESC: binary_space_partitioning
 ----------------------------------------
 FOLDER: ProceduralGeneration_Ten
@@ -215,7 +215,7 @@ FOLDER: ProceduralGeneration_Ten
 ----------------------------------------
 FOLDER: ProceduralGeneration_Three
   KEY: voronoi_diagrams
-  SCENE: res://algorithms/proceduralgeneration/voronoi_diagrams/voronoi_diagrams.tscn
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/voronoi_diagrams.tscn
   DESC: Spatial partitioning using Voronoi tessellation algorithms
   KEY: voronoi_space
   SCENE: res://commons/context/walkgrids/voronoi_space.tscn
@@ -227,7 +227,7 @@ FOLDER: ProceduralGeneration_Two
 ----------------------------------------
 FOLDER: ProceduralGeneration_Voronoi_Diagrams
   KEY: voronoi_diagram_3d
-  SCENE: res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.tscn
+  SCENE: res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/VoronoiDiagram3D.tscn
   DESC: voronoi_diagram_3d
 ----------------------------------------
 FOLDER: ProceduralGeneration_Wave_Function_Collapse

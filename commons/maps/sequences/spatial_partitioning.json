@@ -35,11 +35,11 @@
 			],
 
 			"algorithm_paths": {
-				"voronoi": "res://algorithms/proceduralgeneration/voronoi_diagrams/",
-				"voronoi_3d": "res://algorithms/proceduralgeneration/voronoi_diagram_3d/",
-				"delaunay": "res://algorithms/proceduralgeneration/delaunay_triangulation_3d_cell/",
-				"bsp": "res://algorithms/proceduralgeneration/binary_space_partitioning/",
-				"poisson": "res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/"
+				"voronoi": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/",
+				"voronoi_3d": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagram_3d/",
+				"delaunay": "res://algorithms/proceduralgeneration/spatial_partitioning/delaunay_triangulation_3d_cell/",
+				"bsp": "res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/",
+				"poisson": "res://algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/"
 			},
 
 			"return_to": "lab",

@@ -9,4 +9,4 @@ Every folder under that root is a playable laboratory: each couples a .tscn rig,
 ---
 
 ## Macro Layout Sculptors
-res://algorithms/proceduralgeneration/binary_space_partitioning/BinarySpacePartitioning.tscn demonstrates BSP-driven dungeon carving--recursive AABB splits stored in BinarySpacePartitioning.gd
+res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn demonstrates BSP-driven dungeon carving--recursive AABB splits stored in BinarySpacePartitioning.gd
