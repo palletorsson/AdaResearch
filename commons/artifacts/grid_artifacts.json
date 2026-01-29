@@ -1599,20 +1599,20 @@
 			"name": "crackpropagation_ca",
 			"lookup_name": "crackpropagation_ca",
 			"description": "crackpropagation_ca",
-			"scene": "res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.tscn",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.tscn",
 			"todo": "fix this no visuals"
 		},
 		"dewcoveredfol": {
 			"name": "dewcoveredfol",
 			"lookup_name": "dewcoveredfol",
 			"description": "dewcoveredfol",
-			"scene": "res://algorithms/proceduralgeneration/dewcoveredfoliage/dewcoveredfoliage.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/dewcoveredfoliage/dewcoveredfoliage.tscn"
 		},
 		"percolationnetwork_ca": {
 			"name": "percolationnetwork_ca",
 			"lookup_name": "percolationnetwork_ca",
 			"description": "percolationnetwork_ca",
-			"scene": "res://algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn"
 		},
 		"mandelbrot_set": {
 			"name": "Mandelbrot Set",
@@ -1660,7 +1660,7 @@
 			"name": "CaveGenerator",
 			"lookup_name": "CaveGenerator",
 			"description": "CaveGenerator",
-			"scene": "res://algorithms/proceduralgeneration/cave_generator/CaveGenerator.tscn",
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/cave_generator/CaveGenerator.tscn",
 			"todo": "fix me, now cave is created"
 		},
 		"cellular_automata_2d": {
@@ -1805,7 +1805,7 @@
 			"name": "GeneticProgramming",
 			"lookup_name": "GeneticProgramming",
 			"description": "GeneticProgramming",
-			"scene": "res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn"
 		},
 		"reaction_diffusion": {
 			"name": "Reaction Diffusion",
@@ -1817,7 +1817,7 @@
 			"name": "Liquid Simulation",
 			"lookup_name": "liquid_simulation",
 			"description": "Particle-based liquid simulation and fluid dynamics",
-			"scene": "res://algorithms/proceduralgeneration/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/particlebasedsimulation/liquidsimulation/liquid_simulation.tscn"
 		},
 		"mushrooms": {
 			"name": "Mushrooms",
@@ -1829,7 +1829,7 @@
 			"name": "Mirrored Cellular Automata",
 			"lookup_name": "mirrored_cellular_automata",
 			"description": "Cellular automata with mirroring and symmetry effects",
-			"scene": "res://algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.tscn"
 		},
 		"metaballs": {
 			"name": "Metaballs",
@@ -1922,7 +1922,7 @@
 			"name": "Layered Membrane",
 			"lookup_name": "layered_membrane",
 			"description": "Procedural membrane generation with layered structures",
-			"scene": "res://algorithms/proceduralgeneration/layeredmembrane/layered_membrane.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.tscn"
 		},
 		"implicit_surface_modeling": {
 			"name": "Implicit Surface Modeling",
@@ -1958,13 +1958,13 @@
 			"name": "Branching Growth Algorithm",
 			"lookup_name": "branching_growth_algorithm",
 			"description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
-			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn"
 		},
 		"branching_growth_algorithm_continued": {
 			"name": "Branching Growth Algorithm continued",
 			"lookup_name": "branching_growth_algorithm_continued",
 			"description": "Procedural branching and growth pattern generation",
-			"scene": "res://algorithms/proceduralgeneration/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn"
 		},
 		"CA_sphere": {
 			"name": "CA_sphere",
@@ -2609,7 +2609,7 @@
 			"name": "space_colonization_algorithm",
 			"lookup_name": "space_colonization_algorithm",
 			"description": "space_colonization_algorithm",
-			"scene": "res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn"
 		},
 		"voronoi_diagram_3d": {
 			"name": "voronoi_diagram_3d",
@@ -2694,7 +2694,7 @@
 			"name": "caverandomwalk",
 			"lookup_name": "caverandomwalk",
 			"description": "caverandomwalk",
-			"scene": "res://algorithms/proceduralgeneration/caverandomwalk/caverandomwalk.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn"
 		},
 		"maze_generator": {
 			"name": "Maze Generator",
@@ -2706,13 +2706,13 @@
 			"name": "Mirror Cellular Texture for 3D",
 			"lookup_name": "mirror_cellular_texture_for_3d",
 			"description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
-			"scene": "res://algorithms/proceduralgeneration/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn"
 		},
 		"slime_mold": {
 			"name": "Slime Mold",
 			"lookup_name": "slime_mold",
 			"description": "Interactive slime mold simulation using Dave Stewart's tube algorithm",
-			"scene": "res://algorithms/proceduralgeneration/slimemold/slime.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/slimemold/slime.tscn"
 		},
 		"diffusion_limited_aggregation": {
 			"name": "diffusion_limited_aggregation",

@@ -59,7 +59,7 @@ FOLDER: ProceduralGenerationTesseractErrorTunnel
 Error processing c:\Users\palle\Documents\GitHub\AdaResearch\commons\maps\ProceduralGenerationWfcDungeonGenerator\map_data.json: Expecting value: line 33 column 3 (char 939)
 FOLDER: ProceduralGeneration_17
   KEY: percolationnetwork_ca
-  SCENE: res://algorithms/proceduralgeneration/percolationnetwork_ca/percolationnetwork_ca.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn
   DESC: percolationnetwork_ca
 ----------------------------------------
 FOLDER: ProceduralGeneration_21
@@ -69,12 +69,12 @@ FOLDER: ProceduralGeneration_21
 ----------------------------------------
 FOLDER: ProceduralGeneration_BranchingGrowthAlgorithm
   KEY: branching_growth_algorithm
-  SCENE: res://algorithms/proceduralgeneration/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn
   DESC: Interactive visualization of branching growth patterns and algorithmic plant generation
 ----------------------------------------
 FOLDER: ProceduralGeneration_CaveRandomWalk
   KEY: caverandomwalk
-  SCENE: res://algorithms/proceduralgeneration/caverandomwalk/caverandomwalk.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn
   DESC: caverandomwalk
 ----------------------------------------
 FOLDER: ProceduralGeneration_CubeMound
@@ -109,7 +109,7 @@ FOLDER: ProceduralGeneration_Eight
   SCENE: res://algorithms/color/color_scanner/grab_stick.tscn
   DESC: grab_stick
   KEY: mirror_cellular_texture_for_3d
-  SCENE: res://algorithms/proceduralgeneration/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn
   DESC: Interactive 3D cellular automata with mirroring and texture generation capabilities
   KEY: rhizomatic_maze_space
   SCENE: res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn
@@ -139,7 +139,7 @@ FOLDER: ProceduralGeneration_Genetic_Algorithms
 ----------------------------------------
 FOLDER: ProceduralGeneration_Genetic_Programming
   KEY: GeneticProgramming
-  SCENE: res://algorithms/proceduralgeneration/genetic_programming/GeneticProgramming.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn
   DESC: GeneticProgramming
 ----------------------------------------
 FOLDER: ProceduralGeneration_MarchingCave
@@ -191,7 +191,7 @@ FOLDER: ProceduralGeneration_Seven
 ----------------------------------------
 FOLDER: ProceduralGeneration_Space_Colonization_Algorithms
   KEY: space_colonization_algorithm
-  SCENE: res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn
   DESC: space_colonization_algorithm
 ----------------------------------------
 FOLDER: ProceduralGeneration_Space_Partitioning
