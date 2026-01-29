@@ -57,10 +57,10 @@
 			],
 
 			"algorithm_paths": {
-				"Reaction_Diffusion": "res://algorithms/proceduralgeneration/reactiondiffusion/",
-				"Reaction_Diffusion_VR": "res://algorithms/proceduralgeneration/reactiondiffusion/reaction_diffusion_vr.tscn",
-				"Turing_Pattern": "res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern.tscn",
-				"Animal_Patterns": "res://algorithms/proceduralgeneration/reactiondiffusion/scenes/"
+				"Reaction_Diffusion": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/",
+				"Reaction_Diffusion_VR": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion_vr.tscn",
+				"Turing_Pattern": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/turing_pattern.tscn",
+				"Animal_Patterns": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/scenes/"
 			},
 
 			"references": {
