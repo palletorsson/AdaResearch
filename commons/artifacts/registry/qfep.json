@@ -1,0 +1,74 @@
+{
+	"artifacts": {
+		"lambda_slider": {
+			"name": "Lambda Slider",
+			"lookup_name": "lambda_slider",
+			"description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5.",
+			"scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
+			"interaction": "grab_slide",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_controller",
+			"qfep_term": "λ",
+			"capacity": "TUNE entropy drive"
+		},
+		"phi_slider": {
+			"name": "Phi Slider",
+			"lookup_name": "phi_slider",
+			"description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being.",
+			"scene": "res://commons/interfaces/qfep/phi_slider.tscn",
+			"interaction": "grab_slide",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_controller",
+			"qfep_term": "φΔE(S,t)",
+			"capacity": "TUNE rate sensitivity"
+		},
+		"qfep_formula_display": {
+			"name": "QFEP Formula Display",
+			"lookup_name": "qfep_formula_display",
+			"description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term is highlightable and connects to explanatory content. The theoretical anchor of the entire curriculum.",
+			"scene": "res://commons/interfaces/qfep/qfep_formula_display.tscn",
+			"interaction": "touch_highlight",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all",
+			"capacity": "SEE the theory",
+			"status": "planned"
+		},
+		"qfep_sandbox_console": {
+			"name": "QFEP Sandbox Console",
+			"lookup_name": "qfep_sandbox_console",
+			"description": "Full QFEP parameter control panel combining lambda_slider, phi_slider, F meter, E(S) meter, and real-time visualization. Find the edge of chaos. You have earned the force.",
+			"scene": "res://commons/interfaces/qfep/qfep_sandbox_console.tscn",
+			"interaction": "full_control",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_controller",
+			"qfep_term": "all",
+			"capacity": "CONTROL everything",
+			"status": "planned"
+		},
+		"bifurcation_walkway": {
+			"name": "Bifurcation Walkway",
+			"lookup_name": "bifurcation_walkway",
+			"description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable → period doubling → chaos → windows of order. The bifurcation diagram made walkable.",
+			"scene": "res://commons/interfaces/qfep/bifurcation_walkway.tscn",
+			"interaction": "walk_through",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "λ",
+			"capacity": "WALK phase transition",
+			"status": "planned"
+		},
+		"edge_of_chaos_orb": {
+			"name": "Edge of Chaos Orb",
+			"lookup_name": "edge_of_chaos_orb",
+			"description": "A sphere that visualizes the current QFEP state. Color and behavior shift based on global λ and φ values. Green and dancing when at the edge of chaos (λ≈0.4, φ>0).",
+			"scene": "res://commons/interfaces/qfep/edge_of_chaos_orb.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all",
+			"capacity": "SEE current state",
+			"status": "planned"
+		}
+	}
+}

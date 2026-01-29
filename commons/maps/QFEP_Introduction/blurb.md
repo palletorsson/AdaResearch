@@ -1,0 +1,1 @@
+A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity. In this studio, color is not observed but worn - decoration for a body that exists only as data.
