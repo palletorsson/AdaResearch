@@ -179,36 +179,36 @@ func grid_key(grid_pos: Vector3i) -> String:
     return "%d,%d,%d" % [grid_pos.x, grid_pos.y, grid_pos.z]
 
 func add_to_grid(point: Vector3):
-	var grid_pos = world_to_grid(point)
-	var key = grid_key(grid_pos)
-	
-	if not grid.has(key):
-	    grid[key] = []
-	
-	grid[key].append(point)
+    var grid_pos = world_to_grid(point)
+    var key = grid_key(grid_pos)
+    
+    if not grid.has(key):
+        grid[key] = []
+    
+    grid[key].append(point)
 
 func visualize_samples():
     clear_visualization()
 
     # Draw sample points
     for point in sample_points:
-    	create_sample_visual(point)
+        create_sample_visual(point)
 
     # Draw grid if enabled
     if show_grid:
-    	create_grid_visual()
+        create_grid_visual()
 
-	# Draw radius spheres if enabled
-	if show_radius:
-		create_radius_visual()
+    # Draw radius spheres if enabled
+    if show_radius:
+        create_radius_visual()
 
-	# Draw distance lines to show minimum distance constraint
-	if show_distance_lines:
-		create_distance_lines_visual()
+    # Draw distance lines to show minimum distance constraint
+    if show_distance_lines:
+        create_distance_lines_visual()
 
-	# Add explanation label
-	if show_label:
-		create_explanation_label()
+    # Add explanation label
+    if show_label:
+        create_explanation_label()
 
 func create_sample_visual(point: Vector3):
     var instance = MeshInstance3D.new()
@@ -333,62 +333,62 @@ func create_grid_visual():
     grid_mesh.material_override = material
 
 func create_distance_lines_visual():
-	# Draw lines between nearby points to show the minimum distance constraint
-	var line_mesh = MeshInstance3D.new()
-	line_mesh.name = "DistanceLines"
-	add_child(line_mesh)
+    # Draw lines between nearby points to show the minimum distance constraint
+    var line_mesh = MeshInstance3D.new()
+    line_mesh.name = "DistanceLines"
+    add_child(line_mesh)
 
-	var surface_tool = SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_LINES)
+    var surface_tool = SurfaceTool.new()
+    surface_tool.begin(Mesh.PRIMITIVE_LINES)
 
-	# For each point, connect to nearest neighbors (limited for performance)
-	var max_points = min(sample_points.size(), 50)
-	for i in range(max_points):
-		var point = sample_points[i]
-		# Find 2-3 nearest neighbors
-		var distances = []
-		for j in range(sample_points.size()):
-			if i != j:
-				var dist = point.distance_to(sample_points[j])
-				if dist < min_distance * 2.0:  # Only show close neighbors
-					distances.append({"index": j, "dist": dist})
+    # For each point, connect to nearest neighbors (limited for performance)
+    var max_points = min(sample_points.size(), 50)
+    for i in range(max_points):
+        var point = sample_points[i]
+        # Find 2-3 nearest neighbors
+        var distances = []
+        for j in range(sample_points.size()):
+            if i != j:
+                var dist = point.distance_to(sample_points[j])
+                if dist < min_distance * 2.0:  # Only show close neighbors
+                    distances.append({"index": j, "dist": dist})
 
-		distances.sort_custom(func(a, b): return a.dist < b.dist)
+        distances.sort_custom(func(a, b): return a.dist < b.dist)
 
-		# Connect to 2 nearest neighbors
-		for k in range(min(2, distances.size())):
-			surface_tool.add_vertex(point)
-			surface_tool.add_vertex(sample_points[distances[k].index])
+        # Connect to 2 nearest neighbors
+        for k in range(min(2, distances.size())):
+            surface_tool.add_vertex(point)
+            surface_tool.add_vertex(sample_points[distances[k].index])
 
-	line_mesh.mesh = surface_tool.commit()
+    line_mesh.mesh = surface_tool.commit()
 
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(1.0, 0.5, 0.0, 0.4)
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	line_mesh.material_override = material
+    var material = StandardMaterial3D.new()
+    material.albedo_color = Color(1.0, 0.5, 0.0, 0.4)
+    material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    line_mesh.material_override = material
 
 func create_explanation_label():
-	# Main explanation
-	var label = Label3D.new()
-	label.name = "ExplanationLabel"
-	label.text = "POISSON DISK SAMPLING\nPoints maintain minimum distance\n(Blue Noise Distribution)"
-	label.position = Vector3(0, sample_region.y / 2 + 1.5, 0)
-	label.font_size = 40
-	label.modulate = Color(0.2, 0.9, 1.0)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.outline_size = 8
-	add_child(label)
+    # Main explanation
+    var label = Label3D.new()
+    label.name = "ExplanationLabel"
+    label.text = "POISSON DISK SAMPLING\nPoints maintain minimum distance\n(Blue Noise Distribution)"
+    label.position = Vector3(0, sample_region.y / 2 + 1.5, 0)
+    label.font_size = 40
+    label.modulate = Color(0.2, 0.9, 1.0)
+    label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    label.outline_size = 8
+    add_child(label)
 
-	# Min distance indicator
-	var dist_label = Label3D.new()
-	dist_label.name = "DistanceLabel"
-	dist_label.text = "Min Distance: %.2f" % min_distance
-	dist_label.position = Vector3(0, -sample_region.y / 2 - 0.5, 0)
-	dist_label.font_size = 32
-	dist_label.modulate = Color(1.0, 0.8, 0.3)
-	dist_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	add_child(dist_label)
+    # Min distance indicator
+    var dist_label = Label3D.new()
+    dist_label.name = "DistanceLabel"
+    dist_label.text = "Min Distance: %.2f" % min_distance
+    dist_label.position = Vector3(0, -sample_region.y / 2 - 0.5, 0)
+    dist_label.font_size = 32
+    dist_label.modulate = Color(1.0, 0.8, 0.3)
+    dist_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(dist_label)
 
 func print_sample_points():
     print("\n=== Poisson Disk Sample Points ===")
