@@ -10,11 +10,16 @@ extends Node3D
 ##
 ## This version uses a square wave synthesizer with a frequency chirp and exponential decay
 ## to emulate the classic 8-bit "pick up" sound effect.
+##
+## OPTIMIZED: Uses WavefunctionResources for shared meshes and MultiMesh for trails
 
 @onready var large_sphere: MeshInstance3D
 @onready var small_sphere: MeshInstance3D
 @onready var audio_player: AudioStreamPlayer3D
-@onready var trail_points: Array[MeshInstance3D] = []
+
+# MultiMesh trail (replaces 128 individual MeshInstance3D nodes)
+var trail_multimesh: MultiMeshInstance3D
+var trail_positions: PackedVector3Array
 
 # Spherical coordinates (position of small sphere)
 var theta: float = 0.0  # Latitude angle (0 to PI)
@@ -52,26 +57,15 @@ func _ready() -> void:
 	_create_trail()
 	_setup_audio()
 	_setup_controls()
-	print("SphericalHarmonics: Ready - Mario Mode Activated!")
+	print("SphericalHarmonics: Ready - Mario Mode Activated! (Optimized)")
 
 func _create_spheres() -> void:
-	# Large sphere (center)
+	# Large sphere (center) - uses shared glass material
 	large_sphere = MeshInstance3D.new()
-	var large_mesh = SphereMesh.new()
-	large_mesh.radius = 1.0
-	large_mesh.height = 2.0
-	large_mesh.rings = 32
-	large_mesh.radial_segments = 64
-	large_sphere.mesh = large_mesh
-
-	var large_material = StandardMaterial3D.new()
-	large_material.albedo_color = Color(0.2, 0.3, 0.8, 0.3)
-	large_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	large_material.emission_enabled = true
-	large_material.emission = Color(0.1, 0.2, 0.4, 1.0)
-	large_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	large_sphere.material_override = large_material
-
+	large_sphere.mesh = WavefunctionResources.get_unit_sphere()
+	large_sphere.material_override = WavefunctionResources.get_glass_material(
+		Color(0.2, 0.3, 0.8), 0.3
+	)
 	add_child(large_sphere)
 
 	# Small sphere (orbiting)
@@ -80,13 +74,12 @@ func _create_spheres() -> void:
 	small_mesh.radius = 0.1
 	small_mesh.height = 0.2
 	small_sphere.mesh = small_mesh
-
+	# This one needs dynamic color, so create its own material
 	var small_material = StandardMaterial3D.new()
 	small_material.albedo_color = Color(1, 0.7, 0.2, 1.0)
 	small_material.emission_enabled = true
 	small_material.emission = Color(1, 0.7, 0.2, 1.0) * 0.8
 	small_sphere.material_override = small_material
-
 	add_child(small_sphere)
 
 	# Initial position
@@ -118,25 +111,33 @@ func _create_labels() -> void:
 	add_child(hint)
 
 func _create_trail() -> void:
-	# Create trail points to visualize path
+	# OPTIMIZED: Use MultiMesh instead of 128 individual MeshInstance3D nodes
+	# This reduces draw calls from 128 to 1
+	
+	trail_positions.resize(TRAIL_LENGTH)
+	
+	trail_multimesh = MultiMeshInstance3D.new()
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = TRAIL_LENGTH
+	mm.mesh = WavefunctionResources.get_trail_sphere()
+	trail_multimesh.multimesh = mm
+	
+	# Use shared emissive material
+	trail_multimesh.material_override = WavefunctionResources.get_emissive_material(
+		Color(1, 0.7, 0.2), 1.0, 0.8
+	)
+	
+	# Initialize all instances as hidden (zero scale)
 	for i in range(TRAIL_LENGTH):
-		var point = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = 0.02
-		sphere.height = 0.04
-		point.mesh = sphere
-
-		var material = StandardMaterial3D.new()
-		var age = i / float(TRAIL_LENGTH)
-		material.albedo_color = Color(1, 0.7, 0.2, 0.3 * (1.0 - age))
-		material.emission_enabled = true
-		material.emission = Color(1, 0.7, 0.2, 1.0) * 0.5 * (1.0 - age)
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		point.material_override = material
-
-		point.visible = false
-		add_child(point)
-		trail_points.append(point)
+		mm.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO))
+		# Set fading color based on age
+		var age = float(i) / float(TRAIL_LENGTH)
+		mm.set_instance_color(i, Color(1, 0.7, 0.2, 0.8 * (1.0 - age)))
+	
+	add_child(trail_multimesh)
+	print("SphericalHarmonics: Trail using MultiMesh (1 node instead of 128)")
 
 func _setup_audio() -> void:
 	audio_stream = AudioStreamGenerator.new()
@@ -166,9 +167,22 @@ func _update_small_sphere_position() -> void:
 
 	small_sphere.position = Vector3(x, y, z)
 
-	if trail_points.size() == TRAIL_LENGTH:
-		trail_points[trail_index].position = small_sphere.position
-		trail_points[trail_index].visible = true
+	# Update trail using MultiMesh
+	if trail_multimesh and trail_multimesh.multimesh:
+		var mm = trail_multimesh.multimesh
+		var pos = small_sphere.position
+		trail_positions[trail_index] = pos
+		
+		# Update this trail point's transform (visible, at position)
+		var t = Transform3D(Basis(), pos)
+		mm.set_instance_transform(trail_index, t)
+		
+		# Update colors to create fading effect (newest = bright, oldest = dim)
+		for i in range(TRAIL_LENGTH):
+			var age_offset = (trail_index - i + TRAIL_LENGTH) % TRAIL_LENGTH
+			var alpha = 0.8 * (1.0 - float(age_offset) / float(TRAIL_LENGTH))
+			mm.set_instance_color(i, Color(1, 0.7, 0.2, alpha))
+		
 		trail_index = (trail_index + 1) % TRAIL_LENGTH
 
 func _update_sound_from_position() -> void:
@@ -185,8 +199,6 @@ func _update_sound_from_position() -> void:
 	# Update label
 	var label = get_node_or_null("PositionLabel")
 	if label:
-		var theta_deg = rad_to_deg(theta)
-		var phi_deg = rad_to_deg(phi)
 		label.text = "Mario Mode: F_Start=%.0fHz Decay=%.1f" % [freq_start, decay_rate]
 
 func _process(delta: float) -> void:
@@ -247,8 +259,9 @@ func _generate_audio_samples() -> void:
 				# Exponential decay
 				var envelope = exp(-progress * decay_rate)
 				
-				# Square wave
-				var wave = 1.0 if sin(2.0 * PI * freq * current_time_in_sound) > 0 else -1.0
+				# Square wave using lookup table (OPTIMIZED)
+				var phase = fposmod(freq * current_time_in_sound, 1.0)
+				var wave = WavefunctionResources.fast_square(phase)
 				
 				sample = wave * envelope * 0.5
 

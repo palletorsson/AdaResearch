@@ -1,6 +1,6 @@
 # demo_selector.gd - Switch between different mesh generation techniques
 extends Node3D
-const BASE_PATH := "res://algorithms/proceduralgeneration/proceduralstrategies/"
+const BASE_PATH := "res://algorithms/proceduralgeneration/procedural_logic/proceduralstrategies/"
 
 enum Strategy {
 	MARCHING_CUBES,
