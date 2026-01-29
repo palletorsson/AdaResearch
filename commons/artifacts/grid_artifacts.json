@@ -1721,7 +1721,7 @@
 			"name": "Tree Generator",
 			"lookup_name": "tree_gen",
 			"description": "Procedural tree generation with branching algorithms",
-			"scene": "res://algorithms/proceduralgeneration/treegen/gen_tree.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/treegen/gen_tree.tscn"
 		},
 		"gridscheckers": {
 			"name": "gridscheckers",
@@ -1793,7 +1793,7 @@
 			"name": "Tile Patterns",
 			"lookup_name": "tile_patterns",
 			"description": "Procedural tile pattern generation and tiling algorithms",
-			"scene": "res://algorithms/proceduralgeneration/tilepatterns/tilepattern.tscn"
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/tilepattern.tscn"
 		},
 		"fuzzy_cloud": {
 			"name": "fuzzy_cloud",
@@ -1823,7 +1823,7 @@
 			"name": "Mushrooms",
 			"lookup_name": "mushrooms",
 			"description": "Interactive procedural mushroom generation with organic growth patterns",
-			"scene": "res://algorithms/proceduralgeneration/mushrooms/mushrooms.tscn"
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn"
 		},
 		"mirrored_cellular_automata": {
 			"name": "Mirrored Cellular Automata",
@@ -1904,7 +1904,7 @@
 			"name": "Maze Generation",
 			"lookup_name": "maze_generation",
 			"description": "VR-scale walkable maze with recursive backtracking generation",
-			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.tscn"
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn"
 		},
 		"markov_chains": {
 			"name": "Markov Chains",
@@ -1952,7 +1952,7 @@
 			"name": "spherenetwork",
 			"lookup_name": "spherenetwork",
 			"description": "spherenetwork",
-			"scene": "res://algorithms/proceduralgeneration/spherenetwork/spherenetwork.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/spherenetwork/spherenetwork.tscn"
 		},
 		"branching_growth_algorithm": {
 			"name": "Branching Growth Algorithm",
@@ -2120,7 +2120,7 @@
 			"name": "modernistchairgallery",
 			"lookup_name": "modernistchairgallery",
 			"description": "Physics constraint systems for maintaining object relationships",
-			"scene": "res://algorithms/proceduralgeneration/modernistchairs/ModernistChairGallery.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/modernistchairs/ModernistChairGallery.tscn"
 		},
 		"fem_simulation": {
 			"name": "Finite Element Method",
@@ -2682,13 +2682,13 @@
 			"name": "cube_mound_scene",
 			"lookup_name": "cube_mound_scene",
 			"description": "cube_mound_scene",
-			"scene": "res://algorithms/proceduralgeneration/cubemound/cube_mound_scene.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn"
 		},
 		"cube_mound_scene_sphere": {
 			"name": "cube_mound_scene_sphere",
 			"lookup_name": "cube_mound_scene_sphere",
 			"description": "cube_mound_scene_sphere",
-			"scene": "res://algorithms/proceduralgeneration/cubemound/cube_mound_scene_sphere.tscn"
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene_sphere.tscn"
 		},
 		"caverandomwalk": {
 			"name": "caverandomwalk",
@@ -2700,7 +2700,7 @@
 			"name": "Maze Generator",
 			"lookup_name": "maze_generator",
 			"description": "VR-scale walkable maze with animated recursive backtracking",
-			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.tscn"
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn"
 		},
 		"mirror_cellular_texture_for_3d": {
 			"name": "Mirror Cellular Texture for 3D",
@@ -2730,13 +2730,13 @@
 			"name": "Color Pattern Mate Texture for 3D",
 			"lookup_name": "color_pattern_mate_texture_for_3d",
 			"description": "Interactive 3D color pattern mate texture generation for procedural tiling",
-			"scene": "res://algorithms/proceduralgeneration/tilepatterns/color_pattern_mate_texture_for_3d.tscn"
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_mate_texture_for_3d.tscn"
 		},
 		"color_pattern_texture_for_3d": {
 			"name": "Color Pattern Texture for 3D",
 			"lookup_name": "color_pattern_texture_for_3d",
 			"description": "Interactive 3D color pattern texture generation for procedural tiling systems",
-			"scene": "res://algorithms/proceduralgeneration/tilepatterns/color_pattern_texture_for_3d.tscn"
+			"scene": "res://algorithms/proceduralgeneration/procedural_logic/tilepatterns/color_pattern_texture_for_3d.tscn"
 		},
 		"random_walker_machine": {
 			"name": "Random Walker Machine",

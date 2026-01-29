@@ -79,10 +79,10 @@ FOLDER: ProceduralGeneration_CaveRandomWalk
 ----------------------------------------
 FOLDER: ProceduralGeneration_CubeMound
   KEY: cube_mound_scene
-  SCENE: res://algorithms/proceduralgeneration/cubemound/cube_mound_scene.tscn
+  SCENE: res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn
   DESC: cube_mound_scene
   KEY: cube_mound_scene_sphere
-  SCENE: res://algorithms/proceduralgeneration/cubemound/cube_mound_scene_sphere.tscn
+  SCENE: res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene_sphere.tscn
   DESC: cube_mound_scene_sphere
 ----------------------------------------
 FOLDER: ProceduralGeneration_Delaunay_Triangulation
@@ -162,7 +162,7 @@ FOLDER: ProceduralGeneration_Markov_Chains
 ----------------------------------------
 FOLDER: ProceduralGeneration_Maze
   KEY: maze_generation
-  SCENE: res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn
+  SCENE: res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator.tscn
   DESC: Procedural maze generation algorithms and visualization
 ----------------------------------------
 FOLDER: ProceduralGeneration_N_grams
@@ -210,7 +210,7 @@ FOLDER: ProceduralGeneration_Ten
   SCENE: res://algorithms/fractals/julia_set/julia_set.tscn
   DESC: Complex plane fractal visualization of Julia sets
   KEY: tree_gen
-  SCENE: res://algorithms/proceduralgeneration/treegen/gen_tree.tscn
+  SCENE: res://algorithms/proceduralgeneration/growth_systems/treegen/gen_tree.tscn
   DESC: Procedural tree generation with branching algorithms
 ----------------------------------------
 FOLDER: ProceduralGeneration_Three
