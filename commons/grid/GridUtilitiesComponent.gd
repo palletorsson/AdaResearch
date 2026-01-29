@@ -978,6 +978,7 @@ func _is_sequence_name(name: String) -> bool:
 		"resourcemanagement",
 		"advancedlaboratory", 
 		"machinelearning",
+		"qfeplaboratory",
 		"testmaps"
 	]
 	return name in known_sequences

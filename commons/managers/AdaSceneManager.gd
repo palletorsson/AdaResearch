@@ -394,22 +394,23 @@ func _load_grid_scene_with_first_map():
 	if current_sequence_data.is_empty():
 		push_error("AdaSceneManager: ERROR - No sequence data")
 		return
-	
+
 	var maps = current_sequence_data.get("maps", [])
 	if maps.is_empty():
 		push_error("AdaSceneManager: ERROR - No maps in sequence")
 		return
-	
+
 	var first_map = maps[0]
 	if debug:
 		print("AdaSceneManager: Loading grid scene with map: %s" % first_map)
-	
+
 	var grid_scene_data = {
 		"sequence_data": current_sequence_data,
-		"initial_map": first_map,
+		"map_name": first_map,  # vrStaging expects "map_name"
+		"initial_map": first_map,  # Keep for backwards compatibility
 		"scene_manager": self
 	}
-	
+
 	_load_scene_with_data(GRID_SCENE_PATH, grid_scene_data)
 
 func _restore_sequence_context(sequence_data: Dictionary):

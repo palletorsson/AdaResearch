@@ -44,12 +44,17 @@ signal slider_released()
 
 # Internal references
 var _slider: XRToolsInteractableSlider
+var _handle: XRToolsInteractableHandle
 var _rail_mesh: MeshInstance3D
 var _handle_mesh: MeshInstance3D
 var _label: Label3D
 var _particles: GPUParticles3D
 var _rail_material: StandardMaterial3D
 var _handle_material: StandardMaterial3D
+var _is_grabbed: bool = false
+
+# Glow parameters (like grab_sphere)
+const GLOW_EMISSION_ENERGY: float = 2.0
 
 # Color gradient for phi visualization
 const COLOR_RESIST = Color(0.6, 0.3, 0.7, 1.0)     # Purple - resists change (φ<0)
@@ -68,8 +73,9 @@ func _ready() -> void:
 	print("PhiSlider ready at φ = %.2f" % phi)
 
 func _build_slider() -> void:
-	# Create the XR Tools slider
+	# Create the XR Tools slider - horizontal along X axis
 	_slider = XRToolsInteractableSlider.new()
+	_slider.name = "InteractableSlider"
 	_slider.slider_limit_min = 0.0
 	_slider.slider_limit_max = rail_length
 	# Convert phi (-1 to 1) to slider position (0 to rail_length)
@@ -77,24 +83,55 @@ func _build_slider() -> void:
 	_slider.default_position = 0.65 * rail_length  # Default φ=0.3
 	_slider.default_on_release = false
 	_slider.slider_steps = 0.0  # Continuous
+	
+	# Create HandleOrigin node - this is the reference point for the handle
+	# Matches the working slider_horizontal.tscn structure
+	var handle_origin = Node3D.new()
+	handle_origin.name = "HandleOrigin"
+	
+	# Create handle for grabbing - make it feel like grab_sphere
+	_handle = XRToolsInteractableHandle.new()
+	_handle.name = "InteractableHandle"
+	
+	# CRITICAL: Configure RigidBody3D settings so it doesn't fall!
+	_handle.gravity_scale = 0.0
+	_handle.collision_layer = 262144  # Bit 18 - XR pickable layer
+	_handle.collision_mask = 0  # Don't collide with anything
+	_handle.freeze = true  # Freeze until grabbed
+	_handle.picked_up_layer = 0  # Match working slider
+	
+	# Handle collision shape - larger for easier grabbing
+	var handle_collision = CollisionShape3D.new()
+	handle_collision.name = "CollisionShape3D"
+	var handle_shape = SphereShape3D.new()
+	handle_shape.radius = handle_radius * 2.0  # Larger collision for easier grab
+	handle_collision.shape = handle_shape
+	_handle.add_child(handle_collision)
+	
+	# Add grab point redirects for left and right hands (like working slider)
+	var grab_redirect_left = XRToolsGrabPointRedirect.new()
+	grab_redirect_left.name = "GrabPointRedirectLeft"
+	_handle.add_child(grab_redirect_left)
+	
+	var grab_redirect_right = XRToolsGrabPointRedirect.new()
+	grab_redirect_right.name = "GrabPointRedirectRight"
+	_handle.add_child(grab_redirect_right)
+	
+	# BUILD ENTIRE HIERARCHY BEFORE ADDING TO TREE
+	# This ensures _hook_child_handles() finds the handle when slider._ready() runs
+	handle_origin.add_child(_handle)
+	_slider.add_child(handle_origin)
+	
+	# NOW add to tree - slider._ready() will find and hook the handle
 	add_child(_slider)
 	
-	# Create handle for grabbing
-	var handle = XRToolsInteractableHandle.new()
-	handle.name = "Handle"
-	_slider.add_child(handle)
-	
-	# Handle collision shape
-	var handle_collision = CollisionShape3D.new()
-	var handle_shape = SphereShape3D.new()
-	handle_shape.radius = handle_radius * 1.5
-	handle_collision.shape = handle_shape
-	handle.add_child(handle_collision)
-	
-	# Connect signals
-	_slider.slider_moved.connect(_on_slider_moved)
-	_slider.grabbed.connect(_on_slider_grabbed)
-	_slider.released.connect(_on_slider_released)
+	# Connect our own signals after hierarchy is set up
+	if _slider.has_signal("slider_moved"):
+		_slider.slider_moved.connect(_on_slider_moved)
+	if _handle.has_signal("grabbed"):
+		_handle.grabbed.connect(_on_slider_grabbed)
+	if _handle.has_signal("released"):
+		_handle.released.connect(_on_slider_released)
 
 func _build_visuals() -> void:
 	# Build the rail
@@ -115,7 +152,7 @@ func _build_visuals() -> void:
 	# Build gradient overlay on rail
 	_build_rail_gradient()
 	
-	# Build the handle visual
+	# Build the handle visual - attach to handle so it moves with grab
 	_handle_mesh = MeshInstance3D.new()
 	var handle_sphere = SphereMesh.new()
 	handle_sphere.radius = handle_radius
@@ -128,7 +165,8 @@ func _build_visuals() -> void:
 	_handle_material.emission = COLOR_EMBRACE
 	_handle_material.emission_energy_multiplier = 0.5
 	_handle_mesh.material_override = _handle_material
-	_slider.add_child(_handle_mesh)
+	# Add mesh to the HANDLE so it follows the grab position
+	_handle.add_child(_handle_mesh)
 	
 	# Build label
 	if show_label:
@@ -232,14 +270,26 @@ func _on_slider_moved(position: float) -> void:
 	phi = (position / rail_length) * 2.0 - 1.0
 	
 func _on_slider_grabbed(_interactable) -> void:
+	_is_grabbed = true
 	emit_signal("slider_grabbed")
+	# Apply glow effect like grab_sphere
 	if _handle_material:
-		_handle_material.emission_energy_multiplier = 1.5
+		_handle_material.emission_energy_multiplier = GLOW_EMISSION_ENERGY
+		# Scale up slightly when grabbed
+		if _handle_mesh:
+			var tween = create_tween()
+			tween.tween_property(_handle_mesh, "scale", Vector3(1.3, 1.3, 1.3), 0.1)
 	
 func _on_slider_released(_interactable) -> void:
+	_is_grabbed = false
 	emit_signal("slider_released")
+	# Reset glow effect
 	if _handle_material:
 		_handle_material.emission_energy_multiplier = 0.5
+		# Scale back to normal
+		if _handle_mesh:
+			var tween = create_tween()
+			tween.tween_property(_handle_mesh, "scale", Vector3.ONE, 0.1)
 
 func _update_visuals() -> void:
 	# Update handle position

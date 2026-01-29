@@ -412,10 +412,10 @@ func _is_sequence_name(name: String) -> bool:
 		"meshestextures",
 		"randomness",
 		"wavefunctions",
-		"vectors", 
-		"fractals", 
-		"cellularautomata", 
-		"joints", 
+		"vectors",
+		"fractals",
+		"cellularautomata",
+		"joints",
 		"noise",
 		"forces",
 		"particles",
@@ -438,6 +438,7 @@ func _is_sequence_name(name: String) -> bool:
 		"speculativecomputation",
 		"resourcemanagement",
 		"advancedlaboratory",
+		"qfeplaboratory",
 		"testmaps"
 	]
 	return name in known_sequences

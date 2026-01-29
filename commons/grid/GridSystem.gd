@@ -45,42 +45,71 @@ signal grid_animation_complete()
 
 func _ready():
 	print("GridSystem: Initializing component-based grid system...")
-	
+
 	if not base_cube:
 		push_error("GridSystem: Base cube reference not found!")
 		return
-	
-	# Check for scene data first (from AdaSceneManager)
-	_check_for_scene_data()
-	
-	# Initialize components
+
+	# Initialize components first
 	_initialize_components()
-	
+
+	# CRITICAL: Defer scene data check and map loading to next frame
+	# This allows staging to set scene_user_data BEFORE we try to read it
+	call_deferred("_deferred_initialization")
+
+func _deferred_initialization():
+	"""Deferred init to allow staging to set scene_user_data first"""
+	print("GridSystem: Deferred initialization starting...")
+
+	# Now check for scene data (metadata should be set by now)
+	_check_for_scene_data()
+
 	# Load map data
 	_load_map_data()
 
 # Check for scene data and update map_name
 func _check_for_scene_data():
+	var scene_data = {}
+
+	# Try multiple locations for scene data
+	# 1. Check current scene's metadata
 	var scene_root = get_tree().current_scene
-	var scene_data = scene_root.get_meta("scene_user_data", {})
-	
+	if scene_root:
+		scene_data = scene_root.get_meta("scene_user_data", {})
+		if scene_data.is_empty():
+			scene_data = scene_root.get_meta("scene_data", {})
+
+	# 2. Check staging node (AdaVRStaging) metadata
 	if scene_data.is_empty():
-		scene_data = scene_root.get_meta("scene_data", {})
-	
+		var staging = get_node_or_null("/root/AdaVRStaging")
+		if staging:
+			scene_data = staging.get_meta("scene_user_data", {})
+			if scene_data.is_empty():
+				scene_data = staging.get_meta("scene_data", {})
+
+	# 3. Check parent scene's metadata (if GridSystem is child of loaded scene)
+	if scene_data.is_empty():
+		var parent = get_parent()
+		while parent and scene_data.is_empty():
+			scene_data = parent.get_meta("scene_user_data", {})
+			if scene_data.is_empty():
+				scene_data = parent.get_meta("scene_data", {})
+			parent = parent.get_parent()
+
 	if not scene_data.is_empty():
 		print("GridSystem: Found scene data: %s" % scene_data)
-		
+
 		# Update map name from scene data
 		if scene_data.has("map_name"):
 			var new_map_name = scene_data["map_name"]
 			print("GridSystem: Updating map_name from '%s' to '%s'" % [map_name, new_map_name])
 			map_name = new_map_name
-		
+
 		if scene_data.has("initial_map"):
 			var new_map_name = scene_data["initial_map"]
 			print("GridSystem: Updating map_name from '%s' to '%s' (initial_map)" % [map_name, new_map_name])
 			map_name = new_map_name
-		
+
 		# Store sequence data for reference
 		if scene_data.has("sequence_data"):
 			set_meta("current_sequence", scene_data["sequence_data"])
@@ -185,7 +214,7 @@ func _is_sequence_name(name: String) -> bool:
 		"patterngeneration", "proceduralgeneration", "searchpathfinding",
 		"topology", "graphtheory", "computationalgeometry",
 		"machinelearning", "criticalalgorithms", "speculativecomputation",
-		"resourcemanagement", "advancedlaboratory", "testmaps"
+		"resourcemanagement", "advancedlaboratory", "qfeplaboratory", "testmaps"
 	]
 	return name in known_sequences
 
@@ -438,7 +467,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		if action == "next_in_sequence":
 			print("GridSystem: ✅ Using teleporter's 'next_in_sequence' action")
 			# If no active sequence and destination is a sequence name, convert to start_sequence
-			if current_sequence.is_empty() and destination in ["primitives", "array_tutorial", "randomness", "noise", "wavefunctions"]:
+			if current_sequence.is_empty() and destination in ["primitives", "array_tutorial", "randomness", "noise", "wavefunctions", "qfeplaboratory"]:
 				print("GridSystem: 🔄 No active sequence, converting next_in_sequence to start_sequence for: %s" % destination)
 				action = "start_sequence"
 				sequence = destination
@@ -449,7 +478,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
-		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory"]:
+		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory"]:
 			action = "start_sequence"
 			sequence = destination
 			destination = ""

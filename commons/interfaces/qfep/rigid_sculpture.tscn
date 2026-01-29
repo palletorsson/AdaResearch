@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_rigid_sculpture"]
+
+[ext_resource type="Script" uid="uid://qfep_rigid_sculpture_script" path="res://commons/interfaces/qfep/rigid_sculpture.gd" id="1_rigid"]
+
+[node name="RigidSculpture" type="Node3D"]
+script = ExtResource("1_rigid")

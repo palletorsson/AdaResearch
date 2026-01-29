@@ -22,17 +22,16 @@
 			"qfep_term": "φΔE(S,t)",
 			"capacity": "TUNE rate sensitivity"
 		},
-		"qfep_formula_display": {
-			"name": "QFEP Formula Display",
-			"lookup_name": "qfep_formula_display",
-			"description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term is highlightable and connects to explanatory content. The theoretical anchor of the entire curriculum.",
-			"scene": "res://commons/interfaces/qfep/qfep_formula_display.tscn",
-			"interaction": "touch_highlight",
+		"qfep_formula_3d": {
+			"name": "QFEP Formula 3D",
+			"lookup_name": "qfep_formula_3d",
+			"description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
+			"scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
+			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "all",
-			"capacity": "SEE the theory",
-			"status": "planned"
+			"capacity": "SEE the theory"
 		},
 		"qfep_sandbox_console": {
 			"name": "QFEP Sandbox Console",
@@ -69,6 +68,296 @@
 			"qfep_term": "all",
 			"capacity": "SEE current state",
 			"status": "planned"
+		},
+		"grab_sphere_F": {
+			"name": "F Term Sphere",
+			"lookup_name": "grab_sphere_F",
+			"description": "Grabbable sphere representing F (Free Energy) - the order-seeking, pattern-finding drive. Blue glow.",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+			"default_params": {"color": "4080FF"},
+			"interaction": "grab",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_term",
+			"qfep_term": "F"
+		},
+		"grab_sphere_E": {
+			"name": "E Term Sphere",
+			"lookup_name": "grab_sphere_E",
+			"description": "Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space. Red glow.",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+			"default_params": {"color": "FF6060"},
+			"interaction": "grab",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_term",
+			"qfep_term": "E(S)"
+		},
+		"grab_sphere_lambda": {
+			"name": "Lambda Term Sphere",
+			"lookup_name": "grab_sphere_lambda",
+			"description": "Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+			"default_params": {"color": "40FF80"},
+			"interaction": "grab",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_term",
+			"qfep_term": "λ"
+		},
+		"grab_sphere_phi": {
+			"name": "Phi Term Sphere",
+			"lookup_name": "grab_sphere_phi",
+			"description": "Grabbable sphere representing φ (phi) - the rate sensitivity, the queer signature. Magenta glow.",
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+			"default_params": {"color": "FF80FF"},
+			"interaction": "grab",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_term",
+			"qfep_term": "φ"
+		},
+		"qfep_reactor": {
+			"name": "QFEP Reactor",
+			"lookup_name": "qfep_reactor",
+			"description": "Central orb that visualizes the current QFEP state. Pulses and glows based on lambda and phi. Blue=order, green=edge of chaos, red=dissolution. The heart of the laboratory.",
+			"scene": "res://commons/interfaces/qfep/qfep_reactor.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all",
+			"capacity": "SEE system state"
+		},
+		"entropy_meter": {
+			"name": "Entropy Meter",
+			"lookup_name": "entropy_meter",
+			"description": "Visual gauge showing current E(S) entropy level. A filling tube that responds to lambda. Low=blue, medium=green, high=red. Classic lab instrument aesthetic.",
+			"scene": "res://commons/interfaces/qfep/entropy_meter.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_instrument",
+			"qfep_term": "E(S)",
+			"capacity": "MEASURE entropy"
+		},
+		"edge_detector": {
+			"name": "Edge Detector",
+			"lookup_name": "edge_detector",
+			"description": "Handheld tool that detects edge of chaos. Beeps faster and glows brighter as lambda approaches 0.4. The antenna vibrates at the sweet spot. A tricorder for QFEP.",
+			"scene": "res://commons/interfaces/qfep/edge_detector.tscn",
+			"interaction": "grab",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_tool",
+			"qfep_term": "λ",
+			"capacity": "DETECT edge of chaos"
+		},
+		"phase_cube": {
+			"name": "Phase Cube",
+			"lookup_name": "phase_cube",
+			"description": "A cube that shows phase transitions. SOLID (crystal, λ<0.25) → COMPLEX (edge, 0.25<λ<0.55) → GAS (dissolution, λ>0.55). Visual metaphor for matter states as QFEP states.",
+			"scene": "res://commons/interfaces/qfep/phase_cube.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "λ",
+			"capacity": "SEE phase transitions"
+		},
+		"qfep_oscilloscope": {
+			"name": "QFEP Oscilloscope",
+			"lookup_name": "qfep_oscilloscope",
+			"description": "Real-time waveform display showing F (blue) and E(S) (red) over time. Watch the oscillation between order and entropy. Classic lab monitor aesthetic.",
+			"scene": "res://commons/interfaces/qfep/qfep_oscilloscope.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_instrument",
+			"qfep_term": "F, E(S)",
+			"capacity": "SEE oscillation"
+		},
+		"reactive_particle_field": {
+			"name": "Reactive Particle Field",
+			"lookup_name": "reactive_particle_field",
+			"description": "A field of 100 particles that respond to lambda and phi. Low λ: ordered grid. Edge λ: swirling dance. High λ: chaotic swarm. Phi affects dynamics. The formula made physical.",
+			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all",
+			"capacity": "SEE emergence"
+		},
+		
+		"_comment_aliases": "=== ALIASES TO EXISTING ARTIFACTS ===",
+		
+		"crystal_cluster": {
+			"name": "Crystal Cluster",
+			"lookup_name": "crystal_cluster",
+			"description": "Ordered crystalline formation representing λ=0 (pure order). Alias for crystalcluster primitive.",
+			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "F",
+			"capacity": "SEE order"
+		},
+		"reactive_particles": {
+			"name": "Reactive Particles",
+			"lookup_name": "reactive_particles",
+			"description": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters.",
+			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all"
+		},
+		"crystal_formation": {
+			"name": "Crystal Formation",
+			"lookup_name": "crystal_formation",
+			"description": "Ordered crystal cluster for λ=0 zone. Pure order, frozen pattern.",
+			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+			"default_params": {"color": "4080FF"},
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "F"
+		},
+		"edge_particles": {
+			"name": "Edge Particles",
+			"lookup_name": "edge_particles",
+			"description": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.",
+			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+			"default_params": {"lambda": 0.4},
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "λ"
+		},
+		"emergence_zone": {
+			"name": "Emergence Zone",
+			"lookup_name": "emergence_zone",
+			"description": "A zone where complexity emerges. Particles self-organize at the edge of chaos.",
+			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+			"default_params": {"lambda": 0.4, "phi": 0.3},
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all"
+		},
+		
+		"_comment_new": "=== NEW ARTIFACTS TO BUILD ===",
+		
+		"random_cubes": {
+			"name": "Random Cubes",
+			"lookup_name": "random_cubes",
+			"description": "Chaotically arranged cubes representing high entropy. Random positions, rotations, scales.",
+			"scene": "res://commons/interfaces/qfep/random_cubes.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "E(S)"
+		},
+		"particle_chaos": {
+			"name": "Particle Chaos",
+			"lookup_name": "particle_chaos",
+			"description": "High-entropy particle system. Maximum spread, random velocities, dissolution.",
+			"scene": "res://commons/interfaces/qfep/particle_chaos.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "E(S)"
+		},
+		"ordered_grid": {
+			"name": "Ordered Grid",
+			"lookup_name": "ordered_grid",
+			"description": "Perfectly aligned cube grid representing low λ. Order, predictability, rigidity.",
+			"scene": "res://commons/interfaces/qfep/ordered_grid.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "F"
+		},
+		"chaos_particles": {
+			"name": "Chaos Particles",
+			"lookup_name": "chaos_particles",
+			"description": "λ=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.",
+			"scene": "res://commons/interfaces/qfep/chaos_particles.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "E(S)"
+		},
+		"dissolving_form": {
+			"name": "Dissolving Form",
+			"lookup_name": "dissolving_form",
+			"description": "A mesh that appears to dissolve/disintegrate. High λ territory.",
+			"scene": "res://commons/interfaces/qfep/dissolving_form.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "E(S)"
+		},
+		"complexity_pattern": {
+			"name": "Complexity Pattern",
+			"lookup_name": "complexity_pattern",
+			"description": "Game of Life cellular automata at edge of chaos. Self-organizing complexity.",
+			"scene": "res://commons/interfaces/qfep/complexity_pattern.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "λ"
+		},
+		"turing_pattern": {
+			"name": "Turing Pattern",
+			"lookup_name": "turing_pattern",
+			"description": "Reaction-diffusion Turing pattern. Spots, stripes, labyrinths.",
+			"scene": "res://commons/interfaces/qfep/turing_pattern.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "λ"
+		},
+		"edge_core": {
+			"name": "Edge Core",
+			"lookup_name": "edge_core",
+			"description": "Central orb for edge of chaos. Pulsing, alive, responsive to λ.",
+			"scene": "res://commons/interfaces/qfep/edge_core.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "all"
+		},
+		"rigid_sculpture": {
+			"name": "Rigid Sculpture",
+			"lookup_name": "rigid_sculpture",
+			"description": "Static crystalline form for φ<0 zone. Resists change.",
+			"scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "φ"
+		},
+		"fluid_form": {
+			"name": "Fluid Form",
+			"lookup_name": "fluid_form",
+			"description": "Morphing iridescent form for φ>0 zone. Embraces becoming.",
+			"scene": "res://commons/interfaces/qfep/fluid_form.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "φ"
+		},
+		"preserved_pattern": {
+			"name": "Preserved Pattern",
+			"lookup_name": "preserved_pattern",
+			"description": "Static checkerboard that never changes. Conservative φ<0.",
+			"scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "φ"
+		},
+		"transforming_pattern": {
+			"name": "Transforming Pattern",
+			"lookup_name": "transforming_pattern",
+			"description": "Constantly evolving wave pattern. Queer φ>0 signature.",
+			"scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
+			"interaction": "observe",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "φ"
 		}
 	}
 }

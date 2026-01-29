@@ -1,97 +1,98 @@
 {
 	"map_info": {
-		"name": "Color Nails",
-		"lookup_name": "Color_Nails",
-		"description": "A salon for digital fingers. Use the nail color controller and color balls to practice precise color selection - decoration for a body that exists only as data.",
+		"name": "QFEP Introduction",
+		"lookup_name": "QFEP_Introduction",
+		"description": "The formula that unifies everything. QFE = F − λE(S) + φΔE(S,t). See it. Touch it. Begin to understand.",
 		"version": "1.0",
 		"format": "json",
 		"dimensions": {
-			"width": 8,
-			"depth": 15,
-			"max_height": 2
+			"width": 9,
+			"depth": 12,
+			"max_height": 3
 		},
 		"metadata": {
-			"difficulty": "beginner",
-			"category": "color",
-			"estimated_time": "3-4 minutes",
-			"learning_objectives": ["Color selection", "Precise hue control", "Digital materiality"]
+			"difficulty": "advanced",
+			"category": "qfep",
+			"estimated_time": "4-5 minutes",
+			"learning_objectives": [
+				"See the QFEP formula as unified framework",
+				"Understand F as order-seeking drive",
+				"Understand E(S) as entropy/freedom",
+				"First encounter with λ and φ sliders"
+			]
 		}
 	},
+	"audio": {
+		"ambient_preset": "laboratory_hum",
+		"volume": -8.0
+	},
 	"documentation": {
-		"summary": "Color_Nails - Nail Polish Studio",
-		"layout": "6x7 salon bay with concentric lighting and nail interaction stations.",
-		"objective": "Use the nail color controller and color balls to practice precise color selection.",
+		"summary": "QFEP_Introduction - The Formula Revealed",
+		"layout": "Intimate laboratory space. Formula display at center. Grabbable term objects.",
+		"objective": "See the unified formula. Begin to understand the terms. First touch of the sliders.",
 		"key_elements": [
-			"`nail_color_controller:180:1.0` console at (2,3)",
-			"`colorballs` accessory rack at (2,4)",
-			"`dark_sphere` dome creating the studio ambiance",
-			"Ring of extra lights `el` and teleporter `t` at (3,6)"
+			"3D formula display at center",
+			"Grabbable F, E, λ, φ term objects",
+			"lambda_slider and phi_slider for first interaction",
+			"Clipboards with technical and critical readings"
 		]
 	},
 	"layers": {
 		"structure": [
-			["1", "1", "2", "2", "2", "2","2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 			
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "2", "2", "2", "0", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 			
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "1", "1", "1", "1", "2"], 
-			["2", "1", "2", "2", "2", "2","2"], 			
-
+			["2", "2", "2", "2", "2", "2", "2", "2", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "2", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "2", "2", "2", "0", "2", "2", "2", "2"]
 		],
 		"utilities": [
-			[" ", " ", " ", " ", " "],
-			[" ", "el", " ", "el", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " "],
-			[" ", " ", "wp", " ", " "],
-			[" ", " ", " ",  " ", " ", "t"],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "s:1:1:1", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "sub:map", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "el:2", " ", " ", " ", " ", " ", "el:2", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " ", " ", " "]
 		],
 		"interactables": [
-			
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", "lambda_slider", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "phi_slider", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "dark_sphere", " ", " "],
-		 				
-									
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "qfep_formula_3d:0:1.5", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "lambda_slider:0:0.5", " ", " ", " ", "phi_slider:0:0.5", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "grab_sphere_F:0:0.3", " ", " ", "grab_sphere_E:0:0.3", " ", " ", "grab_sphere_lambda:0:0.3", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "tt:qfep_introduction:180:0.5", " ", " ", " ", "tt:qfep_critical:180:0.5", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
 	},
 	"utility_definitions": {
 		"t": {
 			"type": "teleporter",
-			"name": "Next",
-			"description": "Continue to next step",
+			"name": "Continue",
+			"description": "Explore the F term",
 			"properties": {
 				"action": "next_in_sequence"
 			}
-		}, 
-		"s": {
-			"properties": {
-				"height": 5.5  
-			}
 		}
 	},
-
 	"lighting": {
-		"ambient_color": [0.4, 0.4, 0.5],
-		"ambient_energy": 0.6,
+		"ambient_color": [0.15, 0.15, 0.25],
+		"ambient_energy": 0.5,
 		"directional_light": {
 			"enabled": true,
-			"direction": [-0.4, -0.7, -0.4],
-			"color": [1.0, 0.9, 0.8],
-			"energy": 1.2
+			"direction": [-0.3, -0.8, -0.3],
+			"color": [0.9, 0.9, 1.0],
+			"energy": 0.8
 		}
 	},
 	"settings": {
@@ -100,10 +101,18 @@
 		"show_grid": true,
 		"enable_physics": true,
 		"auto_reveal_on_entry": false,
-		"initial_tile_visibility": "hidden_except_corners",
+		"initial_tile_visibility": "visible",
 		"background": {
 			"type": "sky",
-			"color": [0.2, 0.3, 0.7]
+			"color": [0.05, 0.05, 0.15]
+		},
+		"grid_animation": {
+			"enabled": true,
+			"type": "scale_up",
+			"duration": 0.2,
+			"delay_between": 0.01,
+			"order": "radial_center",
+			"easing": "ease_out"
 		}
 	}
-} 
+}

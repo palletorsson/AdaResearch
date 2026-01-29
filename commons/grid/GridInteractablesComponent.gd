@@ -141,7 +141,16 @@ func _load_single_artifact_registry(registry_path: String, validation_errors: Ar
 	# Process and validate each artifact with lookup_name
 	for artifact_key in raw_artifacts.keys():
 		var artifact_data = raw_artifacts[artifact_key]
-		
+
+		# Skip comment entries (keys starting with _ that have string values)
+		if artifact_key.begins_with("_") and typeof(artifact_data) == TYPE_STRING:
+			continue
+
+		# Validate artifact_data is a Dictionary
+		if typeof(artifact_data) != TYPE_DICTIONARY:
+			validation_errors.append("Artifact '%s' must be a Dictionary, got %s in %s" % [artifact_key, type_string(typeof(artifact_data)), registry_path])
+			continue
+
 		# Validate required fields
 		if not artifact_data.has("lookup_name"):
 			validation_errors.append("Artifact '%s' missing required 'lookup_name' field in %s" % [artifact_key, registry_path])

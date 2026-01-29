@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_dissolving_form"]
+
+[ext_resource type="Script" uid="uid://qfep_dissolving_form_script" path="res://commons/interfaces/qfep/dissolving_form.gd" id="1_dissolve"]
+
+[node name="DissolvingForm" type="Node3D"]
+script = ExtResource("1_dissolve")
