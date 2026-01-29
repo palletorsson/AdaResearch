@@ -43,8 +43,8 @@ extends Node3D
 const DISPLACEMENT_SHADER_PATH = "res://algorithms/patterngeneration/fabrics/displacement.gdshader"
 const DISPLACEMENT_SHADER: Shader = preload("res://algorithms/patterngeneration/fabrics/displacement.gdshader")
 var displacement_shader: Shader = null
-const MARBLE_SHADER_PATH = "res://algorithms/proceduralgeneration/berninicolumns/shaders/marble_column.gdshader"
-const MARBLE_SHADER: Shader = preload("res://algorithms/proceduralgeneration/berninicolumns/shaders/marble_column.gdshader")
+const MARBLE_SHADER_PATH = "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/shaders/marble_column.gdshader"
+const MARBLE_SHADER: Shader = preload("res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/shaders/marble_column.gdshader")
 var marble_shader: Shader = null
 
 # For animated rotation and melting
