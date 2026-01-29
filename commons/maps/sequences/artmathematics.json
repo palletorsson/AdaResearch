@@ -1,0 +1,74 @@
+{
+	"sequences": {
+		"artmathematics": {
+			"name": "Art & Mathematics: Visual Philosophy",
+			"truth": "Art makes visible what mathematics proves. The impossible staircase is Gödel you can climb.",
+			"qfep_term": "Visualization",
+			"qfep_connection": "Artists have visualized QFEP dynamics for centuries—Escher's impossible objects (edge of formal systems), Magritte's sign/signified gap, Minimalism's dark room paradox. Art embodies theory before theory names itself.",
+			"formula": "Ceci n'est pas une pipe",
+
+			"description": "From Escher's impossible staircases to Magritte's treachery of images to Minimalism's meaning-evacuation paradox. Art as visual epistemology—making mathematical and philosophical limits tangible.",
+			"layer": "cross_cutting",
+			"prerequisites": ["primitives", "transformations"],
+			"unlocks": ["speculativecomputation"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+
+			"learning_objectives": [
+				"Escher: locally coherent, globally impossible—visual Gödel",
+				"Magritte: the sign is not the signified—representation has limits",
+				"Constructivism: meaning-free elements in autonomous arrangements",
+				"Minimalism paradox: signs signify despite meaning-evacuation",
+				"Art as visual philosophy"
+			],
+
+			"content": [
+				"Escher_Impossible: Staircases that go up by going down",
+				"Escher_Tessellation: Infinity in finite space",
+				"Magritte_Pipe: This is not a pipe—representation's gap",
+				"Magritte_Windows: The frame that lies",
+				"Rodchenko_Monochrome: Pure Red, Pure Yellow, Pure Blue—meaning-free?",
+				"Judd_Minimalism: What you see is what you see—but is it?",
+				"Dark_Room_Paradox: The attempt to evacuate meaning keeps generating it",
+				"Art_Synthesis: Why artists see what mathematicians prove"
+			],
+
+			"maps": [
+				"Escher_Impossible",
+				"Escher_Tessellation",
+				"Magritte_Pipe",
+				"Magritte_Windows",
+				"Rodchenko_Monochrome",
+				"Judd_Minimalism",
+				"Dark_Room_Paradox",
+				"Art_Synthesis"
+			],
+
+			"audio": {
+				"ambient_preset": "gallery_silence",
+				"volume": -15.0
+			},
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/escher_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/magritte_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/minimalism_axioms.md"
+			],
+
+			"references": {
+				"gamwell_chapters": ["Ch 9: Gödel (Escher/Magritte)", "Ch 4: Formalism (Constructivism)", "Ch 13: Postmodernism (Minimalism)"],
+				"key_figures": ["M.C. Escher", "René Magritte", "Alexander Rodchenko", "Donald Judd", "Robert Morris"],
+				"key_works": ["Relativity (1953)", "The Treachery of Images (1929)", "Untitled (Specific Objects)"]
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_artmathematics",
+			"completion_rewards": [
+				"visual_philosopher_badge",
+				"impossible_object_badge",
+				"escher_badge"
+			]
+		}
+	}
+}

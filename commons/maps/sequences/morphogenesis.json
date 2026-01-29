@@ -1,0 +1,79 @@
+{
+	"sequences": {
+		"morphogenesis": {
+			"name": "Morphogenesis: Pattern from Noise",
+			"truth": "You don't need a blueprint. Random initial conditions + simple rules = complex patterns.",
+			"qfep_term": "E(S)→F",
+			"qfep_connection": "Turing morphogenesis is the E(S) term creating F—entropy generating order through self-organization. Diffusion (entropy-increasing) paradoxically creates structure when coupled with local activation.",
+			"formula": "∂u/∂t = D∇²u + f(u,v)",
+
+			"description": "Turing's 1952 insight: ordered patterns emerge from homogeneous chaos. Reaction-diffusion dynamics, edge of chaos, spontaneous self-organization. The generative engine where entropy becomes structure.",
+			"layer": "emergence",
+			"prerequisites": ["randomness"],
+			"unlocks": ["cellularautomata", "proceduralgeneration", "qfeplaboratory"],
+
+			"difficulty": "intermediate",
+			"estimated_time": "25-30 minutes",
+
+			"learning_objectives": [
+				"Turing instability: when homogeneity becomes unstable",
+				"Reaction-diffusion: local activation + long-range inhibition",
+				"The λ parameter as activation/inhibition balance",
+				"Phase transitions: homogeneous → patterned",
+				"Emergence without blueprint or designer"
+			],
+
+			"content": [
+				"Turing_Introduction: The 1952 paper that changed everything",
+				"Homogeneous_Instability: When sameness becomes unstable",
+				"Reaction_Diffusion: Two chemicals, one miracle",
+				"Animal_Patterns: Zebra stripes, leopard spots, shell spirals",
+				"Lambda_Slider: The dial between order and chaos",
+				"Phase_Transition: Walking through the bifurcation",
+				"Emergence_Garden: Patterns bloom from noise",
+				"Morphogenesis_Synthesis: Order without orderer, form without former"
+			],
+
+			"maps": [
+				"Turing_Introduction",
+				"Homogeneous_Instability",
+				"Reaction_Diffusion",
+				"Animal_Patterns",
+				"Lambda_Slider",
+				"Phase_Transition",
+				"Emergence_Garden",
+				"Morphogenesis_Synthesis"
+			],
+
+			"audio": {
+				"ambient_preset": "organic_drift",
+				"volume": -10.0
+			},
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/turing_morphogenesis_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/reaction_diffusion_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/emergence_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"Reaction_Diffusion": "res://algorithms/reactiondiffusion/",
+				"Animal_Patterns": "res://algorithms/reactiondiffusion/patterns/"
+			},
+
+			"references": {
+				"gamwell_chapters": ["Ch 10: Turing Computation", "Ch 12: Computers/Fractals"],
+				"key_figures": ["Alan Turing", "Ilya Prigogine", "Stuart Kauffman"],
+				"key_papers": ["The Chemical Basis of Morphogenesis (1952)"]
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_morphogenesis",
+			"completion_rewards": [
+				"morphogenesis_badge",
+				"pattern_from_noise_badge",
+				"emergence_badge"
+			]
+		}
+	}
+}

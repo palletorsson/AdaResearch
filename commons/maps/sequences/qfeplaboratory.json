@@ -1,0 +1,93 @@
+{
+	"sequences": {
+		"qfeplaboratory": {
+			"name": "QFEP Laboratory: The Formula Made Interactive",
+			"truth": "QFE = F − λE(S) + φΔE(S,t). Life exists at λ ≈ 0.3-0.5.",
+			"qfep_term": "All",
+			"qfep_connection": "The complete QFEP framework made tangible. Interactive sliders for λ (entropy drive) and φ (rate sensitivity). Visualize the oscillation between order and chaos. Find your edge of chaos.",
+			"formula": "QFE = F − λE(S) + φΔE(S,t)",
+
+			"description": "The theoretical core of Ada Research made interactive. Manipulate the QFEP parameters directly. See how F, λ, and φ create different system behaviors. Understand why life exists at the edge of chaos.",
+			"layer": "integration",
+			"prerequisites": ["primitives", "randomness", "wavefunctions", "foundationscrisis"],
+			"unlocks": ["recursiveemergence", "speculativecomputation"],
+
+			"difficulty": "advanced",
+			"estimated_time": "30-35 minutes",
+
+			"learning_objectives": [
+				"F (Free Energy): prediction error, order-seeking, surprise minimization",
+				"E(S) (Entropy): possibility space, disorder, freedom from pattern",
+				"λ (Entropy Drive): the dial between crystallization and dissolution",
+				"φΔE(S,t) (Rate Term): sensitivity to change, the queer signature",
+				"Edge of chaos: where λ ≈ 0.3-0.5, where adaptation happens"
+			],
+
+			"content": [
+				"QFEP_Introduction: The formula that unifies the curriculum",
+				"F_Term: Free energy—the drive toward prediction and order",
+				"E_Term: Entropy—freedom as high-dimensional possibility",
+				"Lambda_Spectrum: From crystal (λ=0) to dissolution (λ=1)",
+				"Phi_Term: Rate of change—positive φ as queer signature",
+				"Edge_Of_Chaos: The sweet spot where life happens",
+				"QFEP_Sandbox: Interactive playground with all parameters",
+				"QFEP_Synthesis: Bringing it all together"
+			],
+
+			"maps": [
+				"QFEP_Introduction",
+				"QFEP_F_Term",
+				"QFEP_E_Term",
+				"QFEP_Lambda_Spectrum",
+				"QFEP_Phi_Term",
+				"QFEP_Edge_Of_Chaos",
+				"QFEP_Sandbox",
+				"QFEP_Synthesis"
+			],
+
+			"audio": {
+				"ambient_preset": "laboratory_hum",
+				"volume": -12.0
+			},
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/qfep_introduction_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/free_energy_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/entropy_drive_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/edge_of_chaos_axioms.md"
+			],
+
+			"interactive_elements": {
+				"lambda_slider": {
+					"description": "Real-time λ adjustment (0.0 to 1.0)",
+					"default": 0.4,
+					"visual_feedback": "System behavior changes in real-time"
+				},
+				"phi_slider": {
+					"description": "Rate sensitivity adjustment (-1.0 to 1.0)",
+					"default": 0.3,
+					"visual_feedback": "Positive φ = embrace change, negative φ = resist change"
+				},
+				"entropy_visualization": {
+					"description": "Real-time entropy measurement display",
+					"modes": ["histogram", "phase_space", "time_series"]
+				}
+			},
+
+			"references": {
+				"gamwell_chapters": ["Ch 7: Symmetry (Langton's λ)", "Ch 10: Turing", "Ch 12: Fractals/Bifurcation"],
+				"key_concepts": ["Free Energy Principle", "Active Inference", "Edge of Chaos", "Langton's Lambda"],
+				"key_figures": ["Karl Friston", "Chris Langton", "Stuart Kauffman", "Ilya Prigogine"]
+			},
+
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_qfeplaboratory",
+			"completion_rewards": [
+				"qfep_master_badge",
+				"edge_of_chaos_badge",
+				"theoretical_foundation_badge",
+				"oscillation_badge"
+			]
+		}
+	}
+}

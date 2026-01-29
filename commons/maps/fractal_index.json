@@ -13,7 +13,7 @@
 	"layers": {
 		"primitives": {
 			"qfep_term": "F",
-			"description": "Stable foundations - the atoms of space. Order before entropy enters.",
+			"description": "Stable foundations - the Euclidean world. Order before entropy enters. Mastery that will confront its own limits.",
 			"sequences": ["primitives", "meshes", "datastructures"]
 		},
 		"properties": {
@@ -28,8 +28,8 @@
 		},
 		"emergence": {
 			"qfep_term": "E(S)",
-			"description": "Entropy - patterns from chaos. Turing instability, morphogenesis.",
-			"sequences": ["randomness", "noise", "cellularautomata", "fractals"]
+			"description": "Entropy - patterns from chaos. Turing instability, morphogenesis. Where disorder becomes generative.",
+			"sequences": ["randomness", "noise", "morphogenesis", "cellularautomata", "fractals"]
 		},
 		"systems": {
 			"qfep_term": "λ",
@@ -38,15 +38,15 @@
 		},
 		"integration": {
 			"qfep_term": "φΔE(S,t)",
-			"description": "Queer ecology - oscillating between order and disorder. Rate of entropy change.",
-			"sequences": ["recursiveemergence", "speculativecomputation", "criticalalgorithms"]
+			"description": "Queer ecology - oscillating between order and disorder. Rate of entropy change. Where theory becomes embodied.",
+			"sequences": ["foundationscrisis", "qfeplaboratory", "recursiveemergence", "speculativecomputation", "criticalalgorithms"]
 		}
 	},
 
 	"special_categories": {
 		"cross_cutting": {
 			"description": "Sequences that span multiple layers",
-			"sequences": ["graphtheory", "searchpathfinding", "computationalgeometry", "particles", "proceduralaudio"]
+			"sequences": ["graphtheory", "searchpathfinding", "computationalgeometry", "particles", "proceduralaudio", "artmathematics"]
 		},
 		"experimental": {
 			"description": "Work in progress or specialized sequences",
@@ -114,6 +114,26 @@
 			"requires": ["vectors", "randomness", "swarmintelligence"],
 			"enables": ["criticalalgorithms", "speculativecomputation"],
 			"related_axioms": ["ml_axioms.md", "gradient_descent.md", "neural_networks.md"]
+		},
+		"morphogenesis": {
+			"requires": ["randomness"],
+			"enables": ["cellularautomata", "proceduralgeneration", "qfeplaboratory"],
+			"related_axioms": ["turing_morphogenesis_axioms.md", "reaction_diffusion_axioms.md", "emergence_axioms.md"]
+		},
+		"foundationscrisis": {
+			"requires": ["primitives", "randomness"],
+			"enables": ["qfeplaboratory", "speculativecomputation"],
+			"related_axioms": ["godel_axioms.md", "russell_paradox_axioms.md", "brouwer_axioms.md"]
+		},
+		"artmathematics": {
+			"requires": ["primitives", "transformations"],
+			"enables": ["speculativecomputation"],
+			"related_axioms": ["escher_axioms.md", "magritte_axioms.md", "minimalism_axioms.md"]
+		},
+		"qfeplaboratory": {
+			"requires": ["primitives", "randomness", "wavefunctions", "foundationscrisis"],
+			"enables": ["recursiveemergence", "speculativecomputation"],
+			"related_axioms": ["qfep_introduction_axioms.md", "free_energy_axioms.md", "edge_of_chaos_axioms.md"]
 		}
 	},
 
