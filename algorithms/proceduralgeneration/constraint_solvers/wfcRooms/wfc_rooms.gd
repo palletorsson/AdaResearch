@@ -1,6 +1,6 @@
 # res://RoomTilesBuilder.gd
 # Godot 4.x — Run from the Script Editor (EditorScript → Run).
-# Generates res://algorithms/proceduralgeneration/wfcRooms/RoomTiles_Aligned.tscn with clean, edge-aligned WFC tiles.
+# Generates res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/RoomTiles_Aligned.tscn with clean, edge-aligned WFC tiles.
 @tool
 extends EditorScript
 
@@ -90,7 +90,7 @@ func _run() -> void:
 	
 	print("Scene packed successfully!")
 
-	var path := "res://algorithms/proceduralgeneration/wfcRooms/RoomTiles_Aligned.tscn"
+	var path := "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/RoomTiles_Aligned.tscn"
 	var save_ok := ResourceSaver.save(scene, path)
 	if save_ok != OK:
 		push_error("Failed to save: %s (Error: %d)" % [path, save_ok])

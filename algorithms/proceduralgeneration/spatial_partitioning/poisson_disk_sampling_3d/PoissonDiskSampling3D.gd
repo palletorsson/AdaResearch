@@ -179,24 +179,24 @@ func grid_key(grid_pos: Vector3i) -> String:
     return "%d,%d,%d" % [grid_pos.x, grid_pos.y, grid_pos.z]
 
 func add_to_grid(point: Vector3):
-    var grid_pos = world_to_grid(point)
-    var key = grid_key(grid_pos)
-    
-    if not grid.has(key):
-        grid[key] = []
-    
-    grid[key].append(point)
+	var grid_pos = world_to_grid(point)
+	var key = grid_key(grid_pos)
+	
+	if not grid.has(key):
+	    grid[key] = []
+	
+	grid[key].append(point)
 
 func visualize_samples():
-	clear_visualization()
+    clear_visualization()
 
-	# Draw sample points
-	for point in sample_points:
-		create_sample_visual(point)
+    # Draw sample points
+    for point in sample_points:
+    	create_sample_visual(point)
 
-	# Draw grid if enabled
-	if show_grid:
-		create_grid_visual()
+    # Draw grid if enabled
+    if show_grid:
+    	create_grid_visual()
 
 	# Draw radius spheres if enabled
 	if show_radius:

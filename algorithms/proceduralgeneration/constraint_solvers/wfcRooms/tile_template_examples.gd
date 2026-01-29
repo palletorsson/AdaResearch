@@ -1,4 +1,4 @@
-## res://algorithms/proceduralgeneration/wfcRooms/tile_template_examples.gd
+## res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/tile_template_examples.gd
 ## Example tile templates for different dungeon themes
 ## Copy these into wfc_rooms.gd to generate different tile sets
 @tool

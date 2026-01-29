@@ -1,4 +1,4 @@
-# res://algorithms/proceduralgeneration/wfcRooms/wfc_maze_office.gd
+# res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_maze_office.gd
 # Combined WFC + Maze generator
 extends "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_office_generator.gd"
 

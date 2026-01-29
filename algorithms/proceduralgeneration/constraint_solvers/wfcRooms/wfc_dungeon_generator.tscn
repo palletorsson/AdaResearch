@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0quvjqenm1yr"]
 
-[ext_resource type="Script" uid="uid://b671la8wjdg1h" path="res://algorithms/proceduralgeneration/wfcRooms/wfc_solver.gd" id="1_main"]
-[ext_resource type="Script" uid="uid://c5dmmoy3y3hdt" path="res://algorithms/proceduralgeneration/wfcRooms/WFCDungeonUI.gd" id="2_ui"]
+[ext_resource type="Script" uid="uid://b671la8wjdg1h" path="res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_solver.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://c5dmmoy3y3hdt" path="res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/WFCDungeonUI.gd" id="2_ui"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1

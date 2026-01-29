@@ -1,4 +1,4 @@
-# res://algorithms/proceduralgeneration/wfcRooms/wfc_office_tiles.gd
+# res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_office_tiles.gd
 # Godot 4.x — Run from the Script Editor (EditorScript → Run).
 # Generates office floor plan tiles for WFC procedural generation
 @tool
@@ -165,7 +165,7 @@ func _run() -> void:
 		push_error("Failed to pack scene. Error code: ", ok)
 		return
 
-	var path := "res://algorithms/proceduralgeneration/wfcRooms/OfficeTiles.tscn"
+	var path := "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/OfficeTiles.tscn"
 	var save_ok := ResourceSaver.save(scene, path)
 	if save_ok != OK:
 		push_error("Failed to save: %s (Error: %d)" % [path, save_ok])
