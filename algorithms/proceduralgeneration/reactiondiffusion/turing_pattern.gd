@@ -52,7 +52,7 @@ func _ready():
 	_initialize_grids()
 	
 	# Create initial image
-	image.create(width, height, false, Image.FORMAT_RGB8)
+	image = Image.create_empty(width, height, false, Image.FORMAT_RGB8)
 	
 	# Create and configure sprite
 	add_child(sprite)
@@ -292,9 +292,9 @@ func _process(delta):
 
 func _update_texture():
 	# Check if image is properly initialized
-	if image.get_width() == 0 or image.get_height() == 0:
+	if image == null or image.get_width() == 0 or image.get_height() == 0:
 		print("Image not initialized, recreating...")
-		image.create(width, height, false, Image.FORMAT_RGB8)
+		image = Image.create_empty(width, height, false, Image.FORMAT_RGB8)
 		return
 	
 	# Update the image based on current concentrations

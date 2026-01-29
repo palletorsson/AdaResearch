@@ -418,21 +418,46 @@ func draw_dual_mesh():
 	mesh_instance.material_override = material
 
 func visualize_seeds():
-	for seed in seed_points:
+	for i in range(seed_points.size()):
+		var seed_pos = seed_points[i]
 		var sphere = MeshInstance3D.new()
 		add_child(sphere)
-		
+
 		var mesh = SphereMesh.new()
-		mesh.radius = 0.15
+		mesh.radius = 0.25  # Larger seeds for visibility
+		mesh.height = 0.5
 		sphere.mesh = mesh
-		sphere.position = seed
-		
+		sphere.position = seed_pos
+
+		# Get cell color for the seed
+		var seed_color = cell_colors[i % cell_colors.size()] if color_per_cell else Color(1, 0.3, 0.3)
+
 		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(1, 0.3, 0.3)
+		material.albedo_color = seed_color
 		material.emission_enabled = true
-		material.emission = Color(1, 0.3, 0.3)
-		material.emission_energy_multiplier = 2.0
+		material.emission = seed_color
+		material.emission_energy_multiplier = 3.0
 		sphere.material_override = material
+
+		# Add a small label above each seed showing it's a "seed point"
+		if i == 0:  # Only label the first seed to avoid clutter
+			var label = Label3D.new()
+			label.text = "Seed Point"
+			label.position = seed_pos + Vector3(0, 0.5, 0)
+			label.font_size = 32
+			label.modulate = Color(1, 1, 1)
+			label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			add_child(label)
+
+	# Add explanation label
+	var explanation = Label3D.new()
+	explanation.text = "VORONOI: Each region contains\nall points closest to its seed"
+	explanation.position = Vector3(0, region_size.y / 2 + 1.5, 0)
+	explanation.font_size = 48
+	explanation.modulate = Color(1, 1, 0.8)
+	explanation.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	explanation.outline_size = 8
+	add_child(explanation)
 
 func get_boundary_key(cell_a: int, cell_b: int) -> String:
 	var min_id = min(cell_a, cell_b)

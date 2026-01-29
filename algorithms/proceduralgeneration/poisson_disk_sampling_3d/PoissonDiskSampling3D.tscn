@@ -1,17 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqxvhxqxqxqxp"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxp"]
 
 [ext_resource type="Script" uid="uid://cemo3u3uip2wd" path="res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonDiskSampling3D.gd" id="1_script"]
 [ext_resource type="Script" path="res://algorithms/proceduralgeneration/poisson_disk_sampling_3d/PoissonUI.gd" id="2_ui"]
-
-[sub_resource type="Environment" id="Environment_ps"]
-background_mode = 1
-background_color = Color(0.1, 0.1, 0.15, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.2, 0.2, 0.2, 1)
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ps"]
 
 [node name="PoissonDiskSampling3D" type="Node3D"]
 
@@ -21,18 +11,10 @@ min_distance = 1.0
 show_radius = true
 show_grid = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707106, -0.424264, 0.565685, 0, 0.8, 0.6, -0.707106, -0.424264, 0.565685, 10, 10, 10)
-fov = 60.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 light_energy = 1.2
 shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ps")
-camera_attributes = SubResource("CameraAttributesPractical_ps")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

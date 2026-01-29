@@ -1258,6 +1258,12 @@
 			"description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
 			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn"
 		},
+		"marching_cubes_sculpt_vr": {
+			"name": "Marching Cubes VR Sculpt",
+			"lookup_name": "marching_cubes_sculpt_vr",
+			"description": "VR paintable marching cubes - sculpt in 3D with your controllers using GPU compute shaders",
+			"scene": "res://algorithms/proceduralgeneration/marchingcave/Scenes/MarchingCubesSculptVR.tscn"
+		},
 		"rhizome_cave_system": {
 			"name": "Rhizomatic Cave System",
 			"lookup_name": "rhizome_cave_system",
@@ -1805,7 +1811,7 @@
 			"name": "Reaction Diffusion",
 			"lookup_name": "reaction_diffusion",
 			"description": "Turing pattern generation using reaction-diffusion systems",
-			"scene": "res://algorithms/proceduralgeneration/reactiondiffusion/turing_pattern.tscn"
+			"scene": "res://algorithms/proceduralgeneration/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn"
 		},
 		"liquid_simulation": {
 			"name": "Liquid Simulation",
@@ -1897,8 +1903,8 @@
 		"maze_generation": {
 			"name": "Maze Generation",
 			"lookup_name": "maze_generation",
-			"description": "Procedural maze generation algorithms and visualization",
-			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn"
+			"description": "VR-scale walkable maze with recursive backtracking generation",
+			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.tscn"
 		},
 		"markov_chains": {
 			"name": "Markov Chains",
@@ -2693,8 +2699,8 @@
 		"maze_generator": {
 			"name": "Maze Generator",
 			"lookup_name": "maze_generator",
-			"description": "Interactive maze generation algorithms with procedural layout creation",
-			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator.tscn"
+			"description": "VR-scale walkable maze with animated recursive backtracking",
+			"scene": "res://algorithms/proceduralgeneration/mazegeneration/maze_generator_vr.tscn"
 		},
 		"mirror_cellular_texture_for_3d": {
 			"name": "Mirror Cellular Texture for 3D",

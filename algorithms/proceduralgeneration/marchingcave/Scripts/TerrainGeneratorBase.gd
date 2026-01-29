@@ -35,7 +35,7 @@ var lut_buffer : RID
 # Data received from compute shader
 var triangle_data_bytes
 var counter_data_bytes
-var num_triangles
+var num_triangles : int = 0
 
 var array_mesh : ArrayMesh
 var verts = PackedVector3Array()

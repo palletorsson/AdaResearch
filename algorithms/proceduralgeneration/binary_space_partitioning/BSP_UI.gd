@@ -1,6 +1,6 @@
 extends Control
 
-@onready var bsp_node: BinarySpacePartitioning = $"../../BinarySpacePartitioning"
+@onready var bsp_node: BinarySpacePartitioning = $"../.."
 @onready var depth_slider: HSlider = $Panel/VBoxContainer/DepthSlider
 @onready var min_size_slider: HSlider = $Panel/VBoxContainer/MinSizeSlider
 @onready var gradient_option: OptionButton = $Panel/VBoxContainer/GradientOption

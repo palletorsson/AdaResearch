@@ -5,8 +5,8 @@
 
 [node name="BinarySpacePartitioning" type="Node3D"]
 script = ExtResource("1_script")
-max_depth = 6
-min_cell_size = 1.0
+max_depth = 8
+min_cell_size = 0.7
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)

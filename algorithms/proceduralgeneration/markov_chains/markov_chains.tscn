@@ -22,12 +22,10 @@ emission_energy_multiplier = 0.3
 [node name="MarkovChains" type="Node3D"]
 script = ExtResource("1_script")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="StateSpace" type="Node3D" parent="."]
 
@@ -44,7 +42,6 @@ size = Vector3(4, 0.3, 0.3)
 
 [node name="GenerationEngine" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-visible = false
 
 [node name="EngineCore" type="CSGBox3D" parent="GenerationEngine"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -70,7 +67,6 @@ material_override = SubResource("StandardMaterial3D_3")
 
 [node name="ProbabilityMatrix" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-visible = false
 
 [node name="MatrixCore" type="CSGBox3D" parent="ProbabilityMatrix"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -85,7 +81,6 @@ size = Vector3(3, 0.3, 0.3)
 
 [node name="GeneratedSequence" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-visible = false
 
 [node name="SequenceCore" type="CSGBox3D" parent="GeneratedSequence"]
 material_override = SubResource("StandardMaterial3D_2")
@@ -99,7 +94,6 @@ size = Vector3(4, 0.3, 0.3)
 [node name="SequenceElements" type="Node3D" parent="GeneratedSequence"]
 
 [node name="MarkovMetrics" type="Node3D" parent="."]
-visible = false
 
 [node name="EntropyMeter" type="Node3D" parent="MarkovMetrics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 8, 0)
@@ -126,6 +120,11 @@ material_override = SubResource("StandardMaterial3D_2")
 radius = 0.3
 
 [node name="Grid" type="Node3D" parent="."]
-visible = false
+
+[node name="ProbabilitySelector" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="VisitFrequency" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
 
 [node name="GridLines" type="Node3D" parent="Grid"]

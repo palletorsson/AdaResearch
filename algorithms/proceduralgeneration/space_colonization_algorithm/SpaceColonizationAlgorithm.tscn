@@ -1,17 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6j3y8m1n8p7q"]
+[gd_scene load_steps=3 format=3 uid="uid://c6j3y8m1n8p7q"]
 
 [ext_resource type="Script" uid="uid://btj2u837kku9k" path="res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationAlgorithm.gd" id="1_space"]
 [ext_resource type="Script" path="res://algorithms/proceduralgeneration/space_colonization_algorithm/SpaceColonizationUI.gd" id="2_ui"]
-
-[sub_resource type="Environment" id="Environment_sc"]
-background_mode = 1
-background_color = Color(0.1, 0.1, 0.15, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.2, 0.2, 0.2, 1)
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_sc"]
 
 [node name="SpaceColonizationAlgorithm" type="Node3D"]
 
@@ -25,17 +15,10 @@ regenerate = false
 step_growth = false
 toggle_animation = false
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 12)
-fov = 60.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 5, 0)
-light_energy = 0.8
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_sc")
-camera_attributes = SubResource("CameraAttributesPractical_sc")
+light_energy = 1.2
+shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

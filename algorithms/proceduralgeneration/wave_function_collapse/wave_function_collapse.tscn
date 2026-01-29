@@ -1,39 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ekey5yw2xry0"]
+[gd_scene load_steps=3 format=3 uid="uid://ekey5yw2xry0"]
 
 [ext_resource type="Script" uid="uid://dny8ijfvb5ng" path="res://algorithms/proceduralgeneration/wave_function_collapse/WaveFunctionCollapse.gd" id="1_wfc"]
 [ext_resource type="Script" path="res://algorithms/proceduralgeneration/wave_function_collapse/WFC_UI.gd" id="2_ui"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wfc"]
-sky_top_color = Color(0.1, 0.1, 0.15, 1)
-sky_horizon_color = Color(0.2, 0.2, 0.3, 1)
-ground_bottom_color = Color(0.1, 0.1, 0.15, 1)
-ground_horizon_color = Color(0.2, 0.2, 0.3, 1)
-
-[sub_resource type="Sky" id="Sky_env"]
-sky_material = SubResource("ProceduralSkyMaterial_wfc")
-
-[sub_resource type="Environment" id="Environment_wfc"]
-background_mode = 2
-sky = SubResource("Sky_env")
-ambient_light_source = 3
-ambient_light_color = Color(0.3, 0.3, 0.4, 1)
-tonemap_mode = 2
-glow_enabled = true
-glow_strength = 0.8
-
 [node name="WaveFunctionCollapse" type="Node3D"]
 script = ExtResource("1_wfc")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 12, 0)
 light_energy = 1.5
 shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wfc")
 
 [node name="WFCGrid" type="Node3D" parent="."]
 

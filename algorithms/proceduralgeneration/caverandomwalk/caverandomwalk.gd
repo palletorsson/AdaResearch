@@ -18,11 +18,18 @@ const CARVE_RADIUS := 1      # 1-voxel radius for walkable width
 const CENTER_RADIUS := 2     # "close enough" to center in xz
 
 func _ready() -> void:
+	regenerate()
+
+func regenerate() -> void:
+	# Clear existing meshes
+	for child in get_children():
+		child.queue_free()
+
 	_rng.seed = seed
 	_center = Vector3i(grid_size.x / 2, 0, grid_size.z / 2)
 	_init_grid()
 	_carve_cave()
-	_build_meshes()
+	call_deferred("_build_meshes")
 
 func _init_grid() -> void:
 	var total := grid_size.x * grid_size.y * grid_size.z

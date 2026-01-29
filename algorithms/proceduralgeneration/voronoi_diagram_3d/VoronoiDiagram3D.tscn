@@ -1,27 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cglvhpjwbdohe"]
+[gd_scene load_steps=3 format=3 uid="uid://cglvhpjwbdohe"]
 
 [ext_resource type="Script" uid="uid://ck810hwsx4iay" path="res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiDiagram3D.gd" id="1_script"]
 [ext_resource type="Script" path="res://algorithms/proceduralgeneration/voronoi_diagram_3d/VoronoiUI.gd" id="2_ui"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3d"]
-sky_top_color = Color(0.1, 0.1, 0.1, 1)
-sky_horizon_color = Color(0.2, 0.2, 0.2, 1)
-ground_bottom_color = Color(0.1, 0.1, 0.1, 1)
-ground_horizon_color = Color(0.2, 0.2, 0.2, 1)
-
-[sub_resource type="Sky" id="Sky_env"]
-sky_material = SubResource("ProceduralSkyMaterial_3d")
-
-[sub_resource type="Environment" id="Environment_3d"]
-background_mode = 2
-sky = SubResource("Sky_env")
-ambient_light_source = 3
-ambient_light_color = Color(0.4, 0.4, 0.4, 1)
-tonemap_mode = 2
-glow_enabled = true
-glow_intensity = 0.5
-glow_strength = 0.8
-glow_bloom = 0.3
 
 [node name="VoronoiDiagram3D" type="Node3D"]
 script = ExtResource("1_script")
@@ -35,17 +15,10 @@ cell_colors = [Color(0.8, 0.4, 0.4, 1), Color(0.4, 0.8, 0.4, 1), Color(0.4, 0.4,
 resolution = 24
 smooth_normals = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 12, 12, 12)
-fov = 60.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 10, 0)
 light_energy = 1.2
 shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3d")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

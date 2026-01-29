@@ -14,35 +14,16 @@
 				"Higher-dimensional geometry (4D polytopes)"
 			],
 			"maps": [
-				"ProceduralGeneration_Wave_Function_Collapse",
-				"ProceduralGenerationWfcDungeonGenerator",
 
-				"ProceduralGeneration_Voronoi_Diagrams",
-				"ProceduralGeneration_Delaunay_Triangulation",
-				"ProceduralGeneration_Space_Partitioning",
-				"ProceduralGeneration_Poisson_Disk_Sampling",
-
-				"ProceduralGeneration_Marching_Cubes_Algorithm",
-				"ProceduralGeneration_MarchingGallery",
-				"ProceduralGenerationMarchingCubesVovelNoise",
-				"ProceduralGenerationMarchingCubesSculpture",
-				"ProceduralGenerationMarchingcubesTorusSculpture",
-				"ProceduralGenerationMarchingcubesFlatLandscape",
-				"ProceduralGeneration_MarchingCave",
-
+				"ProceduralGeneration_Markov_Chains",
+				"ProceduralGenerationCaveExplorer3dUi", 
 				"ProceduralGeneration_CaveRandomWalk",
 				"ProceduralGeneration_Maze",
 
-				"ProceduralGeneration_Markov_Chains",
-				"ProceduralGeneration_N_grams",
-				"LSystems_Context_Free_Grammars_CFG",
-				"LSystems_Tree_L_Systems",
 
-				"ProceduralGeneration_Genetic_Algorithms",
 				"ProceduralGeneration_Genetic_Programming",
 
 				"ProceduralGeneration_Space_Colonization_Algorithms",
-				"ProceduralGeneration_Reaction_Diffusion_Systems",
 				"ProceduralGeneration_BranchingGrowthAlgorithm",
 				"ProceduralGenerationBooleanPatterns",
 				"ProceduralGenerationCrystalRandom",
@@ -50,7 +31,27 @@
 				"ProceduralGenerationNetSpace",
 				"ProceduralGenerationSixteenCellNet",
 				"ProceduralGenerationTesseractErrorTunnel",
-				"ProceduralGenerationPortals"
+				"ProceduralGenerationPortals",
+				
+				"ProceduralGeneration_Reaction_Diffusion_Systems",
+
+			
+
+				"ProceduralGeneration_Voronoi_Diagrams",
+				"ProceduralGeneration_Delaunay_Triangulation",
+				"ProceduralGeneration_Space_Partitioning",
+				"ProceduralGeneration_Poisson_Disk_Sampling",
+
+				
+				"ProceduralGeneration_Wave_Function_Collapse",
+				"ProceduralGenerationWfcDungeonGenerator",
+				"ProceduralGeneration_Marching_Cubes_Algorithm",
+				"ProceduralGeneration_MarchingGallery",
+				"ProceduralGenerationMarchingCubesVovelNoise",
+				"ProceduralGenerationMarchingCubesSculpture",
+				"ProceduralGenerationMarchingcubesTorusSculpture",
+				"ProceduralGenerationMarchingcubesFlatLandscape",
+				"ProceduralGeneration_MarchingCave",				
 			],
 			"return_to": "lab",
 			"unlock_requirements": [
