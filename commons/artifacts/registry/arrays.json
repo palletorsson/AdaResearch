@@ -84,7 +84,11 @@
 				"num_steps": 16,
 				"bpm": 85,
 				"sound_preset": "trap_beats"
-			}
+			},
+			"dev_themes": ["audio"],
+			"dev_category": "procedural_audio",
+			"complexity": "beginner",
+			"tags": ["music", "sequencer", "trap", "beats", "interactive"]
 		},
 		"step_sequencer_synth": {
 			"name": "Synth Sequencer",
@@ -108,7 +112,11 @@
 				"num_steps": 16,
 				"bpm": 122,
 				"sound_preset": "90s_house"
-			}
+			},
+			"dev_themes": ["audio"],
+			"dev_category": "procedural_audio",
+			"complexity": "beginner",
+			"tags": ["music", "sequencer", "house", "90s", "dance", "interactive"]
 		},
 		"step_sequencer_pads": {
 			"name": "Juno Pads Sequencer",
@@ -132,7 +140,11 @@
 				"num_steps": 16,
 				"bpm": 112,
 				"sound_preset": "kraftwerk"
-			}
+			},
+			"dev_themes": ["audio", "philosophy"],
+			"dev_category": "procedural_audio",
+			"complexity": "intermediate",
+			"tags": ["music", "sequencer", "kraftwerk", "electronic", "historic", "interactive"]
 		},
 		"step_sequencer_disco": {
 			"name": "Disco Sequencer",
@@ -156,7 +168,11 @@
 				"num_steps": 8,
 				"bpm": 75,
 				"sound_preset": "ambient_works"
-			}
+			},
+			"dev_themes": ["audio"],
+			"dev_category": "procedural_audio",
+			"complexity": "intermediate",
+			"tags": ["music", "sequencer", "ambient", "atmospheric", "generative", "interactive"]
 		},
 		"step_sequencer_jazz": {
 			"name": "Jazz Fusion Sequencer",
@@ -168,7 +184,11 @@
 				"num_steps": 16,
 				"bpm": 100,
 				"sound_preset": "jazz_fusion"
-			}
+			},
+			"dev_themes": ["audio"],
+			"dev_category": "procedural_audio",
+			"complexity": "intermediate",
+			"tags": ["music", "sequencer", "jazz", "fusion", "experimental", "interactive"]
 		},
 		"step_sequencer_chiptune": {
 			"name": "Chiptune Sequencer",

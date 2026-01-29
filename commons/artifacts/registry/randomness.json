@@ -28,13 +28,21 @@
 			"name": "plane_manipulator",
 			"lookup_name": "plane_manipulator",
 			"description": "This script animates a random walk on a 3D plane. It simulates walkers that move across the plane's surface, raising the ground to create trails in real-time.",
-			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn"
+			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn",
+			"dev_themes": ["procedural", "emergence"],
+			"dev_category": "procedural_terrain",
+			"complexity": "intermediate",
+			"tags": ["random_walk", "terrain", "realtime", "trails", "3d"]
 		},
 		"pheromone_terrain": {
 			"name": "pheromone_terrain",
 			"lookup_name": "pheromone_terrain",
 			"description": "pheromone_terrain",
-			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn"
+			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+			"dev_themes": ["procedural", "emergence"],
+			"dev_category": "procedural_terrain",
+			"complexity": "advanced",
+			"tags": ["pheromone", "swarm", "terrain", "self_organization"]
 		},
 		"randomup": {
 			"name": "randomup",
@@ -64,7 +72,11 @@
 			"name": "pixel_cloud",
 			"lookup_name": "pixel_cloud",
 			"description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
-			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn"
+			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+			"dev_themes": ["procedural", "emergence"],
+			"dev_category": "procedural_sculpture",
+			"complexity": "intermediate",
+			"tags": ["random_walk", "self_avoiding", "sculpture", "voxel", "3d"]
 		},
 		"randompoint": {
 			"name": "randompoint",
@@ -88,13 +100,21 @@
 			"name": "Random Walk 128x128",
 			"lookup_name": "random_walk_128",
 			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
-			"scene": "res://algorithms/randomness/random_walk_128.tscn"
+			"scene": "res://algorithms/randomness/random_walk_128.tscn",
+			"dev_themes": ["procedural", "primitives"],
+			"dev_category": "random_walk_algorithm",
+			"complexity": "beginner",
+			"tags": ["random_walk", "grid", "voxel", "2d", "visualization"]
 		},
 		"ten_print_maze_3d": {
 			"name": "ten_print_maze_3d",
 			"lookup_name": "ten_print_maze_3d",
 			"description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
-			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn"
+			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+			"dev_themes": ["procedural", "emergence"],
+			"dev_category": "procedural_maze",
+			"complexity": "intermediate",
+			"tags": ["10print", "maze", "pathfinding", "generative", "3d", "classic"]
 		},
 		"digital_materiality_glitch": {
 			"name": "Digital Materiality Glitch",

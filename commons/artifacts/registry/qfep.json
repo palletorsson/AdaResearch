@@ -9,7 +9,11 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_controller",
 			"qfep_term": "λ",
-			"capacity": "TUNE entropy drive"
+			"capacity": "TUNE entropy drive",
+			"dev_themes": ["qfep", "tools"],
+			"dev_category": "qfep_controller",
+			"complexity": "intermediate",
+			"tags": ["interactive", "slider", "parameter_control", "entropy"]
 		},
 		"phi_slider": {
 			"name": "Phi Slider",
@@ -20,7 +24,11 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_controller",
 			"qfep_term": "φΔE(S,t)",
-			"capacity": "TUNE rate sensitivity"
+			"capacity": "TUNE rate sensitivity",
+			"dev_themes": ["qfep", "tools"],
+			"dev_category": "qfep_controller",
+			"complexity": "advanced",
+			"tags": ["interactive", "slider", "parameter_control", "change_rate", "queer_theory"]
 		},
 		"qfep_formula_3d": {
 			"name": "QFEP Formula 3D",
@@ -31,7 +39,11 @@
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "all",
-			"capacity": "SEE the theory"
+			"capacity": "SEE the theory",
+			"dev_themes": ["qfep", "philosophy"],
+			"dev_category": "qfep_visualization",
+			"complexity": "intermediate",
+			"tags": ["visualization", "formula", "theory", "3d"]
 		},
 		"qfep_sandbox_console": {
 			"name": "QFEP Sandbox Console",
@@ -55,7 +67,11 @@
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "λ",
 			"capacity": "WALK phase transition",
-			"status": "planned"
+			"status": "planned",
+			"dev_themes": ["qfep", "emergence"],
+			"dev_category": "qfep_visualization",
+			"complexity": "advanced",
+			"tags": ["walkable", "chaos", "phase_transition", "embodied_learning"]
 		},
 		"edge_of_chaos_orb": {
 			"name": "Edge of Chaos Orb",
@@ -67,7 +83,11 @@
 			"artifact_type": "qfep_visualization",
 			"qfep_term": "all",
 			"capacity": "SEE current state",
-			"status": "planned"
+			"status": "planned",
+			"dev_themes": ["qfep", "emergence"],
+			"dev_category": "qfep_visualization",
+			"complexity": "intermediate",
+			"tags": ["visualization", "realtime", "state_indicator", "edge_of_chaos"]
 		},
 		"grab_sphere_F": {
 			"name": "F Term Sphere",

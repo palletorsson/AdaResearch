@@ -17,7 +17,11 @@
       "parameters": {
         "current_index": "Starting statement (0-8)",
         "grabbable": "Enable XR grab interaction"
-      }
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "complexity": "advanced",
+      "tags": ["godel", "self_reference", "paradox", "incompleteness", "interactive"]
     },
     "russell_set_box": {
       "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
@@ -30,7 +34,11 @@
       "parameters": {
         "max_visible_depth": "How many nested boxes before infinite indicator",
         "size": "Outer box dimensions"
-      }
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "complexity": "advanced",
+      "tags": ["russell", "paradox", "self_reference", "set_theory", "interactive"]
     },
     "magritte_pipe": {
       "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
@@ -42,7 +50,11 @@
       "interactions": ["click to cycle through meta-layers of representation"],
       "parameters": {
         "current_layer": "Current level of representation questioning (0-5)"
-      }
+      },
+      "dev_themes": ["philosophy"],
+      "dev_category": "art_mathematics",
+      "complexity": "intermediate",
+      "tags": ["magritte", "representation", "meta", "art", "interactive"]
     },
     "escher_staircase": {
       "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
@@ -55,7 +67,11 @@
       "parameters": {
         "steps_per_side": "Number of steps on each side of the square",
         "rotate_view": "Auto-rotate for viewing"
-      }
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "complexity": "advanced",
+      "tags": ["escher", "impossible", "paradox", "geometry", "interactive"]
     },
     "florensky_sphere": {
       "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
@@ -68,7 +84,11 @@
       "parameters": {
         "current_state": "A, NOT_A, BOTH, or NEITHER",
         "allow_observation": "Whether observation collapses superposition"
-      }
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "complexity": "expert",
+      "tags": ["florensky", "paraconsistent_logic", "superposition", "quantum", "interactive"]
     },
     "bifurcation_diagram": {
       "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",

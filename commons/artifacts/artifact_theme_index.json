@@ -1,0 +1,167 @@
+{
+	"metadata_version": "1.0",
+	"description": "Index mapping themes to artifact lookup_names for developer workflow. Auto-generated from artifact registries.",
+	"last_updated": "2026-01-29",
+	"total_tagged_artifacts": 20,
+
+	"by_theme": {
+		"qfep": [
+			"lambda_slider",
+			"phi_slider",
+			"qfep_formula_3d",
+			"bifurcation_walkway",
+			"edge_of_chaos_orb",
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase",
+			"florensky_sphere"
+		],
+		"audio": [
+			"step_sequencer_trap",
+			"step_sequencer_house",
+			"step_sequencer_kraftwerk",
+			"step_sequencer_jazz",
+			"step_sequencer_ambient"
+		],
+		"philosophy": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"magritte_pipe",
+			"escher_staircase",
+			"florensky_sphere",
+			"step_sequencer_kraftwerk"
+		],
+		"procedural": [
+			"plane_manipulator",
+			"pheromone_terrain",
+			"pixel_cloud",
+			"random_walk_128",
+			"ten_print_maze_3d"
+		],
+		"emergence": [
+			"bifurcation_walkway",
+			"edge_of_chaos_orb",
+			"plane_manipulator",
+			"pheromone_terrain",
+			"pixel_cloud",
+			"ten_print_maze_3d"
+		],
+		"tools": [
+			"lambda_slider",
+			"phi_slider"
+		],
+		"primitives": [
+			"random_walk_128"
+		]
+	},
+
+	"by_complexity": {
+		"beginner": [
+			"step_sequencer_trap",
+			"step_sequencer_house",
+			"random_walk_128"
+		],
+		"intermediate": [
+			"lambda_slider",
+			"qfep_formula_3d",
+			"edge_of_chaos_orb",
+			"step_sequencer_kraftwerk",
+			"step_sequencer_jazz",
+			"step_sequencer_ambient",
+			"magritte_pipe",
+			"plane_manipulator",
+			"pixel_cloud",
+			"ten_print_maze_3d"
+		],
+		"advanced": [
+			"phi_slider",
+			"bifurcation_walkway",
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase",
+			"pheromone_terrain"
+		],
+		"expert": [
+			"florensky_sphere"
+		]
+	},
+
+	"by_category": {
+		"qfep_controller": [
+			"lambda_slider",
+			"phi_slider"
+		],
+		"qfep_visualization": [
+			"qfep_formula_3d",
+			"bifurcation_walkway",
+			"edge_of_chaos_orb"
+		],
+		"procedural_audio": [
+			"step_sequencer_trap",
+			"step_sequencer_house",
+			"step_sequencer_kraftwerk",
+			"step_sequencer_jazz",
+			"step_sequencer_ambient"
+		],
+		"foundations_crisis": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"escher_staircase",
+			"florensky_sphere"
+		],
+		"art_mathematics": [
+			"magritte_pipe"
+		],
+		"procedural_terrain": [
+			"plane_manipulator",
+			"pheromone_terrain"
+		],
+		"procedural_sculpture": [
+			"pixel_cloud"
+		],
+		"random_walk_algorithm": [
+			"random_walk_128"
+		],
+		"procedural_maze": [
+			"ten_print_maze_3d"
+		]
+	},
+
+	"by_registry": {
+		"qfep.json": [
+			"lambda_slider",
+			"phi_slider",
+			"qfep_formula_3d",
+			"bifurcation_walkway",
+			"edge_of_chaos_orb"
+		],
+		"arrays.json": [
+			"step_sequencer_trap",
+			"step_sequencer_house",
+			"step_sequencer_kraftwerk",
+			"step_sequencer_jazz",
+			"step_sequencer_ambient"
+		],
+		"foundations.json": [
+			"godel_statement_plaque",
+			"russell_set_box",
+			"magritte_pipe",
+			"escher_staircase",
+			"florensky_sphere"
+		],
+		"randomness.json": [
+			"plane_manipulator",
+			"pheromone_terrain",
+			"pixel_cloud",
+			"random_walk_128",
+			"ten_print_maze_3d"
+		]
+	},
+
+	"notes": [
+		"This is a proof-of-concept index with 20 tagged artifacts",
+		"Artifacts can appear in multiple themes (e.g., godel_statement_plaque is both qfep and philosophy)",
+		"This index should be updated whenever artifacts are tagged or theme metadata changes",
+		"Future: Consider auto-generation script to build this from registry files"
+	]
+}
