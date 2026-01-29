@@ -23,16 +23,12 @@
 				"Applications: terrain, cities, networks, game levels"
 			],
 
-			"maps": [
-				"SpatialPartitioning_Voronoi_Intro",
-				"SpatialPartitioning_Voronoi_3D",
-				"SpatialPartitioning_Delaunay",
-				"SpatialPartitioning_Voronoi_Delaunay_Dual",
-				"SpatialPartitioning_BSP",
-				"SpatialPartitioning_Poisson_Disk",
-				"SpatialPartitioning_Applications",
-				"SpatialPartitioning_Synthesis"
-			],
+		"maps": [
+			"ProceduralGeneration_Voronoi_Diagrams",
+			"ProceduralGeneration_Delaunay_Triangulation",
+			"ProceduralGeneration_Space_Partitioning",
+			"ProceduralGeneration_Poisson_Disk_Sampling"
+		],
 
 			"algorithm_paths": {
 				"voronoi": "res://algorithms/proceduralgeneration/spatial_partitioning/voronoi_diagrams/",
