@@ -9,7 +9,7 @@ extends Node3D
 @export var block_size: float = 0.3
 @export var animate_portals: bool = false
 
-const TessellatingPortal = preload("res://algorithms/proceduralgeneration/tessellatingportal/tessellating_portal.gd")
+const TessellatingPortal = preload("res://algorithms/proceduralgeneration/higher_dimensional/tessellatingportal/tessellating_portal.gd")
 
 # Portal types
 const PORTAL_TYPES = [

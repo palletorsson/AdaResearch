@@ -6,7 +6,7 @@ extends Node3D
 @export var grid_cols: int = 4
 @export var spacing_between: float = 15.0
 
-const TesseractNetSpace = preload("res://algorithms/proceduralgeneration/tesseractnetspace/tesseract_net_space.gd")
+const TesseractNetSpace = preload("res://algorithms/proceduralgeneration/higher_dimensional/tesseractnetspace/tesseract_net_space.gd")
 
 # Net types
 const NET_TYPES = [

@@ -5,11 +5,12 @@ extends Node3D
 var test_results: Array[String] = []
 var tests_passed: int = 0
 var tests_failed: int = 0
+var sep: String = "============================================================"
 
 func _ready() -> void:
-	print("\n" + "="*60)
+	print("\n" + sep)
 	print("FOUNDATIONS ARTIFACTS TEST")
-	print("="*60 + "\n")
+	print(sep + "\n")
 	
 	# Add camera
 	var camera = Camera3D.new()
@@ -25,9 +26,9 @@ func _ready() -> void:
 	test_bifurcation_diagram()
 	
 	# Summary
-	print("\n" + "="*60)
+	print("\n" + sep)
 	print("RESULTS: %d passed, %d failed" % [tests_passed, tests_failed])
-	print("="*60)
+	print(sep)
 	
 	for result in test_results:
 		print(result)

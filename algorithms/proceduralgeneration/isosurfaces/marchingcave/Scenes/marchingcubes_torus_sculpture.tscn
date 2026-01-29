@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://1fk8s7shqqka"]
 
-[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
-[ext_resource type="Script" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorTorus.gd" id="2_kc6u2"]
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres" id="1_gptaj"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorTorus.gd" id="2_kc6u2"]
 
 [sub_resource type="Environment" id="Environment_q07dc"]
 background_mode = 1

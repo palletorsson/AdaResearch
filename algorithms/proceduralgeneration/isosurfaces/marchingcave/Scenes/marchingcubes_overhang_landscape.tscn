@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dv0fm0aosdfr5"]
 
-[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_overhang"]
-[ext_resource type="Script" uid="uid://dwbhem1qt7nne" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorOverhang.gd" id="2_overhang"]
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres" id="1_overhang"]
+[ext_resource type="Script" uid="uid://dwbhem1qt7nne" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorOverhang.gd" id="2_overhang"]
 
 [sub_resource type="Environment" id="Environment_overhang"]
 background_mode = 1

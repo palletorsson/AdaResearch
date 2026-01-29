@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://hqc1qedx5jca"]
 
-[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/marchingcave/Materials/TerrainMat.tres" id="1_portal"]
-[ext_resource type="Script" uid="uid://c6oqc0d2q1pfd" path="res://algorithms/proceduralgeneration/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd" id="2_unified"]
+[ext_resource type="Material" uid="uid://ci35dxa4c1wj5" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres" id="1_portal"]
+[ext_resource type="Script" uid="uid://c6oqc0d2q1pfd" path="res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorUnifiedPortals.gd" id="2_unified"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_portal"]
 

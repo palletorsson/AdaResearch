@@ -1,6 +1,6 @@
 # res://algorithms/proceduralgeneration/wfcRooms/wfc_maze_office.gd
 # Combined WFC + Maze generator
-extends "res://algorithms/proceduralgeneration/wfcRooms/wfc_office_generator.gd"
+extends "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_office_generator.gd"
 
 ## Add a random path constraint to ensure connectivity to an office
 @export var force_path_to_office : bool = true
