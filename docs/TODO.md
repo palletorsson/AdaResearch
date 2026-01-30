@@ -41,14 +41,14 @@
 |------|-----------|---------|
 | grid_artifacts.json | ~736 | Legacy bloat |
 | arrays.json | 26 | ✅ Good |
-| cellular_automata.json | 39 | Mixed |
+| cellular_automata.json | 39 | ✅ Fixed |
 | foundations.json | 6 | ✅ Exemplary |
 | furniture.json | 28 | ✅ Good |
 | lsystems.json | 5 | ✅ Clean |
-| qfep.json | 35 | Many planned |
-| randomness.json | 96 | Needs work |
+| qfep.json | 35 | ✅ Clean |
+| randomness.json | 96 | ✅ Fixed |
 | script_runner.json | 1 | ✅ Good |
-| soft_bodies.json | 15 | Mixed |
+| soft_bodies.json | 15 | ✅ Fixed |
 | wavefunctions.json | 73 | Mixed |
 
 ---
@@ -73,7 +73,7 @@
   - Navigation patterns for AI agents
 
 ### P2: Cleanup
-- [ ] Document system architecture
+- [x] Document system architecture — ✅ Created `ARCHITECTURE.md` (2026-01-30)
   - Core systems (grid, artifacts, sequences)
   - Player systems (XR, movement, interaction)
   - Data flow diagrams
