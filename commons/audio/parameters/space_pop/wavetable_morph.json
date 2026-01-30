@@ -1,0 +1,12 @@
+{
+  "_metadata": {
+    "sound_type": "wavetable_morph",
+    "description": "Slowly evolving wavetable - morphs through sine, triangle, saw, and square waveforms.",
+    "tags": ["wavetable", "synth", "evolving", "pad", "morphing"]
+  },
+  "parameters": {
+    "root_note": { "min": 36, "max": 72, "value": 55 },
+    "morph_rate": { "min": 0.01, "max": 0.5, "value": 0.1 },
+    "duration": { "min": 2.0, "max": 30.0, "value": 10.0 }
+  }
+}

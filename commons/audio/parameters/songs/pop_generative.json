@@ -1,0 +1,13 @@
+{
+    "_metadata": {
+        "sound_type": "pop_interactive_song",
+        "display_name": "Pop Generative Song",
+        "description": "Procedurally generated pop music with interactive transitions. Intro → Verse → Chorus structure with keys, bass, drums, lead, and pads.",
+        "category": "songs",
+        "tags": ["pop", "generative", "full_song", "interactive", "verse", "chorus"],
+        "is_interactive_song": true
+    },
+    "parameters": {
+        "duration": { "min": 30.0, "max": 300.0, "value": 90.0, "step": 10.0, "description": "Approximate song length" }
+    }
+}

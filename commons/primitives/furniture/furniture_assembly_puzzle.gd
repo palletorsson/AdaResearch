@@ -6,10 +6,8 @@ class_name FurnitureAssemblyPuzzle
 ## Inspired by Donald Judd's furniture: complex forms from simple rectangles.
 ## "A chair is just rectangles with the right transforms."
 ##
-## Players scale, rotate, and position cube pieces to match ghost guides.
-## When a piece matches its ghost target (position, rotation, scale within tolerance),
-## it snaps into place and the ghost turns green. When all pieces are placed,
-## the puzzle completes and the assembled furniture grows to real size.
+## Players scale, rotate, and position cube pieces to match holographic guides.
+## Clean Alyx-style completion - pieces snap with satisfying pulse, no text.
 
 ## Furniture type presets
 enum FurnitureType {
@@ -327,9 +325,9 @@ func _complete_puzzle() -> void:
 		await _grow_to_final_size()
 
 
-## Make assembled furniture into a grabbable object (no scaling or moving)
+## Make assembled furniture into a grabbable object - clean transition
 func _grow_to_final_size() -> void:
-	print("FurnitureAssemblyPuzzle: Completing puzzle...")
+	print("FurnitureAssemblyPuzzle: Spawning reward...")
 
 	# Calculate center of assembled pieces for positioning reward
 	var center = Vector3.ZERO

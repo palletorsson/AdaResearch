@@ -1,0 +1,17 @@
+{
+    "_metadata": {
+        "sound_type": "supersaw_progressive",
+        "display_name": "Supersaw Progressive",
+        "description": "Deadmau5 style progressive house supersaw with sidechain pumping. Native Instruments Massive sound.",
+        "category": "pop_edm",
+        "tags": ["supersaw", "progressive", "deadmau5", "massive", "sidechain", "edm"]
+    },
+    "parameters": {
+        "root_note": { "min": 48.0, "max": 72.0, "value": 60.0, "step": 1.0 },
+        "voices": { "min": 3.0, "max": 11.0, "value": 7.0, "step": 2.0 },
+        "detune": { "min": 0.005, "max": 0.03, "value": 0.015, "step": 0.005 },
+        "sidechain": { "min": 0.0, "max": 0.9, "value": 0.7, "step": 0.05 },
+        "bpm": { "min": 120.0, "max": 140.0, "value": 128.0, "step": 1.0 },
+        "duration": { "min": 2.0, "max": 15.0, "value": 8.0, "step": 0.5 }
+    }
+}

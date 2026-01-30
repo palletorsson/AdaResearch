@@ -261,11 +261,24 @@ var stream = SoundBank.get_sound("AudioSynthesizer.MOOG_MINIMOOG_BASS")
 # Get preset definition
 var preset = SoundBank.get_preset("techno_noir_full")
 
-# Pre-generate all sounds for a preset (async)
+# Pre-generate all sounds for a preset
 SoundBank.pregenerate_preset_sounds("lab_scientific")
 
 # Setup audio buses for a preset
 SoundBank.setup_buses_for_preset("liturgical_cathedral")
+
+# Cross-scene ambient tracking
+SoundBank.set_current_ambient("prog_synth_70s", controller)
+var current = SoundBank.get_current_ambient()  # Returns preset name
+
+# Check if same preset during transition (skip regeneration)
+if SoundBank.should_skip_generation("prog_synth_70s"):
+    # Take over existing audio instead of regenerating
+    pass
+
+# Register/unregister players for pause tracking
+SoundBank.register_music_player(my_player)
+SoundBank.unregister_music_player(my_player)
 
 # Clear cache
 SoundBank.clear_cache()
@@ -281,14 +294,21 @@ SoundBank.print_info()
 var controller = AmbientSoundController.new()
 add_child(controller)
 
-# Load preset
+# Load preset (async by default - non-blocking)
 controller.load_preset("techno_noir_full", -6.0, 2.0)
+
+# Load preset synchronously (blocking - legacy)
+controller.load_preset("techno_noir_full", -6.0, 2.0, false)
 
 # Start ambient (usually called automatically)
 controller.start_ambient()
 
 # Stop ambient
 controller.stop_ambient()
+
+# Pause/Resume (for map transitions)
+controller.pause_ambient()   # Pauses players, saves positions
+controller.resume_ambient()  # Resumes from saved positions
 
 # Adjust volume
 controller.set_volume(-10.0)
@@ -298,6 +318,13 @@ controller.crossfade_to_preset("lab_scientific", 3.0)
 
 # Get info
 controller.print_info()
+
+# Signals
+controller.loading_started.connect(_on_loading_started)
+controller.loading_progress.connect(_on_loading_progress)  # (progress, sound_name)
+controller.loading_complete.connect(_on_loading_complete)
+controller.ambient_paused.connect(_on_paused)
+controller.ambient_resumed.connect(_on_resumed)
 ```
 
 ---
@@ -335,6 +362,168 @@ controller.print_info()
 1. **Preset Buses**: Ensure preset defines buses in `buses` section
 2. **Bus Setup**: Call `SoundBank.setup_buses_for_preset()` before loading preset
 3. **Bus Names**: Check that bus names match between preset and player configuration
+
+---
+
+## Async Generation & Scene Transitions
+
+### Non-Blocking Audio Loading
+
+Audio generation now happens in background threads to prevent blocking scene loading.
+
+**Key Components:**
+
+1. **AsyncAudioGenerator** (`commons/audio/AsyncAudioGenerator.gd`)
+   - Thread-based sound generation
+   - Queue-based processing
+   - Progress signals for loading UI
+
+2. **AmbientSoundController** (updated)
+   - Uses `AsyncAudioGenerator` by default
+   - Emits `loading_started`, `loading_progress`, `loading_complete` signals
+   - Supports `pause_ambient()` / `resume_ambient()` for seamless teleportation
+
+### How It Works
+
+```
+Scene Load Request
+       ↓
+┌──────────────────┐
+│ load_preset()    │ ← Returns immediately (non-blocking)
+└────────┬─────────┘
+         │
+         ├──→ Check SoundBank cache
+         │         ↓
+         │    ┌────────────────┐
+         │    │ Sounds cached? │
+         │    └───────┬────────┘
+         │         Yes│    No
+         │            ↓     ↓
+         │    Start    Background
+         │    immediately  Thread
+         │                  ↓
+         │           ┌──────────────┐
+         │           │ Generate     │
+         │           │ sounds...    │
+         │           └──────┬───────┘
+         │                  ↓
+         │           Cache in SoundBank
+         │                  ↓
+         └──────────→ start_ambient()
+```
+
+### Pause/Resume During Teleportation
+
+When teleporting between maps in the same sequence, the audio **pauses instead of restarting**:
+
+```gdscript
+# Automatic (connected to SceneManager signals):
+# - scene_transition_started → pause_ambient()
+# - scene_transition_completed → resume_ambient()
+
+# Manual control:
+ambient_controller.pause_ambient()   # Pauses all players, saves positions
+ambient_controller.resume_ambient()  # Resumes from saved positions
+```
+
+### Cross-Scene Tracking
+
+`SoundBankSingleton` tracks the current ambient preset across scene changes:
+
+```gdscript
+# Check if we should skip regeneration
+if SoundBank.should_skip_generation("prog_synth_70s"):
+    # Same preset during transition - just take over
+    pass
+
+# Register current ambient
+SoundBank.set_current_ambient("prog_synth_70s", controller)
+
+# Get current playing preset
+var preset = SoundBank.get_current_ambient()
+```
+
+### Configuration
+
+In preset JSON, enable persistence:
+
+```json
+{
+  "presets": {
+    "prog_synth_70s": {
+      "generation": {
+        "persist_across_maps": true
+      },
+      "continuous_layers": [ ... ]
+    }
+  }
+}
+```
+
+### Loading UI Integration
+
+Connect to signals for loading feedback:
+
+```gdscript
+ambient_controller.loading_started.connect(_on_loading_started)
+ambient_controller.loading_progress.connect(_on_loading_progress)
+ambient_controller.loading_complete.connect(_on_loading_complete)
+
+func _on_loading_progress(progress: float, sound_name: String):
+    loading_bar.value = progress * 100
+    status_label.text = "Loading: " + sound_name
+```
+
+---
+
+## Song Preview & Timeline
+
+### SongTimeline Component
+
+Interactive timeline for debugging and discussing sounds:
+
+**Features:**
+- Visual section markers (color-coded by type)
+- Click-to-seek functionality
+- Layer annotations with parameter values
+- Selectable text (copy/paste parameters)
+- Real-time playhead tracking
+
+**Usage:**
+```gdscript
+var timeline = SongTimeline.new()
+add_child(timeline)
+
+# Load from AudioStreamInteractive
+timeline.load_interactive_stream(my_song)
+
+# Or load custom metadata
+timeline.load_song_metadata({
+    "sections": [
+        {"name": "Intro", "start": 0.0, "end": 8.0, "layers": [...]},
+        {"name": "Verse", "start": 8.0, "end": 24.0, "layers": [...]}
+    ],
+    "total_duration": 60.0
+})
+
+# Update playhead
+timeline.set_current_time(player.get_playback_position())
+
+# Handle seek
+timeline.seek_requested.connect(func(time): player.seek(time))
+```
+
+### SongPreviewDesktop
+
+Standalone scene for testing songs with timeline:
+
+**Location:** `commons/audio/catalog/SongPreviewDesktop.tscn`
+
+**Features:**
+- All 7 procedural songs (prog_synth_70s, ambient_works, etc.)
+- Pause/Resume controls
+- Full timeline with layer annotations
+- Selectable parameter text for discussion
 
 ---
 
@@ -376,4 +565,8 @@ controller.print_info()
 
 ---
 
-*Last updated: 2025-01-20*
+*Last updated: 2026-01-30*
+
+**Changelog:**
+- 2026-01-30: Added async generation, pause/resume for teleportation, cross-scene tracking, SongTimeline component
+- 2025-01-20: Initial sound system guide

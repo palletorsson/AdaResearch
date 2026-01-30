@@ -42,28 +42,41 @@ static func _find_lab_system() -> Node:
 ## Get all artifacts from GridInteractablesComponent registry
 ## Returns array of artifact dictionaries
 static func get_all_artifacts() -> Array:
+	print("ArtifactCatalogDataProvider: get_all_artifacts() called")
+
 	var grid_system = _find_grid_system()
 	if not grid_system:
-		push_warning("ArtifactCatalogDataProvider: GridSystem not found")
+		push_warning("ArtifactCatalogDataProvider: GridSystem not found in scene tree")
+		print("ArtifactCatalogDataProvider: DEBUG - Looking for 'grid_system' group members...")
+		var scene_tree = Engine.get_main_loop() as SceneTree
+		if scene_tree:
+			var groups = scene_tree.get_nodes_in_group("grid_system")
+			print("ArtifactCatalogDataProvider: DEBUG - Found %d nodes in 'grid_system' group" % groups.size())
 		return []
 
+	print("ArtifactCatalogDataProvider: Found GridSystem: %s" % grid_system.name)
+
 	if not grid_system.has_node("GridInteractablesComponent"):
-		push_warning("ArtifactCatalogDataProvider: GridInteractablesComponent not found")
+		push_warning("ArtifactCatalogDataProvider: GridInteractablesComponent not found as child of GridSystem")
+		print("ArtifactCatalogDataProvider: DEBUG - GridSystem children: %s" % str(grid_system.get_children().map(func(c): return c.name)))
 		return []
 
 	var interactables = grid_system.get_node("GridInteractablesComponent")
+	print("ArtifactCatalogDataProvider: Found GridInteractablesComponent")
+
 	if not "grid_artifact_registry" in interactables:
-		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry not found")
+		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry property not found in GridInteractablesComponent")
 		return []
 
 	var registry = interactables.grid_artifact_registry
 	var artifact_count = registry.size()
 
 	if artifact_count == 0:
-		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry is empty - map may not be fully loaded yet")
-		print("ArtifactCatalogDataProvider: Waiting for artifacts to load...")
+		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry is EMPTY (0 artifacts)")
+		print("ArtifactCatalogDataProvider: This means artifacts have not been loaded yet or loading failed")
+		print("ArtifactCatalogDataProvider: Check console for 'GridInteractablesComponent: Loading artifact registries...' messages")
 	else:
-		print("ArtifactCatalogDataProvider: Found %d artifacts in registry" % artifact_count)
+		print("ArtifactCatalogDataProvider: ✅ Found %d artifacts in registry" % artifact_count)
 
 	return registry.values()
 

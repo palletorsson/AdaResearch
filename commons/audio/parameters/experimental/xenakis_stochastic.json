@@ -1,0 +1,60 @@
+{
+    "_metadata": {
+        "sound_type": "xenakis_stochastic",
+        "display_name": "Xenakis Stochastic",
+        "description": "Iannis Xenakis-inspired mathematical composition. Probability distributions, Markov chains, dense pitch clusters.",
+        "category": "experimental",
+        "tags": ["xenakis", "stochastic", "markov", "algorithmic", "mathematical", "clusters"]
+    },
+    "parameters": {
+        "pitch_mean_midi": {
+            "min": 36.0,
+            "max": 84.0,
+            "value": 60.0,
+            "step": 1.0,
+            "description": "Mean pitch for Gaussian distribution (MIDI note)"
+        },
+        "pitch_std_dev": {
+            "min": 1.0,
+            "max": 24.0,
+            "value": 12.0,
+            "step": 1.0,
+            "description": "Standard deviation for pitch spread"
+        },
+        "cluster_density": {
+            "min": 2.0,
+            "max": 16.0,
+            "value": 8.0,
+            "step": 1.0,
+            "description": "Number of simultaneous notes in clusters"
+        },
+        "cluster_spread_cents": {
+            "min": 10.0,
+            "max": 200.0,
+            "value": 50.0,
+            "step": 5.0,
+            "description": "Microtonal spread within clusters"
+        },
+        "event_density": {
+            "min": 0.5,
+            "max": 10.0,
+            "value": 3.0,
+            "step": 0.5,
+            "description": "Events per second"
+        },
+        "glissando_probability": {
+            "min": 0.0,
+            "max": 1.0,
+            "value": 0.3,
+            "step": 0.05,
+            "description": "Probability of glissando between notes"
+        },
+        "duration": {
+            "min": 2.0,
+            "max": 15.0,
+            "value": 6.0,
+            "step": 0.5,
+            "description": "Total duration in seconds"
+        }
+    }
+}

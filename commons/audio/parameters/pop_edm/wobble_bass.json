@@ -1,0 +1,15 @@
+{
+    "_metadata": {
+        "sound_type": "wobble_bass",
+        "display_name": "Wobble Bass",
+        "description": "Skrillex style dubstep wobble bass. Aggressive wavetable modulation with LFO on filter - automation as violence.",
+        "category": "pop_edm",
+        "tags": ["wobble", "dubstep", "skrillex", "massive", "bass", "brostep"]
+    },
+    "parameters": {
+        "root_note": { "min": 24.0, "max": 48.0, "value": 36.0, "step": 1.0 },
+        "wobble_rate": { "min": 1.0, "max": 16.0, "value": 4.0, "step": 0.5 },
+        "aggression": { "min": 0.3, "max": 1.0, "value": 0.8, "step": 0.05 },
+        "duration": { "min": 2.0, "max": 10.0, "value": 4.0, "step": 0.5 }
+    }
+}

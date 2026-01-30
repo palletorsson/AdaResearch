@@ -1,0 +1,12 @@
+{
+  "_metadata": {
+    "sound_type": "rain_atmosphere",
+    "description": "Rain and urban ambience - layered noise textures with traffic rumble for noir scenes.",
+    "tags": ["rain", "ambience", "atmosphere", "urban", "noir", "texture"]
+  },
+  "parameters": {
+    "density": { "min": 0.1, "max": 1.0, "value": 0.5 },
+    "rumble": { "min": 0.0, "max": 0.8, "value": 0.3 },
+    "duration": { "min": 5.0, "max": 60.0, "value": 15.0 }
+  }
+}

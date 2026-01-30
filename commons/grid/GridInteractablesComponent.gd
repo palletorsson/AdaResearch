@@ -50,31 +50,39 @@ func _ready():
 
 # Load artifact registries based on map configuration
 func _load_artifact_registries():
-	print("GridInteractablesComponent: Loading artifact registries with lookup_name validation...")
-	
+	print("GridInteractablesComponent: ============ LOADING ARTIFACT REGISTRIES ============")
+	print("GridInteractablesComponent: Starting artifact registry loading with lookup_name validation...")
+
 	# Get artifact registries from map external references
 	var artifact_paths = _get_artifact_registry_paths()
-	
+	print("GridInteractablesComponent: Found %d registry paths to load" % artifact_paths.size())
+	for path in artifact_paths:
+		print("GridInteractablesComponent:   - %s" % path)
+
 	var total_loaded = 0
 	var validation_errors = []
 	var validation_warnings = []
-	
+
 	for registry_path in artifact_paths:
 		var loaded_count = _load_single_artifact_registry(registry_path, validation_errors, validation_warnings)
 		total_loaded += loaded_count
-	
+		print("GridInteractablesComponent:   → Loaded %d artifacts from %s" % [loaded_count, registry_path])
+
 	# Report validation results
 	if validation_errors.size() > 0:
 		push_error("GridInteractablesComponent: VALIDATION ERRORS in artifact registries:")
 		for error in validation_errors:
 			push_error("  - %s" % error)
-	
+
 	if validation_warnings.size() > 0:
 		print("GridInteractablesComponent: Validation warnings:")
 		for warning in validation_warnings:
 			print("  - %s" % warning)
-	
-	print("GridInteractablesComponent: ✅ Loaded %d validated artifacts from %d registries" % [total_loaded, artifact_paths.size()])
+
+	print("GridInteractablesComponent: ============================================")
+	print("GridInteractablesComponent: ✅ TOTAL: Loaded %d validated artifacts from %d registries" % [total_loaded, artifact_paths.size()])
+	print("GridInteractablesComponent: Final registry size: %d" % grid_artifact_registry.size())
+	print("GridInteractablesComponent: ============================================")
 
 # Get artifact registry paths from map data and registry directory
 func _get_artifact_registry_paths() -> Array[String]:

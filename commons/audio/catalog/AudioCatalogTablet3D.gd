@@ -125,6 +125,8 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 			return TrapBeatsGenerator.generate_sound(sound_type_str, merged_params)
 		"Cinematic":
 			return CinematicMusicGenerator.generate_sound(sound_type_str, merged_params)
+		"SpaceDystopia":
+			return SpaceDystopiaGenerator.generate_track(sound_type_str)
 		"SciFi":
 			return SciFiPreviewGenerator.generate_preview(sound_type_str)
 	
@@ -194,6 +196,11 @@ func _detect_generator_type(category: String, sound_key: String) -> String:
 			return "TrapBeats"
 		"cinematic":
 			return "Cinematic"
+		"sci_fi":
+			# Use new SpaceDystopiaGenerator for album tracks
+			if key_lower.contains("drift") or key_lower.contains("noir") or key_lower.contains("neon") or key_lower.contains("foundry") or key_lower.contains("stellar") or key_lower.contains("inter") or key_lower.contains("skyline") or key_lower.contains("market") or key_lower.contains("celestial") or key_lower.contains("finale"):
+				return "SpaceDystopia"
+			return "Default"
 
 	# Check by sound key patterns
 	if key_lower.begins_with("tech_noir") or key_lower.contains("industrial"):
@@ -203,8 +210,10 @@ func _detect_generator_type(category: String, sound_key: String) -> String:
 	if key_lower.begins_with("cinematic") or key_lower.contains("vangelis") or key_lower.contains("blade_runner"):
 		return "Cinematic"
 	
-	# Don't use SciFi generator for now - it's too limited
-	# Let these fall through to the AudioSynthesizer
+	# Space Dystopia album tracks
+	if key_lower.begins_with("drift") or key_lower.begins_with("noir") or key_lower.begins_with("neon") or key_lower.begins_with("foundry"):
+		return "SpaceDystopia"
+	
 	return "Default"
 
 
@@ -271,6 +280,46 @@ func _string_to_sound_type(type_str: String) -> int:
 		# Biological
 		"heartbeat": AudioSynthesizer.SoundType.HEARTBEAT,
 		"heartbeat_segment": AudioSynthesizer.SoundType.HEARTBEAT,
+		# Space Dystopia new sounds
+		"processed_vocal_pad": AudioSynthesizer.SoundType.PROCESSED_VOCAL_PAD,
+		"industrial_anvil": AudioSynthesizer.SoundType.INDUSTRIAL_ANVIL,
+		"trip_hop_beat": AudioSynthesizer.SoundType.TRIP_HOP_BEAT,
+		"ethnic_tabla": AudioSynthesizer.SoundType.ETHNIC_TABLA,
+		"gamelan_bell": AudioSynthesizer.SoundType.GAMELAN_BELL,
+		"organ_swell": AudioSynthesizer.SoundType.ORGAN_SWELL,
+		"noir_sax": AudioSynthesizer.SoundType.NOIR_SAX,
+		"choir_pad": AudioSynthesizer.SoundType.CHOIR_PAD,
+		"reversed_swell": AudioSynthesizer.SoundType.REVERSED_SWELL,
+		"blade_runner_brass": AudioSynthesizer.SoundType.BLADE_RUNNER_BRASS,
+		# Experimental / Algorithmic
+		"radiophonic_workshop": AudioSynthesizer.SoundType.RADIOPHONIC_WORKSHOP,
+		"xenakis_stochastic": AudioSynthesizer.SoundType.XENAKIS_STOCHASTIC,
+		"spiegel_intelligent": AudioSynthesizer.SoundType.SPIEGEL_INTELLIGENT,
+		"autechre_flutter": AudioSynthesizer.SoundType.AUTECHRE_FLUTTER,
+		"ikeda_dataplex": AudioSynthesizer.SoundType.IKEDA_DATAPLEX,
+		"eccojam_drift": AudioSynthesizer.SoundType.ECCOJAM_DRIFT,
+		"cellular_automata": AudioSynthesizer.SoundType.CELLULAR_AUTOMATA,
+		# Pop & EDM Genre-Defining
+		"moroder_disco_bass": AudioSynthesizer.SoundType.MORODER_DISCO_BASS,
+		"prophet_pad": AudioSynthesizer.SoundType.PROPHET_PAD,
+		"prince_sync_lead": AudioSynthesizer.SoundType.PRINCE_SYNC_LEAD,
+		"electro_808": AudioSynthesizer.SoundType.ELECTRO_808,
+		"detroit_techno": AudioSynthesizer.SoundType.DETROIT_TECHNO,
+		"house_organ": AudioSynthesizer.SoundType.HOUSE_ORGAN,
+		"rave_stab": AudioSynthesizer.SoundType.RAVE_STAB,
+		"supersaw_progressive": AudioSynthesizer.SoundType.SUPERSAW_PROGRESSIVE,
+		"wobble_bass": AudioSynthesizer.SoundType.WOBBLE_BASS,
+		"synthwave_lead": AudioSynthesizer.SoundType.SYNTHWAVE_LEAD,
+		# Space Dystopia Soundscape Pop
+		"space_choir_pad": AudioSynthesizer.SoundType.SPACE_CHOIR_PAD,
+		"cinematic_strings": AudioSynthesizer.SoundType.CINEMATIC_STRINGS,
+		"industrial_clank": AudioSynthesizer.SoundType.INDUSTRIAL_CLANK,
+		"rain_atmosphere": AudioSynthesizer.SoundType.RAIN_ATMOSPHERE,
+		"wavetable_morph": AudioSynthesizer.SoundType.WAVETABLE_MORPH,
+		"pedal_steel_swell": AudioSynthesizer.SoundType.PEDAL_STEEL_SWELL,
+		"glitch_chaos": AudioSynthesizer.SoundType.GLITCH_CHAOS,
+		"noir_sax_breath": AudioSynthesizer.SoundType.NOIR_SAX_BREATH,
+		"space_sub_drone": AudioSynthesizer.SoundType.SPACE_SUB_DRONE,
 	}
 
 	var key := type_str.to_lower().replace(" ", "_").replace("-", "_")

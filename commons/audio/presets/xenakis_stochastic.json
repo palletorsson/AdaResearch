@@ -1,0 +1,94 @@
+{
+    "name": "Xenakis Stochastic",
+    "description": "Iannis Xenakis-inspired mathematical composition. Probability distributions, Markov chains, dense pitch clusters, stochastic textures.",
+    "style_notes": {
+        "influences": ["Iannis Xenakis", "Metastaseis", "Pléïades", "UPIC System"],
+        "era": "1954-2001",
+        "techniques": [
+            "Stochastic pitch selection (Gaussian distribution)",
+            "Markov chains for melodic transitions",
+            "Glissandi clouds (mass pitch movements)",
+            "Dense cluster chords",
+            "Set theory pitch class operations"
+        ],
+        "philosophy": "Mathematical models applied to music - probability, game theory, set theory"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.STOCHASTIC_CLOUD",
+            "volume_db": -8.0,
+            "bus": "Texture"
+        },
+        {
+            "sound_id": "AudioSynthesizer.MARKOV_MELODY",
+            "volume_db": -10.0,
+            "bus": "Melody"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.CLUSTER_DRONE",
+        "volume_db": -10.0,
+        "bus": "Texture",
+        "fade_out_when_ready": true,
+        "fade_duration": 5.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.GLISSANDO_SWARM",
+            "interval_range": [10.0, 30.0],
+            "volume_db": -12.0,
+            "bus": "FX"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PITCH_CLUSTER_BURST",
+            "interval_range": [5.0, 15.0],
+            "volume_db": -14.0,
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "Texture": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.85,
+                    "wet": 0.5
+                }
+            ]
+        },
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 500,
+                    "feedback": 0.4,
+                    "wet": 0.3
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": false
+    },
+    "synthesis_parameters": {
+        "pitch_distribution": "gaussian",
+        "pitch_mean_midi": 60,
+        "pitch_std_dev": 12,
+        "cluster_density": 8,
+        "cluster_spread_cents": 50,
+        "markov_transition_matrix": "chromatic_weighted",
+        "glissando_voices": 12,
+        "glissando_duration_range": [2.0, 8.0],
+        "event_density_per_second": 3.0
+    }
+}

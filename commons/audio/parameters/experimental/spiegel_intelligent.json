@@ -1,0 +1,60 @@
+{
+    "_metadata": {
+        "sound_type": "spiegel_intelligent",
+        "display_name": "Spiegel Intelligent Harmony",
+        "description": "Laurie Spiegel Music Mouse-inspired generative harmony. Algorithmic counterpoint, rule-based voice leading.",
+        "category": "experimental",
+        "tags": ["spiegel", "music_mouse", "algorithmic", "harmony", "counterpoint", "generative"]
+    },
+    "parameters": {
+        "root_note_midi": {
+            "min": 36.0,
+            "max": 72.0,
+            "value": 48.0,
+            "step": 1.0,
+            "description": "Root note (MIDI)"
+        },
+        "scale_type": {
+            "min": 0.0,
+            "max": 3.0,
+            "value": 0.0,
+            "step": 1.0,
+            "description": "Scale: 0=Major, 1=Minor, 2=Dorian, 3=Pentatonic"
+        },
+        "harmony_voices": {
+            "min": 2.0,
+            "max": 6.0,
+            "value": 4.0,
+            "step": 1.0,
+            "description": "Number of harmony voices"
+        },
+        "voice_leading_smoothness": {
+            "min": 0.0,
+            "max": 1.0,
+            "value": 0.7,
+            "step": 0.05,
+            "description": "Preference for stepwise motion"
+        },
+        "chord_change_rate": {
+            "min": 0.1,
+            "max": 2.0,
+            "value": 0.5,
+            "step": 0.1,
+            "description": "Chord changes per second"
+        },
+        "arpeggio_probability": {
+            "min": 0.0,
+            "max": 1.0,
+            "value": 0.3,
+            "step": 0.05,
+            "description": "Probability of arpeggiation"
+        },
+        "duration": {
+            "min": 2.0,
+            "max": 15.0,
+            "value": 8.0,
+            "step": 0.5,
+            "description": "Total duration in seconds"
+        }
+    }
+}

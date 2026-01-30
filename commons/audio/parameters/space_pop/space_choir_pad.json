@@ -1,0 +1,13 @@
+{
+  "_metadata": {
+    "sound_type": "space_choir_pad",
+    "description": "Sacred choir vowel pad - ethereal voices morphing between 'ooh' and 'aah'. Perfect for sci-fi cathedrals.",
+    "tags": ["choir", "pad", "vocal", "ethereal", "space", "cinematic"]
+  },
+  "parameters": {
+    "root_note": { "min": 36, "max": 72, "value": 60 },
+    "vowel_morph": { "min": 0.0, "max": 1.0, "value": 0.5 },
+    "vibrato_depth": { "min": 0.0, "max": 0.05, "value": 0.02 },
+    "duration": { "min": 1.0, "max": 30.0, "value": 8.0 }
+  }
+}

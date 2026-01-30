@@ -51,6 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05746, 0)
 equation = ["point", "times", "6", "equals", "wedge"]
 
 [node name="PuzzleBoundary" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7574645, 0)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.7574645, 0)
 material_override = SubResource("StandardMaterial3D_boundary")
 mesh = SubResource("SphereMesh_boundary")

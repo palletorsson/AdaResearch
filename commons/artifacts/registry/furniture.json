@@ -182,6 +182,15 @@
 			"description": "VR kiosk for browsing and spawning artifacts. Filter by theme and complexity, search by tags. 318+ artifacts organized into 10 thematic categories. Dev tool that becomes player inventory through progression.",
 			"scene": "res://commons/artifacts/catalog/ArtifactCatalogTablet3D.tscn",
 			"category": "navigation"
+		},
+		"laser_exploding_sphere": {
+			"name": "Laser Exploding Sphere",
+			"lookup_name": "laser_exploding_sphere",
+			"description": "Grabbable sphere that explodes into particles when hit by a laser pointer. 40 particle burst with procedural explosion sound. VR target practice.",
+			"scene": "res://commons/primitives/spheres/laser_exploding_sphere.tscn",
+			"category": "interactive",
+			"dev_themes": ["tools", "primitives"],
+			"complexity": "beginner"
 		}
 	}
 }

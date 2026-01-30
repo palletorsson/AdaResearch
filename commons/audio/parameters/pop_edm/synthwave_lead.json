@@ -1,0 +1,15 @@
+{
+    "_metadata": {
+        "sound_type": "synthwave_lead",
+        "display_name": "Synthwave Lead",
+        "description": "The Weeknd 'Blinding Lights' style synthwave lead. Detuned saws with gated reverb - retro-futurism into pop.",
+        "category": "pop_edm",
+        "tags": ["synthwave", "weeknd", "80s", "retro", "serum", "gated_reverb"]
+    },
+    "parameters": {
+        "root_note": { "min": 60.0, "max": 84.0, "value": 72.0, "step": 1.0 },
+        "detune": { "min": 0.002, "max": 0.02, "value": 0.008, "step": 0.002 },
+        "brightness": { "min": 0.3, "max": 1.0, "value": 0.7, "step": 0.05 },
+        "duration": { "min": 2.0, "max": 10.0, "value": 4.0, "step": 0.5 }
+    }
+}

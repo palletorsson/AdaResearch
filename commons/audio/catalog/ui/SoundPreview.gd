@@ -128,7 +128,13 @@ func show_sound(sound: Dictionary) -> void:
 	var description: String = metadata.get("description", "")
 	_description_label.text = description
 
-	var tags: String = metadata.get("tags", "")
+	var tags_raw = metadata.get("tags", "")
+	var tags: String = ""
+	if tags_raw is Array:
+		tags = ", ".join(tags_raw)
+	elif tags_raw is String:
+		tags = tags_raw
+	
 	if not tags.is_empty():
 		_tags_label.text = "Tags: " + tags
 	else:

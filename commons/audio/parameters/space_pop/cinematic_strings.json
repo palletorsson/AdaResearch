@@ -1,0 +1,13 @@
+{
+  "_metadata": {
+    "sound_type": "cinematic_strings",
+    "description": "Slow attack string ensemble - Hans Zimmer style cinematic swells with ensemble detuning.",
+    "tags": ["strings", "cinematic", "orchestral", "pad", "swell", "film"]
+  },
+  "parameters": {
+    "root_note": { "min": 36, "max": 72, "value": 48 },
+    "attack_time": { "min": 0.5, "max": 5.0, "value": 2.0 },
+    "chorus_depth": { "min": 0.001, "max": 0.01, "value": 0.005 },
+    "duration": { "min": 2.0, "max": 30.0, "value": 10.0 }
+  }
+}

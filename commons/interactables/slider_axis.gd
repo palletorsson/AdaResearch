@@ -64,6 +64,8 @@ func _apply_transform(value: float) -> void:
 	# Keep X and Z at 0
 	transform.origin.x = 0
 	transform.origin.z = 0
+	# Lock rotation to prevent any rotation
+	transform.basis = Basis.IDENTITY
 
 func _do_move_slider(value: float) -> float:
 	value = _apply_steps(value)

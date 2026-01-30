@@ -484,5 +484,3 @@ func _seq_track_10_singularity(delta):
 		if piano:
 			var freq = 2000.0 + randf() * 2000.0
 			piano.play_note(freq, 0.2, 0.1)
-
-

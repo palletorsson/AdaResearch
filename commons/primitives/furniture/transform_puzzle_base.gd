@@ -34,24 +34,25 @@ enum PuzzleState {
 @export var validation_interval: float = 0.2  # How often to check (seconds)
 @export var show_ghost_guides: bool = true  # Show target positions
 
-## Ghost Guide Appearance
+## Ghost Guide Appearance - Alyx style holographic
 @export_group("Ghost Guides")
-@export var ghost_alpha: float = 0.3
-@export var ghost_color: Color = Color(0.5, 0.8, 1.0, 0.3)
-@export var ghost_emission_energy: float = 0.3
+@export var ghost_alpha: float = 0.25
+@export var ghost_color: Color = Color(0.0, 0.8, 1.0, 0.25)  # Cyan hologram
+@export var ghost_emission_energy: float = 0.8
 
-## Proximity Feedback
+## Proximity Feedback - Alyx style
 @export_group("Proximity Feedback")
 @export var show_proximity_feedback: bool = true
-@export var close_color: Color = Color(0.3, 1.0, 0.5, 0.8)  # Green when close
-@export var far_color: Color = Color(1.0, 0.5, 0.3, 0.8)  # Orange when far
+@export var close_color: Color = Color(0.2, 1.0, 0.7, 0.6)  # Teal-green when close
+@export var far_color: Color = Color(0.0, 0.6, 0.8, 0.3)  # Dim cyan when far
 
-## Success Feedback
+## Success Feedback - Clean, no text
 @export_group("Success Feedback")
-@export var success_message: String = "Assembly Complete!"
-@export var show_success_label: bool = true
-@export var success_display_duration: float = 3.0
+@export var success_message: String = ""  # No text by default
+@export var show_success_label: bool = false  # Clean completion
+@export var success_display_duration: float = 0.5
 @export var lock_on_complete: bool = true
+@export var completion_pulse_color: Color = Color(0.3, 1.0, 0.6, 1.0)  # Green pulse
 
 ## Tag System (like LineSnapPuzzleBase)
 @export_group("Tag System")
@@ -186,44 +187,77 @@ func _setup_ghost_guides() -> void:
 			ghost_guides[target.piece_id] = ghost
 
 
-## Create a ghost mesh showing target transform
-func _create_ghost_for_target(target: PieceTarget) -> MeshInstance3D:
+## Create a ghost mesh showing target transform - Alyx holographic style
+func _create_ghost_for_target(target: PieceTarget) -> Node3D:
+	var ghost_container_node = Node3D.new()
+	ghost_container_node.name = "Ghost_" + target.piece_id
+	
+	# Main ghost body - subtle fill
 	var ghost = MeshInstance3D.new()
-	ghost.name = "Ghost_" + target.piece_id
-
-	# Create a box mesh matching target scale
+	ghost.name = "GhostBody"
 	var box = BoxMesh.new()
 	box.size = target.target_scale
 	ghost.mesh = box
 
-	# Create transparent material
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = ghost_color
+	mat.albedo_color = Color(ghost_color.r, ghost_color.g, ghost_color.b, ghost_alpha * 0.5)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
 	mat.emission = Color(ghost_color.r, ghost_color.g, ghost_color.b, 1.0)
-	mat.emission_energy_multiplier = ghost_emission_energy
+	mat.emission_energy_multiplier = ghost_emission_energy * 0.3
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	ghost.material_override = mat
+	ghost_container_node.add_child(ghost)
+	
+	# Edge wireframe effect - brighter outline
+	var edge_ghost = MeshInstance3D.new()
+	edge_ghost.name = "GhostEdge"
+	var edge_box = BoxMesh.new()
+	edge_box.size = target.target_scale * 1.02  # Slightly larger
+	edge_ghost.mesh = edge_box
+	
+	var edge_mat = StandardMaterial3D.new()
+	edge_mat.albedo_color = Color(ghost_color.r, ghost_color.g, ghost_color.b, ghost_alpha)
+	edge_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	edge_mat.emission_enabled = true
+	edge_mat.emission = ghost_color
+	edge_mat.emission_energy_multiplier = ghost_emission_energy
+	edge_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	edge_mat.cull_mode = BaseMaterial3D.CULL_FRONT  # Only show back faces = edge effect
+	edge_ghost.material_override = edge_mat
+	ghost_container_node.add_child(edge_ghost)
 
 	# Apply target transform (relative to puzzle origin)
-	ghost.position = target.target_position
-	ghost.rotation_degrees = target.target_rotation
-	# Note: scale is baked into the mesh size, not the node scale
+	ghost_container_node.position = target.target_position
+	ghost_container_node.rotation_degrees = target.target_rotation
 
-	return ghost
+	# Add subtle animation
+	_add_ghost_animation(ghost_container_node)
+
+	return ghost_container_node
 
 
-## Create success label
+## Add subtle pulse animation to ghost
+func _add_ghost_animation(ghost: Node3D) -> void:
+	var tween = create_tween()
+	tween.set_loops()
+	tween.tween_property(ghost, "scale", Vector3.ONE * 1.02, 1.5).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(ghost, "scale", Vector3.ONE * 0.98, 1.5).set_trans(Tween.TRANS_SINE)
+
+
+## Create success label (optional - disabled by default for clean look)
 func _create_success_label() -> void:
+	if not show_success_label or success_message.is_empty():
+		return
+	
 	success_label = Label3D.new()
 	success_label.name = "SuccessLabel"
 	success_label.text = success_message
-	success_label.font_size = 36
-	success_label.outline_size = 10
+	success_label.font_size = 28
+	success_label.outline_size = 0
 	success_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	success_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
+	success_label.modulate = Color(0.3, 1.0, 0.7, 1.0)
 	success_label.visible = false
 	add_child(success_label)
 
@@ -342,19 +376,16 @@ func _snap_piece_to_target(piece_id: String, piece: Node3D, target: PieceTarget)
 	piece.queue_free()
 	puzzle_pieces.erase(piece_id)
 
-	# Update ghost to full green then hide
+	# Flash ghost green then fade out smoothly
 	_update_ghost_color(target.piece_id, true)
 
-	var ghost = ghost_guides.get(target.piece_id)
-	if ghost:
-		# Fade out the ghost by tweening material alpha (not modulate - that's for 2D)
-		var mat = ghost.material_override as StandardMaterial3D
-		if mat:
-			var ghost_tween = create_tween()
-			ghost_tween.tween_property(mat, "albedo_color:a", 0.0, 0.5)
-			ghost_tween.tween_callback(func(): ghost.visible = false)
-		else:
-			ghost.visible = false
+	var ghost_node = ghost_guides.get(target.piece_id)
+	if ghost_node:
+		# Pulse then shrink away
+		var ghost_tween = create_tween()
+		ghost_tween.tween_property(ghost_node, "scale", Vector3.ONE * 1.1, 0.1)
+		ghost_tween.tween_property(ghost_node, "scale", Vector3.ZERO, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		ghost_tween.tween_callback(func(): ghost_node.visible = false)
 
 	# Emit signal
 	piece_at_target.emit(target.piece_id)
@@ -555,15 +586,24 @@ func _update_ghost_color(piece_id: String, is_close: bool) -> void:
 	if not show_proximity_feedback:
 		return
 
-	var ghost = ghost_guides.get(piece_id)
-	if ghost and ghost.material_override:
-		var mat = ghost.material_override as StandardMaterial3D
-		if mat:
-			var color = close_color if is_close else ghost_color
-			mat.albedo_color = color
-			mat.emission = Color(color.r, color.g, color.b, 1.0)
-			# Increase emission when matched
-			mat.emission_energy_multiplier = 1.5 if is_close else ghost_emission_energy
+	var ghost_node = ghost_guides.get(piece_id)
+	if not ghost_node:
+		return
+	
+	var color = close_color if is_close else ghost_color
+	var emission_mult = 2.0 if is_close else ghost_emission_energy
+	
+	# Update both body and edge materials
+	for child in ghost_node.get_children():
+		if child is MeshInstance3D and child.material_override:
+			var mat = child.material_override as StandardMaterial3D
+			if mat:
+				mat.emission = Color(color.r, color.g, color.b, 1.0)
+				mat.emission_energy_multiplier = emission_mult
+				if child.name == "GhostBody":
+					mat.albedo_color = Color(color.r, color.g, color.b, ghost_alpha * 0.5)
+				else:
+					mat.albedo_color = Color(color.r, color.g, color.b, ghost_alpha)
 
 
 ## Update ghost color with smooth gradient based on proximity distance
@@ -571,15 +611,25 @@ func _update_ghost_proximity_gradient(piece_id: String, proximity: float) -> voi
 	if not show_proximity_feedback:
 		return
 
-	var ghost = ghost_guides.get(piece_id)
-	if ghost and ghost.material_override:
-		var mat = ghost.material_override as StandardMaterial3D
-		if mat:
-			# proximity is 0-1, where 1 = at target, 0 = far away
-			var color = ghost_color.lerp(close_color, proximity)
-			mat.albedo_color = color
-			mat.emission = Color(color.r, color.g, color.b, 1.0)
-			mat.emission_energy_multiplier = lerp(ghost_emission_energy, 1.5, proximity)
+	var ghost_node = ghost_guides.get(piece_id)
+	if not ghost_node:
+		return
+	
+	# proximity is 0-1, where 1 = at target, 0 = far away
+	var color = ghost_color.lerp(close_color, proximity)
+	var emission_mult = lerp(ghost_emission_energy, 2.5, proximity)
+	
+	# Update both body and edge materials
+	for child in ghost_node.get_children():
+		if child is MeshInstance3D and child.material_override:
+			var mat = child.material_override as StandardMaterial3D
+			if mat:
+				mat.emission = Color(color.r, color.g, color.b, 1.0)
+				mat.emission_energy_multiplier = emission_mult
+				if child.name == "GhostBody":
+					mat.albedo_color = Color(color.r, color.g, color.b, ghost_alpha * 0.5 * (0.5 + proximity * 0.5))
+				else:
+					mat.albedo_color = Color(color.r, color.g, color.b, ghost_alpha * (0.5 + proximity * 0.5))
 
 
 ## Called when a piece's scale changes
@@ -594,7 +644,7 @@ func _on_piece_dropped(_pickable, piece_id: String) -> void:
 	_validate_all_pieces()
 
 
-## Complete the puzzle
+## Complete the puzzle - clean Alyx-style (no text)
 func _complete_puzzle() -> void:
 	if is_completed:
 		return
@@ -604,10 +654,13 @@ func _complete_puzzle() -> void:
 
 	print("TransformPuzzleBase: Puzzle completed!")
 
+	# Play completion pulse on all ghosts
+	_play_completion_pulse()
+
 	# Play completion sound
 	_play_completion_sound()
 
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.3).timeout
 
 	# Snap all pieces to exact target positions
 	_snap_pieces_to_targets()
@@ -618,9 +671,8 @@ func _complete_puzzle() -> void:
 
 	current_state = PuzzleState.LOCKED
 
-	# Hide ghost guides
-	if ghost_container:
-		ghost_container.visible = false
+	# Fade out ghost guides smoothly
+	_fade_out_ghosts()
 
 	# Trigger tag action
 	if trigger_tag != "":
@@ -628,19 +680,43 @@ func _complete_puzzle() -> void:
 		print("TransformPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, action])
 		TagSystem.trigger_tag_action(trigger_tag, action)
 
-	# Show success message
-	if success_label:
-		success_label.visible = true
-		success_label.global_position = global_position + Vector3(0, 0.5, 0)
-		await get_tree().create_timer(success_display_duration).timeout
-		if success_label:
-			success_label.visible = false
-
 	current_state = PuzzleState.COMPLETED
 
 	# Emit signals
 	all_pieces_aligned.emit()
 	puzzle_completed.emit()
+
+
+## Play completion pulse effect on all pieces
+func _play_completion_pulse() -> void:
+	for ghost_id in ghost_guides:
+		var ghost_node = ghost_guides[ghost_id]
+		if not is_instance_valid(ghost_node):
+			continue
+		
+		for child in ghost_node.get_children():
+			if child is MeshInstance3D and child.material_override:
+				var mat = child.material_override as StandardMaterial3D
+				if mat:
+					var tween = create_tween()
+					tween.tween_property(mat, "emission", completion_pulse_color, 0.15)
+					tween.tween_property(mat, "emission_energy_multiplier", 4.0, 0.15)
+					tween.tween_property(mat, "emission_energy_multiplier", ghost_emission_energy, 0.3)
+
+
+## Fade out ghosts smoothly
+func _fade_out_ghosts() -> void:
+	if not ghost_container:
+		return
+	
+	for ghost_id in ghost_guides:
+		var ghost_node = ghost_guides[ghost_id]
+		if not is_instance_valid(ghost_node):
+			continue
+		
+		var tween = create_tween()
+		tween.tween_property(ghost_node, "scale", Vector3.ZERO, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		tween.tween_callback(func(): ghost_node.visible = false)
 
 
 ## Snap all pieces to their exact target positions
@@ -701,7 +777,7 @@ func _lock_all_pieces() -> void:
 			piece.enabled = false
 
 
-## Play completion sound
+## Play completion sound - subtle confirmation
 func _play_completion_sound() -> void:
 	if not has_node("/root/SoundBank"):
 		return
@@ -714,16 +790,22 @@ func _play_completion_sound() -> void:
 
 	var player = AudioStreamPlayer3D.new()
 	player.stream = sound_stream
-	player.volume_db = 0.0
-	player.max_distance = 20.0
+	player.volume_db = -6.0  # Quieter
+	player.max_distance = 15.0
 	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
 	add_child(player)
-	# Set position after adding to tree
 	if is_inside_tree():
 		player.global_position = global_position
 
 	player.finished.connect(player.queue_free)
 	player.play()
+	
+	# Limit duration
+	get_tree().create_timer(2.0).timeout.connect(func():
+		if is_instance_valid(player):
+			player.stop()
+			player.queue_free()
+	)
 
 
 ## Reset the puzzle

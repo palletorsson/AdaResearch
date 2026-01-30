@@ -31,6 +31,14 @@ const MANIFEST_PATH = "res://commons/audio/presets_manifest.json"
 var audio_buses_initialized: bool = false
 var active_buses: Dictionary = {}
 
+# Map transition state
+var _is_transitioning: bool = false
+var _paused_players: Array = []
+
+# Current ambient tracking (survives scene changes)
+var current_ambient_preset: String = ""
+var current_ambient_controller: Node = null  # Weak reference via instance_id
+
 func _ready():
 	print("🎵 SoundBankSingleton initializing...")
 	generation_mutex = Mutex.new()
@@ -41,9 +49,77 @@ func _ready():
 
 	# Pre-generate common sounds (lazy loading by default)
 	# Specific sounds are generated on-demand
+	
+	# Connect to scene manager signals for pause during transitions
+	call_deferred("_connect_scene_manager_signals")
 
 	print("✅ SoundBankSingleton ready")
 	sound_bank_ready.emit()
+
+func _connect_scene_manager_signals():
+	# Try to find SceneManager and connect to transition signals
+	var scene_manager = get_node_or_null("/root/SceneManager")
+	if scene_manager:
+		if scene_manager.has_signal("scene_transition_started"):
+			if not scene_manager.scene_transition_started.is_connected(_on_scene_transition_started):
+				scene_manager.scene_transition_started.connect(_on_scene_transition_started)
+				print("SoundBank: Connected to scene_transition_started")
+		if scene_manager.has_signal("scene_transition_completed"):
+			if not scene_manager.scene_transition_completed.is_connected(_on_scene_transition_completed):
+				scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
+				print("SoundBank: Connected to scene_transition_completed")
+	else:
+		print("SoundBank: SceneManager not found, will retry...")
+		# Retry after a short delay
+		await get_tree().create_timer(1.0).timeout
+		_connect_scene_manager_signals()
+
+func _on_scene_transition_started(_from_scene: String, _to_scene: String, _transition_type):
+	"""Track transition state - actual pause handled by AmbientSoundController"""
+	_is_transitioning = true
+
+func _on_scene_transition_completed(_scene_name: String, _user_data: Dictionary):
+	"""Track transition state - actual resume handled by AmbientSoundController"""
+	_is_transitioning = false
+
+func pause_all_music():
+	"""Pause tracked music players (called by AmbientSoundController if needed)"""
+	for player in _paused_players:
+		if is_instance_valid(player) and player.playing:
+			player.stream_paused = true
+
+func resume_all_music():
+	"""Resume tracked music players"""
+	for player in _paused_players:
+		if is_instance_valid(player):
+			player.stream_paused = false
+	_paused_players.clear()
+
+func register_music_player(player: Node):
+	"""Register a player for pause/resume tracking (avoids tree walk)"""
+	if player not in _paused_players:
+		_paused_players.append(player)
+
+func unregister_music_player(player: Node):
+	"""Unregister a player from tracking"""
+	_paused_players.erase(player)
+
+func set_current_ambient(preset_name: String, controller: Node = null):
+	"""Track the currently playing ambient preset"""
+	current_ambient_preset = preset_name
+	current_ambient_controller = controller
+
+func get_current_ambient() -> String:
+	"""Get the currently playing ambient preset name"""
+	return current_ambient_preset
+
+func is_ambient_playing(preset_name: String) -> bool:
+	"""Check if a specific ambient preset is currently playing/paused"""
+	return current_ambient_preset == preset_name and _is_transitioning
+
+func should_skip_generation(preset_name: String) -> bool:
+	"""Check if we should skip generation (same preset during transition)"""
+	return preset_name == current_ambient_preset and _is_transitioning
 
 func _exit_tree():
 	# Clean up thread if running
@@ -133,8 +209,8 @@ func get_sound(sound_id: String) -> AudioStream:
 		sound_generated.emit(sound_id)
 		return sound
 	else:
-		# Check if it supports async generation (only pop songs for now)
-		if sound_id.contains("POP_INTERACTIVE_SONG"):
+		# Check if it supports async generation (interactive songs)
+		if sound_id.contains("POP_INTERACTIVE_SONG") or sound_id.contains("AMBIENT_WORKS_SONG") or sound_id.contains("PROG_SYNTH_SONG"):
 			print("SoundBank: Triggering async generation for ", sound_id)
 			_request_async_generation(sound_id)
 			return null # Caller must listen to sound_generated signal
@@ -143,21 +219,30 @@ func get_sound(sound_id: String) -> AudioStream:
 		return null
 
 func _request_async_generation(sound_id: String):
+	# Store the sound_id for callback
+	_pending_async_id = sound_id
+	
 	if sound_id.contains("POP_INTERACTIVE_SONG"):
 		AudioSynthesizer.generate_pop_song_async({}, self, "_on_async_sound_ready")
 	elif sound_id.contains("AMBIENT_WORKS_SONG"):
-		AudioSynthesizer.generate_pop_song_async({"type": "AMBIENT"}, self, "_on_async_sound_ready") # Reusing generation thread wrapper
+		AudioSynthesizer.generate_pop_song_async({"type": "AMBIENT"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("PROG_SYNTH_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "PROG_SYNTH"}, self, "_on_async_sound_ready")
+
+var _pending_async_id: String = ""
 
 func _on_async_sound_ready(stream: AudioStream):
-	# Assuming single active generation for now, mapped to the ID
-	# TODO: Pass ID through callback for robustness
-	var sound_id = "AudioSynthesizer.POP_INTERACTIVE_SONG" # Hardcoded fallback matches current usage
+	# Use tracked pending ID
+	var sound_id = _pending_async_id if not _pending_async_id.is_empty() else "AudioSynthesizer.POP_INTERACTIVE_SONG"
+	
 	if stream:
 		sound_registry[sound_id] = stream
 		print("SoundBank: Async sound ready: ", sound_id)
 		sound_generated.emit(sound_id)
 	else:
-		print("SoundBank: Async generation failed")
+		print("SoundBank: Async generation failed for: ", sound_id)
+	
+	_pending_async_id = ""
 
 func _generate_sound(sound_id: String) -> AudioStream:
 	"""Generate a sound based on its ID"""
@@ -270,6 +355,7 @@ func _string_to_sound_type(sound_name: String):
 		"APHEX_TWIN_GLITCH": return AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR
 		"TELEPORT_WHOOSH": return AudioSynthesizer.SoundType.TELEPORT_DRONE
 		"POP_INTERACTIVE_SONG": return AudioSynthesizer.SoundType.POP_INTERACTIVE_SONG
+		"PROG_SYNTH_SONG": return AudioSynthesizer.SoundType.PROG_SYNTH_SONG
 		_:
 			return null
 

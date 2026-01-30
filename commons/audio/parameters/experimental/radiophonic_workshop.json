@@ -1,0 +1,60 @@
+{
+    "_metadata": {
+        "sound_type": "radiophonic_workshop",
+        "display_name": "Radiophonic Workshop",
+        "description": "BBC Radiophonic Workshop style - Delia Derbyshire, Doctor Who era. Ring modulation, tape loops, oscillator sweeps.",
+        "category": "experimental",
+        "tags": ["delia_derbyshire", "bbc", "tape", "ring_mod", "doctor_who", "musique_concrete"]
+    },
+    "parameters": {
+        "ring_mod_carrier_hz": {
+            "min": 200.0,
+            "max": 2000.0,
+            "value": 800.0,
+            "step": 10.0,
+            "description": "Ring modulator carrier frequency"
+        },
+        "ring_mod_modulator_hz": {
+            "min": 20.0,
+            "max": 500.0,
+            "value": 120.0,
+            "step": 5.0,
+            "description": "Ring modulator modulation frequency"
+        },
+        "swoop_min_hz": {
+            "min": 20.0,
+            "max": 200.0,
+            "value": 50.0,
+            "step": 5.0,
+            "description": "Oscillator swoop minimum frequency"
+        },
+        "swoop_max_hz": {
+            "min": 500.0,
+            "max": 4000.0,
+            "value": 2000.0,
+            "step": 50.0,
+            "description": "Oscillator swoop maximum frequency"
+        },
+        "swoop_duration": {
+            "min": 0.5,
+            "max": 5.0,
+            "value": 2.0,
+            "step": 0.1,
+            "description": "Duration of frequency sweep"
+        },
+        "tape_warble": {
+            "min": 0.0,
+            "max": 0.1,
+            "value": 0.02,
+            "step": 0.005,
+            "description": "Tape speed variation amount"
+        },
+        "duration": {
+            "min": 1.0,
+            "max": 10.0,
+            "value": 4.0,
+            "step": 0.5,
+            "description": "Total duration in seconds"
+        }
+    }
+}

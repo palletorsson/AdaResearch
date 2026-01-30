@@ -1,0 +1,108 @@
+{
+    "name": "Eccojam Drift",
+    "description": "Oneohtrix Point Never / Chuck Person Eccojams-inspired. Slowed loops, heavy reverb, hypnotic repetition, vaporwave nostalgia, time-stretched memories.",
+    "style_notes": {
+        "influences": ["Oneohtrix Point Never", "Chuck Person's Eccojams", "vaporwave", "Replica"],
+        "era": "2010-present",
+        "techniques": [
+            "Extreme time-stretching (0.5x-0.25x speed)",
+            "Heavy reverb and delay",
+            "Loop micro-sampling",
+            "Pitch-shifted nostalgia",
+            "Tape warble emulation"
+        ],
+        "philosophy": "Memories stretched until they dissolve - the ghost in the sample"
+    },
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.SLOWED_LOOP_TEXTURE",
+            "volume_db": -6.0,
+            "bus": "Loop"
+        },
+        {
+            "sound_id": "AudioSynthesizer.NOSTALGIC_PAD",
+            "volume_db": -10.0,
+            "bus": "Pad"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.TAPE_HISS_WARMTH",
+        "volume_db": -16.0,
+        "bus": "Texture",
+        "fade_out_when_ready": true,
+        "fade_duration": 5.0
+    },
+    "random_events": [
+        {
+            "sound_id": "AudioSynthesizer.WARPED_VOCAL_GHOST",
+            "interval_range": [15.0, 40.0],
+            "volume_db": -12.0,
+            "bus": "Loop"
+        },
+        {
+            "sound_id": "AudioSynthesizer.PITCH_DRIFT_MOMENT",
+            "interval_range": [8.0, 20.0],
+            "volume_db": -14.0,
+            "bus": "Pad"
+        }
+    ],
+    "buses": {
+        "Loop": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.95,
+                    "wet": 0.7
+                },
+                {
+                    "type": "Delay",
+                    "delay_ms": 666,
+                    "feedback": 0.6,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Lowpass",
+                    "cutoff_hz": 4000
+                }
+            ]
+        },
+        "Pad": {
+            "effects": [
+                {
+                    "type": "Chorus",
+                    "rate_hz": 0.3,
+                    "depth": 0.6,
+                    "wet": 0.4
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.9,
+                    "wet": 0.6
+                }
+            ]
+        },
+        "Texture": {
+            "effects": [
+                {
+                    "type": "Lowpass",
+                    "cutoff_hz": 2000
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": true
+    },
+    "synthesis_parameters": {
+        "playback_speed": 0.5,
+        "loop_length_beats": 4,
+        "pitch_shift_semitones": -12,
+        "tape_warble_rate_hz": 0.2,
+        "tape_warble_depth_cents": 15,
+        "reverb_pre_delay_ms": 50,
+        "decay_time_seconds": 8.0,
+        "filter_cutoff_modulation": true,
+        "nostalgic_frequency_rolloff_hz": 6000
+    }
+}

@@ -13,6 +13,11 @@ extends XRToolsStaging
 @export var preferred_grid_map: String = "Lab"
 @export var skip_menu: bool = false  # Skip menu and load directly into lab
 
+# Transition speed configuration
+@export var quick_transition_duration: float = 0.3  # Fast fades for in-sequence transitions
+@export var normal_transition_duration: float = 1.0  # Standard VR-comfortable fades
+var _use_quick_transition: bool = false  # Set by AdaSceneManager for in-sequence transitions
+
 # Signal emitted when staging is complete
 signal staging_complete
 
@@ -372,11 +377,8 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 	
 	print("AdaVRStaging: Found grid system: %s" % grid_system.name)
 	
-	# Wait for the grid system to initialize
-	print("AdaVRStaging: Waiting for grid system to initialize...")
+	# Minimal wait - just one frame for node initialization (delay already in load_scene)
 	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().create_timer(0.1).timeout
 	
 	# Configure the grid system to load the specified map
 	var map_name = user_data.get("map_name", "Lab")
@@ -399,6 +401,161 @@ func get_scene_loaded() -> bool:
 func switch_to_scene(scene_path: String, user_data = null):
 	print("AdaVRStaging: Switching to scene: %s" % scene_path)
 	load_scene(scene_path, user_data)
+
+## Override load_scene to support quick transitions for in-sequence map changes
+func load_scene(p_scene_path: String, user_data = null) -> void:
+	# Check if this is an in-sequence transition (same scene type, just different map)
+	var is_in_sequence = user_data is Dictionary and user_data.has("sequence_data")
+	_use_quick_transition = is_in_sequence
+	
+	var fade_duration = quick_transition_duration if _use_quick_transition else normal_transition_duration
+	var tracking_delay = 0.02 if _use_quick_transition else 0.1  # Minimal delay for fast transitions
+	
+	if _use_quick_transition:
+		print("AdaVRStaging: ⚡ Quick transition mode (%.1fs fades)" % fade_duration)
+	
+	# Do not load if in the editor
+	if Engine.is_editor_hint():
+		return
+	if !xr_origin or !xr_camera:
+		return
+	
+	# Start threaded loading - if cached, returns immediately
+	ResourceLoader.load_threaded_request(p_scene_path)
+	
+	# If a current scene exists, fade it out
+	if current_scene:
+		# Call scene methods if they exist (XRToolsSceneBase compatibility)
+		if current_scene.has_method("scene_pre_exiting"):
+			current_scene.scene_pre_exiting(user_data)
+		_safe_remove_signals(current_scene)
+		
+		# Fade to black (quick or normal)
+		if _tween:
+			_tween.kill()
+		_tween = get_tree().create_tween()
+		_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
+		await _tween.finished
+		
+		emit_signal("scene_exiting", current_scene, user_data)
+		if current_scene.has_method("scene_exiting"):
+			current_scene.scene_exiting(user_data)
+		$Scene.remove_child(current_scene)
+		current_scene.queue_free()
+		current_scene = null
+	
+	# Only show loading screen if needed (not for quick transitions with cached scenes)
+	var show_loading = prompt_for_continue or \
+		ResourceLoader.load_threaded_get_status(p_scene_path) != ResourceLoader.THREAD_LOAD_LOADED
+	
+	# Skip loading screen entirely for quick transitions if scene is cached
+	if _use_quick_transition and ResourceLoader.load_threaded_get_status(p_scene_path) == ResourceLoader.THREAD_LOAD_LOADED:
+		show_loading = false
+	
+	if show_loading:
+		xr_origin.set_process_internal(true)
+		xr_origin.current = true
+		xr_camera.current = true
+		$LoadingScreen.progress = 0.0
+		$LoadingScreen.enable_press_to_continue = false
+		$LoadingScreen.follow_camera = true
+		$LoadingScreen.visible = true
+		switching_to_loading_scene.emit(user_data)
+		
+		if _tween:
+			_tween.kill()
+		_tween = get_tree().create_tween()
+		_tween.tween_method(set_fade, 1.0, 0.0, fade_duration)
+		await _tween.finished
+	
+	# Wait for scene to load if not ready
+	if $LoadingScreen.visible:
+		var res: ResourceLoader.ThreadLoadStatus
+		while true:
+			var progress := []
+			res = ResourceLoader.load_threaded_get_status(p_scene_path, progress)
+			if res != ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				break
+			$LoadingScreen.progress = progress[0]
+			await get_tree().create_timer(0.05).timeout  # Faster polling
+		
+		if res != ResourceLoader.THREAD_LOAD_LOADED:
+			push_error("Error ", res, " loading resource ", p_scene_path)
+			breakpoint
+			get_tree().quit(1)
+		
+		if prompt_for_continue and not _use_quick_transition:
+			$LoadingScreen.enable_press_to_continue = true
+			await $LoadingScreen.continue_pressed
+		
+		if _tween:
+			_tween.kill()
+		_tween = get_tree().create_tween()
+		_tween.tween_method(set_fade, 0.0, 1.0, fade_duration)
+		await _tween.finished
+		
+		$LoadingScreen.follow_camera = false
+		$LoadingScreen.visible = false
+		xr_origin.set_process_internal(false)
+	
+	# Instantiate the new scene
+	var new_scene: PackedScene = ResourceLoader.load_threaded_get(p_scene_path)
+	current_scene = new_scene.instantiate()
+	current_scene_path = p_scene_path
+	$Scene.add_child(current_scene)
+	_safe_add_signals(current_scene)
+	
+	# Small delay for VR tracking (shorter for quick transitions)
+	await get_tree().create_timer(tracking_delay).timeout
+	if current_scene.has_method("scene_loaded"):
+		current_scene.scene_loaded(user_data)
+	scene_loaded.emit(current_scene, user_data)
+	
+	# Fade in (quick or normal)
+	if _tween:
+		_tween.kill()
+	_tween = get_tree().create_tween()
+	_tween.tween_method(set_fade, 1.0, 0.0, fade_duration)
+	await _tween.finished
+	
+	# Report scene visible
+	if current_scene.has_method("scene_visible"):
+		current_scene.scene_visible(user_data)
+	scene_visible.emit(current_scene, user_data)
+	
+	# Reset quick transition flag
+	_use_quick_transition = false
+
+# Safe signal helpers for scenes that may not extend XRToolsSceneBase
+func _safe_add_signals(p_scene: Node):
+	"""Add scene signals if they exist"""
+	if p_scene.has_signal("request_exit_to_main_menu"):
+		if not p_scene.request_exit_to_main_menu.is_connected(_on_exit_to_main_menu):
+			p_scene.request_exit_to_main_menu.connect(_on_exit_to_main_menu)
+	if p_scene.has_signal("request_load_scene"):
+		if not p_scene.request_load_scene.is_connected(_on_load_scene):
+			p_scene.request_load_scene.connect(_on_load_scene)
+	if p_scene.has_signal("request_reset_scene"):
+		if not p_scene.request_reset_scene.is_connected(_on_reset_scene):
+			p_scene.request_reset_scene.connect(_on_reset_scene)
+	if p_scene.has_signal("request_quit"):
+		if not p_scene.request_quit.is_connected(_on_quit):
+			p_scene.request_quit.connect(_on_quit)
+
+func _safe_remove_signals(p_scene: Node):
+	"""Remove scene signals if connected"""
+	if p_scene.has_signal("request_exit_to_main_menu"):
+		if p_scene.request_exit_to_main_menu.is_connected(_on_exit_to_main_menu):
+			p_scene.request_exit_to_main_menu.disconnect(_on_exit_to_main_menu)
+	if p_scene.has_signal("request_load_scene"):
+		if p_scene.request_load_scene.is_connected(_on_load_scene):
+			p_scene.request_load_scene.disconnect(_on_load_scene)
+	if p_scene.has_signal("request_reset_scene"):
+		if p_scene.request_reset_scene.is_connected(_on_reset_scene):
+			p_scene.request_reset_scene.disconnect(_on_reset_scene)
+	if p_scene.has_signal("request_quit"):
+		if p_scene.request_quit.is_connected(_on_quit):
+			p_scene.request_quit.disconnect(_on_quit)
 
 # Manager initialization
 func _initialize_managers():

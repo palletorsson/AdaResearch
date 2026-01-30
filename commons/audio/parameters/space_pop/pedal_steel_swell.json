@@ -1,0 +1,12 @@
+{
+  "_metadata": {
+    "sound_type": "pedal_steel_swell",
+    "description": "Country/ambient steel guitar - harmonics with slow volume pedal swell. Atmospheric.",
+    "tags": ["steel", "guitar", "ambient", "country", "swell", "harmonic"]
+  },
+  "parameters": {
+    "root_note": { "min": 40, "max": 72, "value": 52 },
+    "swell_time": { "min": 0.5, "max": 4.0, "value": 1.5 },
+    "duration": { "min": 2.0, "max": 15.0, "value": 6.0 }
+  }
+}

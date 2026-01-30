@@ -1,0 +1,15 @@
+{
+    "_metadata": {
+        "sound_type": "rave_stab",
+        "display_name": "Rave Stab",
+        "description": "The Prodigy style aggressive rave stab. Juno-106 saw + PWM + portamento with distortion - dance music becomes violent.",
+        "category": "pop_edm",
+        "tags": ["rave", "prodigy", "stab", "juno", "aggressive", "90s"]
+    },
+    "parameters": {
+        "root_note": { "min": 55.0, "max": 79.0, "value": 65.0, "step": 1.0 },
+        "aggression": { "min": 0.3, "max": 1.0, "value": 0.7, "step": 0.05 },
+        "stab_rate": { "min": 2.0, "max": 8.0, "value": 4.0, "step": 0.5 },
+        "duration": { "min": 1.0, "max": 8.0, "value": 4.0, "step": 0.5 }
+    }
+}

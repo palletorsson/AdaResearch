@@ -1,0 +1,38 @@
+{
+    "name": "70s Prog Synth",
+    "description": "Progressive rock synthesizer - ELP, Kraftwerk, Yes style. Minimoog bass, screaming leads, motorik drums.",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.PROG_SYNTH_SONG",
+            "volume_db": -3.0,
+            "bus": "Music"
+        }
+    ],
+    "placeholder_layer": {
+        "sound_id": "AudioSynthesizer.MELODIC_DRONE",
+        "volume_db": -8.0,
+        "bus": "Music",
+        "fade_out_when_ready": true,
+        "fade_duration": 3.0
+    },
+    "random_events": [],
+    "buses": {
+        "Music": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.4,
+                    "wet": 0.25
+                },
+                {
+                    "type": "Limiter",
+                    "ceiling_db": -1.0
+                }
+            ]
+        }
+    },
+    "generation": {
+        "async": true,
+        "persist_across_maps": true
+    }
+}

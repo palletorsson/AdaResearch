@@ -45,6 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 equation = ["point", "plus", "point", "plus", "point", "equals", "triangle"]
 
 [node name="PuzzleBoundary" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.85, 0)
 material_override = SubResource("StandardMaterial3D_boundary")
 mesh = SubResource("SphereMesh_boundary")

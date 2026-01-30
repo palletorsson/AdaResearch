@@ -81,6 +81,61 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_heartbeat(data, sample_count, params)
 		AudioSynthesizer.SoundType.LAB_HUM:
 			generate_custom_lab_hum(data, sample_count, params)
+		# Experimental / Algorithmic - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.RADIOPHONIC_WORKSHOP:
+			AudioSynthesizer._generate_radiophonic_workshop(data, sample_count, params)
+		AudioSynthesizer.SoundType.XENAKIS_STOCHASTIC:
+			AudioSynthesizer._generate_xenakis_stochastic(data, sample_count, params)
+		AudioSynthesizer.SoundType.SPIEGEL_INTELLIGENT:
+			AudioSynthesizer._generate_spiegel_intelligent(data, sample_count, params)
+		AudioSynthesizer.SoundType.AUTECHRE_FLUTTER:
+			AudioSynthesizer._generate_autechre_flutter(data, sample_count, params)
+		AudioSynthesizer.SoundType.IKEDA_DATAPLEX:
+			AudioSynthesizer._generate_ikeda_dataplex(data, sample_count, params)
+		AudioSynthesizer.SoundType.ECCOJAM_DRIFT:
+			AudioSynthesizer._generate_eccojam_drift(data, sample_count, params)
+		AudioSynthesizer.SoundType.CELLULAR_AUTOMATA:
+			AudioSynthesizer._generate_cellular_automata(data, sample_count, params)
+		# Pop & EDM - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.MORODER_DISCO_BASS:
+			AudioSynthesizer._generate_moroder_disco_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.PROPHET_PAD:
+			AudioSynthesizer._generate_prophet_pad(data, sample_count, params)
+		AudioSynthesizer.SoundType.PRINCE_SYNC_LEAD:
+			AudioSynthesizer._generate_prince_sync_lead(data, sample_count, params)
+		AudioSynthesizer.SoundType.ELECTRO_808:
+			AudioSynthesizer._generate_electro_808(data, sample_count, params)
+		AudioSynthesizer.SoundType.DETROIT_TECHNO:
+			AudioSynthesizer._generate_detroit_techno(data, sample_count, params)
+		AudioSynthesizer.SoundType.HOUSE_ORGAN:
+			AudioSynthesizer._generate_house_organ(data, sample_count, params)
+		AudioSynthesizer.SoundType.RAVE_STAB:
+			AudioSynthesizer._generate_rave_stab(data, sample_count, params)
+		AudioSynthesizer.SoundType.SUPERSAW_PROGRESSIVE:
+			AudioSynthesizer._generate_supersaw_progressive(data, sample_count, params)
+		AudioSynthesizer.SoundType.WOBBLE_BASS:
+			AudioSynthesizer._generate_wobble_bass(data, sample_count, params)
+		AudioSynthesizer.SoundType.SYNTHWAVE_LEAD:
+			AudioSynthesizer._generate_synthwave_lead(data, sample_count, params)
+		# Space Dystopia Soundscape Pop - route to AudioSynthesizer
+		AudioSynthesizer.SoundType.SPACE_CHOIR_PAD:
+			AudioSynthesizer._generate_space_choir_pad(data, sample_count, params)
+		AudioSynthesizer.SoundType.CINEMATIC_STRINGS:
+			AudioSynthesizer._generate_cinematic_strings(data, sample_count, params)
+		AudioSynthesizer.SoundType.INDUSTRIAL_CLANK:
+			AudioSynthesizer._generate_industrial_clank(data, sample_count, params)
+		AudioSynthesizer.SoundType.RAIN_ATMOSPHERE:
+			AudioSynthesizer._generate_rain_atmosphere(data, sample_count, params)
+		AudioSynthesizer.SoundType.WAVETABLE_MORPH:
+			AudioSynthesizer._generate_wavetable_morph(data, sample_count, params)
+		AudioSynthesizer.SoundType.PEDAL_STEEL_SWELL:
+			AudioSynthesizer._generate_pedal_steel_swell(data, sample_count, params)
+		AudioSynthesizer.SoundType.GLITCH_CHAOS:
+			AudioSynthesizer._generate_glitch_chaos(data, sample_count, params)
+		AudioSynthesizer.SoundType.NOIR_SAX_BREATH:
+			AudioSynthesizer._generate_noir_sax_breath(data, sample_count, params)
+		AudioSynthesizer.SoundType.SPACE_SUB_DRONE:
+			AudioSynthesizer._generate_space_sub_drone(data, sample_count, params)
 
 	return create_audio_stream(data)
 
