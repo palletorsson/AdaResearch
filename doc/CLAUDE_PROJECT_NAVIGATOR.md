@@ -163,10 +163,13 @@ GridSystem.gd                    → Master orchestrator
 ├── GridUtilitiesComponent.gd    → Teleporters, labels, mechanics
 ├── GridSpawnComponent.gd        → Player positioning
 ├── GridCeilingComponent.gd      → Sky dome
-└── GridAudioComponent.gd        → Spatial sound
+├── GridAudioComponent.gd        → Spatial sound
+└── UtilityRegistry.gd           → Single source of truth for utility types
 ```
 
-**Key Reference:** `GRID_CONFIG_SYNTAX_GUIDE.md`
+**Key References:** 
+- `GRID_CONFIG_SYNTAX_GUIDE.md`
+- `UtilityRegistry.gd` - Authoritative utility type definitions
 
 ### 1.2 Map/Sequence System (The Curriculum)
 **Location:** `commons/maps/`
@@ -176,10 +179,16 @@ Hierarchical learning progressions.
 ```
 commons/maps/
 ├── map_sequences.json           → Master sequence registry
-├── sequences/                   → 33 sequence definitions
-│   ├── fractals.json           → Maps: Fractals_1 through Fractals_10
-│   ├── randomness.json         → 13 maps on entropy/noise
-│   └── ...                     → 31 more sequences
+├── sequences/                   → 40+ sequence definitions
+│   ├── primitives.json         → Core geometry (13 maps)
+│   ├── randomness.json         → Entropy/noise (13 maps)
+│   ├── fractals.json           → Self-similarity (10 maps)
+│   ├── wavefunctions.json      → Audio/signal processing
+│   ├── proceduralaudio.json    → Generative music
+│   ├── cellularautomata.json   → Pattern generation
+│   ├── lsystems.json           → Grammar-based growth
+│   ├── machinelearning.json    → AI/ML concepts
+│   └── ...                     → 30+ more sequences
 └── {MapName}/                   → Individual map folders
 	├── map_data.json           → 3-layer structure (INFRASTRUCTURE)
 	├── blurb.md                → Short poetic summary
@@ -350,28 +359,49 @@ Scene instantiated, positioned, configured
 ```
 Map loaded
 	↓
-Sequence definition checked for audio config
+GridAudioComponent checks sequence/map audio config
 	↓
-AmbientSoundController.set_ambient_preset(preset_name)
+AmbientSoundController.load_preset(preset_name)
 	↓
-SoundBankSingleton loads parameters from:
-  commons/audio/parameters/{category}/{preset}.json
+Fast path: All sounds cached? → Start immediately
 	↓
-Spatial audio positioned in scene
+Slow path: AsyncAudioGenerator spawns background thread
+	↓
+SoundBankSingleton loads/generates sounds from:
+  - commons/audio/presets/{preset}.json (preset definition)
+  - commons/audio/parameters/{category}/{sound}.json (sound params)
+	↓
+On scene transition: Audio pauses, resumes with same preset
 ```
+
+**Key Audio Components:**
+- `SoundBankSingleton.gd` - Central sound registry and generation
+- `AmbientSoundController.gd` - Per-map ambient management, pause/resume
+- `AsyncAudioGenerator.gd` - Background thread generation (prevents blocking)
+- `GridAudioComponent.gd` - Connects maps to audio system
+
+**Audio Guide:** `commons/audio/SOUND_SYSTEM_GUIDE.md`
 
 ---
 
 ## Level 4: File Locations Index
 
-### Managers (Singletons)
+### Managers (Singletons/Autoloads)
 | Manager | File | Purpose |
 |---------|------|---------|
 | AdaSceneManager | `commons/managers/AdaSceneManager.gd` | Scene transitions, sequence control |
 | GridArtifactRegistry | `commons/managers/GridArtifactRegistry.gd` | Artifact name → scene lookup |
 | JsonMapLoader | `commons/managers/JsonMapLoader.gd` | Map JSON parsing |
-| SoundBankSingleton | `commons/audio/SoundBankSingleton.gd` | Centralized audio |
-| GameManager | `commons/managers/GameManager.gd` | Game state |
+| SoundBankSingleton | `commons/audio/SoundBankSingleton.gd` | Sound registry, generation, caching |
+| MapProgressionManager | `commons/managers/MapProgressionManager.gd` | Sequence/map progression tracking |
+| GameManager | `commons/managers/GameManager.gd` | Game state, scoring |
+
+### Audio Components (Non-singleton)
+| Component | File | Purpose |
+|-----------|------|---------|
+| AmbientSoundController | `commons/audio/AmbientSoundController.gd` | Per-map ambient, pause/resume |
+| AsyncAudioGenerator | `commons/audio/AsyncAudioGenerator.gd` | Background thread generation |
+| GridAudioComponent | `commons/grid/GridAudioComponent.gd` | Map ↔ audio integration |
 
 ### Grid Components
 | Component | File | Responsibility |
@@ -382,17 +412,23 @@ Spatial audio positioned in scene
 | GridInteractablesComponent | `commons/grid/GridInteractablesComponent.gd` | Object spawning |
 | GridUtilitiesComponent | `commons/grid/GridUtilitiesComponent.gd` | Mechanics |
 | GridSpawnComponent | `commons/grid/GridSpawnComponent.gd` | Player spawn |
+| GridAudioComponent | `commons/grid/GridAudioComponent.gd` | Audio integration |
+| GridCeilingComponent | `commons/grid/GridCeilingComponent.gd` | Sky dome |
+| UtilityRegistry | `commons/grid/UtilityRegistry.gd` | Utility type definitions (SSOT) |
 
 ### Key Data Files
 | Data | Location |
 |------|----------|
-| All sequences | `commons/maps/sequences/*.json` |
+| All sequences | `commons/maps/sequences/*.json` (40+ files) |
 | Sequence registry | `commons/maps/map_sequences.json` |
 | Artifact registry (legacy) | `commons/artifacts/grid_artifacts.json` |
 | Artifact registries (modular) | `commons/artifacts/registry/*.json` |
-| Audio presets | `commons/audio/ambient_presets.json` |
+| Utility registry | `commons/grid/UtilityRegistry.gd` |
+| Audio preset manifest | `commons/audio/presets_manifest.json` |
+| Audio presets | `commons/audio/presets/*.json` |
 | Sound parameters | `commons/audio/parameters/**/*.json` |
-| Tutorial texts | `commons/context/clipboard/tutorial_text/*.md` |
+| Tutorial texts | `commons/context/clipboard/tutorial_text/*.gd` |
+| Tutorial index | `commons/context/clipboard/tutorial_text.json` |
 
 ### Scene Templates
 | Scene | Location | Purpose |
@@ -400,7 +436,13 @@ Spatial audio positioned in scene
 | Grid (VR) | `commons/scenes/grid.tscn` | Standard VR map |
 | Grid (Desktop) | `commons/scenes/grid_desktop.tscn` | Desktop variant |
 | Lab | `commons/scenes/lab.tscn` | Hub environment |
-| VR Staging | `commons/scenes/vr_staging.tscn` | VR initialization |
+| VR Staging | `commons/scenes/vrStaging.tscn` + `.gd` | VR initialization, loading screens |
+
+**VR Staging Features:**
+- Threaded scene preloading
+- Loading screen with progress bar
+- Quick transition mode (0.3s fades) for in-sequence teleports
+- Normal transition mode (1.0s fades) for comfort
 
 ---
 
@@ -496,11 +538,14 @@ ls commons/grid/Grid*.gd
 | System | Critical File | Why |
 |--------|--------------|-----|
 | Grid | `GridSystem.gd` | Orchestrates all components |
+| Utilities | `UtilityRegistry.gd` | Single source of truth for utility types |
 | Maps | Any `map_data.json` | Shows 3-layer structure |
-| Sequences | `fractals.json` | Complete sequence example |
+| Sequences | `primitives.json` | Complete sequence example |
 | Artifacts | `grid_artifacts.json` | Master artifact registry |
 | Managers | `AdaSceneManager.gd` | Scene transition logic |
 | Audio | `SoundBankSingleton.gd` | Audio system entry point |
+| Audio Guide | `SOUND_SYSTEM_GUIDE.md` | Full audio documentation |
+| Playing Guide | `CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md` | How to navigate maps |
 
 ---
 
@@ -535,6 +580,9 @@ ls commons/grid/Grid*.gd
 | Add audio to a map | `commons/maps/sequences/{name}.json` → `audio` field |
 | Create tutorial content | `commons/context/clipboard/tutorial_text/` |
 | Test a map | `commons/scenes/desktop_map_tester.tscn` |
+| Play the game (text) | `CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md` |
+| Understand audio system | `commons/audio/SOUND_SYSTEM_GUIDE.md` |
+| Preview sounds | `commons/audio/catalog/SongPreviewDesktop.tscn` |
 
 ---
 

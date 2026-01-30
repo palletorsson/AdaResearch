@@ -1,15 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx7n8m5p4qjek"]
+[gd_scene load_steps=4 format=3 uid="uid://bx7n8m5p4qjek"]
 
-[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_sphere"]
-[ext_resource type="Script" path="res://commons/primitives/spheres/laser_exploding_sphere.gd" id="2_sphere"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphere"]
-albedo_color = Color(1.0, 0.3, 0.2, 1)
-metallic = 0.4
-roughness = 0.3
-emission_enabled = true
-emission = Color(1.0, 0.2, 0.1, 1)
-emission_energy_multiplier = 0.5
+[ext_resource type="Script" path="res://commons/primitives/spheres/laser_exploding_sphere.gd" id="1_sphere"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sphere"]
 radius = 0.1
@@ -20,19 +11,26 @@ height = 0.2
 radial_segments = 16
 rings = 12
 
-[node name="LaserExplodingSphere" instance=ExtResource("1_sphere")]
-collision_layer = 524289
-collision_mask = 2147483663
-script = ExtResource("2_sphere")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphere"]
+albedo_color = Color(1.0, 0.3, 0.2, 1)
+metallic = 0.4
+roughness = 0.3
+emission_enabled = true
+emission = Color(1.0, 0.2, 0.1, 1)
+emission_energy_multiplier = 0.5
+
+[node name="LaserExplodingSphere" type="StaticBody3D"]
+collision_layer = 1048576
+collision_mask = 0
+script = ExtResource("1_sphere")
 explosion_particle_count = 40
 explosion_speed = 2.5
 explosion_lifetime = 1.2
 explosion_color = Color(1, 0.5, 0.1, 1)
-ranged_grab_method = 0
 
-[node name="CollisionShape3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_sphere")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_main")
-material_override = SubResource("StandardMaterial3D_sphere")
+surface_material_override/0 = SubResource("StandardMaterial3D_sphere")

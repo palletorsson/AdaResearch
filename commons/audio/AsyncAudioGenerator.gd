@@ -229,19 +229,34 @@ func _thread_generate_sounds() -> void:
 
 func _call_deferred_emit(signal_name: String, args: Array) -> void:
 	"""Helper to emit signals from thread via call_deferred"""
-	# We need a way to emit signals from the thread
-	# Since this is a RefCounted, we use a workaround
+	# Must use call_deferred to emit signals from background thread
 	match signal_name:
 		"generation_started":
-			generation_started.emit(args[0])
+			call_deferred("_emit_generation_started", args[0])
 		"generation_progress":
-			generation_progress.emit(args[0], args[1])
+			call_deferred("_emit_generation_progress", args[0], args[1])
 		"generation_complete":
-			generation_complete.emit(args[0], args[1])
+			call_deferred("_emit_generation_complete", args[0], args[1])
 		"generation_failed":
-			generation_failed.emit(args[0], args[1])
+			call_deferred("_emit_generation_failed", args[0], args[1])
 		"all_generations_complete":
-			all_generations_complete.emit()
+			call_deferred("_emit_all_generations_complete")
+
+# Deferred emission helpers (called on main thread)
+func _emit_generation_started(sound_id: String) -> void:
+	generation_started.emit(sound_id)
+
+func _emit_generation_progress(sound_id: String, progress: float) -> void:
+	generation_progress.emit(sound_id, progress)
+
+func _emit_generation_complete(sound_id: String, stream: AudioStream) -> void:
+	generation_complete.emit(sound_id, stream)
+
+func _emit_generation_failed(sound_id: String, error: String) -> void:
+	generation_failed.emit(sound_id, error)
+
+func _emit_all_generations_complete() -> void:
+	all_generations_complete.emit()
 
 
 # ============================================================================

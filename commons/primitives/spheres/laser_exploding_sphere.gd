@@ -1,8 +1,8 @@
 @tool
-extends XRToolsPickable
+extends StaticBody3D
 
 ## Laser Exploding Sphere
-## A grabbable sphere that explodes and disappears when hit by a laser pointer
+## A simple sphere that explodes and disappears when hit by a laser pointer
 
 @export var explosion_particle_count: int = 30
 @export var explosion_speed: float = 2.0
@@ -17,38 +17,16 @@ var _is_exploding: bool = false
 var _explosion_particles: Array[Node3D] = []
 
 func _ready() -> void:
-	super()
-
-	# Add to group for laser detection
-	add_to_group("laser_destructible")
+	# Debug: Print collision layer
+	print("LaserExplodingSphere _ready:")
+	print("  collision_layer = ", collision_layer)
+	print("  collision_mask = ", collision_mask)
+	print("  Layer 21 bit value = ", pow(2, 20))
+	print("  Has layer 21? ", (collision_layer & int(pow(2, 20))) != 0)
 
 	# Setup explosion audio
 	_setup_explosion_audio()
 
-	# Setup laser detection area
-	call_deferred("_setup_laser_detection_area")
-
-func _setup_laser_detection_area() -> void:
-	# Create an Area3D to detect laser pointer hits
-	var detection_area = Area3D.new()
-	detection_area.name = "LaserDetectionArea"
-	detection_area.collision_layer = 0
-	detection_area.collision_mask = 32  # Layer 6 for laser pointers
-	detection_area.monitoring = true
-	detection_area.monitorable = true
-
-	# Create collision shape for the area
-	var collision_shape = CollisionShape3D.new()
-	var sphere_shape = SphereShape3D.new()
-	sphere_shape.radius = 0.12  # Slightly larger than the sphere for easier hits
-	collision_shape.shape = sphere_shape
-
-	detection_area.add_child(collision_shape)
-	add_child(detection_area)
-
-	# Connect signals
-	detection_area.body_entered.connect(_on_detection_body_entered)
-	detection_area.area_entered.connect(_on_detection_area_entered)
 
 func _setup_explosion_audio() -> void:
 	var explosion_stream = _build_explosion_stream()
@@ -88,6 +66,7 @@ func _build_explosion_stream() -> AudioStreamWAV:
 	return stream
 
 ## Called when the sphere is hit (by laser or other area)
+## This can be called directly by the laser pointer's raycast
 func hit_by_laser() -> void:
 	if _is_exploding:
 		return
@@ -95,15 +74,33 @@ func hit_by_laser() -> void:
 	print("LaserExplodingSphere: Hit by laser, exploding!")
 	_explode()
 
-func _on_detection_area_entered(area: Area3D) -> void:
-	# Check if the area is from a laser pointer
-	if area.is_in_group("laser_pointer") or area.name.contains("Pointer") or area.name.contains("Ray"):
-		hit_by_laser()
+## Alternative: Called when pointer action is triggered while pointing at this object
+func pointer_pressed(at_position: Vector3) -> void:
+	print("LaserExplodingSphere: Pointer pressed, exploding!")
+	hit_by_laser()
 
-func _on_detection_body_entered(body: Node3D) -> void:
-	# Alternative detection method via body collision
-	if body.is_in_group("laser_pointer") or body.name.contains("Pointer") or body.name.contains("Ray"):
+## Alternative: Called by function pointer on click
+func action() -> void:
+	print("LaserExplodingSphere: Action triggered, exploding!")
+	hit_by_laser()
+
+## Called by XR Tools pointer system when pointer events occur
+func pointer_event(event) -> void:
+	var event_type = event.event_type
+	print("LaserExplodingSphere: pointer_event called! event_type = ", event_type, " (type: ", typeof(event_type), ")")
+	print("  Checking if event_type == 0: ", (event_type == 0))
+
+	# Explode when laser enters (touches) the sphere
+	if event_type == 0:  # XRToolsPointerEvent.Type.ENTERED = 0
+		print(">>> LaserExplodingSphere: Laser touched sphere, EXPLODING NOW!")
 		hit_by_laser()
+	# Also support trigger click if it works
+	elif event_type == 2:  # XRToolsPointerEvent.Type.PRESSED = 2
+		print(">>> LaserExplodingSphere: Pointer event (PRESSED), EXPLODING NOW!")
+		hit_by_laser()
+	else:
+		print("  Not exploding - event type is: ", event_type)
+
 
 ## Trigger explosion effect
 func _explode() -> void:
@@ -118,8 +115,7 @@ func _explode() -> void:
 	if mesh_instance:
 		mesh_instance.visible = false
 
-	# Disable physics
-	freeze = true
+	# Disable collision
 	collision_layer = 0
 	collision_mask = 0
 

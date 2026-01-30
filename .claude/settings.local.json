@@ -40,7 +40,8 @@
       "Bash(git commit:*)",
       "Bash(python3 -c \"\nwith open\\(''algorithms/proceduralgeneration/spatial_partitioning/poisson_disk_sampling_3d/PoissonDiskSampling3D.gd'', ''r'', encoding=''utf-8''\\) as f:\n    lines = f.readlines\\(\\)\n    for i in range\\(180, min\\(195, len\\(lines\\)\\)\\):\n        line = lines[i]\n        if line.strip\\(\\):\n            indent = len\\(line\\) - len\\(line.lstrip\\(\\)\\)\n            has_tab = ''\\\\t'' in line[:indent+1]\n            has_space = '' '' in line[:indent+1] and not has_tab\n            print\\(f''Line {i+1}: indent={indent}, tab={has_tab}, space={has_space}, content={line[:40].rstrip\\(\\)}''\n\")",
       "Bash(for map in ConstraintSolvers_WFC_Intro ConstraintSolvers_WFC_Entropy ConstraintSolvers_WFC_Propagation ConstraintSolvers_WFC_Tiles)",
-      "Bash(do [ -d \"commons/maps/$map\" ])"
+      "Bash(do [ -d \"commons/maps/$map\" ])",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

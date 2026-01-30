@@ -84,12 +84,14 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 	["0", "0", "0", "0", "0"]   // Row 2
 ]
 ```
-here you add what file controls this behvior in res://commons/grid/
+
+**Controller:** `res://commons/grid/GridStructureComponent.gd`
 
 **Interpretation:**
-- `"0"` = empty space
+- `"0"` = empty space (void)
 - `"1"` = place 1 cube at this grid position
 - `"2"` = stack 2 cubes (raised platform)
+- `"3"`, `"4"`, etc. = higher platforms
 - Each row is Z-axis, each column is X-axis
 - Arrays read top-to-bottom = north-to-south
 
@@ -101,15 +103,46 @@ here you add what file controls this behvior in res://commons/grid/
 	[" ", " ", " ", " ", " "]
 ]
 ```
-here you add what file controls this behvior in res://commons/grid/
-**Common codes:**
-- `"t"` = teleporter (to next map)
-- `"s"` = spawn point
-- `"origin"` = origin marker
-- `"la:point"` = label annotation
-- `"3t:text"` = floating text marker
-- `"sr:15:17:10"` = copies the last cell to expand the map
-- update this list 
+
+**Controller:** `res://commons/grid/GridUtilitiesComponent.gd`
+**Registry:** `res://commons/grid/UtilityRegistry.gd` (single source of truth for all utility types)
+
+**Transport utilities:**
+- `"t"` = teleporter (to next map) - Format: `t` or `t:destination:spawn_point`
+- `"t:warning"` / `"t:exit"` / `"t:portal_glow"` = colored teleporter variants
+- `"s"` = spawn point - Format: `s` or `s:x:y:z` for specific coordinates
+- `"l"` = lift (vertical platform) - Format: `l:height`
+- `"m"` = move player - Format: `m:x:y:z:delay` moves player after delay
+- `"tc"` = transport cube - Format: `tc:distance:direction` (e.g., `tc:4:z`, `tc:3:-x:auto`)
+- `"wp"` = walkable prism - Format: `wp:rotation`
+
+**UI/Text utilities:**
+- `"3t:text"` = floating 3D text - underscores become spaces (e.g., `3t:Hello_World`)
+- `"la:keyid"` = label showing artifact name from grid_artifacts.json
+- `"an"` = annotation/info board - displays map name and description
+- `"sr:key"` = speed reader - shows tutorial text one line at a time
+- `"sub:key"` = subtitle trigger - Portal 2-style subtitles (e.g., `sub:map`, `sub:welcome:GLaDOS`)
+- `"tts:message"` = text-to-speech - speaks text on load
+
+**Visual/Structural:**
+- `"el"` = extra light - Format: `el` or `el:energy_value`
+- `"a"` = wall barrier
+- `"w"` = window
+- `"hb"` = horizontal border
+- `"bp:code"` = big pipe - procedural pipe system
+
+**Interactive:**
+- `"p"` = pick up cube
+- `"n"` = next cube - advances to next example with 3s respawn
+- `"rg"` = regenerate cube - triggers regenerate signal
+- `"r"` = reset cube - resets player to safe position
+- `"q"` = quit cube - quit game with confirmation
+- `"pb:feature"` = player body trigger - customization (e.g., `pb:dress`, `pb:skin_color:FF0000`)
+
+**Other:**
+- `"sp"` = score points display
+- `"b"` = table
+- `" "` = empty space 
 
 #### **Layer 3: `interactables`** (Educational objects)
 ```json
@@ -119,54 +152,50 @@ here you add what file controls this behvior in res://commons/grid/
 	[" ", " ", "dark_sphere", " ", " "]
 ]
 ```
-here you add what file controls this behvior in res://commons/grid/
+
+**Controller:** `res://commons/grid/GridInteractablesComponent.gd`
+**Artifact Registry:** `res://commons/artifacts/grid_artifacts.json` (base lookup)
+**Modular Registries:** `res://commons/artifacts/registry/*.json` (category-specific)
+
 **Format:** `type:rotation:height:scale#config`
 
 **Common objects:**
-- `code_display:-90:2#tutorial:point_zero`
-  - Type: clipboard
-  - Rotation: -90 degrees
-  - Height: 2 units
-  - Loads tutorial: "point_zero"
 
-- `arrow:180:0:0.2`
-  - Type: arrow primitive
-  - Rotation: 180 degrees
-  - Height: 0
-  - Scale: 0.2
+**Educational/Display:**
+- `code_display:-90:2#tutorial:point_zero` - Clipboard with tutorial text
+  - Rotation: -90°, Height: 2 units, Loads: "point_zero" tutorial
+- `vectorpoint:180:1:5` - Coordinate axes display (XYZ visualization)
+- `draw_dot` - Drawing/marking tool
 
-- `grab_sphere_point:180`
-  - Grabbable point sphere
-  - Rotation: 180 degrees
+**Primitives:**
+- `origin` - Origin marker (Vector3.ZERO visualization)
+- `arrow:180:0:0.2` - Directional arrow (rotation:height:scale)
+- `grab_sphere_point:180` - Grabbable point sphere
+- `dark_sphere` - Large black sphere creating ambient darkness
+- `cube_scene` - Basic cube primitive
+- `platonic_demo` - Platonic solids demonstration
 
-   - `dark_sphere`
-	 - Ambient darkening effect
-	 - A large black sphere that surrounds the scene in darkness
+**Interactive/Collectible:**
+- `pick_up_cube` - Mario-style collectible
+  - Rotates and bobs, makes pickup sound, adds points
+- `snap_pyramid_puzzle` - Snap-together pyramid puzzle
+- `snap_octahedron_puzzle` - Snap-together octahedron
+- `furniture_assembly_puzzle` - Grabbable furniture assembly
 
-   - `vectorpoint:180:1:5`
-	 - Coordinate axes display
+**Visual/Artistic:**
+- `pollock_painting_in_3d` - Particle-based Jackson Pollock visualization
+- `pipe_dream` - Procedural tangled pipe network
+- `random_butterflies` - Flocking entities with random flight paths
+- `extrem_randomness` - High-entropy mathematical visualization
+- `digital_materiality_glitch` - Glitch art artifact
 
-   - `pick_up_cube`
-	 - A cube that rotate, and move uo and down when you walk over it it make a mario sound and disapear.
-	 - It generates a Mario-style pickup sound with frequency sweep and exponential decay
-	 - It has a visual feedback effect when collected
-	 - It adds points to the game manager
+**Audio:**
+- `laser_exploding_sphere` - Interactive sphere with laser effects and explosion sounds
 
-   - `pollock_painting_in_3d`
-	 - An artistic artifact visualizing chaotic movement.
-	 - Uses particle systems to create a 3D interpretation of Jackson Pollock's drip paintings.
-
-   - `pipe_dream`
-     - A structural chaos visualization.
-     - Generates a complex, tangled network of pipes, demonstrating randomness in connectivity.
-
-   - `random_butterflies`
-     - A biological randomness simulation.
-     - Flocking entities with randomized flight paths and behaviors.
-
-   - `extrem_randomness`
-     - A mathematical visualization of high-entropy systems.
-     - Demonstrates "pure" randomness without smoothing or filtering.
+**Structural:**
+- `prism_block` - Architectural prism
+- `lshape` - L-shaped architectural element
+- `diamondtoruscollection` - Torus collection display
 
 ### How to Visualize a Map
 
@@ -497,10 +526,33 @@ Experience:
 
 ### Map System
 - **Base Sequence Configuration:** `commons/maps/map_sequences.json`
-- **Modular Sequence Files:** `commons/maps/sequences/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
+- **Modular Sequence Files:** `commons/maps/sequences/*.json` - 40+ category files including:
+  - `primitives.json`, `randomness.json`, `vectors.json`, `wavefunctions.json`
+  - `noise.json`, `fractals.json`, `particles.json`, `meshes.json`
+  - `proceduralaudio.json`, `machinelearning.json`, `graphtheory.json`
+  - `cellularautomata.json`, `lsystems.json`, `morphogenesis.json`
   - `AdaSceneManager` merges these files dynamically at runtime.
-  - Look here for specific sequence definitions like "wavefunctions" or "noise".
 - **Individual maps:** `commons/maps/{MapName}/map_data.json`
+
+### Audio System
+- **Ambient Presets:** `commons/audio/presets/*.json`
+- **Preset Manifest:** `commons/audio/presets_manifest.json`
+- **Sound Bank:** `commons/audio/SoundBankSingleton.gd` (autoload singleton)
+- **Ambient Controller:** `commons/audio/AmbientSoundController.gd`
+- **Async Generator:** `commons/audio/AsyncAudioGenerator.gd` (background thread generation)
+- **Audio Guide:** `commons/audio/SOUND_SYSTEM_GUIDE.md`
+
+Map-level audio is configured in `map_data.json`:
+```json
+{
+  "settings": {
+    "audio": {
+      "ambient_preset": "prog_synth_70s",
+      "volume": -5.0
+    }
+  }
+}
+```
 
 ### Tutorial Content
 - **Index:** `commons/context/clipboard/tutorial_text.json`
@@ -510,13 +562,36 @@ Experience:
 - **Clipboard display:** `commons/context/clipboard/codeDisplay.tscn`
 - **Text UI:** `commons/primitives/panels/DigitalPaper/TextUIControl.tscn`
 - **Base scene:** `commons/scenes/base.tscn`
+- **VR Staging:** `commons/scenes/vrStaging.gd` (entry point, handles loading screens)
+- **Grid Scene:** `commons/scenes/grid.tscn` (main gameplay scene)
+- **Lab Scene:** `commons/scenes/lab.tscn` (hub with artifact activation)
 
-### Grid System
-- **Artifacts catalog:** `commons/artifacts/grid_artifacts.json` (Base lookup table)
-- **Modular Artifact Registry:** `commons/artifacts/registry/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
+### Scene Management
+- **Scene Manager:** `commons/managers/AdaSceneManager.gd` (autoload as "SceneManager")
+  - Handles artifact → sequence activation
+  - Manages map-to-map transitions within sequences
+  - Emits `scene_transition_started` / `scene_transition_completed` signals
+  - Quick transition mode (0.3s fades) for in-sequence teleports
+
+### Grid System Components
+All grid components live in `res://commons/grid/`:
+
+- **GridSystem.gd** - Main coordinator, orchestrates all components
+- **GridDataComponent.gd** - Loads and parses `map_data.json`
+- **GridStructureComponent.gd** - Generates physical floor/platform cubes from `structure` layer
+- **GridUtilitiesComponent.gd** - Spawns teleporters, lifts, text displays from `utilities` layer
+- **GridInteractablesComponent.gd** - Places artifacts from `interactables` layer
+- **GridSpawnComponent.gd** - Handles player spawn points
+- **GridAudioComponent.gd** - Manages ambient audio for the map
+- **GridCeilingComponent.gd** - Optional ceiling generation
+- **UtilityRegistry.gd** - Single source of truth for all utility type definitions
+
+### Artifact Registry
+- **Base catalog:** `commons/artifacts/grid_artifacts.json`
+- **Modular registries:** `commons/artifacts/registry/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
   - `GridInteractablesComponent` merges these files dynamically at runtime.
   - Contains descriptions and metadata for specialized objects.
-  - Maps keys like "code_display" → scene files like "res://commons/context/clipboard/codeDisplay.tscn"
+  - Maps keys like `"code_display"` → scene files like `"res://commons/context/clipboard/codeDisplay.tscn"`
 
 ## Understanding the Pedagogical Strategy
 

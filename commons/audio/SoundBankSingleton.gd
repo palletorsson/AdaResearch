@@ -209,11 +209,14 @@ func get_sound(sound_id: String) -> AudioStream:
 		sound_generated.emit(sound_id)
 		return sound
 	else:
-		# Check if it supports async generation (interactive songs)
-		if sound_id.contains("POP_INTERACTIVE_SONG") or sound_id.contains("AMBIENT_WORKS_SONG") or sound_id.contains("PROG_SYNTH_SONG"):
-			print("SoundBank: Triggering async generation for ", sound_id)
-			_request_async_generation(sound_id)
-			return null # Caller must listen to sound_generated signal
+		# Check if it supports async generation (interactive songs - these take 10+ seconds)
+		var async_song_types = ["POP_INTERACTIVE_SONG", "AMBIENT_WORKS_SONG", "PROG_SYNTH_SONG",
+							   "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]
+		for song_type in async_song_types:
+			if sound_id.contains(song_type):
+				print("SoundBank: Triggering async generation for ", sound_id)
+				_request_async_generation(sound_id)
+				return null  # Caller must listen to sound_generated signal
 			
 		print("⚠️ Failed to generate sound: ", sound_id)
 		return null
@@ -222,12 +225,23 @@ func _request_async_generation(sound_id: String):
 	# Store the sound_id for callback
 	_pending_async_id = sound_id
 	
+	# Route to appropriate async generator based on song type
 	if sound_id.contains("POP_INTERACTIVE_SONG"):
 		AudioSynthesizer.generate_pop_song_async({}, self, "_on_async_sound_ready")
 	elif sound_id.contains("AMBIENT_WORKS_SONG"):
 		AudioSynthesizer.generate_pop_song_async({"type": "AMBIENT"}, self, "_on_async_sound_ready")
 	elif sound_id.contains("PROG_SYNTH_SONG"):
 		AudioSynthesizer.generate_pop_song_async({"type": "PROG_SYNTH"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("MORODER_DISCO_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "MORODER_DISCO"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("DETROIT_TECHNO_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "DETROIT_TECHNO"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("SYNTHWAVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "SYNTHWAVE"}, self, "_on_async_sound_ready")
+	elif sound_id.contains("RAVE_SONG"):
+		AudioSynthesizer.generate_pop_song_async({"type": "RAVE"}, self, "_on_async_sound_ready")
+	else:
+		print("SoundBank: ⚠️ Unknown async song type in: ", sound_id)
 
 var _pending_async_id: String = ""
 
@@ -326,6 +340,14 @@ func _generate_synthetic_sound(sound_name: String, params: Dictionary = {}) -> A
 
 func _generate_synthesizer_sound(sound_name: String) -> AudioStreamWAV:
 	"""Generate sound from AudioSynthesizer"""
+	
+	# IMPORTANT: Interactive songs must use async generation - return null to trigger async path
+	# These take 10+ seconds to generate synchronously!
+	if sound_name in ["POP_INTERACTIVE_SONG", "AMBIENT_WORKS_SONG", "PROG_SYNTH_SONG", 
+					  "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]:
+		print("SoundBank: Interactive song '%s' requires async generation" % sound_name)
+		return null  # Triggers async path in get_sound()
+	
 	var AudioSynth = preload("res://commons/audio/generators/AudioSynthesizer.gd")
 
 	# Convert string name to enum
