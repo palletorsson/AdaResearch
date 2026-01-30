@@ -1,150 +1,153 @@
 # AdaResearch
-A meta quest into the world of algorithms
 
-AdaResearch is a VR/desktop research platform built in Godot 4 for exploring algorithms, audio synthesis, and interactive learning environments. The project combines educational content with hands-on experimentation tools.
+> A VR/desktop meta-quest into algorithms, exploring the queer potential within mathematical objects
 
-## 🏗️ Project Structure
+Named after **Ada Lovelace**, who in 1842 wrote about computation's capacity for generative art. AdaResearch asks: *Can we put Paul Klee's Pedagogical Sketchbook in Virtual Drag?*
 
-### Core Modules
+## 🎯 Vision
 
-- **`algorithms/`** - Algorithm implementations and visualizations
-  - `randomness/` - Random number generation and statistical algorithms
-  - `spacetopology/` - Spatial relationship algorithms
-  - `wavefunctions/spectralanalysis/` - Audio analysis and spectral processing
+AdaResearch is an educational VR/desktop platform built in Godot 4 that teaches algorithms through embodied interaction and critical theory. The project probes for **queer potential within technical objects** — exploring how digital resolution creates "invisible fences" that shape bodies, creativity, and subjectivity.
 
-- **`commons/`** - Shared systems and utilities
-  - `audio/` - **[Recently Restructured]** Comprehensive audio synthesis system
-  - `globals/` - Global autoloads and state management
-  - `grid/` - Grid-based interaction systems
-  - `primitives/` - Basic 3D objects and animations
-  - `scenes/` - Reusable scene components
-  - `context/` - Environmental contexts (disco floor, walk grids, etc.)
+### The Queer Free Energy Principle (QFEP)
 
-- **`doc/`** - Documentation and guides
-- **`tests/`** - Test scenes and validation scripts
+The theoretical framework unifying the curriculum:
 
-## 🎵 Audio System (Recently Updated - January 2025)
-
-The audio system features a **centralized Singleton Sound Bank** architecture with hierarchical configuration:
-
-### Current Status: ✅ FULLY FUNCTIONAL
-- **Singleton Sound Bank** - Centralized sound generation and caching (AutoLoad)
-- **10 Ambient Presets** - JSON-defined atmospheric soundscapes with layers and effects
-- **Hierarchical Configuration** - Global → Sequence → Map cascade in `map_sequences.json`
-- **70+ audio parameter files** organized into 6 logical categories
-- **Multiple JSON formats** supported automatically
-- **Real-time parameter editing** with visual feedback
-- **Professional-grade interfaces** for sound design
-- **Educational content** with music theory integration
-
-### Audio Module Structure
 ```
-commons/audio/
-├── 🎛️ SINGLETON SOUND SYSTEM (January 2025)
-│   ├── SoundBankSingleton.gd      # AutoLoad singleton for sound management
-│   ├── AmbientSoundController.gd  # Per-map ambient controller
-│   ├── ambient_presets.json       # 10 ambient presets
-│   └── SOUND_SYSTEM_GUIDE.md      # Complete integration guide
-├── runtime/           # Game runtime components
-├── interfaces/        # Development sound design tools
-├── generators/        # Audio synthesis engines (AudioSynthesizer, etc.)
-├── compositions/      # Track players and systems
-├── parameters/        # Organized JSON configs (70+ files)
-│   ├── basic/        # Simple sounds (sine waves, pickups)
-│   ├── drums/        # Drum machines and percussion
-│   ├── synthesizers/ # Classic synth emulations
-│   ├── retro/        # Retro/chiptune sounds
-│   ├── experimental/ # Advanced synthesis techniques
-│   └── ambient/      # Atmospheric and drone sounds
-├── documentation/     # Guides and tutorials
-└── testing/          # Validation and test scenes
+QFE = F − λE(S) + φΔE(S,t)
 ```
 
-### Recent Achievements
+| Term | Meaning | In the Project |
+|------|---------|----------------|
+| **F** | Free energy (order, prediction) | Primitives, structure, determinism |
+| **E(S)** | Entropy (disorder, freedom) | Randomness, possibility space |
+| **λ** | Entropy drive (0→1) | The dial between order and chaos |
+| **φΔE(S,t)** | Rate of change sensitivity | Positive φ = queer signature |
 
-**January 2026 - Trace & Movement Unlock System:**
-- ✅ **Global Trace Data**: Persistent storage for user-drawn traces.
-- ✅ **Movement Unlock Mechanic**: interactive "DrawDot" tool with unlock meter.
-- ✅ **Tag Integration**: Removing obstacles via movement threshold.
-- ✅ **Grid Visualization**: Auto-centering, scaling, and clamping (max 5m).
-- ✅ **Shadow Line**: Green, grid-snapped shadow trace.
+**Life exists at λ ≈ 0.3-0.5** — enough order to maintain identity, enough chaos to adapt.
 
-**January 2025 - Singleton Sound Bank System:**
-- ✅ Centralized sound management with SoundBankSingleton (AutoLoad)
-- ✅ 10 ambient presets with continuous layers and random events
-- ✅ Hierarchical audio configuration (Global → Sequence → Map)
-- ✅ Dynamic audio bus management with 6 effect types
-- ✅ Lazy loading with caching for performance
-- ✅ String-to-enum conversion for AudioSynthesizer compatibility
+The curriculum embodies this:
+- **Primitives** → F maximized (pure order)
+- **Wavefunctions** → F ↔ E(S) oscillation
+- **Randomness** → E(S) made visible
+- **Emergence** → E(S) → F (patterns from noise)
 
-**December 2024 - System Restructure:**
-- ✅ Automated migration from mixed folder structure
-- ✅ Fixed "Invalid access to property 'value'" errors across all sounds
-- ✅ Enhanced parameter loading supporting 3 different JSON formats
-- ✅ Smart emoji-based sound categorization
-- ✅ Real-time audio visualization (waveform + spectrum)
-- ✅ Comprehensive educational content with interactive exercises
+## 🗺️ Learning Sequences
+
+40+ sequences organize 200+ maps into learning progressions:
+
+| Sequence | Maps | Focus |
+|----------|------|-------|
+| `primitives` | 13 | Points, lines, planes, cubes — the building blocks |
+| `randomness` | 13 | Entropy, distributions, noise, walks |
+| `fractals` | 10 | Self-similarity, recursion, infinite detail |
+| `wavefunctions` | — | Audio, oscillation, signal processing |
+| `cellularautomata` | — | Local rules → global patterns |
+| `lsystems` | — | Grammar-based growth |
+| `softbodies` | — | Deformable physics |
+| `qfeplaboratory` | 8 | Interactive QFEP exploration |
+
+Each map contains:
+- **3-layer grid** — structure, utilities, interactables
+- **4 documentation files** — blurb, summary, technical, critical theory
+
+## 🏗️ Architecture
+
+See **[ARCHITECTURE.md](ARCHITECTURE.md)** for complete technical reference.
+
+```
+AdaResearch/
+├── algorithms/         # 50+ categories of algorithm visualizations
+├── commons/
+│   ├── artifacts/      # 700+ educational objects (registry)
+│   ├── audio/          # Procedural sound system
+│   ├── grid/           # Component-based map rendering
+│   ├── managers/       # Scene, game, progression managers
+│   └── maps/           # Map data and sequences
+├── core/               # Physics and particle engines
+├── addons/             # godot-xr-tools, custom plugins
+└── shaders/            # Visual effects
+```
+
+### Key Systems
+
+| System | Purpose | Entry Point |
+|--------|---------|-------------|
+| **Grid** | Renders maps from JSON | `commons/grid/GridSystem.gd` |
+| **Artifacts** | Object registry & spawning | `commons/artifacts/registry/` |
+| **Sequences** | Curriculum organization | `commons/maps/sequences/` |
+| **Audio** | Procedural sound | `commons/audio/SoundBankSingleton.gd` |
 
 ## 🎮 Getting Started
 
 ### Prerequisites
 - Godot 4.x
-- VR headset (optional, for VR features)
+- VR headset (optional — desktop mode available)
 
 ### Quick Start
-1. Open the project in Godot
-2. Try the audio interfaces: `commons/audio/interfaces/`
-3. Explore algorithm visualizations: `algorithms/`
-4. Test grid interactions: `commons/scenes/grid.tscn`
 
-## 🧪 Testing
-- Audio system: Run `commons/audio/quick_test_fix.gd`
-- Grid systems: `tests/` folder contains validation scenes
-- VR compatibility: `tests/vr_test_simple.tscn`
+1. Clone and open in Godot
+2. Run `commons/scenes/lab.tscn` — the hub environment
+3. Use teleporters to navigate between maps
+4. Grab and interact with artifacts
+
+### Desktop Testing
+- `commons/scenes/grid_desktop.tscn` — Test any map
+- `commons/scenes/desktop_map_tester.tscn` — Map browser
 
 ## 📚 Documentation
 
-### Key Documentation Files
-- `commons/audio/SOUND_SYSTEM_GUIDE.md` - Singleton sound bank integration guide
-- `commons/audio/documentation/README.md` - Audio system overview
-- `commons/audio/ambient_presets.json` - 10 ambient preset definitions
-- `commons/audio/documentation/FOLDER_RESTRUCTURE_PLAN.md` - Migration details
-- `doc/LAB_GRID_GUID.md` - Grid interaction systems
-- `doc/PROGRESSION_SYSTEM.md` - Learning progression mechanics
+| Document | Purpose |
+|----------|---------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Technical system reference |
+| [doc/CLAUDE_PROJECT_NAVIGATOR.md](doc/CLAUDE_PROJECT_NAVIGATOR.md) | Comprehensive project guide |
+| [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |
+| [commons/audio/SOUND_SYSTEM_GUIDE.md](commons/audio/SOUND_SYSTEM_GUIDE.md) | Audio system details |
+| [doc/VR_GAMEPLAY_DESIGN.md](doc/VR_GAMEPLAY_DESIGN.md) | VR design philosophy |
+| [doc/QFEP_GAMWELL_MAPPING.md](doc/QFEP_GAMWELL_MAPPING.md) | Theory grounded in art/math history |
 
-## 🔄 Development Status
+## 🔄 Recent Development
 
-### Recently Completed
-- **Singleton Sound Bank System** (Jan 2025)
-  - Centralized AutoLoad sound management
-  - Hierarchical ambient preset configuration
-  - Audio bus management with effects
-  - Per-map ambient controllers
+### January 2026
+- ✅ QFEP Laboratory artifacts (sliders, reactor, meters)
+- ✅ Trace & Movement Unlock System
+- ✅ Procedural generation sequence reorganization
+- ✅ Registry cleanup (26 placeholder descriptions fixed)
+- ✅ Architecture documentation
 
-- **Audio System Restructuring** (Dec 2024)
-  - Complete folder reorganization
-  - Multi-format JSON parameter loading
-  - Enhanced error handling and validation
-  - Real-time interface improvements
+### January 2025
+- ✅ Singleton Sound Bank system
+- ✅ 10 ambient presets with hierarchical configuration
+- ✅ 70+ audio parameter files
 
-### Next Development Areas
-- Integration of SoundBank with map loading system
-- Extract techno_noir and liturgical generators
-- Algorithm visualization enhancements
-- VR interaction improvements
-- Grid system optimizations
-- Educational content expansion
+## 🧭 Project Status
+
+| Area | Status |
+|------|--------|
+| Grid System | ✅ Production |
+| Artifact Registry | ✅ 700+ objects |
+| Audio System | ✅ Production |
+| VR Integration | ✅ Working |
+| Primitives sequence | ✅ 80% documented |
+| Randomness sequence | 🔄 Maps done, docs needed |
+| Fractals sequence | 🔄 Needs audit |
+| Other sequences | 📋 Planned |
 
 ## 🤝 Contributing
 
-The project is designed for iterative development with clear module separation. Each system (audio, grid, algorithms) can be developed independently.
+The project uses component-based architecture for independent development:
+- Each algorithm category is self-contained
+- Grid system components are modular
+- Artifacts can be added via JSON registry
+- VR features gracefully degrade to desktop
 
-### Development Notes
-- Audio system is production-ready and fully documented
-- Grid systems use component-based architecture
-- VR features are optional and gracefully degrade
-- All major systems include comprehensive testing
+## 📖 References
+
+- Ada Lovelace's Notes on the Analytical Engine (1842)
+- Paul Klee, *Pedagogical Sketchbook* (1953)
+- Karl Friston, Free Energy Principle
+- Lynn Gamwell, *Mathematics and Art* (2015)
+- Daniel Shiffman, *The Nature of Code*
 
 ---
 
-*For detailed information about specific modules, see the README files in each subdirectory.*
+*For module-specific documentation, see README files in each subdirectory.*

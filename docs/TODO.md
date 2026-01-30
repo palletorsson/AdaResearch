@@ -56,11 +56,11 @@
 ## Documentation
 
 ### P0: Critical
-- [ ] Update `README.md`
-  - Add QFEP / theoretical framework
-  - Add map sequences / learning progression
-  - Add artifact system overview
-  - Link to Claude guides
+- [x] Update `README.md` — ✅ Rewritten with QFEP, sequences, architecture (2026-01-30)
+  - Added QFEP theoretical framework
+  - Added learning sequences overview
+  - Added architecture links
+  - Linked to key documentation
 
 ### P1: Important
 - [ ] Maintain `CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md`
@@ -83,10 +83,14 @@
   - Common node setups
 
 ### P3: Enhancement
-- [ ] Add comments, READMEs, and markdown docs where needed
-  - Script headers explaining purpose
-  - README.md per major folder
-  - Inline comments for complex logic
+- [x] Add READMEs per major folder — ✅ Created 6 READMEs (2026-01-30):
+  - `commons/artifacts/README.md`
+  - `commons/audio/README.md`
+  - `commons/managers/README.md`
+  - `core/README.md`
+  - `shaders/README.md`
+  - `spatial_ui/README.md`
+- [ ] Add script headers and inline comments for complex logic
 
 ---
 

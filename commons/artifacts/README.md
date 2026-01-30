@@ -1,0 +1,93 @@
+# Artifacts
+
+> Registry system mapping artifact names to scene paths
+
+## Overview
+
+The artifact system connects names used in map JSON files to actual Godot scenes. When a map's `interactables` layer contains `"grab_sphere_point"`, the registry resolves it to `res://commons/primitives/point/grab_sphere_point.tscn`.
+
+## Structure
+
+```
+artifacts/
+├── grid_artifacts.json     # Legacy master registry (700+ entries)
+├── registry/               # Modular registries by category
+│   ├── arrays.json
+│   ├── cellular_automata.json
+│   ├── foundations.json
+│   ├── fractals.json
+│   ├── furniture.json
+│   ├── lsystems.json
+│   ├── qfep.json
+│   ├── randomness.json
+│   ├── soft_bodies.json
+│   └── wavefunctions.json
+└── catalog/                # Visual browsing tools
+```
+
+## Registry Entry Schema
+
+```json
+{
+  "artifact_name": {
+    "name": "Display Name",
+    "lookup_name": "artifact_name",
+    "description": "What it does",
+    "scene": "res://path/to/scene.tscn",
+    "category": "category_tag",
+    "interaction": "grab|observe|touch",
+    "complexity": "beginner|intermediate|advanced",
+    "tags": ["tag1", "tag2"]
+  }
+}
+```
+
+## Usage in Maps
+
+In `map_data.json` interactables layer:
+
+```json
+"interactables": [
+  [" ", "grab_sphere_point", " "],
+  [" ", "code_display#tutorial:fractals", " "]
+]
+```
+
+### Configuration Syntax
+
+```
+artifact_name:rotation:y_offset:scale
+artifact_name#key:value#key2:value2
+```
+
+**Examples:**
+- `grab_sphere_point` — Default placement
+- `grab_sphere_point:180` — Rotated 180°
+- `grab_sphere_point:0:2` — Elevated 2 units
+- `code_display#tutorial:fractals_axioms` — With config
+
+## Resolution Order
+
+1. Search `registry/*.json` (modular registries)
+2. Fallback to `grid_artifacts.json` (legacy)
+
+## Adding New Artifacts
+
+1. Create scene in appropriate location
+2. Add entry to relevant `registry/{category}.json`
+3. Use in maps via `interactables` layer
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `GridArtifactRegistry.gd` | `commons/managers/` — Resolution logic |
+| `GridInteractablesComponent.gd` | `commons/grid/` — Spawning logic |
+
+## Quality Guidelines
+
+Use `foundations.json` as the exemplary model:
+- Rich descriptions with context
+- `gamwell_reference` for art/math history
+- `qfep_connection` for theoretical tie-in
+- `signals`, `interactions`, `parameters` documentation
