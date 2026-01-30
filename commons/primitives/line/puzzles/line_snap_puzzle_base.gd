@@ -1,38 +1,42 @@
 extends Node3D
 class_name LineSnapPuzzleBase
 
-## LineSnapPuzzleBase - Simplified base class for interactive line snap puzzles
-## Any endpoint can snap to any target point from a shared pool
+## LineSnapPuzzleBase - Half-Life: Alyx style holographic puzzles
+## Clean, minimal UI with glowing elements
 
 ## Puzzle Configuration
 @export_group("Puzzle Configuration")
-@export var auto_validate: bool = true  # Check on every snap
-@export var show_target_markers: bool = true  # Show visual markers at targets
-@export var target_marker_color: Color = Color(1, 1, 0, 0.8)  # Yellow markers
+@export var auto_validate: bool = true
+@export var show_target_markers: bool = true
 
-@export_group("Success Feedback")
-@export var success_message: String = "Puzzle Complete!"
+## Alyx-style colors
+@export_group("Visual Style")
+@export var marker_color: Color = Color(0.0, 0.8, 1.0, 0.6)  # Cyan hologram
+@export var marker_active_color: Color = Color(0.0, 1.0, 0.8, 0.9)  # Bright when active
+@export var completion_color: Color = Color(0.2, 1.0, 0.6, 1.0)  # Green pulse on complete
+@export var line_color: Color = Color(0.1, 0.7, 0.9, 0.9)  # Cyan line
+@export var line_locked_color: Color = Color(0.3, 1.0, 0.7, 1.0)  # Green locked
+
+@export_group("Completion")
 @export var lock_on_complete: bool = true
-@export var show_success_label: bool = true
-@export var success_display_duration: float = 3.0
+@export var completion_pulse_duration: float = 0.5
 
 @export_group("Tag System")
-@export var trigger_tag: String = ""  # Tag to trigger on puzzle completion
-@export var trigger_action: String = ""  # Action to execute (reveal, remove, hide, etc.)
+@export var trigger_tag: String = ""
+@export var trigger_action: String = ""
 
 @export_group("Form Validation")
-@export var use_form_constraints: bool = true  # Use relationship-based validation
-@export var require_all_at_targets: bool = true  # Also require endpoints at targets (hybrid mode)
+@export var use_form_constraints: bool = true
+@export var require_all_at_targets: bool = true
 
-## Internal state - SIMPLIFIED: any endpoint can snap to any target
-var target_positions: Array[Vector3] = []  # All target points (local coordinates)
-var line_start_positions: Array[Array] = []  # [[start_a, end_a], [start_b, end_b], ...] for each line
-var form_constraints: Array[FormConstraint] = []  # Geometric relationship constraints
+## Internal state
+var target_positions: Array[Vector3] = []
+var line_start_positions: Array[Array] = []
+var form_constraints: Array[FormConstraint] = []
 var snap_lines: Array[SnapLineSegment] = []
-var target_markers: Array[Node3D] = []  # Visual markers at target positions
-var instruction_label: Label3D
-var success_label: Label3D
+var target_markers: Array[Node3D] = []
 var is_completed: bool = false
+var success_message: String = ""  # Kept for compatibility but not displayed
 
 ## Signals
 signal puzzle_completed()
@@ -40,83 +44,95 @@ signal line_snapped_to_target(line: SnapLineSegment)
 signal all_lines_aligned()
 
 func _ready() -> void:
-	# Child class should have populated target_positions and line_start_positions
 	if target_positions.is_empty():
-		push_error("LineSnapPuzzleBase: target_positions not set by child class!")
+		push_error("LineSnapPuzzleBase: target_positions not set!")
 		return
-
 	if line_start_positions.is_empty():
-		push_error("LineSnapPuzzleBase: line_start_positions not set by child class!")
+		push_error("LineSnapPuzzleBase: line_start_positions not set!")
 		return
 
-	# Wait for transform to be fully applied
 	await get_tree().process_frame
 
-	print("LineSnapPuzzleBase: Setting up puzzle with %d targets and %d lines" % [target_positions.size(), line_start_positions.size()])
-
-	# Create target markers
 	if show_target_markers:
 		call_deferred("_setup_target_markers")
-
-	# Create the snap lines
 	call_deferred("_setup_lines")
 
-	# Find instruction label
-	instruction_label = get_node_or_null("InstructionLabel")
-
-	# Create success label
-	if show_success_label:
-		_create_success_label()
-
 func _setup_target_markers() -> void:
-	"""Create visual markers at all target positions"""
-	print("LineSnapPuzzleBase: Creating %d target markers..." % target_positions.size())
-
+	"""Create Alyx-style holographic markers"""
 	for i in range(target_positions.size()):
 		var local_pos = target_positions[i]
-		var marker = _create_target_marker(i)
+		var marker = _create_alyx_marker(i)
 		add_child(marker)
 		marker.global_position = global_transform * local_pos
 		target_markers.append(marker)
-		print("  Target %d at %s (global: %s)" % [i, local_pos, marker.global_position])
 
-func _create_target_marker(index: int) -> Node3D:
-	"""Create a visual sphere marker at a target position"""
+func _create_alyx_marker(_index: int) -> Node3D:
+	"""Create a sleek holographic target marker"""
 	var marker = Node3D.new()
-	marker.name = "TargetMarker%d" % index
-
-	# Create sphere
-	var sphere_mesh = MeshInstance3D.new()
+	marker.name = "TargetMarker"
+	
+	# Outer ring (torus)
+	var ring_mesh = MeshInstance3D.new()
+	ring_mesh.name = "Ring"
+	var torus = TorusMesh.new()
+	torus.inner_radius = 0.018
+	torus.outer_radius = 0.025
+	torus.rings = 24
+	torus.ring_segments = 12
+	ring_mesh.mesh = torus
+	ring_mesh.rotation.x = PI / 2  # Lay flat
+	
+	var ring_mat = StandardMaterial3D.new()
+	ring_mat.albedo_color = marker_color
+	ring_mat.emission_enabled = true
+	ring_mat.emission = marker_color
+	ring_mat.emission_energy_multiplier = 1.5
+	ring_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	ring_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	ring_mesh.material_override = ring_mat
+	marker.add_child(ring_mesh)
+	
+	# Inner dot
+	var dot_mesh = MeshInstance3D.new()
+	dot_mesh.name = "Dot"
 	var sphere = SphereMesh.new()
-	sphere.radius = 0.025
-	sphere.height = 0.05
-	sphere.radial_segments = 12
-	sphere.rings = 6
-	sphere_mesh.mesh = sphere
-
-	# Create emissive material
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = target_marker_color
-	mat.emission_enabled = true
-	mat.emission = target_marker_color
-	mat.emission_energy_multiplier = 2.0
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	sphere_mesh.material_override = mat
-
-	marker.add_child(sphere_mesh)
+	sphere.radius = 0.008
+	sphere.height = 0.016
+	sphere.radial_segments = 16
+	sphere.rings = 8
+	dot_mesh.mesh = sphere
+	
+	var dot_mat = StandardMaterial3D.new()
+	dot_mat.albedo_color = marker_active_color
+	dot_mat.emission_enabled = true
+	dot_mat.emission = marker_active_color
+	dot_mat.emission_energy_multiplier = 2.0
+	dot_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	dot_mesh.material_override = dot_mat
+	marker.add_child(dot_mesh)
+	
+	# Add subtle animation
+	var anim_script = GDScript.new()
+	anim_script.source_code = """
+extends Node3D
+var time: float = 0.0
+var base_scale: float = 1.0
+func _process(delta):
+	time += delta
+	var pulse = 1.0 + sin(time * 3.0) * 0.1
+	scale = Vector3.ONE * base_scale * pulse
+	$Ring.rotation.y += delta * 0.5
+"""
+	marker.set_script(anim_script)
+	
 	return marker
 
 func _setup_lines() -> void:
-	"""Create SnapLineSegment instances"""
-	print("LineSnapPuzzleBase: Setting up %d lines..." % line_start_positions.size())
-
-	# Convert all targets to global coordinates
+	"""Create snap lines with Alyx styling"""
 	var global_targets: Array[Vector3] = []
 	for local_pos in target_positions:
 		global_targets.append(global_transform * local_pos)
 
-	# Load the snap line segment scene
 	var snap_line_scene = load("res://commons/primitives/line/snap_line_segment.tscn")
 	if not snap_line_scene:
 		push_error("LineSnapPuzzleBase: Could not load snap_line_segment.tscn")
@@ -127,83 +143,49 @@ func _setup_lines() -> void:
 		var start_pos: Vector3 = positions[0]
 		var end_pos: Vector3 = positions[1]
 
-		print("  Line %d: start=%s, end=%s" % [i + 1, start_pos, end_pos])
-
-		# Create line instance
 		var snap_line = snap_line_scene.instantiate()
 		snap_line.name = "SnapLine%d" % (i + 1)
+		
+		# Apply Alyx colors
+		snap_line.line_color = line_color
+		snap_line.locked_color = line_locked_color
+		
 		add_child(snap_line)
-
-		# Wait a frame for initialization
 		await get_tree().process_frame
 
-		# Set initial endpoint positions
 		if snap_line.endpoint_a and snap_line.endpoint_b:
 			snap_line.endpoint_a.global_position = global_transform * start_pos
 			snap_line.endpoint_b.global_position = global_transform * end_pos
-
-			# Pass the shared target pool to this line
 			snap_line.set_shared_targets(global_targets)
-
-			# Connect signals
+			
 			snap_line.endpoints_changed.connect(_on_endpoints_changed.bind(snap_line))
 			snap_line.snapped_to_target.connect(_on_line_snapped.bind(snap_line))
 			snap_line.line_locked.connect(_on_line_locked.bind(snap_line))
-
-			# Update line geometry
 			snap_line._update_line_geometry()
-
+			
 			snap_lines.append(snap_line)
-			print("  ✓ Line %d created" % (i + 1))
-		else:
-			push_error("  ✗ Line %d missing endpoints!" % (i + 1))
-
-	print("LineSnapPuzzleBase: All %d lines set up" % snap_lines.size())
-
-func _create_success_label() -> void:
-	"""Create the success message label"""
-	success_label = Label3D.new()
-	success_label.name = "SuccessLabel"
-	success_label.text = success_message
-	success_label.font_size = 64
-	success_label.outline_size = 16
-	success_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	success_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
-	success_label.outline_modulate = Color(0.0, 0.3, 0.0, 1.0)
-	success_label.visible = false
-	add_child(success_label)
 
 func _on_endpoints_changed(_start_pos: Vector3, _end_pos: Vector3, line: SnapLineSegment) -> void:
-	"""Called when any line's endpoints move"""
 	if is_completed or not auto_validate:
 		return
-
 	if line.is_at_target():
 		_validate_puzzle()
 
 func _on_line_snapped(line: SnapLineSegment) -> void:
-	"""Called when a line snaps to a target"""
-	print("LineSnapPuzzleBase: Line snapped")
 	line_snapped_to_target.emit(line)
-
-	# Hide target markers that have been snapped to
 	_update_target_marker_visibility()
-
 	if auto_validate:
 		_validate_puzzle()
 
 func _on_line_locked(_line: SnapLineSegment) -> void:
-	"""Called when a line is locked"""
 	pass
 
 func _update_target_marker_visibility() -> void:
-	"""Hide target markers that have endpoints snapped to them"""
-	# Collect all snapped target positions
+	"""Fade out markers when snapped"""
 	var snapped_positions: Array[Vector3] = []
 	for line in snap_lines:
 		snapped_positions.append_array(line.get_snapped_targets())
 
-	# Update marker visibility
 	for i in range(target_markers.size()):
 		var marker = target_markers[i]
 		var marker_pos = marker.global_position
@@ -214,40 +196,35 @@ func _update_target_marker_visibility() -> void:
 				is_snapped = true
 				break
 
-		marker.visible = not is_snapped
+		# Fade instead of hide
+		if is_snapped:
+			_fade_marker(marker, 0.0, 0.2)
+		else:
+			marker.visible = true
+
+func _fade_marker(marker: Node3D, target_alpha: float, duration: float) -> void:
+	"""Smoothly fade a marker"""
+	var tween = create_tween()
+	tween.tween_property(marker, "scale", Vector3.ONE * target_alpha, duration)
+	tween.tween_callback(func(): marker.visible = target_alpha > 0.1)
 
 func _validate_puzzle() -> void:
-	"""Check if puzzle is complete using form constraints and/or position checking"""
 	if is_completed:
 		return
 
-	# Check position requirements (hybrid mode or position-only mode)
 	if require_all_at_targets:
-		var all_at_targets = true
-		for i in range(snap_lines.size()):
-			var line = snap_lines[i]
+		for line in snap_lines:
 			if not line.is_at_target():
-				print("  Line %d not at target yet" % i)
-				all_at_targets = false
-		if not all_at_targets:
-			return  # Not all lines at targets yet
-		print("LineSnapPuzzleBase: All lines at targets, checking constraints...")
+				return
 
-	# Check form constraints (relationship-based validation)
 	if use_form_constraints and not form_constraints.is_empty():
 		var line_data = _get_line_endpoint_data()
 		for constraint in form_constraints:
-			var valid = constraint.validate(line_data)
-			print("  Constraint '%s': %s" % [constraint.description, "PASS" if valid else "FAIL"])
-			if not valid:
-				return  # Constraint not satisfied
+			if not constraint.validate(line_data):
+				return
 
-	# All validations passed
-	print("LineSnapPuzzleBase: All validations passed!")
 	_complete_puzzle()
 
-
-## Get current line endpoint positions for constraint validation
 func _get_line_endpoint_data() -> Array:
 	var line_data: Array = []
 	for line in snap_lines:
@@ -259,108 +236,92 @@ func _get_line_endpoint_data() -> Array:
 	return line_data
 
 func _complete_puzzle() -> void:
-	"""Puzzle solved - lock lines and show success"""
+	"""Puzzle solved - clean Alyx-style completion (no text)"""
 	if is_completed:
 		return
 
 	is_completed = true
-	print("LineSnapPuzzleBase: Puzzle completed!")
-
-	# Show success message IMMEDIATELY
-	if success_label:
-		success_label.visible = true
-		success_label.global_position = global_position + Vector3(0, 0.5, 0)
-
-	# Update instruction label immediately
-	if instruction_label:
-		instruction_label.text = success_message
-		instruction_label.modulate = Color(0.2, 1.0, 0.3, 1.0)
-
-	# Play completion sound
+	
+	# Play completion pulse on all lines
+	_play_completion_pulse()
+	
+	# Play subtle sound
 	_play_completion_sound()
-
-	# Emit signals immediately
+	
+	# Emit signals
 	all_lines_aligned.emit()
 	puzzle_completed.emit()
 
-	# Wait before cleanup
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(completion_pulse_duration).timeout
 
-	# Hide all endpoint spheres
+	# Hide endpoint spheres smoothly
 	for line in snap_lines:
 		if line.has_method("_hide_endpoint_spheres"):
 			line._update_line_geometry()
 			line._hide_endpoint_spheres()
 
-	# Lock all lines
+	# Lock lines
 	if lock_on_complete:
 		for line in snap_lines:
 			line.lock_line()
 
-	# Hide all target markers
+	# Fade out remaining markers
 	for marker in target_markers:
-		marker.visible = false
+		_fade_marker(marker, 0.0, 0.3)
 
-	# Trigger tag-based action if configured
+	# Trigger tag action
 	if trigger_tag != "":
-		var action = trigger_action
-		if action == "" or action == "remove":
-			action = "shrink_and_remove"
-		print("LineSnapPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, action])
+		var action = trigger_action if trigger_action != "" else "shrink_and_remove"
 		TagSystem.trigger_tag_action(trigger_tag, action)
 
-	# Hide success message after display duration
-	await get_tree().create_timer(success_display_duration).timeout
-	if success_label:
-		success_label.visible = false
+func _play_completion_pulse() -> void:
+	"""Flash all lines with completion color"""
+	for line in snap_lines:
+		if line.material:
+			var original_emission = line.material.emission_energy_multiplier
+			var tween = create_tween()
+			tween.tween_property(line.material, "emission", completion_color, 0.1)
+			tween.tween_property(line.material, "emission_energy_multiplier", 3.0, 0.1)
+			tween.tween_property(line.material, "emission_energy_multiplier", original_emission, 0.3)
 
 func _play_completion_sound() -> void:
-	"""Play a happy sound when puzzle is completed (max 3 seconds)"""
+	"""Play subtle confirmation sound"""
 	if not has_node("/root/SoundBank"):
 		return
 
 	var sound_bank = get_node("/root/SoundBank")
 	var sound_stream = sound_bank.get_sound("AudioSynthesizer.POWER_UP_JINGLE")
-
 	if not sound_stream:
 		return
 
 	var player = AudioStreamPlayer3D.new()
-	player.name = "CompletionSoundPlayer"
 	player.stream = sound_stream
-	player.volume_db = 0.0
-	player.max_distance = 20.0
+	player.volume_db = -6.0  # Quieter
+	player.max_distance = 15.0
 	player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
 	add_child(player)
 	player.global_position = global_position
-
 	player.finished.connect(player.queue_free)
 	player.play()
 
-	# Stop sound after 3 seconds max
-	get_tree().create_timer(3.0).timeout.connect(func():
+	get_tree().create_timer(2.0).timeout.connect(func():
 		if is_instance_valid(player):
 			player.stop()
 			player.queue_free()
 	)
 
 func get_completion_percentage() -> float:
-	"""Return percentage of lines complete (0.0 to 1.0)"""
 	if snap_lines.is_empty():
 		return 0.0
-
-	var lines_complete = 0
+	var complete = 0
 	for line in snap_lines:
 		if line.is_at_target():
-			lines_complete += 1
-
-	return float(lines_complete) / float(snap_lines.size())
+			complete += 1
+	return float(complete) / float(snap_lines.size())
 
 func reset_puzzle() -> void:
-	"""Reset the puzzle to initial state"""
 	is_completed = false
 
-	# Unlock and reset all lines
 	for i in range(snap_lines.size()):
 		var line = snap_lines[i]
 		line.unlock_line()
@@ -375,16 +336,6 @@ func reset_puzzle() -> void:
 				line.endpoint_b.visible = true
 				line._update_line_geometry()
 
-	# Show all target markers
 	for marker in target_markers:
 		marker.visible = true
-
-	# Hide success label
-	if success_label:
-		success_label.visible = false
-
-	# Reset instruction label
-	if instruction_label:
-		instruction_label.modulate = Color(1, 1, 1, 1)
-
-	print("LineSnapPuzzleBase: Puzzle reset")
+		marker.scale = Vector3.ONE

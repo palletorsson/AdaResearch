@@ -7,60 +7,69 @@
 [ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="4_sq4bi"]
 [ext_resource type="Resource" uid="uid://bhvrpfo4ecbub" path="res://addons/godot-xr-tools/hands/poses/pose_point_right.tres" id="5_g2ih4"]
 [ext_resource type="Script" uid="uid://ddrknxyorgm1x" path="res://commons/interactables/push_button.gd" id="6_ntrw0"]
-[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.08, 0.02, 0.08)
+[sub_resource type="StandardMaterial3D" id="MatPanelDark"]
+albedo_color = Color(0.06, 0.06, 0.08, 1)
+metallic = 0.15
+roughness = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_Base"]
-size = Vector3(0.08, 0.02, 0.08)
+size = Vector3(0.06, 0.008, 0.06)
 
-[sub_resource type="CylinderShape3D" id="3"]
+[sub_resource type="BoxShape3D" id="CollisionBase"]
+size = Vector3(0.06, 0.015, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="MatButtonGlow"]
+resource_local_to_scene = true
+albedo_color = Color(0.12, 0.12, 0.15, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.05, 0.05, 0.08, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_Button"]
+top_radius = 0.02
+bottom_radius = 0.022
+height = 0.015
+radial_segments = 32
+
+[sub_resource type="CylinderShape3D" id="CollisionButton"]
 height = 0.02
+radius = 0.022
+
+[sub_resource type="CylinderShape3D" id="AreaShape"]
+height = 0.04
 radius = 0.025
 
-[sub_resource type="CylinderMesh" id="4"]
-top_radius = 0.025
-bottom_radius = 0.025
-height = 0.02
-radial_segments = 24
-rings = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_Button"]
-resource_local_to_scene = true
-albedo_color = Color(0.15, 0.15, 0.2, 1)
-roughness = 0.4
-
-[sub_resource type="CylinderShape3D" id="6"]
-height = 0.05
-radius = 0.03
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_lygiq"]
-radius = 0.05
+[sub_resource type="SphereShape3D" id="SphereShape3D_Pose"]
+radius = 0.045
 
 [node name="PushButton" type="Node3D"]
 script = ExtResource("6_ntrw0")
-pressed_color = Color(0, 0.8, 1, 1)
-released_color = Color(0.15, 0.15, 0.2, 1)
+pressed_color = Color(0.2, 0.85, 1.0, 1)
+released_color = Color(0.12, 0.12, 0.15, 1)
 
 [node name="ButtonBase" type="StaticBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonBase"]
-shape = SubResource("1")
+shape = SubResource("CollisionBase")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ButtonBase"]
+[node name="BaseMesh" type="MeshInstance3D" parent="ButtonBase"]
 mesh = SubResource("BoxMesh_Base")
-surface_material_override/0 = ExtResource("MatPanel")
+surface_material_override/0 = SubResource("MatPanelDark")
 
 [node name="Button" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Button"]
-shape = SubResource("3")
+shape = SubResource("CollisionButton")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
-mesh = SubResource("4")
-surface_material_override/0 = SubResource("StandardMaterial3D_Button")
+[node name="ButtonMesh" type="MeshInstance3D" parent="Button"]
+mesh = SubResource("CylinderMesh_Button")
+surface_material_override/0 = SubResource("MatButtonGlow")
 
 [node name="InteractableAreaButton" type="Area3D" parent="."]
 collision_layer = 0
@@ -73,16 +82,16 @@ script = ExtResource("3_kg5ep")
 event = ExtResource("4_sq4bi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableAreaButton"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
-shape = SubResource("6")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+shape = SubResource("AreaShape")
 
 [node name="HandPoseArea" parent="." instance=ExtResource("3_2axcm")]
 left_pose = ExtResource("4_sgcw0")
 right_pose = ExtResource("5_g2ih4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
-shape = SubResource("SphereShape3D_lygiq")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+shape = SubResource("SphereShape3D_Pose")
 
 [connection signal="body_entered" from="InteractableAreaButton" to="InteractableAreaButton/Rumbler" method="rumble_hand"]
 [connection signal="body_exited" from="InteractableAreaButton" to="InteractableAreaButton/Rumbler" method="cancel_hand"]

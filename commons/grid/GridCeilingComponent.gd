@@ -267,6 +267,34 @@ func _generate_grid_structure(width: int, depth: int):
 		grid_line.position = Vector3(x * tile_size, ceiling_height, depth / 2.0)
 		grid_line.rotation_degrees = Vector3(0, 90, 0)
 		grid_container.add_child(grid_line)
+	
+	# Create solid ceiling top to block exterior light/sky
+	_create_ceiling_cap(width, depth, grid_container)
+
+# Create solid ceiling cap to block sky/exterior
+func _create_ceiling_cap(width: int, depth: int, container: Node3D):
+	var cap = MeshInstance3D.new()
+	cap.name = "CeilingCap"
+	
+	var box = BoxMesh.new()
+	# Cover entire ceiling area with thick solid panel above the tiles
+	var width_m = width * tile_size + 0.5  # Slight overhang
+	var depth_m = depth * tile_size + 0.5
+	box.size = Vector3(width_m, 0.3, depth_m)  # 30cm thick solid cap
+	cap.mesh = box
+	
+	# Dark non-reflective material (absorbs light, no rendering overhead)
+	var cap_mat = StandardMaterial3D.new()
+	cap_mat.albedo_color = Color(0.02, 0.02, 0.02)  # Near black
+	cap_mat.roughness = 1.0
+	cap_mat.metallic = 0.0
+	cap_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED  # No lighting calcs
+	cap.material_override = cap_mat
+	
+	# Position above the visible ceiling
+	cap.position = Vector3(width_m / 2.0 - 0.25, ceiling_height + 0.2, depth_m / 2.0 - 0.25)
+	container.add_child(cap)
+	print("GridCeilingComponent: Created ceiling cap (%.1fm x %.1fm)" % [width_m, depth_m])
 
 # Create a single T-grid beam
 func _create_grid_beam(length: float, thickness: float) -> MeshInstance3D:
@@ -399,35 +427,34 @@ func _generate_light_panels(width: int, depth: int) -> int:
 
 	return light_count
 
-# Create a light panel with integrated OmniLight3D
+# Create a light panel - optimized for performance
+# Uses emission for visual glow, OmniLight only for key lights
 func _create_light_panel() -> Node3D:
 	var light_panel = Node3D.new()
 
 	# Create the glowing panel mesh
 	var panel_mesh = MeshInstance3D.new()
 	var plane = PlaneMesh.new()
-	# Make light panels same size as tiles (98% of tile_size)
 	var visible_tile_size = tile_size * 0.98
 	plane.size = Vector2(visible_tile_size, visible_tile_size)
 	panel_mesh.mesh = plane
 	panel_mesh.name = "PanelMesh"
-	# Create unique material instance for this panel so we can change its color
 	panel_mesh.material_override = light_material.duplicate()
-	panel_mesh.rotation_degrees = Vector3(180, 0, 0)  # Flip to face downward
+	panel_mesh.rotation_degrees = Vector3(180, 0, 0)
 	light_panel.add_child(panel_mesh)
 
-	# Add actual light source
-	var light = OmniLight3D.new()
-	light.light_color = light_color
-	light.light_energy = light_intensity
-	light.omni_range = tile_size * 3.0
-	light.omni_attenuation = 0.5  # Soft falloff for diffused lighting
-	light.position = Vector3(0, -0.1, 0)  # Below the panel
-	light_panel.add_child(light)
-
-	# Add slight flicker for realism (optional)
-	if randf() < 0.1:  # 10% of lights have subtle flicker
-		_add_subtle_flicker(light)
+	# Only add actual OmniLight to sparse key positions (1 in 4)
+	# Most panels just use emissive material (free)
+	var panel_count = ceiling_lights.size()
+	if panel_count % 4 == 0:
+		var light = OmniLight3D.new()
+		light.light_color = light_color
+		light.light_energy = light_intensity * 2.0  # Boost since fewer lights
+		light.omni_range = tile_size * 5.0  # Larger range
+		light.omni_attenuation = 0.7
+		light.shadow_enabled = false  # No shadows = much faster
+		light.position = Vector3(0, -0.1, 0)
+		light_panel.add_child(light)
 
 	return light_panel
 

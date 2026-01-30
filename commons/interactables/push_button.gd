@@ -6,7 +6,7 @@ signal pressed
 @export var released_color: Color = Color(1.0, 0.0, 0.0, 1.0)
 
 @onready var _interactable: Node = $"InteractableAreaButton"
-@onready var _button_mesh: MeshInstance3D = $"Button/MeshInstance3D"
+@onready var _button_mesh: MeshInstance3D = $"Button/ButtonMesh"
 var _button_material: StandardMaterial3D
 var _is_pressed_visual := false
 

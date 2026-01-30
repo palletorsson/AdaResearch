@@ -110,6 +110,7 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 	var metadata: Dictionary = sound.get("metadata", {})
 	var sound_type_str: String = metadata.get("sound_type", sound.sound_key)
 	var category: String = sound.get("category", "")
+	var sound_key: String = sound.get("sound_key", "")
 
 	# Merge default parameters with user parameters
 	var merged_params := _merge_parameters(sound.get("parameters", {}), parameters)
@@ -126,21 +127,66 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 			return CinematicMusicGenerator.generate_sound(sound_type_str, merged_params)
 		"SciFi":
 			return SciFiPreviewGenerator.generate_preview(sound_type_str)
-		_:
-			# Default: use CustomSoundGenerator with AudioSynthesizer
-			var sound_type := _string_to_sound_type(sound_type_str)
-			if sound_type != -1:
-				return CustomSoundGenerator.generate_custom_sound(sound_type, merged_params)
+	
+	# Try direct mapping from sound_type metadata
+	var sound_type := _string_to_sound_type(sound_type_str)
+	if sound_type != -1:
+		return CustomSoundGenerator.generate_custom_sound(sound_type, merged_params)
+	
+	# Try sound_key as fallback
+	sound_type = _string_to_sound_type(sound_key)
+	if sound_type != -1:
+		return CustomSoundGenerator.generate_custom_sound(sound_type, merged_params)
+	
+	# Smart fallback based on category
+	match category:
+		"drums":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.DARK_808_KICK, merged_params)
+		"synthesizers":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MOOG_BASS_LEAD, merged_params)
+		"ambient":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MELODIC_DRONE, merged_params)
+		"retro":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.C64_SID_LEAD, merged_params)
+		"sci_fi":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.LAB_HUM, merged_params)
+		"cinematic":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.CS80_BRASS_LEAD, merged_params)
+		"educational":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.BASIC_SINE_WAVE, merged_params)
+		"basic":
+			# For basic category, use the sound key to pick
+			if sound_key.contains("explosion"):
+				return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.EXPLOSION, merged_params)
+			elif sound_key.contains("laser"):
+				return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.LASER_SHOT, merged_params)
+			elif sound_key.contains("jump"):
+				return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.RETRO_JUMP, merged_params)
+			elif sound_key.contains("pickup"):
+				return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.PICKUP_MARIO, merged_params)
+			elif sound_key.contains("power"):
+				return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.POWER_UP_JINGLE, merged_params)
+		"experimental":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR, merged_params)
+		"liturgical":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MELODIC_DRONE, merged_params)
+		"fourier":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MELODIC_DRONE, merged_params)
+		"epic":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.CS80_BRASS_LEAD, merged_params)
 
-	# Fallback: basic sine wave
+	# Final fallback: use melodic drone (more interesting than sine wave)
+	print("AudioCatalogTablet3D: Using fallback for '%s' (category: %s)" % [sound_key, category])
 	return CustomSoundGenerator.generate_custom_sound(
-		AudioSynthesizer.SoundType.BASIC_SINE_WAVE,
+		AudioSynthesizer.SoundType.MELODIC_DRONE,
 		merged_params
 	)
 
 
 func _detect_generator_type(category: String, sound_key: String) -> String:
-	# Check by category
+	var key_lower := sound_key.to_lower()
+	
+	# Check by category first
 	match category:
 		"tech_noir":
 			return "TechnoNoir"
@@ -148,55 +194,116 @@ func _detect_generator_type(category: String, sound_key: String) -> String:
 			return "TrapBeats"
 		"cinematic":
 			return "Cinematic"
-		"sci_fi":
-			return "SciFi"
 
 	# Check by sound key patterns
-	if sound_key.begins_with("tech_noir") or sound_key.contains("industrial"):
+	if key_lower.begins_with("tech_noir") or key_lower.contains("industrial"):
 		return "TechnoNoir"
-	if sound_key.begins_with("trap") or sound_key.contains("808"):
+	if key_lower.begins_with("trap") or (key_lower.contains("808") and not key_lower.contains("sub")):
 		return "TrapBeats"
-	if sound_key.begins_with("cinematic") or sound_key.contains("vangelis"):
+	if key_lower.begins_with("cinematic") or key_lower.contains("vangelis") or key_lower.contains("blade_runner"):
 		return "Cinematic"
-	if sound_key.begins_with("sci_fi") or sound_key.contains("lab_hum"):
-		return "SciFi"
-
+	
+	# Don't use SciFi generator for now - it's too limited
+	# Let these fall through to the AudioSynthesizer
 	return "Default"
 
 
 func _string_to_sound_type(type_str: String) -> int:
-	# Map string to AudioSynthesizer.SoundType enum
+	# Map string to AudioSynthesizer.SoundType enum - complete list
 	var type_map := {
+		# Basic sounds
 		"basic_sine_wave": AudioSynthesizer.SoundType.BASIC_SINE_WAVE,
 		"pickup_mario": AudioSynthesizer.SoundType.PICKUP_MARIO,
 		"teleport_drone": AudioSynthesizer.SoundType.TELEPORT_DRONE,
+		"lift_bass_pulse": AudioSynthesizer.SoundType.LIFT_BASS_PULSE,
 		"ghost_drone": AudioSynthesizer.SoundType.GHOST_DRONE,
 		"melodic_drone": AudioSynthesizer.SoundType.MELODIC_DRONE,
 		"laser_shot": AudioSynthesizer.SoundType.LASER_SHOT,
+		"power_up_jingle": AudioSynthesizer.SoundType.POWER_UP_JINGLE,
 		"explosion": AudioSynthesizer.SoundType.EXPLOSION,
 		"retro_jump": AudioSynthesizer.SoundType.RETRO_JUMP,
+		"shield_hit": AudioSynthesizer.SoundType.SHIELD_HIT,
 		"ambient_wind": AudioSynthesizer.SoundType.AMBIENT_WIND,
+		# Drum machines
 		"dark_808_kick": AudioSynthesizer.SoundType.DARK_808_KICK,
 		"acid_606_hihat": AudioSynthesizer.SoundType.ACID_606_HIHAT,
 		"dark_808_sub_bass": AudioSynthesizer.SoundType.DARK_808_SUB_BASS,
 		"tr909_kick": AudioSynthesizer.SoundType.TR909_KICK,
+		"synare_3_disco_tom": AudioSynthesizer.SoundType.SYNARE_3_DISCO_TOM,
+		"synare_3_cosmic_fx": AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX,
+		# Retro / vintage
+		"ambient_amiga_drone": AudioSynthesizer.SoundType.AMBIENT_AMIGA_DRONE,
+		"c64_sid_lead": AudioSynthesizer.SoundType.C64_SID_LEAD,
+		"amiga_mod_sample": AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE,
+		"gameboy_dmg_wav": AudioSynthesizer.SoundType.C64_SID_LEAD,  # Use SID as fallback
+		# Synthesizers
 		"moog_bass_lead": AudioSynthesizer.SoundType.MOOG_BASS_LEAD,
 		"tb303_acid_bass": AudioSynthesizer.SoundType.TB303_ACID_BASS,
 		"dx7_electric_piano": AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO,
-		"c64_sid_lead": AudioSynthesizer.SoundType.C64_SID_LEAD,
-		"amiga_mod_sample": AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE,
 		"ppg_wave_pad": AudioSynthesizer.SoundType.PPG_WAVE_PAD,
 		"jupiter_8_strings": AudioSynthesizer.SoundType.JUPITER_8_STRINGS,
 		"korg_m1_piano": AudioSynthesizer.SoundType.KORG_M1_PIANO,
 		"arp_2600_lead": AudioSynthesizer.SoundType.ARP_2600_LEAD,
-		"cs80_brass_lead": AudioSynthesizer.SoundType.CS80_BRASS_LEAD,
-		"heartbeat": AudioSynthesizer.SoundType.HEARTBEAT,
+		"moog_kraftwerk_sequencer": AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER,
+		# Experimental
+		"herbie_hancock_moog_fusion": AudioSynthesizer.SoundType.HERBIE_HANCOCK_MOOG_FUSION,
+		"aphex_twin_modular": AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR,
+		"flying_lotus_sampler": AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER,
+		# Sci-Fi
+		"sci_fi_lab_hum_clean": AudioSynthesizer.SoundType.SCI_FI_LAB_HUM_CLEAN,
+		"sci_fi_resonant_drone": AudioSynthesizer.SoundType.SCI_FI_RESONANT_DRONE,
+		"sci_fi_data_chirps": AudioSynthesizer.SoundType.SCI_FI_DATA_CHIRPS,
+		"sci_fi_ventilation": AudioSynthesizer.SoundType.SCI_FI_VENTILATION,
+		"sci_fi_electromagnetic": AudioSynthesizer.SoundType.SCI_FI_ELECTROMAGNETIC,
 		"lab_hum": AudioSynthesizer.SoundType.LAB_HUM,
+		# Cinematic
+		"cs80_brass_lead": AudioSynthesizer.SoundType.CS80_BRASS_LEAD,
+		"cinematic_432hz_pad": AudioSynthesizer.SoundType.CINEMATIC_432HZ_PAD,
+		"vangelis_brass_lead": AudioSynthesizer.SoundType.CS80_BRASS_LEAD,
+		"blade_runner_pad": AudioSynthesizer.SoundType.PPG_WAVE_PAD,
+		"deep_dark_cello_drone": AudioSynthesizer.SoundType.MELODIC_DRONE,
+		# Pop
+		"pop_juno_chorus_pad": AudioSynthesizer.SoundType.POP_JUNO_CHORUS_PAD,
+		"pop_dx7_ballad_keys": AudioSynthesizer.SoundType.POP_DX7_BALLAD_KEYS,
+		"pop_obxa_brass": AudioSynthesizer.SoundType.POP_OBXA_BRASS,
+		"pop_prophet_lead": AudioSynthesizer.SoundType.POP_PROPHET_LEAD,
+		"pop_funk_bass": AudioSynthesizer.SoundType.POP_FUNK_BASS,
+		# Biological
+		"heartbeat": AudioSynthesizer.SoundType.HEARTBEAT,
+		"heartbeat_segment": AudioSynthesizer.SoundType.HEARTBEAT,
 	}
 
-	var key := type_str.to_lower().replace(" ", "_")
+	var key := type_str.to_lower().replace(" ", "_").replace("-", "_")
 	if type_map.has(key):
 		return type_map[key]
+	
+	# Try partial matches for common patterns
+	if key.contains("kick") or key.contains("808_kick"):
+		return AudioSynthesizer.SoundType.DARK_808_KICK
+	if key.contains("hihat") or key.contains("hat"):
+		return AudioSynthesizer.SoundType.ACID_606_HIHAT
+	if key.contains("snare"):
+		return AudioSynthesizer.SoundType.TR909_KICK
+	if key.contains("bass") and key.contains("sub"):
+		return AudioSynthesizer.SoundType.DARK_808_SUB_BASS
+	if key.contains("bass"):
+		return AudioSynthesizer.SoundType.MOOG_BASS_LEAD
+	if key.contains("pad"):
+		return AudioSynthesizer.SoundType.PPG_WAVE_PAD
+	if key.contains("drone"):
+		return AudioSynthesizer.SoundType.MELODIC_DRONE
+	if key.contains("lead"):
+		return AudioSynthesizer.SoundType.ARP_2600_LEAD
+	if key.contains("piano") or key.contains("keys"):
+		return AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO
+	if key.contains("string"):
+		return AudioSynthesizer.SoundType.JUPITER_8_STRINGS
+	if key.contains("brass"):
+		return AudioSynthesizer.SoundType.CS80_BRASS_LEAD
+	if key.contains("hum") or key.contains("lab"):
+		return AudioSynthesizer.SoundType.LAB_HUM
+	if key.contains("wind") or key.contains("ambient"):
+		return AudioSynthesizer.SoundType.AMBIENT_WIND
 
 	return -1
 

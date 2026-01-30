@@ -1150,6 +1150,12 @@
 			"description": "A shimmering grid that pulses with disco energy",
 			"scene": "res://commons/context/discofloor/discofloor.tscn"
 		},
+		"standalone_disco": {
+			"name": "Standalone Disco Floor",
+			"lookup_name": "standalone_disco",
+			"description": "Self-contained disco floor with white tiles and pattern control. Config: width:8, depth:8, tile_size:0.5, show_controls:true",
+			"scene": "res://commons/context/discofloor/standalone_disco_floor.tscn"
+		},
 		"grid_editor_main": {
 			"name": "grid_editor_main",
 			"lookup_name": "grid_editor_main",

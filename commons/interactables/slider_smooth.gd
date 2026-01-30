@@ -22,12 +22,26 @@ func _ready() -> void:
 	_update_label(_current_slider_value())
 
 func _process(_delta: float) -> void:
-	# Keep the handle on the slider track (lock Y and Z drift in local space)
-	# The slider moves along its local X axis; Y and Z are drift axes
+	if not _slider:
+		return
+	
+	var s_min = _slider.get("slider_limit_min")
+	var s_max = _slider.get("slider_limit_max")
+	if s_min == null: s_min = 0.0
+	if s_max == null: s_max = 0.14
+	
+	# Clamp the slider's transform position directly
+	var slider_x = _slider.transform.origin.x
+	var clamped_x = clamp(slider_x, s_min, s_max)
+	if slider_x != clamped_x:
+		_slider.transform.origin.x = clamped_x
+		_slider.slider_position = clamped_x
+	
+	# Keep handle centered (prevent drift after release)
 	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	if handle and handle.is_picked_up():
-		handle.transform.origin.y = 0
-		handle.transform.origin.z = 0
+	if handle and not handle.is_picked_up():
+		# Only reset when not being held - allow movement while grabbed
+		handle.transform.origin = Vector3.ZERO
 
 func _connect_slider_signal() -> void:
 	if not _slider:

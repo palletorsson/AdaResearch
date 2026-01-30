@@ -4,11 +4,11 @@ class_name SnapLineSegment
 ## SnapLineSegment - A line segment with draggable snap points at each endpoint
 ## The line dynamically updates as endpoints are moved
 
-## Line appearance
-@export var line_width: float = 0.01  # 1cm thick line
-@export var line_color: Color = Color(1, 1, 1, 0.8)
-@export var locked_color: Color = Color(0.2, 1, 0.3, 1)  # Green when locked
-@export var snap_tolerance: float = 0.05  # 5cm snap distance to target
+## Line appearance - Alyx style holographic
+@export var line_width: float = 0.006  # Thinner, sleeker
+@export var line_color: Color = Color(0.1, 0.75, 0.95, 0.9)  # Cyan hologram
+@export var locked_color: Color = Color(0.3, 1.0, 0.7, 1.0)  # Green success
+@export var snap_tolerance: float = 0.06  # 6cm snap distance
 
 ## Shared target pool (set by puzzle controller) - all available targets in global positions
 var shared_targets: Array[Vector3] = []
@@ -78,19 +78,20 @@ func _ready() -> void:
 	print("SnapLineSegment: Initialization complete")
 
 func _create_line_mesh() -> void:
-	"""Create the visual line mesh"""
+	"""Create the visual line mesh - Alyx holographic style"""
 	line_mesh = MeshInstance3D.new()
 	line_mesh.name = "LineMesh"
 	add_child(line_mesh)
 	
-	# Create material
+	# Create glowing holographic material
 	material = StandardMaterial3D.new()
 	material.albedo_color = line_color
 	material.emission_enabled = true
 	material.emission = line_color
-	material.emission_energy_multiplier = 0.5
+	material.emission_energy_multiplier = 1.2
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Visible from both sides
 	
 	line_mesh.material_override = material
 

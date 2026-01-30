@@ -1,99 +1,90 @@
-[gd_scene load_steps=15 format=3 uid="uid://cpwdvy41fqdua"]
+[gd_scene load_steps=14 format=3 uid="uid://cpwdvy41fqdua"]
 
 [ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
 [ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
 [ext_resource type="Script" uid="uid://cgk7meitry1a" path="res://commons/interactables/slider_smooth.gd" id="5_wmxoe"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
-[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
-[ext_resource type="Material" uid="uid://cmj6x1g2q4v6m" path="res://commons/interactables/materials/rack_metal.tres" id="MatMetal"]
-[ext_resource type="Material" uid="uid://b8y2x3g5q7v8n" path="res://commons/interactables/materials/rack_accent.tres" id="MatAccent"]
-[ext_resource type="Material" uid="uid://c8v4y5z6a7b8c" path="res://commons/interactables/materials/ui_shadow.tres" id="MatShadow"]
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.08, 0.22, 0.02)
+[sub_resource type="StandardMaterial3D" id="MatPanelDark"]
+albedo_color = Color(0.06, 0.06, 0.08, 1)
+metallic = 0.15
+roughness = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_Panel"]
-size = Vector3(0.08, 0.22, 0.01)
+size = Vector3(0.08, 0.22, 0.008)
 
-[sub_resource type="StandardMaterial3D" id="MatTrack"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="BoxShape3D" id="CollisionPanel"]
+size = Vector3(0.08, 0.22, 0.015)
 
-[sub_resource type="BoxMesh" id="BoxMesh_Track"]
-size = Vector3(0.01, 0.16, 0.001)
+[sub_resource type="StandardMaterial3D" id="MatTrackGroove"]
+albedo_color = Color(0.01, 0.01, 0.015, 1)
+metallic = 0.0
+roughness = 0.95
 
-[sub_resource type="BoxShape3D" id="3"]
-size = Vector3(0.04, 0.01, 0.03)
+[sub_resource type="BoxMesh" id="BoxMesh_TrackGroove"]
+size = Vector3(0.006, 0.16, 0.003)
+
+[sub_resource type="StandardMaterial3D" id="MatHandleGlow"]
+albedo_color = Color(0.2, 0.85, 1.0, 1)
+metallic = 0.85
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.15, 0.65, 0.85, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_Handle"]
-size = Vector3(0.04, 0.015, 0.03)
+size = Vector3(0.03, 0.015, 0.03)
 
-[sub_resource type="BoxShape3D" id="7"]
-size = Vector3(0.04, 0.02, 0.03)
+[sub_resource type="BoxShape3D" id="CollisionHandle"]
+size = Vector3(0.035, 0.025, 0.035)
 
-[sub_resource type="QuadMesh" id="QuadMesh_Shadow"]
-size = Vector2(0.06, 0.06)
+[sub_resource type="StandardMaterial3D" id="MatLabelText"]
+shading_mode = 1
+albedo_color = Color(0.7, 0.75, 0.8, 1)
 
 [node name="SliderSmooth" type="Node3D"]
 script = ExtResource("5_wmxoe")
 
 [node name="Frame" type="StaticBody3D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
-shape = SubResource("1")
+shape = SubResource("CollisionPanel")
 
-[node name="BaseMesh" type="MeshInstance3D" parent="Frame"]
+[node name="PanelMesh" type="MeshInstance3D" parent="Frame"]
 mesh = SubResource("BoxMesh_Panel")
-surface_material_override/0 = ExtResource("MatPanel")
+surface_material_override/0 = SubResource("MatPanelDark")
 
-[node name="TrackMesh" type="MeshInstance3D" parent="Frame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.006)
-mesh = SubResource("BoxMesh_Track")
-surface_material_override/0 = SubResource("MatTrack")
+[node name="TrackGroove" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+mesh = SubResource("BoxMesh_TrackGroove")
+surface_material_override/0 = SubResource("MatTrackGroove")
 
 [node name="Label3DValue" type="Label3D" parent="Frame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.01)
-pixel_size = 0.001
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.095, 0.008)
+pixel_size = 0.0008
 text = "0.50"
-font_size = 12
+font_size = 14
 outline_size = 0
+modulate = Color(0.85, 0.9, 0.95, 1)
 
 [node name="LabelName" type="Label3D" parent="Frame"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.01)
-pixel_size = 0.001
-font_size = 10
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.095, 0.008)
+pixel_size = 0.0008
+font_size = 11
 outline_size = 0
+modulate = Color(0.5, 0.55, 0.6, 1)
 
 [node name="SliderOrigin" type="Node3D" parent="."]
-transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -0.07, 0.01)
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -0.07, 0.012)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2")
+slider_limit_min = 0.0
 slider_limit_max = 0.14
 slider_position = 0.07
 default_position = 0.07
-
-[node name="SliderBody" type="StaticBody3D" parent="SliderOrigin/InteractableSlider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-collision_layer = 1
-collision_mask = 0
-
-[node name="HandleCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-shape = SubResource("3")
-
-[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-mesh = SubResource("BoxMesh_Handle")
-surface_material_override/0 = ExtResource("MatMetal")
-
-[node name="AccentMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
-mesh = SubResource("BoxMesh_Handle")
-surface_material_override/0 = ExtResource("MatAccent")
-
-[node name="ShadowMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.005)
-mesh = SubResource("QuadMesh_Shadow")
-surface_material_override/0 = ExtResource("MatShadow")
 
 [node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
 
@@ -105,7 +96,11 @@ script = ExtResource("4")
 picked_up_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
-shape = SubResource("7")
+shape = SubResource("CollisionHandle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = SubResource("MatHandleGlow")
 
 [node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_boasd")]
 
