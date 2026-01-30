@@ -4,470 +4,547 @@
 			"name": "Vitruvian Man",
 			"lookup_name": "VitruvianMan",
 			"description": "Da Vinci's proportional man reinterpreted—the human body inscribed in circle and square, demonstrating that anatomy is geometry, that limbs sweep arcs, that the body itself is a measurement system oscillating between ideal forms.",
-			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn"
+			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn",
+			"category": "waves"
 		},
 		
 		"SoundBoxLong": {
 			"name": "Sound Box (Long)",
 			"lookup_name": "SoundBoxLong",
 			"description": "Extended resonant chamber—a longer tube means lower fundamental frequency. This is why cellos are larger than violins: wavelength determines pitch, and pitch determines the physical size of instruments.",
-			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn"
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn",
+			"category": "waves"
 		},
 		"SoundBoxShort": {
 			"name": "Sound Box (Short)",
 			"lookup_name": "SoundBoxShort",
 			"description": "Compact resonant chamber—a shorter tube means higher fundamental frequency. The relationship between length and pitch is the physical basis of all wind and string instruments.",
-			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn"
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn",
+			"category": "waves"
 		},
 
 		"spectral_analyzer": {
 			"name": "Spectral Analyzer",
 			"lookup_name": "spectral_analyzer",
 			"description": "Real-time audio frequency spectrum visualization",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn"
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
+			"category": "waves"
 		},
 		"spectrum_display": {
 			"name": "Frequency Spectrum Analyzer",
 			"lookup_name": "spectrum_display",
 			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn"
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
+			"category": "waves"
 		},
 		"spectral_sine_wave": {
 			"name": "Spectral Sine Wave",
 			"lookup_name": "spectral_sine_wave",
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn"
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
+			"category": "waves"
 		},
 		"walkable_sine_bridge": {
 			"name": "walkable_sine_bridge",
 			"lookup_name": "walkable_sine_bridge",
 			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
-			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn"
+			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
+			"category": "waves"
 		},
 		"DancingBody": {
 			"name": "Dancing Body",
 			"lookup_name": "DancingBody",
 			"description": "Kinematic waves—sine functions propagated through a skeletal hierarchy create procedural dance. The body becomes an instrument played by oscillation; movement emerges from phase lag down the bone chain.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn"
+			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn",
+			"category": "waves"
 		},
 		"OscillatingWave": {
 			"name": "Oscillating Wave",
 			"lookup_name": "OscillatingWave",
 			"description": "The fundamental wave made visible—a 3D sine wave oscillating in real-time. Adjust amplitude, frequency, and phase to feel how these parameters shape the perpetual motion between poles.",
-			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn",
+			"category": "waves"
 		},
 		"HarmonicBuilder": {
 			"name": "Harmonic Builder",
 			"lookup_name": "HarmonicBuilder",
 			"description": "Fourier synthesis in action—stack sine waves of different frequencies to build complex shapes. Any waveform is a sum of simple oscillations; this tool lets you construct them one harmonic at a time.",
-			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn"
+			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn",
+			"category": "waves"
 		},
 		"BeatFrequencies": {
 			"name": "Beat Frequencies",
 			"lookup_name": "BeatFrequencies",
 			"description": "When two waves of slightly different frequency combine, they create a pulsing envelope—the 'beat'. This is how piano tuners work, how interference patterns form, how waves negotiate difference.",
-			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn"
+			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn",
+			"category": "waves"
 		},
 		"ColoredLinesVR": {
 			"name": "ColoredLinesVR",
 			"lookup_name": "ColoredLinesVR",
 			"description": "Builds a VR hallway filled with glowing sine-wave tubes rendered from procedural meshes.",
-			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn"
+			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn",
+			"category": "waves"
 		},
 		"StaticCables": {
 			"name": "StaticCables",
 			"lookup_name": "StaticCables",
 			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
-			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn"
+			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
+			"category": "waves"
 		},
 		"doublehelix": {
 			"name": "doublehelix",
 			"lookup_name": "doublehelix",
 			"description": "Procedurally models an adjustable DNA-style double helix with strands, rungs, and rebuild-on-change controls.",
-			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn"
+			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn",
+			"category": "waves"
 		},
 		"dual_display_test": {
 			"name": "dual_display_test",
 			"lookup_name": "dual_display_test",
 			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn"
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn",
+			"category": "waves"
 		},
 		"fourier_transform": {
 			"name": "Fourier Transform",
 			"lookup_name": "fourier_transform",
 			"description": "Frequency domain analysis and signal processing",
-			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn"
+			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
+			"category": "waves"
 		},
 		"resonance_frequencies_visualizer": {
 			"name": "Resonance Frequencies Visualizer",
 			"lookup_name": "resonance_frequencies_visualizer",
 			"description": "Every object has frequencies at which it wants to vibrate—its resonant modes. This visualizer reveals those hidden harmonics, showing how systems amplify certain frequencies while damping others. Resonance is selective listening.",
-			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn"
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn",
+			"category": "waves"
 		},
 		"unit_circle": {
 			"name": "Unit Circle",
 			"lookup_name": "unit_circle",
 			"description": "Trigonometric functions visualization on unit circle",
-			"scene": "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn"
+			"scene": "res://algorithms/wavefunctions/unitcircle/unit_circle.tscn",
+			"category": "waves"
 		},
 		"tech_noir_audio": {
 			"name": "Tech Noir Audio",
 			"lookup_name": "tech_noir_audio",
 			"description": "John Cage inspired algorithmic audio composition",
-			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+			"category": "waves"
 		},
 		"liturgicalambientgen": {
 			"name": "liturgicalambientgenera",
 			"lookup_name": "liturgicalambientgen",
 			"description": "Threaded ambient generator that layers choral drones, organ swells, and cathedral effects with progress visualization.",
-			"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn"
+			"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
+			"category": "waves"
 		},
 		"resonance_frequencies": {
 			"name": "Resonance Frequencies",
 			"lookup_name": "resonance_frequencies",
 			"description": "Visualization of resonant frequency patterns",
-			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn"
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
+			"category": "waves"
 		},
 		"noir_sequencer": {
 			"name": "Noir Sequencer",
 			"lookup_name": "noir_sequencer",
 			"description": "Film noir style algorithmic music sequencer",
-			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn"
+			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
+			"category": "waves"
 		},
 		"SphericalHarmonics": {
 			"name": "Spherical Harmonics",
 			"lookup_name": "SphericalHarmonics",
 			"description": "Waves on a sphere—the mathematical functions that describe electron orbitals, planetary magnetic fields, and 3D audio spatialization. These are the 3D cousins of sine waves, oscillating across spherical surfaces.",
-			"scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn"
+			"scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn",
+			"category": "waves"
 		},
 		"kusama_sine": {
 			"name": "Kusama Sine",
 			"lookup_name": "kusama_sine",
 			"description": "Yayoi Kusama inspired sine wave patterns",
-			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn"
+			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
+			"category": "waves"
 		},
 		"john_cage_tech_noir": {
 			"name": "john_cage_tech_noir",
 			"lookup_name": "john_cage_tech_noir",
 			"description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
-			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn"
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+			"category": "waves"
 		},
 		"mario_test_sound_ui": {
 			"name": "mario_test_sound_ui",
 			"lookup_name": "mario_test_sound_ui",
 			"description": "Sci-fi kiosk hosting the Mario slider UI with XR hand poses and 2D-in-3D controls.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn"
+			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
+			"category": "waves"
 		},
 		"MarioSoundController": {
 			"name": "MarioSoundController",
 			"lookup_name": "MarioSoundController",
 			"description": "MarioSoundController.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn"
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
+			"category": "waves"
 		},
 		"coshlea": {
 			"name": "coshlea",
 			"lookup_name": "coshlea",
 			"description": "Creates a hyperbolic cosine helicoid surface with adjustable domain sampling.",
-			"scene": "algorithms/wavefunctions/coshlea/coshlea.tscn"
+			"scene": "algorithms/wavefunctions/coshlea/coshlea.tscn",
+			"category": "waves"
 		},
 		"sine_cylinder_staircase": {
 			"name": "sine_cylinder_staircase",
 			"lookup_name": "sine_cylinder_staircase",
 			"description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
-			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn"
+			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+			"category": "waves"
 		},
 		"sine_wall_static": {
 			"name": "Sine Wall (Static)",
 			"lookup_name": "sine_wall_static",
 			"description": "Architecture frozen mid-oscillation—a wall whose surface undulates in a sine pattern. This is what waves look like when time stops: pure spatial frequency without temporal change.",
-			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn"
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn",
+			"category": "waves"
 		},
 		"sine_art_monitor": {
 			"name": "Sine Art Monitor",
 			"lookup_name": "sine_art_monitor",
 			"description": "Wave as artwork—a display showing sine functions rendered as visual compositions. The same mathematics that describes sound and light becomes aesthetic object.",
-			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn"
+			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn",
+			"category": "waves"
 		},
 		"sine_wall_corridor": {
 			"name": "Sine Wall Corridor",
 			"lookup_name": "sine_wall_corridor",
 			"description": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",
-			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn"
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+			"category": "waves"
 		},
 		"SplineCables": {
 			"name": "Spline Cables",
 			"lookup_name": "SplineCables",
 			"description": "Smooth curves connecting points—cables that hang in catenary arcs, the natural shape a flexible line takes under gravity. Infrastructure as frozen wave.",
-			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn"
+			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn",
+			"category": "waves"
 		},
 		"spring_network": {
 			"name": "SpringNetwork",
 			"lookup_name": "spring_network",
 			"description": "10\u00d710 grid of coupled springs",
-			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn"
+			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
+			"category": "waves"
 		},
 		"lissajous_curves": {
 			"name": "LissajousCurves",
 			"lookup_name": "lissajous_curves",
 			"description": "Parametric curves with particle tracer",
-			"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn"
+			"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
+			"category": "waves"
 		},
 		"coupled_oscillator_lattice": {
 			"name": "CoupledOscillatorLattice",
 			"lookup_name": "coupled_oscillator_lattice",
 			"description": "12\u00d712 oscillator grid",
-			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn"
+			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+			"category": "waves"
 		},
 		"parametric_pendulum_waves": {
 			"name": "ParametricPendulumWaves",
 			"lookup_name": "parametric_pendulum_waves",
 			"description": "Parametric pendulum waves",
-			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn"
+			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
+			"category": "waves"
 		},
 		"rainbow_hallway": {
 			"name": "rainbow_hallway",
 			"lookup_name": "rainbow_hallway",
 			"description": "CSG hallway coated with animated rainbow shader controls and glow-rich lighting.",
-			"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn"
+			"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
+			"category": "waves"
 		},
 		"hallway_scene": {
 			"name": "hallway_scene",
 			"lookup_name": "hallway_scene",
 			"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
-			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn"
+			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+			"category": "waves"
 		},
 		"segment_slide": {
 			"name": "Segment Slide",
 			"lookup_name": "segment_slide",
 			"description": "A ride segment following wave contours—slide down a sine curve, feel acceleration as slope changes. The body learns wave mathematics through gravity and motion.",
-			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn"
+			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn",
+			"category": "waves"
 		},
 		"resonating_metallophone": {
 			"name": "Resonating Metallophone",
 			"lookup_name": "resonating_metallophone",
 			"description": "Metal bars that ring—each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
-			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn"
+			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+			"category": "waves"
 		},
 		"bernini_columns": {
 			"name": "Bernini Columns",
 			"lookup_name": "bernini_columns",
 			"description": "Baroque architectural wave patterns",
-			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn"
+			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+			"category": "waves"
 		},
 		"line_builder_3d": {
 			"name": "Line Builder 3D",
 			"lookup_name": "line_builder_3d",
 			"description": "Draw curves in space—each line segment becomes a building block for wave forms. Connect points to see how discrete positions approximate continuous curves.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn"
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn",
+			"category": "waves"
 		},
 		"cable_builder": {
 			"name": "Cable Builder",
 			"lookup_name": "cable_builder",
 			"description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn"
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+			"category": "waves"
 		},
 		"fourier_transform_advanced": {
 			"name": "Advanced Fourier Transform",
 			"lookup_name": "fourier_transform_advanced",
 			"description": "Enhanced frequency domain signal analysis",
-			"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn"
+			"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
+			"category": "waves"
 		},
 		"parametric_shapes": {
 			"name": "Parametric Shapes",
 			"lookup_name": "parametric_shapes",
 			"description": "Mathematical curve and surface generation",
-			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn"
+			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
+			"category": "waves"
 		},
 		"DoublePendulum": {
 			"name": "Double Pendulum",
 			"lookup_name": "DoublePendulum",
 			"description": "Deterministic chaos—two connected pendulums create wildly unpredictable motion from simple physics. This is where periodic oscillation breaks down; tiny differences in starting conditions lead to radically different trajectories.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn",
+			"category": "waves"
 		},
 		"PendulumGrid3x3": {
 			"name": "Pendulum Grid 3x3",
 			"lookup_name": "PendulumGrid3x3",
 			"description": "Nine pendulums in a grid—each swinging independently but visible together. Watch for emergent patterns: when do they synchronize? When do they diverge? Collective oscillation reveals hidden coupling.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn",
+			"category": "waves"
 		},
 
 		"math_objects": {
 			"name": "Mathematical Objects",
 			"lookup_name": "math_objects",
 			"description": "A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.",
-			"scene": "res://commons/primitives/parametric/math_objects.tscn"
+			"scene": "res://commons/primitives/parametric/math_objects.tscn",
+			"category": "waves"
 		},
 
 		"CircleSpiral": {
 			"name": "Circle Spiral",
 			"lookup_name": "CircleSpiral",
 			"description": "Rotation extended through time becomes spiral—a circle that doesn't close but climbs. This is what happens when circular motion gains a third dimension: the helix, the spring, the DNA strand.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/CircleSpiral.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/CircleSpiral.tscn",
+			"category": "waves"
 		},
 		"standing_waves": {
 			"name": "Standing Waves",
 			"lookup_name": "standing_waves",
 			"description": "Stationary wave pattern visualization",
-			"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn"
+			"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
+			"category": "waves"
 		},
 		"unit_circle_advanced": {
 			"name": "Advanced Unit Circle",
 			"lookup_name": "unit_circle_advanced",
 			"description": "Enhanced trigonometric visualization",
-			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn"
+			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+			"category": "waves"
 		},
 		"SimpleOscillatingBridge": {
 			"name": "Simple Oscillating Bridge",
 			"lookup_name": "SimpleOscillatingBridge",
 			"description": "A walkable surface that breathes—rising and falling in sine wave motion. Cross it to feel oscillation in your body, the ground itself becoming unstable in a predictable rhythm.",
-			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn"
+			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn",
+			"category": "waves"
 		},
 		"SystemsMusicTest": {
 			"name": "Systems Music Test",
 			"lookup_name": "SystemsMusicTest",
 			"description": "Music as system—notes triggered by spatial position, harmony emerging from movement through space. Steve Reich meets VR: phase relationships create texture.",
-			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn"
+			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn",
+			"category": "waves"
 		},
 		"ruth_asawa_sculpture": {
 			"name": "Ruth Asawa Sculpture",
 			"lookup_name": "ruth_asawa_sculpture",
 			"description": "Wire forms inspired by Ruth Asawa's crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.",
-			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn"
+			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn",
+			"category": "waves"
 		},
 		"ElphabaDemo": {
 			"name": "Elphaba Demo",
 			"lookup_name": "ElphabaDemo",
 			"description": "Character animation driven by oscillation—the Wicked witch moves through wave functions. Procedural performance where sine waves become gesture, mathematics becomes drama.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDemo.tscn"
+			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDemo.tscn",
+			"category": "waves"
 		},
 		"ElphabaDress": {
 			"name": "Elphaba Dress",
 			"lookup_name": "ElphabaDress",
 			"description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn"
+			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn",
+			"category": "waves"
 		},			
 		
 		"wave_interference": {
 			"name": "Wave Interference",
 			"lookup_name": "wave_interference",
 			"description": "Superposition and interference patterns",
-			"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn"
+			"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+			"category": "waves"
 		},
 		"fouriertransformshape": {
 			"name": "fouriertransformshape",
 			"lookup_name": "fouriertransformshape",
 			"description": "Shows nested rotating circles that trace a Fourier drawing with emissive connections.",
-			"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn"
+			"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
+			"category": "waves"
 		},
 		"wave_propagation_3d": {
 			"name": "3D Wave Propagation",
 			"lookup_name": "wave_propagation_3d",
 			"description": "Three-dimensional wave dynamics simulation",
-			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn"
+			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
+			"category": "waves"
 		},
 		"MelodySoundBoard": {
 			"name": "MelodySoundBoard",
 			"lookup_name": "MelodySoundBoard",
 			"description": "MelodySoundBoard",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn"
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
+			"category": "waves"
 		},
 		"MelodyChaser3D": {
 			"name": "MelodyChaser3D",
 			"lookup_name": "MelodyChaser3D",
 			"description": "Follow-the-leader musical instrument - a glowing point traces a helix pattern through pitch space, play notes by following it with your hand",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn"
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn",
+			"category": "waves"
 		},
 		"SoundscapeRadioRack": {
 			"name": "SoundscapeRadioRack",
 			"lookup_name": "SoundscapeRadioRack",
 			"description": "SoundscapeRadioRack",
-			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn"
+			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
+			"category": "waves"
 		},				
 		
 		"water_land_ride": {
 			"name": "water_land_ride",
 			"lookup_name": "water_land_ride",
 			"description": "water_land_ride",
-			"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn"
+			"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn",
+			"category": "waves"
 		},
 		"OscillationDriver": {
 			"name": "OscillationDriver",
 			"lookup_name": "OscillationDriver",
 			"description": "Basic oscillation driving a property",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.tscn",
+			"category": "waves"
 		},
 		"double_helix_scene": {
 			"name": "double_helix_scene",
 			"lookup_name": "double_helix_scene",
 			"description": "double_helix_scene",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn",
+			"category": "waves"
 		},	
 		"circle_spiral_scene": {
 			"name": "circle_spiral_scene",
 			"lookup_name": "circle_spiral_scene",
 			"description": "circle_spiral_scene",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn",
+			"category": "waves"
 		},				
 		
 		"OscillationCurve": {
 			"name": "OscillationCurve",
 			"lookup_name": "OscillationCurve",
 			"description": "Visualizing oscillation over time",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.tscn",
+			"category": "waves"
 		},
 		"UnitCircleTrig": {
 			"name": "UnitCircleTrig",
 			"lookup_name": "UnitCircleTrig",
 			"description": "Unit circle generating Sine and Cosine",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.tscn",
+			"category": "waves"
 		},
 		"PendulumWave": {
 			"name": "PendulumWave",
 			"lookup_name": "PendulumWave",
 			"description": "Pendulum generating a sine wave",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
+			"category": "waves"
 		},
 		"TrigWalkingPath": {
 			"name": "TrigWalkingPath",
 			"lookup_name": "TrigWalkingPath",
 			"description": "Walkable path generated by trig functions",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
+			"category": "waves"
 		},
 		"DoubleHelix": {
 			"name": "DoubleHelix",
 			"lookup_name": "DoubleHelix",
 			"description": "DNA-like double helix structure",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn",
+			"category": "waves"
 		},
 		"Lissajous3D": {
 			"name": "Lissajous3D",
 			"lookup_name": "Lissajous3D",
 			"description": "3D Lissajous knot",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/Lissajous3D.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/Lissajous3D.tscn",
+			"category": "waves"
 		},
 		"PendulumCircle": {
 			"name": "PendulumCircle",
 			"lookup_name": "PendulumCircle",
 			"description": "Compound motion of pendulum and circle",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.tscn"
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.tscn",
+			"category": "waves"
 		},
 		"WaveRideScene": {
 			"name": "WaveRideScene",
 			"lookup_name": "WaveRideScene",
 			"description": "WaveRideScene",
-			"scene": "res://algorithms/wavefunctions/wave_function_ride/WaveRideScene.tscn"
+			"scene": "res://algorithms/wavefunctions/wave_function_ride/WaveRideScene.tscn",
+			"category": "waves"
 		},
 		"PhonemeCloud": {
 			"name": "PhonemeCloud",
 			"lookup_name": "PhonemeCloud",
 			"description": "PhonemeCloud",
-			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn"
+			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn",
+			"category": "waves"
 		},
 		"MelodySoundBoard": {
 			"name": "MelodySoundBoard",
 			"lookup_name": "MelodySoundBoard",
 			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn"
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
+			"category": "waves"
 		}
 
 	}

@@ -4,13 +4,15 @@
 			"name": "Pattern Tile Puzzle",
 			"lookup_name": "pattern_tile_puzzle",
 			"description": "Create patterns on a small tile grid. Watch them repeat across a carpet. Handmade meets computational - from textile traditions to pixel art.",
-			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn"
+			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives"
 		},
 		"pattern_tile_4x4": {
 			"name": "4x4 Pattern Tile",
 			"lookup_name": "pattern_tile_4x4",
 			"description": "Basic 4x4 tile pattern editor. Simple repeat mode.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives",
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 0
@@ -21,6 +23,7 @@
 			"lookup_name": "pattern_tile_mirror",
 			"description": "4x4 tile with mirror symmetry (kaleidoscope effect).",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives",
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 3
@@ -31,6 +34,7 @@
 			"lookup_name": "pattern_tile_8x8",
 			"description": "Larger 8x8 tile for more complex patterns.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives",
 			"config": {
 				"tile_size": 8,
 				"repeat_mode": 0
@@ -41,6 +45,7 @@
 			"lookup_name": "pattern_tile_brick",
 			"description": "Tile with brick/half-drop offset. Classic masonry pattern.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives",
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 6
@@ -51,6 +56,7 @@
 			"lookup_name": "pattern_tile_herringbone",
 			"description": "Tile with herringbone weave pattern.",
 			"scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+			"category": "primitives",
 			"config": {
 				"tile_size": 4,
 				"repeat_mode": 8
@@ -60,25 +66,29 @@
 			"name": "Index Visualizer",
 			"lookup_name": "index_visualizer",
 			"description": "Displays current grid position as array index [row, col].",
-			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn"
+			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn",
+			"category": "primitives"
 		},
 		"pattern_tile_cube": {
 			"name": "Pattern Tile Cube",
 			"lookup_name": "pattern_tile_cube",
 			"description": "Small grabbable color cube for pattern tile puzzle. Drag to grid cells to place colors.",
-			"scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn"
+			"scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn",
+			"category": "primitives"
 		},
 		"step_sequencer": {
 			"name": "Step Sequencer",
 			"lookup_name": "step_sequencer",
 			"description": "2D step sequencer with click-to-toggle grid. Arrays as sound - playhead reads indices, triggers sounds.",
-			"scene": "res://commons/audio/sequencer/step_sequencer.tscn"
+			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives"
 		},
 		"step_sequencer_trap": {
 			"name": "Trap Sequencer",
 			"lookup_name": "step_sequencer_trap",
 			"description": "Trap beat sequencer with 16 steps.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -95,6 +105,7 @@
 			"lookup_name": "step_sequencer_synth",
 			"description": "Synthesizer sequencer with classic synth sounds.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -107,6 +118,7 @@
 			"lookup_name": "step_sequencer_house",
 			"description": "Crystal Waters / Gypsy Woman style 90s house. TR-909 kick, M1 piano stabs, acid bass.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -123,6 +135,7 @@
 			"lookup_name": "step_sequencer_pads",
 			"description": "Lush analog pads. Juno-106, Jupiter-8, PPG Wave. Slow atmospheric builds.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 8,
@@ -135,6 +148,7 @@
 			"lookup_name": "step_sequencer_kraftwerk",
 			"description": "1970s Germany. Moog sequencer pulse, robotic precision. The birth of electronic music.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -151,6 +165,7 @@
 			"lookup_name": "step_sequencer_disco",
 			"description": "1970s funk and groove. Four-on-floor, Synare disco tom, funky bass.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -163,6 +178,7 @@
 			"lookup_name": "step_sequencer_ambient",
 			"description": "1990s Aphex Twin style. Modular textures, drones, ethereal atmosphere.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 8,
@@ -179,6 +195,7 @@
 			"lookup_name": "step_sequencer_jazz",
 			"description": "1970s Herbie Hancock. Jazz meets electronics, Moog fusion, DX7 piano.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -195,6 +212,7 @@
 			"lookup_name": "step_sequencer_chiptune",
 			"description": "1980s 8-bit. C64 SID chip, Amiga tracker, retro game sounds.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -207,6 +225,7 @@
 			"lookup_name": "step_sequencer_scifi",
 			"description": "Laboratory atmosphere. Hums, data chirps, electromagnetic interference.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 8,
@@ -219,6 +238,7 @@
 			"lookup_name": "step_sequencer_cinematic",
 			"description": "1980s Blade Runner. CS-80 brass, Jupiter strings, Vangelis influence.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 8,
@@ -231,6 +251,7 @@
 			"lookup_name": "step_sequencer_breakbeat",
 			"description": "1990s jungle/DnB. Syncopation, chopped samples, fast hi-hats.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -243,6 +264,7 @@
 			"lookup_name": "step_sequencer_cosmic",
 			"description": "1970s-80s space disco. Jean-Michel Jarre, ARP 2600, cosmic FX.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 16,
@@ -255,6 +277,7 @@
 			"lookup_name": "step_sequencer_lofi",
 			"description": "2010s chill beats. Warm DX7 piano, mellow 808, study music vibes.",
 			"scene": "res://commons/audio/sequencer/step_sequencer.tscn",
+			"category": "primitives",
 			"config": {
 				"num_tracks": 4,
 				"num_steps": 8,
@@ -266,25 +289,29 @@
 			"name": "Binary Table Display",
 			"lookup_name": "binary_table",
 			"description": "Show any 2D array as a grid of values. See the data structure made visible.",
-			"scene": "res://algorithms/arrays/binary_table/binary_table_display.tscn"
+			"scene": "res://algorithms/arrays/binary_table/binary_table_display.tscn",
+			"category": "primitives"
 		},
 		"pulsar_glass_tubes": {
 			"name": "Pulsar Glass Tubes",
 			"lookup_name": "pulsar_glass_tubes",
 			"description": "3D glass tube visualization of Pulsar B1919+21 radio waves. Height = signal intensity. Arrays as art.",
-			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn"
+			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+			"category": "primitives"
 		},
 		"pulsar_visualizer": {
 			"name": "Pulsar B1919+21 Visualizer",
 			"lookup_name": "pulsar_visualizer",
 			"description": "The first pulsar discovered (1967). Binary table + 3D glass tubes. Joy Division's Unknown Pleasures made interactive.",
-			"scene": "res://algorithms/arrays/pulsar/pulsar_visualizer.tscn"
+			"scene": "res://algorithms/arrays/pulsar/pulsar_visualizer.tscn",
+			"category": "primitives"
 		},
 		"pulsar_compact": {
 			"name": "Pulsar Compact",
 			"lookup_name": "pulsar_compact",
 			"description": "Smaller pulsar visualization. 20 rows of glass tubes.",
 			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+			"category": "primitives",
 			"config": {
 				"rows": 20,
 				"cols": 30,
@@ -296,6 +323,7 @@
 			"lookup_name": "pulsar_lines",
 			"description": "Pulsar visualization using lines instead of tubes. Better performance.",
 			"scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+			"category": "primitives",
 			"config": {
 				"visualization_mode": 1,
 				"rows": 60,

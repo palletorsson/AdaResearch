@@ -4,75 +4,86 @@
 			"name": "Slope Gradient Cubes",
 			"lookup_name": "RotateGridCubes",
 			"description": "Gradient slope test with animated rotation for walkability check.",
-			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn"
+			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn",
+			"category": "procedural"
 		},
 		"rotate_grid_cubes": {
 			"name": "Rotate Grid Cubes",
 			"lookup_name": "rotate_grid_cubes",
 			"description": "Rotates grid cubes with configurable patterns including alternating directions and phase offsets for passable slopes.",
-			"scene": "res://algorithms/randomness/RotateGridCubes.tscn"
+			"scene": "res://algorithms/randomness/RotateGridCubes.tscn",
+			"category": "procedural"
 		},
 		"random_edge_profile": {
 			"name": "Random Edge Profile",
 			"lookup_name": "random_edge_profile",
 			"description": "A planar surface that generates random edge profiles and patterns",
-			"scene": "res://algorithms/randomness/profile_random.tscn"
+			"scene": "res://algorithms/randomness/profile_random.tscn",
+			"category": "procedural"
 		},
 		"entropy_axiom": {
-			"name": "entropy_axiom",
+			"name": "Entropy Axiom",
 			"lookup_name": "entropy_axiom",
-			"description": "entropy_axiom",
-			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn"
+			"description": "Visualizes the gradient from order to chaos using a 10x10x40 MultiMesh grid (4000 instances). Points transition from structured alignment to random displacement along the Z-axis.",
+			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+			"category": "emergence"
 		},
 		"plane_manipulator": {
 			"name": "plane_manipulator",
 			"lookup_name": "plane_manipulator",
 			"description": "This script animates a random walk on a 3D plane. It simulates walkers that move across the plane's surface, raising the ground to create trails in real-time.",
 			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn",
+			"category": "procedural",
 			"dev_themes": ["procedural", "emergence"],
 			"dev_category": "procedural_terrain",
 			"complexity": "intermediate",
 			"tags": ["random_walk", "terrain", "realtime", "trails", "3d"]
 		},
 		"pheromone_terrain": {
-			"name": "pheromone_terrain",
+			"name": "Pheromone Terrain",
 			"lookup_name": "pheromone_terrain",
-			"description": "pheromone_terrain",
+			"description": "Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.",
 			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+			"category": "emergence",
 			"dev_themes": ["procedural", "emergence"],
 			"dev_category": "procedural_terrain",
 			"complexity": "advanced",
 			"tags": ["pheromone", "swarm", "terrain", "self_organization"]
 		},
 		"randomup": {
-			"name": "randomup",
+			"name": "Random Up",
 			"lookup_name": "randomup",
-			"description": "randomup",
-			"scene": "res://algorithms/randomness/randomup/randomup.tscn"
+			"description": "Randomly elevates objects upward with varying heights, demonstrating basic vertical displacement using uniform randomness.",
+			"scene": "res://algorithms/randomness/randomup/randomup.tscn",
+			"category": "primitives"
 		},
 		"randompoints": {
 			"name": "randompoints",
 			"lookup_name": "randompoints",
 			"description": "Spawns labeled grab points distributed by 3D Gaussian noise inside a configurable volume.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn"
+			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
+			"category": "emergence"
 		},
 		"randompoints_gaussian": {
 			"name": "randompoints_gaussian",
 			"lookup_name": "randompoints_gaussian",
 			"description": "Variant of the grab-point scatter preconfigured to sample from a 3D Gaussian cloud with labeled spheres.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn"
+			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn",
+			"category": "emergence"
 		},
 		"randompoints_uniform": {
 			"name": "randompoints_uniform",
 			"lookup_name": "randompoints_uniform",
 			"description": "Scatters grab spheres uniformly through a bounding box and labels each point.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn"
+			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn",
+			"category": "emergence"
 		},
 		"pixel_cloud": {
 			"name": "pixel_cloud",
 			"lookup_name": "pixel_cloud",
 			"description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
 			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+			"category": "procedural",
 			"dev_themes": ["procedural", "emergence"],
 			"dev_category": "procedural_sculpture",
 			"complexity": "intermediate",
@@ -82,25 +93,29 @@
 			"name": "randompoint",
 			"lookup_name": "randompoint",
 			"description": "Drops a single draggable point inside an XY bounds and keeps its billboarded coordinate label in range.",
-			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn"
+			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn",
+			"category": "primitives"
 		},
 		"randomlines": {
 			"name": "randomlines",
 			"lookup_name": "randomlines",
 			"description": "Spawns multiple interactive line rigs and randomly positions their grab endpoints in 3D space.",
-			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn"
+			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
+			"category": "primitives"
 		},
 		"bubbles_random": {
 			"name": "Random Bubbles",
 			"lookup_name": "bubbles_random",
 			"description": "A particle system that generates random bubble effects with dynamic spawning",
-			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn"
+			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
+			"category": "procedural"
 		},
 		"random_walk_128": {
 			"name": "Random Walk 128x128",
 			"lookup_name": "random_walk_128",
 			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
 			"scene": "res://algorithms/randomness/random_walk_128.tscn",
+			"category": "primitives",
 			"dev_themes": ["procedural", "primitives"],
 			"dev_category": "random_walk_algorithm",
 			"complexity": "beginner",
@@ -111,6 +126,7 @@
 			"lookup_name": "ten_print_maze_3d",
 			"description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
 			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+			"category": "procedural",
 			"dev_themes": ["procedural", "emergence"],
 			"dev_category": "procedural_maze",
 			"complexity": "intermediate",
@@ -120,163 +136,190 @@
 			"name": "Digital Materiality Glitch",
 			"lookup_name": "digital_materiality_glitch",
 			"description": "Interactive exploration of digital materiality through glitch aesthetics and algorithmic artifacts",
-			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn"
+			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
+			"category": "procedural"
 		},
 		"distribution_visualization": {
 			"name": "Distribution Visualization",
 			"lookup_name": "distribution_visualization",
 			"description": "Interactive visualization of statistical distributions and probability patterns",
-			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn"
+			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
+			"category": "emergence"
 		},
 		"pickup_cube_placer": {
 			"name": "pickup_cube_placer",
 			"lookup_name": "pickup_cube_placer",
 			"description": "Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.",
-			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn"
+			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
+			"category": "procedural"
 		},
 		"walk_random": {
 			"name": "Random Walker",
 			"lookup_name": "walk_random",
 			"description": "An algorithmic walker that creates trails through the grid space",
-			"scene": "res://algorithms/randomness/walk_random.tscn"
+			"scene": "res://algorithms/randomness/walk_random.tscn",
+			"category": "procedural"
 		},
 		"rotate_random_y": {
-			"name": "rotate_random_y",
+			"name": "Rotate Random Y",
 			"lookup_name": "rotate_random_y",
-			"description": "rotate_random_y",
-			"scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn"
+			"description": "Applies random Y-axis rotation to objects, creating varied orientations while maintaining vertical alignment.",
+			"scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn",
+			"category": "primitives"
 		},
 		"Random_Rotate_Random_XYZ": {
-			"name": "Random_Rotate_Random_XYZ",
+			"name": "Random Rotate XYZ",
 			"lookup_name": "Random_Rotate_Random_XYZ",
-			"description": "Random_Rotate_Random_XYZ",
-			"scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn"
+			"description": "Applies random rotation on all three axes (X, Y, Z), creating fully randomized orientations for chaotic arrangements.",
+			"scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn",
+			"category": "primitives"
 		},
 		"randomize_cubes_over_Z": {
-			"name": "randomize_cubes_over_Z",
+			"name": "Randomize Cubes Over Z",
 			"lookup_name": "randomize_cubes_over_Z",
-			"description": "randomize_cubes_over_Z",
-			"scene": "res://algorithms/randomness/RandomizeCubesOverZ/randomize_cubes_over_Z.tscn"
+			"description": "Distributes cubes with increasing randomness along the Z-axis, visualizing a gradient from order to disorder.",
+			"scene": "res://algorithms/randomness/RandomizeCubesOverZ/randomize_cubes_over_Z.tscn",
+			"category": "primitives"
 		},
 		"plane_random": {
-			"name": "plane_random",
+			"name": "Plane Random",
 			"lookup_name": "plane_random",
-			"description": "plane_random",
-			"scene": "res://algorithms/randomness/PlaneRandom/plane_random.tscn"
+			"description": "Generates a planar surface with random vertex displacement, creating organic undulating terrain from flat geometry.",
+			"scene": "res://algorithms/randomness/PlaneRandom/plane_random.tscn",
+			"category": "procedural"
 		},
 		"random_bell_curve": {
-			"name": "random_bell_curve",
+			"name": "Random Bell Curve Terrain",
 			"lookup_name": "random_bell_curve",
-			"description": "random_bell_curve",
-			"scene": "res://algorithms/randomness/randombellcurve/random_bell_curve.tscn"
+			"description": "Builds a 20x20 quad grid shaped into a 3D Gaussian bell curve with HeightMapShape3D collisions. Optional surface noise adds organic variation.",
+			"scene": "res://algorithms/randomness/randombellcurve/random_bell_curve.tscn",
+			"category": "emergence"
 		},
 		"pipe_dream": {
-			"name": "pipe_dream",
+			"name": "Pipe Dream",
 			"lookup_name": "pipe_dream",
-			"description": "pipe_dream",
-			"scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn"
+			"description": "A 3D recreation of the classic Windows Pipes screensaver. Grows a colored pipe that randomly changes direction, building an intricate network over 100 segments.",
+			"scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn",
+			"category": "procedural"
 		},
 		"bell_alley": {
-			"name": "bell_alley",
+			"name": "Bell Curve Alley",
 			"lookup_name": "bell_alley",
-			"description": "bell_alley",
-			"scene": "res://algorithms/randomness/bell_alley/bell_alley.tscn"
+			"description": "Constructs a corridor of cubes along Z that widens according to a Gaussian bell curve, creating a passage that narrows at the center and expands at the edges.",
+			"scene": "res://algorithms/randomness/bell_alley/bell_alley.tscn",
+			"category": "emergence"
 		},
 		"remove_random": {
 			"name": "Random Destructor",
 			"lookup_name": "remove_random",
 			"description": "A demolition algorithm that randomly removes cubes from the grid",
-			"scene": "res://algorithms/randomness/remove_random.tscn"
+			"scene": "res://algorithms/randomness/remove_random.tscn",
+			"category": "primitives"
 		},
 		"height_random": {
 			"name": "Height Distributor",
 			"lookup_name": "height_random",
 			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
-			"scene": "res://algorithms/randomness/height_random.tscn"
+			"scene": "res://algorithms/randomness/height_random.tscn",
+			"category": "procedural"
 		},
 		"gaussian_random": {
 			"name": "Gaussian Generator",
 			"lookup_name": "gaussian_random",
 			"description": "A bell curve algorithm that creates natural-looking height distributions",
-			"scene": "res://algorithms/randomness/gaussian_random.tscn"
+			"scene": "res://algorithms/randomness/gaussian_random.tscn",
+			"category": "emergence"
 		},
 		"GaussianPaintSplatter": {
-			"name": "GaussianPaintSplatter",
+			"name": "Gaussian Paint Splatter",
 			"lookup_name": "GaussianPaintSplatter",
-			"description": "GaussianPaintSplatter",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn"
+			"description": "Generates paint splatter patterns using Gaussian distribution, creating natural clustering around a center point with density falling off like a bell curve.",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn",
+			"category": "emergence"
 		},
 		"RandomGaussianTexture": {
-			"name": "RandomGaussianTexture",
+			"name": "Random Gaussian Texture",
 			"lookup_name": "RandomGaussianTexture",
-			"description": "RandomGaussianTexture",
-			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn"
+			"description": "Generates textures with pixel values sampled from a Gaussian distribution, creating soft, natural-looking noise patterns.",
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
+			"category": "emergence"
 		},
 		"GaussianBlurCircle": {
-			"name": "GaussianBlurCircle",
+			"name": "Gaussian Blur Circle",
 			"lookup_name": "GaussianBlurCircle",
-			"description": "GaussianBlurCircle",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurCircle.tscn"
+			"description": "Demonstrates Gaussian blur applied to a circular region, showing how the bell curve kernel creates smooth, natural edge falloff.",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurCircle.tscn",
+			"category": "emergence"
 		},
 		"GaussianBlurShader": {
-			"name": "GaussianBlurShader",
+			"name": "Gaussian Blur Shader",
 			"lookup_name": "GaussianBlurShader",
-			"description": "GaussianBlurShader",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn"
+			"description": "GPU-accelerated Gaussian blur using a fragment shader. Real-time demonstration of the convolution kernel derived from the normal distribution.",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn",
+			"category": "emergence"
 		},
 		"WhiteNoiseGallery": {
-			"name": "WhiteNoiseGallery",
+			"name": "White Noise Gallery",
 			"lookup_name": "WhiteNoiseGallery",
-			"description": "WhiteNoiseGallery",
-			"scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn"
+			"description": "A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
+			"scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn",
+			"category": "procedural"
 		},
 		"NoiseColors3D": {
-			"name": "NoiseColors3D",
+			"name": "Noise Colors 3D",
 			"lookup_name": "NoiseColors3D",
-			"description": "NoiseColors3Dy",
-			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn"
+			"description": "Compares different noise 'colors' (white, pink, brown, blue) in 3D space, visualizing their distinct frequency distributions and correlation properties.",
+			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn",
+			"category": "procedural"
 		},
 		"blue_noise": {
 			"name": "Blue Noise",
 			"lookup_name": "blue_noise",
 			"description": "Interactive blue noise generation for high-quality random sampling and distribution",
-			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn"
+			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
+			"category": "procedural"
 		},
 		"noisetorus": {
 			"name": "noisetorus",
 			"lookup_name": "noisetorus",
 			"description": "Shader-driven torus whose surface ripples with animated noise and hue shifting.",
-			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn"
+			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
+			"category": "procedural"
 		},
 		"noisetext": {
 			"name": "noisetext",
 			"lookup_name": "noisetext",
 			"description": "Applies the noise planet shader to 3D text and a plinth for animated logo signage.",
-			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn"
+			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
+			"category": "procedural"
 		},
 		"noisesphere": {
 			"name": "noisesphere",
 			"lookup_name": "noisesphere",
 			"description": "Noise-deformed hemisphere rendered with the planet shader for atmospheric dome effects.",
-			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn"
+			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
+			"category": "procedural"
 		},
 		"sculpt_one": {
 			"name": "Sculpt One",
 			"lookup_name": "sculpt_one",
 			"description": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
-			"scene": "res://algorithms/randomness/sculpt_one.tscn"
+			"scene": "res://algorithms/randomness/sculpt_one.tscn",
+			"category": "procedural"
 		},
 		"env_one": {
 			"name": "Environment One",
 			"lookup_name": "env_one",
 			"description": "A procedural environment generation algorithm using randomness for kitbashing",
-			"scene": "res://algorithms/randomness/env_one.tscn"
+			"scene": "res://algorithms/randomness/env_one.tscn",
+			"category": "procedural"
 		},
 		"random_transformations_geometric": {
 			"name": "Random Transformations - Geometric",
 			"lookup_name": "random_transformations_geometric",
 			"description": "Random geometric transform visualization",
 			"scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
+			"category": "primitives",
 			"interaction": "look",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -286,6 +329,7 @@
 			"lookup_name": "random_transformations_stochastic",
 			"description": "Stochastic distribution demonstrations",
 			"scene": "res://algorithms/randomness/random_transformations/stochastic_operations/stochastic_operations.tscn",
+			"category": "emergence",
 			"interaction": "look",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -295,6 +339,7 @@
 			"lookup_name": "random_transformations_matrices",
 			"description": "Random matrix visualization",
 			"scene": "res://algorithms/randomness/random_transformations/random_matrices/random_matrices.tscn",
+			"category": "primitives",
 			"interaction": "look",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -304,6 +349,7 @@
 			"lookup_name": "random_transformations_noise",
 			"description": "Noise-based distortion grid",
 			"scene": "res://algorithms/randomness/random_transformations/noise_based_distortion/noise_based_distortion.tscn",
+			"category": "procedural",
 			"interaction": "look",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -313,6 +359,7 @@
 			"lookup_name": "particle_randomness_pure",
 			"description": "Pure random particle movement",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn",
+			"category": "primitives",
 			"interaction": "touch_to_activate",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -322,6 +369,7 @@
 			"lookup_name": "particle_randomness_perlin",
 			"description": "Perlin-noise-driven particles",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn",
+			"category": "procedural",
 			"interaction": "touch_to_activate",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -331,6 +379,7 @@
 			"lookup_name": "particle_randomness_patterns",
 			"description": "Procedural pattern particles",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn",
+			"category": "procedural",
 			"interaction": "touch_to_activate",
 			"sequence": "randomness",
 			"artifact_type": "interactive_algorithm"
@@ -339,253 +388,295 @@
 			"name": "Particle Randomness - Emergent",
 			"lookup_name": "particle_randomness_emergent",
 			"description": "Emergent behavior particle system",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn",
+			"category": "emergence"
 		},
 		"particle_randomness_evolutionary": {
 			"name": "Particle Randomness - Evolutionary",
 			"lookup_name": "particle_randomness_evolutionary",
 			"description": "Evolutionary algorithm particles",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+			"category": "emergence"
 		},
 		"noiselayers": {
-			"name": "noiselayers",
+			"name": "Noise Layers",
 			"lookup_name": "noiselayers",
-			"description": "noiselayers",
-			"scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn"
+			"description": "Demonstrates octave layering (fractal Brownian motion) by stacking multiple noise frequencies. Shows how combining scales creates natural complexity.",
+			"scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+			"category": "procedural"
 		},
 		"2d_in_3d_randomness_vis": {
-			"name": "2d_in_3d_randomness_vis",
+			"name": "2D in 3D Randomness Visualization",
 			"lookup_name": "2d_in_3d_randomness_vis",
-			"description": "2d_in_3d_randomness_vis",
-			"scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn"
+			"description": "An infoboard displaying 2D randomness algorithms rendered in 3D space, bridging flat visualizations with spatial understanding.",
+			"scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn",
+			"category": "procedural"
 		},
 		"walkingsphere": {
 			"name": "walkingsphere",
 			"lookup_name": "walkingsphere",
 			"description": "Spike, Random walk, Cellular automata  sphere",
-			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn"
+			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn",
+			"category": "emergence"
 		},
 		"evolutionary_algorithms": {
-			"name": "evolutionary_algorithms",
+			"name": "Evolutionary Algorithms",
 			"lookup_name": "evolutionary_algorithms",
-			"description": "evolutionary_algorithms",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn"
+			"description": "Particle system demonstrating selection, mutation, and crossover. Populations evolve toward fitness goals through randomized genetic operations.",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+			"category": "emergence"
 		},
 		"random_walk_collection": {
 			"name": "Random Walk Grab Paper",
 			"lookup_name": "random_walk_collection",
 			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn"
+			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
+			"category": "procedural"
 		},
 		"random_walk_grab_paper": {
 			"name": "Random Walk Grab Paper",
 			"lookup_name": "random_walk_grab_paper",
 			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn"
+			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn",
+			"category": "procedural"
 		},
 		"crystal_random_walk_demo": {
-			"name": "crystal_random_walk_demo",
+			"name": "Crystal Random Walk Demo",
 			"lookup_name": "crystal_random_walk_demo",
-			"description": "crystal_random_walk_demo",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk_demo.tscn"
+			"description": "Random walk constrained to a crystal lattice structure, demonstrating how geometric constraints shape stochastic paths into crystalline forms.",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk_demo.tscn",
+			"category": "procedural"
 		},
 		"tessellation_lattice_demo": {
-			"name": "tessellation_lattice_demo",
+			"name": "Tessellation Lattice Demo",
 			"lookup_name": "tessellation_lattice_demo",
-			"description": "tessellation_lattice_demo",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn"
+			"description": "Random walk on tessellated lattice structures (triangular, hexagonal, square), showing how tiling geometry affects diffusion patterns.",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn",
+			"category": "procedural"
 		},
 		"random_gaussian_texture": {
 			"name": "Random Gaussian Texture",
 			"lookup_name": "random_gaussian_texture",
 			"description": "Interactive Gaussian distribution texture generation for natural random patterns",
-			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn"
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
+			"category": "emergence"
 		},
 		"probability_distributions_3d": {
 			"name": "Probability Distributions 3D",
 			"lookup_name": "probability_distributions_3d",
 			"description": "Interactive 3D visualization of various probability distributions and statistical patterns",
-			"scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn"
+			"scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn",
+			"category": "emergence"
 		},
 		"pool_hole_noise": {
 			"name": "Pool Hole Noise",
 			"lookup_name": "pool_hole_noise",
 			"description": "Interactive cellular noise generation with pool hole pattern visualization",
-			"scene": "res://algorithms/randomness/noise/cellularnoise/scenes/pool_hole_noise.tscn"
+			"scene": "res://algorithms/randomness/noise/cellularnoise/scenes/pool_hole_noise.tscn",
+			"category": "procedural"
 		},
 		"neon_wave_grid": {
 			"name": "Neon Wave Grid",
 			"lookup_name": "neon_wave_grid",
 			"description": "Interactive Perlin noise-based neon wave grid with dynamic lighting effects",
-			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/NeonWaveGrid.tscn"
+			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/NeonWaveGrid.tscn",
+			"category": "procedural"
 		},
 		"perlin_noise_terrain": {
 			"name": "Perlin Noise Terrain",
 			"lookup_name": "perlin_noise_terrain",
 			"description": "Interactive 3D terrain generation using Perlin noise algorithms",
-			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn"
+			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
+			"category": "procedural"
 		},
 		"perlin_noise": {
 			"name": "Perlin Noise",
 			"lookup_name": "perlin_noise",
 			"description": "Interactive Perlin noise generation and visualization",
-			"scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn"
+			"scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
+			"category": "procedural"
 		},
 		"pollock_painting_in_3d": {
 			"name": "Pollock Painting in 3D",
 			"lookup_name": "pollock_painting_in_3d",
 			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+			"category": "procedural"
 		},
 		"spawn_randomcubes": {
 			"name": "spawn_randomcubes",
 			"lookup_name": "spawn_randomcubes",
 			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn",
+			"category": "procedural"
 		},
 		"pollock_3d": {
 			"name": "Pollock 3D",
 			"lookup_name": "pollock_3d",
 			"description": "Interactive 3D Jackson Pollock-inspired art using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.tscn",
+			"category": "procedural"
 		},
 		"extreme_randomness": {
 			"name": "Extreme Randomness",
 			"lookup_name": "extreme_randomness",
 			"description": "Interactive particle-based extreme randomness generation and visualization",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
+			"category": "procedural"
 		},
 		"random_decay_objects": {
 			"name": "Random Decay Objects",
 			"lookup_name": "random_decay_objects",
 			"description": "Interactive visualization of random decay processes and object degradation",
-			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn"
+			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn",
+			"category": "emergence"
 		},
 		"random_color_book_page_collection": {
 			"name": "Random Color Book Page Collection",
 			"lookup_name": "random_color_book_page_collection",
 			"description": "Interactive collection of randomly generated colored book pages using procedural algorithms",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn"
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn",
+			"category": "procedural"
 		},
 		"random_number_book_page_collection": {
 			"name": "Random Number Book Page Collection",
 			"lookup_name": "random_number_book_page_collection",
 			"description": "Interactive collection of randomly generated numbered book pages using procedural algorithms",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn"
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
+			"category": "procedural"
 		},
 		"random_transformations": {
 			"name": "Random Transformations",
 			"lookup_name": "random_transformations",
 			"description": "Interactive visualization of random geometric transformations and spatial manipulations",
-			"scene": "res://algorithms/randomness/random_transformations/random_transformations.tscn"
+			"scene": "res://algorithms/randomness/random_transformations/random_transformations.tscn",
+			"category": "primitives"
 		},
 		"simplex_noise": {
 			"name": "Simplex Noise",
 			"lookup_name": "simplex_noise",
 			"description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
-			"scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn"
+			"scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
+			"category": "procedural"
 		},
 		"ten_print": {
 			"name": "10 PRINT",
 			"lookup_name": "ten_print",
 			"description": "Interactive recreation of the classic Commodore 64 10 PRINT maze generation algorithm",
-			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn"
+			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
+			"category": "procedural"
 		},
 		"trng_vs_prng": {
 			"name": "TRNG vs PRNG",
 			"lookup_name": "trng_vs_prng",
 			"description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",
-			"scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn"
+			"scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+			"category": "primitives"
 		},
 		"value_noise": {
 			"name": "Value Noise",
 			"lookup_name": "value_noise",
 			"description": "Interactive Value noise generation and visualization for procedural texture creation",
-			"scene": "res://algorithms/randomness/valuenoise/valuenoise.tscn"
+			"scene": "res://algorithms/randomness/valuenoise/valuenoise.tscn",
+			"category": "procedural"
 		},
 		"random_number_book_page_1955": {
 			"name": "Random Number Book Page 1955",
 			"lookup_name": "random_number_book_page_1955",
 			"description": "Interactive 1955-style random number book page generation using procedural algorithms",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn"
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+			"category": "procedural"
 		},
 		"random_butterflies": {
 			"name": "Random Butterflies",
 			"lookup_name": "random_butterflies",
 			"description": "Interactive butterfly swarm with random movement patterns and procedural animation",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+			"category": "emergence"
 		},
 		"random_edge_profile_collection": {
 			"name": "Random Edge Profile Collection",
 			"lookup_name": "random_edge_profile_collection",
 			"description": "Interactive collection of random edge profiles for procedural geometry generation",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn",
+			"category": "procedural"
 		},
 		"random_plants": {
 			"name": "Random Plants",
 			"lookup_name": "random_plants",
 			"description": "Interactive procedural plant generation with random growth patterns and organic forms",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn",
+			"category": "procedural"
 		},
 		"omoss": {
 			"name": "Omoss",
 			"lookup_name": "omoss",
 			"description": "Interactive Omoss algorithm for procedural organic growth and pattern generation",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn"
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn",
+			"category": "procedural"
 		},
 		"shader_noise_space": {
 			"name": "Shader Noise Space",
 			"lookup_name": "shader_noise_space",
 			"description": "Interactive shader-based noise space exploration with procedural textures and patterns",
-			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn"
+			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
+			"category": "procedural"
 		},
 		"voxelnoise": {
-			"name": "voxelnoise",
+			"name": "Voxel Noise",
 			"lookup_name": "voxelnoise",
-			"description": "voxelnoise",
-			"scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn"
+			"description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
+			"scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn",
+			"category": "procedural"
 		},
 		"VoxelNoiseROIs": {
-			"name": "VoxelNoiseROIs",
+			"name": "Voxel Noise ROIs",
 			"lookup_name": "VoxelNoiseROIs",
-			"description": "VoxelNoiseROIs",
-			"scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn"
+			"description": "Voxel noise with regions of interest (ROIs) — isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
+			"scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn",
+			"category": "procedural"
 		},
 		"noise_terrain": {
 			"name": "Noise Terrain",
 			"lookup_name": "noise_terrain",
 			"description": "Interactive procedural terrain generation using various noise algorithms and height mapping",
-			"scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn"
+			"scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
+			"category": "procedural"
 		},
 		"perlin_noise_clouds": {
 			"name": "Perlin Noise Clouds",
 			"lookup_name": "perlin_noise_clouds",
 			"description": "Interactive 3D volumetric cloud generation using Perlin noise for atmospheric and procedural sky effects",
-			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn"
+			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn",
+			"category": "procedural"
 		},
 		"noise_terrain_with_blobs": {
 			"name": "Noise Terrain with Animated Blobs",
 			"lookup_name": "noise_terrain_with_blobs",
 			"description": "Advanced noise terrain generator with animated blob particles that move across the landscape using spatial shaders and dynamic positioning",
-			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn"
+			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn",
+			"category": "procedural"
 		},
 		"cloudvolume": {
 			"name": "Cloud Volume",
 			"lookup_name": "cloudvolume",
 			"description": "3D volumetric cloud generation using noise algorithms for atmospheric and sky effects",
-			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn"
+			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn",
+			"category": "procedural"
 		},
 		"perlinvolume": {
 			"name": "Perlin Volume",
 			"lookup_name": "perlinvolume",
 			"description": "3D Perlin noise volume generation for procedural content creation and spatial algorithms",
-			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn"
+			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn",
+			"category": "procedural"
 		},
 		"instancingscatter": {
 			"name": "Instancing Scatter",
 			"lookup_name": "instancingscatter",
 			"description": "High-performance instance scattering algorithm for procedural object placement and distribution",
-			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn"
+			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn",
+			"category": "procedural"
 		}
 	}
 }

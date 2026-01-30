@@ -7,6 +7,7 @@
   },
   "artifacts": {
     "godel_statement_plaque": {
+      "lookup_name": "godel_statement_plaque",
       "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
       "class_name": "GodelStatementPlaque",
       "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
@@ -20,10 +21,12 @@
       },
       "dev_themes": ["philosophy", "qfep"],
       "dev_category": "foundations_crisis",
+      "category": "philosophy",
       "complexity": "advanced",
       "tags": ["godel", "self_reference", "paradox", "incompleteness", "interactive"]
     },
     "russell_set_box": {
+      "lookup_name": "russell_set_box",
       "scene": "res://commons/interfaces/foundations/russell_set_box.tscn",
       "class_name": "RussellSetBox",
       "description": "Nested boxes visualizing Russell's Paradox - the set of all sets that don't contain themselves",
@@ -37,10 +40,12 @@
       },
       "dev_themes": ["philosophy", "qfep"],
       "dev_category": "foundations_crisis",
+      "category": "philosophy",
       "complexity": "advanced",
       "tags": ["russell", "paradox", "self_reference", "set_theory", "interactive"]
     },
     "magritte_pipe": {
+      "lookup_name": "magritte_pipe",
       "scene": "res://commons/interfaces/foundations/magritte_pipe.tscn",
       "class_name": "MagrittePipe",
       "description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
@@ -53,10 +58,12 @@
       },
       "dev_themes": ["philosophy"],
       "dev_category": "art_mathematics",
+      "category": "philosophy",
       "complexity": "intermediate",
       "tags": ["magritte", "representation", "meta", "art", "interactive"]
     },
     "escher_staircase": {
+      "lookup_name": "escher_staircase",
       "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
       "class_name": "EscherStaircase",
       "description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
@@ -70,10 +77,12 @@
       },
       "dev_themes": ["philosophy", "qfep"],
       "dev_category": "foundations_crisis",
+      "category": "philosophy",
       "complexity": "advanced",
       "tags": ["escher", "impossible", "paradox", "geometry", "interactive"]
     },
     "florensky_sphere": {
+      "lookup_name": "florensky_sphere",
       "scene": "res://commons/interfaces/foundations/florensky_sphere.tscn",
       "class_name": "FlorenskySphere",
       "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
@@ -87,10 +96,12 @@
       },
       "dev_themes": ["philosophy", "qfep"],
       "dev_category": "foundations_crisis",
+      "category": "philosophy",
       "complexity": "expert",
       "tags": ["florensky", "paraconsistent_logic", "superposition", "quantum", "interactive"]
     },
     "bifurcation_diagram": {
+      "lookup_name": "bifurcation_diagram",
       "scene": "res://commons/interfaces/foundations/bifurcation_diagram.tscn",
       "class_name": "BifurcationDiagram",
       "description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
@@ -102,7 +113,11 @@
         "current_r": "Current r value (2.5-4.0)",
         "r_steps": "Resolution of diagram",
         "width": "Physical width of visualization"
-      }
+      },
+      "dev_themes": ["qfep", "philosophy"],
+      "category": "philosophy",
+      "complexity": "advanced",
+      "tags": ["chaos", "bifurcation", "edge_of_chaos", "lambda", "interactive"]
     }
   },
   "sequence_mapping": {

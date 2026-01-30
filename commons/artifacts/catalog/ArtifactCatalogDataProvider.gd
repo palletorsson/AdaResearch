@@ -39,55 +39,124 @@ static func _find_lab_system() -> Node:
 
 	return null
 
+# Cached standalone registry (loaded when GridSystem not available)
+static var _standalone_registry: Dictionary = {}
+static var _standalone_loaded: bool = false
+
+## Load artifacts directly from JSON files (fallback for standalone/desktop mode)
+static func _load_standalone_registry() -> void:
+	if _standalone_loaded:
+		return
+	
+	print("ArtifactCatalogDataProvider: Loading artifacts directly (standalone mode)...")
+	_standalone_registry.clear()
+	
+	# Load base registry
+	var base_path = "res://commons/artifacts/grid_artifacts.json"
+	_load_registry_file(base_path)
+	
+	# Load modular registries
+	var registry_dir = "res://commons/artifacts/registry/"
+	var dir = DirAccess.open(registry_dir)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".json"):
+				_load_registry_file(registry_dir + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	
+	_standalone_loaded = true
+	print("ArtifactCatalogDataProvider: ✅ Standalone registry loaded with %d artifacts" % _standalone_registry.size())
+
+## Load a single registry JSON file into _standalone_registry
+static func _load_registry_file(path: String) -> void:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		print("ArtifactCatalogDataProvider: ⚠️ Could not open: %s" % path)
+		return
+	
+	var json = JSON.new()
+	var json_text = file.get_as_text()
+	file.close()
+	
+	if json.parse(json_text) != OK:
+		print("ArtifactCatalogDataProvider: ⚠️ JSON parse error in: %s" % path)
+		return
+	
+	var data = json.data
+	if data is Dictionary:
+		# Handle both flat format and "artifacts" wrapper
+		var artifacts = data.get("artifacts", data)
+		var count_before = _standalone_registry.size()
+		if artifacts is Dictionary:
+			for key in artifacts.keys():
+				var artifact = artifacts[key]
+				if artifact is Dictionary:
+					# Ensure lookup_name is set
+					if not artifact.has("lookup_name"):
+						artifact["lookup_name"] = key
+					_standalone_registry[key] = artifact
+		var count_added = _standalone_registry.size() - count_before
+		print("ArtifactCatalogDataProvider: Loaded %d artifacts from %s" % [count_added, path.get_file()])
+
 ## Get all artifacts from GridInteractablesComponent registry
+## Falls back to direct JSON loading if GridSystem not available (desktop/standalone mode)
 ## Returns array of artifact dictionaries
 static func get_all_artifacts() -> Array:
 	print("ArtifactCatalogDataProvider: get_all_artifacts() called")
 
 	var grid_system = _find_grid_system()
 	if not grid_system:
-		push_warning("ArtifactCatalogDataProvider: GridSystem not found in scene tree")
-		print("ArtifactCatalogDataProvider: DEBUG - Looking for 'grid_system' group members...")
-		var scene_tree = Engine.get_main_loop() as SceneTree
-		if scene_tree:
-			var groups = scene_tree.get_nodes_in_group("grid_system")
-			print("ArtifactCatalogDataProvider: DEBUG - Found %d nodes in 'grid_system' group" % groups.size())
-		return []
+		# Fallback: load directly from JSON files (desktop/standalone mode)
+		print("ArtifactCatalogDataProvider: GridSystem not found, using standalone mode")
+		_load_standalone_registry()
+		return _standalone_registry.values()
 
 	print("ArtifactCatalogDataProvider: Found GridSystem: %s" % grid_system.name)
 
 	if not grid_system.has_node("GridInteractablesComponent"):
-		push_warning("ArtifactCatalogDataProvider: GridInteractablesComponent not found as child of GridSystem")
-		print("ArtifactCatalogDataProvider: DEBUG - GridSystem children: %s" % str(grid_system.get_children().map(func(c): return c.name)))
-		return []
+		# Fallback: load directly
+		print("ArtifactCatalogDataProvider: GridInteractablesComponent not found, using standalone mode")
+		_load_standalone_registry()
+		return _standalone_registry.values()
 
 	var interactables = grid_system.get_node("GridInteractablesComponent")
 	print("ArtifactCatalogDataProvider: Found GridInteractablesComponent")
 
 	if not "grid_artifact_registry" in interactables:
 		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry property not found in GridInteractablesComponent")
-		return []
+		_load_standalone_registry()
+		return _standalone_registry.values()
 
 	var registry = interactables.grid_artifact_registry
 	var artifact_count = registry.size()
 
 	if artifact_count == 0:
-		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry is EMPTY (0 artifacts)")
-		print("ArtifactCatalogDataProvider: This means artifacts have not been loaded yet or loading failed")
-		print("ArtifactCatalogDataProvider: Check console for 'GridInteractablesComponent: Loading artifact registries...' messages")
-	else:
-		print("ArtifactCatalogDataProvider: ✅ Found %d artifacts in registry" % artifact_count)
-
+		# GridSystem exists but registry is empty - try standalone fallback
+		print("ArtifactCatalogDataProvider: Registry empty, falling back to standalone mode")
+		_load_standalone_registry()
+		return _standalone_registry.values()
+	
+	print("ArtifactCatalogDataProvider: ✅ Found %d artifacts in registry" % artifact_count)
 	return registry.values()
 
 ## Look up artifacts by lookup_names
 static func _lookup_artifacts(lookup_names: Array) -> Array:
+	var registry: Dictionary = {}
+	
+	# Try GridSystem first
 	var grid_system = _find_grid_system()
-	if not grid_system or not grid_system.has_node("GridInteractablesComponent"):
-		return []
-
-	var interactables = grid_system.get_node("GridInteractablesComponent")
-	var registry = interactables.grid_artifact_registry
+	if grid_system and grid_system.has_node("GridInteractablesComponent"):
+		var interactables = grid_system.get_node("GridInteractablesComponent")
+		if "grid_artifact_registry" in interactables:
+			registry = interactables.grid_artifact_registry
+	
+	# Fallback to standalone if empty
+	if registry.is_empty():
+		_load_standalone_registry()
+		registry = _standalone_registry
 
 	var artifacts = []
 	for lookup_name in lookup_names:
@@ -204,13 +273,16 @@ static func get_unlocked_artifact_count() -> int:
 ## Get artifact by lookup_name
 static func get_artifact_by_lookup_name(lookup_name: String) -> Dictionary:
 	var grid_system = _find_grid_system()
-	if not grid_system or not grid_system.has_node("GridInteractablesComponent"):
-		return {}
-
-	var interactables = grid_system.get_node("GridInteractablesComponent")
-	var registry = interactables.grid_artifact_registry
-
-	if registry.has(lookup_name):
-		return registry[lookup_name]
+	if grid_system and grid_system.has_node("GridInteractablesComponent"):
+		var interactables = grid_system.get_node("GridInteractablesComponent")
+		if "grid_artifact_registry" in interactables:
+			var registry = interactables.grid_artifact_registry
+			if registry.has(lookup_name):
+				return registry[lookup_name]
+	
+	# Fallback to standalone registry
+	_load_standalone_registry()
+	if _standalone_registry.has(lookup_name):
+		return _standalone_registry[lookup_name]
 
 	return {}

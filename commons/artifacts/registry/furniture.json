@@ -4,31 +4,36 @@
 			"name": "Chair Assembly Puzzle",
 			"lookup_name": "chair_assembly_puzzle",
 			"description": "Interactive puzzle where players assemble a Judd-inspired chair by scaling, rotating, and positioning cube pieces to match ghost guides.",
-			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn"
+			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"category": "puzzles"
 		},
 		"scalable_wood_cube": {
 			"name": "Scalable Wood Cube",
 			"lookup_name": "scalable_wood_cube",
 			"description": "Grabbable wood cube with two-handed scaling support. Scale snaps to discrete values (0.05x to 4.0x) per axis.",
-			"scene": "res://commons/primitives/cubes/grab_cube_scalable.tscn"
+			"scene": "res://commons/primitives/cubes/grab_cube_scalable.tscn",
+			"category": "primitives"
 		},
 		"attachable_wood_cube": {
 			"name": "Attachable Wood Cube",
 			"lookup_name": "attachable_wood_cube",
 			"description": "Scalable wood cube with attachment points on all faces. Pieces snap together when attachment points align and face each other.",
-			"scene": "res://commons/primitives/cubes/grab_cube_attachable.tscn"
+			"scene": "res://commons/primitives/cubes/grab_cube_attachable.tscn",
+			"category": "primitives"
 		},
 		"snappable_wood_cube": {
 			"name": "Snappable Wood Cube",
 			"lookup_name": "snappable_wood_cube",
 			"description": "Scalable wood cube with grid-based face snapping. Faces snap to 0.05m grid alignment when parallel and close.",
-			"scene": "res://commons/primitives/cubes/grab_cube_snappable.tscn"
+			"scene": "res://commons/primitives/cubes/grab_cube_snappable.tscn",
+			"category": "primitives"
 		},
 		"stool_assembly_puzzle": {
 			"name": "Stool Assembly Puzzle",
 			"lookup_name": "stool_assembly_puzzle",
 			"description": "Assembly puzzle for a simple stool (seat + 4 legs).",
 			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"furniture_type": 1
 			}
@@ -38,6 +43,7 @@
 			"lookup_name": "table_assembly_puzzle",
 			"description": "Assembly puzzle for a minimal table (top + 4 legs).",
 			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"furniture_type": 2
 			}
@@ -47,6 +53,7 @@
 			"lookup_name": "shelf_assembly_puzzle",
 			"description": "Assembly puzzle for a Judd-style shelf (2 vertical supports + 3 horizontal shelves).",
 			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"furniture_type": 3
 			}
@@ -55,13 +62,15 @@
 			"name": "Biederman Relief Puzzle",
 			"lookup_name": "biederman_relief",
 			"description": "Constructivist relief composition inspired by Charles Biederman. Arrange colored rectangular bars at varying depths on a blue backing.",
-			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn"
+			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"category": "puzzles"
 		},
 		"mondrian_relief": {
 			"name": "Mondrian Relief Puzzle",
 			"lookup_name": "mondrian_relief",
 			"description": "De Stijl relief composition inspired by Piet Mondrian. Grid-based arrangement with primary colors and black lines.",
 			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"relief_type": 1
 			}
@@ -71,6 +80,7 @@
 			"lookup_name": "albers_relief",
 			"description": "Color study relief inspired by Josef Albers. Nested squares exploring color interaction.",
 			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"relief_type": 2
 			}
@@ -80,6 +90,7 @@
 			"lookup_name": "constructivist_relief",
 			"description": "Dynamic diagonal composition inspired by Soviet Constructivism. Bold red and black bars creating visual tension.",
 			"scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"relief_type": 3
 			}
@@ -88,13 +99,15 @@
 			"name": "Assembly Line Puzzle",
 			"lookup_name": "assembly_line_puzzle",
 			"description": "Conveyor belt puzzle. Build houses from cubes and pyramids on a production line.",
-			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn"
+			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"category": "puzzles"
 		},
 		"lab_assembly_puzzle": {
 			"name": "Lab Assembly Puzzle",
 			"lookup_name": "lab_assembly_puzzle",
 			"description": "Half-Life inspired lab equipment assembly. Build health chargers, cameras, and specimen jars from basic shapes.",
 			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"puzzle_type": 1
 			}
@@ -104,6 +117,7 @@
 			"lookup_name": "scientific_assembly_puzzle",
 			"description": "Build real lab equipment from simple primitives. Assemble cubes and pyramids to produce a microscope, electronic scales, or multimeter.",
 			"scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"puzzle_type": 2
 			}
@@ -112,25 +126,29 @@
 			"name": "Score Display",
 			"lookup_name": "score_display",
 			"description": "Visual counter display showing score. Can be incremented via signals or methods.",
-			"scene": "res://commons/visualaid/score/score_display.tscn"
+			"scene": "res://commons/visualaid/score/score_display.tscn",
+			"category": "tools"
 		},
 		"balance_puzzle": {
 			"name": "Balance Puzzle",
 			"lookup_name": "balance_puzzle",
 			"description": "Stack freely. Reach the height threshold while stable. Your creation transforms into a walking creature. No templates - truth emerges from physics.",
-			"scene": "res://commons/primitives/balance/balance_puzzle.tscn"
+			"scene": "res://commons/primitives/balance/balance_puzzle.tscn",
+			"category": "puzzles"
 		},
 		"equipment_assembly_puzzle": {
 			"name": "Equipment Assembly Puzzle",
 			"lookup_name": "equipment_assembly_puzzle",
 			"description": "Level 2 compositional assembly. Combine assembled equipment (microscope, scales, etc.) into functional workstations.",
-			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn"
+			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"category": "puzzles"
 		},
 		"analysis_station_puzzle": {
 			"name": "Analysis Station Assembly",
 			"lookup_name": "analysis_station_puzzle",
 			"description": "Combine microscope, scales, and specimen jar into an analysis workstation for examining specimens.",
 			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"workstation_type": 0
 			}
@@ -140,6 +158,7 @@
 			"lookup_name": "measurement_station_puzzle",
 			"description": "Combine multimeter and scales into a measurement workstation for precise readings.",
 			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"workstation_type": 1
 			}
@@ -149,6 +168,7 @@
 			"lookup_name": "storage_station_puzzle",
 			"description": "Arrange multiple specimen jars into an organized storage workstation.",
 			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"workstation_type": 2
 			}
@@ -158,6 +178,7 @@
 			"lookup_name": "diagnostic_station_puzzle",
 			"description": "Combine microscope and multimeter into a diagnostic workstation.",
 			"scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+			"category": "puzzles",
 			"config": {
 				"workstation_type": 3
 			}
@@ -189,7 +210,10 @@
 			"description": "Grabbable sphere that explodes into particles when hit by a laser pointer. 40 particle burst with procedural explosion sound. VR target practice.",
 			"scene": "res://commons/primitives/spheres/laser_exploding_sphere.tscn",
 			"category": "interactive",
-			"dev_themes": ["tools", "primitives"],
+			"dev_themes": [
+				"tools",
+				"primitives"
+			],
 			"complexity": "beginner"
 		}
 	}

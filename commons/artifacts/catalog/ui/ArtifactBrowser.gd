@@ -37,14 +37,18 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 
 	# Group artifacts by theme
 	var artifacts_by_theme = {}
+	var uncategorized = []
 	for theme in all_themes:
 		artifacts_by_theme[theme] = []
 
 	for artifact in _current_artifacts:
 		var artifact_themes = artifact.get("dev_themes", [])
-		for artifact_theme in artifact_themes:
-			if artifacts_by_theme.has(artifact_theme):
-				artifacts_by_theme[artifact_theme].append(artifact)
+		if artifact_themes.is_empty():
+			uncategorized.append(artifact)
+		else:
+			for artifact_theme in artifact_themes:
+				if artifacts_by_theme.has(artifact_theme):
+					artifacts_by_theme[artifact_theme].append(artifact)
 
 	# Create theme categories
 	for theme in all_themes:
@@ -60,20 +64,33 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 
 		# Add artifacts in this theme
 		for artifact in theme_artifacts:
-			var item = _tree.create_item(theme_item)
-			var artifact_name = artifact.get("name", "Unknown")
-			var lookup_name = artifact.get("lookup_name", "")
+			_add_artifact_item(theme_item, artifact)
+	
+	# Add uncategorized artifacts
+	if not uncategorized.is_empty():
+		var uncategorized_item = _tree.create_item(root)
+		uncategorized_item.set_text(0, "All Artifacts (%d)" % uncategorized.size())
+		uncategorized_item.set_selectable(0, false)
+		uncategorized_item.set_collapsed(true)
+		
+		for artifact in uncategorized:
+			_add_artifact_item(uncategorized_item, artifact)
 
-			item.set_text(0, artifact_name)
-			item.set_metadata(0, lookup_name)
+func _add_artifact_item(parent_item: TreeItem, artifact: Dictionary):
+	var item = _tree.create_item(parent_item)
+	var artifact_name = artifact.get("name", artifact.get("lookup_name", "Unknown"))
+	var lookup_name = artifact.get("lookup_name", "")
 
-			# Lock indicator for progression mode
-			if not ArtifactCatalogDataProvider.is_artifact_unlocked(lookup_name):
-				item.set_custom_color(0, Color(0.5, 0.5, 0.5))
-				item.set_suffix(0, " 🔒")
-				item.set_tooltip_text(0, "Locked - complete sequences to unlock")
-			else:
-				item.set_tooltip_text(0, artifact.get("description", ""))
+	item.set_text(0, artifact_name)
+	item.set_metadata(0, lookup_name)
+
+	# Lock indicator for progression mode
+	if not ArtifactCatalogDataProvider.is_artifact_unlocked(lookup_name):
+		item.set_custom_color(0, Color(0.5, 0.5, 0.5))
+		item.set_suffix(0, " 🔒")
+		item.set_tooltip_text(0, "Locked - complete sequences to unlock")
+	else:
+		item.set_tooltip_text(0, artifact.get("description", ""))
 
 	_update_stats()
 
