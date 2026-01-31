@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://array_rotate_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/array_transform_staircase.gd" id="1_script"]
+
+[node name="ArrayRotate" type="Node3D"]
+script = ExtResource("1_script")
+mode = 1
+count = 12
+element_size = Vector3(0.4, 0.08, 0.15)
+rotate_axis = Vector3(0, 1, 0)
+rotate_angle_degrees = 30.0
+rotate_radius = 0.8
+element_color = Color(0.7, 0.7, 0.75, 1)
