@@ -37,6 +37,7 @@ for i in rows:
 ```
 
 **Good for:** Facades, grids, lattices, tilings  
+**Algorithm folders:** `arrays`, `primitives`, `patterngeneration`  
 **Sequences:** `array_tutorial`, `primitives`
 
 ---
@@ -53,6 +54,7 @@ forward(length)
 ```
 
 **Good for:** Branching, paths, organic growth, drawing  
+**Algorithm folders:** `lsystems` (interpretation)  
 **Sequences:** `lsystems` (implicit)
 
 ---
@@ -69,6 +71,7 @@ func fractal(depth):
 ```
 
 **Good for:** Trees, coastlines, mountains, Sierpinski  
+**Algorithm folders:** `fractals` (42 scenes)  
 **Sequences:** `fractals`
 
 ---
@@ -85,6 +88,7 @@ Generations: A → AB → ABA → ABAAB → ...
 ```
 
 **Good for:** Linguistic structure, growth patterns, L-systems  
+**Algorithm folders:** `lsystems`, `stringalgorithms`, `proceduralgeneration/grammar_systems`  
 **Sequences:** `lsystems`, `grammar_systems`
 
 ---
@@ -101,6 +105,7 @@ for agent in agents:
 ```
 
 **Good for:** Flocking, swarms, CA, unpredictable patterns  
+**Algorithm folders:** `swarmintelligence`, `cellularautomata` (41), `emergentsystems`, `steering`, `particles`  
 **Sequences:** `swarmintelligence`, `cellularautomata`, `particles`
 
 ---
@@ -117,6 +122,7 @@ for point in sample_points:
 ```
 
 **Good for:** Noise, terrain, implicit surfaces, organic shapes  
+**Algorithm folders:** `randomness` (114!), `wavefunctions` (105), `spacetopology`, `proceduralgeneration/isosurfaces`  
 **Sequences:** `noise`, `randomness`, `isosurfaces`
 
 ---
@@ -138,7 +144,8 @@ result = A.intersect(B)
 ```
 
 **Good for:** Carved forms, caves, architectural voids, mechanical parts  
-**Sequences:** `booleans` (cave example)  
+**Algorithm folders:** `primitives/booleans`, `transformation/booleanTunnel`  
+**Sequences:** (cave example)  
 **Godot:** `CSGBox3D`, `CSGCombiner3D`, `CSGSphere3D`
 
 ---
@@ -156,7 +163,90 @@ angle(A, B, C) == 90°
 ```
 
 **Good for:** Physics, inverse kinematics, optimization, equilibrium  
+**Algorithm folders:** `physicssimulation` (39), `forces`, `softbodies`, `joint` (11), `proceduralgeneration/constraint_solvers`  
 **Sequences:** `forces`, `softbodies`, `constraint_solvers`
+
+---
+
+## Full Algorithm → Paradigm Mapping
+
+### F_order (Structure, Prediction)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `primitives` | 28 | Array, Boolean |
+| `arrays` | 15 | Array |
+| `vectors` | 57 | Transform |
+| `transformation` | 10 | Transform |
+| `color` | 38 | Field |
+| `computationalgeometry` | 8 | Constraint |
+| `datastructures` | 16 | Array, Graph |
+
+### Oscillation (F↔E Balance)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `wavefunctions` | 105 | Field |
+| `oscillation` | 18 | Field |
+| `forces` | 10 | Constraint |
+| `joint` | 11 | Constraint |
+| `proceduralaudio` | 10 | Field |
+
+### E_entropy (Disorder, Randomness)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `randomness` | 114 | Field |
+| `cellularautomata` | 41 | Agent |
+| `chaos` | 4 | Field, Agent |
+| `patterngeneration` | 11 | Field, Grammar |
+
+### Lambda_edge (Edge of Chaos)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `fractals` | 42 | Fractal |
+| `lsystems` | 7 | Grammar, Turtle |
+| `spacetopology` | 25 | Field, Boolean |
+| `emergentsystems` | 12 | Agent |
+| `wfc` | 5 | Constraint, Field |
+
+### Integration (Emergence)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `swarmintelligence` | 9 | Agent |
+| `steering` | 15 | Agent |
+| `physicssimulation` | 39 | Constraint |
+| `softbodies` | 13 | Constraint |
+| `computationalbiology` | 11 | Agent, Grammar |
+
+### Synthesis (Full QFEP)
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `machinelearning` | 65 | Constraint, Agent |
+| `proceduralgeneration` | 101 | All paradigms |
+| `graphtheory` | 21 | Constraint, Array |
+| `alternativegeometries` | 8 | Field, Transform |
+
+### Critical/Theory
+| Folder | Scenes | Paradigm(s) |
+|--------|--------|-------------|
+| `criticalalgorithms` | 2 | — |
+| `criticaltheory` | 8 | — |
+| `neuroscience` | 3 | Agent, Field |
+
+---
+
+## Scene Count by Paradigm
+
+| Paradigm | Estimated Scenes | Primary Folders |
+|----------|------------------|-----------------|
+| **Field** | ~350 | randomness, wavefunctions, noise |
+| **Agent** | ~80 | cellularautomata, swarm, steering |
+| **Constraint** | ~75 | physics, forces, softbodies |
+| **Fractal** | ~45 | fractals |
+| **Array** | ~60 | arrays, primitives, vectors |
+| **Grammar** | ~20 | lsystems, stringalgorithms |
+| **Boolean** | ~10 | booleans, tunnels |
+| **Turtle** | ~10 | (implicit in lsystems) |
+
+**Total: ~1000+ algorithm scenes**
 
 ---
 
@@ -164,14 +254,15 @@ angle(A, B, C) == 90°
 
 Real systems often combine paradigms:
 
-| Combination | Result |
-|-------------|--------|
-| Array + Transform | Staircase (cumulative offset) |
-| Array + Field | 2.5D glass planes (discrete sampling continuous) |
-| Grammar + Turtle | L-systems (rewrite rules + turtle interpretation) |
-| Agent + Field | Particles in flow field |
-| Fractal + Grammar | Recursive L-systems |
-| Constraint + Agent | Physics-based swarms |
+| Combination | Result | Example Folders |
+|-------------|--------|-----------------|
+| Array + Transform | Staircase | `transformation` |
+| Array + Field | 2.5D, terrain | `randomness/noise` |
+| Grammar + Turtle | L-systems | `lsystems` |
+| Agent + Field | Flow fields | `steering`, `swarmintelligence` |
+| Fractal + Grammar | Recursive L-systems | `lsystems/Growth` |
+| Constraint + Agent | Physics swarms | `physicssimulation` |
+| Field + Boolean | Marching cubes | `spacetopology/marchingcubes` |
 
 ---
 
@@ -209,17 +300,6 @@ Each paradigm requires capacities from previous ones.
 
 ---
 
-## References
-
-- Prusinkiewicz & Lindenmayer, *The Algorithmic Beauty of Plants*
-- Shiffman, *The Nature of Code*
-- Stiny, *Shape Grammars*
-- Reynolds, *Flocks, Herds and Schools* (Boids)
-- Wolfram, *A New Kind of Science* (CA)
-- Perlin, *Noise* (continuous fields)
-
----
-
 ## Mapping to QFEP Phases & Curriculum Spine
 
 The taxonomy integrates with `curriculum_spine.json`:
@@ -249,19 +329,16 @@ The QFEP phases are the **paths through territory**.
 The sequences are **stations on paths**.  
 The maps are **rooms in stations**.
 
-### Generating from Taxonomy
+---
 
-```gdscript
-# WorldMapDataProvider can read:
-# - curriculum_spine.json → ordered sequences with QFEP phases
-# - TAXONOMY.md → paradigm classifications
-# - map_sequences.json → sequence definitions
-# 
-# To produce: navigable world map where
-# - Position encodes paradigm
-# - Color encodes QFEP phase
-# - Connections encode prerequisites
-```
+## References
+
+- Prusinkiewicz & Lindenmayer, *The Algorithmic Beauty of Plants*
+- Shiffman, *The Nature of Code*
+- Stiny, *Shape Grammars*
+- Reynolds, *Flocks, Herds and Schools* (Boids)
+- Wolfram, *A New Kind of Science* (CA)
+- Perlin, *Noise* (continuous fields)
 
 ---
 
