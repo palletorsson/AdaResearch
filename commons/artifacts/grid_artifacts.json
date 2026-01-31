@@ -742,6 +742,30 @@
 			"description": "Compact table of all 5 platonic solids, 3 grabbable copies each. Tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
 			"scene": "res://commons/primitives/platonic_grabbables.tscn"
 		},
+		"aalto_vase": {
+			"name": "aalto_vase",
+			"lookup_name": "aalto_vase",
+			"description": "Procedural Aalto-style organic vase using Fourier harmonics. Based on Alvar Aalto's Savoy vase (1936).",
+			"scene": "res://commons/primitives/design_classics/aalto_vase.tscn"
+		},
+		"grab_aalto_vase": {
+			"name": "grab_aalto_vase",
+			"lookup_name": "grab_aalto_vase",
+			"description": "Grabbable Aalto vase. Procedural organic form with glass material.",
+			"scene": "res://commons/primitives/design_classics/grab_aalto_vase.tscn"
+		},
+		"alessi_tree": {
+			"name": "alessi_tree",
+			"lookup_name": "alessi_tree",
+			"description": "Procedural Alessi-style stacked cone tree with radial stripes. Zigzag lathe form.",
+			"scene": "res://commons/primitives/design_classics/alessi_tree.tscn"
+		},
+		"grab_alessi_tree": {
+			"name": "grab_alessi_tree",
+			"lookup_name": "grab_alessi_tree",
+			"description": "Grabbable Alessi tree. Red and white striped ceramic-style holiday decoration.",
+			"scene": "res://commons/primitives/design_classics/grab_alessi_tree.tscn"
+		},
 		"platonic_demo": {
 			"name": "platonic_demo",
 			"lookup_name": "platonic_demo",

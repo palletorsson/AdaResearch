@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://grab_aalto_vase_001"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/design_classics/aalto_vase.gd" id="2_script"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 1.0
+radius = 0.5
+
+[node name="GrabAaltoVase" instance=ExtResource("1_pickable")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_1")
+
+[node name="AaltoVase" type="Node3D" parent="." index="1"]
+script = ExtResource("2_script")
+height = 1.0
+base_radius = 0.25
+rim_radius = 0.45
+radial_segments = 32
+height_segments = 16
+harmonics = [1.0, 0.3, 0.18, -0.12, 0.05]
+twist = 0.15

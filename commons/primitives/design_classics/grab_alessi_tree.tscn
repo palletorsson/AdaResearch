@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://grab_alessi_tree_001"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" path="res://commons/primitives/design_classics/alessi_tree.gd" id="2_script"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 1.0
+radius = 0.45
+
+[node name="GrabAlessiTree" instance=ExtResource("1_pickable")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_1")
+
+[node name="AlessiTree" type="Node3D" parent="." index="1"]
+script = ExtResource("2_script")
+height = 1.0
+base_radius = 0.4
+tiers = 5
+radial_segments = 24
+stripe_count = 12
+color_a = Color(1, 1, 1, 1)
+color_b = Color(0.9, 0.15, 0.1, 1)
+gold_trim = true
