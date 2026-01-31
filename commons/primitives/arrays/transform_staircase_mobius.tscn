@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://transform_staircase_mobius_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/transform_staircase.gd" id="1_script"]
+
+[node name="TransformStaircaseMobius" type="Node3D"]
+script = ExtResource("1_script")
+staircase_type = 2
+step_count = 48
+base_scale = Vector3(0.3, 0.05, 0.15)
+mobius_radius = 1.5
+mobius_twist_total = 180.0
+use_rainbow = true
+emit_light = true

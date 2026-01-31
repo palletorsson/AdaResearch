@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://transform_staircase_spiral_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/transform_staircase.gd" id="1_script"]
+
+[node name="TransformStaircaseSpiral" type="Node3D"]
+script = ExtResource("1_script")
+staircase_type = 1
+step_count = 36
+base_scale = Vector3(0.5, 0.08, 0.25)
+spiral_radius = 1.2
+spiral_rise_per_step = 0.1
+spiral_angle_per_step = 20.0
+use_rainbow = true
+emit_light = true

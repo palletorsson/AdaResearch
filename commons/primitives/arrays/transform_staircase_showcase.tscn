@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://transform_staircase_showcase_001"]
+
+[ext_resource type="Script" path="res://commons/primitives/arrays/transform_staircase.gd" id="1_script"]
+
+[node name="TransformStaircaseShowcase" type="Node3D"]
+
+[node name="Spiral" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+script = ExtResource("1_script")
+staircase_type = 1
+step_count = 24
+base_scale = Vector3(0.35, 0.06, 0.18)
+spiral_radius = 0.8
+spiral_rise_per_step = 0.12
+spiral_angle_per_step = 25.0
+use_rainbow = true
+
+[node name="DNA" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+script = ExtResource("1_script")
+staircase_type = 5
+step_count = 32
+base_scale = Vector3(0.12, 0.12, 0.12)
+dna_radius = 0.5
+dna_rise_per_step = 0.1
+use_rainbow = false
+
+[node name="Fibonacci" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+script = ExtResource("1_script")
+staircase_type = 3
+step_count = 48
+base_scale = Vector3(0.08, 0.04, 0.08)
+fib_scale_factor = 1.05
+use_rainbow = true
+
+[node name="Mobius" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+script = ExtResource("1_script")
+staircase_type = 2
+step_count = 36
+base_scale = Vector3(0.25, 0.04, 0.12)
+mobius_radius = 1.2
+use_rainbow = true
+
+[node name="Linear" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+script = ExtResource("1_script")
+staircase_type = 0
+step_count = 12
+base_scale = Vector3(0.4, 0.08, 0.3)
+linear_rise = 0.2
+linear_run = 0.35
+use_rainbow = true
