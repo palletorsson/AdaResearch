@@ -2,6 +2,153 @@
 
 > How do we encode form? What primitives and operations are needed?
 
+---
+
+## From Point to Forest: The Foundational Stack
+
+Everything builds from nothing. The progression:
+
+### Level 0: The Point
+```
+Point = Vector3(x, y, z)
+```
+Position without extension. Pure existence. The origin of everything.
+
+**Maps:** `Point_Zero`, `Point_One`
+
+---
+
+### Level 1: Primitives (0D → 3D)
+
+| Dimension | Primitive | Definition | Example |
+|-----------|-----------|------------|---------|
+| 0D | Point | Position | `Vector3(0,0,0)` |
+| 1D | Line | Two points connected | `Point_Line` |
+| 2D | Triangle | Three points, one face | `Point_Triangle` |
+| 2D | Plane | Infinite flat surface | `grab_plane` |
+| 3D | Tetrahedron | 4 faces, simplest solid | `grab_tetrahedron` |
+| 3D | Cube | 6 faces, the workhorse | `grab_cube` |
+| 3D | Sphere | All points equidistant | `grab_sphere` |
+
+**Platonic Solids (regular polyhedra):**
+- Tetrahedron (4 faces)
+- Cube/Hexahedron (6 faces)
+- Octahedron (8 faces)
+- Dodecahedron (12 faces)
+- Icosahedron (20 faces)
+
+**Sequences:** `primitives`
+
+---
+
+### Level 2: Properties
+
+What can a primitive have?
+
+| Property | Type | Example |
+|----------|------|---------|
+| Position | Vector3 | `(x, y, z)` |
+| Color | RGB/HSV | `Color(1, 0, 0)` |
+| Scale | Vector3 | `(1, 1, 1)` |
+| Rotation | Basis/Quat | `Basis.IDENTITY` |
+| Material | Surface | albedo, roughness, metallic |
+
+**Sequences:** `color`, `vectors`
+
+---
+
+### Level 3: Transformations
+
+How do primitives move?
+
+| Transform | Formula | Effect |
+|-----------|---------|--------|
+| Translate | `p + offset` | Move position |
+| Rotate | `p × rotation_matrix` | Spin around axis |
+| Scale | `p × scale_factor` | Grow/shrink |
+| Shear | `p × shear_matrix` | Skew |
+
+**Sequences:** `transformation`, `vectors`
+
+---
+
+### Level 4: Collections
+
+How do we have many?
+
+| Collection | Structure | Example |
+|------------|-----------|---------|
+| Array | Indexed sequence | `elements[i]` |
+| Grid | 2D array | `elements[i][j]` |
+| Lattice | 3D array | `elements[i][j][k]` |
+| Graph | Nodes + edges | `node.connections` |
+| Tree | Hierarchical | `node.children` |
+
+**Sequences:** `arrays`, `datastructures`
+
+---
+
+### Level 5: Patterns
+
+Collections + rules = patterns.
+
+| Pattern | Rule | Example |
+|---------|------|---------|
+| Repetition | Same transform each | Grid |
+| Progression | Cumulative transform | Staircase |
+| Alternation | Modulo selection | Checkerboard |
+| Symmetry | Mirror/rotate | Mandala |
+| Gradient | Interpolated property | Color fade |
+
+---
+
+### Level 6: Dynamics
+
+Patterns over time.
+
+| Dynamic | Mechanism | Example |
+|---------|-----------|---------|
+| Animation | Transform(t) | Spinning cube |
+| Physics | Forces → acceleration | Bouncing ball |
+| Oscillation | sin(t), cos(t) | Wave |
+| Growth | Recursive expansion | L-system tree |
+| Emergence | Agent interaction | Flocking |
+
+**Sequences:** `forces`, `wavefunctions`, `particles`
+
+---
+
+### Level 7: Complexity
+
+Dynamics → emergent structure.
+
+| Complexity | Source | Example |
+|------------|--------|---------|
+| Fractal | Self-similarity | Mandelbrot |
+| Cellular | Local rules | Game of Life |
+| Swarm | Collective behavior | Boids |
+| Evolutionary | Selection pressure | Genetic algorithm |
+
+**Sequences:** `fractals`, `cellularautomata`, `swarmintelligence`
+
+---
+
+### Level 8: The Forest
+
+All levels combined. A forest is:
+- Points (leaf positions)
+- Primitives (trunk cylinders, leaf planes)
+- Properties (bark color, leaf green)
+- Transforms (branch angles)
+- Arrays (many trees)
+- Patterns (spacing rules)
+- Dynamics (wind, growth)
+- Complexity (ecosystem interaction)
+
+**From point to forest: each level requires the previous.**
+
+---
+
 ## The Encoding Stack
 
 To describe any complex structure (a facade, a forest, a form), we need:
