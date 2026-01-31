@@ -724,6 +724,18 @@
 			"description": "Procedural icosahedron primitive for sphere approximations.",
 			"scene": "res://commons/primitives/icosahedron/icosahedron.tscn"
 		},
+		"grab_dodecahedron": {
+			"name": "grab_dodecahedron",
+			"lookup_name": "grab_dodecahedron",
+			"description": "Grabbable dodecahedron. 12 pentagonal faces, 20 vertices, 30 edges.",
+			"scene": "res://commons/primitives/dodecahedron/grab_dodecahedron.tscn"
+		},
+		"grab_icosahedron": {
+			"name": "grab_icosahedron",
+			"lookup_name": "grab_icosahedron",
+			"description": "Grabbable icosahedron. 20 triangular faces, 12 vertices, 30 edges.",
+			"scene": "res://commons/primitives/icosahedron/grab_icosahedron.tscn"
+		},
 		"platonic_demo": {
 			"name": "platonic_demo",
 			"lookup_name": "platonic_demo",
