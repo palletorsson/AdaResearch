@@ -30,6 +30,21 @@ Position without extension. Pure existence. The origin of everything.
 | 3D | Cube | 6 faces, the workhorse | `grab_cube` |
 | 3D | Sphere | All points equidistant | `grab_sphere` |
 
+**The Fold: 2D → 3D Transition**
+
+```
+Quad → Net → Fold → Volume
+```
+
+| Step | What | Artifact |
+|------|------|----------|
+| Quad | Single 2D face | `grab_plane` |
+| Net | Connected quads (flat) | `folding_cube` (progress=0) |
+| Fold | Hinges rotate 0°→90° | `folding_cube` (animating) |
+| Volume | Closed 3D shape | `folding_cube` (progress=1) |
+
+**Key insight:** 3D is 2D + connectivity + fold. The cube doesn't "have" 6 faces — it IS 6 faces with edge relationships.
+
 **Platonic Solids (regular polyhedra):**
 - Tetrahedron (4 faces)
 - Cube/Hexahedron (6 faces)
