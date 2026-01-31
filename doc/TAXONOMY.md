@@ -198,4 +198,51 @@ Each paradigm requires capacities from previous ones.
 
 ---
 
+## Mapping to QFEP Phases & Curriculum Spine
+
+The taxonomy integrates with `curriculum_spine.json`:
+
+| QFEP Phase | λ Range | Paradigms | Sequences |
+|------------|---------|-----------|-----------|
+| **F_order** | λ→0 | Array, Transform | `primitives`, `vectors`, `transformation` |
+| **oscillation** | F↔E | Field (periodic) | `wavefunctions`, `forces` |
+| **E_entropy** | λ→1 | Field (noise), Agent | `randomness`, `noise`, `cellularautomata` |
+| **lambda_edge** | λ≈0.3-0.5 | Fractal, Grammar | `fractals`, `lsystems` |
+| **integration** | φ>0 | Agent, Constraint | `swarmintelligence`, `softbodies` |
+| **synthesis** | Full QFEP | All combined | `qfeplaboratory` |
+
+### World Map Structure
+
+```
+WORLD_MAP = {
+    lines: QFEP_PHASES (6 colored metro lines),
+    stations: SEQUENCES (stops along each line),
+    interchanges: PARADIGM_COMBINATIONS (where lines cross),
+    terrain: PARADIGMS (underlying generative modes)
+}
+```
+
+The paradigms are the **territory**.  
+The QFEP phases are the **paths through territory**.  
+The sequences are **stations on paths**.  
+The maps are **rooms in stations**.
+
+### Generating from Taxonomy
+
+```gdscript
+# WorldMapDataProvider can read:
+# - curriculum_spine.json → ordered sequences with QFEP phases
+# - TAXONOMY.md → paradigm classifications
+# - map_sequences.json → sequence definitions
+# 
+# To produce: navigable world map where
+# - Position encodes paradigm
+# - Color encodes QFEP phase
+# - Connections encode prerequisites
+```
+
+---
+
 *This taxonomy maps to AdaResearch sequences. Each paradigm is a way of thinking about generation — a different answer to "how do we make form?"*
+
+*See also: `curriculum_spine.json`, `WorldMapDataProvider.gd`*
