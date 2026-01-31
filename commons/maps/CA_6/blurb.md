@@ -1,0 +1,1 @@
+Larger neighborhoods reach further. The Moore neighborhood sees eight cells; extend it and see sixteen, twenty-four. Information propagates faster. Patterns scale differently. The choice of neighborhood shape determines what structures can form and how quickly they spread.

@@ -1,0 +1,1 @@
+Totalistic rules count neighbors without distinguishing direction. Nine neighbors become one number. That number determines the next state. Smoothness emerges: similar configurations produce similar outcomes. The automaton forgets which direction the influence came from.

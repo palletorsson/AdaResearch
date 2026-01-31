@@ -1,0 +1,1 @@
+Give agents rules. Let them interact. Watch what emerges. Agent-based modeling makes no assumptions about aggregate behavior — it builds the aggregate from individuals. Markets, epidemics, ecosystems: when the whole is too complex to model, model the parts.

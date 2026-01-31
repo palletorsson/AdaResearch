@@ -1,0 +1,1 @@
+Watch the tree grow. Each frame, the L-system applies its rules, the turtle interprets the string, the branches extend. Growth animated: not a static model but a process unfolding. The tree is not drawn but derived, not placed but produced.

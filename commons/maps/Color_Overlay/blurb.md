@@ -1,0 +1,1 @@
+Layers blend. Additive: light plus light makes brighter light (screens, projectors). Subtractive: pigment plus pigment makes darker pigment (paint, ink). Multiply, screen, overlay, soft light — blend modes are algebra of appearance. Transparency as computation.

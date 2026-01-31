@@ -1,0 +1,1 @@
+The flow field assigns direction to space. Agents read the field and follow. No pathfinding, no goals — just local obedience to arrows. Thousands of agents streaming through invisible currents. The field is the program; the swarm is the execution.

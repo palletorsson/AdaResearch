@@ -1,0 +1,1 @@
+A grid of cells. Each cell looks at its neighbors and decides: alive or dead, on or off. Simple rules, applied everywhere simultaneously. One generation becomes the next. From trivial local logic, global patterns emerge. This is cellular automata — computation distributed across space.

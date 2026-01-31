@@ -1,0 +1,1 @@
+A vector is magnitude with direction. Not just "how much" but "which way." The arrow points, the length speaks of intensity. Position, velocity, force, acceleration — all vectors. The language of physics is directional quantities. Learn to read the arrows.

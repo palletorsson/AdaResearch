@@ -1,0 +1,1 @@
+Color is context. A gray square looks blue next to orange, yellow next to purple. The eye does not measure wavelength — it compares. Simultaneous contrast, color constancy, chromatic adaptation: vision is relational, not absolute. No color exists alone.

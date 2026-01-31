@@ -1,0 +1,1 @@
+Superposition: waves pass through each other unchanged, but where they overlap, amplitudes add. Constructive interference builds peaks; destructive interference cancels troughs. Interference patterns encode information — this is how holograms work, how noise cancels, how signals decode.

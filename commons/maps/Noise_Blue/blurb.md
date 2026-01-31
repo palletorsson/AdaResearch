@@ -1,0 +1,1 @@
+Blue noise has no low frequencies — all variation is fine-grained, evenly distributed. Points spread apart naturally, avoiding clusters and gaps. The opposite of white noise's clumping. Used for dithering, sampling, stippling. When you want randomness that looks intentional.

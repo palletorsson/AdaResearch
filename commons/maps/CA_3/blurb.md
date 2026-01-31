@@ -1,0 +1,1 @@
+Elementary cellular automata: one dimension, three-cell neighborhoods, eight possible patterns. 256 possible rules, each producing different behavior. Rule 30 generates apparent chaos. Rule 110 is Turing complete. Wolfram's classification: from death to complexity in a single number.

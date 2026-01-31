@@ -1,0 +1,1 @@
+Wireworld: cells can be empty, electron head, electron tail, or conductor. Electrons flow along conductor paths, enabling logic gates, circuits, computers. A cellular automaton that can simulate computers. Turing completeness in four colors.

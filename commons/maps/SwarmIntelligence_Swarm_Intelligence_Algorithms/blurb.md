@@ -1,0 +1,1 @@
+Nature solved optimization before we did. Bees dance solutions. Ants find shortest paths. Fish schools evade predators. Birds flock efficiently. Swarm intelligence algorithms borrow these strategies: decentralized, robust, adaptive. Evolution debugged these algorithms over millions of years.

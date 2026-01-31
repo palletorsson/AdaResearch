@@ -1,0 +1,1 @@
+Expand the canvas. Ten dimensions of parameters: position, time, octaves, persistence, lacunarity, seed. Each dimension adds variation, adds control, adds possibility. The space of all possible noise configurations is vast. Navigate it. Find terrains no one has seen before.

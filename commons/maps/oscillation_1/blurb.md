@@ -1,0 +1,1 @@
+Back and forth, back and forth. The oscillator returns to where it started, again and again. Amplitude measures how far it swings; frequency measures how fast. Time becomes circular. The simplest repeating motion, the foundation of waves and cycles everywhere.

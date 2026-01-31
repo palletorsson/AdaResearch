@@ -1,0 +1,1 @@
+Before Perlin, noise was static — random values with no memory, no structure. Then came coherent noise: smooth, continuous, organic. Sample adjacent points and get adjacent values. The noise function remembers its neighbors. Chaos with correlation. Randomness that flows.

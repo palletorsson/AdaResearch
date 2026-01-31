@@ -1,0 +1,1 @@
+Normals give surfaces direction. Each vertex knows which way is "out." Lighting calculations depend on normals — the angle between surface and light determines brightness. Smooth shading interpolates normals; flat shading uses face normals. The normal makes the mesh visible.

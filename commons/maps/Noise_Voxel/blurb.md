@@ -1,0 +1,1 @@
+Three-dimensional noise carved into blocks. Where the function exceeds threshold: solid. Where it falls below: void. Caves, overhangs, floating islands — topologies impossible with heightmaps alone. The voxel grid quantizes continuous noise into habitable space.

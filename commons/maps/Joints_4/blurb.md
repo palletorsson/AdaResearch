@@ -1,0 +1,1 @@
+Ball joints: three rotational degrees of freedom, spherical motion. Shoulders, hips, joysticks. The ball moves freely within its socket, constrained only by the socket's rim. Maximum rotational freedom within positional constraint. The most permissive joint that still connects.

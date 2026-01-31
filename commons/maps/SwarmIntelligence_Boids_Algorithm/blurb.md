@@ -1,0 +1,1 @@
+Separation, alignment, cohesion. Three rules, applied locally, produce flocking globally. Each boid sees only neighbors, yet the flock moves as one. No leader, no plan, no communication beyond proximity. Emergence: complex collective behavior from simple individual rules.

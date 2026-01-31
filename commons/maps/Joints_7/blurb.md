@@ -1,0 +1,1 @@
+Inverse kinematics: specify where the hand should be, and the algorithm figures out how to bend the arm. The end constrains the chain. Work backward from goal to configuration. Animation becomes positioning endpoints; the math handles the rest.

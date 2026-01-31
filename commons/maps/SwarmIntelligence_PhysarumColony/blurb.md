@@ -1,0 +1,1 @@
+Slime mold builds networks. It spreads, explores, finds food, then optimizes — reinforcing efficient paths, pruning dead ends. No brain, no neurons, yet it solves mazes, recreates rail networks, computes. Intelligence without centralization. The blob that thinks by growing.

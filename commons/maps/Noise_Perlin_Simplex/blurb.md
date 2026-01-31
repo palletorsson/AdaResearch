@@ -1,0 +1,1 @@
+Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions. Evolution of an algorithm. Thirty years of refinement in two functions.

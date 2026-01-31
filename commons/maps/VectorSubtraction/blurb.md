@@ -1,0 +1,1 @@
+Subtraction asks: what is the difference between here and there? The displacement vector points from origin to destination. Relative position, relative velocity — all subtraction. To know where you are going, subtract where you are from where you want to be.

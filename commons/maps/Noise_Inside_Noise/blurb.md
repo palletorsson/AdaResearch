@@ -1,0 +1,1 @@
+Noise controlling noise. The output of one function becomes the input coordinate of another. Warped, distorted, folded space. What was smooth becomes turbulent. What was regular becomes organic. Domain warping: when the map itself is noise-transformed.

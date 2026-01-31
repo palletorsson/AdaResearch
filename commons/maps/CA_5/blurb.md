@@ -1,0 +1,1 @@
+More than two states. Not just on/off but a gradient of intensities. Cells decay, brighten, cycle through values. The grid becomes continuous-feeling despite discrete updates. Multiple states enable richer dynamics: waves, excitations, recovery periods.

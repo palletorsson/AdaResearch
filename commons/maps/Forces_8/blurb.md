@@ -1,0 +1,1 @@
+Compound forces build complex behavior. Springs connected to springs. Gravity modified by buoyancy. Friction that depends on velocity. The simple rules combine into emergent complexity. A single object under many forces moves in ways no single force could predict alone.

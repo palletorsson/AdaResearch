@@ -1,0 +1,1 @@
+Forces are vectors that act on bodies. Gravity pulls down. Wind pushes sideways. Friction resists motion. Sum all forces to find the net — the single arrow that tells an object how to accelerate. F = ma, where F is not a number but a direction with magnitude.

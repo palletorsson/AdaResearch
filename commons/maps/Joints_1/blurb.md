@@ -1,0 +1,1 @@
+Joints connect bodies and constrain motion. A hinge allows rotation around one axis. A ball joint allows rotation around any axis. Constraints remove degrees of freedom — what cannot move is as important as what can. Joints are rules made physical.

@@ -1,0 +1,1 @@
+Attraction and repulsion at a distance. Gravity pulls masses together. Electric charges push like away, pull opposite. The inverse square law: double the distance, quarter the force. Fields extend through space, forces act without contact. Action at a distance, mediated by mathematics.

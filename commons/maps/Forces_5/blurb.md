@@ -1,0 +1,1 @@
+Air resistance grows with velocity. The faster you fall, the harder air pushes back. Eventually: terminal velocity, where drag equals gravity and acceleration stops. Objects reach their speed limit not through lack of force but through opposing forces in balance.

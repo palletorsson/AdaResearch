@@ -1,0 +1,1 @@
+Newton's prism split white into rainbow. The spectrum is continuous — infinite wavelengths from red to violet. But we see only three cone types, collapsing infinity into tristimulus. Metamers: different spectra that look identical. The eye is a lossy compressor.

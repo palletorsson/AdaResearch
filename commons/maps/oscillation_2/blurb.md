@@ -1,0 +1,1 @@
+Sine and cosine: the circular functions. Project uniform circular motion onto a line and you get sinusoidal oscillation. The unit circle unwrapped becomes the wave. Phase tells you where in the cycle you are. Everything periodic can be written in sines.

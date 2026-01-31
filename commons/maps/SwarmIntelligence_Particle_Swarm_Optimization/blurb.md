@@ -1,0 +1,1 @@
+Particles search for optima. Each remembers its best position; all know the global best. Move toward both, add some randomness. The swarm explores and exploits simultaneously. Function optimization as social behavior — finding peaks through collective wandering.

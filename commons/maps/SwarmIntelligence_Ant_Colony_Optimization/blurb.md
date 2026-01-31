@@ -1,0 +1,1 @@
+Ants leave pheromones as they walk. Paths with more pheromone attract more ants. Paths with shorter distances get walked more often. Positive feedback loops find optimal routes through mazes. Dumb agents, smart swarm. Stigmergy: communication through environment.

@@ -1,0 +1,1 @@
+Springs are soft constraints. Not "you must be here" but "you should tend toward here." Force proportional to displacement, always pulling back to rest position. Springs make physics bouncy, responsive, alive. Rigid becomes elastic. Constraint becomes suggestion.

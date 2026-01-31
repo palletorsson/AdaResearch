@@ -1,0 +1,1 @@
+Light reveals color by adding wavelengths. The flashlight illuminates, and surfaces respond differently — some absorb, some reflect, some fluoresce. In darkness, color vanishes. Color is not property but interaction: object, light source, and eye together produce what we see.

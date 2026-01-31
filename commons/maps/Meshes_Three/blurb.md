@@ -1,0 +1,1 @@
+UVs map 2D textures onto 3D surfaces. Unwrap the mesh like peeling an orange, flatten it onto a plane, paint the texture, re-wrap. The UV coordinates tell each vertex where to sample the image. 2D art wrapped around 3D form. Projection and compromise.

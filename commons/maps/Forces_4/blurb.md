@@ -1,0 +1,1 @@
+Friction resists motion. Static friction holds objects still until threshold is crossed; kinetic friction slows objects already moving. Surfaces grip and release. Without friction, the world would be frictionless ice — nothing would stop, nothing would hold, nothing would stand.

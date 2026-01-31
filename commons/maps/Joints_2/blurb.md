@@ -1,0 +1,1 @@
+The hinge: rotation around a single axis. Doors swing. Knees bend. Elbows flex. The simplest useful joint, reducing infinite freedom to one dimension of allowed motion. Everything else is forbidden. The hinge enforces its axis.

@@ -1,0 +1,1 @@
+F means forward. + means turn right. [ means save position. ] means restore. From this alphabet: trees. The grammar is botanical instruction. The string is the genotype; the rendered tree is phenotype. Nature's branching expressed in rewrite rules.

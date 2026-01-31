@@ -1,0 +1,1 @@
+Randomness enters the grammar. A rule might produce one result 60% of the time, another 40%. No two trees grow identical. The L-system becomes probabilistic, its outputs varied within constraint. Same grammar, different forests. Nature's variation formalized.

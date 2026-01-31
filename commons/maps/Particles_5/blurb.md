@@ -1,0 +1,1 @@
+Collision and response. Particles bounce off surfaces, stick to geometry, slide along walls. The dead simple particle gains spatial awareness — it knows where solid things are and reacts. From ghost to inhabitant, the particle enters the world.

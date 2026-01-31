@@ -1,0 +1,1 @@
+Different algorithms, different characters. Perlin is smooth and directional. Simplex is isotropic and faster. Value noise is blocky at low frequencies. Worley noise creates cells and boundaries. Each function has personality. Choose the right noise for the right texture.

@@ -1,0 +1,1 @@
+Springs pull and push. Hooke's law: F = -kx. The further you stretch, the harder it pulls back. Equilibrium is where forces balance. Oscillation is what happens when you disturb that balance. The spring wants to return but overshoots. Again and again.

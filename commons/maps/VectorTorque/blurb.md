@@ -1,0 +1,1 @@
+Torque is rotational force — the cross product of lever arm and applied force. Push at the edge of a door and it swings easily. Push near the hinge and it resists. Distance from the pivot matters. Rotation has its own physics, and torque is its currency.

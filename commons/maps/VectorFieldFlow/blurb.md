@@ -1,0 +1,1 @@
+At every point in space, an arrow. The field assigns direction and magnitude to position itself. Drop a particle and watch it follow — not a predetermined path but an emergent trajectory through the field's instructions. Wind, current, magnetism: space itself tells things where to go.

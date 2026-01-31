@@ -1,0 +1,1 @@
+A particle: position, velocity, and lifetime. Spawn it, update it each frame, kill it when done. Thousands at once, each independent, together forming clouds, sparks, rain. The particle system is brute force beauty — no interaction between particles, just numbers accumulating.

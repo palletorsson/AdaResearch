@@ -1,0 +1,1 @@
+Noise fills space. Not a surface but a density field — every point has a value, every region has texture. Slice through and see cross-sections. Move through and feel gradients. Volumetric noise is the medium of clouds, fog, smoke: things without hard edges, present everywhere at once.

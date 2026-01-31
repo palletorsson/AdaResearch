@@ -1,0 +1,1 @@
+Grab the color. Move it through space. Watch it change against different backgrounds. The color remains numerically identical — same RGB, same HSV — yet it appears to shift. Your hand holds a constant while your eye perceives change. Color is lie agreed upon.

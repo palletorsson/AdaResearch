@@ -1,0 +1,1 @@
+Light bounces. Balls reflect. Shadows fall. Projection finds the component of one vector along another — the shadow cast on a direction. Reflection flips the perpendicular component, preserving the parallel. Mirrors, collisions, and rendering all speak this language.
