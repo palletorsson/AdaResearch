@@ -23,7 +23,7 @@ structure = positions.map((i,j) => {
 
 ---
 
-## Seven Generative Paradigms
+## Eight Generative Paradigms
 
 ### 1. Array/Grid
 **Structure:** `element[i,j] = f(i,j)`
@@ -121,7 +121,29 @@ for point in sample_points:
 
 ---
 
-### 7. Constraint/Solve
+### 7. Boolean/CSG
+**Structure:** `A ∪ B`, `A - B`, `A ∩ B`
+
+Constructive Solid Geometry. Build complex forms from simple primitives using set operations.
+
+```gdscript
+# Union: combine two shapes
+result = A.union(B)
+
+# Subtract: carve B from A
+result = A.subtract(B)
+
+# Intersect: only where both exist
+result = A.intersect(B)
+```
+
+**Good for:** Carved forms, caves, architectural voids, mechanical parts  
+**Sequences:** `booleans` (cave example)  
+**Godot:** `CSGBox3D`, `CSGCombiner3D`, `CSGSphere3D`
+
+---
+
+### 8. Constraint/Solve
 **Structure:** Specify relationships → solver finds positions
 
 Declarative: say what you want, not how to get it.
