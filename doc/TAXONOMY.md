@@ -149,6 +149,118 @@ All levels combined. A forest is:
 
 ---
 
+## Full Map: Levels → Sequences → Maps
+
+### Level 0-1: Point & Primitives (F_order)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `primitives` | 12 | Point_One, Point_Lines, Point_Trace, Point_Triangle, Primitives_1, Primitives_Ignorance... |
+| `meshes` | 4 | Mesh construction from primitives |
+
+### Level 2: Properties (F_order)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `color` | 6 | Color_Nails, Color_Rainbow, Color_Paint, Color_Gradiant... |
+| `vectors` | 11 | VectorBasics, VectorAddition, VectorDotProduct, VectorCrossProduct... |
+
+### Level 3: Transform (F_order)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `transformation` | 6 | Translation, rotation, scale demos |
+| `array_tutorial` | 7 | Array + transform combinations |
+
+### Level 4: Collections (F_order → oscillation)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `datastructures` | 12 | Trees, graphs, hash maps, heaps... |
+| `graphtheory` | 10 | Force-directed, MST, network flow... |
+| `computationalgeometry` | 8 | Convex hull, Voronoi, closest pair... |
+
+### Level 5: Patterns (oscillation)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `patterngeneration` | 5 | Truchet, Penrose, reaction-diffusion... |
+| `wavefunctions` | 11 | Oscillation, Fourier, coupled oscillators... |
+| `proceduralaudio` | 8 | Additive, FM, granular synthesis... |
+
+### Level 6: Dynamics (oscillation → E_entropy)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `forces` | 10 | Newton, attraction, repulsion... |
+| `particles` | 5 | Emitters, systems, trails... |
+| `physicssimulation` | 16 | Cloth, fluid, collision, FEM... |
+| `softbodies` | 8 | Jelly, cloth, deformable... |
+
+### Level 7: Fields & Randomness (E_entropy)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `randomness` | 13 | Distributions, entropy, walks... |
+| `noise` | 10 | Perlin, Simplex, Value, Blue... |
+| `cellularautomata` | 12 | 1D, 2D, 3D CA, Game of Life... |
+
+### Level 8: Growth & Recursion (lambda_edge)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `fractals` | 8 | Koch, Mandelbrot, Julia, trees... |
+| `lsystems` | 12 | Trees, architecture, ecosystems... |
+| `grammar_systems` | 2 | Context-free, shape grammars... |
+| `recursiveemergence` | 11 | Recursive patterns emerging... |
+
+### Level 9: Emergence (integration)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `swarmintelligence` | 7 | Boids, ants, particle swarm... |
+| `morphogenesis` | 2 | Biological form generation... |
+| `isosurfaces` | 3 | Marching cubes, SDF... |
+| `higher_dimensions` | 4 | 4D+, tesseract, hypersphere... |
+
+### Level 10: Synthesis (synthesis)
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `qfeplaboratory` | 8 | λ-slider, phase cube, reactor... |
+| `machinelearning` | 15 | Neural nets, evolution, clustering... |
+| `advancedlaboratory` | 5 | Advanced synthesis... |
+
+### Theory & Critique
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `criticalalgorithms` | 6 | Bias, ethics, power... |
+| `foundationscrisis` | 8 | Gödel, Russell, Escher... |
+| `artmathematics` | 8 | Historical math/art connections... |
+| `speculativecomputation` | 5 | Future, quantum, alt-computation... |
+
+### Utility
+| Sequence | Maps | Content |
+|----------|------|---------|
+| `constraint_solvers` | 3 | IK, optimization... |
+| `searchpathfinding` | 7 | A*, Dijkstra, flow fields... |
+| `spatial_partitioning` | 4 | Octrees, BSP, BVH... |
+| `resourcemanagement` | 6 | Allocation, pooling... |
+
+---
+
+## Summary: 41 Sequences, ~280 Maps
+
+| Level | Phase | Sequences | Maps |
+|-------|-------|-----------|------|
+| 0-1 Primitives | F_order | 2 | 16 |
+| 2 Properties | F_order | 2 | 17 |
+| 3 Transform | F_order | 2 | 13 |
+| 4 Collections | F→osc | 3 | 30 |
+| 5 Patterns | oscillation | 3 | 24 |
+| 6 Dynamics | osc→E | 4 | 39 |
+| 7 Fields | E_entropy | 3 | 35 |
+| 8 Growth | lambda_edge | 4 | 33 |
+| 9 Emergence | integration | 4 | 16 |
+| 10 Synthesis | synthesis | 3 | 28 |
+| Theory | — | 4 | 27 |
+| Utility | — | 4 | 20 |
+| **Total** | | **41** | **~280** |
+
+Plus: 494 total map folders, ~1000 algorithm scenes.
+
+---
+
 ## The Encoding Stack
 
 To describe any complex structure (a facade, a forest, a form), we need:
