@@ -766,6 +766,24 @@
 			"description": "Grabbable Alessi tree. Red and white striped ceramic-style holiday decoration.",
 			"scene": "res://commons/primitives/design_classics/grab_alessi_tree.tscn"
 		},
+		"editable_curve": {
+			"name": "editable_curve",
+			"lookup_name": "editable_curve",
+			"description": "Interactive curve with grabbable control points. Supports Bezier, Catmull-Rom, and linear modes. Extends the trace concept: deliberate construction over recorded gesture.",
+			"scene": "res://commons/primitives/curves/editable_curve.tscn"
+		},
+		"editable_bezier": {
+			"name": "editable_bezier",
+			"lookup_name": "editable_bezier",
+			"description": "Cubic Bezier curve editor. 4 control points: P0-P1 defines start tangent, P2-P3 defines end tangent. Shows tangent handles.",
+			"scene": "res://commons/primitives/curves/editable_bezier.tscn"
+		},
+		"editable_catmull_rom": {
+			"name": "editable_catmull_rom",
+			"lookup_name": "editable_catmull_rom",
+			"description": "Catmull-Rom spline editor. Curve passes through all control points. More intuitive for freeform drawing.",
+			"scene": "res://commons/primitives/curves/editable_catmull_rom.tscn"
+		},
 		"platonic_demo": {
 			"name": "platonic_demo",
 			"lookup_name": "platonic_demo",
