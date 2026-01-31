@@ -802,6 +802,18 @@
 			"description": "Array + Scale. scale[i] = factor^i. The nest: cumulative scaling (telescoping).",
 			"scene": "res://commons/primitives/arrays/array_scale.tscn"
 		},
+		"glass_planes_empty": {
+			"name": "glass_planes_empty",
+			"lookup_name": "glass_planes_empty",
+			"description": "2.5D: Array of transparent glass planes. Pure repetition — depth from layered transparency. No noise.",
+			"scene": "res://commons/primitives/arrays/glass_planes_empty.tscn"
+		},
+		"glass_planes_2_5d": {
+			"name": "glass_planes_2_5d",
+			"lookup_name": "glass_planes_2_5d",
+			"description": "2.5D: Glass planes + noise. Discrete layers framing continuous field. Volumetric look, flat render cost.",
+			"scene": "res://commons/primitives/arrays/glass_planes_2_5d.tscn"
+		},
 		"transform_staircase_spiral": {
 			"name": "transform_staircase_spiral",
 			"lookup_name": "transform_staircase_spiral",
