@@ -814,6 +814,18 @@
 			"description": "2.5D: Glass planes + noise. Discrete layers framing continuous field. Volumetric look, flat render cost.",
 			"scene": "res://commons/primitives/arrays/glass_planes_2_5d.tscn"
 		},
+		"folding_cube": {
+			"name": "folding_cube",
+			"lookup_name": "folding_cube",
+			"description": "Animated cube net folding into 3D cube. Shows how 6 connected squares become a volume. Cross net with hinge animation.",
+			"scene": "res://commons/primitives/cubes/folding_cube.tscn"
+		},
+		"folding_cube_interactive": {
+			"name": "folding_cube_interactive",
+			"lookup_name": "folding_cube_interactive",
+			"description": "Interactive folding cube. Grab the handle to manually fold/unfold. Snaps to flat or folded state on release.",
+			"scene": "res://commons/primitives/cubes/folding_cube_interactive.tscn"
+		},
 		"transform_staircase_spiral": {
 			"name": "transform_staircase_spiral",
 			"lookup_name": "transform_staircase_spiral",
