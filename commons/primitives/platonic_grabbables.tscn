@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://platonic_grabbables_001"]
+
+[ext_resource type="PackedScene" uid="uid://dgjmmu8itghpj" path="res://commons/primitives/tetrahedron/grab_tetrahedron.tscn" id="1_grab_tetra"]
+[ext_resource type="PackedScene" uid="uid://djkjuy7wct10q" path="res://commons/primitives/cubes/grab_cube.tscn" id="2_grab_cube"]
+[ext_resource type="PackedScene" uid="uid://l0xse04bya00" path="res://commons/primitives/octahedron/grab_octahedron.tscn" id="3_grab_octa"]
+[ext_resource type="PackedScene" path="res://commons/primitives/dodecahedron/grab_dodecahedron.tscn" id="4_grab_dode"]
+[ext_resource type="PackedScene" path="res://commons/primitives/icosahedron/grab_icosahedron.tscn" id="5_grab_ico"]
+
+[node name="PlatonicGrabbables" type="Node3D"]
+
+# Tetrahedrons - column 1
+[node name="GrabTetrahedron_1" parent="." instance=ExtResource("1_grab_tetra")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2, 0.2, -0.3)
+
+[node name="GrabTetrahedron_2" parent="." instance=ExtResource("1_grab_tetra")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2, 0.2, 0)
+
+[node name="GrabTetrahedron_3" parent="." instance=ExtResource("1_grab_tetra")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2, 0.2, 0.3)
+
+# Cubes - column 2
+[node name="GrabCube_1" parent="." instance=ExtResource("2_grab_cube")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1, 0.15, -0.3)
+
+[node name="GrabCube_2" parent="." instance=ExtResource("2_grab_cube")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1, 0.15, 0)
+
+[node name="GrabCube_3" parent="." instance=ExtResource("2_grab_cube")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1, 0.15, 0.3)
+
+# Octahedrons - column 3
+[node name="GrabOctahedron_1" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.2, -0.3)
+
+[node name="GrabOctahedron_2" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.2, 0)
+
+[node name="GrabOctahedron_3" parent="." instance=ExtResource("3_grab_octa")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.2, 0.3)
+
+# Dodecahedrons - column 4
+[node name="GrabDodecahedron_1" parent="." instance=ExtResource("4_grab_dode")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1, 0.2, -0.3)
+
+[node name="GrabDodecahedron_2" parent="." instance=ExtResource("4_grab_dode")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1, 0.2, 0)
+
+[node name="GrabDodecahedron_3" parent="." instance=ExtResource("4_grab_dode")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1, 0.2, 0.3)
+
+# Icosahedrons - column 5
+[node name="GrabIcosahedron_1" parent="." instance=ExtResource("5_grab_ico")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 2, 0.2, -0.3)
+
+[node name="GrabIcosahedron_2" parent="." instance=ExtResource("5_grab_ico")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 2, 0.2, 0)
+
+[node name="GrabIcosahedron_3" parent="." instance=ExtResource("5_grab_ico")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 2, 0.2, 0.3)

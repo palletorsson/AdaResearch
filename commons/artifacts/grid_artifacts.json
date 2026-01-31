@@ -736,6 +736,12 @@
 			"description": "Grabbable icosahedron. 20 triangular faces, 12 vertices, 30 edges.",
 			"scene": "res://commons/primitives/icosahedron/grab_icosahedron.tscn"
 		},
+		"platonic_grabbables": {
+			"name": "platonic_grabbables",
+			"lookup_name": "platonic_grabbables",
+			"description": "Compact table of all 5 platonic solids, 3 grabbable copies each. Tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
+			"scene": "res://commons/primitives/platonic_grabbables.tscn"
+		},
 		"platonic_demo": {
 			"name": "platonic_demo",
 			"lookup_name": "platonic_demo",
