@@ -12,6 +12,7 @@ extends Control
 const SongTimeline = preload("res://commons/audio/catalog/ui/SongTimeline.gd")
 const WordSynthDisplay = preload("res://commons/audio/catalog/ui/WordSynthDisplay.gd")
 const WordSynthBridge = preload("res://commons/audio/catalog/WordSynthBridge.gd")
+const SynthConfigRegistry = preload("res://commons/audio/catalog/SynthConfigRegistry.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 
 # Word→Synth bridge for semantic parameter control
@@ -906,7 +907,10 @@ func _on_word_clicked(layer: String, word: String):
 
 
 func _on_layer_selected(layer: String):
-	# Apply all words for this layer
+	# Show sound breakdown panel
+	show_sound_breakdown(layer)
+	
+	# Also apply words
 	var layer_words = _word_display._layer_words.get(layer, [])
 	var new_params = _word_bridge.words_to_live_params(layer, layer_words)
 	
@@ -917,7 +921,7 @@ func _on_layer_selected(layer: String):
 				_param_sliders[key].value = new_params[key]
 	
 	_apply_live_params()
-	_status_label.text = "📋 %s: applied %d words" % [layer, layer_words.size()]
+	_status_label.text = "🔬 %s breakdown" % layer
 
 
 func _on_layer_preview(layer: String, params: Dictionary):
@@ -1652,3 +1656,263 @@ func _on_word_picker_toggled(pressed: bool, layer: String, word: String):
 	_populate_word_picker(layer)
 	
 	_status_label.text = "🏷️ %s: %s" % [layer, ", ".join(current_words)]
+
+
+# === SOUND BREAKDOWN PANEL ===
+
+var _breakdown_popup: PopupPanel = null
+
+func show_sound_breakdown(layer: String):
+	"""Show detailed breakdown of a sound's constitution"""
+	if _breakdown_popup == null:
+		_breakdown_popup = _create_breakdown_popup()
+		add_child(_breakdown_popup)
+	
+	_populate_breakdown(layer)
+	
+	# Center the popup
+	var popup_size = Vector2(450, 550)
+	_breakdown_popup.size = popup_size
+	_breakdown_popup.position = get_viewport_rect().size / 2.0 - popup_size / 2.0
+	_breakdown_popup.popup()
+
+
+func _create_breakdown_popup() -> PopupPanel:
+	var popup = PopupPanel.new()
+	
+	var scroll = ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	popup.add_child(scroll)
+	
+	var panel = VBoxContainer.new()
+	panel.name = "Content"
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_theme_constant_override("separation", 12)
+	scroll.add_child(panel)
+	
+	# Title
+	var title = Label.new()
+	title.name = "Title"
+	title.text = "🔬 SOUND BREAKDOWN"
+	title.add_theme_font_size_override("font_size", 20)
+	title.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
+	panel.add_child(title)
+	
+	# Synth type
+	var type_label = Label.new()
+	type_label.name = "TypeLabel"
+	type_label.add_theme_font_size_override("font_size", 14)
+	type_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.8))
+	panel.add_child(type_label)
+	
+	# Feature bars section
+	var features_section = VBoxContainer.new()
+	features_section.name = "FeaturesSection"
+	features_section.add_theme_constant_override("separation", 6)
+	panel.add_child(features_section)
+	
+	var features_title = Label.new()
+	features_title.text = "📊 Features"
+	features_title.add_theme_font_size_override("font_size", 16)
+	features_title.add_theme_color_override("font_color", Color(0.6, 0.8, 0.6))
+	features_section.add_child(features_title)
+	
+	var features_container = VBoxContainer.new()
+	features_container.name = "FeatureBars"
+	features_container.add_theme_constant_override("separation", 4)
+	features_section.add_child(features_container)
+	
+	# Words section
+	var words_section = VBoxContainer.new()
+	words_section.name = "WordsSection"
+	words_section.add_theme_constant_override("separation", 6)
+	panel.add_child(words_section)
+	
+	var words_title = Label.new()
+	words_title.text = "🏷️ Derived Words"
+	words_title.add_theme_font_size_override("font_size", 16)
+	words_title.add_theme_color_override("font_color", Color(0.9, 0.6, 0.3))
+	words_section.add_child(words_title)
+	
+	var words_flow = HFlowContainer.new()
+	words_flow.name = "WordsFlow"
+	words_flow.add_theme_constant_override("h_separation", 6)
+	words_flow.add_theme_constant_override("v_separation", 4)
+	words_section.add_child(words_flow)
+	
+	# Params section
+	var params_section = VBoxContainer.new()
+	params_section.name = "ParamsSection"
+	params_section.add_theme_constant_override("separation", 4)
+	panel.add_child(params_section)
+	
+	var params_title = Label.new()
+	params_title.text = "⚙️ Raw Parameters"
+	params_title.add_theme_font_size_override("font_size", 16)
+	params_title.add_theme_color_override("font_color", Color(0.5, 0.7, 0.9))
+	params_section.add_child(params_title)
+	
+	var params_grid = GridContainer.new()
+	params_grid.name = "ParamsGrid"
+	params_grid.columns = 2
+	params_grid.add_theme_constant_override("h_separation", 16)
+	params_grid.add_theme_constant_override("v_separation", 2)
+	params_section.add_child(params_grid)
+	
+	# Close button
+	var close_btn = Button.new()
+	close_btn.text = "Close"
+	close_btn.pressed.connect(func(): popup.hide())
+	panel.add_child(close_btn)
+	
+	return popup
+
+
+func _populate_breakdown(layer: String):
+	if _breakdown_popup == null:
+		return
+	
+	var content = _breakdown_popup.find_child("Content", true, false)
+	if content == null:
+		return
+	
+	# Get actual config from registry
+	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
+	
+	# If no config found, use displayed params
+	if config.is_empty():
+		config = _word_display._layer_params.get(layer, {})
+	
+	# Analyze the sound
+	var analysis = _word_bridge.analyze_sound(layer, config)
+	
+	# Update title
+	var title = content.find_child("Title", true, false) as Label
+	if title:
+		title.text = "🔬 %s" % layer
+	
+	# Update type
+	var type_label = content.find_child("TypeLabel", true, false) as Label
+	if type_label:
+		var synth_type = config.get("type", "unknown")
+		type_label.text = "Type: %s" % synth_type
+	
+	# Update feature bars
+	var feature_bars = content.find_child("FeatureBars", true, false) as VBoxContainer
+	if feature_bars:
+		# Clear existing
+		for child in feature_bars.get_children():
+			child.queue_free()
+		
+		# Add feature bars
+		var feature_colors = {
+			"brightness": Color(1.0, 0.9, 0.4),
+			"warmth": Color(1.0, 0.5, 0.3),
+			"movement": Color(0.5, 0.8, 1.0),
+			"space": Color(0.6, 0.4, 0.9),
+			"thickness": Color(0.4, 0.8, 0.5),
+			"aggression": Color(1.0, 0.3, 0.3)
+		}
+		
+		for feature_name in analysis["features"].keys():
+			var value = analysis["features"][feature_name]
+			var bar_row = _create_feature_bar(feature_name, value, feature_colors.get(feature_name, Color.WHITE))
+			feature_bars.add_child(bar_row)
+	
+	# Update words
+	var words_flow = content.find_child("WordsFlow", true, false) as HFlowContainer
+	if words_flow:
+		# Clear existing
+		for child in words_flow.get_children():
+			child.queue_free()
+		
+		# Add word tags
+		for word in analysis["words"]:
+			var tag = Button.new()
+			tag.text = word
+			tag.flat = false
+			tag.add_theme_font_size_override("font_size", 12)
+			
+			var style = StyleBoxFlat.new()
+			style.bg_color = Color(0.3, 0.4, 0.5)
+			style.set_corner_radius_all(4)
+			style.content_margin_left = 8
+			style.content_margin_right = 8
+			style.content_margin_top = 4
+			style.content_margin_bottom = 4
+			tag.add_theme_stylebox_override("normal", style)
+			
+			words_flow.add_child(tag)
+		
+		if analysis["words"].is_empty():
+			var none_label = Label.new()
+			none_label.text = "(no words derived)"
+			none_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+			words_flow.add_child(none_label)
+	
+	# Update params grid
+	var params_grid = content.find_child("ParamsGrid", true, false) as GridContainer
+	if params_grid:
+		# Clear existing
+		for child in params_grid.get_children():
+			child.queue_free()
+		
+		# Add param rows
+		for param_name in config.keys():
+			if param_name == "type" or param_name == "style" or param_name == "pattern":
+				continue  # Skip non-numeric
+			
+			var name_label = Label.new()
+			name_label.text = param_name
+			name_label.add_theme_font_size_override("font_size", 11)
+			name_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.65))
+			params_grid.add_child(name_label)
+			
+			var value = config[param_name]
+			var val_label = Label.new()
+			if value is float:
+				val_label.text = "%.3f" % value
+			else:
+				val_label.text = str(value)
+			val_label.add_theme_font_size_override("font_size", 11)
+			val_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.9))
+			params_grid.add_child(val_label)
+
+
+func _create_feature_bar(name: String, value: float, color: Color) -> Control:
+	var row = HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	
+	# Label
+	var label = Label.new()
+	label.text = name.capitalize()
+	label.add_theme_font_size_override("font_size", 12)
+	label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.75))
+	label.custom_minimum_size.x = 80
+	row.add_child(label)
+	
+	# Bar background
+	var bar_bg = ColorRect.new()
+	bar_bg.color = Color(0.15, 0.15, 0.18)
+	bar_bg.custom_minimum_size = Vector2(150, 16)
+	bar_bg.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(bar_bg)
+	
+	# Bar fill
+	var bar_fill = ColorRect.new()
+	bar_fill.color = color
+	bar_fill.custom_minimum_size = Vector2(150 * value, 16)
+	bar_fill.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	bar_bg.add_child(bar_fill)
+	
+	# Value
+	var val_label = Label.new()
+	val_label.text = "%.0f%%" % (value * 100)
+	val_label.add_theme_font_size_override("font_size", 11)
+	val_label.add_theme_color_override("font_color", color)
+	val_label.custom_minimum_size.x = 40
+	val_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(val_label)
+	
+	return row

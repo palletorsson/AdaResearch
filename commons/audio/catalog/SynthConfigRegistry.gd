@@ -1,0 +1,607 @@
+# SynthConfigRegistry.gd
+# Registry of actual synth parameters used by each generator
+# Enables reverse-lookup: "what is this sound made of?"
+
+extends RefCounted
+class_name SynthConfigRegistry
+
+# song_id → { layer_name → { param_name → value } }
+static var _configs: Dictionary = {}
+
+static func _static_init():
+	_register_all_configs()
+
+
+static func _register_all_configs():
+	"""Register known synth configurations from AudioSynthesizer generators"""
+	
+	# === AMBIENT WORKS (Aphex Twin style) ===
+	_configs["ambient_works"] = {
+		"Keys": {
+			"type": "FM piano",
+			"filter.cutoff": 2000,
+			"filter.resonance": 0.3,
+			"env.attack": 0.01,
+			"env.decay": 0.3,
+			"env.sustain": 0.4,
+			"env.release": 0.5,
+			"fx.reverb.mix": 0.3,
+			"fx.distortion": 0.15,  # tape saturation
+			"osc.drift": 0.05
+		},
+		"Pad": {
+			"type": "subtractive",
+			"osc.voices": 5,
+			"osc.detune": 8,
+			"filter.cutoff": 1500,
+			"env.attack": 1.5,
+			"env.decay": 0.5,
+			"env.sustain": 0.7,
+			"env.release": 2.0,
+			"fx.chorus.depth": 0.4,
+			"fx.reverb.mix": 0.5,
+			"mix.stereo_width": 1.2
+		},
+		"Bass": {
+			"type": "303 acid",
+			"filter.cutoff": 800,
+			"filter.resonance": 0.8,
+			"filter.type": "ladder",
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.3,
+			"mod.lfo.rate": 2.0,
+			"mod.lfo.depth": 0.4,
+			"mod.lfo.target": "filter",
+			"fx.distortion": 0.25
+		},
+		"Drums": {
+			"type": "breakbeat",
+			"style": "lo-fi",
+			"fx.bitcrush.depth": 12,
+			"fx.distortion": 0.1,
+			"mix.high_shelf_db": -3
+		}
+	}
+	
+	# === BLADE RUNNER (Vangelis style) ===
+	_configs["blade_runner"] = {
+		"Vangelis Keys": {
+			"type": "CS-80 brass",
+			"filter.cutoff": 2500,
+			"filter.resonance": 0.7,
+			"env.attack": 0.02,
+			"env.decay": 0.4,
+			"env.sustain": 0.6,
+			"env.release": 0.8,
+			"mod.lfo.rate": 5.0,
+			"mod.lfo.depth": 0.01,
+			"mod.lfo.target": "pitch",
+			"osc.voices": 2,
+			"osc.detune": 5,
+			"fx.reverb.mix": 0.4,
+			"fx.reverb.decay": 3.0
+		},
+		"String Pad": {
+			"type": "string ensemble",
+			"osc.voices": 8,
+			"osc.detune": 3,
+			"filter.cutoff": 3000,
+			"env.attack": 0.3,
+			"env.sustain": 0.8,
+			"env.release": 1.5,
+			"fx.chorus.depth": 0.3,
+			"mix.stereo_width": 1.3
+		},
+		"Bass Pulse": {
+			"type": "sub pulse",
+			"filter.cutoff": 200,
+			"env.attack": 0.1,
+			"env.decay": 0.5,
+			"env.sustain": 0.6,
+			"mod.lfo.rate": 0.5,
+			"mod.lfo.depth": 0.3,
+			"mod.lfo.target": "amplitude",
+			"sub.level_db": 0
+		},
+		"Lead": {
+			"type": "solo synth",
+			"filter.cutoff": 4000,
+			"filter.resonance": 0.4,
+			"env.attack": 0.05,
+			"env.sustain": 0.9,
+			"mod.lfo.rate": 5.0,
+			"mod.lfo.depth": 0.015,
+			"mod.lfo.target": "pitch",
+			"fx.delay.mix": 0.3,
+			"fx.delay.time": 0.375,
+			"fx.reverb.mix": 0.5
+		}
+	}
+	
+	# === DETROIT TECHNO ===
+	_configs["detroit_techno"] = {
+		"Pad": {
+			"type": "digital",
+			"osc.voices": 4,
+			"osc.detune": 0,
+			"osc.drift": 0,
+			"filter.cutoff": 3500,
+			"env.attack": 0.5,
+			"env.sustain": 0.7,
+			"fx.reverb.mix": 0.4,
+			"mix.stereo_width": 1.1
+		},
+		"Bass": {
+			"type": "808 sub",
+			"filter.cutoff": 150,
+			"env.attack": 0.001,
+			"env.decay": 0.3,
+			"env.sustain": 0.5,
+			"sub.level_db": 3
+		},
+		"Stabs": {
+			"type": "chord stab",
+			"filter.cutoff": 2000,
+			"filter.resonance": 0.5,
+			"env.attack": 0.001,
+			"env.decay": 0.08,
+			"env.sustain": 0,
+			"fx.reverb.mix": 0.2
+		},
+		"Drums": {
+			"type": "909",
+			"style": "machine funk",
+			"env.attack": 0.001,
+			"mix.high_shelf_db": 2
+		}
+	}
+	
+	# === SYNTHWAVE ===
+	_configs["synthwave"] = {
+		"Arpeggio": {
+			"type": "Juno-60",
+			"osc.voices": 4,
+			"osc.detune": 12,
+			"filter.cutoff": 3000,
+			"filter.resonance": 0.3,
+			"env.attack": 0.001,
+			"env.decay": 0.2,
+			"env.sustain": 0.5,
+			"fx.chorus.depth": 0.4,
+			"fx.delay.mix": 0.25,
+			"fx.delay.time": 0.375
+		},
+		"Bass": {
+			"type": "saw bass",
+			"filter.cutoff": 600,
+			"filter.resonance": 0.4,
+			"env.attack": 0.001,
+			"env.decay": 0.1,
+			"env.sustain": 0.8,
+			"osc.voices": 2,
+			"osc.detune": 5
+		},
+		"Lead": {
+			"type": "supersaw lead",
+			"osc.voices": 7,
+			"osc.detune": 15,
+			"filter.cutoff": 4500,
+			"env.attack": 0.02,
+			"env.sustain": 0.9,
+			"mod.lfo.rate": 5.5,
+			"mod.lfo.depth": 0.02,
+			"mod.lfo.target": "pitch",
+			"fx.delay.mix": 0.35,
+			"fx.reverb.mix": 0.4,
+			"mix.stereo_width": 1.4
+		},
+		"Drums": {
+			"type": "LinnDrum",
+			"fx.reverb.mix": 0.6,
+			"fx.reverb.decay": 1.5,
+			"style": "gated reverb"
+		}
+	}
+	
+	# === FRENCH TOUCH ===
+	_configs["french_touch"] = {
+		"Filter Bass": {
+			"type": "filter disco",
+			"filter.cutoff": 400,
+			"filter.resonance": 0.6,
+			"filter.type": "lowpass",
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.7,
+			"mod.lfo.rate": 0.25,
+			"mod.lfo.depth": 0.5,
+			"mod.lfo.target": "filter",
+			"fx.distortion": 0.2
+		},
+		"Duck Lead": {
+			"type": "quack synth",
+			"filter.cutoff": 1500,
+			"filter.resonance": 0.8,
+			"filter.type": "bandpass",
+			"env.attack": 0.001,
+			"env.decay": 0.05,
+			"env.sustain": 0.2
+		},
+		"Chiff": {
+			"type": "wavetable",
+			"env.attack": 0.001,
+			"env.decay": 0.08,
+			"env.sustain": 0,
+			"filter.cutoff": 5000
+		},
+		"Vocoder Pad": {
+			"type": "vocoder",
+			"osc.voices": 4,
+			"filter.cutoff": 2000,
+			"env.attack": 0.1,
+			"env.sustain": 0.8,
+			"mix.stereo_width": 1.0
+		},
+		"Drums": {
+			"type": "disco kit",
+			"tempo": 120,
+			"pattern": "four-on-floor"
+		}
+	}
+	
+	# === SUPERSAW TRANCE ===
+	_configs["supersaw_trance"] = {
+		"Supersaw Pad": {
+			"type": "JP-8000 supersaw",
+			"osc.voices": 8,
+			"osc.detune": 25,
+			"filter.cutoff": 6000,
+			"filter.resonance": 0.2,
+			"env.attack": 0.3,
+			"env.sustain": 0.9,
+			"env.release": 2.0,
+			"fx.reverb.mix": 0.5,
+			"fx.reverb.decay": 4.0,
+			"mix.stereo_width": 1.5
+		},
+		"Supersaw Lead": {
+			"type": "JP-8000 supersaw",
+			"osc.voices": 7,
+			"osc.detune": 18,
+			"filter.cutoff": 8000,
+			"env.attack": 0.01,
+			"env.sustain": 0.95,
+			"fx.delay.mix": 0.3,
+			"fx.reverb.mix": 0.4
+		},
+		"Trance Bass": {
+			"type": "sub bass",
+			"filter.cutoff": 120,
+			"env.attack": 0.001,
+			"env.decay": 0.2,
+			"env.sustain": 0.6,
+			"sub.level_db": 6
+		},
+		"Arp": {
+			"type": "trance arp",
+			"osc.voices": 3,
+			"osc.detune": 8,
+			"filter.cutoff": 4000,
+			"env.attack": 0.001,
+			"env.decay": 0.1,
+			"env.sustain": 0.4,
+			"fx.delay.mix": 0.4,
+			"fx.delay.time": 0.1875
+		},
+		"Drums": {
+			"type": "trance kit",
+			"tempo": 138,
+			"pattern": "driving"
+		}
+	}
+	
+	# === LO-FI HOUSE ===
+	_configs["lofi_house"] = {
+		"Juno Bass": {
+			"type": "Juno-106 DCO",
+			"waveform": "saw+square",
+			"filter.cutoff": 500,
+			"filter.resonance": 0.5,
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.3,
+			"osc.drift": 0.03,
+			"fx.distortion": 0.1
+		},
+		"Juno Pad": {
+			"type": "Juno-106 DCO",
+			"osc.voices": 4,
+			"osc.detune": 5,
+			"filter.cutoff": 1800,
+			"env.attack": 0.2,
+			"env.sustain": 0.7,
+			"fx.chorus.depth": 0.5,
+			"fx.chorus.rate": 0.8,
+			"osc.drift": 0.02
+		},
+		"Stab": {
+			"type": "filtered stab",
+			"filter.cutoff": 1200,
+			"env.attack": 0.001,
+			"env.decay": 0.08,
+			"env.sustain": 0
+		},
+		"Drums": {
+			"type": "lo-fi kit",
+			"tempo": 118,
+			"fx.bitcrush.depth": 12,
+			"fx.distortion": 0.15,
+			"style": "dusty"
+		}
+	}
+	
+	# === REESE JUNGLE ===
+	_configs["reese_jungle"] = {
+		"Reese Bass": {
+			"type": "reese",
+			"osc.voices": 2,
+			"osc.detune": 35,
+			"filter.cutoff": 600,
+			"filter.resonance": 0.4,
+			"mod.lfo.rate": 0.25,
+			"mod.lfo.depth": 0.3,
+			"mod.lfo.target": "filter",
+			"sub.level_db": 3,
+			"fx.distortion": 0.2
+		},
+		"Amen Break": {
+			"type": "breakbeat",
+			"tempo": 170,
+			"style": "chopped",
+			"fx.distortion": 0.1
+		},
+		"Stab": {
+			"type": "bitcrushed chord",
+			"fx.bitcrush.depth": 10,
+			"filter.cutoff": 3000,
+			"env.attack": 0.001,
+			"env.decay": 0.1,
+			"env.sustain": 0
+		},
+		"Pad": {
+			"type": "ambient texture",
+			"filter.cutoff": 2000,
+			"env.attack": 1.0,
+			"env.sustain": 0.6,
+			"fx.reverb.mix": 0.7,
+			"fx.reverb.decay": 5.0,
+			"mix.stereo_width": 1.3
+		}
+	}
+	
+	# === AMBIENT TECHNO ===
+	_configs["ambient_techno"] = {
+		"Ambient Pad": {
+			"type": "evolving pad",
+			"osc.voices": 4,
+			"osc.detune": 6,
+			"filter.cutoff": 1500,
+			"env.attack": 5.0,
+			"env.decay": 2.0,
+			"env.sustain": 0.7,
+			"env.release": 8.0,
+			"mod.lfo.rate": 0.05,
+			"mod.lfo.depth": 0.2,
+			"fx.reverb.mix": 0.6,
+			"fx.reverb.decay": 8.0,
+			"mix.stereo_width": 1.4
+		},
+		"Texture": {
+			"type": "granular texture",
+			"mod.lfo.rate": 0.07,
+			"fx.reverb.mix": 0.5,
+			"mix.volume_db": -6
+		},
+		"Minimal Kick": {
+			"type": "minimal",
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"filter.cutoff": 100,
+			"mix.volume_db": -3
+		},
+		"Arp": {
+			"type": "slow arp",
+			"filter.cutoff": 2500,
+			"env.attack": 0.01,
+			"env.decay": 3.0,
+			"env.sustain": 0.2,
+			"fx.delay.mix": 0.5,
+			"fx.delay.time": 0.5,
+			"fx.reverb.mix": 0.6
+		}
+	}
+	
+	# === PROG SYNTH 70s ===
+	_configs["prog_synth_70s"] = {
+		"Bass": {
+			"type": "Minimoog",
+			"filter.cutoff": 800,
+			"filter.resonance": 0.4,
+			"filter.type": "ladder",
+			"env.attack": 0.01,
+			"env.decay": 0.2,
+			"env.sustain": 0.7,
+			"osc.drift": 0.08,
+			"fx.distortion": 0.15
+		},
+		"Pad": {
+			"type": "string machine",
+			"osc.voices": 6,
+			"osc.detune": 10,
+			"filter.cutoff": 2000,
+			"env.attack": 2.0,
+			"env.sustain": 0.8,
+			"fx.chorus.depth": 0.3,
+			"osc.drift": 0.05
+		},
+		"Lead": {
+			"type": "Minimoog solo",
+			"filter.cutoff": 3500,
+			"filter.resonance": 0.5,
+			"env.attack": 0.02,
+			"env.sustain": 0.9,
+			"mod.lfo.rate": 5.0,
+			"mod.lfo.depth": 0.03,
+			"mod.lfo.target": "pitch",
+			"osc.drift": 0.06
+		},
+		"Drums": {
+			"type": "acoustic kit",
+			"style": "motorik",
+			"tempo": 110
+		}
+	}
+	
+	# === POP GENERATIVE ===
+	_configs["pop_generative"] = {
+		"Bass": {
+			"type": "synth bass",
+			"filter.cutoff": 600,
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.6
+		},
+		"Keys": {
+			"type": "electric piano",
+			"filter.cutoff": 2500,
+			"env.attack": 0.01,
+			"env.decay": 0.3,
+			"env.sustain": 0.5,
+			"fx.chorus.depth": 0.2
+		},
+		"Pad": {
+			"type": "warm pad",
+			"osc.voices": 4,
+			"osc.detune": 8,
+			"filter.cutoff": 1500,
+			"env.attack": 0.5,
+			"env.sustain": 0.7,
+			"fx.reverb.mix": 0.3
+		},
+		"Lead": {
+			"type": "melodic synth",
+			"filter.cutoff": 3000,
+			"env.attack": 0.02,
+			"env.sustain": 0.8,
+			"fx.delay.mix": 0.2
+		},
+		"Drums": {
+			"type": "pop kit"
+		}
+	}
+	
+	# === MORODER DISCO ===
+	_configs["moroder_disco"] = {
+		"Sequencer": {
+			"type": "Moog sequencer",
+			"filter.cutoff": 1200,
+			"filter.resonance": 0.6,
+			"mod.lfo.rate": 4.0,
+			"mod.lfo.depth": 0.4,
+			"mod.lfo.target": "filter",
+			"env.attack": 0.001,
+			"env.decay": 0.1,
+			"env.sustain": 0.5,
+			"osc.drift": 0.04
+		},
+		"Bass": {
+			"type": "Moog bass",
+			"filter.cutoff": 500,
+			"filter.resonance": 0.3,
+			"filter.type": "ladder",
+			"env.attack": 0.001,
+			"env.sustain": 0.8
+		},
+		"Strings": {
+			"type": "string machine",
+			"osc.voices": 8,
+			"osc.detune": 6,
+			"filter.cutoff": 3000,
+			"env.attack": 0.3,
+			"env.sustain": 0.9,
+			"fx.chorus.depth": 0.5,
+			"mix.stereo_width": 1.2
+		},
+		"Drums": {
+			"type": "disco kit",
+			"pattern": "four-on-floor",
+			"tempo": 120
+		}
+	}
+	
+	# === RAVE ===
+	_configs["rave"] = {
+		"Bass": {
+			"type": "hoover",
+			"osc.voices": 3,
+			"osc.detune": 40,
+			"filter.cutoff": 800,
+			"filter.resonance": 0.5,
+			"mod.lfo.rate": 3.0,
+			"mod.lfo.depth": 0.3,
+			"fx.distortion": 0.3
+		},
+		"Stabs": {
+			"type": "Mentasm chord",
+			"osc.voices": 4,
+			"osc.detune": 25,
+			"filter.cutoff": 2500,
+			"filter.resonance": 0.4,
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.3
+		},
+		"Drums": {
+			"type": "breakbeat",
+			"tempo": 140,
+			"fx.distortion": 0.15
+		}
+	}
+
+
+# === PUBLIC API ===
+
+static func get_config(song_id: String) -> Dictionary:
+	"""Get full config for a song"""
+	if _configs.is_empty():
+		_register_all_configs()
+	return _configs.get(song_id, {})
+
+
+static func get_layer_config(song_id: String, layer_name: String) -> Dictionary:
+	"""Get config for a specific layer"""
+	var song_config = get_config(song_id)
+	
+	# Try exact match first
+	if song_config.has(layer_name):
+		return song_config[layer_name]
+	
+	# Try case-insensitive match
+	for key in song_config.keys():
+		if key.to_lower() == layer_name.to_lower():
+			return song_config[key]
+	
+	return {}
+
+
+static func get_all_layers(song_id: String) -> Array:
+	"""Get all layer names for a song"""
+	return get_config(song_id).keys()
+
+
+static func get_registered_songs() -> Array:
+	"""Get all registered song IDs"""
+	if _configs.is_empty():
+		_register_all_configs()
+	return _configs.keys()
