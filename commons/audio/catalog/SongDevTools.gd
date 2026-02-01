@@ -1488,7 +1488,7 @@ func show_word_picker(layer: String, position: Vector2 = Vector2.ZERO):
 	_populate_word_picker(layer)
 	
 	if position == Vector2.ZERO:
-		position = get_viewport_rect().size / 2 - _word_picker_popup.size / 2
+		position = get_viewport_rect().size / 2.0 - Vector2(_word_picker_popup.size) / 2.0
 	_word_picker_popup.position = position
 	_word_picker_popup.popup()
 
