@@ -285,46 +285,55 @@ func _compute_features():
 
 # === TRAIT DERIVATION ===
 
-# Trait rules: feature thresholds + param conditions
-const TRAIT_RULES = {
-	# Timbral
-	"bright": {"feature": "brightness", "min": 0.65, "category": "timbral"},
-	"dark": {"feature": "brightness", "max": 0.35, "category": "timbral"},
-	"warm": {"feature": "warmth", "min": 0.55, "category": "timbral"},
-	"cold": {"feature": "warmth", "max": 0.3, "category": "timbral"},
-	"thick": {"feature": "thickness", "min": 0.55, "category": "timbral"},
-	"thin": {"feature": "thickness", "max": 0.3, "category": "timbral"},
-	"aggressive": {"feature": "aggression", "min": 0.55, "category": "timbral"},
-	"soft": {"feature": "aggression", "max": 0.3, "category": "timbral"},
+const WORD_MAP_PATH = "res://commons/audio/parameters/word_synthesis_map.json"
+
+# Trait rules loaded from JSON - single source of truth
+static var _trait_rules: Dictionary = {}
+static var _trait_rules_loaded: bool = false
+
+
+static func _load_trait_rules():
+	"""Load trait rules from JSON config"""
+	if _trait_rules_loaded:
+		return
 	
-	# Envelope
-	"plucky": {"feature": "attack_speed", "min": 0.8, "feature2": "decay_length", "max2": 0.4, "category": "envelope"},
-	"punchy": {"feature": "attack_speed", "min": 0.85, "category": "envelope"},
-	"sustained": {"param": "env.sustain", "min": 0.7, "category": "envelope"},
-	"swelling": {"feature": "attack_speed", "max": 0.3, "category": "envelope"},
-	"percussive": {"param": "env.sustain", "max": 0.15, "feature": "attack_speed", "min": 0.9, "category": "envelope"},
+	if FileAccess.file_exists(WORD_MAP_PATH):
+		var file = FileAccess.open(WORD_MAP_PATH, FileAccess.READ)
+		var json = JSON.new()
+		var error = json.parse(file.get_as_text())
+		file.close()
+		
+		if error == OK:
+			_trait_rules = json.data.get("trait_rules", {})
+			print("SoundIdentity: Loaded %d trait rules from JSON" % _trait_rules.size())
+		else:
+			push_warning("SoundIdentity: Failed to parse word_synthesis_map.json")
+			_load_fallback_rules()
+	else:
+		push_warning("SoundIdentity: word_synthesis_map.json not found, using fallback")
+		_load_fallback_rules()
 	
-	# Spatial
-	"wide": {"feature": "width", "min": 0.6, "category": "spatial"},
-	"narrow": {"feature": "width", "max": 0.3, "category": "spatial"},
-	"spacious": {"feature": "space", "min": 0.55, "category": "spatial"},
-	"dry": {"feature": "space", "max": 0.2, "category": "spatial"},
-	"distant": {"feature": "space", "min": 0.6, "feature2": "brightness", "max2": 0.5, "category": "spatial"},
-	"present": {"feature": "space", "max": 0.3, "feature2": "brightness", "min2": 0.5, "category": "spatial"},
-	
-	# Movement
-	"evolving": {"feature": "movement", "min": 0.4, "category": "movement"},
-	"static": {"feature": "movement", "max": 0.15, "category": "movement"},
-	"pulsing": {"param": "mod.lfo.target", "equals": "amplitude", "param2": "mod.lfo.depth", "min2": 0.2, "category": "movement"},
-	"wobbling": {"param": "mod.lfo.target", "equals": "filter", "param2": "mod.lfo.depth", "min2": 0.2, "category": "movement"},
-	"shimmering": {"param": "fx.chorus.depth", "min": 0.25, "category": "movement"},
-	
-	# Character
-	"analog": {"param": "osc.drift", "min": 0.03, "category": "character"},
-	"digital": {"param": "osc.drift", "max": 0.01, "feature": "warmth", "max2": 0.4, "category": "character"},
-	"lo-fi": {"param": "fx.bitcrush.depth", "max": 12, "category": "character"},
-	"clean": {"param": "fx.distortion", "max": 0.05, "category": "character"},
-}
+	_trait_rules_loaded = true
+
+
+static func _load_fallback_rules():
+	"""Fallback rules if JSON fails to load"""
+	_trait_rules = {
+		"bright": {"feature": "brightness", "min": 0.65, "category": "timbral"},
+		"dark": {"feature": "brightness", "max": 0.35, "category": "timbral"},
+		"warm": {"feature": "warmth", "min": 0.55, "category": "timbral"},
+		"cold": {"feature": "warmth", "max": 0.3, "category": "timbral"},
+		"thick": {"feature": "thickness", "min": 0.55, "category": "timbral"},
+		"thin": {"feature": "thickness", "max": 0.3, "category": "timbral"},
+		"spacious": {"feature": "space", "min": 0.55, "category": "spatial"},
+		"dry": {"feature": "space", "max": 0.2, "category": "spatial"},
+	}
+
+
+static func get_trait_rules() -> Dictionary:
+	"""Get trait rules (loads from JSON if needed)"""
+	_load_trait_rules()
+	return _trait_rules
 
 
 func _derive_traits():
@@ -334,8 +343,9 @@ func _derive_traits():
 		traits[cat].clear()
 	trait_confidence.clear()
 	
-	for trait_name in TRAIT_RULES.keys():
-		var rule = TRAIT_RULES[trait_name]
+	var rules = SoundIdentity.get_trait_rules()
+	for trait_name in rules.keys():
+		var rule = rules[trait_name]
 		var confidence = _evaluate_rule(rule)
 		
 		if confidence > 0.5:
@@ -434,11 +444,12 @@ func _build_explanations():
 func _explain_trait(trait_name: String) -> Array:
 	"""Generate human-readable explanations for why a trait applies"""
 	var explanations = []
+	var rules = SoundIdentity.get_trait_rules()
 	
-	if not TRAIT_RULES.has(trait_name):
+	if not rules.has(trait_name):
 		return explanations
 	
-	var rule = TRAIT_RULES[trait_name]
+	var rule = rules[trait_name]
 	
 	# Feature-based explanation
 	if rule.has("feature"):
@@ -474,8 +485,9 @@ func _explain_trait(trait_name: String) -> Array:
 func _get_traits_for_feature(feature_names: Array) -> Array:
 	"""Get traits that depend on given features"""
 	var result = []
-	for trait_name in TRAIT_RULES.keys():
-		var rule = TRAIT_RULES[trait_name]
+	var rules = SoundIdentity.get_trait_rules()
+	for trait_name in rules.keys():
+		var rule = rules[trait_name]
 		if rule.has("feature") and rule["feature"] in feature_names:
 			result.append(trait_name)
 	return result
@@ -551,10 +563,11 @@ static func similarity(a: SoundIdentity, b: SoundIdentity) -> float:
 
 func suggest_changes_for_trait(target_trait: String) -> Dictionary:
 	"""Suggest param changes to achieve a target trait"""
-	if not TRAIT_RULES.has(target_trait):
+	var rules = SoundIdentity.get_trait_rules()
+	if not rules.has(target_trait):
 		return {}
 	
-	var rule = TRAIT_RULES[target_trait]
+	var rule = rules[target_trait]
 	var suggestions = {}
 	
 	# Feature-based suggestions

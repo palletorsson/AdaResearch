@@ -1,6 +1,7 @@
 # WordSynthBridge.gd
 # Translates semantic words → actual synth parameters
 # Handles conflict resolution when multiple words apply
+# Configuration is loaded from word_synthesis_map.json (single source of truth)
 
 extends RefCounted
 class_name WordSynthBridge
@@ -11,62 +12,14 @@ var _word_map: Dictionary = {}
 var _param_spec: Dictionary = {}
 var _conflict_rules: Dictionary = {}
 
-# Layer-specific priority overrides (bass prefers warmth, lead prefers brightness)
-var layer_priority: Dictionary = {
-	"bass": {"warm": 1.2, "thick": 1.3, "subby": 1.4, "bright": 0.7, "thin": 0.5},
-	"pad": {"wide": 1.2, "evolving": 1.2, "dreamy": 1.3, "punchy": 0.6},
-	"lead": {"bright": 1.2, "aggressive": 1.1, "present": 1.2, "warm": 0.8, "soft": 0.7},
-	"drums": {"punchy": 1.3, "crisp": 1.2, "soft": 0.6},
-	"keys": {"warm": 1.1, "plucky": 1.2, "glassy": 1.1}
-}
+# Loaded from JSON - layer-specific word weight adjustments
+var layer_priority: Dictionary = {}
 
-# Map from word_synthesis_map param names → SongDevTools live_params names
-var param_mapping: Dictionary = {
-	# Filter
-	"filter.cutoff": {
-		"bass": "bass_filter_cutoff",
-		"pad": "pad_filter_cutoff",
-		"lead": "lead_filter_cutoff",
-		"_default": "bass_filter_cutoff"
-	},
-	"filter.resonance": {
-		"bass": "bass_filter_resonance",
-		"_default": "bass_filter_resonance"
-	},
-	# Oscillator
-	"osc.detune": {
-		"pad": "pad_detune",
-		"_default": "pad_detune"
-	},
-	# Envelope (not yet in live_params, but could be added)
-	"env.attack": "_unmapped",
-	"env.decay": "_unmapped",
-	"env.sustain": "_unmapped",
-	"env.release": "_unmapped",
-	# FX
-	"fx.reverb.mix": {
-		"_default": "reverb_mix"
-	},
-	"fx.delay.mix": {
-		"_default": "delay_mix"
-	},
-	"fx.delay.time": {
-		"_default": "delay_time"
-	},
-	# Volume
-	"mix.volume_db": {
-		"bass": "bass_volume",
-		"pad": "pad_volume",
-		"lead": "lead_volume",
-		"drums": "drums_volume",
-		"_default": "master_volume"
-	},
-	# Modulation
-	"mod.lfo.depth": {
-		"lead": "lead_vibrato_depth",
-		"_default": "lead_vibrato_depth"
-	}
-}
+# Loaded from JSON - maps namespaced params to SongDevTools live_params
+var param_mapping: Dictionary = {}
+
+# Loaded from JSON - trait detection rules
+var trait_rules: Dictionary = {}
 
 
 func _init():
@@ -84,9 +37,17 @@ func _load_word_map():
 			_word_map = json.data
 			_param_spec = _word_map.get("param_spec", {})
 			_conflict_rules = _word_map.get("conflict_rules", {})
-			print("WordSynthBridge: Loaded word map")
+			
+			# Load centralized configs from JSON
+			layer_priority = _word_map.get("layer_priority", {})
+			param_mapping = _word_map.get("param_mapping", {})
+			trait_rules = _word_map.get("trait_rules", {})
+			
+			print("WordSynthBridge: Loaded word map with %d trait rules" % trait_rules.size())
 		else:
 			push_warning("WordSynthBridge: Failed to parse word map")
+	else:
+		push_warning("WordSynthBridge: word_synthesis_map.json not found")
 
 
 func get_word_params(word: String) -> Dictionary:
