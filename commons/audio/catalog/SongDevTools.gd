@@ -938,6 +938,22 @@ func _on_layer_preview(layer: String, params: Dictionary):
 		_status_label.text = "Playing: " + _current_song_id if _current_song_id else "Ready"
 
 
+func _resolve_param(value) -> float:
+	"""Resolve param value that might be a dict with range/value to a float"""
+	if value is Dictionary:
+		if value.has("value"):
+			return float(value["value"])
+		elif value.has("range"):
+			var r = value["range"]
+			var tendency = value.get("tendency", "middle")
+			match tendency:
+				"low": return r[0] + (r[1] - r[0]) * 0.25
+				"high": return r[0] + (r[1] - r[0]) * 0.75
+				_: return (r[0] + r[1]) / 2.0
+		return 0.0
+	return float(value) if value != null else 0.0
+
+
 func _generate_layer_preview(layer: String, params: Dictionary) -> AudioStream:
 	var sample_rate = 44100
 	var duration = 2.0
@@ -946,11 +962,11 @@ func _generate_layer_preview(layer: String, params: Dictionary) -> AudioStream:
 	data.resize(samples)
 	
 	var base_freq = 261.63
-	var attack = params.get("env.attack", params.get("attack", 0.01))
-	var decay = params.get("env.decay", params.get("decay", 0.2))
-	var sustain = params.get("env.sustain", params.get("sustain", 0.7))
-	var voices = int(params.get("osc.voices", params.get("voices", 1)))
-	var detune = params.get("osc.detune", params.get("detune", 0.0))
+	var attack = _resolve_param(params.get("env.attack", params.get("attack", 0.01)))
+	var decay = _resolve_param(params.get("env.decay", params.get("decay", 0.2)))
+	var sustain = _resolve_param(params.get("env.sustain", params.get("sustain", 0.7)))
+	var voices = int(_resolve_param(params.get("osc.voices", params.get("voices", 1))))
+	var detune = _resolve_param(params.get("osc.detune", params.get("detune", 0.0)))
 	
 	match layer.to_lower():
 		"bass", "reese bass", "juno bass", "filter bass", "trance bass":
