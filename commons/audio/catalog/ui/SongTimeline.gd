@@ -14,6 +14,7 @@ var _sections: Array = []  # [{name, start, end, layers}]
 var _total_duration: float = 0.0
 var _current_time: float = 0.0
 var _is_playing: bool = false
+var _is_dragging: bool = false
 
 # Visual components
 var _timeline_bar: Control
@@ -98,8 +99,9 @@ func _setup_ui():
 	
 	# Playhead
 	_playhead = Control.new()
-	_playhead.custom_minimum_size = Vector2(2, 0)
-	_playhead.set_anchors_preset(Control.PRESET_LEFT_WIDE)
+	_playhead.custom_minimum_size = Vector2(12, 0)
+	_playhead.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_playhead.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_playhead.draw.connect(_on_playhead_draw)
 	_timeline_bar.add_child(_playhead)
 	
@@ -399,11 +401,7 @@ func _get_section_color(section_name: String) -> Color:
 
 
 func _update_playhead():
-	if _total_duration <= 0:
-		return
-	var ratio = _current_time / _total_duration
-	var bar_width = _timeline_bar.size.x
-	_playhead.position.x = ratio * bar_width - 1
+	_playhead.queue_redraw()
 
 
 func _update_time_label():
@@ -493,21 +491,54 @@ func _on_timeline_draw():
 
 
 func _on_playhead_draw():
+	if _total_duration <= 0:
+		return
+	
+	var w = _playhead.size.x
 	var h = _playhead.size.y
-	_playhead.draw_line(Vector2(0, 0), Vector2(0, h), COLOR_PLAYHEAD, 2.0)
-	# Triangle head
+	var ratio = _current_time / _total_duration
+	var x = ratio * w
+	
+	# Playhead line
+	_playhead.draw_line(Vector2(x, 0), Vector2(x, h), COLOR_PLAYHEAD, 2.0)
+	
+	# Triangle head at top
 	var head_points = PackedVector2Array([
-		Vector2(-6, 0),
-		Vector2(6, 0),
-		Vector2(0, 10)
+		Vector2(x - 6, 0),
+		Vector2(x + 6, 0),
+		Vector2(x, 10)
 	])
 	_playhead.draw_colored_polygon(head_points, COLOR_PLAYHEAD)
+	
+	# Small circle at bottom
+	_playhead.draw_circle(Vector2(x, h - 4), 4, COLOR_PLAYHEAD)
 
 
 func _on_timeline_input(event: InputEvent):
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				_is_dragging = true
+				_seek_to_mouse(event.position.x)
+			else:
+				_is_dragging = false
+		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			# Right-click to loop a section
 			var click_x = event.position.x
 			var ratio = click_x / _timeline_bar.size.x
-			var seek_time = ratio * _total_duration
-			seek_requested.emit(seek_time)
+			var click_time = ratio * _total_duration
+			# Find which section was clicked
+			for section in _sections:
+				if click_time >= section["start"] and click_time < section["end"]:
+					section_clicked.emit(section["name"])
+					break
+	elif event is InputEventMouseMotion and _is_dragging:
+		_seek_to_mouse(event.position.x)
+
+
+func _seek_to_mouse(x: float):
+	var ratio = clamp(x / _timeline_bar.size.x, 0.0, 1.0)
+	var seek_time = ratio * _total_duration
+	_current_time = seek_time
+	_playhead.queue_redraw()
+	seek_requested.emit(seek_time)

@@ -1,0 +1,641 @@
+{
+  "_meta": {
+    "description": "Semantic word → synthesis parameter mapping with bidirectional support",
+    "version": "2.0.0",
+    "notes": "Namespaced params, normalized ranges, conflict resolution, feature extraction"
+  },
+
+  "param_spec": {
+    "filter.cutoff": { "unit": "Hz", "min": 20, "max": 20000, "scale": "log", "default": 1000 },
+    "filter.resonance": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "filter.type": { "type": "enum", "values": ["lowpass", "highpass", "bandpass", "notch", "ladder"] },
+    
+    "env.attack": { "unit": "s", "min": 0.001, "max": 10.0, "scale": "log", "default": 0.01 },
+    "env.decay": { "unit": "s", "min": 0.001, "max": 10.0, "scale": "log", "default": 0.1 },
+    "env.sustain": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.7 },
+    "env.release": { "unit": "s", "min": 0.001, "max": 10.0, "scale": "log", "default": 0.3 },
+    
+    "osc.voices": { "unit": "count", "min": 1, "max": 16, "scale": "linear", "default": 1 },
+    "osc.detune": { "unit": "cents", "min": 0, "max": 100, "scale": "linear", "default": 0 },
+    "osc.drift": { "unit": "0..1", "min": 0.0, "max": 0.5, "scale": "linear", "default": 0.0 },
+    
+    "mix.volume_db": { "unit": "dB", "min": -60, "max": 12, "scale": "linear", "default": 0 },
+    "mix.high_shelf_db": { "unit": "dB", "min": -12, "max": 12, "scale": "linear", "default": 0 },
+    "mix.low_shelf_db": { "unit": "dB", "min": -12, "max": 12, "scale": "linear", "default": 0 },
+    "mix.stereo_width": { "unit": "0..1", "min": 0.0, "max": 1.5, "scale": "linear", "default": 1.0 },
+    
+    "fx.reverb.mix": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "fx.reverb.decay": { "unit": "s", "min": 0.1, "max": 20.0, "scale": "log", "default": 1.5 },
+    "fx.reverb.predelay": { "unit": "s", "min": 0.0, "max": 0.2, "scale": "linear", "default": 0.02 },
+    "fx.reverb.diffusion": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.5 },
+    
+    "fx.delay.mix": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "fx.delay.time": { "unit": "s", "min": 0.01, "max": 2.0, "scale": "log", "default": 0.25 },
+    "fx.delay.feedback": { "unit": "0..1", "min": 0.0, "max": 0.95, "scale": "linear", "default": 0.3 },
+    
+    "fx.chorus.depth": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "fx.chorus.rate": { "unit": "Hz", "min": 0.1, "max": 10.0, "scale": "log", "default": 1.0 },
+    
+    "fx.distortion": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "fx.bitcrush.depth": { "unit": "bits", "min": 4, "max": 16, "scale": "linear", "default": 16 },
+    
+    "mod.lfo.rate": { "unit": "Hz", "min": 0.01, "max": 50.0, "scale": "log", "default": 1.0 },
+    "mod.lfo.depth": { "unit": "0..1", "min": 0.0, "max": 1.0, "scale": "linear", "default": 0.0 },
+    "mod.lfo.target": { "type": "enum", "values": ["filter", "amplitude", "pitch", "pan"] },
+    
+    "sub.level_db": { "unit": "dB", "min": -60, "max": 6, "scale": "linear", "default": -12 }
+  },
+
+  "features": {
+    "_description": "Computed features for params→words reverse mapping",
+    "brightness": {
+      "formula": "normalize(filter.cutoff, log) * 0.6 + normalize(mix.high_shelf_db) * 0.4",
+      "range": [0, 1]
+    },
+    "warmth": {
+      "formula": "normalize(fx.distortion) * 0.3 + (1 - normalize(filter.cutoff, log)) * 0.4 + normalize(mix.low_shelf_db) * 0.3",
+      "range": [0, 1]
+    },
+    "movement": {
+      "formula": "normalize(mod.lfo.depth) * 0.5 + normalize(fx.chorus.depth) * 0.3 + (osc.detune > 10 ? 0.2 : 0)",
+      "range": [0, 1]
+    },
+    "space": {
+      "formula": "normalize(fx.reverb.mix) * 0.5 + normalize(fx.reverb.decay, log) * 0.3 + normalize(mix.stereo_width) * 0.2",
+      "range": [0, 1]
+    },
+    "aggression": {
+      "formula": "normalize(fx.distortion) * 0.4 + normalize(filter.resonance) * 0.3 + (1 - normalize(env.attack, log)) * 0.3",
+      "range": [0, 1]
+    },
+    "thickness": {
+      "formula": "normalize(osc.voices) * 0.4 + normalize(osc.detune) * 0.3 + normalize(sub.level_db) * 0.3",
+      "range": [0, 1]
+    }
+  },
+
+  "word_rules": {
+    "_description": "Feature thresholds for params→words matching",
+    "bright": { "feature": "brightness", "range": [0.65, 1.0] },
+    "dark": { "feature": "brightness", "range": [0.0, 0.35] },
+    "warm": { "feature": "warmth", "range": [0.6, 1.0] },
+    "cold": { "feature": "warmth", "range": [0.0, 0.3] },
+    "static": { "feature": "movement", "range": [0.0, 0.15] },
+    "evolving": { "feature": "movement", "range": [0.4, 1.0] },
+    "dry": { "feature": "space", "range": [0.0, 0.2] },
+    "spacious": { "feature": "space", "range": [0.6, 1.0] },
+    "aggressive": { "feature": "aggression", "range": [0.6, 1.0] },
+    "soft": { "feature": "aggression", "range": [0.0, 0.3] },
+    "thick": { "feature": "thickness", "range": [0.6, 1.0] },
+    "thin": { "feature": "thickness", "range": [0.0, 0.3] }
+  },
+
+  "conflict_rules": {
+    "_description": "How to resolve conflicting word parameters",
+    "default_merge_mode": "weighted_average",
+    "priority_groups": {
+      "timbral": 1.0,
+      "envelope": 0.9,
+      "spatial": 0.8,
+      "movement": 0.7,
+      "experimental": 0.6
+    },
+    "exclusive_pairs": [
+      ["warm", "cold"],
+      ["bright", "dark"],
+      ["thick", "thin"],
+      ["wide", "narrow"],
+      ["aggressive", "soft"],
+      ["static", "evolving"]
+    ],
+    "merge_modes": {
+      "intersect": "Use overlapping range, fail if none",
+      "weighted_average": "Blend toward weighted mean",
+      "max": "Take highest value",
+      "min": "Take lowest value",
+      "priority": "Higher priority word wins"
+    }
+  },
+
+  "timbral_words": {
+    "warm": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [200, 800], "tendency": "low" },
+        "filter.resonance": { "range": [0.1, 0.4] },
+        "mix.high_shelf_db": { "range": [-6, -2] },
+        "fx.distortion": { "range": [0.1, 0.3] },
+        "osc.detune": { "range": [5, 15] }
+      },
+      "opposites": ["cold", "brittle", "harsh"]
+    },
+    "cold": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [2000, 6000] },
+        "filter.resonance": { "range": [0.3, 0.7] },
+        "mix.high_shelf_db": { "range": [2, 6] },
+        "fx.distortion": { "range": [0, 0.1] },
+        "fx.chorus.depth": { "range": [0, 0.1] }
+      },
+      "opposites": ["warm", "thick", "analog"]
+    },
+    "bright": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [3000, 8000] },
+        "mix.high_shelf_db": { "range": [3, 8] }
+      },
+      "opposites": ["dark", "muffled", "dull"]
+    },
+    "dark": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [200, 1500] },
+        "mix.high_shelf_db": { "range": [-12, -4] },
+        "mix.low_shelf_db": { "range": [2, 6] }
+      },
+      "opposites": ["bright", "crisp", "airy"]
+    },
+    "thick": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "osc.voices": { "range": [4, 8] },
+        "osc.detune": { "range": [10, 30] },
+        "sub.level_db": { "range": [0, 6] },
+        "mix.stereo_width": { "range": [0.7, 1.0] }
+      },
+      "opposites": ["thin", "sparse", "hollow"]
+    },
+    "thin": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "osc.voices": { "range": [1, 2] },
+        "osc.detune": { "range": [0, 5] },
+        "filter.cutoff": { "range": [500, 2000], "note": "highpass" }
+      },
+      "opposites": ["thick", "full", "rich"]
+    },
+    "aggressive": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "fx.distortion": { "range": [0.3, 0.8] },
+        "filter.resonance": { "range": [0.5, 0.9] },
+        "env.attack": { "range": [0.001, 0.01] }
+      },
+      "opposites": ["soft", "gentle", "mellow"]
+    },
+    "soft": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.05, 0.3] },
+        "fx.distortion": { "range": [0, 0.1] },
+        "filter.resonance": { "range": [0.1, 0.3] },
+        "mix.high_shelf_db": { "range": [-4, 0] }
+      },
+      "opposites": ["aggressive", "harsh", "punchy"]
+    },
+    "punchy": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.001, 0.005] },
+        "env.decay": { "range": [0.05, 0.2] }
+      },
+      "opposites": ["soft", "mushy", "slow"]
+    },
+    "crisp": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.001, 0.01] },
+        "mix.high_shelf_db": { "range": [2, 5] },
+        "fx.reverb.mix": { "range": [0, 0.2] }
+      },
+      "opposites": ["muddy", "soft", "washy"]
+    },
+    "glassy": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [4000, 12000] },
+        "env.attack": { "range": [0.001, 0.02] }
+      },
+      "note": "Best with FM synthesis",
+      "opposites": ["warm", "analog", "soft"]
+    },
+    "analog": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "osc.drift": { "range": [0.05, 0.15] },
+        "fx.distortion": { "range": [0.1, 0.4] },
+        "filter.type": "ladder"
+      },
+      "opposites": ["digital", "clean", "sterile"]
+    },
+    "digital": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "osc.drift": { "range": [0, 0.01] },
+        "fx.distortion": { "range": [0, 0.05] }
+      },
+      "opposites": ["analog", "warm", "vintage"]
+    },
+    "subby": {
+      "category": "timbral",
+      "weight": 1.0,
+      "params": {
+        "sub.level_db": { "range": [0, 6] },
+        "filter.cutoff": { "range": [80, 300] },
+        "mix.low_shelf_db": { "range": [3, 8] },
+        "mix.stereo_width": { "range": [0, 0.3], "note": "mono sub" }
+      },
+      "opposites": ["thin", "bright", "airy"]
+    }
+  },
+
+  "envelope_words": {
+    "plucky": {
+      "category": "envelope",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "value": 0.001 },
+        "env.decay": { "range": [0.1, 0.3] },
+        "env.sustain": { "range": [0, 0.2] },
+        "env.release": { "range": [0.1, 0.3] }
+      }
+    },
+    "sustained": {
+      "category": "envelope",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.01, 0.1] },
+        "env.decay": { "range": [0.1, 0.3] },
+        "env.sustain": { "range": [0.7, 1.0] },
+        "env.release": { "range": [0.3, 1.0] }
+      }
+    },
+    "swelling": {
+      "category": "envelope",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.5, 3.0] },
+        "env.decay": { "range": [0.1, 0.3] },
+        "env.sustain": { "range": [0.6, 0.9] },
+        "env.release": { "range": [1.0, 3.0] }
+      }
+    },
+    "percussive": {
+      "category": "envelope",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "value": 0.001 },
+        "env.decay": { "range": [0.05, 0.15] },
+        "env.sustain": { "value": 0 },
+        "env.release": { "range": [0.05, 0.1] }
+      }
+    },
+    "pad-like": {
+      "category": "envelope",
+      "weight": 1.0,
+      "params": {
+        "env.attack": { "range": [0.3, 1.5] },
+        "env.decay": { "range": [0.5, 1.0] },
+        "env.sustain": { "range": [0.6, 0.9] },
+        "env.release": { "range": [1.0, 4.0] }
+      }
+    }
+  },
+
+  "spatial_words": {
+    "wide": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "mix.stereo_width": { "range": [1.0, 1.5] }
+      },
+      "opposites": ["narrow", "mono", "centered"]
+    },
+    "narrow": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "mix.stereo_width": { "range": [0, 0.3] }
+      },
+      "opposites": ["wide", "spacious", "spread"]
+    },
+    "distant": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.mix": { "range": [0.5, 0.8] },
+        "fx.reverb.predelay": { "range": [0.05, 0.15] },
+        "mix.high_shelf_db": { "range": [-6, -2] },
+        "mix.volume_db": { "range": [-12, -6] }
+      },
+      "opposites": ["present", "close", "in-your-face"]
+    },
+    "present": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.mix": { "range": [0, 0.2] },
+        "mix.high_shelf_db": { "range": [2, 6] }
+      },
+      "opposites": ["distant", "far", "washy"]
+    },
+    "spacious": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.mix": { "range": [0.3, 0.6] },
+        "fx.reverb.decay": { "range": [2.0, 6.0] },
+        "mix.stereo_width": { "range": [0.8, 1.2] }
+      },
+      "opposites": ["tight", "dry", "intimate"]
+    },
+    "dreamy": {
+      "category": "spatial",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.mix": { "range": [0.4, 0.8] },
+        "fx.reverb.decay": { "range": [2, 6] },
+        "env.attack": { "range": [0.1, 0.5] },
+        "fx.chorus.depth": { "range": [0.3, 0.6] },
+        "fx.delay.mix": { "range": [0.2, 0.5] }
+      },
+      "opposites": ["dry", "tight", "present"]
+    }
+  },
+
+  "movement_words": {
+    "pulsing": {
+      "category": "movement",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.rate": { "range": [2, 8], "sync": "tempo" },
+        "mod.lfo.depth": { "range": [0.3, 0.7] },
+        "mod.lfo.target": "amplitude"
+      }
+    },
+    "wobbling": {
+      "category": "movement",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.rate": { "range": [0.5, 4] },
+        "mod.lfo.depth": { "range": [0.4, 0.8] },
+        "mod.lfo.target": "filter"
+      }
+    },
+    "shimmering": {
+      "category": "movement",
+      "weight": 1.0,
+      "params": {
+        "fx.chorus.rate": { "range": [0.5, 2] },
+        "fx.chorus.depth": { "range": [0.3, 0.6] }
+      }
+    },
+    "static": {
+      "category": "movement",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.depth": { "value": 0 },
+        "fx.chorus.depth": { "value": 0 }
+      },
+      "opposites": ["moving", "animated", "evolving"]
+    },
+    "evolving": {
+      "category": "movement",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.rate": { "range": [0.05, 0.2] },
+        "mod.lfo.depth": { "range": [0.2, 0.5] }
+      }
+    }
+  },
+
+  "experimental_words": {
+    "_description": "Avant-garde / system character words (Ikeda, Radigue, Autechre vibes)",
+    
+    "granular": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "grain.size": { "range": [0.01, 0.1], "unit": "s" },
+        "grain.density": { "range": [10, 100], "unit": "grains/s" },
+        "grain.jitter": { "range": [0.1, 0.5] },
+        "grain.spray": { "range": [0.0, 0.3] }
+      },
+      "note": "Requires granular engine"
+    },
+    "spectral": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fft.blur": { "range": [0.1, 0.8] },
+        "fft.shift": { "range": [-12, 12], "unit": "semitones" }
+      },
+      "note": "Requires FFT processing"
+    },
+    "noisy": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "noise.level_db": { "range": [-20, -6] },
+        "noise.color": { "type": "enum", "values": ["white", "pink", "brown"] }
+      }
+    },
+    "rusty": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fx.bitcrush.depth": { "range": [8, 12] },
+        "fx.distortion": { "range": [0.2, 0.5] },
+        "filter.resonance": { "range": [0.3, 0.6] }
+      },
+      "note": "Bitcrush + comb + uneven EQ"
+    },
+    "hollow": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "filter.type": "bandpass",
+        "filter.resonance": { "range": [0.5, 0.8] },
+        "mix.low_shelf_db": { "range": [-8, -4] }
+      }
+    },
+    "unstable": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "osc.drift": { "range": [0.1, 0.3] },
+        "mod.lfo.rate": { "range": [0.01, 0.1], "note": "very slow random" }
+      },
+      "note": "S&H modulation, pitch wander"
+    },
+    "fragile": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "filter.cutoff": { "range": [2000, 6000], "note": "highpass feel" },
+        "env.sustain": { "range": [0, 0.2] },
+        "mix.stereo_width": { "range": [0.2, 0.5] }
+      }
+    },
+    "chaotic": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fx.distortion": { "range": [0.5, 0.9] },
+        "mod.lfo.depth": { "range": [0.6, 1.0] },
+        "mod.lfo.rate": { "range": [1, 20], "note": "fast random" }
+      },
+      "note": "Feedback, FM depth mod, nonlinear waveshaping"
+    },
+    "claustrophobic": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.decay": { "range": [0.2, 0.5] },
+        "fx.reverb.diffusion": { "range": [0.7, 1.0], "note": "strong early reflections" },
+        "mix.stereo_width": { "range": [0.1, 0.3] }
+      }
+    },
+    "cathedral": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fx.reverb.decay": { "range": [6, 15] },
+        "fx.reverb.diffusion": { "range": [0.8, 1.0] },
+        "fx.reverb.mix": { "range": [0.5, 0.8] }
+      }
+    },
+    "mechanical": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.rate": { "sync": "tempo", "values": ["1/4", "1/8", "1/16"] },
+        "mod.lfo.depth": { "range": [0.3, 0.6] }
+      },
+      "note": "Stepped/quantized modulation"
+    },
+    "fluttering": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "mod.lfo.rate": { "range": [8, 20] },
+        "mod.lfo.depth": { "range": [0.05, 0.15] },
+        "mod.lfo.target": "pitch",
+        "fx.chorus.depth": { "range": [0.1, 0.3] }
+      }
+    },
+    "glitchy": {
+      "category": "experimental",
+      "weight": 1.0,
+      "params": {
+        "fx.bitcrush.depth": { "range": [6, 10] },
+        "grain.retrigger": true
+      },
+      "note": "Stutter, sample-rate reduction"
+    }
+  },
+
+  "scene_presets": {
+    "_description": "In-game soundscape presets aligned with zones/mechanics",
+    
+    "lab_calibration": {
+      "style": "Ikeda-ish",
+      "words": ["digital", "crisp", "static", "cold", "mechanical"],
+      "params": {
+        "osc.drift": 0,
+        "fx.reverb.mix": 0.1,
+        "filter.cutoff": 8000
+      }
+    },
+    "entropy_fog": {
+      "style": "Hecker-ish",
+      "words": ["warm", "spacious", "evolving", "unstable"],
+      "params": {
+        "fx.distortion": 0.4,
+        "fx.reverb.mix": 0.6,
+        "fx.reverb.decay": 5.0,
+        "osc.drift": 0.15
+      }
+    },
+    "electrical_storm": {
+      "style": "White Noise / EMS",
+      "words": ["aggressive", "noisy", "chaotic", "unstable"],
+      "params": {
+        "filter.resonance": 0.7,
+        "noise.level_db": -12,
+        "mod.lfo.depth": 0.8
+      }
+    },
+    "deep_listening_drone": {
+      "style": "Radigue / Oliveros",
+      "words": ["warm", "swelling", "spacious", "evolving", "sustained"],
+      "params": {
+        "env.attack": 5.0,
+        "env.release": 8.0,
+        "fx.reverb.decay": 10.0,
+        "mod.lfo.rate": 0.02
+      }
+    },
+    "machine_consciousness": {
+      "style": "Autechre",
+      "words": ["cold", "mechanical", "glitchy", "evolving"],
+      "params": {
+        "fx.bitcrush.depth": 10,
+        "mod.lfo.rate": 3.5,
+        "osc.drift": 0.05
+      }
+    },
+    "crystal_cavern": {
+      "style": "Ambient",
+      "words": ["glassy", "spacious", "shimmering", "distant"],
+      "params": {
+        "fx.reverb.decay": 8.0,
+        "fx.reverb.mix": 0.7,
+        "fx.delay.mix": 0.3,
+        "filter.cutoff": 6000
+      }
+    }
+  },
+
+  "layer_templates": {
+    "bass": {
+      "typical_words": ["thick", "warm", "punchy", "subby"],
+      "param_focus": ["filter.cutoff", "sub.level_db", "env.attack", "fx.distortion"]
+    },
+    "pad": {
+      "typical_words": ["dreamy", "soft", "wide", "evolving"],
+      "param_focus": ["env.attack", "env.release", "fx.reverb.mix", "fx.chorus.depth", "filter.cutoff"]
+    },
+    "lead": {
+      "typical_words": ["bright", "present", "aggressive"],
+      "param_focus": ["filter.cutoff", "filter.resonance", "mod.lfo.depth"]
+    },
+    "keys": {
+      "typical_words": ["warm", "plucky", "glassy", "soft"],
+      "param_focus": ["env.attack", "env.decay", "filter.resonance"]
+    },
+    "drums": {
+      "typical_words": ["punchy", "crisp", "aggressive"],
+      "param_focus": ["env.attack", "env.decay", "fx.distortion"]
+    },
+    "texture": {
+      "typical_words": ["granular", "evolving", "noisy", "spectral"],
+      "param_focus": ["grain.size", "grain.density", "mod.lfo.rate"]
+    }
+  }
+}
