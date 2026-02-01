@@ -130,35 +130,64 @@ func _setup_realtime_effects():
 	if master_idx < 0:
 		return
 	
-	# Check if effects already exist
-	var has_reverb = false
-	var has_delay = false
+	# Clear existing effects (we'll add our own in known order)
+	while AudioServer.get_bus_effect_count(master_idx) > 0:
+		AudioServer.remove_bus_effect(master_idx, 0)
 	
-	for i in range(AudioServer.get_bus_effect_count(master_idx)):
-		var effect = AudioServer.get_bus_effect(master_idx, i)
-		if effect is AudioEffectReverb:
-			has_reverb = true
-		elif effect is AudioEffectDelay:
-			has_delay = true
+	# Add effects in specific order for consistent indexing
+	# 0: Filter (lowpass)
+	var filter = AudioEffectFilter.new()
+	filter.cutoff_hz = live_params.get("bass_filter_cutoff", 800.0)
+	filter.resonance = live_params.get("bass_filter_resonance", 0.5)
+	filter.db = AudioEffectFilter.FILTER_12DB
+	AudioServer.add_bus_effect(master_idx, filter)
 	
-	# Add missing effects
-	if not has_reverb:
-		var reverb = AudioEffectReverb.new()
-		reverb.wet = live_params.get("reverb_mix", 0.3)
-		reverb.room_size = 0.6
-		reverb.damping = 0.5
-		AudioServer.add_bus_effect(master_idx, reverb)
+	# 1: Highpass filter (for pad brightness control)
+	var highpass = AudioEffectHighPassFilter.new()
+	highpass.cutoff_hz = 20.0  # Start fully open
+	highpass.resonance = 0.5
+	AudioServer.add_bus_effect(master_idx, highpass)
 	
-	if not has_delay:
-		var delay = AudioEffectDelay.new()
-		delay.tap1_active = true
-		delay.tap1_delay_ms = live_params.get("delay_time", 0.375) * 1000
-		delay.tap1_level_db = -6.0
-		delay.dry = 1.0 - live_params.get("delay_mix", 0.2)
-		delay.feedback_active = true
-		delay.feedback_delay_ms = delay.tap1_delay_ms
-		delay.feedback_level_db = -12.0
-		AudioServer.add_bus_effect(master_idx, delay)
+	# 2: Distortion
+	var distortion = AudioEffectDistortion.new()
+	distortion.mode = AudioEffectDistortion.MODE_SOFT_CLIP
+	distortion.drive = 0.0
+	distortion.keep_hf_hz = 8000
+	AudioServer.add_bus_effect(master_idx, distortion)
+	
+	# 3: Chorus (for pad detune/width simulation)
+	var chorus = AudioEffectChorus.new()
+	chorus.voice_count = 2
+	chorus.voice_delay_ms = 15.0
+	chorus.voice_rate_hz = 0.8
+	chorus.voice_depth_ms = live_params.get("pad_detune", 10.0) * 0.5
+	chorus.dry = 0.8
+	chorus.wet = 0.2
+	AudioServer.add_bus_effect(master_idx, chorus)
+	
+	# 4: Delay
+	var delay = AudioEffectDelay.new()
+	delay.tap1_active = true
+	delay.tap1_delay_ms = live_params.get("delay_time", 0.375) * 1000
+	delay.tap1_level_db = -6.0
+	delay.dry = 1.0 - live_params.get("delay_mix", 0.2)
+	delay.feedback_active = true
+	delay.feedback_delay_ms = delay.tap1_delay_ms
+	delay.feedback_level_db = -12.0
+	AudioServer.add_bus_effect(master_idx, delay)
+	
+	# 5: Reverb
+	var reverb = AudioEffectReverb.new()
+	reverb.wet = live_params.get("reverb_mix", 0.3)
+	reverb.room_size = 0.6
+	reverb.damping = 0.5
+	AudioServer.add_bus_effect(master_idx, reverb)
+	
+	# 6: Limiter (safety)
+	var limiter = AudioEffectLimiter.new()
+	limiter.ceiling_db = -0.5
+	limiter.threshold_db = -6.0
+	AudioServer.add_bus_effect(master_idx, limiter)
 
 
 func _setup_spectrum_analyzer():
@@ -1428,20 +1457,93 @@ func _update_section_dropdown(pos: float):
 
 func _apply_realtime_effects():
 	"""Apply live_params to audio buses for real-time changes"""
-	# Master volume
 	var master_idx = AudioServer.get_bus_index("Master")
-	if master_idx >= 0:
-		AudioServer.set_bus_volume_db(master_idx, live_params["master_volume"])
+	if master_idx < 0:
+		return
 	
-	# Find or create effect buses for real-time control
-	# For now, update any existing effects
-	for i in range(AudioServer.get_bus_effect_count(master_idx)):
-		var effect = AudioServer.get_bus_effect(master_idx, i)
-		if effect is AudioEffectReverb:
-			effect.wet = live_params.get("reverb_mix", 0.3)
-		elif effect is AudioEffectDelay:
-			effect.dry = 1.0 - live_params.get("delay_mix", 0.2)
-			effect.tap1_delay_ms = live_params.get("delay_time", 0.375) * 1000
+	# Master volume
+	AudioServer.set_bus_volume_db(master_idx, live_params["master_volume"])
+	
+	# Effects are in known order (set up in _setup_realtime_effects):
+	# 0: Lowpass Filter, 1: Highpass Filter, 2: Distortion, 3: Chorus, 4: Delay, 5: Reverb, 6: Limiter
+	
+	var effect_count = AudioServer.get_bus_effect_count(master_idx)
+	
+	# 0: Lowpass Filter (bass_filter_cutoff, bass_filter_resonance)
+	if effect_count > 0:
+		var filter = AudioServer.get_bus_effect(master_idx, 0)
+		if filter is AudioEffectFilter:
+			# Map bass cutoff (100-2000) to filter (200-8000)
+			var cutoff = live_params.get("bass_filter_cutoff", 800.0)
+			filter.cutoff_hz = clampf(cutoff * 2.0, 200, 16000)
+			filter.resonance = live_params.get("bass_filter_resonance", 0.5)
+	
+	# 1: Highpass Filter (pad_filter_cutoff inverted - higher = brighter = less bass)
+	if effect_count > 1:
+		var highpass = AudioServer.get_bus_effect(master_idx, 1)
+		if highpass is AudioEffectHighPassFilter:
+			# Map pad cutoff: low value = dark (highpass at 20), high value = bright (highpass higher)
+			var pad_cutoff = live_params.get("pad_filter_cutoff", 2000.0)
+			# Invert: low pad_cutoff → low highpass (more bass), high pad_cutoff → still low highpass
+			# Actually, let's use it to thin out low end when pad is "bright"
+			highpass.cutoff_hz = 20.0 + (8000 - pad_cutoff) * 0.01  # Subtle effect
+	
+	# 2: Distortion (drive based on "aggression" - derive from filter settings)
+	if effect_count > 2:
+		var distortion = AudioServer.get_bus_effect(master_idx, 2)
+		if distortion is AudioEffectDistortion:
+			# Use resonance as proxy for drive (high resonance = more edge)
+			var resonance = live_params.get("bass_filter_resonance", 0.5)
+			distortion.drive = resonance * 0.3  # Subtle
+	
+	# 3: Chorus (pad_detune → depth)
+	if effect_count > 3:
+		var chorus = AudioServer.get_bus_effect(master_idx, 3)
+		if chorus is AudioEffectChorus:
+			var detune = live_params.get("pad_detune", 10.0)
+			chorus.voice_depth_ms = detune * 0.3  # Convert cents-ish to ms
+			chorus.wet = clampf(detune / 30.0, 0.0, 0.5) * 0.4  # More detune = more wet
+	
+	# 4: Delay
+	if effect_count > 4:
+		var delay = AudioServer.get_bus_effect(master_idx, 4)
+		if delay is AudioEffectDelay:
+			var delay_mix = live_params.get("delay_mix", 0.2)
+			var delay_time = live_params.get("delay_time", 0.375)
+			delay.dry = 1.0 - delay_mix
+			delay.tap1_delay_ms = delay_time * 1000
+			delay.tap1_level_db = -6.0 + (delay_mix * 6.0)  # Louder when more wet
+			delay.feedback_delay_ms = delay_time * 1000
+	
+	# 5: Reverb
+	if effect_count > 5:
+		var reverb = AudioServer.get_bus_effect(master_idx, 5)
+		if reverb is AudioEffectReverb:
+			reverb.wet = live_params.get("reverb_mix", 0.3)
+			# Room size based on pad volume (louder pad = bigger room feel)
+			var pad_vol = live_params.get("pad_volume", 0.0)
+			reverb.room_size = clampf(0.5 + pad_vol * 0.02, 0.3, 0.9)
+	
+	# Individual "volume" params - simulate via EQ-ish approach using filter bypass
+	# For proper per-layer control we'd need separate buses, but we can fake it:
+	# bass_volume → affects low frequencies
+	# lead_volume → affects high frequencies  
+	# drums_volume → affects transients (no good way without separate bus)
+	
+	# Simulate bass volume via filter cutoff modulation
+	var bass_vol = live_params.get("bass_volume", 0.0)
+	if effect_count > 0 and bass_vol < -6:
+		var filter = AudioServer.get_bus_effect(master_idx, 0)
+		if filter is AudioEffectFilter:
+			# Lower bass volume = lower cutoff
+			filter.cutoff_hz *= pow(10, bass_vol / 40.0)
+	
+	# Lead vibrato → modulate chorus rate slightly
+	var vibrato = live_params.get("lead_vibrato_depth", 0.2)
+	if effect_count > 3:
+		var chorus = AudioServer.get_bus_effect(master_idx, 3)
+		if chorus is AudioEffectChorus:
+			chorus.voice_rate_hz = 0.5 + vibrato * 4.0  # 0.5 to 2.5 Hz
 
 
 func _load_timeline_for_song(song_id: String, stream: AudioStream):
