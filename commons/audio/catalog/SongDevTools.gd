@@ -678,6 +678,12 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_ambient_techno_song({})
 		"blade_runner":
 			stream = AudioSynthesizer.generate_blade_runner_song({})
+		"boards_of_canada":
+			stream = AudioSynthesizer.generate_boards_of_canada_song({})
+		"burial":
+			stream = AudioSynthesizer.generate_burial_song({})
+		"kraftwerk":
+			stream = AudioSynthesizer.generate_kraftwerk_song({})
 		_:
 			# No generator - show config breakdown only (no audio)
 			_status_label.text = "📋 %s (config only - no audio)" % song_id
