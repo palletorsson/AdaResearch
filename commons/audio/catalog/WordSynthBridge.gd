@@ -135,19 +135,26 @@ func words_to_live_params(layer: String, words: Array) -> Dictionary:
 	elif "drum" in layer.to_lower(): layer_key = "drums"
 	elif "key" in layer.to_lower(): layer_key = "keys"
 	
-	# Check for conflicting words
+	# Check for conflicting words - later word in list wins for exclusive pairs
 	var exclusive_pairs = _conflict_rules.get("exclusive_pairs", [])
-	var active_words = []
-	for word in words:
-		var dominated = false
+	var excluded_words = {}  # word → true if excluded by a later exclusive
+	
+	# Process in reverse to let later words win
+	for i in range(words.size() - 1, -1, -1):
+		var word = words[i]
 		for pair in exclusive_pairs:
 			if word in pair:
 				for other in pair:
-					if other != word and other in words:
-						# Both exclusive words present - later one wins for now
-						# (could do weighted blend instead)
-						pass
-		active_words.append(word)
+					if other != word and other in words and not excluded_words.has(other):
+						# This word excludes earlier occurrences of its opposite
+						for j in range(i):
+							if words[j] == other:
+								excluded_words[other] = true
+	
+	var active_words = []
+	for word in words:
+		if not excluded_words.has(word):
+			active_words.append(word)
 	
 	# Get params from each word
 	for word in active_words:

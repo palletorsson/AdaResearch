@@ -815,3 +815,63 @@ static func get_registered_songs() -> Array:
 	if _configs.is_empty():
 		_register_all_configs()
 	return _configs.keys()
+
+
+# === VALIDATION ===
+
+# Known valid parameter names (from word_synthesis_map.json param_spec)
+const VALID_PARAMS = [
+	"type", "style", "pattern", "tempo", "waveform",  # Metadata
+	"filter.cutoff", "filter.resonance", "filter.type",
+	"env.attack", "env.decay", "env.sustain", "env.release",
+	"osc.voices", "osc.detune", "osc.drift",
+	"mix.volume_db", "mix.high_shelf_db", "mix.low_shelf_db", "mix.stereo_width",
+	"fx.reverb.mix", "fx.reverb.decay", "fx.reverb.predelay", "fx.reverb.diffusion",
+	"fx.delay.mix", "fx.delay.time", "fx.delay.feedback",
+	"fx.chorus.depth", "fx.chorus.rate",
+	"fx.distortion", "fx.bitcrush.depth",
+	"mod.lfo.rate", "mod.lfo.depth", "mod.lfo.target",
+	"sub.level_db",
+	"noise.level_db", "noise.color",
+	"grain.size", "grain.density", "grain.jitter", "grain.spray",
+	"vocoder.bands", "pitch_shift", "pitch_env.depth", "pitch_env.decay"
+]
+
+
+static func validate_all_configs() -> Dictionary:
+	"""Validate all registered configs, return errors"""
+	if _configs.is_empty():
+		_register_all_configs()
+	
+	var errors = {}
+	
+	for song_id in _configs.keys():
+		var song_errors = []
+		var song_config = _configs[song_id]
+		
+		for layer_name in song_config.keys():
+			var layer_config = song_config[layer_name]
+			
+			for param_name in layer_config.keys():
+				if param_name not in VALID_PARAMS:
+					song_errors.append("%s.%s: unknown param '%s'" % [layer_name, param_name, param_name])
+		
+		if not song_errors.is_empty():
+			errors[song_id] = song_errors
+	
+	return errors
+
+
+static func print_validation_report():
+	"""Print validation results to console"""
+	var errors = validate_all_configs()
+	
+	if errors.is_empty():
+		print("SynthConfigRegistry: All configs valid ✓")
+		return
+	
+	print("SynthConfigRegistry: Validation errors found:")
+	for song_id in errors.keys():
+		print("  %s:" % song_id)
+		for error in errors[song_id]:
+			print("    - %s" % error)
