@@ -158,9 +158,14 @@ func _setup_realtime_effects():
 	# 3: Chorus (for pad detune/width simulation)
 	var chorus = AudioEffectChorus.new()
 	chorus.voice_count = 2
-	chorus.voice_delay_ms = 15.0
-	chorus.voice_rate_hz = 0.8
-	chorus.voice_depth_ms = live_params.get("pad_detune", 10.0) * 0.5
+	chorus.set("voice/1/delay_ms", 15.0)
+	chorus.set("voice/1/rate_hz", 0.8)
+	chorus.set("voice/1/depth_ms", live_params.get("pad_detune", 10.0) * 0.5)
+	chorus.set("voice/1/level_db", 0.0)
+	chorus.set("voice/2/delay_ms", 20.0)
+	chorus.set("voice/2/rate_hz", 0.9)
+	chorus.set("voice/2/depth_ms", live_params.get("pad_detune", 10.0) * 0.4)
+	chorus.set("voice/2/level_db", 0.0)
 	chorus.dry = 0.8
 	chorus.wet = 0.2
 	AudioServer.add_bus_effect(master_idx, chorus)
@@ -1501,7 +1506,8 @@ func _apply_realtime_effects():
 		var chorus = AudioServer.get_bus_effect(master_idx, 3)
 		if chorus is AudioEffectChorus:
 			var detune = live_params.get("pad_detune", 10.0)
-			chorus.voice_depth_ms = detune * 0.3  # Convert cents-ish to ms
+			chorus.set("voice/1/depth_ms", detune * 0.3)
+			chorus.set("voice/2/depth_ms", detune * 0.25)
 			chorus.wet = clampf(detune / 30.0, 0.0, 0.5) * 0.4  # More detune = more wet
 	
 	# 4: Delay
@@ -1543,7 +1549,9 @@ func _apply_realtime_effects():
 	if effect_count > 3:
 		var chorus = AudioServer.get_bus_effect(master_idx, 3)
 		if chorus is AudioEffectChorus:
-			chorus.voice_rate_hz = 0.5 + vibrato * 4.0  # 0.5 to 2.5 Hz
+			var rate = 0.5 + vibrato * 4.0  # 0.5 to 2.5 Hz
+			chorus.set("voice/1/rate_hz", rate)
+			chorus.set("voice/2/rate_hz", rate * 1.1)  # Slight offset for richness
 
 
 func _load_timeline_for_song(song_id: String, stream: AudioStream):
