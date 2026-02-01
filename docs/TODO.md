@@ -112,4 +112,3 @@
   - Difficulty/pacing issues
   - VR comfort (motion sickness, scale)
   - Missing feedback/affordances
-

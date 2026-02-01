@@ -345,7 +345,15 @@ func _derive_traits():
 	
 	var rules = SoundIdentity.get_trait_rules()
 	for trait_name in rules.keys():
+		# Skip metadata keys (like _description)
+		if trait_name.begins_with("_"):
+			continue
+		
 		var rule = rules[trait_name]
+		# Skip non-dictionary entries
+		if not rule is Dictionary:
+			continue
+		
 		var confidence = _evaluate_rule(rule)
 		
 		if confidence > 0.5:
@@ -487,7 +495,11 @@ func _get_traits_for_feature(feature_names: Array) -> Array:
 	var result = []
 	var rules = SoundIdentity.get_trait_rules()
 	for trait_name in rules.keys():
+		if trait_name.begins_with("_"):
+			continue
 		var rule = rules[trait_name]
+		if not rule is Dictionary:
+			continue
 		if rule.has("feature") and rule["feature"] in feature_names:
 			result.append(trait_name)
 	return result

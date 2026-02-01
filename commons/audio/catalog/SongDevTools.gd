@@ -15,6 +15,7 @@ const WordSynthBridge = preload("res://commons/audio/catalog/WordSynthBridge.gd"
 const SynthConfigRegistry = preload("res://commons/audio/catalog/SynthConfigRegistry.gd")
 const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
 const SoundIdentityPanel = preload("res://commons/audio/catalog/ui/SoundIdentityPanel.gd")
+const SoundDetailPanel = preload("res://commons/audio/catalog/ui/SoundDetailPanel.gd")
 # AudioSynthesizer is available via class_name - no preload needed
 
 # Word→Synth bridge for semantic parameter control
@@ -1860,13 +1861,106 @@ func _on_word_picker_toggled(pressed: bool, layer: String, word: String):
 	_status_label.text = "🏷️ %s: %s" % [layer, ", ".join(current_words)]
 
 
-# === SOUND IDENTITY PANEL ===
+# === SOUND DETAIL PANEL (Full Editing) ===
+
+var _detail_popup: PopupPanel = null
+var _detail_panel: SoundDetailPanel = null
+
+func show_sound_breakdown(layer: String):
+	"""Show full sound editing panel with sliders, words, suggestions"""
+	if _detail_popup == null:
+		_detail_popup = PopupPanel.new()
+		_detail_popup.size = Vector2(480, 700)
+		# Don't make it a separate window - keep it embedded so audio continues
+		_detail_popup.popup_window = false
+		_detail_popup.exclusive = false
+		_detail_popup.transient = false
+		
+		_detail_panel = SoundDetailPanel.new()
+		_detail_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_detail_panel.param_changed.connect(_on_detail_param_changed)
+		_detail_panel.word_added.connect(_on_detail_word_added)
+		_detail_panel.word_removed.connect(_on_detail_word_removed)
+		_detail_panel.preview_requested.connect(_on_detail_preview)
+		_detail_panel.close_requested.connect(func(): _detail_popup.hide())
+		_detail_popup.add_child(_detail_panel)
+		
+		add_child(_detail_popup)
+	
+	# Get config and words
+	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
+	if config.is_empty():
+		config = _word_display._layer_params.get(layer, {})
+	
+	var words = _word_display._layer_words.get(layer, [])
+	
+	# Load into detail panel
+	_detail_panel.load_sound(_current_song_id, layer, words, config)
+	
+	# Center popup
+	_detail_popup.position = get_viewport_rect().size / 2.0 - Vector2(_detail_popup.size) / 2.0
+	_detail_popup.popup()
+	
+	_status_label.text = "🎛️ Editing: %s" % layer
+
+
+func _on_detail_param_changed(layer: String, param: String, value: float):
+	"""Handle param change from detail panel - apply to live params"""
+	# Map detail panel param to live_params
+	var mapping = {
+		"filter.cutoff": "bass_filter_cutoff" if "bass" in layer.to_lower() else "pad_filter_cutoff" if "pad" in layer.to_lower() else "lead_filter_cutoff",
+		"filter.resonance": "bass_filter_resonance",
+		"osc.detune": "pad_detune",
+		"mod.vibrato_depth": "lead_vibrato_depth",
+		"fx.reverb_mix": "reverb_mix",
+		"fx.delay_mix": "delay_mix",
+	}
+	
+	if mapping.has(param):
+		var live_param = mapping[param]
+		live_params[live_param] = value
+		if _param_sliders.has(live_param):
+			_param_sliders[live_param].value = value
+		_apply_live_params()
+	
+	_status_label.text = "⚙️ %s.%s = %.3f" % [layer, param, value]
+
+
+func _on_detail_word_added(layer: String, word: String):
+	"""Handle word added from detail panel"""
+	var words = _word_display._layer_words.get(layer, []).duplicate()
+	if word not in words:
+		words.append(word)
+	var params = _word_display._layer_params.get(layer, {})
+	_word_display.set_layer_words(layer, words, params)
+	
+	# Apply word to live params
+	_on_word_clicked(layer, word)
+	_status_label.text = "🏷️ Added '%s' to %s" % [word, layer]
+
+
+func _on_detail_word_removed(layer: String, word: String):
+	"""Handle word removed from detail panel"""
+	var words = _word_display._layer_words.get(layer, []).duplicate()
+	words.erase(word)
+	var params = _word_display._layer_params.get(layer, {})
+	_word_display.set_layer_words(layer, words, params)
+	_status_label.text = "🏷️ Removed '%s' from %s" % [word, layer]
+
+
+func _on_detail_preview(layer: String):
+	"""Preview just this layer from detail panel"""
+	var params = _word_display._layer_params.get(layer, {})
+	_on_layer_preview(layer, params)
+
+
+# === LEGACY IDENTITY PANEL (Read-only breakdown) ===
 
 var _identity_popup: PopupPanel = null
 var _identity_panel: SoundIdentityPanel = null
 
-func show_sound_breakdown(layer: String):
-	"""Show detailed SoundIdentity breakdown of a sound's constitution"""
+func show_identity_breakdown(layer: String):
+	"""Show read-only SoundIdentity breakdown (features + traits)"""
 	if _identity_popup == null:
 		_identity_popup = PopupPanel.new()
 		_identity_popup.size = Vector2(420, 600)
@@ -1878,15 +1972,11 @@ func show_sound_breakdown(layer: String):
 		
 		add_child(_identity_popup)
 	
-	# Get config from registry or displayed params
 	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
 	if config.is_empty():
 		config = _word_display._layer_params.get(layer, {})
 	
-	# Create SoundIdentity and display
 	_identity_panel.set_from_params(layer, config)
-	
-	# Center popup
 	_identity_popup.position = get_viewport_rect().size / 2.0 - Vector2(_identity_popup.size) / 2.0
 	_identity_popup.popup()
 
