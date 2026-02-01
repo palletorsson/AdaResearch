@@ -150,7 +150,7 @@ func _setup_realtime_effects():
 	
 	# 2: Distortion
 	var distortion = AudioEffectDistortion.new()
-	distortion.mode = AudioEffectDistortion.MODE_SOFT_CLIP
+	distortion.mode = AudioEffectDistortion.MODE_ATAN  # Soft saturation
 	distortion.drive = 0.0
 	distortion.keep_hf_hz = 8000
 	AudioServer.add_bus_effect(master_idx, distortion)
