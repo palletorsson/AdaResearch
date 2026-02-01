@@ -568,6 +568,216 @@ static func _register_all_configs():
 			"fx.distortion": 0.15
 		}
 	}
+	
+	# === BOARDS OF CANADA (Lo-fi nostalgia, tape-warped) ===
+	# Scottish duo - Music Has the Right to Children, Geogaddi
+	# Key: detuned oscillators, tape saturation, VHS/childhood aesthetic
+	_configs["boards_of_canada"] = {
+		"Warbly Pad": {
+			"type": "tape-degraded poly",
+			"osc.voices": 4,
+			"osc.detune": 15,
+			"osc.drift": 0.12,  # Heavy pitch instability (tape wow)
+			"filter.cutoff": 800,
+			"filter.resonance": 0.2,
+			"env.attack": 0.8,
+			"env.decay": 0.5,
+			"env.sustain": 0.6,
+			"env.release": 2.0,
+			"mod.lfo.rate": 0.15,  # Very slow wobble
+			"mod.lfo.depth": 0.08,
+			"mod.lfo.target": "pitch",
+			"fx.distortion": 0.2,  # Tape saturation
+			"fx.chorus.depth": 0.15,
+			"fx.reverb.mix": 0.35,
+			"mix.high_shelf_db": -4,  # Rolled off highs (old tape)
+			"mix.stereo_width": 0.8
+		},
+		"Melodic Sequence": {
+			"type": "detuned mono",
+			"osc.drift": 0.08,
+			"filter.cutoff": 1200,
+			"filter.resonance": 0.3,
+			"env.attack": 0.01,
+			"env.decay": 0.3,
+			"env.sustain": 0.4,
+			"env.release": 0.5,
+			"fx.distortion": 0.15,
+			"fx.delay.mix": 0.35,
+			"fx.delay.time": 0.333,  # Dotted eighth
+			"fx.delay.feedback": 0.4,
+			"mix.high_shelf_db": -6
+		},
+		"Bass": {
+			"type": "warm sub",
+			"filter.cutoff": 400,
+			"filter.resonance": 0.25,
+			"osc.drift": 0.04,
+			"env.attack": 0.02,
+			"env.decay": 0.25,
+			"env.sustain": 0.6,
+			"fx.distortion": 0.1,
+			"sub.level_db": 0
+		},
+		"Texture Layer": {
+			"type": "granular/tape noise",
+			"fx.bitcrush.depth": 10,  # Lo-fi sampling
+			"fx.distortion": 0.25,
+			"filter.cutoff": 2000,
+			"mix.volume_db": -12,
+			"fx.reverb.mix": 0.5
+		},
+		"Drums": {
+			"type": "lo-fi breakbeat",
+			"tempo": 100,
+			"fx.bitcrush.depth": 12,
+			"fx.distortion": 0.2,
+			"mix.high_shelf_db": -3,
+			"style": "hip-hop influenced"
+		}
+	}
+	
+	# === BURIAL (Dark UK garage, vinyl atmosphere) ===
+	# Will Bevan - Untrue, Kindred
+	# Key: vinyl crackle, pitched vocals, 2-step, sub bass, melancholy
+	_configs["burial"] = {
+		"Sub Bass": {
+			"type": "UK garage sub",
+			"filter.cutoff": 120,
+			"filter.type": "lowpass",
+			"env.attack": 0.01,
+			"env.decay": 0.4,
+			"env.sustain": 0.5,
+			"env.release": 0.3,
+			"sub.level_db": 6,
+			"mix.stereo_width": 0.0  # Mono sub
+		},
+		"Atmosphere Pad": {
+			"type": "dark reverb wash",
+			"osc.voices": 3,
+			"osc.detune": 8,
+			"filter.cutoff": 1500,
+			"filter.resonance": 0.15,
+			"env.attack": 1.5,
+			"env.decay": 1.0,
+			"env.sustain": 0.5,
+			"env.release": 3.0,
+			"fx.reverb.mix": 0.7,
+			"fx.reverb.decay": 6.0,
+			"fx.reverb.predelay": 0.08,
+			"mix.high_shelf_db": -3,
+			"mix.stereo_width": 1.3
+		},
+		"Pitched Vocal": {
+			"type": "timestretched R&B sample",
+			"filter.cutoff": 2500,
+			"filter.resonance": 0.2,
+			"env.attack": 0.05,
+			"env.sustain": 0.7,
+			"fx.reverb.mix": 0.5,
+			"fx.delay.mix": 0.3,
+			"fx.delay.time": 0.5,
+			"fx.bitcrush.depth": 14,  # Slight degradation
+			"pitch_shift": -5  # Pitched down (semitones)
+		},
+		"Crackle Layer": {
+			"type": "vinyl noise",
+			"noise.level_db": -18,
+			"noise.color": "pink",
+			"filter.cutoff": 4000,
+			"filter.type": "lowpass",
+			"mix.volume_db": -15
+		},
+		"Garage Stab": {
+			"type": "organ stab",
+			"filter.cutoff": 1800,
+			"filter.resonance": 0.3,
+			"env.attack": 0.001,
+			"env.decay": 0.12,
+			"env.sustain": 0.1,
+			"env.release": 0.2,
+			"fx.reverb.mix": 0.4
+		},
+		"Drums": {
+			"type": "2-step garage",
+			"tempo": 130,
+			"style": "shuffled, sparse",
+			"fx.reverb.mix": 0.25,
+			"fx.distortion": 0.05
+		}
+	}
+	
+	# === KRAFTWERK (German electronic pioneers) ===
+	# Trans-Europe Express, The Man-Machine, Computer World
+	# Key: Minimoog, vocoder, precise sequences, clinical/robotic
+	_configs["kraftwerk"] = {
+		"Minimoog Bass": {
+			"type": "Minimoog Model D",
+			"filter.cutoff": 600,
+			"filter.resonance": 0.35,
+			"filter.type": "ladder",
+			"env.attack": 0.001,
+			"env.decay": 0.2,
+			"env.sustain": 0.7,
+			"env.release": 0.15,
+			"osc.drift": 0.02,  # Slight analog drift
+			"fx.distortion": 0.05
+		},
+		"Sequencer Line": {
+			"type": "ARP 2600 sequence",
+			"filter.cutoff": 2000,
+			"filter.resonance": 0.5,
+			"env.attack": 0.001,
+			"env.decay": 0.08,
+			"env.sustain": 0.3,
+			"env.release": 0.1,
+			"mod.lfo.rate": 0.0,  # No modulation - precise
+			"osc.drift": 0.0  # Stable pitch
+		},
+		"Vocoder Pad": {
+			"type": "Sennheiser VSM201 vocoder",
+			"osc.voices": 6,
+			"filter.cutoff": 3000,
+			"filter.resonance": 0.4,
+			"env.attack": 0.05,
+			"env.sustain": 0.8,
+			"env.release": 0.3,
+			"fx.chorus.depth": 0.1,
+			"mix.stereo_width": 1.0,
+			"vocoder.bands": 16
+		},
+		"Lead Melody": {
+			"type": "Minimoog lead",
+			"filter.cutoff": 3500,
+			"filter.resonance": 0.4,
+			"env.attack": 0.02,
+			"env.decay": 0.15,
+			"env.sustain": 0.8,
+			"env.release": 0.2,
+			"mod.lfo.rate": 5.0,  # Subtle vibrato
+			"mod.lfo.depth": 0.008,
+			"mod.lfo.target": "pitch",
+			"osc.drift": 0.015
+		},
+		"Electric Percussion": {
+			"type": "Syndrum / custom electronic",
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.0,
+			"filter.cutoff": 800,
+			"filter.resonance": 0.6,
+			"fx.distortion": 0.0,  # Clean
+			"pitch_env.depth": 0.8,  # Pitch drop on hit
+			"pitch_env.decay": 0.1
+		},
+		"Drums": {
+			"type": "TR-808 / custom",
+			"tempo": 110,
+			"style": "mechanical, quantized",
+			"fx.distortion": 0.0,  # Clean and precise
+			"mix.high_shelf_db": 0
+		}
+	}
 
 
 # === PUBLIC API ===
