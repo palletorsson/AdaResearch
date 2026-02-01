@@ -11,7 +11,11 @@ extends Control
 
 const SongTimeline = preload("res://commons/audio/catalog/ui/SongTimeline.gd")
 const WordSynthDisplay = preload("res://commons/audio/catalog/ui/WordSynthDisplay.gd")
+const WordSynthBridge = preload("res://commons/audio/catalog/WordSynthBridge.gd")
 # AudioSynthesizer is available via class_name - no preload needed
+
+# Word→Synth bridge for semantic parameter control
+var _word_bridge: WordSynthBridge
 
 # Audio
 var _player: AudioStreamPlayer
@@ -100,6 +104,7 @@ signal parameters_changed(params: Dictionary)
 func _ready():
 	if not Engine.is_editor_hint():
 		get_tree().root.title = "AdaResearch Song Dev Tools"
+	_word_bridge = WordSynthBridge.new()
 	_setup_audio()
 	_setup_ui()
 	_setup_spectrum_analyzer()
@@ -331,6 +336,7 @@ func _setup_ui():
 	_word_display.word_clicked.connect(_on_word_clicked)
 	_word_display.layer_preview_requested.connect(_on_layer_preview)
 	_word_display.layer_selected.connect(_on_layer_selected)
+	_word_display.add_word_requested.connect(show_word_picker)
 	word_panel.add_child(_word_display)
 
 
@@ -876,15 +882,42 @@ func _on_layer_volume(value: float, layer_name: String):
 
 
 func _on_word_clicked(layer: String, word: String):
-	# Show what this word means and what the opposites are
-	var params = _word_display.get_word_params(word)
-	_status_label.text = "🏷️ %s: %s" % [layer, word]
-	print("Word clicked: %s → %s, params: %s" % [layer, word, params])
+	# Get word params and apply them via the bridge
+	var layer_words = _word_display._layer_words.get(layer, [])
+	
+	# Use bridge to translate words → live_params
+	var new_params = _word_bridge.apply_words_to_params(layer, layer_words, live_params)
+	
+	# Apply changes
+	for key in new_params.keys():
+		if live_params.has(key):
+			live_params[key] = new_params[key]
+			if _param_sliders.has(key):
+				_param_sliders[key].value = new_params[key]
+	
+	_apply_live_params()
+	parameters_changed.emit(live_params)
+	
+	# Show status with opposites
+	var opposites = _word_bridge.get_opposites(word)
+	var opp_text = " (try: %s)" % ", ".join(opposites) if not opposites.is_empty() else ""
+	_status_label.text = "🏷️ %s: %s%s" % [layer, word, opp_text]
+	print("Word applied: %s → %s, updated params: %s" % [layer, word, new_params])
 
 
 func _on_layer_selected(layer: String):
-	var params = _word_display.get_layer_params(layer)
-	_status_label.text = "📋 %s config" % layer
+	# Apply all words for this layer
+	var layer_words = _word_display._layer_words.get(layer, [])
+	var new_params = _word_bridge.words_to_live_params(layer, layer_words)
+	
+	for key in new_params.keys():
+		if live_params.has(key):
+			live_params[key] = new_params[key]
+			if _param_sliders.has(key):
+				_param_sliders[key].value = new_params[key]
+	
+	_apply_live_params()
+	_status_label.text = "📋 %s: applied %d words" % [layer, layer_words.size()]
 
 
 func _on_layer_preview(layer: String, params: Dictionary):
@@ -1437,3 +1470,169 @@ func _load_timeline_for_song(song_id: String, stream: AudioStream):
 		_section_dropdown.add_item(section["name"])
 	_section_dropdown.disabled = false
 	_section_dropdown.selected = 0
+
+
+# === WORD PICKER ===
+
+var _word_picker_popup: PopupPanel = null
+var _word_picker_layer: String = ""
+
+func show_word_picker(layer: String, position: Vector2 = Vector2.ZERO):
+	"""Show popup to browse and add words for a layer"""
+	_word_picker_layer = layer
+	
+	if _word_picker_popup == null:
+		_word_picker_popup = _create_word_picker_popup()
+		add_child(_word_picker_popup)
+	
+	_populate_word_picker(layer)
+	
+	if position == Vector2.ZERO:
+		position = get_viewport_rect().size / 2 - _word_picker_popup.size / 2
+	_word_picker_popup.position = position
+	_word_picker_popup.popup()
+
+
+func _create_word_picker_popup() -> PopupPanel:
+	var popup = PopupPanel.new()
+	popup.size = Vector2(400, 500)
+	
+	var panel = VBoxContainer.new()
+	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	panel.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 12)
+	panel.add_theme_constant_override("separation", 8)
+	popup.add_child(panel)
+	
+	# Title
+	var title = Label.new()
+	title.name = "Title"
+	title.text = "🏷️ ADD WORD"
+	title.add_theme_font_size_override("font_size", 18)
+	panel.add_child(title)
+	
+	# Category tabs
+	var tabs = TabContainer.new()
+	tabs.name = "Categories"
+	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	panel.add_child(tabs)
+	
+	# Create tab for each category
+	for category in ["timbral", "envelope", "spatial", "movement", "experimental"]:
+		var scroll = ScrollContainer.new()
+		scroll.name = category.capitalize()
+		tabs.add_child(scroll)
+		
+		var flow = HFlowContainer.new()
+		flow.name = "Words"
+		flow.add_theme_constant_override("h_separation", 6)
+		flow.add_theme_constant_override("v_separation", 6)
+		scroll.add_child(flow)
+	
+	# Current words display
+	var current_label = Label.new()
+	current_label.name = "CurrentLabel"
+	current_label.text = "Current: "
+	current_label.add_theme_font_size_override("font_size", 12)
+	panel.add_child(current_label)
+	
+	# Close button
+	var close_btn = Button.new()
+	close_btn.text = "Close"
+	close_btn.pressed.connect(func(): popup.hide())
+	panel.add_child(close_btn)
+	
+	return popup
+
+
+func _populate_word_picker(layer: String):
+	if _word_picker_popup == null:
+		return
+	
+	var tabs = _word_picker_popup.find_child("Categories", true, false) as TabContainer
+	if tabs == null:
+		return
+	
+	var current_words = _word_display._layer_words.get(layer, [])
+	
+	# Update title
+	var title = _word_picker_popup.find_child("Title", true, false) as Label
+	if title:
+		title.text = "🏷️ ADD WORD TO: %s" % layer
+	
+	# Update current words label
+	var current_label = _word_picker_popup.find_child("CurrentLabel", true, false) as Label
+	if current_label:
+		current_label.text = "Current: %s" % ", ".join(current_words) if not current_words.is_empty() else "Current: (none)"
+	
+	# Populate each category
+	for i in range(tabs.get_tab_count()):
+		var category = tabs.get_tab_title(i).to_lower()
+		var scroll = tabs.get_child(i) as ScrollContainer
+		var flow = scroll.find_child("Words", true, false) as HFlowContainer
+		if flow == null:
+			continue
+		
+		# Clear existing
+		for child in flow.get_children():
+			child.queue_free()
+		
+		# Add word buttons
+		var words = _word_bridge.get_all_words_in_category(category)
+		for word in words:
+			var btn = Button.new()
+			btn.text = word
+			btn.toggle_mode = true
+			btn.button_pressed = word in current_words
+			btn.add_theme_font_size_override("font_size", 12)
+			
+			# Color based on whether it's active
+			var style = StyleBoxFlat.new()
+			style.bg_color = Color(0.3, 0.4, 0.5) if word in current_words else Color(0.2, 0.2, 0.25)
+			style.set_corner_radius_all(4)
+			style.content_margin_left = 8
+			style.content_margin_right = 8
+			style.content_margin_top = 4
+			style.content_margin_bottom = 4
+			btn.add_theme_stylebox_override("normal", style)
+			
+			btn.toggled.connect(_on_word_picker_toggled.bind(layer, word))
+			
+			# Tooltip with description
+			var params = _word_bridge.get_word_params(word)
+			var opposites = _word_bridge.get_opposites(word)
+			btn.tooltip_text = "Opposites: %s" % ", ".join(opposites) if not opposites.is_empty() else ""
+			
+			flow.add_child(btn)
+
+
+func _on_word_picker_toggled(pressed: bool, layer: String, word: String):
+	var current_words = _word_display._layer_words.get(layer, []).duplicate()
+	
+	if pressed and word not in current_words:
+		# Add word, remove any opposites
+		var opposites = _word_bridge.get_opposites(word)
+		current_words = current_words.filter(func(w): return w not in opposites)
+		current_words.append(word)
+	elif not pressed and word in current_words:
+		# Remove word
+		current_words.erase(word)
+	
+	# Update display
+	var params = _word_display._layer_params.get(layer, {})
+	_word_display.set_layer_words(layer, current_words, params)
+	
+	# Apply via bridge
+	var new_params = _word_bridge.apply_words_to_params(layer, current_words, live_params)
+	for key in new_params.keys():
+		if live_params.has(key):
+			live_params[key] = new_params[key]
+			if _param_sliders.has(key):
+				_param_sliders[key].value = new_params[key]
+	
+	_apply_live_params()
+	parameters_changed.emit(live_params)
+	
+	# Refresh picker display
+	_populate_word_picker(layer)
+	
+	_status_label.text = "🏷️ %s: %s" % [layer, ", ".join(current_words)]

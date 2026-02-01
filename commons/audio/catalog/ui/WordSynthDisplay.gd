@@ -9,6 +9,7 @@ signal word_clicked(layer: String, word: String)
 signal word_change_requested(layer: String, old_word: String, new_word: String)
 signal layer_preview_requested(layer: String, params: Dictionary)
 signal layer_selected(layer: String)
+signal add_word_requested(layer: String, position: Vector2)
 
 const WORD_MAP_PATH = "res://commons/audio/parameters/word_synthesis_map.json"
 
@@ -138,6 +139,14 @@ func _rebuild_layer_display(layer_name: String):
 	preview_btn.pressed.connect(_on_layer_preview.bind(layer_name))
 	header.add_child(preview_btn)
 	
+	# Add word button
+	var add_btn = Button.new()
+	add_btn.text = "+"
+	add_btn.tooltip_text = "Add word to %s" % layer_name
+	add_btn.custom_minimum_size = Vector2(28, 24)
+	add_btn.pressed.connect(_on_add_word_pressed.bind(layer_name, add_btn))
+	header.add_child(add_btn)
+	
 	# Word tags (clickable)
 	var word_flow = HFlowContainer.new()
 	word_flow.add_theme_constant_override("h_separation", 6)
@@ -260,6 +269,12 @@ func _on_word_clicked(layer_name: String, word: String):
 	var opposites = _get_opposites(word)
 	if not opposites.is_empty():
 		print("WordSynthDisplay: '%s' clicked. Opposites: %s" % [word, opposites])
+
+
+func _on_add_word_pressed(layer_name: String, button: Button):
+	"""Emit signal to open word picker"""
+	var global_pos = button.global_position + Vector2(button.size.x, 0)
+	add_word_requested.emit(layer_name, global_pos)
 
 
 func _on_layer_name_clicked(layer_name: String):
