@@ -268,7 +268,10 @@ func _setup_ui():
 		["lofi_house", "📼 Lo-Fi House"],
 		["reese_jungle", "🌴 Jungle"],
 		["ambient_techno", "🌌 Ambient"],
-		["blade_runner", "🌃 Blade Runner"]
+		["blade_runner", "🌃 Blade Runner"],
+		["boards_of_canada", "📼 BoC"],
+		["burial", "🌧️ Burial"],
+		["kraftwerk", "🤖 Kraftwerk"]
 	]
 	
 	for song in songs:
@@ -675,6 +678,13 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_ambient_techno_song({})
 		"blade_runner":
 			stream = AudioSynthesizer.generate_blade_runner_song({})
+		_:
+			# No generator - show config breakdown only (no audio)
+			_status_label.text = "📋 %s (config only - no audio)" % song_id
+			_current_song_id = song_id
+			_load_song_words(song_id)
+			_enable_buttons()
+			return
 	
 	if stream == null:
 		_status_label.text = "Generation failed - check console for errors"
@@ -1298,6 +1308,80 @@ func _load_song_words(song_id: String):
 			"Drums": {
 				"words": ["punchy", "crisp"],
 				"params": {"type": "pop kit"}
+			}
+		},
+		"boards_of_canada": {
+			"Warbly Pad": {
+				"words": ["warm", "analog", "unstable", "evolving", "lo-fi"],
+				"params": {"type": "tape-degraded poly", "osc.drift": 0.12, "fx.distortion": 0.2}
+			},
+			"Melodic Sequence": {
+				"words": ["warm", "dark", "plucky", "lo-fi"],
+				"params": {"type": "detuned mono", "osc.drift": 0.08}
+			},
+			"Bass": {
+				"words": ["warm", "soft", "thick"],
+				"params": {"type": "warm sub", "filter.cutoff": 400}
+			},
+			"Texture Layer": {
+				"words": ["lo-fi", "noisy", "evolving"],
+				"params": {"type": "granular/tape noise", "fx.bitcrush.depth": 10}
+			},
+			"Drums": {
+				"words": ["lo-fi", "warm", "soft"],
+				"params": {"type": "lo-fi breakbeat", "tempo": 100}
+			}
+		},
+		"burial": {
+			"Sub Bass": {
+				"words": ["thick", "dark", "punchy"],
+				"params": {"type": "UK garage sub", "filter.cutoff": 120}
+			},
+			"Atmosphere Pad": {
+				"words": ["spacious", "dark", "wide", "evolving"],
+				"params": {"type": "dark reverb wash", "fx.reverb.decay": 6.0}
+			},
+			"Pitched Vocal": {
+				"words": ["soft", "distant", "dreamy", "lo-fi"],
+				"params": {"type": "timestretched R&B sample", "pitch_shift": -5}
+			},
+			"Crackle Layer": {
+				"words": ["noisy", "lo-fi", "static"],
+				"params": {"type": "vinyl noise"}
+			},
+			"Garage Stab": {
+				"words": ["plucky", "soft", "spacious"],
+				"params": {"type": "organ stab"}
+			},
+			"Drums": {
+				"words": ["soft", "spacious"],
+				"params": {"type": "2-step garage", "tempo": 130}
+			}
+		},
+		"kraftwerk": {
+			"Minimoog Bass": {
+				"words": ["warm", "analog", "punchy", "clean"],
+				"params": {"type": "Minimoog Model D", "filter.type": "ladder"}
+			},
+			"Sequencer Line": {
+				"words": ["cold", "digital", "mechanical", "static"],
+				"params": {"type": "ARP 2600 sequence", "osc.drift": 0.0}
+			},
+			"Vocoder Pad": {
+				"words": ["wide", "cold", "digital"],
+				"params": {"type": "Sennheiser VSM201 vocoder"}
+			},
+			"Lead Melody": {
+				"words": ["warm", "analog", "sustained"],
+				"params": {"type": "Minimoog lead", "mod.lfo.depth": 0.008}
+			},
+			"Electric Percussion": {
+				"words": ["punchy", "percussive", "clean"],
+				"params": {"type": "Syndrum / custom electronic"}
+			},
+			"Drums": {
+				"words": ["punchy", "clean", "mechanical"],
+				"params": {"type": "TR-808 / custom", "tempo": 110}
 			}
 		}
 	}
