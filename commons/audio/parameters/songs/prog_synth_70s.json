@@ -1,13 +1,61 @@
 {
     "_metadata": {
         "sound_type": "prog_synth_song",
-        "display_name": "70s Prog Synth Song",
-        "description": "Full progressive rock track - ELP, Kraftwerk, Yes, Pink Floyd style. Minimoog bass, screaming leads with portamento, motorik drums, warm pads.",
+        "display_name": "70s Prog Synth",
+        "description": "Progressive rock/electronic. ELP's virtuoso Moog, Yes' orchestral layers, Kraftwerk's motorik minimalism, Pink Floyd's space. Epic and exploratory.",
         "category": "songs",
-        "tags": ["prog", "70s", "moog", "elp", "kraftwerk", "yes", "full_song", "interactive"],
-        "is_interactive_song": true
+        "tags": ["prog", "70s", "moog", "elp", "kraftwerk", "yes", "pink_floyd", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Emerson Lake & Palmer", "Yes", "Kraftwerk", "Pink Floyd", "Tangerine Dream"],
+        "reference_tracks": ["Lucky Man", "Roundabout", "Autobahn", "On the Run"]
+    },
+    "identity": {
+        "emotion": "epic_exploration",
+        "era": "early_to_mid_70s",
+        "character": ["virtuosic", "cerebral", "exploratory", "epic"]
     },
     "parameters": {
-        "duration": { "min": 30.0, "max": 300.0, "value": 120.0, "step": 10.0, "description": "Approximate song length" }
+        "duration": { "min": 180.0, "max": 900.0, "value": 420.0, "step": 60.0, "description": "Extended prog length" },
+        "bpm": { "min": 80, "max": 140, "value": 110, "step": 1, "description": "Variable (prog = tempo changes)" },
+        "key": { "options": ["Em", "Am", "Dm", "G", "C"], "value": "Em", "description": "Often modal (Dorian, Mixolydian)" },
+        "style": { "options": ["virtuoso", "motorik", "space"], "value": "virtuoso", "description": "ELP vs Kraftwerk vs Floyd" }
+    },
+    "sound_design": {
+        "minimoog_lead": {
+            "oscillators": { "count": 3, "waveform": "sawtooth", "detune": "slight" },
+            "filter": { "type": "24db_lowpass", "resonance": { "min": 0.6, "max": 0.8 } },
+            "portamento": { "enabled": true, "essential": true, "speed": { "min": 0.05, "max": 0.2 } },
+            "expression": ["pitch_wheel_bends", "filter_sweeps"],
+            "character": "screaming_lead"
+        },
+        "motorik_beat": {
+            "pattern": "steady_unwavering_4_4",
+            "character": "mechanical_hypnotic",
+            "philosophy": "human_as_machine"
+        },
+        "sequencer": {
+            "style": "tangerine_dream",
+            "pattern": "16th_note_arpeggios",
+            "filter_modulation": "slow_lfo_sweeps",
+            "layering": "multiple_polyrhythms"
+        },
+        "orchestral_synth": {
+            "mellotron": { "samples": ["strings", "choir"], "character": "ghostly" },
+            "hammond_organ": { "leslie": true, "modeled": true },
+            "role": "orchestral_weight_without_orchestra"
+        }
+    },
+    "time_signatures": ["4/4", "7/8", "6/8", "5/4"],
+    "chord_progressions": [
+        { "name": "modal_vamps", "modes": ["dorian", "mixolydian"] },
+        { "name": "through_composed", "chords": "changing_no_repetition" },
+        { "name": "descending_drama", "chords": ["i", "VII", "VI", "V"] },
+        { "name": "rock_power", "chords": "power_chords_fifths" }
+    ],
+    "arrangement": {
+        "structure": "sections_not_verse_chorus",
+        "development": "themes_transformed_key_changes",
+        "dynamics": "extreme_quiet_to_extreme_loud",
+        "tempo_changes": true
     }
 }

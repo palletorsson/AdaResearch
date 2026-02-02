@@ -11,59 +11,59 @@ The Word Synth system provides **bidirectional translation** between:
 ### Flow 1: Words → Sound (Forward)
 ```
 User selects words in WordSynthDisplay
-    ↓
+	↓
 WordSynthBridge.words_to_live_params(layer, words)
-    ├─ Looks up each word in word_synthesis_map.json
-    ├─ Resolves conflicts (exclusive pairs, layer priorities)
-    └─ Returns {bass_filter_cutoff: 400, reverb_mix: 0.5, ...}
-    ↓
+	├─ Looks up each word in word_synthesis_map.json
+	├─ Resolves conflicts (exclusive pairs, layer priorities)
+	└─ Returns {bass_filter_cutoff: 400, reverb_mix: 0.5, ...}
+	↓
 SongDevTools.live_params updated
-    ↓
+	↓
 _apply_realtime_effects() → AudioServer bus effects
-    ↓
+	↓
 User hears the change
 ```
 
 ### Flow 2: Sound → Words (Reverse)
 ```
 User clicks layer name in WordSynthDisplay
-    ↓
+	↓
 SongDevTools.show_sound_breakdown(layer)
-    ↓
+	↓
 SynthConfigRegistry.get_layer_config(song_id, layer)
-    └─ Returns actual synth params for this layer
-    ↓
+	└─ Returns actual synth params for this layer
+	↓
 SoundIdentity.from_params(layer, config)
-    ├─ _build_recipe() → signal chain
-    ├─ _compute_features() → normalized 0-1 values
-    ├─ _derive_traits() → word tags
-    └─ _build_explanations() → why each trait applies
-    ↓
+	├─ _build_recipe() → signal chain
+	├─ _compute_features() → normalized 0-1 values
+	├─ _derive_traits() → word tags
+	└─ _build_explanations() → why each trait applies
+	↓
 SoundIdentityPanel displays:
-    ├─ Recipe: [osc:saw] → [filter:lowpass] → [fx:distortion]
-    ├─ Features: brightness=30%, warmth=70%, ...
-    ├─ Traits: warm, thick, analog (clickable)
-    └─ Explanations: "warm because filter.cutoff=400"
+	├─ Recipe: [osc:saw] → [filter:lowpass] → [fx:distortion]
+	├─ Features: brightness=30%, warmth=70%, ...
+	├─ Traits: warm, thick, analog (clickable)
+	└─ Explanations: "warm because filter.cutoff=400"
 ```
 
 ### Flow 3: Song Playback
 ```
 User clicks song button (e.g., "Kraftwerk")
-    ↓
+	↓
 SongDevTools._on_song_selected(song_id)
-    ↓
+	↓
 _generate_and_play(song_id)
-    ↓
+	↓
 AudioSynthesizer.generate_kraftwerk_song({})
-    └─ Creates AudioStreamInteractive with sections
-    ↓
+	└─ Creates AudioStreamInteractive with sections
+	↓
 _load_song_words(song_id) → populates WordSynthDisplay
 _load_timeline_for_song() → populates timeline
-    ↓
+	↓
 Audio plays, user can:
-    ├─ Adjust sliders → _apply_realtime_effects()
-    ├─ Click words → applies via WordSynthBridge
-    └─ Click layers → shows SoundIdentity breakdown
+	├─ Adjust sliders → _apply_realtime_effects()
+	├─ Click words → applies via WordSynthBridge
+	└─ Click layers → shows SoundIdentity breakdown
 ```
 
 ## Component Responsibilities
@@ -93,8 +93,8 @@ Audio plays, user can:
 │  live_params    WordSynthBridge         SoundIdentity          │
 │       │               │                      │                  │
 └───────┼───────────────┼──────────────────────┼──────────────────┘
-        │               │                      │
-        ▼               ▼                      ▼
+		│               │                      │
+		▼               ▼                      ▼
 ┌───────────────┐ ┌─────────────────┐ ┌───────────────────┐
 │ AudioServer   │ │ word_synthesis  │ │ SynthConfig       │
 │ (bus effects) │ │ _map.json       │ │ Registry          │
@@ -126,10 +126,10 @@ Traits are derived from features using threshold rules:
 
 ```gdscript
 const TRAIT_RULES = {
-    "bright": {"feature": "brightness", "min": 0.65},
-    "warm": {"feature": "warmth", "min": 0.55},
-    "plucky": {"feature": "attack_speed", "min": 0.8, 
-               "feature2": "decay_length", "max2": 0.4},
+	"bright": {"feature": "brightness", "min": 0.65},
+	"warm": {"feature": "warmth", "min": 0.55},
+	"plucky": {"feature": "attack_speed", "min": 0.8, 
+			   "feature2": "decay_length", "max2": 0.4},
 }
 ```
 

@@ -2,67 +2,89 @@
 	"sequences": {
 		"transformations": {
 			"name": "Transformations: What Stays the Same When Everything Changes",
-			"truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
+			"truth": "Identity preserved under transformation. Vectors enable movement. What stays the same when everything changes?",
 			"qfep_term": "S",
-			"qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
-			"formula": "T(v) = M × v, where M is a 4×4 matrix encoding translate, rotate, scale",
-			"demonstration": "Translate: move without changing. Rotate: spin without deforming. Scale: grow without breaking. Combine transformations and see order matters.",
+			"qfep_connection": "Transformations modify system states while preserving essential structure. Vectors are the language of change—direction and magnitude enable translation, rotation, scale.",
+			"formula": "T(v) = M × v, v = (x,y,z), dot(a,b) = |a||b|cos(θ), cross(a,b) ⊥ a,b",
+			"demonstration": "Translate: vectors as displacement. Rotate: dot product measures angle, cross product finds axis. Scale: vectors as multipliers.",
 
-			"description": "Affine transformations in 3D space. Translation, rotation, and scale—the three fundamental ways to change position, orientation, and size while preserving shape. Matrix math makes this possible.",
+			"description": "Vectors and transformations together. Vectors give direction and magnitude; transformations apply them. Translation uses vector addition, rotation uses dot and cross products. This is the grammar of spatial change.",
 			"layer": "properties",
-			"prerequisites": ["primitives", "vectors"],
-			"unlocks": ["fractals", "proceduralgeneration"],
+			"prerequisites": ["primitives"],
+			"unlocks": ["wavefunctions", "fractals", "proceduralgeneration", "computationalgeometry", "graphtheory"],
 
 			"difficulty": "beginner",
-			"estimated_time": "15-20 minutes",
+			"estimated_time": "35-45 minutes",
 
 			"learning_objectives": [
-				"Translation: moving objects in space (T_x, T_y, T_z)",
-				"Rotation: changing orientation around axes",
+				"Vector basics: direction + magnitude = vector",
+				"Vector addition: combining displacements head-to-tail",
+				"Vector subtraction: direction between two points",
+				"Translation: moving objects via vector displacement",
+				"Dot product: measuring alignment (a·b = |a||b|cos θ)",
+				"Rotation: changing orientation using angles from dot product",
+				"Cross product: finding perpendicular axis for rotation",
 				"Scale: changing size uniformly or non-uniformly",
-				"Matrix representation: transformations as 4×4 matrices",
-				"Composition: combining transformations (order matters!)",
-				"Invariants: what properties are preserved under each transformation"
+				"Projection and reflection: mirrors and collision response",
+				"Composition: combining transformations (order matters!)"
 			],
 
 			"content": [
-				"Transformation_Intro: Overview of transformation types",
-				"Trans_Translate_1: Moving objects in space—translation basics",
+				"Transformation_Intro: Overview—vectors enable transformations",
+				"VectorBasics: Components and magnitude—what vectors are",
+				"Trans_Translate_1: Moving objects—translation as vector displacement",
+				"VectorAddition: Combining displacements head-to-tail",
 				"Trans_Translate_2: Advanced translation and composition",
+				"VectorSubtraction: Direction between points—needed for targeting",
 				"Trans_Rotation_1: Rotating around axes—orientation change",
+				"VectorDotProduct: Measuring alignment—how much rotation?",
 				"Trans_Rotation_2: Combined rotations and gimbal lock",
+				"VectorCrossProduct: Finding perpendicular axis—rotation axis discovery",
 				"Trans_Scale: Scaling uniformly and non-uniformly",
-				"Trans_Composition: Combining transforms to build forms (furniture assembly)"
+				"VectorProjectionReflection: Mirrors and collision response"
 			],
 
 			"maps": [
-
 				"Transformation_Intro",
+				"VectorBasics",
 				"Trans_Translate_1",
+				"VectorAddition",
 				"Trans_Translate_2",
- 				"Trans_Rotation_1",
+				"VectorSubtraction",
+				"Trans_Rotation_1",
+				"VectorDotProduct",
 				"Trans_Rotation_2",
-				"Trans_Scale"
+				"VectorCrossProduct",
+				"Trans_Scale",
+				"VectorProjectionReflection"
 			],
 
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/dot_product_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/cross_product_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
 			],
 
 			"algorithm_paths": {
 				"Transformation_Intro": "res://algorithms/transformations/",
+				"VectorBasics": "res://algorithms/vectors/basics/",
+				"VectorAddition": "res://algorithms/vectors/addition/",
 				"Trans_Rotation_1": "res://algorithms/transformations/rotation/",
-				"Trans_Composition": "res://commons/primitives/furniture/"
+				"VectorDotProduct": "res://algorithms/vectors/dot/",
+				"VectorCrossProduct": "res://algorithms/vectors/cross/"
 			},
 
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_post_transformation",
 			"unlock_requirements": [],
 			"completion_rewards": [
+				"vector_master_badge",
 				"transformer_badge",
-				"matrix_master_badge"
+				"matrix_master_badge",
+				"rotation_guru_badge"
 			]
 		}
 	}

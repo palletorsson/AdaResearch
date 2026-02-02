@@ -1,0 +1,79 @@
+{
+    "_archive_metadata": {
+        "original_file": "synthwave.json",
+        "version": 1,
+        "archived_date": "2025-01-30",
+        "description": "First identity-based configuration with full sound design specs"
+    },
+    "_metadata": {
+        "sound_type": "synthwave_song",
+        "display_name": "Synthwave",
+        "description": "Retrofuture 80s nostalgia. Kavinsky, Gunship, The Midnight style. Gated reverb drums, supersaws, arpeggios, neon cinema aesthetic.",
+        "category": "songs",
+        "tags": ["synthwave", "retrowave", "80s", "electronic", "neon", "cinematic", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Kavinsky", "Gunship", "The Midnight", "FM-84", "Perturbator"],
+        "reference_tracks": ["Nightcall", "Tech Noir", "Sunset", "Running in the Night"]
+    },
+    "identity": {
+        "emotion": "nostalgic_cinema",
+        "era": "retrofuture_80s",
+        "character": ["lush", "wide", "emotional", "neon", "driving"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 360.0, "value": 270.0, "step": 30.0, "description": "Song-length track" },
+        "bpm": { "min": 80, "max": 128, "value": 108, "step": 1, "description": "Driving but not frantic" },
+        "key": { "options": ["Am", "Fm", "Cm", "Em", "Gm"], "value": "Fm", "description": "Minor for melancholic nostalgia" },
+        "cinematic_level": { "min": 0.0, "max": 1.0, "value": 0.8, "step": 0.1, "description": "Epic vs intimate" }
+    },
+    "sound_design": {
+        "gated_reverb_drums": {
+            "snare": {
+                "character": "big_roomy",
+                "reverb_decay": 1.5,
+                "gate_time_ms": 150,
+                "gate_curve": "fast_cutoff"
+            },
+            "kick": { "character": "punchy_electronic" },
+            "toms": { "character": "huge_tribal" },
+            "processing": "gate_cutting_reverb_tail"
+        },
+        "arpeggiated_synths": {
+            "pattern": "16th_notes",
+            "waveform": ["sawtooth", "pulse"],
+            "delay": { "type": "dotted_8th", "feedback": 0.4 },
+            "reverb": true,
+            "character": "driving_hypnotic"
+        },
+        "supersaw_pads": {
+            "oscillators": { "count": 7, "waveform": "sawtooth" },
+            "detune_cents": { "spread": { "min": 20, "max": 40 } },
+            "processing": ["chorus", "reverb"],
+            "character": "massive_wide_emotional"
+        },
+        "bass": {
+            "layers": { "analog_saw": 0.6, "sub_sine": 0.4 },
+            "pattern": "root_notes_occasional_octave_jumps",
+            "processing": "light_saturation",
+            "character": "fat_analog"
+        },
+        "lead": {
+            "oscillators": 2,
+            "detune": true,
+            "processing": ["reverb", "delay"],
+            "style": "soaring_emotional_bends"
+        }
+    },
+    "chord_progressions": [
+        { "name": "cinematic_minor", "chords": ["Am", "F", "C", "G"] },
+        { "name": "dark_epic", "chords": ["Fm", "Db", "Ab", "Eb"] },
+        { "name": "natural_minor_flow", "chords": ["i", "VI", "III", "VII"] },
+        { "name": "darker_variant", "chords": ["i", "iv", "VII", "III"] }
+    ],
+    "arrangement": {
+        "structure": "clear_sections",
+        "sections": ["intro", "verse", "chorus", "bridge"],
+        "builds": ["filter_sweeps", "layer_addition"],
+        "drops": "strip_to_arp_plus_kick_rebuild"
+    }
+}

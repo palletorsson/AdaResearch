@@ -1372,4 +1372,194 @@ func wobble_bass(t: float, freq: float, wobble_rate: float = 4.0) -> float:
 
 ---
 
+## Essential Tracks to Study & Build Upon
+
+Curated tracks that exemplify each genre. These aren't just "good songs" — they're **production blueprints** with clear, analyzable elements.
+
+### Ambient Works Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **Xtal** | Aphex Twin | 95 | Dm | Perfect balance: lo-fi warmth + emotional melody. The pad is 3 detuned saws with slow filter LFO. Breakbeat sits low in mix. Study the **restraint** — melody only appears halfway through. |
+| **Ageispolis** | Aphex Twin | 92 | Em | Brighter acid line over warm pads. Shows how 303-style bass can be gentle, not aggressive. Note the **tape wobble** on everything. |
+| **Roygbiv** | Boards of Canada | 92 | G | Major key warmth. Detuned lead over muffled drums. The lo-fi processing is extreme — sounds like a childhood VHS tape. Study the **nostalgia engineering**. |
+| **Turquoise Hexagon Sun** | Boards of Canada | 84 | Am | Slower, more ambient. Pad-focused. Shows how minimal a track can be while remaining engaging. The **field recordings** add organic texture. |
+| **Polygon Window** | Aphex Twin | 130 | Cm | Faster, more structured. Shows the bridge between ambient and rave. Two-note bass pattern + lush pads = complete track. |
+
+**What makes these work:**
+- Melody emerges from texture, not imposed on it
+- Lo-fi processing is **consistent** across all elements (everything sounds like it came from the same tape)
+- Repetition creates trance, variation creates journey
+- Space > density
+
+---
+
+### Detroit Techno Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **Strings of Life** | Derrick May | 125 | Am | The benchmark. Piano/string stabs over 909. The **string riff** is simple (3 notes) but the rhythm is everything. Builds by addition, never subtraction. |
+| **No UFOs** | Model 500 | 120 | Dm | Juan Atkins' electro-techno. Vocoder + synth bass + drum machine. Sparse — most of the track is **space**. Every element has room. |
+| **Good Life** | Inner City | 120 | C | Kevin Saunderson's pop-techno. Shows how Detroit can be **uplifting** without losing machine precision. Chord progression is house, rhythm is techno. |
+| **Clear** | Cybotron | 125 | Em | Proto-techno. Minimal: sequenced bass, handclaps, sparse keys. Study the **808 programming** — swing is subtle but essential. |
+| **Big Fun** | Inner City | 122 | F | Soulful vocal over machine rhythm. Demonstrates the "human + machine" balance. The **pad swells** are the emotional core. |
+
+**What makes these work:**
+- 909 is mixed **forward** but not overwhelming
+- Strings/pads provide soul against mechanical rhythm
+- Harmonic movement is minimal (1-2 chords often)
+- Every sound is **identifiable** — no mud
+- Builds last 64+ bars — patience rewarded
+
+---
+
+### Moroder Disco Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **I Feel Love** | Donna Summer | 128 | F | The blueprint. 16th-note Moog sequencer = the entire harmonic content for 5+ minutes. Kick is **inside** the sequencer pulse, not separate. Study how **one chord** sustains a whole track. |
+| **From Here to Eternity** | Giorgio Moroder | 126 | Am | Minor key variant. More dramatic. The sequencer here has more filter movement. Vocal is sparse — track is about the **pulse**. |
+| **Chase** | Giorgio Moroder | 130 | Em | Film score tension. Ascending sequencer pattern builds dread. No drums for long sections — sequencer **is** the rhythm. Perfect for studying tension/release. |
+| **E=MC²** | Giorgio Moroder | 124 | C | Vocal-driven but synth-dominated. The bass is a separate layer from sequencer. Shows how to **stack** repetitive elements without clutter. |
+| **The Legend of Babel** | Donna Summer | 126 | Gm | Epic 17-minute version. Study the **arrangement** — how to hold attention over extended runtime with minimal harmonic change. |
+
+**What makes these work:**
+- Sequencer is the track — everything else is decoration
+- Kick and sequencer are **rhythmically fused** (same 16th grid)
+- Filter automation is the only "development" needed
+- Mix is **mid-focused** — bass sequencer fills the spectrum
+- Repetition is hypnotic, not boring (the right tempo helps)
+
+---
+
+### Pop Generative Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **bad guy** | Billie Eilish | 135 | Gm | Minimal production, maximum impact. Bass is sub + high click, nothing in between. Drums are **sparse** — the gaps create tension. Study the sidechain pumping. |
+| **Blinding Lights** | The Weeknd | 171 | Fm | Synthwave-pop at double-time. Arpeggiated synth drives everything. Note how **gated reverb** on drums creates the 80s feel without being pastiche. |
+| **Don't Start Now** | Dua Lipa | 124 | Bm | Disco-pop. Bassline is the hook. The **pre-chorus lift** is textbook — filtering up, adding layers, then dropping into chorus. |
+| **Levitating** | Dua Lipa | 103 | Bm | Slower disco-pop. Study the **bass pattern** (it's melodic, not just root notes). The string stabs add disco authenticity. |
+| **Everything I Wanted** | Billie Eilish | 120 | Em | Emotional minimalism. Piano + voice + sub bass. Production builds by **adding texture**, not elements. The sidechained pad is barely there but essential. |
+
+**What makes these work:**
+- **Hooks** appear in first 30 seconds
+- Sidechain compression creates **movement** even in sparse sections
+- Pre-chorus → chorus energy shift is dramatic
+- Low end is **clean** (sub bass separated from everything)
+- Verse is restrained so chorus has room to **explode**
+
+---
+
+### 70s Prog Synth Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **Lucky Man** | ELP | 138→free | G | The Moog solo that started it all. Song is folk-rock until 3:08, then **screaming Moog** with portamento. Study how the solo builds from low drone to soaring lead. |
+| **Autobahn** | Kraftwerk | 112 | E | 22 minutes of motorik bliss. The **sequencer patterns** evolve slowly. Melody is minimal, repetition is maximal. Human-machine fusion. |
+| **On the Run** | Pink Floyd | 165 | — | Pure sequencer + effects. No traditional melody. Study the **Synthi AKS programming** — 8 notes, endless variation through filter/ring mod. Atonal tension. |
+| **Roundabout** | Yes | 138 | Em | Complex prog structure but **catchy** riff. The organ/Moog interplay is key. Multiple time signatures but feels natural. |
+| **Shine On You Crazy Diamond** | Pink Floyd | varies | Gm | 25-minute emotional journey. The **Minimoog lead** (Gilmour) has perfect portamento. Study the dynamics — whisper to scream and back. |
+
+**What makes these work:**
+- **Portamento** on lead synths creates vocal quality
+- Tempo/meter changes serve the music, not show off
+- Long-form structure rewards patience
+- Mix has **depth** — things are near and far
+- Virtuosity is emotional, not just technical
+
+---
+
+### Rave / Breakbeat Hardcore Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **Charly** | The Prodigy | 155 | Am | The hoover anthem. Study the **hoover patch** — it's saw + PWM through resonant filter with portamento. The "Charly says" sample is chopped rhythmically. |
+| **On a Ragga Tip** | SL2 | 150 | Am | Breakbeat chopping masterclass. The vocal sample is **time-stretched** to fit tempo. Piano stabs are offbeat. Pure euphoria engineering. |
+| **Activ-8** | Altern-8 | 145 | Em | Piano rave. The M1 piano pattern is simple but **rhythmically complex** (syncopated). Breakbeats are layered, not just looped. |
+| **Experience** | The Prodigy | 140 | Dm | More musical than most rave. Actual chord progression + bass line. Shows you can be **sophisticated** at 140 BPM. |
+| **We Are the Music Makers** | Aphex Twin | 150 | C | Rave meets Willy Wonka. Sample manipulation as art. The **pitched vocal** becomes the melody. Shows experimental potential in rave format. |
+
+**What makes these work:**
+- Breakbeats are **chopped**, not just sped up (swing preserved)
+- Hoovers slide between notes — portamento is identity
+- Piano stabs are **offbeat** (syncopation creates energy)
+- Builds are short and intense — attention span is low at 150 BPM
+- Samples are treated as instruments, not decorations
+
+---
+
+### Synthwave Style
+
+| Track | Artist | BPM | Key | Why It Works |
+|-------|--------|-----|-----|--------------|
+| **Nightcall** | Kavinsky | 94 | Fm | Slow synthwave with vocoder. The **arpeggiated synth** is simple (root-5th-octave-5th). Drum pattern is sparse. Study the **space** between elements. |
+| **Tech Noir** | Gunship | 118 | Am | Epic synthwave. Layered supersaws build through verses. The **gated snare** is huge. Saxophone (!) adds humanity. |
+| **Sunset** | The Midnight | 105 | F | Emotional synthwave. Chord progression is **pop** (I-V-vi-IV). The sax solo is unironically beautiful. Shows synthwave can have heart. |
+| **A Real Hero** | College | 98 | Dm | Minimal, voice-forward. The synth arpeggio is one note per chord. **Restraint** creates emotional impact. Less is more. |
+| **Turbo Killer** | Carpenter Brut | 128 | Em | Aggressive synthwave. Distorted leads, heavy drums. Shows the **dark** side of the genre. Metal-influenced but purely electronic. |
+
+**What makes these work:**
+- Gated reverb on snare = instant 80s (but don't overdo it)
+- Arpeggios are **simple** — complexity comes from layering
+- Supersaws need **movement** (filter LFO, chorus, or both)
+- Leave room for **melody** — pads support, don't dominate
+- Minor keys with major moments = nostalgic emotion
+
+---
+
+### Cross-Genre Study Tracks
+
+These tracks blend genres or defy categorization — study them for **innovation**:
+
+| Track | Artist | Why Study It |
+|-------|--------|--------------|
+| **Windowlicker** | Aphex Twin | How to be experimental AND catchy. The synth riff is pop hook hidden in IDM. |
+| **Da Funk** | Daft Punk | Disco, house, and filter house combined. One synth riff, relentless. |
+| **Teardrop** | Massive Attack | Trip-hop production: space, texture, restraint. The harpsichord + beat = unexpected. |
+| **Around the World** | Daft Punk | Repetition taken to extreme. Same phrase 144 times. Study the **filter automation** — it's the only development. |
+| **Midnight City** | M83 | Synthwave meets shoegaze meets pop. The sax hook is the track. Layering creates wall of sound. |
+| **Blue Monday** | New Order | Sequencer-driven post-punk/synth-pop. The drum machine pattern is iconic. Study the **bass synth** — it carries the harmony. |
+
+---
+
+### Listening Methodology
+
+When studying a track:
+
+1. **First listen:** Feel only. What's the emotional arc?
+2. **Second listen:** Count elements. How many simultaneous sounds?
+3. **Third listen:** Focus on drums. What's the pattern? Where's the swing?
+4. **Fourth listen:** Focus on bass. Root notes only? Melodic? Filtered?
+5. **Fifth listen:** Focus on pads/atmosphere. Mono or stereo? Moving or static?
+6. **Sixth listen:** Focus on leads/hooks. When do they appear? How often?
+7. **Final listen:** Study arrangement. Map the sections. Note where energy changes.
+
+**Key question for each track:** "What could I remove and still have the essence?"
+
+---
+
+## Song Identity Quick Reference
+
+Each song in `commons/audio/parameters/songs/` has a distinct identity. See `docs/music/SONG_IDENTITIES.md` for full research.
+
+| Song | BPM | Key | Signature Sound | Emotion |
+|------|-----|-----|-----------------|---------|
+| **Ambient Works** | 85-100 | Am, Em, Dm | Warm detuned pads, lo-fi breaks | Nostalgic warmth |
+| **Detroit Techno** | 120-130 | Cm, Gm, Dm | 909 drums, Juno strings | Cold soulfulness |
+| **Moroder Disco** | 120-130 | C, G (major) | 16th-note sequencer | Hypnotic ecstasy |
+| **Pop Generative** | 100-128 | Various | Sidechained synths, hooks | Immediate emotion |
+| **Prog Synth 70s** | 80-140 | Modal | Moog lead w/ portamento, motorik beat | Epic exploration |
+| **Rave** | 140-160 | Am, Em | Hoover bass, breakbeats, piano stabs | Euphoric chaos |
+| **Synthwave** | 100-118 | Fm, Am, Cm | Gated drums, supersaws, arpeggios | Nostalgic cinema |
+
+### Key Differentiators
+
+- **Ambient Works vs Synthwave:** Both nostalgic, but Ambient Works is lo-fi/intimate (bedroom), Synthwave is polished/cinematic (neon)
+- **Detroit Techno vs Moroder Disco:** Both 4/4, but Detroit is cold/minimal, Moroder is hypnotic/euphoric
+- **Rave vs Detroit:** Both electronic, but Rave is chaotic/fast (140+), Detroit is controlled/steady (125)
+- **Prog vs Pop:** Prog explores (long, tempo changes, odd meters), Pop structures (verse-chorus, hooks)
+
+---
+
 *Last updated: 2025-01-30*

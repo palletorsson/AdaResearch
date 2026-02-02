@@ -1,0 +1,27 @@
+{
+    "_metadata": {
+        "sound_type": "kraftwerk_v2_song",
+        "display_name": "Kraftwerk V2",
+        "description": "Enhanced Kraftwerk style. Autobahn vibes, computer world aesthetics, robotic precision, electronic dreams.",
+        "category": "songs",
+        "tags": ["kraftwerk", "electro", "motorik", "v2", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Kraftwerk"],
+        "reference_tracks": ["Computer Love", "Tour de France", "Neon Lights"]
+    },
+    "identity": {
+        "emotion": "electronic_dreams",
+        "era": "late_70s_early_80s",
+        "character": ["robotic", "driving", "hypnotic", "futuristic"]
+    },
+    "parameters": {
+        "bpm": { "min": 100, "max": 120, "value": 112, "step": 1 },
+        "key": { "options": ["E", "Am", "Em", "G"], "value": "Am" },
+        "robotic_precision": { "min": 0.0, "max": 1.0, "value": 0.95 }
+    },
+    "sound_design": {
+        "sequence": { "drift": 0.0, "filter_cutoff": 2000 },
+        "moog_bass": { "detune_cents": 2, "filter_cutoff": 600 },
+        "drums": { "style": "motorik_driving", "tempo": 112 }
+    }
+}

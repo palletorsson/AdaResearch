@@ -1,13 +1,58 @@
 {
     "_metadata": {
         "sound_type": "ambient_works_song",
-        "display_name": "Ambient Works Song",
-        "description": "Aphex Twin 'Selected Ambient Works 85-92' style. Warm analogue pads, lo-fi breakbeats, tape drift, acid bass. Slow tempo (90 BPM), emotive progressions.",
+        "display_name": "Ambient Works",
+        "description": "Aphex Twin 'Selected Ambient Works 85-92' style. Warm analogue pads, lo-fi breakbeats, tape drift, acid bass. Dreamy, melancholic, intimate.",
         "category": "songs",
         "tags": ["ambient", "aphex_twin", "lo-fi", "breakbeat", "acid", "full_song", "interactive"],
-        "is_interactive_song": true
+        "is_interactive_song": true,
+        "reference_artists": ["Aphex Twin", "Boards of Canada", "Autechre (early)"],
+        "reference_tracks": ["Xtal", "Pulsewidth", "Ageispolis"]
+    },
+    "identity": {
+        "emotion": "nostalgic_warmth",
+        "era": "late_80s_bedroom",
+        "character": ["tape_degraded", "intimate", "haunted", "dreamy"]
     },
     "parameters": {
-        "duration": { "min": 30.0, "max": 300.0, "value": 120.0, "step": 10.0, "description": "Approximate song length" }
+        "duration": { "min": 60.0, "max": 480.0, "value": 180.0, "step": 30.0, "description": "Song duration in seconds" },
+        "bpm": { "min": 85, "max": 100, "value": 92, "step": 1, "description": "Tempo (slow, contemplative)" },
+        "key": { "options": ["Am", "Em", "Dm", "Gm"], "value": "Am", "description": "Minor keys for melancholy" },
+        "lo_fi_amount": { "min": 0.0, "max": 1.0, "value": 0.6, "step": 0.1, "description": "Tape saturation and degradation" }
+    },
+    "sound_design": {
+        "pads": {
+            "oscillators": 3,
+            "waveform": "sawtooth",
+            "detune_cents": { "min": -15, "max": 15 },
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": { "min": 800, "max": 1500 },
+            "filter_lfo_rate_hz": { "min": 0.05, "max": 0.2 },
+            "character": "warm_wooly_unstable"
+        },
+        "drums": {
+            "style": "sampled_breakbeat",
+            "bit_depth": { "min": 8, "max": 12, "value": 10 },
+            "shuffle": 0.15,
+            "processing": ["bitcrush", "tape_saturation", "high_shelf_cut"]
+        },
+        "bass": {
+            "style": "acid_303",
+            "pattern": "8th_notes_with_slides",
+            "filter_resonance": { "min": 0.4, "max": 0.6 },
+            "character": "squelchy_warm"
+        }
+    },
+    "chord_progressions": [
+        { "name": "classic_minor_descent", "chords": ["Am", "G", "F", "E"] },
+        { "name": "hopeful_melancholy", "chords": ["Em", "C", "G", "D"] },
+        { "name": "circular_hypnotic", "chords": ["Dm", "Am", "Em", "Am"] },
+        { "name": "natural_minor", "chords": ["i", "VI", "III", "VII"] }
+    ],
+    "arrangement": {
+        "structure": "evolving",
+        "has_strict_sections": false,
+        "development": "gradual_layering",
+        "transitions": "filter_sweeps"
     }
 }

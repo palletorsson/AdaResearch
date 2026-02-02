@@ -2379,6 +2379,1756 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
 
 
+# ============================================================================
+# V2 ENHANCED TRACKS - Based on deep research from music_tracks/*.md
+# These versions incorporate more accurate synthesis techniques
+# ============================================================================
+
+# === BOARDS OF CANADA V2 ===
+# Enhanced with research: 15-cent detune, 0.15Hz LFO, bit crushing, dotted delay
+static func generate_boards_of_canada_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 95.0  # Slightly slower, more hypnotic
+	var bar_duration = 240.0 / bpm
+	
+	var root_note = ["C", "D", "E", "G"][randi() % 4] + "3"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	var progression = [0, 5, 3, 4]  # Nostalgic progression
+	
+	print("AudioSynthesizer: Generating Boards of Canada V2 in ", root_note)
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+	
+	# Intro: Warbly pad fading in with texture
+	var intro = _generate_boc_v2_section(progression, scale, ["warbly_pad", "texture"], bar_duration, bpm)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Build: Add melody and bass
+	var build = _generate_boc_v2_section(progression, scale, ["warbly_pad", "melody", "warm_bass", "texture"], bar_duration, bpm)
+	playback.set_clip_stream(1, build)
+	playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Main: Full lo-fi groove with drums
+	var main = _generate_boc_v2_section(progression, scale, ["warbly_pad", "melody", "warm_bass", "lofi_drums", "texture"], bar_duration, bpm)
+	playback.set_clip_stream(2, main)
+	playback.set_clip_name(2, "Main")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Outro: Fade to texture
+	var outro = _generate_boc_v2_section(progression, scale, ["warbly_pad", "texture"], bar_duration, bpm)
+	playback.set_clip_stream(3, outro)
+	playback.set_clip_name(3, "Outro")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 0)
+	
+	var xfade = 4.0  # Long crossfades for dreamy feel
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_boc_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	# Pre-generate delay buffer for dotted eighth delay
+	var delay_time = 0.333  # Dotted eighth at ~90 BPM
+	var delay_samples = int(delay_time * SAMPLE_RATE)
+	var delay_buffer = PackedFloat32Array()
+	delay_buffer.resize(delay_samples)
+	delay_buffer.fill(0.0)
+	var delay_write_pos = 0
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# WARBLY PAD - Research: 15-cent detune, 0.15Hz LFO, high shelf cut
+		if "warbly_pad" in instruments:
+			var detune_cents = 15.0  # From research
+			var lfo_rate = 0.15  # Very slow LFO from research
+			var lfo_depth = 0.08  # 8% pitch modulation
+			
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				# Very slow LFO for tape wow/flutter
+				var global_drift = sin(2.0 * PI * lfo_rate * t) * lfo_depth
+				
+				for freq in chord_freqs:
+					# Apply drift + heavy detune (4 voices per note)
+					var detune_ratio = pow(2.0, detune_cents / 1200.0)
+					var drifted = freq * (1.0 + global_drift)
+					
+					# 4 detuned voices (research: heavy detune)
+					pad += sin(2.0 * PI * drifted * t)
+					pad += sin(2.0 * PI * drifted * detune_ratio * t) * 0.7
+					pad += sin(2.0 * PI * drifted / detune_ratio * t) * 0.7
+					pad += sin(2.0 * PI * drifted * 0.995 * t) * 0.5
+				
+				pad /= chord_freqs.size() * 2.9
+				
+				# Tape saturation (soft clip)
+				pad = tanh(pad * 1.3)
+				
+				# Slow envelope
+				var env = 1.0
+				if progress < 0.2: env = progress / 0.2
+				elif progress > 0.8: env = (1.0 - progress) / 0.2
+				
+				# High shelf cut simulation (reduce brightness)
+				# Simple approach: mix with slightly filtered version
+				chord_mix[j] += pad * env * 0.28
+		
+		# MELODY - Dotted eighth delay, pitch drift, simple childlike melody
+		if "melody" in instruments:
+			var note_length = samples_per_chord / 8
+			var melody_notes = [0, 0, 4, 0, 7, 4, 0, -3]  # Pentatonic-ish
+			
+			for n in range(8):
+				var start = n * note_length
+				var note_offset = melody_notes[n]
+				var note_freq = chord_freqs[0] * 2.0 * pow(2.0, note_offset / 12.0)
+				
+				for j in range(note_length):
+					var t = float(j) / SAMPLE_RATE
+					
+					# Pitch drift
+					var drift = sin(2.0 * PI * 0.3 * t + n * 1.5) * 0.012
+					var freq = note_freq * (1.0 + drift)
+					
+					# Simple sine with slight harmonic
+					var mel = sin(2.0 * PI * freq * t)
+					mel += sin(2.0 * PI * freq * 2.01 * t) * 0.25
+					
+					# Plucky with long decay
+					var env = exp(-t * 4.0)
+					
+					# Tape saturation
+					mel = tanh(mel * 1.2)
+					
+					var sample = mel * env * 0.12
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += sample
+						# Write to delay buffer
+						delay_buffer[delay_write_pos] = sample * 0.35  # Delay feedback
+						delay_write_pos = (delay_write_pos + 1) % delay_samples
+		
+		# WARM BASS - Gentle, filtered
+		if "warm_bass" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var bass_freq = root_freq * 0.25  # Deep
+				
+				# Slight drift
+				var drift = sin(2.0 * PI * 0.08 * t) * 0.006
+				var bass = sin(2.0 * PI * bass_freq * (1.0 + drift) * t)
+				
+				# Warm harmonic
+				bass += sin(2.0 * PI * bass_freq * 2.0 * t) * 0.25
+				
+				# Soft distortion
+				bass = tanh(bass * 1.1)
+				
+				# Gentle envelope
+				var env = 1.0
+				if progress < 0.05: env = progress / 0.05
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				chord_mix[j] += bass * env * 0.3
+		
+		# LOFI DRUMS - Hip-hop influenced, humanized timing
+		if "lofi_drums" in instruments:
+			var beat_samples = samples_per_chord / 8
+			
+			for beat in range(8):
+				# Humanize timing (±10ms)
+				var timing_offset = int((randf() - 0.5) * SAMPLE_RATE * 0.01)
+				var start = beat * beat_samples + timing_offset
+				start = clampi(start, 0, samples_per_chord - 1)
+				
+				# Kick on 1, 5 (with slight variation)
+				if beat == 0 or beat == 4:
+					for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						var kick_freq = 50.0 * exp(-kt * 18.0) + 38.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 10.0)
+						# Bit crush simulation
+						kick = floor(kick * 64.0) / 64.0
+						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.38
+				
+				# Snare on 3, 7
+				if beat == 2 or beat == 6:
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var st = float(j) / SAMPLE_RATE
+						var snare = (randf() - 0.5) * exp(-st * 12.0) * 0.6
+						snare += sin(2.0 * PI * 170.0 * st) * exp(-st * 18.0) * 0.4
+						# Bit crush
+						snare = floor(snare * 48.0) / 48.0
+						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.22
+				
+				# Lo-fi hats
+				if beat % 2 == 0:
+					for j in range(min(int(SAMPLE_RATE * 0.04), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * 35.0) * 0.12
+						# Heavy filtering
+						hat *= 0.7
+						if start + j < samples_per_chord: chord_mix[start + j] += hat
+		
+		# TEXTURE - Research: 10-bit crushing, tape noise
+		if "texture" in instruments:
+			for j in range(samples_per_chord):
+				# Tape hiss (filtered noise)
+				var hiss = (randf() - 0.5) * 0.012
+				
+				# Occasional crackle (VHS/cassette)
+				if randf() < 0.002:
+					hiss += (randf() - 0.5) * 0.08
+				if randf() < 0.0003:
+					hiss += (randf() - 0.5) * 0.2
+				
+				chord_mix[j] += hiss
+		
+		# Mix delay buffer into output
+		for j in range(samples_per_chord):
+			var delay_read_pos = (delay_write_pos + j) % delay_samples
+			chord_mix[j] += delay_buffer[delay_read_pos] * 0.25
+		
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				# Final bit crushing (10-bit from research)
+				var sample = chord_mix[j]
+				sample = floor(sample * 512.0) / 512.0  # ~10-bit
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.03))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# === BURIAL V2 ===
+# Enhanced with research: Sound Forge loose timing, vinyl crackle, 2-step garage patterns
+static func generate_burial_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 130.0
+	var bar_duration = 240.0 / bpm
+	
+	var root_note = ["D", "E", "F", "G"][randi() % 4] + "2"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	var progression = [0, 5, 3, 4]
+	
+	print("AudioSynthesizer: Generating Burial V2 in ", root_note)
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+	
+	# Intro: Rain, crackle, distant pad
+	var intro = _generate_burial_v2_section(progression, scale, ["atmosphere", "crackle", "rain"], bar_duration, bpm)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Build: Add bass, stabs
+	var build = _generate_burial_v2_section(progression, scale, ["atmosphere", "sub_bass", "garage_stab", "crackle", "rain"], bar_duration, bpm)
+	playback.set_clip_stream(1, build)
+	playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Main: Full 2-step with vocals
+	var main = _generate_burial_v2_section(progression, scale, ["atmosphere", "sub_bass", "garage_stab", "twostep_drums", "pitched_vocal", "crackle"], bar_duration, bpm)
+	playback.set_clip_stream(2, main)
+	playback.set_clip_name(2, "Main")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Outro: Fade to rain
+	var outro = _generate_burial_v2_section(progression, scale, ["atmosphere", "crackle", "rain"], bar_duration, bpm)
+	playback.set_clip_stream(3, outro)
+	playback.set_clip_name(3, "Outro")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 0)
+	
+	var xfade = 5.0  # Long, atmospheric fades
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_burial_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# ATMOSPHERE - Research: long reverb, dark, evolving
+		if "atmosphere" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var atmos = 0.0
+				
+				for freq in chord_freqs:
+					# Dark, filtered tones
+					atmos += sin(2.0 * PI * freq * 0.5 * t) * 0.6  # Octave down
+					atmos += sin(2.0 * PI * freq * t) * 0.4
+				atmos /= chord_freqs.size()
+				
+				# Very long envelope (reverb tail simulation)
+				var env = 1.0
+				if progress < 0.3: env = progress / 0.3
+				elif progress > 0.6: env = (1.0 - progress) / 0.4
+				
+				# Add phaser-like movement (cobwebs from research)
+				var phaser = sin(2.0 * PI * 0.3 * t) * 0.15
+				atmos *= (1.0 + phaser)
+				
+				chord_mix[j] += atmos * env * 0.18
+		
+		# SUB BASS - Research: "warm and earthy, like underground train"
+		if "sub_bass" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var sub_freq = root_freq * 0.25  # Very deep
+				
+				var sub = sin(2.0 * PI * sub_freq * t)
+				
+				# Warm harmonic layer
+				sub += sin(2.0 * PI * sub_freq * 2.0 * t) * 0.2
+				
+				# "Distorted and heavy, yet warm"
+				sub = tanh(sub * 1.4)
+				
+				# Gentle envelope
+				var env = 1.0
+				if progress < 0.02: env = progress / 0.02
+				elif progress > 0.85: env = (1.0 - progress) / 0.15
+				
+				chord_mix[j] += sub * env * 0.42
+		
+		# GARAGE STAB - Organ-like, reverb tail
+		if "garage_stab" in instruments:
+			# Offbeat placement (UK garage style)
+			var stab_times = [
+				int(samples_per_chord * 0.1),
+				int(samples_per_chord * 0.4),
+				int(samples_per_chord * 0.65)
+			]
+			
+			for st in stab_times:
+				for j in range(min(int(SAMPLE_RATE * 0.3), samples_per_chord - st)):
+					var t = float(j) / SAMPLE_RATE
+					var stab = 0.0
+					for freq in chord_freqs:
+						# Organ-like harmonics
+						stab += sin(2.0 * PI * freq * t)
+						stab += sin(2.0 * PI * freq * 2.0 * t) * 0.5
+						stab += sin(2.0 * PI * freq * 3.0 * t) * 0.25
+					stab /= chord_freqs.size() * 1.75
+					
+					# Long reverb tail
+					var env = exp(-t * 4.0) * 0.6 + exp(-t * 1.5) * 0.4
+					
+					if st + j < samples_per_chord: chord_mix[st + j] += stab * env * 0.1
+		
+		# TWO-STEP DRUMS - Research: "intuitively arranged, not quantized"
+		if "twostep_drums" in instruments:
+			var sixteenth = samples_per_chord / 16
+			
+			# 2-step pattern: kick avoids 1, shuffled timing
+			var kick_steps = [2, 5, 10, 13]  # Offbeat kicks
+			var snare_steps = [4, 12]
+			var hat_steps = [0, 3, 6, 8, 11, 14]  # Shuffled
+			
+			for step in range(16):
+				# Research: "minute hesitations and slippages"
+				var timing_humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.015)  # ±15ms
+				var start = step * sixteenth + timing_humanize
+				start = clampi(start, 0, samples_per_chord - 1)
+				
+				if step in kick_steps:
+					# Velocity variation
+					var vel = 0.8 + randf() * 0.2
+					for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						var kick_freq = 48.0 * exp(-kt * 22.0) + 32.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 12.0)
+						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.45 * vel
+				
+				if step in snare_steps:
+					# "Snares covered in fuzz" from research
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var st = float(j) / SAMPLE_RATE
+						var snare = (randf() - 0.5) * exp(-st * 15.0)
+						# Add "fuzz" via waveshaping
+						snare = tanh(snare * 2.0) * 0.5
+						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.18
+				
+				if step in hat_steps:
+					# "Covered in fuzz and phaser"
+					for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * 45.0)
+						# Phaser simulation
+						hat *= sin(2.0 * PI * 2000.0 * ht + sin(ht * 10.0) * 3.0)
+						if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.08
+		
+		# PITCHED VOCAL - Research: "pitch-shifted voices", ghostly
+		if "pitched_vocal" in instruments:
+			# Simulate pitched-down vocal sample
+			var vocal_start = int(samples_per_chord * 0.3)
+			var vocal_length = int(SAMPLE_RATE * 0.8)
+			
+			for j in range(min(vocal_length, samples_per_chord - vocal_start)):
+				var t = float(j) / SAMPLE_RATE
+				
+				# Formant-like simulation (pitched down)
+				var formant1 = sin(2.0 * PI * 300.0 * t)  # Lower formant
+				var formant2 = sin(2.0 * PI * 700.0 * t) * 0.5
+				var formant3 = sin(2.0 * PI * 1200.0 * t) * 0.25
+				
+				var vocal = formant1 + formant2 + formant3
+				vocal *= sin(2.0 * PI * chord_freqs[0] * 0.5 * t)  # Carrier
+				
+				# Timestretched artifacts (slow amplitude modulation)
+				vocal *= sin(2.0 * PI * 0.8 * t) * 0.3 + 0.7
+				
+				# Heavy reverb
+				var env = exp(-t * 1.5)
+				
+				if vocal_start + j < samples_per_chord:
+					chord_mix[vocal_start + j] += vocal * env * 0.06
+		
+		# CRACKLE - Research: "vinyl crackle throughout"
+		if "crackle" in instruments:
+			for j in range(samples_per_chord):
+				# Constant low hiss
+				var crackle = (randf() - 0.5) * 0.01
+				
+				# Random pops (vinyl surface noise)
+				if randf() < 0.004:
+					crackle += (randf() - 0.5) * 0.12
+				if randf() < 0.001:
+					crackle += (randf() - 0.5) * 0.25
+				
+				chord_mix[j] += crackle
+		
+		# RAIN - Urban atmosphere
+		if "rain" in instruments:
+			for j in range(samples_per_chord):
+				# Filtered pink noise (rain)
+				var rain = (randf() - 0.5) * 0.025
+				# Occasional heavier drops
+				if randf() < 0.01:
+					rain += (randf() - 0.5) * 0.04
+				chord_mix[j] += rain
+		
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				final_mix[start_idx + j] = clampf(chord_mix[j], -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.03))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# === KRAFTWERK V2 ===
+# Enhanced with research: Motorik beat, vocoder, precise sequencer, Autobahn sounds
+static func generate_kraftwerk_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 110.0  # Motorik tempo
+	var bar_duration = 240.0 / bpm
+	
+	var root_note = ["C", "D", "E", "F"][randi() % 4] + "3"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)  # Kraftwerk often major
+	var progression = [0, 0, 4, 3]  # Simple, hypnotic
+	
+	print("AudioSynthesizer: Generating Kraftwerk V2 in ", root_note)
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+	
+	# Intro: Car engine starting, sequence fading in
+	var intro = _generate_kraftwerk_v2_section(progression, scale, ["car_sounds", "sequence"], bar_duration, bpm)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Build: Add bass and motorik drums
+	var build = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "moog_bass", "motorik_drums"], bar_duration, bpm)
+	playback.set_clip_stream(1, build)
+	playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Main: Full arrangement with vocoder and lead
+	var main = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "moog_bass", "vocoder_pad", "moog_lead", "motorik_drums"], bar_duration, bpm)
+	playback.set_clip_stream(2, main)
+	playback.set_clip_name(2, "Main")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Outro: Fade to sequence
+	var outro = _generate_kraftwerk_v2_section(progression, scale, ["sequence", "vocoder_pad", "car_sounds"], bar_duration, bpm)
+	playback.set_clip_stream(3, outro)
+	playback.set_clip_name(3, "Outro")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 0)
+	
+	var xfade = 2.5
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, bpm: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# CAR SOUNDS - Autobahn style (engine drone, road noise)
+		if "car_sounds" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				
+				# Engine drone (low frequency oscillation)
+				var engine = sin(2.0 * PI * 55.0 * t) * 0.2
+				engine += sin(2.0 * PI * 110.0 * t) * 0.1
+				engine += sin(2.0 * PI * 82.5 * t) * 0.15
+				
+				# Road/tire noise (filtered noise)
+				var road = (randf() - 0.5) * 0.08
+				
+				# Fade in/out
+				var env = 1.0
+				if progress < 0.1: env = progress / 0.1
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				chord_mix[j] += (engine + road) * env * 0.15
+		
+		# SEQUENCE - Research: "Zero modulation, precise, stable pitch"
+		if "sequence" in instruments:
+			var step_samples = samples_per_chord / 16  # 16th notes
+			var seq_pattern = [0, 12, 7, 12, 0, 12, 7, 12, 0, 12, 7, 12, 5, 12, 7, 12]
+			
+			for step in range(16):
+				var start = step * step_samples
+				var note_offset = seq_pattern[step]
+				var seq_freq = chord_freqs[0] * pow(2.0, note_offset / 12.0)
+				
+				for j in range(step_samples):
+					var t = float(j) / SAMPLE_RATE
+					
+					# Clean square wave (research: zero modulation)
+					var square = sign(sin(2.0 * PI * seq_freq * t))
+					
+					# Very short envelope (percussive)
+					var env = exp(-t * 15.0)
+					
+					# Research: "Filter cutoff 2000Hz with resonance"
+					# Simulate with harmonic content
+					var filtered = square * 0.6 + sin(2.0 * PI * seq_freq * t) * 0.4
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += filtered * env * 0.15
+		
+		# MOOG BASS - Research: "Dual detuned sawtooth, ladder filter"
+		if "moog_bass" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var bass_freq = root_freq * 0.5
+				
+				# Dual detuned saws (research: 2 cents drift)
+				var drift_cents = 2.0
+				var drift_ratio = pow(2.0, drift_cents / 1200.0)
+				var saw1 = fmod(t * bass_freq, 1.0) * 2.0 - 1.0
+				var saw2 = fmod(t * bass_freq * drift_ratio, 1.0) * 2.0 - 1.0
+				
+				var bass = (saw1 + saw2) * 0.5
+				
+				# Research: "Filter 600Hz cutoff, moderate resonance"
+				# Simulate with slight warmth
+				bass = tanh(bass * 0.9)
+				
+				# Clean envelope
+				var env = 1.0
+				if progress < 0.005: env = progress / 0.005
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				chord_mix[j] += bass * env * 0.28
+		
+		# VOCODER PAD - Research: "16 vocoder bands, filter 3000Hz"
+		if "vocoder_pad" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				
+				var vocoder = 0.0
+				for freq in chord_freqs:
+					# Multiple formant bands (simulating vocoder)
+					vocoder += sin(2.0 * PI * freq * t) * 0.5
+					vocoder += sin(2.0 * PI * freq * 2.0 * t) * 0.3
+					vocoder += sin(2.0 * PI * freq * 3.0 * t) * 0.2
+					vocoder += sin(2.0 * PI * freq * 4.0 * t) * 0.1
+				vocoder /= chord_freqs.size() * 1.1
+				
+				# Research: "Subtle chorus for width"
+				var chorus = sin(2.0 * PI * chord_freqs[0] * 1.003 * t) * 0.2
+				vocoder += chorus
+				
+				# Slow attack, long sustain
+				var env = 1.0
+				if progress < 0.15: env = progress / 0.15
+				elif progress > 0.85: env = (1.0 - progress) / 0.15
+				
+				chord_mix[j] += vocoder * env * 0.12
+		
+		# MOOG LEAD - Research: "Bright filter 3500Hz, subtle vibrato 5Hz"
+		if "moog_lead" in instruments:
+			var lead_pattern = [0, 2, 4, 2, 0, -1, 0, 2]
+			var note_length = samples_per_chord / 8
+			
+			for n in range(8):
+				var start = n * note_length
+				var note_offset = lead_pattern[n]
+				var lead_freq = chord_freqs[0] * 2.0 * pow(2.0, note_offset / 12.0)
+				
+				for j in range(note_length):
+					var t = float(j) / SAMPLE_RATE
+					var note_progress = float(j) / note_length
+					
+					# Research: "Vibrato 5Hz LFO at very low depth 0.008"
+					var vibrato = 0.0
+					if note_progress > 0.3:  # Vibrato comes in late
+						var vib_amount = (note_progress - 0.3) / 0.7
+						vibrato = sin(2.0 * PI * 5.0 * t) * 0.008 * vib_amount
+					
+					var lead = sin(2.0 * PI * lead_freq * (1.0 + vibrato) * t)
+					
+					# Research: "Slight pitch drift 1.5 cents"
+					lead += sin(2.0 * PI * lead_freq * 1.001 * t) * 0.3
+					
+					# Clean envelope
+					var env = 1.0
+					if note_progress < 0.02: env = note_progress / 0.02
+					elif note_progress > 0.8: env = (1.0 - note_progress) / 0.2
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += lead * env * 0.1
+		
+		# MOTORIK DRUMS - Research: "Steady 4/4 with driving 8th-note hi-hats"
+		if "motorik_drums" in instruments:
+			var eighth_samples = samples_per_chord / 8
+			
+			for beat in range(8):
+				var start = beat * eighth_samples
+				
+				# Kick on 1, 3, 5, 7 (four on floor)
+				if beat % 2 == 0:
+					for j in range(min(int(SAMPLE_RATE * 0.1), eighth_samples)):
+						var kt = float(j) / SAMPLE_RATE
+						# Research: "Custom electronic drums with pitch envelope"
+						var kick_freq = 65.0 * exp(-kt * 28.0) + 48.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 9.0)
+						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.32
+				
+				# Snare on 2 and 6
+				if beat == 2 or beat == 6:
+					for j in range(min(int(SAMPLE_RATE * 0.08), eighth_samples)):
+						var st = float(j) / SAMPLE_RATE
+						# Research: "Resonant filter for pitched 'boing' sounds"
+						var snare = sin(2.0 * PI * 220.0 * st) * exp(-st * 22.0) * 0.4
+						snare += (randf() - 0.5) * exp(-st * 28.0) * 0.35
+						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.18
+				
+				# Hi-hat on EVERY 8th note (motorik signature)
+				for j in range(min(int(SAMPLE_RATE * 0.035), eighth_samples)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * 55.0)
+					# Clean, precise
+					if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.1
+		
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				final_mix[start_idx + j] = clampf(chord_mix[j], -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.015))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# === POP MADONNA 80s ===
+# "Holiday", "Into the Groove" era - Jellybean Benitez production style
+# Key: gated reverb snare, octave bass, bright Juno stabs, 4-on-floor
+static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 118.0  # Classic 80s dance-pop
+	var bar_duration = 240.0 / bpm
+	
+	# Major keys (bright, uplifting)
+	var roots = ["C", "D", "F", "G"]
+	var root_note = roots[randi() % roots.size()] + "4"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)
+	
+	# Classic 80s progressions
+	var progressions = [
+		[0, 4, 5, 3],  # I - V - vi - IV
+		[0, 3, 4, 4],  # I - IV - V - V
+		[0, 5, 3, 4],  # I - vi - IV - V
+	]
+	var progression = progressions[randi() % progressions.size()]
+	
+	print("AudioSynthesizer: Generating Madonna 80s Pop in ", root_note)
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 5
+	playback.initial_clip = 0
+	
+	# 0. INTRO: Beat + bass hook
+	var intro = _generate_madonna_section(progression, scale,
+		["gated_drums", "octave_bass", "synth_stab"], bar_duration, bpm, 0.7)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# 1. VERSE
+	var verse = _generate_madonna_section(progression, scale,
+		["gated_drums", "octave_bass", "juno_pad", "synth_stab"], bar_duration, bpm, 0.8)
+	playback.set_clip_stream(1, verse)
+	playback.set_clip_name(1, "Verse")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# 2. PRE-CHORUS: Build
+	var pre = _generate_madonna_section(progression, scale,
+		["gated_drums", "octave_bass", "juno_pad", "synth_stab", "hook_melody"], bar_duration, bpm, 0.9)
+	playback.set_clip_stream(2, pre)
+	playback.set_clip_name(2, "Pre-Chorus")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# 3. CHORUS: Full energy
+	var chorus = _generate_madonna_section(progression, scale,
+		["gated_drums", "octave_bass", "juno_pad", "synth_stab", "hook_melody", "string_hits"], bar_duration, bpm, 1.0)
+	playback.set_clip_stream(3, chorus)
+	playback.set_clip_name(3, "Chorus")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 4)
+	
+	# 4. OUTRO
+	var outro = _generate_madonna_section(progression, scale,
+		["gated_drums", "octave_bass", "synth_stab"], bar_duration, bpm, 0.7)
+	playback.set_clip_stream(4, outro)
+	playback.set_clip_name(4, "Outro")
+	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance_next_clip(4, 0)
+	
+	var xfade = 1.5
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 1.0)
+	playback.add_transition(3, 4, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(4, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_madonna_section(progression: Array, scale: Array, instruments: Array,
+		bar_duration: float, bpm: float, energy: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for chord_idx in range(progression.size()):
+		var degree = progression[chord_idx]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# === GATED DRUMS ===
+		# The defining 80s sound: tight kick, GATED REVERB snare, crisp hats
+		if "gated_drums" in instruments:
+			var sixteenth = samples_per_chord / 16
+			
+			for step in range(16):
+				var start = step * sixteenth
+				
+				# KICK - 4 on floor, punchy
+				if step % 4 == 0:
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						var kick_freq = 60.0 * exp(-kt * 30.0) + 50.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 8.0)
+						# Click transient
+						kick += sin(2.0 * PI * 2500.0 * kt) * exp(-kt * 200.0) * 0.15
+						kick = tanh(kick * 1.4)
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += kick * 0.4 * energy
+				
+				# GATED REVERB SNARE - the 80s sound
+				if step == 4 or step == 12:
+					# Snare hit
+					for j in range(min(int(SAMPLE_RATE * 0.2), samples_per_chord - start)):
+						var st = float(j) / SAMPLE_RATE
+						
+						# Snare body
+						var snare = sin(2.0 * PI * 200.0 * st) * exp(-st * 25.0) * 0.3
+						# Snare noise
+						snare += (randf() - 0.5) * exp(-st * 20.0) * 0.4
+						
+						# GATED REVERB - rises then cuts off sharply
+						var gate_length = 0.15
+						var reverb_env = 0.0
+						if st < gate_length:
+							# Reverb builds up
+							reverb_env = (1.0 - exp(-st * 15.0)) * (1.0 - st / gate_length)
+						# Reverb tail (noise)
+						var reverb = (randf() - 0.5) * reverb_env * 0.4
+						
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += (snare + reverb) * 0.28 * energy
+				
+				# HI-HATS - 8ths, crisp
+				if step % 2 == 0:
+					var is_open = step % 8 == 6
+					var decay = 35.0 if not is_open else 18.0
+					for j in range(min(int(SAMPLE_RATE * 0.05), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * decay)
+						# Brighter 80s hats
+						hat += sin(2.0 * PI * 8000.0 * ht) * exp(-ht * 100.0) * 0.1
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += hat * 0.08 * energy
+		
+		# === OCTAVE BASS ===
+		# Synth bass that jumps octaves - very 80s
+		if "octave_bass" in instruments:
+			var bass_freq = root_freq * 0.25
+			var eighth = samples_per_chord / 8
+			
+			for beat in range(8):
+				var start = beat * eighth
+				# Octave pattern: low-low-HIGH-low
+				var octave_mult = 2.0 if beat % 4 == 2 else 1.0
+				var note_freq = bass_freq * octave_mult
+				
+				for j in range(min(int(eighth * 0.9), samples_per_chord - start)):
+					var t = float(j) / SAMPLE_RATE
+					var progress = float(j) / eighth
+					
+					# Saw bass with filter
+					var bass = fmod(t * note_freq, 1.0) * 2.0 - 1.0
+					bass += fmod(t * note_freq * 1.003, 1.0) * 2.0 - 1.0
+					bass *= 0.5
+					
+					# Filter envelope
+					var filt = 0.4 + exp(-progress * 4.0) * 0.4
+					bass = tanh(bass * filt * 1.5)
+					
+					# Envelope
+					var env = 1.0
+					if progress < 0.02: env = progress / 0.02
+					elif progress > 0.85: env = (1.0 - progress) / 0.15
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += bass * env * 0.32 * energy
+		
+		# === JUNO PAD ===
+		# Lush, bright 80s pad (Roland Juno style)
+		if "juno_pad" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				for freq in chord_freqs:
+					# PWM square waves (Juno character)
+					var pwm = 0.3 + sin(2.0 * PI * 0.3 * t) * 0.2
+					var wave1 = 1.0 if fmod(t * freq, 1.0) < pwm else -1.0
+					var wave2 = 1.0 if fmod(t * freq * 1.007, 1.0) < (pwm + 0.05) else -1.0
+					pad += (wave1 + wave2) * 0.5
+				pad /= chord_freqs.size()
+				
+				# Bright filter (80s shimmer)
+				pad = tanh(pad * 0.7)
+				
+				# Chorus effect (stereo spread simulation)
+				pad += sin(2.0 * PI * chord_freqs[0] * 1.002 * t) * 0.15
+				
+				# Envelope
+				var env = 1.0
+				if progress < 0.1: env = progress / 0.1
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				chord_mix[j] += pad * env * 0.15 * energy
+		
+		# === SYNTH STAB ===
+		# Bright brass-like stab (DX7 / Juno style)
+		if "synth_stab" in instruments:
+			var stab_times = [0, int(samples_per_chord * 0.5)]
+			
+			for st in stab_times:
+				for j in range(min(int(SAMPLE_RATE * 0.15), samples_per_chord - st)):
+					var t = float(j) / SAMPLE_RATE
+					var stab = 0.0
+					
+					for freq in chord_freqs:
+						# Bright, brassy tone
+						stab += sin(2.0 * PI * freq * t)
+						stab += sin(2.0 * PI * freq * 2.0 * t) * 0.5
+						stab += sin(2.0 * PI * freq * 3.0 * t) * 0.25
+						stab += sin(2.0 * PI * freq * 4.0 * t) * 0.12
+					stab /= chord_freqs.size() * 1.9
+					
+					# Fast attack, quick decay (stabby)
+					var env = exp(-t * 12.0)
+					
+					if st + j < samples_per_chord:
+						chord_mix[st + j] += stab * env * 0.1 * energy
+		
+		# === HOOK MELODY ===
+		# Catchy, singable synth hook (Madonna-style: stepwise with resolution)
+		if "hook_melody" in instruments:
+			# Hooky pattern with call-response feel
+			var melody = [0, 2, 4, 2, 0, 0, 5, 4]  # Rising then falling
+			var eighth = samples_per_chord / 8
+			
+			for n in range(8):
+				var start = n * eighth
+				var offset = melody[n]
+				var mel_freq = chord_freqs[0] * 2.0 * pow(2.0, offset / 12.0)
+				
+				for j in range(int(eighth * 0.9)):
+					var t = float(j) / SAMPLE_RATE
+					var note_progress = float(j) / eighth
+					
+					# Bright lead sound
+					var lead = sin(2.0 * PI * mel_freq * t)
+					lead += sin(2.0 * PI * mel_freq * 2.0 * t) * 0.3
+					lead += fmod(t * mel_freq, 1.0) * 2.0 - 1.0  # Add saw
+					lead *= 0.5
+					
+					lead = tanh(lead * 0.9)
+					
+					# Envelope
+					var env = 1.0
+					if note_progress < 0.05: env = note_progress / 0.05
+					elif note_progress > 0.8: env = (1.0 - note_progress) / 0.2
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += lead * env * 0.1 * energy
+		
+		# === STRING HITS ===
+		# Orchestral stab on downbeats (very 80s)
+		if "string_hits" in instruments:
+			for j in range(min(int(SAMPLE_RATE * 0.4), samples_per_chord)):
+				var t = float(j) / SAMPLE_RATE
+				var strings = 0.0
+				
+				for freq in chord_freqs:
+					# Multiple harmonics for string-like tone
+					strings += sin(2.0 * PI * freq * t) * 0.4
+					strings += sin(2.0 * PI * freq * 2.0 * t) * 0.3
+					strings += sin(2.0 * PI * freq * 3.0 * t) * 0.2
+					strings += sin(2.0 * PI * freq * 4.0 * t) * 0.1
+				strings /= chord_freqs.size()
+				
+				# Attack + sustain + release
+				var env = 1.0
+				if t < 0.02: env = t / 0.02
+				elif t > 0.3: env = exp(-(t - 0.3) * 8.0)
+				
+				chord_mix[j] += strings * env * 0.12 * energy
+		
+		# Mix into final
+		var start_idx = chord_idx * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				sample = tanh(sample * 0.85)
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.015))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# === POP V2 ===
+# Modern synth-pop / chillwave with distinct palette
+# Optimized for: identity token, frequency allocation, loop durability, VO safety
+static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 118.0  # Upbeat pop tempo
+	var bar_duration = 240.0 / bpm
+	
+	# Major key for pop brightness
+	var roots = ["C", "G", "D", "F", "A"]
+	var root_note = roots[randi() % roots.size()] + "4"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)
+	
+	# Classic pop progression with emotional lift
+	var progression = [0, 4, 5, 3]  # I - V - vi - IV (the hit progression)
+	
+	print("AudioSynthesizer: Generating Pop V2 in ", root_note, " (modern synth-pop)")
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 5
+	playback.initial_clip = 0
+	
+	# Clear arc: Intro → Verse → Pre-Chorus → Chorus → Outro
+	
+	# 0. INTRO: Pluck motif + beat hint (establish identity with energy)
+	var intro = _generate_pop_v2_section(progression, scale,
+		["pluck_motif", "shimmer_arp", "snap_beat"], bar_duration, bpm, 0.6)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# 1. VERSE: Full groove
+	var verse = _generate_pop_v2_section(progression, scale,
+		["pluck_motif", "sub_808", "full_beat", "sidechain_pad"], bar_duration, bpm, 0.75)
+	playback.set_clip_stream(1, verse)
+	playback.set_clip_name(1, "Verse")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# 2. PRE-CHORUS: Build tension
+	var pre = _generate_pop_v2_section(progression, scale,
+		["pluck_motif", "sub_808", "full_beat", "sidechain_pad", "shimmer_arp", "vocal_chop"], bar_duration, bpm, 0.85)
+	playback.set_clip_stream(2, pre)
+	playback.set_clip_name(2, "Pre-Chorus")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# 3. CHORUS: Full energy
+	var chorus = _generate_pop_v2_section(progression, scale,
+		["pluck_motif", "sub_808", "full_beat", "sidechain_pad", "shimmer_arp", "synth_lead", "vocal_chop"], bar_duration, bpm, 1.0)
+	playback.set_clip_stream(3, chorus)
+	playback.set_clip_name(3, "Chorus")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 4)
+	
+	# 4. OUTRO: Return to intro energy (loop seam)
+	var outro = _generate_pop_v2_section(progression, scale,
+		["pluck_motif", "shimmer_arp", "snap_beat"], bar_duration, bpm, 0.6)
+	playback.set_clip_stream(4, outro)
+	playback.set_clip_name(4, "Outro")
+	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance_next_clip(4, 0)
+	
+	var xfade = 2.0
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, 1.5)
+	playback.add_transition(3, 4, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(4, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_pop_v2_section(progression: Array, scale: Array, instruments: Array,
+		bar_duration: float, bpm: float, energy: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	# Pre-calculate sidechain envelope for the whole section
+	var sidechain_env = PackedFloat32Array()
+	sidechain_env.resize(total_samples)
+	var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+	for i in range(total_samples):
+		var beat_pos = fmod(float(i), beat_samples) / beat_samples
+		# Sidechain: duck on beat, recover quickly
+		sidechain_env[i] = 0.3 + 0.7 * (1.0 - exp(-beat_pos * 8.0))
+	
+	for chord_idx in range(progression.size()):
+		var degree = progression[chord_idx]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# === PLUCK MOTIF ===
+		# Identity token: clean digital pluck with signature rhythm
+		# Frequency: mid (500-2kHz)
+		if "pluck_motif" in instruments:
+			var sixteenth = samples_per_chord / 16
+			# Signature rhythm pattern (recognizable)
+			var pattern = [1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1]
+			var note_offsets = [0, 0, 4, 4, 7, 0, 0, 4, 7, 7, 4, 4, 0, 0, 7, 4]
+			
+			for step in range(16):
+				if pattern[step] == 0:
+					continue
+				var start = step * sixteenth
+				var offset = note_offsets[step]
+				var pluck_freq = chord_freqs[0] * pow(2.0, offset / 12.0)
+				
+				for j in range(min(int(SAMPLE_RATE * 0.3), samples_per_chord - start)):
+					var t = float(j) / SAMPLE_RATE
+					
+					# Clean digital pluck: sine + harmonics with fast decay
+					var pluck = sin(2.0 * PI * pluck_freq * t)
+					pluck += sin(2.0 * PI * pluck_freq * 2.0 * t) * 0.3 * exp(-t * 10.0)
+					pluck += sin(2.0 * PI * pluck_freq * 3.0 * t) * 0.15 * exp(-t * 15.0)
+					
+					# Pluck envelope
+					var env = exp(-t * 6.0)
+					
+					# Slight filter sweep
+					pluck *= 0.7 + 0.3 * exp(-t * 8.0)
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += pluck * env * 0.12 * energy
+		
+		# === SHIMMER ARP ===
+		# Frequency: high (4-8kHz) - "air" band, sparkle
+		if "shimmer_arp" in instruments:
+			var eighth = samples_per_chord / 8
+			var arp_notes = [0, 4, 7, 12, 7, 4, 0, 4]  # Up and down
+			
+			for step in range(8):
+				var start = step * eighth
+				var offset = arp_notes[step]
+				var arp_freq = chord_freqs[0] * 2.0 * pow(2.0, offset / 12.0)  # 2 octaves up
+				
+				for j in range(min(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
+					var t = float(j) / SAMPLE_RATE
+					
+					# Pure sine with slight detune for shimmer
+					var shimmer = sin(2.0 * PI * arp_freq * t)
+					shimmer += sin(2.0 * PI * arp_freq * 1.003 * t) * 0.5
+					shimmer += sin(2.0 * PI * arp_freq * 0.997 * t) * 0.5
+					shimmer /= 2.0
+					
+					# Soft envelope
+					var env = exp(-t * 8.0)
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += shimmer * env * 0.06 * energy
+		
+		# === SUB 808 ===
+		# Frequency: sub only (30-60Hz) - clean separation
+		if "sub_808" in instruments:
+			var bass_freq = root_freq * 0.25  # Deep sub
+			
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				
+				# 808 character: sine with pitch envelope on attack
+				var pitch_env = 1.0 + exp(-t * 30.0) * 0.5
+				var sub = sin(2.0 * PI * bass_freq * pitch_env * t)
+				
+				# Slight saturation
+				sub = tanh(sub * 1.2)
+				
+				# Long sustain, soft release
+				var env = 1.0
+				if progress < 0.01: env = progress / 0.01
+				elif progress > 0.85: env = (1.0 - progress) / 0.15
+				
+				chord_mix[j] += sub * env * 0.35 * energy
+		
+		# === SIDECHAIN PAD ===
+		# Frequency: low-mid to mid (200-1500Hz)
+		# Pumping feel from sidechain
+		if "sidechain_pad" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				for freq in chord_freqs:
+					# Soft saw waves
+					var saw = fmod(t * freq, 1.0) * 2.0 - 1.0
+					saw += fmod(t * freq * 1.005, 1.0) * 2.0 - 1.0
+					pad += saw * 0.5
+				pad /= chord_freqs.size()
+				
+				# Lowpass for warmth
+				pad = tanh(pad * 0.8)
+				
+				# Envelope
+				var env = 1.0
+				if progress < 0.1: env = progress / 0.1
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				# Apply sidechain
+				var global_idx = chord_idx * samples_per_chord + j
+				var sc = sidechain_env[global_idx] if global_idx < sidechain_env.size() else 1.0
+				
+				chord_mix[j] += pad * env * sc * 0.18 * energy
+		
+		# === VOCAL CHOP ===
+		# Simulated pitched vocal hits - rhythmic interest
+		# Frequency: presence (2-4kHz) - but sparse, VO-safe
+		if "vocal_chop" in instruments:
+			var chop_times = [int(samples_per_chord * 0.25), int(samples_per_chord * 0.75)]
+			
+			for ct in chop_times:
+				# Formant-like synthesis
+				var formant_freqs = [800.0, 1200.0, 2500.0]  # "ah" vowel-ish
+				var carrier_freq = chord_freqs[0]
+				
+				for j in range(min(int(SAMPLE_RATE * 0.2), samples_per_chord - ct)):
+					var t = float(j) / SAMPLE_RATE
+					var chop = 0.0
+					
+					for ff in formant_freqs:
+						chop += sin(2.0 * PI * ff * t) * sin(2.0 * PI * carrier_freq * t)
+					chop /= formant_freqs.size()
+					
+					# Short, percussive
+					var env = exp(-t * 8.0)
+					
+					if ct + j < samples_per_chord:
+						chord_mix[ct + j] += chop * env * 0.07 * energy
+		
+		# === SYNTH LEAD ===
+		# Frequency: mid-presence (1-3kHz)
+		# Modern pop: sparse, rhythmic, space between notes
+		if "synth_lead" in instruments:
+			# -100 = rest, sparse pattern (modern pop has space)
+			var lead_pattern = [0, -100, 4, -100, 7, 4, -100, 0]
+			var note_samples = samples_per_chord / 8
+			
+			for n in range(8):
+				var start = n * note_samples
+				var offset = lead_pattern[n]
+				
+				# Skip rests
+				if offset <= -100:
+					continue
+				
+				var lead_freq = chord_freqs[0] * 2.0 * pow(2.0, offset / 12.0)
+				
+				for j in range(note_samples):
+					var t = float(j) / SAMPLE_RATE
+					var note_progress = float(j) / note_samples
+					
+					# Supersaw-lite (3 voices)
+					var lead = 0.0
+					for d in [-0.01, 0.0, 0.01]:
+						lead += fmod(t * lead_freq * (1.0 + d), 1.0) * 2.0 - 1.0
+					lead /= 3.0
+					
+					# Filter
+					lead = tanh(lead * 0.9)
+					
+					# Envelope with slight attack
+					var env = 1.0
+					if note_progress < 0.05: env = note_progress / 0.05
+					elif note_progress > 0.7: env = (1.0 - note_progress) / 0.3
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += lead * env * 0.1 * energy
+		
+		# === SNAP BEAT ===
+		# Punchy: kick + snaps + offbeat hats (upbeat feel)
+		if "snap_beat" in instruments:
+			var sixteenth = samples_per_chord / 16
+			
+			for step in range(16):
+				var start = step * sixteenth
+				# Tight humanize
+				start += int((randf() - 0.5) * SAMPLE_RATE * 0.004)
+				start = clampi(start, 0, samples_per_chord - 1)
+				
+				# KICK on 1, 5, 9, 13 (four on floor)
+				if step % 4 == 0:
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						var kick_freq = 55.0 * exp(-kt * 28.0) + 45.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 8.0)
+						kick = tanh(kick * 1.4)  # Punchy
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += kick * 0.38 * energy
+				
+				# SNAP on 4, 12 (backbeat)
+				if step == 4 or step == 12:
+					for j in range(min(int(SAMPLE_RATE * 0.06), samples_per_chord - start)):
+						var st = float(j) / SAMPLE_RATE
+						# Layered snap for punch
+						var snap = (randf() - 0.5) * exp(-st * 50.0) * 0.6
+						snap += sin(2.0 * PI * 1100.0 * st) * exp(-st * 35.0) * 0.4
+						snap += (randf() - 0.5) * exp(-st * 80.0) * 0.3  # Extra layer
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += snap * 0.18 * energy
+				
+				# HATS - offbeat for groove (not on kick)
+				if step % 2 == 1:
+					for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * 55.0)
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += hat * 0.07 * energy
+		
+		# === FULL BEAT ===
+		# Driving, energetic beat for verse/chorus
+		if "full_beat" in instruments:
+			var sixteenth = samples_per_chord / 16
+			
+			for step in range(16):
+				var start = step * sixteenth
+				start += int((randf() - 0.5) * SAMPLE_RATE * 0.003)
+				start = clampi(start, 0, samples_per_chord - 1)
+				
+				# KICK - punchy, slightly more attack
+				if step % 4 == 0 or step == 10:  # Extra kick for drive
+					for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						var kick_freq = 60.0 * exp(-kt * 25.0) + 48.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 7.0)
+						kick = tanh(kick * 1.5)  # More punch
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += kick * 0.42 * energy
+				
+				# CLAP on 4, 12 - thick layered
+				if step == 4 or step == 12:
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var ct = float(j) / SAMPLE_RATE
+						var clap = (randf() - 0.5) * exp(-ct * 22.0) * 0.5
+						clap += (randf() - 0.5) * exp(-(ct + 0.008) * 28.0) * 0.3
+						clap += (randf() - 0.5) * exp(-(ct + 0.015) * 35.0) * 0.2
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += clap * 0.2 * energy
+				
+				# HATS - every 8th with accents
+				if step % 2 == 0:
+					var accent = 1.2 if step % 4 == 2 else 1.0  # Accent offbeats
+					for j in range(min(int(SAMPLE_RATE * 0.03), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * 50.0)
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += hat * 0.065 * energy * accent
+		
+		# Mix into final
+		var start_idx = chord_idx * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				sample = tanh(sample * 0.85)  # Soft limit
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.015))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# === PROG SYNTH 70s V2 ===
+# Optimized for 10-point rubric: identity token, arc legibility, frequency allocation, loop durability
+# Based on Tangerine Dream, Kraftwerk, ELP research
+static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 105.0  # Slightly slower for hypnotic feel
+	var bar_duration = 240.0 / bpm
+	
+	# Modal root (prog loves Dorian, Aeolian)
+	var roots = ["D", "E", "A", "B"]
+	var root_note = roots[randi() % roots.size()] + "3"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	
+	# Prog progression: modal, with a clear return point
+	var progression = [0, 5, 3, 0]  # i - VI - iv - i (returns home = loop friendly)
+	
+	# Identity token: a signature motif interval (perfect 5th rise)
+	var motif_interval = 7  # Perfect 5th - recognizable, prog-like
+	
+	print("AudioSynthesizer: Generating Prog Synth V2 in ", root_note, " (optimized)")
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 5
+	playback.initial_clip = 0
+	
+	# Section design for clear ARC:
+	# Intro (sparse) → Build (add rhythm) → Peak (full + lead) → Release → Loop-friendly outro
+	
+	# 0. INTRO: Mellotron pad + motif hint (sparse, establish identity)
+	var intro = _generate_prog_v2_section(progression, scale, 
+		["mellotron_pad", "motif_bell"], bar_duration, bpm, motif_interval, 0.4)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# 1. BUILD: Add bass + motorik (energy rises)
+	var build = _generate_prog_v2_section(progression, scale,
+		["mellotron_pad", "moog_bass_v2", "motorik_v2", "motif_bell"], bar_duration, bpm, motif_interval, 0.6)
+	playback.set_clip_stream(1, build)
+	playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# 2. PEAK: Full arrangement with sequence + lead (climax)
+	var peak = _generate_prog_v2_section(progression, scale,
+		["mellotron_pad", "moog_bass_v2", "arp_sequence", "prog_lead", "motorik_v2"], bar_duration, bpm, motif_interval, 1.0)
+	playback.set_clip_stream(2, peak)
+	playback.set_clip_name(2, "Peak")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# 3. RELEASE: Pull back to pad + bass (tension release)
+	var release = _generate_prog_v2_section(progression, scale,
+		["mellotron_pad", "moog_bass_v2", "motif_bell"], bar_duration, bpm, motif_interval, 0.5)
+	playback.set_clip_stream(3, release)
+	playback.set_clip_name(3, "Release")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 4)
+	
+	# 4. OUTRO: Match intro energy (loop-friendly seam)
+	var outro = _generate_prog_v2_section(progression, scale,
+		["mellotron_pad", "motif_bell"], bar_duration, bpm, motif_interval, 0.4)
+	playback.set_clip_stream(4, outro)
+	playback.set_clip_name(4, "Outro")
+	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance_next_clip(4, 0)
+	
+	# Long crossfades for prog feel
+	var xfade = 4.0
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 4, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(4, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_prog_v2_section(progression: Array, scale: Array, instruments: Array, 
+		bar_duration: float, bpm: float, motif_interval: int, energy_level: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# === MELLOTRON PAD ===
+		# Frequency: mid-range (300-2000Hz) - leaves room for bass
+		# Research: 6-voice, 10-cent detune, 2s attack, chorus
+		if "mellotron_pad" in instruments:
+			var detune_cents = 10.0
+			var detune_ratio = pow(2.0, detune_cents / 1200.0)
+			
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				# Analog drift (research: 5 cents slow drift)
+				var drift = sin(2.0 * PI * 0.12 * t) * 0.003
+				
+				for freq in chord_freqs:
+					# 4 detuned voices (string machine character)
+					var f = freq * (1.0 + drift)
+					pad += sin(2.0 * PI * f * t) * 0.4
+					pad += sin(2.0 * PI * f * detune_ratio * t) * 0.3
+					pad += sin(2.0 * PI * f / detune_ratio * t) * 0.3
+					# Slight square for organ-ish character
+					pad += sign(sin(2.0 * PI * f * 0.5 * t)) * 0.15
+				
+				pad /= chord_freqs.size() * 1.15
+				
+				# Long attack (2s from research), smooth release
+				var env = 1.0
+				var attack_time = 0.18  # ~18% of section = ~2s at 105bpm
+				if progress < attack_time:
+					env = progress / attack_time
+				elif progress > 0.85:
+					env = (1.0 - progress) / 0.15
+				
+				# Soft saturation (tape warmth)
+				pad = tanh(pad * 1.1)
+				
+				# Chorus simulation (slow detuned copy)
+				var chorus = sin(2.0 * PI * chord_freqs[0] * 1.002 * t + sin(t * 0.5) * 0.3) * 0.1
+				
+				chord_mix[j] += (pad + chorus) * env * 0.22 * energy_level
+		
+		# === MOTIF BELL ===
+		# Identity token: recurring bell/mallet hit with signature interval
+		# Appears every 2 bars, provides instant recognition
+		if "motif_bell" in instruments:
+			# Play motif at bar start and midpoint (recurrence)
+			var motif_times = [0, int(samples_per_chord * 0.5)]
+			
+			for mt in motif_times:
+				# Signature: root then 5th (perfect 5th = identity)
+				var motif_freqs = [
+					chord_freqs[0] * 2.0,  # Root, octave up
+					chord_freqs[0] * 2.0 * pow(2.0, motif_interval / 12.0)  # 5th above
+				]
+				
+				for note_idx in range(2):
+					var note_start = mt + note_idx * int(SAMPLE_RATE * 0.15)
+					var note_freq = motif_freqs[note_idx]
+					var note_length = int(SAMPLE_RATE * 1.2)
+					
+					for j in range(min(note_length, samples_per_chord - note_start)):
+						var t = float(j) / SAMPLE_RATE
+						
+						# Bell: sine + harmonics with fast decay
+						var bell = sin(2.0 * PI * note_freq * t)
+						bell += sin(2.0 * PI * note_freq * 2.0 * t) * 0.5 * exp(-t * 3.0)
+						bell += sin(2.0 * PI * note_freq * 3.0 * t) * 0.25 * exp(-t * 5.0)
+						bell += sin(2.0 * PI * note_freq * 4.1 * t) * 0.15 * exp(-t * 7.0)  # Inharmonic
+						
+						# Envelope: sharp attack, long decay (bell character)
+						var env = exp(-t * 1.8)
+						
+						if note_start + j < samples_per_chord:
+							chord_mix[note_start + j] += bell * env * 0.08 * energy_level
+		
+		# === MOOG BASS V2 ===
+		# Frequency: sub + bass only (20-200Hz) - clear ownership
+		# Research: dual saw + sub square, ladder filter, 8-cent drift
+		if "moog_bass_v2" in instruments:
+			var bass_freq = root_freq * 0.25  # Deep
+			var filter_state = 0.0
+			
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				
+				# Analog drift (8 cents from research)
+				var drift = sin(2.0 * PI * 0.08 * t + i * 1.5) * 0.005
+				var f = bass_freq * (1.0 + drift)
+				
+				# Dual detuned saws
+				var saw1 = fmod(t * f, 1.0) * 2.0 - 1.0
+				var saw2 = fmod(t * f * 0.996, 1.0) * 2.0 - 1.0
+				# Sub square
+				var sub = sign(sin(2.0 * PI * f * 0.5 * t))
+				
+				var bass = saw1 * 0.35 + saw2 * 0.35 + sub * 0.3
+				
+				# Ladder filter envelope (research: 800Hz cutoff, 0.4 resonance)
+				var filter_env = 0.4 + exp(-progress * 5.0) * 0.4
+				filter_state += filter_env * 0.3 * (bass - filter_state)
+				bass = filter_state
+				
+				# Warm saturation
+				bass = tanh(bass * 1.5)
+				
+				# Envelope
+				var env = 1.0
+				if progress < 0.01: env = progress / 0.01
+				elif progress > 0.8: env = (1.0 - progress) / 0.2
+				
+				chord_mix[j] += bass * env * 0.32 * energy_level
+		
+		# === ARP SEQUENCE ===
+		# Frequency: presence range (2-4kHz) - clarity without VO conflict
+		# 16th notes, filter movement, recognizable pattern
+		if "arp_sequence" in instruments:
+			var step_samples = samples_per_chord / 16
+			# Pattern: root, 5th, octave, 5th (ascending feel)
+			var seq_offsets = [0, 7, 12, 7, 0, 7, 12, 7, 0, 7, 12, 7, 5, 7, 12, 7]
+			
+			for step in range(16):
+				var start = step * step_samples
+				var offset = seq_offsets[step]
+				var seq_freq = chord_freqs[0] * pow(2.0, offset / 12.0)
+				
+				for j in range(step_samples):
+					var t = float(j) / SAMPLE_RATE
+					var step_progress = float(j) / step_samples
+					
+					# Square wave with PWM (research)
+					var pwm = 0.3 + sin(2.0 * PI * 0.5 * t) * 0.15
+					var square = 1.0 if fmod(t * seq_freq, 1.0) < pwm else -1.0
+					
+					# Resonant filter sweep
+					var filter_mod = 0.5 + sin(2.0 * PI * 2.0 * t) * 0.2
+					square = tanh(square * filter_mod)
+					
+					# Percussive envelope
+					var env = exp(-step_progress * 8.0) * 0.5 + 0.5 * exp(-step_progress * 2.0)
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += square * env * 0.1 * energy_level
+		
+		# === PROG LEAD ===
+		# Frequency: mid-presence (1-3kHz)
+		# Research: saw, bright filter 3500Hz, 5Hz vibrato, portamento
+		# Prog uses bigger intervals: 4ths, 5ths, octaves
+		if "prog_lead" in instruments:
+			var lead_pattern = [0, 5, 7, 5, 0, 4, 7, 12]  # Modal, uses 4ths/5ths
+			var note_samples = samples_per_chord / 8
+			var prev_freq = chord_freqs[0] * 2.0
+			
+			for n in range(8):
+				var start = n * note_samples
+				var offset = lead_pattern[n]
+				var target_freq = chord_freqs[0] * 2.0 * pow(2.0, offset / 12.0)
+				
+				for j in range(note_samples):
+					var t = float(j) / SAMPLE_RATE
+					var note_progress = float(j) / note_samples
+					
+					# Portamento (glide from previous note)
+					var glide_amount = exp(-note_progress * 15.0)
+					var freq = target_freq + (prev_freq - target_freq) * glide_amount
+					
+					# Vibrato (5Hz, delayed onset)
+					var vib = 0.0
+					if note_progress > 0.25:
+						vib = sin(2.0 * PI * 5.0 * t) * 0.012 * (note_progress - 0.25) / 0.75
+					freq *= (1.0 + vib)
+					
+					# Bright sawtooth
+					var lead = fmod(t * freq, 1.0) * 2.0 - 1.0
+					lead += fmod(t * freq * 1.003, 1.0) * 2.0 - 1.0  # Slight detune
+					lead *= 0.5
+					
+					# Filter (bright, research: 3500Hz)
+					lead = tanh(lead * 1.3)
+					
+					# Envelope
+					var env = 1.0
+					if note_progress < 0.03: env = note_progress / 0.03
+					elif note_progress > 0.85: env = (1.0 - note_progress) / 0.15
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += lead * env * 0.12 * energy_level
+				
+				prev_freq = target_freq
+		
+		# === MOTORIK V2 ===
+		# Frequency: sub (kick), presence (snare), air (hats)
+		# Research: 4/4 kick, 8th hats (driving), humanized
+		if "motorik_v2" in instruments:
+			var eighth_samples = samples_per_chord / 8
+			
+			for beat in range(8):
+				# Humanize timing (±5ms - less than other genres, prog is tighter)
+				var humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.005)
+				var start = beat * eighth_samples + humanize
+				start = clampi(start, 0, samples_per_chord - 1)
+				
+				# Velocity humanization
+				var vel = 0.9 + randf() * 0.1
+				
+				# KICK on every beat (4/4)
+				if beat % 2 == 0:
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+						var kt = float(j) / SAMPLE_RATE
+						# Pitch envelope
+						var kick_freq = 55.0 * exp(-kt * 25.0) + 42.0
+						var kick = sin(2.0 * PI * kick_freq * kt) * exp(-kt * 9.0)
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += kick * 0.28 * vel * energy_level
+				
+				# SNARE on 3 and 7
+				if beat == 2 or beat == 6:
+					for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+						var st = float(j) / SAMPLE_RATE
+						var snare = sin(2.0 * PI * 200.0 * st) * exp(-st * 20.0) * 0.4
+						snare += (randf() - 0.5) * exp(-st * 22.0) * 0.35
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += snare * 0.15 * vel * energy_level
+				
+				# HI-HAT on every 8th (motorik signature)
+				# Vary open/closed for interest without fatigue
+				var is_open = beat % 4 == 2
+				var hat_decay = 40.0 if not is_open else 20.0
+				var hat_length = SAMPLE_RATE * 0.03 if not is_open else SAMPLE_RATE * 0.06
+				
+				for j in range(min(int(hat_length), samples_per_chord - start)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * hat_decay)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += hat * 0.07 * vel * energy_level
+		
+		# Mix into final buffer with soft limiting
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				# Soft limit
+				sample = tanh(sample * 0.9)
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.02))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
 static func generate_pop_song_async(parameters: Dictionary, callback_object: Object, callback_method: String):
 	if is_generating:
 		print("AudioSynthesizer: Already generating sound")

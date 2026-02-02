@@ -58,9 +58,17 @@ var _layer_solos: Dictionary = {}  # layer_name -> {solo: CheckBox, mute: CheckB
 var _main_tabs: TabContainer
 var _overview_tab: Control
 var _sound_editor_tab: Control
+var _archive_tab: Control
 var _sound_detail_panel: SoundDetailPanel
 var _editor_back_btn: Button
 var _editor_sound_name: Label
+
+# Archive UI
+var _archive_list: ItemList
+var _archive_details: RichTextLabel
+var _archive_load_btn: Button
+var _archive_compare_btn: Button
+var _archive_index: Dictionary = {}
 
 # Parameter Panel
 var _param_panel: PanelContainer
@@ -73,6 +81,9 @@ var _current_snapshot: String = "A"
 var _visualizer: Control
 var _spectrum: AudioEffectSpectrumAnalyzerInstance
 var _oscilloscope_buffer: PackedFloat32Array
+
+# Track analyzer
+var _scorecard: TrackScorecard
 
 # Live parameters (these affect playback in real-time)
 var live_params: Dictionary = {
@@ -276,32 +287,22 @@ func _setup_ui():
 	songs_grid.add_theme_constant_override("v_separation", 8)
 	songs_scroll.add_child(songs_grid)
 	
-	var songs = [
-		["prog_synth_70s", "🎸 70s Prog"],
-		["pop_generative", "🎤 Pop"],
-		["ambient_works", "🌊 Ambient"],
-		["moroder_disco", "🪩 Disco"],
-		["detroit_techno", "🔩 Techno"],
-		["synthwave", "🌃 Synthwave"],
-		["rave", "⚡ Rave"],
-		["french_touch", "🇫🇷 French Touch"],
-		["supersaw_trance", "🔊 Supersaw"],
-		["lofi_house", "📼 Lo-Fi House"],
-		["reese_jungle", "🌴 Jungle"],
-		["ambient_techno", "🌌 Ambient"],
-		["blade_runner", "🌃 Blade Runner"],
-		["boards_of_canada", "📼 BoC"],
-		["burial", "🌧️ Burial"],
-		["kraftwerk", "🤖 Kraftwerk"]
-	]
+	# Load all songs from the songs folder
+	var songs = _load_songs_from_folder()
 	
 	for song in songs:
 		var btn = Button.new()
 		btn.text = song[1]
 		btn.pressed.connect(_on_song_selected.bind(song[0]))
-		_style_button_compact(btn, Color(0.2, 0.4, 0.5))
+		_style_button_compact(btn, _get_song_button_color(song[0]))
 		_song_buttons[song[0]] = btn
 		songs_grid.add_child(btn)
+	
+	if songs.is_empty():
+		var empty_label = Label.new()
+		empty_label.text = "No songs found.\nAdd JSON configs to songs/ folder."
+		empty_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
+		songs_grid.add_child(empty_label)
 	
 	# Transport controls
 	var transport = HBoxContainer.new()
@@ -328,6 +329,14 @@ func _setup_ui():
 	_loop_btn.toggled.connect(_on_loop_toggled)
 	_style_button_compact(_loop_btn, Color(0.4, 0.3, 0.5))
 	transport.add_child(_loop_btn)
+	
+	# Analyze button
+	var analyze_btn = Button.new()
+	analyze_btn.text = "📊 Analyze"
+	analyze_btn.disabled = false
+	analyze_btn.pressed.connect(_analyze_current_track)
+	_style_button_compact(analyze_btn, Color(0.3, 0.4, 0.5))
+	transport.add_child(analyze_btn)
 	
 	# Section dropdown
 	_section_dropdown = OptionButton.new()
@@ -363,6 +372,24 @@ func _setup_ui():
 	_timeline.seek_requested.connect(_on_timeline_seek)
 	_timeline.section_clicked.connect(_on_section_clicked)
 	_timeline_container.add_child(_timeline)
+	
+	# Track Scorecard (collapsible)
+	var scorecard_header = HBoxContainer.new()
+	scorecard_header.add_theme_constant_override("separation", 8)
+	left_panel.add_child(scorecard_header)
+	
+	var scorecard_toggle = Button.new()
+	scorecard_toggle.text = "📊 Track Analysis"
+	scorecard_toggle.toggle_mode = true
+	scorecard_toggle.button_pressed = false
+	scorecard_toggle.toggled.connect(func(pressed): _scorecard.visible = pressed)
+	_style_button_compact(scorecard_toggle, Color(0.3, 0.4, 0.5))
+	scorecard_header.add_child(scorecard_toggle)
+	
+	_scorecard = TrackScorecard.new()
+	_scorecard.visible = false
+	_scorecard.custom_minimum_size.y = 350
+	left_panel.add_child(_scorecard)
 	
 	# Right panel - parameters
 	var right_panel = VBoxContainer.new()
@@ -402,6 +429,9 @@ func _setup_ui():
 	
 	# === SOUND EDITOR TAB ===
 	_setup_sound_editor_tab()
+	
+	# === ARCHIVE TAB ===
+	_setup_archive_tab()
 
 
 func _setup_sound_editor_tab():
@@ -456,7 +486,545 @@ func _setup_sound_editor_tab():
 
 func _on_tab_changed(tab_index: int):
 	"""Handle tab switching"""
-	pass  # Audio continues playing regardless of tab
+	# Refresh archive list when switching to archive tab
+	if tab_index == 2:  # Archive tab
+		_refresh_archive_list()
+
+
+func _setup_archive_tab():
+	"""Create the Archive Songs tab for accessing old song versions"""
+	_archive_tab = HSplitContainer.new()
+	_archive_tab.name = "📦 Archive"
+	_main_tabs.add_child(_archive_tab)
+	
+	# Left panel - archive list
+	var left_panel = VBoxContainer.new()
+	left_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left_panel.size_flags_stretch_ratio = 1.0
+	left_panel.add_theme_constant_override("separation", 8)
+	_archive_tab.add_child(left_panel)
+	
+	# Header
+	var header = HBoxContainer.new()
+	header.add_theme_constant_override("separation", 8)
+	left_panel.add_child(header)
+	
+	var title = Label.new()
+	title.text = "📦 ARCHIVED SONGS"
+	title.add_theme_font_size_override("font_size", 20)
+	title.add_theme_color_override("font_color", Color(0.8, 0.6, 0.3))
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(title)
+	
+	var refresh_btn = Button.new()
+	refresh_btn.text = "🔄 Refresh"
+	refresh_btn.pressed.connect(_refresh_archive_list)
+	_style_button_compact(refresh_btn, Color(0.3, 0.4, 0.5))
+	header.add_child(refresh_btn)
+	
+	# Archive list
+	var list_panel = PanelContainer.new()
+	var list_style = StyleBoxFlat.new()
+	list_style.bg_color = Color(0.06, 0.06, 0.08)
+	list_style.set_corner_radius_all(6)
+	list_panel.add_theme_stylebox_override("panel", list_style)
+	list_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	left_panel.add_child(list_panel)
+	
+	_archive_list = ItemList.new()
+	_archive_list.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_archive_list.item_selected.connect(_on_archive_item_selected)
+	_archive_list.add_theme_font_size_override("font_size", 14)
+	list_panel.add_child(_archive_list)
+	
+	# Action buttons
+	var actions = HBoxContainer.new()
+	actions.add_theme_constant_override("separation", 8)
+	left_panel.add_child(actions)
+	
+	_archive_load_btn = Button.new()
+	_archive_load_btn.text = "📂 Load Archived"
+	_archive_load_btn.disabled = true
+	_archive_load_btn.pressed.connect(_on_archive_load_pressed)
+	_style_button_compact(_archive_load_btn, Color(0.3, 0.5, 0.4))
+	actions.add_child(_archive_load_btn)
+	
+	_archive_compare_btn = Button.new()
+	_archive_compare_btn.text = "⚖️ Compare to Current"
+	_archive_compare_btn.disabled = true
+	_archive_compare_btn.pressed.connect(_on_archive_compare_pressed)
+	_style_button_compact(_archive_compare_btn, Color(0.4, 0.4, 0.5))
+	actions.add_child(_archive_compare_btn)
+	
+	# Right panel - archive details
+	var right_panel = VBoxContainer.new()
+	right_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_panel.size_flags_stretch_ratio = 1.5
+	right_panel.add_theme_constant_override("separation", 8)
+	_archive_tab.add_child(right_panel)
+	
+	var details_title = Label.new()
+	details_title.text = "📋 ARCHIVE DETAILS"
+	details_title.add_theme_font_size_override("font_size", 18)
+	details_title.add_theme_color_override("font_color", Color(0.6, 0.7, 0.8))
+	right_panel.add_child(details_title)
+	
+	var details_panel = PanelContainer.new()
+	var details_style = StyleBoxFlat.new()
+	details_style.bg_color = Color(0.06, 0.06, 0.08)
+	details_style.set_corner_radius_all(6)
+	details_style.content_margin_left = 12
+	details_style.content_margin_right = 12
+	details_style.content_margin_top = 12
+	details_style.content_margin_bottom = 12
+	details_panel.add_theme_stylebox_override("panel", details_style)
+	details_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	right_panel.add_child(details_panel)
+	
+	_archive_details = RichTextLabel.new()
+	_archive_details.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_archive_details.bbcode_enabled = true
+	_archive_details.text = "[color=#888888]Select an archived song to view details...[/color]"
+	_archive_details.add_theme_font_size_override("normal_font_size", 13)
+	details_panel.add_child(_archive_details)
+	
+	# Load archive index
+	_load_archive_index()
+
+
+func _load_archive_index():
+	"""Load the archive index JSON file"""
+	var path = "res://commons/audio/parameters/songs/archive/ARCHIVE_INDEX.json"
+	if not FileAccess.file_exists(path):
+		print("Archive index not found at: ", path)
+		return
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		print("Failed to open archive index")
+		return
+	
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		print("Failed to parse archive index: ", json.get_error_message())
+		return
+	
+	_archive_index = json.data
+	print("Loaded archive index with %d entries" % _archive_index.get("archives", []).size())
+
+
+func _refresh_archive_list():
+	"""Refresh the archive list from the index"""
+	_archive_list.clear()
+	_load_archive_index()
+	
+	var archives = _archive_index.get("archives", [])
+	
+	# Group by song
+	var by_song: Dictionary = {}
+	for entry in archives:
+		var song = entry.get("song", "unknown")
+		if not by_song.has(song):
+			by_song[song] = []
+		by_song[song].append(entry)
+	
+	# Add items grouped by song
+	for song in by_song.keys():
+		var versions = by_song[song]
+		for entry in versions:
+			var version = entry.get("version", 0)
+			var date = entry.get("date", "unknown")
+			var emotion = entry.get("emotion", "")
+			
+			var display_text = "%s v%d (%s)" % [song, version, date]
+			if not emotion.is_empty():
+				display_text += " - %s" % emotion
+			
+			var idx = _archive_list.add_item(display_text)
+			_archive_list.set_item_metadata(idx, entry)
+			
+			# Color based on song type
+			var color = _get_song_color(song)
+			_archive_list.set_item_custom_fg_color(idx, color)
+	
+	if _archive_list.item_count == 0:
+		_archive_list.add_item("No archived songs found")
+		_archive_list.set_item_disabled(0, true)
+	
+	_status_label.text = "📦 Loaded %d archived versions" % archives.size()
+
+
+func _get_song_color(song_id: String) -> Color:
+	"""Get a distinct color for each song type (for archive list)"""
+	match song_id:
+		"ambient_works", "ambient_techno": return Color(0.4, 0.7, 0.9)
+		"detroit_techno": return Color(0.7, 0.5, 0.9)
+		"moroder_disco", "french_touch": return Color(0.9, 0.6, 0.4)
+		"pop_generative", "pop_v2", "pop_madonna": return Color(0.9, 0.4, 0.6)
+		"prog_synth_70s", "prog_synth_v2": return Color(0.5, 0.8, 0.5)
+		"rave", "reese_jungle": return Color(0.9, 0.3, 0.3)
+		"synthwave", "blade_runner": return Color(0.6, 0.4, 0.9)
+		"boards_of_canada", "boards_of_canada_v2": return Color(0.6, 0.75, 0.6)
+		"burial", "burial_v2": return Color(0.4, 0.4, 0.6)
+		"kraftwerk", "kraftwerk_v2": return Color(0.8, 0.5, 0.5)
+		"supersaw_trance": return Color(0.3, 0.6, 0.9)
+		"lofi_house": return Color(0.7, 0.6, 0.5)
+		_: return Color(0.3, 0.45, 0.55)
+
+
+func _get_song_button_color(song_id: String) -> Color:
+	"""Get button color for overview (slightly darker than list color)"""
+	var base = _get_song_color(song_id)
+	return base.darkened(0.3)
+
+
+func _load_songs_from_folder() -> Array:
+	"""Load all songs from songs folder (archive is for version history, not hiding)"""
+	var songs = []
+	var songs_path = "res://commons/audio/parameters/songs"
+	
+	# Display name mappings
+	var display_names = {
+		"ambient_works": "🌊 Ambient Works",
+		"ambient_techno": "🌌 Ambient Techno",
+		"blade_runner": "🌃 Blade Runner",
+		"boards_of_canada": "📼 BoC",
+		"boards_of_canada_v2": "📼 BoC V2",
+		"burial": "🌧️ Burial",
+		"burial_v2": "🌧️ Burial V2",
+		"detroit_techno": "🔩 Hard Detroit",
+		"french_touch": "🇫🇷 French Touch",
+		"kraftwerk": "🤖 Kraftwerk",
+		"kraftwerk_v2": "🤖 Kraftwerk V2",
+		"lofi_house": "📼 Lo-Fi House",
+		"moroder_disco": "🪩 Moroder Disco",
+		"pop_generative": "🎤 Pop",
+		"pop_madonna": "👸 Madonna 80s",
+		"pop_v2": "🎤 Pop V2",
+		"prog_synth_70s": "🎸 70s Prog",
+		"prog_synth_v2": "🎸 Prog V2",
+		"rave": "⚡ Rave",
+		"reese_jungle": "🌴 Jungle",
+		"supersaw_trance": "🔊 Supersaw",
+		"synthwave": "🌃 Synthwave"
+	}
+	
+	# Read songs folder
+	var dir = DirAccess.open(songs_path)
+	if dir == null:
+		print("Failed to open songs directory")
+		return songs
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	
+	while file_name != "":
+		# Skip directories and non-JSON files
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var song_id = file_name.replace(".json", "")
+			var display_name = display_names.get(song_id, "🎵 " + song_id.replace("_", " ").capitalize())
+			songs.append([song_id, display_name])
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+	
+	# Sort alphabetically
+	songs.sort_custom(func(a, b): return a[1] < b[1])
+	
+	print("Loaded %d songs from folder" % songs.size())
+	return songs
+
+
+func _on_archive_item_selected(index: int):
+	"""Display details for selected archive entry"""
+	var entry = _archive_list.get_item_metadata(index)
+	if entry == null or entry is not Dictionary:
+		return
+	
+	_archive_load_btn.disabled = false
+	_archive_compare_btn.disabled = false
+	
+	# Build details text
+	var text = ""
+	
+	# Song name and version
+	var song = entry.get("song", "unknown")
+	var version = entry.get("version", 0)
+	text += "[b][color=#88ccff]%s[/color][/b] — Version %d\n" % [song.replace("_", " ").capitalize(), version]
+	text += "[color=#666666]━━━━━━━━━━━━━━━━━━━━━━━━━━[/color]\n\n"
+	
+	# Date and filename
+	text += "[color=#aaaaaa]📅 Date:[/color] %s\n" % entry.get("date", "unknown")
+	text += "[color=#aaaaaa]📄 File:[/color] %s\n\n" % entry.get("filename", "unknown")
+	
+	# Description
+	var desc = entry.get("description", "")
+	if not desc.is_empty():
+		text += "[color=#aaaaaa]📝 Description:[/color]\n%s\n\n" % desc
+	
+	# Quick stats
+	var bpm = entry.get("bpm", 0)
+	var key = entry.get("key", "")
+	var emotion = entry.get("emotion", "")
+	
+	if bpm > 0 or not key.is_empty() or not emotion.is_empty():
+		text += "[color=#aaaaaa]🎵 Quick Stats:[/color]\n"
+		if bpm > 0:
+			text += "  • BPM: [color=#ffcc88]%d[/color]\n" % bpm
+		if not key.is_empty():
+			text += "  • Key: [color=#88ffcc]%s[/color]\n" % key
+		if not emotion.is_empty():
+			text += "  • Emotion: [color=#ff88cc]%s[/color]\n" % emotion.replace("_", " ")
+		text += "\n"
+	
+	# Changes
+	var changes = entry.get("changes", [])
+	if not changes.is_empty():
+		text += "[color=#aaaaaa]🔄 Changes in this version:[/color]\n"
+		for change in changes:
+			text += "  • %s\n" % change
+		text += "\n"
+	
+	_archive_details.text = text
+
+
+func _on_archive_load_pressed():
+	"""Load the selected archived song config"""
+	var selected = _archive_list.get_selected_items()
+	if selected.is_empty():
+		return
+	
+	var entry = _archive_list.get_item_metadata(selected[0])
+	if entry == null:
+		return
+	
+	var filename = entry.get("filename", "")
+	var path = "res://commons/audio/parameters/songs/archive/%s" % filename
+	
+	if not FileAccess.file_exists(path):
+		_status_label.text = "❌ Archive file not found: %s" % filename
+		return
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		_status_label.text = "❌ Failed to open archive file"
+		return
+	
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		_status_label.text = "❌ Failed to parse archive: %s" % json.get_error_message()
+		return
+	
+	var config = json.data
+	
+	# Display the config in a popup or detail view
+	_show_archived_config(entry.get("song", "unknown"), config)
+	
+	_status_label.text = "📂 Loaded archived: %s v%d" % [entry.get("song", ""), entry.get("version", 0)]
+
+
+func _show_archived_config(song_id: String, config: Dictionary):
+	"""Display the archived config details"""
+	var popup = PopupPanel.new()
+	popup.size = Vector2(600, 700)
+	popup.title = "Archived Config: %s" % song_id
+	
+	var scroll = ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 12)
+	popup.add_child(scroll)
+	
+	var vbox = VBoxContainer.new()
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.add_theme_constant_override("separation", 12)
+	scroll.add_child(vbox)
+	
+	# Title
+	var title = Label.new()
+	title.text = "📦 %s (Archived)" % song_id.replace("_", " ").capitalize()
+	title.add_theme_font_size_override("font_size", 20)
+	title.add_theme_color_override("font_color", Color(0.8, 0.6, 0.3))
+	vbox.add_child(title)
+	
+	# Display config as formatted text
+	var text = RichTextLabel.new()
+	text.bbcode_enabled = true
+	text.fit_content = true
+	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	var formatted = _format_config_for_display(config)
+	text.text = formatted
+	vbox.add_child(text)
+	
+	# Close button
+	var close_btn = Button.new()
+	close_btn.text = "Close"
+	close_btn.pressed.connect(func(): popup.queue_free())
+	_style_button_compact(close_btn, Color(0.4, 0.3, 0.3))
+	vbox.add_child(close_btn)
+	
+	add_child(popup)
+	popup.position = get_viewport_rect().size / 2.0 - Vector2(popup.size) / 2.0
+	popup.popup()
+
+
+func _format_config_for_display(config: Dictionary, indent: int = 0) -> String:
+	"""Format a config dictionary as BBCode for display"""
+	var text = ""
+	var prefix = "  ".repeat(indent)
+	
+	for key in config.keys():
+		var value = config[key]
+		
+		# Skip archive metadata in display
+		if key == "_archive_metadata":
+			continue
+		
+		if value is Dictionary:
+			text += "%s[color=#88ccff]%s:[/color]\n" % [prefix, key]
+			text += _format_config_for_display(value, indent + 1)
+		elif value is Array:
+			text += "%s[color=#88ccff]%s:[/color] [" % [prefix, key]
+			var items = []
+			for item in value:
+				if item is Dictionary:
+					items.append("{...}")
+				else:
+					items.append(str(item))
+			text += ", ".join(items) + "]\n"
+		else:
+			var color = "#aaffaa" if value is int or value is float else "#ffcc88" if value is String else "#cccccc"
+			text += "%s[color=#88ccff]%s:[/color] [color=%s]%s[/color]\n" % [prefix, key, color, str(value)]
+	
+	return text
+
+
+func _on_archive_compare_pressed():
+	"""Compare selected archive with current song config"""
+	var selected = _archive_list.get_selected_items()
+	if selected.is_empty():
+		return
+	
+	var entry = _archive_list.get_item_metadata(selected[0])
+	if entry == null:
+		return
+	
+	var song_id = entry.get("song", "")
+	
+	# Load archived config
+	var filename = entry.get("filename", "")
+	var archive_path = "res://commons/audio/parameters/songs/archive/%s" % filename
+	
+	if not FileAccess.file_exists(archive_path):
+		_status_label.text = "❌ Archive file not found"
+		return
+	
+	var archive_file = FileAccess.open(archive_path, FileAccess.READ)
+	var json = JSON.new()
+	json.parse(archive_file.get_as_text())
+	archive_file.close()
+	var archived_config = json.data
+	
+	# Load current config
+	var current_path = "res://commons/audio/parameters/songs/%s.json" % song_id
+	if not FileAccess.file_exists(current_path):
+		_status_label.text = "❌ Current config not found: %s" % song_id
+		return
+	
+	var current_file = FileAccess.open(current_path, FileAccess.READ)
+	json.parse(current_file.get_as_text())
+	current_file.close()
+	var current_config = json.data
+	
+	# Show comparison
+	_show_config_comparison(song_id, archived_config, current_config, entry.get("version", 0))
+	
+	_status_label.text = "⚖️ Comparing %s v%d to current" % [song_id, entry.get("version", 0)]
+
+
+func _show_config_comparison(song_id: String, archived: Dictionary, current: Dictionary, version: int):
+	"""Show side-by-side comparison of archived vs current config"""
+	var popup = PopupPanel.new()
+	popup.size = Vector2(900, 700)
+	
+	var main_vbox = VBoxContainer.new()
+	main_vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	main_vbox.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 12)
+	main_vbox.add_theme_constant_override("separation", 8)
+	popup.add_child(main_vbox)
+	
+	# Title
+	var title = Label.new()
+	title.text = "⚖️ %s — v%d vs Current" % [song_id.replace("_", " ").capitalize(), version]
+	title.add_theme_font_size_override("font_size", 20)
+	title.add_theme_color_override("font_color", Color(0.7, 0.8, 0.9))
+	main_vbox.add_child(title)
+	
+	# Split view
+	var hsplit = HSplitContainer.new()
+	hsplit.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	main_vbox.add_child(hsplit)
+	
+	# Archived side
+	var archived_panel = VBoxContainer.new()
+	archived_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hsplit.add_child(archived_panel)
+	
+	var archived_label = Label.new()
+	archived_label.text = "📦 Archived (v%d)" % version
+	archived_label.add_theme_font_size_override("font_size", 16)
+	archived_label.add_theme_color_override("font_color", Color(0.8, 0.6, 0.3))
+	archived_panel.add_child(archived_label)
+	
+	var archived_scroll = ScrollContainer.new()
+	archived_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	archived_panel.add_child(archived_scroll)
+	
+	var archived_text = RichTextLabel.new()
+	archived_text.bbcode_enabled = true
+	archived_text.fit_content = true
+	archived_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	archived_text.text = _format_config_for_display(archived)
+	archived_scroll.add_child(archived_text)
+	
+	# Current side
+	var current_panel = VBoxContainer.new()
+	current_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hsplit.add_child(current_panel)
+	
+	var current_label = Label.new()
+	current_label.text = "📄 Current"
+	current_label.add_theme_font_size_override("font_size", 16)
+	current_label.add_theme_color_override("font_color", Color(0.3, 0.8, 0.5))
+	current_panel.add_child(current_label)
+	
+	var current_scroll = ScrollContainer.new()
+	current_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	current_panel.add_child(current_scroll)
+	
+	var current_text = RichTextLabel.new()
+	current_text.bbcode_enabled = true
+	current_text.fit_content = true
+	current_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	current_text.text = _format_config_for_display(current)
+	current_scroll.add_child(current_text)
+	
+	# Close button
+	var close_btn = Button.new()
+	close_btn.text = "Close"
+	close_btn.pressed.connect(func(): popup.queue_free())
+	_style_button_compact(close_btn, Color(0.4, 0.3, 0.3))
+	main_vbox.add_child(close_btn)
+	
+	add_child(popup)
+	popup.position = get_viewport_rect().size / 2.0 - Vector2(popup.size) / 2.0
+	popup.popup()
 
 
 func _on_editor_back_pressed():
@@ -768,6 +1336,18 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_burial_song({})
 		"kraftwerk":
 			stream = AudioSynthesizer.generate_kraftwerk_song({})
+		"boards_of_canada_v2":
+			stream = AudioSynthesizer.generate_boards_of_canada_v2_song({})
+		"burial_v2":
+			stream = AudioSynthesizer.generate_burial_v2_song({})
+		"kraftwerk_v2":
+			stream = AudioSynthesizer.generate_kraftwerk_v2_song({})
+		"prog_synth_v2":
+			stream = AudioSynthesizer.generate_prog_synth_v2_song({})
+		"pop_v2":
+			stream = AudioSynthesizer.generate_pop_v2_song({})
+		"pop_madonna":
+			stream = AudioSynthesizer.generate_pop_madonna_song({})
 		_:
 			# No generator - show config breakdown only (no audio)
 			_status_label.text = "📋 %s (config only - no audio)" % song_id
@@ -818,6 +1398,110 @@ func _stop_song():
 	_stop_btn.disabled = true
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
+
+
+func _analyze_current_track():
+	"""Analyze the current track and display results in the scorecard"""
+	if _current_stream == null:
+		_status_label.text = "No track loaded - select a song first"
+		return
+	
+	_status_label.text = "Analyzing track..."
+	
+	# Extract audio samples from the current stream
+	var audio_data = PackedFloat32Array()
+	
+	if _current_stream is AudioStreamInteractive:
+		var clip_count = _current_stream.clip_count
+		if clip_count > 0:
+			# Get first clip's stream
+			var first_clip = _current_stream.get_clip_stream(0)
+			if first_clip is AudioStreamWAV:
+				audio_data = _extract_samples_from_wav(first_clip)
+	
+	if audio_data.is_empty():
+		_status_label.text = "Could not extract audio for analysis"
+		return
+	
+	# Run analysis
+	var bpm = _estimate_bpm_from_song(_current_song_id)
+	_scorecard.analyze(audio_data, bpm)
+	
+	# Show scorecard and update status
+	_scorecard.visible = true
+	var results = _scorecard.get_results()
+	var overall = results.get("overall_score", 0.0) * 10.0
+	_status_label.text = "Analysis: %.1f/10 | λ=%.2f" % [overall, results.get("estimated_lambda", 0.5)]
+
+
+func _extract_samples_from_wav(wav: AudioStreamWAV) -> PackedFloat32Array:
+	"""Extract float samples from AudioStreamWAV"""
+	var result = PackedFloat32Array()
+	var data = wav.data
+	
+	if data.is_empty():
+		return result
+	
+	var format = wav.format
+	
+	match format:
+		AudioStreamWAV.FORMAT_8_BITS:
+			result.resize(data.size())
+			for i in range(data.size()):
+				result[i] = (float(data[i]) - 128.0) / 128.0
+		AudioStreamWAV.FORMAT_16_BITS:
+			var sample_count = data.size() / 2
+			result.resize(sample_count)
+			for i in range(sample_count):
+				var low = data[i * 2]
+				var high = data[i * 2 + 1]
+				var value = low | (high << 8)
+				if value >= 32768:
+					value -= 65536
+				result[i] = float(value) / 32768.0
+		AudioStreamWAV.FORMAT_IMA_ADPCM:
+			pass  # Complex, skip
+	
+	return result
+
+
+func _estimate_bpm_from_song(song_id: String) -> float:
+	"""Estimate BPM based on song style"""
+	match song_id:
+		"boards_of_canada", "boards_of_canada_v2":
+			return 95.0
+		"burial", "burial_v2":
+			return 130.0
+		"kraftwerk", "kraftwerk_v2":
+			return 110.0
+		"detroit_techno":
+			return 125.0
+		"rave":
+			return 145.0
+		"reese_jungle":
+			return 170.0
+		"french_touch":
+			return 122.0
+		"supersaw_trance":
+			return 140.0
+		"ambient_works", "ambient_techno":
+			return 100.0
+		"moroder_disco":
+			return 115.0
+		"synthwave", "blade_runner":
+			return 100.0
+		"lofi_house":
+			return 115.0
+		"prog_synth_70s":
+			return 100.0
+		"prog_synth_v2":
+			return 105.0
+		"pop_v2":
+			return 118.0
+		"pop_madonna":
+			return 118.0
+		_:
+			return 120.0
 
 
 func _on_song_finished():
@@ -1472,6 +2156,167 @@ func _load_song_words(song_id: String):
 			"Drums": {
 				"words": ["punchy", "clean", "mechanical"],
 				"params": {"type": "TR-808 / custom", "tempo": 110}
+			}
+		},
+		# V2 Enhanced Versions
+		"boards_of_canada_v2": {
+			"Warbly Pad": {
+				"words": ["warm", "analog", "unstable", "nostalgic", "tape-degraded"],
+				"params": {"detune_cents": 15, "lfo_rate": 0.15, "voices": 4}
+			},
+			"Melody": {
+				"words": ["childlike", "simple", "detuned", "dotted-delay"],
+				"params": {"delay_type": "dotted_8th", "drift": 0.012}
+			},
+			"Warm Bass": {
+				"words": ["deep", "soft", "filtered", "warm"],
+				"params": {"filter_cutoff": 400, "saturation": "tape"}
+			},
+			"Lo-Fi Drums": {
+				"words": ["crunchy", "humanized", "hip-hop", "bit-crushed"],
+				"params": {"bitcrush": 10, "timing_humanize": 10}
+			},
+			"Texture": {
+				"words": ["VHS", "tape-hiss", "crackle", "nostalgic"],
+				"params": {"noise_type": "cassette"}
+			}
+		},
+		"burial_v2": {
+			"Atmosphere": {
+				"words": ["dark", "cavernous", "evolving", "urban"],
+				"params": {"reverb_decay": 6.0, "phaser": true}
+			},
+			"Sub Bass": {
+				"words": ["underground", "earthy", "warm", "heavy"],
+				"params": {"freq": 40, "saturation": 1.4}
+			},
+			"Garage Stab": {
+				"words": ["organ", "reverbed", "offbeat", "soulful"],
+				"params": {"harmonics": 3, "decay": 0.3}
+			},
+			"2-Step Drums": {
+				"words": ["shuffled", "loose", "humanized", "fuzzy"],
+				"params": {"timing_slop": 15, "quantize": false}
+			},
+			"Pitched Vocal": {
+				"words": ["ghostly", "timestretched", "distant", "R&B"],
+				"params": {"pitch_shift": -5, "timestretched": true}
+			},
+			"Crackle": {
+				"words": ["vinyl", "rain", "static", "South London"],
+				"params": {"density": 0.004}
+			}
+		},
+		"kraftwerk_v2": {
+			"Sequence": {
+				"words": ["precise", "mechanical", "hypnotic", "stable"],
+				"params": {"drift": 0.0, "filter_cutoff": 2000}
+			},
+			"Moog Bass": {
+				"words": ["clean", "dual-saw", "ladder-filtered", "punchy"],
+				"params": {"detune_cents": 2, "filter_cutoff": 600}
+			},
+			"Vocoder Pad": {
+				"words": ["robotic", "formant", "chorus", "wide"],
+				"params": {"bands": 16, "filter": 3000}
+			},
+			"Moog Lead": {
+				"words": ["bright", "vibrato", "expressive", "Florian"],
+				"params": {"vibrato_rate": 5, "vibrato_depth": 0.008}
+			},
+			"Motorik Drums": {
+				"words": ["driving", "8th-hat", "mechanical", "Autobahn"],
+				"params": {"pattern": "motorik", "tempo": 110}
+			},
+			"Car Sounds": {
+				"words": ["engine", "highway", "road-noise", "cinematic"],
+				"params": {"type": "Autobahn ambience"}
+			}
+		},
+		"prog_synth_v2": {
+			"Mellotron Pad": {
+				"words": ["warm", "analog", "string-machine", "choir-like", "drifting"],
+				"params": {"detune_cents": 10, "attack": 2.0, "chorus": 0.3, "drift": 5}
+			},
+			"Motif Bell": {
+				"words": ["crystalline", "recurring", "identity", "5th-interval", "recognizable"],
+				"params": {"interval": "P5", "recurrence": "every_8_bars", "decay": 1.2}
+			},
+			"Moog Bass V2": {
+				"words": ["fat", "warm", "sub", "filtered", "analog-drift"],
+				"params": {"osc": "dual_saw+sub", "filter": "ladder_800Hz", "drift_cents": 8}
+			},
+			"Arp Sequence": {
+				"words": ["pulsing", "PWM", "resonant", "ascending", "hypnotic"],
+				"params": {"wave": "square_pwm", "pattern": "1-5-8-5", "filter_sweep": true}
+			},
+			"Prog Lead": {
+				"words": ["bright", "vibrato", "portamento", "screaming", "ELP-style"],
+				"params": {"filter": 3500, "vibrato_hz": 5, "glide": true}
+			},
+			"Motorik V2": {
+				"words": ["driving", "tight", "humanized", "8th-hats", "Neu!-style"],
+				"params": {"pattern": "motorik", "humanize_ms": 5, "tempo": 105}
+			}
+		},
+		"pop_v2": {
+			"Pluck Motif": {
+				"words": ["digital", "clean", "rhythmic", "identity", "chillwave"],
+				"params": {"wave": "sine+harmonics", "decay": 6.0, "pattern": "syncopated"}
+			},
+			"Shimmer Arp": {
+				"words": ["sparkle", "high", "detuned", "ethereal", "air"],
+				"params": {"octave": "+2", "detune": 0.003, "decay": 8.0}
+			},
+			"Sub 808": {
+				"words": ["deep", "sub", "pitched", "modern", "clean"],
+				"params": {"freq_range": "30-60Hz", "pitch_env": true, "saturation": 1.2}
+			},
+			"Sidechain Pad": {
+				"words": ["pumping", "warm", "ducking", "atmospheric", "soft-saw"],
+				"params": {"sidechain": "4th-note", "attack": 0.1, "filter": "lowpass"}
+			},
+			"Vocal Chop": {
+				"words": ["formant", "rhythmic", "pitched", "ah-vowel", "percussive"],
+				"params": {"formants": [800, 1200, 2500], "decay": 8.0}
+			},
+			"Synth Lead": {
+				"words": ["supersaw-lite", "bright", "melodic", "hook", "3-voice"],
+				"params": {"voices": 3, "detune": 0.01, "filter": "mid-bright"}
+			},
+			"Snap Beat": {
+				"words": ["minimal", "finger-snap", "clean", "modern", "sparse"],
+				"params": {"kick": "4th", "snap": "backbeat", "hats": "8th"}
+			},
+			"Full Beat": {
+				"words": ["driving", "layered-clap", "16th-hats", "punchy", "chorus-energy"],
+				"params": {"kick": "4th+extra", "clap": "layered", "hats": "16th"}
+			}
+		},
+		"pop_madonna": {
+			"Gated Drums": {
+				"words": ["80s", "gated-reverb", "punchy", "snappy", "dance"],
+				"params": {"kick": "4-on-floor", "snare": "gated_reverb_150ms", "hats": "8th_bright"}
+			},
+			"Octave Bass": {
+				"words": ["jumping", "synth", "saw", "filtered", "bouncy"],
+				"params": {"pattern": "low-low-HIGH-low", "wave": "detuned_saw", "filter_env": true}
+			},
+			"Juno Pad": {
+				"words": ["lush", "PWM", "bright", "chorus", "shimmery"],
+				"params": {"wave": "pwm_square", "chorus": 0.4, "filter": "bright"}
+			},
+			"Synth Stab": {
+				"words": ["brass", "DX7", "bright", "attack", "chord-hit"],
+				"params": {"harmonics": 4, "decay": 12.0, "character": "brassy"}
+			},
+			"Hook Melody": {
+				"words": ["catchy", "singable", "bright", "memorable", "lead"],
+				"params": {"wave": "sine+saw", "range": "octave_up", "vibrato": false}
+			},
+			"String Hits": {
+				"words": ["orchestral", "stab", "downbeat", "dramatic", "80s"],
+				"params": {"attack": 0.02, "release": 0.4, "harmonics": "rich"}
 			}
 		}
 	}

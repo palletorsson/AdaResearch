@@ -1,0 +1,27 @@
+{
+    "_metadata": {
+        "sound_type": "burial_song",
+        "display_name": "Burial",
+        "description": "Untrue style. 2-step garage rhythms, vinyl crackle, pitched vocals, cavernous reverb, South London rain.",
+        "category": "songs",
+        "tags": ["burial", "dubstep", "uk_garage", "dark", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Burial"],
+        "reference_tracks": ["Archangel", "Untrue", "Ghost Hardware"]
+    },
+    "identity": {
+        "emotion": "melancholic_urban",
+        "era": "mid_00s_london",
+        "character": ["dark", "cavernous", "ghostly", "crackly"]
+    },
+    "parameters": {
+        "bpm": { "min": 125, "max": 140, "value": 130, "step": 1 },
+        "key": { "options": ["Am", "Dm", "Em", "Gm"], "value": "Am" },
+        "darkness": { "min": 0.0, "max": 1.0, "value": 0.8 }
+    },
+    "sound_design": {
+        "sub_bass": { "filter_cutoff": 120, "style": "uk_garage" },
+        "crackle": { "density": 0.004, "style": "vinyl" },
+        "drums": { "style": "2step_garage", "tempo": 130 }
+    }
+}

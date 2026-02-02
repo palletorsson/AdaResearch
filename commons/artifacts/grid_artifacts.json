@@ -3,6 +3,16 @@
 	"format": "lab_artifacts",
 	"description": "Artifact definitions for the Lab environment",
 	"artifacts": {
+		"vector_translation_demo": {
+			"name": "Vector Translation Demo",
+			"lookup_name": "vector_translation_demo",
+			"description": "Interactive slider-controlled vector translation. Adjust magnitude and direction to see cube movement. Shows position = origin + vector relationship.",
+			"scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+			"category": "transformations",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"tags": ["vector", "translation", "transform", "interactive", "slider"]
+		},
 		"mobius_world": {
 			"name": "Möbius World",
 			"lookup_name": "mobius_world",

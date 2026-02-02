@@ -1,0 +1,79 @@
+{
+    "_archive_metadata": {
+        "original_file": "rave.json",
+        "version": 1,
+        "archived_date": "2025-01-30",
+        "description": "First identity-based configuration with full sound design specs"
+    },
+    "_metadata": {
+        "sound_type": "rave_song",
+        "display_name": "Rave",
+        "description": "90s breakbeat hardcore / happy hardcore. The Prodigy, SL2, Altern-8 style. Hoover bass, chopped breakbeats, piano stabs, euphoric chaos.",
+        "category": "songs",
+        "tags": ["rave", "breakbeat", "hardcore", "90s", "prodigy", "hoover", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["The Prodigy", "SL2", "Altern-8", "2 Unlimited"],
+        "reference_tracks": ["Charly", "On a Ragga Tip", "Activ-8", "Experience"]
+    },
+    "identity": {
+        "emotion": "euphoric_chaos",
+        "era": "early_90s_uk",
+        "character": ["raw", "energetic", "slightly_chaotic", "warehouse"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 480.0, "value": 300.0, "step": 30.0, "description": "Rave track length" },
+        "bpm": { "min": 140, "max": 160, "value": 145, "step": 1, "description": "Fast and driving" },
+        "key": { "options": ["Am", "Em", "Dm", "Gm"], "value": "Am", "description": "Minor for dark euphoria" },
+        "aggression": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "Intensity level" }
+    },
+    "sound_design": {
+        "hoover": {
+            "source": "alpha_juno_what_the",
+            "oscillators": { "saw": 0.6, "pwm": 0.4 },
+            "pulse_width_modulation": { "rate_hz": 3.0, "depth": 0.2 },
+            "portamento": true,
+            "filter": {
+                "type": "lowpass_resonant",
+                "cutoff_hz": { "min": 800, "max": 2000 },
+                "resonance": 0.75,
+                "lfo_rate_hz": 4.0
+            },
+            "distortion": { "amount": 0.6, "type": "tanh" },
+            "character": "screaming_aggressive_slides"
+        },
+        "breakbeats": {
+            "sources": ["amen", "think", "funky_drummer"],
+            "processing": ["timestretched", "chopped", "layered"],
+            "tempo_stretch": { "original": 120, "target": 145 },
+            "character": "frantic_energy"
+        },
+        "piano_stabs": {
+            "source": "m1_piano",
+            "pattern": "offbeat_stabs",
+            "processing": ["reverb", "slight_delay"],
+            "role": "euphoric_lift"
+        },
+        "vocal_samples": {
+            "style": ["chopped", "pitched", "timestretched"],
+            "character": ["rave_mc_shouts", "diva_samples"],
+            "processing": ["heavy_reverb", "delay_throws"]
+        }
+    },
+    "drum_pattern": {
+        "style": "syncopated_breakbeat",
+        "kick_steps": [0, 3, 6, 10, 12, 15],
+        "snare_steps": [4, 8, 11, 14],
+        "hat_steps": [0, 2, 4, 6, 8, 10, 12, 14]
+    },
+    "chord_progressions": [
+        { "name": "euphoric_descent", "chords": ["Am", "G", "F", "E"] },
+        { "name": "hypnotic_oscillation", "chords": ["Am", "Am", "G", "G"] },
+        { "name": "building_tension", "chords": ["i", "VII", "VI", "VII"] },
+        { "name": "classic_rave", "chords": ["i", "VI", "VII", "i"] }
+    ],
+    "arrangement": {
+        "structure": "builds_to_drops",
+        "energy": "constant_high",
+        "breakdowns": "strip_to_beat_plus_stabs_rebuild"
+    }
+}

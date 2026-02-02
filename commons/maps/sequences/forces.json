@@ -8,25 +8,31 @@
 			"formula": "F = m × a → a = F/m → v += a × dt → p += v × dt",
 			"demonstration": "Feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
 
-			"description": "Physical forces and their effects on motion. Newton's laws in action: every force produces acceleration, every acceleration changes velocity, every velocity changes position. This is the engine of dynamics.",
+			"description": "Physical forces and their effects on motion. Newton's laws in action: every force produces acceleration, every acceleration changes velocity, every velocity changes position. Vectors become physics.",
 			"layer": "behaviors",
-			"prerequisites": ["vectors"],
+			"prerequisites": ["transformations"],
 			"unlocks": ["physicssimulation", "swarmintelligence", "softbodies"],
 
 			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
+			"estimated_time": "35-45 minutes",
 
 			"learning_objectives": [
+				"Vectors as forces: direction and magnitude in physics",
+				"Velocity and acceleration as vector quantities",
 				"F = ma: Force equals mass times acceleration",
-				"Vector forces: direction and magnitude combine",
 				"Gravity: constant downward acceleration (9.8 m/s²)",
 				"Attraction and repulsion: inverse square laws",
+				"Torque: rotational forces from cross products",
 				"Friction: resistance proportional to normal force",
 				"Particle systems: many bodies under forces",
 				"Integration: Euler, Verlet, RK4 methods"
 			],
 
 			"content": [
+				"VectorForces: Vectors as physical forces—direction meets physics",
+				"VectorMotion: Velocity and acceleration as vectors",
+				"VectorThrowing: Physics interaction with vectors",
+				"VectorTorque: Rotational forces from cross products",
 				"Forces_Drone_Game: Applied forces in interactive context",
 				"Forces_Destruct: Destructible environments—forces break things",
 				"Forces_1: Introduction to force application",
@@ -40,6 +46,10 @@
 			],
 
 			"maps": [
+				"VectorForces",
+				"VectorMotion",
+				"VectorThrowing",
+				"VectorTorque",
 				"Forces_Drone_Game",
 				"Forces_Destruct",
 				"Forces_1",
@@ -55,20 +65,24 @@
 			"axiom_files": [
 				"res://commons/context/clipboard/tutorial_text/forces_axioms.md",
 				"res://commons/context/clipboard/tutorial_text/newtons_laws.md",
-				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md"
+				"res://commons/context/clipboard/tutorial_text/gravity_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/vectors_axioms.md"
 			],
 
 			"algorithm_paths": {
 				"Forces_1": "res://algorithms/physics/forces/",
-				"Forces_Destruct": "res://algorithms/physics/destruction/"
+				"Forces_Destruct": "res://algorithms/physics/destruction/",
+				"VectorForces": "res://algorithms/vectors/forces/",
+				"VectorMotion": "res://algorithms/vectors/motion/"
 			},
 
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_color",
-			"unlock_requirements": ["vectors"],
+			"lab_map": "Lab/map_data_post_forces",
+			"unlock_requirements": [],
 			"completion_rewards": [
 				"force_master_badge",
-				"newton_badge"
+				"newton_badge",
+				"physics_vector_badge"
 			]
 		}
 	}

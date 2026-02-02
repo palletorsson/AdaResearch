@@ -2,16 +2,27 @@
 	"sequences": {
 		"noise": {
 			"name": "Noise: Entropy with Memory",
+			"truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
+			"qfep_term": "λE(S)",
+			"qfep_connection": "Noise is the λ parameter tuned for coherence: entropy constrained by smoothness. The edge of chaos made continuous.",
+			"formula": "noise(p) = Σ amplitude^i × perlin(frequency^i × p)",
 			"description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuity—each value smoothly related to those around it. This is the λ parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usable—random enough to be surprising, continuous enough to be natural.",
+			"layer": "behaviors",
+			"prerequisites": ["randomness"],
+			"unlocks": ["proceduralgeneration", "morphogenesis"],
+
 			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
+			"estimated_time": "30-40 minutes",
+
 			"learning_objectives": [
 				"Noise as structured entropy: randomness with continuity constraints",
 				"White noise vs. smooth noise: the λ spectrum of coherence",
 				"Octaves as fractal layering: multiple scales of structured randomness",
 				"Perlin/Simplex: grid + gradient + interpolation algorithms",
+				"Vector fields: noise as flow direction",
 				"Procedural generation: noise as substrate for worlds"
 			],
+
 			"content": [
 				"Noise_Columns: Vertical extrusion of 2D noise field",
 				"Noise_One: Single-dimensional noise visualization",
@@ -22,8 +33,10 @@
 				"Noise_Space_10: Noise in spatial context",
 				"Noise_Functions: Comparative noise function gallery",
 				"Noise_Perlin_Simplex: Perlin vs. Simplex comparison",
-				"Noise_Blue: Anti-aliased, evenly-distributed noise"
+				"Noise_Blue: Anti-aliased, evenly-distributed noise",
+				"VectorFieldFlow: Vector fields and fluid dynamics—noise as direction"
 			],
+
 			"maps": [
 				"Noise_Columns",
 				"Noise_One",
@@ -34,17 +47,28 @@
 				"Noise_Space_10",
 				"Noise_Functions",
 				"Noise_Perlin_Simplex",
-				"Noise_Blue"
+				"Noise_Blue",
+				"VectorFieldFlow"
 			],
+
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/noise_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
+			],
+
+			"algorithm_paths": {
+				"Noise_Perlin_Simplex": "res://algorithms/noise/",
+				"VectorFieldFlow": "res://algorithms/vectors/flowfield/"
+			},
+
 			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_color",
-			"unlock_requirements": [
-				"randomness"
-			],
+			"lab_map": "Lab/map_data_post_noise",
+			"unlock_requirements": [],
 			"completion_rewards": [
 				"noise_architect_badge",
 				"coherent_chaos_badge",
-				"procedural_mind_badge"
+				"procedural_mind_badge",
+				"flow_field_badge"
 			]
 		}
 	}

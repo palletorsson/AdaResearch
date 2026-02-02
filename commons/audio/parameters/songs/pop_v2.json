@@ -1,0 +1,28 @@
+{
+    "_metadata": {
+        "sound_type": "pop_v2_song",
+        "display_name": "Pop V2",
+        "description": "Enhanced modern pop. Chillwave motifs, shimmer arps, 808 sub, pumping pads, vocal chops.",
+        "category": "songs",
+        "tags": ["pop", "modern", "chillwave", "v2", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Billie Eilish", "Finneas", "Tame Impala", "The 1975"],
+        "reference_tracks": ["ocean eyes", "Currents", "Somebody Else"]
+    },
+    "identity": {
+        "emotion": "dreamy_modern",
+        "era": "2010s_present",
+        "character": ["ethereal", "clean", "atmospheric", "hooky"]
+    },
+    "parameters": {
+        "bpm": { "min": 100, "max": 125, "value": 118, "step": 1 },
+        "key": { "options": ["C", "Am", "G", "Em"], "value": "Am" },
+        "shimmer": { "min": 0.0, "max": 1.0, "value": 0.7 }
+    },
+    "sound_design": {
+        "pluck_motif": { "decay": 6.0, "pattern": "syncopated" },
+        "shimmer_arp": { "octave": "+2", "detune": 0.003 },
+        "sub_808": { "pitch_env": true },
+        "drums": { "style": "minimal_snap", "tempo": 118 }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "_metadata": {
+        "sound_type": "pop_madonna_song",
+        "display_name": "80s Madonna Pop",
+        "description": "Like a Virgin / True Blue era. Gated drums, octave bass, Juno pads, DX7 stabs, catchy hooks.",
+        "category": "songs",
+        "tags": ["80s", "madonna", "synth_pop", "gated", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Madonna", "Cyndi Lauper", "Whitney Houston"],
+        "reference_tracks": ["Like a Virgin", "Material Girl", "True Blue"]
+    },
+    "identity": {
+        "emotion": "confident_glamour",
+        "era": "mid_80s",
+        "character": ["punchy", "shimmery", "catchy", "dance"]
+    },
+    "parameters": {
+        "bpm": { "min": 115, "max": 130, "value": 118, "step": 1 },
+        "key": { "options": ["C", "G", "F", "D"], "value": "C" },
+        "80s_intensity": { "min": 0.0, "max": 1.0, "value": 0.85 }
+    },
+    "sound_design": {
+        "gated_drums": {
+            "snare": { "gated_reverb_ms": 150 },
+            "kick": "four_on_floor",
+            "hats": "8th_bright"
+        },
+        "octave_bass": { "pattern": "low_low_HIGH_low", "wave": "detuned_saw" },
+        "juno_pad": { "wave": "pwm_square", "chorus": 0.4 },
+        "synth_stab": { "type": "dx7_brass", "decay": 12.0 }
+    }
+}

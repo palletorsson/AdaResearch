@@ -1,11 +1,92 @@
 {
-  "_metadata": {
-    "sound_type": "detroit_techno",
-    "description": "Detroit Techno - Juan Atkins, Derrick May style. Cold machine funk, minimal, hypnotic 4/4.",
-    "tags": ["techno", "detroit", "electronic", "minimal", "machine", "song"],
-    "is_song": true
-  },
-  "parameters": {
-    "bpm": { "min": 120, "max": 130, "value": 125, "unit": "BPM" }
-  }
+    "_metadata": {
+        "sound_type": "detroit_techno_song",
+        "display_name": "Hard Detroit Techno",
+        "description": "Jeff Mills, Robert Hood, Underground Resistance style. Relentless 909, minimal stabs, driving force. No soul, just machine.",
+        "category": "songs",
+        "tags": ["techno", "detroit", "hard", "minimal", "909", "industrial", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Jeff Mills", "Robert Hood", "Underground Resistance", "Surgeon"],
+        "reference_tracks": ["The Bells", "Minimal Nation", "Punisher", "Jupiter Jazz"]
+    },
+    "identity": {
+        "emotion": "relentless_drive",
+        "era": "early_90s_detroit_industrial",
+        "character": ["hard", "minimal", "driving", "mechanical", "dark"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 600.0, "value": 360.0, "step": 60.0 },
+        "bpm": { "min": 130, "max": 145, "value": 138, "step": 1, "description": "Faster, harder" },
+        "key": { "options": ["Am", "Em", "Dm", "Bm"], "value": "Am", "description": "Minor, dark" },
+        "hardness": { "min": 0.5, "max": 1.0, "value": 0.85, "step": 0.05, "description": "Aggression level" }
+    },
+    "sound_design": {
+        "drums": {
+            "machine": "TR-909",
+            "kick": {
+                "fundamental_hz": 55,
+                "punch_hz": { "min": 150, "max": 200 },
+                "attack": "hard",
+                "decay": "tight",
+                "drive": 0.3,
+                "character": "pounding"
+            },
+            "snare": { 
+                "character": "snappy_909", 
+                "pitch": "high",
+                "reverb": "none"
+            },
+            "hihats": { 
+                "style": "relentless_16th",
+                "open_hat_offbeat": true,
+                "velocity_variation": 0.1
+            },
+            "claps": { "on_2_and_4": true, "layered": false }
+        },
+        "bass": {
+            "style": "minimal_stab",
+            "waveform": "square",
+            "filter": {
+                "type": "lowpass_resonant",
+                "cutoff_hz": 400,
+                "resonance": 0.6,
+                "envelope": "plucky"
+            },
+            "pattern": "single_note_pulse",
+            "character": "dark_driving"
+        },
+        "stabs": {
+            "style": "metallic_hit",
+            "source": "detuned_saw_chord",
+            "filter": { "type": "bandpass", "cutoff_hz": 2000 },
+            "decay_ms": 80,
+            "pattern": "offbeat_sparse",
+            "character": "industrial"
+        },
+        "texture": {
+            "style": "machine_noise",
+            "elements": ["filtered_noise_sweeps", "metallic_resonance"],
+            "density": "sparse"
+        }
+    },
+    "arrangement": {
+        "structure": "hypnotic_loop",
+        "loop_length_bars": 8,
+        "builds": ["filter_close", "element_drop", "snare_roll"],
+        "breakdowns": "strip_to_kick_only",
+        "drops": "full_force_return",
+        "variation": "minimal"
+    },
+    "mix": {
+        "kick_dominant": true,
+        "low_end_focus_hz": 60,
+        "high_cut_hz": 12000,
+        "room": "dry",
+        "compression": "heavy"
+    },
+    "chord_progressions": [
+        { "name": "single_note", "chords": ["Am"], "notes": "No progression, just root" },
+        { "name": "minimal_shift", "chords": ["Am", "Em"], "bars": 16 },
+        { "name": "dark_descent", "chords": ["Am", "Gm", "Fm"], "bars": 24 }
+    ]
 }

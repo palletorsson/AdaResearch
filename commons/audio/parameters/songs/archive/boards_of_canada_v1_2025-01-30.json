@@ -1,0 +1,26 @@
+{
+    "_metadata": {
+        "sound_type": "boards_of_canada_song",
+        "display_name": "Boards of Canada",
+        "description": "Music Has the Right to Children style. Warbly detuned synths, lo-fi textures, nostalgic melodies, tape degradation.",
+        "category": "songs",
+        "tags": ["boards_of_canada", "idm", "ambient", "lofi", "nostalgic", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Boards of Canada"],
+        "reference_tracks": ["Roygbiv", "Turquoise Hexagon Sun", "An Eagle in Your Mind"]
+    },
+    "identity": {
+        "emotion": "nostalgic_wonder",
+        "era": "late_90s_warp",
+        "character": ["warbly", "nostalgic", "detuned", "tape_degraded"]
+    },
+    "parameters": {
+        "bpm": { "min": 85, "max": 110, "value": 95, "step": 1 },
+        "key": { "options": ["G", "Am", "Em", "C"], "value": "G" },
+        "tape_wobble": { "min": 0.0, "max": 1.0, "value": 0.6 }
+    },
+    "sound_design": {
+        "warbly_pad": { "drift": 0.12, "distortion": 0.2 },
+        "drums": { "style": "lofi_breakbeat", "tempo": 95 }
+    }
+}

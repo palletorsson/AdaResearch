@@ -1,0 +1,72 @@
+{
+    "_archive_metadata": {
+        "original_file": "detroit_techno.json",
+        "version": 1,
+        "archived_date": "2025-01-30",
+        "description": "First identity-based configuration with full sound design specs"
+    },
+    "_metadata": {
+        "sound_type": "detroit_techno_song",
+        "display_name": "Detroit Techno",
+        "description": "Juan Atkins, Derrick May, Kevin Saunderson style. Cold machine funk meets soulful strings. 909 drums, Juno pads, hypnotic repetition.",
+        "category": "songs",
+        "tags": ["techno", "detroit", "electronic", "minimal", "machine", "soulful", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Juan Atkins", "Derrick May", "Kevin Saunderson", "Model 500"],
+        "reference_tracks": ["No UFOs", "Strings of Life", "Big Fun", "Clear"]
+    },
+    "identity": {
+        "emotion": "cold_soulfulness",
+        "era": "mid_to_late_80s_detroit",
+        "character": ["machine_precision", "human_feeling", "futuristic_longing"]
+    },
+    "parameters": {
+        "duration": { "min": 120.0, "max": 600.0, "value": 360.0, "step": 60.0, "description": "Song duration (DJ-friendly length)" },
+        "bpm": { "min": 120, "max": 130, "value": 125, "step": 1, "description": "Steady, driving tempo" },
+        "key": { "options": ["Cm", "Gm", "Dm", "Am"], "value": "Cm", "description": "Minor keys for melancholic futurism" },
+        "soul_amount": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "String/pad presence vs machine coldness" }
+    },
+    "sound_design": {
+        "drums": {
+            "machine": "TR-909",
+            "kick": {
+                "fundamental_hz": 50,
+                "thump_hz": { "min": 100, "max": 150 },
+                "character": "punchy"
+            },
+            "snare": { "character": "crisp_909", "reverb": "subtle" },
+            "hihats": { "style": "open_closed_909", "rides": true },
+            "claps": { "layer_with_snare": true }
+        },
+        "strings": {
+            "source": "juno_106",
+            "oscillators": 2,
+            "chorus": true,
+            "filter_movement": "slow",
+            "character": "lush_detuned_melancholic",
+            "role": "emotional_core"
+        },
+        "bass": {
+            "style": "minimoog_warm",
+            "pattern": "hypnotic_1_to_2_notes",
+            "character": "round_supportive"
+        },
+        "leads": {
+            "style": "fm_bells_or_filtered_squares",
+            "usage": "sparse_punctuation",
+            "processing": ["reverb", "delay"]
+        }
+    },
+    "chord_progressions": [
+        { "name": "epic_cinematic", "chords": ["Cm", "Ab", "Eb", "Bb"] },
+        { "name": "hopeful_minor", "chords": ["Gm", "Eb", "Bb", "F"] },
+        { "name": "introspective", "chords": ["Dm", "Am", "G", "F"] },
+        { "name": "circular", "chords": ["i", "VI", "VII", "i"] }
+    ],
+    "arrangement": {
+        "structure": "loop_evolution",
+        "loop_length_bars": { "min": 8, "max": 16 },
+        "builds": ["filter_sweeps", "element_addition", "element_subtraction"],
+        "breakdowns": "kick_plus_pads_rebuild"
+    }
+}

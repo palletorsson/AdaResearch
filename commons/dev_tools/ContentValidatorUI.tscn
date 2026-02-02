@@ -1,0 +1,209 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://commons/dev_tools/ContentValidatorUI.gd" id="1_script"]
+[ext_resource type="Script" path="res://commons/dev_tools/MapGridDrawer.gd" id="2_grid"]
+[ext_resource type="Script" path="res://commons/dev_tools/ContentMapRenderer.gd" id="3_metro"]
+
+[node name="ContentValidatorUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Pages" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorldMapPage" type="Control" parent="Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Pages/WorldMapPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Pages/WorldMapPage/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Pages/WorldMapPage/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "🗺️ Content Overview"
+
+[node name="Spacer" type="Control" parent="Pages/WorldMapPage/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValidateButton" type="Button" parent="Pages/WorldMapPage/VBox/Header"]
+layout_mode = 2
+text = "🔄 Refresh"
+
+[node name="StatusLabel" type="Label" parent="Pages/WorldMapPage/VBox/Header"]
+layout_mode = 2
+text = "Loading..."
+
+[node name="HSplit" type="HSplitContainer" parent="Pages/WorldMapPage/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 350
+
+[node name="MetroMapPanel" type="PanelContainer" parent="Pages/WorldMapPage/VBox/HSplit"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MetroMap" type="Control" parent="Pages/WorldMapPage/VBox/HSplit/MetroMapPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_metro")
+
+[node name="Scroll" type="ScrollContainer" parent="Pages/WorldMapPage/VBox/HSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="SpineContainer" type="VBoxContainer" parent="Pages/WorldMapPage/VBox/HSplit/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="SequencePage" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Pages/SequencePage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Pages/SequencePage/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="Pages/SequencePage/VBox/Header"]
+layout_mode = 2
+text = "← Back"
+
+[node name="Title" type="Label" parent="Pages/SequencePage/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Sequence"
+
+[node name="InfoPanel" type="RichTextLabel" parent="Pages/SequencePage/VBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+bbcode_enabled = true
+text = "Sequence info"
+fit_content = true
+scroll_active = false
+
+[node name="MapsLabel" type="Label" parent="Pages/SequencePage/VBox"]
+layout_mode = 2
+text = "Maps:"
+
+[node name="Scroll" type="ScrollContainer" parent="Pages/SequencePage/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MapsContainer" type="GridContainer" parent="Pages/SequencePage/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="MapPage" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Pages/MapPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Pages/MapPage/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="Pages/MapPage/VBox/Header"]
+layout_mode = 2
+text = "← Back to Sequence"
+
+[node name="Title" type="Label" parent="Pages/MapPage/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Map"
+
+[node name="HSplit" type="HSplitContainer" parent="Pages/MapPage/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 320
+
+[node name="LeftPanel" type="VBoxContainer" parent="Pages/MapPage/VBox/HSplit"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="GridLabel" type="Label" parent="Pages/MapPage/VBox/HSplit/LeftPanel"]
+layout_mode = 2
+text = "2D Layout"
+
+[node name="MapGrid" type="Control" parent="Pages/MapPage/VBox/HSplit/LeftPanel"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+clip_contents = true
+script = ExtResource("2_grid")
+
+[node name="ArtifactsLabel" type="Label" parent="Pages/MapPage/VBox/HSplit/LeftPanel"]
+layout_mode = 2
+text = "Artifacts:"
+
+[node name="ArtifactsList" type="ItemList" parent="Pages/MapPage/VBox/HSplit/LeftPanel"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RightPanel" type="VBoxContainer" parent="Pages/MapPage/VBox/HSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MapTabs" type="TabContainer" parent="Pages/MapPage/VBox/HSplit/RightPanel"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
