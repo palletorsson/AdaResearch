@@ -9,6 +9,7 @@ class_name SoundDetailPanel
 const WordSynthBridge = preload("res://commons/audio/catalog/WordSynthBridge.gd")
 const SynthConfigRegistry = preload("res://commons/audio/catalog/SynthConfigRegistry.gd")
 const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
+const SoundDescriptions = preload("res://commons/audio/catalog/SoundDescriptions.gd")
 
 signal param_changed(layer: String, param: String, value: float)
 signal word_added(layer: String, word: String)
@@ -27,7 +28,7 @@ var _original_params: Dictionary = {}
 # UI Components
 var _header_label: Label
 var _type_label: Label
-var _close_btn: Button
+var _synth_description: Label
 var _preview_btn: Button
 
 # Sections
@@ -162,18 +163,21 @@ func _setup_ui():
 	_style_button(_preview_btn, Color(0.2, 0.5, 0.3))
 	header.add_child(_preview_btn)
 	
-	_close_btn = Button.new()
-	_close_btn.text = "✕"
-	_close_btn.pressed.connect(func(): close_requested.emit())
-	_style_button(_close_btn, Color(0.4, 0.2, 0.2))
-	header.add_child(_close_btn)
-	
 	# Type label
 	_type_label = Label.new()
 	_type_label.text = "Select a sound to edit"
 	_type_label.add_theme_font_size_override("font_size", 13)
 	_type_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
 	main_vbox.add_child(_type_label)
+	
+	# Synthesis description (one-sentence explanation)
+	_synth_description = Label.new()
+	_synth_description.text = ""
+	_synth_description.add_theme_font_size_override("font_size", 12)
+	_synth_description.add_theme_color_override("font_color", Color(0.6, 0.7, 0.65))
+	_synth_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_synth_description.custom_minimum_size.y = 40
+	main_vbox.add_child(_synth_description)
 	
 	# === WORDS SECTION ===
 	main_vbox.add_child(_create_section_header("🏷️ WORDS", Color(0.9, 0.7, 0.4)))
@@ -275,7 +279,11 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	
 	# Update header
 	_header_label.text = "🎛️ %s" % layer
-	_type_label.text = "Song: %s | Layer Type: %s" % [song_id, _detect_layer_type(layer)]
+	var synth_type = SoundDescriptions.get_short_type(layer)
+	_type_label.text = "Song: %s | Type: %s" % [song_id, synth_type]
+	
+	# Synthesis description
+	_synth_description.text = "⚡ " + SoundDescriptions.get_description(layer, song_id)
 	
 	# Rebuild UI
 	_rebuild_words()

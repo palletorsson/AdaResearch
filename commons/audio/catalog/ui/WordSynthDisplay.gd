@@ -12,6 +12,7 @@ signal layer_selected(layer: String)
 signal add_word_requested(layer: String, position: Vector2)
 
 const WORD_MAP_PATH = "res://commons/audio/parameters/word_synthesis_map.json"
+const SoundDescriptions = preload("res://commons/audio/catalog/SoundDescriptions.gd")
 
 var _word_map: Dictionary = {}
 var _layer_words: Dictionary = {}  # layer_name -> [words]
@@ -129,6 +130,7 @@ func _rebuild_layer_display(layer_name: String):
 	name_btn.add_theme_color_override("font_hover_color", Color(1.0, 1.0, 1.0))
 	name_btn.pressed.connect(_on_layer_name_clicked.bind(layer_name))
 	name_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_btn.tooltip_text = SoundDescriptions.get_description(layer_name)
 	header.add_child(name_btn)
 	
 	# Preview button (plays just this layer)

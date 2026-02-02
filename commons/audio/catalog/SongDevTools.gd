@@ -54,6 +54,14 @@ var _layer_controls: VBoxContainer
 var _word_display: WordSynthDisplay
 var _layer_solos: Dictionary = {}  # layer_name -> {solo: CheckBox, mute: CheckBox, volume: HSlider}
 
+# Tab navigation
+var _main_tabs: TabContainer
+var _overview_tab: Control
+var _sound_editor_tab: Control
+var _sound_detail_panel: SoundDetailPanel
+var _editor_back_btn: Button
+var _editor_sound_name: Label
+
 # Parameter Panel
 var _param_panel: PanelContainer
 var _param_sliders: Dictionary = {}  # param_name -> HSlider
@@ -224,11 +232,23 @@ func _setup_ui():
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	
-	# Main horizontal split
+	# Main TabContainer
+	_main_tabs = TabContainer.new()
+	_main_tabs.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_main_tabs.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 8)
+	_main_tabs.tab_changed.connect(_on_tab_changed)
+	add_child(_main_tabs)
+	
+	# === OVERVIEW TAB ===
+	_overview_tab = Control.new()
+	_overview_tab.name = "🎵 Overview"
+	_main_tabs.add_child(_overview_tab)
+	
+	# Main horizontal split (inside overview tab)
 	var hsplit = HSplitContainer.new()
 	hsplit.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	hsplit.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 16)
-	add_child(hsplit)
+	hsplit.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 8)
+	_overview_tab.add_child(hsplit)
 	
 	# Left panel - song list and timeline
 	var left_panel = VBoxContainer.new()
@@ -379,6 +399,69 @@ func _setup_ui():
 	_word_display.layer_selected.connect(_on_layer_selected)
 	_word_display.add_word_requested.connect(show_word_picker)
 	word_panel.add_child(_word_display)
+	
+	# === SOUND EDITOR TAB ===
+	_setup_sound_editor_tab()
+
+
+func _setup_sound_editor_tab():
+	"""Create the Sound Editor tab with full editing capabilities"""
+	_sound_editor_tab = VBoxContainer.new()
+	_sound_editor_tab.name = "🎛️ Sound Editor"
+	_sound_editor_tab.add_theme_constant_override("separation", 8)
+	_main_tabs.add_child(_sound_editor_tab)
+	
+	# Header with back button and sound name
+	var header = HBoxContainer.new()
+	header.add_theme_constant_override("separation", 12)
+	_sound_editor_tab.add_child(header)
+	
+	_editor_back_btn = Button.new()
+	_editor_back_btn.text = "← Back to Overview"
+	_editor_back_btn.pressed.connect(_on_editor_back_pressed)
+	_style_button_compact(_editor_back_btn, Color(0.3, 0.35, 0.4))
+	header.add_child(_editor_back_btn)
+	
+	_editor_sound_name = Label.new()
+	_editor_sound_name.text = "Select a sound to edit"
+	_editor_sound_name.add_theme_font_size_override("font_size", 24)
+	_editor_sound_name.add_theme_color_override("font_color", Color(0.4, 0.85, 1.0))
+	_editor_sound_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(_editor_sound_name)
+	
+	# Hint label when no sound selected
+	var hint_label = Label.new()
+	hint_label.name = "HintLabel"
+	hint_label.text = "Click on a layer name in the Overview tab to edit its sound"
+	hint_label.add_theme_font_size_override("font_size", 14)
+	hint_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.55))
+	hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_sound_editor_tab.add_child(hint_label)
+	
+	# Sound Detail Panel (hidden until a sound is selected)
+	_sound_detail_panel = SoundDetailPanel.new()
+	_sound_detail_panel.name = "DetailPanel"
+	_sound_detail_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_sound_detail_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_sound_detail_panel.visible = false
+	_sound_detail_panel.param_changed.connect(_on_detail_param_changed)
+	_sound_detail_panel.word_added.connect(_on_detail_word_added)
+	_sound_detail_panel.word_removed.connect(_on_detail_word_removed)
+	_sound_detail_panel.preview_requested.connect(_on_detail_preview)
+	_sound_detail_panel.close_requested.connect(_on_editor_back_pressed)
+	_sound_editor_tab.add_child(_sound_detail_panel)
+
+
+func _on_tab_changed(tab_index: int):
+	"""Handle tab switching"""
+	pass  # Audio continues playing regardless of tab
+
+
+func _on_editor_back_pressed():
+	"""Return to Overview tab"""
+	_main_tabs.current_tab = 0
 
 
 func _create_visualizer() -> Control:
@@ -1861,32 +1944,10 @@ func _on_word_picker_toggled(pressed: bool, layer: String, word: String):
 	_status_label.text = "🏷️ %s: %s" % [layer, ", ".join(current_words)]
 
 
-# === SOUND DETAIL PANEL (Full Editing) ===
-
-var _detail_popup: PopupPanel = null
-var _detail_panel: SoundDetailPanel = null
+# === SOUND DETAIL PANEL (Tab-based) ===
 
 func show_sound_breakdown(layer: String):
-	"""Show full sound editing panel with sliders, words, suggestions"""
-	if _detail_popup == null:
-		_detail_popup = PopupPanel.new()
-		_detail_popup.size = Vector2(480, 700)
-		# Don't make it a separate window - keep it embedded so audio continues
-		_detail_popup.popup_window = false
-		_detail_popup.exclusive = false
-		_detail_popup.transient = false
-		
-		_detail_panel = SoundDetailPanel.new()
-		_detail_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		_detail_panel.param_changed.connect(_on_detail_param_changed)
-		_detail_panel.word_added.connect(_on_detail_word_added)
-		_detail_panel.word_removed.connect(_on_detail_word_removed)
-		_detail_panel.preview_requested.connect(_on_detail_preview)
-		_detail_panel.close_requested.connect(func(): _detail_popup.hide())
-		_detail_popup.add_child(_detail_panel)
-		
-		add_child(_detail_popup)
-	
+	"""Switch to Sound Editor tab and load the selected sound"""
 	# Get config and words
 	var config = SynthConfigRegistry.get_layer_config(_current_song_id, layer)
 	if config.is_empty():
@@ -1894,12 +1955,20 @@ func show_sound_breakdown(layer: String):
 	
 	var words = _word_display._layer_words.get(layer, [])
 	
-	# Load into detail panel
-	_detail_panel.load_sound(_current_song_id, layer, words, config)
+	# Update editor tab header
+	_editor_sound_name.text = "🎛️ %s" % layer
 	
-	# Center popup
-	_detail_popup.position = get_viewport_rect().size / 2.0 - Vector2(_detail_popup.size) / 2.0
-	_detail_popup.popup()
+	# Hide hint, show detail panel
+	var hint = _sound_editor_tab.get_node_or_null("HintLabel")
+	if hint:
+		hint.visible = false
+	_sound_detail_panel.visible = true
+	
+	# Load into detail panel
+	_sound_detail_panel.load_sound(_current_song_id, layer, words, config)
+	
+	# Switch to Sound Editor tab
+	_main_tabs.current_tab = 1
 	
 	_status_label.text = "🎛️ Editing: %s" % layer
 
