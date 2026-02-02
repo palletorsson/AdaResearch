@@ -159,19 +159,21 @@ func _update_arrow() -> void:
 	
 	arrow.visible = true
 	
-	# Scale arrow to match vector length
-	var base_length = 1.0  # Arrow's default length
-	var scale_factor = mag / base_length
-	arrow.scale = Vector3(scale_factor, scale_factor, scale_factor) * 0.15
+	# Scale arrow to match vector length (arrow is ~1 unit long at scale 1)
+	arrow.scale = Vector3.ONE * mag
 	
-	# Rotate arrow to point in vector direction
-	if current_vector.length() > 0.001:
+	# Point arrow from origin toward cube
+	# Arrow mesh points along +Z, look_at makes -Z point at target
+	# So we look at the opposite direction
+	if mag > 0.001:
 		var target_dir = current_vector.normalized()
-		# Arrow points in -Z by default, so we look_at the target
-		var look_target = arrow.global_position + target_dir
-		arrow.look_at(look_target, Vector3.UP)
-		# Rotate 90 degrees because arrow mesh points in different direction
-		arrow.rotate_object_local(Vector3.RIGHT, PI/2)
+		var up = Vector3.UP
+		if abs(target_dir.dot(Vector3.UP)) > 0.99:
+			up = Vector3.FORWARD
+		
+		# look_at points -Z at target, but our arrow points +Z
+		# So look at the negative direction
+		arrow.look_at(arrow.global_position - target_dir, up)
 
 func _update_trail() -> void:
 	if not show_trail:

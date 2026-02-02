@@ -1,0 +1,86 @@
+{
+    "_metadata": {
+        "sound_type": "warm_strings_pad",
+        "display_name": "Warm Strings Pad",
+        "description": "Lush detuned string pad - wide stereo, slow filter LFO, classic house warmth",
+        "category": "pop_edm",
+        "era": "early_90s",
+        "tags": ["pad", "strings", "warm", "house", "ambient"],
+        "reference_artists": ["Sasha", "Deep Dish", "Bedrock"],
+        "reference_tracks": ["Gypsy Woman", "Flashdance"],
+        "created_at": "2026-02-05T12:00:00Z",
+        "version": "1.0"
+    },
+    "parameters": {
+        "oscillators": {
+            "value": 4,
+            "min": 2,
+            "max": 8,
+            "step": 1
+        },
+        "detune_cents": {
+            "value": 12,
+            "min": 0,
+            "max": 50,
+            "step": 1
+        },
+        "attack_ms": {
+            "value": 200,
+            "min": 10,
+            "max": 2000,
+            "step": 10
+        },
+        "decay_ms": {
+            "value": 500,
+            "min": 100,
+            "max": 2000,
+            "step": 50
+        },
+        "sustain": {
+            "value": 0.7,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "release_ms": {
+            "value": 500,
+            "min": 100,
+            "max": 3000,
+            "step": 50
+        },
+        "filter_type": {
+            "value": "lowpass",
+            "options": ["lowpass", "bandpass"]
+        },
+        "filter_cutoff_hz": {
+            "value": 3000,
+            "min": 500,
+            "max": 8000,
+            "step": 100
+        },
+        "filter_lfo_rate_hz": {
+            "value": 0.1,
+            "min": 0.01,
+            "max": 2.0,
+            "step": 0.01
+        },
+        "filter_lfo_depth": {
+            "value": 0.2,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "stereo_width": {
+            "value": 0.8,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.1
+        },
+        "volume_db": {
+            "value": -6,
+            "min": -24,
+            "max": 0,
+            "step": 1
+        }
+    }
+}

@@ -412,7 +412,8 @@ func _create_line_between(start: Vector3, end: Vector3, index: int) -> MeshInsta
 		var up = Vector3.UP
 		if abs(direction.dot(up)) > 0.99:
 			up = Vector3.RIGHT
-		line.look_at(midpoint + direction, up)
+		# Use Basis.looking_at() instead of look_at() - works before node is in tree
+		line.basis = Basis.looking_at(direction, up)
 		line.rotate_object_local(Vector3.RIGHT, PI/2)
 
 	return line

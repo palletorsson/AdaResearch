@@ -13,7 +13,7 @@
 			"difficulty": "beginner",
 			"category": "wavefunctions",
 			"estimated_time": "6-8 minutes",
-			"learning_objectives": ["Sine wave fundamentals: sin(t) oscillation", "Amplitude and frequency parameters", "Spatial phase offset creating wave propagation", "Critical perspective: the closed loop of perfect periodicity"]
+			"learning_objectives": ["Sine wave fundamentals: sin(t) oscillation", "Simple harmonic motion (SHM)", "Amplitude and frequency parameters", "Multiple oscillators and phase relationships", "Spatial phase offset creating wave propagation"]
 		}
 	},
 	"documentation": {
@@ -93,9 +93,9 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "colorballs", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "harmonic_motion_demo:0:0.5", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "oscilloscope:0:0.5", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "pick_up_cube", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "colorballs", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],

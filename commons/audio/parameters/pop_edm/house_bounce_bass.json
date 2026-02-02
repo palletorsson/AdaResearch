@@ -1,0 +1,68 @@
+{
+    "_metadata": {
+        "sound_type": "house_bounce_bass",
+        "display_name": "House Bounce Bass",
+        "description": "Bouncy 90s house bassline - sawtooth with filter envelope, octave jumps",
+        "category": "pop_edm",
+        "era": "early_90s",
+        "tags": ["house", "bass", "bounce", "90s", "octave"],
+        "reference_artists": ["Crystal Waters", "CeCe Peniston", "Basement Jaxx"],
+        "reference_tracks": ["Gypsy Woman", "Finally", "Red Alert"],
+        "created_at": "2026-02-05T12:00:00Z",
+        "version": "1.0"
+    },
+    "parameters": {
+        "waveform": {
+            "value": "sawtooth",
+            "options": ["sawtooth", "square", "triangle", "pulse"]
+        },
+        "filter_type": {
+            "value": "lowpass",
+            "options": ["lowpass", "bandpass"]
+        },
+        "filter_cutoff_hz": {
+            "value": 800,
+            "min": 200,
+            "max": 3000,
+            "step": 50
+        },
+        "filter_resonance": {
+            "value": 0.4,
+            "min": 0.0,
+            "max": 0.9,
+            "step": 0.05
+        },
+        "filter_env_amount": {
+            "value": 0.3,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "filter_env_decay_ms": {
+            "value": 150,
+            "min": 20,
+            "max": 500,
+            "step": 10
+        },
+        "pattern": {
+            "value": "octave_bounce",
+            "options": ["octave_bounce", "root_fifth", "walking", "steady"]
+        },
+        "notes_per_bar": {
+            "value": 8,
+            "min": 4,
+            "max": 16,
+            "step": 1
+        },
+        "slide": {
+            "value": true,
+            "options": [true, false]
+        },
+        "slide_time_ms": {
+            "value": 30,
+            "min": 10,
+            "max": 100,
+            "step": 5
+        }
+    }
+}

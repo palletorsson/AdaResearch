@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://cspring_demo"]
+
+[ext_resource type="Script" path="res://commons/artifacts/spring_demo/spring_demo.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdub" path="res://commons/interactables/slider_horizontal.tscn" id="2_slider"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mass"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="Material_mass"]
+albedo_color = Color(0.9, 0.3, 0.2, 1.0)
+emission_enabled = true
+emission = Color(0.5, 0.1, 0.1, 1.0)
+emission_energy_multiplier = 1.0
+metallic = 0.3
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_anchor"]
+size = Vector3(0.3, 0.05, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="Material_anchor"]
+albedo_color = Color(0.3, 0.3, 0.35, 1.0)
+metallic = 0.7
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_arrow"]
+top_radius = 0.0
+bottom_radius = 0.03
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="Material_arrow"]
+albedo_color = Color(1.0, 1.0, 0.2, 1.0)
+emission_enabled = true
+emission = Color(0.8, 0.8, 0.0, 1.0)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="StandardMaterial3D" id="Material_spring"]
+vertex_color_use_as_albedo = true
+shading_mode = 0
+
+[node name="SpringDemo" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Anchor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_anchor")
+surface_material_override/0 = SubResource("Material_anchor")
+
+[node name="Mass" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_mass")
+surface_material_override/0 = SubResource("Material_mass")
+
+[node name="SpringMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("Material_spring")
+
+[node name="ForceArrow" type="Node3D" parent="."]
+
+[node name="ArrowMesh" type="MeshInstance3D" parent="ForceArrow"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.2, 0, 0)
+mesh = SubResource("CylinderMesh_arrow")
+surface_material_override/0 = SubResource("Material_arrow")
+
+[node name="FormulaLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.003
+text = "F = -kx - cv"
+font_size = 28
+outline_size = 4
+horizontal_alignment = 1
+modulate = Color(0.9, 0.95, 1.0, 1.0)
+
+[node name="ValuesLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.3, 0)
+pixel_size = 0.0015
+text = "k=10.0  m=1.00  c=0.20
+x=0.500  v=0.000
+F=-5.00  T=0.63s"
+font_size = 20
+outline_size = 2
+horizontal_alignment = 0
+modulate = Color(0.7, 0.85, 0.9, 1.0)
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
+pixel_size = 0.003
+text = "Spring-Mass System"
+font_size = 32
+outline_size = 5
+horizontal_alignment = 1
+
+[node name="HookesLaw" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+pixel_size = 0.002
+text = "Hooke's Law: Spring force proportional to displacement"
+font_size = 16
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.6, 0.7, 0.8, 0.8)
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.4, 0.4)
+
+[node name="StiffnessSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="MassSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DampingSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="PanelLabel" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0.01)
+pixel_size = 0.001
+text = "SPRING PARAMETERS"
+font_size = 12
+outline_size = 2
+horizontal_alignment = 1

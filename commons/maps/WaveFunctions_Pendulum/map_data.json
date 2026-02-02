@@ -13,7 +13,7 @@
 			"difficulty": "beginner",
 			"category": "algorithms",
 			"estimated_time": "5 minutes",
-			"learning_objectives": ["Wavefunctions"]
+			"learning_objectives": ["Gravity creates oscillation", "Simple pendulum mechanics", "Spring-mass systems", "Pendulum wave patterns", "Chaos: double pendulum sensitivity"]
 		}
 	},
 	"documentation": {
@@ -56,10 +56,10 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "PendulumWave:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "PendulumWave:90", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", "PendulumWave:90", " ", " "],
+			[" ", "spring_demo:0:0.5", " ", " ", " ", " ", " ", " ", " ", "PendulumWave:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", "", " ", " ", " ", " ", " ", " "],
+			[" ", "harmonic_motion_demo:0:0.5", " ", " ", " ", "", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "PendulumGrid3x3:180:3:0.5", " ", "", " ", " ", " ", " "],

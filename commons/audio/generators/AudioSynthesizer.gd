@@ -3115,6 +3115,205 @@ static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, ins
 	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
 
 
+# === GYPSY WOMAN HOUSE 90s ===
+# Crystal Waters "Gypsy Woman" (1991) style - Classic NYC/Chicago house
+# Key: piano stabs, bouncy filtered bass, 909 drums, soulful groove
+static func generate_gypsy_woman_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 120.0  # Classic house tempo
+	var bar_duration = 240.0 / bpm
+	
+	# F major is the iconic key for this track
+	var root_note = "F3"
+	var scale = PopMusicTheory.get_major_scale_notes(root_note)
+	
+	# Gypsy Woman chord progression: Fmaj7 - Gm7 - Am7 - Gm7
+	var progression = [0, 1, 2, 1]  # I - ii - iii - ii in F major
+	
+	print("AudioSynthesizer: Generating Gypsy Woman House in F major")
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+	
+	# Intro: Just drums building
+	var intro = _generate_gypsy_house_section(progression, scale, ["drums"], bar_duration)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Verse: Add bass and piano stabs
+	var verse = _generate_gypsy_house_section(progression, scale, ["drums", "bass", "piano_stab"], bar_duration)
+	playback.set_clip_stream(1, verse)
+	playback.set_clip_name(1, "Verse")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Chorus: Full arrangement with pads
+	var chorus = _generate_gypsy_house_section(progression, scale, ["drums", "bass", "piano_stab", "pad"], bar_duration)
+	playback.set_clip_stream(2, chorus)
+	playback.set_clip_name(2, "Chorus")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Breakdown: Piano and pad only
+	var breakdown = _generate_gypsy_house_section([0, 2], scale, ["piano_stab", "pad"], bar_duration)
+	playback.set_clip_stream(3, breakdown)
+	playback.set_clip_name(3, "Breakdown")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 1)  # Back to verse
+	
+	var xfade = 1.0
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_gypsy_house_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
+	var bpm = 120.0
+	var total_duration = progression.size() * bar_duration * 2  # 2 bars per chord
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# 909-STYLE HOUSE DRUMS
+		if "drums" in instruments:
+			var beat_samples = int(bar_duration * SAMPLE_RATE / 4)  # 16th note grid
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var beat_in_bar = int(fmod(j, bar_duration * SAMPLE_RATE) / beat_samples)
+				var sample_in_beat = j % beat_samples
+				var beat_t = float(sample_in_beat) / beat_samples
+				
+				# Kick on 1, 5, 9, 13 (4-on-floor)
+				if beat_in_bar % 4 == 0 and sample_in_beat < int(SAMPLE_RATE * 0.15):
+					var kick_t = float(sample_in_beat) / SAMPLE_RATE
+					var kick_freq = 55.0 * exp(-kick_t * 30.0) + 45.0  # Pitch drop
+					var kick = sin(2.0 * PI * kick_freq * kick_t)
+					kick *= exp(-kick_t * 15.0)  # Amplitude decay
+					kick = tanh(kick * 2.5)  # Soft saturation
+					chord_mix[j] += kick * 0.5
+				
+				# Clap/Snare on 5, 13 (beats 2 and 4)
+				if (beat_in_bar == 4 or beat_in_bar == 12) and sample_in_beat < int(SAMPLE_RATE * 0.12):
+					var clap_t = float(sample_in_beat) / SAMPLE_RATE
+					var noise = randf() * 2.0 - 1.0
+					var clap_env = exp(-clap_t * 25.0)
+					# Bandpass filter simulation for clap
+					chord_mix[j] += noise * clap_env * 0.25
+				
+				# Hi-hats: 16th notes with velocity variation
+				if sample_in_beat < int(SAMPLE_RATE * 0.03):
+					var hat_t = float(sample_in_beat) / SAMPLE_RATE
+					var hat_noise = randf() * 2.0 - 1.0
+					var hat_env = exp(-hat_t * 80.0)
+					var hat_vel = 0.15 if beat_in_bar % 2 == 0 else 0.08  # Accent on offbeats
+					# Open hat on 2.5 and 6.5 (offbeats)
+					if beat_in_bar == 2 or beat_in_bar == 6 or beat_in_bar == 10 or beat_in_bar == 14:
+						hat_env = exp(-hat_t * 20.0)  # Longer decay for open hat
+						hat_vel = 0.12
+					chord_mix[j] += hat_noise * hat_env * hat_vel
+		
+		# HOUSE BASS - Bouncy filtered saw
+		if "bass" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var beat_pos = fmod(t * bpm / 60.0, 1.0)
+				
+				# Octave bounce pattern (root, root+octave alternating)
+				var bass_freq = root_freq * 0.5
+				if int(t * bpm / 60.0 * 2) % 2 == 1:
+					bass_freq *= 2.0  # Octave up on offbeats
+				
+				# Sawtooth oscillator
+				var saw = fmod(t * bass_freq, 1.0) * 2.0 - 1.0
+				
+				# Filter envelope (opens and closes with each note)
+				var note_t = fmod(t, 60.0 / bpm / 2)
+				var filter_env = 0.2 + 0.6 * exp(-note_t * 12.0)
+				saw = tanh(saw * (1.0 + filter_env))
+				
+				# Sidechain ducking from kick
+				var sidechain = 1.0 - exp(-beat_pos * 8.0) * 0.4
+				
+				chord_mix[j] += saw * sidechain * filter_env * 0.3
+		
+		# PIANO STABS - Classic house piano
+		if "piano_stab" in instruments:
+			# Stab on beats 1, 2.5, 3, 4.5 (syncopated)
+			var stab_times = [0.0, 0.375, 0.5, 0.875]  # In bar fractions
+			for stab_time in stab_times:
+				var stab_start = int(stab_time * bar_duration * 2 * SAMPLE_RATE)
+				var stab_duration = int(SAMPLE_RATE * 0.25)  # Short stab
+				
+				for j in range(stab_duration):
+					if stab_start + j >= samples_per_chord:
+						break
+					var t = float(j) / SAMPLE_RATE
+					var stab = 0.0
+					
+					# Play full chord (add 7th for that house flavor)
+					for k in range(min(4, chord_freqs.size())):
+						var freq = chord_freqs[k]
+						# Complex tone (fundamental + harmonics)
+						stab += sin(2.0 * PI * freq * t) * 0.5
+						stab += sin(2.0 * PI * freq * 2.0 * t) * 0.25
+						stab += sin(2.0 * PI * freq * 3.0 * t) * 0.1
+					
+					# Sharp attack, quick decay (stab envelope)
+					var env = exp(-t * 8.0)
+					chord_mix[stab_start + j] += stab * env * 0.15
+		
+		# WARM PAD - Strings/synth pad
+		if "pad" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var pad = 0.0
+				
+				# Detuned oscillators for warmth
+				for k in range(min(3, chord_freqs.size())):
+					var freq = chord_freqs[k]
+					pad += sin(2.0 * PI * freq * t)
+					pad += sin(2.0 * PI * freq * 1.003 * t) * 0.7  # Slight detune
+					pad += sin(2.0 * PI * freq * 0.997 * t) * 0.7
+				
+				# Slow filter LFO
+				var lfo = 0.5 + 0.5 * sin(2.0 * PI * 0.1 * t)
+				pad *= 0.3 + 0.7 * lfo
+				
+				# Soft envelope
+				var progress = float(j) / samples_per_chord
+				var env = sin(progress * PI)  # Fade in and out
+				
+				chord_mix[j] += pad * env * 0.08
+		
+		# Mix this chord's audio into final
+		var offset = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if offset + j < total_samples:
+				final_mix[offset + j] += chord_mix[j]
+	
+	# Soft clip the final mix
+	for i in range(total_samples):
+		final_mix[i] = tanh(final_mix[i])
+	
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_FORWARD)
+
+
 # === POP MADONNA 80s ===
 # "Holiday", "Into the Groove" era - Jellybean Benitez production style
 # Key: gated reverb snare, octave bass, bright Juno stabs, 4-on-floor

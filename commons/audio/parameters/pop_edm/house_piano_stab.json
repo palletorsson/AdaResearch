@@ -1,0 +1,74 @@
+{
+    "_metadata": {
+        "sound_type": "house_piano_stab",
+        "display_name": "House Piano Stab",
+        "description": "Classic 90s house piano stab - punchy, filtered, rhythmic chord hits",
+        "category": "pop_edm",
+        "era": "early_90s",
+        "tags": ["house", "piano", "stab", "90s", "chord"],
+        "reference_artists": ["Crystal Waters", "Robin S", "Black Box"],
+        "reference_tracks": ["Gypsy Woman", "Show Me Love", "Ride On Time"],
+        "created_at": "2026-02-05T12:00:00Z",
+        "version": "1.0"
+    },
+    "parameters": {
+        "waveform": {
+            "value": "complex_piano",
+            "options": ["complex_piano", "electric_piano", "rhodes", "wurlitzer"]
+        },
+        "attack_ms": {
+            "value": 5,
+            "min": 1,
+            "max": 50,
+            "step": 1
+        },
+        "decay_ms": {
+            "value": 300,
+            "min": 50,
+            "max": 800,
+            "step": 10
+        },
+        "sustain": {
+            "value": 0.3,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.05
+        },
+        "release_ms": {
+            "value": 200,
+            "min": 50,
+            "max": 1000,
+            "step": 10
+        },
+        "filter_type": {
+            "value": "lowpass",
+            "options": ["lowpass", "bandpass", "highpass"]
+        },
+        "filter_cutoff_hz": {
+            "value": 4000,
+            "min": 500,
+            "max": 12000,
+            "step": 100
+        },
+        "filter_resonance": {
+            "value": 0.2,
+            "min": 0.0,
+            "max": 0.9,
+            "step": 0.05
+        },
+        "velocity_sensitivity": {
+            "value": 0.6,
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.1
+        },
+        "voicing": {
+            "value": "close_position",
+            "options": ["close_position", "spread", "drop2", "quartal"]
+        },
+        "inversions": {
+            "value": true,
+            "options": [true, false]
+        }
+    }
+}

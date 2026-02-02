@@ -1,0 +1,170 @@
+[gd_scene load_steps=12 format=3 uid="uid://coscilloscope_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/oscilloscope/oscilloscope_artifact.gd" id="1_script"]
+[ext_resource type="Script" path="res://commons/artifacts/oscilloscope/oscilloscope_display.gd" id="2_display"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdub" path="res://commons/interactables/slider_horizontal.tscn" id="3_slider"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+size = Vector3(0.6, 0.5, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="Material_chassis"]
+albedo_color = Color(0.12, 0.12, 0.14, 1.0)
+metallic = 0.3
+roughness = 0.7
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+size = Vector2(0.5, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="Material_screen"]
+shading_mode = 0
+albedo_color = Color(0.01, 0.03, 0.01, 1.0)
+emission_enabled = true
+emission = Color(0.05, 0.1, 0.05, 1.0)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_bezel"]
+size = Vector3(0.54, 0.44, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="Material_bezel"]
+albedo_color = Color(0.08, 0.08, 0.1, 1.0)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
+top_radius = 0.015
+bottom_radius = 0.018
+height = 0.02
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="Material_knob"]
+albedo_color = Color(0.3, 0.3, 0.35, 1.0)
+metallic = 0.8
+roughness = 0.3
+
+[node name="OscilloscopeArtifact" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("BoxMesh_chassis")
+surface_material_override/0 = SubResource("Material_chassis")
+
+[node name="Screen" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.076)
+
+[node name="ScreenMesh" type="MeshInstance3D" parent="Screen"]
+mesh = SubResource("QuadMesh_screen")
+surface_material_override/0 = SubResource("Material_screen")
+
+[node name="Bezel" type="MeshInstance3D" parent="Screen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+mesh = SubResource("BoxMesh_bezel")
+surface_material_override/0 = SubResource("Material_bezel")
+
+[node name="ScreenViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 400)
+render_target_update_mode = 4
+
+[node name="OscilloscopeDisplay" type="Control" parent="ScreenViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_display")
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0.08)
+pixel_size = 0.002
+text = "OSCILLOSCOPE"
+font_size = 24
+outline_size = 0
+horizontal_alignment = 1
+modulate = Color(0.7, 0.9, 0.8, 1.0)
+
+[node name="ModeLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.05, 0.08)
+pixel_size = 0.001
+text = "MODE"
+font_size = 12
+outline_size = 0
+
+[node name="ModeKnob" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.22, 0.02, 0.08)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("Material_knob")
+
+[node name="WaveLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.05, 0.08)
+pixel_size = 0.001
+text = "WAVE"
+font_size = 12
+outline_size = 0
+
+[node name="WaveKnob" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.1, 0.02, 0.08)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("Material_knob")
+
+[node name="ColorLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.05, 0.08)
+pixel_size = 0.001
+text = "COLOR"
+font_size = 12
+outline_size = 0
+
+[node name="ColorKnob" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.1, 0.02, 0.08)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("Material_knob")
+
+[node name="PresetLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.05, 0.08)
+pixel_size = 0.001
+text = "PRESET"
+font_size = 12
+outline_size = 0
+
+[node name="PresetKnob" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.22, 0.02, 0.08)
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("Material_knob")
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.35, 0)
+
+[node name="FreqASlider" parent="ControlPanel" instance=ExtResource("3_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="FreqBSlider" parent="ControlPanel" instance=ExtResource("3_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="AmplitudeSlider" parent="ControlPanel" instance=ExtResource("3_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PhaseSlider" parent="ControlPanel" instance=ExtResource("3_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="TimeDivSlider" parent="ControlPanel" instance=ExtResource("3_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="PanelLabel" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0.01)
+pixel_size = 0.001
+text = "CONTROLS"
+font_size = 14
+outline_size = 0
+horizontal_alignment = 1
+modulate = Color(0.6, 0.8, 0.7, 1.0)
+
+[node name="FormulaLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.08)
+pixel_size = 0.0012
+text = "x = A·sin(ωt + φ)
+y = B·sin(ωt·r)"
+font_size = 16
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.5, 0.7, 0.6, 0.8)

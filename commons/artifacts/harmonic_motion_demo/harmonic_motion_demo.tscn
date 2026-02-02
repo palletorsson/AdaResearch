@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://charmonic_motion_demo"]
+
+[ext_resource type="Script" path="res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdub" path="res://commons/interactables/slider_horizontal.tscn" id="2_slider"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_oscillator"]
+radius = 0.08
+height = 0.16
+
+[sub_resource type="StandardMaterial3D" id="Material_oscillator"]
+albedo_color = Color(0.0, 0.9, 1.0, 1.0)
+emission_enabled = true
+emission = Color(0.0, 0.5, 0.6, 1.0)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_track"]
+size = Vector3(4.0, 0.02, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="Material_track"]
+albedo_color = Color(0.2, 0.2, 0.25, 1.0)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_axis"]
+top_radius = 0.005
+bottom_radius = 0.005
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="Material_axis"]
+albedo_color = Color(0.5, 0.5, 0.5, 0.5)
+transparency = 1
+
+[node name="HarmonicMotionDemo" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Track" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("BoxMesh_track")
+surface_material_override/0 = SubResource("Material_track")
+
+[node name="CenterAxis" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, -1)
+mesh = SubResource("CylinderMesh_axis")
+surface_material_override/0 = SubResource("Material_axis")
+
+[node name="Oscillator" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_oscillator")
+surface_material_override/0 = SubResource("Material_oscillator")
+
+[node name="TrailMesh" type="MeshInstance3D" parent="."]
+
+[node name="SineCurve" type="MeshInstance3D" parent="."]
+
+[node name="FormulaLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+pixel_size = 0.003
+text = "x = A·sin(ωt + φ)"
+font_size = 32
+outline_size = 4
+horizontal_alignment = 1
+modulate = Color(0.8, 0.9, 1.0, 1.0)
+
+[node name="ValuesLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+pixel_size = 0.002
+text = "A=1.00  ω=6.28  φ=0°
+x=0.000"
+font_size = 24
+outline_size = 3
+horizontal_alignment = 1
+modulate = Color(0.6, 0.8, 0.9, 1.0)
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+pixel_size = 0.003
+text = "Simple Harmonic Motion"
+font_size = 36
+outline_size = 5
+horizontal_alignment = 1
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.2, 0.4)
+
+[node name="AmplitudeSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="FrequencySlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+
+[node name="PhaseSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="DampingSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+
+[node name="PanelLabel" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0.01)
+pixel_size = 0.001
+text = "PARAMETERS"
+font_size = 14
+outline_size = 2
+horizontal_alignment = 1

@@ -778,6 +778,69 @@ static func _register_all_configs():
 			"mix.high_shelf_db": 0
 		}
 	}
+	
+	# === GYPSY WOMAN HOUSE (Crystal Waters style) ===
+	# Classic 90s house - piano stabs, bouncy bass, 909 drums, euphoric
+	_configs["gypsy_woman_house"] = {
+		"Piano": {
+			"type": "house piano stab",
+			"filter.cutoff": 4000,
+			"filter.resonance": 0.2,
+			"env.attack": 0.005,
+			"env.decay": 0.3,
+			"env.sustain": 0.3,
+			"env.release": 0.2,
+			"velocity_sensitivity": 0.6,
+			"voicing": "close_position"
+		},
+		"Bass": {
+			"type": "house bounce",
+			"waveform": "sawtooth",
+			"filter.cutoff": 800,
+			"filter.resonance": 0.4,
+			"filter.type": "lowpass",
+			"env.attack": 0.001,
+			"env.decay": 0.15,
+			"env.sustain": 0.7,
+			"pattern": "octave_bounce",
+			"slide": 0.03
+		},
+		"Pad": {
+			"type": "warm strings",
+			"osc.voices": 4,
+			"osc.detune": 12,
+			"filter.cutoff": 3000,
+			"filter.resonance": 0.1,
+			"env.attack": 0.2,
+			"env.decay": 0.5,
+			"env.sustain": 0.7,
+			"env.release": 0.5,
+			"mod.lfo.rate": 0.1,
+			"mod.lfo.depth": 0.2,
+			"mod.lfo.target": "filter",
+			"mix.stereo_width": 1.2,
+			"mix.volume_db": -6
+		},
+		"Vocal Chop": {
+			"type": "la da dee",
+			"filter.cutoff": 3500,
+			"filter.resonance": 0.15,
+			"env.attack": 0.01,
+			"env.sustain": 0.8,
+			"fx.reverb.mix": 0.3,
+			"formant": "ah",
+			"mod.lfo.rate": 5.0,
+			"mod.lfo.depth": 0.01,
+			"mod.lfo.target": "pitch"
+		},
+		"Drums": {
+			"type": "TR-909",
+			"style": "four-on-floor house",
+			"tempo": 120,
+			"pattern": "classic_house",
+			"fx.reverb.mix": 0.15
+		}
+	}
 
 
 # === PUBLIC API ===

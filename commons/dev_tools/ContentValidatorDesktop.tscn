@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bowvwy6q1q6om"]
 
-[ext_resource type="Script" path="res://commons/dev_tools/ContentValidatorDesktop.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://c4ww7mcvmltr6" path="res://commons/dev_tools/ContentValidatorDesktop.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://commons/dev_tools/ContentValidatorUI.tscn" id="2_ui"]
 
 [node name="ContentValidatorDesktop" type="Control"]

@@ -1,0 +1,160 @@
+{
+    "_metadata": {
+        "sound_type": "gypsy_woman_house_song",
+        "display_name": "Gypsy Woman House",
+        "description": "Crystal Waters - Gypsy Woman (1991) style. Classic house piano stabs, bouncy bassline, 909 drums, and that iconic filtered disco-house groove. 'La da dee la dee da'",
+        "category": "songs",
+        "tags": ["house", "90s_house", "piano_house", "classic_house", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Crystal Waters", "Robin S", "CeCe Peniston", "Black Box"],
+        "reference_tracks": ["Gypsy Woman", "Show Me Love", "Finally", "Ride On Time"]
+    },
+    "identity": {
+        "emotion": "euphoric_uplifting",
+        "era": "early_90s_house",
+        "character": ["bouncy", "soulful", "filtered", "piano", "joyful"]
+    },
+    "parameters": {
+        "bpm": { "min": 118, "max": 124, "value": 120, "step": 1 },
+        "key": { "options": ["F", "Dm", "C", "Am", "G"], "value": "F" },
+        "swing": { "min": 0.0, "max": 0.2, "value": 0.05 },
+        "filter_cutoff": { "min": 200, "max": 8000, "value": 2000 }
+    },
+    "sound_design": {
+        "drums": {
+            "machine": "TR-909",
+            "style": "four_on_floor_house",
+            "kick": {
+                "punch_hz": 60,
+                "click_hz": 3000,
+                "decay_ms": 200,
+                "character": "punchy_909",
+                "velocity": 0.9
+            },
+            "snare": {
+                "style": "clap_909",
+                "on_beats": [2, 4],
+                "velocity": 0.75
+            },
+            "hihats": {
+                "style": "16th_offbeat",
+                "open_hat_on": [2.5, 4.5],
+                "velocity_variation": 0.15,
+                "swing": 0.05
+            },
+            "rimshot": {
+                "enabled": true,
+                "pattern": "offbeat_accent"
+            }
+        },
+        "bass": {
+            "style": "house_bounce",
+            "waveform": "sawtooth",
+            "filter": {
+                "type": "lowpass",
+                "cutoff_hz": 800,
+                "resonance": 0.4,
+                "envelope_amount": 0.3,
+                "envelope_decay_ms": 150
+            },
+            "pattern": "octave_bounce",
+            "notes_per_bar": 8,
+            "slide": true,
+            "slide_time_ms": 30
+        },
+        "piano": {
+            "style": "house_stab",
+            "waveform": "complex_piano",
+            "attack_ms": 5,
+            "decay_ms": 300,
+            "sustain": 0.3,
+            "release_ms": 200,
+            "filter": {
+                "type": "lowpass",
+                "cutoff_hz": 4000,
+                "resonance": 0.2
+            },
+            "velocity_sensitivity": 0.6,
+            "voicing": "close_position",
+            "inversions": true
+        },
+        "pads": {
+            "style": "warm_strings",
+            "oscillators": 4,
+            "detune_cents": 12,
+            "attack_ms": 200,
+            "release_ms": 500,
+            "filter": {
+                "type": "lowpass",
+                "cutoff_hz": 3000,
+                "lfo_rate_hz": 0.1,
+                "lfo_depth": 0.2
+            },
+            "volume": -6
+        },
+        "vocal_chop": {
+            "style": "la_da_dee",
+            "notes": ["F4", "A4", "C5", "F5"],
+            "rhythm": "syncopated",
+            "filter_sweep": true
+        }
+    },
+    "chord_progressions": [
+        {
+            "name": "main_verse",
+            "description": "The iconic Gypsy Woman progression",
+            "chords": ["Fmaj7", "Gm7", "Am7", "Gm7"],
+            "durations": [2, 2, 2, 2],
+            "voicing": "spread"
+        },
+        {
+            "name": "chorus",
+            "description": "Uplifting chorus section", 
+            "chords": ["Fmaj7", "Dm7", "Gm7", "C7"],
+            "durations": [2, 2, 2, 2]
+        },
+        {
+            "name": "breakdown",
+            "description": "Stripped back piano moment",
+            "chords": ["Fmaj7", "Am7"],
+            "durations": [4, 4]
+        }
+    ],
+    "arrangement": {
+        "structure": "verse_chorus_house",
+        "sections": [
+            {"name": "intro", "bars": 8, "elements": ["drums", "hihats"]},
+            {"name": "build", "bars": 8, "elements": ["drums", "bass", "hihats"]},
+            {"name": "verse", "bars": 16, "elements": ["drums", "bass", "piano", "hihats"], "progression": "main_verse"},
+            {"name": "chorus", "bars": 16, "elements": ["drums", "bass", "piano", "pads", "hihats"], "progression": "chorus"},
+            {"name": "breakdown", "bars": 8, "elements": ["piano", "pads"], "progression": "breakdown"},
+            {"name": "drop", "bars": 16, "elements": ["drums", "bass", "piano", "pads", "hihats"], "progression": "chorus"}
+        ],
+        "builds": ["filter_sweeps", "drum_fills", "element_addition"],
+        "transitions": {
+            "intro_to_build": "kick_roll",
+            "build_to_verse": "filter_open",
+            "verse_to_chorus": "snare_fill",
+            "breakdown_to_drop": "reverse_cymbal"
+        }
+    },
+    "mix": {
+        "kick_volume": 0,
+        "bass_volume": -3,
+        "piano_volume": -6,
+        "pad_volume": -9,
+        "hihat_volume": -8,
+        "master_compression": {
+            "threshold_db": -6,
+            "ratio": 3,
+            "attack_ms": 10,
+            "release_ms": 100
+        },
+        "sidechain": {
+            "source": "kick",
+            "targets": ["bass", "pads"],
+            "amount": 0.3,
+            "release_ms": 150
+        }
+    }
+}

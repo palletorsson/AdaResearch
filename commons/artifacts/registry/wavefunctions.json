@@ -23,6 +23,13 @@
 			"category": "waves"
 		},
 
+		"seismograph": {
+			"name": "seismograph",
+			"lookup_name": "seismograph",
+			"description": "seismograph",
+			"scene": "res://commons/lab/seismograph/seismograph.tscn",
+			"category": "waves"
+		},
 		"spectral_analyzer": {
 			"name": "Spectral Analyzer",
 			"lookup_name": "spectral_analyzer",
@@ -544,6 +551,84 @@
 			"lookup_name": "MelodySoundBoard",
 			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
 			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
+			"category": "waves"
+		},
+		"air_music_display_case": {
+			"name": "Air Music Display Case",
+			"lookup_name": "air_music_display_case",
+			"description": "A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.",
+			"scene": "res://commons/artifacts/air_music_display_case/air_music_display_case.tscn",
+			"category": "waves"
+		},
+		"chladni_plate": {
+			"name": "Chladni Plate",
+			"lookup_name": "chladni_plate",
+			"description": "Vibrating metal plate with sand particles that migrate to nodal lines, forming standing wave patterns. Auto-cycles through modes showing different resonant geometries. Ernst Chladni's classic 18th-century experiment demonstrating that sound creates visible form.",
+			"scene": "res://commons/artifacts/chladni_plate/chladni_plate.tscn",
+			"category": "waves"
+		},
+		"GlassRack": {
+			"name": "Glass Rack",
+			"lookup_name": "GlassRack",
+			"description": "Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.",
+			"scene": "res://commons/glass_rack/GlassRack.tscn",
+			"category": "waves"
+		},
+		
+		"multimeter": {
+			"name": "Multimeter",
+			"lookup_name": "multimeter",
+			"description": "Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage waveforms—the needle deflects following sin(t * frequency), showing how alternating current oscillates between positive and negative. Modes: AC voltage, DC voltage, resistance, frequency.",
+			"scene": "res://commons/lab/multimeter/multimeter.tscn",
+			"category": "waves"
+		},
+		"chemicalapparatus": {
+			"name": "Chemical Apparatus",
+			"lookup_name": "chemicalapparatus",
+			"description": "Chemistry station with bubbling liquids using sine-based animation. Flask and beaker liquids oscillate with phase offsets demonstrating wave relationships. Test tubes show wave propagation. Bunsen burner flame flickers using multi-frequency sine superposition for natural randomness.",
+			"scene": "res://commons/lab/chemicalapparatus/chemicalapparatus.tscn",
+			"category": "waves"
+		},
+		"samplevialrack": {
+			"name": "Sample Vial Rack",
+			"lookup_name": "samplevialrack",
+			"description": "Six sample vials demonstrating phase relationships. Each vial glows with a sine wave offset by TAU/6 from its neighbor, creating a visible wave propagation effect. Modes: linear wave travel, radial expansion from center, random phases. Classic wave interference visualization.",
+			"scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
+			"category": "waves"
+		},
+		"electronicscales": {
+			"name": "Electronic Scales",
+			"lookup_name": "electronicscales",
+			"description": "Laboratory scales demonstrating damped harmonic oscillation. When weighing, the display settles using e^(-bt) * sin(ωt)—exponential decay multiplied by sine. Adjustable damping factor and frequency. Shows how real oscillating systems lose energy over time.",
+			"scene": "res://commons/lab/electronicscales/electronicscales.tscn",
+			"category": "waves"
+		},
+		"microscope": {
+			"name": "Microscope",
+			"lookup_name": "microscope",
+			"description": "Laboratory microscope with pulsing illumination. Stage light breathes with slow sine wave, objective lens glows in quadrature phase. Auto-focus mode oscillates the stage height. Focus knob rotates to show mechanical-wave coupling. Three color-coded objectives.",
+			"scene": "res://commons/lab/microscope/microscope.tscn",
+			"category": "waves"
+		},
+		"atmosphericmonitoring": {
+			"name": "Atmospheric Monitoring Station",
+			"lookup_name": "atmosphericmonitoring",
+			"description": "Three analog gauges at different frequencies: pressure (0.05 Hz slow drift), temperature (0.02 Hz), humidity (0.03 Hz). Demonstrates how multiple independent oscillations create complex patterns. Status lights indicate normal ranges. Real atmospheric data oscillates similarly.",
+			"scene": "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.tscn",
+			"category": "waves"
+		},
+		"holographicdisplay": {
+			"name": "Holographic Display",
+			"lookup_name": "holographicdisplay",
+			"description": "Holographic projector with sine-based effects. Scan line sweeps vertically using sin(t), content rotates and bobs, flicker effect at 15Hz creates subtle instability. Wireframe cube demonstrates 3D rotation. Projector lights pulse with phase offsets around the ring.",
+			"scene": "res://commons/lab/holographicdisplay/holographicdisplay.tscn",
+			"category": "waves"
+		},
+		"biomagneticresonator": {
+			"name": "Biomagnetic Resonator",
+			"lookup_name": "biomagneticresonator",
+			"description": "Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.",
+			"scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
 			"category": "waves"
 		}
 

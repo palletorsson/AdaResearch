@@ -13,6 +13,76 @@
 			"complexity": "beginner",
 			"tags": ["vector", "translation", "transform", "interactive", "slider"]
 		},
+		"oscilloscope": {
+			"name": "Oscilloscope",
+			"lookup_name": "oscilloscope",
+			"description": "Multi-mode oscilloscope with VR sliders. Shows waveform, Lissajous patterns, and XY plots. Classic green phosphor CRT aesthetic. Controls: FREQ A/B, Amplitude, Phase, Time/Div.",
+			"scene": "res://commons/artifacts/oscilloscope/oscilloscope_artifact.tscn",
+			"category": "wavefunctions",
+			"interaction": "grab",
+			"complexity": "intermediate",
+			"tags": ["oscilloscope", "waveform", "lissajous", "audio", "visualization", "interactive", "slider"]
+		},
+		"harmonic_motion_demo": {
+			"name": "Simple Harmonic Motion Demo",
+			"lookup_name": "harmonic_motion_demo",
+			"description": "Interactive SHM demonstration. Ball oscillates along track showing x = A·sin(ωt + φ). Sliders for Amplitude, Frequency, Phase, Damping. Shows formula and live values.",
+			"scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
+			"category": "wavefunctions",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"tags": ["harmonic", "oscillation", "sine", "physics", "interactive", "slider"]
+		},
+		"spring_demo": {
+			"name": "Spring-Mass System Demo",
+			"lookup_name": "spring_demo",
+			"description": "Interactive spring physics with Hooke's Law F=-kx. Visual spring coil stretches/compresses. Sliders for Spring Constant (k), Mass, Damping. Shows natural frequency and period.",
+			"scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
+			"category": "wavefunctions",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"tags": ["spring", "hooke", "oscillation", "physics", "interactive", "slider"]
+		},
+		"additive_wave_demo": {
+			"name": "Additive Wave Synthesis Demo",
+			"lookup_name": "additive_wave_demo",
+			"description": "Build complex waveforms from sine harmonics. 5 sliders control harmonic amplitudes. Shows combined wave and individual components. Detects square/sawtooth/triangle presets.",
+			"scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+			"category": "wavefunctions",
+			"interaction": "grab",
+			"complexity": "intermediate",
+			"tags": ["fourier", "additive", "synthesis", "harmonics", "waveform", "interactive", "slider"]
+		},
+		"dna_specimen": {
+			"name": "DNA Specimen Jar",
+			"lookup_name": "dna_specimen",
+			"description": "Double helix DNA suspended in luminescent fluid inside a glass specimen jar. Slowly rotates. Demonstrates biological oscillation and helical wave patterns.",
+			"scene": "res://commons/artifacts/dna_specimen/dna_specimen.tscn",
+			"category": "wavefunctions",
+			"interaction": "observe",
+			"complexity": "beginner",
+			"tags": ["dna", "helix", "biology", "oscillation", "specimen", "glass"]
+		},
+		"petri_dish_worms": {
+			"name": "Petri Dish - Sine Worms",
+			"lookup_name": "petri_dish_worms",
+			"description": "Petri dish with small organisms moving in sinusoidal patterns. C. elegans-inspired creatures demonstrate oscillation in biological locomotion.",
+			"scene": "res://commons/artifacts/petri_dish_worms/petri_dish_worms.tscn",
+			"category": "wavefunctions",
+			"interaction": "observe",
+			"complexity": "beginner",
+			"tags": ["biology", "worms", "sine", "locomotion", "petri", "oscillation"]
+		},
+		"chladni_plate": {
+			"name": "Chladni Plate",
+			"lookup_name": "chladni_plate",
+			"description": "Vibrating metal plate with sand particles forming nodal patterns. Auto-cycles through modes (2,3), (3,4), (4,5), etc. Classic demonstration of standing wave modes. Config: mode_n, mode_m, auto_cycle, particles.",
+			"scene": "res://commons/artifacts/chladni_plate/chladni_plate.tscn",
+			"category": "wavefunctions",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"tags": ["chladni", "vibration", "nodes", "standing waves", "resonance", "sand", "patterns"]
+		},
 		"mobius_world": {
 			"name": "Möbius World",
 			"lookup_name": "mobius_world",
@@ -1605,10 +1675,14 @@
 			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn"
 		},
 		"GlassRack": {
-			"name": "GlassRack",
+			"name": "Glass Rack",
 			"lookup_name": "GlassRack",
-			"description": "Modular glass apparatus system - configurable lab glassware with spiral, wobbly, flask segments. Turtle commands: f,l,r,u,d,spiral,wobbly,flask,junction",
-			"scene": "res://commons/glass_rack/GlassRack.tscn"
+			"description": "Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube.",
+			"scene": "res://commons/glass_rack/GlassRack.tscn",
+			"category": "wavefunctions",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"tags": ["glass", "lab", "condenser", "spiral", "chemistry", "apparatus", "modular"]
 		},
 		"BigPipe": {
 			"name": "BigPipe",

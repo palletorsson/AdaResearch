@@ -152,9 +152,10 @@ func _create_cable_segment(start: Vector3, end: Vector3, color: Color):
 
 	cable.position = midpoint
 
-	# Orient cylinder along direction
-	if direction.normalized() != Vector3.UP and direction.normalized() != Vector3.DOWN:
-		cable.look_at(end, Vector3.UP)
+	# Orient cylinder along direction (use Basis.looking_at() - works before node is in tree)
+	var dir_norm = direction.normalized()
+	if dir_norm != Vector3.UP and dir_norm != Vector3.DOWN:
+		cable.basis = Basis.looking_at((end - midpoint).normalized(), Vector3.UP)
 		cable.rotate_object_local(Vector3.RIGHT, PI / 2)
 	else:
 		if direction.y < 0:

@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdna_specimen"]
+
+[ext_resource type="Script" path="res://commons/artifacts/dna_specimen/dna_specimen.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/doublehelix/doublehelix.tscn" id="2_helix"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jar"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.45
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fluid"]
+top_radius = 0.11
+bottom_radius = 0.11
+height = 0.38
+radial_segments = 24
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 0.14
+bottom_radius = 0.15
+height = 0.05
+radial_segments = 32
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lid"]
+top_radius = 0.13
+bottom_radius = 0.12
+height = 0.03
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="Material_lid"]
+albedo_color = Color(0.25, 0.25, 0.28, 1.0)
+metallic = 0.8
+roughness = 0.2
+
+[node name="DNASpecimen" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("CylinderMesh_base")
+
+[node name="Jar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275, 0)
+mesh = SubResource("CylinderMesh_jar")
+
+[node name="Fluid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+mesh = SubResource("CylinderMesh_fluid")
+
+[node name="Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515, 0)
+mesh = SubResource("CylinderMesh_lid")
+surface_material_override/0 = SubResource("Material_lid")
+
+[node name="HelixContainer" type="Node3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.08, 0)
+
+[node name="DoubleHelix" parent="HelixContainer" instance=ExtResource("2_helix")]
+helix_radius = 0.5
+helix_height = 2.0
+helix_turns = 3
+strand_point_radius = 0.06
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0.16)
+pixel_size = 0.001
+text = "DNA HELIX
+Biological Oscillation"
+font_size = 12
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.7, 0.8, 0.9, 0.9)

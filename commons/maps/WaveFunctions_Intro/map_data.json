@@ -1,0 +1,109 @@
+{
+	"map_info": {
+		"name": "Oscillation Control Room",
+		"lookup_name": "WaveFunctions_Intro",
+		"description": "A small control room where you first encounter oscillation. Multiple oscilloscopes display different waveforms. Interactive demos let you feel the parameters. This is where you learn the language before the journey begins.",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 9,
+			"depth": 11,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "wavefunctions",
+			"estimated_time": "5-8 minutes",
+			"learning_objectives": [
+				"What is oscillation? Periodic motion between extremes",
+				"The sine wave: x = A·sin(ωt + φ)",
+				"Parameters: Amplitude, Frequency, Phase",
+				"Harmonic motion in springs and pendulums",
+				"Visualizing waveforms on an oscilloscope"
+			]
+		}
+	},
+	"documentation": {
+		"summary": "WaveFunctions Intro - The Control Room",
+		"layout": "Intimate 9x11 control room with oscilloscope banks, interactive demos at center tables, and monitors on walls",
+		"objective": "Learn the fundamental concepts of oscillation through interactive exploration before venturing into larger wave experiences",
+		"key_elements": [
+			"oscilloscope_bank - Multiple oscilloscopes showing different waveforms",
+			"harmonic_motion_demo - Interactive SHM with sliders",
+			"spring_demo - Hooke's Law visualization",
+			"additive_wave_demo - Build waves from harmonics",
+			"double_pendulum_display - Chaos preview on monitor"
+		]
+	},
+	"layers": {
+		"structure": [
+			["2", "2", "2", "2", "2", "2", "2", "2", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "0", "1", "1", "1", "2"],
+			["2", "2", "2", "2", "1", "2", "2", "2", "2"],
+			["2", "2", "2", "2", "1", "2", "2", "2", "2"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", "t", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "oscilloscope:180:1.5#mode:0", " ", "oscilloscope:180:1.5#mode:1", " ", "oscilloscope:180:1.5#mode:0#wave:1", " ", "oscilloscope:180:1.5#mode:0#wave:2", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "harmonic_motion_demo:0:0.5", " ", " ", " ", "spring_demo:0:0.5", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "clipboard#oscillation_axioms:90:0.5", " ", " ", "dark_sphere", " ", " ", "clipboard#wavefunction_axioms:-90:0.5", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "additive_wave_demo:0:0.5", " ", " ", " ", "oscilloscope:0:0.5#mode:1", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Begin Journey",
+			"description": "Enter the world of waves",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.15, 0.18, 0.22],
+		"ambient_energy": 0.4,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.3],
+			"color": [0.8, 0.85, 1.0],
+			"energy": 0.6
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": false,
+		"enable_physics": true,
+		"background": {
+			"type": "color",
+			"color": [0.05, 0.07, 0.1]
+		}
+	}
+}

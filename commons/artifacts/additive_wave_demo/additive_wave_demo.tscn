@@ -1,0 +1,123 @@
+[gd_scene load_steps=5 format=3 uid="uid://cadditive_wave_demo"]
+
+[ext_resource type="Script" path="res://commons/artifacts/additive_wave_demo/additive_wave_demo.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdub" path="res://commons/interactables/slider_horizontal.tscn" id="2_slider"]
+
+[sub_resource type="StandardMaterial3D" id="Material_wave"]
+vertex_color_use_as_albedo = true
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+size = Vector3(2.2, 0.02, 0.5)
+
+[node name="AdditiveWaveDemo" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="WaveMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("Material_wave")
+
+[node name="ComponentWaves" type="Node3D" parent="."]
+
+[node name="FormulaLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+pixel_size = 0.002
+text = "f(t) = 1.0·sin(ωt)"
+font_size = 24
+outline_size = 3
+horizontal_alignment = 1
+modulate = Color(0.9, 0.95, 1.0, 1.0)
+
+[node name="PresetLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+pixel_size = 0.0015
+text = "Pure Sine Wave"
+font_size = 20
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.6, 0.8, 0.9, 0.9)
+
+[node name="TitleLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.003
+text = "Additive Wave Synthesis"
+font_size = 32
+outline_size = 4
+horizontal_alignment = 1
+
+[node name="ExplanationLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+pixel_size = 0.0012
+text = "Add harmonics to build complex waveforms from simple sines
+(Fourier synthesis: any periodic signal = sum of sine waves)"
+font_size = 16
+outline_size = 2
+horizontal_alignment = 1
+modulate = Color(0.5, 0.65, 0.7, 0.8)
+
+[node name="ControlPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.1, 0.3)
+
+[node name="FundamentalSlider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Harmonic2Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Harmonic3Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Harmonic4Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+
+[node name="Harmonic5Slider" parent="ControlPanel" instance=ExtResource("2_slider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="PanelLabel" type="Label3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0.01)
+pixel_size = 0.001
+text = "HARMONICS"
+font_size = 14
+outline_size = 2
+horizontal_alignment = 1
+
+[node name="HarmonicLabels" type="Node3D" parent="ControlPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, 0.01)
+
+[node name="H1Label" type="Label3D" parent="ControlPanel/HarmonicLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+pixel_size = 0.001
+text = "1× (fundamental)"
+font_size = 10
+modulate = Color(0.2, 1.0, 0.4, 1.0)
+
+[node name="H2Label" type="Label3D" parent="ControlPanel/HarmonicLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+pixel_size = 0.001
+text = "2× (octave)"
+font_size = 10
+modulate = Color(0.2, 0.6, 1.0, 1.0)
+
+[node name="H3Label" type="Label3D" parent="ControlPanel/HarmonicLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+pixel_size = 0.001
+text = "3× (fifth)"
+font_size = 10
+modulate = Color(1.0, 0.4, 0.8, 1.0)
+
+[node name="H4Label" type="Label3D" parent="ControlPanel/HarmonicLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+pixel_size = 0.001
+text = "4× (2nd octave)"
+font_size = 10
+modulate = Color(1.0, 0.8, 0.2, 1.0)
+
+[node name="H5Label" type="Label3D" parent="ControlPanel/HarmonicLabels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+pixel_size = 0.001
+text = "5× (major third)"
+font_size = 10
+modulate = Color(0.8, 0.4, 1.0, 1.0)

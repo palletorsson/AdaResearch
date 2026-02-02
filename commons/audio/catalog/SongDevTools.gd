@@ -697,6 +697,7 @@ func _load_songs_from_folder() -> Array:
 		"burial_v2": "🌧️ Burial V2",
 		"detroit_techno": "🔩 Hard Detroit",
 		"french_touch": "🇫🇷 French Touch",
+		"gypsy_woman_house": "💃 Gypsy Woman",
 		"kraftwerk": "🤖 Kraftwerk",
 		"kraftwerk_v2": "🤖 Kraftwerk V2",
 		"lofi_house": "📼 Lo-Fi House",
@@ -1348,6 +1349,8 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_pop_v2_song({})
 		"pop_madonna":
 			stream = AudioSynthesizer.generate_pop_madonna_song({})
+		"gypsy_woman_house":
+			stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
 		_:
 			# No generator - show config breakdown only (no audio)
 			_status_label.text = "📋 %s (config only - no audio)" % song_id

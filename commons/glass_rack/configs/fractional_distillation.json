@@ -1,0 +1,16 @@
+{
+	"rack_info": {
+		"name": "Fractional Distillation Column",
+		"description": "Multi-stage distillation with reducers and collection points",
+		"version": "1.0"
+	},
+	"layout": {
+		"segment_length": 0.12,
+		"tube_radius": 0.018
+	},
+	"path": "flask,f,u,f,spiral,f,reducer,f,spiral,f,reducer,f,corner45,f,condenser,d,f,f,beaker",
+	"materials": {
+		"glass_color": [0.82, 0.90, 1.0, 0.3],
+		"liquid_color": [0.9, 0.6, 0.2, 0.5]
+	}
+}
