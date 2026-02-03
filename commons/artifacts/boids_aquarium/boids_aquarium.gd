@@ -26,7 +26,7 @@ class_name BoidsAquarium
 		_update_boid_params()
 		_sync_alignment_slider()
 
-@export var cohesion_weight: float = 1.0:
+@export var cohesion_weight: float = 1.5:
 	set(value):
 		cohesion_weight = clampf(value, 0.0, 5.0)
 		_update_boid_params()
@@ -37,12 +37,12 @@ class_name BoidsAquarium
 		max_speed = clampf(value, 0.1, 1.5)
 		_update_boid_params()
 
-@export var perception_radius: float = 0.2
+@export var perception_radius: float = 0.15
 
 ## Visual
 @export_group("Visual")
-@export var boid_color: Color = Color(0.3, 0.7, 1.0)
-@export var boid_size: float = 0.015
+@export var boid_size: Vector3 = Vector3(0.008, 0.008, 0.025)  # Elongated cube
+@export var boid_transparency: float = 0.7
 @export var tank_transparency: float = 0.15
 
 var _boids: Array = []
@@ -128,17 +128,16 @@ func _create_multimesh():
 	_multimesh.use_colors = true
 	_multimesh.instance_count = boid_count
 	
-	# Cone-like fish shape
-	var mesh = CylinderMesh.new()
-	mesh.top_radius = 0.0
-	mesh.bottom_radius = boid_size
-	mesh.height = boid_size * 3
+	# Elongated cube shape
+	var mesh = BoxMesh.new()
+	mesh.size = boid_size
 	_multimesh.mesh = mesh
 	
 	var mat = StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 0.3
+	mat.emission_energy_multiplier = 0.4
 	
 	_multimesh_instance = MultiMeshInstance3D.new()
 	_multimesh_instance.name = "BoidMultiMesh"
@@ -264,7 +263,19 @@ func _update_boid_params():
 
 func _spawn_boids():
 	_boids.clear()
-	var half = tank_size * 0.4
+	var half = tank_size * 0.3  # Spawn closer together
+	
+	# Color palette for variety
+	var colors = [
+		Color(1.0, 0.3, 0.3),  # Red
+		Color(0.3, 1.0, 0.4),  # Green
+		Color(0.3, 0.5, 1.0),  # Blue
+		Color(1.0, 0.8, 0.2),  # Yellow
+		Color(1.0, 0.4, 0.8),  # Pink
+		Color(0.4, 1.0, 1.0),  # Cyan
+		Color(0.8, 0.5, 1.0),  # Purple
+		Color(1.0, 0.6, 0.3),  # Orange
+	]
 	
 	for i in range(boid_count):
 		var pos = Vector3(
@@ -275,11 +286,12 @@ func _spawn_boids():
 		var vel = Vector3(randf() - 0.5, randf() - 0.5, randf() - 0.5).normalized() * max_speed * 0.5
 		_boids.append(BoidData.new(pos, vel))
 		
-		# Color variation
-		var hue_shift = randf() * 0.1 - 0.05
-		var color = boid_color
-		color.h = fmod(color.h + hue_shift, 1.0)
-		_multimesh.set_instance_color(i, color)
+		# Each boid gets a different color with transparency
+		var base_color = colors[i % colors.size()]
+		var hue_shift = randf() * 0.05 - 0.025  # Small variation
+		base_color.h = fmod(base_color.h + hue_shift + 1.0, 1.0)
+		base_color.a = boid_transparency
+		_multimesh.set_instance_color(i, base_color)
 
 func _respawn_boids():
 	_spawn_boids()
