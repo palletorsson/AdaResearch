@@ -944,11 +944,13 @@ func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, look
 	
 	# Try to call a configuration method on the artifact if it exists
 	# This allows artifacts to handle their own configuration logic
+	# IMPORTANT: duplicate() the dictionary since call_deferred holds a reference
+	# and the original dict may be modified before the deferred call executes
 	if artifact_object.has_method("apply_grid_config"):
-		artifact_object.call_deferred("apply_grid_config", config_data)
+		artifact_object.call_deferred("apply_grid_config", config_data.duplicate(true))
 		print("  → Called apply_grid_config() method")
 	elif artifact_object.has_method("configure"):
-		artifact_object.call_deferred("configure", config_data)
+		artifact_object.call_deferred("configure", config_data.duplicate(true))
 		print("  → Called configure() method")
 	else:
 		print("  → No configuration method found, using metadata only")
@@ -963,37 +965,37 @@ func _try_set_property(obj: Object, prop: String, value) -> void:
 			obj.set(prop, value)
 			return
 
-# Add continuous rotation to an object
+# Add continuous rotation to an object using a Timer
 func _add_continuous_rotation(obj: Node3D, rotate_z: bool, rotate_x: bool, rotate_y: bool) -> void:
 	if not obj:
 		return
 
-	# Create a simple script that rotates the object
-	var script_text = """
-extends Node3D
+	# Build rotation speed vector (30 degrees per second for each enabled axis)
+	var speed := Vector3(
+		30.0 if rotate_x else 0.0,
+		30.0 if rotate_y else 0.0,
+		30.0 if rotate_z else 0.0
+	)
 
-@export var rotation_speed_z: float = %s
-@export var rotation_speed_x: float = %s
-@export var rotation_speed_y: float = %s
+	# Skip if no rotation needed
+	if speed == Vector3.ZERO:
+		return
 
-func _process(delta: float) -> void:
-	if rotation_speed_z != 0.0:
-		rotate_z(deg_to_rad(rotation_speed_z * delta))
-	if rotation_speed_x != 0.0:
-		rotate_x(deg_to_rad(rotation_speed_x * delta))
-	if rotation_speed_y != 0.0:
-		rotate_y(deg_to_rad(rotation_speed_y * delta))
-""" % [
-		"30.0" if rotate_z else "0.0",
-		"30.0" if rotate_x else "0.0",
-		"30.0" if rotate_y else "0.0"
-	]
+	# Store the rotation speed in metadata
+	obj.set_meta("_rotation_speed", speed)
 
-	var script = GDScript.new()
-	script.source_code = script_text
-	script.reload()
+	# Add a timer that handles rotation updates
+	var timer := Timer.new()
+	timer.name = "_RotationTimer"
+	timer.wait_time = 0.016  # ~60fps
+	timer.autostart = true
+	obj.add_child(timer)
 
-	obj.set_script(script)
+	timer.timeout.connect(func():
+		if is_instance_valid(obj) and obj.has_meta("_rotation_speed"):
+			var rot_speed: Vector3 = obj.get_meta("_rotation_speed")
+			obj.rotation_degrees += rot_speed * timer.wait_time
+	)
 
 # Apply transform data from artifact definition
 func _apply_artifact_transform(artifact_object: Node, artifact_info: Dictionary):

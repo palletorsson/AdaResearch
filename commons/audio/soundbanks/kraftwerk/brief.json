@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "id": "kraftwerk",
+    "name": "Kraftwerk",
+    "lineage": "Ralf Hütter, Florian Schneider, Karl Bartos",
+    "era": "1974-present",
+    "bpm": { "min": 100, "max": 120, "typical": 110 },
+    "lambda": 0.15
+  },
+
+  "identity": {
+    "token": "ZERO modulation + vocoder + motorik beat + machine precision",
+    "two_second_test": "Robotic precision, clean electronic, motorik pulse",
+    "emotional_truth": "Robot pop, industrial folk music, machine aesthetic"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder"],
+
+  "forbidden": [
+    "tape_degradation",
+    "heavy_detune",
+    "distortion",
+    "vinyl_crackle",
+    "humanization",
+    "pitch_drift_over_2_cents",
+    "heavy_reverb",
+    "supersaw"
+  ],
+
+  "rhythm": {
+    "quantize": "perfect",
+    "humanize_ms": 0,
+    "swing_pct": 0,
+    "pattern": "motorik"
+  },
+
+  "harmony": {
+    "scales": ["major", "minor"],
+    "voicings": "simple_clean"
+  },
+
+  "fx": {
+    "clean_production": true,
+    "minimal_reverb": true,
+    "no_distortion": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.0
+  },
+
+  "sections": {
+    "intro": ["pad", "sequence"],
+    "build": ["pad", "sequence", "bass", "hihat"],
+    "main": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder"],
+    "breakdown": ["pad", "sequence"],
+    "outro": ["pad"]
+  }
+}

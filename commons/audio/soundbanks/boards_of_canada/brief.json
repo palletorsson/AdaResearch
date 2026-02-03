@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "id": "boards_of_canada",
+    "name": "Boards of Canada",
+    "lineage": "Mike Sandison, Marcus Eoin - Scottish brothers",
+    "era": "1998-present",
+    "bpm": { "min": 80, "max": 110, "typical": 95 },
+    "lambda": 0.55
+  },
+
+  "identity": {
+    "token": "Tape wow (0.15Hz LFO) + 15¢ detune + 10-bit + rolled-off highs",
+    "two_second_test": "Warbling pitch, dusty lo-fi, nostalgic warmth",
+    "emotional_truth": "Childhood memory, 1970s educational media, sun-bleached VHS"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "sequence", "texture"],
+
+  "forbidden": [
+    "supersaw",
+    "clean_digital",
+    "bright_highs",
+    "gated_reverb",
+    "sidechain",
+    "zero_detune",
+    "quantized_tight"
+  ],
+
+  "rhythm": {
+    "quantize": "loose",
+    "humanize_ms": 10,
+    "swing_pct": 5,
+    "pattern": "hip_hop_influenced"
+  },
+
+  "harmony": {
+    "scales": ["minor", "pentatonic"],
+    "voicings": "simple_childlike"
+  },
+
+  "fx": {
+    "tape_wow": true,
+    "bitcrush_10bit": true,
+    "highshelf_cut_db": -4,
+    "tape_saturation": true
+  },
+
+  "transitions": {
+    "crossfade_s": 4.0
+  },
+
+  "sections": {
+    "intro": ["texture", "pad"],
+    "build": ["texture", "pad", "bass", "hihat"],
+    "main": ["kick", "snare", "hihat", "bass", "pad", "sequence", "texture"],
+    "breakdown": ["texture", "pad", "sequence"],
+    "outro": ["texture", "pad"]
+  }
+}

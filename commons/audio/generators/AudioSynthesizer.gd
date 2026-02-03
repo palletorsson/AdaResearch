@@ -380,6 +380,7 @@ static func generate_detroit_techno_song(parameters: Dictionary = {}) -> AudioSt
 
 
 static func _generate_detroit_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
+	# DETROIT TECHNO - Research: 909 punch, clean/dry, ZERO detune, machine funk
 	var bpm = 125.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
@@ -392,63 +393,84 @@ static func _generate_detroit_section(progression: Array, scale: Array, instrume
 		var root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
+		# 909 KICK - Punchy with click transient (research: fast attack, triangle-ish)
 		if "kick" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
 			for beat in range(int(samples_per_chord / beat_samples) + 1):
 				var start = beat * beat_samples
-				for j in range(min(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
+				for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
-					var kfreq = 50.0 + exp(-kt * 35.0) * 80.0
-					var kick = sin(2.0 * PI * kfreq * kt) * exp(-kt * 10.0)
-					if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.6
+					# 909: faster pitch drop, click transient
+					var kfreq = 55.0 + exp(-kt * 50.0) * 120.0
+					var body = sin(2.0 * PI * kfreq * kt)
+					# Add click transient (909 characteristic)
+					var click = 0.0
+					if kt < 0.003: click = sin(kt * 8000.0) * (1.0 - kt / 0.003)
+					var kick = (body + click * 0.4) * exp(-kt * 14.0)
+					if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.55
 		
+		# 909 HIHAT - Metallic, crisp (research: +2dB high shelf)
 		if "hihat" in instruments:
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
 			for step in range(int(samples_per_chord / sixteenth) + 1):
 				var start = step * sixteenth
-				for j in range(min(int(SAMPLE_RATE * 0.02), samples_per_chord - start)):
+				for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
 					var ht = float(j) / SAMPLE_RATE
-					var hat = sin(ht * 14000.0 + randf() * 0.5) * exp(-ht * 100.0)
-					if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.12
+					# Multiple high frequencies for metallic character
+					var hat = sin(ht * 12000.0) * 0.5 + sin(ht * 15000.0) * 0.3 + (randf() - 0.5) * 0.4
+					hat *= exp(-ht * 90.0)
+					if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.14
 		
+		# 909 CLAP - Layered noise bursts
 		if "clap" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
 			for beat in [1, 3]:
 				var start = beat * beat_samples
 				if start < samples_per_chord:
-					for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
 						var ct = float(j) / SAMPLE_RATE
-						var clap = (randf() - 0.5) * exp(-ct * 30.0)
-						if start + j < samples_per_chord: chord_mix[start + j] += clap * 0.3
+						# Multiple micro-transients (909 clap characteristic)
+						var clap = 0.0
+						for layer in [0.0, 0.008, 0.016, 0.024]:
+							if ct >= layer:
+								clap += (randf() - 0.5) * exp(-(ct - layer) * 40.0) * 0.4
+						if start + j < samples_per_chord: chord_mix[start + j] += clap * 0.32
 		
+		# SUB + SQUARE BASS (research: 808-style sub with square harmonic)
 		if "bass" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
-				var sub = sin(2.0 * PI * root_freq * 0.5 * t) * 0.4
-				chord_mix[j] += sub
+				var bass_freq = root_freq * 0.5
+				var sub = sin(2.0 * PI * bass_freq * t)
+				# Add square wave harmonic for Detroit character
+				var sq = sign(sin(2.0 * PI * bass_freq * t)) * 0.25
+				chord_mix[j] += (sub * 0.35 + sq * 0.1)
 		
+		# CHORD STAB - Very short decay (research: 0.08s, percussive)
 		if "stab" in instruments:
 			var stab_times = [0, int(samples_per_chord * 0.5)]
 			for start in stab_times:
-				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
 					var st = float(j) / SAMPLE_RATE
 					var stab = 0.0
 					for freq in chord_freqs: stab += sin(2.0 * PI * freq * 2.0 * st)
 					stab /= chord_freqs.size()
-					stab *= exp(-st * 15.0)
-					if start + j < samples_per_chord: chord_mix[start + j] += stab * 0.25
+					stab *= exp(-st * 25.0)  # Faster decay than before
+					if start + j < samples_per_chord: chord_mix[start + j] += stab * 0.28
 		
+		# CLEAN DIGITAL PAD - ZERO detune, ZERO drift (research: clean, precise)
 		if "pad" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var progress = float(j) / samples_per_chord
 				var pad = 0.0
+				# Pure sines, NO detune (Detroit = clean digital)
 				for freq in chord_freqs: pad += sin(2.0 * PI * freq * t)
 				pad /= chord_freqs.size()
 				var env = 1.0
-				if progress < 0.15: env = progress / 0.15
-				elif progress > 0.85: env = (1.0 - progress) / 0.15
-				chord_mix[j] += pad * env * 0.2
+				if progress < 0.12: env = progress / 0.12
+				elif progress > 0.88: env = (1.0 - progress) / 0.12
+				chord_mix[j] += pad * env * 0.18
 		
 		var start_idx = i * samples_per_chord
 		for j in range(samples_per_chord):
@@ -498,6 +520,7 @@ static func generate_synthwave_song(parameters: Dictionary = {}) -> AudioStreamI
 
 
 static func _generate_synthwave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
+	# SYNTHWAVE - Research: LinnDrum gated reverb (150ms), 7-voice supersaw, fat Moog bass
 	var bpm = 118.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
@@ -510,68 +533,94 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 		var root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
+		# JUNO-STYLE ARP with chorus
 		if "arp" in instruments:
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
-			var arp_pattern = [0, 4, 7, 12, 7, 4]  # Up and down
+			var arp_pattern = [0, 4, 7, 12, 7, 4]
 			for step in range(int(samples_per_chord / sixteenth)):
 				var start = step * sixteenth
 				var note_idx = step % arp_pattern.size()
 				var freq = root_freq * pow(2.0, arp_pattern[note_idx] / 12.0)
 				for j in range(min(sixteenth, samples_per_chord - start)):
 					var at = float(j) / SAMPLE_RATE
-					var env = exp(-at * 12.0)
-					var saw1 = fmod(at * freq, 1.0) * 2.0 - 1.0
-					var saw2 = fmod(at * freq * 1.005, 1.0) * 2.0 - 1.0  # Detuned
-					if start + j < samples_per_chord: chord_mix[start + j] += (saw1 + saw2) * 0.5 * env * 0.2
+					var env = exp(-at * 10.0)
+					# Juno-style chorus (3 voices slightly detuned)
+					var arp = fmod(at * freq, 1.0) * 2.0 - 1.0
+					arp += fmod(at * freq * 1.004, 1.0) * 2.0 - 1.0
+					arp += fmod(at * freq * 0.996, 1.0) * 2.0 - 1.0
+					arp /= 3.0
+					if start + j < samples_per_chord: chord_mix[start + j] += arp * env * 0.18
 		
+		# 7-VOICE SUPERSAW PAD (research: JP-8000 style, 25 cent detune)
 		if "pad" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var progress = float(j) / samples_per_chord
 				var pad = 0.0
 				for freq in chord_freqs:
-					pad += sin(2.0 * PI * freq * t) * 0.5
-					pad += sin(2.0 * PI * freq * 1.003 * t) * 0.5  # Chorus
+					# 7 detuned saws per note
+					for voice in range(7):
+						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0  # ±12.5 cents
+						var detune_ratio = pow(2.0, detune_cents / 1200.0)
+						var saw = fmod(t * freq * detune_ratio, 1.0) * 2.0 - 1.0
+						pad += saw / 7.0
 				pad /= chord_freqs.size()
 				var env = 1.0
-				if progress < 0.2: env = progress / 0.2
-				elif progress > 0.8: env = (1.0 - progress) / 0.2
-				chord_mix[j] += pad * env * 0.25
+				if progress < 0.15: env = progress / 0.15
+				elif progress > 0.85: env = (1.0 - progress) / 0.15
+				chord_mix[j] += pad * env * 0.22
 		
+		# LINNDRUM GATED REVERB (research: 150ms reverb cut)
 		if "drums" in instruments:
 			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			var gate_samples = int(0.15 * SAMPLE_RATE)  # 150ms gate
 			# Gated kick
 			for beat in range(4):
 				var start = beat * beat_samples
-				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+				for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
 					var kt = float(j) / SAMPLE_RATE
-					var kick = sin(2.0 * PI * 55.0 * kt) * exp(-kt * 15.0)
-					if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.5
-			# Snare on 2 and 4
+					var kick = sin(2.0 * PI * 50.0 * kt) * exp(-kt * 12.0)
+					# Add room reverb that gets gated
+					if j < gate_samples:
+						kick += sin(2.0 * PI * 50.0 * kt * 0.5) * exp(-kt * 8.0) * 0.3
+					if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.48
+			# GATED SNARE (the 80s sound!)
 			for beat in [1, 3]:
 				var start = beat * beat_samples
-				for j in range(min(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
+				for j in range(min(gate_samples, samples_per_chord - start)):
 					var st = float(j) / SAMPLE_RATE
-					var snare = sin(2.0 * PI * 200.0 * st) * exp(-st * 20.0) * 0.4
-					snare += (randf() - 0.5) * exp(-st * 25.0) * 0.4  # Noise
-					if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.35
+					# Snare body
+					var snare = sin(2.0 * PI * 180.0 * st) * exp(-st * 15.0) * 0.5
+					snare += (randf() - 0.5) * exp(-st * 12.0) * 0.4
+					# Gated reverb tail (cut at 150ms)
+					var gate_env = 1.0 if j < gate_samples * 0.9 else (float(gate_samples - j) / (gate_samples * 0.1))
+					if start + j < samples_per_chord: chord_mix[start + j] += snare * gate_env * 0.4
 		
+		# FAT MOOG BASS (research: saw+square, warm saturation)
 		if "bass" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
-				var saw = fmod(t * root_freq * 0.5, 1.0) * 2.0 - 1.0
-				chord_mix[j] += saw * 0.3
+				var bass_freq = root_freq * 0.5
+				var saw = fmod(t * bass_freq, 1.0) * 2.0 - 1.0
+				var square = sign(sin(2.0 * PI * bass_freq * t))
+				var bass = saw * 0.6 + square * 0.4
+				bass = tanh(bass * 1.4)  # Warm saturation
+				chord_mix[j] += bass * 0.32
 		
+		# SUPERSAW LEAD (7 voices)
 		if "lead" in instruments:
-			# Detuned lead melody (simple)
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var progress = float(j) / samples_per_chord
-				var lead_freq = chord_freqs[0] * 2.0  # Octave up
-				var saw1 = fmod(t * lead_freq, 1.0) * 2.0 - 1.0
-				var saw2 = fmod(t * lead_freq * 0.995, 1.0) * 2.0 - 1.0
-				var env = sin(PI * progress)  # Swell
-				chord_mix[j] += (saw1 + saw2) * 0.5 * env * 0.15
+				var lead_freq = chord_freqs[0] * 2.0
+				var lead = 0.0
+				for voice in range(7):
+					var detune_cents = (float(voice) / 6.0 - 0.5) * 20.0
+					var detune_ratio = pow(2.0, detune_cents / 1200.0)
+					lead += fmod(t * lead_freq * detune_ratio, 1.0) * 2.0 - 1.0
+				lead /= 7.0
+				var env = sin(PI * progress)
+				chord_mix[j] += lead * env * 0.16
 		
 		var start_idx = i * samples_per_chord
 		for j in range(samples_per_chord):
@@ -621,6 +670,7 @@ static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamIntera
 
 
 static func _generate_rave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
+	# RAVE - Research: Hoover ±3% detune, Amen breaks, Mentasm stabs, DISTORTION
 	var bpm = 140.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
@@ -633,8 +683,8 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 		var root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
+		# AMEN-STYLE BREAKBEAT (research: chopped, iconic pattern)
 		if "breakbeat" in instruments:
-			# Amen-style breakbeat pattern
 			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
 			var kick_steps = [0, 6, 10]
 			var snare_steps = [4, 12]
@@ -643,73 +693,93 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 			for step in range(16):
 				var start = step * sixteenth
 				if step in kick_steps:
-					for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					for j in range(min(int(SAMPLE_RATE * 0.07), samples_per_chord - start)):
 						var kt = float(j) / SAMPLE_RATE
-						var kick = sin(2.0 * PI * (60.0 + exp(-kt * 40.0) * 80.0) * kt) * exp(-kt * 12.0)
-						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.55
+						# Punchy breakbeat kick
+						var kick = sin(2.0 * PI * (65.0 + exp(-kt * 45.0) * 90.0) * kt) * exp(-kt * 15.0)
+						kick = tanh(kick * 1.8)  # Distortion!
+						if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.5
 				if step in snare_steps:
 					for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
 						var st = float(j) / SAMPLE_RATE
-						var snare = sin(2.0 * PI * 180.0 * st) * exp(-st * 18.0) * 0.5
-						snare += (randf() - 0.5) * exp(-st * 22.0) * 0.5
-						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.45
+						# Crunchy snare
+						var snare = sin(2.0 * PI * 200.0 * st) * exp(-st * 20.0) * 0.4
+						snare += (randf() - 0.5) * exp(-st * 18.0) * 0.6
+						snare = tanh(snare * 2.0)  # Distortion!
+						if start + j < samples_per_chord: chord_mix[start + j] += snare * 0.42
 				if step in hat_steps:
-					for j in range(min(int(SAMPLE_RATE * 0.015), samples_per_chord - start)):
+					for j in range(min(int(SAMPLE_RATE * 0.02), samples_per_chord - start)):
 						var ht = float(j) / SAMPLE_RATE
-						var hat = (randf() - 0.5) * exp(-ht * 120.0)
-						if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.2
+						var hat = (randf() - 0.5) * exp(-ht * 100.0)
+						if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.18
 		
+		# HOOVER BASS - ±3% detuned saws with filter LFO (research: Mentasm sound)
 		if "hoover" in instruments:
-			# The classic rave hoover bass
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var hoover = 0.0
-				for detune in [-0.03, 0.0, 0.03]:
+				# 5 detuned saws for thick hoover
+				for detune in [-0.035, -0.015, 0.0, 0.015, 0.035]:
 					var freq = root_freq * 0.5 * (1.0 + detune)
 					var saw = fmod(t * freq, 1.0) * 2.0 - 1.0
 					hoover += saw
-				hoover /= 3.0
-				hoover = tanh(hoover * 1.5)  # Slight saturation
-				chord_mix[j] += hoover * 0.35
+				hoover /= 5.0
+				# Filter LFO (hoover "wobble")
+				var filter_mod = 0.4 + sin(2.0 * PI * 3.0 * t) * 0.3
+				hoover *= filter_mod
+				# HEAVY saturation (rave distortion)
+				hoover = tanh(hoover * 2.5)
+				chord_mix[j] += hoover * 0.38
 		
+		# MENTASM STAB - Detuned saw chords (research: 25 cent detune)
 		if "stab" in instruments:
-			# Aggressive chord stab
 			var stab_times = [0, int(samples_per_chord * 0.25), int(samples_per_chord * 0.75)]
 			for start in stab_times:
-				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
 					var st = float(j) / SAMPLE_RATE
 					var stab = 0.0
 					for freq in chord_freqs:
-						var saw = fmod(st * freq * 2.0, 1.0) * 2.0 - 1.0
-						stab += saw
+						# Detuned saws per note (Mentasm character)
+						var saw1 = fmod(st * freq * 2.0, 1.0) * 2.0 - 1.0
+						var saw2 = fmod(st * freq * 2.0 * 1.015, 1.0) * 2.0 - 1.0  # 25 cent detune
+						stab += (saw1 + saw2) * 0.5
 					stab /= chord_freqs.size()
-					stab *= exp(-st * 20.0)
-					if start + j < samples_per_chord: chord_mix[start + j] += stab * 0.3
+					stab *= exp(-st * 18.0)
+					stab = tanh(stab * 1.8)  # Distortion
+					if start + j < samples_per_chord: chord_mix[start + j] += stab * 0.32
 		
+		# AGGRESSIVE LEAD
 		if "lead" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var progress = float(j) / samples_per_chord
 				var lead_freq = chord_freqs[0] * 2.0
 				var saw = fmod(t * lead_freq, 1.0) * 2.0 - 1.0
+				saw = tanh(saw * 1.5)  # Distortion
 				var env = sin(PI * progress * 2.0) if progress < 0.5 else 0.0
-				chord_mix[j] += saw * env * 0.2
+				chord_mix[j] += saw * env * 0.22
 		
+		# DARK PAD
 		if "pad" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var progress = float(j) / samples_per_chord
 				var pad = 0.0
-				for freq in chord_freqs: pad += sin(2.0 * PI * freq * t)
-				pad /= chord_freqs.size()
+				for freq in chord_freqs:
+					# Slight detune for width
+					pad += sin(2.0 * PI * freq * t)
+					pad += sin(2.0 * PI * freq * 1.003 * t) * 0.5
+				pad /= chord_freqs.size() * 1.5
 				var env = 1.0
-				if progress < 0.3: env = progress / 0.3
-				elif progress > 0.7: env = (1.0 - progress) / 0.3
-				chord_mix[j] += pad * env * 0.25
+				if progress < 0.25: env = progress / 0.25
+				elif progress > 0.75: env = (1.0 - progress) / 0.25
+				chord_mix[j] += pad * env * 0.22
 		
 		var start_idx = i * samples_per_chord
 		for j in range(samples_per_chord):
-			if start_idx + j < total_samples: final_mix[start_idx + j] = clampf(chord_mix[j], -1.0, 1.0)
+			# Global distortion for rave character
+			var sample = tanh(chord_mix[j] * 1.3)
+			if start_idx + j < total_samples: final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
 	
 	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.01))
 	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)

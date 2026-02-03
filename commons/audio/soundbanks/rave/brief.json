@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "rave",
+    "name": "Rave",
+    "lineage": "The Prodigy, Altern-8, Human Resource, Joey Beltram",
+    "era": "1990-1995",
+    "bpm": { "min": 140, "max": 160, "typical": 145 },
+    "lambda": 0.45
+  },
+
+  "identity": {
+    "token": "Hoover bass (40¢ detune!) + mentasm stabs + breakbeat + distortion",
+    "two_second_test": "THAT hoover sound, aggressive stabs, frantic energy",
+    "emotional_truth": "Warehouse energy, strobe lights, pure aggression"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "hoover", "stab", "pad"],
+
+  "forbidden": [
+    "clean_production",
+    "subtle_detune",
+    "tape_degradation",
+    "vinyl_crackle",
+    "slow_attack",
+    "gated_reverb_80s",
+    "lo_fi"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 0,
+    "swing_pct": 0,
+    "pattern": "breakbeat_4x4"
+  },
+
+  "harmony": {
+    "scales": ["minor"],
+    "voicings": "simple_aggressive"
+  },
+
+  "fx": {
+    "heavy_distortion": true,
+    "compression": "heavy"
+  },
+
+  "transitions": {
+    "crossfade_s": 1.5
+  },
+
+  "sections": {
+    "intro": ["pad"],
+    "build": ["pad", "hihat", "hoover"],
+    "main": ["kick", "snare", "hihat", "hoover", "stab", "pad"],
+    "breakdown": ["pad", "hoover"],
+    "outro": ["pad", "kick"]
+  }
+}

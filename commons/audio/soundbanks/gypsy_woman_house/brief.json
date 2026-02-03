@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "gypsy_woman_house",
+    "name": "Gypsy Woman House",
+    "lineage": "Crystal Waters, Basement Jaxx, CeCe Peniston, Robin S",
+    "era": "1991-1995",
+    "bpm": { "min": 118, "max": 128, "typical": 122 },
+    "lambda": 0.4
+  },
+
+  "identity": {
+    "token": "Piano stabs + bouncy offbeat bass + 909 + soulful",
+    "two_second_test": "Bouncy piano chord, pumping bass, uplifting energy",
+    "emotional_truth": "Dancefloor joy, soulful house, summer vibes"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "clap", "bass", "piano", "organ", "pad"],
+
+  "forbidden": [
+    "hoover_bass",
+    "supersaw",
+    "distortion",
+    "tape_degradation",
+    "lo_fi",
+    "aggressive",
+    "dark_atmosphere"
+  ],
+
+  "rhythm": {
+    "quantize": "tight",
+    "humanize_ms": 3,
+    "swing_pct": 5
+  },
+
+  "harmony": {
+    "scales": ["major", "dorian"],
+    "voicings": "gospel_soul"
+  },
+
+  "fx": {
+    "sidechain": true,
+    "warm_eq": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.0
+  },
+
+  "sections": {
+    "intro": ["pad", "hihat"],
+    "build": ["kick", "hihat", "pad", "bass"],
+    "main": ["kick", "snare", "hihat", "clap", "bass", "piano", "pad"],
+    "breakdown": ["pad", "piano"],
+    "drop": ["kick", "snare", "hihat", "clap", "bass", "piano", "organ", "pad"],
+    "outro": ["kick", "hihat", "pad"]
+  }
+}

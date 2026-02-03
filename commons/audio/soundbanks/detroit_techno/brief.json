@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "id": "detroit_techno",
+    "name": "Detroit Techno",
+    "lineage": "Juan Atkins, Derrick May, Kevin Saunderson",
+    "era": "1985-present",
+    "bpm": { "min": 120, "max": 130, "typical": 128 },
+    "lambda": 0.2
+  },
+
+  "identity": {
+    "token": "909 drums + clean digital pad + 808 sub bass",
+    "two_second_test": "Crisp metallic snare, cold synth chord, deep sub",
+    "emotional_truth": "Afrofuturist machine funk - technology as liberation"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"],
+
+  "forbidden": [
+    "supersaw",
+    "hoover_bass",
+    "tape_saturation",
+    "gated_reverb",
+    "pitch_drift",
+    "pad_detune",
+    "humanization",
+    "vinyl_crackle",
+    "bitcrushing"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 0,
+    "swing_pct": 0
+  },
+
+  "harmony": {
+    "scales": ["minor", "dorian"],
+    "voicings": "jazz_influenced"
+  },
+
+  "fx": {
+    "reverb_global": false,
+    "highshelf_db": 2
+  },
+
+  "transitions": {
+    "crossfade_s": 2.0
+  },
+
+  "sections": {
+    "intro": ["pad"],
+    "build": ["pad", "bass", "hihat"],
+    "main": ["kick", "snare", "hihat", "clap", "bass", "pad", "stab"],
+    "breakdown": ["pad", "bass"],
+    "outro": ["pad"]
+  }
+}

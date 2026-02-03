@@ -266,3 +266,106 @@ func get_frequency_ratio() -> float:
 	if display and display.frequency_a > 0:
 		return display.frequency_b / display.frequency_a
 	return 1.0
+
+# Grid configuration support
+# Usage in data_map.json: "oscilloscope:90:0:1#freq_a:880#freq_b:440#amp:0.9#mode:1#style:amber"
+# Supported config keys:
+#   freq_a / frequency_a  - Frequency A in Hz (20-2000)
+#   freq_b / frequency_b  - Frequency B in Hz (20-2000)
+#   amp / amplitude       - Amplitude 0.0-1.0
+#   phase                 - Phase offset in degrees (0-360)
+#   mode                  - Display mode: 0=Waveform, 1=Lissajous, 2=XY
+#   style / color         - Phosphor style: green, amber, blue, white
+#   preset                - Harmonic preset: octave, fifth, fourth, major_third, unison, tritone
+#   time_div              - Time division (0.1-5.0)
+#   wave / wave_shape     - Wave shape: 0=Sine, 1=Square, 2=Triangle, 3=Sawtooth
+#   trace_3d              - Show 3D trace: true/1 or false/0
+
+func apply_grid_config(config: Dictionary) -> void:
+	print("OscilloscopeArtifact: Applying grid config: %s" % str(config))
+
+	# Frequency A
+	if config.has("freq_a"):
+		initial_freq_a = float(config.freq_a)
+	elif config.has("frequency_a"):
+		initial_freq_a = float(config.frequency_a)
+
+	# Frequency B
+	if config.has("freq_b"):
+		initial_freq_b = float(config.freq_b)
+	elif config.has("frequency_b"):
+		initial_freq_b = float(config.frequency_b)
+
+	# Amplitude
+	if config.has("amp"):
+		initial_amplitude = clamp(float(config.amp), 0.0, 1.0)
+	elif config.has("amplitude"):
+		initial_amplitude = clamp(float(config.amplitude), 0.0, 1.0)
+
+	# Phase (degrees)
+	var phase_deg := 0.0
+	if config.has("phase"):
+		phase_deg = float(config.phase)
+
+	# Mode
+	if config.has("mode"):
+		initial_mode = int(config.mode)
+
+	# Phosphor style
+	if config.has("style"):
+		phosphor_style = str(config.style)
+	elif config.has("color"):
+		phosphor_style = str(config.color)
+
+	# Time division
+	var time_div := 1.0
+	if config.has("time_div"):
+		time_div = clamp(float(config.time_div), 0.1, 5.0)
+
+	# Wave shape
+	var wave_shape := -1
+	if config.has("wave"):
+		wave_shape = int(config.wave)
+	elif config.has("wave_shape"):
+		wave_shape = int(config.wave_shape)
+
+	# 3D trace
+	if config.has("trace_3d"):
+		var val = str(config.trace_3d).to_lower()
+		show_3d_trace = val == "true" or val == "1"
+
+	# Apply to display
+	if display:
+		display.set_mode(initial_mode as OscilloscopeDisplay.Mode)
+		display.set_frequency_a(initial_freq_a)
+		display.set_frequency_b(initial_freq_b)
+		display.set_amplitude_value(initial_amplitude)
+		display.set_phosphor_style(phosphor_style)
+
+		if phase_deg != 0.0:
+			display.set_phase(deg_to_rad(phase_deg))
+
+		display.time_div = time_div
+
+		if wave_shape >= 0:
+			display.set_wave_shape(wave_shape as OscilloscopeDisplay.WaveShape)
+
+	# Update sliders to match
+	if freq_a_slider:
+		freq_a_slider.set_normalized_value(_freq_to_norm(initial_freq_a))
+	if freq_b_slider:
+		freq_b_slider.set_normalized_value(_freq_to_norm(initial_freq_b))
+	if amplitude_slider:
+		amplitude_slider.set_normalized_value(initial_amplitude)
+	if phase_slider and phase_deg != 0.0:
+		phase_slider.set_normalized_value(phase_deg / 360.0)
+	if time_div_slider:
+		time_div_slider.set_normalized_value((time_div - 0.1) / 4.9)
+
+	# Handle presets (applied last to override frequencies)
+	if config.has("preset"):
+		set_preset(str(config.preset))
+
+	print("OscilloscopeArtifact: Config applied - freq_a=%.1f, freq_b=%.1f, amp=%.2f, mode=%d, style=%s" % [
+		initial_freq_a, initial_freq_b, initial_amplitude, initial_mode, phosphor_style
+	])

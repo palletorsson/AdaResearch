@@ -661,12 +661,18 @@ func _get_song_color(song_id: String) -> Color:
 	"""Get a distinct color for each song type (for archive list)"""
 	match song_id:
 		"ambient_works", "ambient_techno": return Color(0.4, 0.7, 0.9)
-		"detroit_techno": return Color(0.7, 0.5, 0.9)
+		"detroit_techno", "detroit_sb": return Color(0.7, 0.5, 0.9)
 		"moroder_disco", "french_touch": return Color(0.9, 0.6, 0.4)
 		"pop_generative", "pop_v2", "pop_madonna": return Color(0.9, 0.4, 0.6)
 		"prog_synth_70s", "prog_synth_v2": return Color(0.5, 0.8, 0.5)
 		"rave", "reese_jungle": return Color(0.9, 0.3, 0.3)
-		"synthwave", "blade_runner": return Color(0.6, 0.4, 0.9)
+		"synthwave", "blade_runner", "synthwave_sb": return Color(0.6, 0.4, 0.9)
+		"burial_sb": return Color(0.4, 0.4, 0.5)
+		"boc_sb": return Color(0.6, 0.5, 0.3)
+		"rave_sb": return Color(0.9, 0.2, 0.2)
+		"kraftwerk_sb": return Color(0.3, 0.6, 0.9)
+		"madonna_sb": return Color(0.95, 0.5, 0.7)
+		"gypsy_sb": return Color(0.4, 0.8, 0.6)
 		"boards_of_canada", "boards_of_canada_v2": return Color(0.6, 0.75, 0.6)
 		"burial", "burial_v2": return Color(0.4, 0.4, 0.6)
 		"kraftwerk", "kraftwerk_v2": return Color(0.8, 0.5, 0.5)
@@ -696,6 +702,14 @@ func _load_songs_from_folder() -> Array:
 		"burial": "🌧️ Burial",
 		"burial_v2": "🌧️ Burial V2",
 		"detroit_techno": "🔩 Hard Detroit",
+		"detroit_sb": "🔩 Detroit (Soundbank)",
+		"synthwave_sb": "🌆 Synthwave (Soundbank)",
+		"burial_sb": "🌧️ Burial (Soundbank)",
+		"boc_sb": "📼 BoC (Soundbank)",
+		"rave_sb": "⚡ Rave (Soundbank)",
+		"kraftwerk_sb": "🤖 Kraftwerk (Soundbank)",
+		"madonna_sb": "💃 Madonna 80s (Soundbank)",
+		"gypsy_sb": "🎹 Gypsy Woman (Soundbank)",
 		"french_touch": "🇫🇷 French Touch",
 		"gypsy_woman_house": "💃 Gypsy Woman",
 		"kraftwerk": "🤖 Kraftwerk",
@@ -1315,6 +1329,22 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_moroder_disco_song({})
 		"detroit_techno":
 			stream = AudioSynthesizer.generate_detroit_techno_song({})
+		"detroit_sb":
+			stream = SoundbankGenerator.generate_song("detroit_techno", {})
+		"synthwave_sb":
+			stream = SoundbankGenerator.generate_song("synthwave", {})
+		"burial_sb":
+			stream = SoundbankGenerator.generate_song("burial", {})
+		"boc_sb":
+			stream = SoundbankGenerator.generate_song("boards_of_canada", {})
+		"rave_sb":
+			stream = SoundbankGenerator.generate_song("rave", {})
+		"kraftwerk_sb":
+			stream = SoundbankGenerator.generate_song("kraftwerk", {})
+		"madonna_sb":
+			stream = SoundbankGenerator.generate_song("madonna_80s", {})
+		"gypsy_sb":
+			stream = SoundbankGenerator.generate_song("gypsy_woman_house", {})
 		"synthwave":
 			stream = AudioSynthesizer.generate_synthwave_song({})
 		"rave":
@@ -1477,8 +1507,8 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 			return 130.0
 		"kraftwerk", "kraftwerk_v2":
 			return 110.0
-		"detroit_techno":
-			return 125.0
+		"detroit_techno", "detroit_sb":
+			return 128.0
 		"rave":
 			return 145.0
 		"reese_jungle":

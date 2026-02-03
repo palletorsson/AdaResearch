@@ -1,7 +1,7 @@
-# TurtlePipeBase.gd - Turtle Graphics Pipe Building System
+# GlassRackPipeBase.gd - Turtle Graphics Pipe Building System for Glass Rack
 # Base class for building 3D pipe structures using turtle-graphics commands
 extends Node3D
-class_name TurtlePipeBase
+class_name GlassRackPipeBase
 
 signal build_complete
 

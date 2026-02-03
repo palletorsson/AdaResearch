@@ -1,7 +1,7 @@
 # GlassRackController.gd - Modular Glass Apparatus System
-# Extends TurtlePipeBase for turtle-graphics pipe building
+# Extends GlassRackPipeBase for turtle-graphics pipe building
 # Specialized for laboratory glassware with transparency and liquid flow
-extends TurtlePipeBase
+extends GlassRackPipeBase
 class_name GlassRackController
 
 signal apparatus_built

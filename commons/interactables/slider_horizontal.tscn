@@ -83,6 +83,7 @@ collision_mask = 0
 shape = SubResource("3")
 
 [node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
+visible = false
 mesh = SubResource("BoxMesh_Handle")
 surface_material_override/0 = ExtResource("MatMetal")
 
