@@ -39,6 +39,18 @@
 			"qfep_connection": "Parameter space exploration — stiffness, pressure, damping create different morphological behaviors",
 			"tags": ["softbody", "physics", "variants", "comparison", "queer_morphology"]
 		},
+		"ca_rule_explorer": {
+			"name": "CA Rule Explorer",
+			"lookup_name": "ca_rule_explorer",
+			"description": "1×1m horizontal board displaying Wolfram 1D cellular automata. 64 cells wide, 50 rows of history. Interactive rule selection 0-255. Famous rules: 30 (chaos), 90 (Sierpiński), 110 (Turing complete). Simple rules → complex patterns.",
+			"scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+			"category": "emergence",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "cellularautomata",
+			"qfep_connection": "Rule 110 is Turing complete — proof that simple local rules can produce universal computation. Edge of chaos territory.",
+			"tags": ["cellular_automata", "wolfram", "rule_110", "emergence", "computation", "interactive", "1d_ca"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
