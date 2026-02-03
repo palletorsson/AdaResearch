@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bias_visualizer_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/bias_visualizer/bias_visualizer.gd" id="1_script"]
+
+[node name="BiasVisualizer" type="Node3D"]
+script = ExtResource("1_script")
+display_size = 1.0
+word_scale = 0.05
+male_color = Color(0.3, 0.5, 1, 1)
+female_color = Color(1, 0.4, 0.6, 1)
+neutral_color = Color(0.5, 0.9, 0.4, 1)
+profession_color = Color(1, 0.8, 0.2, 1)
+analogy_type = 0

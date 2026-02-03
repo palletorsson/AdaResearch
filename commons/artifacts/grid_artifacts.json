@@ -111,6 +111,18 @@
 			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like λ — more iterations reveal more detail at the edge of legibility.",
 			"tags": ["lsystem", "grammar", "rewriting", "fractal", "plant", "lindenmayer", "turtle", "presets"]
 		},
+		"bias_visualizer": {
+			"name": "Bias Visualizer",
+			"lookup_name": "bias_visualizer",
+			"description": "Word embedding bias made visible. Shows how professions cluster by gender in ML models (doctor→male, nurse→female). Joy Buolamwini's 'Coded Gaze' embodied. The training data encodes our prejudices.",
+			"scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
+			"category": "critical",
+			"interaction": "observe",
+			"complexity": "advanced",
+			"sequence": "criticalalgorithms",
+			"qfep_connection": "Bias is frozen E(S) — entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical φ: questioning whose data, whose categories.",
+			"tags": ["bias", "word_embedding", "critical_algorithms", "coded_gaze", "buolamwini", "fairness", "ml_ethics", "gender_bias"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
