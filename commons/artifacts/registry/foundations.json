@@ -118,6 +118,83 @@
       "category": "philosophy",
       "complexity": "advanced",
       "tags": ["chaos", "bifurcation", "edge_of_chaos", "lambda", "interactive"]
+    },
+    "euclid_postulates_plaque": {
+      "lookup_name": "euclid_postulates_plaque",
+      "scene": "res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.tscn",
+      "class_name": "EuclidPostulatesPlaque",
+      "description": "Interactive plaque displaying Euclid's five postulates, highlighting the controversial fifth (parallel) postulate",
+      "gamwell_reference": "Chapter 1-2: Euclidean Geometry",
+      "qfep_connection": "The parallel postulate seemed self-evident for 2000 years - certainty is fragile",
+      "signals": ["postulate_selected", "parallel_highlighted"],
+      "interactions": ["click to cycle postulates"],
+      "parameters": {
+        "current_postulate": "Current postulate (0-4)",
+        "highlight_fifth": "Emphasize the parallel postulate"
+      },
+      "dev_themes": ["philosophy", "geometry"],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "intermediate",
+      "tags": ["euclid", "geometry", "parallel_postulate", "foundations", "interactive"]
+    },
+    "penrose_triangle": {
+      "lookup_name": "penrose_triangle",
+      "scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
+      "class_name": "PenroseTriangle",
+      "description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
+      "gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
+      "qfep_connection": "Local validity does not guarantee global consistency",
+      "signals": ["viewpoint_locked", "illusion_revealed"],
+      "interactions": ["move to find the 'sweet spot' where illusion works"],
+      "parameters": {
+        "size": "Triangle size",
+        "auto_rotate": "Slowly rotate to reveal impossibility"
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "intermediate",
+      "tags": ["penrose", "impossible", "illusion", "escher", "interactive"]
+    },
+    "poincare_disk": {
+      "lookup_name": "poincare_disk",
+      "scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
+      "class_name": "PoincareDisk",
+      "description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
+      "gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
+      "qfep_connection": "The parallel postulate is independent - geometry is a choice",
+      "signals": ["curvature_changed"],
+      "interactions": ["observe geodesics as circular arcs"],
+      "parameters": {
+        "disk_radius": "Size of the disk",
+        "line_count": "Number of geodesic lines",
+        "show_triangle": "Display hyperbolic triangle"
+      },
+      "dev_themes": ["geometry", "philosophy"],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "advanced",
+      "tags": ["hyperbolic", "poincare", "non_euclidean", "geometry", "interactive"]
+    },
+    "schrodinger_box": {
+      "lookup_name": "schrodinger_box",
+      "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
+      "class_name": "SchrodingerBox",
+      "description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
+      "gamwell_reference": "Quantum mechanics and measurement problem",
+      "qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
+      "signals": ["box_opened", "state_collapsed", "superposition_entered"],
+      "interactions": ["click to observe (collapse superposition)", "auto-resets to superposition"],
+      "parameters": {
+        "box_size": "Physical dimensions",
+        "auto_reset_time": "Seconds before returning to superposition"
+      },
+      "dev_themes": ["philosophy", "qfep"],
+      "dev_category": "foundations_crisis",
+      "category": "philosophy",
+      "complexity": "intermediate",
+      "tags": ["schrodinger", "quantum", "superposition", "collapse", "interactive"]
     }
   },
   "sequence_mapping": {
@@ -125,21 +202,29 @@
       "godel_statement_plaque",
       "russell_set_box",
       "escher_staircase",
-      "florensky_sphere"
+      "florensky_sphere",
+      "euclid_postulates_plaque",
+      "penrose_triangle",
+      "poincare_disk",
+      "schrodinger_box"
     ],
     "artmathematics": [
       "magritte_pipe",
-      "escher_staircase"
+      "escher_staircase",
+      "penrose_triangle"
     ],
     "qfeplaboratory": [
       "bifurcation_diagram",
-      "florensky_sphere"
+      "florensky_sphere",
+      "schrodinger_box"
     ]
   },
   "theoretical_connections": {
     "self_reference_artifacts": ["godel_statement_plaque", "russell_set_box", "escher_staircase"],
-    "representation_gap_artifacts": ["magritte_pipe"],
-    "paraconsistent_artifacts": ["florensky_sphere"],
-    "edge_of_chaos_artifacts": ["bifurcation_diagram"]
+    "representation_gap_artifacts": ["magritte_pipe", "penrose_triangle"],
+    "paraconsistent_artifacts": ["florensky_sphere", "schrodinger_box"],
+    "edge_of_chaos_artifacts": ["bifurcation_diagram"],
+    "non_euclidean_artifacts": ["poincare_disk"],
+    "foundations_artifacts": ["euclid_postulates_plaque"]
   }
 }
