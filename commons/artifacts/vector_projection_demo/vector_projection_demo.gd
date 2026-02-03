@@ -10,20 +10,22 @@ extends Node3D
 class_name VectorProjectionDemo
 
 ## Display settings
-@export var max_vector_length: float = 1.0
-@export var arrow_thickness: float = 0.02
+@export var max_vector_length: float = 1.2
+@export var arrow_thickness: float = 0.025
 
 ## Vector A (incident/source)
-@export var vector_a: Vector3 = Vector3(0.5, 0.6, 0.2):
+@export var vector_a: Vector3 = Vector3(0.6, 0.7, 0.2):
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
-		_update_visualization()
+		if is_inside_tree():
+			_update_visualization()
 
 ## Normal vector (surface normal for reflection)
 @export var normal: Vector3 = Vector3(0.0, 1.0, 0.0):
 	set(value):
-		normal = value.normalized() * 0.5 if value.length() > 0.01 else Vector3(0, 1, 0) * 0.5
-		_update_visualization()
+		normal = value.normalized() * 0.6 if value.length() > 0.01 else Vector3(0, 1, 0) * 0.6
+		if is_inside_tree():
+			_update_visualization()
 
 ## Colors
 @export var color_a: Color = Color(1.0, 0.3, 0.3)  # Red - incident
@@ -45,6 +47,15 @@ var _handle_n: Node3D
 var _title_panel: Node3D
 var _formula_panel: Node3D
 var _control_panel: Node3D
+
+# Vector labels
+var _label_a: Label3D
+var _label_n: Label3D
+var _label_proj: Label3D
+var _label_refl: Label3D
+
+# Coordinate axes
+var _axes_container: Node3D
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
@@ -121,8 +132,10 @@ func _get_panel_label(panel: Node3D) -> Label3D:
 
 func _ready():
 	_create_base()
+	_create_coordinate_axes()
 	_create_plane()
 	_create_arrows()
+	_create_vector_labels()
 	_create_drop_line()
 	_create_handles()
 	_create_labels()
@@ -144,6 +157,69 @@ func _create_base():
 	origin_mat.emission_energy_multiplier = 0.3
 	origin.material_override = origin_mat
 	add_child(origin)
+
+func _create_coordinate_axes():
+	_axes_container = Node3D.new()
+	_axes_container.name = "Axes"
+	add_child(_axes_container)
+	
+	var axis_length = max_vector_length * 1.3
+	_create_axis_line(Vector3(axis_length, 0, 0), Color(1.0, 0.3, 0.3, 0.5), "X")
+	_create_axis_line(Vector3(0, axis_length, 0), Color(0.3, 1.0, 0.3, 0.5), "Y")
+	_create_axis_line(Vector3(0, 0, axis_length), Color(0.3, 0.5, 1.0, 0.5), "Z")
+
+func _create_axis_line(direction: Vector3, color: Color, label_text: String):
+	var length = direction.length()
+	var norm = direction.normalized()
+	
+	var shaft = MeshInstance3D.new()
+	var cylinder = CylinderMesh.new()
+	cylinder.top_radius = 0.005
+	cylinder.bottom_radius = 0.005
+	cylinder.height = length
+	shaft.mesh = cylinder
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shaft.material_override = mat
+	shaft.position = direction / 2.0
+	
+	if abs(norm.dot(Vector3.UP)) < 0.99:
+		shaft.look_at(shaft.position + direction, Vector3.UP)
+		shaft.rotate_object_local(Vector3.RIGHT, PI/2)
+	
+	_axes_container.add_child(shaft)
+	
+	var lbl = Label3D.new()
+	lbl.text = label_text
+	lbl.pixel_size = 0.002
+	lbl.font_size = 16
+	lbl.modulate = color
+	lbl.position = direction + norm * 0.05
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_axes_container.add_child(lbl)
+
+func _create_vector_labels():
+	_label_a = _create_vector_label("A", color_a)
+	_label_n = _create_vector_label("n", color_normal)
+	_label_proj = _create_vector_label("proj", color_projection)
+	_label_refl = _create_vector_label("refl", color_reflection)
+	add_child(_label_a)
+	add_child(_label_n)
+	add_child(_label_proj)
+	add_child(_label_refl)
+
+func _create_vector_label(text: String, color: Color) -> Label3D:
+	var label = Label3D.new()
+	label.text = text
+	label.pixel_size = 0.0018
+	label.font_size = 16
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.outline_size = 6
+	label.outline_modulate = Color(0, 0, 0, 0.7)
+	return label
 
 func _create_plane():
 	_plane_mesh = MeshInstance3D.new()
@@ -264,20 +340,21 @@ func _create_labels():
 	_title_panel = _create_text_panel(
 		"TitlePanel",
 		"PROJECTION & REFLECTION",
-		Vector3(0, max_vector_length + 0.2, 0),
-		Vector2(0.42, 0.06),
-		18
+		Vector3(0, max_vector_length + 0.3, -0.3),
+		Vector2(0.46, 0.07),
+		20
 	)
+	_title_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_title_panel)
 	
 	_formula_panel = _create_text_panel(
 		"FormulaPanel",
 		"",
-		Vector3(0, 0.02, max_vector_length + 0.2),
-		Vector2(0.5, 0.16),
+		Vector3(-max_vector_length - 0.2, max_vector_length * 0.5, 0),
+		Vector2(0.52, 0.18),
 		11
 	)
-	_formula_panel.rotation_degrees = Vector3(-25, 0, 0)
+	_formula_panel.rotation_degrees = Vector3(0, 90, 0)
 	add_child(_formula_panel)
 
 func _create_vr_controls():
@@ -352,6 +429,12 @@ func _update_visualization():
 	_position_arrow(_arrow_projection, Vector3.ZERO, proj_onto_plane)
 	_position_arrow(_arrow_reflection, Vector3.ZERO, reflection)
 	_position_arrow(_arrow_proj_normal, proj_onto_plane, vector_a)
+	
+	# Update vector labels
+	_label_a.position = vector_a * 0.5 + Vector3(0.04, 0.04, 0)
+	_label_n.position = normal * 0.5 + Vector3(0.04, 0.04, 0)
+	_label_proj.position = proj_onto_plane * 0.5 + Vector3(0, -0.04, 0.04)
+	_label_refl.position = reflection * 0.5 + Vector3(0.04, 0, 0.04)
 	
 	# Update plane orientation
 	_update_plane_orientation(n_unit)

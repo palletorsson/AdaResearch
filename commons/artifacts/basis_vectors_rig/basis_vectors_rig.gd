@@ -10,14 +10,15 @@ extends Node3D
 class_name BasisVectorsRig
 
 ## Display settings
-@export var axis_length: float = 0.5
-@export var arrow_thickness: float = 0.015
+@export var axis_length: float = 0.6
+@export var arrow_thickness: float = 0.018
 
 ## Target point to decompose
-@export var target_point: Vector3 = Vector3(0.3, 0.4, 0.2):
+@export var target_point: Vector3 = Vector3(0.35, 0.45, 0.25):
 	set(value):
 		target_point = value
-		_update_visualization()
+		if is_inside_tree():
+			_update_visualization()
 
 ## Colors (standard RGB for XYZ)
 @export var color_i: Color = Color(1.0, 0.2, 0.2)  # Red = X
@@ -262,25 +263,26 @@ func _create_point_marker():
 	add_child(_handle_point)
 
 func _create_labels():
-	# Title panel - top
+	# Title panel - facing player
 	_title_panel = _create_text_panel(
 		"TitlePanel",
 		"BASIS VECTORS",
-		Vector3(0, axis_length + 0.22, 0),
-		Vector2(0.28, 0.06),
-		20
+		Vector3(0, axis_length + 0.28, -0.2),
+		Vector2(0.30, 0.07),
+		22
 	)
+	_title_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_title_panel)
 	
-	# Coordinates panel - front, showing decomposition
+	# Coordinates panel - to the side
 	_coords_panel = _create_text_panel(
 		"CoordsPanel", 
 		"",
-		Vector3(0, 0.02, axis_length + 0.18),
-		Vector2(0.38, 0.12),
+		Vector3(-axis_length - 0.12, axis_length * 0.6, 0),
+		Vector2(0.40, 0.14),
 		14
 	)
-	_coords_panel.rotation_degrees = Vector3(-25, 0, 0)
+	_coords_panel.rotation_degrees = Vector3(0, 90, 0)
 	add_child(_coords_panel)
 
 func _create_vr_controls():

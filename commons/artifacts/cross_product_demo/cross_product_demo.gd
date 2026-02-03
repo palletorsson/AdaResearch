@@ -11,20 +11,22 @@ extends Node3D
 class_name CrossProductDemo
 
 ## Display settings
-@export var max_vector_length: float = 0.8
-@export var arrow_thickness: float = 0.02
+@export var max_vector_length: float = 1.0
+@export var arrow_thickness: float = 0.025
 
 ## Vector A
-@export var vector_a: Vector3 = Vector3(0.5, 0.0, 0.0):
+@export var vector_a: Vector3 = Vector3(0.7, 0.0, 0.0):
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
-		_update_visualization()
+		if is_inside_tree():
+			_update_visualization()
 
 ## Vector B
-@export var vector_b: Vector3 = Vector3(0.0, 0.0, 0.5):
+@export var vector_b: Vector3 = Vector3(0.0, 0.0, 0.7):
 	set(value):
 		vector_b = value.limit_length(max_vector_length)
-		_update_visualization()
+		if is_inside_tree():
+			_update_visualization()
 
 ## Colors
 @export var color_a: Color = Color(1.0, 0.3, 0.3)  # Red
@@ -44,6 +46,14 @@ var _result_panel: Node3D
 var _formula_panel: Node3D
 var _right_hand_indicator: Node3D
 var _control_panel: Node3D
+
+# Vector labels
+var _label_a: Label3D
+var _label_b: Label3D
+var _label_result: Label3D
+
+# Coordinate axes
+var _axes_container: Node3D
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
@@ -122,7 +132,9 @@ func _get_panel_label(panel: Node3D) -> Label3D:
 
 func _ready():
 	_create_base()
+	_create_coordinate_axes()
 	_create_arrows()
+	_create_vector_labels()
 	_create_parallelogram()
 	_create_handles()
 	_create_right_hand_indicator()
@@ -159,6 +171,67 @@ func _create_base():
 	origin_mat.emission_energy_multiplier = 0.3
 	origin.material_override = origin_mat
 	add_child(origin)
+
+func _create_coordinate_axes():
+	_axes_container = Node3D.new()
+	_axes_container.name = "Axes"
+	add_child(_axes_container)
+	
+	var axis_length = max_vector_length * 1.4
+	_create_axis_line(Vector3(axis_length, 0, 0), Color(1.0, 0.3, 0.3, 0.5), "X")
+	_create_axis_line(Vector3(0, axis_length, 0), Color(0.3, 1.0, 0.3, 0.5), "Y")
+	_create_axis_line(Vector3(0, 0, axis_length), Color(0.3, 0.5, 1.0, 0.5), "Z")
+
+func _create_axis_line(direction: Vector3, color: Color, label_text: String):
+	var length = direction.length()
+	var norm = direction.normalized()
+	
+	var shaft = MeshInstance3D.new()
+	var cylinder = CylinderMesh.new()
+	cylinder.top_radius = 0.005
+	cylinder.bottom_radius = 0.005
+	cylinder.height = length
+	shaft.mesh = cylinder
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shaft.material_override = mat
+	shaft.position = direction / 2.0
+	
+	if abs(norm.dot(Vector3.UP)) < 0.99:
+		shaft.look_at(shaft.position + direction, Vector3.UP)
+		shaft.rotate_object_local(Vector3.RIGHT, PI/2)
+	
+	_axes_container.add_child(shaft)
+	
+	var lbl = Label3D.new()
+	lbl.text = label_text
+	lbl.pixel_size = 0.002
+	lbl.font_size = 16
+	lbl.modulate = color
+	lbl.position = direction + norm * 0.05
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_axes_container.add_child(lbl)
+
+func _create_vector_labels():
+	_label_a = _create_vector_label("A", color_a)
+	_label_b = _create_vector_label("B", color_b)
+	_label_result = _create_vector_label("A×B", color_result)
+	add_child(_label_a)
+	add_child(_label_b)
+	add_child(_label_result)
+
+func _create_vector_label(text: String, color: Color) -> Label3D:
+	var label = Label3D.new()
+	label.text = text
+	label.pixel_size = 0.0018
+	label.font_size = 16
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.outline_size = 6
+	label.outline_modulate = Color(0, 0, 0, 0.7)
+	return label
 
 func _create_arrows():
 	_arrow_a = _create_arrow("ArrowA", color_a)
@@ -258,35 +331,37 @@ func _create_right_hand_indicator():
 	_right_hand_indicator.add_child(arc)
 
 func _create_labels():
-	# Title panel - top
+	# Title panel - facing player
 	_title_panel = _create_text_panel(
 		"TitlePanel",
 		"CROSS PRODUCT",
-		Vector3(0, max_vector_length * 1.5 + 0.12, 0),
-		Vector2(0.28, 0.06),
-		20
+		Vector3(0, max_vector_length * 1.6 + 0.15, -0.3),
+		Vector2(0.30, 0.07),
+		22
 	)
+	_title_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_title_panel)
 	
-	# Result panel - below title
+	# Result panel - below title, facing player
 	_result_panel = _create_text_panel(
 		"ResultPanel",
 		"",
-		Vector3(0, max_vector_length * 1.5 + 0.02, 0),
-		Vector2(0.48, 0.07),
+		Vector3(0, max_vector_length * 1.6, -0.3),
+		Vector2(0.52, 0.08),
 		14
 	)
+	_result_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_result_panel)
 	
-	# Formula panel - front
+	# Formula panel - to the side
 	_formula_panel = _create_text_panel(
 		"FormulaPanel",
 		"",
-		Vector3(0, 0.02, max_vector_length + 0.22),
-		Vector2(0.46, 0.12),
+		Vector3(-max_vector_length - 0.2, max_vector_length * 0.6, 0),
+		Vector2(0.48, 0.14),
 		12
 	)
-	_formula_panel.rotation_degrees = Vector3(-25, 0, 0)
+	_formula_panel.rotation_degrees = Vector3(0, 90, 0)
 	add_child(_formula_panel)
 
 func _create_vr_controls():
@@ -354,6 +429,11 @@ func _update_visualization():
 	_position_arrow(_arrow_a, Vector3.ZERO, vector_a)
 	_position_arrow(_arrow_b, Vector3.ZERO, vector_b)
 	_position_arrow(_arrow_result, Vector3.ZERO, cross)
+	
+	# Update vector labels
+	_label_a.position = vector_a * 0.5 + Vector3(0.04, 0.04, 0)
+	_label_b.position = vector_b * 0.5 + Vector3(0.04, 0, 0.04)
+	_label_result.position = cross * 0.5 + Vector3(0.05, 0, 0)
 	
 	# Update parallelogram (shows area)
 	_update_parallelogram()
