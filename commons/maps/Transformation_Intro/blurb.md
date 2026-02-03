@@ -1,1 +1,0 @@
-Space is what becomes perceptible through transformation. Before the cube rotates, before it moves, before it scales, there is only undifferentiated presence. Transformation makes space legible: here becomes there, this size becomes that size, this orientation becomes another. The cube sits waiting, already transformed by systems you cannot see.
