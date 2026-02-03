@@ -168,7 +168,7 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 	environment_root.add_child(floor)
 
 ## Creates a framed info panel with backing, border, and title
-func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(1.4, 0.55)) -> Label3D:
+func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(1.8, 0.6)) -> Label3D:
 	var panel = Node3D.new()
 	panel.name = "InfoPanel"
 	panel.position = position * SCENE_SCALE
