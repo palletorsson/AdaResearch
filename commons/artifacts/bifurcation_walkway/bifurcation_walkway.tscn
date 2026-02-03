@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bifurcation_walkway_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.gd" id="1_script"]
+
+[node name="BifurcationWalkway" type="Node3D"]
+script = ExtResource("1_script")
+walkway_length = 10.0
+walkway_width = 2.0
+walkway_height = 3.0
+r_min = 2.5
+r_max = 4.0
+attractor_points = 50
+warmup_iterations = 100
+point_size = 0.05
+display_height = 2.0
+stable_color = Color(0.2, 0.5, 1, 1)
+edge_color = Color(0.2, 1, 0.4, 1)
+chaos_color = Color(1, 0.3, 0.2, 1)

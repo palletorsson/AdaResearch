@@ -63,6 +63,18 @@
 			"qfep_connection": "The Mandelbrot boundary is exactly λ_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
 			"tags": ["mandelbrot", "fractal", "self_similarity", "infinite_detail", "shader", "interactive", "zoom"]
 		},
+		"bifurcation_walkway": {
+			"name": "Bifurcation Walkway",
+			"lookup_name": "bifurcation_walkway",
+			"description": "A 10m corridor where your X position = r parameter in the logistic map. Walk through the phase transition: stable fixed point → period doubling → onset of chaos → period-3 window. The lambda parameter made physical. THIS IS QFEP EMBODIED.",
+			"scene": "res://commons/artifacts/bifurcation_walkway/bifurcation_walkway.tscn",
+			"category": "qfep",
+			"interaction": "walk_through",
+			"complexity": "advanced",
+			"sequence": "qfeplaboratory",
+			"qfep_connection": "The logistic map's r parameter IS the λ drive. At r≈3.57, chaos begins — this is λ_edge, where life exists. You walk through the phase space of order→chaos.",
+			"tags": ["bifurcation", "logistic_map", "phase_transition", "chaos", "qfep", "walkable", "embodied_learning", "lambda"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
