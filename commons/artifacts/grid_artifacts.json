@@ -99,6 +99,18 @@
 			"qfep_connection": "Noise is E(S) made visible. The threshold is a λ-like parameter — where you draw the line between solid and void.",
 			"tags": ["perlin", "noise", "voxel", "terrain", "procedural", "threshold", "sculpting"]
 		},
+		"lsystem_editor": {
+			"name": "L-System Editor",
+			"lookup_name": "lsystem_editor",
+			"description": "Interactive L-system viewer with 7 presets: Koch, Sierpinski, Dragon, Plant, Bush, Fern, Binary Tree. Grammar as generative tool. Control generations and angle. Watch simple rules grow complex forms.",
+			"scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
+			"category": "fractals",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "lsystems",
+			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like λ — more iterations reveal more detail at the edge of legibility.",
+			"tags": ["lsystem", "grammar", "rewriting", "fractal", "plant", "lindenmayer", "turtle", "presets"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
