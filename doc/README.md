@@ -33,7 +33,7 @@ The curriculum embodies this:
 
 ## 🗺️ Learning Sequences
 
-40+ sequences organize 200+ maps into learning progressions:
+42 sequences organize 500+ maps into learning progressions:
 
 | Sequence | Maps | Focus |
 |----------|------|-------|
@@ -56,9 +56,9 @@ See **[ARCHITECTURE.md](ARCHITECTURE.md)** for complete technical reference.
 
 ```
 AdaResearch/
-├── algorithms/         # 50+ categories of algorithm visualizations
+├── algorithms/         # 52 categories of algorithm visualizations
 ├── commons/
-│   ├── artifacts/      # 700+ educational objects (registry)
+│   ├── artifacts/      # 750+ educational objects (registry)
 │   ├── audio/          # Procedural sound system
 │   ├── grid/           # Component-based map rendering
 │   ├── managers/       # Scene, game, progression managers
@@ -98,14 +98,20 @@ AdaResearch/
 
 | Document | Purpose |
 |----------|---------|
+| [ENTRY.md](ENTRY.md) | **Start here** — Project entry point |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Technical system reference |
-| [doc/CLAUDE_PROJECT_NAVIGATOR.md](doc/CLAUDE_PROJECT_NAVIGATOR.md) | Comprehensive project guide |
+| [TAXONOMY.md](TAXONOMY.md) | Generative paradigms framework |
 | [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |
 | [commons/audio/SOUND_SYSTEM_GUIDE.md](commons/audio/SOUND_SYSTEM_GUIDE.md) | Audio system details |
 | [doc/VR_GAMEPLAY_DESIGN.md](doc/VR_GAMEPLAY_DESIGN.md) | VR design philosophy |
 | [doc/QFEP_GAMWELL_MAPPING.md](doc/QFEP_GAMWELL_MAPPING.md) | Theory grounded in art/math history |
 
 ## 🔄 Recent Development
+
+### February 2026
+- ✅ Vector scenes scaled to 1m cube standard
+- ✅ ENTRY.md documentation entry point
+- ✅ Content validator integration
 
 ### January 2026
 - ✅ QFEP Laboratory artifacts (sliders, reactor, meters)
@@ -124,7 +130,7 @@ AdaResearch/
 | Area | Status |
 |------|--------|
 | Grid System | ✅ Production |
-| Artifact Registry | ✅ 700+ objects |
+| Artifact Registry | ✅ 750+ objects |
 | Audio System | ✅ Production |
 | VR Integration | ✅ Working |
 | Primitives sequence | ✅ 80% documented |
