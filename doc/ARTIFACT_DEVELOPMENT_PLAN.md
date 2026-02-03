@@ -119,7 +119,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `mandelbrot_dive` | 🔨 Build | HIGH | Zoom into infinite detail |
+| `mandelbrot_dive` | ✅ Done | HIGH | **2026-02-03** — GPU shader, 5 palettes, auto-dive |
 | `julia_set_explorer` | 🔨 Build | HIGH | c-parameter slider |
 | `sierpinski_builder` | 🔨 Build | HIGH | Step-by-step construction |
 | `koch_snowflake_grower` | 🔨 Build | MED | Iteration control |
@@ -231,7 +231,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 | `entropy_meter` | ✅ Done | — | E(S) gauge |
 | `edge_detector` | ✅ Done | — | λ≈0.4 finder |
 | `reactive_particle_field` | ✅ Done | — | Formula made physical |
-| `bifurcation_walkway` | 🔨 Build | HIGH | **Walkable phase transition** |
+| `bifurcation_walkway` | ✅ Done | HIGH | **2026-02-03** — 10m walkway, r=2.5→4.0, λ made physical |
 | `qfep_sandbox_console` | 🔨 Build | HIGH | Full control panel |
 | `edge_of_chaos_orb` | 🔨 Build | MED | State indicator |
 
@@ -308,8 +308,8 @@ Building order optimized for grant alignment + QFEP coverage:
 | 5 | `lsystem_editor` | lsystems | Grammar as generative tool |
 | 6 | ✅ `jelly_cube` | softbodies | Queer morphology precursor — **DONE 2026-02-03** |
 | 7 | `perlin_terrain_sculptor` | noise | Core noise interaction |
-| 8 | `mandelbrot_dive` | fractals | Infinite detail zoom |
-| 9 | `bifurcation_walkway` | qfeplaboratory | Walkable phase transition |
+| 8 | ✅ `mandelbrot_dive` | fractals | Infinite detail — **DONE 2026-02-03** |
+| 9 | ✅ `bifurcation_walkway` | qfeplaboratory | Walkable phase transition — **DONE 2026-02-03** |
 | 10 | `queer_morphology_specimen` | softbodies | **Grant thesis** - fluid form |
 
 ---
@@ -332,7 +332,7 @@ Update this file as artifacts are completed:
 - Add completion date
 - Note any scope changes
 
-**Last updated:** 2026-02-03 (boids_aquarium ✅, jelly_cube ✅, ca_rule_explorer ✅)
+**Last updated:** 2026-02-03 (5 artifacts done: boids, jelly, CA, mandelbrot, bifurcation)
 
 ---
 
