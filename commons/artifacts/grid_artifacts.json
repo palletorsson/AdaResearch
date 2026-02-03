@@ -123,6 +123,18 @@
 			"qfep_connection": "Bias is frozen E(S) — entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical φ: questioning whose data, whose categories.",
 			"tags": ["bias", "word_embedding", "critical_algorithms", "coded_gaze", "buolamwini", "fairness", "ml_ethics", "gender_bias"]
 		},
+		"vector_addition_demo": {
+			"name": "Vector Addition Demo",
+			"lookup_name": "vector_addition_demo",
+			"description": "Interactive A + B = C with 3D arrows. Parallelogram law visualized — ghost arrows show head-to-tail addition. Grabbable endpoints to adjust vectors.",
+			"scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+			"category": "transformations",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"sequence": "vectors",
+			"qfep_connection": "Vectors are the language of forces and flows. Addition is composition — combining influences. Foundation for all physics.",
+			"tags": ["vector", "addition", "parallelogram", "arrows", "foundational", "interactive"]
+		},
 		"game_of_life_petri": {
 			"name": "Game of Life Petri",
 			"lookup_name": "game_of_life_petri",
