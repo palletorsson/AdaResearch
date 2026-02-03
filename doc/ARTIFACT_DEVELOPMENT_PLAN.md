@@ -78,10 +78,10 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `distribution_sampler` | 🔨 Build | HIGH | Gaussian, uniform, Poisson - grabbable |
-| `random_walk_terrarium` | 🔨 Build | HIGH | 2D/3D walks in glass case |
+| `distribution_sampler` | ✅ Done | HIGH | **2026-02-03** — Gaussian/Uniform/Poisson/Exp, falling samples |
+| `random_walk_terrarium` | ✅ Done | HIGH | **2026-02-03** — 2D/3D/Lévy, glass case, MSD tracking |
 | `entropy_source` | 🔨 Build | HIGH | Visual true randomness vs pseudo |
-| `monte_carlo_estimator` | 🔨 Build | MED | Pi estimation with darts |
+| `monte_carlo_estimator` | ✅ Done | MED | **2026-02-03** — Pi estimation with darts |
 | `brownian_motion_tank` | 🔨 Build | MED | Particles in fluid |
 
 ### 3B: Noise (Week 6)
@@ -89,7 +89,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
 | `perlin_terrain_sculptor` | ✅ Done | HIGH | **2026-02-03** — 24³ voxels, threshold control |
-| `flow_field_painter` | 🔨 Build | HIGH | Draw particles following noise |
+| `flow_field_painter` | ✅ Done | HIGH | **2026-02-03** — 500 particles, adjustable scale |
 | `noise_comparison_panel` | 🔨 Build | MED | Value vs Perlin vs Simplex |
 | `curl_noise_vortex` | 🔨 Build | MED | Divergence-free flow |
 | `fractal_brownian_landscape` | 🔨 Build | LOW | fBm terrain generation |
@@ -99,7 +99,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
 | `ca_rule_explorer` | ✅ Done | HIGH | **2026-02-03** — 64×50 board, rules 0-255, keyboard control |
-| `game_of_life_petri` | 🔨 Build | HIGH | Classic GoL, drawable |
+| `game_of_life_petri` | ✅ Done | HIGH | **2026-02-03** — 64×64 board, pattern presets |
 | `ca_3d_cube` | 🔨 Build | MED | 3D cellular automata |
 | `langtons_ant_habitat` | 🔨 Build | MED | Emergent highway |
 | `wireworld_circuit` | 🔨 Build | LOW | Logic with CA |

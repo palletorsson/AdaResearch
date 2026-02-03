@@ -4673,6 +4673,54 @@
 			"sequence": "forces",
 			"qfep_connection": "Orbit as dynamic equilibrium — perpetual falling, never landing. Balance between kinetic and potential. Stability from motion.",
 			"tags": ["orbit", "kepler", "gravity", "satellite", "planet", "celestial_mechanics", "physics"]
+		},
+		"distribution_sampler": {
+			"name": "Distribution Sampler",
+			"lookup_name": "distribution_sampler",
+			"description": "Interactive probability distribution visualizer. Shows Gaussian, Uniform, Poisson, Exponential with falling samples and histogram. Theoretical PDF overlay. Live statistics.",
+			"scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+			"category": "randomness",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "randomness",
+			"qfep_connection": "Distributions as 'shape of randomness' — entropy has structure. Different distributions = different λ signatures.",
+			"tags": ["probability", "distribution", "gaussian", "poisson", "statistics", "histogram", "sampling"]
+		},
+		"random_walk_terrarium": {
+			"name": "Random Walk Terrarium",
+			"lookup_name": "random_walk_terrarium",
+			"description": "Glass terrarium containing random walkers. Modes: 2D, 3D, Lévy flight. Color-coded trails with boundary reflection. Mean squared displacement tracking.",
+			"scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+			"category": "randomness",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "randomness",
+			"qfep_connection": "Random walk as pure E(S) — no memory, no direction, maximum entropy. Lévy flights: structured randomness.",
+			"tags": ["random_walk", "brownian", "levy_flight", "diffusion", "stochastic", "MSD"]
+		},
+		"monte_carlo_estimator": {
+			"name": "Monte Carlo π Estimator",
+			"lookup_name": "monte_carlo_estimator",
+			"description": "Visual Monte Carlo π estimation. Darts fall onto a square with inscribed circle. π ≈ 4 × (inside/total). Watch order emerge from randomness.",
+			"scene": "res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.tscn",
+			"category": "randomness",
+			"interaction": "observe",
+			"complexity": "beginner",
+			"sequence": "randomness",
+			"qfep_connection": "Order (π) emerges from randomness through accumulation. Law of large numbers as F-minimization.",
+			"tags": ["monte_carlo", "pi", "estimation", "randomness", "probability", "convergence"]
+		},
+		"flow_field_painter": {
+			"name": "Flow Field Painter",
+			"lookup_name": "flow_field_painter",
+			"description": "Particles flowing through Perlin noise field. Creates organic, paint-like patterns. Adjustable noise scale and evolution speed. 500 particles with trails.",
+			"scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+			"category": "noise",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "noise",
+			"qfep_connection": "Noise as structured randomness — not chaos, not order, but λ-edge. Flow reveals hidden structure.",
+			"tags": ["perlin", "noise", "flow_field", "particles", "generative_art", "procedural"]
 		}
 	}
 }
