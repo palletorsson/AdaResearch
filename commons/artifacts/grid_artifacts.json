@@ -123,6 +123,30 @@
 			"qfep_connection": "Bias is frozen E(S) — entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical φ: questioning whose data, whose categories.",
 			"tags": ["bias", "word_embedding", "critical_algorithms", "coded_gaze", "buolamwini", "fairness", "ml_ethics", "gender_bias"]
 		},
+		"game_of_life_petri": {
+			"name": "Game of Life Petri",
+			"lookup_name": "game_of_life_petri",
+			"description": "Conway's Game of Life in a petri dish. B3/S23 rules — birth with 3 neighbors, survival with 2-3. Pattern presets: Glider, Pulsar, Gosper Gun. Four rules create infinite complexity.",
+			"scene": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
+			"category": "emergence",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "cellularautomata",
+			"qfep_connection": "Game of Life operates at the edge of chaos — simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules.",
+			"tags": ["cellular_automata", "game_of_life", "conway", "emergence", "glider", "turing_complete"]
+		},
+		"julia_set_explorer": {
+			"name": "Julia Set Explorer",
+			"lookup_name": "julia_set_explorer",
+			"description": "GPU-accelerated Julia set with c-parameter control. Mandelbrot's sibling — where each pixel is a starting z₀ with fixed c. Six famous presets: Dendrite, San Marco, Rabbit, Spiral, Dragon, Douady Rabbit.",
+			"scene": "res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn",
+			"category": "fractals",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "fractals",
+			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a λ-like dial.",
+			"tags": ["julia", "fractal", "complex_dynamics", "shader", "interactive", "mandelbrot_sibling"]
+		},
 		"queer_morphology_specimen": {
 			"name": "Queer Morphology Specimen",
 			"lookup_name": "queer_morphology_specimen",
