@@ -4965,7 +4965,19 @@
                                                               "generative_art",
                                                               "procedural"
                                                           ]
-                                             }
+                                             },
+                      "control_pendulum":  {
+                                               "description":  "Grabbable pendulum that controls oscillation. Grab to stop, swing to control.",
+                                               "name":  "Control Pendulum",
+                                               "lookup_name":  "control_pendulum",
+                                               "scene":  "res://commons/artifacts/control_pendulum/control_pendulum.tscn"
+                                           },
+                      "oscillation_controlled_cube":  {
+                                                          "description":  "Cube controlled by pendulum: Y translation, rotation speed, scale pulse.",
+                                                          "name":  "Oscillation Controlled Cube",
+                                                          "lookup_name":  "oscillation_controlled_cube",
+                                                          "scene":  "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn"
+                                                      }
                   },
     "euclid_postulates_plaque":  {
                                      "description":  "Euclid\u0027s five postulates - the parallel postulate",
@@ -4996,7 +5008,7 @@
                            "scene":  "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn"
                        },
     "angle_sum_triangle":  {
-                               "description":  "Triangle angle sum = 180°",
+                               "description":  "Triangle angle sum = 180ï¿½",
                                "scene":  "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn"
                            },
     "constructive_proof":  {
@@ -5004,7 +5016,7 @@
                                "scene":  "res://commons/artifacts/constructive_proof/constructive_proof.tscn"
                            },
     "excluded_middle_demo":  {
-                                 "description":  "Law of excluded middle - P ? ¬P",
+                                 "description":  "Law of excluded middle - P ? ï¿½P",
                                  "scene":  "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn"
                              },
     "superposition_display":  {

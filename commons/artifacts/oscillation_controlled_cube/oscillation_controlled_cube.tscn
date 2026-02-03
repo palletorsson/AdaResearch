@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://osc_ctrl_cube1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd" id="1_script"]
+
+[node name="OscillationControlledCube" type="Node3D"]
+script = ExtResource("1_script")
