@@ -62,7 +62,7 @@ const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 ## Creates a text label with a backing panel frame
 func _create_text_panel(panel_name: String, text: String, pos: Vector3, 
-		size: Vector2 = Vector2(0.3, 0.08), font_size: int = 16, 
+		size: Vector2 = Vector2(0.5, 0.12), font_size: int = 20, 
 		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Node3D:
 	var panel = Node3D.new()
 	panel.name = panel_name
@@ -79,6 +79,7 @@ func _create_text_panel(panel_name: String, text: String, pos: Vector3,
 	mat.albedo_color = panel_color
 	mat.metallic = 0.2
 	mat.roughness = 0.8
+	mat.render_priority = -10
 	backing.material_override = mat
 	backing.position.z = -0.005
 	panel.add_child(backing)
@@ -90,10 +91,12 @@ func _create_text_panel(panel_name: String, text: String, pos: Vector3,
 	var label = Label3D.new()
 	label.name = "Label"
 	label.text = text
-	label.pixel_size = 0.001
+	label.pixel_size = 0.0015
 	label.font_size = font_size
 	label.horizontal_alignment = alignment
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.no_depth_test = true
+	label.render_priority = 100
 	label.position.z = 0.002
 	panel.add_child(label)
 	
@@ -347,9 +350,9 @@ func _create_labels():
 	_title_panel = _create_text_panel(
 		"TitlePanel",
 		"DOT PRODUCT",
-		Vector3(0, max_vector_length + 0.25, -0.3),
-		Vector2(0.28, 0.07),
-		22
+		Vector3(0, max_vector_length + 0.35, -0.4),
+		Vector2(0.42, 0.1),
+		28
 	)
 	_title_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_title_panel)
@@ -358,9 +361,9 @@ func _create_labels():
 	_result_panel = _create_text_panel(
 		"ResultPanel",
 		"",
-		Vector3(0, max_vector_length + 0.12, -0.3),
-		Vector2(0.44, 0.06),
-		16
+		Vector3(0, max_vector_length + 0.18, -0.4),
+		Vector2(0.66, 0.12),
+		18
 	)
 	_result_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_result_panel)
@@ -369,9 +372,9 @@ func _create_labels():
 	_formula_panel = _create_text_panel(
 		"FormulaPanel",
 		"",
-		Vector3(-max_vector_length - 0.15, max_vector_length * 0.5, 0),
-		Vector2(0.44, 0.16),
-		12
+		Vector3(-max_vector_length - 0.25, max_vector_length * 0.5, 0),
+		Vector2(0.66, 0.22),
+		14
 	)
 	_formula_panel.rotation_degrees = Vector3(0, 90, 0)
 	add_child(_formula_panel)
