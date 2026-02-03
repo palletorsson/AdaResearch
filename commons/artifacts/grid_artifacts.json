@@ -4625,6 +4625,54 @@
 			"sequence": "transformations",
 			"qfep_connection": "Matrix as transformation rule — how one space maps to another. det(M) shows information preservation/loss.",
 			"tags": ["matrix", "transformation", "linear_algebra", "determinant", "shear", "rotation", "scale"]
+		},
+		"coupled_pendulums": {
+			"name": "Coupled Pendulums",
+			"lookup_name": "coupled_pendulums",
+			"description": "Two pendulums connected by a spring showing energy transfer. Coupling strength controls beat frequency. Weak coupling = slow transfer, strong = fast beats. Physics simulation with adjustable damping.",
+			"scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
+			"category": "oscillation",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "wavefunctions",
+			"qfep_connection": "Energy oscillates between subsystems. λ = coupling strength. At edge of chaos, unpredictable transfer patterns emerge.",
+			"tags": ["pendulum", "coupled", "oscillation", "energy_transfer", "beats", "resonance", "physics"]
+		},
+		"wave_interference_tank": {
+			"name": "Wave Interference Tank",
+			"lookup_name": "wave_interference_tank",
+			"description": "Two-source wave interference demonstration. Real-time surface simulation with adjustable frequency, source separation, and phase difference. Shows constructive/destructive interference patterns.",
+			"scene": "res://commons/artifacts/wave_interference_tank/wave_interference_tank.tscn",
+			"category": "oscillation",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "wavefunctions",
+			"qfep_connection": "Superposition — waves don't fight, they add. Patterns emerge from phase relationships. Information through interference.",
+			"tags": ["waves", "interference", "superposition", "ripple", "phase", "constructive", "destructive"]
+		},
+		"force_field_visualizer": {
+			"name": "Force Field Visualizer",
+			"lookup_name": "force_field_visualizer",
+			"description": "Vector field visualization for forces. Shows gravity, point charge, dipole, or vortex fields as arrow grids. Color indicates direction (outward=red, inward=blue). Adjustable strength.",
+			"scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
+			"category": "forces",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "forces",
+			"qfep_connection": "Fields as invisible structure — order you can't see until you probe it. The hidden F that shapes everything.",
+			"tags": ["field", "vector_field", "gravity", "electric", "dipole", "vortex", "visualization"]
+		},
+		"orbital_mechanics_demo": {
+			"name": "Orbital Mechanics Demo",
+			"lookup_name": "orbital_mechanics_demo",
+			"description": "Planet + satellite orbital mechanics. Shows Kepler's laws, gravitational orbits with trail. Presets: circular, elliptical, escape, decay. Displays orbital energy and angular momentum.",
+			"scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
+			"category": "forces",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "forces",
+			"qfep_connection": "Orbit as dynamic equilibrium — perpetual falling, never landing. Balance between kinetic and potential. Stability from motion.",
+			"tags": ["orbit", "kepler", "gravity", "satellite", "planet", "celestial_mechanics", "physics"]
 		}
 	}
 }

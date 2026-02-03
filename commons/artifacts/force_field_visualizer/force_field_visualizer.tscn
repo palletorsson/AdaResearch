@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btpmn4rxk7e8c"]
+
+[ext_resource type="Script" path="res://commons/artifacts/force_field_visualizer/force_field_visualizer.gd" id="1_main"]
+
+[node name="ForceFieldVisualizer" type="Node3D"]
+script = ExtResource("1_main")

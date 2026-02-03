@@ -48,11 +48,11 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `coupled_pendulums` | 🔨 Build | HIGH | Energy transfer visualization |
-| `wave_interference_tank` | 🔨 Build | HIGH | Two sources, interference pattern |
+| `coupled_pendulums` | ✅ Done | HIGH | **2026-02-03** — Spring-coupled, energy bars, beats |
+| `wave_interference_tank` | ✅ Done | HIGH | **2026-02-03** — 64x64 surface, phase control |
 | `resonance_bridge` | 🔨 Build | MED | Tacoma Narrows reference |
-| `force_field_visualizer` | 🔨 Build | MED | Arrow field for gravity/charge |
-| `orbital_mechanics_demo` | 🔨 Build | LOW | Planet + satellite |
+| `force_field_visualizer` | ✅ Done | MED | **2026-02-03** — Gravity/charge/dipole/vortex |
+| `orbital_mechanics_demo` | ✅ Done | LOW | **2026-02-03** — Kepler orbits, energy display |
 
 **Existing (complete):**
 - `oscilloscope` ✅
