@@ -51,6 +51,18 @@
 			"qfep_connection": "Rule 110 is Turing complete — proof that simple local rules can produce universal computation. Edge of chaos territory.",
 			"tags": ["cellular_automata", "wolfram", "rule_110", "emergence", "computation", "interactive", "1d_ca"]
 		},
+		"mandelbrot_dive": {
+			"name": "Mandelbrot Dive",
+			"lookup_name": "mandelbrot_dive",
+			"description": "GPU-accelerated Mandelbrot set on a 1×1m table. Infinite zoom into self-similar fractal structure. 5 color schemes, auto-dive mode to famous coordinates. The boundary between order and chaos, infinitely complex.",
+			"scene": "res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn",
+			"category": "fractals",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "fractals",
+			"qfep_connection": "The Mandelbrot boundary is exactly λ_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
+			"tags": ["mandelbrot", "fractal", "self_similarity", "infinite_detail", "shader", "interactive", "zoom"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
