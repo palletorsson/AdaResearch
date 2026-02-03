@@ -16,7 +16,7 @@ func _ready():
 	var force_start = force_vector.get_node_or_null("lineContainer/GrabSphere")
 	if force_start:
 		_disable_grab_sphere(force_start)
-	info_label = create_info_panel("Torque", Vector3(-3.0, 2.2, 0.0))
+	info_label = create_info_panel("Torque", Vector3(3.0, 2.2, 0.0))
 
 func _process(_delta):
 	var r = get_vector(radius_vector)

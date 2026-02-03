@@ -33,7 +33,7 @@ func _ready():
 	_cache_vector_nodes(projection_vector, _cached_proj_nodes)
 	_cache_vector_nodes(rejection_vector, _cached_rej_nodes)
 
-	info_label = create_info_panel("Dot Product", Vector3(-0.34, 0.28, 0.0))
+	info_label = create_info_panel("Dot Product", Vector3(0.5, 0.5, 0.0))
 	angle_label = create_info_panel("theta", Vector3(0.0, 0.22, 0.0))
 
 func _process(delta):

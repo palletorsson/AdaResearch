@@ -26,7 +26,7 @@ func _ready():
 	difference_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 1.0, 1.0, 1.0), "a - b", false)
 	negative_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.6), "-b", false)
 	tip_tail_neg_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.4), "-b@a", false)
-	info_label = create_info_panel("Vector Subtraction", Vector3(-2.5, 2.2, 0.0))
+	info_label = create_info_panel("Vector Subtraction", Vector3(2.5, 2.2, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)

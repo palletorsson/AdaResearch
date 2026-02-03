@@ -25,7 +25,7 @@ func _ready():
 	thrust_vector = spawn_vector(Vector3.ZERO, Vector3(2.5, 0.0, 0.0), Color(1.0, 0.6, 0.4, 1.0), "Thrust")
 	drag_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 0.7, 1.0, 0.7), "Drag", false)
 	
-	info_label = create_info_panel("Forces", Vector3(-3.0, 2.4, 0.0))
+	info_label = create_info_panel("Forces", Vector3(3.0, 2.4, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(gravity_vector, _cached_gravity_nodes)

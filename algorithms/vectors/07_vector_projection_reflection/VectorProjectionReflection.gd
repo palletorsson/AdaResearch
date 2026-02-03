@@ -27,7 +27,7 @@ func _ready():
 	
 	plane_mesh = _create_plane_mesh()
 	environment_root.add_child(plane_mesh)
-	info_label = create_info_panel("Projection & Reflection", Vector3(-3.0, 2.3, 0.0))
+	info_label = create_info_panel("Projection & Reflection", Vector3(3.0, 2.3, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(incident_vector, _cached_incident_nodes)

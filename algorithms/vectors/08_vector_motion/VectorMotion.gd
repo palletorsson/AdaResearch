@@ -37,7 +37,7 @@ func _ready():
 	velocity_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.3, 0.9, 1.0, 1.0), "Velocity", false)
 	position_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 1.0, 0.6, 1.0), "Position", false)
 	
-	info_label = create_info_panel("Motion Vectors", Vector3(-3.2, 2.4, 0.0))
+	info_label = create_info_panel("Motion Vectors", Vector3(3.2, 2.4, 0.0))
 	
 	# Trail Setup
 	_create_trail_system()

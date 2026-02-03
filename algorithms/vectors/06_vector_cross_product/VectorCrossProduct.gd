@@ -24,7 +24,7 @@ func _ready():
 	
 	parallelogram = _create_parallelogram_mesh_instance()
 	environment_root.add_child(parallelogram)
-	info_label = create_info_panel("Cross Product", Vector3(-3.0, 2.3, 0.0))
+	info_label = create_info_panel("Cross Product", Vector3(3.0, 2.3, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
