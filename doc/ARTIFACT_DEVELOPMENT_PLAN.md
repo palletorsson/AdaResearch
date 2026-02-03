@@ -170,7 +170,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `boids_aquarium` | 🔨 Build | HIGH | Classic Reynolds flocking |
+| `boids_aquarium` | ✅ Done | HIGH | **2026-02-03** — 1m glass cube, 30 boids |
 | `ant_colony_farm` | 🔨 Build | HIGH | Pheromone trails visible |
 | `swarm_conductor` | 🔨 Build | HIGH | Player influences swarm |
 | `particle_swarm_optimizer` | 🔨 Build | MED | PSO finding minima |
@@ -302,7 +302,7 @@ Building order optimized for grant alignment + QFEP coverage:
 | # | Artifact | Sequence | Why |
 |---|----------|----------|-----|
 | 1 | `bias_visualizer` | criticalalgorithms | **Grant thesis** - coded gaze |
-| 2 | `boids_aquarium` | swarmintelligence | WP3 emergence showcase |
+| 2 | ✅ `boids_aquarium` | swarmintelligence | WP3 emergence showcase — **DONE 2026-02-03** |
 | 3 | `turing_pattern_generator` | morphogenesis | Turing's leopard spots |
 | 4 | `ca_rule_explorer` | cellularautomata | Wolfram rules interactive |
 | 5 | `lsystem_editor` | lsystems | Grammar as generative tool |
@@ -332,7 +332,7 @@ Update this file as artifacts are completed:
 - Add completion date
 - Note any scope changes
 
-**Last updated:** 2026-02-03
+**Last updated:** 2026-02-03 (boids_aquarium ✅)
 
 ---
 
