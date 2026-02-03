@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8kdp5m7vxr2n"]
+
+[ext_resource type="Script" path="res://commons/artifacts/dot_product_projector/dot_product_projector.gd" id="1_main"]
+
+[node name="DotProductProjector" type="Node3D"]
+script = ExtResource("1_main")

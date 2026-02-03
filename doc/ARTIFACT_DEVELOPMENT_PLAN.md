@@ -25,11 +25,11 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `vector_addition_demo` | 🔨 Build | HIGH | Two arrows → resultant, grabbable |
-| `dot_product_projector` | 🔨 Build | HIGH | Show projection visually |
-| `cross_product_demo` | 🔨 Build | HIGH | Normal vector from two inputs |
-| `transform_matrix_cube` | 🔨 Build | MED | 3x3 matrix → cube deformation |
-| `basis_vectors_rig` | 🔨 Build | MED | i,j,k as grabbable axes |
+| `vector_addition_demo` | ✅ Done | HIGH | **2026-02-03** — Parallelogram law, VR controls |
+| `dot_product_projector` | ✅ Done | HIGH | **2026-02-03** — Projection, angle arc, alignment viz |
+| `cross_product_demo` | ✅ Done | HIGH | **2026-02-03** — Normal, parallelogram area, right-hand rule |
+| `transform_matrix_cube` | ✅ Done | MED | **2026-02-03** — Cube deformation, determinant display |
+| `basis_vectors_rig` | ✅ Done | MED | **2026-02-03** — i,j,k decomposition, rotatable basis |
 
 **Existing to integrate:**
 - `vector_translation_demo` ✅

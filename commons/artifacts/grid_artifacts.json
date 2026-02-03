@@ -4577,6 +4577,54 @@
 			"lookup_name": "entropy_meter",
 			"description": "Visual meter showing current system entropy E(S). Bar fills from order (blue) to chaos (red).",
 			"scene": "res://commons/interfaces/qfep/entropy_meter.tscn"
+		},
+		"dot_product_projector": {
+			"name": "Dot Product Projector",
+			"lookup_name": "dot_product_projector",
+			"description": "Interactive dot product visualizer. Shows A · B = |A||B|cos(θ) geometrically as projection of A onto B. Grabbable vector endpoints with angle arc display. Dot product as 'alignment' — how much two directions agree.",
+			"scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+			"category": "vectors",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"sequence": "primitives",
+			"qfep_connection": "Alignment metric — positive (same direction) vs negative (opposed). Information about agreement/conflict.",
+			"tags": ["dot_product", "projection", "vectors", "geometry", "alignment", "angle", "interactive"]
+		},
+		"cross_product_demo": {
+			"name": "Cross Product Demo",
+			"lookup_name": "cross_product_demo",
+			"description": "Interactive cross product visualizer. Shows A × B = normal perpendicular to both, with magnitude = parallelogram area. Right-hand rule indicator. Cross product as 'emergence' — a third direction from two.",
+			"scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
+			"category": "vectors",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"sequence": "primitives",
+			"qfep_connection": "Emergence — two vectors create a third orthogonal direction. Order from constraints.",
+			"tags": ["cross_product", "normal", "vectors", "area", "parallelogram", "right_hand_rule", "interactive"]
+		},
+		"basis_vectors_rig": {
+			"name": "Basis Vectors Rig",
+			"lookup_name": "basis_vectors_rig",
+			"description": "Interactive î, ĵ, k̂ coordinate system. Shows how any point P = xi + yj + zk. Grabbable target point with component decomposition. Rotatable basis to show coordinate dependence.",
+			"scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+			"category": "vectors",
+			"interaction": "grab",
+			"complexity": "intermediate",
+			"sequence": "primitives",
+			"qfep_connection": "Frame of reference as imposed order. Same point, different coordinates. Observer-dependence.",
+			"tags": ["basis", "coordinates", "vectors", "decomposition", "frame_of_reference", "interactive"]
+		},
+		"transform_matrix_cube": {
+			"name": "Transform Matrix Cube",
+			"lookup_name": "transform_matrix_cube",
+			"description": "3×3 matrix transformation visualizer. Shows how matrices deform a unit cube. Presets: identity, scale, shear, rotation, reflection. Determinant display shows volume change and orientation flip.",
+			"scene": "res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.tscn",
+			"category": "vectors",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "transformations",
+			"qfep_connection": "Matrix as transformation rule — how one space maps to another. det(M) shows information preservation/loss.",
+			"tags": ["matrix", "transformation", "linear_algebra", "determinant", "shear", "rotation", "scale"]
 		}
 	}
 }
