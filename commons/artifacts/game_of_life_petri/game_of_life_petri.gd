@@ -175,7 +175,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, dish_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -192,7 +192,7 @@ func _create_vr_controls():
 	# Speed slider
 	_speed_slider = SLIDER_HORIZONTAL.instantiate()
 	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0, 0.045, 0.015)
+	_speed_slider.position = Vector3(0, 0.045, -0.005)
 	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
 		speed_label.text = "SPEED"
@@ -204,7 +204,7 @@ func _create_vr_controls():
 	for i in range(patterns.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Pattern%d" % i
-		btn.position = Vector3(-0.18 + i * 0.09, -0.035, 0.015)
+		btn.position = Vector3(-0.18 + i * 0.09, -0.035, -0.005)
 		btn.scale = Vector3(0.8, 0.8, 0.8)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, patterns[i])

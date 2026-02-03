@@ -140,7 +140,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, total_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -157,7 +157,7 @@ func _create_vr_controls():
 	# Threshold slider (-1 to 1)
 	_threshold_slider = SLIDER_HORIZONTAL.instantiate()
 	_threshold_slider.name = "ThresholdSlider"
-	_threshold_slider.position = Vector3(-0.12, 0.04, 0.015)
+	_threshold_slider.position = Vector3(-0.12, 0.04, -0.005)
 	var thresh_label = _threshold_slider.get_node_or_null("Frame/LabelName")
 	if thresh_label:
 		thresh_label.text = "THRESH"
@@ -167,7 +167,7 @@ func _create_vr_controls():
 	# Scale slider (0.5 to 20)
 	_scale_slider = SLIDER_HORIZONTAL.instantiate()
 	_scale_slider.name = "ScaleSlider"
-	_scale_slider.position = Vector3(0.12, 0.04, 0.015)
+	_scale_slider.position = Vector3(0.12, 0.04, -0.005)
 	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
 	if scale_label:
 		scale_label.text = "SCALE"
@@ -177,7 +177,7 @@ func _create_vr_controls():
 	# New Seed button
 	var seed_btn = PUSH_BUTTON.instantiate()
 	seed_btn.name = "SeedButton"
-	seed_btn.position = Vector3(-0.08, -0.04, 0.015)
+	seed_btn.position = Vector3(-0.08, -0.04, -0.005)
 	_control_panel.add_child(seed_btn)
 	_add_button_label(seed_btn, "SEED")
 	var seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
@@ -187,7 +187,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.08, -0.04, 0.015)
+	reset_btn.position = Vector3(0.08, -0.04, -0.005)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")

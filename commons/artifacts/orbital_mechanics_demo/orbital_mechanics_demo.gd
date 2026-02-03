@@ -156,7 +156,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.1, 0.35)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
 	add_child(_control_panel)
 	
 	# Panel
@@ -181,7 +181,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, 0.03, 0.015)
+		btn.position = Vector3(-0.12 + i * 0.08, 0.03, -0.005)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
@@ -195,7 +195,7 @@ func _create_vr_controls():
 	# Time scale slider
 	var time_slider = SLIDER_HORIZONTAL.instantiate()
 	time_slider.name = "TimeSlider"
-	time_slider.position = Vector3(0, -0.03, 0.015)
+	time_slider.position = Vector3(0, -0.03, -0.005)
 	time_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var time_label = time_slider.get_node_or_null("Frame/LabelName")
 	if time_label:

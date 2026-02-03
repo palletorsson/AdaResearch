@@ -204,7 +204,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, display_size * 0.6 + 0.12)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -223,7 +223,7 @@ func _create_vr_controls():
 	for i in range(3):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "AnalogyButton%d" % i
-		btn.position = Vector3(-0.12 + i * 0.12, 0, 0.015)
+		btn.position = Vector3(-0.12 + i * 0.12, 0, -0.005)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, labels[i])
 		
@@ -235,7 +235,7 @@ func _create_vr_controls():
 	# Rotate toggle button
 	var rotate_btn = PUSH_BUTTON.instantiate()
 	rotate_btn.name = "RotateButton"
-	rotate_btn.position = Vector3(0.16, 0, 0.015)
+	rotate_btn.position = Vector3(0.16, 0, -0.005)
 	_control_panel.add_child(rotate_btn)
 	_add_button_label(rotate_btn, "ROT")
 	var rotate_area = rotate_btn.get_node_or_null("InteractableAreaButton")
