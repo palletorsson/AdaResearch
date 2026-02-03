@@ -20,13 +20,13 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
-	create_axes(3.5)
+	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.7, -0.4), Color(0.9, 0.5, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.3, 1.1, 0.8), Color(0.2, 0.6, 1.0, 1.0), "Vector b")
 	difference_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 1.0, 1.0, 1.0), "a - b", false)
 	negative_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.6), "-b", false)
 	tip_tail_neg_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.4), "-b@a", false)
-	info_label = create_info_panel("Vector Subtraction", Vector3(2.5, 2.2, 0.0))
+	info_label = create_info_panel("Vector Subtraction", Vector3(0.5, 1.2, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)

@@ -17,14 +17,14 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
-	create_axes(3.5)
+	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.2, 1.0), Color(1.0, 0.55, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.4, 1.5, 0.6), Color(0.2, 0.7, 1.0, 1.0), "Vector b")
 	cross_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.8, 0.6, 1.0, 1.0), "a_cross_b", false)
 	
 	parallelogram = _create_parallelogram_mesh_instance()
 	environment_root.add_child(parallelogram)
-	info_label = create_info_panel("Cross Product", Vector3(3.0, 2.3, 0.0))
+	info_label = create_info_panel("Cross Product", Vector3(0.5, 1.2, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)

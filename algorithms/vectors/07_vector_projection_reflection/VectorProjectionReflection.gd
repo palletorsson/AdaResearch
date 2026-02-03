@@ -19,7 +19,7 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
-	create_axes(3.5)
+	create_axes(1.5)
 	incident_vector = spawn_vector(Vector3.ZERO, Vector3(1.2, 1.3, 0.5), Color(1.0, 0.5, 0.3, 1.0), "Incident")
 	normal_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.6, 0.6), Color(0.3, 0.8, 1.0, 1.0), "Normal")
 	plane_projection = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.7, 1.0, 0.5, 1.0), "Plane Projection", false)
@@ -27,7 +27,7 @@ func _ready():
 	
 	plane_mesh = _create_plane_mesh()
 	environment_root.add_child(plane_mesh)
-	info_label = create_info_panel("Projection & Reflection", Vector3(3.0, 2.3, 0.0))
+	info_label = create_info_panel("Projection & Reflection", Vector3(0.5, 1.2, 0.0))
 
 	# Cache nodes
 	_cache_vector_nodes(incident_vector, _cached_incident_nodes)

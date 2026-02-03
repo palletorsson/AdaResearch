@@ -25,7 +25,7 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
-	create_axes(4.0)
+	create_axes(1.5)
 	
 	# Ball at (0, 1, 0) scaled
 	ball = create_ball(Vector3(0.0, 1.0, 0.0), 0.2, 1.0, Color(0.9, 0.4, 0.7, 1.0))
@@ -37,7 +37,7 @@ func _ready():
 	velocity_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.3, 0.9, 1.0, 1.0), "Velocity", false)
 	position_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 1.0, 0.6, 1.0), "Position", false)
 	
-	info_label = create_info_panel("Motion Vectors", Vector3(3.2, 2.4, 0.0))
+	info_label = create_info_panel("Motion Vectors", Vector3(0.5, 1.2, 0.0))
 	
 	# Trail Setup
 	_create_trail_system()

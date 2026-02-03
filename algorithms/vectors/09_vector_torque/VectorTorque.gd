@@ -8,7 +8,7 @@ var info_label: Label3D
 
 func _ready():
 	super._ready()
-	create_axes(3.5)
+	create_axes(1.5)
 	radius_vector = spawn_vector(Vector3.ZERO, Vector3(1.4, 0.8, 0.0), Color(1.0, 0.6, 0.2, 1.0), "r")
 	force_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, 1.4, 1.0), Color(0.2, 0.8, 1.0, 1.0), "F")
 	torque_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.9, 0.6, 1.0, 1.0), "tau", false)
@@ -16,7 +16,7 @@ func _ready():
 	var force_start = force_vector.get_node_or_null("lineContainer/GrabSphere")
 	if force_start:
 		_disable_grab_sphere(force_start)
-	info_label = create_info_panel("Torque", Vector3(3.0, 2.2, 0.0))
+	info_label = create_info_panel("Torque", Vector3(0.5, 1.2, 0.0))
 
 func _process(_delta):
 	var r = get_vector(radius_vector)

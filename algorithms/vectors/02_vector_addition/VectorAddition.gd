@@ -25,7 +25,7 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
-	create_axes(3.5)
+	create_axes(1.5)
 
 	# Vectors from origin
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.8, 0.6, -0.2), Color(0.9, 0.4, 0.3, 1.0), "Vector a")
@@ -56,7 +56,7 @@ func _ready():
 	label_a_copy = _create_floating_label("a (copy)", Color(0.9, 0.4, 0.3, 0.7))
 	label_b_copy = _create_floating_label("b (copy)", Color(0.3, 0.8, 0.9, 0.7))
 
-	info_label = create_info_panel("Vector Addition", Vector3(2.5, 2.2, 0.0))
+	info_label = create_info_panel("Vector Addition", Vector3(0.5, 1.2, 0.0))
 
 func _process(delta):
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)

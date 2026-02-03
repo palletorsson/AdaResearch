@@ -20,13 +20,13 @@ var _cached_component_nodes: Dictionary = {
 
 func _ready():
 	super._ready()
-	create_axes(3.0)
+	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.5, 1.0, 0.5), Color(0.95, 0.85, 0.2, 1.0), "Vector a")
 	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(1.0, 0.4, 0.9, 1.0), "Unit a", false)
 	component_vectors["x"] = spawn_vector(Vector3.ZERO, Vector3(1.5, 0, 0), Color(1.0, 0.3, 0.3, 1.0), "a_x", false)
 	component_vectors["y"] = spawn_vector(Vector3.ZERO, Vector3(0, 1.0, 0), Color(0.3, 1.0, 0.3, 1.0), "a_y", false)
 	component_vectors["z"] = spawn_vector(Vector3.ZERO, Vector3(0, 0, 0.5), Color(0.3, 0.5, 1.0, 1.0), "a_z", false)
-	info_label = create_info_panel("Vector a", Vector3(2.2, 2.0, 0.0))
+	info_label = create_info_panel("Vector a", Vector3(0.5, 1.2, 0.0))
 	
 	# Cache nodes for performance
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
