@@ -25,6 +25,7 @@ class_name BasisVectorsRig
 @export var color_k: Color = Color(0.2, 0.4, 1.0)  # Blue = Z
 @export var color_point: Color = Color(1.0, 0.8, 0.3)  # Yellow = target
 @export var color_component: Color = Color(0.5, 0.5, 0.5, 0.5)  # Gray = decomposition
+@export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
 
 var _arrow_i: Node3D
 var _arrow_j: Node3D
@@ -32,14 +33,87 @@ var _arrow_k: Node3D
 var _component_lines: Array[MeshInstance3D] = []
 var _point_marker: MeshInstance3D
 var _handle_point: Node3D
-var _info_label: Label3D
-var _coords_label: Label3D
+var _title_panel: Node3D
+var _coords_panel: Node3D
 var _control_panel: Node3D
 
 # Standard basis (can be transformed)
 var _basis: Basis = Basis.IDENTITY
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
+## Creates a text label with a backing panel frame
+func _create_text_panel(panel_name: String, text: String, position: Vector3, 
+		size: Vector2 = Vector2(0.3, 0.08), font_size: int = 16, 
+		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Node3D:
+	var panel = Node3D.new()
+	panel.name = panel_name
+	panel.position = position
+	
+	# Backing panel
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(size.x, size.y, 0.008)
+	backing.mesh = box
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = panel_color
+	mat.metallic = 0.2
+	mat.roughness = 0.8
+	backing.material_override = mat
+	backing.position.z = -0.005
+	panel.add_child(backing)
+	
+	# Frame edges
+	_add_panel_frame(panel, size)
+	
+	# Label
+	var label = Label3D.new()
+	label.name = "Label"
+	label.text = text
+	label.pixel_size = 0.001
+	label.font_size = font_size
+	label.horizontal_alignment = alignment
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position.z = 0.002
+	panel.add_child(label)
+	
+	return panel
+
+func _add_panel_frame(panel: Node3D, size: Vector2):
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.3, 0.32, 0.35)
+	frame_mat.metallic = 0.5
+	frame_mat.roughness = 0.4
+	
+	var thickness = 0.004
+	var depth = 0.01
+	var half_w = size.x / 2.0
+	var half_h = size.y / 2.0
+	
+	# Top and bottom edges
+	for y_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(size.x + thickness * 2, thickness, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(0, half_h * y_mult, -depth/2 + 0.002)
+		panel.add_child(edge)
+	
+	# Left and right edges
+	for x_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(thickness, size.y, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(half_w * x_mult, 0, -depth/2 + 0.002)
+		panel.add_child(edge)
+
+func _get_panel_label(panel: Node3D) -> Label3D:
+	return panel.get_node_or_null("Label") as Label3D
 
 func _ready():
 	_create_base()
@@ -82,15 +156,15 @@ func _create_base():
 	add_child(origin)
 
 func _create_basis_arrows():
-	_arrow_i = _create_axis_arrow("ArrowI", color_i, "î")
-	_arrow_j = _create_axis_arrow("ArrowJ", color_j, "ĵ")
-	_arrow_k = _create_axis_arrow("ArrowK", color_k, "k̂")
+	_arrow_i = _create_axis_arrow("ArrowI", color_i, "î", "X")
+	_arrow_j = _create_axis_arrow("ArrowJ", color_j, "ĵ", "Y")
+	_arrow_k = _create_axis_arrow("ArrowK", color_k, "k̂", "Z")
 	
 	add_child(_arrow_i)
 	add_child(_arrow_j)
 	add_child(_arrow_k)
 
-func _create_axis_arrow(arrow_name: String, color: Color, label_text: String) -> Node3D:
+func _create_axis_arrow(arrow_name: String, color: Color, unit_label: String, axis_label: String) -> Node3D:
 	var arrow = Node3D.new()
 	arrow.name = arrow_name
 	
@@ -124,16 +198,29 @@ func _create_axis_arrow(arrow_name: String, color: Color, label_text: String) ->
 	head.position = Vector3(0, axis_length, 0)
 	arrow.add_child(head)
 	
-	# Label at tip
-	var lbl = Label3D.new()
-	lbl.name = "Label"
-	lbl.text = label_text
-	lbl.pixel_size = 0.002
-	lbl.font_size = 20
-	lbl.modulate = color
-	lbl.position = Vector3(0.04, axis_length + 0.03, 0)
-	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	arrow.add_child(lbl)
+	# Axis label (X, Y, Z) - larger, prominent
+	var axis_lbl = Label3D.new()
+	axis_lbl.name = "AxisLabel"
+	axis_lbl.text = axis_label
+	axis_lbl.pixel_size = 0.0025
+	axis_lbl.font_size = 24
+	axis_lbl.modulate = color
+	axis_lbl.outline_size = 8
+	axis_lbl.outline_modulate = Color(0, 0, 0, 0.8)
+	axis_lbl.position = Vector3(0.05, axis_length + 0.02, 0)
+	axis_lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	arrow.add_child(axis_lbl)
+	
+	# Unit vector label (î, ĵ, k̂) - smaller, below
+	var unit_lbl = Label3D.new()
+	unit_lbl.name = "UnitLabel"
+	unit_lbl.text = unit_label
+	unit_lbl.pixel_size = 0.0015
+	unit_lbl.font_size = 14
+	unit_lbl.modulate = color * 0.8
+	unit_lbl.position = Vector3(0.05, axis_length - 0.02, 0)
+	unit_lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	arrow.add_child(unit_lbl)
 	
 	return arrow
 
@@ -175,21 +262,26 @@ func _create_point_marker():
 	add_child(_handle_point)
 
 func _create_labels():
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.002
-	_info_label.font_size = 18
-	_info_label.position = Vector3(0, axis_length + 0.25, 0)
-	_info_label.text = "BASIS VECTORS"
-	add_child(_info_label)
+	# Title panel - top
+	_title_panel = _create_text_panel(
+		"TitlePanel",
+		"BASIS VECTORS",
+		Vector3(0, axis_length + 0.22, 0),
+		Vector2(0.28, 0.06),
+		20
+	)
+	add_child(_title_panel)
 	
-	_coords_label = Label3D.new()
-	_coords_label.name = "CoordsLabel"
-	_coords_label.pixel_size = 0.0015
-	_coords_label.font_size = 16
-	_coords_label.position = Vector3(0, -0.1, axis_length + 0.15)
-	_coords_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_coords_label)
+	# Coordinates panel - front, showing decomposition
+	_coords_panel = _create_text_panel(
+		"CoordsPanel", 
+		"",
+		Vector3(0, 0.02, axis_length + 0.18),
+		Vector2(0.38, 0.12),
+		14
+	)
+	_coords_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_coords_panel)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -343,9 +435,11 @@ func _draw_dashed_line(line: MeshInstance3D, start: Vector3, end: Vector3, color
 	line.rotate_object_local(Vector3.RIGHT, PI/2)
 
 func _update_labels(coords: Vector3):
-	_coords_label.text = "P = %.2f·î + %.2f·ĵ + %.2f·k̂\n" % [coords.x, coords.y, coords.z]
-	_coords_label.text += "P = (%.2f, %.2f, %.2f)\n" % [target_point.x, target_point.y, target_point.z]
-	_coords_label.text += "|P| = %.3f" % target_point.length()
+	var label = _get_panel_label(_coords_panel)
+	if label:
+		label.text = "P = %.2f·î + %.2f·ĵ + %.2f·k̂\n" % [coords.x, coords.y, coords.z]
+		label.text += "P = (%.2f, %.2f, %.2f)\n" % [target_point.x, target_point.y, target_point.z]
+		label.text += "|P| = %.3f" % target_point.length()
 
 func _process(_delta):
 	if _handle_point and _handle_point.position != target_point:

@@ -248,7 +248,7 @@ func _create_vr_controls():
 	
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
 	if reset_area:
-		reset_area.button_pressed.connect(_on_reset_pressed)
+		reset_area.button_pressed.connect(func(_b): _on_reset_pressed())
 	
 	# Sync initial values
 	call_deferred("_sync_sliders_deferred")
@@ -280,7 +280,7 @@ func _on_speed_slider_moved(_position):
 func _on_preset_pressed(preset_rule: int):
 	rule = preset_rule
 
-func _on_reset_pressed(_button = null):  # Accept optional button arg
+func _on_reset_pressed():
 	_reset()
 
 func _update_rule_display():

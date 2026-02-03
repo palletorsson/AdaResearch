@@ -33,6 +33,7 @@ class_name DotProductProjector
 @export var color_projection: Color = Color(0.3, 1.0, 0.4)  # Green - projection
 @export var color_perpendicular: Color = Color(1.0, 0.8, 0.3, 0.5)  # Yellow - perp component
 @export var color_angle: Color = Color(0.8, 0.5, 1.0, 0.4)  # Purple - angle arc
+@export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
 
 var _arrow_a: Node3D
 var _arrow_b: Node3D
@@ -42,12 +43,85 @@ var _drop_line: MeshInstance3D
 var _angle_arc: MeshInstance3D
 var _handle_a: Node3D
 var _handle_b: Node3D
-var _info_label: Label3D
-var _formula_label: Label3D
-var _result_label: Label3D
+var _title_panel: Node3D
+var _result_panel: Node3D
+var _formula_panel: Node3D
 var _control_panel: Node3D
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
+## Creates a text label with a backing panel frame
+func _create_text_panel(panel_name: String, text: String, pos: Vector3, 
+		size: Vector2 = Vector2(0.3, 0.08), font_size: int = 16, 
+		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Node3D:
+	var panel = Node3D.new()
+	panel.name = panel_name
+	panel.position = pos
+	
+	# Backing panel
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(size.x, size.y, 0.008)
+	backing.mesh = box
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = panel_color
+	mat.metallic = 0.2
+	mat.roughness = 0.8
+	backing.material_override = mat
+	backing.position.z = -0.005
+	panel.add_child(backing)
+	
+	# Frame edges
+	_add_panel_frame(panel, size)
+	
+	# Label
+	var label = Label3D.new()
+	label.name = "Label"
+	label.text = text
+	label.pixel_size = 0.001
+	label.font_size = font_size
+	label.horizontal_alignment = alignment
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position.z = 0.002
+	panel.add_child(label)
+	
+	return panel
+
+func _add_panel_frame(panel: Node3D, size: Vector2):
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.3, 0.32, 0.35)
+	frame_mat.metallic = 0.5
+	frame_mat.roughness = 0.4
+	
+	var thickness = 0.004
+	var depth = 0.01
+	var half_w = size.x / 2.0
+	var half_h = size.y / 2.0
+	
+	# Top and bottom edges
+	for y_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(size.x + thickness * 2, thickness, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(0, half_h * y_mult, -depth/2 + 0.002)
+		panel.add_child(edge)
+	
+	# Left and right edges
+	for x_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(thickness, size.y, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(half_w * x_mult, 0, -depth/2 + 0.002)
+		panel.add_child(edge)
+
+func _get_panel_label(panel: Node3D) -> Label3D:
+	return panel.get_node_or_null("Label") as Label3D
 
 func _ready():
 	_create_base()
@@ -196,29 +270,36 @@ func _create_handle(handle_name: String, color: Color) -> Node3D:
 	return handle
 
 func _create_labels():
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.002
-	_info_label.font_size = 20
-	_info_label.position = Vector3(0, max_vector_length + 0.2, 0)
-	_info_label.text = "DOT PRODUCT"
-	add_child(_info_label)
+	# Title panel - top
+	_title_panel = _create_text_panel(
+		"TitlePanel",
+		"DOT PRODUCT",
+		Vector3(0, max_vector_length + 0.2, 0),
+		Vector2(0.26, 0.06),
+		20
+	)
+	add_child(_title_panel)
 	
-	_formula_label = Label3D.new()
-	_formula_label.name = "FormulaLabel"
-	_formula_label.pixel_size = 0.0015
-	_formula_label.font_size = 14
-	_formula_label.position = Vector3(0, -0.12, max_vector_length + 0.15)
-	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_formula_label)
+	# Result panel - below title
+	_result_panel = _create_text_panel(
+		"ResultPanel",
+		"",
+		Vector3(0, max_vector_length + 0.1, 0),
+		Vector2(0.4, 0.05),
+		16
+	)
+	add_child(_result_panel)
 	
-	_result_label = Label3D.new()
-	_result_label.name = "ResultLabel"
-	_result_label.pixel_size = 0.002
-	_result_label.font_size = 18
-	_result_label.position = Vector3(0, max_vector_length + 0.08, 0)
-	_result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_result_label)
+	# Formula panel - front
+	_formula_panel = _create_text_panel(
+		"FormulaPanel",
+		"",
+		Vector3(0, 0.02, max_vector_length + 0.18),
+		Vector2(0.42, 0.12),
+		12
+	)
+	_formula_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_formula_panel)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -380,15 +461,18 @@ func _update_angle_arc(angle_rad: float):
 
 func _update_labels(dot: float, proj_len: float, angle_deg: float):
 	# Sign indicator
-	var sign_word = "positive" if dot > 0.01 else ("negative" if dot < -0.01 else "zero")
 	var alignment = "aligned" if dot > 0.01 else ("opposed" if dot < -0.01 else "orthogonal")
 	
-	_result_label.text = "A · B = %.3f (%s)" % [dot, alignment]
-	_result_label.modulate = Color(0.3, 1.0, 0.4) if dot > 0 else (Color(1.0, 0.4, 0.3) if dot < 0 else Color(1.0, 1.0, 0.3))
+	var result_label = _get_panel_label(_result_panel)
+	if result_label:
+		result_label.text = "A · B = %.3f (%s)" % [dot, alignment]
+		result_label.modulate = Color(0.3, 1.0, 0.4) if dot > 0 else (Color(1.0, 0.4, 0.3) if dot < 0 else Color(1.0, 1.0, 0.3))
 	
-	_formula_label.text = "A = (%.2f, %.2f, %.2f)  |A| = %.2f\n" % [vector_a.x, vector_a.y, vector_a.z, vector_a.length()]
-	_formula_label.text += "B = (%.2f, %.2f, %.2f)  |B| = %.2f\n" % [vector_b.x, vector_b.y, vector_b.z, vector_b.length()]
-	_formula_label.text += "θ = %.1f°  proj = %.2f" % [angle_deg, proj_len]
+	var formula_label = _get_panel_label(_formula_panel)
+	if formula_label:
+		formula_label.text = "A = (%.2f, %.2f, %.2f)  |A| = %.2f\n" % [vector_a.x, vector_a.y, vector_a.z, vector_a.length()]
+		formula_label.text += "B = (%.2f, %.2f, %.2f)  |B| = %.2f\n" % [vector_b.x, vector_b.y, vector_b.z, vector_b.length()]
+		formula_label.text += "θ = %.1f°  proj = %.2f" % [angle_deg, proj_len]
 
 func _process(_delta):
 	if _handle_a and _handle_a.position != vector_a:

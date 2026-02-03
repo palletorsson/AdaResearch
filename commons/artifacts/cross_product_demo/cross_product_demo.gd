@@ -31,6 +31,7 @@ class_name CrossProductDemo
 @export var color_b: Color = Color(0.3, 0.5, 1.0)  # Blue  
 @export var color_result: Color = Color(0.3, 1.0, 0.4)  # Green - cross product
 @export var color_parallelogram: Color = Color(0.8, 0.6, 1.0, 0.3)  # Purple - area
+@export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
 
 var _arrow_a: Node3D
 var _arrow_b: Node3D
@@ -38,13 +39,86 @@ var _arrow_result: Node3D
 var _parallelogram: MeshInstance3D
 var _handle_a: Node3D
 var _handle_b: Node3D
-var _info_label: Label3D
-var _formula_label: Label3D
-var _result_label: Label3D
+var _title_panel: Node3D
+var _result_panel: Node3D
+var _formula_panel: Node3D
 var _right_hand_indicator: Node3D
 var _control_panel: Node3D
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
+## Creates a text label with a backing panel frame
+func _create_text_panel(panel_name: String, text: String, pos: Vector3, 
+		size: Vector2 = Vector2(0.3, 0.08), font_size: int = 16, 
+		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Node3D:
+	var panel = Node3D.new()
+	panel.name = panel_name
+	panel.position = pos
+	
+	# Backing panel
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(size.x, size.y, 0.008)
+	backing.mesh = box
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = panel_color
+	mat.metallic = 0.2
+	mat.roughness = 0.8
+	backing.material_override = mat
+	backing.position.z = -0.005
+	panel.add_child(backing)
+	
+	# Frame edges
+	_add_panel_frame(panel, size)
+	
+	# Label
+	var label = Label3D.new()
+	label.name = "Label"
+	label.text = text
+	label.pixel_size = 0.001
+	label.font_size = font_size
+	label.horizontal_alignment = alignment
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position.z = 0.002
+	panel.add_child(label)
+	
+	return panel
+
+func _add_panel_frame(panel: Node3D, size: Vector2):
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.3, 0.32, 0.35)
+	frame_mat.metallic = 0.5
+	frame_mat.roughness = 0.4
+	
+	var thickness = 0.004
+	var depth = 0.01
+	var half_w = size.x / 2.0
+	var half_h = size.y / 2.0
+	
+	# Top and bottom edges
+	for y_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(size.x + thickness * 2, thickness, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(0, half_h * y_mult, -depth/2 + 0.002)
+		panel.add_child(edge)
+	
+	# Left and right edges
+	for x_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = Vector3(thickness, size.y, depth)
+		edge.mesh = box
+		edge.material_override = frame_mat
+		edge.position = Vector3(half_w * x_mult, 0, -depth/2 + 0.002)
+		panel.add_child(edge)
+
+func _get_panel_label(panel: Node3D) -> Label3D:
+	return panel.get_node_or_null("Label") as Label3D
 
 func _ready():
 	_create_base()
@@ -184,29 +258,36 @@ func _create_right_hand_indicator():
 	_right_hand_indicator.add_child(arc)
 
 func _create_labels():
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.002
-	_info_label.font_size = 20
-	_info_label.position = Vector3(0, max_vector_length * 1.5 + 0.1, 0)
-	_info_label.text = "CROSS PRODUCT"
-	add_child(_info_label)
+	# Title panel - top
+	_title_panel = _create_text_panel(
+		"TitlePanel",
+		"CROSS PRODUCT",
+		Vector3(0, max_vector_length * 1.5 + 0.12, 0),
+		Vector2(0.28, 0.06),
+		20
+	)
+	add_child(_title_panel)
 	
-	_result_label = Label3D.new()
-	_result_label.name = "ResultLabel"
-	_result_label.pixel_size = 0.002
-	_result_label.font_size = 18
-	_result_label.position = Vector3(0, max_vector_length * 1.5, 0)
-	_result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_result_label)
+	# Result panel - below title
+	_result_panel = _create_text_panel(
+		"ResultPanel",
+		"",
+		Vector3(0, max_vector_length * 1.5 + 0.02, 0),
+		Vector2(0.48, 0.07),
+		14
+	)
+	add_child(_result_panel)
 	
-	_formula_label = Label3D.new()
-	_formula_label.name = "FormulaLabel"
-	_formula_label.pixel_size = 0.0015
-	_formula_label.font_size = 14
-	_formula_label.position = Vector3(0, -0.12, max_vector_length + 0.2)
-	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_formula_label)
+	# Formula panel - front
+	_formula_panel = _create_text_panel(
+		"FormulaPanel",
+		"",
+		Vector3(0, 0.02, max_vector_length + 0.22),
+		Vector2(0.46, 0.12),
+		12
+	)
+	_formula_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_formula_panel)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -392,13 +473,17 @@ func _update_labels(cross: Vector3, magnitude: float):
 		else:
 			direction_word = "(+Z forward)" if cross.z > 0 else "(-Z back)"
 	
-	_result_label.text = "A × B = (%.2f, %.2f, %.2f) %s\n|A × B| = %.3f (area)" % [
-		cross.x, cross.y, cross.z, direction_word, magnitude
-	]
+	var result_label = _get_panel_label(_result_panel)
+	if result_label:
+		result_label.text = "A × B = (%.2f, %.2f, %.2f) %s\n|A × B| = %.3f (area)" % [
+			cross.x, cross.y, cross.z, direction_word, magnitude
+		]
 	
-	_formula_label.text = "A = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
-	_formula_label.text += "B = (%.2f, %.2f, %.2f)\n" % [vector_b.x, vector_b.y, vector_b.z]
-	_formula_label.text += "Right-hand rule: curl A→B, thumb = result"
+	var formula_label = _get_panel_label(_formula_panel)
+	if formula_label:
+		formula_label.text = "A = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
+		formula_label.text += "B = (%.2f, %.2f, %.2f)\n" % [vector_b.x, vector_b.y, vector_b.z]
+		formula_label.text += "Right-hand rule: curl A→B, thumb = result"
 
 func _process(_delta):
 	if _handle_a and _handle_a.position != vector_a:
