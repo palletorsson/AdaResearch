@@ -175,12 +175,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Stiffness slider (0-1)
 	_stiffness_slider = SLIDER_HORIZONTAL.instantiate()
 	_stiffness_slider.name = "StiffnessSlider"
-	_stiffness_slider.position = Vector3(-0.14, 0.04, 0.01)
+	_stiffness_slider.position = Vector3(-0.14, 0.04, 0)
 	var stiff_label = _stiffness_slider.get_node_or_null("Frame/LabelName")
 	if stiff_label:
 		stiff_label.text = "STIFF"
@@ -190,7 +191,7 @@ func _create_vr_controls():
 	# Damping slider (0-0.1)
 	_damping_slider = SLIDER_HORIZONTAL.instantiate()
 	_damping_slider.name = "DampingSlider"
-	_damping_slider.position = Vector3(0, 0.04, 0.01)
+	_damping_slider.position = Vector3(0, 0.04, 0)
 	var damp_label = _damping_slider.get_node_or_null("Frame/LabelName")
 	if damp_label:
 		damp_label.text = "DAMP"
@@ -200,7 +201,7 @@ func _create_vr_controls():
 	# Pressure slider (0-5)
 	_pressure_slider = SLIDER_HORIZONTAL.instantiate()
 	_pressure_slider.name = "PressureSlider"
-	_pressure_slider.position = Vector3(0.14, 0.04, 0.01)
+	_pressure_slider.position = Vector3(0.14, 0.04, 0)
 	var press_label = _pressure_slider.get_node_or_null("Frame/LabelName")
 	if press_label:
 		press_label.text = "PRESS"
@@ -210,7 +211,7 @@ func _create_vr_controls():
 	# Color cycle button
 	var color_btn = PUSH_BUTTON.instantiate()
 	color_btn.name = "ColorButton"
-	color_btn.position = Vector3(-0.08, -0.04, 0.01)
+	color_btn.position = Vector3(-0.08, -0.04, 0)
 	_control_panel.add_child(color_btn)
 	_add_button_label(color_btn, "COLOR")
 	var color_area = color_btn.get_node_or_null("InteractableAreaButton")
@@ -220,7 +221,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.08, -0.04, 0.01)
+	reset_btn.position = Vector3(0.08, -0.04, 0)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
@@ -234,7 +235,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

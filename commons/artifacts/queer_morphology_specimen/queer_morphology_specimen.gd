@@ -318,12 +318,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Lambda slider (edge of chaos: 0-1)
 	_lambda_slider = SLIDER_HORIZONTAL.instantiate()
 	_lambda_slider.name = "LambdaSlider"
-	_lambda_slider.position = Vector3(-0.08, 0.025, 0.01)
+	_lambda_slider.position = Vector3(-0.08, 0.025, 0)
 	var lambda_label = _lambda_slider.get_node_or_null("Frame/LabelName")
 	if lambda_label:
 		lambda_label.text = "λ EDGE"
@@ -333,7 +334,7 @@ func _create_vr_controls():
 	# Phi slider (becoming: -1 to 1)
 	_phi_slider = SLIDER_HORIZONTAL.instantiate()
 	_phi_slider.name = "PhiSlider"
-	_phi_slider.position = Vector3(0.08, 0.025, 0.01)
+	_phi_slider.position = Vector3(0.08, 0.025, 0)
 	var phi_label = _phi_slider.get_node_or_null("Frame/LabelName")
 	if phi_label:
 		phi_label.text = "φ BECOME"
@@ -350,7 +351,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, -0.04, 0.01)
+		btn.position = Vector3(-0.1 + i * 0.1, -0.04, 0)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
 		
@@ -367,7 +368,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 9
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

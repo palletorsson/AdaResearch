@@ -171,12 +171,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Separation slider (0-5)
 	_separation_slider = SLIDER_HORIZONTAL.instantiate()
 	_separation_slider.name = "SeparationSlider"
-	_separation_slider.position = Vector3(-0.14, 0.02, 0.01)
+	_separation_slider.position = Vector3(-0.14, 0.02, 0)
 	var sep_label = _separation_slider.get_node_or_null("Frame/LabelName")
 	if sep_label:
 		sep_label.text = "SEP"
@@ -186,7 +187,7 @@ func _create_vr_controls():
 	# Alignment slider (0-5)
 	_alignment_slider = SLIDER_HORIZONTAL.instantiate()
 	_alignment_slider.name = "AlignmentSlider"
-	_alignment_slider.position = Vector3(0, 0.02, 0.01)
+	_alignment_slider.position = Vector3(0, 0.02, 0)
 	var align_label = _alignment_slider.get_node_or_null("Frame/LabelName")
 	if align_label:
 		align_label.text = "ALIGN"
@@ -196,7 +197,7 @@ func _create_vr_controls():
 	# Cohesion slider (0-5)
 	_cohesion_slider = SLIDER_HORIZONTAL.instantiate()
 	_cohesion_slider.name = "CohesionSlider"
-	_cohesion_slider.position = Vector3(0.14, 0.02, 0.01)
+	_cohesion_slider.position = Vector3(0.14, 0.02, 0)
 	var coh_label = _cohesion_slider.get_node_or_null("Frame/LabelName")
 	if coh_label:
 		coh_label.text = "COH"
@@ -206,7 +207,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0, -0.04, 0.01)
+	reset_btn.position = Vector3(0, -0.04, 0)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
@@ -220,7 +221,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

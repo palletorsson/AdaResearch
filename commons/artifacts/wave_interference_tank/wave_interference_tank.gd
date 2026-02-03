@@ -181,12 +181,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Frequency slider
 	_freq_slider = SLIDER_HORIZONTAL.instantiate()
 	_freq_slider.name = "FreqSlider"
-	_freq_slider.position = Vector3(-0.1, 0.04, 0.01)
+	_freq_slider.position = Vector3(-0.1, 0.04, 0)
 	_freq_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var freq_label = _freq_slider.get_node_or_null("Frame/LabelName")
 	if freq_label:
@@ -197,7 +198,7 @@ func _create_vr_controls():
 	# Separation slider
 	_sep_slider = SLIDER_HORIZONTAL.instantiate()
 	_sep_slider.name = "SepSlider"
-	_sep_slider.position = Vector3(0.1, 0.04, 0.01)
+	_sep_slider.position = Vector3(0.1, 0.04, 0)
 	_sep_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var sep_label = _sep_slider.get_node_or_null("Frame/LabelName")
 	if sep_label:
@@ -216,7 +217,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Phase%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, -0.035, 0.01)
+		btn.position = Vector3(-0.15 + i * 0.1, -0.035, 0)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
@@ -233,7 +234,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0.01)
+	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders():

@@ -203,12 +203,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Zoom slider (logarithmic: 0.1 to 100000)
 	_zoom_slider = SLIDER_HORIZONTAL.instantiate()
 	_zoom_slider.name = "ZoomSlider"
-	_zoom_slider.position = Vector3(-0.12, 0.04, 0.01)
+	_zoom_slider.position = Vector3(-0.12, 0.04, 0)
 	var zoom_label = _zoom_slider.get_node_or_null("Frame/LabelName")
 	if zoom_label:
 		zoom_label.text = "ZOOM"
@@ -218,7 +219,7 @@ func _create_vr_controls():
 	# Palette slider (0-4)
 	_palette_slider = SLIDER_HORIZONTAL.instantiate()
 	_palette_slider.name = "PaletteSlider"
-	_palette_slider.position = Vector3(0.12, 0.04, 0.01)
+	_palette_slider.position = Vector3(0.12, 0.04, 0)
 	var palette_label = _palette_slider.get_node_or_null("Frame/LabelName")
 	if palette_label:
 		palette_label.text = "COLOR"
@@ -228,7 +229,7 @@ func _create_vr_controls():
 	# Zoom In / Out buttons
 	var zoom_in_btn = PUSH_BUTTON.instantiate()
 	zoom_in_btn.name = "ZoomInButton"
-	zoom_in_btn.position = Vector3(-0.15, -0.04, 0.01)
+	zoom_in_btn.position = Vector3(-0.15, -0.04, 0)
 	_control_panel.add_child(zoom_in_btn)
 	_add_button_label(zoom_in_btn, "+")
 	var zoom_in_area = zoom_in_btn.get_node_or_null("InteractableAreaButton")
@@ -237,7 +238,7 @@ func _create_vr_controls():
 	
 	var zoom_out_btn = PUSH_BUTTON.instantiate()
 	zoom_out_btn.name = "ZoomOutButton"
-	zoom_out_btn.position = Vector3(-0.08, -0.04, 0.01)
+	zoom_out_btn.position = Vector3(-0.08, -0.04, 0)
 	_control_panel.add_child(zoom_out_btn)
 	_add_button_label(zoom_out_btn, "-")
 	var zoom_out_area = zoom_out_btn.get_node_or_null("InteractableAreaButton")
@@ -247,7 +248,7 @@ func _create_vr_controls():
 	# Auto-dive button
 	var dive_btn = PUSH_BUTTON.instantiate()
 	dive_btn.name = "DiveButton"
-	dive_btn.position = Vector3(0.02, -0.04, 0.01)
+	dive_btn.position = Vector3(0.02, -0.04, 0)
 	_control_panel.add_child(dive_btn)
 	_add_button_label(dive_btn, "DIVE")
 	var dive_area = dive_btn.get_node_or_null("InteractableAreaButton")
@@ -257,7 +258,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.12, -0.04, 0.01)
+	reset_btn.position = Vector3(0.12, -0.04, 0)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
@@ -271,7 +272,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 12
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

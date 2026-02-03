@@ -235,12 +235,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Coupling slider
 	_coupling_slider = SLIDER_HORIZONTAL.instantiate()
 	_coupling_slider.name = "CouplingSlider"
-	_coupling_slider.position = Vector3(0, 0.03, 0.01)
+	_coupling_slider.position = Vector3(0, 0.03, 0)
 	var coupling_label = _coupling_slider.get_node_or_null("Frame/LabelName")
 	if coupling_label:
 		coupling_label.text = "COUPLING"
@@ -258,7 +259,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, -0.035, 0.01)
+		btn.position = Vector3(-0.12 + i * 0.08, -0.035, 0)
 		btn.scale = Vector3(0.7, 0.7, 0.7)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
@@ -277,7 +278,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.022, 0.01)
+	lbl.position = Vector3(0, -0.022, 0)
 	btn.add_child(lbl)
 
 func _sync_coupling_slider():

@@ -168,6 +168,7 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Orbit preset buttons
@@ -181,7 +182,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, 0.03, 0.01)
+		btn.position = Vector3(-0.12 + i * 0.08, 0.03, 0)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
@@ -195,7 +196,7 @@ func _create_vr_controls():
 	# Time scale slider
 	var time_slider = SLIDER_HORIZONTAL.instantiate()
 	time_slider.name = "TimeSlider"
-	time_slider.position = Vector3(0, -0.03, 0.01)
+	time_slider.position = Vector3(0, -0.03, 0)
 	time_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var time_label = time_slider.get_node_or_null("Frame/LabelName")
 	if time_label:
@@ -211,7 +212,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0.01)
+	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
 func _set_orbit(r: float, v: float):

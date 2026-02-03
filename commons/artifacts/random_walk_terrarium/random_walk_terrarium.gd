@@ -162,6 +162,7 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Mode buttons
@@ -169,7 +170,7 @@ func _create_vr_controls():
 	for i in range(modes.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Mode%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, 0.02, 0.01)
+		btn.position = Vector3(-0.1 + i * 0.1, 0.02, 0)
 		btn.scale = Vector3(0.7, 0.7, 0.7)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, modes[i])
@@ -182,7 +183,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0, -0.025, 0.01)
+	reset_btn.position = Vector3(0, -0.025, 0)
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
@@ -195,7 +196,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.022, 0.01)
+	lbl.position = Vector3(0, -0.022, 0)
 	btn.add_child(lbl)
 
 func _reset_walkers():

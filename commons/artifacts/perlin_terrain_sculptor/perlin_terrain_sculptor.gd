@@ -152,12 +152,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Threshold slider (-1 to 1)
 	_threshold_slider = SLIDER_HORIZONTAL.instantiate()
 	_threshold_slider.name = "ThresholdSlider"
-	_threshold_slider.position = Vector3(-0.12, 0.04, 0.01)
+	_threshold_slider.position = Vector3(-0.12, 0.04, 0)
 	var thresh_label = _threshold_slider.get_node_or_null("Frame/LabelName")
 	if thresh_label:
 		thresh_label.text = "THRESH"
@@ -167,7 +168,7 @@ func _create_vr_controls():
 	# Scale slider (0.5 to 20)
 	_scale_slider = SLIDER_HORIZONTAL.instantiate()
 	_scale_slider.name = "ScaleSlider"
-	_scale_slider.position = Vector3(0.12, 0.04, 0.01)
+	_scale_slider.position = Vector3(0.12, 0.04, 0)
 	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
 	if scale_label:
 		scale_label.text = "SCALE"
@@ -177,7 +178,7 @@ func _create_vr_controls():
 	# New Seed button
 	var seed_btn = PUSH_BUTTON.instantiate()
 	seed_btn.name = "SeedButton"
-	seed_btn.position = Vector3(-0.08, -0.04, 0.01)
+	seed_btn.position = Vector3(-0.08, -0.04, 0)
 	_control_panel.add_child(seed_btn)
 	_add_button_label(seed_btn, "SEED")
 	var seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
@@ -187,7 +188,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.08, -0.04, 0.01)
+	reset_btn.position = Vector3(0.08, -0.04, 0)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
@@ -201,7 +202,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 12
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

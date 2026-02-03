@@ -177,12 +177,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# R min slider (0.5 to r_max)
 	_r_min_slider = SLIDER_HORIZONTAL.instantiate()
 	_r_min_slider.name = "RMinSlider"
-	_r_min_slider.position = Vector3(-0.12, 0.01, 0.01)
+	_r_min_slider.position = Vector3(-0.12, 0.01, 0)
 	var min_label = _r_min_slider.get_node_or_null("Frame/LabelName")
 	if min_label:
 		min_label.text = "R MIN"
@@ -192,7 +193,7 @@ func _create_vr_controls():
 	# R max slider (r_min to 4.0)
 	_r_max_slider = SLIDER_HORIZONTAL.instantiate()
 	_r_max_slider.name = "RMaxSlider"
-	_r_max_slider.position = Vector3(0.12, 0.01, 0.01)
+	_r_max_slider.position = Vector3(0.12, 0.01, 0)
 	var max_label = _r_max_slider.get_node_or_null("Frame/LabelName")
 	if max_label:
 		max_label.text = "R MAX"
@@ -202,7 +203,7 @@ func _create_vr_controls():
 	# Preset buttons
 	var preset_btn1 = PUSH_BUTTON.instantiate()
 	preset_btn1.name = "PresetFull"
-	preset_btn1.position = Vector3(-0.1, -0.035, 0.01)
+	preset_btn1.position = Vector3(-0.1, -0.035, 0)
 	preset_btn1.scale = Vector3(0.8, 0.8, 0.8)
 	_control_panel.add_child(preset_btn1)
 	_add_button_label(preset_btn1, "FULL")
@@ -212,7 +213,7 @@ func _create_vr_controls():
 	
 	var preset_btn2 = PUSH_BUTTON.instantiate()
 	preset_btn2.name = "PresetChaos"
-	preset_btn2.position = Vector3(0, -0.035, 0.01)
+	preset_btn2.position = Vector3(0, -0.035, 0)
 	preset_btn2.scale = Vector3(0.8, 0.8, 0.8)
 	_control_panel.add_child(preset_btn2)
 	_add_button_label(preset_btn2, "CHAOS")
@@ -222,7 +223,7 @@ func _create_vr_controls():
 	
 	var preset_btn3 = PUSH_BUTTON.instantiate()
 	preset_btn3.name = "PresetBifurc"
-	preset_btn3.position = Vector3(0.1, -0.035, 0.01)
+	preset_btn3.position = Vector3(0.1, -0.035, 0)
 	preset_btn3.scale = Vector3(0.8, 0.8, 0.8)
 	_control_panel.add_child(preset_btn3)
 	_add_button_label(preset_btn3, "BIFUR")

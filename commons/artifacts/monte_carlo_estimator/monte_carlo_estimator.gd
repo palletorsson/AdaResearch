@@ -158,12 +158,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Speed slider
 	var speed_slider = SLIDER_HORIZONTAL.instantiate()
 	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0, 0.025, 0.01)
+	speed_slider.position = Vector3(0, 0.025, 0)
 	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -185,7 +186,7 @@ func _create_vr_controls():
 	for i in range(buttons.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Btn%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, -0.025, 0.01)
+		btn.position = Vector3(-0.12 + i * 0.08, -0.025, 0)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, buttons[i][0])
@@ -200,7 +201,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.02, 0.01)
+	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
 func _process(delta):

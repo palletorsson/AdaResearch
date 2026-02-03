@@ -201,6 +201,7 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Transform presets
@@ -216,7 +217,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.2 + (i % 3) * 0.13, 0.035 - (i / 3) * 0.06, 0.01)
+		btn.position = Vector3(-0.2 + (i % 3) * 0.13, 0.035 - (i / 3) * 0.06, 0)
 		btn.scale = Vector3(0.6, 0.6, 0.6)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
@@ -231,7 +232,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.022, 0.01)
+	lbl.position = Vector3(0, -0.022, 0)
 	btn.add_child(lbl)
 
 func _apply_matrix(m: Basis):

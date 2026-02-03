@@ -154,12 +154,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Preset slider (0-5)
 	_preset_slider = SLIDER_HORIZONTAL.instantiate()
 	_preset_slider.name = "PresetSlider"
-	_preset_slider.position = Vector3(0, 0.055, 0.01)
+	_preset_slider.position = Vector3(0, 0.055, 0)
 	var preset_label = _preset_slider.get_node_or_null("Frame/LabelName")
 	if preset_label:
 		preset_label.text = "PRESET"
@@ -169,7 +170,7 @@ func _create_vr_controls():
 	# Feed slider
 	_feed_slider = SLIDER_HORIZONTAL.instantiate()
 	_feed_slider.name = "FeedSlider"
-	_feed_slider.position = Vector3(-0.12, -0.02, 0.01)
+	_feed_slider.position = Vector3(-0.12, -0.02, 0)
 	var feed_label = _feed_slider.get_node_or_null("Frame/LabelName")
 	if feed_label:
 		feed_label.text = "FEED"
@@ -179,7 +180,7 @@ func _create_vr_controls():
 	# Kill slider
 	_kill_slider = SLIDER_HORIZONTAL.instantiate()
 	_kill_slider.name = "KillSlider"
-	_kill_slider.position = Vector3(0.12, -0.02, 0.01)
+	_kill_slider.position = Vector3(0.12, -0.02, 0)
 	var kill_label = _kill_slider.get_node_or_null("Frame/LabelName")
 	if kill_label:
 		kill_label.text = "KILL"
@@ -189,7 +190,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.2, 0.055, 0.01)
+	reset_btn.position = Vector3(0.2, 0.055, 0)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
@@ -203,7 +204,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.001
 	lbl.font_size = 12
-	lbl.position = Vector3(0, -0.025, 0.01)
+	lbl.position = Vector3(0, -0.025, 0)
 	btn.add_child(lbl)
 
 func _sync_sliders_deferred():

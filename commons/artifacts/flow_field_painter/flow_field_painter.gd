@@ -140,12 +140,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Scale slider
 	var scale_slider = SLIDER_HORIZONTAL.instantiate()
 	scale_slider.name = "ScaleSlider"
-	scale_slider.position = Vector3(-0.08, 0.025, 0.01)
+	scale_slider.position = Vector3(-0.08, 0.025, 0)
 	scale_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var scale_label = scale_slider.get_node_or_null("Frame/LabelName")
 	if scale_label:
@@ -159,7 +160,7 @@ func _create_vr_controls():
 	# Speed slider
 	var speed_slider = SLIDER_HORIZONTAL.instantiate()
 	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0.08, 0.025, 0.01)
+	speed_slider.position = Vector3(0.08, 0.025, 0)
 	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -173,7 +174,7 @@ func _create_vr_controls():
 	# Buttons
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(-0.08, -0.025, 0.01)
+	reset_btn.position = Vector3(-0.08, -0.025, 0)
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
@@ -183,7 +184,7 @@ func _create_vr_controls():
 	
 	var seed_btn = PUSH_BUTTON.instantiate()
 	seed_btn.name = "SeedBtn"
-	seed_btn.position = Vector3(0.08, -0.025, 0.01)
+	seed_btn.position = Vector3(0.08, -0.025, 0)
 	seed_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(seed_btn)
 	_add_button_label(seed_btn, "NEW SEED")
@@ -196,7 +197,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0.01)
+	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
 func _reset_particles():

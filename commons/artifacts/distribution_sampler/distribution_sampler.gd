@@ -127,7 +127,7 @@ func _create_bars():
 		bar.material_override = mat
 		
 		var x = -display_width/2 + (i + 0.5) * bar_width
-		bar.position = Vector3(x, 0, 0.01)
+		bar.position = Vector3(x, 0, 0)
 		
 		_bar_meshes.append(bar)
 		add_child(bar)
@@ -175,6 +175,7 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Distribution buttons
@@ -182,7 +183,7 @@ func _create_vr_controls():
 	for i in range(types.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Dist%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, 0.025, 0.01)
+		btn.position = Vector3(-0.15 + i * 0.1, 0.025, 0)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, types[i])
@@ -195,7 +196,7 @@ func _create_vr_controls():
 	# Clear button
 	var clear_btn = PUSH_BUTTON.instantiate()
 	clear_btn.name = "ClearBtn"
-	clear_btn.position = Vector3(0.15, -0.025, 0.01)
+	clear_btn.position = Vector3(0.15, -0.025, 0)
 	clear_btn.scale = Vector3(0.65, 0.65, 0.65)
 	_control_panel.add_child(clear_btn)
 	_add_button_label(clear_btn, "CLEAR")
@@ -208,7 +209,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.text = text
 	lbl.pixel_size = 0.0008
 	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0.01)
+	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
 func _clear_samples():

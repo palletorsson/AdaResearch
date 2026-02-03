@@ -122,12 +122,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Preset slider (0-6)
 	_preset_slider = SLIDER_HORIZONTAL.instantiate()
 	_preset_slider.name = "PresetSlider"
-	_preset_slider.position = Vector3(0, 0.055, 0.01)
+	_preset_slider.position = Vector3(0, 0.055, 0)
 	var preset_label = _preset_slider.get_node_or_null("Frame/LabelName")
 	if preset_label:
 		preset_label.text = "PRESET"
@@ -137,7 +138,7 @@ func _create_vr_controls():
 	# Generation slider (1-10)
 	_gen_slider = SLIDER_HORIZONTAL.instantiate()
 	_gen_slider.name = "GenSlider"
-	_gen_slider.position = Vector3(-0.12, -0.02, 0.01)
+	_gen_slider.position = Vector3(-0.12, -0.02, 0)
 	var gen_label = _gen_slider.get_node_or_null("Frame/LabelName")
 	if gen_label:
 		gen_label.text = "GEN"
@@ -147,7 +148,7 @@ func _create_vr_controls():
 	# Angle slider (5-90)
 	_angle_slider = SLIDER_HORIZONTAL.instantiate()
 	_angle_slider.name = "AngleSlider"
-	_angle_slider.position = Vector3(0.12, -0.02, 0.01)
+	_angle_slider.position = Vector3(0.12, -0.02, 0)
 	var angle_label = _angle_slider.get_node_or_null("Frame/LabelName")
 	if angle_label:
 		angle_label.text = "ANGLE"

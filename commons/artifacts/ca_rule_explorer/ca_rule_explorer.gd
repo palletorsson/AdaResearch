@@ -182,12 +182,13 @@ func _create_vr_controls():
 	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
 	panel_mat.metallic = 0.3
 	panel_back.material_override = panel_mat
+	panel_back.position.z = -0.01
 	_control_panel.add_child(panel_back)
 	
 	# Rule slider (0-255)
 	_rule_slider = SLIDER_HORIZONTAL.instantiate()
 	_rule_slider.name = "RuleSlider"
-	_rule_slider.position = Vector3(-0.12, 0.05, 0.01)
+	_rule_slider.position = Vector3(-0.12, 0.05, 0)
 	_rule_slider.set_range(0, 255)
 	var rule_label = _rule_slider.get_node_or_null("Frame/LabelName")
 	if rule_label:
@@ -198,7 +199,7 @@ func _create_vr_controls():
 	# Speed slider (1-30 gen/sec)
 	_speed_slider = SLIDER_HORIZONTAL.instantiate()
 	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0.12, 0.05, 0.01)
+	_speed_slider.position = Vector3(0.12, 0.05, 0)
 	_speed_slider.set_range(1, 30)
 	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -212,7 +213,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % presets[i]
-		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, 0.01)
+		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, 0)
 		_control_panel.add_child(btn)
 		
 		# Label for button
@@ -220,7 +221,7 @@ func _create_vr_controls():
 		btn_label.text = str(presets[i])
 		btn_label.pixel_size = 0.001
 		btn_label.font_size = 14
-		btn_label.position = Vector3(0, -0.025, 0.01)
+		btn_label.position = Vector3(0, -0.025, 0)
 		btn.add_child(btn_label)
 		
 		# Connect signal - use lambda with captured value
@@ -232,14 +233,14 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.18, -0.05, 0.01)
+	reset_btn.position = Vector3(0.18, -0.05, 0)
 	_control_panel.add_child(reset_btn)
 	
 	var reset_label = Label3D.new()
 	reset_label.text = "RST"
 	reset_label.pixel_size = 0.001
 	reset_label.font_size = 14
-	reset_label.position = Vector3(0, -0.025, 0.01)
+	reset_label.position = Vector3(0, -0.025, 0)
 	reset_btn.add_child(reset_label)
 	
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
