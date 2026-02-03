@@ -222,6 +222,9 @@ func _generate():
 	_update_info()
 
 func _draw_lsystem():
+	if not _immediate_mesh:
+		return
+	
 	_immediate_mesh.clear_surfaces()
 	
 	if _current_string.length() == 0:
@@ -299,6 +302,9 @@ func _draw_lsystem():
 	_immediate_mesh.surface_end()
 
 func _update_info():
+	if not _info_label:
+		return
+	
 	var name = "Custom"
 	if preset < PRESETS.size():
 		name = PRESETS[preset][4]
