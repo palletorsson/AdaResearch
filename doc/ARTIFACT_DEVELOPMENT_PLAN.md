@@ -98,7 +98,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `ca_rule_explorer` | 🔨 Build | HIGH | Wolfram 1D, rule selector (30, 110, etc) |
+| `ca_rule_explorer` | ✅ Done | HIGH | **2026-02-03** — 64×50 board, rules 0-255, keyboard control |
 | `game_of_life_petri` | 🔨 Build | HIGH | Classic GoL, drawable |
 | `ca_3d_cube` | 🔨 Build | MED | 3D cellular automata |
 | `langtons_ant_habitat` | 🔨 Build | MED | Emergent highway |
@@ -304,7 +304,7 @@ Building order optimized for grant alignment + QFEP coverage:
 | 1 | `bias_visualizer` | criticalalgorithms | **Grant thesis** - coded gaze |
 | 2 | ✅ `boids_aquarium` | swarmintelligence | WP3 emergence showcase — **DONE 2026-02-03** |
 | 3 | `turing_pattern_generator` | morphogenesis | Turing's leopard spots |
-| 4 | `ca_rule_explorer` | cellularautomata | Wolfram rules interactive |
+| 4 | ✅ `ca_rule_explorer` | cellularautomata | Wolfram rules interactive — **DONE 2026-02-03** |
 | 5 | `lsystem_editor` | lsystems | Grammar as generative tool |
 | 6 | ✅ `jelly_cube` | softbodies | Queer morphology precursor — **DONE 2026-02-03** |
 | 7 | `perlin_terrain_sculptor` | noise | Core noise interaction |
@@ -332,7 +332,7 @@ Update this file as artifacts are completed:
 - Add completion date
 - Note any scope changes
 
-**Last updated:** 2026-02-03 (boids_aquarium ✅, jelly_cube ✅)
+**Last updated:** 2026-02-03 (boids_aquarium ✅, jelly_cube ✅, ca_rule_explorer ✅)
 
 ---
 
