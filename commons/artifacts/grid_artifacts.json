@@ -4994,5 +4994,29 @@
     "riemann_sphere":  {
                            "description":  "Compactified complex plane",
                            "scene":  "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn"
-                       }
+                       },
+    "angle_sum_triangle":  {
+                               "description":  "Triangle angle sum = 180°",
+                               "scene":  "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn"
+                           },
+    "constructive_proof":  {
+                               "description":  "Constructive vs classical proof",
+                               "scene":  "res://commons/artifacts/constructive_proof/constructive_proof.tscn"
+                           },
+    "excluded_middle_demo":  {
+                                 "description":  "Law of excluded middle - P ? ¬P",
+                                 "scene":  "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn"
+                             },
+    "superposition_display":  {
+                                  "description":  "Quantum superposition visualization",
+                                  "scene":  "res://commons/artifacts/superposition_display/superposition_display.tscn"
+                              },
+    "curvature_slider":  {
+                             "description":  "Controls curvature: hyperbolic ? flat ? elliptic",
+                             "scene":  "res://commons/artifacts/curvature_slider/curvature_slider.tscn"
+                         },
+    "brouwer_choice_sequence":  {
+                                    "description":  "Unfinished infinite sequences",
+                                    "scene":  "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn"
+                                }
 }
