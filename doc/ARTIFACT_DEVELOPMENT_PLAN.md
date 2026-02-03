@@ -180,7 +180,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `jelly_cube` | 🔨 Build | HIGH | Deformable grabbable |
+| `jelly_cube` | ✅ Done | HIGH | **2026-02-03** — 5 variants: jelly, bouncy, water, slime, queer |
 | `cloth_simulator` | 🔨 Build | HIGH | Fabric physics |
 | `fluid_tank` | 🔨 Build | HIGH | SPH or grid fluid |
 | `slime_mold` | 🔨 Build | MED | Physarum simulation |
@@ -306,7 +306,7 @@ Building order optimized for grant alignment + QFEP coverage:
 | 3 | `turing_pattern_generator` | morphogenesis | Turing's leopard spots |
 | 4 | `ca_rule_explorer` | cellularautomata | Wolfram rules interactive |
 | 5 | `lsystem_editor` | lsystems | Grammar as generative tool |
-| 6 | `jelly_cube` | softbodies | Queer morphology precursor |
+| 6 | ✅ `jelly_cube` | softbodies | Queer morphology precursor — **DONE 2026-02-03** |
 | 7 | `perlin_terrain_sculptor` | noise | Core noise interaction |
 | 8 | `mandelbrot_dive` | fractals | Infinite detail zoom |
 | 9 | `bifurcation_walkway` | qfeplaboratory | Walkable phase transition |
@@ -332,7 +332,7 @@ Update this file as artifacts are completed:
 - Add completion date
 - Note any scope changes
 
-**Last updated:** 2026-02-03 (boids_aquarium ✅)
+**Last updated:** 2026-02-03 (boids_aquarium ✅, jelly_cube ✅)
 
 ---
 
