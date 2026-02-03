@@ -110,7 +110,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, display_size * 0.5 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -127,7 +127,7 @@ func _create_vr_controls():
 	# Preset slider (0-6)
 	_preset_slider = SLIDER_HORIZONTAL.instantiate()
 	_preset_slider.name = "PresetSlider"
-	_preset_slider.position = Vector3(0, 0.055, -0.005)
+	_preset_slider.position = Vector3(0, 0.055, 0.01)
 	var preset_label = _preset_slider.get_node_or_null("Frame/LabelName")
 	if preset_label:
 		preset_label.text = "PRESET"
@@ -137,7 +137,7 @@ func _create_vr_controls():
 	# Generation slider (1-10)
 	_gen_slider = SLIDER_HORIZONTAL.instantiate()
 	_gen_slider.name = "GenSlider"
-	_gen_slider.position = Vector3(-0.12, -0.02, -0.005)
+	_gen_slider.position = Vector3(-0.12, -0.02, 0.01)
 	var gen_label = _gen_slider.get_node_or_null("Frame/LabelName")
 	if gen_label:
 		gen_label.text = "GEN"
@@ -147,7 +147,7 @@ func _create_vr_controls():
 	# Angle slider (5-90)
 	_angle_slider = SLIDER_HORIZONTAL.instantiate()
 	_angle_slider.name = "AngleSlider"
-	_angle_slider.position = Vector3(0.12, -0.02, -0.005)
+	_angle_slider.position = Vector3(0.12, -0.02, 0.01)
 	var angle_label = _angle_slider.get_node_or_null("Frame/LabelName")
 	if angle_label:
 		angle_label.text = "ANGLE"

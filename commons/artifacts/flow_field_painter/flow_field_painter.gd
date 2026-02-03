@@ -128,7 +128,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.05, canvas_size.y/2 + 0.12)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel
@@ -145,7 +145,7 @@ func _create_vr_controls():
 	# Scale slider
 	var scale_slider = SLIDER_HORIZONTAL.instantiate()
 	scale_slider.name = "ScaleSlider"
-	scale_slider.position = Vector3(-0.08, 0.025, -0.005)
+	scale_slider.position = Vector3(-0.08, 0.025, 0.01)
 	scale_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var scale_label = scale_slider.get_node_or_null("Frame/LabelName")
 	if scale_label:
@@ -159,7 +159,7 @@ func _create_vr_controls():
 	# Speed slider
 	var speed_slider = SLIDER_HORIZONTAL.instantiate()
 	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0.08, 0.025, -0.005)
+	speed_slider.position = Vector3(0.08, 0.025, 0.01)
 	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -173,7 +173,7 @@ func _create_vr_controls():
 	# Buttons
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(-0.08, -0.025, -0.005)
+	reset_btn.position = Vector3(-0.08, -0.025, 0.01)
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
@@ -183,7 +183,7 @@ func _create_vr_controls():
 	
 	var seed_btn = PUSH_BUTTON.instantiate()
 	seed_btn.name = "SeedBtn"
-	seed_btn.position = Vector3(0.08, -0.025, -0.005)
+	seed_btn.position = Vector3(0.08, -0.025, 0.01)
 	seed_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(seed_btn)
 	_add_button_label(seed_btn, "NEW SEED")

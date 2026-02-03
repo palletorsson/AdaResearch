@@ -159,7 +159,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -tank_size.y/2 - 0.08, tank_size.z/2 + 0.12)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -176,7 +176,7 @@ func _create_vr_controls():
 	# Separation slider (0-5)
 	_separation_slider = SLIDER_HORIZONTAL.instantiate()
 	_separation_slider.name = "SeparationSlider"
-	_separation_slider.position = Vector3(-0.14, 0.02, -0.005)
+	_separation_slider.position = Vector3(-0.14, 0.02, 0.01)
 	var sep_label = _separation_slider.get_node_or_null("Frame/LabelName")
 	if sep_label:
 		sep_label.text = "SEP"
@@ -186,7 +186,7 @@ func _create_vr_controls():
 	# Alignment slider (0-5)
 	_alignment_slider = SLIDER_HORIZONTAL.instantiate()
 	_alignment_slider.name = "AlignmentSlider"
-	_alignment_slider.position = Vector3(0, 0.02, -0.005)
+	_alignment_slider.position = Vector3(0, 0.02, 0.01)
 	var align_label = _alignment_slider.get_node_or_null("Frame/LabelName")
 	if align_label:
 		align_label.text = "ALIGN"
@@ -196,7 +196,7 @@ func _create_vr_controls():
 	# Cohesion slider (0-5)
 	_cohesion_slider = SLIDER_HORIZONTAL.instantiate()
 	_cohesion_slider.name = "CohesionSlider"
-	_cohesion_slider.position = Vector3(0.14, 0.02, -0.005)
+	_cohesion_slider.position = Vector3(0.14, 0.02, 0.01)
 	var coh_label = _cohesion_slider.get_node_or_null("Frame/LabelName")
 	if coh_label:
 		coh_label.text = "COH"
@@ -206,7 +206,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0, -0.04, -0.005)
+	reset_btn.position = Vector3(0, -0.04, 0.01)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")

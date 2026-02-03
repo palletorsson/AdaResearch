@@ -323,7 +323,7 @@ func _create_vr_controls():
 	# Lambda slider (edge of chaos: 0-1)
 	_lambda_slider = SLIDER_HORIZONTAL.instantiate()
 	_lambda_slider.name = "LambdaSlider"
-	_lambda_slider.position = Vector3(-0.08, 0.025, -0.005)
+	_lambda_slider.position = Vector3(-0.08, 0.025, 0.01)
 	var lambda_label = _lambda_slider.get_node_or_null("Frame/LabelName")
 	if lambda_label:
 		lambda_label.text = "λ EDGE"
@@ -333,7 +333,7 @@ func _create_vr_controls():
 	# Phi slider (becoming: -1 to 1)
 	_phi_slider = SLIDER_HORIZONTAL.instantiate()
 	_phi_slider.name = "PhiSlider"
-	_phi_slider.position = Vector3(0.08, 0.025, -0.005)
+	_phi_slider.position = Vector3(0.08, 0.025, 0.01)
 	var phi_label = _phi_slider.get_node_or_null("Frame/LabelName")
 	if phi_label:
 		phi_label.text = "φ BECOME"
@@ -350,7 +350,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, -0.04, -0.005)
+		btn.position = Vector3(-0.1 + i * 0.1, -0.04, 0.01)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])
 		

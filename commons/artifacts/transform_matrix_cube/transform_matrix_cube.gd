@@ -189,7 +189,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, cube_size + 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -216,7 +216,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.2 + (i % 3) * 0.13, 0.035 - (i / 3) * 0.06, -0.005)
+		btn.position = Vector3(-0.2 + (i % 3) * 0.13, 0.035 - (i / 3) * 0.06, 0.01)
 		btn.scale = Vector3(0.6, 0.6, 0.6)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, presets[i][0])

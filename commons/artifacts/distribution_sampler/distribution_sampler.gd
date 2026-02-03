@@ -163,7 +163,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.08, 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel
@@ -182,7 +182,7 @@ func _create_vr_controls():
 	for i in range(types.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Dist%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, 0.025, -0.005)
+		btn.position = Vector3(-0.15 + i * 0.1, 0.025, 0.01)
 		btn.scale = Vector3(0.65, 0.65, 0.65)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, types[i])
@@ -195,7 +195,7 @@ func _create_vr_controls():
 	# Clear button
 	var clear_btn = PUSH_BUTTON.instantiate()
 	clear_btn.name = "ClearBtn"
-	clear_btn.position = Vector3(0.15, -0.025, -0.005)
+	clear_btn.position = Vector3(0.15, -0.025, 0.01)
 	clear_btn.scale = Vector3(0.65, 0.65, 0.65)
 	_control_panel.add_child(clear_btn)
 	_add_button_label(clear_btn, "CLEAR")
@@ -344,7 +344,7 @@ func _update_theory_curve():
 		var x_norm = float(i) / float(segments)
 		var y = _theoretical_pdf(x_norm)
 		var x = -display_width/2 + x_norm * display_width
-		points.append(Vector3(x, y * display_height * 0.8, -0.005))
+		points.append(Vector3(x, y * display_height * 0.8, 0.01))
 	
 	# Build line mesh
 	var immediate_mesh = ImmediateMesh.new()

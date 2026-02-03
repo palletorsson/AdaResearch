@@ -199,7 +199,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, table_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -216,7 +216,7 @@ func _create_vr_controls():
 	# C real slider (-2 to 2)
 	_c_real_slider = SLIDER_HORIZONTAL.instantiate()
 	_c_real_slider.name = "CRealSlider"
-	_c_real_slider.position = Vector3(-0.12, 0.05, -0.005)
+	_c_real_slider.position = Vector3(-0.12, 0.05, 0.01)
 	var real_label = _c_real_slider.get_node_or_null("Frame/LabelName")
 	if real_label:
 		real_label.text = "C REAL"
@@ -226,7 +226,7 @@ func _create_vr_controls():
 	# C imaginary slider (-2 to 2)
 	_c_imag_slider = SLIDER_HORIZONTAL.instantiate()
 	_c_imag_slider.name = "CImagSlider"
-	_c_imag_slider.position = Vector3(0.12, 0.05, -0.005)
+	_c_imag_slider.position = Vector3(0.12, 0.05, 0.01)
 	var imag_label = _c_imag_slider.get_node_or_null("Frame/LabelName")
 	if imag_label:
 		imag_label.text = "C IMAG"
@@ -238,7 +238,7 @@ func _create_vr_controls():
 	for i in range(6):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.2 + (i % 3) * 0.1, -0.03 - floor(i / 3.0) * 0.05, -0.005)
+		btn.position = Vector3(-0.2 + (i % 3) * 0.1, -0.03 - floor(i / 3.0) * 0.05, 0.01)
 		btn.scale = Vector3(0.8, 0.8, 0.8)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, preset_names[i])

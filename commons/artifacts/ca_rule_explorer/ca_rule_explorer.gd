@@ -170,7 +170,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, board_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)  # Angled toward user
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)  # Angled toward user
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -187,7 +187,7 @@ func _create_vr_controls():
 	# Rule slider (0-255)
 	_rule_slider = SLIDER_HORIZONTAL.instantiate()
 	_rule_slider.name = "RuleSlider"
-	_rule_slider.position = Vector3(-0.12, 0.05, -0.005)
+	_rule_slider.position = Vector3(-0.12, 0.05, 0.01)
 	_rule_slider.set_range(0, 255)
 	var rule_label = _rule_slider.get_node_or_null("Frame/LabelName")
 	if rule_label:
@@ -198,7 +198,7 @@ func _create_vr_controls():
 	# Speed slider (1-30 gen/sec)
 	_speed_slider = SLIDER_HORIZONTAL.instantiate()
 	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0.12, 0.05, -0.005)
+	_speed_slider.position = Vector3(0.12, 0.05, 0.01)
 	_speed_slider.set_range(1, 30)
 	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -212,7 +212,7 @@ func _create_vr_controls():
 	for i in range(presets.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Preset%d" % presets[i]
-		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, -0.005)
+		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, 0.01)
 		_control_panel.add_child(btn)
 		
 		# Label for button
@@ -232,7 +232,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.18, -0.05, -0.005)
+	reset_btn.position = Vector3(0.18, -0.05, 0.01)
 	_control_panel.add_child(reset_btn)
 	
 	var reset_label = Label3D.new()

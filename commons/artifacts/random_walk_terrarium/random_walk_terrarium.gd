@@ -150,7 +150,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.08, terrarium_size.z/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 180, 0)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel
@@ -169,7 +169,7 @@ func _create_vr_controls():
 	for i in range(modes.size()):
 		var btn = PUSH_BUTTON.instantiate()
 		btn.name = "Mode%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, 0.02, -0.005)
+		btn.position = Vector3(-0.1 + i * 0.1, 0.02, 0.01)
 		btn.scale = Vector3(0.7, 0.7, 0.7)
 		_control_panel.add_child(btn)
 		_add_button_label(btn, modes[i])
@@ -182,7 +182,7 @@ func _create_vr_controls():
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0, -0.025, -0.005)
+	reset_btn.position = Vector3(0, -0.025, 0.01)
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
