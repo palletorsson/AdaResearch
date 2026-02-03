@@ -11,18 +11,18 @@ extends Node3D
 class_name CrossProductDemo
 
 ## Display settings
-@export var max_vector_length: float = 1.0
+@export var max_vector_length: float = 1.2
 @export var arrow_thickness: float = 0.025
 
 ## Vector A
-@export var vector_a: Vector3 = Vector3(0.7, 0.0, 0.0):
+@export var vector_a: Vector3 = Vector3(0.8, 0.0, 0.0):
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
 		if is_inside_tree():
 			_update_visualization()
 
 ## Vector B
-@export var vector_b: Vector3 = Vector3(0.0, 0.0, 0.7):
+@export var vector_b: Vector3 = Vector3(0.0, 0.0, 0.8):
 	set(value):
 		vector_b = value.limit_length(max_vector_length)
 		if is_inside_tree():
@@ -385,11 +385,11 @@ func _create_vr_controls():
 	
 	# Preset buttons for different configurations
 	var presets = [
-		["X×Z", Vector3(0.5, 0, 0), Vector3(0, 0, 0.5)],    # Standard XZ → Y
-		["Z×X", Vector3(0, 0, 0.5), Vector3(0.5, 0, 0)],    # Reversed → -Y
-		["X×Y", Vector3(0.5, 0, 0), Vector3(0, 0.5, 0)],    # XY → Z
-		["3D", Vector3(0.4, 0.3, 0.2), Vector3(0.2, 0.4, 0.5)],  # General 3D
-		["RESET", Vector3(0.5, 0, 0), Vector3(0, 0, 0.5)]
+		["X×Z", Vector3(0.8, 0, 0), Vector3(0, 0, 0.8)],    # Standard XZ → Y
+		["Z×X", Vector3(0, 0, 0.8), Vector3(0.8, 0, 0)],    # Reversed → -Y
+		["X×Y", Vector3(0.8, 0, 0), Vector3(0, 0.8, 0)],    # XY → Z
+		["3D", Vector3(0.6, 0.4, 0.3), Vector3(0.3, 0.5, 0.7)],  # General 3D
+		["RESET", Vector3(0.8, 0, 0), Vector3(0, 0, 0.8)]
 	]
 	
 	for i in range(presets.size()):
@@ -574,11 +574,11 @@ func _process(_delta):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
-			KEY_1: _apply_preset(Vector3(0.5, 0, 0), Vector3(0, 0, 0.5))
-			KEY_2: _apply_preset(Vector3(0, 0, 0.5), Vector3(0.5, 0, 0))
-			KEY_3: _apply_preset(Vector3(0.5, 0, 0), Vector3(0, 0.5, 0))
-			KEY_4: _apply_preset(Vector3(0.4, 0.3, 0.2), Vector3(0.2, 0.4, 0.5))
-			KEY_R: _apply_preset(Vector3(0.5, 0, 0), Vector3(0, 0, 0.5))
+			KEY_1: _apply_preset(Vector3(0.8, 0, 0), Vector3(0, 0, 0.8))
+			KEY_2: _apply_preset(Vector3(0, 0, 0.8), Vector3(0.8, 0, 0))
+			KEY_3: _apply_preset(Vector3(0.8, 0, 0), Vector3(0, 0.8, 0))
+			KEY_4: _apply_preset(Vector3(0.6, 0.4, 0.3), Vector3(0.3, 0.5, 0.7))
+			KEY_R: _apply_preset(Vector3(0.8, 0, 0), Vector3(0, 0, 0.8))
 
 func set_vectors(a: Vector3, b: Vector3):
 	vector_a = a
