@@ -210,6 +210,7 @@ func _create_vr_controls():
 	_zoom_slider = SLIDER_HORIZONTAL.instantiate()
 	_zoom_slider.name = "ZoomSlider"
 	_zoom_slider.position = Vector3(-0.12, 0.04, 0)
+	_zoom_slider.rotation_degrees.x = -30
 	var zoom_label = _zoom_slider.get_node_or_null("Frame/LabelName")
 	if zoom_label:
 		zoom_label.text = "ZOOM"
@@ -220,6 +221,7 @@ func _create_vr_controls():
 	_palette_slider = SLIDER_HORIZONTAL.instantiate()
 	_palette_slider.name = "PaletteSlider"
 	_palette_slider.position = Vector3(0.12, 0.04, 0)
+	_palette_slider.rotation_degrees.x = -30
 	var palette_label = _palette_slider.get_node_or_null("Frame/LabelName")
 	if palette_label:
 		palette_label.text = "COLOR"
@@ -230,6 +232,7 @@ func _create_vr_controls():
 	var zoom_in_btn = PUSH_BUTTON.instantiate()
 	zoom_in_btn.name = "ZoomInButton"
 	zoom_in_btn.position = Vector3(-0.15, -0.04, 0)
+	zoom_in_btn.rotation_degrees.x = -30
 	_control_panel.add_child(zoom_in_btn)
 	_add_button_label(zoom_in_btn, "+")
 	var zoom_in_area = zoom_in_btn.get_node_or_null("InteractableAreaButton")
@@ -239,6 +242,7 @@ func _create_vr_controls():
 	var zoom_out_btn = PUSH_BUTTON.instantiate()
 	zoom_out_btn.name = "ZoomOutButton"
 	zoom_out_btn.position = Vector3(-0.08, -0.04, 0)
+	zoom_out_btn.rotation_degrees.x = -30
 	_control_panel.add_child(zoom_out_btn)
 	_add_button_label(zoom_out_btn, "-")
 	var zoom_out_area = zoom_out_btn.get_node_or_null("InteractableAreaButton")
@@ -249,6 +253,7 @@ func _create_vr_controls():
 	var dive_btn = PUSH_BUTTON.instantiate()
 	dive_btn.name = "DiveButton"
 	dive_btn.position = Vector3(0.02, -0.04, 0)
+	dive_btn.rotation_degrees.x = -30
 	_control_panel.add_child(dive_btn)
 	_add_button_label(dive_btn, "DIVE")
 	var dive_area = dive_btn.get_node_or_null("InteractableAreaButton")
@@ -259,6 +264,7 @@ func _create_vr_controls():
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
 	reset_btn.position = Vector3(0.12, -0.04, 0)
+	reset_btn.rotation_degrees.x = -30
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")

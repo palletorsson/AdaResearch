@@ -178,6 +178,7 @@ func _create_vr_controls():
 	_separation_slider = SLIDER_HORIZONTAL.instantiate()
 	_separation_slider.name = "SeparationSlider"
 	_separation_slider.position = Vector3(-0.14, 0.02, 0)
+	_separation_slider.rotation_degrees.x = -30
 	var sep_label = _separation_slider.get_node_or_null("Frame/LabelName")
 	if sep_label:
 		sep_label.text = "SEP"
@@ -188,6 +189,7 @@ func _create_vr_controls():
 	_alignment_slider = SLIDER_HORIZONTAL.instantiate()
 	_alignment_slider.name = "AlignmentSlider"
 	_alignment_slider.position = Vector3(0, 0.02, 0)
+	_alignment_slider.rotation_degrees.x = -30
 	var align_label = _alignment_slider.get_node_or_null("Frame/LabelName")
 	if align_label:
 		align_label.text = "ALIGN"
@@ -198,6 +200,7 @@ func _create_vr_controls():
 	_cohesion_slider = SLIDER_HORIZONTAL.instantiate()
 	_cohesion_slider.name = "CohesionSlider"
 	_cohesion_slider.position = Vector3(0.14, 0.02, 0)
+	_cohesion_slider.rotation_degrees.x = -30
 	var coh_label = _cohesion_slider.get_node_or_null("Frame/LabelName")
 	if coh_label:
 		coh_label.text = "COH"
@@ -208,6 +211,7 @@ func _create_vr_controls():
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
 	reset_btn.position = Vector3(0, -0.04, 0)
+	reset_btn.rotation_degrees.x = -30
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")

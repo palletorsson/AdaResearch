@@ -194,6 +194,7 @@ func _create_vr_controls():
 	var strength_slider = SLIDER_HORIZONTAL.instantiate()
 	strength_slider.name = "StrengthSlider"
 	strength_slider.position = Vector3(0, -0.025, 0)
+	strength_slider.rotation_degrees.x = -30
 	strength_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var strength_label = strength_slider.get_node_or_null("Frame/LabelName")
 	if strength_label:

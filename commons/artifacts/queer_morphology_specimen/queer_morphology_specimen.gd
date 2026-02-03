@@ -325,6 +325,7 @@ func _create_vr_controls():
 	_lambda_slider = SLIDER_HORIZONTAL.instantiate()
 	_lambda_slider.name = "LambdaSlider"
 	_lambda_slider.position = Vector3(-0.08, 0.025, 0)
+	_lambda_slider.rotation_degrees.x = -30
 	var lambda_label = _lambda_slider.get_node_or_null("Frame/LabelName")
 	if lambda_label:
 		lambda_label.text = "λ EDGE"
@@ -335,6 +336,7 @@ func _create_vr_controls():
 	_phi_slider = SLIDER_HORIZONTAL.instantiate()
 	_phi_slider.name = "PhiSlider"
 	_phi_slider.position = Vector3(0.08, 0.025, 0)
+	_phi_slider.rotation_degrees.x = -30
 	var phi_label = _phi_slider.get_node_or_null("Frame/LabelName")
 	if phi_label:
 		phi_label.text = "φ BECOME"

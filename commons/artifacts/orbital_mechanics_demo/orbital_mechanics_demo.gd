@@ -197,6 +197,7 @@ func _create_vr_controls():
 	var time_slider = SLIDER_HORIZONTAL.instantiate()
 	time_slider.name = "TimeSlider"
 	time_slider.position = Vector3(0, -0.03, 0)
+	time_slider.rotation_degrees.x = -30
 	time_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var time_label = time_slider.get_node_or_null("Frame/LabelName")
 	if time_label:

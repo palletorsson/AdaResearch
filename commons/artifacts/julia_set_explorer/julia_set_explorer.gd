@@ -218,6 +218,7 @@ func _create_vr_controls():
 	_c_real_slider = SLIDER_HORIZONTAL.instantiate()
 	_c_real_slider.name = "CRealSlider"
 	_c_real_slider.position = Vector3(-0.12, 0.05, 0)
+	_c_real_slider.rotation_degrees.x = -30
 	var real_label = _c_real_slider.get_node_or_null("Frame/LabelName")
 	if real_label:
 		real_label.text = "C REAL"
@@ -228,6 +229,7 @@ func _create_vr_controls():
 	_c_imag_slider = SLIDER_HORIZONTAL.instantiate()
 	_c_imag_slider.name = "CImagSlider"
 	_c_imag_slider.position = Vector3(0.12, 0.05, 0)
+	_c_imag_slider.rotation_degrees.x = -30
 	var imag_label = _c_imag_slider.get_node_or_null("Frame/LabelName")
 	if imag_label:
 		imag_label.text = "C IMAG"

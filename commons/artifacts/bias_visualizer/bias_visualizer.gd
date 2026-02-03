@@ -237,6 +237,7 @@ func _create_vr_controls():
 	var rotate_btn = PUSH_BUTTON.instantiate()
 	rotate_btn.name = "RotateButton"
 	rotate_btn.position = Vector3(0.16, 0, 0)
+	rotate_btn.rotation_degrees.x = -30
 	_control_panel.add_child(rotate_btn)
 	_add_button_label(rotate_btn, "ROT")
 	var rotate_area = rotate_btn.get_node_or_null("InteractableAreaButton")

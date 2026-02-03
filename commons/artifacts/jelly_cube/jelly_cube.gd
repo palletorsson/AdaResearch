@@ -182,6 +182,7 @@ func _create_vr_controls():
 	_stiffness_slider = SLIDER_HORIZONTAL.instantiate()
 	_stiffness_slider.name = "StiffnessSlider"
 	_stiffness_slider.position = Vector3(-0.14, 0.04, 0)
+	_stiffness_slider.rotation_degrees.x = -30
 	var stiff_label = _stiffness_slider.get_node_or_null("Frame/LabelName")
 	if stiff_label:
 		stiff_label.text = "STIFF"
@@ -192,6 +193,7 @@ func _create_vr_controls():
 	_damping_slider = SLIDER_HORIZONTAL.instantiate()
 	_damping_slider.name = "DampingSlider"
 	_damping_slider.position = Vector3(0, 0.04, 0)
+	_damping_slider.rotation_degrees.x = -30
 	var damp_label = _damping_slider.get_node_or_null("Frame/LabelName")
 	if damp_label:
 		damp_label.text = "DAMP"
@@ -202,6 +204,7 @@ func _create_vr_controls():
 	_pressure_slider = SLIDER_HORIZONTAL.instantiate()
 	_pressure_slider.name = "PressureSlider"
 	_pressure_slider.position = Vector3(0.14, 0.04, 0)
+	_pressure_slider.rotation_degrees.x = -30
 	var press_label = _pressure_slider.get_node_or_null("Frame/LabelName")
 	if press_label:
 		press_label.text = "PRESS"
@@ -212,6 +215,7 @@ func _create_vr_controls():
 	var color_btn = PUSH_BUTTON.instantiate()
 	color_btn.name = "ColorButton"
 	color_btn.position = Vector3(-0.08, -0.04, 0)
+	color_btn.rotation_degrees.x = -30
 	_control_panel.add_child(color_btn)
 	_add_button_label(color_btn, "COLOR")
 	var color_area = color_btn.get_node_or_null("InteractableAreaButton")
@@ -222,6 +226,7 @@ func _create_vr_controls():
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
 	reset_btn.position = Vector3(0.08, -0.04, 0)
+	reset_btn.rotation_degrees.x = -30
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RST")
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")

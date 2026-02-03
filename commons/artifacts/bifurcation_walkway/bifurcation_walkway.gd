@@ -184,6 +184,7 @@ func _create_vr_controls():
 	_r_min_slider = SLIDER_HORIZONTAL.instantiate()
 	_r_min_slider.name = "RMinSlider"
 	_r_min_slider.position = Vector3(-0.12, 0.01, 0)
+	_r_min_slider.rotation_degrees.x = -30
 	var min_label = _r_min_slider.get_node_or_null("Frame/LabelName")
 	if min_label:
 		min_label.text = "R MIN"
@@ -194,6 +195,7 @@ func _create_vr_controls():
 	_r_max_slider = SLIDER_HORIZONTAL.instantiate()
 	_r_max_slider.name = "RMaxSlider"
 	_r_max_slider.position = Vector3(0.12, 0.01, 0)
+	_r_max_slider.rotation_degrees.x = -30
 	var max_label = _r_max_slider.get_node_or_null("Frame/LabelName")
 	if max_label:
 		max_label.text = "R MAX"

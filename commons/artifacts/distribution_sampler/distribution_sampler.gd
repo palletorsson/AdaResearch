@@ -197,6 +197,7 @@ func _create_vr_controls():
 	var clear_btn = PUSH_BUTTON.instantiate()
 	clear_btn.name = "ClearBtn"
 	clear_btn.position = Vector3(0.15, -0.025, 0)
+	clear_btn.rotation_degrees.x = -30
 	clear_btn.scale = Vector3(0.65, 0.65, 0.65)
 	_control_panel.add_child(clear_btn)
 	_add_button_label(clear_btn, "CLEAR")

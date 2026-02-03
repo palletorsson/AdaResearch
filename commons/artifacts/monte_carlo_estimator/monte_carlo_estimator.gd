@@ -165,6 +165,7 @@ func _create_vr_controls():
 	var speed_slider = SLIDER_HORIZONTAL.instantiate()
 	speed_slider.name = "SpeedSlider"
 	speed_slider.position = Vector3(0, 0.025, 0)
+	speed_slider.rotation_degrees.x = -30
 	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:

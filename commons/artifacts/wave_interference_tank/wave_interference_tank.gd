@@ -188,6 +188,7 @@ func _create_vr_controls():
 	_freq_slider = SLIDER_HORIZONTAL.instantiate()
 	_freq_slider.name = "FreqSlider"
 	_freq_slider.position = Vector3(-0.1, 0.04, 0)
+	_freq_slider.rotation_degrees.x = -30
 	_freq_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var freq_label = _freq_slider.get_node_or_null("Frame/LabelName")
 	if freq_label:
@@ -199,6 +200,7 @@ func _create_vr_controls():
 	_sep_slider = SLIDER_HORIZONTAL.instantiate()
 	_sep_slider.name = "SepSlider"
 	_sep_slider.position = Vector3(0.1, 0.04, 0)
+	_sep_slider.rotation_degrees.x = -30
 	_sep_slider.scale = Vector3(0.8, 0.8, 0.8)
 	var sep_label = _sep_slider.get_node_or_null("Frame/LabelName")
 	if sep_label:

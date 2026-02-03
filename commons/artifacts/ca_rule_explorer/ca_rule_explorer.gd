@@ -189,6 +189,7 @@ func _create_vr_controls():
 	_rule_slider = SLIDER_HORIZONTAL.instantiate()
 	_rule_slider.name = "RuleSlider"
 	_rule_slider.position = Vector3(-0.12, 0.05, 0)
+	_rule_slider.rotation_degrees.x = -30
 	_rule_slider.set_range(0, 255)
 	var rule_label = _rule_slider.get_node_or_null("Frame/LabelName")
 	if rule_label:
@@ -200,6 +201,7 @@ func _create_vr_controls():
 	_speed_slider = SLIDER_HORIZONTAL.instantiate()
 	_speed_slider.name = "SpeedSlider"
 	_speed_slider.position = Vector3(0.12, 0.05, 0)
+	_speed_slider.rotation_degrees.x = -30
 	_speed_slider.set_range(1, 30)
 	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
 	if speed_label:
@@ -234,6 +236,7 @@ func _create_vr_controls():
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetButton"
 	reset_btn.position = Vector3(0.18, -0.05, 0)
+	reset_btn.rotation_degrees.x = -30
 	_control_panel.add_child(reset_btn)
 	
 	var reset_label = Label3D.new()

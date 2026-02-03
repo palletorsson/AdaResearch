@@ -184,6 +184,7 @@ func _create_vr_controls():
 	var reset_btn = PUSH_BUTTON.instantiate()
 	reset_btn.name = "ResetBtn"
 	reset_btn.position = Vector3(0, -0.025, 0)
+	reset_btn.rotation_degrees.x = -30
 	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")

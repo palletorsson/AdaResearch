@@ -242,6 +242,7 @@ func _create_vr_controls():
 	_coupling_slider = SLIDER_HORIZONTAL.instantiate()
 	_coupling_slider.name = "CouplingSlider"
 	_coupling_slider.position = Vector3(0, 0.03, 0)
+	_coupling_slider.rotation_degrees.x = -30
 	var coupling_label = _coupling_slider.get_node_or_null("Frame/LabelName")
 	if coupling_label:
 		coupling_label.text = "COUPLING"
