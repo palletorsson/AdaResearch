@@ -87,6 +87,18 @@
 			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios — another λ parameter space. Order (uniform) vs chaos (noise) with patterns at the edge.",
 			"tags": ["turing", "reaction_diffusion", "morphogenesis", "gray_scott", "leopard", "patterns", "emergence"]
 		},
+		"perlin_terrain_sculptor": {
+			"name": "Perlin Terrain Sculptor",
+			"lookup_name": "perlin_terrain_sculptor",
+			"description": "24³ voxel terrain where Perlin noise is the brush. Threshold slider reveals/hides structure. The continuous field sampled into discrete voxels — the relationship between smooth and chunky.",
+			"scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+			"category": "noise",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "noise",
+			"qfep_connection": "Noise is E(S) made visible. The threshold is a λ-like parameter — where you draw the line between solid and void.",
+			"tags": ["perlin", "noise", "voxel", "terrain", "procedural", "threshold", "sculpting"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
