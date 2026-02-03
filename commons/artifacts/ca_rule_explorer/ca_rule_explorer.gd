@@ -280,7 +280,7 @@ func _on_speed_slider_moved(_position):
 func _on_preset_pressed(preset_rule: int):
 	rule = preset_rule
 
-func _on_reset_pressed():
+func _on_reset_pressed(_button = null):  # Accept optional button arg
 	_reset()
 
 func _update_rule_display():

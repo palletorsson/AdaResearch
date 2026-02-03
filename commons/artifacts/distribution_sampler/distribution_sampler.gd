@@ -213,7 +213,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _clear_samples():
+func _clear_samples(_button = null):  # Accept optional button arg
 	_bins.clear()
 	_bins.resize(num_bins)
 	for i in range(num_bins):

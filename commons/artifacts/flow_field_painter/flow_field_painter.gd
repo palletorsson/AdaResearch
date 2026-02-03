@@ -204,13 +204,13 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _reset_particles():
+func _reset_particles(_button = null):  # Accept optional button arg
 	for p in _particles:
 		p.x = randf() * canvas_size.x - canvas_size.x/2
 		p.y = randf() * canvas_size.y - canvas_size.y/2
 		p.trail.clear()
 
-func _new_seed():
+func _new_seed(_button = null):  # Accept optional button arg
 	_noise.seed = randi()
 	_reset_particles()
 

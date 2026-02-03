@@ -272,11 +272,11 @@ func _on_pressure_slider_moved(_position):
 	if _pressure_slider and _pressure_slider.has_method("get_normalized_value"):
 		pressure = _pressure_slider.get_normalized_value() * 5.0
 
-func _on_color_pressed():
+func _on_color_pressed(_button = null):  # Accept optional button arg
 	_color_index = (_color_index + 1) % JELLY_COLORS.size()
 	jelly_color = JELLY_COLORS[_color_index]
 
-func _reset_physics():
+func _reset_physics(_button = null):  # Accept optional button arg
 	stiffness = 0.5
 	damping = 0.01
 	pressure = 1.0

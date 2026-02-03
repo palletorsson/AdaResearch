@@ -293,7 +293,7 @@ func _spawn_boids():
 		base_color.a = boid_transparency
 		_multimesh.set_instance_color(i, base_color)
 
-func _respawn_boids():
+func _respawn_boids(_button = null):  # Accept optional button arg from signal
 	_spawn_boids()
 
 func _process(delta):
