@@ -88,7 +88,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `perlin_terrain_sculptor` | 🔨 Build | HIGH | Sliders for octaves, persistence |
+| `perlin_terrain_sculptor` | ✅ Done | HIGH | **2026-02-03** — 24³ voxels, threshold control |
 | `flow_field_painter` | 🔨 Build | HIGH | Draw particles following noise |
 | `noise_comparison_panel` | 🔨 Build | MED | Value vs Perlin vs Simplex |
 | `curl_noise_vortex` | 🔨 Build | MED | Divergence-free flow |
@@ -130,7 +130,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `lsystem_editor` | 🔨 Build | HIGH | Live axiom/rules editing |
+| `lsystem_editor` | ✅ Done | HIGH | **2026-02-03** — 7 presets, live controls |
 | `tree_grower` | 🔨 Build | HIGH | Botanical L-system |
 | `branching_coral` | 🔨 Build | MED | Underwater aesthetic |
 | `city_generator` | 🔨 Build | MED | Urban L-system |
@@ -160,7 +160,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `turing_pattern_generator` | 🔨 Build | HIGH | Reaction-diffusion, spots/stripes |
+| `turing_pattern_generator` | ✅ Done | HIGH | **2026-02-03** — Gray-Scott, 6 presets |
 | `leopard_spots_demo` | 🔨 Build | HIGH | Turing's actual problem |
 | `gray_scott_reactor` | 🔨 Build | MED | Parameter exploration |
 | `diffusion_limited_aggregation` | 🔨 Build | MED | Crystal growth |
@@ -249,7 +249,7 @@ This plan maps the original grant vision (VR_VR_PT_2023.md) through the QFEP fra
 
 | Artifact | Status | Priority | Notes |
 |----------|--------|----------|-------|
-| `bias_visualizer` | 🔨 Build | **CRITICAL** | Joy Buolamwini reference |
+| `bias_visualizer` | ✅ Done | **CRITICAL** | **2026-02-03** — Word embeddings, Coded Gaze |
 | `filter_bubble_terrarium` | 🔨 Build | HIGH | Recommendation isolation |
 | `surveillance_panopticon` | 🔨 Build | HIGH | Farocki reference |
 | `data_extractivism_map` | 🔨 Build | MED | Kate Crawford reference |
@@ -301,13 +301,13 @@ Building order optimized for grant alignment + QFEP coverage:
 
 | # | Artifact | Sequence | Why |
 |---|----------|----------|-----|
-| 1 | `bias_visualizer` | criticalalgorithms | **Grant thesis** - coded gaze |
+| 1 | ✅ `bias_visualizer` | criticalalgorithms | **Grant thesis** — **DONE 2026-02-03** |
 | 2 | ✅ `boids_aquarium` | swarmintelligence | WP3 emergence showcase — **DONE 2026-02-03** |
-| 3 | `turing_pattern_generator` | morphogenesis | Turing's leopard spots |
+| 3 | ✅ `turing_pattern_generator` | morphogenesis | Turing's leopard spots — **DONE 2026-02-03** |
 | 4 | ✅ `ca_rule_explorer` | cellularautomata | Wolfram rules interactive — **DONE 2026-02-03** |
-| 5 | `lsystem_editor` | lsystems | Grammar as generative tool |
+| 5 | ✅ `lsystem_editor` | lsystems | Grammar as tool — **DONE 2026-02-03** |
 | 6 | ✅ `jelly_cube` | softbodies | Queer morphology precursor — **DONE 2026-02-03** |
-| 7 | `perlin_terrain_sculptor` | noise | Core noise interaction |
+| 7 | ✅ `perlin_terrain_sculptor` | noise | Core noise — **DONE 2026-02-03** |
 | 8 | ✅ `mandelbrot_dive` | fractals | Infinite detail — **DONE 2026-02-03** |
 | 9 | ✅ `bifurcation_walkway` | qfeplaboratory | Walkable phase transition — **DONE 2026-02-03** |
 | 10 | `queer_morphology_specimen` | softbodies | **Grant thesis** - fluid form |
@@ -332,7 +332,7 @@ Update this file as artifacts are completed:
 - Add completion date
 - Note any scope changes
 
-**Last updated:** 2026-02-03 (5 artifacts done: boids, jelly, CA, mandelbrot, bifurcation)
+**Last updated:** 2026-02-03 (9/10 priority artifacts done! Only queer_morphology_specimen remains)
 
 ---
 
