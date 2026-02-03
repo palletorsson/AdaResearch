@@ -15,6 +15,30 @@
 			"qfep_connection": "Emergence at λ≈0.4 — simple rules create complex, unpredictable behavior without central control",
 			"tags": ["boids", "flocking", "emergence", "swarm", "reynolds", "collective_behavior", "self_organization"]
 		},
+		"jelly_cube": {
+			"name": "Jelly Cube",
+			"lookup_name": "jelly_cube",
+			"description": "A soft, deformable cube that jiggles when touched. SoftBody3D physics creates organic, responsive behavior. Precursor to queer morphology — form that refuses rigidity.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
+			"category": "physics",
+			"interaction": "grab",
+			"complexity": "beginner",
+			"sequence": "softbodies",
+			"qfep_connection": "Low stiffness = high λ territory. Form becomes fluid, resists fixed categories.",
+			"tags": ["softbody", "physics", "deformable", "jelly", "queer_morphology", "interactive"]
+		},
+		"jelly_variants": {
+			"name": "Jelly Variants",
+			"lookup_name": "jelly_variants",
+			"description": "Five soft body specimens: Jelly (balanced), Bouncy (high pressure), Water Balloon (low stiffness), Slime (high damping), Queer Morph (φ>0). Each demonstrates different physics parameter configurations.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
+			"category": "physics",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "softbodies",
+			"qfep_connection": "Parameter space exploration — stiffness, pressure, damping create different morphological behaviors",
+			"tags": ["softbody", "physics", "variants", "comparison", "queer_morphology"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
