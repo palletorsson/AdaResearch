@@ -194,6 +194,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	title_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	title_mat.metallic = 0.2
 	title_mat.roughness = 0.7
+	title_mat.render_priority = -10  # Render before text
 	title_backing.material_override = title_mat
 	title_panel.add_child(title_backing)
 	
@@ -208,6 +209,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	title_label.font_size = 28
 	title_label.modulate = Color.WHITE
 	title_label.no_depth_test = true
+	title_label.render_priority = 100
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.position.z = 0.02 * SCENE_SCALE
@@ -226,6 +228,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	back_mat.metallic = 0.15
 	back_mat.roughness = 0.85
+	back_mat.render_priority = -10  # Render before text
 	backing.material_override = back_mat
 	panel.add_child(backing)
 	
@@ -240,6 +243,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	label.font_size = 20
 	label.modulate = Color.WHITE
 	label.no_depth_test = true
+	label.render_priority = 100
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.position.z = 0.02 * SCENE_SCALE
