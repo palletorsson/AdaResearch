@@ -207,9 +207,10 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	title_label.pixel_size = 0.0012
 	title_label.font_size = 24
 	title_label.modulate = Color.WHITE
+	title_label.no_depth_test = true
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title_label.position.z = 0.01 * SCENE_SCALE
+	title_label.position.z = 0.02 * SCENE_SCALE
 	title_panel.add_child(title_label)
 	
 	# === INFO PANEL ===
@@ -238,9 +239,10 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	label.pixel_size = 0.0012
 	label.font_size = 18
 	label.modulate = Color.WHITE
+	label.no_depth_test = true
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.position.z = 0.015 * SCENE_SCALE
+	label.position.z = 0.02 * SCENE_SCALE
 	panel.add_child(label)
 	
 	return label
