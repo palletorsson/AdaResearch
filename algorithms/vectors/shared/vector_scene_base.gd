@@ -167,14 +167,74 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 	floor.position = Vector3(0.0, -0.05, 0.0) * SCENE_SCALE
 	environment_root.add_child(floor)
 
-func create_info_panel(text: String, position: Vector3) -> Label3D:
+## Creates a framed info panel with backing and border
+func create_info_panel(text: String, position: Vector3, size: Vector2 = Vector2(0.55, 0.18)) -> Label3D:
+	var panel = Node3D.new()
+	panel.name = "InfoPanel"
+	panel.position = position * SCENE_SCALE
+	info_root.add_child(panel)
+	
+	var scaled_size = size * SCENE_SCALE
+	
+	# Backing panel
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(scaled_size.x, scaled_size.y, 0.008 * SCENE_SCALE)
+	backing.mesh = box
+	
+	var back_mat = StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.05, 0.06, 0.08, 0.92)
+	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	back_mat.metallic = 0.15
+	back_mat.roughness = 0.85
+	backing.material_override = back_mat
+	backing.position.z = -0.005 * SCENE_SCALE
+	panel.add_child(backing)
+	
+	# Frame border
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.25, 0.28, 0.32)
+	frame_mat.metallic = 0.4
+	frame_mat.roughness = 0.5
+	
+	var thickness = 0.012 * SCENE_SCALE
+	var depth = 0.012 * SCENE_SCALE
+	var half_w = scaled_size.x / 2.0
+	var half_h = scaled_size.y / 2.0
+	
+	# Top and bottom edges
+	for y_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var edge_box = BoxMesh.new()
+		edge_box.size = Vector3(scaled_size.x + thickness * 2, thickness, depth)
+		edge.mesh = edge_box
+		edge.material_override = frame_mat
+		edge.position = Vector3(0, half_h * y_mult, -depth/2)
+		panel.add_child(edge)
+	
+	# Left and right edges
+	for x_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var edge_box = BoxMesh.new()
+		edge_box.size = Vector3(thickness, scaled_size.y, depth)
+		edge.mesh = edge_box
+		edge.material_override = frame_mat
+		edge.position = Vector3(half_w * x_mult, 0, -depth/2)
+		panel.add_child(edge)
+	
+	# Label
 	var label = Label3D.new()
+	label.name = "Label"
 	label.text = text
+	label.pixel_size = 0.0012
 	label.font_size = 16
-	label.modulate = Color.PALE_TURQUOISE
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = position * SCENE_SCALE
-	info_root.add_child(label)
+	label.modulate = Color(0.7, 0.95, 0.95)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position.z = 0.003 * SCENE_SCALE
+	panel.add_child(label)
+	
 	return label
 
 func create_ball(position: Vector3, radius: float = 0.18, mass: float = 1.0, color: Color = Color(0.9, 0.4, 0.8, 1.0)) -> RigidBody3D:
