@@ -272,7 +272,7 @@ func _input(event):
 			KEY_UP: noise_scale = minf(noise_scale + 0.5, 10.0)
 			KEY_DOWN: noise_scale = maxf(noise_scale - 0.5, 0.5)
 
-func set_scale(s: float):
+func set_noise_scale(s: float):
 	noise_scale = s
 
 func reset():
