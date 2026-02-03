@@ -4982,5 +4982,17 @@
     "schrodinger_box":  {
                             "description":  "Quantum superposition thought experiment",
                             "scene":  "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn"
-                        }
+                        },
+    "hyperbolic_surface":  {
+                               "description":  "Saddle surface - negative curvature",
+                               "scene":  "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn"
+                           },
+    "elliptic_surface":  {
+                             "description":  "Dome surface - positive curvature",
+                             "scene":  "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn"
+                         },
+    "riemann_sphere":  {
+                           "description":  "Compactified complex plane",
+                           "scene":  "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn"
+                       }
 }
