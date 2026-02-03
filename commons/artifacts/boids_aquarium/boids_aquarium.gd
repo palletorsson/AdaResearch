@@ -6,11 +6,11 @@ extends Node3D
 
 class_name BoidsAquarium
 
-## Tank dimensions
-@export var tank_size: Vector3 = Vector3(0.8, 0.6, 0.5)
+## Tank dimensions (1m cube)
+@export var tank_size: Vector3 = Vector3(1.0, 1.0, 1.0)
 
 ## Boid count
-@export_range(10, 200) var boid_count: int = 50
+@export_range(10, 200) var boid_count: int = 30
 
 ## Flocking parameters
 @export_group("Flocking")
@@ -32,12 +32,12 @@ class_name BoidsAquarium
 		_update_boid_params()
 		_sync_cohesion_slider()
 
-@export var max_speed: float = 1.0:
+@export var max_speed: float = 0.5:
 	set(value):
-		max_speed = clampf(value, 0.2, 3.0)
+		max_speed = clampf(value, 0.1, 1.5)
 		_update_boid_params()
 
-@export var perception_radius: float = 0.15
+@export var perception_radius: float = 0.2
 
 ## Visual
 @export_group("Visual")
