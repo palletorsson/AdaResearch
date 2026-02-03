@@ -225,7 +225,7 @@ func _create_vr_controls():
 		var m = presets[i][1]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _apply_matrix(m))
+			area.button_pressed.connect(func(_b): _apply_matrix(m))
 
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()

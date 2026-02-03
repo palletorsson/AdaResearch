@@ -214,7 +214,7 @@ func _create_vr_controls():
 		var pattern_idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _on_pattern_button(pattern_idx))
+			area.button_pressed.connect(func(_b): _on_pattern_button(pattern_idx))
 	
 	call_deferred("_sync_speed_slider")
 

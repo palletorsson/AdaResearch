@@ -230,7 +230,7 @@ func _create_vr_controls():
 		var rule_val = presets[i]
 		var area_btn = btn.get_node_or_null("InteractableAreaButton")
 		if area_btn:
-			area_btn.button_pressed.connect(func(): _on_preset_pressed(rule_val))
+			area_btn.button_pressed.connect(func(_b): _on_preset_pressed(rule_val))
 	
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()

@@ -211,7 +211,7 @@ func _create_vr_controls():
 	_add_button_label(preset_btn1, "FULL")
 	var area1 = preset_btn1.get_node_or_null("InteractableAreaButton")
 	if area1:
-		area1.button_pressed.connect(func(): _set_r_range(0.5, 4.0))
+		area1.button_pressed.connect(func(_b): _set_r_range(0.5, 4.0))
 	
 	var preset_btn2 = PUSH_BUTTON.instantiate()
 	preset_btn2.name = "PresetChaos"
@@ -221,7 +221,7 @@ func _create_vr_controls():
 	_add_button_label(preset_btn2, "CHAOS")
 	var area2 = preset_btn2.get_node_or_null("InteractableAreaButton")
 	if area2:
-		area2.button_pressed.connect(func(): _set_r_range(3.5, 4.0))
+		area2.button_pressed.connect(func(_b): _set_r_range(3.5, 4.0))
 	
 	var preset_btn3 = PUSH_BUTTON.instantiate()
 	preset_btn3.name = "PresetBifurc"
@@ -231,7 +231,7 @@ func _create_vr_controls():
 	_add_button_label(preset_btn3, "BIFUR")
 	var area3 = preset_btn3.get_node_or_null("InteractableAreaButton")
 	if area3:
-		area3.button_pressed.connect(func(): _set_r_range(2.8, 3.6))
+		area3.button_pressed.connect(func(_b): _set_r_range(2.8, 3.6))
 	
 	call_deferred("_sync_sliders_deferred")
 

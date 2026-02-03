@@ -227,7 +227,7 @@ func _create_vr_controls():
 		var phase = presets[i][1]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): phase_difference = phase)
+			area.button_pressed.connect(func(_b): phase_difference = phase)
 	
 	call_deferred("_sync_sliders")
 

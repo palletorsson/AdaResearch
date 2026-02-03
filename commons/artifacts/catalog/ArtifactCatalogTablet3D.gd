@@ -19,6 +19,7 @@ func _ready():
 	# Connect to UI signals after scene is ready
 	call_deferred("_connect_ui_signals")
 	call_deferred("_find_spawn_manager")
+	call_deferred("_ensure_viewport_updates")
 
 
 func _connect_ui_signals():
@@ -48,6 +49,21 @@ func _find_catalog_ui_recursive(node: Node) -> ArtifactCatalogUI:
 			return result
 
 	return null
+
+
+func _ensure_viewport_updates():
+	# Force the SubViewport to use UPDATE_ALWAYS mode for continuous rendering
+	if _viewport_2d_in_3d:
+		var viewport = _viewport_2d_in_3d.get_node_or_null("Viewport")
+		if viewport and viewport is SubViewport:
+			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+			print("ArtifactCatalogTablet3D: Set viewport to UPDATE_ALWAYS")
+
+		# Also try setting the update_mode property if it exists
+		if _viewport_2d_in_3d.has_method("set_update_mode"):
+			_viewport_2d_in_3d.set_update_mode(1)  # 1 = UPDATE_ALWAYS
+		elif "update_mode" in _viewport_2d_in_3d:
+			_viewport_2d_in_3d.update_mode = 1
 
 
 func _find_spawn_manager():

@@ -191,7 +191,7 @@ func _create_vr_controls():
 		var type_idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): distribution = type_idx as DistType)
+			area.button_pressed.connect(func(_b): distribution = type_idx as DistType)
 	
 	# Clear button
 	var clear_btn = PUSH_BUTTON.instantiate()

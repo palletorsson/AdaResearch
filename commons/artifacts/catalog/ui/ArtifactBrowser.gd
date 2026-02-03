@@ -43,12 +43,42 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 
 	for artifact in _current_artifacts:
 		var artifact_themes = artifact.get("dev_themes", [])
-		if artifact_themes.is_empty():
-			uncategorized.append(artifact)
-		else:
+		var matched_any_theme = false
+
+		if not artifact_themes.is_empty():
 			for artifact_theme in artifact_themes:
 				if artifacts_by_theme.has(artifact_theme):
 					artifacts_by_theme[artifact_theme].append(artifact)
+					matched_any_theme = true
+
+		# Add to uncategorized if no themes OR no matching themes found
+		if artifact_themes.is_empty() or not matched_any_theme:
+			uncategorized.append(artifact)
+
+	print("ArtifactBrowser: Populated with %d artifacts, %d uncategorized, %d themes" % [
+		_current_artifacts.size(), uncategorized.size(), all_themes.size()
+	])
+
+	# Add uncategorized artifacts FIRST (most artifacts are here)
+	# Limit initial display to prevent performance issues
+	const MAX_INITIAL_DISPLAY = 100
+
+	if not uncategorized.is_empty():
+		var uncategorized_item = _tree.create_item(root)
+		var display_count = mini(uncategorized.size(), MAX_INITIAL_DISPLAY)
+		var total_count = uncategorized.size()
+
+		if total_count > MAX_INITIAL_DISPLAY:
+			uncategorized_item.set_text(0, "All Artifacts (showing %d of %d - use search to filter)" % [display_count, total_count])
+		else:
+			uncategorized_item.set_text(0, "All Artifacts (%d)" % total_count)
+
+		uncategorized_item.set_selectable(0, false)
+		uncategorized_item.set_collapsed(false)  # Show expanded by default
+
+		# Only add first N items to prevent UI freeze
+		for i in range(display_count):
+			_add_artifact_item(uncategorized_item, uncategorized[i])
 
 	# Create theme categories
 	for theme in all_themes:
@@ -65,16 +95,11 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 		# Add artifacts in this theme
 		for artifact in theme_artifacts:
 			_add_artifact_item(theme_item, artifact)
-	
-	# Add uncategorized artifacts
-	if not uncategorized.is_empty():
-		var uncategorized_item = _tree.create_item(root)
-		uncategorized_item.set_text(0, "All Artifacts (%d)" % uncategorized.size())
-		uncategorized_item.set_selectable(0, false)
-		uncategorized_item.set_collapsed(true)
-		
-		for artifact in uncategorized:
-			_add_artifact_item(uncategorized_item, artifact)
+
+	# Force tree to repaint
+	_tree.queue_redraw()
+	queue_redraw()
+
 
 func _add_artifact_item(parent_item: TreeItem, artifact: Dictionary):
 	var item = _tree.create_item(parent_item)
@@ -91,8 +116,6 @@ func _add_artifact_item(parent_item: TreeItem, artifact: Dictionary):
 		item.set_tooltip_text(0, "Locked - complete sequences to unlock")
 	else:
 		item.set_tooltip_text(0, artifact.get("description", ""))
-
-	_update_stats()
 
 
 func _show_empty_message():

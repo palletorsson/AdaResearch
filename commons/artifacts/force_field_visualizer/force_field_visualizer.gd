@@ -188,7 +188,7 @@ func _create_vr_controls():
 		var type_idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): field_type = type_idx as FieldType)
+			area.button_pressed.connect(func(_b): field_type = type_idx as FieldType)
 	
 	# Strength slider
 	var strength_slider = SLIDER_HORIZONTAL.instantiate()

@@ -20,7 +20,8 @@ class_name BiasVisualizer
 @export_enum("Gender-Profession", "Gender-Trait", "Algorithmic Redlining") var analogy_type: int = 0:
 	set(value):
 		analogy_type = clampi(value, 0, 2)
-		_show_analogy()
+		if is_inside_tree():  # Only update if node is ready
+			_show_analogy()
 
 const WORD_DATA = {
 	"man": {"pos": Vector3(-0.4, 0.0, 0.0), "category": "gender_m"},
@@ -231,7 +232,7 @@ func _create_vr_controls():
 		var idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): analogy_type = idx)
+			area.button_pressed.connect(func(_b): analogy_type = idx)
 	
 	# Rotate toggle button
 	var rotate_btn = PUSH_BUTTON.instantiate()
@@ -242,7 +243,7 @@ func _create_vr_controls():
 	_add_button_label(rotate_btn, "ROT")
 	var rotate_area = rotate_btn.get_node_or_null("InteractableAreaButton")
 	if rotate_area:
-		rotate_area.button_pressed.connect(func(): _rotation_enabled = not _rotation_enabled)
+		rotate_area.button_pressed.connect(func(_b): _rotation_enabled = not _rotation_enabled)
 
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()

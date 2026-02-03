@@ -191,7 +191,7 @@ func _create_vr_controls():
 		var v = presets[i][2]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _set_orbit(r, v))
+			area.button_pressed.connect(func(_b): _set_orbit(r, v))
 	
 	# Time scale slider
 	var time_slider = SLIDER_HORIZONTAL.instantiate()

@@ -270,7 +270,7 @@ func _create_vr_controls():
 		var k = presets[i][3]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _apply_preset(a1, a2, k))
+			area.button_pressed.connect(func(_b): _apply_preset(a1, a2, k))
 	
 	call_deferred("_sync_coupling_slider")
 

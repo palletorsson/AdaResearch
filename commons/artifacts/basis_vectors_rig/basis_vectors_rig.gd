@@ -230,7 +230,7 @@ func _create_vr_controls():
 		var pt = presets[i][1]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _set_target_point(pt))
+			area.button_pressed.connect(func(_b): _set_target_point(pt))
 	
 	# Basis rotation presets
 	var rotations = [
@@ -250,7 +250,7 @@ func _create_vr_controls():
 		var b = rotations[i][1]
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): _set_basis(b))
+			area.button_pressed.connect(func(_b): _set_basis(b))
 
 func _add_button_label(btn: Node, text: String):
 	var lbl = Label3D.new()

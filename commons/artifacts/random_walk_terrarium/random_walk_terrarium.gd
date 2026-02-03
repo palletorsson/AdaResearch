@@ -178,7 +178,7 @@ func _create_vr_controls():
 		var mode_idx = i
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(): walk_mode = mode_idx as WalkMode)
+			area.button_pressed.connect(func(_b): walk_mode = mode_idx as WalkMode)
 	
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()

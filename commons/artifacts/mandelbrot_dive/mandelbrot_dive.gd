@@ -237,7 +237,7 @@ func _create_vr_controls():
 	_add_button_label(zoom_in_btn, "+")
 	var zoom_in_area = zoom_in_btn.get_node_or_null("InteractableAreaButton")
 	if zoom_in_area:
-		zoom_in_area.button_pressed.connect(func(): zoom *= 2.0)
+		zoom_in_area.button_pressed.connect(func(_b): zoom *= 2.0)
 	
 	var zoom_out_btn = PUSH_BUTTON.instantiate()
 	zoom_out_btn.name = "ZoomOutButton"
@@ -247,7 +247,7 @@ func _create_vr_controls():
 	_add_button_label(zoom_out_btn, "-")
 	var zoom_out_area = zoom_out_btn.get_node_or_null("InteractableAreaButton")
 	if zoom_out_area:
-		zoom_out_area.button_pressed.connect(func(): zoom /= 2.0)
+		zoom_out_area.button_pressed.connect(func(_b): zoom /= 2.0)
 	
 	# Auto-dive button
 	var dive_btn = PUSH_BUTTON.instantiate()
@@ -258,7 +258,7 @@ func _create_vr_controls():
 	_add_button_label(dive_btn, "DIVE")
 	var dive_area = dive_btn.get_node_or_null("InteractableAreaButton")
 	if dive_area:
-		dive_area.button_pressed.connect(func(): auto_zoom = not auto_zoom)
+		dive_area.button_pressed.connect(func(_b): auto_zoom = not auto_zoom)
 	
 	# Reset button
 	var reset_btn = PUSH_BUTTON.instantiate()
