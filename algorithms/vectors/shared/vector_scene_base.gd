@@ -246,6 +246,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	label.render_priority = 100
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.position.x = -scaled_size.x / 2.0 + 0.02 * SCENE_SCALE  # Left edge + margin
 	label.position.z = 0.02 * SCENE_SCALE
 	panel.add_child(label)
 	
