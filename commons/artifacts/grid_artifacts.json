@@ -3,6 +3,18 @@
 	"format": "lab_artifacts",
 	"description": "Artifact definitions for the Lab environment",
 	"artifacts": {
+		"boids_aquarium": {
+			"name": "Boids Aquarium",
+			"lookup_name": "boids_aquarium",
+			"description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion. The whole is greater than the sum of its parts.",
+			"scene": "res://commons/artifacts/boids_aquarium/boids_aquarium.tscn",
+			"category": "emergence",
+			"interaction": "observe",
+			"complexity": "intermediate",
+			"sequence": "swarmintelligence",
+			"qfep_connection": "Emergence at λ≈0.4 — simple rules create complex, unpredictable behavior without central control",
+			"tags": ["boids", "flocking", "emergence", "swarm", "reynolds", "collective_behavior", "self_organization"]
+		},
 		"vector_translation_demo": {
 			"name": "Vector Translation Demo",
 			"lookup_name": "vector_translation_demo",
