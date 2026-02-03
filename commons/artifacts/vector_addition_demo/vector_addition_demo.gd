@@ -10,27 +10,29 @@ extends Node3D
 class_name VectorAdditionDemo
 
 ## Display settings
-@export var max_vector_length: float = 1.0
-@export var arrow_thickness: float = 0.02
+@export var max_vector_length: float = 1.2
+@export var arrow_thickness: float = 0.025
 
 ## Vector A
-@export var vector_a: Vector3 = Vector3(0.5, 0.3, 0.0):
+@export var vector_a: Vector3 = Vector3(0.8, 0.3, -0.1):
 	set(value):
 		vector_a = value.limit_length(max_vector_length)
-		_update_vectors()
+		if is_inside_tree():
+			_update_vectors()
 
 ## Vector B  
-@export var vector_b: Vector3 = Vector3(0.2, 0.5, 0.3):
+@export var vector_b: Vector3 = Vector3(0.2, 0.7, 0.4):
 	set(value):
 		vector_b = value.limit_length(max_vector_length)
-		_update_vectors()
+		if is_inside_tree():
+			_update_vectors()
 
 ## Colors
-@export var color_a: Color = Color(1.0, 0.3, 0.3)  # Red
-@export var color_b: Color = Color(0.3, 0.5, 1.0)  # Blue
-@export var color_result: Color = Color(0.3, 1.0, 0.4)  # Green
-@export var color_ghost: Color = Color(0.5, 0.5, 0.5, 0.4)
-@export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.9)
+@export var color_a: Color = Color(0.9, 0.4, 0.3)  # Red-orange
+@export var color_b: Color = Color(0.3, 0.8, 0.9)  # Cyan
+@export var color_result: Color = Color(1.0, 0.95, 0.2)  # Yellow
+@export var color_ghost: Color = Color(0.6, 0.6, 0.6, 0.5)
+@export var panel_color: Color = Color(0.06, 0.06, 0.08, 0.92)
 
 var _arrow_a: Node3D
 var _arrow_b: Node3D
@@ -41,6 +43,18 @@ var _handle_a: Node3D
 var _handle_b: Node3D
 var _title_panel: Node3D
 var _formula_panel: Node3D
+
+# Vector labels
+var _label_a: Label3D
+var _label_b: Label3D
+var _label_result: Label3D
+var _label_a_ghost: Label3D
+var _label_b_ghost: Label3D
+
+# Coordinate axes
+var _axis_x: Node3D
+var _axis_y: Node3D
+var _axis_z: Node3D
 
 # VR Controls
 var _control_panel: Node3D
@@ -122,7 +136,9 @@ func _get_panel_label(panel: Node3D) -> Label3D:
 
 func _ready():
 	_create_base()
+	_create_coordinate_axes()
 	_create_arrows()
+	_create_vector_labels()
 	_create_handles()
 	_create_labels()
 	_create_vr_controls()
@@ -158,6 +174,103 @@ func _create_base():
 	origin_mat.emission_energy_multiplier = 0.3
 	origin.material_override = origin_mat
 	add_child(origin)
+
+func _create_coordinate_axes():
+	var axis_length = max_vector_length * 1.5
+	var axis_thickness = 0.008
+	
+	_axis_x = _create_axis_line("AxisX", Vector3(axis_length, 0, 0), Color(1.0, 0.3, 0.3, 0.6), "X")
+	_axis_y = _create_axis_line("AxisY", Vector3(0, axis_length, 0), Color(0.3, 1.0, 0.3, 0.6), "Y")
+	_axis_z = _create_axis_line("AxisZ", Vector3(0, 0, axis_length), Color(0.3, 0.5, 1.0, 0.6), "Z")
+	
+	add_child(_axis_x)
+	add_child(_axis_y)
+	add_child(_axis_z)
+
+func _create_axis_line(axis_name: String, direction: Vector3, color: Color, label_text: String) -> Node3D:
+	var axis = Node3D.new()
+	axis.name = axis_name
+	
+	var length = direction.length()
+	var shaft = MeshInstance3D.new()
+	var cylinder = CylinderMesh.new()
+	cylinder.top_radius = 0.006
+	cylinder.bottom_radius = 0.006
+	cylinder.height = length
+	shaft.mesh = cylinder
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	shaft.material_override = mat
+	
+	# Position shaft at midpoint
+	var norm = direction.normalized()
+	shaft.position = direction / 2.0
+	
+	# Orient - default cylinder points up (+Y)
+	if abs(norm.dot(Vector3.UP)) < 0.99:
+		var up = Vector3.UP
+		shaft.look_at(shaft.global_position + direction, up)
+		shaft.rotate_object_local(Vector3.RIGHT, PI/2)
+	elif norm.y < 0:
+		shaft.rotation_degrees.z = 180
+	
+	axis.add_child(shaft)
+	
+	# Arrow head
+	var head = MeshInstance3D.new()
+	var cone = CylinderMesh.new()
+	cone.top_radius = 0.0
+	cone.bottom_radius = 0.015
+	cone.height = 0.04
+	head.mesh = cone
+	head.material_override = mat
+	head.position = direction
+	
+	if abs(norm.dot(Vector3.UP)) < 0.99:
+		head.look_at(head.global_position + direction, Vector3.UP)
+		head.rotate_object_local(Vector3.RIGHT, -PI/2)
+	elif norm.y < 0:
+		head.rotation_degrees.z = 180
+	
+	axis.add_child(head)
+	
+	# Label
+	var lbl = Label3D.new()
+	lbl.text = label_text
+	lbl.pixel_size = 0.002
+	lbl.font_size = 18
+	lbl.modulate = color
+	lbl.position = direction + norm * 0.06
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	axis.add_child(lbl)
+	
+	return axis
+
+func _create_vector_labels():
+	_label_a = _create_vector_label("A", color_a)
+	_label_b = _create_vector_label("B", color_b)
+	_label_result = _create_vector_label("A+B", color_result)
+	_label_a_ghost = _create_vector_label("A", color_ghost)
+	_label_b_ghost = _create_vector_label("B", color_ghost)
+	
+	add_child(_label_a)
+	add_child(_label_b)
+	add_child(_label_result)
+	add_child(_label_a_ghost)
+	add_child(_label_b_ghost)
+
+func _create_vector_label(text: String, color: Color) -> Label3D:
+	var label = Label3D.new()
+	label.text = text
+	label.pixel_size = 0.0018
+	label.font_size = 16
+	label.modulate = color
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.outline_size = 6
+	label.outline_modulate = Color(0, 0, 0, 0.7)
+	return label
 
 func _create_arrows():
 	_arrow_a = _create_arrow("ArrowA", color_a)
@@ -252,32 +365,34 @@ func _create_handle(handle_name: String, color: Color) -> Node3D:
 	return handle
 
 func _create_labels():
-	# Title panel - top
+	# Title panel - positioned to face player (who looks from +Z toward origin)
 	_title_panel = _create_text_panel(
 		"TitlePanel",
 		"VECTOR ADDITION",
-		Vector3(0, max_vector_length + 0.18, 0),
-		Vector2(0.32, 0.06),
-		20
+		Vector3(0, max_vector_length + 0.25, -0.3),
+		Vector2(0.36, 0.07),
+		22
 	)
+	# Rotate to face +Z (toward player)
+	_title_panel.rotation_degrees = Vector3(0, 180, 0)
 	add_child(_title_panel)
 	
-	# Formula panel - front
+	# Formula panel - to the side, angled toward player
 	_formula_panel = _create_text_panel(
 		"FormulaPanel",
 		"",
-		Vector3(0, 0.02, max_vector_length + 0.18),
-		Vector2(0.4, 0.12),
+		Vector3(-max_vector_length - 0.15, max_vector_length * 0.6, 0),
+		Vector2(0.42, 0.16),
 		14
 	)
-	_formula_panel.rotation_degrees = Vector3(-25, 0, 0)
+	_formula_panel.rotation_degrees = Vector3(0, 90, 0)
 	add_child(_formula_panel)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.04, max_vector_length + 0.25)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	_control_panel.position = Vector3(0, 0.06, max_vector_length + 0.4)
+	_control_panel.rotation_degrees = Vector3(-35, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel backing
@@ -294,10 +409,10 @@ func _create_vr_controls():
 	
 	# Preset buttons
 	var presets = [
-		["ORTHO", Vector3(0.5, 0, 0), Vector3(0, 0.5, 0)],
-		["ACUTE", Vector3(0.6, 0.2, 0), Vector3(0.2, 0.6, 0)],
-		["3D", Vector3(0.4, 0.3, 0.2), Vector3(0.2, 0.4, 0.5)],
-		["RESET", Vector3(0.5, 0.3, 0), Vector3(0.2, 0.5, 0.3)]
+		["ORTHO", Vector3(0.9, 0, 0), Vector3(0, 0.8, 0)],
+		["ACUTE", Vector3(0.8, 0.3, 0), Vector3(0.3, 0.8, 0)],
+		["3D", Vector3(0.7, 0.4, 0.3), Vector3(0.3, 0.6, 0.5)],
+		["RESET", Vector3(0.8, 0.3, -0.1), Vector3(0.2, 0.7, 0.4)]
 	]
 	
 	for i in range(presets.size()):
@@ -346,6 +461,15 @@ func _update_vectors():
 	# Ghost B (from tip of A)
 	_position_arrow(_arrow_b_ghost, vector_a, vector_a + vector_b)
 	
+	# Update vector labels at midpoints
+	_label_a.position = vector_a * 0.5 + Vector3(0.03, 0.03, 0)
+	_label_b.position = vector_b * 0.5 + Vector3(0.03, 0.03, 0)
+	_label_result.position = result * 0.5 + Vector3(0.04, 0.04, 0)
+	
+	# Ghost labels at midpoints of ghost arrows
+	_label_a_ghost.position = vector_b + vector_a * 0.5 + Vector3(0.03, 0.03, 0)
+	_label_b_ghost.position = vector_a + vector_b * 0.5 + Vector3(0.03, 0.03, 0)
+	
 	# Update formula
 	_update_formula(result)
 
@@ -381,11 +505,10 @@ func _position_arrow(arrow: Node3D, start: Vector3, end: Vector3):
 func _update_formula(result: Vector3):
 	var label = _get_panel_label(_formula_panel)
 	if label:
-		label.text = "A = (%.2f, %.2f, %.2f)\nB = (%.2f, %.2f, %.2f)\nA + B = (%.2f, %.2f, %.2f)" % [
-			vector_a.x, vector_a.y, vector_a.z,
-			vector_b.x, vector_b.y, vector_b.z,
-			result.x, result.y, result.z
-		]
+		label.text = "A = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
+		label.text += "B = (%.2f, %.2f, %.2f)\n" % [vector_b.x, vector_b.y, vector_b.z]
+		label.text += "A + B = (%.2f, %.2f, %.2f)\n" % [result.x, result.y, result.z]
+		label.text += "|A + B| = %.2f" % result.length()
 
 func _process(_delta):
 	# Check if handles moved (for future grabbable implementation)
@@ -398,13 +521,13 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:
-				_apply_preset(Vector3(0.5, 0, 0), Vector3(0, 0.5, 0))
+				_apply_preset(Vector3(0.9, 0, 0), Vector3(0, 0.8, 0))
 			KEY_2:
-				_apply_preset(Vector3(0.6, 0.2, 0), Vector3(0.2, 0.6, 0))
+				_apply_preset(Vector3(0.8, 0.3, 0), Vector3(0.3, 0.8, 0))
 			KEY_3:
-				_apply_preset(Vector3(0.4, 0.3, 0.2), Vector3(0.2, 0.4, 0.5))
+				_apply_preset(Vector3(0.7, 0.4, 0.3), Vector3(0.3, 0.6, 0.5))
 			KEY_R:
-				_apply_preset(Vector3(0.5, 0.3, 0), Vector3(0.2, 0.5, 0.3))
+				_apply_preset(Vector3(0.8, 0.3, -0.1), Vector3(0.2, 0.7, 0.4))
 
 func set_vectors(a: Vector3, b: Vector3):
 	vector_a = a
