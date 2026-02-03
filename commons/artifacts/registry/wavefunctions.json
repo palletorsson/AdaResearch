@@ -511,10 +511,10 @@
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
 			"category": "waves"
 		},
-		"DoubleHelix": {
-			"name": "DoubleHelix",
-			"lookup_name": "DoubleHelix",
-			"description": "DNA-like double helix structure",
+		"double_helix_oscillator": {
+			"name": "Double Helix Oscillator",
+			"lookup_name": "double_helix_oscillator",
+			"description": "DNA-like double helix structure (oscillation-driven variant)",
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn",
 			"category": "waves"
 		},
