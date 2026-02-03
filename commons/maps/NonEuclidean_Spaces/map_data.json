@@ -1,0 +1,97 @@
+{
+	"map_info": {
+		"name": "Non-Euclidean Spaces",
+		"lookup_name": "NonEuclidean_Spaces",
+		"description": "What happens when parallel lines meet? Or diverge infinitely? Walk through hyperbolic and elliptic geometries where the sum of angles in a triangle isn't 180°.",
+		"version": "1.0",
+		"format": "json",
+		"dimensions": {
+			"width": 13,
+			"depth": 11,
+			"max_height": 4
+		},
+		"metadata": {
+			"difficulty": "advanced",
+			"category": "foundations",
+			"estimated_time": "5-6 minutes",
+			"learning_objectives": [
+				"Experience hyperbolic space (negative curvature)",
+				"Experience elliptic space (positive curvature)",
+				"See triangle angle sums change with curvature",
+				"Understand that geometry is a choice, not a truth"
+			]
+		}
+	},
+	"audio": {
+		"ambient_preset": "void_ambient",
+		"volume": -8.0
+	},
+	"layers": {
+		"structure": [
+			["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
+			["2", "2", "2", "2", "2", "2", "0", "2", "2", "2", "2", "2", "2"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "s:1:1:1", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " ", " "]
+		],
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "hyperbolic_surface:0:0.5:1", " ", " ", " ", " ", " ", " ", "elliptic_surface:0:0.5:1", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "curvature_slider:0:0.5", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "poincare_disk:0:0.8", " ", " ", " ", " ", " ", " ", "riemann_sphere:0:0.8", " ", " "],
+			[" ", " ", " ", " ", "tt:noneuclidean_technical:180:0.5", " ", " ", " ", "tt:noneuclidean_critical:180:0.5", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Continue",
+			"description": "To the paradox of self-reference",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"lighting": {
+		"ambient_color": [0.1, 0.1, 0.2],
+		"ambient_energy": 0.4,
+		"directional_light": {
+			"enabled": true,
+			"direction": [-0.3, -0.8, -0.3],
+			"color": [0.7, 0.7, 1.0],
+			"energy": 0.7
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"background": {
+			"type": "sky",
+			"color": [0.02, 0.02, 0.08]
+		}
+	}
+}
