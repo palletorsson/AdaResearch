@@ -1,6 +1,6 @@
 # bias_visualizer.gd
 # Demonstrates bias in word embeddings
-# Joy Buolamwini's "Coded Gaze" made visible
+# VR-enabled with button controls for analogy selection
 
 extends Node3D
 
@@ -17,33 +17,26 @@ class_name BiasVisualizer
 @export var profession_color: Color = Color(1.0, 0.8, 0.2)
 
 ## Current analogy
-@export_enum("Gender-Profession", "Gender-Trait", "Race-Crime", "Custom") var analogy_type: int = 0:
+@export_enum("Gender-Profession", "Gender-Trait", "Algorithmic Redlining") var analogy_type: int = 0:
 	set(value):
-		analogy_type = value
+		analogy_type = clampi(value, 0, 2)
 		_show_analogy()
 
-# Word data: simplified 3D positions showing bias relationships
-# Based on real Word2Vec/GloVe patterns
 const WORD_DATA = {
-	# Gender axis
 	"man": {"pos": Vector3(-0.4, 0.0, 0.0), "category": "gender_m"},
 	"woman": {"pos": Vector3(0.4, 0.0, 0.0), "category": "gender_f"},
 	"he": {"pos": Vector3(-0.35, 0.1, 0.05), "category": "gender_m"},
 	"she": {"pos": Vector3(0.35, 0.1, 0.05), "category": "gender_f"},
 	"king": {"pos": Vector3(-0.3, 0.3, 0.1), "category": "gender_m"},
 	"queen": {"pos": Vector3(0.3, 0.3, 0.1), "category": "gender_f"},
-	
-	# Professions (biased positions)
-	"doctor": {"pos": Vector3(-0.2, 0.2, 0.3), "category": "profession"},  # Closer to male
-	"nurse": {"pos": Vector3(0.25, 0.15, 0.3), "category": "profession"},   # Closer to female
+	"doctor": {"pos": Vector3(-0.2, 0.2, 0.3), "category": "profession"},
+	"nurse": {"pos": Vector3(0.25, 0.15, 0.3), "category": "profession"},
 	"engineer": {"pos": Vector3(-0.3, 0.1, 0.35), "category": "profession"},
 	"teacher": {"pos": Vector3(0.15, 0.2, 0.25), "category": "profession"},
 	"CEO": {"pos": Vector3(-0.35, 0.25, 0.4), "category": "profession"},
 	"secretary": {"pos": Vector3(0.3, 0.1, 0.35), "category": "profession"},
 	"programmer": {"pos": Vector3(-0.25, 0.05, 0.3), "category": "profession"},
 	"homemaker": {"pos": Vector3(0.35, 0.0, 0.25), "category": "profession"},
-	
-	# Traits (biased)
 	"strong": {"pos": Vector3(-0.2, -0.2, 0.2), "category": "trait"},
 	"gentle": {"pos": Vector3(0.2, -0.2, 0.2), "category": "trait"},
 	"logical": {"pos": Vector3(-0.25, -0.1, 0.25), "category": "trait"},
@@ -52,29 +45,22 @@ const WORD_DATA = {
 	"nurturing": {"pos": Vector3(0.3, -0.2, 0.15), "category": "trait"},
 }
 
-# Analogies to demonstrate
 const ANALOGIES = {
-	0: {  # Gender-Profession
+	0: {
 		"title": "GENDER → PROFESSION BIAS",
 		"equation": "man - woman + nurse = ?",
-		"expected": "doctor",
-		"actual": "doctor (biased)",
 		"words": ["man", "woman", "doctor", "nurse", "engineer", "secretary", "CEO", "homemaker"],
 		"explanation": "Professions cluster by gender.\nWho was in the training data?"
 	},
-	1: {  # Gender-Trait
+	1: {
 		"title": "GENDER → TRAIT BIAS",
 		"equation": "he - she + emotional = ?",
-		"expected": "logical",
-		"actual": "logical (stereotyped)",
 		"words": ["man", "woman", "he", "she", "strong", "gentle", "logical", "emotional"],
 		"explanation": "Traits encode stereotypes.\nThe model learned our prejudices."
 	},
-	2: {  # Race-Crime (sensitive)
+	2: {
 		"title": "ALGORITHMIC REDLINING",
 		"equation": "The ZIP code proxy",
-		"expected": "neutral",
-		"actual": "discrimination",
 		"words": ["man", "woman", "doctor", "nurse", "CEO", "secretary"],
 		"explanation": "Bias isn't always explicit.\nProxies encode discrimination.\n(Safiya Noble, Ruha Benjamin)"
 	},
@@ -86,12 +72,17 @@ var _connection_instance: MeshInstance3D
 var _title_label: Label3D
 var _equation_label: Label3D
 var _explanation_label: Label3D
+var _control_panel: Node3D
+var _rotation_enabled: bool = false
+
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_base()
 	_create_labels()
 	_create_word_cloud()
 	_create_connections()
+	_create_vr_controls()
 	_show_analogy()
 
 func _create_base():
@@ -111,7 +102,7 @@ func _create_base():
 	base.position = Vector3(0, -0.01, 0)
 	add_child(base)
 	
-	# Gender axis indicator
+	# Gender axis indicators
 	var axis_label_m = Label3D.new()
 	axis_label_m.text = "♂"
 	axis_label_m.pixel_size = 0.003
@@ -151,21 +142,11 @@ func _create_labels():
 	_explanation_label.position = Vector3(0, 0.05, display_size * 0.55)
 	_explanation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_explanation_label)
-	
-	var hint = Label3D.new()
-	hint.name = "ControlsHint"
-	hint.pixel_size = 0.001
-	hint.font_size = 18
-	hint.text = "1-3 Analogies | Space Rotate"
-	hint.position = Vector3(0, -0.03, display_size * 0.6)
-	hint.modulate = Color(0.5, 0.5, 0.5)
-	add_child(hint)
 
 func _create_word_cloud():
 	for word in WORD_DATA.keys():
 		var data = WORD_DATA[word]
 		
-		# Create sphere for word
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = word_scale
 		sphere_mesh.height = word_scale * 2
@@ -174,7 +155,6 @@ func _create_word_cloud():
 		node.name = "Word_" + word
 		node.mesh = sphere_mesh
 		
-		# Color based on category
 		var mat = StandardMaterial3D.new()
 		match data.category:
 			"gender_m":
@@ -195,7 +175,6 @@ func _create_word_cloud():
 		node.visible = false
 		add_child(node)
 		
-		# Label for word
 		var label = Label3D.new()
 		label.text = word
 		label.pixel_size = 0.0015
@@ -221,34 +200,78 @@ func _create_connections():
 	
 	add_child(_connection_instance)
 
+func _create_vr_controls():
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, 0.04, display_size * 0.6 + 0.12)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	add_child(_control_panel)
+	
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.4, 0.1, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
+	
+	# Three analogy buttons
+	var labels = ["PROF", "TRAIT", "REDLN"]
+	for i in range(3):
+		var btn = PUSH_BUTTON.instantiate()
+		btn.name = "AnalogyButton%d" % i
+		btn.position = Vector3(-0.12 + i * 0.12, 0, 0.015)
+		_control_panel.add_child(btn)
+		_add_button_label(btn, labels[i])
+		
+		var idx = i
+		var area = btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(): analogy_type = idx)
+	
+	# Rotate toggle button
+	var rotate_btn = PUSH_BUTTON.instantiate()
+	rotate_btn.name = "RotateButton"
+	rotate_btn.position = Vector3(0.16, 0, 0.015)
+	_control_panel.add_child(rotate_btn)
+	_add_button_label(rotate_btn, "ROT")
+	var rotate_area = rotate_btn.get_node_or_null("InteractableAreaButton")
+	if rotate_area:
+		rotate_area.button_pressed.connect(func(): _rotation_enabled = not _rotation_enabled)
+
+func _add_button_label(btn: Node, text: String):
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.001
+	lbl.font_size = 10
+	lbl.position = Vector3(0, -0.025, 0.01)
+	btn.add_child(lbl)
+
 func _show_analogy():
-	# Hide all words first
 	for word in _word_nodes.keys():
 		_word_nodes[word].sphere.visible = false
 		_word_nodes[word].label.visible = false
 	
-	# Get current analogy data
 	var analogy = ANALOGIES.get(analogy_type, ANALOGIES[0])
 	
-	# Show relevant words
 	for word in analogy.words:
 		if _word_nodes.has(word):
 			_word_nodes[word].sphere.visible = true
 			_word_nodes[word].label.visible = true
 	
-	# Update labels
 	_title_label.text = analogy.title
 	_equation_label.text = analogy.equation
 	_explanation_label.text = analogy.explanation
 	
-	# Draw connections
 	_draw_connections(analogy.words)
 
 func _draw_connections(words: Array):
 	_connection_lines.clear_surfaces()
 	_connection_lines.surface_begin(Mesh.PRIMITIVE_LINES)
 	
-	# Connect gender pairs
 	var pairs = [["man", "woman"], ["he", "she"], ["king", "queen"]]
 	for pair in pairs:
 		if pair[0] in words and pair[1] in words:
@@ -258,12 +281,10 @@ func _draw_connections(words: Array):
 			_connection_lines.surface_add_vertex(p1)
 			_connection_lines.surface_add_vertex(p2)
 	
-	# Draw bias lines (professions to gender axis)
 	var professions = ["doctor", "nurse", "engineer", "secretary", "CEO", "homemaker"]
 	for prof in professions:
 		if prof in words and WORD_DATA.has(prof):
 			var prof_pos = WORD_DATA[prof].pos * display_size
-			# Line to nearest gender word
 			var nearest = "man" if prof_pos.x < 0 else "woman"
 			if nearest in words:
 				var gender_pos = WORD_DATA[nearest].pos * display_size
@@ -274,8 +295,6 @@ func _draw_connections(words: Array):
 				_connection_lines.surface_add_vertex(gender_pos)
 	
 	_connection_lines.surface_end()
-
-var _rotation_enabled: bool = false
 
 func _process(delta):
 	if _rotation_enabled:

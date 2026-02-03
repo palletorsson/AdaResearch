@@ -1,6 +1,6 @@
 # lsystem_editor.gd
-# Interactive L-system viewer with presets
-# Grammar as a generative tool - from axiom to tree
+# Interactive L-system viewer with VR controls
+# Grammar as a generative tool
 
 extends Node3D
 
@@ -13,16 +13,25 @@ class_name LSystemEditor
 
 ## L-system parameters
 @export var axiom: String = "F"
-@export var angle_degrees: float = 25.0
-@export var generations: int = 4
+@export var angle_degrees: float = 25.0:
+	set(value):
+		angle_degrees = clampf(value, 5.0, 90.0)
+		_generate()
+		_sync_angle_slider()
+
+@export var generations: int = 4:
+	set(value):
+		generations = clampi(value, 1, 10)
+		_generate()
+		_sync_gen_slider()
 
 ## Current preset
-@export_enum("Koch Curve", "Sierpinski", "Dragon Curve", "Plant", "Bush", "Fern", "Binary Tree", "Custom") var preset: int = 3:
+@export_enum("Koch Curve", "Sierpinski", "Dragon Curve", "Plant", "Bush", "Fern", "Binary Tree") var preset: int = 3:
 	set(value):
-		preset = value
+		preset = clampi(value, 0, 6)
 		_apply_preset()
+		_sync_preset_slider()
 
-# Preset definitions: [axiom, rules_dict, angle, recommended_generations]
 const PRESETS = {
 	0: ["F", {"F": "F+F-F-F+F"}, 90.0, 4, "Koch Curve"],
 	1: ["F-G-G", {"F": "F-G+F+G-F", "G": "GG"}, 120.0, 5, "Sierpinski"],
@@ -33,21 +42,26 @@ const PRESETS = {
 	6: ["F", {"F": "G[+F]-F", "G": "GG"}, 45.0, 6, "Binary Tree"],
 }
 
-# Rules dictionary
 var _rules: Dictionary = {}
-
-# Generated string
 var _current_string: String = ""
-
-# Visualization
 var _mesh_instance: MeshInstance3D
 var _immediate_mesh: ImmediateMesh
 var _info_label: Label3D
+
+# VR Controls
+var _preset_slider: Node
+var _gen_slider: Node
+var _angle_slider: Node
+var _control_panel: Node3D
+
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_display()
 	_create_base()
 	_create_labels()
+	_create_vr_controls()
 	_apply_preset()
 
 func _create_display():
@@ -91,15 +105,92 @@ func _create_labels():
 	_info_label.font_size = 24
 	_info_label.position = Vector3(0, display_size + 0.1, 0)
 	add_child(_info_label)
+
+func _create_vr_controls():
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, 0.04, display_size * 0.5 + 0.15)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	add_child(_control_panel)
 	
-	var hint = Label3D.new()
-	hint.name = "ControlsHint"
-	hint.pixel_size = 0.001
-	hint.font_size = 18
-	hint.text = "1-7 Presets | ←→ Generations | ↑↓ Angle"
-	hint.position = Vector3(0, -0.05, display_size * 0.5)
-	hint.modulate = Color(0.6, 0.6, 0.6)
-	add_child(hint)
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.5, 0.2, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
+	
+	# Preset slider (0-6)
+	_preset_slider = SLIDER_HORIZONTAL.instantiate()
+	_preset_slider.name = "PresetSlider"
+	_preset_slider.position = Vector3(0, 0.055, 0.015)
+	var preset_label = _preset_slider.get_node_or_null("Frame/LabelName")
+	if preset_label:
+		preset_label.text = "PRESET"
+	_control_panel.add_child(_preset_slider)
+	_preset_slider.slider_moved.connect(_on_preset_slider_moved)
+	
+	# Generation slider (1-10)
+	_gen_slider = SLIDER_HORIZONTAL.instantiate()
+	_gen_slider.name = "GenSlider"
+	_gen_slider.position = Vector3(-0.12, -0.02, 0.015)
+	var gen_label = _gen_slider.get_node_or_null("Frame/LabelName")
+	if gen_label:
+		gen_label.text = "GEN"
+	_control_panel.add_child(_gen_slider)
+	_gen_slider.slider_moved.connect(_on_gen_slider_moved)
+	
+	# Angle slider (5-90)
+	_angle_slider = SLIDER_HORIZONTAL.instantiate()
+	_angle_slider.name = "AngleSlider"
+	_angle_slider.position = Vector3(0.12, -0.02, 0.015)
+	var angle_label = _angle_slider.get_node_or_null("Frame/LabelName")
+	if angle_label:
+		angle_label.text = "ANGLE"
+	_control_panel.add_child(_angle_slider)
+	_angle_slider.slider_moved.connect(_on_angle_slider_moved)
+	
+	call_deferred("_sync_sliders_deferred")
+
+func _sync_sliders_deferred():
+	_sync_preset_slider()
+	_sync_gen_slider()
+	_sync_angle_slider()
+
+func _sync_preset_slider():
+	if _preset_slider and _preset_slider.has_method("set_normalized_value"):
+		_preset_slider.set_normalized_value(float(preset) / 6.0)
+
+func _sync_gen_slider():
+	if _gen_slider and _gen_slider.has_method("set_normalized_value"):
+		_gen_slider.set_normalized_value(float(generations - 1) / 9.0)
+
+func _sync_angle_slider():
+	if _angle_slider and _angle_slider.has_method("set_normalized_value"):
+		_angle_slider.set_normalized_value((angle_degrees - 5.0) / 85.0)
+
+func _on_preset_slider_moved(_position):
+	if _preset_slider and _preset_slider.has_method("get_normalized_value"):
+		var norm = _preset_slider.get_normalized_value()
+		var new_preset = int(norm * 6.99)
+		if new_preset != preset:
+			preset = new_preset
+
+func _on_gen_slider_moved(_position):
+	if _gen_slider and _gen_slider.has_method("get_normalized_value"):
+		var norm = _gen_slider.get_normalized_value()
+		var new_gen = 1 + int(norm * 9.99)
+		if new_gen != generations:
+			generations = new_gen
+
+func _on_angle_slider_moved(_position):
+	if _angle_slider and _angle_slider.has_method("get_normalized_value"):
+		var norm = _angle_slider.get_normalized_value()
+		angle_degrees = 5.0 + norm * 85.0
 
 func _apply_preset():
 	if preset >= 0 and preset < PRESETS.size():
@@ -107,12 +198,12 @@ func _apply_preset():
 		axiom = p[0]
 		_rules = p[1].duplicate()
 		angle_degrees = p[2]
-		generations = p[3]
+		generations = mini(p[3], 10)
 	
 	_generate()
+	call_deferred("_sync_sliders_deferred")
 
 func _generate():
-	# Generate the L-system string
 	_current_string = axiom
 	
 	for _gen in range(generations):
@@ -123,8 +214,10 @@ func _generate():
 			else:
 				new_string += c
 		_current_string = new_string
+		# Limit string length for performance
+		if _current_string.length() > 100000:
+			break
 	
-	# Draw the result
 	_draw_lsystem()
 	_update_info()
 
@@ -134,16 +227,12 @@ func _draw_lsystem():
 	if _current_string.length() == 0:
 		return
 	
-	# Turtle state
 	var pos = Vector3.ZERO
 	var dir = Vector3.UP
 	var right = Vector3.RIGHT
 	var stack: Array = []
 	
-	# Calculate line length based on string length
 	var line_length = minf(max_line_length, display_size / pow(_current_string.length(), 0.4))
-	
-	# Collect all line segments first
 	var lines: Array[Vector3] = []
 	var min_bounds = Vector3.INF
 	var max_bounds = -Vector3.INF
@@ -152,37 +241,36 @@ func _draw_lsystem():
 	
 	for c in _current_string:
 		match c:
-			"F", "G":  # Forward (draw)
+			"F", "G":
 				var new_pos = pos + dir * line_length
 				lines.append(pos)
 				lines.append(new_pos)
 				pos = new_pos
 				min_bounds = min_bounds.min(pos)
 				max_bounds = max_bounds.max(pos)
-			"f":  # Forward (no draw)
+			"f":
 				pos += dir * line_length
-			"+":  # Turn left
+			"+":
 				var axis = dir.cross(right).normalized()
 				if axis.length() < 0.1:
 					axis = Vector3.FORWARD
 				dir = dir.rotated(axis, angle_rad)
 				right = right.rotated(axis, angle_rad)
-			"-":  # Turn right
+			"-":
 				var axis = dir.cross(right).normalized()
 				if axis.length() < 0.1:
 					axis = Vector3.FORWARD
 				dir = dir.rotated(axis, -angle_rad)
 				right = right.rotated(axis, -angle_rad)
-			"[":  # Push state
+			"[":
 				stack.append([pos, dir, right])
-			"]":  # Pop state
+			"]":
 				if stack.size() > 0:
 					var state = stack.pop_back()
 					pos = state[0]
 					dir = state[1]
 					right = state[2]
 	
-	# Calculate scale and offset to fit in display area
 	var bounds_size = max_bounds - min_bounds
 	var max_dim = maxf(maxf(bounds_size.x, bounds_size.y), bounds_size.z)
 	if max_dim < 0.001:
@@ -191,14 +279,12 @@ func _draw_lsystem():
 	var scale_factor = display_size * 0.8 / max_dim
 	var center = (min_bounds + max_bounds) / 2.0
 	
-	# Draw scaled lines
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	for i in range(0, lines.size(), 2):
 		var p1 = (lines[i] - center) * scale_factor
 		var p2 = (lines[i + 1] - center) * scale_factor
 		
-		# Color gradient based on height
 		var t1 = clampf((p1.y + display_size * 0.4) / display_size, 0, 1)
 		var t2 = clampf((p2.y + display_size * 0.4) / display_size, 0, 1)
 		
@@ -217,49 +303,29 @@ func _update_info():
 	if preset < PRESETS.size():
 		name = PRESETS[preset][4]
 	
-	_info_label.text = "%s\nGen: %d | Angle: %.1f°\nChars: %d" % [
-		name, generations, angle_degrees, _current_string.length()
-	]
+	_info_label.text = "%s\nGen: %d | Angle: %.1f°" % [name, generations, angle_degrees]
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
-			KEY_1:
-				preset = 0
-			KEY_2:
-				preset = 1
-			KEY_3:
-				preset = 2
-			KEY_4:
-				preset = 3
-			KEY_5:
-				preset = 4
-			KEY_6:
-				preset = 5
-			KEY_7:
-				preset = 6
+			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7:
+				preset = event.keycode - KEY_1
 			KEY_LEFT:
 				generations = maxi(1, generations - 1)
-				_generate()
 			KEY_RIGHT:
-				generations = mini(12, generations + 1)
-				_generate()
+				generations = mini(10, generations + 1)
 			KEY_UP:
 				angle_degrees += 5.0
-				_generate()
 			KEY_DOWN:
 				angle_degrees = maxf(5.0, angle_degrees - 5.0)
-				_generate()
 
-## Set rules programmatically
 func set_rules(new_axiom: String, new_rules: Dictionary, new_angle: float = 25.0, new_generations: int = 4):
 	axiom = new_axiom
 	_rules = new_rules.duplicate()
 	angle_degrees = new_angle
 	generations = new_generations
-	preset = 7  # Custom
+	preset = 7
 	_generate()
 
-## Get current generated string
 func get_string() -> String:
 	return _current_string

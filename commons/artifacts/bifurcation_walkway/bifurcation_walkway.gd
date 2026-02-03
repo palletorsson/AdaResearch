@@ -1,293 +1,345 @@
 # bifurcation_walkway.gd
-# A walkable corridor where X position = r parameter in the logistic map
-# Walk through the phase transition: stable → period doubling → chaos
+# Vertical display showing the bifurcation diagram (logistic map)
+# VR-enabled with parameter controls
 
 extends Node3D
 
 class_name BifurcationWalkway
 
-## Walkway dimensions
-@export var walkway_length: float = 10.0
-@export var walkway_width: float = 2.0
-@export var walkway_height: float = 3.0
+## Display dimensions
+@export var display_width: float = 2.0
+@export var display_height: float = 1.5
 
-## Parameter range
-@export var r_min: float = 2.5
-@export var r_max: float = 4.0
+## Diagram parameters
+@export_range(0.5, 4.0) var r_min: float = 2.5:
+	set(value):
+		r_min = clampf(value, 0.5, r_max - 0.1)
+		_generate_diagram()
+		_sync_r_min_slider()
 
-## Visualization
-@export var attractor_points: int = 50
-@export var warmup_iterations: int = 100
-@export var point_size: float = 0.05
-@export var display_height: float = 2.0
+@export_range(0.5, 4.0) var r_max: float = 4.0:
+	set(value):
+		r_max = clampf(value, r_min + 0.1, 4.0)
+		_generate_diagram()
+		_sync_r_max_slider()
+
+@export var samples_per_r: int = 100
+@export var r_steps: int = 400
+@export var warmup_iterations: int = 200
+@export var show_iterations: int = 50
 
 ## Colors
-@export var stable_color: Color = Color(0.2, 0.5, 1.0)      # Blue - order
-@export var edge_color: Color = Color(0.2, 1.0, 0.4)        # Green - edge of chaos
-@export var chaos_color: Color = Color(1.0, 0.3, 0.2)       # Red - chaos
+@export var point_color: Color = Color(0.2, 0.8, 1.0)
+@export var background_color: Color = Color(0.02, 0.02, 0.04)
+@export var frame_color: Color = Color(0.15, 0.15, 0.2)
 
-# Internal
-var _point_meshes: Array[MeshInstance3D] = []
-var _current_r: float = 2.5
-var _floor_mesh: MeshInstance3D
-var _r_label: Label3D
-var _phase_label: Label3D
-var _player_marker: MeshInstance3D
+var _multimesh: MultiMesh
+var _multimesh_instance: MultiMeshInstance3D
+var _info_label: Label3D
+var _active_points: int = 0
 
-# Key r values
-const R_STABLE = 3.0       # Below: single fixed point
-const R_PERIOD2 = 3.44949  # Period-2 begins
-const R_PERIOD4 = 3.54409  # Period-4 begins
-const R_CHAOS = 3.56995    # Onset of chaos
-const R_BAND3 = 3.82843    # Period-3 window (Li-Yorke chaos)
+# VR Controls
+var _r_min_slider: Node
+var _r_max_slider: Node
+var _control_panel: Node3D
+
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
-	_create_walkway()
-	_create_attractor_display()
+	_create_frame()
+	_create_multimesh()
 	_create_labels()
-	_create_markers()
+	_create_vr_controls()
+	_generate_diagram()
 
-func _create_walkway():
-	# Floor
-	_floor_mesh = MeshInstance3D.new()
-	_floor_mesh.name = "Floor"
+func _create_frame():
+	# Background panel
+	var bg = MeshInstance3D.new()
+	bg.name = "Background"
 	
-	var floor_box = BoxMesh.new()
-	floor_box.size = Vector3(walkway_length, 0.1, walkway_width)
-	_floor_mesh.mesh = floor_box
+	var bg_mesh = BoxMesh.new()
+	bg_mesh.size = Vector3(display_width, display_height, 0.02)
+	bg.mesh = bg_mesh
 	
-	var floor_mat = StandardMaterial3D.new()
-	floor_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	floor_mat.metallic = 0.3
-	floor_mat.roughness = 0.7
-	_floor_mesh.material_override = floor_mat
+	var bg_mat = StandardMaterial3D.new()
+	bg_mat.albedo_color = background_color
+	bg_mat.metallic = 0.3
+	bg_mat.roughness = 0.8
+	bg.material_override = bg_mat
 	
-	_floor_mesh.position = Vector3(walkway_length / 2, -0.05, 0)
-	add_child(_floor_mesh)
+	bg.position = Vector3(0, display_height / 2, -0.01)
+	add_child(bg)
 	
-	# Floor collision
-	var static_body = StaticBody3D.new()
-	static_body.name = "FloorCollision"
-	var collision = CollisionShape3D.new()
-	var shape = BoxShape3D.new()
-	shape.size = Vector3(walkway_length, 0.1, walkway_width)
-	collision.shape = shape
-	static_body.add_child(collision)
-	static_body.position = Vector3(walkway_length / 2, -0.05, 0)
-	add_child(static_body)
+	# Frame edges
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = frame_color
+	frame_mat.metallic = 0.7
+	frame_mat.roughness = 0.3
 	
-	# R-value markers on floor
-	_create_floor_markers()
-
-func _create_floor_markers():
-	var markers = [
-		[R_STABLE, "r=3.0\nStable"],
-		[R_PERIOD2, "r≈3.45\nPeriod-2"],
-		[R_CHAOS, "r≈3.57\nChaos"],
-		[R_BAND3, "r≈3.83\nPeriod-3"]
+	var thickness = 0.03
+	var edges = [
+		[Vector3(0, 0, 0), Vector3(display_width + thickness, thickness, thickness)],  # Bottom
+		[Vector3(0, display_height, 0), Vector3(display_width + thickness, thickness, thickness)],  # Top
+		[Vector3(-display_width/2, display_height/2, 0), Vector3(thickness, display_height, thickness)],  # Left
+		[Vector3(display_width/2, display_height/2, 0), Vector3(thickness, display_height, thickness)],   # Right
 	]
 	
-	for marker_data in markers:
-		var r_val = marker_data[0]
-		var text = marker_data[1]
-		
-		var x_pos = _r_to_x(r_val)
-		
-		# Line marker
-		var line = MeshInstance3D.new()
-		var line_mesh = BoxMesh.new()
-		line_mesh.size = Vector3(0.02, 0.01, walkway_width)
-		line.mesh = line_mesh
-		
-		var line_mat = StandardMaterial3D.new()
-		line_mat.albedo_color = Color(0.5, 0.5, 0.5)
-		line.material_override = line_mat
-		
-		line.position = Vector3(x_pos, 0.01, 0)
-		add_child(line)
-		
-		# Label
-		var label = Label3D.new()
-		label.text = text
-		label.pixel_size = 0.003
-		label.font_size = 20
-		label.position = Vector3(x_pos, 0.02, -walkway_width/2 - 0.1)
-		label.rotation_degrees = Vector3(-90, 0, 0)
-		label.modulate = Color(0.7, 0.7, 0.7)
-		add_child(label)
+	for edge in edges:
+		var e = MeshInstance3D.new()
+		var box = BoxMesh.new()
+		box.size = edge[1]
+		e.mesh = box
+		e.material_override = frame_mat
+		e.position = edge[0]
+		add_child(e)
 
-func _create_attractor_display():
-	# Create spheres for attractor visualization
-	var sphere_mesh = SphereMesh.new()
-	sphere_mesh.radius = point_size / 2
-	sphere_mesh.height = point_size
+func _create_multimesh():
+	_multimesh = MultiMesh.new()
+	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	_multimesh.use_colors = true
+	
+	var max_points = r_steps * show_iterations
+	_multimesh.instance_count = max_points
+	_multimesh.visible_instance_count = 0
+	
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.003
+	sphere.height = 0.006
+	sphere.radial_segments = 8
+	sphere.rings = 4
+	_multimesh.mesh = sphere
 	
 	var mat = StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
 	mat.emission_energy_multiplier = 0.5
 	
-	for i in range(attractor_points):
-		var point = MeshInstance3D.new()
-		point.mesh = sphere_mesh
-		point.material_override = mat.duplicate()
-		point.visible = false
-		add_child(point)
-		_point_meshes.append(point)
+	_multimesh_instance = MultiMeshInstance3D.new()
+	_multimesh_instance.name = "PointsMultiMesh"
+	_multimesh_instance.multimesh = _multimesh
+	_multimesh_instance.material_override = mat
+	add_child(_multimesh_instance)
 
 func _create_labels():
-	# R value label
-	_r_label = Label3D.new()
-	_r_label.name = "RLabel"
-	_r_label.pixel_size = 0.003
-	_r_label.font_size = 36
-	_r_label.position = Vector3(0, display_height + 0.5, 0)
-	add_child(_r_label)
+	_info_label = Label3D.new()
+	_info_label.name = "InfoLabel"
+	_info_label.pixel_size = 0.003
+	_info_label.font_size = 24
+	_info_label.position = Vector3(0, display_height + 0.15, 0)
+	add_child(_info_label)
 	
-	# Phase label
-	_phase_label = Label3D.new()
-	_phase_label.name = "PhaseLabel"
-	_phase_label.pixel_size = 0.002
-	_phase_label.font_size = 28
-	_phase_label.position = Vector3(0, display_height + 0.2, 0)
-	add_child(_phase_label)
+	# R axis labels
+	var r_label_min = Label3D.new()
+	r_label_min.pixel_size = 0.002
+	r_label_min.font_size = 16
+	r_label_min.position = Vector3(-display_width/2, -0.08, 0)
+	r_label_min.modulate = Color(0.6, 0.6, 0.6)
+	add_child(r_label_min)
 	
-	# Title at entrance
-	var title = Label3D.new()
-	title.text = "BIFURCATION WALKWAY\n← Order    Chaos →"
-	title.pixel_size = 0.004
-	title.font_size = 32
-	title.position = Vector3(0, 1.5, 0)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(title)
+	var r_label_max = Label3D.new()
+	r_label_max.pixel_size = 0.002
+	r_label_max.font_size = 16
+	r_label_max.position = Vector3(display_width/2, -0.08, 0)
+	r_label_max.modulate = Color(0.6, 0.6, 0.6)
+	add_child(r_label_max)
+	
+	# X axis labels
+	var x_label_0 = Label3D.new()
+	x_label_0.text = "0"
+	x_label_0.pixel_size = 0.002
+	x_label_0.font_size = 14
+	x_label_0.position = Vector3(-display_width/2 - 0.06, 0, 0)
+	x_label_0.modulate = Color(0.5, 0.5, 0.5)
+	add_child(x_label_0)
+	
+	var x_label_1 = Label3D.new()
+	x_label_1.text = "1"
+	x_label_1.pixel_size = 0.002
+	x_label_1.font_size = 14
+	x_label_1.position = Vector3(-display_width/2 - 0.06, display_height, 0)
+	x_label_1.modulate = Color(0.5, 0.5, 0.5)
+	add_child(x_label_1)
 
-func _create_markers():
-	# Player position marker (visual indicator on floor)
-	_player_marker = MeshInstance3D.new()
-	_player_marker.name = "PlayerMarker"
+func _create_vr_controls():
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, -0.15, 0.12)
+	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(_control_panel)
 	
-	var marker_mesh = CylinderMesh.new()
-	marker_mesh.top_radius = 0.1
-	marker_mesh.bottom_radius = 0.15
-	marker_mesh.height = 0.02
-	_player_marker.mesh = marker_mesh
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.5, 0.12, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
 	
-	var marker_mat = StandardMaterial3D.new()
-	marker_mat.albedo_color = Color(1, 1, 1, 0.5)
-	marker_mat.emission_enabled = true
-	marker_mat.emission = Color(1, 1, 1)
-	marker_mat.emission_energy_multiplier = 0.3
-	_player_marker.material_override = marker_mat
+	# R min slider (0.5 to r_max)
+	_r_min_slider = SLIDER_HORIZONTAL.instantiate()
+	_r_min_slider.name = "RMinSlider"
+	_r_min_slider.position = Vector3(-0.12, 0.01, 0.015)
+	var min_label = _r_min_slider.get_node_or_null("Frame/LabelName")
+	if min_label:
+		min_label.text = "R MIN"
+	_control_panel.add_child(_r_min_slider)
+	_r_min_slider.slider_moved.connect(_on_r_min_slider_moved)
 	
-	_player_marker.position = Vector3(0, 0.02, 0)
-	add_child(_player_marker)
+	# R max slider (r_min to 4.0)
+	_r_max_slider = SLIDER_HORIZONTAL.instantiate()
+	_r_max_slider.name = "RMaxSlider"
+	_r_max_slider.position = Vector3(0.12, 0.01, 0.015)
+	var max_label = _r_max_slider.get_node_or_null("Frame/LabelName")
+	if max_label:
+		max_label.text = "R MAX"
+	_control_panel.add_child(_r_max_slider)
+	_r_max_slider.slider_moved.connect(_on_r_max_slider_moved)
+	
+	# Preset buttons
+	var preset_btn1 = PUSH_BUTTON.instantiate()
+	preset_btn1.name = "PresetFull"
+	preset_btn1.position = Vector3(-0.1, -0.035, 0.015)
+	preset_btn1.scale = Vector3(0.8, 0.8, 0.8)
+	_control_panel.add_child(preset_btn1)
+	_add_button_label(preset_btn1, "FULL")
+	var area1 = preset_btn1.get_node_or_null("InteractableAreaButton")
+	if area1:
+		area1.button_pressed.connect(func(): _set_r_range(0.5, 4.0))
+	
+	var preset_btn2 = PUSH_BUTTON.instantiate()
+	preset_btn2.name = "PresetChaos"
+	preset_btn2.position = Vector3(0, -0.035, 0.015)
+	preset_btn2.scale = Vector3(0.8, 0.8, 0.8)
+	_control_panel.add_child(preset_btn2)
+	_add_button_label(preset_btn2, "CHAOS")
+	var area2 = preset_btn2.get_node_or_null("InteractableAreaButton")
+	if area2:
+		area2.button_pressed.connect(func(): _set_r_range(3.5, 4.0))
+	
+	var preset_btn3 = PUSH_BUTTON.instantiate()
+	preset_btn3.name = "PresetBifurc"
+	preset_btn3.position = Vector3(0.1, -0.035, 0.015)
+	preset_btn3.scale = Vector3(0.8, 0.8, 0.8)
+	_control_panel.add_child(preset_btn3)
+	_add_button_label(preset_btn3, "BIFUR")
+	var area3 = preset_btn3.get_node_or_null("InteractableAreaButton")
+	if area3:
+		area3.button_pressed.connect(func(): _set_r_range(2.8, 3.6))
+	
+	call_deferred("_sync_sliders_deferred")
 
-func _r_to_x(r: float) -> float:
-	# Map r value to X position on walkway
-	var t = (r - r_min) / (r_max - r_min)
-	return t * walkway_length
+func _add_button_label(btn: Node, text: String):
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.001
+	lbl.font_size = 9
+	lbl.position = Vector3(0, -0.03, 0.012)
+	btn.add_child(lbl)
 
-func _x_to_r(x: float) -> float:
-	# Map X position to r value
-	var t = clampf(x / walkway_length, 0.0, 1.0)
-	return r_min + t * (r_max - r_min)
+func _sync_sliders_deferred():
+	_sync_r_min_slider()
+	_sync_r_max_slider()
 
-func _process(_delta):
-	# Find player or camera
-	var player_x = _find_player_x()
-	if player_x < 0:
-		return
-	
-	_current_r = _x_to_r(player_x)
-	_update_attractor_display()
-	_update_labels()
-	_update_marker(player_x)
+func _sync_r_min_slider():
+	if _r_min_slider and _r_min_slider.has_method("set_normalized_value"):
+		_r_min_slider.set_normalized_value((r_min - 0.5) / 3.5)
 
-func _find_player_x() -> float:
-	# Try to find XR camera or regular camera
-	var camera = get_viewport().get_camera_3d()
-	if camera:
-		var local_pos = to_local(camera.global_position)
-		return local_pos.x
-	return -1.0
+func _sync_r_max_slider():
+	if _r_max_slider and _r_max_slider.has_method("set_normalized_value"):
+		_r_max_slider.set_normalized_value((r_max - 0.5) / 3.5)
 
-func _update_attractor_display():
-	# Calculate logistic map attractor for current r
-	var x = 0.5
+func _on_r_min_slider_moved(_position):
+	if _r_min_slider and _r_min_slider.has_method("get_normalized_value"):
+		var norm = _r_min_slider.get_normalized_value()
+		r_min = 0.5 + norm * 3.5
+
+func _on_r_max_slider_moved(_position):
+	if _r_max_slider and _r_max_slider.has_method("get_normalized_value"):
+		var norm = _r_max_slider.get_normalized_value()
+		r_max = 0.5 + norm * 3.5
+
+func _set_r_range(new_min: float, new_max: float):
+	r_min = new_min
+	r_max = new_max
+
+func _generate_diagram():
+	var idx = 0
+	var half_w = display_width / 2.0
 	
-	# Warmup iterations
-	for i in range(warmup_iterations):
-		x = _current_r * x * (1.0 - x)
+	_info_label.text = "BIFURCATION DIAGRAM\nr ∈ [%.2f, %.2f]" % [r_min, r_max]
 	
-	# Collect attractor points
-	var attractor_values: Array[float] = []
-	for i in range(attractor_points):
-		x = _current_r * x * (1.0 - x)
-		attractor_values.append(x)
-	
-	# Get color based on r
-	var color = _get_phase_color(_current_r)
-	
-	# Update point positions
-	var x_pos = _r_to_x(_current_r)
-	for i in range(attractor_points):
-		var point = _point_meshes[i]
-		var y = attractor_values[i] * display_height + 0.5
+	for i in range(r_steps):
+		var r = r_min + (r_max - r_min) * (float(i) / r_steps)
+		var x = 0.5  # Initial population
 		
-		point.position = Vector3(x_pos, y, 0)
-		point.visible = true
+		# Warmup
+		for _w in range(warmup_iterations):
+			x = r * x * (1.0 - x)
 		
-		var mat = point.material_override as StandardMaterial3D
-		if mat:
-			mat.albedo_color = color
-			mat.emission = color
-
-func _get_phase_color(r: float) -> Color:
-	if r < R_STABLE:
-		return stable_color
-	elif r < R_CHAOS:
-		# Transition zone
-		var t = (r - R_STABLE) / (R_CHAOS - R_STABLE)
-		return stable_color.lerp(edge_color, t)
-	else:
-		# Chaos zone
-		var t = minf((r - R_CHAOS) / (r_max - R_CHAOS), 1.0)
-		return edge_color.lerp(chaos_color, t)
-
-func _get_phase_name(r: float) -> String:
-	if r < R_STABLE:
-		return "STABLE FIXED POINT"
-	elif r < R_PERIOD2:
-		return "FIXED POINT"
-	elif r < R_PERIOD4:
-		return "PERIOD-2 CYCLE"
-	elif r < R_CHAOS:
-		return "PERIOD DOUBLING"
-	elif r < R_BAND3 - 0.02:
-		return "CHAOS"
-	elif r < R_BAND3 + 0.02:
-		return "PERIOD-3 WINDOW"
-	else:
-		return "CHAOS"
-
-func _update_labels():
-	var x_pos = _r_to_x(_current_r)
+		# Record points
+		for _s in range(show_iterations):
+			x = r * x * (1.0 - x)
+			
+			var screen_x = (float(i) / r_steps - 0.5) * display_width
+			var screen_y = x * display_height
+			
+			var transform = Transform3D()
+			transform.origin = Vector3(screen_x, screen_y, 0.01)
+			_multimesh.set_instance_transform(idx, transform)
+			
+			# Color based on r value (chaos regions brighter)
+			var brightness = 0.5 + smoothstep(3.0, 4.0, r) * 0.5
+			var color = point_color
+			color.v = brightness
+			_multimesh.set_instance_color(idx, color)
+			
+			idx += 1
+			if idx >= _multimesh.instance_count:
+				break
+		
+		if idx >= _multimesh.instance_count:
+			break
 	
-	_r_label.position.x = x_pos
-	_r_label.text = "r = %.4f" % _current_r
-	_r_label.modulate = _get_phase_color(_current_r)
-	
-	_phase_label.position.x = x_pos
-	_phase_label.text = _get_phase_name(_current_r)
-	_phase_label.modulate = _get_phase_color(_current_r)
+	_active_points = idx
+	_multimesh.visible_instance_count = idx
 
-func _update_marker(player_x: float):
-	_player_marker.position.x = clampf(player_x, 0, walkway_length)
-	_player_marker.material_override.albedo_color = _get_phase_color(_current_r)
-	_player_marker.material_override.emission = _get_phase_color(_current_r)
+func smoothstep(edge0: float, edge1: float, x: float) -> float:
+	var t = clampf((x - edge0) / (edge1 - edge0), 0.0, 1.0)
+	return t * t * (3.0 - 2.0 * t)
 
-## External API for testing without player
-func set_r(r: float):
-	_current_r = clampf(r, r_min, r_max)
-	_update_attractor_display()
-	_update_labels()
-	_update_marker(_r_to_x(_current_r))
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_1:
+				_set_r_range(0.5, 4.0)
+			KEY_2:
+				_set_r_range(2.5, 4.0)
+			KEY_3:
+				_set_r_range(3.5, 4.0)
+			KEY_4:
+				_set_r_range(3.8, 3.9)
+			KEY_LEFT:
+				var shift = (r_max - r_min) * 0.1
+				r_min -= shift
+				r_max -= shift
+			KEY_RIGHT:
+				var shift = (r_max - r_min) * 0.1
+				r_min += shift
+				r_max += shift
+			KEY_UP:  # Zoom in
+				var center = (r_min + r_max) / 2.0
+				var half_range = (r_max - r_min) / 2.0 * 0.8
+				r_min = center - half_range
+				r_max = center + half_range
+			KEY_DOWN:  # Zoom out
+				var center = (r_min + r_max) / 2.0
+				var half_range = (r_max - r_min) / 2.0 * 1.25
+				r_min = center - half_range
+				r_max = center + half_range
+
+func set_range(new_min: float, new_max: float):
+	_set_r_range(new_min, new_max)

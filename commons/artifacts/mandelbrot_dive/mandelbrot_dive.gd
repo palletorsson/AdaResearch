@@ -1,6 +1,6 @@
 # mandelbrot_dive.gd
 # GPU-accelerated Mandelbrot set on a 1×1m table
-# Infinite detail zoom - demonstrates self-similarity and fractals
+# VR-enabled with slider controls for zoom, pan, and palette
 
 extends Node3D
 
@@ -12,13 +12,14 @@ class_name MandelbrotDive
 ## Fractal parameters
 @export var max_iterations: int = 100:
 	set(value):
-		max_iterations = value
+		max_iterations = clampi(value, 20, 500)
 		_update_shader_params()
 
 @export var zoom: float = 1.0:
 	set(value):
 		zoom = clampf(value, 0.0001, 1000000.0)
 		_update_shader_params()
+		_sync_zoom_slider()
 
 @export var center_x: float = -0.5:
 	set(value):
@@ -33,8 +34,9 @@ class_name MandelbrotDive
 ## Color scheme
 @export_enum("Classic", "Fire", "Ocean", "Neon", "Grayscale") var color_scheme: int = 0:
 	set(value):
-		color_scheme = value
+		color_scheme = clampi(value, 0, 4)
 		_update_shader_params()
+		_sync_palette_slider()
 
 ## Animation
 @export var auto_zoom: bool = false
@@ -45,6 +47,14 @@ class_name MandelbrotDive
 var _display_mesh: MeshInstance3D
 var _shader_material: ShaderMaterial
 var _info_label: Label3D
+
+# VR Controls
+var _zoom_slider: Node
+var _palette_slider: Node
+var _control_panel: Node3D
+
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 const MANDELBROT_SHADER = """
 shader_type spatial;
@@ -95,38 +105,29 @@ vec3 get_color(float t, int scheme) {
 }
 
 void fragment() {
-	// Map UV to complex plane
 	vec2 uv = UV - 0.5;
-	float aspect = 1.0;
-	
 	vec2 c = center + uv * 4.0 / zoom;
 	
-	// Mandelbrot iteration
 	vec2 z = vec2(0.0);
 	int iter = 0;
 	
 	for (int i = 0; i < 500; i++) {
 		if (i >= max_iter) break;
 		if (dot(z, z) > 4.0) break;
-		
 		z = vec2(z.x*z.x - z.y*z.y, 2.0*z.x*z.y) + c;
 		iter++;
 	}
 	
-	// Color based on iteration count
 	if (iter >= max_iter) {
 		ALBEDO = vec3(0.0);
 	} else {
-		// Smooth coloring
 		float log_zn = log(dot(z, z)) / 2.0;
 		float nu = log(log_zn / log(2.0)) / log(2.0);
 		float smooth_iter = float(iter) + 1.0 - nu;
-		
 		float t = smooth_iter / float(max_iter);
 		ALBEDO = get_color(fract(t * 5.0), color_scheme);
 	}
 	
-	// Slight emission for glow
 	EMISSION = ALBEDO * 0.2;
 }
 """
@@ -135,10 +136,9 @@ func _ready():
 	_create_table()
 	_create_display()
 	_create_info_label()
-	_create_controls_hint()
+	_create_vr_controls()
 
 func _create_table():
-	# Pedestal/base
 	var base = MeshInstance3D.new()
 	base.name = "Base"
 	
@@ -165,11 +165,9 @@ func _create_display():
 	quad.size = Vector2(table_size, table_size)
 	_display_mesh.mesh = quad
 	
-	# Rotate to be horizontal (face up)
 	_display_mesh.rotation_degrees = Vector3(-90, 0, 0)
 	_display_mesh.position = Vector3(0, 0.01, 0)
 	
-	# Create shader material
 	_shader_material = ShaderMaterial.new()
 	var shader = Shader.new()
 	shader.code = MANDELBROT_SHADER
@@ -189,15 +187,119 @@ func _create_info_label():
 	add_child(_info_label)
 	_update_info_label()
 
-func _create_controls_hint():
-	var hint = Label3D.new()
-	hint.name = "ControlsHint"
-	hint.pixel_size = 0.001
-	hint.font_size = 20
-	hint.text = "↑↓ Zoom  |  WASD Pan  |  1-5 Colors  |  A Auto-dive"
-	hint.position = Vector3(0, 0.03, table_size/2 + 0.05)
-	hint.modulate = Color(0.6, 0.6, 0.6)
-	add_child(hint)
+func _create_vr_controls():
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, 0.04, table_size/2 + 0.15)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	add_child(_control_panel)
+	
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.5, 0.18, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
+	
+	# Zoom slider (logarithmic: 0.1 to 100000)
+	_zoom_slider = SLIDER_HORIZONTAL.instantiate()
+	_zoom_slider.name = "ZoomSlider"
+	_zoom_slider.position = Vector3(-0.12, 0.04, 0.015)
+	var zoom_label = _zoom_slider.get_node_or_null("Frame/LabelName")
+	if zoom_label:
+		zoom_label.text = "ZOOM"
+	_control_panel.add_child(_zoom_slider)
+	_zoom_slider.slider_moved.connect(_on_zoom_slider_moved)
+	
+	# Palette slider (0-4)
+	_palette_slider = SLIDER_HORIZONTAL.instantiate()
+	_palette_slider.name = "PaletteSlider"
+	_palette_slider.position = Vector3(0.12, 0.04, 0.015)
+	var palette_label = _palette_slider.get_node_or_null("Frame/LabelName")
+	if palette_label:
+		palette_label.text = "COLOR"
+	_control_panel.add_child(_palette_slider)
+	_palette_slider.slider_moved.connect(_on_palette_slider_moved)
+	
+	# Zoom In / Out buttons
+	var zoom_in_btn = PUSH_BUTTON.instantiate()
+	zoom_in_btn.name = "ZoomInButton"
+	zoom_in_btn.position = Vector3(-0.15, -0.04, 0.015)
+	_control_panel.add_child(zoom_in_btn)
+	_add_button_label(zoom_in_btn, "+")
+	var zoom_in_area = zoom_in_btn.get_node_or_null("InteractableAreaButton")
+	if zoom_in_area:
+		zoom_in_area.button_pressed.connect(func(): zoom *= 2.0)
+	
+	var zoom_out_btn = PUSH_BUTTON.instantiate()
+	zoom_out_btn.name = "ZoomOutButton"
+	zoom_out_btn.position = Vector3(-0.08, -0.04, 0.015)
+	_control_panel.add_child(zoom_out_btn)
+	_add_button_label(zoom_out_btn, "-")
+	var zoom_out_area = zoom_out_btn.get_node_or_null("InteractableAreaButton")
+	if zoom_out_area:
+		zoom_out_area.button_pressed.connect(func(): zoom /= 2.0)
+	
+	# Auto-dive button
+	var dive_btn = PUSH_BUTTON.instantiate()
+	dive_btn.name = "DiveButton"
+	dive_btn.position = Vector3(0.02, -0.04, 0.015)
+	_control_panel.add_child(dive_btn)
+	_add_button_label(dive_btn, "DIVE")
+	var dive_area = dive_btn.get_node_or_null("InteractableAreaButton")
+	if dive_area:
+		dive_area.button_pressed.connect(func(): auto_zoom = not auto_zoom)
+	
+	# Reset button
+	var reset_btn = PUSH_BUTTON.instantiate()
+	reset_btn.name = "ResetButton"
+	reset_btn.position = Vector3(0.12, -0.04, 0.015)
+	_control_panel.add_child(reset_btn)
+	_add_button_label(reset_btn, "RST")
+	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+	if reset_area:
+		reset_area.button_pressed.connect(_reset)
+	
+	call_deferred("_sync_sliders_deferred")
+
+func _add_button_label(btn: Node, text: String):
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.001
+	lbl.font_size = 12
+	lbl.position = Vector3(0, -0.025, 0.01)
+	btn.add_child(lbl)
+
+func _sync_sliders_deferred():
+	_sync_zoom_slider()
+	_sync_palette_slider()
+
+func _sync_zoom_slider():
+	if _zoom_slider and _zoom_slider.has_method("set_normalized_value"):
+		# Logarithmic scale: zoom 0.1 to 100000
+		var log_zoom = log(zoom) / log(10)  # -1 to 5
+		var norm = (log_zoom + 1.0) / 6.0
+		_zoom_slider.set_normalized_value(clampf(norm, 0, 1))
+
+func _sync_palette_slider():
+	if _palette_slider and _palette_slider.has_method("set_normalized_value"):
+		_palette_slider.set_normalized_value(float(color_scheme) / 4.0)
+
+func _on_zoom_slider_moved(_position):
+	if _zoom_slider and _zoom_slider.has_method("get_normalized_value"):
+		var norm = _zoom_slider.get_normalized_value()
+		# Logarithmic: norm 0-1 maps to zoom 0.1 to 100000
+		var log_zoom = norm * 6.0 - 1.0  # -1 to 5
+		zoom = pow(10, log_zoom)
+
+func _on_palette_slider_moved(_position):
+	if _palette_slider and _palette_slider.has_method("get_normalized_value"):
+		var norm = _palette_slider.get_normalized_value()
+		color_scheme = int(norm * 4.99)
 
 func _update_shader_params():
 	if not _shader_material:
@@ -212,56 +314,16 @@ func _update_info_label():
 	if not _info_label:
 		return
 	var scheme_names = ["Classic", "Fire", "Ocean", "Neon", "Gray"]
-	_info_label.text = "MANDELBROT\nZoom: %.2e\nIter: %d | %s" % [zoom, max_iterations, scheme_names[color_scheme]]
+	_info_label.text = "MANDELBROT\nZoom: %.2e | %s" % [zoom, scheme_names[color_scheme]]
 
 func _process(delta):
 	if auto_zoom:
-		# Gradually zoom toward interesting point
 		zoom *= (1.0 + zoom_speed * delta)
-		
-		# Lerp center toward target
 		var lerp_speed = 0.5 * delta
 		center_x = lerpf(center_x, zoom_target_x, lerp_speed)
 		center_y = lerpf(center_y, zoom_target_y, lerp_speed)
-		
-		# Increase iterations as we zoom deeper
 		if zoom > 100:
 			max_iterations = mini(500, int(100 + log(zoom) * 20))
-		
-		_update_shader_params()
-
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		var pan_amount = 0.1 / zoom
-		
-		match event.keycode:
-			KEY_UP, KEY_EQUAL, KEY_KP_ADD:
-				zoom *= 1.5
-			KEY_DOWN, KEY_MINUS, KEY_KP_SUBTRACT:
-				zoom /= 1.5
-			KEY_W:
-				center_y += pan_amount
-			KEY_S:
-				center_y -= pan_amount
-			KEY_A:
-				center_x -= pan_amount
-			KEY_D:
-				center_x += pan_amount
-			KEY_1:
-				color_scheme = 0
-			KEY_2:
-				color_scheme = 1
-			KEY_3:
-				color_scheme = 2
-			KEY_4:
-				color_scheme = 3
-			KEY_5:
-				color_scheme = 4
-			KEY_R:
-				_reset()
-			KEY_Z:
-				auto_zoom = not auto_zoom
-		
 		_update_shader_params()
 
 func _reset():
@@ -271,8 +333,33 @@ func _reset():
 	max_iterations = 100
 	auto_zoom = false
 	_update_shader_params()
+	_sync_zoom_slider()
 
-## External control methods
+# Keep keyboard for desktop
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		var pan_amount = 0.1 / zoom
+		match event.keycode:
+			KEY_UP, KEY_EQUAL:
+				zoom *= 1.5
+			KEY_DOWN, KEY_MINUS:
+				zoom /= 1.5
+			KEY_W:
+				center_y += pan_amount
+			KEY_S:
+				center_y -= pan_amount
+			KEY_A:
+				center_x -= pan_amount
+			KEY_D:
+				center_x += pan_amount
+			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5:
+				color_scheme = event.keycode - KEY_1
+			KEY_R:
+				_reset()
+			KEY_Z:
+				auto_zoom = not auto_zoom
+		_update_shader_params()
+
 func set_zoom(value: float):
 	zoom = value
 

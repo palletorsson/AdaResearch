@@ -1,6 +1,6 @@
 # perlin_terrain_sculptor.gd
 # Voxel sculpture tool where Perlin noise is the brush
-# Add/remove voxels based on noise thresholding
+# VR-enabled with slider controls
 
 extends Node3D
 
@@ -8,41 +8,50 @@ class_name PerlinTerrainSculptor
 
 ## Grid dimensions
 @export var grid_size: int = 24
-@export var voxel_size: float = 0.04  # Total size ≈ 1m
+@export var voxel_size: float = 0.04
 
 ## Noise parameters
 @export_group("Noise")
 @export var noise_scale: float = 4.0:
 	set(value):
-		noise_scale = value
-		_noise.frequency = noise_scale * 0.1
+		noise_scale = clampf(value, 0.5, 20.0)
+		if _noise:
+			_noise.frequency = noise_scale * 0.1
+		_generate_terrain()
+		_sync_scale_slider()
+
 @export var noise_octaves: int = 3:
 	set(value):
-		noise_octaves = value
-		_noise.fractal_octaves = noise_octaves
+		noise_octaves = clampi(value, 1, 6)
+		if _noise:
+			_noise.fractal_octaves = noise_octaves
+		_generate_terrain()
+
 @export var threshold: float = 0.0:
 	set(value):
-		threshold = value
+		threshold = clampf(value, -1.0, 1.0)
+		_generate_terrain()
+		_sync_threshold_slider()
 		_update_info()
-
-## Sculpting
-@export_group("Sculpting")
-@export var brush_radius: int = 3
-@export var auto_sculpt: bool = true
-@export var sculpt_speed: float = 2.0
 
 ## Colors
 @export var voxel_color: Color = Color(0.3, 0.7, 0.4)
 @export var height_gradient: bool = true
 
-# Internal
-var _voxels: Array = []  # 3D bool array
+var _voxels: Array = []
 var _multimesh: MultiMesh
 var _multimesh_instance: MultiMeshInstance3D
 var _noise: FastNoiseLite
 var _active_voxel_count: int = 0
-var _sculpt_time: float = 0.0
 var _info_label: Label3D
+
+# VR Controls
+var _threshold_slider: Node
+var _scale_slider: Node
+var _control_panel: Node3D
+
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_init_noise()
@@ -50,7 +59,8 @@ func _ready():
 	_create_multimesh()
 	_create_base()
 	_create_labels()
-	_generate_initial_terrain()
+	_create_vr_controls()
+	_generate_terrain()
 
 func _init_noise():
 	_noise = FastNoiseLite.new()
@@ -123,22 +133,111 @@ func _create_labels():
 	_info_label.position = Vector3(0, total_size/2 + 0.15, -total_size/2 - 0.08)
 	add_child(_info_label)
 	_update_info()
+
+func _create_vr_controls():
+	var total_size = grid_size * voxel_size
 	
-	var hint = Label3D.new()
-	hint.name = "ControlsHint"
-	hint.pixel_size = 0.001
-	hint.font_size = 18
-	hint.text = "↑↓ Threshold | ←→ Scale | R Reset | N New Seed"
-	hint.position = Vector3(0, 0.03, total_size/2 + 0.06)
-	hint.modulate = Color(0.6, 0.6, 0.6)
-	add_child(hint)
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, 0.04, total_size/2 + 0.15)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	add_child(_control_panel)
+	
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.5, 0.18, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
+	
+	# Threshold slider (-1 to 1)
+	_threshold_slider = SLIDER_HORIZONTAL.instantiate()
+	_threshold_slider.name = "ThresholdSlider"
+	_threshold_slider.position = Vector3(-0.12, 0.04, 0.015)
+	var thresh_label = _threshold_slider.get_node_or_null("Frame/LabelName")
+	if thresh_label:
+		thresh_label.text = "THRESH"
+	_control_panel.add_child(_threshold_slider)
+	_threshold_slider.slider_moved.connect(_on_threshold_slider_moved)
+	
+	# Scale slider (0.5 to 20)
+	_scale_slider = SLIDER_HORIZONTAL.instantiate()
+	_scale_slider.name = "ScaleSlider"
+	_scale_slider.position = Vector3(0.12, 0.04, 0.015)
+	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
+	if scale_label:
+		scale_label.text = "SCALE"
+	_control_panel.add_child(_scale_slider)
+	_scale_slider.slider_moved.connect(_on_scale_slider_moved)
+	
+	# New Seed button
+	var seed_btn = PUSH_BUTTON.instantiate()
+	seed_btn.name = "SeedButton"
+	seed_btn.position = Vector3(-0.08, -0.04, 0.015)
+	_control_panel.add_child(seed_btn)
+	_add_button_label(seed_btn, "SEED")
+	var seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
+	if seed_area:
+		seed_area.button_pressed.connect(_on_new_seed)
+	
+	# Reset button
+	var reset_btn = PUSH_BUTTON.instantiate()
+	reset_btn.name = "ResetButton"
+	reset_btn.position = Vector3(0.08, -0.04, 0.015)
+	_control_panel.add_child(reset_btn)
+	_add_button_label(reset_btn, "RST")
+	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+	if reset_area:
+		reset_area.button_pressed.connect(reset)
+	
+	call_deferred("_sync_sliders_deferred")
+
+func _add_button_label(btn: Node, text: String):
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.pixel_size = 0.001
+	lbl.font_size = 12
+	lbl.position = Vector3(0, -0.025, 0.01)
+	btn.add_child(lbl)
+
+func _sync_sliders_deferred():
+	_sync_threshold_slider()
+	_sync_scale_slider()
+
+func _sync_threshold_slider():
+	if _threshold_slider and _threshold_slider.has_method("set_normalized_value"):
+		_threshold_slider.set_normalized_value((threshold + 1.0) / 2.0)
+
+func _sync_scale_slider():
+	if _scale_slider and _scale_slider.has_method("set_normalized_value"):
+		_scale_slider.set_normalized_value((noise_scale - 0.5) / 19.5)
+
+func _on_threshold_slider_moved(_position):
+	if _threshold_slider and _threshold_slider.has_method("get_normalized_value"):
+		var norm = _threshold_slider.get_normalized_value()
+		threshold = norm * 2.0 - 1.0
+
+func _on_scale_slider_moved(_position):
+	if _scale_slider and _scale_slider.has_method("get_normalized_value"):
+		var norm = _scale_slider.get_normalized_value()
+		noise_scale = 0.5 + norm * 19.5
+
+func _on_new_seed():
+	_noise.seed = randi()
+	_generate_terrain()
 
 func _update_info():
 	if _info_label:
 		_info_label.text = "PERLIN TERRAIN\nScale: %.1f | Thresh: %.2f\nVoxels: %d" % [noise_scale, threshold, _active_voxel_count]
 
-func _generate_initial_terrain():
-	# Generate terrain based on noise
+func _generate_terrain():
+	if not _noise:
+		return
+	
 	var half = grid_size / 2.0
 	
 	for x in range(grid_size):
@@ -149,8 +248,6 @@ func _generate_initial_terrain():
 				var wz = (z - half) * voxel_size
 				
 				var n = _noise.get_noise_3d(wx * 10, wy * 10, wz * 10)
-				
-				# Height bias - more likely to have voxels at bottom
 				var height_bias = (float(y) / grid_size - 0.5) * 0.5
 				
 				_voxels[x][y][z] = n - height_bias > threshold
@@ -176,7 +273,6 @@ func _rebuild_multimesh():
 					transform.origin = pos
 					_multimesh.set_instance_transform(idx, transform)
 					
-					# Color based on height
 					var color = voxel_color
 					if height_gradient:
 						var t = float(y) / grid_size
@@ -189,82 +285,24 @@ func _rebuild_multimesh():
 	_multimesh.visible_instance_count = idx
 	_update_info()
 
-func _process(delta):
-	if auto_sculpt:
-		_sculpt_time += delta * sculpt_speed
-		# Slowly evolve the noise offset
-		_noise.offset = Vector3(_sculpt_time * 0.1, 0, 0)
-		
-		# Periodically regenerate
-		if fmod(_sculpt_time, 2.0) < delta * sculpt_speed:
-			_generate_initial_terrain()
-
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_UP:
 				threshold += 0.05
-				_generate_initial_terrain()
 			KEY_DOWN:
 				threshold -= 0.05
-				_generate_initial_terrain()
 			KEY_LEFT:
 				noise_scale = maxf(0.5, noise_scale - 0.5)
-				_generate_initial_terrain()
 			KEY_RIGHT:
 				noise_scale += 0.5
-				_generate_initial_terrain()
 			KEY_R:
-				threshold = 0.0
-				noise_scale = 4.0
-				_generate_initial_terrain()
+				reset()
 			KEY_N:
-				_noise.seed = randi()
-				_generate_initial_terrain()
-			KEY_SPACE:
-				auto_sculpt = not auto_sculpt
-
-## Sculpt at world position (for VR controllers)
-func sculpt_add(world_pos: Vector3, radius: float = -1):
-	if radius < 0:
-		radius = brush_radius
-	var local_pos = to_local(world_pos)
-	_sculpt_sphere(local_pos, radius, true)
-
-func sculpt_remove(world_pos: Vector3, radius: float = -1):
-	if radius < 0:
-		radius = brush_radius
-	var local_pos = to_local(world_pos)
-	_sculpt_sphere(local_pos, radius, false)
-
-func _sculpt_sphere(center: Vector3, radius: float, add: bool):
-	var half = grid_size / 2.0
-	var changed = false
-	
-	for x in range(grid_size):
-		for y in range(grid_size):
-			for z in range(grid_size):
-				var pos = Vector3(
-					(x - half + 0.5) * voxel_size,
-					(y - half + 0.5) * voxel_size,
-					(z - half + 0.5) * voxel_size
-				)
-				
-				if pos.distance_to(center) <= radius * voxel_size:
-					var n = _noise.get_noise_3d(pos.x * 10, pos.y * 10, pos.z * 10)
-					if add:
-						if n > threshold - 0.2:
-							_voxels[x][y][z] = true
-							changed = true
-					else:
-						if n < threshold + 0.2:
-							_voxels[x][y][z] = false
-							changed = true
-	
-	if changed:
-		_rebuild_multimesh()
+				_on_new_seed()
 
 func reset():
-	_noise.seed = randi()
 	threshold = 0.0
-	_generate_initial_terrain()
+	noise_scale = 4.0
+	_noise.seed = randi()
+	_generate_terrain()

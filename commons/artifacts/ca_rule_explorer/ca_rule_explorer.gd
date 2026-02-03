@@ -1,6 +1,6 @@
 # ca_rule_explorer.gd
 # 1×1m horizontal board displaying Wolfram 1D cellular automata
-# Interactive rule selection (0-255), shows pattern evolution
+# VR-enabled with slider and button controls
 
 extends Node3D
 
@@ -16,13 +16,19 @@ class_name CARuleExplorer
 ## Current rule (0-255)
 @export_range(0, 255) var rule: int = 110:
 	set(value):
-		rule = value
+		rule = clampi(value, 0, 255)
 		if is_inside_tree():
 			_reset()
 			_update_rule_display()
+			_sync_rule_slider()
 
 ## Animation
-@export var generations_per_second: float = 10.0
+@export var generations_per_second: float = 10.0:
+	set(value):
+		generations_per_second = clampf(value, 1.0, 30.0)
+		if is_inside_tree():
+			_sync_speed_slider()
+
 @export var auto_run: bool = true
 
 ## Colors
@@ -32,12 +38,17 @@ class_name CARuleExplorer
 
 # Internal state
 var _current_row: Array[bool] = []
-var _grid: Array[Array] = []  # History of rows
+var _grid: Array[Array] = []
 var _multimesh_instance: MultiMeshInstance3D
 var _multimesh: MultiMesh
 var _cell_size: Vector2
 var _generation_timer: float = 0.0
 var _rule_label: Label3D
+
+# VR Controls
+var _rule_slider: Node
+var _speed_slider: Node
+var _control_panel: Node3D
 
 # Famous rules
 const FAMOUS_RULES = {
@@ -50,16 +61,18 @@ const FAMOUS_RULES = {
 	255: "Life"
 }
 
+const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
+const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+
 func _ready():
 	_cell_size = Vector2(board_size / cells_x, board_size / rows_visible)
 	_create_board()
 	_create_multimesh()
 	_create_rule_display()
-	_create_controls_hint()
+	_create_vr_controls()
 	_reset()
 
 func _create_board():
-	# Base board (horizontal surface)
 	var board = MeshInstance3D.new()
 	board.name = "Board"
 	
@@ -76,7 +89,6 @@ func _create_board():
 	board.position = Vector3(0, -0.01, 0)
 	add_child(board)
 	
-	# Frame/edge
 	_create_frame()
 
 func _create_frame():
@@ -89,12 +101,11 @@ func _create_frame():
 	var height = 0.03
 	var half = board_size / 2.0
 	
-	# Four edges
 	var edges = [
-		Vector3(0, height/2, -half - thickness/2),  # Front
-		Vector3(0, height/2, half + thickness/2),   # Back
-		Vector3(-half - thickness/2, height/2, 0),  # Left
-		Vector3(half + thickness/2, height/2, 0)    # Right
+		Vector3(0, height/2, -half - thickness/2),
+		Vector3(0, height/2, half + thickness/2),
+		Vector3(-half - thickness/2, height/2, 0),
+		Vector3(half + thickness/2, height/2, 0)
 	]
 	var sizes = [
 		Vector3(board_size + thickness*2, height, thickness),
@@ -105,9 +116,9 @@ func _create_frame():
 	
 	for i in range(4):
 		var edge = MeshInstance3D.new()
-		var box = BoxMesh.new()
-		box.size = sizes[i]
-		edge.mesh = box
+		var ebox = BoxMesh.new()
+		ebox.size = sizes[i]
+		edge.mesh = ebox
 		edge.material_override = frame_mat
 		edge.position = edges[i]
 		add_child(edge)
@@ -118,7 +129,6 @@ func _create_multimesh():
 	_multimesh.use_colors = true
 	_multimesh.instance_count = cells_x * rows_visible
 	
-	# Small flat box for each cell
 	var cell_mesh = BoxMesh.new()
 	cell_mesh.size = Vector3(_cell_size.x * 0.95, 0.005, _cell_size.y * 0.95)
 	_multimesh.mesh = cell_mesh
@@ -134,7 +144,6 @@ func _create_multimesh():
 	_multimesh_instance.material_override = mat
 	add_child(_multimesh_instance)
 	
-	# Initialize positions
 	var half = board_size / 2.0
 	for row in range(rows_visible):
 		for col in range(cells_x):
@@ -153,19 +162,122 @@ func _create_rule_display():
 	_rule_label.pixel_size = 0.002
 	_rule_label.font_size = 48
 	_rule_label.position = Vector3(0, 0.05, -board_size/2 - 0.08)
-	_rule_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(_rule_label)
 	_update_rule_display()
 
-func _create_controls_hint():
-	var hint = Label3D.new()
-	hint.name = "ControlsHint"
-	hint.pixel_size = 0.001
-	hint.font_size = 24
-	hint.text = "← → Change Rule  |  R Reset  |  Space Pause"
-	hint.position = Vector3(0, 0.03, board_size/2 + 0.06)
-	hint.modulate = Color(0.6, 0.6, 0.6)
-	add_child(hint)
+func _create_vr_controls():
+	# Control panel behind the board
+	_control_panel = Node3D.new()
+	_control_panel.name = "ControlPanel"
+	_control_panel.position = Vector3(0, 0.04, board_size/2 + 0.15)
+	_control_panel.rotation_degrees = Vector3(30, 0, 0)  # Angled toward user
+	add_child(_control_panel)
+	
+	# Panel backing
+	var panel_back = MeshInstance3D.new()
+	var panel_mesh = BoxMesh.new()
+	panel_mesh.size = Vector3(0.5, 0.2, 0.01)
+	panel_back.mesh = panel_mesh
+	var panel_mat = StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
+	panel_mat.metallic = 0.3
+	panel_back.material_override = panel_mat
+	_control_panel.add_child(panel_back)
+	
+	# Rule slider (0-255)
+	_rule_slider = SLIDER_HORIZONTAL.instantiate()
+	_rule_slider.name = "RuleSlider"
+	_rule_slider.position = Vector3(-0.12, 0.05, 0.015)
+	_rule_slider.set_range(0, 255)
+	var rule_label = _rule_slider.get_node_or_null("Frame/LabelName")
+	if rule_label:
+		rule_label.text = "RULE"
+	_control_panel.add_child(_rule_slider)
+	_rule_slider.slider_moved.connect(_on_rule_slider_moved)
+	
+	# Speed slider (1-30 gen/sec)
+	_speed_slider = SLIDER_HORIZONTAL.instantiate()
+	_speed_slider.name = "SpeedSlider"
+	_speed_slider.position = Vector3(0.12, 0.05, 0.015)
+	_speed_slider.set_range(1, 30)
+	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
+	if speed_label:
+		speed_label.text = "SPEED"
+	_control_panel.add_child(_speed_slider)
+	_speed_slider.slider_moved.connect(_on_speed_slider_moved)
+	
+	# Preset buttons
+	var presets = [30, 90, 110, 184]
+	var btn_x_start = -0.18
+	for i in range(presets.size()):
+		var btn = PUSH_BUTTON.instantiate()
+		btn.name = "Preset%d" % presets[i]
+		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, 0.015)
+		_control_panel.add_child(btn)
+		
+		# Label for button
+		var btn_label = Label3D.new()
+		btn_label.text = str(presets[i])
+		btn_label.pixel_size = 0.001
+		btn_label.font_size = 14
+		btn_label.position = Vector3(0, -0.025, 0.01)
+		btn.add_child(btn_label)
+		
+		# Connect signal - use lambda with captured value
+		var rule_val = presets[i]
+		var area_btn = btn.get_node_or_null("InteractableAreaButton")
+		if area_btn:
+			area_btn.button_pressed.connect(func(): _on_preset_pressed(rule_val))
+	
+	# Reset button
+	var reset_btn = PUSH_BUTTON.instantiate()
+	reset_btn.name = "ResetButton"
+	reset_btn.position = Vector3(0.18, -0.05, 0.015)
+	_control_panel.add_child(reset_btn)
+	
+	var reset_label = Label3D.new()
+	reset_label.text = "RST"
+	reset_label.pixel_size = 0.001
+	reset_label.font_size = 14
+	reset_label.position = Vector3(0, -0.025, 0.01)
+	reset_btn.add_child(reset_label)
+	
+	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+	if reset_area:
+		reset_area.button_pressed.connect(_on_reset_pressed)
+	
+	# Sync initial values
+	call_deferred("_sync_sliders_deferred")
+
+func _sync_sliders_deferred():
+	_sync_rule_slider()
+	_sync_speed_slider()
+
+func _sync_rule_slider():
+	if _rule_slider and _rule_slider.has_method("set_normalized_value"):
+		_rule_slider.set_normalized_value(float(rule) / 255.0)
+
+func _sync_speed_slider():
+	if _speed_slider and _speed_slider.has_method("set_normalized_value"):
+		_speed_slider.set_normalized_value((generations_per_second - 1.0) / 29.0)
+
+func _on_rule_slider_moved(_position):
+	if _rule_slider and _rule_slider.has_method("get_normalized_value"):
+		var norm = _rule_slider.get_normalized_value()
+		var new_rule = int(norm * 255.0)
+		if new_rule != rule:
+			rule = new_rule
+
+func _on_speed_slider_moved(_position):
+	if _speed_slider and _speed_slider.has_method("get_normalized_value"):
+		var norm = _speed_slider.get_normalized_value()
+		generations_per_second = 1.0 + norm * 29.0
+
+func _on_preset_pressed(preset_rule: int):
+	rule = preset_rule
+
+func _on_reset_pressed():
+	_reset()
 
 func _update_rule_display():
 	var rule_name = FAMOUS_RULES.get(rule, "")
@@ -175,21 +287,16 @@ func _update_rule_display():
 		_rule_label.text = "RULE %d" % rule
 
 func _reset():
-	# Clear grid
 	_grid.clear()
-	
-	# Initialize first row - single cell in center
 	_current_row.clear()
 	_current_row.resize(cells_x)
 	for i in range(cells_x):
 		_current_row[i] = false
 	_current_row[cells_x / 2] = true
-	
 	_grid.append(_current_row.duplicate())
 	_update_display()
 
 func _apply_rule(left: bool, center: bool, right: bool) -> bool:
-	# Wolfram elementary CA rule encoding
 	var neighborhood = (int(left) << 2) | (int(center) << 1) | int(right)
 	return (rule >> neighborhood) & 1 == 1
 
@@ -206,7 +313,6 @@ func _advance():
 	_current_row = new_row
 	_grid.push_front(new_row.duplicate())
 	
-	# Keep only visible rows
 	while _grid.size() > rows_visible:
 		_grid.pop_back()
 	
@@ -232,6 +338,7 @@ func _process(delta):
 		_generation_timer = 0.0
 		_advance()
 
+# Keep keyboard for desktop testing
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -252,18 +359,15 @@ func _input(event):
 			KEY_4:
 				rule = 184
 
-## Set rule externally (for sliders)
+## External API
 func set_rule(new_rule: int):
 	rule = clampi(new_rule, 0, 255)
 
-## Get current rule
 func get_rule() -> int:
 	return rule
 
-## Toggle auto-run
 func toggle_pause():
 	auto_run = not auto_run
 
-## Step one generation manually
 func step():
 	_advance()
