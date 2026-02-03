@@ -150,7 +150,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.08, terrarium_size.z/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	
 	# Panel

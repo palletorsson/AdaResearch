@@ -170,7 +170,7 @@ func _create_vr_controls():
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.04, board_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(30, 0, 0)  # Angled toward user
+	_control_panel.rotation_degrees = Vector3(-30, 0, 0)  # Angled toward user
 	add_child(_control_panel)
 	
 	# Panel backing
