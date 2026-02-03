@@ -168,15 +168,15 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 	environment_root.add_child(floor)
 
 ## Creates a framed info panel with backing, border, and title
-func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(1.0, 0.4)) -> Label3D:
+func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(1.4, 0.55)) -> Label3D:
 	var panel = Node3D.new()
 	panel.name = "InfoPanel"
 	panel.position = position * SCENE_SCALE
 	info_root.add_child(panel)
 	
 	var scaled_size = size * SCENE_SCALE
-	var title_height = 0.08 * SCENE_SCALE
-	var gap = 0.02 * SCENE_SCALE
+	var title_height = 0.12 * SCENE_SCALE
+	var gap = 0.025 * SCENE_SCALE
 	
 	# === TITLE PANEL ===
 	var title_panel = Node3D.new()
@@ -204,8 +204,8 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	var title_label = Label3D.new()
 	title_label.name = "TitleLabel"
 	title_label.text = title.to_upper()
-	title_label.pixel_size = 0.0012
-	title_label.font_size = 24
+	title_label.pixel_size = 0.0015
+	title_label.font_size = 28
 	title_label.modulate = Color.WHITE
 	title_label.no_depth_test = true
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -236,8 +236,8 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	var label = Label3D.new()
 	label.name = "Label"
 	label.text = ""
-	label.pixel_size = 0.0012
-	label.font_size = 18
+	label.pixel_size = 0.0015
+	label.font_size = 20
 	label.modulate = Color.WHITE
 	label.no_depth_test = true
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
