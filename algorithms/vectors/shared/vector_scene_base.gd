@@ -156,6 +156,8 @@ func create_axes(length: float = 3.0):
 		label.font_size = 32
 		label.modulate = axis_data.color
 		label.position = axis_data.dir * (scaled_length + 0.25 * SCENE_SCALE)
+		label.no_depth_test = true
+		label.render_priority = 100
 		environment_root.add_child(label)
 
 func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
@@ -210,9 +212,11 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	title_label.modulate = Color.WHITE
 	title_label.no_depth_test = true
 	title_label.render_priority = 100
+	title_label.outline_size = 4
+	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title_label.position.z = 0.02 * SCENE_SCALE
+	title_label.position.z = 0.08 * SCENE_SCALE
 	title_panel.add_child(title_label)
 	
 	# === INFO PANEL ===
@@ -244,10 +248,12 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	label.modulate = Color.WHITE
 	label.no_depth_test = true
 	label.render_priority = 100
+	label.outline_size = 3
+	label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.position.x = -scaled_size.x / 2.0 + 0.02 * SCENE_SCALE  # Left edge + margin
-	label.position.z = 0.02 * SCENE_SCALE
+	label.position.z = 0.08 * SCENE_SCALE
 	panel.add_child(label)
 	
 	return label

@@ -786,6 +786,224 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 
 
 # ============================================================================
+# ACID HOUSE - Chicago 1987 style (Phuture, DJ Pierre)
+# The TB-303 is acid house. High resonance, filter sweeps, slides, accents.
+# ============================================================================
+static func generate_acid_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	# Acid House - Phuture, DJ Pierre, 808 State style
+	# Squelchy 303, 808/909 drums, hypnotic repetition
+	randomize()
+	var bpm = 124.0
+	var bar_duration = 240.0 / bpm
+	# Use low octave for proper acid bass (A1 = 55Hz, classic acid frequency)
+	var root_note = "A1"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
+	# Acid house often uses minimal harmonic movement
+	var progression = [0, 0, 0, 0]  # Single chord hypnosis
+	print("AudioSynthesizer: Generating Acid House Track in ", root_note)
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 4
+	playback.initial_clip = 0
+	
+	# Intro: Drums only, building anticipation
+	var intro = _generate_acid_house_section(progression, scale, ["kick", "hihat"], bar_duration, 0.3)
+	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1); playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# Build: 303 enters, filter closed
+	var build = _generate_acid_house_section(progression, scale, ["kick", "hihat", "acid303"], bar_duration, 0.5)
+	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
+	playback.set_clip_auto_advance(1, 1); playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# Peak: Full squelch, claps, maximum energy
+	var peak = _generate_acid_house_section(progression, scale, ["kick", "hihat", "clap", "acid303", "cowbell"], bar_duration, 0.9)
+	playback.set_clip_stream(2, peak); playback.set_clip_name(2, "Peak")
+	playback.set_clip_auto_advance(2, 1); playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# Breakdown: 303 solo with filter play
+	var breakdown = _generate_acid_house_section(progression, scale, ["acid303"], bar_duration, 0.7)
+	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
+	playback.set_clip_auto_advance(3, 1); playback.set_clip_auto_advance_next_clip(3, 0)
+	
+	var xfade = 2.0
+	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	return playback
+
+
+static func _generate_acid_house_section(progression: Array, scale: Array, instruments: Array, bar_duration: float, filter_intensity: float) -> AudioStreamWAV:
+	# ACID HOUSE - Research: 303 18dB filter, high resonance, slide + accent
+	var bpm = 124.0
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array(); final_mix.resize(total_samples); final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	
+	# 303 filter state (persists across samples for resonance)
+	var filter_state = [0.0, 0.0, 0.0]
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
+		
+		# 808/909 KICK - 4-on-floor, punchy
+		if "kick" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			for beat in range(int(samples_per_chord / beat_samples) + 1):
+				var start = beat * beat_samples
+				for j in range(mini(int(SAMPLE_RATE * 0.15), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					# 808-style kick with pitch drop
+					var kfreq = 50.0 + exp(-kt * 35.0) * 80.0
+					var kick = sin(2.0 * PI * kfreq * kt) * exp(-kt * 10.0)
+					if start + j < samples_per_chord: chord_mix[start + j] += kick * 0.38
+		
+		# 808 HIHAT - 16th notes
+		if "hihat" in instruments:
+			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
+			for step in range(int(samples_per_chord / sixteenth) + 1):
+				var start = step * sixteenth
+				var is_open = (step % 4 == 2)  # Open hat on offbeats
+				var decay = 80.0 if not is_open else 25.0
+				for j in range(mini(int(SAMPLE_RATE * 0.05), samples_per_chord - start)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * decay)
+					# High-pass character
+					hat += sin(ht * 12000.0) * 0.3 * exp(-ht * decay)
+					if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.12
+		
+		# 808 CLAP - On 2 and 4
+		if "clap" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			for beat in [1, 3]:
+				var start = beat * beat_samples
+				if start < samples_per_chord:
+					for j in range(mini(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
+						var ct = float(j) / SAMPLE_RATE
+						# 808 clap: layered noise bursts
+						var clap = 0.0
+						for layer in [0.0, 0.01, 0.02]:
+							if ct >= layer:
+								clap += (randf() - 0.5) * exp(-(ct - layer) * 35.0) * 0.5
+						if start + j < samples_per_chord: chord_mix[start + j] += clap * 0.28
+		
+		# 808 COWBELL - Chicago flavor
+		if "cowbell" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			# Syncopated cowbell pattern
+			var cowbell_beats = [0.5, 1.5, 2.5, 3.5]  # Offbeats
+			for cb in cowbell_beats:
+				var start = int(cb * beat_samples)
+				if start < samples_per_chord:
+					for j in range(mini(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+						var ct = float(j) / SAMPLE_RATE
+						# 808 cowbell: two detuned square waves
+						var cw = 0.0
+						cw += (1.0 if fmod(ct * 587.0, 1.0) < 0.5 else -1.0) * 0.5
+						cw += (1.0 if fmod(ct * 845.0, 1.0) < 0.5 else -1.0) * 0.5
+						cw *= exp(-ct * 25.0)
+						if start + j < samples_per_chord: chord_mix[start + j] += cw * 0.08
+		
+		# TB-303 ACID BASS - The heart of acid house!
+		if "acid303" in instruments:
+			var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
+			
+			# Generate acid pattern with slides and accents
+			# Classic pattern: root with octave jumps, strategic slides
+			var acid_pattern = []
+			var base_note = root_freq
+			for step in range(16):
+				var note_data = {"freq": base_note, "slide": false, "accent": false, "rest": false}
+				# Pattern: mostly root, occasional octave up
+				if step in [3, 8, 13]:
+					note_data.freq = base_note * 2.0  # Octave up
+					note_data.slide = true
+				elif step in [1, 5, 9]:
+					note_data.rest = true
+				# Accents on certain beats (NOT step 0 - avoid spike when 303 enters)
+				if step in [4, 7, 10, 14]:
+					note_data.accent = true
+				acid_pattern.append(note_data)
+			
+			var current_freq = base_note
+			for step in range(16):
+				var start = step * sixteenth
+				var note = acid_pattern[step]
+				
+				if note.rest:
+					continue
+				
+				var target_freq = note.freq
+				
+				for j in range(mini(sixteenth, samples_per_chord - start)):
+					var t = float(j) / SAMPLE_RATE
+					var step_phase = float(j) / float(sixteenth)
+					
+					# Portamento (slide)
+					if note.slide:
+						current_freq = lerp(current_freq, target_freq, 0.08)
+					else:
+						current_freq = lerp(current_freq, target_freq, 0.5)
+					
+					# Sawtooth oscillator
+					var phase = fmod(t * current_freq + float(start) / SAMPLE_RATE * current_freq, 1.0)
+					var saw = phase * 2.0 - 1.0
+					
+					# Filter envelope
+					var env_decay = 8.0 if not note.accent else 5.0
+					var env = exp(-t * env_decay)
+					
+					# Accent boosts filter envelope (moderate boost to avoid spikes)
+					var accent_mult = 1.0 if not note.accent else 1.25
+					
+					# Calculate filter cutoff (THE ACID SOUND)
+					var base_cutoff = 200.0 + filter_intensity * 600.0
+					var env_mod = 3000.0 * filter_intensity
+					var filter_cutoff = base_cutoff + env * env_mod * accent_mult
+					
+					# Slow filter sweep over time for movement
+					var sweep = sin(float(start + j) / SAMPLE_RATE * 0.5) * 0.3 + 0.7
+					filter_cutoff *= sweep
+					
+					# Moderate resonance (0.5-0.65 range, tamed to avoid squealing)
+					var resonance = 0.5 + filter_intensity * 0.15
+					
+					# Simple resonant lowpass approximation
+					var f = clampf(filter_cutoff / SAMPLE_RATE * 2.0, 0.01, 0.99)
+					var fb = resonance + resonance / (1.0 - f + 0.001)
+					
+					filter_state[0] += f * (saw - filter_state[0] + fb * (filter_state[0] - filter_state[2]))
+					filter_state[1] += f * (filter_state[0] - filter_state[1])
+					filter_state[2] += f * (filter_state[1] - filter_state[2])
+					
+					var filtered = filter_state[2]
+					
+					# Amp envelope
+					var amp_env = exp(-t * 4.0) * 0.8 + 0.2
+					if note.accent:
+						amp_env *= 1.15  # Subtle accent boost (avoid spikes)
+					
+					var acid = filtered * amp_env * 0.22  # Much lower level - 303 should sit in mix
+					
+					if start + j < samples_per_chord: chord_mix[start + j] += acid
+		
+		# Mix into final buffer
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			# Soft clip for warmth (reduced to prevent clipping)
+			var sample = tanh(chord_mix[j] * 0.85)
+			if start_idx + j < total_samples: final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.01))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
+# ============================================================================
 # FRENCH TOUCH - Daft Punk "Discovery" style
 # Based on research: Resonant bandpass "duck" leads, wavetable chiffs, filter disco
 # ============================================================================
@@ -3262,7 +3480,7 @@ static func _generate_gypsy_house_section(progression: Array, scale: Array, inst
 		
 		# 909-STYLE HOUSE DRUMS
 		if "drums" in instruments:
-			var beat_samples = int(bar_duration * SAMPLE_RATE / 4)  # 16th note grid
+			var beat_samples = int(bar_duration * SAMPLE_RATE / 16)  # 16th note grid (16 steps per bar)
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
 				var beat_in_bar = int(fmod(j, bar_duration * SAMPLE_RATE) / beat_samples)

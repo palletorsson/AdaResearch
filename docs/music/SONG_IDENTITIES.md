@@ -682,6 +682,7 @@ func supersaw_pad(t: float, freq: float) -> float:
 
 | Song | BPM | Key | Signature Sound | Emotion |
 |------|-----|-----|-----------------|---------|
+| Acid House | 118-130 | Am, Em (or none) | TB-303 squelch, resonant filter | Hypnotic squelch |
 | Ambient Works | 85-100 | Am, Em, Dm | Warm detuned pads, lo-fi breaks | Nostalgic warmth |
 | Detroit Techno | 120-130 | Cm, Gm, Dm | 909 drums, Juno strings | Cold soulfulness |
 | Moroder Disco | 120-130 | C, G (major) | 16th-note sequencer | Hypnotic ecstasy |

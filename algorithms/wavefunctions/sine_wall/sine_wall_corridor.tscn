@@ -19,6 +19,8 @@ corridor_height = 4.0
 base_frequency = 5.2
 base_amplitude = 0.2
 enable_collision = false
+animate_at_runtime = true
+animation_speed = 0.05
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("1")

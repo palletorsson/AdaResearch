@@ -14,6 +14,7 @@ var _status_label: Label
 var _song_buttons: Dictionary = {}
 var _play_btn: Button
 var _stop_btn: Button
+var _export_btn: Button
 var _section_label: Label
 
 # Timeline component
@@ -48,14 +49,14 @@ func _setup_ui():
 	
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	vbox.add_theme_constant_override("separation", 20)
-	vbox.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 40)
+	vbox.add_theme_constant_override("separation", 10)
+	vbox.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 20)
 	add_child(vbox)
 	
 	# Title
 	_title_label = Label.new()
 	_title_label.text = "🎹 SONG PREVIEW"
-	_title_label.add_theme_font_size_override("font_size", 48)
+	_title_label.add_theme_font_size_override("font_size", 36)
 	_title_label.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(_title_label)
@@ -63,35 +64,44 @@ func _setup_ui():
 	# Subtitle
 	var subtitle = Label.new()
 	subtitle.text = "Full procedural songs with multiple sections"
-	subtitle.add_theme_font_size_override("font_size", 20)
+	subtitle.add_theme_font_size_override("font_size", 16)
 	subtitle.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(subtitle)
 	
-	# Spacer
-	var spacer1 = Control.new()
-	spacer1.custom_minimum_size.y = 20
-	vbox.add_child(spacer1)
+	# === SCROLLABLE SONG GRID ===
+	var scroll = ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	vbox.add_child(scroll)
 	
-	# Song buttons - 7 full songs!
+	var grid = GridContainer.new()
+	grid.columns = 3  # 3 columns of cards
+	grid.add_theme_constant_override("h_separation", 12)
+	grid.add_theme_constant_override("v_separation", 12)
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(grid)
+	
+	# Song buttons - 13 full songs including hybrids!
 	var songs = [
-		["prog_synth_70s", "🎸 70s Prog Synth", "ELP, Kraftwerk, Yes - Moog bass, screaming leads, motorik drums"],
-		["pop_generative", "🎤 Pop Generative", "Verse-Chorus structure with keys, bass, drums, lead"],
-		["ambient_works", "🌊 Ambient Works", "Aphex Twin style - warm pads, lo-fi breakbeats, dreamy"],
-		["moroder_disco", "🪩 Moroder Disco", "Giorgio Moroder 'I Feel Love' - hypnotic 16th sequencer, 4-on-floor"],
-		["detroit_techno", "🔩 Detroit Techno", "Juan Atkins, Derrick May - cold machine funk, minimal, hypnotic"],
-		["synthwave", "🌃 Synthwave", "The Weeknd, Kavinsky - 80s gated drums, detuned leads, arpeggios"],
-		["rave", "⚡ 90s Rave", "The Prodigy, SL2 - aggressive breakbeats, hoover bass, stabs"]
+		["ada_theme", "🎤 Ada Theme", "Warm backing for Ada voice"],
+		["prog_synth_70s", "🎸 70s Prog", "ELP, Kraftwerk, Yes"],
+		["pop_generative", "🎤 Pop Gen", "Verse-Chorus structure"],
+		["ambient_works", "🌊 Ambient", "Aphex Twin style"],
+		["i_feel_love", "💜 I Feel Love", "Donna Summer + synth voice"],
+		["detroit_techno", "🔩 Detroit", "Cold machine funk"],
+		["midnight_metroplex", "🌃 Metroplex", "909 + 808 researched"],
+		["synthwave", "🌆 Synthwave", "80s gated drums"],
+		["rave", "⚡ Rave", "Breakbeats + hoover"],
+		["replicants_dawn", "🌅 Replicant", "Vangelis × Detroit"],
+		["foggy_frequencies", "🌫️ Foggy", "BoC × Burial"],
+		["chicago_dusseldorf", "🚂 Chi→Düss", "House × Kraftwerk"],
+		["moroder_disco", "🪩 Moroder", "Instrumental version"]
 	]
 	
 	for song in songs:
-		var song_box = _create_song_box(song[0], song[1], song[2])
-		vbox.add_child(song_box)
-	
-	# Spacer
-	var spacer2 = Control.new()
-	spacer2.custom_minimum_size.y = 20
-	vbox.add_child(spacer2)
+		var song_card = _create_song_card(song[0], song[1], song[2])
+		grid.add_child(song_card)
 	
 	# Control buttons
 	var controls = HBoxContainer.new()
@@ -112,6 +122,13 @@ func _setup_ui():
 	_stop_btn.pressed.connect(_stop_song)
 	_style_button(_stop_btn, Color(0.6, 0.2, 0.2))
 	controls.add_child(_stop_btn)
+	
+	_export_btn = Button.new()
+	_export_btn.text = "  💾 EXPORT WAV  "
+	_export_btn.disabled = true
+	_export_btn.pressed.connect(_export_wav)
+	_style_button(_export_btn, Color(0.3, 0.4, 0.6))
+	controls.add_child(_export_btn)
 	
 	# Status
 	_status_label = Label.new()
@@ -196,6 +213,79 @@ func _create_song_box(id: String, title: String, desc: String) -> Control:
 	return box
 
 
+func _create_song_card(id: String, title: String, desc: String) -> Control:
+	"""Compact card for grid layout"""
+	var card = PanelContainer.new()
+	card.custom_minimum_size = Vector2(220, 100)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.1, 0.1, 0.14)
+	style.border_color = Color(0.25, 0.25, 0.3)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(10)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	card.add_theme_stylebox_override("panel", style)
+	
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
+	card.add_child(vbox)
+	
+	# Title
+	var title_lbl = Label.new()
+	title_lbl.text = title
+	title_lbl.add_theme_font_size_override("font_size", 20)
+	title_lbl.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
+	vbox.add_child(title_lbl)
+	
+	# Description
+	var desc_lbl = Label.new()
+	desc_lbl.text = desc
+	desc_lbl.add_theme_font_size_override("font_size", 12)
+	desc_lbl.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
+	desc_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+	vbox.add_child(desc_lbl)
+	
+	# Play button
+	var play_btn = Button.new()
+	play_btn.text = "▶ PLAY"
+	play_btn.pressed.connect(_on_song_selected.bind(id))
+	play_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_style_card_button(play_btn)
+	vbox.add_child(play_btn)
+	
+	_song_buttons[id] = play_btn
+	
+	return card
+
+
+func _style_card_button(btn: Button):
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.2, 0.45, 0.3)
+	style.set_corner_radius_all(5)
+	style.content_margin_left = 8
+	style.content_margin_right = 8
+	style.content_margin_top = 6
+	style.content_margin_bottom = 6
+	btn.add_theme_stylebox_override("normal", style)
+	btn.add_theme_font_size_override("font_size", 14)
+	
+	var hover = style.duplicate()
+	hover.bg_color = Color(0.25, 0.55, 0.35)
+	btn.add_theme_stylebox_override("hover", hover)
+	
+	var pressed = style.duplicate()
+	pressed.bg_color = Color(0.15, 0.35, 0.2)
+	btn.add_theme_stylebox_override("pressed", pressed)
+	
+	var disabled = style.duplicate()
+	disabled.bg_color = Color(0.2, 0.2, 0.2)
+	btn.add_theme_stylebox_override("disabled", disabled)
+
+
 func _style_button(btn: Button, color: Color):
 	var style = StyleBoxFlat.new()
 	style.bg_color = color
@@ -237,6 +327,8 @@ func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
 	
 	match song_id:
+		"ada_theme":
+			stream = SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
 		"prog_synth_70s":
 			stream = AudioSynthesizer.generate_prog_synth_song({})
 		"pop_generative":
@@ -247,10 +339,24 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_moroder_disco_song({})
 		"detroit_techno":
 			stream = AudioSynthesizer.generate_detroit_techno_song({})
+		"midnight_metroplex":
+			stream = SoundbankGenerator.generate_song("detroit_techno", {})
 		"synthwave":
 			stream = AudioSynthesizer.generate_synthwave_song({})
 		"rave":
 			stream = AudioSynthesizer.generate_rave_song({})
+		# === NEW: I Feel Love with singing ===
+		"i_feel_love":
+			stream = SoundbankGenerator.generate_song("moroder_disco", {"bpm": 126})
+		"moroder_disco":
+			stream = SoundbankGenerator.generate_song("moroder_disco", {"bpm": 126})
+		# === HYBRID SONGS ===
+		"replicants_dawn":
+			stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
+		"foggy_frequencies":
+			stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
+		"chicago_dusseldorf":
+			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
 	
 	if stream == null:
 		_status_label.text = "Failed to generate song!"
@@ -269,6 +375,7 @@ func _generate_and_play(song_id: String):
 	_play_btn.disabled = false
 	_play_btn.text = "  ⏸ PAUSE  "
 	_stop_btn.disabled = false
+	_export_btn.disabled = false
 	_enable_buttons()
 	
 	# Load timeline with song metadata
@@ -303,6 +410,7 @@ func _stop_song():
 	_play_btn.text = "  ⏸ PAUSE  "
 	_play_btn.disabled = true
 	_stop_btn.disabled = true
+	_export_btn.disabled = true
 	_section_label.text = ""
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
@@ -315,8 +423,68 @@ func _on_song_finished():
 	_play_btn.disabled = true
 	_play_btn.text = "  ⏸ PAUSE  "
 	_stop_btn.disabled = true
+	# Keep export enabled after finished - user may want to export
 	_section_label.text = ""
 	_timeline.set_playing(false)
+
+
+func _export_wav():
+	"""Export current song to WAV file"""
+	if _player.stream == null:
+		_status_label.text = "No song to export!"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+		return
+	
+	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	var filename = _current_song + "_" + timestamp + ".wav"
+	var export_path = "user://exports/"
+	
+	# Ensure export directory exists
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(export_path))
+	
+	var full_path = export_path + filename
+	
+	_status_label.text = "Exporting..."
+	_status_label.add_theme_color_override("font_color", Color(1.0, 0.8, 0.3))
+	_export_btn.disabled = true
+	
+	# Use SongExporter if available
+	if ClassDB.class_exists("SongExporter") or ResourceLoader.exists("res://commons/audio/generators/SongExporter.gd"):
+		call_deferred("_do_export", full_path)
+	else:
+		# Fallback: export the stream directly if it's a WAV
+		_export_stream_directly(full_path)
+
+
+func _do_export(path: String):
+	var result = SongExporter.export_interactive_to_wav(_current_stream, path)
+	if result == OK:
+		var global_path = ProjectSettings.globalize_path(path)
+		_status_label.text = "Exported: " + global_path
+		_status_label.add_theme_color_override("font_color", Color(0.3, 1.0, 0.5))
+		print("Song exported to: ", global_path)
+	else:
+		_status_label.text = "Export failed!"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	_export_btn.disabled = false
+
+
+func _export_stream_directly(path: String):
+	"""Fallback export for non-interactive streams"""
+	if _player.stream is AudioStreamWAV:
+		var wav: AudioStreamWAV = _player.stream
+		var err = wav.save_to_wav(path)
+		if err == OK:
+			var global_path = ProjectSettings.globalize_path(path)
+			_status_label.text = "Exported: " + global_path
+			_status_label.add_theme_color_override("font_color", Color(0.3, 1.0, 0.5))
+		else:
+			_status_label.text = "Export failed!"
+			_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	else:
+		_status_label.text = "Cannot export this stream type directly"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.5, 0.3))
+	_export_btn.disabled = false
 
 
 func _enable_buttons():
@@ -398,6 +566,32 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 	"""Return detailed layer/parameter info per section for each song type"""
 	
 	match song_id:
+		"ada_theme":
+			return {
+				"intro": [
+					{"name": "Warm Pad", "type": "pad", "params": "5 voices | ±8 cents detune | LPF 2kHz | slow attack"},
+				],
+				"verse": [
+					{"name": "Warm Pad", "type": "pad", "params": "supportive | leaves space for vocal"},
+					{"name": "Sine Bass", "type": "bass", "params": "deep | sustained root notes"},
+					{"name": "Soft Drums", "type": "drums", "params": "minimal | pillow kick | brush snare"},
+				],
+				"chorus": [
+					{"name": "Warm Pad", "type": "pad", "params": "fuller | filter opening"},
+					{"name": "Sine Bass", "type": "bass", "params": "following chords"},
+					{"name": "Gentle Arp", "type": "seq", "params": "twinkling | up-down | delay"},
+					{"name": "Soft Drums", "type": "drums", "params": "adding hi-hat"},
+				],
+				"bridge": [
+					{"name": "Warm Pad", "type": "pad", "params": "extended chords | dreamy"},
+					{"name": "Gentle Arp", "type": "seq", "params": "exposed | reverb"},
+				],
+				"outro": [
+					{"name": "Warm Pad", "type": "pad", "params": "fade | long release"},
+				],
+				"default": [{"name": "Ada Theme", "type": "mix", "params": "100 BPM | A major | space for vocals"}]
+			}
+		
 		"prog_synth_70s":
 			return {
 				"intro": [
@@ -503,6 +697,79 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"default": [{"name": "Detroit Mix", "type": "mix", "params": ""}]
 			}
 		
+		"midnight_metroplex":
+			return {
+				"intro": [
+					{"name": "Digital Pad", "type": "pad", "params": "Juno-106 DCO | ZERO detune | filter 3500Hz | cold"},
+				],
+				"build": [
+					{"name": "Digital Pad", "type": "pad", "params": "sustained | clean"},
+					{"name": "808 Sub Bass", "type": "bass", "params": "sine+square | 150Hz cutoff | +3dB sub"},
+					{"name": "909 Hi-Hat", "type": "drums", "params": "6-oscillator metallic | 263-845Hz | offbeat"},
+				],
+				"main": [
+					{"name": "909 Kick", "type": "drums", "params": "130→50Hz pitch | 25ms decay | click transient"},
+					{"name": "909 Snare", "type": "drums", "params": "dual-osc 180+330Hz | ring-mod character"},
+					{"name": "909 Hi-Hat", "type": "drums", "params": "6-osc metallic synthesis"},
+					{"name": "909 Clap", "type": "drums", "params": "4-burst layered | 12ms spacing"},
+					{"name": "808 Sub", "type": "bass", "params": "locked to kick | deep sub"},
+					{"name": "Digital Pad", "type": "pad", "params": "Juno DCO | stable pitch | cold"},
+					{"name": "FM Stab", "type": "lead", "params": "DX7 Alg.5 | mod ratio 3.0 | metallic"},
+				],
+				"breakdown": [
+					{"name": "Digital Pad", "type": "pad", "params": "exposed | atmospheric"},
+					{"name": "808 Sub", "type": "bass", "params": "minimal | breathing room"},
+				],
+				"outro": [
+					{"name": "Digital Pad", "type": "pad", "params": "fade | filter closing"},
+					{"name": "909 Hi-Hat", "type": "drums", "params": "fading metallic"},
+				],
+				"default": [{"name": "Midnight Metroplex", "type": "mix", "params": "126 BPM | Am | machine precision"}]
+			}
+		
+		"i_feel_love", "moroder_disco":
+			return {
+				"intro": [
+					{"name": "Space Pad", "type": "pad", "params": "ARP Odyssey | reverb | slow filter"},
+					{"name": "16th Sequencer", "type": "seq", "params": "Moog | constant 16ths | THE motor"},
+				],
+				"build": [
+					{"name": "16th Sequencer", "type": "seq", "params": "filter opening"},
+					{"name": "Space Pad", "type": "pad", "params": "building"},
+					{"name": "Hi-Hat", "type": "drums", "params": "constant 16ths | driving"},
+					{"name": "Minimoog Bass", "type": "bass", "params": "pulsing | follows root"},
+				],
+				"main": [
+					{"name": "4-on-Floor Kick", "type": "drums", "params": "CR-78 | punchy | foundation"},
+					{"name": "Hi-Hat", "type": "drums", "params": "relentless 16ths"},
+					{"name": "16th Sequencer", "type": "seq", "params": "hypnotic | never stops"},
+					{"name": "Minimoog Bass", "type": "bass", "params": "locked to root"},
+					{"name": "Space Pad", "type": "pad", "params": "floating above"},
+				],
+				"vocal": [
+					{"name": "Donna Summer Voice", "type": "vocal", "params": "breathy | high | 'I feel love'"},
+					{"name": "Full Groove", "type": "drums", "params": "kick + hihat + sequencer"},
+					{"name": "Bass", "type": "bass", "params": "pulsing foundation"},
+				],
+				"breakdown": [
+					{"name": "16th Sequencer", "type": "seq", "params": "exposed | filter sweep"},
+					{"name": "Space Pad", "type": "pad", "params": "ethereal | building tension"},
+				],
+				"drop": [
+					{"name": "Full Kit", "type": "drums", "params": "kick + snare + hihat"},
+					{"name": "16th Sequencer", "type": "seq", "params": "filter fully open"},
+					{"name": "Bass", "type": "bass", "params": "driving"},
+					{"name": "Space Pad", "type": "pad", "params": "euphoric"},
+					{"name": "Donna Summer Voice", "type": "vocal", "params": "ecstatic | repeating"},
+				],
+				"outro": [
+					{"name": "Space Pad", "type": "pad", "params": "fading"},
+					{"name": "16th Sequencer", "type": "seq", "params": "filter closing"},
+					{"name": "Donna Summer Voice", "type": "vocal", "params": "fading 'love...'"},
+				],
+				"default": [{"name": "I Feel Love", "type": "mix", "params": "126 BPM | Cmaj | Donna Summer × Moroder"}]
+			}
+		
 		"synthwave":
 			return {
 				"intro": [
@@ -571,6 +838,116 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 					{"name": "Drums", "type": "drums", "params": "full kit | energy"},
 				],
 				"default": [{"name": "Pop Mix", "type": "mix", "params": ""}]
+			}
+		
+		# === HYBRID SONGS ===
+		
+		"replicants_dawn":
+			return {
+				"intro": [
+					{"name": "VP-330 Choir", "type": "pad", "params": "ethereal | slow attack | Vangelis signature"},
+					{"name": "Prophet Pad", "type": "pad", "params": "warm analog | sustained"},
+				],
+				"build": [
+					{"name": "CS-80 Strings", "type": "pad", "params": "lush | dual filter sweep"},
+					{"name": "Jupiter Arpeggio", "type": "seq", "params": "shimmering | 16th notes"},
+					{"name": "Prophet Pad", "type": "pad", "params": "bed layer"},
+				],
+				"main": [
+					{"name": "909 Kick", "type": "drums", "params": "4-on-floor | Detroit precision"},
+					{"name": "909 Hi-Hat", "type": "drums", "params": "offbeat | metallic"},
+					{"name": "808 Sub", "type": "bass", "params": "locked to kick | deep"},
+					{"name": "CS-80 Brass", "type": "lead", "params": "expressive | aftertouch | wide intervals"},
+					{"name": "Prophet Pad", "type": "pad", "params": "foundation"},
+				],
+				"breakdown": [
+					{"name": "Prophet Pad", "type": "pad", "params": "exposed | emotional"},
+					{"name": "909 Snare", "type": "drums", "params": "ghost hits | sparse"},
+				],
+				"climax": [
+					{"name": "909 Full Kit", "type": "drums", "params": "kick + snare + hihat + clap"},
+					{"name": "808 Sub", "type": "bass", "params": "driving"},
+					{"name": "CS-80 Lead", "type": "lead", "params": "soaring | vibrato | high register"},
+					{"name": "CS-80 Strings", "type": "pad", "params": "swelling"},
+					{"name": "VP-330 Choir", "type": "pad", "params": "triumphant"},
+				],
+				"outro": [
+					{"name": "VP-330 Choir", "type": "pad", "params": "fading | ethereal"},
+					{"name": "Prophet Pad", "type": "pad", "params": "single note | fade"},
+				],
+				"default": [{"name": "Replicant's Dawn", "type": "mix", "params": "120 BPM | Dm | Vangelis × Detroit"}]
+			}
+		
+		"foggy_frequencies":
+			return {
+				"intro": [
+					{"name": "BoC Texture", "type": "noise", "params": "tape hiss | warped | nostalgic"},
+					{"name": "Vinyl Crackle", "type": "noise", "params": "Burial signature | 3am vibes"},
+				],
+				"build": [
+					{"name": "BoC Sequence", "type": "seq", "params": "detuned | pitch drift | 8th notes"},
+					{"name": "BoC Pad", "type": "pad", "params": "warm | lo-fi | slow filter"},
+					{"name": "Burial Atmosphere", "type": "pad", "params": "reverb wash | nocturnal"},
+				],
+				"main": [
+					{"name": "2-Step Kick", "type": "drums", "params": "displaced | never on beat 1"},
+					{"name": "2-Step Snare", "type": "drums", "params": "ghost notes | shuffled"},
+					{"name": "Shuffled Hi-Hat", "type": "drums", "params": "swung | varying velocity"},
+					{"name": "BoC Pad", "type": "pad", "params": "nostalgic bed"},
+					{"name": "BoC Bass", "type": "bass", "params": "warm | sparse"},
+				],
+				"breakdown": [
+					{"name": "Burial Vocal", "type": "vocal", "params": "pitched | reverb | ghostly"},
+					{"name": "BoC Sequence", "type": "seq", "params": "exposed | haunting"},
+					{"name": "Vinyl Crackle", "type": "noise", "params": "intimate"},
+				],
+				"outro": [
+					{"name": "BoC Texture", "type": "noise", "params": "fading memories"},
+					{"name": "Vinyl Crackle", "type": "noise", "params": "fade to silence"},
+				],
+				"default": [{"name": "Foggy Frequencies", "type": "mix", "params": "130 BPM | Fm | BoC × Burial"}]
+			}
+		
+		"chicago_dusseldorf":
+			return {
+				"intro": [
+					{"name": "House Piano", "type": "keys", "params": "jazz voicings | soulful | warm"},
+					{"name": "House Organ", "type": "keys", "params": "sustained | filter sweep"},
+					{"name": "House Pad", "type": "pad", "params": "establishing mood"},
+				],
+				"verse": [
+					{"name": "House Kick", "type": "drums", "params": "4-on-floor | bouncy"},
+					{"name": "House Clap", "type": "drums", "params": "2 and 4 | punchy"},
+					{"name": "Motorik Hi-Hat", "type": "drums", "params": "8th notes | transitioning"},
+					{"name": "Chicago Bass", "type": "bass", "params": "offbeat | bouncy | short notes"},
+					{"name": "House Piano", "type": "keys", "params": "offbeat stabs | THE sound"},
+				],
+				"transition": [
+					{"name": "House Piano", "type": "keys", "params": "fading | morphing"},
+					{"name": "Kraftwerk Sequence", "type": "seq", "params": "emerging | cold | precise"},
+				],
+				"robotic": [
+					{"name": "Motorik Kick", "type": "drums", "params": "unwavering | machine"},
+					{"name": "Motorik Hi-Hat", "type": "drums", "params": "perfect 8ths | no variation"},
+					{"name": "Kraftwerk Snare", "type": "drums", "params": "electronic | precise"},
+					{"name": "Chicago Bass", "type": "bass", "params": "now locked to kick"},
+					{"name": "Kraftwerk Vocoder", "type": "vocal", "params": "'Trans Europa' | robotic"},
+				],
+				"breakdown": [
+					{"name": "House Piano", "type": "keys", "params": "ghost | memory of soul"},
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "cold | digital"},
+				],
+				"finale": [
+					{"name": "Hybrid Drums", "type": "drums", "params": "kick + hihat + clap"},
+					{"name": "House Organ", "type": "keys", "params": "stabs | hybrid groove"},
+					{"name": "Kraftwerk Sequence", "type": "seq", "params": "driving | hypnotic"},
+					{"name": "Kraftwerk Vocoder", "type": "vocal", "params": "full robotic choir"},
+				],
+				"outro": [
+					{"name": "Kraftwerk Sequence", "type": "seq", "params": "mechanical | fading"},
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "cold ending"},
+				],
+				"default": [{"name": "Chicago → Düsseldorf", "type": "mix", "params": "122 BPM | Am | House × Kraftwerk"}]
 			}
 		
 		_:

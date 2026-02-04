@@ -630,6 +630,57 @@
 			"description": "Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.",
 			"scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
 			"category": "waves"
+		},
+
+		"static_reference_cube": {
+			"name": "Static Reference Cube",
+			"lookup_name": "static_reference_cube",
+			"description": "Stage 1 of oscillation progression: A motionless cube establishing the baseline for comparison. Without stillness, we cannot perceive motion. The constant against which all oscillation is measured. Position = constant, y = 0.",
+			"scene": "res://commons/artifacts/static_reference_cube/static_reference_cube.tscn",
+			"category": "waves"
+		},
+		"rotating_cube_demo": {
+			"name": "Rotating Cube Demo",
+			"lookup_name": "rotating_cube_demo",
+			"description": "Continuous rotation demonstration: θ += ω·dt. The simplest rotational motion—angle increases by angular velocity times delta time each frame. Ground arc shows the rotation path, direction arrow tracks the current angle. Constant spin, no oscillation.",
+			"scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn",
+			"category": "waves"
+		},
+		"y_oscillation_cube": {
+			"name": "Y-Oscillation Cube",
+			"lookup_name": "y_oscillation_cube",
+			"description": "Stage 2 of oscillation progression: Core concept of y = A·sin(ωt). A cube oscillates vertically along a rail, demonstrating how sine function maps time to position. Trail ghosts show motion path, real-time labels display t, sin(t), and y values. The fundamental oscillation.",
+			"scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
+			"category": "waves"
+		},
+		"rotation_oscillation_cube": {
+			"name": "Rotation Oscillation Cube",
+			"lookup_name": "rotation_oscillation_cube",
+			"description": "Stage 3 of oscillation progression: θ = A·sin(ωt) applied to rotation instead of position. Same mathematics, different output mapping. Arc indicator shows rotation range, direction arrow on cube face. Toggle between oscillating mode (pendulum-like) and continuous rotation (θ += ω·dt).",
+			"scene": "res://commons/artifacts/rotation_oscillation_cube/rotation_oscillation_cube.tscn",
+			"category": "waves"
+		},
+		"oscillation_controlled_cube": {
+			"name": "Oscillation Controlled Cube",
+			"lookup_name": "oscillation_controlled_cube",
+			"description": "Stage 4 of oscillation progression: The 'mario cube' responding to pendulum control. Three simultaneous mappings: y_offset → Y position, angular_velocity → rotation speed, amplitude → scale pulse. Visual guides show vertical rail, rotation arc, and real-time parameter breakdown. QFEP: One input, many outputs—oscillation as control signal.",
+			"scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
+			"category": "waves"
+		},
+		
+		"sine_wall_explanation": {
+			"name": "Sine Wall Explanation",
+			"lookup_name": "sine_wall_explanation",
+			"description": "1m display case showing how sine function shapes corridor walls. Animated mini-corridor demonstrates x = A·sin(f·z)—the wave displacement that creates the sine_wall_corridor effect. Shows amplitude, frequency parameters with live wave propagation.",
+			"scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn",
+			"category": "waves"
+		},
+		"sine_space_explanation": {
+			"name": "Sine Space Explanation",
+			"lookup_name": "sine_space_explanation",
+			"description": "1m display case showing how sine waves modulate 3D space. An 8×8 grid of points demonstrates y = A·sin(x)·sin(z)—the product of two sine functions creating a wave surface. Points rise and fall showing phase relationships across X and Z axes.",
+			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn",
+			"category": "waves"
 		}
 
 	}

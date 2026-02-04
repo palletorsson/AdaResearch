@@ -1,0 +1,45 @@
+{
+	"artifacts": {
+		"_comment": "Transform demonstration artifacts - translation, rotation, scale",
+		
+		"x_translation_cube": {
+			"name": "X-Translation Cube",
+			"lookup_name": "x_translation_cube",
+			"description": "X-axis translation demonstration: position.x changes from left → wait → right → wait. Red cube slides along the X-axis (horizontal), showing how translation along a single axis works. Live display shows current X offset and direction.",
+			"scene": "res://commons/artifacts/axis_translation_cube/x_translation_cube.tscn",
+			"category": "transforms"
+		},
+		
+		"y_translation_cube": {
+			"name": "Y-Translation Cube",
+			"lookup_name": "y_translation_cube",
+			"description": "Y-axis translation demonstration: position.y changes from up → wait → down → wait. Green cube rises and falls along the Y-axis (vertical), showing elevator-like motion. Live display shows current Y offset and direction.",
+			"scene": "res://commons/artifacts/axis_translation_cube/y_translation_cube.tscn",
+			"category": "transforms"
+		},
+		
+		"z_translation_cube": {
+			"name": "Z-Translation Cube",
+			"lookup_name": "z_translation_cube",
+			"description": "Z-axis translation demonstration: position.z changes from forward → wait → back → wait. Blue cube moves along the Z-axis (depth), showing movement toward and away from the viewer. Live display shows current Z offset and direction.",
+			"scene": "res://commons/artifacts/axis_translation_cube/z_translation_cube.tscn",
+			"category": "transforms"
+		},
+		
+		"axis_translation_cube": {
+			"name": "Axis Translation Cube",
+			"lookup_name": "axis_translation_cube",
+			"description": "Configurable axis translation demonstration. Set axis export to 0 (X), 1 (Y), or 2 (Z) to change which axis the cube translates along. Shows start → wait → end → wait pattern with trail ghosts and live labels.",
+			"scene": "res://commons/artifacts/axis_translation_cube/axis_translation_cube.tscn",
+			"category": "transforms"
+		},
+		
+		"translation_cube_demo": {
+			"name": "Translation Cube Demo",
+			"lookup_name": "translation_cube_demo",
+			"description": "Existing translation demo used in Trans_Translate_2. Interactive demonstration of 3D translation vectors.",
+			"scene": "res://commons/artifacts/translation_cube_demo/translation_cube_demo.tscn",
+			"category": "transforms"
+		}
+	}
+}

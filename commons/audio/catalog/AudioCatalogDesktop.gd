@@ -1,11 +1,14 @@
 # AudioCatalogDesktop.gd
-# Standalone desktop launcher for AudioCatalogUI
-# Run this scene directly to browse and preview all sounds
+# Main desktop application for AdaResearch audio tools
+# Tabs: Genre Synth Browser | Original Catalog | Live Session
 
 extends Control
 
-@onready var _catalog_ui: AudioCatalogUI
+const GenreSynthBrowser = preload("res://commons/audio/catalog/GenreSynthBrowser.gd")
 
+var _tab_container: TabContainer
+var _genre_browser: GenreSynthBrowser
+var _catalog_ui: AudioCatalogUI
 var _audio_player: AudioStreamPlayer
 var _current_stream: AudioStreamWAV
 
@@ -14,22 +17,36 @@ func _ready():
 	# Set up window
 	get_tree().root.title = "AdaResearch Audio Catalog"
 	
-	# Create audio player
-	_audio_player = AudioStreamPlayer.new()
-	_audio_player.bus = "Master"
+	# Use scene nodes or create if missing
+	_audio_player = $AudioPlayer if has_node("AudioPlayer") else AudioStreamPlayer.new()
+	if not has_node("AudioPlayer"):
+		_audio_player.bus = "Master"
+		add_child(_audio_player)
 	_audio_player.finished.connect(_on_audio_finished)
-	add_child(_audio_player)
 	
-	# Create the catalog UI
+	# Use scene TabContainer or create
+	_tab_container = $TabContainer if has_node("TabContainer") else TabContainer.new()
+	if not has_node("TabContainer"):
+		_tab_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+		add_child(_tab_container)
+	
+	# Tab 1: Genre Synth Browser (NEW - elements by genre)
+	_genre_browser = GenreSynthBrowser.new()
+	_genre_browser.name = "🎹 Synth Elements"
+	_tab_container.add_child(_genre_browser)
+	
+	# Tab 2: Original Catalog UI
 	_catalog_ui = AudioCatalogUI.new()
-	_catalog_ui.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(_catalog_ui)
+	_catalog_ui.name = "📦 Sound Catalog"
+	_tab_container.add_child(_catalog_ui)
 	
 	# Connect signals
 	_catalog_ui.play_requested.connect(_on_play_requested)
 	_catalog_ui.stop_requested.connect(_on_stop_requested)
 	
-	print("Audio Catalog Desktop ready - %d sounds loaded" % AudioCatalogDataProvider.get_sound_count())
+	print("Audio Catalog Desktop ready")
+	print("  - Genre Synth Browser: 10 genres, 40+ elements")
+	print("  - Sound Catalog: %d sounds" % AudioCatalogDataProvider.get_sound_count())
 
 
 func _on_play_requested(sound_key: String, parameters: Dictionary):
@@ -121,6 +138,25 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 			return TechnoNoirGenerator.generate_sound(sound_type_str, merged_params)
 		"trap_beats":
 			return TrapBeatsGenerator.generate_sound(sound_type_str, merged_params)
+		# Additional category fallbacks
+		"basic":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.PICKUP_MARIO, merged_params)
+		"cyber_jazz":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.NOIR_SAX, merged_params)
+		"epic":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.CINEMATIC_STRINGS, merged_params)
+		"fourier":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MELODIC_DRONE, merged_params)
+		"liturgical":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.CHOIR_PAD, merged_params)
+		"pop_edm":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.SUPERSAW_PROGRESSIVE, merged_params)
+		"songs":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.DETROIT_TECHNO, merged_params)
+		"space_dystopia":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.BLADE_RUNNER_BRASS, merged_params)
+		"space_pop":
+			return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.SPACE_CHOIR_PAD, merged_params)
 
 	print("AudioCatalogDesktop: Using fallback for '%s' (category: %s)" % [sound_key, category])
 	return CustomSoundGenerator.generate_custom_sound(AudioSynthesizer.SoundType.MELODIC_DRONE, merged_params)

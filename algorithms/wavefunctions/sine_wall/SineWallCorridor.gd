@@ -28,6 +28,8 @@ extends Node3D
 @export var use_plush_shader: bool = true
 
 @export var auto_update_in_editor: bool = true
+@export var animate_at_runtime: bool = true
+@export var animation_speed: float = 0.05  # Very slow animation
 
 var _left_wall: MeshInstance3D
 var _right_wall: MeshInstance3D
@@ -295,15 +297,20 @@ func _evaluate_color(displacement: float) -> Color:
 func _make_signature() -> String:
 	return str(columns, rows, corridor_length, corridor_width, corridor_height, base_frequency, base_amplitude, left_wall_frequency_multiplier, left_wall_amplitude_multiplier, phase, phase_offset_between_walls, wave_layers, bottom_color, mid_color, top_color, enable_collision, use_plush_shader)
 
-func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint():
-		set_process(false)
-		return
-	if not auto_update_in_editor:
-		return
-	var signature := _make_signature()
-	if signature != _last_signature:
-		_build_corridor()
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		# Editor mode: check for parameter changes
+		if not auto_update_in_editor:
+			return
+		var signature := _make_signature()
+		if signature != _last_signature:
+			_build_corridor()
+	else:
+		# Runtime mode: animate phase slowly
+		if animate_at_runtime:
+			phase += delta * animation_speed
+			_last_signature = ""  # Force rebuild
+			_build_corridor()
 
 func _update_process_state() -> void:
-	set_process(Engine.is_editor_hint())
+	set_process(Engine.is_editor_hint() or animate_at_runtime)

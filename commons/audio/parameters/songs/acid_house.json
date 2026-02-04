@@ -1,0 +1,220 @@
+{
+    "_metadata": {
+        "sound_type": "acid_house_song",
+        "display_name": "Acid House",
+        "description": "Chicago acid house - TB-303 squelch over 808/909 drums. High resonance, filter sweeps, slides and accents. Hypnotic, repetitive, the filter IS the performance.",
+        "reference_artists": ["Phuture", "DJ Pierre", "Marshall Jefferson", "808 State", "A Guy Called Gerald", "Hardfloor"],
+        "reference_tracks": ["Acid Tracks - Phuture", "Voodoo Ray - A Guy Called Gerald", "Pacific State - 808 State", "Acperience 1 - Hardfloor"]
+    },
+    "identity": {
+        "emotion": "hypnotic_squelch",
+        "era": "chicago_1987",
+        "character": ["raw", "hypnotic", "acidic", "repetitive", "ecstatic"]
+    },
+    "parameters": {
+        "bpm": { "min": 118, "max": 130, "value": 124 },
+        "key": { "options": ["Am", "Em", "Dm", "none"], "value": "Am" },
+        "time_signature": "4/4"
+    },
+    "sound_design": {
+        "acid_bass": {
+            "enabled": true,
+            "type": "tb303",
+            "waveform": "sawtooth",
+            "filter": {
+                "type": "lowpass_18db",
+                "cutoff_hz": { "min": 200, "max": 800, "value": 400 },
+                "resonance": { "min": 0.6, "max": 0.95, "value": 0.8 },
+                "env_mod": { "min": 0.4, "max": 0.9, "value": 0.7 },
+                "decay_ms": { "min": 100, "max": 400, "value": 200 }
+            },
+            "accent": {
+                "enabled": true,
+                "amount": 0.5,
+                "frequency": "every_2_to_4_steps"
+            },
+            "slide": {
+                "enabled": true,
+                "speed": 0.15,
+                "frequency": "strategic"
+            },
+            "octave_range": { "min": 1, "max": 3 },
+            "pattern_style": "repetitive_with_variation"
+        },
+        "drums": {
+            "machine": "TR-808",
+            "alternate": "TR-909",
+            "kick": {
+                "style": "four_on_floor",
+                "punch_hz": 60,
+                "decay_ms": 300,
+                "character": "punchy_round"
+            },
+            "clap": {
+                "style": "808_clap",
+                "position": "2_and_4",
+                "reverb": 0.2
+            },
+            "hihat_closed": {
+                "style": "16th_notes",
+                "velocity_variation": 0.2
+            },
+            "hihat_open": {
+                "style": "offbeat",
+                "decay_ms": 150
+            },
+            "cowbell": {
+                "enabled": true,
+                "probability": 0.3,
+                "pattern": "syncopated"
+            }
+        },
+        "pads": {
+            "enabled": false,
+            "notes": "acid house traditionally minimal - pads optional for ambient acid variant"
+        },
+        "fx": {
+            "delay": {
+                "enabled": true,
+                "time_sync": "dotted_8th",
+                "feedback": 0.3,
+                "wet": 0.2,
+                "target": "acid_bass"
+            },
+            "reverb": {
+                "enabled": true,
+                "decay_s": 1.5,
+                "wet": 0.15,
+                "target": "drums"
+            }
+        }
+    },
+    "pattern_templates": {
+        "classic_acid": {
+            "description": "Single note with octave jumps, slides, accents",
+            "steps": 16,
+            "notes": ["C2", "--", "C2", "C3", "C2", "--", "C2", "C2", "C3", "--", "C2", "C2", "C2", "C3", "--", "C2"],
+            "slides": [false, false, false, true, false, false, false, false, true, false, false, false, false, true, false, false],
+            "accents": [true, false, false, false, true, false, false, true, false, false, true, false, false, false, true, false]
+        },
+        "rolling": {
+            "description": "Constant 16th notes, filter does the work",
+            "steps": 16,
+            "notes": ["C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2", "C3", "C3", "C2", "C2", "C2", "C2", "C3", "C2"],
+            "slides": [false, false, false, false, false, false, false, true, false, false, false, false, false, false, true, false],
+            "accents": [true, false, false, true, false, false, true, false, true, false, false, true, false, false, true, false]
+        },
+        "minimal": {
+            "description": "Sparse pattern, silence as tension",
+            "steps": 16,
+            "notes": ["C2", "--", "--", "--", "C3", "--", "--", "C2", "--", "--", "--", "--", "C3", "--", "C2", "--"],
+            "slides": [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+            "accents": [true, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false]
+        }
+    },
+    "drum_patterns": {
+        "basic_4x4": {
+            "kick":     ["X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", "."],
+            "clap":     [".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", ".", ".", "."],
+            "chh":      ["X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", ".", "X", "."],
+            "ohh":      [".", ".", ".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", "."]
+        },
+        "driving": {
+            "kick":     ["X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", "."],
+            "clap":     [".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X", ".", ".", "."],
+            "chh":      ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+            "ohh":      [".", ".", ".", ".", ".", ".", ".", "X", ".", ".", ".", ".", ".", ".", ".", "X"],
+            "cowbell":  [".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", ".", ".", ".", "X", "."]
+        }
+    },
+    "arrangement": {
+        "structure": "long_form_hypnotic",
+        "sections": {
+            "intro": {
+                "bars": 16,
+                "elements": ["kick", "hihat"],
+                "notes": "drums only, building anticipation"
+            },
+            "acid_intro": {
+                "bars": 16,
+                "elements": ["kick", "hihat", "acid_bass"],
+                "filter_position": "closed",
+                "notes": "303 enters, filter closed, slowly opens"
+            },
+            "build": {
+                "bars": 32,
+                "elements": ["drums_full", "acid_bass"],
+                "filter_position": "opening",
+                "notes": "claps enter, filter sweep up"
+            },
+            "peak": {
+                "bars": 32,
+                "elements": ["drums_full", "acid_bass"],
+                "filter_position": "open",
+                "notes": "full squelch, maximum resonance"
+            },
+            "breakdown": {
+                "bars": 16,
+                "elements": ["acid_bass"],
+                "filter_position": "sweeping",
+                "notes": "drums drop, 303 solo with filter play"
+            },
+            "rebuild": {
+                "bars": 16,
+                "elements": ["kick", "acid_bass"],
+                "filter_position": "rising",
+                "notes": "kick returns, tension builds"
+            },
+            "peak_2": {
+                "bars": 32,
+                "elements": ["drums_full", "acid_bass"],
+                "filter_position": "open",
+                "notes": "full energy return"
+            },
+            "outro": {
+                "bars": 16,
+                "elements": ["kick", "hihat", "acid_bass"],
+                "filter_position": "closing",
+                "notes": "filter closes down, elements drop"
+            }
+        },
+        "builds": ["filter_sweeps", "element_addition", "resonance_increase"],
+        "total_bars": 176,
+        "duration_at_124bpm": "5:41"
+    },
+    "performance": {
+        "filter_automation": {
+            "enabled": true,
+            "style": "continuous_sweep",
+            "notes": "the filter IS the performance - constant movement"
+        },
+        "resonance_automation": {
+            "enabled": true,
+            "range": [0.6, 0.95],
+            "notes": "push toward self-oscillation at peaks"
+        },
+        "live_tweaking": true
+    },
+    "variations": {
+        "ambient_acid": {
+            "pads_enabled": true,
+            "bpm": 115,
+            "resonance": 0.65,
+            "reference": "Pacific State - 808 State"
+        },
+        "acid_techno": {
+            "bpm": 138,
+            "drums": "TR-909",
+            "resonance": 0.9,
+            "multiple_303s": true,
+            "reference": "Acperience 1 - Hardfloor"
+        },
+        "deep_acid": {
+            "bpm": 120,
+            "filter_cutoff": 300,
+            "resonance": 0.7,
+            "reverb_wet": 0.3,
+            "reference": "Can You Feel It - Mr. Fingers"
+        }
+    }
+}

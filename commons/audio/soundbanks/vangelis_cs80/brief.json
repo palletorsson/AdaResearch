@@ -1,0 +1,53 @@
+{
+	"name": "Vangelis CS-80 Era",
+	"description": "The sound of cinematic emotion. Yamaha CS-80 brass, Prophet-5 pads, VP-330 choirs, Jupiter-4 arpeggios. Blade Runner. Chariots of Fire. Human feeling through machine.",
+	"era": "1978-1985",
+	"bpm_range": "60-120",
+	"key_characteristics": [
+		"Polyphonic aftertouch expression",
+		"Ring modulation for metallic/bell tones",
+		"Dual filter (HPF + LPF) sweeps",
+		"Ribbon controller pitch bends",
+		"Layered string machines",
+		"Vocoder choir textures"
+	],
+	"reference_tracks": [
+		"Blade Runner - Main Titles (1982)",
+		"Blade Runner - Love Theme (1982)",
+		"Chariots of Fire - Main Theme (1981)",
+		"Antarctica - Theme (1983)",
+		"1492: Conquest of Paradise (1992)"
+	],
+	"key_artists": ["Vangelis"],
+	"key_hardware": [
+		"Yamaha CS-80 (primary)",
+		"Sequential Prophet-5",
+		"Roland Jupiter-4",
+		"Roland VP-330 Vocoder Plus",
+		"Roland CR-5000",
+		"Yamaha GS-1 (FM prototype)"
+	],
+	"soundbank": [
+		"cs80_brass",
+		"cs80_strings",
+		"cs80_lead",
+		"prophet_pad",
+		"jupiter_arp",
+		"vp330_choir",
+		"vp330_strings",
+		"singing_voice",
+		"cr5000_kick",
+		"cr5000_snare",
+		"cr5000_hihat"
+	],
+	"forbidden": [
+		"tb303_acid",
+		"supersaw",
+		"modern_wobble",
+		"bitcrushed",
+		"trap_hihat",
+		"dubstep_bass"
+	],
+	"mood": "Epic, emotional, cinematic, nostalgic, futuristic-retro",
+	"production_notes": "Heavy use of reverb (Lexicon 224). Slow attack pads. Expression through aftertouch and ribbon. Layering multiple synths for depth."
+}

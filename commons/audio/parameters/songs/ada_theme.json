@@ -1,0 +1,84 @@
+{
+    "_metadata": {
+        "sound_type": "ada_theme_song",
+        "display_name": "Ada Theme",
+        "description": "A warm, contemplative theme for the Ada singing voice. Spacious pads, gentle pulse, room for vocal melody. Inspired by 80s synth-pop warmth meets ambient introspection.",
+        "category": "songs",
+        "tags": ["ambient", "vocal_backing", "warm", "contemplative", "ada", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["Vangelis", "Brian Eno", "Kraftwerk (ballads)", "Laurie Anderson"],
+        "reference_tracks": ["Blade Runner Love Theme", "An Ending (Ascent)", "Computer Love"]
+    },
+    "identity": {
+        "emotion": "curious_wonder",
+        "era": "timeless_digital",
+        "character": ["warm", "spacious", "contemplative", "supportive"]
+    },
+    "parameters": {
+        "duration": { "min": 60.0, "max": 300.0, "value": 120.0, "step": 30.0, "description": "Song duration in seconds" },
+        "bpm": { "min": 90, "max": 110, "value": 100, "step": 1, "description": "Tempo (matches singing_board default)" },
+        "key": { "options": ["A", "AM", "D", "DM"], "value": "A", "description": "A major to match ada_melody" },
+        "vocal_space": { "min": 0.0, "max": 1.0, "value": 0.7, "step": 0.1, "description": "How much room to leave for vocals (higher = sparser arrangement)" }
+    },
+    "sound_design": {
+        "pads": {
+            "oscillators": 5,
+            "waveform": "sawtooth",
+            "detune_cents": { "min": -8, "max": 8 },
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": { "min": 1200, "max": 2500 },
+            "filter_lfo_rate_hz": { "min": 0.03, "max": 0.1 },
+            "attack_ms": 500,
+            "release_ms": 2000,
+            "character": "warm_wide_supportive"
+        },
+        "drums": {
+            "style": "minimal_electronic",
+            "kick": { "punch_hz": 80, "character": "soft_pillow" },
+            "snare": { "character": "brush_soft", "velocity": 0.4 },
+            "hihats": { "style": "sparse_8th", "velocity": 0.3 },
+            "processing": ["soft_compression", "reverb_heavy"]
+        },
+        "bass": {
+            "style": "warm_sine",
+            "waveform": "sine",
+            "pattern": "root_notes_sustained",
+            "filter_cutoff_hz": 400,
+            "character": "deep_supportive"
+        },
+        "sequence": {
+            "style": "gentle_arpeggio",
+            "pattern": "up_down",
+            "octave_range": 2,
+            "velocity": 0.35,
+            "delay_mix": 0.4,
+            "character": "twinkling_background"
+        }
+    },
+    "chord_progressions": [
+        { "name": "ada_main", "chords": ["A", "D", "F#m", "E"], "description": "Warm major progression matching ada_melody" },
+        { "name": "ada_verse", "chords": ["A", "E", "F#m", "D"], "description": "Classic pop progression" },
+        { "name": "ada_bridge", "chords": ["D", "A", "E", "F#m"], "description": "Lift for 're-search' moment" },
+        { "name": "ada_outro", "chords": ["A", "Aadd9", "D", "Dmaj7"], "description": "Extended chords for dreamy ending" }
+    ],
+    "arrangement": {
+        "structure": "verse_chorus_minimal",
+        "has_strict_sections": false,
+        "development": "breathing_dynamics",
+        "transitions": "pad_swells",
+        "vocal_sections": {
+            "verse": { "density": 0.3, "instruments": ["bass", "pads"] },
+            "chorus": { "density": 0.5, "instruments": ["bass", "pads", "sequence"] },
+            "instrumental": { "density": 0.7, "instruments": ["all"] }
+        }
+    },
+    "mixing": {
+        "reverb": { "size": 0.7, "mix": 0.35, "character": "hall" },
+        "stereo_width": 0.8,
+        "frequency_pocket": {
+            "description": "Leave 200-4000Hz relatively clear for vocal formants",
+            "pad_eq": { "cut_hz": 800, "cut_db": -3 },
+            "sequence_eq": { "high_shelf_hz": 5000, "boost_db": 2 }
+        }
+    }
+}

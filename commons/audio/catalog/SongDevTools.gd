@@ -70,6 +70,15 @@ var _archive_load_btn: Button
 var _archive_compare_btn: Button
 var _archive_index: Dictionary = {}
 
+# Config Inspector (live JSON view)
+var _config_inspector: PanelContainer
+var _config_text: RichTextLabel
+var _config_edit_btn: Button
+var _config_path_label: Label
+var _current_config: Dictionary = {}
+var _current_config_path: String = ""
+var _current_section_name: String = ""
+
 # Parameter Panel
 var _param_panel: PanelContainer
 var _param_sliders: Dictionary = {}  # param_name -> HSlider
@@ -88,8 +97,8 @@ var _scorecard: TrackScorecard
 # Live parameters (these affect playback in real-time)
 var live_params: Dictionary = {
 	"master_volume": 0.0,
-	"bass_filter_cutoff": 800.0,
-	"bass_filter_resonance": 0.5,
+	"bass_filter_cutoff": 20000.0,
+	"bass_filter_resonance": 0.1,
 	"bass_volume": 0.0,
 	"pad_filter_cutoff": 2000.0,
 	"pad_detune": 10.0,
@@ -106,8 +115,8 @@ var live_params: Dictionary = {
 # Parameter ranges for randomization
 var param_ranges: Dictionary = {
 	"master_volume": {"min": -20.0, "max": 6.0, "default": 0.0},
-	"bass_filter_cutoff": {"min": 100.0, "max": 2000.0, "default": 800.0},
-	"bass_filter_resonance": {"min": 0.1, "max": 0.9, "default": 0.5},
+	"bass_filter_cutoff": {"min": 100.0, "max": 20000.0, "default": 20000.0},
+	"bass_filter_resonance": {"min": 0.1, "max": 0.9, "default": 0.1},
 	"bass_volume": {"min": -12.0, "max": 6.0, "default": 0.0},
 	"pad_filter_cutoff": {"min": 200.0, "max": 8000.0, "default": 2000.0},
 	"pad_detune": {"min": 0.0, "max": 30.0, "default": 10.0},
@@ -391,6 +400,9 @@ func _setup_ui():
 	_scorecard.custom_minimum_size.y = 350
 	left_panel.add_child(_scorecard)
 	
+	# Config Inspector (live JSON view)
+	_setup_config_inspector(left_panel)
+	
 	# Right panel - parameters
 	var right_panel = VBoxContainer.new()
 	right_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -592,6 +604,196 @@ func _setup_archive_tab():
 	_load_archive_index()
 
 
+func _setup_config_inspector(parent: Control):
+	"""Create the live JSON config inspector panel"""
+	# Header with toggle and edit button
+	var header = HBoxContainer.new()
+	header.add_theme_constant_override("separation", 8)
+	parent.add_child(header)
+	
+	var toggle_btn = Button.new()
+	toggle_btn.text = "📋 Config Inspector"
+	toggle_btn.toggle_mode = true
+	toggle_btn.button_pressed = true  # Visible by default
+	_style_button_compact(toggle_btn, Color(0.4, 0.5, 0.3))
+	header.add_child(toggle_btn)
+	
+	_config_edit_btn = Button.new()
+	_config_edit_btn.text = "✏️ Edit JSON"
+	_config_edit_btn.disabled = true
+	_config_edit_btn.pressed.connect(_on_config_edit_pressed)
+	_style_button_compact(_config_edit_btn, Color(0.5, 0.4, 0.3))
+	header.add_child(_config_edit_btn)
+	
+	_config_path_label = Label.new()
+	_config_path_label.text = ""
+	_config_path_label.add_theme_font_size_override("font_size", 11)
+	_config_path_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
+	_config_path_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_config_path_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	header.add_child(_config_path_label)
+	
+	# Config panel
+	_config_inspector = PanelContainer.new()
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.06, 0.07, 0.09)
+	style.border_color = Color(0.2, 0.25, 0.2)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(6)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	_config_inspector.add_theme_stylebox_override("panel", style)
+	_config_inspector.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_config_inspector.custom_minimum_size.y = 200
+	parent.add_child(_config_inspector)
+	
+	# Toggle visibility
+	toggle_btn.toggled.connect(func(pressed): _config_inspector.visible = pressed)
+	
+	# Scroll container for config text
+	var scroll = ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_config_inspector.add_child(scroll)
+	
+	# RichTextLabel for selectable, formatted JSON
+	_config_text = RichTextLabel.new()
+	_config_text.bbcode_enabled = true
+	_config_text.fit_content = true
+	_config_text.selection_enabled = true  # Make text selectable!
+	_config_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_config_text.add_theme_font_size_override("normal_font_size", 12)
+	_config_text.add_theme_font_size_override("mono_font_size", 12)
+	_config_text.text = "[color=#666666]Select a song to view its config...[/color]"
+	scroll.add_child(_config_text)
+
+
+func _on_config_edit_pressed():
+	"""Open the config JSON file in the system editor"""
+	if _current_config_path.is_empty():
+		return
+	
+	# Convert res:// path to absolute path
+	var abs_path = ProjectSettings.globalize_path(_current_config_path)
+	
+	# Open in default system editor
+	if OS.get_name() == "Windows":
+		OS.shell_open(abs_path)
+	elif OS.get_name() == "macOS":
+		OS.execute("open", [abs_path])
+	else:
+		OS.execute("xdg-open", [abs_path])
+	
+	_status_label.text = "📝 Opened: " + _current_config_path.get_file()
+
+
+func _load_config_for_song(song_id: String):
+	"""Load and display the JSON config for the current song"""
+	var config_path = "res://commons/audio/parameters/songs/%s.json" % song_id
+	_current_config_path = config_path
+	
+	if not FileAccess.file_exists(config_path):
+		_config_text.text = "[color=#ff6666]No config file found: %s[/color]" % config_path
+		_config_edit_btn.disabled = true
+		_config_path_label.text = ""
+		_current_config = {}
+		return
+	
+	var file = FileAccess.open(config_path, FileAccess.READ)
+	if file == null:
+		_config_text.text = "[color=#ff6666]Failed to open config file[/color]"
+		_config_edit_btn.disabled = true
+		return
+	
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		_config_text.text = "[color=#ff6666]JSON parse error: %s[/color]" % json.get_error_message()
+		_config_edit_btn.disabled = true
+		return
+	
+	_current_config = json.data
+	_config_edit_btn.disabled = false
+	_config_path_label.text = config_path.get_file()
+	
+	# Format and display the config
+	_update_config_display()
+
+
+func _update_config_display():
+	"""Update the config display, highlighting the current section"""
+	if _current_config.is_empty():
+		return
+	
+	var formatted = _format_config_as_bbcode(_current_config, _current_section_name)
+	_config_text.text = formatted
+
+
+func _format_config_as_bbcode(config: Dictionary, highlight_section: String = "", indent: int = 0) -> String:
+	"""Format config dictionary as BBCode with syntax highlighting"""
+	var lines = []
+	var prefix = "  ".repeat(indent)
+	
+	for key in config.keys():
+		var value = config[key]
+		var key_color = "#88aaff"  # Blue for keys
+		
+		# Highlight current section
+		var is_current_section = false
+		if key == "sections" or (highlight_section != "" and key.to_lower() == highlight_section.to_lower()):
+			is_current_section = true
+			key_color = "#ffcc00"  # Yellow for current section
+		
+		if value is Dictionary:
+			# Check if this is the highlighted section
+			var section_marker = ""
+			if is_current_section or (indent == 2 and key.to_lower() == highlight_section.to_lower()):
+				section_marker = " [color=#00ff88]◀ NOW[/color]"
+			lines.append("%s[color=%s]\"%s\"[/color]:%s {" % [prefix, key_color, key, section_marker])
+			lines.append(_format_config_as_bbcode(value, highlight_section, indent + 1))
+			lines.append("%s}" % prefix)
+		elif value is Array:
+			if value.size() <= 8 and not (value.size() > 0 and value[0] is Dictionary):
+				# Short array - inline
+				var items = []
+				for item in value:
+					if item is String:
+						items.append("[color=#98c379]\"%s\"[/color]" % item)
+					else:
+						items.append("[color=#d19a66]%s[/color]" % str(item))
+				lines.append("%s[color=%s]\"%s\"[/color]: [%s]" % [prefix, key_color, key, ", ".join(items)])
+			else:
+				# Long array - multiline
+				lines.append("%s[color=%s]\"%s\"[/color]: [" % [prefix, key_color, key])
+				for item in value:
+					if item is Dictionary:
+						lines.append(_format_config_as_bbcode(item, highlight_section, indent + 1))
+					elif item is String:
+						lines.append("%s  [color=#98c379]\"%s\"[/color]," % [prefix, item])
+					else:
+						lines.append("%s  [color=#d19a66]%s[/color]," % [prefix, str(item)])
+				lines.append("%s]" % prefix)
+		elif value is String:
+			lines.append("%s[color=%s]\"%s\"[/color]: [color=#98c379]\"%s\"[/color]" % [prefix, key_color, key, value])
+		elif value is bool:
+			var bool_color = "#56b6c2" if value else "#e06c75"
+			lines.append("%s[color=%s]\"%s\"[/color]: [color=%s]%s[/color]" % [prefix, key_color, key, bool_color, str(value).to_lower()])
+		else:
+			lines.append("%s[color=%s]\"%s\"[/color]: [color=#d19a66]%s[/color]" % [prefix, key_color, key, str(value)])
+	
+	return "\n".join(lines)
+
+
+func _on_section_changed(section_name: String):
+	"""Called when the current section changes during playback"""
+	_current_section_name = section_name
+	_update_config_display()
+
+
 func _load_archive_index():
 	"""Load the archive index JSON file"""
 	var path = "res://commons/audio/parameters/songs/archive/ARCHIVE_INDEX.json"
@@ -694,6 +896,8 @@ func _load_songs_from_folder() -> Array:
 	
 	# Display name mappings
 	var display_names = {
+		"acid_house": "🧪 Acid House",
+		"acid_techno_303": "🔊 Acid Techno 303",
 		"ambient_works": "🌊 Ambient Works",
 		"ambient_techno": "🌌 Ambient Techno",
 		"blade_runner": "🌃 Blade Runner",
@@ -703,6 +907,7 @@ func _load_songs_from_folder() -> Array:
 		"burial_v2": "🌧️ Burial V2",
 		"detroit_techno": "🔩 Hard Detroit",
 		"detroit_sb": "🔩 Detroit (Soundbank)",
+		"midnight_metroplex": "🌃 Midnight Metroplex",
 		"synthwave_sb": "🌆 Synthwave (Soundbank)",
 		"burial_sb": "🌧️ Burial (Soundbank)",
 		"boc_sb": "📼 BoC (Soundbank)",
@@ -721,6 +926,7 @@ func _load_songs_from_folder() -> Array:
 		"pop_v2": "🎤 Pop V2",
 		"prog_synth_70s": "🎸 70s Prog",
 		"prog_synth_v2": "🎸 Prog V2",
+		"ada_theme": "🎤 Ada Theme",
 		"rave": "⚡ Rave",
 		"reese_jungle": "🌴 Jungle",
 		"supersaw_trance": "🔊 Supersaw",
@@ -1308,6 +1514,9 @@ func _on_song_selected(song_id: String):
 	_current_song = song_id
 	_status_label.text = "Generating " + song_id + "..."
 	
+	# Load config for inspector
+	_load_config_for_song(song_id)
+	
 	for btn in _song_buttons.values():
 		btn.disabled = true
 	
@@ -1319,6 +1528,8 @@ func _generate_and_play(song_id: String):
 	
 	# AudioSynthesizer has class_name - call static methods directly
 	match song_id:
+		"acid_house":
+			stream = AudioSynthesizer.generate_acid_house_song({})
 		"prog_synth_70s":
 			stream = AudioSynthesizer.generate_prog_synth_song({})
 		"pop_generative":
@@ -1345,6 +1556,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_song("madonna_80s", {})
 		"gypsy_sb":
 			stream = SoundbankGenerator.generate_song("gypsy_woman_house", {})
+		"midnight_metroplex":
+			stream = SoundbankGenerator.generate_song("detroit_techno", {})
 		"synthwave":
 			stream = AudioSynthesizer.generate_synthwave_song({})
 		"rave":
@@ -1588,8 +1801,9 @@ func _on_section_selected(index: int):
 		_last_section_name = section["name"]  # Prevent auto-update from changing dropdown
 		_skip_section_update_until = Time.get_ticks_msec() / 1000.0 + 1.0  # Skip for 1 second
 		
-		# Update word display for this section
+		# Update word display and config inspector for this section
 		_update_words_for_section(section["name"])
+		_on_section_changed(section["name"])
 		
 		# Auto-enable loop for this section
 		_loop_start = section["start"]
@@ -1629,6 +1843,7 @@ func _on_section_clicked(section_name: String):
 			
 			_section_dropdown.selected = i + 1
 			_update_words_for_section(section_name)
+			_on_section_changed(section_name)
 			break
 
 
@@ -2511,6 +2726,7 @@ func _update_section_dropdown(pos: float):
 				_last_section_name = section["name"]
 				_section_dropdown.selected = i + 1  # +1 for "Section" placeholder
 				_update_words_for_section(section["name"])  # Update words for new section
+				_on_section_changed(section["name"])  # Update config inspector
 			return
 
 

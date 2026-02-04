@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "ada_theme",
+    "name": "Ada Theme",
+    "lineage": "Vangelis, Brian Eno, Kraftwerk ballads",
+    "era": "timeless",
+    "bpm": { "min": 90, "max": 110, "typical": 100 },
+    "lambda": 0.1
+  },
+
+  "identity": {
+    "token": "warm_pads + vocal_space + gentle_pulse + contemplative",
+    "two_second_test": "Warm, spacious, supportive - room for voice",
+    "emotional_truth": "Curious wonder, supportive presence, digital warmth"
+  },
+
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "sequence"],
+
+  "forbidden": [
+    "harsh_distortion",
+    "aggressive_compression",
+    "busy_arpeggios",
+    "punchy_kicks",
+    "loud_snares",
+    "competing_melodies"
+  ],
+
+  "rhythm": {
+    "quantize": "soft",
+    "humanize_ms": 5,
+    "swing_pct": 0,
+    "pattern": "minimal"
+  },
+
+  "harmony": {
+    "scales": ["major"],
+    "voicings": "warm_extended"
+  },
+
+  "fx": {
+    "reverb_heavy": true,
+    "soft_compression": true,
+    "vocal_frequency_pocket": true
+  },
+
+  "transitions": {
+    "crossfade_s": 3.0
+  },
+
+  "sections": {
+    "intro": ["pad"],
+    "verse": ["pad", "bass", "kick", "snare"],
+    "chorus": ["pad", "bass", "kick", "snare", "hihat", "sequence"],
+    "bridge": ["pad", "sequence"],
+    "outro": ["pad"]
+  }
+}
