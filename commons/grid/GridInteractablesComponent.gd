@@ -19,7 +19,18 @@ const CONFIG_PARAM_NAMES = [
 	"rock_size_min", "rock_size_max", "deformation_min", "deformation_max",
 	"roughness_min", "roughness_max", "subdivisions", "generation_seed",
 	"rock_mass", "rock_friction", "rock_bounce", "spawn_mode",
-	"enable_gravity", "use_pride_colors", "make_rocks_static", "color_variation"
+	"enable_gravity", "use_pride_colors", "make_rocks_static", "color_variation",
+	# Configurable portal / transform params
+	"rot_x", "rot_y", "rot_z", "pos_x", "pos_y", "pos_z",
+	"dest", "dest_x", "dest_y", "dest_z", "dest_map", "map", "spawn",
+	"label", "color1", "color2", "energy", "frame", "active", "cooldown",
+	# Wave/burst pattern params
+	"wave", "wave_rows", "wave_flat", "wave_max", "wave_axis",
+	"burst", "burst_rotate", "burst_flat", "burst_axis",
+	"grad", "grad_start", "grad_end", "grad_axis", "grad_auto", "bell", "flip", "max_slope",
+	"alt_x", "alt_y", "alt_z", "phase", "phase_deg", "phase_mode",
+	"spin_x", "spin_y", "spin_z", "speed_x", "speed_y", "speed_z",
+	"animate", "duration", "no_collision", "rotate_collision"
 ]
 
 # References

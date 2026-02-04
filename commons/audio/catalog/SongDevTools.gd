@@ -927,6 +927,8 @@ func _load_songs_from_folder() -> Array:
 		"prog_synth_70s": "🎸 70s Prog",
 		"prog_synth_v2": "🎸 Prog V2",
 		"ada_theme": "🎤 Ada Theme",
+		"aphex_twin": "💛 Digital Amber (Aphex)",
+		"aphex_twin_digital_amber": "💛 Digital Amber",
 		"rave": "⚡ Rave",
 		"reese_jungle": "🌴 Jungle",
 		"supersaw_trance": "🔊 Supersaw",
@@ -1594,6 +1596,22 @@ func _generate_and_play(song_id: String):
 			stream = AudioSynthesizer.generate_pop_madonna_song({})
 		"gypsy_woman_house":
 			stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
+		# === SOUNDBANK SONGS ===
+		"aphex_twin", "aphex_twin_digital_amber":
+			stream = SoundbankGenerator.generate_song("aphex_twin", {})
+		"ada_theme":
+			stream = SoundbankGenerator.generate_song("ada_theme", {})
+		"vangelis_cs80":
+			stream = SoundbankGenerator.generate_song("vangelis_cs80", {})
+		"moroder_disco_sb":
+			stream = SoundbankGenerator.generate_song("moroder_disco", {})
+		# === HYBRID SONGS ===
+		"chicago_dusseldorf":
+			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
+		"replicants_dawn":
+			stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
+		"foggy_frequencies":
+			stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
 		_:
 			# No generator - show config breakdown only (no audio)
 			_status_label.text = "📋 %s (config only - no audio)" % song_id
@@ -2826,16 +2844,13 @@ func _apply_realtime_effects():
 
 func _load_timeline_for_song(song_id: String, stream: AudioStream):
 	_current_song_id = song_id  # Track for section word updates
-	# Reuse logic from SongPreviewDesktop
-	var metadata = {
-		"name": song_id,
-		"sections": [],
-		"total_duration": 0.0
-	}
+	
+	var metadata = {"name": song_id, "sections": [], "total_duration": 0.0}
 	
 	if stream is AudioStreamInteractive:
 		var interactive = stream as AudioStreamInteractive
 		var time_offset = 0.0
+		var song_layers = _get_layers_for_song(song_id)
 		
 		for i in range(interactive.clip_count):
 			var clip_name = interactive.get_clip_name(i)
@@ -2844,12 +2859,14 @@ func _load_timeline_for_song(song_id: String, stream: AudioStream):
 			if clip_stream:
 				duration = clip_stream.get_length()
 			
+			var section_layers = song_layers.get(clip_name.to_lower(), song_layers.get("default", []))
+			
 			metadata["sections"].append({
 				"name": clip_name if clip_name else "Section %d" % (i + 1),
 				"start": time_offset,
 				"end": time_offset + duration,
 				"index": i,
-				"layers": []
+				"layers": section_layers
 			})
 			time_offset += duration
 		
@@ -2870,6 +2887,76 @@ func _load_timeline_for_song(song_id: String, stream: AudioStream):
 		_section_dropdown.add_item(section["name"])
 	_section_dropdown.disabled = false
 	_section_dropdown.selected = 0
+
+
+func _get_layers_for_song(song_id: String) -> Dictionary:
+	"""Return detailed layer/parameter info per section for each song type"""
+	match song_id:
+		"aphex_twin", "aphex_twin_digital_amber":
+			return {
+				"intro": [
+					{"name": "Tape Texture", "type": "noise", "params": "hiss | warmth | memory"},
+					{"name": "Warm Pad", "type": "pad", "params": "detuned ±8 cents | SAW85"},
+				],
+				"build": [
+					{"name": "Warm Pad", "type": "pad", "params": "evolving | LFO drift"},
+					{"name": "Sub Bass", "type": "bass", "params": "sine | pulse"},
+					{"name": "Hi-Hat", "type": "drums", "params": "sparse | humanized"},
+					{"name": "Sequence", "type": "seq", "params": "bell-like | detuned"},
+				],
+				"main": [
+					{"name": "Kick", "type": "drums", "params": "pillow 808 | warm"},
+					{"name": "Snare", "type": "drums", "params": "lo-fi break | ghosts"},
+					{"name": "Hi-Hat", "type": "drums", "params": "intricate | velocity"},
+					{"name": "Acid Bass", "type": "bass", "params": "303 squelch"},
+					{"name": "Warm Pad", "type": "pad", "params": "nostalgic"},
+					{"name": "Lead", "type": "lead", "params": "detuned fifth | RDJ"},
+				],
+				"breakdown": [
+					{"name": "Piano", "type": "keys", "params": "prepared | intimate"},
+					{"name": "Granular Pad", "type": "pad", "params": "crystalline"},
+					{"name": "Vocal", "type": "vocal", "params": "ghostly | human traces"},
+				],
+				"outro": [
+					{"name": "Warm Pad", "type": "pad", "params": "filter closing"},
+					{"name": "Tape Texture", "type": "noise", "params": "fade to silence"},
+				],
+				"default": [{"name": "Digital Amber", "type": "mix", "params": "108 BPM | F#m"}]
+			}
+		"chicago_dusseldorf":
+			return {
+				"intro": [
+					{"name": "House Piano", "type": "keys", "params": "jazz voicings | warm"},
+					{"name": "House Organ", "type": "keys", "params": "sustained | sweep"},
+				],
+				"verse": [
+					{"name": "House Kick", "type": "drums", "params": "4-on-floor"},
+					{"name": "Chicago Bass", "type": "bass", "params": "offbeat | bouncy"},
+					{"name": "House Piano", "type": "keys", "params": "offbeat stabs"},
+				],
+				"robotic": [
+					{"name": "Motorik Kick", "type": "drums", "params": "machine"},
+					{"name": "Kraftwerk Seq", "type": "seq", "params": "precise"},
+					{"name": "Vocoder", "type": "vocal", "params": "Trans Europa"},
+				],
+				"default": [{"name": "Chi→Düss", "type": "mix", "params": "122 BPM"}]
+			}
+		"ada_theme":
+			return {
+				"intro": [{"name": "Warm Pad", "type": "pad", "params": "supportive | space for vocal"}],
+				"verse": [
+					{"name": "Pad", "type": "pad", "params": "bed"},
+					{"name": "Bass", "type": "bass", "params": "sine | root notes"},
+					{"name": "Drums", "type": "drums", "params": "minimal"},
+				],
+				"chorus": [
+					{"name": "Pad", "type": "pad", "params": "fuller"},
+					{"name": "Arp", "type": "seq", "params": "twinkling"},
+				],
+				"default": [{"name": "Ada Theme", "type": "mix", "params": "100 BPM | warm"}]
+			}
+		_:
+			return {"default": [{"name": "Audio", "type": "mix", "params": ""}]}
 
 
 # === WORD PICKER ===

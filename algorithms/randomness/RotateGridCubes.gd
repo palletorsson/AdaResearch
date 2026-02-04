@@ -39,6 +39,21 @@ extends Node3D
 @export var max_walkable_slope: float = 45.0  # Player's max slope (for auto calculation)
 @export_enum("Z (forward)", "X (sideways)", "Diagonal", "Radial") var gradient_axis: int = 0
 
+# Burst Pattern - alternating rotated/flat sections
+@export_group("Burst Pattern")
+@export var burst_mode: bool = true  # Enable burst pattern (overrides gradient)
+@export var burst_rotate_count: int = 3  # Rows of rotation before flat section
+@export var burst_flat_count: int = 3  # Rows of flat (0°) cubes between bursts
+@export_enum("Z (forward)", "X (sideways)") var burst_axis: int = 0  # Which axis to measure rows
+
+# Wave Pattern - repeating gradient (0 → max → 0) with flat gaps
+@export_group("Wave Pattern")
+@export var wave_mode: bool = false  # Enable wave pattern (overrides burst/gradient)
+@export var wave_rows: int = 5  # Rows for one wave cycle (0 → max → 0)
+@export var wave_flat_rows: int = 2  # Flat rows between waves
+@export var wave_max_rotation: float = 20.0  # Peak rotation at center of wave
+@export_enum("Z (forward)", "X (sideways)") var wave_axis: int = 0  # Which axis for wave
+
 # Animation settings
 @export_group("Animation")
 @export var rotate_on_ready: bool = true
@@ -103,7 +118,12 @@ func rotate_all_cubes():
 		rotation_x_degrees,
 		rotation_y_degrees
 	])
-	if gradient_enabled:
+	if burst_mode:
+		var axis_name = "Z (forward)" if burst_axis == 0 else "X (sideways)"
+		print("RotateGridCubes: Burst mode - %d rotated rows, %d flat rows, axis=%s" % [
+			burst_rotate_count, burst_flat_count, axis_name
+		])
+	elif gradient_enabled:
 		var end_info = str(gradient_end) + "°"
 		if gradient_auto_max:
 			var auto_max = get_max_x_rotation(rotation_z_degrees, max_walkable_slope)
@@ -158,8 +178,59 @@ func _get_rotation_for_position(pos: Vector3, index: int, base_rot: Vector3) -> 
 	var grid_z = int(round(pos.z))
 	var is_alternate = (grid_x + grid_z) % 2 == 1  # Checkerboard pattern
 
-	# Apply gradient - rotation varies across grid
-	if gradient_enabled:
+	# Apply wave pattern - repeating gradient (0 → max → 0) with flat gaps
+	if wave_mode:
+		var row_index: int
+		if wave_axis == 0:  # Z (forward)
+			row_index = grid_z
+		else:  # X (sideways)
+			row_index = grid_x
+		
+		# Normalize to positive
+		if row_index < 0:
+			row_index = -row_index
+		
+		# Calculate position in wave cycle
+		var cycle_length = wave_rows + wave_flat_rows
+		var pos_in_cycle = row_index % cycle_length
+		
+		if pos_in_cycle < wave_rows:
+			# In wave section - apply bell curve (0 → max → 0)
+			# t goes from 0 to 1 across wave_rows
+			var t = float(pos_in_cycle) / float(wave_rows - 1) if wave_rows > 1 else 0.5
+			# Bell curve using sin: peaks at t=0.5
+			var wave_factor = sin(t * PI)
+			rot.x = wave_max_rotation * wave_factor
+		else:
+			# In flat section
+			rot.x = 0.0
+		
+		# Wave mode overrides burst/gradient, skip to alternating patterns
+	# Apply burst pattern - alternating rotated/flat sections
+	elif burst_mode:
+		# Determine which row we're in based on burst_axis
+		var row_index: int
+		if burst_axis == 0:  # Z (forward)
+			row_index = grid_z
+		else:  # X (sideways)
+			row_index = grid_x
+		
+		# Normalize to positive values for modulo
+		if row_index < 0:
+			row_index = -row_index
+		
+		# Determine position in the burst cycle
+		var cycle_length = burst_rotate_count + burst_flat_count
+		var pos_in_cycle = row_index % cycle_length
+		var is_rotating = pos_in_cycle < burst_rotate_count
+		
+		if not is_rotating:
+			# Flat section - set rotation to zero
+			rot = Vector3.ZERO
+		# else: keep the base_rot for rotating sections
+		
+		# Skip gradient if burst mode is active (burst overrides gradient)
+	elif gradient_enabled:
 		var t = _get_gradient_factor(grid_x, grid_z)
 
 		# Bell curve: transform t from linear (0→1) to bell (0→1→0)
@@ -408,6 +479,37 @@ func apply_grid_config(config: Dictionary) -> void:
 		use_animation = str(config["animate"]).to_lower() == "true"
 	if config.has("duration"):
 		rotation_duration = float(config["duration"])
+
+	# Burst pattern settings (burst, burst_rotate, burst_flat, burst_axis)
+	if config.has("burst"):
+		burst_mode = str(config["burst"]).to_lower() == "true"
+	if config.has("burst_rotate"):
+		burst_rotate_count = int(config["burst_rotate"])
+	if config.has("burst_flat"):
+		burst_flat_count = int(config["burst_flat"])
+	if config.has("burst_axis"):
+		var axis_str = str(config["burst_axis"]).to_lower()
+		match axis_str:
+			"z", "forward", "0": burst_axis = 0
+			"x", "sideways", "1": burst_axis = 1
+
+	# Wave pattern settings (wave, wave_rows, wave_flat, wave_max, wave_axis)
+	if config.has("wave"):
+		wave_mode = str(config["wave"]).to_lower() == "true"
+		# Wave mode overrides burst
+		if wave_mode:
+			burst_mode = false
+	if config.has("wave_rows"):
+		wave_rows = int(config["wave_rows"])
+	if config.has("wave_flat"):
+		wave_flat_rows = int(config["wave_flat"])
+	if config.has("wave_max"):
+		wave_max_rotation = float(config["wave_max"])
+	if config.has("wave_axis"):
+		var axis_str = str(config["wave_axis"]).to_lower()
+		match axis_str:
+			"z", "forward", "0": wave_axis = 0
+			"x", "sideways", "1": wave_axis = 1
 
 	# Gradient settings (grad, grad_start, grad_end, grad_axis, grad_auto, max_slope, bell, flip)
 	if config.has("grad"):

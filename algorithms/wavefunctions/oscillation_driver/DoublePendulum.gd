@@ -180,7 +180,7 @@ func _update_drawing():
 		if drawable:
 			if drawable.has_method("draw_point"):
 				var uv = drawable.get_uv_from_world_pos(hit_point)
-				drawable.draw_point(uv, current_color, 25)  # Larger brush size
+				drawable.draw_point(uv, current_color, 40)  # Even larger brush size for better coverage
 			else:
 				drawable.draw_at_world_position(hit_point, current_color)
 

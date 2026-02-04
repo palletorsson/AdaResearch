@@ -7,6 +7,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_area"]
 size = Vector3(1.5, 2.5, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_part"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_portal"]
 render_priority = 0
 shader = ExtResource("2_shader")
@@ -23,13 +30,6 @@ shader_parameter/distortion_strength = 0.05
 
 [sub_resource type="QuadMesh" id="QuadMesh_portal"]
 size = Vector2(1.4, 2.4)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
-albedo_color = Color(0.1, 0.1, 0.1, 1)
-metallic = 0.8
-roughness = 0.2
-
-[sub_resource type="BoxMesh" id="BoxMesh_frame_part"]
 
 [node name="Portal" type="Node3D"]
 script = ExtResource("1_script")
@@ -74,15 +74,12 @@ mesh = SubResource("QuadMesh_portal")
 [node name="TeleportAudio" type="Node3D" parent="."]
 script = ExtResource("3_audio")
 volume_db = -5.0
-max_distance = 10.0
 secondary_sound = 3
 
 [node name="SceneLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-pixel_size = 0.005
 billboard = 1
 text = " "
-font_size = 32
 outline_size = 8
 
 [connection signal="body_entered" from="TeleportArea" to="." method="_on_teleport_area_body_entered"]

@@ -40,6 +40,23 @@
 			"description": "Existing translation demo used in Trans_Translate_2. Interactive demonstration of 3D translation vectors.",
 			"scene": "res://commons/artifacts/translation_cube_demo/translation_cube_demo.tscn",
 			"category": "transforms"
+		},
+		
+		"boolean_tunnel": {
+			"name": "Boolean Tunnel",
+			"lookup_name": "boolean_tunnel",
+			"description": "Tunnel of hollow boolean cubes demonstrating rotation accumulation. Supports burst_mode for alternating rotating/flat sections, tunnel_rotation_x/z for orientation, and rotation_per_segment for twist amount.",
+			"scene": "res://algorithms/transformation/booleanTunnel/boolean_tunnel.tscn",
+			"category": "transforms",
+			"parameters": {
+				"burst_mode": "bool - alternate rotating and flat sections",
+				"burst_rotate_count": "int - cubes per rotating burst (default 3)",
+				"burst_flat_count": "int - flat cubes between bursts (default 3)",
+				"tunnel_rotation_x": "float - rotate whole tunnel around X (-90 to stand up)",
+				"tunnel_rotation_z": "float - rotate whole tunnel around Z",
+				"rotation_per_segment": "float - degrees of rotation per cube",
+				"num_segments": "int - total number of cubes"
+			}
 		}
 	}
 }

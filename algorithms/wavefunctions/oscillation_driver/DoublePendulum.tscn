@@ -48,7 +48,7 @@ target_position = Vector3(0, 0, -10)
 collide_with_areas = true
 
 [node name="DrawingCanvas" parent="." instance=ExtResource("2")]
-transform = Transform3D(4, 0, 0, 0, -1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, -2)
+transform = Transform3D(8, 0, 0, 0, -3.49691e-07, -8, 0, 8, -3.49691e-07, 0, 1, -1)
 
 [node name="Trail" type="MeshInstance3D" parent="."]
 

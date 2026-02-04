@@ -4,7 +4,7 @@
     "name": "Kraftwerk",
     "lineage": "Ralf Hütter, Florian Schneider, Karl Bartos",
     "era": "1974-present",
-    "bpm": { "min": 100, "max": 120, "typical": 110 },
+    "bpm": { "min": 100, "max": 130, "typical": 110 },
     "lambda": 0.15
   },
 
@@ -14,7 +14,7 @@
     "emotional_truth": "Robot pop, industrial folk music, machine aesthetic"
   },
 
-  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder"],
+  "soundbank": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder", "electronic_perc"],
 
   "forbidden": [
     "tape_degradation",
@@ -52,8 +52,161 @@
   "sections": {
     "intro": ["pad", "sequence"],
     "build": ["pad", "sequence", "bass", "hihat"],
+    "verse": ["kick", "snare", "hihat", "bass", "pad", "sequence"],
+    "chorus": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder"],
     "main": ["kick", "snare", "hihat", "bass", "pad", "sequence", "vocoder"],
     "breakdown": ["pad", "sequence"],
-    "outro": ["pad"]
+    "outro": ["pad", "sequence"]
+  },
+
+  "songs": {
+    "computer_love": {
+      "meta": {
+        "title": "Computer Love",
+        "album": "Computer World",
+        "year": 1981,
+        "bpm": 129,
+        "time_signature": "4/4",
+        "key": "E minor",
+        "style": "Motorik (robotic, hypnotic, unchanging)"
+      },
+
+      "velocity_profile": {
+        "type": "machine",
+        "description": "Perfect consistency - 0% variation, every hit identical",
+        "base": 0.7,
+        "accent": 0.7,
+        "ghost": 0.7,
+        "variation": 0.0
+      },
+
+      "timing": {
+        "swing_pct": 0,
+        "humanize_ms": 0,
+        "quantize": "perfect",
+        "note": "Machine precision - NO timing variation whatsoever"
+      },
+
+      "drum_patterns": {
+        "_format_note": "16-step patterns representing one bar of 16th notes. 1=hit, 0=rest. Steps 1,5,9,13 are downbeats (1,2,3,4).",
+
+        "kick": {
+          "description": "Steady 4-on-floor pulse - the relentless motorik drive",
+          "source": "Modified drum machine (likely Roland CR-78 or custom Kraftwerk electronics)",
+          "character": "Punchy, short, electronic - no sustain, immediate transient",
+          "main": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],
+          "intro": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
+          "build": [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],
+          "breakdown": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
+          "fill_transition": [1,0,0,0, 1,0,0,0, 1,0,1,0, 1,0,1,0],
+          "notes": "4-on-floor but without the disco energy - mechanical, inevitable"
+        },
+
+        "snare": {
+          "description": "Classic backbeat on 2 and 4 - robotic, unchanging",
+          "source": "Electronic snare - synthetic, not sampled acoustic",
+          "character": "Tight, controlled, no ring or overtones",
+          "main": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+          "intro": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
+          "build": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+          "breakdown": [0,0,0,0, 1,0,0,0, 0,0,0,0, 0,0,0,0],
+          "fill_transition": [0,0,0,0, 1,0,0,0, 0,0,1,0, 1,0,1,0],
+          "notes": "Steps 5 and 13 are beats 2 and 4. Never varies."
+        },
+
+        "hihat": {
+          "description": "Driving motorik 8th notes - the hypnotic pulse",
+          "source": "Electronic hihat - clean, short, precise",
+          "character": "Minimal attack/decay, identical each hit, trance-inducing repetition",
+          "main": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],
+          "main_16ths": [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+          "intro": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],
+          "build": [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],
+          "breakdown": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],
+          "fill_transition": [1,0,1,0, 1,0,1,0, 1,1,1,1, 1,1,1,1],
+          "notes": "8ths (main) or 16ths (more intense sections). All identical velocity."
+        },
+
+        "electronic_perc": {
+          "description": "Optional electronic percussion - subtle synthetic accents",
+          "source": "Custom Kraftwerk electronics, Syndrum-like",
+          "character": "Metallic, tuned percussion hits - sparse, accent function",
+          "main": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,0],
+          "intro": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],
+          "build": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,1,0],
+          "main_alt": [0,0,1,0, 0,0,0,0, 0,0,1,0, 0,0,0,0],
+          "fill_transition": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],
+          "notes": "Sparse accents. The '& of 4' pattern (step 15) creates subtle forward motion."
+        }
+      },
+
+      "section_evolution": {
+        "intro": {
+          "bars": 8,
+          "active_drums": ["hihat"],
+          "description": "Minimal - just hihat establishing the pulse, maybe pad/sequence"
+        },
+        "verse": {
+          "bars": 16,
+          "active_drums": ["kick", "snare", "hihat"],
+          "description": "Full motorik pattern - unchanging, hypnotic"
+        },
+        "bridge": {
+          "bars": 8,
+          "active_drums": ["kick", "snare", "hihat", "electronic_perc"],
+          "description": "Slight variation with electronic percussion accents"
+        },
+        "breakdown": {
+          "bars": 8,
+          "active_drums": ["hihat", "snare"],
+          "description": "Reduced - kick drops out, snare sparse, hihat continues"
+        },
+        "outro": {
+          "bars": 8,
+          "active_drums": ["hihat"],
+          "description": "Gradual removal - drums fade leaving just the pulse"
+        }
+      },
+
+      "fill_patterns": {
+        "_note": "Kraftwerk fills are MINIMAL - the machine doesn't show off",
+        "subtle_4_bar": {
+          "description": "Slight hihat density increase on bar 4",
+          "bar_3": "normal",
+          "bar_4_hihat": [1,0,1,0, 1,0,1,0, 1,1,1,0, 1,1,1,0]
+        },
+        "section_transition": {
+          "description": "Brief fill only at major section changes",
+          "last_beat": {
+            "kick": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,1,0],
+            "hihat": [1,0,1,0, 1,0,1,0, 1,1,1,0, 1,1,1,1]
+          }
+        },
+        "anti_fill": {
+          "description": "The most Kraftwerk fill: complete dropout before section",
+          "effect": "1 beat of silence before new section (creates anticipation through absence)"
+        }
+      },
+
+      "production_notes": {
+        "drum_machine": "Custom modified electronics, possibly CR-78 derived",
+        "mixing": "Drums sit in the mix, not dominating - equal partners with synths",
+        "eq": "Clean, no warmth added - intentionally cold",
+        "compression": "Minimal - the machine has no dynamics to tame",
+        "reverb": "None to very short plate - space but not wash",
+        "panning": {
+          "kick": "center",
+          "snare": "center", 
+          "hihat": "slight right (10-20%)",
+          "electronic_perc": "slight left (10-20%)"
+        }
+      },
+
+      "philosophical_notes": {
+        "motorik_essence": "The drums are a MACHINE. They do not speed up when excited. They do not slow down when tired. They do not accent the interesting part. They simply continue.",
+        "kraftwerk_principle": "Mensch-Maschine (Man-Machine): The human operates the machine, but the machine sets the pace. The drummer is replaced by a button.",
+        "anti_expression": "Every fill, accent, or variation a human drummer would add is removed. The absence of personality IS the personality."
+      }
+    }
   }
 }

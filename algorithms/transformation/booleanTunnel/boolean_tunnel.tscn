@@ -4,7 +4,7 @@
 
 [node name="BooleanTunnel" type="Node3D"]
 script = ExtResource("1_xrtc0")
-num_segments = 11
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9692996, 0.24588262, 0, -0.24588262, 0.9692996, 0, 1.2191784, 4.4870667)
+num_segments = 14
+tunnel_rotation_x = 90.0
+enable_teleporter = true
+teleport_destination = Vector3(0, 2, 23)

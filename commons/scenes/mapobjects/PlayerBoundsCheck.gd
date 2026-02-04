@@ -9,6 +9,11 @@ enum CheckType {
 	EUCLIDEAN_SQUARED  ## Spherical check: dist^2 > limit^2 (fast, spherical shape)
 }
 
+enum ResetMode {
+	LAST_SAFE_POSITION,  ## Reset to last tracked safe position (default)
+	UTILITY_SPAWN        ## Reset to "s" utility spawn point from map
+}
+
 @export_group("Settings")
 @export var active: bool = true
 ## How often to check (in seconds). 0 = every frame.
@@ -22,7 +27,8 @@ enum CheckType {
 @export var scalar_limit: float = 30.0
 
 @export_group("Reset")
-@export var reset_position: Vector3 = Vector3(0.0, 2.0, 0.0)  # Higher default
+@export var reset_mode: ResetMode = ResetMode.LAST_SAFE_POSITION  ## Where to reset player
+@export var reset_position: Vector3 = Vector3(0.0, 2.0, 0.0)  # Higher default (fallback)
 @export var reset_velocity: bool = true
 @export var reset_cooldown: float = 2.0  # Seconds before allowing another reset
 
@@ -111,24 +117,40 @@ func _reset_player():
 	if is_resetting:
 		return
 
-	print("PlayerBoundsCheck: ⚠️ Player out of bounds! Teleporting to last safe position...")
+	print("PlayerBoundsCheck: ⚠️ Player out of bounds! Resetting...")
 	is_resetting = true
 	_reset_cooldown_timer = reset_cooldown  # Start cooldown
 
-	# Determine target position - prefer last safe position, then spawn point, then default
+	# Determine target position based on reset mode
 	var target_pos = reset_position
 	
-	if _has_safe_position:
-		target_pos = _last_safe_position
-		print("PlayerBoundsCheck: Using last safe position: %s" % target_pos)
-	else:
-		# Fall back to spawn point
-		var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
-		if spawn_node:
-			target_pos = spawn_node.global_position
-			print("PlayerBoundsCheck: Using SpawnPoint: %s" % target_pos)
-		else:
-			print("PlayerBoundsCheck: Using default reset position: %s" % target_pos)
+	match reset_mode:
+		ResetMode.UTILITY_SPAWN:
+			# Try utility spawn first, then SpawnPoint node, then default
+			var utility_spawn_pos = _find_utility_spawn_position()
+			if utility_spawn_pos != Vector3.ZERO:
+				target_pos = utility_spawn_pos
+				print("PlayerBoundsCheck: Using utility spawn position: %s" % target_pos)
+			else:
+				var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
+				if spawn_node:
+					target_pos = spawn_node.global_position
+					print("PlayerBoundsCheck: Using SpawnPoint (no utility spawn): %s" % target_pos)
+				else:
+					print("PlayerBoundsCheck: Using default reset position (no spawn found): %s" % target_pos)
+		
+		ResetMode.LAST_SAFE_POSITION, _:
+			# Prefer last safe position, then spawn point, then default
+			if _has_safe_position:
+				target_pos = _last_safe_position
+				print("PlayerBoundsCheck: Using last safe position: %s" % target_pos)
+			else:
+				var spawn_node = get_tree().current_scene.find_child("SpawnPoint", true, false)
+				if spawn_node:
+					target_pos = spawn_node.global_position
+					print("PlayerBoundsCheck: Using SpawnPoint: %s" % target_pos)
+				else:
+					print("PlayerBoundsCheck: Using default reset position: %s" % target_pos)
 	
 	# Ensure minimum height
 	if target_pos.y < 1.0:
@@ -144,13 +166,8 @@ func _reset_player():
 	if reset_velocity:
 		_reset_velocity(player_node)
 
-	# 2. Teleport immediately (no physics frame wait - faster reset)
-	var root = _find_player_root(player_node)
-	if root:
-		root.global_position = target_pos
-		print("PlayerBoundsCheck: Teleported player root '%s' to %s" % [root.name, target_pos])
-	else:
-		player_node.global_position = target_pos
+	# 2. Teleport immediately using proper XR teleport
+	_teleport_player_to(target_pos)
 
 	# 3. Reset velocity again after teleport
 	if reset_velocity:
@@ -163,7 +180,8 @@ func _reset_player():
 		_reset_velocity(player_node)
 
 	# 5. Check if player is stuck inside geometry and try to fix
-	await _check_and_fix_stuck_position(root if root else player_node, target_pos)
+	var player_root = _find_player_root(player_node)
+	await _check_and_fix_stuck_position(player_root if player_root else player_node, target_pos)
 
 	# Disable Fly Mode
 	if flight_controller:
@@ -223,12 +241,12 @@ func _check_and_fix_stuck_position(player_root: Node3D, original_target: Vector3
 		for offset in offsets:
 			var test_pos = original_target + offset
 			if _is_position_clear(test_pos, space_state, player_root):
-				player_root.global_position = test_pos
+				_teleport_player_to(test_pos)
 				print("PlayerBoundsCheck: ✅ Found clear position at offset %s" % offset)
 				return
 
 		# Last resort: move significantly higher
-		player_root.global_position = original_target + Vector3(0, 3.0, 0)
+		_teleport_player_to(original_target + Vector3(0, 3.0, 0))
 		print("PlayerBoundsCheck: ⚠️ Moved player up 3m as fallback")
 
 func _is_position_clear(pos: Vector3, space_state: PhysicsDirectSpaceState3D, player_root: Node3D) -> bool:
@@ -294,6 +312,44 @@ func _reset_velocity(body: Node3D):
 		if "linear_velocity" in root:
 			root.linear_velocity = Vector3.ZERO
 			root.angular_velocity = Vector3.ZERO
+
+func _teleport_player_to(target_pos: Vector3):
+	"""Teleport player using XRToolsPlayerBody.teleport() if available, else fallback"""
+	var player_body = _find_xr_player_body()
+	
+	if player_body and player_body.has_method("teleport"):
+		# Use XR Tools proper teleport
+		var target_transform = Transform3D()
+		target_transform.origin = target_pos
+		target_transform.basis = player_body.global_transform.basis  # Keep current rotation
+		player_body.teleport(target_transform)
+		player_body.velocity = Vector3.ZERO
+		print("PlayerBoundsCheck: Used XRToolsPlayerBody.teleport() to %s" % target_pos)
+	else:
+		# Fallback to raw position set
+		var root = _find_player_root(player_node)
+		if root:
+			root.global_position = target_pos
+			print("PlayerBoundsCheck: Fallback - set position to %s" % target_pos)
+		elif player_node:
+			player_node.global_position = target_pos
+
+func _find_xr_player_body() -> Node3D:
+	"""Find XRToolsPlayerBody in the tree"""
+	# Search in groups first
+	var player_bodies = get_tree().get_nodes_in_group("player_body")
+	for pb in player_bodies:
+		if pb.has_method("teleport"):
+			return pb
+	
+	# Find by name in scene
+	var root = get_tree().current_scene
+	if root:
+		var pb = root.find_child("PlayerBody", true, false)
+		if pb and pb.has_method("teleport"):
+			return pb
+	
+	return null
 
 func _find_player_root(body: Node3D) -> Node3D:
 	if not body: return null
@@ -448,8 +504,7 @@ func _emergency_unstuck():
 		for offset in emergency_offsets:
 			var test_pos = base_pos + offset
 			if _is_position_clear(test_pos, space_state, root):
-				root.global_position = test_pos
-				_reset_velocity(root)
+				_teleport_player_to(test_pos)
 				print("PlayerBoundsCheck: 🚨 Emergency unstuck to %s" % test_pos)
 				# Restart monitoring
 				_post_reset_last_position = test_pos
@@ -457,10 +512,10 @@ func _emergency_unstuck():
 				return
 
 	# Last resort - just move up
-	root.global_position = base_pos + Vector3(0, 3.0 + _post_reset_stuck_checks * 2, 0)
-	_reset_velocity(root)
+	var fallback_pos = base_pos + Vector3(0, 3.0 + _post_reset_stuck_checks * 2, 0)
+	_teleport_player_to(fallback_pos)
 	print("PlayerBoundsCheck: 🚨 Emergency fallback - moved player up significantly")
-	_post_reset_last_position = root.global_position
+	_post_reset_last_position = fallback_pos
 	_post_reset_monitor_time = POST_RESET_MONITOR_DURATION
 
 func _ensure_safe_spawn_position(player_root: Node3D):
@@ -490,7 +545,8 @@ func _ensure_safe_spawn_position(player_root: Node3D):
 		if ground_check.has_ground and ground_check.distance < 3.0:
 			var safe_y = ground_check.position.y + 0.2  # Slightly above ground
 			if abs(current_pos.y - safe_y) > 0.5:
-				player_root.global_position.y = safe_y
+				var snap_pos = Vector3(current_pos.x, safe_y, current_pos.z)
+				_teleport_player_to(snap_pos)
 				print("PlayerBoundsCheck: Snapped player to ground at y=%.2f" % safe_y)
 		print("PlayerBoundsCheck: ✅ Player in safe position")
 
@@ -589,15 +645,13 @@ func _move_to_safe_ground(player_root: Node3D, space_state: PhysicsDirectSpaceSt
 				var ground = _find_ground_below(space_state, test_pos, player_root)
 				if ground.has_ground and ground.distance < 10.0:  # Must have ground within 10m
 					var safe_pos = Vector3(test_pos.x, ground.position.y + 0.2, test_pos.z)
-					player_root.global_position = safe_pos
-					_reset_velocity(player_root)
+					_teleport_player_to(safe_pos)
 					print("PlayerBoundsCheck: ✅ Moved player to safe ground at %s" % safe_pos)
 					return
 	
 	# Last resort: teleport to JSON spawn position elevated
 	var final_pos = spawn_from_json + Vector3(0, 2, 0)
-	player_root.global_position = final_pos
-	_reset_velocity(player_root)
+	_teleport_player_to(final_pos)
 	print("PlayerBoundsCheck: ⚠️ Used elevated spawn fallback at %s" % final_pos)
 
 func _is_inside_enclosing_mesh(pos: Vector3) -> bool:
@@ -658,3 +712,44 @@ func _find_node_with_property(node: Node, property_name: String) -> Node:
 			return result
 	
 	return null
+
+func _find_utility_spawn_position() -> Vector3:
+	"""Find spawn position from 's' utility in map data"""
+	var grid_system = _find_grid_system()
+	if not grid_system:
+		print("PlayerBoundsCheck: No GridSystem found for utility spawn lookup")
+		return Vector3.ZERO
+	
+	# Get cube_size and gutter for coordinate conversion
+	var cube_size = 1.0
+	var gutter = 0.0
+	if "data_component" in grid_system and grid_system.data_component:
+		var settings = grid_system.data_component.get_settings()
+		cube_size = settings.get("cube_size", 1.0)
+		gutter = settings.get("gutter", 0.0)
+	
+	# Find GridUtilitiesComponent
+	var utilities_component = grid_system.find_child("GridUtilitiesComponent", false, false)
+	if not utilities_component:
+		print("PlayerBoundsCheck: No GridUtilitiesComponent found")
+		return Vector3.ZERO
+	
+	# Get all utility positions and look for spawn_coordinates metadata
+	if utilities_component.has_method("get_all_utility_positions"):
+		var utility_positions = utilities_component.get_all_utility_positions()
+		for pos in utility_positions:
+			if utilities_component.has_method("get_utility_at"):
+				var utility = utilities_component.get_utility_at(pos.x, pos.y, pos.z)
+				if utility and utility.has_meta("spawn_coordinates"):
+					var coords = utility.get_meta("spawn_coordinates")
+					# Convert grid coordinates to world position
+					var world_pos = Vector3(
+						coords.x * (cube_size + gutter),
+						coords.y,  # Y is already in world space
+						coords.z * (cube_size + gutter)
+					)
+					print("PlayerBoundsCheck: Found utility spawn at grid(%s) -> world(%s)" % [coords, world_pos])
+					return world_pos
+	
+	print("PlayerBoundsCheck: No utility spawn found in map")
+	return Vector3.ZERO

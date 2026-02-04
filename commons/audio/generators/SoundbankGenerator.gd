@@ -237,6 +237,12 @@ const VELOCITY = {
 		"ghost": 0.25,
 		"variation": 0.1,
 	},
+	"aphex_twin": {
+		"base": 0.65,      # Warm but present
+		"accent": 0.85,
+		"ghost": 0.35,     # Audible ghosts (lo-fi character)
+		"variation": 0.18, # Human wobble
+	},
 	"moroder_disco": {
 		"base": 0.85,      # Consistent, driving
 		"accent": 1.0,
@@ -326,6 +332,10 @@ const STRUCTURES = {
 		"sections": ["intro", "verse", "chorus", "verse", "chorus", "bridge", "outro"],
 		"bars": [4, 8, 8, 8, 8, 4, 4],
 	},
+	"aphex_twin": {
+		"sections": ["intro", "build", "main", "breakdown", "main", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8],
+	},
 	"moroder_disco": {
 		"sections": ["intro", "build", "main", "vocal", "breakdown", "drop", "outro"],
 		"bars": [8, 8, 16, 16, 8, 16, 8],
@@ -351,8 +361,8 @@ const STRUCTURES = {
 		"bars": [4, 8, 16, 4, 16, 4],
 	},
 	"kraftwerk": {
-		"sections": ["intro", "verse", "verse", "bridge", "verse", "outro"],
-		"bars": [8, 16, 16, 8, 16, 8],
+		"sections": ["intro", "verse", "chorus", "verse", "chorus", "outro"],
+		"bars": [8, 16, 8, 16, 8, 8],
 	},
 	"madonna_80s": {
 		"sections": ["intro", "verse", "prechorus", "chorus", "verse", "chorus", "outro"],
@@ -440,7 +450,8 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 		var next_clip = (i + 1) % section_names.size()
 		playback.set_clip_auto_advance_next_clip(i, next_clip)
 	
-	var xfade = brief.get("transitions", {}).get("crossfade_s", 2.0)
+	var xfade_val = brief.get("transitions", {}).get("crossfade_s", 2.0)
+	var xfade: float = float(xfade_val) if not xfade_val is Dictionary else 2.0
 	for i in range(section_names.size()):
 		var next = (i + 1) % section_names.size()
 		playback.add_transition(i, next,
@@ -623,7 +634,7 @@ static func _generate_hybrid_section(
 	final_mix.resize(total_samples)
 	final_mix.fill(0.0)
 	
-	var step_samples = int((bar_duration / 4.0) * SAMPLE_RATE)  # 16th note
+	var step_samples = int((bar_duration / 16.0) * SAMPLE_RATE)  # 16th note (bar has 16 steps)
 	var patterns = PATTERNS.get(hybrid_id, PATTERNS["detroit_techno"])
 	var bass_cfg = BASS_PATTERNS.get(hybrid_id, BASS_PATTERNS["detroit_techno"])
 	var sound_sources = config.get("sound_sources", {})
@@ -709,7 +720,7 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 	final_mix.resize(total_samples)
 	final_mix.fill(0.0)
 	
-	var step_duration = bar_duration / 4.0  # 16th note
+	var step_duration = bar_duration / 16.0  # 16th note (bar has 16 steps)
 	var step_samples = int(step_duration * SAMPLE_RATE)
 	
 	var patterns = PATTERNS.get(genre_id, PATTERNS["detroit_techno"])

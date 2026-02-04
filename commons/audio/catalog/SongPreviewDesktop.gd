@@ -82,8 +82,10 @@ func _setup_ui():
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(grid)
 	
-	# Song buttons - 13 full songs including hybrids!
+	# Song buttons - 15 full songs including hybrids!
 	var songs = [
+		["computer_love", "🤖 Computer Love", "Kraftwerk - robotic romance"],
+		["aphex_twin_digital_amber", "💛 Digital Amber", "Aphex Twin - SAW meets Syro"],
 		["ada_theme", "🎤 Ada Theme", "Warm backing for Ada voice"],
 		["prog_synth_70s", "🎸 70s Prog", "ELP, Kraftwerk, Yes"],
 		["pop_generative", "🎤 Pop Gen", "Verse-Chorus structure"],
@@ -327,6 +329,10 @@ func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
 	
 	match song_id:
+		"computer_love":
+			stream = SoundbankGenerator.generate_song("kraftwerk", {"bpm": 129})
+		"aphex_twin_digital_amber":
+			stream = SoundbankGenerator.generate_song("aphex_twin", {"bpm": 108})
 		"ada_theme":
 			stream = SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
 		"prog_synth_70s":
@@ -566,6 +572,37 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 	"""Return detailed layer/parameter info per section for each song type"""
 	
 	match song_id:
+		"computer_love":
+			return {
+				"intro": [
+					{"name": "Kraftwerk Arpeggio", "type": "seq", "params": "F-A-C-F ascending | pulse wave | ZERO detune | 2500Hz filter"},
+				],
+				"verse": [
+					{"name": "Kraftwerk Arpeggio", "type": "seq", "params": "iconic pattern | mechanical precision"},
+					{"name": "Motorik Kick", "type": "drums", "params": "4-on-floor | unwavering | 129 BPM"},
+					{"name": "Motorik Snare", "type": "drums", "params": "backbeat 2 & 4 | electronic"},
+					{"name": "Motorik Hi-Hat", "type": "drums", "params": "driving 8ths | machine perfect"},
+					{"name": "Kraftwerk Bass", "type": "bass", "params": "clean sine | root following | 2¢ drift max"},
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "warm strings | vocoder-style | 6 voices"},
+				],
+				"chorus": [
+					{"name": "Kraftwerk Lead", "type": "lead", "params": "melodic theme | triangle+square | 50ms portamento"},
+					{"name": "Kraftwerk Arpeggio", "type": "seq", "params": "foundation | hypnotic"},
+					{"name": "Full Motorik Drums", "type": "drums", "params": "kick + snare + hihat | robotic"},
+					{"name": "Kraftwerk Bass", "type": "bass", "params": "locked to kick"},
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "full warmth | supporting"},
+				],
+				"breakdown": [
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "exposed | emotional machine"},
+					{"name": "Kraftwerk Arpeggio", "type": "seq", "params": "solo | melancholic"},
+				],
+				"outro": [
+					{"name": "Kraftwerk Arpeggio", "type": "seq", "params": "fading | digital loneliness"},
+					{"name": "Kraftwerk Pad", "type": "pad", "params": "long release | acceptance"},
+				],
+				"default": [{"name": "Computer Love", "type": "mix", "params": "129 BPM | F Major | robotic romance"}]
+			}
+		
 		"ada_theme":
 			return {
 				"intro": [
@@ -906,6 +943,41 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 					{"name": "Vinyl Crackle", "type": "noise", "params": "fade to silence"},
 				],
 				"default": [{"name": "Foggy Frequencies", "type": "mix", "params": "130 BPM | Fm | BoC × Burial"}]
+			}
+		
+		"aphex_twin", "aphex_twin_digital_amber":
+			return {
+				"intro": [
+					{"name": "Tape Texture", "type": "noise", "params": "hiss | warmth | memory surface"},
+					{"name": "Warm Pad", "type": "pad", "params": "detuned ±8 cents | SAW85 character | filter sweep"},
+				],
+				"build": [
+					{"name": "Warm Pad", "type": "pad", "params": "evolving | LFO drift 0.08Hz"},
+					{"name": "Sub Bass", "type": "bass", "params": "sine | gentle pulse"},
+					{"name": "Hi-Hat Pattern", "type": "drums", "params": "sparse | humanized | emerging from noise"},
+					{"name": "Sequence", "type": "seq", "params": "bell-like | detuned fifths"},
+				],
+				"main": [
+					{"name": "Kick", "type": "drums", "params": "pillow 808 | warm punch"},
+					{"name": "Snare", "type": "drums", "params": "lo-fi breakbeat | ghost notes"},
+					{"name": "Hi-Hat", "type": "drums", "params": "intricate | velocity variation"},
+					{"name": "Acid Bass", "type": "bass", "params": "303 squelch | resonant filter"},
+					{"name": "Warm Pad", "type": "pad", "params": "wooly nostalgic"},
+					{"name": "Lead", "type": "lead", "params": "detuned fifth | RDJ signature"},
+					{"name": "Tape Texture", "type": "noise", "params": "constant warmth"},
+				],
+				"breakdown": [
+					{"name": "Prepared Piano", "type": "keys", "params": "Avril 14th intimacy | muted strings"},
+					{"name": "Granular Pad", "type": "pad", "params": "fractured | crystalline"},
+					{"name": "Ghostly Vocal", "type": "vocal", "params": "pitched | reverb heavy | human traces"},
+					{"name": "Field Recording", "type": "noise", "params": "distant children | fragments of world"},
+				],
+				"outro": [
+					{"name": "Warm Pad", "type": "pad", "params": "filter closing | amber hardens"},
+					{"name": "Tape Texture", "type": "noise", "params": "returning | fade to silence"},
+					{"name": "Vinyl Crackle", "type": "noise", "params": "memory surface noise"},
+				],
+				"default": [{"name": "Digital Amber", "type": "mix", "params": "108 BPM | F#m | SAW meets Syro"}]
 			}
 		
 		"chicago_dusseldorf":

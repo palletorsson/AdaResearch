@@ -1,5 +1,12 @@
 {
 	"artifacts": {
+		"WavePaintings": {
+			"name": "Wave Paintings",
+			"lookup_name": "WavePaintings",
+			"description": "Three pendulum-painting stations—grab the bob to swing it, watch oscillation become visible trace. Each pendulum paints on a wet canvas below, translating harmonic motion into color trails. The physics of swinging becomes the brush; chaos becomes art.",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.tscn",
+			"category": "waves"
+		},
 		"VitruvianMan": {
 			"name": "Vitruvian Man",
 			"lookup_name": "VitruvianMan",
