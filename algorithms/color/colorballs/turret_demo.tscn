@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsjlxedr7hmrs"]
+
+[ext_resource type="Script" path="res://algorithms/color/colorballs/laser_turret.gd" id="1_turret"]
+[ext_resource type="Script" uid="uid://c1dnkff4n6obn" path="res://algorithms/color/colorballs/colorballs.gd" id="2_balls"]
+[ext_resource type="Script" path="res://algorithms/color/colorballs/turret_demo.gd" id="3_demo"]
+
+[node name="TurretDemo" type="Node3D"]
+script = ExtResource("3_demo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 6)
+
+[node name="LaserTurret" type="Node3D" parent="."]
+script = ExtResource("1_turret")
+rotation_speed = 4.0
+detection_range = 20.0
+fire_delay = 0.2
+burn_time = 0.3
+laser_color = Color(1, 0.05, 0, 1)
+laser_width = 0.015
+laser_glow_width = 0.06
+laser_intensity = 4.0
+
+[node name="ColorBalls" type="Node3D" parent="."]
+script = ExtResource("2_balls")
+ball_count = 15
+spawn_area_size = Vector3(6, 1, 6)
+spawn_height = 4.0
+initial_velocity_range = 1.0
+fall_threshold = -3.0

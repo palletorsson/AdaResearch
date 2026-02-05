@@ -40,6 +40,9 @@ var balls: Array = []
 var ball_scene: PackedScene
 
 func _ready() -> void:
+	# Add to group so turret can find us
+	add_to_group("colorballs")
+	
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
 	if palette_keys.is_empty():

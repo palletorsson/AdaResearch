@@ -9,13 +9,14 @@ extends RefCounted
 
 const SAMPLE_RATE = 44100.0
 
-const PITCH_START_HZ = 140.0
-const PITCH_END_HZ = 48.0
-const PITCH_DECAY_S = 0.03
-const BODY_DECAY_S = 0.22
-const CLICK_LEVEL = 0.06
-const DRIVE = 1.1
-const LEVEL = 0.52
+# Tuned for Basic Channel / Chain Reaction depth
+const PITCH_START_HZ = 130.0   # Slightly lower start - darker attack
+const PITCH_END_HZ = 42.0      # Deeper fundamental (sub territory)
+const PITCH_DECAY_S = 0.035    # Slightly longer pitch sweep
+const BODY_DECAY_S = 0.32      # LONGER body - dub house kicks sustain
+const CLICK_LEVEL = 0.04       # Even softer click - all sub, no snap
+const DRIVE = 1.05             # Less drive - cleaner for dub space
+const LEVEL = 0.55             # Slightly louder to compensate for softer character
 
 
 static func generate(t: float, trigger_time: float = 0.0) -> float:

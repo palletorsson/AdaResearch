@@ -12,6 +12,7 @@ class_name SineWallExplanation
 @export var amplitude: float = 0.12
 @export var frequency: float = 2.0
 @export var wave_speed: float = 0.4
+@export var animate: bool = false
 @export var wall_color: Color = Color(0.8, 0.2, 0.3)
 @export var value_color: Color = Color(1.0, 1.0, 0.4)
 
@@ -35,6 +36,7 @@ func _ready():
 	_create_value_markers()
 	_create_labels()
 	_create_reference_plane()
+	set_process(animate)
 
 
 func _create_base_plate():
@@ -288,6 +290,8 @@ func _create_labels():
 
 
 func _process(delta):
+	if not animate:
+		return
 	_time += delta * wave_speed
 	_update_wall_mesh(_time)
 	_update_sine_curve(_time)
@@ -297,9 +301,20 @@ func _process(delta):
 # Public API
 func set_amplitude(a: float) -> void:
 	amplitude = a
+	_refresh_static()
 
 func set_frequency(f: float) -> void:
 	frequency = f
+	_refresh_static()
 
 func set_wave_speed(s: float) -> void:
 	wave_speed = s
+
+
+func _refresh_static() -> void:
+	if _wall_mesh == null or _sine_curve == null or _value_markers.is_empty():
+		return
+	_time = 0.0
+	_update_wall_mesh(_time)
+	_update_sine_curve(_time)
+	_update_value_markers(_time)

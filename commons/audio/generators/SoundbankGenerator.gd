@@ -99,13 +99,16 @@ const PATTERNS = {
 		"organ": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Sustained organ
 	},
 	
-	# Dub House: Deep, spacious, offbeat chord stabs
+	# Dub House: Deep, spacious, hypnotic - Basic Channel/Maurizio style
+	# The SPACE between hits is the instrument. Less is more.
+	# Reference: "Phylyps Trak", "Quadrant Dub", Rhythm & Sound
 	"dub_house": {
-		"kick":  [2,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # Deep 4-on-floor
-		"snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
-		"clap":  [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],
-		"hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Offbeat 8ths
-		"stab":  [0,0,0,1, 0,0,0,0.5, 0,0,0,1, 0,0,0,0.5],  # Dub chord echoes
+		"kick":    [2,0,0,0, 1,0,0,0.2, 1,0,0,0, 1,0,0.2,0],  # 4-on-floor with subtle ghost kicks
+		"rimshot": [0,0,0,0, 0,0,0,0, 0,0,0,0, 1,0,0,0],      # SPARSE - single rimshot on beat 4
+		"snare":   [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],      # Essentially unused - rimshot replaces it
+		"clap":    [0,0,0,0, 0,0,0,0, 0.8,0,0,0, 0,0,0,0],    # Single soft clap on 3 (sparse accent)
+		"hihat":   [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0.6],    # Offbeat 8ths + ghost open hat on &4
+		"stab":    [0,0,0,1, 0,0,0,0.25, 0,0,0,1, 0,0,0,0.25],# Dub chord with delay-style ghost echoes
 	},
 	
 	# Vangelis CS-80: Cinematic, expressive, sparse drums with big pads
@@ -312,10 +315,10 @@ const VELOCITY = {
 		"variation": 0.1,  # Groovy variation
 	},
 	"dub_house": {
-		"base": 0.8,       # Deep and steady
-		"accent": 1.0,
-		"ghost": 0.35,
-		"variation": 0.12, # Subtle human sway
+		"base": 0.7,       # Softer base - dub house breathes
+		"accent": 0.9,     # Even accents are restrained
+		"ghost": 0.25,     # Ghosts are felt, not heard (Basic Channel subtlety)
+		"variation": 0.08, # Less variation = more hypnotic repetition
 	},
 	"vangelis_cs80": {
 		"base": 0.7,       # Cinematic dynamics
@@ -722,7 +725,7 @@ static func _get_genre_progression(genre_id: String) -> Array:
 		"gypsy_woman_house":
 			return [0, 3, 4, 0]  # I - IV - V - I (uplifting house, MAJOR!)
 		"dub_house":
-			return [0, 5, 3, 6]  # i - VI - iv - VII (dub space)
+			return [0, 3, 0, 3]  # i - iv - i - iv (minimal movement)
 		"vangelis_cs80":
 			return [0, 3, 5, 4]  # i - iv - vi - V (cinematic minor drama)
 		"replicants_dawn":
@@ -892,7 +895,7 @@ static func _add_sound_hit(mix: PackedFloat32Array, script, start: int,
 		var sample = 0.0
 		
 		match sound_name:
-			"kick", "snare", "clap":
+			"kick", "snare", "clap", "rimshot":
 				if script.has_method("generate"):
 					sample = script.generate(t, 0.0)
 			"hihat":

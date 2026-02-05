@@ -222,6 +222,30 @@
                                                                 "interactive"
 															]
 											   },
+					  "vector_magnitude_demo":  {
+												   "name":  "Vector Magnitude Demo",
+												   "lookup_name":  "vector_magnitude_demo",
+												   "description":  "Interactive vector magnitude visualization. Shows |V| = √(x² + y² + z²) with visual ruler alongside vector. Component breakdown and Pythagorean calculation. Grabbable endpoint.",
+												   "scene":  "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+												   "category":  "vectors",
+												   "interaction":  "grab",
+												   "complexity":  "beginner",
+												   "sequence":  "vectors",
+												   "qfep_connection":  "Magnitude is the scalar truth of a vector — its length regardless of direction. Distance in space, intensity of force, speed of motion.",
+												   "tags":  ["vector", "magnitude", "length", "pythagorean", "foundational", "interactive"]
+											   },
+					  "vector_normalize_demo":  {
+												   "name":  "Vector Normalize Demo",
+												   "lookup_name":  "vector_normalize_demo",
+												   "description":  "Interactive normalization visualization. Shows V̂ = V/|V| with unit sphere. Original vector faded, unit vector bright. See how any vector maps to the unit sphere. Grabbable endpoint.",
+												   "scene":  "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+												   "category":  "vectors",
+												   "interaction":  "grab",
+												   "complexity":  "beginner",
+												   "sequence":  "vectors",
+												   "qfep_connection":  "Normalization extracts pure direction by removing magnitude. The unit sphere is where all directions live — equal in length, distinct in orientation.",
+												   "tags":  ["vector", "normalize", "unit", "direction", "foundational", "interactive"]
+											   },
 					  "game_of_life_petri":  {
 												 "name":  "Game of Life Petri",
 												 "lookup_name":  "game_of_life_petri",

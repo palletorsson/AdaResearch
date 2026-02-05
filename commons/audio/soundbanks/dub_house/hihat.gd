@@ -1,20 +1,22 @@
-# Dub House Hi-Hat - Soft metallic shimmer
+# Dub House Hi-Hat - Hypnotic offbeat shimmer
 #
-# Character: Offbeat, low-intensity hat with gentle decay
-# Source: 909-style metallic mix, softened
-# Processing: Reduced brightness, longer tail
+# Character: Dark, filtered, tape-saturated offbeat hat
+# Source: 909 filtered through tape delay character
+# Processing: Heavily filtered, longer shimmer, dub space
+# Reference: Basic Channel "Quadrant Dub", Maurizio "Ploy"
 
 class_name DubHouseHihat
 extends RefCounted
 
 const SAMPLE_RATE = 44100.0
 
-const METAL_FREQS = [258.0, 404.0, 431.0, 482.0, 592.0, 818.0]
-const CLOSED_DECAY_S = 0.035
-const OPEN_DECAY_S = 0.22
-const NOISE_LEVEL = 0.35
-const METAL_LEVEL = 0.55
-const LEVEL = 0.16
+# Lower frequencies = darker, more filtered sound (tape character)
+const METAL_FREQS = [205.0, 320.0, 385.0, 440.0, 520.0, 680.0]  # Tuned DOWN for dub darkness
+const CLOSED_DECAY_S = 0.055     # LONGER - more shimmer, hypnotic sustain
+const OPEN_DECAY_S = 0.35        # Much longer open hat tail
+const NOISE_LEVEL = 0.50         # More noise = softer, airier character
+const METAL_LEVEL = 0.40         # Less metal = less harsh, more dub
+const LEVEL = 0.14               # Subtle - sits back in the mix
 
 
 static func generate(t: float, trigger_time: float = 0.0, open: bool = false) -> float:

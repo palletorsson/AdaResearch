@@ -767,6 +767,45 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"default": [{"name": "Midnight Metroplex", "type": "mix", "params": "126 BPM | Am | machine precision"}]
 			}
 		
+		"dub_house_sb":
+			return {
+				"intro": [
+					{"name": "Pad", "type": "pad", "params": "warm bed | slow attack"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat | low intensity"},
+				],
+				"build": [
+					{"name": "Kick", "type": "drums", "params": "deep 4-on-floor"},
+					{"name": "Sub Bass", "type": "bass", "params": "round | sustained"},
+					{"name": "Pad", "type": "pad", "params": "wide | distant"},
+				],
+				"main": [
+					{"name": "Kick", "type": "drums", "params": "deep"},
+					{"name": "Snare", "type": "drums", "params": "short | airy"},
+					{"name": "Clap", "type": "drums", "params": "roomy"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat swing"},
+					{"name": "Dub Stab", "type": "keys", "params": "filtered | delay tails"},
+					{"name": "Sub Bass", "type": "bass", "params": "sub-forward"},
+					{"name": "Pad", "type": "pad", "params": "warm support"},
+				],
+				"breakdown": [
+					{"name": "Dub Stab", "type": "keys", "params": "space and decay"},
+					{"name": "Pad", "type": "pad", "params": "long release"},
+				],
+				"drop": [
+					{"name": "Kick", "type": "drums", "params": "deep"},
+					{"name": "Snare", "type": "drums", "params": "short"},
+					{"name": "Clap", "type": "drums", "params": "roomy"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
+					{"name": "Dub Stab", "type": "keys", "params": "tape-delay"},
+					{"name": "Sub Bass", "type": "bass", "params": "pulse"},
+				],
+				"outro": [
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
+					{"name": "Pad", "type": "pad", "params": "fade"},
+				],
+				"default": [{"name": "Dub House", "type": "mix", "params": "122 BPM | minor/dorian"}]
+			}
+		
 		"i_feel_love", "moroder_disco":
 			return {
 				"intro": [

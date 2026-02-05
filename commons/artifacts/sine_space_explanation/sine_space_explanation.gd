@@ -11,6 +11,7 @@ class_name SineSpaceExplanation
 @export var amplitude: float = 0.12
 @export var frequency: float = 1.5
 @export var wave_speed: float = 0.3
+@export var animate: bool = false
 @export var surface_color: Color = Color(0.2, 0.5, 0.8)
 @export var wireframe_color: Color = Color(0.4, 0.8, 1.0)
 
@@ -28,6 +29,7 @@ func _ready():
 	_create_wireframe()
 	_create_labels()
 	_create_axis_markers()
+	set_process(animate)
 
 
 func _create_base_plate():
@@ -239,6 +241,8 @@ func _create_axis_markers():
 
 
 func _process(delta):
+	if not animate:
+		return
 	_time += delta * wave_speed
 	_update_surface_mesh(_time)
 	_update_wireframe_mesh(_time)
@@ -247,9 +251,19 @@ func _process(delta):
 # Public API
 func set_amplitude(a: float) -> void:
 	amplitude = a
+	_refresh_static()
 
 func set_frequency(f: float) -> void:
 	frequency = f
+	_refresh_static()
 
 func set_wave_speed(s: float) -> void:
 	wave_speed = s
+
+
+func _refresh_static() -> void:
+	if _surface_mesh == null or _wireframe_mesh == null:
+		return
+	_time = 0.0
+	_update_surface_mesh(_time)
+	_update_wireframe_mesh(_time)

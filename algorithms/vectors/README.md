@@ -14,6 +14,7 @@ Immersive VR-first demonstrations that connect vector mathematics to spatial int
 - **Motion Vectors & Kinematics** - Acceleration-driven dynamics with live velocity readouts. `res://algorithms/vectors/08_vector_motion/VectorMotion.tscn`
 - **Torque & Moment Arm** - Rotational effects from `tau = r x F`. `res://algorithms/vectors/09_vector_torque/VectorTorque.tscn`
 - **Vector Field Flow** - Particle advection through a dynamic field. `res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn`
+- **Turret Targeting** - Laser turret tracks and destroys balls using subtraction, magnitude, normalization, and dot product. `res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn`
 
 ## Core Concepts Covered
 - Vector magnitude, direction, and normalization
@@ -22,5 +23,6 @@ Immersive VR-first demonstrations that connect vector mathematics to spatial int
 - Surface reflections, oriented areas, torque, and right-hand normals
 - Force accumulation, drag, and acceleration-driven motion
 - Vector fields and particle advection
+- Target tracking and aim alignment
 
 Each scene is designed for VR controllers but remains keyboard friendly (`R` reset, `Space` pause forces). Use the glowing spheres on the arrow heads to drag vectors through space and observe the immediate feedback projected nearby.

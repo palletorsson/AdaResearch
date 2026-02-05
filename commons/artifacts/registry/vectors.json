@@ -1,0 +1,213 @@
+{
+  "registry_info": {
+	"name": "vectors",
+	"description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
+	"category": "mathematics",
+	"theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
+  },
+  "artifacts": {
+	"hl_turret_vectors": {
+	  "lookup_name": "hl_turret_vectors",
+	  "scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+	  "class_name": "HLTurretVectors",
+	  "name": "Half-Life Turret - Vector Compendium",
+	  "description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
+	  "qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
+	  "signals": ["target_acquired", "target_lost", "bullet_fired", "bullet_hit"],
+	  "interactions": ["grab target sphere to move it", "preset buttons for scenarios", "SPACE to manual fire", "F to toggle auto-fire"],
+	  "parameters": {
+		"turret_height": "Height of turret barrel (default 0.4)",
+		"barrel_length": "Length of gun barrel (default 0.25)",
+		"field_of_view_degrees": "Total FOV cone in degrees (default 90)",
+		"max_range": "Maximum targeting range (default 2.5)",
+		"tracking_speed": "How fast turret tracks target (default 2.0)",
+		"target_position": "Initial target position Vector3",
+		"shooting_enabled": "Enable automatic firing (default true)",
+		"fire_rate": "Shots per second (default 3.0)",
+		"bullet_speed": "Bullet velocity in units/sec (default 4.0)",
+		"show_bullet_vectors": "Show velocity arrows on bullets (default true)"
+	  },
+	  "dev_themes": ["vectors", "game_mechanics", "applied_math", "physics"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "all_operations", "turret", "game", "interactive", "subtraction", "magnitude", "normalize", "dot_product", "cross_product", "projection", "addition", "scalar_multiplication", "velocity", "physics", "shooting"]
+	},
+	"vector_addition_demo": {
+	  "lookup_name": "vector_addition_demo",
+	  "scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+	  "class_name": "VectorAdditionDemo",
+	  "name": "Vector Addition",
+	  "description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
+	  "qfep_connection": "Composition - how separate movements combine into a single displacement",
+	  "signals": [],
+	  "interactions": ["grab handle spheres to adjust vectors", "preset buttons"],
+	  "parameters": {
+		"vector_a": "First vector",
+		"vector_b": "Second vector",
+		"max_vector_length": "Maximum allowed vector length"
+	  },
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "addition", "parallelogram", "interactive"]
+	},
+	"vector_subtraction_demo": {
+	  "lookup_name": "vector_subtraction_demo",
+	  "scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+	  "class_name": "VectorSubtractionDemo",
+	  "name": "Vector Subtraction",
+	  "description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
+	  "qfep_connection": "Difference and direction - finding what separates two states",
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "subtraction", "direction", "interactive"]
+	},
+	"vector_magnitude_demo": {
+	  "lookup_name": "vector_magnitude_demo",
+	  "scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+	  "class_name": "VectorMagnitudeDemo",
+	  "name": "Vector Magnitude",
+	  "description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
+	  "qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "magnitude", "length", "pythagorean", "interactive"]
+	},
+	"vector_normalize_demo": {
+	  "lookup_name": "vector_normalize_demo",
+	  "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+	  "class_name": "VectorNormalizeDemo",
+	  "name": "Vector Normalization",
+	  "description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
+	  "qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "normalize", "unit_vector", "direction", "interactive"]
+	},
+	"dot_product_projector": {
+	  "lookup_name": "dot_product_projector",
+	  "scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+	  "class_name": "DotProductProjector",
+	  "name": "Dot Product Projector",
+	  "description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
+	  "qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
+	  "signals": [],
+	  "interactions": ["grab handle spheres", "preset configurations"],
+	  "parameters": {
+		"vector_a": "Vector being projected",
+		"vector_b": "Vector projected onto"
+	  },
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "dot_product", "projection", "angle", "cosine", "interactive"]
+	},
+	"cross_product_demo": {
+	  "lookup_name": "cross_product_demo",
+	  "scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
+	  "class_name": "CrossProductDemo",
+	  "name": "Cross Product Demo",
+	  "description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+	  "qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
+	  "signals": [],
+	  "interactions": ["grab handle spheres", "preset configurations"],
+	  "parameters": {
+		"vector_a": "First vector",
+		"vector_b": "Second vector"
+	  },
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "cross_product", "perpendicular", "area", "right_hand_rule", "interactive"]
+	},
+	"vector_projection_demo": {
+	  "lookup_name": "vector_projection_demo",
+	  "scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+	  "class_name": "VectorProjectionDemo",
+	  "name": "Vector Projection",
+	  "description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
+	  "qfep_connection": "Projection as filtering - extracting the component in a particular direction",
+	  "dev_themes": ["vectors"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "projection", "shadow", "component", "interactive"]
+	},
+	"vector_translation_demo": {
+	  "lookup_name": "vector_translation_demo",
+	  "scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+	  "class_name": "VectorTranslationDemo",
+	  "name": "Vector Translation",
+	  "description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
+	  "qfep_connection": "Translation as movement - vectors as instructions for displacement",
+	  "dev_themes": ["vectors", "transforms"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "translation", "displacement", "position", "interactive"]
+	},
+	"basis_vectors_rig": {
+	  "lookup_name": "basis_vectors_rig",
+	  "scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+	  "class_name": "BasisVectorsRig",
+	  "name": "Basis Vectors Rig",
+	  "description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
+	  "qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
+	  "signals": [],
+	  "interactions": ["grab and rotate basis", "move target point", "preset configurations"],
+	  "parameters": {
+		"target_point": "Point to decompose into basis components",
+		"axis_length": "Length of basis arrows"
+	  },
+	  "dev_themes": ["vectors", "linear_algebra"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "basis", "coordinate_system", "linear_combination", "interactive"]
+	}
+  },
+  "sequence_mapping": {
+	"vector_fundamentals": [
+	  "vector_addition_demo",
+	  "vector_subtraction_demo",
+	  "vector_magnitude_demo",
+      "vector_normalize_demo"
+	],
+	"vector_products": [
+	  "dot_product_projector",
+	  "cross_product_demo",
+      "vector_projection_demo"
+	],
+	"vector_applications": [
+	  "hl_turret_vectors",
+      "basis_vectors_rig"
+	],
+	"all_vectors": [
+	  "vector_addition_demo",
+	  "vector_subtraction_demo",
+	  "vector_magnitude_demo",
+	  "vector_normalize_demo",
+	  "dot_product_projector",
+	  "cross_product_demo",
+	  "vector_projection_demo",
+	  "hl_turret_vectors",
+      "basis_vectors_rig"
+	]
+  },
+  "theoretical_connections": {
+	"basic_operations": ["vector_addition_demo", "vector_subtraction_demo", "vector_magnitude_demo", "vector_normalize_demo"],
+	"product_operations": ["dot_product_projector", "cross_product_demo"],
+	"applied_examples": ["hl_turret_vectors"],
+	"coordinate_systems": ["basis_vectors_rig", "vector_translation_demo"]
+  }
+}

@@ -18,7 +18,7 @@
 	},
 	"documentation": {
 		"summary": "WaveFunctions Sine Space",
-		"layout": "13x14 chamber with enhanced lighting and a dynamic sine-space sculpture at center stage.",
+		"layout": "13x14 chamber with enhanced lighting and a static sine-space sculpture at center stage.",
 		"objective": "Observe how sine waves modulate space while collecting the supporting pickup challenge. edit sine space in sine_space.tscn",
 		"key_elements": ["Spawn `s` on the northern balcony", "`sine_space` installation at (5,5)", "`pick_up_cube` task nearby for interaction", "Extra lights `el` and teleporter `t` guiding the exit"]
 	},
@@ -28,8 +28,8 @@
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "8"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "8"],
 			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "8"],
-			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "8"],
-			["8", "8", "8", "8", "8", "8", "8", "8", "1", "1", "1", "8"],
+			["1", "2", "1", "1", "1", "1", "1", "1", "2", "1", "1", "8"],
+			["8", "8", "8", "8", "8", "8", "8", "8", "2", "1", "1", "8"],
 			["8", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "8"],
 			["8", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "8"],
 			["8", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "8"],
@@ -87,9 +87,9 @@
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", "sine_wall_explanation:0:0.5", " ", "sine_wall_corridor:90", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "", " ", " ", "sine_wall_corridor:90", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "sine_space_explanation:0:0.5", " ", " ", " "],
+			[" ", "sine_wall_explanation", " ", " ", " ", " ", " ", " ", "sine_space_explanation:90", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "colorballs", " ", " ", " ", " ", " ", " "],

@@ -27,8 +27,8 @@ extends Node3D
 @export var enable_collision: bool = true
 @export var use_plush_shader: bool = true
 
-@export var auto_update_in_editor: bool = true
-@export var animate_at_runtime: bool = true
+@export var auto_update_in_editor: bool = false
+@export var animate_at_runtime: bool = false
 @export var animation_speed: float = 0.05  # Very slow animation
 
 var _left_wall: MeshInstance3D
