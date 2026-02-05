@@ -95,6 +95,15 @@ const INFO_BOARD_TYPES = {
 		"color": Color(0.6, 0.8, 0.9),
 		"supports_parameters": true
 	},
+	"turret_boll": {
+		"name": "Turret-Boll Vectors",
+		"category": "Mathematics",
+		"scene": "TurretBoll/TurretBollInfoBoard.tscn",
+		"scene_3d": "TurretBoll/2d_in_3d_turretboll_vis.tscn",
+		"description": "All vector operations: subtract, magnitude, normalize, dot product, projection",
+		"color": Color(0.5, 1.0, 0.6),
+		"supports_parameters": true
+	},
 	"forces": {
 		"name": "Forces Info Board",
 		"category": "Physics",

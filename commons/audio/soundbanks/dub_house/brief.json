@@ -14,7 +14,7 @@
     "emotional_truth": "Submerged, spacious, meditative groove"
   },
 
-  "soundbank": ["kick", "snare", "clap", "hihat", "rimshot", "bass", "stab", "pad"],
+  "soundbank": ["kick", "snare", "clap", "hihat", "rimshot", "bass", "stab", "pad", "siren"],
 
   "forbidden": [
     "supersaw",
@@ -50,11 +50,11 @@
   },
 
   "sections": {
-    "intro": ["pad", "hihat"],
-    "build": ["kick", "hihat", "pad", "bass"],
+    "intro": ["pad", "hihat", "siren"],
+    "build": ["kick", "hihat", "pad", "bass", "siren"],
     "main": ["kick", "rimshot", "hihat", "bass", "stab", "pad"],
-    "breakdown": ["pad", "stab"],
+    "breakdown": ["pad", "stab", "siren"],
     "drop": ["kick", "clap", "hihat", "bass", "stab"],
-    "outro": ["hihat", "pad", "rimshot"]
+    "outro": ["hihat", "pad", "rimshot", "siren"]
   }
 }

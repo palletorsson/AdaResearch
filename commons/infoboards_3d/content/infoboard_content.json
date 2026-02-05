@@ -21,7 +21,8 @@
 			"forces",
 			"unitcircle",
 			"randomwalk",
-			"procedural_generation"
+			"procedural_generation",
+			"turret_boll"
 		],
 		"title": "AdaResearch InfoBoard Book",
 		"version": "1.0.0"
@@ -1487,6 +1488,34 @@
 			],
 			"subtitle": "From Flat to Solid",
 			"title": "Polyhedra & Their Nets"
+		},
+		"turret_boll": {
+			"board_id": "turret_boll",
+			"category": "Mathematics",
+			"description": "All vector operations demonstrated through turret targeting: subtract, magnitude, normalize, dot product, projection",
+			"order": 25.0,
+			"pages": [
+				{
+					"title": "Turret → Boll Vector Operations",
+					"axiom": "A turret tracking a ball demonstrates all fundamental vector operations in one coherent system.",
+					"concepts": ["subtraction", "magnitude", "normalization", "dot product", "projection"],
+					"code": {
+						"id": "targeting_loop",
+						"language": "gdscript",
+						"block": "var to_target = ball.pos - turret.pos  # ① subtract\nvar distance = to_target.length()       # ② magnitude\nvar aim = to_target.normalized()        # ③ normalize\nvar lock = forward.dot(aim)             # ④ dot product\nif distance < range and lock > 0.97:\n    fire()"
+					},
+					"visualization": {
+						"id": "turret_boll_static",
+						"files": [
+							"res://commons/infoboards_3d/boards/TurretBoll/TurretBollInfoSheet.gd"
+						]
+					}
+				}
+			],
+			"scene_2d": "res://commons/infoboards_3d/boards/TurretBoll/TurretBollInfoBoard.tscn",
+			"scene_3d": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+			"subtitle": "Vector Operations",
+			"title": "Turret → Boll"
 		}
 	}
 }

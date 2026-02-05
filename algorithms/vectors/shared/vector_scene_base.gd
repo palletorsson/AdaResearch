@@ -30,16 +30,16 @@ func _init_shared_resources():
 	if _shared_cylinder_mesh == null:
 		_shared_cylinder_mesh = CylinderMesh.new()
 		_shared_cylinder_mesh.height = 1.0 # Unit height for scaling
-		_shared_cylinder_mesh.top_radius = 0.01
-		_shared_cylinder_mesh.bottom_radius = 0.01
-		_shared_cylinder_mesh.radial_segments = 12
+		_shared_cylinder_mesh.top_radius = 0.006  # Smaller for exhibition
+		_shared_cylinder_mesh.bottom_radius = 0.006
+		_shared_cylinder_mesh.radial_segments = 8
 
 	if _shared_cone_mesh == null:
 		_shared_cone_mesh = CylinderMesh.new()
-		_shared_cone_mesh.height = 0.2
-		_shared_cone_mesh.bottom_radius = 0.05
+		_shared_cone_mesh.height = 0.12  # Smaller arrowhead
+		_shared_cone_mesh.bottom_radius = 0.025
 		_shared_cone_mesh.top_radius = 0.0
-		_shared_cone_mesh.radial_segments = 16
+		_shared_cone_mesh.radial_segments = 12
 
 	if _shared_sphere_mesh == null:
 		_shared_sphere_mesh = SphereMesh.new()

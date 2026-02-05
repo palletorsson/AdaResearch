@@ -193,48 +193,16 @@ func _load_sound_parameter_file(file_path: String):
 
 func _create_sound_type_mappings():
 	"""Create mappings between sound keys and AudioSynthesizer.SoundType enum"""
-	# Map sound keys to enum values
-	var enum_mapping = {
-		"basic_sine_wave": AudioSynthesizer.SoundType.BASIC_SINE_WAVE,
-		"pickup_mario": AudioSynthesizer.SoundType.PICKUP_MARIO,
-		"teleport_drone": AudioSynthesizer.SoundType.TELEPORT_DRONE,
-		"lift_bass_pulse": AudioSynthesizer.SoundType.LIFT_BASS_PULSE,
-		"ghost_drone": AudioSynthesizer.SoundType.GHOST_DRONE,
-		"melodic_drone": AudioSynthesizer.SoundType.MELODIC_DRONE,
-		"laser_shot": AudioSynthesizer.SoundType.LASER_SHOT,
-		"power_up_jingle": AudioSynthesizer.SoundType.POWER_UP_JINGLE,
-		"explosion": AudioSynthesizer.SoundType.EXPLOSION,
-		"retro_jump": AudioSynthesizer.SoundType.RETRO_JUMP,
-		"shield_hit": AudioSynthesizer.SoundType.SHIELD_HIT,
-		"ambient_wind": AudioSynthesizer.SoundType.AMBIENT_WIND,
-		"dark_808_kick": AudioSynthesizer.SoundType.DARK_808_KICK,
-		"acid_606_hihat": AudioSynthesizer.SoundType.ACID_606_HIHAT,
-		"dark_808_sub_bass": AudioSynthesizer.SoundType.DARK_808_SUB_BASS,
-		"ambient_amiga_drone": AudioSynthesizer.SoundType.AMBIENT_AMIGA_DRONE,
-		"moog_bass_lead": AudioSynthesizer.SoundType.MOOG_BASS_LEAD,
-		"tb303_acid_bass": AudioSynthesizer.SoundType.TB303_ACID_BASS,
-		"dx7_electric_piano": AudioSynthesizer.SoundType.DX7_ELECTRIC_PIANO,
-		"c64_sid_lead": AudioSynthesizer.SoundType.C64_SID_LEAD,
-		"amiga_mod_sample": AudioSynthesizer.SoundType.AMIGA_MOD_SAMPLE,
-		"ppg_wave_pad": AudioSynthesizer.SoundType.PPG_WAVE_PAD,
-		"tr909_kick": AudioSynthesizer.SoundType.TR909_KICK,
-		"jupiter_8_strings": AudioSynthesizer.SoundType.JUPITER_8_STRINGS,
-		"korg_m1_piano": AudioSynthesizer.SoundType.KORG_M1_PIANO,
-		"arp_2600_lead": AudioSynthesizer.SoundType.ARP_2600_LEAD,
-		"synare_3_disco_tom": AudioSynthesizer.SoundType.SYNARE_3_DISCO_TOM,
-		"synare_3_cosmic_fx": AudioSynthesizer.SoundType.SYNARE_3_COSMIC_FX,
-		"moog_kraftwerk_sequencer": AudioSynthesizer.SoundType.MOOG_KRAFTWERK_SEQUENCER,
-		"herbie_hancock_moog_fusion": AudioSynthesizer.SoundType.HERBIE_HANCOCK_MOOG_FUSION,
-		"aphex_twin_modular": AudioSynthesizer.SoundType.APHEX_TWIN_MODULAR,
-		"flying_lotus_sampler": AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER
-	}
-	
-	# Create reverse mapping for loaded sounds
+	sound_type_mapping.clear()
 	for sound_key in sound_parameters.keys():
-		if enum_mapping.has(sound_key):
-			sound_type_mapping[enum_mapping[sound_key]] = sound_key
+		var enum_name = sound_key.to_upper()
+		if AudioSynthesizer.SoundType.has(enum_name):
+			sound_type_mapping[AudioSynthesizer.SoundType[enum_name]] = sound_key
 		else:
 			print("⚠️ No enum mapping found for sound: %s" % sound_key)
+	
+	if sound_type_mapping.is_empty():
+		sound_type_mapping[AudioSynthesizer.SoundType.BASIC_SINE_WAVE] = "basic_sine_wave"
 
 func _load_fallback_parameters():
 	"""Load basic fallback parameters if folder loading fails"""

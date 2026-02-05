@@ -771,12 +771,14 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 			return {
 				"intro": [
 					{"name": "Pad", "type": "pad", "params": "warm bed | slow attack"},
+					{"name": "Siren Drone", "type": "pad", "params": "cinematic | slow sweep"},
 					{"name": "Hi-Hat", "type": "drums", "params": "offbeat | low intensity"},
 				],
 				"build": [
 					{"name": "Kick", "type": "drums", "params": "deep 4-on-floor"},
 					{"name": "Sub Bass", "type": "bass", "params": "round | sustained"},
 					{"name": "Pad", "type": "pad", "params": "wide | distant"},
+					{"name": "Siren Drone", "type": "pad", "params": "long sweep | distant"},
 				],
 				"main": [
 					{"name": "Kick", "type": "drums", "params": "deep"},
@@ -790,6 +792,7 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"breakdown": [
 					{"name": "Dub Stab", "type": "keys", "params": "space and decay"},
 					{"name": "Pad", "type": "pad", "params": "long release"},
+					{"name": "Siren Drone", "type": "pad", "params": "slow rise | cinematic"},
 				],
 				"drop": [
 					{"name": "Kick", "type": "drums", "params": "deep"},
@@ -802,6 +805,7 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"outro": [
 					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
 					{"name": "Pad", "type": "pad", "params": "fade"},
+					{"name": "Siren Drone", "type": "pad", "params": "distant | tail"},
 				],
 				"default": [{"name": "Dub House", "type": "mix", "params": "122 BPM | minor/dorian"}]
 			}

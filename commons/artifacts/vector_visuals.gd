@@ -21,9 +21,9 @@ const COLORS = {
 	"glow": Color(1.0, 1.0, 1.0, 0.3),
 }
 
-# Create a sleek arrow with glow effect - THIN style like y_oscillation_cube
+# Create a sleek arrow with glow effect - SMALLER for exhibition
 static func create_arrow(parent: Node3D, arrow_name: String, color: Color, 
-		thickness: float = 0.012, ghost: bool = false) -> Node3D:
+		thickness: float = 0.008, ghost: bool = false) -> Node3D:
 	var arrow = Node3D.new()
 	arrow.name = arrow_name
 	
@@ -472,6 +472,90 @@ static func create_vector_label(parent: Node3D, label_name: String, text: String
 # Utility to get panel label
 static func get_panel_label(panel: Node3D) -> Label3D:
 	return panel.get_node_or_null("Label") as Label3D
+
+# Create exhibition-style plate (tilted, in front of artifact, museum style)
+static func create_exhibition_plate(parent: Node3D, panel_name: String, 
+		title: String, description: String, pos: Vector3, 
+		size: Vector2 = Vector2(0.5, 0.18)) -> Node3D:
+	var plate = Node3D.new()
+	plate.name = panel_name
+	plate.position = pos
+	# Tilt back like a museum plate
+	plate.rotation_degrees = Vector3(-25, 0, 0)
+	
+	# Metal plate backing
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(size.x, size.y, 0.008)
+	backing.mesh = box
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.15, 0.17)
+	mat.metallic = 0.8
+	mat.roughness = 0.35
+	backing.material_override = mat
+	backing.position.z = -0.005
+	plate.add_child(backing)
+	
+	# Subtle frame
+	var frame_mat = StandardMaterial3D.new()
+	frame_mat.albedo_color = Color(0.25, 0.25, 0.28)
+	frame_mat.metallic = 0.9
+	frame_mat.roughness = 0.3
+	
+	var thickness = 0.006
+	var half_w = size.x / 2.0
+	var half_h = size.y / 2.0
+	
+	for y_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var edge_box = BoxMesh.new()
+		edge_box.size = Vector3(size.x + thickness * 2, thickness, 0.012)
+		edge.mesh = edge_box
+		edge.material_override = frame_mat
+		edge.position = Vector3(0, half_h * y_mult, -0.003)
+		plate.add_child(edge)
+	
+	for x_mult in [-1.0, 1.0]:
+		var edge = MeshInstance3D.new()
+		var edge_box = BoxMesh.new()
+		edge_box.size = Vector3(thickness, size.y, 0.012)
+		edge.mesh = edge_box
+		edge.material_override = frame_mat
+		edge.position = Vector3(half_w * x_mult, 0, -0.003)
+		plate.add_child(edge)
+	
+	# Title text
+	var title_label = Label3D.new()
+	title_label.name = "TitleLabel"
+	title_label.text = title
+	title_label.pixel_size = 0.001
+	title_label.font_size = 18
+	title_label.modulate = Color(0.95, 0.95, 0.95)
+	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title_label.position = Vector3(0, half_h - 0.035, 0.006)
+	title_label.outline_size = 2
+	title_label.outline_modulate = Color(0, 0, 0, 0.3)
+	plate.add_child(title_label)
+	
+	# Description text
+	var desc_label = Label3D.new()
+	desc_label.name = "Label"
+	desc_label.text = description
+	desc_label.pixel_size = 0.001
+	desc_label.font_size = 11
+	desc_label.modulate = Color(0.8, 0.8, 0.82)
+	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	desc_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	desc_label.position = Vector3(0, half_h - 0.065, 0.006)
+	desc_label.outline_size = 1
+	desc_label.outline_modulate = Color(0, 0, 0, 0.2)
+	plate.add_child(desc_label)
+	
+	if parent:
+		parent.add_child(plate)
+	return plate
 
 # Animate handle pulse
 static func pulse_handle(handle: Node3D, delta: float, time: float):

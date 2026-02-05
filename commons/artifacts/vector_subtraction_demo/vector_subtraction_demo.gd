@@ -11,7 +11,7 @@ class_name VectorSubtractionDemo
 
 ## Display settings
 @export var max_vector_length: float = 1.2
-@export var arrow_thickness: float = 0.025
+@export var arrow_thickness: float = 0.006  # Small for exhibition
 
 ## Vector A
 @export var vector_a: Vector3 = Vector3(0.8, 0.4, -0.1):

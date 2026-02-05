@@ -1,4 +1,4 @@
-# AdaResearch — Project Entry Point
+# AdaResearch -- Project Entry Point
 
 > **For new contributors and AI assistants: Start here.**
 
@@ -18,9 +18,10 @@ Named after **Ada Lovelace** (1815-1852), who first envisioned that computation 
 |--------|-------|--------|
 | **Sequences** | 42 | `commons/maps/sequences/*.json` |
 | **Maps** | 503 | `commons/maps/*/map_data.json` |
-| **Artifacts** | 749+ | `commons/artifacts/grid_artifacts.json` |
-| **Algorithm folders** | 639 | `algorithms/` |
-| **Spine sequences** | 18 | `curriculum_spine.json` |
+| **Lab artifacts (grid)** | 752 | `commons/artifacts/grid_artifacts.json` |
+| **Registry artifacts** | 367 | `commons/artifacts/registry/*.json` |
+| **Algorithm folders (all subdirs)** | 641 | `algorithms/` |
+| **Spine sequences** | 18 | `commons/maps/curriculum_spine.json` |
 
 ---
 
@@ -29,34 +30,34 @@ Named after **Ada Lovelace** (1815-1852), who first envisioned that computation 
 Everything is organized around the **Queer Free Energy Principle**:
 
 ```
-QFE = F − λE(S) + φΔE(S,t)
+QFE = F - lambda*E(S) + phi*dE(S,t)
 ```
 
 | Symbol | Meaning | Curriculum Phase |
 |--------|---------|------------------|
 | **F** | Free energy (order, prediction) | `primitives`, `transformations` |
 | **E(S)** | Entropy (disorder, randomness) | `randomness`, `noise`, `cellularautomata` |
-| **λ** | Order↔chaos balance (0→1) | `fractals`, `lsystems` |
-| **φΔE** | Rate of change (queer signature) | `morphogenesis`, `swarmintelligence` |
+| **lambda** | Order<->chaos balance (0->1) | `fractals`, `lsystems` |
+| **phi*dE** | Rate of change (queer signature) | `morphogenesis`, `swarmintelligence` |
 
-**Life exists at λ ≈ 0.3-0.5** — enough order to maintain identity, enough chaos to adapt.
+**Life exists at lambda ~ 0.3-0.5** -- enough order to maintain identity, enough chaos to adapt.
 
 ---
 
 ## Project Structure (Truth Sources)
 
-### 🔴 Primary Truth (Authoritative)
+### Primary Truth (Authoritative)
 
 | Path | What It Contains |
 |------|------------------|
 | `commons/maps/curriculum_spine.json` | The 18-sequence learning progression |
 | `commons/maps/sequences/*.json` | All 42 sequence definitions with maps |
 | `commons/maps/{MapName}/map_data.json` | Individual map data (grid layers, artifacts) |
-| `commons/artifacts/grid_artifacts.json` | Legacy artifact registry (749 entries) |
-| `commons/artifacts/registry/*.json` | New modular registries |
+| `commons/artifacts/grid_artifacts.json` | Legacy artifact registry (752 entries) |
+| `commons/artifacts/registry/*.json` | New modular registries (12 files, 367 entries) |
 | `algorithms/` | Actual algorithm implementations |
 
-### 🟡 Secondary Truth (Documentation)
+### Secondary Truth (Documentation)
 
 | Path | What It Contains |
 |------|------------------|
@@ -64,22 +65,22 @@ QFE = F − λE(S) + φΔE(S,t)
 | `doc/TAXONOMY.md` | Generative paradigms framework |
 | `doc/README.md` | Project overview |
 
-### 🔵 Validation Tools
+### Validation Tools
 
 | Tool | Purpose |
 |------|---------|
 | `commons/dev_tools/ContentValidatorDesktop.tscn` | **Run this** to see real content state |
 | `commons/dev_tools/validation_report.md` | Exported validation report |
 
-**⚠️ Documentation can be outdated. When in doubt, run the validator or check the JSON files.**
+**WARNING:** Documentation can be outdated. When in doubt, run the validator or check the JSON files.
 
 ---
 
 ## Content Chain
 
 ```
-Sequences → Maps → Artifacts → Scenes
-    ↓          ↓         ↓          ↓
+Sequences -> Maps -> Artifacts -> Scenes
+    v          v         v          v
   .json    map_data   registry   .tscn/.gd
             .json      .json
 ```
@@ -103,11 +104,11 @@ commons/maps/sequences/primitives.json
 ### Map Structure
 ```
 commons/maps/Point_One/
-├── map_data.json      # Grid layers, artifact placements
-├── blurb.md           # Poetic hook
-├── summary.md         # Overview
-├── technical.md       # Code examples
-└── critical.md        # Queer theory critique
+|-- map_data.json      # Grid layers, artifact placements
+|-- blurb.md           # Poetic hook
+|-- summary.md         # Overview
+|-- technical.md       # Code examples
+`-- critical.md        # Queer theory critique
 ```
 
 ### Map Layers (in map_data.json)
@@ -135,7 +136,7 @@ The recommended progression through QFEP phases:
 | 4 | `forces` | oscillation | Newton, physics vectors |
 | 5 | `randomness` | E_entropy | Distributions, entropy |
 | 6 | `noise` | E_entropy | Perlin, flow fields |
-| 7 | `cellularautomata` | E_entropy | Game of Life, rules→patterns |
+| 7 | `cellularautomata` | E_entropy | Game of Life, rules->patterns |
 | 8 | `fractals` | lambda_edge | Self-similarity, recursion |
 | 9 | `lsystems` | lambda_edge | Grammar-based growth |
 | 10 | `proceduralgeneration` | lambda_edge | WFC, Markov |
@@ -143,7 +144,7 @@ The recommended progression through QFEP phases:
 | 12 | `swarmintelligence` | integration | Boids, emergence |
 | 13 | `softbodies` | integration | Deformable physics |
 | 14 | `machinelearning` | integration | Neural nets |
-| 15 | `foundationscrisis` | synthesis | Gödel, Russell, limits |
+| 15 | `foundationscrisis` | synthesis | Godel, Russell, limits |
 | 16 | `qfeplaboratory` | synthesis | Full QFEP embodied |
 | 17 | `speculativecomputation` | synthesis | Queer futures |
 | 18 | `criticalalgorithms` | synthesis | Algorithmic bias |
@@ -181,9 +182,9 @@ Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 ## What Makes This Project Different
 
 1. **Dual-lens pedagogy**: Every algorithm has both technical AND critical theory content
-2. **Embodied learning**: VR interactions — grab vectors, tune parameters, see emergence
-3. **QFEP framework**: Unified theoretical structure connecting order↔chaos
-4. **Generative incompleteness**: The project is deliberately unfinished — you learn by filling gaps
+2. **Embodied learning**: VR interactions -- grab vectors, tune parameters, see emergence
+3. **QFEP framework**: Unified theoretical structure connecting order<->chaos
+4. **Generative incompleteness**: The project is deliberately unfinished -- you learn by filling gaps
 
 ---
 
@@ -191,13 +192,13 @@ Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 
 | Document | Purpose | Trust Level |
 |----------|---------|-------------|
-| `doc/ENTRY.md` | **You are here** | 🟢 Current |
-| `doc/ARCHITECTURE.md` | Technical systems | 🟡 Mostly current |
-| `doc/TAXONOMY.md` | 8 generative paradigms | 🟢 Current |
-| `doc/README.md` | Project overview | 🟡 Mostly current |
-| `doc/VR_GAMEPLAY_DESIGN.md` | VR design philosophy | 🟡 |
-| `doc/QFEP_GAMWELL_MAPPING.md` | Theory grounding | 🟢 |
-| `doc/ARTIFACT_DEVELOPMENT_PLAN.md` | Build roadmap | 🟡 |
+| `doc/ENTRY.md` | **You are here** | Current |
+| `doc/ARCHITECTURE.md` | Technical systems | Mostly current |
+| `doc/TAXONOMY.md` | 8 generative paradigms | Current |
+| `doc/README.md` | Project overview | Mostly current |
+| `doc/VR_GAMEPLAY_DESIGN.md` | VR design philosophy | Mostly current |
+| `doc/QFEP_GAMWELL_MAPPING.md` | Theory grounding | Current |
+| `doc/ARTIFACT_DEVELOPMENT_PLAN.md` | Build roadmap | Mostly current |
 
 **When in doubt:** Run `ContentValidatorDesktop.tscn` or check the JSON source files.
 
@@ -209,15 +210,15 @@ Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 2. **Check `curriculum_spine.json`** for current sequence structure
 3. **Check `commons/maps/sequences/*.json`** for map lists
 4. **Run validator** to see actual content state
-5. **Documentation may be stale** — project files are the truth
+5. **Documentation may be stale** -- project files are the truth
 
 ### Common Tasks
-- "Add an artifact" → See registry files + map_data.json
-- "Check what maps exist" → Count map_data.json files
-- "Understand curriculum" → curriculum_spine.json
-- "See what's broken" → Run ContentValidatorDesktop
+- "Add an artifact" -> See registry files + map_data.json
+- "Check what maps exist" -> Count map_data.json files
+- "Understand curriculum" -> curriculum_spine.json
+- "See what's broken" -> Run ContentValidatorDesktop
 
 ---
 
-*Last updated: 2026-02-03*
+*Last updated: 2026-02-05*
 *To verify this doc: run `commons/dev_tools/ContentValidatorDesktop.tscn`*

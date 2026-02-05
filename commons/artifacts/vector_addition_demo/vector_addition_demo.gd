@@ -13,7 +13,7 @@ class_name VectorAdditionDemo
 
 ## Display settings
 @export var max_vector_length: float = 1.2
-@export var arrow_thickness: float = 0.012  # Thin like y_oscillation_cube
+@export var arrow_thickness: float = 0.006  # Small for exhibition
 
 ## Vector A
 @export var vector_a: Vector3 = Vector3(0.8, 0.3, 0.0):
@@ -99,20 +99,20 @@ func _make_pickable(handle: Node3D):
 		pass  # Handle via Area3D for now
 
 func _create_labels():
-	# Title panel - positioned behind artifact, facing player at +Z
-	_title_panel = VectorVisuals.create_panel(self, "TitlePanel", 
+	# Exhibition plate - in front, tilted like museum label
+	_title_panel = VectorVisuals.create_exhibition_plate(self, "TitlePanel", 
 		"VECTOR ADDITION",
-		Vector3(0, max_vector_length + 0.35, -max_vector_length - 0.2),
-		Vector2(0.45, 0.09), 24)
-	# No rotation needed - panel faces +Z by default
+		"A⃗ + B⃗ = C⃗\nHead-to-tail method",
+		Vector3(0, 0.05, max_vector_length + 0.3),
+		Vector2(0.4, 0.12))
 	
 	# Formula panel - to the right side, facing player
 	_formula_panel = VectorVisuals.create_panel(self, "FormulaPanel", "",
 		Vector3(max_vector_length + 0.25, max_vector_length * 0.5, 0),
-		Vector2(0.55, 0.22), 13, HORIZONTAL_ALIGNMENT_LEFT)
-	_formula_panel.rotation_degrees = Vector3(0, -90, 0)  # Face toward +Z side
+		Vector2(0.48, 0.2), 11, HORIZONTAL_ALIGNMENT_LEFT)
+	_formula_panel.rotation_degrees = Vector3(0, -90, 0)
 	
-	# Vector labels
+	# Vector labels - smaller
 	_label_a = VectorVisuals.create_vector_label(self, "LabelA", "A⃗", color_a)
 	_label_b = VectorVisuals.create_vector_label(self, "LabelB", "B⃗", color_b)
 	_label_result = VectorVisuals.create_vector_label(self, "LabelResult", "A⃗+B⃗", color_result)

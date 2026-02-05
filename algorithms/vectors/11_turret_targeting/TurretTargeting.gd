@@ -9,12 +9,12 @@ extends Node3D
 
 @export_category("Dropper")
 @export var drop_interval: float = 2.5
-@export var max_balls: int = 4
+@export var max_balls: int = 50  # No practical limit
 @export var auto_drop: bool = true
 
 @export_category("Turret")  
 @export var detection_range: float = 8.0
-@export var burn_time: float = 0.3
+@export var damage_per_second: float = 50.0  # ~2 sec to kill a 100hp ball
 @export var laser_color: Color = Color(1.0, 0.05, 0.0)
 
 @export_category("Display")
@@ -51,7 +51,7 @@ func _setup_turret() -> void:
 	turret.name = "LaserTurret"
 	turret.position = turret_position
 	turret.detection_range = detection_range
-	turret.burn_time = burn_time
+	turret.damage_per_second = damage_per_second
 	turret.laser_color = laser_color
 	add_child(turret)
 

@@ -1530,100 +1530,99 @@ func _on_song_selected(song_id: String):
 func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
 	
-	# AudioSynthesizer has class_name - call static methods directly
-	match song_id:
-		"acid_house":
-			stream = AudioSynthesizer.generate_acid_house_song({})
-		"prog_synth_70s":
-			stream = AudioSynthesizer.generate_prog_synth_song({})
-		"pop_generative":
-			stream = AudioSynthesizer.generate_pop_interactive_song({})
-		"ambient_works":
-			stream = AudioSynthesizer.generate_ambient_works_song({})
-		"moroder_disco":
-			stream = AudioSynthesizer.generate_moroder_disco_song({})
-		"detroit_techno":
-			stream = AudioSynthesizer.generate_detroit_techno_song({})
-		"detroit_sb":
-			stream = SoundbankGenerator.generate_song("detroit_techno", {})
-		"synthwave_sb":
-			stream = SoundbankGenerator.generate_song("synthwave", {})
-		"burial_sb":
-			stream = SoundbankGenerator.generate_song("burial", {})
-		"boc_sb":
-			stream = SoundbankGenerator.generate_song("boards_of_canada", {})
-		"rave_sb":
-			stream = SoundbankGenerator.generate_song("rave", {})
-		"kraftwerk_sb":
-			stream = SoundbankGenerator.generate_song("kraftwerk", {})
-		"madonna_sb":
-			stream = SoundbankGenerator.generate_song("madonna_80s", {})
-		"gypsy_sb":
-			stream = SoundbankGenerator.generate_song("gypsy_woman_house", {})
-		"dub_house_sb":
-			stream = SoundbankGenerator.generate_song("dub_house", {})
-		"midnight_metroplex":
-			stream = SoundbankGenerator.generate_song("detroit_techno", {})
-		"synthwave":
-			stream = AudioSynthesizer.generate_synthwave_song({})
-		"rave":
-			stream = AudioSynthesizer.generate_rave_song({})
-		"french_touch":
-			stream = AudioSynthesizer.generate_french_touch_song({})
-		"supersaw_trance":
-			stream = AudioSynthesizer.generate_supersaw_trance_song({})
-		"lofi_house":
-			stream = AudioSynthesizer.generate_lofi_house_song({})
-		"reese_jungle":
-			stream = AudioSynthesizer.generate_reese_jungle_song({})
-		"ambient_techno":
-			stream = AudioSynthesizer.generate_ambient_techno_song({})
-		"blade_runner":
-			stream = AudioSynthesizer.generate_blade_runner_song({})
-		"boards_of_canada":
-			stream = AudioSynthesizer.generate_boards_of_canada_song({})
-		"burial":
-			stream = AudioSynthesizer.generate_burial_song({})
-		"kraftwerk":
-			stream = AudioSynthesizer.generate_kraftwerk_song({})
-		"boards_of_canada_v2":
-			stream = AudioSynthesizer.generate_boards_of_canada_v2_song({})
-		"burial_v2":
-			stream = AudioSynthesizer.generate_burial_v2_song({})
-		"kraftwerk_v2":
-			stream = AudioSynthesizer.generate_kraftwerk_v2_song({})
-		"prog_synth_v2":
-			stream = AudioSynthesizer.generate_prog_synth_v2_song({})
-		"pop_v2":
-			stream = AudioSynthesizer.generate_pop_v2_song({})
-		"pop_madonna":
-			stream = AudioSynthesizer.generate_pop_madonna_song({})
-		"gypsy_woman_house":
-			stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
-		# === SOUNDBANK SONGS ===
-		"aphex_twin", "aphex_twin_digital_amber":
-			stream = SoundbankGenerator.generate_song("aphex_twin", {})
-		"ada_theme":
-			stream = SoundbankGenerator.generate_song("ada_theme", {})
-		"vangelis_cs80":
-			stream = SoundbankGenerator.generate_song("vangelis_cs80", {})
-		"moroder_disco_sb":
-			stream = SoundbankGenerator.generate_song("moroder_disco", {})
-		# === HYBRID SONGS ===
-		"chicago_dusseldorf":
-			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
-		"replicants_dawn":
-			stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
-		"foggy_frequencies":
-			stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
-		_:
-			# No generator - show config breakdown only (no audio)
-			_status_label.text = "📋 %s (config only - no audio)" % song_id
-			_current_song_id = song_id
-			_load_song_words(song_id)
-			_enable_buttons()
-			return
-	
+	# Soundbank previews (explicit *_sb IDs)
+	if song_id.ends_with("_sb"):
+		var soundbank_map = {
+			"detroit_sb": "detroit_techno",
+			"synthwave_sb": "synthwave",
+			"burial_sb": "burial",
+			"boc_sb": "boards_of_canada",
+			"rave_sb": "rave",
+			"kraftwerk_sb": "kraftwerk",
+			"madonna_sb": "madonna_80s",
+			"gypsy_sb": "gypsy_woman_house",
+			"dub_house_sb": "dub_house",
+			"moroder_disco_sb": "moroder_disco",
+		}
+		var bank_id = soundbank_map.get(song_id, "")
+		if bank_id != "":
+			stream = SoundbankGenerator.generate_song(bank_id, {})
+		else:
+			stream = null
+	else:
+		# AudioSynthesizer has class_name - call static methods directly
+		match song_id:
+			"acid_house":
+				stream = AudioSynthesizer.generate_acid_house_song({})
+			"prog_synth_70s":
+				stream = AudioSynthesizer.generate_prog_synth_song({})
+			"pop_generative":
+				stream = AudioSynthesizer.generate_pop_interactive_song({})
+			"ambient_works":
+				stream = AudioSynthesizer.generate_ambient_works_song({})
+			"moroder_disco":
+				stream = AudioSynthesizer.generate_moroder_disco_song({})
+			"detroit_techno":
+				stream = AudioSynthesizer.generate_detroit_techno_song({})
+			"midnight_metroplex":
+				stream = SoundbankGenerator.generate_song("detroit_techno", {})
+			"synthwave":
+				stream = AudioSynthesizer.generate_synthwave_song({})
+			"rave":
+				stream = AudioSynthesizer.generate_rave_song({})
+			"french_touch":
+				stream = AudioSynthesizer.generate_french_touch_song({})
+			"supersaw_trance":
+				stream = AudioSynthesizer.generate_supersaw_trance_song({})
+			"lofi_house":
+				stream = AudioSynthesizer.generate_lofi_house_song({})
+			"reese_jungle":
+				stream = AudioSynthesizer.generate_reese_jungle_song({})
+			"ambient_techno":
+				stream = AudioSynthesizer.generate_ambient_techno_song({})
+			"blade_runner":
+				stream = AudioSynthesizer.generate_blade_runner_song({})
+			"boards_of_canada":
+				stream = AudioSynthesizer.generate_boards_of_canada_song({})
+			"burial":
+				stream = AudioSynthesizer.generate_burial_song({})
+			"kraftwerk":
+				stream = AudioSynthesizer.generate_kraftwerk_song({})
+			"boards_of_canada_v2":
+				stream = AudioSynthesizer.generate_boards_of_canada_v2_song({})
+			"burial_v2":
+				stream = AudioSynthesizer.generate_burial_v2_song({})
+			"kraftwerk_v2":
+				stream = AudioSynthesizer.generate_kraftwerk_v2_song({})
+			"prog_synth_v2":
+				stream = AudioSynthesizer.generate_prog_synth_v2_song({})
+			"pop_v2":
+				stream = AudioSynthesizer.generate_pop_v2_song({})
+			"pop_madonna":
+				stream = AudioSynthesizer.generate_pop_madonna_song({})
+			"gypsy_woman_house":
+				stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
+			# === SOUND BANK-ONLY SONGS ===
+			"aphex_twin", "aphex_twin_digital_amber":
+				stream = SoundbankGenerator.generate_song("aphex_twin", {})
+			"ada_theme":
+				stream = SoundbankGenerator.generate_song("ada_theme", {})
+			"vangelis_cs80":
+				stream = SoundbankGenerator.generate_song("vangelis_cs80", {})
+			# === HYBRID SONGS ===
+			"chicago_dusseldorf":
+				stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
+			"replicants_dawn":
+				stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
+			"foggy_frequencies":
+				stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
+			_:
+				# No generator - show config breakdown only (no audio)
+				_status_label.text = "?? %s (config only - no audio)" % song_id
+				_current_song_id = song_id
+				_load_song_words(song_id)
+				_enable_buttons()
+				return
 	if stream == null:
 		_status_label.text = "Generation failed - check console for errors"
 		_enable_buttons()
@@ -2290,6 +2289,10 @@ func _load_song_words(song_id: String):
 			"Pad": {
 				"words": ["warm", "wide", "sustained", "distant"],
 				"params": {"attack": 1.2, "release": 1.5}
+			},
+			"Siren Drone": {
+				"words": ["ominous", "swelling", "distant", "cinematic"],
+				"params": {"sweep": "slow", "attack": 4.0, "release": 6.0}
 			},
 			"Drums": {
 				"words": ["punchy", "soft", "warm"],
@@ -2981,12 +2984,14 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 			return {
 				"intro": [
 					{"name": "Pad", "type": "pad", "params": "warm | slow attack"},
+					{"name": "Siren Drone", "type": "pad", "params": "cinematic | slow sweep"},
 					{"name": "Hi-Hat", "type": "drums", "params": "offbeat | low intensity"},
 				],
 				"build": [
 					{"name": "Kick", "type": "drums", "params": "deep 4-on-floor"},
 					{"name": "Sub Bass", "type": "bass", "params": "round | sustained"},
 					{"name": "Pad", "type": "pad", "params": "wide | distant"},
+					{"name": "Siren Drone", "type": "pad", "params": "long sweep | distant"},
 				],
 				"main": [
 					{"name": "Kick", "type": "drums", "params": "deep"},
@@ -3000,6 +3005,7 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"breakdown": [
 					{"name": "Dub Stab", "type": "keys", "params": "space and decay"},
 					{"name": "Pad", "type": "pad", "params": "long release"},
+					{"name": "Siren Drone", "type": "pad", "params": "slow rise | cinematic"},
 				],
 				"drop": [
 					{"name": "Kick", "type": "drums", "params": "deep"},
@@ -3012,6 +3018,7 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 				"outro": [
 					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
 					{"name": "Pad", "type": "pad", "params": "fade"},
+					{"name": "Siren Drone", "type": "pad", "params": "distant | tail"},
 				],
 				"default": [{"name": "Dub House", "type": "mix", "params": "122 BPM | minor/dorian"}]
 			}

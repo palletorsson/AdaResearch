@@ -174,6 +174,119 @@
 	  "category": "mathematics",
 	  "complexity": "intermediate",
 	  "tags": ["vectors", "basis", "coordinate_system", "linear_combination", "interactive"]
+	},
+	"turret_targeting": {
+	  "lookup_name": "turret_targeting",
+	  "scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
+	  "class_name": "TurretTargeting",
+	  "name": "Turret Targeting (Combined)",
+	  "description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
+	  "qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
+	  "signals": ["ball_destroyed", "target_acquired", "target_lost"],
+	  "interactions": ["DROP BALL button", "RESET button", "AUTO toggle"],
+	  "parameters": {
+		"turret_position": "Position of turret base (default 0,0,0)",
+		"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
+		"drop_interval": "Seconds between ball drops (default 2.5)",
+		"max_balls": "Maximum balls alive at once (default 4)",
+		"detection_range": "Turret targeting range (default 8.0)",
+		"burn_time": "Time laser burns before explosion (default 0.3)",
+		"laser_color": "Color of laser beam (default red)",
+		"show_controls": "Show VR control panel (default true)"
+	  },
+	  "dev_themes": ["vectors", "game_mechanics", "applied_math"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "subtraction", "magnitude", "normalize", "dot_product", "turret", "targeting", "interactive", "game", "laser", "vr"]
+	},
+	"laser_turret": {
+	  "lookup_name": "laser_turret",
+	  "scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
+	  "class_name": "LaserTurret",
+	  "name": "Laser Turret",
+	  "description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
+	  "qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
+	  "signals": ["ball_destroyed", "target_acquired", "target_lost"],
+	  "interactions": ["Automatic targeting - no direct interaction needed"],
+	  "parameters": {
+		"rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
+		"detection_range": "Maximum targeting range (default 10.0)",
+		"fire_delay": "Lock time before firing (default 0.25)",
+		"burn_time": "Laser burn time before explosion (default 0.35)",
+		"laser_color": "Color of laser beam (default red)",
+		"auto_target": "Auto-acquire targets (default true)",
+		"target_closest": "Prioritize closest target (default true)"
+	  },
+	  "dev_themes": ["vectors", "game_mechanics", "applied_math"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "subtraction", "magnitude", "normalize", "dot_product", "turret", "laser", "standalone"]
+	},
+	"ball_dropper": {
+	  "lookup_name": "ball_dropper",
+	  "scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
+	  "class_name": "BallDropper",
+	  "name": "Ball Dropper",
+	  "description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
+	  "qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
+	  "signals": ["ball_spawned", "ball_destroyed"],
+	  "interactions": ["Automatic dropping - configure via parameters"],
+	  "parameters": {
+		"drop_interval": "Seconds between drops (default 3.0)",
+		"auto_drop": "Enable automatic dropping (default true)",
+		"max_balls": "Maximum balls alive at once (default 5)",
+		"ball_radius": "Size of balls (default 0.1)",
+		"ball_mass": "Mass for physics (default 0.5)",
+		"ball_bounce": "Bounciness (default 0.7)",
+		"spawn_spread": "Random XZ spread (default 0.3)",
+		"initial_velocity": "Starting velocity Vector3"
+	  },
+	  "dev_themes": ["vectors", "physics", "spawning"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["balls", "physics", "spawner", "dropper", "colorful", "standalone"]
+	},
+	"sentry_turret": {
+	  "lookup_name": "sentry_turret",
+	  "scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+	  "class_name": "SentryTurret",
+	  "name": "Sentry Turret",
+	  "description": "Half-Life style sentry turret. Targets balls and/or player. Simple reliable targeting with bullet physics. Emits signals for hits.",
+	  "qfep_connection": "The turret as autonomous agent - continuously computing vectors to track and engage targets.",
+	  "signals": ["target_acquired", "target_lost", "fired", "hit_target"],
+	  "interactions": ["Automatic - targets balls and player"],
+	  "parameters": {
+		"rotation_speed": "Turret rotation speed (default 5.0)",
+		"detection_range": "Maximum targeting range (default 15.0)",
+		"fire_rate": "Shots per second (default 5.0)",
+		"bullet_speed": "Bullet velocity (default 20.0)",
+		"target_player": "Target the player/camera (default true)",
+		"target_balls": "Target balls from droppers (default true)"
+	  },
+	  "dev_themes": ["vectors", "game_mechanics", "targeting"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["turret", "sentry", "targeting", "bullets", "halflife", "player", "balls"]
+	},
+	"turret_boll_infoboard": {
+	  "lookup_name": "turret_boll_infoboard",
+	  "scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+	  "class_name": "TurretBollInfoBoard",
+	  "name": "Turret-Boll Vector Diagram",
+	  "description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
+	  "qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
+	  "signals": [],
+	  "interactions": ["Static display - no interaction"],
+	  "parameters": {},
+	  "dev_themes": ["vectors", "infoboard", "reference"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "beginner",
+	  "tags": ["vectors", "infoboard", "2d_in_3d", "subtraction", "magnitude", "normalize", "dot_product", "projection", "turret", "reference", "diagram"]
 	}
   },
   "sequence_mapping": {
@@ -190,6 +303,10 @@
 	],
 	"vector_applications": [
 	  "hl_turret_vectors",
+	  "turret_targeting",
+	  "laser_turret",
+	  "ball_dropper",
+	  "turret_boll_infoboard",
       "basis_vectors_rig"
 	],
 	"all_vectors": [
@@ -201,13 +318,17 @@
 	  "cross_product_demo",
 	  "vector_projection_demo",
 	  "hl_turret_vectors",
+	  "turret_targeting",
+	  "laser_turret",
+	  "ball_dropper",
+	  "turret_boll_infoboard",
       "basis_vectors_rig"
 	]
   },
   "theoretical_connections": {
 	"basic_operations": ["vector_addition_demo", "vector_subtraction_demo", "vector_magnitude_demo", "vector_normalize_demo"],
 	"product_operations": ["dot_product_projector", "cross_product_demo"],
-	"applied_examples": ["hl_turret_vectors"],
+	"applied_examples": ["hl_turret_vectors", "turret_targeting", "laser_turret", "ball_dropper", "turret_boll_infoboard"],
 	"coordinate_systems": ["basis_vectors_rig", "vector_translation_demo"]
   }
 }

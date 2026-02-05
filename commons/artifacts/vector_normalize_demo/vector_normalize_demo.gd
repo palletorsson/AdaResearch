@@ -109,12 +109,15 @@ func _create_wireframe_ring(normal: Vector3, color: Color):
 		segment.material_override = mat
 		segment.position = (p1 + p2) / 2.0
 		
+		# Orient segment along direction (without look_at - node not in tree)
 		var direction = p2 - p1
 		if direction.length() > 0.001:
 			var up = Vector3.UP
 			if abs(direction.normalized().dot(up)) > 0.99:
 				up = Vector3.FORWARD
-			segment.look_at(segment.position + direction, up)
+			# Calculate rotation manually
+			var basis = Basis.looking_at(direction, up)
+			segment.basis = basis
 			segment.rotate_object_local(Vector3.RIGHT, PI/2)
 		
 		ring.add_child(segment)

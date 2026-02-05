@@ -1,16 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://crnal4iti23i7"]
+[gd_scene load_steps=2 format=3 uid="uid://d3yj88shn16v1"]
 
-[ext_resource type="Script" uid="uid://cturretlaser002" path="res://algorithms/color/colorballs/laser_turret.gd" id="1_turret"]
+[ext_resource type="Script" path="res://algorithms/color/colorballs/laser_turret.gd" id="1_turret"]
 
 [node name="LaserTurret" type="Node3D"]
 script = ExtResource("1_turret")
-rotation_speed = 3.0
-detection_range = 15.0
-fire_delay = 0.3
-burn_time = 0.4
-laser_color = Color(1, 0.1, 0, 1)
-laser_width = 0.02
-laser_glow_width = 0.08
-laser_intensity = 3.0
-auto_target = true
-prioritize_closest = true

@@ -685,6 +685,12 @@ static func _generate_hybrid_section(
 			if script == null:
 				continue
 			
+			if sound_name == "siren":
+				if bar == 0:
+					_add_continuous_sound(final_mix, script, 0,
+						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg)
+				continue
+			
 			# Drums and melodic patterns (use hybrid patterns)
 			if patterns.has(sound_name):
 				_add_pattern_sound(final_mix, script, bar_start, patterns[sound_name],
@@ -768,6 +774,12 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 			
 			var script = bank.get_sound_script(sound_name)
 			if script == null:
+				continue
+			
+			if sound_name == "siren":
+				if bar == 0:
+					_add_continuous_sound(final_mix, script, 0,
+						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg)
 				continue
 			
 			# Drums and melodic patterns
@@ -934,7 +946,7 @@ static func _add_continuous_sound(mix: PackedFloat32Array, script, start: int,
 		var sample = 0.0
 		
 		match sound_name:
-			"pad", "atmosphere", "supersaw":
+			"pad", "atmosphere", "supersaw", "siren":
 				if script.has_method("generate"):
 					sample = script.generate(t, chord_freqs, note_duration, 0.0)
 				elif script.has_method("generate_sample"):

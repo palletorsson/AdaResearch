@@ -25,7 +25,7 @@ const SAMPLE_RATE = 44100.0
 
 # Oscillator - Sawtooth with controlled harmonics
 const DETUNE_CENTS = 1.5         # MINIMAL - warmth from harmonics, not spread
-                                  # (Research: <2 cents for Kraftwerk)
+								  # (Research: <2 cents for Kraftwerk)
 
 # Filter - Vocoder-like formant shaping
 const FILTER_CUTOFF_HZ = 3000.0  # Open enough for presence
@@ -119,7 +119,7 @@ static func _formant_response(freq: float, formant_hz: float) -> float:
 	# Resonant peak at formant frequency
 	var bandwidth = 200.0
 	var diff = absf(freq - formant_hz)
-	return expf(-(diff * diff) / (2.0 * bandwidth * bandwidth))
+	return exp(-(diff * diff) / (2.0 * bandwidth * bandwidth))
 
 
 static func generate_sample(t: float, chord_freqs: Array) -> float:

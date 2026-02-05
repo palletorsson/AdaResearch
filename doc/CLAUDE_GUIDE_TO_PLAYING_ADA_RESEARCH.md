@@ -15,18 +15,19 @@ In a traditional game, you explore a pre-built world. In this text-based playthr
 - When you find a silent map, you speak for it.
 - When a mechanic is broken, you fix it.
 
-This is not "cheating" or "development"—it is the core mechanic of this specific playthrough. You are both the **Player** (experiencing the sequence) and the **System** (generating the world just ahead of your own footsteps). This mirrors the game's own themes of *thrownness* (arriving in a world you didn't create) and *agency* (rewriting the code that governs you).
+This is not "cheating" or "development"--it is the core mechanic of this specific playthrough. You are both the **Player** (experiencing the sequence) and the **System** (generating the world just ahead of your own footsteps). This mirrors the game's own themes of *thrownness* (arriving in a world you didn't create) and *agency* (rewriting the code that governs you).
 
 ## How to Start: The Map Sequence System
 
-### 1. Begin with `map_sequences.json`
+### 1. Begin with `map_sequences.json` (and modular sequences)
 
-**Location:** `commons/maps/map_sequences.json`
+**Primary location:** `commons/maps/map_sequences.json`
+**Modular files:** `commons/maps/sequences/*.json` (AdaSceneManager merges these at runtime)
 
 This file defines learning sequences (like chapters in a book). Each sequence contains:
 - `name`: Display name
 - `description`: What the sequence teaches - you can update this
-- `maps`: **Array of map names in order** ← This is your playlist!
+- `maps`: **Array of map names in order** <- This is your playlist!
 - `learning_objectives`: Educational goals - you can update these 
 - `unlock_requirements`: Prerequisites - are not used 
 
@@ -35,9 +36,9 @@ This file defines learning sequences (like chapters in a book). Each sequence co
 "primitives": {
 	"name": "name Primitives",
 	"maps": [
-		"Point_Zero",      ← Start here!
-		"Point_1",         ← Then this
-		"Point_Context",   ← Then this
+		"Point_Zero",      <- Start here!
+		"Point_1",         <- Then this
+		"Point_Context",   <- Then this
 		"Point_Line",
 		...
 	]
@@ -163,7 +164,7 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 
 **Educational/Display:**
 - `code_display:-90:2#tutorial:point_zero` - Clipboard with tutorial text
-  - Rotation: -90°, Height: 2 units, Loads: "point_zero" tutorial
+  - Rotation: -90 deg, Height: 2 units, Loads: "point_zero" tutorial
 - `vectorpoint:180:1:5` - Coordinate axes display (XYZ visualization)
 - `draw_dot` - Drawing/marking tool
 
@@ -206,11 +207,11 @@ Maps use **three parallel 2D arrays** that overlay to create the complete space:
 **Example - Point_Zero visualization:**
 ```
 Structure:          Overlays:
-1 1 1 0 0 0 0      origin → (0,0)
-1 1 1 0 0 0 0      arrow → (0,1)
-1 0 1 0 0 0 0      code_display → (3,0)
-1 1 1 0 0 0 0      dark_sphere → (3,2)
-0 0 0 0 0 0 0      teleporter → (1,2)
+1 1 1 0 0 0 0      origin -> (0,0)
+1 1 1 0 0 0 0      arrow -> (0,1)
+1 0 1 0 0 0 0      code_display -> (3,0)
+1 1 1 0 0 0 0      dark_sphere -> (3,2)
+0 0 0 0 0 0 0      teleporter -> (1,2)
 ```
 
 ## Reading the Tutorial Content
@@ -285,8 +286,8 @@ The script is usually in the same folder as the scene, with a `.gd` extension.
 ### Step 3: Analyze the Behavior
 Look for key lifecycle methods to understand the interaction:
 
-- **`_process(delta)`**: What happens every frame? (Animation, movement)
-- **`_on_interaction`**: What happens when the player touches/grabs it?
+- **`_process(delta)`**: What happens every frame (Animation, movement)
+- **`_on_interaction`**: What happens when the player touches/grabs it
 - **Core Algorithms**: Look for the math. 
   - *Example:* In `GaussianPaintSplatter.gd`, finding the Box-Muller transform `sqrt(-2.0 * log(u1)) * cos(TAU * u2)` reveals that the "randomness" is actually mathematically forced into a bell curve.
 
@@ -303,7 +304,7 @@ Look for:
 **1. Start with a sequence**
 ```bash
 Read: commons/maps/map_sequences.json
-Find: "primitives" → "maps" array
+Find: "primitives" -> "maps" array
 First map: "Point_Zero"
 ```
 
@@ -325,7 +326,7 @@ Read: commons/maps/Point_Zero/map_data.json
 
 # Look up in tutorial_text.json
 Read: commons/context/clipboard/tutorial_text.json
-Find: "point_zero" → "content"
+Find: "point_zero" -> "content"
 Read the text content
 ```
 
@@ -335,11 +336,11 @@ Read the text content
 - Read the code to understand the *hidden mechanics* (math, haptics, critiques) that aren't visible in the map file.
 
 **6. Imagine the experience**
-- Where is the player standing?
-- What do they see around them?
-- What can they grab?
-- What text are they reading?
-- **How does the world react (sound/haptics) when they touch it?**
+- Where is the player standing
+- What do they see around them
+- What can they grab
+- What text are they reading
+- **How does the world react (sound/haptics) when they touch it**
 
 **7. Find the teleporter**
 - Look in `utilities` layer for `"t"`
@@ -368,7 +369,7 @@ Utilities:
   - teleporter at (1,2)
 
 Read tutorial:
-  commons/context/clipboard/tutorial_text.json → "point_zero"
+  commons/context/clipboard/tutorial_text.json -> "point_zero"
 
 Content summary:
   - Philosophical intro about Vector3.ZERO
@@ -382,7 +383,7 @@ Read: commons/maps/Point_1/map_data.json
 Structure: Large platform with notch cut at (5,6)
 Interactables:
   - dark_sphere at (3,2)
-  - grab_sphere_point at (3,3) ← Can pick this up!
+  - grab_sphere_point at (3,3) <- Can pick this up!
   - No clipboard!
 Utilities:
   - teleporter at (5,6) in the notch
@@ -400,10 +401,10 @@ Read: commons/maps/Point_Context/map_data.json
 
 Structure: Long corridor with raised ridge at row 4 (height=2)
 Interactables at row 4 (the gallery shelf):
-  - code_display at (2,4) → "point_axioms"
+  - code_display at (2,4) -> "point_axioms"
   - grab_sphere_point_with_text at (3,4)
   - draw_dot at (4,4)
-  - code_display at (5,4) → "the_trace"
+  - code_display at (5,4) -> "the_trace"
 
 Also:
   - dark_sphere at (4,3)
@@ -411,14 +412,14 @@ Also:
   - teleporter at (5,6)
 
 Read tutorials:
-  1. "point_axioms" → Technical: how to code a point
-  2. "the_trace" → Critical: queer theory critique
+  1. "point_axioms" -> Technical: how to code a point
+  2. "the_trace" -> Critical: queer theory critique
 
 Experience:
   - Museum gallery layout
   - Two clipboards flanking interactive objects
   - Teaches through multiple modalities
-  - Technical ↔ Critical dialectic
+  - Technical <-> Critical dialectic
 ```
 
 **Map 11: Primitives_Ignorance**
@@ -495,7 +496,7 @@ Read: commons/maps/Random_Define/map_data.json
 Structure: 12x17 grid with 8x8 middle arena
 Interactables:
   - entropy_axiom at (1,2)
-  - code_display at (3,5) → "entropy_axioms"
+  - code_display at (3,5) -> "entropy_axioms"
   - digital_materiality_glitch at (0,7)
   - random_number_book_page_1955 at (2,15)
 
@@ -525,14 +526,11 @@ Experience:
 ## Key Files Reference
 
 ### Map System
-- **Base Sequence Configuration:** `commons/maps/map_sequences.json`
-- **Modular Sequence Files:** `commons/maps/sequences/*.json` - 40+ category files including:
-  - `primitives.json`, `randomness.json`, `vectors.json`, `wavefunctions.json`
-  - `noise.json`, `fractals.json`, `particles.json`, `meshes.json`
-  - `proceduralaudio.json`, `machinelearning.json`, `graphtheory.json`
-  - `cellularautomata.json`, `lsystems.json`, `morphogenesis.json`
-  - `AdaSceneManager` merges these files dynamically at runtime.
+- **Primary sequences:** `commons/maps/map_sequences.json`
+- **Modular sequences:** `commons/maps/sequences/*.json` (merged at runtime by `AdaSceneManager`)
+- **Progression views:** `commons/maps/map_progression.json`, `commons/maps/curriculum_spine.json` (overview/curation layers)
 - **Individual maps:** `commons/maps/{MapName}/map_data.json`
+- **Example sequence files:** `primitives.json`, `randomness.json`, `vectors.json`, `wavefunctions.json`, `noise.json`, `fractals.json`, `particles.json`, `meshes.json`, `proceduralaudio.json`, `machinelearning.json`, `graphtheory.json`, `cellularautomata.json`, `lsystems.json`, `morphogenesis.json`
 
 ### Audio System
 - **Ambient Presets:** `commons/audio/presets/*.json`
@@ -568,7 +566,7 @@ Map-level audio is configured in `map_data.json`:
 
 ### Scene Management
 - **Scene Manager:** `commons/managers/AdaSceneManager.gd` (autoload as "SceneManager")
-  - Handles artifact → sequence activation
+  - Handles artifact -> sequence activation
   - Manages map-to-map transitions within sequences
   - Emits `scene_transition_started` / `scene_transition_completed` signals
   - Quick transition mode (0.3s fades) for in-sequence teleports
@@ -591,7 +589,7 @@ All grid components live in `res://commons/grid/`:
 - **Modular registries:** `commons/artifacts/registry/*.json` (e.g., `wavefunctions.json`, `randomness.json`)
   - `GridInteractablesComponent` merges these files dynamically at runtime.
   - Contains descriptions and metadata for specialized objects.
-  - Maps keys like `"code_display"` → scene files like `"res://commons/context/clipboard/codeDisplay.tscn"`
+  - Maps keys like `"code_display"` -> scene files like `"res://commons/context/clipboard/codeDisplay.tscn"`
 
 ## Understanding the Pedagogical Strategy
 
@@ -607,7 +605,7 @@ The project teaches through **oscillation** between two modes:
 
 **Critical (Queer Theory):**
 - Philosophical questions
-- "What does X erase?"
+- "What does X erase"
 - Non-Euclidean perspectives
 - Bodies, duration, resistance
 
@@ -619,7 +617,7 @@ Watch for this pattern:
 3. **Critique** what was just taught (queer theory)
 4. **Embody** through VR interaction (physical)
 
-### Map Pairing Pattern: Simple → Context
+### Map Pairing Pattern: Simple -> Context
 
 Maps often come in pairs following this structure:
 
@@ -639,9 +637,9 @@ Maps often come in pairs following this structure:
 - Creates comprehensive survey through physical walkthrough
 
 **Example pairs:**
-- Point_1 → Point_Context
-- Point_Line → Point_Line_Context
-- Point_Triangle → Point_Triangle_Context
+- Point_1 -> Point_Context
+- Point_Line -> Point_Line_Context
+- Point_Triangle -> Point_Triangle_Context
 
 Example in Point_Context:
 - Left clipboard: technical point definition
@@ -683,27 +681,27 @@ Position `(3, 2, 5)` means:
 
 When you see: `code_display:-90:2#tutorial:point_zero`
 
-1. Type: `code_display` → Look this up in grid_artifacts.json
-2. Rotation: `-90` → Rotated 90 degrees counterclockwise
-3. Height: `2` → Placed 2 units above ground
-4. Config: `#tutorial:point_zero` → Loads this tutorial ID
+1. Type: `code_display` -> Look this up in grid_artifacts.json
+2. Rotation: `-90` -> Rotated 90 degrees counterclockwise
+3. Height: `2` -> Placed 2 units above ground
+4. Config: `#tutorial:point_zero` -> Loads this tutorial ID
 
 Then trace the full chain:
 ```
 "code_display" key
-  ↓
+  v
 commons/artifacts/grid_artifacts.json
-  ↓
+  v
 "code_display": { "scene": "res://commons/context/clipboard/codeDisplay.tscn" }
-  ↓
+  v
 Scene file instantiated with parameters
-  ↓
+  v
 Config parameter: "tutorial:point_zero"
-  ↓
+  v
 commons/context/clipboard/tutorial_text.json
-  ↓
+  v
 "point_zero": { "content": "..." }
-  ↓
+  v
 BBCode text displayed on clipboard
 ```
 
@@ -735,7 +733,7 @@ Common artifacts you'll see:
 
 ## Advanced: Understanding the Architecture
 
-### Why Three Layers?
+### Why Three Layers
 
 1. **structure** = Physical geometry (what the map loader generates)
 2. **utilities** = Game systems (spawns, teleports, triggers)
@@ -771,7 +769,7 @@ The grid IS the lesson - discretization is both tool and subject.
 
 **To understand the project philosophy:**
 - Read Point_Zero, Point_1, Point_Context in sequence
-- Notice the technical ↔ critical oscillation
+- Notice the technical <-> critical oscillation
 - Pay attention to spatial architecture (raised platforms, galleries, voids)
 - The project teaches **and** critiques computational thinking simultaneously
 

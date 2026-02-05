@@ -25,6 +25,8 @@ var interactive_exercises_container: VBoxContainer
 # Audio Player for previewing sounds
 var audio_player: AudioStreamPlayer
 var current_sound_key: String = "basic_sine_wave"
+var sound_type_by_key: Dictionary = {}
+var sound_key_by_type: Dictionary = {}
 
 # Real-time update system
 var realtime_enabled: bool = true
@@ -665,6 +667,19 @@ func load_parameters_from_files():
 	else:
 		print("⚠️ No parameters loaded from JSON, keeping hardcoded defaults")
 
+	_refresh_sound_type_maps()
+
+func _refresh_sound_type_maps():
+	"""Build sound key <-> SoundType mappings based on loaded parameters."""
+	sound_type_by_key.clear()
+	sound_key_by_type.clear()
+	for sound_key in sound_parameters.keys():
+		var enum_name = sound_key.to_upper()
+		if AudioSynthesizer.SoundType.has(enum_name):
+			var sound_type = AudioSynthesizer.SoundType[enum_name]
+			sound_type_by_key[sound_key] = sound_type
+			sound_key_by_type[sound_type] = sound_key
+
 func create_visualization_section() -> VBoxContainer:
 	"""Create the waveform and spectrum visualization section"""
 	var section = VBoxContainer.new()
@@ -1098,91 +1113,13 @@ func update_value_label(param_name: String, value):
 		print("🔍 Available value labels: %s" % value_labels.keys())
 
 func get_sound_key_from_type(sound_type: AudioSynthesizer.SoundType) -> String:
-	match sound_type:
-		AudioSynthesizer.SoundType.BASIC_SINE_WAVE:
-			return "basic_sine_wave"
-		AudioSynthesizer.SoundType.PICKUP_MARIO:
-			return "pickup_mario"
-		AudioSynthesizer.SoundType.TELEPORT_DRONE:
-			return "teleport_drone"
-		AudioSynthesizer.SoundType.LIFT_BASS_PULSE:
-			return "lift_bass_pulse"
-		AudioSynthesizer.SoundType.GHOST_DRONE:
-			return "ghost_drone"
-		AudioSynthesizer.SoundType.MELODIC_DRONE:
-			return "melodic_drone"
-		AudioSynthesizer.SoundType.LASER_SHOT:
-			return "laser_shot"
-		AudioSynthesizer.SoundType.POWER_UP_JINGLE:
-			return "power_up_jingle"
-		AudioSynthesizer.SoundType.EXPLOSION:
-			return "explosion"
-		AudioSynthesizer.SoundType.RETRO_JUMP:
-			return "retro_jump"
-		AudioSynthesizer.SoundType.SHIELD_HIT:
-			return "shield_hit"
-		AudioSynthesizer.SoundType.AMBIENT_WIND:
-			return "ambient_wind"
-		_:
-			return "basic_sine_wave"
+	return sound_key_by_type.get(sound_type, "basic_sine_wave")
 
 func get_type_from_sound_key(sound_key: String) -> AudioSynthesizer.SoundType:
-	match sound_key:
-		"basic_sine_wave":
-			return AudioSynthesizer.SoundType.BASIC_SINE_WAVE
-		"pickup_mario":
-			return AudioSynthesizer.SoundType.PICKUP_MARIO
-		"teleport_drone":
-			return AudioSynthesizer.SoundType.TELEPORT_DRONE
-		"lift_bass_pulse":
-			return AudioSynthesizer.SoundType.LIFT_BASS_PULSE
-		"ghost_drone":
-			return AudioSynthesizer.SoundType.GHOST_DRONE
-		"melodic_drone":
-			return AudioSynthesizer.SoundType.MELODIC_DRONE
-		"laser_shot":
-			return AudioSynthesizer.SoundType.LASER_SHOT
-		"power_up_jingle":
-			return AudioSynthesizer.SoundType.POWER_UP_JINGLE
-		"explosion":
-			return AudioSynthesizer.SoundType.EXPLOSION
-		"retro_jump":
-			return AudioSynthesizer.SoundType.RETRO_JUMP
-		"shield_hit":
-			return AudioSynthesizer.SoundType.SHIELD_HIT
-		"ambient_wind":
-			return AudioSynthesizer.SoundType.AMBIENT_WIND
-		_:
-			return AudioSynthesizer.SoundType.BASIC_SINE_WAVE
+	return sound_type_by_key.get(sound_key, AudioSynthesizer.SoundType.BASIC_SINE_WAVE)
 
 func get_sound_name_from_type(type: AudioSynthesizer.SoundType) -> String:
-	match type:
-		AudioSynthesizer.SoundType.BASIC_SINE_WAVE:
-			return "Basic Sine Wave"
-		AudioSynthesizer.SoundType.PICKUP_MARIO:
-			return "Mario Pickup"
-		AudioSynthesizer.SoundType.TELEPORT_DRONE:
-			return "Teleport Drone"
-		AudioSynthesizer.SoundType.LIFT_BASS_PULSE:
-			return "Bass Pulse"
-		AudioSynthesizer.SoundType.GHOST_DRONE:
-			return "Ghost Drone"
-		AudioSynthesizer.SoundType.MELODIC_DRONE:
-			return "Melodic Drone"
-		AudioSynthesizer.SoundType.LASER_SHOT:
-			return "Laser Shot"
-		AudioSynthesizer.SoundType.POWER_UP_JINGLE:
-			return "Power-Up Jingle"
-		AudioSynthesizer.SoundType.EXPLOSION:
-			return "Explosion"
-		AudioSynthesizer.SoundType.RETRO_JUMP:
-			return "Retro Jump"
-		AudioSynthesizer.SoundType.SHIELD_HIT:
-			return "Shield Hit"
-		AudioSynthesizer.SoundType.AMBIENT_WIND:
-			return "Ambient Wind"
-		_:
-			return "Unknown Sound"
+	return AudioSynthesizer.get_sound_type_name(type)
 
 # Signal handlers
 func _on_sound_type_changed(index: int):
