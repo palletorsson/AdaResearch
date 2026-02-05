@@ -2892,6 +2892,18 @@
 											  "description":  "VectorFieldFlow",
 											  "scene":  "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn"
 										  },
+					  "VectorWorkbench":  {
+											  "name":  "Vector Workbench",
+											  "lookup_name":  "VectorWorkbench",
+											  "description":  "Universal vector sandbox - two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live",
+											  "scene":  "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+											  "category":  "vectors",
+											  "interaction":  "grab",
+											  "complexity":  "intermediate",
+											  "sequence":  "vectors",
+											  "qfep_connection":  "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
+											  "tags":  ["vectors", "addition", "subtraction", "dot_product", "cross_product", "projection", "sandbox"]
+										  },
 					  "vectorline":  {
 										 "name":  "vectorline",
 										 "lookup_name":  "vectorline",

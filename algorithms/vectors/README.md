@@ -3,6 +3,7 @@
 Immersive VR-first demonstrations that connect vector mathematics to spatial intuition. Every scene uses the shared draggable arrow primitive located at `res://commons/primitives/line/line.tscn`, now updated with an arrowhead and live magnitude display.
 
 ## Scenes
+- **Vector Workbench** - Universal sandbox: two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live. `res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn`
 - **Vector Basics** - Magnitude, normalization, and axis components. `res://algorithms/vectors/01_vector_basics/VectorBasics.tscn`
 - **Vector Addition** - Tip-to-tail resultant construction. `res://algorithms/vectors/02_vector_addition/VectorAddition.tscn`
 - **Dot Product & Projection** - Parallel/perpendicular decomposition. `res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn`

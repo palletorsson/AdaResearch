@@ -99,6 +99,15 @@ const PATTERNS = {
 		"organ": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Sustained organ
 	},
 	
+	# Dub House: Deep, spacious, offbeat chord stabs
+	"dub_house": {
+		"kick":  [2,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],  # Deep 4-on-floor
+		"snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+		"clap":  [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,0],
+		"hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Offbeat 8ths
+		"stab":  [0,0,0,1, 0,0,0,0.5, 0,0,0,1, 0,0,0,0.5],  # Dub chord echoes
+	},
+	
 	# Vangelis CS-80: Cinematic, expressive, sparse drums with big pads
 	"vangelis_cs80": {
 		"cr5000_kick":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sparse, cinematic
@@ -184,6 +193,10 @@ const BASS_PATTERNS = {
 		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # OFFBEAT bouncy (signature!)
 		"style": "short",  # Bouncy short notes
 	},
+	"dub_house": {
+		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # Offbeat sub pulse
+		"style": "sustained",
+	},
 	# Vangelis CS-80: Sparse, cinematic sub bass
 	"vangelis_cs80": {
 		"pattern": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Very sparse
@@ -220,6 +233,7 @@ const SWING = {
 	"kraftwerk": 0.0,            # Robot precision
 	"madonna_80s": 0.0,          # Tight pop
 	"gypsy_woman_house": 8.0,    # Groovy house swing
+	"dub_house": 8.0,            # Deep house sway
 	"vangelis_cs80": 0.0,        # Cinematic straight
 	"replicants_dawn": 0.0,      # Machine precision (Detroit side)
 	"foggy_frequencies": 15.0,   # Blend of Burial (12) and BoC (18)
@@ -297,6 +311,12 @@ const VELOCITY = {
 		"ghost": 0.45,
 		"variation": 0.1,  # Groovy variation
 	},
+	"dub_house": {
+		"base": 0.8,       # Deep and steady
+		"accent": 1.0,
+		"ghost": 0.35,
+		"variation": 0.12, # Subtle human sway
+	},
 	"vangelis_cs80": {
 		"base": 0.7,       # Cinematic dynamics
 		"accent": 0.95,    # Expressive but controlled
@@ -371,6 +391,10 @@ const STRUCTURES = {
 	"gypsy_woman_house": {
 		"sections": ["intro", "build", "main", "breakdown", "drop", "main", "outro"],
 		"bars": [4, 8, 16, 8, 16, 8, 4],
+	},
+	"dub_house": {
+		"sections": ["intro", "build", "main", "breakdown", "drop", "main", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8, 4],
 	},
 	"vangelis_cs80": {
 		"sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
@@ -697,6 +721,8 @@ static func _get_genre_progression(genre_id: String) -> Array:
 			return [0, 5, 3, 4]  # I - vi - IV - V (classic pop, MAJOR!)
 		"gypsy_woman_house":
 			return [0, 3, 4, 0]  # I - IV - V - I (uplifting house, MAJOR!)
+		"dub_house":
+			return [0, 5, 3, 6]  # i - VI - iv - VII (dub space)
 		"vangelis_cs80":
 			return [0, 3, 5, 4]  # i - iv - vi - V (cinematic minor drama)
 		"replicants_dawn":

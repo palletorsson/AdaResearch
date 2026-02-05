@@ -875,6 +875,7 @@ func _get_song_color(song_id: String) -> Color:
 		"kraftwerk_sb": return Color(0.3, 0.6, 0.9)
 		"madonna_sb": return Color(0.95, 0.5, 0.7)
 		"gypsy_sb": return Color(0.4, 0.8, 0.6)
+		"dub_house_sb": return Color(0.45, 0.65, 0.7)
 		"boards_of_canada", "boards_of_canada_v2": return Color(0.6, 0.75, 0.6)
 		"burial", "burial_v2": return Color(0.4, 0.4, 0.6)
 		"kraftwerk", "kraftwerk_v2": return Color(0.8, 0.5, 0.5)
@@ -915,6 +916,7 @@ func _load_songs_from_folder() -> Array:
 		"kraftwerk_sb": "🤖 Kraftwerk (Soundbank)",
 		"madonna_sb": "💃 Madonna 80s (Soundbank)",
 		"gypsy_sb": "🎹 Gypsy Woman (Soundbank)",
+		"dub_house_sb": "Dub House (Soundbank)",
 		"french_touch": "🇫🇷 French Touch",
 		"gypsy_woman_house": "💃 Gypsy Woman",
 		"kraftwerk": "🤖 Kraftwerk",
@@ -1558,6 +1560,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_song("madonna_80s", {})
 		"gypsy_sb":
 			stream = SoundbankGenerator.generate_song("gypsy_woman_house", {})
+		"dub_house_sb":
+			stream = SoundbankGenerator.generate_song("dub_house", {})
 		"midnight_metroplex":
 			stream = SoundbankGenerator.generate_song("detroit_techno", {})
 		"synthwave":
@@ -2274,6 +2278,24 @@ func _load_song_words(song_id: String):
 				"params": {"type": "lofi", "saturation": "tape", "tempo": 118}
 			}
 		},
+		"dub_house_sb": {
+			"Dub Stab": {
+				"words": ["warm", "dark", "plucky", "distant"],
+				"params": {"filter_cutoff": 1200, "decay": 0.18, "delay": 0.12}
+			},
+			"Sub Bass": {
+				"words": ["warm", "soft", "pulsing"],
+				"params": {"type": "sub", "style": "sustained"}
+			},
+			"Pad": {
+				"words": ["warm", "wide", "sustained", "distant"],
+				"params": {"attack": 1.2, "release": 1.5}
+			},
+			"Drums": {
+				"words": ["punchy", "soft", "warm"],
+				"params": {"type": "909", "swing": 8}
+			}
+		},
 		"reese_jungle": {
 			"Reese Bass": {
 				"words": ["wobbling", "detuned", "thick", "dark"],
@@ -2954,6 +2976,44 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 					{"name": "Arp", "type": "seq", "params": "twinkling"},
 				],
 				"default": [{"name": "Ada Theme", "type": "mix", "params": "100 BPM | warm"}]
+			}
+		"dub_house_sb":
+			return {
+				"intro": [
+					{"name": "Pad", "type": "pad", "params": "warm | slow attack"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat | low intensity"},
+				],
+				"build": [
+					{"name": "Kick", "type": "drums", "params": "deep 4-on-floor"},
+					{"name": "Sub Bass", "type": "bass", "params": "round | sustained"},
+					{"name": "Pad", "type": "pad", "params": "wide | distant"},
+				],
+				"main": [
+					{"name": "Kick", "type": "drums", "params": "deep"},
+					{"name": "Snare", "type": "drums", "params": "short | airy"},
+					{"name": "Clap", "type": "drums", "params": "roomy"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat swing"},
+					{"name": "Dub Stab", "type": "keys", "params": "filtered | delay tails"},
+					{"name": "Sub Bass", "type": "bass", "params": "sub-forward"},
+					{"name": "Pad", "type": "pad", "params": "warm bed"},
+				],
+				"breakdown": [
+					{"name": "Dub Stab", "type": "keys", "params": "space and decay"},
+					{"name": "Pad", "type": "pad", "params": "long release"},
+				],
+				"drop": [
+					{"name": "Kick", "type": "drums", "params": "deep"},
+					{"name": "Snare", "type": "drums", "params": "short"},
+					{"name": "Clap", "type": "drums", "params": "roomy"},
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
+					{"name": "Dub Stab", "type": "keys", "params": "tape-delay"},
+					{"name": "Sub Bass", "type": "bass", "params": "pulse"},
+				],
+				"outro": [
+					{"name": "Hi-Hat", "type": "drums", "params": "offbeat"},
+					{"name": "Pad", "type": "pad", "params": "fade"},
+				],
+				"default": [{"name": "Dub House", "type": "mix", "params": "122 BPM | minor/dorian"}]
 			}
 		_:
 			return {"default": [{"name": "Audio", "type": "mix", "params": ""}]}

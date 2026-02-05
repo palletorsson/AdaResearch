@@ -4,6 +4,18 @@ Notes on procedural audio synthesis for AdaResearch.
 
 ---
 
+## Expressive Mapping (Technology -> What It Expresses)
+
+| Technology | Expression |
+|-----------|------------|
+| Analog | Unstable matter |
+| FM | Mathematical alienness |
+| Wavetable | Morphing systems |
+| Granular | Memory and time fracture |
+| Modular | Emergence and autonomy |
+
+---
+
 ## Gain Staging (Avoiding Distortion)
 
 The core issue with digital distortion: when summing multiple oscillators/harmonics, peaks can stack. If you have 5 signals at 0.3 amplitude each, worst-case they sum to 1.5 → **clipping**.
@@ -1539,6 +1551,68 @@ When studying a track:
 
 ---
 
+## Dub House / Dub Techno Foundation
+
+Dub house sits between deep house warmth and dub techno space. The groove is simple; the character lives in filtered chord stabs, tape delay, and sub weight.
+
+### Core Identity
+**Emotion:** submerged, spacious, meditative  
+**Era:** 1993-2005 (Basic Channel, Maurizio, Rhythm & Sound)  
+**Character:** warm low end, minimal drum motion, chord stabs that echo into space
+
+### Technical Parameters
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| **BPM** | 118-126 | Steady 4/4, not rushed |
+| **Key** | Minor / Dorian | Moody, open voicings |
+| **Swing** | 6-10% | Gentle offbeat push |
+
+### Sound Design Elements
+
+#### Dub Chord Stab (Signature)
+- **Oscillators:** 2-3 detuned saws + pulse
+- **Filter:** Low-pass 800-1600 Hz, mild resonance
+- **Envelope:** Fast attack, short decay, low sustain
+- **FX:** Tape delay 120-240 ms, spring-like reverb tail
+- **Role:** The identity. Offbeat and space-forward.
+
+```gdscript
+# Dub chord stab sketch
+const DETUNE_CENTS = 7.0
+const ATTACK_S = 0.004
+const DECAY_S = 0.18
+const SUSTAIN = 0.2
+const DELAY_TAP_S = 0.12
+```
+
+#### Bass (Deep, Round)
+- **Oscillators:** Sine + low saw
+- **Envelope:** Pluck with long tail
+- **Character:** Sub-first, mid-light
+
+#### Drums (Minimal 909)
+- **Kick:** Deep 909, soft click
+- **Snare/Clap:** Short, airy, dry or lightly reverbed
+- **Hats:** Offbeat 8ths, low intensity, swung
+
+#### Pad/Atmosphere
+- **Oscillators:** 2-3 detuned saws + triangle
+- **Envelope:** Slow attack, long release
+- **Movement:** Slow LFO on brightness
+
+### Progressions
+| Progression | Character |
+|-------------|-----------|
+| i - VI - iv - VII | Classic dub techno tension |
+| i - iv - VII - iv | Minimal, hypnotic |
+
+### Arrangement
+- Long intro/outro for DJ mixing
+- Builds via filter movement and chord density, not new elements
+- Drops are subtle: remove kick, let the stab breathe
+
+---
+
 ## Song Identity Quick Reference
 
 Each song in `commons/audio/parameters/songs/` has a distinct identity. See `docs/music/SONG_IDENTITIES.md` for full research.
@@ -1552,6 +1626,7 @@ Each song in `commons/audio/parameters/songs/` has a distinct identity. See `doc
 | **Prog Synth 70s** | 80-140 | Modal | Moog lead w/ portamento, motorik beat | Epic exploration |
 | **Rave** | 140-160 | Am, Em | Hoover bass, breakbeats, piano stabs | Euphoric chaos |
 | **Synthwave** | 100-118 | Fm, Am, Cm | Gated drums, supersaws, arpeggios | Nostalgic cinema |
+| **Dub House** | 118-126 | Minor, Dorian | Dub chord stabs, tape delay, sub bass | Submerged space |
 
 ### Key Differentiators
 

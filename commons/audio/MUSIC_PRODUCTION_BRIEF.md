@@ -81,6 +81,7 @@ commons/audio/
 | `burial` | kick, snare, hihat, sub, crackle, atmosphere, vocal | Dark, 2-step, vinyl noise | 0.5 |
 | `detroit_techno` | kick, snare, hihat, clap, bass, pad, stab | Cold, precise, machine funk | 0.2 |
 | `gypsy_woman_house` | kick, snare, hihat, clap, bass, piano, organ, pad | Bouncy, soulful, offbeat piano | 0.4 |
+| `dub_house` | kick, snare, clap, hihat, bass, stab, pad | Submerged, spacious, dub chord focus | 0.35 |
 | `kraftwerk` | kick, snare, hihat, bass, sequence, vocoder | Robotic, precise, minimal | 0.15 |
 | `madonna_80s` | kick, snare, hihat, bass, pad, arp, lead | Pop, gated reverb, bright | 0.35 |
 | `moroder_disco` | kick, snare, hihat, clap, bass, sequence, strings | Hypnotic, sequenced, euphoric | 0.3 |

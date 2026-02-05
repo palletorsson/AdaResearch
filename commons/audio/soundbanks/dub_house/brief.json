@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "id": "dub_house",
+    "name": "Dub House",
+    "lineage": "Basic Channel, Maurizio, Rhythm & Sound, early deep house",
+    "era": "1993-2005",
+    "bpm": { "min": 118, "max": 126, "typical": 122 },
+    "lambda": 0.35
+  },
+
+  "identity": {
+    "token": "Deep 4-on-floor + offbeat dub chord + tape-delay space",
+    "two_second_test": "Filtered chord stab with a dark tail over a warm 4/4 kick",
+    "emotional_truth": "Submerged, spacious, meditative groove"
+  },
+
+  "soundbank": ["kick", "snare", "clap", "hihat", "bass", "stab", "pad"],
+
+  "forbidden": [
+    "supersaw",
+    "hoover_bass",
+    "gated_reverb",
+    "bright_piano",
+    "bitcrushing",
+    "glitch",
+    "aggressive_distortion",
+    "vocal_chops"
+  ],
+
+  "rhythm": {
+    "quantize": "tight",
+    "humanize_ms": 4,
+    "swing_pct": 8
+  },
+
+  "harmony": {
+    "scales": ["minor", "dorian"],
+    "voicings": "minor7_sus4_dub"
+  },
+
+  "fx": {
+    "tape_delay": true,
+    "spring_reverb": true,
+    "lowpass": true,
+    "sidechain": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.0
+  },
+
+  "sections": {
+    "intro": ["pad", "hihat"],
+    "build": ["kick", "hihat", "pad", "bass"],
+    "main": ["kick", "snare", "clap", "hihat", "bass", "stab", "pad"],
+    "breakdown": ["pad", "stab"],
+    "drop": ["kick", "snare", "clap", "hihat", "bass", "stab"],
+    "outro": ["hihat", "pad"]
+  }
+}

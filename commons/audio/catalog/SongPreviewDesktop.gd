@@ -98,6 +98,7 @@ func _setup_ui():
 		["replicants_dawn", "🌅 Replicant", "Vangelis × Detroit"],
 		["foggy_frequencies", "🌫️ Foggy", "BoC × Burial"],
 		["chicago_dusseldorf", "🚂 Chi→Düss", "House × Kraftwerk"],
+		["dub_house_sb", "Dub House", "Dub chord stabs + tape space"],
 		["moroder_disco", "🪩 Moroder", "Instrumental version"]
 	]
 	
@@ -363,6 +364,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
 		"chicago_dusseldorf":
 			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
+		"dub_house_sb":
+			stream = SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
 	
 	if stream == null:
 		_status_label.text = "Failed to generate song!"
