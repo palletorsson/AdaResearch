@@ -1,0 +1,97 @@
+{
+  "id": "big_pipes",
+  "name": "Big Pipes",
+  "version": "1.0",
+  "description": "Industrial drain pipe system for map decoration",
+  "orientation": {
+    "plane": "XZ",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 2.0
+  },
+  "categories": [
+    {"id": "basic", "name": "Basic", "color": "#607D8B", "icon": "─"},
+    {"id": "turns", "name": "Turns", "color": "#795548", "icon": "╮"},
+    {"id": "vertical", "name": "Vertical", "color": "#9E9E9E", "icon": "↑"}
+  ],
+  "elements": [
+    {
+      "id": "straight",
+      "name": "Straight",
+      "category": "basic",
+      "size": [1, 1],
+      "icon": "─",
+      "ascii": ["─"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "left", "radius": 0.8},
+        "out": {"cell": [0, 0], "side": "right", "radius": 0.8}
+      },
+      "command": "f"
+    },
+    {
+      "id": "corner_left",
+      "name": "Corner Left",
+      "category": "turns",
+      "size": [1, 1],
+      "icon": "╭",
+      "ascii": ["╭"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
+        "out": {"cell": [0, 0], "side": "right", "radius": 0.8}
+      },
+      "command": "l"
+    },
+    {
+      "id": "corner_right",
+      "name": "Corner Right",
+      "category": "turns",
+      "size": [1, 1],
+      "icon": "╮",
+      "ascii": ["╮"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
+        "out": {"cell": [0, 0], "side": "left", "radius": 0.8}
+      },
+      "command": "r"
+    },
+    {
+      "id": "sbend",
+      "name": "S-Bend",
+      "category": "turns",
+      "size": [2, 1],
+      "icon": "∿",
+      "ascii": ["╭╯"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "left", "radius": 0.8},
+        "out": {"cell": [1, 0], "side": "right", "radius": 0.8}
+      },
+      "command": "s"
+    },
+    {
+      "id": "up",
+      "name": "Bend Up",
+      "category": "vertical",
+      "size": [1, 1],
+      "icon": "↑",
+      "ascii": ["↑"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "back", "radius": 0.8},
+        "out": {"cell": [0, 0], "side": "top", "radius": 0.8}
+      },
+      "command": "u"
+    },
+    {
+      "id": "down",
+      "name": "Bend Down",
+      "category": "vertical",
+      "size": [1, 1],
+      "icon": "↓",
+      "ascii": ["↓"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "back", "radius": 0.8},
+        "out": {"cell": [0, 0], "side": "bottom", "radius": 0.8}
+      },
+      "command": "d"
+    }
+  ]
+}

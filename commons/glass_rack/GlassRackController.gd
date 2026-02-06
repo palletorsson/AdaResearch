@@ -90,10 +90,17 @@ func _register_custom_commands() -> void:
 	_command_handlers["pop"] = _cmd_pop
 
 func _cmd_spiral() -> void:
-	var segment = _create_segment("spiral", {"height": segment_length * 2})
+	var spiral_height = segment_length * 2
+	var spiral_radius = 0.08  # Match the default in _create_spiral_segment
+	var stub_length = spiral_radius * 0.5
+	var segment = _create_segment("spiral", {"height": spiral_height, "spiral_radius": spiral_radius})
 	if segment:
 		_place_segment(segment)
-		cursor_pos += Vector3.UP * segment_length * 2
+		# Total height: spiral + exit curve + exit stub
+		var exit_y = spiral_height + spiral_radius * 0.5 + stub_length
+		cursor_pos += Vector3.UP * exit_y
+		# Spiral changes direction from forward to up
+		_rotate_cursor_pitch(-PI / 2)
 
 func _cmd_wobbly() -> void:
 	var segment = _create_segment("wobbly", {"length": segment_length * 2})
@@ -282,28 +289,40 @@ func _create_straight_segment(params: Dictionary) -> Node3D:
 		liquid.position.z = length / 2
 		group.add_child(liquid)
 
+	# Standardized ports
+	GlassSegmentPorts.apply_standard_ports(group, radius, length)
+
 	return group
 
 func _create_spiral_segment(params: Dictionary) -> Node3D:
 	var group = Node3D.new()
 	var height = params.get("height", 0.5)
-	var spiral_radius = params.get("spiral_radius", 0.1)
+	var spiral_radius = params.get("spiral_radius", 0.08)
 	var tube_radius = params.get("tube_radius", pipe_radius * 0.75)
 	var turns = params.get("turns", 4)
 	var resolution = params.get("resolution", 24)
 
-	var mesh = _generate_spiral_mesh(height, spiral_radius, tube_radius, turns, resolution)
+	# Generate spiral with lead-in and lead-out for standard connection points
+	var mesh = _generate_spiral_mesh_with_leads(height, spiral_radius, tube_radius, turns, resolution)
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = mesh
 	mesh_instance.material_override = glass_material
 	group.add_child(mesh_instance)
 
 	if show_liquid:
-		var liquid_mesh = _generate_spiral_mesh(height, spiral_radius, tube_radius * 0.7, turns, resolution)
+		var liquid_mesh = _generate_spiral_mesh_with_leads(height, spiral_radius, tube_radius * 0.7, turns, resolution)
 		var liquid_instance = MeshInstance3D.new()
 		liquid_instance.mesh = liquid_mesh
 		liquid_instance.material_override = liquid_material
 		group.add_child(liquid_instance)
+
+	# Ports match the stub positions
+	var stub_length = spiral_radius * 0.5
+	var exit_y = height + spiral_radius * 0.5 + stub_length
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3(0, 0, -stub_length), Vector3.BACK, tube_radius),
+		"out": GlassSegmentPorts.create_port(Vector3(0, exit_y, 0), Vector3.UP, tube_radius)
+	})
 
 	return group
 
@@ -326,6 +345,9 @@ func _create_wobbly_segment(params: Dictionary) -> Node3D:
 		liquid_instance.mesh = liquid_mesh
 		liquid_instance.material_override = liquid_material
 		group.add_child(liquid_instance)
+
+	# Wobbly is like straight but wiggly
+	GlassSegmentPorts.apply_standard_ports(group, tube_radius, length)
 
 	return group
 
@@ -367,6 +389,13 @@ func _create_flask_segment(params: Dictionary) -> Node3D:
 		liquid_body.position = body.position
 		group.add_child(liquid_body)
 
+	# Flask: input at base (bottom of sphere), output at neck end
+	var total_length = flask_radius * 2 + neck_length
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, neck_radius * 1.5),
+		"out": GlassSegmentPorts.create_port(Vector3(0, 0, total_length), Vector3.FORWARD, neck_radius)
+	})
+
 	return group
 
 func _create_junction_segment(params: Dictionary) -> Node3D:
@@ -395,14 +424,22 @@ func _create_junction_segment(params: Dictionary) -> Node3D:
 	branch_tube.position.z = length / 2
 	group.add_child(branch_tube)
 
-	# Junction sphere
+	# Junction sphere - sized to smoothly join the tubes
 	var junction_sphere = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
-	sphere.radius = radius * 1.5
+	sphere.radius = radius * 1.1  # Just slightly larger than tube radius
+	sphere.height = radius * 2.2
 	junction_sphere.mesh = sphere
 	junction_sphere.material_override = glass_material
 	junction_sphere.position.z = length / 2
 	group.add_child(junction_sphere)
+
+	# T-junction has 3 ports
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, radius),
+		"out": GlassSegmentPorts.create_port(Vector3(0, 0, length), Vector3.FORWARD, radius),
+		"branch": GlassSegmentPorts.create_port(Vector3(length, 0, length / 2), Vector3.RIGHT, radius)
+	})
 
 	return group
 
@@ -424,13 +461,135 @@ func _create_corner_segment(params: Dictionary) -> Node3D:
 		liquid_instance.material_override = liquid_material
 		group.add_child(liquid_instance)
 
+	# 90° corner - exit is at corner_radius on X, corner_radius on Z, facing right
+	var exit_pos = Vector3(corner_radius, 0, corner_radius)
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, radius),
+		"out": GlassSegmentPorts.create_port(exit_pos, Vector3.RIGHT, radius)
+	})
+
 	return group
 
 # =============================================================================
 # MESH GENERATION
 # =============================================================================
 
+func _generate_spiral_mesh_with_leads(height: float, spiral_radius: float, tube_radius: float, turns: int, resolution: int) -> ArrayMesh:
+	## Generates a clean spiral condenser coil
+	## Entry: (0, 0, 0) facing BACK (-Z)  
+	## Exit: (0, height, 0) facing UP (+Y)
+	## Spiral is offset so entry/exit are centered
+	
+	var surface_tool = SurfaceTool.new()
+	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	var tube_sides = 8
+	var all_rings: Array = []
+	
+	var total_points = resolution * turns
+	var height_per_point = height / float(total_points)
+	
+	# Offset spiral so it's centered - spiral will be shifted by -spiral_radius on X
+	var x_offset = -spiral_radius
+	
+	# === ENTRY STUB: Short straight section at bottom ===
+	var stub_length = spiral_radius * 0.5
+	for i in range(4):
+		var t = float(i) / 3.0
+		var center = Vector3(0, 0, -stub_length * (1.0 - t))  # From -stub to 0
+		var tangent = Vector3.FORWARD
+		var ring = _create_tube_ring_oriented(center, tangent, tube_radius, tube_sides)
+		all_rings.append(ring)
+	
+	# === ENTRY CURVE: Quarter turn from +Z to spiral tangent ===
+	var curve_res = 8
+	for i in range(curve_res):
+		var t = float(i) / float(curve_res)
+		var angle = t * PI / 2
+		# Curve from (0,0,0) going +Z to (0,0,spiral_radius) going tangent to spiral
+		var center = Vector3(
+			x_offset * (1.0 - cos(angle)),  # 0 to x_offset
+			0,
+			spiral_radius * sin(angle)  # 0 to spiral_radius
+		)
+		# Blend tangent from +Z to spiral start tangent
+		var tangent = Vector3(
+			sin(angle) * 0.5,
+			t * height_per_point * 0.1,
+			cos(angle)
+		).normalized()
+		var ring = _create_tube_ring_oriented(center, tangent, tube_radius, tube_sides)
+		all_rings.append(ring)
+	
+	# === MAIN SPIRAL (offset so center is at x=0) ===
+	for i in range(total_points + 1):
+		var t = float(i) / float(total_points)
+		var angle = t * TAU * turns
+
+		var center = Vector3(
+			cos(angle) * spiral_radius + x_offset,  # Offset so spiral crosses x=0
+			t * height,
+			sin(angle) * spiral_radius
+		)
+
+		var tangent = Vector3(
+			-sin(angle) * spiral_radius,
+			height_per_point,
+			cos(angle) * spiral_radius
+		).normalized()
+
+		var ring = _create_tube_ring_oriented(center, tangent, tube_radius, tube_sides)
+		all_rings.append(ring)
+	
+	# === EXIT CURVE: From spiral end to vertical ===
+	var end_x = cos(turns * TAU) * spiral_radius + x_offset
+	var end_z = sin(turns * TAU) * spiral_radius
+	
+	for i in range(1, curve_res + 1):
+		var t = float(i) / float(curve_res)
+		var angle = t * PI / 2
+		var center = Vector3(
+			end_x * (1.0 - t),  # Blend to x=0
+			height + spiral_radius * 0.5 * sin(angle),
+			end_z * (1.0 - t)   # Blend to z=0
+		)
+		var tangent = Vector3(
+			-end_x * (1.0 - t) * 0.5,
+			cos(angle) + 0.5,
+			-end_z * (1.0 - t) * 0.5
+		).normalized()
+		var ring = _create_tube_ring_oriented(center, tangent, tube_radius, tube_sides)
+		all_rings.append(ring)
+	
+	# === EXIT STUB: Short vertical section at top ===
+	var exit_y = height + spiral_radius * 0.5
+	for i in range(1, 4):
+		var t = float(i) / 3.0
+		var center = Vector3(0, exit_y + stub_length * t, 0)
+		var tangent = Vector3.UP
+		var ring = _create_tube_ring_oriented(center, tangent, tube_radius, tube_sides)
+		all_rings.append(ring)
+	
+	_add_tube_faces(surface_tool, all_rings, tube_sides)
+	surface_tool.generate_normals()
+	return surface_tool.commit()
+
+func _create_tube_ring_oriented(center: Vector3, tangent: Vector3, radius: float, sides: int) -> Array:
+	var up = Vector3.UP
+	if abs(tangent.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var binormal = tangent.cross(up).normalized()
+	var normal = binormal.cross(tangent).normalized()
+	
+	var ring: Array = []
+	for j in range(sides):
+		var tube_angle = TAU * j / sides
+		var offset = normal * cos(tube_angle) * radius + binormal * sin(tube_angle) * radius
+		ring.append(center + offset)
+	return ring
+
 func _generate_spiral_mesh(height: float, spiral_radius: float, tube_radius: float, turns: int, resolution: int) -> ArrayMesh:
+	# Legacy spiral without leads (kept for reference)
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -598,6 +757,11 @@ func _create_beaker_segment(params: Dictionary) -> Node3D:
 		liquid.material_override = liquid_material
 		liquid.position.y = height * 0.3
 		group.add_child(liquid)
+	
+	# Beaker is terminal - open vessel, only has input at top
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3(0, height, 0), Vector3.UP, radius)
+	}, true)  # is_terminal = true
 	
 	return group
 

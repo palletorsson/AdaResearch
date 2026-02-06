@@ -1,6 +1,9 @@
 # GlassPipeSegments.gd
 # Segment generation functions for glass pipe system
 # Separated for clarity - used by GlassRackController
+#
+# ALL segments must have standardized port metadata via GlassSegmentPorts
+# Port standard: in_port at Vector3.ZERO facing BACK, out_port(s) at exit facing FORWARD
 extends RefCounted
 class_name GlassPipeSegments
 
@@ -28,8 +31,13 @@ static func create_sbend(params: Dictionary, glass_mat: Material, liquid_mat: Ma
 		liquid_instance.material_override = liquid_mat
 		group.add_child(liquid_instance)
 	
-	# Store exit offset for cursor advancement
-	group.set_meta("exit_offset", Vector3(offset, 0, length))
+	# Standardized ports
+	var exit_pos = Vector3(offset, 0, length)
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, tube_radius),
+		"out": GlassSegmentPorts.create_port(exit_pos, Vector3.FORWARD, tube_radius)
+	})
+	group.set_meta("exit_offset", exit_pos)
 	
 	return group
 
@@ -119,14 +127,20 @@ static func create_ypipe(params: Dictionary, glass_mat: Material, liquid_mat: Ma
 			branch_liquid.rotation = branch_tube.rotation
 			group.add_child(branch_liquid)
 	
-	# Store port positions for connection system
+	# Standardized ports with radius
 	var exit_dist = inlet_length + branch_length
-	group.set_meta("ports", {
-		"in": {"position": Vector3.ZERO, "direction": Vector3.BACK},
-		"out1": {"position": Vector3(-sin(angle_rad) * branch_length, 0, exit_dist * cos(angle_rad)), 
-				 "direction": Vector3(-sin(angle_rad), 0, cos(angle_rad))},
-		"out2": {"position": Vector3(sin(angle_rad) * branch_length, 0, exit_dist * cos(angle_rad)), 
-				 "direction": Vector3(sin(angle_rad), 0, cos(angle_rad))}
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, tube_radius),
+		"out1": GlassSegmentPorts.create_port(
+			Vector3(-sin(angle_rad) * branch_length, 0, exit_dist * cos(angle_rad)),
+			Vector3(-sin(angle_rad), 0, cos(angle_rad)),
+			tube_radius
+		),
+		"out2": GlassSegmentPorts.create_port(
+			Vector3(sin(angle_rad) * branch_length, 0, exit_dist * cos(angle_rad)),
+			Vector3(sin(angle_rad), 0, cos(angle_rad)),
+			tube_radius
+		)
 	})
 	
 	return group
@@ -153,6 +167,14 @@ static func create_corner45(params: Dictionary, glass_mat: Material, liquid_mat:
 		liquid_instance.material_override = liquid_mat
 		group.add_child(liquid_instance)
 	
+	# Exit position for 45° corner
+	var exit_pos = Vector3(corner_radius * (1.0 - cos(PI/4)), 0, corner_radius * sin(PI/4))
+	var exit_dir = Vector3(sin(PI/4), 0, cos(PI/4))
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, tube_radius),
+		"out": GlassSegmentPorts.create_port(exit_pos, exit_dir, tube_radius)
+	})
+	
 	return group
 
 # =============================================================================
@@ -177,9 +199,14 @@ static func create_ubend(params: Dictionary, glass_mat: Material, liquid_mat: Ma
 		liquid_instance.material_override = liquid_mat
 		group.add_child(liquid_instance)
 	
-	# U-bend reverses direction
+	# U-bend reverses direction - exit is offset on X and faces backward
+	var exit_pos = Vector3(bend_radius * 2, 0, 0)
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, tube_radius),
+		"out": GlassSegmentPorts.create_port(exit_pos, Vector3.BACK, tube_radius)  # Reversed direction
+	})
 	group.set_meta("reverses_direction", true)
-	group.set_meta("exit_offset", Vector3(bend_radius * 2, 0, 0))
+	group.set_meta("exit_offset", exit_pos)
 	
 	return group
 
@@ -216,7 +243,11 @@ static func create_reducer(params: Dictionary, glass_mat: Material, liquid_mat: 
 		liquid.position.z = length / 2
 		group.add_child(liquid)
 	
-	group.set_meta("exit_radius", radius_out)
+	# Reducer has different in/out radii
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, radius_in),
+		"out": GlassSegmentPorts.create_port(Vector3(0, 0, length), Vector3.FORWARD, radius_out)
+	})
 	
 	return group
 
@@ -251,7 +282,8 @@ static func create_cap(params: Dictionary, glass_mat: Material, _liquid_mat: Mat
 	stub.position.z = -tube_radius
 	group.add_child(stub)
 	
-	group.set_meta("is_terminal", true)
+	# Terminal segment - only has input port
+	GlassSegmentPorts.apply_terminal_port(group, tube_radius)
 	
 	return group
 
@@ -287,7 +319,8 @@ static func create_drip(params: Dictionary, glass_mat: Material, liquid_mat: Mat
 		drop.position.z = tip_length + tube_radius * 0.3
 		group.add_child(drop)
 	
-	group.set_meta("is_terminal", true)
+	# Terminal segment - only has input port
+	GlassSegmentPorts.apply_terminal_port(group, tube_radius)
 	
 	return group
 
@@ -330,6 +363,14 @@ static func create_cross(params: Dictionary, glass_mat: Material, liquid_mat: Ma
 			liquid_arm.position = arm.position
 			liquid_arm.rotation = arm.rotation
 			group.add_child(liquid_arm)
+	
+	# 4-way junction has 4 ports
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.BACK * arm_length, Vector3.BACK, tube_radius),
+		"out": GlassSegmentPorts.create_port(Vector3.FORWARD * arm_length, Vector3.FORWARD, tube_radius),
+		"left": GlassSegmentPorts.create_port(Vector3.LEFT * arm_length, Vector3.LEFT, tube_radius),
+		"right": GlassSegmentPorts.create_port(Vector3.RIGHT * arm_length, Vector3.RIGHT, tube_radius)
+	})
 	
 	return group
 
@@ -416,6 +457,14 @@ static func create_condenser(params: Dictionary, glass_mat: Material, liquid_mat
 		else:
 			port.rotation.x = PI
 		group.add_child(port)
+	
+	# Condenser has main flow ports plus coolant ports
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, inner_radius),
+		"out": GlassSegmentPorts.create_port(Vector3(0, 0, length), Vector3.FORWARD, inner_radius),
+		"coolant_in": GlassSegmentPorts.create_port(port_positions[0], Vector3.UP, inner_radius),
+		"coolant_out": GlassSegmentPorts.create_port(port_positions[1], Vector3.DOWN, inner_radius)
+	})
 	
 	return group
 

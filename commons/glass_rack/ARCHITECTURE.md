@@ -3,7 +3,55 @@
 ## Current State
 - `TurtlePipeBase` - turtle graphics commands (f, l, r, u, d)
 - `GlassRackController` - glass-specific segments (spiral, flask, wobbly, junction)
+- `GlassPipeSegments` - procedural mesh generators for complex segments
+- `GlassSegmentPorts` - standardized port system for connections
 - Linear path strings: `"f,f,spiral,u,f,flask"`
+
+## Port Standard (REQUIRED FOR ALL SEGMENTS)
+
+Every segment MUST have standardized port metadata via `GlassSegmentPorts`.
+
+### Port Structure
+```gdscript
+{
+    "in": {
+        "position": Vector3,    # Local position of input connection
+        "direction": Vector3,   # Direction the port faces (normalized)
+        "radius": float         # Connection radius for alignment
+    },
+    "out": {                    # Or "out1", "out2" for multi-output
+        "position": Vector3,
+        "direction": Vector3,
+        "radius": float
+    }
+}
+```
+
+### Rules
+1. **Input port "in"** is ALWAYS at or near `Vector3.ZERO`
+2. **Input direction** faces `Vector3.BACK` (where flow comes from)
+3. **Output direction** faces `Vector3.FORWARD` (where flow goes)
+4. **Radius** must match the tube_radius for that port
+5. **Terminal segments** (cap, drip, beaker) have `is_terminal=true` and no output port
+6. **Multi-output segments** (ypipe, cross, junction) have named ports: out1, out2, left, right, branch
+
+### Applying Ports
+```gdscript
+# For standard straight-like segments:
+GlassSegmentPorts.apply_standard_ports(segment, tube_radius, length)
+
+# For terminal segments:
+GlassSegmentPorts.apply_terminal_port(segment, tube_radius)
+
+# For custom port layouts:
+GlassSegmentPorts.apply_ports(segment, {
+    "in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, radius),
+    "out": GlassSegmentPorts.create_port(exit_pos, exit_dir, radius)
+})
+```
+
+### Validation
+Run `glass_rack_test_scene.tscn` to validate all segments have proper ports.
 
 ## Problem
 Linear paths can't handle:

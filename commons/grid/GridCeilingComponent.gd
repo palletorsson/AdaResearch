@@ -16,6 +16,8 @@ var grid_thickness: float = 0.02  # T-grid metal thickness
 var drop_distance: float = 0.3  # Distance ceiling drops from actual ceiling
 var ceiling_width: float = -1.0  # Coverage width in meters (-1 = auto from grid)
 var ceiling_depth: float = -1.0  # Coverage depth in meters (-1 = auto from grid)
+var ceiling_offset_x: float = 0.0  # X offset in meters for ceiling placement
+var ceiling_offset_z: float = 0.0  # Z offset in meters for ceiling placement
 var cube_size: float = 1.0  # Grid cube size (from grid system)
 var gutter: float = 0.0  # Grid gutter (from grid system)
 
@@ -172,7 +174,7 @@ func generate_ceiling(ceiling_config: Dictionary = {}):
 	var coverage_depth_m = depth * tile_size
 
 	print("GridCeilingComponent: Creating ceiling with 0.5m cells covering %.1fm × %.1fm (%d×%d cells) at height %.1fm" % [coverage_width_m, coverage_depth_m, width, depth, ceiling_height])
-	print("  Grid dimensions: %dx%d (cube_size: %.1fm, gutter: %.1fm)" % [dimensions.x, dimensions.z, cube_size, gutter])
+	print("  Grid dimensions: %dx%d (cube_size: %.1fm, gutter: %.1fm) offset: (%.1f, %.1f)" % [dimensions.x, dimensions.z, cube_size, gutter, ceiling_offset_x, ceiling_offset_z])
 
 	# Store dimensions for disco mode
 	grid_width_cells = width
@@ -244,7 +246,19 @@ func _parse_ceiling_config(config: Dictionary):
 		light_intensity = config.get("light_intensity")
 	if config.has("pattern"):
 		light_pattern = config.get("pattern")
-		
+
+	# Size overrides (size_x/size_z override width/depth if both present)
+	if config.has("size_x"):
+		ceiling_width = config.get("size_x")
+	if config.has("size_z"):
+		ceiling_depth = config.get("size_z")
+
+	# Offset for ceiling placement
+	if config.has("offset_x"):
+		ceiling_offset_x = config.get("offset_x")
+	if config.has("offset_z"):
+		ceiling_offset_z = config.get("offset_z")
+
 	if config.has("array_learning") and config.get("array_learning"):
 		# Auto-start array learning (deferred to ensure generation is complete)
 		call_deferred("start_array_learning")
@@ -255,16 +269,20 @@ func _generate_grid_structure(width: int, depth: int):
 	grid_container.name = "CeilingGrid"
 	grid_system.add_child(grid_container)
 
+	# Calculate beam lengths in meters (cells * tile_size)
+	var width_m = width * tile_size
+	var depth_m = depth * tile_size
+
 	# Create horizontal grid lines (along X axis)
 	for z in range(depth + 1):
-		var grid_line = _create_grid_beam(width, grid_thickness)
-		grid_line.position = Vector3(width / 2.0, ceiling_height, z * tile_size)
+		var grid_line = _create_grid_beam(width_m, grid_thickness)
+		grid_line.position = Vector3(ceiling_offset_x + width_m / 2.0, ceiling_height, ceiling_offset_z + z * tile_size)
 		grid_container.add_child(grid_line)
 
 	# Create depth grid lines (along Z axis)
 	for x in range(width + 1):
-		var grid_line = _create_grid_beam(depth, grid_thickness)
-		grid_line.position = Vector3(x * tile_size, ceiling_height, depth / 2.0)
+		var grid_line = _create_grid_beam(depth_m, grid_thickness)
+		grid_line.position = Vector3(ceiling_offset_x + x * tile_size, ceiling_height, ceiling_offset_z + depth_m / 2.0)
 		grid_line.rotation_degrees = Vector3(0, 90, 0)
 		grid_container.add_child(grid_line)
 	
@@ -292,7 +310,7 @@ func _create_ceiling_cap(width: int, depth: int, container: Node3D):
 	cap.material_override = cap_mat
 	
 	# Position above the visible ceiling
-	cap.position = Vector3(width_m / 2.0 - 0.25, ceiling_height + 0.2, depth_m / 2.0 - 0.25)
+	cap.position = Vector3(ceiling_offset_x + width_m / 2.0 - 0.25, ceiling_height + 0.2, ceiling_offset_z + depth_m / 2.0 - 0.25)
 	container.add_child(cap)
 	print("GridCeilingComponent: Created ceiling cap (%.1fm x %.1fm)" % [width_m, depth_m])
 
@@ -321,9 +339,9 @@ func _generate_ceiling_tiles(width: int, depth: int) -> int:
 
 			var tile = _create_ceiling_tile()
 			tile.position = Vector3(
-				x * tile_size + tile_size / 2.0,
+				ceiling_offset_x + x * tile_size + tile_size / 2.0,
 				ceiling_height + 0.005,  # Tiny bit above grid to show T-grid structure
-				z * tile_size + tile_size / 2.0
+				ceiling_offset_z + z * tile_size + tile_size / 2.0
 			)
 			tiles_container.add_child(tile)
 			ceiling_tiles.append(tile)
@@ -416,9 +434,9 @@ func _generate_light_panels(width: int, depth: int) -> int:
 			if _should_place_light(x, z):
 				var light_panel = _create_light_panel()
 				light_panel.position = Vector3(
-					x * tile_size + tile_size / 2.0,
+					ceiling_offset_x + x * tile_size + tile_size / 2.0,
 					ceiling_height + 0.005,  # Same height as tiles (tiny bit above grid)
-					z * tile_size + tile_size / 2.0
+					ceiling_offset_z + z * tile_size + tile_size / 2.0
 				)
 				lights_container.add_child(light_panel)
 				ceiling_lights.append(light_panel)

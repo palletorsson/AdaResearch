@@ -12,6 +12,7 @@ const UtilitiesComponentScript = preload("res://commons/grid/GridUtilitiesCompon
 const InteractablesComponentScript = preload("res://commons/grid/GridInteractablesComponent.gd")
 const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
+const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 
 # Configuration
@@ -27,6 +28,7 @@ var utilities_component
 var interactables_component
 var spawn_component
 var ceiling_component
+var wall_component
 var audio_component
 
 # Scene references
@@ -148,6 +150,10 @@ func _initialize_components():
 	ceiling_component.name = "GridCeilingComponent"
 	add_child(ceiling_component)
 
+	wall_component = WallComponentScript.new()
+	wall_component.name = "GridWallComponent"
+	add_child(wall_component)
+
 	audio_component = AudioComponentScript.new()
 	audio_component.name = "GridAudioComponent"
 	add_child(audio_component)
@@ -181,6 +187,9 @@ func _connect_component_signals():
 
 	# Ceiling component signals
 	ceiling_component.ceiling_generation_complete.connect(_on_ceiling_complete)
+
+	# Wall component signals
+	wall_component.wall_generation_complete.connect(_on_wall_complete)
 
 	# Audio component signals
 	audio_component.audio_initialized.connect(_on_audio_initialized)
@@ -278,6 +287,7 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	interactables_component.initialize(self, structure_component, utilities_component, data_component, component_settings)
 	spawn_component.initialize(data_component, component_settings)
 	ceiling_component.initialize(self, data_component, component_settings)
+	wall_component.initialize(self, data_component, component_settings)
 	audio_component.initialize(self, data_component)
 
 	# Set sequence ID if available from scene data
@@ -394,12 +404,31 @@ func _handle_ceiling_generation():
 		print("GridSystem: Generating ceiling...")
 		ceiling_component.generate_ceiling(ceiling_config)
 	else:
-		# Skip ceiling, go directly to spawn
-		call_deferred("_handle_player_spawn")
+		# Skip ceiling, try walls
+		_handle_wall_generation()
 
 # Handle ceiling generation completion
 func _on_ceiling_complete(tile_count: int, light_count: int):
 	print("GridSystem: Ceiling generation complete (%d tiles, %d lights)" % [tile_count, light_count])
+
+	# Generate walls after ceiling
+	_handle_wall_generation()
+
+# Handle wall generation
+func _handle_wall_generation():
+	var settings = data_component.get_settings()
+	var wall_config = settings.get("walls", {})
+
+	if not wall_config.is_empty():
+		print("GridSystem: Generating walls...")
+		wall_component.generate_walls(wall_config)
+	else:
+		# Skip walls, go directly to spawn
+		call_deferred("_handle_player_spawn")
+
+# Handle wall generation completion
+func _on_wall_complete(wall_count: int):
+	print("GridSystem: Wall generation complete (%d walls)" % wall_count)
 
 	# Now handle player spawn positioning
 	call_deferred("_handle_player_spawn")
@@ -603,6 +632,9 @@ func _clear_all_components():
 	if ceiling_component:
 		ceiling_component.clear_ceiling()
 
+	if wall_component:
+		wall_component.clear_walls()
+
 	if audio_component:
 		audio_component.cleanup()
 
@@ -621,7 +653,8 @@ func get_current_map_info() -> Dictionary:
 			"utilities": utilities_component.get_utility_count() if utilities_component else 0,
 			"interactables": interactables_component.get_interactable_count() if interactables_component else 0,
 			"ceiling_tiles": ceiling_component.ceiling_tiles.size() if ceiling_component else 0,
-			"ceiling_lights": ceiling_component.ceiling_lights.size() if ceiling_component else 0
+			"ceiling_lights": ceiling_component.ceiling_lights.size() if ceiling_component else 0,
+			"walls": wall_component.get_wall_count() if wall_component else 0
 		},
 		"generation_complete": not generation_in_progress
 	}
@@ -649,6 +682,9 @@ func get_spawn_component() -> GridSpawnComponent:
 
 func get_ceiling_component() -> GridCeilingComponent:
 	return ceiling_component
+
+func get_wall_component() -> GridWallComponent:
+	return wall_component
 
 func get_audio_component() -> GridAudioComponent:
 	return audio_component

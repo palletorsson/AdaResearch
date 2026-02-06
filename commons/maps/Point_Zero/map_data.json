@@ -118,6 +118,13 @@
 			"delay_between": 0.05,
 			"order": "sequential",
 			"easing": "ease_out"
+		}, 
+		"walls": {
+			"preset": "office",
+			"height": 3.5,
+			"width": 3,
+			"depth": 3,
+			"shader": "res://commons/resourses/shaders/SimpleGrid.gdshader"
 		}
 	}
 }

@@ -1,0 +1,194 @@
+{
+  "id": "glass_rack",
+  "name": "Glass Rack",
+  "version": "1.0",
+  "description": "Laboratory glassware apparatus",
+  "orientation": {
+    "plane": "XZ",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 0.1
+  },
+  "categories": [
+    {"id": "vessels", "name": "Vessels", "color": "#4CAF50", "icon": "🧪"},
+    {"id": "tubes", "name": "Tubes", "color": "#2196F3", "icon": "│"},
+    {"id": "junctions", "name": "Junctions", "color": "#FF9800", "icon": "⑂"},
+    {"id": "condensers", "name": "Condensers", "color": "#9C27B0", "icon": "◎"},
+    {"id": "terminals", "name": "Terminals", "color": "#F44336", "icon": "▼"}
+  ],
+  "elements": [
+    {
+      "id": "flask",
+      "name": "Flask",
+      "category": "vessels",
+      "size": [1, 2],
+      "icon": "⚗️",
+      "ascii": ["○", "│"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.02},
+        "out": {"cell": [0, 1], "side": "top", "radius": 0.015}
+      },
+      "params": {
+        "radius": {"type": "float", "default": 0.05, "min": 0.02, "max": 0.1, "label": "Flask Radius"}
+      },
+      "segment_type": "flask"
+    },
+    {
+      "id": "beaker",
+      "name": "Beaker",
+      "category": "vessels",
+      "size": [1, 1],
+      "icon": "🧪",
+      "ascii": ["▢"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "top", "radius": 0.04}
+      },
+      "is_terminal": true,
+      "params": {
+        "radius": {"type": "float", "default": 0.04, "min": 0.02, "max": 0.08}
+      },
+      "segment_type": "beaker"
+    },
+    {
+      "id": "straight",
+      "name": "Straight Tube",
+      "category": "tubes",
+      "size": [1, 1],
+      "icon": "│",
+      "ascii": ["│"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.015},
+        "out": {"cell": [0, 0], "side": "top", "radius": 0.015}
+      },
+      "segment_type": "straight"
+    },
+    {
+      "id": "corner",
+      "name": "Corner 90°",
+      "category": "tubes",
+      "size": [1, 1],
+      "icon": "╮",
+      "ascii": ["╮"],
+      "rotations": ["╮", "╯", "╰", "╭"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.015},
+        "out": {"cell": [0, 0], "side": "right", "radius": 0.015}
+      },
+      "segment_type": "corner"
+    },
+    {
+      "id": "sbend",
+      "name": "S-Bend",
+      "category": "tubes",
+      "size": [2, 1],
+      "icon": "∿",
+      "ascii": ["╭╯"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "left", "radius": 0.015},
+        "out": {"cell": [1, 0], "side": "right", "radius": 0.015}
+      },
+      "segment_type": "sbend"
+    },
+    {
+      "id": "ypipe",
+      "name": "Y-Pipe",
+      "category": "junctions",
+      "size": [3, 2],
+      "icon": "⑂",
+      "ascii": [" ┬ ", "╱ ╲"],
+      "ports": {
+        "in": {"cell": [1, 0], "side": "bottom", "radius": 0.015},
+        "out1": {"cell": [0, 1], "side": "top", "radius": 0.015},
+        "out2": {"cell": [2, 1], "side": "top", "radius": 0.015}
+      },
+      "segment_type": "ypipe"
+    },
+    {
+      "id": "junction",
+      "name": "T-Junction",
+      "category": "junctions",
+      "size": [2, 1],
+      "icon": "┬",
+      "ascii": ["┬─"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.015},
+        "out": {"cell": [0, 0], "side": "top", "radius": 0.015},
+        "branch": {"cell": [1, 0], "side": "right", "radius": 0.015}
+      },
+      "segment_type": "junction"
+    },
+    {
+      "id": "cross",
+      "name": "Cross",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┼",
+      "ascii": ["┼"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.015},
+        "out": {"cell": [0, 0], "side": "top", "radius": 0.015},
+        "left": {"cell": [0, 0], "side": "left", "radius": 0.015},
+        "right": {"cell": [0, 0], "side": "right", "radius": 0.015}
+      },
+      "segment_type": "cross"
+    },
+    {
+      "id": "spiral",
+      "name": "Spiral Condenser",
+      "category": "condensers",
+      "size": [2, 3],
+      "icon": "◎",
+      "ascii": ["╭╮", "◎◎", "╰╯"],
+      "ports": {
+        "in": {"cell": [1, 0], "side": "bottom", "radius": 0.015},
+        "out": {"cell": [1, 2], "side": "top", "radius": 0.015}
+      },
+      "params": {
+        "turns": {"type": "int", "default": 4, "min": 2, "max": 8},
+        "height": {"type": "float", "default": 0.4, "min": 0.2, "max": 0.8}
+      },
+      "segment_type": "spiral"
+    },
+    {
+      "id": "condenser",
+      "name": "Jacketed Condenser",
+      "category": "condensers",
+      "size": [1, 3],
+      "icon": "⫾",
+      "ascii": ["╤", "║", "╧"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.01},
+        "out": {"cell": [0, 2], "side": "top", "radius": 0.01},
+        "coolant_in": {"cell": [0, 0], "side": "right", "radius": 0.01},
+        "coolant_out": {"cell": [0, 2], "side": "right", "radius": 0.01}
+      },
+      "segment_type": "condenser"
+    },
+    {
+      "id": "cap",
+      "name": "Cap",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "●",
+      "ascii": ["●"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.015}
+      },
+      "is_terminal": true,
+      "segment_type": "cap"
+    },
+    {
+      "id": "drip",
+      "name": "Drip Tip",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "▽",
+      "ascii": ["▽"],
+      "ports": {
+        "in": {"cell": [0, 0], "side": "top", "radius": 0.015}
+      },
+      "is_terminal": true,
+      "segment_type": "drip"
+    }
+  ]
+}

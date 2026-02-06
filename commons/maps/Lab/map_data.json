@@ -98,12 +98,16 @@
 			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
 			"unlock_on_sequence_completion": true
 		},
-		"ceiling": {
-			"preset": "office",
-			"height": 5.5,
-			"light_spacing": 3,
-			"light_intensity": 1.2,
-			"pattern": "sparse"
-		}
+	"ceiling": {
+		"preset": "office",
+		"height": 5.5,
+		"size_x": 3.0,
+		"size_z": 3.0,
+		"offset_x": 0.0,
+		"offset_z": 0.0,
+		"light_spacing": 3,
+		"light_intensity": 1.2,
+		"pattern": "sparse"
+	}, 
 	}
 }
