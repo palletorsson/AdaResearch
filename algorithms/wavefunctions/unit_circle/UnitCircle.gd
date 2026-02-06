@@ -9,6 +9,11 @@ extends Node3D
 @export var cosine_color: Color = Color(0.6, 0.8, 1.0)
 @export var point_color: Color = Color(0.8, 0.6, 1.0)
 @export var circle_dot_color: Color = Color(0.85, 0.85, 0.9)
+@export var use_color_wheel: bool = true
+@export_range(0.0, 1.0, 0.01) var wheel_saturation: float = 0.9
+@export_range(0.0, 1.0, 0.01) var wheel_value: float = 1.0
+@export var color_platforms_from_wheel: bool = true
+@export_range(0.0, 1.0, 0.01) var platform_wheel_value: float = 0.85
 @export var num_cycles: int = 2  
 # --- Bridge ---
 @export var start_x: float = 3.0
@@ -30,6 +35,7 @@ var sine_line: Node3D
 var cosine_line: Node3D
 var _sine_cap: Node3D
 var _cos_cap: Node3D
+var _rotating_material: StandardMaterial3D
 
 # --- Shared mesh ---
 var _shared_box: BoxMesh
@@ -76,17 +82,25 @@ func _create_unit_circle_outline() -> void:
 	dot.height = dot.radius * 2.0
 	mm.mesh = dot
 	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
 	var res: int = 64
 	mm.instance_count = res
 
 	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
 	mat.albedo_color = circle_dot_color
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 1.0, 1.0)
+	mat.emission_energy_multiplier = 0.6
 	circle_outline.material_override = mat
 
 	for i in range(res):
 		var th: float = float(i) / float(res) * TAU
 		var p: Vector3 = Vector3(cos(th) * radius, sin(th) * radius, 0)
 		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, p))
+		var dot_color = _get_wheel_color(th, wheel_value) if use_color_wheel else circle_dot_color
+		mm.set_instance_color(i, dot_color)
 
 	circle_outline.multimesh = mm
 	add_child(circle_outline)
@@ -100,11 +114,11 @@ func _create_rotator() -> void:
 	sm.radius = 0.08
 	sm.height = sm.radius * 2.0
 	rotating_point.mesh = sm
-	var pm := StandardMaterial3D.new()
-	pm.albedo_color = point_color
-	pm.emission_enabled = true
-	pm.emission = point_color * 0.6
-	rotating_point.material_override = pm
+	_rotating_material = StandardMaterial3D.new()
+	_rotating_material.albedo_color = point_color
+	_rotating_material.emission_enabled = true
+	_rotating_material.emission = point_color * 0.6
+	rotating_point.material_override = _rotating_material
 	add_child(rotating_point)
 
 	radius_line = _make_line_node(Vector3.ZERO, Vector3(radius, 0, 0), point_color, line_thickness)
@@ -115,6 +129,10 @@ func _update_rotator_and_indicators() -> void:
 	var y: float = sin(angle) * radius
 	var p: Vector3 = Vector3(x, y, 0)
 	rotating_point.position = p
+	if use_color_wheel and _rotating_material:
+		var wheel_color = _get_wheel_color(angle, wheel_value)
+		_rotating_material.albedo_color = wheel_color
+		_rotating_material.emission = wheel_color * 0.6
 
 	# update lines
 	_update_line_node(radius_line, Vector3.ZERO, p, line_thickness)
@@ -197,9 +215,15 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 	bm.size = platform_size
 	mi.mesh = bm
 	var m := StandardMaterial3D.new()
-	m.albedo_color = platform_color
-	m.emission_enabled = true
-	m.emission = platform_color * 0.3
+	if color_platforms_from_wheel and use_color_wheel:
+		var wheel_color = _get_wheel_color(step_angle, platform_wheel_value)
+		m.albedo_color = wheel_color
+		m.emission_enabled = true
+		m.emission = wheel_color * 0.35
+	else:
+		m.albedo_color = platform_color
+		m.emission_enabled = true
+		m.emission = platform_color * 0.3
 	m.metallic = 0.35
 	m.roughness = 0.6
 	mi.material_override = m
@@ -215,3 +239,7 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 		node.add_child(body)
 
 	add_child(node)
+
+func _get_wheel_color(theta: float, value: float) -> Color:
+	var hue = fposmod(theta / TAU, 1.0)
+	return Color.from_hsv(hue, wheel_saturation, value)

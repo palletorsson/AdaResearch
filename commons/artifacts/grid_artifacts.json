@@ -613,6 +613,12 @@
 									   "description":  "draw_dot.",
 									   "scene":  "res://commons/primitives/point/draw_dot.tscn"
 								   },
+				"draw_dot_time_domain":  {
+									"name":  "draw_dot_time_domain",
+									"lookup_name":  "draw_dot_time_domain",
+									"description":  "Draw dot with time-domain trace along +Z.",
+									"scene":  "res://commons/primitives/point/draw_dot_time_domain.tscn"
+								},
 					  "snap_demo":  {
 										"name":  "snap_demo",
 										"lookup_name":  "snap_demo",
@@ -1543,6 +1549,12 @@
 										   "description":  "Cartesian coordinate system, x y z godot",
 										   "scene":  "res://commons/scenes/mapobjects/pick_up_cube.tscn"
 									   },
+				"mario_cube_time_trace":  {
+									"name":  "Mario Cube Time Trace",
+									"lookup_name":  "mario_cube_time_trace",
+									"description":  "Pick-up cube with time-domain trace in +Z, like pendulum trail.",
+									"scene":  "res://commons/scenes/mapobjects/mario_cube_time_trace.tscn"
+								},
 					  "pickup_cube_static":  {
 												 "name":  "Static Pickup Cube",
 												 "lookup_name":  "pickup_cube_static",
@@ -2933,6 +2945,18 @@
 											  "sequence":  "vectors",
 											  "qfep_connection":  "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
 											  "tags":  ["vectors", "addition", "subtraction", "dot_product", "cross_product", "projection", "sandbox"]
+										  },
+					  "vector_joint_playground":  {
+											  "name":  "Vector-Joint Playground",
+											  "lookup_name":  "vector_joint_playground",
+											  "description":  "Human-scale VR playground with 6 stations: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces)",
+											  "scene":  "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+											  "category":  "vectors",
+											  "interaction":  "grab",
+											  "complexity":  "intermediate",
+											  "sequence":  "vectors",
+											  "qfep_connection":  "Vectors as embodied forces - abstract math becomes physical machinery at human scale",
+											  "tags":  ["vectors", "joints", "playground", "magnitude", "addition", "dot_product", "subtraction", "cross_product", "forces", "interactive", "vr"]
 										  },
 					  "vectorline":  {
 										 "name":  "vectorline",

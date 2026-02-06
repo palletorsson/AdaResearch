@@ -1,5 +1,7 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+const SpringScaleScript = preload("res://algorithms/vectors/shared/gadgets/spring_scale_gadget.gd")
+
 var vector_a: Node3D
 var unit_vector: Node3D
 var component_vectors := {
@@ -8,6 +10,7 @@ var component_vectors := {
 	"z": null
 }
 var info_label: Label3D
+var spring_gadget: Node3D
 
 # Cached references to avoid get_node in _process
 var _cached_vector_a_nodes: Dictionary = {}
@@ -20,14 +23,22 @@ var _cached_component_nodes: Dictionary = {
 
 func _ready():
 	super._ready()
+	# Half-size for exhibition display
+	scale = Vector3(0.5, 0.5, 0.5)
+
 	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.5, 1.0, 0.5), Color(0.95, 0.85, 0.2, 1.0), "Vector a")
 	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(1.0, 0.4, 0.9, 1.0), "Unit a", false)
 	component_vectors["x"] = spawn_vector(Vector3.ZERO, Vector3(1.5, 0, 0), Color(1.0, 0.3, 0.3, 1.0), "a_x", false)
 	component_vectors["y"] = spawn_vector(Vector3.ZERO, Vector3(0, 1.0, 0), Color(0.3, 1.0, 0.3, 1.0), "a_y", false)
 	component_vectors["z"] = spawn_vector(Vector3.ZERO, Vector3(0, 0, 0.5), Color(0.3, 0.5, 1.0, 1.0), "a_z", false)
-	info_label = create_info_panel("Vector a", Vector3(0.5, 1.2, 0.0))
-	
+	info_label = create_info_panel("Vector Basics", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "v = |v| * v-hat", "Magnitude and direction")
+
+	# Spring scale gadget
+	spring_gadget = SpringScaleScript.new()
+	spring_gadget.position = Vector3(-0.6, 0, 0)
+	add_child(spring_gadget)
+
 	# Cache nodes for performance
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
 	_cache_vector_nodes(unit_vector, _cached_unit_vector_nodes)
@@ -40,6 +51,8 @@ func _process(_delta):
 	_update_unit_vector(vec)
 	_update_components(vec)
 	_update_info(vec)
+	if spring_gadget:
+		spring_gadget.update_from_vectors(vec, Vector3.ZERO)
 
 func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
 	if arrow == null: return

@@ -287,6 +287,22 @@
 	  "category": "mathematics",
 	  "complexity": "beginner",
 	  "tags": ["vectors", "infoboard", "2d_in_3d", "subtraction", "magnitude", "normalize", "dot_product", "projection", "turret", "reference", "diagram"]
+	},
+	"vector_joint_playground": {
+	  "lookup_name": "vector_joint_playground",
+	  "scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+	  "class_name": "VectorJointPlayground",
+	  "name": "Vector-Joint Playground",
+	  "description": "Human-scale VR playground with 6 interactive stations. Each station pairs draggable vectors with a large physics joint mechanism: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces). Drag a vector, watch the machine respond.",
+	  "qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+	  "signals": [],
+	  "interactions": ["grab vector endpoints to manipulate", "observe mechanism responses", "read live math on info panels"],
+	  "parameters": {},
+	  "dev_themes": ["vectors", "joints", "physics", "interactive"],
+	  "dev_category": "vector_operations",
+	  "category": "mathematics",
+	  "complexity": "intermediate",
+	  "tags": ["vectors", "joints", "playground", "magnitude", "addition", "dot_product", "subtraction", "cross_product", "forces", "interactive", "vr", "human_scale"]
 	}
   },
   "sequence_mapping": {
@@ -307,7 +323,8 @@
 	  "laser_turret",
 	  "ball_dropper",
 	  "turret_boll_infoboard",
-      "basis_vectors_rig"
+      "basis_vectors_rig",
+	  "vector_joint_playground"
 	],
 	"all_vectors": [
 	  "vector_addition_demo",
@@ -322,7 +339,8 @@
 	  "laser_turret",
 	  "ball_dropper",
 	  "turret_boll_infoboard",
-      "basis_vectors_rig"
+      "basis_vectors_rig",
+	  "vector_joint_playground"
 	]
   },
   "theoretical_connections": {

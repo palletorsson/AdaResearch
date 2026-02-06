@@ -98,15 +98,15 @@
 			[" ", " ", " ", " ", "pickup_cube_transforming", " ", " ", " ", " "],			
 			[" ", "", " ", " ", "pickup_cube_rotating", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],			
-			[" ", " ", " ", " ", "pick_up_cube:0:0:0.5", " ", " ", " ", " "],						
+			[" ", " ", " ", " ", "", " ", " ", " ", " "],						
 			[" ", " ", "control_pendulum:0:1.5:1", " ", "pick_up_cube:0:0:0.6", " ", " ", " ", " "],
 			[" ", " ", "", " ", "pick_up_cube:0:0:0.7", " ", " ", " ", " "],
-			[" ", " ", "oscillation_controlled_cube:180:0.5:1", " ", "pick_up_cube:0:0:0.8", " ", " ", " ", ""],
+			[" ", " ", "oscillation_controlled_cube:180:0.5:1", " ", "pick_up_cube:0:0:0.8", " ", "mario_cube_time_trace:0:1:0.5", " ", ""],
 			[" ", " ", " ", " ", "pick_up_cube:0:0:0.9", " ", " ", " ", " "],						
 			[" ", " ", " ", " ", "pick_up_cube:0:0:1", " ", " ", " ", " "],
 			[" ", " ", " ", " ", "", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " "],						
-			[" ", "SphericalHarmonics:0:2", " ", " ", " ", " ", " ", "SphericalHarmonics:0:2", " "]			
+			[" ", "SphericalHarmonics:0:4", " ", " ", " ", " ", " ", "SphericalHarmonics:0:4", " "]			
 		]
 	},
 	

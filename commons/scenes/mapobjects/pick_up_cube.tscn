@@ -9,12 +9,12 @@ size = Vector3(0.52, 0.52, 0.52)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdpok"]
 render_priority = 0
 shader = ExtResource("2_lx240")
-shader_parameter/modelColor = Color(0.505344, 0.505344, 0.505344, 1)
+shader_parameter/modelColor = Color(0, 0, 0, 1)
 shader_parameter/wireframeColor = Color(0.940526, 0.689287, 0, 1)
-shader_parameter/emissionColor = Color(1, 0, 1, 1)
-shader_parameter/width = 8.68
-shader_parameter/blur = 0.581
-shader_parameter/emission_strength = 2.018
+shader_parameter/emissionColor = Color(0, 1, 1, 1)
+shader_parameter/width = 1.00000004424012
+shader_parameter/blur = 1.00000004424012
+shader_parameter/emission_strength = 1.0000000475
 shader_parameter/show_interior = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_y57fk"]

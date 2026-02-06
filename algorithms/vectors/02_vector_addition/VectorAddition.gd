@@ -1,11 +1,14 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+const PistonGadgetScript = preload("res://algorithms/vectors/shared/gadgets/piston_gadget.gd")
+
 var vector_a: Node3D
 var vector_b: Node3D
 var sum_vector: Node3D
 var info_label: Label3D
 var dotted_line_a: MultiMeshInstance3D
 var dotted_line_b: MultiMeshInstance3D
+var piston_gadget: Node3D
 
 # Pedagogical Enhancements
 var label_a_copy: Label3D
@@ -25,6 +28,9 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
+	# Half-size for exhibition display
+	scale = Vector3(0.5, 0.5, 0.5)
+
 	create_axes(1.5)
 
 	# Vectors from origin
@@ -32,6 +38,11 @@ func _ready():
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(0.4, 1.6, 0.9), Color(0.3, 0.8, 0.9, 1.0), "Vector b")
 	sum_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 0.95, 0.1, 1.0), "a + b", false)
 	_highlight_sum_vector()
+
+	# Piston gadget
+	piston_gadget = PistonGadgetScript.new()
+	piston_gadget.position = Vector3(-0.6, 0, 0)
+	add_child(piston_gadget)
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
@@ -56,15 +67,17 @@ func _ready():
 	label_a_copy = _create_floating_label("a (copy)", Color(0.9, 0.4, 0.3, 0.7))
 	label_b_copy = _create_floating_label("b (copy)", Color(0.3, 0.8, 0.9, 0.7))
 
-	info_label = create_info_panel("Vector Addition", Vector3(0.5, 1.2, 0.0))
+	info_label = create_info_panel("Vector Addition", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "C = A + B", "Parallelogram rule")
 
 func _process(delta):
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b = _get_vector_fast(vector_b, _cached_vector_b_nodes)
 	var result = a + b
-	
+
 	_update_vector_fast(sum_vector, result, _cached_sum_vector_nodes)
 	_update_dotted_lines(a, b, result)
+	if piston_gadget:
+		piston_gadget.update_from_vectors(a, b)
 	
 	# Update Pedagogical Labels
 	# label_b_copy sits at the midpoint of the dotted line extending from a

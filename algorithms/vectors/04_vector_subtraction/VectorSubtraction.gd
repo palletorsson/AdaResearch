@@ -1,11 +1,14 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+const BalanceBeamScript = preload("res://algorithms/vectors/shared/gadgets/balance_beam_gadget.gd")
+
 var vector_a: Node3D
 var vector_b: Node3D
 var difference_vector: Node3D
 var negative_b: Node3D
 var tip_tail_neg_b: Node3D
 var info_label: Label3D
+var balance_gadget: Node3D
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -20,13 +23,21 @@ const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready():
 	super._ready()
+	# Half-size for exhibition display
+	scale = Vector3(0.5, 0.5, 0.5)
+
 	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.7, -0.4), Color(0.9, 0.5, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.3, 1.1, 0.8), Color(0.2, 0.6, 1.0, 1.0), "Vector b")
 	difference_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 1.0, 1.0, 1.0), "a - b", false)
 	negative_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.6), "-b", false)
 	tip_tail_neg_b = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.2, 0.6, 1.0, 0.4), "-b@a", false)
-	info_label = create_info_panel("Vector Subtraction", Vector3(0.5, 1.2, 0.0))
+	info_label = create_info_panel("Vector Subtraction", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "C = A - B = A + (-B)", "Difference of two vectors")
+
+	# Balance beam gadget
+	balance_gadget = BalanceBeamScript.new()
+	balance_gadget.position = Vector3(-0.6, 0, 0)
+	add_child(balance_gadget)
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
@@ -43,7 +54,9 @@ func _process(delta):
 	
 	_update_vector_fast(difference_vector, diff, _cached_diff_nodes)
 	_update_vector_fast(negative_b, minus_b, _cached_neg_b_nodes)
-	
+	if balance_gadget:
+		balance_gadget.update_from_vectors(a, b)
+
 	# Position the tip-to-tail vector at the tip of A
 	# Note: 'a' is the unscaled vector logic value.
 	# The position in world space needs to be scaled.

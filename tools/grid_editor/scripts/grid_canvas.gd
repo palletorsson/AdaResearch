@@ -8,6 +8,8 @@ signal cell_hovered(cell: Vector2i)
 signal cell_clicked(cell: Vector2i, button: int)
 signal element_placed(placement: Dictionary)
 signal element_selected(placement: Dictionary)
+signal element_rotated(placement: Dictionary)
+signal element_moved(placement: Dictionary)
 signal selection_cleared
 
 # Grid settings
@@ -32,19 +34,26 @@ var hovered_cell: Vector2i = Vector2i(-1, -1)
 var selected_placements: Array = []
 var dragging_element: Dictionary = {}
 var drag_preview_cell: Vector2i = Vector2i(-1, -1)
+var drag_rotation: int = 0  # 0, 90, 180, 270
+
+# Moving existing elements
+var moving_placement: Dictionary = {}
+var move_offset: Vector2i = Vector2i.ZERO
 
 # Data
 var placements: Array = []  # Array of placement dictionaries
 var subset_loader: GridEditorSubsetLoader  # Set by parent
 
-# Colors
-var color_grid_line: Color = Color(0.3, 0.3, 0.35)
-var color_grid_major: Color = Color(0.4, 0.4, 0.45)
-var color_background: Color = Color(0.15, 0.15, 0.18)
-var color_hover: Color = Color(0.4, 0.6, 0.9, 0.3)
-var color_selected: Color = Color(0.9, 0.6, 0.2, 0.4)
-var color_preview: Color = Color(0.5, 0.9, 0.5, 0.5)
-var color_invalid: Color = Color(0.9, 0.3, 0.3, 0.5)
+# Modern dark theme colors
+var color_grid_line: Color = Color(0.2, 0.22, 0.26)
+var color_grid_major: Color = Color(0.28, 0.3, 0.35)
+var color_background: Color = Color(0.1, 0.1, 0.12)
+var color_hover: Color = Color(0.35, 0.55, 0.85, 0.25)
+var color_selected: Color = Color(0.95, 0.65, 0.2, 0.35)
+var color_preview: Color = Color(0.4, 0.85, 0.5, 0.4)
+var color_invalid: Color = Color(0.9, 0.25, 0.25, 0.4)
+var color_element_bg: Color = Color(0.18, 0.22, 0.28, 0.9)
+var color_element_border: Color = Color(0.5, 0.55, 0.65)
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -73,8 +82,10 @@ func _draw() -> void:
 		var color = color_grid_major if y % 4 == 0 else color_grid_line
 		draw_line(from, to, color, 1.0 if y % 4 == 0 else 0.5)
 	
-	# Draw placed elements
+	# Draw placed elements (skip the one being moved)
 	for placement in placements:
+		if placement == moving_placement:
+			continue
 		_draw_element(placement, selected_placements.has(placement))
 	
 	# Draw hover highlight
@@ -82,10 +93,10 @@ func _draw() -> void:
 		var rect = _get_cell_rect(hovered_cell)
 		draw_rect(rect, color_hover)
 	
-	# Draw drag preview
+	# Draw drag preview (new element)
 	if not dragging_element.is_empty() and _is_valid_cell(drag_preview_cell):
 		var element = dragging_element
-		var elem_size = Vector2i(element.get("size", [1, 1])[0], element.get("size", [1, 1])[1])
+		var elem_size = _get_rotated_size(element, drag_rotation)
 		var can_place = _can_place_at(drag_preview_cell, elem_size)
 		var preview_color = color_preview if can_place else color_invalid
 		
@@ -97,7 +108,24 @@ func _draw() -> void:
 					draw_rect(rect, preview_color)
 		
 		# Draw element preview
-		_draw_element_preview(element, drag_preview_cell)
+		_draw_element_preview(element, drag_preview_cell, drag_rotation)
+	
+	# Draw move preview (existing element)
+	if not moving_placement.is_empty() and _is_valid_cell(drag_preview_cell):
+		var element = subset_loader.get_element(moving_placement.get("element", "")) if subset_loader else {}
+		var rotation = moving_placement.get("rotation", 0)
+		var elem_size = _get_rotated_size(element, rotation)
+		var can_place = _can_place_at_for_move(drag_preview_cell, elem_size, moving_placement)
+		var preview_color = color_preview if can_place else color_invalid
+		
+		for dx in range(elem_size.x):
+			for dy in range(elem_size.y):
+				var cell = drag_preview_cell + Vector2i(dx, dy)
+				if _is_valid_cell(cell):
+					var rect = _get_cell_rect(cell)
+					draw_rect(rect, preview_color)
+		
+		_draw_element_preview(element, drag_preview_cell, rotation)
 
 func _draw_element(placement: Dictionary, is_selected: bool) -> void:
 	if not subset_loader:
@@ -107,42 +135,48 @@ func _draw_element(placement: Dictionary, is_selected: bool) -> void:
 		return
 	
 	var cell = Vector2i(placement.get("position", [0, 0])[0], placement.get("position", [0, 0])[1])
-	var elem_size = Vector2i(element.get("size", [1, 1])[0], element.get("size", [1, 1])[1])
 	var rotation = placement.get("rotation", 0)
+	var elem_size = _get_rotated_size(element, rotation)
 	
-	# Draw element background
+	# Draw element background with modern styling
 	var full_rect = _get_element_rect(cell, elem_size)
-	var bg_color = Color(0.25, 0.35, 0.45, 0.8)
+	var bg_color = color_element_bg
 	if is_selected:
-		bg_color = color_selected
+		bg_color = Color(0.3, 0.4, 0.55, 0.9)
 	draw_rect(full_rect, bg_color)
-	draw_rect(full_rect, Color.WHITE, false, 2.0)
+	var border_color = color_selected if is_selected else color_element_border
+	draw_rect(full_rect, border_color, false, 2.0 if is_selected else 1.0)
 	
-	# Draw icon/ASCII
+	# Draw icon/ASCII with rotation
 	var icon = element.get("icon", "?")
 	var font = ThemeDB.fallback_font
 	var font_size = int(cell_size * zoom * 0.6)
-	var text_pos = full_rect.get_center() - Vector2(font_size * 0.3, -font_size * 0.3)
-	draw_string(font, text_pos, icon, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
+	var center = full_rect.get_center()
 	
-	# Draw ports
-	var ports = element.get("ports", {})
-	for port_name in ports:
-		var port = ports[port_name]
-		var port_cell = Vector2i(port.get("cell", [0, 0])[0], port.get("cell", [0, 0])[1])
-		var port_pos = _cell_to_canvas(cell + port_cell) + Vector2(cell_size * zoom / 2, cell_size * zoom / 2)
-		var port_color = Color.RED if port_name == "in" else Color.GREEN
-		draw_circle(port_pos, 4.0 * zoom, port_color)
+	draw_set_transform(center, deg_to_rad(rotation), Vector2.ONE)
+	draw_string(font, Vector2(-font_size * 0.3, font_size * 0.3), icon, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
+	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+	
+	# Draw rotation indicator for non-zero rotation
+	if rotation != 0:
+		var indicator_pos = full_rect.position + Vector2(4, 4)
+		draw_string(font, indicator_pos, "%d°" % rotation, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.7, 0.7, 0.7, 0.8))
+	
+	# Ports hidden for free placement
 
-func _draw_element_preview(element: Dictionary, cell: Vector2i) -> void:
-	var elem_size = Vector2i(element.get("size", [1, 1])[0], element.get("size", [1, 1])[1])
+func _draw_element_preview(element: Dictionary, cell: Vector2i, rotation: int = 0) -> void:
+	var elem_size = _get_rotated_size(element, rotation)
 	var full_rect = _get_element_rect(cell, elem_size)
 	
 	var icon = element.get("icon", "?")
 	var font = ThemeDB.fallback_font
 	var font_size = int(cell_size * zoom * 0.6)
-	var text_pos = full_rect.get_center() - Vector2(font_size * 0.3, -font_size * 0.3)
-	draw_string(font, text_pos, icon, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, Color(1, 1, 1, 0.7))
+	var center = full_rect.get_center()
+	
+	# Draw rotated icon
+	draw_set_transform(center, deg_to_rad(rotation), Vector2.ONE)
+	draw_string(font, Vector2(-font_size * 0.3, font_size * 0.3), icon, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, Color(1, 1, 1, 0.7))
+	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -163,19 +197,42 @@ func _gui_input(event: InputEvent) -> void:
 			accept_event()
 		
 		# Click
-		elif mb.button_index == MOUSE_BUTTON_LEFT and mb.pressed:
+		elif mb.button_index == MOUSE_BUTTON_LEFT:
 			var cell = _canvas_to_cell(mb.position)
-			if not dragging_element.is_empty():
-				_try_place_element(cell)
+			if mb.pressed:
+				if not dragging_element.is_empty():
+					_try_place_element(cell)
+				elif mb.double_click:
+					_handle_double_click(cell)
+				else:
+					_start_move_or_select(cell)
+				accept_event()
 			else:
-				_handle_click(cell)
-			accept_event()
+				# Mouse released
+				if not moving_placement.is_empty():
+					_finish_move(cell)
+					accept_event()
 		
 		elif mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
 			dragging_element = {}
+			moving_placement = {}
 			drag_preview_cell = Vector2i(-1, -1)
+			drag_rotation = 0
 			queue_redraw()
 			accept_event()
+	
+	elif event is InputEventKey:
+		var ke = event as InputEventKey
+		if ke.pressed and ke.keycode == KEY_R:
+			if not dragging_element.is_empty():
+				# Rotate while dragging
+				drag_rotation = (drag_rotation + 90) % 360
+				queue_redraw()
+				accept_event()
+			elif not selected_placements.is_empty():
+				# Rotate selected element
+				_rotate_selected()
+				accept_event()
 	
 	elif event is InputEventMouseMotion:
 		var mm = event as InputEventMouseMotion
@@ -192,6 +249,9 @@ func _gui_input(event: InputEvent) -> void:
 			
 			if not dragging_element.is_empty():
 				drag_preview_cell = cell
+				queue_redraw()
+			elif not moving_placement.is_empty():
+				drag_preview_cell = cell - move_offset
 				queue_redraw()
 
 func _zoom_at(pos: Vector2, factor: float) -> void:
@@ -246,23 +306,48 @@ func _placements_overlap(cell: Vector2i, elem_size: Vector2i, placement: Diction
 	var p_size = Vector2i(1, 1)
 	if subset_loader:
 		var p_element = subset_loader.get_element(placement.get("element", ""))
-		p_size = Vector2i(p_element.get("size", [1, 1])[0], p_element.get("size", [1, 1])[1])
+		var p_rotation = placement.get("rotation", 0)
+		p_size = _get_rotated_size(p_element, p_rotation)
 	
 	var r1 = Rect2i(cell, elem_size)
 	var r2 = Rect2i(p_cell, p_size)
 	return r1.intersects(r2)
 
-func _handle_click(cell: Vector2i) -> void:
+func _handle_double_click(cell: Vector2i) -> void:
+	# Find element at cell and rotate it
+	for placement in placements:
+		var p_cell = Vector2i(placement.get("position", [0, 0])[0], placement.get("position", [0, 0])[1])
+		var p_size = Vector2i(1, 1)
+		if subset_loader:
+			var p_element = subset_loader.get_element(placement.get("element", ""))
+			var p_rotation = placement.get("rotation", 0)
+			p_size = _get_rotated_size(p_element, p_rotation)
+		
+		if cell.x >= p_cell.x and cell.x < p_cell.x + p_size.x:
+			if cell.y >= p_cell.y and cell.y < p_cell.y + p_size.y:
+				# Select and rotate
+				selected_placements = [placement]
+				placement["rotation"] = (placement.get("rotation", 0) + 90) % 360
+				element_rotated.emit(placement)
+				queue_redraw()
+				return
+
+func _start_move_or_select(cell: Vector2i) -> void:
 	# Check if clicking on existing element
 	for placement in placements:
 		var p_cell = Vector2i(placement.get("position", [0, 0])[0], placement.get("position", [0, 0])[1])
 		var p_size = Vector2i(1, 1)
 		if subset_loader:
 			var p_element = subset_loader.get_element(placement.get("element", ""))
-			p_size = Vector2i(p_element.get("size", [1, 1])[0], p_element.get("size", [1, 1])[1])
+			var p_rotation = placement.get("rotation", 0)
+			p_size = _get_rotated_size(p_element, p_rotation)
 		
 		if cell.x >= p_cell.x and cell.x < p_cell.x + p_size.x:
 			if cell.y >= p_cell.y and cell.y < p_cell.y + p_size.y:
+				# Start moving this element
+				moving_placement = placement
+				move_offset = cell - p_cell
+				drag_preview_cell = p_cell
 				selected_placements = [placement]
 				element_selected.emit(placement)
 				queue_redraw()
@@ -270,14 +355,54 @@ func _handle_click(cell: Vector2i) -> void:
 	
 	# Clear selection
 	selected_placements.clear()
+	moving_placement = {}
 	selection_cleared.emit()
 	queue_redraw()
+
+func _finish_move(cell: Vector2i) -> void:
+	if moving_placement.is_empty():
+		return
+	
+	var target_cell = cell - move_offset
+	var element = subset_loader.get_element(moving_placement.get("element", "")) if subset_loader else {}
+	var rotation = moving_placement.get("rotation", 0)
+	var elem_size = _get_rotated_size(element, rotation)
+	
+	if _can_place_at_for_move(target_cell, elem_size, moving_placement):
+		moving_placement["position"] = [target_cell.x, target_cell.y]
+		element_moved.emit(moving_placement)
+	
+	moving_placement = {}
+	drag_preview_cell = Vector2i(-1, -1)
+	queue_redraw()
+
+func _can_place_at_for_move(cell: Vector2i, elem_size: Vector2i, exclude_placement: Dictionary) -> bool:
+	# Check bounds
+	if cell.x < 0 or cell.y < 0:
+		return false
+	if cell.x + elem_size.x > grid_dimensions.x:
+		return false
+	if cell.y + elem_size.y > grid_dimensions.y:
+		return false
+	
+	# Check overlap (excluding the element being moved)
+	for placement in placements:
+		if placement == exclude_placement:
+			continue
+		if _placements_overlap(cell, elem_size, placement):
+			return false
+	
+	return true
+
+func _handle_click(cell: Vector2i) -> void:
+	# Legacy - now handled by _start_move_or_select
+	pass
 
 func _try_place_element(cell: Vector2i) -> void:
 	if dragging_element.is_empty():
 		return
 	
-	var elem_size = Vector2i(dragging_element.get("size", [1, 1])[0], dragging_element.get("size", [1, 1])[1])
+	var elem_size = _get_rotated_size(dragging_element, drag_rotation)
 	if not _can_place_at(cell, elem_size):
 		return
 	
@@ -285,7 +410,7 @@ func _try_place_element(cell: Vector2i) -> void:
 		"id": "elem_%d" % (placements.size() + 1),
 		"element": dragging_element.get("id", ""),
 		"position": [cell.x, cell.y],
-		"rotation": 0,
+		"rotation": drag_rotation,
 		"params": {}
 	}
 	
@@ -295,7 +420,20 @@ func _try_place_element(cell: Vector2i) -> void:
 	# Clear drag state (or keep for multi-place)
 	dragging_element = {}
 	drag_preview_cell = Vector2i(-1, -1)
+	drag_rotation = 0
 	queue_redraw()
+
+func _rotate_selected() -> void:
+	for placement in selected_placements:
+		placement["rotation"] = (placement.get("rotation", 0) + 90) % 360
+		element_rotated.emit(placement)
+	queue_redraw()
+
+func _get_rotated_size(element: Dictionary, rotation: int) -> Vector2i:
+	var size = Vector2i(element.get("size", [1, 1])[0], element.get("size", [1, 1])[1])
+	if rotation == 90 or rotation == 270:
+		return Vector2i(size.y, size.x)  # Swap width/height
+	return size
 
 # Public API
 func start_drag(element: Dictionary) -> void:

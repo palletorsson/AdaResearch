@@ -1,11 +1,14 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+const HingePanelScript = preload("res://algorithms/vectors/shared/gadgets/hinge_panel_gadget.gd")
+
 var vector_a: Node3D
 var vector_b: Node3D
 var projection_vector: Node3D
 var rejection_vector: Node3D
 var info_label: Label3D
 var angle_label: Label3D
+var hinge_gadget: Node3D
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -19,6 +22,9 @@ const TEXT_UPDATE_INTERVAL: float = 0.1 # 10Hz
 
 func _ready():
 	super._ready()
+	# Half-size for exhibition display
+	scale = Vector3(0.5, 0.5, 0.5)
+
 	create_axes(1.0)
 
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(0.9, 0.55, 0.2), Color(1.0, 0.55, 0.25, 1.0), "Vector a")
@@ -27,13 +33,18 @@ func _ready():
 	projection_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.85, 1.0, 0.45, 1.0), "proj_b(a)", false)
 	rejection_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 0.75, 0.95, 0.85), "rej_b(a)", false)
 
+	# Hinge panel gadget
+	hinge_gadget = HingePanelScript.new()
+	hinge_gadget.position = Vector3(-0.5, 0.15, 0)
+	add_child(hinge_gadget)
+
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)
 	_cache_vector_nodes(vector_b, _cached_vector_b_nodes)
 	_cache_vector_nodes(projection_vector, _cached_proj_nodes)
 	_cache_vector_nodes(rejection_vector, _cached_rej_nodes)
 
-	info_label = create_info_panel("Dot Product", Vector3(0.5, 0.8, 0.0))
+	info_label = create_info_panel("Dot Product", Vector3(0.5, 0.8, 0.0), Vector2(1.8, 0.6), "A . B = |A||B|cos(theta)", "Projection and angle")
 	angle_label = create_info_panel("theta", Vector3(0.0, 0.22, 0.0))
 
 func _process(delta):
@@ -65,6 +76,10 @@ func _process(delta):
 		mid_dir = Vector3.UP
 	mid_dir = mid_dir.normalized()
 	angle_label.position = vector_a.position + mid_dir * 0.22
+
+	# Update gadget
+	if hinge_gadget:
+		hinge_gadget.update_from_vectors(a_vec, b_vec)
 
 	# Text updates throttled
 	_time_since_last_text_update += delta

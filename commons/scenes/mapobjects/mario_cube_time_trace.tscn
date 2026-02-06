@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/mapobjects/pick_up_cube.tscn" id="1_pickup"]
+[ext_resource type="Script" path="res://commons/scenes/mapobjects/mario_cube_time_trace.gd" id="2_trace_script"]
+
+[node name="MarioCubeTimeTrace" type="Node3D"]
+script = ExtResource("2_trace_script")
+time_axis_speed = 0.6
+sample_interval = 0.05
+trail_max_points = 1200
+
+[node name="PickUpCube" parent="." instance=ExtResource("1_pickup")]

@@ -22,10 +22,7 @@
       "size": [1, 1],
       "icon": "─",
       "ascii": ["─"],
-      "ports": {
-        "in": {"cell": [0, 0], "side": "left", "radius": 0.8},
-        "out": {"cell": [0, 0], "side": "right", "radius": 0.8}
-      },
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn",
       "command": "f"
     },
     {
@@ -35,6 +32,8 @@
       "size": [1, 1],
       "icon": "╭",
       "ascii": ["╭"],
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
+      "rotation_y": 90,
       "ports": {
         "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
         "out": {"cell": [0, 0], "side": "right", "radius": 0.8}
@@ -48,6 +47,8 @@
       "size": [1, 1],
       "icon": "╮",
       "ascii": ["╮"],
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
+      "rotation_y": 0,
       "ports": {
         "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
         "out": {"cell": [0, 0], "side": "left", "radius": 0.8}
@@ -61,6 +62,7 @@
       "size": [2, 1],
       "icon": "∿",
       "ascii": ["╭╯"],
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn",
       "ports": {
         "in": {"cell": [0, 0], "side": "left", "radius": 0.8},
         "out": {"cell": [1, 0], "side": "right", "radius": 0.8}

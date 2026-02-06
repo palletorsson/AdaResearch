@@ -79,6 +79,13 @@ var _current_config: Dictionary = {}
 var _current_config_path: String = ""
 var _current_section_name: String = ""
 
+# Subset selector (grid editor subsets)
+var _subset_dropdown: OptionButton
+var _loaded_subsets: Dictionary = {}  # id -> parsed JSON
+var _current_subset_id: String = ""
+
+signal subset_changed(subset_id: String, subset_data: Dictionary)
+
 # Parameter Panel
 var _param_panel: PanelContainer
 var _param_sliders: Dictionary = {}  # param_name -> HSlider
@@ -246,17 +253,18 @@ func _setup_spectrum_analyzer():
 
 
 func _setup_ui():
-	# Background
+	# Modern dark background with subtle gradient feel
 	var bg = ColorRect.new()
-	bg.color = Color(0.05, 0.05, 0.07)
+	bg.color = Color(0.08, 0.08, 0.11)
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
 	
-	# Main TabContainer
+	# Main TabContainer with modern styling
 	_main_tabs = TabContainer.new()
 	_main_tabs.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_main_tabs.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 8)
+	_main_tabs.set_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_SIZE, 12)
 	_main_tabs.tab_changed.connect(_on_tab_changed)
+	_style_tab_container(_main_tabs)
 	add_child(_main_tabs)
 	
 	# === OVERVIEW TAB ===
@@ -274,26 +282,47 @@ func _setup_ui():
 	var left_panel = VBoxContainer.new()
 	left_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	left_panel.size_flags_stretch_ratio = 2.0
-	left_panel.add_theme_constant_override("separation", 12)
+	left_panel.add_theme_constant_override("separation", 16)
 	hsplit.add_child(left_panel)
 	
-	# Title
-	_title_label = Label.new()
-	_title_label.text = "🛠️ SONG DEV TOOLS"
-	_title_label.add_theme_font_size_override("font_size", 32)
-	_title_label.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
-	left_panel.add_child(_title_label)
+	# Modern header with title
+	var header = HBoxContainer.new()
+	header.add_theme_constant_override("separation", 16)
+	left_panel.add_child(header)
 	
-	# Song buttons (compact)
+	_title_label = Label.new()
+	_title_label.text = "SONG DEV TOOLS"
+	_title_label.add_theme_font_size_override("font_size", 28)
+	_title_label.add_theme_color_override("font_color", Color(0.95, 0.95, 0.98))
+	header.add_child(_title_label)
+	
+	# Subset dropdown in header (modern pill style)
+	_subset_dropdown = OptionButton.new()
+	_subset_dropdown.custom_minimum_size = Vector2(200, 36)
+	_style_dropdown_modern(_subset_dropdown)
+	_subset_dropdown.item_selected.connect(_on_subset_selected)
+	header.add_child(_subset_dropdown)
+	
+	# Load subsets after dropdown is styled and ready
+	call_deferred("_load_subsets")
+	
+	# Song buttons in a modern card
+	var songs_panel = PanelContainer.new()
+	songs_panel.custom_minimum_size.y = 180
+	songs_panel.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	_style_panel_modern(songs_panel, Color(0.09, 0.09, 0.12))
+	left_panel.add_child(songs_panel)
+	
 	var songs_scroll = ScrollContainer.new()
-	songs_scroll.custom_minimum_size.y = 200
-	songs_scroll.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	left_panel.add_child(songs_scroll)
+	songs_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	songs_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	songs_panel.add_child(songs_scroll)
 	
 	var songs_grid = GridContainer.new()
-	songs_grid.columns = 2
-	songs_grid.add_theme_constant_override("h_separation", 8)
-	songs_grid.add_theme_constant_override("v_separation", 8)
+	songs_grid.columns = 3
+	songs_grid.add_theme_constant_override("h_separation", 10)
+	songs_grid.add_theme_constant_override("v_separation", 10)
+	songs_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	songs_scroll.add_child(songs_grid)
 	
 	# Load all songs from the songs folder
@@ -303,7 +332,8 @@ func _setup_ui():
 		var btn = Button.new()
 		btn.text = song[1]
 		btn.pressed.connect(_on_song_selected.bind(song[0]))
-		_style_button_compact(btn, _get_song_button_color(song[0]))
+		_style_button_modern(btn, _get_song_button_color(song[0]))
+		btn.custom_minimum_size.x = 140
 		_song_buttons[song[0]] = btn
 		songs_grid.add_child(btn)
 	
@@ -313,30 +343,43 @@ func _setup_ui():
 		empty_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6))
 		songs_grid.add_child(empty_label)
 	
-	# Transport controls
+	# Transport controls in modern bar
+	var transport_panel = PanelContainer.new()
+	var transport_style = StyleBoxFlat.new()
+	transport_style.bg_color = Color(0.12, 0.12, 0.15)
+	transport_style.set_corner_radius_all(10)
+	transport_style.content_margin_left = 12
+	transport_style.content_margin_right = 12
+	transport_style.content_margin_top = 8
+	transport_style.content_margin_bottom = 8
+	transport_panel.add_theme_stylebox_override("panel", transport_style)
+	left_panel.add_child(transport_panel)
+	
 	var transport = HBoxContainer.new()
-	transport.add_theme_constant_override("separation", 8)
-	left_panel.add_child(transport)
+	transport.add_theme_constant_override("separation", 12)
+	transport_panel.add_child(transport)
 	
 	_play_btn = Button.new()
 	_play_btn.text = "▶"
 	_play_btn.disabled = true
+	_play_btn.custom_minimum_size = Vector2(44, 36)
 	_play_btn.pressed.connect(_toggle_pause)
-	_style_button_compact(_play_btn, Color(0.2, 0.5, 0.3))
+	_style_button_modern(_play_btn, Color(0.2, 0.55, 0.35))
 	transport.add_child(_play_btn)
 	
 	_stop_btn = Button.new()
 	_stop_btn.text = "⏹"
 	_stop_btn.disabled = true
+	_stop_btn.custom_minimum_size = Vector2(44, 36)
 	_stop_btn.pressed.connect(_stop_song)
-	_style_button_compact(_stop_btn, Color(0.5, 0.2, 0.2))
+	_style_button_modern(_stop_btn, Color(0.55, 0.25, 0.25))
 	transport.add_child(_stop_btn)
 	
 	_loop_btn = Button.new()
 	_loop_btn.text = "🔁 Loop"
 	_loop_btn.toggle_mode = true
 	_loop_btn.toggled.connect(_on_loop_toggled)
-	_style_button_compact(_loop_btn, Color(0.4, 0.3, 0.5))
+	_style_button_modern(_loop_btn, Color(0.35, 0.3, 0.5))
 	transport.add_child(_loop_btn)
 	
 	# Analyze button
@@ -344,22 +387,27 @@ func _setup_ui():
 	analyze_btn.text = "📊 Analyze"
 	analyze_btn.disabled = false
 	analyze_btn.pressed.connect(_analyze_current_track)
-	_style_button_compact(analyze_btn, Color(0.3, 0.4, 0.5))
+	_style_button_modern(analyze_btn, Color(0.25, 0.35, 0.45))
 	transport.add_child(analyze_btn)
 	
-	# Section dropdown
+	# Section dropdown (modern)
 	_section_dropdown = OptionButton.new()
-	_section_dropdown.custom_minimum_size.x = 100
+	_section_dropdown.custom_minimum_size = Vector2(130, 36)
 	_section_dropdown.add_item("Section", 0)
 	_section_dropdown.disabled = true
 	_section_dropdown.item_selected.connect(_on_section_selected)
+	_style_dropdown_modern(_section_dropdown)
 	transport.add_child(_section_dropdown)
+	
+	# Spacer
+	var spacer = Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	transport.add_child(spacer)
 	
 	_status_label = Label.new()
 	_status_label.text = "Select a song..."
-	_status_label.add_theme_font_size_override("font_size", 14)
-	_status_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
-	_status_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_status_label.add_theme_font_size_override("font_size", 13)
+	_status_label.add_theme_color_override("font_color", Color(0.55, 0.57, 0.65))
 	transport.add_child(_status_label)
 	
 	# Visualizer
@@ -885,9 +933,10 @@ func _get_song_color(song_id: String) -> Color:
 
 
 func _get_song_button_color(song_id: String) -> Color:
-	"""Get button color for overview (slightly darker than list color)"""
+	"""Get button color for overview - modern muted tones"""
 	var base = _get_song_color(song_id)
-	return base.darkened(0.3)
+	# Desaturate slightly and darken for modern flat look
+	return base.darkened(0.4).lerp(Color(0.15, 0.15, 0.18), 0.3)
 
 
 func _load_songs_from_folder() -> Array:
@@ -1495,11 +1544,11 @@ func _populate_layer_controls(layer_names: Array):
 func _style_button_compact(btn: Button, color: Color):
 	var style = StyleBoxFlat.new()
 	style.bg_color = color
-	style.set_corner_radius_all(4)
-	style.content_margin_left = 10
-	style.content_margin_right = 10
-	style.content_margin_top = 6
-	style.content_margin_bottom = 6
+	style.set_corner_radius_all(6)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
 	btn.add_theme_stylebox_override("normal", style)
 	
 	var hover = style.duplicate()
@@ -1509,6 +1558,138 @@ func _style_button_compact(btn: Button, color: Color):
 	var pressed = style.duplicate()
 	pressed.bg_color = color.darkened(0.2)
 	btn.add_theme_stylebox_override("pressed", pressed)
+	
+	var focus = style.duplicate()
+	focus.bg_color = color.lightened(0.1)
+	focus.border_color = Color(0.4, 0.6, 1.0, 0.5)
+	focus.set_border_width_all(2)
+	btn.add_theme_stylebox_override("focus", focus)
+
+
+func _style_button_modern(btn: Button, color: Color):
+	"""Modern flat button with subtle glow on hover"""
+	var style = StyleBoxFlat.new()
+	style.bg_color = color
+	style.set_corner_radius_all(8)
+	style.content_margin_left = 16
+	style.content_margin_right = 16
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	style.shadow_color = Color(0, 0, 0, 0.3)
+	style.shadow_size = 2
+	style.shadow_offset = Vector2(0, 1)
+	btn.add_theme_stylebox_override("normal", style)
+	
+	var hover = style.duplicate()
+	hover.bg_color = color.lightened(0.12)
+	hover.shadow_size = 4
+	hover.shadow_color = Color(color.r, color.g, color.b, 0.3)
+	btn.add_theme_stylebox_override("hover", hover)
+	
+	var pressed = style.duplicate()
+	pressed.bg_color = color.darkened(0.15)
+	pressed.shadow_size = 1
+	btn.add_theme_stylebox_override("pressed", pressed)
+	
+	btn.add_theme_font_size_override("font_size", 13)
+	btn.add_theme_color_override("font_color", Color(0.95, 0.95, 0.98))
+	btn.add_theme_color_override("font_hover_color", Color(1, 1, 1))
+
+
+func _style_dropdown_modern(dropdown: OptionButton):
+	"""Modern styled dropdown/select"""
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0.15, 0.16, 0.2)
+	style.set_corner_radius_all(8)
+	style.content_margin_left = 14
+	style.content_margin_right = 30  # Room for arrow
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	style.border_color = Color(0.25, 0.27, 0.35)
+	style.set_border_width_all(1)
+	dropdown.add_theme_stylebox_override("normal", style)
+	
+	var hover = style.duplicate()
+	hover.bg_color = Color(0.18, 0.19, 0.24)
+	hover.border_color = Color(0.4, 0.5, 0.7)
+	dropdown.add_theme_stylebox_override("hover", hover)
+	
+	var pressed = style.duplicate()
+	pressed.bg_color = Color(0.2, 0.22, 0.28)
+	pressed.border_color = Color(0.5, 0.6, 0.8)
+	dropdown.add_theme_stylebox_override("pressed", pressed)
+	
+	var focus = style.duplicate()
+	focus.border_color = Color(0.4, 0.6, 1.0)
+	focus.set_border_width_all(2)
+	dropdown.add_theme_stylebox_override("focus", focus)
+	
+	dropdown.add_theme_font_size_override("font_size", 14)
+	dropdown.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
+	dropdown.add_theme_color_override("font_hover_color", Color(1, 1, 1))
+	dropdown.add_theme_color_override("font_focus_color", Color(1, 1, 1))
+	dropdown.add_theme_color_override("font_pressed_color", Color(1, 1, 1))
+	
+	# Arrow color
+	dropdown.add_theme_color_override("arrow_color", Color(0.6, 0.65, 0.75))
+
+
+func _style_dropdown_popup(dropdown: OptionButton):
+	"""Style the dropdown popup menu"""
+	var popup = dropdown.get_popup()
+	if popup == null:
+		return
+	
+	popup.transparent_bg = false
+	var popup_style = StyleBoxFlat.new()
+	popup_style.bg_color = Color(0.12, 0.13, 0.16)
+	popup_style.set_corner_radius_all(8)
+	popup_style.border_color = Color(0.25, 0.27, 0.35)
+	popup_style.set_border_width_all(1)
+	popup_style.shadow_color = Color(0, 0, 0, 0.4)
+	popup_style.shadow_size = 8
+	popup.add_theme_stylebox_override("panel", popup_style)
+	
+	popup.add_theme_color_override("font_color", Color(0.85, 0.87, 0.92))
+	popup.add_theme_color_override("font_hover_color", Color(1, 1, 1))
+	popup.add_theme_color_override("font_accelerator_color", Color(0.5, 0.5, 0.6))
+	
+	var hover_style = StyleBoxFlat.new()
+	hover_style.bg_color = Color(0.25, 0.35, 0.55)
+	hover_style.set_corner_radius_all(4)
+	popup.add_theme_stylebox_override("hover", hover_style)
+	
+	popup.add_theme_constant_override("v_separation", 6)
+	popup.add_theme_constant_override("h_separation", 8)
+
+
+func _style_tab_container(tabs: TabContainer):
+	"""Modern tab container styling"""
+	var panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(0.1, 0.1, 0.13)
+	panel_style.set_corner_radius_all(8)
+	panel_style.corner_radius_top_left = 0
+	panel_style.corner_radius_top_right = 0
+	tabs.add_theme_stylebox_override("panel", panel_style)
+	
+	tabs.add_theme_font_size_override("font_size", 14)
+	tabs.add_theme_color_override("font_selected_color", Color(0.95, 0.95, 0.98))
+	tabs.add_theme_color_override("font_unselected_color", Color(0.5, 0.52, 0.58))
+	tabs.add_theme_color_override("font_hovered_color", Color(0.75, 0.77, 0.82))
+
+
+func _style_panel_modern(panel: PanelContainer, bg_color: Color = Color(0.1, 0.1, 0.13)):
+	"""Modern panel with subtle border"""
+	var style = StyleBoxFlat.new()
+	style.bg_color = bg_color
+	style.set_corner_radius_all(10)
+	style.border_color = Color(0.18, 0.19, 0.24)
+	style.set_border_width_all(1)
+	style.content_margin_left = 16
+	style.content_margin_right = 16
+	style.content_margin_top = 12
+	style.content_margin_bottom = 12
+	panel.add_theme_stylebox_override("panel", style)
 
 
 # === SONG PLAYBACK ===
@@ -2912,6 +3093,7 @@ func _load_timeline_for_song(song_id: String, stream: AudioStream):
 		_section_dropdown.add_item(section["name"])
 	_section_dropdown.disabled = false
 	_section_dropdown.selected = 0
+	_style_dropdown_popup(_section_dropdown)
 
 
 func _get_layers_for_song(song_id: String) -> Dictionary:
@@ -3301,3 +3483,106 @@ func show_identity_breakdown(layer: String):
 func _on_identity_trait_clicked(trait_name: String):
 	"""Handle trait click from identity panel"""
 	_status_label.text = "🏷️ Trait: %s" % trait_name
+
+
+# === SUBSET SELECTOR ===
+
+func _load_subsets():
+	"""Load all subsets from the grid_editor/subsets folder"""
+	_loaded_subsets.clear()
+	_subset_dropdown.clear()
+	
+	var subsets_path = "res://tools/grid_editor/subsets"
+	var dir = DirAccess.open(subsets_path)
+	if dir == null:
+		print("Could not open subsets folder: ", subsets_path)
+		_subset_dropdown.add_item("(no subsets)", 0)
+		return
+	
+	var idx = 0
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var subset = _load_subset_file(subsets_path + "/" + file_name)
+			if subset and subset.has("id"):
+				_loaded_subsets[subset.id] = subset
+				var display_name = subset.get("name", subset.id)
+				_subset_dropdown.add_item(display_name, idx)
+				_subset_dropdown.set_item_metadata(idx, subset.id)
+				idx += 1
+				print("Loaded subset: ", subset.id, " - ", display_name)
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+	
+	if _loaded_subsets.is_empty():
+		_subset_dropdown.add_item("(no subsets found)", 0)
+	else:
+		# Select first subset by default
+		_subset_dropdown.selected = 0
+		var first_id = _subset_dropdown.get_item_metadata(0)
+		_set_current_subset(first_id)
+	
+	# Style the popup after items are added
+	_style_dropdown_popup(_subset_dropdown)
+
+
+func _load_subset_file(path: String) -> Dictionary:
+	"""Load a single subset JSON file"""
+	if not FileAccess.file_exists(path):
+		push_error("Subset file not found: ", path)
+		return {}
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_error("Failed to open subset: ", path)
+		return {}
+	
+	var json = JSON.new()
+	var error = json.parse(file.get_as_text())
+	file.close()
+	
+	if error != OK:
+		push_error("Failed to parse subset: ", path, " - ", json.get_error_message())
+		return {}
+	
+	return json.data
+
+
+func _on_subset_selected(index: int):
+	"""Handle subset dropdown selection"""
+	var subset_id = _subset_dropdown.get_item_metadata(index)
+	if subset_id and subset_id is String:
+		_set_current_subset(subset_id)
+
+
+func _set_current_subset(subset_id: String):
+	"""Set the current active subset"""
+	if not _loaded_subsets.has(subset_id):
+		return
+	
+	_current_subset_id = subset_id
+	var subset_data = _loaded_subsets[subset_id]
+	
+	_status_label.text = "📦 Subset: %s" % subset_data.get("name", subset_id)
+	print("Selected subset: ", subset_id)
+	
+	# Emit signal for other components to react
+	subset_changed.emit(subset_id, subset_data)
+
+
+func get_current_subset() -> Dictionary:
+	"""Get the currently selected subset data"""
+	return _loaded_subsets.get(_current_subset_id, {})
+
+
+func get_current_subset_id() -> String:
+	"""Get the currently selected subset ID"""
+	return _current_subset_id
+
+
+func get_subset(subset_id: String) -> Dictionary:
+	"""Get a specific subset by ID"""
+	return _loaded_subsets.get(subset_id, {})

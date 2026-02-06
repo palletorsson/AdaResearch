@@ -1,0 +1,157 @@
+{
+  "id": "audio_rack",
+  "name": "Audio Rack",
+  "version": "1.0",
+  "description": "Audio synthesis elements for SongDevTools",
+  "orientation": {
+    "plane": "XY",
+    "up_axis": "Y",
+    "forward": "+Z",
+    "grid_size": 0.08,
+    "comment": "Each grid cell = 8cm. Wall-mounted rack, X=left/right, Y=up/down, Z=depth."
+  },
+  "categories": [
+    {"id": "sources", "name": "Sound Sources", "color": "#4CAF50"},
+    {"id": "filters", "name": "Filters", "color": "#2196F3"},
+    {"id": "effects", "name": "Effects", "color": "#FF9800"},
+    {"id": "modulators", "name": "Modulators", "color": "#9C27B0"},
+    {"id": "outputs", "name": "Outputs", "color": "#F44336"}
+  ],
+  "elements": [
+    {
+      "id": "osc_sine",
+      "name": "Sine Oscillator",
+      "category": "sources",
+      "size": [1, 1],
+      "icon": "∿",
+      "description": "Pure sine wave oscillator",
+      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+    },
+    {
+      "id": "osc_saw",
+      "name": "Saw Oscillator",
+      "category": "sources",
+      "size": [1, 1],
+      "icon": "⩘",
+      "description": "Sawtooth wave oscillator",
+      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+    },
+    {
+      "id": "osc_square",
+      "name": "Square Oscillator",
+      "category": "sources",
+      "size": [1, 1],
+      "icon": "⊓",
+      "description": "Square wave oscillator with PWM",
+      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+    },
+    {
+      "id": "noise",
+      "name": "Noise Generator",
+      "category": "sources",
+      "size": [1, 1],
+      "icon": "⌇",
+      "description": "White/pink noise source",
+      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+    },
+    {
+      "id": "filter_lp",
+      "name": "Low-Pass Filter",
+      "category": "filters",
+      "size": [2, 2],
+      "icon": "▼",
+      "description": "Resonant low-pass filter",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "scene_scale": [0.4, 0.4, 0.4]
+    },
+    {
+      "id": "filter_hp",
+      "name": "High-Pass Filter",
+      "category": "filters",
+      "size": [2, 2],
+      "icon": "▲",
+      "description": "Resonant high-pass filter",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "scene_scale": [0.4, 0.4, 0.4]
+    },
+    {
+      "id": "filter_bp",
+      "name": "Band-Pass Filter",
+      "category": "filters",
+      "size": [2, 2],
+      "icon": "◆",
+      "description": "Band-pass filter",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "scene_scale": [0.4, 0.4, 0.4]
+    },
+    {
+      "id": "vca",
+      "name": "VCA",
+      "category": "effects",
+      "size": [1, 2],
+      "icon": "▷",
+      "description": "Voltage controlled amplifier",
+      "scene": "res://commons/audio/interfaces/VRAudioControlSlider.tscn"
+    },
+    {
+      "id": "delay",
+      "name": "Delay",
+      "category": "effects",
+      "size": [3, 2],
+      "icon": "◐",
+      "description": "Delay/echo effect",
+      "scene": "res://commons/audio/interfaces/VRWaveformDisplay.tscn",
+      "scene_scale": [0.5, 0.5, 0.5]
+    },
+    {
+      "id": "reverb",
+      "name": "Reverb",
+      "category": "effects",
+      "size": [3, 2],
+      "icon": "◎",
+      "description": "Reverb effect",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "scene_scale": [0.5, 0.5, 0.5]
+    },
+    {
+      "id": "env_adsr",
+      "name": "ADSR Envelope",
+      "category": "modulators",
+      "size": [2, 2],
+      "icon": "╱╲",
+      "description": "Attack-Decay-Sustain-Release envelope",
+      "scene": "res://commons/audio/interfaces/VRWaveformDisplay.tscn",
+      "scene_scale": [0.4, 0.4, 0.4]
+    },
+    {
+      "id": "lfo",
+      "name": "LFO",
+      "category": "modulators",
+      "size": [2, 1],
+      "icon": "〜",
+      "description": "Low frequency oscillator",
+      "scene": "res://commons/audio/interfaces/VRSimpleWaveform.tscn",
+      "scene_scale": [0.5, 0.5, 0.5]
+    },
+    {
+      "id": "mixer",
+      "name": "Mixer",
+      "category": "outputs",
+      "size": [2, 3],
+      "icon": "☰",
+      "description": "4-channel mixer",
+      "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+      "scene_scale": [0.6, 0.6, 0.6]
+    },
+    {
+      "id": "output",
+      "name": "Output",
+      "category": "outputs",
+      "size": [2, 2],
+      "icon": "◉",
+      "description": "Audio output",
+      "scene": "res://commons/audio/interfaces/VRLissajousDisplay.tscn",
+      "scene_scale": [0.5, 0.5, 0.5]
+    }
+  ]
+}

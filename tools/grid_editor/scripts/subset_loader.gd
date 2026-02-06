@@ -13,23 +13,30 @@ var current_subset: Dictionary:
 		return subsets.get(current_subset_id, {})
 
 func _ready() -> void:
-	load_all_subsets()
+	# Defer loading to ensure parent (EditorMain) has connected signals first
+	call_deferred("load_all_subsets")
+
+## Explicit list of subset files (directory listing fails in exported builds)
+const SUBSET_FILES: Array[String] = [
+	"res://tools/grid_editor/subsets/audio_rack.json",
+	"res://tools/grid_editor/subsets/big_pipes.json",
+	"res://tools/grid_editor/subsets/glass_rack.json",
+]
 
 func load_all_subsets() -> void:
 	subsets.clear()
 	
-	var dir = DirAccess.open("res://tools/grid_editor/subsets")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if file_name.ends_with(".json"):
-				var subset = _load_subset_file("res://tools/grid_editor/subsets/" + file_name)
-				if subset and subset.has("id"):
-					subsets[subset.id] = subset
-					print("Loaded subset: ", subset.id)
-			file_name = dir.get_next()
+	# Load explicitly listed subset files (DirAccess.list_dir fails on res:// in exports)
+	for path in SUBSET_FILES:
+		if ResourceLoader.exists(path) or FileAccess.file_exists(path):
+			var subset = _load_subset_file(path)
+			if subset and subset.has("id"):
+				subsets[subset.id] = subset
+				print("Loaded subset: ", subset.id)
+		else:
+			push_warning("Subset file not found: ", path)
 	
+	print("SubsetLoader: Loaded %d subsets" % subsets.size())
 	subsets_loaded.emit()
 	
 	# Set default subset
@@ -37,14 +44,29 @@ func load_all_subsets() -> void:
 		set_current_subset(subsets.keys()[0])
 
 func _load_subset_file(path: String) -> Dictionary:
-	if not FileAccess.file_exists(path):
-		push_error("Subset file not found: ", path)
+	# Try FileAccess first (works for both res:// in editor and user:// always)
+	var content: String = ""
+	
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ)
+		if file:
+			content = file.get_as_text()
+			file.close()
+	
+	# If FileAccess failed on res://, try loading as JSON resource
+	if content.is_empty() and path.begins_with("res://"):
+		# Godot 4: load JSON as text resource
+		if ResourceLoader.exists(path):
+			var res = load(path)
+			if res is JSON:
+				return res.data
+	
+	if content.is_empty():
+		push_error("Subset file not found or empty: ", path)
 		return {}
 	
-	var file = FileAccess.open(path, FileAccess.READ)
 	var json = JSON.new()
-	var error = json.parse(file.get_as_text())
-	file.close()
+	var error = json.parse(content)
 	
 	if error != OK:
 		push_error("Failed to parse subset: ", path, " - ", json.get_error_message())

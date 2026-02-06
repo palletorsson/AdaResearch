@@ -1,6 +1,7 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const DRAG_COEFFICIENT := 0.8
+const CatapultGadgetScript = preload("res://algorithms/vectors/shared/gadgets/catapult_gadget.gd")
 
 var ball: RigidBody3D
 var gravity_vector: Node3D
@@ -8,6 +9,7 @@ var thrust_vector: Node3D
 var drag_vector: Node3D
 var info_label: Label3D
 var accumulator := 0.0
+var catapult_gadget: Node3D
 
 # Cached nodes
 var _cached_gravity_nodes: Dictionary = {}
@@ -16,16 +18,24 @@ var _cached_drag_nodes: Dictionary = {}
 
 func _ready():
 	super._ready()
+	# Half-size for exhibition display
+	scale = Vector3(0.5, 0.5, 0.5)
+
 	create_axes(1.5)
 	_create_ground()
 	ball = create_ball(Vector3(0.0, 1.2, 0.0), 0.22, 1.2, Color(0.9, 0.5, 1.0, 1.0))
-	
+
 	# Spawn vectors with Logical values. Base class handles SCENE_SCALE for position/visuals.
 	gravity_vector = spawn_vector(Vector3.ZERO, Vector3(0.0, -6.0, 0.0), Color(0.4, 0.8, 1.0, 1.0), "Gravity")
 	thrust_vector = spawn_vector(Vector3.ZERO, Vector3(2.5, 0.0, 0.0), Color(1.0, 0.6, 0.4, 1.0), "Thrust")
 	drag_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.6, 0.7, 1.0, 0.7), "Drag", false)
-	
-	info_label = create_info_panel("Forces", Vector3(0.5, 1.2, 0.0))
+
+	info_label = create_info_panel("Vector Forces", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "F_net = sum(F_i)", "Net force from thrust, gravity, drag")
+
+	# Catapult gadget
+	catapult_gadget = CatapultGadgetScript.new()
+	catapult_gadget.position = Vector3(-0.6, 0, 0)
+	add_child(catapult_gadget)
 
 	# Cache nodes
 	_cache_vector_nodes(gravity_vector, _cached_gravity_nodes)
@@ -63,7 +73,11 @@ func _physics_process(delta):
 	
 	# Apply SCALED force to physics body so simulation matches visual scale
 	ball.apply_central_force(net_force_logical * SCENE_SCALE)
-	
+
+	# Update catapult gadget
+	if catapult_gadget:
+		catapult_gadget.update_from_vectors(thrust_force_logical, gravity_force_logical)
+
 	accumulator += delta
 	if accumulator > 0.1:
 		_update_info(gravity_force_logical, thrust_force_logical, drag_force_logical, net_force_logical, velocity_logical)

@@ -13,14 +13,14 @@ var data_component: GridDataComponent
 var wall_height: float = 2.0  # Wall height in meters
 var wall_width: float = -1.0  # Coverage width in meters (-1 = auto from grid)
 var wall_depth: float = -1.0  # Coverage depth in meters (-1 = auto from grid)
-var wall_offset_x: float = 0.0  # X offset for wall placement
-var wall_offset_z: float = 0.0  # Z offset for wall placement
+var wall_offset_x: float = -0.5  # X offset for wall placement
+var wall_offset_z: float = -0.5  # Z offset for wall placement
 var wall_thickness: float = 0.05  # Wall panel thickness
 var cube_size: float = 1.0
 var gutter: float = 0.0
 
 # Shader configuration
-var shader_path: String = "res://commons/resourses/shaders/SimpleGrid.gdshader"
+var shader_path: String = "res://commons/resourses/shaders/WallGrid.gdshader"
 var model_color: Color = Color(0.15, 0.15, 0.15, 1.0)
 var wireframe_color: Color = Color(0.6, 0.6, 0.6, 1.0)
 var emission_color: Color = Color(0.4, 0.4, 0.5, 1.0)
@@ -144,33 +144,42 @@ func generate_walls(wall_config: Dictionary = {}):
 	print("GridWallComponent: Walls complete - %d walls" % wall_count)
 	wall_generation_complete.emit(wall_count)
 
-# Create a single wall panel mesh with shader material
-func _create_wall_panel(panel_width: float, panel_height: float) -> MeshInstance3D:
-	var wall = MeshInstance3D.new()
-	var mesh = BoxMesh.new()
-	mesh.size = Vector3(panel_width, panel_height, wall_thickness)
+# Create a single wall panel using PlaneMesh with UV-based grid shader
+func _create_wall_panel(panel_width: float, panel_height: float) -> Node3D:
+	var wall_root = Node3D.new()
 
-	# Subdivide for better wireframe detail from shader
-	var subdiv_x = int(panel_width / 0.5)
-	var subdiv_y = int(panel_height / 0.5)
-	mesh.subdivide_width = max(subdiv_x, 1)
-	mesh.subdivide_height = max(subdiv_y, 1)
-	mesh.subdivide_depth = 0
+	# PlaneMesh is horizontal by default (XZ plane), so we rotate it to be vertical
+	var wall_mesh_node = MeshInstance3D.new()
+	wall_mesh_node.name = "WallMesh"
+	var mesh = PlaneMesh.new()
+	mesh.size = Vector2(panel_width, panel_height)
 
-	wall.mesh = mesh
-	wall.material_override = wall_material
+	wall_mesh_node.mesh = mesh
+
+	# Each wall gets its own material — 1 grid cell per meter
+	var mat = wall_material.duplicate() as ShaderMaterial
+	var cells_x = panel_width
+	var cells_y = panel_height
+	mat.set_shader_parameter("grid_cells_x", cells_x)
+	mat.set_shader_parameter("grid_cells_y", cells_y)
+	wall_mesh_node.material_override = mat
+
+	# Rotate plane from horizontal (XZ) to vertical (XY), facing +Z
+	wall_mesh_node.rotation_degrees = Vector3(90, 0, 0)
+
+	wall_root.add_child(wall_mesh_node)
 
 	# Add static body for collision
 	var static_body = StaticBody3D.new()
 	static_body.name = "WallCollision"
 	var collision = CollisionShape3D.new()
 	var shape = BoxShape3D.new()
-	shape.size = mesh.size
+	shape.size = Vector3(panel_width, panel_height, wall_thickness)
 	collision.shape = shape
 	static_body.add_child(collision)
-	wall.add_child(static_body)
+	wall_root.add_child(static_body)
 
-	return wall
+	return wall_root
 
 # Setup shader material for walls
 func _setup_wall_material():
@@ -289,6 +298,17 @@ func _parse_wall_config(config: Dictionary):
 	# Shader overrides
 	if config.has("shader"):
 		shader_path = config.get("shader")
+
+	# Simple color shorthand — sets wireframe and emission from one value
+	if config.has("color"):
+		var c = config.get("color")
+		if c is Array and c.size() >= 3:
+			var base = Color(c[0], c[1], c[2], c[3] if c.size() > 3 else 1.0)
+			wireframe_color = base
+			emission_color = base * 0.7
+			model_color = base * 0.15
+
+	# Fine-grained color overrides (override "color" shorthand if both present)
 	if config.has("model_color"):
 		var c = config.get("model_color")
 		if c is Array and c.size() >= 3:
