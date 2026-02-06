@@ -12,14 +12,24 @@ const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_po
 @export var spacing: float = 8.0  # Space between pendulums
 @export var pendulum_scale: float = 1.0  # Full size pendulums
 @export var canvas_scale: float = 1.6  # Canvas size
+@export var use_uniform_swing: bool = false
+@export var enable_middle_interaction: bool = false
 
 # Initial angles
 @export var base_theta1: float = 90.0
 @export var base_theta2: float = 90.0
 @export var angle_variation: float = 5.0
 
-# Middle pendulum damping (so it slows down)
-@export var middle_damping: float = 0.002
+# Uniform damping (kept name for compatibility with existing scenes)
+@export var middle_damping: float = 0.0
+
+# Frame + paint color cycle
+@export var frame_thickness: float = 0.08
+@export var frame_depth: float = 0.05
+@export var frame_color: Color = Color(0.12, 0.12, 0.14)
+@export var paint_cycle_speed: float = 0.12
+@export var paint_cycle_saturation: float = 0.75
+@export var paint_cycle_value: float = 0.95
 
 var pendulums: Array[Node3D] = []
 var middle_index: int = 1  # Index of middle pendulum
@@ -29,10 +39,13 @@ var _is_grabbed: bool = false
 var _grab_velocity_samples: Array[Vector3] = []
 var _last_bob_position: Vector3 = Vector3.ZERO
 var _grabbable_bob: Node3D = null
+var _paint_surfaces: Array[Node] = []
+var _paint_time: float = 0.0
 
 func _ready():
 	_spawn_pendulums()
-	_setup_middle_grabbable()
+	if enable_middle_interaction:
+		_setup_middle_grabbable()
 	_setup_camera()
 	_setup_environment()
 	_create_title()
@@ -45,9 +58,12 @@ func _spawn_pendulums():
 		var pendulum = DoublePendulumScene.instantiate()
 		pendulum.name = "Pendulum_%d" % i
 		
-		# Vary initial angles
-		var theta1_offset = (i - 1) * angle_variation
-		var theta2_offset = (i - 1) * -angle_variation * 0.5
+		# Uniform swing across all pendulums (optional variation)
+		var theta1_offset = 0.0
+		var theta2_offset = 0.0
+		if not use_uniform_swing:
+			theta1_offset = (i - middle_index) * angle_variation
+			theta2_offset = (i - middle_index) * -angle_variation * 0.5
 		pendulum.theta1_start = base_theta1 + theta1_offset
 		pendulum.theta2_start = base_theta2 + theta2_offset
 		
@@ -65,10 +81,11 @@ func _spawn_pendulums():
 			canvas.scale = Vector3.ONE * canvas_scale
 			canvas.position.y -= 0.2  # Lower it
 			canvas.position.z = -1.5  # Behind the pendulum
+			_register_canvas_surface(canvas)
+			_add_canvas_frame(canvas)
 		
-		# Middle pendulum gets damping
-		if i == middle_index:
-			pendulum.damping = middle_damping
+		# Uniform damping for all pendulums
+		pendulum.damping = middle_damping
 		
 		add_child(pendulum)
 		pendulums.append(pendulum)
@@ -92,6 +109,8 @@ func _disable_camera(pendulum: Node3D):
 
 func _setup_middle_grabbable():
 	"""Add a grabbable sphere overlaying the middle pendulum's Bob2"""
+	if not enable_middle_interaction:
+		return
 	if middle_index >= pendulums.size():
 		return
 	
@@ -150,8 +169,11 @@ func _setup_camera():
 	var camera = Camera3D.new()
 	camera.name = "Camera3D"
 	var view_distance = num_pendulums * spacing * 0.7
-	camera.position = Vector3(0, 2.0, view_distance)
-	camera.look_at(Vector3(0, 1.5, 0))
+	var cam_pos = Vector3(0, 2.0, view_distance)
+	var look_target = Vector3(0, 1.5, 0)
+	camera.position = cam_pos
+	# Use look_at_from_position since node isn't in tree yet
+	camera.look_at_from_position(cam_pos, look_target)
 	add_child(camera)
 
 func _setup_environment():
@@ -200,6 +222,8 @@ func _create_title():
 # =============================================================================
 
 func _on_bob_picked_up(_pickable):
+	if not enable_middle_interaction:
+		return
 	_is_grabbed = true
 	_grab_velocity_samples.clear()
 	if _grabbable_bob:
@@ -215,6 +239,8 @@ func _on_bob_picked_up(_pickable):
 		label.text = "SWING IT!"
 
 func _on_bob_dropped(_pickable):
+	if not enable_middle_interaction:
+		return
 	_is_grabbed = false
 	
 	if middle_index >= pendulums.size():
@@ -253,6 +279,8 @@ func _on_bob_dropped(_pickable):
 		label.text = "GRAB & SWING"
 
 func _physics_process(delta):
+	if not enable_middle_interaction:
+		return
 	if not _is_grabbed or middle_index >= pendulums.size():
 		return
 	
@@ -292,7 +320,10 @@ func _physics_process(delta):
 	middle.omega2 = 0.0
 
 func _process(_delta):
+	_update_paint_colors(_delta)
 	# Override middle pendulum physics when grabbed
+	if not enable_middle_interaction:
+		return
 	if _is_grabbed and middle_index < pendulums.size():
 		var middle = pendulums[middle_index]
 		# Force visual update from our angles
@@ -313,10 +344,92 @@ func get_pendulum(index: int) -> Node3D:
 func reset_all():
 	for i in range(pendulums.size()):
 		var p = pendulums[i]
-		var theta1_offset = (i - 1) * angle_variation
-		var theta2_offset = (i - 1) * -angle_variation * 0.5
+		var theta1_offset = 0.0
+		var theta2_offset = 0.0
+		if not use_uniform_swing:
+			theta1_offset = (i - middle_index) * angle_variation
+			theta2_offset = (i - middle_index) * -angle_variation * 0.5
 		p.theta1 = deg_to_rad(base_theta1 + theta1_offset)
 		p.theta2 = deg_to_rad(base_theta2 + theta2_offset)
 		p.omega1 = 0.0
 		p.omega2 = 0.0
 		p.trail_points.clear()
+
+func _register_canvas_surface(canvas: Node3D) -> void:
+	var surface = canvas.get_node_or_null("CanvasBody/CanvasSurface")
+	if surface:
+		_paint_surfaces.append(surface)
+
+func _add_canvas_frame(canvas: Node3D) -> void:
+	var body = canvas.get_node_or_null("CanvasBody")
+	if not body:
+		return
+	if body.get_node_or_null("CanvasFrame"):
+		return
+	var surface = body.get_node_or_null("CanvasSurface")
+	var plane_size = Vector2(2.0, 2.0)
+	if surface and surface is MeshInstance3D:
+		var mesh = (surface as MeshInstance3D).mesh
+		if mesh and mesh is PlaneMesh:
+			plane_size = (mesh as PlaneMesh).size
+
+	var half_x = plane_size.x * 0.5
+	var half_z = plane_size.y * 0.5
+	var depth = frame_depth
+	var thickness = frame_thickness
+
+	var frame = Node3D.new()
+	frame.name = "CanvasFrame"
+	frame.position.y = depth * 0.5
+	body.add_child(frame)
+
+	# Top
+	frame.add_child(_make_frame_piece(
+		Vector3(plane_size.x + thickness * 2.0, depth, thickness),
+		Vector3(0, 0, half_z + thickness * 0.5)
+	))
+	# Bottom
+	frame.add_child(_make_frame_piece(
+		Vector3(plane_size.x + thickness * 2.0, depth, thickness),
+		Vector3(0, 0, -half_z - thickness * 0.5)
+	))
+	# Left
+	frame.add_child(_make_frame_piece(
+		Vector3(thickness, depth, plane_size.y + thickness * 2.0),
+		Vector3(-half_x - thickness * 0.5, 0, 0)
+	))
+	# Right
+	frame.add_child(_make_frame_piece(
+		Vector3(thickness, depth, plane_size.y + thickness * 2.0),
+		Vector3(half_x + thickness * 0.5, 0, 0)
+	))
+
+func _make_frame_piece(size: Vector3, position: Vector3) -> MeshInstance3D:
+	var mesh = BoxMesh.new()
+	mesh.size = size
+	var piece = MeshInstance3D.new()
+	piece.mesh = mesh
+	piece.position = position
+	var material = StandardMaterial3D.new()
+	material.albedo_color = frame_color
+	material.metallic = 0.05
+	material.roughness = 0.7
+	piece.material_override = material
+	return piece
+
+func _update_paint_colors(delta: float) -> void:
+	if _paint_surfaces.is_empty():
+		return
+	_paint_time = fmod(_paint_time + delta * paint_cycle_speed, 1.0)
+	var tint = Color.from_hsv(_paint_time, paint_cycle_saturation, paint_cycle_value)
+	for surface in _paint_surfaces:
+		if surface and surface is MeshInstance3D:
+			var mesh_surface: MeshInstance3D = surface
+			var material = mesh_surface.material_override
+			if material == null:
+				material = mesh_surface.get_active_material(0)
+			if material == null:
+				material = StandardMaterial3D.new()
+				mesh_surface.material_override = material
+			if material is StandardMaterial3D:
+				(material as StandardMaterial3D).albedo_color = tint

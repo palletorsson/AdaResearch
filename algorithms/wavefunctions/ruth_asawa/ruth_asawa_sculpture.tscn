@@ -33,3 +33,23 @@ audio_reactive = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6)
+
+[node name="CoreLights" type="Node3D" parent="."]
+
+[node name="CoreLightTop" type="OmniLight3D" parent="CoreLights"]
+position = Vector3(0, 3, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 2.0
+omni_range = 4.0
+
+[node name="CoreLightMid" type="OmniLight3D" parent="CoreLights"]
+position = Vector3(0, 0, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 2.0
+omni_range = 4.0
+
+[node name="CoreLightBottom" type="OmniLight3D" parent="CoreLights"]
+position = Vector3(0, -3, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 2.0
+omni_range = 4.0

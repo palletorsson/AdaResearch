@@ -233,6 +233,7 @@ func _string_to_sound_type(type_str: String) -> int:
 		"retro_jump": AudioSynthesizer.SoundType.RETRO_JUMP,
 		"shield_hit": AudioSynthesizer.SoundType.SHIELD_HIT,
 		"ambient_wind": AudioSynthesizer.SoundType.AMBIENT_WIND,
+		"artifact_reveal_shimmer": AudioSynthesizer.SoundType.ARTIFACT_REVEAL_SHIMMER,
 		# Drum machines
 		"dark_808_kick": AudioSynthesizer.SoundType.DARK_808_KICK,
 		"acid_606_hihat": AudioSynthesizer.SoundType.ACID_606_HIHAT,

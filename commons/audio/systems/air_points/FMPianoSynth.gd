@@ -71,6 +71,10 @@ func _generate_and_cache(key: String, f: float, v: float, s: float):
 	# HEAVY MATH HAPPENING HERE (InBackground)
 	var new_stream = FMPianoGenerator.generate_note(f, v, s)
 	
+	# Guard: node may have been freed while thread was running
+	if not is_instance_valid(self) or _cache_mutex == null:
+		return
+	
 	_cache_mutex.lock()
 	_sample_cache[key] = new_stream
 	_cache_mutex.unlock()

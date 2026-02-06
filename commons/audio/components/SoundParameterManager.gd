@@ -25,7 +25,8 @@ static var sound_type_files = {
 	"explosion": "explosion.json",
 	"retro_jump": "retro_jump.json",
 	"shield_hit": "shield_hit.json",
-	"ambient_wind": "ambient_wind.json"
+	"ambient_wind": "ambient_wind.json",
+	"artifact_reveal_shimmer": "artifact_reveal_shimmer.json"
 }
 
 # Default parameters as fallback
@@ -89,6 +90,21 @@ static var default_parameters = {
 		"harmonic3_amp": {"value": 0.2, "min": 0.0, "max": 1.0, "step": 0.01},
 		"harmonic4_amp": {"value": 0.1, "min": 0.0, "max": 1.0, "step": 0.01},
 		"overall_amplitude": {"value": 0.2, "min": 0.0, "max": 1.0, "step": 0.01}
+	},
+	"artifact_reveal_shimmer": {
+		"duration": {"value": 1.2, "min": 0.4, "max": 5.0, "step": 0.1},
+		"base_freq": {"value": 880.0, "min": 300.0, "max": 2000.0, "step": 5.0},
+		"partial_count": {"value": 5, "min": 1, "max": 10, "step": 1},
+		"spread_cents": {"value": 12.0, "min": 0.0, "max": 50.0, "step": 1.0},
+		"shimmer_rate": {"value": 5.0, "min": 0.5, "max": 12.0, "step": 0.1},
+		"shimmer_depth": {"value": 0.4, "min": 0.0, "max": 1.0, "step": 0.01},
+		"noise_amount": {"value": 0.06, "min": 0.0, "max": 0.3, "step": 0.01},
+		"attack": {"value": 0.02, "min": 0.005, "max": 0.2, "step": 0.005},
+		"decay": {"value": 0.25, "min": 0.05, "max": 1.5, "step": 0.05},
+		"sustain": {"value": 0.4, "min": 0.0, "max": 1.0, "step": 0.01},
+		"release": {"value": 0.6, "min": 0.1, "max": 2.5, "step": 0.05},
+		"pitch_rise": {"value": 3.0, "min": 0.0, "max": 12.0, "step": 0.5},
+		"amplitude": {"value": 0.35, "min": 0.0, "max": 1.0, "step": 0.01}
 	}
 }
 
@@ -286,7 +302,8 @@ static func _get_sound_description(sound_key: String) -> String:
 		"explosion": "Multi-layered explosion with low/mid/high frequency components",
 		"retro_jump": "8-bit style jump sound with duty cycle modulation",
 		"shield_hit": "Impact sound with metallic ring characteristics",
-		"ambient_wind": "Natural wind ambience with filtered noise"
+		"ambient_wind": "Natural wind ambience with filtered noise",
+		"artifact_reveal_shimmer": "Shimmering reveal cue for artifact discoveries"
 	}
 	return descriptions.get(sound_key, "Custom sound parameters")
 

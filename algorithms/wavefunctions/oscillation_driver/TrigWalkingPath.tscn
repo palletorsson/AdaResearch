@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://trig_walking_path_demo"]
+[gd_scene load_steps=5 format=3 uid="uid://dt3etdebb4l2w"]
 
-[ext_resource type="Script" path="res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd" id="1"]
+[ext_resource type="Script" uid="uid://cel6cpsjxa1n" path="res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd" id="1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="1"]
 sky_top_color = Color(0.1, 0.1, 0.2, 1)
@@ -21,24 +21,23 @@ tonemap_mode = 2
 [node name="TrigWalkingPath" type="Node3D"]
 script = ExtResource("1")
 path_length = 100
+escalator_mode = true
 
 [node name="SinePath" type="Node3D" parent="."]
 
 [node name="Label3D" type="Label3D" parent="SinePath"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 0)
 billboard = 1
-text = "Sine Path"
-font_size = 32
 modulate = Color(1, 0.3, 0.3, 1)
+text = "Sine Path"
 
 [node name="CosinePath" type="Node3D" parent="."]
 
 [node name="Label3D" type="Label3D" parent="CosinePath"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0)
 billboard = 1
-text = "Cosine Path"
-font_size = 32
 modulate = Color(0.3, 0.5, 1, 1)
+text = "Cosine Path"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 5, 8)
@@ -53,4 +52,3 @@ environment = SubResource("3")
 [node name="FloorReference" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -40)
 size = Vector3(10, 0.1, 100)
-material_override = null

@@ -7,6 +7,13 @@
 			"scene": "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.tscn",
 			"category": "waves"
 		},
+		"foucault_pendulum": {
+			"name": "Foucault Pendulum",
+			"lookup_name": "foucault_pendulum",
+			"description": "A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault's elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.",
+			"scene": "res://commons/artifacts/foucault_pendulum/foucault_pendulum.tscn",
+			"category": "waves"
+		},
 		"VitruvianMan": {
 			"name": "Vitruvian Man",
 			"lookup_name": "VitruvianMan",
@@ -105,6 +112,13 @@
 			"lookup_name": "StaticCables",
 			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
 			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
+			"category": "waves"
+		},
+		"pylon_cables": {
+			"name": "Electric Pylon Cables",
+			"lookup_name": "pylon_cables",
+			"description": "Four electric pylons with swinging cables between them. Cables sway in the wind. Final cable drops to a transformer box on the ground. Lattice tower construction with insulators.",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/pylon_cables.tscn",
 			"category": "waves"
 		},
 		"doublehelix": {

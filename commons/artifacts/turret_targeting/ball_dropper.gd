@@ -188,7 +188,8 @@ func _show_ball(ball: Node3D) -> void:
 	ball.visible = true
 	var rb = ball.get_node_or_null("RigidBody3D")
 	if rb:
-		rb.freeze = false
+		# Unfreeze deferred so position change takes effect first
+		rb.set_deferred("freeze", false)
 
 func _set_next_interval() -> void:
 	"""Randomize next drop interval"""
@@ -223,6 +224,8 @@ func drop_ball() -> Node3D:
 		# All balls in use, recycle oldest active
 		if active_balls.size() > 0:
 			ball = active_balls.pop_front()
+			# Must freeze before repositioning - active RigidBody ignores position changes
+			_hide_ball(ball)
 	
 	if ball == null:
 		return null
@@ -241,9 +244,16 @@ func drop_ball() -> Node3D:
 	var spawn_pos = global_position + Vector3(0, drop_height - 0.2, 0)
 	spawn_pos.x += randf_range(-spawn_spread, spawn_spread)
 	spawn_pos.z += randf_range(-spawn_spread, spawn_spread)
-	ball.global_position = spawn_pos
 	
-	# Reset and show
+	# Set position on both root and RigidBody to ensure physics sync
+	ball.global_position = spawn_pos
+	var rb = ball.get_node_or_null("RigidBody3D")
+	if rb:
+		rb.global_position = spawn_pos
+		rb.linear_velocity = Vector3.ZERO
+		rb.angular_velocity = Vector3.ZERO
+	
+	# Show and enable physics
 	_show_ball(ball)
 	active_balls.append(ball)
 	
@@ -309,3 +319,18 @@ func force_drop() -> void:
 var balls: Array[Node3D]:
 	get:
 		return active_balls
+
+# Static method to apply damage to a ball (call from turret)
+static func apply_damage_to_ball(ball: Node3D, damage: float) -> bool:
+	"""Apply damage to a ball, returns true if ball was destroyed"""
+	if not is_instance_valid(ball):
+		return false
+	
+	if not ball.has_meta("health"):
+		ball.set_meta("health", 80.0)
+		ball.set_meta("max_health", 80.0)
+	
+	var health = ball.get_meta("health") - damage
+	ball.set_meta("health", health)
+	
+	return health <= 0

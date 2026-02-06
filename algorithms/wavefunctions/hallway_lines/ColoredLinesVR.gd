@@ -15,6 +15,9 @@ extends Node3D
 @export var span_frequency: float = 1.5
 @export var line_radius: float = 0.3  # Thicker tubes
 @export var ring_segments: int = 16  # More segments for smoother tubes
+@export var arch_mode: bool = false  # True = arches from floor, False = wall-to-wall
+@export var arch_base_height: float = 0.5  # How high arch starts from floor
+@export var arch_peak_height: float = 6.0  # Maximum height of arch
 
 var line_meshes: Array[MeshInstance3D] = []
 var line_materials: Array[ShaderMaterial] = []
@@ -114,34 +117,8 @@ func _setup_environment() -> void:
 		camera.environment = env
 
 func _create_hallway_box() -> void:
-	
-
-
-
-	var ceiling := MeshInstance3D.new()
-	ceiling.name = "Ceiling"
-
-	ceiling.position = Vector3(0.0, hallway_height + FLOOR_OFFSET_Y, 0.0)
-	ceiling.material_override = _make_metal(Color(0.12, 0.12, 0.18))
-	add_child(ceiling)
-
-	var wall_mesh := BoxMesh.new()
-	wall_mesh.size = Vector3(0.2, hallway_height, hallway_length)
-	var wall_material := _make_metal(Color(0.7, 0.7, 0.8))
-
-	var wall_left := MeshInstance3D.new()
-	wall_left.name = "WallLeft"
-	wall_left.mesh = wall_mesh
-	wall_left.material_override = wall_material
-	wall_left.position = Vector3(-hallway_width * 0.5, hallway_height * 0.5 + FLOOR_OFFSET_Y, 0.0)
-	add_child(wall_left)
-
-	var wall_right := MeshInstance3D.new()
-	wall_right.name = "WallRight"
-	wall_right.mesh = wall_mesh
-	wall_right.material_override = wall_material
-	wall_right.position = Vector3(hallway_width * 0.5, hallway_height * 0.5 + FLOOR_OFFSET_Y, 0.0)
-	add_child(wall_right)
+	# Walls removed - just open space with the colored lines
+	pass
 
 func _make_metal(color: Color) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
@@ -163,9 +140,15 @@ func generate_line_paths() -> void:
 		var z_pos: float = lerp(start_z, end_z, lerp_t)
 		var spans_in_row: int = 2 + (r % 2)
 		for s in range(spans_in_row):
-			var y_mid := 2.0 + float(s) * 1.8 + sin((float(r) + float(s)) * 0.37) * 0.6
 			var phase := float(r) * 0.55 + float(s) * 1.1
-			line_paths.append(_create_span_path(z_pos, y_mid, phase))
+			if arch_mode:
+				# Arch mode: arches rise from floor
+				var x_offset := (float(s) - float(spans_in_row - 1) / 2.0) * 3.0
+				line_paths.append(_create_arch_path(z_pos, x_offset, phase))
+			else:
+				# Wall-to-wall mode
+				var y_mid := 2.0 + float(s) * 1.8 + sin((float(r) + float(s)) * 0.37) * 0.6
+				line_paths.append(_create_span_path(z_pos, y_mid, phase))
 
 func _create_span_path(z_pos: float, y_mid: float, phase: float) -> PackedVector3Array:
 	var start := Vector3(-hallway_width * 0.5, y_mid, z_pos)
@@ -179,6 +162,37 @@ func _create_span_path(z_pos: float, y_mid: float, phase: float) -> PackedVector
 		var arc := sin(PI * t) * span_wave_amp
 		var twist := sin(TAU * span_frequency * t + phase) * span_twist_amp
 		pts.append(base + Vector3(0.0, arc, twist))
+
+	return pts
+
+
+func _create_arch_path(z_pos: float, x_offset: float, phase: float) -> PackedVector3Array:
+	# Create an arch that rises from floor, goes up and over, back to floor
+	var samples = max(2, points_per_line)
+	var pts := PackedVector3Array()
+	
+	var arch_width := hallway_width * 0.4  # Width of arch base
+	var start_x := x_offset - arch_width * 0.5
+	var end_x := x_offset + arch_width * 0.5
+	
+	for i in range(samples):
+		var t := 0.0 if samples <= 1 else float(i) / float(samples - 1)
+		
+		# X position: goes from start to end
+		var x: float = lerpf(start_x, end_x, t)
+		
+		# Y position: arch shape (parabola or sine)
+		var arch_t := sin(PI * t)  # 0 at ends, 1 at middle
+		var y: float = arch_base_height + arch_t * (arch_peak_height - arch_base_height)
+		
+		# Add some waviness
+		var wave := sin(TAU * span_frequency * t + phase) * span_twist_amp * 0.5
+		y += wave * arch_t  # Wave is strongest at peak
+		
+		# Z position: base z with some twist
+		var z: float = z_pos + sin(TAU * t * 2.0 + phase) * span_twist_amp * arch_t
+		
+		pts.append(Vector3(x, y, z))
 
 	return pts
 
@@ -240,6 +254,9 @@ func _create_line_mesh_from_path(path: PackedVector3Array) -> ArrayMesh:
 	var uvs := PackedVector2Array()
 	var indices := PackedInt32Array()
 
+	# Add one extra vertex per ring to close UV seam properly
+	var verts_per_ring := segments + 1
+
 	for i in range(path.size()):
 		var current := path[i]
 		var progress := float(i) / float(path.size() - 1)
@@ -258,18 +275,20 @@ func _create_line_mesh_from_path(path: PackedVector3Array) -> ArrayMesh:
 		var right := direction.cross(up).normalized()
 		var actual_up := right.cross(direction).normalized()
 
-		for j in range(segments):
-			var angle := float(j) / float(segments) * TAU
+		# Create ring vertices with duplicate at seam for proper UV
+		for j in range(verts_per_ring):
+			var angle := float(j % segments) / float(segments) * TAU
 			var offset: Vector3 = (right * cos(angle) + actual_up * sin(angle)) * radius
 			vertices.append(current + offset)
 			normals.append(offset.normalized())
+			# UV.y goes from 0 to 1 with the last vertex at 1.0 (not wrapping to 0)
 			uvs.append(Vector2(progress, float(j) / float(segments)))
 
 	for i in range(path.size() - 1):
-		var prev_ring: int = i * segments
-		var curr_ring: int = (i + 1) * segments
+		var prev_ring: int = i * verts_per_ring
+		var curr_ring: int = (i + 1) * verts_per_ring
 		for j in range(segments):
-			var next_j: int = (j + 1) % segments
+			var next_j: int = j + 1  # No modulo - we have the extra vertex
 			indices.append(prev_ring + j)
 			indices.append(curr_ring + j)
 			indices.append(prev_ring + next_j)

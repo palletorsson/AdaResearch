@@ -131,9 +131,11 @@ func _process(delta):
 
 	# --- TRAIL GENERATION ---
 	var bob_pos = bob2.global_position
+	# Convert to local space for the trail mesh
+	var local_pos = trail_instance.to_local(bob_pos)
 	
-	# Add point
-	trail_points.push_front(Vector3(bob_pos.x, bob_pos.y, 0.0))
+	# Add point (using local coordinates)
+	trail_points.push_front(Vector3(local_pos.x, local_pos.y, 0.0))
 	
 	# Move existing points (Time flow)
 	for i in range(trail_points.size()):

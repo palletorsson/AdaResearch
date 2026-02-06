@@ -4765,6 +4765,7 @@ enum SoundType {
 	RETRO_JUMP,        # Classic platformer jump - pitch bend
 	SHIELD_HIT,        # Metallic impact - ring modulation
 	AMBIENT_WIND,      # Atmospheric texture - filtered noise
+	ARTIFACT_REVEAL_SHIMMER, # Shimmering artifact reveal cue
 	DARK_808_KICK,     # Deep 808 kick with pitch envelope and click attack
 	ACID_606_HIHAT,    # Filtered noise hi-hat with metallic ring characteristic of 606
 	DARK_808_SUB_BASS, # Deep sub bass with slow modulation and dark character
@@ -4940,6 +4941,8 @@ static func generate_sound(type: SoundType, duration: float = 1.0, parameters: D
 			_generate_shield_hit(data, sample_count)
 		SoundType.AMBIENT_WIND:
 			_generate_ambient_wind(data, sample_count)
+		SoundType.ARTIFACT_REVEAL_SHIMMER:
+			_generate_artifact_reveal_shimmer(data, sample_count)
 		SoundType.DARK_808_KICK:
 			_generate_dark_808_kick(data, sample_count)
 		SoundType.ACID_606_HIHAT:
@@ -5303,6 +5306,61 @@ static func _generate_ambient_wind(data: PackedFloat32Array, sample_count: int):
 		var tonal = sin(2.0 * PI * 80.0 * t) * 0.1 + sin(2.0 * PI * 120.0 * t) * 0.05
 		
 		data[i] = (filtered_noise + tonal) * modulation * 0.2
+
+static func _generate_artifact_reveal_shimmer(data: PackedFloat32Array, sample_count: int, params: Dictionary = {}):
+	# Shimmering reveal cue - harmonic cluster + light noise + shimmer LFO
+	var duration = float(sample_count) / SAMPLE_RATE
+	var base_freq = params.get("base_freq", 880.0)
+	var partial_count = int(params.get("partial_count", 5))
+	var spread_cents = params.get("spread_cents", 12.0)
+	var shimmer_rate = params.get("shimmer_rate", 5.0)
+	var shimmer_depth = clamp(params.get("shimmer_depth", 0.4), 0.0, 1.0)
+	var noise_amount = params.get("noise_amount", 0.06)
+	var attack = max(params.get("attack", 0.02), 0.001)
+	var decay = max(params.get("decay", 0.25), 0.001)
+	var sustain = clamp(params.get("sustain", 0.4), 0.0, 1.0)
+	var release = max(params.get("release", 0.6), 0.001)
+	var pitch_rise = params.get("pitch_rise", 0.0)
+	var amplitude = params.get("amplitude", 0.35)
+
+	partial_count = clamp(partial_count, 1, 12)
+
+	var ratios = [1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+	var partials: Array[float] = []
+	for i in range(partial_count):
+		var ratio = ratios[i % ratios.size()]
+		var detune_cents = (randf() * 2.0 - 1.0) * spread_cents
+		var detune_ratio = pow(2.0, detune_cents / 1200.0)
+		partials.append(base_freq * ratio * detune_ratio)
+
+	for i in range(sample_count):
+		var t = float(i) / SAMPLE_RATE
+		var progress = float(i) / sample_count
+
+		var pitch_ratio = pow(2.0, (pitch_rise * progress) / 12.0)
+		var shimmer = sin(2.0 * PI * shimmer_rate * t + sin(2.0 * PI * shimmer_rate * 0.25 * t) * 0.5)
+		shimmer = shimmer * shimmer_depth + (1.0 - shimmer_depth)
+
+		# ADSR envelope
+		var env = 1.0
+		if t < attack:
+			env = t / attack
+		elif t < attack + decay:
+			var decay_progress = (t - attack) / decay
+			env = lerp(1.0, sustain, decay_progress)
+		elif t < duration - release:
+			env = sustain
+		else:
+			var release_progress = (t - (duration - release)) / release
+			env = sustain * max(0.0, 1.0 - release_progress)
+
+		var wave = 0.0
+		for freq in partials:
+			wave += sin(2.0 * PI * freq * pitch_ratio * t)
+		wave /= float(partials.size())
+
+		var noise = (randf() * 2.0 - 1.0) * noise_amount
+		data[i] = (wave + noise) * shimmer * env * amplitude
 
 static func _generate_dark_808_kick(data: PackedFloat32Array, sample_count: int):
 	# Deep 808 kick with pitch envelope and click attack

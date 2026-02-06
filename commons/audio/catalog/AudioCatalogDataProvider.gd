@@ -232,3 +232,82 @@ static func get_sound_count() -> int:
 static func get_category_count() -> int:
 	load_catalog()
 	return _categories.size()
+
+
+static func save_sound_parameters(sound_key: String, new_values: Dictionary) -> bool:
+	load_catalog()
+	if not _catalog.has(sound_key):
+		push_warning("AudioCatalogDataProvider: Sound not found: " + sound_key)
+		return false
+
+	var entry: Dictionary = _catalog[sound_key]
+	var file_path: String = entry.get("file_path", "")
+	if file_path.is_empty() or not FileAccess.file_exists(file_path):
+		push_warning("AudioCatalogDataProvider: File not found: " + file_path)
+		return false
+
+	var file := FileAccess.open(file_path, FileAccess.READ)
+	if not file:
+		push_warning("AudioCatalogDataProvider: Could not open file: " + file_path)
+		return false
+	var json_text := file.get_as_text()
+	file.close()
+
+	var json := JSON.new()
+	var error := json.parse(json_text)
+	if error != OK:
+		push_warning("AudioCatalogDataProvider: JSON parse error in " + file_path + ": " + json.get_error_message())
+		return false
+
+	var data: Dictionary = json.data
+	if data.is_empty():
+		return false
+
+	var format: int = entry.get("format", JsonFormat.DIRECT)
+	match format:
+		JsonFormat.ROOT_METADATA:
+			var params_root: Dictionary = data.get("parameters", {})
+			_apply_values(params_root, new_values)
+			data["parameters"] = params_root
+		JsonFormat.NESTED_METADATA:
+			var nested_key := sound_key
+			if not data.has(nested_key):
+				var keys := data.keys()
+				if keys.size() == 0:
+					return false
+				nested_key = keys[0]
+			var nested: Dictionary = data.get(nested_key, {})
+			var params_nested: Dictionary = nested.get("parameters", nested)
+			_apply_values(params_nested, new_values)
+			nested["parameters"] = params_nested
+			data[nested_key] = nested
+		_:
+			_apply_values(data, new_values)
+
+	var write_file := FileAccess.open(file_path, FileAccess.WRITE)
+	if not write_file:
+		push_warning("AudioCatalogDataProvider: Could not write file: " + file_path)
+		return false
+	write_file.store_string(JSON.stringify(data, "\t"))
+	write_file.close()
+
+	# Update cached entry parameters
+	var updated_params: Dictionary = entry.get("parameters", {}).duplicate(true)
+	_apply_values(updated_params, new_values)
+	entry["parameters"] = updated_params
+	_catalog[sound_key] = entry
+
+	return true
+
+
+static func _apply_values(target: Dictionary, new_values: Dictionary) -> void:
+	for key in new_values.keys():
+		if target.has(key):
+			var entry = target[key]
+			if entry is Dictionary and entry.has("value"):
+				entry["value"] = new_values[key]
+				target[key] = entry
+			else:
+				target[key] = new_values[key]
+		else:
+			target[key] = new_values[key]

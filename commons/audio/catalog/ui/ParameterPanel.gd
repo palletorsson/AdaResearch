@@ -55,27 +55,74 @@ func build_controls(parameters: Dictionary) -> void:
 		return
 
 	# Sort parameters by name
-	var param_names: Array = parameters.keys()
+	var param_names: Array[String] = []
+	for key in parameters.keys():
+		param_names.append(str(key))
 	param_names.sort()
 
 	# Build slider for each numeric parameter
 	var count := 0
-	for param_name in param_names:
+	for param_name: String in param_names:
 		if count >= max_visible_params:
 			break
 
-		var config: Dictionary = parameters[param_name]
+		var raw_value: Variant = parameters[param_name]
 
-		# Skip non-numeric parameters
-		if not config.has("min") or not config.has("max"):
-			# Check for options (dropdown)
-			if config.has("options"):
-				_add_option_control(param_name, config)
-				count += 1
+		if raw_value is Dictionary:
+			var config: Dictionary = raw_value
+
+			# Skip non-numeric parameters
+			if not config.has("min") or not config.has("max"):
+				# Check for options (dropdown)
+				if config.has("options"):
+					_add_option_control(param_name, config)
+					count += 1
+				continue
+
+			_add_slider(param_name, config)
+			count += 1
+		elif raw_value is int or raw_value is float:
+			var inferred := _infer_numeric_config(param_name, float(raw_value))
+			_add_slider(param_name, inferred)
+			count += 1
+		else:
+			# Unsupported parameter format (string, array, etc.)
 			continue
 
-		_add_slider(param_name, config)
-		count += 1
+
+func _infer_numeric_config(param_name: String, value: float) -> Dictionary:
+	var name: String = param_name.to_lower()
+	var min_val: float = 0.0
+	var max_val: float = max(1.0, value * 2.0)
+	var step_val: float = max(0.01, (max_val - min_val) / 100.0)
+
+	if name.contains("freq"):
+		min_val = max(0.0, value * 0.5)
+		max_val = max(200.0, value * 4.0)
+		step_val = 1.0
+	elif name.contains("duration"):
+		min_val = 0.1
+		max_val = max(10.0, value * 2.0)
+		step_val = 0.1
+	elif name.contains("attack") or name.contains("decay") or name.contains("release"):
+		min_val = 0.0
+		max_val = max(5.0, value * 2.0)
+		step_val = 0.01
+	elif name.contains("rate"):
+		min_val = 0.0
+		max_val = max(10.0, value * 2.0)
+		step_val = 0.01
+	elif name.contains("depth") or name.contains("amount") or name.contains("mix"):
+		min_val = 0.0
+		max_val = 1.0
+		step_val = 0.01
+
+	return {
+		"value": value,
+		"min": min_val,
+		"max": max_val,
+		"step": step_val
+	}
 
 
 func _add_slider(param_name: String, config: Dictionary) -> void:

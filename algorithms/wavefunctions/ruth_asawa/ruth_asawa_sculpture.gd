@@ -167,9 +167,12 @@ func generate_surface():
 		var material := StandardMaterial3D.new()
 		if wireframe:
 			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			material.albedo_color = Color(0.3, 0.3, 0.3) # Dark wire
+			material.albedo_color = Color(1.0, 1.0, 1.0)
+			material.emission_enabled = true
+			material.emission = Color(1.0, 1.0, 1.0)
+			material.emission_energy = 0.6
 		else:
-			material.albedo_color = Color(0.6, 0.6, 0.6)
+			material.albedo_color = Color(1.0, 1.0, 1.0)
 			material.metallic = 0.5
 			material.roughness = 0.5
 			material.cull_mode = BaseMaterial3D.CULL_DISABLED # Show both sides
@@ -221,29 +224,62 @@ func generate_audio_reactive_surface():
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	var u_max := TAU
+	var time := Time.get_ticks_msec() / 1000.0
+	
+	# Get bass, mid, and treble averages for whole-form response
+	var bass_avg := 0.0
+	var mid_avg := 0.0
+	var treble_avg := 0.0
+	var bands_per_group := spectrum_bands / 3
+	
+	for i in range(bands_per_group):
+		bass_avg += smoothed_bands[i] if i < smoothed_bands.size() else 0.0
+	for i in range(bands_per_group, bands_per_group * 2):
+		mid_avg += smoothed_bands[i] if i < smoothed_bands.size() else 0.0
+	for i in range(bands_per_group * 2, spectrum_bands):
+		treble_avg += smoothed_bands[i] if i < smoothed_bands.size() else 0.0
+	
+	bass_avg /= bands_per_group
+	mid_avg /= bands_per_group
+	treble_avg /= bands_per_group
 
 	for i in range(v_resolution + 1):
-		var v_ratio = float(i) / float(v_resolution)
-		var y = (v_ratio - 0.5) * height
+		var v_ratio := float(i) / float(v_resolution)
+		var y := (v_ratio - 0.5) * height
 
 		# Base radius from curve
-		var r = 1.0
+		var r := 1.0
 		if radius_curve:
 			r = radius_curve.sample(v_ratio) * max_radius
 
-		# Map vertical position to frequency band
-		var band_index = int(v_ratio * (spectrum_bands - 1))
-		var band_influence = smoothed_bands[band_index] if band_index < smoothed_bands.size() else 0.0
-
-		# Modulate radius by frequency
-		r *= 1.0 + band_influence * frequency_influence
+		# Global volume influence - whole form breathes
+		r *= 1.0 + smoothed_volume * frequency_influence * 0.5
 
 		for j in range(u_resolution + 1):
-			var u_ratio = float(j) / float(u_resolution)
-			var u = u_ratio * u_max
+			var u_ratio := float(j) / float(u_resolution)
+			var u := u_ratio * u_max
 
-			var x = r * cos(u)
-			var z = r * sin(u)
+			# Local radius modulation based on position + audio
+			var local_r := r
+			
+			# Bass creates slow waves traveling up
+			var bass_wave := sin(v_ratio * TAU * 2.0 - time * 2.0) * bass_avg * frequency_influence * 0.3
+			
+			# Mids create horizontal ripples
+			var mid_wave := sin(u * 4.0 + time * 3.0) * mid_avg * frequency_influence * 0.2
+			
+			# Treble creates fine texture shimmer
+			var treble_wave := sin(u * 8.0 + v_ratio * TAU * 4.0 + time * 5.0) * treble_avg * frequency_influence * 0.15
+			
+			# Band-specific bulges - spread across the whole form
+			var band_index := int(fposmod(v_ratio * 3.0 + u_ratio, 1.0) * (spectrum_bands - 1))
+			var band_influence: float = smoothed_bands[band_index] if band_index < smoothed_bands.size() else 0.0
+			var band_bulge := band_influence * frequency_influence * 0.4
+			
+			local_r *= 1.0 + bass_wave + mid_wave + treble_wave + band_bulge
+
+			var x := local_r * cos(u)
+			var z := local_r * sin(u)
 
 			st.set_uv(Vector2(u_ratio, v_ratio))
 			st.add_vertex(Vector3(x, -y, z))
@@ -251,8 +287,8 @@ func generate_audio_reactive_surface():
 	# Generate indices
 	for i in range(v_resolution):
 		for j in range(u_resolution):
-			var current = i * (u_resolution + 1) + j
-			var next_row = (i + 1) * (u_resolution + 1) + j
+			var current := i * (u_resolution + 1) + j
+			var next_row := (i + 1) * (u_resolution + 1) + j
 
 			if wireframe:
 				st.add_index(current)
@@ -276,11 +312,15 @@ func generate_audio_reactive_surface():
 		var material := StandardMaterial3D.new()
 		if wireframe:
 			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			# Color shifts with volume - darker at low volume, brighter at high
-			var brightness = 0.2 + smoothed_volume * 0.6
-			material.albedo_color = Color(brightness * 0.8, brightness, brightness * 1.2)
+			# Color shifts with bass
+			var hue := fposmod(bass_avg * 0.3, 1.0)
+			var wire_color := Color.from_hsv(hue, 0.3, 1.0)
+			material.albedo_color = wire_color
+			material.emission_enabled = true
+			material.emission = wire_color
+			material.emission_energy = 0.4 + smoothed_volume * 1.5
 		else:
-			material.albedo_color = Color(0.6, 0.6, 0.6)
+			material.albedo_color = Color(1.0, 1.0, 1.0)
 			material.metallic = 0.5
 			material.roughness = 0.5
 			material.cull_mode = BaseMaterial3D.CULL_DISABLED

@@ -1255,6 +1255,12 @@
 										   "description":  "Animated cube net folding into 3D cube. Shows how 6 connected squares become a volume. Cross net with hinge animation.",
 										   "scene":  "res://commons/primitives/cubes/folding_cube.tscn"
 									   },
+					  "polyhedron_nets_cube":  {
+												   "name":  "polyhedron_nets_cube",
+												   "lookup_name":  "polyhedron_nets_cube",
+												   "description":  "Cube net visualization with fold animation. Configurable via #fold_duration, #fold_delay, #auto_fold.",
+												   "scene":  "res://commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn"
+											   },
 					  "folding_cube_interactive":  {
 													   "name":  "folding_cube_interactive",
 													   "lookup_name":  "folding_cube_interactive",

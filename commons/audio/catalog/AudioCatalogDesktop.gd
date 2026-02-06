@@ -5,10 +5,12 @@
 extends Control
 
 const GenreSynthBrowser = preload("res://commons/audio/catalog/GenreSynthBrowser.gd")
+const SoundEffectBoard = preload("res://commons/audio/catalog/ui/SoundEffectBoard.gd")
 
 var _tab_container: TabContainer
 var _genre_browser: GenreSynthBrowser
 var _catalog_ui: AudioCatalogUI
+var _effect_board: SoundEffectBoard
 var _audio_player: AudioStreamPlayer
 var _current_stream: AudioStreamWAV
 
@@ -39,10 +41,17 @@ func _ready():
 	_catalog_ui = AudioCatalogUI.new()
 	_catalog_ui.name = "📦 Sound Catalog"
 	_tab_container.add_child(_catalog_ui)
+
+	# Tab 3: SFX Board
+	_effect_board = SoundEffectBoard.new()
+	_effect_board.name = "SFX Board"
+	_tab_container.add_child(_effect_board)
 	
 	# Connect signals
 	_catalog_ui.play_requested.connect(_on_play_requested)
 	_catalog_ui.stop_requested.connect(_on_stop_requested)
+	_effect_board.play_requested.connect(_on_play_requested)
+	_effect_board.stop_requested.connect(_on_stop_requested)
 	
 	print("Audio Catalog Desktop ready")
 	print("  - Genre Synth Browser: 10 genres, 40+ elements")
@@ -73,18 +82,26 @@ func _play_sound(sound_key: String, parameters: Dictionary):
 	_audio_player.play()
 
 	_catalog_ui.set_playing(true)
+	if _effect_board:
+		_effect_board.set_playing(true)
 
 	var samples := _extract_samples(audio_stream)
 	_catalog_ui.set_waveform_data(samples)
+	if _effect_board:
+		_effect_board.set_waveform_data(samples)
 
 
 func _stop_sound():
 	_audio_player.stop()
 	_catalog_ui.set_playing(false)
+	if _effect_board:
+		_effect_board.set_playing(false)
 
 
 func _on_audio_finished():
 	_catalog_ui.set_playing(false)
+	if _effect_board:
+		_effect_board.set_playing(false)
 
 
 func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWAV:
@@ -201,6 +218,7 @@ func _string_to_sound_type(type_str: String) -> int:
 		"retro_jump": AudioSynthesizer.SoundType.RETRO_JUMP,
 		"shield_hit": AudioSynthesizer.SoundType.SHIELD_HIT,
 		"ambient_wind": AudioSynthesizer.SoundType.AMBIENT_WIND,
+		"artifact_reveal_shimmer": AudioSynthesizer.SoundType.ARTIFACT_REVEAL_SHIMMER,
 		"dark_808_kick": AudioSynthesizer.SoundType.DARK_808_KICK,
 		"acid_606_hihat": AudioSynthesizer.SoundType.ACID_606_HIHAT,
 		"dark_808_sub_bass": AudioSynthesizer.SoundType.DARK_808_SUB_BASS,
@@ -311,11 +329,15 @@ func _merge_parameters(defaults: Dictionary, overrides: Dictionary) -> Dictionar
 	var result := {}
 
 	for key in defaults:
-		var config: Dictionary = defaults[key]
-		if config.has("value"):
-			result[key] = config.value
-		elif config.has("min"):
-			result[key] = config.get("min", 0.0)
+		var raw_value: Variant = defaults[key]
+		if raw_value is Dictionary:
+			var config: Dictionary = raw_value
+			if config.has("value"):
+				result[key] = config.get("value")
+			elif config.has("min"):
+				result[key] = config.get("min", 0.0)
+		elif raw_value is int or raw_value is float:
+			result[key] = raw_value
 
 	for key in overrides:
 		result[key] = overrides[key]

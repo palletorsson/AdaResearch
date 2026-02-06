@@ -16,17 +16,23 @@ class_name SineWallExplanation
 @export var wall_color: Color = Color(0.8, 0.2, 0.3)
 @export var value_color: Color = Color(1.0, 1.0, 0.4)
 
+@export var frequency_min: float = 0.5
+@export var frequency_max: float = 6.0
+
 var _wall_mesh: MeshInstance3D
 var _base_plate: MeshInstance3D
 var _formula_label: Label3D
 var _title_label: Label3D
+var _freq_label: Label3D
 var _value_labels: Array[Label3D] = []
 var _value_markers: Array[MeshInstance3D] = []
 var _sine_curve: MeshInstance3D
+var _freq_slider: Node
 var _time: float = 0.0
 
 const SEGMENTS = 48
 const VALUE_POINTS = 5  # Number of points showing values
+const SLIDER_H = preload("res://commons/interactables/slider_horizontal.tscn")
 
 
 func _ready():
@@ -36,6 +42,7 @@ func _ready():
 	_create_value_markers()
 	_create_labels()
 	_create_reference_plane()
+	_create_frequency_slider()
 	set_process(animate)
 
 
@@ -287,6 +294,49 @@ func _create_labels():
 	min_label.position = Vector3(-amplitude - 0.06, wall_height + 0.04, 0)
 	min_label.modulate = Color(0.4, 0.8, 1.0)
 	add_child(min_label)
+
+
+func _create_frequency_slider():
+	if not SLIDER_H:
+		return
+	
+	_freq_slider = SLIDER_H.instantiate()
+	_freq_slider.position = Vector3(0, -0.08, wall_length / 2 + 0.15)
+	_freq_slider.rotation.y = PI  # Face toward viewer
+	add_child(_freq_slider)
+	
+	# Set range
+	if _freq_slider.has_method("set_range"):
+		_freq_slider.set_range(frequency_min, frequency_max)
+	if _freq_slider.has_method("set_param_name"):
+		_freq_slider.set_param_name("f")
+	
+	# Set initial value
+	var norm = inverse_lerp(frequency_min, frequency_max, frequency)
+	if _freq_slider.has_method("set_normalized_value"):
+		_freq_slider.set_normalized_value(norm)
+	
+	# Connect signal
+	if _freq_slider.has_signal("slider_moved"):
+		_freq_slider.slider_moved.connect(_on_freq_slider_moved)
+	
+	# Frequency label
+	_freq_label = Label3D.new()
+	_freq_label.pixel_size = 0.001
+	_freq_label.font_size = 32
+	_freq_label.text = "frequency: %.1f" % frequency
+	_freq_label.position = Vector3(0, 0.02, wall_length / 2 + 0.15)
+	_freq_label.modulate = Color(0.7, 0.85, 1.0)
+	add_child(_freq_label)
+
+
+func _on_freq_slider_moved(_pos):
+	if _freq_slider and _freq_slider.has_method("get_normalized_value"):
+		var norm = _freq_slider.get_normalized_value()
+		frequency = lerp(frequency_min, frequency_max, norm)
+		_refresh_static()
+		if _freq_label:
+			_freq_label.text = "frequency: %.1f" % frequency
 
 
 func _process(delta):

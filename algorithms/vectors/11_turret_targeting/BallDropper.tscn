@@ -4,9 +4,10 @@
 
 [node name="BallDropper" type="Node3D"]
 script = ExtResource("1_dropper")
-drop_interval = 3.0
+drop_interval_min = 2.0
+drop_interval_max = 3.5
 auto_drop = true
-max_balls = 5
+total_balls = 30
 ball_radius = 0.1
 ball_mass = 0.5
 ball_bounce = 0.7

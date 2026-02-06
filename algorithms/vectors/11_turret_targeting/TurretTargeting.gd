@@ -41,10 +41,6 @@ func _ready() -> void:
 	
 	if turret.has_signal("ball_destroyed"):
 		turret.ball_destroyed.connect(_on_ball_destroyed)
-	
-	print("=== TURRET TARGETING ===")
-	print("Vector operations: subtract (direction), magnitude (range), normalize (aim)")
-	print("SPACE: Drop ball | R: Reset | T: Toggle auto-drop")
 
 func _setup_turret() -> void:
 	turret = TURRET_SCENE.instantiate()
@@ -119,4 +115,3 @@ func _input(event: InputEvent) -> void:
 				reset()
 			KEY_T:
 				set_auto_drop(not auto_drop)
-				print("Auto-drop: ", auto_drop)

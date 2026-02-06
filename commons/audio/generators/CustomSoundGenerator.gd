@@ -37,6 +37,8 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_shield_hit(data, sample_count, params)
 		AudioSynthesizer.SoundType.AMBIENT_WIND:
 			generate_custom_ambient_wind(data, sample_count, params)
+		AudioSynthesizer.SoundType.ARTIFACT_REVEAL_SHIMMER:
+			AudioSynthesizer._generate_artifact_reveal_shimmer(data, sample_count, params)
 		AudioSynthesizer.SoundType.DARK_808_KICK:
 			generate_custom_dark_808_kick(data, sample_count, params)
 		AudioSynthesizer.SoundType.ACID_606_HIHAT:

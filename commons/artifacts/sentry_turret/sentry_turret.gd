@@ -19,6 +19,8 @@ signal hit_target(target: Node3D, position: Vector3)
 @export var burst_size: int = 5  # shots before reload
 @export var target_player: bool = true
 @export var target_balls: bool = true
+@export var use_laser_damage: bool = true  # Laser deals damage instead of bullets
+@export var laser_damage_per_second: float = 100.0  # Damage when laser is on target
 
 @export_category("Appearance")
 @export var turret_color: Color = Color(0.5, 0.5, 0.55)
@@ -38,6 +40,7 @@ var fire_cooldown: float = 0.0
 var reload_cooldown: float = 0.0
 var shots_in_burst: int = 0
 var bullets: Array[Dictionary] = []
+var is_laser_firing: bool = false
 
 func _ready():
 	_build_turret()
@@ -189,9 +192,34 @@ func _process(delta):
 	_update_bullets(delta)
 	_update_laser()
 
+func _get_target_position(target: Node3D) -> Vector3:
+	"""Get actual position of target - handles ball structure with RigidBody child"""
+	if not is_instance_valid(target):
+		return Vector3.ZERO
+	
+	# Check if target has a RigidBody3D child (ball structure)
+	var rb = target.get_node_or_null("RigidBody3D")
+	if rb:
+		return rb.global_position
+	
+	# Check if target IS a RigidBody3D
+	if target is RigidBody3D:
+		return target.global_position
+	
+	# Fallback to node's own position
+	return target.global_position
+
+var _debug_timer: float = 0.0
+
 func _find_target():
 	var best_target: Node3D = null
 	var best_dist: float = INF
+	
+	# Debug every 2 seconds
+	_debug_timer += get_process_delta_time()
+	var do_debug = _debug_timer > 2.0
+	if do_debug:
+		_debug_timer = 0.0
 	
 	# Find player
 	if target_player:
@@ -205,10 +233,15 @@ func _find_target():
 	# Find balls
 	if target_balls:
 		var balls = _find_balls()
+		if do_debug:
+			print("[Turret] Found %d balls, target_balls=%s" % [balls.size(), target_balls])
 		for ball in balls:
 			if not is_instance_valid(ball):
 				continue
-			var dist = global_position.distance_to(ball.global_position)
+			var ball_pos = _get_target_position(ball)
+			var dist = global_position.distance_to(ball_pos)
+			if do_debug:
+				print("[Turret]   Ball at %s, dist=%.1f (range=%.1f)" % [ball_pos, dist, detection_range])
 			if dist < detection_range and dist < best_dist:
 				best_dist = dist
 				best_target = ball
@@ -216,9 +249,11 @@ func _find_target():
 	if best_target != current_target:
 		if best_target:
 			current_target = best_target
+			print("[Turret] TARGET ACQUIRED: %s at dist %.1f" % [best_target.name, best_dist])
 			emit_signal("target_acquired", current_target)
 		elif current_target:
 			current_target = null
+			print("[Turret] TARGET LOST")
 			emit_signal("target_lost")
 
 func _find_player() -> Node3D:
@@ -247,23 +282,29 @@ func _find_balls() -> Array:
 	var balls: Array = []
 	
 	# Check droppers
-	for dropper in get_tree().get_nodes_in_group("ball_dropper"):
+	var droppers = get_tree().get_nodes_in_group("ball_dropper")
+	for dropper in droppers:
 		if "active_balls" in dropper:
-			balls.append_array(dropper.active_balls)
+			for ball in dropper.active_balls:
+				if is_instance_valid(ball) and ball.visible:
+					balls.append(ball)
 		elif "balls" in dropper:
 			for b in dropper.balls:
-				if is_instance_valid(b):
+				if is_instance_valid(b) and b.visible:
 					balls.append(b)
 	
 	# Check colorballs
 	for spawner in get_tree().get_nodes_in_group("colorballs"):
 		if "balls" in spawner:
-			balls.append_array(spawner.balls)
+			for b in spawner.balls:
+				if is_instance_valid(b) and b.visible:
+					balls.append(b)
 	
-	# Scan for ball nodes
+	# Scan for ball nodes in group
 	if balls.is_empty():
 		for node in get_tree().get_nodes_in_group("balls"):
-			balls.append(node)
+			if is_instance_valid(node) and node.visible:
+				balls.append(node)
 	
 	return balls
 
@@ -274,17 +315,20 @@ func _track_target(delta: float):
 		barrel.rotation.x = lerp_angle(barrel.rotation.x, 0.0, delta * 2)
 		return
 	
-	var target_pos = current_target.global_position
+	var target_pos = _get_target_position(current_target)
 	var head_pos = head.global_position
-	var to_target = target_pos - head_pos
 	
-	# Yaw
-	var target_yaw = atan2(to_target.x, to_target.z)
+	# Transform target direction into turret's local space for proper yaw/pitch
+	var to_target_world = target_pos - head_pos
+	var to_target_local = global_transform.basis.inverse() * to_target_world
+	
+	# Yaw (in local space)
+	var target_yaw = atan2(to_target_local.x, to_target_local.z)
 	head.rotation.y = lerp_angle(head.rotation.y, target_yaw, rotation_speed * delta)
 	
-	# Pitch
-	var horiz_dist = Vector2(to_target.x, to_target.z).length()
-	var target_pitch = -atan2(to_target.y, horiz_dist)
+	# Pitch (using local space direction)
+	var horiz_dist = Vector2(to_target_local.x, to_target_local.z).length()
+	var target_pitch = -atan2(to_target_local.y, horiz_dist)
 	target_pitch = clamp(target_pitch, -PI/4, PI/4)
 	barrel.rotation.x = lerp_angle(barrel.rotation.x, target_pitch, rotation_speed * delta)
 
@@ -293,19 +337,36 @@ func _update_shooting(delta: float):
 	reload_cooldown -= delta
 	
 	if not current_target or not is_instance_valid(current_target):
+		is_laser_firing = false
 		return
+	
+	# Check distance to target
+	var muzzle_world = muzzle_pos.global_position
+	var target_pos = _get_target_position(current_target)
+	var dist_to_target = muzzle_world.distance_to(target_pos)
+	var is_close_enough = dist_to_target < detection_range
+	
+	# Laser damage mode - just fire if target is in range (laser visual already hits)
+	if use_laser_damage:
+		if is_close_enough:
+			if not is_laser_firing:
+				print("[Turret] *** LASER FIRING *** dist: %.1f" % dist_to_target)
+			is_laser_firing = true
+			_apply_laser_damage(delta)
+		else:
+			if is_laser_firing:
+				print("[Turret] Target out of range - dist: %.1f" % dist_to_target)
+			is_laser_firing = false
+		return
+	
+	# Bullet mode
+	is_laser_firing = false
 	
 	# Check if reloading
 	if reload_cooldown > 0:
 		return
 	
-	# Check aim
-	var muzzle_world = muzzle_pos.global_position
-	var aim_dir = -barrel.global_transform.basis.z
-	var to_target = (current_target.global_position - muzzle_world).normalized()
-	var aim_quality = aim_dir.dot(to_target)
-	
-	if aim_quality > 0.95 and fire_cooldown <= 0:
+	if is_close_enough and fire_cooldown <= 0:
 		_fire()
 		fire_cooldown = 1.0 / fire_rate
 		shots_in_burst += 1
@@ -314,6 +375,202 @@ func _update_shooting(delta: float):
 		if shots_in_burst >= burst_size:
 			reload_cooldown = reload_time
 			shots_in_burst = 0
+
+var _damage_debug_timer: float = 0.0
+
+# Signal for external listeners
+signal laser_hit(target: Node3D, damage: float, position: Vector3)
+
+func _apply_laser_damage(delta: float):
+	"""Apply continuous laser damage to current target"""
+	if not current_target or not is_instance_valid(current_target):
+		print("[Turret] _apply_laser_damage: No valid target!")
+		return
+	
+	var damage = laser_damage_per_second * delta
+	var target_pos = _get_target_position(current_target)
+	
+	# Emit signal for any listeners
+	emit_signal("laser_hit", current_target, damage, target_pos)
+	
+	# Try to call take_damage() on the target if it has that method
+	if current_target.has_method("take_damage"):
+		current_target.take_damage(damage)
+	else:
+		# Also check RigidBody child
+		var rb = current_target.get_node_or_null("RigidBody3D")
+		if rb and rb.has_method("take_damage"):
+			rb.take_damage(damage)
+	
+	# Also manage health via metadata (fallback)
+	if not current_target.has_meta("health"):
+		print("[Turret] Setting initial health on %s" % current_target.name)
+		current_target.set_meta("health", 80.0)
+		current_target.set_meta("max_health", 80.0)
+	
+	var health: float = current_target.get_meta("health")
+	var max_health: float = current_target.get_meta("max_health")
+	health -= damage
+	current_target.set_meta("health", health)
+	
+	# Debug every 0.3 seconds
+	_damage_debug_timer += delta
+	if _damage_debug_timer > 0.3:
+		_damage_debug_timer = 0.0
+		print("[Turret] BURNING %s - damage/frame: %.2f, Health: %.1f/%.1f" % [current_target.name, damage, health, max_health])
+	
+	# Visual burn effect on ball
+	_apply_burn_effect(current_target)
+	
+	# Check if destroyed
+	if health <= 0:
+		print("[Turret] *** BALL DESTROYED! *** Health: %.1f" % health)
+		_destroy_target(current_target)
+
+func _apply_burn_effect(target: Node3D):
+	"""Visual feedback when laser is burning a ball"""
+	if not is_instance_valid(target):
+		return
+	
+	var max_health = target.get_meta("max_health") if target.has_meta("max_health") else 100.0
+	var health = target.get_meta("health") if target.has_meta("health") else max_health
+	var burn_progress = 1.0 - clamp(health / max_health, 0.0, 1.0)
+	
+	# Find the mesh to apply burn effect
+	var rb = target.get_node_or_null("RigidBody3D")
+	if rb:
+		var mesh = rb.get_node_or_null("MeshInstance3D")
+		if mesh and mesh.material_override:
+			var mat = mesh.material_override as StandardMaterial3D
+			if mat:
+				# Increase emission as ball burns
+				mat.emission_energy_multiplier = 0.8 + burn_progress * 5.0
+				# Shift color towards white/yellow
+				var original_color = target.get_meta("ball_color") if target.has_meta("ball_color") else mat.albedo_color
+				mat.emission = original_color.lerp(Color(1.0, 0.9, 0.5), burn_progress * 0.7)
+
+func _destroy_target(target: Node3D):
+	"""Destroy a ball target"""
+	if not is_instance_valid(target):
+		return
+	
+	var pos = _get_target_position(target)
+	var color = target.get_meta("ball_color") if target.has_meta("ball_color") else Color(1.0, 0.5, 0.2)
+	
+	print("[Turret] Destroying ball at %s" % pos)
+	
+	# Clear current target FIRST to prevent re-processing
+	var was_current = (current_target == target)
+	if was_current:
+		current_target = null
+		is_laser_firing = false
+	
+	# Spawn explosion effect
+	_spawn_explosion(pos, color)
+	
+	# Notify dropper to recycle the ball
+	var removed = false
+	for dropper in get_tree().get_nodes_in_group("ball_dropper"):
+		if dropper.has_method("remove_ball"):
+			dropper.remove_ball(target)
+			removed = true
+			print("[Turret] Ball recycled via dropper")
+			break
+	
+	# If no dropper handled it, just hide/free it
+	if not removed:
+		target.visible = false
+		target.queue_free()
+		print("[Turret] Ball freed directly")
+	
+	if was_current:
+		emit_signal("target_lost")
+	
+	emit_signal("hit_target", target, pos)
+
+func _spawn_explosion(pos: Vector3, color: Color):
+	"""Spawn particle explosion at position"""
+	# Central flash
+	var flash = MeshInstance3D.new()
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.2
+	flash.mesh = sphere
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color.WHITE
+	mat.emission_enabled = true
+	mat.emission = Color.WHITE
+	mat.emission_energy_multiplier = 15.0
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	flash.material_override = mat
+	flash.position = pos
+	get_tree().root.add_child(flash)
+	
+	# Expanding ring
+	var ring = MeshInstance3D.new()
+	var torus = TorusMesh.new()
+	torus.inner_radius = 0.15
+	torus.outer_radius = 0.2
+	ring.mesh = torus
+	var ring_mat = StandardMaterial3D.new()
+	ring_mat.albedo_color = color
+	ring_mat.emission_enabled = true
+	ring_mat.emission = color
+	ring_mat.emission_energy_multiplier = 10.0
+	ring_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	ring_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	ring.material_override = ring_mat
+	ring.position = pos
+	get_tree().root.add_child(ring)
+	
+	# Sparks/fragments
+	for i in range(8):
+		var spark = MeshInstance3D.new()
+		var spark_mesh = SphereMesh.new()
+		spark_mesh.radius = 0.04
+		spark.mesh = spark_mesh
+		var spark_mat = StandardMaterial3D.new()
+		spark_mat.albedo_color = color.lerp(Color.YELLOW, 0.5)
+		spark_mat.emission_enabled = true
+		spark_mat.emission = color.lerp(Color.YELLOW, 0.5)
+		spark_mat.emission_energy_multiplier = 8.0
+		spark_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		spark.material_override = spark_mat
+		spark.position = pos
+		get_tree().root.add_child(spark)
+		
+		# Random direction
+		var dir = Vector3(randf_range(-1, 1), randf_range(0.2, 1), randf_range(-1, 1)).normalized()
+		var end_pos = pos + dir * randf_range(0.3, 0.6)
+		
+		var spark_tween = get_tree().create_tween()
+		spark_tween.tween_property(spark, "position", end_pos, 0.3).set_ease(Tween.EASE_OUT)
+		spark_tween.parallel().tween_property(spark_mat, "albedo_color:a", 0.0, 0.3)
+		spark_tween.tween_callback(spark.queue_free)
+	
+	# Animate flash
+	var tween = get_tree().create_tween()
+	tween.tween_property(mat, "albedo_color:a", 0.0, 0.2)
+	tween.parallel().tween_property(flash, "scale", Vector3.ONE * 3.0, 0.2)
+	tween.tween_callback(flash.queue_free)
+	
+	# Animate ring
+	var ring_tween = get_tree().create_tween()
+	ring_tween.tween_property(ring, "scale", Vector3.ONE * 4.0, 0.4).set_ease(Tween.EASE_OUT)
+	ring_tween.parallel().tween_property(ring_mat, "albedo_color:a", 0.0, 0.4)
+	ring_tween.tween_callback(ring.queue_free)
+	
+	# Add light flash
+	var light = OmniLight3D.new()
+	light.light_color = color.lerp(Color.WHITE, 0.5)
+	light.light_energy = 5.0
+	light.omni_range = 2.0
+	light.position = pos
+	get_tree().root.add_child(light)
+	
+	var light_tween = get_tree().create_tween()
+	light_tween.tween_property(light, "light_energy", 0.0, 0.3)
+	light_tween.tween_callback(light.queue_free)
 
 func _fire():
 	var muzzle_world = muzzle_pos.global_position
@@ -379,7 +636,8 @@ func _update_bullets(delta: float):
 		if target_balls:
 			for ball in _find_balls():
 				if is_instance_valid(ball):
-					var dist = b["pos"].distance_to(ball.global_position)
+					var ball_pos = _get_target_position(ball)
+					var dist = b["pos"].distance_to(ball_pos)
 					if dist < 0.2:
 						_on_hit(ball, b["pos"])
 						to_remove.append(i)
@@ -455,16 +713,29 @@ func _update_laser():
 	
 	laser.visible = true
 	
-	# Brighter/different color when targeting player
-	if is_targeting_player:
+	# Brighter when actively firing laser
+	if is_laser_firing:
+		eye.material_override.emission_energy_multiplier = 8.0
+		laser.material_override.emission_energy_multiplier = 8.0
+		# Thicker laser when firing
+		var laser_mesh = laser.mesh as CylinderMesh
+		if laser_mesh:
+			laser_mesh.top_radius = 0.008
+			laser_mesh.bottom_radius = 0.008
+	elif is_targeting_player:
 		eye.material_override.emission_energy_multiplier = 5.0
 		laser.material_override.emission_energy_multiplier = 5.0
 	else:
 		eye.material_override.emission_energy_multiplier = 3.0
 		laser.material_override.emission_energy_multiplier = 3.0
+		# Normal thin laser
+		var laser_mesh = laser.mesh as CylinderMesh
+		if laser_mesh:
+			laser_mesh.top_radius = 0.003
+			laser_mesh.bottom_radius = 0.003
 	
 	var muzzle_world = muzzle_pos.global_position
-	var target_pos = current_target.global_position
+	var target_pos = _get_target_position(current_target)
 	var dist = muzzle_world.distance_to(target_pos)
 	var dir = (target_pos - muzzle_world).normalized()
 	var mid = muzzle_world + dir * (dist / 2)
