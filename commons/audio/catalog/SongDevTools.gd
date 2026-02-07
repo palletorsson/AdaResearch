@@ -40,6 +40,8 @@ var _song_buttons: Dictionary = {}
 var _play_btn: Button
 var _stop_btn: Button
 var _loop_btn: Button
+var _export_wav_btn: Button
+var _export_midi_btn: Button
 var _section_dropdown: OptionButton
 
 # Timeline
@@ -390,6 +392,24 @@ func _setup_ui():
 	_style_button_modern(analyze_btn, Color(0.25, 0.35, 0.45))
 	transport.add_child(analyze_btn)
 	
+	# Export WAV button
+	_export_wav_btn = Button.new()
+	_export_wav_btn.text = "💾 WAV"
+	_export_wav_btn.disabled = true
+	_export_wav_btn.custom_minimum_size = Vector2(70, 36)
+	_export_wav_btn.pressed.connect(_export_wav)
+	_style_button_modern(_export_wav_btn, Color(0.3, 0.45, 0.35))
+	transport.add_child(_export_wav_btn)
+	
+	# Export MIDI button
+	_export_midi_btn = Button.new()
+	_export_midi_btn.text = "🎹 MIDI"
+	_export_midi_btn.disabled = true
+	_export_midi_btn.custom_minimum_size = Vector2(70, 36)
+	_export_midi_btn.pressed.connect(_export_midi)
+	_style_button_modern(_export_midi_btn, Color(0.35, 0.3, 0.45))
+	transport.add_child(_export_midi_btn)
+	
 	# Section dropdown (modern)
 	_section_dropdown = OptionButton.new()
 	_section_dropdown.custom_minimum_size = Vector2(130, 36)
@@ -540,6 +560,7 @@ func _setup_sound_editor_tab():
 	_sound_detail_panel.word_added.connect(_on_detail_word_added)
 	_sound_detail_panel.word_removed.connect(_on_detail_word_removed)
 	_sound_detail_panel.preview_requested.connect(_on_detail_preview)
+	_sound_detail_panel.pattern_changed.connect(_on_detail_pattern_changed)
 	_sound_detail_panel.close_requested.connect(_on_editor_back_pressed)
 	_sound_editor_tab.add_child(_sound_detail_panel)
 
@@ -1822,6 +1843,8 @@ func _generate_and_play(song_id: String):
 	_play_btn.disabled = false
 	_play_btn.text = "⏸"
 	_stop_btn.disabled = false
+	_export_wav_btn.disabled = false
+	_export_midi_btn.disabled = false
 	_enable_buttons()
 	
 	# Load timeline metadata
@@ -1847,6 +1870,8 @@ func _stop_song():
 	_play_btn.text = "▶"
 	_play_btn.disabled = true
 	_stop_btn.disabled = true
+	_export_wav_btn.disabled = true
+	_export_midi_btn.disabled = true
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
 
@@ -1953,6 +1978,112 @@ func _estimate_bpm_from_song(song_id: String) -> float:
 			return 118.0
 		_:
 			return 120.0
+
+
+# === EXPORT ===
+
+func _export_wav():
+	"""Export current song to WAV file"""
+	if _current_stream == null:
+		_status_label.text = "No song to export!"
+		return
+	
+	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	var filename = _current_song + "_" + timestamp + ".wav"
+	var export_path = "user://exports/"
+	
+	# Ensure export directory exists
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(export_path))
+	
+	var full_path = export_path + filename
+	
+	_status_label.text = "Exporting WAV..."
+	_export_wav_btn.disabled = true
+	
+	# Use SongExporter if available
+	if ResourceLoader.exists("res://commons/audio/generators/SongExporter.gd"):
+		var SongExporter = load("res://commons/audio/generators/SongExporter.gd")
+		var result = SongExporter.export_interactive_to_wav(_current_stream, full_path)
+		if result == OK:
+			var global_path = ProjectSettings.globalize_path(full_path)
+			_status_label.text = "Exported: " + global_path
+			print("WAV exported to: ", global_path)
+		else:
+			_status_label.text = "WAV export failed!"
+	else:
+		# Fallback: export the stream directly if it's a WAV
+		if _player.stream is AudioStreamWAV:
+			var wav: AudioStreamWAV = _player.stream
+			var err = wav.save_to_wav(full_path)
+			if err == OK:
+				var global_path = ProjectSettings.globalize_path(full_path)
+				_status_label.text = "Exported: " + global_path
+			else:
+				_status_label.text = "WAV export failed!"
+		else:
+			_status_label.text = "Cannot export this stream type"
+	
+	_export_wav_btn.disabled = false
+
+
+func _export_midi():
+	"""Export current song patterns to MIDI file"""
+	if _current_song.is_empty():
+		_status_label.text = "No song to export!"
+		return
+	
+	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	var filename = _current_song + "_" + timestamp + ".mid"
+	var export_path = "user://exports/"
+	
+	# Ensure export directory exists
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(export_path))
+	
+	var full_path = export_path + filename
+	
+	_status_label.text = "Exporting MIDI..."
+	_export_midi_btn.disabled = true
+	
+	# Use MidiExporter
+	if ResourceLoader.exists("res://commons/audio/generators/MidiExporter.gd"):
+		var MidiExporter = load("res://commons/audio/generators/MidiExporter.gd")
+		
+		# Get BPM for this song
+		var bpm = _estimate_bpm_from_song(_current_song)
+		
+		# Map song IDs to pattern IDs (some songs use different patterns or generators)
+		var pattern_map = {
+			# Songs that use soundbank patterns directly
+			"midnight_metroplex": "detroit_techno",
+			"i_feel_love": "moroder_disco",
+			"computer_love": "kraftwerk",
+			"aphex_twin_digital_amber": "boards_of_canada",
+			"ada_theme": "chromatic_story",
+			# Songs that use AudioSynthesizer (no patterns in SoundbankGenerator)
+			"prog_synth_70s": "",
+			"pop_generative": "",
+			"ambient_works": "",
+		}
+		
+		var pattern_id = pattern_map.get(_current_song, _current_song)
+		
+		# Check if this song has exportable patterns
+		if pattern_id.is_empty():
+			_status_label.text = "'" + _current_song + "' uses procedural generation (no fixed patterns to export)"
+			_export_midi_btn.disabled = false
+			return
+		
+		var result = MidiExporter.export_patterns(pattern_id, full_path, bpm)
+		if result:
+			var global_path = ProjectSettings.globalize_path(full_path)
+			_status_label.text = "MIDI exported: " + global_path
+			print("MIDI exported to: ", global_path)
+		else:
+			_status_label.text = "No patterns found for '" + pattern_id + "'"
+	else:
+		_status_label.text = "MidiExporter not found!"
+	
+	_export_midi_btn.disabled = false
 
 
 func _on_song_finished():
@@ -3397,8 +3528,8 @@ func show_sound_breakdown(layer: String):
 		hint.visible = false
 	_sound_detail_panel.visible = true
 	
-	# Load into detail panel
-	_sound_detail_panel.load_sound(_current_song_id, layer, words, config)
+	# Load into detail panel with current section context
+	_sound_detail_panel.load_sound(_current_song_id, layer, words, config, _current_section_name)
 	
 	# Switch to Sound Editor tab
 	_main_tabs.current_tab = 1
@@ -3454,6 +3585,25 @@ func _on_detail_preview(layer: String):
 	"""Preview just this layer from detail panel"""
 	var params = _word_display._layer_params.get(layer, {})
 	_on_layer_preview(layer, params)
+
+
+func _on_detail_pattern_changed(layer: String, pattern_data: Dictionary):
+	"""Handle pattern change from detail panel - update in-memory patterns"""
+	print("Pattern changed for %s: %s" % [layer, pattern_data])
+	
+	# Update patterns in SoundbankGenerator (in memory)
+	# This would need to be saved to persist across sessions
+	var SG = load("res://commons/audio/generators/SoundbankGenerator.gd")
+	if SG and SG.PATTERNS.has(_current_song_id):
+		# For drum patterns, merge all drum data
+		if pattern_data.has("kick") or pattern_data.has("snare") or pattern_data.has("hihat"):
+			for key in pattern_data.keys():
+				SG.PATTERNS[_current_song_id][key] = pattern_data[key]
+		# For single layer patterns
+		elif pattern_data.has("pattern"):
+			SG.PATTERNS[_current_song_id][layer] = pattern_data["pattern"]
+	
+	_status_label.text = "🎵 Pattern updated for %s" % layer
 
 
 # === LEGACY IDENTITY PANEL (Read-only breakdown) ===

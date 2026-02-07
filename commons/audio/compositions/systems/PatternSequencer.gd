@@ -1,15 +1,18 @@
 # PatternSequencer.gd
-# Advanced pattern sequencer with variable lengths and algorithms
+# Unified pattern sequencer with support for drums, bass, chords, and arps
+# Single data model for all pattern types
 extends Node
 class_name PatternSequencer
 
-# Pattern data structure
+# ===== PATTERN DATA STRUCTURE =====
+
 class Pattern:
 	var steps: Array = []
 	var length: int = 16
 	var swing: float = 0.0
-	var velocity_variation: float = 0.0
+	var humanize: float = 0.0  # 0-20ms timing variation
 	var name: String = ""
+	var pattern_type: String = "generic"  # drum, bass, chord, arp
 	
 	func get_step(position: int) -> Dictionary:
 		if steps.is_empty():
@@ -23,34 +26,407 @@ class Pattern:
 	func resize_pattern(new_length: int):
 		length = new_length
 		if steps.size() < new_length:
-			# Extend pattern
 			for i in range(steps.size(), new_length):
-				steps.append({
-					"active": false,
-					"velocity": 1.0,
-					"pitch": 0.0,
-					"probability": 1.0,
-					"sound_index": 0
-				})
+				steps.append(_get_default_step())
 		elif steps.size() > new_length:
-			# Truncate pattern
 			steps = steps.slice(0, new_length)
+	
+	func _get_default_step() -> Dictionary:
+		return {
+			"active": false,
+			"velocity": 1.0,
+			"pitch": 0.0,
+			"probability": 1.0,
+			"sound_index": 0,
+			"duration": 1.0,
+			"micro_timing": 0.0
+		}
 
-# Multi-track patterns
-var patterns: Dictionary = {}
+
+# ===== TRACK DATA STRUCTURE =====
+
+class Track:
+	var name: String = ""
+	var pattern: Pattern = null
+	var track_type: String = "drum"  # drum, bass, chord, arp
+	var muted: bool = false
+	var solo: bool = false
+	var volume: float = 1.0
+	var pan: float = 0.0
+	
+	# Track-specific data
+	var drum_data: DrumTrackData = null
+	var bass_data: BassTrackData = null
+	var chord_data: ChordTrackData = null
+	var arp_data: ArpTrackData = null
+	
+	func _init(track_name: String = "", type: String = "drum"):
+		name = track_name
+		track_type = type
+		pattern = Pattern.new()
+		pattern.pattern_type = type
+		
+		match type:
+			"drum": drum_data = DrumTrackData.new()
+			"bass": bass_data = BassTrackData.new()
+			"chord": chord_data = ChordTrackData.new()
+			"arp": arp_data = ArpTrackData.new()
+
+
+# ===== TRACK-SPECIFIC DATA CLASSES =====
+
+class DrumTrackData:
+	var kit_name: String = "808_kit"
+	var elements: Array = ["kick", "snare", "hihat", "clap"]
+	var element_mutes: Dictionary = {}
+	var element_volumes: Dictionary = {}
+
+
+class BassTrackData:
+	var root_note: int = 36  # C2
+	var octave: int = 2
+	var notes: Array = []    # Per-step MIDI notes
+	var glides: Array = []   # Per-step glide flags
+	var scale: String = "minor"
+	var synth_type: String = "sub"
+
+
+class ChordTrackData:
+	var key: String = "C"
+	var scale: String = "major"
+	var chords: Array = []     # Per-step chord degrees
+	var voicings: Array = []   # Per-step voicing indices
+	var sustains: Array = []   # Per-step sustain flags
+	var inversion: int = 0
+
+
+class ArpTrackData:
+	var direction: String = "up"      # up, down, up_down, down_up, random, as_played
+	var rate: String = "1/8"          # 1/4, 1/8, 1/16, 1/32, triplets
+	var octave_range: int = 1         # 1-4
+	var gate_length: float = 0.8      # 0.1-1.0
+	var velocity_curve: String = "flat"  # flat, crescendo, decrescendo, accent
+
+
+# ===== MAIN SEQUENCER =====
+
+# Multi-track storage
+var tracks: Dictionary = {}           # track_name -> Track
+var patterns: Dictionary = {}         # pattern_name -> Pattern (legacy compatibility)
 var global_position: int = 0
 var steps_per_beat: int = 4
+var bpm: float = 120.0
 
-# Pattern events
+# Signals
 signal pattern_created(name: String)
 signal pattern_step_triggered(pattern_name: String, step: int)
+signal pattern_changed(track_name: String, step: int, data: Dictionary)
+signal track_added(track_name: String, track_type: String)
+signal track_removed(track_name: String)
+
 
 func _ready():
 	print("🎹 PATTERN SEQUENCER 🎹")
-	print("Advanced pattern generation system ready")
+	print("Unified pattern system ready (drums, bass, chords, arps)")
+
+
+# ===== TRACK MANAGEMENT =====
+
+func create_track(name: String, track_type: String = "drum", length: int = 16) -> Track:
+	"""Create a new track with specified type"""
+	var track = Track.new(name, track_type)
+	track.pattern.resize_pattern(length)
+	track.pattern.name = name
+	
+	# Initialize type-specific step data
+	match track_type:
+		"bass":
+			track.bass_data.notes.resize(length)
+			track.bass_data.glides.resize(length)
+			for i in range(length):
+				track.bass_data.notes[i] = track.bass_data.root_note
+				track.bass_data.glides[i] = false
+		"chord":
+			track.chord_data.chords.resize(length)
+			track.chord_data.voicings.resize(length)
+			track.chord_data.sustains.resize(length)
+			for i in range(length):
+				track.chord_data.chords[i] = "rest"
+				track.chord_data.voicings[i] = 0
+				track.chord_data.sustains[i] = false
+	
+	tracks[name] = track
+	track_added.emit(name, track_type)
+	print("   ✨ Track created: %s (type: %s, %d steps)" % [name, track_type, length])
+	return track
+
+
+func get_track(name: String) -> Track:
+	"""Get a track by name"""
+	return tracks.get(name, null)
+
+
+func delete_track(name: String):
+	"""Delete a track"""
+	if tracks.has(name):
+		tracks.erase(name)
+		track_removed.emit(name)
+		print("   🗑️ Track deleted: %s" % name)
+
+
+func get_all_tracks() -> Array:
+	"""Get all track names"""
+	return tracks.keys()
+
+
+func get_tracks_by_type(track_type: String) -> Array:
+	"""Get all tracks of a specific type"""
+	var result = []
+	for name in tracks.keys():
+		if tracks[name].track_type == track_type:
+			result.append(name)
+	return result
+
+
+# ===== STEP VELOCITY ACCESS =====
+
+func get_step_velocity(track_name: String, step: int) -> float:
+	"""Get velocity at a specific step"""
+	var track = get_track(track_name)
+	if track == null:
+		return 0.0
+	
+	var step_data = track.pattern.get_step(step)
+	return step_data.get("velocity", 0.0) if step_data.get("active", false) else 0.0
+
+
+func set_step_velocity(track_name: String, step: int, velocity: float):
+	"""Set velocity at a specific step"""
+	var track = get_track(track_name)
+	if track == null:
+		return
+	
+	var step_data = track.pattern.get_step(step)
+	step_data["velocity"] = velocity
+	step_data["active"] = velocity > 0.0
+	track.pattern.set_step(step, step_data)
+	
+	pattern_changed.emit(track_name, step, step_data)
+
+
+func get_pattern_for_track(track_name: String) -> Pattern:
+	"""Get the pattern object for a track"""
+	var track = get_track(track_name)
+	if track:
+		return track.pattern
+	return null
+
+
+# ===== DRUM-SPECIFIC METHODS =====
+
+func set_drum_hit(track_name: String, element: String, step: int, velocity: float = 1.0):
+	"""Set a drum hit for a specific element at a step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "drum":
+		return
+	
+	var step_data = track.pattern.get_step(step)
+	if not step_data.has("elements"):
+		step_data["elements"] = {}
+	
+	step_data["elements"][element] = velocity
+	step_data["active"] = true
+	track.pattern.set_step(step, step_data)
+	
+	pattern_changed.emit(track_name, step, step_data)
+
+
+func get_drum_hit(track_name: String, element: String, step: int) -> float:
+	"""Get drum hit velocity for element at step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "drum":
+		return 0.0
+	
+	var step_data = track.pattern.get_step(step)
+	if step_data.has("elements"):
+		return step_data["elements"].get(element, 0.0)
+	return 0.0
+
+
+func load_drum_pattern(track_name: String, patterns_dict: Dictionary, elements: Array = []):
+	"""Load drum patterns from dictionary format"""
+	var track = get_track(track_name)
+	if track == null:
+		track = create_track(track_name, "drum", 16)
+	
+	if elements.is_empty():
+		elements = patterns_dict.keys()
+	
+	track.drum_data.elements = elements
+	
+	# Convert to step-based format
+	for step in range(track.pattern.length):
+		var step_data = {"active": false, "elements": {}, "velocity": 1.0}
+		for element in elements:
+			if patterns_dict.has(element) and step < patterns_dict[element].size():
+				var vel = patterns_dict[element][step]
+				if vel > 0:
+					step_data["elements"][element] = vel
+					step_data["active"] = true
+		track.pattern.set_step(step, step_data)
+
+
+func get_drum_patterns(track_name: String) -> Dictionary:
+	"""Export drum patterns back to dictionary format"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "drum":
+		return {}
+	
+	var result = {}
+	for element in track.drum_data.elements:
+		result[element] = []
+		for step in range(track.pattern.length):
+			result[element].append(get_drum_hit(track_name, element, step))
+	
+	return result
+
+
+# ===== BASS-SPECIFIC METHODS =====
+
+func set_bass_note(track_name: String, step: int, midi_note: int, velocity: float = 1.0, glide: bool = false):
+	"""Set bass note at step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "bass":
+		return
+	
+	var step_data = track.pattern.get_step(step)
+	step_data["active"] = velocity > 0
+	step_data["velocity"] = velocity
+	step_data["pitch"] = midi_note
+	track.pattern.set_step(step, step_data)
+	
+	if step < track.bass_data.notes.size():
+		track.bass_data.notes[step] = midi_note
+		track.bass_data.glides[step] = glide
+	
+	pattern_changed.emit(track_name, step, step_data)
+
+
+func get_bass_note(track_name: String, step: int) -> Dictionary:
+	"""Get bass note data at step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "bass":
+		return {"note": 0, "velocity": 0, "glide": false}
+	
+	var step_data = track.pattern.get_step(step)
+	var note = track.bass_data.notes[step] if step < track.bass_data.notes.size() else 36
+	var glide = track.bass_data.glides[step] if step < track.bass_data.glides.size() else false
+	
+	return {
+		"note": note,
+		"velocity": step_data.get("velocity", 0.0) if step_data.get("active", false) else 0.0,
+		"glide": glide
+	}
+
+
+func set_bass_root(track_name: String, root_note: int, octave: int = -1):
+	"""Set bass track root note and optionally octave"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "bass":
+		return
+	
+	track.bass_data.root_note = root_note
+	if octave >= 0:
+		track.bass_data.octave = octave
+
+
+# ===== CHORD-SPECIFIC METHODS =====
+
+func set_chord(track_name: String, step: int, chord_degree: String, voicing: int = 0, sustain: bool = false, velocity: float = 1.0):
+	"""Set chord at step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "chord":
+		return
+	
+	var step_data = track.pattern.get_step(step)
+	step_data["active"] = chord_degree != "rest" and velocity > 0
+	step_data["velocity"] = velocity
+	track.pattern.set_step(step, step_data)
+	
+	if step < track.chord_data.chords.size():
+		track.chord_data.chords[step] = chord_degree
+		track.chord_data.voicings[step] = voicing
+		track.chord_data.sustains[step] = sustain
+	
+	pattern_changed.emit(track_name, step, step_data)
+
+
+func get_chord(track_name: String, step: int) -> Dictionary:
+	"""Get chord data at step"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "chord":
+		return {"chord": "rest", "voicing": 0, "sustain": false, "velocity": 0.0}
+	
+	var step_data = track.pattern.get_step(step)
+	
+	return {
+		"chord": track.chord_data.chords[step] if step < track.chord_data.chords.size() else "rest",
+		"voicing": track.chord_data.voicings[step] if step < track.chord_data.voicings.size() else 0,
+		"sustain": track.chord_data.sustains[step] if step < track.chord_data.sustains.size() else false,
+		"velocity": step_data.get("velocity", 0.0) if step_data.get("active", false) else 0.0
+	}
+
+
+func set_chord_key(track_name: String, key: String, scale: String = ""):
+	"""Set chord track key and scale"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "chord":
+		return
+	
+	track.chord_data.key = key
+	if not scale.is_empty():
+		track.chord_data.scale = scale
+
+
+# ===== ARP-SPECIFIC METHODS =====
+
+func set_arp_settings(track_name: String, settings: Dictionary):
+	"""Set arpeggiator settings"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "arp":
+		return
+	
+	if settings.has("direction"):
+		track.arp_data.direction = settings["direction"]
+	if settings.has("rate"):
+		track.arp_data.rate = settings["rate"]
+	if settings.has("octave_range"):
+		track.arp_data.octave_range = settings["octave_range"]
+	if settings.has("gate_length"):
+		track.arp_data.gate_length = settings["gate_length"]
+	if settings.has("velocity_curve"):
+		track.arp_data.velocity_curve = settings["velocity_curve"]
+
+
+func get_arp_settings(track_name: String) -> Dictionary:
+	"""Get arpeggiator settings"""
+	var track = get_track(track_name)
+	if track == null or track.track_type != "arp":
+		return {}
+	
+	return {
+		"direction": track.arp_data.direction,
+		"rate": track.arp_data.rate,
+		"octave_range": track.arp_data.octave_range,
+		"gate_length": track.arp_data.gate_length,
+		"velocity_curve": track.arp_data.velocity_curve
+	}
+
+
+# ===== LEGACY PATTERN METHODS (for compatibility) =====
 
 func create_pattern(name: String, length: int) -> Pattern:
-	"""Create a new pattern"""
+	"""Create a new pattern (legacy compatibility)"""
 	var pattern = Pattern.new()
 	pattern.name = name
 	pattern.length = length
@@ -64,7 +440,7 @@ func create_pattern(name: String, length: int) -> Pattern:
 			"probability": 1.0,
 			"sound_index": 0,
 			"duration": 1.0,
-			"micro_timing": 0.0  # Timing offset in ms
+			"micro_timing": 0.0
 		}
 	
 	patterns[name] = pattern
@@ -72,15 +448,18 @@ func create_pattern(name: String, length: int) -> Pattern:
 	print("   ✨ Pattern created: %s (%d steps)" % [name, length])
 	return pattern
 
+
 func get_pattern(name: String) -> Pattern:
-	"""Get a pattern by name"""
+	"""Get a pattern by name (legacy compatibility)"""
 	return patterns.get(name, null)
 
+
 func delete_pattern(name: String):
-	"""Delete a pattern"""
+	"""Delete a pattern (legacy compatibility)"""
 	if patterns.has(name):
 		patterns.erase(name)
 		print("   🗑️ Pattern deleted: %s" % name)
+
 
 # ===== EUCLIDEAN RHYTHMS =====
 
@@ -100,7 +479,6 @@ func generate_euclidean_rhythm(pattern: Pattern, pulses: int, steps: int = -1):
 		else:
 			bucket.append([0])
 	
-	# Distribute evenly using Euclidean algorithm
 	while bucket.size() > 1:
 		var ones = []
 		var zeros = []
@@ -117,23 +495,19 @@ func generate_euclidean_rhythm(pattern: Pattern, pulses: int, steps: int = -1):
 		bucket.clear()
 		var min_count = min(ones.size(), zeros.size())
 		
-		# Pair ones with zeros
 		for i in range(min_count):
 			var combined = ones[i] + zeros[i]
 			bucket.append(combined)
 		
-		# Add remaining groups
 		for i in range(min_count, ones.size()):
 			bucket.append(ones[i])
 		for i in range(min_count, zeros.size()):
 			bucket.append(zeros[i])
 	
-	# Flatten to pattern
 	var flat_pattern = []
 	for group in bucket:
 		flat_pattern.append_array(group)
 	
-	# Apply to pattern steps
 	for i in range(min(steps, flat_pattern.size())):
 		pattern.steps[i] = {
 			"active": flat_pattern[i] == 1,
@@ -147,241 +521,6 @@ func generate_euclidean_rhythm(pattern: Pattern, pulses: int, steps: int = -1):
 	
 	print("   🔄 Euclidean rhythm: %d pulses in %d steps" % [pulses, steps])
 
-# ===== ALGORITHMIC PATTERNS =====
-
-func generate_kick_pattern(pattern: Pattern, style: String = "four_on_floor"):
-	"""Generate kick drum patterns"""
-	pattern.steps.clear()
-	pattern.steps.resize(pattern.length)
-	
-	# Initialize all steps as inactive
-	for i in range(pattern.length):
-		pattern.steps[i] = {
-			"active": false,
-			"velocity": 1.0,
-			"pitch": 0.0,
-			"probability": 1.0,
-			"sound_index": 0,
-			"duration": 1.0,
-			"micro_timing": 0.0
-		}
-	
-	match style:
-		"four_on_floor":
-			# Classic house/techno 4/4 pattern
-			for i in range(0, pattern.length, 4):
-				pattern.steps[i].active = true
-				pattern.steps[i].velocity = 1.0
-		
-		"breakbeat":
-			# Amen break inspired pattern
-			var break_pattern = [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0]
-			for i in range(min(pattern.length, break_pattern.size())):
-				pattern.steps[i].active = break_pattern[i] == 1
-				pattern.steps[i].velocity = randf_range(0.8, 1.0)
-		
-		"trap":
-			# Trap-style kick pattern
-			var trap_kicks = [0, 4, 6, 10, 14]  # Typical trap kick positions
-			for pos in trap_kicks:
-				if pos < pattern.length:
-					pattern.steps[pos].active = true
-					pattern.steps[pos].velocity = randf_range(0.9, 1.0)
-		
-		"dnb":
-			# Drum & Bass pattern
-			pattern.steps[0].active = true   # Strong kick on 1
-			pattern.steps[0].velocity = 1.0
-			if pattern.length >= 12:
-				pattern.steps[10].active = true  # Syncopated kick
-				pattern.steps[10].velocity = 0.8
-
-func generate_hihat_pattern(pattern: Pattern, style: String = "steady"):
-	"""Generate hi-hat patterns"""
-	pattern.steps.clear()
-	pattern.steps.resize(pattern.length)
-	
-	# Initialize all steps
-	for i in range(pattern.length):
-		pattern.steps[i] = {
-			"active": false,
-			"velocity": randf_range(0.6, 0.9),
-			"pitch": randf_range(-2.0, 2.0),  # Slight pitch variation
-			"probability": 1.0,
-			"sound_index": 0,
-			"duration": 0.3,
-			"micro_timing": 0.0
-		}
-	
-	match style:
-		"steady":
-			# Simple 8th note pattern
-			for i in range(1, pattern.length, 2):
-				pattern.steps[i].active = true
-		
-		"shuffled":
-			# Shuffled 16th notes
-			for i in range(1, pattern.length, 4):
-				pattern.steps[i].active = true
-				pattern.steps[i].micro_timing = 30.0  # Swing timing
-			for i in range(3, pattern.length, 4):
-				pattern.steps[i].active = true
-				pattern.steps[i].velocity *= 0.7  # Quieter off-beats
-		
-		"trap":
-			# Trap hi-hat rolls
-			for i in range(pattern.length):
-				if i % 4 == 2:  # Main hi-hats on off-beats
-					pattern.steps[i].active = true
-					pattern.steps[i].velocity = 0.8
-				elif randf() < 0.3:  # Random additional hits
-					pattern.steps[i].active = true
-					pattern.steps[i].velocity = randf_range(0.4, 0.6)
-		
-		"jungle":
-			# Jungle/DnB style chopped up hi-hats
-			for i in range(pattern.length):
-				if randf() < 0.6:
-					pattern.steps[i].active = true
-					pattern.steps[i].velocity = randf_range(0.3, 0.8)
-					pattern.steps[i].pitch = randf_range(-5.0, 3.0)
-
-func generate_snare_pattern(pattern: Pattern, style: String = "backbeat"):
-	"""Generate snare patterns"""
-	pattern.steps.clear()
-	pattern.steps.resize(pattern.length)
-	
-	# Initialize all steps
-	for i in range(pattern.length):
-		pattern.steps[i] = {
-			"active": false,
-			"velocity": 1.0,
-			"pitch": 0.0,
-			"probability": 1.0,
-			"sound_index": 0,
-			"duration": 1.0,
-			"micro_timing": 0.0
-		}
-	
-	match style:
-		"backbeat":
-			# Classic rock/pop backbeat
-			pattern.steps[4].active = true   # Beat 2
-			pattern.steps[12].active = true  # Beat 4
-		
-		"breakbeat":
-			# Complex breakbeat snare placement
-			var snare_hits = [4, 10, 14]
-			for pos in snare_hits:
-				if pos < pattern.length:
-					pattern.steps[pos].active = true
-					pattern.steps[pos].velocity = randf_range(0.8, 1.0)
-		
-		"dnb":
-			# Drum & Bass snare on beat 3
-			if pattern.length >= 8:
-				pattern.steps[8].active = true
-				pattern.steps[8].velocity = 1.0
-		
-		"latin":
-			# Latin-inspired syncopated snares
-			var latin_snares = [3, 6, 11, 14]
-			for pos in latin_snares:
-				if pos < pattern.length:
-					pattern.steps[pos].active = true
-					pattern.steps[pos].velocity = randf_range(0.7, 0.9)
-
-# ===== MELODIC PATTERNS =====
-
-func generate_bass_line(pattern: Pattern, key: String = "Am", style: String = "steady"):
-	"""Generate bass line patterns"""
-	# Define scale notes (semitones from root)
-	var scales = {
-		"Am": [0, 2, 3, 5, 7, 8, 10],      # A natural minor
-		"Em": [0, 2, 3, 5, 7, 8, 10],      # E natural minor  
-		"Dm": [0, 2, 3, 5, 7, 8, 10],      # D natural minor
-		"Cm": [0, 2, 3, 5, 7, 8, 10],      # C natural minor
-	}
-	
-	var scale = scales.get(key, scales["Am"])
-	
-	pattern.steps.clear()
-	pattern.steps.resize(pattern.length)
-	
-	for i in range(pattern.length):
-		pattern.steps[i] = {
-			"active": false,
-			"velocity": 0.8,
-			"pitch": 0.0,
-			"probability": 1.0,
-			"sound_index": 0,
-			"duration": 2.0,
-			"micro_timing": 0.0
-		}
-	
-	match style:
-		"steady":
-			# Root notes on strong beats
-			for i in range(0, pattern.length, 8):
-				pattern.steps[i].active = true
-				pattern.steps[i].pitch = 0.0  # Root note
-				pattern.steps[i].velocity = 1.0
-		
-		"walking":
-			# Walking bass line
-			for i in range(0, pattern.length, 2):
-				pattern.steps[i].active = true
-				var scale_degree = (i / 2) % scale.size()
-				pattern.steps[i].pitch = scale[scale_degree] - 12  # One octave down
-				pattern.steps[i].velocity = randf_range(0.7, 0.9)
-		
-		"acid":
-			# TB-303 style acid bass
-			for i in range(pattern.length):
-				if randf() < 0.6:
-					pattern.steps[i].active = true
-					pattern.steps[i].pitch = scale[randi() % scale.size()] - 12
-					pattern.steps[i].velocity = randf_range(0.6, 1.0)
-					pattern.steps[i].duration = randf_range(0.5, 2.0)
-
-func generate_arp_pattern(pattern: Pattern, chord: Array = [0, 4, 7], style: String = "up"):
-	"""Generate arpeggiated patterns"""
-	pattern.steps.clear()
-	pattern.steps.resize(pattern.length)
-	
-	for i in range(pattern.length):
-		pattern.steps[i] = {
-			"active": false,
-			"velocity": 0.7,
-			"pitch": 0.0,
-			"probability": 1.0,
-			"sound_index": 0,
-			"duration": 0.8,
-			"micro_timing": 0.0
-		}
-	
-	var chord_extended = chord + chord.map(func(note): return note + 12)  # Add octave
-	
-	match style:
-		"up":
-			for i in range(0, pattern.length, 2):
-				var note_index = (i / 2) % chord_extended.size()
-				pattern.steps[i].active = true
-				pattern.steps[i].pitch = chord_extended[note_index]
-		
-		"down":
-			chord_extended.reverse()
-			for i in range(0, pattern.length, 2):
-				var note_index = (i / 2) % chord_extended.size()
-				pattern.steps[i].active = true
-				pattern.steps[i].pitch = chord_extended[note_index]
-		
-		"random":
-			for i in range(0, pattern.length, 2):
-				if randf() < 0.8:
-					pattern.steps[i].active = true
-					pattern.steps[i].pitch = chord_extended[randi() % chord_extended.size()]
-					pattern.steps[i].velocity = randf_range(0.5, 0.9)
 
 # ===== PATTERN MANIPULATION =====
 
@@ -391,22 +530,33 @@ func apply_swing(pattern: Pattern, amount: float):
 	
 	for i in range(pattern.steps.size()):
 		if i % 2 == 1:  # Off-beat steps
-			pattern.steps[i].micro_timing = amount * 100.0  # Convert to ms
+			pattern.steps[i].micro_timing = amount * 100.0
 
-func apply_velocity_humanization(pattern: Pattern, variation: float):
-	"""Add human-like velocity variation"""
-	pattern.velocity_variation = variation
+
+func apply_humanize(pattern: Pattern, amount_ms: float):
+	"""Apply humanization (timing and velocity variation)"""
+	pattern.humanize = amount_ms
 	
 	for step in pattern.steps:
 		if step.active:
+			step.micro_timing = randf_range(-amount_ms, amount_ms)
+			step.velocity = clampf(step.velocity + randf_range(-0.1, 0.1), 0.1, 1.0)
+
+
+func apply_velocity_humanization(pattern: Pattern, variation: float):
+	"""Add human-like velocity variation"""
+	for step in pattern.steps:
+		if step.active:
 			var random_factor = randf_range(-variation, variation)
-			step.velocity = clamp(step.velocity + random_factor, 0.1, 1.0)
+			step.velocity = clampf(step.velocity + random_factor, 0.1, 1.0)
+
 
 func apply_probability(pattern: Pattern, base_probability: float):
 	"""Set probability for all active steps"""
 	for step in pattern.steps:
 		if step.active:
 			step.probability = base_probability
+
 
 # ===== PATTERN OPERATIONS =====
 
@@ -419,36 +569,54 @@ func copy_pattern(source_name: String, dest_name: String) -> Pattern:
 	var new_pattern = create_pattern(dest_name, source.length)
 	new_pattern.steps = source.steps.duplicate(true)
 	new_pattern.swing = source.swing
-	new_pattern.velocity_variation = source.velocity_variation
+	new_pattern.humanize = source.humanize
 	
 	return new_pattern
 
-func merge_patterns(pattern1_name: String, pattern2_name: String, dest_name: String) -> Pattern:
-	"""Merge two patterns together"""
-	var p1 = patterns.get(pattern1_name)
-	var p2 = patterns.get(pattern2_name)
-	
-	if not p1 or not p2:
+
+func copy_track(source_name: String, dest_name: String) -> Track:
+	"""Copy a track with all its data"""
+	var source = get_track(source_name)
+	if not source:
 		return null
 	
-	var max_length = max(p1.length, p2.length)
-	var merged = create_pattern(dest_name, max_length)
+	var dest = create_track(dest_name, source.track_type, source.pattern.length)
+	dest.pattern.steps = source.pattern.steps.duplicate(true)
+	dest.pattern.swing = source.pattern.swing
+	dest.pattern.humanize = source.pattern.humanize
+	dest.muted = source.muted
+	dest.volume = source.volume
+	dest.pan = source.pan
 	
-	for i in range(max_length):
-		var step1 = p1.get_step(i) if i < p1.length else {"active": false}
-		var step2 = p2.get_step(i) if i < p2.length else {"active": false}
-		
-		merged.steps[i] = {
-			"active": step1.active or step2.active,
-			"velocity": max(step1.get("velocity", 0.0), step2.get("velocity", 0.0)),
-			"pitch": step1.get("pitch", 0.0) if step1.active else step2.get("pitch", 0.0),
-			"probability": min(step1.get("probability", 1.0), step2.get("probability", 1.0)),
-			"sound_index": step1.get("sound_index", 0) if step1.active else step2.get("sound_index", 0),
-			"duration": max(step1.get("duration", 1.0), step2.get("duration", 1.0)),
-			"micro_timing": 0.0
-		}
+	# Copy type-specific data
+	match source.track_type:
+		"drum":
+			dest.drum_data.kit_name = source.drum_data.kit_name
+			dest.drum_data.elements = source.drum_data.elements.duplicate()
+			dest.drum_data.element_mutes = source.drum_data.element_mutes.duplicate()
+		"bass":
+			dest.bass_data.root_note = source.bass_data.root_note
+			dest.bass_data.octave = source.bass_data.octave
+			dest.bass_data.notes = source.bass_data.notes.duplicate()
+			dest.bass_data.glides = source.bass_data.glides.duplicate()
+			dest.bass_data.scale = source.bass_data.scale
+		"chord":
+			dest.chord_data.key = source.chord_data.key
+			dest.chord_data.scale = source.chord_data.scale
+			dest.chord_data.chords = source.chord_data.chords.duplicate()
+			dest.chord_data.voicings = source.chord_data.voicings.duplicate()
+			dest.chord_data.sustains = source.chord_data.sustains.duplicate()
+		"arp":
+			dest.arp_data.direction = source.arp_data.direction
+			dest.arp_data.rate = source.arp_data.rate
+			dest.arp_data.octave_range = source.arp_data.octave_range
+			dest.arp_data.gate_length = source.arp_data.gate_length
+			dest.arp_data.velocity_curve = source.arp_data.velocity_curve
 	
-	return merged
+	return dest
+
+
+# ===== INFO & DEBUG =====
 
 func get_pattern_info() -> Dictionary:
 	"""Get information about all patterns"""
@@ -465,12 +633,34 @@ func get_pattern_info() -> Dictionary:
 			"length": pattern.length,
 			"active_steps": active_steps,
 			"swing": pattern.swing,
-			"velocity_variation": pattern.velocity_variation
+			"humanize": pattern.humanize
 		}
 	
 	return info
 
-# ===== CONSOLE COMMANDS =====
+
+func get_track_info() -> Dictionary:
+	"""Get information about all tracks"""
+	var info = {}
+	
+	for name in tracks.keys():
+		var track = tracks[name]
+		var active_steps = 0
+		for step in track.pattern.steps:
+			if step.active:
+				active_steps += 1
+		
+		info[name] = {
+			"type": track.track_type,
+			"length": track.pattern.length,
+			"active_steps": active_steps,
+			"swing": track.pattern.swing,
+			"muted": track.muted,
+			"solo": track.solo
+		}
+	
+	return info
+
 
 func list_patterns():
 	"""List all patterns"""
@@ -484,4 +674,26 @@ func list_patterns():
 			data.length, 
 			data.active_steps, 
 			data.swing
-		]) 
+		])
+
+
+func list_tracks():
+	"""List all tracks"""
+	print("🎹 TRACK LIST 🎹")
+	var info = get_track_info()
+	
+	for name in info.keys():
+		var data = info[name]
+		var status = ""
+		if data.muted:
+			status = " [MUTED]"
+		elif data.solo:
+			status = " [SOLO]"
+		print("   %s (%s): %d steps (%d active) | Swing: %.2f%s" % [
+			name,
+			data.type,
+			data.length, 
+			data.active_steps, 
+			data.swing,
+			status
+		])

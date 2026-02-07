@@ -1,7 +1,6 @@
 # SoundDetailPanel.gd
-# Full sound editing panel - click a sound in catalog to open
-# Shows: sliders, words, suggestions, evaluations
-# All editable and immediately affects playback
+# Full sound editing panel with tabs: Sound (params), Pattern (sequencer), FX
+# Click a sound in catalog to open
 
 extends PanelContainer
 class_name SoundDetailPanel
@@ -11,31 +10,60 @@ const SynthConfigRegistry = preload("res://commons/audio/catalog/SynthConfigRegi
 const SoundIdentity = preload("res://commons/audio/catalog/SoundIdentity.gd")
 const SoundDescriptions = preload("res://commons/audio/catalog/SoundDescriptions.gd")
 
+# Unified pattern editors (new architecture)
+const DrumPatternEditor = preload("res://commons/audio/catalog/ui/DrumPatternEditor.gd")
+const BassPatternEditor = preload("res://commons/audio/catalog/ui/BassPatternEditor.gd")
+const ChordPatternEditor = preload("res://commons/audio/catalog/ui/ChordPatternEditor.gd")
+const ArpPatternEditor = preload("res://commons/audio/catalog/ui/ArpPatternEditor.gd")
+
+# Legacy editors (deprecated - kept for backwards compatibility)
+const DrumSequencer = preload("res://commons/audio/catalog/ui/DrumSequencer.gd")
+const BassTimeline = preload("res://commons/audio/catalog/ui/BassTimeline.gd")
+const ChordTimeline = preload("res://commons/audio/catalog/ui/ChordTimeline.gd")
+const ArpeggioEditor = preload("res://commons/audio/catalog/ui/ArpeggioEditor.gd")
+
+# Use unified editors by default
+var _use_unified_editors: bool = true
+
 signal param_changed(layer: String, param: String, value: float)
 signal word_added(layer: String, word: String)
 signal word_removed(layer: String, word: String)
 signal preview_requested(layer: String)
 signal suggestion_applied(layer: String, changes: Dictionary)
+signal pattern_changed(layer: String, pattern_data: Dictionary)
 signal close_requested()
 
 var _word_bridge: WordSynthBridge
 var _current_layer: String = ""
 var _current_song: String = ""
+var _current_section: String = ""
 var _current_params: Dictionary = {}
 var _current_words: Array = []
 var _original_params: Dictionary = {}
+var _current_pattern: Dictionary = {}
 
 # UI Components
 var _header_label: Label
 var _type_label: Label
 var _synth_description: Label
 var _preview_btn: Button
+var _tab_container: TabContainer
 
-# Sections
+# Sound Tab
+var _sound_tab: Control
 var _sliders_container: VBoxContainer
 var _words_container: HFlowContainer
 var _suggestions_container: VBoxContainer
 var _evaluation_container: VBoxContainer
+
+# Pattern Tab
+var _pattern_tab: Control
+var _pattern_editor: Control  # Will be DrumSequencer, BassTimeline, ChordTimeline, or ArpeggioEditor
+var _pattern_type_label: Label
+
+# FX Tab  
+var _fx_tab: Control
+var _fx_sliders: Dictionary = {}
 
 # Slider references
 var _param_sliders: Dictionary = {}  # param_name -> {slider, value_label, min, max}
@@ -116,6 +144,14 @@ const WORD_CATEGORIES = {
 	"movement": Color(0.9, 0.4, 0.7),
 }
 
+# Sound type detection for pattern editors
+const DRUM_SOUNDS = ["kick", "snare", "clap", "hihat", "rimshot", "shaker", 
+					 "tambourine", "perc", "cr5000_kick", "cr5000_snare", 
+					 "cr5000_hihat", "fingersnap"]
+const BASS_SOUNDS = ["bass", "sub", "hoover"]
+const CHORD_SOUNDS = ["pad", "keys", "rhodes", "strings", "piano", "organ", "stab"]
+const ARP_SOUNDS = ["arp", "sequence", "sequencer", "jupiter_arp"]
+
 
 func _ready():
 	_word_bridge = WordSynthBridge.new()
@@ -135,15 +171,10 @@ func _setup_ui():
 	style.content_margin_bottom = 12
 	add_theme_stylebox_override("panel", style)
 	
-	var scroll = ScrollContainer.new()
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	add_child(scroll)
-	
 	var main_vbox = VBoxContainer.new()
-	main_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	main_vbox.add_theme_constant_override("separation", 16)
-	scroll.add_child(main_vbox)
+	main_vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	main_vbox.add_theme_constant_override("separation", 12)
+	add_child(main_vbox)
 	
 	# === HEADER ===
 	var header = HBoxContainer.new()
@@ -176,49 +207,93 @@ func _setup_ui():
 	_synth_description.add_theme_font_size_override("font_size", 12)
 	_synth_description.add_theme_color_override("font_color", Color(0.6, 0.7, 0.65))
 	_synth_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_synth_description.custom_minimum_size.y = 40
+	_synth_description.custom_minimum_size.y = 30
 	main_vbox.add_child(_synth_description)
 	
+	# === TAB CONTAINER ===
+	_tab_container = TabContainer.new()
+	_tab_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_style_tab_container(_tab_container)
+	main_vbox.add_child(_tab_container)
+	
+	# Create tabs
+	_setup_sound_tab()
+	_setup_pattern_tab()
+	_setup_fx_tab()
+
+
+func _style_tab_container(tabs: TabContainer):
+	# Modern tab styling
+	tabs.add_theme_constant_override("side_margin", 0)
+	
+	var tab_style = StyleBoxFlat.new()
+	tab_style.bg_color = Color(0.12, 0.12, 0.15)
+	tab_style.set_corner_radius_all(4)
+	tab_style.corner_radius_bottom_left = 0
+	tab_style.corner_radius_bottom_right = 0
+	
+	var tab_selected = tab_style.duplicate()
+	tab_selected.bg_color = Color(0.18, 0.18, 0.22)
+	tab_selected.border_color = Color(0.4, 0.6, 0.8)
+	tab_selected.border_width_top = 2
+
+
+func _setup_sound_tab():
+	_sound_tab = VBoxContainer.new()
+	_sound_tab.name = "🎛️ Sound"
+	_sound_tab.add_theme_constant_override("separation", 12)
+	_tab_container.add_child(_sound_tab)
+	
+	var scroll = ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_sound_tab.add_child(scroll)
+	
+	var content = VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 16)
+	scroll.add_child(content)
+	
 	# === WORDS SECTION ===
-	main_vbox.add_child(_create_section_header("🏷️ WORDS", Color(0.9, 0.7, 0.4)))
+	content.add_child(_create_section_header("🏷️ WORDS", Color(0.9, 0.7, 0.4)))
 	
 	_words_container = HFlowContainer.new()
 	_words_container.add_theme_constant_override("h_separation", 8)
 	_words_container.add_theme_constant_override("v_separation", 6)
-	main_vbox.add_child(_words_container)
+	content.add_child(_words_container)
 	
 	# Add word button
 	var add_word_btn = Button.new()
 	add_word_btn.text = "+ Add Word"
 	add_word_btn.pressed.connect(_on_add_word_pressed)
 	_style_button(add_word_btn, Color(0.3, 0.4, 0.5))
-	main_vbox.add_child(add_word_btn)
+	content.add_child(add_word_btn)
 	
 	# === SLIDERS SECTION ===
-	main_vbox.add_child(_create_section_header("⚙️ PARAMETERS", Color(0.4, 0.7, 0.9)))
+	content.add_child(_create_section_header("⚙️ PARAMETERS", Color(0.4, 0.7, 0.9)))
 	
 	_sliders_container = VBoxContainer.new()
 	_sliders_container.add_theme_constant_override("separation", 8)
-	main_vbox.add_child(_sliders_container)
+	content.add_child(_sliders_container)
 	
 	# === SUGGESTIONS SECTION ===
-	main_vbox.add_child(_create_section_header("💡 SUGGESTIONS", Color(0.9, 0.8, 0.4)))
+	content.add_child(_create_section_header("💡 SUGGESTIONS", Color(0.9, 0.8, 0.4)))
 	
 	_suggestions_container = VBoxContainer.new()
 	_suggestions_container.add_theme_constant_override("separation", 4)
-	main_vbox.add_child(_suggestions_container)
+	content.add_child(_suggestions_container)
 	
 	# === EVALUATION SECTION ===
-	main_vbox.add_child(_create_section_header("📊 EVALUATION", Color(0.6, 0.9, 0.7)))
+	content.add_child(_create_section_header("📊 EVALUATION", Color(0.6, 0.9, 0.7)))
 	
 	_evaluation_container = VBoxContainer.new()
 	_evaluation_container.add_theme_constant_override("separation", 4)
-	main_vbox.add_child(_evaluation_container)
+	content.add_child(_evaluation_container)
 	
 	# === ACTION BUTTONS ===
 	var action_row = HBoxContainer.new()
 	action_row.add_theme_constant_override("separation", 8)
-	main_vbox.add_child(action_row)
+	content.add_child(action_row)
 	
 	var reset_btn = Button.new()
 	reset_btn.text = "↺ Reset"
@@ -237,6 +312,112 @@ func _setup_ui():
 	copy_btn.pressed.connect(_on_copy_config_pressed)
 	_style_button(copy_btn, Color(0.3, 0.4, 0.4))
 	action_row.add_child(copy_btn)
+
+
+func _setup_pattern_tab():
+	_pattern_tab = VBoxContainer.new()
+	_pattern_tab.name = "🎵 Pattern"
+	_pattern_tab.add_theme_constant_override("separation", 8)
+	_tab_container.add_child(_pattern_tab)
+	
+	# Pattern type label
+	_pattern_type_label = Label.new()
+	_pattern_type_label.text = "Select a sound to edit its pattern"
+	_pattern_type_label.add_theme_font_size_override("font_size", 14)
+	_pattern_type_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.65))
+	_pattern_tab.add_child(_pattern_type_label)
+	
+	# Pattern editor placeholder (will be replaced with appropriate editor)
+	var placeholder = Label.new()
+	placeholder.name = "PatternPlaceholder"
+	placeholder.text = "Pattern editor will appear here based on sound type"
+	placeholder.add_theme_font_size_override("font_size", 12)
+	placeholder.add_theme_color_override("font_color", Color(0.5, 0.5, 0.55))
+	placeholder.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	placeholder.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_pattern_tab.add_child(placeholder)
+
+
+func _setup_fx_tab():
+	_fx_tab = VBoxContainer.new()
+	_fx_tab.name = "✨ FX"
+	_fx_tab.add_theme_constant_override("separation", 12)
+	_tab_container.add_child(_fx_tab)
+	
+	var scroll = ScrollContainer.new()
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_fx_tab.add_child(scroll)
+	
+	var content = VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", 16)
+	scroll.add_child(content)
+	
+	# FX sections
+	content.add_child(_create_section_header("🌀 REVERB", Color(0.5, 0.7, 0.9)))
+	content.add_child(_create_fx_slider("reverb_mix", "Mix", 0.0, 1.0, 0.3))
+	content.add_child(_create_fx_slider("reverb_size", "Size", 0.0, 1.0, 0.5))
+	content.add_child(_create_fx_slider("reverb_damping", "Damping", 0.0, 1.0, 0.5))
+	
+	content.add_child(_create_section_header("⏱️ DELAY", Color(0.7, 0.6, 0.5)))
+	content.add_child(_create_fx_slider("delay_mix", "Mix", 0.0, 1.0, 0.2))
+	content.add_child(_create_fx_slider("delay_time", "Time", 0.05, 1.0, 0.375))
+	content.add_child(_create_fx_slider("delay_feedback", "Feedback", 0.0, 0.9, 0.3))
+	
+	content.add_child(_create_section_header("📢 DISTORTION", Color(0.9, 0.5, 0.4)))
+	content.add_child(_create_fx_slider("distortion_drive", "Drive", 0.0, 1.0, 0.0))
+	content.add_child(_create_fx_slider("distortion_mix", "Mix", 0.0, 1.0, 0.5))
+	
+	content.add_child(_create_section_header("🎚️ FILTER", Color(0.6, 0.8, 0.5)))
+	content.add_child(_create_fx_slider("filter_cutoff", "Cutoff", 20, 20000, 8000))
+	content.add_child(_create_fx_slider("filter_resonance", "Resonance", 0.0, 1.0, 0.1))
+
+
+func _create_fx_slider(param_name: String, label_text: String, min_val: float, max_val: float, default_val: float) -> Control:
+	var row = HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	
+	var label = Label.new()
+	label.text = label_text
+	label.add_theme_font_size_override("font_size", 12)
+	label.add_theme_color_override("font_color", Color(0.65, 0.65, 0.7))
+	label.custom_minimum_size.x = 80
+	row.add_child(label)
+	
+	var slider = HSlider.new()
+	slider.min_value = min_val
+	slider.max_value = max_val
+	slider.value = default_val
+	slider.step = (max_val - min_val) / 100.0
+	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slider.value_changed.connect(_on_fx_slider_changed.bind(param_name))
+	row.add_child(slider)
+	
+	var val_label = Label.new()
+	val_label.text = _format_value(default_val, min_val, max_val)
+	val_label.add_theme_font_size_override("font_size", 11)
+	val_label.add_theme_color_override("font_color", Color(0.5, 0.6, 0.7))
+	val_label.custom_minimum_size.x = 50
+	val_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(val_label)
+	
+	_fx_sliders[param_name] = {
+		"slider": slider,
+		"label": val_label,
+		"min": min_val,
+		"max": max_val
+	}
+	
+	slider.value_changed.connect(func(v): val_label.text = _format_value(v, min_val, max_val))
+	
+	return row
+
+
+func _on_fx_slider_changed(value: float, param_name: String):
+	# Emit FX param change
+	param_changed.emit(_current_layer, "fx." + param_name, value)
 
 
 func _create_section_header(title: String, color: Color) -> Label:
@@ -264,10 +445,11 @@ func _style_button(btn: Button, color: Color):
 
 # === PUBLIC API ===
 
-func load_sound(song_id: String, layer: String, words: Array = [], params: Dictionary = {}):
+func load_sound(song_id: String, layer: String, words: Array = [], params: Dictionary = {}, section: String = ""):
 	"""Load a sound for editing"""
 	_current_song = song_id
 	_current_layer = layer
+	_current_section = section
 	_current_words = words.duplicate()
 	
 	# Get params from registry or use provided
@@ -281,6 +463,8 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	_header_label.text = "🎛️ %s" % layer
 	var synth_type = SoundDescriptions.get_short_type(layer)
 	_type_label.text = "Song: %s | Type: %s" % [song_id, synth_type]
+	if not section.is_empty():
+		_type_label.text += " | Section: %s" % section
 	
 	# Synthesis description
 	_synth_description.text = "⚡ " + SoundDescriptions.get_description(layer, song_id)
@@ -290,6 +474,266 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	_rebuild_sliders()
 	_rebuild_suggestions()
 	_rebuild_evaluation()
+	
+	# Setup pattern editor
+	_setup_pattern_editor_for_layer(layer)
+	
+	# Load pattern data if available
+	_load_pattern_for_layer(song_id, layer)
+
+
+func _setup_pattern_editor_for_layer(layer: String):
+	"""Create the appropriate pattern editor based on layer type"""
+	# Remove existing pattern editor
+	if _pattern_editor != null:
+		_pattern_editor.queue_free()
+		_pattern_editor = null
+	
+	# Remove placeholder if exists
+	var placeholder = _pattern_tab.get_node_or_null("PatternPlaceholder")
+	if placeholder:
+		placeholder.queue_free()
+	
+	var layer_lower = layer.to_lower()
+	var editor_type = "none"
+	
+	# Determine editor type and create appropriate editor
+	if _is_drum_layer(layer_lower):
+		editor_type = "drum"
+		_pattern_type_label.text = "🥁 Drum Sequencer for: %s" % layer
+		if _use_unified_editors:
+			_pattern_editor = DrumPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_pattern_preview)
+		else:
+			_pattern_editor = DrumSequencer.new()
+			_pattern_editor.pattern_changed.connect(_on_drum_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_pattern_preview)
+	elif _is_bass_layer(layer_lower):
+		editor_type = "bass"
+		_pattern_type_label.text = "🎸 Bass Timeline for: %s" % layer
+		if _use_unified_editors:
+			_pattern_editor = BassPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_bass_preview)
+		else:
+			_pattern_editor = BassTimeline.new()
+			_pattern_editor.pattern_changed.connect(_on_bass_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_bass_preview)
+	elif _is_chord_layer(layer_lower):
+		editor_type = "chord"
+		_pattern_type_label.text = "🎹 Chord Timeline for: %s" % layer
+		if _use_unified_editors:
+			_pattern_editor = ChordPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_chord_preview)
+		else:
+			_pattern_editor = ChordTimeline.new()
+			_pattern_editor.pattern_changed.connect(_on_chord_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_chord_preview)
+	elif _is_arp_layer(layer_lower):
+		editor_type = "arp"
+		_pattern_type_label.text = "🎵 Arpeggio Editor for: %s" % layer
+		if _use_unified_editors:
+			_pattern_editor = ArpPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_arp_preview)
+		else:
+			_pattern_editor = ArpeggioEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_arp_pattern_changed)
+			_pattern_editor.preview_requested.connect(_on_arp_preview)
+	else:
+		# Default to drum pattern editor for unknown
+		_pattern_type_label.text = "🎵 Pattern Editor for: %s (generic)" % layer
+		if _use_unified_editors:
+			_pattern_editor = DrumPatternEditor.new()
+			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
+		else:
+			_pattern_editor = DrumSequencer.new()
+			_pattern_editor.pattern_changed.connect(_on_drum_pattern_changed)
+	
+	if _pattern_editor:
+		_pattern_editor.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		_pattern_tab.add_child(_pattern_editor)
+
+
+func _is_drum_layer(layer: String) -> bool:
+	for drum in DRUM_SOUNDS:
+		if drum in layer:
+			return true
+	return false
+
+
+func _is_bass_layer(layer: String) -> bool:
+	for bass in BASS_SOUNDS:
+		if bass in layer:
+			return true
+	return false
+
+
+func _is_chord_layer(layer: String) -> bool:
+	for chord in CHORD_SOUNDS:
+		if chord in layer:
+			return true
+	return false
+
+
+func _is_arp_layer(layer: String) -> bool:
+	for arp in ARP_SOUNDS:
+		if arp in layer:
+			return true
+	return false
+
+
+func _load_pattern_for_layer(song_id: String, layer: String):
+	"""Load pattern data from SoundbankGenerator.PATTERNS"""
+	# Try to access SoundbankGenerator patterns
+	var patterns = {}
+	if ClassDB.class_exists("SoundbankGenerator"):
+		var sg = ClassDB.instantiate("SoundbankGenerator")
+		if sg and sg.has_method("get_patterns"):
+			patterns = sg.get_patterns(song_id)
+	
+	# Fallback: try loading from the constant
+	if patterns.is_empty():
+		# Load patterns directly
+		var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
+		if SoundbankGenerator:
+			patterns = SoundbankGenerator.PATTERNS.get(song_id, {})
+	
+	_current_pattern = patterns
+	
+	# Load into the appropriate editor
+	var layer_lower = layer.to_lower()
+	
+	# Handle unified editors
+	if _use_unified_editors:
+		if _pattern_editor is DrumPatternEditor:
+			var drum_patterns = {}
+			for key in patterns.keys():
+				if _is_drum_layer(key.to_lower()):
+					drum_patterns[key] = patterns[key]
+			
+			if patterns.has(layer):
+				drum_patterns[layer] = patterns[layer]
+			
+			if not drum_patterns.is_empty():
+				_pattern_editor.load_patterns(drum_patterns)
+			else:
+				var single_pattern = {}
+				single_pattern[layer] = patterns.get(layer, [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0])
+				_pattern_editor.load_patterns(single_pattern)
+		
+		elif _pattern_editor is BassPatternEditor:
+			var bass_cfg = {}
+			var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
+			if SoundbankGenerator:
+				bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(song_id, {})
+			
+			if bass_cfg.has("pattern"):
+				var notes = bass_cfg.get("notes", [])
+				var glides = bass_cfg.get("glides", [])
+				_pattern_editor.load_pattern(bass_cfg["pattern"], notes, glides)
+		
+		elif _pattern_editor is ChordPatternEditor:
+			if patterns.has(layer):
+				_pattern_editor.load_pattern(patterns[layer])
+		
+		elif _pattern_editor is ArpPatternEditor:
+			var settings = {
+				"direction": "up",
+				"rate": "1/8",
+				"octave_range": 1,
+				"gate_length": 0.8,
+			}
+			_pattern_editor.load_settings(settings)
+		return
+	
+	# Legacy editors (backwards compatibility)
+	if _pattern_editor is DrumSequencer:
+		# For drums, we might need to filter or load specific patterns
+		var drum_patterns = {}
+		for key in patterns.keys():
+			if _is_drum_layer(key.to_lower()):
+				drum_patterns[key] = patterns[key]
+		
+		# If loading a specific drum layer, show that plus related drums
+		if patterns.has(layer):
+			drum_patterns[layer] = patterns[layer]
+		
+		if not drum_patterns.is_empty():
+			_pattern_editor.load_patterns(drum_patterns)
+		else:
+			# Load with just the current layer
+			var single_pattern = {}
+			single_pattern[layer] = patterns.get(layer, [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0])
+			_pattern_editor.load_patterns(single_pattern)
+	
+	elif _pattern_editor is BassTimeline:
+		# Load bass pattern
+		var bass_cfg = {}
+		var SoundbankGenerator = load("res://commons/audio/generators/SoundbankGenerator.gd")
+		if SoundbankGenerator:
+			bass_cfg = SoundbankGenerator.BASS_PATTERNS.get(song_id, {})
+		
+		if bass_cfg.has("pattern"):
+			_pattern_editor.load_pattern(bass_cfg["pattern"])
+	
+	elif _pattern_editor is ChordTimeline:
+		# Load chord pattern (from pad/keys pattern if exists)
+		if patterns.has(layer):
+			_pattern_editor.load_pattern(patterns[layer])
+	
+	elif _pattern_editor is ArpeggioEditor:
+		# Load arp settings
+		var settings = {
+			"pattern": "up",
+			"rate": "1/8",
+			"octave_range": 1,
+			"gate_length": 0.8,
+		}
+		_pattern_editor.load_settings(settings)
+
+
+func _on_unified_pattern_changed(pattern_data: Dictionary):
+	"""Unified handler for all new pattern editors"""
+	_current_pattern = pattern_data
+	pattern_changed.emit(_current_layer, pattern_data)
+
+
+func _on_drum_pattern_changed(pattern_data: Dictionary):
+	_current_pattern = pattern_data
+	pattern_changed.emit(_current_layer, pattern_data)
+
+
+func _on_bass_pattern_changed(pattern: Array, notes: Array):
+	var data = {"pattern": pattern, "notes": notes}
+	pattern_changed.emit(_current_layer, data)
+
+
+func _on_chord_pattern_changed(pattern: Array, chords: Array):
+	var data = {"pattern": pattern, "chords": chords}
+	pattern_changed.emit(_current_layer, data)
+
+
+func _on_arp_pattern_changed(settings: Dictionary):
+	pattern_changed.emit(_current_layer, settings)
+
+
+func _on_pattern_preview(element: String):
+	preview_requested.emit(element)
+
+
+func _on_bass_preview(note: int):
+	preview_requested.emit(_current_layer)
+
+
+func _on_chord_preview(chord: Array):
+	preview_requested.emit(_current_layer)
+
+
+func _on_arp_preview():
+	preview_requested.emit(_current_layer)
 
 
 func _detect_layer_type(layer: String) -> String:
@@ -814,3 +1258,30 @@ func _on_copy_config_pressed():
 	var config_text = JSON.stringify(_current_params, "\t")
 	DisplayServer.clipboard_set(config_text)
 	print("SoundDetailPanel: Config copied to clipboard")
+
+
+func get_current_pattern() -> Dictionary:
+	"""Return current pattern data for saving"""
+	# Try to get from unified editor first
+	if _pattern_editor and _pattern_editor.has_method("get_pattern_data"):
+		return _pattern_editor.get_pattern_data()
+	return _current_pattern
+
+
+func set_use_unified_editors(enabled: bool):
+	"""Switch between unified and legacy pattern editors"""
+	_use_unified_editors = enabled
+	# Re-setup current editor if one exists
+	if not _current_layer.is_empty():
+		_setup_pattern_editor_for_layer(_current_layer)
+		_load_pattern_for_layer(_current_song, _current_layer)
+
+
+func is_using_unified_editors() -> bool:
+	"""Check if using unified pattern editors"""
+	return _use_unified_editors
+
+
+func get_pattern_editor():
+	"""Return the current pattern editor instance"""
+	return _pattern_editor
