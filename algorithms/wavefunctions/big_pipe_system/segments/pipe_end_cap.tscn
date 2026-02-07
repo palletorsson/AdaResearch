@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://pipe_cap_001"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pipe"]
+cull_mode = 2
+albedo_color = Color(0.7, 0.7, 0.8, 1.0)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_stub"]
+top_radius = 0.8
+bottom_radius = 0.8
+height = 0.5
+radial_segments = 16
+
+[sub_resource type="SphereMesh" id="SphereMesh_cap"]
+radius = 0.8
+height = 0.8
+radial_segments = 16
+rings = 8
+is_hemisphere = true
+
+[node name="PipeEndCap" type="Node3D"]
+
+[node name="Stub" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.25)
+material_override = SubResource("StandardMaterial3D_pipe")
+mesh = SubResource("CylinderMesh_stub")
+
+[node name="Cap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.5)
+material_override = SubResource("StandardMaterial3D_pipe")
+mesh = SubResource("SphereMesh_cap")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]

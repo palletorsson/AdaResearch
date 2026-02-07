@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3yq8v5gq2r1" path="res://commons/audio/interfaces/VRAudioMonitorUI.tscn" id="3_ui"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_chassis"]
-size = Vector3(0.3, 0.22, 0.1)
+size = Vector3(0.32, 0.24, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
 albedo_color = Color(0.04, 0.04, 0.05, 1)
@@ -13,7 +13,7 @@ metallic = 1.0
 roughness = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
-size = Vector3(0.32, 0.24, 0.12)
+size = Vector3(0.34, 0.26, 0.12)
 
 [node name="VRAudioMonitor" type="Node3D"]
 script = ExtResource("1_v4m4")
@@ -34,9 +34,9 @@ uppercase = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.051)
 
 [node name="Viewport2Din3D" parent="ScreenOrigin" instance=ExtResource("2_viewport")]
-screen_size = Vector2(0.28, 0.18)
+screen_size = Vector2(0.30, 0.22)
 scene = ExtResource("3_ui")
-viewport_size = Vector2(560, 360)
+viewport_size = Vector2(600, 440)
 unshaded = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

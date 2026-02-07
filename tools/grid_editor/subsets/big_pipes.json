@@ -1,18 +1,21 @@
 {
   "id": "big_pipes",
   "name": "Big Pipes",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Industrial drain pipe system for map decoration",
   "orientation": {
     "plane": "XZ",
     "up_axis": "Y",
     "forward": "+Z",
-    "grid_size": 2.0
+    "grid_size": 2.0,
+    "comment": "2m per cell. Top-down view: X=left/right, Z=forward/back"
   },
   "categories": [
-    {"id": "basic", "name": "Basic", "color": "#607D8B", "icon": "─"},
-    {"id": "turns", "name": "Turns", "color": "#795548", "icon": "╮"},
-    {"id": "vertical", "name": "Vertical", "color": "#9E9E9E", "icon": "↑"}
+    {"id": "basic", "name": "Basic", "color": "#607D8B"},
+    {"id": "turns", "name": "Turns", "color": "#795548"},
+    {"id": "junctions", "name": "Junctions", "color": "#FF9800"},
+    {"id": "vertical", "name": "Vertical", "color": "#9E9E9E"},
+    {"id": "terminals", "name": "Terminals", "color": "#F44336"}
   ],
   "elements": [
     {
@@ -21,9 +24,8 @@
       "category": "basic",
       "size": [1, 1],
       "icon": "─",
-      "ascii": ["─"],
-      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn",
-      "command": "f"
+      "description": "Straight pipe segment",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_straight.tscn"
     },
     {
       "id": "corner_left",
@@ -31,14 +33,9 @@
       "category": "turns",
       "size": [1, 1],
       "icon": "╭",
-      "ascii": ["╭"],
+      "description": "90° corner, turns left",
       "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
-      "rotation_y": 90,
-      "ports": {
-        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
-        "out": {"cell": [0, 0], "side": "right", "radius": 0.8}
-      },
-      "command": "l"
+      "rotation_y": 90
     },
     {
       "id": "corner_right",
@@ -46,14 +43,9 @@
       "category": "turns",
       "size": [1, 1],
       "icon": "╮",
-      "ascii": ["╮"],
+      "description": "90° corner, turns right",
       "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_corner.tscn",
-      "rotation_y": 0,
-      "ports": {
-        "in": {"cell": [0, 0], "side": "bottom", "radius": 0.8},
-        "out": {"cell": [0, 0], "side": "left", "radius": 0.8}
-      },
-      "command": "r"
+      "rotation_y": 0
     },
     {
       "id": "sbend",
@@ -61,13 +53,26 @@
       "category": "turns",
       "size": [2, 1],
       "icon": "∿",
-      "ascii": ["╭╯"],
-      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn",
-      "ports": {
-        "in": {"cell": [0, 0], "side": "left", "radius": 0.8},
-        "out": {"cell": [1, 0], "side": "right", "radius": 0.8}
-      },
-      "command": "s"
+      "description": "S-curve lateral shift",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_s_bend.tscn"
+    },
+    {
+      "id": "t_junction",
+      "name": "T-Junction",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┬",
+      "description": "Three-way T-junction",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_t_junction.tscn"
+    },
+    {
+      "id": "cross",
+      "name": "Cross",
+      "category": "junctions",
+      "size": [1, 1],
+      "icon": "┼",
+      "description": "Four-way cross junction",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_cross.tscn"
     },
     {
       "id": "up",
@@ -75,12 +80,8 @@
       "category": "vertical",
       "size": [1, 1],
       "icon": "↑",
-      "ascii": ["↑"],
-      "ports": {
-        "in": {"cell": [0, 0], "side": "back", "radius": 0.8},
-        "out": {"cell": [0, 0], "side": "top", "radius": 0.8}
-      },
-      "command": "u"
+      "description": "Bends upward out of ground plane",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_vertical_up.tscn"
     },
     {
       "id": "down",
@@ -88,12 +89,17 @@
       "category": "vertical",
       "size": [1, 1],
       "icon": "↓",
-      "ascii": ["↓"],
-      "ports": {
-        "in": {"cell": [0, 0], "side": "back", "radius": 0.8},
-        "out": {"cell": [0, 0], "side": "bottom", "radius": 0.8}
-      },
-      "command": "d"
+      "description": "Bends downward into ground",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_vertical_down.tscn"
+    },
+    {
+      "id": "end_cap",
+      "name": "End Cap",
+      "category": "terminals",
+      "size": [1, 1],
+      "icon": "●",
+      "description": "Sealed pipe end",
+      "scene": "res://algorithms/wavefunctions/big_pipe_system/segments/pipe_end_cap.tscn"
     }
   ]
 }

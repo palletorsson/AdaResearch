@@ -702,6 +702,63 @@
 			"description": "1m display case showing how sine waves modulate 3D space. An 8×8 grid of points demonstrates y = A·sin(x)·sin(z)—the product of two sine functions creating a wave surface. Points rise and fall showing phase relationships across X and Z axes.",
 			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn",
 			"category": "waves"
+		},
+
+		"RackSineBasic": {
+			"name": "Sine Wave Rack",
+			"lookup_name": "RackSineBasic",
+			"description": "Basic sine wave synthesizer rack with frequency, amplitude, and duration controls. Includes waveform display. The purest sound—a single frequency oscillating smoothly. Grab sliders in VR to shape the wave, hear mathematics become music.",
+			"scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
+			"category": "waves"
+		},
+		"Rack303Acid": {
+			"name": "303 Acid Rack",
+			"lookup_name": "Rack303Acid",
+			"description": "Roland TB-303 style acid bass synthesizer with cutoff and resonance knobs. The squelchy sound that defined acid house—filter sweeps turning simple waveforms into liquid screams. Resonance creates feedback peaks at the cutoff frequency.",
+			"scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
+			"category": "waves"
+		},
+		"Rack808Drums": {
+			"name": "808 Kick Rack",
+			"lookup_name": "Rack808Drums",
+			"description": "Deep 808 kick drum synthesizer with decay control and VU meter. The foundation of hip-hop and electronic music—sub-bass that you feel more than hear. Sine wave with pitch envelope creates that iconic 'boom'.",
+			"scene": "res://commons/audio/rack_presets/rack_808_drums.tscn",
+			"category": "waves"
+		},
+		"RackMario": {
+			"name": "Mario Pickup Rack",
+			"lookup_name": "RackMario",
+			"description": "Mario-style pickup sound synthesizer with start/end frequency sweep controls. The iconic coin sound—a rapid frequency chirp that triggers dopamine. Demonstrates how frequency modulation over time creates recognizable timbres.",
+			"scene": "res://commons/audio/rack_presets/rack_mario.tscn",
+			"category": "waves"
+		},
+		"RackDX7Piano": {
+			"name": "DX7 Piano Rack",
+			"lookup_name": "RackDX7Piano",
+			"description": "Yamaha DX7 FM electric piano synthesizer with attack and release envelope controls. The sound of the 80s—FM synthesis creating bell-like tones impossible with analog. Frequency modulation: one oscillator modulating another's frequency.",
+			"scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
+			"category": "waves"
+		},
+		"RackMoogBass": {
+			"name": "Moog Bass Rack",
+			"lookup_name": "RackMoogBass",
+			"description": "Classic Moog-style bass/lead synthesizer with ladder filter cutoff and resonance. The fat analog sound—oscillators through the famous 4-pole filter. Cutoff frequency determines which harmonics pass; resonance emphasizes the cutoff point.",
+			"scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
+			"category": "waves"
+		},
+		"RackAmbientDrone": {
+			"name": "Ambient Drone Rack",
+			"lookup_name": "RackAmbientDrone",
+			"description": "Atmospheric ambient drone synthesizer with lissajous phase display. Slowly evolving textures—sound as environment rather than event. Multiple detuned oscillators create beating patterns; the lissajous shows phase relationships between channels.",
+			"scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+			"category": "waves"
+		},
+		"VRAudioMonitor": {
+			"name": "VR Audio Monitor",
+			"lookup_name": "VRAudioMonitor",
+			"description": "Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.",
+			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+			"category": "waves"
 		}
 
 	}

@@ -54,7 +54,7 @@
 			[" ", " ", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", " ", " ", "audio_catalog_tablet:90", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "AudioContr:-90#config:heartbeat_rack", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ",   "RackSineBasic:0:1", "Rack303Acid:0:1", " ", " ", "RackMoogBass:0:1", "RackDX7Piano:0:1"," ", " ", " "],
 			[" ", " ", "", " ", "VRAudioMonitor", " ", "AudioContr#config:slider_rack", " ", " ", " ", " ", " "],
 			[" ", "MarioSoundController#mode:techno_kick", " ", " ", " ", " ", " ", " ", "mario_test_sound_ui", " ", " ", " "],
 			[" ", "MarioSoundController#mode:laser_zap", " ", " ", "MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60", " ", " ", " ", " ", " ", "interactable_demo", " "],

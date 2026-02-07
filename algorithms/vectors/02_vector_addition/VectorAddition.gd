@@ -13,6 +13,7 @@ var piston_gadget: Node3D
 # Pedagogical Enhancements
 var label_a_copy: Label3D
 var label_b_copy: Label3D
+var _label_offset := Vector3(0.0, 0.08, 0.0)
 
 # Cached nodes
 var _cached_vector_a_nodes: Dictionary = {}
@@ -36,8 +37,7 @@ func _ready():
 	# Vectors from origin
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.8, 0.6, -0.2), Color(0.9, 0.4, 0.3, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(0.4, 1.6, 0.9), Color(0.3, 0.8, 0.9, 1.0), "Vector b")
-	sum_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(1.0, 0.95, 0.1, 1.0), "a + b", false)
-	_highlight_sum_vector()
+	sum_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.55, 1.0, 0.4, 1.0), "a + b", false)
 
 	# Piston gadget
 	piston_gadget = PistonGadgetScript.new()
@@ -58,8 +58,9 @@ func _ready():
 		_dot_mesh.radial_segments = 8
 		_dot_mesh.rings = 4
 	
-	dotted_line_a = _create_dotted_line_multimesh()
-	dotted_line_b = _create_dotted_line_multimesh()
+	# Dotted lines color-coded to their source vector
+	dotted_line_a = _create_dotted_line_multimesh(Color(0.9, 0.4, 0.3, 0.45))  # a's color (coral)
+	dotted_line_b = _create_dotted_line_multimesh(Color(0.3, 0.8, 0.9, 0.45))  # b's color (cyan)
 	environment_root.add_child(dotted_line_a)
 	environment_root.add_child(dotted_line_b)
 
@@ -67,7 +68,7 @@ func _ready():
 	label_a_copy = _create_floating_label("a (copy)", Color(0.9, 0.4, 0.3, 0.7))
 	label_b_copy = _create_floating_label("b (copy)", Color(0.3, 0.8, 0.9, 0.7))
 
-	info_label = create_info_panel("Vector Addition", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "C = A + B", "Parallelogram rule")
+	info_label = create_info_panel("Vector Addition", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "C = A + B", "Parallelogram rule")
 
 func _process(delta):
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
@@ -81,9 +82,9 @@ func _process(delta):
 	
 	# Update Pedagogical Labels
 	# label_b_copy sits at the midpoint of the dotted line extending from a
-	label_b_copy.position = (a + b * 0.5) * SCENE_SCALE
+	label_b_copy.position = (a + b * 0.5) * SCENE_SCALE + _label_offset * SCENE_SCALE
 	# label_a_copy sits at the midpoint of the dotted line extending from b
-	label_a_copy.position = (b + a * 0.5) * SCENE_SCALE
+	label_a_copy.position = (b + a * 0.5) * SCENE_SCALE + _label_offset * SCENE_SCALE
 	
 	_time_since_last_text_update += delta
 	if _time_since_last_text_update >= TEXT_UPDATE_INTERVAL:
@@ -98,22 +99,21 @@ func _update_info(a: Vector3, b: Vector3, result: Vector3):
 	builder.append("|a + b| = %.2f" % result.length())
 	info_label.text = "\n".join(builder)
 
-func _create_dotted_line_multimesh() -> MultiMeshInstance3D:
+func _create_dotted_line_multimesh(color: Color = Color(0.7, 0.7, 0.7, 0.5)) -> MultiMeshInstance3D:
 	var mmi = MultiMeshInstance3D.new()
 	mmi.name = "DottedLine"
 	mmi.multimesh = MultiMesh.new()
 	mmi.multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	mmi.multimesh.mesh = _dot_mesh
-	# Pre-allocate a reasonable buffer (e.g. 100 dots max)
 	mmi.multimesh.instance_count = 100
 	mmi.multimesh.visible_instance_count = 0
-	
+
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.7, 0.7, 0.7, 0.5)
+	material.albedo_color = color
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mmi.material_override = material
-	
+
 	return mmi
 
 func _update_dotted_lines(a: Vector3, b: Vector3, result: Vector3):
@@ -159,12 +159,6 @@ func _create_floating_label(text: String, color: Color) -> Label3D:
 	environment_root.add_child(label)
 	return label
 
-func _highlight_sum_vector():
-	var line_node: Node = sum_vector.get_node_or_null("lineContainer")
-	if line_node:
-		line_node.set("line_thickness", 0.01 * SCENE_SCALE) # Scale thickness
-		line_node.set("line_color", Color(1.0, 0.95, 0.1, 1.0))
-
 # --- Caching Helpers (Local Implementation) ---
 
 func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
@@ -178,7 +172,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	var end: Node3D = cache_dict.get("end")
 	if start and end:
 		# Apply SCENE_SCALE inverse to get logical vector
-		return (end.global_position - start.global_position) / SCENE_SCALE
+		return (end.global_position - start.global_position) / (SCENE_SCALE * scale.x)
 	if arrow.has_method("get_vector"):
 		return arrow.get_vector()
 	return Vector3.ZERO

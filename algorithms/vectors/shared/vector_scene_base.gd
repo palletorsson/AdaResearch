@@ -117,7 +117,7 @@ func get_vector(arrow: Node) -> Vector3:
 	var start_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere")
 	var end_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere2")
 	if start_node and end_node:
-		return (end_node.global_position - start_node.global_position) / SCENE_SCALE
+		return (end_node.global_position - start_node.global_position) / (SCENE_SCALE * scale.x)
 	return Vector3.ZERO
 
 func create_axes(length: float = 3.0):
@@ -169,50 +169,38 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 	floor.position = Vector3(0.0, -0.05, 0.0) * SCENE_SCALE
 	environment_root.add_child(floor)
 
-## Creates a framed info panel with backing, border, and title.
-## Optional formula and description are rendered as static lines inside the panel.
-func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(1.8, 0.6), formula: String = "", description: String = "") -> Label3D:
-	# Expand panel height if formula/description provided
-	var extra_rows := 0
-	if formula != "":
-		extra_rows += 1
-	if description != "":
-		extra_rows += 1
-	var expanded_size = Vector2(size.x, size.y + extra_rows * 0.15)
-
+## Creates a unified info canvas: title, hr, two-column table (data | formula).
+## Positioned back and up. Returns the live data Label3D for per-frame updates.
+func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(2.2, 0.8), formula: String = "", description: String = "") -> Label3D:
+	var sc := SCENE_SCALE
 	var panel = Node3D.new()
 	panel.name = "InfoPanel"
-	panel.position = position * SCENE_SCALE
+	panel.position = position * sc
 	info_root.add_child(panel)
 
-	var scaled_size = expanded_size * SCENE_SCALE
-	var title_height = 0.12 * SCENE_SCALE
-	var gap = 0.025 * SCENE_SCALE
+	var w := size.x * sc
+	var h := size.y * sc
+	var z_front := 0.008 * sc  # Label z-offset in front of backing
+	var pad := 0.025 * sc      # Inner padding
 
-	# === TITLE PANEL ===
-	var title_panel = Node3D.new()
-	title_panel.name = "TitlePanel"
-	title_panel.position.y = scaled_size.y / 2.0 + title_height / 2.0 + gap
-	panel.add_child(title_panel)
+	# ── BACKING ──
+	var backing = MeshInstance3D.new()
+	backing.name = "Backing"
+	var box = BoxMesh.new()
+	box.size = Vector3(w, h, 0.01 * sc)
+	backing.mesh = box
+	var back_mat = StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.04, 0.05, 0.07, 0.92)
+	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	back_mat.metallic = 0.15
+	back_mat.roughness = 0.85
+	back_mat.render_priority = -10
+	backing.material_override = back_mat
+	panel.add_child(backing)
+	_add_frame(panel, Vector2(w, h))
 
-	# Title backing
-	var title_backing = MeshInstance3D.new()
-	var title_box = BoxMesh.new()
-	title_box.size = Vector3(scaled_size.x, title_height, 0.01 * SCENE_SCALE)
-	title_backing.mesh = title_box
-	var title_mat = StandardMaterial3D.new()
-	title_mat.albedo_color = Color(0.06, 0.07, 0.1, 0.95)
-	title_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	title_mat.metallic = 0.2
-	title_mat.roughness = 0.7
-	title_mat.render_priority = -10
-	title_backing.material_override = title_mat
-	title_panel.add_child(title_backing)
-
-	# Title frame
-	_add_frame(title_panel, Vector2(scaled_size.x, title_height))
-
-	# Title label
+	# ── TITLE (centered at top) ──
+	var title_y := h / 2.0 - pad
 	var title_label = Label3D.new()
 	title_label.name = "TitleLabel"
 	title_label.text = title.to_upper()
@@ -224,102 +212,83 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	title_label.outline_size = 4
 	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	title_label.position.z = 0.08 * SCENE_SCALE
-	title_panel.add_child(title_label)
+	title_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	title_label.position = Vector3(0, title_y, z_front)
+	panel.add_child(title_label)
 
-	# === INFO PANEL ===
-	# Backing panel
-	var backing = MeshInstance3D.new()
-	backing.name = "Backing"
-	var box = BoxMesh.new()
-	box.size = Vector3(scaled_size.x, scaled_size.y, 0.01 * SCENE_SCALE)
-	backing.mesh = box
+	# ── HORIZONTAL RULE (accent line below title) ──
+	var hr_y := title_y - 0.14 * sc
+	var accent = MeshInstance3D.new()
+	var accent_box = BoxMesh.new()
+	accent_box.size = Vector3(w * 0.85, 0.002 * sc, 0.005 * sc)
+	accent.mesh = accent_box
+	var accent_mat = StandardMaterial3D.new()
+	accent_mat.albedo_color = Color(0.4, 0.7, 1.0)
+	accent_mat.emission_enabled = true
+	accent_mat.emission = Color(0.3, 0.5, 0.8)
+	accent_mat.emission_energy_multiplier = 1.5
+	accent.material_override = accent_mat
+	accent.position = Vector3(0, hr_y, 0.003 * sc)
+	panel.add_child(accent)
 
-	var back_mat = StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.04, 0.05, 0.07, 0.95)
-	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	back_mat.metallic = 0.15
-	back_mat.roughness = 0.85
-	back_mat.render_priority = -10
-	backing.material_override = back_mat
-	panel.add_child(backing)
+	# ── TWO-COLUMN TABLE AREA (below hr) ──
+	var table_top := hr_y - 0.03 * sc
+	var col_gap := 0.02 * sc
+	var half_w := w / 2.0
+	var left_x := -half_w + pad                  # Left column: data
+	var right_x := col_gap                        # Right column: formula
 
-	# Frame border
-	_add_frame(panel, scaled_size)
+	# Left column: LIVE DATA (updated per frame)
+	var data_label = Label3D.new()
+	data_label.name = "Label"
+	data_label.text = ""
+	data_label.pixel_size = 0.0015
+	data_label.font_size = 18
+	data_label.modulate = Color.WHITE
+	data_label.no_depth_test = true
+	data_label.render_priority = 100
+	data_label.outline_size = 3
+	data_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
+	data_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	data_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	data_label.position = Vector3(left_x, table_top, z_front)
+	panel.add_child(data_label)
 
-	# === FORMULA LINE (static, at top of info area) ===
-	var content_top = scaled_size.y / 2.0 - 0.03 * SCENE_SCALE
-	var cursor_y = content_top
+	# Right column: FORMULA + DESCRIPTION (static)
+	if formula != "" or description != "":
+		var right_label = Label3D.new()
+		right_label.name = "FormulaLabel"
+		var right_text := ""
+		if formula != "":
+			right_text = formula
+		if description != "":
+			if right_text != "":
+				right_text += "\n"
+			right_text += description
+		right_label.text = right_text
+		right_label.pixel_size = 0.0015
+		right_label.font_size = 18
+		right_label.modulate = Color(0.75, 0.88, 1.0)
+		right_label.no_depth_test = true
+		right_label.render_priority = 100
+		right_label.outline_size = 2
+		right_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.6)
+		right_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		right_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		right_label.position = Vector3(right_x, table_top, z_front)
+		panel.add_child(right_label)
 
-	if formula != "":
-		var formula_label = Label3D.new()
-		formula_label.name = "FormulaLabel"
-		formula_label.text = formula
-		formula_label.pixel_size = 0.0015
-		formula_label.font_size = 22
-		formula_label.modulate = Color(0.85, 0.95, 1.0)
-		formula_label.no_depth_test = true
-		formula_label.render_priority = 100
-		formula_label.outline_size = 3
-		formula_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.7)
-		formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		formula_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		formula_label.position = Vector3(0, cursor_y, 0.08 * SCENE_SCALE)
-		panel.add_child(formula_label)
-		cursor_y -= 0.07 * SCENE_SCALE
+	# Vertical divider between columns
+	if formula != "" or description != "":
+		var divider = MeshInstance3D.new()
+		var div_mesh = BoxMesh.new()
+		div_mesh.size = Vector3(0.002 * sc, (h - 0.1 * sc) * 0.6, 0.004 * sc)
+		divider.mesh = div_mesh
+		divider.material_override = accent_mat  # Reuse accent material
+		divider.position = Vector3(col_gap - 0.01 * sc, table_top - (h * 0.15), 0.003 * sc)
+		panel.add_child(divider)
 
-		# Accent line under formula
-		var accent = MeshInstance3D.new()
-		var accent_box = BoxMesh.new()
-		accent_box.size = Vector3(scaled_size.x * 0.6, 0.002 * SCENE_SCALE, 0.005 * SCENE_SCALE)
-		accent.mesh = accent_box
-		var accent_mat = StandardMaterial3D.new()
-		accent_mat.albedo_color = Color(0.4, 0.7, 1.0)
-		accent_mat.emission_enabled = true
-		accent_mat.emission = Color(0.3, 0.5, 0.8)
-		accent_mat.emission_energy_multiplier = 1.5
-		accent.material_override = accent_mat
-		accent.position = Vector3(0, cursor_y + 0.02 * SCENE_SCALE, 0.003 * SCENE_SCALE)
-		panel.add_child(accent)
-
-	# === DESCRIPTION LINE (static, below formula) ===
-	if description != "":
-		var desc_label = Label3D.new()
-		desc_label.name = "DescLabel"
-		desc_label.text = description
-		desc_label.pixel_size = 0.0015
-		desc_label.font_size = 16
-		desc_label.modulate = Color(0.55, 0.6, 0.65)
-		desc_label.no_depth_test = true
-		desc_label.render_priority = 100
-		desc_label.outline_size = 2
-		desc_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.5)
-		desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		desc_label.position = Vector3(0, cursor_y, 0.08 * SCENE_SCALE)
-		panel.add_child(desc_label)
-		cursor_y -= 0.06 * SCENE_SCALE
-
-	# === LIVE DATA LABEL (updated per frame by the scene) ===
-	var label = Label3D.new()
-	label.name = "Label"
-	label.text = ""
-	label.pixel_size = 0.0015
-	label.font_size = 20
-	label.modulate = Color.WHITE
-	label.no_depth_test = true
-	label.render_priority = 100
-	label.outline_size = 3
-	label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	label.position.x = -scaled_size.x / 2.0 + 0.02 * SCENE_SCALE
-	label.position.y = cursor_y
-	label.position.z = 0.08 * SCENE_SCALE
-	panel.add_child(label)
-
-	return label
+	return data_label
 
 func _add_frame(parent: Node3D, size: Vector2):
 	var frame_mat = StandardMaterial3D.new()

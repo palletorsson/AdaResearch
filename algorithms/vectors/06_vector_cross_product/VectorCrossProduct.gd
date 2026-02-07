@@ -26,11 +26,11 @@ func _ready():
 	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.6, 0.2, 1.0), Color(1.0, 0.55, 0.2, 1.0), "Vector a")
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(-0.4, 1.5, 0.6), Color(0.2, 0.7, 1.0, 1.0), "Vector b")
-	cross_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.8, 0.6, 1.0, 1.0), "a_cross_b", false)
+	cross_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.75, 0.55, 1.0, 1.0), "a x b", false)
 
 	parallelogram = _create_parallelogram_mesh_instance()
 	environment_root.add_child(parallelogram)
-	info_label = create_info_panel("Cross Product", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "A x B = |A||B|sin(theta) n-hat", "Perpendicular vector, area of parallelogram")
+	info_label = create_info_panel("Cross Product", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "A x B = |A||B|sin(theta) n-hat", "Perpendicular vector, area of parallelogram")
 
 	# Paddle wheel gadget
 	paddle_gadget = PaddleWheelScript.new()
@@ -59,60 +59,58 @@ func _process(delta):
 
 func _create_parallelogram_mesh_instance() -> MeshInstance3D:
 	var mesh_instance = MeshInstance3D.new()
-	mesh_instance.name = "Parallelogram"
-	
-	# Initialize with an empty ArrayMesh
+	mesh_instance.name = "ParallelogramGrid"
+
 	var array_mesh = ArrayMesh.new()
 	mesh_instance.mesh = array_mesh
-	
+
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.3, 0.8, 1.0, 0.3)
+	material.albedo_color = Color(0.6, 0.85, 1.0, 0.65)
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.roughness = 0.2
-	material.metallic = 0.0
-	material.double_sided = true
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED # Ensure double-sided rendering
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.emission_enabled = true
+	material.emission = Color(0.35, 0.55, 0.9)
+	material.emission_energy_multiplier = 0.6
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mesh_instance.material_override = material
-	
+
 	return mesh_instance
 
 func _update_parallelogram(a: Vector3, b: Vector3):
 	if parallelogram == null or parallelogram.mesh == null:
 		return
-	
-	# Apply SCENE_SCALE to vertices for visualization
-	var a_scaled = a * SCENE_SCALE
-	var b_scaled = b * SCENE_SCALE
-	var sum_scaled = (a + b) * SCENE_SCALE
-	var zero = Vector3.ZERO
-	
-	# Define vertices for 2 triangles forming a quad
-	var vertices = PackedVector3Array([
-		zero, a_scaled, b_scaled,
-		b_scaled, a_scaled, sum_scaled
-	])
-	
-	# Use a single shared color
-	# Note: To optimize further, we could skip color array if material albedo is sufficient,
-	# but here we want vertex alpha potentially. For now, let's use material albedo primarily.
-	# The previous implementation used vertex colors, let's stick to simple geometry.
-	
+
+	var a_s = a * SCENE_SCALE
+	var b_s = b * SCENE_SCALE
+
+	# Build a grid of lines across the parallelogram
+	var grid_n := 10  # number of subdivisions per axis
+	var vertices = PackedVector3Array()
+
+	# Lines along a-direction (from b-axis subdivisions)
+	for i in range(grid_n + 1):
+		var t = float(i) / float(grid_n)
+		var start = b_s * t
+		var end_pt = a_s + b_s * t
+		vertices.append(start)
+		vertices.append(end_pt)
+
+	# Lines along b-direction (from a-axis subdivisions)
+	for i in range(grid_n + 1):
+		var t = float(i) / float(grid_n)
+		var start = a_s * t
+		var end_pt = a_s * t + b_s
+		vertices.append(start)
+		vertices.append(end_pt)
+
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
-	
-	# Normals (optional for unlit/transparent, but good for lighting)
-	var normal = a_scaled.cross(b_scaled).normalized()
-	if normal.is_finite():
-		var normals = PackedVector3Array([
-			normal, normal, normal,
-			normal, normal, normal
-		])
-		arrays[Mesh.ARRAY_NORMAL] = normals
 
 	var m: ArrayMesh = parallelogram.mesh
 	m.clear_surfaces()
-	m.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	if vertices.size() >= 2:
+		m.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 
 func _update_info(a: Vector3, b: Vector3, cross: Vector3):
 	var mag_a = a.length()
@@ -146,7 +144,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 	var end: Node3D = cache_dict.get("end")
 	if start and end:
 		# SCENE_SCALE division handled here to return logical vector
-		return (end.global_position - start.global_position) / SCENE_SCALE
+		return (end.global_position - start.global_position) / (SCENE_SCALE * scale.x)
 	if arrow.has_method("get_vector"):
 		return arrow.get_vector()
 	return Vector3.ZERO

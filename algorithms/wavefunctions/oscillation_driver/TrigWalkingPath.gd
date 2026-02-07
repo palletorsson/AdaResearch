@@ -12,12 +12,14 @@ extends Node3D
 @export var step_distance: float = 0.6 # Distance between steps along Z
 @export var path_length: int = 40 # Number of steps to keep ahead
 @export var generation_speed: float = 0.0 # If > 0, generates in real-time. If 0, static generation.
-@export var lane_offset: float = 2.0
+@export var lane_offset: float = 1.6
 
 @export_category("Step Geometry")
 @export var step_width: float = 1.8
 @export var step_height: float = 0.2
 @export var step_depth: float = 0.6
+@export var start_height: float = 0.6
+@export var end_height: float = -0.6
 
 @export_category("Escalator Mode")
 @export var escalator_mode: bool = false  # Animate steps like escalator
@@ -28,6 +30,7 @@ extends Node3D
 @export var add_end_platforms: bool = true
 @export var platform_size: Vector3 = Vector3(6.0, 0.25, 2.0)
 @export var platform_color: Color = Color(0.2, 0.2, 0.25)
+@export var platform_height_offset: float = -0.2
 
 # Containers
 @onready var sine_path: Node3D = $SinePath
@@ -59,8 +62,8 @@ func _add_step_pair(index: int):
 	# Calculate wave values based on index (will be animated in escalator mode)
 	var t: float = index * step_distance * frequency
 	
-	var sin_y: float = sin(t) * amplitude
-	var cos_y: float = cos(t) * amplitude
+	var sin_y: float = _compute_step_y(z_pos, sin(t))
+	var cos_y: float = _compute_step_y(z_pos, cos(t))
 	
 	# Create Sine Step (Left side)
 	var step_sin := _create_step(Color(1.0, 0.3, 0.3))
@@ -129,8 +132,8 @@ func _update_escalator(delta: float):
 		# Calculate wave height based on current position
 		var t_sin: float = (z_pos_sin + half_length) * frequency
 		var t_cos: float = (z_pos_cos + half_length) * frequency
-		var sin_y: float = sin(t_sin) * amplitude
-		var cos_y: float = cos(t_cos) * amplitude
+		var sin_y: float = _compute_step_y(z_pos_sin, sin(t_sin))
+		var cos_y: float = _compute_step_y(z_pos_cos, cos(t_cos))
 		
 		# Update positions
 		step_sin.position = Vector3(-lane_offset, sin_y, z_pos_sin)
@@ -148,11 +151,17 @@ func _create_end_platforms() -> void:
 	var half_length: float = total_length * 0.5
 
 	var z_positions = [
-		-half_length - platform_size.z * 0.5,
-		half_length + platform_size.z * 0.5
+		-half_length,
+		half_length
+	]
+	var y_positions = [
+		_platform_y_for_base(start_height),
+		_platform_y_for_base(end_height)
 	]
 
-	for z in z_positions:
+	for i in range(z_positions.size()):
+		var z = z_positions[i]
+		var y = y_positions[i]
 		var body := StaticBody3D.new()
 		var mesh_instance := MeshInstance3D.new()
 		var box := BoxMesh.new()
@@ -171,8 +180,22 @@ func _create_end_platforms() -> void:
 		collision.shape = shape
 		body.add_child(collision)
 
-		body.position = Vector3(0.0, 0.0, z)
+		body.position = Vector3(0.0, y, z)
 		end_platforms.add_child(body)
+
+func _compute_step_y(z_pos: float, wave_value: float) -> float:
+	var total_length: float = path_length * step_distance
+	if total_length <= 0.001:
+		return 0.0
+
+	var z_norm = clamp((z_pos + total_length * 0.5) / total_length, 0.0, 1.0)
+	var base_y = lerp(start_height, end_height, z_norm)
+	# Fade wave to 0 at ends so platforms are reachable
+	var edge_fade = sin(PI * z_norm)
+	return base_y + wave_value * amplitude * edge_fade
+
+func _platform_y_for_base(base_y: float) -> float:
+	return base_y + (step_height - platform_size.y) * 0.5 + platform_height_offset
 
 func _process(delta: float):
 	if generation_speed > 0 and not escalator_mode:

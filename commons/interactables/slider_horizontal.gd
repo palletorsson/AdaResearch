@@ -27,11 +27,16 @@ func _ready() -> void:
 	_update_label(_current_slider_value())
 
 func _process(_delta: float) -> void:
-	# Keep the handle on the board (lock Y and Z local to its origin)
+	# Keep the handle constrained to track (prevent lifting out of slot)
 	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	if handle and handle.is_picked_up():
-		handle.transform.origin.y = 0
-		handle.transform.origin.z = 0
+	if handle:
+		if handle.is_picked_up():
+			# While grabbed, constrain Y and Z to stay on track
+			handle.transform.origin.y = 0.0
+			handle.transform.origin.z = 0.0
+		else:
+			# Reset position when released
+			handle.transform.origin = Vector3.ZERO
 
 func _connect_slider_signal() -> void:
 	if not _slider:

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_boasd"]
 
 [sub_resource type="StandardMaterial3D" id="MatPanelDark"]
-albedo_color = Color(0.06, 0.06, 0.08, 1)
+albedo_color = Color(0.25, 0.25, 0.28, 1)
 metallic = 0.15
 roughness = 0.75
 
@@ -17,7 +17,7 @@ size = Vector3(0.08, 0.22, 0.008)
 size = Vector3(0.08, 0.22, 0.015)
 
 [sub_resource type="StandardMaterial3D" id="MatTrackGroove"]
-albedo_color = Color(0.01, 0.01, 0.015, 1)
+albedo_color = Color(0.08, 0.08, 0.1, 1)
 metallic = 0.0
 roughness = 0.95
 

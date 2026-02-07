@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dck80am3y6t48"]
+
+[ext_resource type="Script" uid="uid://bwb4du68kaskh" path="res://algorithms/wavefunctions/spectralanalysis/GameSoundMeter.gd" id="1_spectrum"]
+[ext_resource type="Script" path="res://commons/audio/interfaces/VRSpectrumDisplay.gd" id="2_controller"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_chassis"]
+size = Vector3(0.16, 0.16, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chassis"]
+albedo_color = Color(0.08, 0.08, 0.1, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chassis"]
+size = Vector3(0.18, 0.18, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_screen"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 0.5, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_screen"]
+size = Vector2(0.14, 0.12)
+
+[node name="VRSpectrumDisplaySmall" type="Node3D"]
+script = ExtResource("2_controller")
+
+[node name="Chassis" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_chassis")
+surface_material_override/0 = SubResource("StandardMaterial3D_chassis")
+
+[node name="LabelName" type="Label3D" parent="Chassis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065, 0.011)
+pixel_size = 0.0004
+text = "FILTER"
+font_size = 20
+outline_size = 4
+
+[node name="SpectrumViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(280, 240)
+render_target_update_mode = 4
+
+[node name="GameSoundMeter" type="Control" parent="SpectrumViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spectrum")
+auto_find_teleport_audio = false
+monitor_master_bus = true
+bar_count = 16
+background_color = Color(0.05, 0.05, 0.08, 1)
+line_width = 6.0
+height_multiplier = 200.0
+enable_distance_culling = false
+overlay_mode = false
+world_space_mode = true
+
+[node name="ScreenMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0.011)
+material_override = SubResource("StandardMaterial3D_screen")
+mesh = SubResource("QuadMesh_screen")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_chassis")

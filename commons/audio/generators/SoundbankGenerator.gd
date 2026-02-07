@@ -111,6 +111,34 @@ const PATTERNS = {
 		"stab":    [0,0,0,1, 0,0,0,0.25, 0,0,0,1, 0,0,0,0.25],# Dub chord with delay-style ghost echoes
 	},
 	
+	# 90s R&B: Authentic New Jack Swing at 92 BPM
+	# Reference: Guy "Piece of My Love", Teddy Riley, Blackstreet
+	# Pattern designed for 18% swing — the pocket lives here
+	"nineties_rnb": {
+		"kick":      [2,0,0.4,0, 0,0.3,0,0.25, 1,0,0,0.35, 0,0.5,0,0.25],  # Syncopated 808 with tasteful ghosts
+		"snare":     [0,0,0.2,0, 2,0,0,0.25, 0,0,0.15,0, 2,0,0,0.3],       # 2&4 with light pre/after ghosts
+		"clap":      [0,0,0,0, 1,0,0.15,0, 0,0,0,0, 1,0,0.2,0],            # Layered clap with subtle flare
+		"hihat":     [0.8,0.2,0.6,0.2, 0.85,0.2,0.55,0.25, 0.8,0.2,0.6,0.2, 0.9,0.25,0.7,0.25],  # Silky swung 16ths
+		"shaker":    [0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25],  # Soft 16ths
+		"fingersnap":[0,0,0,0, 0.8,0,0,0, 0,0,0,0, 0.8,0,0,0], # Subtle 2&4
+		"tambourine":[0,0,0,0, 0.6,0,0,0, 0,0,0,0, 0.6,0,0,0], # Soft 2&4
+		"rhodes":    [1,0,0.4,0, 0,0,0.7,0.2, 0.9,0,0.3,0, 0,0,0.6,0.3],  # More offbeat comping
+		"pad":       [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],     # Sustained JV-1080 strings
+		"strings":   [0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],     # Swell on beat 3
+	},
+	
+	# Chromatic Story: Jazz-influenced emotional journey (Am → C)
+	# Light jazzy feel with room for chromatic exploration
+	"chromatic_story": {
+		"kick":    [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Light 4-on-floor (half notes feel)
+		"snare":   [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],  # 2 and 4 (brushes)
+		"hihat":   [0.6,0,0.4,0, 0.6,0,0.4,0, 0.6,0,0.4,0, 0.6,0,0.4,0],  # Swung 8ths with ghost notes
+		"rimshot": [0,0,0,0, 0,0,0.5,0, 0,0,0,0, 0,0,0.5,0],  # Jazz rimclick accents
+		"piano":   [1,0,0,0.4, 0,0,1,0, 0.6,0,0,0.4, 0,0,0.8,0],  # Comping with syncopation
+		"pad":     [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Sustained chord
+		"sequence":[0,0,1,0, 0,1,0,0, 0,0,1,0, 1,0,0,0],  # Chromatic arpeggio pattern
+	},
+	
 	# Vangelis CS-80: Cinematic, expressive, sparse drums with big pads
 	"vangelis_cs80": {
 		"cr5000_kick":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sparse, cinematic
@@ -152,6 +180,19 @@ const PATTERNS = {
 		"organ":    [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Sustained organ
 		"sequence": [1,0,0,1, 0,0,1,0, 1,0,0,1, 0,0,1,0],  # Kraftwerk sequence
 		"vocoder":  [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Robotic vocoder hits
+	},
+	
+	# K-Bass: Korean bass music — jungle/DnB grammar with Seoul sensibilities
+	# Reference: yunji "ECHO", ENTER THE K-BASS Vol.1 (SCR × ScreaM)
+	# 170 BPM, break-led, sub as lead instrument, drop-based dynamics
+	"k_bass": {
+		"kick":    [2,0,0,0, 0,0,1,0, 0,0,0,0, 0,0,1,0],  # Syncopated jungle kick
+		"snare":   [0,0,0,0, 2,0,0,0, 0,0,0,0, 2,0,0,1],  # Strong 2&4 with ghost roll
+		"hihat":   [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],  # Rolling 16ths (jungle)
+		"sub":     [2,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sub as LEAD — pressure on 1&3
+		"stab":    [0,0,0,0, 0,0,0,2, 0,0,0,0, 0,0,0,0],  # Metallic stab punctuation (sparse)
+		"break":   [1,0,1,0, 0,1,0,0, 1,0,0,1, 0,0,1,0],  # Chopped break pattern overlay
+		"atmosphere": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Tension drone (sustained)
 	},
 }
 
@@ -200,6 +241,16 @@ const BASS_PATTERNS = {
 		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # Offbeat sub pulse
 		"style": "sustained",
 	},
+	# 90s R&B: Deep Moog sub bass with filter envelope — chromatic approach tones
+	"nineties_rnb": {
+		"pattern": [1,0,0.4,0, 0,0.3,0,0.2, 1,0,0.3,0, 0,0.4,0,0.2],  # Root + ghost approach notes
+		"style": "sustained",  # Deep round Moog sub with filter envelope
+	},
+	# Chromatic Story: Walking bass with chromatic passing tones
+	"chromatic_story": {
+		"pattern": [1,0,0,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],  # Walking quarter notes with pickup
+		"style": "walking",  # Jazz walking bass style
+	},
 	# Vangelis CS-80: Sparse, cinematic sub bass
 	"vangelis_cs80": {
 		"pattern": [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],  # Very sparse
@@ -220,6 +271,11 @@ const BASS_PATTERNS = {
 		"pattern": [0,0,1,0, 0,0,0,1, 0,0,1,0, 0,0,0,1],  # Chicago offbeat
 		"style": "short",
 	},
+	# K-Bass: Reese sub as lead — pressure and weight, physical impact
+	"k_bass": {
+		"pattern": [2,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],  # Sub hits on 1&3, accent on 1
+		"style": "sustained",  # Long, physical sub pressure
+	},
 }
 
 # =============================================================================
@@ -238,9 +294,12 @@ const SWING = {
 	"gypsy_woman_house": 8.0,    # Groovy house swing
 	"dub_house": 8.0,            # Deep house sway
 	"vangelis_cs80": 0.0,        # Cinematic straight
+	"nineties_rnb": 18.0,        # Authentic New Jack Swing (Teddy Riley groove)
+	"chromatic_story": 5.0,      # Slight jazz swing (not too heavy)
 	"replicants_dawn": 0.0,      # Machine precision (Detroit side)
 	"foggy_frequencies": 15.0,   # Blend of Burial (12) and BoC (18)
 	"chicago_dusseldorf": 4.0,   # Slight groove, transitioning to straight
+	"k_bass": 0.0,               # Jungle straight — precision at 170 BPM
 }
 
 # =============================================================================
@@ -326,6 +385,18 @@ const VELOCITY = {
 		"ghost": 0.3,
 		"variation": 0.12, # Slight human expression
 	},
+	"nineties_rnb": {
+		"base": 0.65,      # Soft, silky smooth
+		"accent": 0.9,     # Expressive but controlled
+		"ghost": 0.3,      # Subtle ghost notes (felt, not heard)
+		"variation": 0.13, # Human feel — Teddy Riley pocket
+	},
+	"chromatic_story": {
+		"base": 0.65,      # Moderate - room for dynamics
+		"accent": 0.85,    # Expressive but not harsh
+		"ghost": 0.3,      # Audible ghost notes (jazz feel)
+		"variation": 0.12, # Human variation - not machine
+	},
 	"replicants_dawn": {
 		"base": 0.75,      # Blend: Detroit machine + Vangelis expression
 		"accent": 0.95,
@@ -343,6 +414,12 @@ const VELOCITY = {
 		"accent": 0.95,
 		"ghost": 0.5,
 		"variation": 0.06, # Transitioning to robotic
+	},
+	"k_bass": {
+		"base": 0.85,      # Strong, physical
+		"accent": 1.0,     # Impact moments hit HARD
+		"ghost": 0.4,      # Audible ghosts in break patterns
+		"variation": 0.08, # Tight but not robotic
 	},
 }
 
@@ -403,6 +480,16 @@ const STRUCTURES = {
 		"sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
 		"bars": [8, 8, 16, 8, 16, 8],
 	},
+	# 90s R&B: Classic verse-chorus-bridge structure
+	"nineties_rnb": {
+		"sections": ["intro", "verse1", "prechorus1", "chorus1", "bridge", "outro"],
+		"bars": [8, 16, 8, 16, 8, 8],
+	},
+	# Chromatic Story: 8-section emotional journey (Am → C)
+	"chromatic_story": {
+		"sections": ["uncertainty", "searching", "darkness", "hope", "jazz", "breakthrough", "resolution", "celebration"],
+		"bars": [8, 8, 8, 8, 16, 8, 8, 8],
+	},
 	# Replicant's Dawn: Vangelis x Detroit - cinematic to machine
 	"replicants_dawn": {
 		"sections": ["intro", "build", "main", "breakdown", "climax", "outro"],
@@ -417,6 +504,11 @@ const STRUCTURES = {
 	"chicago_dusseldorf": {
 		"sections": ["intro", "verse", "transition", "robotic", "breakdown", "finale", "outro"],
 		"bars": [4, 16, 8, 16, 8, 16, 4],
+	},
+	# K-Bass: Drop-based structure — tension, release, switch-ups
+	"k_bass": {
+		"sections": ["intro", "build", "drop1", "breakdown", "drop2", "switchup", "outro"],
+		"bars": [8, 8, 16, 8, 16, 8, 4],
 	},
 }
 
@@ -734,6 +826,10 @@ static func _get_genre_progression(genre_id: String) -> Array:
 			return [0, 3, 0, 3]  # i - iv - i - iv (minimal movement)
 		"vangelis_cs80":
 			return [0, 3, 5, 4]  # i - iv - vi - V (cinematic minor drama)
+		"nineties_rnb":
+			return [0, 3, 6, 2]  # Dm → Gm → C → F (i-iv-bVII-bIII, Guy "Piece of My Love" style)
+		"chromatic_story":
+			return [0, 3, 4, 2]  # Am → F → G → Dm (chromatic journey through circle of fifths)
 		"replicants_dawn":
 			return [0, 5, 3, 4]  # Dm - Bb - Gm - A (cinematic minor)
 		"foggy_frequencies":
@@ -907,7 +1003,7 @@ static func _add_sound_hit(mix: PackedFloat32Array, script, start: int,
 		var sample = 0.0
 		
 		match sound_name:
-			"kick", "snare", "clap", "rimshot":
+			"kick", "snare", "clap", "rimshot", "shaker", "fingersnap", "tambourine", "perc":
 				if script.has_method("generate"):
 					sample = script.generate(t, 0.0)
 			"hihat":
@@ -915,16 +1011,19 @@ static func _add_sound_hit(mix: PackedFloat32Array, script, start: int,
 					sample = script.generate_closed(t, 0.0)
 				elif script.has_method("generate"):
 					sample = script.generate(t, 0.0, false)
-			"stab", "piano", "organ":
+			"stab", "piano", "organ", "rhodes", "strings", "pad":
 				if script.has_method("generate"):
 					sample = script.generate(t, chord_freqs, 0.0)
-			"arp", "sequence":
+			"arp", "sequence", "sequencer", "jupiter_arp", "singing_voice", "vocoder", "lead":
 				var freq = chord_freqs[0] if chord_freqs.size() > 0 else 440.0
 				if script.has_method("generate"):
 					sample = script.generate(t, freq, 0.0)
 			_:
-				# Fallback for unknown instruments (likely drums)
-				if script.has_method("generate"):
+				# Fallback for unknown instruments - try different signatures
+				if script.has_method("generate_sample"):
+					sample = script.generate_sample(t, chord_freqs)
+				elif script.has_method("generate"):
+					# Try with just t, trigger_time (drums)
 					sample = script.generate(t, 0.0)
 		
 		mix[idx] = clampf(mix[idx] + sample * volume, -1.0, 1.0)
@@ -946,7 +1045,7 @@ static func _add_continuous_sound(mix: PackedFloat32Array, script, start: int,
 		var sample = 0.0
 		
 		match sound_name:
-			"pad", "atmosphere", "supersaw", "siren":
+			"pad", "atmosphere", "supersaw", "siren", "strings":
 				if script.has_method("generate"):
 					sample = script.generate(t, chord_freqs, note_duration, 0.0)
 				elif script.has_method("generate_sample"):

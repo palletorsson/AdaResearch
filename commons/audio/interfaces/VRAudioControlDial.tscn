@@ -11,8 +11,8 @@ metallic = 0.4
 roughness = 0.6
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_base"]
-top_radius = 0.025
-bottom_radius = 0.025
+top_radius = 0.035
+bottom_radius = 0.035
 height = 0.01
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
@@ -24,16 +24,16 @@ emission = Color(0.3, 0.7, 1.0, 1)
 emission_energy_multiplier = 0.8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
-top_radius = 0.02
-bottom_radius = 0.02
-height = 0.03
+top_radius = 0.028
+bottom_radius = 0.028
+height = 0.035
 radial_segments = 16
 
 [sub_resource type="BoxMesh" id="BoxMesh_indicator"]
 size = Vector3(0.005, 0.015, 0.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_base"]
-size = Vector3(0.06, 0.06, 0.02)
+size = Vector3(0.08, 0.08, 0.02)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
 radius = 0.01

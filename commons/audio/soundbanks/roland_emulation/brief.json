@@ -1,0 +1,79 @@
+{
+    "name": "roland_emulation",
+    "display_name": "Roland Emulation",
+    "description": "Classic Roland synthesizer sounds recreated through synthesis — Juno chorus pads, D-50 digital beauty, JV-1080 workstation staples, TR-808/909 drum machines.",
+    "category": "reference_soundbank",
+    "tags": ["roland", "juno", "d50", "jv1080", "808", "909", "analog", "digital", "classic"],
+    "sounds": {
+        "juno_pad": {
+            "script": "juno_pad.gd",
+            "description": "Juno-106 style PWM pad with BBD chorus",
+            "character": "warm_wide_analog"
+        },
+        "juno_bass": {
+            "script": "juno_bass.gd",
+            "description": "Juno-style bass with sub oscillator",
+            "character": "punchy_round"
+        },
+        "juno_strings": {
+            "script": "juno_strings.gd",
+            "description": "Juno ensemble strings with full chorus",
+            "character": "lush_cinematic"
+        },
+        "d50_fantasia": {
+            "script": "d50_fantasia.gd",
+            "description": "D-50 Fantasia — bell attack + string sustain",
+            "character": "ethereal_80s"
+        },
+        "d50_digital_native": {
+            "script": "d50_digital_native.gd",
+            "description": "D-50 Digital Native Dance — breathy pad",
+            "character": "airy_lush"
+        },
+        "jv_strings": {
+            "script": "jv_strings.gd",
+            "description": "JV-1080 lush string ensemble",
+            "character": "90s_polished"
+        },
+        "jv_rhodes": {
+            "script": "jv_rhodes.gd",
+            "description": "JV-1080 style electric piano",
+            "character": "warm_expressive"
+        },
+        "tr808_kick": {
+            "script": "tr808_kick.gd",
+            "description": "TR-808 bass drum — deep sine with pitch envelope",
+            "character": "deep_sub"
+        },
+        "tr808_snare": {
+            "script": "tr808_snare.gd",
+            "description": "TR-808 snare — noise + tones",
+            "character": "punchy_noise"
+        },
+        "tr808_clap": {
+            "script": "tr808_clap.gd",
+            "description": "TR-808 handclap — staggered noise bursts",
+            "character": "spread_reverb"
+        },
+        "tr808_hihat": {
+            "script": "tr808_hihat.gd",
+            "description": "TR-808 hi-hat — high-passed noise",
+            "character": "crisp_pure"
+        },
+        "tr909_kick": {
+            "script": "tr909_kick.gd",
+            "description": "TR-909 kick — punchier, tighter than 808",
+            "character": "punch_attack"
+        },
+        "tr909_hihat": {
+            "script": "tr909_hihat.gd",
+            "description": "TR-909 hi-hat — metallic ring character",
+            "character": "metallic_crisp"
+        }
+    },
+    "usage": {
+        "for_songs": "Import individual sounds into song-specific soundbanks",
+        "for_reference": "Study synthesis parameters for recreating Roland character",
+        "mix_and_match": "Combine eras — Juno pads + 909 drums is classic"
+    }
+}

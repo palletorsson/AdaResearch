@@ -63,6 +63,7 @@ Pigment subtracts. More colors = darker.
 | `visual_color_mixing.tscn` | Visual emphasis |
 | `interactive_color_mixing.tscn` | Grabbable disks |
 | `advanced_mixing_examples.tscn` | Complex combinations |
+| `color_constellation_office.tscn` | Office space with adaptive additive/subtractive constellations |
 
 ## Files
 

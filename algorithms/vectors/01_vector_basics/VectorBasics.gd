@@ -11,6 +11,9 @@ var component_vectors := {
 }
 var info_label: Label3D
 var spring_gadget: Node3D
+var _magnitude_dots: MultiMeshInstance3D
+var _magnitude_label: Label3D
+static var _mag_dot_mesh: SphereMesh
 
 # Cached references to avoid get_node in _process
 var _cached_vector_a_nodes: Dictionary = {}
@@ -28,11 +31,17 @@ func _ready():
 
 	create_axes(1.5)
 	vector_a = spawn_vector(Vector3.ZERO, Vector3(1.5, 1.0, 0.5), Color(0.95, 0.85, 0.2, 1.0), "Vector a")
-	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(1.0, 0.4, 0.9, 1.0), "Unit a", false)
-	component_vectors["x"] = spawn_vector(Vector3.ZERO, Vector3(1.5, 0, 0), Color(1.0, 0.3, 0.3, 1.0), "a_x", false)
-	component_vectors["y"] = spawn_vector(Vector3.ZERO, Vector3(0, 1.0, 0), Color(0.3, 1.0, 0.3, 1.0), "a_y", false)
-	component_vectors["z"] = spawn_vector(Vector3.ZERO, Vector3(0, 0, 0.5), Color(0.3, 0.5, 1.0, 1.0), "a_z", false)
-	info_label = create_info_panel("Vector Basics", Vector3(0.5, 1.2, 0.0), Vector2(1.8, 0.6), "v = |v| * v-hat", "Magnitude and direction")
+	unit_vector = spawn_vector(Vector3.ZERO, Vector3(1, 0, 0), Color(1.0, 0.5, 0.85, 1.0), "Unit a", false)
+	# Component colors use soft pastels for clarity
+	component_vectors["x"] = spawn_vector(Vector3.ZERO, Vector3(1.5, 0, 0), Color(1.0, 0.65, 0.85, 0.85), "a_x", false) # pink
+	component_vectors["y"] = spawn_vector(Vector3.ZERO, Vector3(0, 1.0, 0), Color(0.6, 1.0, 0.7, 0.85), "a_y", false) # light green
+	component_vectors["z"] = spawn_vector(Vector3.ZERO, Vector3(0, 0, 0.5), Color(0.6, 0.8, 1.0, 0.85), "a_z", false) # light blue
+
+	# Magnitude bracket (dashed arc from origin toward tip)
+	_magnitude_dots = _create_magnitude_dots()
+	environment_root.add_child(_magnitude_dots)
+	_magnitude_label = _create_mag_label()
+	info_label = create_info_panel("Vector Basics", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "v = |v| * v-hat", "Magnitude and direction")
 
 	# Spring scale gadget
 	spring_gadget = SpringScaleScript.new()
@@ -50,6 +59,7 @@ func _process(_delta):
 	var vec = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	_update_unit_vector(vec)
 	_update_components(vec)
+	_update_magnitude_arc(vec)
 	_update_info(vec)
 	if spring_gadget:
 		spring_gadget.update_from_vectors(vec, Vector3.ZERO)
@@ -96,8 +106,67 @@ func _update_info(vec: Vector3):
 	var magnitude = vec.length()
 	var hat = vec / magnitude if magnitude > 0.001 else Vector3.ZERO
 	var builder := []
-	builder.append("Vector a = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
+	builder.append("a = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
 	builder.append("|a| = %.2f" % magnitude)
-	builder.append("Unit a = (%.2f, %.2f, %.2f)" % [hat.x, hat.y, hat.z])
-	builder.append("Components -> x: %.2f, y: %.2f, z: %.2f" % [vec.x, vec.y, vec.z])
+	builder.append("a-hat = (%.2f, %.2f, %.2f)" % [hat.x, hat.y, hat.z])
+	builder.append("x: %.2f  y: %.2f  z: %.2f" % [vec.x, vec.y, vec.z])
 	info_label.text = "\n".join(builder)
+
+# ── Magnitude arc (dotted quarter-arc from X-axis toward vector) ──
+
+func _create_magnitude_dots() -> MultiMeshInstance3D:
+	if _mag_dot_mesh == null:
+		_mag_dot_mesh = SphereMesh.new()
+		_mag_dot_mesh.radius = 0.008
+		_mag_dot_mesh.height = 0.016
+		_mag_dot_mesh.radial_segments = 6
+		_mag_dot_mesh.rings = 3
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "MagnitudeArc"
+	mmi.multimesh = MultiMesh.new()
+	mmi.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	mmi.multimesh.mesh = _mag_dot_mesh
+	mmi.multimesh.instance_count = 24
+	mmi.multimesh.visible_instance_count = 0
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.95, 0.85, 0.2, 0.6)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mmi.material_override = mat
+	return mmi
+
+func _create_mag_label() -> Label3D:
+	var label = Label3D.new()
+	label.text = "|a|"
+	label.font_size = 14
+	label.modulate = Color(0.95, 0.85, 0.2, 0.9)
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.no_depth_test = true
+	label.render_priority = 100
+	label.outline_size = 2
+	label.outline_modulate = Color(0, 0, 0, 0.6)
+	environment_root.add_child(label)
+	return label
+
+func _update_magnitude_arc(vec: Vector3):
+	var mag = vec.length()
+	if mag < 0.01:
+		_magnitude_dots.multimesh.visible_instance_count = 0
+		_magnitude_label.visible = false
+		return
+	_magnitude_label.visible = true
+	# Arc radius = 0.3 of magnitude (so it sits inside the vector)
+	var arc_radius = mag * 0.35
+	var num_dots = 16
+	_magnitude_dots.multimesh.visible_instance_count = num_dots
+	# Arc sweeps from +X axis toward vector direction in the XY plane of the vector
+	var dir = vec.normalized()
+	var x_axis = Vector3.RIGHT
+	for i in range(num_dots):
+		var t = float(i) / float(num_dots - 1)
+		var p = x_axis.slerp(dir, t) * arc_radius
+		_magnitude_dots.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, p))
+	# Label at midpoint of arc, slightly outward
+	var mid_dir = x_axis.slerp(dir, 0.5).normalized()
+	_magnitude_label.position = mid_dir * (arc_radius + 0.04)
+	_magnitude_label.text = "|a| = %.2f" % mag

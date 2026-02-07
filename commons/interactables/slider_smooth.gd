@@ -37,11 +37,16 @@ func _process(_delta: float) -> void:
 		_slider.transform.origin.x = clamped_x
 		_slider.slider_position = clamped_x
 	
-	# Keep handle centered (prevent drift after release)
+	# Keep handle constrained to track (prevent lifting out of slot)
 	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	if handle and not handle.is_picked_up():
-		# Only reset when not being held - allow movement while grabbed
-		handle.transform.origin = Vector3.ZERO
+	if handle:
+		if handle.is_picked_up():
+			# While grabbed, constrain Y and Z to stay on track
+			handle.transform.origin.y = 0.0
+			handle.transform.origin.z = 0.0
+		else:
+			# Reset position when released
+			handle.transform.origin = Vector3.ZERO
 
 func _connect_slider_signal() -> void:
 	if not _slider:

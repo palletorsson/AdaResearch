@@ -1,8 +1,8 @@
 {
   "id": "audio_rack",
   "name": "Audio Rack",
-  "version": "1.0",
-  "description": "Audio synthesis elements for SongDevTools",
+  "version": "2.1",
+  "description": "Audio synthesis elements with parameter bindings for SongDevTools",
   "orientation": {
     "plane": "XY",
     "up_axis": "Y",
@@ -10,148 +10,517 @@
     "grid_size": 0.08,
     "comment": "Each grid cell = 8cm. Wall-mounted rack, X=left/right, Y=up/down, Z=depth."
   },
+  "audio": {
+    "sound_type": "basic_sine_wave",
+    "create_dedicated_bus": true,
+    "auto_play_on_change": true,
+    "play_debounce_ms": 500
+  },
   "categories": [
-    {"id": "sources", "name": "Sound Sources", "color": "#4CAF50"},
+    {"id": "sources", "name": "Sources", "color": "#8BC34A"},
+    {"id": "controls", "name": "Controls", "color": "#4CAF50"},
     {"id": "filters", "name": "Filters", "color": "#2196F3"},
     {"id": "effects", "name": "Effects", "color": "#FF9800"},
     {"id": "modulators", "name": "Modulators", "color": "#9C27B0"},
-    {"id": "outputs", "name": "Outputs", "color": "#F44336"}
+    {"id": "displays", "name": "Displays", "color": "#F44336"},
+    {"id": "buttons", "name": "Buttons", "color": "#E91E63"}
   ],
   "elements": [
     {
-      "id": "osc_sine",
-      "name": "Sine Oscillator",
+      "id": "src_sine",
+      "name": "Sine Wave",
       "category": "sources",
-      "size": [1, 1],
+      "size": [2, 2],
       "icon": "∿",
-      "description": "Pure sine wave oscillator",
-      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+      "description": "Basic sine wave oscillator",
+      "scene": null,
+      "source": {
+        "sound_type": "BASIC_SINE_WAVE",
+        "label": "SINE"
+      }
     },
     {
-      "id": "osc_saw",
-      "name": "Saw Oscillator",
+      "id": "src_mario",
+      "name": "Mario Pickup",
       "category": "sources",
-      "size": [1, 1],
-      "icon": "⩘",
-      "description": "Sawtooth wave oscillator",
-      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+      "size": [2, 2],
+      "icon": "🍄",
+      "description": "Mario-style pickup sound with sweep",
+      "scene": null,
+      "source": {
+        "sound_type": "PICKUP_MARIO",
+        "label": "MARIO"
+      }
     },
     {
-      "id": "osc_square",
-      "name": "Square Oscillator",
+      "id": "src_laser",
+      "name": "Laser Shot",
       "category": "sources",
-      "size": [1, 1],
-      "icon": "⊓",
-      "description": "Square wave oscillator with PWM",
-      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+      "size": [2, 2],
+      "icon": "⚡",
+      "description": "Sci-fi laser beam sound",
+      "scene": null,
+      "source": {
+        "sound_type": "LASER_SHOT",
+        "label": "LASER"
+      }
     },
     {
-      "id": "noise",
-      "name": "Noise Generator",
+      "id": "src_808kick",
+      "name": "808 Kick",
       "category": "sources",
-      "size": [1, 1],
-      "icon": "⌇",
-      "description": "White/pink noise source",
-      "scene": "res://commons/audio/interfaces/VRAudioControlDial.tscn"
+      "size": [2, 2],
+      "icon": "🥁",
+      "description": "Deep 808 kick drum",
+      "scene": null,
+      "source": {
+        "sound_type": "DARK_808_KICK",
+        "label": "808"
+      }
     },
     {
-      "id": "filter_lp",
-      "name": "Low-Pass Filter",
+      "id": "src_303",
+      "name": "303 Acid",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎹",
+      "description": "TB-303 acid bass",
+      "scene": null,
+      "source": {
+        "sound_type": "TB303_ACID_BASS",
+        "label": "303"
+      }
+    },
+    {
+      "id": "src_dx7",
+      "name": "DX7 Piano",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎹",
+      "description": "Yamaha DX7 FM electric piano",
+      "scene": null,
+      "source": {
+        "sound_type": "DX7_ELECTRIC_PIANO",
+        "label": "DX7"
+      }
+    },
+    {
+      "id": "src_moog",
+      "name": "Moog Bass",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🎛️",
+      "description": "Classic Moog bass/lead",
+      "scene": null,
+      "source": {
+        "sound_type": "MOOG_BASS_LEAD",
+        "label": "MOOG"
+      }
+    },
+    {
+      "id": "src_ambient",
+      "name": "Ambient Drone",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🌊",
+      "description": "Atmospheric ambient drone",
+      "scene": null,
+      "source": {
+        "sound_type": "AMBIENT_AMIGA_DRONE",
+        "label": "DRONE"
+      }
+    },
+    {
+      "id": "src_heartbeat",
+      "name": "Heartbeat",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "💓",
+      "description": "Biological heartbeat rhythm",
+      "scene": null,
+      "source": {
+        "sound_type": "HEARTBEAT",
+        "label": "HEART"
+      }
+    },
+    {
+      "id": "src_aphex",
+      "name": "Aphex Modular",
+      "category": "sources",
+      "size": [2, 2],
+      "icon": "🔊",
+      "description": "Aphex Twin experimental modular",
+      "scene": null,
+      "source": {
+        "sound_type": "APHEX_TWIN_MODULAR",
+        "label": "APHEX"
+      }
+    },
+    {
+      "id": "sl_freq",
+      "name": "Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "∿",
+      "description": "Frequency control slider",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "frequency",
+        "min": 20.0,
+        "max": 2000.0,
+        "default": 440.0,
+        "label": "FREQ"
+      }
+    },
+    {
+      "id": "sl_amp",
+      "name": "Amplitude",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "▮",
+      "description": "Volume/amplitude control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "amplitude",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.5,
+        "label": "AMP"
+      }
+    },
+    {
+      "id": "sl_dur",
+      "name": "Duration",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⏱",
+      "description": "Sound duration control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "duration",
+        "min": 0.1,
+        "max": 5.0,
+        "default": 1.0,
+        "label": "DUR"
+      }
+    },
+    {
+      "id": "sl_decay",
+      "name": "Decay Rate",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "╲",
+      "description": "Decay rate control",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "decay_rate",
+        "min": 0.1,
+        "max": 20.0,
+        "default": 8.0,
+        "label": "DECAY"
+      }
+    },
+    {
+      "id": "sl_start_freq",
+      "name": "Start Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⤴",
+      "description": "Starting frequency for sweeps",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "start_freq",
+        "min": 100.0,
+        "max": 2000.0,
+        "default": 540.0,
+        "label": "START"
+      }
+    },
+    {
+      "id": "sl_end_freq",
+      "name": "End Frequency",
+      "category": "controls",
+      "size": [1, 3],
+      "icon": "⤵",
+      "description": "Ending frequency for sweeps",
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "control": {
+        "type": "slider",
+        "parameter": "end_freq",
+        "min": 100.0,
+        "max": 2000.0,
+        "default": 880.0,
+        "label": "END"
+      }
+    },
+    {
+      "id": "knob_freq",
+      "name": "Freq Knob",
+      "category": "controls",
+      "size": [2, 2],
+      "icon": "◎",
+      "description": "Frequency control knob",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "frequency",
+        "min": 20.0,
+        "max": 2000.0,
+        "default": 440.0,
+        "label": "FREQ"
+      }
+    },
+    {
+      "id": "knob_cutoff",
+      "name": "Filter Cutoff",
       "category": "filters",
       "size": [2, 2],
       "icon": "▼",
-      "description": "Resonant low-pass filter",
-      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
-      "scene_scale": [0.4, 0.4, 0.4]
+      "description": "Filter cutoff frequency",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "cutoff",
+        "min": 20.0,
+        "max": 20000.0,
+        "default": 1000.0,
+        "label": "CUTOFF"
+      }
     },
     {
-      "id": "filter_hp",
-      "name": "High-Pass Filter",
-      "category": "filters",
-      "size": [2, 2],
-      "icon": "▲",
-      "description": "Resonant high-pass filter",
-      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
-      "scene_scale": [0.4, 0.4, 0.4]
-    },
-    {
-      "id": "filter_bp",
-      "name": "Band-Pass Filter",
+      "id": "knob_resonance",
+      "name": "Resonance",
       "category": "filters",
       "size": [2, 2],
       "icon": "◆",
-      "description": "Band-pass filter",
-      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
-      "scene_scale": [0.4, 0.4, 0.4]
+      "description": "Filter resonance/Q",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "resonance",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.3,
+        "label": "RES"
+      }
     },
     {
-      "id": "vca",
-      "name": "VCA",
-      "category": "effects",
-      "size": [1, 2],
-      "icon": "▷",
-      "description": "Voltage controlled amplifier",
-      "scene": "res://commons/audio/interfaces/VRAudioControlSlider.tscn"
-    },
-    {
-      "id": "delay",
-      "name": "Delay",
-      "category": "effects",
-      "size": [3, 2],
-      "icon": "◐",
-      "description": "Delay/echo effect",
-      "scene": "res://commons/audio/interfaces/VRWaveformDisplay.tscn",
-      "scene_scale": [0.5, 0.5, 0.5]
-    },
-    {
-      "id": "reverb",
-      "name": "Reverb",
-      "category": "effects",
-      "size": [3, 2],
-      "icon": "◎",
-      "description": "Reverb effect",
-      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
-      "scene_scale": [0.5, 0.5, 0.5]
-    },
-    {
-      "id": "env_adsr",
-      "name": "ADSR Envelope",
+      "id": "knob_attack",
+      "name": "Attack",
       "category": "modulators",
       "size": [2, 2],
-      "icon": "╱╲",
-      "description": "Attack-Decay-Sustain-Release envelope",
-      "scene": "res://commons/audio/interfaces/VRWaveformDisplay.tscn",
-      "scene_scale": [0.4, 0.4, 0.4]
+      "icon": "╱",
+      "description": "Envelope attack time",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "attack",
+        "min": 0.001,
+        "max": 2.0,
+        "default": 0.01,
+        "label": "ATK"
+      }
     },
     {
-      "id": "lfo",
-      "name": "LFO",
+      "id": "knob_release",
+      "name": "Release",
       "category": "modulators",
-      "size": [2, 1],
-      "icon": "〜",
-      "description": "Low frequency oscillator",
+      "size": [2, 2],
+      "icon": "╲",
+      "description": "Envelope release time",
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "control": {
+        "type": "knob",
+        "parameter": "release",
+        "min": 0.01,
+        "max": 5.0,
+        "default": 0.5,
+        "label": "REL"
+      }
+    },
+    {
+      "id": "sl_h_mix",
+      "name": "Mix Slider",
+      "category": "effects",
+      "size": [4, 1],
+      "icon": "═",
+      "description": "Horizontal mix/blend fader",
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "control": {
+        "type": "slider_h",
+        "parameter": "mix",
+        "min": 0.0,
+        "max": 1.0,
+        "default": 0.5,
+        "label": "MIX"
+      }
+    },
+    {
+      "id": "sl_h_pan",
+      "name": "Pan",
+      "category": "effects",
+      "size": [4, 1],
+      "icon": "◀▶",
+      "description": "Stereo panning",
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "control": {
+        "type": "slider_h",
+        "parameter": "pan",
+        "min": -1.0,
+        "max": 1.0,
+        "default": 0.0,
+        "label": "PAN"
+      }
+    },
+    {
+      "id": "btn_play",
+      "name": "Play",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "▶",
+      "description": "Play/trigger sound",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "play",
+        "color": "#00ff00",
+        "label": "PLAY"
+      }
+    },
+    {
+      "id": "btn_stop",
+      "name": "Stop",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "■",
+      "description": "Stop sound",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "stop",
+        "color": "#ff0000",
+        "label": "STOP"
+      }
+    },
+    {
+      "id": "btn_reset",
+      "name": "Reset",
+      "category": "buttons",
+      "size": [1, 1],
+      "icon": "↺",
+      "description": "Reset all controls to defaults",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "control": {
+        "type": "button",
+        "action": "reset",
+        "color": "#ffaa00",
+        "label": "RESET"
+      }
+    },
+    {
+      "id": "disp_waveform",
+      "name": "Waveform",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "∿",
+      "description": "Waveform display showing audio output",
       "scene": "res://commons/audio/interfaces/VRSimpleWaveform.tscn",
-      "scene_scale": [0.5, 0.5, 0.5]
+      "display": {
+        "type": "waveform",
+        "source": "rack",
+        "freq_param": "frequency",
+        "amp_param": "amplitude",
+        "label": "OUTPUT"
+      }
     },
     {
-      "id": "mixer",
-      "name": "Mixer",
-      "category": "outputs",
-      "size": [2, 3],
-      "icon": "☰",
-      "description": "4-channel mixer",
-      "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
-      "scene_scale": [0.6, 0.6, 0.6]
+      "id": "disp_spectrum",
+      "name": "Spectrum",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "▂▄▆█",
+      "description": "Frequency spectrum analyzer",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn",
+      "display": {
+        "type": "spectrum",
+        "source": "rack",
+        "label": "SPECTRUM"
+      }
     },
     {
-      "id": "output",
-      "name": "Output",
-      "category": "outputs",
-      "size": [2, 2],
-      "icon": "◉",
-      "description": "Audio output",
+      "id": "disp_lissajous",
+      "name": "Lissajous",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "∞",
+      "description": "XY phase display",
       "scene": "res://commons/audio/interfaces/VRLissajousDisplay.tscn",
-      "scene_scale": [0.5, 0.5, 0.5]
+      "display": {
+        "type": "lissajous",
+        "source": "rack",
+        "label": "PHASE"
+      }
+    },
+    {
+      "id": "disp_monitor",
+      "name": "Monitor",
+      "category": "displays",
+      "size": [4, 3],
+      "icon": "▣",
+      "description": "Combined audio monitor",
+      "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+      "display": {
+        "type": "monitor",
+        "source": "rack",
+        "label": "MONITOR"
+      }
+    },
+    {
+      "id": "disp_wave_small",
+      "name": "Wave (S)",
+      "category": "displays",
+      "size": [2, 2],
+      "icon": "∿",
+      "description": "Small waveform display",
+      "scene": "res://commons/audio/interfaces/VRWaveformDisplaySmall.tscn",
+      "display": {
+        "type": "waveform",
+        "source": "rack",
+        "label": "WAVE"
+      }
+    },
+    {
+      "id": "disp_spec_small",
+      "name": "Spectrum (S)",
+      "category": "displays",
+      "size": [2, 2],
+      "icon": "▂▄▆",
+      "description": "Small spectrum display",
+      "scene": "res://commons/audio/interfaces/VRSpectrumDisplaySmall.tscn",
+      "display": {
+        "type": "spectrum",
+        "source": "rack",
+        "label": "FFT"
+      }
+    },
+    {
+      "id": "meter_vu",
+      "name": "VU Meter",
+      "category": "displays",
+      "size": [1, 2],
+      "icon": "▮",
+      "description": "Volume level meter",
+      "scene": null,
+      "display": {
+        "type": "meter",
+        "source": "rack",
+        "label": "VU"
+      }
     }
   ]
 }

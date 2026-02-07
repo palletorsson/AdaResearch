@@ -11,7 +11,7 @@ metallic = 0.4
 roughness = 0.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_slot"]
-size = Vector3(0.2, 0.04, 0.02)
+size = Vector3(0.32, 0.06, 0.02)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
 albedo_color = Color(0.2, 0.6, 1.0, 1)
@@ -23,7 +23,7 @@ emission_energy_multiplier = 1.0
 size = Vector3(0.015, 0.045, 0.03)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_slot"]
-size = Vector3(0.22, 0.05, 0.03)
+size = Vector3(0.34, 0.08, 0.03)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
 radius = 0.025
@@ -66,13 +66,13 @@ outline_size = 4
 uppercase = true
 
 [node name="SliderOrigin" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0, 0)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0, 0)
 script = ExtResource("2_v4m4")
-slider_limit_min = -0.1
-slider_limit_max = 0.1
+slider_limit_min = -0.14
+slider_limit_max = 0.14
 slider_position = 0.0
 default_position = 0.0
 

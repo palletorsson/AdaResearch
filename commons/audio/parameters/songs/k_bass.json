@@ -1,0 +1,174 @@
+{
+    "_metadata": {
+        "sound_type": "k_bass_song",
+        "display_name": "K-Bass",
+        "description": "Korean bass music export — UK jungle/DnB grammar filtered through Seoul underground sensibilities. Sub as lead instrument, break-led drums, high-contrast drops, timbre-forward design. The ENTER THE K-BASS Vol.1 aesthetic.",
+        "category": "songs",
+        "tags": ["bass", "jungle", "dnb", "korean", "uk", "club", "scream_records", "scr"],
+        "is_interactive_song": true,
+        "reference_artists": ["yunji", "MAR VISTA", "Coziest", "h4rdy", "7ip7o3"],
+        "reference_tracks": ["ECHO (메아리)", "Modori (모도리)", "Dokkaebi (도깨비)", "teum (틈)", "Seoul Metro (서울 메트로)"],
+        "reference_compilations": ["ENTER THE K-BASS Vol.1 (SCR × ScreaM Records)"]
+    },
+    "identity": {
+        "emotion": "pressure_release",
+        "era": "2024-present",
+        "character": ["physical", "kinetic", "textural", "dramatic"]
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 300.0, "value": 240.0, "step": 30.0, "description": "Club-functional duration" },
+        "bpm": { "min": 160, "max": 180, "value": 170, "step": 2, "description": "DnB velocity (jungle/DnB pillar)" },
+        "key": { "options": ["Am", "Dm", "Em", "Gm"], "value": "Am", "description": "Minor keys for tension" },
+        "swing": { "min": 0.0, "max": 0.15, "value": 0.0, "step": 0.02, "description": "Straight 16ths or subtle shuffle for jungle feel" }
+    },
+    "theory": {
+        "tonal_center": "Am",
+        "mode": "Natural minor with chromatic tension",
+        "harmonic_language": "Minimal — texture over harmony, stabs over progressions",
+        "signature_moves": {
+            "description": "K-Bass prioritizes timbre and rhythm over harmonic movement",
+            "common_techniques": [
+                "Single-note sub pressure as anchor",
+                "Metallic stab punctuation (not melodic)",
+                "Negative space as compositional tool",
+                "Drop-based dynamics rather than chord progressions"
+            ]
+        }
+    },
+    "sound_design": {
+        "sub_bass": {
+            "style": "reese_pressure",
+            "description": "Sub as lead instrument — physical, weighted",
+            "waveform": "detuned_saws_into_lowpass",
+            "oscillators": 2,
+            "detune_cents": 15,
+            "filter_type": "lowpass",
+            "filter_cutoff_hz": { "min": 80, "max": 400 },
+            "filter_modulation": "slow_lfo_0.5hz",
+            "sub_fundamental_hz": 40,
+            "processing": ["saturation", "stereo_width_on_mids"],
+            "character": "physical_pressure"
+        },
+        "mid_bass": {
+            "style": "reese_growl",
+            "description": "Mid-range texture layer for drops",
+            "waveform": "modulated_saws",
+            "filter_cutoff_hz": { "min": 400, "max": 2000 },
+            "fm_modulation": 0.3,
+            "processing": ["distortion", "flanger_slow"],
+            "character": "metallic_growl"
+        },
+        "drums": {
+            "style": "chopped_breaks",
+            "description": "Break-led, jungle/DnB grammar — syncopated, kinetic",
+            "break_sources": ["amen", "think", "funky_drummer"],
+            "kick": {
+                "type": "break_derived",
+                "punch_hz": 100,
+                "sub_layer_hz": 50,
+                "decay_ms": 150,
+                "processing": ["compression", "saturation"],
+                "character": "punchy_break"
+            },
+            "snare": {
+                "type": "break_derived",
+                "crack_hz": 200,
+                "body_hz": 150,
+                "decay_ms": 100,
+                "reverb_send": 0.15,
+                "character": "tight_jungle"
+            },
+            "hats": {
+                "style": "rapid_16ths",
+                "decay_ms": 30,
+                "velocity_variation": 0.4,
+                "pattern": "rolling_jungle",
+                "character": "metallic_crisp"
+            },
+            "break_processing": {
+                "timestretching": "granular",
+                "chop_style": "razor_edits",
+                "roll_probability": 0.15,
+                "ghost_notes": true
+            }
+        },
+        "stabs": {
+            "style": "metallic_punctuation",
+            "description": "Sharp, textural punctuation — not melodic",
+            "waveform": "fm_metallic",
+            "attack_ms": 1,
+            "decay_ms": 80,
+            "filter_type": "bandpass",
+            "filter_center_hz": 1500,
+            "processing": ["distortion", "short_reverb"],
+            "usage": "sparse_impact_moments"
+        },
+        "atmospheres": {
+            "style": "tension_drones",
+            "description": "Negative space textures — urban, industrial",
+            "sources": ["filtered_noise", "granular_textures", "field_recordings"],
+            "processing": ["heavy_reverb", "highpass_filter"],
+            "character": "Seoul_underground"
+        }
+    },
+    "arrangement": {
+        "structure": "drop_based",
+        "description": "High-contrast arrangement — drops, negative space, switch-ups",
+        "sections": {
+            "intro": {
+                "bars": 16,
+                "elements": ["atmospheres", "sparse_drums"],
+                "character": "tension_build"
+            },
+            "build": {
+                "bars": 16,
+                "elements": ["rising_filter", "snare_rolls", "sub_hint"],
+                "character": "pressure_accumulation"
+            },
+            "drop": {
+                "bars": 16,
+                "elements": ["full_sub", "breaks", "stabs"],
+                "character": "release_impact"
+            },
+            "breakdown": {
+                "bars": 8,
+                "elements": ["negative_space", "atmosphere"],
+                "character": "dramatic_pause"
+            },
+            "switch_up": {
+                "bars": 16,
+                "elements": ["new_break_pattern", "modulated_bass"],
+                "character": "textural_shift"
+            }
+        },
+        "transitions": {
+            "types": ["hard_cut", "filter_sweep", "snare_roll", "silence"],
+            "impact_moments": ["cymbal_crash", "sub_drop", "reverb_tail"]
+        },
+        "dynamics": {
+            "contrast_ratio": "extreme",
+            "silence_usage": "compositional_tool",
+            "drop_spacing": "varied_not_predictable"
+        }
+    },
+    "mix_philosophy": {
+        "description": "Engineered for international club translation",
+        "sub_treatment": {
+            "mono_below_hz": 120,
+            "presence": "dominant",
+            "headroom": "prioritized"
+        },
+        "clarity": {
+            "transient_preservation": true,
+            "frequency_separation": "clear_bands",
+            "impact": "physical"
+        },
+        "reference_context": "SXSW London, European club circuit"
+    },
+    "cultural_context": {
+        "scene": "Seoul Community Radio (SCR) × ScreaM Records",
+        "aesthetic": "Korean underground electronic exporting UK bass grammar",
+        "philosophy": "Reinterpreting Korean emotion/sensibility into club-functional forms",
+        "not_kpop": "No verse/chorus, no vocal hooks — timbre and rhythm lead"
+    }
+}

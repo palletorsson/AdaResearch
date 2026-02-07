@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://brack_ambient_drone"]
+
+[ext_resource type="Script" path="res://addons/element_editor/element_layout_node.gd" id="1_layout"]
+
+[node name="RackAmbientDrone" type="Node3D"]
+script = ExtResource("1_layout")
+subset_id = "audio_rack"
+grid_size = 0.08
+orientation_plane = "XY"
+grid_width = 12
+grid_height = 8
+show_grid = false
+show_cables = true
+sound_type = "AMBIENT_AMIGA_DRONE"
+auto_play_on_change = true
+placements = [{
+"id": "src_ambient",
+"grid_pos": Vector3i(0, 6, 0),
+"rotation": 0
+}, {
+"id": "sl_freq",
+"grid_pos": Vector3i(0, 2, 0),
+"rotation": 0
+}, {
+"id": "sl_amp",
+"grid_pos": Vector3i(1, 2, 0),
+"rotation": 0
+}, {
+"id": "sl_dur",
+"grid_pos": Vector3i(2, 2, 0),
+"rotation": 0
+}, {
+"id": "disp_waveform",
+"grid_pos": Vector3i(8, 4, 0),
+"rotation": 0
+}, {
+"id": "disp_lissajous",
+"grid_pos": Vector3i(8, 0, 0),
+"rotation": 0
+}, {
+"id": "btn_play",
+"grid_pos": Vector3i(0, 0, 0),
+"rotation": 0
+}, {
+"id": "btn_stop",
+"grid_pos": Vector3i(1, 0, 0),
+"rotation": 0
+}]

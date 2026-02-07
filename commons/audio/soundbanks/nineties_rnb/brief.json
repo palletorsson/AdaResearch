@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "nineties_rnb",
+    "name": "90s R&B",
+    "lineage": "Guy, Teddy Riley, D'Angelo, Aaliyah, TLC, Boyz II Men, Jodeci",
+    "era": "1992-1999",
+    "bpm": { "min": 70, "max": 100, "typical": 92 },
+    "lambda": 0.2
+  },
+
+  "identity": {
+    "token": "rhodes_tremolo + 808_sub + swung_hats + fingersnaps + silky_pads",
+    "two_second_test": "Warm Rhodes chord, deep 808, swung hi-hats, smooth groove",
+    "emotional_truth": "Smooth, sensual, romantic — the sound of slow jams and New Jack Swing"
+  },
+
+  "soundbank": ["kick", "snare", "clap", "hihat", "shaker", "fingersnap", "rhodes", "bass", "pad", "strings"],
+
+  "forbidden": [
+    "harsh_digital",
+    "aggressive_distortion",
+    "machine_quantization",
+    "cold_pads",
+    "straight_timing"
+  ],
+
+  "rhythm": {
+    "quantize": "swung",
+    "humanize_ms": 8,
+    "swing_pct": 18
+  },
+
+  "harmony": {
+    "scales": ["minor", "dorian"],
+    "voicings": "jazz_extended_9ths_11ths",
+    "progression": "i9-iv9-bVII7-bIII7"
+  },
+
+  "fx": {
+    "warm_compression": true,
+    "plate_reverb_snare": true,
+    "tape_saturation_light": true
+  },
+
+  "transitions": {
+    "crossfade_s": 2.0
+  },
+
+  "sections": {
+    "intro": ["rhodes", "pad"],
+    "verse1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "shaker"],
+    "prechorus1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings", "fingersnap"],
+    "chorus1": ["rhodes", "pad", "bass", "kick", "snare", "clap", "hihat", "strings", "shaker"],
+    "bridge": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings"],
+    "outro": ["rhodes", "pad", "bass", "kick", "hihat"]
+  }
+}

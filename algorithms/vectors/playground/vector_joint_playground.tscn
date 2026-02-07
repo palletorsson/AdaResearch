@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://ccrxemhllxux4"]
 
-[ext_resource type="Script" path="res://algorithms/vectors/playground/vector_joint_playground.gd" id="1"]
+[ext_resource type="Script" uid="uid://d4i43kmd6wlxj" path="res://algorithms/vectors/playground/vector_joint_playground.gd" id="1"]
 
 [node name="VectorJointPlayground" type="Node3D"]
 script = ExtResource("1")

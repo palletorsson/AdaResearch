@@ -4848,7 +4848,49 @@ enum SoundType {
 	PEDAL_STEEL_SWELL,       # Country/ambient steel guitar
 	GLITCH_CHAOS,            # Digital chaos and artifacts
 	NOIR_SAX_BREATH,         # Breathy jazz saxophone
-	SPACE_SUB_DRONE          # Deep sub bass drone
+	SPACE_SUB_DRONE,         # Deep sub bass drone
+	# Expressive Lead & Melodic Sounds
+	SUPERSAW_LEAD,           # Trance/EDM - 7 detuned saws, wide stereo
+	SYNC_LEAD,               # Aggressive - oscillator sync, harmonically rich
+	FM_BELL,                 # DX7 style - metallic, harmonic FM synthesis
+	SQUARE_LEAD,             # Chiptune/retro - hollow, punchy
+	PORTAMENTO_LEAD,         # Smooth gliding between notes
+	VOCAL_FORMANT,           # Vowel sounds - formant filter, "ooh"/"aah"
+	BRASS_STAB,              # House/funk - fast attack, filter sweep
+	STRING_ENSEMBLE,         # Lush strings that can play melodies
+	PLUCK_LEAD,              # Kalimba/marimba style - fast decay, melodic
+	GLASS_LEAD,              # Crystalline, bell-like FM
+	DISTORTED_LEAD,          # Rock/industrial - tube/fuzz saturation
+	BITCRUSHED_LEAD,         # Lo-fi character - bit reduction, aliasing
+	# Genre-Defining Bass Sounds
+	REESE_BASS,              # DnB essential - detuned saws, phasing movement, dark
+	WOBBLE_BASS_CUSTOM,      # Dubstep - LFO on filter cutoff, aggressive (custom impl)
+	PLUCK_BASS,              # House/pop - fast attack, medium decay, punchy
+	SUB_BASS_SINE,           # Pure sub - clean sine, no harmonics, foundation
+	DISTORTED_BASS,          # Rock/industrial - tube saturation, grit
+	JUNO_BASS,               # 80s pop - chorus, warmth, Roland character
+	MINIMOOG_BASS,           # Funk/soul - ladder filter, fat
+	SH101_BASS,              # Acid/electro - single osc, resonant, slidey
+	PROPHET_BASS,            # Synthwave - poly aftertouch response, lush
+	UPRIGHT_BASS,            # Jazz/lo-fi - body resonance, finger noise
+	SLAP_BASS,               # Funk - attack transient, string slap
+	PICKED_BASS,             # Rock - pick attack, string vibration
+	# Essential Drum Sounds (Production Quality)
+	CLAP,                    # TR-909 style layered noise bursts with room character
+	OPEN_HIHAT,              # TR-909/808 style long decay metallic hi-hat
+	SNARE_ACOUSTIC,          # Layered acoustic snare with body, wires, and air
+	RIMSHOT,                 # Wood + metal click for dub/reggae
+	# Production Polish Drums
+	SHAKER,                  # 16th note groove texture with filtered noise
+	TAMBOURINE,              # Pop/disco essential with jingles + shell hit
+	RIDE_CYMBAL,             # Jazz/ambient long metallic shimmer
+	CRASH_CYMBAL,            # Transition cymbal with noise burst + metallic decay
+	# Genre-Specific Drums
+	TOM_LOW,                 # Low floor tom for fills and tribal beats
+	TOM_MID,                 # Mid rack tom for fills
+	TOM_HIGH,                # High rack tom for fills
+	CONGA,                   # Latin/house grooves with slap transient
+	BONGO                    # Higher pitched percussion fills
 }
 
 # Sound generation functions
@@ -5032,6 +5074,33 @@ static func generate_sound(type: SoundType, duration: float = 1.0, parameters: D
 			_generate_reversed_swell(data, sample_count)
 		SoundType.BLADE_RUNNER_BRASS:
 			_generate_blade_runner_brass(data, sample_count)
+		# Essential Drum Sounds - routed to CustomSoundGenerator
+		SoundType.CLAP:
+			CustomSoundGenerator.generate_custom_clap(data, sample_count, parameters)
+		SoundType.OPEN_HIHAT:
+			CustomSoundGenerator.generate_custom_open_hihat(data, sample_count, parameters)
+		SoundType.SNARE_ACOUSTIC:
+			CustomSoundGenerator.generate_custom_snare_acoustic(data, sample_count, parameters)
+		SoundType.RIMSHOT:
+			CustomSoundGenerator.generate_custom_rimshot(data, sample_count, parameters)
+		SoundType.SHAKER:
+			CustomSoundGenerator.generate_custom_shaker(data, sample_count, parameters)
+		SoundType.TAMBOURINE:
+			CustomSoundGenerator.generate_custom_tambourine(data, sample_count, parameters)
+		SoundType.RIDE_CYMBAL:
+			CustomSoundGenerator.generate_custom_ride_cymbal(data, sample_count, parameters)
+		SoundType.CRASH_CYMBAL:
+			CustomSoundGenerator.generate_custom_crash_cymbal(data, sample_count, parameters)
+		SoundType.TOM_LOW:
+			CustomSoundGenerator.generate_custom_tom(data, sample_count, parameters, "low")
+		SoundType.TOM_MID:
+			CustomSoundGenerator.generate_custom_tom(data, sample_count, parameters, "mid")
+		SoundType.TOM_HIGH:
+			CustomSoundGenerator.generate_custom_tom(data, sample_count, parameters, "high")
+		SoundType.CONGA:
+			CustomSoundGenerator.generate_custom_conga(data, sample_count, parameters)
+		SoundType.BONGO:
+			CustomSoundGenerator.generate_custom_bongo(data, sample_count, parameters)
 	
 	return _create_audio_stream(data)
 

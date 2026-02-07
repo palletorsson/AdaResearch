@@ -929,6 +929,7 @@ func _get_song_color(song_id: String) -> Color:
 		"kraftwerk", "kraftwerk_v2": return Color(0.8, 0.5, 0.5)
 		"supersaw_trance": return Color(0.3, 0.6, 0.9)
 		"lofi_house": return Color(0.7, 0.6, 0.5)
+		"chromatic_story": return Color(0.5, 0.7, 0.85)
 		_: return Color(0.3, 0.45, 0.55)
 
 
@@ -982,8 +983,10 @@ func _load_songs_from_folder() -> Array:
 		"aphex_twin_digital_amber": "💛 Digital Amber",
 		"rave": "⚡ Rave",
 		"reese_jungle": "🌴 Jungle",
+		"k_bass": "🇰🇷 K-Bass",
 		"supersaw_trance": "🔊 Supersaw",
-		"synthwave": "🌃 Synthwave"
+		"synthwave": "🌃 Synthwave",
+		"chromatic_story": "🎹 Chromatic Story"
 	}
 	
 	# Read songs folder

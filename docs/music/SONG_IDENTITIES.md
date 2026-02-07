@@ -678,6 +678,93 @@ func supersaw_pad(t: float, freq: float) -> float:
 
 ---
 
+---
+
+## K-Bass (Korean Bass Music Export)
+
+### Historical Context
+Emerging 2023-2024 from Seoul's underground club scene, K-Bass is Korean bass music explicitly framed as export culture — UK-rooted rhythmic systems (jungle/DnB/UKG/dubstep) treated as modular tools, carried by Korean producers' sensibilities. The ENTER THE K-BASS Vol.1 compilation (SCR × ScreaM Records, 2024) documents this movement ahead of SXSW London.
+
+### Core Identity
+**Emotion:** Physical pressure, kinetic release
+**Era:** 2024-present
+**Character:** Textural, impact-driven, dramatic
+
+### Technical Parameters
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| **BPM** | 160-180 | DnB/jungle velocity |
+| **Key** | Minor (Am, Dm, Em) | Tension-focused |
+| **Time Signature** | 4/4 | Break-based phrasing |
+
+### Sound Design Elements
+
+#### Sub Bass (Lead Instrument)
+- **Role:** Central, physical — this IS the hook
+- **Style:** Reese bass, detuned saws into lowpass
+- **Processing:** Saturation for harmonics, stereo width on mids only
+- **Sub fundamental:** 40Hz for physical pressure
+- **Movement:** Slow LFO on filter cutoff (0.5Hz)
+
+```gdscript
+# K-Bass reese sub
+func k_bass_sub(t: float, freq: float) -> float:
+    var detune = [0.992, 1.0, 1.008]
+    var output = 0.0
+    for d in detune:
+        output += sawtooth(freq * d * t)
+    output /= 3.0
+    
+    # Slow filter modulation for movement
+    var lfo = sin(t * 0.5 * TAU)
+    var cutoff = 150.0 + lfo * 70.0
+    return lowpass(output, cutoff) * 0.8
+```
+
+#### Drums (Break-Led)
+- **Source:** Chopped breaks (Amen, Think, Funky Drummer)
+- **Processing:** Timestretching, granular, razor edits
+- **Pattern:** Syncopated jungle patterns, not 4/4 monotony
+- **Key sounds:**
+  - Kick: Punchy break-derived, sub layer at 50Hz
+  - Snare: Tight, minimal reverb
+  - Hats: Rapid 16ths, metallic, rolling
+
+#### Stabs (Textural Punctuation)
+- **Role:** Impact moments, not melody
+- **Character:** Metallic, FM-based, short decay
+- **Usage:** Sparse, dramatic placement
+- **Processing:** Distortion, short reverb
+
+#### Arrangement Philosophy
+- **Structure:** Drop-based, not verse/chorus
+- **Dynamics:** Extreme contrast ratio
+- **Negative space:** Compositional tool, silence as impact
+- **Transitions:** Hard cuts, filter sweeps, snare rolls
+
+### What K-Bass Is NOT
+- Not K-Pop (no verse/chorus, no vocal hooks)
+- Not melody-led songwriting
+- Not 4/4 techno monotony
+- Not Western producers sampling Korean aesthetics
+
+### Reference Artists/Tracks
+| Artist | Track | Character |
+|--------|-------|-----------|
+| yunji | ECHO (메아리) | DnB/jungle pillar |
+| MAR VISTA | Modori (모도리) | Bass pressure |
+| Coziest | Dokkaebi (도깨비) | Textural |
+| h4rdy | teum (틈) | Negative space |
+| 7ip7o3 | Seoul Metro (서울 메트로) | Urban kinetic |
+
+### Scene Context
+- **Seoul Community Radio (SCR):** Platform/curator
+- **ScreaM Records:** Label partner
+- **SXSW London:** International export showcase
+- **Philosophy:** Korean emotion/sensibility → club-functional forms
+
+---
+
 ## Summary Table
 
 | Song | BPM | Key | Signature Sound | Emotion |
@@ -685,6 +772,7 @@ func supersaw_pad(t: float, freq: float) -> float:
 | Acid House | 118-130 | Am, Em (or none) | TB-303 squelch, resonant filter | Hypnotic squelch |
 | Ambient Works | 85-100 | Am, Em, Dm | Warm detuned pads, lo-fi breaks | Nostalgic warmth |
 | Detroit Techno | 120-130 | Cm, Gm, Dm | 909 drums, Juno strings | Cold soulfulness |
+| K-Bass | 160-180 | Am, Dm, Em | Reese sub, chopped breaks, stabs | Physical pressure |
 | Moroder Disco | 120-130 | C, G (major) | 16th-note sequencer | Hypnotic ecstasy |
 | Pop Generative | 100-128 | Various | Sidechained synths, hooks | Immediate emotion |
 | Prog Synth 70s | 80-140 | Modal | Moog lead, motorik beat | Epic exploration |

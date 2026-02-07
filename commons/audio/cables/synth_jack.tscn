@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/audio/cables/synth_jack.gd" id="1_jack"]
+
+[node name="SynthJack" type="Node3D"]
+script = ExtResource("1_jack")
+
+[node name="SocketArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SocketArea"]
+
+[node name="SocketMesh" type="MeshInstance3D" parent="."]
+
+[node name="RingMesh" type="MeshInstance3D" parent="."]

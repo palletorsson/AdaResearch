@@ -1807,6 +1807,12 @@
 												"description":  "Procedurally layers Albers-inspired colored squares on a plane mesh.",
 												"scene":  "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn"
 											},
+					  "albers_wall_gallery":  {
+												  "name":  "albers_wall_gallery",
+												  "lookup_name":  "albers_wall_gallery",
+												  "description":  "White gallery wall with 98 Josef Albers-inspired canvases and spotlights.",
+												  "scene":  "res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn"
+											  },
 					  "platonicsolids":  {
 											 "name":  "platonicsolids",
 											 "lookup_name":  "platonicsolids",
@@ -3114,6 +3120,12 @@
 												  "description":  "visual_color_mixing",
 												  "scene":  "res://algorithms/color/color_mixing/visual_color_mixing.tscn"
 											  },
+					  "color_constellation_office":  {
+														  "name":  "color_constellation_office",
+														  "lookup_name":  "color_constellation_office",
+														  "description":  "Office space with adaptive additive/subtractive constellations",
+														  "scene":  "res://algorithms/color/color_mixing/color_constellation_office.tscn"
+													  },
 					  "ball_painting_demo":  {
 												 "name":  "ball_painting_demo",
 												 "lookup_name":  "ball_painting_demo",

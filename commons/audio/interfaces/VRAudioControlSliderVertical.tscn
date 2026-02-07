@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://cyvy080efjvo2"]
+
+[ext_resource type="Script" path="res://commons/interactables/slider_smooth.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2_v4m4"]
+[ext_resource type="Script" uid="uid://b7ersbm6j30qg" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rack"]
+albedo_color = Color(0.15, 0.15, 0.18, 1)
+metallic = 0.4
+roughness = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_slot"]
+size = Vector3(0.06, 0.24, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
+albedo_color = Color(0.2, 0.6, 1.0, 1)
+emission_enabled = true
+emission = Color(0.2, 0.6, 1.0, 1)
+emission_energy_multiplier = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_handle"]
+size = Vector3(0.045, 0.015, 0.03)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slot"]
+size = Vector3(0.08, 0.26, 0.03)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
+radius = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_accent"]
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.2
+
+[node name="VRAudioControlSliderVertical" type="Node3D"]
+script = ExtResource("1_v4m4")
+decimal_places = 1
+
+[node name="Frame" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
+shape = SubResource("BoxShape3D_slot")
+
+[node name="Backing" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+mesh = SubResource("BoxMesh_slot")
+surface_material_override/0 = SubResource("StandardMaterial3D_rack")
+
+[node name="Label3DValue" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.01)
+pixel_size = 0.0005
+text = "0.0"
+font_size = 36
+outline_size = 6
+uppercase = true
+
+[node name="LabelName" type="Label3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14, 0.01)
+pixel_size = 0.0005
+text = "PARAM"
+font_size = 16
+font_color = Color(0.7, 0.7, 0.7, 1)
+outline_size = 4
+uppercase = true
+
+[node name="SliderOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10, 0)
+
+[node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10, 0)
+script = ExtResource("2_v4m4")
+slider_axis = Vector3(0, 1, 0)
+slider_limit_min = -0.10
+slider_limit_max = 0.10
+slider_position = 0.0
+default_position = 0.0
+
+[node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+
+[node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin"]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("3_v4m4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+shape = SubResource("SphereShape3D_handle")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
+mesh = SubResource("BoxMesh_handle")
+surface_material_override/0 = SubResource("StandardMaterial3D_handle")
+
+[node name="Indicator" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle/HandleMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+mesh = SubResource("BoxMesh_handle")
+surface_material_override/0 = SubResource("StandardMaterial3D_accent")
+scale = Vector3(1.0, 0.3, 1.1)
+
+[node name="GrabPointRedirectTop" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0)
+
+[node name="GrabPointRedirectBottom" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.05, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unit_size = 1.0
+max_db = -10.0

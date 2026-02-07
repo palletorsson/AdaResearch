@@ -41,3 +41,8 @@ Stand in front of the squares and focus on one color. Notice how it seems to cha
 
 - `homagetothesquare.gd` — Albers-style nested squares
 - `homagetothesquare.tscn` — Scene setup
+
+## Gallery Wall
+
+- `albers_wall_gallery.gd` - Builds a 98-canvas wall with spotlights
+- `albers_wall_gallery.tscn` - Wall gallery scene

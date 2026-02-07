@@ -76,13 +76,40 @@
     },
     
     {
-      "id": "corner",
-      "name": "Corner",
+      "id": "corner_bl",
+      "name": "Corner ╭",
+      "category": "bends",
+      "size": [2, 2],
+      "icon": "╭",
+      "description": "90° elbow: bottom to right",
+      "segment_type": "corner_bl"
+    },
+    {
+      "id": "corner_br",
+      "name": "Corner ╮",
       "category": "bends",
       "size": [2, 2],
       "icon": "╮",
-      "description": "90° elbow bend. Connects vertical to horizontal.",
-      "segment_type": "corner"
+      "description": "90° elbow: bottom to left",
+      "segment_type": "corner_br"
+    },
+    {
+      "id": "corner_tr",
+      "name": "Corner ╯",
+      "category": "bends",
+      "size": [2, 2],
+      "icon": "╯",
+      "description": "90° elbow: top to left",
+      "segment_type": "corner_tr"
+    },
+    {
+      "id": "corner_tl",
+      "name": "Corner ╰",
+      "category": "bends",
+      "size": [2, 2],
+      "icon": "╰",
+      "description": "90° elbow: top to right",
+      "segment_type": "corner_tl"
     },
     {
       "id": "sbend",

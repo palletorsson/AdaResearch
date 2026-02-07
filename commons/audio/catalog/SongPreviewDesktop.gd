@@ -15,7 +15,10 @@ var _song_buttons: Dictionary = {}
 var _play_btn: Button
 var _stop_btn: Button
 var _export_btn: Button
+var _midi_export_btn: Button
+var _stem_editor_btn: Button
 var _section_label: Label
+var _stem_editor: Control = null
 
 # Timeline component
 var _timeline: SongTimeline
@@ -82,8 +85,10 @@ func _setup_ui():
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(grid)
 	
-	# Song buttons - 15 full songs including hybrids!
+	# Song buttons - 18 full songs including hybrids!
 	var songs = [
+		["chromatic_story", "🎹 Chromatic Story", "Jazz → Pop emotional journey"],
+		["nineties_rnb", "🎵 90s R&B", "Dm slow jam - Rhodes + 808"],
 		["computer_love", "🤖 Computer Love", "Kraftwerk - robotic romance"],
 		["aphex_twin_digital_amber", "💛 Digital Amber", "Aphex Twin - SAW meets Syro"],
 		["ada_theme", "🎤 Ada Theme", "Warm backing for Ada voice"],
@@ -99,7 +104,8 @@ func _setup_ui():
 		["foggy_frequencies", "🌫️ Foggy", "BoC × Burial"],
 		["chicago_dusseldorf", "🚂 Chi→Düss", "House × Kraftwerk"],
 		["dub_house_sb", "Dub House", "Dub chord stabs + tape space"],
-		["moroder_disco", "🪩 Moroder", "Instrumental version"]
+		["moroder_disco", "🪩 Moroder", "Instrumental version"],
+		["k_bass", "🇰🇷 K-Bass", "Seoul jungle/DnB - sub pressure"]
 	]
 	
 	for song in songs:
@@ -132,6 +138,24 @@ func _setup_ui():
 	_export_btn.pressed.connect(_export_wav)
 	_style_button(_export_btn, Color(0.3, 0.4, 0.6))
 	controls.add_child(_export_btn)
+	
+	# MIDI Export button
+	var midi_btn = Button.new()
+	midi_btn.text = "  🎹 MIDI  "
+	midi_btn.disabled = true
+	midi_btn.pressed.connect(_export_midi)
+	_style_button(midi_btn, Color(0.4, 0.35, 0.5))
+	controls.add_child(midi_btn)
+	_midi_export_btn = midi_btn
+	
+	# Stem Editor button
+	var stem_btn = Button.new()
+	stem_btn.text = "  🎚️ STEMS  "
+	stem_btn.disabled = true
+	stem_btn.pressed.connect(_open_stem_editor)
+	_style_button(stem_btn, Color(0.35, 0.45, 0.4))
+	controls.add_child(stem_btn)
+	_stem_editor_btn = stem_btn
 	
 	# Status
 	_status_label = Label.new()
@@ -330,6 +354,10 @@ func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
 	
 	match song_id:
+		"chromatic_story":
+			stream = SoundbankGenerator.generate_song("chromatic_story", {"bpm": 100})
+		"nineties_rnb":
+			stream = SoundbankGenerator.generate_song("nineties_rnb", {"bpm": 92})
 		"computer_love":
 			stream = SoundbankGenerator.generate_song("kraftwerk", {"bpm": 129})
 		"aphex_twin_digital_amber":
@@ -366,6 +394,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
 		"dub_house_sb":
 			stream = SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
+		"k_bass":
+			stream = SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
 	
 	if stream == null:
 		_status_label.text = "Failed to generate song!"
@@ -385,6 +415,8 @@ func _generate_and_play(song_id: String):
 	_play_btn.text = "  ⏸ PAUSE  "
 	_stop_btn.disabled = false
 	_export_btn.disabled = false
+	_midi_export_btn.disabled = false
+	_stem_editor_btn.disabled = false
 	_enable_buttons()
 	
 	# Load timeline with song metadata
@@ -420,6 +452,8 @@ func _stop_song():
 	_play_btn.disabled = true
 	_stop_btn.disabled = true
 	_export_btn.disabled = true
+	_midi_export_btn.disabled = true
+	_stem_editor_btn.disabled = true
 	_section_label.text = ""
 	_timeline.set_current_time(0.0)
 	_timeline.set_playing(false)
@@ -432,7 +466,7 @@ func _on_song_finished():
 	_play_btn.disabled = true
 	_play_btn.text = "  ⏸ PAUSE  "
 	_stop_btn.disabled = true
-	# Keep export enabled after finished - user may want to export
+	# Keep export/midi/stems enabled after finished - user may want to export
 	_section_label.text = ""
 	_timeline.set_playing(false)
 
@@ -494,6 +528,130 @@ func _export_stream_directly(path: String):
 		_status_label.text = "Cannot export this stream type directly"
 		_status_label.add_theme_color_override("font_color", Color(1.0, 0.5, 0.3))
 	_export_btn.disabled = false
+
+
+func _export_midi():
+	"""Export current song patterns to MIDI file"""
+	if _current_song.is_empty():
+		_status_label.text = "No song selected!"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+		return
+	
+	var timestamp = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	var filename = _current_song + "_" + timestamp + ".mid"
+	var export_path = "user://exports/"
+	
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(export_path))
+	
+	var full_path = export_path + filename
+	var bpm = _get_song_bpm(_current_song)
+	
+	_status_label.text = "Exporting MIDI..."
+	_status_label.add_theme_color_override("font_color", Color(1.0, 0.8, 0.3))
+	_midi_export_btn.disabled = true
+	
+	call_deferred("_do_midi_export", full_path, bpm)
+
+
+func _do_midi_export(path: String, bpm: float):
+	"""Perform MIDI export"""
+	# Map song IDs to pattern IDs (some songs use different pattern names)
+	var pattern_id = _current_song
+	match _current_song:
+		"midnight_metroplex":
+			pattern_id = "detroit_techno"
+		"computer_love":
+			pattern_id = "kraftwerk"
+		"aphex_twin_digital_amber":
+			pattern_id = "boards_of_canada"  # Using closest match
+		"i_feel_love":
+			pattern_id = "moroder_disco"
+		"dub_house_sb":
+			pattern_id = "dub_house"
+	
+	if MidiExporter.export_song(pattern_id, path, {"bpm": bpm, "bars": 4}):
+		var global_path = ProjectSettings.globalize_path(path)
+		_status_label.text = "MIDI exported: " + global_path
+		_status_label.add_theme_color_override("font_color", Color(0.3, 1.0, 0.5))
+		print("MIDI exported to: ", global_path)
+	else:
+		_status_label.text = "MIDI export failed!"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+	
+	_midi_export_btn.disabled = false
+
+
+func _open_stem_editor():
+	"""Open the stem editor for current song"""
+	if _current_song.is_empty():
+		_status_label.text = "No song selected!"
+		_status_label.add_theme_color_override("font_color", Color(1.0, 0.3, 0.3))
+		return
+	
+	# Pause current playback
+	if _is_playing:
+		_player.stream_paused = true
+		_play_btn.text = "  ▶ RESUME  "
+		_timeline.set_playing(false)
+	
+	# Create stem editor
+	var StemEditorScene = load("res://commons/audio/catalog/StemEditor.tscn")
+	_stem_editor = StemEditorScene.instantiate()
+	_stem_editor.editor_closed.connect(_on_stem_editor_closed)
+	add_child(_stem_editor)
+	
+	# Map song ID to pattern ID
+	var pattern_id = _current_song
+	match _current_song:
+		"midnight_metroplex":
+			pattern_id = "detroit_techno"
+		"computer_love":
+			pattern_id = "kraftwerk"
+		"aphex_twin_digital_amber":
+			pattern_id = "boards_of_canada"
+		"i_feel_love":
+			pattern_id = "moroder_disco"
+		"dub_house_sb":
+			pattern_id = "dub_house"
+	
+	var bpm = _get_song_bpm(_current_song)
+	_stem_editor.load_song(pattern_id, bpm)
+	
+	_status_label.text = "Editing stems for: " + _current_song
+	_status_label.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
+
+
+func _on_stem_editor_closed():
+	"""Handle stem editor closing"""
+	_stem_editor = null
+	_status_label.text = "Stem editor closed"
+	_status_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
+
+
+func _get_song_bpm(song_id: String) -> float:
+	"""Get the BPM for a song"""
+	var bpm_map = {
+		"chromatic_story": 100.0,
+		"nineties_rnb": 92.0,
+		"computer_love": 129.0,
+		"aphex_twin_digital_amber": 108.0,
+		"ada_theme": 100.0,
+		"prog_synth_70s": 110.0,
+		"pop_generative": 118.0,
+		"ambient_works": 90.0,
+		"moroder_disco": 126.0,
+		"detroit_techno": 126.0,
+		"midnight_metroplex": 126.0,
+		"synthwave": 118.0,
+		"rave": 145.0,
+		"i_feel_love": 126.0,
+		"replicants_dawn": 120.0,
+		"foggy_frequencies": 130.0,
+		"chicago_dusseldorf": 122.0,
+		"dub_house_sb": 122.0,
+		"k_bass": 170.0,
+	}
+	return bpm_map.get(song_id, 120.0)
 
 
 func _enable_buttons():
@@ -575,6 +733,103 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 	"""Return detailed layer/parameter info per section for each song type"""
 	
 	match song_id:
+		"chromatic_story":
+			return {
+				"uncertainty": [
+					{"name": "Jazz Pad", "type": "pad", "params": "warm | slow attack | Am atmosphere"},
+					{"name": "Walking Bass", "type": "bass", "params": "upright style | chromatic walk A→G→F→E"},
+				],
+				"searching": [
+					{"name": "Jazz Pad", "type": "pad", "params": "exploratory"},
+					{"name": "Walking Bass", "type": "bass", "params": "ii-V-I motion"},
+					{"name": "Rhodes Piano", "type": "keys", "params": "jazz voicings | warm bell"},
+					{"name": "Brush Hi-Hat", "type": "drums", "params": "swung 8ths | soft"},
+				],
+				"darkness": [
+					{"name": "Jazz Pad", "type": "pad", "params": "tension building"},
+					{"name": "Walking Bass", "type": "bass", "params": "chromatic descent"},
+					{"name": "Rhodes Piano", "type": "keys", "params": "E7#9 Hendrix chord | moll/dur clash"},
+					{"name": "Soft Kick", "type": "drums", "params": "acoustic feel"},
+					{"name": "Brush Snare", "type": "drums", "params": "whispered"},
+				],
+				"hope": [
+					{"name": "Jazz Pad", "type": "pad", "params": "opening up | C major light"},
+					{"name": "Walking Bass", "type": "bass", "params": "bass walk C→B→A→G"},
+					{"name": "Gentle Arpeggio", "type": "seq", "params": "shimmering | hopeful"},
+					{"name": "Brush Hi-Hat", "type": "drums", "params": "light groove"},
+				],
+				"jazz": [
+					{"name": "Rhodes Piano", "type": "keys", "params": "Dm9→G13→Cmaj9→A7alt | full extensions"},
+					{"name": "Walking Bass", "type": "bass", "params": "jazz walking | chromatic approach"},
+					{"name": "Soft Kick", "type": "drums", "params": "jazz club"},
+					{"name": "Brush Hi-Hat", "type": "drums", "params": "swung | intricate"},
+					{"name": "Rimshot", "type": "drums", "params": "woody click | jazz touch"},
+				],
+				"breakthrough": [
+					{"name": "Jazz Pad", "type": "pad", "params": "triumphant | full"},
+					{"name": "Walking Bass", "type": "bass", "params": "driving"},
+					{"name": "Rhodes Piano", "type": "keys", "params": "clean triads | liberating"},
+					{"name": "Full Kit", "type": "drums", "params": "kick + snare + hihat"},
+					{"name": "Gentle Arpeggio", "type": "seq", "params": "celebratory"},
+				],
+				"resolution": [
+					{"name": "Jazz Pad", "type": "pad", "params": "peaceful | settling"},
+					{"name": "Walking Bass", "type": "bass", "params": "I-V-vi-IV | pop resolution"},
+					{"name": "Rhodes Piano", "type": "keys", "params": "warm | earned"},
+					{"name": "Soft Kit", "type": "drums", "params": "kick + hihat | gentle"},
+				],
+				"celebration": [
+					{"name": "Jazz Pad", "type": "pad", "params": "fadeout | warm 7ths"},
+					{"name": "Walking Bass", "type": "bass", "params": "home | settled"},
+					{"name": "Gentle Arpeggio", "type": "seq", "params": "fading | joyful"},
+				],
+				"default": [{"name": "Chromatic Story", "type": "mix", "params": "100 BPM | Am→C | jazz brain, pop heart"}]
+			}
+		
+		"nineties_rnb":
+			return {
+				"intro": [
+					{"name": "Rhodes EP", "type": "keys", "params": "tremolo 5.5Hz | warm | Dm9 floating"},
+					{"name": "Silky Pad", "type": "pad", "params": "6-voice detuned | slow attack"},
+					{"name": "Light Percussion", "type": "drums", "params": "shaker 16ths | setting mood"},
+				],
+				"verse1": [
+					{"name": "Rhodes EP", "type": "keys", "params": "jazz voicings | i7-v7-bVImaj7"},
+					{"name": "Silky Pad", "type": "pad", "params": "warm support"},
+					{"name": "Moog Sub Bass", "type": "bass", "params": "deep round | filter envelope"},
+					{"name": "808 Kick", "type": "drums", "params": "55Hz | 500ms decay | deep"},
+					{"name": "Snare+Clap", "type": "drums", "params": "layered | 2&4"},
+					{"name": "Swung Hi-Hat", "type": "drums", "params": "15% swing | New Jack feel"},
+				],
+				"prechorus1": [
+					{"name": "Rhodes EP", "type": "keys", "params": "building | bVImaj9 descent"},
+					{"name": "Lush Strings", "type": "pad", "params": "swelling | vibrato"},
+					{"name": "Moog Sub Bass", "type": "bass", "params": "chromatic walk Bb→A→G"},
+					{"name": "Full Kit", "type": "drums", "params": "intensifying | fingersnaps 2&4"},
+				],
+				"chorus1": [
+					{"name": "Rhodes EP", "type": "keys", "params": "full voicings | Dm9-Gm9-Bbmaj7"},
+					{"name": "Silky Pad", "type": "pad", "params": "wide | euphoric"},
+					{"name": "Lush Strings", "type": "pad", "params": "90s string machine"},
+					{"name": "Moog Sub Bass", "type": "bass", "params": "driving | octaves"},
+					{"name": "Full Kit", "type": "drums", "params": "808 + clap + swung hats"},
+					{"name": "Synth Stabs", "type": "lead", "params": "filtered | rhythmic"},
+				],
+				"bridge": [
+					{"name": "Rhodes EP", "type": "keys", "params": "Ebmaj7 key shift | chromatic"},
+					{"name": "Lush Strings", "type": "pad", "params": "emotional peak"},
+					{"name": "Moog Sub Bass", "type": "bass", "params": "Db7 tritone sub | sophisticated"},
+					{"name": "Full Kit", "type": "drums", "params": "building to peak"},
+				],
+				"outro": [
+					{"name": "Rhodes EP", "type": "keys", "params": "vamp | Dm9-Gm9 loop"},
+					{"name": "Silky Pad", "type": "pad", "params": "fading"},
+					{"name": "Moog Sub Bass", "type": "bass", "params": "settling"},
+					{"name": "Sparse Kit", "type": "drums", "params": "winding down | could loop forever"},
+				],
+				"default": [{"name": "90s R&B", "type": "mix", "params": "85 BPM | Dm | silky smooth"}]
+			}
+		
 		"computer_love":
 			return {
 				"intro": [
