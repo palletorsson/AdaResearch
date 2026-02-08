@@ -55,6 +55,13 @@
 			"description": "Tumbling ring of tetrahedra with 4 attack modes. Rolls toward player while continuously rotating through itself. Each face color triggers different attack: Fire (red), Ice (blue), Spike (purple), Shield (gold).",
 			"scene": "res://commons/hazards/kaleidocycle/kaleidocycle_enemy.tscn",
 			"category": "hazards"
+		},
+		"proximity_spawner": {
+			"name": "Proximity Spawner",
+			"lookup_name": "proximity_spawner",
+			"description": "Spawns enemies when player enters radius. Respawns after enemy death. Configure with type, spawn_radius, despawn_radius, respawn_delay.",
+			"scene": "res://commons/hazards/proximity_spawner.tscn",
+			"category": "hazards"
 		}
 	}
 }

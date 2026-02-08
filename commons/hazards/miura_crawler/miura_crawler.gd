@@ -23,9 +23,9 @@ enum State { DORMANT, ALERT, CRAWL, ATTACK, FLATTEN, DEAD }
 @export var attack_cooldown: float = 1.2
 
 @export_group("Timing")
-@export var alert_time: float = 0.4
-@export var pop_duration: float = 0.3
-@export var flatten_duration: float = 0.25
+@export var alert_time: float = 4.0
+@export var pop_duration: float = 3.0
+@export var flatten_duration: float = 2.5
 
 @export_group("Appearance")
 @export var surface_color: Color = Color(0.45, 0.52, 0.48, 1.0)
@@ -63,6 +63,10 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("miura_enemy")
+	# Start in CRAWL for visibility during dev
+	_set_state(State.CRAWL)
+	_fold_amount = 0.7
+	print("MiuraCrawler: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -127,7 +131,7 @@ func _process_crawl(delta: float) -> void:
 		return
 	
 	# Inchworm locomotion
-	_crawl_phase += delta * 3.0
+	_crawl_phase += delta * 0.3
 	var phase: float = fmod(_crawl_phase, TAU)
 	
 	# Fold cycles: bunch up then extend
@@ -189,7 +193,9 @@ func _process_dead(delta: float) -> void:
 	_fold_amount = move_toward(_fold_amount, 0.0, delta)
 	
 	if _state_time >= 3.0:
-		queue_free()
+		# Reset instead of destroy for dev observation
+		_health = max_health
+		_set_state(State.DORMANT)
 
 
 func _set_state(new_state: State) -> void:

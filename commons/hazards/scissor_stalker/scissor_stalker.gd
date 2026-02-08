@@ -24,9 +24,9 @@ enum State { COMPACT, STALK, POUNCE, ATTACK, RETRACT, DEAD }
 
 @export_group("Timing")
 @export var stalk_extend: float = 0.5  # Leg extension while stalking
-@export var pounce_duration: float = 0.35
-@export var attack_duration: float = 0.5
-@export var retract_duration: float = 0.4
+@export var pounce_duration: float = 3.5
+@export var attack_duration: float = 5.0
+@export var retract_duration: float = 4.0
 
 @export_group("Appearance")
 @export var body_color: Color = Color(0.25, 0.22, 0.28, 1.0)
@@ -64,6 +64,10 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("scissor_enemy")
+	# Start stalking for visibility during dev
+	_set_state(State.STALK)
+	_leg_extension = 0.5
+	print("ScissorStalker: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -123,7 +127,7 @@ func _process_stalk(delta: float) -> void:
 		return
 	
 	# Walk toward player
-	_walk_phase += delta * 4.0
+	_walk_phase += delta * 0.4
 	
 	if is_instance_valid(_player_node):
 		var to_player: Vector3 = _player_node.global_position - global_position
@@ -199,7 +203,9 @@ func _process_dead(delta: float) -> void:
 		_body_mesh.position.y = move_toward(_body_mesh.position.y, body_radius * 0.3, delta * 0.5)
 	
 	if _state_time >= 3.0:
-		queue_free()
+		# Reset instead of destroy for dev observation
+		_health = max_health
+		_set_state(State.COMPACT)
 
 
 func _set_state(new_state: State) -> void:

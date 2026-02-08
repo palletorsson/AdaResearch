@@ -19,15 +19,15 @@ const FIRE_BOLT_SCENE: PackedScene = preload("res://commons/hazards/armadillo_dr
 @export_group("Combat")
 @export var max_health: float = 100.0
 @export var roll_speed: float = 3.0
-@export var tumble_speed: float = 2.0
+@export var tumble_speed: float = 0.2
 @export var detection_radius: float = 12.0
 @export var attack_radius: float = 2.5
 @export var base_damage: float = 15.0
 
 @export_group("Timing")
-@export var cycle_duration: float = 0.8
-@export var attack_duration: float = 0.6
-@export var cooldown_duration: float = 0.4
+@export var cycle_duration: float = 8.0
+@export var attack_duration: float = 6.0
+@export var cooldown_duration: float = 4.0
 
 @export_group("Face Colors")
 @export var fire_color: Color = Color(1.0, 0.3, 0.1, 1.0)
@@ -61,6 +61,7 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("kaleidocycle_enemy")
+	print("KaleidocycleEnemy: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -143,7 +144,7 @@ func _process_attack(delta: float) -> void:
 				_attack_shield()
 	
 	# Slight pulse
-	_rotation_phase += sin(t * PI * 4.0) * 0.1
+	_rotation_phase += sin(t * PI * 0.4) * 0.1
 	
 	if t >= 1.0:
 		_shield_active = false
@@ -163,7 +164,9 @@ func _process_dead(delta: float) -> void:
 	_rotation_phase += delta * 0.5
 	
 	if _state_time >= 3.0:
-		queue_free()
+		# Reset instead of destroy for dev observation
+		_health = max_health
+		_set_state(State.ROLL)
 
 
 func _set_state(new_state: State) -> void:

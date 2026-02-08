@@ -3,7 +3,7 @@ class_name OrigamiDroideka
 
 @export_group("Origami Inflation")
 @export var inflation_enabled: bool = true
-@export var inflation_speed: float = 1.05
+@export var inflation_speed: float = 0.12
 @export var inflation_amplitude: float = 0.12
 @export var inflation_min_scale: float = 0.72
 @export var inflation_fire_bias: float = 0.28
@@ -286,17 +286,17 @@ func _apply_fold_pose(fold: float) -> void:
 		var parity: float = 1.0 if (i % 2 == 0) else -1.0
 		var accordion: float = lerp(pleat_fold_degrees, 4.0, inflate)
 		var twist: float = lerp(pleat_twist_degrees, 6.0, inflate)
-		var micro_wave: float = sin(_state_time * 8.0 + phase * 2.0) * 1.9 * (1.0 - inflate)
+		var micro_wave: float = sin(_state_time * 0.8 + phase * 2.0) * 1.9 * (1.0 - inflate)
 
 		hinge.rotation_degrees.y = parity * (accordion + micro_wave)
 		hinge.rotation_degrees.x = parity * twist * 0.5
-		hinge.rotation_degrees.z = sin(phase + _state_time * 2.1) * (3.5 * (1.0 - inflate))
+		hinge.rotation_degrees.z = sin(phase + _state_time * 0.21) * (3.5 * (1.0 - inflate))
 
 		var radial_length_scale: float = lerp(0.38, 1.08, inflate)
 		var width_scale: float = lerp(0.80, 1.0, inflate)
 		var panel_thickness_scale: float = lerp(0.68, 1.0, inflate)
 		var split_dihedral: float = lerp(split_closed_dihedral_degrees, split_open_dihedral_degrees, inflate)
-		var split_jitter: float = sin(_state_time * 5.2 + phase * 3.0) * split_jitter_degrees * (1.0 - inflate)
+		var split_jitter: float = sin(_state_time * 0.52 + phase * 3.0) * split_jitter_degrees * (1.0 - inflate)
 
 		if i < _split_left_hinges.size() and i < _split_right_hinges.size():
 			_split_left_hinges[i].rotation_degrees.x = -0.5 * (split_dihedral + split_jitter)

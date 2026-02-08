@@ -1,5 +1,7 @@
 extends Node3D
 
+const GRID_SHADER: Shader = preload("res://commons/resourses/shaders/SimpleGrid.gdshader")
+
 @export_group("Timing")
 @export var wait_min_seconds: float = 1.0
 @export var wait_span_seconds: float = 6.0
@@ -14,6 +16,11 @@ extends Node3D
 @export var outgoing_color: Color = Color(1.00, 0.44, 0.18, 1.0)
 @export var incoming_color: Color = Color(0.28, 1.00, 0.52, 1.0)
 @export var hidden_color: Color = Color(0.12, 0.14, 0.18, 0.25)
+@export var wireframe_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var wireframe_width: float = 1.8
+@export var wireframe_blur: float = 1.0
+@export var wireframe_emission_strength: float = 1.45
+@export var force_upright: bool = true
 
 enum CycleState {
 	IDLE,
@@ -32,11 +39,13 @@ var _indicator_mesh: MeshInstance3D = null
 var _collider_body: StaticBody3D = null
 var _collision_shape: CollisionShape3D = null
 
-var _cube_material: StandardMaterial3D = null
+var _cube_material: ShaderMaterial = null
 var _indicator_material: StandardMaterial3D = null
 
 func _ready() -> void:
 	_rng.randomize()
+	if force_upright:
+		rotation_degrees = Vector3.ZERO
 	_ensure_nodes()
 	_setup_materials()
 	_base_position = position
@@ -82,12 +91,15 @@ func _ensure_nodes() -> void:
 		_collider_body.add_child(_collision_shape)
 
 func _setup_materials() -> void:
-	_cube_material = StandardMaterial3D.new()
-	_cube_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	_cube_material.metallic = 0.12
-	_cube_material.roughness = 0.42
-	_cube_material.emission_enabled = true
-	_cube_material.emission_energy = 0.7
+	_cube_material = ShaderMaterial.new()
+	_cube_material.shader = GRID_SHADER
+	_cube_material.set_shader_parameter("wireframeColor", wireframe_color)
+	_cube_material.set_shader_parameter("width", wireframe_width)
+	_cube_material.set_shader_parameter("blur", wireframe_blur)
+	_cube_material.set_shader_parameter("emission_strength", wireframe_emission_strength)
+	_cube_material.set_shader_parameter("show_interior", true)
+	_cube_material.set_shader_parameter("wireframeOpacity", 1.0)
+	_cube_material.set_shader_parameter("globalOpacity", 1.0)
 	if _cube_mesh:
 		_cube_mesh.material_override = _cube_material
 
@@ -178,8 +190,14 @@ func _set_cube_visual(color_value: Color, alpha_value: float) -> void:
 	if _cube_material == null:
 		return
 	var albedo: Color = Color(color_value.r, color_value.g, color_value.b, clamp(alpha_value, 0.0, 1.0))
-	_cube_material.albedo_color = albedo
-	_cube_material.emission = Color(color_value.r, color_value.g, color_value.b, 1.0) * 0.75
+	var emission: Color = Color(color_value.r, color_value.g, color_value.b, 1.0)
+	var edge_color: Color = color_value.lerp(wireframe_color, 0.55)
+	var edge_alpha: float = clamp(max(0.2, albedo.a), 0.0, 1.0)
+	_cube_material.set_shader_parameter("modelColor", albedo)
+	_cube_material.set_shader_parameter("emissionColor", emission)
+	_cube_material.set_shader_parameter("wireframeColor", edge_color)
+	_cube_material.set_shader_parameter("modelOpacity", albedo.a)
+	_cube_material.set_shader_parameter("wireframeOpacity", edge_alpha)
 
 func _set_indicator_visual(color_value: Color, is_visible: bool) -> void:
 	if _indicator_mesh:
@@ -228,6 +246,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	disable_collider_delay = max(0.0, disable_collider_delay)
 	enable_collider_delay = max(0.0, enable_collider_delay)
 	sink_distance = max(0.0, sink_distance)
+
+	if force_upright:
+		rotation_degrees = Vector3.ZERO
 
 	_restart_cycle_loop()
 

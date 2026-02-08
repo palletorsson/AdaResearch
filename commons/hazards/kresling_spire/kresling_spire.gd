@@ -27,10 +27,10 @@ const FIRE_BOLT_SCENE: PackedScene = preload("res://commons/hazards/armadillo_dr
 @export var fire_interval: float = 0.6
 
 @export_group("Timing")
-@export var rise_duration: float = 0.7
-@export var aim_duration: float = 0.5
-@export var collapse_duration: float = 0.4
-@export var relocate_time: float = 2.0
+@export var rise_duration: float = 7.0
+@export var aim_duration: float = 5.0
+@export var collapse_duration: float = 4.0
+@export var relocate_time: float = 20.0
 
 @export_group("Appearance")
 @export var shell_color: Color = Color(0.35, 0.38, 0.45, 1.0)
@@ -70,6 +70,10 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("kresling_enemy")
+	# Start extended for visibility during dev
+	_set_state(State.AIM)
+	_twist = 0.1
+	print("KreslingSpire: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:
@@ -104,7 +108,7 @@ func _process_disc(delta: float) -> void:
 	_twist = move_toward(_twist, 0.95, delta * 3.0)
 	
 	# Spin while disc
-	_spin_angle += delta * 4.0
+	_spin_angle += delta * 0.4
 	if _mesh_root:
 		_mesh_root.rotation.y = _spin_angle
 	
@@ -184,7 +188,7 @@ func _process_relocate(delta: float) -> void:
 	_twist = 0.95
 	
 	# Spin while moving
-	_spin_angle += delta * 5.0
+	_spin_angle += delta * 0.5
 	if _mesh_root:
 		_mesh_root.rotation.y = _spin_angle
 	
@@ -200,7 +204,9 @@ func _process_dead(delta: float) -> void:
 	_twist = move_toward(_twist, 0.7, delta)
 	
 	if _state_time >= 3.0:
-		queue_free()
+		# Reset instead of destroy for dev observation
+		_health = max_health
+		_set_state(State.DISC)
 
 
 func _set_state(new_state: State) -> void:

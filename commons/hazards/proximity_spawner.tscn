@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cproxspwn01"]
+
+[ext_resource type="Script" path="res://commons/hazards/proximity_spawner.gd" id="1"]
+
+[node name="ProximitySpawner" type="Node3D"]
+script = ExtResource("1")
+enemy_type = "miura_crawler"
+spawn_radius = 15.0
+despawn_radius = 30.0
+respawn_delay = 2.0
