@@ -62,6 +62,13 @@
 			"description": "Spawns enemies when player enters radius. Respawns after enemy death. Configure with type, spawn_radius, despawn_radius, respawn_delay.",
 			"scene": "res://commons/hazards/proximity_spawner.tscn",
 			"category": "hazards"
+		},
+		"sphere_droideka": {
+			"name": "Sphere Droideka",
+			"lookup_name": "sphere_droideka",
+			"description": "Armadillidiidae-style spherical droideka. Rolls as compact ball of overlapping shell plates, unfolds to tripod stance with shield dome and twin blasters. Star Wars droideka inspired.",
+			"scene": "res://commons/hazards/sphere_droideka/sphere_droideka.tscn",
+			"category": "hazards"
 		}
 	}
 }
