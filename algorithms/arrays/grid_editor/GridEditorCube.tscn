@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bvq8xh3m5n7yw"]
 
-[ext_resource type="Script" path="res://algorithms/array/grid_editor/GridEditorCube.gd" id="1_cube_script"]
+[ext_resource type="Script" path="res://algorithms/arrays/grid_editor/GridEditorCube.gd" id="1_cube_script"]
 [ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="2_grid_shader"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cube"]
@@ -37,3 +37,4 @@ mesh = SubResource("BoxMesh_cube")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cube")
+

@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://algorithms/array/single_cube.gd" id="1_scube"]
+[ext_resource type="Script" path="res://algorithms/arrays/single_cube.gd" id="1_scube"]
 
 [node name="SingleCube" type="Node3D"]
 script = ExtResource("1_scube")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.5, 3.0)
+

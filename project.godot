@@ -15,18 +15,18 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Ada Research Zero One"
-run/main_scene="uid://dh0yixpmcvifk"
+run/main_scene="res://commons/scenes/vr_staging.tscn"
 config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
 
 [audio]
 
-buses/default_bus_layout="uid://7fksnh0w5cq2"
+buses/default_bus_layout="uid://rwex60pqapc"
 
 [autoload]
 
-XRToolsUserSettings="*uid://crqshaibmqeim"
-XRToolsRumbleManager="*uid://cgeyl3q142pxo"
+XRToolsUserSettings="*uid://bqgb8i74tm0t"
+XRToolsRumbleManager="*uid://by853dk86g1qw"
 GameManager="*res://commons/managers/GameManager.gd"
 TextManager="*res://commons/managers/TextManager.gd"
 MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
@@ -49,10 +49,6 @@ enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res:/
 [filesystem]
 
 import/blender/enabled=false
-
-[gdnative]
-
-singletons=["res://addons/godot-openxr/config/godot_openxr.gdnlib"]
 
 [global_script_classes]
 

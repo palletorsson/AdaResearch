@@ -19,6 +19,12 @@ var last_grip_state: bool = false  # Track grip button state
 # Agent detection area (separate from physics attraction)
 var agent_detection_area: Area3D
 
+# Optional visual/muzzle nodes. These are null-safe fallbacks so this script
+# remains compatible if the parent gravity gun implementation changes.
+var gun_mesh: MeshInstance3D = null
+var force_field_mesh: MeshInstance3D = null
+var muzzle_point: Node3D = null
+
 # Signals for Grid Agents
 signal agent_captured(agent: GridAgent)
 signal agent_directed(agent: GridAgent, target: Vector3)
@@ -26,6 +32,9 @@ signal agent_released(agent: GridAgent)
 
 func _ready() -> void:
 	super._ready()
+	gun_mesh = get_node_or_null("GunMesh") as MeshInstance3D
+	force_field_mesh = get_node_or_null("ForceFieldMesh") as MeshInstance3D
+	muzzle_point = get_node_or_null("MuzzlePoint") as Node3D
 	setup_agent_detection()
 	
 	# Update visual color for algo-gun

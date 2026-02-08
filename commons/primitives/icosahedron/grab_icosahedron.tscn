@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_icosahedron"]
-points = PackedVector3Array(0.34026, 0.210292, 0, -0.34026, 0.210292, 0, 0.34026, -0.210292, 0, -0.34026, -0.210292, 0, 0.210292, 0, 0.34026, 0.210292, 0, -0.34026, -0.210292, 0, 0.34026, -0.210292, 0, -0.34026, 0, 0.34026, -0.34026, 0, -0.34026, -0.34026, 0, 0.34026, -0.34026, 0, -0.34026)
+points = PackedVector3Array(0.34026, 0.210292, 0, -0.34026, 0.210292, 0, 0.34026, -0.210292, 0, -0.34026, -0.210292, 0, 0.210292, 0, 0.34026, 0.210292, 0, -0.34026, -0.210292, 0, 0.34026, -0.210292, 0, -0.34026, 0, 0.34026, 0.210292, 0, -0.34026, 0.210292, 0, 0.34026, -0.210292, 0, -0.34026, -0.210292)
 
 [node name="GrabIcosahedron" instance=ExtResource("1_pickable")]
 script = ExtResource("2_grab_icosahedron")
@@ -23,3 +23,4 @@ shape = SubResource("ConvexPolygonShape3D_icosahedron")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 
 [node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]
+

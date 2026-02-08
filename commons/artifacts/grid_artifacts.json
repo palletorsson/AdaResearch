@@ -1691,37 +1691,37 @@
 									  "name":  "row_3_x",
 									  "lookup_name":  "row_3_x",
 									  "description":  "Places three pickup cubes in a single row along the X axis.",
-									  "scene":  "res://algorithms/array/row_3_x.tscn"
+									  "scene":  "res://algorithms/arrays/row_3_x.tscn"
 								  },
 					  "column_3_z":  {
 										 "name":  "column_3_z",
 										 "lookup_name":  "column_3_z",
 										 "description":  "Stacks three pickup cubes in the Z direction for spacing tests.",
-										 "scene":  "res://algorithms/array/column_3_z.tscn"
+										 "scene":  "res://algorithms/arrays/column_3_z.tscn"
 									 },
 					  "grid_2d_4x4":  {
 										  "name":  "grid_2d_4x4",
 										  "lookup_name":  "grid_2d_4x4",
 										  "description":  "Builds a 4x4 pickup-cube grid laid out across the floor.",
-										  "scene":  "res://algorithms/array/grid_2d_4x4.tscn"
+										  "scene":  "res://algorithms/arrays/grid_2d_4x4.tscn"
 									  },
 					  "grid_3d_4x4x4":  {
 											"name":  "grid_3d_4x4x4",
 											"lookup_name":  "grid_3d_4x4x4",
 											"description":  "Populates a 4x4x4 lattice of pickup cubes for volumetric layouts.",
-											"scene":  "res://algorithms/array/grid_3d_4x4x4.tscn"
+											"scene":  "res://algorithms/arrays/grid_3d_4x4x4.tscn"
 										},
 					  "grid_snapper":  {
 										   "name":  "grid_snapper",
 										   "lookup_name":  "grid_snapper",
 										   "description":  "grid_snapper",
-										   "scene":  "res://algorithms/array/grid_snapper.tscn"
+										   "scene":  "res://algorithms/arrays/grid_snapper.tscn"
 									   },
 					  "mondrian_run":  {
 										   "name":  "mondrian_run",
 										   "lookup_name":  "mondrian_run",
 										   "description":  "mondrian_run",
-										   "scene":  "res://algorithms/array/mondrian_grid/mondrian_run.tscn"
+										   "scene":  "res://algorithms/arrays/mondrian_grid/mondrian_run.tscn"
 									   },
 					  "disco_floor":  {
 										  "name":  "Disco Grid",
@@ -1739,7 +1739,7 @@
 											   "name":  "grid_editor_main",
 											   "lookup_name":  "grid_editor_main",
 											   "description":  "grid_editor_main",
-											   "scene":  "res://algorithms/array/grid_editor/grid_editor_main.tscn"
+											   "scene":  "res://algorithms/arrays/grid_editor/grid_editor_main.tscn"
 										   },
 					  "rorschach_scan":  {
 											 "name":  "Rorschach Brain Scan",

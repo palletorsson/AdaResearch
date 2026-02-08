@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqclb0h72ibbe"]
 
-[ext_resource type="Script" uid="uid://ce3niucpt102o" path="res://algorithms/array/grid_snapper.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://ce3niucpt102o" path="res://algorithms/arrays/grid_snapper.gd" id="1_script"]
 
 [node name="GridSnapper" type="Node3D"]
 script = ExtResource("1_script")
+

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgpfvxpeasoes"]
+[gd_scene format=3 uid="uid://cgpfvxpeasoes"]
 
 [ext_resource type="Script" uid="uid://bo6g8pnjidrrb" path="res://commons/audio/catalog/SongPreviewDesktop.gd" id="1_main"]
 
-[node name="SongPreviewDesktop" type="Control"]
+[node name="SongPreviewDesktop" type="Control" unique_id=29409424]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

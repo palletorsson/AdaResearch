@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5xyi50f13kcx"]
 
-[ext_resource type="Script" uid="uid://dkrmc4arvqnqx" path="res://algorithms/array/mondrian_grid/mondrian_generator_3d.gd" id="1_generator"]
+[ext_resource type="Script" uid="uid://dkrmc4arvqnqx" path="res://algorithms/arrays/mondrian_grid/mondrian_generator_3d.gd" id="1_generator"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
@@ -35,3 +35,4 @@ spawner_offset = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5589614, 0.8291937, 0, -0.8291937, 0.5589614, 0, 7.7962093, 10.138665)
+

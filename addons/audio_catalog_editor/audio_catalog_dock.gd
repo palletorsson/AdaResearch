@@ -368,7 +368,9 @@ func _has_nested_parameters(data: Dictionary) -> bool:
 
 func _resolve_sound_key(metadata: Dictionary, file_name: String, nested_key: String) -> String:
 	if metadata.has("sound_type"):
-		return String(metadata["sound_type"]).to_lower()
+		var sound_type = _variant_to_search_text(metadata["sound_type"])
+		if not sound_type.is_empty():
+			return sound_type.to_lower()
 	if nested_key != "":
 		return nested_key.to_lower()
 	return file_name.get_basename().to_lower()
@@ -390,14 +392,41 @@ func _format_display_name(identifier: String) -> String:
 		parts[i] = part.substr(0, 1).to_upper() + part.substr(1)
 	return " ".join(parts)
 
+func _variant_to_search_text(value: Variant) -> String:
+	if value == null:
+		return ""
+	if value is String:
+		return value
+	if value is StringName:
+		return String(value)
+	if value is Array:
+		var array_parts: Array[String] = []
+		for item in value:
+			var item_text = _variant_to_search_text(item)
+			if not item_text.is_empty():
+				array_parts.append(item_text)
+		return " ".join(array_parts)
+	if value is Dictionary:
+		var dictionary_parts: Array[String] = []
+		for key in value.keys():
+			var item_text = _variant_to_search_text(value[key])
+			if not item_text.is_empty():
+				dictionary_parts.append(item_text)
+		return " ".join(dictionary_parts)
+	return str(value)
+
 func _build_search_blob(sound_key: String, metadata: Dictionary, file_path: String) -> String:
 	var parts: Array[String] = []
 	parts.append(sound_key)
 	parts.append(file_path)
 	if metadata.has("description"):
-		parts.append(String(metadata["description"]))
+		var description_text = _variant_to_search_text(metadata["description"])
+		if not description_text.is_empty():
+			parts.append(description_text)
 	if metadata.has("tags"):
-		parts.append(String(metadata["tags"]))
+		var tags_text = _variant_to_search_text(metadata["tags"])
+		if not tags_text.is_empty():
+			parts.append(tags_text)
 	return " ".join(parts).to_lower()
 
 func _populate_tree(filter_text: String) -> void:

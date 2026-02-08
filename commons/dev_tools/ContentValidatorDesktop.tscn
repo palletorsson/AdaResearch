@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bowvwy6q1q6om"]
+[gd_scene format=3 uid="uid://bowvwy6q1q6om"]
 
 [ext_resource type="Script" uid="uid://c4ww7mcvmltr6" path="res://commons/dev_tools/ContentValidatorDesktop.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://commons/dev_tools/ContentValidatorUI.tscn" id="2_ui"]
 
-[node name="ContentValidatorDesktop" type="Control"]
+[node name="ContentValidatorDesktop" type="Control" unique_id=1483140166]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=455333377]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.08, 0.08, 0.1, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=968568122]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,30 +33,30 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1939500275]
 layout_mode = 2
 
-[node name="TitleBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TitleBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=744385528]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TitleBar"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TitleBar" unique_id=2041853869]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "📋 AdaResearch Content Validator"
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TitleBar"]
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TitleBar" unique_id=115944605]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExportButton" type="Button" parent="MarginContainer/VBoxContainer/TitleBar"]
+[node name="ExportButton" type="Button" parent="MarginContainer/VBoxContainer/TitleBar" unique_id=1878075685]
 layout_mode = 2
 text = "📄 Export Report"
 
-[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/TitleBar"]
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/TitleBar" unique_id=1550682909]
 layout_mode = 2
 text = "✕"
 
-[node name="ContentValidatorUI" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_ui")]
+[node name="ContentValidatorUI" parent="MarginContainer/VBoxContainer" unique_id=1652009085 instance=ExtResource("2_ui")]
 layout_mode = 2
 size_flags_vertical = 3

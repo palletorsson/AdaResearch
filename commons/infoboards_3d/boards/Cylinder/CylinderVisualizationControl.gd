@@ -51,7 +51,7 @@ func draw_basic_cylinder(center: Vector2):
 	var bottom_center = center + Vector2(0, height / 2)
 
 	# Draw bottom cap first (painter's algorithm)
-	draw_ellipse(bottom_center, radius, radius * 0.4, CYLINDER_CAP_BOTTOM)
+	draw_filled_ellipse(bottom_center, radius, radius * 0.4, CYLINDER_CAP_BOTTOM)
 
 	# Draw cylinder side
 	var segments = 32
@@ -75,7 +75,7 @@ func draw_basic_cylinder(center: Vector2):
 		draw_line(bottom1, top1, CYLINDER_EDGE, 1.0)
 
 	# Draw top cap
-	draw_ellipse(top_center, radius, radius * 0.4, CYLINDER_CAP_TOP)
+	draw_filled_ellipse(top_center, radius, radius * 0.4, CYLINDER_CAP_TOP)
 
 	# Draw outlines
 	draw_arc_ellipse(top_center, radius, radius * 0.4, 0, TAU, 32, CYLINDER_EDGE, 2.0)
@@ -118,7 +118,7 @@ func draw_cylinder_parts(center: Vector2):
 	var bottom_center = center + Vector2(0, height / 2)
 
 	# Draw bottom cap
-	draw_ellipse(bottom_center, bottom_radius, bottom_radius * 0.4, CYLINDER_CAP_BOTTOM)
+	draw_filled_ellipse(bottom_center, bottom_radius, bottom_radius * 0.4, CYLINDER_CAP_BOTTOM)
 
 	# Draw side
 	var segments = 32
@@ -139,7 +139,7 @@ func draw_cylinder_parts(center: Vector2):
 		draw_line(bottom1, top1, CYLINDER_EDGE, 1.0)
 
 	# Draw top cap
-	draw_ellipse(top_center, top_radius, top_radius * 0.4, CYLINDER_CAP_TOP)
+	draw_filled_ellipse(top_center, top_radius, top_radius * 0.4, CYLINDER_CAP_TOP)
 
 	# Draw outlines
 	draw_arc_ellipse(top_center, top_radius, top_radius * 0.4, 0, TAU, 32, CYLINDER_EDGE, 2.0)
@@ -203,7 +203,7 @@ func draw_cylinder_segments(center: Vector2):
 	draw_string(get_theme_default_font(), Vector2(20, size.y - 40), "Rings: %d" % rings, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(1.0, 0.9, 0.2))
 	draw_string(get_theme_default_font(), Vector2(20, size.y - 20), "More segments = smoother", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(0.7, 0.7, 0.8, 0.8))
 
-func draw_ellipse(pos: Vector2, radius_x: float, radius_y: float, color: Color):
+func draw_filled_ellipse(pos: Vector2, radius_x: float, radius_y: float, color: Color):
 	"""Draw a filled ellipse"""
 	var segments = 32
 	var points = PackedVector2Array()

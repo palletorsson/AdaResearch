@@ -48,8 +48,8 @@ func generate_grid():
 	# Ensure spawner scene is loaded if referenced by path (though export does it)
 	if spawner_scene == null:
 		# Try to load default if not set
-		if FileAccess.file_exists("res://algorithms/array/mondrian_grid/mondrian_spawner.tscn"):
-			spawner_scene = load("res://algorithms/array/mondrian_grid/mondrian_spawner.tscn")
+		if FileAccess.file_exists("res://algorithms/arrays/mondrian_grid/mondrian_spawner.tscn"):
+			spawner_scene = load("res://algorithms/arrays/mondrian_grid/mondrian_spawner.tscn")
 
 func _subdivide_rect(rect: Rect2i, partitions: Array):
 	# Check if we should stop splitting
@@ -146,7 +146,7 @@ func _build_geometry(partitions: Array):
 		else:
 			box.use_collision = false
 			# Add ghost animation script to white blocks
-			box.set_script(load("res://algorithms/array/mondrian_grid/mondrian_ghost_block.gd"))
+			box.set_script(load("res://algorithms/arrays/mondrian_grid/mondrian_ghost_block.gd"))
 		
 		mesh_root.add_child(box)
 
@@ -208,7 +208,7 @@ func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node):
 	if not spawner_scene:
 		# Auto-load default if missing
 		print("MondrianGenerator: Spawner scene not set, loading default...")
-		spawner_scene = load("res://algorithms/array/mondrian_grid/mondrian_spawner.tscn")
+		spawner_scene = load("res://algorithms/arrays/mondrian_grid/mondrian_spawner.tscn")
 		if not spawner_scene:
 			print("MondrianGenerator: ⚠️ Failed to load default spawner scene!")
 			return

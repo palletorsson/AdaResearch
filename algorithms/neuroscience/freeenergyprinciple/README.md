@@ -80,7 +80,7 @@ neuroscience/freeenergyprinciple/
 ├── scripts/
 │   └── markov_blanket_visualization.gd # Main implementation (419 lines)
 ├── scenes/
-│   └── markov_blanket_visualization.tscn # Godot scene file
+│   └── (removed) use res://algorithms/neuroscience/markovblanket/puls_markov.tscn
 └── docs/
     ├── theoretical_background.md       # Detailed theory explanation
     ├── implementation_guide.md         # Technical implementation details
@@ -92,7 +92,7 @@ neuroscience/freeenergyprinciple/
 ### Running the Visualization
 
 1. Open Godot Engine
-2. Load the project scene: `scenes/markov_blanket_visualization.tscn`
+2. Load the project scene: `res://algorithms/neuroscience/markovblanket/puls_markov.tscn`
 3. Run the scene to start the interactive visualization
 4. Observe the real-time entropy dynamics and information processing
 

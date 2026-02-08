@@ -29,7 +29,7 @@ var cube_scene: PackedScene
 
 func _ready() -> void:
 	# Load the cube scene
-	cube_scene = preload("res://algorithms/array/grid_editor/GridEditorCube.tscn")
+	cube_scene = preload("res://algorithms/arrays/grid_editor/GridEditorCube.tscn")
 	
 	# Create grid containers
 	miniature_grid_container = Node3D.new()

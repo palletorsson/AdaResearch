@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh0yixpmcvifk"]
+[gd_scene format=3 uid="uid://dh0yixpmcvifk"]
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8x7y605w4v3v" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_pointer"]
 [ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="6_qxsll"]
-[ext_resource type="PackedScene" path="res://commons/scenes/mapobjects/MapManual.tscn" id="7_mapmanual"]
+[ext_resource type="PackedScene" uid="uid://co6w18g0nxj81" path="res://commons/scenes/mapobjects/MapManual.tscn" id="7_mapmanual"]
 
 [sub_resource type="Curve" id="Curve_qsc12"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -70,34 +70,36 @@ adjustment_brightness = 0.92
 adjustment_contrast = 1.02
 adjustment_saturation = 1.01
 
-[node name="VRStaging" instance=ExtResource("1")]
+[node name="VRStaging" unique_id=1027500865 instance=ExtResource("1")]
 script = ExtResource("2")
 use_lab_system = true
 start_with_grid_system = true
 main_lab_scene = "res://commons/scenes/lab.tscn"
 preferred_grid_map = "Lab"
+skip_menu = false
+quick_transition_duration = 0.3
+normal_transition_duration = 1.0
 main_scene = "uid://cgrljkfrmkgda"
 
-[node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" instance=ExtResource("5_pointer")]
+[node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" unique_id=378771753 instance=ExtResource("5_pointer")]
 distance = 5.0
 show_laser = 2
 laser_length = 1
 
-[node name="FunctionPointerRight" parent="XROrigin3D/RightHandController" index="0" instance=ExtResource("5_pointer")]
+[node name="FunctionPointerRight" parent="XROrigin3D/RightHandController" index="0" unique_id=1112221138 instance=ExtResource("5_pointer")]
 distance = 5.0
 show_laser = 2
 laser_length = 1
 
-[node name="MapManual" parent="XROrigin3D" index="4" instance=ExtResource("7_mapmanual")]
+[node name="MapManual" parent="XROrigin3D" index="3" unique_id=400103662 instance=ExtResource("7_mapmanual")]
 
 [node name="LoadingScreen" parent="." index="2"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 6.64472, -20.0492)
 follow_speed = SubResource("Curve_qsc12")
 splash_screen = ExtResource("3")
 
-[node name="MainMenu3D" parent="." index="4" instance=ExtResource("4_menu")]
+[node name="MainMenu3D" parent="." index="4" unique_id=1502343055 instance=ExtResource("4_menu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="6"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="6" unique_id=1450078467]
 environment = SubResource("Environment_hmfpo")
-

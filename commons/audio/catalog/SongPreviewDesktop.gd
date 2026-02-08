@@ -93,6 +93,7 @@ func _setup_ui():
 		["aphex_twin_digital_amber", "💛 Digital Amber", "Aphex Twin - SAW meets Syro"],
 		["ada_theme", "🎤 Ada Theme", "Warm backing for Ada voice"],
 		["prog_synth_70s", "🎸 70s Prog", "ELP, Kraftwerk, Yes"],
+		["kpop_prog", "🎤 K-Pop Prog", "70s Prog × K-Pop - Moog kill parts"],
 		["pop_generative", "🎤 Pop Gen", "Verse-Chorus structure"],
 		["ambient_works", "🌊 Ambient", "Aphex Twin style"],
 		["i_feel_love", "💜 I Feel Love", "Donna Summer + synth voice"],
@@ -366,6 +367,8 @@ func _generate_and_play(song_id: String):
 			stream = SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
 		"prog_synth_70s":
 			stream = AudioSynthesizer.generate_prog_synth_song({})
+		"kpop_prog":
+			stream = AudioSynthesizer.generate_kpop_prog_song({})
 		"pop_generative":
 			stream = AudioSynthesizer.generate_pop_interactive_song({})
 		"ambient_works":
@@ -637,6 +640,7 @@ func _get_song_bpm(song_id: String) -> float:
 		"aphex_twin_digital_amber": 108.0,
 		"ada_theme": 100.0,
 		"prog_synth_70s": 110.0,
+		"kpop_prog": 118.0,
 		"pop_generative": 118.0,
 		"ambient_works": 90.0,
 		"moroder_disco": 126.0,
@@ -914,6 +918,46 @@ func _get_layers_for_song(song_id: String) -> Dictionary:
 					{"name": "Kraftwerk Seq", "type": "seq", "params": "fading | filter closing"},
 				],
 				"default": [{"name": "Mix", "type": "mix", "params": ""}]
+			}
+		
+		"kpop_prog":
+			return {
+				"intro": [
+					{"name": "Kraftwerk Seq", "type": "seq", "params": "16th pulse | Autobahn → EDM build"},
+					{"name": "Motorik Light", "type": "drums", "params": "soft 4/4 | groove starts immediately"},
+					{"name": "Hi-Hats", "type": "drums", "params": "velocity rolls | constant groove"},
+				],
+				"verse": [
+					{"name": "Mellotron Pad", "type": "pad", "params": "ghostly strings | prog atmosphere | Em"},
+					{"name": "Motorik Drums", "type": "drums", "params": "4-on-floor | GROOVE CONSTANT"},
+					{"name": "808 Sub", "type": "bass", "params": "foundation | Em root"},
+				],
+				"chorus": [
+					{"name": "Supersaw Pad", "type": "pad", "params": "7 voices | KEY CHANGE → G major (lift!)"},
+					{"name": "808 Sub", "type": "bass", "params": "G root | sidechain pump"},
+					{"name": "Chorus Drums", "type": "drums", "params": "full power | GROOVE CONSTANT"},
+					{"name": "Chant Stab", "type": "stab", "params": "syncopated | hook accent"},
+					{"name": "Kraftwerk Seq", "type": "seq", "params": "layered pulse"},
+				],
+				"killpart": [
+					{"name": "Neo-Moog Lead", "type": "lead", "params": "3 saws ±7¢ | portamento 80ms | ELP scream"},
+					{"name": "Prog Drums", "type": "drums", "params": "syncopated | GROOVE CONSTANT | back to Em"},
+					{"name": "808 Sub", "type": "bass", "params": "Em foundation"},
+					{"name": "Kraftwerk Seq", "type": "seq", "params": "pulse continues"},
+				],
+				"bridge": [
+					{"name": "Mellotron Pad", "type": "pad", "params": "breathing room | Em"},
+					{"name": "Motorik Light", "type": "drums", "params": "soft groove | BRIEF BREAK feel"},
+					{"name": "Build Riser", "type": "fx", "params": "tension rebuild"},
+				],
+				"finalchorus": [
+					{"name": "Supersaw Pad", "type": "pad", "params": "KEY CHANGE → F minor (+1 semitone)"},
+					{"name": "808 Sub", "type": "bass", "params": "F root | maximum"},
+					{"name": "Chorus Drums", "type": "drums", "params": "full power | GROOVE CONSTANT"},
+					{"name": "Neo-Moog Lead", "type": "lead", "params": "added layer | climax"},
+					{"name": "Chant Stab", "type": "stab", "params": "hook hook hook"},
+				],
+				"default": [{"name": "K-Pop Prog", "type": "mix", "params": "118 BPM | Em→G→Em→Fm | CONSTANT GROOVE"}]
 			}
 		
 		"ambient_works":

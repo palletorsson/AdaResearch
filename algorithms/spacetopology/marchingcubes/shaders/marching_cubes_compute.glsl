@@ -28,7 +28,7 @@ layout(set = 0, binding = 4, std430) restrict buffer CounterBuffer {
 };
 
 // Uniforms
-layout(set = 0, binding = 5, std430) uniform Params {
+layout(set = 0, binding = 5, std140) uniform Params {
     ivec3 grid_size;        // Size of the density grid
     vec3 voxel_scale;       // Scale of each voxel
     vec3 grid_offset;       // Offset of the grid in world space

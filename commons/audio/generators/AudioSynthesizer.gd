@@ -4616,6 +4616,469 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
 
 
+# === K-POP PROG REMIX ===
+# 70s Progressive Rock (ELP, Kraftwerk, Yes) meets K-Pop (BTS, BLACKPINK, aespa)
+# CONSTANT BEAT - groove NEVER stops, same kick/snare throughout
+# Key modulation: Em → G major (lift) → Fm (climax) → loops
+# Research: ada_the_research/music_tracks/kpop_prog_remix.md
+static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	randomize()
+	var bpm = 118.0  # Classic K-pop tempo
+	var bar_duration = 240.0 / bpm
+	
+	# E minor - prog classic
+	var root_note = "E3"
+	var scale_em = PopMusicTheory.get_minor_scale_notes(root_note)  # E minor
+	var scale_g = PopMusicTheory.get_major_scale_notes("G3")  # G major (relative major - KEY CHANGE 1)
+	var scale_fm = PopMusicTheory.get_minor_scale_notes("F3")  # F minor (half step up - KEY CHANGE 2)
+	
+	# Progressions
+	var main_prog = [0, 5, 3, 4]  # i - VI - iv - V
+	var lift_prog = [0, 2, 5, 4]  # Ascending feel
+	
+	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em → G → Fm")
+	
+	var playback = AudioStreamInteractive.new()
+	playback.clip_count = 5
+	playback.initial_clip = 0
+	
+	# === CONSTANT BEAT STRUCTURE ===
+	# ALL sections have "constant_beat" - same 4/4 kick+snare+hats throughout
+	# Only melodic/harmonic content changes
+	
+	# 0. INTRO: Beat + sequence (Em)
+	var intro = _generate_kpop_prog_section(main_prog, scale_em, 
+		["constant_beat", "kraftwerk_seq"], bar_duration, bpm, 0.7)
+	playback.set_clip_stream(0, intro)
+	playback.set_clip_name(0, "Intro")
+	playback.set_clip_auto_advance(0, 1)
+	playback.set_clip_auto_advance_next_clip(0, 1)
+	
+	# 1. VERSE: Beat + mellotron + bass (Em)
+	var verse = _generate_kpop_prog_section(main_prog, scale_em, 
+		["constant_beat", "mellotron_kpop", "sub_808"], bar_duration, bpm, 0.8)
+	playback.set_clip_stream(1, verse)
+	playback.set_clip_name(1, "Verse")
+	playback.set_clip_auto_advance(1, 1)
+	playback.set_clip_auto_advance_next_clip(1, 2)
+	
+	# 2. CHORUS: Beat + supersaw + bass + stabs (G major - KEY CHANGE 1)
+	var chorus = _generate_kpop_prog_section(lift_prog, scale_g,
+		["constant_beat", "supersaw_kpop", "sub_808", "chant_stab", "kraftwerk_seq"], bar_duration, bpm, 1.0)
+	playback.set_clip_stream(2, chorus)
+	playback.set_clip_name(2, "Chorus (G)")
+	playback.set_clip_auto_advance(2, 1)
+	playback.set_clip_auto_advance_next_clip(2, 3)
+	
+	# 3. KILL PART: Beat + Moog lead (Em - resolves back)
+	var kill_part = _generate_kpop_prog_section(main_prog, scale_em,
+		["constant_beat", "neomoog_lead", "sub_808", "kraftwerk_seq"], bar_duration, bpm, 1.0)
+	playback.set_clip_stream(3, kill_part)
+	playback.set_clip_name(3, "Kill Part")
+	playback.set_clip_auto_advance(3, 1)
+	playback.set_clip_auto_advance_next_clip(3, 4)
+	
+	# 4. FINAL: Beat + everything (Fm - KEY CHANGE 2, half step up)
+	var final_chorus = _generate_kpop_prog_section(lift_prog, scale_fm,
+		["constant_beat", "supersaw_kpop", "sub_808", "chant_stab", "neomoog_lead"], bar_duration, bpm, 1.1)
+	playback.set_clip_stream(4, final_chorus)
+	playback.set_clip_name(4, "Final (Fm)")
+	playback.set_clip_auto_advance(4, 1)
+	playback.set_clip_auto_advance_next_clip(4, 0)  # Loops back to intro
+	
+	# Tight crossfades (beat continuous)
+	var xfade = 0.5  # Very short - beat doesn't break
+	for i in range(4):
+		playback.add_transition(i, i + 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, 
+			AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	playback.add_transition(4, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, 
+		AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
+	
+	return playback
+
+
+static func _generate_kpop_prog_section(progression: Array, scale: Array, instruments: Array,
+		bar_duration: float, bpm: float, energy: float) -> AudioStreamWAV:
+	var total_duration = progression.size() * bar_duration * 2
+	var total_samples = int(total_duration * SAMPLE_RATE)
+	var final_mix = PackedFloat32Array()
+	final_mix.resize(total_samples)
+	final_mix.fill(0.0)
+	var samples_per_chord = int(bar_duration * 2 * SAMPLE_RATE)
+	var sixteenth = int(60.0 / bpm / 4.0 * SAMPLE_RATE)
+	
+	for i in range(progression.size()):
+		var degree = progression[i]
+		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var root_freq = chord_freqs[0]
+		var chord_mix = PackedFloat32Array()
+		chord_mix.resize(samples_per_chord)
+		chord_mix.fill(0.0)
+		
+		# === KRAFTWERK SEQUENCE (Intro/Outro/Pre-Chorus) ===
+		# 16th note pulse arp, Autobahn meets EDM build
+		if "kraftwerk_seq" in instruments:
+			var arp_pattern = [0, 12, 7, 12, 0, 12, 7, 12, 0, 7, 12, 7, 0, 12, 7, 0]
+			for step in range(16):
+				var start = step * sixteenth
+				var note_offset = arp_pattern[step]
+				var freq = root_freq * pow(2.0, note_offset / 12.0)
+				
+				for j in range(min(sixteenth, samples_per_chord - start)):
+					var t = float(j) / SAMPLE_RATE
+					var step_progress = float(j) / sixteenth
+					
+					# Pulse wave (Kraftwerk character)
+					var pulse_width = 0.5 + sin(t * 3.0) * 0.1
+					var pulse = 1.0 if fmod(t * freq, 1.0) < pulse_width else -1.0
+					
+					# Filter sweep (slow LFO)
+					var filter_mod = 0.5 + 0.5 * sin(t * 0.25 * TAU)
+					pulse *= 0.3 + filter_mod * 0.5
+					
+					# Sharp decay envelope
+					var env = exp(-step_progress * 8.0)
+					
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += pulse * env * 0.18 * energy
+		
+		# === MELLOTRON PAD (Verse atmosphere - prog DNA) ===
+		if "mellotron_kpop" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				# Tape wow/flutter (prog character)
+				var wow = sin(t * 0.2 * TAU) * 0.004
+				
+				for freq in chord_freqs:
+					var f = freq * (1.0 + wow)
+					# Filtered saw + noise = Mellotron strings
+					var saw = fmod(t * f, 1.0) * 2.0 - 1.0
+					var noise = (randf() - 0.5) * 0.1
+					pad += (saw * 0.7 + noise) * 0.33
+				
+				pad /= chord_freqs.size()
+				
+				# Slow attack (Mellotron character)
+				var env = 1.0
+				if progress < 0.15: env = progress / 0.15
+				elif progress > 0.9: env = (1.0 - progress) / 0.1
+				
+				chord_mix[j] += pad * env * 0.2 * energy
+		
+		# === SUPERSAW PAD (Chorus lift - K-pop DNA) ===
+		if "supersaw_kpop" in instruments:
+			for j in range(samples_per_chord):
+				var t = float(j) / SAMPLE_RATE
+				var progress = float(j) / samples_per_chord
+				var pad = 0.0
+				
+				for freq in chord_freqs:
+					# 7-voice supersaw (JP-8000 style)
+					for voice in range(7):
+						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0
+						var detune_ratio = pow(2.0, detune_cents / 1200.0)
+						var saw = fmod(t * freq * detune_ratio, 1.0) * 2.0 - 1.0
+						pad += saw / 7.0
+				
+				pad /= chord_freqs.size()
+				
+				# Sidechain pumping (K-pop character)
+				var beat_phase = fmod(t * bpm / 60.0, 1.0)
+				var sidechain = 0.4 + 0.6 * (1.0 - exp(-beat_phase * 6.0))
+				
+				var env = sin(PI * progress) * 0.8 + 0.2
+				chord_mix[j] += pad * env * sidechain * 0.22 * energy
+		
+		# === 808 SUB BASS (K-pop foundation) ===
+		if "sub_808" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			# Sub hits pattern: [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,1]
+			var sub_steps = [0, 8, 15]
+			for step in sub_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.4), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					# Pitch drop
+					var sub_freq = 60.0 * pow(2.0, -st * 0.3)
+					var sub = sin(TAU * sub_freq * st) * exp(-st * 2.5)
+					# Warm saturation
+					sub = tanh(sub * 1.3)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += sub * 0.35 * energy
+		
+		# === TRAP DRUMS (Verse - K-pop DNA) ===
+		if "trap_drums" in instruments:
+			# Kick pattern: [1,0,0,0, 0,0,0,0, 1,0,1,0, 0,0,0,0]
+			var kick_steps = [0, 8, 10]
+			for step in kick_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 55.0 + exp(-kt * 40.0) * 100.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 10.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.45 * energy
+			
+			# Snare on 4 and 12
+			for step in [4, 12]:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 180.0 * st) * exp(-st * 18.0) * 0.4
+					snare += (randf() - 0.5) * exp(-st * 20.0) * 0.4
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.28 * energy
+		
+		# === HI-HAT ROLLS (Trap character) ===
+		if "hihat_rolls" in instruments:
+			for step in range(16):
+				var start = step * sixteenth
+				# Velocity roll pattern
+				var vel = 0.5 + (float(step % 4) / 4.0) * 0.5
+				for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * 80.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += hat * 0.1 * vel * energy
+		
+		# === MOTORIK DRUMS (Pre-Chorus - prog DNA) ===
+		if "motorik_kpop" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			# 4-on-floor kick
+			for beat in range(4):
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 55.0 + exp(-kt * 35.0) * 80.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 12.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.42 * energy
+			
+			# Snare on 2 and 4
+			for beat in [1, 3]:
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 200.0 * st) * exp(-st * 20.0) * 0.35
+					snare += (randf() - 0.5) * exp(-st * 25.0) * 0.35
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.22 * energy
+			
+			# Offbeat hi-hats (Kraftwerk signature)
+			for beat in range(8):
+				if beat % 2 == 1:
+					var start = int(beat * beat_samples / 2)
+					for j in range(min(int(SAMPLE_RATE * 0.03), samples_per_chord - start)):
+						var ht = float(j) / SAMPLE_RATE
+						var hat = (randf() - 0.5) * exp(-ht * 60.0)
+						if start + j < samples_per_chord:
+							chord_mix[start + j] += hat * 0.12 * energy
+		
+		# === CONSTANT BEAT (Same groove in EVERY section - never stops) ===
+		if "constant_beat" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			
+			# KICK: Solid 4-on-floor - never changes
+			for beat in range(4):
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 55.0 + exp(-kt * 35.0) * 85.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 11.0)
+					kick = tanh(kick * 1.3)  # Warm saturation
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.48 * energy
+			
+			# SNARE: 2 and 4 - always
+			for beat in [1, 3]:
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.09), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 190.0 * st) * exp(-st * 18.0) * 0.4
+					snare += (randf() - 0.5) * exp(-st * 20.0) * 0.45
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.3 * energy
+			
+			# HI-HATS: Steady 8ths with offbeat accent - constant pulse
+			for eighth in range(8):
+				var start = int(eighth * beat_samples / 2)
+				var is_offbeat = eighth % 2 == 1
+				var hat_vol = 0.12 if is_offbeat else 0.08  # Offbeat accent
+				for j in range(min(int(SAMPLE_RATE * 0.03), samples_per_chord - start)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * 65.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += hat * hat_vol * energy
+		
+		# === MOTORIK LIGHT (Intro groove - keeps beat but lighter) ===
+		if "motorik_light" in instruments:
+			var beat_samples = int(60.0 / bpm * SAMPLE_RATE)
+			# Softer 4-on-floor kick
+			for beat in range(4):
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 50.0 + exp(-kt * 30.0) * 60.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 14.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.28 * energy
+			
+			# Light snare on 2 and 4 (quieter)
+			for beat in [1, 3]:
+				var start = beat * beat_samples
+				for j in range(min(int(SAMPLE_RATE * 0.06), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 200.0 * st) * exp(-st * 25.0) * 0.25
+					snare += (randf() - 0.5) * exp(-st * 30.0) * 0.25
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.15 * energy
+		
+		# === CHORUS DRUMS (Full power) ===
+		if "chorus_drums" in instruments:
+			# Kick: [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,1,0]
+			var kick_steps = [0, 6, 8, 14]
+			for step in kick_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.12), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 55.0 + exp(-kt * 45.0) * 110.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 11.0)
+					kick = tanh(kick * 1.5)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.5 * energy
+			
+			# Snare + Clap layered: [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1]
+			for step in [4, 12, 15]:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 185.0 * st) * exp(-st * 16.0) * 0.45
+					snare += (randf() - 0.5) * exp(-st * 18.0) * 0.45
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.3 * energy
+			
+			# Glitchy hi-hats: [1,0,1,1, 0,1,1,0, 1,0,1,1, 0,1,1,0]
+			var hat_steps = [0, 2, 3, 5, 6, 8, 10, 11, 13, 14]
+			for step in hat_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.025), samples_per_chord - start)):
+					var ht = float(j) / SAMPLE_RATE
+					var hat = (randf() - 0.5) * exp(-ht * 70.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += hat * 0.1 * energy
+		
+		# === PROG DRUMS (Dance Break - syncopated) ===
+		if "prog_drums" in instruments:
+			# Complex kick: [1,0,1,0, 0,1,0,0, 1,0,1,0, 0,1,0,1]
+			var kick_steps = [0, 2, 5, 8, 10, 13, 15]
+			for step in kick_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.1), samples_per_chord - start)):
+					var kt = float(j) / SAMPLE_RATE
+					var kick_freq = 55.0 + exp(-kt * 38.0) * 90.0
+					var kick = sin(TAU * kick_freq * kt) * exp(-kt * 11.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += kick * 0.45 * energy
+			
+			# Complex snare: [0,0,0,0, 1,0,0,1, 0,0,0,0, 1,0,1,0]
+			for step in [4, 7, 12, 14]:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var snare = sin(TAU * 200.0 * st) * exp(-st * 20.0) * 0.4
+					snare += (randf() - 0.5) * exp(-st * 22.0) * 0.4
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += snare * 0.25 * energy
+		
+		# === NEO-MOOG LEAD (Kill Part - screaming prog lead) ===
+		if "neomoog_lead" in instruments:
+			# Melody pattern: ascending prog run
+			var melody_notes = [0, 2, 4, 7, 9, 12, 9, 7]  # Dorian ascending
+			var prev_freq = root_freq * 2.0
+			
+			for note_idx in range(melody_notes.size()):
+				var note_start = int(note_idx * samples_per_chord / melody_notes.size())
+				var note_samples = int(samples_per_chord / melody_notes.size())
+				var target_freq = root_freq * 2.0 * pow(2.0, melody_notes[note_idx] / 12.0)
+				
+				for j in range(note_samples):
+					if note_start + j >= samples_per_chord:
+						break
+					var t = float(j) / SAMPLE_RATE
+					var note_progress = float(j) / note_samples
+					
+					# Portamento (80ms glide - ELP character)
+					var porta_time = 0.08
+					var freq = prev_freq
+					if t < porta_time:
+						freq = prev_freq + (target_freq - prev_freq) * (t / porta_time)
+					else:
+						freq = target_freq
+					
+					# 3 detuned saws
+					var lead = 0.0
+					for voice in range(3):
+						var detune = [0.0, 7.0, -7.0][voice]
+						var d_ratio = pow(2.0, detune / 1200.0)
+						lead += fmod(t * freq * d_ratio, 1.0) * 2.0 - 1.0
+					lead /= 3.0
+					
+					# Filter envelope (bright attack)
+					var filter_env = 0.4 + 0.6 * exp(-note_progress * 3.0)
+					lead *= filter_env
+					
+					# Amplitude envelope
+					var env = 1.0
+					if note_progress < 0.05: env = note_progress / 0.05
+					elif note_progress > 0.85: env = (1.0 - note_progress) / 0.15
+					
+					chord_mix[note_start + j] += lead * env * 0.2 * energy
+				
+				prev_freq = target_freq
+		
+		# === CHANT STAB (Hook accent - "Moog-a-Moog-a") ===
+		if "chant_stab" in instruments:
+			# Stab pattern: syncopated on chord hits
+			var stab_steps = [0, 3, 6, 8, 11]
+			for step in stab_steps:
+				var start = step * sixteenth
+				for j in range(min(int(SAMPLE_RATE * 0.08), samples_per_chord - start)):
+					var st = float(j) / SAMPLE_RATE
+					var stab = 0.0
+					for freq in chord_freqs:
+						stab += sin(TAU * freq * 2.0 * st)
+					stab /= chord_freqs.size()
+					stab *= exp(-st * 18.0)
+					if start + j < samples_per_chord:
+						chord_mix[start + j] += stab * 0.2 * energy
+		
+		# === BUILD RISER (Pre-Chorus tension) ===
+		if "build_riser" in instruments:
+			for j in range(samples_per_chord):
+				var progress = float(j) / samples_per_chord
+				var t = float(j) / SAMPLE_RATE
+				# Noise sweep up
+				var noise = (randf() - 0.5)
+				# High-pass that opens (build character)
+				var hp_amount = progress * 0.5
+				noise *= hp_amount * progress
+				chord_mix[j] += noise * 0.08 * energy
+		
+		# Mix into final with soft limiting
+		var start_idx = i * samples_per_chord
+		for j in range(samples_per_chord):
+			if start_idx + j < total_samples:
+				var sample = chord_mix[j]
+				sample = tanh(sample * 0.9)
+				final_mix[start_idx + j] = clampf(sample, -1.0, 1.0)
+	
+	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.015))
+	return _create_audio_stream(final_mix, AudioStreamWAV.LOOP_DISABLED)
+
+
 static func generate_pop_song_async(parameters: Dictionary, callback_object: Object, callback_method: String):
 	if is_generating:
 		print("AudioSynthesizer: Already generating sound")

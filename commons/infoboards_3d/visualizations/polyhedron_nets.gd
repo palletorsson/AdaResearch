@@ -8,8 +8,10 @@ extends Node3D
 @export var edge_color: Color = Color(0.2, 0.2, 0.2, 1.0)
 @export var fold_progress: float = 0.0:
 	set(value):
-		field = clamp(value, 0.0, 1.0)
+		_fold_progress = clamp(value, 0.0, 1.0)
 		_apply_fold()
+	get:
+		return _fold_progress
 @export var auto_fold: bool = true
 @export var fold_delay: float = 0.4
 @export var fold_duration: float = 2.0
@@ -21,6 +23,7 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 
 var _cube_root: Node3D
 var _cube_hinges: Dictionary = {}
+var _fold_progress: float = 0.0
 
 func _ready():
 	match net_type:

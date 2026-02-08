@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://btxvpgsb55wbr"]
+[gd_scene load_steps=4 format=3 uid="uid://xuobeizbpfc55"]
 
 [ext_resource type="Script" uid="uid://xo0g4j5qkt7y" path="res://algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd" id="1_cave_script"]
 
@@ -11,6 +11,7 @@ emission = Color(0.25, 0.1, 0.35, 1)
 emission_energy_multiplier = 1.8
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rxir3"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [node name="QueerMarchingCave" type="Node3D"]
 script = ExtResource("1_cave_script")
@@ -43,3 +44,4 @@ shape = SubResource("ConvexPolygonShape3D_rxir3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.411622, 2.04635)
+

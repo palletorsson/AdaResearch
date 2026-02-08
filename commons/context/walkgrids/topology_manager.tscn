@@ -22,10 +22,13 @@ shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_73o5n"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d1xnd"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y0xe5"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cm8s1"]
 render_priority = 0
@@ -42,6 +45,7 @@ shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_krqlj"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [node name="TopologyManager" type="Node3D"]
 script = ExtResource("1_v503f")
@@ -88,3 +92,4 @@ transform = Transform3D(1, 0, 0, 0, 0.917845, 0.39694, 0, -0.39694, 0.917845, 0,
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.11527, 0)
+

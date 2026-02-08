@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "id": "kpop_prog",
+    "name": "K-Pop Prog Remix",
+    "lineage": "ELP + Kraftwerk + Yes → BTS + BLACKPINK + aespa",
+    "era": "1970s → 2024 fusion",
+    "bpm": { "min": 116, "max": 120, "typical": 118 },
+    "lambda": 0.55
+  },
+
+  "identity": {
+    "token": "Moog screams become kill parts + motorik becomes pre-chorus build + 7 minutes → 3:28",
+    "two_second_test": "Kraftwerk precision meets K-pop maximalism — you hear both lineages immediately",
+    "emotional_truth": "Cerebral exploration compressed into ruthless hookiness — same impulse, new grammar"
+  },
+
+  "soundbank": ["kick", "snare", "clap", "hihat", "hihat_open", "808_sub", "neomoog_lead", "kraftwerk_seq", "supersaw_pad", "mellotron_pad"],
+
+  "forbidden": [
+    "hoover_bass",
+    "dubstep_wobble",
+    "gated_reverb_snare",
+    "pure_trap_without_melody",
+    "4_on_floor_monotony",
+    "extended_solos_over_16_bars"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 2,
+    "swing_pct": 0,
+    "pattern": "verse_trap_chorus_edm_prechor_motorik"
+  },
+
+  "harmony": {
+    "key": "Em",
+    "mode": "dorian",
+    "scales": ["dorian"],
+    "progressions": {
+      "verse": ["i7", "i7", "i7", "i7"],
+      "prechorus": ["i", "VII", "VI", "V"],
+      "chorus": ["i", "III", "VII", "VI"],
+      "bridge": ["iv", "i", "bII", "III"]
+    }
+  },
+
+  "instruments": {
+    "neomoog_lead": {
+      "role": "kill_part",
+      "oscillators": 3,
+      "waveform": "sawtooth",
+      "detune_cents": [0, 7, -7],
+      "filter_cutoff_hz": 2000,
+      "resonance": 0.7,
+      "portamento_ms": 80,
+      "character": "screaming_prog_lead_with_kpop_brightness"
+    },
+    "kraftwerk_seq": {
+      "role": "intro_outro_build",
+      "oscillators": 2,
+      "waveform": "pulse",
+      "pulse_width": 0.5,
+      "detune_cents": 3,
+      "filter_cutoff_hz": 1500,
+      "lfo_hz": 0.25,
+      "lfo_depth_hz": 800,
+      "pattern": "16th_up_down_arp",
+      "character": "autobahn_meets_edm_build"
+    },
+    "808_sub": {
+      "role": "foundation",
+      "waveform": "sine",
+      "freq_start_hz": 60,
+      "pitch_drop_octaves": 0.3,
+      "attack_ms": 5,
+      "decay_ms": 400,
+      "distortion": 0.2,
+      "character": "modern_kpop_sub_with_prog_warmth"
+    },
+    "supersaw_pad": {
+      "role": "chorus_lift",
+      "voices": 7,
+      "waveform": "sawtooth",
+      "detune_cents": 25,
+      "filter_cutoff_hz": 4000,
+      "resonance": 0.3,
+      "character": "anthemic_kpop_chorus_power"
+    },
+    "mellotron_pad": {
+      "role": "verse_atmosphere",
+      "waveform": "filtered_noise_saw",
+      "attack_ms": 200,
+      "release_ms": 1000,
+      "filter_cutoff_hz": 1800,
+      "wow_flutter_cents": 8,
+      "wow_rate_hz": 0.2,
+      "character": "ghostly_prog_atmosphere"
+    }
+  },
+
+  "drums": {
+    "verse": {
+      "kick": [1,0,0,0, 0,0,0,0, 1,0,1,0, 0,0,0,0],
+      "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+      "hihat": [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+      "hihat_open": [0,0,0,0, 0,0,0,1, 0,0,0,0, 0,0,0,1],
+      "character": "trap_influenced_space_for_vocals"
+    },
+    "prechorus": {
+      "kick": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],
+      "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+      "hihat": [0,0,1,0, 0,0,1,0, 0,0,1,0, 0,0,1,0],
+      "clap": [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1],
+      "character": "motorik_precision_tension"
+    },
+    "chorus": {
+      "kick": [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,1,0],
+      "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1],
+      "clap": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+      "hihat": [1,0,1,1, 0,1,1,0, 1,0,1,1, 0,1,1,0],
+      "808_sub": [1,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,1],
+      "character": "kpop_maximalist_full_power"
+    },
+    "dance_break": {
+      "kick": [1,0,1,0, 0,1,0,0, 1,0,1,0, 0,1,0,1],
+      "snare": [0,0,0,0, 1,0,0,1, 0,0,0,0, 1,0,1,0],
+      "hihat": [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,1,1],
+      "character": "prog_syncopation_7_8_feel_in_4_4"
+    }
+  },
+
+  "fx": {
+    "sidechain_to_kick": true,
+    "reverb": "hall_on_pads",
+    "delay": "ping_pong_8th_on_sequence",
+    "saturation": "subtle_warmth"
+  },
+
+  "transitions": {
+    "crossfade_s": 1.5
+  },
+
+  "sections": {
+    "intro": { "bars": 8, "elements": ["kraftwerk_seq"] },
+    "verse": { "bars": 8, "elements": ["mellotron_pad", "kick", "snare", "hihat", "hihat_open"] },
+    "prechorus": { "bars": 4, "elements": ["mellotron_pad", "kraftwerk_seq", "kick", "snare", "hihat", "clap"] },
+    "chorus": { "bars": 8, "elements": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"] },
+    "dance_break": { "bars": 4, "elements": ["neomoog_lead", "kick", "snare", "hihat"] },
+    "bridge": { "bars": 4, "elements": ["mellotron_pad"] },
+    "final_chorus": { "bars": 8, "elements": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"], "key_change": "+1" },
+    "outro": { "bars": 4, "elements": ["kraftwerk_seq", "mellotron_pad"] }
+  },
+
+  "arrangement": [
+    "intro", "verse", "prechorus", "chorus",
+    "verse", "prechorus", "chorus",
+    "dance_break", "bridge", "final_chorus", "outro"
+  ]
+}

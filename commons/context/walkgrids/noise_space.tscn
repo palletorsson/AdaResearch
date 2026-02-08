@@ -18,6 +18,7 @@ shader_parameter/globalOpacity = 1.0
 shader_parameter/show_interior = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2glbx"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0, 0.5, -0.5, 0, 0, 0.5)
 
 [node name="NoiseSpace" type="Node3D"]
 script = ExtResource("1_ci0is")
@@ -33,3 +34,4 @@ shape = SubResource("ConvexPolygonShape3D_2glbx")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.905495, 0.424357, 0, -0.424357, 0.905495, 0, 3.08208, 7.02245)
+

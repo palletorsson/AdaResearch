@@ -1,4 +1,4 @@
-﻿{
+{
 	"categories": {
 		"Advanced Laboratory": [
 			"res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
@@ -7,13 +7,13 @@
 			"res://algorithms/advancedlaboratory/water_dynamics/water_dynamics.tscn"
 		],
 		"Array & Grid": [
-			"res://algorithms/array/grid_editor/grid_editor_main.tscn",
-			"res://algorithms/array/grid_snapper_demo.tscn",
-			"res://algorithms/array/grid_3d_4x4x4.tscn",
-			"res://algorithms/array/grid_2d_4x4.tscn",
-			"res://algorithms/array/single_cube.tscn",
-			"res://algorithms/array/row_3_x.tscn",
-			"res://algorithms/array/column_3_z.tscn"
+			"res://algorithms/arrays/grid_editor/grid_editor_main.tscn",
+			"res://algorithms/arrays/grid_snapper_demo.tscn",
+			"res://algorithms/arrays/grid_3d_4x4x4.tscn",
+			"res://algorithms/arrays/grid_2d_4x4.tscn",
+			"res://algorithms/arrays/single_cube.tscn",
+			"res://algorithms/arrays/row_3_x.tscn",
+			"res://algorithms/arrays/column_3_z.tscn"
 		],
 		"Alternative Geometries": [
 			"res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
@@ -140,7 +140,6 @@
 			"res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn"
 		],
 		"Neuroscience": [
-			"res://algorithms/neuroscience/freeenergyprinciple/scenes/markov_blanket_visualization.tscn",
 			"res://algorithms/neuroscience/perceptionaltering/perception_altering.tscn",
 			"res://algorithms/neuroscience/markovblanket/puls_markov.tscn"
 		],

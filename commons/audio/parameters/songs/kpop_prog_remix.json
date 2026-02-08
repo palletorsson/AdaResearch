@@ -1,0 +1,116 @@
+{
+    "_metadata": {
+        "sound_type": "kpop_prog_song",
+        "display_name": "K-Pop Prog Remix",
+        "description": "70s Progressive Rock meets K-Pop. Moog leads become kill parts, motorik drums become pre-chorus builds, 7-minute odysseys compress to 3:28 bangers.",
+        "category": "songs",
+        "tags": ["kpop", "prog", "remix", "hybrid", "moog", "kraftwerk", "bts", "elp", "full_song", "interactive"],
+        "is_interactive_song": true,
+        "reference_artists": ["ELP", "Kraftwerk", "Yes", "BTS", "BLACKPINK", "aespa", "Stray Kids"],
+        "reference_tracks": ["Lucky Man", "Autobahn", "Roundabout", "Dynamite", "How You Like That"]
+    },
+    "identity": {
+        "emotion": "cerebral_hooks",
+        "era": "1970s_meets_2024",
+        "character": ["hooky", "cerebral", "maximalist", "choreo_ready"],
+        "thesis": "Prog-Pop proves that 70s cerebral experimentation and K-pop ruthless hookiness are the same impulse to push boundaries"
+    },
+    "parameters": {
+        "duration": { "min": 180.0, "max": 240.0, "value": 208.0, "step": 10.0, "description": "K-pop tight length (~3:28)" },
+        "bpm": { "min": 116, "max": 120, "value": 118, "step": 1, "description": "Classic K-pop tempo" },
+        "key": { "options": ["Em", "Fm"], "value": "Em", "description": "E Dorian → F minor (key change in final chorus)" },
+        "style": { "options": ["balanced", "prog_heavy", "kpop_heavy"], "value": "balanced", "description": "Bias toward lineage" }
+    },
+    "sound_design": {
+        "neomoog_lead": {
+            "oscillators": { "count": 3, "waveform": "sawtooth", "detune_cents": [0, 7, -7] },
+            "filter": { "type": "24db_lowpass", "cutoff_hz": 2000, "resonance": 0.7 },
+            "portamento": { "enabled": true, "speed_ms": 80 },
+            "character": "screaming_prog_lead_becomes_kill_part"
+        },
+        "kraftwerk_seq": {
+            "oscillators": { "count": 2, "waveform": "pulse", "pulse_width": 0.5 },
+            "detune_cents": 3,
+            "filter": { "cutoff_hz": 1500, "lfo_hz": 0.25, "lfo_depth_hz": 800 },
+            "pattern": "16th_up_down_arpeggio",
+            "character": "autobahn_meets_edm_build"
+        },
+        "supersaw_pad": {
+            "voices": 7,
+            "waveform": "sawtooth",
+            "detune_cents": 25,
+            "filter": { "cutoff_hz": 4000, "resonance": 0.3 },
+            "sidechain": { "enabled": true, "amount": 0.6 },
+            "character": "kpop_chorus_anthemic_lift"
+        },
+        "sub_808": {
+            "waveform": "sine",
+            "freq_start_hz": 60,
+            "pitch_drop_octaves": 0.3,
+            "attack_ms": 5,
+            "decay_ms": 400,
+            "saturation": 0.2,
+            "character": "modern_kpop_sub_with_prog_warmth"
+        },
+        "mellotron_pad": {
+            "waveform": "filtered_saw_plus_noise",
+            "attack_ms": 200,
+            "release_ms": 1000,
+            "filter_cutoff_hz": 1800,
+            "wow_flutter": { "cents": 8, "rate_hz": 0.2 },
+            "character": "ghostly_prog_strings"
+        }
+    },
+    "drums": {
+        "verse": {
+            "style": "trap_influenced",
+            "kick": [1,0,0,0, 0,0,0,0, 1,0,1,0, 0,0,0,0],
+            "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            "hihat": "16th_velocity_rolls"
+        },
+        "prechorus": {
+            "style": "motorik_revival",
+            "kick": [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0],
+            "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            "hihat": "offbeat_kraftwerk"
+        },
+        "chorus": {
+            "style": "kpop_maximalist",
+            "kick": [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,1,0],
+            "snare": [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1],
+            "hihat": "glitchy_pattern"
+        },
+        "dance_break": {
+            "style": "prog_syncopation",
+            "kick": [1,0,1,0, 0,1,0,0, 1,0,1,0, 0,1,0,1],
+            "snare": [0,0,0,0, 1,0,0,1, 0,0,0,0, 1,0,1,0],
+            "character": "7_8_feel_in_4_4"
+        }
+    },
+    "chord_progressions": [
+        { "name": "verse", "chords": ["Em7", "Em7", "Em7", "Em7"], "character": "modal_vamp" },
+        { "name": "prechorus", "chords": ["Em", "D", "C", "B7"], "character": "descending_drama" },
+        { "name": "chorus", "chords": ["Em", "G", "D", "C"], "character": "kpop_lift" },
+        { "name": "bridge", "chords": ["Am", "Em", "F", "G"], "character": "prog_chromaticism" }
+    ],
+    "arrangement": {
+        "structure": [
+            { "name": "intro", "bars": 8, "elements": ["kraftwerk_seq"] },
+            { "name": "verse", "bars": 8, "elements": ["mellotron_pad", "trap_drums", "hihat_rolls"] },
+            { "name": "prechorus", "bars": 4, "elements": ["mellotron_pad", "kraftwerk_seq", "motorik_drums", "build_riser"] },
+            { "name": "chorus", "bars": 8, "elements": ["supersaw_pad", "sub_808", "chorus_drums", "chant_stab"] },
+            { "name": "verse2", "bars": 8, "elements": ["mellotron_pad", "trap_drums", "hihat_rolls", "sub_808"] },
+            { "name": "prechorus2", "bars": 4, "elements": ["mellotron_pad", "kraftwerk_seq", "motorik_drums", "build_riser"] },
+            { "name": "chorus2", "bars": 8, "elements": ["supersaw_pad", "sub_808", "chorus_drums", "chant_stab"] },
+            { "name": "dance_break", "bars": 4, "elements": ["neomoog_lead", "prog_drums", "sub_808"], "special": "kill_part" },
+            { "name": "bridge", "bars": 4, "elements": ["mellotron_pad"] },
+            { "name": "final_chorus", "bars": 8, "elements": ["supersaw_pad", "sub_808", "chorus_drums", "chant_stab", "kraftwerk_seq"], "key_change": "+1" },
+            { "name": "outro", "bars": 4, "elements": ["kraftwerk_seq", "mellotron_pad"] }
+        ],
+        "total_bars": 68,
+        "duration_estimate_seconds": 208,
+        "transitions": {
+            "crossfade_s": 1.5
+        }
+    }
+}
