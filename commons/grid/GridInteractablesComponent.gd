@@ -30,7 +30,9 @@ const CONFIG_PARAM_NAMES = [
 	"grad", "grad_start", "grad_end", "grad_axis", "grad_auto", "bell", "flip", "max_slope",
 	"alt_x", "alt_y", "alt_z", "phase", "phase_deg", "phase_mode",
 	"spin_x", "spin_y", "spin_z", "speed_x", "speed_y", "speed_z",
-	"animate", "duration", "no_collision", "rotate_collision"
+	"animate", "duration", "no_collision", "rotate_collision",
+	# Random cycle cube params
+	"span", "random_span", "wait_min", "wait_span", "down", "up", "hide"
 ]
 
 # References
@@ -777,6 +779,7 @@ func _parse_token_params(token: String, result: Dictionary) -> Dictionary:
 	return result
 
 func _parse_interactable_token(token: String) -> Dictionary:
+	token = _normalize_legacy_semicolon_token(token)
 	var result := {"lookup_name": token, "overrides": {}, "config_data": {}, "tag": "", "trigger_action": ""}
 	
 	# Handle # configuration syntax first - could be tag OR config
@@ -814,6 +817,28 @@ func _parse_interactable_token(token: String) -> Dictionary:
 	
 	# Handle legacy : syntax for overrides (no # found)
 	return _parse_token_params(token, result)
+
+# Normalize legacy semicolon separator in artifact tokens.
+# Example: "r_c;90:0:1#8" -> "r_c:90:0:1#8"
+func _normalize_legacy_semicolon_token(token: String) -> String:
+	var semicolon_index = token.find(";")
+	if semicolon_index == -1:
+		return token
+
+	var hash_index = token.find("#")
+	var head_end = hash_index if hash_index != -1 else token.length()
+
+	# Only normalize if ';' is in the artifact head section and the name itself
+	# doesn't already contain ':' before that semicolon.
+	if semicolon_index > head_end:
+		return token
+
+	var before_semicolon = token.substr(0, semicolon_index)
+	if before_semicolon.find(":") != -1:
+		return token
+
+	var after_semicolon = token.substr(semicolon_index + 1)
+	return "%s:%s" % [before_semicolon, after_semicolon]
 
 # Parse configuration token syntax with # (e.g., "clipboard#pages:point,line,triangle")
 # Format: "artifact_name[:rotation:height:scale]#config_key:config_value[#config_key2:config_value2]..."

@@ -2,6 +2,7 @@ extends Node2D
 
 # PollockPainting.gd
 # A dynamic simulation of Jackson Pollock's action painting technique
+signal stroke_path_generated(path: PackedVector2Array, stroke_color: Color, stroke_width: float, duration: float)
 
 @export var canvas_size: Vector2 = Vector2(1200, 800)  # Size of the canvas
 @export var background_color: Color = Color(0.85, 0.82, 0.73)  # Tan/beige background
@@ -179,6 +180,8 @@ func add_line():
 	for i in range(1, points.size()):
 		paint_line(points[i-1], points[i], color, line_width)
 
+	_emit_stroke_path(points, color, line_width)
+
 func paint_circle(center: Vector2, radius: float, color: Color):
 	# Make sure we're in bounds
 	if center.x < 0 or center.x >= canvas_size.x or center.y < 0 or center.y >= canvas_size.y:
@@ -226,3 +229,29 @@ func paint_line(from: Vector2, to: Vector2, color: Color, width: float):
 		adjusted_width *= rng.randf_range(0.8, 1.2)
 		
 		paint_circle(pos, adjusted_width, color)
+
+func _emit_stroke_path(points: Array, stroke_color: Color, stroke_width: float) -> void:
+	if points.size() < 2:
+		return
+
+	var packed_path := PackedVector2Array()
+	for p in points:
+		if p is Vector2:
+			packed_path.append(p)
+
+	if packed_path.size() < 2:
+		return
+
+	var duration: float = clampf(float(packed_path.size()) * 0.03, 0.25, 2.4)
+	emit_signal("stroke_path_generated", packed_path, stroke_color, stroke_width, duration)
+
+func _on_regenerate_button_pressed() -> void:
+	if canvas == null:
+		return
+	canvas.fill(background_color)
+	create_initial_painting()
+	update_texture()
+
+func _on_save_button_pressed() -> void:
+	# Keep UI connection valid in map/VR contexts where export is optional.
+	update_texture()

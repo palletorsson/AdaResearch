@@ -7,7 +7,7 @@
 			"estimated_time": "25-30 minutes",
 			"learning_objectives": [
 				"Entropy as possibility space, not destruction",
-				"PRNG vs TRNG: deterministic chaos vs physical noise",
+				"PRNG vs TRNG: deterministic sequences vs physical randomness",
 				"Distributions: uniform, Gaussian, and the shapes of chance",
 				"Random walk: non-teleological movement, queer navigation",
 				"Emergence: Turing morphogenesis, patterns from noise"
@@ -15,39 +15,29 @@
 			"content": [
 				"Definition: Entropy is freedom from pattern—high-dimensional liberation",
 				"10_PRINT: Complexity from simplest random rule (Commodore 64 aesthetic)",
-				"Noise_Types: Taxonomy of disorder—white, pink, brown, blue",
 				"Random_Walk: Non-teleological movement, √N displacement, queer wandering",
 				"Gaussian: Bell curves and the Central Limit Theorem—structure within chaos",
 				"Pheromone: Stigmergy—when randomness leaves traces, emergence begins",
 				"Mushrooms: RAND Corporation 1955, fungal spores, historical randomness",
 				"Space_Geometry: Random at the structural level—non-Euclidean possibility",
 				"Examples: Pollock drips, butterfly wings, pipes, extremes",
-				"Space: Integration—all QFEP terms visible, synthesis through experience"
+				"Transformations: Randomized geometric operations on primitives (scale, rotation, translation)"
 			],
 			"maps": [
+				"Random_Game",
 				"Random_Definition",
 				"Randomness_10_PRINT_Algorithm",
-				"Random_Noise_Types",
 				"Random_Cubes",
 				"Random_Rotate_Random_XYZ",
 				"Random_Walk",
+				"Random_Remove",				
 				"Random_Gaussian",
- 
 				"Random_Pheromone",
 				"Random_Mushrooms",
 				"Random_Space_Geometry",
 				"Randomness_Examples_of_Randomness",
-				"Random_Space",
-				"Randomness_Digital_Materiality_Glitch",
-				"Randomness_Distribution_Visualization",
-				"Randomness_Random_Transformations",
-				"Randomness_TRNG_vs_PRNG",
-				"Random_Game",
-				"Random_Plane",
-				"Random_Points",
-				"Random_Random_Over_Z",
-				"Random_Remove",
-				"Random_Rotate_Random_Y"
+				"Random_Space"
+
 			],
 			"audio": {
 				"ambient_preset": "white_noise_drift",

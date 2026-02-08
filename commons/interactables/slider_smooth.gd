@@ -1,12 +1,19 @@
 @tool
 extends Node3D
 
-# Dedicated script for Vertical Sliders
-# The InteractableSlider is rotated 90 degrees to slide along the Y axis
+# Dedicated script for Audio Control Sliders (Horizontal and Vertical)
+# Handles constraint enforcement to keep handles locked to track
 
 @export var slider_node: NodePath = NodePath("SliderOrigin/InteractableSlider")
 @export var label_node: NodePath = NodePath("Frame/Label3DValue")
 @export_range(0, 6) var decimal_places: int = 2
+
+## Maximum distance handle can deviate from track before snap-back
+@export var max_track_deviation: float = 0.02
+## Speed of snap-back animation when handle is released off-track  
+@export var snap_back_speed: float = 15.0
+## How strongly to enforce constraints while grabbed (higher = stiffer)
+@export var constraint_strength: float = 0.8
 
 var range_min: float = 0.0
 var range_max: float = 1.0
@@ -17,11 +24,20 @@ signal slider_moved(value)
 @onready var _label: Label3D = get_node_or_null(label_node)
 var _last_display_text: String = ""
 
+# Track the handle for constraint enforcement
+var _handle: RigidBody3D = null
+var _handle_origin: Node3D = null
+var _is_snapping_back: bool = false
+
 func _ready() -> void:
 	_connect_slider_signal()
 	_update_label(_current_slider_value())
+	
+	# Cache handle references
+	_handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
+	_handle_origin = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin")
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not _slider:
 		return
 	
@@ -30,23 +46,48 @@ func _process(_delta: float) -> void:
 	if s_min == null: s_min = 0.0
 	if s_max == null: s_max = 0.14
 	
-	# Clamp the slider's transform position directly
-	var slider_x = _slider.transform.origin.x
-	var clamped_x = clamp(slider_x, s_min, s_max)
-	if slider_x != clamped_x:
-		_slider.transform.origin.x = clamped_x
-		_slider.slider_position = clamped_x
+	# Get slider axis (horizontal uses X, vertical uses Y)
+	var slider_axis_raw = _slider.get("slider_axis")
+	var slider_axis: Vector3 = slider_axis_raw if slider_axis_raw != null else Vector3(1, 0, 0)
 	
-	# Keep handle constrained to track (prevent lifting out of slot)
-	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	if handle:
-		if handle.is_picked_up():
-			# While grabbed, constrain Y and Z to stay on track
-			handle.transform.origin.y = 0.0
-			handle.transform.origin.z = 0.0
-		else:
-			# Reset position when released
-			handle.transform.origin = Vector3.ZERO
+	var is_vertical = slider_axis.y != 0.0
+	
+	# Clamp the slider's transform position directly
+	if is_vertical:
+		var slider_y = _slider.transform.origin.y
+		var clamped_y = clamp(slider_y, s_min, s_max)
+		if slider_y != clamped_y:
+			_slider.transform.origin.y = clamped_y
+			_slider.slider_position = clamped_y
+	else:
+		var slider_x = _slider.transform.origin.x
+		var clamped_x = clamp(slider_x, s_min, s_max)
+		if slider_x != clamped_x:
+			_slider.transform.origin.x = clamped_x
+			_slider.slider_position = clamped_x
+	
+	# Enforce handle constraints to keep it locked to track
+	_enforce_handle_constraints(delta, is_vertical)
+
+func _enforce_handle_constraints(_delta: float, is_vertical: bool) -> void:
+	if not _handle or not _handle_origin:
+		return
+	
+	# HARD LOCK: Force non-slider axes to zero EVERY FRAME
+	# This prevents any lifting off the track
+	var handle_local_pos = _handle.transform.origin
+	
+	if is_vertical:
+		# Vertical slider: only Y can move, X and Z locked to 0
+		if handle_local_pos.x != 0.0 or handle_local_pos.z != 0.0:
+			_handle.transform.origin = Vector3(0.0, handle_local_pos.y, 0.0)
+	else:
+		# Horizontal slider: only X can move, Y and Z locked to 0  
+		if handle_local_pos.y != 0.0 or handle_local_pos.z != 0.0:
+			_handle.transform.origin = Vector3(handle_local_pos.x, 0.0, 0.0)
+	
+	# Also lock rotation to prevent drift
+	_handle.transform.basis = Basis.IDENTITY
 
 func _connect_slider_signal() -> void:
 	if not _slider:

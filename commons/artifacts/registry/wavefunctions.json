@@ -219,6 +219,13 @@
 			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
 			"category": "waves"
 		},
+		"DualBallFMController": {
+			"name": "Dual Ball FM Synth",
+			"lookup_name": "DualBallFMController",
+			"description": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
+			"category": "waves"
+		},
 		"coshlea": {
 			"name": "coshlea",
 			"lookup_name": "coshlea",

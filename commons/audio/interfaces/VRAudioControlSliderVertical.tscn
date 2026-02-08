@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyvy080efjvo2"]
+[gd_scene load_steps=14 format=3 uid="uid://cyvy080efjvo2"]
 
 [ext_resource type="Script" path="res://commons/interactables/slider_smooth.gd" id="1_v4m4"]
 [ext_resource type="Script" uid="uid://dggc31iasvhym" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2_v4m4"]
@@ -6,21 +6,34 @@
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rack"]
-albedo_color = Color(0.15, 0.15, 0.18, 1)
-metallic = 0.4
-roughness = 0.6
+resource_name = "TE Cream Background"
+albedo_color = Color(0.92, 0.90, 0.87, 1)
+metallic = 0.1
+roughness = 0.7
 
 [sub_resource type="BoxMesh" id="BoxMesh_slot"]
 size = Vector3(0.06, 0.24, 0.02)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slot_groove"]
+resource_name = "TE Slot Groove"
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.2
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_groove"]
+size = Vector3(0.012, 0.22, 0.008)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
-albedo_color = Color(0.2, 0.6, 1.0, 1)
+resource_name = "TE Orange Handle"
+albedo_color = Color(0.95, 0.45, 0.2, 1)
+metallic = 0.3
+roughness = 0.5
 emission_enabled = true
-emission = Color(0.2, 0.6, 1.0, 1)
-emission_energy_multiplier = 1.0
+emission = Color(0.95, 0.45, 0.2, 1)
+emission_energy_multiplier = 0.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_handle"]
-size = Vector3(0.045, 0.015, 0.03)
+size = Vector3(0.048, 0.018, 0.032)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_slot"]
 size = Vector3(0.08, 0.26, 0.03)
@@ -28,11 +41,12 @@ size = Vector3(0.08, 0.26, 0.03)
 [sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
 radius = 0.025
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_accent"]
-albedo_color = Color(0.8, 0.8, 0.8, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_indicator"]
+resource_name = "TE Handle Indicator"
+albedo_color = Color(1.0, 1.0, 1.0, 1)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.2
+emission_energy_multiplier = 0.3
 
 [node name="VRAudioControlSliderVertical" type="Node3D"]
 script = ExtResource("1_v4m4")
@@ -48,21 +62,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
 mesh = SubResource("BoxMesh_slot")
 surface_material_override/0 = SubResource("StandardMaterial3D_rack")
 
+[node name="SlotGroove" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+mesh = SubResource("BoxMesh_groove")
+surface_material_override/0 = SubResource("StandardMaterial3D_slot_groove")
+
 [node name="Label3DValue" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14, 0.01)
 pixel_size = 0.0005
 text = "0.0"
 font_size = 36
-outline_size = 6
-uppercase = true
+font_color = Color(0.15, 0.15, 0.15, 1)
+outline_size = 0
 
 [node name="LabelName" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14, 0.01)
 pixel_size = 0.0005
 text = "PARAM"
 font_size = 16
-font_color = Color(0.7, 0.7, 0.7, 1)
-outline_size = 4
+font_color = Color(0.3, 0.3, 0.3, 1)
+outline_size = 0
 uppercase = true
 
 [node name="SliderOrigin" type="Node3D" parent="."]
@@ -94,10 +113,11 @@ mesh = SubResource("BoxMesh_handle")
 surface_material_override/0 = SubResource("StandardMaterial3D_handle")
 
 [node name="Indicator" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle/HandleMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.012)
 mesh = SubResource("BoxMesh_handle")
-surface_material_override/0 = SubResource("StandardMaterial3D_accent")
-scale = Vector3(1.0, 0.3, 1.1)
+surface_material_override/0 = SubResource("StandardMaterial3D_indicator")
+skeleton = NodePath("../..")
+scale = Vector3(0.9, 0.25, 0.15)
 
 [node name="GrabPointRedirectTop" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("4_v4m4")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0)

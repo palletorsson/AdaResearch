@@ -17,8 +17,15 @@ var trng_samples := []
 var prng_samples := []
 var entropy_history := []
 
+@export var show_visual_frames := true
+@export var frame_back_color := Color(0.06, 0.08, 0.12, 0.9)
+@export var frame_border_color := Color(0.72, 0.8, 0.95, 1.0)
+@export var frame_border_thickness := 0.08
+@export var frame_depth := 0.03
+
 func _ready():
 	initialize_generators()
+	_setup_visual_frames()
 
 func _process(delta):
 	time += delta
@@ -100,8 +107,7 @@ func visualize_true_random():
 	var container = $TrueRandomGenerator
 	
 	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	_clear_dynamic_children(container)
 	
 	# Show entropy sources
 	var entropy_sources = ["Quantum", "Thermal", "Atmospheric", "Timing"]
@@ -136,7 +142,13 @@ func visualize_true_random():
 		
 		connection.height = 2.0
 		connection.position = source_sphere.position * 0.5
-		connection.look_at_from_position(connection.position, Vector3.ZERO, Vector3.UP)
+		var to_center: Vector3 = Vector3.ZERO - connection.position
+		var up_axis: Vector3 = Vector3.UP
+		if to_center.length() > 0.0001:
+			var direction: Vector3 = to_center.normalized()
+			if abs(direction.dot(Vector3.UP)) > 0.98:
+				up_axis = Vector3.FORWARD
+		connection.look_at_from_position(connection.position, Vector3.ZERO, up_axis)
 		connection.rotate_object_local(Vector3.RIGHT, PI / 2)
 		
 		var conn_material = StandardMaterial3D.new()
@@ -166,8 +178,7 @@ func visualize_pseudo_random():
 	var container = $PseudoRandomGenerator
 	
 	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	_clear_dynamic_children(container)
 	
 	# Show PRNG algorithm structure (LCG)
 	var algorithm_steps = ["Seed", "Multiply", "Add", "Modulo", "Output"]
@@ -241,8 +252,7 @@ func show_statistical_comparison():
 	var container = $StatisticalComparison
 	
 	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	_clear_dynamic_children(container)
 	
 	if trng_samples.size() < 50 or prng_samples.size() < 50:
 		return
@@ -342,8 +352,7 @@ func demonstrate_entropy_visualization():
 	var container = $EntropyVisualization
 	
 	# Clear previous visualization
-	for child in container.get_children():
-		child.queue_free()
+	_clear_dynamic_children(container)
 	
 	# Calculate entropy for both sources
 	var trng_entropy = calculate_entropy(trng_samples)
@@ -447,3 +456,86 @@ func calculate_entropy(samples: Array) -> float:
 			entropy -= probability * log(probability) / log(2)
 	
 	return entropy / log(bin_count) / log(2)  # Normalize to 0-1
+
+func _clear_dynamic_children(container: Node3D) -> void:
+	for child in container.get_children():
+		if child.get_meta("persistent_frame", false):
+			continue
+		child.queue_free()
+
+func _setup_visual_frames() -> void:
+	if not show_visual_frames:
+		return
+	_create_panel_frame($TrueRandomGenerator, "TrueRandomFrame", Vector3(0, -0.4, -0.18), Vector2(6.4, 6.8))
+	_create_panel_frame($PseudoRandomGenerator, "PseudoRandomFrame", Vector3(0, -0.4, -0.18), Vector2(6.0, 6.8))
+
+func _create_panel_frame(parent: Node3D, root_name: String, center: Vector3, panel_size: Vector2) -> void:
+	if parent.get_node_or_null(root_name):
+		return
+
+	var root := Node3D.new()
+	root.name = root_name
+	root.set_meta("persistent_frame", true)
+	parent.add_child(root)
+
+	var back_mat := StandardMaterial3D.new()
+	back_mat.albedo_color = frame_back_color
+	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	back_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	var border_mat := StandardMaterial3D.new()
+	border_mat.albedo_color = frame_border_color
+	border_mat.emission_enabled = true
+	border_mat.emission = frame_border_color * 0.25
+	border_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	var half_w := panel_size.x * 0.5
+	var half_h := panel_size.y * 0.5
+	var half_t := frame_border_thickness * 0.5
+
+	_add_frame_piece(
+		root,
+		"Back",
+		center,
+		Vector3(panel_size.x, panel_size.y, frame_depth),
+		back_mat
+	)
+	_add_frame_piece(
+		root,
+		"Top",
+		center + Vector3(0, half_h - half_t, 0),
+		Vector3(panel_size.x, frame_border_thickness, frame_depth),
+		border_mat
+	)
+	_add_frame_piece(
+		root,
+		"Bottom",
+		center + Vector3(0, -half_h + half_t, 0),
+		Vector3(panel_size.x, frame_border_thickness, frame_depth),
+		border_mat
+	)
+	_add_frame_piece(
+		root,
+		"Left",
+		center + Vector3(-half_w + half_t, 0, 0),
+		Vector3(frame_border_thickness, panel_size.y, frame_depth),
+		border_mat
+	)
+	_add_frame_piece(
+		root,
+		"Right",
+		center + Vector3(half_w - half_t, 0, 0),
+		Vector3(frame_border_thickness, panel_size.y, frame_depth),
+		border_mat
+	)
+
+func _add_frame_piece(parent: Node3D, name: String, position: Vector3, size_vec: Vector3, material: Material) -> void:
+	var piece := MeshInstance3D.new()
+	piece.name = name
+	var mesh := BoxMesh.new()
+	mesh.size = size_vec
+	piece.mesh = mesh
+	piece.material_override = material
+	piece.position = position
+	piece.set_meta("persistent_frame", true)
+	parent.add_child(piece)

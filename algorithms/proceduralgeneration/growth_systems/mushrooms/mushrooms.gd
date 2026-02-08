@@ -7,13 +7,24 @@ extends Node3D
 @export var mushroom_variety: int = 5
 @export var add_glowing_mushrooms: bool = true
 @export var add_ground_cover: bool = true
+@export var use_random_ground: bool = true
+@export var ground_random_amplitude: float = 0.18
+@export var ground_resolution: int = 36
+@export var ground_seed: int = 0
 
 # References
 var mushroom_types = []
 var mushrooms = []
 var ground = null
+var ground_height_grid: PackedFloat32Array = PackedFloat32Array()
+var ground_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready():
+	if ground_seed == 0:
+		ground_rng.randomize()
+	else:
+		ground_rng.seed = ground_seed
+
 	# Create the ground first
 	create_ground()
 	
@@ -35,66 +46,118 @@ func create_ground():
 	ground = Node3D.new()
 	ground.name = "Ground"
 	
+	var static_body = StaticBody3D.new()
+	static_body.name = "GroundStaticBody"
+	ground.add_child(static_body)
+	
 	# Add a mesh for the ground
 	var ground_mesh = MeshInstance3D.new()
 	ground_mesh.name = "GroundMesh"
-	
-	# Create a plane with subdivisions for slight height variation
-	var plane = PlaneMesh.new()
-	plane.size = Vector2(meadow_size, meadow_size)
-	plane.subdivide_depth = 20
-	plane.subdivide_width = 20
-	ground_mesh.mesh = plane
+	ground_mesh.mesh = _build_ground_mesh()
 	
 	# Create ground material
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.3, 0.35, 0.25)  # Dark soil color
 	material.roughness = 0.9
 	ground_mesh.material_override = material
-	
-	# Add collision
-	var static_body = StaticBody3D.new()
+
+	# Add walkable collision from the actual surface mesh
 	var collision = CollisionShape3D.new()
-	var shape = BoxShape3D.new()
-	shape.size = Vector3(meadow_size, 0.1, meadow_size)
-	collision.shape = shape
+	collision.name = "GroundCollision"
+	if ground_mesh.mesh:
+		collision.shape = ground_mesh.mesh.create_trimesh_shape()
+	else:
+		var fallback = BoxShape3D.new()
+		fallback.size = Vector3(meadow_size, 0.1, meadow_size)
+		collision.shape = fallback
+
+	static_body.add_child(ground_mesh)
 	static_body.add_child(collision)
-	ground.add_child(static_body)
 	
 	# Add to scene
-	ground.add_child(ground_mesh)
 	add_child(ground)
-	
-	# Add subtle height noise to ground
-	add_height_noise_to_ground(ground_mesh)
 
-func add_height_noise_to_ground(ground_mesh):
-	# Get the mesh to modify
-	var mesh = ground_mesh.mesh
-	if not mesh is ArrayMesh:
-		return
-	
-	# Access the mesh data
+func _build_ground_mesh() -> ArrayMesh:
+	var plane = PlaneMesh.new()
+	plane.size = Vector2(meadow_size, meadow_size)
+	plane.subdivide_depth = maxi(1, ground_resolution)
+	plane.subdivide_width = maxi(1, ground_resolution)
+
 	var surface_tool = SurfaceTool.new()
-	surface_tool.create_from(mesh, 0)
-	var array_mesh = surface_tool.commit()
-	var mesh_data = array_mesh.surface_get_arrays(0)
-	var vertices = mesh_data[Mesh.ARRAY_VERTEX]
-	
-	# Apply noise to each vertex
-	var noise = FastNoiseLite.new()
-	noise.seed = randi()
-	noise.frequency = 0.2
-	
+	surface_tool.create_from(plane, 0)
+	var base_mesh: ArrayMesh = surface_tool.commit()
+	if base_mesh.get_surface_count() == 0:
+		return base_mesh
+
+	var arrays = base_mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+	var grid_res := maxi(1, ground_resolution)
+	var grid_size := grid_res + 1
+	ground_height_grid = PackedFloat32Array()
+	ground_height_grid.resize(grid_size * grid_size)
+
 	for i in range(vertices.size()):
-		var vertex = vertices[i]
-		var noise_value = noise.get_noise_2d(vertex.x, vertex.z) * 0.3
-		vertices[i].y = noise_value
-	
-	# Update the mesh
-	mesh_data[Mesh.ARRAY_VERTEX] = vertices
-	array_mesh.surface_set_arrays(0, mesh_data)
-	ground_mesh.mesh = array_mesh
+		var v = vertices[i]
+		var height := 0.0
+		if use_random_ground:
+			# RandomSpace-style random heights (no coherent noise field).
+			height = ground_rng.randf_range(-ground_random_amplitude, ground_random_amplitude)
+		vertices[i].y = height
+
+		var gx = int(round(((v.x / meadow_size) + 0.5) * grid_res))
+		var gz = int(round(((v.z / meadow_size) + 0.5) * grid_res))
+		gx = clampi(gx, 0, grid_res)
+		gz = clampi(gz, 0, grid_res)
+		ground_height_grid[gz * grid_size + gx] = height
+
+	var normals := _calculate_vertex_normals(vertices, indices)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+
+	var out_mesh = ArrayMesh.new()
+	out_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return out_mesh
+
+func _calculate_vertex_normals(vertices: PackedVector3Array, indices: PackedInt32Array) -> PackedVector3Array:
+	var normals := PackedVector3Array()
+	normals.resize(vertices.size())
+	for i in range(normals.size()):
+		normals[i] = Vector3.ZERO
+
+	if indices.is_empty():
+		for i in range(normals.size()):
+			normals[i] = Vector3.UP
+		return normals
+
+	for i in range(0, indices.size(), 3):
+		var i0: int = indices[i]
+		var i1: int = indices[i + 1]
+		var i2: int = indices[i + 2]
+		if i0 >= vertices.size() or i1 >= vertices.size() or i2 >= vertices.size():
+			continue
+
+		var edge1 = vertices[i1] - vertices[i0]
+		var edge2 = vertices[i2] - vertices[i0]
+		var face_normal = edge1.cross(edge2)
+		if face_normal.length_squared() > 0.000001:
+			face_normal = face_normal.normalized()
+		else:
+			face_normal = Vector3.UP
+
+		normals[i0] += face_normal
+		normals[i1] += face_normal
+		normals[i2] += face_normal
+
+	for i in range(normals.size()):
+		if normals[i].length_squared() > 0.000001:
+			normals[i] = normals[i].normalized()
+		else:
+			normals[i] = Vector3.UP
+		if normals[i].y < 0.0:
+			normals[i] = -normals[i]
+
+	return normals
 
 func create_mushroom_templates():
 	# Create different mushroom types
@@ -465,14 +528,33 @@ func generate_mushroom_positions():
 	
 	return positions
 
-func get_ground_height(x, z):
-	# In a real implementation, you would raycast to the ground
-	# For this example, we'll use a simple noise function
-	var noise = FastNoiseLite.new()
-	noise.seed = randi()
-	noise.frequency = 0.2
-	
-	return noise.get_noise_2d(x, z) * 0.3
+func get_ground_height(x: float, z: float) -> float:
+	if not use_random_ground or ground_height_grid.is_empty():
+		return 0.0
+
+	var grid_res: int = maxi(1, ground_resolution)
+	var grid_size: int = grid_res + 1
+
+	var u: float = ((x / meadow_size) + 0.5) * float(grid_res)
+	var v: float = ((z / meadow_size) + 0.5) * float(grid_res)
+	u = clampf(u, 0.0, float(grid_res))
+	v = clampf(v, 0.0, float(grid_res))
+
+	var x0: int = int(floor(u))
+	var z0: int = int(floor(v))
+	var x1: int = mini(x0 + 1, grid_res)
+	var z1: int = mini(z0 + 1, grid_res)
+	var tx: float = u - float(x0)
+	var tz: float = v - float(z0)
+
+	var h00: float = ground_height_grid[z0 * grid_size + x0]
+	var h10: float = ground_height_grid[z0 * grid_size + x1]
+	var h01: float = ground_height_grid[z1 * grid_size + x0]
+	var h11: float = ground_height_grid[z1 * grid_size + x1]
+
+	var h0: float = lerpf(h00, h10, tx)
+	var h1: float = lerpf(h01, h11, tx)
+	return lerpf(h0, h1, tz)
 
 func create_mushroom_patterns():
 	# Create fairy rings
@@ -711,6 +793,16 @@ func add_rocks():
 		material.albedo_color = Color(0.5, 0.5, 0.5).darkened(randf() * 0.3)
 		material.roughness = 0.9
 		rock.material_override = material
+
+		var pos_x = randf() * meadow_size - meadow_size / 2
+		var pos_z = randf() * meadow_size - meadow_size / 2
+		var ground_height = get_ground_height(pos_x, pos_z)
+		rock.position = Vector3(pos_x, ground_height + size_val * 0.35, pos_z)
+		rock.rotation_degrees = Vector3(
+			randf() * 30,
+			randf() * 360,
+			randf() * 30
+		)
 		
 		rocks.add_child(rock)
 	

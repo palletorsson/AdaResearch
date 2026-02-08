@@ -6,7 +6,7 @@ extends Node3D
 
 @export_category("Walker Settings")
 @export var walker_count: int = 5
-@export var walk_speed: float = 2.0  # Steps per second
+@export var walk_speed: float = 5.0  # Steps per second
 @export var raise_amount: float = 0.05  # Height increase per step
 @export var max_height: float = 3.0
 
@@ -172,11 +172,15 @@ func _process(delta: float):
 	
 	# Update walkers at specified speed
 	time_accumulator += delta
-	var step_interval = 1.0 / walk_speed
-	
-	if time_accumulator >= step_interval:
-		time_accumulator = 0.0
-		_walk_step()
+	var step_interval = 1.0 / maxf(walk_speed, 0.001)
+	var steps_to_run := 0
+	while time_accumulator >= step_interval and steps_to_run < 32:
+		time_accumulator -= step_interval
+		steps_to_run += 1
+
+	if steps_to_run > 0:
+		for i in range(steps_to_run):
+			_walk_step()
 		_update_mesh()
 
 func _decay_pheromones(delta: float):

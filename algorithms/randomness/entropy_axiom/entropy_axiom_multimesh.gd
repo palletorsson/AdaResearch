@@ -11,12 +11,20 @@ extends Node3D
 @export var max_randomness: float = 0.5
 @export var min_randomness: float = 0.0
 @export var point_radius: float = 0.018
+@export var show_bounds_frame: bool = true
+@export var frame_thickness: float = 0.012
+@export var frame_padding: float = 0.05
+@export var frame_color: Color = Color(0.95, 0.98, 1.0, 0.8)
+@export var frame_emission_color: Color = Color(0.6, 0.8, 1.0, 1.0)
+@export var frame_emission_energy: float = 1.6
 
 var multimesh_instance: MultiMeshInstance3D
+var frame_root: Node3D
 
 func _ready():
 	create_multimesh()
 	generate_entropy_grid()
+	create_bounds_frame()
 
 func create_multimesh():
 	# Create MultiMeshInstance3D node
@@ -106,3 +114,76 @@ func get_entropy_color(entropy_factor: float) -> Color:
 	var value = 1.0
 
 	return Color.from_hsv(hue, saturation, value)
+
+func create_bounds_frame():
+	if not show_bounds_frame:
+		return
+
+	frame_root = Node3D.new()
+	frame_root.name = "EntropyBoundsFrame"
+	add_child(frame_root)
+
+	var min_corner = _get_bounds_min()
+	var max_corner = _get_bounds_max()
+	_build_frame_edges(min_corner, max_corner)
+
+func _get_bounds_min() -> Vector3:
+	var min_x = (0.0 - grid_size_x / 2.0) * base_spacing - max_randomness - point_radius - frame_padding
+	var min_y = (0.0 - grid_size_y / 2.0) * base_spacing - max_randomness - point_radius - frame_padding
+	var min_z = -point_radius - frame_padding
+	return Vector3(min_x, min_y, min_z)
+
+func _get_bounds_max() -> Vector3:
+	var max_x = ((grid_size_x - 1) - grid_size_x / 2.0) * base_spacing + max_randomness + point_radius + frame_padding
+	var max_y = ((grid_size_y - 1) - grid_size_y / 2.0) * base_spacing + max_randomness + point_radius + frame_padding
+	var max_z = (grid_size_z - 1) * base_spacing + point_radius + frame_padding
+	return Vector3(max_x, max_y, max_z)
+
+func _build_frame_edges(min_corner: Vector3, max_corner: Vector3):
+	var thickness = max(frame_thickness, 0.001)
+	var size_x = max(max_corner.x - min_corner.x, thickness)
+	var size_y = max(max_corner.y - min_corner.y, thickness)
+	var size_z = max(max_corner.z - min_corner.z, thickness)
+
+	var edge_mesh = BoxMesh.new()
+	edge_mesh.size = Vector3.ONE
+
+	var material = StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = frame_color
+	material.emission_enabled = true
+	material.emission = frame_emission_color
+	material.emission_energy_multiplier = frame_emission_energy
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if frame_color.a < 1.0:
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+	var cx = (min_corner.x + max_corner.x) * 0.5
+	var cy = (min_corner.y + max_corner.y) * 0.5
+	var cz = (min_corner.z + max_corner.z) * 0.5
+
+	# 4 edges along X
+	_add_frame_edge(edge_mesh, material, Vector3(cx, min_corner.y, min_corner.z), Vector3(size_x, thickness, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(cx, min_corner.y, max_corner.z), Vector3(size_x, thickness, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(cx, max_corner.y, min_corner.z), Vector3(size_x, thickness, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(cx, max_corner.y, max_corner.z), Vector3(size_x, thickness, thickness))
+
+	# 4 edges along Y
+	_add_frame_edge(edge_mesh, material, Vector3(min_corner.x, cy, min_corner.z), Vector3(thickness, size_y, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(min_corner.x, cy, max_corner.z), Vector3(thickness, size_y, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, cy, min_corner.z), Vector3(thickness, size_y, thickness))
+	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, cy, max_corner.z), Vector3(thickness, size_y, thickness))
+
+	# 4 edges along Z
+	_add_frame_edge(edge_mesh, material, Vector3(min_corner.x, min_corner.y, cz), Vector3(thickness, thickness, size_z))
+	_add_frame_edge(edge_mesh, material, Vector3(min_corner.x, max_corner.y, cz), Vector3(thickness, thickness, size_z))
+	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, min_corner.y, cz), Vector3(thickness, thickness, size_z))
+	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, max_corner.y, cz), Vector3(thickness, thickness, size_z))
+
+func _add_frame_edge(mesh: Mesh, material: Material, center: Vector3, size: Vector3):
+	var edge = MeshInstance3D.new()
+	edge.mesh = mesh
+	edge.material_override = material
+	edge.position = center
+	edge.scale = size
+	frame_root.add_child(edge)

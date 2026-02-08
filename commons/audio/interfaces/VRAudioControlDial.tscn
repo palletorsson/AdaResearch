@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx6m7xj7q8xv7"]
+[gd_scene load_steps=14 format=3 uid="uid://cx6m7xj7q8xv7"]
 
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRAudioControlDial.gd" id="1_v4m4"]
 [ext_resource type="Script" uid="uid://ccvkvky7vqx7x" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_v4m4"]
@@ -6,37 +6,51 @@
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rack"]
-albedo_color = Color(0.15, 0.15, 0.18, 1)
-metallic = 0.4
-roughness = 0.6
+resource_name = "TE Cream Background"
+albedo_color = Color(0.92, 0.90, 0.87, 1)
+metallic = 0.1
+roughness = 0.7
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_base"]
-top_radius = 0.035
-bottom_radius = 0.035
-height = 0.01
+top_radius = 0.038
+bottom_radius = 0.038
+height = 0.012
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
-albedo_color = Color(0.3, 0.7, 1.0, 1)
-metallic = 0.5
-roughness = 0.4
-emission_enabled = true
-emission = Color(0.3, 0.7, 1.0, 1)
-emission_energy_multiplier = 0.8
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knob_base"]
+resource_name = "TE Knob Base"
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.4
+roughness = 0.6
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
 top_radius = 0.028
 bottom_radius = 0.028
 height = 0.035
-radial_segments = 16
+radial_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_indicator"]
+resource_name = "TE Knob Indicator"
+albedo_color = Color(0.95, 0.45, 0.2, 1)
+metallic = 0.3
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.95, 0.45, 0.2, 1)
+emission_energy_multiplier = 0.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_indicator"]
-size = Vector3(0.005, 0.015, 0.01)
+size = Vector3(0.006, 0.016, 0.012)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_base"]
 size = Vector3(0.08, 0.08, 0.02)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_handle"]
 radius = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ring"]
+resource_name = "TE Ring Accent"
+albedo_color = Color(0.95, 0.45, 0.2, 1)
+metallic = 0.5
+roughness = 0.4
 
 [node name="VRAudioControlDial" type="Node3D"]
 script = ExtResource("1_v4m4")
@@ -56,15 +70,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0.01)
 pixel_size = 0.0005
 text = "0.5"
 font_size = 32
-outline_size = 6
+font_color = Color(0.15, 0.15, 0.15, 1)
+outline_size = 0
 
 [node name="LabelName" type="Label3D" parent="Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.045, 0.01)
 pixel_size = 0.0005
 text = "PARAM"
 font_size = 24
-font_color = Color(0.7, 0.7, 0.7, 1)
-outline_size = 4
+font_color = Color(0.3, 0.3, 0.3, 1)
+outline_size = 0
 uppercase = true
 
 [node name="DialOrigin" type="Node3D" parent="."]
@@ -75,14 +90,14 @@ hinge_limit_min = -150.0
 hinge_limit_max = 150.0
 
 [node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.01)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.012)
 mesh = SubResource("CylinderMesh_knob")
-surface_material_override/0 = SubResource("StandardMaterial3D_handle")
+surface_material_override/0 = SubResource("StandardMaterial3D_knob_base")
 
 [node name="Indicator" type="MeshInstance3D" parent="DialOrigin/InteractableHinge/KnobMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, -0.015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016, -0.018)
 mesh = SubResource("BoxMesh_indicator")
-surface_material_override/0 = SubResource("StandardMaterial3D_handle")
+surface_material_override/0 = SubResource("StandardMaterial3D_indicator")
 
 [node name="Handles" type="Node3D" parent="DialOrigin/InteractableHinge"]
 

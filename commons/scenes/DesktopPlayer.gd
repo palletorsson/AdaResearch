@@ -25,6 +25,8 @@ var current_interactable: Node = null
 func _ready():
 	# Capture mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if GameManager:
+		GameManager.register_player(self)
 
 	# Auto-bootstrap if running standalone
 	if get_parent() == get_tree().root:

@@ -4,6 +4,8 @@
 
 extends Node
 
+const DEATH_CROSS_SCENE: PackedScene = preload("res://commons/primitives/plus/plus.tscn")
+
 # Game state
 var player_score: int = 0
 var current_message: String = ""
@@ -12,6 +14,18 @@ var game_paused: bool = false
 
 var max_player_health: float = 100.0
 var player_health: float = 100.0
+
+@export var death_sequence_enabled: bool = true
+@export var death_sequence_duration: float = 3.0
+@export var death_orbit_radius: float = 4.0
+@export var death_orbit_height: float = 2.2
+@export var death_orbit_speed: float = 1.6
+@export var death_start_radius: float = 0.8
+@export var death_start_height: float = 1.1
+@export var death_cross_scale: Vector3 = Vector3(0.7, 1.5, 0.2)
+@export var death_cross_color: Color = Color(0.92, 0.92, 0.92, 1.0)
+@export var death_cross_y_offset: float = 0.05
+var _death_sequence_running: bool = false
 
 # Map tracking
 var current_map_name: String = ""
@@ -40,6 +54,7 @@ signal game_state_changed(is_started: bool, is_paused: bool)
 signal regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionary)
 signal health_updated(new_health: float)
 signal player_damaged(amount: float, new_health: float)
+signal player_died(position: Vector3)
 signal current_map_changed(map_name: String)
 signal nail_color_changed(new_color: Color)
 signal hand_color_changed(new_color: Color)
@@ -123,6 +138,7 @@ func reset_game_state() -> void:
 
 func reset_level_state() -> void:
 	player_health = max_player_health
+	_death_sequence_running = false
 	emit_signal("health_updated", player_health)
 
 func _reload_scene() -> void:
@@ -219,12 +235,168 @@ func get_player() -> Node3D:
 	return current_player
 
 func _handle_player_death() -> void:
+	if _death_sequence_running:
+		return
+
+	var death_position: Vector3 = _get_player_death_position()
+	emit_signal("player_died", death_position)
 
 	if debug:
-		print("GameManager: Player health depleted. Resetting level...")
-	
-	# Give a short delay or effect before reload if possible, but for now direct reload
+		print("GameManager: Player health depleted at %s" % str(death_position))
+
+	if death_sequence_enabled:
+		_death_sequence_running = true
+		call_deferred("_run_death_sequence", death_position)
+	else:
+		call_deferred("_reload_scene")
+
+func _run_death_sequence(death_position: Vector3) -> void:
+	var tree: SceneTree = get_tree()
+	if tree == null or tree.current_scene == null:
+		_death_sequence_running = false
+		call_deferred("_reload_scene")
+		return
+
+	var scene_root: Node = tree.current_scene
+	var memorial_position: Vector3 = _resolve_memorial_position(death_position)
+	var focus_position: Vector3 = memorial_position + Vector3(0.0, 0.9, 0.0)
+	var player_node: Node3D = _resolve_player_node()
+	var is_xr_mode: bool = _is_xr_active()
+
+	_spawn_death_cross(scene_root, memorial_position)
+
+	var camera_pivot: Node3D = Node3D.new()
+	camera_pivot.name = "DeathCameraPivot"
+	scene_root.add_child(camera_pivot)
+	camera_pivot.global_position = memorial_position
+
+	var camera_rig: Node3D = Node3D.new()
+	camera_rig.name = "DeathCameraRig"
+	camera_pivot.add_child(camera_rig)
+
+	var death_camera: Camera3D = Camera3D.new()
+	death_camera.name = "DeathCamera"
+	death_camera.fov = 72.0
+	camera_rig.add_child(death_camera)
+
+	if not is_xr_mode:
+		death_camera.current = true
+
+	var total_time: float = max(0.3, death_sequence_duration)
+	var elapsed: float = 0.0
+
+	while elapsed < total_time and is_inside_tree() and tree.current_scene == scene_root:
+		await tree.process_frame
+		if tree == null:
+			break
+
+		var delta: float = max(0.001, tree.root.get_process_delta_time())
+		elapsed += delta
+
+		var t: float = clamp(elapsed / total_time, 0.0, 1.0)
+		var eased: float = _ease_out_cubic(t)
+		var radius: float = lerp(death_start_radius, death_orbit_radius, eased)
+		var height: float = lerp(death_start_height, death_orbit_height, eased)
+
+		camera_pivot.rotation.y += delta * death_orbit_speed
+		camera_rig.position = Vector3(0.0, height, radius)
+
+		if is_xr_mode and is_instance_valid(player_node):
+			player_node.global_position = camera_pivot.global_transform * camera_rig.position
+		else:
+			death_camera.look_at(focus_position, Vector3.UP)
+
+	_death_sequence_running = false
 	call_deferred("_reload_scene")
+
+func _get_player_death_position() -> Vector3:
+	var player_node: Node3D = _resolve_player_node()
+	if is_instance_valid(player_node):
+		return player_node.global_position
+	return Vector3.ZERO
+
+func _resolve_player_node() -> Node3D:
+	if is_instance_valid(current_player):
+		return current_player
+
+	var tree: SceneTree = get_tree()
+	if tree == null or tree.current_scene == null:
+		return null
+
+	var scene_root: Node = tree.current_scene
+	var candidate: Node = null
+
+	candidate = tree.get_first_node_in_group("player")
+	if candidate is Node3D:
+		current_player = candidate as Node3D
+		return current_player
+
+	candidate = tree.get_first_node_in_group("player_body")
+	if candidate is Node3D:
+		current_player = candidate as Node3D
+		return current_player
+
+	var names: Array[String] = ["XROrigin3D", "DesktopPlayer", "Player", "PlayerBody"]
+	for name in names:
+		candidate = scene_root.find_child(name, true, false)
+		if candidate is Node3D:
+			current_player = candidate as Node3D
+			return current_player
+
+	return null
+
+func _spawn_death_cross(scene_root: Node, world_position: Vector3) -> Node3D:
+	if DEATH_CROSS_SCENE == null:
+		return null
+
+	var cross_instance: Node = DEATH_CROSS_SCENE.instantiate()
+	if not (cross_instance is Node3D):
+		return null
+
+	var cross_node: Node3D = cross_instance as Node3D
+	cross_node.name = "DeathCross"
+	cross_node.global_position = world_position + Vector3(0.0, death_cross_y_offset, 0.0)
+	cross_node.scale = death_cross_scale
+	scene_root.add_child(cross_node)
+
+	if cross_node.has_method("set_base_color"):
+		cross_node.call("set_base_color", death_cross_color)
+
+	return cross_node
+
+func _resolve_memorial_position(death_position: Vector3) -> Vector3:
+	var tree: SceneTree = get_tree()
+	if tree == null or tree.current_scene == null:
+		return death_position
+
+	var scene_root: Node = tree.current_scene
+	if not (scene_root is Node3D):
+		return death_position
+
+	var scene_3d: Node3D = scene_root as Node3D
+	var space_state: PhysicsDirectSpaceState3D = scene_3d.get_world_3d().direct_space_state
+	if space_state == null:
+		return death_position
+
+	var from: Vector3 = death_position + Vector3(0.0, 3.0, 0.0)
+	var to: Vector3 = death_position + Vector3(0.0, -8.0, 0.0)
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(from, to)
+	query.collide_with_areas = false
+	query.collide_with_bodies = true
+
+	var hit: Dictionary = space_state.intersect_ray(query)
+	if hit.has("position") and hit["position"] is Vector3:
+		return hit["position"]
+
+	return death_position
+
+func _is_xr_active() -> bool:
+	var xr_interface: XRInterface = XRServer.get_primary_interface()
+	return xr_interface != null and xr_interface.is_initialized()
+
+func _ease_out_cubic(t: float) -> float:
+	var clamped_t: float = clamp(t, 0.0, 1.0)
+	return 1.0 - pow(1.0 - clamped_t, 3.0)
 
 
 

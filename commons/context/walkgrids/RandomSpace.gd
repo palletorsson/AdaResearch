@@ -17,6 +17,15 @@ class_name RandomSpace
 @export var collision_update_interval: float = 0.5  # Collision update interval in seconds
 @export var enable_lod: bool = true
 @export var lod_distance: float = 50.0
+@export var use_trimesh_collision: bool = true
+
+# Visual tuning
+@export var surface_color: Color = Color(0.78, 0.88, 1.0, 1.0)
+@export var emission_tint: Color = Color(0.72, 0.84, 1.0, 1.0)
+@export var emission_strength: float = 0.42
+@export var surface_metallic: float = 0.06
+@export var surface_roughness: float = 0.62
+@export var rim_strength: float = 0.28
 
 enum AnimationType {
 	WAVE,
@@ -75,9 +84,18 @@ func generate_space():
 func _setup_material():
 	"""Setup the material for the space"""
 	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.LIGHT_PINK
-	material.roughness = 0.1
-	material.metallic = 1.0
+	material.albedo_color = surface_color
+	material.roughness = surface_roughness
+	material.metallic = surface_metallic
+	material.rim_enabled = true
+	material.rim = rim_strength
+	material.rim_tint = 0.7
+	material.clearcoat_enabled = true
+	material.clearcoat = 0.18
+	material.clearcoat_gloss = 0.72
+	material.emission_enabled = true
+	material.emission = emission_tint
+	material.emission_energy_multiplier = emission_strength
 	mesh_instance.material_override = material
 
 func _process(delta):
@@ -100,17 +118,21 @@ func _process(delta):
 
 func _update_mesh():
 	"""Update the mesh with animated heights"""
-	if not enable_animation or base_heights.is_empty():
+	if base_heights.is_empty():
 		return
 	
-	# Calculate LOD factor if enabled
-	var lod_factor = 1.0
-	if enable_lod and player_node:
-		var distance = global_position.distance_to(player_node.global_position)
-		lod_factor = clamp(1.0 - (distance / lod_distance), 0.1, 1.0)
-	
-	# Update heights based on animation type
-	_animate_heights(lod_factor)
+	if enable_animation:
+		# Calculate LOD factor if enabled
+		var lod_factor = 1.0
+		if enable_lod and player_node:
+			var distance = global_position.distance_to(player_node.global_position)
+			lod_factor = clamp(1.0 - (distance / lod_distance), 0.1, 1.0)
+		
+		# Update heights based on animation type
+		_animate_heights(lod_factor)
+	else:
+		# Keep a pure static random field for walkable mode.
+		current_heights = base_heights.duplicate()
 	
 	# Create and apply new mesh
 	var mesh = create_mesh_from_heights(current_heights)
@@ -174,8 +196,12 @@ func _animate_chaotic(amplitude: float):
 func _update_collision():
 	"""Update collision shape - called less frequently for performance"""
 	if mesh_instance.mesh:
-		# Use convex collision for better VR performance
-		create_collision_single_convex(mesh_instance.mesh)
+		if use_trimesh_collision:
+			# Matches SineSpace behavior for reliable walkability.
+			create_collision_from_mesh(mesh_instance.mesh)
+		else:
+			# Faster fallback.
+			create_collision_single_convex(mesh_instance.mesh)
 
 # Public API for external control
 func set_animation_type(new_type: AnimationType):
