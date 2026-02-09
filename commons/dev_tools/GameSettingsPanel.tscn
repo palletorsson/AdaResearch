@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c1r8k6m3n4p5q"]
 
-[ext_resource type="Script" path="res://commons/dev_tools/GameSettingsPanel.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dkx0ror2ne2td" path="res://commons/dev_tools/GameSettingsPanel.gd" id="1_script"]
 
-[node name="GameSettingsPanel" type="Control"]
+[node name="GameSettingsPanel" type="Control" unique_id=1364751538]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1266767706]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.12, 0.12, 0.15, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1518981246]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,174 +32,174 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer" unique_id=480147317]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="MarginContainer/VBox"]
+[node name="Title" type="Label" parent="MarginContainer/VBox" unique_id=430387743]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "⚙️ Game Settings Panel"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBox"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBox" unique_id=943727646]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=522842653]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/VBox/HBox"]
+[node name="LeftColumn" type="VBoxContainer" parent="MarginContainer/VBox/HBox" unique_id=348322551]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="GameSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn"]
+[node name="GameSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn" unique_id=321153909]
 layout_mode = 2
 
-[node name="GameLabel" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection"]
+[node name="GameLabel" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection" unique_id=1539743614]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "🎮 Game State"
 
-[node name="GameModeRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection"]
+[node name="GameModeRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection" unique_id=2042887440]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/GameModeRow"]
+[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/GameModeRow" unique_id=1156994270]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Game Mode:"
 
-[node name="GameModeOption" type="OptionButton" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection"]
+[node name="GameModeOption" type="OptionButton" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection" unique_id=18472791]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ScoreRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection"]
+[node name="ScoreRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection" unique_id=1545063632]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/ScoreRow"]
+[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/ScoreRow" unique_id=1710327657]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Score:"
 
-[node name="ScoreSpinBox" type="SpinBox" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/ScoreRow"]
+[node name="ScoreSpinBox" type="SpinBox" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/ScoreRow" unique_id=975285644]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 99999.0
 
-[node name="HealthRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection"]
+[node name="HealthRow" type="HBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection" unique_id=1851559804]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow"]
+[node name="Label" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow" unique_id=888724137]
 layout_mode = 2
 text = "Health:"
 
-[node name="HealthSlider" type="HSlider" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow"]
+[node name="HealthSlider" type="HSlider" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow" unique_id=1323278477]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HealthValue" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow"]
+[node name="HealthValue" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/GameSection/HealthRow" unique_id=513622258]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 text = "100%"
 horizontal_alignment = 2
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBox/HBox/LeftColumn"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBox/HBox/LeftColumn" unique_id=445510227]
 layout_mode = 2
 
-[node name="SettingsSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn"]
+[node name="SettingsSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/LeftColumn" unique_id=613090150]
 layout_mode = 2
 
-[node name="SettingsLabel" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection"]
+[node name="SettingsLabel" type="Label" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection" unique_id=1521494634]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "⚡ Settings"
 
-[node name="InfoboardCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection"]
+[node name="InfoboardCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection" unique_id=686631841]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Show Info Board"
 
-[node name="DebugCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection"]
+[node name="DebugCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection" unique_id=1181909196]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Debug Mode"
 
-[node name="SoundCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection"]
+[node name="SoundCheck" type="CheckButton" parent="MarginContainer/VBox/HBox/LeftColumn/SettingsSection" unique_id=1768302983]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Sound Enabled"
 
-[node name="RightColumn" type="VBoxContainer" parent="MarginContainer/VBox/HBox"]
+[node name="RightColumn" type="VBoxContainer" parent="MarginContainer/VBox/HBox" unique_id=1823886542]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="ProgressSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/RightColumn"]
+[node name="ProgressSection" type="VBoxContainer" parent="MarginContainer/VBox/HBox/RightColumn" unique_id=890051144]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ProgressLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="ProgressLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=1079448678]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "📊 Progression"
 
-[node name="CompletedMapsLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="CompletedMapsLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=868936117]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Completed: 0 maps"
 
-[node name="UnlockedMapsLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="UnlockedMapsLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=524731605]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Unlocked: 0 maps"
 
-[node name="CurrentStateLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="CurrentStateLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=1528847610]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Lab State: initial"
 
-[node name="SequencesLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="SequencesLabel" type="Label" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=1656938424]
 layout_mode = 2
 text = "Sequences (double-click to complete):"
 
-[node name="SequenceList" type="ItemList" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection"]
+[node name="SequenceList" type="ItemList" parent="MarginContainer/VBox/HBox/RightColumn/ProgressSection" unique_id=10921499]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBox"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBox" unique_id=1577492152]
 layout_mode = 2
 
-[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=1111060638]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 10
+alignment = 1
 
-[node name="ResetProgressBtn" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+[node name="ResetProgressBtn" type="Button" parent="MarginContainer/VBox/ButtonRow" unique_id=314848975]
 layout_mode = 2
 text = "🔄 Reset Progress"
 
-[node name="UnlockAllBtn" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+[node name="UnlockAllBtn" type="Button" parent="MarginContainer/VBox/ButtonRow" unique_id=1020562652]
 layout_mode = 2
 text = "🔓 Unlock All"
 
-[node name="SaveBtn" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+[node name="SaveBtn" type="Button" parent="MarginContainer/VBox/ButtonRow" unique_id=1611078411]
 layout_mode = 2
 text = "💾 Save"
 
-[node name="LoadBtn" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+[node name="LoadBtn" type="Button" parent="MarginContainer/VBox/ButtonRow" unique_id=1883636528]
 layout_mode = 2
 text = "📂 Load"
 
-[node name="StatusBar" type="HBoxContainer" parent="MarginContainer/VBox"]
+[node name="StatusBar" type="HBoxContainer" parent="MarginContainer/VBox" unique_id=505681529]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBox/StatusBar"]
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBox/StatusBar" unique_id=1261076342]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

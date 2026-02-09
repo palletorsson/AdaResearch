@@ -104,9 +104,8 @@ func _load_map(map_name: String):
 		lab_grid_system.reload_map = true
 
 func _start_sequence(sequence_name: String):
-	"""Start a sequence by loading its first map"""
+	"""Start a sequence - loads last map in TEST mode, first incomplete otherwise"""
 	current_sequence = sequence_name
-	current_map_index = 0
 
 	# Get sequence configuration from AdaSceneManager
 	if not AdaSceneManager.is_available():
@@ -126,13 +125,30 @@ func _start_sequence(sequence_name: String):
 		push_error("DesktopLabManager: No maps in sequence '%s'" % sequence_name)
 		return
 
-	# Get first map name
-	var first_map = maps[0]
-	print("DesktopLabManager: Loading first map of '%s': %s" % [sequence_name, first_map])
+	# Determine which map to load based on game mode
+	var target_index = 0
+	
+	# TEST mode: skip to last map
+	if GameManager and GameManager.is_test_mode():
+		target_index = maps.size() - 1
+		print("DesktopLabManager: TEST MODE - Skipping to last map")
+	else:
+		# Normal mode: find first incomplete map (or last if all complete)
+		target_index = maps.size() - 1  # Default to last
+		var map_progression = get_node_or_null("/root/MapProgressionManager")
+		if map_progression:
+			for i in range(maps.size()):
+				if not map_progression.is_map_completed(maps[i]):
+					target_index = i
+					break
+	
+	current_map_index = target_index
+	var target_map = maps[target_index]
+	print("DesktopLabManager: Loading map [%d/%d] of '%s': %s" % [target_index + 1, maps.size(), sequence_name, target_map])
 
 	# Load the map in the lab grid system
 	if lab_grid_system:
-		lab_grid_system.map_name = first_map
+		lab_grid_system.map_name = target_map
 		lab_grid_system.reload_map = true
 
 		# Wait for map to generate, then move player to spawn

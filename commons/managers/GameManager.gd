@@ -13,7 +13,7 @@ enum GameMode {
 	EXPLORER    # Full lab unlocked, all paths available
 }
 
-var game_mode: GameMode = GameMode.STORY
+@export var game_mode: GameMode = GameMode.TEST  # Default to TEST for quick iteration
 
 signal game_mode_changed(new_mode: GameMode)
 
@@ -133,15 +133,14 @@ signal console_cleared()
 
 # Called when the game starts
 func _ready() -> void:
-	if debug:
-		print("GameManager: Singleton initialized")
+	print("GameManager: Singleton initialized - game_mode before load: %s" % get_game_mode_name())
 	reset_game_state()
 	
 	# Load saved settings (game mode, colors, etc.)
 	if FileAccess.file_exists("user://savegame.save"):
+		print("GameManager: Save file exists, loading...")
 		load_game()
-		if debug:
-			print("GameManager: Loaded saved settings - Mode: %s" % get_game_mode_name())
+		print("GameManager: After load - game_mode: %s (is_test=%s)" % [get_game_mode_name(), is_test_mode()])
 	
 	add_test_console_messages()
 # Reset the game state
@@ -549,7 +548,11 @@ func load_game() -> bool:
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
 		show_infoboard = save_data.get("show_infoboard", false)
-		game_mode = save_data.get("game_mode", GameMode.STORY)
+		# Skip loading game_mode - use default from script/scene instead
+		# var loaded_mode = save_data.get("game_mode", GameMode.STORY)
+		# print("GameManager: load_game() - raw game_mode from file: %s (type: %s)" % [loaded_mode, typeof(loaded_mode)])
+		# game_mode = loaded_mode
+		print("GameManager: load_game() - keeping game_mode from default: %s" % get_game_mode_name())
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)

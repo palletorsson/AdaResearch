@@ -367,12 +367,19 @@ func _start_sequence_from_request(request: Dictionary):
 	if debug:
 		print("AdaSceneManager: Starting sequence '%s' with %d maps" % [sequence_name, current_sequence_data.maps.size()])
 	
+	# Debug: Print current game mode
+	print("AdaSceneManager: GameManager exists: %s" % (GameManager != null))
+	if GameManager:
+		print("AdaSceneManager: Current game mode: %s (is_test_mode=%s)" % [GameManager.get_game_mode_name(), GameManager.is_test_mode()])
+	
 	# Check for TEST mode - skip to last map
 	if GameManager and GameManager.is_test_mode():
 		var maps = current_sequence_data.get("maps", [])
 		if maps.size() > 1:
 			current_sequence_data["current_step"] = maps.size() - 1
 			print("AdaSceneManager: TEST MODE - Skipping to last map: %s" % maps[maps.size() - 1])
+	else:
+		print("AdaSceneManager: STORY MODE - Starting from first map")
 	
 	# Emit sequence started signal
 	sequence_started.emit(sequence_name, current_sequence_data)

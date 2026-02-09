@@ -16,6 +16,12 @@ var lab_scene: Node3D
 # Progression tracking
 var completed_sequences: Array[String] = []
 
+# Distance-based artifact activation (performance optimization)
+@export var artifact_activation_distance: float = 12.0
+@export var artifact_check_interval: float = 2.0
+@export var enable_distance_activation: bool = true
+var _distance_check_timer: Timer
+
 # Signals for lab scene coordination
 signal artifact_activated(artifact_id: String)
 signal progression_event(event_name: String, event_data: Dictionary)
@@ -41,6 +47,9 @@ func _ready():
 	
 	# Connect to external progression signals
 	_connect_progression_signals()
+	
+	# Setup distance-based artifact activation timer
+	_setup_distance_activation()
 
 func _load_json_data():
 	"""Load both JSON files"""
@@ -434,3 +443,86 @@ func get_progression_info() -> Dictionary:
 		"available_states": artifact_system_state.get("progression_states", {}).keys(),
 		"sequence_rewards": artifact_system_state.get("sequence_rewards", {}).keys()
 	}
+
+# =============================================================================
+# DISTANCE-BASED ARTIFACT ACTIVATION (Performance Optimization)
+# =============================================================================
+
+func _setup_distance_activation():
+	"""Setup timer for periodic distance checks"""
+	if not enable_distance_activation:
+		print("LabManager: Distance activation disabled")
+		return
+	
+	_distance_check_timer = Timer.new()
+	_distance_check_timer.wait_time = artifact_check_interval
+	_distance_check_timer.timeout.connect(_check_artifact_distances)
+	_distance_check_timer.autostart = true
+	add_child(_distance_check_timer)
+	print("LabManager: Distance activation enabled (range: %.1fm, interval: %.1fs)" % [artifact_activation_distance, artifact_check_interval])
+
+func _check_artifact_distances():
+	"""Check distance to each artifact and activate/deactivate based on proximity"""
+	var player = GameManager.get_player() if GameManager else null
+	if not player:
+		return
+	
+	var player_pos = player.global_position
+	var dist_sq_threshold = artifact_activation_distance * artifact_activation_distance
+	var activated_count = 0
+	var deactivated_count = 0
+	
+	for artifact_id in active_artifacts:
+		var artifact = active_artifacts[artifact_id]
+		if not is_instance_valid(artifact):
+			continue
+		
+		var dist_sq = player_pos.distance_squared_to(artifact.global_position)
+		
+		if dist_sq < dist_sq_threshold:
+			# Close enough - activate
+			if not artifact.is_processing():
+				_activate_artifact_processing(artifact)
+				activated_count += 1
+		else:
+			# Too far - deactivate
+			if artifact.is_processing():
+				_deactivate_artifact_processing(artifact)
+				deactivated_count += 1
+	
+	# Debug output (only when changes happen)
+	if activated_count > 0 or deactivated_count > 0:
+		print("LabManager: Distance check - activated: %d, deactivated: %d" % [activated_count, deactivated_count])
+
+func _activate_artifact_processing(artifact: Node3D):
+	"""Activate an artifact's processing"""
+	artifact.set_process(true)
+	artifact.set_physics_process(true)
+	# Re-enable particles if present
+	for child in artifact.get_children():
+		if child is GPUParticles3D:
+			child.emitting = true
+
+func _deactivate_artifact_processing(artifact: Node3D):
+	"""Deactivate an artifact's processing (keeps it visible)"""
+	artifact.set_process(false)
+	artifact.set_physics_process(false)
+	# Pause particles if present
+	for child in artifact.get_children():
+		if child is GPUParticles3D:
+			child.emitting = false
+
+func set_distance_activation_enabled(enabled: bool):
+	"""Toggle distance-based activation at runtime"""
+	enable_distance_activation = enabled
+	if _distance_check_timer:
+		if enabled:
+			_distance_check_timer.start()
+			print("LabManager: Distance activation enabled")
+		else:
+			_distance_check_timer.stop()
+			# Re-activate all artifacts
+			for artifact in active_artifacts.values():
+				if is_instance_valid(artifact):
+					_activate_artifact_processing(artifact)
+			print("LabManager: Distance activation disabled - all artifacts active")
