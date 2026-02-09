@@ -1,20 +1,33 @@
 {
 	"map_info": {
-		"name": "Lab_Post_Noise",
-		"description": "Lab State After Noise - Noise artifacts unlocked",
-		"version": "1.0",
+		"name": "Lab - Post Noise",
+		"lookup_name": "Lab_Post_Noise",
+		"description": "Central Science Lab - After completing noise. Perlin artifacts active, cellular automata opens.",
+		"version": "2.1",
 		"format": "json_lab_progressive",
 		"progression_state": "post_noise",
 		"dimensions": {
-			"width": 18,
-			"depth": 26,
+			"width": 13,
+			"depth": 14,
 			"max_height": 6
 		},
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Explore the Noise wing", "Access the Noise sequence", "Navigate expanded lab space"]
+			"learning_objectives": ["Noise artifacts displayed", "Access cellular automata sequence", "Structured randomness demonstrated"]
 		}
+	},
+	"progression_delta": {
+		"base": "map_data_post_random",
+		"spine_order": 6,
+		"description": "After noise: cellular automata teleporter opens, noise-related artifacts added",
+		"structure_changes": [],
+		"added_utilities": [
+			{"row": 12, "col": 10, "utility": "t:cellularautomata", "note": "CA portal opens"}
+		],
+		"added_interactables": [
+			{"row": 10, "col": 9, "artifact": "noisetext:90:-0.3:0.5", "note": "noise showcase"}
+		]
 	},
 	"layers": {
 		"structure": [
@@ -25,19 +38,13 @@
 			["6", "1", "0", "1", "1", "1", "3", "3", "3", "6", "0", "0", "0"],
 			["6", "1", "1", "1", "1", "0", "3", "4", "0", "6", "0", "0", "0"],
 			["6", "2", "6", "3", "1", "3", "6", "6", "6", "6", "6", "6", "6"],
-			["6", "1", "1", "1", "1", "1", "2", "6", "0", "1", "1", "0", "6"],			
-			["6", "2", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],			
-			["6", "2", "1", "1", "2", "2", "1", "1", "1", "2", "6", "1", "6"],	
-			["6", "2", "1", "1", "3", "3", "1", "6", "1", "2", "4", "1", "6"],	
-			["6", "1", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],				
-			["6", "0", "6", "6", "0", "6", "1", "6", "1", "1", "1", "1", "6"],							
-			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "1", "6", "6"],
-			["6", "1", "1", "1", "1", "1", "2", "6", "0", "2", "2", "2", "6"],			
-			["6", "2", "1", "1", "1", "1", "1", "6", "2", "2", "2", "2", "6"],			
-			["6", "2", "1", "1", "2", "2", "1", "6", "3", "3", "3", "3", "6"],	
-			["6", "2", "1", "1", "3", "3", "1", "6", "3", "3", "3", "3", "6"],	
-			["6", "1", "1", "1", "1", "1", "1", "3", "3", "3", "3", "3", "6"],				
-			["6", "0", "6", "6", "0", "6", "1", "6", "6", "6", "6", "6", "6"],			
+			["6", "1", "1", "1", "1", "1", "2", "6", "0", "1", "1", "0", "6"],
+			["6", "2", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
+			["6", "2", "1", "1", "2", "2", "1", "1", "1", "2", "6", "1", "6"],
+			["6", "2", "1", "1", "3", "3", "1", "6", "1", "2", "2", "1", "6"],
+			["6", "1", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
+			["6", "0", "6", "6", "0", "6", "1", "6", "1", "1", "1", "1", "6"],
+			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -52,52 +59,35 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wp", " ", " "], 
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "t:fractals", " ", " ", "wp", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]			
+			[" ", " ", " ", " ", " ", " ", "t:wavefunctions", " ", " ", " ", "t:cellularautomata", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " "],
 			[" ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
-			[" ", "smallcontainment:0:0:4", " ", " ", "world_map_tablet:180:2.7:2", " ", " ", " ", " ", " ", "", " ", " "],
+			[" ", " ", "cube_lines", "light_sphere", " ", "homagetothesquare:0:1:0.2", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
+			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "smallcontainment:0:0:4", " ", "world_map_tablet:90:2.7:2", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "nail_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " 0", " ", " ", " "],
-			[" ", "hand_model:180:1-", " ", " ", "spectral_sine_wave:90:1:0.4", "RackMoogBass:-90", " ", " ", " ", "random_walk_collection:90", " ", " ", " "],
+			[" ", "nail_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "hand_model:0:-1", " ", " ", "spectral_sine_wave:0:0:0.4", "RackMoogBass:180", " ", " ", " ", "random_walk_collection:90", " ", " ", " "],
 			[" ", "hand_color_controller:90", " ", " ", " ", " ", " ", " ", " ", "noisetext:90:-0.3:0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]	
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		]
-		
-	
-		
-		
 	},
 	"external_references": {
 		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
-		"utility_registry": "res://commons/utilities/utility_registry.json",
-		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Sequence Portal",
-			"description": "Portal to learning sequences"
-		}
+		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 8.0],
 			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - with noise access"
+			"description": "Main entrance - facing expanded lab"
 		}
 	},
 	"lighting": {
@@ -121,18 +111,18 @@
 		"enable_physics": true,
 		"lab_mode": true,
 		"progression_state": "post_noise",
-		"progression": {
-			"enable_artifact_unlocking": true,
-			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
-			"unlock_on_sequence_completion": true
-		},
 		"ceiling": {
 			"preset": "laboratory",
 			"height": 5.5,
 			"light_spacing": 2,
 			"light_intensity": 1.8,
 			"pattern": "sparse"
+		},
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"unlock_on_sequence_completion": true
 		}
 	}
 }

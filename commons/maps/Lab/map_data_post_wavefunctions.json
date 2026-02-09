@@ -1,20 +1,46 @@
 {
 	"map_info": {
-		"name": "Lab_Post_WaveFunctions",
-		"description": "Lab State After Wave Functions - New wing and sequence portal unlocked",
-		"version": "1.0",
+		"name": "Lab - Post Wavefunctions",
+		"lookup_name": "Lab_Post_Wavefunctions",
+		"description": "Central Science Lab - After completing wavefunctions. South wing opens with oscillation artifacts.",
+		"version": "2.1",
 		"format": "json_lab_progressive",
 		"progression_state": "post_wavefunctions",
 		"dimensions": {
-			"width": 18,
-			"depth": 20,
+			"width": 13,
+			"depth": 14,
 			"max_height": 6
 		},
 		"metadata": {
 			"difficulty": "hub",
 			"category": "laboratory_progressive",
-			"learning_objectives": ["Explore the Wave Functions wing", "Access the Wave Functions overview sequence", "Navigate expanded lab space"]
+			"learning_objectives": ["Explore the oscillation wing", "Access forces and color sequences", "Wavefunction artifacts displayed"]
 		}
+	},
+	"progression_delta": {
+		"base": "map_data_post_transformation",
+		"spine_order": 3,
+		"description": "After wavefunctions: south wing opens (rows 7-13), wavefunction artifacts added, new teleporters accessible",
+		"structure_changes": [
+			{"row": 6, "col": 4, "from": "3", "to": "1", "note": "passage to south wing opens"}
+		],
+		"structure_additions": {
+			"rows_added": [7, 8, 9, 10, 11, 12, 13],
+			"note": "South wing with oscillation and color areas"
+		},
+		"added_utilities": [
+			{"row": 7, "col": 1, "utility": "t:array_tutorial", "note": "array tutorial access"},
+			{"row": 12, "col": 6, "utility": "t:wavefunctions", "note": "wavefunctions portal"}
+		],
+		"added_interactables": [
+			{"row": 3, "col": 5, "artifact": "infokiosk:-90", "note": "info display"},
+			{"row": 4, "col": 5, "artifact": "homagetothesquare:0:1:0.2", "note": "color theory piece"},
+			{"row": 8, "col": 1, "artifact": "nail_color_controller:90", "note": "color control"},
+			{"row": 9, "col": 1, "artifact": "hand_model:0:-1", "note": "hand visualization"},
+			{"row": 9, "col": 4, "artifact": "spectral_sine_wave:0:0:0.4", "note": "wavefunction showcase"},
+			{"row": 9, "col": 5, "artifact": "RackMoogBass:180", "note": "audio synthesis"},
+			{"row": 10, "col": 1, "artifact": "hand_color_controller:90", "note": "hand color control"}
+		]
 	},
 	"layers": {
 		"structure": [
@@ -25,12 +51,12 @@
 			["6", "1", "0", "1", "1", "1", "3", "3", "3", "6", "0", "0", "0"],
 			["6", "1", "1", "1", "1", "0", "3", "4", "0", "6", "0", "0", "0"],
 			["6", "2", "6", "3", "1", "3", "6", "6", "6", "6", "6", "6", "6"],
-			["6", "1", "1", "1", "1", "1", "2", "6", "0", "1", "1", "0", "6"],			
-			["6", "2", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],			
-			["6", "2", "1", "1", "2", "2", "1", "1", "1", "2", "6", "1", "6"],	
-			["6", "2", "1", "1", "3", "3", "1", "6", "1", "2", "2", "1", "6"],	
-			["6", "1", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],				
-			["6", "0", "6", "6", "0", "6", "1", "6", "1", "1", "1", "1", "6"],							
+			["6", "1", "1", "1", "1", "1", "2", "6", "0", "1", "1", "0", "6"],
+			["6", "2", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
+			["6", "2", "1", "1", "2", "2", "1", "1", "1", "2", "6", "1", "6"],
+			["6", "2", "1", "1", "3", "3", "1", "6", "1", "2", "2", "1", "6"],
+			["6", "1", "1", "1", "1", "1", "1", "6", "1", "1", "1", "1", "6"],
+			["6", "0", "6", "6", "0", "6", "1", "6", "1", "1", "1", "1", "6"],
 			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"]
 		],
 		"utilities": [
@@ -41,12 +67,12 @@
 			[" ", " ", "t:primitives:0:0:0.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", "tc:2:y", " ", " ", "t:color", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", "t:randomness", " ", " ", "t:noise", " "],
+			[" ", "t:array_tutorial", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "t:array_tutorial", " ", " ", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", "t:wavefunctions", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 		],
 		"interactables": [
@@ -56,7 +82,7 @@
 			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_lines", "light_sphere", " ", "homagetothesquare:0:1:0.2", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
 			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "smallcontainment:0:0:4", " ", "world_map_tablet:90:2.7:2", " ", " ", " ", " ", " ", " ", "", " ", " "],
+			[" ", "smallcontainment:0:0:4", " ", "world_map_tablet:90:2.7:2", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "nail_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "hand_model:0:-1", " ", " ", "spectral_sine_wave:0:0:0.4", "RackMoogBass:180", " ", " ", " ", " ", " ", " ", " "],
@@ -68,21 +94,13 @@
 	},
 	"external_references": {
 		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
-		"utility_registry": "res://commons/utilities/utility_registry.json",
-		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
-	},
-	"utility_definitions": {
-		"t": {
-			"type": "teleporter",
-			"name": "Sequence Portal",
-			"description": "Portal to learning sequences"
-		}
+		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
 		"default": {
 			"position": [0.5, 1.8, 8.0],
 			"rotation": [0.0, 180.0, 0.0],
-			"description": "Main entrance - with wave functions access"
+			"description": "Main entrance - facing expanded lab"
 		}
 	},
 	"lighting": {
@@ -106,18 +124,18 @@
 		"enable_physics": true,
 		"lab_mode": true,
 		"progression_state": "post_wavefunctions",
-		"progression": {
-			"enable_artifact_unlocking": true,
-			"save_progression": true,
-			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
-			"unlock_on_sequence_completion": true
-		},
 		"ceiling": {
 			"preset": "laboratory",
 			"height": 5.5,
 			"light_spacing": 2,
 			"light_intensity": 1.8,
 			"pattern": "sparse"
+		},
+		"progression": {
+			"enable_artifact_unlocking": true,
+			"save_progression": true,
+			"initial_artifacts": ["rotating_cube", "xyz_coordinates"],
+			"unlock_on_sequence_completion": true
 		}
 	}
 }

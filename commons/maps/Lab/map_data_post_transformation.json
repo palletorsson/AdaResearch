@@ -1,24 +1,26 @@
 {
 	"map_info": {
 		"name": "Lab - Post Transformation",
-		"description": "Central Science Lab - After completing transformation sequence. Transport cube now operational to reach color.",
-		"version": "2.0",
-		"format": "json_lab",
+		"lookup_name": "Lab_Post_Transformation",
+		"description": "Central Science Lab - After completing transformation sequence. Transport cube now operational.",
+		"version": "2.1",
+		"format": "json_lab_progressive",
+		"progression_state": "post_transformation",
 		"dimensions": {
 			"width": 11,
 			"depth": 8,
-			"max_height": 8
+			"max_height": 6
 		},
 		"metadata": {
 			"difficulty": "hub",
-			"category": "laboratory",
-			"estimated_time": "exploration based",
-			"learning_objectives": ["Central hub after transformation completion", "Transport cube access to color sequence", "Progressive artifact discovery"]
+			"category": "laboratory_progressive",
+			"learning_objectives": ["Transport cube access to color sequence", "Transformation artifacts displayed"]
 		}
 	},
 	"progression_delta": {
 		"base": "map_data_post_primitives",
-		"description": "Transport cube added to reach color teleporter at height 4",
+		"spine_order": 2,
+		"description": "After transformations: transport cube added to reach color teleporter at height 4",
 		"structure_changes": [
 			{"row": 5, "col": 5, "from": "1", "to": "0", "note": "hole for transport cube"}
 		],
@@ -36,7 +38,7 @@
 			["6", "1", "0", "1", "1", "1", "3", "3", "3", "6", "0"],
 			["6", "1", "1", "1", "1", "0", "3", "4", "0", "6", "0"],
 			["6", "2", "6", "3", "3", "3", "6", "6", "6", "6", "0"],
-			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "0"]			
+			["6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "0"]
 		],
 		"utilities": [
 			["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -61,31 +63,7 @@
 	},
 	"external_references": {
 		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],
-		"utility_registry": "res://commons/utilities/utility_registry.json",
-		"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
-	},
-	"artifact_definitions": {
-		"note": "Artifacts are now referenced by lookup_name from external registry files",
-		"rotating_cube": "References lab_artifacts.json rotating_cube definition",
-		"primitives_badge": "Badge showing completion of primitives sequence"
-	},
-	"utility_definitions": {
-		"note": "Utilities are now referenced from external registry",
-		"s": "References utility_registry.json spawn_point definition",
-		"t": {
-			"type": "teleporter",
-			"name": "Next Sequence",
-			"description": "Start a new learning sequence",
-			"properties": {
-				"action": "start_sequence",
-				"visual_effect": "portal_glow"
-			}
-		},
-		"l": {
-			"type": "lift",
-			"name": "Platform Lift",
-			"description": "Lift to upper level - now operational after transformation mastery"
-		}
+		"utility_registry": "res://commons/utilities/utility_registry.json"
 	},
 	"spawn_points": {
 		"default": {
@@ -104,8 +82,6 @@
 			"energy": 1.0
 		},
 		"lab_atmosphere": {
-			"enable_particle_effects": false,
-			"fog_enabled": false,
 			"mood": "bright_scientific"
 		}
 	},
@@ -117,18 +93,11 @@
 		"enable_physics": true,
 		"lab_mode": true,
 		"progression_state": "post_transformation",
-		"background": {
-			"type": "sky",
-			"color": [0.1, 0.15, 0.25]
-		},
 		"ceiling": {
+			"preset": "office",
 			"height": 5.5,
-			"tile_size": 0.5,
-			"width": 16.0,
-			"depth": 16.0,
 			"light_spacing": 2,
-			"light_intensity": 0.5,
-			"preset": "office"
+			"light_intensity": 0.5
 		},
 		"progression": {
 			"enable_artifact_unlocking": true,
