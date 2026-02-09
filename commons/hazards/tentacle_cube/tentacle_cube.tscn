@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/hazards/tentacle_cube/tentacle_cube.gd" id="1_script"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_proximity"]
+radius = 4.0
+
+[node name="TentacleCube" type="CharacterBody3D"]
+script = ExtResource("1_script")
+
+[node name="ProximityArea" type="Area3D" parent="."]
+
+[node name="ProximityShape" type="CollisionShape3D" parent="ProximityArea"]
+shape = SubResource("SphereShape3D_proximity")

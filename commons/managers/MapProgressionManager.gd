@@ -524,6 +524,120 @@ func reset_progress():
 	save_player_progress()
 	print("Progress reset for new game")
 
+# =============================================================================
+# GAME MODE HELPERS (Test Mode / Explorer Mode)
+# =============================================================================
+
+# Get the last map in a sequence (for test mode - skip to end)
+func get_last_map_in_sequence(sequence_name: String) -> String:
+	var maps = get_sequence_maps(sequence_name)
+	if maps.size() > 0:
+		return maps[maps.size() - 1]
+	return ""
+
+# Skip to the last map of a sequence (test mode)
+func skip_to_sequence_end(sequence_name: String) -> String:
+	var last_map = get_last_map_in_sequence(sequence_name)
+	if last_map.is_empty():
+		print("MapProgressionManager: No maps in sequence '%s'" % sequence_name)
+		return ""
+	
+	# Mark all maps except the last as completed
+	var maps = get_sequence_maps(sequence_name)
+	for i in range(maps.size() - 1):
+		if not maps[i] in completed_maps:
+			completed_maps.append(maps[i])
+	
+	# Unlock the last map
+	if not last_map in unlocked_maps:
+		unlocked_maps.append(last_map)
+	
+	save_player_progress()
+	print("MapProgressionManager: Skipped to last map '%s' in sequence '%s'" % [last_map, sequence_name])
+	return last_map
+
+# Get the lab map to return to after completing a sequence
+func get_sequence_lab_map(sequence_name: String) -> String:
+	if not sequences.has(sequence_name):
+		return "Lab/map_data"
+	
+	var sequence = sequences[sequence_name]
+	return sequence.get("lab_map", "Lab/map_data")
+
+# Unlock all maps in all sequences (explorer mode)
+func unlock_all_sequences() -> void:
+	print("MapProgressionManager: Unlocking all sequences (Explorer Mode)")
+	
+	for seq_name in sequences.keys():
+		var maps = get_sequence_maps(seq_name)
+		for map_name in maps:
+			if not map_name in unlocked_maps:
+				unlocked_maps.append(map_name)
+				map_unlocked.emit(map_name)
+	
+	save_player_progress()
+	print("MapProgressionManager: All %d maps unlocked" % unlocked_maps.size())
+
+# Check if we should skip to end based on game mode
+func should_skip_sequence() -> bool:
+	if not is_instance_valid(GameManager):
+		return false
+	return GameManager.is_test_mode()
+
+# Get next map considering game mode
+func get_next_map_for_mode(current_map_name: String) -> String:
+	# Check game mode
+	if is_instance_valid(GameManager) and GameManager.is_test_mode():
+		# In test mode, check if this is the last map in sequence
+		for seq_name in sequences.keys():
+			var maps = get_sequence_maps(seq_name)
+			var idx = maps.find(current_map_name)
+			if idx >= 0:
+				# If not last map, skip to last
+				if idx < maps.size() - 1:
+					return maps[maps.size() - 1]
+				else:
+					# Already at last map, go to lab
+					return get_sequence_lab_map(seq_name)
+	
+	# Default behavior
+	return get_next_map(current_map_name)
+
+# Get all available sequences
+func get_all_sequence_names() -> Array[String]:
+	var result: Array[String] = []
+	for seq_name in sequences.keys():
+		result.append(str(seq_name))
+	return result
+
+# Get sequence info for UI display
+func get_sequence_info(sequence_name: String) -> Dictionary:
+	if not sequences.has(sequence_name):
+		return {}
+	
+	var seq = sequences[sequence_name]
+	var maps = get_sequence_maps(sequence_name)
+	
+	return {
+		"name": seq.get("name", sequence_name),
+		"description": seq.get("description", ""),
+		"difficulty": seq.get("difficulty", "unknown"),
+		"estimated_time": seq.get("estimated_time", "unknown"),
+		"map_count": maps.size(),
+		"completed_count": _count_completed_in_sequence(sequence_name),
+		"completion_percentage": get_sequence_completion_percentage(sequence_name),
+		"is_completed": is_sequence_completed(sequence_name),
+		"lab_map": seq.get("lab_map", "Lab/map_data")
+	}
+
+func _count_completed_in_sequence(sequence_name: String) -> int:
+	var maps = get_sequence_maps(sequence_name)
+	var count = 0
+	for map_name in maps:
+		if map_name in completed_maps:
+			count += 1
+	return count
+
 # Get the first map in a sequence
 func get_first_map_in_sequence(sequence_name: String) -> String:
 	if sequences.has(sequence_name):

@@ -6,6 +6,17 @@ extends Node
 
 const DEATH_CROSS_SCENE: PackedScene = preload("res://commons/primitives/plus/plus.tscn")
 
+# Game Modes
+enum GameMode {
+	STORY,      # Full sequence playthrough (default)
+	TEST,       # Skip to last map of each sequence, then lab
+	EXPLORER    # Full lab unlocked, all paths available
+}
+
+var game_mode: GameMode = GameMode.STORY
+
+signal game_mode_changed(new_mode: GameMode)
+
 # Game state
 var player_score: int = 0
 var current_message: String = ""
@@ -125,6 +136,13 @@ func _ready() -> void:
 	if debug:
 		print("GameManager: Singleton initialized")
 	reset_game_state()
+	
+	# Load saved settings (game mode, colors, etc.)
+	if FileAccess.file_exists("user://savegame.save"):
+		load_game()
+		if debug:
+			print("GameManager: Loaded saved settings - Mode: %s" % get_game_mode_name())
+	
 	add_test_console_messages()
 # Reset the game state
 func reset_game_state() -> void:
@@ -502,6 +520,7 @@ func save_game() -> void:
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"show_infoboard": show_infoboard,
+		"game_mode": game_mode,
 		"nail_color": {"r": nail_color.r, "g": nail_color.g, "b": nail_color.b, "a": nail_color.a},
 		"hand_color": {"r": hand_color.r, "g": hand_color.g, "b": hand_color.b, "a": hand_color.a},
 		"timestamp": Time.get_datetime_string_from_system()
@@ -530,6 +549,7 @@ func load_game() -> bool:
 		music_volume = save_data.get("music_volume", 0.8)
 		sfx_volume = save_data.get("sfx_volume", 0.7)
 		show_infoboard = save_data.get("show_infoboard", false)
+		game_mode = save_data.get("game_mode", GameMode.STORY)
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)
@@ -550,6 +570,35 @@ func load_game() -> bool:
 	else:
 		push_error("GameManager: Failed to load game")
 		return false
+
+# Game Mode Management
+func set_game_mode(mode: GameMode) -> void:
+	if game_mode == mode:
+		return
+	game_mode = mode
+	emit_signal("game_mode_changed", mode)
+	if debug:
+		print("GameManager: Game mode set to %s" % GameMode.keys()[mode])
+	save_game()
+
+func get_game_mode() -> GameMode:
+	return game_mode
+
+func is_test_mode() -> bool:
+	return game_mode == GameMode.TEST
+
+func is_explorer_mode() -> bool:
+	return game_mode == GameMode.EXPLORER
+
+func is_story_mode() -> bool:
+	return game_mode == GameMode.STORY
+
+func cycle_game_mode() -> void:
+	var next_mode = (game_mode + 1) % GameMode.size()
+	set_game_mode(next_mode as GameMode)
+
+func get_game_mode_name() -> String:
+	return GameMode.keys()[game_mode]
 
 # Debug functions
 func add_test_points(amount: int = 10) -> void:

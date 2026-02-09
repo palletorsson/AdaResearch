@@ -367,6 +367,13 @@ func _start_sequence_from_request(request: Dictionary):
 	if debug:
 		print("AdaSceneManager: Starting sequence '%s' with %d maps" % [sequence_name, current_sequence_data.maps.size()])
 	
+	# Check for TEST mode - skip to last map
+	if GameManager and GameManager.is_test_mode():
+		var maps = current_sequence_data.get("maps", [])
+		if maps.size() > 1:
+			current_sequence_data["current_step"] = maps.size() - 1
+			print("AdaSceneManager: TEST MODE - Skipping to last map: %s" % maps[maps.size() - 1])
+	
 	# Emit sequence started signal
 	sequence_started.emit(sequence_name, current_sequence_data)
 	
@@ -400,14 +407,17 @@ func _load_grid_scene_with_first_map():
 		push_error("AdaSceneManager: ERROR - No maps in sequence")
 		return
 
-	var first_map = maps[0]
+	# Use current_step (may be modified for test mode)
+	var step = current_sequence_data.get("current_step", 0)
+	var target_map = maps[step]
+	
 	if debug:
-		print("AdaSceneManager: Loading grid scene with map: %s" % first_map)
+		print("AdaSceneManager: Loading grid scene with map: %s (step %d/%d)" % [target_map, step + 1, maps.size()])
 
 	var grid_scene_data = {
 		"sequence_data": current_sequence_data,
-		"map_name": first_map,  # vrStaging expects "map_name"
-		"initial_map": first_map,  # Keep for backwards compatibility
+		"map_name": target_map,  # vrStaging expects "map_name"
+		"initial_map": target_map,  # Keep for backwards compatibility
 		"scene_manager": self
 	}
 

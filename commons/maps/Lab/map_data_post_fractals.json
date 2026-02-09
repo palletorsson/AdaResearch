@@ -1,10 +1,10 @@
 {
 	"map_info": {
-		"name": "Lab_Post_WaveFunctions",
-		"description": "Lab State After Wave Functions - New wing and sequence portal unlocked",
+		"name": "Lab_Post_Fractals",
+		"description": "Lab State After Fractals - New wing and sequence portal unlocked",
 		"version": "1.0",
 		"format": "json_lab_progressive",
-		"progression_state": "post_wavefunctions",
+		"progression_state": "post_fractals",
 		"dimensions": {
 			"width": 12,
 			"depth": 20,
@@ -70,10 +70,10 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "rotating_cube:0:1:0.2", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "grid_lines:0:-0.4:0.19", " ", " ", " ", "lshape:-90:-1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", "homagetothesquare:0:1:0.2", " "],
-			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "pyramid_edit:45:0:0.4", "RackSineBasic:0:1", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", "rainbow:45:2.5:0.04", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "cube_scene:0:2:0.6", " ", "world_map_tablet:180:0.2:2", " ", " ", " ", "rainbow:45:2.5:0.04", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "smallcontainment:0:0:4", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
  			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", "nail_color_controller:90:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -119,7 +119,7 @@
 		"show_grid": false,
 		"enable_physics": true,
 		"lab_mode": true,
-		"progression_state": "post_wavefunctions",
+		"progression_state": "post_fractals",
 		"progression": {
 			"enable_artifact_unlocking": true,
 			"save_progression": true,

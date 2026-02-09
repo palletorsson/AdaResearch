@@ -160,3 +160,59 @@ func _input(event):
 	elif event.is_action_pressed("ui_home"):
 		# Reload current map
 		load_sequence(current_sequence_name, current_map_index)
+	
+	# Game Mode controls (F1-F3)
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_F1:
+				_set_game_mode(GameManager.GameMode.STORY)
+			KEY_F2:
+				_set_game_mode(GameManager.GameMode.TEST)
+			KEY_F3:
+				_set_game_mode(GameManager.GameMode.EXPLORER)
+			KEY_F4:
+				_print_debug_info()
+			KEY_F5:
+				_skip_to_sequence_end()
+
+func _set_game_mode(mode: GameManager.GameMode):
+	"""Set game mode with feedback"""
+	GameManager.set_game_mode(mode)
+	print("═══════════════════════════════════════")
+	print("  GAME MODE: %s" % GameManager.get_game_mode_name())
+	print("═══════════════════════════════════════")
+	
+	if mode == GameManager.GameMode.EXPLORER:
+		MapProgressionManager.unlock_all_sequences()
+		print("  All sequences unlocked!")
+
+func _skip_to_sequence_end():
+	"""Skip to last map of current sequence"""
+	if current_sequence_name.is_empty():
+		print("DesktopMapTester: No sequence loaded")
+		return
+	
+	var last_map = MapProgressionManager.skip_to_sequence_end(current_sequence_name)
+	if not last_map.is_empty():
+		load_map(last_map)
+		print("DesktopMapTester: Skipped to last map: %s" % last_map)
+
+func _print_debug_info():
+	"""Print debug information"""
+	print("═══════════════════════════════════════")
+	print("  DEBUG INFO")
+	print("═══════════════════════════════════════")
+	print("  Game Mode: %s" % GameManager.get_game_mode_name())
+	print("  Current Sequence: %s" % current_sequence_name)
+	print("  Current Map Index: %d" % current_map_index)
+	print("  Completed Maps: %d" % MapProgressionManager.get_completed_maps().size())
+	print("  Unlocked Maps: %d" % MapProgressionManager.get_unlocked_maps().size())
+	print("───────────────────────────────────────")
+	print("  CONTROLS:")
+	print("    F1 = Story Mode")
+	print("    F2 = Test Mode (skip sequences)")
+	print("    F3 = Explorer Mode (unlock all)")
+	print("    F4 = Debug Info")
+	print("    F5 = Skip to sequence end")
+	print("    PageUp/Down = Prev/Next map")
+	print("═══════════════════════════════════════")

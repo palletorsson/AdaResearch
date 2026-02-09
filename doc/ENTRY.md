@@ -80,9 +80,9 @@ QFE = F - lambda*E(S) + phi*dE(S,t)
 
 ```
 Sequences -> Maps -> Artifacts -> Scenes
-    v          v         v          v
+	v          v         v          v
   .json    map_data   registry   .tscn/.gd
-            .json      .json
+			.json      .json
 ```
 
 ### Sequence Structure
@@ -90,13 +90,13 @@ Sequences -> Maps -> Artifacts -> Scenes
 commons/maps/sequences/primitives.json
 {
   "sequences": {
-    "primitives": {
-      "name": "Primitives: Points Build Worlds",
-      "truth": "A point is position without extension...",
-      "qfep_connection": "...",
-      "maps": ["Point_One", "Point_Lines", ...],
-      "learning_objectives": [...]
-    }
+	"primitives": {
+	  "name": "Primitives: Points Build Worlds",
+	  "truth": "A point is position without extension...",
+	  "qfep_connection": "...",
+	  "maps": ["Point_One", "Point_Lines", ...],
+	  "learning_objectives": [...]
+	}
   }
 }
 ```
@@ -115,9 +115,9 @@ commons/maps/Point_One/
 ```json
 {
   "layers": {
-    "structure": [[...]],      // Walls, floors, ceilings
-    "utilities": [[...]],      // Lights, sounds, teleporters
-    "interactables": [[...]]   // Artifacts to manipulate
+	"structure": [[...]],      // Walls, floors, ceilings
+	"utilities": [[...]],      // Lights, sounds, teleporters
+	"interactables": [[...]]   // Artifacts to manipulate
   }
 }
 ```
