@@ -1,41 +1,41 @@
 {
-    "sequences": {
-        "graphtheory": {
-            "name": "Graph Theory",
-            "description": "Explore graph algorithms and network analysis",
-            "difficulty": "advanced",
-            "estimated_time": "35-40 minutes",
-            "learning_objectives": [
-                "Network analysis techniques",
-                "Graph traversal algorithms",
-                "Flow optimization",
+	"sequences": {
+		"graphtheory": {
+			"name": "Graph Theory",
+			"description": "Explore graph algorithms and network analysis",
+			"difficulty": "advanced",
+			"estimated_time": "35-40 minutes",
+			"learning_objectives": [
+				"Network analysis techniques",
+				"Graph traversal algorithms",
+				"Flow optimization",
                 "Connectivity analysis"
-            ],
-            "maps": [
-                "GraphTheory_Network_Analysis",
-                "GraphTheory_Force_Directed_Graph_Layout",
-                "GraphTheory_Force_Directed_3d",
-                "GraphTheory_Graphspace",
-                "GraphTheory_Graphspace_3d",
-                "GraphTheory_Path_Finding_3d",
-                "GraphTheory_Tarjan_s_Algorithm",
-                "GraphTheory_Kosaraju_s_Algorithm",
-                "GraphTheory_Topological_Sort",
-                "GraphTheory_Minimum_Spanning_Tree",
-                "GraphTheory_Maximum_Flow_Algorithms",
-                "GraphTheory_Push_Relabel_Algorithm",
-                "GraphTheory_Karger_s_Algorithm",
+			],
+			"maps": [
+				"GraphTheory_Network_Analysis",
+				"GraphTheory_Force_Directed_Graph_Layout",
+				"GraphTheory_Force_Directed_3d",
+				"GraphTheory_Graphspace",
+				"GraphTheory_Graphspace_3d",
+				"GraphTheory_Path_Finding_3d",
+				"GraphTheory_Tarjan_s_Algorithm",
+				"GraphTheory_Kosaraju_s_Algorithm",
+				"GraphTheory_Topological_Sort",
+				"GraphTheory_Minimum_Spanning_Tree",
+				"GraphTheory_Maximum_Flow_Algorithms",
+				"GraphTheory_Push_Relabel_Algorithm",
+				"GraphTheory_Karger_s_Algorithm",
                 "GraphTheory_Edmonds_Algorithm"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_graphtheory",
-            "unlock_requirements": [
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_graphtheory",
+			"unlock_requirements": [
                 "searchpathfinding"
-            ],
-            "completion_rewards": [
-                "graph_theory_master_badge",
+			],
+			"completion_rewards": [
+				"graph_theory_master_badge",
                 "network_analyst_badge"
-            ]
-        }
-    }
+			]
+		}
+	}
 }

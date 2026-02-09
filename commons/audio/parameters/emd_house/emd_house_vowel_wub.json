@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_vowel_wub",
+    "display_name": "EMD House - Vowel Wub",
+    "description": "Formant-flavored wub motion with moving vowel character.",
+    "category": "emd_house",
+    "tags": ["emd_house", "vowel", "formant", "wub", "bass"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "vowel_wub",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 98.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 35.0, "max": 360.0, "value": 98.0, "step": 1.0 },
+    "duration": { "min": 0.3, "max": 4.0, "value": 1.2, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

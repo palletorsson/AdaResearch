@@ -79,6 +79,22 @@ static func generate_custom_sound(type: AudioSynthesizer.SoundType, params: Dict
 			generate_custom_aphex_twin_modular(data, sample_count, params)
 		AudioSynthesizer.SoundType.FLYING_LOTUS_SAMPLER:
 			generate_custom_flying_lotus_sampler(data, sample_count, params)
+		# Cinematic / legacy synths
+		AudioSynthesizer.SoundType.CS80_BRASS_LEAD:
+			AudioSynthesizer._generate_cs80_brass_lead(data, sample_count)
+		AudioSynthesizer.SoundType.CINEMATIC_432HZ_PAD:
+			AudioSynthesizer._generate_cinematic_432hz_pad(data, sample_count)
+		# Pop legacy timbres
+		AudioSynthesizer.SoundType.POP_JUNO_CHORUS_PAD:
+			AudioSynthesizer._generate_juno_chorus_pad(data, sample_count)
+		AudioSynthesizer.SoundType.POP_DX7_BALLAD_KEYS:
+			AudioSynthesizer._generate_dx7_ballad_keys(data, sample_count)
+		AudioSynthesizer.SoundType.POP_OBXA_BRASS:
+			AudioSynthesizer._generate_obxa_brass(data, sample_count)
+		AudioSynthesizer.SoundType.POP_PROPHET_LEAD:
+			AudioSynthesizer._generate_prophet_lead(data, sample_count)
+		AudioSynthesizer.SoundType.POP_FUNK_BASS:
+			AudioSynthesizer._generate_funk_bass(data, sample_count)
 		AudioSynthesizer.SoundType.HEARTBEAT:
 			generate_custom_heartbeat(data, sample_count, params)
 		AudioSynthesizer.SoundType.LAB_HUM:

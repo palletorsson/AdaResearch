@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "id": "emd_house",
+    "name": "EMD House Recreation Pack",
+    "lineage": "Akayo-style recreations plus modern bass-house inspired extensions",
+    "era": "2025-2026",
+    "bpm": { "min": 120, "max": 140, "typical": 128 },
+    "lambda": 0.42
+  },
+
+  "identity": {
+    "token": "Wavetable-first recreations: arp clarity, yoi/formant motion, gritty leads, heavy bass-house pressure",
+    "two_second_test": "Talking bass movement and sharp distorted lead timbre in the first bar",
+    "emotional_truth": "Reverse-engineering workflow translated into playable, club-forward micro-instruments"
+  },
+
+  "soundbank": [
+    "sine_arp",
+    "wub_synth",
+    "vowel_wub",
+    "gritty_lead",
+    "aggressive_bass_house_bass",
+    "razor_formant_bass",
+    "metallic_yoi_lead",
+    "hyper_pluck_lead"
+  ],
+
+  "forbidden": [
+    "flat_static_timbre",
+    "ultra_clean_no_modulation",
+    "long_unshaped_attack"
+  ],
+
+  "rhythm": {
+    "quantize": "strict",
+    "humanize_ms": 0,
+    "swing_pct": 0
+  },
+
+  "harmony": {
+    "scales": ["minor", "phrygian", "dorian"],
+    "voicings": "modern_edm_layered"
+  },
+
+  "fx": {
+    "distortion": "moderate_to_heavy",
+    "reverb_style": "short_room_plus_delay"
+  },
+
+  "transitions": {
+    "crossfade_s": 1.5
+  },
+
+  "sections": {
+    "intro": ["sine_arp", "hyper_pluck_lead"],
+    "build": ["sine_arp", "wub_synth", "vowel_wub"],
+    "main": ["wub_synth", "vowel_wub", "gritty_lead", "aggressive_bass_house_bass", "razor_formant_bass", "metallic_yoi_lead"],
+    "breakdown": ["sine_arp", "vowel_wub", "hyper_pluck_lead"],
+    "outro": ["sine_arp", "gritty_lead", "hyper_pluck_lead"]
+  }
+}

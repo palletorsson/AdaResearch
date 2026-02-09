@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_metallic_yoi_lead",
+    "display_name": "EMD House - Metallic Yoi Lead",
+    "description": "Metallic yoi-style lead with FM bite and macro contour.",
+    "category": "emd_house",
+    "tags": ["emd_house", "yoi", "lead", "metallic", "fm"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "metallic_yoi_lead",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 174.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 60.0, "max": 1400.0, "value": 174.0, "step": 1.0 },
+    "duration": { "min": 0.2, "max": 3.5, "value": 1.1, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

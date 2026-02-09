@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_wub_synth",
+    "display_name": "EMD House - Wub Synth",
+    "description": "Detuned saw wub with LFO amplitude contour and controlled grit.",
+    "category": "emd_house",
+    "tags": ["emd_house", "wub", "bass", "recreation", "edm"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "wub_synth",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 110.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 40.0, "max": 440.0, "value": 110.0, "step": 1.0 },
+    "duration": { "min": 0.3, "max": 4.0, "value": 1.2, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

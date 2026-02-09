@@ -1,0 +1,19 @@
+{
+  "_metadata": {
+    "sound_type": "emd_house_gritty_lead",
+    "display_name": "EMD House - Gritty Lead",
+    "description": "Stacked-sine distorted lead with fast pitch movement.",
+    "category": "emd_house",
+    "tags": ["emd_house", "lead", "distorted", "gritty", "basshouse"],
+    "generator": "soundbank_script",
+    "soundbank_id": "emd_house",
+    "sound_name": "gritty_lead",
+    "invoke_mode": "t_freq_trigger",
+    "preview_freq_hz": 220.0
+  },
+  "parameters": {
+    "frequency_hz": { "min": 80.0, "max": 1200.0, "value": 220.0, "step": 1.0 },
+    "duration": { "min": 0.2, "max": 3.0, "value": 1.0, "step": 0.1 },
+    "gain": { "min": 0.2, "max": 1.8, "value": 1.0, "step": 0.05 }
+  }
+}

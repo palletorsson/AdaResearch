@@ -1,0 +1,21 @@
+{
+  "picked_bass": {
+    "_metadata": {
+      "sound_type": "picked_bass",
+      "description": "Defined picked bass with bright transient and articulate mid harmonics.",
+      "instrument": "Electric bass (picked)",
+      "era": "1970s-present",
+      "tags": ["bass", "picked", "rock", "articulate"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 2.0, "min": 0.2, "max": 10.0, "step": 0.1 },
+      "frequency": { "value": 82.4, "min": 20.0, "max": 220.0, "step": 0.1 },
+      "pick_hardness": { "value": 0.72, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "pick_position": { "value": 0.35, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "tone": { "value": 0.62, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "drive": { "value": 0.22, "min": 0.0, "max": 1.0, "step": 0.01 },
+      "amplitude": { "value": 0.5, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

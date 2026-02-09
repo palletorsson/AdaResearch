@@ -1,0 +1,16 @@
+{
+  "pop_juno_chorus_pad": {
+    "_metadata": {
+      "sound_type": "pop_juno_chorus_pad",
+      "description": "Lush 80s Juno chorus pad for wide harmonic beds.",
+      "instrument": "Roland Juno-106 style",
+      "era": "1980s",
+      "tags": ["pad", "pop", "juno", "chorus"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 5.5, "min": 1.0, "max": 16.0, "step": 0.5 },
+      "amplitude": { "value": 0.34, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

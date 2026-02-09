@@ -115,6 +115,12 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 	# Merge default parameters with user parameters
 	var merged_params := _merge_parameters(sound.get("parameters", {}), parameters)
 
+	# Soundbank script pathway (e.g. emd_house recreations)
+	if metadata.get("generator", "") == "soundbank_script":
+		var soundbank_stream := _generate_soundbank_script_audio(metadata, merged_params)
+		if soundbank_stream != null:
+			return soundbank_stream
+
 	# Try to detect generator type
 	var generator_type := _detect_generator_type(category, sound_type_str)
 
@@ -183,6 +189,111 @@ func _generate_audio(sound: Dictionary, parameters: Dictionary) -> AudioStreamWA
 		AudioSynthesizer.SoundType.MELODIC_DRONE,
 		merged_params
 	)
+
+
+func _generate_soundbank_script_audio(metadata: Dictionary, params: Dictionary) -> AudioStreamWAV:
+	var soundbank_id := str(metadata.get("soundbank_id", ""))
+	var sound_name := str(metadata.get("sound_name", metadata.get("sound_type", "")))
+	if soundbank_id.is_empty() or sound_name.is_empty():
+		push_warning("AudioCatalogTablet3D: soundbank_script metadata missing soundbank_id/sound_name")
+		return null
+
+	var bank := SoundbankLoader.load_genre(soundbank_id)
+	if bank == null or not bank.has_sound(sound_name):
+		push_warning("AudioCatalogTablet3D: Sound '%s' not found in soundbank '%s'" % [sound_name, soundbank_id])
+		return null
+
+	var script = bank.get_sound_script(sound_name)
+	if script == null or not script.has_method("generate"):
+		push_warning("AudioCatalogTablet3D: Soundbank script '%s/%s' has no generate()" % [soundbank_id, sound_name])
+		return null
+
+	var duration := float(params.get("duration", metadata.get("duration", 1.0)))
+	if script.has_method("get_duration"):
+		var script_duration = script.get_duration()
+		if script_duration is float or script_duration is int:
+			duration = maxf(duration, float(script_duration))
+	duration = clampf(duration, 0.08, 12.0)
+
+	var frequency_hz := _resolve_preview_frequency(params, metadata)
+	var gain := clampf(float(params.get("gain", metadata.get("gain", 1.0))), 0.0, 2.0)
+	var invoke_mode := str(metadata.get("invoke_mode", "t_freq_trigger"))
+
+	var sample_count := int(AudioSynthesizer.SAMPLE_RATE * duration)
+	var data := PackedFloat32Array()
+	data.resize(sample_count)
+
+	for i in range(sample_count):
+		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
+		var sample = _invoke_soundbank_sample(script, invoke_mode, t, frequency_hz, params)
+		data[i] = clampf(sample * gain, -1.0, 1.0)
+
+	return CustomSoundGenerator.create_audio_stream(data)
+
+
+func _resolve_preview_frequency(params: Dictionary, metadata: Dictionary) -> float:
+	if params.has("frequency_hz"):
+		return maxf(float(params.get("frequency_hz", 110.0)), 20.0)
+	if params.has("root_freq_hz"):
+		return maxf(float(params.get("root_freq_hz", 110.0)), 20.0)
+	if params.has("midi_note"):
+		var midi = float(params.get("midi_note", 45.0))
+		return 440.0 * pow(2.0, (midi - 69.0) / 12.0)
+	if metadata.has("preview_midi_note"):
+		var preview_midi = float(metadata.get("preview_midi_note", 45.0))
+		return 440.0 * pow(2.0, (preview_midi - 69.0) / 12.0)
+	return maxf(float(metadata.get("preview_freq_hz", 110.0)), 20.0)
+
+
+func _invoke_soundbank_sample(script, invoke_mode: String, t: float, freq: float, params: Dictionary) -> float:
+	if script == null or not script.has_method("generate"):
+		return 0.0
+
+	var argc := _get_method_arg_count(script, "generate")
+	if argc <= 0:
+		# Fallback assumption for Script resources where arg reflection is unavailable.
+		argc = 3
+
+	match invoke_mode:
+		"t_freq":
+			if argc >= 2:
+				return float(script.generate(t, freq))
+		"t_trigger":
+			if argc >= 2:
+				return float(script.generate(t, 0.0))
+		"t_freq_params":
+			if argc >= 3:
+				return float(script.generate(t, freq, params))
+		"t_freq_trigger":
+			if argc >= 3:
+				return float(script.generate(t, freq, 0.0))
+
+	# Safe fallback by arity
+	if argc == 1:
+		return float(script.generate(t))
+	if argc == 2:
+		return float(script.generate(t, freq))
+	if argc >= 3:
+		return float(script.generate(t, freq, 0.0))
+
+	return 0.0
+
+
+func _get_method_arg_count(target: Object, method_name: String) -> int:
+	if target == null:
+		return -1
+
+	var methods: Array = []
+	if target is Script and target.has_method("get_script_method_list"):
+		methods = target.get_script_method_list()
+	if methods.is_empty():
+		methods = target.get_method_list()
+
+	for method in methods:
+		if str(method.get("name", "")) == method_name:
+			var args: Array = method.get("args", method.get("arguments", []))
+			return args.size()
+	return -1
 
 
 func _detect_generator_type(category: String, sound_key: String) -> String:
@@ -321,6 +432,32 @@ func _string_to_sound_type(type_str: String) -> int:
 		"glitch_chaos": AudioSynthesizer.SoundType.GLITCH_CHAOS,
 		"noir_sax_breath": AudioSynthesizer.SoundType.NOIR_SAX_BREATH,
 		"space_sub_drone": AudioSynthesizer.SoundType.SPACE_SUB_DRONE,
+		# Expressive leads
+		"supersaw_lead": AudioSynthesizer.SoundType.SUPERSAW_LEAD,
+		"sync_lead": AudioSynthesizer.SoundType.SYNC_LEAD,
+		"fm_bell": AudioSynthesizer.SoundType.FM_BELL,
+		"square_lead": AudioSynthesizer.SoundType.SQUARE_LEAD,
+		"portamento_lead": AudioSynthesizer.SoundType.PORTAMENTO_LEAD,
+		"vocal_formant": AudioSynthesizer.SoundType.VOCAL_FORMANT,
+		"brass_stab": AudioSynthesizer.SoundType.BRASS_STAB,
+		"string_ensemble": AudioSynthesizer.SoundType.STRING_ENSEMBLE,
+		"pluck_lead": AudioSynthesizer.SoundType.PLUCK_LEAD,
+		"glass_lead": AudioSynthesizer.SoundType.GLASS_LEAD,
+		"distorted_lead": AudioSynthesizer.SoundType.DISTORTED_LEAD,
+		"bitcrushed_lead": AudioSynthesizer.SoundType.BITCRUSHED_LEAD,
+		# Genre-defining basses
+		"reese_bass": AudioSynthesizer.SoundType.REESE_BASS,
+		"wobble_bass_custom": AudioSynthesizer.SoundType.WOBBLE_BASS_CUSTOM,
+		"pluck_bass": AudioSynthesizer.SoundType.PLUCK_BASS,
+		"sub_bass_sine": AudioSynthesizer.SoundType.SUB_BASS_SINE,
+		"distorted_bass": AudioSynthesizer.SoundType.DISTORTED_BASS,
+		"juno_bass": AudioSynthesizer.SoundType.JUNO_BASS,
+		"minimoog_bass": AudioSynthesizer.SoundType.MINIMOOG_BASS,
+		"sh101_bass": AudioSynthesizer.SoundType.SH101_BASS,
+		"prophet_bass": AudioSynthesizer.SoundType.PROPHET_BASS,
+		"upright_bass": AudioSynthesizer.SoundType.UPRIGHT_BASS,
+		"slap_bass": AudioSynthesizer.SoundType.SLAP_BASS,
+		"picked_bass": AudioSynthesizer.SoundType.PICKED_BASS,
 	}
 
 	var key := type_str.to_lower().replace(" ", "_").replace("-", "_")

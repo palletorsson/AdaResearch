@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckeftq4c82nfb"]
+[gd_scene format=3 uid="uid://ckeftq4c82nfb"]
 
 [ext_resource type="Script" uid="uid://d217m8w3ggpb2" path="res://commons/audio/catalog/AudioCatalogDesktop.gd" id="1_main"]
 
-[node name="AudioCatalogDesktop" type="Control"]
+[node name="AudioCatalogDesktop" type="Control" unique_id=734321255]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,9 +11,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=650804207]
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=61643749]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

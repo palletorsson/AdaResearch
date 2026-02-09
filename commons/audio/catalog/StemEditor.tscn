@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://2np2830appil"]
 
-[ext_resource type="Script" path="res://commons/audio/catalog/StemEditor.gd" id="1_stem_editor"]
+[ext_resource type="Script" uid="uid://du2lgqjlvo5jx" path="res://commons/audio/catalog/StemEditor.gd" id="1_stem_editor"]
 
-[node name="StemEditor" type="Control"]
+[node name="StemEditor" type="Control" unique_id=769681809]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

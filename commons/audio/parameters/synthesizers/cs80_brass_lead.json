@@ -1,0 +1,16 @@
+{
+  "cs80_brass_lead": {
+    "_metadata": {
+      "sound_type": "cs80_brass_lead",
+      "description": "Expressive CS-80 style brass lead with analog swell and cinematic weight.",
+      "instrument": "Yamaha CS-80 style",
+      "era": "1970s-1980s",
+      "tags": ["lead", "brass", "vangelis", "cinematic"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 3.2, "min": 0.5, "max": 12.0, "step": 0.1 },
+      "amplitude": { "value": 0.5, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}

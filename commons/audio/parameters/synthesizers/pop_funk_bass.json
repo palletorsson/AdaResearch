@@ -1,0 +1,17 @@
+{
+  "pop_funk_bass": {
+    "_metadata": {
+      "sound_type": "pop_funk_bass",
+      "description": "Classic pop-funk bass voice with tight envelope and synth punch.",
+      "instrument": "Minimoog Funk Bass style",
+      "era": "1980s",
+      "tags": ["bass", "pop", "funk", "retro"],
+      "version": "1.0"
+    },
+    "parameters": {
+      "duration": { "value": 1.8, "min": 0.1, "max": 8.0, "step": 0.05 },
+      "frequency": { "value": 82.4, "min": 20.0, "max": 220.0, "step": 0.1 },
+      "amplitude": { "value": 0.55, "min": 0.05, "max": 1.0, "step": 0.01 }
+    }
+  }
+}
