@@ -31,7 +31,39 @@ var square_colors = [
 var square_sizes = [1.0, 0.85, 0.7, 0.6, 0.5, 0.42, 0.35, 0.28, 0.22, 0.16]
 
 func _ready():
+	create_frame()
 	create_albers_plane()
+
+func create_frame():
+	# Create a 0.5m thick frame behind the painting
+	var frame = MeshInstance3D.new()
+	frame.name = "Frame"
+	add_child(frame)
+	
+	# Calculate frame size based on outer square
+	# Outer square: size = 1.0 * PLANE_SIZE * 0.5 * scale_factor = 2.5
+	# Add margin for frame border
+	var outer_size = square_sizes[0] * PLANE_SIZE * 0.5 * scale_factor
+	var frame_size = outer_size + 0.15  # Slight border around painting
+	var frame_depth = 0.5  # 0.5m thick
+	
+	var box = BoxMesh.new()
+	box.size = Vector3(frame_size, frame_size, frame_depth)
+	frame.mesh = box
+	
+	# Position frame behind the painting
+	# Painting is at z_offset = 0, frame goes behind (-Z, which becomes -X after rotation)
+	frame.position = Vector3(x_offset, 0, z_offset - frame_depth * 0.5 - 0.01)
+	
+	# Match the painting rotation
+	frame.rotation_degrees = Vector3(0, 90, 0)
+	
+	# Dark wood frame material
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.1, 0.08)  # Dark brown/walnut
+	mat.roughness = 0.7
+	mat.metallic = 0.0
+	frame.material_override = mat
 
 func create_albers_plane():
 	# Create the base plane geometry
