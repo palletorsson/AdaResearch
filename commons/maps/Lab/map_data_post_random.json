@@ -56,15 +56,15 @@
 			[" ", " ", "pyramid_edit:45:0:0.4", " ", " ", "infokiosk:-90", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", "rainbow:90:0:0.05", " ", " ", " ", " "],
-			[" ", "smallcontainment:0:0:4", " ", " ", " ", " ", " ", " ", " ", " ", "homagetothesquare:0:1:0.2", " ", " "],
-			[" ", " ", " ", " ", "world_map_tablet:180:2:2", " ", " ", " ", "random_walk_collection:180", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-			[" ", "nail_color_controller:90:1.0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "smallcontainment:0:0:4", " ", "world_map_tablet:90:2.7:2", " ", " ", " ", " ", " ", " ", "", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "nail_color_controller:90:1.0", " ", " ", "spectral_sine_wave:90:1:0.4", "RackMoogBass:90:1", " ", " ", " ", "random_walk_collection:180", " ", " ", " "],
+			[" ", "hand_model:180:0", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", "hand_color_controller:90", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-		]
+		] 
 	},
 	"external_references": {
 		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json"],

@@ -35,7 +35,7 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "t:primitives", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " ", " ", "t:color", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
  
 		],
 		"interactables": [
@@ -45,12 +45,12 @@
 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", "cube_lines", "light_sphere", " ", " ", " ", " ", "rainbow:90:0:0.05", " ", " "],
 			[" ", " ", "cube_scene:0:2:0.6", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " "],
+			[" ", " ", " ", " ", "world_map_tablet:180:0.2:2", " ", " ", " "]
 		 
 		]
 	},
 	"subtitles": {
-		"Lab_One_Info": " Find First Simulation. ",
+		"Lab_One_Info": " Find First Simulation. "
 	},
 	"external_references": {
 		"artifact_registries": ["res://commons/artifacts/lab_artifacts.json", "res://commons/artifacts/grid_artifacts.json", "res://commons/artifacts/registry/furniture.json"],
@@ -108,6 +108,6 @@
 		"light_spacing": 3,
 		"light_intensity": 1.2,
 		"pattern": "sparse"
-	}, 
+	} 
 	}
 }
