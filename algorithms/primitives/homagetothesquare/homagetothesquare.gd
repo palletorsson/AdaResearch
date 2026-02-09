@@ -11,7 +11,7 @@ var scale_factor = 0.5
 
 # Translation offset
 var x_offset = 0.5
-var z_offset = 0.4
+var z_offset = 0.5
 
 # Colors from the Albers image (from outer to inner)
 var square_colors = [
