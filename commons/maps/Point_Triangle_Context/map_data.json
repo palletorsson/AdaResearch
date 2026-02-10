@@ -64,9 +64,9 @@
 		],
 		"interactables": [
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", "folded_strip:90:-0.3"],
+			[" ", " ", " ", " ", " ", " ", "folded_strip:-90:-0.3"],
 			[" ", " ", " ", "", " ", " ", " "],
-			[" ", " ", " ", "draw_triangle_faces:0:1", " ", " ", " "],
+			[" ", " ", " ", "draw_triangle_faces:180:1", " ", " ", " "],
 			[" ", " ", " ", "", " ", " ", " "],						
 			[" ", " ", " ", "dark_sphere", " ", " ", " "],
 			[" ", "interactivetriangle:180:-1.0:0.2", "pythagorean_triangle_angles:180:-0.2:0.2", " ", "quad_line_puzzle#fillhole:remove", "quad:0:0:0.5", " "],

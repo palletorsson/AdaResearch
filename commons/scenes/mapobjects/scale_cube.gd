@@ -48,17 +48,18 @@ func create_cube() -> void:
 	box_mesh.size = Vector3.ONE
 	mesh_instance.mesh = box_mesh
 	
-	# Load and apply Grid shader
-	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+	# Load and apply Grid shader (matching transport_cube parameters)
+	var shader = load("res://commons/resourses/shaders/Grid.gdshader")
 	if shader:
 		var material = ShaderMaterial.new()
 		material.shader = shader
-		material.set_shader_parameter("fill_color", fill_color)
-		material.set_shader_parameter("wireframe_color", wireframe_color)
-		material.set_shader_parameter("emission_color", wireframe_color)
-		material.set_shader_parameter("width", 8.0)
-		material.set_shader_parameter("blur", 0.5)
-		material.set_shader_parameter("emission_strength", 1.5)
+		material.set_shader_parameter("modelColor", fill_color)
+		material.set_shader_parameter("wireframeColor", wireframe_color)
+		material.set_shader_parameter("emissionColor", wireframe_color)
+		material.set_shader_parameter("width", 3.713)
+		material.set_shader_parameter("blur", 0.581)
+		material.set_shader_parameter("emission_strength", 0.458)
+		material.set_shader_parameter("show_interior", true)
 		mesh_instance.material_override = material
 	else:
 		# Fallback to standard material

@@ -12,6 +12,7 @@ func _ready():
 	print("Suite Selection:")
 	print("  1 - Trap Beats (drums)")
 	print("  2 - Tech Noir (ambient/atmospheric)")
+	print("  3 - Detroit Techno (soundbank suite)")
 	print("")
 	print("Pattern Selection (Trap Beats):")
 	print("  Q - Minimal trap")
@@ -84,6 +85,18 @@ func _input(event):
 			sequencer.change_suite("tech_noir")
 			print("🎨 Switched to: Tech Noir")
 			print("  Available sounds: ", sequencer.get_suite_sounds())
+
+		KEY_3:
+			var suites = sequencer.get_available_suites()
+			if "detroit_techno" in suites:
+				sequencer.change_suite("detroit_techno")
+				sequencer.load_pattern("main")
+				sequencer.set_bpm(128.0)
+				sequencer.set_swing(0.0)
+				print("🎨 Switched to: Detroit Techno")
+				print("  Available sounds: ", sequencer.get_suite_sounds())
+			else:
+				print("⚠ Detroit Techno suite not available")
 
 		# Pattern selection (context-dependent on current suite)
 		KEY_Q:

@@ -156,7 +156,7 @@ func _create_labels():
 	_label.modulate = Color(0.8, 0.9, 1.0)
 	add_child(_label)
 	
-	# Formula label
+	# Formula label (hidden by default - enable with show_formula export)
 	_formula_label = Label3D.new()
 	_formula_label.pixel_size = 0.001
 	_formula_label.font_size = 72
@@ -166,6 +166,7 @@ func _create_labels():
 	_formula_label.position = Vector3(_base_position.x, -0.08, _base_position.z + cube_size)
 	_formula_label.rotation.x = -PI / 6
 	_formula_label.modulate = Color(0.6, 0.85, 1.0)
+	_formula_label.visible = false  # Hidden by default
 	add_child(_formula_label)
 	
 	# Axis indicator
