@@ -22,7 +22,7 @@ albedo_color = Color(0.3, 0.3, 0.3, 1)
 environment = SubResource("Environment_Dark")
 
 [node name="Room" type="Node3D" parent="."]
-visible = false
+visible = true
 
 [node name="Floor" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
