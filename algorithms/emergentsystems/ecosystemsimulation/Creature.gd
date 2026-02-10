@@ -1,4 +1,4 @@
-extends Node2D
+﻿extends Node2D
 class_name Creature
 
 var velocity: Vector2 = Vector2.ZERO
@@ -39,7 +39,7 @@ func _init(pos: Vector2, dna_values: Dictionary = {}):
 	lifespan = dna["lifespan"]
 	health = 1.0  # Full health at birth
 
-func _process(delta: float):
+func _process(_delta: float):
 	# Not needed since we'll handle updates through the ecosystem
 	pass
 

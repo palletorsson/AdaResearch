@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Editable parameters
 @export var metaball_count: int = 9
@@ -72,7 +72,7 @@ func initialize_metaballs():
 	# Update shader parameters
 	update_shader_parameters()
 
-func _process(delta):
+func _process(_delta):
 	# Create new array for updated positions
 	var updated_positions = []
 	

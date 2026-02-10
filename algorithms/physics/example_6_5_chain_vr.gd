@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 6.5: Chain
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -197,7 +197,7 @@ func create_joint(node_a: Node3D, node_b: Node3D, index: int) -> Generic6DOFJoin
 	add_child(joint)
 	return joint
 
-func animate_controller(delta: float):
+func animate_controller(_delta: float):
 	"""Animate controller position (simulates VR hand movement)"""
 	var time = Time.get_ticks_msec() / 1000.0
 	controller_position = Vector3(

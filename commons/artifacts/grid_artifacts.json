@@ -3136,7 +3136,7 @@
 											  "name":  "flashlight_demo",
 											  "lookup_name":  "flashlight_demo",
 											  "description":  "flashlight_demog",
-											  "scene":  "res://algorithms/light/flashlight_demo/flashlight_demo.tscn"
+											  "scene":  "res://algorithms/effects/flashlight_demo/flashlight_demo.tscn"
 										  },
 					  "mondrian_3d_display":  {
 												  "name":  "Mondrian 3D Display",
@@ -3419,6 +3419,12 @@
 												  "lookup_name":  "grabcolorcollection",
 												  "description":  "grabcolorcollection",
 												  "scene":  "res://algorithms/color/grabcolor/grabcolorcollection.tscn"
+											  },
+					  "color_sets_overview":  {
+												  "name":  "Color Sets Overview",
+												  "lookup_name":  "color_sets_overview",
+												  "description":  "Overview display of available color palettes and sets.",
+												  "scene":  "res://algorithms/color/grabcolor/color_sets_overview.tscn"
 											  },
 					  "shelf":  {
 									"name":  "shelf",

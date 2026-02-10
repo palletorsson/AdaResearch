@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 var visualization_type = "intro"
 var animation_time = 0.0
@@ -97,7 +97,7 @@ func _draw():
 			draw_fields_visualization(center_x, center_y)
 
 # Physics update functions
-func update_intro_physics(delta):
+func update_intro_physics(_delta):
 	# Basic vector movement demo
 	var time_factor = animation_time * 0.5
 	
@@ -118,11 +118,11 @@ func update_intro_physics(delta):
 			if trail.size() > MAX_TRAIL_POINTS:
 				trail.remove_at(0)
 
-func update_addition_physics(delta):
+func update_addition_physics(_delta):
 	# Vector addition demo movement
 	pass  # Will be drawn statically in draw function
 
-func update_multiplication_physics(delta):
+func update_multiplication_physics(_delta):
 	# Vector multiplication demo movement
 	pass  # Will be drawn statically in draw function
 
@@ -571,7 +571,7 @@ func draw_multiplication_visualization(center_x, center_y):
 		
 		draw_string_outlined(
 			origin + scaled_vector + Vector2(10, -10 + i * 20),
-			str(factor) + " × v",
+			str(factor) + " Ã— v",
 			color,
 			Color.BLACK,
 			1
@@ -686,7 +686,7 @@ func draw_multiplication_visualization(center_x, center_y):
 	
 	draw_string_outlined(
 		dot_origin + Vector2(0, -60),
-		"Angle: " + str(snapped(rad_to_deg(angle_between), 0.1)) + "°",
+		"Angle: " + str(snapped(rad_to_deg(angle_between), 0.1)) + "Â°",
 		COLOR_HIGHLIGHT,
 		Color.BLACK,
 		1

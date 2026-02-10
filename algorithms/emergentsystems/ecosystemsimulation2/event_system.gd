@@ -1,4 +1,4 @@
-# event_system.gd
+﻿# event_system.gd
 class_name EventSystem
 extends Node
 
@@ -153,7 +153,7 @@ func update(delta: float):
 func set_entropy(value: float):
 	current_entropy = clamp(value, 0.0, 1.0)
 
-func _determine_random_event_type(current_day: int) -> String:
+func _determine_random_event_type(_current_day: int) -> String:
 	# Event probabilities adjusted by entropy and narrative arc
 	var celebration_chance = 0.4 - current_entropy * 0.2
 	var challenge_chance = 0.3 + current_entropy * 0.2

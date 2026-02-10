@@ -1,7 +1,7 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name TentacleCube
 ## Stationary machine cube that unfolds mechanical tentacles when player approaches.
-## Uses Godot 4.6 IK for tentacle tracking. Dormant cube → unfolds → tracks player.
+## Uses Godot 4.6 IK for tentacle tracking. Dormant cube â†’ unfolds â†’ tracks player.
 
 signal enemy_destroyed(enemy: Node3D)
 signal tentacle_strike(position: Vector3)
@@ -108,7 +108,7 @@ func _process_dormant(_delta: float) -> void:
 		_set_state(State.UNFOLDING)
 
 
-func _process_unfolding(delta: float) -> void:
+func _process_unfolding(_delta: float) -> void:
 	var t: float = clampf(_state_time / unfold_duration, 0.0, 1.0)
 	
 	# Elastic ease out for dramatic unfold
@@ -139,7 +139,7 @@ func _process_active(delta: float) -> void:
 		_attempt_strike()
 
 
-func _process_retracting(delta: float) -> void:
+func _process_retracting(_delta: float) -> void:
 	var t: float = clampf(_state_time / retract_duration, 0.0, 1.0)
 	
 	# Smooth retract
@@ -185,7 +185,7 @@ func _set_state(new_state: State) -> void:
 		State.DEAD:
 			emit_signal("enemy_destroyed", self)
 	
-	print("TentacleCube: %s → %s" % [State.keys()[old_state], State.keys()[new_state]])
+	print("TentacleCube: %s â†’ %s" % [State.keys()[old_state], State.keys()[new_state]])
 
 
 # === GEOMETRY BUILDING ===
@@ -341,7 +341,7 @@ func _apply_unfold_pose(progress: float) -> void:
 				var upward_basis: Basis = Basis.looking_at(Vector3.UP, -fold_dir)
 				pose.basis = folded_basis.slerp(upward_basis, progress)
 			else:
-				# Segment bones - unfold from 180° to straight
+				# Segment bones - unfold from 180Â° to straight
 				var fold_angle := PI * (1.0 - progress)
 				pose.basis = Basis(Vector3.RIGHT, fold_angle)
 			
@@ -404,7 +404,7 @@ func _track_player(delta: float) -> void:
 			_skeleton.set_bone_pose(tip_bone, current_pose)
 
 
-func _apply_idle_sway(delta: float) -> void:
+func _apply_idle_sway(_delta: float) -> void:
 	var time := Time.get_ticks_msec() * 0.001 * idle_sway_speed
 	
 	for t in range(tentacle_count):

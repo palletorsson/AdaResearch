@@ -1,4 +1,4 @@
-extends "res://algorithms/joint/shared/joint_demo_base.gd"
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var lower: RigidBody3D
 
@@ -39,7 +39,7 @@ func _build_demo():
 	# Nudge to start motion
 	call_deferred("_nudge")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		lower.apply_impulse(Vector3(2.0, 0.0, 1.0))
 

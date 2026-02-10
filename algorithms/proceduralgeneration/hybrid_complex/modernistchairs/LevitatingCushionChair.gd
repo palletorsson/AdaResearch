@@ -1,4 +1,4 @@
-# LevitatingCushionChair.gd
+﻿# LevitatingCushionChair.gd
 # Procedural generation of levitating cushion chairs
 extends Node3D
 class_name LevitatingCushionChair
@@ -59,7 +59,7 @@ func generate_chair():
 			field_particle.material_override = materials.get_material("holographic")
 			add_child(field_particle)
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

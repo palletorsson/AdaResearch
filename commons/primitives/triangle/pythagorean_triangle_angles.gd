@@ -1,4 +1,4 @@
-# PythagoreanTriangleAngles.gd - Extends Pythagorean demo with Angle emphasis
+﻿# PythagoreanTriangleAngles.gd - Extends Pythagorean demo with Angle emphasis
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
@@ -103,7 +103,7 @@ func create_labels():
 	fl.modulate = Color(1.0, 1.0, 0.5, 1.0)
 	
 	# Angle Labels
-	var al0 = create_label("Angle0", "90°", 32)
+	var al0 = create_label("Angle0", "90Â°", 32)
 	al0.modulate = Color.YELLOW
 	var al1 = create_label("Angle1", "Angle", 24)
 	var al2 = create_label("Angle2", "Angle", 24)
@@ -143,10 +143,10 @@ func update_labels():
 	var sum_sq = a_sq + b_sq
 	var diff = abs(sum_sq - c_sq)
 	var op = "="
-	if diff > 0.05: op = "≈"
-	if diff > 0.5: op = "≠"
+	if diff > 0.05: op = "â‰ˆ"
+	if diff > 0.5: op = "â‰ "
 	
-	update_label_pos("FormulaLabel", "a² + b² %s c²\n%.1f + %.1f %s %.1f" % [op, a_sq, b_sq, op, c_sq], 
+	update_label_pos("FormulaLabel", "aÂ² + bÂ² %s cÂ²\n%.1f + %.1f %s %.1f" % [op, a_sq, b_sq, op, c_sq], 
 		(vertex_positions[0] + vertex_positions[1] + vertex_positions[2]) / 3.0 + Vector3(0, 1.5, 0))
 
 func update_label_pos(n: String, t: String, p: Vector3):
@@ -160,7 +160,7 @@ func update_angles():
 	update_angle_visual(1, angle_mesh_1, "Angle1", vertex_positions[1], vertex_positions[2], vertex_positions[0])
 	update_angle_visual(2, angle_mesh_2, "Angle2", vertex_positions[2], vertex_positions[0], vertex_positions[1])
 
-func update_angle_visual(idx: int, mesh: MeshInstance3D, label_name: String, center: Vector3, pA: Vector3, pB: Vector3):
+func update_angle_visual(_idx: int, mesh: MeshInstance3D, label_name: String, center: Vector3, pA: Vector3, pB: Vector3):
 	var dirA = (pA - center).normalized()
 	var dirB = (pB - center).normalized()
 	
@@ -171,7 +171,7 @@ func update_angle_visual(idx: int, mesh: MeshInstance3D, label_name: String, cen
 	
 	# Label
 	if label_nodes.has(label_name):
-		label_nodes[label_name].text = "%.0f°" % deg
+		label_nodes[label_name].text = "%.0fÂ°" % deg
 		# Position: Along the bisector
 		var bisector = (dirA + dirB).normalized() * (arc_radius + 0.15)
 		label_nodes[label_name].position = center + bisector
@@ -291,7 +291,7 @@ func _on_point_moved(index: int, position: Vector3, _meta: Dictionary) -> void:
 	vertex_positions[index] = constrained_pos
 	update_visuals()
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void: pass
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void: pass
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
 	var pos = vertex_positions[index]

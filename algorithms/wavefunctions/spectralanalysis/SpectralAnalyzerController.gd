@@ -1,4 +1,4 @@
-# SpectralAnalyzerController.gd - Interactive spectral analyzer for grid system
+﻿# SpectralAnalyzerController.gd - Interactive spectral analyzer for grid system
 extends Node3D
 class_name SpectralAnalyzerController
 
@@ -71,7 +71,7 @@ func _setup_display():
 		
 		display_material.material_override = material
 
-func _process(delta: float):
+func _process(_delta: float):
 	"""Main update loop"""
 	if is_active and display_enabled:
 		_update_audio_detection()

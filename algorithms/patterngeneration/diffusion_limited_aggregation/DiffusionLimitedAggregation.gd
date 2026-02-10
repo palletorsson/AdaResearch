@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 var time = 0.0
 var aggregate_points = []
@@ -99,7 +99,7 @@ func spawn_random_particle():
 	
 	walking_particles.append(particle)
 
-func update_walking_particles(delta):
+func update_walking_particles(_delta):
 	var particles_to_remove = []
 	
 	for i in range(walking_particles.size()):

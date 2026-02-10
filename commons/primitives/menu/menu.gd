@@ -1,4 +1,4 @@
-# GameMenu.gd - VR Game Menu using slanted cube primitives
+﻿# GameMenu.gd - VR Game Menu using slanted cube primitives
 extends Node3D
 
 @export var menu_radius: float = 3.0
@@ -166,7 +166,7 @@ func setup_vr_interactions():
 			var area = item.get_node("InteractionArea")
 			area.set_monitoring(true)
 
-func _on_vr_controller_trigger(controller_id: int, item: Node3D):
+func _on_vr_controller_trigger(_controller_id: int, item: Node3D):
 	# Handle VR controller trigger on menu item
 	if item.has_method("activate"):
 		item.activate()

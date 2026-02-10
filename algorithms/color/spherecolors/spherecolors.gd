@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # 3D Geometry Color Plates - Inspired by Three.js geometry colors
 # Color plates represented as geometric forms in 3D space
@@ -692,7 +692,7 @@ func animate_geometry(delta):
 	var pulse = 1.0 + sin(time * pulse_frequency) * pulse_amplitude
 	scale = Vector3.ONE * pulse
 
-func update_colors(delta):
+func update_colors(_delta):
 	# Animate colors over time
 	var color_time_offset = time * color_wave_speed
 
@@ -709,7 +709,7 @@ func update_colors(delta):
 				material.albedo_color = animated_color
 				material.emission = animated_color * emission_strength
 
-func update_dot_colors(delta):
+func update_dot_colors(_delta):
 	if not dots_mesh_instance:
 		return
 
@@ -725,7 +725,7 @@ func update_dot_colors(delta):
 		var animated_color = base_color * wave_factor
 		multi_mesh.set_instance_color(i, animated_color)
 
-func apply_morphing(delta):
+func apply_morphing(_delta):
 	# Subtle vertex displacement for organic feel
 	for i in range(color_plates.size()):
 		if i < color_plates.size():
@@ -734,7 +734,7 @@ func apply_morphing(delta):
 			var original_pos = Vector3.ZERO  # You'd store original positions
 			# Apply subtle position changes (implementation would require storing original positions)
 
-func _input(event):
+func _input(_event):
 	# Removed all input handling for clean automatic slideshow
 	pass
 

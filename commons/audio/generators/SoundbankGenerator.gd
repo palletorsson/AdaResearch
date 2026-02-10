@@ -121,10 +121,11 @@ const PATTERNS = {
 		"hihat":     [0.8,0.2,0.6,0.2, 0.85,0.2,0.55,0.25, 0.8,0.2,0.6,0.2, 0.9,0.25,0.7,0.25],  # Silky swung 16ths
 		"shaker":    [0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25, 0.35,0.25,0.35,0.25],  # Soft 16ths
 		"fingersnap":[0,0,0,0, 0.8,0,0,0, 0,0,0,0, 0.8,0,0,0], # Subtle 2&4
-		"tambourine":[0,0,0,0, 0.6,0,0,0, 0,0,0,0, 0.6,0,0,0], # Soft 2&4
 		"rhodes":    [1,0,0.4,0, 0,0,0.7,0.2, 0.9,0,0.3,0, 0,0,0.6,0.3],  # More offbeat comping
 		"pad":       [1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0],     # Sustained JV-1080 strings
 		"strings":   [0,0,0,0, 0,0,0,0, 1,0,0,0, 0,0,0,0],     # Swell on beat 3
+		"organ":     [0,0,0.8,0, 0,0,0.65,0, 0,0,0.8,0, 0,0,0.7,0],  # M1-style offbeat stabs
+		"lead":      [0,0,0,0, 0,0,0.55,0, 0,0,0,0, 0,0.8,0,0.5],    # Sparse hook answer phrase
 	},
 	
 	# Chromatic Story: Jazz-influenced emotional journey (Am → C)
@@ -513,7 +514,96 @@ const STRUCTURES = {
 }
 
 
+static func _merge_with_song_research_parameters(default_song_id: String, runtime_parameters: Dictionary) -> Dictionary:
+	var requested_song_id = str(runtime_parameters.get("song_id", default_song_id)).strip_edges()
+	if requested_song_id.is_empty():
+		requested_song_id = default_song_id
+	
+	var merged = _load_song_research_defaults(default_song_id)
+	if requested_song_id != default_song_id:
+		var requested_defaults = _load_song_research_defaults(requested_song_id)
+		for key in requested_defaults.keys():
+			merged[key] = requested_defaults[key]
+	for key in runtime_parameters.keys():
+		merged[key] = runtime_parameters[key]
+	
+	merged["song_id"] = requested_song_id
+	
+	if not merged.has("progression_name"):
+		var progression_data = merged.get("chord_progressions", null)
+		if progression_data is Array and progression_data.size() > 0 and progression_data[0] is Dictionary:
+			merged["progression_name"] = str(progression_data[0].get("name", ""))
+	
+	return merged
+
+
+static func _load_song_research_defaults(song_id: String) -> Dictionary:
+	var alias_map = {
+		"aphex_twin": "aphex_twin_digital_amber",
+	}
+	var lookup_song_id = alias_map.get(song_id, song_id)
+	var config_path = "res://commons/audio/parameters/songs/%s.json" % lookup_song_id
+	if not FileAccess.file_exists(config_path):
+		return {"song_id": song_id}
+	
+	var file = FileAccess.open(config_path, FileAccess.READ)
+	if file == null:
+		return {"song_id": song_id}
+	
+	var parsed = JSON.parse_string(file.get_as_text())
+	if not parsed is Dictionary:
+		return {"song_id": song_id}
+	
+	var config: Dictionary = parsed
+	var defaults: Dictionary = {"song_id": song_id}
+	
+	var config_params = config.get("parameters", {})
+	if config_params is Dictionary:
+		for param_name in config_params.keys():
+			var param_info = config_params[param_name]
+			if param_info is Dictionary:
+				if param_info.has("value"):
+					defaults[param_name] = param_info["value"]
+				elif param_info.has("default"):
+					defaults[param_name] = param_info["default"]
+	
+	if config.has("arrangement") and config["arrangement"] is Dictionary:
+		var arrangement: Dictionary = config["arrangement"]
+		defaults["arrangement"] = arrangement
+		defaults["carry_layers"] = bool(arrangement.get("carry_layers", true))
+		
+		var variation_hint = str(arrangement.get("variation", "")).to_lower()
+		if arrangement.has("enable_motif_variation"):
+			defaults["enable_motif_variation"] = bool(arrangement["enable_motif_variation"])
+		elif arrangement.has("motif_variation"):
+			defaults["enable_motif_variation"] = bool(arrangement["motif_variation"])
+		elif not variation_hint.is_empty():
+			defaults["enable_motif_variation"] = not (variation_hint in ["none", "off", "false", "minimal"])
+		
+		if arrangement.has("motif_variation_amount"):
+			defaults["motif_variation_amount"] = float(arrangement["motif_variation_amount"])
+		elif variation_hint == "minimal":
+			defaults["motif_variation_amount"] = 0.2
+		elif variation_hint == "medium":
+			defaults["motif_variation_amount"] = 0.45
+		elif variation_hint == "high":
+			defaults["motif_variation_amount"] = 0.75
+	
+	if config.has("chord_progressions"):
+		defaults["chord_progressions"] = config["chord_progressions"]
+	
+	var rhythm = config.get("rhythm", null)
+	if rhythm is Dictionary:
+		if rhythm.has("humanize_ms"):
+			defaults["humanize_ms"] = float(rhythm["humanize_ms"])
+		if rhythm.has("swing_pct"):
+			defaults["swing_pct"] = float(rhythm["swing_pct"])
+	
+	return defaults
+
+
 static func generate_song(genre_id: String, parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters(genre_id, parameters)
 	var bank = SoundbankLoader.load_genre(genre_id)
 	if bank.get_available_sounds().is_empty():
 		push_error("SoundbankGenerator: No sounds loaded for " + genre_id)
@@ -522,29 +612,40 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 	var brief = bank.get_brief()
 	var bpm = parameters.get("bpm", bank.get_bpm())
 	var bar_duration = 240.0 / bpm
-	var humanize_ms = brief.get("rhythm", {}).get("humanize_ms", 0)
-	var swing_pct = SWING.get(genre_id, 0.0)
+	var humanize_ms = float(parameters.get("humanize_ms", brief.get("rhythm", {}).get("humanize_ms", 0)))
+	var swing_pct = float(parameters.get("swing_pct", SWING.get(genre_id, 0.0)))
 	var velocity_cfg = VELOCITY.get(genre_id, VELOCITY["detroit_techno"])
+	var carry_layers_enabled = bool(parameters.get("carry_layers", true))
+	var carry_layer_names = parameters.get("carry_layer_names", [])
+	var enable_motif_variation = bool(parameters.get("enable_motif_variation", false))
+	var motif_variation_amount = clampf(float(parameters.get("motif_variation_amount", 0.25)), 0.0, 1.0)
 	
 	randomize()
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
+	var key_value = str(parameters.get("key", ""))
+	var root_note = _key_to_root_note(key_value)
+	if root_note.is_empty():
+		root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	
 	# Choose scale based on genre character
 	var scale: Array
-	if genre_id in ["madonna_80s", "gypsy_woman_house", "ada_theme"]:
-		# Uplifting genres use MAJOR
+	if not key_value.is_empty():
+		scale = PopMusicTheory.get_minor_scale_notes(root_note) if _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root_note)
+	elif genre_id in ["madonna_80s", "gypsy_woman_house", "ada_theme"]:
 		scale = PopMusicTheory.get_major_scale_notes(root_note)
 	else:
-		# Darker genres use minor
 		scale = PopMusicTheory.get_minor_scale_notes(root_note)
 	
-	var progression = _get_genre_progression(genre_id)
+	var progression = _resolve_progression_from_parameters(genre_id, parameters, scale)
 	
 	print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%)" % [genre_id, root_note, bpm, swing_pct])
 	
 	var structure = STRUCTURES.get(genre_id, STRUCTURES["detroit_techno"])
-	var section_names = structure["sections"]
-	var section_bars = structure["bars"]
+	var arrangement_plan = _resolve_arrangement_plan(structure, parameters.get("arrangement", {}), bank.get_available_sounds())
+	var section_names = arrangement_plan.get("sections", structure["sections"])
+	var section_bars = arrangement_plan.get("bars", structure["bars"])
+	var section_sound_overrides = arrangement_plan.get("section_sounds", {})
+	var genre_patterns = PATTERNS.get(genre_id, {})
+	var carry_pool: Array = []
 	
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = section_names.size()
@@ -553,23 +654,33 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 	for i in range(section_names.size()):
 		var section_name = section_names[i]
 		var num_bars = section_bars[i]
-		var section_sounds = bank.get_section_sounds(section_name)
+		var section_sounds = section_sound_overrides.get(section_name, [])
+		if section_sounds.is_empty():
+			section_sounds = bank.get_section_sounds(section_name)
 		if section_sounds.is_empty():
 			section_sounds = bank.get_available_sounds()
+		section_sounds = _dedupe_sounds(section_sounds)
+		
+		if carry_layers_enabled and not carry_pool.is_empty():
+			section_sounds = _merge_unique_sounds(section_sounds, carry_pool)
 		
 		print("  Section '%s' (%d bars): %s" % [section_name, num_bars, ", ".join(section_sounds)])
 		
 		var stream = _generate_section(bank, genre_id, section_sounds, progression, 
 										scale, bar_duration, bpm, num_bars, 
-										humanize_ms, swing_pct, velocity_cfg)
+										humanize_ms, swing_pct, velocity_cfg,
+										section_name, enable_motif_variation, motif_variation_amount)
 		playback.set_clip_stream(i, stream)
 		playback.set_clip_name(i, section_name.capitalize())
 		
 		playback.set_clip_auto_advance(i, 1)
 		var next_clip = (i + 1) % section_names.size()
 		playback.set_clip_auto_advance_next_clip(i, next_clip)
+		
+		if carry_layers_enabled:
+			carry_pool = _extract_carry_layers(section_sounds, carry_layer_names, genre_patterns)
 	
-	var xfade_val = brief.get("transitions", {}).get("crossfade_s", 2.0)
+	var xfade_val = arrangement_plan.get("crossfade_s", brief.get("transitions", {}).get("crossfade_s", 2.0))
 	var xfade: float = float(xfade_val) if not xfade_val is Dictionary else 2.0
 	for i in range(section_names.size()):
 		var next = (i + 1) % section_names.size()
@@ -579,6 +690,357 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 			AudioStreamInteractive.FADE_CROSS, xfade)
 	
 	return playback
+
+
+static func _resolve_arrangement_plan(base_structure: Dictionary, arrangement_data, available_sounds: Array) -> Dictionary:
+	var plan = {
+		"sections": base_structure.get("sections", []).duplicate(),
+		"bars": base_structure.get("bars", []).duplicate(),
+		"section_sounds": {},
+	}
+	
+	if not arrangement_data is Dictionary:
+		return plan
+	
+	var arrangement: Dictionary = arrangement_data
+	var default_bars = int(arrangement.get("loop_length_bars", 8))
+	var parsed_sections: Array = []
+	var parsed_bars: Array = []
+	var section_sound_overrides: Dictionary = {}
+	
+	if arrangement.has("sections"):
+		var section_data = arrangement["sections"]
+		if section_data is Array:
+			if section_data.size() > 0 and section_data[0] is Dictionary:
+				for section_info in section_data:
+					var section_name = str(section_info.get("name", "")).strip_edges().to_lower()
+					if section_name.is_empty():
+						continue
+					parsed_sections.append(section_name)
+					var bars = int(section_info.get("bars", section_info.get("length_bars", default_bars)))
+					parsed_bars.append(maxi(1, bars))
+					var raw_elements = section_info.get("elements", section_info.get("instruments", []))
+					var resolved_elements = _resolve_arrangement_elements(raw_elements, available_sounds)
+					if not resolved_elements.is_empty():
+						section_sound_overrides[section_name] = resolved_elements
+			else:
+				for section_name_variant in section_data:
+					var section_name = str(section_name_variant).strip_edges().to_lower()
+					if section_name.is_empty():
+						continue
+					parsed_sections.append(section_name)
+					parsed_bars.append(_default_section_bar_count(plan["sections"], plan["bars"], section_name, default_bars))
+		elif section_data is Dictionary:
+			var section_dict: Dictionary = section_data
+			for section_key in section_dict.keys():
+				var section_name = str(section_key).strip_edges().to_lower()
+				if section_name.is_empty():
+					continue
+				parsed_sections.append(section_name)
+				var section_info = section_dict[section_key]
+				var bars = default_bars
+				if section_info is Dictionary:
+					bars = int(section_info.get("bars", section_info.get("length_bars", default_bars)))
+					var raw_elements = section_info.get("elements", section_info.get("instruments", []))
+					var resolved_elements = _resolve_arrangement_elements(raw_elements, available_sounds)
+					if not resolved_elements.is_empty():
+						section_sound_overrides[section_name] = resolved_elements
+				parsed_bars.append(maxi(1, bars))
+	
+	if not parsed_sections.is_empty() and parsed_sections.size() == parsed_bars.size():
+		plan["sections"] = parsed_sections
+		plan["bars"] = parsed_bars
+	
+	plan["section_sounds"] = section_sound_overrides
+	if arrangement.has("transitions"):
+		var transitions = arrangement["transitions"]
+		if transitions is Dictionary and transitions.has("crossfade_s"):
+			plan["crossfade_s"] = float(transitions["crossfade_s"])
+	if arrangement.has("crossfade_s"):
+		plan["crossfade_s"] = float(arrangement["crossfade_s"])
+	
+	return plan
+
+
+static func _resolve_arrangement_elements(raw_elements, available_sounds: Array) -> Array:
+	var resolved: Array = []
+	if not raw_elements is Array:
+		return resolved
+	
+	for item in raw_elements:
+		var token = str(item).strip_edges().to_lower()
+		if token.is_empty():
+			continue
+		if token == "all":
+			return available_sounds.duplicate()
+		var sound_name = _resolve_sound_name(token, available_sounds)
+		if not sound_name.is_empty() and not resolved.has(sound_name):
+			resolved.append(sound_name)
+	
+	return resolved
+
+
+static func _resolve_sound_name(token: String, available_sounds: Array) -> String:
+	for sound_name in available_sounds:
+		if str(sound_name).to_lower() == token:
+			return sound_name
+	
+	var parts = token.split("_")
+	if not parts.is_empty():
+		var first_token = parts[0]
+		for sound_name in available_sounds:
+			if str(sound_name).to_lower() == first_token:
+				return sound_name
+	
+	for sound_name in available_sounds:
+		var lowered = str(sound_name).to_lower()
+		if token.begins_with(lowered) or token.find(lowered) != -1:
+			return sound_name
+	
+	return ""
+
+
+static func _default_section_bar_count(base_sections: Array, base_bars: Array, section_name: String, fallback_bars: int) -> int:
+	var idx = base_sections.find(section_name)
+	if idx >= 0 and idx < base_bars.size():
+		return int(base_bars[idx])
+	return maxi(1, fallback_bars)
+
+
+static func _dedupe_sounds(sounds: Array) -> Array:
+	var deduped: Array = []
+	for sound_name in sounds:
+		if not deduped.has(sound_name):
+			deduped.append(sound_name)
+	return deduped
+
+
+static func _merge_unique_sounds(primary: Array, additions: Array) -> Array:
+	var merged = _dedupe_sounds(primary)
+	for sound_name in additions:
+		if not merged.has(sound_name):
+			merged.append(sound_name)
+	return merged
+
+
+static func _extract_carry_layers(sounds: Array, requested_layers: Array, patterns: Dictionary) -> Array:
+	var carry: Array = []
+	for sound_name in sounds:
+		if _should_carry_sound(str(sound_name), requested_layers, patterns):
+			carry.append(sound_name)
+	if carry.size() > 4:
+		carry = carry.slice(0, 4)
+	return carry
+
+
+static func _should_carry_sound(sound_name: String, requested_layers: Array, patterns: Dictionary) -> bool:
+	if not requested_layers.is_empty():
+		return requested_layers.has(sound_name)
+	
+	if patterns.has(sound_name):
+		return false
+	
+	var lowered = sound_name.to_lower()
+	if lowered in ["bass", "sub", "hoover", "kick", "snare", "clap", "hihat", "rimshot", "shaker", "tambourine", "perc", "fingersnap", "break"]:
+		return false
+	
+	var carry_tokens = ["pad", "atmosphere", "texture", "crackle", "string", "choir", "siren", "vocal", "drone", "noise"]
+	for token in carry_tokens:
+		if lowered.find(token) != -1:
+			return true
+	
+	return false
+
+
+static func _key_to_root_note(key_value: String) -> String:
+	if key_value.is_empty():
+		return ""
+	var root = _extract_chord_root(key_value)
+	if root.is_empty():
+		return ""
+	return root + "3"
+
+
+static func _is_minor_key(key_value: String) -> bool:
+	var lowered = key_value.to_lower()
+	if lowered.find("maj") != -1:
+		return false
+	return lowered.ends_with("m") or lowered.find(" minor") != -1
+
+
+static func _resolve_progression_from_parameters(genre_id: String, parameters: Dictionary, scale: Array) -> Array:
+	var fallback = _get_genre_progression(genre_id)
+	var progression_data = parameters.get("chord_progressions", null)
+	if progression_data == null:
+		return fallback
+	
+	var progression_name = str(parameters.get("progression_name", ""))
+	var chords = _extract_chords_from_progressions(progression_data, progression_name)
+	var degrees = _chords_to_degrees(chords, scale)
+	return fallback if degrees.is_empty() else degrees
+
+
+static func _extract_chords_from_progressions(progressions, preferred_name: String) -> Array:
+	var target_name = preferred_name.to_lower()
+	
+	if progressions is Array:
+		if progressions.is_empty():
+			return []
+		if progressions[0] is Dictionary:
+			var fallback: Array = []
+			for progression in progressions:
+				var progression_name = str(progression.get("name", "")).to_lower()
+				var chords = progression.get("chords", [])
+				if fallback.is_empty() and chords is Array:
+					fallback = _expand_progression_chords(chords, progression)
+				if not target_name.is_empty() and progression_name == target_name and chords is Array:
+					return _expand_progression_chords(chords, progression)
+			return fallback
+		return progressions
+	
+	if progressions is Dictionary:
+		if progressions.has("chords") and progressions["chords"] is Array:
+			return _expand_progression_chords(progressions["chords"], progressions)
+		for key in progressions.keys():
+			var value = progressions[key]
+			if value is Dictionary and value.has("chords") and value["chords"] is Array:
+				if target_name.is_empty() or str(key).to_lower() == target_name or str(value.get("name", "")).to_lower() == target_name:
+					return _expand_progression_chords(value["chords"], value)
+	
+	return []
+
+
+static func _expand_progression_chords(chords: Array, progression_info: Dictionary) -> Array:
+	var bars_per_chord = maxi(1, int(progression_info.get("bars_per_chord", 1)))
+	if bars_per_chord <= 1:
+		return chords
+	
+	var expanded: Array = []
+	for chord in chords:
+		for _repeat_idx in range(bars_per_chord):
+			expanded.append(chord)
+	return expanded
+
+
+static func _chords_to_degrees(chords: Array, scale: Array) -> Array:
+	var degrees: Array = []
+	for chord_value in chords:
+		var chord_name = str(chord_value).strip_edges()
+		if chord_name.is_empty():
+			continue
+		var degree = _roman_to_degree(chord_name)
+		if degree == -1:
+			var root = _extract_chord_root(chord_name)
+			if root.is_empty():
+				continue
+			degree = _find_scale_degree(root, scale)
+		if degree >= 0:
+			degrees.append(degree)
+	return degrees
+
+
+static func _roman_to_degree(symbol: String) -> int:
+	var core = symbol.strip_edges()
+	if core.is_empty():
+		return -1
+	
+	while core.begins_with("b") or core.begins_with("#"):
+		core = core.substr(1)
+	
+	var roman = ""
+	for i in range(core.length()):
+		var ch = core[i]
+		if ch in ["I", "V", "i", "v"]:
+			roman += ch
+		else:
+			break
+	
+	match roman.to_upper():
+		"I":
+			return 0
+		"II":
+			return 1
+		"III":
+			return 2
+		"IV":
+			return 3
+		"V":
+			return 4
+		"VI":
+			return 5
+		"VII":
+			return 6
+		_:
+			return -1
+
+
+static func _extract_chord_root(chord_name: String) -> String:
+	var token = chord_name.strip_edges()
+	if token.is_empty():
+		return ""
+	
+	var slash_idx = token.find("/")
+	if slash_idx != -1:
+		token = token.substr(0, slash_idx)
+	
+	var first = token[0].to_upper()
+	if not first in ["A", "B", "C", "D", "E", "F", "G"]:
+		return ""
+	
+	var root = first
+	if token.length() > 1:
+		var accidental = token[1]
+		if accidental == "#" or accidental == "b":
+			root += accidental
+	
+	return _normalize_note_name(root)
+
+
+static func _normalize_note_name(note_name: String) -> String:
+	var flat_map = {
+		"Db": "C#",
+		"Eb": "D#",
+		"Gb": "F#",
+		"Ab": "G#",
+		"Bb": "A#",
+		"Cb": "B",
+		"Fb": "E",
+	}
+	return flat_map.get(note_name, note_name)
+
+
+static func _find_scale_degree(root_note: String, scale: Array) -> int:
+	for i in range(scale.size()):
+		var note = str(scale[i])
+		if note.is_empty():
+			continue
+		var octave_idx = note.length() - 1
+		var scale_root = note.substr(0, octave_idx)
+		if scale_root == root_note:
+			return i
+	
+	var root_idx = PopMusicTheory.NOTES.find(root_note)
+	if root_idx == -1:
+		return -1
+	
+	var best_idx = -1
+	var best_dist = 99
+	for i in range(scale.size()):
+		var note = str(scale[i])
+		if note.is_empty():
+			continue
+		var octave_idx = note.length() - 1
+		var scale_root = note.substr(0, octave_idx)
+		var scale_idx = PopMusicTheory.NOTES.find(scale_root)
+		if scale_idx == -1:
+			continue
+		var dist = abs(scale_idx - root_idx)
+		dist = mini(dist, 12 - dist)
+		if dist < best_dist:
+			best_dist = dist
+			best_idx = i
+	
+	return best_idx
 
 
 # =============================================================================
@@ -674,6 +1136,7 @@ const HYBRID_CONFIGS = {
 
 static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {}) -> AudioStreamInteractive:
 	"""Generate a song that combines sounds from multiple soundbanks"""
+	parameters = _merge_with_song_research_parameters(hybrid_id, parameters)
 	if not HYBRID_CONFIGS.has(hybrid_id):
 		push_error("SoundbankGenerator: Unknown hybrid config: " + hybrid_id)
 		return null
@@ -688,21 +1151,32 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 	
 	var bpm = parameters.get("bpm", config.get("bpm", 120))
 	var bar_duration = 240.0 / bpm
-	var swing_pct = SWING.get(hybrid_id, 0.0)
+	var swing_pct = float(parameters.get("swing_pct", SWING.get(hybrid_id, 0.0)))
 	var velocity_cfg = VELOCITY.get(hybrid_id, VELOCITY["detroit_techno"])
+	var carry_layers_enabled = bool(parameters.get("carry_layers", true))
+	var carry_layer_names = parameters.get("carry_layer_names", [])
+	var enable_motif_variation = bool(parameters.get("enable_motif_variation", false))
+	var motif_variation_amount = clampf(float(parameters.get("motif_variation_amount", 0.25)), 0.0, 1.0)
 	
 	randomize()
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = _get_genre_progression(hybrid_id)
+	var key_value = str(parameters.get("key", ""))
+	var root_note = _key_to_root_note(key_value)
+	if root_note.is_empty():
+		root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
+	var scale = PopMusicTheory.get_minor_scale_notes(root_note) if key_value.is_empty() or _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root_note)
+	var progression = _resolve_progression_from_parameters(hybrid_id, parameters, scale)
 	
 	print("SoundbankGenerator: Generating hybrid '%s' (%s × %s) in %s at %s BPM" % [
 		hybrid_id, config.primary_bank, config.secondary_bank, root_note, bpm
 	])
 	
 	var structure = STRUCTURES.get(hybrid_id, STRUCTURES["detroit_techno"])
-	var section_names = structure["sections"]
-	var section_bars = structure["bars"]
+	var arrangement_plan = _resolve_arrangement_plan(structure, parameters.get("arrangement", {}), config.sound_sources.keys())
+	var section_names = arrangement_plan.get("sections", structure["sections"])
+	var section_bars = arrangement_plan.get("bars", structure["bars"])
+	var section_sound_overrides = arrangement_plan.get("section_sounds", {})
+	var hybrid_patterns = PATTERNS.get(hybrid_id, {})
+	var carry_pool: Array = []
 	
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = section_names.size()
@@ -711,7 +1185,10 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 	for i in range(section_names.size()):
 		var section_name = section_names[i]
 		var num_bars = section_bars[i]
-		var section_sounds = config.section_sounds.get(section_name, [])
+		var section_sounds = section_sound_overrides.get(section_name, config.section_sounds.get(section_name, []))
+		section_sounds = _dedupe_sounds(section_sounds)
+		if carry_layers_enabled and not carry_pool.is_empty():
+			section_sounds = _merge_unique_sounds(section_sounds, carry_pool)
 		
 		print("  Section '%s' (%d bars): %s" % [section_name, num_bars, ", ".join(section_sounds)])
 		
@@ -719,7 +1196,8 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 			primary_bank, secondary_bank, config,
 			hybrid_id, section_sounds, progression,
 			scale, bar_duration, bpm, num_bars,
-			swing_pct, velocity_cfg
+			swing_pct, velocity_cfg,
+			section_name, enable_motif_variation, motif_variation_amount
 		)
 		playback.set_clip_stream(i, stream)
 		playback.set_clip_name(i, section_name.capitalize())
@@ -727,14 +1205,18 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 		playback.set_clip_auto_advance(i, 1)
 		var next_clip = (i + 1) % section_names.size()
 		playback.set_clip_auto_advance_next_clip(i, next_clip)
+		
+		if carry_layers_enabled:
+			carry_pool = _extract_carry_layers(section_sounds, carry_layer_names, hybrid_patterns)
 	
 	# Add crossfades
+	var xfade = float(arrangement_plan.get("crossfade_s", 2.0))
 	for i in range(section_names.size()):
 		var next = (i + 1) % section_names.size()
 		playback.add_transition(i, next,
 			AudioStreamInteractive.TRANSITION_FROM_TIME_END,
 			AudioStreamInteractive.TRANSITION_TO_TIME_START,
-			AudioStreamInteractive.FADE_CROSS, 2.0)
+			AudioStreamInteractive.FADE_CROSS, xfade)
 	
 	return playback
 
@@ -744,7 +1226,9 @@ static func _generate_hybrid_section(
 	config: Dictionary, hybrid_id: String, sounds: Array,
 	progression: Array, scale: Array,
 	bar_duration: float, bpm: float, num_bars: int,
-	swing_pct: float, velocity_cfg: Dictionary
+	swing_pct: float, velocity_cfg: Dictionary,
+	section_name: String = "", enable_motif_variation: bool = false,
+	motif_variation_amount: float = 0.25
 ) -> AudioStreamWAV:
 	"""Generate a section using sounds from multiple banks"""
 	var total_duration = num_bars * bar_duration
@@ -763,6 +1247,8 @@ static func _generate_hybrid_section(
 		var chord_idx = bar % progression.size()
 		var degree = progression[chord_idx]
 		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var motif_degree = _resolve_motif_degree(degree, bar, num_bars, enable_motif_variation, motif_variation_amount)
+		var motif_chord_freqs = PopMusicTheory.get_chord_frequencies(scale, motif_degree)
 		var root_freq = chord_freqs[0] if chord_freqs.size() > 0 else 220.0
 		
 		for sound_name in sounds:
@@ -780,14 +1266,17 @@ static func _generate_hybrid_section(
 			if sound_name == "siren":
 				if bar == 0:
 					_add_continuous_sound(final_mix, script, 0,
-						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg)
+						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg,
+						0.0, total_duration)
 				continue
 			
 			# Drums and melodic patterns (use hybrid patterns)
 			if patterns.has(sound_name):
-				_add_pattern_sound(final_mix, script, bar_start, patterns[sound_name],
+				var hit_chords = motif_chord_freqs if _is_hook_sound(sound_name) else chord_freqs
+				var bar_pattern = _get_bar_pattern(patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
+				_add_pattern_sound(final_mix, script, bar_start, bar_pattern,
 								   step_samples, sound_name, 0.0, swing_pct,
-								   velocity_cfg, chord_freqs)
+								   velocity_cfg, hit_chords)
 			# Bass with its own pattern
 			elif sound_name in ["bass", "sub", "hoover"]:
 				_add_bass_pattern(final_mix, script, bar_start, bass_cfg,
@@ -796,7 +1285,8 @@ static func _generate_hybrid_section(
 			else:
 				_add_continuous_sound(final_mix, script, bar_start,
 									  int(bar_duration * SAMPLE_RATE),
-									  sound_name, root_freq, chord_freqs, velocity_cfg)
+									  sound_name, root_freq, chord_freqs, velocity_cfg,
+									  bar * bar_duration, total_duration)
 	
 	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.02))
 	return _create_audio_stream(final_mix)
@@ -844,7 +1334,9 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 							   progression: Array, scale: Array, 
 							   bar_duration: float, bpm: float, num_bars: int,
 							   humanize_ms: float, swing_pct: float,
-							   velocity_cfg: Dictionary) -> AudioStreamWAV:
+							   velocity_cfg: Dictionary, section_name: String = "",
+							   enable_motif_variation: bool = false,
+							   motif_variation_amount: float = 0.25) -> AudioStreamWAV:
 	var total_duration = num_bars * bar_duration
 	var total_samples = int(total_duration * SAMPLE_RATE)
 	var final_mix = PackedFloat32Array()
@@ -862,6 +1354,8 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 		var chord_idx = bar % progression.size()
 		var degree = progression[chord_idx]
 		var chord_freqs = PopMusicTheory.get_chord_frequencies(scale, degree)
+		var motif_degree = _resolve_motif_degree(degree, bar, num_bars, enable_motif_variation, motif_variation_amount)
+		var motif_chord_freqs = PopMusicTheory.get_chord_frequencies(scale, motif_degree)
 		var root_freq = chord_freqs[0] if chord_freqs.size() > 0 else 220.0
 		
 		for sound_name in sounds:
@@ -875,14 +1369,17 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 			if sound_name == "siren":
 				if bar == 0:
 					_add_continuous_sound(final_mix, script, 0,
-						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg)
+						total_samples, sound_name, root_freq, chord_freqs, velocity_cfg,
+						0.0, total_duration)
 				continue
 			
 			# Drums and melodic patterns
 			if patterns.has(sound_name):
-				_add_pattern_sound(final_mix, script, bar_start, patterns[sound_name], 
+				var hit_chords = motif_chord_freqs if _is_hook_sound(sound_name) else chord_freqs
+				var bar_pattern = _get_bar_pattern(patterns[sound_name], sound_name, bar, section_name, enable_motif_variation, motif_variation_amount)
+				_add_pattern_sound(final_mix, script, bar_start, bar_pattern, 
 								   step_samples, sound_name, humanize_ms, swing_pct,
-								   velocity_cfg, chord_freqs)
+								   velocity_cfg, hit_chords)
 			# Bass with its own pattern
 			elif sound_name in ["bass", "sub", "hoover"]:
 				_add_bass_pattern(final_mix, script, bar_start, bass_cfg,
@@ -891,10 +1388,54 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 			else:
 				_add_continuous_sound(final_mix, script, bar_start, 
 									  int(bar_duration * SAMPLE_RATE), 
-									  sound_name, root_freq, chord_freqs, velocity_cfg)
+									  sound_name, root_freq, chord_freqs, velocity_cfg,
+									  bar * bar_duration, total_duration)
 	
 	_apply_fade_envelope(final_mix, int(SAMPLE_RATE * 0.02))
 	return _create_audio_stream(final_mix)
+
+
+static func _resolve_motif_degree(base_degree: int, bar_index: int, num_bars: int, enabled: bool, amount: float) -> int:
+	if not enabled or amount <= 0.0:
+		return base_degree
+	if randf() > amount:
+		return base_degree
+	
+	var phrase_pos = bar_index % 8
+	if phrase_pos == 7:
+		return (base_degree + 4) % 7
+	if phrase_pos == 3 or phrase_pos == 6:
+		return (base_degree + 2) % 7
+	if bar_index == num_bars - 1:
+		return (base_degree + 5) % 7
+	return base_degree
+
+
+static func _is_hook_sound(sound_name: String) -> bool:
+	return sound_name in ["stab", "arp", "sequence", "sequencer", "jupiter_arp", "singing_voice", "vocoder", "lead", "piano", "organ", "rhodes"]
+
+
+static func _get_bar_pattern(base_pattern: Array, sound_name: String, bar_index: int, section_name: String, enabled: bool, amount: float) -> Array:
+	if not enabled or amount <= 0.0:
+		return base_pattern
+	
+	var pattern = base_pattern.duplicate()
+	var lowered = sound_name.to_lower()
+	
+	if lowered in ["hihat", "shaker", "tambourine"] and randf() < amount * 0.4 and bar_index % 8 == 7:
+		if pattern.size() > 14:
+			pattern[14] = maxi(float(pattern[14]), 0.5)
+		if pattern.size() > 15:
+			pattern[15] = maxi(float(pattern[15]), 0.5)
+	
+	if _is_hook_sound(sound_name) and randf() < amount * 0.5:
+		var add_step = 6 if bar_index % 2 == 0 else 10
+		if add_step < pattern.size():
+			pattern[add_step] = maxi(float(pattern[add_step]), 1.0)
+			if section_name.to_lower().find("break") != -1:
+				pattern[add_step] = mini(float(pattern[add_step]), 0.6)
+	
+	return pattern
 
 
 static func _add_pattern_sound(mix: PackedFloat32Array, script, bar_start: int, 
@@ -1032,8 +1573,10 @@ static func _add_sound_hit(mix: PackedFloat32Array, script, start: int,
 static func _add_continuous_sound(mix: PackedFloat32Array, script, start: int, 
 								   length: int, sound_name: String, 
 								   root_freq: float, chord_freqs: Array,
-								   velocity_cfg: Dictionary) -> void:
-	var note_duration = float(length) / SAMPLE_RATE
+								   velocity_cfg: Dictionary,
+								   time_offset: float = 0.0,
+								   note_duration_override: float = -1.0) -> void:
+	var note_duration = note_duration_override if note_duration_override > 0 else float(length) / SAMPLE_RATE
 	var volume = velocity_cfg["base"]
 	
 	for i in range(length):
@@ -1041,11 +1584,11 @@ static func _add_continuous_sound(mix: PackedFloat32Array, script, start: int,
 		if idx >= mix.size():
 			break
 		
-		var t = float(i) / SAMPLE_RATE
+		var t = time_offset + float(i) / SAMPLE_RATE
 		var sample = 0.0
 		
 		match sound_name:
-			"pad", "atmosphere", "supersaw", "siren", "strings":
+			"pad", "atmosphere", "supersaw", "siren", "strings", "choir":
 				if script.has_method("generate"):
 					sample = script.generate(t, chord_freqs, note_duration, 0.0)
 				elif script.has_method("generate_sample"):

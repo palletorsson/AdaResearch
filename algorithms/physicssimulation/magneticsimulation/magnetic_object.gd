@@ -1,4 +1,4 @@
-extends RigidBody3D
+﻿extends RigidBody3D
 class_name MagneticObject
 
 # Magnetic properties
@@ -82,7 +82,7 @@ func get_magnetic_moment() -> Vector3:
 	# Direction is from south to north pole, scaled by strength
 	return pole_direction.normalized() * magnetic_strength
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	# This could be used to actually apply forces between magnets
 	# But we're focusing on visualization for now
 	pass

@@ -1,4 +1,4 @@
-# PointInfoBoard.gd
+﻿# PointInfoBoard.gd
 # Info board for Point concepts - the fundamental building block
 extends Control
 
@@ -89,7 +89,7 @@ var page_content = [
 			"AXIOM 4: The text label must update when the point's position changes.",
 			"",
 			"CODE:",
-			"func _process(delta):",
+			"func _process(_delta):",
 			"\tlabel_3d.text = str(point_position)",
 			"\tlabel_3d.position = point_position + label_offset",
 			""

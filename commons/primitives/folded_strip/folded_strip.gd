@@ -1,4 +1,4 @@
-# FoldedStrip.gd - Creates an editable strip of triangles acting like folded paper
+﻿# FoldedStrip.gd - Creates an editable strip of triangles acting like folded paper
 extends Node3D
 
 @export var color_main: Color = Color(0.2, 0.8, 0.3, 1.0)
@@ -178,8 +178,8 @@ func _on_point_moved(index: int, position: Vector3, meta: Dictionary) -> void:
 			vertex_positions[point_index] = position
 			update_mesh()
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void: pass
-func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void: pass
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void: pass
+func _on_point_dropped(_index: int, _pickable, _meta: Dictionary) -> void: pass
 
 func print_help():
 	print("=== Folded Strip (Editable) ===")

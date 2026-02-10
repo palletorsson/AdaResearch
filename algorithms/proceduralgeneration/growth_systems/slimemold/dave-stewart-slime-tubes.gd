@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Dave Stewart-inspired Slimy Pools and Tubes Generator
 # Creates viscous, organic tubular forms with pooling liquid effects
@@ -612,7 +612,7 @@ func reset_bubble(bubble):
 	bubble_mesh.height = bubble["size"] * 2
 	bubble["instance"].mesh = bubble_mesh
 
-func update_tubes(delta):
+func update_tubes(_delta):
 	for tube in tubes:
 		# Slowly deform tubes over time
 		var tube_mesh = create_tube_mesh(tube["path"], tube["thickness"])

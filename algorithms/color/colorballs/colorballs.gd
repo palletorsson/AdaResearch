@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Random Color Rigidbody Balls - Sizes between handballs and golfballs
 # Creates physics-enabled balls with random colors from palette system
@@ -218,7 +218,7 @@ func set_ball_color(ball_instance: Node3D, color: Color) -> void:
 		material.emission_energy_multiplier = 1.0
 		mesh_instance.material_override = material
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if respawn_on_fall:
 		check_and_respawn_fallen_balls()
 

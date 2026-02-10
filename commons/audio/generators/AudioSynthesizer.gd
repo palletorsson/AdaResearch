@@ -1,4 +1,4 @@
-# AudioSynthesizer.gd
+﻿# AudioSynthesizer.gd
 # Path: res://commons/audio/AudioSynthesizer.gd
 # Procedural Audio Synthesizer for generating sound effects and music
 # Generates 16-bit PCM WAV data based on mathematical functions
@@ -24,12 +24,328 @@ const CHANNELS = 1
 const BPM = 100.0
 # const BAR_DURATION = 240.0 / BPM # This was replaced by the new BAR_DURATION above
 
-static func generate_pop_interactive_song(_parameters: Dictionary = {}) -> AudioStreamInteractive:
+static func _merge_with_song_research_parameters(default_song_id: String, runtime_parameters: Dictionary) -> Dictionary:
+	var requested_song_id = str(runtime_parameters.get("song_id", default_song_id)).strip_edges()
+	if requested_song_id.is_empty():
+		requested_song_id = default_song_id
+	
+	var merged = _load_song_research_defaults(default_song_id)
+	if requested_song_id != default_song_id:
+		var requested_defaults = _load_song_research_defaults(requested_song_id)
+		for key in requested_defaults.keys():
+			merged[key] = requested_defaults[key]
+	for key in runtime_parameters.keys():
+		merged[key] = runtime_parameters[key]
+	
+	merged["song_id"] = requested_song_id
+	
+	if not merged.has("progression_name"):
+		var progression_data = merged.get("chord_progressions", null)
+		if progression_data is Array and progression_data.size() > 0 and progression_data[0] is Dictionary:
+			merged["progression_name"] = str(progression_data[0].get("name", ""))
+	
+	return merged
+
+
+static func _load_song_research_defaults(song_id: String) -> Dictionary:
+	var alias_map = {
+		"kpop_prog": "kpop_prog_remix",
+		"computer_love": "kraftwerk",
+	}
+	var lookup_song_id = alias_map.get(song_id, song_id)
+	var config_path = "res://commons/audio/parameters/songs/%s.json" % lookup_song_id
+	if not FileAccess.file_exists(config_path):
+		return {"song_id": song_id}
+	
+	var file = FileAccess.open(config_path, FileAccess.READ)
+	if file == null:
+		return {"song_id": song_id}
+	
+	var parsed = JSON.parse_string(file.get_as_text())
+	if not parsed is Dictionary:
+		return {"song_id": song_id}
+	
+	var config: Dictionary = parsed
+	var defaults: Dictionary = {"song_id": song_id}
+	
+	var config_params = config.get("parameters", {})
+	if config_params is Dictionary:
+		for param_name in config_params.keys():
+			var param_info = config_params[param_name]
+			if param_info is Dictionary:
+				if param_info.has("value"):
+					defaults[param_name] = param_info["value"]
+				elif param_info.has("default"):
+					defaults[param_name] = param_info["default"]
+	
+	if config.has("arrangement") and config["arrangement"] is Dictionary:
+		defaults["arrangement"] = config["arrangement"]
+	
+	if config.has("chord_progressions"):
+		defaults["chord_progressions"] = config["chord_progressions"]
+	
+	return defaults
+
+
+static func _resolve_progression_from_parameters(parameters: Dictionary, fallback: Array, scale: Array) -> Array:
+	var progression_data = parameters.get("chord_progressions", null)
+	if progression_data == null:
+		return fallback
+	
+	var progression_name = str(parameters.get("progression_name", ""))
+	var chords = _extract_chords_from_progressions(progression_data, progression_name)
+	if chords.is_empty():
+		return fallback
+	
+	var degrees = _chords_to_degrees(chords, scale)
+	if not degrees.is_empty():
+		return degrees
+	
+	# If absolute chord names don't match the current random key, infer degrees from the configured song key.
+	var key_value = str(parameters.get("key", "")).strip_edges()
+	if not key_value.is_empty():
+		var root = _extract_chord_root(key_value)
+		if not root.is_empty():
+			var key_scale = PopMusicTheory.get_minor_scale_notes(root + "3") if _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root + "3")
+			degrees = _chords_to_degrees(chords, key_scale)
+			if not degrees.is_empty():
+				return degrees
+	
+	return fallback
+
+
+static func _extract_chords_from_progressions(progressions, preferred_name: String) -> Array:
+	var target_name = preferred_name.to_lower()
+	
+	if progressions is Array:
+		if progressions.is_empty():
+			return []
+		if progressions[0] is Dictionary:
+			var fallback: Array = []
+			for progression in progressions:
+				var progression_name = str(progression.get("name", "")).to_lower()
+				var chords = progression.get("chords", [])
+				if fallback.is_empty() and chords is Array:
+					fallback = _expand_progression_chords(chords, progression)
+				if not target_name.is_empty() and progression_name == target_name and chords is Array:
+					return _expand_progression_chords(chords, progression)
+			return fallback
+		return progressions
+	
+	if progressions is Dictionary:
+		if progressions.has("chords") and progressions["chords"] is Array:
+			return _expand_progression_chords(progressions["chords"], progressions)
+		for key in progressions.keys():
+			var value = progressions[key]
+			if value is Dictionary and value.has("chords") and value["chords"] is Array:
+				if target_name.is_empty() or str(key).to_lower() == target_name or str(value.get("name", "")).to_lower() == target_name:
+					return _expand_progression_chords(value["chords"], value)
+	
+	return []
+
+
+static func _expand_progression_chords(chords: Array, progression_info: Dictionary) -> Array:
+	var bars_per_chord = maxi(1, int(progression_info.get("bars_per_chord", 1)))
+	if bars_per_chord <= 1:
+		return chords
+	
+	var expanded: Array = []
+	for chord in chords:
+		for _repeat_idx in range(bars_per_chord):
+			expanded.append(chord)
+	return expanded
+
+
+static func _chords_to_degrees(chords: Array, scale: Array) -> Array:
+	var degrees: Array = []
+	for chord_value in chords:
+		var chord_name = str(chord_value).strip_edges()
+		if chord_name.is_empty():
+			continue
+		var degree = _roman_to_degree(chord_name)
+		if degree == -1:
+			var root = _extract_chord_root(chord_name)
+			if root.is_empty():
+				continue
+			degree = _find_scale_degree(root, scale)
+		if degree >= 0:
+			degrees.append(degree)
+	return degrees
+
+
+static func _roman_to_degree(symbol: String) -> int:
+	var core = symbol.strip_edges()
+	if core.is_empty():
+		return -1
+	
+	while core.begins_with("b") or core.begins_with("#"):
+		core = core.substr(1)
+	
+	var roman = ""
+	for i in range(core.length()):
+		var ch = core[i]
+		if ch in ["I", "V", "i", "v"]:
+			roman += ch
+		else:
+			break
+	
+	match roman.to_upper():
+		"I":
+			return 0
+		"II":
+			return 1
+		"III":
+			return 2
+		"IV":
+			return 3
+		"V":
+			return 4
+		"VI":
+			return 5
+		"VII":
+			return 6
+		_:
+			return -1
+
+
+static func _extract_chord_root(chord_name: String) -> String:
+	var token = chord_name.strip_edges()
+	if token.is_empty():
+		return ""
+	
+	var slash_idx = token.find("/")
+	if slash_idx != -1:
+		token = token.substr(0, slash_idx)
+	
+	var first = token[0].to_upper()
+	if not first in ["A", "B", "C", "D", "E", "F", "G"]:
+		return ""
+	
+	var root = first
+	if token.length() > 1:
+		var accidental = token[1]
+		if accidental == "#" or accidental == "b":
+			root += accidental
+	
+	return _normalize_note_name(root)
+
+
+static func _normalize_note_name(note_name: String) -> String:
+	var flat_map = {
+		"Db": "C#",
+		"Eb": "D#",
+		"Gb": "F#",
+		"Ab": "G#",
+		"Bb": "A#",
+		"Cb": "B",
+		"Fb": "E",
+	}
+	return flat_map.get(note_name, note_name)
+
+
+static func _find_scale_degree(root_note: String, scale: Array) -> int:
+	for i in range(scale.size()):
+		var note = str(scale[i])
+		if note.is_empty():
+			continue
+		var octave_idx = note.length() - 1
+		var scale_root = note.substr(0, octave_idx)
+		if scale_root == root_note:
+			return i
+	
+	var root_idx = PopMusicTheory.NOTES.find(root_note)
+	if root_idx == -1:
+		return -1
+	
+	var best_idx = -1
+	var best_dist = 99
+	for i in range(scale.size()):
+		var note = str(scale[i])
+		if note.is_empty():
+			continue
+		var octave_idx = note.length() - 1
+		var scale_root = note.substr(0, octave_idx)
+		var scale_idx = PopMusicTheory.NOTES.find(scale_root)
+		if scale_idx == -1:
+			continue
+		var dist = abs(scale_idx - root_idx)
+		dist = mini(dist, 12 - dist)
+		if dist < best_dist:
+			best_dist = dist
+			best_idx = i
+	
+	return best_idx
+
+
+static func _is_minor_key(key_value: String) -> bool:
+	var lowered = key_value.to_lower()
+	if lowered.find("maj") != -1:
+		return false
+	return lowered.ends_with("m") or lowered.find(" minor") != -1
+
+
+static func _default_progression_for_song(song_id: String) -> Array:
+	match song_id:
+		"pop_generative":
+			return PopMusicTheory.PROG_POP_4
+		"ambient_works":
+			return [1, 5, 6, 4]
+		"prog_synth_70s":
+			return [0, 6, 5, 4]
+		"moroder_disco":
+			return [1, 1, 5, 5]
+		"detroit_techno":
+			return [0, 0, 5, 4]
+		"synthwave":
+			return [0, 5, 3, 4]
+		"rave":
+			return [0, 0, 5, 5]
+		"acid_house":
+			return [0, 0, 0, 0]
+		"french_touch":
+			return [0, 5, 3, 4]
+		"supersaw_trance":
+			return [0, 5, 3, 4]
+		"lofi_house":
+			return [0, 3, 5, 4]
+		"reese_jungle":
+			return [0, 0, 5, 3]
+		"ambient_techno":
+			return [0, 3, 5, 0]
+		"blade_runner":
+			return [0, 5, 3, 4]
+		"boards_of_canada":
+			return [1, 4, 6, 5]
+		"burial":
+			return [1, 6, 4, 5]
+		"kraftwerk":
+			return [1, 4, 5, 1]
+		"boards_of_canada_v2":
+			return [0, 5, 3, 4]
+		"burial_v2":
+			return [0, 5, 3, 4]
+		"kraftwerk_v2":
+			return [0, 0, 4, 3]
+		"gypsy_woman_house":
+			return [0, 1, 2, 1]
+		"pop_madonna":
+			return [0, 4, 5, 3]
+		"pop_v2":
+			return [0, 4, 5, 3]
+		"prog_synth_v2":
+			return [0, 5, 3, 0]
+		_:
+			return [0, 5, 3, 4]
+
+
+static func generate_pop_interactive_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("pop_generative", parameters)
 	# 1. Pick Key and Progression
 	randomize()
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "4"
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)
-	var progression = PopMusicTheory.PROG_POP_4 # Default
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Pop Song in ", root_note)
 	
@@ -68,6 +384,7 @@ static func generate_pop_interactive_song(_parameters: Dictionary = {}) -> Audio
 	return playback
 
 static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("ambient_works", parameters)
 	# Aphex Twin "Ambient Works 85-92" Style Generator
 	# Characteristics: Warm analogue pads, lo-fi breakbeats, tape drift, acid bass
 	
@@ -79,7 +396,8 @@ static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStr
 	# Key selection (often minor/dorean for this style)
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3" # Lower register
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [1, 5, 6, 4] # Simple emotive progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Ambient Works Song in ", root_note)
 	
@@ -126,6 +444,7 @@ static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStr
 	return playback
 
 static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("prog_synth_70s", parameters)
 	# 70s Progressive Rock Synthesizer - ELP, Kraftwerk, Yes, Pink Floyd style
 	# Features: Minimoog bass, ELP-style leads with portamento, Kraftwerk sequences
 	# Warm analog pads, motorik drums
@@ -145,7 +464,8 @@ static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStream
 		[0, 5, 2, 6],     # i - VI - iii - VII (emotive)
 		[0, 4, 5, 3],     # i - V - VI - iv (pop-prog)
 	]
-	var progression = progressions[randi() % progressions.size()]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating 70s Prog Synth Track in ", root_note)
 	
@@ -199,6 +519,7 @@ static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStream
 	return playback
 
 static func generate_moroder_disco_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("moroder_disco", parameters)
 	# Giorgio Moroder "I Feel Love" style - the synth as motor
 	# Hypnotic 16th-note sequencer, 4-on-floor kick, pulsing bass, space pads
 	
@@ -208,7 +529,8 @@ static func generate_moroder_disco_song(parameters: Dictionary = {}) -> AudioStr
 	
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [1, 1, 5, 5]  # Simple hypnotic progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Moroder Disco Track in ", root_note)
 	
@@ -341,6 +663,7 @@ static func _generate_disco_section_stream(progression: Array, scale: Array, ins
 
 
 static func generate_detroit_techno_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("detroit_techno", parameters)
 	# Detroit Techno - Juan Atkins, Derrick May style
 	# Cold machine funk, minimal, hypnotic
 	randomize()
@@ -348,7 +671,8 @@ static func generate_detroit_techno_song(parameters: Dictionary = {}) -> AudioSt
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 0, 5, 4]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Detroit Techno in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -481,6 +805,7 @@ static func _generate_detroit_section(progression: Array, scale: Array, instrume
 
 
 static func generate_synthwave_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("synthwave", parameters)
 	# Synthwave - The Weeknd, Kavinsky style
 	# 80s gated drums, detuned leads, arpeggios
 	randomize()
@@ -488,7 +813,8 @@ static func generate_synthwave_song(parameters: Dictionary = {}) -> AudioStreamI
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Synthwave in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -560,7 +886,7 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 				for freq in chord_freqs:
 					# 7 detuned saws per note
 					for voice in range(7):
-						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0  # ±12.5 cents
+						var detune_cents = (float(voice) / 6.0 - 0.5) * 25.0  # Ãƒâ€šÃ‚Â±12.5 cents
 						var detune_ratio = pow(2.0, detune_cents / 1200.0)
 						var saw = fmod(t * freq * detune_ratio, 1.0) * 2.0 - 1.0
 						pad += saw / 7.0
@@ -631,6 +957,7 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 
 
 static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("rave", parameters)
 	# 90s Rave - The Prodigy, SL2 style
 	# Aggressive breakbeats, hoover bass, stabs
 	randomize()
@@ -638,7 +965,8 @@ static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamIntera
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 0, 5, 5]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Rave Track in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -670,7 +998,7 @@ static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamIntera
 
 
 static func _generate_rave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
-	# RAVE - Research: Hoover ±3% detune, Amen breaks, Mentasm stabs, DISTORTION
+	# RAVE - Research: Hoover Ãƒâ€šÃ‚Â±3% detune, Amen breaks, Mentasm stabs, DISTORTION
 	var bpm = 140.0
 	var total_duration = progression.size() * bar_duration * 2
 	var total_samples = int(total_duration * SAMPLE_RATE)
@@ -713,7 +1041,7 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 						var hat = (randf() - 0.5) * exp(-ht * 100.0)
 						if start + j < samples_per_chord: chord_mix[start + j] += hat * 0.18
 		
-		# HOOVER BASS - ±3% detuned saws with filter LFO (research: Mentasm sound)
+		# HOOVER BASS - Ãƒâ€šÃ‚Â±3% detuned saws with filter LFO (research: Mentasm sound)
 		if "hoover" in instruments:
 			for j in range(samples_per_chord):
 				var t = float(j) / SAMPLE_RATE
@@ -790,6 +1118,7 @@ static func _generate_rave_section(progression: Array, scale: Array, instruments
 # The TB-303 is acid house. High resonance, filter sweeps, slides, accents.
 # ============================================================================
 static func generate_acid_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("acid_house", parameters)
 	# Acid House - Phuture, DJ Pierre, 808 State style
 	# Squelchy 303, 808/909 drums, hypnotic repetition
 	randomize()
@@ -799,7 +1128,8 @@ static func generate_acid_house_song(parameters: Dictionary = {}) -> AudioStream
 	var root_note = "A1"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
 	# Acid house often uses minimal harmonic movement
-	var progression = [0, 0, 0, 0]  # Single chord hypnosis
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Acid House Track in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1008,12 +1338,14 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 # Based on research: Resonant bandpass "duck" leads, wavetable chiffs, filter disco
 # ============================================================================
 static func generate_french_touch_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("french_touch", parameters)
 	randomize()
 	var bpm = 120.0
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]  # I-vi-IV-V disco progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating French Touch in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1143,12 +1475,14 @@ static func _generate_french_touch_section(progression: Array, scale: Array, ins
 # Big uplifting chords with long attack/release
 # ============================================================================
 static func generate_supersaw_trance_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("supersaw_trance", parameters)
 	randomize()
 	var bpm = 138.0  # Classic trance tempo
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]  # Uplifting minor progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Supersaw Trance in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1288,12 +1622,14 @@ static func _generate_supersaw_section(progression: Array, scale: Array, instrum
 # Dusty drums, tape warmth, classic house groove
 # ============================================================================
 static func generate_lofi_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("lofi_house", parameters)
 	randomize()
 	var bpm = 118.0
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 3, 5, 4]  # Deep house progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Lo-Fi House in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1430,15 +1766,17 @@ static func _generate_lofi_house_section(progression: Array, scale: Array, instr
 
 # ============================================================================
 # REESE JUNGLE - Kevin Saunderson's classic: 2 detuned saws + sub
-# Based on research: ±0.07 semitone detune, 64 unison voices, metal filter
+# Based on research: Ãƒâ€šÃ‚Â±0.07 semitone detune, 64 unison voices, metal filter
 # ============================================================================
 static func generate_reese_jungle_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("reese_jungle", parameters)
 	randomize()
 	var bpm = 170.0  # Classic jungle tempo
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 0, 5, 3]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Reese Jungle in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1482,7 +1820,7 @@ static func _generate_reese_jungle_section(progression: Array, scale: Array, ins
 		var root_freq = chord_freqs[0]
 		var chord_mix = PackedFloat32Array(); chord_mix.resize(samples_per_chord); chord_mix.fill(0.0)
 		
-		# REESE BASS - Two detuned saws + sub (from research: ±0.07 semitones)
+		# REESE BASS - Two detuned saws + sub (from research: Ãƒâ€šÃ‚Â±0.07 semitones)
 		if "reese_bass" in instruments:
 			var detune_semitones = 0.07
 			var detune_ratio = pow(2.0, detune_semitones / 12.0)
@@ -1570,12 +1908,14 @@ static func _generate_reese_jungle_section(progression: Array, scale: Array, ins
 # Carl Craig, The Orb style immersive pads
 # ============================================================================
 static func generate_ambient_techno_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("ambient_techno", parameters)
 	randomize()
 	var bpm = 110.0  # Slower ambient tempo
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 3, 5, 0]  # Minimal ambient progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Ambient Techno in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -1690,12 +2030,14 @@ static func _generate_ambient_techno_section(progression: Array, scale: Array, i
 # Lush keys with ensemble chorus and plate reverb feel
 # ============================================================================
 static func generate_blade_runner_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("blade_runner", parameters)
 	randomize()
 	var bpm = 70.0  # Slow cinematic tempo
 	var bar_duration = 240.0 / bpm
 	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]  # Cinematic minor progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	print("AudioSynthesizer: Generating Blade Runner in ", root_note)
 	
 	var playback = AudioStreamInteractive.new()
@@ -2200,13 +2542,15 @@ static func _generate_ambient_section_stream(progression: Array, scale: Array, i
 # === BOARDS OF CANADA ===
 # Lo-fi, nostalgic, tape-warped Scottish duo sound
 static func generate_boards_of_canada_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("boards_of_canada", parameters)
 	randomize()
 	var bpm = 100.0  # BoC typical tempo
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["C", "D", "F", "G"][randi() % 4] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [1, 4, 6, 5]  # Nostalgic, melancholic
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Boards of Canada in ", root_note)
 	
@@ -2356,13 +2700,15 @@ static func _generate_boc_section(progression: Array, scale: Array, instruments:
 # === BURIAL ===
 # Dark UK garage, vinyl atmosphere, pitched vocals
 static func generate_burial_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("burial", parameters)
 	randomize()
 	var bpm = 130.0  # UK garage tempo
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["D", "E", "G", "A"][randi() % 4] + "2"  # Dark, low
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [1, 6, 4, 5]  # Melancholic
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Burial in ", root_note)
 	
@@ -2505,13 +2851,15 @@ static func _generate_burial_section(progression: Array, scale: Array, instrumen
 # === KRAFTWERK ===
 # German electronic pioneers - precise, mechanical, clean
 static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("kraftwerk", parameters)
 	randomize()
 	var bpm = 110.0  # Kraftwerk typical tempo
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["C", "D", "E", "G"][randi() % 4] + "3"
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)  # Often major/bright
-	var progression = [1, 4, 5, 1]  # Simple, hypnotic
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Kraftwerk in ", root_note)
 	
@@ -2675,13 +3023,15 @@ static func _generate_kraftwerk_section(progression: Array, scale: Array, instru
 # === BOARDS OF CANADA V2 ===
 # Enhanced with research: 15-cent detune, 0.15Hz LFO, bit crushing, dotted delay
 static func generate_boards_of_canada_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("boards_of_canada_v2", parameters)
 	randomize()
 	var bpm = 95.0  # Slightly slower, more hypnotic
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["C", "D", "E", "G"][randi() % 4] + "3"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]  # Nostalgic progression
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Boards of Canada V2 in ", root_note)
 	
@@ -2853,7 +3203,7 @@ static func _generate_boc_v2_section(progression: Array, scale: Array, instrumen
 			var beat_samples = samples_per_chord / 8
 			
 			for beat in range(8):
-				# Humanize timing (±10ms)
+				# Humanize timing (Ãƒâ€šÃ‚Â±10ms)
 				var timing_offset = int((randf() - 0.5) * SAMPLE_RATE * 0.01)
 				var start = beat * beat_samples + timing_offset
 				start = clampi(start, 0, samples_per_chord - 1)
@@ -2921,13 +3271,15 @@ static func _generate_boc_v2_section(progression: Array, scale: Array, instrumen
 # === BURIAL V2 ===
 # Enhanced with research: Sound Forge loose timing, vinyl crackle, 2-step garage patterns
 static func generate_burial_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("burial_v2", parameters)
 	randomize()
 	var bpm = 130.0
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["D", "E", "F", "G"][randi() % 4] + "2"
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-	var progression = [0, 5, 3, 4]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Burial V2 in ", root_note)
 	
@@ -3070,7 +3422,7 @@ static func _generate_burial_v2_section(progression: Array, scale: Array, instru
 			
 			for step in range(16):
 				# Research: "minute hesitations and slippages"
-				var timing_humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.015)  # ±15ms
+				var timing_humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.015)  # Ãƒâ€šÃ‚Â±15ms
 				var start = step * sixteenth + timing_humanize
 				start = clampi(start, 0, samples_per_chord - 1)
 				
@@ -3163,13 +3515,15 @@ static func _generate_burial_v2_section(progression: Array, scale: Array, instru
 # === KRAFTWERK V2 ===
 # Enhanced with research: Motorik beat, vocoder, precise sequencer, Autobahn sounds
 static func generate_kraftwerk_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("kraftwerk_v2", parameters)
 	randomize()
 	var bpm = 110.0  # Motorik tempo
 	var bar_duration = 240.0 / bpm
 	
 	var root_note = ["C", "D", "E", "F"][randi() % 4] + "3"
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)  # Kraftwerk often major
-	var progression = [0, 0, 4, 3]  # Simple, hypnotic
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Kraftwerk V2 in ", root_note)
 	
@@ -3407,6 +3761,7 @@ static func _generate_kraftwerk_v2_section(progression: Array, scale: Array, ins
 # Crystal Waters "Gypsy Woman" (1991) style - Classic NYC/Chicago house
 # Key: piano stabs, bouncy filtered bass, 909 drums, soulful groove
 static func generate_gypsy_woman_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("gypsy_woman_house", parameters)
 	randomize()
 	var bpm = 120.0  # Classic house tempo
 	var bar_duration = 240.0 / bpm
@@ -3416,7 +3771,8 @@ static func generate_gypsy_woman_house_song(parameters: Dictionary = {}) -> Audi
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)
 	
 	# Gypsy Woman chord progression: Fmaj7 - Gm7 - Am7 - Gm7
-	var progression = [0, 1, 2, 1]  # I - ii - iii - ii in F major
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Gypsy Woman House in F major")
 	
@@ -3606,6 +3962,7 @@ static func _generate_gypsy_house_section(progression: Array, scale: Array, inst
 # "Holiday", "Into the Groove" era - Jellybean Benitez production style
 # Key: gated reverb snare, octave bass, bright Juno stabs, 4-on-floor
 static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("pop_madonna", parameters)
 	randomize()
 	var bpm = 118.0  # Classic 80s dance-pop
 	var bar_duration = 240.0 / bpm
@@ -3621,7 +3978,8 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 		[0, 3, 4, 4],  # I - IV - V - V
 		[0, 5, 3, 4],  # I - vi - IV - V
 	]
-	var progression = progressions[randi() % progressions.size()]
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Madonna 80s Pop in ", root_note)
 	
@@ -3907,6 +4265,7 @@ static func _generate_madonna_section(progression: Array, scale: Array, instrume
 # Modern synth-pop / chillwave with distinct palette
 # Optimized for: identity token, frequency allocation, loop durability, VO safety
 static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("pop_v2", parameters)
 	randomize()
 	var bpm = 118.0  # Upbeat pop tempo
 	var bar_duration = 240.0 / bpm
@@ -3917,7 +4276,8 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)
 	
 	# Classic pop progression with emotional lift
-	var progression = [0, 4, 5, 3]  # I - V - vi - IV (the hit progression)
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	print("AudioSynthesizer: Generating Pop V2 in ", root_note, " (modern synth-pop)")
 	
@@ -3925,7 +4285,7 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 	playback.clip_count = 5
 	playback.initial_clip = 0
 	
-	# Clear arc: Intro → Verse → Pre-Chorus → Chorus → Outro
+	# Clear arc: Intro ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Verse ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Pre-Chorus ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Chorus ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Outro
 	
 	# 0. INTRO: Pluck motif + beat hint (establish identity with energy)
 	var intro = _generate_pop_v2_section(progression, scale,
@@ -4274,6 +4634,7 @@ static func _generate_pop_v2_section(progression: Array, scale: Array, instrumen
 # Optimized for 10-point rubric: identity token, arc legibility, frequency allocation, loop durability
 # Based on Tangerine Dream, Kraftwerk, ELP research
 static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("prog_synth_v2", parameters)
 	randomize()
 	var bpm = 105.0  # Slightly slower for hypnotic feel
 	var bar_duration = 240.0 / bpm
@@ -4284,7 +4645,8 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
 	
 	# Prog progression: modal, with a clear return point
-	var progression = [0, 5, 3, 0]  # i - VI - iv - i (returns home = loop friendly)
+
+	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 	
 	# Identity token: a signature motif interval (perfect 5th rise)
 	var motif_interval = 7  # Perfect 5th - recognizable, prog-like
@@ -4296,7 +4658,7 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 	playback.initial_clip = 0
 	
 	# Section design for clear ARC:
-	# Intro (sparse) → Build (add rhythm) → Peak (full + lead) → Release → Loop-friendly outro
+	# Intro (sparse) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Build (add rhythm) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Peak (full + lead) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Release ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Loop-friendly outro
 	
 	# 0. INTRO: Mellotron pad + motif hint (sparse, establish identity)
 	var intro = _generate_prog_v2_section(progression, scale, 
@@ -4564,7 +4926,7 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 			var eighth_samples = samples_per_chord / 8
 			
 			for beat in range(8):
-				# Humanize timing (±5ms - less than other genres, prog is tighter)
+				# Humanize timing (Ãƒâ€šÃ‚Â±5ms - less than other genres, prog is tighter)
 				var humanize = int((randf() - 0.5) * SAMPLE_RATE * 0.005)
 				var start = beat * eighth_samples + humanize
 				start = clampi(start, 0, samples_per_chord - 1)
@@ -4619,9 +4981,10 @@ static func _generate_prog_v2_section(progression: Array, scale: Array, instrume
 # === K-POP PROG REMIX ===
 # 70s Progressive Rock (ELP, Kraftwerk, Yes) meets K-Pop (BTS, BLACKPINK, aespa)
 # CONSTANT BEAT - groove NEVER stops, same kick/snare throughout
-# Key modulation: Em → G major (lift) → Fm (climax) → loops
+# Key modulation: Em ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ G major (lift) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Fm (climax) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ loops
 # Research: ada_the_research/music_tracks/kpop_prog_remix.md
 static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
+	parameters = _merge_with_song_research_parameters("kpop_prog_remix", parameters)
 	randomize()
 	var bpm = 118.0  # Classic K-pop tempo
 	var bar_duration = 240.0 / bpm
@@ -4636,7 +4999,7 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 	var main_prog = [0, 5, 3, 4]  # i - VI - iv - V
 	var lift_prog = [0, 2, 5, 4]  # Ascending feel
 	
-	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em → G → Fm")
+	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ G ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Fm")
 	
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -5568,7 +5931,7 @@ static func generate_sound(type: SoundType, duration: float = 1.0, parameters: D
 	return _create_audio_stream(data)
 
 static func _generate_basic_sine_wave(data: PackedFloat32Array, sample_count: int):
-	# Simple sine wave: amplitude * sin(2π * frequency * time)
+	# Simple sine wave: amplitude * sin(2ÃƒÂÃ¢â€šÂ¬ * frequency * time)
 	var frequency = 440.0  # A4 note
 	var amplitude = 0.3
 	
@@ -7053,9 +7416,9 @@ static func generate_and_save_all_sounds():
 		var file_path = script_path + sound_name + ".tres"
 		var save_result = ResourceSaver.save(sounds[sound_name], file_path)
 		if save_result == OK:
-			print("  ✅ Saved: %s" % file_path)
+			print("  ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Saved: %s" % file_path)
 		else:
-			print("  ❌ Failed to save: %s (Error: %d)" % [file_path, save_result])
+			print("  ÃƒÂ¢Ã‚ÂÃ…â€™ Failed to save: %s (Error: %d)" % [file_path, save_result])
 	
 	print("AudioSynthesizer: All sounds generated and saved as .tres resources to res://commons/audio/!")
 
@@ -8811,7 +9174,7 @@ static func _generate_cinematic_strings(data: PackedFloat32Array, sample_count: 
 static func _generate_industrial_clank(data: PackedFloat32Array, sample_count: int, params: Dictionary):
 	# Metal factory hit - FM synthesis metallic percussion
 	var pitch = params.get("pitch", 150.0)
-	var mod_ratio = params.get("mod_ratio", 1.414)  # √2 for metallic inharmonic
+	var mod_ratio = params.get("mod_ratio", 1.414)  # ÃƒÂ¢Ã‹â€ Ã…Â¡2 for metallic inharmonic
 	var mod_index = params.get("mod_index", 8.0)
 	var decay = params.get("decay", 6.0)
 	
@@ -8869,7 +9232,7 @@ static func _generate_rain_atmosphere(data: PackedFloat32Array, sample_count: in
 
 
 static func _generate_wavetable_morph(data: PackedFloat32Array, sample_count: int, params: Dictionary):
-	# Slowly evolving wavetable - sine → triangle → saw → square
+	# Slowly evolving wavetable - sine ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ triangle ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ saw ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ square
 	var root_midi = int(params.get("root_note", 55.0))
 	var morph_rate = params.get("morph_rate", 0.1)  # Hz
 	

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 ## Blobfish Particle Swarm
 ## Particles move together as a cohesive blob with organic motion
@@ -74,7 +74,7 @@ func _update_blob_center():
 	if count > 0:
 		blob_center = sum / count
 
-func _apply_blobfish_behavior(particle, delta: float):
+func _apply_blobfish_behavior(particle, _delta: float):
 	"""Apply blobfish-like forces to a particle"""
 	var pos = particle.global_position
 	

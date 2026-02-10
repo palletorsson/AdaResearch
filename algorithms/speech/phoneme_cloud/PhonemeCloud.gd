@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name PhonemeCloud
 
 # Phoneme Cloud Prototype
@@ -40,7 +40,7 @@ func _check_xr():
 	# Try to find controller if in a standard XR scene
 	# This might need to be assigned externally or found via groups in a real integration
 
-func _process(delta):
+func _process(_delta):
 	_update_cursor()
 	_update_phoneme_weights()
 

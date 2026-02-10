@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name SubtitleManager
 
 ## Global subtitle manager - add to autoloads as "Subtitles"
@@ -36,7 +36,7 @@ func _ready():
 	# Load setting from GameManager if available
 	_load_settings()
 
-func _process(delta: float):
+func _process(_delta: float):
 	if _is_typing and _subtitle_label:
 		_current_char_index += 5  # Characters per frame (faster typing)
 		if _current_char_index >= _full_text.length():

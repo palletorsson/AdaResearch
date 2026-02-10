@@ -1,4 +1,4 @@
-extends "res://algorithms/joint/shared/joint_demo_base.gd"
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var hinge: HingeJoint3D
 
@@ -24,7 +24,7 @@ func _build_demo():
 
 	add_label("Motorised Drawbridge", Vector3(0.0, 4.0, 3.5))
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var velocity := 0.0
 	if Input.is_action_pressed("ui_up"):
 		velocity = 1.2

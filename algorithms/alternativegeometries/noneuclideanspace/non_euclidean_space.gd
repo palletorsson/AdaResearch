@@ -1,4 +1,4 @@
-# non_euclidean_spaces.gd - Main controller for non-Euclidean experiments
+﻿# non_euclidean_spaces.gd - Main controller for non-Euclidean experiments
 extends Node3D
 
 # Configuration
@@ -54,7 +54,7 @@ func _on_portal_exited(portal: Portal, body: Node3D):
 			var label = debug_overlay.get_node("DebugLabel")
 			label.text = "Exited portal: " + portal.name
 
-func _process(delta):
+func _process(_delta):
 	if player and debug_overlay:
 		var label = debug_overlay.get_node("DebugLabel")
 		label.text += "\nPlayer position: " + str(player.global_position)

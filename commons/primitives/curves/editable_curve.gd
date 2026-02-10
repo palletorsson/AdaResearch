@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 class_name EditableCurve
 
@@ -168,7 +168,7 @@ func _create_grabbable_point() -> Node3D:
 	
 	return point
 
-func _on_control_point_moved(index: int) -> void:
+func _on_control_point_moved(_index: int) -> void:
 	_rebuild_curve()
 	curve_changed.emit(get_control_positions())
 

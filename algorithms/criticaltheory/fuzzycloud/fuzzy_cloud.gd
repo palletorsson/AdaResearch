@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Configuration
 @export_category("Sculpture Configuration")
@@ -521,7 +521,7 @@ func create_optimized_hair_for_blob(parent_node, core_mesh, size):
 	parent_node.add_child(hair_container)
 
 # Alternative hair implementation using a particle system
-func create_particle_hair_for_blob(parent_node, core_mesh, size):
+func create_particle_hair_for_blob(parent_node, core_mesh, _size):
 	var particles = GPUParticles3D.new()
 	particles.name = "HairParticles"
 	

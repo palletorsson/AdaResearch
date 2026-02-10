@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Parameters for modular kitbashing generation
 @export var module_count: int = 30
@@ -83,7 +83,7 @@ func _connect_regenerate_cube(cube):
 		cube.regenerate_requested.connect(_on_regenerate_requested)
 		print("envOne: connected to regenerate cube %s" % cube.get_path())
 
-func _on_regenerate_requested(origin: Vector3, targets: Array, metadata: Dictionary):
+func _on_regenerate_requested(_origin: Vector3, targets: Array, metadata: Dictionary):
 	print("envOne: regenerate signal received with %d target(s)" % targets.size())
 	if targets.is_empty() or _matches_target(targets):
 		regenerate_scene()

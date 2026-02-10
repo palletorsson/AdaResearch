@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 # Coupled Oscillator Lattice
@@ -11,7 +11,7 @@ extends Node3D
 @export var base_height: float = 1.0
 
 @export_group("Oscillator Properties")
-@export var natural_frequency: float = 2.0  # ω₀
+@export var natural_frequency: float = 2.0  # Ï‰â‚€
 @export var mass: float = 1.0
 @export var damping_coefficient: float = 0.02
 
@@ -108,7 +108,7 @@ func _create_oscillator_visual(osc: Dictionary) -> void:
 	sphere.position = osc.position
 	add_child(sphere)
 
-func _apply_excitation(delta: float) -> void:
+func _apply_excitation(_delta: float) -> void:
 	# Find center oscillator
 	var center_x = int(lattice_size.x / 2)
 	var center_y = int(lattice_size.y / 2)

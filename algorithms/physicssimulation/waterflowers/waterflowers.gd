@@ -1,4 +1,4 @@
-# WaterFlowersVR.gd
+﻿# WaterFlowersVR.gd
 # A mesmerizing VR scene with realistic water and physically simulated floating flowers.
 extends Node3D
 
@@ -445,7 +445,7 @@ func create_flower_mesh(flower_type: String, index: int) -> ArrayMesh:
 		"daisy": return create_daisy_mesh(index)
 		"cherry_blossom": return create_cherry_blossom_mesh(index)
 		_: return create_water_lily_mesh(index)
-func create_lotus_mesh(index: int) -> ArrayMesh:
+func create_lotus_mesh(_index: int) -> ArrayMesh:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -465,7 +465,7 @@ func create_lotus_mesh(index: int) -> ArrayMesh:
 			st.add_vertex(Vector3(cos(angle) * layer_radius, layer_height + 0.1, sin(angle) * layer_radius))
 	st.generate_normals()
 	return st.commit()
-func create_lily_mesh(index: int) -> ArrayMesh:
+func create_lily_mesh(_index: int) -> ArrayMesh:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -476,7 +476,7 @@ func create_lily_mesh(index: int) -> ArrayMesh:
 		st.set_uv(Vector2(0.5 + 0.5*cos(angle), 0.5+0.5*sin(angle))); st.add_vertex(Vector3(cos(angle) * 0.6, 0.05, sin(angle) * 0.6))
 	st.generate_normals(); return st.commit()
 func create_rose_mesh(index: int) -> ArrayMesh: return create_lotus_mesh(index)
-func create_daisy_mesh(index: int) -> ArrayMesh:
+func create_daisy_mesh(_index: int) -> ArrayMesh:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -487,7 +487,7 @@ func create_daisy_mesh(index: int) -> ArrayMesh:
 		st.set_uv(Vector2(0.5+0.5*cos(angle),0.5+0.5*sin(angle))); st.add_vertex(Vector3(cos(angle)*0.5, 0.02, sin(angle)*0.5))
 	st.generate_normals(); return st.commit()
 	
-func create_cherry_blossom_mesh(index: int) -> ArrayMesh:
+func create_cherry_blossom_mesh(_index: int) -> ArrayMesh:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -514,7 +514,7 @@ func create_cherry_blossom_mesh(index: int) -> ArrayMesh:
 	st.generate_normals()
 	return st.commit()
 	
-func create_water_lily_mesh(index: int) -> ArrayMesh:
+func create_water_lily_mesh(_index: int) -> ArrayMesh:
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)

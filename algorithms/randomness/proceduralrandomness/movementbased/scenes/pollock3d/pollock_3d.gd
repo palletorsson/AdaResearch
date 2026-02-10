@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Paint node 
 var paint_container: Node3D
@@ -242,7 +242,7 @@ func add_random_splatters(parent, pos, width, color, viscosity):
 		var splat_size = width * randf_range(0.1, 0.5) * viscosity.spread_factor
 		add_splat(parent, splat_pos, splat_size, color)
 		
-func add_paint_drip(parent, pos, width, color, direction, viscosity):
+func add_paint_drip(parent, pos, width, color, _direction, viscosity):
 	# Create a drip that goes downward from the position
 	var drip_length = randf_range(0.2, 1.0) / viscosity.spread_factor
 	

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Simplified Learning Creature inspired by Carl Sims' approach
 # This script creates a simple creature that learns to move through reinforcement learning
@@ -417,7 +417,7 @@ func create_segment(parent_segment, position, segment_index):
 	
 	return segment
 
-func create_limb(limb_name, position, scale_vec=Vector3(1,1,1)):
+func create_limb(limb_name, position, _scale_vec=Vector3(1, 1, 1)):
 	# Create a limb
 	var limb = RigidBody3D.new()
 	limb.name = limb_name

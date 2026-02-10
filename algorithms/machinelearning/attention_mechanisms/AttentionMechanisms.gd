@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 
 @export var token_count: int = 6 : set = _set_token_count
@@ -311,7 +311,7 @@ func _animate_focus(delta: float) -> void:
 			if mat:
 				mat.emission = color_focus * (0.2 + score * 0.8) * focus_intensity
 
-func _animate_attention_matrix(delta: float) -> void:
+func _animate_attention_matrix(_delta: float) -> void:
 	if _matrix_mm == null or _attention_scores.is_empty():
 		return
 

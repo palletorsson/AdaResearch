@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 @onready var plane_node = $Plane
 
 # Export settings
@@ -108,7 +108,7 @@ func _initialize_walk(mi: MeshInstance3D):
 			indices.append(d)
 	set_process(true)
 
-func _process(delta):
+func _process(_delta):
 	if not mesh_instance or vertex_grid.is_empty():
 		return
 	# Move walkers

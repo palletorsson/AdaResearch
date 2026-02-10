@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var left_hand_path: NodePath
 @export var right_hand_path: NodePath
@@ -32,7 +32,7 @@ func _setup_mesh():
 	
 	add_child(_mesh_instance)
 
-func _process(delta):
+func _process(_delta):
 	if not _left_hand or not _right_hand:
 		return
 		

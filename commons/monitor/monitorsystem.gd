@@ -1,4 +1,4 @@
-# GameMonitorSystem.gd
+﻿# GameMonitorSystem.gd
 # Creates 4 different monitor displays with camera views: overhead, third person, mirror, and side view
 extends Node3D
 class_name GameMonitorSystem
@@ -148,7 +148,7 @@ func setup_camera_tracking():
 	# Initial camera positioning
 	update_camera_positions()
 
-func _process(delta):
+func _process(_delta):
 	"""Update camera positions each frame to follow target"""
 	if target_player:
 		update_camera_positions()

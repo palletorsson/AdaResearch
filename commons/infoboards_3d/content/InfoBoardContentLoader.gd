@@ -1,4 +1,4 @@
-# InfoBoardContentLoader.gd
+﻿# InfoBoardContentLoader.gd
 # Loads and manages InfoBoard content from centralized JSON file
 # Single source of truth for all educational content
 extends RefCounted
@@ -227,7 +227,7 @@ static func search_by_concept(concept: String) -> Array:
 	return results
 
 # Export content as readable "book" text
-static func export_as_book(output_path: String = "res://infoboard_book.txt") -> bool:
+static func export_as_book(_output_path: String = "res://infoboard_book.txt") -> bool:
 	if not _is_loaded:
 		load_content()
 

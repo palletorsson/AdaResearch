@@ -1,4 +1,4 @@
-# DendriteGrowthCA.gd
+﻿# DendriteGrowthCA.gd
 # Crystal dendrite formation simulation
 extends LineNetworkCA
 
@@ -19,7 +19,7 @@ func initialize_grid():
 	growth_centers.append(center)
 	grid[center.x][center.y][center.z] = 2  # Dendrite state
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Probabilistic dendrite branching
 	var new_centers = []
 	

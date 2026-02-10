@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 ## Vector Workbench - Universal vector operation visualizer
 ## Two draggable vectors with live computed outputs for all major operations
@@ -26,7 +26,7 @@ var _use_sliders: bool = false  # True when sliders are controlling vectors
 # Result vectors (computed, not grabbable)
 var result_add: Node3D       # A + B
 var result_sub: Node3D       # A - B  
-var result_cross: Node3D     # A × B
+var result_cross: Node3D     # A Ã— B
 var result_proj: Node3D      # proj_B(A) - projection of A onto B
 
 # Visual elements
@@ -66,7 +66,7 @@ func _ready():
 	# Create result vectors (not grabbable)
 	result_add = spawn_vector(Vector3.ZERO, Vector3.ZERO, COLOR_ADD, "A + B", false)
 	result_sub = spawn_vector(Vector3.ZERO, Vector3.ZERO, COLOR_SUB, "A - B", false)
-	result_cross = spawn_vector(Vector3.ZERO, Vector3.ZERO, COLOR_CROSS, "A × B", false)
+	result_cross = spawn_vector(Vector3.ZERO, Vector3.ZERO, COLOR_CROSS, "A Ã— B", false)
 	result_proj = spawn_vector(Vector3.ZERO, Vector3.ZERO, COLOR_PROJ, "proj", false)
 	
 	# Create visual elements
@@ -145,7 +145,7 @@ func _update_addition(a: Vector3, b: Vector3):
 	_update_vector_fast(result_add, sum, _cache_add)
 	_update_vector_fast(result_sub, diff, _cache_sub)
 
-func _update_subtraction(a: Vector3, b: Vector3):
+func _update_subtraction(_a: Vector3, b: Vector3):
 	# Already handled in _update_addition
 	pass
 
@@ -179,7 +179,7 @@ func _update_projection(a: Vector3, b: Vector3):
 		_update_vector_fast(result_proj, Vector3.ZERO, _cache_proj)
 		return
 	
-	# proj_B(A) = (A · B / |B|²) * B
+	# proj_B(A) = (A Â· B / |B|Â²) * B
 	var proj = (a.dot(b) / mag_b_sq) * b
 	_update_vector_fast(result_proj, proj, _cache_proj)
 
@@ -269,13 +269,13 @@ func _update_info(a: Vector3, b: Vector3):
 	var lines := []
 	lines.append("A = (%.2f, %.2f, %.2f)  |A| = %.2f" % [a.x, a.y, a.z, mag_a])
 	lines.append("B = (%.2f, %.2f, %.2f)  |B| = %.2f" % [b.x, b.y, b.z, mag_b])
-	lines.append("─────────────────────────────")
+	lines.append("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€")
 	lines.append("A + B = (%.2f, %.2f, %.2f)" % [(a+b).x, (a+b).y, (a+b).z])
 	lines.append("A - B = (%.2f, %.2f, %.2f)" % [(a-b).x, (a-b).y, (a-b).z])
-	lines.append("─────────────────────────────")
-	lines.append("A · B = %.2f   θ = %.1f°" % [dot, angle_deg])
-	lines.append("A × B = (%.2f, %.2f, %.2f)  |A×B| = %.2f" % [cross.x, cross.y, cross.z, cross.length()])
-	lines.append("─────────────────────────────")
+	lines.append("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€")
+	lines.append("A Â· B = %.2f   Î¸ = %.1fÂ°" % [dot, angle_deg])
+	lines.append("A Ã— B = (%.2f, %.2f, %.2f)  |AÃ—B| = %.2f" % [cross.x, cross.y, cross.z, cross.length()])
+	lines.append("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€")
 	lines.append("proj_B(A) = (%.2f, %.2f, %.2f)" % [proj.x, proj.y, proj.z])
 	lines.append("")
 	lines.append("[1] All  [2] Add  [3] Dot  [4] Cross  [5] Proj  [R] Reset")
@@ -299,7 +299,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE

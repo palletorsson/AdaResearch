@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name FoldingCubeInteractive
 
 ## Interactive Folding Cube - Grab edges to fold manually
@@ -88,7 +88,7 @@ func _setup_fold_handle() -> void:
 		
 		add_child(_fold_handle)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _is_grabbed and _fold_handle:
 		# Map handle Y position to fold progress
 		var handle_y = _fold_handle.global_position.y - global_position.y

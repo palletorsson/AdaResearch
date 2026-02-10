@@ -49,6 +49,8 @@
 
   "sections": {
     "intro": ["pad", "arp"],
+    "verse": ["pad", "arp", "bass", "hihat"],
+    "chorus": ["kick", "snare", "hihat", "bass", "supersaw", "arp", "pad"],
     "build": ["pad", "arp", "bass", "hihat"],
     "main": ["kick", "snare", "hihat", "bass", "supersaw", "arp", "pad"],
     "breakdown": ["pad", "arp"],

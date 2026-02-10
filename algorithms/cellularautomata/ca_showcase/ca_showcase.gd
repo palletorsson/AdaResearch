@@ -1,4 +1,4 @@
-# CAVRShowcase.gd
+﻿# CAVRShowcase.gd
 # Comprehensive VR Cellular Automata Showcase System
 # Attach to Node3D in your VR scene
 extends Node3D
@@ -433,7 +433,7 @@ func activate_cell(showcase: Node3D, x: int, y: int, z: int, color: Color):
 	if not active_cells.has(Vector3i(x, y, z)):
 		active_cells.append(Vector3i(x, y, z))
 
-func create_2d_grid_on_platform(parent: Node3D, label: String) -> Array:
+func create_2d_grid_on_platform(_parent: Node3D, label: String) -> Array:
 	var grid = []
 	grid.resize(GRID_SIZE)
 	
@@ -979,7 +979,7 @@ func duplicate_3d_grid(grid: Array) -> Array:
 
 
 # VR Interaction handlers
-func on_vr_controller_input(controller_id: int, input_type: String):
+func on_vr_controller_input(_controller_id: int, input_type: String):
 	if input_type == "trigger_pressed":
 		cycle_to_next_showcase()
 	elif input_type == "grip_pressed":

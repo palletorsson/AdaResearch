@@ -57,9 +57,9 @@ func _create_display() -> void:
 	quad.size = Vector2(panel_width, panel_height)
 	_panel.mesh = quad
 
-	# Dark semi-transparent background
+	# Light semi-transparent background
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(0.08, 0.08, 0.12, 0.85)
+	mat.albedo_color = Color(0.25, 0.25, 0.30, 0.75)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	_panel.material_override = mat

@@ -1,4 +1,4 @@
-# ModularBlockChair.gd
+﻿# ModularBlockChair.gd
 # Procedural generation of De Stijl modular block chairs
 # Inspired by Gerrit Rietveld's Red and Blue Chair
 extends Node3D
@@ -53,7 +53,7 @@ func generate_chair():
 		support.material_override = primary_colors[4] if i % 2 == 0 else primary_colors[3]  # Black/White
 		add_child(support)
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

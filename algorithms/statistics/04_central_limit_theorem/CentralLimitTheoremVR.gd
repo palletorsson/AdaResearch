@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Interactive VR Central Limit Theorem - Sampling Distribution Demo
 # Shows how sample means approach normal distribution regardless of population shape
@@ -234,7 +234,7 @@ func start_sampling_animation():
 	
 	sampling_tween.tween_callback(create_sample_means_histogram)
 
-func take_animated_sample(sample_index: int):
+func take_animated_sample(_sample_index: int):
 	"""Take a single sample with animation"""
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -452,16 +452,16 @@ func update_info_display():
 	if population_data.size() > 0:
 		var pop_mean = calculate_mean(population_data)
 		var pop_std = sqrt(calculate_variance(population_data))
-		text += "Population μ: %.2f\n" % pop_mean
-		text += "Population σ: %.2f\n\n" % pop_std
+		text += "Population Î¼: %.2f\n" % pop_mean
+		text += "Population Ïƒ: %.2f\n\n" % pop_std
 		
 		if sample_means.size() > 0:
 			var sample_mean_avg = calculate_mean(sample_means)
 			var sample_mean_std = sqrt(calculate_variance(sample_means))
 			var theoretical_sem = pop_std / sqrt(sample_size)
 			
-			text += "Sample Means μ: %.2f\n" % sample_mean_avg
-			text += "Sample Means σ: %.2f\n" % sample_mean_std
+			text += "Sample Means Î¼: %.2f\n" % sample_mean_avg
+			text += "Sample Means Ïƒ: %.2f\n" % sample_mean_std
 			text += "Theoretical SEM: %.2f" % theoretical_sem
 	
 	info_display.text = text

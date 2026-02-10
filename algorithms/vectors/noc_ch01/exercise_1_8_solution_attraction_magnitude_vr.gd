@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 1.8: Exercise 1.8: Attraction Magnitude
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -87,7 +87,7 @@ func _setup_line() -> void:
 	_line_instance.material_override = MAT_LINE
 	_sim_root.add_child(_line_instance)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var to_attractor := _attractor_position - _position
 	var distance := to_attractor.length()
 

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Arrays and Grid Understanding Visualization
 # Demonstrates fundamental data structure concepts in 3D space
@@ -156,7 +156,7 @@ func animate_arrays():
 			var wave_height = sin(time + i * 0.3 + j * 0.3) * 0.4
 			element.position.y = wave_height
 
-func demonstrate_operations(delta):
+func demonstrate_operations(_delta):
 	# Cycle through different operations
 	if operation_timer > 3.0:
 		operation_timer = 0.0

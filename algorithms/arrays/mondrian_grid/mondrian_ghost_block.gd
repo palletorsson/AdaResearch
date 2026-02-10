@@ -1,4 +1,4 @@
-extends CSGBox3D
+﻿extends CSGBox3D
 
 # MondrianGhostBlock.gd
 # Animates the block from opaque white to transparent fading in and out.
@@ -17,7 +17,7 @@ func _ready():
 	if mat and mat is StandardMaterial3D:
 		material_override = mat.duplicate()
 
-func _process(delta):
+func _process(_delta):
 	var t = Time.get_ticks_msec() / 1000.0 + time_offset
 	
 	# Smooth sine wave opacity: 0.1 to 0.8

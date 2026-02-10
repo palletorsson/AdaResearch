@@ -1,4 +1,4 @@
-# TerrainDemoController.gd
+﻿# TerrainDemoController.gd
 # Controls the walkable terrain demo
 # Provides UI and camera controls for testing marching cubes terrain
 
@@ -292,15 +292,15 @@ func _on_generation_progress(percentage: float):
 	
 	var status = ""
 	if percentage <= 25:
-		status = "🏗️ Creating voxel grid..."
+		status = "ðŸ—ï¸ Creating voxel grid..."
 	elif percentage <= 50:
-		status = "🌄 Generating height field..."
+		status = "ðŸŒ„ Generating height field..."
 	elif percentage <= 75:
-		status = "🎨 Creating terrain meshes..."
+		status = "ðŸŽ¨ Creating terrain meshes..."
 	else:
-		status = "⚡ Building collision..."
+		status = "âš¡ Building collision..."
 	
-	stats_text.text = "[color=cyan]🔄 Generating terrain...[/color]\n[color=gray]%s[/color]\n[color=white]Progress: %.0f%%[/color]" % [status, percentage]
+	stats_text.text = "[color=cyan]ðŸ”„ Generating terrain...[/color]\n[color=gray]%s[/color]\n[color=white]Progress: %.0f%%[/color]" % [status, percentage]
 
 func _on_generation_complete():
 	"""Handle generation completion"""
@@ -322,13 +322,13 @@ func update_terrain_statistics():
 	var info = terrain_generator.get_terrain_info()
 	
 	var stats_html = "[color=cyan]Terrain Statistics:[/color]\n"
-	stats_html += "• Terrain Size: %.0fx%.0f units\n" % [info.terrain_size.x, info.terrain_size.y]
-	stats_html += "• Height Variation: %.1f units\n" % info.height_variation
-	stats_html += "• Terrain Chunks: %d\n" % info.terrain_chunks
-	stats_html += "• Mesh Instances: %d\n" % info.mesh_instances
-	stats_html += "• Collision Bodies: %d\n" % info.collision_bodies
-	stats_html += "• Total Vertices: %s\n" % format_number(info.total_vertices)
-	stats_html += "• Total Triangles: %s\n" % format_number(info.total_triangles)
+	stats_html += "â€¢ Terrain Size: %.0fx%.0f units\n" % [info.terrain_size.x, info.terrain_size.y]
+	stats_html += "â€¢ Height Variation: %.1f units\n" % info.height_variation
+	stats_html += "â€¢ Terrain Chunks: %d\n" % info.terrain_chunks
+	stats_html += "â€¢ Mesh Instances: %d\n" % info.mesh_instances
+	stats_html += "â€¢ Collision Bodies: %d\n" % info.collision_bodies
+	stats_html += "â€¢ Total Vertices: %s\n" % format_number(info.total_vertices)
+	stats_html += "â€¢ Total Triangles: %s\n" % format_number(info.total_triangles)
 	
 	# Count VR navigation tiles
 	var nav_tile_count = 0
@@ -337,12 +337,12 @@ func update_terrain_statistics():
 			nav_tile_count += 1
 	
 	stats_html += "\n[color=green]VR Navigation:[/color]\n"
-	stats_html += "• Walkable Tiles: %d (1x1m)\n" % nav_tile_count
-	stats_html += "• VR Controllers: %d\n" % vr_controllers.size()
+	stats_html += "â€¢ Walkable Tiles: %d (1x1m)\n" % nav_tile_count
+	stats_html += "â€¢ VR Controllers: %d\n" % vr_controllers.size()
 	
 	# Memory estimate
 	var memory_mb = (info.total_vertices * 12 + info.total_triangles * 6) / (1024 * 1024)
-	stats_html += "\n• Memory Est: %.1f MB" % memory_mb
+	stats_html += "\nâ€¢ Memory Est: %.1f MB" % memory_mb
 	
 	stats_text.text = stats_html
 
@@ -377,11 +377,11 @@ func _on_noise_changed(value: float):
 	noise_label.text = "Noise Frequency: %.3f" % value
 
 # VR teleportation handlers
-func _on_vr_button_pressed(controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
+func _on_vr_button_pressed(_controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
 	if button == "trigger_click" or button == "by_button":
 		teleport_marker.visible = true
 
-func _on_vr_button_released(controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
+func _on_vr_button_released(_controller: XRController3D, teleport_ray: RayCast3D, teleport_marker: MeshInstance3D, button: String):
 	if button == "trigger_click" or button == "by_button":
 		teleport_marker.visible = false
 		

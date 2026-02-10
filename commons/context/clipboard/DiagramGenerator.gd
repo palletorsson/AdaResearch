@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name DiagramGenerator
 
 # Generates procedural diagrams for tutorials
@@ -333,7 +333,7 @@ static func draw_arrow_down(img: Image, x: int, y: int, color: Color):
             img.set_pixel(x + dx, y + 20 - dy, color)
 
 
-static func draw_text(img: Image, x: float, y: float, text: String, color: Color, centered: bool):
+static func draw_text(_img: Image, x: float, y: float, text: String, color: Color, centered: bool):
     # Note: Actual text rendering requires a font
     # This is a placeholder - you'd use a bitmap font or rasterize text
     # For now, we'll skip actual text rendering

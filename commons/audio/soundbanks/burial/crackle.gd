@@ -1,4 +1,4 @@
-# Burial Vinyl Crackle - ALWAYS PRESENT
+﻿# Burial Vinyl Crackle - ALWAYS PRESENT
 # Research: burial.md
 #
 # Character: Constant vinyl surface noise with pops and clicks
@@ -22,7 +22,7 @@ const POP_LEVEL = 0.12            # Pop volume
 const BIG_POP_LEVEL = 0.25        # Big pop volume
 
 
-static func generate(t: float, _trigger_time: float = 0.0) -> float:
+static func generate(_t: float, _trigger_time: float = 0.0) -> float:
 	# Base crackle - always present
 	var crackle = (randf() * 2.0 - 1.0) * BASE_LEVEL
 	

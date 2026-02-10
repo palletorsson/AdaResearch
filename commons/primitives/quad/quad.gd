@@ -1,4 +1,4 @@
-# Quad.gd - Creates an editable quad split into two triangles with different colors
+﻿# Quad.gd - Creates an editable quad split into two triangles with different colors
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
@@ -146,7 +146,7 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.set_uv(Vector2(1.0, 0.0))
 	st.add_vertex(v1)
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
@@ -257,8 +257,8 @@ func print_help():
 	print("R: Reset to square")
 	print("Q: Reset to rectangle")
 	print("D: Reset to diamond")
-	print("Pink Triangle: Bottom-left �+' Bottom-right �+' Top-right")
-	print("Black Triangle: Bottom-left �+' Top-right �+' Top-left")
+	print("Pink Triangle: Bottom-left ï¿½+' Bottom-right ï¿½+' Top-right")
+	print("Black Triangle: Bottom-left ï¿½+' Top-right ï¿½+' Top-left")
 	print("============================")
 
 func get_quad_info() -> Dictionary:

@@ -1,4 +1,4 @@
-# throw_ball_sphere.gd
+﻿# throw_ball_sphere.gd
 # Extends grab_sphere to add throwing mechanics with velocity tracking
 extends "res://commons/primitives/point/grab_sphere.gd"
 
@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 		_track_velocity(delta)
 		_update_velocity_vector()
 
-func _track_velocity(delta: float) -> void:
+func _track_velocity(_delta: float) -> void:
 	"""Track position history for velocity calculation"""
 	var current_pos = global_position
 	var current_time = Time.get_ticks_msec() / 1000.0

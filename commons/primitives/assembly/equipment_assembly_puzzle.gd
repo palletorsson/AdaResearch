@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 ## Equipment Assembly Puzzle - Level 2 Compositional Assembly
 ##
@@ -7,9 +7,9 @@ extends Node3D
 ## Equipment is sourced from the EquipmentRegistry (built by assembly_line_puzzle).
 ##
 ## This is the second level of the compositional assembly hierarchy:
-## Level 1: Primitives → Equipment (assembly_line_puzzle)
-## Level 2: Equipment → Workstations (this puzzle)
-## Level 3: Workstations → Labs (future)
+## Level 1: Primitives â†’ Equipment (assembly_line_puzzle)
+## Level 2: Equipment â†’ Workstations (this puzzle)
+## Level 3: Workstations â†’ Labs (future)
 
 signal equipment_placed(equipment_type: String, slot_index: int)
 signal workstation_completed(workstation_type: String)
@@ -410,7 +410,7 @@ func _snap_equipment_to_slot(equipment: Node3D, slot_index: int) -> void:
 
 	equipment_placed.emit(ws.required_equipment[slot_index], slot_index)
 
-func _on_equipment_snapped(equipment: Node3D, slot_index: int) -> void:
+func _on_equipment_snapped(_equipment: Node3D, slot_index: int) -> void:
 	# Check if all slots are filled
 	var all_filled = true
 	for filled in _slot_filled:
@@ -463,7 +463,7 @@ func _on_workstation_complete() -> void:
 	_current_workstation_index = (_current_workstation_index + 1) % _workstation_sequence.size()
 	_setup_current_workstation_ghost()
 
-func _update_ghost_pulse(delta: float) -> void:
+func _update_ghost_pulse(_delta: float) -> void:
 	if _ghost_meshes.is_empty():
 		return
 

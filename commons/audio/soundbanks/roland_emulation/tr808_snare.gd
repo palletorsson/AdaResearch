@@ -1,4 +1,4 @@
-# TR-808 Snare Drum
+﻿# TR-808 Snare Drum
 # Noise burst + two sine tones for that punchy synthetic snare
 extends RefCounted
 class_name TR808Snare
@@ -36,7 +36,7 @@ func trigger(vel: float = 1.0):
 	velocity = vel
 
 
-func generate_sample(time: float) -> Dictionary:
+func generate_sample(_time: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

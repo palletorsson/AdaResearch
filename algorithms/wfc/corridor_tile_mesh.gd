@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name CorridorTileMesh
 
 # Custom mesh generator for corridor tiles with visible doorways
@@ -175,7 +175,7 @@ static func create_room_mesh(size: float) -> BoxMesh:
 	box.size = Vector3(size * 0.9, size * 0.8, size * 0.9)
 	return box
 
-static func create_doorway_mesh(tile_id: String, size: float) -> BoxMesh:
+static func create_doorway_mesh(_tile_id: String, size: float) -> BoxMesh:
 	"""Create a doorway mesh (thin opening)"""
 	var box = BoxMesh.new()
 	box.size = Vector3(size * 0.8, size * 0.8, size * 0.3)
@@ -193,13 +193,13 @@ static func create_ew_corridor_mesh(size: float) -> BoxMesh:
 	box.size = Vector3(size, size * 0.8, size * 0.3)
 	return box
 
-static func create_corner_mesh(tile_id: String, size: float) -> BoxMesh:
+static func create_corner_mesh(_tile_id: String, size: float) -> BoxMesh:
 	"""Corner corridor (L-shape)"""
 	var box = BoxMesh.new()
 	box.size = Vector3(size * 0.7, size * 0.8, size * 0.7)
 	return box
 
-static func create_tjunction_mesh(tile_id: String, size: float) -> BoxMesh:
+static func create_tjunction_mesh(_tile_id: String, size: float) -> BoxMesh:
 	"""T-junction corridor"""
 	var box = BoxMesh.new()
 	box.size = Vector3(size * 0.8, size * 0.8, size * 0.8)

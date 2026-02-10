@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Simple Fluid Simulation using Particle-Based Method
 # Demonstrates basic fluid dynamics with attraction/repulsion forces
@@ -180,7 +180,7 @@ func setup_camera():
 	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func simulate_fluid(delta):
+func simulate_fluid(_delta):
 	# Use fixed time step for stability
 	var fixed_delta = time_step
 	

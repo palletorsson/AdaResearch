@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Implementation of a 3D representation inspired by Mona Hatoum's "Remains to be Seen"
 # This script creates a 3D installation with suspended furniture frames made of metal wire
@@ -300,7 +300,7 @@ func add_suspension_wires(frames_parent):
 			# Add to scene
 			add_child(wire)
 
-func create_swing_animation(animation_player, frame):
+func create_swing_animation(_animation_player, frame):
 	# Create animation for subtle swinging motion
 	var animation = Animation.new()
 	
@@ -329,6 +329,6 @@ func create_swing_animation(animation_player, frame):
 	
 
 
-func _process(delta):
+func _process(_delta):
 	# Add any global animations or interactions here
 	pass

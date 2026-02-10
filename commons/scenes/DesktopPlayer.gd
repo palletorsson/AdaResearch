@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name DesktopPlayer
 
 # Movement settings
@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _apply_camera_rotation(delta: float):
+func _apply_camera_rotation(_delta: float):
 	if mouse_motion == Vector2.ZERO:
 		return
 
@@ -108,7 +108,7 @@ func _apply_camera_rotation(delta: float):
 
 	mouse_motion = Vector2.ZERO
 
-func _process(delta: float):
+func _process(_delta: float):
 	_check_for_interactable()
 
 func _check_for_interactable():
@@ -187,7 +187,7 @@ func _is_interactable(node: Node) -> bool:
 
 	return false
 
-func _highlight_interactable(node: Node, highlight: bool):
+func _highlight_interactable(_node: Node, highlight: bool):
 	"""Visual feedback for interactable objects"""
 	# Update crosshair color
 	if crosshair:

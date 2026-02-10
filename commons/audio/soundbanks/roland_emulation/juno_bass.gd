@@ -1,4 +1,4 @@
-# Juno-106 Bass
+﻿# Juno-106 Bass
 # Punchy, round, sits perfectly in a mix
 extends RefCounted
 class_name JunoBass
@@ -54,7 +54,7 @@ func release():
 	amp_env_phase = "release"
 
 
-func generate_sample(time: float) -> Dictionary:
+func generate_sample(_time: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

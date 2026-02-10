@@ -1,4 +1,4 @@
-extends XRToolsPickable
+﻿extends XRToolsPickable
 
 @export var alternate_material : Material
 @onready var task_manager_controller = $"../../../../TaskContainerModel/TaskManagerController"
@@ -18,7 +18,7 @@ var _original_position: Vector3
 
 var score = 0
 
-func _on_grabbed(pickable: Variant, by: Variant) -> void:
+func _on_grabbed(_pickable: Variant, by: Variant) -> void:
 	
 	if is_in_group("teslasphere"):
 		emit_signal("item_grabbed")

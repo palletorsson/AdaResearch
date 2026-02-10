@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Magnetic simulation parameters
 @export var field_size := Vector3(10, 10, 10)
@@ -30,7 +30,7 @@ func _ready():
 
 	print("Magnetic Simulation - VR Ready!")
 
-func _process(delta):
+func _process(_delta):
 	# Update the field every frame
 	update_field()
 

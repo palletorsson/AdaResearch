@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends "res://commons/primitives/cubes/grab_cube.gd"
 
 ## Scalable Grab Cube
@@ -101,7 +101,7 @@ func _ready() -> void:
 		released.connect(_on_released)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
@@ -114,13 +114,13 @@ func _physics_process(delta: float) -> void:
 		_process_scaling()
 
 
-func _on_grabbed(_pickable, by: Node3D) -> void:
+func _on_grabbed(_pickable, _by: Node3D) -> void:
 	# Check if this is a second hand grab
 	if _grab_driver and _grab_driver.secondary:
 		_start_scaling()
 
 
-func _on_released(_pickable, by: Node3D) -> void:
+func _on_released(_pickable, _by: Node3D) -> void:
 	# Check if we lost the secondary grab
 	if _is_scaling and (not _grab_driver or not _grab_driver.secondary):
 		_stop_scaling()

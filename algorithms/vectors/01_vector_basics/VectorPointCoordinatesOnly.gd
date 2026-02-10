@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 @export var axis_length: float = 1.5
 
@@ -20,7 +20,7 @@ func _spawn_vectors() -> void:
 	y_line = _spawn_axis(Vector3.UP, Color.GREEN, "Y")
 	z_line = _spawn_axis(Vector3.BACK, Color.BLUE, "Z")
 
-func _spawn_axis(direction: Vector3, color: Color, name: String) -> Node3D:
+func _spawn_axis(_direction: Vector3, color: Color, name: String) -> Node3D:
 	var line = spawn_vector(Vector3.ZERO, Vector3.ZERO, color, "%s-line" % name, false)
 	_hide_vector_builtins(line)
 	_ensure_axis_label(name, color)

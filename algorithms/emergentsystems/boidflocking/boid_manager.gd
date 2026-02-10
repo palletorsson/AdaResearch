@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name BoidManager
 
@@ -79,7 +79,7 @@ func _connect_controller_signals():
 			right_controller.connect("button_pressed", Callable(self, "_on_right_controller_button_pressed"))
 			right_controller.connect("button_released", Callable(self, "_on_right_controller_button_released"))
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Handle controller interaction with boids
 	_process_controller_interaction()
 
@@ -96,7 +96,7 @@ func _process_controller_interaction():
 		var controller_forward = -right_controller.global_transform.basis.z.normalized()
 		_interact_with_nearby_boids(controller_pos, controller_forward, false)  # false for repel
 
-func _interact_with_nearby_boids(controller_pos, direction, attract):
+func _interact_with_nearby_boids(controller_pos, _direction, attract):
 	for boid in boids:
 		var distance = controller_pos.distance_to(boid.global_position)
 		

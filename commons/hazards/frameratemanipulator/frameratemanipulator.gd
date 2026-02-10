@@ -1,4 +1,4 @@
-# FramerateManipulatorEntity.gd
+﻿# FramerateManipulatorEntity.gd
 # Evil entity that gradually changes the game's framerate to mess with player experience
 extends Node3D
 class_name FramerateManipulatorEntity
@@ -224,7 +224,7 @@ func _apply_chaos_mode(delta):
 		ChaosMode.MALICIOUS_FREEZE:
 			_apply_malicious_freeze(delta)
 
-func _apply_subtle_degradation(delta):
+func _apply_subtle_degradation(_delta):
 	# Gradually reduce FPS over time
 	if fps_change_timer >= fps_change_interval:
 		if current_target_fps > target_fps_min:
@@ -232,7 +232,7 @@ func _apply_subtle_degradation(delta):
 			_set_target_fps(current_target_fps)
 		fps_change_timer = 0.0
 
-func _apply_random_spikes(delta):
+func _apply_random_spikes(_delta):
 	# Random FPS spikes and drops
 	if fps_change_timer >= fps_change_interval * randf_range(0.5, 2.0):
 		var spike_direction = 1 if randf() > 0.5 else -1
@@ -243,7 +243,7 @@ func _apply_random_spikes(delta):
 		_set_target_fps(current_target_fps)
 		fps_change_timer = 0.0
 
-func _apply_progressive_slowdown(delta):
+func _apply_progressive_slowdown(_delta):
 	# Continuously slow down the game
 	if fps_change_timer >= fps_change_interval * 0.5:  # More frequent changes
 		if current_target_fps > target_fps_min:
@@ -252,14 +252,14 @@ func _apply_progressive_slowdown(delta):
 			_set_target_fps(current_target_fps)
 		fps_change_timer = 0.0
 
-func _apply_chaotic_swings(delta):
+func _apply_chaotic_swings(_delta):
 	# Wild FPS swings
 	if fps_change_timer >= fps_change_interval * randf_range(0.2, 1.0):
 		current_target_fps = randi_range(target_fps_min, target_fps_max)
 		_set_target_fps(current_target_fps)
 		fps_change_timer = 0.0
 
-func _apply_malicious_freeze(delta):
+func _apply_malicious_freeze(_delta):
 	# Periodic screen freezes
 	if freeze_timer >= screen_freeze_interval and not is_screen_frozen:
 		_trigger_screen_freeze()
@@ -284,7 +284,7 @@ func _calculate_performance_severity(fps: int) -> String:
 	else:
 		return "critical"
 
-func _apply_frame_manipulations(delta):
+func _apply_frame_manipulations(_delta):
 	# Apply artificial lag
 	if enable_artificial_lag and lag_timer >= lag_interval:
 		_trigger_artificial_lag()

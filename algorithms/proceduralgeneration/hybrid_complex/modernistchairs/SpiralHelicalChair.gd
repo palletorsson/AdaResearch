@@ -1,4 +1,4 @@
-# SpiralHelicalChair.gd
+﻿# SpiralHelicalChair.gd
 # Procedural generation of spiral helical chairs
 extends Node3D
 class_name SpiralHelicalChair
@@ -84,7 +84,7 @@ func create_tube_from_curve(curve: Curve3D) -> ArrayMesh:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return array_mesh
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

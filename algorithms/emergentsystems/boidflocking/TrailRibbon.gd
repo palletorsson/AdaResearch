@@ -1,4 +1,4 @@
-extends MeshInstance3D
+﻿extends MeshInstance3D
 
 @export var length: int = 30
 @export var width: float = 0.2
@@ -21,7 +21,7 @@ func _ready():
 	global_position = Vector3.ZERO
 	global_rotation = Vector3.ZERO
 
-func _process(delta):
+func _process(_delta):
 	var parent = get_parent()
 	if not is_instance_valid(parent):
 		queue_free()

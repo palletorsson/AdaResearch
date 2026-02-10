@@ -1,4 +1,4 @@
-extends "res://algorithms/joint/shared/joint_demo_base.gd"
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var leg: RigidBody3D
 
@@ -21,6 +21,6 @@ func _build_demo():
 
 	add_label("Character Joint Hip", Vector3(0.0, 5.5, 2.5))
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		leg.apply_impulse(Vector3(2.0, 0.0, 1.5))

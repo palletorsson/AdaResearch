@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Vector-Joint Playground
 # Human-scale VR arena with 6 interactive stations.
@@ -13,9 +13,9 @@ const STATION_COUNT := 6
 const STATION_ARC_DEG := 180.0
 
 # Colors (matching GadgetBase palette)
-const COLOR_A := Color(1.0, 0.55, 0.2)       # Orange – vector A
-const COLOR_B := Color(0.3, 0.8, 0.9)        # Cyan – vector B
-const COLOR_RESULT := Color(0.95, 0.85, 0.2)  # Yellow – result
+const COLOR_A := Color(1.0, 0.55, 0.2)       # Orange â€“ vector A
+const COLOR_B := Color(0.3, 0.8, 0.9)        # Cyan â€“ vector B
+const COLOR_RESULT := Color(0.95, 0.85, 0.2)  # Yellow â€“ result
 const COLOR_METAL := Color(0.45, 0.48, 0.52)
 const COLOR_DARK := Color(0.2, 0.22, 0.25)
 const COLOR_FRAME := Color(0.15, 0.16, 0.18)
@@ -30,9 +30,9 @@ var _mat_cache: Dictionary = {}
 var _text_timer: float = 0.0
 const TEXT_INTERVAL := 0.1
 
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 #  LIFECYCLE
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _ready():
 	_build_arena()
@@ -56,9 +56,9 @@ func _process(delta):
 	_update_waterwheel(do_text)
 	_update_spring(do_text)
 
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 #  ARENA
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_arena():
 	# Floor
@@ -89,9 +89,9 @@ func _build_arena():
 	marker.position.y = 0.12
 	add_child(marker)
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 1: THE CRANE — Magnitude → HingeJoint3D
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 1: THE CRANE â€” Magnitude â†’ HingeJoint3D
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_crane():
 	var sd := _init_station("Crane", 0)
@@ -133,7 +133,7 @@ func _build_station_crane():
 	sd.caches = [_cache_nodes(vec)]
 
 	# Info panel
-	sd.info_label = _build_info_panel(sd.root, "THE CRANE", "|v| = sqrt(x² + y² + z²)", "Magnitude controls arm angle", Vector3(0, 4.8, -1.0))
+	sd.info_label = _build_info_panel(sd.root, "THE CRANE", "|v| = sqrt(xÂ² + yÂ² + zÂ²)", "Magnitude controls arm angle", Vector3(0, 4.8, -1.0))
 
 func _update_crane(do_text: bool):
 	var sd: Dictionary = _stations[0]
@@ -147,11 +147,11 @@ func _update_crane(do_text: bool):
 	var hinge: HingeJoint3D = sd.joints[0]
 	hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, vel)
 	if do_text and sd.info_label:
-		sd.info_label.text = "v = (%.1f, %.1f, %.1f)\n|v| = %.2f\nArm angle = %.1f°" % [v.x, v.y, v.z, mag, target_deg]
+		sd.info_label.text = "v = (%.1f, %.1f, %.1f)\n|v| = %.2f\nArm angle = %.1fÂ°" % [v.x, v.y, v.z, mag, target_deg]
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 2: THE PISTONS — Addition → SliderJoint3D ×2
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 2: THE PISTONS â€” Addition â†’ SliderJoint3D Ã—2
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_pistons():
 	var sd := _init_station("Pistons", 1)
@@ -161,12 +161,12 @@ func _build_station_pistons():
 	var frame_v = h.create_static_body(Vector3(0, 1.25, 0), h.make_box_mesh(Vector3(0.2, 2.5, 0.2)), COLOR_FRAME, "FrameV")
 	var frame_h = h.create_static_body(Vector3(1.25, 0, 0), h.make_box_mesh(Vector3(2.5, 0.2, 0.2)), COLOR_FRAME, "FrameH")
 
-	# Piston A – horizontal (X-axis)
+	# Piston A â€“ horizontal (X-axis)
 	var piston_a = h.create_rigid_body(Vector3(0.5, 0, 0), h.make_box_mesh(Vector3(0.4, 0.3, 0.3)), COLOR_A, 1.5, "PistonA")
 	piston_a.linear_damp = 3.0
 	var slider_a = h.create_slider_joint(frame_h, piston_a, Vector3(0.5, 0, 0), 0.0, 2.0, "SliderA")
 
-	# Piston B – vertical (Y-axis)
+	# Piston B â€“ vertical (Y-axis)
 	var piston_b = h.create_rigid_body(Vector3(0, 0.5, 0), h.make_box_mesh(Vector3(0.3, 0.4, 0.3)), COLOR_B, 1.5, "PistonB")
 	piston_b.linear_damp = 3.0
 	piston_b.gravity_scale = 0.0  # Prevent gravity pulling it down
@@ -216,9 +216,9 @@ func _update_pistons(do_text: bool):
 		var r := a + b
 		sd.info_label.text = "A = (%.1f, %.1f, %.1f)  |A| = %.2f\nB = (%.1f, %.1f, %.1f)  |B| = %.2f\nA+B = (%.1f, %.1f, %.1f)" % [a.x, a.y, a.z, mag_a, b.x, b.y, b.z, mag_b, r.x, r.y, r.z]
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 3: THE DOOR — Dot Product → HingeJoint3D ×2
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 3: THE DOOR â€” Dot Product â†’ HingeJoint3D Ã—2
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_door():
 	var sd := _init_station("Door", 2)
@@ -254,7 +254,7 @@ func _build_station_door():
 	sd.vectors = [vec_a, vec_b]
 	sd.caches = [_cache_nodes(vec_a), _cache_nodes(vec_b)]
 
-	sd.info_label = _build_info_panel(sd.root, "THE DOOR", "A · B = |A||B| cos θ", "Dot product angle opens the doors", Vector3(0, 4.2, -1.0))
+	sd.info_label = _build_info_panel(sd.root, "THE DOOR", "A Â· B = |A||B| cos Î¸", "Dot product angle opens the doors", Vector3(0, 4.2, -1.0))
 
 func _update_door(do_text: bool):
 	var sd: Dictionary = _stations[2]
@@ -279,11 +279,11 @@ func _update_door(do_text: bool):
 	hinge_b.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, vel_b)
 
 	if do_text and sd.info_label:
-		sd.info_label.text = "A · B = %.2f\n|A| = %.2f  |B| = %.2f\nθ = %.1f°\nDoor angle = %.1f°" % [dot, mag_a, mag_b, rad_to_deg(theta), rad_to_deg(theta)]
+		sd.info_label.text = "A Â· B = %.2f\n|A| = %.2f  |B| = %.2f\nÎ¸ = %.1fÂ°\nDoor angle = %.1fÂ°" % [dot, mag_a, mag_b, rad_to_deg(theta), rad_to_deg(theta)]
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 4: THE SEESAW — Subtraction → HingeJoint3D + gravity
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 4: THE SEESAW â€” Subtraction â†’ HingeJoint3D + gravity
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_seesaw():
 	var sd := _init_station("Seesaw", 3)
@@ -331,7 +331,7 @@ func _build_station_seesaw():
 	sd.vectors = [vec_a, vec_b]
 	sd.caches = [_cache_nodes(vec_a), _cache_nodes(vec_b)]
 
-	sd.info_label = _build_info_panel(sd.root, "THE SEESAW", "C = A − B = A + (−B)", "Magnitudes as weights — gravity shows the difference", Vector3(0, 3.5, -1.0))
+	sd.info_label = _build_info_panel(sd.root, "THE SEESAW", "C = A âˆ’ B = A + (âˆ’B)", "Magnitudes as weights â€” gravity shows the difference", Vector3(0, 3.5, -1.0))
 
 func _update_seesaw(do_text: bool):
 	var sd: Dictionary = _stations[3]
@@ -353,11 +353,11 @@ func _update_seesaw(do_text: bool):
 
 	if do_text and sd.info_label:
 		var diff := a - b
-		sd.info_label.text = "|A| = %.2f (weight left)\n|B| = %.2f (weight right)\nA−B = (%.1f, %.1f, %.1f)\n|A−B| = %.2f" % [a.length(), b.length(), diff.x, diff.y, diff.z, diff.length()]
+		sd.info_label.text = "|A| = %.2f (weight left)\n|B| = %.2f (weight right)\nAâˆ’B = (%.1f, %.1f, %.1f)\n|Aâˆ’B| = %.2f" % [a.length(), b.length(), diff.x, diff.y, diff.z, diff.length()]
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 5: THE WATERWHEEL — Cross Product → HingeJoint3D
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 5: THE WATERWHEEL â€” Cross Product â†’ HingeJoint3D
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_waterwheel():
 	var sd := _init_station("Waterwheel", 4)
@@ -407,7 +407,7 @@ func _build_station_waterwheel():
 	sd.vectors = [vec_a, vec_b]
 	sd.caches = [_cache_nodes(vec_a), _cache_nodes(vec_b)]
 
-	sd.info_label = _build_info_panel(sd.root, "THE WATERWHEEL", "A × B = |A||B| sin θ  n̂", "Cross product magnitude spins the wheel", Vector3(0, 3.8, -1.0))
+	sd.info_label = _build_info_panel(sd.root, "THE WATERWHEEL", "A Ã— B = |A||B| sin Î¸  nÌ‚", "Cross product magnitude spins the wheel", Vector3(0, 3.8, -1.0))
 
 func _update_waterwheel(do_text: bool):
 	var sd: Dictionary = _stations[4]
@@ -425,11 +425,11 @@ func _update_waterwheel(do_text: bool):
 	hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, speed)
 
 	if do_text and sd.info_label:
-		sd.info_label.text = "A × B = (%.1f, %.1f, %.1f)\n|A × B| = %.2f\nWheel speed = %.1f rad/s" % [cross.x, cross.y, cross.z, cross_mag, speed]
+		sd.info_label.text = "A Ã— B = (%.1f, %.1f, %.1f)\n|A Ã— B| = %.2f\nWheel speed = %.1f rad/s" % [cross.x, cross.y, cross.z, cross_mag, speed]
 
-# ═══════════════════════════════════════════════════════════
-#  STATION 6: THE SPRING TOWER — Forces → Generic6DOFJoint3D
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+#  STATION 6: THE SPRING TOWER â€” Forces â†’ Generic6DOFJoint3D
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _build_station_spring():
 	var sd := _init_station("Spring", 5)
@@ -486,7 +486,7 @@ func _build_station_spring():
 	sd.vectors = [vec_a, vec_b]
 	sd.caches = [_cache_nodes(vec_a), _cache_nodes(vec_b)]
 
-	sd.info_label = _build_info_panel(sd.root, "THE SPRING TOWER", "F_net = ΣF_i", "Net force compresses or extends the spring", Vector3(0, 4.8, -1.0))
+	sd.info_label = _build_info_panel(sd.root, "THE SPRING TOWER", "F_net = Î£F_i", "Net force compresses or extends the spring", Vector3(0, 4.8, -1.0))
 
 func _update_spring(do_text: bool):
 	var sd: Dictionary = _stations[5]
@@ -513,9 +513,9 @@ func _update_spring(do_text: bool):
 	if do_text and sd.info_label:
 		sd.info_label.text = "Thrust = (%.1f, %.1f, %.1f)\nGravity = (%.1f, %.1f, %.1f)\nF_net = (%.1f, %.1f, %.1f)\n|F_net| = %.2f" % [a.x, a.y, a.z, b.x, b.y, b.z, net.x, net.y, net.z, net.length()]
 
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 #  SHARED HELPERS
-# ═══════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 func _init_station(station_name: String, index: int) -> Dictionary:
 	var pos := _station_position(index)
@@ -554,7 +554,7 @@ func _station_facing(index: int) -> float:
 	var pos := _station_position(index)
 	return rad_to_deg(atan2(-pos.x, -pos.z))
 
-# ─── Vector helpers (no SCENE_SCALE) ───
+# â”€â”€â”€ Vector helpers (no SCENE_SCALE) â”€â”€â”€
 
 func _spawn_vector(parent: Node3D, origin: Vector3, endpoint: Vector3, color: Color, label: String) -> Node3D:
 	var arrow: Node3D = VECTOR_SCENE.instantiate()
@@ -580,14 +580,14 @@ func _cache_nodes(arrow: Node3D) -> Dictionary:
 		"line_container": arrow.get_node_or_null("lineContainer"),
 	}
 
-func _get_vec(arrow: Node3D, cache: Dictionary) -> Vector3:
+func _get_vec(_arrow: Node3D, cache: Dictionary) -> Vector3:
 	var s: Node3D = cache.get("start")
 	var e: Node3D = cache.get("end")
 	if s and e:
 		return e.global_position - s.global_position
 	return Vector3.ZERO
 
-# ─── Info panel builder ───
+# â”€â”€â”€ Info panel builder â”€â”€â”€
 
 func _build_info_panel(parent: Node3D, title: String, formula: String, desc: String, pos: Vector3) -> Label3D:
 	var panel := Node3D.new()
@@ -691,7 +691,7 @@ func _build_info_panel(parent: Node3D, title: String, formula: String, desc: Str
 
 	return live
 
-# ─── Material helper ───
+# â”€â”€â”€ Material helper â”€â”€â”€
 
 func _mat(color: Color, unlit: bool = false, transparent: bool = false) -> StandardMaterial3D:
 	var key := str(color) + ("_u" if unlit else "_l") + ("_t" if transparent else "")

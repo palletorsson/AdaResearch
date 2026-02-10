@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpk8q4n7rx5wn"]
+[gd_scene load_steps=12 format=3 uid="uid://dpk8q4n7rx5wn"]
 
 [ext_resource type="Script" uid="uid://fcj7gexxscxa" path="res://commons/context/drawingboard/paper_draw_surface.gd" id="1_v2"]
 [ext_resource type="Script" uid="uid://12e4cmpldmpb" path="res://commons/context/drawingboard/ball_spawner.gd" id="5_spawner"]
@@ -25,11 +25,57 @@ disable_receive_shadows = true
 [sub_resource type="PlaneMesh" id="PlaneMesh_canvas"]
 size = Vector2(4, 4)
 
+[sub_resource type="StandardMaterial3D" id="MatFrame"]
+albedo_color = Color(0.15, 0.12, 0.1, 1)
+metallic = 0.2
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_FrameTop"]
+size = Vector3(4.3, 0.15, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_FrameSide"]
+size = Vector3(0.15, 4.3, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="MatBackboard"]
+albedo_color = Color(0.95, 0.93, 0.9, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_Backboard"]
+size = Vector3(4.0, 4.0, 0.08)
+
 [node name="BallPaintingDemoV2" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lights")
 camera_attributes = SubResource("CameraAttributesPractical_default")
+
+[node name="Frame" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)
+
+[node name="Backboard" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.06)
+mesh = SubResource("BoxMesh_Backboard")
+surface_material_override/0 = SubResource("MatBackboard")
+
+[node name="FrameTop" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.075, 0)
+mesh = SubResource("BoxMesh_FrameTop")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameBottom" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.075, 0)
+mesh = SubResource("BoxMesh_FrameTop")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.075, 0, 0)
+mesh = SubResource("BoxMesh_FrameSide")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameRight" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.075, 0, 0)
+mesh = SubResource("BoxMesh_FrameSide")
+surface_material_override/0 = SubResource("MatFrame")
 
 [node name="DrawingArea3D" type="Area3D" parent="." groups=["drawing_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)

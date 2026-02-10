@@ -21,9 +21,13 @@ const DISTORTION = 1.5
 const LEVEL = 0.45
 
 
-static func generate(t: float, freq: float, trigger_time: float = 0.0) -> float:
+static func generate(t: float, freq_source = 220.0, trigger_time: float = 0.0) -> float:
 	var dt = t - trigger_time
 	if dt < 0.0 or dt > 0.15:
+		return 0.0
+	
+	var freq = _resolve_freq(freq_source)
+	if freq <= 0.0:
 		return 0.0
 	
 	# Envelope
@@ -55,8 +59,17 @@ static func generate(t: float, freq: float, trigger_time: float = 0.0) -> float:
 	return clampf(output * env * LEVEL, -1.0, 1.0)
 
 
-static func generate_sample(t: float, freq: float) -> float:
-	return generate(t, freq, 0.0)
+static func generate_sample(t: float, freq_source = 220.0) -> float:
+	return generate(t, freq_source, 0.0)
+
+
+static func _resolve_freq(source) -> float:
+	if source is Array:
+		var values: Array = source
+		if values.is_empty():
+			return 220.0
+		return maxf(float(values[0]), 1.0)
+	return maxf(float(source), 1.0)
 
 
 static func get_duration() -> float:

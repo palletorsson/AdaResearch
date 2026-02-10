@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @onready var spotlight: SpotLight3D = $SpotLight3D
 @onready var objects_parent: Node3D = $Objects
@@ -27,7 +27,7 @@ func _input(event: InputEvent):
 		var to = from + get_viewport().get_camera_3d().project_ray_normal(mouse_pos) * ray_length
 		spotlight.look_at(to)
 
-func _process(delta: float):
+func _process(_delta: float):
 	for i in range(objects_parent.get_child_count()):
 		var child = objects_parent.get_child(i) as MeshInstance3D
 		var material = object_materials[i]

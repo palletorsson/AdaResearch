@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 ## Trig Walking Path Demo
 ## Generates walkable paths from Sine and Cosine waves using individual steps
@@ -197,7 +197,7 @@ func _compute_step_y(z_pos: float, wave_value: float) -> float:
 func _platform_y_for_base(base_y: float) -> float:
 	return base_y + (step_height - platform_size.y) * 0.5 + platform_height_offset
 
-func _process(delta: float):
+func _process(_delta: float):
 	if generation_speed > 0 and not escalator_mode:
 		# Implement endless runner style generation here if needed
 		pass

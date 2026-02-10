@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name SpringMassSystem
 
@@ -116,7 +116,7 @@ func _physics_process(delta):
 	# Update spring visuals (less frequently)
 	_update_spring_visuals()
 
-func _apply_spring_forces(delta):
+func _apply_spring_forces(_delta):
 	for spring in springs:
 		var point1 = spring.point1
 		var point2 = spring.point2

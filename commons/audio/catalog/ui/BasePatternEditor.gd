@@ -1,4 +1,4 @@
-# BasePatternEditor.gd
+﻿# BasePatternEditor.gd
 # Shared base class for all pattern editors (drum, bass, chord, arp)
 # Provides common grid rendering, transport, and interaction
 
@@ -100,17 +100,17 @@ func _get_row_color(row: int) -> Color:
 	return Color.WHITE  # Return WHITE to use default velocity colors
 
 
-func _render_step(row: int, step: int, cell: Control, data: Dictionary) -> void:
+func _render_step(_row: int, step: int, cell: Control, data: Dictionary) -> void:
 	"""Override: Custom step rendering"""
 	pass
 
 
-func _on_step_clicked(row: int, step: int, button: int) -> void:
+func _on_step_clicked(_row: int, step: int, button: int) -> void:
 	"""Override: Handle step click"""
 	pass
 
 
-func _on_step_drag(row: int, step: int, button: int) -> void:
+func _on_step_drag(_row: int, step: int, button: int) -> void:
 	"""Override: Handle step drag"""
 	pass
 
@@ -122,7 +122,7 @@ func _get_default_step_data() -> Dictionary:
 
 func _get_editor_title() -> String:
 	"""Override: Return editor title"""
-	return "🎵 PATTERN EDITOR"
+	return "ðŸŽµ PATTERN EDITOR"
 
 
 func _get_editor_color() -> Color:
@@ -140,7 +140,7 @@ func _get_pattern_for_export() -> Dictionary:
 	return _pattern_data.duplicate(true)
 
 
-func _on_extra_controls_setup(container: HBoxContainer) -> void:
+func _on_extra_controls_setup(_container: HBoxContainer) -> void:
 	"""Override: Add extra controls to header"""
 	pass
 
@@ -218,20 +218,20 @@ func _setup_header():
 	
 	# Transport buttons
 	_play_btn = Button.new()
-	_play_btn.text = "▶ Play"
+	_play_btn.text = "â–¶ Play"
 	_play_btn.pressed.connect(_on_play_pressed)
 	_style_button(_play_btn, Color(0.2, 0.5, 0.3))
 	_header.add_child(_play_btn)
 	
 	_stop_btn = Button.new()
-	_stop_btn.text = "⏹ Stop"
+	_stop_btn.text = "â¹ Stop"
 	_stop_btn.pressed.connect(_on_stop_pressed)
 	_style_button(_stop_btn, Color(0.5, 0.3, 0.2))
 	_header.add_child(_stop_btn)
 	
 	# Apply button
 	_apply_btn = Button.new()
-	_apply_btn.text = "✓ Apply"
+	_apply_btn.text = "âœ“ Apply"
 	_apply_btn.pressed.connect(_on_apply_pressed)
 	_style_button(_apply_btn, Color(0.3, 0.4, 0.6))
 	_header.add_child(_apply_btn)
@@ -307,7 +307,7 @@ func _setup_footer():
 	_main_container.add_child(_footer)
 	
 	var instructions = Label.new()
-	instructions.text = "Click: toggle • Right-click/Shift-click: cycle velocity (ghost → normal → accent → off)"
+	instructions.text = "Click: toggle â€¢ Right-click/Shift-click: cycle velocity (ghost â†’ normal â†’ accent â†’ off)"
 	instructions.add_theme_font_size_override("font_size", 11)
 	instructions.add_theme_color_override("font_color", Color(0.5, 0.5, 0.55))
 	_footer.add_child(instructions)
@@ -391,7 +391,7 @@ func _draw_beat_markers():
 			marker.add_theme_font_size_override("font_size", 14)
 			marker.add_theme_color_override("font_color", Color(0.8, 0.8, 0.85))
 		else:
-			marker.text = "·"
+			marker.text = "Â·"
 			marker.add_theme_font_size_override("font_size", 10)
 			marker.add_theme_color_override("font_color", Color(0.4, 0.4, 0.45))
 		marker.position = Vector2(ROW_LABEL_WIDTH + step * CELL_SIZE.x + 8, 5)
@@ -482,12 +482,12 @@ func _get_velocity_color(velocity: float) -> Color:
 		return VELOCITY_COLORS[0.0]
 
 
-func _get_step_data(row: int, step: int) -> Dictionary:
+func _get_step_data(_row: int, step: int) -> Dictionary:
 	"""Get step data - override in subclasses for custom data structure"""
 	return _get_default_step_data()
 
 
-func _set_step_data(row: int, step: int, data: Dictionary):
+func _set_step_data(_row: int, step: int, data: Dictionary):
 	"""Set step data - override in subclasses"""
 	pass
 
@@ -613,7 +613,7 @@ func _on_stop_pressed():
 func _start_playback():
 	_is_playing = true
 	_current_step = 0
-	_play_btn.text = "⏸ Pause"
+	_play_btn.text = "â¸ Pause"
 	
 	var step_duration = 60.0 / _bpm / 4.0  # 16th note
 	_step_timer.wait_time = step_duration
@@ -625,13 +625,13 @@ func _start_playback():
 
 func _pause_playback():
 	_is_playing = false
-	_play_btn.text = "▶ Play"
+	_play_btn.text = "â–¶ Play"
 	_step_timer.stop()
 
 
 func _stop_playback():
 	_is_playing = false
-	_play_btn.text = "▶ Play"
+	_play_btn.text = "â–¶ Play"
 	_step_timer.stop()
 	_current_step = 0
 	_clear_highlights()

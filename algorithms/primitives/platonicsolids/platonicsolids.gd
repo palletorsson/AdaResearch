@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # PlatonicSolids.gd - Queer-themed geometric primitives in Godot 4
 # Based on Ada Research VR project structure
@@ -592,6 +592,6 @@ func apply_queer_material(mesh_instance: MeshInstance3D, base_color: Color):
 	
 	mesh_instance.material_override = material
 
-func _process(delta):
+func _process(_delta):
 	# No animation - static display
 	pass

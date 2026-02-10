@@ -1,4 +1,4 @@
-# PythagoreanTriangle.gd - Creates a right triangle demonstrating Pythagorean theorem
+﻿# PythagoreanTriangle.gd - Creates a right triangle demonstrating Pythagorean theorem
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
@@ -116,7 +116,7 @@ func create_labels():
 	# Create Pythagorean formula label
 	var formula_label = Label3D.new()
 	formula_label.name = "FormulaLabel"
-	formula_label.text = "a² + b² = c²"
+	formula_label.text = "aÂ² + bÂ² = cÂ²"
 	formula_label.font_size = 48
 	formula_label.outline_size = 6
 	formula_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -185,10 +185,10 @@ func update_labels():
 		var diff = abs(sum_sq - c_sq)
 		
 		var op = "="
-		if diff > 0.05: op = "≈" # Approximate
-		if diff > 0.5: op = "≠"  # Not equal
+		if diff > 0.05: op = "â‰ˆ" # Approximate
+		if diff > 0.5: op = "â‰ "  # Not equal
 		
-		label_nodes["FormulaLabel"].text = "a² + b² %s c²\n%.1f + %.1f %s %.1f" % [op, a_sq, b_sq, op, c_sq]
+		label_nodes["FormulaLabel"].text = "aÂ² + bÂ² %s cÂ²\n%.1f + %.1f %s %.1f" % [op, a_sq, b_sq, op, c_sq]
 		
 		# Position above triangle
 		var center = (vertex_positions[0] + vertex_positions[1] + vertex_positions[2]) / 3.0
@@ -434,7 +434,7 @@ func update_arc_indicator(mesh_inst: MeshInstance3D, corner: Vector3, leg1_end: 
 
 	pass
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	pass
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
@@ -448,6 +448,6 @@ func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
 
 func print_help():
 	print("=== Pythagorean Triangle (Standing) ===")
-	print("Demonstrates: a² + b² = c²")
+	print("Demonstrates: aÂ² + bÂ² = cÂ²")
 	print("Mouse: Drag corners (constrained to XY plane)")
 	print("R: Reset to standard right triangle")

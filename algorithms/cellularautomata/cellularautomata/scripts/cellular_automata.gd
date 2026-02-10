@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # ==============================
 # CONFIGURATION PARAMETERS
@@ -41,7 +41,7 @@ func _ready():
 	texture = ImageHelper.create_texture_from_image(img)
 	MaterialHelper.update_texture_material(mesh_instance, texture)
 
-	# ⚡ Pre-fill history with a random number of rows (0-100)
+	# âš¡ Pre-fill history with a random number of rows (0-100)
 	var initial_scroll = randi_range(0, 100)
 	for i in range(initial_scroll):
 		_generate_next_row()  # Generate the next row and push it to history
@@ -140,10 +140,10 @@ func _int_to_binary(value: int, length: int) -> String:
 # GRABBING EVENTS (TOGGLE SCROLLING)
 # ==============================
 
-func _on_grab_paper_grabbed(pickable: Variant, by: Variant) -> void:
+func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 	""" Enables scrolling when the paper is grabbed. """
 	scroll_on = true
 
-func _on_grab_paper_dropped(pickable: Variant) -> void:
+func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	""" Stops scrolling when the paper is released. """
 	scroll_on = false

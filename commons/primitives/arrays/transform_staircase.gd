@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 class_name TransformStaircase
 
@@ -143,7 +143,7 @@ func _spiral_transform(index: int) -> Transform3D:
 	var basis = Basis(Vector3.UP, angle + PI/2)
 	return Transform3D(basis, pos)
 
-func _mobius_transform(index: int, t: float) -> Transform3D:
+func _mobius_transform(_index: int, t: float) -> Transform3D:
 	var angle = t * TAU  # Full circle
 	var twist = deg_to_rad(t * mobius_twist_total)
 	

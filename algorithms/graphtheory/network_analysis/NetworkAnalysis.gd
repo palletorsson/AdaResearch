@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name NetworkAnalysis
 
 var time: float = 0.0
@@ -181,7 +181,7 @@ func create_edge(idx1: int, idx2: int, weight: float):
 		"weight": weight
 	})
 
-func update_network_edges(delta):
+func update_network_edges(_delta):
 	for edge_data in network_edges:
 		var node1_pos = network_nodes[edge_data["node1"]]["node"].global_position
 		var node2_pos = network_nodes[edge_data["node2"]]["node"].global_position

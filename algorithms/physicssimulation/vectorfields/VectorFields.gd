@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name VectorFields
 
@@ -85,7 +85,7 @@ func _calculate_field_vector(pos: Vector3) -> Vector3:
 	
 	return Vector3.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if trail_enabled:
 		_update_particle_trail()
 	

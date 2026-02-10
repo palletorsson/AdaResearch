@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 var content = """[font_size=28][b]4'33"[/b][/font_size]
 [i]The Impossibility of Silence[/i]
@@ -33,14 +33,14 @@ You cannot have a signal of 0. There is always thermal noise in the circuit. The
 
 [b]3. Ambient Computation[/b]
 
-Most algorithms focus on the "event"—the button press, the explosion. Cage asks us to simulate the [b]uneventful[/b].
+Most algorithms focus on the "event"â€”the button press, the explosion. Cage asks us to simulate the [b]uneventful[/b].
 
 Can we write code that does nothing, beautifully?
 Can we create a system that just "is"?
 
 [color=green][b]Code[/b][/color]
 [color=green][code]
-func _process(delta):
+func _process(_delta):
     # Drift slowly, without destination
     position += Vector3(
         noise.get_noise_1d(time), 
@@ -53,7 +53,7 @@ func _process(delta):
 
 [b]4. Queer Silence[/b]
 
-Silence has often been used as a weapon ("The Closet"). But Cage (a queer artist) reframed silence as a space of infinite potential—a space where the normative signal stops, allowing other ways of being to become audible.
+Silence has often been used as a weapon ("The Closet"). But Cage (a queer artist) reframed silence as a space of infinite potentialâ€”a space where the normative signal stops, allowing other ways of being to become audible.
 
 [color=orange][b]Critical Note:[/b][/color] In this room, do not look for the puzzle. Do not look for the objective. Just listen. The algorithm is running, but it is not "working." It is just breathing.
 

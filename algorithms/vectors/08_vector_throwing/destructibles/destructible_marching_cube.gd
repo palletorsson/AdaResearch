@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 ## Destructible Marching Cubes Object
 ## Generates organic geometry using marching cubes, then shatters on impact
@@ -146,7 +146,7 @@ func _destroy(impact_point: Vector3, impact_velocity: Vector3):
 	# Create fragments
 	_create_fragments(impact_point, impact_velocity)
 
-func _create_fragments(impact_point: Vector3, impact_velocity: Vector3):
+func _create_fragments(_impact_point: Vector3, impact_velocity: Vector3):
 	if not _base_mesh:
 		return
 

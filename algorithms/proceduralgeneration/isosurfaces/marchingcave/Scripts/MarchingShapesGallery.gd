@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var spacing : float = 60.0
 
@@ -37,6 +37,6 @@ func _ready():
 		
 		print("Spawned " + shape_names[i])
 
-func _process(delta):
+func _process(_delta):
 	# Rotate camera or objects?
 	pass

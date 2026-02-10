@@ -1,4 +1,4 @@
-# FlowingRibbonChair.gd
+﻿# FlowingRibbonChair.gd
 # Procedural generation of flowing ribbon chairs
 extends Node3D
 class_name FlowingRibbonChair
@@ -75,7 +75,7 @@ func create_ribbon_mesh(curve: Curve3D) -> ArrayMesh:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return array_mesh
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

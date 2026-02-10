@@ -1,50 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://gdfn5mwvwx1o"]
+[gd_scene format=3 uid="uid://gdfn5mwvwx1o"]
 
-[ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/light/flashlight_demo/flashlight.tscn" id="1_flashlight"]
+[ext_resource type="PackedScene" uid="uid://dwj7igy7ibn87" path="res://algorithms/effects/flashlight_demo/flashlight.tscn" id="1_flashlight"]
 
 [sub_resource type="Environment" id="Environment_Dark"]
 background_mode = 1
+background_color = Color(0.05, 0.05, 0.08, 1)
 ambient_light_source = 1
-tonemap_mode = 2
-glow_enabled = true
+ambient_light_energy = 0.15
 
-[sub_resource type="StandardMaterial3D" id="Mat_Floor"]
-albedo_color = Color(0.1, 0.1, 0.1, 1)
-metallic = 0.5
-roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_Canvas"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+roughness = 0.9
 
-[sub_resource type="StandardMaterial3D" id="Mat_Wall"]
-albedo_color = Color(0.3, 0.3, 0.3, 1)
+[node name="FlashlightDemo" type="Node3D" unique_id=978102410]
 
-[node name="FlashlightDemo" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1970379384]
 environment = SubResource("Environment_Dark")
 
-[node name="Room" type="Node3D" parent="."]
-visible = true
+[node name="Canvas" type="CSGBox3D" parent="." unique_id=1599858006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+size = Vector3(6, 4, 0.1)
+material = SubResource("Mat_Canvas")
 
-[node name="Floor" type="CSGBox3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(20, 1, 20)
-material = SubResource("Mat_Floor")
+[node name="RedFlashlight" parent="." unique_id=49459907 instance=ExtResource("1_flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.3, 3)
 
-[node name="WallBack" type="CSGBox3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
-size = Vector3(10, 5, 0.5)
-material = SubResource("Mat_Wall")
+[node name="GreenFlashlight" parent="." unique_id=107017720 instance=ExtResource("1_flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 3)
 
-[node name="Box1" type="CSGBox3D" parent="Room"]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, 0.5, -2)
-material = SubResource("Mat_Wall")
+[node name="BlueFlashlight" parent="." unique_id=6070795 instance=ExtResource("1_flashlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, 3)
 
-[node name="Box2" type="CSGBox3D" parent="Room"]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2, 0.5, -2)
-size = Vector3(0.5, 1.5, 0.5)
-material = SubResource("Mat_Wall")
+[node name="Label3D" type="Label3D" parent="." unique_id=1844506434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -1.8)
+text = "RGB ADDITIVE COLOR MIXING"
+font_size = 48
+outline_size = 8
 
-[node name="Flashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 5)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1148719605]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.5, 6)

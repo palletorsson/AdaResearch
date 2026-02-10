@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
@@ -23,7 +23,7 @@ Not smooth gradients - sharp boundaries, organic cells, natural cracks.
 [code]
 # Scatter feature points in grid cells
 func get_feature_point(cell_x: int, cell_y: int) -> Vector2:
-    # Random offset within cell [0, 1] × [0, 1]
+    # Random offset within cell [0, 1] Ã— [0, 1]
     var hash_x = hash_2d(cell_x, cell_y)
     var hash_y = hash_2d(cell_x + 1, cell_y + 1)
     return Vector2(cell_x + hash_x, cell_y + hash_y)
@@ -34,7 +34,7 @@ func worley_noise_2d(x: float, y: float) -> float:
 
     var min_dist = INF
 
-    # Check 3×3 grid of cells (current + neighbors)
+    # Check 3Ã—3 grid of cells (current + neighbors)
     for offset_y in range(-1, 2):
         for offset_x in range(-1, 2):
             var neighbor_x = cell_x + offset_x
@@ -53,7 +53,7 @@ func worley_noise_2d(x: float, y: float) -> float:
 # Creates cell boundaries where distances are equal
 [/code]
 
-**Key insight:** Where two cells meet, distances to their feature points are equal → boundary.
+**Key insight:** Where two cells meet, distances to their feature points are equal â†’ boundary.
 
 [hr]
 
@@ -63,7 +63,7 @@ func worley_noise_2d(x: float, y: float) -> float:
 
 [color=yellow][b]F1: Distance to Closest Point[/b][/color]
 [code]
-func worley_F1(x: float, y: float) -> float:
+func worley_F1(_x: float, y: float) -> float:
     # Return distance to NEAREST feature point
     return min_dist  # As computed above
 
@@ -74,7 +74,7 @@ func worley_F1(x: float, y: float) -> float:
 
 [color=yellow][b]F2: Distance to Second-Closest Point[/b][/color]
 [code]
-func worley_F2(x: float, y: float) -> float:
+func worley_F2(_x: float, y: float) -> float:
     var distances = []
 
     # Collect all distances
@@ -91,7 +91,7 @@ func worley_F2(x: float, y: float) -> float:
 
 [color=yellow][b]F2 - F1: Difference (Edge Detection)[/b][/color]
 [code]
-func worley_F2_minus_F1(x: float, y: float) -> float:
+func worley_F2_minus_F1(_x: float, y: float) -> float:
     var distances = []
     # ... collect distances ...
     distances.sort()
@@ -114,7 +114,7 @@ func worley_F2_minus_F1(x: float, y: float) -> float:
 [code]
 func euclidean_distance(a: Vector2, b: Vector2) -> float:
     var diff = b - a
-    return diff.length()  # sqrt(dx² + dy²)
+    return diff.length()  # sqrt(dxÂ² + dyÂ²)
 
 # Result: Natural circular cells
 # Most organic-looking
@@ -150,7 +150,7 @@ func minkowski_distance(a: Vector2, b: Vector2, p: float) -> float:
 
 # p=1: Manhattan
 # p=2: Euclidean
-# p=∞: Chebyshev
+# p=âˆž: Chebyshev
 # p=0.5: Star-shaped cells (interesting!)
 [/code]
 
@@ -220,7 +220,7 @@ func worley_noise_3d(x: float, y: float, z: float) -> float:
 
     var min_dist = INF
 
-    # Check 3×3×3 grid of cells
+    # Check 3Ã—3Ã—3 grid of cells
     for oz in range(-1, 2):
         for oy in range(-1, 2):
             for ox in range(-1, 2):
@@ -292,7 +292,7 @@ var final_color = lerp(base_color, cell_color, smoothstep(0.3, 0.5, cells))
 **Worley noise is expensive (many distance calculations):**
 
 [color=yellow][b]1. Spatial Hashing[/b][/color]
-- Only check nearby cells (3×3 in 2D, 3×3×3 in 3D)
+- Only check nearby cells (3Ã—3 in 2D, 3Ã—3Ã—3 in 3D)
 - Don't check entire space
 - Feature points stored in grid structure
 
@@ -351,7 +351,7 @@ func get_feature_point(cell_x: int, cell_y: int) -> Vector2:
 - **Giraffe spots:** Turing patterns converge to Voronoi
 - **Dragonfly wings:** Cell growth creates natural tessellation
 - **Cracked mud:** Shrinkage cracks follow minimum energy paths (Voronoi)
-- **Soap bubbles:** Surface tension minimizes area → Voronoi structure
+- **Soap bubbles:** Surface tension minimizes area â†’ Voronoi structure
 - **Plant cells:** Growth pressure creates polygonal packing
 
 **Worley noise mimics natural cell formation** - not just aesthetic, but physically grounded.

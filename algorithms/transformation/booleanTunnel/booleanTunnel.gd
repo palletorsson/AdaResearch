@@ -7,6 +7,11 @@ var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/telep
 @export var rotation_per_segment: float = 10.0  # degrees
 @export var cube_height: float = 4.0  # height of the cube for pivot compensation
 @export var cube_base_rotation_z: float = 0.0  # base rotation for each cube (degrees)
+
+@export_group("Cone Taper")
+@export var cone_mode: bool = false  # taper from start to end
+@export var start_scale: float = 1.0  # scale at tunnel entrance
+@export var end_scale: float = 0.4  # scale at tunnel exit (smaller = narrower)
 @export_group("Tunnel Orientation")
 @export var tunnel_rotation_x: float = 0.0  # rotate whole tunnel around X (degrees) - use -90 to stand up
 @export var tunnel_rotation_z: float = 0.0  # rotate whole tunnel around Z (degrees) - turns sideways
@@ -64,6 +69,14 @@ func apply_grid_config(config: Dictionary):
 	if config.has("burst_flat_count"):
 		burst_flat_count = int(config["burst_flat_count"])
 	
+	# Cone taper
+	if config.has("cone_mode"):
+		cone_mode = str(config["cone_mode"]).to_lower() == "true"
+	if config.has("start_scale"):
+		start_scale = float(config["start_scale"])
+	if config.has("end_scale"):
+		end_scale = float(config["end_scale"])
+	
 	# Teleporter
 	if config.has("enable_teleporter"):
 		enable_teleporter = str(config["enable_teleporter"]).to_lower() == "true"
@@ -88,6 +101,7 @@ func generate_tunnel():
 	print("  - burst_rotate_count: %d" % burst_rotate_count)
 	print("  - burst_flat_count: %d" % burst_flat_count)
 	print("  - tunnel_rotation_x: %.1f" % tunnel_rotation_x)
+	print("  - cone_mode: %s (%.1f → %.1f)" % [cone_mode, start_scale, end_scale])
 	print("  - enable_teleporter: %s" % enable_teleporter)
 	
 	# Clear existing children
@@ -149,6 +163,12 @@ func generate_tunnel():
 
 		cube_instance.transform = transform_3d
 		cube_instance.name = "Cube" + str(i)
+		
+		# Apply cone taper scaling
+		if cone_mode and num_segments > 1:
+			var t = float(i) / float(num_segments - 1)  # 0 at start, 1 at end
+			var scale_factor = lerp(start_scale, end_scale, t)
+			cube_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)
 	
 	# Apply whole-tunnel rotation
 	if tunnel_rotation_x != 0.0 or tunnel_rotation_z != 0.0:

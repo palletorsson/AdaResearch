@@ -1,4 +1,4 @@
-
+﻿
 class_name RhizomaticMaterials
 extends Node
 
@@ -34,7 +34,7 @@ func create_material_library():
 	tendril_mat.roughness = 0.9
 	materials["tendril"] = tendril_mat
 
-func get_tunnel_material(properties: Dictionary = {}) -> StandardMaterial3D:
+func get_tunnel_material(_properties: Dictionary = {}) -> StandardMaterial3D:
 	return materials.get("tunnel", null)
 
 func get_chamber_material() -> StandardMaterial3D:

@@ -1,4 +1,4 @@
-# edge_detector.gd
+﻿# edge_detector.gd
 # Handheld tool that detects edge of chaos
 # Beeps and glows when lambda is in the sweet spot (0.3-0.5)
 
@@ -141,7 +141,7 @@ func _update_detection():
 	
 	edge_detected.emit(detection_strength)
 
-func _update_visuals(delta):
+func _update_visuals(_delta):
 	var color: Color
 	var energy: float
 	

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Advanced Evolutionary Neural Network Ecosystem
 # Combines genetic algorithms, neural networks, emergent behavior, and multi-species evolution
@@ -415,7 +415,7 @@ class EvolutionaryCreature:
 				"socializing":
 					release_pheromone("social", 0.4)
 	
-	func release_pheromone(pheromone_type: String, intensity: float):
+	func release_pheromone(_pheromone_type: String, intensity: float):
 		"""Release chemical signals"""
 		# This would be handled by the main ecosystem
 		pass
@@ -1473,7 +1473,7 @@ func handle_creature_death(creature: EvolutionaryCreature, index: int):
 	
 	print("EcosystemEvolution: Creature died - Age: %.1f, Fitness: %.1f" % [creature.age, creature.fitness])
 
-func update_species_dynamics(delta: float):
+func update_species_dynamics(_delta: float):
 	"""Update species-level dynamics"""
 	if not speciation_enabled:
 		return
@@ -2025,7 +2025,7 @@ func setup_performance_graphs(canvas: CanvasLayer):
 	# Fitness trend indicator
 	var fitness_trend_label = Label.new()
 	fitness_trend_label.position = Vector2(360, 250)
-	fitness_trend_label.text = "Fitness Trend: ↗"
+	fitness_trend_label.text = "Fitness Trend: â†—"
 	canvas.add_child(fitness_trend_label)
 	ui_elements["fitness_trend"] = fitness_trend_label
 
@@ -2348,7 +2348,7 @@ func setup_performance_tracking():
 		"queer_forms_detected": []
 	}
 
-func update_visualizations(delta: float):
+func update_visualizations(_delta: float):
 	"""Update all visual elements"""
 	# Update fitness landscape
 	if show_fitness_landscape and fitness_landscape_mesh:
@@ -2687,7 +2687,7 @@ func calculate_fitness_trend() -> String:
 	"""Calculate fitness trend over recent generations"""
 	var history = performance_metrics.fitness_progression
 	if history.size() < 5:
-		return "→"
+		return "â†’"
 	
 	var recent_avg = 0.0
 	var older_avg = 0.0
@@ -2702,11 +2702,11 @@ func calculate_fitness_trend() -> String:
 	older_avg /= recent_count
 	
 	if recent_avg > older_avg * 1.05:
-		return "↗"
+		return "â†—"
 	elif recent_avg < older_avg * 0.95:
-		return "↘"
+		return "â†˜"
 	else:
-		return "→"
+		return "â†’"
 
 # Debug and analysis functions
 func print_ecosystem_report():
@@ -2907,7 +2907,7 @@ class PersistentHomology:
 				if distance <= threshold:
 					edges += 1
 		
-		# Euler characteristic approximation: loops ≈ edges - vertices + components
+		# Euler characteristic approximation: loops â‰ˆ edges - vertices + components
 		var components = count_connected_components(points, threshold)
 		return max(0, edges - vertices + components)
 	

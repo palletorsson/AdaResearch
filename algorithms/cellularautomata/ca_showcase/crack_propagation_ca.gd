@@ -1,4 +1,4 @@
-# CrackPropagationCA.gd
+﻿# CrackPropagationCA.gd
 # Material crack propagation simulation
 extends BaseCA
 
@@ -29,7 +29,7 @@ func initialize_grid():
 		stress_points.append(stress_point)
 		grid[stress_point.x][stress_point.y][stress_point.z] = 1  # Stress point
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Propagate cracks from stress concentrators
 	propagate_cracks()
 	update_visualization()

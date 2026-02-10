@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name PheromoneSystem
 
 # Pheromone system parameters
@@ -145,7 +145,7 @@ func _process(delta):
 		last_update_time = Time.get_ticks_msec()
 
 # Process pheromone decay and diffusion
-func process_pheromones(delta):
+func process_pheromones(_delta):
 	# Decay pheromones
 	for x in range(resolution + 1):
 		for z in range(resolution + 1):

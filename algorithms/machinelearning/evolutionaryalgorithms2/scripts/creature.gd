@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Creature properties
 var creature_type = 0
@@ -482,7 +482,7 @@ func setup_topology_behavior():
 	# Behavior: Change topological genus periodically
 	pass
 
-func process_symbiotic(delta):
+func process_symbiotic(_delta):
 	# Look for nearby symbiotic creatures to connect with
 	var nearby_creatures = find_nearby_creatures(3.0)
 	
@@ -490,7 +490,7 @@ func process_symbiotic(delta):
 		if creature.creature_type == creature_type:
 			attempt_connection(creature)
 
-func process_phase_shifting(delta):
+func process_phase_shifting(_delta):
 	# Cycle between states: solid, liquid, gas
 	var phase_time = fmod(age, genome.get("phase_duration", 10.0))
 	var phase_progress = phase_time / genome.get("phase_duration", 10.0)
@@ -541,7 +541,7 @@ func process_recursive(delta):
 		
 		part.apply_central_force(force)
 
-func process_resonance(delta):
+func process_resonance(_delta):
 	# Update resonance wave parameters
 	var base_freq = genome.get("base_frequency", 1.0)
 	var amplitude = genome.get("amplitude", 0.2)
@@ -580,7 +580,7 @@ func process_resonance(delta):
 		# Create resonance effects with nearby objects
 		emit_resonance_wave(part.global_position, base_freq * freq_mod, amplitude)
 
-func process_topology(delta):
+func process_topology(_delta):
 	# Change topological genus over time
 	var morph_time = fmod(age, 20.0) 
 	var morph_speed = genome.get("morph_speed", 0.5)
@@ -960,7 +960,7 @@ func spawn_recursive_child():
 	
 	return child
 
-func emit_resonance_wave(position, frequency, amplitude):
+func emit_resonance_wave(_position, frequency, amplitude):
 	# Emit a resonance wave that affects nearby objects
 	var nearby = find_nearby_creatures(amplitude * 10.0)
 	

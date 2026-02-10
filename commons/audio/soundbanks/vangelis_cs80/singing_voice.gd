@@ -79,8 +79,15 @@ static func generate(t: float, freq: float, duration: float = 2.0,
 	return clampf(output * env * LEVEL, -1.0, 1.0)
 
 
-static func generate_sample(t: float, freq: float) -> float:
+static func generate_sample(t: float, freq_source = 220.0) -> float:
 	"""Simple sample generation for pattern-based playback"""
+	var freq := 220.0
+	if freq_source is Array:
+		var values: Array = freq_source
+		if not values.is_empty():
+			freq = maxf(float(values[0]), 1.0)
+	else:
+		freq = maxf(float(freq_source), 1.0)
 	return generate(t, freq, 0.5, 0.0)
 
 

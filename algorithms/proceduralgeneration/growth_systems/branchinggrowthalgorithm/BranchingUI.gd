@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 @onready var growth_node = $"../../BranchingGrowthAlgorithm"
 @onready var branch_slider = $Panel/VBoxContainer/BranchSlider
@@ -17,7 +17,7 @@ func _update_ui():
 	rainbow_check.button_pressed = growth_node.enable_pride_colors
 	sparkle_check.button_pressed = growth_node.enable_sparkles
 
-func _process(delta):
+func _process(_delta):
 	if growth_node:
 		var stats = growth_node.get_growth_stats()
 		stats_label.text = "Branches: %d\nAttractors: %d / %d\nGrowing: %s" % [

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name MarkovChains
 
 var time: float = 0.0
@@ -74,7 +74,7 @@ func _process(delta):
 	animate_probability_selector(delta)
 	update_markov_metrics(delta)
 
-func animate_probability_selector(delta):
+func animate_probability_selector(_delta):
 	# Animate the probability selection visualization
 	if not is_selecting:
 		return
@@ -423,7 +423,7 @@ func create_sequence_elements():
 
 	# Add "ONLY CURRENT STATE MATTERS" label to emphasize memoryless property
 	var memoryless_label = Label3D.new()
-	memoryless_label.text = "← Past fades (memoryless) | Current →"
+	memoryless_label.text = "â† Past fades (memoryless) | Current â†’"
 	memoryless_label.font_size = 20
 	memoryless_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	memoryless_label.position = Vector3(0, 1.0, 0)
@@ -612,7 +612,7 @@ func animate_states(delta):
 				var intensity = 0.3 + activity * 0.4 + current_boost
 				state.material_override.emission_energy_multiplier = intensity
 
-func animate_transitions(delta):
+func animate_transitions(_delta):
 	# Animate transitions (arrows with probability labels)
 	for i in range(transitions.size()):
 		var transition_data = transitions[i]
@@ -742,7 +742,7 @@ func animate_probability_matrix(delta):
 			else:
 				indicator.material_override.emission = Color(prob, prob, 0.2, 1) * 0.3
 
-func animate_generated_sequence(delta):
+func animate_generated_sequence(_delta):
 	# Animate generated sequence core
 	var sequence_core = $GeneratedSequence/SequenceCore
 	if sequence_core:

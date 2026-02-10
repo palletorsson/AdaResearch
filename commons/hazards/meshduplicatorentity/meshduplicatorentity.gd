@@ -1,4 +1,4 @@
-# MeshDuplicatorEntity.gd
+﻿# MeshDuplicatorEntity.gd
 # Entity that finds and duplicates meshes in the scene, causing visual chaos
 extends Node3D
 class_name MeshDuplicatorEntity
@@ -229,7 +229,7 @@ func _get_all_scene_nodes(node: Node) -> Array:
 		nodes.append_array(_get_all_scene_nodes(child))
 	return nodes
 
-func _update_scanning(delta):
+func _update_scanning(_delta):
 	if scan_timer >= 1.0:  # Scan for 1 second
 		_complete_scan()
 		is_scanning = false

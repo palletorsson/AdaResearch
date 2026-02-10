@@ -1,4 +1,4 @@
-class_name LineNetworkCA
+﻿class_name LineNetworkCA
 extends BaseCA
 
 # Visualizes CA growth as a branching network of lines.
@@ -52,7 +52,7 @@ func initialize_grid():
 					grid[walker.x][walker.y][walker.z] = 1
 					frontier.append(walker)
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	if iteration_count >= max_generations:
 		return
 

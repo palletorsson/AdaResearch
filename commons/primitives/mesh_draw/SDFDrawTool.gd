@@ -1,4 +1,4 @@
-extends "res://addons/godot-xr-tools/objects/pickable.gd"
+﻿extends "res://addons/godot-xr-tools/objects/pickable.gd"
 
 # SDF Draw Tool (Digital Clay Brush)
 # Interaction:
@@ -30,7 +30,7 @@ func _process(delta):
 		else:
 			_last_blob_pos = Vector3.INF # Reset stroke
 
-func _draw(delta):
+func _draw(_delta):
 	if not _active_generator:
 		_spawn_generator()
 		

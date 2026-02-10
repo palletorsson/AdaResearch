@@ -1,4 +1,4 @@
-# LShape.gd - Upside down L shape (fits within 1,1,1)
+﻿# LShape.gd - Upside down L shape (fits within 1,1,1)
 extends Node3D
 
 var base_color: Color = Color(0.2, 0.8, 1.0)  # Cyan
@@ -115,7 +115,7 @@ func create_lshape_faces() -> Array:
 
 	return faces
 
-func create_collision(vertices: Array):
+func create_collision(_vertices: Array):
 	# Create StaticBody3D with box colliders
 	var static_body = StaticBody3D.new()
 	static_body.name = "LShapeCollision"

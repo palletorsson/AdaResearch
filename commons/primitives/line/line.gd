@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Line connection system for grab spheres with queer CGI education
 @export var line_thickness: float = 0.005
@@ -89,7 +89,7 @@ func update_connections():
 		current_line = create_connection_line(point_one.position, point_two.position)
 		update_length_label(point_one.position, point_two.position)
 
-func _process(delta):
+func _process(_delta):
 	if point_one and point_two and is_instance_valid(point_one) and is_instance_valid(point_two):
 		update_line_transform(point_one.position, point_two.position)
 		update_length_label(point_one.position, point_two.position)

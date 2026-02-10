@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 # Vertical Wave Lines System
@@ -38,7 +38,7 @@ func _ready() -> void:
 		_setup_system()
 	_update_grid()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Shader handles animation via TIME, but we can pass other uniforms if needed manually
 	# Currently the shader does it all.
 	pass

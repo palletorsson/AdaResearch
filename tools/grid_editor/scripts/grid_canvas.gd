@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Control
 class_name GridCanvas
 ## 2D Grid canvas for placing elements
@@ -160,7 +160,7 @@ func _draw_element(placement: Dictionary, is_selected: bool) -> void:
 	# Draw rotation indicator for non-zero rotation
 	if rotation != 0:
 		var indicator_pos = full_rect.position + Vector2(4, 4)
-		draw_string(font, indicator_pos, "%d°" % rotation, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.7, 0.7, 0.7, 0.8))
+		draw_string(font, indicator_pos, "%dÂ°" % rotation, HORIZONTAL_ALIGNMENT_LEFT, -1, 10, Color(0.7, 0.7, 0.7, 0.8))
 	
 	# Ports hidden for free placement
 
@@ -394,7 +394,7 @@ func _can_place_at_for_move(cell: Vector2i, elem_size: Vector2i, exclude_placeme
 	
 	return true
 
-func _handle_click(cell: Vector2i) -> void:
+func _handle_click(_cell: Vector2i) -> void:
 	# Legacy - now handled by _start_move_or_select
 	pass
 

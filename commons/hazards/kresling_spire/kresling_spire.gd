@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name KreslingSpire
 ## Kresling origami sniper tower - twisting cylinder that extends to fire.
 ## Compact disc form for mobility, tall tower form for sniping.
@@ -126,7 +126,7 @@ func _process_disc(delta: float) -> void:
 		velocity = Vector3.ZERO
 
 
-func _process_rise(delta: float) -> void:
+func _process_rise(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / rise_duration, 0.0, 1.0)
@@ -174,7 +174,7 @@ func _process_fire(delta: float) -> void:
 			_set_state(State.AIM)
 
 
-func _process_collapse(delta: float) -> void:
+func _process_collapse(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / collapse_duration, 0.0, 1.0)

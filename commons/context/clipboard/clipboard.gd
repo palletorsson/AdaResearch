@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippet_library.gd")
 const TutorialTextLibrary := preload("res://commons/context/clipboard/tutorial_text_library.gd")
@@ -49,7 +49,7 @@ var _tutorial_library: TutorialTextLibrary
 var init_position: Vector3
 var _is_being_held: bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Proximity Reveal Logic (Smart Screen)
 	var camera = get_viewport().get_camera_3d()
 	if not camera: return
@@ -383,7 +383,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var needs_refresh = false
 
 	# Check if there's a direct tutorial ID as a key (shorthand syntax)
-	# e.g., clipboard#point_zero:15:-0.3:1.1 → {"point_zero": "15:-0.3:1.1"}
+	# e.g., clipboard#point_zero:15:-0.3:1.1 â†’ {"point_zero": "15:-0.3:1.1"}
 	for key in config_data.keys():
 		var key_str = str(key).strip_edges()
 		# Skip known parameter keys

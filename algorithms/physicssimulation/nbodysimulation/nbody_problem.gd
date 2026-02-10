@@ -1,4 +1,4 @@
-extends Node2D
+﻿extends Node2D
 
 # N-Body Gravitational Attraction
 # Based on The Nature of Code by Daniel Shiffman
@@ -49,7 +49,7 @@ func create_bodies(count):
 		add_child(body)
 		bodies.append(body)
 
-func _process(delta):
+func _process(_delta):
 	# Apply gravitational forces between all bodies
 	for i in range(bodies.size()):
 		for j in range(bodies.size()):

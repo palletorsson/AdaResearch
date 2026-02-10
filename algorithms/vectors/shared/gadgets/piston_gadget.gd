@@ -1,6 +1,6 @@
-extends GadgetBase
+﻿extends GadgetBase
 
-# Piston Gadget — Two pistons at 90° pushing a platform
+# Piston Gadget â€” Two pistons at 90Â° pushing a platform
 # Uses SliderJoint3D for each piston axis.
 # Piston A extends = |a|, Piston B extends = |b|.
 
@@ -113,7 +113,7 @@ func _ready():
 	label_a = create_label("|a|", Vector3(0.1, -0.03, 0), 14, COLOR_ORANGE)
 	label_b = create_label("|b|", Vector3(-0.03, 0.1, 0), 14, COLOR_CYAN)
 
-func _process(delta):
+func _process(_delta):
 	# Platform marker follows the combined piston positions
 	if piston_a and piston_b:
 		platform_marker.position = Vector3(

@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var ball: RigidBody3D
 var acceleration_vector: Node3D
@@ -164,7 +164,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE

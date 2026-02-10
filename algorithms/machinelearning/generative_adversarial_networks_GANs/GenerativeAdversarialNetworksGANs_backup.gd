@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 
 var time: float = 0.0
@@ -210,7 +210,7 @@ func animate_competition(delta):
 			var blue_component = 0.2 + competition_level * 0.6
 			competition_core.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_data_flow(delta):
+func animate_data_flow(_delta):
 	# Animate data flowing from generator to competition
 	var generator_to_competition = $DataFlow/GeneratorToCompetition
 	# This would contain connection lines or particles showing data flow

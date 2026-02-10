@@ -1,4 +1,4 @@
-# surreal_machines.gd
+﻿# surreal_machines.gd
 # Surreal mechanical contraptions with joints and joyful soft body interactions
 extends Node3D
 
@@ -945,7 +945,7 @@ func _process(delta):
 	update_celebration_effects(delta)
 	update_physics_interactions(delta)
 
-func update_celebration_effects(delta):
+func update_celebration_effects(_delta):
 	# Pulse rainbow effects
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 2.0) * 0.2 + 1.0
 
@@ -954,7 +954,7 @@ func update_celebration_effects(delta):
 			var base_glow = material.get_shader_parameter("glow_intensity")
 			material.set_shader_parameter("glow_intensity", base_glow * time_factor)
 
-func update_physics_interactions(delta):
+func update_physics_interactions(_delta):
 	# Apply gentle forces to create organic movement
 	for i in range(mechanical_parts.size()):
 		var part = mechanical_parts[i]

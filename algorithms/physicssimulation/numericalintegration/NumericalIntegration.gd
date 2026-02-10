@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name NumericalIntegration
 
@@ -27,7 +27,7 @@ func _initialize_particles():
 	for particle in particles:
 		particle.initialize()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if paused:
 		return
 	

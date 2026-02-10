@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Control
 
 # BBCode Tutorial Text Editor
@@ -142,7 +142,7 @@ func _on_bbcode_button_pressed(tag: String) -> void:
 
 	_on_content_changed()
 
-func _on_external_file_toggled(enabled: bool) -> void:
+func _on_external_file_toggled(_enabled: bool) -> void:
 	"""Toggle between inline content and external file"""
 	modified = true
 	_set_status("Modified (unsaved)", Color.YELLOW)

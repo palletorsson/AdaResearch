@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name GadgetBase
 
@@ -22,10 +22,10 @@ var _materials: Dictionary = {}
 
 # Called by the parent scene every frame with current vector values.
 # Override in subclass.
-func update_from_vectors(a: Vector3, b: Vector3) -> void:
+func update_from_vectors(_a: Vector3, b: Vector3) -> void:
 	pass
 
-# ─── BODY HELPERS ───
+# â”€â”€â”€ BODY HELPERS â”€â”€â”€
 
 func create_static_body(pos: Vector3, mesh: Mesh, color: Color, body_name: String = "Static") -> StaticBody3D:
 	var body = StaticBody3D.new()
@@ -65,7 +65,7 @@ func create_rigid_body(pos: Vector3, mesh: Mesh, color: Color, mass: float = 1.0
 	add_child(body)
 	return body
 
-# ─── JOINT HELPERS ───
+# â”€â”€â”€ JOINT HELPERS â”€â”€â”€
 
 func create_hinge_joint(body_a: PhysicsBody3D, body_b: PhysicsBody3D, anchor_pos: Vector3,
 		hinge_axis_rotation: Vector3 = Vector3.ZERO, enable_motor: bool = true,
@@ -132,7 +132,7 @@ func create_spring_joint(body_a: PhysicsBody3D, body_b: PhysicsBody3D, anchor_po
 	add_child(joint)
 	return joint
 
-# ─── MESH HELPERS ───
+# â”€â”€â”€ MESH HELPERS â”€â”€â”€
 
 func make_box_mesh(size: Vector3) -> BoxMesh:
 	var m = BoxMesh.new()
@@ -163,7 +163,7 @@ func make_torus_mesh(inner_radius: float, outer_radius: float) -> TorusMesh:
 	m.rings = 12
 	return m
 
-# ─── MATERIAL HELPERS ───
+# â”€â”€â”€ MATERIAL HELPERS â”€â”€â”€
 
 func get_material(color: Color, unlit: bool = false) -> StandardMaterial3D:
 	var key = str(color) + ("_u" if unlit else "_l")
@@ -197,7 +197,7 @@ func get_emissive_material(color: Color, strength: float = 1.0) -> StandardMater
 	_materials[key] = mat
 	return mat
 
-# ─── VISUAL HELPERS ───
+# â”€â”€â”€ VISUAL HELPERS â”€â”€â”€
 
 func add_mesh_child(parent: Node3D, mesh: Mesh, material: StandardMaterial3D, pos: Vector3 = Vector3.ZERO, rot_deg: Vector3 = Vector3.ZERO) -> MeshInstance3D:
 	var mi = MeshInstance3D.new()
@@ -223,7 +223,7 @@ func create_label(text: String, pos: Vector3, font_size: int = 18, color: Color 
 	add_child(label)
 	return label
 
-# ─── INTERNAL ───
+# â”€â”€â”€ INTERNAL â”€â”€â”€
 
 func _shape_from_mesh(mesh: Mesh) -> Shape3D:
 	if mesh is BoxMesh:

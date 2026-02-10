@@ -8,9 +8,15 @@ extends RefCounted
 const SAMPLE_RATE = 44100.0
 const LEVEL = 0.08
 
-static func generate(t: float, freq: float = 0.0, duration: float = 0.05, trigger_time: float = 0.0) -> float:
+static func generate(t: float, freq: float = 0.0, duration_source = 0.05, trigger_time: float = 0.0) -> float:
 	var dt = t - trigger_time
-	if dt < 0.0 or dt > 0.08:
+	var duration := 0.05
+	if duration_source is bool:
+		duration = 0.12 if duration_source else 0.05
+	else:
+		duration = clampf(float(duration_source), 0.02, 0.2)
+	
+	if dt < 0.0 or dt > (duration + 0.03):
 		return 0.0
 	
 	# Noise source
@@ -24,7 +30,7 @@ static func generate(t: float, freq: float = 0.0, duration: float = 0.05, trigge
 	var output = noise * 0.6 + metallic
 	
 	# Sharp envelope
-	var env = exp(-dt * 80.0)
+	var env = exp(-dt * (80.0 if duration <= 0.06 else 45.0))
 	
 	return clampf(output * env * LEVEL, -1.0, 1.0)
 

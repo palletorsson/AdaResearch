@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name PhysarumAgent
 
 # References
@@ -21,7 +21,7 @@ func initialize(start_pos: Vector3, _grid: PhysarumGrid, _map_size: Vector2):
 	map_size = _map_size
 	rotation.y = rng.randf() * TAU
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# 1. Sense Pipeline
 	# Local Vectors
 	var fwd = -transform.basis.z

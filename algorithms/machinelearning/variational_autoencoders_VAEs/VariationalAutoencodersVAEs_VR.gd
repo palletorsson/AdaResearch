@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Variational Autoencoder Visualization
 # Walk inside latent space, grab points to generate samples
@@ -208,7 +208,7 @@ func _create_latent_space():
 
 	# Label
 	var label = Label3D.new()
-	label.text = "LATENT SPACE\nμ = (%.2f, %.2f, %.2f)\nσ² = (%.2f, %.2f, %.2f)" % [
+	label.text = "LATENT SPACE\nÎ¼ = (%.2f, %.2f, %.2f)\nÏƒÂ² = (%.2f, %.2f, %.2f)" % [
 		latent_mean.x, latent_mean.y, latent_mean.z,
 		latent_variance.x, latent_variance.y, latent_variance.z
 	]
@@ -433,7 +433,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 	return mesh
 
 func _create_reparameterization_viz():
-	"""Visualize reparameterization trick: z = μ + σε"""
+	"""Visualize reparameterization trick: z = Î¼ + ÏƒÎµ"""
 	if not show_reparameterization:
 		return
 
@@ -444,7 +444,7 @@ func _create_reparameterization_viz():
 
 	# Formula visualization
 	var label = Label3D.new()
-	label.text = "REPARAMETERIZATION TRICK\nz = μ + σ ⊙ ε\nwhere ε ~ N(0,1)"
+	label.text = "REPARAMETERIZATION TRICK\nz = Î¼ + Ïƒ âŠ™ Îµ\nwhere Îµ ~ N(0,1)"
 	label.font_size = 44
 	label.outline_size = 10
 	label.modulate = Color(0.9, 0.3, 0.9)
@@ -452,7 +452,7 @@ func _create_reparameterization_viz():
 	reparam_container.add_child(label)
 
 	# Visual components
-	var components = ["μ (mean)", "σ (std)", "ε (noise)", "z (sample)"]
+	var components = ["Î¼ (mean)", "Ïƒ (std)", "Îµ (noise)", "z (sample)"]
 	var colors = [Color(0.3, 0.9, 0.3), Color(0.9, 0.5, 0.3), Color(0.9, 0.3, 0.3), Color(0.9, 0.3, 0.9)]
 	var positions = [Vector3(-3, -1.5, 0), Vector3(-1, -1.5, 0), Vector3(1, -1.5, 0), Vector3(3, -1.5, 0)]
 
@@ -543,7 +543,7 @@ func _create_info_panels():
 	# VAE vs AE
 	_create_info_panel(
 		Vector3(-tunnel_length, 4.0, -3.0),
-		"VARIATIONAL AUTOENCODER\nEncodes to distribution (μ,σ)\nnot single point\nEnables generation",
+		"VARIATIONAL AUTOENCODER\nEncodes to distribution (Î¼,Ïƒ)\nnot single point\nEnables generation",
 		Color(0.3, 0.9, 0.5)
 	)
 
@@ -567,7 +567,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_encoder(delta):
+func _animate_encoder(_delta):
 	"""Animate encoder tunnel"""
 	for i in range(encoder_tunnel.get_child_count()):
 		var child = encoder_tunnel.get_child(i)
@@ -591,7 +591,7 @@ func _animate_latent_space(delta):
 			var to_center = -sample.position.normalized() * 2.0
 			sample.apply_central_force(to_center)
 
-func _animate_decoder(delta):
+func _animate_decoder(_delta):
 	"""Animate decoder tunnel"""
 	for i in range(decoder_tunnel.get_child_count()):
 		var child = decoder_tunnel.get_child(i)
@@ -599,7 +599,7 @@ func _animate_decoder(delta):
 			var pulse = 0.4 + sin(time * 2.0 + float(i) * 0.5) * 0.2 * training_progress
 			child.material_override.emission_energy_multiplier = pulse
 
-func _animate_data_flow(delta):
+func _animate_data_flow(_delta):
 	"""Animate particles flowing through VAE"""
 	# Input particles pulse
 	for particle in input_data_particles:
@@ -611,14 +611,14 @@ func _animate_data_flow(delta):
 		var pulse = 1.0 + cos(time * 2.3 + particle.position.x) * 0.15
 		particle.scale = Vector3.ONE * pulse
 
-func _update_distribution_visualization(delta):
+func _update_distribution_visualization(_delta):
 	"""Update latent distribution label"""
 	if not show_distribution:
 		return
 
 	var label = latent_sphere.get_node_or_null("LatentLabel")
 	if label:
-		label.text = "LATENT SPACE\nμ = (%.2f, %.2f, %.2f)\nσ² = (%.2f, %.2f, %.2f)" % [
+		label.text = "LATENT SPACE\nÎ¼ = (%.2f, %.2f, %.2f)\nÏƒÂ² = (%.2f, %.2f, %.2f)" % [
 			latent_mean.x, latent_mean.y, latent_mean.z,
 			latent_variance.x, latent_variance.y, latent_variance.z
 		]

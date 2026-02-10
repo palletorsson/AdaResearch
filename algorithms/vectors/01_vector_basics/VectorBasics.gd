@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const SpringScaleScript = preload("res://algorithms/vectors/shared/gadgets/spring_scale_gadget.gd")
 
@@ -81,7 +81,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector
@@ -112,7 +112,7 @@ func _update_info(vec: Vector3):
 	builder.append("x: %.2f  y: %.2f  z: %.2f" % [vec.x, vec.y, vec.z])
 	info_label.text = "\n".join(builder)
 
-# ── Magnitude arc (dotted quarter-arc from X-axis toward vector) ──
+# â”€â”€ Magnitude arc (dotted quarter-arc from X-axis toward vector) â”€â”€
 
 func _create_magnitude_dots() -> MultiMeshInstance3D:
 	if _mag_dot_mesh == null:

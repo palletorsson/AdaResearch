@@ -1,4 +1,4 @@
-# gravity_gun.gd
+﻿# gravity_gun.gd
 # VR Gravity Gun - Ray-based targeting with manual capture
 # Objects must be grabbed and placed into the capture zone
 extends Node3D
@@ -310,7 +310,7 @@ func _is_valid_target(body: RigidBody3D) -> bool:
 		return false
 	return true
 
-func _attract_targeted_object(delta: float) -> void:
+func _attract_targeted_object(_delta: float) -> void:
 	if not targeted_object or not is_instance_valid(targeted_object):
 		targeted_object = null
 		return

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var grid_size: Vector3i = Vector3i(20, 10, 20)
 @export var tile_size: float = 2.0
@@ -44,7 +44,7 @@ func _ready():
 			initial_collapsed_indices.append(i)
 	
 	# Initial Propagation: Constrain the empty cells based on the fixed base terrain
-	print("🌊 Propagating initial constraints...")
+	print("ðŸŒŠ Propagating initial constraints...")
 	for idx in initial_collapsed_indices:
 		if not _propagate(idx):
 			push_error("Initial propagation failed! Base terrain invalid.")
@@ -54,24 +54,24 @@ func _ready():
 	if not animate_generation:
 		var success = _run_rest_of_wfc_instant()
 		if success:
-			print("✅ WFC (Instant) Completed!")
+			print("âœ… WFC (Instant) Completed!")
 		else:
-			print("❌ WFC (Instant) Failed!")
+			print("âŒ WFC (Instant) Failed!")
 	else:
-		print("▶️ Starting WFC Animation...")
+		print("â–¶ï¸ Starting WFC Animation...")
 		is_running = true
 
-func _process(delta):
+func _process(_delta):
 	if is_running:
 		for i in range(steps_per_frame):
 			if cells_collapsed_count >= total_cells:
-				print("✅ WFC (Animated) Completed!")
+				print("âœ… WFC (Animated) Completed!")
 				is_running = false
 				break
 				
 			# Perform one step
 			if not _step_wfc():
-				print("❌ WFC Failed (Contradiction) during animation!")
+				print("âŒ WFC Failed (Contradiction) during animation!")
 				is_running = false
 				break
 
@@ -190,10 +190,10 @@ func _generate_base_terrain():
 		elif n == "Slope_W": slope_w = i
 	
 	if water_idx == -1 or grass_idx == -1:
-		push_warning("⚠️ Biome tiles missing, skipping base terrain gen.")
+		push_warning("âš ï¸ Biome tiles missing, skipping base terrain gen.")
 		return
 
-	print("🌍 Generating Heightmap & Ramps...")
+	print("ðŸŒ Generating Heightmap & Ramps...")
 	
 	# 1. Generate Raw Heightmap
 	var hmap = []

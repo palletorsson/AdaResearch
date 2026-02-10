@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Enhanced Configuration variables
 @export_category("Ultra-Vivid Sculpture Configuration")
@@ -731,7 +731,7 @@ func add_sine_wave_dots(mesh_instance, base_color, density, segment_index):
 		
 		mesh_instance.add_child(dot)
 
-func animate_all_elements(delta):
+func animate_all_elements(_delta):
 	animate_core_layers()
 	animate_morphing_petals()
 	animate_undulating_tendrils()

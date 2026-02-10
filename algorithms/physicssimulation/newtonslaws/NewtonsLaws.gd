@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name NewtonsLaws
 
@@ -99,7 +99,7 @@ func create_arrow(color: Color) -> MeshInstance3D:
 	arrow.visible = false
 	return arrow
 
-func create_trail(color: Color) -> ImmediateMesh:
+func create_trail(_color: Color) -> ImmediateMesh:
 	var trail = ImmediateMesh.new()
 	return trail
 

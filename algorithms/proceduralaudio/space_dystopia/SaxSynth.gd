@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name SaxSynth
 
 # Digital Saxophone (Noir Edition)
@@ -72,7 +72,7 @@ func play_note(freq: float, vel: float = 0.8):
 func stop_note():
 	env_state = 4 # Release
 
-func _process(delta):
+func _process(_delta):
 	_fill_buffer()
 
 func _fill_buffer():

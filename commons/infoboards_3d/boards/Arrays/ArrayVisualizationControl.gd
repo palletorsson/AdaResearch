@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 var visualization_type = "intro"
 # Constants for visualization
@@ -485,7 +485,7 @@ func draw_3d_array_visualization(center_x, center_y):
 		draw_line(loop_pos, cube_pos, Color(0.8, 0.8, 1.0, 0.5), 2)
 		draw_circle(pulse_pos, pulse_radius, Color(1.0, 1.0, 1.0, 0.8))
 
-func draw_advanced_visualization(center_x, center_y):
+func draw_advanced_visualization(center_x, _center_y):
 	# Split the visualization area into two sections
 	var section_height = size.y / 2
 	

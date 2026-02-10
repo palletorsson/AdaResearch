@@ -1,6 +1,6 @@
-# qfep_formula_3d.gd
+﻿# qfep_formula_3d.gd
 # 3D visualization of the QFEP formula using TextMesh
-# QFE = F − λE(S) + φΔE(S,t)
+# QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)
 
 extends Node3D
 class_name QFEPFormula3D
@@ -42,7 +42,7 @@ func _ready():
 	add_to_group("qfep_display")
 
 func _create_formula():
-	# Create the formula: QFE = F − λE(S) + φΔE(S,t)
+	# Create the formula: QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)
 	# Position each term horizontally
 	
 	var x_offset: float = 0.0
@@ -60,12 +60,12 @@ func _create_formula():
 	x_offset = _add_term("F", "F", x_offset, COLOR_F)
 	x_offset += spacing
 	
-	# −
-	x_offset = _add_term("minus1", "−", x_offset, COLOR_OPERATOR)
+	# âˆ’
+	x_offset = _add_term("minus1", "âˆ’", x_offset, COLOR_OPERATOR)
 	x_offset += spacing
 	
-	# λ
-	x_offset = _add_term("lambda", "λ", x_offset, COLOR_LAMBDA)
+	# Î»
+	x_offset = _add_term("lambda", "Î»", x_offset, COLOR_LAMBDA)
 	
 	# E(S)
 	x_offset = _add_term("E", "E(S)", x_offset, COLOR_E)
@@ -75,11 +75,11 @@ func _create_formula():
 	x_offset = _add_term("plus", "+", x_offset, COLOR_OPERATOR)
 	x_offset += spacing
 	
-	# φ
-	x_offset = _add_term("phi", "φ", x_offset, COLOR_PHI)
+	# Ï†
+	x_offset = _add_term("phi", "Ï†", x_offset, COLOR_PHI)
 	
-	# Δ
-	x_offset = _add_term("delta", "Δ", x_offset, COLOR_PHI)
+	# Î”
+	x_offset = _add_term("delta", "Î”", x_offset, COLOR_PHI)
 	
 	# E(S,t)
 	x_offset = _add_term("E_rate", "E(S,t)", x_offset, COLOR_E)
@@ -126,7 +126,7 @@ func _setup_materials():
 	# Materials are created in _add_term
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if not animate:
 		return
 	
@@ -169,7 +169,7 @@ func get_term_info(term_name: String) -> Dictionary:
 			}
 		"lambda":
 			return {
-				"name": "Lambda (λ)",
+				"name": "Lambda (Î»)",
 				"description": "Entropy drive. 0=order, 0.4=edge, 1=chaos"
 			}
 		"E":
@@ -179,12 +179,12 @@ func get_term_info(term_name: String) -> Dictionary:
 			}
 		"phi":
 			return {
-				"name": "Phi (φ)",
+				"name": "Phi (Ï†)",
 				"description": "Rate sensitivity. Positive = embrace change."
 			}
 		"delta":
 			return {
-				"name": "Delta (Δ)",
+				"name": "Delta (Î”)",
 				"description": "Rate of change in entropy over time."
 			}
 		"E_rate":

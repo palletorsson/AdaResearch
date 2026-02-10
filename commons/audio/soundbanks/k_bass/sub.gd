@@ -24,9 +24,13 @@ const SATURATION = 1.3            # Harmonic content
 const LEVEL = 0.5
 
 
-static func generate(t: float, freq: float, note_duration: float = 1.0, note_time: float = 0.0) -> float:
+static func generate(t: float, freq_source = 55.0, note_duration: float = 1.0, note_time: float = 0.0) -> float:
 	var dt = t - note_time
 	if dt < 0.0:
+		return 0.0
+	
+	var freq = _resolve_freq(freq_source)
+	if freq <= 0.0:
 		return 0.0
 	
 	# Envelope
@@ -69,8 +73,17 @@ static func generate(t: float, freq: float, note_duration: float = 1.0, note_tim
 	return clampf(output * env * LEVEL, -1.0, 1.0)
 
 
-static func generate_sample(t: float, freq: float) -> float:
-	return generate(t, freq, 10.0, 0.0)
+static func generate_sample(t: float, freq_source = 55.0) -> float:
+	return generate(t, freq_source, 10.0, 0.0)
+
+
+static func _resolve_freq(source) -> float:
+	if source is Array:
+		var values: Array = source
+		if values.is_empty():
+			return 55.0
+		return maxf(float(values[0]), 1.0)
+	return maxf(float(source), 1.0)
 
 
 static func get_duration() -> float:

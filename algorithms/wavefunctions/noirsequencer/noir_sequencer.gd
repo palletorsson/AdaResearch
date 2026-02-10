@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 # Constants
 const ROWS = 8
@@ -282,7 +282,7 @@ func play_note(note_name):
 	if using_fallback:
 		play_note_fallback(note_name, freq)
 
-func try_play_note_primary(note_name, freq):
+func try_play_note_primary(_note_name, freq):
 	var amp = 0.5
 	var attack = 0.05
 	var release = 0.7

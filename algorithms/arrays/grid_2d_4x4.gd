@@ -82,7 +82,7 @@ func _create_binary_table():
 	# Configure table - BIGGER for visibility
 	table.rows = 4
 	table.cols = 4
-	table.title = "grid[x][z]"
+	table.title = ""  # No title
 	table.cell_size = 0.22  # Increased from 0.12
 	table.font_size = 56    # Increased from 32
 	table.data = grid_data

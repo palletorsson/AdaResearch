@@ -1,4 +1,4 @@
-extends MeshInstance3D
+﻿extends MeshInstance3D
 
 @export var texture_size: Vector2i = Vector2i(1440, 1000)  # Resolution of the drawing texture
 @export var default_brush_size: int = 12  # Default size of the brush stroke
@@ -224,6 +224,6 @@ func draw_at_world_position(world_pos: Vector3, color: Color = Color.BLACK):
 	if uv.x >= 0.0 and uv.x <= 1.0 and uv.y >= 0.0 and uv.y <= 1.0:
 		draw_point(uv, color)
 
-func _process(delta):
+func _process(_delta):
 	# GPU simulation runs automatically in the shader/viewport
 	pass

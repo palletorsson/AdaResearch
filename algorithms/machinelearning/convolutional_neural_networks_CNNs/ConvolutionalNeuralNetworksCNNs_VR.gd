@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Convolutional Neural Networks
 # Walk through CNN layers as physical spatial architecture
@@ -283,7 +283,7 @@ func _create_pooling_layers():
 
 		# Label
 		var label = Label3D.new()
-		label.text = "MAX POOL\n2x2 → ½ size"
+		label.text = "MAX POOL\n2x2 â†’ Â½ size"
 		label.font_size = 42
 		label.outline_size = 10
 		label.modulate = Color(0.9, 0.5, 0.3)
@@ -500,7 +500,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_feature_maps(delta):
+func _animate_feature_maps(_delta):
 	"""Animate feature map planes"""
 	for layer_idx in range(feature_maps.size()):
 		for filter_idx in range(feature_maps[layer_idx].size()):

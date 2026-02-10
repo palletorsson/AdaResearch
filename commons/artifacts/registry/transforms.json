@@ -57,6 +57,29 @@
 				"rotation_per_segment": "float - degrees of rotation per cube",
 				"num_segments": "int - total number of cubes"
 			}
+		},
+		
+		"transformation_workbench": {
+			"name": "Transformation Workbench",
+			"lookup_name": "transformation_workbench",
+			"description": "Interactive VR learning tool for understanding transformations. Grabbable cube shows live 4x4 matrix updates, ghost position for comparison, and mode buttons to switch between Translate (T), Rotate (R), and Scale (S). Rotation snaps to 90° increments and shows coordinate swap notation. Matrix cells highlight based on current transformation mode.",
+			"scene": "res://algorithms/transformation/transformation_workbench/transformation_workbench.tscn",
+			"category": "transforms",
+			"parameters": {
+				"current_mode": "int - Starting mode: 0=Translate, 1=Rotate, 2=Scale",
+				"show_matrix": "bool - Show the 4x4 matrix display (default true)",
+				"show_ghost": "bool - Show ghost at original position (default true)",
+				"show_vectors": "bool - Show transformation vector/info (default true)",
+				"snap_rotation_to_90": "bool - Snap rotations to 90° increments (default true)"
+			}
+		},
+		
+		"rotatescalecubes": {
+			"name": "Rotate Scale Cubes",
+			"lookup_name": "rotatescalecubes",
+			"description": "Demonstration of combined rotation and scaling transformations on multiple cubes.",
+			"scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+			"category": "transforms"
 		}
 	}
 }

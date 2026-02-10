@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name SynthCablePlug
 
 ## Grabbable plug end of a synth cable
@@ -168,7 +168,7 @@ func _on_area_entered(area: Area3D):
 		_snap_to_jack(parent)
 
 
-func _on_area_exited(area: Area3D):
+func _on_area_exited(_area: Area3D):
 	pass  # Disconnection handled by jack or grab
 
 

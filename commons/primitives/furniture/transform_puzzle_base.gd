@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name TransformPuzzleBase
 
 ## TransformPuzzleBase - Base class for puzzles verifying full transforms
@@ -639,7 +639,7 @@ func _on_piece_scale_changed(_new_scale: float, _scale_index: int, piece_id: Str
 
 
 ## Called when a piece is dropped
-func _on_piece_dropped(_pickable, piece_id: String) -> void:
+func _on_piece_dropped(_pickable, _piece_id: String) -> void:
 	# Trigger immediate validation
 	_validate_all_pieces()
 

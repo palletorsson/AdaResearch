@@ -1,5 +1,5 @@
-# WordSynthBridge.gd
-# Translates semantic words → actual synth parameters
+﻿# WordSynthBridge.gd
+# Translates semantic words â†’ actual synth parameters
 # Handles conflict resolution when multiple words apply
 # Configuration is loaded from word_synthesis_map.json (single source of truth)
 
@@ -66,7 +66,7 @@ func get_word_category(word: String) -> String:
 	return "unknown"
 
 
-func resolve_param_value(param_name: String, param_data) -> float:
+func resolve_param_value(_param_name: String, param_data) -> float:
 	"""Convert word param data to a concrete value"""
 	if param_data is Dictionary:
 		if param_data.has("value"):
@@ -88,7 +88,7 @@ func words_to_live_params(layer: String, words: Array) -> Dictionary:
 	var result: Dictionary = {}
 	var param_contributions: Dictionary = {}  # param -> [{value, weight}]
 	
-	var layer_key = layer.to_lower().split(" ")[0]  # "Filter Bass" → "filter"
+	var layer_key = layer.to_lower().split(" ")[0]  # "Filter Bass" â†’ "filter"
 	# Map common layer names
 	if "bass" in layer.to_lower(): layer_key = "bass"
 	elif "pad" in layer.to_lower(): layer_key = "pad"
@@ -98,7 +98,7 @@ func words_to_live_params(layer: String, words: Array) -> Dictionary:
 	
 	# Check for conflicting words - later word in list wins for exclusive pairs
 	var exclusive_pairs = _conflict_rules.get("exclusive_pairs", [])
-	var excluded_words = {}  # word → true if excluded by a later exclusive
+	var excluded_words = {}  # word â†’ true if excluded by a later exclusive
 	
 	# Process in reverse to let later words win
 	for i in range(words.size() - 1, -1, -1):
@@ -175,7 +175,7 @@ func apply_words_to_params(layer: String, words: Array, current_params: Dictiona
 	return result
 
 
-func suggest_words_from_params(layer: String, params: Dictionary) -> Array:
+func suggest_words_from_params(_layer: String, params: Dictionary) -> Array:
 	"""Reverse mapping: given params, suggest appropriate words"""
 	var suggestions: Array = []
 	

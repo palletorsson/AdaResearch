@@ -1,4 +1,4 @@
-# SoundTimelineVisualizer.gd
+﻿# SoundTimelineVisualizer.gd
 extends Control
 
 class_name SoundTimelineVisualizer
@@ -169,7 +169,7 @@ func update_playback_position(delta):
 		if timeline_duration > 0:
 			scroll_position = playback_position / timeline_duration
 
-func update_visualization(delta):
+func update_visualization(_delta):
 	# Update playhead position
 	var timeline_duration = get_timeline_duration()
 	if timeline_duration > 0:

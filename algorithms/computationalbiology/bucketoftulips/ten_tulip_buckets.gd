@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Ten Tulip Buckets Generator
 # Creates 10 instances of the bucket of tulips scene
@@ -104,7 +104,7 @@ func create_ten_buckets():
 		add_child(bucket_instance)
 		bucket_instances.append(bucket_instance)
 
-func randomize_bucket_properties(bucket_instance, index):
+func randomize_bucket_properties(bucket_instance, _index):
 	# Randomize scale slightly
 	var scale_factor = 0.8 + randf() * 0.4  # 0.8 to 1.2
 	bucket_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)

@@ -1,4 +1,4 @@
-# AlgorithmInfoBoardBase.gd
+﻿# AlgorithmInfoBoardBase.gd
 # Base controller for handheld algorithm info boards
 # Manages page navigation, content display, and visualization switching
 extends Control
@@ -309,7 +309,7 @@ func update_visualization(vis_type: String) -> void:
 			visualization_control.set_animation_playing(animation_playing)
 
 # Virtual function - override to create specific visualizations
-func create_visualization(vis_type: String) -> Control:
+func create_visualization(_vis_type: String) -> Control:
 	# Return null by default - child classes should override
 	return null
 
@@ -369,7 +369,7 @@ func _setup_vr_input():
 	
 	print("AlgorithmInfoBoardBase: VR input handler configured")
 
-func _on_vr_scroll_changed(scroll_value: float):
+func _on_vr_scroll_changed(_scroll_value: float):
 	"""Handle VR scroll changes - override in child classes for custom behavior"""
 	pass
 

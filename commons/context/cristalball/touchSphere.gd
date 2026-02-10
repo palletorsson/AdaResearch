@@ -1,4 +1,4 @@
-extends Area3D
+﻿extends Area3D
 
 @export var cooldown_time: float = 3.5  # Cooldown time in seconds
 var is_on_cooldown: bool = false  # To track whether the sphere is on cooldown
@@ -19,7 +19,7 @@ func _ready():
 	cooldown_timer.connect("timeout", Callable(self, "_on_cooldown_timeout"))
 	add_child(cooldown_timer)
 
-func _on_area_entered(area: Area3D) -> void:
+func _on_area_entered(_area: Area3D) -> void:
 	if not is_on_cooldown:
 		# Activate glowing color
 		if material:

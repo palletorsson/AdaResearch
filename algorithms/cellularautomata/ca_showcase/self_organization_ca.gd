@@ -1,4 +1,4 @@
-# SelfOrganizationCA.gd
+﻿# SelfOrganizationCA.gd
 # Self-organizing patterns and emergence
 extends BaseCA
 
@@ -23,7 +23,7 @@ func initialize_grid():
 			for z in range(GRID_SIZE):
 				grid[x][y][z] = randi() % 10  # Random state 0-9
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Evolve self-organizing patterns
 	evolve_self_organization()
 	update_visualization()

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name QueerNoiseTerrain
 
 # Terrain parameters
@@ -383,7 +383,7 @@ func apply_terrain_material():
 		mesh_instance.material_override = terrain_material
 		print("Applied standard material")
 
-func animate_terrain_colors(delta):
+func animate_terrain_colors(_delta):
 	if not terrain_mesh:
 		return
 	

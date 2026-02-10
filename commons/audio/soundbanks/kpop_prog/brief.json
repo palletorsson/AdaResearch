@@ -141,14 +141,25 @@
   },
 
   "sections": {
-    "intro": { "bars": 8, "elements": ["kraftwerk_seq"] },
-    "verse": { "bars": 8, "elements": ["mellotron_pad", "kick", "snare", "hihat", "hihat_open"] },
-    "prechorus": { "bars": 4, "elements": ["mellotron_pad", "kraftwerk_seq", "kick", "snare", "hihat", "clap"] },
-    "chorus": { "bars": 8, "elements": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"] },
-    "dance_break": { "bars": 4, "elements": ["neomoog_lead", "kick", "snare", "hihat"] },
-    "bridge": { "bars": 4, "elements": ["mellotron_pad"] },
-    "final_chorus": { "bars": 8, "elements": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"], "key_change": "+1" },
-    "outro": { "bars": 4, "elements": ["kraftwerk_seq", "mellotron_pad"] }
+    "intro": ["kraftwerk_seq"],
+    "verse": ["mellotron_pad", "kick", "snare", "hihat", "hihat_open"],
+    "prechorus": ["mellotron_pad", "kraftwerk_seq", "kick", "snare", "hihat", "clap"],
+    "chorus": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"],
+    "dance_break": ["neomoog_lead", "kick", "snare", "hihat"],
+    "bridge": ["mellotron_pad"],
+    "final_chorus": ["supersaw_pad", "808_sub", "kick", "snare", "clap", "hihat"],
+    "outro": ["kraftwerk_seq", "mellotron_pad"]
+  },
+
+  "section_specs": {
+    "intro": { "bars": 8 },
+    "verse": { "bars": 8 },
+    "prechorus": { "bars": 4 },
+    "chorus": { "bars": 8 },
+    "dance_break": { "bars": 4 },
+    "bridge": { "bars": 4 },
+    "final_chorus": { "bars": 8, "key_change": "+1" },
+    "outro": { "bars": 4 }
   },
 
   "arrangement": [

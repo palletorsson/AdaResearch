@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name SciFiSynth
 
 # Space Dystopia Orchestrator
@@ -151,7 +151,7 @@ func _setup_track_1_drift():
 	wind_gen.grain_density = 60.0 # Heavy storm
 	wind_gen.grain_pitch_base = 1.5 # Higher pitch whistling
 
-func _seq_track_1_drift(delta):
+func _seq_track_1_drift(_delta):
 	# Sparse Piano Logic (Markov Chain Lite)
 	# Play a note every 5-10 seconds
 	if randf() < 0.005: # approx once per 3-4 sec at 60fps
@@ -170,7 +170,7 @@ func _setup_track_2_interdimensional():
 	# Start evolving drone
 	wave_synth.play_note(55.0, 0.4, 0.0) # A1 drone
 
-func _seq_track_2_interdimensional(delta):
+func _seq_track_2_interdimensional(_delta):
 	# Automation: Slowly sweep wavetable position
 	# 0 = Sine, 1 = Tri, 2 = Saw, 3 = Square, 4 = Pulse
 	var sweep = (sin(time * 0.1) + 1.0) * 2.0 # 0 to 4 slow sweep
@@ -202,7 +202,7 @@ func _setup_track_3_foundry():
 	# We'll use the 'noise_player' to trigger hits or re-purpose a player.
 	pass
 
-func _seq_track_3_foundry(delta):
+func _seq_track_3_foundry(_delta):
 	# Industrial Rhythm (Slow, heavy)
 	# BPM ~ 60
 	var t_int = int(time * 1000)
@@ -240,7 +240,7 @@ func _setup_track_4_noir():
 	pad_player_l.volume_db = -6.0
 	pad_player_l.play()
 
-func _seq_track_4_noir(delta):
+func _seq_track_4_noir(_delta):
 	# Saxophone "Human" Player Logic
 	# Phrases: Play for 2-4 sec, Rest for 3-6 sec
 	
@@ -295,7 +295,7 @@ func _setup_track_5_stellar():
 	
 	wave_synth.play_note(293.66, 0.3, 3.0) # D4, Square wave start
 
-func _seq_track_5_stellar(delta):
+func _seq_track_5_stellar(_delta):
 	# Very slow morph
 	var morph = (sin(time * 0.05) + 1.0) * 2.0 # 0 to 4
 	wave_synth.set_shape_pos(morph)
@@ -316,7 +316,7 @@ func _setup_track_6_neon():
 	pad_player_l.volume_db = -6.0
 	pad_player_l.play()
 
-func _seq_track_6_neon(delta):
+func _seq_track_6_neon(_delta):
 	# Generative Jazz Quintet Logic
 	var t_int = int(time * 1000)
 	
@@ -364,7 +364,7 @@ func _setup_track_7_skyline():
 	pad_player_r.volume_db = -6.0
 	pad_player_r.play()
 
-func _seq_track_7_skyline(delta):
+func _seq_track_7_skyline(_delta):
 	# Mournful Piano (High reverb)
 	if randf() < 0.005:
 		if piano:
@@ -385,7 +385,7 @@ func _setup_track_8_market():
 	# 2. Simple Beat (Using Metallic Hits on off-beats for industrial feel)
 	# Done in sequencer
 
-func _seq_track_8_market(delta):
+func _seq_track_8_market(_delta):
 	# 120 BPM = 500ms per beat. 16th note = 125ms
 	var t_int = int(time * 1000)
 	var beat_16 = (t_int / 125) % 16
@@ -438,7 +438,7 @@ func _setup_track_9_celestial():
 	pad_player_r.volume_db = -5.0
 	pad_player_r.play()
 
-func _seq_track_9_celestial(delta):
+func _seq_track_9_celestial(_delta):
 	# Lead melody using FMPiano (Bell-like)
 	if randf() < 0.01:
 		if piano:
@@ -473,7 +473,7 @@ func _setup_track_10_singularity():
 	
 	wave_synth.play_note(110.0, 0.2, 0.0)
 
-func _seq_track_10_singularity(delta):
+func _seq_track_10_singularity(_delta):
 	# Chaos Engine
 	# Randomly morph wavetable fast
 	var warp = (sin(time * 10.0) + 1.0) * 2.0

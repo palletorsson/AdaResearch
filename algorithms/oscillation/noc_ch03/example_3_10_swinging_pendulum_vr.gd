@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 3.10: Swinging Pendulum
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -80,7 +80,7 @@ func _spawn_pendulum() -> void:
 	_bob.material_override = MAT_BOB
 	_anchor.add_child(_bob)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_angular_acceleration = (-gravity / arm_length) * sin(_angle)
 	_angular_velocity += _angular_acceleration
 	_angular_velocity *= 0.995
@@ -90,4 +90,4 @@ func _process(delta: float) -> void:
 	_rod.position = Vector3(0, -arm_length / 2, 0)
 	_bob.position = Vector3(0, -arm_length, 0)
 
-	_status_label.text = "Pendulum | %.1f°" % rad_to_deg(_angle)
+	_status_label.text = "Pendulum | %.1fÂ°" % rad_to_deg(_angle)

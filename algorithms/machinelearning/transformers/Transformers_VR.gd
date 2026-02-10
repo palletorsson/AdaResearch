@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Transformer Visualization
 # Walk through token sequences with visible attention beams
@@ -354,7 +354,7 @@ func _create_qkv_visualization():
 
 	# Description
 	var desc = Label3D.new()
-	desc.text = "Self-Attention Computation:\nAttention(Q,K,V) = softmax(QK^T/√d)V"
+	desc.text = "Self-Attention Computation:\nAttention(Q,K,V) = softmax(QK^T/âˆšd)V"
 	desc.font_size = 32
 	desc.outline_size = 8
 	desc.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -511,7 +511,7 @@ func _update_attention_weights(delta):
 			for k_idx in range(sequence_length):
 				attention_weights[head][q_idx][k_idx] = max(0.0, attention_weights[head][q_idx][k_idx]) / max(0.001, total)
 
-func _animate_tokens(delta):
+func _animate_tokens(_delta):
 	"""Animate token spheres"""
 	for i in range(encoder_tokens.size()):
 		var token = encoder_tokens[i]
@@ -523,7 +523,7 @@ func _animate_tokens(delta):
 		var pulse = 1.0 + cos(time * 2.2 + i * 0.4) * 0.15 * training_progress
 		token.scale = Vector3.ONE * pulse
 
-func _animate_attention_beams(delta):
+func _animate_attention_beams(_delta):
 	"""Update attention beam visualizations"""
 	if not show_attention_beams:
 		return
@@ -550,7 +550,7 @@ func _animate_attention_beams(delta):
 				var weight = attention_weights[head][q_idx][k_idx]
 				beam.material_override.emission_energy_multiplier = weight * 2.0
 
-func _animate_positional_encoding(delta):
+func _animate_positional_encoding(_delta):
 	"""Animate positional encoding waves"""
 	for encoding_data in positional_encodings:
 		var pos = encoding_data.position
@@ -568,7 +568,7 @@ func _animate_positional_encoding(delta):
 
 			particle.position = Vector3(x, y, z)
 
-func _animate_qkv(delta):
+func _animate_qkv(_delta):
 	"""Animate Query/Key/Value spheres"""
 	for i in range(qkv_visualizations.size()):
 		var qkv = qkv_visualizations[i]

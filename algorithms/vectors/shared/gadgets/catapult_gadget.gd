@@ -1,6 +1,6 @@
-extends GadgetBase
+﻿extends GadgetBase
 
-# Catapult Gadget — Mini launcher driven by force vectors
+# Catapult Gadget â€” Mini launcher driven by force vectors
 # Uses HingeJoint3D with motor and angle limits.
 # Arm angle = force direction, arm pull-back = force magnitude.
 
@@ -82,7 +82,7 @@ func _ready():
 	# --- Label ---
 	force_label = create_label("|F|", Vector3(0.06, 0.06, 0), 14, COLOR_ORANGE)
 
-func _process(delta):
+func _process(_delta):
 	# Drive arm toward target angle
 	var current_angle = arm.rotation.z
 	var angle_error = _target_angle - current_angle

@@ -1,4 +1,4 @@
-# SoundDetailPanel.gd
+﻿# SoundDetailPanel.gd
 # Full sound editing panel with tabs: Sound (params), Pattern (sequencer), FX
 # Click a sound in catalog to open
 
@@ -182,14 +182,14 @@ func _setup_ui():
 	main_vbox.add_child(header)
 	
 	_header_label = Label.new()
-	_header_label.text = "🎛️ SOUND EDITOR"
+	_header_label.text = "ðŸŽ›ï¸ SOUND EDITOR"
 	_header_label.add_theme_font_size_override("font_size", 22)
 	_header_label.add_theme_color_override("font_color", Color(0.4, 0.85, 1.0))
 	_header_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(_header_label)
 	
 	_preview_btn = Button.new()
-	_preview_btn.text = "▶ Preview"
+	_preview_btn.text = "â–¶ Preview"
 	_preview_btn.pressed.connect(_on_preview_pressed)
 	_style_button(_preview_btn, Color(0.2, 0.5, 0.3))
 	header.add_child(_preview_btn)
@@ -240,7 +240,7 @@ func _style_tab_container(tabs: TabContainer):
 
 func _setup_sound_tab():
 	_sound_tab = VBoxContainer.new()
-	_sound_tab.name = "🎛️ Sound"
+	_sound_tab.name = "ðŸŽ›ï¸ Sound"
 	_sound_tab.add_theme_constant_override("separation", 12)
 	_tab_container.add_child(_sound_tab)
 	
@@ -255,7 +255,7 @@ func _setup_sound_tab():
 	scroll.add_child(content)
 	
 	# === WORDS SECTION ===
-	content.add_child(_create_section_header("🏷️ WORDS", Color(0.9, 0.7, 0.4)))
+	content.add_child(_create_section_header("ðŸ·ï¸ WORDS", Color(0.9, 0.7, 0.4)))
 	
 	_words_container = HFlowContainer.new()
 	_words_container.add_theme_constant_override("h_separation", 8)
@@ -270,21 +270,21 @@ func _setup_sound_tab():
 	content.add_child(add_word_btn)
 	
 	# === SLIDERS SECTION ===
-	content.add_child(_create_section_header("⚙️ PARAMETERS", Color(0.4, 0.7, 0.9)))
+	content.add_child(_create_section_header("âš™ï¸ PARAMETERS", Color(0.4, 0.7, 0.9)))
 	
 	_sliders_container = VBoxContainer.new()
 	_sliders_container.add_theme_constant_override("separation", 8)
 	content.add_child(_sliders_container)
 	
 	# === SUGGESTIONS SECTION ===
-	content.add_child(_create_section_header("💡 SUGGESTIONS", Color(0.9, 0.8, 0.4)))
+	content.add_child(_create_section_header("ðŸ’¡ SUGGESTIONS", Color(0.9, 0.8, 0.4)))
 	
 	_suggestions_container = VBoxContainer.new()
 	_suggestions_container.add_theme_constant_override("separation", 4)
 	content.add_child(_suggestions_container)
 	
 	# === EVALUATION SECTION ===
-	content.add_child(_create_section_header("📊 EVALUATION", Color(0.6, 0.9, 0.7)))
+	content.add_child(_create_section_header("ðŸ“Š EVALUATION", Color(0.6, 0.9, 0.7)))
 	
 	_evaluation_container = VBoxContainer.new()
 	_evaluation_container.add_theme_constant_override("separation", 4)
@@ -296,19 +296,19 @@ func _setup_sound_tab():
 	content.add_child(action_row)
 	
 	var reset_btn = Button.new()
-	reset_btn.text = "↺ Reset"
+	reset_btn.text = "â†º Reset"
 	reset_btn.pressed.connect(_on_reset_pressed)
 	_style_button(reset_btn, Color(0.4, 0.3, 0.3))
 	action_row.add_child(reset_btn)
 	
 	var random_btn = Button.new()
-	random_btn.text = "🎲 Randomize"
+	random_btn.text = "ðŸŽ² Randomize"
 	random_btn.pressed.connect(_on_randomize_pressed)
 	_style_button(random_btn, Color(0.5, 0.3, 0.5))
 	action_row.add_child(random_btn)
 	
 	var copy_btn = Button.new()
-	copy_btn.text = "📋 Copy Config"
+	copy_btn.text = "ðŸ“‹ Copy Config"
 	copy_btn.pressed.connect(_on_copy_config_pressed)
 	_style_button(copy_btn, Color(0.3, 0.4, 0.4))
 	action_row.add_child(copy_btn)
@@ -316,7 +316,7 @@ func _setup_sound_tab():
 
 func _setup_pattern_tab():
 	_pattern_tab = VBoxContainer.new()
-	_pattern_tab.name = "🎵 Pattern"
+	_pattern_tab.name = "ðŸŽµ Pattern"
 	_pattern_tab.add_theme_constant_override("separation", 8)
 	_tab_container.add_child(_pattern_tab)
 	
@@ -341,7 +341,7 @@ func _setup_pattern_tab():
 
 func _setup_fx_tab():
 	_fx_tab = VBoxContainer.new()
-	_fx_tab.name = "✨ FX"
+	_fx_tab.name = "âœ¨ FX"
 	_fx_tab.add_theme_constant_override("separation", 12)
 	_tab_container.add_child(_fx_tab)
 	
@@ -356,21 +356,21 @@ func _setup_fx_tab():
 	scroll.add_child(content)
 	
 	# FX sections
-	content.add_child(_create_section_header("🌀 REVERB", Color(0.5, 0.7, 0.9)))
+	content.add_child(_create_section_header("ðŸŒ€ REVERB", Color(0.5, 0.7, 0.9)))
 	content.add_child(_create_fx_slider("reverb_mix", "Mix", 0.0, 1.0, 0.3))
 	content.add_child(_create_fx_slider("reverb_size", "Size", 0.0, 1.0, 0.5))
 	content.add_child(_create_fx_slider("reverb_damping", "Damping", 0.0, 1.0, 0.5))
 	
-	content.add_child(_create_section_header("⏱️ DELAY", Color(0.7, 0.6, 0.5)))
+	content.add_child(_create_section_header("â±ï¸ DELAY", Color(0.7, 0.6, 0.5)))
 	content.add_child(_create_fx_slider("delay_mix", "Mix", 0.0, 1.0, 0.2))
 	content.add_child(_create_fx_slider("delay_time", "Time", 0.05, 1.0, 0.375))
 	content.add_child(_create_fx_slider("delay_feedback", "Feedback", 0.0, 0.9, 0.3))
 	
-	content.add_child(_create_section_header("📢 DISTORTION", Color(0.9, 0.5, 0.4)))
+	content.add_child(_create_section_header("ðŸ“¢ DISTORTION", Color(0.9, 0.5, 0.4)))
 	content.add_child(_create_fx_slider("distortion_drive", "Drive", 0.0, 1.0, 0.0))
 	content.add_child(_create_fx_slider("distortion_mix", "Mix", 0.0, 1.0, 0.5))
 	
-	content.add_child(_create_section_header("🎚️ FILTER", Color(0.6, 0.8, 0.5)))
+	content.add_child(_create_section_header("ðŸŽšï¸ FILTER", Color(0.6, 0.8, 0.5)))
 	content.add_child(_create_fx_slider("filter_cutoff", "Cutoff", 20, 20000, 8000))
 	content.add_child(_create_fx_slider("filter_resonance", "Resonance", 0.0, 1.0, 0.1))
 
@@ -460,14 +460,14 @@ func load_sound(song_id: String, layer: String, words: Array = [], params: Dicti
 	_original_params = config.duplicate(true)
 	
 	# Update header
-	_header_label.text = "🎛️ %s" % layer
+	_header_label.text = "ðŸŽ›ï¸ %s" % layer
 	var synth_type = SoundDescriptions.get_short_type(layer)
 	_type_label.text = "Song: %s | Type: %s" % [song_id, synth_type]
 	if not section.is_empty():
 		_type_label.text += " | Section: %s" % section
 	
 	# Synthesis description
-	_synth_description.text = "⚡ " + SoundDescriptions.get_description(layer, song_id)
+	_synth_description.text = "âš¡ " + SoundDescriptions.get_description(layer, song_id)
 	
 	# Rebuild UI
 	_rebuild_words()
@@ -500,7 +500,7 @@ func _setup_pattern_editor_for_layer(layer: String):
 	# Determine editor type and create appropriate editor
 	if _is_drum_layer(layer_lower):
 		editor_type = "drum"
-		_pattern_type_label.text = "🥁 Drum Sequencer for: %s" % layer
+		_pattern_type_label.text = "ðŸ¥ Drum Sequencer for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = DrumPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -511,7 +511,7 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.preview_requested.connect(_on_pattern_preview)
 	elif _is_bass_layer(layer_lower):
 		editor_type = "bass"
-		_pattern_type_label.text = "🎸 Bass Timeline for: %s" % layer
+		_pattern_type_label.text = "ðŸŽ¸ Bass Timeline for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = BassPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -522,7 +522,7 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.preview_requested.connect(_on_bass_preview)
 	elif _is_chord_layer(layer_lower):
 		editor_type = "chord"
-		_pattern_type_label.text = "🎹 Chord Timeline for: %s" % layer
+		_pattern_type_label.text = "ðŸŽ¹ Chord Timeline for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ChordPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -533,7 +533,7 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.preview_requested.connect(_on_chord_preview)
 	elif _is_arp_layer(layer_lower):
 		editor_type = "arp"
-		_pattern_type_label.text = "🎵 Arpeggio Editor for: %s" % layer
+		_pattern_type_label.text = "ðŸŽµ Arpeggio Editor for: %s" % layer
 		if _use_unified_editors:
 			_pattern_editor = ArpPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -544,7 +544,7 @@ func _setup_pattern_editor_for_layer(layer: String):
 			_pattern_editor.preview_requested.connect(_on_arp_preview)
 	else:
 		# Default to drum pattern editor for unknown
-		_pattern_type_label.text = "🎵 Pattern Editor for: %s (generic)" % layer
+		_pattern_type_label.text = "ðŸŽµ Pattern Editor for: %s (generic)" % layer
 		if _use_unified_editors:
 			_pattern_editor = DrumPatternEditor.new()
 			_pattern_editor.pattern_changed.connect(_on_unified_pattern_changed)
@@ -724,11 +724,11 @@ func _on_pattern_preview(element: String):
 	preview_requested.emit(element)
 
 
-func _on_bass_preview(note: int):
+func _on_bass_preview(_note: int):
 	preview_requested.emit(_current_layer)
 
 
-func _on_chord_preview(chord: Array):
+func _on_chord_preview(_chord: Array):
 	preview_requested.emit(_current_layer)
 
 
@@ -784,7 +784,7 @@ func _rebuild_words():
 
 func _create_word_tag(word: String) -> Button:
 	var btn = Button.new()
-	btn.text = word + " ✕"
+	btn.text = word + " âœ•"
 	btn.add_theme_font_size_override("font_size", 13)
 	
 	var category = _word_bridge.get_word_category(word)
@@ -1037,10 +1037,10 @@ func _create_suggestion_row(suggestion: Dictionary) -> Control:
 	# Icon
 	var icon = Label.new()
 	match suggestion["action"]:
-		"adjust": icon.text = "⚙️"
-		"conflict": icon.text = "⚠️"
-		"add_word": icon.text = "💡"
-		_: icon.text = "•"
+		"adjust": icon.text = "âš™ï¸"
+		"conflict": icon.text = "âš ï¸"
+		"add_word": icon.text = "ðŸ’¡"
+		_: icon.text = "â€¢"
 	icon.add_theme_font_size_override("font_size", 12)
 	row.add_child(icon)
 	

@@ -1,4 +1,4 @@
-# entity.gd
+﻿# entity.gd
 class_name Entity
 extends Node3D
 
@@ -50,7 +50,7 @@ func _setup_visual_representation():
 	visual_representation.name = "VisualForm"
 	add_child(visual_representation)
 
-func _process(delta):
+func _process(_delta):
 	# Age and energy updates happen in process_behavior
 	pass
 
@@ -152,7 +152,7 @@ func _process_seeking_connection(delta):
 		)
 		target_position = position + random_offset
 
-func _process_transforming(delta):
+func _process_transforming(_delta):
 	# Transformation is a process that takes time
 	if !is_transforming:
 		# Start transformation
@@ -186,7 +186,7 @@ func _process_challenging_boundary(delta):
 	# Move back to idle after the challenge
 	_set_behavior("idle")
 
-func _process_celebrating(delta):
+func _process_celebrating(_delta):
 	# Celebration after a transformation or other significant event
 	# This might involve special visual effects or interactions
 	

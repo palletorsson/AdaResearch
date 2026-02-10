@@ -1,4 +1,4 @@
-# RaycastingPointsVR.gd
+﻿# RaycastingPointsVR.gd
 # A mesmerizing VR scene with particles that react to invisible rays
 extends Node3D
 
@@ -405,7 +405,7 @@ func update_ray_shader_data():
 	process_material.set_shader_parameter("ray_strengths", ray_strength_array)
 
 # Optional: Add interaction with VR controllers
-func _input(event):
+func _input(_event):
 	# This could be extended to respond to VR controller input
 	# For now, rays move automatically
 	pass

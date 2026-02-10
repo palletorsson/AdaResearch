@@ -1,4 +1,4 @@
-# jelly_cube.gd
+﻿# jelly_cube.gd
 # A soft, deformable cube that jiggles when touched
 # VR-enabled with physics parameter controls
 
@@ -282,7 +282,7 @@ func _reset_physics(_button = null):  # Accept optional button arg
 	pressure = 1.0
 
 ## Apply an impulse to the jelly (for poking)
-func poke(world_position: Vector3, _force: float = 2.0):
+func poke(_world_position: Vector3, _force: float = 2.0):
 	if not _soft_body:
 		return
 	# SoftBody interaction handled by physics collision

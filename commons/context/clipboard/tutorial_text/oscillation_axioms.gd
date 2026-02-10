@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
@@ -6,11 +6,11 @@ extends Node
 var text = '''[center][font_size=28][b]Oscillation and the Edge of Chaos[/b][/font_size][/center]
 [center][i]How Waves Navigate Between Order and Disorder[/i][/center]
 
-Oscillation is not merely motion between poles. It is the **fundamental mechanism** by which systems maintain themselves at the edge of chaos—neither frozen in order nor dissolved in randomness.
+Oscillation is not merely motion between poles. It is the **fundamental mechanism** by which systems maintain themselves at the edge of chaosâ€”neither frozen in order nor dissolved in randomness.
 
 The sine wave is the simplest form of this navigation. More complex oscillations reveal how adaptive systems survive by **perpetually not-settling**.
 
-**QFE = F − λE(S) + φΔE(S,t)**
+**QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)**
 
 This is the Queer Free Energy Principle. Oscillation is where the terms meet.
 
@@ -23,22 +23,22 @@ Living systems face a paradox:
 Too much **order** (low entropy) = rigidity, brittleness, death by crystallization
 Too much **chaos** (high entropy) = dissolution, noise, death by dispersal
 
-**Life exists at the boundary** — oscillating between order and disorder, never committing fully to either.
+**Life exists at the boundary** â€” oscillating between order and disorder, never committing fully to either.
 
 [color=yellow][b]Code: The Survival Zone[/b][/color]
 [code]
 var entropy = 0.5  # System state (0 = perfect order, 1 = maximum chaos)
 
-func update_system(delta):
+func update_system(_delta):
     # If too ordered, inject randomness
     if entropy < 0.3:
         entropy += random_perturbation()
-        # System was crystallizing — loosen up
+        # System was crystallizing â€” loosen up
 
     # If too chaotic, impose structure
     if entropy > 0.7:
         entropy -= structural_constraint()
-        # System was dissolving — cohere
+        # System was dissolving â€” cohere
 
     # The healthy zone: 0.3 to 0.7
     # Oscillating, never settling
@@ -50,11 +50,11 @@ The wave does this automatically. At peak amplitude, it reverses toward trough. 
 
 [b]Free Energy: The Cost of Surprise[/b]
 
-In the Free Energy Principle, systems minimize **surprise** — unexpected inputs that don't match internal models.
+In the Free Energy Principle, systems minimize **surprise** â€” unexpected inputs that don't match internal models.
 
 **F** = variational free energy (the prediction error)
 
-A system that minimizes F becomes better at predicting its world. But pure prediction-minimization leads to **pathological order** — the system becomes rigid, unable to adapt.
+A system that minimizes F becomes better at predicting its world. But pure prediction-minimization leads to **pathological order** â€” the system becomes rigid, unable to adapt.
 
 [color=yellow][b]Code: Pure Prediction Minimization[/b][/color]
 [code]
@@ -73,7 +73,7 @@ func perceive(input):
     # Brittleness
 [/code]
 
-A thermostat perfectly minimizing free energy would break when the environment shifts. It needs **oscillation** — tolerance for variation.
+A thermostat perfectly minimizing free energy would break when the environment shifts. It needs **oscillation** â€” tolerance for variation.
 
 [hr]
 
@@ -81,9 +81,9 @@ A thermostat perfectly minimizing free energy would break when the environment s
 
 The second term introduces **entropy seeking**:
 
-**−λE(S)** = desire for disorder, diversity, exploration
+**âˆ’Î»E(S)** = desire for disorder, diversity, exploration
 
-This is the counter-force to prediction. When λ > 0, the system actively seeks surprise, novelty, entropy.
+This is the counter-force to prediction. When Î» > 0, the system actively seeks surprise, novelty, entropy.
 
 [color=yellow][b]Code: Entropy-Seeking Behavior[/b][/color]
 [code]
@@ -104,17 +104,17 @@ func decide_action():
     # Lambda modulates the oscillation between explore/exploit
 [/code]
 
-**λ is the tuning parameter** — how much the system values disorder relative to order.
+**Î» is the tuning parameter** â€” how much the system values disorder relative to order.
 
-When λ = 0: pure prediction, rigid order
-When λ = 1: pure exploration, chaotic dispersal
-When λ ≈ 0.3-0.5: **edge of chaos**, adaptive capacity
+When Î» = 0: pure prediction, rigid order
+When Î» = 1: pure exploration, chaotic dispersal
+When Î» â‰ˆ 0.3-0.5: **edge of chaos**, adaptive capacity
 
 [hr]
 
 [b]Oscillation as Navigation[/b]
 
-The sine wave navigates automatically. But complex systems must **actively oscillate** — sometimes toward order, sometimes toward chaos.
+The sine wave navigates automatically. But complex systems must **actively oscillate** â€” sometimes toward order, sometimes toward chaos.
 
 [color=yellow][b]Code: Active Oscillation[/b][/color]
 [code]
@@ -137,17 +137,17 @@ func update_behavior(delta):
     # System breathes between exploration and consolidation
 [/code]
 
-This is **rhythmic adaptation** — the system oscillates between gathering information (high λ) and integrating it (low λ).
+This is **rhythmic adaptation** â€” the system oscillates between gathering information (high Î») and integrating it (low Î»).
 
 [hr]
 
-[b]The Rate of Change: φΔE(S,t)[/b]
+[b]The Rate of Change: Ï†Î”E(S,t)[/b]
 
 The third term captures **how fast entropy is changing**:
 
-**+φΔE(S,t)** = sensitivity to entropy dynamics
+**+Ï†Î”E(S,t)** = sensitivity to entropy dynamics
 
-A system doesn't just have entropy — its entropy is increasing, decreasing, or stable. φ modulates response to this rate of change.
+A system doesn't just have entropy â€” its entropy is increasing, decreasing, or stable. Ï† modulates response to this rate of change.
 
 [color=yellow][b]Code: Responding to Entropy Rate[/b][/color]
 [code]
@@ -169,7 +169,7 @@ func update_entropy_tracking(current_entropy, delta):
     # They embrace increasing entropy (becoming-other)
 [/code]
 
-**φ is the signature of queer adaptive capacity** — positive φ means the system values change, transition, becoming-other.
+**Ï† is the signature of queer adaptive capacity** â€” positive Ï† means the system values change, transition, becoming-other.
 
 [hr]
 
@@ -177,7 +177,7 @@ func update_entropy_tracking(current_entropy, delta):
 
 Putting it together:
 
-**QFE = F − λE(S) + φΔE(S,t)**
+**QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)**
 
 This is not a static balance but a **dynamic oscillation**:
 
@@ -219,7 +219,7 @@ func adaptive_response():
     # Always in motion between poles
 [/code]
 
-The system **cannot settle** — the entropy and rate terms prevent crystallization while the free energy term prevents dissolution.
+The system **cannot settle** â€” the entropy and rate terms prevent crystallization while the free energy term prevents dissolution.
 
 [hr]
 
@@ -253,22 +253,22 @@ var omega1, omega2 = 0.0  # Angular velocities
 var length1, length2 = 1.0
 var mass1, mass2 = 1.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
     # Complex coupled differential equations
-    # Small changes in initial conditions →
+    # Small changes in initial conditions â†’
     # Radically different trajectories
 
     # This is QFEP in action:
     # - F term: gravity pulls toward equilibrium (order)
     # - E(S) term: coupling creates unpredictability (entropy)
-    # - φΔE(S,t) term: sensitivity to change amplifies
+    # - Ï†Î”E(S,t) term: sensitivity to change amplifies
 
     # Result: edge of chaos
     # Deterministic but unpredictable
     # Oscillating between pattern and chaos
 [/code]
 
-The double pendulum is **perfectly deterministic** (no randomness) yet **practically unpredictable** (sensitive dependence). This is the edge of chaos — structure without rigidity.
+The double pendulum is **perfectly deterministic** (no randomness) yet **practically unpredictable** (sensitive dependence). This is the edge of chaos â€” structure without rigidity.
 
 [hr]
 
@@ -294,20 +294,20 @@ func fourier_wave(x, harmonics):
 # With infinite harmonics: square/saw wave (edge of complexity)
 [/code]
 
-Each harmonic is a **separate oscillation** — a desire at different frequency. The complete wave is the **superposition of all desires**.
+Each harmonic is a **separate oscillation** â€” a desire at different frequency. The complete wave is the **superposition of all desires**.
 
 This is why Fourier matters for QFEP:
 - Low frequencies = slow, structural, ordered
 - High frequencies = fast, detail, entropic
 - Spectrum = distribution of energy across frequencies
 
-A living system needs **multiple frequencies** — slow rhythms (heartbeat, breath, seasons) and fast responses (reflexes, perception).
+A living system needs **multiple frequencies** â€” slow rhythms (heartbeat, breath, seasons) and fast responses (reflexes, perception).
 
 [hr]
 
 [b]Sound as Material Wave[/b]
 
-When oscillation becomes physical — air pressure varying at 440 Hz — you hear the note A.
+When oscillation becomes physical â€” air pressure varying at 440 Hz â€” you hear the note A.
 
 **Sound is oscillation made audible.** The ear is a Fourier analyzer, decomposing complex waves into frequency components.
 
@@ -326,7 +326,7 @@ func generate_tone():
     return samples
 
 # Each sample is a moment of oscillation
-# Played back through speaker → physical oscillation
+# Played back through speaker â†’ physical oscillation
 # Air molecules push/pull at 440 times per second
 # Ear drum oscillates in sympathy
 # You hear: tone
@@ -346,7 +346,7 @@ Why "queer" free energy? Because **queer existence is oscillation at the edge**:
 
 - Not fitting binary categories (male/female, homo/hetero)
 - **Oscillating** between positions rather than settling
-- Valuing **transition** and **becoming** (positive φ)
+- Valuing **transition** and **becoming** (positive Ï†)
 - **Resisting crystallization** into fixed identity
 
 [color=yellow][b]The Queer Parameters:[/b][/color]
@@ -366,9 +366,9 @@ var phi_queer = 0.4     # Positive rate sensitivity (embrace becoming)
 # - More adaptive, more resilient
 [/code]
 
-Self-Organized Criticality (SOC) shows that **systems naturally evolve to the edge of chaos**. Sandpiles, earthquakes, neural activity — all display power-law distributions, poised between order and disorder.
+Self-Organized Criticality (SOC) shows that **systems naturally evolve to the edge of chaos**. Sandpiles, earthquakes, neural activity â€” all display power-law distributions, poised between order and disorder.
 
-**Queer existence is human SOC** — living at the critical point, one grain from avalanche.
+**Queer existence is human SOC** â€” living at the critical point, one grain from avalanche.
 
 [hr]
 
@@ -376,14 +376,14 @@ Self-Organized Criticality (SOC) shows that **systems naturally evolve to the ed
 
 The progression through wavefunctions is a journey:
 
-1. **Unit Circle** → rotation creates oscillation (emergence of wave)
-2. **Sine Wave** → simplest oscillation, single frequency (pure order)
-3. **Fourier** → complex waves from simple ones (structure emerges)
-4. **Interference** → when waves meet, patterns form (interaction)
-5. **Resonance** → when frequencies match, amplification (selection)
-6. **Double Pendulum** → deterministic chaos (edge of chaos)
+1. **Unit Circle** â†’ rotation creates oscillation (emergence of wave)
+2. **Sine Wave** â†’ simplest oscillation, single frequency (pure order)
+3. **Fourier** â†’ complex waves from simple ones (structure emerges)
+4. **Interference** â†’ when waves meet, patterns form (interaction)
+5. **Resonance** â†’ when frequencies match, amplification (selection)
+6. **Double Pendulum** â†’ deterministic chaos (edge of chaos)
 
-Each step adds **complexity** while maintaining **mathematical structure**. By the double pendulum, we've arrived at **chaos that isn't random** — deterministic unpredictability.
+Each step adds **complexity** while maintaining **mathematical structure**. By the double pendulum, we've arrived at **chaos that isn't random** â€” deterministic unpredictability.
 
 This is the QFEP territory: **structured disorder, ordered chaos, the place where life happens**.
 
@@ -393,11 +393,11 @@ This is the QFEP territory: **structured disorder, ordered chaos, the place wher
 
 Oscillation is not just a mathematical curiosity. It is:
 
-1. **Survival strategy** — don't crystallize, don't dissolve
-2. **Adaptive mechanism** — explore/exploit cycling
-3. **Resilience** — absorb perturbation without breaking
-4. **Creativity** — generate novelty from structure
-5. **Identity formation** — becoming rather than being
+1. **Survival strategy** â€” don't crystallize, don't dissolve
+2. **Adaptive mechanism** â€” explore/exploit cycling
+3. **Resilience** â€” absorb perturbation without breaking
+4. **Creativity** â€” generate novelty from structure
+5. **Identity formation** â€” becoming rather than being
 
 The sine wave teaches this at the simplest level: **never settling, always moving toward opposite, crossing equilibrium without stopping**.
 
@@ -406,7 +406,7 @@ Complex oscillation (Fourier, chaos, QFEP) extends this to **multiple frequencie
 [hr]
 
 [color=cyan][b]Summary:[/b][/color]
-Oscillation is how systems navigate between order and chaos. The Queer Free Energy Principle (QFE = F − λE(S) + φΔE(S,t)) formalizes this: minimizing prediction error (F) while valuing entropy (λ term) and embracing change (φ term). Simple oscillation (sine wave) demonstrates perpetual non-settling. Complex oscillation (double pendulum, Fourier synthesis) shows how structure and chaos coexist. Queer existence is human oscillation at the edge of chaos — positive entropy drive, positive rate sensitivity, adaptive resilience through perpetual becoming.
+Oscillation is how systems navigate between order and chaos. The Queer Free Energy Principle (QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)) formalizes this: minimizing prediction error (F) while valuing entropy (Î» term) and embracing change (Ï† term). Simple oscillation (sine wave) demonstrates perpetual non-settling. Complex oscillation (double pendulum, Fourier synthesis) shows how structure and chaos coexist. Queer existence is human oscillation at the edge of chaos â€” positive entropy drive, positive rate sensitivity, adaptive resilience through perpetual becoming.
 
 [hr]
 

@@ -1,4 +1,4 @@
-# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
+﻿# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
 # No UI - just the educational animation for VR environments
 extends Node3D
 
@@ -306,7 +306,7 @@ func _process(delta):
 			# Keep what we built without animation
 			pass
 
-func animate_vertices(delta):
+func animate_vertices(_delta):
 	# Show vertices one by one with blinking effect
 	if current_step_time >= step_duration and animation_step < vertices.size():
 		vertex_spheres[animation_step].visible = true
@@ -322,7 +322,7 @@ func animate_vertices(delta):
 	
 	# Note: Blinking animation removed since grab spheres handle their own appearance
 
-func animate_edges(delta):
+func animate_edges(_delta):
 	# Show edges progressively
 	var edge_step_duration = step_duration * 0.4
 	
@@ -337,7 +337,7 @@ func animate_edges(delta):
 			current_step_time = 0.0
 			animation_step_completed.emit("edges_complete")
 
-func animate_triangles(delta):
+func animate_triangles(_delta):
 	# Show triangles progressively
 	var triangle_step_duration = step_duration * 0.3
 	
@@ -351,7 +351,7 @@ func animate_triangles(delta):
 			current_step_time = 0.0
 			animation_step_completed.emit("triangles_complete")
 
-func animate_final_mesh(delta):
+func animate_final_mesh(_delta):
 	# Wait a moment, then transition to final mesh
 	if current_step_time >= step_duration:
 		# Hide all individual components

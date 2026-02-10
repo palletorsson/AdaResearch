@@ -1,4 +1,4 @@
-extends XRToolsPickable
+﻿extends XRToolsPickable
 
 ## Grid Editor Cube (Improved)
 ## A cube that snaps to a grid and synchronizes with a paired cube in another grid
@@ -110,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		_ghost_preview.position = ghost_local_pos
 		_ghost_preview.visible = true
 
-func _on_picked_up(pickable) -> void:
+func _on_picked_up(_pickable) -> void:
 	freeze = false
 	# Disable collisions while holding so we can reach through other cubes
 	collision_layer = 0
@@ -138,7 +138,7 @@ func _on_picked_up(pickable) -> void:
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0, 0.3, 0.1, 0)
 
-func _on_dropped(pickable) -> void:
+func _on_dropped(_pickable) -> void:
 	# Restore collisions (Layer 3 = Pickable)
 	collision_layer = 4
 	collision_mask = 3
@@ -167,7 +167,7 @@ func _on_dropped(pickable) -> void:
 	freeze = true
 	print("GridEditorCube: Dropped at grid position %s" % grid_position)
 
-func _on_highlight_updated(pickable, enable: bool) -> void:
+func _on_highlight_updated(_pickable, enable: bool) -> void:
 	_is_hovered = enable
 	if not is_picked_up():
 		_apply_color_tint(hover_color if enable else Color.WHITE)

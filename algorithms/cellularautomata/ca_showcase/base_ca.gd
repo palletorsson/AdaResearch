@@ -1,4 +1,4 @@
-# BaseCA.gd
+﻿# BaseCA.gd
 # Base class for all Cellular Automata implementations
 class_name BaseCA
 extends Node3D
@@ -85,7 +85,7 @@ func _process(delta):
 		update_visualization()
 		iteration_count += 1
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Override in subclasses
 	pass
 

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Preload the cube scene
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
@@ -185,7 +185,7 @@ func get_wall_color(wall_idx: int) -> Color:
 		_:
 			return Color(1.0, 1.0, 1.0, 1.0)
 
-func animate_walls(delta):
+func animate_walls(_delta):
 	# Animate current generation row on all walls
 	if current_generation < grid_height:
 		for wall in walls:

@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends StaticBody3D
 
 ## Laser Exploding Sphere
@@ -75,7 +75,7 @@ func hit_by_laser() -> void:
 	_explode()
 
 ## Alternative: Called when pointer action is triggered while pointing at this object
-func pointer_pressed(at_position: Vector3) -> void:
+func pointer_pressed(_at_position: Vector3) -> void:
 	print("LaserExplodingSphere: Pointer pressed, exploding!")
 	hit_by_laser()
 

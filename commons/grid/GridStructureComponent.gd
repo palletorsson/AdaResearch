@@ -1,4 +1,4 @@
-# GridStructureComponent.gd
+﻿# GridStructureComponent.gd
 # Handles cube placement and grid structure building
 # Creates the physical 3D layout from structure data using MultiMesh for performance
 
@@ -398,7 +398,7 @@ func _sort_corners_first():
 	)
 
 # Initialize cubes to their starting animation state
-func _initialize_cubes_for_animation(total_size: float):
+func _initialize_cubes_for_animation(_total_size: float):
 	for data in _pending_cube_data:
 		var transform = Transform3D()
 		
@@ -585,7 +585,7 @@ func has_cube_at(x: int, y: int, z: int) -> bool:
 # Get cube at position
 # Note: Returns null with MultiMesh as there are no individual cube nodes
 # Use has_cube_at() to check for cube existence
-func get_cube_at(x: int, y: int, z: int) -> Node3D:
+func get_cube_at(_x: int, y: int, z: int) -> Node3D:
 	return null
 
 # Clear all cubes

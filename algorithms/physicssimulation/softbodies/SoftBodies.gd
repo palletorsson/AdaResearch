@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var node_resolution: int = 6
 @export var stiffness: float = 100.0
@@ -85,14 +85,14 @@ class SoftBody:
 		else:  # Blob sphere
 			return distance < 0.8
 	
-	func create_springs(resolution: int):
+	func create_springs(_resolution: int):
 		for i in range(nodes.size()):
 			for j in range(i + 1, nodes.size()):
 				var distance = nodes[i].position.distance_to(nodes[j].position)
 				if distance < 0.3:  # Connect nearby nodes
 					springs.append([i, j, distance])
 	
-	func create_tetrahedra(resolution: int):
+	func create_tetrahedra(_resolution: int):
 		# Create tetrahedral elements for volume calculation
 		for i in range(0, nodes.size() - 3, 4):
 			if i + 3 < nodes.size():
@@ -350,7 +350,7 @@ func apply_volume_preservation(soft_body: SoftBody):
 			var correction_force = correction_direction * volume_correction * 10.0
 			node.apply_force(correction_force)
 
-func animate_pressure_sources(delta: float):
+func animate_pressure_sources(_delta: float):
 	# Animate pressure field positions
 	for i in range(pressure_sources.size()):
 		var pressure_field = $PressureSources.get_child(i)

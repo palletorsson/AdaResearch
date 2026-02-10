@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Script to create a 3D composition inspired by David McLeod's style
 # Using recursive sphere packing and various primitives created on the fly
@@ -224,7 +224,7 @@ func create_cluster(parent, position, size, type, recursion_level):
 			
 			create_cluster(cluster, sub_position, sub_size, sub_type, recursion_level + 1)
 
-func create_bubble_cluster(parent, size, recursion_level):
+func create_bubble_cluster(parent, size, _recursion_level):
 	# Calculate how many bubbles to create based on size and density
 	var bubble_count = int(size * bubble_density * 50)
 	bubble_count = min(bubble_count, 100)  # Cap to prevent too many objects

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Spring-Mass System Physics Simulation
 # Interactive network of masses connected by springs with real-time physics
@@ -313,7 +313,7 @@ func setup_camera():
 	add_child(camera)
 	camera.look_at_from_position(camera.position, Vector3(0, 3, 0), Vector3.UP)
 
-func simulate_physics(delta):
+func simulate_physics(_delta):
 	var fixed_delta = time_step
 	
 	# Apply gravity to all masses

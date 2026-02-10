@@ -1,8 +1,8 @@
-# vector_magnitude_demo.gd
+﻿# vector_magnitude_demo.gd
 # Interactive vector magnitude visualization
 # Same style as VectorBasics - uses vector_scene_base
 #
-# Shows: |V| = √(x² + y² + z²)
+# Shows: |V| = âˆš(xÂ² + yÂ² + zÂ²)
 
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
@@ -73,7 +73,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector
@@ -92,9 +92,9 @@ func _update_info(vec: Vector3):
 	var builder := []
 	builder.append("V = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
 	builder.append("")
-	builder.append("|V| = √(x² + y² + z²)")
-	builder.append("|V| = √(%.2f² + %.2f² + %.2f²)" % [vec.x, vec.y, vec.z])
-	builder.append("|V| = √%.2f" % (vec.x*vec.x + vec.y*vec.y + vec.z*vec.z))
+	builder.append("|V| = âˆš(xÂ² + yÂ² + zÂ²)")
+	builder.append("|V| = âˆš(%.2fÂ² + %.2fÂ² + %.2fÂ²)" % [vec.x, vec.y, vec.z])
+	builder.append("|V| = âˆš%.2f" % (vec.x*vec.x + vec.y*vec.y + vec.z*vec.z))
 	builder.append("|V| = %.3f" % magnitude)
 	info_label.text = "\n".join(builder)
 

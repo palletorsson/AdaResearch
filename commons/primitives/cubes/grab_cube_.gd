@@ -1,4 +1,4 @@
-# XRDistanceConstraint.gd - Add as child to XRToolsPickable objects
+﻿# XRDistanceConstraint.gd - Add as child to XRToolsPickable objects
 extends Node
 
 # Constraint settings
@@ -43,7 +43,7 @@ func _on_dropped(_pickable):
 	print("XR Grab released")
 
 # Update constraint every physics frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_grabbed:
 		if use_hard_constraint:
 			apply_hard_constraint()

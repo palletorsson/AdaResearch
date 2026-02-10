@@ -1,4 +1,4 @@
-# TimelineController.gd
+﻿# TimelineController.gd
 extends Control
 
 # UI References
@@ -80,7 +80,7 @@ func _on_scroll_changed(value: float):
 	if timeline_visualizer:
 		timeline_visualizer.set_scroll(value)
 
-func _process(delta):
+func _process(_delta):
 	# Update UI based on timeline state
 	if timeline_visualizer:
 		# Update scroll slider max value based on timeline content

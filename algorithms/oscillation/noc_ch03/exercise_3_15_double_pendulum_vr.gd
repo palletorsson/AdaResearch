@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROD := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -105,7 +105,7 @@ func _spawn_pendulum() -> void:
 	_trail = MeshInstance3D.new()
 	_sim_root.add_child(_trail)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var num1 := -gravity * (2 * _mass1 + _mass2) * sin(_angle1)
 	num1 -= _mass2 * gravity * sin(_angle1 - 2 * _angle2)
 	num1 -= 2 * sin(_angle1 - _angle2) * _mass2

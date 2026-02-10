@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name AnickaYiLab
 
 # Visual settings
@@ -142,7 +142,7 @@ func duplicate_shader_material(original_material: ShaderMaterial) -> ShaderMater
 	
 	return new_material
 
-func update_materials(delta: float):
+func update_materials(_delta: float):
 	# Update liquid materials properties for a subtle dynamic effect
 	
 	# Update main material properties
@@ -463,7 +463,7 @@ func setup_interaction():
 		
 		equipment.add_child(area)
 
-func _on_area_input_event(camera, event, click_position, click_normal, shape_idx, equipment):
+func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape_idx, equipment):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		# Handle interaction with the equipment
 		print("Interacted with: ", equipment.name)

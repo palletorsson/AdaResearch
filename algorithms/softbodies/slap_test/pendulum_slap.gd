@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Configuration
 @export var pendulum_height: float = 8.0
@@ -91,7 +91,7 @@ func create_link(pos: Vector3, color: Color) -> RigidBody3D:
 	return body
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Add some periodic force to keep the pendulum swinging if needed
 	# Or just let it swing from gravity if we start it offset
 	pass

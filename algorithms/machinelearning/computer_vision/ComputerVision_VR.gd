@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Computer Vision
 # Interactive image processing with spatial convolution filters
@@ -489,7 +489,7 @@ func _create_info_panels():
 	# Convolution explanation
 	_create_info_panel(
 		Vector3(-8.0, image_canvas_size / 2.0 + 2.5, -2.0),
-		"CONVOLUTION\nSliding window operation\nKernel × Image = Feature\nLocal pattern detection",
+		"CONVOLUTION\nSliding window operation\nKernel Ã— Image = Feature\nLocal pattern detection",
 		Color(0.9, 0.9, 0.3)
 	)
 
@@ -519,7 +519,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _update_pixel_display(delta):
+func _update_pixel_display(_delta):
 	"""Update pixel visualization"""
 	# Update input pixels
 	for y in range(image_resolution):
@@ -544,7 +544,7 @@ func _update_pixel_display(delta):
 			pixel.material_override.albedo_color = Color(value, value * 0.3, value * 0.3)
 			pixel.material_override.emission = Color(value, value * 0.3, value * 0.3)
 
-func _animate_kernel_window(delta):
+func _animate_kernel_window(_delta):
 	"""Animate sliding convolution kernel"""
 	if not show_sliding_kernel or not kernel_window:
 		return
@@ -555,7 +555,7 @@ func _animate_kernel_window(delta):
 	var py = (float(current_filter_pos.y) / image_resolution - 0.5) * grid_size
 	kernel_window.position = Vector3(-8.0 + px, py, 0.2)
 
-func _animate_features(delta):
+func _animate_features(_delta):
 	"""Animate feature visualizations"""
 	for i in range(feature_visualizations.size()):
 		var features = feature_visualizations[i]

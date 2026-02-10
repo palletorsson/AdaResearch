@@ -1,4 +1,4 @@
-# quest_controller.gd - Procedural Quest controller model for tutorials
+﻿# quest_controller.gd - Procedural Quest controller model for tutorials
 # Simple representation of Meta Quest Touch controller
 extends Node3D
 
@@ -198,7 +198,7 @@ func _create_grip() -> MeshInstance3D:
 
 	return mesh_instance
 
-func _add_button_labels(mirror: float):
+func _add_button_labels(_mirror: float):
 	# A/X button label
 	var label_a = Label3D.new()
 	label_a.text = "B" if is_right_hand else "Y"

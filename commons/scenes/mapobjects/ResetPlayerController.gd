@@ -1,4 +1,4 @@
-# ResetLevelController.gd
+﻿# ResetLevelController.gd
 # Reset Level Cube - Utility type "r"
 # Resets the entire level/map when activated
 
@@ -57,11 +57,11 @@ func _setup_reset_area():
 	# Connect signals - MUST be done correctly
 	if not reset_area.is_connected("body_entered", Callable(self, "_on_reset_area_body_entered")):
 		reset_area.body_entered.connect(_on_reset_area_body_entered)
-		print("ResetLevelController: ✅ Connected body_entered signal")
+		print("ResetLevelController: âœ… Connected body_entered signal")
 	
 	if not reset_area.is_connected("body_exited", Callable(self, "_on_reset_area_body_exited")):
 		reset_area.body_exited.connect(_on_reset_area_body_exited)
-		print("ResetLevelController: ✅ Connected body_exited signal")
+		print("ResetLevelController: âœ… Connected body_exited signal")
 	
 	# Debug collision setup
 	print("ResetLevelController: Reset area collision_layer=%d, collision_mask=%d" % [reset_area.collision_layer, reset_area.collision_mask])
@@ -78,7 +78,7 @@ func _setup_visual_effects():
 			material.set_shader_parameter("emissionColor", Color.ORANGE_RED)
 			material.set_shader_parameter("emission_strength", 3.0)
 
-func _process(delta):
+func _process(_delta):
 	# Check player distance for warning (only if using proximity activation)
 	if activation_method == "proximity" and player_node and not is_resetting:
 		var distance = global_position.distance_to(player_node.global_position)
@@ -140,13 +140,13 @@ func _show_warning_effects():
 # SIGNAL HANDLERS - These are the critical functions that must work
 func _on_reset_area_body_entered(body: Node3D):
 	"""Handle player entering the reset area"""
-	print("ResetLevelController: 🔍 BODY ENTERED RESET AREA: %s (type: %s)" % [body.name, body.get_class()])
-	print("ResetLevelController: 🔍 Body groups: %s" % body.get_groups())
-	print("ResetLevelController: 🔍 Body collision layer: %s" % (body.collision_layer if body.has_property("collision_layer") else "N/A"))
+	print("ResetLevelController: ðŸ” BODY ENTERED RESET AREA: %s (type: %s)" % [body.name, body.get_class()])
+	print("ResetLevelController: ðŸ” Body groups: %s" % body.get_groups())
+	print("ResetLevelController: ðŸ” Body collision layer: %s" % (body.collision_layer if body.has_property("collision_layer") else "N/A"))
 	
 	# Check if it's the player body
 	if _is_player_body(body):
-		print("ResetLevelController: ✅ PLAYER DETECTED IN RESET AREA!")
+		print("ResetLevelController: âœ… PLAYER DETECTED IN RESET AREA!")
 		player_in_area = true
 		
 		if activation_method == "proximity":
@@ -156,7 +156,7 @@ func _on_reset_area_body_entered(body: Node3D):
 			# Wait for manual activation (touch/grab)
 			print("ResetLevelController: Player in area, waiting for activation...")
 	else:
-		print("ResetLevelController: ❌ Not recognized as player body")
+		print("ResetLevelController: âŒ Not recognized as player body")
 
 func _on_reset_area_body_exited(body: Node3D):
 	"""Handle player exiting the reset area"""
@@ -175,36 +175,36 @@ func _is_player_body(body: Node3D) -> bool:
 	
 	# Check if it's in the player_body group (XR-Tools)
 	if body.has_method("is_in_group") and body.is_in_group("player_body"):
-		print("  - ✅ Body is in 'player_body' group (XR-Tools)")
+		print("  - âœ… Body is in 'player_body' group (XR-Tools)")
 		return true
 	
 	# Check if it's in the player group
 	if body.has_method("is_in_group") and body.is_in_group("player"):
-		print("  - ✅ Body is in 'player' group")
+		print("  - âœ… Body is in 'player' group")
 		return true
 	
 	# Check if it matches our found player node
 	if player_node and (body == player_node or body.get_parent() == player_node):
-		print("  - ✅ Body matches found player node")
+		print("  - âœ… Body matches found player node")
 		return true
 	
 	# Check for XR-Tools PlayerBody class
 	if body.get_class() == "XRToolsPlayerBody":
-		print("  - ✅ Body is XRToolsPlayerBody")
+		print("  - âœ… Body is XRToolsPlayerBody")
 		return true
 	
 	# Check common player node names
 	var player_names = ["PlayerBody", "XROrigin3D", "VROrigin", "CharacterBody3D", "player"]
 	if body.name.to_lower() in player_names or "player" in body.name.to_lower():
-		print("  - ✅ Body name suggests it's a player: %s" % body.name)
+		print("  - âœ… Body name suggests it's a player: %s" % body.name)
 		return true
 	
 	# Check if it's a CharacterBody3D (common for players)
 	if body is CharacterBody3D:
-		print("  - ✅ Body is CharacterBody3D")
+		print("  - âœ… Body is CharacterBody3D")
 		return true
 	
-	print("  - ❌ Body not recognized as player")
+	print("  - âŒ Body not recognized as player")
 	return false
 
 func _activate_reset():
@@ -213,7 +213,7 @@ func _activate_reset():
 		print("ResetLevelController: Already resetting, ignoring activation")
 		return
 	
-	print("ResetLevelController: 🔄 LEVEL RESET ACTIVATED!")
+	print("ResetLevelController: ðŸ”„ LEVEL RESET ACTIVATED!")
 	is_resetting = true
 	level_reset_started.emit()
 	
@@ -297,10 +297,10 @@ func force_level_reset():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
-			print("ResetLevelController: 🔄 MANUAL RESET TRIGGERED (R key)")
+			print("ResetLevelController: ðŸ”„ MANUAL RESET TRIGGERED (R key)")
 			_activate_reset()
 		elif event.keycode == KEY_T:
-			print("ResetLevelController: 🔧 Testing collision detection")
+			print("ResetLevelController: ðŸ”§ Testing collision detection")
 			_test_collision_detection()
 
 func _test_collision_detection():

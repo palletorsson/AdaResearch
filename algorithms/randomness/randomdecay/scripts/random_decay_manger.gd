@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # --- Exported Variables ---
 @export var grid_size: Vector2i = Vector2i(9, 9)  # Dimensions of the grid
@@ -17,7 +17,7 @@ var grid_elements: Array[Node3D] = []  # Stores references to all grid elements
 func _ready():
 	create_grid()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if decay_on: 
 		_decay()
 
@@ -69,9 +69,9 @@ func _decay() -> void:
 		label3D.text = "No element to Change" 
 
 
-func _on_grab_paper_grabbed(pickable: Variant, by: Variant) -> void:
+func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 	decay_on = true
 
 
-func _on_grab_paper_dropped(pickable: Variant) -> void:
+func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	decay_on = false

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Queer manifesto text that emits letter by letter
 @export_multiline var manifesto_text: String = """We are the spectrum of possibility, refusing the narrow confines of convention. Our existence is rebellion, our love is revolution. In a world that demands we choose binary boxes, we choose fluidity, multiplicity, the beautiful complexity of authentic being.
@@ -50,8 +50,8 @@ var jazz_intensity: float = 0.0  # Current jazz intensity based on Y movement
 var x_movement: float = 0.0  # Track X-axis movement for melody navigation
 var z_movement: float = 0.0  # Track Z-axis movement for Moonlight Sonata navigation
 
-# Für Elise melody tracking
-var fur_elise_notes: Array[float] = []  # Für Elise melody notes (frequencies)
+# FÃ¼r Elise melody tracking
+var fur_elise_notes: Array[float] = []  # FÃ¼r Elise melody notes (frequencies)
 var fur_elise_durations: Array[float] = []  # Note durations
 var fur_elise_current_note: int = 0  # Current note index
 var fur_elise_note_timer: float = 0.0  # Timer for current note
@@ -83,7 +83,7 @@ var audio_player: AudioStreamPlayer3D
 @export var jazz_blue_notes: bool = true     # Add blue note intervals
 @export var jazz_vibrato: float = 0.1        # Vibrato depth
 @export var y_movement_sensitivity: float = 1.0  # How much Y movement affects jazziness (range 0-3)
-@export var play_fur_elise: bool = true          # Play Für Elise melody
+@export var play_fur_elise: bool = true          # Play FÃ¼r Elise melody
 @export var fur_elise_speed: float = 1.0         # Melody playback speed
 @export var x_movement_sensitivity: float = 5.0  # How much X movement affects melody position (range 0-6)
 @export var z_movement_sensitivity: float = 5.0  # How much Z movement affects Moonlight Sonata position (range 0-6)
@@ -227,7 +227,7 @@ func check_movement():
 	
 	# Play bell sound and start melodies when starting to move
 	if not was_moving and is_moving:
-		print("DEBUG: Movement started - playing jazzy bell sound, Für Elise, and Moonlight Sonata")
+		print("DEBUG: Movement started - playing jazzy bell sound, FÃ¼r Elise, and Moonlight Sonata")
 		play_bell_sound()
 		start_fur_elise()
 		start_moonlight_sonata()
@@ -348,7 +348,7 @@ func play_bell_sound():
 		print("DEBUG: Jazzy bell sound played!")
 
 func initialize_fur_elise():
-	# Für Elise melody in frequencies (A4 = 440Hz as reference)
+	# FÃ¼r Elise melody in frequencies (A4 = 440Hz as reference)
 	# The famous opening: E-D#-E-D#-E-B-D-C-A
 	fur_elise_notes = [
 		659.25,  # E5
@@ -393,7 +393,7 @@ func initialize_fur_elise():
 		0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5   # Fourth phrase
 	]
 	
-	print("Für Elise melody initialized with ", fur_elise_notes.size(), " notes")
+	print("FÃ¼r Elise melody initialized with ", fur_elise_notes.size(), " notes")
 
 func start_fur_elise():
 	if not play_fur_elise:
@@ -402,11 +402,11 @@ func start_fur_elise():
 	fur_elise_playing = true
 	fur_elise_current_note = 0
 	fur_elise_note_timer = 0.0
-	print("Started Für Elise melody!")
+	print("Started FÃ¼r Elise melody!")
 
 func stop_fur_elise():
 	fur_elise_playing = false
-	print("Stopped Für Elise melody")
+	print("Stopped FÃ¼r Elise melody")
 
 func update_fur_elise(delta: float):
 	if not fur_elise_playing or fur_elise_notes.size() == 0:
@@ -427,7 +427,7 @@ func update_fur_elise(delta: float):
 			# Check if melody is complete
 			if fur_elise_current_note >= fur_elise_notes.size():
 				fur_elise_playing = false
-				print("Für Elise melody completed!")
+				print("FÃ¼r Elise melody completed!")
 				return
 			
 			# Play current note with jazz effects
@@ -461,7 +461,7 @@ func play_fur_elise_note():
 		audio_player.pitch_scale = 1.0  # No additional pitch scaling
 		audio_player.play()
 	
-	print("Playing Für Elise note ", fur_elise_current_note + 1, "/", fur_elise_notes.size(), " - Frequency: ", jazz_frequency)
+	print("Playing FÃ¼r Elise note ", fur_elise_current_note + 1, "/", fur_elise_notes.size(), " - Frequency: ", jazz_frequency)
 
 func generate_fur_elise_note(frequency: float) -> AudioStreamWAV:
 	# Generate a single note with jazz characteristics
@@ -813,7 +813,7 @@ func emit_next_letter():
 	# Add special effects for certain characters
 	if character == ' ':
 		letter_label.modulate.a = 0.3  # Make spaces more transparent
-		letter_label.text = "•"        # Use bullet for visibility
+		letter_label.text = "â€¢"        # Use bullet for visibility
 	elif character in "!.?":
 		letter_label.modulate *= 1.5   # Make punctuation brighter
 		letter_label.font_size = int(letter_font_size * 1.2)  # Bigger punctuation
@@ -867,7 +867,7 @@ func animate_letter_spawn(letter_label: Label3D):
 	var tween = create_tween()
 	tween.tween_property(letter_label, "scale", Vector3.ONE, 0.2)
 
-func update_existing_letters(delta: float):
+func update_existing_letters(_delta: float):
 	var current_time = Time.get_ticks_msec() / 1000.0
 	
 	# Only update every few frames to reduce CPU load

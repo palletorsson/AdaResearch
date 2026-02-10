@@ -1,4 +1,4 @@
-# foucault_pendulum.gd
+﻿# foucault_pendulum.gd
 # Foucault Pendulum - demonstrates Earth's rotation through precessing swing plane
 # Draws rosette patterns on a horizontal canvas below
 
@@ -35,6 +35,12 @@ class_name FoucaultPendulum
 @export_category("Canvas")
 @export var canvas_size: float = 6.0
 @export var canvas_color: Color = Color(0.95, 0.93, 0.88)  # Cream paper
+@export var show_frame: bool = true  # Toggle frame visibility
+
+@export_category("Sine Modulation")
+@export var sine_modulation_enabled: bool = false
+@export var sine_modulation_amplitude: float = 0.08  # Subtle variation
+@export var sine_modulation_frequency: float = 0.3  # Slow oscillation
 
 @export_category("Drawing")
 @export var marker_color: Color = Color(0.08, 0.06, 0.04)  # Dark ink
@@ -85,7 +91,7 @@ func _ready():
 	_create_debug_visuals()
 	_update_pendulum_visual()
 	
-	print("FoucaultPendulum ready - latitude: ", latitude, "° | precession = Earth × sin(lat)")
+	print("FoucaultPendulum ready - latitude: ", latitude, "Â° | precession = Earth Ã— sin(lat)")
 
 
 func _create_ceiling_mount():
@@ -198,8 +204,9 @@ func _create_canvas():
 	_canvas.material_override = mat
 	_canvas_body.add_child(_canvas)
 	
-	# Frame
-	_add_canvas_frame()
+	# Frame (optional)
+	if show_frame:
+		_add_canvas_frame()
 
 
 func _add_canvas_frame():
@@ -437,14 +444,14 @@ func _create_labels():
 	
 	var precession_factor = sin(deg_to_rad(latitude))
 	var info = Label3D.new()
-	info.text = "Latitude: %.0f° | Precession = Ω × sin(%.0f°) = %.2f×Ω" % [latitude, latitude, precession_factor]
+	info.text = "Latitude: %.0fÂ° | Precession = Î© Ã— sin(%.0fÂ°) = %.2fÃ—Î©" % [latitude, latitude, precession_factor]
 	info.font_size = 28
 	info.position = Vector3(0, pendulum_length + 0.2, 0)
 	info.modulate = Color(0.4, 0.35, 0.3)
 	add_child(info)
 	
 	var info2 = Label3D.new()
-	info2.text = "Ring rotates with Earth — pendulum swings in fixed plane"
+	info2.text = "Ring rotates with Earth â€” pendulum swings in fixed plane"
 	info2.font_size = 24
 	info2.position = Vector3(0, pendulum_length - 0.05, 0)
 	info2.modulate = Color(0.5, 0.45, 0.4)
@@ -452,8 +459,14 @@ func _create_labels():
 
 
 func _physics_process(delta: float):
-	# Simple pendulum physics: θ'' = -(g/L) * sin(θ)
+	# Simple pendulum physics: Î¸'' = -(g/L) * sin(Î¸)
 	var angular_acceleration = -(gravity / pendulum_length) * sin(theta)
+	
+	# Apply subtle sine-wave modulation (Foucault-inspired variation)
+	if sine_modulation_enabled:
+		var sine_mod = sin(Time.get_ticks_msec() * 0.001 * sine_modulation_frequency * TAU)
+		angular_acceleration += sine_mod * sine_modulation_amplitude * 0.1
+	
 	omega += angular_acceleration * delta
 	omega *= (1.0 - damping)  # Apply damping
 	theta += omega * delta
@@ -468,8 +481,8 @@ func _physics_process(delta: float):
 		_apply_drive(delta)
 	
 	# Earth rotates beneath the pendulum
-	# Precession rate = Earth rotation × sin(latitude)
-	# At poles (90°): full rotation; at equator (0°): no precession
+	# Precession rate = Earth rotation Ã— sin(latitude)
+	# At poles (90Â°): full rotation; at equator (0Â°): no precession
 	var precession_rate = earth_rotation_rate * sin(deg_to_rad(latitude))
 	earth_angle += earth_rotation_rate * delta
 	
@@ -540,16 +553,16 @@ func _apply_gravity_sphere_forces(delta: float):
 		swing_direction += perp_force * delta * 0.1
 
 
-func _apply_drive(delta: float):
+func _apply_drive(_delta: float):
 	# Estimate current amplitude from max theta reached
-	# Drive kicks in near the center (theta ≈ 0) when velocity is highest
+	# Drive kicks in near the center (theta â‰ˆ 0) when velocity is highest
 	
 	# Only apply drive near center of swing (where real EM drives work)
 	if abs(theta) > 0.05:
 		return
 	
 	# Check if we need more energy (amplitude too low)
-	# Use omega to estimate amplitude: at center, omega ≈ sqrt(g/L) * amplitude
+	# Use omega to estimate amplitude: at center, omega â‰ˆ sqrt(g/L) * amplitude
 	var estimated_amplitude = abs(omega) * sqrt(pendulum_length / gravity)
 	
 	if estimated_amplitude < target_amplitude:

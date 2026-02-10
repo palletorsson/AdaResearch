@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined LSTM Networks Visualization
 # Room-scale interactive LSTM cell where you can walk inside and manipulate gates
@@ -398,7 +398,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _update_gate_activations(delta):
+func _update_gate_activations(_delta):
 	"""Update gate activations based on position or training"""
 	if enable_gate_grabbing:
 		# Gate activation based on how high the gate is raised
@@ -463,14 +463,14 @@ func _animate_memory_flow(delta):
 		particle.material_override.albedo_color = Color(r, 0.3, b, 0.8)
 		particle.material_override.emission = Color(r, 0.3, b)
 
-func _update_cell_state_visual(delta):
+func _update_cell_state_visual(_delta):
 	"""Update main cell visual based on training state"""
 	var cell_core = get_node_or_null("CellStructure/CellCore")
 	if cell_core and cell_core.material_override:
 		var intensity = 0.3 + training_progress * 0.7
 		cell_core.material_override.emission_energy_multiplier = intensity
 
-func _update_training_metrics(delta):
+func _update_training_metrics(_delta):
 	"""Update training metric displays"""
 	# This could control floating text displays showing loss and accuracy
 	pass

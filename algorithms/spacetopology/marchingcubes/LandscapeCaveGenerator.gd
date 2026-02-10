@@ -1,4 +1,4 @@
-# LandscapeCaveGenerator.gd
+﻿# LandscapeCaveGenerator.gd
 # Unified marching cubes implementation for generating landscapes with caves
 # Inspired by Unity's MeshGenerator with GDScript optimizations
 # Combines terrain generation with cave systems using density fields
@@ -172,7 +172,7 @@ func setup_marching_cubes_tables():
 	print("LandscapeCaveGenerator: Marching cubes tables initialized")
 
 # === MAIN GENERATION FUNCTIONS ===
-func _process(delta):
+func _process(_delta):
 	if settings_updated and not is_generating:
 		generate_world()
 		settings_updated = false
@@ -359,15 +359,15 @@ func calculate_density_at_position(world_pos: Vector3) -> float:
 	if distance_from_terrain <= -3.0:
 		terrain_density = 0.9  # Deep underground = definitely solid
 	elif distance_from_terrain <= -1.0:
-		# Transition zone - map -3 to -1 → 0.9 to 0.7
+		# Transition zone - map -3 to -1 â†’ 0.9 to 0.7
 		var t = (-distance_from_terrain - 1.0) / 2.0  # 0 to 1
 		terrain_density = lerp(0.7, 0.9, t)
 	elif distance_from_terrain <= 0.0:
-		# Surface zone - map -1 to 0 → 0.7 to 0.3
+		# Surface zone - map -1 to 0 â†’ 0.7 to 0.3
 		var t = -distance_from_terrain  # 0 to 1
 		terrain_density = lerp(0.3, 0.7, t)
 	elif distance_from_terrain <= 1.0:
-		# Air transition - map 0 to 1 → 0.3 to 0.1
+		# Air transition - map 0 to 1 â†’ 0.3 to 0.1
 		var t = distance_from_terrain  # 0 to 1
 		terrain_density = lerp(0.3, 0.1, t)
 	else:

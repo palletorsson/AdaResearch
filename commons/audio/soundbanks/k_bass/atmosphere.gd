@@ -58,7 +58,7 @@ static func generate(t: float, note_duration: float = 4.0, note_time: float = 0.
 	return clampf(output * env * LEVEL, -1.0, 1.0)
 
 
-static func generate_sample(t: float) -> float:
+static func generate_sample(t: float, _unused = 0.0) -> float:
 	return generate(t, 100.0, 0.0)
 
 

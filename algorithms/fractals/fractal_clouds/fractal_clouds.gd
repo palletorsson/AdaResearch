@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Fractal Cloud Generator
 # Creates volumetric clouds using fractal noise (fBm - fractional Brownian motion)
@@ -209,7 +209,7 @@ func _calculate_point_color(point: Dictionary) -> Color:
 
 	return color
 
-func _update_cloud_animation(delta: float):
+func _update_cloud_animation(_delta: float):
 	"""Animate cloud particles"""
 	if not multimesh:
 		return

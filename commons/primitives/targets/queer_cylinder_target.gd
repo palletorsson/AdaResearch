@@ -1,4 +1,4 @@
-extends StaticBody3D
+﻿extends StaticBody3D
 
 # Queer Cylinder Target
 # A dynamic, responsive target practice object celebrating queer aesthetics
@@ -97,7 +97,7 @@ func _create_material(color: Color) -> StandardMaterial3D:
 	mat.metallic = 0.1
 	return mat
 
-func damage(amount: float) -> void:
+func damage(_amount: float) -> void:
 	_on_hit()
 
 func hit() -> void:

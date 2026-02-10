@@ -1,4 +1,4 @@
-# vector_addition_demo.gd
+﻿# vector_addition_demo.gd
 # Interactive vector addition: A + B = C
 # VR-enabled with grabbable arrow endpoints
 #
@@ -93,7 +93,7 @@ func _create_handles():
 	_make_pickable(_handle_a)
 	_make_pickable(_handle_b)
 
-func _make_pickable(handle: Node3D):
+func _make_pickable(_handle: Node3D):
 	if ResourceLoader.exists("res://addons/godot-xr-tools/objects/pickable.gd"):
 		# Create a RigidBody3D wrapper for XR picking
 		pass  # Handle via Area3D for now
@@ -102,7 +102,7 @@ func _create_labels():
 	# Exhibition plate - in front, tilted like museum label
 	_title_panel = VectorVisuals.create_exhibition_plate(self, "TitlePanel", 
 		"VECTOR ADDITION",
-		"A⃗ + B⃗ = C⃗\nHead-to-tail method",
+		"Aâƒ— + Bâƒ— = Câƒ—\nHead-to-tail method",
 		Vector3(0, 0.05, max_vector_length + 0.3),
 		Vector2(0.4, 0.12))
 	
@@ -113,9 +113,9 @@ func _create_labels():
 	_formula_panel.rotation_degrees = Vector3(0, -90, 0)
 	
 	# Vector labels - smaller
-	_label_a = VectorVisuals.create_vector_label(self, "LabelA", "A⃗", color_a)
-	_label_b = VectorVisuals.create_vector_label(self, "LabelB", "B⃗", color_b)
-	_label_result = VectorVisuals.create_vector_label(self, "LabelResult", "A⃗+B⃗", color_result)
+	_label_a = VectorVisuals.create_vector_label(self, "LabelA", "Aâƒ—", color_a)
+	_label_b = VectorVisuals.create_vector_label(self, "LabelB", "Bâƒ—", color_b)
+	_label_result = VectorVisuals.create_vector_label(self, "LabelResult", "Aâƒ—+Bâƒ—", color_result)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -195,10 +195,10 @@ func _update_vectors():
 	# Update formula panel
 	var formula_label = VectorVisuals.get_panel_label(_formula_panel)
 	if formula_label:
-		formula_label.text = "A⃗ = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
-		formula_label.text += "B⃗ = (%.2f, %.2f, %.2f)\n\n" % [vector_b.x, vector_b.y, vector_b.z]
-		formula_label.text += "A⃗ + B⃗ = (%.2f, %.2f, %.2f)\n" % [result.x, result.y, result.z]
-		formula_label.text += "|A⃗ + B⃗| = %.3f" % result.length()
+		formula_label.text = "Aâƒ— = (%.2f, %.2f, %.2f)\n" % [vector_a.x, vector_a.y, vector_a.z]
+		formula_label.text += "Bâƒ— = (%.2f, %.2f, %.2f)\n\n" % [vector_b.x, vector_b.y, vector_b.z]
+		formula_label.text += "Aâƒ— + Bâƒ— = (%.2f, %.2f, %.2f)\n" % [result.x, result.y, result.z]
+		formula_label.text += "|Aâƒ— + Bâƒ—| = %.3f" % result.length()
 
 func _process(delta):
 	_time += delta

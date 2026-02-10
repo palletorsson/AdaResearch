@@ -1,4 +1,4 @@
-# vector_visuals.gd
+﻿# vector_visuals.gd
 # Shared visual helpers for vector artifacts
 # Creates sleek, modern visuals with glow effects and clean geometry
 
@@ -200,7 +200,7 @@ static func _create_handle_ring(color: Color, radius: float) -> MeshInstance3D:
 	return ring
 
 # Create sleek ground plane with grid
-static func create_ground(parent: Node3D, size: float = 3.0) -> Node3D:
+static func create_ground(_parent: Node3D, size: float = 3.0) -> Node3D:
 	var ground = Node3D.new()
 	ground.name = "Ground"
 	
@@ -361,8 +361,7 @@ static func _create_axis(parent: Node3D, direction: Vector3, color: Color, label
 	parent.add_child(label)
 
 # Create modern glass-style info panel
-static func create_panel(parent: Node3D, panel_name: String, text: String, 
-		pos: Vector3, size: Vector2 = Vector2(0.4, 0.12), font_size: int = 16,
+static func create_panel(_parent: Node3D, panel_name: String, text: String, pos: Vector3, size: Vector2 = Vector2(0.4, 0.12), font_size: int = 16,
 		alignment: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> Node3D:
 	var panel = Node3D.new()
 	panel.name = panel_name
@@ -474,9 +473,7 @@ static func get_panel_label(panel: Node3D) -> Label3D:
 	return panel.get_node_or_null("Label") as Label3D
 
 # Create exhibition-style plate (tilted, in front of artifact, museum style)
-static func create_exhibition_plate(parent: Node3D, panel_name: String, 
-		title: String, description: String, pos: Vector3, 
-		size: Vector2 = Vector2(0.5, 0.18)) -> Node3D:
+static func create_exhibition_plate(_parent: Node3D, panel_name: String, title: String, description: String, pos: Vector3, size: Vector2 = Vector2(0.5, 0.18)) -> Node3D:
 	var plate = Node3D.new()
 	plate.name = panel_name
 	plate.position = pos

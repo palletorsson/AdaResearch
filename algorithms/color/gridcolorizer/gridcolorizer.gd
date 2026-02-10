@@ -1,4 +1,4 @@
-# CubeColorizer3D.gd
+﻿# CubeColorizer3D.gd
 # MultiMesh-compatible cube colorizer
 # Finds MultiMeshInstance3D and applies colors using per-instance color system
 
@@ -65,7 +65,7 @@ func _get_palette_colors(palette_name: String) -> Array:
 	return []
 
 func _ready():
-	print("ColorGrid: Ready to cycle through vibrant queer patterns! 🌈")
+	print("ColorGrid: Ready to cycle through vibrant queer patterns! ðŸŒˆ")
 	_initialize_pattern_names()
 
 	# Wait one second before checking for MultiMesh
@@ -230,29 +230,29 @@ func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String):
 				sample_colors.append("i%d=%s" % [i, color_value])
 
 	# Debug: Verify MultiMesh configuration
-	print("ColorGrid: 🔍 MultiMesh.use_colors = %s" % multimesh.use_colors)
-	print("ColorGrid: 🔍 MultiMesh.instance_count = %d" % multimesh.instance_count)
+	print("ColorGrid: ðŸ” MultiMesh.use_colors = %s" % multimesh.use_colors)
+	print("ColorGrid: ðŸ” MultiMesh.instance_count = %d" % multimesh.instance_count)
 
 	# CRITICAL: Adjust material to make instance colors visible
 	_adjust_material_for_colors()
 
-	print("ColorGrid: ✅ Applied palette '%s' - set %d colors on %d instances" % [pattern_name, colors_applied, instance_count])
-	print("ColorGrid: 🎨 Sample colors: %s" % ", ".join(sample_colors))
+	print("ColorGrid: âœ… Applied palette '%s' - set %d colors on %d instances" % [pattern_name, colors_applied, instance_count])
+	print("ColorGrid: ðŸŽ¨ Sample colors: %s" % ", ".join(sample_colors))
 
 func _adjust_material_for_colors():
 	"""Adjust shader parameters to make instance colors visible"""
 	if not multimesh_instance:
-		print("ColorGrid: ❌ No multimesh_instance found!")
+		print("ColorGrid: âŒ No multimesh_instance found!")
 		return
 
 	var material = multimesh_instance.material_override
 	if not material:
-		print("ColorGrid: ❌ No material_override found on MultiMeshInstance3D!")
+		print("ColorGrid: âŒ No material_override found on MultiMeshInstance3D!")
 		return
 
 	if material is ShaderMaterial:
 		var shader_mat = material as ShaderMaterial
-		print("ColorGrid: ✅ Found ShaderMaterial: %s" % shader_mat.shader.resource_path if shader_mat.shader else "no shader")
+		print("ColorGrid: âœ… Found ShaderMaterial: %s" % shader_mat.shader.resource_path if shader_mat.shader else "no shader")
 
 		# Set modelColor to white so instance colors show through
 		shader_mat.set_shader_parameter("modelColor", Color.WHITE)
@@ -266,9 +266,9 @@ func _adjust_material_for_colors():
 		# Increase model opacity
 		shader_mat.set_shader_parameter("modelOpacity", 1.0)
 
-		print("ColorGrid: ✅ Adjusted shader parameters: modelColor=WHITE, wireframeOpacity=0.3, show_interior=true, modelOpacity=1.0")
+		print("ColorGrid: âœ… Adjusted shader parameters: modelColor=WHITE, wireframeOpacity=0.3, show_interior=true, modelOpacity=1.0")
 	else:
-		print("ColorGrid: ❌ Material is not a ShaderMaterial! Type: %s" % material.get_class())
+		print("ColorGrid: âŒ Material is not a ShaderMaterial! Type: %s" % material.get_class())
 
 func apply_gradient_pattern(gradient_name: String):
 	if not multimesh:
@@ -328,7 +328,7 @@ func interpolate_gradient(progress: float, gradient_colors: Array) -> Color:
 
 	return color1.lerp(color2, local_progress)
 
-func apply_sphere_reflection(pattern_name: String):
+func apply_sphere_reflection(_pattern_name: String):
 	if not multimesh:
 		return
 
@@ -404,7 +404,7 @@ func find_next_cubes_recursive(node: Node, next_cubes: Array):
 		find_next_cubes_recursive(child, next_cubes)
 
 func _on_next_requested(from_position: Vector3):
-	print("ColorGrid: 🎨 Next pattern requested from %s" % from_position)
+	print("ColorGrid: ðŸŽ¨ Next pattern requested from %s" % from_position)
 	advance_to_next_pattern()
 
 func advance_to_next_pattern():

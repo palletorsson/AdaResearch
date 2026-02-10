@@ -1,4 +1,4 @@
-var text = '''[b]The Point[/b]
+﻿var text = '''[b]The Point[/b]
 [i]The Atom of Space[/i]
 
 A point in 3D space is a vector defining a position (x, y, z).
@@ -61,7 +61,7 @@ Billboard mode makes the label always face the camera, ensuring readability from
 The text label must update when the point's position changes.
 
 [code]
-func _process(delta):
+func _process(_delta):
     label_3d.text = str(point_position)
     label_3d.position = point_position + label_offset
 [/code]

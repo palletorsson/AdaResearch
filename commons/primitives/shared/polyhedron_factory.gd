@@ -1,4 +1,4 @@
-# PolyhedronFactory.gd - Factory for creating any polyhedron including Johnson solids
+﻿# PolyhedronFactory.gd - Factory for creating any polyhedron including Johnson solids
 extends Object
 class_name PolyhedronFactory
 
@@ -176,7 +176,7 @@ static func create_icosahedron(scale := 0.5, color := Color(0.5, 1.0, 0.5)) -> N
 		"scale": scale
 	})
 
-static func create_dodecahedron(scale := 0.5, color := Color(1.0, 0.5, 1.0)) -> Node3D:
+static func create_dodecahedron(_scale := 0.5, color := Color(1.0, 0.5, 1.0)) -> Node3D:
 	# 20 vertices using the correct dodecahedron coordinates
 	var vertices: Array[Vector3] = [
 		Vector3(0.5774, 0.5774, 0.5774),    # 0

@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name MiuraCrawler
 ## Miura-ori folding enemy - flat corrugated sheet that crawls like an inchworm.
 ## Can flatten to squeeze through gaps, pops up to attack.
@@ -154,7 +154,7 @@ func _process_crawl(delta: float) -> void:
 		velocity = Vector3.ZERO
 
 
-func _process_attack(delta: float) -> void:
+func _process_attack(_delta: float) -> void:
 	# Lunge attack: pop up high then slam
 	var t: float = clamp(_state_time / 0.4, 0.0, 1.0)
 	
@@ -179,7 +179,7 @@ func _process_attack(delta: float) -> void:
 		_set_state(State.CRAWL)
 
 
-func _process_flatten(delta: float) -> void:
+func _process_flatten(_delta: float) -> void:
 	var t: float = clamp(_state_time / flatten_duration, 0.0, 1.0)
 	_fold_amount = lerp(0.7, 0.05, ease(t, 2.0))
 	velocity = Vector3.ZERO

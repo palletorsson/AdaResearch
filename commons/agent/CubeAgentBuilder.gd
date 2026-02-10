@@ -1,4 +1,4 @@
-# CubeAgentBuilder.gd
+﻿# CubeAgentBuilder.gd
 # Builds an articulated cube-based character from agent_data.json
 # Creates RigidBody3D cubes connected with Generic6DOFJoint3D joints
 
@@ -172,7 +172,7 @@ func _create_single_cube(grid_x: int, grid_y: int, grid_z: int, scale_factor: fl
 
 	return cube_body
 
-func _get_cube_color(grid_x: int, grid_z: int) -> Color:
+func _get_cube_color(_grid_x: int, grid_z: int) -> Color:
 	# Color code body parts
 	if grid_z == 0:
 		return Color(1.0, 0.8, 0.6)  # Head - skin tone

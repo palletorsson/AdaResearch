@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # VowelSynth3D
 # Synthesis engine for vowel sounds using two resonant filters.
@@ -158,7 +158,7 @@ func trigger_nasal(type: String, duration_ms: float = 100.0):
 	e.amplitude = 0.5
 	events.push_back(e)
 
-func trigger_affricate(type: String):
+func trigger_affricate(_type: String):
 	# ch = t + sh
 	trigger_plosive("t")
 	trigger_fricative("sh", 100)

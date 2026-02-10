@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name DiscreetSynth
 
 # Cached AudioStreamWAVs
@@ -52,7 +52,7 @@ func _play_stream(stream: AudioStream):
 	_players.append(p)
 
 # Compatibility methods
-func set_note(freq: float):
+func set_note(_freq: float):
 	pass # Not supported in baked version
 
 func release_all():

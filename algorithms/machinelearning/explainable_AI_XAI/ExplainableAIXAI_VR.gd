@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Explainable AI (XAI)
 # Interactive visualization of model explanations
@@ -549,7 +549,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_shap_values(delta):
+func _animate_shap_values(_delta):
 	"""Animate SHAP feature bars"""
 	for bar in feature_bars:
 		var pulse = 1.0 + sin(time * 2.0) * 0.05
@@ -562,13 +562,13 @@ func _animate_perturbations(delta):
 		var original_y = point.position.y
 		point.position.y += sin(time * 1.5 + point.position.x) * delta * 0.3
 
-func _animate_heatmap(delta):
+func _animate_heatmap(_delta):
 	"""Animate Grad-CAM heatmap"""
 	for point in heatmap_points:
 		var pulse = 1.0 + sin(time * 2.0 + point.position.x + point.position.z) * 0.1
 		point.scale = Vector3(pulse, 1.0, pulse)
 
-func _update_confidence_display(delta):
+func _update_confidence_display(_delta):
 	"""Update confidence meter"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:

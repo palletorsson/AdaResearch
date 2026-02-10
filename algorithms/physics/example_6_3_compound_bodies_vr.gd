@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 6.3: Compound Bodies
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -338,7 +338,7 @@ func spawn_cross(pos: Vector3):
 	add_child(cross)
 	compound_objects.append(cross)
 
-func _on_collision(body: Node):
+func _on_collision(_body: Node):
 	"""Handle collision"""
 	pass  # Collision feedback in VRRigidBody
 

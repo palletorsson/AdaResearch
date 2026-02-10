@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 var time = 0.0
 var tree_operation_timer = 0.0
@@ -378,7 +378,7 @@ func advance_traversal():
 	else:
 		current_traversal_index = 0  # Reset for loop
 
-func start_search(target: int):
+func start_search(_target: int):
 	# Search will be animated in animate_tree()
 	pass
 

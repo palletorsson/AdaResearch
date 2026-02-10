@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
@@ -27,7 +27,7 @@ for i in range(100):
 
 # Result: CLUMPY
 # Some areas dense, others sparse
-# Random ≠ evenly distributed
+# Random â‰  evenly distributed
 [/code]
 
 **Why?** Each point is **independent** - doesn't know about others.
@@ -177,7 +177,7 @@ func is_valid(point: Vector2, width: float, height: float) -> bool:
     return true
 
 # Result: Fast, evenly distributed, no clusters
-# O(n) time complexity (not O(n²) like dart throwing)
+# O(n) time complexity (not O(nÂ²) like dart throwing)
 [/code]
 
 **Bridson's algorithm:** Industry standard for blue noise generation (sampling, stippling, dithering).
@@ -307,7 +307,7 @@ var importance_map = load_importance_texture()
 func weighted_poisson_disk_sample():
     # Similar to regular Poisson, but:
     # - min_distance varies by importance
-    # - High importance → smaller min_distance → more points
+    # - High importance â†’ smaller min_distance â†’ more points
 
     var points = []
     # ... (implementation similar to above, but min_distance = base_distance / importance)
@@ -315,8 +315,8 @@ func weighted_poisson_disk_sample():
     return points
 
 # Example: Place more trees near path (player sees them more)
-# - Path importance = 1.0 → dense trees
-# - Far from path importance = 0.3 → sparse trees
+# - Path importance = 1.0 â†’ dense trees
+# - Far from path importance = 0.3 â†’ sparse trees
 # Still blue noise (no clusters), but variable density
 [/code]
 
@@ -334,7 +334,7 @@ func weighted_poisson_disk_sample():
 [color=yellow][b]Code: 3D Poisson Disk[/b][/color]
 [code]
 # Same algorithm, but Vector3 instead of Vector2
-func poisson_disk_sample_3d(width: float, height: float, depth: float):
+func poisson_disk_sample_3d(_width: float, height: float, depth: float):
     # Use 3D spatial grid
     # Check spherical distance (not planar)
     # Result: Evenly distributed points in 3D volume
@@ -394,7 +394,7 @@ func poisson_disk_sample_3d(width: float, height: float, depth: float):
 
 Blue noise shows us:
 
-1. **Random ≠ evenly distributed** - Clusters appear in uniform random
+1. **Random â‰  evenly distributed** - Clusters appear in uniform random
 2. **Constraints create quality** - Minimum distance improves appearance
 3. **Organized chaos is possible** - Random yet structured
 4. **Fast algorithms exist** - Bridson's Poisson disk is O(n)

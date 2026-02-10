@@ -8,14 +8,14 @@ extends Node3D
 @export var canvas_depth: float = 0.04
 @export var canvas_color: Color = Color(0.98, 0.98, 0.97, 1.0)
 
-@export var frame_thickness: float = 0.03
-@export var frame_depth: float = 0.06
+@export var frame_thickness: float = 0.02
+@export var frame_depth: float = 0.03
 @export var frame_color: Color = Color(0.08, 0.08, 0.09, 1.0)
 
-@export var show_wall: bool = false
+@export var show_wall: bool = true
 @export var show_floor: bool = false
-@export var show_frames: bool = false
-@export var show_canvas: bool = false
+@export var show_frames: bool = true
+@export var show_canvas: bool = true
 
 @export var gap: float = 0.08
 @export var wall_margin: float = 0.7
@@ -117,17 +117,41 @@ func _build_canvases() -> void:
 			add_child(canvas_root)
 
 			if show_frames:
-				var frame = MeshInstance3D.new()
-				var frame_mesh = BoxMesh.new()
-				frame_mesh.size = Vector3(
-					canvas_size + frame_thickness * 2.0,
-					canvas_size + frame_thickness * 2.0,
-					frame_depth
-				)
-				frame.mesh = frame_mesh
-				frame.material_override = _frame_material
-				frame.position = Vector3(0.0, 0.0, frame_z)
-				canvas_root.add_child(frame)
+				# Create 4-bar picture frame (hollow, not solid)
+				var half_size = canvas_size * 0.5
+				var bar_length = canvas_size + frame_thickness * 2.0
+				
+				# Top bar
+				var top_bar = MeshInstance3D.new()
+				var top_mesh = BoxMesh.new()
+				top_mesh.size = Vector3(bar_length, frame_thickness, frame_depth)
+				top_bar.mesh = top_mesh
+				top_bar.material_override = _frame_material
+				top_bar.position = Vector3(0.0, half_size + frame_thickness * 0.5, frame_z)
+				canvas_root.add_child(top_bar)
+				
+				# Bottom bar
+				var bottom_bar = MeshInstance3D.new()
+				bottom_bar.mesh = top_mesh
+				bottom_bar.material_override = _frame_material
+				bottom_bar.position = Vector3(0.0, -half_size - frame_thickness * 0.5, frame_z)
+				canvas_root.add_child(bottom_bar)
+				
+				# Left bar
+				var left_bar = MeshInstance3D.new()
+				var side_mesh = BoxMesh.new()
+				side_mesh.size = Vector3(frame_thickness, canvas_size, frame_depth)
+				left_bar.mesh = side_mesh
+				left_bar.material_override = _frame_material
+				left_bar.position = Vector3(-half_size - frame_thickness * 0.5, 0.0, frame_z)
+				canvas_root.add_child(left_bar)
+				
+				# Right bar
+				var right_bar = MeshInstance3D.new()
+				right_bar.mesh = side_mesh
+				right_bar.material_override = _frame_material
+				right_bar.position = Vector3(half_size + frame_thickness * 0.5, 0.0, frame_z)
+				canvas_root.add_child(right_bar)
 
 			if show_canvas:
 				var canvas = MeshInstance3D.new()
@@ -170,7 +194,8 @@ func _build_lighting() -> void:
 		spot.spot_range = spot_range
 		spot.shadow_enabled = true
 		spot.position = Vector3(x, height + 0.4, spot_distance)
-		spot.look_at(Vector3(x, height * 0.45, 0.0), Vector3.UP)
+		var target = Vector3(x, height * 0.45, 0.0)
+		spot.look_at_from_position(spot.position, target, Vector3.UP)
 		add_child(spot)
 
 func _generate_palette(index: int) -> Array[Color]:

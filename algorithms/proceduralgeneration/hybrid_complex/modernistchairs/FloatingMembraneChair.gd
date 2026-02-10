@@ -1,4 +1,4 @@
-# FloatingMembraneChair.gd
+﻿# FloatingMembraneChair.gd
 # Procedural generation of suspended membrane chairs
 extends Node3D
 class_name FloatingMembraneChair
@@ -48,7 +48,7 @@ func generate_chair():
 	membrane.material_override = materials.get_material("canvas")
 	add_child(membrane)
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

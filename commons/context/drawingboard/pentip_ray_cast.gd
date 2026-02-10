@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @onready var raycast: RayCast3D = $"../RayCast3D"  
 @onready var debug_label: Label3D = $"../Label3D"  
@@ -31,7 +31,7 @@ func _ready():
 	raycast.visible = true  
 	raycast.enabled = false  
 
-func _process(delta):
+func _process(_delta):
 	if is_grabbed and raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider:
@@ -76,7 +76,7 @@ func draw_random_dots(uv_position: Vector2):
 		paper_surface.call("draw_point", dot_position, random_color)
 
 # Called when the pen is grabbed
-func _on_grab_pen_1_grabbed(pickable: Variant, by: Variant) -> void:
+func _on_grab_pen_1_grabbed(_pickable: Variant, by: Variant) -> void:
 	is_grabbed = true
 	raycast.enabled = true
 
@@ -95,7 +95,7 @@ func _on_grab_pen_1_grabbed(pickable: Variant, by: Variant) -> void:
 		debug_label.text = "Basic Pen Active"
 
 # Called when the pen is released
-func _on_grab_pen_1_dropped(pickable: Variant) -> void:
+func _on_grab_pen_1_dropped(_pickable: Variant) -> void:
 	is_grabbed = false
 	raycast.enabled = false  
 	reset_positions()

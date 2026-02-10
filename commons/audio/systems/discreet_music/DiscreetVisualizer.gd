@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var looper_path: NodePath
 var looper: DiscreetMusicLooper
@@ -37,7 +37,7 @@ func _create_tapes():
 	right_tape.position = Vector3(0, -1.0, 0)
 	add_child(right_tape)
 
-func _process(delta):
+func _process(_delta):
 	if not looper: return
 	
 	# Manage markers (simple approach: clear and redraw or pool? 

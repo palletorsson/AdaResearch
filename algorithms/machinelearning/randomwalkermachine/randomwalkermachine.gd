@@ -1,4 +1,4 @@
-# Main.gd - Attach to a Node3D in your main scene
+﻿# Main.gd - Attach to a Node3D in your main scene
 extends Node3D
 
 # Noise and sampling
@@ -138,7 +138,7 @@ func visualize_targets():
 		mesh_instance.position = target_points[i]
 		add_child(mesh_instance)
 
-func _process(delta):
+func _process(_delta):
 	# Update all walkers
 	update_walkers()
 	

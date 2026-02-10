@@ -1,4 +1,4 @@
-extends CanvasLayer
+﻿extends CanvasLayer
 
 # This script creates a 2D UI panel that can be displayed in your VR environment
 # with information about boids algorithms, history, and controls
@@ -211,7 +211,7 @@ func _on_title_bar_input(event):
 		main_panel.position.x = clamp(main_panel.position.x, 0, get_viewport().size.x - panel_width)
 		main_panel.position.y = clamp(main_panel.position.y, 0, get_viewport().size.y - panel_height)
 
-func _process(delta):
+func _process(_delta):
 	# If attached to a controller, update position to follow it
 	if visible and attach_to_controller and controller:
 		# Project 3D controller position to 2D screen space

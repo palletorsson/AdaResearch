@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 @onready var wfc_node: Node3D = $"../../WFCGrid"
 # Access script on the root node (assuming attached to it or parent)
@@ -18,7 +18,7 @@ func _update_ui():
 	speed_slider.value = wfc_root.generation_interval
 	size_slider.value = wfc_root.grid_size
 
-func _process(delta):
+func _process(_delta):
 	if wfc_root:
 		var info = wfc_root.get_wfc_info()
 		stats_label.text = "Collapsed: %d / %d\nProgress: %.1f%%" % [info.collapsed_cells, info.total_cells, info.progress * 100]

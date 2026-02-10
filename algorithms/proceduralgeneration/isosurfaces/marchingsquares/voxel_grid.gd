@@ -1,4 +1,4 @@
-# voxel_grid.gd - Voxel grid with marching squares
+﻿# voxel_grid.gd - Voxel grid with marching squares
 extends Node3D
 
 @export var resolution: int = 8
@@ -51,7 +51,7 @@ func initialize(res: int, size: float):
 	
 	refresh()
 
-func create_voxel_visual(i: int, x: int, y: int):
+func create_voxel_visual(_i: int, x: int, y: int):
 	var quad = MeshInstance3D.new()
 	var quad_mesh = QuadMesh.new()
 	quad_mesh.size = Vector2.ONE * voxel_size * 0.1

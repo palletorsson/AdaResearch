@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Morphogenesis System with Skeleton and Bones
 
@@ -92,7 +92,7 @@ func visualize_attractors():
 		add_child(sphere)
 		attractor_spheres.append(sphere)
 
-func _process(delta):
+func _process(_delta):
 	if is_growing and current_iteration < max_iterations:
 		grow_step()
 		current_iteration += 1

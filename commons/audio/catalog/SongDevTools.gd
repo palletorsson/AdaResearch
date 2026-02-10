@@ -43,6 +43,8 @@ var _loop_btn: Button
 var _export_wav_btn: Button
 var _export_midi_btn: Button
 var _section_dropdown: OptionButton
+var _reference_mix_toggle: CheckBox
+var _reference_mix_mode: bool = true
 
 # Timeline
 var _timeline: SongTimeline
@@ -162,6 +164,7 @@ func _setup_audio():
 	
 	# Add realtime effects to Master bus
 	_setup_realtime_effects()
+	_set_dev_effects_enabled(not _reference_mix_mode)
 
 
 func _setup_realtime_effects():
@@ -418,6 +421,14 @@ func _setup_ui():
 	_section_dropdown.item_selected.connect(_on_section_selected)
 	_style_dropdown_modern(_section_dropdown)
 	transport.add_child(_section_dropdown)
+	
+	_reference_mix_toggle = CheckBox.new()
+	_reference_mix_toggle.text = "Preview Ref"
+	_reference_mix_toggle.button_pressed = _reference_mix_mode
+	_reference_mix_toggle.add_theme_font_size_override("font_size", 12)
+	_reference_mix_toggle.add_theme_color_override("font_color", Color(0.7, 0.9, 0.85))
+	_reference_mix_toggle.toggled.connect(_on_reference_mix_toggled)
+	transport.add_child(_reference_mix_toggle)
 	
 	# Spacer
 	var spacer = Control.new()
@@ -1732,11 +1743,140 @@ func _on_song_selected(song_id: String):
 	call_deferred("_generate_and_play", song_id)
 
 
+func _set_dev_effects_enabled(enabled: bool) -> void:
+	var master_idx = AudioServer.get_bus_index("Master")
+	if master_idx < 0:
+		return
+	
+	# The first six effects are the DevTools color chain.
+	var effect_count = AudioServer.get_bus_effect_count(master_idx)
+	var controlled_count = mini(6, effect_count)
+	for i in range(controlled_count):
+		AudioServer.set_bus_effect_enabled(master_idx, i, enabled)
+
+
+func _on_reference_mix_toggled(pressed: bool) -> void:
+	_reference_mix_mode = pressed
+	_set_dev_effects_enabled(not _reference_mix_mode)
+	_apply_live_params()
+	if _reference_mix_mode:
+		_status_label.text = "Mode: Preview Reference"
+	else:
+		_status_label.text = "Mode: Dev Tools"
+
+
+func _generate_preview_reference_stream(song_id: String) -> AudioStream:
+	match song_id:
+		"chromatic_story":
+			return SoundbankGenerator.generate_song("chromatic_story", {"bpm": 100})
+		"nineties_rnb":
+			return SoundbankGenerator.generate_song("nineties_rnb", {"bpm": 92})
+		"computer_love":
+			return SoundbankGenerator.generate_song("kraftwerk", {"bpm": 129})
+		"aphex_twin", "aphex_twin_digital_amber":
+			return SoundbankGenerator.generate_song("aphex_twin", {"bpm": 108})
+		"ada_theme":
+			return SoundbankGenerator.generate_song("ada_theme", {"bpm": 100})
+		"prog_synth_70s":
+			return AudioSynthesizer.generate_prog_synth_song({})
+		"kpop_prog":
+			return AudioSynthesizer.generate_kpop_prog_song({})
+		"pop_generative":
+			return AudioSynthesizer.generate_pop_interactive_song({})
+		"ambient_works":
+			return AudioSynthesizer.generate_ambient_works_song({})
+		"i_feel_love", "moroder_disco":
+			return SoundbankGenerator.generate_song("moroder_disco", {"bpm": 126})
+		"detroit_techno":
+			return AudioSynthesizer.generate_detroit_techno_song({})
+		"midnight_metroplex":
+			return SoundbankGenerator.generate_song("detroit_techno", {})
+		"synthwave":
+			return AudioSynthesizer.generate_synthwave_song({})
+		"rave":
+			return AudioSynthesizer.generate_rave_song({})
+		"replicants_dawn":
+			return SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
+		"foggy_frequencies":
+			return SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
+		"chicago_dusseldorf":
+			return SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
+		"dub_house_sb", "dub_house":
+			return SoundbankGenerator.generate_song("dub_house", {"bpm": 122})
+		"k_bass":
+			return SoundbankGenerator.generate_song("k_bass", {"bpm": 170})
+		_:
+			return null
+
+
+func _build_generation_params(song_id: String) -> Dictionary:
+	var params: Dictionary = {}
+	
+	if not _current_config.is_empty():
+		var config_params = _current_config.get("parameters", {})
+		if config_params is Dictionary:
+			for param_name in config_params.keys():
+				var param_info = config_params[param_name]
+				if param_info is Dictionary:
+					if param_info.has("value"):
+						params[param_name] = param_info["value"]
+					elif param_info.has("default"):
+						params[param_name] = param_info["default"]
+		
+		var arrangement = _current_config.get("arrangement", null)
+		if arrangement is Dictionary:
+			params["arrangement"] = arrangement
+			params["carry_layers"] = bool(arrangement.get("carry_layers", true))
+			
+			var variation_hint = str(arrangement.get("variation", "")).to_lower()
+			if arrangement.has("enable_motif_variation"):
+				params["enable_motif_variation"] = bool(arrangement["enable_motif_variation"])
+			elif arrangement.has("motif_variation"):
+				params["enable_motif_variation"] = bool(arrangement["motif_variation"])
+			elif not variation_hint.is_empty():
+				params["enable_motif_variation"] = not (variation_hint in ["none", "off", "false", "minimal"])
+			
+			if arrangement.has("motif_variation_amount"):
+				params["motif_variation_amount"] = float(arrangement["motif_variation_amount"])
+			elif variation_hint == "minimal":
+				params["motif_variation_amount"] = 0.2
+			elif variation_hint == "medium":
+				params["motif_variation_amount"] = 0.45
+			elif variation_hint == "high":
+				params["motif_variation_amount"] = 0.75
+		
+		var chord_progressions = _current_config.get("chord_progressions", null)
+		if chord_progressions != null:
+			params["chord_progressions"] = chord_progressions
+			if chord_progressions is Array and chord_progressions.size() > 0 and chord_progressions[0] is Dictionary:
+				params["progression_name"] = chord_progressions[0].get("name", "")
+		
+		var rhythm = _current_config.get("rhythm", null)
+		if rhythm is Dictionary:
+			if rhythm.has("humanize_ms"):
+				params["humanize_ms"] = float(rhythm["humanize_ms"])
+			if rhythm.has("swing_pct"):
+				params["swing_pct"] = float(rhythm["swing_pct"])
+	
+	if not params.has("carry_layers"):
+		params["carry_layers"] = true
+	if not params.has("enable_motif_variation"):
+		params["enable_motif_variation"] = false
+	if not params.has("motif_variation_amount"):
+		params["motif_variation_amount"] = 0.25
+	
+	params["song_id"] = song_id
+	return params
+
+
 func _generate_and_play(song_id: String):
 	var stream: AudioStream = null
+	if _reference_mix_mode:
+		stream = _generate_preview_reference_stream(song_id)
+	var generation_params = _build_generation_params(song_id)
 	
 	# Soundbank previews (explicit *_sb IDs)
-	if song_id.ends_with("_sb"):
+	if stream == null and song_id.ends_with("_sb"):
 		var soundbank_map = {
 			"detroit_sb": "detroit_techno",
 			"synthwave_sb": "synthwave",
@@ -1751,76 +1891,86 @@ func _generate_and_play(song_id: String):
 		}
 		var bank_id = soundbank_map.get(song_id, "")
 		if bank_id != "":
-			stream = SoundbankGenerator.generate_song(bank_id, {})
+			stream = SoundbankGenerator.generate_song(bank_id, generation_params)
 		else:
 			stream = null
-	else:
+	elif stream == null:
 		# AudioSynthesizer has class_name - call static methods directly
 		match song_id:
 			"acid_house":
-				stream = AudioSynthesizer.generate_acid_house_song({})
+				stream = AudioSynthesizer.generate_acid_house_song(generation_params)
+			"acid_techno_303":
+				stream = AudioSynthesizer.generate_acid_house_song(generation_params)
 			"prog_synth_70s":
-				stream = AudioSynthesizer.generate_prog_synth_song({})
+				stream = AudioSynthesizer.generate_prog_synth_song(generation_params)
+			"kpop_prog_remix":
+				stream = AudioSynthesizer.generate_kpop_prog_song(generation_params)
 			"pop_generative":
-				stream = AudioSynthesizer.generate_pop_interactive_song({})
+				stream = AudioSynthesizer.generate_pop_interactive_song(generation_params)
 			"ambient_works":
-				stream = AudioSynthesizer.generate_ambient_works_song({})
+				stream = AudioSynthesizer.generate_ambient_works_song(generation_params)
 			"moroder_disco":
-				stream = AudioSynthesizer.generate_moroder_disco_song({})
+				stream = AudioSynthesizer.generate_moroder_disco_song(generation_params)
 			"detroit_techno":
-				stream = AudioSynthesizer.generate_detroit_techno_song({})
+				stream = AudioSynthesizer.generate_detroit_techno_song(generation_params)
 			"midnight_metroplex":
-				stream = SoundbankGenerator.generate_song("detroit_techno", {})
+				stream = SoundbankGenerator.generate_song("detroit_techno", generation_params)
 			"synthwave":
-				stream = AudioSynthesizer.generate_synthwave_song({})
+				stream = AudioSynthesizer.generate_synthwave_song(generation_params)
 			"rave":
-				stream = AudioSynthesizer.generate_rave_song({})
+				stream = AudioSynthesizer.generate_rave_song(generation_params)
 			"french_touch":
-				stream = AudioSynthesizer.generate_french_touch_song({})
+				stream = AudioSynthesizer.generate_french_touch_song(generation_params)
 			"supersaw_trance":
-				stream = AudioSynthesizer.generate_supersaw_trance_song({})
+				stream = AudioSynthesizer.generate_supersaw_trance_song(generation_params)
 			"lofi_house":
-				stream = AudioSynthesizer.generate_lofi_house_song({})
+				stream = AudioSynthesizer.generate_lofi_house_song(generation_params)
 			"reese_jungle":
-				stream = AudioSynthesizer.generate_reese_jungle_song({})
+				stream = AudioSynthesizer.generate_reese_jungle_song(generation_params)
 			"ambient_techno":
-				stream = AudioSynthesizer.generate_ambient_techno_song({})
+				stream = AudioSynthesizer.generate_ambient_techno_song(generation_params)
 			"blade_runner":
-				stream = AudioSynthesizer.generate_blade_runner_song({})
+				stream = AudioSynthesizer.generate_blade_runner_song(generation_params)
 			"boards_of_canada":
-				stream = AudioSynthesizer.generate_boards_of_canada_song({})
+				stream = AudioSynthesizer.generate_boards_of_canada_song(generation_params)
 			"burial":
-				stream = AudioSynthesizer.generate_burial_song({})
+				stream = AudioSynthesizer.generate_burial_song(generation_params)
 			"kraftwerk":
-				stream = AudioSynthesizer.generate_kraftwerk_song({})
+				stream = AudioSynthesizer.generate_kraftwerk_song(generation_params)
 			"boards_of_canada_v2":
-				stream = AudioSynthesizer.generate_boards_of_canada_v2_song({})
+				stream = AudioSynthesizer.generate_boards_of_canada_v2_song(generation_params)
 			"burial_v2":
-				stream = AudioSynthesizer.generate_burial_v2_song({})
+				stream = AudioSynthesizer.generate_burial_v2_song(generation_params)
 			"kraftwerk_v2":
-				stream = AudioSynthesizer.generate_kraftwerk_v2_song({})
+				stream = AudioSynthesizer.generate_kraftwerk_v2_song(generation_params)
 			"prog_synth_v2":
-				stream = AudioSynthesizer.generate_prog_synth_v2_song({})
+				stream = AudioSynthesizer.generate_prog_synth_v2_song(generation_params)
 			"pop_v2":
-				stream = AudioSynthesizer.generate_pop_v2_song({})
+				stream = AudioSynthesizer.generate_pop_v2_song(generation_params)
 			"pop_madonna":
-				stream = AudioSynthesizer.generate_pop_madonna_song({})
+				stream = AudioSynthesizer.generate_pop_madonna_song(generation_params)
 			"gypsy_woman_house":
-				stream = AudioSynthesizer.generate_gypsy_woman_house_song({})
+				stream = AudioSynthesizer.generate_gypsy_woman_house_song(generation_params)
 			# === SOUND BANK-ONLY SONGS ===
 			"aphex_twin", "aphex_twin_digital_amber":
-				stream = SoundbankGenerator.generate_song("aphex_twin", {})
+				stream = SoundbankGenerator.generate_song("aphex_twin", generation_params)
 			"ada_theme":
-				stream = SoundbankGenerator.generate_song("ada_theme", {})
+				stream = SoundbankGenerator.generate_song("ada_theme", generation_params)
+			"chromatic_story":
+				stream = SoundbankGenerator.generate_song("chromatic_story", generation_params)
+			"nineties_rnb":
+				stream = SoundbankGenerator.generate_song("nineties_rnb", generation_params)
+			"k_bass":
+				stream = SoundbankGenerator.generate_song("k_bass", generation_params)
 			"vangelis_cs80":
-				stream = SoundbankGenerator.generate_song("vangelis_cs80", {})
+				stream = SoundbankGenerator.generate_song("vangelis_cs80", generation_params)
 			# === HYBRID SONGS ===
 			"chicago_dusseldorf":
-				stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", {})
+				stream = SoundbankGenerator.generate_hybrid_song("chicago_dusseldorf", generation_params)
 			"replicants_dawn":
-				stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", {})
+				stream = SoundbankGenerator.generate_hybrid_song("replicants_dawn", generation_params)
 			"foggy_frequencies":
-				stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", {})
+				stream = SoundbankGenerator.generate_hybrid_song("foggy_frequencies", generation_params)
 			_:
 				# No generator - show config breakdown only (no audio)
 				_status_label.text = "?? %s (config only - no audio)" % song_id
@@ -2271,17 +2421,17 @@ func _reset_all():
 
 # === LAYERS ===
 
-func _on_layer_solo(pressed: bool, layer_name: String):
+func _on_layer_solo(_pressed: bool, layer_name: String):
 	# TODO: Implement actual solo via bus routing
 	pass
 
 
-func _on_layer_mute(pressed: bool, layer_name: String):
+func _on_layer_mute(_pressed: bool, layer_name: String):
 	# TODO: Implement actual mute via bus routing
 	pass
 
 
-func _on_layer_volume(value: float, layer_name: String):
+func _on_layer_volume(_value: float, layer_name: String):
 	# TODO: Apply to layer-specific bus
 	pass
 

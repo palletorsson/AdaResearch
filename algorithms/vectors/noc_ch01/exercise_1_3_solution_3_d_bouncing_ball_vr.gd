@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 1.3: Exercise 1.3: 3D Bouncing Ball
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -53,7 +53,7 @@ func _setup_trail() -> void:
 	_trail_instance.material_override = MAT_TRAIL
 	_sim_root.add_child(_trail_instance)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_velocity += _gravity
 	_position += _velocity
 

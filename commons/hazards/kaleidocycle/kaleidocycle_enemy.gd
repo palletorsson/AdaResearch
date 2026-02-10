@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name KaleidocycleEnemy
 ## Kaleidocycle enemy - tumbling ring of tetrahedra with 4 attack modes.
 ## Each face type triggers a different attack when it becomes active.
@@ -126,7 +126,7 @@ func _process_cycle(delta: float) -> void:
 		_set_state(State.ATTACK)
 
 
-func _process_attack(delta: float) -> void:
+func _process_attack(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / attack_duration, 0.0, 1.0)

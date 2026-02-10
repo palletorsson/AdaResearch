@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node
 class_name FaceSnapSystem
 
@@ -291,7 +291,7 @@ func _check_cube_alignment(other_cube: Node3D) -> Variant:
 			# Check if normals are opposing (faces pointing at each other)
 			# For opposing normals, dot should be close to -1
 			var dot = my_world_normal.dot(other_world_normal)
-			var min_dot = -cos(deg_to_rad(angle_tolerance))  # e.g., -cos(30°) = -0.866
+			var min_dot = -cos(deg_to_rad(angle_tolerance))  # e.g., -cos(30Â°) = -0.866
 			if dot > min_dot:
 				continue
 
@@ -374,7 +374,7 @@ func _find_best_snap() -> Variant:
 	return null
 
 
-func _calculate_snap_position(my_center: Vector3, other_center: Vector3, normal: Vector3, my_face: int, other_face: int, other_cube: Node3D) -> Vector3:
+func _calculate_snap_position(_my_center: Vector3, other_center: Vector3, normal: Vector3, my_face: int, other_face: int, other_cube: Node3D) -> Vector3:
 	# The goal: position my cube so that my_face touches other_face
 	#
 	# Strategy:

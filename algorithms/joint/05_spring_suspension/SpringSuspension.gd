@@ -1,4 +1,4 @@
-extends "res://algorithms/joint/shared/joint_demo_base.gd"
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var wheel: RigidBody3D
 var suspension: Generic6DOFJoint3D
@@ -45,6 +45,6 @@ func _build_demo():
 
 	add_label("Damped Spring Suspension", Vector3(0.0, 4.2, 2.5))
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		wheel.apply_impulse(Vector3(0.0, 6.0, 0.0))

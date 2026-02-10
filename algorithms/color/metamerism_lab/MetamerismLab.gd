@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 @export var wave_speed: float = 2.0
@@ -89,7 +89,7 @@ func _create_sphere(color: Color, pos: Vector3) -> MeshInstance3D:
 	add_child(mi)
 	return mi
 
-func _animate(delta):
+func _animate(_delta):
 	# Animate Left Wave (Single Yellow Frequency)
 	for child in _left_wave.get_children():
 		var idx = child.get_meta("idx")

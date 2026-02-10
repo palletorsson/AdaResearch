@@ -1,8 +1,8 @@
-# vector_normalize_demo.gd
+﻿# vector_normalize_demo.gd
 # Interactive vector normalization visualization
 # Same style as VectorBasics - uses vector_scene_base
 #
-# Shows: V̂ = V / |V| (unit vector in same direction)
+# Shows: VÌ‚ = V / |V| (unit vector in same direction)
 
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
@@ -38,7 +38,7 @@ func _ready():
 	unit_label = Label3D.new()
 	unit_label.pixel_size = 0.0025
 	unit_label.font_size = 28
-	unit_label.text = "V̂"
+	unit_label.text = "VÌ‚"
 	unit_label.modulate = Color(0.2, 1.0, 0.5)
 	unit_label.outline_size = 8
 	unit_label.outline_modulate = Color(0, 0, 0, 0.8)
@@ -145,7 +145,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector
@@ -169,9 +169,9 @@ func _update_info(vec: Vector3):
 	builder.append("V = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
 	builder.append("|V| = %.3f" % magnitude)
 	builder.append("")
-	builder.append("V̂ = V / |V|")
-	builder.append("V̂ = (%.2f, %.2f, %.2f)" % [unit.x, unit.y, unit.z])
-	builder.append("|V̂| = 1.000")
+	builder.append("VÌ‚ = V / |V|")
+	builder.append("VÌ‚ = (%.2f, %.2f, %.2f)" % [unit.x, unit.y, unit.z])
+	builder.append("|VÌ‚| = 1.000")
 	info_label.text = "\n".join(builder)
 
 func _update_unit_label(vec: Vector3):

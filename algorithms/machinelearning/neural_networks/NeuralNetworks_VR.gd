@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # VR-Reimagined Neural Network Visualization
 # Walk through network layers as physical rooms
@@ -478,7 +478,7 @@ func _create_control_panel():
 	for i in range(layer_sizes.size()):
 		arch_text += str(layer_sizes[i])
 		if i < layer_sizes.size() - 1:
-			arch_text += " → "
+			arch_text += " â†’ "
 	var arch_label = Label3D.new()
 	arch_label.text = arch_text
 	arch_label.font_size = 32
@@ -540,7 +540,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_neurons(delta):
+func _animate_neurons(_delta):
 	"""Animate neurons based on activation"""
 	for layer_idx in range(layers.size()):
 		for neuron_idx in range(layers[layer_idx].size()):
@@ -604,7 +604,7 @@ func _animate_back_prop(delta):
 
 		particle.position = Vector3(x, y, z)
 
-func _animate_weights(delta):
+func _animate_weights(_delta):
 	"""Update weight line visualizations"""
 	if not show_weights:
 		return

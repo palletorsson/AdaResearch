@@ -1,4 +1,4 @@
-# UV-Based Texture Pixel Scanner - Samples actual texture pixels at hit point
+﻿# UV-Based Texture Pixel Scanner - Samples actual texture pixels at hit point
 extends Node3D
 
 @export_category("Scanner Settings")
@@ -393,7 +393,7 @@ func calculate_cylinder_uv(cylinder_mesh: CylinderMesh, local_point: Vector3) ->
 		var v = (local_point.y + half_height) / height
 		return Vector2(clamp(u, 0.0, 1.0), clamp(1.0 - v, 0.0, 1.0))
 
-func calculate_sphere_uv(sphere_mesh: SphereMesh, local_point: Vector3) -> Vector2:
+func calculate_sphere_uv(_sphere_mesh: SphereMesh, local_point: Vector3) -> Vector2:
 	"""Calculate UV for SphereMesh"""
 	var normalized = local_point.normalized()
 	var u = 0.5 + atan2(normalized.z, normalized.x) / (2.0 * PI)
@@ -653,7 +653,7 @@ func update_ray_for_miss():
 	ray_material.emission = ray_color_scanning
 	ray_material.albedo_color = ray_color_scanning
 
-func update_display_hit(hit_object: Node, distance: float):
+func update_display_hit(_hit_object: Node, distance: float):
 	"""Update display for hits"""
 	
 	if not color_data_label:

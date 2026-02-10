@@ -1,4 +1,4 @@
-# Boards of Canada Texture Layer
+﻿# Boards of Canada Texture Layer
 # Research: boards_of_canada.md
 #
 # Character: VHS crackle, tape noise, lo-fi atmosphere
@@ -17,7 +17,7 @@ const POP_CHANCE = 0.002          # VHS pops
 const POP_LEVEL = 0.08
 
 
-static func generate(t: float, _trigger_time: float = 0.0) -> float:
+static func generate(_t: float, _trigger_time: float = 0.0) -> float:
 	# Base tape noise
 	var noise = (randf() * 2.0 - 1.0) * BASE_LEVEL
 	

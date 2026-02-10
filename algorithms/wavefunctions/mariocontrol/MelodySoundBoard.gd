@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 ## Melody Sound Board - Spatial Musical Instrument
 ## Positions musical notes in 3D space and plays melodies by moving through them
@@ -277,7 +277,7 @@ func _generate_sine_bell(freq: float, intensity: float) -> AudioStreamWAV:
 
 # --- Mapper Interface ---
 
-func _on_mapper_changed(semitone: float, octave_offset: float, intensity: float):
+func _on_mapper_changed(_semitone: float, octave_offset: float, intensity: float):
 	# Could trigger notes based on position for interactive play
 	pass
 

@@ -1,4 +1,4 @@
-extends "res://algorithms/joint/shared/joint_demo_base.gd"
+﻿extends "res://algorithms/joint/shared/joint_demo_base.gd"
 
 var bob: RigidBody3D
 
@@ -36,7 +36,7 @@ func _build_demo():
 	# Nudge to start swinging
 	call_deferred("_nudge")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		bob.apply_impulse(Vector3.RIGHT * 1.5 + Vector3.FORWARD * 0.8)
 

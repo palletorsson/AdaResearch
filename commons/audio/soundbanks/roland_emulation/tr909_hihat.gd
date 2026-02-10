@@ -1,5 +1,5 @@
-# TR-909 Hi-Hat (Closed and Open)
-# Metallic ring character — 6 detuned square waves create the "tssss"
+﻿# TR-909 Hi-Hat (Closed and Open)
+# Metallic ring character â€” 6 detuned square waves create the "tssss"
 extends RefCounted
 class_name TR909HiHat
 
@@ -52,7 +52,7 @@ func choke():
 	is_playing = false
 
 
-func generate_sample(time_since_trigger: float) -> Dictionary:
+func generate_sample(_time_since_trigger: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

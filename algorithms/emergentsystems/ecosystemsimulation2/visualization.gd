@@ -1,4 +1,4 @@
-# visualization.gd
+﻿# visualization.gd
 class_name Visualization
 extends Node3D
 
@@ -853,17 +853,17 @@ func _create_default_event_effect(visual: Node3D, color: Color, intensity: float
 	
 	visual.add_child(sphere)
 
-func _update_entity_visuals(delta: float):
+func _update_entity_visuals(_delta: float):
 	# Update all entity visuals to match current positions
 	for entity in entity_visual_cache.keys():
 		update_entity_visualization(entity)
 
-func _update_connection_visuals(delta: float):
+func _update_connection_visuals(_delta: float):
 	# Connection visuals are updated on demand
 	# This function would be used for automatic updates
 	pass
 
-func _update_trajectory_visuals(delta: float):
+func _update_trajectory_visuals(_delta: float):
 	# Only update if trajectory visualization is enabled
 	if not enable_trajectory_visualization:
 		return
@@ -936,7 +936,7 @@ func _update_trajectory_visuals(delta: float):
 				# If the line didn't get added to the tree properly, clean it up
 				line.queue_free()
 
-func _update_active_effects(delta: float):
+func _update_active_effects(_delta: float):
 	# Update active visual effects
 	for effect in active_effects.duplicate():
 		var visual = effect.visual
@@ -965,7 +965,7 @@ func _update_active_effects(delta: float):
 				# Transformation effects might distort space
 				pass
 
-func _update_entity_histories(delta: float):
+func _update_entity_histories(_delta: float):
 	# Add current positions to history for trajectory visualization
 	for entity in entity_visual_cache.keys():
 		if not entity_history.has(entity):

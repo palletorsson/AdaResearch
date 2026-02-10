@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name FourSoftBodyController
 
 # Configuration
@@ -19,7 +19,7 @@ func _ready():
 	setup_stop_timers()
 
 	
-	print("🎯 Four SoftBody Controller ready!")
+	print("ðŸŽ¯ Four SoftBody Controller ready!")
 	print("   Positions: 2x2 grid with %.1fm spacing" % spacing)
 	print("   Stop times: ", stop_times)
 
@@ -31,7 +31,7 @@ func create_four_soft_bodies():
 	var soft_body_scene = load(soft_body_scene_path)
 	
 	if not soft_body_scene:
-		print("❌ Failed to load soft body scene: ", soft_body_scene_path)
+		print("âŒ Failed to load soft body scene: ", soft_body_scene_path)
 		create_fallback_soft_bodies()
 		return
 	
@@ -54,9 +54,9 @@ func create_four_soft_bodies():
 		var soft_body_node = find_soft_body_in_instance(soft_body_instance)
 		if soft_body_node:
 			soft_body_instances.append(soft_body_node)
-			print("✅ Created SoftBody %d at %s" % [i + 1, positions[i]])
+			print("âœ… Created SoftBody %d at %s" % [i + 1, positions[i]])
 		else:
-			print("⚠️  Could not find SoftBody3D in instance %d" % (i + 1))
+			print("âš ï¸  Could not find SoftBody3D in instance %d" % (i + 1))
 
 func find_soft_body_in_instance(instance: Node) -> SoftBody3D:
 	"""Find the SoftBody3D node within an instance"""
@@ -79,7 +79,7 @@ func find_soft_body_in_instance(instance: Node) -> SoftBody3D:
 func create_fallback_soft_bodies():
 	"""Create basic soft bodies if scene loading fails"""
 	
-	print("🔄 Creating fallback soft bodies...")
+	print("ðŸ”„ Creating fallback soft bodies...")
 	
 	var positions = [
 		Vector3(-spacing/2, 3, -spacing/2),
@@ -129,10 +129,10 @@ func setup_stop_timers():
 		add_child(timer)
 		stop_timers.append(timer)
 		
-		print("⏰ Timer %d set for %.1f seconds" % [i + 1, timer.wait_time])
+		print("â° Timer %d set for %.1f seconds" % [i + 1, timer.wait_time])
 
 
-func _process(delta):
+func _process(_delta):
 	"""Update UI timers"""
 	
 	if not show_timers:
@@ -162,7 +162,7 @@ func _on_stop_timeout(index: int):
 	
 	var soft_body = soft_body_instances[index]
 	
-	print("⏰ Timer %d expired - stopping SoftBody: %s" % [index + 1, soft_body.name])
+	print("â° Timer %d expired - stopping SoftBody: %s" % [index + 1, soft_body.name])
 	stop_soft_body(index)
 
 func stop_soft_body(index: int):
@@ -187,12 +187,12 @@ func stop_soft_body(index: int):
 		ui_labels[index].text = "SoftBody %d: STOPPED!" % [index + 1]
 		ui_labels[index].add_theme_color_override("font_color", Color.BLUE)
 	
-	print("🧊 SoftBody %d stopped and frozen!" % [index + 1])
+	print("ðŸ§Š SoftBody %d stopped and frozen!" % [index + 1])
 
 func restart_all():
 	"""Restart all soft bodies"""
 	
-	print("🔄 Restarting all soft bodies...")
+	print("ðŸ”„ Restarting all soft bodies...")
 	
 	for i in range(soft_body_instances.size()):
 		if stopped_states[i]:
@@ -225,7 +225,7 @@ func restart_soft_body(index: int):
 		std_mat.albedo_color = Color.from_hsv(index * 0.25, 0.8, 1.0)
 		std_mat.albedo_color.a = 0.8
 	
-	print("✅ SoftBody %d restarted!" % [index + 1])
+	print("âœ… SoftBody %d restarted!" % [index + 1])
 
 func _input(event):
 	"""Handle input"""
@@ -234,7 +234,7 @@ func _input(event):
 		restart_all()
 	
 	if event.is_action_pressed("ui_select"):  # Enter key
-		print("📊 Status Report:")
+		print("ðŸ“Š Status Report:")
 		for i in range(soft_body_instances.size()):
 			var status = "RUNNING" if not stopped_states[i] else "STOPPED"
 			print("   SoftBody %d: %s" % [i + 1, status])

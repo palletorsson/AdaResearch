@@ -1,4 +1,4 @@
-# ProceduralGenerationVisualization.gd
+﻿# ProceduralGenerationVisualization.gd
 # Visualization component for procedural generation concepts
 extends Control
 
@@ -91,7 +91,7 @@ func _draw():
 		"advanced":
 			draw_advanced_visualization(center_x, center_y)
 
-func draw_intro_visualization(center_x: float, center_y: float):
+func draw_intro_visualization(_center_x: float, center_y: float):
 	# Draw a grid pattern that shifts procedurally
 	var grid_size = 20
 	var offset = int(time * 20) % grid_size
@@ -110,7 +110,7 @@ func draw_intro_visualization(center_x: float, center_y: float):
 	# Label
 	draw_string(get_theme_default_font(), Vector2(20, 30), "Procedural Pattern Grid", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color.WHITE)
 
-func draw_noise_terrain(center_x: float, center_y: float):
+func draw_noise_terrain(_center_x: float, center_y: float):
 	if not noise_generator:
 		setup_noise()
 
@@ -184,7 +184,7 @@ func draw_lsystem(center_x: float, center_y: float):
 	# Label
 	draw_string(get_theme_default_font(), Vector2(20, 30), "L-System Plant Growth", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color.WHITE)
 
-func draw_dungeon_visualization(center_x: float, center_y: float):
+func draw_dungeon_visualization(_center_x: float, center_y: float):
 	# Draw BSP rooms
 	for room in bsp_rooms:
 		# Room floor

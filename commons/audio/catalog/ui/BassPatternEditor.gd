@@ -1,4 +1,4 @@
-# BassPatternEditor.gd
+﻿# BassPatternEditor.gd
 # Bass pattern editor extending BasePatternEditor
 # Piano roll style - rows = pitches (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)
 
@@ -29,7 +29,7 @@ var _pitch_drag_start_y: float = 0
 
 
 func _get_editor_title() -> String:
-	return "🎸 BASS TIMELINE"
+	return "ðŸŽ¸ BASS TIMELINE"
 
 
 func _get_editor_color() -> Color:
@@ -49,7 +49,7 @@ func _get_row_label(row: int) -> String:
 	return "%s%d" % [note_name, octave]
 
 
-func _get_row_sound(row: int) -> String:
+func _get_row_sound(_row: int) -> String:
 	return "bass"
 
 
@@ -123,7 +123,7 @@ func _get_step_data(row: int, step: int) -> Dictionary:
 	}
 
 
-func _set_step_data(row: int, step: int, data: Dictionary):
+func _set_step_data(_row: int, step: int, data: Dictionary):
 	if step >= _step_count:
 		return
 	
@@ -183,7 +183,7 @@ func _on_step_drag(row: int, step: int, button: int):
 		_rebuild_grid()
 
 
-func _render_step(row: int, step: int, cell: Control, data: Dictionary):
+func _render_step(_row: int, step: int, cell: Control, data: Dictionary):
 	# Add glide indicator if active
 	if data.get("active", false) and data.get("glide", false):
 		var glide_label = cell.get_node_or_null("GlideLabel")

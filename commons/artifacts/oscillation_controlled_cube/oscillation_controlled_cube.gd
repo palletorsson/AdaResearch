@@ -1,8 +1,8 @@
-# oscillation_controlled_cube.gd
+﻿# oscillation_controlled_cube.gd
 # The "mario cube" that responds to pendulum control
-# Pendulum Y → cube Y translation (up/down)
-# Pendulum angular velocity → cube rotation speed
-# Pendulum amplitude → cube scale pulse
+# Pendulum Y â†’ cube Y translation (up/down)
+# Pendulum angular velocity â†’ cube rotation speed
+# Pendulum amplitude â†’ cube scale pulse
 
 extends Node3D
 
@@ -209,25 +209,25 @@ func _create_mapping_panel():
 	_breakdown_label.font_size = 40
 	_breakdown_label.outline_size = 4
 	_breakdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_breakdown_label.text = "MAPPINGS:\ny_offset → Y pos\nang_vel → rotation\namplitude → scale"
+	_breakdown_label.text = "MAPPINGS:\ny_offset â†’ Y pos\nang_vel â†’ rotation\namplitude â†’ scale"
 	_breakdown_label.position = Vector3(-cube_size * 2.0, cube_size * 0.3, 0)
 	_breakdown_label.modulate = Color(0.7, 0.8, 0.9)
 	add_child(_breakdown_label)
 
 func _on_oscillation_updated(y_offset: float, angular_velocity: float, amplitude: float):
-	# Translation: pendulum Y → cube Y
+	# Translation: pendulum Y â†’ cube Y
 	position.y = _base_position.y + y_offset * translation_scale
 	
-	# Rotation: angular velocity → rotation speed
+	# Rotation: angular velocity â†’ rotation speed
 	_current_rotation += angular_velocity * rotation_scale * get_process_delta_time()
 	_cube_instance.rotation.y = _current_rotation
 	
-	# Scale: amplitude → scale pulse
+	# Scale: amplitude â†’ scale pulse
 	var scale_factor = lerp(scale_range.x, scale_range.y, amplitude)
 	_cube_instance.scale = Vector3.ONE * cube_size * scale_factor
 	
 	# Update main label
-	_label.text = "Y: %.2f\nSpin: %.1f°\nScale: %.2f" % [
+	_label.text = "Y: %.2f\nSpin: %.1fÂ°\nScale: %.2f" % [
 		position.y - _base_position.y,
 		rad_to_deg(_current_rotation),
 		scale_factor
@@ -235,7 +235,7 @@ func _on_oscillation_updated(y_offset: float, angular_velocity: float, amplitude
 	
 	# Update breakdown label with real-time mappings
 	if _breakdown_label and show_guides:
-		_breakdown_label.text = "MAPPINGS:\ny_offset %.2f → Y %.2f\nang_vel %.2f → θ %.1f°\namplitude %.2f → s %.2f" % [
+		_breakdown_label.text = "MAPPINGS:\ny_offset %.2f â†’ Y %.2f\nang_vel %.2f â†’ Î¸ %.1fÂ°\namplitude %.2f â†’ s %.2f" % [
 			y_offset, position.y - _base_position.y,
 			angular_velocity, rad_to_deg(fmod(_current_rotation, TAU)),
 			amplitude, scale_factor
@@ -267,7 +267,7 @@ func _update_color_feedback(intensity: float):
 	mat.set_shader_parameter("emissionColor", current_color * (1.0 + intensity * 0.6))
 	mat.set_shader_parameter("emission_strength", 0.3 + intensity * 0.5)
 
-func _process(delta):
+func _process(_delta):
 	# Fallback: if no pendulum connected, do default oscillation
 	if not _pendulum:
 		var t = Time.get_ticks_msec() / 1000.0

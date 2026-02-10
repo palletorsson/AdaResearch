@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 @onready var tree_node = $"../../RecursiveTree"
 @onready var branch_slider = $Panel/VBoxContainer/BranchSlider
@@ -38,7 +38,7 @@ func _on_branch_changed(value):
 func _on_sub_changed(value):
 	$Panel/VBoxContainer/SubBranchLabel.text = "Max Sub-Branches: %d" % int(value)
 
-func _on_seed_changed(value):
+func _on_seed_changed(_value):
 	pass
 
 func _on_randomize_pressed():

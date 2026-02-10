@@ -1,11 +1,11 @@
-extends Node
+﻿extends Node
 
 var text = '''[center][font_size=28][b]Random Walk[/b][/font_size][/center]
 [center][i]Brownian Motion, Drunkard's Path, Diffusion[/i][/center]
 
 **Random walk: each step chooses random direction.**
 
-**Simple rule:** position += random_direction() × step_size
+**Simple rule:** position += random_direction() Ã— step_size
 
 [hr]
 
@@ -15,7 +15,7 @@ var text = '''[center][font_size=28][b]Random Walk[/b][/font_size][/center]
 [code]
 var position = Vector2.ZERO
 
-func _process(delta):
+func _process(_delta):
     var angle = randf() * TAU
     var step = Vector2(cos(angle), sin(angle)) * step_size
     position += step
@@ -26,7 +26,7 @@ func _process(delta):
 [/code]
 
 **Properties:**
-- **Displacement grows as √N** (N = number of steps)
+- **Displacement grows as âˆšN** (N = number of steps)
 - **Returns to origin infinitely often** (2D - will revisit start)
 - **Fills space** (eventually visits every region)
 
@@ -49,13 +49,13 @@ func _process(delta):
 - **Non-teleological** (no goal, just process)
 - **Returns possible** (visiting same places differently)
 - **Fills space** (explores without map)
-- **√N displacement** (progress is slow, non-linear)
+- **âˆšN displacement** (progress is slow, non-linear)
 
 **Queer life as random walk** - no straight path, no predetermined trajectory, wandering that eventually covers territory.
 
 [hr]
 
 [color=cyan][b]Summary:[/b][/color]
-Random walk: each step random direction. Displacement ~ √N. Returns to origin (2D). Fills space eventually. Queer random walk: non-teleological movement, slow non-linear progress, wandering as exploration, no straight paths.
+Random walk: each step random direction. Displacement ~ âˆšN. Returns to origin (2D). Fills space eventually. Queer random walk: non-teleological movement, slow non-linear progress, wandering as exploration, no straight paths.
 
 '''

@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
@@ -34,7 +34,7 @@ var text = '''[center][font_size=28][b]Pheromone Trails[/b][/font_size][/center]
 extends Node2D
 
 var grid_size = Vector2i(100, 100)
-var pheromone_grid = {}  # Dictionary: Vector2i → float
+var pheromone_grid = {}  # Dictionary: Vector2i â†’ float
 
 func _ready():
     # Initialize grid to zero
@@ -77,7 +77,7 @@ var current_cell: Vector2i
 var pheromone_map: Node2D  # Reference to pheromone grid
 var carrying_food = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
     if carrying_food:
         move_toward_nest()
     else:
@@ -306,7 +306,7 @@ func get_activity_color(cell: Vector2i) -> Color:
     var activity = activity_map.get(cell, 0)
     var normalized = clamp(activity / 100.0, 0.0, 1.0)
 
-    # Heat map: blue (cold) → red (hot)
+    # Heat map: blue (cold) â†’ red (hot)
     return Color(normalized, 0, 1.0 - normalized)
 
 # Result: Visualize where ants travel most
@@ -361,7 +361,7 @@ func _ready():
         ants.append(ant)
         add_child(ant)
 
-func _process(delta):
+func _process(_delta):
     for ant in ants:
         if ant.state == "searching":
             # Follow pheromone or explore
@@ -459,7 +459,7 @@ Pheromone trails show us:
 
 1. **Coordination without communication** - Environment mediates
 2. **Emergence from simple rules** - No ant knows optimal path, colony finds it
-3. **Positive feedback creates paths** - More traffic → stronger trail → more traffic
+3. **Positive feedback creates paths** - More traffic â†’ stronger trail â†’ more traffic
 4. **Evaporation prevents stagnation** - Old trails fade, adaptation possible
 5. **Stigmergy is powerful** - Indirect cooperation through environment
 6. **Local rules, global optimization** - Each ant sees only neighbors, colony optimizes

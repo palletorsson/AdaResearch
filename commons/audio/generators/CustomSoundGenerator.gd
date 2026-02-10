@@ -298,7 +298,7 @@ static func generate_custom_teleport_drone(data: PackedFloat32Array, sample_coun
 	var fade_out_time = params.get("fade_out_time", 0.08)
 	var wave_type = params.get("wave_type", "sawtooth")
 	
-	print("🎛️ TELEPORT DRONE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] TELEPORT DRONE GENERATING with wave_type: %s" % wave_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -342,7 +342,7 @@ static func generate_custom_bass_pulse(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.4)
 	var wave_type = params.get("wave_type", "sine")
 	
-	print("🎛️ BASS PULSE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] BASS PULSE GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -422,7 +422,7 @@ static func generate_custom_laser_shot(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.4)
 	var wave_type = params.get("wave_type", "sawtooth")
 	
-	print("🎛️ LASER SHOT GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] LASER SHOT GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -458,7 +458,7 @@ static func generate_custom_power_up_jingle(data: PackedFloat32Array, sample_cou
 	var amplitude = params.get("amplitude", 0.3)
 	var scale_type = params.get("scale_type", "major")
 	
-	print("🎛️ POWER-UP JINGLE GENERATING with scale: %s" % scale_type)
+	print("[SYNTH] POWER-UP JINGLE GENERATING with scale: %s" % scale_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var note_duration = duration / note_count
@@ -503,7 +503,7 @@ static func generate_custom_explosion(data: PackedFloat32Array, sample_count: in
 	var high_amount = params.get("high_amount", 0.3)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ EXPLOSION GENERATING multi-band synthesis")
+	print("[SYNTH] EXPLOSION GENERATING multi-band synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -537,7 +537,7 @@ static func generate_custom_retro_jump(data: PackedFloat32Array, sample_count: i
 	var amplitude = params.get("amplitude", 0.35)
 	var wave_type = params.get("wave_type", "square")
 	
-	print("🎛️ RETRO JUMP GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] RETRO JUMP GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -573,7 +573,7 @@ static func generate_custom_shield_hit(data: PackedFloat32Array, sample_count: i
 	var impact_amount = params.get("impact_amount", 0.8)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ SHIELD HIT GENERATING with ring modulation")
+	print("[SYNTH] SHIELD HIT GENERATING with ring modulation")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -606,7 +606,7 @@ static func generate_custom_ambient_wind(data: PackedFloat32Array, sample_count:
 	var tonal_amount = params.get("tonal_amount", 0.1)
 	var amplitude = params.get("amplitude", 0.2)
 	
-	print("🎛️ AMBIENT WIND GENERATING with noise density: %d" % noise_density)
+	print("[SYNTH] AMBIENT WIND GENERATING with noise density: %d" % noise_density)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -659,7 +659,7 @@ static func generate_custom_dark_808_kick(data: PackedFloat32Array, sample_count
 	var amplitude = params.get("amplitude", 0.7)
 	var saturation = params.get("saturation", 1.5)
 	
-	print("🎛️ DARK 808 KICK GENERATING with pitch sweep")
+	print("[SYNTH] DARK 808 KICK GENERATING with pitch sweep")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -695,7 +695,7 @@ static func generate_custom_acid_606_hihat(data: PackedFloat32Array, sample_coun
 	var ring_amount = params.get("ring_amount", 0.2)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ ACID 606 HIHAT GENERATING with filter sweep")
+	print("[SYNTH] ACID 606 HIHAT GENERATING with filter sweep")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -733,7 +733,7 @@ static func generate_custom_dark_808_sub_bass(data: PackedFloat32Array, sample_c
 	var decay_rate = params.get("decay_rate", 0.5)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ DARK 808 SUB BASS GENERATING with slow modulation")
+	print("[SYNTH] DARK 808 SUB BASS GENERATING with slow modulation")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -777,7 +777,7 @@ static func generate_custom_ambient_amiga_drone(data: PackedFloat32Array, sample
 	var detune_level = params.get("detune_level", 0.1)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ AMBIENT AMIGA DRONE GENERATING multi-layer synthesis")
+	print("[SYNTH] AMBIENT AMIGA DRONE GENERATING multi-layer synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -828,7 +828,7 @@ static func generate_custom_moog_bass_lead(data: PackedFloat32Array, sample_coun
 	var wave_type = params.get("wave_type", params.get("waveform", "sawtooth"))
 	var amplitude = params.get("amplitude", params.get("amp", 0.4))
 	
-	print("🎛️ MOOG BASS LEAD GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] MOOG BASS LEAD GENERATING with wave_type: %s" % wave_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -899,7 +899,7 @@ static func generate_custom_tb303_acid_bass(data: PackedFloat32Array, sample_cou
 	var wave_type = params.get("wave_type", params.get("waveform", "sawtooth"))
 	var amplitude = params.get("amplitude", params.get("amp", 0.3))
 	
-	print("🎛️ TB-303 ACID BASS GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] TB-303 ACID BASS GENERATING with wave_type: %s" % wave_type)
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -944,7 +944,7 @@ static func generate_custom_dx7_electric_piano(data: PackedFloat32Array, sample_
 	var velocity_sensitivity = params.get("velocity_sensitivity", params.get("velocity", 0.7))
 	var amplitude = params.get("amplitude", params.get("amp", 0.4))
 	
-	print("🎛️ DX7 ELECTRIC PIANO GENERATING FM synthesis")
+	print("[SYNTH] DX7 ELECTRIC PIANO GENERATING FM synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1009,7 +1009,7 @@ static func generate_custom_c64_sid_lead(data: PackedFloat32Array, sample_count:
 	var vibrato_depth = params.get("vibrato_depth", 0.1)
 	var amplitude = params.get("amplitude", 0.35)
 	
-	print("🎛️ C64 SID LEAD GENERATING with PWM")
+	print("[SYNTH] C64 SID LEAD GENERATING with PWM")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1067,7 +1067,7 @@ static func generate_custom_amiga_mod_sample(data: PackedFloat32Array, sample_co
 	var wave_type = params.get("wave_type", "sawtooth")
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️ AMIGA MOD SAMPLE GENERATING with wave_type: %s" % wave_type)
+	print("[SYNTH] AMIGA MOD SAMPLE GENERATING with wave_type: %s" % wave_type)
 	
 	# Apply finetune (semitone adjustment)
 	var tuned_freq = base_freq * pow(2.0, finetune / 12.0)
@@ -1122,7 +1122,7 @@ static func generate_custom_ppg_wave_pad(data: PackedFloat32Array, sample_count:
 	var release = params.get("release", 2.0)
 	var amplitude = params.get("amplitude", 0.4)
 	
-	print("🎛️ PPG WAVE PAD GENERATING wavetable synthesis")
+	print("[SYNTH] PPG WAVE PAD GENERATING wavetable synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1172,7 +1172,7 @@ static func generate_custom_tr909_kick(data: PackedFloat32Array, sample_count: i
 	var tone = params.get("tone", 0.5)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️ TR-909 KICK GENERATING drum synthesis")
+	print("[SYNTH] TR-909 KICK GENERATING drum synthesis")
 	
 	for i in range(sample_count):
 		var t = float(i) / AudioSynthesizer.SAMPLE_RATE
@@ -1213,7 +1213,7 @@ static func generate_custom_jupiter_8_strings(data: PackedFloat32Array, sample_c
 	var release = params.get("release", 1.5)
 	var amplitude = params.get("amplitude", 0.3)
 	
-	print("🎛️ JUPITER-8 STRINGS GENERATING ensemble synthesis")
+	print("[SYNTH] JUPITER-8 STRINGS GENERATING ensemble synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1265,7 +1265,7 @@ static func generate_custom_korg_m1_piano(data: PackedFloat32Array, sample_count
 	var stereo_width = params.get("stereo_width", 0.5)
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ KORG M1 PIANO GENERATING digital piano synthesis")
+	print("[SYNTH] KORG M1 PIANO GENERATING digital piano synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1316,7 +1316,7 @@ static func generate_custom_arp_2600_lead(data: PackedFloat32Array, sample_count
 	var portamento = params.get("portamento", 0.0)
 	var amplitude = params.get("amplitude", 0.6)
 	
-	print("🎛️ ARP 2600 LEAD GENERATING analog synthesis")
+	print("[SYNTH] ARP 2600 LEAD GENERATING analog synthesis")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1383,7 +1383,7 @@ static func generate_custom_synare_3_disco_tom(data: PackedFloat32Array, sample_
 	var wave_type = params.get("wave_type", "pulse")
 	var amplitude = params.get("amplitude", 0.5)
 	
-	print("🎛️ SYNARE 3 DISCO TOM GENERATING - the 'Ring My Bell' sound!")
+	print("[SYNTH] SYNARE 3 DISCO TOM GENERATING - the 'Ring My Bell' sound!")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1486,7 +1486,7 @@ static func generate_custom_synare_3_cosmic_fx(data: PackedFloat32Array, sample_
 	var retrigger_rate = params.get("retrigger_rate", 4.0)
 	var amplitude = params.get("amplitude", 0.4)
 	
-	print("🎛️ SYNARE 3 COSMIC FX GENERATING - UFO and space sounds! 🛸")
+	print("[SYNTH] SYNARE 3 COSMIC FX GENERATING - UFO and space sounds! ??")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -1601,7 +1601,7 @@ static func generate_custom_moog_kraftwerk_sequencer(data: PackedFloat32Array, s
 	var stereo_spread = params.get("stereo_spread", 0.2)
 	var amplitude = params.get("amplitude", 0.7)
 	
-	print("🎹 MOOG KRAFTWERK SEQUENCER GENERATING - Electronic precision!")
+	print("[SYNTH] MOOG KRAFTWERK SEQUENCER GENERATING - Electronic precision!")
 	
 	# Note frequency mapping
 	var note_frequencies = {
@@ -1790,7 +1790,7 @@ static func generate_custom_herbie_hancock_moog_fusion(data: PackedFloat32Array,
 	var space_reverb = params.get("space_reverb", 0.25)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎹✨ HERBIE HANCOCK MOOG FUSION GENERATING - Jazz-funk revolution!")
+	print("[SYNTH] HERBIE HANCOCK MOOG FUSION GENERATING - Jazz-funk revolution!")
 	
 	# Note frequency mapping
 	var note_frequencies = {
@@ -2001,7 +2001,7 @@ static func generate_custom_aphex_twin_modular(data: PackedFloat32Array, sample_
 	var mathematical_precision = params.get("mathematical_precision", 0.9)
 	var amplitude = params.get("amplitude", 0.7)
 	
-	print("🔬🎛️ APHEX TWIN MODULAR GENERATING - Experimental synthesis mastery!")
+	print("[SYNTH] APHEX TWIN MODULAR GENERATING - Experimental synthesis mastery!")
 	
 	# Mathematical constants and sequences
 	var golden_ratio = 1.618033988749
@@ -2369,7 +2369,7 @@ static func generate_custom_flying_lotus_sampler(data: PackedFloat32Array, sampl
 	var experimental_factor = params.get("experimental_factor", 0.4)
 	var amplitude = params.get("amplitude", 0.8)
 	
-	print("🎛️🚁 FLYING LOTUS SAMPLER GENERATING - Genre-defying beat music!")
+	print("[SYNTH] FLYING LOTUS SAMPLER GENERATING - Genre-defying beat music!")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var beat_duration = 60.0 / bpm / 4.0  # 16th note duration
@@ -2770,7 +2770,7 @@ static func generate_custom_reese_bass(data: PackedFloat32Array, sample_count: i
 	var release = params.get("release", 0.3)
 	var amplitude = params.get("amplitude", params.get("amp", 0.45))
 	
-	print("🎛️ REESE BASS GENERATING - DnB essential with %d detuned voices" % num_voices)
+	print("[SYNTH] REESE BASS GENERATING - DnB essential with %d detuned voices" % num_voices)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -2837,7 +2837,7 @@ static func generate_custom_wobble_bass(data: PackedFloat32Array, sample_count: 
 	var release = params.get("release", 0.2)
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ WOBBLE BASS GENERATING - Dubstep with %.1f Hz LFO" % wobble_rate)
+	print("[SYNTH] WOBBLE BASS GENERATING - Dubstep with %.1f Hz LFO" % wobble_rate)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -2902,7 +2902,7 @@ static func generate_custom_pluck_bass(data: PackedFloat32Array, sample_count: i
 	var wave_type = params.get("wave_type", params.get("waveform", "saw"))
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ PLUCK BASS GENERATING - House/Pop punchy bass with %s wave" % wave_type)
+	print("[SYNTH] PLUCK BASS GENERATING - House/Pop punchy bass with %s wave" % wave_type)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -2963,7 +2963,7 @@ static func generate_custom_sub_bass_sine(data: PackedFloat32Array, sample_count
 	var pitch_drop_time = params.get("pitch_drop_time", 0.05)
 	var amplitude = params.get("amplitude", params.get("amp", 0.6))
 	
-	print("🎛️ SUB BASS SINE GENERATING - Pure sub at %.1f Hz" % freq)
+	print("[SYNTH] SUB BASS SINE GENERATING - Pure sub at %.1f Hz" % freq)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3016,7 +3016,7 @@ static func generate_custom_distorted_bass(data: PackedFloat32Array, sample_coun
 	var sub_mix = params.get("sub_mix", params.get("sub", 0.2))
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ DISTORTED BASS GENERATING - Rock/Industrial with drive %.2f" % drive)
+	print("[SYNTH] DISTORTED BASS GENERATING - Rock/Industrial with drive %.2f" % drive)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3085,7 +3085,7 @@ static func generate_custom_juno_bass(data: PackedFloat32Array, sample_count: in
 	var release = params.get("release", 0.4)
 	var amplitude = params.get("amplitude", params.get("amp", 0.45))
 	
-	print("🎛️ JUNO BASS GENERATING - 80s pop with Roland chorus")
+	print("[SYNTH] JUNO BASS GENERATING - 80s pop with Roland chorus")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3160,7 +3160,7 @@ static func generate_custom_minimoog_bass(data: PackedFloat32Array, sample_count
 	var keyboard_tracking = params.get("keyboard_tracking", 0.5)
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ MINIMOOG BASS GENERATING - Fat Moog ladder filter")
+	print("[SYNTH] MINIMOOG BASS GENERATING - Fat Moog ladder filter")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3256,7 +3256,7 @@ static func generate_custom_sh101_bass(data: PackedFloat32Array, sample_count: i
 	var release = params.get("release", 0.2)
 	var amplitude = params.get("amplitude", params.get("amp", 0.45))
 	
-	print("🎛️ SH-101 BASS GENERATING - Acid squelch with %.2f resonance" % filter_resonance)
+	print("[SYNTH] SH-101 BASS GENERATING - Acid squelch with %.2f resonance" % filter_resonance)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	var current_freq = freq
@@ -3344,7 +3344,7 @@ static func generate_custom_prophet_bass(data: PackedFloat32Array, sample_count:
 	var release = params.get("release", 0.5)
 	var amplitude = params.get("amplitude", params.get("amp", 0.4))
 	
-	print("🎛️ PROPHET BASS GENERATING - Synthwave lush with %d unison voices" % unison_voices)
+	print("[SYNTH] PROPHET BASS GENERATING - Synthwave lush with %d unison voices" % unison_voices)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3412,7 +3412,7 @@ static func generate_custom_upright_bass(data: PackedFloat32Array, sample_count:
 	var warmth = params.get("warmth", 0.7)
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ UPRIGHT BASS GENERATING - Jazz with body resonance")
+	print("[SYNTH] UPRIGHT BASS GENERATING - Jazz with body resonance")
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3485,7 +3485,7 @@ static func generate_custom_slap_bass(data: PackedFloat32Array, sample_count: in
 	var compression = params.get("compression", 0.6)
 	var amplitude = params.get("amplitude", params.get("amp", 0.55))
 	
-	print("🎛️ SLAP BASS GENERATING - Funk with slap intensity %.2f" % slap_intensity)
+	print("[SYNTH] SLAP BASS GENERATING - Funk with slap intensity %.2f" % slap_intensity)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -3557,7 +3557,7 @@ static func generate_custom_picked_bass(data: PackedFloat32Array, sample_count: 
 	var drive = params.get("drive", 0.2)
 	var amplitude = params.get("amplitude", params.get("amp", 0.5))
 	
-	print("🎛️ PICKED BASS GENERATING - Rock with pick hardness %.2f" % pick_hardness)
+	print("[SYNTH] PICKED BASS GENERATING - Rock with pick hardness %.2f" % pick_hardness)
 	
 	var duration = float(sample_count) / AudioSynthesizer.SAMPLE_RATE
 	
@@ -4116,7 +4116,7 @@ static func generate_custom_bongo(data: PackedFloat32Array, sample_count: int, p
 
 static func generate_custom_supersaw_lead(data: PackedFloat32Array, sample_count: int, params: Dictionary):
 	# SUPERSAW LEAD - Trance/EDM essential (JP-8000 style)
-	# Research: 7 detuned saws, ±25-30 cents spread, stereo width
+	# Research: 7 detuned saws, +/-25-30 cents spread, stereo width
 	var freq = params.get("frequency", params.get("freq", 440.0))
 	var detune_cents = params.get("detune_cents", params.get("detune", 25.0))
 	var velocity = params.get("velocity", 0.8)

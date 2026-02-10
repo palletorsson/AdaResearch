@@ -1,4 +1,4 @@
-# Attach this script to your main node or player
+﻿# Attach this script to your main node or player
 extends Node3D
 
 @onready var position_label: Label3D = $Label3D  # Adjust path as needed
@@ -15,7 +15,7 @@ func _ready():
 		# Initial position update
 		update_position_display()
 
-func _process(delta):
+func _process(_delta):
 	# Update position display every frame
 	update_position_display()
 
@@ -39,7 +39,7 @@ func update_position_display():
 # Alternative: Update only when position changes significantly
 var last_displayed_position: Vector3
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var current_pos = global_position
 	
 	# Only update if position changed by more than 0.1 units

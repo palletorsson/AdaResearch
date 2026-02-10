@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
  
 
 var time: float = 0.0
@@ -165,7 +165,7 @@ func animate_algorithm(delta):
 			var blue_component = 0.2 + bias_level * 0.6
 			algorithm_core.material_override.albedo_color = Color(red_component, 0.2, blue_component, 1)
 
-func animate_bias_indicators(delta):
+func animate_bias_indicators(_delta):
 	# Animate bias arrows
 	var bias_arrows = $BiasIndicators/BiasArrows
 	for i in range(bias_arrows.get_child_count()):

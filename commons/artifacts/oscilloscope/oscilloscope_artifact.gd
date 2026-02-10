@@ -1,4 +1,4 @@
-# oscilloscope_artifact.gd - VR Oscilloscope with interactive controls
+﻿# oscilloscope_artifact.gd - VR Oscilloscope with interactive controls
 # Combines OscilloscopeDisplay with VR sliders for frequency, amplitude, phase
 # Can show waveform, Lissajous, or XY modes
 extends Node3D
@@ -133,7 +133,7 @@ func _process(delta: float) -> void:
 	if show_3d_trace and display:
 		_update_3d_trace(delta)
 
-func _update_3d_trace(delta: float) -> void:
+func _update_3d_trace(_delta: float) -> void:
 	if not trace_3d or not display:
 		return
 	

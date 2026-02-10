@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var tracked_node_name: String = "XRPlayer" 
 @export var font_size: int = 48
@@ -10,7 +10,7 @@ var _player: Node3D
 func _ready():
 	_create_label()
 
-func _process(delta):
+func _process(_delta):
 	if not _player:
 		# Try to find player in the scene tree
 		_player = get_tree().get_first_node_in_group("player")

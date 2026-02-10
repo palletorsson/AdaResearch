@@ -16,7 +16,7 @@ const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolum
 @export var vertical_segments: int = 40
 @export var radial_segments: int = 16
 @export var twist_factor: float = 0.8  # How much the column twists as it rises
-@export var material_color: Color = Color(0.8, 0.7, 0.5, 1.0)  # Gold-like color
+@export var material_color: Color = Color(0.92, 0.88, 0.78, 1.0)  # Lighter marble-gold color
 
 # For animated rotation
 @export var rotate_columns: bool = true
@@ -33,12 +33,18 @@ var audio_phase: float = 0.0
 # -- Scene State --
 var columns = []
 
-# Column positions (Baldacchino has 4 columns)
+# Column positions - expanded colonnade layout (8 columns in two rows)
 var column_positions = [
+	# Inner square (original Baldacchino)
 	Vector3(-2, 0, -2),
 	Vector3(2, 0, -2),
 	Vector3(-2, 0, 2),
-	Vector3(2, 0, 2)
+	Vector3(2, 0, 2),
+	# Outer colonnade (4 additional columns)
+	Vector3(-4, 0, -4),
+	Vector3(4, 0, -4),
+	Vector3(-4, 0, 4),
+	Vector3(4, 0, 4),
 ]
 
 # -- Godot Lifecycle Functions --
@@ -95,12 +101,12 @@ func _generate_audio_samples():
 	for i in range(frames_available):
 		var sample = 0.0
 		
-		# Generate a chord based on the 4 columns
-		# Frequencies based on a low D minor chord (approximate)
+		# Generate a chord based on the 8 columns
+		# Frequencies based on a richer D Major chord with octave doubling
 		# Modulate slightly with rotation speed
-		var freqs = [146.83, 185.00, 220.00, 293.66] # D3, F#3, A3, D4 (D Major-ish for gold)
+		var freqs = [146.83, 185.00, 220.00, 293.66, 73.42, 110.00, 329.63, 440.00] # D2-D4 extended
 		
-		for j in range(4):
+		for j in range(min(8, column_positions.size())):
 			var f = freqs[j] + sin(time * 0.5 + j) * 2.0 # Slight detuning
 			
 			# Sawtooth-ish wave for metallic sound
@@ -264,7 +270,8 @@ func create_lighting():
 	for pos in column_positions:
 		var spotlight = SpotLight3D.new()
 		spotlight.position = pos + Vector3(0, column_height * 1.5, 0)
-		spotlight.look_at_from_position(spotlight.position, pos, Vector3.UP)
+		# Use FORWARD as up vector when looking straight down to avoid colinear vectors
+		spotlight.look_at_from_position(spotlight.position, pos, Vector3.FORWARD)
 		spotlight.light_energy = 2.0
 		spotlight.light_color = Color(1.0, 0.9, 0.7) # Warm golden light
 		spotlight.spot_range = column_height * 2.0

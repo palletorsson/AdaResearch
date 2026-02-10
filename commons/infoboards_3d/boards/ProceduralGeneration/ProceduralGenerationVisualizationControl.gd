@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 # Visualization type and parameters
 var visualization_type = "intro"
@@ -214,12 +214,12 @@ func process_intro_animation(delta):
 		# Show dungeon generation
 		process_dungeon_animation(delta)
 
-func process_noise_animation(delta):
+func process_noise_animation(_delta):
 	# For noise-based terrain, we might animate water or cloud movements
 	# This is optional since the terrain itself is static
 	pass
 
-func process_lsystem_animation(delta):
+func process_lsystem_animation(_delta):
 	# Animate the L-system growth
 	var growth_progress = fmod(time_elapsed, 10.0) / 10.0
 	
@@ -247,7 +247,7 @@ func process_lsystem_animation(delta):
 			# Restore turtle state
 			pass
 
-func process_dungeon_animation(delta):
+func process_dungeon_animation(_delta):
 	# For dungeon visualization, we might animate exploration or generation
 	# This is optional since the dungeon layout itself is static once generated
 	pass
@@ -268,7 +268,7 @@ func process_advanced_animation(delta):
 		process_dungeon_animation(delta)
 
 # Drawing functions
-func draw_intro_visualization(center_x, center_y):
+func draw_intro_visualization(center_x, _center_y):
 	# Draw a split screen showing all three techniques
 	var third_height = size.y / 3
 	
@@ -399,7 +399,7 @@ func draw_lsystem(center_x, center_y, scale_factor = 1.0):
 		var info_y = center_y - 150
 		
 		draw_string(ThemeDB.fallback_font, Vector2(info_x, info_y), "Current L-System: " + current_lsystem.capitalize(), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, COLOR_TEXT)
-		draw_string(ThemeDB.fallback_font, Vector2(info_x, info_y + 25), "Angle: " + str(lsystem_angle) + "°", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, COLOR_TEXT)
+		draw_string(ThemeDB.fallback_font, Vector2(info_x, info_y + 25), "Angle: " + str(lsystem_angle) + "Â°", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, COLOR_TEXT)
 		draw_string(ThemeDB.fallback_font, Vector2(info_x, info_y + 50), "Iterations: " + str(LSYSTEM_ITERATIONS), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, COLOR_TEXT)
 
 func draw_dungeon(center_x, center_y, scale_factor = 1.0):

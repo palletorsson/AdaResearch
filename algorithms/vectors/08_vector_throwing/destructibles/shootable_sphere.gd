@@ -1,4 +1,4 @@
-# shootable_sphere.gd
+﻿# shootable_sphere.gd
 # Simple sphere that can be picked up by gravity gun and shot at targets
 extends RigidBody3D
 
@@ -97,7 +97,7 @@ func _stop_glow() -> void:
 	var tween = create_tween()
 	tween.tween_property(original_material, "emission_energy_multiplier", 0.3, 0.5)
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	"""Handle collision feedback"""
 	# Add impact effects here if desired
 	pass

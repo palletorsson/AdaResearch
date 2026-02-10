@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
@@ -69,7 +69,7 @@ func update_bridge():
 			turn_counter = 0
 			initialize_rules()
 
-func animate_cells(delta):
+func animate_cells(_delta):
 	for i in range(grid_width):
 		for j in range(grid_height):
 			var cell = cell_nodes[i][j]

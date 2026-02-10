@@ -1,5 +1,5 @@
-# TR-808 Hi-Hat (Closed and Open)
-# Pure noise character — "shhh" rather than metallic ring
+﻿# TR-808 Hi-Hat (Closed and Open)
+# Pure noise character â€” "shhh" rather than metallic ring
 extends RefCounted
 class_name TR808HiHat
 
@@ -47,7 +47,7 @@ func choke():
 	is_playing = false
 
 
-func generate_sample(time_since_trigger: float) -> Dictionary:
+func generate_sample(_time_since_trigger: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

@@ -1,4 +1,4 @@
-extends "res://commons/primitives/point/grab_sphere.gd"
+﻿extends "res://commons/primitives/point/grab_sphere.gd"
 
 ## Axis-constrained slider for teaching translation
 ## Slides only along one axis (X, Y, or Z)
@@ -111,7 +111,7 @@ func _on_dropped(pickable) -> void:
 	super._on_dropped(pickable)
 	_constrain_to_axis()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Continuously constrain while being dragged
 	if is_picked_up():
 		_constrain_to_axis()

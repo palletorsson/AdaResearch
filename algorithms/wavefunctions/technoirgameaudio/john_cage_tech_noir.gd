@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Endless Techno-Noir Ambient Generator (Non-Blocking Version)
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
@@ -580,7 +580,7 @@ func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, col
 	})
 
 # Smooth amplitude-driven scaling to keep the floating orbs breathing.
-func update_visualizers(delta):
+func update_visualizers(_delta):
 	if visualizer_infos.size() == 0:
 		return
 	for i in range(visualizer_infos.size()):

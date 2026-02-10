@@ -1,4 +1,4 @@
-class_name ParticleResources
+﻿class_name ParticleResources
 extends Node
 
 ## Shared Particle Resources Singleton
@@ -98,7 +98,7 @@ static func get_random_confetti_material() -> StandardMaterial3D:
 		instance = ParticleResources.new()
 	return instance.confetti_materials[randi() % instance.confetti_materials.size()]
 
-static func create_multimesh(max_instances: int, mesh: Mesh) -> MultiMesh:
+static func create_multimesh(_max_instances: int, mesh: Mesh) -> MultiMesh:
 	"""Create a MultiMesh for particle instancing"""
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D

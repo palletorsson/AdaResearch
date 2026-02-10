@@ -1,7 +1,7 @@
-# ===========================================================================
+﻿# ===========================================================================
 # NOC Example 4.6: Particle Repeller
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing â†’ GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
@@ -75,7 +75,7 @@ func create_info_label():
 	instructions.font_size = 18
 	instructions.modulate = Color(0.8, 1.0, 0.8)
 	instructions.position = Vector3(0, 0.5, 0)
-	instructions.text = "[SPACE] Burst | [↑/↓] Strength | [C] Clear | [R] Reset"
+	instructions.text = "[SPACE] Burst | [â†‘/â†“] Strength | [C] Clear | [R] Reset"
 	add_child(instructions)
 
 func update_info_label():
@@ -151,7 +151,7 @@ func create_repeller():
 
 	repeller.add_child(ring)
 
-func animate_repeller(delta: float):
+func animate_repeller(_delta: float):
 	"""Move repeller in circular pattern"""
 	var time = Time.get_ticks_msec() / 1000.0
 

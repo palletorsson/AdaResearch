@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Quantum Superposition Visualization
 # Demonstrates quantum states, wave function collapse, and measurement effects
@@ -43,7 +43,7 @@ func initialize_quantum_state():
     var num_states = pow(2, num_qubits)
     quantum_state.clear()
     
-    # Create equal superposition: |000⟩ + |001⟩ + |010⟩ + ... + |111⟩
+    # Create equal superposition: |000âŸ© + |001âŸ© + |010âŸ© + ... + |111âŸ©
     var amplitude = 1.0 / sqrt(num_states)
     for i in range(num_states):
         quantum_state.append(Vector2(amplitude, 0.0))  # Real amplitude, no imaginary part initially
@@ -220,7 +220,7 @@ func animate_superposition(delta):
         var scale = 0.5 + probability * 1.5
         qubit.scale = Vector3.ONE * scale
 
-func animate_collapsed_state(delta):
+func animate_collapsed_state(_delta):
     """Animate the state after measurement collapse"""
     # Flash measurement indicator
     measurement_indicator.visible = sin(time * 10.0) > 0
@@ -303,12 +303,12 @@ func update_probability_clouds():
         material.albedo_color.a = 0.1 + probability * 0.4
 
 func calculate_qubit_probability(qubit_index: int) -> float:
-    """Calculate probability of measuring qubit in |1⟩ state"""
+    """Calculate probability of measuring qubit in |1âŸ© state"""
     var probability = 0.0
     var num_states = quantum_state.size()
     
     for state in range(num_states):
-        if (state >> qubit_index) & 1 == 1:  # Qubit is in |1⟩ state
+        if (state >> qubit_index) & 1 == 1:  # Qubit is in |1âŸ© state
             var amplitude_squared = quantum_state[state].length_squared()
             probability += amplitude_squared
     
@@ -343,7 +343,7 @@ func _on_measurement_pressed():
     measurement_indicator.visible = true
     measurement_indicator.position = Vector3(0, 2, 0)
     
-    print("Measurement collapsed to state: |", format_binary_state(collapsed_state), "⟩")
+    print("Measurement collapsed to state: |", format_binary_state(collapsed_state), "âŸ©")
 
 func _on_reset_pressed():
     """Reset to superposition state"""
@@ -363,7 +363,7 @@ func _on_phase_changed(qubit_index: int, value: float):
     if is_collapsed:
         return
     
-    # Apply phase rotation to states where this qubit is |1⟩
+    # Apply phase rotation to states where this qubit is |1âŸ©
     for state in range(quantum_state.size()):
         if (state >> qubit_index) & 1 == 1:
             var current_amplitude = quantum_state[state].length()

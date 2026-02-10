@@ -1,4 +1,4 @@
-# ArpPatternEditor.gd
+﻿# ArpPatternEditor.gd
 # Arpeggio pattern editor extending BasePatternEditor
 # Shows note order visualization with direction/rate/octave controls
 
@@ -7,13 +7,13 @@ class_name ArpPatternEditor
 
 # Arp patterns and rates
 const PATTERNS = {
-	"up": "▲ Up",
-	"down": "▼ Down",
-	"up_down": "◆ Up-Down",
-	"down_up": "◇ Down-Up",
-	"random": "🎲 Random",
-	"as_played": "✋ As Played",
-	"chord": "▬ Chord",
+	"up": "â–² Up",
+	"down": "â–¼ Down",
+	"up_down": "â—† Up-Down",
+	"down_up": "â—‡ Down-Up",
+	"random": "ðŸŽ² Random",
+	"as_played": "âœ‹ As Played",
+	"chord": "â–¬ Chord",
 }
 
 const RATES = {
@@ -53,7 +53,7 @@ var _visualization: Control
 
 
 func _get_editor_title() -> String:
-	return "🎵 ARPEGGIO EDITOR"
+	return "ðŸŽµ ARPEGGIO EDITOR"
 
 
 func _get_editor_color() -> Color:
@@ -72,7 +72,7 @@ func _get_row_label(row: int) -> String:
 	return ""
 
 
-func _get_row_sound(row: int) -> String:
+func _get_row_sound(_row: int) -> String:
 	return "arp"
 
 
@@ -145,13 +145,13 @@ func _setup_arp_header():
 	
 	# Transport
 	_play_btn = Button.new()
-	_play_btn.text = "▶ Play"
+	_play_btn.text = "â–¶ Play"
 	_play_btn.pressed.connect(_on_play_pressed)
 	_style_button(_play_btn, Color(0.2, 0.5, 0.3))
 	_header.add_child(_play_btn)
 	
 	_apply_btn = Button.new()
-	_apply_btn.text = "✓ Apply"
+	_apply_btn.text = "âœ“ Apply"
 	_apply_btn.pressed.connect(_on_apply_pressed)
 	_style_button(_apply_btn, Color(0.3, 0.4, 0.6))
 	_header.add_child(_apply_btn)
@@ -287,8 +287,8 @@ func _create_right_column() -> VBoxContainer:
 	
 	_velocity_dropdown = OptionButton.new()
 	_velocity_dropdown.add_item("Flat")
-	_velocity_dropdown.add_item("Crescendo ▲")
-	_velocity_dropdown.add_item("Decrescendo ▼")
+	_velocity_dropdown.add_item("Crescendo â–²")
+	_velocity_dropdown.add_item("Decrescendo â–¼")
 	_velocity_dropdown.add_item("Accent First")
 	_velocity_dropdown.add_item("Accent Last")
 	_velocity_dropdown.selected = 0
@@ -514,7 +514,7 @@ func _on_arp_step_tick():
 func _start_playback():
 	_is_playing = true
 	_current_step = 0
-	_play_btn.text = "⏸ Pause"
+	_play_btn.text = "â¸ Pause"
 	
 	var step_duration = 60.0 / _bpm * RATES[_rate] * 4
 	_step_timer.wait_time = step_duration
@@ -525,7 +525,7 @@ func _start_playback():
 
 func _stop_playback():
 	_is_playing = false
-	_play_btn.text = "▶ Play"
+	_play_btn.text = "â–¶ Play"
 	_step_timer.stop()
 	_visualization.queue_redraw()
 	playback_stopped.emit()

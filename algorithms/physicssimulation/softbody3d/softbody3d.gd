@@ -1,4 +1,4 @@
-extends SoftBody3D
+﻿extends SoftBody3D
 class_name SoftBodyVariation
 
 # Soft body type-specific properties
@@ -210,7 +210,7 @@ func _apply_recovering_behavior():
 	}
 	target_color = fallback_colors.get(soft_body_type, Color.WHITE)
 
-func _update_forces(delta):
+func _update_forces(_delta):
 	# Apply wind effect
 	if enable_wind_effect and wind_force != Vector3.ZERO:
 		_apply_force(wind_force)

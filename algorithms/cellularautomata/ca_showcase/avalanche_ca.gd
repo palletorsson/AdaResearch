@@ -1,4 +1,4 @@
-# AvalancheCA.gd
+﻿# AvalancheCA.gd
 # Sand pile avalanche model (Bak-Tang-Wiesenfeld)
 extends BaseCA
 
@@ -19,7 +19,7 @@ func initialize_grid():
 	
 	grid = create_2d_grid()
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Add sand grain to random location
 	if randf() < SAND_DROP_RATE:
 		add_sand_grain()

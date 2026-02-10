@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
@@ -34,7 +34,7 @@ func _ready():
 	initialize_population()
 	run_ga_generation()
 
-func _process(delta):
+func _process(_delta):
 	# Process evaluation asynchronously
 	if is_evaluating:
 		evaluate_population_async()

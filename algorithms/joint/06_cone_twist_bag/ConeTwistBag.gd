@@ -35,7 +35,7 @@ func _build_demo():
 	# Nudge to set it in motion
 	call_deferred("_nudge")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		bag.apply_impulse((Vector3.FORWARD + Vector3.RIGHT) * 4.0)
 

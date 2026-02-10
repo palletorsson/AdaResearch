@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 # Growth CA with Attractors - Organic root/slime network growth
@@ -238,7 +238,7 @@ func _find_best_growth_direction(pos: Vector3i) -> Vector3i:
 	# Convert force to discrete direction
 	return _vector_to_direction(total_force)
 
-func _find_alternative_direction(pos: Vector3i, avoid_dir: Vector3i) -> Vector3i:
+func _find_alternative_direction(_pos: Vector3i, avoid_dir: Vector3i) -> Vector3i:
 	# Find a direction different from avoid_dir for branching
 	var directions = [
 		Vector3i(1, 0, 0), Vector3i(-1, 0, 0),

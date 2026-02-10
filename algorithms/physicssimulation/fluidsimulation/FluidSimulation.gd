@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name FluidSimulation
 
@@ -88,7 +88,7 @@ func _calculate_densities():
 			if distance < smoothing_length:
 				particle.density += particle_mass * _kernel_function(distance)
 
-func _calculate_forces(delta):
+func _calculate_forces(_delta):
 	for particle in particles:
 		var pressure_force = Vector3.ZERO
 		var viscosity_force = Vector3.ZERO

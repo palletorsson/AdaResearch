@@ -1,4 +1,4 @@
-# RecrystallizationCA.gd
+﻿# RecrystallizationCA.gd
 # Metal recrystallization simulation
 extends BaseCA
 
@@ -29,7 +29,7 @@ func initialize_grid():
 		nucleation_sites.append(site)
 		grid[site.x][site.y][site.z] = 1  # Mark as crystal
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Grow crystals from nucleation sites
 	for site in nucleation_sites:
 		if randf() < GROWTH_RATE:

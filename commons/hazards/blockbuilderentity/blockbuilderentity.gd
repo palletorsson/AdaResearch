@@ -339,7 +339,7 @@ func _physics_process(delta):
 	if geometry_scan_timer >= geometry_scan_interval:
 		geometry_scan_timer = 0.0
 		_scan_for_consumable_geometry()
-func _update_state(delta):
+func _update_state(_delta):
 	match current_state:
 		GooState.SCAVENGING:
 			_update_scavenging_state()
@@ -379,7 +379,7 @@ func _update_building_state():
 		return
 	_attempt_hive_construction()
 
-func _update_movement(delta):
+func _update_movement(_delta):
 	if not navigation_agent:
 		return
 	var target = global_position
@@ -703,7 +703,7 @@ func _on_detection_area_entered(body):
 		if current_state == GooState.SCAVENGING and vertex_budget >= min_vertices_to_capture:
 			_change_state(GooState.PURSUING)
 
-func _on_detection_area_exited(body):
+func _on_detection_area_exited(_body):
 	pass
 
 func _on_consumption_area_body_entered(body):

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name ConvolutionalNeuralNetworkShowcaseBack
 
 @export_range(6, 16, 1) var grid_size: int = 8
@@ -402,7 +402,7 @@ func _update_dense_stage(delta: float) -> void:
 			mat.emission = mat.albedo_color * (0.6 + activation * 1.3)
 		orb.rotate_y(delta * (0.5 + activation))
 
-func _update_ribbon(delta: float) -> void:
+func _update_ribbon(_delta: float) -> void:
 	if _ribbon_particles.is_empty():
 		return
 	for particle in _ribbon_particles:

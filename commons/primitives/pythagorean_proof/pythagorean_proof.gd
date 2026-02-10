@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)
 @export var sphere_size_multiplier: float = 0.5
@@ -181,10 +181,10 @@ func print_help():
 	print("Mouse: Drag the corner spheres to reshape the triangle")
 	print("R: Reset to right-angled triangle")
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	pass
 
-func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_dropped(_index: int, _pickable, _meta: Dictionary) -> void:
 	pass
 
 func _on_fill_button_pressed():

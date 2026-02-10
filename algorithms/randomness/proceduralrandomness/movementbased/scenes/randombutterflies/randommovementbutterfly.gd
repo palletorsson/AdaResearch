@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var area_size: Vector3 = Vector3(20, 10, 20)  # The area size within which the butterfly can move
 @export var min_move_time: float = 5.0  # Minimum time to move in one direction
@@ -145,7 +145,7 @@ func point_in_direction(direction: Vector3):
 		# Rotate the butterfly to face the movement direction
 		look_at(position + direction, Vector3(0, 1, 0))  # Use upward vector to keep butterfly right-side up
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	# Check if we have reached the sitting point (if one was chosen)
 	if not is_sitting and (sitting_points.size() > 0 or random_sitting_points.size() > 0) and target_sit_position:
 		if position.distance_to(target_sit_position) < 0.5:

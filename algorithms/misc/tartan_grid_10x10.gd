@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 
 # 10x10 Tartan Grid Gallery
 # Displays different Scottish tartan patterns in a grid layout
@@ -140,7 +140,7 @@ var grid_container: GridContainer
 var pattern_cells = []
 
 func _ready():
-	print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 TartanGrid10x10: Initializing tartan pattern gallery...")
+	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ TartanGrid10x10: Initializing tartan pattern gallery...")
 	
 	# Combine traditional and custom patterns
 	all_patterns = tartan_patterns + custom_patterns
@@ -152,7 +152,7 @@ func _ready():
 	setup_grid()
 	generate_tartan_grid()
 	
-	print("✅ Generated ", all_patterns.size(), " tartan patterns in 10x10 grid")
+	print("âœ… Generated ", all_patterns.size(), " tartan patterns in 10x10 grid")
 
 func setup_grid():
 	# Create grid container
@@ -216,7 +216,7 @@ func create_tartan_cell(pattern: Dictionary, index: int) -> Control:
 	
 	return cell
 
-func create_tartan_material(pattern: Dictionary) -> CanvasItemMaterial:
+func create_tartan_material(_pattern: Dictionary) -> CanvasItemMaterial:
 	# For now, create a simple gradient approximation
 	# In a full implementation, this would be a custom shader
 	var material = CanvasItemMaterial.new()
@@ -243,7 +243,7 @@ func generate_random_tartan() -> Dictionary:
 	}
 
 func _on_tartan_clicked(pattern: Dictionary, index: int):
-	print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 Clicked tartan: ", pattern.name)
+	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ Clicked tartan: ", pattern.name)
 	print("  Colors: ", pattern.colors.size())
 	print("  Pattern: ", pattern.pattern)
 	print("  Grid position: ", index, " (", index % GRID_SIZE, ",", index / GRID_SIZE, ")")
@@ -289,10 +289,10 @@ func show_pattern_details(pattern: Dictionary, index: int):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
-			print("🔄 Regenerating random patterns...")
+			print("ðŸ”„ Regenerating random patterns...")
 			regenerate_random_patterns()
 		elif event.keycode == KEY_S:
-			print("💾 Saving tartan gallery screenshot...")
+			print("ðŸ’¾ Saving tartan gallery screenshot...")
 			save_screenshot()
 
 func regenerate_random_patterns():
@@ -322,4 +322,4 @@ func save_screenshot():
 	# Save to user directory
 	var path = OS.get_user_data_dir() + "/" + filename
 	img.save_png(path)
-	print("📸 Tartan gallery saved: ", path)
+	print("ðŸ“¸ Tartan gallery saved: ", path)

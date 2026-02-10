@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export_group("Model Synthesis Parameters")
 @export var exemplar_size: Vector3i = Vector3i(8, 8, 8)  # Size of input exemplar
@@ -126,7 +126,7 @@ class ModelSynthesis:
 			return output[pos.x][pos.y][pos.z]
 		return null
 	
-	func get_neighborhood(grid: Array, pos: Vector3i, size: int, is_exemplar: bool = true) -> Neighborhood:
+	func get_neighborhood(_grid: Array, pos: Vector3i, size: int, is_exemplar: bool = true) -> Neighborhood:
 		var neighborhood = Neighborhood.new(pos, size)
 		var bounds = exemplar_size if is_exemplar else output_size
 		

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 var time = 0.0
 var nodes = []
@@ -244,7 +244,7 @@ func animate_traversal():
 	# This will be handled in the animate_list function
 	pass
 
-func animate_search(target_value: int):
+func animate_search(_target_value: int):
 	# This will be handled in the animate_list function
 	pass
 

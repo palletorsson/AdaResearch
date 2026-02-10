@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Advanced Glitch & Bit Manipulation System for Godot 4
 # Comprehensive implementation of digital corruption techniques
@@ -30,7 +30,7 @@ func _ready():
 	setup_demo_scene()
 	initialize_glitch_systems()
 	create_ui_controls()
-	print("🎨 Advanced Glitch System Initialized!")
+	print("ðŸŽ¨ Advanced Glitch System Initialized!")
 
 func _process(delta):
 	time += delta * temporal_speed
@@ -209,7 +209,7 @@ func apply_datamosh_transform(obj: Node3D, delta):
 		obj.scale = Vector3.ONE
 		obj.rotation.z = 0.0
 
-func update_pixel_sort_effect(delta) -> Color:
+func update_pixel_sort_effect(_delta) -> Color:
 	# Update pixel sort simulation
 	var sort_triggered = sin(time * 2.0) > 0.8
 	
@@ -550,7 +550,7 @@ func _input(event):
 				print("Auto-animation: ", auto_animate)
 			KEY_R:
 				initialize_glitch_systems()
-				print("🔄 Glitch systems reset!")
+				print("ðŸ”„ Glitch systems reset!")
 			KEY_G:
 				corruption_seed = randi()
-				print("🎲 New corruption seed: ", corruption_seed)
+				print("ðŸŽ² New corruption seed: ", corruption_seed)

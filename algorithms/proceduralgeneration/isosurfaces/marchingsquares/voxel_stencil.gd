@@ -1,4 +1,4 @@
-# voxel_stencil.gd - Base stencil for editing
+﻿# voxel_stencil.gd - Base stencil for editing
 class_name VoxelStencil
 
 var fill_type: bool = true
@@ -14,7 +14,7 @@ func set_center(x: int, y: int):
 	center_x = x
 	center_y = y
 
-func apply(x: int, y: int, voxel: bool) -> bool:
+func apply(_x: int, y: int, voxel: bool) -> bool:
 	return fill_type
 
 func get_x_start() -> int:

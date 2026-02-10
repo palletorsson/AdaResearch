@@ -1,4 +1,4 @@
-# CubeAgentWalkController.gd
+﻿# CubeAgentWalkController.gd
 # Simple procedural walking controller for cube agents
 # Uses sinusoidal joint movements to create walking motion
 
@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	_apply_balance(delta)
 	_apply_forward_movement(delta)
 
-func _apply_leg_movement(delta: float) -> void:
+func _apply_leg_movement(_delta: float) -> void:
 	# Alternating leg movement using sine waves
 	var phase = time_elapsed * step_frequency * TAU
 
@@ -94,7 +94,7 @@ func _apply_leg_movement(delta: float) -> void:
 		if cube is RigidBody3D:
 			cube.apply_central_force(Vector3(0, right_force_y, right_force_z))
 
-func _apply_arm_swing(delta: float) -> void:
+func _apply_arm_swing(_delta: float) -> void:
 	# Arms swing opposite to legs for natural walking
 	var phase = time_elapsed * step_frequency * TAU
 
@@ -110,7 +110,7 @@ func _apply_arm_swing(delta: float) -> void:
 		if cube is RigidBody3D:
 			cube.apply_torque(Vector3(right_swing * 0.1, 0, right_swing))
 
-func _apply_balance(delta: float) -> void:
+func _apply_balance(_delta: float) -> void:
 	if not root_body:
 		return
 
@@ -130,7 +130,7 @@ func _apply_balance(delta: float) -> void:
 		if cube is RigidBody3D:
 			cube.apply_torque(balance_torque * 0.3)
 
-func _apply_forward_movement(delta: float) -> void:
+func _apply_forward_movement(_delta: float) -> void:
 	if not root_body:
 		return
 

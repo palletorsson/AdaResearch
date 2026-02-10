@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends XRToolsPickable
 
 ## Snap Point - Interactive point that can snap to other snap points
@@ -134,7 +134,7 @@ func _is_connection_manager(node: Node) -> bool:
 
 	return false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Check if position changed
 	if global_position.distance_to(_last_position) > 0.001:
 		point_moved.emit(global_position)

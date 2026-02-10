@@ -1,4 +1,4 @@
-# EffectsRack.gd
+﻿# EffectsRack.gd
 # Master effects processors and send buses
 extends Node
 class_name EffectsRack
@@ -54,7 +54,7 @@ signal effect_applied(effect_name: String, target: String)
 signal sweep_completed(sweep_id: String)
 
 func _ready():
-	print("🎚️ EFFECTS RACK 🎚️")
+	print("ðŸŽšï¸ EFFECTS RACK ðŸŽšï¸")
 	print("Setting up master effects chain...")
 	
 	_setup_effects_buses()
@@ -77,7 +77,7 @@ func _setup_effects_buses():
 	
 	_setup_send_effects()
 	
-	print("   ✅ Send buses created")
+	print("   âœ… Send buses created")
 
 func _setup_send_effects():
 	"""Setup effects on send buses"""
@@ -143,7 +143,7 @@ func _setup_master_chain():
 	master_limiter.soft_clip_db = -2.0
 	AudioServer.add_bus_effect(master_bus, master_limiter, 2)
 	
-	print("   ✅ Master chain configured")
+	print("   âœ… Master chain configured")
 
 # ===== DYNAMIC EFFECTS =====
 
@@ -155,7 +155,7 @@ func apply_filter_sweep(layer_bus: String, start_freq: float, end_freq: float, d
 	
 	var bus_idx = AudioServer.get_bus_index(layer_bus)
 	if bus_idx == -1:
-		print("   ❌ Bus not found: %s" % layer_bus)
+		print("   âŒ Bus not found: %s" % layer_bus)
 		return
 	
 	# Find the filter effect (usually at index 1)
@@ -167,7 +167,7 @@ func apply_filter_sweep(layer_bus: String, start_freq: float, end_freq: float, d
 			break
 	
 	if not filter_effect:
-		print("   ❌ No filter found on bus: %s" % layer_bus)
+		print("   âŒ No filter found on bus: %s" % layer_bus)
 		return
 	
 	# Create sweep tween
@@ -183,7 +183,7 @@ func apply_filter_sweep(layer_bus: String, start_freq: float, end_freq: float, d
 		"start_time": Time.get_time_dict_from_system()
 	})
 	
-	print("   🌊 Filter sweep: %s (%.0fHz -> %.0fHz over %.1fs)" % [layer_bus, start_freq, end_freq, duration])
+	print("   ðŸŒŠ Filter sweep: %s (%.0fHz -> %.0fHz over %.1fs)" % [layer_bus, start_freq, end_freq, duration])
 	effect_applied.emit("filter_sweep", layer_bus)
 
 func apply_volume_fade(layer_bus: String, start_volume: float, end_volume: float, duration: float, fade_id: String = ""):
@@ -194,7 +194,7 @@ func apply_volume_fade(layer_bus: String, start_volume: float, end_volume: float
 	
 	var bus_idx = AudioServer.get_bus_index(layer_bus)
 	if bus_idx == -1:
-		print("   ❌ Bus not found: %s" % layer_bus)
+		print("   âŒ Bus not found: %s" % layer_bus)
 		return
 	
 	# Create fade tween
@@ -210,7 +210,7 @@ func apply_volume_fade(layer_bus: String, start_volume: float, end_volume: float
 		"start_time": Time.get_time_dict_from_system()
 	})
 	
-	print("   📉 Volume fade: %s (%.1fdB -> %.1fdB over %.1fs)" % [layer_bus, start_volume, end_volume, duration])
+	print("   ðŸ“‰ Volume fade: %s (%.1fdB -> %.1fdB over %.1fs)" % [layer_bus, start_volume, end_volume, duration])
 	effect_applied.emit("volume_fade", layer_bus)
 
 func apply_resonance_sweep(layer_bus: String, start_resonance: float, end_resonance: float, duration: float):
@@ -232,7 +232,7 @@ func apply_resonance_sweep(layer_bus: String, start_resonance: float, end_resona
 		var tween = create_tween()
 		tween.tween_property(filter_effect, "resonance", end_resonance, duration).from(start_resonance)
 		
-		print("   🔊 Resonance sweep: %s (%.1f -> %.1f)" % [layer_bus, start_resonance, end_resonance])
+		print("   ðŸ”Š Resonance sweep: %s (%.1f -> %.1f)" % [layer_bus, start_resonance, end_resonance])
 		effect_applied.emit("resonance_sweep", layer_bus)
 
 func apply_delay_throw(layer_bus: String, throw_duration: float = 2.0, feedback_amount: float = 0.7):
@@ -257,7 +257,7 @@ func apply_delay_throw(layer_bus: String, throw_duration: float = 2.0, feedback_
 	tween.parallel().tween_method(_set_bus_send_level.bind(bus_idx, delay_bus), 0.8, 0.0, throw_duration * 0.7)
 	tween.parallel().tween_method(_set_delay_feedback, linear_to_db(feedback_amount), master_delay.feedback_level_db, throw_duration * 0.7)
 	
-	print("   💫 Delay throw: %s (%.1fs)" % [layer_bus, throw_duration])
+	print("   ðŸ’« Delay throw: %s (%.1fs)" % [layer_bus, throw_duration])
 	effect_applied.emit("delay_throw", layer_bus)
 
 # ===== MASTER EFFECTS CONTROL =====
@@ -273,7 +273,7 @@ func set_master_reverb(room_size: float, damping: float, wet: float):
 		reverb_params.damping = damping
 		reverb_params.wet = wet
 		
-		print("   🏢 Master reverb updated: Size=%.2f, Damp=%.2f, Wet=%.2f" % [room_size, damping, wet])
+		print("   ðŸ¢ Master reverb updated: Size=%.2f, Damp=%.2f, Wet=%.2f" % [room_size, damping, wet])
 
 func set_master_delay_time(time_ms: float, sync_to_bpm: bool = true, bpm: float = 120.0):
 	"""Set master delay time"""
@@ -298,7 +298,7 @@ func set_master_delay_time(time_ms: float, sync_to_bpm: bool = true, bpm: float 
 				if diff < min_diff:
 					min_diff = diff
 					closest_time = sync_times[division]
-					print("   🎵 Delay synced to %s" % division)
+					print("   ðŸŽµ Delay synced to %s" % division)
 			
 			time_ms = closest_time
 		
@@ -306,7 +306,7 @@ func set_master_delay_time(time_ms: float, sync_to_bpm: bool = true, bpm: float 
 		master_delay.feedback_delay_ms = time_ms * 2.0
 		delay_params.time_ms = time_ms
 		
-		print("   ⏱️ Master delay time: %.1fms" % time_ms)
+		print("   â±ï¸ Master delay time: %.1fms" % time_ms)
 
 func set_master_compression(threshold: float, ratio: float, attack: float, release: float):
 	"""Adjust master compressor"""
@@ -316,7 +316,7 @@ func set_master_compression(threshold: float, ratio: float, attack: float, relea
 		master_compressor.attack_us = attack
 		master_compressor.release_ms = release
 		
-		print("   🗜️ Master compressor: Thresh=%.1fdB, Ratio=%.1f:1" % [threshold, ratio])
+		print("   ðŸ—œï¸ Master compressor: Thresh=%.1fdB, Ratio=%.1f:1" % [threshold, ratio])
 
 # ===== SPECIAL EFFECTS =====
 
@@ -334,7 +334,7 @@ func apply_master_filter_sweep(start_freq: float, end_freq: float, duration: flo
 	tween.tween_property(temp_filter, "cutoff_hz", end_freq, duration)
 	tween.tween_callback(_remove_master_filter.bind(temp_filter))
 	
-	print("   🌊 MASTER filter sweep: %.0fHz -> %.0fHz" % [start_freq, end_freq])
+	print("   ðŸŒŠ MASTER filter sweep: %.0fHz -> %.0fHz" % [start_freq, end_freq])
 
 func apply_master_volume_duck(duck_amount: float, duck_duration: float, release_duration: float):
 	"""Duck the master volume temporarily"""
@@ -346,7 +346,7 @@ func apply_master_volume_duck(duck_amount: float, duck_duration: float, release_
 	tween.tween_method(_set_bus_volume.bind(master_bus), original_volume, ducked_volume, duck_duration)
 	tween.tween_method(_set_bus_volume.bind(master_bus), ducked_volume, original_volume, release_duration)
 	
-	print("   🦆 Master duck: -%.1fdB for %.1fs" % [duck_amount, duck_duration])
+	print("   ðŸ¦† Master duck: -%.1fdB for %.1fs" % [duck_amount, duck_duration])
 
 func apply_tempo_delay_ramp(start_bpm: float, end_bpm: float, duration: float):
 	"""Ramp delay time to match tempo change"""
@@ -359,7 +359,7 @@ func apply_tempo_delay_ramp(start_bpm: float, end_bpm: float, duration: float):
 		tween.tween_property(master_delay, "tap1_delay_ms", end_time, duration).from(start_time)
 		tween.tween_property(master_delay, "feedback_delay_ms", end_time * 2.0, duration).from(start_time * 2.0)
 		
-		print("   🎵 Delay tempo ramp: %.1f -> %.1f BPM" % [start_bpm, end_bpm])
+		print("   ðŸŽµ Delay tempo ramp: %.1f -> %.1f BPM" % [start_bpm, end_bpm])
 
 # ===== HELPER FUNCTIONS =====
 
@@ -367,7 +367,7 @@ func _set_bus_volume(bus_idx: int, volume_db: float):
 	"""Helper to set bus volume"""
 	AudioServer.set_bus_volume_db(bus_idx, volume_db)
 
-func _set_bus_send_level(from_bus: int, to_bus: int, level: float):
+func _set_bus_send_level(_from_bus: int, to_bus: int, level: float):
 	"""Helper to set send level"""
 	# Note: Godot doesn't have direct send level control
 	# This would need custom implementation or workaround
@@ -442,14 +442,14 @@ func emergency_stop_all_effects():
 	active_sweeps.clear()
 	active_fades.clear()
 	
-	print("   🛑 All effects stopped")
+	print("   ðŸ›‘ All effects stopped")
 
 # ===== CONSOLE COMMANDS =====
 
 func effects_info():
 	"""Show effects rack information"""
 	var status = get_effects_status()
-	print("🎚️ EFFECTS RACK STATUS 🎚️")
+	print("ðŸŽšï¸ EFFECTS RACK STATUS ðŸŽšï¸")
 	print("   Reverb: Size=%.2f, Damp=%.2f, Wet=%.2f" % [
 		status.reverb.room_size, 
 		status.reverb.damping, 

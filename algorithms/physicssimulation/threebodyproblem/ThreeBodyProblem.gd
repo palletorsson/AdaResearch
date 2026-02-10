@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 class_name ThreeBodyProblem
 
@@ -84,7 +84,7 @@ func _physics_process(delta):
 	if trails_enabled:
 		_update_trails()
 
-func _apply_gravitational_forces(delta):
+func _apply_gravitational_forces(_delta):
 	# Calculate gravitational forces between all pairs of bodies
 	for i in range(bodies.size()):
 		for j in range(i + 1, bodies.size()):

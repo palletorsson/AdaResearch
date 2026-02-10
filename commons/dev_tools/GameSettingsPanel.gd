@@ -1,4 +1,4 @@
-extends Control
+﻿extends Control
 class_name GameSettingsPanel
 
 ## Standalone Game Settings Panel
@@ -109,7 +109,7 @@ func _populate_sequence_list():
 	var sequences = MapProgressionManager.get_all_sequence_names()
 	for seq_name in sequences:
 		var info = MapProgressionManager.get_sequence_info(seq_name)
-		var status = "✓" if info.get("is_completed", false) else "○"
+		var status = "âœ“" if info.get("is_completed", false) else "â—‹"
 		var pct = info.get("completion_percentage", 0)
 		var text = "%s %s (%.0f%%)" % [status, seq_name, pct]
 		sequence_list.add_item(text)
@@ -144,7 +144,7 @@ func _on_sound_check_toggled(toggled_on: bool):
 
 func _mark_unsaved():
 	has_unsaved_changes = true
-	_update_status("⚠️ Unsaved changes - hit Save to apply")
+	_update_status("âš ï¸ Unsaved changes - hit Save to apply")
 
 func _on_reset_progress_pressed():
 	if MapProgressionManager:
@@ -180,7 +180,7 @@ func _on_save_pressed():
 	
 	has_unsaved_changes = false
 	pending_changes.clear()
-	_update_status("✅ Settings saved and applied!")
+	_update_status("âœ… Settings saved and applied!")
 
 func _apply_pending_changes():
 	"""Apply all pending changes to GameManager"""
@@ -243,11 +243,11 @@ func _on_health_updated(new_health: float):
 func _on_game_mode_changed(new_mode):
 	game_mode_option.selected = new_mode
 
-func _on_map_completed(map_name: String):
+func _on_map_completed(_map_name: String):
 	_update_progression_display()
 	_populate_sequence_list()
 
-func _on_map_unlocked(map_name: String):
+func _on_map_unlocked(_map_name: String):
 	_update_progression_display()
 
 func _on_sequence_completed(sequence_name: String):

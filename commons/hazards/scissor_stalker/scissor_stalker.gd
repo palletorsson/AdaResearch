@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name ScissorStalker
 ## Spider-like enemy with Hoberman scissor linkage legs.
 ## Legs can extend 3x their compact length for dramatic reach.
@@ -142,7 +142,7 @@ func _process_stalk(delta: float) -> void:
 		velocity = Vector3.ZERO
 
 
-func _process_pounce(delta: float) -> void:
+func _process_pounce(_delta: float) -> void:
 	var t: float = clamp(_state_time / pounce_duration, 0.0, 1.0)
 	
 	# Rapidly extend legs
@@ -181,7 +181,7 @@ func _process_attack(delta: float) -> void:
 		_set_state(State.STALK)
 
 
-func _process_retract(delta: float) -> void:
+func _process_retract(_delta: float) -> void:
 	var t: float = clamp(_state_time / retract_duration, 0.0, 1.0)
 	
 	_leg_extension = lerp(stalk_extend, 0.1, t)

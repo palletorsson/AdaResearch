@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var area_half_extent: float = 0.8  # random within [-0.8, 0.8] on X and Y
 
@@ -40,7 +40,7 @@ func _update_label(p: Node3D):
 	label.scale = Vector3.ONE * 0.1
 	label.text = "(%.2f, %.2f)" % [p.position.x, p.position.y]
 
-func _process(delta):
+func _process(_delta):
 	if point_node == null:
 		return
 	var pos := point_node.position

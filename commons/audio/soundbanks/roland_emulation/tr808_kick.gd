@@ -1,14 +1,14 @@
-# TR-808 Bass Drum
+﻿# TR-808 Bass Drum
 # The sine wave that launched hip-hop, trap, and modern bass music
 extends RefCounted
 class_name TR808Kick
 
 const SAMPLE_RATE = 44100.0
 
-# Pitch envelope — the 808 kick's defining characteristic
+# Pitch envelope â€” the 808 kick's defining characteristic
 var pitch_start: float = 160.0  # Starting frequency (the "click")
 var pitch_end: float = 48.0  # Ending frequency (the sub)
-var pitch_decay: float = 0.055  # Seconds — how fast it drops
+var pitch_decay: float = 0.055  # Seconds â€” how fast it drops
 
 # Amplitude envelope
 var amp_attack: float = 0.002  # Very fast attack
@@ -36,7 +36,7 @@ func trigger(vel: float = 1.0):
 	velocity = vel
 
 
-func generate_sample(time_since_trigger: float) -> Dictionary:
+func generate_sample(_time_since_trigger: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

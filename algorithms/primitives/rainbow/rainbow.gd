@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
@@ -158,7 +158,7 @@ func create_atmosphere():
 
 
 
-func _process(delta):
+func _process(_delta):
 	# Add some color cycling for extra effect
 	var time = Time.get_time_dict_from_system()
 	var time_factor = (time.second + time.minute * 60) * 0.01

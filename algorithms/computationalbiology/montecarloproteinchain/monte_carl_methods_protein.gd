@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Monte Carlo Protein Chain Simulation
 # This script simulates protein folding using Monte Carlo methods
@@ -661,7 +661,7 @@ func setup_particle_effects():
 	
 	add_child(energy_particles)
 
-func _on_temperature_changed(value: float):
+func _on_temperature_changed(_value: float):
 	"""Handle temperature slider change"""
 	# Update temperature for new moves
 	pass  # Temperature is used in the Monte Carlo step

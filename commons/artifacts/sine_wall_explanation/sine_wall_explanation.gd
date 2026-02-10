@@ -301,8 +301,9 @@ func _create_frequency_slider():
 		return
 	
 	_freq_slider = SLIDER_H.instantiate()
-	_freq_slider.position = Vector3(0, -0.08, wall_length / 2 + 0.15)
-	_freq_slider.rotation.y = PI  # Face toward viewer
+	# Position slider to the side and rotated outward for easier Z-axis manipulation
+	_freq_slider.position = Vector3(display_size * 0.4, 0.05, wall_length / 2 + 0.1)
+	_freq_slider.rotation.y = PI * 0.7  # Rotated outward (about 126°) for easier access
 	add_child(_freq_slider)
 	
 	# Set range
@@ -320,12 +321,13 @@ func _create_frequency_slider():
 	if _freq_slider.has_signal("slider_moved"):
 		_freq_slider.slider_moved.connect(_on_freq_slider_moved)
 	
-	# Frequency label
+	# Frequency label - positioned near the slider
 	_freq_label = Label3D.new()
 	_freq_label.pixel_size = 0.001
 	_freq_label.font_size = 32
 	_freq_label.text = "frequency: %.1f" % frequency
-	_freq_label.position = Vector3(0, 0.02, wall_length / 2 + 0.15)
+	_freq_label.position = Vector3(display_size * 0.4, 0.15, wall_length / 2 + 0.1)
+	_freq_label.rotation.y = PI * 0.7  # Match slider rotation
 	_freq_label.modulate = Color(0.7, 0.85, 1.0)
 	add_child(_freq_label)
 

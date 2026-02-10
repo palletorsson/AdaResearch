@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 ## Principal VR Audio Monitor
@@ -57,7 +57,7 @@ func _on_sound_played(_stream):
 	# This is a hook for future granular monitoring
 	pass
 
-func set_mode(is_spectrum: bool):
+func set_mode(_is_spectrum: bool):
 	if display:
 		# Toggle between Oscilloscope and Spectrum if supported
 		# For now, WaveformDisplay is primarily a spectral sine wave

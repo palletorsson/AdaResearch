@@ -1,4 +1,4 @@
-# PrismaticCrystalChair.gd
+﻿# PrismaticCrystalChair.gd
 # Procedural generation of crystalline faceted chairs
 extends Node3D
 class_name PrismaticCrystalChair
@@ -41,7 +41,7 @@ func generate_chair():
 	crystal_instance.add_child(base_box)
 	crystal_instance.material_override = materials.get_material("clear_acrylic")
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(_params: Dictionary):
 	for child in get_children():
 		if child != materials:
 			child.queue_free()

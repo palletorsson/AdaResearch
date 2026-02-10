@@ -1,4 +1,4 @@
-# DiseaseSpreadCA.gd
+﻿# DiseaseSpreadCA.gd
 # Epidemic spread model (SIR)
 extends PulsingCA
 
@@ -30,7 +30,7 @@ func initialize_grid():
 		var z = randi() % GRID_SIZE
 		grid[x][y][z] = 1  # Infected
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	spread_disease()
 	update_visualization()
 

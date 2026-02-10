@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Turret Demo - Spawns balls one at a time for the turret to destroy
 # Press SPACE to spawn a ball, or enable auto-spawn
@@ -117,7 +117,7 @@ func _spawn_single_ball() -> void:
 	
 	ball_spawner.spawn_height = old_height
 
-func _on_ball_destroyed(ball: Node3D) -> void:
+func _on_ball_destroyed(_ball: Node3D) -> void:
 	balls_destroyed += 1
 	print("[Demo] Ball destroyed! Total: %d" % balls_destroyed)
 

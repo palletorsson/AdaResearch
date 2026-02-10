@@ -1,16 +1,16 @@
-# TR-909 Kick Drum
-# Punchier and tighter than the 808 — the heartbeat of house and techno
+﻿# TR-909 Kick Drum
+# Punchier and tighter than the 808 â€” the heartbeat of house and techno
 extends RefCounted
 class_name TR909Kick
 
 const SAMPLE_RATE = 44100.0
 
-# Pitch envelope — faster and punchier than 808
+# Pitch envelope â€” faster and punchier than 808
 var pitch_start: float = 280.0  # Higher start = more attack
 var pitch_end: float = 58.0  # Slightly higher end than 808
 var pitch_decay: float = 0.028  # Faster pitch drop
 
-# Amplitude envelope — tighter than 808
+# Amplitude envelope â€” tighter than 808
 var amp_attack: float = 0.001  # Instant attack
 var amp_decay: float = 0.35  # Shorter decay = punchier
 
@@ -38,7 +38,7 @@ func trigger(vel: float = 1.0):
 	velocity = vel
 
 
-func generate_sample(time_since_trigger: float) -> Dictionary:
+func generate_sample(_time_since_trigger: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

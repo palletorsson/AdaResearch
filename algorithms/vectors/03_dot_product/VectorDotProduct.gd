@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const HingePanelScript = preload("res://algorithms/vectors/shared/gadgets/hinge_panel_gadget.gd")
 
@@ -113,7 +113,7 @@ func _update_info(a_vec: Vector3, b_vec: Vector3, dot: float, proj: Vector3, rej
 	builder.append("rej_b(a) = (%.2f, %.2f, %.2f)" % [rej.x, rej.y, rej.z])
 	info_label.text = "\n".join(builder)
 
-# ── Angle arc helpers ──
+# â”€â”€ Angle arc helpers â”€â”€
 
 func _create_angle_arc() -> MultiMeshInstance3D:
 	if _arc_dot_mesh == null:
@@ -187,7 +187,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector

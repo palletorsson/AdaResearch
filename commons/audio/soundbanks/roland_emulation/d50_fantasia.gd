@@ -1,4 +1,4 @@
-# D-50 Fantasia
+﻿# D-50 Fantasia
 # The quintessential D-50 sound: bell attack + string sustain
 # Used on countless 80s/90s ballads and film scores
 extends RefCounted
@@ -71,7 +71,7 @@ func release():
 	amp_env_phase = "release"
 
 
-func generate_sample(time: float) -> Dictionary:
+func generate_sample(_time: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	
@@ -114,7 +114,7 @@ func generate_sample(time: float) -> Dictionary:
 	return {"left": output_l * 0.6, "right": output_r * 0.6}
 
 
-func _generate_bell(dt: float) -> float:
+func _generate_bell(_dt: float) -> float:
 	# FM-style bell: multiple inharmonic partials
 	var output = 0.0
 	var partials = [1.0, 2.0, 2.4, 3.0, 4.2, 5.0, 6.3, 7.1]  # Inharmonic series
@@ -133,7 +133,7 @@ func _generate_bell(dt: float) -> float:
 	return output * bell_brightness * 0.15
 
 
-func _generate_strings(dt: float) -> Dictionary:
+func _generate_strings(_dt: float) -> Dictionary:
 	# Detuned saw ensemble for string character
 	var left = 0.0
 	var right = 0.0

@@ -11,7 +11,7 @@ const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_po
 @export var num_pendulums: int = 3
 @export var spacing: float = 8.0  # Space between pendulums
 @export var pendulum_scale: float = 1.0  # Full size pendulums
-@export var canvas_scale: float = 1.6  # Canvas size
+@export var canvas_scale: float = 2.0  # Canvas size (larger for better visibility)
 @export var use_uniform_swing: bool = false
 @export var enable_middle_interaction: bool = false
 

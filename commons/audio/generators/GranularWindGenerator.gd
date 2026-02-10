@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 class_name GranularWindGenerator
 
 # Granular Wind Generator
@@ -64,7 +64,7 @@ func _generate_pink_noise_buffer():
 		pink /= float(octaves)
 		noise_buffer[i] = pink
 
-func _process(delta):
+func _process(_delta):
 	if not playback: return
 	var frames_available = playback.get_frames_available()
 	if frames_available < 1: return

@@ -37,6 +37,10 @@ EquipmentRegistry="*res://commons/globals/equipment_registry.gd"
 Subtitles="*res://commons/ui/subtitles/SubtitleManager.gd"
 StuckDetector="*res://commons/player/stuck_detector.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1800

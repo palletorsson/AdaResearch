@@ -1,4 +1,4 @@
-# SoundDesignerInterface.gd
+﻿# SoundDesignerInterface.gd
 # Enhanced interface with sliders and real-time audio updates
 # Educational Sound Synthesis Learning Platform
 
@@ -172,25 +172,25 @@ var sound_parameters = {
 # Sound theory database - educational content for each sound type
 var sound_theory = {
 	"basic_sine_wave": {
-		"title": "🌊 Basic Sine Wave - The Pure Tone",
+		"title": "ðŸŒŠ Basic Sine Wave - The Pure Tone",
 		"difficulty": "Beginner",
 		"duration": "5-10 minutes",
 		"description": "The fundamental building block of all sound. A sine wave represents pure frequency with no harmonics.",
 		"theory": """
 <b>Mathematical Foundation:</b>
-A sine wave is described by: amplitude × sin(2π × frequency × time)
+A sine wave is described by: amplitude Ã— sin(2Ï€ Ã— frequency Ã— time)
 
 <b>Key Concepts:</b>
-• <b>Frequency</b>: How many cycles per second (Hz). 440Hz = Musical note A4
-• <b>Amplitude</b>: Volume/loudness of the sound (0.0 to 1.0)
-• <b>Duration</b>: How long the sound plays
-• <b>Fade In/Out</b>: Smooth transitions to prevent audio clicks
+â€¢ <b>Frequency</b>: How many cycles per second (Hz). 440Hz = Musical note A4
+â€¢ <b>Amplitude</b>: Volume/loudness of the sound (0.0 to 1.0)
+â€¢ <b>Duration</b>: How long the sound plays
+â€¢ <b>Fade In/Out</b>: Smooth transitions to prevent audio clicks
 
 <b>Real-World Applications:</b>
-• Tuning forks create nearly pure sine waves
-• Musical instruments combine multiple sine waves (harmonics)
-• Test tones for audio equipment calibration
-• Basic building block for synthesizers
+â€¢ Tuning forks create nearly pure sine waves
+â€¢ Musical instruments combine multiple sine waves (harmonics)
+â€¢ Test tones for audio equipment calibration
+â€¢ Basic building block for synthesizers
 
 <b>Interactive Challenge:</b>
 Try changing frequency from 220Hz to 880Hz - notice how pitch rises by octaves!
@@ -203,7 +203,7 @@ Try changing frequency from 220Hz to 880Hz - notice how pitch rises by octaves!
 		]
 	},
 	"pickup_mario": {
-		"title": "🪙 Mario Pickup - The Rising Frequency Sweep",
+		"title": "ðŸª™ Mario Pickup - The Rising Frequency Sweep",
 		"difficulty": "Beginner-Intermediate", 
 		"duration": "10-15 minutes",
 		"description": "Classic video game pickup sound using frequency modulation and envelope shaping.",
@@ -211,34 +211,34 @@ Try changing frequency from 220Hz to 880Hz - notice how pitch rises by octaves!
 <b>Synthesis Technique: Frequency Sweep + Exponential Decay</b>
 
 <b>Key Concepts:</b>
-• <b>Start/End Frequency</b>: Creates the characteristic "rising" sound
-• <b>Decay Rate</b>: How quickly the sound fades (exponential curve)
-• <b>Wave Type</b>: Square/sawtooth for retro "8-bit" character
-• <b>Envelope</b>: Sharp attack, quick decay = percussive sound
+â€¢ <b>Start/End Frequency</b>: Creates the characteristic "rising" sound
+â€¢ <b>Decay Rate</b>: How quickly the sound fades (exponential curve)
+â€¢ <b>Wave Type</b>: Square/sawtooth for retro "8-bit" character
+â€¢ <b>Envelope</b>: Sharp attack, quick decay = percussive sound
 
 <b>Audio Engineering Principles:</b>
-• Frequency modulation creates excitement and energy
-• Square waves contain odd harmonics (1st, 3rd, 5th...)
-• Exponential decay mimics natural sound behavior
-• Short duration prevents ear fatigue in games
+â€¢ Frequency modulation creates excitement and energy
+â€¢ Square waves contain odd harmonics (1st, 3rd, 5th...)
+â€¢ Exponential decay mimics natural sound behavior
+â€¢ Short duration prevents ear fatigue in games
 
 <b>Game Audio Psychology:</b>
-• Rising pitch = positive reward feeling
-• Quick decay = doesn't interfere with gameplay
-• Recognizable retro character = nostalgic appeal
+â€¢ Rising pitch = positive reward feeling
+â€¢ Quick decay = doesn't interfere with gameplay
+â€¢ Recognizable retro character = nostalgic appeal
 
 <b>Try This:</b>
 Reverse the frequencies (start high, end low) - notice how it feels negative!
 		""",
 		"exercises": [
-			{"task": "Classic Mario sound (440→880Hz)", "params": {"start_freq": 440.0, "end_freq": 880.0}},
+			{"task": "Classic Mario sound (440â†’880Hz)", "params": {"start_freq": 440.0, "end_freq": 880.0}},
 			{"task": "Modern game pickup (higher range)", "params": {"start_freq": 800.0, "end_freq": 1600.0}},
 			{"task": "Sad pickup (descending)", "params": {"start_freq": 880.0, "end_freq": 440.0}},
 			{"task": "Quick arcade blip (fast decay)", "params": {"decay_rate": 15.0}}
 		]
 	},
 	"teleport_drone": {
-		"title": "⚡ Teleport Drone - Modulated Synthesis",
+		"title": "âš¡ Teleport Drone - Modulated Synthesis",
 		"difficulty": "Intermediate",
 		"duration": "15-20 minutes", 
 		"description": "Complex synthetic drone using frequency modulation, noise, and dynamic envelopes.",
@@ -246,23 +246,23 @@ Reverse the frequencies (start high, end low) - notice how it feels negative!
 <b>Advanced Synthesis: Frequency Modulation + Noise Generation</b>
 
 <b>Technical Components:</b>
-• <b>Base Frequency</b>: The fundamental tone (carrier)
-• <b>Modulation</b>: LFO (Low Frequency Oscillator) creates wobble
-• <b>Modulation Depth</b>: How extreme the frequency changes
-• <b>Noise Amount</b>: Adds texture and "electricity" feeling
-• <b>Complex Envelope</b>: Fade in → sustain → fade out → silence
+â€¢ <b>Base Frequency</b>: The fundamental tone (carrier)
+â€¢ <b>Modulation</b>: LFO (Low Frequency Oscillator) creates wobble
+â€¢ <b>Modulation Depth</b>: How extreme the frequency changes
+â€¢ <b>Noise Amount</b>: Adds texture and "electricity" feeling
+â€¢ <b>Complex Envelope</b>: Fade in â†’ sustain â†’ fade out â†’ silence
 
 <b>Sound Design Principles:</b>
-• Sawtooth waves = harsh, synthetic character
-• Frequency modulation = movement and life
-• Noise = unpredictability and energy
-• Envelope prevents audio clicks and smooths transitions
+â€¢ Sawtooth waves = harsh, synthetic character
+â€¢ Frequency modulation = movement and life
+â€¢ Noise = unpredictability and energy
+â€¢ Envelope prevents audio clicks and smooths transitions
 
 <b>Science Fiction Audio:</b>
-• Teleportation needs to sound "otherworldly"
-• Modulation suggests energy/power fluctuation
-• Noise implies electrical interference
-• Duration long enough to convey "process happening"
+â€¢ Teleportation needs to sound "otherworldly"
+â€¢ Modulation suggests energy/power fluctuation
+â€¢ Noise implies electrical interference
+â€¢ Duration long enough to convey "process happening"
 
 <b>Advanced Technique:</b>
 The envelope uses smoothstep function for professional-quality fades.
@@ -275,7 +275,7 @@ The envelope uses smoothstep function for professional-quality fades.
 		]
 	},
 	"lift_bass_pulse": {
-		"title": "🎵 Bass Pulse - Rhythm and Low Frequency",
+		"title": "ðŸŽµ Bass Pulse - Rhythm and Low Frequency",
 		"difficulty": "Intermediate",
 		"duration": "10-15 minutes",
 		"description": "Mechanical pulse using low-frequency oscillation and rhythmic modulation.",
@@ -283,27 +283,27 @@ The envelope uses smoothstep function for professional-quality fades.
 <b>Mechanical Audio Design: Rhythm + Low Frequency Response</b>
 
 <b>Bass Frequency Science:</b>
-• <b>Base Frequency</b>: 20-100Hz range felt more than heard
-• <b>Pulse Rate</b>: Creates rhythmic pattern (like heartbeat/engine)
-• <b>Decay Rate</b>: How mechanical energy dissipates
-• <b>Psychoacoustic Effect</b>: Low frequencies create physical sensations
+â€¢ <b>Base Frequency</b>: 20-100Hz range felt more than heard
+â€¢ <b>Pulse Rate</b>: Creates rhythmic pattern (like heartbeat/engine)
+â€¢ <b>Decay Rate</b>: How mechanical energy dissipates
+â€¢ <b>Psychoacoustic Effect</b>: Low frequencies create physical sensations
 
 <b>Pulse Modulation:</b>
-• Uses absolute value of sine wave: abs(sin(x))
-• Creates rhythmic on/off pattern
-• Mimics mechanical systems (pistons, engines, pumps)
-• Exponential decay simulates energy loss over time
+â€¢ Uses absolute value of sine wave: abs(sin(x))
+â€¢ Creates rhythmic on/off pattern
+â€¢ Mimics mechanical systems (pistons, engines, pumps)
+â€¢ Exponential decay simulates energy loss over time
 
 <b>Game Audio Applications:</b>
-• Elevator/lift machinery sounds
-• Mechanical ambience
-• Industrial environments
-• Low-frequency UI feedback
+â€¢ Elevator/lift machinery sounds
+â€¢ Mechanical ambience
+â€¢ Industrial environments
+â€¢ Low-frequency UI feedback
 
 <b>Audio Engineering:</b>
-• Low frequencies require more power to produce
-• Sub-bass content can overload small speakers
-• Always test on different playback systems
+â€¢ Low frequencies require more power to produce
+â€¢ Sub-bass content can overload small speakers
+â€¢ Always test on different playback systems
 		""",
 		"exercises": [
 			{"task": "Slow machinery (1Hz pulse)", "params": {"pulse_rate": 1.0}},
@@ -313,7 +313,7 @@ The envelope uses smoothstep function for professional-quality fades.
 		]
 	},
 	"ghost_drone": {
-		"title": "👻 Ghost Drone - Harmonic Layering",
+		"title": "ðŸ‘» Ghost Drone - Harmonic Layering",
 		"difficulty": "Intermediate-Advanced",
 		"duration": "15-20 minutes",
 		"description": "Atmospheric drone using multiple harmonic layers and tremolo modulation.",
@@ -321,27 +321,27 @@ The envelope uses smoothstep function for professional-quality fades.
 <b>Advanced Harmonic Synthesis: Multiple Oscillator Layering</b>
 
 <b>Harmonic Theory:</b>
-• <b>Multiple Frequencies</b>: Creates rich, complex timbres
-• <b>Frequency Relationships</b>: 110Hz, 165Hz, 220Hz (musical intervals)
-• <b>Amplitude Control</b>: Each layer has independent volume
-• <b>Tremolo Modulation</b>: Overall amplitude variation creates "ghostly" effect
+â€¢ <b>Multiple Frequencies</b>: Creates rich, complex timbres
+â€¢ <b>Frequency Relationships</b>: 110Hz, 165Hz, 220Hz (musical intervals)
+â€¢ <b>Amplitude Control</b>: Each layer has independent volume
+â€¢ <b>Tremolo Modulation</b>: Overall amplitude variation creates "ghostly" effect
 
 <b>Musical Mathematics:</b>
-• 110Hz = A2 (fundamental)
-• 165Hz = E3 (perfect fifth above)
-• 220Hz = A3 (octave above fundamental)
-• These create a harmonious, ethereal chord
+â€¢ 110Hz = A2 (fundamental)
+â€¢ 165Hz = E3 (perfect fifth above)
+â€¢ 220Hz = A3 (octave above fundamental)
+â€¢ These create a harmonious, ethereal chord
 
 <b>Atmospheric Sound Design:</b>
-• Multiple layers = depth and complexity
-• Slow modulation = organic, breathing quality
-• Harmonic relationships = musical pleasantness
-• Moderate amplitude = background ambience
+â€¢ Multiple layers = depth and complexity
+â€¢ Slow modulation = organic, breathing quality
+â€¢ Harmonic relationships = musical pleasantness
+â€¢ Moderate amplitude = background ambience
 
 <b>Advanced Concepts:</b>
-• Additive synthesis (combining pure tones)
-• Harmonic series and musical intervals
-• Tremolo vs. vibrato (amplitude vs. frequency modulation)
+â€¢ Additive synthesis (combining pure tones)
+â€¢ Harmonic series and musical intervals
+â€¢ Tremolo vs. vibrato (amplitude vs. frequency modulation)
 		""",
 		"exercises": [
 			{"task": "Simple harmonic (equal amplitudes)", "params": {"amplitude1": 0.3, "amplitude2": 0.3, "amplitude3": 0.3}},
@@ -351,7 +351,7 @@ The envelope uses smoothstep function for professional-quality fades.
 		]
 	},
 	"melodic_drone": {
-		"title": "🎶 Melodic Drone - Complex Harmonic Synthesis",
+		"title": "ðŸŽ¶ Melodic Drone - Complex Harmonic Synthesis",
 		"difficulty": "Advanced",
 		"duration": "20-30 minutes",
 		"description": "Professional-grade synthesis with harmonic control, tremolo, and musical tuning.",
@@ -359,29 +359,29 @@ The envelope uses smoothstep function for professional-quality fades.
 <b>Professional Synthesizer Design: Full Harmonic Control</b>
 
 <b>Advanced Harmonic Series:</b>
-• <b>Fundamental</b>: Base frequency (220Hz = A3)
-• <b>Harmonic Multipliers</b>: 1.0, 1.5, 2.0, 3.0 (musical ratios)
-• <b>Individual Amplitudes</b>: Precise control over each harmonic
-• <b>Tremolo System</b>: Rate and depth for organic modulation
+â€¢ <b>Fundamental</b>: Base frequency (220Hz = A3)
+â€¢ <b>Harmonic Multipliers</b>: 1.0, 1.5, 2.0, 3.0 (musical ratios)
+â€¢ <b>Individual Amplitudes</b>: Precise control over each harmonic
+â€¢ <b>Tremolo System</b>: Rate and depth for organic modulation
 
 <b>Music Theory Integration:</b>
-• Harmonic ratios create musical intervals
-• 1.5 = Perfect Fifth (musical consonance)
-• 2.0 = Octave (frequency doubling)
-• 3.0 = Perfect Fifth + Octave
-• Complex timbres from simple mathematical relationships
+â€¢ Harmonic ratios create musical intervals
+â€¢ 1.5 = Perfect Fifth (musical consonance)
+â€¢ 2.0 = Octave (frequency doubling)
+â€¢ 3.0 = Perfect Fifth + Octave
+â€¢ Complex timbres from simple mathematical relationships
 
 <b>Professional Synthesis Concepts:</b>
-• Additive synthesis with harmonic control
-• Tremolo modulation for musical expression
-• Amplitude envelope shaping
-• Harmonic balance for timbral design
+â€¢ Additive synthesis with harmonic control
+â€¢ Tremolo modulation for musical expression
+â€¢ Amplitude envelope shaping
+â€¢ Harmonic balance for timbral design
 
 <b>Real-World Applications:</b>
-• Synthesizer programming
-• Music composition and sound design
-• Understanding acoustic instrument harmonic content
-• Electronic music production techniques
+â€¢ Synthesizer programming
+â€¢ Music composition and sound design
+â€¢ Understanding acoustic instrument harmonic content
+â€¢ Electronic music production techniques
 		""",
 		"exercises": [
 			{"task": "Organ-like tone (strong harmonics)", "params": {"harmonic2_amp": 0.4, "harmonic3_amp": 0.3}},
@@ -421,57 +421,57 @@ func _ready():
 
 func connect_signals():
 	# Connect signals after UI is created
-	print("🔌 Connecting signals...")
+	print("ðŸ”Œ Connecting signals...")
 	
 	if sound_type_option:
 		sound_type_option.item_selected.connect(_on_sound_type_changed)
-		print("✅ Sound type option connected")
+		print("âœ… Sound type option connected")
 	else:
-		print("❌ Sound type option not found")
+		print("âŒ Sound type option not found")
 		
 	if preview_button:
 		preview_button.pressed.connect(_on_preview_pressed)
-		print("✅ Preview button connected")
+		print("âœ… Preview button connected")
 	else:
-		print("❌ Preview button not found")
+		print("âŒ Preview button not found")
 		
 	if stop_button:
 		stop_button.pressed.connect(_on_stop_pressed)
-		print("✅ Stop button connected")
+		print("âœ… Stop button connected")
 	else:
-		print("❌ Stop button not found")
+		print("âŒ Stop button not found")
 		
 	if save_button:
 		save_button.pressed.connect(_on_save_pressed)
-		print("✅ Save button connected")
+		print("âœ… Save button connected")
 	else:
-		print("❌ Save button not found")
+		print("âŒ Save button not found")
 		
 	if load_button:
 		load_button.pressed.connect(_on_load_pressed)
-		print("✅ Load button connected")
+		print("âœ… Load button connected")
 	else:
-		print("❌ Load button not found")
+		print("âŒ Load button not found")
 		
 	if export_button:
 		export_button.pressed.connect(_on_export_pressed)
-		print("✅ Export button connected")
+		print("âœ… Export button connected")
 	else:
-		print("❌ Export button not found")
+		print("âŒ Export button not found")
 		
 	if realtime_toggle:
 		realtime_toggle.toggled.connect(_on_realtime_toggled)
-		print("✅ Realtime toggle connected")
+		print("âœ… Realtime toggle connected")
 	else:
-		print("❌ Realtime toggle not found")
+		print("âŒ Realtime toggle not found")
 		
 	# Connect copy JSON button
 	var copy_json_button = get_node_or_null("VBox/Controls/CopyJsonButton")
 	if copy_json_button:
 		copy_json_button.pressed.connect(_show_json_popup)
-		print("✅ Copy JSON button connected")
+		print("âœ… Copy JSON button connected")
 	else:
-		print("❌ Copy JSON button not found")
+		print("âŒ Copy JSON button not found")
 
 func setup_ui():
 	custom_minimum_size = Vector2(900, 700)
@@ -490,7 +490,7 @@ func setup_ui():
 	
 	# Title with background (smaller size)
 	var title = Label.new()
-	title.text = "🎵 Sound Designer Interface"
+	title.text = "ðŸŽµ Sound Designer Interface"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 16)
 	title.add_theme_color_override("font_color", Color.WHITE)
@@ -539,7 +539,7 @@ func setup_ui():
 	
 	preview_button = Button.new()
 	preview_button.name = "PreviewButton"
-	preview_button.text = "🔊 Preview"
+	preview_button.text = "ðŸ”Š Preview"
 	preview_button.custom_minimum_size = Vector2(100, 30)
 	# Style the preview button
 	var preview_style = StyleBoxFlat.new()
@@ -553,7 +553,7 @@ func setup_ui():
 	
 	stop_button = Button.new()
 	stop_button.name = "StopButton"
-	stop_button.text = "⏹️ Stop"
+	stop_button.text = "â¹ï¸ Stop"
 	stop_button.custom_minimum_size = Vector2(80, 30)
 	# Style the stop button
 	var stop_style = StyleBoxFlat.new()
@@ -596,25 +596,25 @@ func setup_ui():
 	
 	save_button = Button.new()
 	save_button.name = "SaveButton"
-	save_button.text = "💾 Save Preset"
+	save_button.text = "ðŸ’¾ Save Preset"
 	save_button.custom_minimum_size = Vector2(120, 30)
 	controls.add_child(save_button)
 	
 	load_button = Button.new()
 	load_button.name = "LoadButton"
-	load_button.text = "📂 Load Preset"
+	load_button.text = "ðŸ“‚ Load Preset"
 	load_button.custom_minimum_size = Vector2(120, 30)
 	controls.add_child(load_button)
 	
 	export_button = Button.new()
 	export_button.name = "ExportButton"
-	export_button.text = "📤 Export Sound"
+	export_button.text = "ðŸ“¤ Export Sound"
 	export_button.custom_minimum_size = Vector2(130, 30)
 	controls.add_child(export_button)
 	
 	var copy_json_button = Button.new()
 	copy_json_button.name = "CopyJsonButton"
-	copy_json_button.text = "📋 Copy JSON"
+	copy_json_button.text = "ðŸ“‹ Copy JSON"
 	copy_json_button.custom_minimum_size = Vector2(100, 30)
 	# Style the copy JSON button
 	var copy_style = StyleBoxFlat.new()
@@ -651,11 +651,11 @@ func setup_ui():
 	parameters_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(parameters_container)
 	
-	print("✅ UI setup complete - all elements created")
+	print("âœ… UI setup complete - all elements created")
 
 func load_parameters_from_files():
 	"""Load sound parameters from JSON files in the restructured directories"""
-	print("📂 Loading sound parameters from JSON files...")
+	print("ðŸ“‚ Loading sound parameters from JSON files...")
 	
 	# Use the enhanced parameter loader to get all parameters
 	var loaded_params = EnhancedParameterLoader.load_all_parameters()
@@ -663,9 +663,9 @@ func load_parameters_from_files():
 	if loaded_params.size() > 0:
 		# Replace the hardcoded parameters with loaded ones
 		sound_parameters = loaded_params
-		print("✅ Loaded %d sound parameter sets from JSON files" % sound_parameters.size())
+		print("âœ… Loaded %d sound parameter sets from JSON files" % sound_parameters.size())
 	else:
-		print("⚠️ No parameters loaded from JSON, keeping hardcoded defaults")
+		print("âš ï¸ No parameters loaded from JSON, keeping hardcoded defaults")
 
 	_refresh_sound_type_maps()
 
@@ -712,7 +712,7 @@ func create_waveform_display() -> Control:
 	
 	# Title
 	var title = Label.new()
-	title.text = "🌊 Waveform (Time Domain)"
+	title.text = "ðŸŒŠ Waveform (Time Domain)"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 14)
 	title.add_theme_color_override("font_color", Color.CYAN)
@@ -754,7 +754,7 @@ func create_spectrum_display() -> Control:
 	
 	# Title
 	var title = Label.new()
-	title.text = "📡 Spectrum (Frequency Domain)"
+	title.text = "ðŸ“¡ Spectrum (Frequency Domain)"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 14)
 	title.add_theme_color_override("font_color", Color.GREEN)
@@ -802,11 +802,11 @@ func setup_realtime_timer():
 	update_timer.one_shot = false  # Continuous timer
 	add_child(update_timer)
 	update_timer.start()
-	print("⏰ Real-time timer started (50ms intervals)")
+	print("â° Real-time timer started (50ms intervals)")
 
 func populate_sound_types():
 	if not sound_type_option:
-		print("❌ Sound type option not ready yet")
+		print("âŒ Sound type option not ready yet")
 		return
 		
 	sound_type_option.clear()
@@ -816,7 +816,7 @@ func populate_sound_types():
 		var display_name = _create_display_name_with_emoji(sound_key)
 		sound_type_option.add_item(display_name)
 	
-	print("🎵 Populated %d sound types from loaded parameters" % sound_parameters.size())
+	print("ðŸŽµ Populated %d sound types from loaded parameters" % sound_parameters.size())
 
 func _create_display_name_with_emoji(sound_key: String) -> String:
 	"""Create a display name with emoji for a sound key"""
@@ -824,30 +824,30 @@ func _create_display_name_with_emoji(sound_key: String) -> String:
 	
 	# Add emoji based on sound type keywords
 	var emoji_map = {
-		"kick": "🥁", "808": "🥁", "drum": "🥁", "909": "🥁", "linn": "🥁",
-		"hihat": "🔥", "hat": "🔥", "606": "🔥",
-		"bass": "🎵", "sub": "🎵",
-		"drone": "🌌", "ambient": "🌌", "amiga": "🌌",
-		"laser": "🔫", "shot": "🔫",
-		"pickup": "🪙", "mario": "🪙",
-		"explosion": "💥", "bomb": "💥",
-		"jump": "🟢", "retro": "🟢",
-		"shield": "🛡️", "hit": "🛡️",
-		"wind": "🌬️", "atmospheric": "🌬️",
-		"sine": "〰️", "basic": "〰️",
-		"disco": "🕺", "tom": "🥁", "synare": "🥁",
-		"cosmic": "🛸", "fx": "🌌", "ufo": "🛸", "space": "🚀",
-		"moog": "🎹", "kraftwerk": "🤖", "sequencer": "🎼", "analog": "🎛️",
-		"herbie": "🎺", "hancock": "🎹", "fusion": "🌟", "jazz": "🎷",
-		"aphex": "🔬", "twin": "🎛️", "modular": "🔧", "experimental": "⚗️",
-		"flying": "🚁", "lotus": "🪷", "sampler": "🎛️", "beats": "🥁",
-		"dx7": "⚡", "electric": "⚡", "piano": "🎹",
-		"tb303": "🔊", "acid": "🔊",
-		"c64": "💾", "sid": "💾", "gameboy": "🎮", "dmg": "🎮",
-		"jupiter": "🪐", "strings": "🎻",
-		"arp": "⚡", "2600": "⚡", "lead": "🎤",
-		"ppg": "🌊", "wave": "🌊", "pad": "🌊",
-		"teleport": "⚡", "power": "⭐", "melodic": "🎶", "ghost": "👻", "lift": "🔄"
+		"kick": "ðŸ¥", "808": "ðŸ¥", "drum": "ðŸ¥", "909": "ðŸ¥", "linn": "ðŸ¥",
+		"hihat": "ðŸ”¥", "hat": "ðŸ”¥", "606": "ðŸ”¥",
+		"bass": "ðŸŽµ", "sub": "ðŸŽµ",
+		"drone": "ðŸŒŒ", "ambient": "ðŸŒŒ", "amiga": "ðŸŒŒ",
+		"laser": "ðŸ”«", "shot": "ðŸ”«",
+		"pickup": "ðŸª™", "mario": "ðŸª™",
+		"explosion": "ðŸ’¥", "bomb": "ðŸ’¥",
+		"jump": "ðŸŸ¢", "retro": "ðŸŸ¢",
+		"shield": "ðŸ›¡ï¸", "hit": "ðŸ›¡ï¸",
+		"wind": "ðŸŒ¬ï¸", "atmospheric": "ðŸŒ¬ï¸",
+		"sine": "ã€°ï¸", "basic": "ã€°ï¸",
+		"disco": "ðŸ•º", "tom": "ðŸ¥", "synare": "ðŸ¥",
+		"cosmic": "ðŸ›¸", "fx": "ðŸŒŒ", "ufo": "ðŸ›¸", "space": "ðŸš€",
+		"moog": "ðŸŽ¹", "kraftwerk": "ðŸ¤–", "sequencer": "ðŸŽ¼", "analog": "ðŸŽ›ï¸",
+		"herbie": "ðŸŽº", "hancock": "ðŸŽ¹", "fusion": "ðŸŒŸ", "jazz": "ðŸŽ·",
+		"aphex": "ðŸ”¬", "twin": "ðŸŽ›ï¸", "modular": "ðŸ”§", "experimental": "âš—ï¸",
+		"flying": "ðŸš", "lotus": "ðŸª·", "sampler": "ðŸŽ›ï¸", "beats": "ðŸ¥",
+		"dx7": "âš¡", "electric": "âš¡", "piano": "ðŸŽ¹",
+		"tb303": "ðŸ”Š", "acid": "ðŸ”Š",
+		"c64": "ðŸ’¾", "sid": "ðŸ’¾", "gameboy": "ðŸŽ®", "dmg": "ðŸŽ®",
+		"jupiter": "ðŸª", "strings": "ðŸŽ»",
+		"arp": "âš¡", "2600": "âš¡", "lead": "ðŸŽ¤",
+		"ppg": "ðŸŒŠ", "wave": "ðŸŒŠ", "pad": "ðŸŒŠ",
+		"teleport": "âš¡", "power": "â­", "melodic": "ðŸŽ¶", "ghost": "ðŸ‘»", "lift": "ðŸ”„"
 	}
 	
 	for keyword in emoji_map.keys():
@@ -859,7 +859,7 @@ func _create_display_name_with_emoji(sound_key: String) -> String:
 
 func create_parameter_controls():
 	if not parameters_container:
-		print("❌ Parameters container not ready yet")
+		print("âŒ Parameters container not ready yet")
 		return
 		
 	# Clear existing controls
@@ -872,7 +872,7 @@ func create_parameter_controls():
 	
 	# Create smaller title
 	var title = Label.new()
-	title.text = "🎛️ Parameters"
+	title.text = "ðŸŽ›ï¸ Parameters"
 	title.add_theme_font_size_override("font_size", 14)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	parameters_container.add_child(title)
@@ -964,17 +964,17 @@ func create_parameter_control_in_column(column: VBoxContainer, param_name: Strin
 	else:
 		create_slider_control_compact(control_container, param_name, param_config)
 	
-	print("✅ Created compact parameter control for: %s" % param_name)
+	print("âœ… Created compact parameter control for: %s" % param_name)
 
-func create_parameter_control(param_name: String, param_config: Dictionary):
+func create_parameter_control(_param_name: String, param_config: Dictionary):
 	# Legacy function - now redirects to column version
-	print("⚠️ Legacy create_parameter_control called - use create_parameter_control_in_column instead")
+	print("âš ï¸ Legacy create_parameter_control called - use create_parameter_control_in_column instead")
 
 func create_slider_control_compact(container: VBoxContainer, param_name: String, config: Dictionary):
 	"""Create a compact slider control for column layout"""
 	# Defensive check for parameter structure
 	if not config is Dictionary:
-		print("❌ Invalid config for %s: %s" % [param_name, config])
+		print("âŒ Invalid config for %s: %s" % [param_name, config])
 		return
 	
 	var slider = HSlider.new()
@@ -1004,7 +1004,7 @@ func create_slider_control_compact(container: VBoxContainer, param_name: String,
 	
 	# Connect the signal with proper lambda function
 	slider.value_changed.connect(func(value): _on_slider_changed(param_name, value))
-	print("🎛️ Created compact slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
+	print("ðŸŽ›ï¸ Created compact slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
 	
 	container.add_child(slider)
 	parameter_controls[param_name] = slider
@@ -1034,8 +1034,8 @@ func create_option_control_compact(container: VBoxContainer, param_name: String,
 	container.add_child(option_button)
 	parameter_controls[param_name] = option_button
 	
-	print("🎛️ Created compact option control for %s (options: %s, current: %s)" % [param_name, options, current_value])
-	print("🔗 Signal connected for %s option control (FIXED LAMBDA)" % param_name)
+	print("ðŸŽ›ï¸ Created compact option control for %s (options: %s, current: %s)" % [param_name, options, current_value])
+	print("ðŸ”— Signal connected for %s option control (FIXED LAMBDA)" % param_name)
 	
 	# Update value label
 	update_value_label(param_name, current_value)
@@ -1068,8 +1068,8 @@ func create_slider_control(container: HBoxContainer, param_name: String, config:
 	
 	# Connect the signal with proper lambda function
 	slider.value_changed.connect(func(value): _on_slider_changed(param_name, value))
-	print("🎛️ Created slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
-	print("🔗 Signal connected for %s slider" % param_name)
+	print("ðŸŽ›ï¸ Created slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
+	print("ðŸ”— Signal connected for %s slider" % param_name)
 	
 	container.add_child(slider)
 	parameter_controls[param_name] = slider
@@ -1100,17 +1100,17 @@ func create_option_control(container: HBoxContainer, param_name: String, config:
 	update_value_label(param_name, current_value)
 
 func update_value_label(param_name: String, value):
-	print("📝 Updating value label for %s with value: %s" % [param_name, value])
+	print("ðŸ“ Updating value label for %s with value: %s" % [param_name, value])
 	if value_labels.has(param_name):
 		var label = value_labels[param_name]
 		if value is float:
 			label.text = "%.2f" % value
 		else:
 			label.text = str(value)
-		print("✅ Updated %s = %s" % [param_name, label.text])  # Debug output
+		print("âœ… Updated %s = %s" % [param_name, label.text])  # Debug output
 	else:
-		print("❌ No value label found for parameter: %s" % param_name)
-		print("🔍 Available value labels: %s" % value_labels.keys())
+		print("âŒ No value label found for parameter: %s" % param_name)
+		print("ðŸ” Available value labels: %s" % value_labels.keys())
 
 func get_sound_key_from_type(sound_type: AudioSynthesizer.SoundType) -> String:
 	return sound_key_by_type.get(sound_type, "basic_sine_wave")
@@ -1126,16 +1126,16 @@ func _on_sound_type_changed(index: int):
 	var sound_keys = sound_parameters.keys()
 	if index < sound_keys.size():
 		current_sound_key = sound_keys[index]
-		print("🎵 Changed to sound: %s" % current_sound_key)
+		print("ðŸŽµ Changed to sound: %s" % current_sound_key)
 		await create_parameter_controls()
 		if realtime_enabled:
 			trigger_audio_update()
 	else:
-		print("❌ Invalid sound index: %d" % index)
+		print("âŒ Invalid sound index: %d" % index)
 
 func _on_slider_changed(param_name: String, value: float):
-	print("🎛️ SLIDER MOVED: %s changed to %.2f" % [param_name, value])  # Enhanced debug output
-	print("🔑 Sound key: %s" % current_sound_key)
+	print("ðŸŽ›ï¸ SLIDER MOVED: %s changed to %.2f" % [param_name, value])  # Enhanced debug output
+	print("ðŸ”‘ Sound key: %s" % current_sound_key)
 	
 	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
@@ -1143,37 +1143,37 @@ func _on_slider_changed(param_name: String, value: float):
 	
 	# Force immediate audio update if real-time is enabled
 	if realtime_enabled:
-		print("🔄 Triggering real-time audio update...")
+		print("ðŸ”„ Triggering real-time audio update...")
 		# Cancel any pending update and do it immediately
 		needs_audio_update = false
 		update_audio_immediately()
 	else:
-		print("⏸️ Real-time disabled, no audio update")
+		print("â¸ï¸ Real-time disabled, no audio update")
 
 func _on_option_changed(param_name: String, index: int):
-	print("🎚️ OPTION CHANGED TRIGGERED: %s to index %d" % [param_name, index])
+	print("ðŸŽšï¸ OPTION CHANGED TRIGGERED: %s to index %d" % [param_name, index])
 	var option_button = parameter_controls[param_name] as OptionButton
 	var value = option_button.get_item_text(index)
 	
-	print("🔑 Sound key: %s" % current_sound_key)
-	print("📝 Setting %s.%s = %s" % [current_sound_key, param_name, value])
+	print("ðŸ”‘ Sound key: %s" % current_sound_key)
+	print("ðŸ“ Setting %s.%s = %s" % [current_sound_key, param_name, value])
 	
 	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
-	print("✅ Option changed: %s = %s" % [param_name, value])
+	print("âœ… Option changed: %s = %s" % [param_name, value])
 	
 	# Force immediate audio update if real-time is enabled
 	if realtime_enabled:
-		print("🔄 Real-time enabled, triggering immediate audio update...")
+		print("ðŸ”„ Real-time enabled, triggering immediate audio update...")
 		# Cancel any pending update and do it immediately
 		needs_audio_update = false
 		update_audio_immediately()
 	else:
-		print("⏸️ Real-time disabled, no audio update")
+		print("â¸ï¸ Real-time disabled, no audio update")
 
 func _on_realtime_toggled(enabled: bool):
 	realtime_enabled = enabled
-	print("🔄 Real-time updates: %s" % ("ENABLED" if enabled else "DISABLED"))
+	print("ðŸ”„ Real-time updates: %s" % ("ENABLED" if enabled else "DISABLED"))
 	if enabled:
 		# Start playing current sound when real-time is enabled
 		update_audio_immediately()
@@ -1181,7 +1181,7 @@ func _on_realtime_toggled(enabled: bool):
 		# Stop audio when real-time is disabled
 		if audio_player and audio_player.playing:
 			audio_player.stop()
-			print("⏹️ Audio stopped (real-time disabled)")
+			print("â¹ï¸ Audio stopped (real-time disabled)")
 
 func trigger_audio_update():
 	needs_audio_update = true
@@ -1193,20 +1193,20 @@ func _on_realtime_update():
 
 func update_audio_immediately():
 	"""Immediately update and play audio with current parameters"""
-	print("🎵 Immediate audio update... (Real-time: %s)" % realtime_enabled)
+	print("ðŸŽµ Immediate audio update... (Real-time: %s)" % realtime_enabled)
 	
 	if not audio_player:
-		print("❌ Audio player not found")
+		print("âŒ Audio player not found")
 		return
 		
 	# Stop current audio
 	if audio_player.playing:
 		audio_player.stop()
-		print("⏸️ Stopped previous audio")
+		print("â¸ï¸ Stopped previous audio")
 	
 	var params = get_current_parameter_values(current_sound_key)
 	
-	print("🎛️ Using parameters for %s: %s" % [current_sound_key, params])
+	print("ðŸŽ›ï¸ Using parameters for %s: %s" % [current_sound_key, params])
 	
 	# Generate new audio with current parameters - need to get the enum type
 	var sound_type = get_type_from_sound_key(current_sound_key)
@@ -1214,12 +1214,12 @@ func update_audio_immediately():
 	if audio_stream:
 		audio_player.stream = audio_stream
 		audio_player.play()
-		print("▶️ Real-time audio started playing (Duration: %.2fs)" % params.get("duration", 0.0))
+		print("â–¶ï¸ Real-time audio started playing (Duration: %.2fs)" % params.get("duration", 0.0))
 		
 		# Update visualizations
 		update_visualizations()
 	else:
-		print("❌ Failed to generate audio stream")
+		print("âŒ Failed to generate audio stream")
 
 func update_audio():
 	"""Standard audio update function"""
@@ -1236,7 +1236,7 @@ func get_current_parameter_values(sound_key: String) -> Dictionary:
 	var params = {}
 	
 	if not sound_parameters.has(sound_key):
-		print("⚠️ No parameters found for sound key: %s" % sound_key)
+		print("âš ï¸ No parameters found for sound key: %s" % sound_key)
 		return params
 	
 	var sound_config = sound_parameters[sound_key]
@@ -1248,24 +1248,24 @@ func get_current_parameter_values(sound_key: String) -> Dictionary:
 		if param_config is Dictionary and param_config.has("value"):
 			params[param_name] = param_config["value"]
 		else:
-			print("⚠️ Invalid parameter structure for %s.%s: %s" % [sound_key, param_name, param_config])
+			print("âš ï¸ Invalid parameter structure for %s.%s: %s" % [sound_key, param_name, param_config])
 			# Provide a safe default
 			params[param_name] = 0.0
 	
-	print("📊 Current %s parameters: %s" % [sound_key, params])
+	print("ðŸ“Š Current %s parameters: %s" % [sound_key, params])
 	return params
 
 func _on_preview_pressed():
-	print("🔊 Preview button pressed!")
+	print("ðŸ”Š Preview button pressed!")
 	update_audio()
 
 func _on_stop_pressed():
-	print("⏹️ Stop button pressed!")
+	print("â¹ï¸ Stop button pressed!")
 	if audio_player and audio_player.playing:
 		audio_player.stop()
-		print("🛑 Audio stopped")
+		print("ðŸ›‘ Audio stopped")
 	else:
-		print("🔇 No audio playing")
+		print("ðŸ”‡ No audio playing")
 
 func _on_save_pressed():
 	var file_dialog = FileDialog.new()
@@ -1317,16 +1317,16 @@ func _save_to_file(file_path: String):
 		var json_string = JSON.stringify(save_data, "\t")
 		file.store_string(json_string)
 		file.close()
-		print("✅ Complete sound parameters saved to: ", file_path)
-		print("📋 Copy-paste ready format with min/max/step values!")
+		print("âœ… Complete sound parameters saved to: ", file_path)
+		print("ðŸ“‹ Copy-paste ready format with min/max/step values!")
 		
 		# Also print to console for easy copying
-		print("🎛️ JSON Output for copy-paste:")
+		print("ðŸŽ›ï¸ JSON Output for copy-paste:")
 		print("==================================================")
 		print(json_string)
 		print("==================================================")
 	else:
-		print("❌ Failed to save file: ", file_path)
+		print("âŒ Failed to save file: ", file_path)
 
 func _load_from_file(file_path: String):
 	var file = FileAccess.open(file_path, FileAccess.READ)
@@ -1348,11 +1348,11 @@ func _load_from_file(file_path: String):
 							sound_parameters[sound_key][param_name]["value"] = loaded_data[sound_key][param_name]
 			
 			create_parameter_controls()
-			print("✅ Sound parameters loaded from: ", file_path)
+			print("âœ… Sound parameters loaded from: ", file_path)
 		else:
-			print("❌ Failed to parse JSON file: ", file_path)
+			print("âŒ Failed to parse JSON file: ", file_path)
 	else:
-		print("❌ Failed to open file: ", file_path)
+		print("âŒ Failed to open file: ", file_path)
 
 func _export_to_tres(file_path: String):
 	var params = get_current_parameter_values(current_sound_key)
@@ -1362,9 +1362,9 @@ func _export_to_tres(file_path: String):
 	var save_result = ResourceSaver.save(audio_stream, file_path)
 	
 	if save_result == OK:
-		print("✅ Sound exported to: ", file_path)
+		print("âœ… Sound exported to: ", file_path)
 	else:
-		print("❌ Failed to export sound: ", file_path)
+		print("âŒ Failed to export sound: ", file_path)
 
 func _show_json_popup():
 	"""Show a popup with the current sound parameters in JSON format for easy copying"""
@@ -1381,7 +1381,7 @@ func _show_json_popup():
 	# Create a popup dialog
 	var popup = AcceptDialog.new()
 	var sound_name = _create_display_name_with_emoji(current_sound_key)
-	popup.title = "📋 JSON Parameters - " + sound_name
+	popup.title = "ðŸ“‹ JSON Parameters - " + sound_name
 	popup.dialog_text = "Copy the JSON for " + sound_name + " and paste it into your code:"
 	
 	# Create a text area with the JSON
@@ -1406,7 +1406,7 @@ func _show_json_popup():
 	
 	# Add copy hint
 	var hint = Label.new()
-	hint.text = "💡 Tip: This contains only the current sound's parameters with your custom values!"
+	hint.text = "ðŸ’¡ Tip: This contains only the current sound's parameters with your custom values!"
 	hint.add_theme_color_override("font_color", Color.CYAN)
 	hint.add_theme_font_size_override("font_size", 12)
 	vbox.add_child(hint)
@@ -1423,7 +1423,7 @@ func _show_json_popup():
 	# Clean up when closed
 	popup.close_requested.connect(popup.queue_free)
 	
-	print("📋 JSON popup displayed - ready for copying!")
+	print("ðŸ“‹ JSON popup displayed - ready for copying!")
 
 # Visualization functions
 func initialize_visualizations():
@@ -1433,7 +1433,7 @@ func initialize_visualizations():
 	current_spectrum_data.resize(spectrum_bands)
 	current_spectrum_data.fill(0.0)
 	
-	print("📊 Visualizations initialized - Waveform: %d samples, Spectrum: %d bands" % [visualization_sample_count, spectrum_bands])
+	print("ðŸ“Š Visualizations initialized - Waveform: %d samples, Spectrum: %d bands" % [visualization_sample_count, spectrum_bands])
 
 func update_visualizations():
 	"""Update waveform and spectrum data from current audio parameters"""
@@ -1669,7 +1669,7 @@ func setup_educational_ui():
 	
 	# Tutorial mode toggle
 	tutorial_mode_toggle = CheckBox.new()
-	tutorial_mode_toggle.text = "📚 Tutorial Mode"
+	tutorial_mode_toggle.text = "ðŸ“š Tutorial Mode"
 	tutorial_mode_toggle.toggled.connect(_on_tutorial_mode_toggled)
 	
 	# Theory content area
@@ -1730,7 +1730,7 @@ func create_interactive_exercises():
 		return
 	
 	var exercises_label = Label.new()
-	exercises_label.text = "🎯 Interactive Exercises:"
+	exercises_label.text = "ðŸŽ¯ Interactive Exercises:"
 	exercises_label.add_theme_font_size_override("font_size", 14)
 	interactive_exercises_container.add_child(exercises_label)
 	
@@ -1760,19 +1760,19 @@ func _execute_exercise(params: Dictionary):
 	# Play the sound to demonstrate
 	_on_preview_pressed()
 	
-	print("✅ Exercise completed! Parameters applied: ", params)
+	print("âœ… Exercise completed! Parameters applied: ", params)
 
 func _on_tutorial_mode_toggled(enabled: bool):
 	"""Toggle tutorial mode on/off"""
 	tutorial_mode = enabled
 	
 	if tutorial_mode:
-		print("📚 Tutorial mode activated - Educational features enabled")
+		print("ðŸ“š Tutorial mode activated - Educational features enabled")
 		theory_panel.visible = true
 		update_theory_display()
 		create_interactive_exercises()
 	else:
-		print("🎛️ Expert mode activated - Simplified interface")
+		print("ðŸŽ›ï¸ Expert mode activated - Simplified interface")
 		theory_panel.visible = false
 
 func calculate_lesson_progress() -> float:
@@ -1786,5 +1786,5 @@ func mark_lesson_completed():
 	lessons_completed[current_sound_key] = true
 	lesson_progress_bar.value = calculate_lesson_progress()
 	
-	print("🎉 Lesson completed: ", sound_theory[current_sound_key]["title"])
-	print("📊 Overall progress: ", int(lesson_progress_bar.value), "%")
+	print("ðŸŽ‰ Lesson completed: ", sound_theory[current_sound_key]["title"])
+	print("ðŸ“Š Overall progress: ", int(lesson_progress_bar.value), "%")

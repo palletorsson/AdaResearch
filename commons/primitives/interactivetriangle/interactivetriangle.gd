@@ -1,4 +1,4 @@
-# SplitQuad.gd - Creates a quad split into two triangles with different colors
+﻿# SplitQuad.gd - Creates a quad split into two triangles with different colors
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
@@ -138,7 +138,7 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.set_uv(Vector2(1.0, 0.0))
 	st.add_vertex(v1)
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
@@ -275,7 +275,7 @@ func print_help():
 	print("R: Reset to right-angled triangle")
 	print("I: Reset to isosceles triangle")
 	print("W: Reset to wide triangle")
-	print("Triangle vertices: Bottom-left �+' Bottom-right �+' Top-center")
+	print("Triangle vertices: Bottom-left ï¿½+' Bottom-right ï¿½+' Top-center")
 	print("============================")
 
 func get_triangle_info() -> Dictionary:

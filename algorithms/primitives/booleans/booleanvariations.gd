@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export_group("Grid Settings")
 @export var grid_size: Vector3i = Vector3i(3, 5, 5)  # x, y, z
@@ -613,7 +613,7 @@ func _ready():
 	linear_damp = 5.0
 	angular_damp = 5.0
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	# Apply additional stability
 	if linear_velocity.length() > 0.1:
 		linear_velocity *= 0.9  # Gradually slow down

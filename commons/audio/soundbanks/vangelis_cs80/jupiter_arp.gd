@@ -29,7 +29,8 @@ const ENSEMBLE_RATE_HZ = 0.8
 const ENSEMBLE_DEPTH = 0.004
 
 
-static func generate(t: float, freq: float, params: Dictionary = {}) -> float:
+static func generate(t: float, freq: float, params_source = {}) -> float:
+	var params: Dictionary = params_source if params_source is Dictionary else {}
 	var brightness = params.get("brightness", 0.7)
 	var ensemble = params.get("ensemble", 0.6)
 	var decay_time = params.get("decay", DECAY_MS) / 1000.0

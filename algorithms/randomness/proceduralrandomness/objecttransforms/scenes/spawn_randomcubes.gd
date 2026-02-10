@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Reference to the base cube that will be duplicated
 @onready var cube_base = $CubeBaseStaticBody3D
@@ -153,7 +153,7 @@ func _on_cube_hit(body, cube):
 		# Break the cube
 		break_cube(cube, hit_pos, hit_normal)
 
-func break_cube(cube, hit_position, hit_normal):
+func break_cube(cube, hit_position, _hit_normal):
 	"""
 	Break a cube into multiple fragments
 	"""

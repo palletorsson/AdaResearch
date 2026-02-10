@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 ## Sound Suite Sequencer Test Scene
 ## Demonstrates switching between different sound suites
@@ -7,7 +7,7 @@ extends Node
 var sequencer: SoundSuiteSequencer
 
 func _ready():
-	print("🎨 SOUND SUITE SEQUENCER TEST")
+	print("ðŸŽ¨ SOUND SUITE SEQUENCER TEST")
 	print("==================================================")
 	print("Suite Selection:")
 	print("  1 - Trap Beats (drums)")
@@ -25,8 +25,8 @@ func _ready():
 	print("")
 	print("Playback Control:")
 	print("  SPACE - Play/Stop")
-	print("  UP/DOWN - BPM ±5")
-	print("  LEFT/RIGHT - Swing ±0.05")
+	print("  UP/DOWN - BPM Â±5")
+	print("  LEFT/RIGHT - Swing Â±0.05")
 	print("")
 	print("Sound Parameter Control (examples):")
 	print("  K - Kick: pitch +5")
@@ -60,7 +60,7 @@ func _ready():
 	sequencer.set_sound_params("hihat_closed", {"decay": 0.05, "noise_tone": 8000.0})
 
 	print("")
-	print("▶️ Ready! Suite: trap_beats | Pattern: minimal_trap | BPM: 85")
+	print("â–¶ï¸ Ready! Suite: trap_beats | Pattern: minimal_trap | BPM: 85")
 	print("Press SPACE to start")
 
 func _input(event):
@@ -78,12 +78,12 @@ func _input(event):
 		# Suite selection
 		KEY_1:
 			sequencer.change_suite("trap_beats")
-			print("🎨 Switched to: Trap Beats")
+			print("ðŸŽ¨ Switched to: Trap Beats")
 			print("  Available sounds: ", sequencer.get_suite_sounds())
 
 		KEY_2:
 			sequencer.change_suite("tech_noir")
-			print("🎨 Switched to: Tech Noir")
+			print("ðŸŽ¨ Switched to: Tech Noir")
 			print("  Available sounds: ", sequencer.get_suite_sounds())
 
 		KEY_3:
@@ -93,10 +93,10 @@ func _input(event):
 				sequencer.load_pattern("main")
 				sequencer.set_bpm(128.0)
 				sequencer.set_swing(0.0)
-				print("🎨 Switched to: Detroit Techno")
+				print("ðŸŽ¨ Switched to: Detroit Techno")
 				print("  Available sounds: ", sequencer.get_suite_sounds())
 			else:
-				print("⚠ Detroit Techno suite not available")
+				print("âš  Detroit Techno suite not available")
 
 		# Pattern selection (context-dependent on current suite)
 		KEY_Q:
@@ -117,7 +117,7 @@ func _input(event):
 					"rain": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
 					"static": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 				})
-				print("🎼 Loaded custom atmospheric layers pattern")
+				print("ðŸŽ¼ Loaded custom atmospheric layers pattern")
 
 		KEY_E:
 			if sequencer.current_suite == "trap_beats":
@@ -130,7 +130,7 @@ func _input(event):
 				var pitch = params.get("pitch", 60.0)
 				pitch += 5.0
 				sequencer.set_sound_params("kick", {"pitch": pitch})
-				print("🎛️ Kick pitch: %.0f" % pitch)
+				print("ðŸŽ›ï¸ Kick pitch: %.0f" % pitch)
 
 		KEY_J:  # Kick pitch down
 			if sequencer.current_suite == "trap_beats":
@@ -138,7 +138,7 @@ func _input(event):
 				var pitch = params.get("pitch", 60.0)
 				pitch -= 5.0
 				sequencer.set_sound_params("kick", {"pitch": pitch})
-				print("🎛️ Kick pitch: %.0f" % pitch)
+				print("ðŸŽ›ï¸ Kick pitch: %.0f" % pitch)
 
 		KEY_S:  # Snare decay up
 			if sequencer.current_suite == "trap_beats":
@@ -146,7 +146,7 @@ func _input(event):
 				var decay = params.get("decay", 0.3)
 				decay += 0.1
 				sequencer.set_sound_params("snare", {"decay": decay})
-				print("🎛️ Snare decay: %.2f" % decay)
+				print("ðŸŽ›ï¸ Snare decay: %.2f" % decay)
 
 		KEY_A:  # Snare decay down
 			if sequencer.current_suite == "trap_beats":
@@ -154,7 +154,7 @@ func _input(event):
 				var decay = params.get("decay", 0.3)
 				decay = max(0.1, decay - 0.1)
 				sequencer.set_sound_params("snare", {"decay": decay})
-				print("🎛️ Snare decay: %.2f" % decay)
+				print("ðŸŽ›ï¸ Snare decay: %.2f" % decay)
 
 		KEY_H:  # Hihat tone up
 			if sequencer.current_suite == "trap_beats":
@@ -162,7 +162,7 @@ func _input(event):
 				var tone = params.get("noise_tone", 8000.0)
 				tone += 1000.0
 				sequencer.set_sound_params("hihat_closed", {"noise_tone": tone})
-				print("🎛️ Hihat tone: %.0f Hz" % tone)
+				print("ðŸŽ›ï¸ Hihat tone: %.0f Hz" % tone)
 
 		KEY_G:  # Hihat tone down
 			if sequencer.current_suite == "trap_beats":
@@ -170,39 +170,39 @@ func _input(event):
 				var tone = params.get("noise_tone", 8000.0)
 				tone = max(3000.0, tone - 1000.0)
 				sequencer.set_sound_params("hihat_closed", {"noise_tone": tone})
-				print("🎛️ Hihat tone: %.0f Hz" % tone)
+				print("ðŸŽ›ï¸ Hihat tone: %.0f Hz" % tone)
 
 	# BPM control
 	if event.is_action_pressed("ui_up"):
 		sequencer.set_bpm(sequencer.bpm + 5.0)
-		print("⏱️ BPM: %.0f" % sequencer.bpm)
+		print("â±ï¸ BPM: %.0f" % sequencer.bpm)
 
 	if event.is_action_pressed("ui_down"):
 		sequencer.set_bpm(sequencer.bpm - 5.0)
-		print("⏱️ BPM: %.0f" % sequencer.bpm)
+		print("â±ï¸ BPM: %.0f" % sequencer.bpm)
 
 	# Swing control
 	if event.is_action_pressed("ui_right"):
 		sequencer.set_swing(sequencer.swing_amount + 0.05)
-		print("🌊 Swing: %.2f" % sequencer.swing_amount)
+		print("ðŸŒŠ Swing: %.2f" % sequencer.swing_amount)
 
 	if event.is_action_pressed("ui_left"):
 		sequencer.set_swing(sequencer.swing_amount - 0.05)
-		print("🌊 Swing: %.2f" % sequencer.swing_amount)
+		print("ðŸŒŠ Swing: %.2f" % sequencer.swing_amount)
 
 func _on_beat(beat_number: int):
 	# Visual feedback every bar
 	if beat_number % 4 == 0:
-		print("♪ Bar %d" % (beat_number / 4))
+		print("â™ª Bar %d" % (beat_number / 4))
 
 func _on_suite_changed(suite_name: String):
-	print("🎨 Suite changed: %s" % suite_name)
+	print("ðŸŽ¨ Suite changed: %s" % suite_name)
 	print("  Sounds: ", sequencer.get_suite_sounds())
 
 func _on_pattern_changed(pattern_name: String):
-	print("🎼 Pattern changed: %s" % pattern_name)
+	print("ðŸŽ¼ Pattern changed: %s" % pattern_name)
 
-func _on_bpm_changed(new_bpm: float):
+func _on_bpm_changed(_new_bpm: float):
 	pass  # Already printed in input handler
 
 func _exit_tree():

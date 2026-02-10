@@ -1,4 +1,4 @@
-# PhysicsController.gd
+﻿# PhysicsController.gd
 # Chapter 5: The Physics Cube
 # Handles RigidBody3D physics interactions and effects
 
@@ -41,7 +41,7 @@ func _process(delta):
 		else:
 			last_collision_time = 0.0
 
-func _on_collision(body: Node):
+func _on_collision(_body: Node):
 	if not rigid_body:
 		return
 	

@@ -1,6 +1,161 @@
 [gd_scene format=3 uid="uid://b0kht3huf7ouv"]
 
 [ext_resource type="Script" uid="uid://nnrknx7ruwh8" path="res://algorithms/transformation/transformation_workbench/transformation_workbench.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="2_handle"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="3_grab_redirect"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="4_push_button"]
 
-[node name="TransformationWorkbench" type="Node3D" unique_id=990882650]
+[sub_resource type="BoxShape3D" id="CollisionCube"]
+size = Vector3(0.32, 0.32, 0.32)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Cube"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="MatCubeBase"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+metallic = 0.3
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.2, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_AxisX"]
+size = Vector3(0.25, 0.01, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="MatAxisX"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_AxisY"]
+size = Vector3(0.01, 0.25, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="MatAxisY"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_AxisZ"]
+size = Vector3(0.01, 0.01, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="MatAxisZ"]
+albedo_color = Color(0, 0, 1, 1)
+emission_enabled = true
+emission = Color(0, 0, 1, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="StandardMaterial3D" id="MatGhost"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_Panel"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="MatPanel"]
+transparency = 1
+albedo_color = Color(0.05, 0.05, 0.1, 0.8)
+
+[node name="TransformationWorkbench" type="Node3D" unique_id=809988052]
 script = ExtResource("1_main")
+
+[node name="GrabbableObject" type="RigidBody3D" parent="." unique_id=1281546303]
+collision_layer = 262144
+collision_mask = 0
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("2_handle")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrabbableObject" unique_id=542789726]
+shape = SubResource("CollisionCube")
+
+[node name="CubeMesh" type="MeshInstance3D" parent="GrabbableObject" unique_id=6136645]
+mesh = SubResource("BoxMesh_Cube")
+surface_material_override/0 = SubResource("MatCubeBase")
+
+[node name="LocalAxes" type="Node3D" parent="GrabbableObject" unique_id=137295634]
+
+[node name="AxisX" type="MeshInstance3D" parent="GrabbableObject/LocalAxes" unique_id=817355297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0, 0)
+mesh = SubResource("BoxMesh_AxisX")
+surface_material_override/0 = SubResource("MatAxisX")
+
+[node name="AxisY" type="MeshInstance3D" parent="GrabbableObject/LocalAxes" unique_id=997561690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("BoxMesh_AxisY")
+surface_material_override/0 = SubResource("MatAxisY")
+
+[node name="AxisZ" type="MeshInstance3D" parent="GrabbableObject/LocalAxes" unique_id=995140233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.125)
+mesh = SubResource("BoxMesh_AxisZ")
+surface_material_override/0 = SubResource("MatAxisZ")
+
+[node name="GrabPointRedirectLeft" parent="GrabbableObject" unique_id=2058138244 instance=ExtResource("3_grab_redirect")]
+
+[node name="GrabPointRedirectRight" parent="GrabbableObject" unique_id=2040836424 instance=ExtResource("3_grab_redirect")]
+
+[node name="Ghost" type="MeshInstance3D" parent="." unique_id=1819028267]
+visible = false
+mesh = SubResource("BoxMesh_Cube")
+surface_material_override/0 = SubResource("MatGhost")
+
+[node name="MatrixDisplay" type="Node3D" parent="." unique_id=1602221402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.3, 0)
+
+[node name="Background" type="MeshInstance3D" parent="MatrixDisplay" unique_id=694963372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+mesh = SubResource("QuadMesh_Panel")
+surface_material_override/0 = SubResource("MatPanel")
+
+[node name="Title" type="Label3D" parent="MatrixDisplay" unique_id=1051627417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+pixel_size = 0.001
+text = "Transform Matrix"
+
+[node name="VectorDisplay" type="Node3D" parent="." unique_id=745584625]
+
+[node name="VectorLabel" type="Label3D" parent="VectorDisplay" unique_id=194818930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.1, 0)
+pixel_size = 0.001
+font_size = 28
+
+[node name="ModeButtons" type="Node3D" parent="." unique_id=1446233227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.2, 0)
+
+[node name="ButtonT" parent="ModeButtons" unique_id=577861379 instance=ExtResource("4_push_button")]
+pressed_color = Color(0.2, 0.8, 0.2, 1)
+released_color = Color(0.1, 0.4, 0.1, 1)
+
+[node name="Label" type="Label3D" parent="ModeButtons/ButtonT" unique_id=1149696239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+pixel_size = 0.001
+text = "T"
+font_size = 48
+
+[node name="ButtonR" parent="ModeButtons" unique_id=680797551 instance=ExtResource("4_push_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+pressed_color = Color(0.8, 0.2, 0.2, 1)
+released_color = Color(0.4, 0.1, 0.1, 1)
+
+[node name="Label" type="Label3D" parent="ModeButtons/ButtonR" unique_id=1039784378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+pixel_size = 0.001
+text = "R"
+font_size = 48
+
+[node name="ButtonS" parent="ModeButtons" unique_id=1474123647 instance=ExtResource("4_push_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24, 0)
+pressed_color = Color(0.2, 0.2, 0.8, 1)
+released_color = Color(0.1, 0.1, 0.4, 1)
+
+[node name="Label" type="Label3D" parent="ModeButtons/ButtonS" unique_id=278292262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+pixel_size = 0.001
+text = "S"
+font_size = 48
+
+[connection signal="dropped" from="GrabbableObject" to="." method="_on_dropped"]
+[connection signal="picked_up" from="GrabbableObject" to="." method="_on_picked_up"]

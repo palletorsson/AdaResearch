@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name ChengSimulation
 
 # Simulation parameters
@@ -1893,7 +1893,7 @@ func complete_construction(entity: SimulationEntity):
 	})
 
 
-func _on_structure_input_event(camera, event, position, normal, shape_idx, structure):
+func _on_structure_input_event(_camera, event, position, _normal, _shape_idx, structure):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Create interaction effect on structure
@@ -2158,11 +2158,11 @@ func _on_entity_body_entered(body, entity: SimulationEntity):
 		# Bounce off
 		entity.velocity = entity.velocity.bounce(Vector3.UP) * 0.5
 
-func _on_entity_body_exited(body, entity: SimulationEntity):
+func _on_entity_body_exited(_body, _entity: SimulationEntity):
 	# Additional functionality can be added here
 	pass
 
-func _on_entity_input_event(camera, event, position, normal, shape_idx, entity: SimulationEntity):
+func _on_entity_input_event(_camera, event, _position, _normal, _shape_idx, entity: SimulationEntity):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Handle mouse interaction (for desktop testing)

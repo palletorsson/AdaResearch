@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # 3D Standing 10 PRINT Maze with Ant Pathfinder
 # Based on the classic one-liner: 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
@@ -215,7 +215,7 @@ func place_ant():
 	ant_moving = true
 	visited = {ant_nav_pos: true}
 
-func move_ant(delta):
+func move_ant(_delta):
 	if is_at_exit():
 		found_exit = true
 		return

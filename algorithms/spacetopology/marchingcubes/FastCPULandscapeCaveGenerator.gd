@@ -1,4 +1,4 @@
-# FastCPULandscapeCaveGenerator.gd
+﻿# FastCPULandscapeCaveGenerator.gd
 # High-performance CPU landscape + cave generator
 # Optimized for speed while maintaining quality
 
@@ -383,7 +383,7 @@ func _input(event):
 			KEY_R:
 				regenerate_world()
 
-func _on_generation_complete(time: float):
+func _on_generation_complete(_time: float):
 	"""Handle generation completion"""
 	update_stats_display()
 

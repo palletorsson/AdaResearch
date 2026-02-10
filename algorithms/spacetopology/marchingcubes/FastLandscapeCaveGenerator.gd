@@ -1,4 +1,4 @@
-# FastLandscapeCaveGenerator.gd
+﻿# FastLandscapeCaveGenerator.gd
 # High-performance landscape + cave generator using GPU compute shaders
 # Based on the rhizomatic approach but with GPU acceleration
 
@@ -461,7 +461,7 @@ func _input(event):
 			KEY_R:
 				regenerate_world()
 
-func _on_generation_complete(time: float):
+func _on_generation_complete(_time: float):
 	"""Handle generation completion"""
 	update_stats_display()
 

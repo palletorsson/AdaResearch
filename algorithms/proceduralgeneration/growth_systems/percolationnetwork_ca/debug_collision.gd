@@ -1,4 +1,4 @@
-# DebugCollision.gd
+﻿# DebugCollision.gd
 # Attach this to a CharacterBody3D to debug collision issues
 extends CharacterBody3D
 
@@ -37,7 +37,7 @@ func debug_current_position():
 	
 	print("=====================")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Simple movement for testing
 	var input_dir = Vector3()
 	if Input.is_action_pressed("ui_right"):

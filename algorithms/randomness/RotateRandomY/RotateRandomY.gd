@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 ## RotateRandomY.gd
 ## Randomly rotates MultiMesh cube instances around Y axis
 
@@ -27,7 +27,7 @@ func _ready():
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
-			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
+			print("âœ… Found MultiMesh with %d instances" % multimesh.instance_count)
 			rotate_random_y_safe()
 		else:
 			push_warning("MultiMesh found but has no instances")
@@ -57,9 +57,9 @@ func rotate_random_y_safe():
 
 		multimesh.set_instance_transform(i, transform)
 
-	print("✅ Rotated %d cubes randomly between %.1f° and %.1f° on Y" % [count, min_y_degrees, max_y_degrees])
+	print("âœ… Rotated %d cubes randomly between %.1fÂ° and %.1fÂ° on Y" % [count, min_y_degrees, max_y_degrees])
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not multimesh or multimesh.instance_count == 0:
 		return
 

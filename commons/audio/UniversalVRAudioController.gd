@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 extends Node3D
 
 ## Universal VR Audio Controller (UVAC)
@@ -207,13 +207,13 @@ func _setup_rack_spectrum_analyzer():
 
 # Called by GridInteractablesComponent when using # syntax
 # Supported parameters:
-#   #config:synth_rack       → Load rack config from rack_configs folder
-#   #sound:laser_shot        → Override sound type
-#   #autoplay:true           → Auto-play sound on ready
-#   #col_spacing:0.25        → Override column spacing
-#   #row_spacing:0.12        → Override row spacing
-#   #hide_selection:true     → Hide category/sound selection panel
-#   #hide_buttons:true       → Hide play/save buttons
+#   #config:synth_rack       â†’ Load rack config from rack_configs folder
+#   #sound:laser_shot        â†’ Override sound type
+#   #autoplay:true           â†’ Auto-play sound on ready
+#   #col_spacing:0.25        â†’ Override column spacing
+#   #row_spacing:0.12        â†’ Override row spacing
+#   #hide_selection:true     â†’ Hide category/sound selection panel
+#   #hide_buttons:true       â†’ Hide play/save buttons
 #
 # Example: AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true
 func apply_grid_config(config_data: Dictionary):
@@ -226,7 +226,7 @@ func apply_grid_config(config_data: Dictionary):
 
 		if FileAccess.file_exists(full_path):
 			load_rack_config(full_path)
-			print("  → Loaded rack config: %s" % config_name)
+			print("  â†’ Loaded rack config: %s" % config_name)
 		else:
 			push_error("UniversalVRAudioController: Rack config not found: %s" % full_path)
 			_list_available_configs()
@@ -237,7 +237,7 @@ func apply_grid_config(config_data: Dictionary):
 		current_sound_key = sound_type
 		if rack_config.has("rack_info"):
 			rack_config["rack_info"]["sound_type"] = sound_type
-		print("  → Sound type override: %s" % sound_type)
+		print("  â†’ Sound type override: %s" % sound_type)
 
 	# Override layout spacing
 	if config_data.has("col_spacing"):
@@ -245,28 +245,28 @@ func apply_grid_config(config_data: Dictionary):
 		if rack_config.has("layout"):
 			rack_config["layout"]["col_spacing"] = spacing
 		_respawn_controls_if_needed()
-		print("  → Column spacing: %s" % spacing)
+		print("  â†’ Column spacing: %s" % spacing)
 
 	if config_data.has("row_spacing"):
 		var spacing = float(config_data["row_spacing"])
 		if rack_config.has("layout"):
 			rack_config["layout"]["row_spacing"] = spacing
 		_respawn_controls_if_needed()
-		print("  → Row spacing: %s" % spacing)
+		print("  â†’ Row spacing: %s" % spacing)
 
 	# Hide selection panel
 	if config_data.has("hide_selection"):
 		var should_hide = str(config_data["hide_selection"]).to_lower() == "true"
 		if has_node("SelectionPanel"):
 			$SelectionPanel.visible = not should_hide
-			print("  → Selection panel visible: %s" % (not should_hide))
+			print("  â†’ Selection panel visible: %s" % (not should_hide))
 
 	# Hide buttons
 	if config_data.has("hide_buttons"):
 		var should_hide = str(config_data["hide_buttons"]).to_lower() == "true"
 		if has_node("Buttons"):
 			$Buttons.visible = not should_hide
-			print("  → Buttons visible: %s" % (not should_hide))
+			print("  â†’ Buttons visible: %s" % (not should_hide))
 
 	# Auto-play on ready
 	if config_data.has("autoplay"):
@@ -274,7 +274,7 @@ func apply_grid_config(config_data: Dictionary):
 		if should_autoplay:
 			# Defer to ensure controls are spawned
 			call_deferred("play_current_sound")
-			print("  → Autoplay enabled")
+			print("  â†’ Autoplay enabled")
 
 func _list_available_configs():
 	var dir = DirAccess.open(RACK_CONFIG_BASE_PATH)
@@ -1022,7 +1022,7 @@ func _trigger_sound_update():
 	_last_play_time = current_time
 	play_current_sound()
 
-func _on_parameter_changed_json(_value, control_id: String):
+func _on_parameter_changed_json(_value, _control_id: String):
 	# Update any waveform displays that are bound to this parameter
 	_update_waveform_displays()
 

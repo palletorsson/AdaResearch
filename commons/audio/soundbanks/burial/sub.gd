@@ -56,5 +56,12 @@ static func generate(t: float, freq: float, note_duration: float = 1.0, note_tim
 	return clampf(sub * env * LEVEL, -1.0, 1.0)
 
 
-static func generate_sample(t: float, freq: float) -> float:
+static func generate_sample(t: float, freq_source = 55.0) -> float:
+	var freq := 55.0
+	if freq_source is Array:
+		var values: Array = freq_source
+		if not values.is_empty():
+			freq = maxf(float(values[0]), 1.0)
+	else:
+		freq = maxf(float(freq_source), 1.0)
 	return generate(t, freq, 10.0, 0.0)

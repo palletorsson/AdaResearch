@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
  
 
 var time: float = 0.0
@@ -223,7 +223,7 @@ func animate_memory_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * training_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_gate_activations(delta):
+func animate_gate_activations(_delta):
 	# Animate gate activation indicators
 	var activation_indicators = $GateActivations/ActivationIndicators
 	for i in range(activation_indicators.get_child_count()):

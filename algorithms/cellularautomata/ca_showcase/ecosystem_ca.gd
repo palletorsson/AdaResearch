@@ -1,4 +1,4 @@
-# EcosystemCA.gd
+﻿# EcosystemCA.gd
 # Predator-prey ecosystem simulation
 extends BaseCA
 
@@ -30,7 +30,7 @@ func initialize_grid():
 				elif rand < 0.15:
 					grid[x][y][z] = 2  # Predator
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Update population dynamics
 	update_population_dynamics()
 	update_visualization()

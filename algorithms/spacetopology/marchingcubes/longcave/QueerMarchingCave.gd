@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name QueerMarchingCave
 
 # Marching cubes parameters
@@ -384,7 +384,7 @@ func create_collision():
 		shape.set_faces(collision_faces)
 		collision_shape.shape = shape
 
-func animate_cave_colors(delta):
+func animate_cave_colors(_delta):
 	var mesh_instance = $CaveMesh
 	if mesh_instance.material_override:
 		var material = mesh_instance.material_override as StandardMaterial3D

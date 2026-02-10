@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 # Terrain and simulation parameters
 @export var terrain_size: Vector2 = Vector2(50.0, 50.0)
@@ -331,7 +331,7 @@ func _process(delta):
 		update_pheromone_texture()
 
 # Process pheromones (decay and diffusion)
-func process_pheromones(delta):
+func process_pheromones(_delta):
 	# Decay pheromones
 	for x in range(terrain_resolution + 1):
 		for z in range(terrain_resolution + 1):

@@ -1,4 +1,4 @@
-# SongTimeline.gd
+﻿# SongTimeline.gd
 # Interactive timeline with annotations showing what sounds play when
 # Displays layers, parameter values, and allows seeking
 
@@ -186,7 +186,7 @@ func _extract_section_layers(section_name: String) -> Array:
 	# Common layer patterns
 	if "intro" in name_lower:
 		layers = [
-			{"name": "Pad", "type": "pad", "params": "detune: ±6 cents | filter: LPF sweep"},
+			{"name": "Pad", "type": "pad", "params": "detune: Â±6 cents | filter: LPF sweep"},
 		]
 	elif "verse" in name_lower:
 		layers = [
@@ -197,7 +197,7 @@ func _extract_section_layers(section_name: String) -> Array:
 	elif "chorus" in name_lower or "main" in name_lower:
 		layers = [
 			{"name": "Bass", "type": "bass", "params": "osc: saw+sub | filter: LPF 1200Hz"},
-			{"name": "Pad", "type": "pad", "params": "voices: 7 | detune: ±8 cents"},
+			{"name": "Pad", "type": "pad", "params": "voices: 7 | detune: Â±8 cents"},
 			{"name": "Lead", "type": "lead", "params": "osc: pulse | PWM: LFO 0.5Hz"},
 			{"name": "Drums", "type": "drums", "params": "pattern: full"},
 		]
@@ -281,7 +281,7 @@ func _create_section_header(section: Dictionary) -> Control:
 	name_label.scroll_active = false
 	name_label.selection_enabled = true
 	name_label.context_menu_enabled = true
-	name_label.text = "▶ " + section["name"].to_upper()
+	name_label.text = "â–¶ " + section["name"].to_upper()
 	name_label.add_theme_font_size_override("normal_font_size", 18)
 	name_label.add_theme_color_override("default_color", COLOR_TEXT)
 	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -304,7 +304,7 @@ func _create_section_header(section: Dictionary) -> Control:
 	return panel
 
 
-func _create_layer_row(section_name: String, layer: Dictionary) -> Control:
+func _create_layer_row(_section_name: String, layer: Dictionary) -> Control:
 	var panel = PanelContainer.new()
 	var style = StyleBoxFlat.new()
 	style.bg_color = COLOR_LAYER_BG
@@ -364,17 +364,17 @@ func _create_layer_row(section_name: String, layer: Dictionary) -> Control:
 
 func _get_layer_icon(layer_type: String) -> String:
 	match layer_type.to_lower():
-		"bass": return "🎸"
-		"pad": return "🌊"
-		"lead": return "🎹"
-		"keys": return "🎹"
-		"drums": return "🥁"
-		"seq", "sequencer": return "⏱️"
-		"noise": return "📻"
-		"sax": return "🎷"
-		"vocal", "choir": return "🎤"
-		"strings": return "🎻"
-		_: return "🔊"
+		"bass": return "ðŸŽ¸"
+		"pad": return "ðŸŒŠ"
+		"lead": return "ðŸŽ¹"
+		"keys": return "ðŸŽ¹"
+		"drums": return "ðŸ¥"
+		"seq", "sequencer": return "â±ï¸"
+		"noise": return "ðŸ“»"
+		"sax": return "ðŸŽ·"
+		"vocal", "choir": return "ðŸŽ¤"
+		"strings": return "ðŸŽ»"
+		_: return "ðŸ”Š"
 
 
 func _get_layer_color(layer_type: String) -> Color:
@@ -411,7 +411,7 @@ func _update_time_label():
 func _update_current_section():
 	for section in _sections:
 		if _current_time >= section["start"] and _current_time < section["end"]:
-			_section_label.text = "▶ " + section["name"]
+			_section_label.text = "â–¶ " + section["name"]
 			return
 	_section_label.text = ""
 
@@ -425,13 +425,13 @@ func _update_info_panel():
 	_info_panel.add_child(vbox)
 	
 	var title = Label.new()
-	title.text = "📊 CURRENT SECTION INFO"
+	title.text = "ðŸ“Š CURRENT SECTION INFO"
 	title.add_theme_font_size_override("font_size", 16)
 	title.add_theme_color_override("font_color", Color(0.5, 0.7, 0.9))
 	vbox.add_child(title)
 	
 	var hint = Label.new()
-	hint.text = "Click timeline to seek • Sections auto-advance"
+	hint.text = "Click timeline to seek â€¢ Sections auto-advance"
 	hint.add_theme_font_size_override("font_size", 14)
 	hint.add_theme_color_override("font_color", COLOR_TEXT_DIM)
 	vbox.add_child(hint)

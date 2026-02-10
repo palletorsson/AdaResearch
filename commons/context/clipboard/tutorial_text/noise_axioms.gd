@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 
 # Tutorial content file
 # Edit using the Tutorial Text Editor plugin
@@ -23,7 +23,7 @@ Noise is **entropy with continuity constraints** - randomness that flows smoothl
 [color=yellow][b]Code: Maximum Disorder[/b][/color]
 [code]
 # White noise: each value random, no correlation
-func white_noise(x: float) -> float:
+func white_noise(_x: float) -> float:
     return randf()  # Completely random
 
 # Values at nearby positions totally different:
@@ -73,7 +73,7 @@ func perlin_1d(x: float) -> float:
     var gradient_0 = random_gradient(cell)
     var gradient_1 = random_gradient(cell + 1)
 
-    # Dot products (distance × gradient)
+    # Dot products (distance Ã— gradient)
     var dot_0 = local_x * gradient_0
     var dot_1 = (local_x - 1.0) * gradient_1
 
@@ -299,9 +299,9 @@ var entropy_pattern = measure_entropy(checkerboard_pattern)  # LOW
 
 **Noise is the Goldilocks zone** between chaos and order.
 
-Too random → incoherent (white noise)
-Too ordered → artificial (patterns)
-**Just right → organic** (smooth noise)
+Too random â†’ incoherent (white noise)
+Too ordered â†’ artificial (patterns)
+**Just right â†’ organic** (smooth noise)
 
 [hr]
 
@@ -323,9 +323,9 @@ for iteration in range(100):
     apply_reaction_diffusion(initial_state)
 
 # After many iterations:
-# → Spots, stripes, spirals emerge
-# → Noise (randomness) → Pattern (structure)
-# → Entropy → Order (with energy input)
+# â†’ Spots, stripes, spirals emerge
+# â†’ Noise (randomness) â†’ Pattern (structure)
+# â†’ Entropy â†’ Order (with energy input)
 [/code]
 
 **Noise is the seed of morphogenesis** - structured randomness that enables pattern emergence.
@@ -357,9 +357,9 @@ Noise is structured randomness - smooth, continuous, unlike white noise (indepen
 
 [color=orange][b]Conclusion:[/b] Randomness Spectrum[/color]
 
-**Entropy** → High-dimensional freedom, disorder as vital
-**PRNG** → Deterministic chaos, seed as control
-**Noise** → Structured randomness, smooth entropy
+**Entropy** â†’ High-dimensional freedom, disorder as vital
+**PRNG** â†’ Deterministic chaos, seed as control
+**Noise** â†’ Structured randomness, smooth entropy
 
 From maximum disorder to controlled variation to intentional pattern.
 From white noise to Perlin to geometric order.

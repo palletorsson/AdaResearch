@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cw8v3xr5qn8hj"]
+[gd_scene load_steps=19 format=3 uid="uid://cw8v3xr5qn8hj"]
 
 [ext_resource type="Script" uid="uid://fcj7gexxscxa" path="res://commons/context/drawingboard/paper_draw_surface.gd" id="1_ballpaint"]
 [ext_resource type="Script" path="res://commons/context/drawingboard/ball_paint_tip.gd" id="2_ballpaint"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_canvas"]
-size = Vector3(3.94408, 0.140366, 4.00644)
+size = Vector3(4.0, 0.140366, 6.0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_canvas"]
 transparency = 1
@@ -14,7 +14,25 @@ emission = Color(0.813258, 0.813258, 0.813258, 1)
 disable_receive_shadows = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_canvas"]
-size = Vector2(4, 4)
+size = Vector2(4, 6)
+
+[sub_resource type="StandardMaterial3D" id="MatFrame"]
+albedo_color = Color(0.15, 0.12, 0.1, 1)
+metallic = 0.2
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_FrameTop"]
+size = Vector3(4.3, 0.15, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_FrameSide"]
+size = Vector3(0.15, 6.3, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="MatBackboard"]
+albedo_color = Color(0.95, 0.93, 0.9, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_Backboard"]
+size = Vector3(4.0, 6.0, 0.08)
 
 [sub_resource type="StandardMaterial3D" id="Material_red"]
 albedo_color = Color(1, 0, 0, 1)
@@ -58,6 +76,34 @@ height = 0.24
 
 [node name="BallPaintingDemo" type="Node3D"]
 
+[node name="Frame" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)
+
+[node name="Backboard" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.06)
+mesh = SubResource("BoxMesh_Backboard")
+surface_material_override/0 = SubResource("MatBackboard")
+
+[node name="FrameTop" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.075, 0)
+mesh = SubResource("BoxMesh_FrameTop")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameBottom" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.075, 0)
+mesh = SubResource("BoxMesh_FrameTop")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.075, 0, 0)
+mesh = SubResource("BoxMesh_FrameSide")
+surface_material_override/0 = SubResource("MatFrame")
+
+[node name="FrameRight" type="MeshInstance3D" parent="Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.075, 0, 0)
+mesh = SubResource("BoxMesh_FrameSide")
+surface_material_override/0 = SubResource("MatFrame")
+
 [node name="DrawingArea3D" type="Area3D" parent="." groups=["drawing_area"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)
 
@@ -81,10 +127,10 @@ font_size = 24
 outline_size = 6
 
 [node name="PaintBalls" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 1.5)
 
 [node name="SmallBall_Red" type="StaticBody3D" parent="PaintBalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PaintBalls/SmallBall_Red"]
 mesh = SubResource("SphereMesh_small")
@@ -92,7 +138,7 @@ mesh = SubResource("SphereMesh_small")
 [node name="BallTipRayCast" type="Node3D" parent="PaintBalls/SmallBall_Red"]
 script = ExtResource("2_ballpaint")
 paper_width = 4.0
-paper_height = 4.0
+paper_height = 6.0
 brush_size = 2
 snap_grid_size = 128
 brush_color = Color(1, 0, 0, 1)
@@ -109,7 +155,7 @@ font_size = 12
 outline_size = 4
 
 [node name="MediumBall_Blue" type="StaticBody3D" parent="PaintBalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PaintBalls/MediumBall_Blue"]
 mesh = SubResource("SphereMesh_medium")
@@ -117,7 +163,7 @@ mesh = SubResource("SphereMesh_medium")
 [node name="BallTipRayCast" type="Node3D" parent="PaintBalls/MediumBall_Blue"]
 script = ExtResource("2_ballpaint")
 paper_width = 4.0
-paper_height = 4.0
+paper_height = 6.0
 brush_size = 4
 snap_grid_size = 64
 brush_color = Color(0, 0, 1, 1)
@@ -134,7 +180,7 @@ font_size = 12
 outline_size = 4
 
 [node name="LargeBall_Green" type="StaticBody3D" parent="PaintBalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PaintBalls/LargeBall_Green"]
 mesh = SubResource("SphereMesh_large")
@@ -142,7 +188,7 @@ mesh = SubResource("SphereMesh_large")
 [node name="BallTipRayCast" type="Node3D" parent="PaintBalls/LargeBall_Green"]
 script = ExtResource("2_ballpaint")
 paper_width = 4.0
-paper_height = 4.0
+paper_height = 6.0
 brush_size = 6
 snap_grid_size = 32
 brush_color = Color(0, 1, 0, 1)
@@ -159,7 +205,7 @@ font_size = 12
 outline_size = 4
 
 [node name="XLargeBall_Yellow" type="StaticBody3D" parent="PaintBalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PaintBalls/XLargeBall_Yellow"]
 mesh = SubResource("SphereMesh_xlarge")
@@ -167,7 +213,7 @@ mesh = SubResource("SphereMesh_xlarge")
 [node name="BallTipRayCast" type="Node3D" parent="PaintBalls/XLargeBall_Yellow"]
 script = ExtResource("2_ballpaint")
 paper_width = 4.0
-paper_height = 4.0
+paper_height = 6.0
 brush_size = 10
 snap_grid_size = 16
 brush_color = Color(1, 1, 0, 1)

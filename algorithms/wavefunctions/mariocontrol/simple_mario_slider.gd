@@ -484,10 +484,20 @@ func _on_waveform_draw():
 			fill_points.append(point)
 		fill_points.append(Vector2(rect.size.x, center_y))
 		fill_points.append(Vector2(0, center_y))
-		var fill_colors = PackedColorArray()
-		for _i in range(fill_points.size()):
-			fill_colors.append(Color(0.2, 0.8, 0.6, 0.15))
-		waveform_display.draw_polygon(fill_points, fill_colors)
+		# Only draw polygon if we have at least 3 valid points and some y-variation
+		if fill_points.size() >= 3:
+			# Check for y-variation to avoid degenerate polygons
+			var has_variation = false
+			var first_y = fill_points[0].y
+			for pt in fill_points:
+				if absf(pt.y - first_y) > 0.1:
+					has_variation = true
+					break
+			if has_variation:
+				var fill_colors = PackedColorArray()
+				for _i in range(fill_points.size()):
+					fill_colors.append(Color(0.2, 0.8, 0.6, 0.15))
+				waveform_display.draw_polygon(fill_points, fill_colors)
 		for i in range(point_array.size() - 1):
 			var hue = clamp(absf(waveform_points[i]) * 0.6 + 0.35, 0.0, 1.0)
 			var color = Color.from_hsv(0.32, 0.7, hue, 0.9)

@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var grid_spacing: float = 0.2  # Distance between grid points
 @onready var player = $"../XROrigin3D" #   $Camera3D #   # Reference to the player
@@ -16,7 +16,7 @@ func _ready():
 	# Initialize grid texture
 	_create_grid_texture(24, 24)
 
-func _process(delta):
+func _process(_delta):
 	# Snap the player to the nearest grid point based on their position
 	if player:
 		var player_pos = player.global_transform.origin

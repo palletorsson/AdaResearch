@@ -1,4 +1,4 @@
-@tool
+﻿@tool
 class_name AdaVRStaging
 extends XRToolsStaging
 
@@ -102,7 +102,7 @@ func _fix_loading_screen_curve():
 		# Set the curve
 		loading_screen.follow_speed = curve
 		
-		print("AdaVRStaging: ✅ follow_speed curve created successfully")
+		print("AdaVRStaging: âœ… follow_speed curve created successfully")
 	else:
 		print("AdaVRStaging: follow_speed curve already exists")
 
@@ -354,11 +354,11 @@ func _on_scene_loaded_handler(scene, user_data):
 	# Only show prompt to continue the first time
 	prompt_for_continue = false
 
-func _on_scene_visible_handler(scene, user_data):
+func _on_scene_visible_handler(scene, _user_data):
 	"""Connected to XRToolsStaging scene_visible signal"""
 	print("AdaVRStaging: Scene visible - %s" % scene.name if scene else "null")
 
-func _on_scene_exiting_handler(scene, user_data):
+func _on_scene_exiting_handler(scene, _user_data):
 	"""Connected to XRToolsStaging scene_exiting signal"""
 	print("AdaVRStaging: Scene exiting - %s" % scene.name if scene else "null")
 
@@ -391,7 +391,7 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 		if grid_system.has_method("generate_layout"):
 			grid_system.generate_layout()
 	
-	print("AdaVRStaging: ✅ Scene setup complete")
+	print("AdaVRStaging: âœ… Scene setup complete")
 
 # Utility functions
 func get_scene_loaded() -> bool:
@@ -412,7 +412,7 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	var tracking_delay = 0.02 if _use_quick_transition else 0.1  # Minimal delay for fast transitions
 	
 	if _use_quick_transition:
-		print("AdaVRStaging: ⚡ Quick transition mode (%.1fs fades)" % fade_duration)
+		print("AdaVRStaging: âš¡ Quick transition mode (%.1fs fades)" % fade_duration)
 	
 	# Do not load if in the editor
 	if Engine.is_editor_hint():

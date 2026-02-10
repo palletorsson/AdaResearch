@@ -9,12 +9,12 @@
   },
 
   "identity": {
-    "token": "rhodes_tremolo + 808_sub + swung_hats + fingersnaps + silky_pads",
-    "two_second_test": "Warm Rhodes chord, deep 808, swung hi-hats, smooth groove",
-    "emotional_truth": "Smooth, sensual, romantic — the sound of slow jams and New Jack Swing"
+    "token": "rhodes_tremolo + 808_sub + swung_hats + fingersnaps + silky_pads + m1_organs + vocal_choir",
+    "two_second_test": "Warm Rhodes chord, deep 808, swung hi-hats, smooth groove, airy choir",
+    "emotional_truth": "Smooth, sensual, romantic - the sound of slow jams and New Jack Swing"
   },
 
-  "soundbank": ["kick", "snare", "clap", "hihat", "shaker", "fingersnap", "rhodes", "bass", "pad", "strings"],
+  "soundbank": ["kick", "snare", "clap", "hihat", "shaker", "fingersnap", "rhodes", "bass", "pad", "strings", "organ", "lead", "choir"],
 
   "forbidden": [
     "harsh_digital",
@@ -47,11 +47,11 @@
   },
 
   "sections": {
-    "intro": ["rhodes", "pad"],
-    "verse1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "shaker"],
-    "prechorus1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings", "fingersnap"],
-    "chorus1": ["rhodes", "pad", "bass", "kick", "snare", "clap", "hihat", "strings", "shaker"],
-    "bridge": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings"],
-    "outro": ["rhodes", "pad", "bass", "kick", "hihat"]
+    "intro": ["rhodes", "pad", "choir"],
+    "verse1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "shaker", "organ"],
+    "prechorus1": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings", "fingersnap", "organ", "choir"],
+    "chorus1": ["rhodes", "pad", "bass", "kick", "snare", "clap", "hihat", "strings", "shaker", "organ", "lead", "choir"],
+    "bridge": ["rhodes", "pad", "bass", "kick", "snare", "hihat", "strings", "lead", "choir"],
+    "outro": ["rhodes", "pad", "bass", "kick", "hihat", "choir"]
   }
 }

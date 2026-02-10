@@ -1,4 +1,4 @@
-# VectorThrowing.gd
+﻿# VectorThrowing.gd
 # Main scene for demonstrating projectile motion with velocity, gravity vectors, and homing drone targets
 extends "../shared/vector_scene_base.gd"
 
@@ -311,7 +311,7 @@ func _update_score_display() -> void:
 		return
 	score_label.text = "SCORE: %d" % total_score
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_update_trajectory()
 	
 	# We don't need constant text updates as they are event-driven in this scene

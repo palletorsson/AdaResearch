@@ -1,4 +1,4 @@
-# AlgorithmVisualizationBase.gd
+﻿# AlgorithmVisualizationBase.gd
 # Base class for all algorithm visualizations
 # Provides common animation controls and drawing infrastructure
 extends Control
@@ -53,7 +53,7 @@ func on_periodic_update() -> void:
 	pass
 
 # Called every frame when animation is playing
-func on_animation_update(delta: float) -> void:
+func on_animation_update(_delta: float) -> void:
 	pass
 
 # Called when reset_simulation is triggered

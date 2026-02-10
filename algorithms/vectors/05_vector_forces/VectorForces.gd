@@ -1,4 +1,4 @@
-extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const DRAG_COEFFICIENT := 0.8
 const CatapultGadgetScript = preload("res://algorithms/vectors/shared/gadgets/catapult_gadget.gd")
@@ -96,7 +96,7 @@ func _physics_process(delta):
 	# Apply SCALED force to physics body so simulation matches visual scale
 	ball.apply_central_force(net_force_logical * SCENE_SCALE)
 
-	# Update catapult gadget — follow ball position
+	# Update catapult gadget â€” follow ball position
 	if catapult_gadget:
 		catapult_gadget.update_from_vectors(thrust_force_logical, gravity_force_logical)
 
@@ -166,7 +166,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE

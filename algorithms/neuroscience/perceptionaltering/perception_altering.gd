@@ -1,4 +1,4 @@
-# perception_altering.gd
+﻿# perception_altering.gd
 class_name PerceptionAlteringEnvironment
 extends Node3D
 
@@ -318,7 +318,7 @@ func _process(delta):
 	if player and (direction_effect > 0 or gravity_effect > 0):
 		_apply_movement_distortion(delta, direction_effect, gravity_effect)
 
-func _apply_movement_distortion(delta: float, direction_effect: float, gravity_effect: float):
+func _apply_movement_distortion(_delta: float, direction_effect: float, gravity_effect: float):
 	# Get the player's XR camera
 	var camera = player.get_node("XRCamera3D")
 	if not camera:

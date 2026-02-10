@@ -1,4 +1,4 @@
-# DrumPatternEditor.gd
+﻿# DrumPatternEditor.gd
 # Drum pattern editor extending BasePatternEditor
 # Rows = drum elements (kick, snare, hihat, clap, etc.)
 
@@ -25,7 +25,7 @@ const DRUM_KITS = [
 
 
 func _get_editor_title() -> String:
-	return "🥁 DRUM SEQUENCER"
+	return "ðŸ¥ DRUM SEQUENCER"
 
 
 func _get_editor_color() -> Color:
@@ -48,7 +48,7 @@ func _get_row_sound(row: int) -> String:
 	return "kick"
 
 
-func _get_row_color(row: int) -> Color:
+func _get_row_color(_row: int) -> Color:
 	# Use default velocity colors
 	return Color.WHITE
 

@@ -1,12 +1,12 @@
-# ChordPatternEditor.gd
+﻿# ChordPatternEditor.gd
 # Chord pattern editor extending BasePatternEditor
-# Rows = chord degrees (I, ii, iii, IV, V, vi, vii°)
+# Rows = chord degrees (I, ii, iii, IV, V, vi, viiÂ°)
 
 extends BasePatternEditor
 class_name ChordPatternEditor
 
 # Roman numeral chord degrees
-const CHORD_DEGREES = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
+const CHORD_DEGREES = ["I", "ii", "iii", "IV", "V", "vi", "viiÂ°"]
 const VOICINGS = ["Root", "1st Inv", "2nd Inv", "Open"]
 
 const CHORD_COLORS = {
@@ -16,7 +16,7 @@ const CHORD_COLORS = {
 	"IV": Color(0.6, 0.5, 0.3),
 	"V": Color(0.7, 0.45, 0.35),
 	"vi": Color(0.55, 0.4, 0.6),
-	"vii°": Color(0.5, 0.35, 0.5),
+	"viiÂ°": Color(0.5, 0.35, 0.5),
 }
 
 # Chord-specific data
@@ -37,7 +37,7 @@ const CHORD_CELL_SIZE = Vector2(50, 50)
 
 
 func _get_editor_title() -> String:
-	return "🎹 CHORD TIMELINE"
+	return "ðŸŽ¹ CHORD TIMELINE"
 
 
 func _get_editor_color() -> Color:
@@ -186,7 +186,7 @@ func _on_step_clicked(row: int, step: int, button: int):
 	pattern_changed.emit(_get_pattern_for_export())
 
 
-func _cycle_velocity(row: int, step: int, direction: int):
+func _cycle_velocity(_row: int, step: int, direction: int):
 	"""Right-click toggles sustain instead of cycling velocity"""
 	if step < _pattern.size() and _pattern[step] > 0:
 		_sustains[step] = not _sustains[step]
@@ -392,7 +392,7 @@ func get_chord_notes(degree: String, key: String = "", voicing: int = 0) -> Arra
 		scale_intervals = [0, 2, 3, 5, 7, 8, 10]
 	
 	# Chord degree to scale degree (0-indexed)
-	var degree_map = {"I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "vii°": 6}
+	var degree_map = {"I": 0, "ii": 1, "iii": 2, "IV": 3, "V": 4, "vi": 5, "viiÂ°": 6}
 	var scale_degree = degree_map.get(degree, 0)
 	
 	# Build triad

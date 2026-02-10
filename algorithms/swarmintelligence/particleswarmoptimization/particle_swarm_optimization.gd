@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name ParticleSwarmOptimization
 
 # Particle Swarm Optimization with Queer Collective Intelligence
@@ -341,7 +341,7 @@ func apply_diversity_preservation():
 				particle.position += breakaway_direction * search_space_size * 0.2
 				particle.velocity = breakaway_direction * max_velocity * 0.5
 
-func update_visuals(delta: float):
+func update_visuals(_delta: float):
 	# Update particle colors based on performance and diversity
 	for i in range(particles.size()):
 		var particle = particles[i]
@@ -395,7 +395,7 @@ func setup_ui():
 	performance_display.add_theme_color_override("font_color", Color.WHITE)
 	canvas.add_child(performance_display)
 
-func analyze_collective_behavior(delta: float):
+func analyze_collective_behavior(_delta: float):
 	# Update diversity metrics
 	var current_diversity = calculate_swarm_diversity()
 	swarm_diversity_history.append(current_diversity)

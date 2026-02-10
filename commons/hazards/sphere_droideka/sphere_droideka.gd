@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 class_name SphereDroideka
 ## Armadillidiidae-style spherical droideka.
 ## Rolls as a compact ball of overlapping shell plates.
@@ -141,7 +141,7 @@ func _process_ball(delta: float) -> void:
 		_roll_angle += delta * 0.5  # Idle wobble
 
 
-func _process_unroll(delta: float) -> void:
+func _process_unroll(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / unroll_duration, 0.0, 1.0)
@@ -151,7 +151,7 @@ func _process_unroll(delta: float) -> void:
 		_set_state(State.DEPLOY)
 
 
-func _process_deploy(delta: float) -> void:
+func _process_deploy(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / deploy_duration, 0.0, 1.0)
@@ -203,7 +203,7 @@ func _process_fire(delta: float) -> void:
 			_set_state(State.AIM)
 
 
-func _process_retract(delta: float) -> void:
+func _process_retract(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / retract_duration, 0.0, 1.0)
@@ -218,7 +218,7 @@ func _process_retract(delta: float) -> void:
 		_set_state(State.ROLL_UP)
 
 
-func _process_rollup(delta: float) -> void:
+func _process_rollup(_delta: float) -> void:
 	velocity = Vector3.ZERO
 	
 	var t: float = clamp(_state_time / rollup_duration, 0.0, 1.0)

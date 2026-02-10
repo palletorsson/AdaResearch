@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 class_name WaveInterference
 
 var time: float = 0.0
@@ -103,7 +103,7 @@ func setup_grid():
 		z_line.position = Vector3(i, -3, 0)
 		grid_lines.add_child(z_line)
 
-func animate_wave_sources(delta):
+func animate_wave_sources(_delta):
 	# Animate wave source cores
 	var source1_core = $WaveSource1/SourceCore
 	var source2_core = $WaveSource2/SourceCore
@@ -126,7 +126,7 @@ func animate_wave_sources(delta):
 		var intensity2 = (sin(time * frequency2 * PI * 2) + 1.0) * 0.5
 		source2_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity2
 
-func animate_wave_rings(delta):
+func animate_wave_rings(_delta):
 	# Animate wave rings expanding from sources
 	for i in range(wave_rings1.size()):
 		var ring = wave_rings1[i]
@@ -162,7 +162,7 @@ func animate_wave_rings(delta):
 				ring.radius = 0.01
 				
 
-func animate_interference_field(delta):
+func animate_interference_field(_delta):
 	# Animate field points based on wave interference
 	var source1_pos = Vector3(-3, 0, -3)
 	var source2_pos = Vector3(3, 0, -3)

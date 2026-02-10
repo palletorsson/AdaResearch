@@ -1,4 +1,4 @@
-# maze_generator_vr.gd
+﻿# maze_generator_vr.gd
 # VR-optimized Maze Generation - Human-scale walkable maze
 extends Node3D
 
@@ -254,7 +254,7 @@ func _remove_wall(x: int, y: int):
 		wall_colliders[y][x].queue_free()
 		wall_colliders[y][x] = null
 
-func _highlight_cell(cell: Vector2i, color: Color):
+func _highlight_cell(_cell: Vector2i, color: Color):
 	# During generation, we highlight path cells by creating temporary markers
 	pass  # Skip for VR performance
 

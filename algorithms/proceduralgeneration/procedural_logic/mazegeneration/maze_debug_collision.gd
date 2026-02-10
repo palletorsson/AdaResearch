@@ -1,4 +1,4 @@
-# MazeDebugCollision.gd
+﻿# MazeDebugCollision.gd
 # Debug script for maze collision testing
 extends CharacterBody3D
 
@@ -41,7 +41,7 @@ func debug_maze_info():
 	print("Wall height: ", info.wall_height)
 	print("================")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Simple movement for testing
 	var input_dir = Vector3()
 	if Input.is_action_pressed("ui_right"):

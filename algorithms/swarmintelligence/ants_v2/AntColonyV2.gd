@@ -1,4 +1,4 @@
-extends Node3D
+﻿extends Node3D
 
 @export var num_ants: int = 100
 @export var terrain_size: Vector2 = Vector2(50, 50)
@@ -91,7 +91,7 @@ func _on_food_entered(body):
 		# print("Food found!")
 		body.set_found_food()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# 1. Source Emission
 	grid.process_source_emission(emission_centers)
 	

@@ -1,4 +1,4 @@
-# VectorsVisualization.gd
+﻿# VectorsVisualization.gd
 # Visualization component for Vectors info board
 extends Control
 
@@ -104,7 +104,7 @@ func _process(delta):
 func set_animation_playing(playing: bool):
 	animation_playing = playing
 
-func update_intro_physics(delta):
+func update_intro_physics(_delta):
 	if particles.size() > 0:
 		var center = Vector2(GRID_SIZE/2, GRID_SIZE/2)
 		var radius = 100

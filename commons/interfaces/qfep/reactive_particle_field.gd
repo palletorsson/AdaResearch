@@ -1,4 +1,4 @@
-# reactive_particle_field.gd
+﻿# reactive_particle_field.gd
 # A field of particles that demonstrates QFEP visually
 # Low lambda: ordered grid, High lambda: chaotic swarm
 
@@ -108,7 +108,7 @@ func _physics_process(delta):
 	
 	_update_particles(delta)
 
-func _update_particles(delta):
+func _update_particles(_delta):
 	var color := _get_current_color()
 	
 	for i in range(particles.size()):

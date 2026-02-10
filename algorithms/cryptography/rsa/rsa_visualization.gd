@@ -1,4 +1,4 @@
-class_name RSAVisualization
+﻿class_name RSAVisualization
 extends Node3D
 
 # RSA Encryption: Cryptographic Authority & Digital Trust
@@ -49,7 +49,7 @@ extends Node3D
 var p: int = 0  # First prime
 var q: int = 0  # Second prime
 var n: int = 0  # Modulus (p * q)
-var phi_n: int = 0  # Euler's totient function φ(n) = (p-1)(q-1)
+var phi_n: int = 0  # Euler's totient function Ï†(n) = (p-1)(q-1)
 var e: int = 65537  # Public exponent (commonly used)
 var d: int = 0  # Private exponent
 
@@ -158,17 +158,17 @@ func generate_keys_complete():
 	# Step 2: Compute n = p * q
 	n = p * q
 	
-	# Step 3: Compute φ(n) = (p-1)(q-1)
+	# Step 3: Compute Ï†(n) = (p-1)(q-1)
 	phi_n = (p - 1) * (q - 1)
 	
 	# Step 4: Choose e (commonly 65537)
 	e = 65537
 	
-	# Ensure gcd(e, φ(n)) = 1
+	# Ensure gcd(e, Ï†(n)) = 1
 	while gcd(e, phi_n) != 1:
 		e += 2
 	
-	# Step 5: Compute d = e^(-1) mod φ(n)
+	# Step 5: Compute d = e^(-1) mod Ï†(n)
 	d = mod_inverse(e, phi_n)
 	
 	finalize_key_generation()
@@ -201,7 +201,7 @@ func generate_large_prime(bit_size: int) -> int:
 	print("Generated prime: ", candidate, " (", bit_size, " bit equivalent)")
 	return candidate
 
-func get_known_prime(bit_size: int) -> int:
+func get_known_prime(_bit_size: int) -> int:
 	"""Get a known prime for the given bit size range"""
 	var known_primes = [
 		101, 103, 107, 109, 113, 127, 131, 137, 139, 149,
@@ -315,7 +315,7 @@ func finalize_key_generation():
 	print("Public Key (e, n): (", e, ", ", n, ")")
 	print("Private Key (d, n): (", d, ", ", n, ")")
 	print("Primes: p =", p, ", q =", q)
-	print("φ(n) =", phi_n)
+	print("Ï†(n) =", phi_n)
 	print("Generation time: ", key_generation_time, " ms")
 	
 	create_key_visualization()
@@ -479,7 +479,7 @@ func step_key_generation():
 			n = p * q
 			current_operation_step += 1
 		3:
-			print("Step 4: Computing φ(n) = (p-1)(q-1)...")
+			print("Step 4: Computing Ï†(n) = (p-1)(q-1)...")
 			phi_n = (p - 1) * (q - 1)
 			current_operation_step += 1
 		4:
@@ -694,7 +694,7 @@ func update_ui():
 			labels.append(label)
 	
 	if labels.size() >= 40:
-		labels[0].text = "🔐 RSA Encryption - Cryptographic Authority"
+		labels[0].text = "ðŸ” RSA Encryption - Cryptographic Authority"
 		labels[1].text = "Key Size: " + str(key_size_bits) + " bits"
 		labels[2].text = "Primality Tests: " + str(primality_test_rounds) + " rounds"
 		labels[3].text = ""
@@ -706,7 +706,7 @@ func update_ui():
 		labels[9].text = "Prime p: " + str(p) if p > 0 else "Prime p: Not generated"
 		labels[10].text = "Prime q: " + str(q) if q > 0 else "Prime q: Not generated"
 		labels[11].text = "Modulus n: " + str(n) if n > 0 else "Modulus n: Not computed"
-		labels[12].text = "φ(n): " + str(phi_n) if phi_n > 0 else "φ(n): Not computed"
+		labels[12].text = "Ï†(n): " + str(phi_n) if phi_n > 0 else "Ï†(n): Not computed"
 		labels[13].text = "Public exp e: " + str(e) if e > 0 else "Public exp e: Not set"
 		labels[14].text = "Private exp d: " + str(d) if d > 0 else "Private exp d: Not computed"
 		labels[15].text = ""
@@ -733,7 +733,7 @@ func update_ui():
 		labels[36].text = "SPACE - Encrypt, D - Decrypt, G - Generate Keys"
 		labels[37].text = "R - Reset, M - Change Message, 1-4 - Key Sizes"
 		labels[38].text = ""
-		labels[39].text = "🏳️‍🌈 Explores cryptographic power & digital sovereignty"
+		labels[39].text = "ðŸ³ï¸â€ðŸŒˆ Explores cryptographic power & digital sovereignty"
 
 func get_current_status() -> String:
 	"""Get current operation status"""

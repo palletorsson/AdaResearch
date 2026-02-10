@@ -1,4 +1,4 @@
-# grid_agent_base.gd
+﻿# grid_agent_base.gd
 # Base class for Grid Agents - algorithmic entities that traverse and modify grid structures
 extends CharacterBody3D
 class_name GridAgent
@@ -152,7 +152,7 @@ func _physics_process(delta):
 		AgentState.DIRECTED:
 			_process_directed(delta)
 
-func _process_wandering(delta):
+func _process_wandering(_delta):
 	# Random walk behavior
 	if wander_timer >= wander_change_interval:
 		wander_timer = 0.0
@@ -182,7 +182,7 @@ func _process_wandering(delta):
 		elif current_grid:
 			_change_state(AgentState.WORKING)
 
-func _process_feeding(delta):
+func _process_feeding(_delta):
 	# Consume nearby cubes for energy
 	if not current_grid:
 		_change_state(AgentState.WANDERING)
@@ -201,7 +201,7 @@ func _process_feeding(delta):
 	if state_timer >= 2.0:
 		_change_state(AgentState.WANDERING)
 
-func _process_working(delta):
+func _process_working(_delta):
 	# Apply tier-specific operation
 	if not current_grid:
 		_change_state(AgentState.WANDERING)
@@ -217,12 +217,12 @@ func _process_working(delta):
 	if state_timer >= 1.5:
 		_change_state(AgentState.WANDERING)
 
-func _process_captured(delta):
+func _process_captured(_delta):
 	# Agent is held by algo-gun, awaiting direction
 	# Movement handled by gun
 	velocity = Vector3.ZERO
 
-func _process_directed(delta):
+func _process_directed(_delta):
 	# Following player-assigned task
 	# Similar to working but with specific target
 	if not has_target:

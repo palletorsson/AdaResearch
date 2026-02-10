@@ -1,4 +1,4 @@
-# PercolationCA.gd
+﻿# PercolationCA.gd
 # Fluid percolation through porous medium
 extends BaseCA
 
@@ -37,7 +37,7 @@ func initialize_grid():
 				grid[x][y][GRID_SIZE - 1] = 2  # Source
 				flow_grid[x][y][GRID_SIZE - 1] = 1.0
 
-func update_simulation(delta):
+func update_simulation(_delta):
 	# Percolate fluid through connected sites
 	percolate_fluid()
 	update_visualization()

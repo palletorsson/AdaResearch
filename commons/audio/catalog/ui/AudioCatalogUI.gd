@@ -1,4 +1,4 @@
-# AudioCatalogUI.gd
+﻿# AudioCatalogUI.gd
 # Main 2D UI controller for the Audio Catalog Tablet
 # Combines SoundBrowser, SoundPreview, and ParameterPanel
 
@@ -231,7 +231,7 @@ func _on_stop_pressed() -> void:
 	stop_requested.emit()
 
 
-func _on_parameter_changed(param_name: String, value: float) -> void:
+func _on_parameter_changed(_param_name: String, value: float) -> void:
 	# Could trigger live preview update here
 	pass
 

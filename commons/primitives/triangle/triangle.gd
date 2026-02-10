@@ -1,4 +1,4 @@
-# Triangle.gd - Creates a single interactive triangle with three grabbable vertices
+﻿# Triangle.gd - Creates a single interactive triangle with three grabbable vertices
 extends Node3D
 
 var vertex_color: Color = Color(0.2, 0.8, 0.3)  # Transparent green marble
@@ -191,7 +191,7 @@ func print_help():
 	print("E: Reset to equilateral triangle")
 	print("R: Reset to right-angled triangle")
 	print("I: Reset to isosceles triangle")
-	print("Triangle vertices: Bottom-left �+' Bottom-right �+' Top-center")
+	print("Triangle vertices: Bottom-left ï¿½+' Bottom-right ï¿½+' Top-center")
 	print("============================")
 
 func get_triangle_info() -> Dictionary:
@@ -210,7 +210,7 @@ func get_triangle_area(indices: Array[int]) -> float:
 	var cross = edge1.cross(edge2)
 	return cross.length() * 0.5
 
-func _on_point_picked_up(index: int, _pickable, _meta: Dictionary) -> void:
+func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
 	print("DEBUG PICKUP")
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:

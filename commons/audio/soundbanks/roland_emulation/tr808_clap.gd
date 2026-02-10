@@ -1,4 +1,4 @@
-# TR-808 Hand Clap
+﻿# TR-808 Hand Clap
 # Multiple staggered noise bursts create the "spread" effect
 extends RefCounted
 class_name TR808Clap
@@ -45,7 +45,7 @@ func trigger(vel: float = 1.0):
 	hp_state = 0.0
 
 
-func generate_sample(time: float) -> Dictionary:
+func generate_sample(_time: float) -> Dictionary:
 	if not is_playing:
 		return {"left": 0.0, "right": 0.0}
 	

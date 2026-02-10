@@ -1,4 +1,4 @@
-class_name KargerAlgorithm
+﻿class_name KargerAlgorithm
 extends Node3D
 
 # Karger's Algorithm: Minimum Cut
@@ -379,7 +379,7 @@ func contract_edge(edge: Dictionary, remaining_vertices: Array):
 		var label = from_node.get_child(0)
 		label.text = from_comp + "(" + str(contracted_vertices[from_comp].size()) + ")"
 
-func calculate_cut_size(remaining_vertices: Array) -> int:
+func calculate_cut_size(_remaining_vertices: Array) -> int:
 	var cut_size = 0
 	for edge in original_edges:
 		var from_comp = get_vertex_component(edge.from)
@@ -388,7 +388,7 @@ func calculate_cut_size(remaining_vertices: Array) -> int:
 			cut_size += 1
 	return cut_size
 
-func get_cut_edges(remaining_vertices: Array) -> Array:
+func get_cut_edges(_remaining_vertices: Array) -> Array:
 	var cut_edges = []
 	for edge in original_edges:
 		var from_comp = get_vertex_component(edge.from)
@@ -487,7 +487,7 @@ func get_algorithm_info() -> Dictionary:
 	return {
 		"name": "Karger's Algorithm",
 		"description": "Randomized algorithm for finding minimum cut",
-		"time_complexity": "O(V²) per iteration",
+		"time_complexity": "O(VÂ²) per iteration",
 		"space_complexity": "O(V + E)",
 		"min_cut_size": min_cut_size,
 		"current_iteration": iteration,
