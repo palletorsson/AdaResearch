@@ -9,7 +9,7 @@
 		"dimensions": {
 			"width": 10,
 			"depth": 21,
-			"max_height": 3
+			"max_height": 4
 		},
 		"metadata": {
 			"difficulty": "beginner",
@@ -86,12 +86,12 @@
 			["cube_scene:0:1:0.2", "line:0:1", " ", " ", "laser_measure:0:1", " ",  " ","laser_exploding_sphere:0:2"],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
-			[" ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", "line_builder_3d:0:0:0.5", " ", " ", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "perspective_lines:0:2", " ", "scale_lines:0:3", " ", "perspective_lines:0:2", " "],
 			[" ", " ", " ", " ", " ", " ", " "],
 			[" ", "", " ", "lightrod:0:0:1#config:4:1", " ", " ", " "],
-			["modulor_man_demo:90:-0.5", " ", " ", "line_builder_3d:90:1:0.8", " ", " ", "dgrid:90:1.15:0.9#config:5:5"]
+			["modulor_man_demo:0:-0.5", " ", " ", "", " ", " ", "dgrid:90:1.15:0.9#config:5:5"]
 		]
 	}, 
 		
