@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cgrljkfrmkgda"]
+[gd_scene load_steps=32 format=3 uid="uid://cgrljkfrmkgda"]
 
 [ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1_v5jw7"]
 [ext_resource type="Script" uid="uid://bmucwjnfexhqa" path="res://commons/scenes/env.gd" id="2_lr6fa"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://do86cuqep43oi" path="res://commons/player/PlayerCustomization.gd" id="24_customization"]
 [ext_resource type="Script" uid="uid://d31t45rigq080" path="res://commons/scenes/mapobjects/MapInfoLabel.gd" id="25_mapinfo"]
 [ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="30_wall_walk"]
+[ext_resource type="Script" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -139,6 +140,16 @@ light_energy = 1.5
 
 [node name="GravityGun" parent="XROrigin3D/RightHand" index="4" instance=ExtResource("17_ciyru")]
 visible = false
+
+[node name="WristStatsDisplay" type="Label3D" parent="XROrigin3D/RightHand" index="5"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.03, 0.05, 0.08)
+pixel_size = 0.0008
+text = "Loading..."
+font_size = 48
+outline_size = 4
+horizontal_alignment = 0
+vertical_alignment = 1
+script = ExtResource("31_wrist_stats")
 
 [node name="PlayerBody" parent="XROrigin3D" index="3" instance=ExtResource("16_3o0oe")]
 

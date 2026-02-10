@@ -1,6 +1,7 @@
 {
 	"map_info": {
 		"name": "Cables & Catenaries: The Weight of Connection",
+		"lookup_name": "Wavefunctions_Cables",
 		"description": "A cable is a line with weight. Gravity pulls it down; tension holds it up. The shape is a catenary (hyperbolic cosine). Simulate physical connections using Verlet integration and stick constraints. Learn slack and tension. Discover that real connections have weight\u2014they sag, require maintenance, are affected by gravity (context). Slack is not inefficiency; it's the buffer that prevents snapping.",
 		"version": "1.0",
 		"format": "json",
